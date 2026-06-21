@@ -5,84 +5,104 @@
 package gameplaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A basic random number generator implementing the ARC4 algorithm, which is suitable for most gameplay mechanics.
 //
-// ARC4RandomSource wraps [raw.GKARC4RandomSource] with a fluent Go API.
+// ARC4RandomSource is an idiomatic wrapper over the Objective-C class GKARC4RandomSource.
 type ARC4RandomSource struct {
-	inner *raw.GKARC4RandomSource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKARC4RandomSource].
-func (x *ARC4RandomSource) Unwrap() *raw.GKARC4RandomSource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ARC4RandomSource) ID() objc.ID { return x.inner.Ptr() }
-
-// ARC4RandomSourceFromID adopts an existing object pointer as a ARC4RandomSource (nil for 0).
+// ARC4RandomSourceFromID adopts an existing Objective-C object as a ARC4RandomSource
+// (nil for 0), retaining it and registering a release finalizer.
 func ARC4RandomSourceFromID(id objc.ID) *ARC4RandomSource {
 	if id == 0 {
 		return nil
 	}
-	return &ARC4RandomSource{inner: raw.GKARC4RandomSourceFromID(id)}
+	x := &ARC4RandomSource{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewARC4RandomSource creates a new [ARC4RandomSource].
+// aRC4RandomSourceAdopt wraps an Objective-C object that this code just created as a
+// ARC4RandomSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func aRC4RandomSourceAdopt(id objc.ID) *ARC4RandomSource {
+	if id == 0 {
+		return nil
+	}
+	x := &ARC4RandomSource{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ARC4RandomSource) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ARC4RandomSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ARC4RandomSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewARC4RandomSource creates a new ARC4RandomSource.
 func NewARC4RandomSource() *ARC4RandomSource {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKARC4RandomSource")), objc.RegisterName("new"))
-	return &ARC4RandomSource{inner: raw.GKARC4RandomSourceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKARC4RandomSource")), objc.RegisterName("new"))
+	return aRC4RandomSourceAdopt(_id)
 }
 
 // Initializes a random source with the specified seed data.
 //
-// NewARC4RandomSourceWithSeed creates a new [ARC4RandomSource].
-func NewARC4RandomSourceWithSeed(seed *foundation.NSData) *ARC4RandomSource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKARC4RandomSource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSeed:"), seed.Ptr())
-	return &ARC4RandomSource{inner: raw.GKARC4RandomSourceFromID(_id)}
+// NewARC4RandomSourceWithSeed creates a new ARC4RandomSource.
+func NewARC4RandomSourceWithSeed(seed obj.Object) *ARC4RandomSource {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKARC4RandomSource")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSeed:"), objref.IDOf(seed))
+	return aRC4RandomSourceAdopt(_id)
 }
 
 // The seed data that determines the random source’s behavior.
 //
-// WithSeed sets the seed property and returns the receiver for chaining.
-func (x *ARC4RandomSource) WithSeed(seed *foundation.NSData) *ARC4RandomSource {
-	x.inner.SetSeed(seed)
+// WithSeed sets seed and returns the receiver so calls can be chained.
+func (x *ARC4RandomSource) WithSeed(seed obj.Object) *ARC4RandomSource {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), objref.IDOf(seed))
 	return x
 }
 
 // Skips the specified number of values in the random sequence.
-//
-// DropValuesWithCount calls the underlying DropValuesWithCount.
-func (x *ARC4RandomSource) DropValuesWithCount(count uint) {
-	x.inner.DropValuesWithCount(count)
+func (x *ARC4RandomSource) DropValuesWithCount(count int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dropValuesWithCount:"), count)
 }
 
 // The seed used to stir the arc4 random source. The seed is not encoded through archiving, but the equivalent state buffers are encoded.
-//
-// Seed calls the underlying Seed.
-func (x *ARC4RandomSource) Seed() *foundation.NSData {
-	return x.inner.Seed()
+func (x *ARC4RandomSource) Seed() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seed"))
+	return obj.Wrap(_r)
 }
 
-// SetSeed calls the underlying SetSeed.
-func (x *ARC4RandomSource) SetSeed(seed *foundation.NSData) {
-	x.inner.SetSeed(seed)
+func (x *ARC4RandomSource) SetSeed(seed obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), objref.IDOf(seed))
 }
-
-func (x *ARC4RandomSource) asRandomSource() *raw.GKRandomSource { return &x.inner.GKRandomSource }
 
 // ARC4RandomSourceable is the interface implemented by [ARC4RandomSource], for mocking and DI.
 type ARC4RandomSourceable interface {
-	Unwrap() *raw.GKARC4RandomSource
-	WithSeed(seed *foundation.NSData) *ARC4RandomSource
-	DropValuesWithCount(count uint)
-	Seed() *foundation.NSData
-	SetSeed(seed *foundation.NSData)
+	obj.Object
+	WithSeed(seed obj.Object) *ARC4RandomSource
+	DropValuesWithCount(count int)
+	Seed() obj.Object
+	SetSeed(seed obj.Object)
 }
 
 var _ ARC4RandomSourceable = (*ARC4RandomSource)(nil)

@@ -5,105 +5,105 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A fetch request that retrieves results asynchronously and supports progress notification.
 //
-// AsynchronousFetchRequest wraps [raw.NSAsynchronousFetchRequest] with a fluent Go API.
+// AsynchronousFetchRequest is an idiomatic wrapper over the Objective-C class NSAsynchronousFetchRequest.
 type AsynchronousFetchRequest struct {
-	inner *raw.NSAsynchronousFetchRequest[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSAsynchronousFetchRequest].
-func (x *AsynchronousFetchRequest) Unwrap() *raw.NSAsynchronousFetchRequest[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AsynchronousFetchRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// AsynchronousFetchRequestFromID adopts an existing object pointer as a AsynchronousFetchRequest (nil for 0).
+// AsynchronousFetchRequestFromID adopts an existing Objective-C object as a AsynchronousFetchRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func AsynchronousFetchRequestFromID(id objc.ID) *AsynchronousFetchRequest {
 	if id == 0 {
 		return nil
 	}
-	return &AsynchronousFetchRequest{inner: raw.NSAsynchronousFetchRequestFromID[objc.ID](id)}
+	x := &AsynchronousFetchRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// asynchronousFetchRequestAdopt wraps an Objective-C object that this code just created as a
+// AsynchronousFetchRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func asynchronousFetchRequestAdopt(id objc.ID) *AsynchronousFetchRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &AsynchronousFetchRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AsynchronousFetchRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AsynchronousFetchRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AsynchronousFetchRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a new asynchronous fetch request configured with the provided fetch request and completion block.
 //
-// NewAsynchronousFetchRequestWithFetchRequestCompletionBlock creates a new [AsynchronousFetchRequest].
-func NewAsynchronousFetchRequestWithFetchRequestCompletionBlock(request *raw.NSFetchRequest[objc.ID], blk func(*raw.NSAsynchronousFetchResult[objc.ID])) *AsynchronousFetchRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAsynchronousFetchRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFetchRequest:completionBlock:"), request.Ptr(), blk)
-	return &AsynchronousFetchRequest{inner: raw.NSAsynchronousFetchRequestFromID[objc.ID](_id)}
+// NewAsynchronousFetchRequestWithFetchRequestCompletionBlock creates a new AsynchronousFetchRequest.
+func NewAsynchronousFetchRequestWithFetchRequestCompletionBlock(request obj.Object, blk func(obj.Object)) *AsynchronousFetchRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAsynchronousFetchRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFetchRequest:completionBlock:"), objref.IDOf(request), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { blk(obj.Wrap(_b0)) }))
+	return asynchronousFetchRequestAdopt(_id)
 }
 
 // A configuration parameter that assists Core Data with scheduling the asynchronous fetch request.
 //
-// WithEstimatedResultCount sets the estimatedResultCount property and returns the receiver for chaining.
+// WithEstimatedResultCount sets estimatedResultCount and returns the receiver so calls can be chained.
 func (x *AsynchronousFetchRequest) WithEstimatedResultCount(estimatedResultCount int) *AsynchronousFetchRequest {
-	x.inner.SetEstimatedResultCount(estimatedResultCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEstimatedResultCount:"), estimatedResultCount)
 	return x
 }
 
 // The stores the request should be sent to.
 //
-// WithAffectedStores sets the collection, converting the Go slice to an NSArray.
+// WithAffectedStores sets the collection and returns the receiver so calls can be chained.
 func (x *AsynchronousFetchRequest) WithAffectedStores(items ...PersistentStoreProvider) *AsynchronousFetchRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSPersistentStoreRequest.SetAffectedStores(foundation.NSArrayFromID[*raw.NSPersistentStore](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asPersistentStore().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSPersistentStoreRequest.SetAffectedStores(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
 	return x
 }
 
-// FetchRequest calls the underlying FetchRequest.
-func (x *AsynchronousFetchRequest) FetchRequest() *raw.NSFetchRequest[objc.ID] {
-	return x.inner.FetchRequest()
+func (x *AsynchronousFetchRequest) FetchRequest() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRequest"))
+	return obj.Wrap(_r)
 }
 
-// CompletionBlock calls the underlying CompletionBlock.
-func (x *AsynchronousFetchRequest) CompletionBlock() objc.Block {
-	return x.inner.CompletionBlock()
-}
-
-// EstimatedResultCount calls the underlying EstimatedResultCount.
 func (x *AsynchronousFetchRequest) EstimatedResultCount() int {
-	return x.inner.EstimatedResultCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("estimatedResultCount"))
+	return _r
 }
 
-// SetEstimatedResultCount calls the underlying SetEstimatedResultCount.
 func (x *AsynchronousFetchRequest) SetEstimatedResultCount(estimatedResultCount int) {
-	x.inner.SetEstimatedResultCount(estimatedResultCount)
-}
-
-func (x *AsynchronousFetchRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest {
-	return &x.inner.NSPersistentStoreRequest
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEstimatedResultCount:"), estimatedResultCount)
 }
 
 // AsynchronousFetchRequestable is the interface implemented by [AsynchronousFetchRequest], for mocking and DI.
 type AsynchronousFetchRequestable interface {
-	Unwrap() *raw.NSAsynchronousFetchRequest[objc.ID]
+	obj.Object
 	WithEstimatedResultCount(estimatedResultCount int) *AsynchronousFetchRequest
 	WithAffectedStores(items ...PersistentStoreProvider) *AsynchronousFetchRequest
-	FetchRequest() *raw.NSFetchRequest[objc.ID]
-	CompletionBlock() objc.Block
+	FetchRequest() obj.Object
 	EstimatedResultCount() int
 	SetEstimatedResultCount(estimatedResultCount int)
 }

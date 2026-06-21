@@ -5,137 +5,112 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A logarithmic gradient softmax kernel that operates on matrices.
 //
-// MatrixLogSoftMaxGradient wraps [raw.MPSMatrixLogSoftMaxGradient] with a fluent Go API.
+// MatrixLogSoftMaxGradient is an idiomatic wrapper over the Objective-C class MPSMatrixLogSoftMaxGradient.
 type MatrixLogSoftMaxGradient struct {
-	inner *raw.MPSMatrixLogSoftMaxGradient
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSMatrixLogSoftMaxGradient].
-func (x *MatrixLogSoftMaxGradient) Unwrap() *raw.MPSMatrixLogSoftMaxGradient { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatrixLogSoftMaxGradient) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixLogSoftMaxGradientFromID adopts an existing object pointer as a MatrixLogSoftMaxGradient (nil for 0).
+// MatrixLogSoftMaxGradientFromID adopts an existing Objective-C object as a MatrixLogSoftMaxGradient
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixLogSoftMaxGradientFromID(id objc.ID) *MatrixLogSoftMaxGradient {
 	if id == 0 {
 		return nil
 	}
-	return &MatrixLogSoftMaxGradient{inner: raw.MPSMatrixLogSoftMaxGradientFromID(id)}
+	x := &MatrixLogSoftMaxGradient{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMatrixLogSoftMaxGradient creates a new [MatrixLogSoftMaxGradient].
+// matrixLogSoftMaxGradientAdopt wraps an Objective-C object that this code just created as a
+// MatrixLogSoftMaxGradient (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixLogSoftMaxGradientAdopt(id objc.ID) *MatrixLogSoftMaxGradient {
+	if id == 0 {
+		return nil
+	}
+	x := &MatrixLogSoftMaxGradient{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MatrixLogSoftMaxGradient) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatrixLogSoftMaxGradient) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatrixLogSoftMaxGradient) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMatrixLogSoftMaxGradient creates a new MatrixLogSoftMaxGradient.
 func NewMatrixLogSoftMaxGradient() *MatrixLogSoftMaxGradient {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixLogSoftMaxGradient")), objc.RegisterName("new"))
-	return &MatrixLogSoftMaxGradient{inner: raw.MPSMatrixLogSoftMaxGradientFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixLogSoftMaxGradient")), objc.RegisterName("new"))
+	return matrixLogSoftMaxGradientAdopt(_id)
 }
 
-// @property   sourceRows @discussion The number of rows to consider from the sources in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrices available starting from [primary/secondary]SourceMatrixOrigin.x, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: primarySourceMatrixOrigin, secondarySourceMatrixOrigin and resultMatrixOrigin from MPSMatrixBinaryKernel can be used to control the starting points in the primary source, secondary source, and result matrices respectively.
+// The number of rows to consider from the sources in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrices available starting from [primary/secondary]SourceMatrixOrigin.x, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: primarySourceMatrixOrigin, secondarySourceMatrixOrigin and resultMatrixOrigin from MPSMatrixBinaryKernel can be used to control the starting points in the primary source, secondary source, and result matrices respectively.
 //
-// WithSourceRows sets the sourceRows property and returns the receiver for chaining.
-func (x *MatrixLogSoftMaxGradient) WithSourceRows(sourceRows uint) *MatrixLogSoftMaxGradient {
-	x.inner.MPSMatrixSoftMaxGradient.SetSourceRows(sourceRows)
+// WithSourceRows sets sourceRows and returns the receiver so calls can be chained.
+func (x *MatrixLogSoftMaxGradient) WithSourceRows(sourceRows int) *MatrixLogSoftMaxGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceRows:"), sourceRows)
 	return x
 }
 
-// @property   sourceColumns @discussion The number of columns to consider from the sources in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrices available starting from [primary/secondary]SourceMatrixOrigin.y, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: primarySourceMatrixOrigin, secondarySourceMatrixOrigin and resultMatrixOrigin from MPSMatrixBinaryKernel can be used to control the starting points in the primary source, secondary source, and result matrices respectively.
+// The number of columns to consider from the sources in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrices available starting from [primary/secondary]SourceMatrixOrigin.y, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultMatrix parameter in encodeToCommandBuffer is large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: primarySourceMatrixOrigin, secondarySourceMatrixOrigin and resultMatrixOrigin from MPSMatrixBinaryKernel can be used to control the starting points in the primary source, secondary source, and result matrices respectively.
 //
-// WithSourceColumns sets the sourceColumns property and returns the receiver for chaining.
-func (x *MatrixLogSoftMaxGradient) WithSourceColumns(sourceColumns uint) *MatrixLogSoftMaxGradient {
-	x.inner.MPSMatrixSoftMaxGradient.SetSourceColumns(sourceColumns)
+// WithSourceColumns sets sourceColumns and returns the receiver so calls can be chained.
+func (x *MatrixLogSoftMaxGradient) WithSourceColumns(sourceColumns int) *MatrixLogSoftMaxGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceColumns:"), sourceColumns)
 	return x
 }
 
-// @property   primarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+// The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
 //
-// WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
-func (x *MatrixLogSoftMaxGradient) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMaxGradient {
-	x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
+// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+func (x *MatrixLogSoftMaxGradient) WithBatchStart(batchStart int) *MatrixLogSoftMaxGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// @property   secondarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+// The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
 //
-// WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
-func (x *MatrixLogSoftMaxGradient) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMaxGradient {
-	x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
-	return x
-}
-
-// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-//
-// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
-func (x *MatrixLogSoftMaxGradient) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMaxGradient {
-	x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
-	return x
-}
-
-// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-//
-// WithBatchStart sets the batchStart property and returns the receiver for chaining.
-func (x *MatrixLogSoftMaxGradient) WithBatchStart(batchStart uint) *MatrixLogSoftMaxGradient {
-	x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel.SetBatchStart(batchStart)
-	return x
-}
-
-// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-//
-// WithBatchSize sets the batchSize property and returns the receiver for chaining.
-func (x *MatrixLogSoftMaxGradient) WithBatchSize(batchSize uint) *MatrixLogSoftMaxGradient {
-	x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel.SetBatchSize(batchSize)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *MatrixLogSoftMaxGradient) WithOptions(options mpscore.MPSKernelOptions) *MatrixLogSoftMaxGradient {
-	x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel.MPSKernel.SetOptions(options)
+// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+func (x *MatrixLogSoftMaxGradient) WithBatchSize(batchSize int) *MatrixLogSoftMaxGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *MatrixLogSoftMaxGradient) WithLabel(label string) *MatrixLogSoftMaxGradient {
-	x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *MatrixLogSoftMaxGradient) asMatrixSoftMaxGradient() *mpsmatrix.MPSMatrixSoftMaxGradient {
-	return &x.inner.MPSMatrixSoftMaxGradient
-}
-
-func (x *MatrixLogSoftMaxGradient) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel {
-	return &x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel
-}
-
-func (x *MatrixLogSoftMaxGradient) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSMatrixSoftMaxGradient.MPSMatrixBinaryKernel.MPSKernel
 }
 
 // MatrixLogSoftMaxGradientable is the interface implemented by [MatrixLogSoftMaxGradient], for mocking and DI.
 type MatrixLogSoftMaxGradientable interface {
-	Unwrap() *raw.MPSMatrixLogSoftMaxGradient
-	WithSourceRows(sourceRows uint) *MatrixLogSoftMaxGradient
-	WithSourceColumns(sourceColumns uint) *MatrixLogSoftMaxGradient
-	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMaxGradient
-	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMaxGradient
-	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixLogSoftMaxGradient
-	WithBatchStart(batchStart uint) *MatrixLogSoftMaxGradient
-	WithBatchSize(batchSize uint) *MatrixLogSoftMaxGradient
-	WithOptions(options mpscore.MPSKernelOptions) *MatrixLogSoftMaxGradient
+	obj.Object
+	WithSourceRows(sourceRows int) *MatrixLogSoftMaxGradient
+	WithSourceColumns(sourceColumns int) *MatrixLogSoftMaxGradient
+	WithBatchStart(batchStart int) *MatrixLogSoftMaxGradient
+	WithBatchSize(batchSize int) *MatrixLogSoftMaxGradient
 	WithLabel(label string) *MatrixLogSoftMaxGradient
 }
 

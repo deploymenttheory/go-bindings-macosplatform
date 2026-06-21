@@ -5,30 +5,30 @@
 package coreimage
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// BarcodeDescriptorProvider is implemented by BarcodeDescriptor and any idiomatic type wrapping a CIBarcodeDescriptor subclass.
+// BarcodeDescriptorProvider is accepted wherever a CIBarcodeDescriptor (or one of its subclasses) is expected.
 type BarcodeDescriptorProvider interface {
-	asBarcodeDescriptor() *raw.CIBarcodeDescriptor
+	objref.Object
 }
 
-// ColorKernelProvider is implemented by ColorKernel and any idiomatic type wrapping a CIColorKernel subclass.
+// ColorKernelProvider is accepted wherever a CIColorKernel (or one of its subclasses) is expected.
 type ColorKernelProvider interface {
-	asColorKernel() *raw.CIColorKernel
+	objref.Object
 }
 
-// FeatureProvider is implemented by Feature and any idiomatic type wrapping a CIFeature subclass.
+// FeatureProvider is accepted wherever a CIFeature (or one of its subclasses) is expected.
 type FeatureProvider interface {
-	asFeature() *raw.CIFeature
+	objref.Object
 }
 
-// FilterProvider is implemented by Filter and any idiomatic type wrapping a CIFilter subclass.
+// FilterProvider is accepted wherever a CIFilter (or one of its subclasses) is expected.
 type FilterProvider interface {
-	asFilter() *raw.CIFilter
+	objref.Object
 }
 
-// KernelProvider is implemented by Kernel and any idiomatic type wrapping a CIKernel subclass.
+// KernelProvider is accepted wherever a CIKernel (or one of its subclasses) is expected.
 type KernelProvider interface {
-	asKernel() *raw.CIKernel
+	objref.Object
 }

@@ -5,64 +5,86 @@
 package networkextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A network endpoint specified by DNS name (or IP address) and port.
 //
-// NWHostEndpoint wraps [raw.NWHostEndpoint] with a fluent Go API.
+// NWHostEndpoint is an idiomatic wrapper over the Objective-C class NWHostEndpoint.
 type NWHostEndpoint struct {
-	inner *raw.NWHostEndpoint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NWHostEndpoint].
-func (x *NWHostEndpoint) Unwrap() *raw.NWHostEndpoint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NWHostEndpoint) ID() objc.ID { return x.inner.Ptr() }
-
-// NWHostEndpointFromID adopts an existing object pointer as a NWHostEndpoint (nil for 0).
+// NWHostEndpointFromID adopts an existing Objective-C object as a NWHostEndpoint
+// (nil for 0), retaining it and registering a release finalizer.
 func NWHostEndpointFromID(id objc.ID) *NWHostEndpoint {
 	if id == 0 {
 		return nil
 	}
-	return &NWHostEndpoint{inner: raw.NWHostEndpointFromID(id)}
+	x := &NWHostEndpoint{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNWHostEndpoint creates a new [NWHostEndpoint].
+// nWHostEndpointAdopt wraps an Objective-C object that this code just created as a
+// NWHostEndpoint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nWHostEndpointAdopt(id objc.ID) *NWHostEndpoint {
+	if id == 0 {
+		return nil
+	}
+	x := &NWHostEndpoint{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NWHostEndpoint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NWHostEndpoint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NWHostEndpoint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNWHostEndpoint creates a new NWHostEndpoint.
 func NewNWHostEndpoint() *NWHostEndpoint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NWHostEndpoint")), objc.RegisterName("new"))
-	return &NWHostEndpoint{inner: raw.NWHostEndpointFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NWHostEndpoint")), objc.RegisterName("new"))
+	return nWHostEndpointAdopt(_id)
 }
 
-// @property hostname @discussion The endpoint's hostname.
-//
-// Hostname calls the underlying Hostname.
+// The endpoint's hostname.
 func (x *NWHostEndpoint) Hostname() string {
-	_r := x.inner.Hostname()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hostname"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property port @discussion The endpoint's port.
-//
-// Port calls the underlying Port.
+// The endpoint's port.
 func (x *NWHostEndpoint) Port() string {
-	_r := x.inner.Port()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("port"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // NWHostEndpointable is the interface implemented by [NWHostEndpoint], for mocking and DI.
 type NWHostEndpointable interface {
-	Unwrap() *raw.NWHostEndpoint
+	obj.Object
 	Hostname() string
 	Port() string
 }

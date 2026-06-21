@@ -6,49 +6,65 @@ package matter
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRBaseClusterBridgedDeviceBasicInformation wraps [raw.MTRBaseClusterBridgedDeviceBasicInformation] with a fluent Go API.
+// MTRBaseClusterBridgedDeviceBasicInformation is an idiomatic wrapper over the Objective-C class MTRBaseClusterBridgedDeviceBasicInformation.
 type MTRBaseClusterBridgedDeviceBasicInformation struct {
-	inner *raw.MTRBaseClusterBridgedDeviceBasicInformation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRBaseClusterBridgedDeviceBasicInformation].
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) Unwrap() *raw.MTRBaseClusterBridgedDeviceBasicInformation {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRBaseClusterBridgedDeviceBasicInformationFromID adopts an existing object pointer as a MTRBaseClusterBridgedDeviceBasicInformation (nil for 0).
+// MTRBaseClusterBridgedDeviceBasicInformationFromID adopts an existing Objective-C object as a MTRBaseClusterBridgedDeviceBasicInformation
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRBaseClusterBridgedDeviceBasicInformationFromID(id objc.ID) *MTRBaseClusterBridgedDeviceBasicInformation {
 	if id == 0 {
 		return nil
 	}
-	return &MTRBaseClusterBridgedDeviceBasicInformation{inner: raw.MTRBaseClusterBridgedDeviceBasicInformationFromID(id)}
+	x := &MTRBaseClusterBridgedDeviceBasicInformation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRBaseClusterBridgedDeviceBasicInformationAdopt wraps an Objective-C object that this code just created as a
+// MTRBaseClusterBridgedDeviceBasicInformation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRBaseClusterBridgedDeviceBasicInformationAdopt(id objc.ID) *MTRBaseClusterBridgedDeviceBasicInformation {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRBaseClusterBridgedDeviceBasicInformation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 //
-// NewMTRBaseClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue creates a new [MTRBaseClusterBridgedDeviceBasicInformation].
-func NewMTRBaseClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterBridgedDeviceBasicInformation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterBridgedDeviceBasicInformation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRBaseClusterBridgedDeviceBasicInformation{inner: raw.MTRBaseClusterBridgedDeviceBasicInformationFromID(_id)}
-}
-
-// Command KeepActive
-//
-// KeepActiveWithParamsCompletion calls the underlying KeepActiveWithParamsCompletion.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) KeepActiveWithParamsCompletion(params *raw.MTRBridgedDeviceBasicInformationClusterKeepActiveParams, completion func(unsafe.Pointer)) {
-	x.inner.KeepActiveWithParamsCompletion(params, completion)
+// NewMTRBaseClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue creates a new MTRBaseClusterBridgedDeviceBasicInformation.
+func NewMTRBaseClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterBridgedDeviceBasicInformation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterBridgedDeviceBasicInformation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRBaseClusterBridgedDeviceBasicInformationAdopt(_id)
 }
 
 // ReadAttributeVendorNameWithCompletion blocks until the operation completes or ctx is cancelled.
@@ -58,16 +74,13 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeVendorNameWit
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeVendorNameWithCompletion(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeVendorNameWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -78,22 +91,19 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeVendorNameWit
 }
 
 // SubscribeAttributeVendorNameWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeVendorNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeVendorNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
 	type _result struct {
 		val string
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeVendorNameWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeVendorNameWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -104,49 +114,47 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeVendorNa
 }
 
 // ReadAttributeVendorIDWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeVendorIDWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeVendorIDWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeVendorIDWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeVendorIDWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeVendorIDWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -158,16 +166,13 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductNameWi
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeProductNameWithCompletion(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductNameWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -178,22 +183,19 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductNameWi
 }
 
 // SubscribeAttributeProductNameWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
 	type _result struct {
 		val string
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeProductNameWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeProductNameWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -204,49 +206,47 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductN
 }
 
 // ReadAttributeProductIDWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductIDWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductIDWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeProductIDWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductIDWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeProductIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeProductIDWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeProductIDWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -258,16 +258,13 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeNodeLabelWith
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeNodeLabelWithCompletion(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNodeLabelWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -277,33 +274,20 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeNodeLabelWith
 	}
 }
 
-// WriteAttributeNodeLabelWithValueCompletion calls the underlying WriteAttributeNodeLabelWithValueCompletion.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) WriteAttributeNodeLabelWithValueCompletion(value string, completion func(unsafe.Pointer)) {
-	x.inner.WriteAttributeNodeLabelWithValueCompletion(foundation.NSStringStringWithUTF8String(value), completion)
-}
-
-// WriteAttributeNodeLabelWithValueParamsCompletion calls the underlying WriteAttributeNodeLabelWithValueParamsCompletion.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) WriteAttributeNodeLabelWithValueParamsCompletion(value string, params *raw.MTRWriteParams, completion func(unsafe.Pointer)) {
-	x.inner.WriteAttributeNodeLabelWithValueParamsCompletion(foundation.NSStringStringWithUTF8String(value), params, completion)
-}
-
 // SubscribeAttributeNodeLabelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeNodeLabelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeNodeLabelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
 	type _result struct {
 		val string
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeNodeLabelWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNodeLabelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -314,49 +298,47 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeNodeLabe
 }
 
 // ReadAttributeHardwareVersionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeHardwareVersionWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHardwareVersionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeHardwareVersionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeHardwareVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeHardwareVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeHardwareVersionWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeHardwareVersionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -368,16 +350,13 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersi
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeHardwareVersionStringWithCompletion(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHardwareVersionStringWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -388,22 +367,19 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersi
 }
 
 // SubscribeAttributeHardwareVersionStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeHardwareVersionStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeHardwareVersionStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
 	type _result struct {
 		val string
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeHardwareVersionStringWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeHardwareVersionStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -414,49 +390,47 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeHardware
 }
 
 // ReadAttributeSoftwareVersionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeSoftwareVersionWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSoftwareVersionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeSoftwareVersionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSoftwareVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSoftwareVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeSoftwareVersionWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeSoftwareVersionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -468,16 +442,13 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersi
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeSoftwareVersionStringWithCompletion(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSoftwareVersionStringWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -488,22 +459,19 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersi
 }
 
 // SubscribeAttributeSoftwareVersionStringWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSoftwareVersionStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSoftwareVersionStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
 	type _result struct {
 		val string
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeSoftwareVersionStringWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeSoftwareVersionStringWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -520,16 +488,13 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeManufacturing
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeManufacturingDateWithCompletion(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeManufacturingDateWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -540,22 +505,19 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeManufacturing
 }
 
 // SubscribeAttributeManufacturingDateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeManufacturingDateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeManufacturingDateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
 	type _result struct {
 		val string
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeManufacturingDateWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeManufacturingDateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -572,16 +534,13 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributePartNumberWit
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributePartNumberWithCompletion(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePartNumberWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -592,22 +551,19 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributePartNumberWit
 }
 
 // SubscribeAttributePartNumberWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributePartNumberWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributePartNumberWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
 	type _result struct {
 		val string
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributePartNumberWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePartNumberWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -624,16 +580,13 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductURLWit
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeProductURLWithCompletion(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductURLWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -644,22 +597,19 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductURLWit
 }
 
 // SubscribeAttributeProductURLWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductURLWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductURLWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
 	type _result struct {
 		val string
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeProductURLWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeProductURLWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -676,16 +626,13 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductLabelW
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeProductLabelWithCompletion(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductLabelWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -696,22 +643,19 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductLabelW
 }
 
 // SubscribeAttributeProductLabelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductLabelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductLabelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
 	type _result struct {
 		val string
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeProductLabelWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeProductLabelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -728,16 +672,13 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSerialNumberW
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeSerialNumberWithCompletion(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSerialNumberWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -748,22 +689,19 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeSerialNumberW
 }
 
 // SubscribeAttributeSerialNumberWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSerialNumberWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSerialNumberWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
 	type _result struct {
 		val string
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeSerialNumberWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeSerialNumberWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -774,49 +712,47 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeSerialNu
 }
 
 // ReadAttributeReachableWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeReachableWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeReachableWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeReachableWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeReachableWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeReachableWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeReachableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeReachableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeReachableWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeReachableWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -828,16 +764,13 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeUniqueIDWithC
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeUniqueIDWithCompletion(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUniqueIDWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -848,22 +781,19 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeUniqueIDWithC
 }
 
 // SubscribeAttributeUniqueIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeUniqueIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeUniqueIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
 	type _result struct {
 		val string
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeUniqueIDWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeUniqueIDWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -880,16 +810,13 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductAppear
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeProductAppearanceWithCompletion(func(_p0 *raw.MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRBridgedDeviceBasicInformationClusterProductAppearanceStructFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductAppearanceWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -900,22 +827,19 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeProductAppear
 }
 
 // SubscribeAttributeProductAppearanceWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductAppearanceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductAppearanceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct, error) {
 	type _result struct {
 		val *MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeProductAppearanceWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *raw.MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRBridgedDeviceBasicInformationClusterProductAppearanceStructFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeProductAppearanceWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -926,307 +850,282 @@ func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeProductA
 }
 
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeGeneratedCommandListWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeAcceptedCommandListWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeAttributeListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeAttributeListWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeFeatureMapWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeClusterRevisionWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterBridgedDeviceBasicInformation) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) asMTRBaseClusterBridgedDeviceBasicInformation() *raw.MTRBaseClusterBridgedDeviceBasicInformation {
-	return x.inner
-}
-
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
-	return &x.inner.MTRGenericBaseCluster
-}
-
-func (x *MTRBaseClusterBridgedDeviceBasicInformation) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericBaseCluster.MTRCluster
-}
-
 // MTRBaseClusterBridgedDeviceBasicInformationable is the interface implemented by [MTRBaseClusterBridgedDeviceBasicInformation], for mocking and DI.
 type MTRBaseClusterBridgedDeviceBasicInformationable interface {
-	Unwrap() *raw.MTRBaseClusterBridgedDeviceBasicInformation
-	KeepActiveWithParamsCompletion(params *raw.MTRBridgedDeviceBasicInformationClusterKeepActiveParams, completion func(unsafe.Pointer))
+	obj.Object
 	ReadAttributeVendorNameWithCompletion(ctx context.Context) (string, error)
-	SubscribeAttributeVendorNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error)
-	ReadAttributeVendorIDWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	SubscribeAttributeVendorNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
+	ReadAttributeVendorIDWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeVendorIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
 	ReadAttributeProductNameWithCompletion(ctx context.Context) (string, error)
-	SubscribeAttributeProductNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error)
-	ReadAttributeProductIDWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeProductIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	SubscribeAttributeProductNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
+	ReadAttributeProductIDWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeProductIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
 	ReadAttributeNodeLabelWithCompletion(ctx context.Context) (string, error)
-	WriteAttributeNodeLabelWithValueCompletion(value string, completion func(unsafe.Pointer))
-	WriteAttributeNodeLabelWithValueParamsCompletion(value string, params *raw.MTRWriteParams, completion func(unsafe.Pointer))
-	SubscribeAttributeNodeLabelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error)
-	ReadAttributeHardwareVersionWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeHardwareVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	SubscribeAttributeNodeLabelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
+	ReadAttributeHardwareVersionWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeHardwareVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
 	ReadAttributeHardwareVersionStringWithCompletion(ctx context.Context) (string, error)
-	SubscribeAttributeHardwareVersionStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error)
-	ReadAttributeSoftwareVersionWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeSoftwareVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	SubscribeAttributeHardwareVersionStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
+	ReadAttributeSoftwareVersionWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeSoftwareVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
 	ReadAttributeSoftwareVersionStringWithCompletion(ctx context.Context) (string, error)
-	SubscribeAttributeSoftwareVersionStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error)
+	SubscribeAttributeSoftwareVersionStringWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
 	ReadAttributeManufacturingDateWithCompletion(ctx context.Context) (string, error)
-	SubscribeAttributeManufacturingDateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error)
+	SubscribeAttributeManufacturingDateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
 	ReadAttributePartNumberWithCompletion(ctx context.Context) (string, error)
-	SubscribeAttributePartNumberWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error)
+	SubscribeAttributePartNumberWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
 	ReadAttributeProductURLWithCompletion(ctx context.Context) (string, error)
-	SubscribeAttributeProductURLWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error)
+	SubscribeAttributeProductURLWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
 	ReadAttributeProductLabelWithCompletion(ctx context.Context) (string, error)
-	SubscribeAttributeProductLabelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error)
+	SubscribeAttributeProductLabelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
 	ReadAttributeSerialNumberWithCompletion(ctx context.Context) (string, error)
-	SubscribeAttributeSerialNumberWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error)
-	ReadAttributeReachableWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeReachableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	SubscribeAttributeSerialNumberWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
+	ReadAttributeReachableWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeReachableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
 	ReadAttributeUniqueIDWithCompletion(ctx context.Context) (string, error)
-	SubscribeAttributeUniqueIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error)
+	SubscribeAttributeUniqueIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
 	ReadAttributeProductAppearanceWithCompletion(ctx context.Context) (*MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct, error)
-	SubscribeAttributeProductAppearanceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct, error)
-	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
-	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
-	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
-	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
-	ReadAttributeAttributeListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
-	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
-	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	SubscribeAttributeProductAppearanceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRBridgedDeviceBasicInformationClusterProductAppearanceStruct, error)
+	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
 }
 
 var _ MTRBaseClusterBridgedDeviceBasicInformationable = (*MTRBaseClusterBridgedDeviceBasicInformation)(nil)

@@ -5,161 +5,152 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A representation of the user interaction for secure PIN change operations on a Smart Card reader.
 //
-// SmartCardUserInteractionForSecurePINChange wraps [raw.TKSmartCardUserInteractionForSecurePINChange] with a fluent Go API.
+// SmartCardUserInteractionForSecurePINChange is an idiomatic wrapper over the Objective-C class TKSmartCardUserInteractionForSecurePINChange.
 type SmartCardUserInteractionForSecurePINChange struct {
-	inner *raw.TKSmartCardUserInteractionForSecurePINChange
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKSmartCardUserInteractionForSecurePINChange].
-func (x *SmartCardUserInteractionForSecurePINChange) Unwrap() *raw.TKSmartCardUserInteractionForSecurePINChange {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SmartCardUserInteractionForSecurePINChange) ID() objc.ID { return x.inner.Ptr() }
-
-// SmartCardUserInteractionForSecurePINChangeFromID adopts an existing object pointer as a SmartCardUserInteractionForSecurePINChange (nil for 0).
+// SmartCardUserInteractionForSecurePINChangeFromID adopts an existing Objective-C object as a SmartCardUserInteractionForSecurePINChange
+// (nil for 0), retaining it and registering a release finalizer.
 func SmartCardUserInteractionForSecurePINChangeFromID(id objc.ID) *SmartCardUserInteractionForSecurePINChange {
 	if id == 0 {
 		return nil
 	}
-	return &SmartCardUserInteractionForSecurePINChange{inner: raw.TKSmartCardUserInteractionForSecurePINChangeFromID(id)}
+	x := &SmartCardUserInteractionForSecurePINChange{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSmartCardUserInteractionForSecurePINChange creates a new [SmartCardUserInteractionForSecurePINChange].
+// smartCardUserInteractionForSecurePINChangeAdopt wraps an Objective-C object that this code just created as a
+// SmartCardUserInteractionForSecurePINChange (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func smartCardUserInteractionForSecurePINChangeAdopt(id objc.ID) *SmartCardUserInteractionForSecurePINChange {
+	if id == 0 {
+		return nil
+	}
+	x := &SmartCardUserInteractionForSecurePINChange{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SmartCardUserInteractionForSecurePINChange) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SmartCardUserInteractionForSecurePINChange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SmartCardUserInteractionForSecurePINChange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSmartCardUserInteractionForSecurePINChange creates a new SmartCardUserInteractionForSecurePINChange.
 func NewSmartCardUserInteractionForSecurePINChange() *SmartCardUserInteractionForSecurePINChange {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSmartCardUserInteractionForSecurePINChange")), objc.RegisterName("new"))
-	return &SmartCardUserInteractionForSecurePINChange{inner: raw.TKSmartCardUserInteractionForSecurePINChangeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("TKSmartCardUserInteractionForSecurePINChange")), objc.RegisterName("new"))
+	return smartCardUserInteractionForSecurePINChangeAdopt(_id)
 }
 
 // The way PIN confirmation is requested. TKSmartCardPINConfirmationNone by default.
 //
-// WithPINConfirmation sets the pINConfirmation property and returns the receiver for chaining.
-func (x *SmartCardUserInteractionForSecurePINChange) WithPINConfirmation(pINConfirmation TKSmartCardPINConfirmation) *SmartCardUserInteractionForSecurePINChange {
-	x.inner.SetPINConfirmation(raw.TKSmartCardPINConfirmation(pINConfirmation))
+// WithPINConfirmation sets pINConfirmation and returns the receiver so calls can be chained.
+func (x *SmartCardUserInteractionForSecurePINChange) WithPINConfirmation(pINConfirmation SmartCardPINConfirmation) *SmartCardUserInteractionForSecurePINChange {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINConfirmation:"), pINConfirmation)
 	return x
 }
 
 // The conditions under which PIN entry should be considered complete.
 //
-// WithPINCompletion sets the pINCompletion property and returns the receiver for chaining.
-func (x *SmartCardUserInteractionForSecurePINChange) WithPINCompletion(pINCompletion TKSmartCardPINCompletion) *SmartCardUserInteractionForSecurePINChange {
-	x.inner.TKSmartCardUserInteractionForPINOperation.SetPINCompletion(raw.TKSmartCardPINCompletion(pINCompletion))
+// WithPINCompletion sets pINCompletion and returns the receiver so calls can be chained.
+func (x *SmartCardUserInteractionForSecurePINChange) WithPINCompletion(pINCompletion SmartCardPINCompletion) *SmartCardUserInteractionForSecurePINChange {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINCompletion:"), pINCompletion)
 	return x
 }
 
 // A list of message indices referring to a predefined message table, used to specify the type and number of messages displayed during the PIN operation. nil by default.
 //
-// WithPINMessageIndices sets the collection, converting the Go slice to an NSArray.
-func (x *SmartCardUserInteractionForSecurePINChange) WithPINMessageIndices(items ...*foundation.NSNumber) *SmartCardUserInteractionForSecurePINChange {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.TKSmartCardUserInteractionForPINOperation.SetPINMessageIndices(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.TKSmartCardUserInteractionForPINOperation.SetPINMessageIndices(_arr)
+// WithPINMessageIndices sets the collection and returns the receiver so calls can be chained.
+func (x *SmartCardUserInteractionForSecurePINChange) WithPINMessageIndices(items ...obj.Object) *SmartCardUserInteractionForSecurePINChange {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINMessageIndices:"), _arr)
 	return x
 }
 
 // The locale for the displayed messages. If nil, the user’s current locale is used. By default, this value is the current locale of the system.
 //
-// WithLocale sets the locale property and returns the receiver for chaining.
-func (x *SmartCardUserInteractionForSecurePINChange) WithLocale(locale *foundation.NSLocale) *SmartCardUserInteractionForSecurePINChange {
-	x.inner.TKSmartCardUserInteractionForPINOperation.SetLocale(locale)
+// WithLocale sets locale and returns the receiver so calls can be chained.
+func (x *SmartCardUserInteractionForSecurePINChange) WithLocale(locale obj.Object) *SmartCardUserInteractionForSecurePINChange {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return x
 }
 
 // The SW1-SW2 status bytes.
 //
-// WithResultSW sets the resultSW property and returns the receiver for chaining.
+// WithResultSW sets resultSW and returns the receiver so calls can be chained.
 func (x *SmartCardUserInteractionForSecurePINChange) WithResultSW(resultSW uint16) *SmartCardUserInteractionForSecurePINChange {
-	x.inner.TKSmartCardUserInteractionForPINOperation.SetResultSW(resultSW)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultSW:"), resultSW)
 	return x
 }
 
 // The returned data without SW1-SW2 bytes, if any.
 //
-// WithResultData sets the resultData property and returns the receiver for chaining.
-func (x *SmartCardUserInteractionForSecurePINChange) WithResultData(resultData *foundation.NSData) *SmartCardUserInteractionForSecurePINChange {
-	x.inner.TKSmartCardUserInteractionForPINOperation.SetResultData(resultData)
-	return x
-}
-
-// The delegate for observing events that occur during the user interaction.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *SmartCardUserInteractionForSecurePINChange) WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteractionForSecurePINChange {
-	x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction.SetDelegate(delegate)
+// WithResultData sets resultData and returns the receiver so calls can be chained.
+func (x *SmartCardUserInteractionForSecurePINChange) WithResultData(resultData obj.Object) *SmartCardUserInteractionForSecurePINChange {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultData:"), objref.IDOf(resultData))
 	return x
 }
 
 // The timeout, in seconds, for initial interaction. If set to 0, the reader-defined default timeout is used. 0 by default.
 //
-// WithInitialTimeout sets the initialTimeout property and returns the receiver for chaining.
+// WithInitialTimeout sets initialTimeout and returns the receiver so calls can be chained.
 func (x *SmartCardUserInteractionForSecurePINChange) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForSecurePINChange {
-	x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction.SetInitialTimeout(initialTimeout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialTimeout:"), initialTimeout)
 	return x
 }
 
 // The timeout, in seconds, after the first key stroke. If set to 0, the reader-defined default timeout is used. 0 by default.
 //
-// WithInteractionTimeout sets the interactionTimeout property and returns the receiver for chaining.
+// WithInteractionTimeout sets interactionTimeout and returns the receiver so calls can be chained.
 func (x *SmartCardUserInteractionForSecurePINChange) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForSecurePINChange {
-	x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction.SetInteractionTimeout(interactionTimeout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteractionTimeout:"), interactionTimeout)
 	return x
 }
 
-// PINConfirmation calls the underlying PINConfirmation.
-func (x *SmartCardUserInteractionForSecurePINChange) PINConfirmation() TKSmartCardPINConfirmation {
-	return TKSmartCardPINConfirmation(x.inner.PINConfirmation())
+func (x *SmartCardUserInteractionForSecurePINChange) PINConfirmation() SmartCardPINConfirmation {
+	_r := objc.Send[SmartCardPINConfirmation](objref.IDOf(x), objc.RegisterName("PINConfirmation"))
+	return _r
 }
 
-// SetPINConfirmation calls the underlying SetPINConfirmation.
-func (x *SmartCardUserInteractionForSecurePINChange) SetPINConfirmation(pINConfirmation TKSmartCardPINConfirmation) {
-	x.inner.SetPINConfirmation(raw.TKSmartCardPINConfirmation(pINConfirmation))
-}
-
-func (x *SmartCardUserInteractionForSecurePINChange) asSmartCardUserInteractionForPINOperation() *raw.TKSmartCardUserInteractionForPINOperation {
-	return &x.inner.TKSmartCardUserInteractionForPINOperation
-}
-
-func (x *SmartCardUserInteractionForSecurePINChange) asSmartCardUserInteraction() *raw.TKSmartCardUserInteraction {
-	return &x.inner.TKSmartCardUserInteractionForPINOperation.TKSmartCardUserInteraction
+func (x *SmartCardUserInteractionForSecurePINChange) SetPINConfirmation(pINConfirmation SmartCardPINConfirmation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINConfirmation:"), pINConfirmation)
 }
 
 // SmartCardUserInteractionForSecurePINChangeable is the interface implemented by [SmartCardUserInteractionForSecurePINChange], for mocking and DI.
 type SmartCardUserInteractionForSecurePINChangeable interface {
-	Unwrap() *raw.TKSmartCardUserInteractionForSecurePINChange
-	WithPINConfirmation(pINConfirmation TKSmartCardPINConfirmation) *SmartCardUserInteractionForSecurePINChange
-	WithPINCompletion(pINCompletion TKSmartCardPINCompletion) *SmartCardUserInteractionForSecurePINChange
-	WithPINMessageIndices(items ...*foundation.NSNumber) *SmartCardUserInteractionForSecurePINChange
-	WithLocale(locale *foundation.NSLocale) *SmartCardUserInteractionForSecurePINChange
+	obj.Object
+	WithPINConfirmation(pINConfirmation SmartCardPINConfirmation) *SmartCardUserInteractionForSecurePINChange
+	WithPINCompletion(pINCompletion SmartCardPINCompletion) *SmartCardUserInteractionForSecurePINChange
+	WithPINMessageIndices(items ...obj.Object) *SmartCardUserInteractionForSecurePINChange
+	WithLocale(locale obj.Object) *SmartCardUserInteractionForSecurePINChange
 	WithResultSW(resultSW uint16) *SmartCardUserInteractionForSecurePINChange
-	WithResultData(resultData *foundation.NSData) *SmartCardUserInteractionForSecurePINChange
-	WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteractionForSecurePINChange
+	WithResultData(resultData obj.Object) *SmartCardUserInteractionForSecurePINChange
 	WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForSecurePINChange
 	WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForSecurePINChange
-	PINConfirmation() TKSmartCardPINConfirmation
-	SetPINConfirmation(pINConfirmation TKSmartCardPINConfirmation)
+	PINConfirmation() SmartCardPINConfirmation
+	SetPINConfirmation(pINConfirmation SmartCardPINConfirmation)
 }
 
 var _ SmartCardUserInteractionForSecurePINChangeable = (*SmartCardUserInteractionForSecurePINChange)(nil)

@@ -5,73 +5,86 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides information about sample data in a track.
 //
-// AssetSegmentReportSampleInformation wraps [raw.AVAssetSegmentReportSampleInformation] with a fluent Go API.
+// AssetSegmentReportSampleInformation is an idiomatic wrapper over the Objective-C class AVAssetSegmentReportSampleInformation.
 type AssetSegmentReportSampleInformation struct {
-	inner *raw.AVAssetSegmentReportSampleInformation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetSegmentReportSampleInformation].
-func (x *AssetSegmentReportSampleInformation) Unwrap() *raw.AVAssetSegmentReportSampleInformation {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetSegmentReportSampleInformation) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetSegmentReportSampleInformationFromID adopts an existing object pointer as a AssetSegmentReportSampleInformation (nil for 0).
+// AssetSegmentReportSampleInformationFromID adopts an existing Objective-C object as a AssetSegmentReportSampleInformation
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetSegmentReportSampleInformationFromID(id objc.ID) *AssetSegmentReportSampleInformation {
 	if id == 0 {
 		return nil
 	}
-	return &AssetSegmentReportSampleInformation{inner: raw.AVAssetSegmentReportSampleInformationFromID(id)}
+	x := &AssetSegmentReportSampleInformation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAssetSegmentReportSampleInformation creates a new [AssetSegmentReportSampleInformation].
+// assetSegmentReportSampleInformationAdopt wraps an Objective-C object that this code just created as a
+// AssetSegmentReportSampleInformation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetSegmentReportSampleInformationAdopt(id objc.ID) *AssetSegmentReportSampleInformation {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetSegmentReportSampleInformation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetSegmentReportSampleInformation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetSegmentReportSampleInformation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetSegmentReportSampleInformation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAssetSegmentReportSampleInformation creates a new AssetSegmentReportSampleInformation.
 func NewAssetSegmentReportSampleInformation() *AssetSegmentReportSampleInformation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetSegmentReportSampleInformation")), objc.RegisterName("new"))
-	return &AssetSegmentReportSampleInformation{inner: raw.AVAssetSegmentReportSampleInformationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetSegmentReportSampleInformation")), objc.RegisterName("new"))
+	return assetSegmentReportSampleInformationAdopt(_id)
 }
 
-// @property	presentationTimeStamp @abstract	The presentation timestamp (PTS) of the sample. @discussion	This timestamp may be different from the earliestPresentationTimeStamp if the video is encoded using frame reordering.
-//
-// PresentationTimeStamp calls the underlying PresentationTimeStamp.
-func (x *AssetSegmentReportSampleInformation) PresentationTimeStamp() coremedia.CMTime {
-	return x.inner.PresentationTimeStamp()
-}
-
-// @property	offset @abstract	The offset of the sample in the segment.
-//
-// Offset calls the underlying Offset.
+// The offset of the sample in the segment.
 func (x *AssetSegmentReportSampleInformation) Offset() int {
-	return x.inner.Offset()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
+	return _r
 }
 
-// @property	length @abstract	The length of the sample.
-//
-// Length calls the underlying Length.
+// The length of the sample.
 func (x *AssetSegmentReportSampleInformation) Length() int {
-	return x.inner.Length()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
-// @property	isSyncSample @abstract	Indicates whether the sample is a sync sample.
-//
-// IsSyncSample calls the underlying IsSyncSample.
+// Indicates whether the sample is a sync sample.
 func (x *AssetSegmentReportSampleInformation) IsSyncSample() bool {
-	return x.inner.IsSyncSample()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSyncSample"))
+	return _r
 }
 
 // AssetSegmentReportSampleInformationable is the interface implemented by [AssetSegmentReportSampleInformation], for mocking and DI.
 type AssetSegmentReportSampleInformationable interface {
-	Unwrap() *raw.AVAssetSegmentReportSampleInformation
-	PresentationTimeStamp() coremedia.CMTime
+	obj.Object
 	Offset() int
 	Length() int
 	IsSyncSample() bool

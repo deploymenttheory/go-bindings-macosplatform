@@ -5,168 +5,178 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a custom extension of a MIDI note on event.
 //
-// ExtendedNoteOnEvent wraps [raw.AVExtendedNoteOnEvent] with a fluent Go API.
+// ExtendedNoteOnEvent is an idiomatic wrapper over the Objective-C class AVExtendedNoteOnEvent.
 type ExtendedNoteOnEvent struct {
-	inner *raw.AVExtendedNoteOnEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVExtendedNoteOnEvent].
-func (x *ExtendedNoteOnEvent) Unwrap() *raw.AVExtendedNoteOnEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExtendedNoteOnEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtendedNoteOnEventFromID adopts an existing object pointer as a ExtendedNoteOnEvent (nil for 0).
+// ExtendedNoteOnEventFromID adopts an existing Objective-C object as a ExtendedNoteOnEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtendedNoteOnEventFromID(id objc.ID) *ExtendedNoteOnEvent {
 	if id == 0 {
 		return nil
 	}
-	return &ExtendedNoteOnEvent{inner: raw.AVExtendedNoteOnEventFromID(id)}
+	x := &ExtendedNoteOnEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// extendedNoteOnEventAdopt wraps an Objective-C object that this code just created as a
+// ExtendedNoteOnEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extendedNoteOnEventAdopt(id objc.ID) *ExtendedNoteOnEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &ExtendedNoteOnEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ExtendedNoteOnEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExtendedNoteOnEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExtendedNoteOnEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an event with a MIDI note, velocity, group identifier, and duration.
 //
-// NewExtendedNoteOnEventWithMIDINoteVelocityGroupIDDuration creates a new [ExtendedNoteOnEvent].
-func NewExtendedNoteOnEventWithMIDINoteVelocityGroupIDDuration(midiNote float32, velocity float32, groupID uint, duration float64) *ExtendedNoteOnEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVExtendedNoteOnEvent")), objc.RegisterName("alloc"))
+// NewExtendedNoteOnEventWithMIDINoteVelocityGroupIDDuration creates a new ExtendedNoteOnEvent.
+func NewExtendedNoteOnEventWithMIDINoteVelocityGroupIDDuration(midiNote float32, velocity float32, groupID int, duration float64) *ExtendedNoteOnEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVExtendedNoteOnEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMIDINote:velocity:groupID:duration:"), midiNote, velocity, groupID, duration)
-	return &ExtendedNoteOnEvent{inner: raw.AVExtendedNoteOnEventFromID(_id)}
+	return extendedNoteOnEventAdopt(_id)
 }
 
 // Creates a note on event with the default instrument.
 //
-// NewExtendedNoteOnEventWithMIDINoteVelocityInstrumentIDGroupIDDuration creates a new [ExtendedNoteOnEvent].
-func NewExtendedNoteOnEventWithMIDINoteVelocityInstrumentIDGroupIDDuration(midiNote float32, velocity float32, instrumentID uint, groupID uint, duration float64) *ExtendedNoteOnEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVExtendedNoteOnEvent")), objc.RegisterName("alloc"))
+// NewExtendedNoteOnEventWithMIDINoteVelocityInstrumentIDGroupIDDuration creates a new ExtendedNoteOnEvent.
+func NewExtendedNoteOnEventWithMIDINoteVelocityInstrumentIDGroupIDDuration(midiNote float32, velocity float32, instrumentID int, groupID int, duration float64) *ExtendedNoteOnEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVExtendedNoteOnEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMIDINote:velocity:instrumentID:groupID:duration:"), midiNote, velocity, instrumentID, groupID, duration)
-	return &ExtendedNoteOnEvent{inner: raw.AVExtendedNoteOnEventFromID(_id)}
+	return extendedNoteOnEventAdopt(_id)
 }
 
 // The MIDI note number.
 //
-// WithMidiNote sets the midiNote property and returns the receiver for chaining.
+// WithMidiNote sets midiNote and returns the receiver so calls can be chained.
 func (x *ExtendedNoteOnEvent) WithMidiNote(midiNote float32) *ExtendedNoteOnEvent {
-	x.inner.SetMidiNote(midiNote)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMidiNote:"), midiNote)
 	return x
 }
 
 // The MDI velocity.
 //
-// WithVelocity sets the velocity property and returns the receiver for chaining.
+// WithVelocity sets velocity and returns the receiver so calls can be chained.
 func (x *ExtendedNoteOnEvent) WithVelocity(velocity float32) *ExtendedNoteOnEvent {
-	x.inner.SetVelocity(velocity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVelocity:"), velocity)
 	return x
 }
 
 // The instrument identifier.
 //
-// WithInstrumentID sets the instrumentID property and returns the receiver for chaining.
-func (x *ExtendedNoteOnEvent) WithInstrumentID(instrumentID uint) *ExtendedNoteOnEvent {
-	x.inner.SetInstrumentID(instrumentID)
+// WithInstrumentID sets instrumentID and returns the receiver so calls can be chained.
+func (x *ExtendedNoteOnEvent) WithInstrumentID(instrumentID int) *ExtendedNoteOnEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstrumentID:"), instrumentID)
 	return x
 }
 
 // The audio unit channel that handles the event.
 //
-// WithGroupID sets the groupID property and returns the receiver for chaining.
-func (x *ExtendedNoteOnEvent) WithGroupID(groupID uint) *ExtendedNoteOnEvent {
-	x.inner.SetGroupID(groupID)
+// WithGroupID sets groupID and returns the receiver so calls can be chained.
+func (x *ExtendedNoteOnEvent) WithGroupID(groupID int) *ExtendedNoteOnEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupID:"), groupID)
 	return x
 }
 
 // The duration of the event, in beats.
 //
-// WithDuration sets the duration property and returns the receiver for chaining.
+// WithDuration sets duration and returns the receiver so calls can be chained.
 func (x *ExtendedNoteOnEvent) WithDuration(duration float64) *ExtendedNoteOnEvent {
-	x.inner.SetDuration(duration)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 	return x
 }
 
-// @property midiNote The MIDI note number represented as a floating point.  If the instrument within the AVMusicTrack's destinationAudioUnit supports fractional values, this may be used to generate arbitrary macro- and micro-tunings.  Range: Destination-dependent, usually 0.0 - 127.0.
-//
-// MidiNote calls the underlying MidiNote.
 func (x *ExtendedNoteOnEvent) MidiNote() float32 {
-	return x.inner.MidiNote()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("midiNote"))
+	return _r
 }
 
-// SetMidiNote calls the underlying SetMidiNote.
 func (x *ExtendedNoteOnEvent) SetMidiNote(midiNote float32) {
-	x.inner.SetMidiNote(midiNote)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMidiNote:"), midiNote)
 }
 
-// @property velocity The MIDI velocity represented as a floating point.  If the instrument within the AVMusicTrack's destinationAudioUnit supports fractional values, this may be used to generate very precise changes in gain, etc.  Range: Destination-dependent, usually 0.0 - 127.0.
-//
-// Velocity calls the underlying Velocity.
 func (x *ExtendedNoteOnEvent) Velocity() float32 {
-	return x.inner.Velocity()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("velocity"))
+	return _r
 }
 
-// SetVelocity calls the underlying SetVelocity.
 func (x *ExtendedNoteOnEvent) SetVelocity(velocity float32) {
-	x.inner.SetVelocity(velocity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVelocity:"), velocity)
 }
 
-// @property instrumentID This should be set to AVExtendedNoteOnEventDefaultInstrument.
-//
-// InstrumentID calls the underlying InstrumentID.
-func (x *ExtendedNoteOnEvent) InstrumentID() uint {
-	return x.inner.InstrumentID()
+func (x *ExtendedNoteOnEvent) InstrumentID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("instrumentID"))
+	return _r
 }
 
-// SetInstrumentID calls the underlying SetInstrumentID.
-func (x *ExtendedNoteOnEvent) SetInstrumentID(instrumentID uint) {
-	x.inner.SetInstrumentID(instrumentID)
+func (x *ExtendedNoteOnEvent) SetInstrumentID(instrumentID int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstrumentID:"), instrumentID)
 }
 
-// @property groupID This represents the audio unit channel (i.e., Group Scope) which should handle this event. Range: normally between 0 and 15, but may be higher if the AVMusicTrack's destinationAudioUnit supports more channels.
-//
-// GroupID calls the underlying GroupID.
-func (x *ExtendedNoteOnEvent) GroupID() uint {
-	return x.inner.GroupID()
+func (x *ExtendedNoteOnEvent) GroupID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("groupID"))
+	return _r
 }
 
-// SetGroupID calls the underlying SetGroupID.
-func (x *ExtendedNoteOnEvent) SetGroupID(groupID uint) {
-	x.inner.SetGroupID(groupID)
+func (x *ExtendedNoteOnEvent) SetGroupID(groupID int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupID:"), groupID)
 }
 
-// @property duration The duration of this event in AVMusicTimeStamp beats.  Range:  Any nonnegative number.
-//
-// Duration calls the underlying Duration.
 func (x *ExtendedNoteOnEvent) Duration() float64 {
-	return x.inner.Duration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+	return _r
 }
 
-// SetDuration calls the underlying SetDuration.
 func (x *ExtendedNoteOnEvent) SetDuration(duration float64) {
-	x.inner.SetDuration(duration)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 }
-
-func (x *ExtendedNoteOnEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMusicEvent }
 
 // ExtendedNoteOnEventable is the interface implemented by [ExtendedNoteOnEvent], for mocking and DI.
 type ExtendedNoteOnEventable interface {
-	Unwrap() *raw.AVExtendedNoteOnEvent
+	obj.Object
 	WithMidiNote(midiNote float32) *ExtendedNoteOnEvent
 	WithVelocity(velocity float32) *ExtendedNoteOnEvent
-	WithInstrumentID(instrumentID uint) *ExtendedNoteOnEvent
-	WithGroupID(groupID uint) *ExtendedNoteOnEvent
+	WithInstrumentID(instrumentID int) *ExtendedNoteOnEvent
+	WithGroupID(groupID int) *ExtendedNoteOnEvent
 	WithDuration(duration float64) *ExtendedNoteOnEvent
 	MidiNote() float32
 	SetMidiNote(midiNote float32)
 	Velocity() float32
 	SetVelocity(velocity float32)
-	InstrumentID() uint
-	SetInstrumentID(instrumentID uint)
-	GroupID() uint
-	SetGroupID(groupID uint)
+	InstrumentID() int
+	SetInstrumentID(instrumentID int)
+	GroupID() int
+	SetGroupID(groupID int)
 	Duration() float64
 	SetDuration(duration float64)
 }

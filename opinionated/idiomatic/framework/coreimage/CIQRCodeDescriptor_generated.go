@@ -5,81 +5,99 @@
 package coreimage
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A concrete subclass of the Core Image Barcode Descriptor that represents a square QR code symbol.
 //
-// QRCodeDescriptor wraps [raw.CIQRCodeDescriptor] with a fluent Go API.
+// QRCodeDescriptor is an idiomatic wrapper over the Objective-C class CIQRCodeDescriptor.
 type QRCodeDescriptor struct {
-	inner *raw.CIQRCodeDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CIQRCodeDescriptor].
-func (x *QRCodeDescriptor) Unwrap() *raw.CIQRCodeDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QRCodeDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// QRCodeDescriptorFromID adopts an existing object pointer as a QRCodeDescriptor (nil for 0).
+// QRCodeDescriptorFromID adopts an existing Objective-C object as a QRCodeDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func QRCodeDescriptorFromID(id objc.ID) *QRCodeDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &QRCodeDescriptor{inner: raw.CIQRCodeDescriptorFromID(id)}
+	x := &QRCodeDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// qRCodeDescriptorAdopt wraps an Objective-C object that this code just created as a
+// QRCodeDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func qRCodeDescriptorAdopt(id objc.ID) *QRCodeDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &QRCodeDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *QRCodeDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QRCodeDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QRCodeDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a QR code descriptor for the given payload and parameters.
 //
-// NewQRCodeDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel creates a new [QRCodeDescriptor].
-func NewQRCodeDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload *foundation.NSData, symbolVersion int, maskPattern uint8, errorCorrectionLevel CIQRCodeErrorCorrectionLevel) *QRCodeDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIQRCodeDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:symbolVersion:maskPattern:errorCorrectionLevel:"), errorCorrectedPayload.Ptr(), symbolVersion, maskPattern, raw.CIQRCodeErrorCorrectionLevel(errorCorrectionLevel))
-	return &QRCodeDescriptor{inner: raw.CIQRCodeDescriptorFromID(_id)}
+// NewQRCodeDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel creates a new QRCodeDescriptor.
+func NewQRCodeDescriptorWithPayloadSymbolVersionMaskPatternErrorCorrectionLevel(errorCorrectedPayload obj.Object, symbolVersion int, maskPattern uint8, errorCorrectionLevel QRCodeErrorCorrectionLevel) *QRCodeDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIQRCodeDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:symbolVersion:maskPattern:errorCorrectionLevel:"), objref.IDOf(errorCorrectedPayload), symbolVersion, maskPattern, errorCorrectionLevel)
+	return qRCodeDescriptorAdopt(_id)
 }
 
 // The error-corrected codeword payload that comprises the QR code symbol. QR Codes are formally specified in ISO/IEC 18004:2006(E). Section 6.4.10 "Bitstream to codeword conversion" specifies the set of 8-bit codewords in the symbol immediately prior to splitting the message into blocks and applying error correction. During decode, error correction is applied and if successful, the message is re-ordered to the state immediately following "Bitstream to codeword conversion." The `errorCorrectedPayload` corresponds to this sequence of 8-bit codewords.
-//
-// ErrorCorrectedPayload calls the underlying ErrorCorrectedPayload.
-func (x *QRCodeDescriptor) ErrorCorrectedPayload() *foundation.NSData {
-	return x.inner.ErrorCorrectedPayload()
+func (x *QRCodeDescriptor) ErrorCorrectedPayload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorCorrectedPayload"))
+	return obj.Wrap(_r)
 }
 
 // The version of the QR code which corresponds to the size of the QR code symbol. ISO/IEC 18004 defines versions from 1 to 40, where a higher symbol version indicates a larger data-carrying capacity. This field is required in order to properly interpret the error corrected payload.
-//
-// SymbolVersion calls the underlying SymbolVersion.
 func (x *QRCodeDescriptor) SymbolVersion() int {
-	return x.inner.SymbolVersion()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("symbolVersion"))
+	return _r
 }
 
 // The data mask pattern for the QR code symbol. QR Codes support eight data mask patterns, which are used to avoid large black or large white areas inside the symbol body. Valid values range from 0 to 7.
-//
-// MaskPattern calls the underlying MaskPattern.
 func (x *QRCodeDescriptor) MaskPattern() uint8 {
-	return x.inner.MaskPattern()
+	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("maskPattern"))
+	return _r
 }
 
 // The error correction level of the QR code symbol. QR Codes support four levels of Reed-Solomon error correction. The possible error correction levels are enumerated in “CIDataMatrixCodeECCVersion“.
-//
-// ErrorCorrectionLevel calls the underlying ErrorCorrectionLevel.
-func (x *QRCodeDescriptor) ErrorCorrectionLevel() CIQRCodeErrorCorrectionLevel {
-	return CIQRCodeErrorCorrectionLevel(x.inner.ErrorCorrectionLevel())
-}
-
-func (x *QRCodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor {
-	return &x.inner.CIBarcodeDescriptor
+func (x *QRCodeDescriptor) ErrorCorrectionLevel() QRCodeErrorCorrectionLevel {
+	_r := objc.Send[QRCodeErrorCorrectionLevel](objref.IDOf(x), objc.RegisterName("errorCorrectionLevel"))
+	return _r
 }
 
 // QRCodeDescriptorable is the interface implemented by [QRCodeDescriptor], for mocking and DI.
 type QRCodeDescriptorable interface {
-	Unwrap() *raw.CIQRCodeDescriptor
-	ErrorCorrectedPayload() *foundation.NSData
+	obj.Object
+	ErrorCorrectedPayload() obj.Object
 	SymbolVersion() int
 	MaskPattern() uint8
-	ErrorCorrectionLevel() CIQRCodeErrorCorrectionLevel
+	ErrorCorrectionLevel() QRCodeErrorCorrectionLevel
 }
 
 var _ QRCodeDescriptorable = (*QRCodeDescriptor)(nil)

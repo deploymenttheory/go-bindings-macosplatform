@@ -5,75 +5,93 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ShareablePassMetadataPreview wraps [raw.PKShareablePassMetadataPreview] with a fluent Go API.
+// ShareablePassMetadataPreview is an idiomatic wrapper over the Objective-C class PKShareablePassMetadataPreview.
 type ShareablePassMetadataPreview struct {
-	inner *raw.PKShareablePassMetadataPreview
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKShareablePassMetadataPreview].
-func (x *ShareablePassMetadataPreview) Unwrap() *raw.PKShareablePassMetadataPreview { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ShareablePassMetadataPreview) ID() objc.ID { return x.inner.Ptr() }
-
-// ShareablePassMetadataPreviewFromID adopts an existing object pointer as a ShareablePassMetadataPreview (nil for 0).
+// ShareablePassMetadataPreviewFromID adopts an existing Objective-C object as a ShareablePassMetadataPreview
+// (nil for 0), retaining it and registering a release finalizer.
 func ShareablePassMetadataPreviewFromID(id objc.ID) *ShareablePassMetadataPreview {
 	if id == 0 {
 		return nil
 	}
-	return &ShareablePassMetadataPreview{inner: raw.PKShareablePassMetadataPreviewFromID(id)}
-}
-
-// NewShareablePassMetadataPreviewWithTemplateIdentifier creates a new [ShareablePassMetadataPreview].
-func NewShareablePassMetadataPreviewWithTemplateIdentifier(templateIdentifier string) *ShareablePassMetadataPreview {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKShareablePassMetadataPreview")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTemplateIdentifier:"), foundation.NSStringStringWithUTF8String(templateIdentifier).Ptr())
-	return &ShareablePassMetadataPreview{inner: raw.PKShareablePassMetadataPreviewFromID(_id)}
-}
-
-// WithOwnerDisplayName sets the ownerDisplayName property and returns the receiver for chaining.
-func (x *ShareablePassMetadataPreview) WithOwnerDisplayName(ownerDisplayName string) *ShareablePassMetadataPreview {
-	x.inner.SetOwnerDisplayName(foundation.NSStringStringWithUTF8String(ownerDisplayName))
+	x := &ShareablePassMetadataPreview{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// OwnerDisplayName calls the underlying OwnerDisplayName.
+// shareablePassMetadataPreviewAdopt wraps an Objective-C object that this code just created as a
+// ShareablePassMetadataPreview (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shareablePassMetadataPreviewAdopt(id objc.ID) *ShareablePassMetadataPreview {
+	if id == 0 {
+		return nil
+	}
+	x := &ShareablePassMetadataPreview{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ShareablePassMetadataPreview) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ShareablePassMetadataPreview) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ShareablePassMetadataPreview) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewShareablePassMetadataPreviewWithTemplateIdentifier creates a new ShareablePassMetadataPreview.
+func NewShareablePassMetadataPreviewWithTemplateIdentifier(templateIdentifier string) *ShareablePassMetadataPreview {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKShareablePassMetadataPreview")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTemplateIdentifier:"), purego.NSString(templateIdentifier))
+	return shareablePassMetadataPreviewAdopt(_id)
+}
+
+// WithOwnerDisplayName sets ownerDisplayName and returns the receiver so calls can be chained.
+func (x *ShareablePassMetadataPreview) WithOwnerDisplayName(ownerDisplayName string) *ShareablePassMetadataPreview {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOwnerDisplayName:"), purego.NSString(ownerDisplayName))
+	return x
+}
+
 func (x *ShareablePassMetadataPreview) OwnerDisplayName() string {
-	_r := x.inner.OwnerDisplayName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerDisplayName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetOwnerDisplayName calls the underlying SetOwnerDisplayName.
 func (x *ShareablePassMetadataPreview) SetOwnerDisplayName(ownerDisplayName string) {
-	x.inner.SetOwnerDisplayName(foundation.NSStringStringWithUTF8String(ownerDisplayName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOwnerDisplayName:"), purego.NSString(ownerDisplayName))
 }
 
-// ProvisioningTemplateIdentifier calls the underlying ProvisioningTemplateIdentifier.
 func (x *ShareablePassMetadataPreview) ProvisioningTemplateIdentifier() string {
-	_r := x.inner.ProvisioningTemplateIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provisioningTemplateIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *ShareablePassMetadataPreview) asAddPassMetadataPreview() *raw.PKAddPassMetadataPreview {
-	return &x.inner.PKAddPassMetadataPreview
+	return purego.GoString(_r)
 }
 
 // ShareablePassMetadataPreviewable is the interface implemented by [ShareablePassMetadataPreview], for mocking and DI.
 type ShareablePassMetadataPreviewable interface {
-	Unwrap() *raw.PKShareablePassMetadataPreview
+	obj.Object
 	WithOwnerDisplayName(ownerDisplayName string) *ShareablePassMetadataPreview
 	OwnerDisplayName() string
 	SetOwnerDisplayName(ownerDisplayName string)

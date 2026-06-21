@@ -5,66 +5,82 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that stores a value for a given unit.
 //
-// Quantity wraps [raw.HKQuantity] with a fluent Go API.
+// Quantity is an idiomatic wrapper over the Objective-C class HKQuantity.
 type Quantity struct {
-	inner *raw.HKQuantity
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKQuantity].
-func (x *Quantity) Unwrap() *raw.HKQuantity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Quantity) ID() objc.ID { return x.inner.Ptr() }
-
-// QuantityFromID adopts an existing object pointer as a Quantity (nil for 0).
+// QuantityFromID adopts an existing Objective-C object as a Quantity
+// (nil for 0), retaining it and registering a release finalizer.
 func QuantityFromID(id objc.ID) *Quantity {
 	if id == 0 {
 		return nil
 	}
-	return &Quantity{inner: raw.HKQuantityFromID(id)}
+	x := &Quantity{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewQuantity creates a new [Quantity].
+// quantityAdopt wraps an Objective-C object that this code just created as a
+// Quantity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func quantityAdopt(id objc.ID) *Quantity {
+	if id == 0 {
+		return nil
+	}
+	x := &Quantity{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Quantity) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Quantity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Quantity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewQuantity creates a new Quantity.
 func NewQuantity() *Quantity {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKQuantity")), objc.RegisterName("new"))
-	return &Quantity{inner: raw.HKQuantityFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKQuantity")), objc.RegisterName("new"))
+	return quantityAdopt(_id)
 }
 
 // Returns a boolean value indicating whether the quantity is compatible with the provided unit.
-//
-// IsCompatibleWithUnit calls the underlying IsCompatibleWithUnit.
-func (x *Quantity) IsCompatibleWithUnit(unit *raw.HKUnit) bool {
-	return x.inner.IsCompatibleWithUnit(unit)
+func (x *Quantity) IsCompatibleWithUnit(unit *Unit) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompatibleWithUnit:"), objref.IDOf(unit))
+	return _r
 }
 
 // Returns the quantity’s value in the provided unit.
-//
-// DoubleValueForUnit calls the underlying DoubleValueForUnit.
-func (x *Quantity) DoubleValueForUnit(unit *raw.HKUnit) float64 {
-	return x.inner.DoubleValueForUnit(unit)
-}
-
-// Compares two values after converting them to the same units.
-//
-// Compare calls the underlying Compare.
-func (x *Quantity) Compare(quantity *raw.HKQuantity) foundation.NSComparisonResult {
-	return x.inner.Compare(quantity)
+func (x *Quantity) DoubleValueForUnit(unit *Unit) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleValueForUnit:"), objref.IDOf(unit))
+	return _r
 }
 
 // Quantityable is the interface implemented by [Quantity], for mocking and DI.
 type Quantityable interface {
-	Unwrap() *raw.HKQuantity
-	IsCompatibleWithUnit(unit *raw.HKUnit) bool
-	DoubleValueForUnit(unit *raw.HKUnit) float64
-	Compare(quantity *raw.HKQuantity) foundation.NSComparisonResult
+	obj.Object
+	IsCompatibleWithUnit(unit *Unit) bool
+	DoubleValueForUnit(unit *Unit) float64
 }
 
 var _ Quantityable = (*Quantity)(nil)

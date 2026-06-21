@@ -5,104 +5,128 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that configures how a render pipeline fetches data to send to the vertex function.
 //
-// VertexBufferLayoutDescriptor wraps [raw.MTLVertexBufferLayoutDescriptor] with a fluent Go API.
+// VertexBufferLayoutDescriptor is an idiomatic wrapper over the Objective-C class MTLVertexBufferLayoutDescriptor.
 type VertexBufferLayoutDescriptor struct {
-	inner *raw.MTLVertexBufferLayoutDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLVertexBufferLayoutDescriptor].
-func (x *VertexBufferLayoutDescriptor) Unwrap() *raw.MTLVertexBufferLayoutDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VertexBufferLayoutDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// VertexBufferLayoutDescriptorFromID adopts an existing object pointer as a VertexBufferLayoutDescriptor (nil for 0).
+// VertexBufferLayoutDescriptorFromID adopts an existing Objective-C object as a VertexBufferLayoutDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func VertexBufferLayoutDescriptorFromID(id objc.ID) *VertexBufferLayoutDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &VertexBufferLayoutDescriptor{inner: raw.MTLVertexBufferLayoutDescriptorFromID(id)}
+	x := &VertexBufferLayoutDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVertexBufferLayoutDescriptor creates a new [VertexBufferLayoutDescriptor].
+// vertexBufferLayoutDescriptorAdopt wraps an Objective-C object that this code just created as a
+// VertexBufferLayoutDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vertexBufferLayoutDescriptorAdopt(id objc.ID) *VertexBufferLayoutDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &VertexBufferLayoutDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VertexBufferLayoutDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VertexBufferLayoutDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VertexBufferLayoutDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVertexBufferLayoutDescriptor creates a new VertexBufferLayoutDescriptor.
 func NewVertexBufferLayoutDescriptor() *VertexBufferLayoutDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLVertexBufferLayoutDescriptor")), objc.RegisterName("new"))
-	return &VertexBufferLayoutDescriptor{inner: raw.MTLVertexBufferLayoutDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLVertexBufferLayoutDescriptor")), objc.RegisterName("new"))
+	return vertexBufferLayoutDescriptorAdopt(_id)
 }
 
 // The number of bytes between the first byte of two consecutive vertices in a buffer.
 //
-// WithStride sets the stride property and returns the receiver for chaining.
-func (x *VertexBufferLayoutDescriptor) WithStride(stride uint) *VertexBufferLayoutDescriptor {
-	x.inner.SetStride(stride)
+// WithStride sets stride and returns the receiver so calls can be chained.
+func (x *VertexBufferLayoutDescriptor) WithStride(stride int) *VertexBufferLayoutDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
 	return x
 }
 
 // The circumstances under which the vertex and its attributes are presented to the vertex function.
 //
-// WithStepFunction sets the stepFunction property and returns the receiver for chaining.
-func (x *VertexBufferLayoutDescriptor) WithStepFunction(stepFunction MTLVertexStepFunction) *VertexBufferLayoutDescriptor {
-	x.inner.SetStepFunction(raw.MTLVertexStepFunction(stepFunction))
+// WithStepFunction sets stepFunction and returns the receiver so calls can be chained.
+func (x *VertexBufferLayoutDescriptor) WithStepFunction(stepFunction VertexStepFunction) *VertexBufferLayoutDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepFunction:"), stepFunction)
 	return x
 }
 
 // The interval at which the vertex and its attributes are presented to the vertex function.
 //
-// WithStepRate sets the stepRate property and returns the receiver for chaining.
-func (x *VertexBufferLayoutDescriptor) WithStepRate(stepRate uint) *VertexBufferLayoutDescriptor {
-	x.inner.SetStepRate(stepRate)
+// WithStepRate sets stepRate and returns the receiver so calls can be chained.
+func (x *VertexBufferLayoutDescriptor) WithStepRate(stepRate int) *VertexBufferLayoutDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepRate:"), stepRate)
 	return x
 }
 
-// Stride calls the underlying Stride.
-func (x *VertexBufferLayoutDescriptor) Stride() uint {
-	return x.inner.Stride()
+func (x *VertexBufferLayoutDescriptor) Stride() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stride"))
+	return _r
 }
 
-// SetStride calls the underlying SetStride.
-func (x *VertexBufferLayoutDescriptor) SetStride(stride uint) {
-	x.inner.SetStride(stride)
+func (x *VertexBufferLayoutDescriptor) SetStride(stride int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
 }
 
-// StepFunction calls the underlying StepFunction.
-func (x *VertexBufferLayoutDescriptor) StepFunction() MTLVertexStepFunction {
-	return MTLVertexStepFunction(x.inner.StepFunction())
+func (x *VertexBufferLayoutDescriptor) StepFunction() VertexStepFunction {
+	_r := objc.Send[VertexStepFunction](objref.IDOf(x), objc.RegisterName("stepFunction"))
+	return _r
 }
 
-// SetStepFunction calls the underlying SetStepFunction.
-func (x *VertexBufferLayoutDescriptor) SetStepFunction(stepFunction MTLVertexStepFunction) {
-	x.inner.SetStepFunction(raw.MTLVertexStepFunction(stepFunction))
+func (x *VertexBufferLayoutDescriptor) SetStepFunction(stepFunction VertexStepFunction) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepFunction:"), stepFunction)
 }
 
-// StepRate calls the underlying StepRate.
-func (x *VertexBufferLayoutDescriptor) StepRate() uint {
-	return x.inner.StepRate()
+func (x *VertexBufferLayoutDescriptor) StepRate() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stepRate"))
+	return _r
 }
 
-// SetStepRate calls the underlying SetStepRate.
-func (x *VertexBufferLayoutDescriptor) SetStepRate(stepRate uint) {
-	x.inner.SetStepRate(stepRate)
+func (x *VertexBufferLayoutDescriptor) SetStepRate(stepRate int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepRate:"), stepRate)
 }
 
 // VertexBufferLayoutDescriptorable is the interface implemented by [VertexBufferLayoutDescriptor], for mocking and DI.
 type VertexBufferLayoutDescriptorable interface {
-	Unwrap() *raw.MTLVertexBufferLayoutDescriptor
-	WithStride(stride uint) *VertexBufferLayoutDescriptor
-	WithStepFunction(stepFunction MTLVertexStepFunction) *VertexBufferLayoutDescriptor
-	WithStepRate(stepRate uint) *VertexBufferLayoutDescriptor
-	Stride() uint
-	SetStride(stride uint)
-	StepFunction() MTLVertexStepFunction
-	SetStepFunction(stepFunction MTLVertexStepFunction)
-	StepRate() uint
-	SetStepRate(stepRate uint)
+	obj.Object
+	WithStride(stride int) *VertexBufferLayoutDescriptor
+	WithStepFunction(stepFunction VertexStepFunction) *VertexBufferLayoutDescriptor
+	WithStepRate(stepRate int) *VertexBufferLayoutDescriptor
+	Stride() int
+	SetStride(stride int)
+	StepFunction() VertexStepFunction
+	SetStepFunction(stepFunction VertexStepFunction)
+	StepRate() int
+	SetStepRate(stepRate int)
 }
 
 var _ VertexBufferLayoutDescriptorable = (*VertexBufferLayoutDescriptor)(nil)

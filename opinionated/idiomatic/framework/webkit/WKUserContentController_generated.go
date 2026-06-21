@@ -5,151 +5,129 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object for managing interactions between JavaScript code and your web view, and for filtering content in your web view.
 //
-// WKUserContentController wraps [raw.WKUserContentController] with a fluent Go API.
+// WKUserContentController is an idiomatic wrapper over the Objective-C class WKUserContentController.
 type WKUserContentController struct {
-	inner *raw.WKUserContentController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKUserContentController].
-func (x *WKUserContentController) Unwrap() *raw.WKUserContentController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKUserContentController) ID() objc.ID { return x.inner.Ptr() }
-
-// WKUserContentControllerFromID adopts an existing object pointer as a WKUserContentController (nil for 0).
+// WKUserContentControllerFromID adopts an existing Objective-C object as a WKUserContentController
+// (nil for 0), retaining it and registering a release finalizer.
 func WKUserContentControllerFromID(id objc.ID) *WKUserContentController {
 	if id == 0 {
 		return nil
 	}
-	return &WKUserContentController{inner: raw.WKUserContentControllerFromID(id)}
+	x := &WKUserContentController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWKUserContentController creates a new [WKUserContentController].
+// wKUserContentControllerAdopt wraps an Objective-C object that this code just created as a
+// WKUserContentController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKUserContentControllerAdopt(id objc.ID) *WKUserContentController {
+	if id == 0 {
+		return nil
+	}
+	x := &WKUserContentController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WKUserContentController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKUserContentController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKUserContentController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWKUserContentController creates a new WKUserContentController.
 func NewWKUserContentController() *WKUserContentController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKUserContentController")), objc.RegisterName("new"))
-	return &WKUserContentController{inner: raw.WKUserContentControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WKUserContentController")), objc.RegisterName("new"))
+	return wKUserContentControllerAdopt(_id)
 }
 
 // Injects the specified script into the webpage’s content.
-//
-// AddUserScript calls the underlying AddUserScript.
-func (x *WKUserContentController) AddUserScript(userScript *raw.WKUserScript) {
-	x.inner.AddUserScript(userScript)
+func (x *WKUserContentController) AddUserScript(userScript *WKUserScript) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addUserScript:"), objref.IDOf(userScript))
 }
 
 // Removes all user scripts from the web view.
-//
-// RemoveAllUserScripts calls the underlying RemoveAllUserScripts.
 func (x *WKUserContentController) RemoveAllUserScripts() {
-	x.inner.RemoveAllUserScripts()
-}
-
-// Installs a message handler that you can call from the specified content world in your JavaScript code.
-//
-// AddScriptMessageHandlerContentWorldName calls the underlying AddScriptMessageHandlerContentWorldName.
-func (x *WKUserContentController) AddScriptMessageHandlerContentWorldName(scriptMessageHandler raw.WKScriptMessageHandler, world *raw.WKContentWorld, name string) {
-	x.inner.AddScriptMessageHandlerContentWorldName(scriptMessageHandler, world, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Installs a message handler that returns a reply to your JavaScript code.
-//
-// AddScriptMessageHandlerWithReplyContentWorldName calls the underlying AddScriptMessageHandlerWithReplyContentWorldName.
-func (x *WKUserContentController) AddScriptMessageHandlerWithReplyContentWorldName(scriptMessageHandlerWithReply raw.WKScriptMessageHandlerWithReply, contentWorld *raw.WKContentWorld, name string) {
-	x.inner.AddScriptMessageHandlerWithReplyContentWorldName(scriptMessageHandlerWithReply, contentWorld, foundation.NSStringStringWithUTF8String(name))
-}
-
-// Installs a message handler that you can call from your JavaScript code.
-//
-// AddScriptMessageHandlerName calls the underlying AddScriptMessageHandlerName.
-func (x *WKUserContentController) AddScriptMessageHandlerName(scriptMessageHandler raw.WKScriptMessageHandler, name string) {
-	x.inner.AddScriptMessageHandlerName(scriptMessageHandler, foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllUserScripts"))
 }
 
 // Uninstalls a custom message handler from the specified content world in your JavaScript code.
-//
-// RemoveScriptMessageHandlerForNameContentWorld calls the underlying RemoveScriptMessageHandlerForNameContentWorld.
-func (x *WKUserContentController) RemoveScriptMessageHandlerForNameContentWorld(name string, contentWorld *raw.WKContentWorld) {
-	x.inner.RemoveScriptMessageHandlerForNameContentWorld(foundation.NSStringStringWithUTF8String(name), contentWorld)
+func (x *WKUserContentController) RemoveScriptMessageHandlerForNameContentWorld(name string, contentWorld *WKContentWorld) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeScriptMessageHandlerForName:contentWorld:"), purego.NSString(name), objref.IDOf(contentWorld))
 }
 
 // Uninstalls the custom message handler with the specified name from your JavaScript code.
-//
-// RemoveScriptMessageHandlerForName calls the underlying RemoveScriptMessageHandlerForName.
 func (x *WKUserContentController) RemoveScriptMessageHandlerForName(name string) {
-	x.inner.RemoveScriptMessageHandlerForName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeScriptMessageHandlerForName:"), purego.NSString(name))
 }
 
 // Uninstalls all custom message handlers from the specified content world in your JavaScript code.
-//
-// RemoveAllScriptMessageHandlersFromContentWorld calls the underlying RemoveAllScriptMessageHandlersFromContentWorld.
-func (x *WKUserContentController) RemoveAllScriptMessageHandlersFromContentWorld(contentWorld *raw.WKContentWorld) {
-	x.inner.RemoveAllScriptMessageHandlersFromContentWorld(contentWorld)
+func (x *WKUserContentController) RemoveAllScriptMessageHandlersFromContentWorld(contentWorld *WKContentWorld) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllScriptMessageHandlersFromContentWorld:"), objref.IDOf(contentWorld))
 }
 
 // Uninstalls all custom message handlers associated with the user content controller.
-//
-// RemoveAllScriptMessageHandlers calls the underlying RemoveAllScriptMessageHandlers.
 func (x *WKUserContentController) RemoveAllScriptMessageHandlers() {
-	x.inner.RemoveAllScriptMessageHandlers()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllScriptMessageHandlers"))
 }
 
 // Adds the specified content rule list to the content controller object.
-//
-// AddContentRuleList calls the underlying AddContentRuleList.
-func (x *WKUserContentController) AddContentRuleList(contentRuleList *raw.WKContentRuleList) {
-	x.inner.AddContentRuleList(contentRuleList)
+func (x *WKUserContentController) AddContentRuleList(contentRuleList *WKContentRuleList) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addContentRuleList:"), objref.IDOf(contentRuleList))
 }
 
 // Removes the specified rule list from the content controller object.
-//
-// RemoveContentRuleList calls the underlying RemoveContentRuleList.
-func (x *WKUserContentController) RemoveContentRuleList(contentRuleList *raw.WKContentRuleList) {
-	x.inner.RemoveContentRuleList(contentRuleList)
+func (x *WKUserContentController) RemoveContentRuleList(contentRuleList *WKContentRuleList) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeContentRuleList:"), objref.IDOf(contentRuleList))
 }
 
 // Removes all rules lists from the content controller.
-//
-// RemoveAllContentRuleLists calls the underlying RemoveAllContentRuleLists.
 func (x *WKUserContentController) RemoveAllContentRuleLists() {
-	x.inner.RemoveAllContentRuleLists()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllContentRuleLists"))
 }
 
-// @abstract The user scripts associated with this user content controller.
+// The user scripts associated with this user content controller.
 //
 // UserScripts returns the collection as a Go slice.
 func (x *WKUserContentController) UserScripts() []*WKUserScript {
-	arr := x.inner.UserScripts()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *WKUserScript {
-		return &WKUserScript{inner: raw.WKUserScriptFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userScripts"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WKUserScript { return WKUserScriptFromID(_id) })
 }
 
 // WKUserContentControllerable is the interface implemented by [WKUserContentController], for mocking and DI.
 type WKUserContentControllerable interface {
-	Unwrap() *raw.WKUserContentController
-	AddUserScript(userScript *raw.WKUserScript)
+	obj.Object
+	AddUserScript(userScript *WKUserScript)
 	RemoveAllUserScripts()
-	AddScriptMessageHandlerContentWorldName(scriptMessageHandler raw.WKScriptMessageHandler, world *raw.WKContentWorld, name string)
-	AddScriptMessageHandlerWithReplyContentWorldName(scriptMessageHandlerWithReply raw.WKScriptMessageHandlerWithReply, contentWorld *raw.WKContentWorld, name string)
-	AddScriptMessageHandlerName(scriptMessageHandler raw.WKScriptMessageHandler, name string)
-	RemoveScriptMessageHandlerForNameContentWorld(name string, contentWorld *raw.WKContentWorld)
+	RemoveScriptMessageHandlerForNameContentWorld(name string, contentWorld *WKContentWorld)
 	RemoveScriptMessageHandlerForName(name string)
-	RemoveAllScriptMessageHandlersFromContentWorld(contentWorld *raw.WKContentWorld)
+	RemoveAllScriptMessageHandlersFromContentWorld(contentWorld *WKContentWorld)
 	RemoveAllScriptMessageHandlers()
-	AddContentRuleList(contentRuleList *raw.WKContentRuleList)
-	RemoveContentRuleList(contentRuleList *raw.WKContentRuleList)
+	AddContentRuleList(contentRuleList *WKContentRuleList)
+	RemoveContentRuleList(contentRuleList *WKContentRuleList)
 	RemoveAllContentRuleLists()
 	UserScripts() []*WKUserScript
 }

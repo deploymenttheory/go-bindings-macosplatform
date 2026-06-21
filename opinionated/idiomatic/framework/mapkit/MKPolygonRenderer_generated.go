@@ -5,207 +5,193 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The visual representation of a single polygon overlay.
 //
-// PolygonRenderer wraps [raw.MKPolygonRenderer] with a fluent Go API.
+// PolygonRenderer is an idiomatic wrapper over the Objective-C class MKPolygonRenderer.
 type PolygonRenderer struct {
-	inner *raw.MKPolygonRenderer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKPolygonRenderer].
-func (x *PolygonRenderer) Unwrap() *raw.MKPolygonRenderer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PolygonRenderer) ID() objc.ID { return x.inner.Ptr() }
-
-// PolygonRendererFromID adopts an existing object pointer as a PolygonRenderer (nil for 0).
+// PolygonRendererFromID adopts an existing Objective-C object as a PolygonRenderer
+// (nil for 0), retaining it and registering a release finalizer.
 func PolygonRendererFromID(id objc.ID) *PolygonRenderer {
 	if id == 0 {
 		return nil
 	}
-	return &PolygonRenderer{inner: raw.MKPolygonRendererFromID(id)}
+	x := &PolygonRenderer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// polygonRendererAdopt wraps an Objective-C object that this code just created as a
+// PolygonRenderer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func polygonRendererAdopt(id objc.ID) *PolygonRenderer {
+	if id == 0 {
+		return nil
+	}
+	x := &PolygonRenderer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PolygonRenderer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PolygonRenderer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PolygonRenderer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new renderer that handles drawing for the specified polygon overlay object.
 //
-// NewPolygonRendererWithPolygon creates a new [PolygonRenderer].
-func NewPolygonRendererWithPolygon(polygon *raw.MKPolygon) *PolygonRenderer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPolygonRenderer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPolygon:"), polygon.Ptr())
-	return &PolygonRenderer{inner: raw.MKPolygonRendererFromID(_id)}
+// NewPolygonRendererWithPolygon creates a new PolygonRenderer.
+func NewPolygonRendererWithPolygon(polygon *Polygon) *PolygonRenderer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKPolygonRenderer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPolygon:"), objref.IDOf(polygon))
+	return polygonRendererAdopt(_id)
 }
 
 // The unit distance along the polygon where the stroke starts.
 //
-// WithStrokeStart sets the strokeStart property and returns the receiver for chaining.
+// WithStrokeStart sets strokeStart and returns the receiver so calls can be chained.
 func (x *PolygonRenderer) WithStrokeStart(strokeStart float64) *PolygonRenderer {
-	x.inner.SetStrokeStart(strokeStart)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeStart:"), strokeStart)
 	return x
 }
 
 // The unit distance along the polygon where the stroke ends.
 //
-// WithStrokeEnd sets the strokeEnd property and returns the receiver for chaining.
+// WithStrokeEnd sets strokeEnd and returns the receiver so calls can be chained.
 func (x *PolygonRenderer) WithStrokeEnd(strokeEnd float64) *PolygonRenderer {
-	x.inner.SetStrokeEnd(strokeEnd)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeEnd:"), strokeEnd)
 	return x
 }
 
 // The fill color to use for the path.
 //
-// WithFillColor sets the fillColor property and returns the receiver for chaining.
-func (x *PolygonRenderer) WithFillColor(fillColor *appkit.NSColor) *PolygonRenderer {
-	x.inner.MKOverlayPathRenderer.SetFillColor(fillColor)
+// WithFillColor sets fillColor and returns the receiver so calls can be chained.
+func (x *PolygonRenderer) WithFillColor(fillColor obj.Object) *PolygonRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	return x
 }
 
 // The stroke color to use for the path.
 //
-// WithStrokeColor sets the strokeColor property and returns the receiver for chaining.
-func (x *PolygonRenderer) WithStrokeColor(strokeColor *appkit.NSColor) *PolygonRenderer {
-	x.inner.MKOverlayPathRenderer.SetStrokeColor(strokeColor)
+// WithStrokeColor sets strokeColor and returns the receiver so calls can be chained.
+func (x *PolygonRenderer) WithStrokeColor(strokeColor obj.Object) *PolygonRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 	return x
 }
 
 // The stroke width to use for the path.
 //
-// WithLineWidth sets the lineWidth property and returns the receiver for chaining.
+// WithLineWidth sets lineWidth and returns the receiver so calls can be chained.
 func (x *PolygonRenderer) WithLineWidth(lineWidth float64) *PolygonRenderer {
-	x.inner.MKOverlayPathRenderer.SetLineWidth(lineWidth)
-	return x
-}
-
-// The line join style to apply to the corners of the path.
-//
-// WithLineJoin sets the lineJoin property and returns the receiver for chaining.
-func (x *PolygonRenderer) WithLineJoin(lineJoin coregraphics.CGLineJoin) *PolygonRenderer {
-	x.inner.MKOverlayPathRenderer.SetLineJoin(lineJoin)
-	return x
-}
-
-// The line cap style to apply to the open ends of the path.
-//
-// WithLineCap sets the lineCap property and returns the receiver for chaining.
-func (x *PolygonRenderer) WithLineCap(lineCap coregraphics.CGLineCap) *PolygonRenderer {
-	x.inner.MKOverlayPathRenderer.SetLineCap(lineCap)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
 	return x
 }
 
 // The limiting value that helps avoid spikes at junctions between connected line segments.
 //
-// WithMiterLimit sets the miterLimit property and returns the receiver for chaining.
+// WithMiterLimit sets miterLimit and returns the receiver so calls can be chained.
 func (x *PolygonRenderer) WithMiterLimit(miterLimit float64) *PolygonRenderer {
-	x.inner.MKOverlayPathRenderer.SetMiterLimit(miterLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
 	return x
 }
 
 // The offset (in points) at which to start drawing the dash pattern.
 //
-// WithLineDashPhase sets the lineDashPhase property and returns the receiver for chaining.
+// WithLineDashPhase sets lineDashPhase and returns the receiver so calls can be chained.
 func (x *PolygonRenderer) WithLineDashPhase(lineDashPhase float64) *PolygonRenderer {
-	x.inner.MKOverlayPathRenderer.SetLineDashPhase(lineDashPhase)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
 	return x
 }
 
 // An array of numbers specifying the dash pattern to use for the path.
 //
-// WithLineDashPattern sets the collection, converting the Go slice to an NSArray.
-func (x *PolygonRenderer) WithLineDashPattern(items ...*foundation.NSNumber) *PolygonRenderer {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.MKOverlayPathRenderer.SetLineDashPattern(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.MKOverlayPathRenderer.SetLineDashPattern(_arr)
+// WithLineDashPattern sets the collection and returns the receiver so calls can be chained.
+func (x *PolygonRenderer) WithLineDashPattern(items ...obj.Object) *PolygonRenderer {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPattern:"), _arr)
 	return x
 }
 
 // A Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
 //
-// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+// WithShouldRasterize sets shouldRasterize and returns the receiver so calls can be chained.
 func (x *PolygonRenderer) WithShouldRasterize(shouldRasterize bool) *PolygonRenderer {
-	x.inner.MKOverlayPathRenderer.SetShouldRasterize(shouldRasterize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	return x
+}
+
+// The path representing the overlay’s shape.
+//
+// WithPath sets path and returns the receiver so calls can be chained.
+func (x *PolygonRenderer) WithPath(path obj.Object) *PolygonRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return x
 }
 
 // The amount of transparency to apply to the overlay.
 //
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha sets alpha and returns the receiver so calls can be chained.
 func (x *PolygonRenderer) WithAlpha(alpha float64) *PolygonRenderer {
-	x.inner.MKOverlayPathRenderer.MKOverlayRenderer.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// Polygon calls the underlying Polygon.
 func (x *PolygonRenderer) Polygon() *Polygon {
-	_r := x.inner.Polygon()
-	if _r == nil {
-		return nil
-	}
-	return &Polygon{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("polygon"))
+	return PolygonFromID(_r)
 }
 
-// StrokeStart calls the underlying StrokeStart.
 func (x *PolygonRenderer) StrokeStart() float64 {
-	return x.inner.StrokeStart()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("strokeStart"))
+	return _r
 }
 
-// SetStrokeStart calls the underlying SetStrokeStart.
 func (x *PolygonRenderer) SetStrokeStart(strokeStart float64) {
-	x.inner.SetStrokeStart(strokeStart)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeStart:"), strokeStart)
 }
 
-// StrokeEnd calls the underlying StrokeEnd.
 func (x *PolygonRenderer) StrokeEnd() float64 {
-	return x.inner.StrokeEnd()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("strokeEnd"))
+	return _r
 }
 
-// SetStrokeEnd calls the underlying SetStrokeEnd.
 func (x *PolygonRenderer) SetStrokeEnd(strokeEnd float64) {
-	x.inner.SetStrokeEnd(strokeEnd)
-}
-
-func (x *PolygonRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer {
-	return &x.inner.MKOverlayPathRenderer
-}
-
-func (x *PolygonRenderer) asOverlayRenderer() *raw.MKOverlayRenderer {
-	return &x.inner.MKOverlayPathRenderer.MKOverlayRenderer
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeEnd:"), strokeEnd)
 }
 
 // PolygonRendererable is the interface implemented by [PolygonRenderer], for mocking and DI.
 type PolygonRendererable interface {
-	Unwrap() *raw.MKPolygonRenderer
+	obj.Object
 	WithStrokeStart(strokeStart float64) *PolygonRenderer
 	WithStrokeEnd(strokeEnd float64) *PolygonRenderer
-	WithFillColor(fillColor *appkit.NSColor) *PolygonRenderer
-	WithStrokeColor(strokeColor *appkit.NSColor) *PolygonRenderer
+	WithFillColor(fillColor obj.Object) *PolygonRenderer
+	WithStrokeColor(strokeColor obj.Object) *PolygonRenderer
 	WithLineWidth(lineWidth float64) *PolygonRenderer
-	WithLineJoin(lineJoin coregraphics.CGLineJoin) *PolygonRenderer
-	WithLineCap(lineCap coregraphics.CGLineCap) *PolygonRenderer
 	WithMiterLimit(miterLimit float64) *PolygonRenderer
 	WithLineDashPhase(lineDashPhase float64) *PolygonRenderer
-	WithLineDashPattern(items ...*foundation.NSNumber) *PolygonRenderer
+	WithLineDashPattern(items ...obj.Object) *PolygonRenderer
 	WithShouldRasterize(shouldRasterize bool) *PolygonRenderer
+	WithPath(path obj.Object) *PolygonRenderer
 	WithAlpha(alpha float64) *PolygonRenderer
 	Polygon() *Polygon
 	StrokeStart() float64

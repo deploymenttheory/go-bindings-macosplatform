@@ -5,111 +5,127 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The base class for all framework layers.
 //
-// Layer wraps [raw.MLCLayer] with a fluent Go API.
+// Layer is an idiomatic wrapper over the Objective-C class MLCLayer.
 type Layer struct {
-	inner *raw.MLCLayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCLayer].
-func (x *Layer) Unwrap() *raw.MLCLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Layer) ID() objc.ID { return x.inner.Ptr() }
-
-// LayerFromID adopts an existing object pointer as a Layer (nil for 0).
+// LayerFromID adopts an existing Objective-C object as a Layer
+// (nil for 0), retaining it and registering a release finalizer.
 func LayerFromID(id objc.ID) *Layer {
 	if id == 0 {
 		return nil
 	}
-	return &Layer{inner: raw.MLCLayerFromID(id)}
+	x := &Layer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLayer creates a new [Layer].
+// layerAdopt wraps an Objective-C object that this code just created as a
+// Layer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func layerAdopt(id objc.ID) *Layer {
+	if id == 0 {
+		return nil
+	}
+	x := &Layer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Layer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Layer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Layer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLayer creates a new Layer.
 func NewLayer() *Layer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCLayer")), objc.RegisterName("new"))
-	return &Layer{inner: raw.MLCLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCLayer")), objc.RegisterName("new"))
+	return layerAdopt(_id)
 }
 
 // A string that helps identify this layer.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *Layer) WithLabel(label string) *Layer {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 //
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
 func (x *Layer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *Layer {
-	x.inner.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// @property   layerID @abstract   The layer ID @discussion A unique number to identify each layer.  Assigned when the layer is created.
-//
-// LayerID calls the underlying LayerID.
-func (x *Layer) LayerID() uint {
-	return x.inner.LayerID()
+// The layer ID A unique number to identify each layer.  Assigned when the layer is created.
+func (x *Layer) LayerID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("layerID"))
+	return _r
 }
 
-// @property   label @abstract   A string to help identify this object.
-//
-// Label calls the underlying Label.
+// A string to help identify this object.
 func (x *Layer) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
 func (x *Layer) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// @property   isDebuggingEnabled @abstract   A flag to identify if we want to debug this layer when executing a graph that includes this layer @discussion If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
-//
-// IsDebuggingEnabled calls the underlying IsDebuggingEnabled.
+// A flag to identify if we want to debug this layer when executing a graph that includes this layer If this is set, we will make sure that the result tensor and gradient tensors are available for reading on CPU The default is NO.  If isDebuggingEnabled is set to YES,  make sure to set options to enable debugging when compiling the graph.  Otherwise this property may be ignored.
 func (x *Layer) IsDebuggingEnabled() bool {
-	return x.inner.IsDebuggingEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDebuggingEnabled"))
+	return _r
 }
 
-// SetIsDebuggingEnabled calls the underlying SetIsDebuggingEnabled.
 func (x *Layer) SetIsDebuggingEnabled(isDebuggingEnabled bool) {
-	x.inner.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 }
 
-// @property   deviceType @abstract   The device type where this layer will be executed @discussion Typically the MLCDevice passed to compileWithOptions will be the device used to execute layers in the graph. If MLCDeviceTypeANE is selected, it is possible that some of the layers of the graph may not be executed on the ANE but instead on the CPU or GPU.  This property can be used to determine which device type the layer will be executed on.
-//
-// DeviceType calls the underlying DeviceType.
-func (x *Layer) DeviceType() MLCDeviceType {
-	return MLCDeviceType(x.inner.DeviceType())
+// The device type where this layer will be executed Typically the MLCDevice passed to compileWithOptions will be the device used to execute layers in the graph. If MLCDeviceTypeANE is selected, it is possible that some of the layers of the graph may not be executed on the ANE but instead on the CPU or GPU.  This property can be used to determine which device type the layer will be executed on.
+func (x *Layer) DeviceType() DeviceType {
+	_r := objc.Send[DeviceType](objref.IDOf(x), objc.RegisterName("deviceType"))
+	return _r
 }
-
-func (x *Layer) asLayer() *raw.MLCLayer { return x.inner }
 
 // Layerable is the interface implemented by [Layer], for mocking and DI.
 type Layerable interface {
-	Unwrap() *raw.MLCLayer
+	obj.Object
 	WithLabel(label string) *Layer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *Layer
-	LayerID() uint
+	LayerID() int
 	Label() string
 	SetLabel(label string)
 	IsDebuggingEnabled() bool
 	SetIsDebuggingEnabled(isDebuggingEnabled bool)
-	DeviceType() MLCDeviceType
+	DeviceType() DeviceType
 }
 
 var _ Layerable = (*Layer)(nil)

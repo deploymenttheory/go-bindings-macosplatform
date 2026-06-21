@@ -5,176 +5,177 @@
 package imagecapturecore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents the flatbed unit on a scanner.
 //
-// ScannerFunctionalUnitFlatbed wraps [raw.ICScannerFunctionalUnitFlatbed] with a fluent Go API.
+// ScannerFunctionalUnitFlatbed is an idiomatic wrapper over the Objective-C class ICScannerFunctionalUnitFlatbed.
 type ScannerFunctionalUnitFlatbed struct {
-	inner *raw.ICScannerFunctionalUnitFlatbed
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ICScannerFunctionalUnitFlatbed].
-func (x *ScannerFunctionalUnitFlatbed) Unwrap() *raw.ICScannerFunctionalUnitFlatbed { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScannerFunctionalUnitFlatbed) ID() objc.ID { return x.inner.Ptr() }
-
-// ScannerFunctionalUnitFlatbedFromID adopts an existing object pointer as a ScannerFunctionalUnitFlatbed (nil for 0).
+// ScannerFunctionalUnitFlatbedFromID adopts an existing Objective-C object as a ScannerFunctionalUnitFlatbed
+// (nil for 0), retaining it and registering a release finalizer.
 func ScannerFunctionalUnitFlatbedFromID(id objc.ID) *ScannerFunctionalUnitFlatbed {
 	if id == 0 {
 		return nil
 	}
-	return &ScannerFunctionalUnitFlatbed{inner: raw.ICScannerFunctionalUnitFlatbedFromID(id)}
+	x := &ScannerFunctionalUnitFlatbed{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewScannerFunctionalUnitFlatbed creates a new [ScannerFunctionalUnitFlatbed].
+// scannerFunctionalUnitFlatbedAdopt wraps an Objective-C object that this code just created as a
+// ScannerFunctionalUnitFlatbed (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scannerFunctionalUnitFlatbedAdopt(id objc.ID) *ScannerFunctionalUnitFlatbed {
+	if id == 0 {
+		return nil
+	}
+	x := &ScannerFunctionalUnitFlatbed{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScannerFunctionalUnitFlatbed) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScannerFunctionalUnitFlatbed) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScannerFunctionalUnitFlatbed) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScannerFunctionalUnitFlatbed creates a new ScannerFunctionalUnitFlatbed.
 func NewScannerFunctionalUnitFlatbed() *ScannerFunctionalUnitFlatbed {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ICScannerFunctionalUnitFlatbed")), objc.RegisterName("new"))
-	return &ScannerFunctionalUnitFlatbed{inner: raw.ICScannerFunctionalUnitFlatbedFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ICScannerFunctionalUnitFlatbed")), objc.RegisterName("new"))
+	return scannerFunctionalUnitFlatbedAdopt(_id)
 }
 
-// @property documentType @abstract ￼Current document type. This will always be one of the supported document types.
+// ￼Current document type. This will always be one of the supported document types.
 //
-// WithDocumentType sets the documentType property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitFlatbed) WithDocumentType(documentType ICScannerDocumentType) *ScannerFunctionalUnitFlatbed {
-	x.inner.SetDocumentType(raw.ICScannerDocumentType(documentType))
+// WithDocumentType sets documentType and returns the receiver so calls can be chained.
+func (x *ScannerFunctionalUnitFlatbed) WithDocumentType(documentType ScannerDocumentType) *ScannerFunctionalUnitFlatbed {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentType:"), documentType)
 	return x
 }
 
-// @property pixelDataType @abstract ￼The pixel data type.
+// ￼The pixel data type.
 //
-// WithPixelDataType sets the pixelDataType property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitFlatbed) WithPixelDataType(pixelDataType ICScannerPixelDataType) *ScannerFunctionalUnitFlatbed {
-	x.inner.ICScannerFunctionalUnit.SetPixelDataType(raw.ICScannerPixelDataType(pixelDataType))
+// WithPixelDataType sets pixelDataType and returns the receiver so calls can be chained.
+func (x *ScannerFunctionalUnitFlatbed) WithPixelDataType(pixelDataType ScannerPixelDataType) *ScannerFunctionalUnitFlatbed {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelDataType:"), pixelDataType)
 	return x
 }
 
-// @property bitDepth @abstract ￼The bit depth to use when performing the final scan. This will always be one of the supported bit depths.
+// ￼The bit depth to use when performing the final scan. This will always be one of the supported bit depths.
 //
-// WithBitDepth sets the bitDepth property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitFlatbed) WithBitDepth(bitDepth ICScannerBitDepth) *ScannerFunctionalUnitFlatbed {
-	x.inner.ICScannerFunctionalUnit.SetBitDepth(raw.ICScannerBitDepth(bitDepth))
+// WithBitDepth sets bitDepth and returns the receiver so calls can be chained.
+func (x *ScannerFunctionalUnitFlatbed) WithBitDepth(bitDepth ScannerBitDepth) *ScannerFunctionalUnitFlatbed {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitDepth:"), bitDepth)
 	return x
 }
 
-// @property measurementUnit @abstract ￼Current measurement unit. This will always be one of the supported measurement units.
+// ￼Current measurement unit. This will always be one of the supported measurement units.
 //
-// WithMeasurementUnit sets the measurementUnit property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitFlatbed) WithMeasurementUnit(measurementUnit ICScannerMeasurementUnit) *ScannerFunctionalUnitFlatbed {
-	x.inner.ICScannerFunctionalUnit.SetMeasurementUnit(raw.ICScannerMeasurementUnit(measurementUnit))
+// WithMeasurementUnit sets measurementUnit and returns the receiver so calls can be chained.
+func (x *ScannerFunctionalUnitFlatbed) WithMeasurementUnit(measurementUnit ScannerMeasurementUnit) *ScannerFunctionalUnitFlatbed {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeasurementUnit:"), measurementUnit)
 	return x
 }
 
-// @property resolution @abstract ￼Current scan resolution. This will always be one of the supported resolution values.
+// ￼Current scan resolution. This will always be one of the supported resolution values.
 //
-// WithResolution sets the resolution property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitFlatbed) WithResolution(resolution uint) *ScannerFunctionalUnitFlatbed {
-	x.inner.ICScannerFunctionalUnit.SetResolution(resolution)
+// WithResolution sets resolution and returns the receiver so calls can be chained.
+func (x *ScannerFunctionalUnitFlatbed) WithResolution(resolution int) *ScannerFunctionalUnitFlatbed {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolution:"), resolution)
 	return x
 }
 
-// @property scaleFactor @abstract ￼Current scale factor. This will always be one of the supported scale factor values.
+// ￼Current scale factor. This will always be one of the supported scale factor values.
 //
-// WithScaleFactor sets the scaleFactor property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitFlatbed) WithScaleFactor(scaleFactor uint) *ScannerFunctionalUnitFlatbed {
-	x.inner.ICScannerFunctionalUnit.SetScaleFactor(scaleFactor)
+// WithScaleFactor sets scaleFactor and returns the receiver so calls can be chained.
+func (x *ScannerFunctionalUnitFlatbed) WithScaleFactor(scaleFactor int) *ScannerFunctionalUnitFlatbed {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleFactor:"), scaleFactor)
 	return x
 }
 
-// @property scanArea @abstract ￼This property along with scanAreaOrientation describes the area to be scanned.
+// ￼Desired orientation of the scan area. This property along with scanArea describes the area to be scanned. This property is set to ICEXIFOrientation1 initially. This property is not used by the ICScannerFunctionalUnitDocumentFeeder subclass.
 //
-// WithScanArea sets the scanArea property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitFlatbed) WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnitFlatbed {
-	x.inner.ICScannerFunctionalUnit.SetScanArea(scanArea)
+// WithScanAreaOrientation sets scanAreaOrientation and returns the receiver so calls can be chained.
+func (x *ScannerFunctionalUnitFlatbed) WithScanAreaOrientation(scanAreaOrientation EXIFOrientationType) *ScannerFunctionalUnitFlatbed {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanAreaOrientation:"), scanAreaOrientation)
 	return x
 }
 
-// @property scanAreaOrientation @abstract ￼Desired orientation of the scan area. This property along with scanArea describes the area to be scanned. @discussion This property is set to ICEXIFOrientation1 initially. This property is not used by the ICScannerFunctionalUnitDocumentFeeder subclass.
+// ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
 //
-// WithScanAreaOrientation sets the scanAreaOrientation property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitFlatbed) WithScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) *ScannerFunctionalUnitFlatbed {
-	x.inner.ICScannerFunctionalUnit.SetScanAreaOrientation(raw.ICEXIFOrientationType(scanAreaOrientation))
-	return x
-}
-
-// @property usesThresholdForBlackAndWhiteScanning @abstract ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
-//
-// WithUsesThresholdForBlackAndWhiteScanning sets the usesThresholdForBlackAndWhiteScanning property and returns the receiver for chaining.
+// WithUsesThresholdForBlackAndWhiteScanning sets usesThresholdForBlackAndWhiteScanning and returns the receiver so calls can be chained.
 func (x *ScannerFunctionalUnitFlatbed) WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnitFlatbed {
-	x.inner.ICScannerFunctionalUnit.SetUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesThresholdForBlackAndWhiteScanning:"), usesThresholdForBlackAndWhiteScanning)
 	return x
 }
 
-// @property thresholdForBlackAndWhiteScanning @abstract ￼Threshold value to be used when performing a scan in black & white. This value should be from 0 to 255.
+// ￼Threshold value to be used when performing a scan in black & white. This value should be from 0 to 255.
 //
-// WithThresholdForBlackAndWhiteScanning sets the thresholdForBlackAndWhiteScanning property and returns the receiver for chaining.
+// WithThresholdForBlackAndWhiteScanning sets thresholdForBlackAndWhiteScanning and returns the receiver so calls can be chained.
 func (x *ScannerFunctionalUnitFlatbed) WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnitFlatbed {
-	x.inner.ICScannerFunctionalUnit.SetThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThresholdForBlackAndWhiteScanning:"), thresholdForBlackAndWhiteScanning)
 	return x
 }
 
-// @property overviewResolution @abstract ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.
+// ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.
 //
-// WithOverviewResolution sets the overviewResolution property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitFlatbed) WithOverviewResolution(overviewResolution uint) *ScannerFunctionalUnitFlatbed {
-	x.inner.ICScannerFunctionalUnit.SetOverviewResolution(overviewResolution)
+// WithOverviewResolution sets overviewResolution and returns the receiver so calls can be chained.
+func (x *ScannerFunctionalUnitFlatbed) WithOverviewResolution(overviewResolution int) *ScannerFunctionalUnitFlatbed {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverviewResolution:"), overviewResolution)
 	return x
 }
 
-// @property supportedDocumentTypes @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
-//
-// SupportedDocumentTypes calls the underlying SupportedDocumentTypes.
-func (x *ScannerFunctionalUnitFlatbed) SupportedDocumentTypes() *foundation.NSIndexSet {
-	return x.inner.SupportedDocumentTypes()
+// ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
+func (x *ScannerFunctionalUnitFlatbed) SupportedDocumentTypes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedDocumentTypes"))
+	return obj.Wrap(_r)
 }
 
-// @property documentType @abstract ￼Current document type. This will always be one of the supported document types.
-//
-// DocumentType calls the underlying DocumentType.
-func (x *ScannerFunctionalUnitFlatbed) DocumentType() ICScannerDocumentType {
-	return ICScannerDocumentType(x.inner.DocumentType())
+// ￼Current document type. This will always be one of the supported document types.
+func (x *ScannerFunctionalUnitFlatbed) DocumentType() ScannerDocumentType {
+	_r := objc.Send[ScannerDocumentType](objref.IDOf(x), objc.RegisterName("documentType"))
+	return _r
 }
 
-// SetDocumentType calls the underlying SetDocumentType.
-func (x *ScannerFunctionalUnitFlatbed) SetDocumentType(documentType ICScannerDocumentType) {
-	x.inner.SetDocumentType(raw.ICScannerDocumentType(documentType))
-}
-
-// @property documentSize @abstract ￼Document size of the current document type expressed in current measurement unit.
-//
-// DocumentSize calls the underlying DocumentSize.
-func (x *ScannerFunctionalUnitFlatbed) DocumentSize() corefoundation.CGSize {
-	return x.inner.DocumentSize()
-}
-
-func (x *ScannerFunctionalUnitFlatbed) asScannerFunctionalUnit() *raw.ICScannerFunctionalUnit {
-	return &x.inner.ICScannerFunctionalUnit
+func (x *ScannerFunctionalUnitFlatbed) SetDocumentType(documentType ScannerDocumentType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentType:"), documentType)
 }
 
 // ScannerFunctionalUnitFlatbedable is the interface implemented by [ScannerFunctionalUnitFlatbed], for mocking and DI.
 type ScannerFunctionalUnitFlatbedable interface {
-	Unwrap() *raw.ICScannerFunctionalUnitFlatbed
-	WithDocumentType(documentType ICScannerDocumentType) *ScannerFunctionalUnitFlatbed
-	WithPixelDataType(pixelDataType ICScannerPixelDataType) *ScannerFunctionalUnitFlatbed
-	WithBitDepth(bitDepth ICScannerBitDepth) *ScannerFunctionalUnitFlatbed
-	WithMeasurementUnit(measurementUnit ICScannerMeasurementUnit) *ScannerFunctionalUnitFlatbed
-	WithResolution(resolution uint) *ScannerFunctionalUnitFlatbed
-	WithScaleFactor(scaleFactor uint) *ScannerFunctionalUnitFlatbed
-	WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnitFlatbed
-	WithScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) *ScannerFunctionalUnitFlatbed
+	obj.Object
+	WithDocumentType(documentType ScannerDocumentType) *ScannerFunctionalUnitFlatbed
+	WithPixelDataType(pixelDataType ScannerPixelDataType) *ScannerFunctionalUnitFlatbed
+	WithBitDepth(bitDepth ScannerBitDepth) *ScannerFunctionalUnitFlatbed
+	WithMeasurementUnit(measurementUnit ScannerMeasurementUnit) *ScannerFunctionalUnitFlatbed
+	WithResolution(resolution int) *ScannerFunctionalUnitFlatbed
+	WithScaleFactor(scaleFactor int) *ScannerFunctionalUnitFlatbed
+	WithScanAreaOrientation(scanAreaOrientation EXIFOrientationType) *ScannerFunctionalUnitFlatbed
 	WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnitFlatbed
 	WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnitFlatbed
-	WithOverviewResolution(overviewResolution uint) *ScannerFunctionalUnitFlatbed
-	SupportedDocumentTypes() *foundation.NSIndexSet
-	DocumentType() ICScannerDocumentType
-	SetDocumentType(documentType ICScannerDocumentType)
-	DocumentSize() corefoundation.CGSize
+	WithOverviewResolution(overviewResolution int) *ScannerFunctionalUnitFlatbed
+	SupportedDocumentTypes() obj.Object
+	DocumentType() ScannerDocumentType
+	SetDocumentType(documentType ScannerDocumentType)
 }
 
 var _ ScannerFunctionalUnitFlatbedable = (*ScannerFunctionalUnitFlatbed)(nil)

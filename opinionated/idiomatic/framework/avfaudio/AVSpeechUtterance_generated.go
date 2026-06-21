@@ -5,208 +5,221 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that encapsulates the text for speech synthesis and parameters that affect the speech.
 //
-// SpeechUtterance wraps [raw.AVSpeechUtterance] with a fluent Go API.
+// SpeechUtterance is an idiomatic wrapper over the Objective-C class AVSpeechUtterance.
 type SpeechUtterance struct {
-	inner *raw.AVSpeechUtterance
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVSpeechUtterance].
-func (x *SpeechUtterance) Unwrap() *raw.AVSpeechUtterance { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpeechUtterance) ID() objc.ID { return x.inner.Ptr() }
-
-// SpeechUtteranceFromID adopts an existing object pointer as a SpeechUtterance (nil for 0).
+// SpeechUtteranceFromID adopts an existing Objective-C object as a SpeechUtterance
+// (nil for 0), retaining it and registering a release finalizer.
 func SpeechUtteranceFromID(id objc.ID) *SpeechUtterance {
 	if id == 0 {
 		return nil
 	}
-	return &SpeechUtterance{inner: raw.AVSpeechUtteranceFromID(id)}
+	x := &SpeechUtterance{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// speechUtteranceAdopt wraps an Objective-C object that this code just created as a
+// SpeechUtterance (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func speechUtteranceAdopt(id objc.ID) *SpeechUtterance {
+	if id == 0 {
+		return nil
+	}
+	x := &SpeechUtterance{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SpeechUtterance) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SpeechUtterance) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SpeechUtterance) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an utterance with the text string that you specify for the speech synthesizer to speak.
 //
-// NewSpeechUtteranceWithString creates a new [SpeechUtterance].
+// NewSpeechUtteranceWithString creates a new SpeechUtterance.
 func NewSpeechUtteranceWithString(string_ string) *SpeechUtterance {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechUtterance")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
-	return &SpeechUtterance{inner: raw.AVSpeechUtteranceFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVSpeechUtterance")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(string_))
+	return speechUtteranceAdopt(_id)
 }
 
 // Creates an utterance with the attributed text string that you specify for the speech synthesizer to speak.
 //
-// NewSpeechUtteranceWithAttributedString creates a new [SpeechUtterance].
-func NewSpeechUtteranceWithAttributedString(string_ *foundation.NSAttributedString) *SpeechUtterance {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechUtterance")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttributedString:"), string_.Ptr())
-	return &SpeechUtterance{inner: raw.AVSpeechUtteranceFromID(_id)}
+// NewSpeechUtteranceWithAttributedString creates a new SpeechUtterance.
+func NewSpeechUtteranceWithAttributedString(string_ obj.Object) *SpeechUtterance {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVSpeechUtterance")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttributedString:"), objref.IDOf(string_))
+	return speechUtteranceAdopt(_id)
 }
 
 // Creates a speech utterance with an Speech Synthesis Markup Language (SSML) string.
 //
-// NewSpeechUtteranceWithSSMLRepresentation creates a new [SpeechUtterance].
+// NewSpeechUtteranceWithSSMLRepresentation creates a new SpeechUtterance.
 func NewSpeechUtteranceWithSSMLRepresentation(string_ string) *SpeechUtterance {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechUtterance")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSSMLRepresentation:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
-	return &SpeechUtterance{inner: raw.AVSpeechUtteranceFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVSpeechUtterance")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSSMLRepresentation:"), purego.NSString(string_))
+	return speechUtteranceAdopt(_id)
 }
 
 // The voice the speech synthesizer uses when speaking the utterance.
 //
-// WithVoice sets the voice property and returns the receiver for chaining.
+// WithVoice sets voice and returns the receiver so calls can be chained.
 func (x *SpeechUtterance) WithVoice(voice *SpeechSynthesisVoice) *SpeechUtterance {
-	x.inner.SetVoice(voice.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoice:"), objref.IDOf(voice))
 	return x
 }
 
 // The rate the speech synthesizer uses when speaking the utterance.
 //
-// WithRate sets the rate property and returns the receiver for chaining.
+// WithRate sets rate and returns the receiver so calls can be chained.
 func (x *SpeechUtterance) WithRate(rate float32) *SpeechUtterance {
-	x.inner.SetRate(rate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 	return x
 }
 
 // The baseline pitch the speech synthesizer uses when speaking the utterance.
 //
-// WithPitchMultiplier sets the pitchMultiplier property and returns the receiver for chaining.
+// WithPitchMultiplier sets pitchMultiplier and returns the receiver so calls can be chained.
 func (x *SpeechUtterance) WithPitchMultiplier(pitchMultiplier float32) *SpeechUtterance {
-	x.inner.SetPitchMultiplier(pitchMultiplier)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitchMultiplier:"), pitchMultiplier)
 	return x
 }
 
 // The volume the speech synthesizer uses when speaking the utterance.
 //
-// WithVolume sets the volume property and returns the receiver for chaining.
+// WithVolume sets volume and returns the receiver so calls can be chained.
 func (x *SpeechUtterance) WithVolume(volume float32) *SpeechUtterance {
-	x.inner.SetVolume(volume)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 	return x
 }
 
 // A Boolean that specifies whether assistive technology settings take precedence over the property values of this utterance.
 //
-// WithPrefersAssistiveTechnologySettings sets the prefersAssistiveTechnologySettings property and returns the receiver for chaining.
+// WithPrefersAssistiveTechnologySettings sets prefersAssistiveTechnologySettings and returns the receiver so calls can be chained.
 func (x *SpeechUtterance) WithPrefersAssistiveTechnologySettings(prefersAssistiveTechnologySettings bool) *SpeechUtterance {
-	x.inner.SetPrefersAssistiveTechnologySettings(prefersAssistiveTechnologySettings)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersAssistiveTechnologySettings:"), prefersAssistiveTechnologySettings)
 	return x
 }
 
 // The amount of time the speech synthesizer pauses before speaking the utterance.
 //
-// WithPreUtteranceDelay sets the preUtteranceDelay property and returns the receiver for chaining.
+// WithPreUtteranceDelay sets preUtteranceDelay and returns the receiver so calls can be chained.
 func (x *SpeechUtterance) WithPreUtteranceDelay(preUtteranceDelay float64) *SpeechUtterance {
-	x.inner.SetPreUtteranceDelay(preUtteranceDelay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreUtteranceDelay:"), preUtteranceDelay)
 	return x
 }
 
 // The amount of time the speech synthesizer pauses after speaking an utterance before handling the next utterance in the queue.
 //
-// WithPostUtteranceDelay sets the postUtteranceDelay property and returns the receiver for chaining.
+// WithPostUtteranceDelay sets postUtteranceDelay and returns the receiver so calls can be chained.
 func (x *SpeechUtterance) WithPostUtteranceDelay(postUtteranceDelay float64) *SpeechUtterance {
-	x.inner.SetPostUtteranceDelay(postUtteranceDelay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostUtteranceDelay:"), postUtteranceDelay)
 	return x
 }
 
-// Voice calls the underlying Voice.
 func (x *SpeechUtterance) Voice() *SpeechSynthesisVoice {
-	_r := x.inner.Voice()
-	if _r == nil {
-		return nil
-	}
-	return &SpeechSynthesisVoice{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voice"))
+	return SpeechSynthesisVoiceFromID(_r)
 }
 
-// SetVoice calls the underlying SetVoice.
-func (x *SpeechUtterance) SetVoice(voice *raw.AVSpeechSynthesisVoice) {
-	x.inner.SetVoice(voice)
+func (x *SpeechUtterance) SetVoice(voice *SpeechSynthesisVoice) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoice:"), objref.IDOf(voice))
 }
 
-// SpeechString calls the underlying SpeechString.
 func (x *SpeechUtterance) SpeechString() string {
-	_r := x.inner.SpeechString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("speechString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// AttributedSpeechString calls the underlying AttributedSpeechString.
-func (x *SpeechUtterance) AttributedSpeechString() *foundation.NSAttributedString {
-	return x.inner.AttributedSpeechString()
+func (x *SpeechUtterance) AttributedSpeechString() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedSpeechString"))
+	return obj.Wrap(_r)
 }
 
-// Rate calls the underlying Rate.
 func (x *SpeechUtterance) Rate() float32 {
-	return x.inner.Rate()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
+	return _r
 }
 
-// SetRate calls the underlying SetRate.
 func (x *SpeechUtterance) SetRate(rate float32) {
-	x.inner.SetRate(rate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 }
 
-// PitchMultiplier calls the underlying PitchMultiplier.
 func (x *SpeechUtterance) PitchMultiplier() float32 {
-	return x.inner.PitchMultiplier()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("pitchMultiplier"))
+	return _r
 }
 
-// SetPitchMultiplier calls the underlying SetPitchMultiplier.
 func (x *SpeechUtterance) SetPitchMultiplier(pitchMultiplier float32) {
-	x.inner.SetPitchMultiplier(pitchMultiplier)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitchMultiplier:"), pitchMultiplier)
 }
 
-// Volume calls the underlying Volume.
 func (x *SpeechUtterance) Volume() float32 {
-	return x.inner.Volume()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("volume"))
+	return _r
 }
 
-// SetVolume calls the underlying SetVolume.
 func (x *SpeechUtterance) SetVolume(volume float32) {
-	x.inner.SetVolume(volume)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 }
 
-// PrefersAssistiveTechnologySettings calls the underlying PrefersAssistiveTechnologySettings.
 func (x *SpeechUtterance) PrefersAssistiveTechnologySettings() bool {
-	return x.inner.PrefersAssistiveTechnologySettings()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("prefersAssistiveTechnologySettings"))
+	return _r
 }
 
-// SetPrefersAssistiveTechnologySettings calls the underlying SetPrefersAssistiveTechnologySettings.
 func (x *SpeechUtterance) SetPrefersAssistiveTechnologySettings(prefersAssistiveTechnologySettings bool) {
-	x.inner.SetPrefersAssistiveTechnologySettings(prefersAssistiveTechnologySettings)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersAssistiveTechnologySettings:"), prefersAssistiveTechnologySettings)
 }
 
-// PreUtteranceDelay calls the underlying PreUtteranceDelay.
 func (x *SpeechUtterance) PreUtteranceDelay() float64 {
-	return x.inner.PreUtteranceDelay()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("preUtteranceDelay"))
+	return _r
 }
 
-// SetPreUtteranceDelay calls the underlying SetPreUtteranceDelay.
 func (x *SpeechUtterance) SetPreUtteranceDelay(preUtteranceDelay float64) {
-	x.inner.SetPreUtteranceDelay(preUtteranceDelay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreUtteranceDelay:"), preUtteranceDelay)
 }
 
-// PostUtteranceDelay calls the underlying PostUtteranceDelay.
 func (x *SpeechUtterance) PostUtteranceDelay() float64 {
-	return x.inner.PostUtteranceDelay()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("postUtteranceDelay"))
+	return _r
 }
 
-// SetPostUtteranceDelay calls the underlying SetPostUtteranceDelay.
 func (x *SpeechUtterance) SetPostUtteranceDelay(postUtteranceDelay float64) {
-	x.inner.SetPostUtteranceDelay(postUtteranceDelay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostUtteranceDelay:"), postUtteranceDelay)
 }
 
 // SpeechUtteranceable is the interface implemented by [SpeechUtterance], for mocking and DI.
 type SpeechUtteranceable interface {
-	Unwrap() *raw.AVSpeechUtterance
+	obj.Object
 	WithVoice(voice *SpeechSynthesisVoice) *SpeechUtterance
 	WithRate(rate float32) *SpeechUtterance
 	WithPitchMultiplier(pitchMultiplier float32) *SpeechUtterance
@@ -215,9 +228,9 @@ type SpeechUtteranceable interface {
 	WithPreUtteranceDelay(preUtteranceDelay float64) *SpeechUtterance
 	WithPostUtteranceDelay(postUtteranceDelay float64) *SpeechUtterance
 	Voice() *SpeechSynthesisVoice
-	SetVoice(voice *raw.AVSpeechSynthesisVoice)
+	SetVoice(voice *SpeechSynthesisVoice)
 	SpeechString() string
-	AttributedSpeechString() *foundation.NSAttributedString
+	AttributedSpeechString() obj.Object
 	Rate() float32
 	SetRate(rate float32)
 	PitchMultiplier() float32

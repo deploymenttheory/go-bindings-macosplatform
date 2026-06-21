@@ -5,147 +5,137 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that uses a delegate object to render an image from a custom format.
 //
-// CustomImageRep wraps [raw.NSCustomImageRep] with a fluent Go API.
+// CustomImageRep is an idiomatic wrapper over the Objective-C class NSCustomImageRep.
 type CustomImageRep struct {
-	inner *raw.NSCustomImageRep
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCustomImageRep].
-func (x *CustomImageRep) Unwrap() *raw.NSCustomImageRep { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CustomImageRep) ID() objc.ID { return x.inner.Ptr() }
-
-// CustomImageRepFromID adopts an existing object pointer as a CustomImageRep (nil for 0).
+// CustomImageRepFromID adopts an existing Objective-C object as a CustomImageRep
+// (nil for 0), retaining it and registering a release finalizer.
 func CustomImageRepFromID(id objc.ID) *CustomImageRep {
 	if id == 0 {
 		return nil
 	}
-	return &CustomImageRep{inner: raw.NSCustomImageRepFromID(id)}
-}
-
-// Initializes a representation of an image of the specified size and flipped status, using a block to draw its content.
-//
-// NewCustomImageRepWithSizeFlippedDrawingHandler creates a new [CustomImageRep].
-func NewCustomImageRepWithSizeFlippedDrawingHandler(size corefoundation.CGSize, drawingHandlerShouldBeCalledWithFlippedContext bool, drawingHandler objc.Block) *CustomImageRep {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCustomImageRep")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSize:flipped:drawingHandler:"), size, drawingHandlerShouldBeCalledWithFlippedContext, drawingHandler)
-	return &CustomImageRep{inner: raw.NSCustomImageRepFromID(_id)}
-}
-
-// Returns a representation of an image initialized with the specified delegate information.
-//
-// NewCustomImageRepWithDrawSelectorDelegate creates a new [CustomImageRep].
-func NewCustomImageRepWithDrawSelectorDelegate(selector objc.SEL, delegate objc.ID) *CustomImageRep {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCustomImageRep")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDrawSelector:delegate:"), selector, delegate)
-	return &CustomImageRep{inner: raw.NSCustomImageRepFromID(_id)}
-}
-
-// The size of the image representation, measured in points in the user coordinate space.
-//
-// WithSize sets the size property and returns the receiver for chaining.
-func (x *CustomImageRep) WithSize(size corefoundation.CGSize) *CustomImageRep {
-	x.inner.NSImageRep.SetSize(size)
+	x := &CustomImageRep{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// customImageRepAdopt wraps an Objective-C object that this code just created as a
+// CustomImageRep (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func customImageRepAdopt(id objc.ID) *CustomImageRep {
+	if id == 0 {
+		return nil
+	}
+	x := &CustomImageRep{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CustomImageRep) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CustomImageRep) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CustomImageRep) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCustomImageRep creates a new CustomImageRep.
+func NewCustomImageRep() *CustomImageRep {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCustomImageRep")), objc.RegisterName("new"))
+	return customImageRepAdopt(_id)
 }
 
 // A Boolean value that indicates whether the image data has an alpha channel.
 //
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha sets alpha and returns the receiver so calls can be chained.
 func (x *CustomImageRep) WithAlpha(alpha bool) *CustomImageRep {
-	x.inner.NSImageRep.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
 // A Boolean value that indicates whether the image is opaque.
 //
-// WithOpaque sets the opaque property and returns the receiver for chaining.
+// WithOpaque sets opaque and returns the receiver so calls can be chained.
 func (x *CustomImageRep) WithOpaque(opaque bool) *CustomImageRep {
-	x.inner.NSImageRep.SetOpaque(opaque)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 	return x
 }
 
 // The name of the color space used by the image data.
 //
-// WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
-func (x *CustomImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *CustomImageRep {
-	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
+// WithColorSpaceName sets colorSpaceName and returns the receiver so calls can be chained.
+func (x *CustomImageRep) WithColorSpaceName(colorSpaceName obj.Object) *CustomImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
 	return x
 }
 
 // The number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
 //
-// WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
+// WithBitsPerSample sets bitsPerSample and returns the receiver so calls can be chained.
 func (x *CustomImageRep) WithBitsPerSample(bitsPerSample int) *CustomImageRep {
-	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
 	return x
 }
 
 // The width of the image, measured in pixels.
 //
-// WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
+// WithPixelsWide sets pixelsWide and returns the receiver so calls can be chained.
 func (x *CustomImageRep) WithPixelsWide(pixelsWide int) *CustomImageRep {
-	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsWide:"), pixelsWide)
 	return x
 }
 
 // The height of the image, measured in pixels.
 //
-// WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
+// WithPixelsHigh sets pixelsHigh and returns the receiver so calls can be chained.
 func (x *CustomImageRep) WithPixelsHigh(pixelsHigh int) *CustomImageRep {
-	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
 	return x
 }
 
 // The layout direction for the image.
 //
-// WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
-func (x *CustomImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *CustomImageRep {
-	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
+// WithLayoutDirection sets layoutDirection and returns the receiver so calls can be chained.
+func (x *CustomImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *CustomImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutDirection:"), layoutDirection)
 	return x
 }
 
-// DrawingHandler calls the underlying DrawingHandler.
-func (x *CustomImageRep) DrawingHandler() objc.Block {
-	return x.inner.DrawingHandler()
+func (x *CustomImageRep) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+	return obj.Wrap(_r)
 }
-
-// DrawSelector calls the underlying DrawSelector.
-func (x *CustomImageRep) DrawSelector() objc.SEL {
-	return x.inner.DrawSelector()
-}
-
-// Delegate calls the underlying Delegate.
-func (x *CustomImageRep) Delegate() objc.ID {
-	return x.inner.Delegate()
-}
-
-func (x *CustomImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageRep }
 
 // CustomImageRepable is the interface implemented by [CustomImageRep], for mocking and DI.
 type CustomImageRepable interface {
-	Unwrap() *raw.NSCustomImageRep
-	WithSize(size corefoundation.CGSize) *CustomImageRep
+	obj.Object
 	WithAlpha(alpha bool) *CustomImageRep
 	WithOpaque(opaque bool) *CustomImageRep
-	WithColorSpaceName(colorSpaceName *foundation.NSString) *CustomImageRep
+	WithColorSpaceName(colorSpaceName obj.Object) *CustomImageRep
 	WithBitsPerSample(bitsPerSample int) *CustomImageRep
 	WithPixelsWide(pixelsWide int) *CustomImageRep
 	WithPixelsHigh(pixelsHigh int) *CustomImageRep
-	WithLayoutDirection(layoutDirection NSImageLayoutDirection) *CustomImageRep
-	DrawingHandler() objc.Block
-	DrawSelector() objc.SEL
-	Delegate() objc.ID
+	WithLayoutDirection(layoutDirection ImageLayoutDirection) *CustomImageRep
+	Delegate() obj.Object
 }
 
 var _ CustomImageRepable = (*CustomImageRep)(nil)

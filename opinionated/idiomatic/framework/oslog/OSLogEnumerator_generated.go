@@ -5,41 +5,68 @@
 package oslog
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/oslog"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An enumerator that can access and list log entries.
 //
-// LogEnumerator wraps [raw.OSLogEnumerator] with a fluent Go API.
+// LogEnumerator is an idiomatic wrapper over the Objective-C class OSLogEnumerator.
 type LogEnumerator struct {
-	inner *raw.OSLogEnumerator
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.OSLogEnumerator].
-func (x *LogEnumerator) Unwrap() *raw.OSLogEnumerator { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LogEnumerator) ID() objc.ID { return x.inner.Ptr() }
-
-// LogEnumeratorFromID adopts an existing object pointer as a LogEnumerator (nil for 0).
+// LogEnumeratorFromID adopts an existing Objective-C object as a LogEnumerator
+// (nil for 0), retaining it and registering a release finalizer.
 func LogEnumeratorFromID(id objc.ID) *LogEnumerator {
 	if id == 0 {
 		return nil
 	}
-	return &LogEnumerator{inner: raw.OSLogEnumeratorFromID(id)}
+	x := &LogEnumerator{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLogEnumerator creates a new [LogEnumerator].
+// logEnumeratorAdopt wraps an Objective-C object that this code just created as a
+// LogEnumerator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func logEnumeratorAdopt(id objc.ID) *LogEnumerator {
+	if id == 0 {
+		return nil
+	}
+	x := &LogEnumerator{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LogEnumerator) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LogEnumerator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LogEnumerator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLogEnumerator creates a new LogEnumerator.
 func NewLogEnumerator() *LogEnumerator {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSLogEnumerator")), objc.RegisterName("new"))
-	return &LogEnumerator{inner: raw.OSLogEnumeratorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("OSLogEnumerator")), objc.RegisterName("new"))
+	return logEnumeratorAdopt(_id)
 }
 
 // LogEnumeratorable is the interface implemented by [LogEnumerator], for mocking and DI.
 type LogEnumeratorable interface {
-	Unwrap() *raw.OSLogEnumerator
+	obj.Object
 }
 
 var _ LogEnumeratorable = (*LogEnumerator)(nil)

@@ -5,210 +5,226 @@
 package networkextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Configuration parameters for a VPN tunnel.
 //
-// NETunnelProviderProtocol wraps [raw.NETunnelProviderProtocol] with a fluent Go API.
+// NETunnelProviderProtocol is an idiomatic wrapper over the Objective-C class NETunnelProviderProtocol.
 type NETunnelProviderProtocol struct {
-	inner *raw.NETunnelProviderProtocol
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NETunnelProviderProtocol].
-func (x *NETunnelProviderProtocol) Unwrap() *raw.NETunnelProviderProtocol { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NETunnelProviderProtocol) ID() objc.ID { return x.inner.Ptr() }
-
-// NETunnelProviderProtocolFromID adopts an existing object pointer as a NETunnelProviderProtocol (nil for 0).
+// NETunnelProviderProtocolFromID adopts an existing Objective-C object as a NETunnelProviderProtocol
+// (nil for 0), retaining it and registering a release finalizer.
 func NETunnelProviderProtocolFromID(id objc.ID) *NETunnelProviderProtocol {
 	if id == 0 {
 		return nil
 	}
-	return &NETunnelProviderProtocol{inner: raw.NETunnelProviderProtocolFromID(id)}
+	x := &NETunnelProviderProtocol{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNETunnelProviderProtocol creates a new [NETunnelProviderProtocol].
+// nETunnelProviderProtocolAdopt wraps an Objective-C object that this code just created as a
+// NETunnelProviderProtocol (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nETunnelProviderProtocolAdopt(id objc.ID) *NETunnelProviderProtocol {
+	if id == 0 {
+		return nil
+	}
+	x := &NETunnelProviderProtocol{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NETunnelProviderProtocol) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NETunnelProviderProtocol) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NETunnelProviderProtocol) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNETunnelProviderProtocol creates a new NETunnelProviderProtocol.
 func NewNETunnelProviderProtocol() *NETunnelProviderProtocol {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NETunnelProviderProtocol")), objc.RegisterName("new"))
-	return &NETunnelProviderProtocol{inner: raw.NETunnelProviderProtocolFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NETunnelProviderProtocol")), objc.RegisterName("new"))
+	return nETunnelProviderProtocolAdopt(_id)
 }
 
 // A dictionary containing keys and values defined by the Tunnel Provider developer.
 //
-// WithProviderConfiguration sets the providerConfiguration property and returns the receiver for chaining.
-func (x *NETunnelProviderProtocol) WithProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NETunnelProviderProtocol {
-	x.inner.SetProviderConfiguration(providerConfiguration)
+// WithProviderConfiguration sets providerConfiguration and returns the receiver so calls can be chained.
+func (x *NETunnelProviderProtocol) WithProviderConfiguration(providerConfiguration obj.Object) *NETunnelProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderConfiguration:"), objref.IDOf(providerConfiguration))
 	return x
 }
 
 // A string identifying the specific Tunnel Provider extension that should be used with this configuration.
 //
-// WithProviderBundleIdentifier sets the providerBundleIdentifier property and returns the receiver for chaining.
+// WithProviderBundleIdentifier sets providerBundleIdentifier and returns the receiver so calls can be chained.
 func (x *NETunnelProviderProtocol) WithProviderBundleIdentifier(providerBundleIdentifier string) *NETunnelProviderProtocol {
-	x.inner.SetProviderBundleIdentifier(foundation.NSStringStringWithUTF8String(providerBundleIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderBundleIdentifier:"), purego.NSString(providerBundleIdentifier))
 	return x
 }
 
 // The address of the VPN server.
 //
-// WithServerAddress sets the serverAddress property and returns the receiver for chaining.
+// WithServerAddress sets serverAddress and returns the receiver so calls can be chained.
 func (x *NETunnelProviderProtocol) WithServerAddress(serverAddress string) *NETunnelProviderProtocol {
-	x.inner.NEVPNProtocol.SetServerAddress(foundation.NSStringStringWithUTF8String(serverAddress))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerAddress:"), purego.NSString(serverAddress))
 	return x
 }
 
 // The user name component of the tunneling protocol authentication credential.
 //
-// WithUsername sets the username property and returns the receiver for chaining.
+// WithUsername sets username and returns the receiver so calls can be chained.
 func (x *NETunnelProviderProtocol) WithUsername(username string) *NETunnelProviderProtocol {
-	x.inner.NEVPNProtocol.SetUsername(foundation.NSStringStringWithUTF8String(username))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsername:"), purego.NSString(username))
 	return x
 }
 
 // A persistent keychain reference to a keychain item containing the password component of the tunneling protocol authentication credential.
 //
-// WithPasswordReference sets the passwordReference property and returns the receiver for chaining.
-func (x *NETunnelProviderProtocol) WithPasswordReference(passwordReference *foundation.NSData) *NETunnelProviderProtocol {
-	x.inner.NEVPNProtocol.SetPasswordReference(passwordReference)
+// WithPasswordReference sets passwordReference and returns the receiver so calls can be chained.
+func (x *NETunnelProviderProtocol) WithPasswordReference(passwordReference obj.Object) *NETunnelProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPasswordReference:"), objref.IDOf(passwordReference))
 	return x
 }
 
 // A persistent keychain reference to a keychain item containing the certificate and private key components of the tunneling protocol authentication credential.
 //
-// WithIdentityReference sets the identityReference property and returns the receiver for chaining.
-func (x *NETunnelProviderProtocol) WithIdentityReference(identityReference *foundation.NSData) *NETunnelProviderProtocol {
-	x.inner.NEVPNProtocol.SetIdentityReference(identityReference)
+// WithIdentityReference sets identityReference and returns the receiver so calls can be chained.
+func (x *NETunnelProviderProtocol) WithIdentityReference(identityReference obj.Object) *NETunnelProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
 	return x
 }
 
 // The certificate and private key components of the tunneling protocol authentication credential, in PKCS12 format.
 //
-// WithIdentityData sets the identityData property and returns the receiver for chaining.
-func (x *NETunnelProviderProtocol) WithIdentityData(identityData *foundation.NSData) *NETunnelProviderProtocol {
-	x.inner.NEVPNProtocol.SetIdentityData(identityData)
+// WithIdentityData sets identityData and returns the receiver so calls can be chained.
+func (x *NETunnelProviderProtocol) WithIdentityData(identityData obj.Object) *NETunnelProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityData:"), objref.IDOf(identityData))
 	return x
 }
 
 // The password for the PKCS12 tunneling protocol authentication credentials.
 //
-// WithIdentityDataPassword sets the identityDataPassword property and returns the receiver for chaining.
+// WithIdentityDataPassword sets identityDataPassword and returns the receiver so calls can be chained.
 func (x *NETunnelProviderProtocol) WithIdentityDataPassword(identityDataPassword string) *NETunnelProviderProtocol {
-	x.inner.NEVPNProtocol.SetIdentityDataPassword(foundation.NSStringStringWithUTF8String(identityDataPassword))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityDataPassword:"), purego.NSString(identityDataPassword))
 	return x
 }
 
 // A Boolean value that indicates whether the VPN disconnects when the device sleeps.
 //
-// WithDisconnectOnSleep sets the disconnectOnSleep property and returns the receiver for chaining.
+// WithDisconnectOnSleep sets disconnectOnSleep and returns the receiver so calls can be chained.
 func (x *NETunnelProviderProtocol) WithDisconnectOnSleep(disconnectOnSleep bool) *NETunnelProviderProtocol {
-	x.inner.NEVPNProtocol.SetDisconnectOnSleep(disconnectOnSleep)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisconnectOnSleep:"), disconnectOnSleep)
 	return x
 }
 
 // The proxy settings to use for HTTP and HTTPS connections that route through the VPN.
 //
-// WithProxySettings sets the proxySettings property and returns the receiver for chaining.
+// WithProxySettings sets proxySettings and returns the receiver so calls can be chained.
 func (x *NETunnelProviderProtocol) WithProxySettings(proxySettings *NEProxySettings) *NETunnelProviderProtocol {
-	x.inner.NEVPNProtocol.SetProxySettings(proxySettings.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
 	return x
 }
 
 // A Boolean value that indicates whether the system sends most network traffic over the tunnel.
 //
-// WithIncludeAllNetworks sets the includeAllNetworks property and returns the receiver for chaining.
+// WithIncludeAllNetworks sets includeAllNetworks and returns the receiver so calls can be chained.
 func (x *NETunnelProviderProtocol) WithIncludeAllNetworks(includeAllNetworks bool) *NETunnelProviderProtocol {
-	x.inner.NEVPNProtocol.SetIncludeAllNetworks(includeAllNetworks)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeAllNetworks:"), includeAllNetworks)
 	return x
 }
 
 // A Boolean value that indicates whether the system excludes all traffic destined for local networks from the tunnel.
 //
-// WithExcludeLocalNetworks sets the excludeLocalNetworks property and returns the receiver for chaining.
+// WithExcludeLocalNetworks sets excludeLocalNetworks and returns the receiver so calls can be chained.
 func (x *NETunnelProviderProtocol) WithExcludeLocalNetworks(excludeLocalNetworks bool) *NETunnelProviderProtocol {
-	x.inner.NEVPNProtocol.SetExcludeLocalNetworks(excludeLocalNetworks)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeLocalNetworks:"), excludeLocalNetworks)
 	return x
 }
 
 // A Boolean value that indicates whether the system excludes all cellular services network traffic from the tunnel.
 //
-// WithExcludeCellularServices sets the excludeCellularServices property and returns the receiver for chaining.
+// WithExcludeCellularServices sets excludeCellularServices and returns the receiver so calls can be chained.
 func (x *NETunnelProviderProtocol) WithExcludeCellularServices(excludeCellularServices bool) *NETunnelProviderProtocol {
-	x.inner.NEVPNProtocol.SetExcludeCellularServices(excludeCellularServices)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeCellularServices:"), excludeCellularServices)
 	return x
 }
 
 // A Boolean value that indicates whether the system excludes all APNs network traffic from the tunnel.
 //
-// WithExcludeAPNs sets the excludeAPNs property and returns the receiver for chaining.
+// WithExcludeAPNs sets excludeAPNs and returns the receiver so calls can be chained.
 func (x *NETunnelProviderProtocol) WithExcludeAPNs(excludeAPNs bool) *NETunnelProviderProtocol {
-	x.inner.NEVPNProtocol.SetExcludeAPNs(excludeAPNs)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeAPNs:"), excludeAPNs)
 	return x
 }
 
-// @property excludeDeviceCommunication @discussion If includeAllNetworks is set to YES and this property is set to YES, then network traffic used for communicating with devices connected via USB or Wi-Fi is excluded from the tunnel. For example, Xcode uses a network tunnel to communicate with connected development devices like iPhone, iPad and TV. The default value of this property is YES.
+// If includeAllNetworks is set to YES and this property is set to YES, then network traffic used for communicating with devices connected via USB or Wi-Fi is excluded from the tunnel. For example, Xcode uses a network tunnel to communicate with connected development devices like iPhone, iPad and TV. The default value of this property is YES.
 //
-// WithExcludeDeviceCommunication sets the excludeDeviceCommunication property and returns the receiver for chaining.
+// WithExcludeDeviceCommunication sets excludeDeviceCommunication and returns the receiver so calls can be chained.
 func (x *NETunnelProviderProtocol) WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NETunnelProviderProtocol {
-	x.inner.NEVPNProtocol.SetExcludeDeviceCommunication(excludeDeviceCommunication)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeDeviceCommunication:"), excludeDeviceCommunication)
 	return x
 }
 
 // A Boolean value that indicates whether route rules for the tunnel take precedence over any locally defined routes.
 //
-// WithEnforceRoutes sets the enforceRoutes property and returns the receiver for chaining.
+// WithEnforceRoutes sets enforceRoutes and returns the receiver so calls can be chained.
 func (x *NETunnelProviderProtocol) WithEnforceRoutes(enforceRoutes bool) *NETunnelProviderProtocol {
-	x.inner.NEVPNProtocol.SetEnforceRoutes(enforceRoutes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnforceRoutes:"), enforceRoutes)
 	return x
 }
 
-// @property providerConfiguration @discussion A dictionary containing NETunnelProvider vendor-specific configuration parameters. This dictionary is passed as-is to NETunnelProviders when a tunnel is started.
-//
-// ProviderConfiguration calls the underlying ProviderConfiguration.
-func (x *NETunnelProviderProtocol) ProviderConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ProviderConfiguration()
+// A dictionary containing NETunnelProvider vendor-specific configuration parameters. This dictionary is passed as-is to NETunnelProviders when a tunnel is started.
+func (x *NETunnelProviderProtocol) ProviderConfiguration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("providerConfiguration"))
+	return obj.Wrap(_r)
 }
 
-// SetProviderConfiguration calls the underlying SetProviderConfiguration.
-func (x *NETunnelProviderProtocol) SetProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.SetProviderConfiguration(providerConfiguration)
+func (x *NETunnelProviderProtocol) SetProviderConfiguration(providerConfiguration obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderConfiguration:"), objref.IDOf(providerConfiguration))
 }
 
-// @property providerBundleIdentifier @discussion A string containing the bundle identifier of the NETunnelProvider to be used by this configuration.
-//
-// ProviderBundleIdentifier calls the underlying ProviderBundleIdentifier.
+// A string containing the bundle identifier of the NETunnelProvider to be used by this configuration.
 func (x *NETunnelProviderProtocol) ProviderBundleIdentifier() string {
-	_r := x.inner.ProviderBundleIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("providerBundleIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetProviderBundleIdentifier calls the underlying SetProviderBundleIdentifier.
 func (x *NETunnelProviderProtocol) SetProviderBundleIdentifier(providerBundleIdentifier string) {
-	x.inner.SetProviderBundleIdentifier(foundation.NSStringStringWithUTF8String(providerBundleIdentifier))
-}
-
-func (x *NETunnelProviderProtocol) asNEVPNProtocol() *raw.NEVPNProtocol {
-	return &x.inner.NEVPNProtocol
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderBundleIdentifier:"), purego.NSString(providerBundleIdentifier))
 }
 
 // NETunnelProviderProtocolable is the interface implemented by [NETunnelProviderProtocol], for mocking and DI.
 type NETunnelProviderProtocolable interface {
-	Unwrap() *raw.NETunnelProviderProtocol
-	WithProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID]) *NETunnelProviderProtocol
+	obj.Object
+	WithProviderConfiguration(providerConfiguration obj.Object) *NETunnelProviderProtocol
 	WithProviderBundleIdentifier(providerBundleIdentifier string) *NETunnelProviderProtocol
 	WithServerAddress(serverAddress string) *NETunnelProviderProtocol
 	WithUsername(username string) *NETunnelProviderProtocol
-	WithPasswordReference(passwordReference *foundation.NSData) *NETunnelProviderProtocol
-	WithIdentityReference(identityReference *foundation.NSData) *NETunnelProviderProtocol
-	WithIdentityData(identityData *foundation.NSData) *NETunnelProviderProtocol
+	WithPasswordReference(passwordReference obj.Object) *NETunnelProviderProtocol
+	WithIdentityReference(identityReference obj.Object) *NETunnelProviderProtocol
+	WithIdentityData(identityData obj.Object) *NETunnelProviderProtocol
 	WithIdentityDataPassword(identityDataPassword string) *NETunnelProviderProtocol
 	WithDisconnectOnSleep(disconnectOnSleep bool) *NETunnelProviderProtocol
 	WithProxySettings(proxySettings *NEProxySettings) *NETunnelProviderProtocol
@@ -218,8 +234,8 @@ type NETunnelProviderProtocolable interface {
 	WithExcludeAPNs(excludeAPNs bool) *NETunnelProviderProtocol
 	WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NETunnelProviderProtocol
 	WithEnforceRoutes(enforceRoutes bool) *NETunnelProviderProtocol
-	ProviderConfiguration() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SetProviderConfiguration(providerConfiguration *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	ProviderConfiguration() obj.Object
+	SetProviderConfiguration(providerConfiguration obj.Object)
 	ProviderBundleIdentifier() string
 	SetProviderBundleIdentifier(providerBundleIdentifier string)
 }

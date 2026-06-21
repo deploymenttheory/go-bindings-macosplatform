@@ -5,295 +5,257 @@
 package screencapturekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains screenshot properties such as output width, height, and image quality specifications.
 //
-// ScreenshotConfiguration wraps [raw.SCScreenshotConfiguration] with a fluent Go API.
+// ScreenshotConfiguration is an idiomatic wrapper over the Objective-C class SCScreenshotConfiguration.
 type ScreenshotConfiguration struct {
-	inner *raw.SCScreenshotConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCScreenshotConfiguration].
-func (x *ScreenshotConfiguration) Unwrap() *raw.SCScreenshotConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScreenshotConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// ScreenshotConfigurationFromID adopts an existing object pointer as a ScreenshotConfiguration (nil for 0).
+// ScreenshotConfigurationFromID adopts an existing Objective-C object as a ScreenshotConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func ScreenshotConfigurationFromID(id objc.ID) *ScreenshotConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &ScreenshotConfiguration{inner: raw.SCScreenshotConfigurationFromID(id)}
+	x := &ScreenshotConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewScreenshotConfiguration creates a new [ScreenshotConfiguration].
+// screenshotConfigurationAdopt wraps an Objective-C object that this code just created as a
+// ScreenshotConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func screenshotConfigurationAdopt(id objc.ID) *ScreenshotConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &ScreenshotConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScreenshotConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScreenshotConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScreenshotConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScreenshotConfiguration creates a new ScreenshotConfiguration.
 func NewScreenshotConfiguration() *ScreenshotConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCScreenshotConfiguration")), objc.RegisterName("new"))
-	return &ScreenshotConfiguration{inner: raw.SCScreenshotConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCScreenshotConfiguration")), objc.RegisterName("new"))
+	return screenshotConfigurationAdopt(_id)
 }
 
 // An integer value that specifies the output width in pixels.
 //
-// WithWidth sets the width property and returns the receiver for chaining.
+// WithWidth sets width and returns the receiver so calls can be chained.
 func (x *ScreenshotConfiguration) WithWidth(width int) *ScreenshotConfiguration {
-	x.inner.SetWidth(width)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 	return x
 }
 
 // An integer value that specifies the output height, measured in pixels.
 //
-// WithHeight sets the height property and returns the receiver for chaining.
+// WithHeight sets height and returns the receiver so calls can be chained.
 func (x *ScreenshotConfiguration) WithHeight(height int) *ScreenshotConfiguration {
-	x.inner.SetHeight(height)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 	return x
 }
 
 // A Boolean value that specifies whether the pointer appears in the screenshot.
 //
-// WithShowsCursor sets the showsCursor property and returns the receiver for chaining.
+// WithShowsCursor sets showsCursor and returns the receiver so calls can be chained.
 func (x *ScreenshotConfiguration) WithShowsCursor(showsCursor bool) *ScreenshotConfiguration {
-	x.inner.SetShowsCursor(showsCursor)
-	return x
-}
-
-// A rectangle that specifies that the screenshot only samples a subset of the frame input.
-//
-// WithSourceRect sets the sourceRect property and returns the receiver for chaining.
-func (x *ScreenshotConfiguration) WithSourceRect(sourceRect corefoundation.CGRect) *ScreenshotConfiguration {
-	x.inner.SetSourceRect(sourceRect)
-	return x
-}
-
-// A rectangle that specifies whether to output screenshots in a subset of the output image.
-//
-// WithDestinationRect sets the destinationRect property and returns the receiver for chaining.
-func (x *ScreenshotConfiguration) WithDestinationRect(destinationRect corefoundation.CGRect) *ScreenshotConfiguration {
-	x.inner.SetDestinationRect(destinationRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsCursor:"), showsCursor)
 	return x
 }
 
 // A Boolean value that specifies whether to ignore framing on windows.
 //
-// WithIgnoreShadows sets the ignoreShadows property and returns the receiver for chaining.
+// WithIgnoreShadows sets ignoreShadows and returns the receiver so calls can be chained.
 func (x *ScreenshotConfiguration) WithIgnoreShadows(ignoreShadows bool) *ScreenshotConfiguration {
-	x.inner.SetIgnoreShadows(ignoreShadows)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoreShadows:"), ignoreShadows)
 	return x
 }
 
 // A Boolean value that specifies whether to ignore framing on windows when using content filters.
 //
-// WithIgnoreClipping sets the ignoreClipping property and returns the receiver for chaining.
+// WithIgnoreClipping sets ignoreClipping and returns the receiver so calls can be chained.
 func (x *ScreenshotConfiguration) WithIgnoreClipping(ignoreClipping bool) *ScreenshotConfiguration {
-	x.inner.SetIgnoreClipping(ignoreClipping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoreClipping:"), ignoreClipping)
 	return x
 }
 
 // A Boolean that specifies whether the screenshot captures subwindows of the included apps and windows.
 //
-// WithIncludeChildWindows sets the includeChildWindows property and returns the receiver for chaining.
+// WithIncludeChildWindows sets includeChildWindows and returns the receiver so calls can be chained.
 func (x *ScreenshotConfiguration) WithIncludeChildWindows(includeChildWindows bool) *ScreenshotConfiguration {
-	x.inner.SetIncludeChildWindows(includeChildWindows)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeChildWindows:"), includeChildWindows)
 	return x
 }
 
 // Specifies whether the screen capture uses attributes of the local or canonical display.
 //
-// WithDisplayIntent sets the displayIntent property and returns the receiver for chaining.
-func (x *ScreenshotConfiguration) WithDisplayIntent(displayIntent SCScreenshotDisplayIntent) *ScreenshotConfiguration {
-	x.inner.SetDisplayIntent(raw.SCScreenshotDisplayIntent(displayIntent))
+// WithDisplayIntent sets displayIntent and returns the receiver so calls can be chained.
+func (x *ScreenshotConfiguration) WithDisplayIntent(displayIntent ScreenshotDisplayIntent) *ScreenshotConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayIntent:"), displayIntent)
 	return x
 }
 
 // Specifies the type of image returned to the client; standard dynamic range, high dynamic range, or both.
 //
-// WithDynamicRange sets the dynamicRange property and returns the receiver for chaining.
-func (x *ScreenshotConfiguration) WithDynamicRange(dynamicRange SCScreenshotDynamicRange) *ScreenshotConfiguration {
-	x.inner.SetDynamicRange(raw.SCScreenshotDynamicRange(dynamicRange))
+// WithDynamicRange sets dynamicRange and returns the receiver so calls can be chained.
+func (x *ScreenshotConfiguration) WithDynamicRange(dynamicRange ScreenshotDynamicRange) *ScreenshotConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDynamicRange:"), dynamicRange)
 	return x
 }
 
 // A uniform type identifier that specifies the screenshot’s file format; HEIC, JPEG, or PNG.
 //
-// WithContentType sets the contentType property and returns the receiver for chaining.
-func (x *ScreenshotConfiguration) WithContentType(contentType *uniformtypeidentifiers.UTType) *ScreenshotConfiguration {
-	x.inner.SetContentType(contentType)
+// WithContentType sets contentType and returns the receiver so calls can be chained.
+func (x *ScreenshotConfiguration) WithContentType(contentType obj.Object) *ScreenshotConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentType:"), objref.IDOf(contentType))
 	return x
 }
 
 // Specifies the URL where the screenshot process saves the output.
 //
-// WithFileURL sets the fileURL property and returns the receiver for chaining.
+// WithFileURL sets fileURL and returns the receiver so calls can be chained.
 func (x *ScreenshotConfiguration) WithFileURL(fileURL string) *ScreenshotConfiguration {
-	x.inner.SetFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileURL:"), rt.FileURL(fileURL))
 	return x
 }
 
-// @abstract SCScreenshotProperty for output width as measured in pixels. Default is the width of the content being captured.
-//
-// Width calls the underlying Width.
+// SCScreenshotProperty for output width as measured in pixels. Default is the width of the content being captured.
 func (x *ScreenshotConfiguration) Width() int {
-	return x.inner.Width()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("width"))
+	return _r
 }
 
-// SetWidth calls the underlying SetWidth.
 func (x *ScreenshotConfiguration) SetWidth(width int) {
-	x.inner.SetWidth(width)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 }
 
-// @abstract SCScreenshotProperty for output height as measured in pixels. Default is the height of the content being captured.
-//
-// Height calls the underlying Height.
+// SCScreenshotProperty for output height as measured in pixels. Default is the height of the content being captured.
 func (x *ScreenshotConfiguration) Height() int {
-	return x.inner.Height()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("height"))
+	return _r
 }
 
-// SetHeight calls the underlying SetHeight.
 func (x *ScreenshotConfiguration) SetHeight(height int) {
-	x.inner.SetHeight(height)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 }
 
-// @abstract SCScreenshotProperty that specifies whether the cursor should appear in the screenshot.  By default the cursor is visible.
-//
-// ShowsCursor calls the underlying ShowsCursor.
+// SCScreenshotProperty that specifies whether the cursor should appear in the screenshot.  By default the cursor is visible.
 func (x *ScreenshotConfiguration) ShowsCursor() bool {
-	return x.inner.ShowsCursor()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsCursor"))
+	return _r
 }
 
-// SetShowsCursor calls the underlying SetShowsCursor.
 func (x *ScreenshotConfiguration) SetShowsCursor(showsCursor bool) {
-	x.inner.SetShowsCursor(showsCursor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsCursor:"), showsCursor)
 }
 
-// @abstract SCScreenshotProperty that specifies that the screenshot only samples a subset of the frame input. If not set, then the entire screenshot will be captured. The rectangle is specified in points in the display’s logical coordinate system.
-//
-// SourceRect calls the underlying SourceRect.
-func (x *ScreenshotConfiguration) SourceRect() corefoundation.CGRect {
-	return x.inner.SourceRect()
-}
-
-// SetSourceRect calls the underlying SetSourceRect.
-func (x *ScreenshotConfiguration) SetSourceRect(sourceRect corefoundation.CGRect) {
-	x.inner.SetSourceRect(sourceRect)
-}
-
-// @abstract SCScreenshotProperty that specifies that the screenshot outputs into a subset of the output CGimage.If not set then the output surface is used. The rectangle is specified in pixels in the display's coordinate system.
-//
-// DestinationRect calls the underlying DestinationRect.
-func (x *ScreenshotConfiguration) DestinationRect() corefoundation.CGRect {
-	return x.inner.DestinationRect()
-}
-
-// SetDestinationRect calls the underlying SetDestinationRect.
-func (x *ScreenshotConfiguration) SetDestinationRect(destinationRect corefoundation.CGRect) {
-	x.inner.SetDestinationRect(destinationRect)
-}
-
-// @abstract SCScreenshotProperty to ignore framing on windows (will ignore shadows).
-//
-// IgnoreShadows calls the underlying IgnoreShadows.
+// SCScreenshotProperty to ignore framing on windows (will ignore shadows).
 func (x *ScreenshotConfiguration) IgnoreShadows() bool {
-	return x.inner.IgnoreShadows()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ignoreShadows"))
+	return _r
 }
 
-// SetIgnoreShadows calls the underlying SetIgnoreShadows.
 func (x *ScreenshotConfiguration) SetIgnoreShadows(ignoreShadows bool) {
-	x.inner.SetIgnoreShadows(ignoreShadows)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoreShadows:"), ignoreShadows)
 }
 
-// @abstract SCScreenshotProperty to ignore framing on windows in the display bounded sharing case (will ignore shadows).
-//
-// IgnoreClipping calls the underlying IgnoreClipping.
+// SCScreenshotProperty to ignore framing on windows in the display bounded sharing case (will ignore shadows).
 func (x *ScreenshotConfiguration) IgnoreClipping() bool {
-	return x.inner.IgnoreClipping()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ignoreClipping"))
+	return _r
 }
 
-// SetIgnoreClipping calls the underlying SetIgnoreClipping.
 func (x *ScreenshotConfiguration) SetIgnoreClipping(ignoreClipping bool) {
-	x.inner.SetIgnoreClipping(ignoreClipping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoreClipping:"), ignoreClipping)
 }
 
-// @abstract SCScreenshotProperty to show the child windows of the applications and windows being captured.  Child windows are included by default.
-//
-// IncludeChildWindows calls the underlying IncludeChildWindows.
+// SCScreenshotProperty to show the child windows of the applications and windows being captured.  Child windows are included by default.
 func (x *ScreenshotConfiguration) IncludeChildWindows() bool {
-	return x.inner.IncludeChildWindows()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeChildWindows"))
+	return _r
 }
 
-// SetIncludeChildWindows calls the underlying SetIncludeChildWindows.
 func (x *ScreenshotConfiguration) SetIncludeChildWindows(includeChildWindows bool) {
-	x.inner.SetIncludeChildWindows(includeChildWindows)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeChildWindows:"), includeChildWindows)
 }
 
-// @abstract Specifies the render type of the screenshot.
-//
-// DisplayIntent calls the underlying DisplayIntent.
-func (x *ScreenshotConfiguration) DisplayIntent() SCScreenshotDisplayIntent {
-	return SCScreenshotDisplayIntent(x.inner.DisplayIntent())
+// Specifies the render type of the screenshot.
+func (x *ScreenshotConfiguration) DisplayIntent() ScreenshotDisplayIntent {
+	_r := objc.Send[ScreenshotDisplayIntent](objref.IDOf(x), objc.RegisterName("displayIntent"))
+	return _r
 }
 
-// SetDisplayIntent calls the underlying SetDisplayIntent.
-func (x *ScreenshotConfiguration) SetDisplayIntent(displayIntent SCScreenshotDisplayIntent) {
-	x.inner.SetDisplayIntent(raw.SCScreenshotDisplayIntent(displayIntent))
+func (x *ScreenshotConfiguration) SetDisplayIntent(displayIntent ScreenshotDisplayIntent) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayIntent:"), displayIntent)
 }
 
-// @abstract Specifies the CGImage to return to the client.
-//
-// DynamicRange calls the underlying DynamicRange.
-func (x *ScreenshotConfiguration) DynamicRange() SCScreenshotDynamicRange {
-	return SCScreenshotDynamicRange(x.inner.DynamicRange())
+// Specifies the CGImage to return to the client.
+func (x *ScreenshotConfiguration) DynamicRange() ScreenshotDynamicRange {
+	_r := objc.Send[ScreenshotDynamicRange](objref.IDOf(x), objc.RegisterName("dynamicRange"))
+	return _r
 }
 
-// SetDynamicRange calls the underlying SetDynamicRange.
-func (x *ScreenshotConfiguration) SetDynamicRange(dynamicRange SCScreenshotDynamicRange) {
-	x.inner.SetDynamicRange(raw.SCScreenshotDynamicRange(dynamicRange))
+func (x *ScreenshotConfiguration) SetDynamicRange(dynamicRange ScreenshotDynamicRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDynamicRange:"), dynamicRange)
 }
 
-// @abstract Specifies the screenshot file format.
-//
-// ContentType calls the underlying ContentType.
-func (x *ScreenshotConfiguration) ContentType() *uniformtypeidentifiers.UTType {
-	return x.inner.ContentType()
+// Specifies the screenshot file format.
+func (x *ScreenshotConfiguration) ContentType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
+	return obj.Wrap(_r)
 }
 
-// SetContentType calls the underlying SetContentType.
-func (x *ScreenshotConfiguration) SetContentType(contentType *uniformtypeidentifiers.UTType) {
-	x.inner.SetContentType(contentType)
+func (x *ScreenshotConfiguration) SetContentType(contentType obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentType:"), objref.IDOf(contentType))
 }
 
-// @abstract Specifies output URL to save the screenshot.  If the imageOutputURL is nil, then the file will not be saved.
-//
-// FileURL calls the underlying FileURL.
-func (x *ScreenshotConfiguration) FileURL() *foundation.NSURL {
-	return x.inner.FileURL()
+// Specifies output URL to save the screenshot.  If the imageOutputURL is nil, then the file will not be saved.
+func (x *ScreenshotConfiguration) FileURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileURL"))
+	return obj.Wrap(_r)
 }
 
-// SetFileURL calls the underlying SetFileURL.
 func (x *ScreenshotConfiguration) SetFileURL(fileURL string) {
-	x.inner.SetFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileURL:"), rt.FileURL(fileURL))
 }
 
 // ScreenshotConfigurationable is the interface implemented by [ScreenshotConfiguration], for mocking and DI.
 type ScreenshotConfigurationable interface {
-	Unwrap() *raw.SCScreenshotConfiguration
+	obj.Object
 	WithWidth(width int) *ScreenshotConfiguration
 	WithHeight(height int) *ScreenshotConfiguration
 	WithShowsCursor(showsCursor bool) *ScreenshotConfiguration
-	WithSourceRect(sourceRect corefoundation.CGRect) *ScreenshotConfiguration
-	WithDestinationRect(destinationRect corefoundation.CGRect) *ScreenshotConfiguration
 	WithIgnoreShadows(ignoreShadows bool) *ScreenshotConfiguration
 	WithIgnoreClipping(ignoreClipping bool) *ScreenshotConfiguration
 	WithIncludeChildWindows(includeChildWindows bool) *ScreenshotConfiguration
-	WithDisplayIntent(displayIntent SCScreenshotDisplayIntent) *ScreenshotConfiguration
-	WithDynamicRange(dynamicRange SCScreenshotDynamicRange) *ScreenshotConfiguration
-	WithContentType(contentType *uniformtypeidentifiers.UTType) *ScreenshotConfiguration
+	WithDisplayIntent(displayIntent ScreenshotDisplayIntent) *ScreenshotConfiguration
+	WithDynamicRange(dynamicRange ScreenshotDynamicRange) *ScreenshotConfiguration
+	WithContentType(contentType obj.Object) *ScreenshotConfiguration
 	WithFileURL(fileURL string) *ScreenshotConfiguration
 	Width() int
 	SetWidth(width int)
@@ -301,23 +263,19 @@ type ScreenshotConfigurationable interface {
 	SetHeight(height int)
 	ShowsCursor() bool
 	SetShowsCursor(showsCursor bool)
-	SourceRect() corefoundation.CGRect
-	SetSourceRect(sourceRect corefoundation.CGRect)
-	DestinationRect() corefoundation.CGRect
-	SetDestinationRect(destinationRect corefoundation.CGRect)
 	IgnoreShadows() bool
 	SetIgnoreShadows(ignoreShadows bool)
 	IgnoreClipping() bool
 	SetIgnoreClipping(ignoreClipping bool)
 	IncludeChildWindows() bool
 	SetIncludeChildWindows(includeChildWindows bool)
-	DisplayIntent() SCScreenshotDisplayIntent
-	SetDisplayIntent(displayIntent SCScreenshotDisplayIntent)
-	DynamicRange() SCScreenshotDynamicRange
-	SetDynamicRange(dynamicRange SCScreenshotDynamicRange)
-	ContentType() *uniformtypeidentifiers.UTType
-	SetContentType(contentType *uniformtypeidentifiers.UTType)
-	FileURL() *foundation.NSURL
+	DisplayIntent() ScreenshotDisplayIntent
+	SetDisplayIntent(displayIntent ScreenshotDisplayIntent)
+	DynamicRange() ScreenshotDynamicRange
+	SetDynamicRange(dynamicRange ScreenshotDynamicRange)
+	ContentType() obj.Object
+	SetContentType(contentType obj.Object)
+	FileURL() obj.Object
 	SetFileURL(fileURL string)
 }
 

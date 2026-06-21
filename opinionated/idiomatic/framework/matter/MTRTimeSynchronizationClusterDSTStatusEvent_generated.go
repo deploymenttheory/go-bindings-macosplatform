@@ -5,61 +5,84 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRTimeSynchronizationClusterDSTStatusEvent wraps [raw.MTRTimeSynchronizationClusterDSTStatusEvent] with a fluent Go API.
+// MTRTimeSynchronizationClusterDSTStatusEvent is an idiomatic wrapper over the Objective-C class MTRTimeSynchronizationClusterDSTStatusEvent.
 type MTRTimeSynchronizationClusterDSTStatusEvent struct {
-	inner *raw.MTRTimeSynchronizationClusterDSTStatusEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterDSTStatusEvent].
-func (x *MTRTimeSynchronizationClusterDSTStatusEvent) Unwrap() *raw.MTRTimeSynchronizationClusterDSTStatusEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTimeSynchronizationClusterDSTStatusEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRTimeSynchronizationClusterDSTStatusEventFromID adopts an existing object pointer as a MTRTimeSynchronizationClusterDSTStatusEvent (nil for 0).
+// MTRTimeSynchronizationClusterDSTStatusEventFromID adopts an existing Objective-C object as a MTRTimeSynchronizationClusterDSTStatusEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRTimeSynchronizationClusterDSTStatusEventFromID(id objc.ID) *MTRTimeSynchronizationClusterDSTStatusEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRTimeSynchronizationClusterDSTStatusEvent{inner: raw.MTRTimeSynchronizationClusterDSTStatusEventFromID(id)}
-}
-
-// NewMTRTimeSynchronizationClusterDSTStatusEvent creates a new [MTRTimeSynchronizationClusterDSTStatusEvent].
-func NewMTRTimeSynchronizationClusterDSTStatusEvent() *MTRTimeSynchronizationClusterDSTStatusEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTimeSynchronizationClusterDSTStatusEvent")), objc.RegisterName("new"))
-	return &MTRTimeSynchronizationClusterDSTStatusEvent{inner: raw.MTRTimeSynchronizationClusterDSTStatusEventFromID(_id)}
-}
-
-// WithDstOffsetActive sets the dstOffsetActive property and returns the receiver for chaining.
-func (x *MTRTimeSynchronizationClusterDSTStatusEvent) WithDstOffsetActive(dstOffsetActive *foundation.NSNumber) *MTRTimeSynchronizationClusterDSTStatusEvent {
-	x.inner.SetDstOffsetActive(dstOffsetActive)
+	x := &MTRTimeSynchronizationClusterDSTStatusEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// DstOffsetActive calls the underlying DstOffsetActive.
-func (x *MTRTimeSynchronizationClusterDSTStatusEvent) DstOffsetActive() *foundation.NSNumber {
-	return x.inner.DstOffsetActive()
+// mTRTimeSynchronizationClusterDSTStatusEventAdopt wraps an Objective-C object that this code just created as a
+// MTRTimeSynchronizationClusterDSTStatusEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRTimeSynchronizationClusterDSTStatusEventAdopt(id objc.ID) *MTRTimeSynchronizationClusterDSTStatusEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRTimeSynchronizationClusterDSTStatusEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetDstOffsetActive calls the underlying SetDstOffsetActive.
-func (x *MTRTimeSynchronizationClusterDSTStatusEvent) SetDstOffsetActive(dstOffsetActive *foundation.NSNumber) {
-	x.inner.SetDstOffsetActive(dstOffsetActive)
+// Description returns the object's -description text.
+func (x *MTRTimeSynchronizationClusterDSTStatusEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRTimeSynchronizationClusterDSTStatusEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRTimeSynchronizationClusterDSTStatusEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRTimeSynchronizationClusterDSTStatusEvent creates a new MTRTimeSynchronizationClusterDSTStatusEvent.
+func NewMTRTimeSynchronizationClusterDSTStatusEvent() *MTRTimeSynchronizationClusterDSTStatusEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRTimeSynchronizationClusterDSTStatusEvent")), objc.RegisterName("new"))
+	return mTRTimeSynchronizationClusterDSTStatusEventAdopt(_id)
+}
+
+// WithDstOffsetActive sets dstOffsetActive and returns the receiver so calls can be chained.
+func (x *MTRTimeSynchronizationClusterDSTStatusEvent) WithDstOffsetActive(dstOffsetActive obj.Object) *MTRTimeSynchronizationClusterDSTStatusEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDstOffsetActive:"), objref.IDOf(dstOffsetActive))
+	return x
+}
+
+func (x *MTRTimeSynchronizationClusterDSTStatusEvent) DstOffsetActive() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dstOffsetActive"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRTimeSynchronizationClusterDSTStatusEvent) SetDstOffsetActive(dstOffsetActive obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDstOffsetActive:"), objref.IDOf(dstOffsetActive))
 }
 
 // MTRTimeSynchronizationClusterDSTStatusEventable is the interface implemented by [MTRTimeSynchronizationClusterDSTStatusEvent], for mocking and DI.
 type MTRTimeSynchronizationClusterDSTStatusEventable interface {
-	Unwrap() *raw.MTRTimeSynchronizationClusterDSTStatusEvent
-	WithDstOffsetActive(dstOffsetActive *foundation.NSNumber) *MTRTimeSynchronizationClusterDSTStatusEvent
-	DstOffsetActive() *foundation.NSNumber
-	SetDstOffsetActive(dstOffsetActive *foundation.NSNumber)
+	obj.Object
+	WithDstOffsetActive(dstOffsetActive obj.Object) *MTRTimeSynchronizationClusterDSTStatusEvent
+	DstOffsetActive() obj.Object
+	SetDstOffsetActive(dstOffsetActive obj.Object)
 }
 
 var _ MTRTimeSynchronizationClusterDSTStatusEventable = (*MTRTimeSynchronizationClusterDSTStatusEvent)(nil)

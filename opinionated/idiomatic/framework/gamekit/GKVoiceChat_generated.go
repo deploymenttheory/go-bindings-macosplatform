@@ -5,201 +5,155 @@
 package gamekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A voice channel that allows players to speak with each other in a multiplayer game.
 //
-// VoiceChat wraps [raw.GKVoiceChat] with a fluent Go API.
+// VoiceChat is an idiomatic wrapper over the Objective-C class GKVoiceChat.
 type VoiceChat struct {
-	inner *raw.GKVoiceChat
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKVoiceChat].
-func (x *VoiceChat) Unwrap() *raw.GKVoiceChat { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VoiceChat) ID() objc.ID { return x.inner.Ptr() }
-
-// VoiceChatFromID adopts an existing object pointer as a VoiceChat (nil for 0).
+// VoiceChatFromID adopts an existing Objective-C object as a VoiceChat
+// (nil for 0), retaining it and registering a release finalizer.
 func VoiceChatFromID(id objc.ID) *VoiceChat {
 	if id == 0 {
 		return nil
 	}
-	return &VoiceChat{inner: raw.GKVoiceChatFromID(id)}
-}
-
-// NewVoiceChat creates a new [VoiceChat].
-func NewVoiceChat() *VoiceChat {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKVoiceChat")), objc.RegisterName("new"))
-	return &VoiceChat{inner: raw.GKVoiceChatFromID(_id)}
-}
-
-// A method that handles when a player’s voice chat changes state.
-//
-// WithPlayerVoiceChatStateDidChangeHandler sets the playerVoiceChatStateDidChangeHandler property and returns the receiver for chaining.
-func (x *VoiceChat) WithPlayerVoiceChatStateDidChangeHandler(playerVoiceChatStateDidChangeHandler func(*raw.GKPlayer, GKVoiceChatPlayerState)) *VoiceChat {
-	x.inner.SetPlayerVoiceChatStateDidChangeHandler(func(_a0 *raw.GKPlayer, _a1 raw.GKVoiceChatPlayerState) {
-		playerVoiceChatStateDidChangeHandler(_a0, GKVoiceChatPlayerState(_a1))
-	})
+	x := &VoiceChat{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// voiceChatAdopt wraps an Objective-C object that this code just created as a
+// VoiceChat (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func voiceChatAdopt(id objc.ID) *VoiceChat {
+	if id == 0 {
+		return nil
+	}
+	x := &VoiceChat{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VoiceChat) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VoiceChat) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VoiceChat) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVoiceChat creates a new VoiceChat.
+func NewVoiceChat() *VoiceChat {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKVoiceChat")), objc.RegisterName("new"))
+	return voiceChatAdopt(_id)
 }
 
 // A Boolean value that indicates whether the channel is sampling the microphone.
 //
-// WithActive sets the active property and returns the receiver for chaining.
+// WithActive sets active and returns the receiver so calls can be chained.
 func (x *VoiceChat) WithActive(active bool) *VoiceChat {
-	x.inner.SetActive(active)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActive:"), active)
 	return x
 }
 
 // The volume level for the channel.
 //
-// WithVolume sets the volume property and returns the receiver for chaining.
+// WithVolume sets volume and returns the receiver so calls can be chained.
 func (x *VoiceChat) WithVolume(volume float32) *VoiceChat {
-	x.inner.SetVolume(volume)
-	return x
-}
-
-// Handles when a player in the chat changes state.
-//
-// WithPlayerStateUpdateHandler sets the playerStateUpdateHandler property and returns the receiver for chaining.
-func (x *VoiceChat) WithPlayerStateUpdateHandler(playerStateUpdateHandler func(*foundation.NSString, GKVoiceChatPlayerState)) *VoiceChat {
-	x.inner.SetPlayerStateUpdateHandler(func(_a0 *foundation.NSString, _a1 raw.GKVoiceChatPlayerState) {
-		playerStateUpdateHandler(_a0, GKVoiceChatPlayerState(_a1))
-	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 	return x
 }
 
 // Starts communication with other players in a channel.
-//
-// Start calls the underlying Start.
 func (x *VoiceChat) Start() {
-	x.inner.Start()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
 }
 
 // Ends communication with other players in a channel.
-//
-// Stop calls the underlying Stop.
 func (x *VoiceChat) Stop() {
-	x.inner.Stop()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
 // Mutes a player in the chat, including the local player.
-//
-// SetPlayerMuted calls the underlying SetPlayerMuted.
-func (x *VoiceChat) SetPlayerMuted(player *raw.GKPlayer, isMuted bool) {
-	x.inner.SetPlayerMuted(player, isMuted)
+func (x *VoiceChat) SetPlayerMuted(player *Player, isMuted bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:muted:"), objref.IDOf(player), isMuted)
 }
 
-// PlayerVoiceChatStateDidChangeHandler calls the underlying PlayerVoiceChatStateDidChangeHandler.
-func (x *VoiceChat) PlayerVoiceChatStateDidChangeHandler() objc.Block {
-	return x.inner.PlayerVoiceChatStateDidChangeHandler()
-}
-
-// SetPlayerVoiceChatStateDidChangeHandler calls the underlying SetPlayerVoiceChatStateDidChangeHandler.
-func (x *VoiceChat) SetPlayerVoiceChatStateDidChangeHandler(playerVoiceChatStateDidChangeHandler func(*raw.GKPlayer, GKVoiceChatPlayerState)) {
-	x.inner.SetPlayerVoiceChatStateDidChangeHandler(func(_a0 *raw.GKPlayer, _a1 raw.GKVoiceChatPlayerState) {
-		playerVoiceChatStateDidChangeHandler(_a0, GKVoiceChatPlayerState(_a1))
-	})
-}
-
-// Name calls the underlying Name.
 func (x *VoiceChat) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// IsActive calls the underlying IsActive.
 func (x *VoiceChat) IsActive() bool {
-	return x.inner.IsActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+	return _r
 }
 
-// SetActive calls the underlying SetActive.
 func (x *VoiceChat) SetActive(active bool) {
-	x.inner.SetActive(active)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActive:"), active)
 }
 
-// Volume calls the underlying Volume.
 func (x *VoiceChat) Volume() float32 {
-	return x.inner.Volume()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("volume"))
+	return _r
 }
 
-// SetVolume calls the underlying SetVolume.
 func (x *VoiceChat) SetVolume(volume float32) {
-	x.inner.SetVolume(volume)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 }
 
 // Players returns the collection as a Go slice.
 func (x *VoiceChat) Players() []*Player {
-	arr := x.inner.Players()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Player {
-		return &Player{inner: raw.GKPlayerFromID(purego.Retain(_id))}
-	})
-}
-
-// PlayerStateUpdateHandler calls the underlying PlayerStateUpdateHandler.
-func (x *VoiceChat) PlayerStateUpdateHandler() objc.Block {
-	return x.inner.PlayerStateUpdateHandler()
-}
-
-// SetPlayerStateUpdateHandler calls the underlying SetPlayerStateUpdateHandler.
-func (x *VoiceChat) SetPlayerStateUpdateHandler(playerStateUpdateHandler func(*foundation.NSString, GKVoiceChatPlayerState)) {
-	x.inner.SetPlayerStateUpdateHandler(func(_a0 *foundation.NSString, _a1 raw.GKVoiceChatPlayerState) {
-		playerStateUpdateHandler(_a0, GKVoiceChatPlayerState(_a1))
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("players"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Player { return PlayerFromID(_id) })
 }
 
 // Mutes a player in a voice chat.
-//
-// SetMuteForPlayer calls the underlying SetMuteForPlayer.
 func (x *VoiceChat) SetMuteForPlayer(isMuted bool, playerID string) {
-	x.inner.SetMuteForPlayer(isMuted, foundation.NSStringStringWithUTF8String(playerID))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMute:forPlayer:"), isMuted, purego.NSString(playerID))
 }
 
 // * This property is obsolete. **
 //
 // PlayerIDs returns the collection as a Go slice.
 func (x *VoiceChat) PlayerIDs() []string {
-	arr := x.inner.PlayerIDs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerIDs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // VoiceChatable is the interface implemented by [VoiceChat], for mocking and DI.
 type VoiceChatable interface {
-	Unwrap() *raw.GKVoiceChat
-	WithPlayerVoiceChatStateDidChangeHandler(playerVoiceChatStateDidChangeHandler func(*raw.GKPlayer, GKVoiceChatPlayerState)) *VoiceChat
+	obj.Object
 	WithActive(active bool) *VoiceChat
 	WithVolume(volume float32) *VoiceChat
-	WithPlayerStateUpdateHandler(playerStateUpdateHandler func(*foundation.NSString, GKVoiceChatPlayerState)) *VoiceChat
 	Start()
 	Stop()
-	SetPlayerMuted(player *raw.GKPlayer, isMuted bool)
-	PlayerVoiceChatStateDidChangeHandler() objc.Block
-	SetPlayerVoiceChatStateDidChangeHandler(playerVoiceChatStateDidChangeHandler func(*raw.GKPlayer, GKVoiceChatPlayerState))
+	SetPlayerMuted(player *Player, isMuted bool)
 	Name() string
 	IsActive() bool
 	SetActive(active bool)
 	Volume() float32
 	SetVolume(volume float32)
 	Players() []*Player
-	PlayerStateUpdateHandler() objc.Block
-	SetPlayerStateUpdateHandler(playerStateUpdateHandler func(*foundation.NSString, GKVoiceChatPlayerState))
 	SetMuteForPlayer(isMuted bool, playerID string)
 	PlayerIDs() []string
 }

@@ -5,77 +5,105 @@
 package iousbhost
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iousbhost"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // The class that claims and configures devices, retrieves descriptors, and sends device requests.
 //
-// HostDevice wraps [raw.IOUSBHostDevice] with a fluent Go API.
+// HostDevice is an idiomatic wrapper over the Objective-C class IOUSBHostDevice.
 type HostDevice struct {
-	inner *raw.IOUSBHostDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IOUSBHostDevice].
-func (x *HostDevice) Unwrap() *raw.IOUSBHostDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HostDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// HostDeviceFromID adopts an existing object pointer as a HostDevice (nil for 0).
+// HostDeviceFromID adopts an existing Objective-C object as a HostDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func HostDeviceFromID(id objc.ID) *HostDevice {
 	if id == 0 {
 		return nil
 	}
-	return &HostDevice{inner: raw.IOUSBHostDeviceFromID(id)}
+	x := &HostDevice{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewHostDevice creates a new [HostDevice].
+// hostDeviceAdopt wraps an Objective-C object that this code just created as a
+// HostDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hostDeviceAdopt(id objc.ID) *HostDevice {
+	if id == 0 {
+		return nil
+	}
+	x := &HostDevice{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HostDevice) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HostDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HostDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHostDevice creates a new HostDevice.
 func NewHostDevice() *HostDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IOUSBHostDevice")), objc.RegisterName("new"))
-	return &HostDevice{inner: raw.IOUSBHostDeviceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("IOUSBHostDevice")), objc.RegisterName("new"))
+	return hostDeviceAdopt(_id)
 }
 
 // Selects a new configuration for the device.
-//
-// ConfigureWithValueMatchInterfacesError calls the underlying ConfigureWithValueMatchInterfacesError.
-func (x *HostDevice) ConfigureWithValueMatchInterfacesError(value uint, matchInterfaces bool) (bool, error) {
-	return x.inner.ConfigureWithValueMatchInterfacesError(value, matchInterfaces)
+func (x *HostDevice) ConfigureWithValueMatchInterfaces(value int, matchInterfaces bool) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("configureWithValue:matchInterfaces:error:"), value, matchInterfaces, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Selects a new configuration for the device and registers the interfaces for matching.
-//
-// ConfigureWithValueError calls the underlying ConfigureWithValueError.
-func (x *HostDevice) ConfigureWithValueError(value uint) (bool, error) {
-	return x.inner.ConfigureWithValueError(value)
+func (x *HostDevice) ConfigureWithValue(value int) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("configureWithValue:error:"), value, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Terminates the device and attempts to re-enumerate it.
 //
-// Reset returns any validation error.
+// Reset returns an error if the operation did not succeed.
 func (x *HostDevice) Reset() error {
-	_, err := x.inner.ResetWithError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("resetWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
-
-// @brief       Return the currently selected configuration descriptor @discussion  This method uses descriptorWithType to return the configuration descriptor currently selected after a successful setConfiguration call @return      Pointer to the configuration descriptor if found, or nil if the device is not configured
-//
-// ConfigurationDescriptor calls the underlying ConfigurationDescriptor.
-func (x *HostDevice) ConfigurationDescriptor() unsafe.Pointer {
-	return x.inner.ConfigurationDescriptor()
-}
-
-func (x *HostDevice) asHostObject() *raw.IOUSBHostObject { return &x.inner.IOUSBHostObject }
 
 // HostDeviceable is the interface implemented by [HostDevice], for mocking and DI.
 type HostDeviceable interface {
-	Unwrap() *raw.IOUSBHostDevice
-	ConfigureWithValueMatchInterfacesError(value uint, matchInterfaces bool) (bool, error)
-	ConfigureWithValueError(value uint) (bool, error)
+	obj.Object
+	ConfigureWithValueMatchInterfaces(value int, matchInterfaces bool) error
+	ConfigureWithValue(value int) error
 	Reset() error
-	ConfigurationDescriptor() unsafe.Pointer
 }
 
 var _ HostDeviceable = (*HostDevice)(nil)

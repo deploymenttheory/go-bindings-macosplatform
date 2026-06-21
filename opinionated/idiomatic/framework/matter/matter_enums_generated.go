@@ -4579,7 +4579,7 @@ func (e MTRDiscoveryCapabilities) String() string {
 type MTRErrorCode int64
 
 const (
-	// MTRErrorCodeGeneralError represents a generic Matter error with no further categorization. The userInfo will have a key named @"errorCode" whose value will be an integer representing the underlying Matter error code.  These integer values should not be assumed to be stable across releases, but may be useful in logging and debugging.
+	// MTRErrorCodeGeneralError represents a generic Matter error with no further categorization. The userInfo will have a key named
 	MTRErrorCodeGeneralError         MTRErrorCode = 1
 	MTRErrorCodeInvalidStringLength  MTRErrorCode = 2
 	MTRErrorCodeInvalidIntegerValue  MTRErrorCode = 3

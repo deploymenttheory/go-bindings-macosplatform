@@ -5,47 +5,68 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that receives audio data.
 //
-// AudioSinkNode wraps [raw.AVAudioSinkNode] with a fluent Go API.
+// AudioSinkNode is an idiomatic wrapper over the Objective-C class AVAudioSinkNode.
 type AudioSinkNode struct {
-	inner *raw.AVAudioSinkNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioSinkNode].
-func (x *AudioSinkNode) Unwrap() *raw.AVAudioSinkNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioSinkNode) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioSinkNodeFromID adopts an existing object pointer as a AudioSinkNode (nil for 0).
+// AudioSinkNodeFromID adopts an existing Objective-C object as a AudioSinkNode
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioSinkNodeFromID(id objc.ID) *AudioSinkNode {
 	if id == 0 {
 		return nil
 	}
-	return &AudioSinkNode{inner: raw.AVAudioSinkNodeFromID(id)}
+	x := &AudioSinkNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates an audio sink node with a block that receives audio data.
-//
-// NewAudioSinkNodeWithReceiverBlock creates a new [AudioSinkNode].
-func NewAudioSinkNodeWithReceiverBlock(block func(*coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int) *AudioSinkNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioSinkNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReceiverBlock:"), block)
-	return &AudioSinkNode{inner: raw.AVAudioSinkNodeFromID(_id)}
+// audioSinkNodeAdopt wraps an Objective-C object that this code just created as a
+// AudioSinkNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioSinkNodeAdopt(id objc.ID) *AudioSinkNode {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioSinkNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *AudioSinkNode) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioNode }
+// Description returns the object's -description text.
+func (x *AudioSinkNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioSinkNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioSinkNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAudioSinkNode creates a new AudioSinkNode.
+func NewAudioSinkNode() *AudioSinkNode {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioSinkNode")), objc.RegisterName("new"))
+	return audioSinkNodeAdopt(_id)
+}
 
 // AudioSinkNodeable is the interface implemented by [AudioSinkNode], for mocking and DI.
 type AudioSinkNodeable interface {
-	Unwrap() *raw.AVAudioSinkNode
+	obj.Object
 }
 
 var _ AudioSinkNodeable = (*AudioSinkNode)(nil)

@@ -5,39 +5,66 @@
 package quartz
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// QCPatchController wraps [raw.QCPatchController] with a fluent Go API.
+// QCPatchController is an idiomatic wrapper over the Objective-C class QCPatchController.
 type QCPatchController struct {
-	inner *raw.QCPatchController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QCPatchController].
-func (x *QCPatchController) Unwrap() *raw.QCPatchController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QCPatchController) ID() objc.ID { return x.inner.Ptr() }
-
-// QCPatchControllerFromID adopts an existing object pointer as a QCPatchController (nil for 0).
+// QCPatchControllerFromID adopts an existing Objective-C object as a QCPatchController
+// (nil for 0), retaining it and registering a release finalizer.
 func QCPatchControllerFromID(id objc.ID) *QCPatchController {
 	if id == 0 {
 		return nil
 	}
-	return &QCPatchController{inner: raw.QCPatchControllerFromID(id)}
+	x := &QCPatchController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewQCPatchController creates a new [QCPatchController].
+// qCPatchControllerAdopt wraps an Objective-C object that this code just created as a
+// QCPatchController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func qCPatchControllerAdopt(id objc.ID) *QCPatchController {
+	if id == 0 {
+		return nil
+	}
+	x := &QCPatchController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *QCPatchController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QCPatchController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QCPatchController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewQCPatchController creates a new QCPatchController.
 func NewQCPatchController() *QCPatchController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QCPatchController")), objc.RegisterName("new"))
-	return &QCPatchController{inner: raw.QCPatchControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QCPatchController")), objc.RegisterName("new"))
+	return qCPatchControllerAdopt(_id)
 }
 
 // QCPatchControllerable is the interface implemented by [QCPatchController], for mocking and DI.
 type QCPatchControllerable interface {
-	Unwrap() *raw.QCPatchController
+	obj.Object
 }
 
 var _ QCPatchControllerable = (*QCPatchController)(nil)

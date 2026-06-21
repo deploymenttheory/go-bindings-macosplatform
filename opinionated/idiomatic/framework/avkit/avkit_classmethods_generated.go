@@ -5,34 +5,33 @@
 package avkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// IsPictureInPictureSupported calls the underlying AVPictureInPictureControllerIsPictureInPictureSupported.
+// Returns a Boolean value that indicates whether the current device supports Picture in Picture.
 func IsPictureInPictureSupported() bool {
-	return raw.AVPictureInPictureControllerIsPictureInPictureSupported()
+	_r := objc.Send[bool](objc.ID(_class("AVPictureInPictureController")), objc.RegisterName("isPictureInPictureSupported"))
+	return _r
 }
 
-// PictureInPictureButtonStartImage calls the underlying AVPictureInPictureControllerPictureInPictureButtonStartImage.
-func PictureInPictureButtonStartImage() *appkit.NSImage {
-	return raw.AVPictureInPictureControllerPictureInPictureButtonStartImage()
+// System default Picture in Picture start template image for use in client's Picture in Picture button.
+func PictureInPictureButtonStartImage() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVPictureInPictureController")), objc.RegisterName("pictureInPictureButtonStartImage"))
+	return obj.Wrap(_r)
 }
 
-// PictureInPictureButtonStopImage calls the underlying AVPictureInPictureControllerPictureInPictureButtonStopImage.
-func PictureInPictureButtonStopImage() *appkit.NSImage {
-	return raw.AVPictureInPictureControllerPictureInPictureButtonStopImage()
+// System default Picture in Picture stop template image for use in client's Picture in Picture button.
+func PictureInPictureButtonStopImage() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVPictureInPictureController")), objc.RegisterName("pictureInPictureButtonStopImage"))
+	return obj.Wrap(_r)
 }
 
+// A list of playback speeds to be used by default across the system.
+//
 // SystemDefaultSpeeds returns the collection as a Go slice.
 func SystemDefaultSpeeds() []*PlaybackSpeed {
-	arr := raw.AVPlaybackSpeedSystemDefaultSpeeds()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlaybackSpeed {
-		return &PlaybackSpeed{inner: raw.AVPlaybackSpeedFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("AVPlaybackSpeed")), objc.RegisterName("systemDefaultSpeeds"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlaybackSpeed { return PlaybackSpeedFromID(_id) })
 }

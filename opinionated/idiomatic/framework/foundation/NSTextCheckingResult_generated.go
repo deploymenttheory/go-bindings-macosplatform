@@ -5,202 +5,174 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An occurrence of textual content found during the analysis of a block of text, such as when matching a regular expression.
 //
-// TextCheckingResult wraps [raw.NSTextCheckingResult] with a fluent Go API.
+// TextCheckingResult is an idiomatic wrapper over the Objective-C class NSTextCheckingResult.
 type TextCheckingResult struct {
-	inner *raw.NSTextCheckingResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTextCheckingResult].
-func (x *TextCheckingResult) Unwrap() *raw.NSTextCheckingResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextCheckingResult) ID() objc.ID { return x.inner.Ptr() }
-
-// TextCheckingResultFromID adopts an existing object pointer as a TextCheckingResult (nil for 0).
+// TextCheckingResultFromID adopts an existing Objective-C object as a TextCheckingResult
+// (nil for 0), retaining it and registering a release finalizer.
 func TextCheckingResultFromID(id objc.ID) *TextCheckingResult {
 	if id == 0 {
 		return nil
 	}
-	return &TextCheckingResult{inner: raw.NSTextCheckingResultFromID(id)}
-}
-
-// NewTextCheckingResult creates a new [TextCheckingResult].
-func NewTextCheckingResult() *TextCheckingResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextCheckingResult")), objc.RegisterName("new"))
-	return &TextCheckingResult{inner: raw.NSTextCheckingResultFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *TextCheckingResult) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *TextCheckingResult {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &TextCheckingResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// ResultType calls the underlying ResultType.
-func (x *TextCheckingResult) ResultType() NSTextCheckingType {
-	return NSTextCheckingType(x.inner.ResultType())
+// textCheckingResultAdopt wraps an Objective-C object that this code just created as a
+// TextCheckingResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textCheckingResultAdopt(id objc.ID) *TextCheckingResult {
+	if id == 0 {
+		return nil
+	}
+	x := &TextCheckingResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Range calls the underlying Range.
-func (x *TextCheckingResult) Range() raw.NSRange {
-	return x.inner.Range()
+// Description returns the object's -description text.
+func (x *TextCheckingResult) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns the result type that the range represents.
-//
-// RangeAtIndex calls the underlying RangeAtIndex.
-func (x *TextCheckingResult) RangeAtIndex(idx uint) raw.NSRange {
-	return x.inner.RangeAtIndex(idx)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextCheckingResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// RangeWithName calls the underlying RangeWithName.
-func (x *TextCheckingResult) RangeWithName(name string) raw.NSRange {
-	return x.inner.RangeWithName(foundation.NSStringStringWithUTF8String(name))
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextCheckingResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTextCheckingResult creates a new TextCheckingResult.
+func NewTextCheckingResult() *TextCheckingResult {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSTextCheckingResult")), objc.RegisterName("new"))
+	return textCheckingResultAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *TextCheckingResult) WithScriptingProperties(scriptingProperties obj.Object) *TextCheckingResult {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+func (x *TextCheckingResult) ResultType() TextCheckingType {
+	_r := objc.Send[TextCheckingType](objref.IDOf(x), objc.RegisterName("resultType"))
+	return _r
 }
 
 // Returns a new text checking result after adjusting the ranges as specified by the offset.
-//
-// ResultByAdjustingRangesWithOffset calls the underlying ResultByAdjustingRangesWithOffset.
 func (x *TextCheckingResult) ResultByAdjustingRangesWithOffset(offset int) *TextCheckingResult {
-	_r := x.inner.ResultByAdjustingRangesWithOffset(offset)
-	if _r == nil {
-		return nil
-	}
-	return &TextCheckingResult{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultByAdjustingRangesWithOffset:"), offset)
+	return TextCheckingResultFromID(_r)
 }
 
-// Orthography calls the underlying Orthography.
 func (x *TextCheckingResult) Orthography() *Orthography {
-	_r := x.inner.Orthography()
-	if _r == nil {
-		return nil
-	}
-	return &Orthography{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orthography"))
+	return OrthographyFromID(_r)
 }
 
-// GrammarDetails calls the underlying GrammarDetails.
-func (x *TextCheckingResult) GrammarDetails() *raw.NSArray[objc.ID] {
-	return x.inner.GrammarDetails()
+// GrammarDetails returns the collection as a Go slice.
+func (x *TextCheckingResult) GrammarDetails() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("grammarDetails"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Date calls the underlying Date.
 func (x *TextCheckingResult) Date() *Date {
-	_r := x.inner.Date()
-	if _r == nil {
-		return nil
-	}
-	return &Date{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+	return DateFromID(_r)
 }
 
-// TimeZone calls the underlying TimeZone.
 func (x *TextCheckingResult) TimeZone() *TimeZone {
-	_r := x.inner.TimeZone()
-	if _r == nil {
-		return nil
-	}
-	return &TimeZone{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
+	return TimeZoneFromID(_r)
 }
 
-// Duration calls the underlying Duration.
 func (x *TextCheckingResult) Duration() float64 {
-	return x.inner.Duration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+	return _r
 }
 
-// Components calls the underlying Components.
-func (x *TextCheckingResult) Components() *raw.NSDictionary[*raw.NSString, *raw.NSString] {
-	return x.inner.Components()
+func (x *TextCheckingResult) Components() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("components"))
+	return obj.Wrap(_r)
 }
 
-// URL calls the underlying URL.
 func (x *TextCheckingResult) URL() *URL {
-	_r := x.inner.URL()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return URLFromID(_r)
 }
 
-// ReplacementString calls the underlying ReplacementString.
-func (x *TextCheckingResult) ReplacementString() *String {
-	_r := x.inner.ReplacementString()
-	if _r == nil {
-		return nil
+func (x *TextCheckingResult) ReplacementString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replacementString"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
 // AlternativeStrings returns the collection as a Go slice.
 func (x *TextCheckingResult) AlternativeStrings() []string {
-	arr := x.inner.AlternativeStrings()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternativeStrings"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// RegularExpression calls the underlying RegularExpression.
 func (x *TextCheckingResult) RegularExpression() *RegularExpression {
-	_r := x.inner.RegularExpression()
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regularExpression"))
+	return RegularExpressionFromID(_r)
+}
+
+func (x *TextCheckingResult) PhoneNumber() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneNumber"))
+	if _r == 0 {
+		return ""
 	}
-	return &RegularExpression{inner: _r}
+	return purego.GoString(_r)
 }
 
-// PhoneNumber calls the underlying PhoneNumber.
-func (x *TextCheckingResult) PhoneNumber() *String {
-	_r := x.inner.PhoneNumber()
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+func (x *TextCheckingResult) NumberOfRanges() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfRanges"))
+	return _r
 }
 
-// NumberOfRanges calls the underlying NumberOfRanges.
-func (x *TextCheckingResult) NumberOfRanges() uint {
-	return x.inner.NumberOfRanges()
+func (x *TextCheckingResult) AddressComponents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressComponents"))
+	return obj.Wrap(_r)
 }
-
-// AddressComponents calls the underlying AddressComponents.
-func (x *TextCheckingResult) AddressComponents() *raw.NSDictionary[*raw.NSString, *raw.NSString] {
-	return x.inner.AddressComponents()
-}
-
-func (x *TextCheckingResult) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // TextCheckingResultable is the interface implemented by [TextCheckingResult], for mocking and DI.
 type TextCheckingResultable interface {
-	Unwrap() *raw.NSTextCheckingResult
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *TextCheckingResult
-	ResultType() NSTextCheckingType
-	Range() raw.NSRange
-	RangeAtIndex(idx uint) raw.NSRange
-	RangeWithName(name string) raw.NSRange
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *TextCheckingResult
+	ResultType() TextCheckingType
 	ResultByAdjustingRangesWithOffset(offset int) *TextCheckingResult
 	Orthography() *Orthography
-	GrammarDetails() *raw.NSArray[objc.ID]
+	GrammarDetails() []obj.Object
 	Date() *Date
 	TimeZone() *TimeZone
 	Duration() float64
-	Components() *raw.NSDictionary[*raw.NSString, *raw.NSString]
+	Components() obj.Object
 	URL() *URL
-	ReplacementString() *String
+	ReplacementString() string
 	AlternativeStrings() []string
 	RegularExpression() *RegularExpression
-	PhoneNumber() *String
-	NumberOfRanges() uint
-	AddressComponents() *raw.NSDictionary[*raw.NSString, *raw.NSString]
+	PhoneNumber() string
+	NumberOfRanges() int
+	AddressComponents() obj.Object
 }
 
 var _ TextCheckingResultable = (*TextCheckingResult)(nil)

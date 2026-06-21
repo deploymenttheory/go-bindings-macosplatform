@@ -5,72 +5,92 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Shortcut wraps [raw.INShortcut] with a fluent Go API.
+// Shortcut is an idiomatic wrapper over the Objective-C class INShortcut.
 type Shortcut struct {
-	inner *raw.INShortcut
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INShortcut].
-func (x *Shortcut) Unwrap() *raw.INShortcut { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Shortcut) ID() objc.ID { return x.inner.Ptr() }
-
-// ShortcutFromID adopts an existing object pointer as a Shortcut (nil for 0).
+// ShortcutFromID adopts an existing Objective-C object as a Shortcut
+// (nil for 0), retaining it and registering a release finalizer.
 func ShortcutFromID(id objc.ID) *Shortcut {
 	if id == 0 {
 		return nil
 	}
-	return &Shortcut{inner: raw.INShortcutFromID(id)}
+	x := &Shortcut{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @abstract Creates a shortcut with the given intent. @param intent Unless user configurable, must have a title and have valid shortcut types. @return Will return @c nil (and log an error) if the intent isn't valid.
-//
-// NewShortcutWithIntent creates a new [Shortcut].
-func NewShortcutWithIntent(intent *raw.INIntent) *Shortcut {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INShortcut")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIntent:"), intent.Ptr())
-	return &Shortcut{inner: raw.INShortcutFromID(_id)}
-}
-
-// @abstract Creates a shortcut with the given user activity.
-//
-// NewShortcutWithUserActivity creates a new [Shortcut].
-func NewShortcutWithUserActivity(userActivity *foundation.NSUserActivity) *Shortcut {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INShortcut")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUserActivity:"), userActivity.Ptr())
-	return &Shortcut{inner: raw.INShortcutFromID(_id)}
-}
-
-// @abstract The intent that will be performed when this shortcut is invoked. @discussion Is @c nil if the shortcut was created with a @c NSUserActivity.
-//
-// Intent calls the underlying Intent.
-func (x *Shortcut) Intent() *Intent {
-	_r := x.inner.Intent()
-	if _r == nil {
+// shortcutAdopt wraps an Objective-C object that this code just created as a
+// Shortcut (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shortcutAdopt(id objc.ID) *Shortcut {
+	if id == 0 {
 		return nil
 	}
-	return &Intent{inner: _r}
+	x := &Shortcut{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @abstract The user activity that will be performed when this shortcut is invoked. @discussion Is @c nil if the shortcut was created with an @c INIntent.
+// Description returns the object's -description text.
+func (x *Shortcut) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Shortcut) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Shortcut) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// Creates a shortcut with the given intent.
 //
-// UserActivity calls the underlying UserActivity.
-func (x *Shortcut) UserActivity() *foundation.NSUserActivity {
-	return x.inner.UserActivity()
+// NewShortcutWithIntent creates a new Shortcut.
+func NewShortcutWithIntent(intent *Intent) *Shortcut {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INShortcut")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIntent:"), objref.IDOf(intent))
+	return shortcutAdopt(_id)
+}
+
+// Creates a shortcut with the given user activity.
+//
+// NewShortcutWithUserActivity creates a new Shortcut.
+func NewShortcutWithUserActivity(userActivity obj.Object) *Shortcut {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INShortcut")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUserActivity:"), objref.IDOf(userActivity))
+	return shortcutAdopt(_id)
+}
+
+// The intent that will be performed when this shortcut is invoked. Is
+func (x *Shortcut) Intent() *Intent {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intent"))
+	return IntentFromID(_r)
+}
+
+// The user activity that will be performed when this shortcut is invoked. Is
+func (x *Shortcut) UserActivity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userActivity"))
+	return obj.Wrap(_r)
 }
 
 // Shortcutable is the interface implemented by [Shortcut], for mocking and DI.
 type Shortcutable interface {
-	Unwrap() *raw.INShortcut
+	obj.Object
 	Intent() *Intent
-	UserActivity() *foundation.NSUserActivity
+	UserActivity() obj.Object
 }
 
 var _ Shortcutable = (*Shortcut)(nil)

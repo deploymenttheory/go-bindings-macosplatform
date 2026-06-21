@@ -5,56 +5,77 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent wraps [raw.MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent] with a fluent Go API.
+// MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent is an idiomatic wrapper over the Objective-C class MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent.
 type MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent struct {
-	inner *raw.MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent].
-func (x *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) Unwrap() *raw.MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventFromID adopts an existing object pointer as a MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent (nil for 0).
+// MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventFromID adopts an existing Objective-C object as a MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventFromID(id objc.ID) *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent{inner: raw.MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventFromID(id)}
+	x := &MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent creates a new [MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent].
+// mTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventAdopt wraps an Objective-C object that this code just created as a
+// MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventAdopt(id objc.ID) *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent creates a new MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent.
 func NewMTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent() *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent")), objc.RegisterName("new"))
-	return &MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent{inner: raw.MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent")), objc.RegisterName("new"))
+	return mTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventAdopt(_id)
 }
 
-// Ranges calls the underlying Ranges.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) Ranges() *foundation.NSArray[objc.ID] {
-	return x.inner.Ranges()
+func (x *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) Ranges() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ranges"))
+	return obj.Wrap(_r)
 }
 
-// SetRanges calls the underlying SetRanges.
-func (x *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) SetRanges(ranges *foundation.NSArray[objc.ID]) {
-	x.inner.SetRanges(ranges)
+func (x *MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent) SetRanges(ranges obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRanges:"), objref.IDOf(ranges))
 }
 
 // MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventable is the interface implemented by [MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent], for mocking and DI.
 type MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventable interface {
-	Unwrap() *raw.MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent
-	Ranges() *foundation.NSArray[objc.ID]
-	SetRanges(ranges *foundation.NSArray[objc.ID])
+	obj.Object
+	Ranges() obj.Object
+	SetRanges(ranges obj.Object)
 }
 
 var _ MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEventable = (*MTRElectricalPowerMeasurementClusterMeasurementPeriodRangesEvent)(nil)

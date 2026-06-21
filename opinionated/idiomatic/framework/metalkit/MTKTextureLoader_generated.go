@@ -5,185 +5,81 @@
 package metalkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An object that creates textures from existing data in common image formats.
 //
-// TextureLoader wraps [raw.MTKTextureLoader] with a fluent Go API.
+// TextureLoader is an idiomatic wrapper over the Objective-C class MTKTextureLoader.
 type TextureLoader struct {
-	inner *raw.MTKTextureLoader
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTKTextureLoader].
-func (x *TextureLoader) Unwrap() *raw.MTKTextureLoader { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextureLoader) ID() objc.ID { return x.inner.Ptr() }
-
-// TextureLoaderFromID adopts an existing object pointer as a TextureLoader (nil for 0).
+// TextureLoaderFromID adopts an existing Objective-C object as a TextureLoader
+// (nil for 0), retaining it and registering a release finalizer.
 func TextureLoaderFromID(id objc.ID) *TextureLoader {
 	if id == 0 {
 		return nil
 	}
-	return &TextureLoader{inner: raw.MTKTextureLoaderFromID(id)}
+	x := &TextureLoader{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes a new texture loader object.
-//
-// NewTextureLoaderWithDevice creates a new [TextureLoader].
-func NewTextureLoaderWithDevice(device metal.MTLDevice) *TextureLoader {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTKTextureLoader")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &TextureLoader{inner: raw.MTKTextureLoaderFromID(_id)}
+// textureLoaderAdopt wraps an Objective-C object that this code just created as a
+// TextureLoader (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textureLoaderAdopt(id objc.ID) *TextureLoader {
+	if id == 0 {
+		return nil
+	}
+	x := &TextureLoader{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Asynchronously loads image data and creates a new Metal texture from a given URL.
-//
-// NewTextureWithContentsOfURLOptionsCompletionHandler calls the underlying NewTextureWithContentsOfURLOptionsCompletionHandler.
-func (x *TextureLoader) NewTextureWithContentsOfURLOptionsCompletionHandler(uRL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
-	x.inner.NewTextureWithContentsOfURLOptionsCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), options, completionHandler)
+// Description returns the object's -description text.
+func (x *TextureLoader) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Asynchronously loads image data and creates a Metal texture from the named texture asset in an asset catalog.
-//
-// NewTextureWithNameScaleFactorBundleOptionsCompletionHandler calls the underlying NewTextureWithNameScaleFactorBundleOptionsCompletionHandler.
-func (x *TextureLoader) NewTextureWithNameScaleFactorBundleOptionsCompletionHandler(name string, scaleFactor float64, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
-	x.inner.NewTextureWithNameScaleFactorBundleOptionsCompletionHandler(foundation.NSStringStringWithUTF8String(name), scaleFactor, bundle, options, completionHandler)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextureLoader) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Asynchronously loads image data and creates a Metal texture from the named texture asset in an asset catalog.
-//
-// NewTextureWithNameScaleFactorDisplayGamutBundleOptionsCompletionHandler calls the underlying NewTextureWithNameScaleFactorDisplayGamutBundleOptionsCompletionHandler.
-func (x *TextureLoader) NewTextureWithNameScaleFactorDisplayGamutBundleOptionsCompletionHandler(name string, scaleFactor float64, displayGamut appkit.NSDisplayGamut, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
-	x.inner.NewTextureWithNameScaleFactorDisplayGamutBundleOptionsCompletionHandler(foundation.NSStringStringWithUTF8String(name), scaleFactor, displayGamut, bundle, options, completionHandler)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextureLoader) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// Asynchronously loads image data and creates new Metal textures from the specified list of URLs.
-//
-// NewTexturesWithContentsOfURLsOptionsCompletionHandler calls the underlying NewTexturesWithContentsOfURLsOptionsCompletionHandler.
-func (x *TextureLoader) NewTexturesWithContentsOfURLsOptionsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*foundation.NSArray[metal.MTLTexture], unsafe.Pointer)) {
-	x.inner.NewTexturesWithContentsOfURLsOptionsCompletionHandler(uRLs, options, completionHandler)
-}
-
-// Asynchronously loads image data and creates Metal textures from the specified list of named texture assets in an asset catalog.
-//
-// NewTexturesWithNamesScaleFactorBundleOptionsCompletionHandler calls the underlying NewTexturesWithNamesScaleFactorBundleOptionsCompletionHandler.
-func (x *TextureLoader) NewTexturesWithNamesScaleFactorBundleOptionsCompletionHandler(names *foundation.NSArray[*foundation.NSString], scaleFactor float64, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*foundation.NSArray[metal.MTLTexture], unsafe.Pointer)) {
-	x.inner.NewTexturesWithNamesScaleFactorBundleOptionsCompletionHandler(names, scaleFactor, bundle, options, completionHandler)
-}
-
-// Asynchronously loads image data and creates Metal textures from the specified list of named texture assets in an asset catalog.
-//
-// NewTexturesWithNamesScaleFactorDisplayGamutBundleOptionsCompletionHandler calls the underlying NewTexturesWithNamesScaleFactorDisplayGamutBundleOptionsCompletionHandler.
-func (x *TextureLoader) NewTexturesWithNamesScaleFactorDisplayGamutBundleOptionsCompletionHandler(names *foundation.NSArray[*foundation.NSString], scaleFactor float64, displayGamut appkit.NSDisplayGamut, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*foundation.NSArray[metal.MTLTexture], unsafe.Pointer)) {
-	x.inner.NewTexturesWithNamesScaleFactorDisplayGamutBundleOptionsCompletionHandler(names, scaleFactor, displayGamut, bundle, options, completionHandler)
-}
-
-// Asynchronously creates a new Metal texture from an in-memory representation of the texture’s data.
-//
-// NewTextureWithDataOptionsCompletionHandler calls the underlying NewTextureWithDataOptionsCompletionHandler.
-func (x *TextureLoader) NewTextureWithDataOptionsCompletionHandler(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
-	x.inner.NewTextureWithDataOptionsCompletionHandler(data, options, completionHandler)
-}
-
-// Asynchronously loads image data and creates a new Metal texture from a given bitmap image.
-//
-// NewTextureWithCGImageOptionsCompletionHandler calls the underlying NewTextureWithCGImageOptionsCompletionHandler.
-func (x *TextureLoader) NewTextureWithCGImageOptionsCompletionHandler(cgImage unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
-	x.inner.NewTextureWithCGImageOptionsCompletionHandler(cgImage, options, completionHandler)
-}
-
-// Asynchronously loads image data and creates a Metal texture from the specified Model I/O texture.
-//
-// NewTextureWithMDLTextureOptionsCompletionHandler calls the underlying NewTextureWithMDLTextureOptionsCompletionHandler.
-func (x *TextureLoader) NewTextureWithMDLTextureOptionsCompletionHandler(texture *modelio.MDLTexture, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer)) {
-	x.inner.NewTextureWithMDLTextureOptionsCompletionHandler(texture, options, completionHandler)
-}
-
-// Synchronously loads image data and creates a new Metal texture from a given URL.
-//
-// NewTextureWithContentsOfURLOptionsError calls the underlying NewTextureWithContentsOfURLOptionsError.
-func (x *TextureLoader) NewTextureWithContentsOfURLOptionsError(uRL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error) {
-	return x.inner.NewTextureWithContentsOfURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), options)
+// NewTextureLoader creates a new TextureLoader.
+func NewTextureLoader() *TextureLoader {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTKTextureLoader")), objc.RegisterName("new"))
+	return textureLoaderAdopt(_id)
 }
 
 // Synchronously loads image data and creates new Metal textures from the specified list of URLs.
-//
-// NewTexturesWithContentsOfURLsOptionsError calls the underlying NewTexturesWithContentsOfURLsOptionsError.
-func (x *TextureLoader) NewTexturesWithContentsOfURLsOptionsError(uRLs *foundation.NSArray[*foundation.NSURL], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSArray[metal.MTLTexture], error) {
-	return x.inner.NewTexturesWithContentsOfURLsOptionsError(uRLs, options)
-}
-
-// Synchronously creates a new Metal texture from an in-memory representation of the texture’s data.
-//
-// NewTextureWithDataOptionsError calls the underlying NewTextureWithDataOptionsError.
-func (x *TextureLoader) NewTextureWithDataOptionsError(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error) {
-	return x.inner.NewTextureWithDataOptionsError(data, options)
-}
-
-// Synchronously loads image data and creates a new Metal texture from a given bitmap image.
-//
-// NewTextureWithCGImageOptionsError calls the underlying NewTextureWithCGImageOptionsError.
-func (x *TextureLoader) NewTextureWithCGImageOptionsError(cgImage unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error) {
-	return x.inner.NewTextureWithCGImageOptionsError(cgImage, options)
-}
-
-// Synchronously loads image data and creates a Metal texture from the specified Model I/O texture.
-//
-// NewTextureWithMDLTextureOptionsError calls the underlying NewTextureWithMDLTextureOptionsError.
-func (x *TextureLoader) NewTextureWithMDLTextureOptionsError(texture *modelio.MDLTexture, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error) {
-	return x.inner.NewTextureWithMDLTextureOptionsError(texture, options)
-}
-
-// Synchronously loads image data and creates a Metal texture from the named texture asset in an asset catalog.
-//
-// NewTextureWithNameScaleFactorBundleOptionsError calls the underlying NewTextureWithNameScaleFactorBundleOptionsError.
-func (x *TextureLoader) NewTextureWithNameScaleFactorBundleOptionsError(name string, scaleFactor float64, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error) {
-	return x.inner.NewTextureWithNameScaleFactorBundleOptionsError(foundation.NSStringStringWithUTF8String(name), scaleFactor, bundle, options)
-}
-
-// Synchronously loads image data and creates a Metal texture from the named texture asset in an asset catalog, using a specified display gamut.
-//
-// NewTextureWithNameScaleFactorDisplayGamutBundleOptionsError calls the underlying NewTextureWithNameScaleFactorDisplayGamutBundleOptionsError.
-func (x *TextureLoader) NewTextureWithNameScaleFactorDisplayGamutBundleOptionsError(name string, scaleFactor float64, displayGamut appkit.NSDisplayGamut, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error) {
-	return x.inner.NewTextureWithNameScaleFactorDisplayGamutBundleOptionsError(foundation.NSStringStringWithUTF8String(name), scaleFactor, displayGamut, bundle, options)
-}
-
-// @property device @abstract Metal device with which to create Metal textures
-//
-// Device calls the underlying Device.
-func (x *TextureLoader) Device() metal.MTLDevice {
-	return x.inner.Device()
+func (x *TextureLoader) NewTexturesWithContentsOfURLsOptionsError(uRLs []obj.Object, options obj.Object) ([]obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("newTexturesWithContentsOfURLs:options:error:"), purego.SliceToNSArray(uRLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
 // TextureLoaderable is the interface implemented by [TextureLoader], for mocking and DI.
 type TextureLoaderable interface {
-	Unwrap() *raw.MTKTextureLoader
-	NewTextureWithContentsOfURLOptionsCompletionHandler(uRL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer))
-	NewTextureWithNameScaleFactorBundleOptionsCompletionHandler(name string, scaleFactor float64, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer))
-	NewTextureWithNameScaleFactorDisplayGamutBundleOptionsCompletionHandler(name string, scaleFactor float64, displayGamut appkit.NSDisplayGamut, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer))
-	NewTexturesWithContentsOfURLsOptionsCompletionHandler(uRLs *foundation.NSArray[*foundation.NSURL], options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*foundation.NSArray[metal.MTLTexture], unsafe.Pointer))
-	NewTexturesWithNamesScaleFactorBundleOptionsCompletionHandler(names *foundation.NSArray[*foundation.NSString], scaleFactor float64, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*foundation.NSArray[metal.MTLTexture], unsafe.Pointer))
-	NewTexturesWithNamesScaleFactorDisplayGamutBundleOptionsCompletionHandler(names *foundation.NSArray[*foundation.NSString], scaleFactor float64, displayGamut appkit.NSDisplayGamut, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(*foundation.NSArray[metal.MTLTexture], unsafe.Pointer))
-	NewTextureWithDataOptionsCompletionHandler(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer))
-	NewTextureWithCGImageOptionsCompletionHandler(cgImage unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer))
-	NewTextureWithMDLTextureOptionsCompletionHandler(texture *modelio.MDLTexture, options *foundation.NSDictionary[*foundation.NSString, objc.ID], completionHandler func(objc.ID, unsafe.Pointer))
-	NewTextureWithContentsOfURLOptionsError(uRL string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error)
-	NewTexturesWithContentsOfURLsOptionsError(uRLs *foundation.NSArray[*foundation.NSURL], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSArray[metal.MTLTexture], error)
-	NewTextureWithDataOptionsError(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error)
-	NewTextureWithCGImageOptionsError(cgImage unsafe.Pointer, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error)
-	NewTextureWithMDLTextureOptionsError(texture *modelio.MDLTexture, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error)
-	NewTextureWithNameScaleFactorBundleOptionsError(name string, scaleFactor float64, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error)
-	NewTextureWithNameScaleFactorDisplayGamutBundleOptionsError(name string, scaleFactor float64, displayGamut appkit.NSDisplayGamut, bundle *foundation.NSBundle, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (metal.MTLTexture, error)
-	Device() metal.MTLDevice
+	obj.Object
+	NewTexturesWithContentsOfURLsOptionsError(uRLs []obj.Object, options obj.Object) ([]obj.Object, error)
 }
 
 var _ TextureLoaderable = (*TextureLoader)(nil)

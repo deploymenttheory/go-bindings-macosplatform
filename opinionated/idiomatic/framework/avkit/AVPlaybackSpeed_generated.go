@@ -5,75 +5,95 @@
 package avkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a user-selectable playback speed in a playback user interface.
 //
-// PlaybackSpeed wraps [raw.AVPlaybackSpeed] with a fluent Go API.
+// PlaybackSpeed is an idiomatic wrapper over the Objective-C class AVPlaybackSpeed.
 type PlaybackSpeed struct {
-	inner *raw.AVPlaybackSpeed
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPlaybackSpeed].
-func (x *PlaybackSpeed) Unwrap() *raw.AVPlaybackSpeed { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlaybackSpeed) ID() objc.ID { return x.inner.Ptr() }
-
-// PlaybackSpeedFromID adopts an existing object pointer as a PlaybackSpeed (nil for 0).
+// PlaybackSpeedFromID adopts an existing Objective-C object as a PlaybackSpeed
+// (nil for 0), retaining it and registering a release finalizer.
 func PlaybackSpeedFromID(id objc.ID) *PlaybackSpeed {
 	if id == 0 {
 		return nil
 	}
-	return &PlaybackSpeed{inner: raw.AVPlaybackSpeedFromID(id)}
+	x := &PlaybackSpeed{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// playbackSpeedAdopt wraps an Objective-C object that this code just created as a
+// PlaybackSpeed (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playbackSpeedAdopt(id objc.ID) *PlaybackSpeed {
+	if id == 0 {
+		return nil
+	}
+	x := &PlaybackSpeed{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PlaybackSpeed) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlaybackSpeed) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlaybackSpeed) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a playback speed with a rate and localized name.
 //
-// NewPlaybackSpeedWithRateLocalizedName creates a new [PlaybackSpeed].
+// NewPlaybackSpeedWithRateLocalizedName creates a new PlaybackSpeed.
 func NewPlaybackSpeedWithRateLocalizedName(rate float32, localizedName string) *PlaybackSpeed {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlaybackSpeed")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRate:localizedName:"), rate, foundation.NSStringStringWithUTF8String(localizedName).Ptr())
-	return &PlaybackSpeed{inner: raw.AVPlaybackSpeedFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlaybackSpeed")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRate:localizedName:"), rate, purego.NSString(localizedName))
+	return playbackSpeedAdopt(_id)
 }
 
-// @property      rate @abstract      The rate associated with this object. When this playback speed is selected this rate will be set in response to the play button being pressed.
-//
-// Rate calls the underlying Rate.
+// The rate associated with this object. When this playback speed is selected this rate will be set in response to the play button being pressed.
 func (x *PlaybackSpeed) Rate() float32 {
-	return x.inner.Rate()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
+	return _r
 }
 
-// @property      localizedName @abstract      A localized name for this playback speed. @discussion    This name will be used to represent this playback speed in playback UIs where more space is available.
-//
-// LocalizedName calls the underlying LocalizedName.
+// A localized name for this playback speed. This name will be used to represent this playback speed in playback UIs where more space is available.
 func (x *PlaybackSpeed) LocalizedName() string {
-	_r := x.inner.LocalizedName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property      localizedNumericName @abstract      A localized name for this playback speed used when space is limited. @discussion    This name will be used to represent this playback speed in playback UIs where limited space is available.
-//
-// LocalizedNumericName calls the underlying LocalizedNumericName.
+// A localized name for this playback speed used when space is limited. This name will be used to represent this playback speed in playback UIs where limited space is available.
 func (x *PlaybackSpeed) LocalizedNumericName() string {
-	_r := x.inner.LocalizedNumericName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedNumericName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // PlaybackSpeedable is the interface implemented by [PlaybackSpeed], for mocking and DI.
 type PlaybackSpeedable interface {
-	Unwrap() *raw.AVPlaybackSpeed
+	obj.Object
 	Rate() float32
 	LocalizedName() string
 	LocalizedNumericName() string

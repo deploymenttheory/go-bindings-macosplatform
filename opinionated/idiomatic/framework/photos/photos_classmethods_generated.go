@@ -5,326 +5,242 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// FetchAssetsInAssetCollectionOptions calls the underlying PHAssetFetchAssetsInAssetCollectionOptions.
-func FetchAssetsInAssetCollectionOptions(assetCollection *raw.PHAssetCollection, options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHAsset] {
-	return raw.PHAssetFetchAssetsInAssetCollectionOptions(assetCollection, options)
+// Retrieves assets from the specified asset collection.
+func FetchAssetsInAssetCollectionOptions(assetCollection *AssetCollection, options *FetchOptions) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAsset")), objc.RegisterName("fetchAssetsInAssetCollection:options:"), objref.IDOf(assetCollection), objref.IDOf(options))
+	return obj.Wrap(_r)
 }
 
-// FetchAssetsWithLocalIdentifiersOptions calls the underlying PHAssetFetchAssetsWithLocalIdentifiersOptions.
-func FetchAssetsWithLocalIdentifiersOptions(identifiers *foundation.NSArray[*foundation.NSString], options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHAsset] {
-	return raw.PHAssetFetchAssetsWithLocalIdentifiersOptions(identifiers, options)
+// Retrieves assets with the specified local-device-specific unique identifiers.
+func FetchAssetsWithLocalIdentifiersOptions(identifiers []string, options *FetchOptions) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAsset")), objc.RegisterName("fetchAssetsWithLocalIdentifiers:options:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(options))
+	return obj.Wrap(_r)
 }
 
-// FetchKeyAssetsInAssetCollectionOptions calls the underlying PHAssetFetchKeyAssetsInAssetCollectionOptions.
-func FetchKeyAssetsInAssetCollectionOptions(assetCollection *raw.PHAssetCollection, options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHAsset] {
-	return raw.PHAssetFetchKeyAssetsInAssetCollectionOptions(assetCollection, options)
+// Retrieves assets marked as key assets in the specified asset collection.
+func FetchKeyAssetsInAssetCollectionOptions(assetCollection *AssetCollection, options *FetchOptions) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAsset")), objc.RegisterName("fetchKeyAssetsInAssetCollection:options:"), objref.IDOf(assetCollection), objref.IDOf(options))
+	return obj.Wrap(_r)
 }
 
-// FetchAssetsWithBurstIdentifierOptions calls the underlying PHAssetFetchAssetsWithBurstIdentifierOptions.
-func FetchAssetsWithBurstIdentifierOptions(burstIdentifier string, options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHAsset] {
-	return raw.PHAssetFetchAssetsWithBurstIdentifierOptions(foundation.NSStringStringWithUTF8String(burstIdentifier), options)
+// Retrieves assets with the specified burst photo sequence identifier.
+func FetchAssetsWithBurstIdentifierOptions(burstIdentifier string, options *FetchOptions) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAsset")), objc.RegisterName("fetchAssetsWithBurstIdentifier:options:"), purego.NSString(burstIdentifier), objref.IDOf(options))
+	return obj.Wrap(_r)
 }
 
-// FetchAssetsWithOptions calls the underlying PHAssetFetchAssetsWithOptions.
-func FetchAssetsWithOptions(options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHAsset] {
-	return raw.PHAssetFetchAssetsWithOptions(options)
+// Retrieves all assets matching the specified options.
+func FetchAssetsWithOptions(options *FetchOptions) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAsset")), objc.RegisterName("fetchAssetsWithOptions:"), objref.IDOf(options))
+	return obj.Wrap(_r)
 }
 
-// FetchAssetsWithMediaTypeOptions calls the underlying PHAssetFetchAssetsWithMediaTypeOptions.
-func FetchAssetsWithMediaTypeOptions(mediaType PHAssetMediaType, options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHAsset] {
-	return raw.PHAssetFetchAssetsWithMediaTypeOptions(raw.PHAssetMediaType(mediaType), options)
+// Retrieves assets with the specified media type.
+func FetchAssetsWithMediaTypeOptions(mediaType AssetMediaType, options *FetchOptions) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAsset")), objc.RegisterName("fetchAssetsWithMediaType:options:"), mediaType, objref.IDOf(options))
+	return obj.Wrap(_r)
 }
 
-// CreationRequestForAssetFromImage calls the underlying PHAssetChangeRequestCreationRequestForAssetFromImage.
-func CreationRequestForAssetFromImage(image *appkit.NSImage) *AssetChangeRequest {
-	_r := raw.PHAssetChangeRequestCreationRequestForAssetFromImage(image)
-	if _r == nil {
-		return nil
-	}
-	return &AssetChangeRequest{inner: _r}
+// Creates a request for adding a new image asset to the Photos library.
+func CreationRequestForAssetFromImage(image obj.Object) *AssetChangeRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetChangeRequest")), objc.RegisterName("creationRequestForAssetFromImage:"), objref.IDOf(image))
+	return AssetChangeRequestFromID(_r)
 }
 
-// CreationRequestForAssetFromImageAtFileURL calls the underlying PHAssetChangeRequestCreationRequestForAssetFromImageAtFileURL.
+// Creates a request for adding a new image asset to the Photos library, using the image file at the specified URL.
 func CreationRequestForAssetFromImageAtFileURL(fileURL string) *AssetChangeRequest {
-	_r := raw.PHAssetChangeRequestCreationRequestForAssetFromImageAtFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
-	if _r == nil {
-		return nil
-	}
-	return &AssetChangeRequest{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetChangeRequest")), objc.RegisterName("creationRequestForAssetFromImageAtFileURL:"), rt.FileURL(fileURL))
+	return AssetChangeRequestFromID(_r)
 }
 
-// CreationRequestForAssetFromVideoAtFileURL calls the underlying PHAssetChangeRequestCreationRequestForAssetFromVideoAtFileURL.
+// Creates a request for adding a new video asset to the Photos library, using the video file at the specified URL.
 func CreationRequestForAssetFromVideoAtFileURL(fileURL string) *AssetChangeRequest {
-	_r := raw.PHAssetChangeRequestCreationRequestForAssetFromVideoAtFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
-	if _r == nil {
-		return nil
-	}
-	return &AssetChangeRequest{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetChangeRequest")), objc.RegisterName("creationRequestForAssetFromVideoAtFileURL:"), rt.FileURL(fileURL))
+	return AssetChangeRequestFromID(_r)
 }
 
-// DeleteAssets calls the underlying PHAssetChangeRequestDeleteAssets.
-func DeleteAssets(assets foundation.NSFastEnumeration) {
-	raw.PHAssetChangeRequestDeleteAssets(assets)
+// Creates a request for modifying the specified asset.
+func ChangeRequestForAsset(asset *Asset) *AssetChangeRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetChangeRequest")), objc.RegisterName("changeRequestForAsset:"), objref.IDOf(asset))
+	return AssetChangeRequestFromID(_r)
 }
 
-// ChangeRequestForAsset calls the underlying PHAssetChangeRequestChangeRequestForAsset.
-func ChangeRequestForAsset(asset *raw.PHAsset) *AssetChangeRequest {
-	_r := raw.PHAssetChangeRequestChangeRequestForAsset(asset)
-	if _r == nil {
-		return nil
-	}
-	return &AssetChangeRequest{inner: _r}
+// Retrieves asset collections with the specified unique identifiers.
+func FetchAssetCollectionsWithLocalIdentifiersOptions(identifiers []string, options *FetchOptions) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCollection")), objc.RegisterName("fetchAssetCollectionsWithLocalIdentifiers:options:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(options))
+	return obj.Wrap(_r)
 }
 
-// FetchAssetCollectionsWithLocalIdentifiersOptions calls the underlying PHAssetCollectionFetchAssetCollectionsWithLocalIdentifiersOptions.
-func FetchAssetCollectionsWithLocalIdentifiersOptions(identifiers *foundation.NSArray[*foundation.NSString], options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHAssetCollection] {
-	return raw.PHAssetCollectionFetchAssetCollectionsWithLocalIdentifiersOptions(identifiers, options)
+// Retrieves asset collections of the specified type containing the specified asset.
+func FetchAssetCollectionsContainingAssetWithTypeOptions(asset *Asset, type_ AssetCollectionType, options *FetchOptions) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCollection")), objc.RegisterName("fetchAssetCollectionsContainingAsset:withType:options:"), objref.IDOf(asset), type_, objref.IDOf(options))
+	return obj.Wrap(_r)
 }
 
-// FetchAssetCollectionsWithTypeSubtypeOptions calls the underlying PHAssetCollectionFetchAssetCollectionsWithTypeSubtypeOptions.
-func FetchAssetCollectionsWithTypeSubtypeOptions(type_ PHAssetCollectionType, subtype unsafe.Pointer, options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHAssetCollection] {
-	return raw.PHAssetCollectionFetchAssetCollectionsWithTypeSubtypeOptions(raw.PHAssetCollectionType(type_), subtype, options)
+// Retrieves asset collections using URLs provided by the Assets Library framework.
+func FetchAssetCollectionsWithALAssetGroupURLsOptions(assetGroupURLs []obj.Object, options *FetchOptions) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCollection")), objc.RegisterName("fetchAssetCollectionsWithALAssetGroupURLs:options:"), purego.SliceToNSArray(assetGroupURLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options))
+	return obj.Wrap(_r)
 }
 
-// FetchAssetCollectionsContainingAssetWithTypeOptions calls the underlying PHAssetCollectionFetchAssetCollectionsContainingAssetWithTypeOptions.
-func FetchAssetCollectionsContainingAssetWithTypeOptions(asset *raw.PHAsset, type_ PHAssetCollectionType, options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHAssetCollection] {
-	return raw.PHAssetCollectionFetchAssetCollectionsContainingAssetWithTypeOptions(asset, raw.PHAssetCollectionType(type_), options)
+// Creates a temporary asset collection containing the specified assets.
+func TransientAssetCollectionWithAssetsTitle(assets []*Asset, title string) *AssetCollection {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCollection")), objc.RegisterName("transientAssetCollectionWithAssets:title:"), purego.SliceToNSArray(assets, func(_v *Asset) objc.ID { return objref.IDOf(_v) }), purego.NSString(title))
+	return AssetCollectionFromID(_r)
 }
 
-// FetchAssetCollectionsWithALAssetGroupURLsOptions calls the underlying PHAssetCollectionFetchAssetCollectionsWithALAssetGroupURLsOptions.
-func FetchAssetCollectionsWithALAssetGroupURLsOptions(assetGroupURLs *foundation.NSArray[*foundation.NSURL], options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHAssetCollection] {
-	return raw.PHAssetCollectionFetchAssetCollectionsWithALAssetGroupURLsOptions(assetGroupURLs, options)
+// Creates a temporary asset collection containing the assets from the specified fetch result.
+func TransientAssetCollectionWithAssetFetchResultTitle(fetchResult obj.Object, title string) *AssetCollection {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCollection")), objc.RegisterName("transientAssetCollectionWithAssetFetchResult:title:"), objref.IDOf(fetchResult), purego.NSString(title))
+	return AssetCollectionFromID(_r)
 }
 
-// TransientAssetCollectionWithAssetsTitle calls the underlying PHAssetCollectionTransientAssetCollectionWithAssetsTitle.
-func TransientAssetCollectionWithAssetsTitle(assets *foundation.NSArray[*raw.PHAsset], title string) *AssetCollection {
-	_r := raw.PHAssetCollectionTransientAssetCollectionWithAssetsTitle(assets, foundation.NSStringStringWithUTF8String(title))
-	if _r == nil {
-		return nil
-	}
-	return &AssetCollection{inner: _r}
-}
-
-// TransientAssetCollectionWithAssetFetchResultTitle calls the underlying PHAssetCollectionTransientAssetCollectionWithAssetFetchResultTitle.
-func TransientAssetCollectionWithAssetFetchResultTitle(fetchResult *raw.PHFetchResult[*raw.PHAsset], title string) *AssetCollection {
-	_r := raw.PHAssetCollectionTransientAssetCollectionWithAssetFetchResultTitle(fetchResult, foundation.NSStringStringWithUTF8String(title))
-	if _r == nil {
-		return nil
-	}
-	return &AssetCollection{inner: _r}
-}
-
-// CreationRequestForAssetCollectionWithTitle calls the underlying PHAssetCollectionChangeRequestCreationRequestForAssetCollectionWithTitle.
+// Creates a request for adding a new asset collection to the Photos library.
 func CreationRequestForAssetCollectionWithTitle(title string) *AssetCollectionChangeRequest {
-	_r := raw.PHAssetCollectionChangeRequestCreationRequestForAssetCollectionWithTitle(foundation.NSStringStringWithUTF8String(title))
-	if _r == nil {
-		return nil
-	}
-	return &AssetCollectionChangeRequest{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCollectionChangeRequest")), objc.RegisterName("creationRequestForAssetCollectionWithTitle:"), purego.NSString(title))
+	return AssetCollectionChangeRequestFromID(_r)
 }
 
-// DeleteAssetCollections calls the underlying PHAssetCollectionChangeRequestDeleteAssetCollections.
-func DeleteAssetCollections(assetCollections foundation.NSFastEnumeration) {
-	raw.PHAssetCollectionChangeRequestDeleteAssetCollections(assetCollections)
+// Creates a request for modifying the specified asset collection.
+func ChangeRequestForAssetCollection(assetCollection *AssetCollection) *AssetCollectionChangeRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCollectionChangeRequest")), objc.RegisterName("changeRequestForAssetCollection:"), objref.IDOf(assetCollection))
+	return AssetCollectionChangeRequestFromID(_r)
 }
 
-// ChangeRequestForAssetCollection calls the underlying PHAssetCollectionChangeRequestChangeRequestForAssetCollection.
-func ChangeRequestForAssetCollection(assetCollection *raw.PHAssetCollection) *AssetCollectionChangeRequest {
-	_r := raw.PHAssetCollectionChangeRequestChangeRequestForAssetCollection(assetCollection)
-	if _r == nil {
-		return nil
-	}
-	return &AssetCollectionChangeRequest{inner: _r}
+// Creates a request for modifying the specified asset collection, with a fetch result for tracking changes.
+func ChangeRequestForAssetCollectionAssets(assetCollection *AssetCollection, assets obj.Object) *AssetCollectionChangeRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCollectionChangeRequest")), objc.RegisterName("changeRequestForAssetCollection:assets:"), objref.IDOf(assetCollection), objref.IDOf(assets))
+	return AssetCollectionChangeRequestFromID(_r)
 }
 
-// ChangeRequestForAssetCollectionAssets calls the underlying PHAssetCollectionChangeRequestChangeRequestForAssetCollectionAssets.
-func ChangeRequestForAssetCollectionAssets(assetCollection *raw.PHAssetCollection, assets *raw.PHFetchResult[*raw.PHAsset]) *AssetCollectionChangeRequest {
-	_r := raw.PHAssetCollectionChangeRequestChangeRequestForAssetCollectionAssets(assetCollection, assets)
-	if _r == nil {
-		return nil
-	}
-	return &AssetCollectionChangeRequest{inner: _r}
-}
-
-// CreationRequestForAsset calls the underlying PHAssetCreationRequestCreationRequestForAsset.
+// Creates a request for adding a new asset to the Photos library using asset resources.
 func CreationRequestForAsset() *AssetCreationRequest {
-	_r := raw.PHAssetCreationRequestCreationRequestForAsset()
-	if _r == nil {
-		return nil
-	}
-	return &AssetCreationRequest{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetCreationRequest")), objc.RegisterName("creationRequestForAsset"))
+	return AssetCreationRequestFromID(_r)
 }
 
-// SupportsAssetResourceTypes calls the underlying PHAssetCreationRequestSupportsAssetResourceTypes.
-func SupportsAssetResourceTypes(types *foundation.NSArray[*foundation.NSNumber]) bool {
-	return raw.PHAssetCreationRequestSupportsAssetResourceTypes(types)
+// Returns a Boolean value indicating whether Photos supports creating an asset with the specified combination of resource types.
+func SupportsAssetResourceTypes(types []obj.Object) bool {
+	_r := objc.Send[bool](objc.ID(_class("PHAssetCreationRequest")), objc.RegisterName("supportsAssetResourceTypes:"), purego.SliceToNSArray(types, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return _r
 }
 
-// AssetResourcesForAsset calls the underlying PHAssetResourceAssetResourcesForAsset.
-func AssetResourcesForAsset(asset *raw.PHAsset) *foundation.NSArray[*raw.PHAssetResource] {
-	return raw.PHAssetResourceAssetResourcesForAsset(asset)
+// Returns the list of data resources associated with an asset.
+func AssetResourcesForAsset(asset *Asset) []*AssetResource {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetResource")), objc.RegisterName("assetResourcesForAsset:"), objref.IDOf(asset))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *AssetResource { return AssetResourceFromID(_id) })
 }
 
-// AssetResourcesForLivePhoto calls the underlying PHAssetResourceAssetResourcesForLivePhoto.
-func AssetResourcesForLivePhoto(livePhoto *raw.PHLivePhoto) *foundation.NSArray[*raw.PHAssetResource] {
-	return raw.PHAssetResourceAssetResourcesForLivePhoto(livePhoto)
+// Returns the list of data resources associated with a Live Photo object.
+func AssetResourcesForLivePhoto(livePhoto *LivePhoto) []*AssetResource {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetResource")), objc.RegisterName("assetResourcesForLivePhoto:"), objref.IDOf(livePhoto))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *AssetResource { return AssetResourceFromID(_id) })
 }
 
-// DefaultManager calls the underlying PHAssetResourceManagerDefaultManager.
+// Returns the shared asset resource manager object.
 func DefaultManager() *AssetResourceManager {
-	_r := raw.PHAssetResourceManagerDefaultManager()
-	if _r == nil {
-		return nil
-	}
-	return &AssetResourceManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHAssetResourceManager")), objc.RegisterName("defaultManager"))
+	return AssetResourceManagerFromID(_r)
 }
 
-// NotFoundIdentifier calls the underlying PHCloudIdentifierNotFoundIdentifier.
-func NotFoundIdentifier() unsafe.Pointer {
-	return raw.PHCloudIdentifierNotFoundIdentifier()
+// Retrieves collections from the specified collection list.
+func FetchCollectionsInCollectionListOptions(collectionList *CollectionList, options *FetchOptions) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHCollection")), objc.RegisterName("fetchCollectionsInCollectionList:options:"), objref.IDOf(collectionList), objref.IDOf(options))
+	return obj.Wrap(_r)
 }
 
-// FetchCollectionsInCollectionListOptions calls the underlying PHCollectionFetchCollectionsInCollectionListOptions.
-func FetchCollectionsInCollectionListOptions(collectionList *raw.PHCollectionList, options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHCollection] {
-	return raw.PHCollectionFetchCollectionsInCollectionListOptions(collectionList, options)
+// Retrieves collections from the root of the photo library’s hierarchy of user-created albums and folders.
+func FetchTopLevelUserCollectionsWithOptions(options *FetchOptions) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHCollection")), objc.RegisterName("fetchTopLevelUserCollectionsWithOptions:"), objref.IDOf(options))
+	return obj.Wrap(_r)
 }
 
-// FetchTopLevelUserCollectionsWithOptions calls the underlying PHCollectionFetchTopLevelUserCollectionsWithOptions.
-func FetchTopLevelUserCollectionsWithOptions(options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHCollection] {
-	return raw.PHCollectionFetchTopLevelUserCollectionsWithOptions(options)
+// Retrieves collection lists that contain the specified collection.
+func FetchCollectionListsContainingCollectionOptions(collection *Collection, options *FetchOptions) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHCollectionList")), objc.RegisterName("fetchCollectionListsContainingCollection:options:"), objref.IDOf(collection), objref.IDOf(options))
+	return obj.Wrap(_r)
 }
 
-// FetchCollectionListsContainingCollectionOptions calls the underlying PHCollectionListFetchCollectionListsContainingCollectionOptions.
-func FetchCollectionListsContainingCollectionOptions(collection *raw.PHCollection, options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHCollectionList] {
-	return raw.PHCollectionListFetchCollectionListsContainingCollectionOptions(collection, options)
+// Retrieves collection lists with the specified local-device-specific unique identifiers.
+func FetchCollectionListsWithLocalIdentifiersOptions(identifiers []string, options *FetchOptions) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHCollectionList")), objc.RegisterName("fetchCollectionListsWithLocalIdentifiers:options:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(options))
+	return obj.Wrap(_r)
 }
 
-// FetchCollectionListsWithLocalIdentifiersOptions calls the underlying PHCollectionListFetchCollectionListsWithLocalIdentifiersOptions.
-func FetchCollectionListsWithLocalIdentifiersOptions(identifiers *foundation.NSArray[*foundation.NSString], options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHCollectionList] {
-	return raw.PHCollectionListFetchCollectionListsWithLocalIdentifiersOptions(identifiers, options)
+// Creates a temporary collection list that contains the specified asset collections.
+func TransientCollectionListWithCollectionsTitle(collections []*Collection, title string) *CollectionList {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHCollectionList")), objc.RegisterName("transientCollectionListWithCollections:title:"), purego.SliceToNSArray(collections, func(_v *Collection) objc.ID { return objref.IDOf(_v) }), purego.NSString(title))
+	return CollectionListFromID(_r)
 }
 
-// FetchCollectionListsWithTypeSubtypeOptions calls the underlying PHCollectionListFetchCollectionListsWithTypeSubtypeOptions.
-func FetchCollectionListsWithTypeSubtypeOptions(collectionListType raw.PHCollectionListType, subtype PHCollectionListSubtype, options *raw.PHFetchOptions) *raw.PHFetchResult[*raw.PHCollectionList] {
-	return raw.PHCollectionListFetchCollectionListsWithTypeSubtypeOptions(collectionListType, raw.PHCollectionListSubtype(subtype), options)
+// Creates a temporary collection list containing the asset collections in the specified fetch result.
+func TransientCollectionListWithCollectionsFetchResultTitle(fetchResult obj.Object, title string) *CollectionList {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHCollectionList")), objc.RegisterName("transientCollectionListWithCollectionsFetchResult:title:"), objref.IDOf(fetchResult), purego.NSString(title))
+	return CollectionListFromID(_r)
 }
 
-// TransientCollectionListWithCollectionsTitle calls the underlying PHCollectionListTransientCollectionListWithCollectionsTitle.
-func TransientCollectionListWithCollectionsTitle(collections *foundation.NSArray[*raw.PHCollection], title string) *CollectionList {
-	_r := raw.PHCollectionListTransientCollectionListWithCollectionsTitle(collections, foundation.NSStringStringWithUTF8String(title))
-	if _r == nil {
-		return nil
-	}
-	return &CollectionList{inner: _r}
-}
-
-// TransientCollectionListWithCollectionsFetchResultTitle calls the underlying PHCollectionListTransientCollectionListWithCollectionsFetchResultTitle.
-func TransientCollectionListWithCollectionsFetchResultTitle(fetchResult *raw.PHFetchResult[*raw.PHCollection], title string) *CollectionList {
-	_r := raw.PHCollectionListTransientCollectionListWithCollectionsFetchResultTitle(fetchResult, foundation.NSStringStringWithUTF8String(title))
-	if _r == nil {
-		return nil
-	}
-	return &CollectionList{inner: _r}
-}
-
-// CreationRequestForCollectionListWithTitle calls the underlying PHCollectionListChangeRequestCreationRequestForCollectionListWithTitle.
+// Creates a request for adding a new collection list to the Photos library.
 func CreationRequestForCollectionListWithTitle(title string) *CollectionListChangeRequest {
-	_r := raw.PHCollectionListChangeRequestCreationRequestForCollectionListWithTitle(foundation.NSStringStringWithUTF8String(title))
-	if _r == nil {
-		return nil
-	}
-	return &CollectionListChangeRequest{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHCollectionListChangeRequest")), objc.RegisterName("creationRequestForCollectionListWithTitle:"), purego.NSString(title))
+	return CollectionListChangeRequestFromID(_r)
 }
 
-// DeleteCollectionLists calls the underlying PHCollectionListChangeRequestDeleteCollectionLists.
-func DeleteCollectionLists(collectionLists foundation.NSFastEnumeration) {
-	raw.PHCollectionListChangeRequestDeleteCollectionLists(collectionLists)
+// Creates a request for modifying the specified collection list.
+func ChangeRequestForCollectionList(collectionList *CollectionList) *CollectionListChangeRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHCollectionListChangeRequest")), objc.RegisterName("changeRequestForCollectionList:"), objref.IDOf(collectionList))
+	return CollectionListChangeRequestFromID(_r)
 }
 
-// ChangeRequestForCollectionList calls the underlying PHCollectionListChangeRequestChangeRequestForCollectionList.
-func ChangeRequestForCollectionList(collectionList *raw.PHCollectionList) *CollectionListChangeRequest {
-	_r := raw.PHCollectionListChangeRequestChangeRequestForCollectionList(collectionList)
-	if _r == nil {
-		return nil
-	}
-	return &CollectionListChangeRequest{inner: _r}
+// Creates a request for modifying the specified collection list, with a fetch result for tracking changes.
+func ChangeRequestForCollectionListChildCollections(collectionList *CollectionList, childCollections obj.Object) *CollectionListChangeRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHCollectionListChangeRequest")), objc.RegisterName("changeRequestForCollectionList:childCollections:"), objref.IDOf(collectionList), objref.IDOf(childCollections))
+	return CollectionListChangeRequestFromID(_r)
 }
 
-// ChangeRequestForCollectionListChildCollections calls the underlying PHCollectionListChangeRequestChangeRequestForCollectionListChildCollections.
-func ChangeRequestForCollectionListChildCollections(collectionList *raw.PHCollectionList, childCollections *raw.PHFetchResult[*raw.PHCollection]) *CollectionListChangeRequest {
-	_r := raw.PHCollectionListChangeRequestChangeRequestForCollectionListChildCollections(collectionList, childCollections)
-	if _r == nil {
-		return nil
-	}
-	return &CollectionListChangeRequest{inner: _r}
+// Creates a request to add, remove, or rearrange child collections in the top-level collection list.
+func ChangeRequestForTopLevelCollectionListUserCollections(childCollections obj.Object) *CollectionListChangeRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHCollectionListChangeRequest")), objc.RegisterName("changeRequestForTopLevelCollectionListUserCollections:"), objref.IDOf(childCollections))
+	return CollectionListChangeRequestFromID(_r)
 }
 
-// ChangeRequestForTopLevelCollectionListUserCollections calls the underlying PHCollectionListChangeRequestChangeRequestForTopLevelCollectionListUserCollections.
-func ChangeRequestForTopLevelCollectionListUserCollections(childCollections *raw.PHFetchResult[*raw.PHCollection]) *CollectionListChangeRequest {
-	_r := raw.PHCollectionListChangeRequestChangeRequestForTopLevelCollectionListUserCollections(childCollections)
-	if _r == nil {
-		return nil
-	}
-	return &CollectionListChangeRequest{inner: _r}
+// Creates a change details object that summarizes the differences between two fetch results.
+func ChangeDetailsFromFetchResultToFetchResultChangedObjects(fromResult obj.Object, toResult obj.Object, changedObjects []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("PHFetchResultChangeDetails")), objc.RegisterName("changeDetailsFromFetchResult:toFetchResult:changedObjects:"), objref.IDOf(fromResult), objref.IDOf(toResult), purego.SliceToNSArray(changedObjects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return obj.Wrap(_r)
 }
 
-// ChangeDetailsFromFetchResultToFetchResultChangedObjects calls the underlying PHFetchResultChangeDetailsChangeDetailsFromFetchResultToFetchResultChangedObjects.
-func ChangeDetailsFromFetchResultToFetchResultChangedObjects(fromResult *raw.PHFetchResult[objc.ID], toResult *raw.PHFetchResult[objc.ID], changedObjects *foundation.NSArray[objc.ID]) *raw.PHFetchResultChangeDetails[objc.ID] {
-	return raw.PHFetchResultChangeDetailsChangeDetailsFromFetchResultToFetchResultChangedObjects(fromResult, toResult, changedObjects)
-}
-
-// PHImageManagerDefaultManager calls the underlying PHImageManagerDefaultManager.
+// Returns the shared image manager object.
 func PHImageManagerDefaultManager() *ImageManager {
-	_r := raw.PHImageManagerDefaultManager()
-	if _r == nil {
-		return nil
-	}
-	return &ImageManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHImageManager")), objc.RegisterName("defaultManager"))
+	return ImageManagerFromID(_r)
 }
 
-// RequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler calls the underlying PHLivePhotoRequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler.
-func RequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler(fileURLs *foundation.NSArray[*foundation.NSURL], image *appkit.NSImage, targetSize corefoundation.CGSize, contentMode PHImageContentMode, resultHandler func(*raw.PHLivePhoto, *foundation.NSDictionary[objc.ID, objc.ID])) int32 {
-	return raw.PHLivePhotoRequestLivePhotoWithResourceFileURLsPlaceholderImageTargetSizeContentModeResultHandler(fileURLs, image, targetSize, raw.PHImageContentMode(contentMode), resultHandler)
-}
-
-// CancelLivePhotoRequestWithRequestID calls the underlying PHLivePhotoCancelLivePhotoRequestWithRequestID.
+// Cancels an asynchronous request
 func CancelLivePhotoRequestWithRequestID(requestID int32) {
-	raw.PHLivePhotoCancelLivePhotoRequestWithRequestID(requestID)
+	objc.Send[objc.ID](objc.ID(_class("PHLivePhoto")), objc.RegisterName("cancelLivePhotoRequestWithRequestID:"), requestID)
 }
 
-// SharedPhotoLibrary calls the underlying PHPhotoLibrarySharedPhotoLibrary.
+// Retrieves the shared photo library object.
 func SharedPhotoLibrary() *PhotoLibrary {
-	_r := raw.PHPhotoLibrarySharedPhotoLibrary()
-	if _r == nil {
-		return nil
-	}
-	return &PhotoLibrary{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("PHPhotoLibrary")), objc.RegisterName("sharedPhotoLibrary"))
+	return PhotoLibraryFromID(_r)
 }
 
-// AuthorizationStatusForAccessLevel calls the underlying PHPhotoLibraryAuthorizationStatusForAccessLevel.
-func AuthorizationStatusForAccessLevel(accessLevel PHAccessLevel) PHAuthorizationStatus {
-	return PHAuthorizationStatus(raw.PHPhotoLibraryAuthorizationStatusForAccessLevel(raw.PHAccessLevel(accessLevel)))
+// Returns the app’s authorization to access the user’s photo library for the specified access level.
+func AuthorizationStatusForAccessLevel(accessLevel AccessLevel) AuthorizationStatus {
+	_r := objc.Send[AuthorizationStatus](objc.ID(_class("PHPhotoLibrary")), objc.RegisterName("authorizationStatusForAccessLevel:"), accessLevel)
+	return _r
 }
 
-// RequestAuthorizationForAccessLevelHandler calls the underlying PHPhotoLibraryRequestAuthorizationForAccessLevelHandler.
-func RequestAuthorizationForAccessLevelHandler(accessLevel PHAccessLevel, handler func(PHAuthorizationStatus)) {
-	raw.PHPhotoLibraryRequestAuthorizationForAccessLevelHandler(raw.PHAccessLevel(accessLevel), func(_a0 raw.PHAuthorizationStatus) { handler(PHAuthorizationStatus(_a0)) })
-}
-
-// AuthorizationStatus calls the underlying PHPhotoLibraryAuthorizationStatus.
-func AuthorizationStatus() PHAuthorizationStatus {
-	return PHAuthorizationStatus(raw.PHPhotoLibraryAuthorizationStatus())
-}
-
-// RequestAuthorization calls the underlying PHPhotoLibraryRequestAuthorization.
-func RequestAuthorization(handler func(PHAuthorizationStatus)) {
-	raw.PHPhotoLibraryRequestAuthorization(func(_a0 raw.PHAuthorizationStatus) { handler(PHAuthorizationStatus(_a0)) })
+// Returns information about your app’s authorization to access the user’s photo library.
+func PHPhotoLibraryAuthorizationStatus() AuthorizationStatus {
+	_r := objc.Send[AuthorizationStatus](objc.ID(_class("PHPhotoLibrary")), objc.RegisterName("authorizationStatus"))
+	return _r
 }

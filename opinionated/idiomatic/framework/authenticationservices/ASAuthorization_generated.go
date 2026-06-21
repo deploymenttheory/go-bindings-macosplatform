@@ -5,57 +5,68 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The encapsulation of a successful authorization by a controller.
 //
-// Authorization wraps [raw.ASAuthorization] with a fluent Go API.
+// Authorization is an idiomatic wrapper over the Objective-C class ASAuthorization.
 type Authorization struct {
-	inner *raw.ASAuthorization
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorization].
-func (x *Authorization) Unwrap() *raw.ASAuthorization { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Authorization) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationFromID adopts an existing object pointer as a Authorization (nil for 0).
+// AuthorizationFromID adopts an existing Objective-C object as a Authorization
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationFromID(id objc.ID) *Authorization {
 	if id == 0 {
 		return nil
 	}
-	return &Authorization{inner: raw.ASAuthorizationFromID(id)}
+	x := &Authorization{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorization creates a new [Authorization].
+// authorizationAdopt wraps an Objective-C object that this code just created as a
+// Authorization (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationAdopt(id objc.ID) *Authorization {
+	if id == 0 {
+		return nil
+	}
+	x := &Authorization{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Authorization) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Authorization) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Authorization) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAuthorization creates a new Authorization.
 func NewAuthorization() *Authorization {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorization")), objc.RegisterName("new"))
-	return &Authorization{inner: raw.ASAuthorizationFromID(_id)}
-}
-
-// @abstract Provider which was used to generate this authorization response.
-//
-// Provider calls the underlying Provider.
-func (x *Authorization) Provider() raw.ASAuthorizationProvider {
-	return x.inner.Provider()
-}
-
-// @abstract The credential that was returned by the authorization provider. Authorization provider type should be used to determine how to introspect the credential.
-//
-// Credential calls the underlying Credential.
-func (x *Authorization) Credential() raw.ASAuthorizationCredential {
-	return x.inner.Credential()
+	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorization")), objc.RegisterName("new"))
+	return authorizationAdopt(_id)
 }
 
 // Authorizationable is the interface implemented by [Authorization], for mocking and DI.
 type Authorizationable interface {
-	Unwrap() *raw.ASAuthorization
-	Provider() raw.ASAuthorizationProvider
-	Credential() raw.ASAuthorizationCredential
+	obj.Object
 }
 
 var _ Authorizationable = (*Authorization)(nil)

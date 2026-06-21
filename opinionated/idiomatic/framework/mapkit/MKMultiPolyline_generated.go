@@ -5,87 +5,93 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A collection of multipolyline shapes, each consisting of one or more connected line segments.
 //
-// MultiPolyline wraps [raw.MKMultiPolyline] with a fluent Go API.
+// MultiPolyline is an idiomatic wrapper over the Objective-C class MKMultiPolyline.
 type MultiPolyline struct {
-	inner *raw.MKMultiPolyline
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKMultiPolyline].
-func (x *MultiPolyline) Unwrap() *raw.MKMultiPolyline { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MultiPolyline) ID() objc.ID { return x.inner.Ptr() }
-
-// MultiPolylineFromID adopts an existing object pointer as a MultiPolyline (nil for 0).
+// MultiPolylineFromID adopts an existing Objective-C object as a MultiPolyline
+// (nil for 0), retaining it and registering a release finalizer.
 func MultiPolylineFromID(id objc.ID) *MultiPolyline {
 	if id == 0 {
 		return nil
 	}
-	return &MultiPolyline{inner: raw.MKMultiPolylineFromID(id)}
+	x := &MultiPolyline{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// multiPolylineAdopt wraps an Objective-C object that this code just created as a
+// MultiPolyline (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func multiPolylineAdopt(id objc.ID) *MultiPolyline {
+	if id == 0 {
+		return nil
+	}
+	x := &MultiPolyline{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MultiPolyline) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MultiPolyline) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MultiPolyline) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a multipolyline object using the provided polylines.
 //
-// NewMultiPolylineWithPolylines creates a new [MultiPolyline].
-func NewMultiPolylineWithPolylines(polylines ...PolylineProvider) *MultiPolyline {
-	_ptrs := make([]objc.ID, len(polylines))
-	for _i, _v := range polylines {
-		_ptrs[_i] = _v.asPolyline().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.MKPolyline]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.MKPolyline](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.MKPolyline](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMultiPolyline")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPolylines:"), _arg0.Ptr())
-	return &MultiPolyline{inner: raw.MKMultiPolylineFromID(_id)}
+// NewMultiPolylineWithPolylines creates a new MultiPolyline.
+func NewMultiPolylineWithPolylines(polylines []*Polyline) *MultiPolyline {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMultiPolyline")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPolylines:"), purego.SliceToNSArray(polylines, func(_v *Polyline) objc.ID { return objref.IDOf(_v) }))
+	return multiPolylineAdopt(_id)
 }
 
 // The title of the shape annotation.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *MultiPolyline) WithTitle(title string) *MultiPolyline {
-	x.inner.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // The subtitle of the shape annotation.
 //
-// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
 func (x *MultiPolyline) WithSubtitle(subtitle string) *MultiPolyline {
-	x.inner.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
 // Polylines returns the collection as a Go slice.
 func (x *MultiPolyline) Polylines() []*Polyline {
-	arr := x.inner.Polylines()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Polyline {
-		return &Polyline{inner: raw.MKPolylineFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("polylines"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Polyline { return PolylineFromID(_id) })
 }
-
-func (x *MultiPolyline) asShape() *raw.MKShape { return &x.inner.MKShape }
 
 // MultiPolylineable is the interface implemented by [MultiPolyline], for mocking and DI.
 type MultiPolylineable interface {
-	Unwrap() *raw.MKMultiPolyline
+	obj.Object
 	WithTitle(title string) *MultiPolyline
 	WithSubtitle(subtitle string) *MultiPolyline
 	Polylines() []*Polyline

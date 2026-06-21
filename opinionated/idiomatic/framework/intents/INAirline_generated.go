@@ -5,73 +5,95 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The information that describes an airline.
 //
-// Airline wraps [raw.INAirline] with a fluent Go API.
+// Airline is an idiomatic wrapper over the Objective-C class INAirline.
 type Airline struct {
-	inner *raw.INAirline
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INAirline].
-func (x *Airline) Unwrap() *raw.INAirline { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Airline) ID() objc.ID { return x.inner.Ptr() }
-
-// AirlineFromID adopts an existing object pointer as a Airline (nil for 0).
+// AirlineFromID adopts an existing Objective-C object as a Airline
+// (nil for 0), retaining it and registering a release finalizer.
 func AirlineFromID(id objc.ID) *Airline {
 	if id == 0 {
 		return nil
 	}
-	return &Airline{inner: raw.INAirlineFromID(id)}
+	x := &Airline{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// airlineAdopt wraps an Objective-C object that this code just created as a
+// Airline (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func airlineAdopt(id objc.ID) *Airline {
+	if id == 0 {
+		return nil
+	}
+	x := &Airline{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Airline) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Airline) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Airline) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new airline object with the specified contents and attributes.
 //
-// NewAirlineWithNameIataCodeIcaoCode creates a new [Airline].
+// NewAirlineWithNameIataCodeIcaoCode creates a new Airline.
 func NewAirlineWithNameIataCodeIcaoCode(name string, iataCode string, icaoCode string) *Airline {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INAirline")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:iataCode:icaoCode:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(iataCode).Ptr(), foundation.NSStringStringWithUTF8String(icaoCode).Ptr())
-	return &Airline{inner: raw.INAirlineFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INAirline")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:iataCode:icaoCode:"), purego.NSString(name), purego.NSString(iataCode), purego.NSString(icaoCode))
+	return airlineAdopt(_id)
 }
 
-// Name calls the underlying Name.
 func (x *Airline) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// IataCode calls the underlying IataCode.
 func (x *Airline) IataCode() string {
-	_r := x.inner.IataCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iataCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// IcaoCode calls the underlying IcaoCode.
 func (x *Airline) IcaoCode() string {
-	_r := x.inner.IcaoCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icaoCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Airlineable is the interface implemented by [Airline], for mocking and DI.
 type Airlineable interface {
-	Unwrap() *raw.INAirline
+	obj.Object
 	Name() string
 	IataCode() string
 	IcaoCode() string

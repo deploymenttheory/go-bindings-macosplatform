@@ -5,55 +5,79 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A type to represent the output of the requested large binary object operation, which returns in a passkey sign-in response.
 //
-// AuthorizationPublicKeyCredentialLargeBlobAssertionOutput wraps [raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput] with a fluent Go API.
+// AuthorizationPublicKeyCredentialLargeBlobAssertionOutput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput.
 type AuthorizationPublicKeyCredentialLargeBlobAssertionOutput struct {
-	inner *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput].
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) Unwrap() *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID adopts an existing object pointer as a AuthorizationPublicKeyCredentialLargeBlobAssertionOutput (nil for 0).
+// AuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID adopts an existing Objective-C object as a AuthorizationPublicKeyCredentialLargeBlobAssertionOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID(id objc.ID) *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationPublicKeyCredentialLargeBlobAssertionOutput{inner: raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID(id)}
+	x := &AuthorizationPublicKeyCredentialLargeBlobAssertionOutput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorizationPublicKeyCredentialLargeBlobAssertionOutput creates a new [AuthorizationPublicKeyCredentialLargeBlobAssertionOutput].
+// authorizationPublicKeyCredentialLargeBlobAssertionOutputAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationPublicKeyCredentialLargeBlobAssertionOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationPublicKeyCredentialLargeBlobAssertionOutputAdopt(id objc.ID) *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationPublicKeyCredentialLargeBlobAssertionOutput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAuthorizationPublicKeyCredentialLargeBlobAssertionOutput creates a new AuthorizationPublicKeyCredentialLargeBlobAssertionOutput.
 func NewAuthorizationPublicKeyCredentialLargeBlobAssertionOutput() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput")), objc.RegisterName("new"))
-	return &AuthorizationPublicKeyCredentialLargeBlobAssertionOutput{inner: raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput")), objc.RegisterName("new"))
+	return authorizationPublicKeyCredentialLargeBlobAssertionOutputAdopt(_id)
 }
 
-// ReadData calls the underlying ReadData.
-func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) ReadData() *foundation.NSData {
-	return x.inner.ReadData()
+func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) ReadData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readData"))
+	return obj.Wrap(_r)
 }
 
-// DidWrite calls the underlying DidWrite.
 func (x *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) DidWrite() bool {
-	return x.inner.DidWrite()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("didWrite"))
+	return _r
 }
 
 // AuthorizationPublicKeyCredentialLargeBlobAssertionOutputable is the interface implemented by [AuthorizationPublicKeyCredentialLargeBlobAssertionOutput], for mocking and DI.
 type AuthorizationPublicKeyCredentialLargeBlobAssertionOutputable interface {
-	Unwrap() *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput
-	ReadData() *foundation.NSData
+	obj.Object
+	ReadData() obj.Object
 	DidWrite() bool
 }
 

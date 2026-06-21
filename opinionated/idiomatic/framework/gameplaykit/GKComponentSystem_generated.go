@@ -5,117 +5,112 @@
 package gameplaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Manages periodic update messages for all component objects of a specified class.
 //
-// ComponentSystem wraps [raw.GKComponentSystem] with a fluent Go API.
+// ComponentSystem is an idiomatic wrapper over the Objective-C class GKComponentSystem.
 type ComponentSystem struct {
-	inner *raw.GKComponentSystem[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKComponentSystem].
-func (x *ComponentSystem) Unwrap() *raw.GKComponentSystem[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ComponentSystem) ID() objc.ID { return x.inner.Ptr() }
-
-// ComponentSystemFromID adopts an existing object pointer as a ComponentSystem (nil for 0).
+// ComponentSystemFromID adopts an existing Objective-C object as a ComponentSystem
+// (nil for 0), retaining it and registering a release finalizer.
 func ComponentSystemFromID(id objc.ID) *ComponentSystem {
 	if id == 0 {
 		return nil
 	}
-	return &ComponentSystem{inner: raw.GKComponentSystemFromID[objc.ID](id)}
+	x := &ComponentSystem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes a component system to manage components of the specified class.
-//
-// NewComponentSystemWithComponentClass creates a new [ComponentSystem].
-func NewComponentSystemWithComponentClass(cls objc.Class) *ComponentSystem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKComponentSystem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComponentClass:"), cls)
-	return &ComponentSystem{inner: raw.GKComponentSystemFromID[objc.ID](_id)}
+// componentSystemAdopt wraps an Objective-C object that this code just created as a
+// ComponentSystem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func componentSystemAdopt(id objc.ID) *ComponentSystem {
+	if id == 0 {
+		return nil
+	}
+	x := &ComponentSystem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ComponentSystem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ComponentSystem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ComponentSystem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewComponentSystem creates a new ComponentSystem.
+func NewComponentSystem() *ComponentSystem {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKComponentSystem")), objc.RegisterName("new"))
+	return componentSystemAdopt(_id)
 }
 
 // Returns the component at the specified index in the system’s list of components.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *ComponentSystem) ObjectAtIndexedSubscript(idx uint) objc.ID {
-	return x.inner.ObjectAtIndexedSubscript(idx)
+func (x *ComponentSystem) ObjectAtIndexedSubscript(idx int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), idx)
+	return obj.Wrap(_r)
 }
 
 // Adds a component instance to the component system.
-//
-// AddComponent calls the underlying AddComponent.
-func (x *ComponentSystem) AddComponent(component objc.ID) {
-	x.inner.AddComponent(component)
+func (x *ComponentSystem) AddComponent(component obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addComponent:"), objref.IDOf(component))
 }
 
 // Adds any instances of the component system’s component class in the specified entity to the component system.
-//
-// AddComponentWithEntity calls the underlying AddComponentWithEntity.
-func (x *ComponentSystem) AddComponentWithEntity(entity *raw.GKEntity) {
-	x.inner.AddComponentWithEntity(entity)
+func (x *ComponentSystem) AddComponentWithEntity(entity *Entity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addComponentWithEntity:"), objref.IDOf(entity))
 }
 
 // Removes any instances of the component system’s component class in the specified entity from the component system.
-//
-// RemoveComponentWithEntity calls the underlying RemoveComponentWithEntity.
-func (x *ComponentSystem) RemoveComponentWithEntity(entity *raw.GKEntity) {
-	x.inner.RemoveComponentWithEntity(entity)
+func (x *ComponentSystem) RemoveComponentWithEntity(entity *Entity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeComponentWithEntity:"), objref.IDOf(entity))
 }
 
 // Removes the specified component instance from the component system.
-//
-// RemoveComponent calls the underlying RemoveComponent.
-func (x *ComponentSystem) RemoveComponent(component objc.ID) {
-	x.inner.RemoveComponent(component)
+func (x *ComponentSystem) RemoveComponent(component obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeComponent:"), objref.IDOf(component))
 }
 
 // Tells all component instances managed by the system to perform their custom periodic actions.
-//
-// UpdateWithDeltaTime calls the underlying UpdateWithDeltaTime.
 func (x *ComponentSystem) UpdateWithDeltaTime(seconds float64) {
-	x.inner.UpdateWithDeltaTime(seconds)
-}
-
-// Returns the class of the specified generic index
-//
-// ClassForGenericArgumentAtIndex calls the underlying ClassForGenericArgumentAtIndex.
-func (x *ComponentSystem) ClassForGenericArgumentAtIndex(index uint) objc.Class {
-	return x.inner.ClassForGenericArgumentAtIndex(index)
-}
-
-// The collection's component class. Any selector the component supports can be called on the system and it will be forwarded to each of the components in the collection.
-//
-// ComponentClass calls the underlying ComponentClass.
-func (x *ComponentSystem) ComponentClass() objc.Class {
-	return x.inner.ComponentClass()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithDeltaTime:"), seconds)
 }
 
 // The array of components currently in the system.
-//
-// Components calls the underlying Components.
-func (x *ComponentSystem) Components() *foundation.NSArray[objc.ID] {
-	return x.inner.Components()
+func (x *ComponentSystem) Components() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("components"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ComponentSystemable is the interface implemented by [ComponentSystem], for mocking and DI.
 type ComponentSystemable interface {
-	Unwrap() *raw.GKComponentSystem[objc.ID]
-	ObjectAtIndexedSubscript(idx uint) objc.ID
-	AddComponent(component objc.ID)
-	AddComponentWithEntity(entity *raw.GKEntity)
-	RemoveComponentWithEntity(entity *raw.GKEntity)
-	RemoveComponent(component objc.ID)
+	obj.Object
+	ObjectAtIndexedSubscript(idx int) obj.Object
+	AddComponent(component obj.Object)
+	AddComponentWithEntity(entity *Entity)
+	RemoveComponentWithEntity(entity *Entity)
+	RemoveComponent(component obj.Object)
 	UpdateWithDeltaTime(seconds float64)
-	ClassForGenericArgumentAtIndex(index uint) objc.Class
-	ComponentClass() objc.Class
-	Components() *foundation.NSArray[objc.ID]
+	Components() []obj.Object
 }
 
 var _ ComponentSystemable = (*ComponentSystem)(nil)

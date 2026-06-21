@@ -9,72 +9,72 @@ import (
 	"strings"
 )
 
-type PDFAccessPermissions uint64
+type AccessPermissions uint64
 
 const (
-	PDFAllowsLowQualityPrinting   PDFAccessPermissions = 1
-	PDFAllowsHighQualityPrinting  PDFAccessPermissions = 2
-	PDFAllowsDocumentChanges      PDFAccessPermissions = 4
-	PDFAllowsDocumentAssembly     PDFAccessPermissions = 8
-	PDFAllowsContentCopying       PDFAccessPermissions = 16
-	PDFAllowsContentAccessibility PDFAccessPermissions = 32
-	PDFAllowsCommenting           PDFAccessPermissions = 64
-	PDFAllowsFormFieldEntry       PDFAccessPermissions = 128
+	AllowsLowQualityPrinting   AccessPermissions = 1
+	AllowsHighQualityPrinting  AccessPermissions = 2
+	AllowsDocumentChanges      AccessPermissions = 4
+	AllowsDocumentAssembly     AccessPermissions = 8
+	AllowsContentCopying       AccessPermissions = 16
+	AllowsContentAccessibility AccessPermissions = 32
+	AllowsCommenting           AccessPermissions = 64
+	AllowsFormFieldEntry       AccessPermissions = 128
 )
 
-func (e PDFAccessPermissions) String() string {
+func (e AccessPermissions) String() string {
 	switch e {
-	case PDFAllowsLowQualityPrinting:
-		return "PDFAllowsLowQualityPrinting"
-	case PDFAllowsHighQualityPrinting:
-		return "PDFAllowsHighQualityPrinting"
-	case PDFAllowsDocumentChanges:
-		return "PDFAllowsDocumentChanges"
-	case PDFAllowsDocumentAssembly:
-		return "PDFAllowsDocumentAssembly"
-	case PDFAllowsContentCopying:
-		return "PDFAllowsContentCopying"
-	case PDFAllowsContentAccessibility:
-		return "PDFAllowsContentAccessibility"
-	case PDFAllowsCommenting:
-		return "PDFAllowsCommenting"
-	case PDFAllowsFormFieldEntry:
-		return "PDFAllowsFormFieldEntry"
+	case AllowsLowQualityPrinting:
+		return "AllowsLowQualityPrinting"
+	case AllowsHighQualityPrinting:
+		return "AllowsHighQualityPrinting"
+	case AllowsDocumentChanges:
+		return "AllowsDocumentChanges"
+	case AllowsDocumentAssembly:
+		return "AllowsDocumentAssembly"
+	case AllowsContentCopying:
+		return "AllowsContentCopying"
+	case AllowsContentAccessibility:
+		return "AllowsContentAccessibility"
+	case AllowsCommenting:
+		return "AllowsCommenting"
+	case AllowsFormFieldEntry:
+		return "AllowsFormFieldEntry"
 	default:
-		return fmt.Sprintf("PDFAccessPermissions(%d)", int64(e))
+		return fmt.Sprintf("AccessPermissions(%d)", int64(e))
 	}
 }
 
-type PDFActionNamedName int64
+type ActionNamedName int64
 
 const (
 	// The action has no name.
-	KPDFActionNamedNone PDFActionNamedName = 0
+	KPDFActionNamedNone ActionNamedName = 0
 	// The Next Page action.
-	KPDFActionNamedNextPage PDFActionNamedName = 1
+	KPDFActionNamedNextPage ActionNamedName = 1
 	// The Previous Page action.
-	KPDFActionNamedPreviousPage PDFActionNamedName = 2
+	KPDFActionNamedPreviousPage ActionNamedName = 2
 	// The First Page action.
-	KPDFActionNamedFirstPage PDFActionNamedName = 3
+	KPDFActionNamedFirstPage ActionNamedName = 3
 	// The Last Page action.
-	KPDFActionNamedLastPage PDFActionNamedName = 4
+	KPDFActionNamedLastPage ActionNamedName = 4
 	// The Go Back action.
-	KPDFActionNamedGoBack PDFActionNamedName = 5
+	KPDFActionNamedGoBack ActionNamedName = 5
 	// The Go Forward action.
-	KPDFActionNamedGoForward PDFActionNamedName = 6
+	KPDFActionNamedGoForward ActionNamedName = 6
 	// The Go to Page action.
-	KPDFActionNamedGoToPage PDFActionNamedName = 7
+	KPDFActionNamedGoToPage ActionNamedName = 7
 	// The Find action.
-	KPDFActionNamedFind PDFActionNamedName = 8
+	KPDFActionNamedFind ActionNamedName = 8
 	// The Print action.
-	KPDFActionNamedPrint PDFActionNamedName = 9
+	KPDFActionNamedPrint ActionNamedName = 9
 	// The Zoom In action.
-	KPDFActionNamedZoomIn PDFActionNamedName = 10
+	KPDFActionNamedZoomIn ActionNamedName = 10
 	// The Zoom Out action.
-	KPDFActionNamedZoomOut PDFActionNamedName = 11
+	KPDFActionNamedZoomOut ActionNamedName = 11
 )
 
-func (e PDFActionNamedName) String() string {
+func (e ActionNamedName) String() string {
 	switch e {
 	case KPDFActionNamedNone:
 		return "KPDFActionNamedNone"
@@ -101,39 +101,39 @@ func (e PDFActionNamedName) String() string {
 	case KPDFActionNamedZoomOut:
 		return "KPDFActionNamedZoomOut"
 	default:
-		return fmt.Sprintf("PDFActionNamedName(%d)", int64(e))
+		return fmt.Sprintf("ActionNamedName(%d)", int64(e))
 	}
 }
 
 // The mouse position over PDF view areas.
 // Bitmask — values may be combined with |.
-type PDFAreaOfInterest uint64
+type AreaOfInterest uint64
 
 const (
 	// The mouse is over an undefined area.
-	KPDFNoArea PDFAreaOfInterest = 0
+	KPDFNoArea AreaOfInterest = 0
 	// The mouse is over a page.
-	KPDFPageArea PDFAreaOfInterest = 1
+	KPDFPageArea AreaOfInterest = 1
 	// The mouse is over text.
-	KPDFTextArea PDFAreaOfInterest = 2
+	KPDFTextArea AreaOfInterest = 2
 	// The mouse is over an annotation.
-	KPDFAnnotationArea PDFAreaOfInterest = 4
+	KPDFAnnotationArea AreaOfInterest = 4
 	// The mouse is over a link.
-	KPDFLinkArea PDFAreaOfInterest = 8
+	KPDFLinkArea AreaOfInterest = 8
 	// The mouse is over a control.
-	KPDFControlArea PDFAreaOfInterest = 16
+	KPDFControlArea AreaOfInterest = 16
 	// The mouse is over a text field.
-	KPDFTextFieldArea PDFAreaOfInterest = 32
+	KPDFTextFieldArea AreaOfInterest = 32
 	// The mouse is over an icon.
-	KPDFIconArea PDFAreaOfInterest = 64
+	KPDFIconArea AreaOfInterest = 64
 	// The mouse is over a popup menu.
-	KPDFPopupArea PDFAreaOfInterest = 128
+	KPDFPopupArea AreaOfInterest = 128
 	// The mouse is over an image.
-	KPDFImageArea PDFAreaOfInterest = 256
-	KPDFAnyArea   PDFAreaOfInterest = 9223372036854775807
+	KPDFImageArea AreaOfInterest = 256
+	KPDFAnyArea   AreaOfInterest = 9223372036854775807
 )
 
-func (e PDFAreaOfInterest) String() string {
+func (e AreaOfInterest) String() string {
 	var parts []string
 	if e&KPDFPageArea != 0 {
 		parts = append(parts, "KPDFPageArea")
@@ -172,22 +172,22 @@ func (e PDFAreaOfInterest) String() string {
 }
 
 // PDF Kit annotation borders may have the following styles.
-type PDFBorderStyle int64
+type BorderStyle int64
 
 const (
 	// Solid border.
-	KPDFBorderStyleSolid PDFBorderStyle = 0
+	KPDFBorderStyleSolid BorderStyle = 0
 	// Dashed border.
-	KPDFBorderStyleDashed PDFBorderStyle = 1
+	KPDFBorderStyleDashed BorderStyle = 1
 	// Beveled border.
-	KPDFBorderStyleBeveled PDFBorderStyle = 2
+	KPDFBorderStyleBeveled BorderStyle = 2
 	// Inset border.
-	KPDFBorderStyleInset PDFBorderStyle = 3
+	KPDFBorderStyleInset BorderStyle = 3
 	// Underline border.
-	KPDFBorderStyleUnderline PDFBorderStyle = 4
+	KPDFBorderStyleUnderline BorderStyle = 4
 )
 
-func (e PDFBorderStyle) String() string {
+func (e BorderStyle) String() string {
 	switch e {
 	case KPDFBorderStyleSolid:
 		return "KPDFBorderStyleSolid"
@@ -200,27 +200,27 @@ func (e PDFBorderStyle) String() string {
 	case KPDFBorderStyleUnderline:
 		return "KPDFBorderStyleUnderline"
 	default:
-		return fmt.Sprintf("PDFBorderStyle(%d)", int64(e))
+		return fmt.Sprintf("BorderStyle(%d)", int64(e))
 	}
 }
 
 // The following box types may be used with PDFPage drawing and bounds-setting methods. See the Adobe PDF Specification for more information on box types, units, and coordinate systems.
-type PDFDisplayBox int64
+type DisplayBox int64
 
 const (
 	// A rectangle defining the boundaries of the physical medium for display or printing, expressed in default user-space units.
-	KPDFDisplayBoxMediaBox PDFDisplayBox = 0
+	KPDFDisplayBoxMediaBox DisplayBox = 0
 	// A rectangle defining the boundaries of the visible region , expressed in default user-space units. Default value equal to kPDFDisplayBoxMediaBox.
-	KPDFDisplayBoxCropBox PDFDisplayBox = 1
+	KPDFDisplayBoxCropBox DisplayBox = 1
 	// A rectangle defining the boundaries of the clip region for the page contents in a production environment. Default value equal to kPDFDisplayBoxCropBox.
-	KPDFDisplayBoxBleedBox PDFDisplayBox = 2
+	KPDFDisplayBoxBleedBox DisplayBox = 2
 	// A rectangle defining the intended boundaries of the finished page. Default value equal to kPDFDisplayBoxCropBox.
-	KPDFDisplayBoxTrimBox PDFDisplayBox = 3
+	KPDFDisplayBoxTrimBox DisplayBox = 3
 	// A rectangle defining the boundaries of the page’s meaningful content including surrounding white space intended for display. Default value equal to kPDFDisplayBoxCropBox.
-	KPDFDisplayBoxArtBox PDFDisplayBox = 4
+	KPDFDisplayBoxArtBox DisplayBox = 4
 )
 
-func (e PDFDisplayBox) String() string {
+func (e DisplayBox) String() string {
 	switch e {
 	case KPDFDisplayBoxMediaBox:
 		return "KPDFDisplayBoxMediaBox"
@@ -233,43 +233,43 @@ func (e PDFDisplayBox) String() string {
 	case KPDFDisplayBoxArtBox:
 		return "KPDFDisplayBoxArtBox"
 	default:
-		return fmt.Sprintf("PDFDisplayBox(%d)", int64(e))
+		return fmt.Sprintf("DisplayBox(%d)", int64(e))
 	}
 }
 
-type PDFDisplayDirection int64
+type DisplayDirection int64
 
 const (
-	KPDFDisplayDirectionVertical   PDFDisplayDirection = 0
-	KPDFDisplayDirectionHorizontal PDFDisplayDirection = 1
+	KPDFDisplayDirectionVertical   DisplayDirection = 0
+	KPDFDisplayDirectionHorizontal DisplayDirection = 1
 )
 
-func (e PDFDisplayDirection) String() string {
+func (e DisplayDirection) String() string {
 	switch e {
 	case KPDFDisplayDirectionVertical:
 		return "KPDFDisplayDirectionVertical"
 	case KPDFDisplayDirectionHorizontal:
 		return "KPDFDisplayDirectionHorizontal"
 	default:
-		return fmt.Sprintf("PDFDisplayDirection(%d)", int64(e))
+		return fmt.Sprintf("DisplayDirection(%d)", int64(e))
 	}
 }
 
 // A wrapper for the chosen display mode constant.
-type PDFDisplayMode int64
+type DisplayMode int64
 
 const (
 	// A display mode where the document displays one page at a time horizontally and vertically.
-	KPDFDisplaySinglePage PDFDisplayMode = 0
+	KPDFDisplaySinglePage DisplayMode = 0
 	// A display mode where the document displays in continuous mode vertically, with single-page width horizontally.
-	KPDFDisplaySinglePageContinuous PDFDisplayMode = 1
+	KPDFDisplaySinglePageContinuous DisplayMode = 1
 	// A display mode where the document displays two pages side-by-side.
-	KPDFDisplayTwoUp PDFDisplayMode = 2
+	KPDFDisplayTwoUp DisplayMode = 2
 	// A display mode where the document displays in continuous mode vertically and displays two pages side-by-side horizontally.
-	KPDFDisplayTwoUpContinuous PDFDisplayMode = 3
+	KPDFDisplayTwoUpContinuous DisplayMode = 3
 )
 
-func (e PDFDisplayMode) String() string {
+func (e DisplayMode) String() string {
 	switch e {
 	case KPDFDisplaySinglePage:
 		return "KPDFDisplaySinglePage"
@@ -280,23 +280,23 @@ func (e PDFDisplayMode) String() string {
 	case KPDFDisplayTwoUpContinuous:
 		return "KPDFDisplayTwoUpContinuous"
 	default:
-		return fmt.Sprintf("PDFDisplayMode(%d)", int64(e))
+		return fmt.Sprintf("DisplayMode(%d)", int64(e))
 	}
 }
 
 // An enumeration that specifies document permissions status.
-type PDFDocumentPermissions int64
+type DocumentPermissions int64
 
 const (
 	// The status that indicates no document permissions.
-	KPDFDocumentPermissionsNone PDFDocumentPermissions = 0
+	KPDFDocumentPermissionsNone DocumentPermissions = 0
 	// The status that indicates user document permissions.
-	KPDFDocumentPermissionsUser PDFDocumentPermissions = 1
+	KPDFDocumentPermissionsUser DocumentPermissions = 1
 	// The status that indicates owner document permissions.
-	KPDFDocumentPermissionsOwner PDFDocumentPermissions = 2
+	KPDFDocumentPermissionsOwner DocumentPermissions = 2
 )
 
-func (e PDFDocumentPermissions) String() string {
+func (e DocumentPermissions) String() string {
 	switch e {
 	case KPDFDocumentPermissionsNone:
 		return "KPDFDocumentPermissionsNone"
@@ -305,23 +305,23 @@ func (e PDFDocumentPermissions) String() string {
 	case KPDFDocumentPermissionsOwner:
 		return "KPDFDocumentPermissionsOwner"
 	default:
-		return fmt.Sprintf("PDFDocumentPermissions(%d)", int64(e))
+		return fmt.Sprintf("DocumentPermissions(%d)", int64(e))
 	}
 }
 
 // A wrapper for the specified interpolation quality.
-type PDFInterpolationQuality int64
+type InterpolationQuality int64
 
 const (
 	// The case where no interpolation quality is specified.
-	KPDFInterpolationQualityNone PDFInterpolationQuality = 0
+	KPDFInterpolationQualityNone InterpolationQuality = 0
 	// The case specifying low interpolation quality.
-	KPDFInterpolationQualityLow PDFInterpolationQuality = 1
+	KPDFInterpolationQualityLow InterpolationQuality = 1
 	// The case specifying high interpolation quality.
-	KPDFInterpolationQualityHigh PDFInterpolationQuality = 2
+	KPDFInterpolationQualityHigh InterpolationQuality = 2
 )
 
-func (e PDFInterpolationQuality) String() string {
+func (e InterpolationQuality) String() string {
 	switch e {
 	case KPDFInterpolationQualityNone:
 		return "KPDFInterpolationQualityNone"
@@ -330,29 +330,29 @@ func (e PDFInterpolationQuality) String() string {
 	case KPDFInterpolationQualityHigh:
 		return "KPDFInterpolationQualityHigh"
 	default:
-		return fmt.Sprintf("PDFInterpolationQuality(%d)", int64(e))
+		return fmt.Sprintf("InterpolationQuality(%d)", int64(e))
 	}
 }
 
 // The following constants specify the available line ending styles.
-type PDFLineStyle int64
+type LineStyle int64
 
 const (
 	// No line ending.
-	KPDFLineStyleNone PDFLineStyle = 0
+	KPDFLineStyleNone LineStyle = 0
 	// A square line ending filled with the annotation’s interior color, if any.
-	KPDFLineStyleSquare PDFLineStyle = 1
+	KPDFLineStyleSquare LineStyle = 1
 	// A circular line ending filled with the annotation’s interior color, if any.
-	KPDFLineStyleCircle PDFLineStyle = 2
+	KPDFLineStyleCircle LineStyle = 2
 	// A diamond-shaped line ending filled with the annotation’s interior color, if any.
-	KPDFLineStyleDiamond PDFLineStyle = 3
+	KPDFLineStyleDiamond LineStyle = 3
 	// An open arrowhead line ending, composed from two short lines meeting in an acute angle at the line end.
-	KPDFLineStyleOpenArrow PDFLineStyle = 4
+	KPDFLineStyleOpenArrow LineStyle = 4
 	// A closed arrowhead line ending, consisting of a triangle with the acute vertex at the line end and filled with the annotation’s interior color, if any.
-	KPDFLineStyleClosedArrow PDFLineStyle = 5
+	KPDFLineStyleClosedArrow LineStyle = 5
 )
 
-func (e PDFLineStyle) String() string {
+func (e LineStyle) String() string {
 	switch e {
 	case KPDFLineStyleNone:
 		return "KPDFLineStyleNone"
@@ -367,25 +367,25 @@ func (e PDFLineStyle) String() string {
 	case KPDFLineStyleClosedArrow:
 		return "KPDFLineStyleClosedArrow"
 	default:
-		return fmt.Sprintf("PDFLineStyle(%d)", int64(e))
+		return fmt.Sprintf("LineStyle(%d)", int64(e))
 	}
 }
 
 // The styles available for markup annotations in PDFKit.
-type PDFMarkupType int64
+type MarkupType int64
 
 const (
 	// Highlight style for the markup.
-	KPDFMarkupTypeHighlight PDFMarkupType = 0
+	KPDFMarkupTypeHighlight MarkupType = 0
 	// Strikethrough style for the markup.
-	KPDFMarkupTypeStrikeOut PDFMarkupType = 1
+	KPDFMarkupTypeStrikeOut MarkupType = 1
 	// Underline style for the markup.
-	KPDFMarkupTypeUnderline PDFMarkupType = 2
+	KPDFMarkupTypeUnderline MarkupType = 2
 	// The redaction style for markup.
-	KPDFMarkupTypeRedact PDFMarkupType = 3
+	KPDFMarkupTypeRedact MarkupType = 3
 )
 
-func (e PDFMarkupType) String() string {
+func (e MarkupType) String() string {
 	switch e {
 	case KPDFMarkupTypeHighlight:
 		return "KPDFMarkupTypeHighlight"
@@ -396,23 +396,23 @@ func (e PDFMarkupType) String() string {
 	case KPDFMarkupTypeRedact:
 		return "KPDFMarkupTypeRedact"
 	default:
-		return fmt.Sprintf("PDFMarkupType(%d)", int64(e))
+		return fmt.Sprintf("MarkupType(%d)", int64(e))
 	}
 }
 
 // The type of scaling to be used when printing a page (see PDFDocument).
-type PDFPrintScalingMode int64
+type PrintScalingMode int64
 
 const (
 	// Do not apply scaling to the page when printing.
-	KPDFPrintPageScaleNone PDFPrintScalingMode = 0
+	KPDFPrintPageScaleNone PrintScalingMode = 0
 	// Scale each page up or down to best fit the paper size.
-	KPDFPrintPageScaleToFit PDFPrintScalingMode = 1
+	KPDFPrintPageScaleToFit PrintScalingMode = 1
 	// Scale large pages down to fit the paper size (smaller pages do not get scaled up).
-	KPDFPrintPageScaleDownToFit PDFPrintScalingMode = 2
+	KPDFPrintPageScaleDownToFit PrintScalingMode = 2
 )
 
-func (e PDFPrintScalingMode) String() string {
+func (e PrintScalingMode) String() string {
 	switch e {
 	case KPDFPrintPageScaleNone:
 		return "KPDFPrintPageScaleNone"
@@ -421,52 +421,31 @@ func (e PDFPrintScalingMode) String() string {
 	case KPDFPrintPageScaleDownToFit:
 		return "KPDFPrintPageScaleDownToFit"
 	default:
-		return fmt.Sprintf("PDFPrintScalingMode(%d)", int64(e))
-	}
-}
-
-type PDFSelectionGranularity uint64
-
-const (
-	PDFSelectionGranularityCharacter PDFSelectionGranularity = 0
-	PDFSelectionGranularityWord      PDFSelectionGranularity = 1
-	PDFSelectionGranularityLine      PDFSelectionGranularity = 2
-)
-
-func (e PDFSelectionGranularity) String() string {
-	switch e {
-	case PDFSelectionGranularityCharacter:
-		return "PDFSelectionGranularityCharacter"
-	case PDFSelectionGranularityWord:
-		return "PDFSelectionGranularityWord"
-	case PDFSelectionGranularityLine:
-		return "PDFSelectionGranularityLine"
-	default:
-		return fmt.Sprintf("PDFSelectionGranularity(%d)", int64(e))
+		return fmt.Sprintf("PrintScalingMode(%d)", int64(e))
 	}
 }
 
 // The types of icons that a text annotation can use.
-type PDFTextAnnotationIconType int64
+type TextAnnotationIconType int64
 
 const (
 	// Comment annotation icon.
-	KPDFTextAnnotationIconComment PDFTextAnnotationIconType = 0
+	KPDFTextAnnotationIconComment TextAnnotationIconType = 0
 	// Key annotation icon.
-	KPDFTextAnnotationIconKey PDFTextAnnotationIconType = 1
+	KPDFTextAnnotationIconKey TextAnnotationIconType = 1
 	// Note annotation icon.
-	KPDFTextAnnotationIconNote PDFTextAnnotationIconType = 2
+	KPDFTextAnnotationIconNote TextAnnotationIconType = 2
 	// Help annotation icon.
-	KPDFTextAnnotationIconHelp PDFTextAnnotationIconType = 3
+	KPDFTextAnnotationIconHelp TextAnnotationIconType = 3
 	// New Paragraph annotation icon.
-	KPDFTextAnnotationIconNewParagraph PDFTextAnnotationIconType = 4
+	KPDFTextAnnotationIconNewParagraph TextAnnotationIconType = 4
 	// Paragraph annotation icon.
-	KPDFTextAnnotationIconParagraph PDFTextAnnotationIconType = 5
+	KPDFTextAnnotationIconParagraph TextAnnotationIconType = 5
 	// Insert annotation icon.
-	KPDFTextAnnotationIconInsert PDFTextAnnotationIconType = 6
+	KPDFTextAnnotationIconInsert TextAnnotationIconType = 6
 )
 
-func (e PDFTextAnnotationIconType) String() string {
+func (e TextAnnotationIconType) String() string {
 	switch e {
 	case KPDFTextAnnotationIconComment:
 		return "KPDFTextAnnotationIconComment"
@@ -483,23 +462,23 @@ func (e PDFTextAnnotationIconType) String() string {
 	case KPDFTextAnnotationIconInsert:
 		return "KPDFTextAnnotationIconInsert"
 	default:
-		return fmt.Sprintf("PDFTextAnnotationIconType(%d)", int64(e))
+		return fmt.Sprintf("TextAnnotationIconType(%d)", int64(e))
 	}
 }
 
 // The state of a button annotation, either on, off, or mixed.
-type PDFWidgetCellState int64
+type WidgetCellState int64
 
 const (
 	// The button widget is in a mixed state, neither on nor off.
-	KPDFWidgetMixedState PDFWidgetCellState = -1
+	KPDFWidgetMixedState WidgetCellState = -1
 	// The button widget is in an unselected state.
-	KPDFWidgetOffState PDFWidgetCellState = 0
+	KPDFWidgetOffState WidgetCellState = 0
 	// The button widget is in a selected state.
-	KPDFWidgetOnState PDFWidgetCellState = 1
+	KPDFWidgetOnState WidgetCellState = 1
 )
 
-func (e PDFWidgetCellState) String() string {
+func (e WidgetCellState) String() string {
 	switch e {
 	case KPDFWidgetMixedState:
 		return "KPDFWidgetMixedState"
@@ -508,25 +487,25 @@ func (e PDFWidgetCellState) String() string {
 	case KPDFWidgetOnState:
 		return "KPDFWidgetOnState"
 	default:
-		return fmt.Sprintf("PDFWidgetCellState(%d)", int64(e))
+		return fmt.Sprintf("WidgetCellState(%d)", int64(e))
 	}
 }
 
 // The types of annotation buttons.
-type PDFWidgetControlType int64
+type WidgetControlType int64
 
 const (
 	// Unknown control type.
-	KPDFWidgetUnknownControl PDFWidgetControlType = -1
+	KPDFWidgetUnknownControl WidgetControlType = -1
 	// Push button control.
-	KPDFWidgetPushButtonControl PDFWidgetControlType = 0
+	KPDFWidgetPushButtonControl WidgetControlType = 0
 	// Radio button control.
-	KPDFWidgetRadioButtonControl PDFWidgetControlType = 1
+	KPDFWidgetRadioButtonControl WidgetControlType = 1
 	// Check box control.
-	KPDFWidgetCheckBoxControl PDFWidgetControlType = 2
+	KPDFWidgetCheckBoxControl WidgetControlType = 2
 )
 
-func (e PDFWidgetControlType) String() string {
+func (e WidgetControlType) String() string {
 	switch e {
 	case KPDFWidgetUnknownControl:
 		return "KPDFWidgetUnknownControl"
@@ -537,6 +516,6 @@ func (e PDFWidgetControlType) String() string {
 	case KPDFWidgetCheckBoxControl:
 		return "KPDFWidgetCheckBoxControl"
 	default:
-		return fmt.Sprintf("PDFWidgetControlType(%d)", int64(e))
+		return fmt.Sprintf("WidgetControlType(%d)", int64(e))
 	}
 }

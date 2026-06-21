@@ -5,19 +5,22 @@
 package network
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/network"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KNWErrorDomainPOSIX returns the value of the CoreFoundation reference constant kNWErrorDomainPOSIX as an objc.ID.
-func KNWErrorDomainPOSIX() objc.ID { return purego.CFConstant(raw.KNWErrorDomainPOSIX()) }
+// KNWErrorDomainPOSIX returns the value of the constant kNWErrorDomainPOSIX.
+func KNWErrorDomainPOSIX() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kNWErrorDomainPOSIX")))
+}
 
-// KNWErrorDomainDNS returns the value of the CoreFoundation reference constant kNWErrorDomainDNS as an objc.ID.
-func KNWErrorDomainDNS() objc.ID { return purego.CFConstant(raw.KNWErrorDomainDNS()) }
+// KNWErrorDomainDNS returns the value of the constant kNWErrorDomainDNS.
+func KNWErrorDomainDNS() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kNWErrorDomainDNS"))) }
 
-// KNWErrorDomainTLS returns the value of the CoreFoundation reference constant kNWErrorDomainTLS as an objc.ID.
-func KNWErrorDomainTLS() objc.ID { return purego.CFConstant(raw.KNWErrorDomainTLS()) }
+// KNWErrorDomainTLS returns the value of the constant kNWErrorDomainTLS.
+func KNWErrorDomainTLS() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kNWErrorDomainTLS"))) }
 
-// KNWErrorDomainWiFiAware returns the value of the CoreFoundation reference constant kNWErrorDomainWiFiAware as an objc.ID.
-func KNWErrorDomainWiFiAware() objc.ID { return purego.CFConstant(raw.KNWErrorDomainWiFiAware()) }
+// KNWErrorDomainWiFiAware returns the value of the constant kNWErrorDomainWiFiAware.
+func KNWErrorDomainWiFiAware() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kNWErrorDomainWiFiAware")))
+}

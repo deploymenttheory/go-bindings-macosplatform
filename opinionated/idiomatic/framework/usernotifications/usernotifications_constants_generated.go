@@ -5,42 +5,39 @@
 package usernotifications
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// UNErrorDomain returns the string constant UNErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func UNErrorDomain() objc.ID {
-	return purego.CFConstant(raw.UNErrorDomain())
+// UNErrorDomain returns the string constant UNErrorDomain, for use as a dictionary key or argument.
+func UNErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("UNErrorDomain"))) }
+
+// UNNotificationAttachmentOptionsTypeHintKey returns the string constant UNNotificationAttachmentOptionsTypeHintKey, for use as a dictionary key or argument.
+func UNNotificationAttachmentOptionsTypeHintKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("UNNotificationAttachmentOptionsTypeHintKey")))
 }
 
-// UNNotificationAttachmentOptionsTypeHintKey returns the string constant UNNotificationAttachmentOptionsTypeHintKey as an objc.ID, for use as a dictionary key or selector argument.
-func UNNotificationAttachmentOptionsTypeHintKey() objc.ID {
-	return purego.CFConstant(raw.UNNotificationAttachmentOptionsTypeHintKey())
+// UNNotificationAttachmentOptionsThumbnailHiddenKey returns the string constant UNNotificationAttachmentOptionsThumbnailHiddenKey, for use as a dictionary key or argument.
+func UNNotificationAttachmentOptionsThumbnailHiddenKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("UNNotificationAttachmentOptionsThumbnailHiddenKey")))
 }
 
-// UNNotificationAttachmentOptionsThumbnailHiddenKey returns the string constant UNNotificationAttachmentOptionsThumbnailHiddenKey as an objc.ID, for use as a dictionary key or selector argument.
-func UNNotificationAttachmentOptionsThumbnailHiddenKey() objc.ID {
-	return purego.CFConstant(raw.UNNotificationAttachmentOptionsThumbnailHiddenKey())
+// UNNotificationAttachmentOptionsThumbnailClippingRectKey returns the string constant UNNotificationAttachmentOptionsThumbnailClippingRectKey, for use as a dictionary key or argument.
+func UNNotificationAttachmentOptionsThumbnailClippingRectKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("UNNotificationAttachmentOptionsThumbnailClippingRectKey")))
 }
 
-// UNNotificationAttachmentOptionsThumbnailClippingRectKey returns the string constant UNNotificationAttachmentOptionsThumbnailClippingRectKey as an objc.ID, for use as a dictionary key or selector argument.
-func UNNotificationAttachmentOptionsThumbnailClippingRectKey() objc.ID {
-	return purego.CFConstant(raw.UNNotificationAttachmentOptionsThumbnailClippingRectKey())
+// UNNotificationAttachmentOptionsThumbnailTimeKey returns the string constant UNNotificationAttachmentOptionsThumbnailTimeKey, for use as a dictionary key or argument.
+func UNNotificationAttachmentOptionsThumbnailTimeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("UNNotificationAttachmentOptionsThumbnailTimeKey")))
 }
 
-// UNNotificationAttachmentOptionsThumbnailTimeKey returns the string constant UNNotificationAttachmentOptionsThumbnailTimeKey as an objc.ID, for use as a dictionary key or selector argument.
-func UNNotificationAttachmentOptionsThumbnailTimeKey() objc.ID {
-	return purego.CFConstant(raw.UNNotificationAttachmentOptionsThumbnailTimeKey())
+// UNNotificationDefaultActionIdentifier returns the string constant UNNotificationDefaultActionIdentifier, for use as a dictionary key or argument.
+func UNNotificationDefaultActionIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("UNNotificationDefaultActionIdentifier")))
 }
 
-// UNNotificationDefaultActionIdentifier returns the string constant UNNotificationDefaultActionIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func UNNotificationDefaultActionIdentifier() objc.ID {
-	return purego.CFConstant(raw.UNNotificationDefaultActionIdentifier())
-}
-
-// UNNotificationDismissActionIdentifier returns the string constant UNNotificationDismissActionIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func UNNotificationDismissActionIdentifier() objc.ID {
-	return purego.CFConstant(raw.UNNotificationDismissActionIdentifier())
+// UNNotificationDismissActionIdentifier returns the string constant UNNotificationDismissActionIdentifier, for use as a dictionary key or argument.
+func UNNotificationDismissActionIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("UNNotificationDismissActionIdentifier")))
 }

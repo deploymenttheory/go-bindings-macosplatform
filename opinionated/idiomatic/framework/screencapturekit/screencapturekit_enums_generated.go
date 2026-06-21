@@ -10,92 +10,92 @@ import (
 )
 
 // Specifies whether the captured screen output is standard or high dynamic range.
-type SCCaptureDynamicRange int64
+type CaptureDynamicRange int64
 
 const (
 	// Specifies that the system captures the screen in standard dynamic range.
-	SCCaptureDynamicRangeSDR SCCaptureDynamicRange = 0
+	CaptureDynamicRangeSDR CaptureDynamicRange = 0
 	// Specifies that the system captures the screen in high dynamic range with attributes of the local display.
-	SCCaptureDynamicRangeHDRLocalDisplay SCCaptureDynamicRange = 1
+	CaptureDynamicRangeHDRLocalDisplay CaptureDynamicRange = 1
 	// Specifies that the system captures the screen in high dynamic range with attributes of the canonical display.
-	SCCaptureDynamicRangeHDRCanonicalDisplay SCCaptureDynamicRange = 2
+	CaptureDynamicRangeHDRCanonicalDisplay CaptureDynamicRange = 2
 )
 
-func (e SCCaptureDynamicRange) String() string {
+func (e CaptureDynamicRange) String() string {
 	switch e {
-	case SCCaptureDynamicRangeSDR:
-		return "SCCaptureDynamicRangeSDR"
-	case SCCaptureDynamicRangeHDRLocalDisplay:
-		return "SCCaptureDynamicRangeHDRLocalDisplay"
-	case SCCaptureDynamicRangeHDRCanonicalDisplay:
-		return "SCCaptureDynamicRangeHDRCanonicalDisplay"
+	case CaptureDynamicRangeSDR:
+		return "CaptureDynamicRangeSDR"
+	case CaptureDynamicRangeHDRLocalDisplay:
+		return "CaptureDynamicRangeHDRLocalDisplay"
+	case CaptureDynamicRangeHDRCanonicalDisplay:
+		return "CaptureDynamicRangeHDRCanonicalDisplay"
 	default:
-		return fmt.Sprintf("SCCaptureDynamicRange(%d)", int64(e))
+		return fmt.Sprintf("CaptureDynamicRange(%d)", int64(e))
 	}
 }
 
 // Available resolutions for content capture.
-type SCCaptureResolutionType int64
+type CaptureResolutionType int64
 
 const (
 	// Allow ScreenCaptureKit to automatically select the quality of content depending on factors such as network connection.
 	//
 	// Deprecated: Use SCShareableContentStyle instead
-	SCCaptureResolutionAutomatic SCCaptureResolutionType = 0
+	CaptureResolutionAutomatic CaptureResolutionType = 0
 	// Capture streaming content at the best available resolution.
 	//
 	// Deprecated: Use SCShareableContentStyle instead
-	SCCaptureResolutionBest SCCaptureResolutionType = 1
+	CaptureResolutionBest CaptureResolutionType = 1
 	// Capture streaming content with a one point to one pixel conversion factor.
-	SCCaptureResolutionNominal SCCaptureResolutionType = 2
+	CaptureResolutionNominal CaptureResolutionType = 2
 )
 
-func (e SCCaptureResolutionType) String() string {
+func (e CaptureResolutionType) String() string {
 	switch e {
-	case SCCaptureResolutionAutomatic:
-		return "SCCaptureResolutionAutomatic"
-	case SCCaptureResolutionBest:
-		return "SCCaptureResolutionBest"
-	case SCCaptureResolutionNominal:
-		return "SCCaptureResolutionNominal"
+	case CaptureResolutionAutomatic:
+		return "CaptureResolutionAutomatic"
+	case CaptureResolutionBest:
+		return "CaptureResolutionBest"
+	case CaptureResolutionNominal:
+		return "CaptureResolutionNominal"
 	default:
-		return fmt.Sprintf("SCCaptureResolutionType(%d)", int64(e))
+		return fmt.Sprintf("CaptureResolutionType(%d)", int64(e))
 	}
 }
 
 // Available modes for selecting streaming content from a picker presented by the operating system.
 // Bitmask — values may be combined with |.
-type SCContentSharingPickerMode uint64
+type ContentSharingPickerMode uint64
 
 const (
 	// The mode allowing the selection of a single window through the presented picker.
-	SCContentSharingPickerModeSingleWindow SCContentSharingPickerMode = 1
+	ContentSharingPickerModeSingleWindow ContentSharingPickerMode = 1
 	// The mode allowing the selection of multiple windows through the presented picker.
-	SCContentSharingPickerModeMultipleWindows SCContentSharingPickerMode = 2
+	ContentSharingPickerModeMultipleWindows ContentSharingPickerMode = 2
 	// The mode allowing the selection of a single application through the presented picker.
-	SCContentSharingPickerModeSingleApplication SCContentSharingPickerMode = 4
+	ContentSharingPickerModeSingleApplication ContentSharingPickerMode = 4
 	// The mode allowing the selection of multiple applications through the presented picker.
-	SCContentSharingPickerModeMultipleApplications SCContentSharingPickerMode = 8
+	ContentSharingPickerModeMultipleApplications ContentSharingPickerMode = 8
 	// The mode allowing the selection of a single display through the presented picker.
-	SCContentSharingPickerModeSingleDisplay SCContentSharingPickerMode = 16
+	ContentSharingPickerModeSingleDisplay ContentSharingPickerMode = 16
 )
 
-func (e SCContentSharingPickerMode) String() string {
+func (e ContentSharingPickerMode) String() string {
 	var parts []string
-	if e&SCContentSharingPickerModeSingleWindow != 0 {
-		parts = append(parts, "SCContentSharingPickerModeSingleWindow")
+	if e&ContentSharingPickerModeSingleWindow != 0 {
+		parts = append(parts, "ContentSharingPickerModeSingleWindow")
 	}
-	if e&SCContentSharingPickerModeMultipleWindows != 0 {
-		parts = append(parts, "SCContentSharingPickerModeMultipleWindows")
+	if e&ContentSharingPickerModeMultipleWindows != 0 {
+		parts = append(parts, "ContentSharingPickerModeMultipleWindows")
 	}
-	if e&SCContentSharingPickerModeSingleApplication != 0 {
-		parts = append(parts, "SCContentSharingPickerModeSingleApplication")
+	if e&ContentSharingPickerModeSingleApplication != 0 {
+		parts = append(parts, "ContentSharingPickerModeSingleApplication")
 	}
-	if e&SCContentSharingPickerModeMultipleApplications != 0 {
-		parts = append(parts, "SCContentSharingPickerModeMultipleApplications")
+	if e&ContentSharingPickerModeMultipleApplications != 0 {
+		parts = append(parts, "ContentSharingPickerModeMultipleApplications")
 	}
-	if e&SCContentSharingPickerModeSingleDisplay != 0 {
-		parts = append(parts, "SCContentSharingPickerModeSingleDisplay")
+	if e&ContentSharingPickerModeSingleDisplay != 0 {
+		parts = append(parts, "ContentSharingPickerModeSingleDisplay")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -104,244 +104,220 @@ func (e SCContentSharingPickerMode) String() string {
 }
 
 // Configures how to present streaming notifications to a streamer of Presenter Overlay.
-type SCPresenterOverlayAlertSetting int64
+type PresenterOverlayAlertSetting int64
 
 const (
 	// Displays an alert when using Presenter Overlay based on the System Settings.
-	SCPresenterOverlayAlertSettingSystem SCPresenterOverlayAlertSetting = 0
+	PresenterOverlayAlertSettingSystem PresenterOverlayAlertSetting = 0
 	// Never display an alert when using Presenter Overlay.
-	SCPresenterOverlayAlertSettingNever SCPresenterOverlayAlertSetting = 1
+	PresenterOverlayAlertSettingNever PresenterOverlayAlertSetting = 1
 	// Always display an alert when using Presenter Overlay.
-	SCPresenterOverlayAlertSettingAlways SCPresenterOverlayAlertSetting = 2
+	PresenterOverlayAlertSettingAlways PresenterOverlayAlertSetting = 2
 )
 
-func (e SCPresenterOverlayAlertSetting) String() string {
+func (e PresenterOverlayAlertSetting) String() string {
 	switch e {
-	case SCPresenterOverlayAlertSettingSystem:
-		return "SCPresenterOverlayAlertSettingSystem"
-	case SCPresenterOverlayAlertSettingNever:
-		return "SCPresenterOverlayAlertSettingNever"
-	case SCPresenterOverlayAlertSettingAlways:
-		return "SCPresenterOverlayAlertSettingAlways"
+	case PresenterOverlayAlertSettingSystem:
+		return "PresenterOverlayAlertSettingSystem"
+	case PresenterOverlayAlertSettingNever:
+		return "PresenterOverlayAlertSettingNever"
+	case PresenterOverlayAlertSettingAlways:
+		return "PresenterOverlayAlertSettingAlways"
 	default:
-		return fmt.Sprintf("SCPresenterOverlayAlertSetting(%d)", int64(e))
+		return fmt.Sprintf("PresenterOverlayAlertSetting(%d)", int64(e))
 	}
 }
 
-type SCScreenshotDisplayIntent int64
+type ScreenshotDisplayIntent int64
 
 const (
-	SCScreenshotDisplayIntentCanonical SCScreenshotDisplayIntent = 0
-	SCScreenshotDisplayIntentLocal     SCScreenshotDisplayIntent = 1
+	ScreenshotDisplayIntentCanonical ScreenshotDisplayIntent = 0
+	ScreenshotDisplayIntentLocal     ScreenshotDisplayIntent = 1
 )
 
-func (e SCScreenshotDisplayIntent) String() string {
+func (e ScreenshotDisplayIntent) String() string {
 	switch e {
-	case SCScreenshotDisplayIntentCanonical:
-		return "SCScreenshotDisplayIntentCanonical"
-	case SCScreenshotDisplayIntentLocal:
-		return "SCScreenshotDisplayIntentLocal"
+	case ScreenshotDisplayIntentCanonical:
+		return "ScreenshotDisplayIntentCanonical"
+	case ScreenshotDisplayIntentLocal:
+		return "ScreenshotDisplayIntentLocal"
 	default:
-		return fmt.Sprintf("SCScreenshotDisplayIntent(%d)", int64(e))
+		return fmt.Sprintf("ScreenshotDisplayIntent(%d)", int64(e))
 	}
 }
 
-type SCScreenshotDynamicRange int64
+type ScreenshotDynamicRange int64
 
 const (
-	SCScreenshotDynamicRangeSDR       SCScreenshotDynamicRange = 0
-	SCScreenshotDynamicRangeHDR       SCScreenshotDynamicRange = 1
-	SCScreenshotDynamicRangeSDRAndHDR SCScreenshotDynamicRange = 2
+	ScreenshotDynamicRangeSDR       ScreenshotDynamicRange = 0
+	ScreenshotDynamicRangeHDR       ScreenshotDynamicRange = 1
+	ScreenshotDynamicRangeSDRAndHDR ScreenshotDynamicRange = 2
 )
 
-func (e SCScreenshotDynamicRange) String() string {
+func (e ScreenshotDynamicRange) String() string {
 	switch e {
-	case SCScreenshotDynamicRangeSDR:
-		return "SCScreenshotDynamicRangeSDR"
-	case SCScreenshotDynamicRangeHDR:
-		return "SCScreenshotDynamicRangeHDR"
-	case SCScreenshotDynamicRangeSDRAndHDR:
-		return "SCScreenshotDynamicRangeSDRAndHDR"
+	case ScreenshotDynamicRangeSDR:
+		return "ScreenshotDynamicRangeSDR"
+	case ScreenshotDynamicRangeHDR:
+		return "ScreenshotDynamicRangeHDR"
+	case ScreenshotDynamicRangeSDRAndHDR:
+		return "ScreenshotDynamicRangeSDRAndHDR"
 	default:
-		return fmt.Sprintf("SCScreenshotDynamicRange(%d)", int64(e))
+		return fmt.Sprintf("ScreenshotDynamicRange(%d)", int64(e))
 	}
 }
 
 // The style of content presented in a stream.
-type SCShareableContentStyle int64
+type ShareableContentStyle int64
 
 const (
 	// The stream isn’t currently presenting any content.
-	SCShareableContentStyleNone SCShareableContentStyle = 0
+	ShareableContentStyleNone ShareableContentStyle = 0
 	// The stream is currently presenting one or more windows.
-	SCShareableContentStyleWindow SCShareableContentStyle = 1
+	ShareableContentStyleWindow ShareableContentStyle = 1
 	// The stream is currently presenting a complete display.
-	SCShareableContentStyleDisplay SCShareableContentStyle = 2
+	ShareableContentStyleDisplay ShareableContentStyle = 2
 	// The stream is currently presenting one or more applications.
-	SCShareableContentStyleApplication SCShareableContentStyle = 3
+	ShareableContentStyleApplication ShareableContentStyle = 3
 )
 
-func (e SCShareableContentStyle) String() string {
+func (e ShareableContentStyle) String() string {
 	switch e {
-	case SCShareableContentStyleNone:
-		return "SCShareableContentStyleNone"
-	case SCShareableContentStyleWindow:
-		return "SCShareableContentStyleWindow"
-	case SCShareableContentStyleDisplay:
-		return "SCShareableContentStyleDisplay"
-	case SCShareableContentStyleApplication:
-		return "SCShareableContentStyleApplication"
+	case ShareableContentStyleNone:
+		return "ShareableContentStyleNone"
+	case ShareableContentStyleWindow:
+		return "ShareableContentStyleWindow"
+	case ShareableContentStyleDisplay:
+		return "ShareableContentStyleDisplay"
+	case ShareableContentStyleApplication:
+		return "ShareableContentStyleApplication"
 	default:
-		return fmt.Sprintf("SCShareableContentStyle(%d)", int64(e))
+		return fmt.Sprintf("ShareableContentStyle(%d)", int64(e))
 	}
 }
 
-type SCStreamConfigurationPreset int64
+type StreamConfigurationPreset int64
 
 const (
-	SCStreamConfigurationPresetCaptureHDRStreamLocalDisplay         SCStreamConfigurationPreset = 0
-	SCStreamConfigurationPresetCaptureHDRStreamCanonicalDisplay     SCStreamConfigurationPreset = 1
-	SCStreamConfigurationPresetCaptureHDRScreenshotLocalDisplay     SCStreamConfigurationPreset = 2
-	SCStreamConfigurationPresetCaptureHDRScreenshotCanonicalDisplay SCStreamConfigurationPreset = 3
-	SCStreamConfigurationPresetCaptureHDRRecordingPreservedSDRHDR10 SCStreamConfigurationPreset = 4
+	StreamConfigurationPresetCaptureHDRStreamLocalDisplay         StreamConfigurationPreset = 0
+	StreamConfigurationPresetCaptureHDRStreamCanonicalDisplay     StreamConfigurationPreset = 1
+	StreamConfigurationPresetCaptureHDRScreenshotLocalDisplay     StreamConfigurationPreset = 2
+	StreamConfigurationPresetCaptureHDRScreenshotCanonicalDisplay StreamConfigurationPreset = 3
+	StreamConfigurationPresetCaptureHDRRecordingPreservedSDRHDR10 StreamConfigurationPreset = 4
 )
 
-func (e SCStreamConfigurationPreset) String() string {
+func (e StreamConfigurationPreset) String() string {
 	switch e {
-	case SCStreamConfigurationPresetCaptureHDRStreamLocalDisplay:
-		return "SCStreamConfigurationPresetCaptureHDRStreamLocalDisplay"
-	case SCStreamConfigurationPresetCaptureHDRStreamCanonicalDisplay:
-		return "SCStreamConfigurationPresetCaptureHDRStreamCanonicalDisplay"
-	case SCStreamConfigurationPresetCaptureHDRScreenshotLocalDisplay:
-		return "SCStreamConfigurationPresetCaptureHDRScreenshotLocalDisplay"
-	case SCStreamConfigurationPresetCaptureHDRScreenshotCanonicalDisplay:
-		return "SCStreamConfigurationPresetCaptureHDRScreenshotCanonicalDisplay"
-	case SCStreamConfigurationPresetCaptureHDRRecordingPreservedSDRHDR10:
-		return "SCStreamConfigurationPresetCaptureHDRRecordingPreservedSDRHDR10"
+	case StreamConfigurationPresetCaptureHDRStreamLocalDisplay:
+		return "StreamConfigurationPresetCaptureHDRStreamLocalDisplay"
+	case StreamConfigurationPresetCaptureHDRStreamCanonicalDisplay:
+		return "StreamConfigurationPresetCaptureHDRStreamCanonicalDisplay"
+	case StreamConfigurationPresetCaptureHDRScreenshotLocalDisplay:
+		return "StreamConfigurationPresetCaptureHDRScreenshotLocalDisplay"
+	case StreamConfigurationPresetCaptureHDRScreenshotCanonicalDisplay:
+		return "StreamConfigurationPresetCaptureHDRScreenshotCanonicalDisplay"
+	case StreamConfigurationPresetCaptureHDRRecordingPreservedSDRHDR10:
+		return "StreamConfigurationPresetCaptureHDRRecordingPreservedSDRHDR10"
 	default:
-		return fmt.Sprintf("SCStreamConfigurationPreset(%d)", int64(e))
+		return fmt.Sprintf("StreamConfigurationPreset(%d)", int64(e))
 	}
 }
 
 // Codes for user cancellation events and errors that can occur in ScreenCaptureKit.
-type SCStreamErrorCode int64
+type StreamErrorCode int64
 
 const (
-	SCStreamErrorUserDeclined                           SCStreamErrorCode = -3801
-	SCStreamErrorFailedToStart                          SCStreamErrorCode = -3802
-	SCStreamErrorMissingEntitlements                    SCStreamErrorCode = -3803
-	SCStreamErrorFailedApplicationConnectionInvalid     SCStreamErrorCode = -3804
-	SCStreamErrorFailedApplicationConnectionInterrupted SCStreamErrorCode = -3805
-	SCStreamErrorFailedNoMatchingApplicationContext     SCStreamErrorCode = -3806
-	SCStreamErrorAttemptToStartStreamState              SCStreamErrorCode = -3807
-	SCStreamErrorAttemptToStopStreamState               SCStreamErrorCode = -3808
-	SCStreamErrorAttemptToUpdateFilterState             SCStreamErrorCode = -3809
-	SCStreamErrorAttemptToConfigState                   SCStreamErrorCode = -3810
-	SCStreamErrorInternalError                          SCStreamErrorCode = -3811
-	SCStreamErrorInvalidParameter                       SCStreamErrorCode = -3812
-	SCStreamErrorNoWindowList                           SCStreamErrorCode = -3813
-	SCStreamErrorNoDisplayList                          SCStreamErrorCode = -3814
-	SCStreamErrorNoCaptureSource                        SCStreamErrorCode = -3815
-	SCStreamErrorRemovingStream                         SCStreamErrorCode = -3816
-	SCStreamErrorUserStopped                            SCStreamErrorCode = -3817
-	SCStreamErrorFailedToStartAudioCapture              SCStreamErrorCode = -3818
-	SCStreamErrorFailedToStopAudioCapture               SCStreamErrorCode = -3819
-	SCStreamErrorFailedToStartMicrophoneCapture         SCStreamErrorCode = -3820
-	SCStreamErrorSystemStoppedStream                    SCStreamErrorCode = -3821
+	StreamErrorUserDeclined                           StreamErrorCode = -3801
+	StreamErrorFailedToStart                          StreamErrorCode = -3802
+	StreamErrorMissingEntitlements                    StreamErrorCode = -3803
+	StreamErrorFailedApplicationConnectionInvalid     StreamErrorCode = -3804
+	StreamErrorFailedApplicationConnectionInterrupted StreamErrorCode = -3805
+	StreamErrorFailedNoMatchingApplicationContext     StreamErrorCode = -3806
+	StreamErrorAttemptToStartStreamState              StreamErrorCode = -3807
+	StreamErrorAttemptToStopStreamState               StreamErrorCode = -3808
+	StreamErrorAttemptToUpdateFilterState             StreamErrorCode = -3809
+	StreamErrorAttemptToConfigState                   StreamErrorCode = -3810
+	StreamErrorInternalError                          StreamErrorCode = -3811
+	StreamErrorInvalidParameter                       StreamErrorCode = -3812
+	StreamErrorNoWindowList                           StreamErrorCode = -3813
+	StreamErrorNoDisplayList                          StreamErrorCode = -3814
+	StreamErrorNoCaptureSource                        StreamErrorCode = -3815
+	StreamErrorRemovingStream                         StreamErrorCode = -3816
+	StreamErrorUserStopped                            StreamErrorCode = -3817
+	StreamErrorFailedToStartAudioCapture              StreamErrorCode = -3818
+	StreamErrorFailedToStopAudioCapture               StreamErrorCode = -3819
+	StreamErrorFailedToStartMicrophoneCapture         StreamErrorCode = -3820
+	StreamErrorSystemStoppedStream                    StreamErrorCode = -3821
 )
 
-func (e SCStreamErrorCode) String() string {
+func (e StreamErrorCode) String() string {
 	switch e {
-	case SCStreamErrorUserDeclined:
-		return "SCStreamErrorUserDeclined"
-	case SCStreamErrorFailedToStart:
-		return "SCStreamErrorFailedToStart"
-	case SCStreamErrorMissingEntitlements:
-		return "SCStreamErrorMissingEntitlements"
-	case SCStreamErrorFailedApplicationConnectionInvalid:
-		return "SCStreamErrorFailedApplicationConnectionInvalid"
-	case SCStreamErrorFailedApplicationConnectionInterrupted:
-		return "SCStreamErrorFailedApplicationConnectionInterrupted"
-	case SCStreamErrorFailedNoMatchingApplicationContext:
-		return "SCStreamErrorFailedNoMatchingApplicationContext"
-	case SCStreamErrorAttemptToStartStreamState:
-		return "SCStreamErrorAttemptToStartStreamState"
-	case SCStreamErrorAttemptToStopStreamState:
-		return "SCStreamErrorAttemptToStopStreamState"
-	case SCStreamErrorAttemptToUpdateFilterState:
-		return "SCStreamErrorAttemptToUpdateFilterState"
-	case SCStreamErrorAttemptToConfigState:
-		return "SCStreamErrorAttemptToConfigState"
-	case SCStreamErrorInternalError:
-		return "SCStreamErrorInternalError"
-	case SCStreamErrorInvalidParameter:
-		return "SCStreamErrorInvalidParameter"
-	case SCStreamErrorNoWindowList:
-		return "SCStreamErrorNoWindowList"
-	case SCStreamErrorNoDisplayList:
-		return "SCStreamErrorNoDisplayList"
-	case SCStreamErrorNoCaptureSource:
-		return "SCStreamErrorNoCaptureSource"
-	case SCStreamErrorRemovingStream:
-		return "SCStreamErrorRemovingStream"
-	case SCStreamErrorUserStopped:
-		return "SCStreamErrorUserStopped"
-	case SCStreamErrorFailedToStartAudioCapture:
-		return "SCStreamErrorFailedToStartAudioCapture"
-	case SCStreamErrorFailedToStopAudioCapture:
-		return "SCStreamErrorFailedToStopAudioCapture"
-	case SCStreamErrorFailedToStartMicrophoneCapture:
-		return "SCStreamErrorFailedToStartMicrophoneCapture"
-	case SCStreamErrorSystemStoppedStream:
-		return "SCStreamErrorSystemStoppedStream"
+	case StreamErrorUserDeclined:
+		return "StreamErrorUserDeclined"
+	case StreamErrorFailedToStart:
+		return "StreamErrorFailedToStart"
+	case StreamErrorMissingEntitlements:
+		return "StreamErrorMissingEntitlements"
+	case StreamErrorFailedApplicationConnectionInvalid:
+		return "StreamErrorFailedApplicationConnectionInvalid"
+	case StreamErrorFailedApplicationConnectionInterrupted:
+		return "StreamErrorFailedApplicationConnectionInterrupted"
+	case StreamErrorFailedNoMatchingApplicationContext:
+		return "StreamErrorFailedNoMatchingApplicationContext"
+	case StreamErrorAttemptToStartStreamState:
+		return "StreamErrorAttemptToStartStreamState"
+	case StreamErrorAttemptToStopStreamState:
+		return "StreamErrorAttemptToStopStreamState"
+	case StreamErrorAttemptToUpdateFilterState:
+		return "StreamErrorAttemptToUpdateFilterState"
+	case StreamErrorAttemptToConfigState:
+		return "StreamErrorAttemptToConfigState"
+	case StreamErrorInternalError:
+		return "StreamErrorInternalError"
+	case StreamErrorInvalidParameter:
+		return "StreamErrorInvalidParameter"
+	case StreamErrorNoWindowList:
+		return "StreamErrorNoWindowList"
+	case StreamErrorNoDisplayList:
+		return "StreamErrorNoDisplayList"
+	case StreamErrorNoCaptureSource:
+		return "StreamErrorNoCaptureSource"
+	case StreamErrorRemovingStream:
+		return "StreamErrorRemovingStream"
+	case StreamErrorUserStopped:
+		return "StreamErrorUserStopped"
+	case StreamErrorFailedToStartAudioCapture:
+		return "StreamErrorFailedToStartAudioCapture"
+	case StreamErrorFailedToStopAudioCapture:
+		return "StreamErrorFailedToStopAudioCapture"
+	case StreamErrorFailedToStartMicrophoneCapture:
+		return "StreamErrorFailedToStartMicrophoneCapture"
+	case StreamErrorSystemStoppedStream:
+		return "StreamErrorSystemStoppedStream"
 	default:
-		return fmt.Sprintf("SCStreamErrorCode(%d)", int64(e))
-	}
-}
-
-// Constants that represent output types for a stream frame.
-type SCStreamOutputType int64
-
-const (
-	// An output type that represents a screen capture sample buffer.
-	SCStreamOutputTypeScreen SCStreamOutputType = 0
-	// An output type that represents an audio capture sample buffer.
-	SCStreamOutputTypeAudio      SCStreamOutputType = 1
-	SCStreamOutputTypeMicrophone SCStreamOutputType = 2
-)
-
-func (e SCStreamOutputType) String() string {
-	switch e {
-	case SCStreamOutputTypeScreen:
-		return "SCStreamOutputTypeScreen"
-	case SCStreamOutputTypeAudio:
-		return "SCStreamOutputTypeAudio"
-	case SCStreamOutputTypeMicrophone:
-		return "SCStreamOutputTypeMicrophone"
-	default:
-		return fmt.Sprintf("SCStreamOutputType(%d)", int64(e))
+		return fmt.Sprintf("StreamErrorCode(%d)", int64(e))
 	}
 }
 
 // The display type of the presented stream.
 //
 // Deprecated: Use SCShareableContentStyle instead
-type SCStreamType int64
+type StreamType int64
 
 const (
 	// The stream is currently presented as a window.
-	SCStreamTypeWindow SCStreamType = 0
+	StreamTypeWindow StreamType = 0
 	// The stream is currently on a complete display.
-	SCStreamTypeDisplay SCStreamType = 1
+	StreamTypeDisplay StreamType = 1
 )
 
-func (e SCStreamType) String() string {
+func (e StreamType) String() string {
 	switch e {
-	case SCStreamTypeWindow:
-		return "SCStreamTypeWindow"
-	case SCStreamTypeDisplay:
-		return "SCStreamTypeDisplay"
+	case StreamTypeWindow:
+		return "StreamTypeWindow"
+	case StreamTypeDisplay:
+		return "StreamTypeDisplay"
 	default:
-		return fmt.Sprintf("SCStreamType(%d)", int64(e))
+		return fmt.Sprintf("StreamType(%d)", int64(e))
 	}
 }

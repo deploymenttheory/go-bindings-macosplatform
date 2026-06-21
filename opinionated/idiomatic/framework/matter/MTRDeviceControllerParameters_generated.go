@@ -5,236 +5,186 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRDeviceControllerParameters wraps [raw.MTRDeviceControllerParameters] with a fluent Go API.
+// MTRDeviceControllerParameters is an idiomatic wrapper over the Objective-C class MTRDeviceControllerParameters.
 type MTRDeviceControllerParameters struct {
-	inner *raw.MTRDeviceControllerParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDeviceControllerParameters].
-func (x *MTRDeviceControllerParameters) Unwrap() *raw.MTRDeviceControllerParameters { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceControllerParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDeviceControllerParametersFromID adopts an existing object pointer as a MTRDeviceControllerParameters (nil for 0).
+// MTRDeviceControllerParametersFromID adopts an existing Objective-C object as a MTRDeviceControllerParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDeviceControllerParametersFromID(id objc.ID) *MTRDeviceControllerParameters {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDeviceControllerParameters{inner: raw.MTRDeviceControllerParametersFromID(id)}
+	x := &MTRDeviceControllerParameters{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRDeviceControllerParameters creates a new [MTRDeviceControllerParameters].
+// mTRDeviceControllerParametersAdopt wraps an Objective-C object that this code just created as a
+// MTRDeviceControllerParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDeviceControllerParametersAdopt(id objc.ID) *MTRDeviceControllerParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDeviceControllerParameters{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDeviceControllerParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDeviceControllerParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDeviceControllerParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRDeviceControllerParameters creates a new MTRDeviceControllerParameters.
 func NewMTRDeviceControllerParameters() *MTRDeviceControllerParameters {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceControllerParameters")), objc.RegisterName("new"))
-	return &MTRDeviceControllerParameters{inner: raw.MTRDeviceControllerParametersFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceControllerParameters")), objc.RegisterName("new"))
+	return mTRDeviceControllerParametersAdopt(_id)
 }
 
 // The Product Attestation Authority certificates that are trusted to sign device attestation information (and in particular to sign Product Attestation Intermediate certificates, which then sign Device Attestation Certificates). Defaults to nil.
 //
-// WithProductAttestationAuthorityCertificates sets the collection, converting the Go slice to an NSArray.
-func (x *MTRDeviceControllerParameters) WithProductAttestationAuthorityCertificates(items ...*foundation.NSData) *MTRDeviceControllerParameters {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetProductAttestationAuthorityCertificates(foundation.NSArrayFromID[*foundation.NSData](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSData](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetProductAttestationAuthorityCertificates(_arr)
+// WithProductAttestationAuthorityCertificates sets the collection and returns the receiver so calls can be chained.
+func (x *MTRDeviceControllerParameters) WithProductAttestationAuthorityCertificates(items ...obj.Object) *MTRDeviceControllerParameters {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductAttestationAuthorityCertificates:"), _arr)
 	return x
 }
 
 // The Certification Declaration certificates whose public keys correspond to private keys that are trusted to sign certification declarations.  Defaults to nil. These certificates are used in addition to, not replacing, the default set of well-known certification declaration signing keys.
 //
-// WithCertificationDeclarationCertificates sets the collection, converting the Go slice to an NSArray.
-func (x *MTRDeviceControllerParameters) WithCertificationDeclarationCertificates(items ...*foundation.NSData) *MTRDeviceControllerParameters {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetCertificationDeclarationCertificates(foundation.NSArrayFromID[*foundation.NSData](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSData](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetCertificationDeclarationCertificates(_arr)
+// WithCertificationDeclarationCertificates sets the collection and returns the receiver so calls can be chained.
+func (x *MTRDeviceControllerParameters) WithCertificationDeclarationCertificates(items ...obj.Object) *MTRDeviceControllerParameters {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificationDeclarationCertificates:"), _arr)
 	return x
 }
 
 // Whether the controller should advertise its operational identity.  Defaults to NO.
 //
-// WithShouldAdvertiseOperational sets the shouldAdvertiseOperational property and returns the receiver for chaining.
+// WithShouldAdvertiseOperational sets shouldAdvertiseOperational and returns the receiver so calls can be chained.
 func (x *MTRDeviceControllerParameters) WithShouldAdvertiseOperational(shouldAdvertiseOperational bool) *MTRDeviceControllerParameters {
-	x.inner.SetShouldAdvertiseOperational(shouldAdvertiseOperational)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldAdvertiseOperational:"), shouldAdvertiseOperational)
 	return x
 }
 
 // Sets the maximum simultaneous subscription establishments that can be happening at one time for devices on Thread. This defaults to a large number. If this value is 0, the maximum subscription establishments allowed at a time will be set to 1.
 //
-// WithConcurrentSubscriptionEstablishmentsAllowedOnThread sets the concurrentSubscriptionEstablishmentsAllowedOnThread property and returns the receiver for chaining.
-func (x *MTRDeviceControllerParameters) WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread uint) *MTRDeviceControllerParameters {
-	x.inner.SetConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread)
+// WithConcurrentSubscriptionEstablishmentsAllowedOnThread sets concurrentSubscriptionEstablishmentsAllowedOnThread and returns the receiver so calls can be chained.
+func (x *MTRDeviceControllerParameters) WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread int) *MTRDeviceControllerParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConcurrentSubscriptionEstablishmentsAllowedOnThread:"), concurrentSubscriptionEstablishmentsAllowedOnThread)
 	return x
 }
 
 // Sets the storage behavior configuration - see MTRDeviceStorageBehaviorConfiguration.h for details
 //
-// WithStorageBehaviorConfiguration sets the storageBehaviorConfiguration property and returns the receiver for chaining.
+// WithStorageBehaviorConfiguration sets storageBehaviorConfiguration and returns the receiver so calls can be chained.
 func (x *MTRDeviceControllerParameters) WithStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerParameters {
-	x.inner.SetStorageBehaviorConfiguration(storageBehaviorConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageBehaviorConfiguration:"), objref.IDOf(storageBehaviorConfiguration))
 	return x
 }
 
 // Whether the controller should start out suspended.
 //
-// WithStartSuspended sets the startSuspended property and returns the receiver for chaining.
+// WithStartSuspended sets startSuspended and returns the receiver so calls can be chained.
 func (x *MTRDeviceControllerParameters) WithStartSuspended(startSuspended bool) *MTRDeviceControllerParameters {
-	x.inner.MTRDeviceControllerAbstractParameters.SetStartSuspended(startSuspended)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSuspended:"), startSuspended)
 	return x
-}
-
-// Set an MTROperationalCertificateIssuer to call (on the provided queue) when operational certificates need to be provided during commissioning.
-//
-// SetOperationalCertificateIssuerQueue calls the underlying SetOperationalCertificateIssuerQueue.
-func (x *MTRDeviceControllerParameters) SetOperationalCertificateIssuerQueue(operationalCertificateIssuer raw.MTROperationalCertificateIssuer, queue *foundation.NSObject) {
-	x.inner.SetOperationalCertificateIssuerQueue(operationalCertificateIssuer, queue)
-}
-
-// Set an MTROTAProviderDelegate to call (on the provided queue).  Only needs to be called if this controller should be able to handle OTA for devices.
-//
-// SetOTAProviderDelegateQueue calls the underlying SetOTAProviderDelegateQueue.
-func (x *MTRDeviceControllerParameters) SetOTAProviderDelegateQueue(otaProviderDelegate raw.MTROTAProviderDelegate, queue *foundation.NSObject) {
-	x.inner.SetOTAProviderDelegateQueue(otaProviderDelegate, queue)
 }
 
 // The Product Attestation Authority certificates that are trusted to sign device attestation information (and in particular to sign Product Attestation Intermediate certificates, which then sign Device Attestation Certificates). Defaults to nil.
 //
 // ProductAttestationAuthorityCertificates returns the collection as a Go slice.
-func (x *MTRDeviceControllerParameters) ProductAttestationAuthorityCertificates() []*foundation.NSData {
-	arr := x.inner.ProductAttestationAuthorityCertificates()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSData {
-		return foundation.NSDataFromID(purego.Retain(_id))
-	})
+func (x *MTRDeviceControllerParameters) ProductAttestationAuthorityCertificates() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productAttestationAuthorityCertificates"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetProductAttestationAuthorityCertificates calls the underlying SetProductAttestationAuthorityCertificates.
-func (x *MTRDeviceControllerParameters) SetProductAttestationAuthorityCertificates(productAttestationAuthorityCertificates *foundation.NSArray[*foundation.NSData]) {
-	x.inner.SetProductAttestationAuthorityCertificates(productAttestationAuthorityCertificates)
+func (x *MTRDeviceControllerParameters) SetProductAttestationAuthorityCertificates(productAttestationAuthorityCertificates []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductAttestationAuthorityCertificates:"), purego.SliceToNSArray(productAttestationAuthorityCertificates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // The Certification Declaration certificates whose public keys correspond to private keys that are trusted to sign certification declarations.  Defaults to nil. These certificates are used in addition to, not replacing, the default set of well-known certification declaration signing keys.
 //
 // CertificationDeclarationCertificates returns the collection as a Go slice.
-func (x *MTRDeviceControllerParameters) CertificationDeclarationCertificates() []*foundation.NSData {
-	arr := x.inner.CertificationDeclarationCertificates()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSData {
-		return foundation.NSDataFromID(purego.Retain(_id))
-	})
+func (x *MTRDeviceControllerParameters) CertificationDeclarationCertificates() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificationDeclarationCertificates"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetCertificationDeclarationCertificates calls the underlying SetCertificationDeclarationCertificates.
-func (x *MTRDeviceControllerParameters) SetCertificationDeclarationCertificates(certificationDeclarationCertificates *foundation.NSArray[*foundation.NSData]) {
-	x.inner.SetCertificationDeclarationCertificates(certificationDeclarationCertificates)
+func (x *MTRDeviceControllerParameters) SetCertificationDeclarationCertificates(certificationDeclarationCertificates []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificationDeclarationCertificates:"), purego.SliceToNSArray(certificationDeclarationCertificates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Whether the controller should advertise its operational identity.  Defaults to NO.
-//
-// ShouldAdvertiseOperational calls the underlying ShouldAdvertiseOperational.
 func (x *MTRDeviceControllerParameters) ShouldAdvertiseOperational() bool {
-	return x.inner.ShouldAdvertiseOperational()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldAdvertiseOperational"))
+	return _r
 }
 
-// SetShouldAdvertiseOperational calls the underlying SetShouldAdvertiseOperational.
 func (x *MTRDeviceControllerParameters) SetShouldAdvertiseOperational(shouldAdvertiseOperational bool) {
-	x.inner.SetShouldAdvertiseOperational(shouldAdvertiseOperational)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldAdvertiseOperational:"), shouldAdvertiseOperational)
 }
 
 // Sets the maximum simultaneous subscription establishments that can be happening at one time for devices on Thread. This defaults to a large number. If this value is 0, the maximum subscription establishments allowed at a time will be set to 1.
-//
-// ConcurrentSubscriptionEstablishmentsAllowedOnThread calls the underlying ConcurrentSubscriptionEstablishmentsAllowedOnThread.
-func (x *MTRDeviceControllerParameters) ConcurrentSubscriptionEstablishmentsAllowedOnThread() uint {
-	return x.inner.ConcurrentSubscriptionEstablishmentsAllowedOnThread()
+func (x *MTRDeviceControllerParameters) ConcurrentSubscriptionEstablishmentsAllowedOnThread() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("concurrentSubscriptionEstablishmentsAllowedOnThread"))
+	return _r
 }
 
-// SetConcurrentSubscriptionEstablishmentsAllowedOnThread calls the underlying SetConcurrentSubscriptionEstablishmentsAllowedOnThread.
-func (x *MTRDeviceControllerParameters) SetConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread uint) {
-	x.inner.SetConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread)
+func (x *MTRDeviceControllerParameters) SetConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConcurrentSubscriptionEstablishmentsAllowedOnThread:"), concurrentSubscriptionEstablishmentsAllowedOnThread)
 }
 
 // Sets the storage behavior configuration - see MTRDeviceStorageBehaviorConfiguration.h for details If this value is nil, a default storage behavior configuration will be used.
-//
-// StorageBehaviorConfiguration calls the underlying StorageBehaviorConfiguration.
 func (x *MTRDeviceControllerParameters) StorageBehaviorConfiguration() *MTRDeviceStorageBehaviorConfiguration {
-	_r := x.inner.StorageBehaviorConfiguration()
-	if _r == nil {
-		return nil
-	}
-	return &MTRDeviceStorageBehaviorConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("storageBehaviorConfiguration"))
+	return MTRDeviceStorageBehaviorConfigurationFromID(_r)
 }
 
-// SetStorageBehaviorConfiguration calls the underlying SetStorageBehaviorConfiguration.
-func (x *MTRDeviceControllerParameters) SetStorageBehaviorConfiguration(storageBehaviorConfiguration *raw.MTRDeviceStorageBehaviorConfiguration) {
-	x.inner.SetStorageBehaviorConfiguration(storageBehaviorConfiguration)
-}
-
-func (x *MTRDeviceControllerParameters) asMTRDeviceControllerParameters() *raw.MTRDeviceControllerParameters {
-	return x.inner
-}
-
-func (x *MTRDeviceControllerParameters) asMTRDeviceControllerAbstractParameters() *raw.MTRDeviceControllerAbstractParameters {
-	return &x.inner.MTRDeviceControllerAbstractParameters
+func (x *MTRDeviceControllerParameters) SetStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageBehaviorConfiguration:"), objref.IDOf(storageBehaviorConfiguration))
 }
 
 // MTRDeviceControllerParametersable is the interface implemented by [MTRDeviceControllerParameters], for mocking and DI.
 type MTRDeviceControllerParametersable interface {
-	Unwrap() *raw.MTRDeviceControllerParameters
-	WithProductAttestationAuthorityCertificates(items ...*foundation.NSData) *MTRDeviceControllerParameters
-	WithCertificationDeclarationCertificates(items ...*foundation.NSData) *MTRDeviceControllerParameters
+	obj.Object
+	WithProductAttestationAuthorityCertificates(items ...obj.Object) *MTRDeviceControllerParameters
+	WithCertificationDeclarationCertificates(items ...obj.Object) *MTRDeviceControllerParameters
 	WithShouldAdvertiseOperational(shouldAdvertiseOperational bool) *MTRDeviceControllerParameters
-	WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread uint) *MTRDeviceControllerParameters
+	WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread int) *MTRDeviceControllerParameters
 	WithStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerParameters
 	WithStartSuspended(startSuspended bool) *MTRDeviceControllerParameters
-	SetOperationalCertificateIssuerQueue(operationalCertificateIssuer raw.MTROperationalCertificateIssuer, queue *foundation.NSObject)
-	SetOTAProviderDelegateQueue(otaProviderDelegate raw.MTROTAProviderDelegate, queue *foundation.NSObject)
-	ProductAttestationAuthorityCertificates() []*foundation.NSData
-	SetProductAttestationAuthorityCertificates(productAttestationAuthorityCertificates *foundation.NSArray[*foundation.NSData])
-	CertificationDeclarationCertificates() []*foundation.NSData
-	SetCertificationDeclarationCertificates(certificationDeclarationCertificates *foundation.NSArray[*foundation.NSData])
+	ProductAttestationAuthorityCertificates() []obj.Object
+	SetProductAttestationAuthorityCertificates(productAttestationAuthorityCertificates []obj.Object)
+	CertificationDeclarationCertificates() []obj.Object
+	SetCertificationDeclarationCertificates(certificationDeclarationCertificates []obj.Object)
 	ShouldAdvertiseOperational() bool
 	SetShouldAdvertiseOperational(shouldAdvertiseOperational bool)
-	ConcurrentSubscriptionEstablishmentsAllowedOnThread() uint
-	SetConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread uint)
+	ConcurrentSubscriptionEstablishmentsAllowedOnThread() int
+	SetConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread int)
 	StorageBehaviorConfiguration() *MTRDeviceStorageBehaviorConfiguration
-	SetStorageBehaviorConfiguration(storageBehaviorConfiguration *raw.MTRDeviceStorageBehaviorConfiguration)
+	SetStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration)
 }
 
 var _ MTRDeviceControllerParametersable = (*MTRDeviceControllerParameters)(nil)

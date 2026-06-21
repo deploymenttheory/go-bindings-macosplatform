@@ -6,855 +6,838 @@ package matter
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRBaseClusterCarbonDioxideConcentrationMeasurement wraps [raw.MTRBaseClusterCarbonDioxideConcentrationMeasurement] with a fluent Go API.
+// MTRBaseClusterCarbonDioxideConcentrationMeasurement is an idiomatic wrapper over the Objective-C class MTRBaseClusterCarbonDioxideConcentrationMeasurement.
 type MTRBaseClusterCarbonDioxideConcentrationMeasurement struct {
-	inner *raw.MTRBaseClusterCarbonDioxideConcentrationMeasurement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRBaseClusterCarbonDioxideConcentrationMeasurement].
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) Unwrap() *raw.MTRBaseClusterCarbonDioxideConcentrationMeasurement {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRBaseClusterCarbonDioxideConcentrationMeasurementFromID adopts an existing object pointer as a MTRBaseClusterCarbonDioxideConcentrationMeasurement (nil for 0).
+// MTRBaseClusterCarbonDioxideConcentrationMeasurementFromID adopts an existing Objective-C object as a MTRBaseClusterCarbonDioxideConcentrationMeasurement
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRBaseClusterCarbonDioxideConcentrationMeasurementFromID(id objc.ID) *MTRBaseClusterCarbonDioxideConcentrationMeasurement {
 	if id == 0 {
 		return nil
 	}
-	return &MTRBaseClusterCarbonDioxideConcentrationMeasurement{inner: raw.MTRBaseClusterCarbonDioxideConcentrationMeasurementFromID(id)}
+	x := &MTRBaseClusterCarbonDioxideConcentrationMeasurement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRBaseClusterCarbonDioxideConcentrationMeasurementAdopt wraps an Objective-C object that this code just created as a
+// MTRBaseClusterCarbonDioxideConcentrationMeasurement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRBaseClusterCarbonDioxideConcentrationMeasurementAdopt(id objc.ID) *MTRBaseClusterCarbonDioxideConcentrationMeasurement {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRBaseClusterCarbonDioxideConcentrationMeasurement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 //
-// NewMTRBaseClusterCarbonDioxideConcentrationMeasurementWithDeviceEndpointIDQueue creates a new [MTRBaseClusterCarbonDioxideConcentrationMeasurement].
-func NewMTRBaseClusterCarbonDioxideConcentrationMeasurementWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterCarbonDioxideConcentrationMeasurement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterCarbonDioxideConcentrationMeasurement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRBaseClusterCarbonDioxideConcentrationMeasurement{inner: raw.MTRBaseClusterCarbonDioxideConcentrationMeasurementFromID(_id)}
+// NewMTRBaseClusterCarbonDioxideConcentrationMeasurementWithDeviceEndpointIDQueue creates a new MTRBaseClusterCarbonDioxideConcentrationMeasurement.
+func NewMTRBaseClusterCarbonDioxideConcentrationMeasurementWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterCarbonDioxideConcentrationMeasurement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterCarbonDioxideConcentrationMeasurement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRBaseClusterCarbonDioxideConcentrationMeasurementAdopt(_id)
 }
 
 // ReadAttributeMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeMeasuredValueWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeMeasuredValueWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeMeasuredValueWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasuredValueWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeMeasuredValueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeMinMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeMinMeasuredValueWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeMinMeasuredValueWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeMinMeasuredValueWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinMeasuredValueWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeMinMeasuredValueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeMaxMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeMaxMeasuredValueWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeMaxMeasuredValueWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeMaxMeasuredValueWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxMeasuredValueWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeMaxMeasuredValueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributePeakMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributePeakMeasuredValueWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributePeakMeasuredValueWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributePeakMeasuredValueWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePeakMeasuredValueWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributePeakMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributePeakMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributePeakMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributePeakMeasuredValueWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePeakMeasuredValueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributePeakMeasuredValueWindowWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributePeakMeasuredValueWindowWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributePeakMeasuredValueWindowWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributePeakMeasuredValueWindowWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePeakMeasuredValueWindowWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributePeakMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributePeakMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributePeakMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributePeakMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePeakMeasuredValueWindowWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeAverageMeasuredValueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeAverageMeasuredValueWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeAverageMeasuredValueWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeAverageMeasuredValueWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageMeasuredValueWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeAverageMeasuredValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeAverageMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeAverageMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeAverageMeasuredValueWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAverageMeasuredValueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeAverageMeasuredValueWindowWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeAverageMeasuredValueWindowWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeAverageMeasuredValueWindowWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeAverageMeasuredValueWindowWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageMeasuredValueWindowWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeAverageMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeAverageMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeAverageMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeAverageMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAverageMeasuredValueWindowWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeUncertaintyWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeUncertaintyWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeUncertaintyWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeUncertaintyWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUncertaintyWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeUncertaintyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeUncertaintyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeUncertaintyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeUncertaintyWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeUncertaintyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeMeasurementUnitWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeMeasurementUnitWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeMeasurementUnitWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeMeasurementUnitWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasurementUnitWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeMeasurementUnitWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeMeasurementUnitWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeMeasurementUnitWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeMeasurementUnitWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeMeasurementUnitWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeMeasurementMediumWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeMeasurementMediumWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeMeasurementMediumWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeMeasurementMediumWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasurementMediumWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeMeasurementMediumWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeMeasurementMediumWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeMeasurementMediumWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeMeasurementMediumWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeMeasurementMediumWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeLevelValueWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeLevelValueWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeLevelValueWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeLevelValueWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLevelValueWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeLevelValueWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeLevelValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeLevelValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeLevelValueWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeLevelValueWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeGeneratedCommandListWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeAcceptedCommandListWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeAttributeListWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeFeatureMapWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeClusterRevisionWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
-	return &x.inner.MTRGenericBaseCluster
-}
-
-func (x *MTRBaseClusterCarbonDioxideConcentrationMeasurement) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericBaseCluster.MTRCluster
-}
-
 // MTRBaseClusterCarbonDioxideConcentrationMeasurementable is the interface implemented by [MTRBaseClusterCarbonDioxideConcentrationMeasurement], for mocking and DI.
 type MTRBaseClusterCarbonDioxideConcentrationMeasurementable interface {
-	Unwrap() *raw.MTRBaseClusterCarbonDioxideConcentrationMeasurement
-	ReadAttributeMeasuredValueWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeMinMeasuredValueWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeMaxMeasuredValueWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributePeakMeasuredValueWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributePeakMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributePeakMeasuredValueWindowWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributePeakMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeAverageMeasuredValueWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeAverageMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeAverageMeasuredValueWindowWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeAverageMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeUncertaintyWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeUncertaintyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeMeasurementUnitWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeMeasurementUnitWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeMeasurementMediumWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeMeasurementMediumWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeLevelValueWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeLevelValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
-	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
-	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
-	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
-	ReadAttributeAttributeListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
-	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
-	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	obj.Object
+	ReadAttributeMeasuredValueWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeMinMeasuredValueWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeMinMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeMaxMeasuredValueWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeMaxMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributePeakMeasuredValueWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributePeakMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributePeakMeasuredValueWindowWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributePeakMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeAverageMeasuredValueWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeAverageMeasuredValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeAverageMeasuredValueWindowWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeAverageMeasuredValueWindowWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeUncertaintyWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeUncertaintyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeMeasurementUnitWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeMeasurementUnitWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeMeasurementMediumWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeMeasurementMediumWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeLevelValueWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeLevelValueWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
 }
 
 var _ MTRBaseClusterCarbonDioxideConcentrationMeasurementable = (*MTRBaseClusterCarbonDioxideConcentrationMeasurement)(nil)

@@ -5,121 +5,115 @@
 package mpsmatrix
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MatrixRandom wraps [raw.MPSMatrixRandom] with a fluent Go API.
+// MatrixRandom is an idiomatic wrapper over the Objective-C class MPSMatrixRandom.
 type MatrixRandom struct {
-	inner *raw.MPSMatrixRandom
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSMatrixRandom].
-func (x *MatrixRandom) Unwrap() *raw.MPSMatrixRandom { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatrixRandom) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixRandomFromID adopts an existing object pointer as a MatrixRandom (nil for 0).
+// MatrixRandomFromID adopts an existing Objective-C object as a MatrixRandom
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixRandomFromID(id objc.ID) *MatrixRandom {
 	if id == 0 {
 		return nil
 	}
-	return &MatrixRandom{inner: raw.MPSMatrixRandomFromID(id)}
+	x := &MatrixRandom{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMatrixRandom creates a new [MatrixRandom].
+// matrixRandomAdopt wraps an Objective-C object that this code just created as a
+// MatrixRandom (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixRandomAdopt(id objc.ID) *MatrixRandom {
+	if id == 0 {
+		return nil
+	}
+	x := &MatrixRandom{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MatrixRandom) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatrixRandom) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatrixRandom) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMatrixRandom creates a new MatrixRandom.
 func NewMatrixRandom() *MatrixRandom {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixRandom")), objc.RegisterName("new"))
-	return &MatrixRandom{inner: raw.MPSMatrixRandomFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixRandom")), objc.RegisterName("new"))
+	return matrixRandomAdopt(_id)
 }
 
-// @property   batchStart @discussion The starting index in the destination batch.
+// The starting index in the destination batch.
 //
-// WithBatchStart sets the batchStart property and returns the receiver for chaining.
-func (x *MatrixRandom) WithBatchStart(batchStart uint) *MatrixRandom {
-	x.inner.SetBatchStart(batchStart)
+// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+func (x *MatrixRandom) WithBatchStart(batchStart int) *MatrixRandom {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// @property   batchSize @discussion The size of the batch to process.
+// The size of the batch to process.
 //
-// WithBatchSize sets the batchSize property and returns the receiver for chaining.
-func (x *MatrixRandom) WithBatchSize(batchSize uint) *MatrixRandom {
-	x.inner.SetBatchSize(batchSize)
+// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+func (x *MatrixRandom) WithBatchSize(batchSize int) *MatrixRandom {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
 }
 
-// @abstract   Encode a MPSMatrixRandom kernel into a command Buffer. @param      commandBuffer       A valid MTLCommandBuffer to receive the encoded filter @param      destinationVector   A valid MPSVector to contain the result.
-//
-// EncodeToCommandBufferDestinationVector calls the underlying EncodeToCommandBufferDestinationVector.
-func (x *MatrixRandom) EncodeToCommandBufferDestinationVector(commandBuffer metal.MTLCommandBuffer, destinationVector *mpscore.MPSVector) {
-	x.inner.EncodeToCommandBufferDestinationVector(commandBuffer, destinationVector)
+// The distribution from which to generate random values. Default is MPSMatrixRandomDistributionDefault
+func (x *MatrixRandom) DistributionType() MatrixRandomDistribution {
+	_r := objc.Send[MatrixRandomDistribution](objref.IDOf(x), objc.RegisterName("distributionType"))
+	return _r
 }
 
-// @abstract   Encode a MPSMatrixRandom kernel into a command Buffer. @param      commandBuffer       A valid MTLCommandBuffer to receive the encoded filter @param      destinationMatrix   A valid MPSMatrix to contain the result.
-//
-// EncodeToCommandBufferDestinationMatrix calls the underlying EncodeToCommandBufferDestinationMatrix.
-func (x *MatrixRandom) EncodeToCommandBufferDestinationMatrix(commandBuffer metal.MTLCommandBuffer, destinationMatrix *mpscore.MPSMatrix) {
-	x.inner.EncodeToCommandBufferDestinationMatrix(commandBuffer, destinationMatrix)
+// The starting index in the destination batch.
+func (x *MatrixRandom) BatchStart() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("batchStart"))
+	return _r
 }
 
-// @property   destinationDataType @discussion The type of the data which makes up the values of the result. Supported values are: MPSDataTypeUInt32 MPSDataTypeFloat32 Default is MPSDataTypeUInt32
-//
-// DestinationDataType calls the underlying DestinationDataType.
-func (x *MatrixRandom) DestinationDataType() mpscore.MPSDataType {
-	return x.inner.DestinationDataType()
+func (x *MatrixRandom) SetBatchStart(batchStart int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 }
 
-// @property   distributionType @discussion The distribution from which to generate random values. Default is MPSMatrixRandomDistributionDefault
-//
-// DistributionType calls the underlying DistributionType.
-func (x *MatrixRandom) DistributionType() MPSMatrixRandomDistribution {
-	return MPSMatrixRandomDistribution(x.inner.DistributionType())
+// The size of the batch to process.
+func (x *MatrixRandom) BatchSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("batchSize"))
+	return _r
 }
 
-// @property   batchStart @discussion The starting index in the destination batch.
-//
-// BatchStart calls the underlying BatchStart.
-func (x *MatrixRandom) BatchStart() uint {
-	return x.inner.BatchStart()
+func (x *MatrixRandom) SetBatchSize(batchSize int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 }
-
-// SetBatchStart calls the underlying SetBatchStart.
-func (x *MatrixRandom) SetBatchStart(batchStart uint) {
-	x.inner.SetBatchStart(batchStart)
-}
-
-// @property   batchSize @discussion The size of the batch to process.
-//
-// BatchSize calls the underlying BatchSize.
-func (x *MatrixRandom) BatchSize() uint {
-	return x.inner.BatchSize()
-}
-
-// SetBatchSize calls the underlying SetBatchSize.
-func (x *MatrixRandom) SetBatchSize(batchSize uint) {
-	x.inner.SetBatchSize(batchSize)
-}
-
-func (x *MatrixRandom) asMatrixRandom() *raw.MPSMatrixRandom { return x.inner }
 
 // MatrixRandomable is the interface implemented by [MatrixRandom], for mocking and DI.
 type MatrixRandomable interface {
-	Unwrap() *raw.MPSMatrixRandom
-	WithBatchStart(batchStart uint) *MatrixRandom
-	WithBatchSize(batchSize uint) *MatrixRandom
-	EncodeToCommandBufferDestinationVector(commandBuffer metal.MTLCommandBuffer, destinationVector *mpscore.MPSVector)
-	EncodeToCommandBufferDestinationMatrix(commandBuffer metal.MTLCommandBuffer, destinationMatrix *mpscore.MPSMatrix)
-	DestinationDataType() mpscore.MPSDataType
-	DistributionType() MPSMatrixRandomDistribution
-	BatchStart() uint
-	SetBatchStart(batchStart uint)
-	BatchSize() uint
-	SetBatchSize(batchSize uint)
+	obj.Object
+	WithBatchStart(batchStart int) *MatrixRandom
+	WithBatchSize(batchSize int) *MatrixRandom
+	DistributionType() MatrixRandomDistribution
+	BatchStart() int
+	SetBatchStart(batchStart int)
+	BatchSize() int
+	SetBatchSize(batchSize int)
 }
 
 var _ MatrixRandomable = (*MatrixRandom)(nil)

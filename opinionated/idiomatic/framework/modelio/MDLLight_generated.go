@@ -5,153 +5,136 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The abstract superclass for objects that describe light sources in a scene.
 //
-// Light wraps [raw.MDLLight] with a fluent Go API.
+// Light is an idiomatic wrapper over the Objective-C class MDLLight.
 type Light struct {
-	inner *raw.MDLLight
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLLight].
-func (x *Light) Unwrap() *raw.MDLLight { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Light) ID() objc.ID { return x.inner.Ptr() }
-
-// LightFromID adopts an existing object pointer as a Light (nil for 0).
+// LightFromID adopts an existing Objective-C object as a Light
+// (nil for 0), retaining it and registering a release finalizer.
 func LightFromID(id objc.ID) *Light {
 	if id == 0 {
 		return nil
 	}
-	return &Light{inner: raw.MDLLightFromID(id)}
+	x := &Light{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLight creates a new [Light].
+// lightAdopt wraps an Objective-C object that this code just created as a
+// Light (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func lightAdopt(id objc.ID) *Light {
+	if id == 0 {
+		return nil
+	}
+	x := &Light{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Light) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Light) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Light) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLight creates a new Light.
 func NewLight() *Light {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLLight")), objc.RegisterName("new"))
-	return &Light{inner: raw.MDLLightFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLLight")), objc.RegisterName("new"))
+	return lightAdopt(_id)
 }
 
 // The type of the light.
 //
-// WithLightType sets the lightType property and returns the receiver for chaining.
-func (x *Light) WithLightType(lightType MDLLightType) *Light {
-	x.inner.SetLightType(raw.MDLLightType(lightType))
+// WithLightType sets lightType and returns the receiver so calls can be chained.
+func (x *Light) WithLightType(lightType LightType) *Light {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightType:"), lightType)
 	return x
 }
 
 // The name of the Core Graphics color space to be used for interpreting the light’s color information.
 //
-// WithColorSpace sets the colorSpace property and returns the receiver for chaining.
+// WithColorSpace sets colorSpace and returns the receiver so calls can be chained.
 func (x *Light) WithColorSpace(colorSpace string) *Light {
-	x.inner.SetColorSpace(foundation.NSStringStringWithUTF8String(colorSpace))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
 	return x
 }
 
 // The parent object that contains this object.
 //
-// WithParent sets the parent property and returns the receiver for chaining.
+// WithParent sets parent and returns the receiver so calls can be chained.
 func (x *Light) WithParent(parent ObjectProvider) *Light {
-	x.inner.MDLObject.SetParent(parent.asObject())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
 }
 
 // The primary object, if applicable, of which this object is an instance.
 //
-// WithInstance sets the instance property and returns the receiver for chaining.
+// WithInstance sets instance and returns the receiver so calls can be chained.
 func (x *Light) WithInstance(instance ObjectProvider) *Light {
-	x.inner.MDLObject.SetInstance(instance.asObject())
-	return x
-}
-
-// A component that manages this object’s spatial transform and its changes over time.
-//
-// WithTransform sets the transform property and returns the receiver for chaining.
-func (x *Light) WithTransform(transform raw.MDLTransformComponent) *Light {
-	x.inner.MDLObject.SetTransform(transform)
-	return x
-}
-
-// A component that manages this object’s collection of children.
-//
-// WithChildren sets the children property and returns the receiver for chaining.
-func (x *Light) WithChildren(children raw.MDLObjectContainerComponent) *Light {
-	x.inner.MDLObject.SetChildren(children)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return x
 }
 
 // A Boolean value indicating whether this object should be used in rendering.
 //
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *Light) WithHidden(hidden bool) *Light {
-	x.inner.MDLObject.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// Returns the radiance of the light as received at a specific point in the same scene.
-//
-// IrradianceAtPoint calls the underlying IrradianceAtPoint.
-func (x *Light) IrradianceAtPoint(point unsafe.Pointer) unsafe.Pointer {
-	return x.inner.IrradianceAtPoint(point)
+func (x *Light) LightType() LightType {
+	_r := objc.Send[LightType](objref.IDOf(x), objc.RegisterName("lightType"))
+	return _r
 }
 
-// Returns the radiance of the light as received at a specific point in the same scene, expressed using the specified color space.
-//
-// IrradianceAtPointColorSpace calls the underlying IrradianceAtPointColorSpace.
-func (x *Light) IrradianceAtPointColorSpace(point unsafe.Pointer, colorSpace unsafe.Pointer) unsafe.Pointer {
-	return x.inner.IrradianceAtPointColorSpace(point, colorSpace)
+func (x *Light) SetLightType(lightType LightType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightType:"), lightType)
 }
 
-// LightType calls the underlying LightType.
-func (x *Light) LightType() MDLLightType {
-	return MDLLightType(x.inner.LightType())
-}
-
-// SetLightType calls the underlying SetLightType.
-func (x *Light) SetLightType(lightType MDLLightType) {
-	x.inner.SetLightType(raw.MDLLightType(lightType))
-}
-
-// ColorSpace calls the underlying ColorSpace.
 func (x *Light) ColorSpace() string {
-	_r := x.inner.ColorSpace()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorSpace"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetColorSpace calls the underlying SetColorSpace.
 func (x *Light) SetColorSpace(colorSpace string) {
-	x.inner.SetColorSpace(foundation.NSStringStringWithUTF8String(colorSpace))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
 }
-
-func (x *Light) asLight() *raw.MDLLight { return x.inner }
-
-func (x *Light) asObject() *raw.MDLObject { return &x.inner.MDLObject }
 
 // Lightable is the interface implemented by [Light], for mocking and DI.
 type Lightable interface {
-	Unwrap() *raw.MDLLight
-	WithLightType(lightType MDLLightType) *Light
+	obj.Object
+	WithLightType(lightType LightType) *Light
 	WithColorSpace(colorSpace string) *Light
 	WithParent(parent ObjectProvider) *Light
 	WithInstance(instance ObjectProvider) *Light
-	WithTransform(transform raw.MDLTransformComponent) *Light
-	WithChildren(children raw.MDLObjectContainerComponent) *Light
 	WithHidden(hidden bool) *Light
-	IrradianceAtPoint(point unsafe.Pointer) unsafe.Pointer
-	IrradianceAtPointColorSpace(point unsafe.Pointer, colorSpace unsafe.Pointer) unsafe.Pointer
-	LightType() MDLLightType
-	SetLightType(lightType MDLLightType)
+	LightType() LightType
+	SetLightType(lightType LightType)
 	ColorSpace() string
 	SetColorSpace(colorSpace string)
 }

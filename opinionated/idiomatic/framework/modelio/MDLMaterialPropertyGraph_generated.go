@@ -5,80 +5,90 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MaterialPropertyGraph wraps [raw.MDLMaterialPropertyGraph] with a fluent Go API.
+// MaterialPropertyGraph is an idiomatic wrapper over the Objective-C class MDLMaterialPropertyGraph.
 type MaterialPropertyGraph struct {
-	inner *raw.MDLMaterialPropertyGraph
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLMaterialPropertyGraph].
-func (x *MaterialPropertyGraph) Unwrap() *raw.MDLMaterialPropertyGraph { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MaterialPropertyGraph) ID() objc.ID { return x.inner.Ptr() }
-
-// MaterialPropertyGraphFromID adopts an existing object pointer as a MaterialPropertyGraph (nil for 0).
+// MaterialPropertyGraphFromID adopts an existing Objective-C object as a MaterialPropertyGraph
+// (nil for 0), retaining it and registering a release finalizer.
 func MaterialPropertyGraphFromID(id objc.ID) *MaterialPropertyGraph {
 	if id == 0 {
 		return nil
 	}
-	return &MaterialPropertyGraph{inner: raw.MDLMaterialPropertyGraphFromID(id)}
-}
-
-// NewMaterialPropertyGraphWithNodesConnections creates a new [MaterialPropertyGraph].
-func NewMaterialPropertyGraphWithNodesConnections(nodes *foundation.NSArray[*raw.MDLMaterialPropertyNode], connections *foundation.NSArray[*raw.MDLMaterialPropertyConnection]) *MaterialPropertyGraph {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialPropertyGraph")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNodes:connections:"), nodes.Ptr(), connections.Ptr())
-	return &MaterialPropertyGraph{inner: raw.MDLMaterialPropertyGraphFromID(_id)}
-}
-
-// WithEvaluationFunction sets the evaluationFunction property and returns the receiver for chaining.
-func (x *MaterialPropertyGraph) WithEvaluationFunction(evaluationFunction func(*raw.MDLMaterialPropertyNode)) *MaterialPropertyGraph {
-	x.inner.MDLMaterialPropertyNode.SetEvaluationFunction(evaluationFunction)
+	x := &MaterialPropertyGraph{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Evaluate calls the underlying Evaluate.
+// materialPropertyGraphAdopt wraps an Objective-C object that this code just created as a
+// MaterialPropertyGraph (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func materialPropertyGraphAdopt(id objc.ID) *MaterialPropertyGraph {
+	if id == 0 {
+		return nil
+	}
+	x := &MaterialPropertyGraph{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MaterialPropertyGraph) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MaterialPropertyGraph) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MaterialPropertyGraph) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMaterialPropertyGraphWithNodesConnections creates a new MaterialPropertyGraph.
+func NewMaterialPropertyGraphWithNodesConnections(nodes []*MaterialPropertyNode, connections []*MaterialPropertyConnection) *MaterialPropertyGraph {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialPropertyGraph")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNodes:connections:"), purego.SliceToNSArray(nodes, func(_v *MaterialPropertyNode) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(connections, func(_v *MaterialPropertyConnection) objc.ID { return objref.IDOf(_v) }))
+	return materialPropertyGraphAdopt(_id)
+}
+
+// WithEvaluationFunction sets evaluationFunction and returns the receiver so calls can be chained.
+func (x *MaterialPropertyGraph) WithEvaluationFunction(evaluationFunction func(obj.Object)) *MaterialPropertyGraph {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvaluationFunction:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { evaluationFunction(obj.Wrap(_b0)) }))
+	return x
+}
+
 func (x *MaterialPropertyGraph) Evaluate() {
-	x.inner.Evaluate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluate"))
 }
 
 // Nodes returns the collection as a Go slice.
 func (x *MaterialPropertyGraph) Nodes() []*MaterialPropertyNode {
-	arr := x.inner.Nodes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MaterialPropertyNode {
-		return &MaterialPropertyNode{inner: raw.MDLMaterialPropertyNodeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MaterialPropertyNode { return MaterialPropertyNodeFromID(_id) })
 }
 
 // Connections returns the collection as a Go slice.
 func (x *MaterialPropertyGraph) Connections() []*MaterialPropertyConnection {
-	arr := x.inner.Connections()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MaterialPropertyConnection {
-		return &MaterialPropertyConnection{inner: raw.MDLMaterialPropertyConnectionFromID(purego.Retain(_id))}
-	})
-}
-
-func (x *MaterialPropertyGraph) asMaterialPropertyNode() *raw.MDLMaterialPropertyNode {
-	return &x.inner.MDLMaterialPropertyNode
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connections"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MaterialPropertyConnection { return MaterialPropertyConnectionFromID(_id) })
 }
 
 // MaterialPropertyGraphable is the interface implemented by [MaterialPropertyGraph], for mocking and DI.
 type MaterialPropertyGraphable interface {
-	Unwrap() *raw.MDLMaterialPropertyGraph
-	WithEvaluationFunction(evaluationFunction func(*raw.MDLMaterialPropertyNode)) *MaterialPropertyGraph
+	obj.Object
+	WithEvaluationFunction(evaluationFunction func(obj.Object)) *MaterialPropertyGraph
 	Evaluate()
 	Nodes() []*MaterialPropertyNode
 	Connections() []*MaterialPropertyConnection

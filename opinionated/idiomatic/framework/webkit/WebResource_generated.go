@@ -5,95 +5,112 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A WebResource object represents a downloaded URL. It encapsulates the data of the download as well as other resource properties such as the URL, MIME type, and frame name.
 //
-// WebResource wraps [raw.WebResource] with a fluent Go API.
+// WebResource is an idiomatic wrapper over the Objective-C class WebResource.
 type WebResource struct {
-	inner *raw.WebResource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WebResource].
-func (x *WebResource) Unwrap() *raw.WebResource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WebResource) ID() objc.ID { return x.inner.Ptr() }
-
-// WebResourceFromID adopts an existing object pointer as a WebResource (nil for 0).
+// WebResourceFromID adopts an existing Objective-C object as a WebResource
+// (nil for 0), retaining it and registering a release finalizer.
 func WebResourceFromID(id objc.ID) *WebResource {
 	if id == 0 {
 		return nil
 	}
-	return &WebResource{inner: raw.WebResourceFromID(id)}
+	x := &WebResource{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// webResourceAdopt wraps an Objective-C object that this code just created as a
+// WebResource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func webResourceAdopt(id objc.ID) *WebResource {
+	if id == 0 {
+		return nil
+	}
+	x := &WebResource{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WebResource) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WebResource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WebResource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes and returns a web resource instance.
 //
-// NewWebResourceWithDataURLMIMETypeTextEncodingNameFrameName creates a new [WebResource].
-func NewWebResourceWithDataURLMIMETypeTextEncodingNameFrameName(data *foundation.NSData, uRL string, mIMEType string, textEncodingName string, frameName string) *WebResource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WebResource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:URL:MIMEType:textEncodingName:frameName:"), data.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), foundation.NSStringStringWithUTF8String(mIMEType).Ptr(), foundation.NSStringStringWithUTF8String(textEncodingName).Ptr(), foundation.NSStringStringWithUTF8String(frameName).Ptr())
-	return &WebResource{inner: raw.WebResourceFromID(_id)}
+// NewWebResourceWithDataURLMIMETypeTextEncodingNameFrameName creates a new WebResource.
+func NewWebResourceWithDataURLMIMETypeTextEncodingNameFrameName(data obj.Object, uRL string, mIMEType string, textEncodingName string, frameName string) *WebResource {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("WebResource")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:URL:MIMEType:textEncodingName:frameName:"), objref.IDOf(data), rt.FileURL(uRL), purego.NSString(mIMEType), purego.NSString(textEncodingName), purego.NSString(frameName))
+	return webResourceAdopt(_id)
 }
 
-// @property data @abstract The data of the resource.
-//
-// Data calls the underlying Data.
-func (x *WebResource) Data() *foundation.NSData {
-	return x.inner.Data()
+// The data of the resource.
+func (x *WebResource) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
 
-// @property URL @abstract The URL of the resource.
-//
-// URL calls the underlying URL.
-func (x *WebResource) URL() *foundation.NSURL {
-	return x.inner.URL()
+// The URL of the resource.
+func (x *WebResource) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
-// @property MIMEType @abstract The MIME type of the resource.
-//
-// MIMEType calls the underlying MIMEType.
+// The MIME type of the resource.
 func (x *WebResource) MIMEType() string {
-	_r := x.inner.MIMEType()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("MIMEType"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property textEncodingName @abstract The text encoding name of the resource (can be nil).
-//
-// TextEncodingName calls the underlying TextEncodingName.
+// The text encoding name of the resource (can be nil).
 func (x *WebResource) TextEncodingName() string {
-	_r := x.inner.TextEncodingName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textEncodingName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property frameName @abstract The frame name of the resource if the resource represents the contents of an entire HTML frame (can be nil).
-//
-// FrameName calls the underlying FrameName.
+// The frame name of the resource if the resource represents the contents of an entire HTML frame (can be nil).
 func (x *WebResource) FrameName() string {
-	_r := x.inner.FrameName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frameName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // WebResourceable is the interface implemented by [WebResource], for mocking and DI.
 type WebResourceable interface {
-	Unwrap() *raw.WebResource
-	Data() *foundation.NSData
-	URL() *foundation.NSURL
+	obj.Object
+	Data() obj.Object
+	URL() obj.Object
 	MIMEType() string
 	TextEncodingName() string
 	FrameName() string

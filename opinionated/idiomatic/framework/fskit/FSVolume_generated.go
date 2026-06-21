@@ -5,83 +5,99 @@
 package fskit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A directory structure for files and folders.
 //
-// Volume wraps [raw.FSVolume] with a fluent Go API.
+// Volume is an idiomatic wrapper over the Objective-C class FSVolume.
 type Volume struct {
-	inner *raw.FSVolume
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSVolume].
-func (x *Volume) Unwrap() *raw.FSVolume { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Volume) ID() objc.ID { return x.inner.Ptr() }
-
-// VolumeFromID adopts an existing object pointer as a Volume (nil for 0).
+// VolumeFromID adopts an existing Objective-C object as a Volume
+// (nil for 0), retaining it and registering a release finalizer.
 func VolumeFromID(id objc.ID) *Volume {
 	if id == 0 {
 		return nil
 	}
-	return &Volume{inner: raw.FSVolumeFromID(id)}
+	x := &Volume{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// volumeAdopt wraps an Objective-C object that this code just created as a
+// Volume (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func volumeAdopt(id objc.ID) *Volume {
+	if id == 0 {
+		return nil
+	}
+	x := &Volume{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Volume) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Volume) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Volume) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a volume with the given identifier and name.
 //
-// NewVolumeWithVolumeIDVolumeName creates a new [Volume].
-func NewVolumeWithVolumeIDVolumeName(volumeID *raw.FSVolumeIdentifier, volumeName *raw.FSFileName) *Volume {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSVolume")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVolumeID:volumeName:"), volumeID.Ptr(), volumeName.Ptr())
-	return &Volume{inner: raw.FSVolumeFromID(_id)}
+// NewVolumeWithVolumeIDVolumeName creates a new Volume.
+func NewVolumeWithVolumeIDVolumeName(volumeID *VolumeIdentifier, volumeName *FileName) *Volume {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("FSVolume")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVolumeID:volumeName:"), objref.IDOf(volumeID), objref.IDOf(volumeName))
+	return volumeAdopt(_id)
 }
 
 // The name of the volume.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *Volume) WithName(name *FileName) *Volume {
-	x.inner.SetName(name.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
 // An identifier that uniquely identifies the volume.
-//
-// VolumeID calls the underlying VolumeID.
 func (x *Volume) VolumeID() *VolumeIdentifier {
-	_r := x.inner.VolumeID()
-	if _r == nil {
-		return nil
-	}
-	return &VolumeIdentifier{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("volumeID"))
+	return VolumeIdentifierFromID(_r)
 }
 
 // The name of the volume.
-//
-// Name calls the underlying Name.
 func (x *Volume) Name() *FileName {
-	_r := x.inner.Name()
-	if _r == nil {
-		return nil
-	}
-	return &FileName{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	return FileNameFromID(_r)
 }
 
-// SetName calls the underlying SetName.
-func (x *Volume) SetName(name *raw.FSFileName) {
-	x.inner.SetName(name)
+func (x *Volume) SetName(name *FileName) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 }
 
 // Volumeable is the interface implemented by [Volume], for mocking and DI.
 type Volumeable interface {
-	Unwrap() *raw.FSVolume
+	obj.Object
 	WithName(name *FileName) *Volume
 	VolumeID() *VolumeIdentifier
 	Name() *FileName
-	SetName(name *raw.FSFileName)
+	SetName(name *FileName)
 }
 
 var _ Volumeable = (*Volume)(nil)

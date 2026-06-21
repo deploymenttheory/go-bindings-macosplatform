@@ -5,104 +5,112 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that implements custom behaviors when changing from one layout to another in a collection view.
 //
-// CollectionViewTransitionLayout wraps [raw.NSCollectionViewTransitionLayout] with a fluent Go API.
+// CollectionViewTransitionLayout is an idiomatic wrapper over the Objective-C class NSCollectionViewTransitionLayout.
 type CollectionViewTransitionLayout struct {
-	inner *raw.NSCollectionViewTransitionLayout
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCollectionViewTransitionLayout].
-func (x *CollectionViewTransitionLayout) Unwrap() *raw.NSCollectionViewTransitionLayout {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionViewTransitionLayout) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionViewTransitionLayoutFromID adopts an existing object pointer as a CollectionViewTransitionLayout (nil for 0).
+// CollectionViewTransitionLayoutFromID adopts an existing Objective-C object as a CollectionViewTransitionLayout
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionViewTransitionLayoutFromID(id objc.ID) *CollectionViewTransitionLayout {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionViewTransitionLayout{inner: raw.NSCollectionViewTransitionLayoutFromID(id)}
+	x := &CollectionViewTransitionLayout{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// collectionViewTransitionLayoutAdopt wraps an Objective-C object that this code just created as a
+// CollectionViewTransitionLayout (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionViewTransitionLayoutAdopt(id objc.ID) *CollectionViewTransitionLayout {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionViewTransitionLayout{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollectionViewTransitionLayout) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollectionViewTransitionLayout) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollectionViewTransitionLayout) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes and returns the transition layout object.
 //
-// NewCollectionViewTransitionLayoutWithCurrentLayoutNextLayout creates a new [CollectionViewTransitionLayout].
-func NewCollectionViewTransitionLayoutWithCurrentLayoutNextLayout(currentLayout *raw.NSCollectionViewLayout, newLayout *raw.NSCollectionViewLayout) *CollectionViewTransitionLayout {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionViewTransitionLayout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCurrentLayout:nextLayout:"), currentLayout.Ptr(), newLayout.Ptr())
-	return &CollectionViewTransitionLayout{inner: raw.NSCollectionViewTransitionLayoutFromID(_id)}
+// NewCollectionViewTransitionLayoutWithCurrentLayoutNextLayout creates a new CollectionViewTransitionLayout.
+func NewCollectionViewTransitionLayoutWithCurrentLayoutNextLayout(currentLayout *CollectionViewLayout, newLayout *CollectionViewLayout) *CollectionViewTransitionLayout {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewTransitionLayout")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCurrentLayout:nextLayout:"), objref.IDOf(currentLayout), objref.IDOf(newLayout))
+	return collectionViewTransitionLayoutAdopt(_id)
 }
 
 // The completion percentage of the transition.
 //
-// WithTransitionProgress sets the transitionProgress property and returns the receiver for chaining.
+// WithTransitionProgress sets transitionProgress and returns the receiver so calls can be chained.
 func (x *CollectionViewTransitionLayout) WithTransitionProgress(transitionProgress float64) *CollectionViewTransitionLayout {
-	x.inner.SetTransitionProgress(transitionProgress)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionProgress:"), transitionProgress)
 	return x
 }
 
 // Sets the value of a key whose value you use during the animation.
-//
-// UpdateValueForAnimatedKey calls the underlying UpdateValueForAnimatedKey.
-func (x *CollectionViewTransitionLayout) UpdateValueForAnimatedKey(value float64, key *foundation.NSString) {
-	x.inner.UpdateValueForAnimatedKey(value, key)
+func (x *CollectionViewTransitionLayout) UpdateValueForAnimatedKey(value float64, key obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateValue:forAnimatedKey:"), value, objref.IDOf(key))
 }
 
 // Returns the most recently set value for the specified key.
-//
-// ValueForAnimatedKey calls the underlying ValueForAnimatedKey.
-func (x *CollectionViewTransitionLayout) ValueForAnimatedKey(key *foundation.NSString) float64 {
-	return x.inner.ValueForAnimatedKey(key)
+func (x *CollectionViewTransitionLayout) ValueForAnimatedKey(key obj.Object) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("valueForAnimatedKey:"), objref.IDOf(key))
+	return _r
 }
 
-// TransitionProgress calls the underlying TransitionProgress.
 func (x *CollectionViewTransitionLayout) TransitionProgress() float64 {
-	return x.inner.TransitionProgress()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("transitionProgress"))
+	return _r
 }
 
-// SetTransitionProgress calls the underlying SetTransitionProgress.
 func (x *CollectionViewTransitionLayout) SetTransitionProgress(transitionProgress float64) {
-	x.inner.SetTransitionProgress(transitionProgress)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionProgress:"), transitionProgress)
 }
 
-// CurrentLayout calls the underlying CurrentLayout.
 func (x *CollectionViewTransitionLayout) CurrentLayout() *CollectionViewLayout {
-	_r := x.inner.CurrentLayout()
-	if _r == nil {
-		return nil
-	}
-	return &CollectionViewLayout{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentLayout"))
+	return CollectionViewLayoutFromID(_r)
 }
 
-// NextLayout calls the underlying NextLayout.
 func (x *CollectionViewTransitionLayout) NextLayout() *CollectionViewLayout {
-	_r := x.inner.NextLayout()
-	if _r == nil {
-		return nil
-	}
-	return &CollectionViewLayout{inner: _r}
-}
-
-func (x *CollectionViewTransitionLayout) asCollectionViewLayout() *raw.NSCollectionViewLayout {
-	return &x.inner.NSCollectionViewLayout
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextLayout"))
+	return CollectionViewLayoutFromID(_r)
 }
 
 // CollectionViewTransitionLayoutable is the interface implemented by [CollectionViewTransitionLayout], for mocking and DI.
 type CollectionViewTransitionLayoutable interface {
-	Unwrap() *raw.NSCollectionViewTransitionLayout
+	obj.Object
 	WithTransitionProgress(transitionProgress float64) *CollectionViewTransitionLayout
-	UpdateValueForAnimatedKey(value float64, key *foundation.NSString)
-	ValueForAnimatedKey(key *foundation.NSString) float64
+	UpdateValueForAnimatedKey(value float64, key obj.Object)
+	ValueForAnimatedKey(key obj.Object) float64
 	TransitionProgress() float64
 	SetTransitionProgress(transitionProgress float64)
 	CurrentLayout() *CollectionViewLayout

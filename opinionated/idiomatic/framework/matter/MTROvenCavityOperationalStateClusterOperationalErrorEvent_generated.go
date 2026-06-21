@@ -5,66 +5,84 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROvenCavityOperationalStateClusterOperationalErrorEvent wraps [raw.MTROvenCavityOperationalStateClusterOperationalErrorEvent] with a fluent Go API.
+// MTROvenCavityOperationalStateClusterOperationalErrorEvent is an idiomatic wrapper over the Objective-C class MTROvenCavityOperationalStateClusterOperationalErrorEvent.
 type MTROvenCavityOperationalStateClusterOperationalErrorEvent struct {
-	inner *raw.MTROvenCavityOperationalStateClusterOperationalErrorEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROvenCavityOperationalStateClusterOperationalErrorEvent].
-func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) Unwrap() *raw.MTROvenCavityOperationalStateClusterOperationalErrorEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTROvenCavityOperationalStateClusterOperationalErrorEventFromID adopts an existing object pointer as a MTROvenCavityOperationalStateClusterOperationalErrorEvent (nil for 0).
+// MTROvenCavityOperationalStateClusterOperationalErrorEventFromID adopts an existing Objective-C object as a MTROvenCavityOperationalStateClusterOperationalErrorEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROvenCavityOperationalStateClusterOperationalErrorEventFromID(id objc.ID) *MTROvenCavityOperationalStateClusterOperationalErrorEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTROvenCavityOperationalStateClusterOperationalErrorEvent{inner: raw.MTROvenCavityOperationalStateClusterOperationalErrorEventFromID(id)}
-}
-
-// NewMTROvenCavityOperationalStateClusterOperationalErrorEvent creates a new [MTROvenCavityOperationalStateClusterOperationalErrorEvent].
-func NewMTROvenCavityOperationalStateClusterOperationalErrorEvent() *MTROvenCavityOperationalStateClusterOperationalErrorEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROvenCavityOperationalStateClusterOperationalErrorEvent")), objc.RegisterName("new"))
-	return &MTROvenCavityOperationalStateClusterOperationalErrorEvent{inner: raw.MTROvenCavityOperationalStateClusterOperationalErrorEventFromID(_id)}
-}
-
-// WithErrorState sets the errorState property and returns the receiver for chaining.
-func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *MTROvenCavityOperationalStateClusterErrorStateStruct) *MTROvenCavityOperationalStateClusterOperationalErrorEvent {
-	x.inner.SetErrorState(errorState.Unwrap())
+	x := &MTROvenCavityOperationalStateClusterOperationalErrorEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// ErrorState calls the underlying ErrorState.
-func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) ErrorState() *MTROvenCavityOperationalStateClusterErrorStateStruct {
-	_r := x.inner.ErrorState()
-	if _r == nil {
+// mTROvenCavityOperationalStateClusterOperationalErrorEventAdopt wraps an Objective-C object that this code just created as a
+// MTROvenCavityOperationalStateClusterOperationalErrorEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROvenCavityOperationalStateClusterOperationalErrorEventAdopt(id objc.ID) *MTROvenCavityOperationalStateClusterOperationalErrorEvent {
+	if id == 0 {
 		return nil
 	}
-	return &MTROvenCavityOperationalStateClusterErrorStateStruct{inner: _r}
+	x := &MTROvenCavityOperationalStateClusterOperationalErrorEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetErrorState calls the underlying SetErrorState.
-func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) SetErrorState(errorState *raw.MTROvenCavityOperationalStateClusterErrorStateStruct) {
-	x.inner.SetErrorState(errorState)
+// Description returns the object's -description text.
+func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTROvenCavityOperationalStateClusterOperationalErrorEvent creates a new MTROvenCavityOperationalStateClusterOperationalErrorEvent.
+func NewMTROvenCavityOperationalStateClusterOperationalErrorEvent() *MTROvenCavityOperationalStateClusterOperationalErrorEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTROvenCavityOperationalStateClusterOperationalErrorEvent")), objc.RegisterName("new"))
+	return mTROvenCavityOperationalStateClusterOperationalErrorEventAdopt(_id)
+}
+
+// WithErrorState sets errorState and returns the receiver so calls can be chained.
+func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *MTROvenCavityOperationalStateClusterErrorStateStruct) *MTROvenCavityOperationalStateClusterOperationalErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorState:"), objref.IDOf(errorState))
+	return x
+}
+
+func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) ErrorState() *MTROvenCavityOperationalStateClusterErrorStateStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorState"))
+	return MTROvenCavityOperationalStateClusterErrorStateStructFromID(_r)
+}
+
+func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) SetErrorState(errorState *MTROvenCavityOperationalStateClusterErrorStateStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorState:"), objref.IDOf(errorState))
 }
 
 // MTROvenCavityOperationalStateClusterOperationalErrorEventable is the interface implemented by [MTROvenCavityOperationalStateClusterOperationalErrorEvent], for mocking and DI.
 type MTROvenCavityOperationalStateClusterOperationalErrorEventable interface {
-	Unwrap() *raw.MTROvenCavityOperationalStateClusterOperationalErrorEvent
+	obj.Object
 	WithErrorState(errorState *MTROvenCavityOperationalStateClusterErrorStateStruct) *MTROvenCavityOperationalStateClusterOperationalErrorEvent
 	ErrorState() *MTROvenCavityOperationalStateClusterErrorStateStruct
-	SetErrorState(errorState *raw.MTROvenCavityOperationalStateClusterErrorStateStruct)
+	SetErrorState(errorState *MTROvenCavityOperationalStateClusterErrorStateStruct)
 }
 
 var _ MTROvenCavityOperationalStateClusterOperationalErrorEventable = (*MTROvenCavityOperationalStateClusterOperationalErrorEvent)(nil)

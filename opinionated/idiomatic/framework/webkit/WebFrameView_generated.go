@@ -5,113 +5,126 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // WebFrameView objects and their subviews display the web content contained in a frame. You never create instances of WebFrameView directly—WebView objects create and manage a hierarchy of WebFrameView objects, one for each frame. WebFrameView objects use a scroll view whose document view conforms to the WebDocumentView protocol.
 //
-// WebFrameView wraps [raw.WebFrameView] with a fluent Go API.
+// WebFrameView is an idiomatic wrapper over the Objective-C class WebFrameView.
 type WebFrameView struct {
-	inner *raw.WebFrameView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WebFrameView].
-func (x *WebFrameView) Unwrap() *raw.WebFrameView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WebFrameView) ID() objc.ID { return x.inner.Ptr() }
-
-// WebFrameViewFromID adopts an existing object pointer as a WebFrameView (nil for 0).
+// WebFrameViewFromID adopts an existing Objective-C object as a WebFrameView
+// (nil for 0), retaining it and registering a release finalizer.
 func WebFrameViewFromID(id objc.ID) *WebFrameView {
 	if id == 0 {
 		return nil
 	}
-	return &WebFrameView{inner: raw.WebFrameViewFromID(id)}
+	x := &WebFrameView{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWebFrameView creates a new [WebFrameView].
+// webFrameViewAdopt wraps an Objective-C object that this code just created as a
+// WebFrameView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func webFrameViewAdopt(id objc.ID) *WebFrameView {
+	if id == 0 {
+		return nil
+	}
+	x := &WebFrameView{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WebFrameView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WebFrameView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WebFrameView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWebFrameView creates a new WebFrameView.
 func NewWebFrameView() *WebFrameView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WebFrameView")), objc.RegisterName("new"))
-	return &WebFrameView{inner: raw.WebFrameViewFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WebFrameView")), objc.RegisterName("new"))
+	return webFrameViewAdopt(_id)
 }
 
 // A Boolean that indicates whether the frame view should allow users to scroll.
 //
-// WithAllowsScrolling sets the allowsScrolling property and returns the receiver for chaining.
+// WithAllowsScrolling sets allowsScrolling and returns the receiver so calls can be chained.
 func (x *WebFrameView) WithAllowsScrolling(allowsScrolling bool) *WebFrameView {
-	x.inner.SetAllowsScrolling(allowsScrolling)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsScrolling:"), allowsScrolling)
 	return x
 }
 
 // Returns a print operation object to print this frame.
-//
-// PrintOperationWithPrintInfo calls the underlying PrintOperationWithPrintInfo.
-func (x *WebFrameView) PrintOperationWithPrintInfo(printInfo *appkit.NSPrintInfo) *appkit.NSPrintOperation {
-	return x.inner.PrintOperationWithPrintInfo(printInfo)
+func (x *WebFrameView) PrintOperationWithPrintInfo(printInfo obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printOperationWithPrintInfo:"), objref.IDOf(printInfo))
+	return obj.Wrap(_r)
 }
 
 // Prints the receiver.
-//
-// PrintDocumentView calls the underlying PrintDocumentView.
 func (x *WebFrameView) PrintDocumentView() {
-	x.inner.PrintDocumentView()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printDocumentView"))
 }
 
-// @property webFrame @abstract The WebFrame associated with this WebFrameView
-//
-// WebFrame calls the underlying WebFrame.
+// The WebFrame associated with this WebFrameView
 func (x *WebFrameView) WebFrame() *WebFrame {
-	_r := x.inner.WebFrame()
-	if _r == nil {
-		return nil
-	}
-	return &WebFrame{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webFrame"))
+	return WebFrameFromID(_r)
 }
 
-// @property documentView @abstract The WebFrameView's document subview @discussion The subview that renders the WebFrameView's contents
-//
-// DocumentView calls the underlying DocumentView.
-func (x *WebFrameView) DocumentView() *appkit.NSView {
-	return x.inner.DocumentView()
+// The WebFrameView's document subview The subview that renders the WebFrameView's contents
+func (x *WebFrameView) DocumentView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentView"))
+	return obj.Wrap(_r)
 }
 
-// @property allowsScrolling @abstract Whether the WebFrameView allows its document to be scrolled
-//
-// AllowsScrolling calls the underlying AllowsScrolling.
+// Whether the WebFrameView allows its document to be scrolled
 func (x *WebFrameView) AllowsScrolling() bool {
-	return x.inner.AllowsScrolling()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsScrolling"))
+	return _r
 }
 
-// SetAllowsScrolling calls the underlying SetAllowsScrolling.
 func (x *WebFrameView) SetAllowsScrolling(allowsScrolling bool) {
-	x.inner.SetAllowsScrolling(allowsScrolling)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsScrolling:"), allowsScrolling)
 }
 
-// @property canPrintHeadersAndFooters @abstract Whether this frame can print headers and footers
-//
-// CanPrintHeadersAndFooters calls the underlying CanPrintHeadersAndFooters.
+// Whether this frame can print headers and footers
 func (x *WebFrameView) CanPrintHeadersAndFooters() bool {
-	return x.inner.CanPrintHeadersAndFooters()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPrintHeadersAndFooters"))
+	return _r
 }
 
-// @property documentViewShouldHandlePrint @abstract Called by the host application before it initializes and runs a print operation. @discussion If NO is returned, the host application will abort its print operation and call -printDocumentView on the WebFrameView.  The document view is then expected to run its own print operation.  If YES is returned, the host application's print operation will continue as normal.
-//
-// DocumentViewShouldHandlePrint calls the underlying DocumentViewShouldHandlePrint.
+// Called by the host application before it initializes and runs a print operation. If NO is returned, the host application will abort its print operation and call -printDocumentView on the WebFrameView.  The document view is then expected to run its own print operation.  If YES is returned, the host application's print operation will continue as normal.
 func (x *WebFrameView) DocumentViewShouldHandlePrint() bool {
-	return x.inner.DocumentViewShouldHandlePrint()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("documentViewShouldHandlePrint"))
+	return _r
 }
 
 // WebFrameViewable is the interface implemented by [WebFrameView], for mocking and DI.
 type WebFrameViewable interface {
-	Unwrap() *raw.WebFrameView
+	obj.Object
 	WithAllowsScrolling(allowsScrolling bool) *WebFrameView
-	PrintOperationWithPrintInfo(printInfo *appkit.NSPrintInfo) *appkit.NSPrintOperation
+	PrintOperationWithPrintInfo(printInfo obj.Object) obj.Object
 	PrintDocumentView()
 	WebFrame() *WebFrame
-	DocumentView() *appkit.NSView
+	DocumentView() obj.Object
 	AllowsScrolling() bool
 	SetAllowsScrolling(allowsScrolling bool)
 	CanPrintHeadersAndFooters() bool

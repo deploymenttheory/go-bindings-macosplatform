@@ -5,85 +5,98 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // One portion of an overall route.
 //
-// RouteStep wraps [raw.MKRouteStep] with a fluent Go API.
+// RouteStep is an idiomatic wrapper over the Objective-C class MKRouteStep.
 type RouteStep struct {
-	inner *raw.MKRouteStep
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKRouteStep].
-func (x *RouteStep) Unwrap() *raw.MKRouteStep { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RouteStep) ID() objc.ID { return x.inner.Ptr() }
-
-// RouteStepFromID adopts an existing object pointer as a RouteStep (nil for 0).
+// RouteStepFromID adopts an existing Objective-C object as a RouteStep
+// (nil for 0), retaining it and registering a release finalizer.
 func RouteStepFromID(id objc.ID) *RouteStep {
 	if id == 0 {
 		return nil
 	}
-	return &RouteStep{inner: raw.MKRouteStepFromID(id)}
+	x := &RouteStep{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRouteStep creates a new [RouteStep].
-func NewRouteStep() *RouteStep {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKRouteStep")), objc.RegisterName("new"))
-	return &RouteStep{inner: raw.MKRouteStepFromID(_id)}
-}
-
-// Instructions calls the underlying Instructions.
-func (x *RouteStep) Instructions() string {
-	_r := x.inner.Instructions()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// Notice calls the underlying Notice.
-func (x *RouteStep) Notice() string {
-	_r := x.inner.Notice()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// Polyline calls the underlying Polyline.
-func (x *RouteStep) Polyline() *Polyline {
-	_r := x.inner.Polyline()
-	if _r == nil {
+// routeStepAdopt wraps an Objective-C object that this code just created as a
+// RouteStep (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func routeStepAdopt(id objc.ID) *RouteStep {
+	if id == 0 {
 		return nil
 	}
-	return &Polyline{inner: _r}
+	x := &RouteStep{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Distance calls the underlying Distance.
-func (x *RouteStep) Distance() unsafe.Pointer {
-	return x.inner.Distance()
+// Description returns the object's -description text.
+func (x *RouteStep) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// TransportType calls the underlying TransportType.
-func (x *RouteStep) TransportType() MKDirectionsTransportType {
-	return MKDirectionsTransportType(x.inner.TransportType())
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RouteStep) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RouteStep) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRouteStep creates a new RouteStep.
+func NewRouteStep() *RouteStep {
+	_id := objc.Send[objc.ID](objc.ID(_class("MKRouteStep")), objc.RegisterName("new"))
+	return routeStepAdopt(_id)
+}
+
+func (x *RouteStep) Instructions() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instructions"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *RouteStep) Notice() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notice"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *RouteStep) Polyline() *Polyline {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("polyline"))
+	return PolylineFromID(_r)
+}
+
+func (x *RouteStep) TransportType() DirectionsTransportType {
+	_r := objc.Send[DirectionsTransportType](objref.IDOf(x), objc.RegisterName("transportType"))
+	return _r
 }
 
 // RouteStepable is the interface implemented by [RouteStep], for mocking and DI.
 type RouteStepable interface {
-	Unwrap() *raw.MKRouteStep
+	obj.Object
 	Instructions() string
 	Notice() string
 	Polyline() *Polyline
-	Distance() unsafe.Pointer
-	TransportType() MKDirectionsTransportType
+	TransportType() DirectionsTransportType
 }
 
 var _ RouteStepable = (*RouteStep)(nil)

@@ -5,48 +5,73 @@
 package videosubscriberaccount
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videosubscriberaccount"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a request made for subscriber account information.
 //
-// VSAccountManagerResult wraps [raw.VSAccountManagerResult] with a fluent Go API.
+// VSAccountManagerResult is an idiomatic wrapper over the Objective-C class VSAccountManagerResult.
 type VSAccountManagerResult struct {
-	inner *raw.VSAccountManagerResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VSAccountManagerResult].
-func (x *VSAccountManagerResult) Unwrap() *raw.VSAccountManagerResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VSAccountManagerResult) ID() objc.ID { return x.inner.Ptr() }
-
-// VSAccountManagerResultFromID adopts an existing object pointer as a VSAccountManagerResult (nil for 0).
+// VSAccountManagerResultFromID adopts an existing Objective-C object as a VSAccountManagerResult
+// (nil for 0), retaining it and registering a release finalizer.
 func VSAccountManagerResultFromID(id objc.ID) *VSAccountManagerResult {
 	if id == 0 {
 		return nil
 	}
-	return &VSAccountManagerResult{inner: raw.VSAccountManagerResultFromID(id)}
+	x := &VSAccountManagerResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVSAccountManagerResult creates a new [VSAccountManagerResult].
+// vSAccountManagerResultAdopt wraps an Objective-C object that this code just created as a
+// VSAccountManagerResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vSAccountManagerResultAdopt(id objc.ID) *VSAccountManagerResult {
+	if id == 0 {
+		return nil
+	}
+	x := &VSAccountManagerResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VSAccountManagerResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VSAccountManagerResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VSAccountManagerResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVSAccountManagerResult creates a new VSAccountManagerResult.
 func NewVSAccountManagerResult() *VSAccountManagerResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VSAccountManagerResult")), objc.RegisterName("new"))
-	return &VSAccountManagerResult{inner: raw.VSAccountManagerResultFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VSAccountManagerResult")), objc.RegisterName("new"))
+	return vSAccountManagerResultAdopt(_id)
 }
 
 // Cancels an in-progress request for subscriber account information.
-//
-// Cancel calls the underlying Cancel.
 func (x *VSAccountManagerResult) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
 // VSAccountManagerResultable is the interface implemented by [VSAccountManagerResult], for mocking and DI.
 type VSAccountManagerResultable interface {
-	Unwrap() *raw.VSAccountManagerResult
+	obj.Object
 	Cancel()
 }
 

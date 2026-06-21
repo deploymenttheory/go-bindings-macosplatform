@@ -5,109 +5,99 @@
 package cinematic
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object representing a series of detections of the same subject over time.
 //
-// DetectionTrack wraps [raw.CNDetectionTrack] with a fluent Go API.
+// DetectionTrack is an idiomatic wrapper over the Objective-C class CNDetectionTrack.
 type DetectionTrack struct {
-	inner *raw.CNDetectionTrack
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNDetectionTrack].
-func (x *DetectionTrack) Unwrap() *raw.CNDetectionTrack { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DetectionTrack) ID() objc.ID { return x.inner.Ptr() }
-
-// DetectionTrackFromID adopts an existing object pointer as a DetectionTrack (nil for 0).
+// DetectionTrackFromID adopts an existing Objective-C object as a DetectionTrack
+// (nil for 0), retaining it and registering a release finalizer.
 func DetectionTrackFromID(id objc.ID) *DetectionTrack {
 	if id == 0 {
 		return nil
 	}
-	return &DetectionTrack{inner: raw.CNDetectionTrackFromID(id)}
+	x := &DetectionTrack{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDetectionTrack creates a new [DetectionTrack].
+// detectionTrackAdopt wraps an Objective-C object that this code just created as a
+// DetectionTrack (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func detectionTrackAdopt(id objc.ID) *DetectionTrack {
+	if id == 0 {
+		return nil
+	}
+	x := &DetectionTrack{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DetectionTrack) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DetectionTrack) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DetectionTrack) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDetectionTrack creates a new DetectionTrack.
 func NewDetectionTrack() *DetectionTrack {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNDetectionTrack")), objc.RegisterName("new"))
-	return &DetectionTrack{inner: raw.CNDetectionTrackFromID(_id)}
-}
-
-// DetectionAtOrBeforeTime calls the underlying DetectionAtOrBeforeTime.
-func (x *DetectionTrack) DetectionAtOrBeforeTime(time_ coremedia.CMTime) *Detection {
-	_r := x.inner.DetectionAtOrBeforeTime(time_)
-	if _r == nil {
-		return nil
-	}
-	return &Detection{inner: _r}
-}
-
-// DetectionNearestTime calls the underlying DetectionNearestTime.
-func (x *DetectionTrack) DetectionNearestTime(time_ coremedia.CMTime) *Detection {
-	_r := x.inner.DetectionNearestTime(time_)
-	if _r == nil {
-		return nil
-	}
-	return &Detection{inner: _r}
-}
-
-// Gets the array of detections in the detection track within the given time range. Makes sense for discrete detection tracks only.
-//
-// DetectionsInTimeRange calls the underlying DetectionsInTimeRange.
-func (x *DetectionTrack) DetectionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.CNDetection] {
-	return x.inner.DetectionsInTimeRange(timeRange)
+	_id := objc.Send[objc.ID](objc.ID(_class("CNDetectionTrack")), objc.RegisterName("new"))
+	return detectionTrackAdopt(_id)
 }
 
 // The type of subject detected by this detection track.
-//
-// DetectionType calls the underlying DetectionType.
-func (x *DetectionTrack) DetectionType() CNDetectionType {
-	return CNDetectionType(x.inner.DetectionType())
+func (x *DetectionTrack) DetectionType() DetectionType {
+	_r := objc.Send[DetectionType](objref.IDOf(x), objc.RegisterName("detectionType"))
+	return _r
 }
 
 // The detectionID of the subject detected during this track; unique within a cinematic script.
-//
-// DetectionID calls the underlying DetectionID.
 func (x *DetectionTrack) DetectionID() int64 {
-	return x.inner.DetectionID()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("detectionID"))
+	return _r
 }
 
 // The detectionGroupID of the subject detected by the track. The detectionGroupID can be used to associate related detections such as the face and torso of the same person.
-//
-// DetectionGroupID calls the underlying DetectionGroupID.
 func (x *DetectionTrack) DetectionGroupID() int64 {
-	return x.inner.DetectionGroupID()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("detectionGroupID"))
+	return _r
 }
 
 // Whether this detection track was created by the client.
-//
-// IsUserCreated calls the underlying IsUserCreated.
 func (x *DetectionTrack) IsUserCreated() bool {
-	return x.inner.IsUserCreated()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUserCreated"))
+	return _r
 }
 
 // Whether this detection track has discrete detections (otherwise continuous). A discrete detection track will return detections only at the specific times a detection occurs. A continuous detection track will return a detection for any requested time and an empty array for time ranges.
-//
-// IsDiscrete calls the underlying IsDiscrete.
 func (x *DetectionTrack) IsDiscrete() bool {
-	return x.inner.IsDiscrete()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDiscrete"))
+	return _r
 }
-
-func (x *DetectionTrack) asDetectionTrack() *raw.CNDetectionTrack { return x.inner }
 
 // DetectionTrackable is the interface implemented by [DetectionTrack], for mocking and DI.
 type DetectionTrackable interface {
-	Unwrap() *raw.CNDetectionTrack
-	DetectionAtOrBeforeTime(time_ coremedia.CMTime) *Detection
-	DetectionNearestTime(time_ coremedia.CMTime) *Detection
-	DetectionsInTimeRange(timeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.CNDetection]
-	DetectionType() CNDetectionType
+	obj.Object
+	DetectionType() DetectionType
 	DetectionID() int64
 	DetectionGroupID() int64
 	IsUserCreated() bool

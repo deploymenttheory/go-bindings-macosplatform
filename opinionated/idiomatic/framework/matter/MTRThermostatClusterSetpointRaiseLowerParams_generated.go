@@ -5,126 +5,144 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRThermostatClusterSetpointRaiseLowerParams wraps [raw.MTRThermostatClusterSetpointRaiseLowerParams] with a fluent Go API.
+// MTRThermostatClusterSetpointRaiseLowerParams is an idiomatic wrapper over the Objective-C class MTRThermostatClusterSetpointRaiseLowerParams.
 type MTRThermostatClusterSetpointRaiseLowerParams struct {
-	inner *raw.MTRThermostatClusterSetpointRaiseLowerParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRThermostatClusterSetpointRaiseLowerParams].
-func (x *MTRThermostatClusterSetpointRaiseLowerParams) Unwrap() *raw.MTRThermostatClusterSetpointRaiseLowerParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRThermostatClusterSetpointRaiseLowerParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRThermostatClusterSetpointRaiseLowerParamsFromID adopts an existing object pointer as a MTRThermostatClusterSetpointRaiseLowerParams (nil for 0).
+// MTRThermostatClusterSetpointRaiseLowerParamsFromID adopts an existing Objective-C object as a MTRThermostatClusterSetpointRaiseLowerParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRThermostatClusterSetpointRaiseLowerParamsFromID(id objc.ID) *MTRThermostatClusterSetpointRaiseLowerParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRThermostatClusterSetpointRaiseLowerParams{inner: raw.MTRThermostatClusterSetpointRaiseLowerParamsFromID(id)}
+	x := &MTRThermostatClusterSetpointRaiseLowerParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRThermostatClusterSetpointRaiseLowerParams creates a new [MTRThermostatClusterSetpointRaiseLowerParams].
+// mTRThermostatClusterSetpointRaiseLowerParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRThermostatClusterSetpointRaiseLowerParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRThermostatClusterSetpointRaiseLowerParamsAdopt(id objc.ID) *MTRThermostatClusterSetpointRaiseLowerParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRThermostatClusterSetpointRaiseLowerParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRThermostatClusterSetpointRaiseLowerParams creates a new MTRThermostatClusterSetpointRaiseLowerParams.
 func NewMTRThermostatClusterSetpointRaiseLowerParams() *MTRThermostatClusterSetpointRaiseLowerParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRThermostatClusterSetpointRaiseLowerParams")), objc.RegisterName("new"))
-	return &MTRThermostatClusterSetpointRaiseLowerParams{inner: raw.MTRThermostatClusterSetpointRaiseLowerParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRThermostatClusterSetpointRaiseLowerParams")), objc.RegisterName("new"))
+	return mTRThermostatClusterSetpointRaiseLowerParamsAdopt(_id)
 }
 
-// WithMode sets the mode property and returns the receiver for chaining.
-func (x *MTRThermostatClusterSetpointRaiseLowerParams) WithMode(mode *foundation.NSNumber) *MTRThermostatClusterSetpointRaiseLowerParams {
-	x.inner.SetMode(mode)
+// WithMode sets mode and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) WithMode(mode obj.Object) *MTRThermostatClusterSetpointRaiseLowerParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return x
 }
 
-// WithAmount sets the amount property and returns the receiver for chaining.
-func (x *MTRThermostatClusterSetpointRaiseLowerParams) WithAmount(amount *foundation.NSNumber) *MTRThermostatClusterSetpointRaiseLowerParams {
-	x.inner.SetAmount(amount)
+// WithAmount sets amount and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) WithAmount(amount obj.Object) *MTRThermostatClusterSetpointRaiseLowerParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRThermostatClusterSetpointRaiseLowerParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThermostatClusterSetpointRaiseLowerParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterSetpointRaiseLowerParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRThermostatClusterSetpointRaiseLowerParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThermostatClusterSetpointRaiseLowerParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThermostatClusterSetpointRaiseLowerParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// Mode calls the underlying Mode.
-func (x *MTRThermostatClusterSetpointRaiseLowerParams) Mode() *foundation.NSNumber {
-	return x.inner.Mode()
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) Mode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mode"))
+	return obj.Wrap(_r)
 }
 
-// SetMode calls the underlying SetMode.
-func (x *MTRThermostatClusterSetpointRaiseLowerParams) SetMode(mode *foundation.NSNumber) {
-	x.inner.SetMode(mode)
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) SetMode(mode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 }
 
-// Amount calls the underlying Amount.
-func (x *MTRThermostatClusterSetpointRaiseLowerParams) Amount() *foundation.NSNumber {
-	return x.inner.Amount()
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) Amount() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("amount"))
+	return obj.Wrap(_r)
 }
 
-// SetAmount calls the underlying SetAmount.
-func (x *MTRThermostatClusterSetpointRaiseLowerParams) SetAmount(amount *foundation.NSNumber) {
-	x.inner.SetAmount(amount)
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) SetAmount(amount obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRThermostatClusterSetpointRaiseLowerParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRThermostatClusterSetpointRaiseLowerParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRThermostatClusterSetpointRaiseLowerParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRThermostatClusterSetpointRaiseLowerParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRThermostatClusterSetpointRaiseLowerParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRThermostatClusterSetpointRaiseLowerParamsable is the interface implemented by [MTRThermostatClusterSetpointRaiseLowerParams], for mocking and DI.
 type MTRThermostatClusterSetpointRaiseLowerParamsable interface {
-	Unwrap() *raw.MTRThermostatClusterSetpointRaiseLowerParams
-	WithMode(mode *foundation.NSNumber) *MTRThermostatClusterSetpointRaiseLowerParams
-	WithAmount(amount *foundation.NSNumber) *MTRThermostatClusterSetpointRaiseLowerParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThermostatClusterSetpointRaiseLowerParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThermostatClusterSetpointRaiseLowerParams
-	Mode() *foundation.NSNumber
-	SetMode(mode *foundation.NSNumber)
-	Amount() *foundation.NSNumber
-	SetAmount(amount *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithMode(mode obj.Object) *MTRThermostatClusterSetpointRaiseLowerParams
+	WithAmount(amount obj.Object) *MTRThermostatClusterSetpointRaiseLowerParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterSetpointRaiseLowerParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThermostatClusterSetpointRaiseLowerParams
+	Mode() obj.Object
+	SetMode(mode obj.Object)
+	Amount() obj.Object
+	SetAmount(amount obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRThermostatClusterSetpointRaiseLowerParamsable = (*MTRThermostatClusterSetpointRaiseLowerParams)(nil)

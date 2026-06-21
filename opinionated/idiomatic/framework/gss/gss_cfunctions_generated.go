@@ -5,416 +5,89 @@
 package gss
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gss"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// GSSCreateCredentialFromUUID calls [raw.GSSCreateCredentialFromUUID] (C function GSSCreateCredentialFromUUID).
-func GSSCreateCredentialFromUUID(uuid unsafe.Pointer) unsafe.Pointer {
-	return raw.GSSCreateCredentialFromUUID(uuid)
-}
-
-// GSSCreateError calls [raw.GSSCreateError] (C function GSSCreateError).
-func GSSCreateError(mech *raw.GssOIDDescStruct, major_status uint32, minor_status uint32) unsafe.Pointer {
-	return raw.GSSCreateError(mech, major_status, minor_status)
-}
-
-// GSSCreateName calls [raw.GSSCreateName] (C function GSSCreateName).
-func GSSCreateName(name unsafe.Pointer, name_type *raw.GssOIDDescStruct, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.GSSCreateName(name, name_type, error_)
-}
-
-// GSSCredentialCopyName calls [raw.GSSCredentialCopyName] (C function GSSCredentialCopyName).
-func GSSCredentialCopyName(cred unsafe.Pointer) unsafe.Pointer {
-	return raw.GSSCredentialCopyName(cred)
-}
-
-// GSSCredentialCopyUUID calls [raw.GSSCredentialCopyUUID] (C function GSSCredentialCopyUUID).
-func GSSCredentialCopyUUID(credential unsafe.Pointer) unsafe.Pointer {
-	return raw.GSSCredentialCopyUUID(credential)
-}
-
-// GSSCredentialGetLifetime calls [raw.GSSCredentialGetLifetime] (C function GSSCredentialGetLifetime).
-func GSSCredentialGetLifetime(cred unsafe.Pointer) uint32 {
-	return raw.GSSCredentialGetLifetime(cred)
-}
-
-// GSSNameCreateDisplayString calls [raw.GSSNameCreateDisplayString] (C function GSSNameCreateDisplayString).
-func GSSNameCreateDisplayString(name unsafe.Pointer) unsafe.Pointer {
-	return raw.GSSNameCreateDisplayString(name)
-}
-
-// AaplChangePassword calls [raw.GssAaplChangePassword] (C function gss_aapl_change_password).
-func AaplChangePassword(name unsafe.Pointer, mech *raw.GssOIDDescStruct, attributes unsafe.Pointer, error_ unsafe.Pointer) uint32 {
-	return raw.GssAaplChangePassword(name, mech, attributes, error_)
-}
-
-// AaplInitialCred calls [raw.GssAaplInitialCred] (C function gss_aapl_initial_cred).
-func AaplInitialCred(desired_name unsafe.Pointer, desired_mech *raw.GssOIDDescStruct, attributes unsafe.Pointer, output_cred_handle unsafe.Pointer, error_ unsafe.Pointer) uint32 {
-	return raw.GssAaplInitialCred(desired_name, desired_mech, attributes, output_cred_handle, error_)
-}
-
-// AcceptSecContext calls [raw.GssAcceptSecContext] (C function gss_accept_sec_context).
-func AcceptSecContext(minor_status *uint32, context_handle unsafe.Pointer, acceptor_cred_handle unsafe.Pointer, input_token unsafe.Pointer, input_chan_bindings unsafe.Pointer, src_name unsafe.Pointer, mech_type **raw.GssOIDDescStruct, output_token *raw.GssBufferDescStruct, ret_flags *uint32, time_rec *uint32, delegated_cred_handle unsafe.Pointer) uint32 {
-	return raw.GssAcceptSecContext(minor_status, context_handle, acceptor_cred_handle, input_token, input_chan_bindings, src_name, mech_type, output_token, ret_flags, time_rec, delegated_cred_handle)
-}
-
-// AcquireCred calls [raw.GssAcquireCred] (C function gss_acquire_cred).
-func AcquireCred(minor_status *uint32, desired_name unsafe.Pointer, time_req uint32, desired_mechs unsafe.Pointer, cred_usage int, output_cred_handle unsafe.Pointer, actual_mechs **raw.GssOIDSetDescStruct, time_rec *uint32) uint32 {
-	return raw.GssAcquireCred(minor_status, desired_name, time_req, desired_mechs, cred_usage, output_cred_handle, actual_mechs, time_rec)
-}
-
-// AcquireCredWithPassword calls [raw.GssAcquireCredWithPassword] (C function gss_acquire_cred_with_password).
-func AcquireCredWithPassword(minor_status *uint32, desired_name unsafe.Pointer, password unsafe.Pointer, time_req uint32, desired_mechs unsafe.Pointer, cred_usage int, output_cred_handle unsafe.Pointer, actual_mechs **raw.GssOIDSetDescStruct, time_rec *uint32) uint32 {
-	return raw.GssAcquireCredWithPassword(minor_status, desired_name, password, time_req, desired_mechs, cred_usage, output_cred_handle, actual_mechs, time_rec)
-}
-
-// AddBufferSetMember calls [raw.GssAddBufferSetMember] (C function gss_add_buffer_set_member).
-func AddBufferSetMember(minor_status *uint32, member_buffer unsafe.Pointer, buffer_set **raw.GssBufferSetDescStruct) uint32 {
-	return raw.GssAddBufferSetMember(minor_status, member_buffer, buffer_set)
-}
-
-// AddCred calls [raw.GssAddCred] (C function gss_add_cred).
-func AddCred(minor_status *uint32, input_cred_handle unsafe.Pointer, desired_name unsafe.Pointer, desired_mech unsafe.Pointer, cred_usage int, initiator_time_req uint32, acceptor_time_req uint32, output_cred_handle unsafe.Pointer, actual_mechs **raw.GssOIDSetDescStruct, initiator_time_rec *uint32, acceptor_time_rec *uint32) uint32 {
-	return raw.GssAddCred(minor_status, input_cred_handle, desired_name, desired_mech, cred_usage, initiator_time_req, acceptor_time_req, output_cred_handle, actual_mechs, initiator_time_rec, acceptor_time_rec)
-}
-
-// AddOidSetMember calls [raw.GssAddOidSetMember] (C function gss_add_oid_set_member).
-func AddOidSetMember(minor_status *uint32, member_oid *raw.GssOIDDescStruct, oid_set **raw.GssOIDSetDescStruct) uint32 {
-	return raw.GssAddOidSetMember(minor_status, member_oid, oid_set)
-}
-
-// CanonicalizeName calls [raw.GssCanonicalizeName] (C function gss_canonicalize_name).
-func CanonicalizeName(minor_status *uint32, input_name unsafe.Pointer, mech_type unsafe.Pointer, output_name unsafe.Pointer) uint32 {
-	return raw.GssCanonicalizeName(minor_status, input_name, mech_type, output_name)
-}
-
-// CompareName calls [raw.GssCompareName] (C function gss_compare_name).
-func CompareName(minor_status *uint32, name1_arg unsafe.Pointer, name2_arg unsafe.Pointer, name_equal *int32) uint32 {
-	return raw.GssCompareName(minor_status, name1_arg, name2_arg, name_equal)
-}
-
-// ContextTime calls [raw.GssContextTime] (C function gss_context_time).
-func ContextTime(minor_status *uint32, context_handle unsafe.Pointer, time_rec *uint32) uint32 {
-	return raw.GssContextTime(minor_status, context_handle, time_rec)
-}
-
-// CreateEmptyBufferSet calls [raw.GssCreateEmptyBufferSet] (C function gss_create_empty_buffer_set).
-func CreateEmptyBufferSet(minor_status *uint32, buffer_set **raw.GssBufferSetDescStruct) uint32 {
-	return raw.GssCreateEmptyBufferSet(minor_status, buffer_set)
-}
-
-// CreateEmptyOidSet calls [raw.GssCreateEmptyOidSet] (C function gss_create_empty_oid_set).
-func CreateEmptyOidSet(minor_status *uint32, oid_set **raw.GssOIDSetDescStruct) uint32 {
-	return raw.GssCreateEmptyOidSet(minor_status, oid_set)
-}
-
-// DecapsulateToken calls [raw.GssDecapsulateToken] (C function gss_decapsulate_token).
-func DecapsulateToken(input_token *raw.GssBufferDescStruct, oid *raw.GssOIDDescStruct, output_token *raw.GssBufferDescStruct) uint32 {
-	return raw.GssDecapsulateToken(input_token, oid, output_token)
-}
-
-// DeleteSecContext calls [raw.GssDeleteSecContext] (C function gss_delete_sec_context).
-func DeleteSecContext(minor_status *uint32, context_handle unsafe.Pointer, output_token *raw.GssBufferDescStruct) uint32 {
-	return raw.GssDeleteSecContext(minor_status, context_handle, output_token)
-}
-
-// DestroyCred calls [raw.GssDestroyCred] (C function gss_destroy_cred).
-func DestroyCred(min_stat *uint32, cred_handle unsafe.Pointer) uint32 {
-	return raw.GssDestroyCred(min_stat, cred_handle)
-}
-
-// DisplayMechAttr calls [raw.GssDisplayMechAttr] (C function gss_display_mech_attr).
-func DisplayMechAttr(minor_status *uint32, mech_attr *raw.GssOIDDescStruct, name *raw.GssBufferDescStruct, short_desc *raw.GssBufferDescStruct, long_desc *raw.GssBufferDescStruct) uint32 {
-	return raw.GssDisplayMechAttr(minor_status, mech_attr, name, short_desc, long_desc)
-}
-
-// DisplayName calls [raw.GssDisplayName] (C function gss_display_name).
-func DisplayName(minor_status *uint32, input_name unsafe.Pointer, output_name_buffer *raw.GssBufferDescStruct, output_name_type **raw.GssOIDDescStruct) uint32 {
-	return raw.GssDisplayName(minor_status, input_name, output_name_buffer, output_name_type)
-}
-
-// DisplayStatus calls [raw.GssDisplayStatus] (C function gss_display_status).
-func DisplayStatus(minor_status *uint32, status_value uint32, status_type int, mech_type unsafe.Pointer, message_content *uint32, status_string *raw.GssBufferDescStruct) uint32 {
-	return raw.GssDisplayStatus(minor_status, status_value, status_type, mech_type, message_content, status_string)
-}
-
-// DuplicateName calls [raw.GssDuplicateName] (C function gss_duplicate_name).
-func DuplicateName(minor_status *uint32, src_name unsafe.Pointer, dest_name unsafe.Pointer) uint32 {
-	return raw.GssDuplicateName(minor_status, src_name, dest_name)
-}
-
-// DuplicateOid calls [raw.GssDuplicateOid] (C function gss_duplicate_oid).
-func DuplicateOid(minor_status *uint32, src_oid *raw.GssOIDDescStruct, dest_oid **raw.GssOIDDescStruct) uint32 {
-	return raw.GssDuplicateOid(minor_status, src_oid, dest_oid)
-}
-
-// EncapsulateToken calls [raw.GssEncapsulateToken] (C function gss_encapsulate_token).
-func EncapsulateToken(input_token *raw.GssBufferDescStruct, oid *raw.GssOIDDescStruct, output_token *raw.GssBufferDescStruct) uint32 {
-	return raw.GssEncapsulateToken(input_token, oid, output_token)
-}
-
-// ExportCred calls [raw.GssExportCred] (C function gss_export_cred).
-func ExportCred(minor_status *uint32, cred_handle unsafe.Pointer, token *raw.GssBufferDescStruct) uint32 {
-	return raw.GssExportCred(minor_status, cred_handle, token)
-}
-
-// ExportName calls [raw.GssExportName] (C function gss_export_name).
-func ExportName(minor_status *uint32, input_name unsafe.Pointer, exported_name *raw.GssBufferDescStruct) uint32 {
-	return raw.GssExportName(minor_status, input_name, exported_name)
-}
-
-// ExportSecContext calls [raw.GssExportSecContext] (C function gss_export_sec_context).
-func ExportSecContext(minor_status *uint32, context_handle unsafe.Pointer, interprocess_token *raw.GssBufferDescStruct) uint32 {
-	return raw.GssExportSecContext(minor_status, context_handle, interprocess_token)
-}
-
-// GetMic calls [raw.GssGetMic] (C function gss_get_mic).
-func GetMic(minor_status *uint32, context_handle unsafe.Pointer, qop_req uint32, message_buffer unsafe.Pointer, message_token *raw.GssBufferDescStruct) uint32 {
-	return raw.GssGetMic(minor_status, context_handle, qop_req, message_buffer, message_token)
-}
-
-// ImportCred calls [raw.GssImportCred] (C function gss_import_cred).
-func ImportCred(minor_status *uint32, token *raw.GssBufferDescStruct, cred_handle unsafe.Pointer) uint32 {
-	return raw.GssImportCred(minor_status, token, cred_handle)
-}
-
-// ImportName calls [raw.GssImportName] (C function gss_import_name).
-func ImportName(minor_status *uint32, input_name_buffer unsafe.Pointer, input_name_type *raw.GssOIDDescStruct, output_name unsafe.Pointer) uint32 {
-	return raw.GssImportName(minor_status, input_name_buffer, input_name_type, output_name)
-}
-
-// ImportSecContext calls [raw.GssImportSecContext] (C function gss_import_sec_context).
-func ImportSecContext(minor_status *uint32, interprocess_token unsafe.Pointer, context_handle unsafe.Pointer) uint32 {
-	return raw.GssImportSecContext(minor_status, interprocess_token, context_handle)
-}
-
-// IndicateMechs calls [raw.GssIndicateMechs] (C function gss_indicate_mechs).
-func IndicateMechs(minor_status *uint32, mech_set **raw.GssOIDSetDescStruct) uint32 {
-	return raw.GssIndicateMechs(minor_status, mech_set)
-}
-
-// IndicateMechsByAttrs calls [raw.GssIndicateMechsByAttrs] (C function gss_indicate_mechs_by_attrs).
-func IndicateMechsByAttrs(minor_status *uint32, desired_mech_attrs *raw.GssOIDSetDescStruct, except_mech_attrs *raw.GssOIDSetDescStruct, critical_mech_attrs *raw.GssOIDSetDescStruct, mechs **raw.GssOIDSetDescStruct) uint32 {
-	return raw.GssIndicateMechsByAttrs(minor_status, desired_mech_attrs, except_mech_attrs, critical_mech_attrs, mechs)
-}
-
-// InitSecContext calls [raw.GssInitSecContext] (C function gss_init_sec_context).
-func InitSecContext(minor_status *uint32, initiator_cred_handle unsafe.Pointer, context_handle unsafe.Pointer, target_name unsafe.Pointer, input_mech_type unsafe.Pointer, req_flags uint32, time_req uint32, input_chan_bindings unsafe.Pointer, input_token unsafe.Pointer, actual_mech_type **raw.GssOIDDescStruct, output_token *raw.GssBufferDescStruct, ret_flags *uint32, time_rec *uint32) uint32 {
-	return raw.GssInitSecContext(minor_status, initiator_cred_handle, context_handle, target_name, input_mech_type, req_flags, time_req, input_chan_bindings, input_token, actual_mech_type, output_token, ret_flags, time_rec)
-}
-
-// InquireAttrsForMech calls [raw.GssInquireAttrsForMech] (C function gss_inquire_attrs_for_mech).
-func InquireAttrsForMech(minor_status *uint32, mech *raw.GssOIDDescStruct, mech_attr **raw.GssOIDSetDescStruct, known_mech_attrs **raw.GssOIDSetDescStruct) uint32 {
-	return raw.GssInquireAttrsForMech(minor_status, mech, mech_attr, known_mech_attrs)
-}
-
-// InquireContext calls [raw.GssInquireContext] (C function gss_inquire_context).
-func InquireContext(minor_status *uint32, context_handle unsafe.Pointer, src_name unsafe.Pointer, targ_name unsafe.Pointer, lifetime_rec *uint32, mech_type **raw.GssOIDDescStruct, ctx_flags *uint32, locally_initiated *int32, xopen *int32) uint32 {
-	return raw.GssInquireContext(minor_status, context_handle, src_name, targ_name, lifetime_rec, mech_type, ctx_flags, locally_initiated, xopen)
-}
-
-// InquireCred calls [raw.GssInquireCred] (C function gss_inquire_cred).
-func InquireCred(minor_status *uint32, cred_handle unsafe.Pointer, name_ret unsafe.Pointer, lifetime *uint32, cred_usage *int, mechanisms **raw.GssOIDSetDescStruct) uint32 {
-	return raw.GssInquireCred(minor_status, cred_handle, name_ret, lifetime, cred_usage, mechanisms)
-}
-
-// InquireCredByMech calls [raw.GssInquireCredByMech] (C function gss_inquire_cred_by_mech).
-func InquireCredByMech(minor_status *uint32, cred_handle unsafe.Pointer, mech_type unsafe.Pointer, cred_name unsafe.Pointer, initiator_lifetime *uint32, acceptor_lifetime *uint32, cred_usage *int) uint32 {
-	return raw.GssInquireCredByMech(minor_status, cred_handle, mech_type, cred_name, initiator_lifetime, acceptor_lifetime, cred_usage)
-}
-
-// InquireCredByOid calls [raw.GssInquireCredByOid] (C function gss_inquire_cred_by_oid).
-func InquireCredByOid(minor_status *uint32, cred_handle unsafe.Pointer, desired_object unsafe.Pointer, data_set **raw.GssBufferSetDescStruct) uint32 {
-	return raw.GssInquireCredByOid(minor_status, cred_handle, desired_object, data_set)
-}
-
-// InquireMechForSaslname calls [raw.GssInquireMechForSaslname] (C function gss_inquire_mech_for_saslname).
-func InquireMechForSaslname(minor_status *uint32, sasl_mech_name unsafe.Pointer, mech_type **raw.GssOIDDescStruct) uint32 {
-	return raw.GssInquireMechForSaslname(minor_status, sasl_mech_name, mech_type)
-}
-
-// InquireMechsForName calls [raw.GssInquireMechsForName] (C function gss_inquire_mechs_for_name).
-func InquireMechsForName(minor_status *uint32, input_name unsafe.Pointer, mech_types **raw.GssOIDSetDescStruct) uint32 {
-	return raw.GssInquireMechsForName(minor_status, input_name, mech_types)
-}
-
-// InquireName calls [raw.GssInquireName] (C function gss_inquire_name).
-func InquireName(minor_status *uint32, input_name unsafe.Pointer, name_is_MN *int32, mN_mech **raw.GssOIDDescStruct, attrs **raw.GssBufferSetDescStruct) uint32 {
-	return raw.GssInquireName(minor_status, input_name, name_is_MN, mN_mech, attrs)
-}
-
-// InquireNamesForMech calls [raw.GssInquireNamesForMech] (C function gss_inquire_names_for_mech).
-func InquireNamesForMech(minor_status *uint32, mechanism *raw.GssOIDDescStruct, name_types **raw.GssOIDSetDescStruct) uint32 {
-	return raw.GssInquireNamesForMech(minor_status, mechanism, name_types)
-}
-
-// InquireSaslnameForMech calls [raw.GssInquireSaslnameForMech] (C function gss_inquire_saslname_for_mech).
-func InquireSaslnameForMech(minor_status *uint32, desired_mech unsafe.Pointer, sasl_mech_name *raw.GssBufferDescStruct, mech_name *raw.GssBufferDescStruct, mech_description *raw.GssBufferDescStruct) uint32 {
-	return raw.GssInquireSaslnameForMech(minor_status, desired_mech, sasl_mech_name, mech_name, mech_description)
-}
-
-// InquireSecContextByOid calls [raw.GssInquireSecContextByOid] (C function gss_inquire_sec_context_by_oid).
-func InquireSecContextByOid(minor_status *uint32, context_handle unsafe.Pointer, desired_object unsafe.Pointer, data_set **raw.GssBufferSetDescStruct) uint32 {
-	return raw.GssInquireSecContextByOid(minor_status, context_handle, desired_object, data_set)
-}
-
-// IterCreds calls [raw.GssIterCreds] (C function gss_iter_creds).
-func IterCreds(min_stat *uint32, flags uint32, mech *raw.GssOIDDescStruct, useriter func(*raw.GssOIDDescStruct, unsafe.Pointer)) uint32 {
-	return raw.GssIterCreds(min_stat, flags, mech, useriter)
-}
-
-// IterCredsF calls [raw.GssIterCredsF] (C function gss_iter_creds_f).
-func IterCredsF(min_stat *uint32, flags uint32, mech *raw.GssOIDDescStruct, userctx unsafe.Pointer, useriter unsafe.Pointer) uint32 {
-	return raw.GssIterCredsF(min_stat, flags, mech, userctx, useriter)
-}
-
-// Krb5CcacheName calls [raw.GssKrb5CcacheName] (C function gss_krb5_ccache_name).
-func Krb5CcacheName(minor_status *uint32, name string, out_name string) uint32 {
-	return raw.GssKrb5CcacheName(minor_status, name, out_name)
-}
-
-// Krb5CopyCcache calls [raw.GssKrb5CopyCcache] (C function gss_krb5_copy_ccache).
-func Krb5CopyCcache(minor_status *uint32, cred unsafe.Pointer, out unsafe.Pointer) uint32 {
-	return raw.GssKrb5CopyCcache(minor_status, cred, out)
-}
-
-// Krb5ExportLucidSecContext calls [raw.GssKrb5ExportLucidSecContext] (C function gss_krb5_export_lucid_sec_context).
-func Krb5ExportLucidSecContext(minor_status *uint32, context_handle unsafe.Pointer, version uint32, rctx unsafe.Pointer) uint32 {
-	return raw.GssKrb5ExportLucidSecContext(minor_status, context_handle, version, rctx)
-}
-
-// Krb5FreeLucidSecContext calls [raw.GssKrb5FreeLucidSecContext] (C function gss_krb5_free_lucid_sec_context).
-func Krb5FreeLucidSecContext(minor_status *uint32, c unsafe.Pointer) uint32 {
-	return raw.GssKrb5FreeLucidSecContext(minor_status, c)
-}
-
-// Krb5SetAllowableEnctypes calls [raw.GssKrb5SetAllowableEnctypes] (C function gss_krb5_set_allowable_enctypes).
-func Krb5SetAllowableEnctypes(minor_status *uint32, cred unsafe.Pointer, num_enctypes uint32, enctypes *int32) uint32 {
-	return raw.GssKrb5SetAllowableEnctypes(minor_status, cred, num_enctypes, enctypes)
-}
-
-// OidEqual calls [raw.GssOidEqual] (C function gss_oid_equal).
-func OidEqual(a *raw.GssOIDDescStruct, b *raw.GssOIDDescStruct) int {
-	return raw.GssOidEqual(a, b)
-}
-
-// OidToStr calls [raw.GssOidToStr] (C function gss_oid_to_str).
-func OidToStr(minor_status *uint32, oid *raw.GssOIDDescStruct, oid_str *raw.GssBufferDescStruct) uint32 {
-	return raw.GssOidToStr(minor_status, oid, oid_str)
-}
-
-// ProcessContextToken calls [raw.GssProcessContextToken] (C function gss_process_context_token).
-func ProcessContextToken(minor_status *uint32, context_handle unsafe.Pointer, token_buffer unsafe.Pointer) uint32 {
-	return raw.GssProcessContextToken(minor_status, context_handle, token_buffer)
-}
-
-// PseudoRandom calls [raw.GssPseudoRandom] (C function gss_pseudo_random).
-func PseudoRandom(minor_status *uint32, context_ unsafe.Pointer, prf_key int, prf_in unsafe.Pointer, desired_output_len int, prf_out *raw.GssBufferDescStruct) uint32 {
-	return raw.GssPseudoRandom(minor_status, context_, prf_key, prf_in, desired_output_len, prf_out)
-}
-
-// ReleaseBuffer calls [raw.GssReleaseBuffer] (C function gss_release_buffer).
-func ReleaseBuffer(minor_status *uint32, buffer *raw.GssBufferDescStruct) uint32 {
-	return raw.GssReleaseBuffer(minor_status, buffer)
-}
-
-// ReleaseBufferSet calls [raw.GssReleaseBufferSet] (C function gss_release_buffer_set).
-func ReleaseBufferSet(minor_status *uint32, buffer_set **raw.GssBufferSetDescStruct) uint32 {
-	return raw.GssReleaseBufferSet(minor_status, buffer_set)
-}
-
-// ReleaseCred calls [raw.GssReleaseCred] (C function gss_release_cred).
-func ReleaseCred(minor_status *uint32, cred_handle unsafe.Pointer) uint32 {
-	return raw.GssReleaseCred(minor_status, cred_handle)
-}
-
-// ReleaseName calls [raw.GssReleaseName] (C function gss_release_name).
-func ReleaseName(minor_status *uint32, input_name unsafe.Pointer) uint32 {
-	return raw.GssReleaseName(minor_status, input_name)
-}
-
-// ReleaseOid calls [raw.GssReleaseOid] (C function gss_release_oid).
-func ReleaseOid(minor_status *uint32, oid **raw.GssOIDDescStruct) uint32 {
-	return raw.GssReleaseOid(minor_status, oid)
-}
-
-// ReleaseOidSet calls [raw.GssReleaseOidSet] (C function gss_release_oid_set).
-func ReleaseOidSet(minor_status *uint32, set **raw.GssOIDSetDescStruct) uint32 {
-	return raw.GssReleaseOidSet(minor_status, set)
-}
-
-// Seal calls [raw.GssSeal] (C function gss_seal).
-func Seal(minor_status *uint32, context_handle unsafe.Pointer, conf_req_flag int, qop_req int, input_message_buffer *raw.GssBufferDescStruct, conf_state *int32, output_message_buffer *raw.GssBufferDescStruct) uint32 {
-	return raw.GssSeal(minor_status, context_handle, conf_req_flag, qop_req, input_message_buffer, conf_state, output_message_buffer)
-}
+var _fnGSSCreateCredentialFromUUID func(objc.ID) objc.ID
 
-// SetCredOption calls [raw.GssSetCredOption] (C function gss_set_cred_option).
-func SetCredOption(minor_status *uint32, cred_handle unsafe.Pointer, object unsafe.Pointer, value unsafe.Pointer) uint32 {
-	return raw.GssSetCredOption(minor_status, cred_handle, object, value)
+// GSSCreateCredentialFromUUID calls the GSS framework function GSSCreateCredentialFromUUID.
+func GSSCreateCredentialFromUUID(uuid obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGSSCreateCredentialFromUUID == nil {
+		ebipurego.RegisterLibFunc(&_fnGSSCreateCredentialFromUUID, _lib, "GSSCreateCredentialFromUUID")
+	}
+	_ret := _fnGSSCreateCredentialFromUUID(objref.IDOf(uuid))
+	return obj.Wrap(_ret)
 }
 
-// SetSecContextOption calls [raw.GssSetSecContextOption] (C function gss_set_sec_context_option).
-func SetSecContextOption(minor_status *uint32, context_handle unsafe.Pointer, object unsafe.Pointer, value unsafe.Pointer) uint32 {
-	return raw.GssSetSecContextOption(minor_status, context_handle, object, value)
-}
-
-// Sign calls [raw.GssSign] (C function gss_sign).
-func Sign(minor_status *uint32, context_handle unsafe.Pointer, qop_req int, message_buffer *raw.GssBufferDescStruct, message_token *raw.GssBufferDescStruct) uint32 {
-	return raw.GssSign(minor_status, context_handle, qop_req, message_buffer, message_token)
-}
-
-// TestOidSetMember calls [raw.GssTestOidSetMember] (C function gss_test_oid_set_member).
-func TestOidSetMember(minor_status *uint32, member *raw.GssOIDDescStruct, set unsafe.Pointer, present *int32) uint32 {
-	return raw.GssTestOidSetMember(minor_status, member, set, present)
-}
+var _fnGSSCredentialCopyName func(objc.ID) objc.ID
 
-// Unseal calls [raw.GssUnseal] (C function gss_unseal).
-func Unseal(minor_status *uint32, context_handle unsafe.Pointer, input_message_buffer *raw.GssBufferDescStruct, output_message_buffer *raw.GssBufferDescStruct, conf_state *int32, qop_state *int32) uint32 {
-	return raw.GssUnseal(minor_status, context_handle, input_message_buffer, output_message_buffer, conf_state, qop_state)
+// GSSCredentialCopyName calls the GSS framework function GSSCredentialCopyName.
+func GSSCredentialCopyName(cred obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGSSCredentialCopyName == nil {
+		ebipurego.RegisterLibFunc(&_fnGSSCredentialCopyName, _lib, "GSSCredentialCopyName")
+	}
+	_ret := _fnGSSCredentialCopyName(objref.IDOf(cred))
+	return obj.Wrap(_ret)
 }
 
-// Unwrap calls [raw.GssUnwrap] (C function gss_unwrap).
-func Unwrap(minor_status *uint32, context_handle unsafe.Pointer, input_message_buffer unsafe.Pointer, output_message_buffer *raw.GssBufferDescStruct, conf_state *int32, qop_state *uint32) uint32 {
-	return raw.GssUnwrap(minor_status, context_handle, input_message_buffer, output_message_buffer, conf_state, qop_state)
-}
+var _fnGSSCredentialCopyUUID func(objc.ID) objc.ID
 
-// Userok calls [raw.GssUserok] (C function gss_userok).
-func Userok(name unsafe.Pointer, user string) int {
-	return raw.GssUserok(name, user)
+// GSSCredentialCopyUUID calls the GSS framework function GSSCredentialCopyUUID.
+func GSSCredentialCopyUUID(credential obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGSSCredentialCopyUUID == nil {
+		ebipurego.RegisterLibFunc(&_fnGSSCredentialCopyUUID, _lib, "GSSCredentialCopyUUID")
+	}
+	_ret := _fnGSSCredentialCopyUUID(objref.IDOf(credential))
+	return obj.Wrap(_ret)
 }
 
-// Verify calls [raw.GssVerify] (C function gss_verify).
-func Verify(minor_status *uint32, context_handle unsafe.Pointer, message_buffer *raw.GssBufferDescStruct, token_buffer *raw.GssBufferDescStruct, qop_state *int32) uint32 {
-	return raw.GssVerify(minor_status, context_handle, message_buffer, token_buffer, qop_state)
-}
+var _fnGSSCredentialGetLifetime func(objc.ID) uint32
 
-// VerifyMic calls [raw.GssVerifyMic] (C function gss_verify_mic).
-func VerifyMic(minor_status *uint32, context_handle unsafe.Pointer, message_buffer unsafe.Pointer, token_buffer unsafe.Pointer, qop_state *uint32) uint32 {
-	return raw.GssVerifyMic(minor_status, context_handle, message_buffer, token_buffer, qop_state)
+// GSSCredentialGetLifetime calls the GSS framework function GSSCredentialGetLifetime.
+func GSSCredentialGetLifetime(cred obj.Object) uint32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGSSCredentialGetLifetime == nil {
+		ebipurego.RegisterLibFunc(&_fnGSSCredentialGetLifetime, _lib, "GSSCredentialGetLifetime")
+	}
+	return _fnGSSCredentialGetLifetime(objref.IDOf(cred))
 }
 
-// Wrap calls [raw.GssWrap] (C function gss_wrap).
-func Wrap(minor_status *uint32, context_handle unsafe.Pointer, conf_req_flag int, qop_req uint32, input_message_buffer unsafe.Pointer, conf_state *int32, output_message_buffer *raw.GssBufferDescStruct) uint32 {
-	return raw.GssWrap(minor_status, context_handle, conf_req_flag, qop_req, input_message_buffer, conf_state, output_message_buffer)
-}
+var _fnGSSNameCreateDisplayString func(objc.ID) objc.ID
 
-// WrapSizeLimit calls [raw.GssWrapSizeLimit] (C function gss_wrap_size_limit).
-func WrapSizeLimit(minor_status *uint32, context_handle unsafe.Pointer, conf_req_flag int, qop_req uint32, req_output_size uint32, max_input_size *uint32) uint32 {
-	return raw.GssWrapSizeLimit(minor_status, context_handle, conf_req_flag, qop_req, req_output_size, max_input_size)
+// GSSNameCreateDisplayString calls the GSS framework function GSSNameCreateDisplayString.
+func GSSNameCreateDisplayString(name obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnGSSNameCreateDisplayString == nil {
+		ebipurego.RegisterLibFunc(&_fnGSSNameCreateDisplayString, _lib, "GSSNameCreateDisplayString")
+	}
+	_ret := _fnGSSNameCreateDisplayString(objref.IDOf(name))
+	return obj.Wrap(_ret)
 }
 
-// Gsskrb5ExtractAuthzDataFromSecContext calls [raw.Gsskrb5ExtractAuthzDataFromSecContext] (C function gsskrb5_extract_authz_data_from_sec_context).
-func Gsskrb5ExtractAuthzDataFromSecContext(minor_status *uint32, context_handle unsafe.Pointer, ad_type int, ad_data *raw.GssBufferDescStruct) uint32 {
-	return raw.Gsskrb5ExtractAuthzDataFromSecContext(minor_status, context_handle, ad_type, ad_data)
-}
+var _fnGsskrb5RegisterAcceptorIdentity func(string) uint32
 
-// Gsskrb5RegisterAcceptorIdentity calls [raw.Gsskrb5RegisterAcceptorIdentity] (C function gsskrb5_register_acceptor_identity).
+// Gsskrb5RegisterAcceptorIdentity calls the GSS framework function gsskrb5_register_acceptor_identity.
 func Gsskrb5RegisterAcceptorIdentity(identity string) uint32 {
-	return raw.Gsskrb5RegisterAcceptorIdentity(identity)
+	_loadOnce.Do(_loadLibrary)
+	if _fnGsskrb5RegisterAcceptorIdentity == nil {
+		ebipurego.RegisterLibFunc(&_fnGsskrb5RegisterAcceptorIdentity, _lib, "gsskrb5_register_acceptor_identity")
+	}
+	return _fnGsskrb5RegisterAcceptorIdentity(identity)
 }
 
-// Krb5GssRegisterAcceptorIdentity calls [raw.Krb5GssRegisterAcceptorIdentity] (C function krb5_gss_register_acceptor_identity).
+var _fnKrb5GssRegisterAcceptorIdentity func(string) uint32
+
+// Krb5GssRegisterAcceptorIdentity calls the GSS framework function krb5_gss_register_acceptor_identity.
 func Krb5GssRegisterAcceptorIdentity(identity string) uint32 {
-	return raw.Krb5GssRegisterAcceptorIdentity(identity)
+	_loadOnce.Do(_loadLibrary)
+	if _fnKrb5GssRegisterAcceptorIdentity == nil {
+		ebipurego.RegisterLibFunc(&_fnKrb5GssRegisterAcceptorIdentity, _lib, "krb5_gss_register_acceptor_identity")
+	}
+	return _fnKrb5GssRegisterAcceptorIdentity(identity)
 }

@@ -5,108 +5,83 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A mutable collection of metadata items that are valid for use during a specific time range.
 //
-// MutableTimedMetadataGroup wraps [raw.AVMutableTimedMetadataGroup] with a fluent Go API.
+// MutableTimedMetadataGroup is an idiomatic wrapper over the Objective-C class AVMutableTimedMetadataGroup.
 type MutableTimedMetadataGroup struct {
-	inner *raw.AVMutableTimedMetadataGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMutableTimedMetadataGroup].
-func (x *MutableTimedMetadataGroup) Unwrap() *raw.AVMutableTimedMetadataGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableTimedMetadataGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableTimedMetadataGroupFromID adopts an existing object pointer as a MutableTimedMetadataGroup (nil for 0).
+// MutableTimedMetadataGroupFromID adopts an existing Objective-C object as a MutableTimedMetadataGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableTimedMetadataGroupFromID(id objc.ID) *MutableTimedMetadataGroup {
 	if id == 0 {
 		return nil
 	}
-	return &MutableTimedMetadataGroup{inner: raw.AVMutableTimedMetadataGroupFromID(id)}
-}
-
-// NewMutableTimedMetadataGroup creates a new [MutableTimedMetadataGroup].
-func NewMutableTimedMetadataGroup() *MutableTimedMetadataGroup {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableTimedMetadataGroup")), objc.RegisterName("new"))
-	return &MutableTimedMetadataGroup{inner: raw.AVMutableTimedMetadataGroupFromID(_id)}
-}
-
-// The time range of the timed metadata.
-//
-// WithTimeRange sets the timeRange property and returns the receiver for chaining.
-func (x *MutableTimedMetadataGroup) WithTimeRange(timeRange coremedia.CMTimeRange) *MutableTimedMetadataGroup {
-	x.inner.SetTimeRange(timeRange)
+	x := &MutableTimedMetadataGroup{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// mutableTimedMetadataGroupAdopt wraps an Objective-C object that this code just created as a
+// MutableTimedMetadataGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableTimedMetadataGroupAdopt(id objc.ID) *MutableTimedMetadataGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableTimedMetadataGroup{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MutableTimedMetadataGroup) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MutableTimedMetadataGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MutableTimedMetadataGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMutableTimedMetadataGroup creates a new MutableTimedMetadataGroup.
+func NewMutableTimedMetadataGroup() *MutableTimedMetadataGroup {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMutableTimedMetadataGroup")), objc.RegisterName("new"))
+	return mutableTimedMetadataGroupAdopt(_id)
 }
 
 // An array of metadata items in the timed metadata group.
 //
-// WithItems sets the collection, converting the Go slice to an NSArray.
+// WithItems sets the collection and returns the receiver so calls can be chained.
 func (x *MutableTimedMetadataGroup) WithItems(items ...MetadataItemProvider) *MutableTimedMetadataGroup {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetItems(foundation.NSArrayFromID[*raw.AVMetadataItem](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asMetadataItem().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.AVMetadataItem](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetItems(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v MetadataItemProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItems:"), _arr)
 	return x
 }
 
-// SetTimeRange calls the underlying SetTimeRange.
-func (x *MutableTimedMetadataGroup) SetTimeRange(timeRange coremedia.CMTimeRange) {
-	x.inner.SetTimeRange(timeRange)
-}
-
-// SetItems calls the underlying SetItems.
-func (x *MutableTimedMetadataGroup) SetItems(items ...MetadataItemProvider) {
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asMetadataItem().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.AVMetadataItem]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.AVMetadataItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.AVMetadataItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetItems(_arg0)
-}
-
-func (x *MutableTimedMetadataGroup) asTimedMetadataGroup() *raw.AVTimedMetadataGroup {
-	return &x.inner.AVTimedMetadataGroup
-}
-
-func (x *MutableTimedMetadataGroup) asMetadataGroup() *raw.AVMetadataGroup {
-	return &x.inner.AVTimedMetadataGroup.AVMetadataGroup
+func (x *MutableTimedMetadataGroup) SetItems(items []*MetadataItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItems:"), purego.SliceToNSArray(items, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }))
 }
 
 // MutableTimedMetadataGroupable is the interface implemented by [MutableTimedMetadataGroup], for mocking and DI.
 type MutableTimedMetadataGroupable interface {
-	Unwrap() *raw.AVMutableTimedMetadataGroup
-	WithTimeRange(timeRange coremedia.CMTimeRange) *MutableTimedMetadataGroup
+	obj.Object
 	WithItems(items ...MetadataItemProvider) *MutableTimedMetadataGroup
-	SetTimeRange(timeRange coremedia.CMTimeRange)
-	SetItems(items ...MetadataItemProvider)
+	SetItems(items []*MetadataItem)
 }
 
 var _ MutableTimedMetadataGroupable = (*MutableTimedMetadataGroup)(nil)

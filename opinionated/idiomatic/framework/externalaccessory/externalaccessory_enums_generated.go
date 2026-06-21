@@ -9,26 +9,26 @@ import (
 )
 
 // The error codes that may be passed in an error object for the Bluetooth picker completion block.
-type EABluetoothAccessoryPickerErrorCode int64
+type BluetoothAccessoryPickerErrorCode int64
 
 const (
-	EABluetoothAccessoryPickerAlreadyConnected EABluetoothAccessoryPickerErrorCode = 0
-	EABluetoothAccessoryPickerResultNotFound   EABluetoothAccessoryPickerErrorCode = 1
-	EABluetoothAccessoryPickerResultCancelled  EABluetoothAccessoryPickerErrorCode = 2
-	EABluetoothAccessoryPickerResultFailed     EABluetoothAccessoryPickerErrorCode = 3
+	BluetoothAccessoryPickerAlreadyConnected BluetoothAccessoryPickerErrorCode = 0
+	BluetoothAccessoryPickerResultNotFound   BluetoothAccessoryPickerErrorCode = 1
+	BluetoothAccessoryPickerResultCancelled  BluetoothAccessoryPickerErrorCode = 2
+	BluetoothAccessoryPickerResultFailed     BluetoothAccessoryPickerErrorCode = 3
 )
 
-func (e EABluetoothAccessoryPickerErrorCode) String() string {
+func (e BluetoothAccessoryPickerErrorCode) String() string {
 	switch e {
-	case EABluetoothAccessoryPickerAlreadyConnected:
-		return "EABluetoothAccessoryPickerAlreadyConnected"
-	case EABluetoothAccessoryPickerResultNotFound:
-		return "EABluetoothAccessoryPickerResultNotFound"
-	case EABluetoothAccessoryPickerResultCancelled:
-		return "EABluetoothAccessoryPickerResultCancelled"
-	case EABluetoothAccessoryPickerResultFailed:
-		return "EABluetoothAccessoryPickerResultFailed"
+	case BluetoothAccessoryPickerAlreadyConnected:
+		return "BluetoothAccessoryPickerAlreadyConnected"
+	case BluetoothAccessoryPickerResultNotFound:
+		return "BluetoothAccessoryPickerResultNotFound"
+	case BluetoothAccessoryPickerResultCancelled:
+		return "BluetoothAccessoryPickerResultCancelled"
+	case BluetoothAccessoryPickerResultFailed:
+		return "BluetoothAccessoryPickerResultFailed"
 	default:
-		return fmt.Sprintf("EABluetoothAccessoryPickerErrorCode(%d)", int64(e))
+		return fmt.Sprintf("BluetoothAccessoryPickerErrorCode(%d)", int64(e))
 	}
 }

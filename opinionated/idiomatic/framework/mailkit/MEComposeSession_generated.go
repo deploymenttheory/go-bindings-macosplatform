@@ -5,80 +5,93 @@
 package mailkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a single mail compose window.
 //
-// ComposeSession wraps [raw.MEComposeSession] with a fluent Go API.
+// ComposeSession is an idiomatic wrapper over the Objective-C class MEComposeSession.
 type ComposeSession struct {
-	inner *raw.MEComposeSession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEComposeSession].
-func (x *ComposeSession) Unwrap() *raw.MEComposeSession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ComposeSession) ID() objc.ID { return x.inner.Ptr() }
-
-// ComposeSessionFromID adopts an existing object pointer as a ComposeSession (nil for 0).
+// ComposeSessionFromID adopts an existing Objective-C object as a ComposeSession
+// (nil for 0), retaining it and registering a release finalizer.
 func ComposeSessionFromID(id objc.ID) *ComposeSession {
 	if id == 0 {
 		return nil
 	}
-	return &ComposeSession{inner: raw.MEComposeSessionFromID(id)}
+	x := &ComposeSession{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewComposeSession creates a new [ComposeSession].
+// composeSessionAdopt wraps an Objective-C object that this code just created as a
+// ComposeSession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func composeSessionAdopt(id objc.ID) *ComposeSession {
+	if id == 0 {
+		return nil
+	}
+	x := &ComposeSession{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ComposeSession) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ComposeSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ComposeSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewComposeSession creates a new ComposeSession.
 func NewComposeSession() *ComposeSession {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MEComposeSession")), objc.RegisterName("new"))
-	return &ComposeSession{inner: raw.MEComposeSessionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MEComposeSession")), objc.RegisterName("new"))
+	return composeSessionAdopt(_id)
 }
 
 // Refreshes the compose session with the extension’s new information.
-//
-// ReloadSession calls the underlying ReloadSession.
 func (x *ComposeSession) ReloadSession() {
-	x.inner.ReloadSession()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadSession"))
 }
 
-// @brief A unique identifier for the session.
-//
-// SessionID calls the underlying SessionID.
-func (x *ComposeSession) SessionID() *foundation.NSUUID {
-	return x.inner.SessionID()
+// A unique identifier for the session.
+func (x *ComposeSession) SessionID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionID"))
+	return obj.Wrap(_r)
 }
 
-// @brief An instance of @c MEMessage that represents properties of the mail message that author is composing in this @c MEComposeSession
-//
-// MailMessage calls the underlying MailMessage.
+// An instance of
 func (x *ComposeSession) MailMessage() *Message {
-	_r := x.inner.MailMessage()
-	if _r == nil {
-		return nil
-	}
-	return &Message{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mailMessage"))
+	return MessageFromID(_r)
 }
 
-// @brief An instance of @c MEComposeContext that provides additional information about the compose session.
-//
-// ComposeContext calls the underlying ComposeContext.
+// An instance of
 func (x *ComposeSession) ComposeContext() *ComposeContext {
-	_r := x.inner.ComposeContext()
-	if _r == nil {
-		return nil
-	}
-	return &ComposeContext{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composeContext"))
+	return ComposeContextFromID(_r)
 }
 
 // ComposeSessionable is the interface implemented by [ComposeSession], for mocking and DI.
 type ComposeSessionable interface {
-	Unwrap() *raw.MEComposeSession
+	obj.Object
 	ReloadSession()
-	SessionID() *foundation.NSUUID
+	SessionID() obj.Object
 	MailMessage() *Message
 	ComposeContext() *ComposeContext
 }

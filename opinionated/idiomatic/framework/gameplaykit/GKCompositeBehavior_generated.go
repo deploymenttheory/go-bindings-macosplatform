@@ -5,81 +5,98 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A set of behaviors, each of which is a set of goals, that together influence the movement of an agent.
 //
-// CompositeBehavior wraps [raw.GKCompositeBehavior] with a fluent Go API.
+// CompositeBehavior is an idiomatic wrapper over the Objective-C class GKCompositeBehavior.
 type CompositeBehavior struct {
-	inner *raw.GKCompositeBehavior
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKCompositeBehavior].
-func (x *CompositeBehavior) Unwrap() *raw.GKCompositeBehavior { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CompositeBehavior) ID() objc.ID { return x.inner.Ptr() }
-
-// CompositeBehaviorFromID adopts an existing object pointer as a CompositeBehavior (nil for 0).
+// CompositeBehaviorFromID adopts an existing Objective-C object as a CompositeBehavior
+// (nil for 0), retaining it and registering a release finalizer.
 func CompositeBehaviorFromID(id objc.ID) *CompositeBehavior {
 	if id == 0 {
 		return nil
 	}
-	return &CompositeBehavior{inner: raw.GKCompositeBehaviorFromID(id)}
+	x := &CompositeBehavior{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCompositeBehavior creates a new [CompositeBehavior].
+// compositeBehaviorAdopt wraps an Objective-C object that this code just created as a
+// CompositeBehavior (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func compositeBehaviorAdopt(id objc.ID) *CompositeBehavior {
+	if id == 0 {
+		return nil
+	}
+	x := &CompositeBehavior{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CompositeBehavior) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CompositeBehavior) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CompositeBehavior) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCompositeBehavior creates a new CompositeBehavior.
 func NewCompositeBehavior() *CompositeBehavior {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKCompositeBehavior")), objc.RegisterName("new"))
-	return &CompositeBehavior{inner: raw.GKCompositeBehaviorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKCompositeBehavior")), objc.RegisterName("new"))
+	return compositeBehaviorAdopt(_id)
 }
 
 // Sets the weight for the specified individual behavior’s influence on agents, adding that behavior to the composite behavior if it is not already present.
-//
-// SetWeightForBehavior calls the underlying SetWeightForBehavior.
-func (x *CompositeBehavior) SetWeightForBehavior(weight float32, behavior *raw.GKBehavior) {
-	x.inner.SetWeightForBehavior(weight, behavior)
+func (x *CompositeBehavior) SetWeightForBehavior(weight float32, behavior *Behavior) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeight:forBehavior:"), weight, objref.IDOf(behavior))
 }
 
 // Returns the weight for the specified individual behavior’s influence on agents.
-//
-// WeightForBehavior calls the underlying WeightForBehavior.
-func (x *CompositeBehavior) WeightForBehavior(behavior *raw.GKBehavior) float32 {
-	return x.inner.WeightForBehavior(behavior)
+func (x *CompositeBehavior) WeightForBehavior(behavior *Behavior) float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weightForBehavior:"), objref.IDOf(behavior))
+	return _r
 }
 
 // Removes the specified individual behavior from the composite behavior.
-//
-// RemoveBehavior calls the underlying RemoveBehavior.
-func (x *CompositeBehavior) RemoveBehavior(behavior *raw.GKBehavior) {
-	x.inner.RemoveBehavior(behavior)
+func (x *CompositeBehavior) RemoveBehavior(behavior *Behavior) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeBehavior:"), objref.IDOf(behavior))
 }
 
 // Removes all individual behaviors from the composite behavior.
-//
-// RemoveAllBehaviors calls the underlying RemoveAllBehaviors.
 func (x *CompositeBehavior) RemoveAllBehaviors() {
-	x.inner.RemoveAllBehaviors()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllBehaviors"))
 }
 
 // Number of sub-behaviors in this behavior
-//
-// BehaviorCount calls the underlying BehaviorCount.
 func (x *CompositeBehavior) BehaviorCount() int {
-	return x.inner.BehaviorCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("behaviorCount"))
+	return _r
 }
-
-func (x *CompositeBehavior) asBehavior() *raw.GKBehavior { return &x.inner.GKBehavior }
 
 // CompositeBehaviorable is the interface implemented by [CompositeBehavior], for mocking and DI.
 type CompositeBehaviorable interface {
-	Unwrap() *raw.GKCompositeBehavior
-	SetWeightForBehavior(weight float32, behavior *raw.GKBehavior)
-	WeightForBehavior(behavior *raw.GKBehavior) float32
-	RemoveBehavior(behavior *raw.GKBehavior)
+	obj.Object
+	SetWeightForBehavior(weight float32, behavior *Behavior)
+	WeightForBehavior(behavior *Behavior) float32
+	RemoveBehavior(behavior *Behavior)
 	RemoveAllBehaviors()
 	BehaviorCount() int
 }

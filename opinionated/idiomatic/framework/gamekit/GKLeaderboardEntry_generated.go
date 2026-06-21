@@ -5,100 +5,107 @@
 package gamekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Information about a single score by a player on a leaderboard.
 //
-// LeaderboardEntry wraps [raw.GKLeaderboardEntry] with a fluent Go API.
+// LeaderboardEntry is an idiomatic wrapper over the Objective-C class GKLeaderboardEntry.
 type LeaderboardEntry struct {
-	inner *raw.GKLeaderboardEntry
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKLeaderboardEntry].
-func (x *LeaderboardEntry) Unwrap() *raw.GKLeaderboardEntry { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LeaderboardEntry) ID() objc.ID { return x.inner.Ptr() }
-
-// LeaderboardEntryFromID adopts an existing object pointer as a LeaderboardEntry (nil for 0).
+// LeaderboardEntryFromID adopts an existing Objective-C object as a LeaderboardEntry
+// (nil for 0), retaining it and registering a release finalizer.
 func LeaderboardEntryFromID(id objc.ID) *LeaderboardEntry {
 	if id == 0 {
 		return nil
 	}
-	return &LeaderboardEntry{inner: raw.GKLeaderboardEntryFromID(id)}
+	x := &LeaderboardEntry{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLeaderboardEntry creates a new [LeaderboardEntry].
-func NewLeaderboardEntry() *LeaderboardEntry {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKLeaderboardEntry")), objc.RegisterName("new"))
-	return &LeaderboardEntry{inner: raw.GKLeaderboardEntryFromID(_id)}
-}
-
-// Player calls the underlying Player.
-func (x *LeaderboardEntry) Player() *Player {
-	_r := x.inner.Player()
-	if _r == nil {
+// leaderboardEntryAdopt wraps an Objective-C object that this code just created as a
+// LeaderboardEntry (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func leaderboardEntryAdopt(id objc.ID) *LeaderboardEntry {
+	if id == 0 {
 		return nil
 	}
-	return &Player{inner: _r}
+	x := &LeaderboardEntry{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Rank calls the underlying Rank.
+// Description returns the object's -description text.
+func (x *LeaderboardEntry) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LeaderboardEntry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LeaderboardEntry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLeaderboardEntry creates a new LeaderboardEntry.
+func NewLeaderboardEntry() *LeaderboardEntry {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKLeaderboardEntry")), objc.RegisterName("new"))
+	return leaderboardEntryAdopt(_id)
+}
+
+func (x *LeaderboardEntry) Player() *Player {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
+	return PlayerFromID(_r)
+}
+
 func (x *LeaderboardEntry) Rank() int {
-	return x.inner.Rank()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rank"))
+	return _r
 }
 
-// Score calls the underlying Score.
 func (x *LeaderboardEntry) Score() int {
-	return x.inner.Score()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("score"))
+	return _r
 }
 
-// FormattedScore calls the underlying FormattedScore.
 func (x *LeaderboardEntry) FormattedScore() string {
-	_r := x.inner.FormattedScore()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formattedScore"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Context calls the underlying Context.
-func (x *LeaderboardEntry) Context() uint {
-	return x.inner.Context()
+func (x *LeaderboardEntry) Context() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("context"))
+	return _r
 }
 
-// Date calls the underlying Date.
-func (x *LeaderboardEntry) Date() *foundation.NSDate {
-	return x.inner.Date()
-}
-
-// ChallengeComposeControllerWithMessagePlayersCompletionHandler calls the underlying ChallengeComposeControllerWithMessagePlayersCompletionHandler.
-func (x *LeaderboardEntry) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*foundation.NSString])) *appkit.NSViewController {
-	return x.inner.ChallengeComposeControllerWithMessagePlayersCompletionHandler(foundation.NSStringStringWithUTF8String(message), players, completionHandler)
-}
-
-// ChallengeComposeControllerWithMessagePlayersCompletion calls the underlying ChallengeComposeControllerWithMessagePlayersCompletion.
-func (x *LeaderboardEntry) ChallengeComposeControllerWithMessagePlayersCompletion(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*raw.GKPlayer])) *appkit.NSViewController {
-	return x.inner.ChallengeComposeControllerWithMessagePlayersCompletion(foundation.NSStringStringWithUTF8String(message), players, completionHandler)
+func (x *LeaderboardEntry) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+	return obj.Wrap(_r)
 }
 
 // LeaderboardEntryable is the interface implemented by [LeaderboardEntry], for mocking and DI.
 type LeaderboardEntryable interface {
-	Unwrap() *raw.GKLeaderboardEntry
+	obj.Object
 	Player() *Player
 	Rank() int
 	Score() int
 	FormattedScore() string
-	Context() uint
-	Date() *foundation.NSDate
-	ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*foundation.NSString])) *appkit.NSViewController
-	ChallengeComposeControllerWithMessagePlayersCompletion(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*raw.GKPlayer])) *appkit.NSViewController
+	Context() int
+	Date() obj.Object
 }
 
 var _ LeaderboardEntryable = (*LeaderboardEntry)(nil)

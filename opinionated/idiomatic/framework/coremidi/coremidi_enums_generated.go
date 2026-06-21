@@ -9,16 +9,16 @@ import (
 	"strings"
 )
 
-type MIDICIDeviceType int64
+type CIDeviceType int64
 
 const (
-	KMIDICIDeviceTypeUnknown     MIDICIDeviceType = 0
-	KMIDICIDeviceTypeLegacyMIDI1 MIDICIDeviceType = 1
-	KMIDICIDeviceTypeVirtual     MIDICIDeviceType = 2
-	KMIDICIDeviceTypeUSBMIDI     MIDICIDeviceType = 3
+	KMIDICIDeviceTypeUnknown     CIDeviceType = 0
+	KMIDICIDeviceTypeLegacyMIDI1 CIDeviceType = 1
+	KMIDICIDeviceTypeVirtual     CIDeviceType = 2
+	KMIDICIDeviceTypeUSBMIDI     CIDeviceType = 3
 )
 
-func (e MIDICIDeviceType) String() string {
+func (e CIDeviceType) String() string {
 	switch e {
 	case KMIDICIDeviceTypeUnknown:
 		return "KMIDICIDeviceTypeUnknown"
@@ -29,20 +29,20 @@ func (e MIDICIDeviceType) String() string {
 	case KMIDICIDeviceTypeUSBMIDI:
 		return "KMIDICIDeviceTypeUSBMIDI"
 	default:
-		return fmt.Sprintf("MIDICIDeviceType(%d)", int64(e))
+		return fmt.Sprintf("CIDeviceType(%d)", int64(e))
 	}
 }
 
-type MIDICIProfileType int64
+type CIProfileType int64
 
 const (
-	KMIDICIProfileTypeSingleChannel MIDICIProfileType = 1
-	KMIDICIProfileTypeGroup         MIDICIProfileType = 2
-	KMIDICIProfileTypeFunctionBlock MIDICIProfileType = 3
-	KMIDICIProfileTypeMultichannel  MIDICIProfileType = 4
+	KMIDICIProfileTypeSingleChannel CIProfileType = 1
+	KMIDICIProfileTypeGroup         CIProfileType = 2
+	KMIDICIProfileTypeFunctionBlock CIProfileType = 3
+	KMIDICIProfileTypeMultichannel  CIProfileType = 4
 )
 
-func (e MIDICIProfileType) String() string {
+func (e CIProfileType) String() string {
 	switch e {
 	case KMIDICIProfileTypeSingleChannel:
 		return "KMIDICIProfileTypeSingleChannel"
@@ -53,27 +53,27 @@ func (e MIDICIProfileType) String() string {
 	case KMIDICIProfileTypeMultichannel:
 		return "KMIDICIProfileTypeMultichannel"
 	default:
-		return fmt.Sprintf("MIDICIProfileType(%d)", int64(e))
+		return fmt.Sprintf("CIProfileType(%d)", int64(e))
 	}
 }
 
 // Supported MIDI message types.
-type MIDIMessageType uint32
+type MessageType uint32
 
 const (
-	KMIDIMessageTypeUtility       MIDIMessageType = 0
-	KMIDIMessageTypeSystem        MIDIMessageType = 1
-	KMIDIMessageTypeChannelVoice1 MIDIMessageType = 2
-	KMIDIMessageTypeSysEx         MIDIMessageType = 3
-	KMIDIMessageTypeChannelVoice2 MIDIMessageType = 4
-	KMIDIMessageTypeData128       MIDIMessageType = 5
-	KMIDIMessageTypeFlexData      MIDIMessageType = 13
-	KMIDIMessageTypeUnknownF      MIDIMessageType = 15
-	KMIDIMessageTypeStream        MIDIMessageType = 15
-	KMIDIMessageTypeInvalid       MIDIMessageType = 255
+	KMIDIMessageTypeUtility       MessageType = 0
+	KMIDIMessageTypeSystem        MessageType = 1
+	KMIDIMessageTypeChannelVoice1 MessageType = 2
+	KMIDIMessageTypeSysEx         MessageType = 3
+	KMIDIMessageTypeChannelVoice2 MessageType = 4
+	KMIDIMessageTypeData128       MessageType = 5
+	KMIDIMessageTypeFlexData      MessageType = 13
+	KMIDIMessageTypeUnknownF      MessageType = 15
+	KMIDIMessageTypeStream        MessageType = 15
+	KMIDIMessageTypeInvalid       MessageType = 255
 )
 
-func (e MIDIMessageType) String() string {
+func (e MessageType) String() string {
 	switch e {
 	case KMIDIMessageTypeUtility:
 		return "KMIDIMessageTypeUtility"
@@ -94,60 +94,60 @@ func (e MIDIMessageType) String() string {
 	case KMIDIMessageTypeInvalid:
 		return "KMIDIMessageTypeInvalid"
 	default:
-		return fmt.Sprintf("MIDIMessageType(%d)", int64(e))
+		return fmt.Sprintf("MessageType(%d)", int64(e))
 	}
 }
 
-type MIDINetworkConnectionPolicy uint64
+type NetworkConnectionPolicy uint64
 
 const (
-	MIDINetworkConnectionPolicy_NoOne              MIDINetworkConnectionPolicy = 0
-	MIDINetworkConnectionPolicy_HostsInContactList MIDINetworkConnectionPolicy = 1
-	MIDINetworkConnectionPolicy_Anyone             MIDINetworkConnectionPolicy = 2
+	NetworkConnectionPolicy_NoOne              NetworkConnectionPolicy = 0
+	NetworkConnectionPolicy_HostsInContactList NetworkConnectionPolicy = 1
+	NetworkConnectionPolicy_Anyone             NetworkConnectionPolicy = 2
 )
 
-func (e MIDINetworkConnectionPolicy) String() string {
+func (e NetworkConnectionPolicy) String() string {
 	switch e {
-	case MIDINetworkConnectionPolicy_NoOne:
-		return "MIDINetworkConnectionPolicy_NoOne"
-	case MIDINetworkConnectionPolicy_HostsInContactList:
-		return "MIDINetworkConnectionPolicy_HostsInContactList"
-	case MIDINetworkConnectionPolicy_Anyone:
-		return "MIDINetworkConnectionPolicy_Anyone"
+	case NetworkConnectionPolicy_NoOne:
+		return "NetworkConnectionPolicy_NoOne"
+	case NetworkConnectionPolicy_HostsInContactList:
+		return "NetworkConnectionPolicy_HostsInContactList"
+	case NetworkConnectionPolicy_Anyone:
+		return "NetworkConnectionPolicy_Anyone"
 	default:
-		return fmt.Sprintf("MIDINetworkConnectionPolicy(%d)", int64(e))
+		return fmt.Sprintf("NetworkConnectionPolicy(%d)", int64(e))
 	}
 }
 
 // Specifies a MIDI protocol variant.
-type MIDIProtocolID int64
+type ProtocolID int64
 
 const (
-	KMIDIProtocol_1_0 MIDIProtocolID = 1
-	KMIDIProtocol_2_0 MIDIProtocolID = 2
+	KMIDIProtocol_1_0 ProtocolID = 1
+	KMIDIProtocol_2_0 ProtocolID = 2
 )
 
-func (e MIDIProtocolID) String() string {
+func (e ProtocolID) String() string {
 	switch e {
 	case KMIDIProtocol_1_0:
 		return "KMIDIProtocol_1_0"
 	case KMIDIProtocol_2_0:
 		return "KMIDIProtocol_2_0"
 	default:
-		return fmt.Sprintf("MIDIProtocolID(%d)", int64(e))
+		return fmt.Sprintf("ProtocolID(%d)", int64(e))
 	}
 }
 
-type MIDIUMPCIObjectBackingType int64
+type UMPCIObjectBackingType int64
 
 const (
-	KMIDIUMPCIObjectBackingTypeUnknown      MIDIUMPCIObjectBackingType = 0
-	KMIDIUMPCIObjectBackingTypeVirtual      MIDIUMPCIObjectBackingType = 1
-	KMIDIUMPCIObjectBackingTypeDriverDevice MIDIUMPCIObjectBackingType = 2
-	KMIDIUMPCIObjectBackingTypeUSBMIDI      MIDIUMPCIObjectBackingType = 3
+	KMIDIUMPCIObjectBackingTypeUnknown      UMPCIObjectBackingType = 0
+	KMIDIUMPCIObjectBackingTypeVirtual      UMPCIObjectBackingType = 1
+	KMIDIUMPCIObjectBackingTypeDriverDevice UMPCIObjectBackingType = 2
+	KMIDIUMPCIObjectBackingTypeUSBMIDI      UMPCIObjectBackingType = 3
 )
 
-func (e MIDIUMPCIObjectBackingType) String() string {
+func (e UMPCIObjectBackingType) String() string {
 	switch e {
 	case KMIDIUMPCIObjectBackingTypeUnknown:
 		return "KMIDIUMPCIObjectBackingTypeUnknown"
@@ -158,20 +158,20 @@ func (e MIDIUMPCIObjectBackingType) String() string {
 	case KMIDIUMPCIObjectBackingTypeUSBMIDI:
 		return "KMIDIUMPCIObjectBackingTypeUSBMIDI"
 	default:
-		return fmt.Sprintf("MIDIUMPCIObjectBackingType(%d)", int64(e))
+		return fmt.Sprintf("UMPCIObjectBackingType(%d)", int64(e))
 	}
 }
 
-type MIDIUMPFunctionBlockDirection int64
+type UMPFunctionBlockDirection int64
 
 const (
-	KMIDIUMPFunctionBlockDirectionUnknown       MIDIUMPFunctionBlockDirection = 0
-	KMIDIUMPFunctionBlockDirectionInput         MIDIUMPFunctionBlockDirection = 1
-	KMIDIUMPFunctionBlockDirectionOutput        MIDIUMPFunctionBlockDirection = 2
-	KMIDIUMPFunctionBlockDirectionBidirectional MIDIUMPFunctionBlockDirection = 3
+	KMIDIUMPFunctionBlockDirectionUnknown       UMPFunctionBlockDirection = 0
+	KMIDIUMPFunctionBlockDirectionInput         UMPFunctionBlockDirection = 1
+	KMIDIUMPFunctionBlockDirectionOutput        UMPFunctionBlockDirection = 2
+	KMIDIUMPFunctionBlockDirectionBidirectional UMPFunctionBlockDirection = 3
 )
 
-func (e MIDIUMPFunctionBlockDirection) String() string {
+func (e UMPFunctionBlockDirection) String() string {
 	switch e {
 	case KMIDIUMPFunctionBlockDirectionUnknown:
 		return "KMIDIUMPFunctionBlockDirectionUnknown"
@@ -182,19 +182,19 @@ func (e MIDIUMPFunctionBlockDirection) String() string {
 	case KMIDIUMPFunctionBlockDirectionBidirectional:
 		return "KMIDIUMPFunctionBlockDirectionBidirectional"
 	default:
-		return fmt.Sprintf("MIDIUMPFunctionBlockDirection(%d)", int64(e))
+		return fmt.Sprintf("UMPFunctionBlockDirection(%d)", int64(e))
 	}
 }
 
-type MIDIUMPFunctionBlockMIDI1Info int64
+type UMPFunctionBlockMIDI1Info int64
 
 const (
-	KMIDIUMPFunctionBlockMIDI1InfoNotMIDI1              MIDIUMPFunctionBlockMIDI1Info = 0
-	KMIDIUMPFunctionBlockMIDI1InfoUnrestrictedBandwidth MIDIUMPFunctionBlockMIDI1Info = 1
-	KMIDIUMPFunctionBlockMIDI1InfoRestrictedBandwidth   MIDIUMPFunctionBlockMIDI1Info = 2
+	KMIDIUMPFunctionBlockMIDI1InfoNotMIDI1              UMPFunctionBlockMIDI1Info = 0
+	KMIDIUMPFunctionBlockMIDI1InfoUnrestrictedBandwidth UMPFunctionBlockMIDI1Info = 1
+	KMIDIUMPFunctionBlockMIDI1InfoRestrictedBandwidth   UMPFunctionBlockMIDI1Info = 2
 )
 
-func (e MIDIUMPFunctionBlockMIDI1Info) String() string {
+func (e UMPFunctionBlockMIDI1Info) String() string {
 	switch e {
 	case KMIDIUMPFunctionBlockMIDI1InfoNotMIDI1:
 		return "KMIDIUMPFunctionBlockMIDI1InfoNotMIDI1"
@@ -203,20 +203,20 @@ func (e MIDIUMPFunctionBlockMIDI1Info) String() string {
 	case KMIDIUMPFunctionBlockMIDI1InfoRestrictedBandwidth:
 		return "KMIDIUMPFunctionBlockMIDI1InfoRestrictedBandwidth"
 	default:
-		return fmt.Sprintf("MIDIUMPFunctionBlockMIDI1Info(%d)", int64(e))
+		return fmt.Sprintf("UMPFunctionBlockMIDI1Info(%d)", int64(e))
 	}
 }
 
-type MIDIUMPFunctionBlockUIHint int64
+type UMPFunctionBlockUIHint int64
 
 const (
-	KMIDIUMPFunctionBlockUIHintUnknown        MIDIUMPFunctionBlockUIHint = 0
-	KMIDIUMPFunctionBlockUIHintReceiver       MIDIUMPFunctionBlockUIHint = 1
-	KMIDIUMPFunctionBlockUIHintSender         MIDIUMPFunctionBlockUIHint = 2
-	KMIDIUMPFunctionBlockUIHintSenderReceiver MIDIUMPFunctionBlockUIHint = 3
+	KMIDIUMPFunctionBlockUIHintUnknown        UMPFunctionBlockUIHint = 0
+	KMIDIUMPFunctionBlockUIHintReceiver       UMPFunctionBlockUIHint = 1
+	KMIDIUMPFunctionBlockUIHintSender         UMPFunctionBlockUIHint = 2
+	KMIDIUMPFunctionBlockUIHintSenderReceiver UMPFunctionBlockUIHint = 3
 )
 
-func (e MIDIUMPFunctionBlockUIHint) String() string {
+func (e UMPFunctionBlockUIHint) String() string {
 	switch e {
 	case KMIDIUMPFunctionBlockUIHintUnknown:
 		return "KMIDIUMPFunctionBlockUIHintUnknown"
@@ -227,19 +227,19 @@ func (e MIDIUMPFunctionBlockUIHint) String() string {
 	case KMIDIUMPFunctionBlockUIHintSenderReceiver:
 		return "KMIDIUMPFunctionBlockUIHintSenderReceiver"
 	default:
-		return fmt.Sprintf("MIDIUMPFunctionBlockUIHint(%d)", int64(e))
+		return fmt.Sprintf("UMPFunctionBlockUIHint(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type MIDIUMPProtocolOptions int64
+type UMPProtocolOptions int64
 
 const (
-	KMIDIUMPProtocolOptionsMIDI1 MIDIUMPProtocolOptions = 1
-	KMIDIUMPProtocolOptionsMIDI2 MIDIUMPProtocolOptions = 2
+	KMIDIUMPProtocolOptionsMIDI1 UMPProtocolOptions = 1
+	KMIDIUMPProtocolOptionsMIDI2 UMPProtocolOptions = 2
 )
 
-func (e MIDIUMPProtocolOptions) String() string {
+func (e UMPProtocolOptions) String() string {
 	var parts []string
 	if e&KMIDIUMPProtocolOptionsMIDI1 != 0 {
 		parts = append(parts, "KMIDIUMPProtocolOptionsMIDI1")

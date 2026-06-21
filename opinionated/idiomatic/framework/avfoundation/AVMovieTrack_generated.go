@@ -5,76 +5,78 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A track in a movie that conforms to the QuickTime or ISO base media file format.
 //
-// MovieTrack wraps [raw.AVMovieTrack] with a fluent Go API.
+// MovieTrack is an idiomatic wrapper over the Objective-C class AVMovieTrack.
 type MovieTrack struct {
-	inner *raw.AVMovieTrack
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMovieTrack].
-func (x *MovieTrack) Unwrap() *raw.AVMovieTrack { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MovieTrack) ID() objc.ID { return x.inner.Ptr() }
-
-// MovieTrackFromID adopts an existing object pointer as a MovieTrack (nil for 0).
+// MovieTrackFromID adopts an existing Objective-C object as a MovieTrack
+// (nil for 0), retaining it and registering a release finalizer.
 func MovieTrackFromID(id objc.ID) *MovieTrack {
 	if id == 0 {
 		return nil
 	}
-	return &MovieTrack{inner: raw.AVMovieTrackFromID(id)}
+	x := &MovieTrack{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMovieTrack creates a new [MovieTrack].
-func NewMovieTrack() *MovieTrack {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMovieTrack")), objc.RegisterName("new"))
-	return &MovieTrack{inner: raw.AVMovieTrackFromID(_id)}
-}
-
-// @property       mediaPresentationTimeRange @abstract       A CMTimeRange indicating the range of presentation times for the track's media.
-//
-// MediaPresentationTimeRange calls the underlying MediaPresentationTimeRange.
-func (x *MovieTrack) MediaPresentationTimeRange() coremedia.CMTimeRange {
-	return x.inner.MediaPresentationTimeRange()
-}
-
-// @property       mediaDecodeTimeRange @abstract       A CMTimeRange indicating the range of decode times for the track's media.
-//
-// MediaDecodeTimeRange calls the underlying MediaDecodeTimeRange.
-func (x *MovieTrack) MediaDecodeTimeRange() coremedia.CMTimeRange {
-	return x.inner.MediaDecodeTimeRange()
-}
-
-// AlternateGroupID calls the underlying AlternateGroupID.
-func (x *MovieTrack) AlternateGroupID() int {
-	return x.inner.AlternateGroupID()
-}
-
-// MediaDataStorage calls the underlying MediaDataStorage.
-func (x *MovieTrack) MediaDataStorage() *MediaDataStorage {
-	_r := x.inner.MediaDataStorage()
-	if _r == nil {
+// movieTrackAdopt wraps an Objective-C object that this code just created as a
+// MovieTrack (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func movieTrackAdopt(id objc.ID) *MovieTrack {
+	if id == 0 {
 		return nil
 	}
-	return &MediaDataStorage{inner: _r}
+	x := &MovieTrack{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *MovieTrack) asMovieTrack() *raw.AVMovieTrack { return x.inner }
+// Description returns the object's -description text.
+func (x *MovieTrack) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
 
-func (x *MovieTrack) asAssetTrack() *raw.AVAssetTrack { return &x.inner.AVAssetTrack }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MovieTrack) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MovieTrack) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMovieTrack creates a new MovieTrack.
+func NewMovieTrack() *MovieTrack {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMovieTrack")), objc.RegisterName("new"))
+	return movieTrackAdopt(_id)
+}
+
+func (x *MovieTrack) AlternateGroupID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("alternateGroupID"))
+	return _r
+}
+
+func (x *MovieTrack) MediaDataStorage() *MediaDataStorage {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaDataStorage"))
+	return MediaDataStorageFromID(_r)
+}
 
 // MovieTrackable is the interface implemented by [MovieTrack], for mocking and DI.
 type MovieTrackable interface {
-	Unwrap() *raw.AVMovieTrack
-	MediaPresentationTimeRange() coremedia.CMTimeRange
-	MediaDecodeTimeRange() coremedia.CMTimeRange
+	obj.Object
 	AlternateGroupID() int
 	MediaDataStorage() *MediaDataStorage
 }

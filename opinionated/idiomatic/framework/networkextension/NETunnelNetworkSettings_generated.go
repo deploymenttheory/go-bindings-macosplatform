@@ -5,116 +5,123 @@
 package networkextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The configuration for a tunnel provider’s virtual interface.
 //
-// NETunnelNetworkSettings wraps [raw.NETunnelNetworkSettings] with a fluent Go API.
+// NETunnelNetworkSettings is an idiomatic wrapper over the Objective-C class NETunnelNetworkSettings.
 type NETunnelNetworkSettings struct {
-	inner *raw.NETunnelNetworkSettings
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NETunnelNetworkSettings].
-func (x *NETunnelNetworkSettings) Unwrap() *raw.NETunnelNetworkSettings { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NETunnelNetworkSettings) ID() objc.ID { return x.inner.Ptr() }
-
-// NETunnelNetworkSettingsFromID adopts an existing object pointer as a NETunnelNetworkSettings (nil for 0).
+// NETunnelNetworkSettingsFromID adopts an existing Objective-C object as a NETunnelNetworkSettings
+// (nil for 0), retaining it and registering a release finalizer.
 func NETunnelNetworkSettingsFromID(id objc.ID) *NETunnelNetworkSettings {
 	if id == 0 {
 		return nil
 	}
-	return &NETunnelNetworkSettings{inner: raw.NETunnelNetworkSettingsFromID(id)}
+	x := &NETunnelNetworkSettings{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// nETunnelNetworkSettingsAdopt wraps an Objective-C object that this code just created as a
+// NETunnelNetworkSettings (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nETunnelNetworkSettingsAdopt(id objc.ID) *NETunnelNetworkSettings {
+	if id == 0 {
+		return nil
+	}
+	x := &NETunnelNetworkSettings{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NETunnelNetworkSettings) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NETunnelNetworkSettings) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NETunnelNetworkSettings) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize a NETunnelNetworkSettings object.
 //
-// NewNETunnelNetworkSettingsWithTunnelRemoteAddress creates a new [NETunnelNetworkSettings].
+// NewNETunnelNetworkSettingsWithTunnelRemoteAddress creates a new NETunnelNetworkSettings.
 func NewNETunnelNetworkSettingsWithTunnelRemoteAddress(address string) *NETunnelNetworkSettings {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NETunnelNetworkSettings")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTunnelRemoteAddress:"), foundation.NSStringStringWithUTF8String(address).Ptr())
-	return &NETunnelNetworkSettings{inner: raw.NETunnelNetworkSettingsFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NETunnelNetworkSettings")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTunnelRemoteAddress:"), purego.NSString(address))
+	return nETunnelNetworkSettingsAdopt(_id)
 }
 
 // The tunnel DNS settings.
 //
-// WithDNSSettings sets the dNSSettings property and returns the receiver for chaining.
+// WithDNSSettings sets dNSSettings and returns the receiver so calls can be chained.
 func (x *NETunnelNetworkSettings) WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NETunnelNetworkSettings {
-	x.inner.SetDNSSettings(dNSSettings.asNEDNSSettings())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSSettings:"), objref.IDOf(dNSSettings))
 	return x
 }
 
 // The tunnel HTTP proxy settings.
 //
-// WithProxySettings sets the proxySettings property and returns the receiver for chaining.
+// WithProxySettings sets proxySettings and returns the receiver so calls can be chained.
 func (x *NETunnelNetworkSettings) WithProxySettings(proxySettings *NEProxySettings) *NETunnelNetworkSettings {
-	x.inner.SetProxySettings(proxySettings.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
 	return x
 }
 
-// @property tunnelRemoteAddress @discussion A string containing the IP address of the remote endpoint that is providing the tunnel service.
-//
-// TunnelRemoteAddress calls the underlying TunnelRemoteAddress.
+// A string containing the IP address of the remote endpoint that is providing the tunnel service.
 func (x *NETunnelNetworkSettings) TunnelRemoteAddress() string {
-	_r := x.inner.TunnelRemoteAddress()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tunnelRemoteAddress"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property DNSSettings @discussion An NEDNSSettings object that contains the desired tunnel DNS settings.
-//
-// DNSSettings calls the underlying DNSSettings.
+// An NEDNSSettings object that contains the desired tunnel DNS settings.
 func (x *NETunnelNetworkSettings) DNSSettings() *NEDNSSettings {
-	_r := x.inner.DNSSettings()
-	if _r == nil {
-		return nil
-	}
-	return &NEDNSSettings{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("DNSSettings"))
+	return NEDNSSettingsFromID(_r)
 }
 
-// SetDNSSettings calls the underlying SetDNSSettings.
-func (x *NETunnelNetworkSettings) SetDNSSettings(dNSSettings *raw.NEDNSSettings) {
-	x.inner.SetDNSSettings(dNSSettings)
+func (x *NETunnelNetworkSettings) SetDNSSettings(dNSSettings *NEDNSSettings) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSSettings:"), objref.IDOf(dNSSettings))
 }
 
-// @property proxySettings @discussion An NEProxySettings object that contains the desired tunnel proxy settings.
-//
-// ProxySettings calls the underlying ProxySettings.
+// An NEProxySettings object that contains the desired tunnel proxy settings.
 func (x *NETunnelNetworkSettings) ProxySettings() *NEProxySettings {
-	_r := x.inner.ProxySettings()
-	if _r == nil {
-		return nil
-	}
-	return &NEProxySettings{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("proxySettings"))
+	return NEProxySettingsFromID(_r)
 }
 
-// SetProxySettings calls the underlying SetProxySettings.
-func (x *NETunnelNetworkSettings) SetProxySettings(proxySettings *raw.NEProxySettings) {
-	x.inner.SetProxySettings(proxySettings)
-}
-
-func (x *NETunnelNetworkSettings) asNETunnelNetworkSettings() *raw.NETunnelNetworkSettings {
-	return x.inner
+func (x *NETunnelNetworkSettings) SetProxySettings(proxySettings *NEProxySettings) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
 }
 
 // NETunnelNetworkSettingsable is the interface implemented by [NETunnelNetworkSettings], for mocking and DI.
 type NETunnelNetworkSettingsable interface {
-	Unwrap() *raw.NETunnelNetworkSettings
+	obj.Object
 	WithDNSSettings(dNSSettings NEDNSSettingsProvider) *NETunnelNetworkSettings
 	WithProxySettings(proxySettings *NEProxySettings) *NETunnelNetworkSettings
 	TunnelRemoteAddress() string
 	DNSSettings() *NEDNSSettings
-	SetDNSSettings(dNSSettings *raw.NEDNSSettings)
+	SetDNSSettings(dNSSettings *NEDNSSettings)
 	ProxySettings() *NEProxySettings
-	SetProxySettings(proxySettings *raw.NEProxySettings)
+	SetProxySettings(proxySettings *NEProxySettings)
 }
 
 var _ NETunnelNetworkSettingsable = (*NETunnelNetworkSettings)(nil)

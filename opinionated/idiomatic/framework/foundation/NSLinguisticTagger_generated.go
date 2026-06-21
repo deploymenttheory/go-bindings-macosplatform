@@ -5,244 +5,117 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Analyze natural language text to tag part of speech and lexical class, identify names, perform lemmatization, and determine the language and script.
 //
-// LinguisticTagger wraps [raw.NSLinguisticTagger] with a fluent Go API.
+// LinguisticTagger is an idiomatic wrapper over the Objective-C class NSLinguisticTagger.
 type LinguisticTagger struct {
-	inner *raw.NSLinguisticTagger
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSLinguisticTagger].
-func (x *LinguisticTagger) Unwrap() *raw.NSLinguisticTagger { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LinguisticTagger) ID() objc.ID { return x.inner.Ptr() }
-
-// LinguisticTaggerFromID adopts an existing object pointer as a LinguisticTagger (nil for 0).
+// LinguisticTaggerFromID adopts an existing Objective-C object as a LinguisticTagger
+// (nil for 0), retaining it and registering a release finalizer.
 func LinguisticTaggerFromID(id objc.ID) *LinguisticTagger {
 	if id == 0 {
 		return nil
 	}
-	return &LinguisticTagger{inner: raw.NSLinguisticTaggerFromID(id)}
+	x := &LinguisticTagger{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// linguisticTaggerAdopt wraps an Objective-C object that this code just created as a
+// LinguisticTagger (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func linguisticTaggerAdopt(id objc.ID) *LinguisticTagger {
+	if id == 0 {
+		return nil
+	}
+	x := &LinguisticTagger{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LinguisticTagger) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LinguisticTagger) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LinguisticTagger) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a linguistic tagger instance using the specified tag schemes and options.
 //
-// NewLinguisticTaggerWithTagSchemesOptions creates a new [LinguisticTagger].
-func NewLinguisticTaggerWithTagSchemesOptions(tagSchemes *raw.NSArray[*raw.NSString], opts uint) *LinguisticTagger {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLinguisticTagger")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTagSchemes:options:"), tagSchemes.Ptr(), opts)
-	return &LinguisticTagger{inner: raw.NSLinguisticTaggerFromID(_id)}
+// NewLinguisticTaggerWithTagSchemesOptions creates a new LinguisticTagger.
+func NewLinguisticTaggerWithTagSchemesOptions(tagSchemes []*String, opts int) *LinguisticTagger {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSLinguisticTagger")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTagSchemes:options:"), purego.SliceToNSArray(tagSchemes, func(_v *String) objc.ID { return objref.IDOf(_v) }), opts)
+	return linguisticTaggerAdopt(_id)
 }
 
 // The string being analyzed by the linguistic tagger.
 //
-// WithString sets the string_ property and returns the receiver for chaining.
-func (x *LinguisticTagger) WithString(string_ string) *LinguisticTagger {
-	x.inner.SetString(foundation.NSStringStringWithUTF8String(string_))
+// WithString sets string_ and returns the receiver so calls can be chained.
+func (x *LinguisticTagger) WithString(string_ StringProvider) *LinguisticTagger {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), objref.IDOf(string_))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *LinguisticTagger) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *LinguisticTagger {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *LinguisticTagger) WithScriptingProperties(scriptingProperties obj.Object) *LinguisticTagger {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
-}
-
-// Sets the orthography for the specified range.
-//
-// SetOrthographyRange calls the underlying SetOrthographyRange.
-func (x *LinguisticTagger) SetOrthographyRange(orthography *raw.NSOrthography, range_ raw.NSRange) {
-	x.inner.SetOrthographyRange(orthography, range_)
-}
-
-// Returns the orthography at the index and also returns the effective range.
-//
-// OrthographyAtIndexEffectiveRange calls the underlying OrthographyAtIndexEffectiveRange.
-func (x *LinguisticTagger) OrthographyAtIndexEffectiveRange(charIndex uint, effectiveRange *raw.NSRange) *Orthography {
-	_r := x.inner.OrthographyAtIndexEffectiveRange(charIndex, effectiveRange)
-	if _r == nil {
-		return nil
-	}
-	return &Orthography{inner: _r}
-}
-
-// Notifies the linguistic tagger that the string (if mutable) has changed as specified by the parameters.
-//
-// StringEditedInRangeChangeInLength calls the underlying StringEditedInRangeChangeInLength.
-func (x *LinguisticTagger) StringEditedInRangeChangeInLength(newRange raw.NSRange, delta int) {
-	x.inner.StringEditedInRangeChangeInLength(newRange, delta)
-}
-
-// Returns the range of the linguistic unit containing the specified character index.
-//
-// TokenRangeAtIndexUnit calls the underlying TokenRangeAtIndexUnit.
-func (x *LinguisticTagger) TokenRangeAtIndexUnit(charIndex uint, unit NSLinguisticTaggerUnit) raw.NSRange {
-	return x.inner.TokenRangeAtIndexUnit(charIndex, raw.NSLinguisticTaggerUnit(unit))
-}
-
-// Returns the range of a sentence containing the specified range.
-//
-// SentenceRangeForRange calls the underlying SentenceRangeForRange.
-func (x *LinguisticTagger) SentenceRangeForRange(range_ raw.NSRange) raw.NSRange {
-	return x.inner.SentenceRangeForRange(range_)
-}
-
-// Enumerates over a given range of the string for a particular unit and calls the specified block for each tag.
-//
-// EnumerateTagsInRangeUnitSchemeOptionsUsing calls the underlying EnumerateTagsInRangeUnitSchemeOptionsUsing.
-func (x *LinguisticTagger) EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, block objc.Block) {
-	x.inner.EnumerateTagsInRangeUnitSchemeOptionsUsing(range_, raw.NSLinguisticTaggerUnit(unit), scheme, raw.NSLinguisticTaggerOptions(options), block)
-}
-
-// Returns a tag for a single scheme, for a given linguistic unit, at the specified character position.
-//
-// TagAtIndexUnitSchemeTokenRange calls the underlying TagAtIndexUnitSchemeTokenRange.
-func (x *LinguisticTagger) TagAtIndexUnitSchemeTokenRange(charIndex uint, unit NSLinguisticTaggerUnit, scheme *raw.NSString, tokenRange *raw.NSRange) *String {
-	_r := x.inner.TagAtIndexUnitSchemeTokenRange(charIndex, raw.NSLinguisticTaggerUnit(unit), scheme, tokenRange)
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// Returns an array of linguistic tags and token ranges for a given string range and linguistic unit.
-//
-// TagsInRangeUnitSchemeOptionsTokenRanges calls the underlying TagsInRangeUnitSchemeOptionsTokenRanges.
-func (x *LinguisticTagger) TagsInRangeUnitSchemeOptionsTokenRanges(range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, tokenRanges ...ValueProvider) *raw.NSArray[*raw.NSString] {
-	_ptrs := make([]objc.ID, len(tokenRanges))
-	for _i, _v := range tokenRanges {
-		_ptrs[_i] = _v.asValue().Ptr()
-	}
-	var _arg4 *raw.NSArray[*raw.NSValue]
-	if len(_ptrs) > 0 {
-		_arg4 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg4 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return x.inner.TagsInRangeUnitSchemeOptionsTokenRanges(range_, raw.NSLinguisticTaggerUnit(unit), scheme, raw.NSLinguisticTaggerOptions(options), _arg4)
-}
-
-// Enumerates over a given range of the string and calls the specified block for each tag.
-//
-// EnumerateTagsInRangeSchemeOptionsUsing calls the underlying EnumerateTagsInRangeSchemeOptionsUsing.
-func (x *LinguisticTagger) EnumerateTagsInRangeSchemeOptionsUsing(range_ raw.NSRange, tagScheme *raw.NSString, opts NSLinguisticTaggerOptions, block objc.Block) {
-	x.inner.EnumerateTagsInRangeSchemeOptionsUsing(range_, tagScheme, raw.NSLinguisticTaggerOptions(opts), block)
-}
-
-// Returns a tag for a single scheme at the specified character position.
-//
-// TagAtIndexSchemeTokenRangeSentenceRange calls the underlying TagAtIndexSchemeTokenRangeSentenceRange.
-func (x *LinguisticTagger) TagAtIndexSchemeTokenRangeSentenceRange(charIndex uint, scheme *raw.NSString, tokenRange *raw.NSRange, sentenceRange *raw.NSRange) *String {
-	_r := x.inner.TagAtIndexSchemeTokenRangeSentenceRange(charIndex, scheme, tokenRange, sentenceRange)
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// Returns an array of linguistic tags and token ranges for a given string range.
-//
-// TagsInRangeSchemeOptionsTokenRanges calls the underlying TagsInRangeSchemeOptionsTokenRanges.
-func (x *LinguisticTagger) TagsInRangeSchemeOptionsTokenRanges(range_ raw.NSRange, tagScheme string, opts NSLinguisticTaggerOptions, tokenRanges ...ValueProvider) *raw.NSArray[*raw.NSString] {
-	_ptrs := make([]objc.ID, len(tokenRanges))
-	for _i, _v := range tokenRanges {
-		_ptrs[_i] = _v.asValue().Ptr()
-	}
-	var _arg3 *raw.NSArray[*raw.NSValue]
-	if len(_ptrs) > 0 {
-		_arg3 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg3 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return x.inner.TagsInRangeSchemeOptionsTokenRanges(range_, foundation.NSStringStringWithUTF8String(tagScheme), raw.NSLinguisticTaggerOptions(opts), _arg3)
-}
-
-// Returns an array of possible tags for the given scheme at the specified range, supplying matching scores.
-//
-// PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores calls the underlying PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores.
-func (x *LinguisticTagger) PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores(charIndex uint, tagScheme string, tokenRange *raw.NSRange, sentenceRange *raw.NSRange, scores ...ValueProvider) *raw.NSArray[*raw.NSString] {
-	_ptrs := make([]objc.ID, len(scores))
-	for _i, _v := range scores {
-		_ptrs[_i] = _v.asValue().Ptr()
-	}
-	var _arg4 *raw.NSArray[*raw.NSValue]
-	if len(_ptrs) > 0 {
-		_arg4 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg4 = raw.NSArrayFromID[*raw.NSValue](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return x.inner.PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores(charIndex, foundation.NSStringStringWithUTF8String(tagScheme), tokenRange, sentenceRange, _arg4)
 }
 
 // TagSchemes returns the collection as a Go slice.
 func (x *LinguisticTagger) TagSchemes() []*String {
-	arr := x.inner.TagSchemes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *String {
-		return &String{inner: raw.NSStringFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tagSchemes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *String { return StringFromID(_id) })
 }
 
-// String calls the underlying String.
-func (x *LinguisticTagger) String() *String {
-	_r := x.inner.String()
-	if _r == nil {
-		return nil
+func (x *LinguisticTagger) String() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("string"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetString calls the underlying SetString.
 func (x *LinguisticTagger) SetString(string_ string) {
-	x.inner.SetString(foundation.NSStringStringWithUTF8String(string_))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), purego.NSString(string_))
 }
 
-// DominantLanguage calls the underlying DominantLanguage.
-func (x *LinguisticTagger) DominantLanguage() *String {
-	_r := x.inner.DominantLanguage()
-	if _r == nil {
-		return nil
+func (x *LinguisticTagger) DominantLanguage() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dominantLanguage"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
-
-func (x *LinguisticTagger) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // LinguisticTaggerable is the interface implemented by [LinguisticTagger], for mocking and DI.
 type LinguisticTaggerable interface {
-	Unwrap() *raw.NSLinguisticTagger
-	WithString(string_ string) *LinguisticTagger
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *LinguisticTagger
-	SetOrthographyRange(orthography *raw.NSOrthography, range_ raw.NSRange)
-	OrthographyAtIndexEffectiveRange(charIndex uint, effectiveRange *raw.NSRange) *Orthography
-	StringEditedInRangeChangeInLength(newRange raw.NSRange, delta int)
-	TokenRangeAtIndexUnit(charIndex uint, unit NSLinguisticTaggerUnit) raw.NSRange
-	SentenceRangeForRange(range_ raw.NSRange) raw.NSRange
-	EnumerateTagsInRangeUnitSchemeOptionsUsing(range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, block objc.Block)
-	TagAtIndexUnitSchemeTokenRange(charIndex uint, unit NSLinguisticTaggerUnit, scheme *raw.NSString, tokenRange *raw.NSRange) *String
-	TagsInRangeUnitSchemeOptionsTokenRanges(range_ raw.NSRange, unit NSLinguisticTaggerUnit, scheme *raw.NSString, options NSLinguisticTaggerOptions, tokenRanges ...ValueProvider) *raw.NSArray[*raw.NSString]
-	EnumerateTagsInRangeSchemeOptionsUsing(range_ raw.NSRange, tagScheme *raw.NSString, opts NSLinguisticTaggerOptions, block objc.Block)
-	TagAtIndexSchemeTokenRangeSentenceRange(charIndex uint, scheme *raw.NSString, tokenRange *raw.NSRange, sentenceRange *raw.NSRange) *String
-	TagsInRangeSchemeOptionsTokenRanges(range_ raw.NSRange, tagScheme string, opts NSLinguisticTaggerOptions, tokenRanges ...ValueProvider) *raw.NSArray[*raw.NSString]
-	PossibleTagsAtIndexSchemeTokenRangeSentenceRangeScores(charIndex uint, tagScheme string, tokenRange *raw.NSRange, sentenceRange *raw.NSRange, scores ...ValueProvider) *raw.NSArray[*raw.NSString]
+	obj.Object
+	WithString(string_ StringProvider) *LinguisticTagger
+	WithScriptingProperties(scriptingProperties obj.Object) *LinguisticTagger
 	TagSchemes() []*String
-	String() *String
+	String() string
 	SetString(string_ string)
-	DominantLanguage() *String
+	DominantLanguage() string
 }
 
 var _ LinguisticTaggerable = (*LinguisticTagger)(nil)

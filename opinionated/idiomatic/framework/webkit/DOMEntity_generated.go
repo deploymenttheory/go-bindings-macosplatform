@@ -5,94 +5,108 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMEntity wraps [raw.DOMEntity] with a fluent Go API.
+// DOMEntity is an idiomatic wrapper over the Objective-C class DOMEntity.
 type DOMEntity struct {
-	inner *raw.DOMEntity
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMEntity].
-func (x *DOMEntity) Unwrap() *raw.DOMEntity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMEntity) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMEntityFromID adopts an existing object pointer as a DOMEntity (nil for 0).
+// DOMEntityFromID adopts an existing Objective-C object as a DOMEntity
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMEntityFromID(id objc.ID) *DOMEntity {
 	if id == 0 {
 		return nil
 	}
-	return &DOMEntity{inner: raw.DOMEntityFromID(id)}
+	x := &DOMEntity{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDOMEntity creates a new [DOMEntity].
+// dOMEntityAdopt wraps an Objective-C object that this code just created as a
+// DOMEntity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMEntityAdopt(id objc.ID) *DOMEntity {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMEntity{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DOMEntity) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMEntity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMEntity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMEntity creates a new DOMEntity.
 func NewDOMEntity() *DOMEntity {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMEntity")), objc.RegisterName("new"))
-	return &DOMEntity{inner: raw.DOMEntityFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMEntity")), objc.RegisterName("new"))
+	return dOMEntityAdopt(_id)
 }
 
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
 func (x *DOMEntity) WithNodeValue(nodeValue string) *DOMEntity {
-	x.inner.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets the prefix property and returns the receiver for chaining.
+// WithPrefix sets prefix and returns the receiver so calls can be chained.
 func (x *DOMEntity) WithPrefix(prefix string) *DOMEntity {
-	x.inner.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets the textContent property and returns the receiver for chaining.
+// WithTextContent sets textContent and returns the receiver so calls can be chained.
 func (x *DOMEntity) WithTextContent(textContent string) *DOMEntity {
-	x.inner.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
-// PublicId calls the underlying PublicId.
 func (x *DOMEntity) PublicId() string {
-	_r := x.inner.PublicId()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicId"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SystemId calls the underlying SystemId.
 func (x *DOMEntity) SystemId() string {
-	_r := x.inner.SystemId()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("systemId"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// NotationName calls the underlying NotationName.
 func (x *DOMEntity) NotationName() string {
-	_r := x.inner.NotationName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notationName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *DOMEntity) asDOMNode() *raw.DOMNode { return &x.inner.DOMNode }
-
-func (x *DOMEntity) asDOMObject() *raw.DOMObject { return &x.inner.DOMNode.DOMObject }
-
-func (x *DOMEntity) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMNode.DOMObject.WebScriptObject
+	return purego.GoString(_r)
 }
 
 // DOMEntityable is the interface implemented by [DOMEntity], for mocking and DI.
 type DOMEntityable interface {
-	Unwrap() *raw.DOMEntity
+	obj.Object
 	WithNodeValue(nodeValue string) *DOMEntity
 	WithPrefix(prefix string) *DOMEntity
 	WithTextContent(textContent string) *DOMEntity

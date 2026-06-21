@@ -5,76 +5,95 @@
 package collaboration
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/collaboration"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object of the CBUserIdentity class represents a user identity and is used for accessing the attributes of a user identity from an identity authority. The principal attributes of CBUserIdentity are a POSIX user identifier (UID), password, and certificate.
 //
-// UserIdentity wraps [raw.CBUserIdentity] with a fluent Go API.
+// UserIdentity is an idiomatic wrapper over the Objective-C class CBUserIdentity.
 type UserIdentity struct {
-	inner *raw.CBUserIdentity
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CBUserIdentity].
-func (x *UserIdentity) Unwrap() *raw.CBUserIdentity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UserIdentity) ID() objc.ID { return x.inner.Ptr() }
-
-// UserIdentityFromID adopts an existing object pointer as a UserIdentity (nil for 0).
+// UserIdentityFromID adopts an existing Objective-C object as a UserIdentity
+// (nil for 0), retaining it and registering a release finalizer.
 func UserIdentityFromID(id objc.ID) *UserIdentity {
 	if id == 0 {
 		return nil
 	}
-	return &UserIdentity{inner: raw.CBUserIdentityFromID(id)}
+	x := &UserIdentity{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewUserIdentity creates a new [UserIdentity].
+// userIdentityAdopt wraps an Objective-C object that this code just created as a
+// UserIdentity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func userIdentityAdopt(id objc.ID) *UserIdentity {
+	if id == 0 {
+		return nil
+	}
+	x := &UserIdentity{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UserIdentity) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UserIdentity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UserIdentity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUserIdentity creates a new UserIdentity.
 func NewUserIdentity() *UserIdentity {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBUserIdentity")), objc.RegisterName("new"))
-	return &UserIdentity{inner: raw.CBUserIdentityFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CBUserIdentity")), objc.RegisterName("new"))
+	return userIdentityAdopt(_id)
 }
 
 // Returns a Boolean value indicating whether the given password is correct for the identity.
-//
-// AuthenticateWithPassword calls the underlying AuthenticateWithPassword.
 func (x *UserIdentity) AuthenticateWithPassword(password string) bool {
-	return x.inner.AuthenticateWithPassword(foundation.NSStringStringWithUTF8String(password))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authenticateWithPassword:"), purego.NSString(password))
+	return _r
 }
 
 // Returns the POSIX UID of the identity. The POSIX UID is a integer that can identify a user within an identity authority. UIDs are not guaranteed to be unique within an identity authority. - Returns: The POSIX UID of the identity.
-//
-// PosixUID calls the underlying PosixUID.
-func (x *UserIdentity) PosixUID() uint {
-	return x.inner.PosixUID()
+func (x *UserIdentity) PosixUID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("posixUID"))
+	return _r
 }
 
 // Returns the public authentication certificate associated with a user identity. The Collaboration framework supports certificate-based authentication in addition to passwords. If a certificate is stored for a user identity, it will be the default method of authentication. When a .Mac account is associated with a user identity, the authentication certificate is automatically downloaded from the .Mac servers. - Returns: The public authentication certificate, or `nil` if none exists.
-//
-// Certificate calls the underlying Certificate.
-func (x *UserIdentity) Certificate() unsafe.Pointer {
-	return x.inner.Certificate()
+func (x *UserIdentity) Certificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificate"))
+	return obj.Wrap(_r)
 }
 
 // Returns a Boolean value indicating whether the identity is allowed to authenticate. If the identity does not have authentication credentials (a password or certificate), it is not able to log in. However, an identity with authentication credentials does not ensure that it is enabled. Any identity can be disabled. - Returns: `TRUE` if the identity can authenticate; otherwise, `FALSE`.
-//
-// IsEnabled calls the underlying IsEnabled.
 func (x *UserIdentity) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
-
-func (x *UserIdentity) asIdentity() *raw.CBIdentity { return &x.inner.CBIdentity }
 
 // UserIdentityable is the interface implemented by [UserIdentity], for mocking and DI.
 type UserIdentityable interface {
-	Unwrap() *raw.CBUserIdentity
+	obj.Object
 	AuthenticateWithPassword(password string) bool
-	PosixUID() uint
-	Certificate() unsafe.Pointer
+	PosixUID() int
+	Certificate() obj.Object
 	IsEnabled() bool
 }
 

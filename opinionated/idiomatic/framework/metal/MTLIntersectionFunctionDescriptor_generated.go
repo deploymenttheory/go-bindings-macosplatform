@@ -5,84 +5,104 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description of an intersection function that performs an intersection test.
 //
-// IntersectionFunctionDescriptor wraps [raw.MTLIntersectionFunctionDescriptor] with a fluent Go API.
+// IntersectionFunctionDescriptor is an idiomatic wrapper over the Objective-C class MTLIntersectionFunctionDescriptor.
 type IntersectionFunctionDescriptor struct {
-	inner *raw.MTLIntersectionFunctionDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLIntersectionFunctionDescriptor].
-func (x *IntersectionFunctionDescriptor) Unwrap() *raw.MTLIntersectionFunctionDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IntersectionFunctionDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// IntersectionFunctionDescriptorFromID adopts an existing object pointer as a IntersectionFunctionDescriptor (nil for 0).
+// IntersectionFunctionDescriptorFromID adopts an existing Objective-C object as a IntersectionFunctionDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func IntersectionFunctionDescriptorFromID(id objc.ID) *IntersectionFunctionDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &IntersectionFunctionDescriptor{inner: raw.MTLIntersectionFunctionDescriptorFromID(id)}
+	x := &IntersectionFunctionDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewIntersectionFunctionDescriptor creates a new [IntersectionFunctionDescriptor].
+// intersectionFunctionDescriptorAdopt wraps an Objective-C object that this code just created as a
+// IntersectionFunctionDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func intersectionFunctionDescriptorAdopt(id objc.ID) *IntersectionFunctionDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &IntersectionFunctionDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IntersectionFunctionDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IntersectionFunctionDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IntersectionFunctionDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewIntersectionFunctionDescriptor creates a new IntersectionFunctionDescriptor.
 func NewIntersectionFunctionDescriptor() *IntersectionFunctionDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLIntersectionFunctionDescriptor")), objc.RegisterName("new"))
-	return &IntersectionFunctionDescriptor{inner: raw.MTLIntersectionFunctionDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLIntersectionFunctionDescriptor")), objc.RegisterName("new"))
+	return intersectionFunctionDescriptorAdopt(_id)
 }
 
 // The name of the function to fetch from the library.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *IntersectionFunctionDescriptor) WithName(name string) *IntersectionFunctionDescriptor {
-	x.inner.MTLFunctionDescriptor.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // A new name for the created function object.
 //
-// WithSpecializedName sets the specializedName property and returns the receiver for chaining.
+// WithSpecializedName sets specializedName and returns the receiver so calls can be chained.
 func (x *IntersectionFunctionDescriptor) WithSpecializedName(specializedName string) *IntersectionFunctionDescriptor {
-	x.inner.MTLFunctionDescriptor.SetSpecializedName(foundation.NSStringStringWithUTF8String(specializedName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpecializedName:"), purego.NSString(specializedName))
 	return x
 }
 
 // The set of constant values assigned to the function constants.
 //
-// WithConstantValues sets the constantValues property and returns the receiver for chaining.
+// WithConstantValues sets constantValues and returns the receiver so calls can be chained.
 func (x *IntersectionFunctionDescriptor) WithConstantValues(constantValues *FunctionConstantValues) *IntersectionFunctionDescriptor {
-	x.inner.MTLFunctionDescriptor.SetConstantValues(constantValues.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantValues:"), objref.IDOf(constantValues))
 	return x
 }
 
 // Flags specifying how Metal should create the new function object.
 //
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *IntersectionFunctionDescriptor) WithOptions(options MTLFunctionOptions) *IntersectionFunctionDescriptor {
-	x.inner.MTLFunctionDescriptor.SetOptions(raw.MTLFunctionOptions(options))
+// WithOptions sets options and returns the receiver so calls can be chained.
+func (x *IntersectionFunctionDescriptor) WithOptions(options FunctionOptions) *IntersectionFunctionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
 	return x
-}
-
-func (x *IntersectionFunctionDescriptor) asFunctionDescriptor() *raw.MTLFunctionDescriptor {
-	return &x.inner.MTLFunctionDescriptor
 }
 
 // IntersectionFunctionDescriptorable is the interface implemented by [IntersectionFunctionDescriptor], for mocking and DI.
 type IntersectionFunctionDescriptorable interface {
-	Unwrap() *raw.MTLIntersectionFunctionDescriptor
+	obj.Object
 	WithName(name string) *IntersectionFunctionDescriptor
 	WithSpecializedName(specializedName string) *IntersectionFunctionDescriptor
 	WithConstantValues(constantValues *FunctionConstantValues) *IntersectionFunctionDescriptor
-	WithOptions(options MTLFunctionOptions) *IntersectionFunctionDescriptor
+	WithOptions(options FunctionOptions) *IntersectionFunctionDescriptor
 }
 
 var _ IntersectionFunctionDescriptorable = (*IntersectionFunctionDescriptor)(nil)

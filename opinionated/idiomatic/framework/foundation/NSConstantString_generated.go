@@ -5,52 +5,73 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ConstantString wraps [raw.NSConstantString] with a fluent Go API.
+// ConstantString is an idiomatic wrapper over the Objective-C class NSConstantString.
 type ConstantString struct {
-	inner *raw.NSConstantString
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSConstantString].
-func (x *ConstantString) Unwrap() *raw.NSConstantString { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ConstantString) ID() objc.ID { return x.inner.Ptr() }
-
-// ConstantStringFromID adopts an existing object pointer as a ConstantString (nil for 0).
+// ConstantStringFromID adopts an existing Objective-C object as a ConstantString
+// (nil for 0), retaining it and registering a release finalizer.
 func ConstantStringFromID(id objc.ID) *ConstantString {
 	if id == 0 {
 		return nil
 	}
-	return &ConstantString{inner: raw.NSConstantStringFromID(id)}
-}
-
-// NewConstantString creates a new [ConstantString].
-func NewConstantString() *ConstantString {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSConstantString")), objc.RegisterName("new"))
-	return &ConstantString{inner: raw.NSConstantStringFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *ConstantString) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ConstantString {
-	x.inner.NSSimpleCString.NSString.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &ConstantString{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-func (x *ConstantString) asSimpleCString() *raw.NSSimpleCString { return &x.inner.NSSimpleCString }
+// constantStringAdopt wraps an Objective-C object that this code just created as a
+// ConstantString (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func constantStringAdopt(id objc.ID) *ConstantString {
+	if id == 0 {
+		return nil
+	}
+	x := &ConstantString{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
 
-func (x *ConstantString) asString() *raw.NSString { return &x.inner.NSSimpleCString.NSString }
+// Description returns the object's -description text.
+func (x *ConstantString) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
 
-func (x *ConstantString) asObject() *raw.NSObject { return &x.inner.NSSimpleCString.NSString.NSObject }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ConstantString) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ConstantString) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewConstantString creates a new ConstantString.
+func NewConstantString() *ConstantString {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSConstantString")), objc.RegisterName("new"))
+	return constantStringAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *ConstantString) WithScriptingProperties(scriptingProperties obj.Object) *ConstantString {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // ConstantStringable is the interface implemented by [ConstantString], for mocking and DI.
 type ConstantStringable interface {
-	Unwrap() *raw.NSConstantString
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ConstantString
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *ConstantString
 }
 
 var _ ConstantStringable = (*ConstantString)(nil)

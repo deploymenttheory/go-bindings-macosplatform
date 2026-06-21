@@ -5,77 +5,92 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // A convenience wrapper for batches of feature providers.
 //
-// ArrayBatchProvider wraps [raw.MLArrayBatchProvider] with a fluent Go API.
+// ArrayBatchProvider is an idiomatic wrapper over the Objective-C class MLArrayBatchProvider.
 type ArrayBatchProvider struct {
-	inner *raw.MLArrayBatchProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLArrayBatchProvider].
-func (x *ArrayBatchProvider) Unwrap() *raw.MLArrayBatchProvider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArrayBatchProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// ArrayBatchProviderFromID adopts an existing object pointer as a ArrayBatchProvider (nil for 0).
+// ArrayBatchProviderFromID adopts an existing Objective-C object as a ArrayBatchProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func ArrayBatchProviderFromID(id objc.ID) *ArrayBatchProvider {
 	if id == 0 {
 		return nil
 	}
-	return &ArrayBatchProvider{inner: raw.MLArrayBatchProviderFromID(id)}
+	x := &ArrayBatchProvider{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// arrayBatchProviderAdopt wraps an Objective-C object that this code just created as a
+// ArrayBatchProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arrayBatchProviderAdopt(id objc.ID) *ArrayBatchProvider {
+	if id == 0 {
+		return nil
+	}
+	x := &ArrayBatchProvider{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ArrayBatchProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ArrayBatchProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ArrayBatchProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates the batch provider based on the array of feature providers.
 //
-// NewArrayBatchProviderWithFeatureProviderArray creates a new [ArrayBatchProvider].
-func NewArrayBatchProviderWithFeatureProviderArray(array ...purego.IDer) *ArrayBatchProvider {
-	_ptrs := make([]objc.ID, len(array))
-	for _i, _v := range array {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *foundation.NSArray[raw.MLFeatureProvider]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.MLFeatureProvider](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.MLFeatureProvider](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MLArrayBatchProvider")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFeatureProviderArray:"), _arg0.Ptr())
-	return &ArrayBatchProvider{inner: raw.MLArrayBatchProviderFromID(_id)}
+// NewArrayBatchProviderWithFeatureProviderArray creates a new ArrayBatchProvider.
+func NewArrayBatchProviderWithFeatureProviderArray(array []obj.Object) *ArrayBatchProvider {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MLArrayBatchProvider")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFeatureProviderArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return arrayBatchProviderAdopt(_id)
 }
 
 // Creates a batch provider based on feature names and their associated arrays of data.
 //
-// NewArrayBatchProviderWithDictionaryError creates a new [ArrayBatchProvider].
-func NewArrayBatchProviderWithDictionaryError(dictionary purego.IDer) (*ArrayBatchProvider, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MLArrayBatchProvider")), objc.RegisterName("alloc"))
+// NewArrayBatchProviderWithDictionaryError creates a new ArrayBatchProvider.
+func NewArrayBatchProviderWithDictionaryError(dictionary obj.Object) (*ArrayBatchProvider, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MLArrayBatchProvider")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), dictionary.ID(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), objref.IDOf(dictionary), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &ArrayBatchProvider{inner: raw.MLArrayBatchProviderFromID(_id)}, nil
+	return arrayBatchProviderAdopt(_id), nil
 }
 
-// Array calls the underlying Array.
-func (x *ArrayBatchProvider) Array() *foundation.NSArray[raw.MLFeatureProvider] {
-	return x.inner.Array()
+func (x *ArrayBatchProvider) Array() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("array"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ArrayBatchProviderable is the interface implemented by [ArrayBatchProvider], for mocking and DI.
 type ArrayBatchProviderable interface {
-	Unwrap() *raw.MLArrayBatchProvider
-	Array() *foundation.NSArray[raw.MLFeatureProvider]
+	obj.Object
+	Array() []obj.Object
 }
 
 var _ ArrayBatchProviderable = (*ArrayBatchProvider)(nil)

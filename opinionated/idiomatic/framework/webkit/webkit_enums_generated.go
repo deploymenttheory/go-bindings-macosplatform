@@ -217,35 +217,6 @@ func (e WKMediaCaptureState) String() string {
 	}
 }
 
-// An enumeration that describes whether an audio or video presentation is playing, paused, or suspended.
-type WKMediaPlaybackState int64
-
-const (
-	// There is no media to play back.
-	WKMediaPlaybackStateNone WKMediaPlaybackState = 0
-	// The media is playing.
-	WKMediaPlaybackStatePlaying WKMediaPlaybackState = 1
-	// The media playback is paused.
-	WKMediaPlaybackStatePaused WKMediaPlaybackState = 2
-	// The media is not playing, and cannot be resumed until the user revokes the suspension.
-	WKMediaPlaybackStateSuspended WKMediaPlaybackState = 3
-)
-
-func (e WKMediaPlaybackState) String() string {
-	switch e {
-	case WKMediaPlaybackStateNone:
-		return "WKMediaPlaybackStateNone"
-	case WKMediaPlaybackStatePlaying:
-		return "WKMediaPlaybackStatePlaying"
-	case WKMediaPlaybackStatePaused:
-		return "WKMediaPlaybackStatePaused"
-	case WKMediaPlaybackStateSuspended:
-		return "WKMediaPlaybackStateSuspended"
-	default:
-		return fmt.Sprintf("WKMediaPlaybackState(%d)", int64(e))
-	}
-}
-
 // The type of action that triggered the navigation.
 type WKNavigationType int64
 

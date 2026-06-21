@@ -5,205 +5,202 @@
 package quartzcomposer
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcomposer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CompositionPickerView wraps [raw.QCCompositionPickerView] with a fluent Go API.
+// CompositionPickerView is an idiomatic wrapper over the Objective-C class QCCompositionPickerView.
 type CompositionPickerView struct {
-	inner *raw.QCCompositionPickerView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QCCompositionPickerView].
-func (x *CompositionPickerView) Unwrap() *raw.QCCompositionPickerView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CompositionPickerView) ID() objc.ID { return x.inner.Ptr() }
-
-// CompositionPickerViewFromID adopts an existing object pointer as a CompositionPickerView (nil for 0).
+// CompositionPickerViewFromID adopts an existing Objective-C object as a CompositionPickerView
+// (nil for 0), retaining it and registering a release finalizer.
 func CompositionPickerViewFromID(id objc.ID) *CompositionPickerView {
 	if id == 0 {
 		return nil
 	}
-	return &CompositionPickerView{inner: raw.QCCompositionPickerViewFromID(id)}
+	x := &CompositionPickerView{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCompositionPickerView creates a new [CompositionPickerView].
+// compositionPickerViewAdopt wraps an Objective-C object that this code just created as a
+// CompositionPickerView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func compositionPickerViewAdopt(id objc.ID) *CompositionPickerView {
+	if id == 0 {
+		return nil
+	}
+	x := &CompositionPickerView{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CompositionPickerView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CompositionPickerView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CompositionPickerView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCompositionPickerView creates a new CompositionPickerView.
 func NewCompositionPickerView() *CompositionPickerView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QCCompositionPickerView")), objc.RegisterName("new"))
-	return &CompositionPickerView{inner: raw.QCCompositionPickerViewFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionPickerView")), objc.RegisterName("new"))
+	return compositionPickerViewAdopt(_id)
 }
 
-// SetCompositionsFromRepositoryWithProtocolAndAttributes calls the underlying SetCompositionsFromRepositoryWithProtocolAndAttributes.
-func (x *CompositionPickerView) SetCompositionsFromRepositoryWithProtocolAndAttributes(protocol string, attributes *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.SetCompositionsFromRepositoryWithProtocolAndAttributes(foundation.NSStringStringWithUTF8String(protocol), attributes)
+func (x *CompositionPickerView) SetCompositionsFromRepositoryWithProtocolAndAttributes(protocol string, attributes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositionsFromRepositoryWithProtocol:andAttributes:"), purego.NSString(protocol), objref.IDOf(attributes))
 }
 
-// Compositions calls the underlying Compositions.
-func (x *CompositionPickerView) Compositions() *foundation.NSArray[objc.ID] {
-	return x.inner.Compositions()
+func (x *CompositionPickerView) Compositions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositions"))
+	return obj.Wrap(_r)
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *CompositionPickerView) SetDelegate(delegate objc.ID) {
-	x.inner.SetDelegate(delegate)
+func (x *CompositionPickerView) SetDelegate(delegate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *CompositionPickerView) Delegate() objc.ID {
-	return x.inner.Delegate()
+func (x *CompositionPickerView) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+	return obj.Wrap(_r)
 }
 
-// SetShowsCompositionNames calls the underlying SetShowsCompositionNames.
 func (x *CompositionPickerView) SetShowsCompositionNames(flag bool) {
-	x.inner.SetShowsCompositionNames(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsCompositionNames:"), flag)
 }
 
-// ShowsCompositionNames calls the underlying ShowsCompositionNames.
 func (x *CompositionPickerView) ShowsCompositionNames() bool {
-	return x.inner.ShowsCompositionNames()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsCompositionNames"))
+	return _r
 }
 
-// SetAllowsEmptySelection calls the underlying SetAllowsEmptySelection.
 func (x *CompositionPickerView) SetAllowsEmptySelection(flag bool) {
-	x.inner.SetAllowsEmptySelection(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEmptySelection:"), flag)
 }
 
-// AllowsEmptySelection calls the underlying AllowsEmptySelection.
 func (x *CompositionPickerView) AllowsEmptySelection() bool {
-	return x.inner.AllowsEmptySelection()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsEmptySelection"))
+	return _r
 }
 
-// SetCompositionAspectRatio calls the underlying SetCompositionAspectRatio.
-func (x *CompositionPickerView) SetCompositionAspectRatio(ratio corefoundation.CGSize) {
-	x.inner.SetCompositionAspectRatio(ratio)
+func (x *CompositionPickerView) SetDefaultValueForInputKey(value obj.Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultValue:forInputKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
-// CompositionAspectRatio calls the underlying CompositionAspectRatio.
-func (x *CompositionPickerView) CompositionAspectRatio() corefoundation.CGSize {
-	return x.inner.CompositionAspectRatio()
-}
-
-// SetDefaultValueForInputKey calls the underlying SetDefaultValueForInputKey.
-func (x *CompositionPickerView) SetDefaultValueForInputKey(value objc.ID, key string) {
-	x.inner.SetDefaultValueForInputKey(value, foundation.NSStringStringWithUTF8String(key))
-}
-
-// ResetDefaultInputValues calls the underlying ResetDefaultInputValues.
 func (x *CompositionPickerView) ResetDefaultInputValues() {
-	x.inner.ResetDefaultInputValues()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetDefaultInputValues"))
 }
 
-// SetSelectedComposition calls the underlying SetSelectedComposition.
-func (x *CompositionPickerView) SetSelectedComposition(composition *quartz.QCComposition) {
-	x.inner.SetSelectedComposition(composition)
+func (x *CompositionPickerView) SetSelectedComposition(composition obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedComposition:"), objref.IDOf(composition))
 }
 
-// SelectedComposition calls the underlying SelectedComposition.
-func (x *CompositionPickerView) SelectedComposition() *quartz.QCComposition {
-	return x.inner.SelectedComposition()
+func (x *CompositionPickerView) SelectedComposition() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedComposition"))
+	return obj.Wrap(_r)
 }
 
-// StartAnimation calls the underlying StartAnimation.
-func (x *CompositionPickerView) StartAnimation(sender objc.ID) {
-	x.inner.StartAnimation(sender)
+func (x *CompositionPickerView) StartAnimation(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startAnimation:"), objref.IDOf(sender))
 }
 
-// StopAnimation calls the underlying StopAnimation.
-func (x *CompositionPickerView) StopAnimation(sender objc.ID) {
-	x.inner.StopAnimation(sender)
+func (x *CompositionPickerView) StopAnimation(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopAnimation:"), objref.IDOf(sender))
 }
 
-// IsAnimating calls the underlying IsAnimating.
 func (x *CompositionPickerView) IsAnimating() bool {
-	return x.inner.IsAnimating()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAnimating"))
+	return _r
 }
 
-// SetMaxAnimationFrameRate calls the underlying SetMaxAnimationFrameRate.
 func (x *CompositionPickerView) SetMaxAnimationFrameRate(maxFPS float32) {
-	x.inner.SetMaxAnimationFrameRate(maxFPS)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAnimationFrameRate:"), maxFPS)
 }
 
-// MaxAnimationFrameRate calls the underlying MaxAnimationFrameRate.
 func (x *CompositionPickerView) MaxAnimationFrameRate() float32 {
-	return x.inner.MaxAnimationFrameRate()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maxAnimationFrameRate"))
+	return _r
 }
 
-// SetBackgroundColor calls the underlying SetBackgroundColor.
-func (x *CompositionPickerView) SetBackgroundColor(color *appkit.NSColor) {
-	x.inner.SetBackgroundColor(color)
+func (x *CompositionPickerView) SetBackgroundColor(color obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(color))
 }
 
-// BackgroundColor calls the underlying BackgroundColor.
-func (x *CompositionPickerView) BackgroundColor() *appkit.NSColor {
-	return x.inner.BackgroundColor()
+func (x *CompositionPickerView) BackgroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+	return obj.Wrap(_r)
 }
 
-// SetDrawsBackground calls the underlying SetDrawsBackground.
 func (x *CompositionPickerView) SetDrawsBackground(flag bool) {
-	x.inner.SetDrawsBackground(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), flag)
 }
 
-// DrawsBackground calls the underlying DrawsBackground.
 func (x *CompositionPickerView) DrawsBackground() bool {
-	return x.inner.DrawsBackground()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsBackground"))
+	return _r
 }
 
-// NumberOfColumns calls the underlying NumberOfColumns.
-func (x *CompositionPickerView) NumberOfColumns() uint {
-	return x.inner.NumberOfColumns()
+func (x *CompositionPickerView) NumberOfColumns() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfColumns"))
+	return _r
 }
 
-// SetNumberOfColumns calls the underlying SetNumberOfColumns.
-func (x *CompositionPickerView) SetNumberOfColumns(columns uint) {
-	x.inner.SetNumberOfColumns(columns)
+func (x *CompositionPickerView) SetNumberOfColumns(columns int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfColumns:"), columns)
 }
 
-// NumberOfRows calls the underlying NumberOfRows.
-func (x *CompositionPickerView) NumberOfRows() uint {
-	return x.inner.NumberOfRows()
+func (x *CompositionPickerView) NumberOfRows() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfRows"))
+	return _r
 }
 
-// SetNumberOfRows calls the underlying SetNumberOfRows.
-func (x *CompositionPickerView) SetNumberOfRows(rows uint) {
-	x.inner.SetNumberOfRows(rows)
+func (x *CompositionPickerView) SetNumberOfRows(rows int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfRows:"), rows)
 }
 
 // CompositionPickerViewable is the interface implemented by [CompositionPickerView], for mocking and DI.
 type CompositionPickerViewable interface {
-	Unwrap() *raw.QCCompositionPickerView
-	SetCompositionsFromRepositoryWithProtocolAndAttributes(protocol string, attributes *foundation.NSDictionary[objc.ID, objc.ID])
-	Compositions() *foundation.NSArray[objc.ID]
-	SetDelegate(delegate objc.ID)
-	Delegate() objc.ID
+	obj.Object
+	SetCompositionsFromRepositoryWithProtocolAndAttributes(protocol string, attributes obj.Object)
+	Compositions() obj.Object
+	SetDelegate(delegate obj.Object)
+	Delegate() obj.Object
 	SetShowsCompositionNames(flag bool)
 	ShowsCompositionNames() bool
 	SetAllowsEmptySelection(flag bool)
 	AllowsEmptySelection() bool
-	SetCompositionAspectRatio(ratio corefoundation.CGSize)
-	CompositionAspectRatio() corefoundation.CGSize
-	SetDefaultValueForInputKey(value objc.ID, key string)
+	SetDefaultValueForInputKey(value obj.Object, key string)
 	ResetDefaultInputValues()
-	SetSelectedComposition(composition *quartz.QCComposition)
-	SelectedComposition() *quartz.QCComposition
-	StartAnimation(sender objc.ID)
-	StopAnimation(sender objc.ID)
+	SetSelectedComposition(composition obj.Object)
+	SelectedComposition() obj.Object
+	StartAnimation(sender obj.Object)
+	StopAnimation(sender obj.Object)
 	IsAnimating() bool
 	SetMaxAnimationFrameRate(maxFPS float32)
 	MaxAnimationFrameRate() float32
-	SetBackgroundColor(color *appkit.NSColor)
-	BackgroundColor() *appkit.NSColor
+	SetBackgroundColor(color obj.Object)
+	BackgroundColor() obj.Object
 	SetDrawsBackground(flag bool)
 	DrawsBackground() bool
-	NumberOfColumns() uint
-	SetNumberOfColumns(columns uint)
-	NumberOfRows() uint
-	SetNumberOfRows(rows uint)
+	NumberOfColumns() int
+	SetNumberOfColumns(columns int)
+	NumberOfRows() int
+	SetNumberOfRows(rows int)
 }
 
 var _ CompositionPickerViewable = (*CompositionPickerView)(nil)

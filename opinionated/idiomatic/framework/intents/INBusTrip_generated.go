@@ -5,118 +5,133 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Information describing a bus trip.
 //
-// BusTrip wraps [raw.INBusTrip] with a fluent Go API.
+// BusTrip is an idiomatic wrapper over the Objective-C class INBusTrip.
 type BusTrip struct {
-	inner *raw.INBusTrip
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INBusTrip].
-func (x *BusTrip) Unwrap() *raw.INBusTrip { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BusTrip) ID() objc.ID { return x.inner.Ptr() }
-
-// BusTripFromID adopts an existing object pointer as a BusTrip (nil for 0).
+// BusTripFromID adopts an existing Objective-C object as a BusTrip
+// (nil for 0), retaining it and registering a release finalizer.
 func BusTripFromID(id objc.ID) *BusTrip {
 	if id == 0 {
 		return nil
 	}
-	return &BusTrip{inner: raw.INBusTripFromID(id)}
+	x := &BusTrip{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// busTripAdopt wraps an Objective-C object that this code just created as a
+// BusTrip (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func busTripAdopt(id objc.ID) *BusTrip {
+	if id == 0 {
+		return nil
+	}
+	x := &BusTrip{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BusTrip) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BusTrip) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BusTrip) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a bus trip with the specified contents and attributes.
 //
-// NewBusTripWithProviderBusNameBusNumberTripDurationDepartureBusStopLocationDeparturePlatformArrivalBusStopLocationArrivalPlatform creates a new [BusTrip].
-func NewBusTripWithProviderBusNameBusNumberTripDurationDepartureBusStopLocationDeparturePlatformArrivalBusStopLocationArrivalPlatform(provider string, busName string, busNumber string, tripDuration *raw.INDateComponentsRange, departureBusStopLocation *corelocation.CLPlacemark, departurePlatform string, arrivalBusStopLocation *corelocation.CLPlacemark, arrivalPlatform string) *BusTrip {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INBusTrip")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvider:busName:busNumber:tripDuration:departureBusStopLocation:departurePlatform:arrivalBusStopLocation:arrivalPlatform:"), foundation.NSStringStringWithUTF8String(provider).Ptr(), foundation.NSStringStringWithUTF8String(busName).Ptr(), foundation.NSStringStringWithUTF8String(busNumber).Ptr(), tripDuration.Ptr(), departureBusStopLocation.Ptr(), foundation.NSStringStringWithUTF8String(departurePlatform).Ptr(), arrivalBusStopLocation.Ptr(), foundation.NSStringStringWithUTF8String(arrivalPlatform).Ptr())
-	return &BusTrip{inner: raw.INBusTripFromID(_id)}
+// NewBusTripWithProviderBusNameBusNumberTripDurationDepartureBusStopLocationDeparturePlatformArrivalBusStopLocationArrivalPlatform creates a new BusTrip.
+func NewBusTripWithProviderBusNameBusNumberTripDurationDepartureBusStopLocationDeparturePlatformArrivalBusStopLocationArrivalPlatform(provider string, busName string, busNumber string, tripDuration *DateComponentsRange, departureBusStopLocation obj.Object, departurePlatform string, arrivalBusStopLocation obj.Object, arrivalPlatform string) *BusTrip {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INBusTrip")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvider:busName:busNumber:tripDuration:departureBusStopLocation:departurePlatform:arrivalBusStopLocation:arrivalPlatform:"), purego.NSString(provider), purego.NSString(busName), purego.NSString(busNumber), objref.IDOf(tripDuration), objref.IDOf(departureBusStopLocation), purego.NSString(departurePlatform), objref.IDOf(arrivalBusStopLocation), purego.NSString(arrivalPlatform))
+	return busTripAdopt(_id)
 }
 
-// Provider calls the underlying Provider.
 func (x *BusTrip) Provider() string {
-	_r := x.inner.Provider()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provider"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// BusName calls the underlying BusName.
 func (x *BusTrip) BusName() string {
-	_r := x.inner.BusName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("busName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// BusNumber calls the underlying BusNumber.
 func (x *BusTrip) BusNumber() string {
-	_r := x.inner.BusNumber()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("busNumber"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// TripDuration calls the underlying TripDuration.
 func (x *BusTrip) TripDuration() *DateComponentsRange {
-	_r := x.inner.TripDuration()
-	if _r == nil {
-		return nil
-	}
-	return &DateComponentsRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tripDuration"))
+	return DateComponentsRangeFromID(_r)
 }
 
-// DepartureBusStopLocation calls the underlying DepartureBusStopLocation.
-func (x *BusTrip) DepartureBusStopLocation() *corelocation.CLPlacemark {
-	return x.inner.DepartureBusStopLocation()
+func (x *BusTrip) DepartureBusStopLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departureBusStopLocation"))
+	return obj.Wrap(_r)
 }
 
-// DeparturePlatform calls the underlying DeparturePlatform.
 func (x *BusTrip) DeparturePlatform() string {
-	_r := x.inner.DeparturePlatform()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departurePlatform"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ArrivalBusStopLocation calls the underlying ArrivalBusStopLocation.
-func (x *BusTrip) ArrivalBusStopLocation() *corelocation.CLPlacemark {
-	return x.inner.ArrivalBusStopLocation()
+func (x *BusTrip) ArrivalBusStopLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalBusStopLocation"))
+	return obj.Wrap(_r)
 }
 
-// ArrivalPlatform calls the underlying ArrivalPlatform.
 func (x *BusTrip) ArrivalPlatform() string {
-	_r := x.inner.ArrivalPlatform()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalPlatform"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // BusTripable is the interface implemented by [BusTrip], for mocking and DI.
 type BusTripable interface {
-	Unwrap() *raw.INBusTrip
+	obj.Object
 	Provider() string
 	BusName() string
 	BusNumber() string
 	TripDuration() *DateComponentsRange
-	DepartureBusStopLocation() *corelocation.CLPlacemark
+	DepartureBusStopLocation() obj.Object
 	DeparturePlatform() string
-	ArrivalBusStopLocation() *corelocation.CLPlacemark
+	ArrivalBusStopLocation() obj.Object
 	ArrivalPlatform() string
 }
 

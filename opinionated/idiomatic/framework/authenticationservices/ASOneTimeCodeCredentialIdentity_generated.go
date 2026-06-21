@@ -5,53 +5,77 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// OneTimeCodeCredentialIdentity wraps [raw.ASOneTimeCodeCredentialIdentity] with a fluent Go API.
+// OneTimeCodeCredentialIdentity is an idiomatic wrapper over the Objective-C class ASOneTimeCodeCredentialIdentity.
 type OneTimeCodeCredentialIdentity struct {
-	inner *raw.ASOneTimeCodeCredentialIdentity
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASOneTimeCodeCredentialIdentity].
-func (x *OneTimeCodeCredentialIdentity) Unwrap() *raw.ASOneTimeCodeCredentialIdentity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OneTimeCodeCredentialIdentity) ID() objc.ID { return x.inner.Ptr() }
-
-// OneTimeCodeCredentialIdentityFromID adopts an existing object pointer as a OneTimeCodeCredentialIdentity (nil for 0).
+// OneTimeCodeCredentialIdentityFromID adopts an existing Objective-C object as a OneTimeCodeCredentialIdentity
+// (nil for 0), retaining it and registering a release finalizer.
 func OneTimeCodeCredentialIdentityFromID(id objc.ID) *OneTimeCodeCredentialIdentity {
 	if id == 0 {
 		return nil
 	}
-	return &OneTimeCodeCredentialIdentity{inner: raw.ASOneTimeCodeCredentialIdentityFromID(id)}
+	x := &OneTimeCodeCredentialIdentity{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @abstract Initializes an instance of ASOneTimeCodeCredentialIdentity. @param serviceIdentifier The service identifier for which this credential identity is valid. @param label A user-provided label to identify the one time code. @param recordIdentifier An optional string to uniquely identify this record in your local database.
+// oneTimeCodeCredentialIdentityAdopt wraps an Objective-C object that this code just created as a
+// OneTimeCodeCredentialIdentity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func oneTimeCodeCredentialIdentityAdopt(id objc.ID) *OneTimeCodeCredentialIdentity {
+	if id == 0 {
+		return nil
+	}
+	x := &OneTimeCodeCredentialIdentity{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *OneTimeCodeCredentialIdentity) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *OneTimeCodeCredentialIdentity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *OneTimeCodeCredentialIdentity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// Initializes an instance of ASOneTimeCodeCredentialIdentity.
 //
-// NewOneTimeCodeCredentialIdentityWithServiceIdentifierLabelRecordIdentifier creates a new [OneTimeCodeCredentialIdentity].
-func NewOneTimeCodeCredentialIdentityWithServiceIdentifierLabelRecordIdentifier(serviceIdentifier *raw.ASCredentialServiceIdentifier, label string, recordIdentifier string) *OneTimeCodeCredentialIdentity {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASOneTimeCodeCredentialIdentity")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceIdentifier:label:recordIdentifier:"), serviceIdentifier.Ptr(), foundation.NSStringStringWithUTF8String(label).Ptr(), foundation.NSStringStringWithUTF8String(recordIdentifier).Ptr())
-	return &OneTimeCodeCredentialIdentity{inner: raw.ASOneTimeCodeCredentialIdentityFromID(_id)}
+// NewOneTimeCodeCredentialIdentityWithServiceIdentifierLabelRecordIdentifier creates a new OneTimeCodeCredentialIdentity.
+func NewOneTimeCodeCredentialIdentityWithServiceIdentifierLabelRecordIdentifier(serviceIdentifier *CredentialServiceIdentifier, label string, recordIdentifier string) *OneTimeCodeCredentialIdentity {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASOneTimeCodeCredentialIdentity")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceIdentifier:label:recordIdentifier:"), objref.IDOf(serviceIdentifier), purego.NSString(label), purego.NSString(recordIdentifier))
+	return oneTimeCodeCredentialIdentityAdopt(_id)
 }
 
-// Label calls the underlying Label.
 func (x *OneTimeCodeCredentialIdentity) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // OneTimeCodeCredentialIdentityable is the interface implemented by [OneTimeCodeCredentialIdentity], for mocking and DI.
 type OneTimeCodeCredentialIdentityable interface {
-	Unwrap() *raw.ASOneTimeCodeCredentialIdentity
+	obj.Object
 	Label() string
 }
 

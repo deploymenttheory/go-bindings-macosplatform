@@ -5,52 +5,68 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The driver that acts as an entry point for smart card app extensions.
 //
-// SmartCardTokenDriver wraps [raw.TKSmartCardTokenDriver] with a fluent Go API.
+// SmartCardTokenDriver is an idiomatic wrapper over the Objective-C class TKSmartCardTokenDriver.
 type SmartCardTokenDriver struct {
-	inner *raw.TKSmartCardTokenDriver
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKSmartCardTokenDriver].
-func (x *SmartCardTokenDriver) Unwrap() *raw.TKSmartCardTokenDriver { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SmartCardTokenDriver) ID() objc.ID { return x.inner.Ptr() }
-
-// SmartCardTokenDriverFromID adopts an existing object pointer as a SmartCardTokenDriver (nil for 0).
+// SmartCardTokenDriverFromID adopts an existing Objective-C object as a SmartCardTokenDriver
+// (nil for 0), retaining it and registering a release finalizer.
 func SmartCardTokenDriverFromID(id objc.ID) *SmartCardTokenDriver {
 	if id == 0 {
 		return nil
 	}
-	return &SmartCardTokenDriver{inner: raw.TKSmartCardTokenDriverFromID(id)}
-}
-
-// NewSmartCardTokenDriver creates a new [SmartCardTokenDriver].
-func NewSmartCardTokenDriver() *SmartCardTokenDriver {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSmartCardTokenDriver")), objc.RegisterName("new"))
-	return &SmartCardTokenDriver{inner: raw.TKSmartCardTokenDriverFromID(_id)}
-}
-
-// The token driver delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *SmartCardTokenDriver) WithDelegate(delegate raw.TKTokenDriverDelegate) *SmartCardTokenDriver {
-	x.inner.TKTokenDriver.SetDelegate(delegate)
+	x := &SmartCardTokenDriver{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-func (x *SmartCardTokenDriver) asTokenDriver() *raw.TKTokenDriver { return &x.inner.TKTokenDriver }
+// smartCardTokenDriverAdopt wraps an Objective-C object that this code just created as a
+// SmartCardTokenDriver (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func smartCardTokenDriverAdopt(id objc.ID) *SmartCardTokenDriver {
+	if id == 0 {
+		return nil
+	}
+	x := &SmartCardTokenDriver{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SmartCardTokenDriver) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SmartCardTokenDriver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SmartCardTokenDriver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSmartCardTokenDriver creates a new SmartCardTokenDriver.
+func NewSmartCardTokenDriver() *SmartCardTokenDriver {
+	_id := objc.Send[objc.ID](objc.ID(_class("TKSmartCardTokenDriver")), objc.RegisterName("new"))
+	return smartCardTokenDriverAdopt(_id)
+}
 
 // SmartCardTokenDriverable is the interface implemented by [SmartCardTokenDriver], for mocking and DI.
 type SmartCardTokenDriverable interface {
-	Unwrap() *raw.TKSmartCardTokenDriver
-	WithDelegate(delegate raw.TKTokenDriverDelegate) *SmartCardTokenDriver
+	obj.Object
 }
 
 var _ SmartCardTokenDriverable = (*SmartCardTokenDriver)(nil)

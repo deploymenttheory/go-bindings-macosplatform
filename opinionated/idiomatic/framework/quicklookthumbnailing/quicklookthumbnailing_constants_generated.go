@@ -5,14 +5,11 @@
 package quicklookthumbnailing
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookthumbnailing"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// QLThumbnailErrorDomain returns the string constant QLThumbnailErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func QLThumbnailErrorDomain() objc.ID {
-	if _r := raw.QLThumbnailErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// QLThumbnailErrorDomain returns the string constant QLThumbnailErrorDomain, for use as a dictionary key or argument.
+func QLThumbnailErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QLThumbnailErrorDomain")))
 }

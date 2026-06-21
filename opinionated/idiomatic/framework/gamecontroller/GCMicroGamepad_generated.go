@@ -5,195 +5,159 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A controller profile that supports the Siri Remote.
 //
-// MicroGamepad wraps [raw.GCMicroGamepad] with a fluent Go API.
+// MicroGamepad is an idiomatic wrapper over the Objective-C class GCMicroGamepad.
 type MicroGamepad struct {
-	inner *raw.GCMicroGamepad
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCMicroGamepad].
-func (x *MicroGamepad) Unwrap() *raw.GCMicroGamepad { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MicroGamepad) ID() objc.ID { return x.inner.Ptr() }
-
-// MicroGamepadFromID adopts an existing object pointer as a MicroGamepad (nil for 0).
+// MicroGamepadFromID adopts an existing Objective-C object as a MicroGamepad
+// (nil for 0), retaining it and registering a release finalizer.
 func MicroGamepadFromID(id objc.ID) *MicroGamepad {
 	if id == 0 {
 		return nil
 	}
-	return &MicroGamepad{inner: raw.GCMicroGamepadFromID(id)}
-}
-
-// NewMicroGamepad creates a new [MicroGamepad].
-func NewMicroGamepad() *MicroGamepad {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCMicroGamepad")), objc.RegisterName("new"))
-	return &MicroGamepad{inner: raw.GCMicroGamepadFromID(_id)}
-}
-
-// The block that this profile calls when an element’s value changes.
-//
-// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
-func (x *MicroGamepad) WithValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement)) *MicroGamepad {
-	x.inner.SetValueChangedHandler(valueChangedHandler)
+	x := &MicroGamepad{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// microGamepadAdopt wraps an Objective-C object that this code just created as a
+// MicroGamepad (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func microGamepadAdopt(id objc.ID) *MicroGamepad {
+	if id == 0 {
+		return nil
+	}
+	x := &MicroGamepad{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MicroGamepad) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MicroGamepad) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MicroGamepad) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMicroGamepad creates a new MicroGamepad.
+func NewMicroGamepad() *MicroGamepad {
+	_id := objc.Send[objc.ID](objc.ID(_class("GCMicroGamepad")), objc.RegisterName("new"))
+	return microGamepadAdopt(_id)
 }
 
 // A Boolean value that indicates whether the directional pad reports absolute or relative values.
 //
-// WithReportsAbsoluteDpadValues sets the reportsAbsoluteDpadValues property and returns the receiver for chaining.
+// WithReportsAbsoluteDpadValues sets reportsAbsoluteDpadValues and returns the receiver so calls can be chained.
 func (x *MicroGamepad) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *MicroGamepad {
-	x.inner.SetReportsAbsoluteDpadValues(reportsAbsoluteDpadValues)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportsAbsoluteDpadValues:"), reportsAbsoluteDpadValues)
 	return x
 }
 
 // A Boolean value that indicates whether the profile reports the directional pad values relative to its current orientation.
 //
-// WithAllowsRotation sets the allowsRotation property and returns the receiver for chaining.
+// WithAllowsRotation sets allowsRotation and returns the receiver so calls can be chained.
 func (x *MicroGamepad) WithAllowsRotation(allowsRotation bool) *MicroGamepad {
-	x.inner.SetAllowsRotation(allowsRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsRotation:"), allowsRotation)
 	return x
 }
 
 // The block that the profile calls when an element’s value changes.
 //
-// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
-func (x *MicroGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *MicroGamepad {
-	x.inner.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
+// WithValueDidChangeHandler sets valueDidChangeHandler and returns the receiver so calls can be chained.
+func (x *MicroGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *MicroGamepad {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return x
 }
 
 // Saves a snapshot of all of the profile’s elements.
-//
-// SaveSnapshot calls the underlying SaveSnapshot.
 func (x *MicroGamepad) SaveSnapshot() *MicroGamepadSnapshot {
-	_r := x.inner.SaveSnapshot()
-	if _r == nil {
-		return nil
-	}
-	return &MicroGamepadSnapshot{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveSnapshot"))
+	return MicroGamepadSnapshotFromID(_r)
 }
 
 // Copies the input values from a specified micro gamepad to a snapshot of a micro gamepad.
-//
-// SetStateFromMicroGamepad calls the underlying SetStateFromMicroGamepad.
-func (x *MicroGamepad) SetStateFromMicroGamepad(microGamepad *raw.GCMicroGamepad) {
-	x.inner.SetStateFromMicroGamepad(microGamepad)
+func (x *MicroGamepad) SetStateFromMicroGamepad(microGamepad *MicroGamepad) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStateFromMicroGamepad:"), objref.IDOf(microGamepad))
 }
 
 // A profile keeps a reference to the controller that this profile is mapping input from.
-//
-// Controller calls the underlying Controller.
 func (x *MicroGamepad) Controller() *Controller {
-	_r := x.inner.Controller()
-	if _r == nil {
-		return nil
-	}
-	return &Controller{inner: _r}
-}
-
-// ValueChangedHandler calls the underlying ValueChangedHandler.
-func (x *MicroGamepad) ValueChangedHandler() objc.Block {
-	return x.inner.ValueChangedHandler()
-}
-
-// SetValueChangedHandler calls the underlying SetValueChangedHandler.
-func (x *MicroGamepad) SetValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement)) {
-	x.inner.SetValueChangedHandler(valueChangedHandler)
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controller"))
+	return ControllerFromID(_r)
 }
 
 // Optionally analog in the Micro profile. All the elements of this directional input are either analog or digital.
-//
-// Dpad calls the underlying Dpad.
 func (x *MicroGamepad) Dpad() *ControllerDirectionPad {
-	_r := x.inner.Dpad()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerDirectionPad{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dpad"))
+	return ControllerDirectionPadFromID(_r)
 }
 
 // The Micro profile has two buttons that are optionally analog in the Micro profile. Button A is the primary action button, it indicates affirmative action and should be used to advance in menus or perform the primary action in gameplay.
-//
-// ButtonA calls the underlying ButtonA.
 func (x *MicroGamepad) ButtonA() *ControllerButtonInput {
-	_r := x.inner.ButtonA()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonA"))
+	return ControllerButtonInputFromID(_r)
 }
 
-// Button X is the secondary action button, it indicates an alternate affirmative action and should be used to perform a secondary action. If there is no secondary action it should be used as equivalent to buttonA. Unlike on other profiles there is no negative button on this profile. Instead the menu button should be used to present menu content or to retreat in a menu flow. @see buttonA
-//
-// ButtonX calls the underlying ButtonX.
+// Button X is the secondary action button, it indicates an alternate affirmative action and should be used to perform a secondary action. If there is no secondary action it should be used as equivalent to buttonA. Unlike on other profiles there is no negative button on this profile. Instead the menu button should be used to present menu content or to retreat in a menu flow.
 func (x *MicroGamepad) ButtonX() *ControllerButtonInput {
-	_r := x.inner.ButtonX()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonX"))
+	return ControllerButtonInputFromID(_r)
 }
 
 // Button menu is the primary menu button, and should be used to enter the main menu and pause the game.
-//
-// ButtonMenu calls the underlying ButtonMenu.
 func (x *MicroGamepad) ButtonMenu() *ControllerButtonInput {
-	_r := x.inner.ButtonMenu()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonMenu"))
+	return ControllerButtonInputFromID(_r)
 }
 
 // The Micro profile can use the raw position values of the touchpad on the remote as D-pad values, or it can create a virtual dpad centered around the first contact point with the surface. If NO; a smaller sliding window is created around the initial touch point and subsequent movement is relative to that center. Movement outside the window will slide the window with it to re-center it. This is great for surfaces where there is no clear sense of a middle and drift over time is an issue. If YES; the absolute values are used and any drift will have to managed manually either through user traning or by a developer using the dpad. The default value for this property is NO, meaning a sliding window is used for the dpad.
-//
-// ReportsAbsoluteDpadValues calls the underlying ReportsAbsoluteDpadValues.
 func (x *MicroGamepad) ReportsAbsoluteDpadValues() bool {
-	return x.inner.ReportsAbsoluteDpadValues()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reportsAbsoluteDpadValues"))
+	return _r
 }
 
-// SetReportsAbsoluteDpadValues calls the underlying SetReportsAbsoluteDpadValues.
 func (x *MicroGamepad) SetReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) {
-	x.inner.SetReportsAbsoluteDpadValues(reportsAbsoluteDpadValues)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportsAbsoluteDpadValues:"), reportsAbsoluteDpadValues)
 }
 
 // Allows the Micro profile to monitor the orientation of the controller, if the controller is positioned in landscape orientation, D-pad input values will be transposed 90 degrees to match the new orientation. The default value for this property is NO.
-//
-// AllowsRotation calls the underlying AllowsRotation.
 func (x *MicroGamepad) AllowsRotation() bool {
-	return x.inner.AllowsRotation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsRotation"))
+	return _r
 }
 
-// SetAllowsRotation calls the underlying SetAllowsRotation.
 func (x *MicroGamepad) SetAllowsRotation(allowsRotation bool) {
-	x.inner.SetAllowsRotation(allowsRotation)
-}
-
-func (x *MicroGamepad) asMicroGamepad() *raw.GCMicroGamepad { return x.inner }
-
-func (x *MicroGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
-	return &x.inner.GCPhysicalInputProfile
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsRotation:"), allowsRotation)
 }
 
 // MicroGamepadable is the interface implemented by [MicroGamepad], for mocking and DI.
 type MicroGamepadable interface {
-	Unwrap() *raw.GCMicroGamepad
-	WithValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement)) *MicroGamepad
+	obj.Object
 	WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *MicroGamepad
 	WithAllowsRotation(allowsRotation bool) *MicroGamepad
-	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *MicroGamepad
+	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *MicroGamepad
 	SaveSnapshot() *MicroGamepadSnapshot
-	SetStateFromMicroGamepad(microGamepad *raw.GCMicroGamepad)
+	SetStateFromMicroGamepad(microGamepad *MicroGamepad)
 	Controller() *Controller
-	ValueChangedHandler() objc.Block
-	SetValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement))
 	Dpad() *ControllerDirectionPad
 	ButtonA() *ControllerButtonInput
 	ButtonX() *ControllerButtonInput

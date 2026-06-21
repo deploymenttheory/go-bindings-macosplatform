@@ -5,221 +5,234 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRColorControlClusterStepColorTemperatureParams wraps [raw.MTRColorControlClusterStepColorTemperatureParams] with a fluent Go API.
+// MTRColorControlClusterStepColorTemperatureParams is an idiomatic wrapper over the Objective-C class MTRColorControlClusterStepColorTemperatureParams.
 type MTRColorControlClusterStepColorTemperatureParams struct {
-	inner *raw.MTRColorControlClusterStepColorTemperatureParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRColorControlClusterStepColorTemperatureParams].
-func (x *MTRColorControlClusterStepColorTemperatureParams) Unwrap() *raw.MTRColorControlClusterStepColorTemperatureParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRColorControlClusterStepColorTemperatureParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRColorControlClusterStepColorTemperatureParamsFromID adopts an existing object pointer as a MTRColorControlClusterStepColorTemperatureParams (nil for 0).
+// MTRColorControlClusterStepColorTemperatureParamsFromID adopts an existing Objective-C object as a MTRColorControlClusterStepColorTemperatureParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRColorControlClusterStepColorTemperatureParamsFromID(id objc.ID) *MTRColorControlClusterStepColorTemperatureParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRColorControlClusterStepColorTemperatureParams{inner: raw.MTRColorControlClusterStepColorTemperatureParamsFromID(id)}
+	x := &MTRColorControlClusterStepColorTemperatureParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRColorControlClusterStepColorTemperatureParams creates a new [MTRColorControlClusterStepColorTemperatureParams].
+// mTRColorControlClusterStepColorTemperatureParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRColorControlClusterStepColorTemperatureParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRColorControlClusterStepColorTemperatureParamsAdopt(id objc.ID) *MTRColorControlClusterStepColorTemperatureParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRColorControlClusterStepColorTemperatureParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRColorControlClusterStepColorTemperatureParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRColorControlClusterStepColorTemperatureParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRColorControlClusterStepColorTemperatureParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRColorControlClusterStepColorTemperatureParams creates a new MTRColorControlClusterStepColorTemperatureParams.
 func NewMTRColorControlClusterStepColorTemperatureParams() *MTRColorControlClusterStepColorTemperatureParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRColorControlClusterStepColorTemperatureParams")), objc.RegisterName("new"))
-	return &MTRColorControlClusterStepColorTemperatureParams{inner: raw.MTRColorControlClusterStepColorTemperatureParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRColorControlClusterStepColorTemperatureParams")), objc.RegisterName("new"))
+	return mTRColorControlClusterStepColorTemperatureParamsAdopt(_id)
 }
 
-// WithStepMode sets the stepMode property and returns the receiver for chaining.
-func (x *MTRColorControlClusterStepColorTemperatureParams) WithStepMode(stepMode *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams {
-	x.inner.SetStepMode(stepMode)
+// WithStepMode sets stepMode and returns the receiver so calls can be chained.
+func (x *MTRColorControlClusterStepColorTemperatureParams) WithStepMode(stepMode obj.Object) *MTRColorControlClusterStepColorTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepMode:"), objref.IDOf(stepMode))
 	return x
 }
 
-// WithStepSize sets the stepSize property and returns the receiver for chaining.
-func (x *MTRColorControlClusterStepColorTemperatureParams) WithStepSize(stepSize *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams {
-	x.inner.SetStepSize(stepSize)
+// WithStepSize sets stepSize and returns the receiver so calls can be chained.
+func (x *MTRColorControlClusterStepColorTemperatureParams) WithStepSize(stepSize obj.Object) *MTRColorControlClusterStepColorTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepSize:"), objref.IDOf(stepSize))
 	return x
 }
 
-// WithTransitionTime sets the transitionTime property and returns the receiver for chaining.
-func (x *MTRColorControlClusterStepColorTemperatureParams) WithTransitionTime(transitionTime *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams {
-	x.inner.SetTransitionTime(transitionTime)
+// WithTransitionTime sets transitionTime and returns the receiver so calls can be chained.
+func (x *MTRColorControlClusterStepColorTemperatureParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterStepColorTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return x
 }
 
-// WithColorTemperatureMinimumMireds sets the colorTemperatureMinimumMireds property and returns the receiver for chaining.
-func (x *MTRColorControlClusterStepColorTemperatureParams) WithColorTemperatureMinimumMireds(colorTemperatureMinimumMireds *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams {
-	x.inner.SetColorTemperatureMinimumMireds(colorTemperatureMinimumMireds)
+// WithColorTemperatureMinimumMireds sets colorTemperatureMinimumMireds and returns the receiver so calls can be chained.
+func (x *MTRColorControlClusterStepColorTemperatureParams) WithColorTemperatureMinimumMireds(colorTemperatureMinimumMireds obj.Object) *MTRColorControlClusterStepColorTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorTemperatureMinimumMireds:"), objref.IDOf(colorTemperatureMinimumMireds))
 	return x
 }
 
-// WithColorTemperatureMaximumMireds sets the colorTemperatureMaximumMireds property and returns the receiver for chaining.
-func (x *MTRColorControlClusterStepColorTemperatureParams) WithColorTemperatureMaximumMireds(colorTemperatureMaximumMireds *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams {
-	x.inner.SetColorTemperatureMaximumMireds(colorTemperatureMaximumMireds)
+// WithColorTemperatureMaximumMireds sets colorTemperatureMaximumMireds and returns the receiver so calls can be chained.
+func (x *MTRColorControlClusterStepColorTemperatureParams) WithColorTemperatureMaximumMireds(colorTemperatureMaximumMireds obj.Object) *MTRColorControlClusterStepColorTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorTemperatureMaximumMireds:"), objref.IDOf(colorTemperatureMaximumMireds))
 	return x
 }
 
-// WithOptionsMask sets the optionsMask property and returns the receiver for chaining.
-func (x *MTRColorControlClusterStepColorTemperatureParams) WithOptionsMask(optionsMask *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams {
-	x.inner.SetOptionsMask(optionsMask)
+// WithOptionsMask sets optionsMask and returns the receiver so calls can be chained.
+func (x *MTRColorControlClusterStepColorTemperatureParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterStepColorTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return x
 }
 
-// WithOptionsOverride sets the optionsOverride property and returns the receiver for chaining.
-func (x *MTRColorControlClusterStepColorTemperatureParams) WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams {
-	x.inner.SetOptionsOverride(optionsOverride)
+// WithOptionsOverride sets optionsOverride and returns the receiver so calls can be chained.
+func (x *MTRColorControlClusterStepColorTemperatureParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterStepColorTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRColorControlClusterStepColorTemperatureParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRColorControlClusterStepColorTemperatureParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterStepColorTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRColorControlClusterStepColorTemperatureParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRColorControlClusterStepColorTemperatureParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterStepColorTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// StepMode calls the underlying StepMode.
-func (x *MTRColorControlClusterStepColorTemperatureParams) StepMode() *foundation.NSNumber {
-	return x.inner.StepMode()
+func (x *MTRColorControlClusterStepColorTemperatureParams) StepMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stepMode"))
+	return obj.Wrap(_r)
 }
 
-// SetStepMode calls the underlying SetStepMode.
-func (x *MTRColorControlClusterStepColorTemperatureParams) SetStepMode(stepMode *foundation.NSNumber) {
-	x.inner.SetStepMode(stepMode)
+func (x *MTRColorControlClusterStepColorTemperatureParams) SetStepMode(stepMode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepMode:"), objref.IDOf(stepMode))
 }
 
-// StepSize calls the underlying StepSize.
-func (x *MTRColorControlClusterStepColorTemperatureParams) StepSize() *foundation.NSNumber {
-	return x.inner.StepSize()
+func (x *MTRColorControlClusterStepColorTemperatureParams) StepSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stepSize"))
+	return obj.Wrap(_r)
 }
 
-// SetStepSize calls the underlying SetStepSize.
-func (x *MTRColorControlClusterStepColorTemperatureParams) SetStepSize(stepSize *foundation.NSNumber) {
-	x.inner.SetStepSize(stepSize)
+func (x *MTRColorControlClusterStepColorTemperatureParams) SetStepSize(stepSize obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepSize:"), objref.IDOf(stepSize))
 }
 
-// TransitionTime calls the underlying TransitionTime.
-func (x *MTRColorControlClusterStepColorTemperatureParams) TransitionTime() *foundation.NSNumber {
-	return x.inner.TransitionTime()
+func (x *MTRColorControlClusterStepColorTemperatureParams) TransitionTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionTime"))
+	return obj.Wrap(_r)
 }
 
-// SetTransitionTime calls the underlying SetTransitionTime.
-func (x *MTRColorControlClusterStepColorTemperatureParams) SetTransitionTime(transitionTime *foundation.NSNumber) {
-	x.inner.SetTransitionTime(transitionTime)
+func (x *MTRColorControlClusterStepColorTemperatureParams) SetTransitionTime(transitionTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 }
 
-// ColorTemperatureMinimumMireds calls the underlying ColorTemperatureMinimumMireds.
-func (x *MTRColorControlClusterStepColorTemperatureParams) ColorTemperatureMinimumMireds() *foundation.NSNumber {
-	return x.inner.ColorTemperatureMinimumMireds()
+func (x *MTRColorControlClusterStepColorTemperatureParams) ColorTemperatureMinimumMireds() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorTemperatureMinimumMireds"))
+	return obj.Wrap(_r)
 }
 
-// SetColorTemperatureMinimumMireds calls the underlying SetColorTemperatureMinimumMireds.
-func (x *MTRColorControlClusterStepColorTemperatureParams) SetColorTemperatureMinimumMireds(colorTemperatureMinimumMireds *foundation.NSNumber) {
-	x.inner.SetColorTemperatureMinimumMireds(colorTemperatureMinimumMireds)
+func (x *MTRColorControlClusterStepColorTemperatureParams) SetColorTemperatureMinimumMireds(colorTemperatureMinimumMireds obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorTemperatureMinimumMireds:"), objref.IDOf(colorTemperatureMinimumMireds))
 }
 
-// ColorTemperatureMaximumMireds calls the underlying ColorTemperatureMaximumMireds.
-func (x *MTRColorControlClusterStepColorTemperatureParams) ColorTemperatureMaximumMireds() *foundation.NSNumber {
-	return x.inner.ColorTemperatureMaximumMireds()
+func (x *MTRColorControlClusterStepColorTemperatureParams) ColorTemperatureMaximumMireds() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorTemperatureMaximumMireds"))
+	return obj.Wrap(_r)
 }
 
-// SetColorTemperatureMaximumMireds calls the underlying SetColorTemperatureMaximumMireds.
-func (x *MTRColorControlClusterStepColorTemperatureParams) SetColorTemperatureMaximumMireds(colorTemperatureMaximumMireds *foundation.NSNumber) {
-	x.inner.SetColorTemperatureMaximumMireds(colorTemperatureMaximumMireds)
+func (x *MTRColorControlClusterStepColorTemperatureParams) SetColorTemperatureMaximumMireds(colorTemperatureMaximumMireds obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorTemperatureMaximumMireds:"), objref.IDOf(colorTemperatureMaximumMireds))
 }
 
-// OptionsMask calls the underlying OptionsMask.
-func (x *MTRColorControlClusterStepColorTemperatureParams) OptionsMask() *foundation.NSNumber {
-	return x.inner.OptionsMask()
+func (x *MTRColorControlClusterStepColorTemperatureParams) OptionsMask() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsMask"))
+	return obj.Wrap(_r)
 }
 
-// SetOptionsMask calls the underlying SetOptionsMask.
-func (x *MTRColorControlClusterStepColorTemperatureParams) SetOptionsMask(optionsMask *foundation.NSNumber) {
-	x.inner.SetOptionsMask(optionsMask)
+func (x *MTRColorControlClusterStepColorTemperatureParams) SetOptionsMask(optionsMask obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 }
 
-// OptionsOverride calls the underlying OptionsOverride.
-func (x *MTRColorControlClusterStepColorTemperatureParams) OptionsOverride() *foundation.NSNumber {
-	return x.inner.OptionsOverride()
+func (x *MTRColorControlClusterStepColorTemperatureParams) OptionsOverride() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsOverride"))
+	return obj.Wrap(_r)
 }
 
-// SetOptionsOverride calls the underlying SetOptionsOverride.
-func (x *MTRColorControlClusterStepColorTemperatureParams) SetOptionsOverride(optionsOverride *foundation.NSNumber) {
-	x.inner.SetOptionsOverride(optionsOverride)
+func (x *MTRColorControlClusterStepColorTemperatureParams) SetOptionsOverride(optionsOverride obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRColorControlClusterStepColorTemperatureParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRColorControlClusterStepColorTemperatureParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRColorControlClusterStepColorTemperatureParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRColorControlClusterStepColorTemperatureParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRColorControlClusterStepColorTemperatureParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRColorControlClusterStepColorTemperatureParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRColorControlClusterStepColorTemperatureParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRColorControlClusterStepColorTemperatureParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRColorControlClusterStepColorTemperatureParamsable is the interface implemented by [MTRColorControlClusterStepColorTemperatureParams], for mocking and DI.
 type MTRColorControlClusterStepColorTemperatureParamsable interface {
-	Unwrap() *raw.MTRColorControlClusterStepColorTemperatureParams
-	WithStepMode(stepMode *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams
-	WithStepSize(stepSize *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams
-	WithTransitionTime(transitionTime *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams
-	WithColorTemperatureMinimumMireds(colorTemperatureMinimumMireds *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams
-	WithColorTemperatureMaximumMireds(colorTemperatureMaximumMireds *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams
-	WithOptionsMask(optionsMask *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams
-	WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRColorControlClusterStepColorTemperatureParams
-	StepMode() *foundation.NSNumber
-	SetStepMode(stepMode *foundation.NSNumber)
-	StepSize() *foundation.NSNumber
-	SetStepSize(stepSize *foundation.NSNumber)
-	TransitionTime() *foundation.NSNumber
-	SetTransitionTime(transitionTime *foundation.NSNumber)
-	ColorTemperatureMinimumMireds() *foundation.NSNumber
-	SetColorTemperatureMinimumMireds(colorTemperatureMinimumMireds *foundation.NSNumber)
-	ColorTemperatureMaximumMireds() *foundation.NSNumber
-	SetColorTemperatureMaximumMireds(colorTemperatureMaximumMireds *foundation.NSNumber)
-	OptionsMask() *foundation.NSNumber
-	SetOptionsMask(optionsMask *foundation.NSNumber)
-	OptionsOverride() *foundation.NSNumber
-	SetOptionsOverride(optionsOverride *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithStepMode(stepMode obj.Object) *MTRColorControlClusterStepColorTemperatureParams
+	WithStepSize(stepSize obj.Object) *MTRColorControlClusterStepColorTemperatureParams
+	WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterStepColorTemperatureParams
+	WithColorTemperatureMinimumMireds(colorTemperatureMinimumMireds obj.Object) *MTRColorControlClusterStepColorTemperatureParams
+	WithColorTemperatureMaximumMireds(colorTemperatureMaximumMireds obj.Object) *MTRColorControlClusterStepColorTemperatureParams
+	WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterStepColorTemperatureParams
+	WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterStepColorTemperatureParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterStepColorTemperatureParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterStepColorTemperatureParams
+	StepMode() obj.Object
+	SetStepMode(stepMode obj.Object)
+	StepSize() obj.Object
+	SetStepSize(stepSize obj.Object)
+	TransitionTime() obj.Object
+	SetTransitionTime(transitionTime obj.Object)
+	ColorTemperatureMinimumMireds() obj.Object
+	SetColorTemperatureMinimumMireds(colorTemperatureMinimumMireds obj.Object)
+	ColorTemperatureMaximumMireds() obj.Object
+	SetColorTemperatureMaximumMireds(colorTemperatureMaximumMireds obj.Object)
+	OptionsMask() obj.Object
+	SetOptionsMask(optionsMask obj.Object)
+	OptionsOverride() obj.Object
+	SetOptionsOverride(optionsOverride obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRColorControlClusterStepColorTemperatureParamsable = (*MTRColorControlClusterStepColorTemperatureParams)(nil)

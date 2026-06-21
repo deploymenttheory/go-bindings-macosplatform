@@ -5,145 +5,137 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A set of options to use with a fetch operation.
 //
-// SyncEngineFetchChangesOptions wraps [raw.CKSyncEngineFetchChangesOptions] with a fluent Go API.
+// SyncEngineFetchChangesOptions is an idiomatic wrapper over the Objective-C class CKSyncEngineFetchChangesOptions.
 type SyncEngineFetchChangesOptions struct {
-	inner *raw.CKSyncEngineFetchChangesOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineFetchChangesOptions].
-func (x *SyncEngineFetchChangesOptions) Unwrap() *raw.CKSyncEngineFetchChangesOptions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineFetchChangesOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineFetchChangesOptionsFromID adopts an existing object pointer as a SyncEngineFetchChangesOptions (nil for 0).
+// SyncEngineFetchChangesOptionsFromID adopts an existing Objective-C object as a SyncEngineFetchChangesOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineFetchChangesOptionsFromID(id objc.ID) *SyncEngineFetchChangesOptions {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineFetchChangesOptions{inner: raw.CKSyncEngineFetchChangesOptionsFromID(id)}
+	x := &SyncEngineFetchChangesOptions{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// syncEngineFetchChangesOptionsAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineFetchChangesOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineFetchChangesOptionsAdopt(id objc.ID) *SyncEngineFetchChangesOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &SyncEngineFetchChangesOptions{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SyncEngineFetchChangesOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEngineFetchChangesOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEngineFetchChangesOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a set of options with the specific scope.
 //
-// NewSyncEngineFetchChangesOptionsWithScope creates a new [SyncEngineFetchChangesOptions].
-func NewSyncEngineFetchChangesOptionsWithScope(scope *raw.CKSyncEngineFetchChangesScope) *SyncEngineFetchChangesOptions {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineFetchChangesOptions")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScope:"), scope.Ptr())
-	return &SyncEngineFetchChangesOptions{inner: raw.CKSyncEngineFetchChangesOptionsFromID(_id)}
+// NewSyncEngineFetchChangesOptionsWithScope creates a new SyncEngineFetchChangesOptions.
+func NewSyncEngineFetchChangesOptionsWithScope(scope *SyncEngineFetchChangesScope) *SyncEngineFetchChangesOptions {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFetchChangesOptions")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScope:"), objref.IDOf(scope))
+	return syncEngineFetchChangesOptionsAdopt(_id)
 }
 
 // The scope in which to fetch changes from the server.
 //
-// WithScope sets the scope property and returns the receiver for chaining.
+// WithScope sets scope and returns the receiver so calls can be chained.
 func (x *SyncEngineFetchChangesOptions) WithScope(scope *SyncEngineFetchChangesScope) *SyncEngineFetchChangesOptions {
-	x.inner.SetScope(scope.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), objref.IDOf(scope))
 	return x
 }
 
 // The operation group to use for the underlying CloudKit operations.
 //
-// WithOperationGroup sets the operationGroup property and returns the receiver for chaining.
+// WithOperationGroup sets operationGroup and returns the receiver so calls can be chained.
 func (x *SyncEngineFetchChangesOptions) WithOperationGroup(operationGroup *OperationGroup) *SyncEngineFetchChangesOptions {
-	x.inner.SetOperationGroup(operationGroup.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationGroup:"), objref.IDOf(operationGroup))
 	return x
 }
 
 // A list of zones that are prioritized over others while fetching changes.
 //
-// WithPrioritizedZoneIDs sets the collection, converting the Go slice to an NSArray.
-func (x *SyncEngineFetchChangesOptions) WithPrioritizedZoneIDs(items ...*raw.CKRecordZoneID) *SyncEngineFetchChangesOptions {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetPrioritizedZoneIDs(foundation.NSArrayFromID[*raw.CKRecordZoneID](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CKRecordZoneID](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetPrioritizedZoneIDs(_arr)
+// WithPrioritizedZoneIDs sets the collection and returns the receiver so calls can be chained.
+func (x *SyncEngineFetchChangesOptions) WithPrioritizedZoneIDs(items ...*RecordZoneID) *SyncEngineFetchChangesOptions {
+	_arr := purego.SliceToNSArray(items, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrioritizedZoneIDs:"), _arr)
 	return x
 }
 
 // The scope in which to fetch changes from the server.
-//
-// Scope calls the underlying Scope.
 func (x *SyncEngineFetchChangesOptions) Scope() *SyncEngineFetchChangesScope {
-	_r := x.inner.Scope()
-	if _r == nil {
-		return nil
-	}
-	return &SyncEngineFetchChangesScope{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scope"))
+	return SyncEngineFetchChangesScopeFromID(_r)
 }
 
-// SetScope calls the underlying SetScope.
-func (x *SyncEngineFetchChangesOptions) SetScope(scope *raw.CKSyncEngineFetchChangesScope) {
-	x.inner.SetScope(scope)
+func (x *SyncEngineFetchChangesOptions) SetScope(scope *SyncEngineFetchChangesScope) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), objref.IDOf(scope))
 }
 
 // The operation group to use for the underlying CloudKit operations. - Tip: Providing a specific operation group helps you to identify and analyze the telemetry of fetch operations in CloudKit Console. The default value is `nil`.
-//
-// OperationGroup calls the underlying OperationGroup.
 func (x *SyncEngineFetchChangesOptions) OperationGroup() *OperationGroup {
-	_r := x.inner.OperationGroup()
-	if _r == nil {
-		return nil
-	}
-	return &OperationGroup{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationGroup"))
+	return OperationGroupFromID(_r)
 }
 
-// SetOperationGroup calls the underlying SetOperationGroup.
-func (x *SyncEngineFetchChangesOptions) SetOperationGroup(operationGroup *raw.CKOperationGroup) {
-	x.inner.SetOperationGroup(operationGroup)
+func (x *SyncEngineFetchChangesOptions) SetOperationGroup(operationGroup *OperationGroup) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationGroup:"), objref.IDOf(operationGroup))
 }
 
 // A list of zones that are prioritized over others while fetching changes. `CKSyncEngine` fetches changes for the zones in this list first. You might use this to prioritize a specific set of zones for initial sync. You could also prioritize the object currently showing in the UI by putting it first in this list. Any zones not included in this list are prioritized in a default manner. If a zone in this list has no changes to fetch, then that zone is ignored.
 //
 // PrioritizedZoneIDs returns the collection as a Go slice.
 func (x *SyncEngineFetchChangesOptions) PrioritizedZoneIDs() []*RecordZoneID {
-	arr := x.inner.PrioritizedZoneIDs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordZoneID {
-		return &RecordZoneID{inner: raw.CKRecordZoneIDFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prioritizedZoneIDs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }
 
-// SetPrioritizedZoneIDs calls the underlying SetPrioritizedZoneIDs.
-func (x *SyncEngineFetchChangesOptions) SetPrioritizedZoneIDs(prioritizedZoneIDs *foundation.NSArray[*raw.CKRecordZoneID]) {
-	x.inner.SetPrioritizedZoneIDs(prioritizedZoneIDs)
+func (x *SyncEngineFetchChangesOptions) SetPrioritizedZoneIDs(prioritizedZoneIDs []*RecordZoneID) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrioritizedZoneIDs:"), purego.SliceToNSArray(prioritizedZoneIDs, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SyncEngineFetchChangesOptionsable is the interface implemented by [SyncEngineFetchChangesOptions], for mocking and DI.
 type SyncEngineFetchChangesOptionsable interface {
-	Unwrap() *raw.CKSyncEngineFetchChangesOptions
+	obj.Object
 	WithScope(scope *SyncEngineFetchChangesScope) *SyncEngineFetchChangesOptions
 	WithOperationGroup(operationGroup *OperationGroup) *SyncEngineFetchChangesOptions
-	WithPrioritizedZoneIDs(items ...*raw.CKRecordZoneID) *SyncEngineFetchChangesOptions
+	WithPrioritizedZoneIDs(items ...*RecordZoneID) *SyncEngineFetchChangesOptions
 	Scope() *SyncEngineFetchChangesScope
-	SetScope(scope *raw.CKSyncEngineFetchChangesScope)
+	SetScope(scope *SyncEngineFetchChangesScope)
 	OperationGroup() *OperationGroup
-	SetOperationGroup(operationGroup *raw.CKOperationGroup)
+	SetOperationGroup(operationGroup *OperationGroup)
 	PrioritizedZoneIDs() []*RecordZoneID
-	SetPrioritizedZoneIDs(prioritizedZoneIDs *foundation.NSArray[*raw.CKRecordZoneID])
+	SetPrioritizedZoneIDs(prioritizedZoneIDs []*RecordZoneID)
 }
 
 var _ SyncEngineFetchChangesOptionsable = (*SyncEngineFetchChangesOptions)(nil)

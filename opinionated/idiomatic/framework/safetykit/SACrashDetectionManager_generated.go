@@ -5,81 +5,75 @@
 package safetykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safetykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Provides registration and management of Crash Detection events.
 //
-// CrashDetectionManager wraps [raw.SACrashDetectionManager] with a fluent Go API.
+// CrashDetectionManager is an idiomatic wrapper over the Objective-C class SACrashDetectionManager.
 type CrashDetectionManager struct {
-	inner *raw.SACrashDetectionManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SACrashDetectionManager].
-func (x *CrashDetectionManager) Unwrap() *raw.SACrashDetectionManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CrashDetectionManager) ID() objc.ID { return x.inner.Ptr() }
-
-// CrashDetectionManagerFromID adopts an existing object pointer as a CrashDetectionManager (nil for 0).
+// CrashDetectionManagerFromID adopts an existing Objective-C object as a CrashDetectionManager
+// (nil for 0), retaining it and registering a release finalizer.
 func CrashDetectionManagerFromID(id objc.ID) *CrashDetectionManager {
 	if id == 0 {
 		return nil
 	}
-	return &CrashDetectionManager{inner: raw.SACrashDetectionManagerFromID(id)}
-}
-
-// NewCrashDetectionManager creates a new [CrashDetectionManager].
-func NewCrashDetectionManager() *CrashDetectionManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SACrashDetectionManager")), objc.RegisterName("new"))
-	return &CrashDetectionManager{inner: raw.SACrashDetectionManagerFromID(_id)}
-}
-
-// The object that receives Crash Detection events.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *CrashDetectionManager) WithDelegate(delegate raw.SACrashDetectionDelegate) *CrashDetectionManager {
-	x.inner.SetDelegate(delegate)
+	x := &CrashDetectionManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Requests permission to access Crash Detection information.
-//
-// RequestAuthorizationWithCompletionHandler calls the underlying RequestAuthorizationWithCompletionHandler.
-func (x *CrashDetectionManager) RequestAuthorizationWithCompletionHandler(handler func(SAAuthorizationStatus, unsafe.Pointer)) {
-	x.inner.RequestAuthorizationWithCompletionHandler(func(_a0 raw.SAAuthorizationStatus, _a1 unsafe.Pointer) { handler(SAAuthorizationStatus(_a0), _a1) })
+// crashDetectionManagerAdopt wraps an Objective-C object that this code just created as a
+// CrashDetectionManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func crashDetectionManagerAdopt(id objc.ID) *CrashDetectionManager {
+	if id == 0 {
+		return nil
+	}
+	x := &CrashDetectionManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// authorizationStatus @discussion Returns a value indicating whether the user has authorized the app to receive Crash Detection updates
-//
-// AuthorizationStatus calls the underlying AuthorizationStatus.
-func (x *CrashDetectionManager) AuthorizationStatus() SAAuthorizationStatus {
-	return SAAuthorizationStatus(x.inner.AuthorizationStatus())
+// Description returns the object's -description text.
+func (x *CrashDetectionManager) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// delegate @discussion The delegate object to receive Crash Detection events.
-//
-// Delegate calls the underlying Delegate.
-func (x *CrashDetectionManager) Delegate() raw.SACrashDetectionDelegate {
-	return x.inner.Delegate()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CrashDetectionManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *CrashDetectionManager) SetDelegate(delegate raw.SACrashDetectionDelegate) {
-	x.inner.SetDelegate(delegate)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CrashDetectionManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCrashDetectionManager creates a new CrashDetectionManager.
+func NewCrashDetectionManager() *CrashDetectionManager {
+	_id := objc.Send[objc.ID](objc.ID(_class("SACrashDetectionManager")), objc.RegisterName("new"))
+	return crashDetectionManagerAdopt(_id)
+}
+
+// authorizationStatus Returns a value indicating whether the user has authorized the app to receive Crash Detection updates
+func (x *CrashDetectionManager) AuthorizationStatus() AuthorizationStatus {
+	_r := objc.Send[AuthorizationStatus](objref.IDOf(x), objc.RegisterName("authorizationStatus"))
+	return _r
 }
 
 // CrashDetectionManagerable is the interface implemented by [CrashDetectionManager], for mocking and DI.
 type CrashDetectionManagerable interface {
-	Unwrap() *raw.SACrashDetectionManager
-	WithDelegate(delegate raw.SACrashDetectionDelegate) *CrashDetectionManager
-	RequestAuthorizationWithCompletionHandler(handler func(SAAuthorizationStatus, unsafe.Pointer))
-	AuthorizationStatus() SAAuthorizationStatus
-	Delegate() raw.SACrashDetectionDelegate
-	SetDelegate(delegate raw.SACrashDetectionDelegate)
+	obj.Object
+	AuthorizationStatus() AuthorizationStatus
 }
 
 var _ CrashDetectionManagerable = (*CrashDetectionManager)(nil)

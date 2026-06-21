@@ -5,17 +5,12 @@
 package securityfoundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/security"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// SFAuthorizationAuthorization calls the underlying SFAuthorizationAuthorization.
-func SFAuthorizationAuthorization() objc.ID {
-	return raw.SFAuthorizationAuthorization()
-}
-
-// AuthorizationWithFlagsRightsEnvironment calls the underlying SFAuthorizationAuthorizationWithFlagsRightsEnvironment.
-func AuthorizationWithFlagsRightsEnvironment(flags security.AuthorizationFlags, rights *security.AuthorizationItemSet, environment *security.AuthorizationItemSet) objc.ID {
-	return raw.SFAuthorizationAuthorizationWithFlagsRightsEnvironment(flags, rights, environment)
+// Returns an authorization object initialized with a default environment, flags, and rights.
+func SFAuthorizationAuthorization() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("SFAuthorization")), objc.RegisterName("authorization"))
+	return obj.Wrap(_r)
 }

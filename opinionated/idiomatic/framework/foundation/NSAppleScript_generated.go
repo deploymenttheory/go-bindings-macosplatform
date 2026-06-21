@@ -5,111 +5,122 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides the ability to load, compile, and execute scripts.
 //
-// AppleScript wraps [raw.NSAppleScript] with a fluent Go API.
+// AppleScript is an idiomatic wrapper over the Objective-C class NSAppleScript.
 type AppleScript struct {
-	inner *raw.NSAppleScript
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSAppleScript].
-func (x *AppleScript) Unwrap() *raw.NSAppleScript { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AppleScript) ID() objc.ID { return x.inner.Ptr() }
-
-// AppleScriptFromID adopts an existing object pointer as a AppleScript (nil for 0).
+// AppleScriptFromID adopts an existing Objective-C object as a AppleScript
+// (nil for 0), retaining it and registering a release finalizer.
 func AppleScriptFromID(id objc.ID) *AppleScript {
 	if id == 0 {
 		return nil
 	}
-	return &AppleScript{inner: raw.NSAppleScriptFromID(id)}
+	x := &AppleScript{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// appleScriptAdopt wraps an Objective-C object that this code just created as a
+// AppleScript (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func appleScriptAdopt(id objc.ID) *AppleScript {
+	if id == 0 {
+		return nil
+	}
+	x := &AppleScript{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AppleScript) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AppleScript) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AppleScript) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a newly allocated script instance from the source identified by the passed URL.
 //
-// NewAppleScriptWithContentsOfURLError creates a new [AppleScript].
-func NewAppleScriptWithContentsOfURLError(url string, errorInfo purego.IDer) *AppleScript {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAppleScript")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), errorInfo.ID())
-	return &AppleScript{inner: raw.NSAppleScriptFromID(_id)}
+// NewAppleScriptWithContentsOfURLError creates a new AppleScript.
+func NewAppleScriptWithContentsOfURLError(url string, errorInfo obj.Object) *AppleScript {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAppleScript")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), rt.FileURL(url), objref.IDOf(errorInfo))
+	return appleScriptAdopt(_id)
 }
 
 // Initializes a newly allocated script instance from the passed source.
 //
-// NewAppleScriptWithSource creates a new [AppleScript].
+// NewAppleScriptWithSource creates a new AppleScript.
 func NewAppleScriptWithSource(source string) *AppleScript {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAppleScript")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), foundation.NSStringStringWithUTF8String(source).Ptr())
-	return &AppleScript{inner: raw.NSAppleScriptFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAppleScript")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), purego.NSString(source))
+	return appleScriptAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *AppleScript) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleScript {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *AppleScript) WithScriptingProperties(scriptingProperties obj.Object) *AppleScript {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Compiles the receiver, if it is not already compiled.
-//
-// CompileAndReturnError calls the underlying CompileAndReturnError.
-func (x *AppleScript) CompileAndReturnError(errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) bool {
-	return x.inner.CompileAndReturnError(errorInfo)
+func (x *AppleScript) CompileAndReturnError(errorInfo obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compileAndReturnError:"), objref.IDOf(errorInfo))
+	return _r
 }
 
 // Executes the receiver, compiling it first if it is not already compiled.
-//
-// ExecuteAndReturnError calls the underlying ExecuteAndReturnError.
-func (x *AppleScript) ExecuteAndReturnError(errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleEventDescriptor {
-	_r := x.inner.ExecuteAndReturnError(errorInfo)
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+func (x *AppleScript) ExecuteAndReturnError(errorInfo obj.Object) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executeAndReturnError:"), objref.IDOf(errorInfo))
+	return AppleEventDescriptorFromID(_r)
 }
 
 // Executes an Apple event in the context of the receiver, as a means of allowing the application to invoke a handler in the script.
-//
-// ExecuteAppleEventError calls the underlying ExecuteAppleEventError.
-func (x *AppleScript) ExecuteAppleEventError(event *raw.NSAppleEventDescriptor, errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleEventDescriptor {
-	_r := x.inner.ExecuteAppleEventError(event, errorInfo)
-	if _r == nil {
-		return nil
-	}
-	return &AppleEventDescriptor{inner: _r}
+func (x *AppleScript) ExecuteAppleEventError(event *AppleEventDescriptor, errorInfo obj.Object) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executeAppleEvent:error:"), objref.IDOf(event), objref.IDOf(errorInfo))
+	return AppleEventDescriptorFromID(_r)
 }
 
-// Source calls the underlying Source.
-func (x *AppleScript) Source() *String {
-	_r := x.inner.Source()
-	if _r == nil {
-		return nil
+func (x *AppleScript) Source() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// IsCompiled calls the underlying IsCompiled.
 func (x *AppleScript) IsCompiled() bool {
-	return x.inner.IsCompiled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompiled"))
+	return _r
 }
-
-func (x *AppleScript) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // AppleScriptable is the interface implemented by [AppleScript], for mocking and DI.
 type AppleScriptable interface {
-	Unwrap() *raw.NSAppleScript
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleScript
-	CompileAndReturnError(errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) bool
-	ExecuteAndReturnError(errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleEventDescriptor
-	ExecuteAppleEventError(event *raw.NSAppleEventDescriptor, errorInfo *raw.NSDictionary[*raw.NSString, objc.ID]) *AppleEventDescriptor
-	Source() *String
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *AppleScript
+	CompileAndReturnError(errorInfo obj.Object) bool
+	ExecuteAndReturnError(errorInfo obj.Object) *AppleEventDescriptor
+	ExecuteAppleEventError(event *AppleEventDescriptor, errorInfo obj.Object) *AppleEventDescriptor
+	Source() string
 	IsCompiled() bool
 }
 

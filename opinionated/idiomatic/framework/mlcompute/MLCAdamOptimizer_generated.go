@@ -5,99 +5,120 @@
 package mlcompute
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An optimizer that represents the adaptive moment estimation algorithm.
 //
-// AdamOptimizer wraps [raw.MLCAdamOptimizer] with a fluent Go API.
+// AdamOptimizer is an idiomatic wrapper over the Objective-C class MLCAdamOptimizer.
 type AdamOptimizer struct {
-	inner *raw.MLCAdamOptimizer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCAdamOptimizer].
-func (x *AdamOptimizer) Unwrap() *raw.MLCAdamOptimizer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AdamOptimizer) ID() objc.ID { return x.inner.Ptr() }
-
-// AdamOptimizerFromID adopts an existing object pointer as a AdamOptimizer (nil for 0).
+// AdamOptimizerFromID adopts an existing Objective-C object as a AdamOptimizer
+// (nil for 0), retaining it and registering a release finalizer.
 func AdamOptimizerFromID(id objc.ID) *AdamOptimizer {
 	if id == 0 {
 		return nil
 	}
-	return &AdamOptimizer{inner: raw.MLCAdamOptimizerFromID(id)}
+	x := &AdamOptimizer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAdamOptimizer creates a new [AdamOptimizer].
+// adamOptimizerAdopt wraps an Objective-C object that this code just created as a
+// AdamOptimizer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func adamOptimizerAdopt(id objc.ID) *AdamOptimizer {
+	if id == 0 {
+		return nil
+	}
+	x := &AdamOptimizer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AdamOptimizer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AdamOptimizer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AdamOptimizer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAdamOptimizer creates a new AdamOptimizer.
 func NewAdamOptimizer() *AdamOptimizer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCAdamOptimizer")), objc.RegisterName("new"))
-	return &AdamOptimizer{inner: raw.MLCAdamOptimizerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCAdamOptimizer")), objc.RegisterName("new"))
+	return adamOptimizerAdopt(_id)
 }
 
 // The learning rate.
 //
-// WithLearningRate sets the learningRate property and returns the receiver for chaining.
+// WithLearningRate sets learningRate and returns the receiver so calls can be chained.
 func (x *AdamOptimizer) WithLearningRate(learningRate float32) *AdamOptimizer {
-	x.inner.MLCOptimizer.SetLearningRate(learningRate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
 	return x
 }
 
 // A Boolean value that indicates whether you apply gradient clipping.
 //
-// WithAppliesGradientClipping sets the appliesGradientClipping property and returns the receiver for chaining.
+// WithAppliesGradientClipping sets appliesGradientClipping and returns the receiver so calls can be chained.
 func (x *AdamOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *AdamOptimizer {
-	x.inner.MLCOptimizer.SetAppliesGradientClipping(appliesGradientClipping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
 	return x
 }
 
-// @property   beta1 @abstract   Coefficent used for computing running averages of gradient. @discussion The default is 0.9.
-//
-// Beta1 calls the underlying Beta1.
+// Coefficent used for computing running averages of gradient. The default is 0.9.
 func (x *AdamOptimizer) Beta1() float32 {
-	return x.inner.Beta1()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("beta1"))
+	return _r
 }
 
-// @property   beta2 @abstract   Coefficent used for computing running averages of square of gradient. @discussion The default is 0.999.
-//
-// Beta2 calls the underlying Beta2.
+// Coefficent used for computing running averages of square of gradient. The default is 0.999.
 func (x *AdamOptimizer) Beta2() float32 {
-	return x.inner.Beta2()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("beta2"))
+	return _r
 }
 
-// Epsilon calls the underlying Epsilon.
 func (x *AdamOptimizer) Epsilon() float32 {
-	return x.inner.Epsilon()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+	return _r
 }
 
-// @property   usesAMSGrad @abstract   Whether to use the AMSGrad variant of this algorithm @discussion The default is false
-//
-// UsesAMSGrad calls the underlying UsesAMSGrad.
+// Whether to use the AMSGrad variant of this algorithm The default is false
 func (x *AdamOptimizer) UsesAMSGrad() bool {
-	return x.inner.UsesAMSGrad()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesAMSGrad"))
+	return _r
 }
 
-// @property   timeStep @abstract   The current timestep used for the update. @discussion The default is 1.
-//
-// TimeStep calls the underlying TimeStep.
-func (x *AdamOptimizer) TimeStep() uint {
-	return x.inner.TimeStep()
+// The current timestep used for the update. The default is 1.
+func (x *AdamOptimizer) TimeStep() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeStep"))
+	return _r
 }
-
-func (x *AdamOptimizer) asOptimizer() *raw.MLCOptimizer { return &x.inner.MLCOptimizer }
 
 // AdamOptimizerable is the interface implemented by [AdamOptimizer], for mocking and DI.
 type AdamOptimizerable interface {
-	Unwrap() *raw.MLCAdamOptimizer
+	obj.Object
 	WithLearningRate(learningRate float32) *AdamOptimizer
 	WithAppliesGradientClipping(appliesGradientClipping bool) *AdamOptimizer
 	Beta1() float32
 	Beta2() float32
 	Epsilon() float32
 	UsesAMSGrad() bool
-	TimeStep() uint
+	TimeStep() int
 }
 
 var _ AdamOptimizerable = (*AdamOptimizer)(nil)

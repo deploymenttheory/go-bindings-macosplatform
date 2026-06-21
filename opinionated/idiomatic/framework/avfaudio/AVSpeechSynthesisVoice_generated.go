@@ -5,97 +5,119 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A distinct voice for use in speech synthesis.
 //
-// SpeechSynthesisVoice wraps [raw.AVSpeechSynthesisVoice] with a fluent Go API.
+// SpeechSynthesisVoice is an idiomatic wrapper over the Objective-C class AVSpeechSynthesisVoice.
 type SpeechSynthesisVoice struct {
-	inner *raw.AVSpeechSynthesisVoice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVSpeechSynthesisVoice].
-func (x *SpeechSynthesisVoice) Unwrap() *raw.AVSpeechSynthesisVoice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpeechSynthesisVoice) ID() objc.ID { return x.inner.Ptr() }
-
-// SpeechSynthesisVoiceFromID adopts an existing object pointer as a SpeechSynthesisVoice (nil for 0).
+// SpeechSynthesisVoiceFromID adopts an existing Objective-C object as a SpeechSynthesisVoice
+// (nil for 0), retaining it and registering a release finalizer.
 func SpeechSynthesisVoiceFromID(id objc.ID) *SpeechSynthesisVoice {
 	if id == 0 {
 		return nil
 	}
-	return &SpeechSynthesisVoice{inner: raw.AVSpeechSynthesisVoiceFromID(id)}
+	x := &SpeechSynthesisVoice{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSpeechSynthesisVoice creates a new [SpeechSynthesisVoice].
+// speechSynthesisVoiceAdopt wraps an Objective-C object that this code just created as a
+// SpeechSynthesisVoice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func speechSynthesisVoiceAdopt(id objc.ID) *SpeechSynthesisVoice {
+	if id == 0 {
+		return nil
+	}
+	x := &SpeechSynthesisVoice{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SpeechSynthesisVoice) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SpeechSynthesisVoice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SpeechSynthesisVoice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSpeechSynthesisVoice creates a new SpeechSynthesisVoice.
 func NewSpeechSynthesisVoice() *SpeechSynthesisVoice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechSynthesisVoice")), objc.RegisterName("new"))
-	return &SpeechSynthesisVoice{inner: raw.AVSpeechSynthesisVoiceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVSpeechSynthesisVoice")), objc.RegisterName("new"))
+	return speechSynthesisVoiceAdopt(_id)
 }
 
-// Language calls the underlying Language.
 func (x *SpeechSynthesisVoice) Language() string {
-	_r := x.inner.Language()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Identifier calls the underlying Identifier.
 func (x *SpeechSynthesisVoice) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Name calls the underlying Name.
 func (x *SpeechSynthesisVoice) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Quality calls the underlying Quality.
-func (x *SpeechSynthesisVoice) Quality() AVSpeechSynthesisVoiceQuality {
-	return AVSpeechSynthesisVoiceQuality(x.inner.Quality())
+func (x *SpeechSynthesisVoice) Quality() SpeechSynthesisVoiceQuality {
+	_r := objc.Send[SpeechSynthesisVoiceQuality](objref.IDOf(x), objc.RegisterName("quality"))
+	return _r
 }
 
-// Gender calls the underlying Gender.
-func (x *SpeechSynthesisVoice) Gender() AVSpeechSynthesisVoiceGender {
-	return AVSpeechSynthesisVoiceGender(x.inner.Gender())
+func (x *SpeechSynthesisVoice) Gender() SpeechSynthesisVoiceGender {
+	_r := objc.Send[SpeechSynthesisVoiceGender](objref.IDOf(x), objc.RegisterName("gender"))
+	return _r
 }
 
-// AudioFileSettings calls the underlying AudioFileSettings.
-func (x *SpeechSynthesisVoice) AudioFileSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.AudioFileSettings()
+func (x *SpeechSynthesisVoice) AudioFileSettings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioFileSettings"))
+	return obj.Wrap(_r)
 }
 
-// VoiceTraits calls the underlying VoiceTraits.
-func (x *SpeechSynthesisVoice) VoiceTraits() AVSpeechSynthesisVoiceTraits {
-	return AVSpeechSynthesisVoiceTraits(x.inner.VoiceTraits())
+func (x *SpeechSynthesisVoice) VoiceTraits() SpeechSynthesisVoiceTraits {
+	_r := objc.Send[SpeechSynthesisVoiceTraits](objref.IDOf(x), objc.RegisterName("voiceTraits"))
+	return _r
 }
 
 // SpeechSynthesisVoiceable is the interface implemented by [SpeechSynthesisVoice], for mocking and DI.
 type SpeechSynthesisVoiceable interface {
-	Unwrap() *raw.AVSpeechSynthesisVoice
+	obj.Object
 	Language() string
 	Identifier() string
 	Name() string
-	Quality() AVSpeechSynthesisVoiceQuality
-	Gender() AVSpeechSynthesisVoiceGender
-	AudioFileSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	VoiceTraits() AVSpeechSynthesisVoiceTraits
+	Quality() SpeechSynthesisVoiceQuality
+	Gender() SpeechSynthesisVoiceGender
+	AudioFileSettings() obj.Object
+	VoiceTraits() SpeechSynthesisVoiceTraits
 }
 
 var _ SpeechSynthesisVoiceable = (*SpeechSynthesisVoice)(nil)

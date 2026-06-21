@@ -5,44 +5,70 @@
 package quartz
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// QuartzFilterView wraps [raw.QuartzFilterView] with a fluent Go API.
+// QuartzFilterView is an idiomatic wrapper over the Objective-C class QuartzFilterView.
 type QuartzFilterView struct {
-	inner *raw.QuartzFilterView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QuartzFilterView].
-func (x *QuartzFilterView) Unwrap() *raw.QuartzFilterView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QuartzFilterView) ID() objc.ID { return x.inner.Ptr() }
-
-// QuartzFilterViewFromID adopts an existing object pointer as a QuartzFilterView (nil for 0).
+// QuartzFilterViewFromID adopts an existing Objective-C object as a QuartzFilterView
+// (nil for 0), retaining it and registering a release finalizer.
 func QuartzFilterViewFromID(id objc.ID) *QuartzFilterView {
 	if id == 0 {
 		return nil
 	}
-	return &QuartzFilterView{inner: raw.QuartzFilterViewFromID(id)}
+	x := &QuartzFilterView{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewQuartzFilterView creates a new [QuartzFilterView].
+// quartzFilterViewAdopt wraps an Objective-C object that this code just created as a
+// QuartzFilterView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func quartzFilterViewAdopt(id objc.ID) *QuartzFilterView {
+	if id == 0 {
+		return nil
+	}
+	x := &QuartzFilterView{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *QuartzFilterView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QuartzFilterView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QuartzFilterView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewQuartzFilterView creates a new QuartzFilterView.
 func NewQuartzFilterView() *QuartzFilterView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QuartzFilterView")), objc.RegisterName("new"))
-	return &QuartzFilterView{inner: raw.QuartzFilterViewFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QuartzFilterView")), objc.RegisterName("new"))
+	return quartzFilterViewAdopt(_id)
 }
 
-// SizeToFit calls the underlying SizeToFit.
 func (x *QuartzFilterView) SizeToFit() {
-	x.inner.SizeToFit()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sizeToFit"))
 }
 
 // QuartzFilterViewable is the interface implemented by [QuartzFilterView], for mocking and DI.
 type QuartzFilterViewable interface {
-	Unwrap() *raw.QuartzFilterView
+	obj.Object
 	SizeToFit()
 }
 

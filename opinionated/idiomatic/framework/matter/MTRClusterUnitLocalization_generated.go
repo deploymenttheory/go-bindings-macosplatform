@@ -5,106 +5,122 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterUnitLocalization wraps [raw.MTRClusterUnitLocalization] with a fluent Go API.
+// MTRClusterUnitLocalization is an idiomatic wrapper over the Objective-C class MTRClusterUnitLocalization.
 type MTRClusterUnitLocalization struct {
-	inner *raw.MTRClusterUnitLocalization
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterUnitLocalization].
-func (x *MTRClusterUnitLocalization) Unwrap() *raw.MTRClusterUnitLocalization { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterUnitLocalization) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterUnitLocalizationFromID adopts an existing object pointer as a MTRClusterUnitLocalization (nil for 0).
+// MTRClusterUnitLocalizationFromID adopts an existing Objective-C object as a MTRClusterUnitLocalization
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterUnitLocalizationFromID(id objc.ID) *MTRClusterUnitLocalization {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterUnitLocalization{inner: raw.MTRClusterUnitLocalizationFromID(id)}
+	x := &MTRClusterUnitLocalization{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterUnitLocalizationAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterUnitLocalization (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterUnitLocalizationAdopt(id objc.ID) *MTRClusterUnitLocalization {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterUnitLocalization{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterUnitLocalization) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterUnitLocalization) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterUnitLocalization) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 //
-// NewMTRClusterUnitLocalizationWithDeviceEndpointIDQueue creates a new [MTRClusterUnitLocalization].
-func NewMTRClusterUnitLocalizationWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterUnitLocalization {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterUnitLocalization")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterUnitLocalization{inner: raw.MTRClusterUnitLocalizationFromID(_id)}
+// NewMTRClusterUnitLocalizationWithDeviceEndpointIDQueue creates a new MTRClusterUnitLocalization.
+func NewMTRClusterUnitLocalizationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterUnitLocalization {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterUnitLocalization")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterUnitLocalizationAdopt(_id)
 }
 
-// NewMTRClusterUnitLocalizationWithDeviceEndpointQueue creates a new [MTRClusterUnitLocalization].
-func NewMTRClusterUnitLocalizationWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterUnitLocalization {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterUnitLocalization")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterUnitLocalization{inner: raw.MTRClusterUnitLocalizationFromID(_id)}
+// NewMTRClusterUnitLocalizationWithDeviceEndpointQueue creates a new MTRClusterUnitLocalization.
+func NewMTRClusterUnitLocalizationWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterUnitLocalization {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterUnitLocalization")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterUnitLocalizationAdopt(_id)
 }
 
-// ReadAttributeTemperatureUnitWithParams calls the underlying ReadAttributeTemperatureUnitWithParams.
-func (x *MTRClusterUnitLocalization) ReadAttributeTemperatureUnitWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTemperatureUnitWithParams(params)
+func (x *MTRClusterUnitLocalization) ReadAttributeTemperatureUnitWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTemperatureUnitWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeTemperatureUnitWithValueExpectedValueInterval calls the underlying WriteAttributeTemperatureUnitWithValueExpectedValueInterval.
-func (x *MTRClusterUnitLocalization) WriteAttributeTemperatureUnitWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeTemperatureUnitWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterUnitLocalization) WriteAttributeTemperatureUnitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeTemperatureUnitWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeTemperatureUnitWithValueExpectedValueIntervalParams calls the underlying WriteAttributeTemperatureUnitWithValueExpectedValueIntervalParams.
-func (x *MTRClusterUnitLocalization) WriteAttributeTemperatureUnitWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeTemperatureUnitWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterUnitLocalization) WriteAttributeTemperatureUnitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeTemperatureUnitWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterUnitLocalization) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterUnitLocalization) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterUnitLocalization) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterUnitLocalization) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterUnitLocalization) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterUnitLocalization) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterUnitLocalization) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+func (x *MTRClusterUnitLocalization) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterUnitLocalization) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterUnitLocalization) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterUnitLocalization) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterUnitLocalization) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterUnitLocalizationable is the interface implemented by [MTRClusterUnitLocalization], for mocking and DI.
 type MTRClusterUnitLocalizationable interface {
-	Unwrap() *raw.MTRClusterUnitLocalization
-	ReadAttributeTemperatureUnitWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeTemperatureUnitWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeTemperatureUnitWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeTemperatureUnitWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeTemperatureUnitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeTemperatureUnitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterUnitLocalizationable = (*MTRClusterUnitLocalization)(nil)

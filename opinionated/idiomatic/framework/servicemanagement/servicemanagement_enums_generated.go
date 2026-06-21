@@ -9,26 +9,26 @@ import (
 )
 
 // Constants that describe the registration or authorization status of a helper executable.
-type SMAppServiceStatus int64
+type AppServiceStatus int64
 
 const (
-	SMAppServiceStatusNotRegistered    SMAppServiceStatus = 0
-	SMAppServiceStatusEnabled          SMAppServiceStatus = 1
-	SMAppServiceStatusRequiresApproval SMAppServiceStatus = 2
-	SMAppServiceStatusNotFound         SMAppServiceStatus = 3
+	AppServiceStatusNotRegistered    AppServiceStatus = 0
+	AppServiceStatusEnabled          AppServiceStatus = 1
+	AppServiceStatusRequiresApproval AppServiceStatus = 2
+	AppServiceStatusNotFound         AppServiceStatus = 3
 )
 
-func (e SMAppServiceStatus) String() string {
+func (e AppServiceStatus) String() string {
 	switch e {
-	case SMAppServiceStatusNotRegistered:
-		return "SMAppServiceStatusNotRegistered"
-	case SMAppServiceStatusEnabled:
-		return "SMAppServiceStatusEnabled"
-	case SMAppServiceStatusRequiresApproval:
-		return "SMAppServiceStatusRequiresApproval"
-	case SMAppServiceStatusNotFound:
-		return "SMAppServiceStatusNotFound"
+	case AppServiceStatusNotRegistered:
+		return "AppServiceStatusNotRegistered"
+	case AppServiceStatusEnabled:
+		return "AppServiceStatusEnabled"
+	case AppServiceStatusRequiresApproval:
+		return "AppServiceStatusRequiresApproval"
+	case AppServiceStatusNotFound:
+		return "AppServiceStatusNotFound"
 	default:
-		return fmt.Sprintf("SMAppServiceStatus(%d)", int64(e))
+		return fmt.Sprintf("AppServiceStatus(%d)", int64(e))
 	}
 }

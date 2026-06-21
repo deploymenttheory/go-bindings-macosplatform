@@ -5,22 +5,19 @@
 package safariservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safariservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// SFErrorDomain returns the string constant SFErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func SFErrorDomain() objc.ID {
-	return purego.CFConstant(raw.SFErrorDomain())
+// SFErrorDomain returns the string constant SFErrorDomain, for use as a dictionary key or argument.
+func SFErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("SFErrorDomain"))) }
+
+// SFExtensionMessageKey returns the string constant SFExtensionMessageKey, for use as a dictionary key or argument.
+func SFExtensionMessageKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SFExtensionMessageKey")))
 }
 
-// SFExtensionMessageKey returns the string constant SFExtensionMessageKey as an objc.ID, for use as a dictionary key or selector argument.
-func SFExtensionMessageKey() objc.ID {
-	return purego.CFConstant(raw.SFExtensionMessageKey())
-}
-
-// SFExtensionProfileKey returns the string constant SFExtensionProfileKey as an objc.ID, for use as a dictionary key or selector argument.
-func SFExtensionProfileKey() objc.ID {
-	return purego.CFConstant(raw.SFExtensionProfileKey())
+// SFExtensionProfileKey returns the string constant SFExtensionProfileKey, for use as a dictionary key or argument.
+func SFExtensionProfileKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SFExtensionProfileKey")))
 }

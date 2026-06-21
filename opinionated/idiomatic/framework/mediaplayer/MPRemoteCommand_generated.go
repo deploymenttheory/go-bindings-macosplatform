@@ -5,98 +5,100 @@
 package mediaplayer
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that responds to remote command events.
 //
-// RemoteCommand wraps [raw.MPRemoteCommand] with a fluent Go API.
+// RemoteCommand is an idiomatic wrapper over the Objective-C class MPRemoteCommand.
 type RemoteCommand struct {
-	inner *raw.MPRemoteCommand
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPRemoteCommand].
-func (x *RemoteCommand) Unwrap() *raw.MPRemoteCommand { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RemoteCommand) ID() objc.ID { return x.inner.Ptr() }
-
-// RemoteCommandFromID adopts an existing object pointer as a RemoteCommand (nil for 0).
+// RemoteCommandFromID adopts an existing Objective-C object as a RemoteCommand
+// (nil for 0), retaining it and registering a release finalizer.
 func RemoteCommandFromID(id objc.ID) *RemoteCommand {
 	if id == 0 {
 		return nil
 	}
-	return &RemoteCommand{inner: raw.MPRemoteCommandFromID(id)}
+	x := &RemoteCommand{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRemoteCommand creates a new [RemoteCommand].
+// remoteCommandAdopt wraps an Objective-C object that this code just created as a
+// RemoteCommand (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func remoteCommandAdopt(id objc.ID) *RemoteCommand {
+	if id == 0 {
+		return nil
+	}
+	x := &RemoteCommand{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RemoteCommand) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RemoteCommand) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RemoteCommand) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRemoteCommand creates a new RemoteCommand.
 func NewRemoteCommand() *RemoteCommand {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPRemoteCommand")), objc.RegisterName("new"))
-	return &RemoteCommand{inner: raw.MPRemoteCommandFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPRemoteCommand")), objc.RegisterName("new"))
+	return remoteCommandAdopt(_id)
 }
 
 // A Boolean value that indicates whether a user can interact with the displayed element.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *RemoteCommand) WithEnabled(enabled bool) *RemoteCommand {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// Adds a target object to be called when an event is received.
-//
-// AddTargetAction calls the underlying AddTargetAction.
-func (x *RemoteCommand) AddTargetAction(target objc.ID, action objc.SEL) {
-	x.inner.AddTargetAction(target, action)
-}
-
-// Removes a target and action from a remote command object.
-//
-// RemoveTargetAction calls the underlying RemoveTargetAction.
-func (x *RemoteCommand) RemoveTargetAction(target objc.ID, action objc.SEL) {
-	x.inner.RemoveTargetAction(target, action)
-}
-
 // Removes a target from the remote command object.
-//
-// RemoveTarget calls the underlying RemoveTarget.
-func (x *RemoteCommand) RemoveTarget(target objc.ID) {
-	x.inner.RemoveTarget(target)
+func (x *RemoteCommand) RemoveTarget(target obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTarget:"), objref.IDOf(target))
 }
 
 // Adds a block to be called when an event is received.
-//
-// AddTargetWithHandler calls the underlying AddTargetWithHandler.
-func (x *RemoteCommand) AddTargetWithHandler(handler func(*raw.MPRemoteCommandEvent) MPRemoteCommandHandlerStatus) objc.ID {
-	return x.inner.AddTargetWithHandler(func(_a0 *raw.MPRemoteCommandEvent) raw.MPRemoteCommandHandlerStatus {
-		return raw.MPRemoteCommandHandlerStatus(handler(_a0))
-	})
+func (x *RemoteCommand) AddTargetWithHandler(handler func(obj.Object) int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTargetWithHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return handler(obj.Wrap(_b0)) }))
+	return obj.Wrap(_r)
 }
 
 // Whether a button (for example) should be enabled and tappable for this particular command.
-//
-// IsEnabled calls the underlying IsEnabled.
 func (x *RemoteCommand) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// SetEnabled calls the underlying SetEnabled.
 func (x *RemoteCommand) SetEnabled(enabled bool) {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
-
-func (x *RemoteCommand) asRemoteCommand() *raw.MPRemoteCommand { return x.inner }
 
 // RemoteCommandable is the interface implemented by [RemoteCommand], for mocking and DI.
 type RemoteCommandable interface {
-	Unwrap() *raw.MPRemoteCommand
+	obj.Object
 	WithEnabled(enabled bool) *RemoteCommand
-	AddTargetAction(target objc.ID, action objc.SEL)
-	RemoveTargetAction(target objc.ID, action objc.SEL)
-	RemoveTarget(target objc.ID)
-	AddTargetWithHandler(handler func(*raw.MPRemoteCommandEvent) MPRemoteCommandHandlerStatus) objc.ID
+	RemoveTarget(target obj.Object)
+	AddTargetWithHandler(handler func(obj.Object) int) obj.Object
 	IsEnabled() bool
 	SetEnabled(enabled bool)
 }

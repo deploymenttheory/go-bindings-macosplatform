@@ -5,52 +5,74 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a physical keyboard connected to a device.
 //
-// Keyboard wraps [raw.GCKeyboard] with a fluent Go API.
+// Keyboard is an idiomatic wrapper over the Objective-C class GCKeyboard.
 type Keyboard struct {
-	inner *raw.GCKeyboard
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCKeyboard].
-func (x *Keyboard) Unwrap() *raw.GCKeyboard { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Keyboard) ID() objc.ID { return x.inner.Ptr() }
-
-// KeyboardFromID adopts an existing object pointer as a Keyboard (nil for 0).
+// KeyboardFromID adopts an existing Objective-C object as a Keyboard
+// (nil for 0), retaining it and registering a release finalizer.
 func KeyboardFromID(id objc.ID) *Keyboard {
 	if id == 0 {
 		return nil
 	}
-	return &Keyboard{inner: raw.GCKeyboardFromID(id)}
+	x := &Keyboard{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewKeyboard creates a new [Keyboard].
+// keyboardAdopt wraps an Objective-C object that this code just created as a
+// Keyboard (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func keyboardAdopt(id objc.ID) *Keyboard {
+	if id == 0 {
+		return nil
+	}
+	x := &Keyboard{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Keyboard) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Keyboard) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Keyboard) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewKeyboard creates a new Keyboard.
 func NewKeyboard() *Keyboard {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCKeyboard")), objc.RegisterName("new"))
-	return &Keyboard{inner: raw.GCKeyboardFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GCKeyboard")), objc.RegisterName("new"))
+	return keyboardAdopt(_id)
 }
 
 // Unlike GCController GCKeyboard only has one input profile. This profile allows you to query buttons and button state
-//
-// KeyboardInput calls the underlying KeyboardInput.
 func (x *Keyboard) KeyboardInput() *KeyboardInput {
-	_r := x.inner.KeyboardInput()
-	if _r == nil {
-		return nil
-	}
-	return &KeyboardInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyboardInput"))
+	return KeyboardInputFromID(_r)
 }
 
 // Keyboardable is the interface implemented by [Keyboard], for mocking and DI.
 type Keyboardable interface {
-	Unwrap() *raw.GCKeyboard
+	obj.Object
 	KeyboardInput() *KeyboardInput
 }
 

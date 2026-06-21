@@ -5,66 +5,85 @@
 package pencilkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An item that represents an eraser tool in the tool picker.
 //
-// ToolPickerEraserItem wraps [raw.PKToolPickerEraserItem] with a fluent Go API.
+// ToolPickerEraserItem is an idiomatic wrapper over the Objective-C class PKToolPickerEraserItem.
 type ToolPickerEraserItem struct {
-	inner *raw.PKToolPickerEraserItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKToolPickerEraserItem].
-func (x *ToolPickerEraserItem) Unwrap() *raw.PKToolPickerEraserItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ToolPickerEraserItem) ID() objc.ID { return x.inner.Ptr() }
-
-// ToolPickerEraserItemFromID adopts an existing object pointer as a ToolPickerEraserItem (nil for 0).
+// ToolPickerEraserItemFromID adopts an existing Objective-C object as a ToolPickerEraserItem
+// (nil for 0), retaining it and registering a release finalizer.
 func ToolPickerEraserItemFromID(id objc.ID) *ToolPickerEraserItem {
 	if id == 0 {
 		return nil
 	}
-	return &ToolPickerEraserItem{inner: raw.PKToolPickerEraserItemFromID(id)}
+	x := &ToolPickerEraserItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// toolPickerEraserItemAdopt wraps an Objective-C object that this code just created as a
+// ToolPickerEraserItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func toolPickerEraserItemAdopt(id objc.ID) *ToolPickerEraserItem {
+	if id == 0 {
+		return nil
+	}
+	x := &ToolPickerEraserItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ToolPickerEraserItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ToolPickerEraserItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ToolPickerEraserItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new eraser item.
 //
-// NewToolPickerEraserItemWithEraserType creates a new [ToolPickerEraserItem].
-func NewToolPickerEraserItemWithEraserType(eraserType PKEraserType) *ToolPickerEraserItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKToolPickerEraserItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEraserType:"), raw.PKEraserType(eraserType))
-	return &ToolPickerEraserItem{inner: raw.PKToolPickerEraserItemFromID(_id)}
+// NewToolPickerEraserItemWithEraserType creates a new ToolPickerEraserItem.
+func NewToolPickerEraserItemWithEraserType(eraserType EraserType) *ToolPickerEraserItem {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKToolPickerEraserItem")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEraserType:"), eraserType)
+	return toolPickerEraserItemAdopt(_id)
 }
 
 // Creates a new eraser item with the specified width.
 //
-// NewToolPickerEraserItemWithEraserTypeWidth creates a new [ToolPickerEraserItem].
-func NewToolPickerEraserItemWithEraserTypeWidth(eraserType PKEraserType, width float64) *ToolPickerEraserItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKToolPickerEraserItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEraserType:width:"), raw.PKEraserType(eraserType), width)
-	return &ToolPickerEraserItem{inner: raw.PKToolPickerEraserItemFromID(_id)}
+// NewToolPickerEraserItemWithEraserTypeWidth creates a new ToolPickerEraserItem.
+func NewToolPickerEraserItemWithEraserTypeWidth(eraserType EraserType, width float64) *ToolPickerEraserItem {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKToolPickerEraserItem")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEraserType:width:"), eraserType, width)
+	return toolPickerEraserItemAdopt(_id)
 }
 
-// EraserTool calls the underlying EraserTool.
 func (x *ToolPickerEraserItem) EraserTool() *EraserTool {
-	_r := x.inner.EraserTool()
-	if _r == nil {
-		return nil
-	}
-	return &EraserTool{inner: _r}
-}
-
-func (x *ToolPickerEraserItem) asToolPickerItem() *raw.PKToolPickerItem {
-	return &x.inner.PKToolPickerItem
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eraserTool"))
+	return EraserToolFromID(_r)
 }
 
 // ToolPickerEraserItemable is the interface implemented by [ToolPickerEraserItem], for mocking and DI.
 type ToolPickerEraserItemable interface {
-	Unwrap() *raw.PKToolPickerEraserItem
+	obj.Object
 	EraserTool() *EraserTool
 }
 

@@ -5,62 +5,86 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that expresses an inclusive range of supported exposure bias values, in EV units.
 //
-// ExposureBiasRange wraps [raw.AVExposureBiasRange] with a fluent Go API.
+// ExposureBiasRange is an idiomatic wrapper over the Objective-C class AVExposureBiasRange.
 type ExposureBiasRange struct {
-	inner *raw.AVExposureBiasRange
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVExposureBiasRange].
-func (x *ExposureBiasRange) Unwrap() *raw.AVExposureBiasRange { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExposureBiasRange) ID() objc.ID { return x.inner.Ptr() }
-
-// ExposureBiasRangeFromID adopts an existing object pointer as a ExposureBiasRange (nil for 0).
+// ExposureBiasRangeFromID adopts an existing Objective-C object as a ExposureBiasRange
+// (nil for 0), retaining it and registering a release finalizer.
 func ExposureBiasRangeFromID(id objc.ID) *ExposureBiasRange {
 	if id == 0 {
 		return nil
 	}
-	return &ExposureBiasRange{inner: raw.AVExposureBiasRangeFromID(id)}
+	x := &ExposureBiasRange{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewExposureBiasRange creates a new [ExposureBiasRange].
+// exposureBiasRangeAdopt wraps an Objective-C object that this code just created as a
+// ExposureBiasRange (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func exposureBiasRangeAdopt(id objc.ID) *ExposureBiasRange {
+	if id == 0 {
+		return nil
+	}
+	x := &ExposureBiasRange{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ExposureBiasRange) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExposureBiasRange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExposureBiasRange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewExposureBiasRange creates a new ExposureBiasRange.
 func NewExposureBiasRange() *ExposureBiasRange {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVExposureBiasRange")), objc.RegisterName("new"))
-	return &ExposureBiasRange{inner: raw.AVExposureBiasRangeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVExposureBiasRange")), objc.RegisterName("new"))
+	return exposureBiasRangeAdopt(_id)
 }
 
 // Determines whether the range contains the specified exposure bias.
-//
-// ContainsExposureBias calls the underlying ContainsExposureBias.
 func (x *ExposureBiasRange) ContainsExposureBias(exposureBias float32) bool {
-	return x.inner.ContainsExposureBias(exposureBias)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsExposureBias:"), exposureBias)
+	return _r
 }
 
-// @property minExposureBias @abstract A float indicating the minimum exposure bias in EV units supported by this range.
-//
-// MinExposureBias calls the underlying MinExposureBias.
+// A float indicating the minimum exposure bias in EV units supported by this range.
 func (x *ExposureBiasRange) MinExposureBias() float32 {
-	return x.inner.MinExposureBias()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minExposureBias"))
+	return _r
 }
 
-// @property maxExposureBias @abstract A float indicating the maximum exposure bias in EV units supported by this range.
-//
-// MaxExposureBias calls the underlying MaxExposureBias.
+// A float indicating the maximum exposure bias in EV units supported by this range.
 func (x *ExposureBiasRange) MaxExposureBias() float32 {
-	return x.inner.MaxExposureBias()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maxExposureBias"))
+	return _r
 }
 
 // ExposureBiasRangeable is the interface implemented by [ExposureBiasRange], for mocking and DI.
 type ExposureBiasRangeable interface {
-	Unwrap() *raw.AVExposureBiasRange
+	obj.Object
 	ContainsExposureBias(exposureBias float32) bool
 	MinExposureBias() float32
 	MaxExposureBias() float32

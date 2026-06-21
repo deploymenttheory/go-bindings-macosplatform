@@ -5,931 +5,843 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The appearance and behavior of an item in the systemwide menu bar.
 //
-// StatusBarButton wraps [raw.NSStatusBarButton] with a fluent Go API.
+// StatusBarButton is an idiomatic wrapper over the Objective-C class NSStatusBarButton.
 type StatusBarButton struct {
-	inner *raw.NSStatusBarButton
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSStatusBarButton].
-func (x *StatusBarButton) Unwrap() *raw.NSStatusBarButton { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StatusBarButton) ID() objc.ID { return x.inner.Ptr() }
-
-// StatusBarButtonFromID adopts an existing object pointer as a StatusBarButton (nil for 0).
+// StatusBarButtonFromID adopts an existing Objective-C object as a StatusBarButton
+// (nil for 0), retaining it and registering a release finalizer.
 func StatusBarButtonFromID(id objc.ID) *StatusBarButton {
 	if id == 0 {
 		return nil
 	}
-	return &StatusBarButton{inner: raw.NSStatusBarButtonFromID(id)}
+	x := &StatusBarButton{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewStatusBarButton creates a new [StatusBarButton].
+// statusBarButtonAdopt wraps an Objective-C object that this code just created as a
+// StatusBarButton (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func statusBarButtonAdopt(id objc.ID) *StatusBarButton {
+	if id == 0 {
+		return nil
+	}
+	x := &StatusBarButton{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *StatusBarButton) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StatusBarButton) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StatusBarButton) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewStatusBarButton creates a new StatusBarButton.
 func NewStatusBarButton() *StatusBarButton {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSStatusBarButton")), objc.RegisterName("new"))
-	return &StatusBarButton{inner: raw.NSStatusBarButtonFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSStatusBarButton")), objc.RegisterName("new"))
+	return statusBarButtonAdopt(_id)
 }
 
 // Determines whether the status bar icon has a disabled/off appearance while still being functional, such as allowing selection and actions.
 //
-// WithAppearsDisabled sets the appearsDisabled property and returns the receiver for chaining.
+// WithAppearsDisabled sets appearsDisabled and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithAppearsDisabled(appearsDisabled bool) *StatusBarButton {
-	x.inner.SetAppearsDisabled(appearsDisabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppearsDisabled:"), appearsDisabled)
 	return x
 }
 
 // The title displayed on the button when it’s in an off state.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithTitle(title string) *StatusBarButton {
-	x.inner.NSButton.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // The title that the button displays in an off state, as an attributed string.
 //
-// WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
-func (x *StatusBarButton) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *StatusBarButton {
-	x.inner.NSButton.SetAttributedTitle(attributedTitle)
+// WithAttributedTitle sets attributedTitle and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithAttributedTitle(attributedTitle obj.Object) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	return x
 }
 
 // The title that the button displays when the button is in an on state.
 //
-// WithAlternateTitle sets the alternateTitle property and returns the receiver for chaining.
+// WithAlternateTitle sets alternateTitle and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithAlternateTitle(alternateTitle string) *StatusBarButton {
-	x.inner.NSButton.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateTitle:"), purego.NSString(alternateTitle))
 	return x
 }
 
 // The title that the button displays as an attributed string when the button is in an on state.
 //
-// WithAttributedAlternateTitle sets the attributedAlternateTitle property and returns the receiver for chaining.
-func (x *StatusBarButton) WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *StatusBarButton {
-	x.inner.NSButton.SetAttributedAlternateTitle(attributedAlternateTitle)
+// WithAttributedAlternateTitle sets attributedAlternateTitle and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
 	return x
 }
 
 // A Boolean value that defines whether a button’s action has a destructive effect.
 //
-// WithHasDestructiveAction sets the hasDestructiveAction property and returns the receiver for chaining.
+// WithHasDestructiveAction sets hasDestructiveAction and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithHasDestructiveAction(hasDestructiveAction bool) *StatusBarButton {
-	x.inner.NSButton.SetHasDestructiveAction(hasDestructiveAction)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDestructiveAction:"), hasDestructiveAction)
 	return x
 }
 
 // The sound that plays when the user clicks the button.
 //
-// WithSound sets the sound property and returns the receiver for chaining.
+// WithSound sets sound and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithSound(sound *Sound) *StatusBarButton {
-	x.inner.NSButton.SetSound(sound.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSound:"), objref.IDOf(sound))
 	return x
 }
 
 // A Boolean value that indicates whether spring loading is enabled for the button.
 //
-// WithSpringLoaded sets the springLoaded property and returns the receiver for chaining.
+// WithSpringLoaded sets springLoaded and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithSpringLoaded(springLoaded bool) *StatusBarButton {
-	x.inner.NSButton.SetSpringLoaded(springLoaded)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpringLoaded:"), springLoaded)
 	return x
 }
 
 // An integer value indicating the maximum pressure level for a button of type NSMultiLevelAcceleratorButton.
 //
-// WithMaxAcceleratorLevel sets the maxAcceleratorLevel property and returns the receiver for chaining.
+// WithMaxAcceleratorLevel sets maxAcceleratorLevel and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithMaxAcceleratorLevel(maxAcceleratorLevel int) *StatusBarButton {
-	x.inner.NSButton.SetMaxAcceleratorLevel(maxAcceleratorLevel)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAcceleratorLevel:"), maxAcceleratorLevel)
 	return x
 }
 
 // The appearance of the button’s border.
 //
-// WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *StatusBarButton) WithBezelStyle(bezelStyle NSBezelStyle) *StatusBarButton {
-	x.inner.NSButton.SetBezelStyle(raw.NSBezelStyle(bezelStyle))
+// WithBezelStyle sets bezelStyle and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithBezelStyle(bezelStyle BezelStyle) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
 	return x
 }
 
 // A Boolean value that determines whether the button has a border.
 //
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered sets bordered and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithBordered(bordered bool) *StatusBarButton {
-	x.inner.NSButton.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
 // A Boolean value that indicates whether the button is transparent.
 //
-// WithTransparent sets the transparent property and returns the receiver for chaining.
+// WithTransparent sets transparent and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithTransparent(transparent bool) *StatusBarButton {
-	x.inner.NSButton.SetTransparent(transparent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransparent:"), transparent)
 	return x
 }
 
 // A Boolean value that determines whether the button displays its border only when the pointer is over it.
 //
-// WithShowsBorderOnlyWhileMouseInside sets the showsBorderOnlyWhileMouseInside property and returns the receiver for chaining.
+// WithShowsBorderOnlyWhileMouseInside sets showsBorderOnlyWhileMouseInside and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *StatusBarButton {
-	x.inner.NSButton.SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsBorderOnlyWhileMouseInside:"), showsBorderOnlyWhileMouseInside)
 	return x
 }
 
 // The color of the button’s bezel, in appearances that support it.
 //
-// WithBezelColor sets the bezelColor property and returns the receiver for chaining.
+// WithBezelColor sets bezelColor and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithBezelColor(bezelColor *Color) *StatusBarButton {
-	x.inner.NSButton.SetBezelColor(bezelColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelColor:"), objref.IDOf(bezelColor))
 	return x
 }
 
 // A tint color to use for the template image and text content.
 //
-// WithContentTintColor sets the contentTintColor property and returns the receiver for chaining.
+// WithContentTintColor sets contentTintColor and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithContentTintColor(contentTintColor *Color) *StatusBarButton {
-	x.inner.NSButton.SetContentTintColor(contentTintColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentTintColor:"), objref.IDOf(contentTintColor))
 	return x
 }
 
 // The tint prominence of the button. Use tint prominence to gently suggest a hierarchy when multiple buttons perform similar actions. A button with primary tint prominence suggests the most preferred option, while secondary prominence indicates a reasonable alternative. See NSTintProminence for a list of possible values.
 //
-// WithTintProminence sets the tintProminence property and returns the receiver for chaining.
-func (x *StatusBarButton) WithTintProminence(tintProminence NSTintProminence) *StatusBarButton {
-	x.inner.NSButton.SetTintProminence(raw.NSTintProminence(tintProminence))
+// WithTintProminence sets tintProminence and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithTintProminence(tintProminence TintProminence) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTintProminence:"), tintProminence)
 	return x
 }
 
 // The image that appears on the button when it’s in an off state, or nil if there is no such image.
 //
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage sets image and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithImage(image *Image) *StatusBarButton {
-	x.inner.NSButton.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
 // An alternate image that appears on the button when the button is in an on state.
 //
-// WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
+// WithAlternateImage sets alternateImage and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithAlternateImage(alternateImage *Image) *StatusBarButton {
-	x.inner.NSButton.SetAlternateImage(alternateImage.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
 	return x
 }
 
 // The position of the button’s image relative to its title.
 //
-// WithImagePosition sets the imagePosition property and returns the receiver for chaining.
-func (x *StatusBarButton) WithImagePosition(imagePosition NSCellImagePosition) *StatusBarButton {
-	x.inner.NSButton.SetImagePosition(raw.NSCellImagePosition(imagePosition))
+// WithImagePosition sets imagePosition and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithImagePosition(imagePosition CellImagePosition) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImagePosition:"), imagePosition)
 	return x
 }
 
 // The scaling mode applied to make the cell’s image fit the frame of the image view.
 //
-// WithImageScaling sets the imageScaling property and returns the receiver for chaining.
-func (x *StatusBarButton) WithImageScaling(imageScaling NSImageScaling) *StatusBarButton {
-	x.inner.NSButton.SetImageScaling(raw.NSImageScaling(imageScaling))
+// WithImageScaling sets imageScaling and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithImageScaling(imageScaling ImageScaling) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageScaling:"), imageScaling)
 	return x
 }
 
 // A Boolean value that determines how the button’s image and title are positioned together within the button bezel.
 //
-// WithImageHugsTitle sets the imageHugsTitle property and returns the receiver for chaining.
+// WithImageHugsTitle sets imageHugsTitle and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithImageHugsTitle(imageHugsTitle bool) *StatusBarButton {
-	x.inner.NSButton.SetImageHugsTitle(imageHugsTitle)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageHugsTitle:"), imageHugsTitle)
 	return x
 }
 
 // The combination of point size, weight, and scale to use when sizing and displaying symbol images.
 //
-// WithSymbolConfiguration sets the symbolConfiguration property and returns the receiver for chaining.
+// WithSymbolConfiguration sets symbolConfiguration and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *StatusBarButton {
-	x.inner.NSButton.SetSymbolConfiguration(symbolConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSymbolConfiguration:"), objref.IDOf(symbolConfiguration))
 	return x
 }
 
 // The button’s state.
 //
-// WithState sets the state property and returns the receiver for chaining.
+// WithState sets state and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithState(state int) *StatusBarButton {
-	x.inner.NSButton.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
 // A Boolean value that indicates whether the button allows a mixed state.
 //
-// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+// WithAllowsMixedState sets allowsMixedState and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithAllowsMixedState(allowsMixedState bool) *StatusBarButton {
-	x.inner.NSButton.SetAllowsMixedState(allowsMixedState)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
 // The key-equivalent character of the button.
 //
-// WithKeyEquivalent sets the keyEquivalent property and returns the receiver for chaining.
+// WithKeyEquivalent sets keyEquivalent and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithKeyEquivalent(keyEquivalent string) *StatusBarButton {
-	x.inner.NSButton.SetKeyEquivalent(foundation.NSStringStringWithUTF8String(keyEquivalent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalent:"), purego.NSString(keyEquivalent))
 	return x
 }
 
 // The mask specifying the modifier keys for the button’s key equivalent.
 //
-// WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
-func (x *StatusBarButton) WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *StatusBarButton {
-	x.inner.NSButton.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))
+// WithKeyEquivalentModifierMask sets keyEquivalentModifierMask and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalentModifierMask:"), keyEquivalentModifierMask)
 	return x
 }
 
-// WithBorderShape sets the borderShape property and returns the receiver for chaining.
-func (x *StatusBarButton) WithBorderShape(borderShape NSControlBorderShape) *StatusBarButton {
-	x.inner.NSButton.SetBorderShape(raw.NSControlBorderShape(borderShape))
+// WithBorderShape sets borderShape and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithBorderShape(borderShape ControlBorderShape) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderShape:"), borderShape)
 	return x
 }
 
 // The target object that receives action messages from the cell.
 //
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *StatusBarButton) WithTarget(target objc.ID) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetTarget(target)
-	return x
-}
-
-// The default action-message selector associated with the control.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *StatusBarButton) WithAction(action objc.SEL) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetAction(action)
+// WithTarget sets target and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithTarget(target obj.Object) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
 // The tag identifying the receiver (not the tag of the receiver’s cell).
 //
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag sets tag and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithTag(tag int) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
 // A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 //
-// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+// WithIgnoresMultiClick sets ignoresMultiClick and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithIgnoresMultiClick(ignoresMultiClick bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
 	return x
 }
 
 // A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 //
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous sets continuous and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithContinuous(continuous bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
 // A Boolean value that indicates whether the receiver reacts to mouse events.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithEnabled(enabled bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // A Boolean value indicating whether the receiver refuses the first responder role.
 //
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithRefusesFirstResponder(refusesFirstResponder bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
 // A Boolean value that indicates whether the cell is highlighted.
 //
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithHighlighted(highlighted bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
 // The size of the control.
 //
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *StatusBarButton) WithControlSize(controlSize NSControlSize) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithControlSize(controlSize ControlSize) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
 // The receiver’s formatter.
 //
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *StatusBarButton) WithFormatter(formatter *foundation.NSFormatter) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetFormatter(formatter)
+// WithFormatter sets formatter and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithFormatter(formatter obj.Object) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
 // The value of the receiver’s cell as an Objective-C object.
 //
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *StatusBarButton) WithObjectValue(objectValue objc.ID) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetObjectValue(objectValue)
+// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithObjectValue(objectValue obj.Object) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
 // The value of the receiver’s cell as an NSString object.
 //
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue sets stringValue and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithStringValue(stringValue string) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
 // The value of the receiver’s cell as an attributed string.
 //
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *StatusBarButton) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithAttributedStringValue(attributedStringValue obj.Object) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
 // The value of the receiver’s cell as an integer.
 //
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue sets intValue and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithIntValue(intValue int) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
 // The value of the receiver’s cell as an integer value.
 //
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithIntegerValue(integerValue int) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
 // The value of the receiver’s cell as a single-precision floating-point number.
 //
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithFloatValue(floatValue float32) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
 // The value of the receiver’s cell as a double-precision floating-point number.
 //
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithDoubleValue(doubleValue float64) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
 // The font used to draw text in the receiver’s cell.
 //
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont sets font and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithFont(font *Font) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
 // A Boolean value that indicates whether the text in the control’s cell uses single line mode.
 //
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithUsesSingleLineMode(usesSingleLineMode bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
 // The line break mode to use for text in the control’s cell.
 //
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *StatusBarButton) WithLineBreakMode(lineBreakMode NSLineBreakMode) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithLineBreakMode(lineBreakMode LineBreakMode) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
 // The alignment mode of the text in the receiver’s cell.
 //
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *StatusBarButton) WithAlignment(alignment NSTextAlignment) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment sets alignment and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithAlignment(alignment TextAlignment) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
 // The initial writing direction used to determine the actual writing direction for text.
 //
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *StatusBarButton) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithBaseWritingDirection(baseWritingDirection WritingDirection) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
 // A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 //
-// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+// WithAllowsExpansionToolTips sets allowsExpansionToolTips and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
 	return x
 }
 
-// WithCell sets the cell property and returns the receiver for chaining.
+// WithCell sets cell and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithCell(cell CellProvider) *StatusBarButton {
-	x.inner.NSButton.NSControl.SetCell(cell.asCell())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return x
 }
 
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
+// WithSubviews sets the collection and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithSubviews(items ...ViewProvider) *StatusBarButton {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSButton.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSButton.NSControl.NSView.SetSubviews(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithHidden(hidden bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+// WithPostsFrameChangedNotifications sets postsFrameChangedNotifications and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+// WithAutoresizesSubviews sets autoresizesSubviews and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithAutoresizesSubviews(autoresizesSubviews bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *StatusBarButton) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
+// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
-func (x *StatusBarButton) WithFrame(frame corefoundation.CGRect) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetFrame(frame)
-	return x
-}
-
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+// WithFrameRotation sets frameRotation and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithFrameRotation(frameRotation float64) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetFrameRotation(frameRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+// WithFrameCenterRotation sets frameCenterRotation and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithFrameCenterRotation(frameCenterRotation float64) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+// WithBoundsRotation sets boundsRotation and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithBoundsRotation(boundsRotation float64) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *StatusBarButton) WithBounds(bounds corefoundation.CGRect) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetBounds(bounds)
-	return x
-}
-
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+// WithCanDrawConcurrently sets canDrawConcurrently and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithCanDrawConcurrently(canDrawConcurrently bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
 // A Boolean value that determines whether the view needs to be redrawn before being displayed.
 //
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+// WithNeedsDisplay sets needsDisplay and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithNeedsDisplay(needsDisplay bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+// WithAcceptsTouchEvents sets acceptsTouchEvents and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithAcceptsTouchEvents(acceptsTouchEvents bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+// WithWantsRestingTouches sets wantsRestingTouches and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithWantsRestingTouches(wantsRestingTouches bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *StatusBarButton) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
+// WithLayerContentsRedrawPolicy sets layerContentsRedrawPolicy and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *StatusBarButton) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
+// WithLayerContentsPlacement sets layerContentsPlacement and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+// WithWantsLayer sets wantsLayer and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithWantsLayer(wantsLayer bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetWantsLayer(wantsLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *StatusBarButton) WithLayer(layer *quartzcore.CALayer) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetLayer(layer)
+// WithLayer sets layer and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithLayer(layer obj.Object) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+// WithCanDrawSubviewsIntoLayer sets canDrawSubviewsIntoLayer and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+// WithNeedsLayout sets needsLayout and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithNeedsLayout(needsLayout bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetNeedsLayout(needsLayout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithAlphaValue(alphaValue float64) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetAlphaValue(alphaValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+// WithLayerUsesCoreImageFilters sets layerUsesCoreImageFilters and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *StatusBarButton) WithBackgroundFilters(items ...*coreimage.CIFilter) *StatusBarButton {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSButton.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSButton.NSControl.NSView.SetBackgroundFilters(_arr)
+// WithBackgroundFilters sets the collection and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithBackgroundFilters(items ...obj.Object) *StatusBarButton {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *StatusBarButton) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetCompositingFilter(compositingFilter)
+// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithCompositingFilter(compositingFilter obj.Object) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *StatusBarButton) WithContentFilters(items ...*coreimage.CIFilter) *StatusBarButton {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSButton.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSButton.NSControl.NSView.SetContentFilters(_arr)
+// WithContentFilters sets the collection and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithContentFilters(items ...obj.Object) *StatusBarButton {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets the shadow property and returns the receiver for chaining.
+// WithShadow sets shadow and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithShadow(shadow *Shadow) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetShadow(shadow.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+// WithClipsToBounds sets clipsToBounds and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithClipsToBounds(clipsToBounds bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+// WithPostsBoundsChangedNotifications sets postsBoundsChangedNotifications and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip sets toolTip and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithToolTip(toolTip string) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *StatusBarButton) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
-func (x *StatusBarButton) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
-	return x
-}
-
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+// WithNextKeyView sets nextKeyView and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithNextKeyView(nextKeyView ViewProvider) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *StatusBarButton) WithFocusRingType(focusRingType NSFocusRingType) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithFocusRingType(focusRingType FocusRingType) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+// WithGestureRecognizers sets the collection and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithGestureRecognizers(items ...GestureRecognizerProvider) *StatusBarButton {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSButton.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSButton.NSControl.NSView.SetGestureRecognizers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *StatusBarButton) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
-	return x
-}
-
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
-func (x *StatusBarButton) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+// WithAllowedTouchTypes sets allowedTouchTypes and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
 // When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+// WithPrefersCompactControlSizeMetrics sets prefersCompactControlSizeMetrics and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+// WithWritingToolsCoordinator sets writingToolsCoordinator and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+// WithNeedsUpdateConstraints sets needsUpdateConstraints and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+// WithTranslatesAutoresizingMaskIntoConstraints sets translatesAutoresizingMaskIntoConstraints and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithHorizontalContentSizeConstraintActive sets horizontalContentSizeConstraintActive and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithVerticalContentSizeConstraintActive sets verticalContentSizeConstraintActive and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+// WithWantsBestResolutionOpenGLSurface sets wantsBestResolutionOpenGLSurface and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets wantsExtendedDynamicRangeOpenGLSurface and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+// WithPressureConfiguration sets pressureConfiguration and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
 // The next responder after this one, or nil if it has none.
 //
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithNextResponder(nextResponder ResponderProvider) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
 // Returns the responder’s menu.
 //
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu sets menu and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithMenu(menu *Menu) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
 // An object encapsulating a user activity supported by this responder.
 //
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *StatusBarButton) WithUserActivity(userActivity *foundation.NSUserActivity) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+func (x *StatusBarButton) WithUserActivity(userActivity obj.Object) *StatusBarButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
 // The NSTouchBar object associated with the responder.
 //
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
 func (x *StatusBarButton) WithTouchBar(touchBar *TouchBar) *StatusBarButton {
-	x.inner.NSButton.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
 // Determines whether the status bar icon has a disabled/off appearance while still being functional, such as allowing selection and actions. The default value is `false`.
-//
-// AppearsDisabled calls the underlying AppearsDisabled.
 func (x *StatusBarButton) AppearsDisabled() bool {
-	return x.inner.AppearsDisabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appearsDisabled"))
+	return _r
 }
 
 // Determines whether the status bar icon has a disabled/off appearance while still being functional, such as allowing selection and actions. The default value is `false`.
-//
-// SetAppearsDisabled calls the underlying SetAppearsDisabled.
 func (x *StatusBarButton) SetAppearsDisabled(appearsDisabled bool) {
-	x.inner.SetAppearsDisabled(appearsDisabled)
-}
-
-func (x *StatusBarButton) asButton() *raw.NSButton { return &x.inner.NSButton }
-
-func (x *StatusBarButton) asControl() *raw.NSControl { return &x.inner.NSButton.NSControl }
-
-func (x *StatusBarButton) asView() *raw.NSView { return &x.inner.NSButton.NSControl.NSView }
-
-func (x *StatusBarButton) asResponder() *raw.NSResponder {
-	return &x.inner.NSButton.NSControl.NSView.NSResponder
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppearsDisabled:"), appearsDisabled)
 }
 
 // StatusBarButtonable is the interface implemented by [StatusBarButton], for mocking and DI.
 type StatusBarButtonable interface {
-	Unwrap() *raw.NSStatusBarButton
+	obj.Object
 	WithAppearsDisabled(appearsDisabled bool) *StatusBarButton
 	WithTitle(title string) *StatusBarButton
-	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *StatusBarButton
+	WithAttributedTitle(attributedTitle obj.Object) *StatusBarButton
 	WithAlternateTitle(alternateTitle string) *StatusBarButton
-	WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *StatusBarButton
+	WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *StatusBarButton
 	WithHasDestructiveAction(hasDestructiveAction bool) *StatusBarButton
 	WithSound(sound *Sound) *StatusBarButton
 	WithSpringLoaded(springLoaded bool) *StatusBarButton
 	WithMaxAcceleratorLevel(maxAcceleratorLevel int) *StatusBarButton
-	WithBezelStyle(bezelStyle NSBezelStyle) *StatusBarButton
+	WithBezelStyle(bezelStyle BezelStyle) *StatusBarButton
 	WithBordered(bordered bool) *StatusBarButton
 	WithTransparent(transparent bool) *StatusBarButton
 	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *StatusBarButton
 	WithBezelColor(bezelColor *Color) *StatusBarButton
 	WithContentTintColor(contentTintColor *Color) *StatusBarButton
-	WithTintProminence(tintProminence NSTintProminence) *StatusBarButton
+	WithTintProminence(tintProminence TintProminence) *StatusBarButton
 	WithImage(image *Image) *StatusBarButton
 	WithAlternateImage(alternateImage *Image) *StatusBarButton
-	WithImagePosition(imagePosition NSCellImagePosition) *StatusBarButton
-	WithImageScaling(imageScaling NSImageScaling) *StatusBarButton
+	WithImagePosition(imagePosition CellImagePosition) *StatusBarButton
+	WithImageScaling(imageScaling ImageScaling) *StatusBarButton
 	WithImageHugsTitle(imageHugsTitle bool) *StatusBarButton
 	WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *StatusBarButton
 	WithState(state int) *StatusBarButton
 	WithAllowsMixedState(allowsMixedState bool) *StatusBarButton
 	WithKeyEquivalent(keyEquivalent string) *StatusBarButton
-	WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *StatusBarButton
-	WithBorderShape(borderShape NSControlBorderShape) *StatusBarButton
-	WithTarget(target objc.ID) *StatusBarButton
-	WithAction(action objc.SEL) *StatusBarButton
+	WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) *StatusBarButton
+	WithBorderShape(borderShape ControlBorderShape) *StatusBarButton
+	WithTarget(target obj.Object) *StatusBarButton
 	WithTag(tag int) *StatusBarButton
 	WithIgnoresMultiClick(ignoresMultiClick bool) *StatusBarButton
 	WithContinuous(continuous bool) *StatusBarButton
 	WithEnabled(enabled bool) *StatusBarButton
 	WithRefusesFirstResponder(refusesFirstResponder bool) *StatusBarButton
 	WithHighlighted(highlighted bool) *StatusBarButton
-	WithControlSize(controlSize NSControlSize) *StatusBarButton
-	WithFormatter(formatter *foundation.NSFormatter) *StatusBarButton
-	WithObjectValue(objectValue objc.ID) *StatusBarButton
+	WithControlSize(controlSize ControlSize) *StatusBarButton
+	WithFormatter(formatter obj.Object) *StatusBarButton
+	WithObjectValue(objectValue obj.Object) *StatusBarButton
 	WithStringValue(stringValue string) *StatusBarButton
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *StatusBarButton
+	WithAttributedStringValue(attributedStringValue obj.Object) *StatusBarButton
 	WithIntValue(intValue int) *StatusBarButton
 	WithIntegerValue(integerValue int) *StatusBarButton
 	WithFloatValue(floatValue float32) *StatusBarButton
 	WithDoubleValue(doubleValue float64) *StatusBarButton
 	WithFont(font *Font) *StatusBarButton
 	WithUsesSingleLineMode(usesSingleLineMode bool) *StatusBarButton
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *StatusBarButton
-	WithAlignment(alignment NSTextAlignment) *StatusBarButton
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *StatusBarButton
+	WithLineBreakMode(lineBreakMode LineBreakMode) *StatusBarButton
+	WithAlignment(alignment TextAlignment) *StatusBarButton
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *StatusBarButton
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *StatusBarButton
 	WithCell(cell CellProvider) *StatusBarButton
 	WithSubviews(items ...ViewProvider) *StatusBarButton
 	WithHidden(hidden bool) *StatusBarButton
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *StatusBarButton
 	WithAutoresizesSubviews(autoresizesSubviews bool) *StatusBarButton
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *StatusBarButton
-	WithFrame(frame corefoundation.CGRect) *StatusBarButton
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *StatusBarButton
 	WithFrameRotation(frameRotation float64) *StatusBarButton
 	WithFrameCenterRotation(frameCenterRotation float64) *StatusBarButton
 	WithBoundsRotation(boundsRotation float64) *StatusBarButton
-	WithBounds(bounds corefoundation.CGRect) *StatusBarButton
 	WithCanDrawConcurrently(canDrawConcurrently bool) *StatusBarButton
 	WithNeedsDisplay(needsDisplay bool) *StatusBarButton
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *StatusBarButton
 	WithWantsRestingTouches(wantsRestingTouches bool) *StatusBarButton
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *StatusBarButton
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *StatusBarButton
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *StatusBarButton
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *StatusBarButton
 	WithWantsLayer(wantsLayer bool) *StatusBarButton
-	WithLayer(layer *quartzcore.CALayer) *StatusBarButton
+	WithLayer(layer obj.Object) *StatusBarButton
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *StatusBarButton
 	WithNeedsLayout(needsLayout bool) *StatusBarButton
 	WithAlphaValue(alphaValue float64) *StatusBarButton
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *StatusBarButton
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *StatusBarButton
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *StatusBarButton
-	WithContentFilters(items ...*coreimage.CIFilter) *StatusBarButton
+	WithBackgroundFilters(items ...obj.Object) *StatusBarButton
+	WithCompositingFilter(compositingFilter obj.Object) *StatusBarButton
+	WithContentFilters(items ...obj.Object) *StatusBarButton
 	WithShadow(shadow *Shadow) *StatusBarButton
 	WithClipsToBounds(clipsToBounds bool) *StatusBarButton
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *StatusBarButton
 	WithToolTip(toolTip string) *StatusBarButton
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *StatusBarButton
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *StatusBarButton
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *StatusBarButton
 	WithNextKeyView(nextKeyView ViewProvider) *StatusBarButton
-	WithFocusRingType(focusRingType NSFocusRingType) *StatusBarButton
+	WithFocusRingType(focusRingType FocusRingType) *StatusBarButton
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *StatusBarButton
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *StatusBarButton
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *StatusBarButton
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *StatusBarButton
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *StatusBarButton
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *StatusBarButton
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *StatusBarButton
@@ -941,7 +853,7 @@ type StatusBarButtonable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *StatusBarButton
 	WithNextResponder(nextResponder ResponderProvider) *StatusBarButton
 	WithMenu(menu *Menu) *StatusBarButton
-	WithUserActivity(userActivity *foundation.NSUserActivity) *StatusBarButton
+	WithUserActivity(userActivity obj.Object) *StatusBarButton
 	WithTouchBar(touchBar *TouchBar) *StatusBarButton
 	AppearsDisabled() bool
 	SetAppearsDisabled(appearsDisabled bool)

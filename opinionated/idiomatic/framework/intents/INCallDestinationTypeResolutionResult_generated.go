@@ -5,47 +5,68 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A resolution result for the destination type of a call.
 //
-// CallDestinationTypeResolutionResult wraps [raw.INCallDestinationTypeResolutionResult] with a fluent Go API.
+// CallDestinationTypeResolutionResult is an idiomatic wrapper over the Objective-C class INCallDestinationTypeResolutionResult.
 type CallDestinationTypeResolutionResult struct {
-	inner *raw.INCallDestinationTypeResolutionResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INCallDestinationTypeResolutionResult].
-func (x *CallDestinationTypeResolutionResult) Unwrap() *raw.INCallDestinationTypeResolutionResult {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CallDestinationTypeResolutionResult) ID() objc.ID { return x.inner.Ptr() }
-
-// CallDestinationTypeResolutionResultFromID adopts an existing object pointer as a CallDestinationTypeResolutionResult (nil for 0).
+// CallDestinationTypeResolutionResultFromID adopts an existing Objective-C object as a CallDestinationTypeResolutionResult
+// (nil for 0), retaining it and registering a release finalizer.
 func CallDestinationTypeResolutionResultFromID(id objc.ID) *CallDestinationTypeResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	return &CallDestinationTypeResolutionResult{inner: raw.INCallDestinationTypeResolutionResultFromID(id)}
+	x := &CallDestinationTypeResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCallDestinationTypeResolutionResult creates a new [CallDestinationTypeResolutionResult].
+// callDestinationTypeResolutionResultAdopt wraps an Objective-C object that this code just created as a
+// CallDestinationTypeResolutionResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func callDestinationTypeResolutionResultAdopt(id objc.ID) *CallDestinationTypeResolutionResult {
+	if id == 0 {
+		return nil
+	}
+	x := &CallDestinationTypeResolutionResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CallDestinationTypeResolutionResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CallDestinationTypeResolutionResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CallDestinationTypeResolutionResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCallDestinationTypeResolutionResult creates a new CallDestinationTypeResolutionResult.
 func NewCallDestinationTypeResolutionResult() *CallDestinationTypeResolutionResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INCallDestinationTypeResolutionResult")), objc.RegisterName("new"))
-	return &CallDestinationTypeResolutionResult{inner: raw.INCallDestinationTypeResolutionResultFromID(_id)}
-}
-
-func (x *CallDestinationTypeResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
-	return &x.inner.INIntentResolutionResult
+	_id := objc.Send[objc.ID](objc.ID(_class("INCallDestinationTypeResolutionResult")), objc.RegisterName("new"))
+	return callDestinationTypeResolutionResultAdopt(_id)
 }
 
 // CallDestinationTypeResolutionResultable is the interface implemented by [CallDestinationTypeResolutionResult], for mocking and DI.
 type CallDestinationTypeResolutionResultable interface {
-	Unwrap() *raw.INCallDestinationTypeResolutionResult
+	obj.Object
 }
 
 var _ CallDestinationTypeResolutionResultable = (*CallDestinationTypeResolutionResult)(nil)

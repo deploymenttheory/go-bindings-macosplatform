@@ -5,178 +5,135 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNPoolingAverage wraps [raw.MPSCNNPoolingAverage] with a fluent Go API.
+// CNNPoolingAverage is an idiomatic wrapper over the Objective-C class MPSCNNPoolingAverage.
 type CNNPoolingAverage struct {
-	inner *raw.MPSCNNPoolingAverage
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNPoolingAverage].
-func (x *CNNPoolingAverage) Unwrap() *raw.MPSCNNPoolingAverage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNPoolingAverage) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNPoolingAverageFromID adopts an existing object pointer as a CNNPoolingAverage (nil for 0).
+// CNNPoolingAverageFromID adopts an existing Objective-C object as a CNNPoolingAverage
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNPoolingAverageFromID(id objc.ID) *CNNPoolingAverage {
 	if id == 0 {
 		return nil
 	}
-	return &CNNPoolingAverage{inner: raw.MPSCNNPoolingAverageFromID(id)}
-}
-
-// @abstract   Initialize a MPSCNNPoolingAverage pooling filter @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel.  Can be an odd or even value. @param      kernelHeight        The height of the kernel.  Can be an odd or even value. @param      strideInPixelsX     The output stride (downsampling factor) in the x dimension. @param      strideInPixelsY     The output stride (downsampling factor) in the y dimension. @return     A valid MPSCNNPooling object or nil, if failure.
-//
-// NewCNNPoolingAverageWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY creates a new [CNNPoolingAverage].
-func NewCNNPoolingAverageWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint) *CNNPoolingAverage {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNPoolingAverage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:"), device, kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY)
-	return &CNNPoolingAverage{inner: raw.MPSCNNPoolingAverageFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPooling @param      device      The MTLDevice on which to make the MPSCNNPooling @return     A new MPSCNNPooling object, or nil if failure.
-//
-// NewCNNPoolingAverageWithCoderDevice creates a new [CNNPoolingAverage].
-func NewCNNPoolingAverageWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *CNNPoolingAverage {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNPoolingAverage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &CNNPoolingAverage{inner: raw.MPSCNNPoolingAverageFromID(_id)}
-}
-
-// @property   zeroPadSizeX @abstract   How much zero padding to apply to both left and right borders of the input image for average pooling, when using @see edgeMode MPSImageEdgeModeClamp. For @see edgeMode MPSImageEdgeModeZero this property is ignored and the area outside the image is interpreted to contain zeros. The zero padding size is used to shrink the pooling window to fit inside the area bound by the source image and its padding region, but the effect is that the normalization factor of the average computation is computed also for the zeros in the padding region.
-//
-// WithZeroPadSizeX sets the zeroPadSizeX property and returns the receiver for chaining.
-func (x *CNNPoolingAverage) WithZeroPadSizeX(zeroPadSizeX uint) *CNNPoolingAverage {
-	x.inner.SetZeroPadSizeX(zeroPadSizeX)
+	x := &CNNPoolingAverage{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   zeroPadSizeY @abstract   How much zero padding to apply to both top and bottom borders of the input image for average pooling, when using @see edgeMode MPSImageEdgeModeClamp. For @see edgeMode MPSImageEdgeModeZero this property is ignored and the area outside the image is interpreted to contain zeros. The zero padding size is used to shrink the pooling window to fit inside the area bound by the source image and its padding region, but the effect is that the normalization factor of the average computation is computed also for the zeros in the padding region.
-//
-// WithZeroPadSizeY sets the zeroPadSizeY property and returns the receiver for chaining.
-func (x *CNNPoolingAverage) WithZeroPadSizeY(zeroPadSizeY uint) *CNNPoolingAverage {
-	x.inner.SetZeroPadSizeY(zeroPadSizeY)
+// cNNPoolingAverageAdopt wraps an Objective-C object that this code just created as a
+// CNNPoolingAverage (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNPoolingAverageAdopt(id objc.ID) *CNNPoolingAverage {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNPoolingAverage{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
+// Description returns the object's -description text.
+func (x *CNNPoolingAverage) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNPoolingAverage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNPoolingAverage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNPoolingAverage creates a new CNNPoolingAverage.
+func NewCNNPoolingAverage() *CNNPoolingAverage {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNPoolingAverage")), objc.RegisterName("new"))
+	return cNNPoolingAverageAdopt(_id)
+}
+
+// How much zero padding to apply to both left and right borders of the input image for average pooling, when using
 //
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *CNNPoolingAverage) WithOffset(offset mpscore.MPSOffset) *CNNPoolingAverage {
-	x.inner.MPSCNNPooling.MPSCNNKernel.SetOffset(offset)
+// WithZeroPadSizeX sets zeroPadSizeX and returns the receiver so calls can be chained.
+func (x *CNNPoolingAverage) WithZeroPadSizeX(zeroPadSizeX int) *CNNPoolingAverage {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroPadSizeX:"), zeroPadSizeX)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
+// How much zero padding to apply to both top and bottom borders of the input image for average pooling, when using
 //
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *CNNPoolingAverage) WithClipRect(clipRect metal.MTLRegion) *CNNPoolingAverage {
-	x.inner.MPSCNNPooling.MPSCNNKernel.SetClipRect(clipRect)
+// WithZeroPadSizeY sets zeroPadSizeY and returns the receiver so calls can be chained.
+func (x *CNNPoolingAverage) WithZeroPadSizeY(zeroPadSizeY int) *CNNPoolingAverage {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroPadSizeY:"), zeroPadSizeY)
 	return x
 }
 
-// @property   destinationFeatureChannelOffset @abstract   The number of channels in the destination MPSImage to skip before writing output. @discussion This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+// The number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
 //
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNPoolingAverage) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNPoolingAverage {
-	x.inner.MPSCNNPooling.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *CNNPoolingAverage) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNPoolingAverage {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+// The number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
 //
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNPoolingAverage) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNPoolingAverage {
-	x.inner.MPSCNNPooling.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset sets sourceFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *CNNPoolingAverage) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNPoolingAverage {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+// The maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 //
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *CNNPoolingAverage) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNPoolingAverage {
-	x.inner.MPSCNNPooling.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+// WithSourceFeatureChannelMaxCount sets sourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+func (x *CNNPoolingAverage) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNPoolingAverage {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode Note: For @ref MPSCNNPoolingAverage specifying edge mode @ref MPSImageEdgeModeClamp is interpreted as a "shrink-to-edge" operation, which shrinks the effective filtering window to remain within the source image borders.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *CNNPoolingAverage) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNPoolingAverage {
-	x.inner.MPSCNNPooling.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
+// How much zero padding to apply to both left and right borders of the input image for average pooling, when using
+func (x *CNNPoolingAverage) ZeroPadSizeX() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("zeroPadSizeX"))
+	return _r
 }
 
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *CNNPoolingAverage) WithPadding(padding raw.MPSNNPadding) *CNNPoolingAverage {
-	x.inner.MPSCNNPooling.MPSCNNKernel.SetPadding(padding)
-	return x
+func (x *CNNPoolingAverage) SetZeroPadSizeX(zeroPadSizeX int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroPadSizeX:"), zeroPadSizeX)
 }
 
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *CNNPoolingAverage) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNPoolingAverage {
-	x.inner.MPSCNNPooling.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
+// How much zero padding to apply to both top and bottom borders of the input image for average pooling, when using
+func (x *CNNPoolingAverage) ZeroPadSizeY() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("zeroPadSizeY"))
+	return _r
 }
 
-// @property   zeroPadSizeX @abstract   How much zero padding to apply to both left and right borders of the input image for average pooling, when using @see edgeMode MPSImageEdgeModeClamp. For @see edgeMode MPSImageEdgeModeZero this property is ignored and the area outside the image is interpreted to contain zeros. The zero padding size is used to shrink the pooling window to fit inside the area bound by the source image and its padding region, but the effect is that the normalization factor of the average computation is computed also for the zeros in the padding region.
-//
-// ZeroPadSizeX calls the underlying ZeroPadSizeX.
-func (x *CNNPoolingAverage) ZeroPadSizeX() uint {
-	return x.inner.ZeroPadSizeX()
-}
-
-// SetZeroPadSizeX calls the underlying SetZeroPadSizeX.
-func (x *CNNPoolingAverage) SetZeroPadSizeX(zeroPadSizeX uint) {
-	x.inner.SetZeroPadSizeX(zeroPadSizeX)
-}
-
-// @property   zeroPadSizeY @abstract   How much zero padding to apply to both top and bottom borders of the input image for average pooling, when using @see edgeMode MPSImageEdgeModeClamp. For @see edgeMode MPSImageEdgeModeZero this property is ignored and the area outside the image is interpreted to contain zeros. The zero padding size is used to shrink the pooling window to fit inside the area bound by the source image and its padding region, but the effect is that the normalization factor of the average computation is computed also for the zeros in the padding region.
-//
-// ZeroPadSizeY calls the underlying ZeroPadSizeY.
-func (x *CNNPoolingAverage) ZeroPadSizeY() uint {
-	return x.inner.ZeroPadSizeY()
-}
-
-// SetZeroPadSizeY calls the underlying SetZeroPadSizeY.
-func (x *CNNPoolingAverage) SetZeroPadSizeY(zeroPadSizeY uint) {
-	x.inner.SetZeroPadSizeY(zeroPadSizeY)
-}
-
-func (x *CNNPoolingAverage) asCNNPooling() *raw.MPSCNNPooling { return &x.inner.MPSCNNPooling }
-
-func (x *CNNPoolingAverage) asCNNKernel() *raw.MPSCNNKernel {
-	return &x.inner.MPSCNNPooling.MPSCNNKernel
+func (x *CNNPoolingAverage) SetZeroPadSizeY(zeroPadSizeY int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroPadSizeY:"), zeroPadSizeY)
 }
 
 // CNNPoolingAverageable is the interface implemented by [CNNPoolingAverage], for mocking and DI.
 type CNNPoolingAverageable interface {
-	Unwrap() *raw.MPSCNNPoolingAverage
-	WithZeroPadSizeX(zeroPadSizeX uint) *CNNPoolingAverage
-	WithZeroPadSizeY(zeroPadSizeY uint) *CNNPoolingAverage
-	WithOffset(offset mpscore.MPSOffset) *CNNPoolingAverage
-	WithClipRect(clipRect metal.MTLRegion) *CNNPoolingAverage
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNPoolingAverage
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNPoolingAverage
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNPoolingAverage
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNPoolingAverage
-	WithPadding(padding raw.MPSNNPadding) *CNNPoolingAverage
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNPoolingAverage
-	ZeroPadSizeX() uint
-	SetZeroPadSizeX(zeroPadSizeX uint)
-	ZeroPadSizeY() uint
-	SetZeroPadSizeY(zeroPadSizeY uint)
+	obj.Object
+	WithZeroPadSizeX(zeroPadSizeX int) *CNNPoolingAverage
+	WithZeroPadSizeY(zeroPadSizeY int) *CNNPoolingAverage
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNPoolingAverage
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNPoolingAverage
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNPoolingAverage
+	ZeroPadSizeX() int
+	SetZeroPadSizeX(zeroPadSizeX int)
+	ZeroPadSizeY() int
+	SetZeroPadSizeY(zeroPadSizeY int)
 }
 
 var _ CNNPoolingAverageable = (*CNNPoolingAverage)(nil)

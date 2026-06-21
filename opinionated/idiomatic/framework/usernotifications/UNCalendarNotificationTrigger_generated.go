@@ -5,60 +5,81 @@
 package usernotifications
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A trigger condition that causes a notification the system delivers at a specific date and time.
 //
-// CalendarNotificationTrigger wraps [raw.UNCalendarNotificationTrigger] with a fluent Go API.
+// CalendarNotificationTrigger is an idiomatic wrapper over the Objective-C class UNCalendarNotificationTrigger.
 type CalendarNotificationTrigger struct {
-	inner *raw.UNCalendarNotificationTrigger
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.UNCalendarNotificationTrigger].
-func (x *CalendarNotificationTrigger) Unwrap() *raw.UNCalendarNotificationTrigger { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CalendarNotificationTrigger) ID() objc.ID { return x.inner.Ptr() }
-
-// CalendarNotificationTriggerFromID adopts an existing object pointer as a CalendarNotificationTrigger (nil for 0).
+// CalendarNotificationTriggerFromID adopts an existing Objective-C object as a CalendarNotificationTrigger
+// (nil for 0), retaining it and registering a release finalizer.
 func CalendarNotificationTriggerFromID(id objc.ID) *CalendarNotificationTrigger {
 	if id == 0 {
 		return nil
 	}
-	return &CalendarNotificationTrigger{inner: raw.UNCalendarNotificationTriggerFromID(id)}
+	x := &CalendarNotificationTrigger{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCalendarNotificationTrigger creates a new [CalendarNotificationTrigger].
+// calendarNotificationTriggerAdopt wraps an Objective-C object that this code just created as a
+// CalendarNotificationTrigger (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func calendarNotificationTriggerAdopt(id objc.ID) *CalendarNotificationTrigger {
+	if id == 0 {
+		return nil
+	}
+	x := &CalendarNotificationTrigger{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CalendarNotificationTrigger) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CalendarNotificationTrigger) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CalendarNotificationTrigger) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCalendarNotificationTrigger creates a new CalendarNotificationTrigger.
 func NewCalendarNotificationTrigger() *CalendarNotificationTrigger {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNCalendarNotificationTrigger")), objc.RegisterName("new"))
-	return &CalendarNotificationTrigger{inner: raw.UNCalendarNotificationTriggerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("UNCalendarNotificationTrigger")), objc.RegisterName("new"))
+	return calendarNotificationTriggerAdopt(_id)
 }
 
 // The next date at which the trigger conditions are met.
-//
-// NextTriggerDate calls the underlying NextTriggerDate.
-func (x *CalendarNotificationTrigger) NextTriggerDate() *foundation.NSDate {
-	return x.inner.NextTriggerDate()
+func (x *CalendarNotificationTrigger) NextTriggerDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextTriggerDate"))
+	return obj.Wrap(_r)
 }
 
-// DateComponents calls the underlying DateComponents.
-func (x *CalendarNotificationTrigger) DateComponents() *foundation.NSDateComponents {
-	return x.inner.DateComponents()
-}
-
-func (x *CalendarNotificationTrigger) asNotificationTrigger() *raw.UNNotificationTrigger {
-	return &x.inner.UNNotificationTrigger
+func (x *CalendarNotificationTrigger) DateComponents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateComponents"))
+	return obj.Wrap(_r)
 }
 
 // CalendarNotificationTriggerable is the interface implemented by [CalendarNotificationTrigger], for mocking and DI.
 type CalendarNotificationTriggerable interface {
-	Unwrap() *raw.UNCalendarNotificationTrigger
-	NextTriggerDate() *foundation.NSDate
-	DateComponents() *foundation.NSDateComponents
+	obj.Object
+	NextTriggerDate() obj.Object
+	DateComponents() obj.Object
 }
 
 var _ CalendarNotificationTriggerable = (*CalendarNotificationTrigger)(nil)

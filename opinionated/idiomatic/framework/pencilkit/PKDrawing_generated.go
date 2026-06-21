@@ -5,148 +5,129 @@
 package pencilkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // A structure representing the drawing information captured by a canvas view.
 //
-// Drawing wraps [raw.PKDrawing] with a fluent Go API.
+// Drawing is an idiomatic wrapper over the Objective-C class PKDrawing.
 type Drawing struct {
-	inner *raw.PKDrawing
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKDrawing].
-func (x *Drawing) Unwrap() *raw.PKDrawing { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Drawing) ID() objc.ID { return x.inner.Ptr() }
-
-// DrawingFromID adopts an existing object pointer as a Drawing (nil for 0).
+// DrawingFromID adopts an existing Objective-C object as a Drawing
+// (nil for 0), retaining it and registering a release finalizer.
 func DrawingFromID(id objc.ID) *Drawing {
 	if id == 0 {
 		return nil
 	}
-	return &Drawing{inner: raw.PKDrawingFromID(id)}
+	x := &Drawing{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDrawing creates a new [Drawing].
+// drawingAdopt wraps an Objective-C object that this code just created as a
+// Drawing (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func drawingAdopt(id objc.ID) *Drawing {
+	if id == 0 {
+		return nil
+	}
+	x := &Drawing{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Drawing) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Drawing) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Drawing) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDrawing creates a new Drawing.
 func NewDrawing() *Drawing {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKDrawing")), objc.RegisterName("new"))
-	return &Drawing{inner: raw.PKDrawingFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKDrawing")), objc.RegisterName("new"))
+	return drawingAdopt(_id)
 }
 
 // Initializes a drawing with an array of strokes.
 //
-// NewDrawingWithStrokes creates a new [Drawing].
-func NewDrawingWithStrokes(strokes *foundation.NSArray[*raw.PKStroke]) *Drawing {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKDrawing")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStrokes:"), strokes.Ptr())
-	return &Drawing{inner: raw.PKDrawingFromID(_id)}
+// NewDrawingWithStrokes creates a new Drawing.
+func NewDrawingWithStrokes(strokes []*Stroke) *Drawing {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKDrawing")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStrokes:"), purego.SliceToNSArray(strokes, func(_v *Stroke) objc.ID { return objref.IDOf(_v) }))
+	return drawingAdopt(_id)
 }
 
-// Initializes and returns the drawing with the specified data. @param data The data containing the drawing data. @param error If an error occurs, upon return the NSError object describes the error. Set to NULL to ignore errors. @return On success, an initialized PKDrawing object. If nil, the outError parameter contains an NSError instance describing the problem.
+// Initializes and returns the drawing with the specified data.
 //
-// NewDrawingWithDataError creates a new [Drawing].
-func NewDrawingWithDataError(data *foundation.NSData) (*Drawing, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKDrawing")), objc.RegisterName("alloc"))
+// NewDrawingWithDataError creates a new Drawing.
+func NewDrawingWithDataError(data obj.Object) (*Drawing, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKDrawing")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:error:"), data.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Drawing{inner: raw.PKDrawingFromID(_id)}, nil
+	return drawingAdopt(_id), nil
 }
 
-// Generate a data representation of the drawing. @return A NSData object containing a representation of the drawing.
-//
-// DataRepresentation calls the underlying DataRepresentation.
-func (x *Drawing) DataRepresentation() *foundation.NSData {
-	return x.inner.DataRepresentation()
+// Generate a data representation of the drawing.
+func (x *Drawing) DataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
+	return obj.Wrap(_r)
 }
 
-// ImageFromRectScale calls the underlying ImageFromRectScale.
-func (x *Drawing) ImageFromRectScale(rect corefoundation.CGRect, scale float64) *appkit.NSImage {
-	return x.inner.ImageFromRectScale(rect, scale)
+// Returns a new drawing by appending the contents of `drawing` on top of the receiver’s contents.
+func (x *Drawing) DrawingByAppendingDrawing(drawing *Drawing) *Drawing {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawingByAppendingDrawing:"), objref.IDOf(drawing))
+	return DrawingFromID(_r)
 }
 
-// Returns a new drawing with `transform` applied. @param transform The transform to apply to this drawing. @return A new copy of this drawing with `transform` applied.
-//
-// DrawingByApplyingTransform calls the underlying DrawingByApplyingTransform.
-func (x *Drawing) DrawingByApplyingTransform(transform corefoundation.CGAffineTransform) *Drawing {
-	_r := x.inner.DrawingByApplyingTransform(transform)
-	if _r == nil {
-		return nil
-	}
-	return &Drawing{inner: _r}
-}
-
-// Returns a new drawing by appending the contents of `drawing` on top of the receiver’s contents. @param drawing The drawing to append. @return A new copy of this drawing with `drawing` appended onto it.
-//
-// DrawingByAppendingDrawing calls the underlying DrawingByAppendingDrawing.
-func (x *Drawing) DrawingByAppendingDrawing(drawing *raw.PKDrawing) *Drawing {
-	_r := x.inner.DrawingByAppendingDrawing(drawing)
-	if _r == nil {
-		return nil
-	}
-	return &Drawing{inner: _r}
-}
-
-// Create a new drawing by appending an array of strokes to this drawing. This is a convenience method, to quickly add strokes to a drawing. @param strokes The strokes to append. @return A new copy of this drawing with `strokes` appended onto it.
-//
-// DrawingByAppendingStrokes calls the underlying DrawingByAppendingStrokes.
-func (x *Drawing) DrawingByAppendingStrokes(strokes *foundation.NSArray[*raw.PKStroke]) *Drawing {
-	_r := x.inner.DrawingByAppendingStrokes(strokes)
-	if _r == nil {
-		return nil
-	}
-	return &Drawing{inner: _r}
+// Create a new drawing by appending an array of strokes to this drawing. This is a convenience method, to quickly add strokes to a drawing.
+func (x *Drawing) DrawingByAppendingStrokes(strokes []*Stroke) *Drawing {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawingByAppendingStrokes:"), purego.SliceToNSArray(strokes, func(_v *Stroke) objc.ID { return objref.IDOf(_v) }))
+	return DrawingFromID(_r)
 }
 
 // The strokes that this drawing contains.
 //
 // Strokes returns the collection as a Go slice.
 func (x *Drawing) Strokes() []*Stroke {
-	arr := x.inner.Strokes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Stroke {
-		return &Stroke{inner: raw.PKStrokeFromID(purego.Retain(_id))}
-	})
-}
-
-// The bounds of the drawing's contents, taking into account the rendered width of all content. If these bounds are used to render an image with `imageFromRect:scale:`, no contents will be cropped.
-//
-// Bounds calls the underlying Bounds.
-func (x *Drawing) Bounds() corefoundation.CGRect {
-	return x.inner.Bounds()
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("strokes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Stroke { return StrokeFromID(_id) })
 }
 
 // The PencilKit version required to use this drawing.
-//
-// RequiredContentVersion calls the underlying RequiredContentVersion.
-func (x *Drawing) RequiredContentVersion() PKContentVersion {
-	return PKContentVersion(x.inner.RequiredContentVersion())
+func (x *Drawing) RequiredContentVersion() ContentVersion {
+	_r := objc.Send[ContentVersion](objref.IDOf(x), objc.RegisterName("requiredContentVersion"))
+	return _r
 }
 
 // Drawingable is the interface implemented by [Drawing], for mocking and DI.
 type Drawingable interface {
-	Unwrap() *raw.PKDrawing
-	DataRepresentation() *foundation.NSData
-	ImageFromRectScale(rect corefoundation.CGRect, scale float64) *appkit.NSImage
-	DrawingByApplyingTransform(transform corefoundation.CGAffineTransform) *Drawing
-	DrawingByAppendingDrawing(drawing *raw.PKDrawing) *Drawing
-	DrawingByAppendingStrokes(strokes *foundation.NSArray[*raw.PKStroke]) *Drawing
+	obj.Object
+	DataRepresentation() obj.Object
+	DrawingByAppendingDrawing(drawing *Drawing) *Drawing
+	DrawingByAppendingStrokes(strokes []*Stroke) *Drawing
 	Strokes() []*Stroke
-	Bounds() corefoundation.CGRect
-	RequiredContentVersion() PKContentVersion
+	RequiredContentVersion() ContentVersion
 }
 
 var _ Drawingable = (*Drawing)(nil)

@@ -5,62 +5,83 @@
 package corelocation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides device location updates.
 //
-// LocationUpdater wraps [raw.CLLocationUpdater] with a fluent Go API.
+// LocationUpdater is an idiomatic wrapper over the Objective-C class CLLocationUpdater.
 type LocationUpdater struct {
-	inner *raw.CLLocationUpdater
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLLocationUpdater].
-func (x *LocationUpdater) Unwrap() *raw.CLLocationUpdater { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LocationUpdater) ID() objc.ID { return x.inner.Ptr() }
-
-// LocationUpdaterFromID adopts an existing object pointer as a LocationUpdater (nil for 0).
+// LocationUpdaterFromID adopts an existing Objective-C object as a LocationUpdater
+// (nil for 0), retaining it and registering a release finalizer.
 func LocationUpdaterFromID(id objc.ID) *LocationUpdater {
 	if id == 0 {
 		return nil
 	}
-	return &LocationUpdater{inner: raw.CLLocationUpdaterFromID(id)}
+	x := &LocationUpdater{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLocationUpdater creates a new [LocationUpdater].
+// locationUpdaterAdopt wraps an Objective-C object that this code just created as a
+// LocationUpdater (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func locationUpdaterAdopt(id objc.ID) *LocationUpdater {
+	if id == 0 {
+		return nil
+	}
+	x := &LocationUpdater{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LocationUpdater) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LocationUpdater) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LocationUpdater) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLocationUpdater creates a new LocationUpdater.
 func NewLocationUpdater() *LocationUpdater {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLLocationUpdater")), objc.RegisterName("new"))
-	return &LocationUpdater{inner: raw.CLLocationUpdaterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CLLocationUpdater")), objc.RegisterName("new"))
+	return locationUpdaterAdopt(_id)
 }
 
 // Resumes the updater.
-//
-// Resume calls the underlying Resume.
 func (x *LocationUpdater) Resume() {
-	x.inner.Resume()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resume"))
 }
 
 // Pauses the updater.
-//
-// Pause calls the underlying Pause.
 func (x *LocationUpdater) Pause() {
-	x.inner.Pause()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause"))
 }
 
 // Invalidates the updater.
-//
-// Invalidate calls the underlying Invalidate.
 func (x *LocationUpdater) Invalidate() {
-	x.inner.Invalidate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
 // LocationUpdaterable is the interface implemented by [LocationUpdater], for mocking and DI.
 type LocationUpdaterable interface {
-	Unwrap() *raw.CLLocationUpdater
+	obj.Object
 	Resume()
 	Pause()
 	Invalidate()

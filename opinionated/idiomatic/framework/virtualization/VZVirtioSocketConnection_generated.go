@@ -5,69 +5,91 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A port-based connection between the guest operating system and the host computer.
 //
-// VirtioSocketConnection wraps [raw.VZVirtioSocketConnection] with a fluent Go API.
+// VirtioSocketConnection is an idiomatic wrapper over the Objective-C class VZVirtioSocketConnection.
 type VirtioSocketConnection struct {
-	inner *raw.VZVirtioSocketConnection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZVirtioSocketConnection].
-func (x *VirtioSocketConnection) Unwrap() *raw.VZVirtioSocketConnection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioSocketConnection) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioSocketConnectionFromID adopts an existing object pointer as a VirtioSocketConnection (nil for 0).
+// VirtioSocketConnectionFromID adopts an existing Objective-C object as a VirtioSocketConnection
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioSocketConnectionFromID(id objc.ID) *VirtioSocketConnection {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioSocketConnection{inner: raw.VZVirtioSocketConnectionFromID(id)}
+	x := &VirtioSocketConnection{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVirtioSocketConnection creates a new [VirtioSocketConnection].
+// virtioSocketConnectionAdopt wraps an Objective-C object that this code just created as a
+// VirtioSocketConnection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioSocketConnectionAdopt(id objc.ID) *VirtioSocketConnection {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtioSocketConnection{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VirtioSocketConnection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VirtioSocketConnection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VirtioSocketConnection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVirtioSocketConnection creates a new VirtioSocketConnection.
 func NewVirtioSocketConnection() *VirtioSocketConnection {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioSocketConnection")), objc.RegisterName("new"))
-	return &VirtioSocketConnection{inner: raw.VZVirtioSocketConnectionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioSocketConnection")), objc.RegisterName("new"))
+	return virtioSocketConnectionAdopt(_id)
 }
 
 // Close the file descriptor associated with the socket.
-//
-// Close calls the underlying Close.
 func (x *VirtioSocketConnection) Close() {
-	x.inner.Close()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }
 
-// @abstract The destination port number of the connection.
-//
-// DestinationPort calls the underlying DestinationPort.
+// The destination port number of the connection.
 func (x *VirtioSocketConnection) DestinationPort() uint32 {
-	return x.inner.DestinationPort()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("destinationPort"))
+	return _r
 }
 
-// @abstract The source port number of the connection.
-//
-// SourcePort calls the underlying SourcePort.
+// The source port number of the connection.
 func (x *VirtioSocketConnection) SourcePort() uint32 {
-	return x.inner.SourcePort()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("sourcePort"))
+	return _r
 }
 
-// @abstract The file descriptor associated with the socket. @discussion Data is sent by writing to the file descriptor. Data is received by reading from the file descriptor. A file descriptor of -1 indicates a closed connection. The file descriptor is owned by the VZVirtioSocketConnection. It is automatically closed when the object is destroyed.
-//
-// FileDescriptor calls the underlying FileDescriptor.
+// The file descriptor associated with the socket. Data is sent by writing to the file descriptor. Data is received by reading from the file descriptor. A file descriptor of -1 indicates a closed connection. The file descriptor is owned by the VZVirtioSocketConnection. It is automatically closed when the object is destroyed.
 func (x *VirtioSocketConnection) FileDescriptor() int {
-	return x.inner.FileDescriptor()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fileDescriptor"))
+	return _r
 }
 
 // VirtioSocketConnectionable is the interface implemented by [VirtioSocketConnection], for mocking and DI.
 type VirtioSocketConnectionable interface {
-	Unwrap() *raw.VZVirtioSocketConnection
+	obj.Object
 	Close()
 	DestinationPort() uint32
 	SourcePort() uint32

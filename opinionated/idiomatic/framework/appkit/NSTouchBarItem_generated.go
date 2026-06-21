@@ -5,120 +5,128 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A UI control shown in the Touch Bar on supported models of MacBook Pro.
 //
-// TouchBarItem wraps [raw.NSTouchBarItem] with a fluent Go API.
+// TouchBarItem is an idiomatic wrapper over the Objective-C class NSTouchBarItem.
 type TouchBarItem struct {
-	inner *raw.NSTouchBarItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTouchBarItem].
-func (x *TouchBarItem) Unwrap() *raw.NSTouchBarItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TouchBarItem) ID() objc.ID { return x.inner.Ptr() }
-
-// TouchBarItemFromID adopts an existing object pointer as a TouchBarItem (nil for 0).
+// TouchBarItemFromID adopts an existing Objective-C object as a TouchBarItem
+// (nil for 0), retaining it and registering a release finalizer.
 func TouchBarItemFromID(id objc.ID) *TouchBarItem {
 	if id == 0 {
 		return nil
 	}
-	return &TouchBarItem{inner: raw.NSTouchBarItemFromID(id)}
+	x := &TouchBarItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// touchBarItemAdopt wraps an Objective-C object that this code just created as a
+// TouchBarItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func touchBarItemAdopt(id objc.ID) *TouchBarItem {
+	if id == 0 {
+		return nil
+	}
+	x := &TouchBarItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TouchBarItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TouchBarItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TouchBarItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new item with the specified identifier.
 //
-// NewTouchBarItemWithIdentifier creates a new [TouchBarItem].
-func NewTouchBarItemWithIdentifier(identifier *foundation.NSString) *TouchBarItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTouchBarItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), identifier.Ptr())
-	return &TouchBarItem{inner: raw.NSTouchBarItemFromID(_id)}
+// NewTouchBarItemWithIdentifier creates a new TouchBarItem.
+func NewTouchBarItemWithIdentifier(identifier obj.Object) *TouchBarItem {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTouchBarItem")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), objref.IDOf(identifier))
+	return touchBarItemAdopt(_id)
 }
 
 // Initializes and returns a new item from a storyboard or nib file.
 //
-// NewTouchBarItemWithCoder creates a new [TouchBarItem].
-func NewTouchBarItemWithCoder(coder *foundation.NSCoder) *TouchBarItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTouchBarItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &TouchBarItem{inner: raw.NSTouchBarItemFromID(_id)}
+// NewTouchBarItemWithCoder creates a new TouchBarItem.
+func NewTouchBarItemWithCoder(coder obj.Object) *TouchBarItem {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTouchBarItem")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return touchBarItemAdopt(_id)
 }
 
 // Determines which items are shown in a bar when space is limited.
 //
-// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+// WithVisibilityPriority sets visibilityPriority and returns the receiver so calls can be chained.
 func (x *TouchBarItem) WithVisibilityPriority(visibilityPriority float32) *TouchBarItem {
-	x.inner.SetVisibilityPriority(visibilityPriority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
 	return x
 }
 
-// Identifier calls the underlying Identifier.
-func (x *TouchBarItem) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *TouchBarItem) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	return obj.Wrap(_r)
 }
 
-// VisibilityPriority calls the underlying VisibilityPriority.
 func (x *TouchBarItem) VisibilityPriority() float32 {
-	return x.inner.VisibilityPriority()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("visibilityPriority"))
+	return _r
 }
 
-// SetVisibilityPriority calls the underlying SetVisibilityPriority.
 func (x *TouchBarItem) SetVisibilityPriority(visibilityPriority float32) {
-	x.inner.SetVisibilityPriority(visibilityPriority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
 }
 
-// View calls the underlying View.
 func (x *TouchBarItem) View() *View {
-	_r := x.inner.View()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+	return ViewFromID(_r)
 }
 
-// ViewController calls the underlying ViewController.
 func (x *TouchBarItem) ViewController() *ViewController {
-	_r := x.inner.ViewController()
-	if _r == nil {
-		return nil
-	}
-	return &ViewController{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewController"))
+	return ViewControllerFromID(_r)
 }
 
 // The user visible string identifying this item during customization. By default this method returns the empty string.
-//
-// CustomizationLabel calls the underlying CustomizationLabel.
 func (x *TouchBarItem) CustomizationLabel() string {
-	_r := x.inner.CustomizationLabel()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customizationLabel"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// IsVisible calls the underlying IsVisible.
 func (x *TouchBarItem) IsVisible() bool {
-	return x.inner.IsVisible()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVisible"))
+	return _r
 }
-
-func (x *TouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return x.inner }
 
 // TouchBarItemable is the interface implemented by [TouchBarItem], for mocking and DI.
 type TouchBarItemable interface {
-	Unwrap() *raw.NSTouchBarItem
+	obj.Object
 	WithVisibilityPriority(visibilityPriority float32) *TouchBarItem
-	Identifier() string
+	Identifier() obj.Object
 	VisibilityPriority() float32
 	SetVisibilityPriority(visibilityPriority float32)
 	View() *View

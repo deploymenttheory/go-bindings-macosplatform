@@ -5,183 +5,198 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRICDManagementClusterRegisterClientParams wraps [raw.MTRICDManagementClusterRegisterClientParams] with a fluent Go API.
+// MTRICDManagementClusterRegisterClientParams is an idiomatic wrapper over the Objective-C class MTRICDManagementClusterRegisterClientParams.
 type MTRICDManagementClusterRegisterClientParams struct {
-	inner *raw.MTRICDManagementClusterRegisterClientParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRICDManagementClusterRegisterClientParams].
-func (x *MTRICDManagementClusterRegisterClientParams) Unwrap() *raw.MTRICDManagementClusterRegisterClientParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRICDManagementClusterRegisterClientParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRICDManagementClusterRegisterClientParamsFromID adopts an existing object pointer as a MTRICDManagementClusterRegisterClientParams (nil for 0).
+// MTRICDManagementClusterRegisterClientParamsFromID adopts an existing Objective-C object as a MTRICDManagementClusterRegisterClientParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRICDManagementClusterRegisterClientParamsFromID(id objc.ID) *MTRICDManagementClusterRegisterClientParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRICDManagementClusterRegisterClientParams{inner: raw.MTRICDManagementClusterRegisterClientParamsFromID(id)}
+	x := &MTRICDManagementClusterRegisterClientParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRICDManagementClusterRegisterClientParams creates a new [MTRICDManagementClusterRegisterClientParams].
+// mTRICDManagementClusterRegisterClientParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRICDManagementClusterRegisterClientParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRICDManagementClusterRegisterClientParamsAdopt(id objc.ID) *MTRICDManagementClusterRegisterClientParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRICDManagementClusterRegisterClientParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRICDManagementClusterRegisterClientParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRICDManagementClusterRegisterClientParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRICDManagementClusterRegisterClientParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRICDManagementClusterRegisterClientParams creates a new MTRICDManagementClusterRegisterClientParams.
 func NewMTRICDManagementClusterRegisterClientParams() *MTRICDManagementClusterRegisterClientParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRICDManagementClusterRegisterClientParams")), objc.RegisterName("new"))
-	return &MTRICDManagementClusterRegisterClientParams{inner: raw.MTRICDManagementClusterRegisterClientParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRICDManagementClusterRegisterClientParams")), objc.RegisterName("new"))
+	return mTRICDManagementClusterRegisterClientParamsAdopt(_id)
 }
 
-// WithCheckInNodeID sets the checkInNodeID property and returns the receiver for chaining.
-func (x *MTRICDManagementClusterRegisterClientParams) WithCheckInNodeID(checkInNodeID *foundation.NSNumber) *MTRICDManagementClusterRegisterClientParams {
-	x.inner.SetCheckInNodeID(checkInNodeID)
+// WithCheckInNodeID sets checkInNodeID and returns the receiver so calls can be chained.
+func (x *MTRICDManagementClusterRegisterClientParams) WithCheckInNodeID(checkInNodeID obj.Object) *MTRICDManagementClusterRegisterClientParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCheckInNodeID:"), objref.IDOf(checkInNodeID))
 	return x
 }
 
-// WithMonitoredSubject sets the monitoredSubject property and returns the receiver for chaining.
-func (x *MTRICDManagementClusterRegisterClientParams) WithMonitoredSubject(monitoredSubject *foundation.NSNumber) *MTRICDManagementClusterRegisterClientParams {
-	x.inner.SetMonitoredSubject(monitoredSubject)
+// WithMonitoredSubject sets monitoredSubject and returns the receiver so calls can be chained.
+func (x *MTRICDManagementClusterRegisterClientParams) WithMonitoredSubject(monitoredSubject obj.Object) *MTRICDManagementClusterRegisterClientParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMonitoredSubject:"), objref.IDOf(monitoredSubject))
 	return x
 }
 
-// WithKey sets the key property and returns the receiver for chaining.
-func (x *MTRICDManagementClusterRegisterClientParams) WithKey(key *foundation.NSData) *MTRICDManagementClusterRegisterClientParams {
-	x.inner.SetKey(key)
+// WithKey sets key and returns the receiver so calls can be chained.
+func (x *MTRICDManagementClusterRegisterClientParams) WithKey(key obj.Object) *MTRICDManagementClusterRegisterClientParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return x
 }
 
-// WithVerificationKey sets the verificationKey property and returns the receiver for chaining.
-func (x *MTRICDManagementClusterRegisterClientParams) WithVerificationKey(verificationKey *foundation.NSData) *MTRICDManagementClusterRegisterClientParams {
-	x.inner.SetVerificationKey(verificationKey)
+// WithVerificationKey sets verificationKey and returns the receiver so calls can be chained.
+func (x *MTRICDManagementClusterRegisterClientParams) WithVerificationKey(verificationKey obj.Object) *MTRICDManagementClusterRegisterClientParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerificationKey:"), objref.IDOf(verificationKey))
 	return x
 }
 
-// WithClientType sets the clientType property and returns the receiver for chaining.
-func (x *MTRICDManagementClusterRegisterClientParams) WithClientType(clientType *foundation.NSNumber) *MTRICDManagementClusterRegisterClientParams {
-	x.inner.SetClientType(clientType)
+// WithClientType sets clientType and returns the receiver so calls can be chained.
+func (x *MTRICDManagementClusterRegisterClientParams) WithClientType(clientType obj.Object) *MTRICDManagementClusterRegisterClientParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClientType:"), objref.IDOf(clientType))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke).
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRICDManagementClusterRegisterClientParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRICDManagementClusterRegisterClientParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRICDManagementClusterRegisterClientParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRICDManagementClusterRegisterClientParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRICDManagementClusterRegisterClientParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRICDManagementClusterRegisterClientParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRICDManagementClusterRegisterClientParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRICDManagementClusterRegisterClientParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// CheckInNodeID calls the underlying CheckInNodeID.
-func (x *MTRICDManagementClusterRegisterClientParams) CheckInNodeID() *foundation.NSNumber {
-	return x.inner.CheckInNodeID()
+func (x *MTRICDManagementClusterRegisterClientParams) CheckInNodeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkInNodeID"))
+	return obj.Wrap(_r)
 }
 
-// SetCheckInNodeID calls the underlying SetCheckInNodeID.
-func (x *MTRICDManagementClusterRegisterClientParams) SetCheckInNodeID(checkInNodeID *foundation.NSNumber) {
-	x.inner.SetCheckInNodeID(checkInNodeID)
+func (x *MTRICDManagementClusterRegisterClientParams) SetCheckInNodeID(checkInNodeID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCheckInNodeID:"), objref.IDOf(checkInNodeID))
 }
 
-// MonitoredSubject calls the underlying MonitoredSubject.
-func (x *MTRICDManagementClusterRegisterClientParams) MonitoredSubject() *foundation.NSNumber {
-	return x.inner.MonitoredSubject()
+func (x *MTRICDManagementClusterRegisterClientParams) MonitoredSubject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("monitoredSubject"))
+	return obj.Wrap(_r)
 }
 
-// SetMonitoredSubject calls the underlying SetMonitoredSubject.
-func (x *MTRICDManagementClusterRegisterClientParams) SetMonitoredSubject(monitoredSubject *foundation.NSNumber) {
-	x.inner.SetMonitoredSubject(monitoredSubject)
+func (x *MTRICDManagementClusterRegisterClientParams) SetMonitoredSubject(monitoredSubject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMonitoredSubject:"), objref.IDOf(monitoredSubject))
 }
 
-// Key calls the underlying Key.
-func (x *MTRICDManagementClusterRegisterClientParams) Key() *foundation.NSData {
-	return x.inner.Key()
+func (x *MTRICDManagementClusterRegisterClientParams) Key() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
+	return obj.Wrap(_r)
 }
 
-// SetKey calls the underlying SetKey.
-func (x *MTRICDManagementClusterRegisterClientParams) SetKey(key *foundation.NSData) {
-	x.inner.SetKey(key)
+func (x *MTRICDManagementClusterRegisterClientParams) SetKey(key obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
 }
 
-// VerificationKey calls the underlying VerificationKey.
-func (x *MTRICDManagementClusterRegisterClientParams) VerificationKey() *foundation.NSData {
-	return x.inner.VerificationKey()
+func (x *MTRICDManagementClusterRegisterClientParams) VerificationKey() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("verificationKey"))
+	return obj.Wrap(_r)
 }
 
-// SetVerificationKey calls the underlying SetVerificationKey.
-func (x *MTRICDManagementClusterRegisterClientParams) SetVerificationKey(verificationKey *foundation.NSData) {
-	x.inner.SetVerificationKey(verificationKey)
+func (x *MTRICDManagementClusterRegisterClientParams) SetVerificationKey(verificationKey obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerificationKey:"), objref.IDOf(verificationKey))
 }
 
-// ClientType calls the underlying ClientType.
-func (x *MTRICDManagementClusterRegisterClientParams) ClientType() *foundation.NSNumber {
-	return x.inner.ClientType()
+func (x *MTRICDManagementClusterRegisterClientParams) ClientType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientType"))
+	return obj.Wrap(_r)
 }
 
-// SetClientType calls the underlying SetClientType.
-func (x *MTRICDManagementClusterRegisterClientParams) SetClientType(clientType *foundation.NSNumber) {
-	x.inner.SetClientType(clientType)
+func (x *MTRICDManagementClusterRegisterClientParams) SetClientType(clientType obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClientType:"), objref.IDOf(clientType))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRICDManagementClusterRegisterClientParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRICDManagementClusterRegisterClientParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRICDManagementClusterRegisterClientParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRICDManagementClusterRegisterClientParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRICDManagementClusterRegisterClientParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRICDManagementClusterRegisterClientParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRICDManagementClusterRegisterClientParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRICDManagementClusterRegisterClientParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRICDManagementClusterRegisterClientParamsable is the interface implemented by [MTRICDManagementClusterRegisterClientParams], for mocking and DI.
 type MTRICDManagementClusterRegisterClientParamsable interface {
-	Unwrap() *raw.MTRICDManagementClusterRegisterClientParams
-	WithCheckInNodeID(checkInNodeID *foundation.NSNumber) *MTRICDManagementClusterRegisterClientParams
-	WithMonitoredSubject(monitoredSubject *foundation.NSNumber) *MTRICDManagementClusterRegisterClientParams
-	WithKey(key *foundation.NSData) *MTRICDManagementClusterRegisterClientParams
-	WithVerificationKey(verificationKey *foundation.NSData) *MTRICDManagementClusterRegisterClientParams
-	WithClientType(clientType *foundation.NSNumber) *MTRICDManagementClusterRegisterClientParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRICDManagementClusterRegisterClientParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRICDManagementClusterRegisterClientParams
-	CheckInNodeID() *foundation.NSNumber
-	SetCheckInNodeID(checkInNodeID *foundation.NSNumber)
-	MonitoredSubject() *foundation.NSNumber
-	SetMonitoredSubject(monitoredSubject *foundation.NSNumber)
-	Key() *foundation.NSData
-	SetKey(key *foundation.NSData)
-	VerificationKey() *foundation.NSData
-	SetVerificationKey(verificationKey *foundation.NSData)
-	ClientType() *foundation.NSNumber
-	SetClientType(clientType *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithCheckInNodeID(checkInNodeID obj.Object) *MTRICDManagementClusterRegisterClientParams
+	WithMonitoredSubject(monitoredSubject obj.Object) *MTRICDManagementClusterRegisterClientParams
+	WithKey(key obj.Object) *MTRICDManagementClusterRegisterClientParams
+	WithVerificationKey(verificationKey obj.Object) *MTRICDManagementClusterRegisterClientParams
+	WithClientType(clientType obj.Object) *MTRICDManagementClusterRegisterClientParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRICDManagementClusterRegisterClientParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRICDManagementClusterRegisterClientParams
+	CheckInNodeID() obj.Object
+	SetCheckInNodeID(checkInNodeID obj.Object)
+	MonitoredSubject() obj.Object
+	SetMonitoredSubject(monitoredSubject obj.Object)
+	Key() obj.Object
+	SetKey(key obj.Object)
+	VerificationKey() obj.Object
+	SetVerificationKey(verificationKey obj.Object)
+	ClientType() obj.Object
+	SetClientType(clientType obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRICDManagementClusterRegisterClientParamsable = (*MTRICDManagementClusterRegisterClientParams)(nil)

@@ -5,953 +5,682 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// CFBridgingRelease calls [raw.CFBridgingRelease] (C function CFBridgingRelease).
-func CFBridgingRelease(x unsafe.Pointer) unsafe.Pointer {
-	return raw.CFBridgingRelease(x)
+var _fnCFBridgingRetain func(objc.ID) objc.ID
+
+// CFBridgingRetain calls the Foundation framework function CFBridgingRetain.
+func CFBridgingRetain(x obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCFBridgingRetain == nil {
+		ebipurego.RegisterLibFunc(&_fnCFBridgingRetain, _lib, "CFBridgingRetain")
+	}
+	_ret := _fnCFBridgingRetain(objref.IDOf(x))
+	return obj.Wrap(_ret)
 }
 
-// CFBridgingRetain calls [raw.CFBridgingRetain] (C function CFBridgingRetain).
-func CFBridgingRetain(x objc.ID) unsafe.Pointer {
-	return raw.CFBridgingRetain(x)
-}
-
-// NSAllHashTableObjects calls [raw.NSAllHashTableObjects] (C function NSAllHashTableObjects).
-func NSAllHashTableObjects(table *raw.NSHashTable[objc.ID]) *raw.NSArray[objc.ID] {
-	return raw.NSAllHashTableObjects(table)
-}
-
-// NSAllMapTableKeys calls [raw.NSAllMapTableKeys] (C function NSAllMapTableKeys).
-func NSAllMapTableKeys(table *raw.NSMapTable[objc.ID, objc.ID]) *raw.NSArray[objc.ID] {
-	return raw.NSAllMapTableKeys(table)
-}
-
-// NSAllMapTableValues calls [raw.NSAllMapTableValues] (C function NSAllMapTableValues).
-func NSAllMapTableValues(table *raw.NSMapTable[objc.ID, objc.ID]) *raw.NSArray[objc.ID] {
-	return raw.NSAllMapTableValues(table)
-}
-
-// NSAllocateCollectable calls [raw.NSAllocateCollectable] (C function NSAllocateCollectable).
-func NSAllocateCollectable(size uint, options uint) unsafe.Pointer {
-	return raw.NSAllocateCollectable(size, options)
-}
-
-// NSAllocateMemoryPages calls [raw.NSAllocateMemoryPages] (C function NSAllocateMemoryPages).
-func NSAllocateMemoryPages(bytes_ uint) unsafe.Pointer {
-	return raw.NSAllocateMemoryPages(bytes_)
-}
-
-// NSAllocateObject calls [raw.NSAllocateObject] (C function NSAllocateObject).
-func NSAllocateObject(aClass objc.Class, extraBytes uint, zone unsafe.Pointer) objc.ID {
-	return raw.NSAllocateObject(aClass, extraBytes, zone)
-}
-
-// NSClassFromString calls [raw.NSClassFromString] (C function NSClassFromString).
-func NSClassFromString(aClassName *raw.NSString) objc.Class {
-	return raw.NSClassFromString(aClassName)
-}
-
-// NSCompareHashTables calls [raw.NSCompareHashTables] (C function NSCompareHashTables).
-func NSCompareHashTables(table1 *raw.NSHashTable[objc.ID], table2 *raw.NSHashTable[objc.ID]) bool {
-	return raw.NSCompareHashTables(table1, table2)
-}
-
-// NSCompareMapTables calls [raw.NSCompareMapTables] (C function NSCompareMapTables).
-func NSCompareMapTables(table1 *raw.NSMapTable[objc.ID, objc.ID], table2 *raw.NSMapTable[objc.ID, objc.ID]) bool {
-	return raw.NSCompareMapTables(table1, table2)
-}
-
-// NSContainsRect calls [raw.NSContainsRect] (C function NSContainsRect).
-func NSContainsRect(aRect corefoundation.CGRect, bRect corefoundation.CGRect) bool {
-	return raw.NSContainsRect(aRect, bRect)
-}
-
-// NSConvertHostDoubleToSwapped calls [raw.NSConvertHostDoubleToSwapped] (C function NSConvertHostDoubleToSwapped).
-func NSConvertHostDoubleToSwapped(x float64) raw.NSSwappedDouble {
-	return raw.NSConvertHostDoubleToSwapped(x)
-}
-
-// NSConvertHostFloatToSwapped calls [raw.NSConvertHostFloatToSwapped] (C function NSConvertHostFloatToSwapped).
-func NSConvertHostFloatToSwapped(x float32) raw.NSSwappedFloat {
-	return raw.NSConvertHostFloatToSwapped(x)
-}
-
-// NSConvertSwappedDoubleToHost calls [raw.NSConvertSwappedDoubleToHost] (C function NSConvertSwappedDoubleToHost).
-func NSConvertSwappedDoubleToHost(x raw.NSSwappedDouble) float64 {
-	return raw.NSConvertSwappedDoubleToHost(x)
-}
-
-// NSConvertSwappedFloatToHost calls [raw.NSConvertSwappedFloatToHost] (C function NSConvertSwappedFloatToHost).
-func NSConvertSwappedFloatToHost(x raw.NSSwappedFloat) float32 {
-	return raw.NSConvertSwappedFloatToHost(x)
-}
-
-// NSCopyHashTableWithZone calls [raw.NSCopyHashTableWithZone] (C function NSCopyHashTableWithZone).
-func NSCopyHashTableWithZone(table *raw.NSHashTable[objc.ID], zone unsafe.Pointer) *raw.NSHashTable[objc.ID] {
-	return raw.NSCopyHashTableWithZone(table, zone)
-}
-
-// NSCopyMapTableWithZone calls [raw.NSCopyMapTableWithZone] (C function NSCopyMapTableWithZone).
-func NSCopyMapTableWithZone(table *raw.NSMapTable[objc.ID, objc.ID], zone unsafe.Pointer) unsafe.Pointer {
-	return raw.NSCopyMapTableWithZone(table, zone)
-}
-
-// NSCopyMemoryPages calls [raw.NSCopyMemoryPages] (C function NSCopyMemoryPages).
-func NSCopyMemoryPages(source unsafe.Pointer, dest unsafe.Pointer, bytes_ uint) {
-	raw.NSCopyMemoryPages(source, dest, bytes_)
-}
-
-// NSCopyObject calls [raw.NSCopyObject] (C function NSCopyObject).
-func NSCopyObject(object objc.ID, extraBytes uint, zone unsafe.Pointer) objc.ID {
-	return raw.NSCopyObject(object, extraBytes, zone)
-}
-
-// NSCountHashTable calls [raw.NSCountHashTable] (C function NSCountHashTable).
-func NSCountHashTable(table *raw.NSHashTable[objc.ID]) uint {
-	return raw.NSCountHashTable(table)
-}
-
-// NSCountMapTable calls [raw.NSCountMapTable] (C function NSCountMapTable).
-func NSCountMapTable(table *raw.NSMapTable[objc.ID, objc.ID]) uint {
-	return raw.NSCountMapTable(table)
-}
-
-// NSCreateHashTable calls [raw.NSCreateHashTable] (C function NSCreateHashTable).
-func NSCreateHashTable(callBacks raw.NSHashTableCallBacks, capacity uint) *raw.NSHashTable[objc.ID] {
-	return raw.NSCreateHashTable(callBacks, capacity)
-}
-
-// NSCreateHashTableWithZone calls [raw.NSCreateHashTableWithZone] (C function NSCreateHashTableWithZone).
-func NSCreateHashTableWithZone(callBacks raw.NSHashTableCallBacks, capacity uint, zone unsafe.Pointer) *raw.NSHashTable[objc.ID] {
-	return raw.NSCreateHashTableWithZone(callBacks, capacity, zone)
-}
-
-// NSCreateMapTable calls [raw.NSCreateMapTable] (C function NSCreateMapTable).
-func NSCreateMapTable(keyCallBacks raw.NSMapTableKeyCallBacks, valueCallBacks raw.NSMapTableValueCallBacks, capacity uint) unsafe.Pointer {
-	return raw.NSCreateMapTable(keyCallBacks, valueCallBacks, capacity)
-}
-
-// NSCreateMapTableWithZone calls [raw.NSCreateMapTableWithZone] (C function NSCreateMapTableWithZone).
-func NSCreateMapTableWithZone(keyCallBacks raw.NSMapTableKeyCallBacks, valueCallBacks raw.NSMapTableValueCallBacks, capacity uint, zone unsafe.Pointer) unsafe.Pointer {
-	return raw.NSCreateMapTableWithZone(keyCallBacks, valueCallBacks, capacity, zone)
-}
-
-// NSCreateZone calls [raw.NSCreateZone] (C function NSCreateZone).
-func NSCreateZone(startSize uint, granularity uint, canFree bool) unsafe.Pointer {
-	return raw.NSCreateZone(startSize, granularity, canFree)
-}
-
-// NSDeallocateMemoryPages calls [raw.NSDeallocateMemoryPages] (C function NSDeallocateMemoryPages).
-func NSDeallocateMemoryPages(ptr unsafe.Pointer, bytes_ uint) {
-	raw.NSDeallocateMemoryPages(ptr, bytes_)
-}
-
-// NSDeallocateObject calls [raw.NSDeallocateObject] (C function NSDeallocateObject).
-func NSDeallocateObject(object objc.ID) {
-	raw.NSDeallocateObject(object)
-}
-
-// NSDecimalAdd calls [raw.NSDecimalAdd] (C function NSDecimalAdd).
-func NSDecimalAdd(result *raw.NSDecimal, leftOperand *raw.NSDecimal, rightOperand *raw.NSDecimal, roundingMode NSRoundingMode) NSCalculationError {
-	return NSCalculationError(raw.NSDecimalAdd(result, leftOperand, rightOperand, raw.NSRoundingMode(roundingMode)))
-}
-
-// NSDecimalCompact calls [raw.NSDecimalCompact] (C function NSDecimalCompact).
-func NSDecimalCompact(number *raw.NSDecimal) {
-	raw.NSDecimalCompact(number)
-}
-
-// NSDecimalCompare calls [raw.NSDecimalCompare] (C function NSDecimalCompare).
-func NSDecimalCompare(leftOperand *raw.NSDecimal, rightOperand *raw.NSDecimal) NSComparisonResult {
-	return NSComparisonResult(raw.NSDecimalCompare(leftOperand, rightOperand))
-}
-
-// NSDecimalCopy calls [raw.NSDecimalCopy] (C function NSDecimalCopy).
-func NSDecimalCopy(destination *raw.NSDecimal, source *raw.NSDecimal) {
-	raw.NSDecimalCopy(destination, source)
-}
-
-// NSDecimalDivide calls [raw.NSDecimalDivide] (C function NSDecimalDivide).
-func NSDecimalDivide(result *raw.NSDecimal, leftOperand *raw.NSDecimal, rightOperand *raw.NSDecimal, roundingMode NSRoundingMode) NSCalculationError {
-	return NSCalculationError(raw.NSDecimalDivide(result, leftOperand, rightOperand, raw.NSRoundingMode(roundingMode)))
-}
-
-// NSDecimalIsNotANumber calls [raw.NSDecimalIsNotANumber] (C function NSDecimalIsNotANumber).
-func NSDecimalIsNotANumber(dcm *raw.NSDecimal) bool {
-	return raw.NSDecimalIsNotANumber(dcm)
-}
-
-// NSDecimalMultiply calls [raw.NSDecimalMultiply] (C function NSDecimalMultiply).
-func NSDecimalMultiply(result *raw.NSDecimal, leftOperand *raw.NSDecimal, rightOperand *raw.NSDecimal, roundingMode NSRoundingMode) NSCalculationError {
-	return NSCalculationError(raw.NSDecimalMultiply(result, leftOperand, rightOperand, raw.NSRoundingMode(roundingMode)))
-}
-
-// NSDecimalMultiplyByPowerOf10 calls [raw.NSDecimalMultiplyByPowerOf10] (C function NSDecimalMultiplyByPowerOf10).
-func NSDecimalMultiplyByPowerOf10(result *raw.NSDecimal, number *raw.NSDecimal, power int16, roundingMode NSRoundingMode) NSCalculationError {
-	return NSCalculationError(raw.NSDecimalMultiplyByPowerOf10(result, number, power, raw.NSRoundingMode(roundingMode)))
-}
-
-// NSDecimalNormalize calls [raw.NSDecimalNormalize] (C function NSDecimalNormalize).
-func NSDecimalNormalize(number1 *raw.NSDecimal, number2 *raw.NSDecimal, roundingMode NSRoundingMode) NSCalculationError {
-	return NSCalculationError(raw.NSDecimalNormalize(number1, number2, raw.NSRoundingMode(roundingMode)))
-}
-
-// NSDecimalPower calls [raw.NSDecimalPower] (C function NSDecimalPower).
-func NSDecimalPower(result *raw.NSDecimal, number *raw.NSDecimal, power uint, roundingMode NSRoundingMode) NSCalculationError {
-	return NSCalculationError(raw.NSDecimalPower(result, number, power, raw.NSRoundingMode(roundingMode)))
-}
-
-// NSDecimalRound calls [raw.NSDecimalRound] (C function NSDecimalRound).
-func NSDecimalRound(result *raw.NSDecimal, number *raw.NSDecimal, scale int, roundingMode NSRoundingMode) {
-	raw.NSDecimalRound(result, number, scale, raw.NSRoundingMode(roundingMode))
-}
-
-// NSDecimalString calls [raw.NSDecimalString] (C function NSDecimalString).
-func NSDecimalString(dcm *raw.NSDecimal, locale objc.ID) *raw.NSString {
-	return raw.NSDecimalString(dcm, locale)
-}
-
-// NSDecimalSubtract calls [raw.NSDecimalSubtract] (C function NSDecimalSubtract).
-func NSDecimalSubtract(result *raw.NSDecimal, leftOperand *raw.NSDecimal, rightOperand *raw.NSDecimal, roundingMode NSRoundingMode) NSCalculationError {
-	return NSCalculationError(raw.NSDecimalSubtract(result, leftOperand, rightOperand, raw.NSRoundingMode(roundingMode)))
-}
-
-// NSDecrementExtraRefCountWasZero calls [raw.NSDecrementExtraRefCountWasZero] (C function NSDecrementExtraRefCountWasZero).
-func NSDecrementExtraRefCountWasZero(object objc.ID) bool {
-	return raw.NSDecrementExtraRefCountWasZero(object)
-}
-
-// NSDefaultMallocZone calls [raw.NSDefaultMallocZone] (C function NSDefaultMallocZone).
-func NSDefaultMallocZone() unsafe.Pointer {
-	return raw.NSDefaultMallocZone()
-}
-
-// NSDivideRect calls [raw.NSDivideRect] (C function NSDivideRect).
-func NSDivideRect(inRect corefoundation.CGRect, slice *corefoundation.CGRect, rem *corefoundation.CGRect, amount float64, edge NSRectEdge) {
-	raw.NSDivideRect(inRect, slice, rem, amount, raw.NSRectEdge(edge))
-}
-
-// NSEdgeInsetsEqual calls [raw.NSEdgeInsetsEqual] (C function NSEdgeInsetsEqual).
-func NSEdgeInsetsEqual(aInsets raw.NSEdgeInsets, bInsets raw.NSEdgeInsets) bool {
-	return raw.NSEdgeInsetsEqual(aInsets, bInsets)
-}
-
-// NSEdgeInsetsMake calls [raw.NSEdgeInsetsMake] (C function NSEdgeInsetsMake).
-func NSEdgeInsetsMake(top float64, left float64, bottom float64, right float64) raw.NSEdgeInsets {
-	return raw.NSEdgeInsetsMake(top, left, bottom, right)
-}
-
-// NSEndHashTableEnumeration calls [raw.NSEndHashTableEnumeration] (C function NSEndHashTableEnumeration).
-func NSEndHashTableEnumeration(enumerator *raw.NSHashEnumerator) {
-	raw.NSEndHashTableEnumeration(enumerator)
-}
-
-// NSEndMapTableEnumeration calls [raw.NSEndMapTableEnumeration] (C function NSEndMapTableEnumeration).
-func NSEndMapTableEnumeration(enumerator *raw.NSMapEnumerator) {
-	raw.NSEndMapTableEnumeration(enumerator)
-}
-
-// NSEnumerateHashTable calls [raw.NSEnumerateHashTable] (C function NSEnumerateHashTable).
-func NSEnumerateHashTable(table *raw.NSHashTable[objc.ID]) raw.NSHashEnumerator {
-	return raw.NSEnumerateHashTable(table)
-}
-
-// NSEnumerateMapTable calls [raw.NSEnumerateMapTable] (C function NSEnumerateMapTable).
-func NSEnumerateMapTable(table *raw.NSMapTable[objc.ID, objc.ID]) raw.NSMapEnumerator {
-	return raw.NSEnumerateMapTable(table)
-}
-
-// NSEqualPoints calls [raw.NSEqualPoints] (C function NSEqualPoints).
-func NSEqualPoints(aPoint corefoundation.CGPoint, bPoint corefoundation.CGPoint) bool {
-	return raw.NSEqualPoints(aPoint, bPoint)
-}
-
-// NSEqualRanges calls [raw.NSEqualRanges] (C function NSEqualRanges).
-func NSEqualRanges(range1 raw.NSRange, range2 raw.NSRange) bool {
-	return raw.NSEqualRanges(range1, range2)
-}
-
-// NSEqualRects calls [raw.NSEqualRects] (C function NSEqualRects).
-func NSEqualRects(aRect corefoundation.CGRect, bRect corefoundation.CGRect) bool {
-	return raw.NSEqualRects(aRect, bRect)
-}
+var _fnNSAllHashTableObjects func(objc.ID) objc.ID
 
-// NSEqualSizes calls [raw.NSEqualSizes] (C function NSEqualSizes).
-func NSEqualSizes(aSize corefoundation.CGSize, bSize corefoundation.CGSize) bool {
-	return raw.NSEqualSizes(aSize, bSize)
+// NSAllHashTableObjects calls the Foundation framework function NSAllHashTableObjects.
+func NSAllHashTableObjects(table obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAllHashTableObjects == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAllHashTableObjects, _lib, "NSAllHashTableObjects")
+	}
+	_ret := _fnNSAllHashTableObjects(objref.IDOf(table))
+	return obj.Wrap(_ret)
 }
 
-// NSExtraRefCount calls [raw.NSExtraRefCount] (C function NSExtraRefCount).
-func NSExtraRefCount(object objc.ID) uint {
-	return raw.NSExtraRefCount(object)
-}
-
-// NSFileTypeForHFSTypeCode calls [raw.NSFileTypeForHFSTypeCode] (C function NSFileTypeForHFSTypeCode).
-func NSFileTypeForHFSTypeCode(hfsFileTypeCode uint) *raw.NSString {
-	return raw.NSFileTypeForHFSTypeCode(hfsFileTypeCode)
-}
-
-// NSFreeHashTable calls [raw.NSFreeHashTable] (C function NSFreeHashTable).
-func NSFreeHashTable(table *raw.NSHashTable[objc.ID]) {
-	raw.NSFreeHashTable(table)
-}
-
-// NSFreeMapTable calls [raw.NSFreeMapTable] (C function NSFreeMapTable).
-func NSFreeMapTable(table *raw.NSMapTable[objc.ID, objc.ID]) {
-	raw.NSFreeMapTable(table)
-}
-
-// NSFullUserName calls [raw.NSFullUserName] (C function NSFullUserName).
-func NSFullUserName() *raw.NSString {
-	return raw.NSFullUserName()
-}
-
-// NSGetSizeAndAlignment calls [raw.NSGetSizeAndAlignment] (C function NSGetSizeAndAlignment).
-func NSGetSizeAndAlignment(typePtr string, sizep *uint, alignp *uint) string {
-	return raw.NSGetSizeAndAlignment(typePtr, sizep, alignp)
-}
+var _fnNSAllMapTableKeys func(objc.ID) objc.ID
 
-// NSGetUncaughtExceptionHandler calls [raw.NSGetUncaughtExceptionHandler] (C function NSGetUncaughtExceptionHandler).
-func NSGetUncaughtExceptionHandler() unsafe.Pointer {
-	return raw.NSGetUncaughtExceptionHandler()
+// NSAllMapTableKeys calls the Foundation framework function NSAllMapTableKeys.
+func NSAllMapTableKeys(table obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAllMapTableKeys == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAllMapTableKeys, _lib, "NSAllMapTableKeys")
+	}
+	_ret := _fnNSAllMapTableKeys(objref.IDOf(table))
+	return obj.Wrap(_ret)
 }
 
-// NSHFSTypeCodeFromFileType calls [raw.NSHFSTypeCodeFromFileType] (C function NSHFSTypeCodeFromFileType).
-func NSHFSTypeCodeFromFileType(fileTypeString *raw.NSString) uint {
-	return raw.NSHFSTypeCodeFromFileType(fileTypeString)
+var _fnNSAllMapTableValues func(objc.ID) objc.ID
+
+// NSAllMapTableValues calls the Foundation framework function NSAllMapTableValues.
+func NSAllMapTableValues(table obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSAllMapTableValues == nil {
+		ebipurego.RegisterLibFunc(&_fnNSAllMapTableValues, _lib, "NSAllMapTableValues")
+	}
+	_ret := _fnNSAllMapTableValues(objref.IDOf(table))
+	return obj.Wrap(_ret)
 }
 
-// NSHFSTypeOfFile calls [raw.NSHFSTypeOfFile] (C function NSHFSTypeOfFile).
-func NSHFSTypeOfFile(fullFilePath *raw.NSString) *raw.NSString {
-	return raw.NSHFSTypeOfFile(fullFilePath)
+var _fnNSCompareHashTables func(objc.ID, objc.ID) bool
+
+// NSCompareHashTables calls the Foundation framework function NSCompareHashTables.
+func NSCompareHashTables(table1 obj.Object, table2 obj.Object) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSCompareHashTables == nil {
+		ebipurego.RegisterLibFunc(&_fnNSCompareHashTables, _lib, "NSCompareHashTables")
+	}
+	return _fnNSCompareHashTables(objref.IDOf(table1), objref.IDOf(table2))
 }
 
-// NSHashGet calls [raw.NSHashGet] (C function NSHashGet).
-func NSHashGet(table *raw.NSHashTable[objc.ID], pointer unsafe.Pointer) unsafe.Pointer {
-	return raw.NSHashGet(table, pointer)
-}
+var _fnNSCompareMapTables func(objc.ID, objc.ID) bool
 
-// NSHashInsert calls [raw.NSHashInsert] (C function NSHashInsert).
-func NSHashInsert(table *raw.NSHashTable[objc.ID], pointer unsafe.Pointer) {
-	raw.NSHashInsert(table, pointer)
+// NSCompareMapTables calls the Foundation framework function NSCompareMapTables.
+func NSCompareMapTables(table1 obj.Object, table2 obj.Object) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSCompareMapTables == nil {
+		ebipurego.RegisterLibFunc(&_fnNSCompareMapTables, _lib, "NSCompareMapTables")
+	}
+	return _fnNSCompareMapTables(objref.IDOf(table1), objref.IDOf(table2))
 }
 
-// NSHashInsertIfAbsent calls [raw.NSHashInsertIfAbsent] (C function NSHashInsertIfAbsent).
-func NSHashInsertIfAbsent(table *raw.NSHashTable[objc.ID], pointer unsafe.Pointer) unsafe.Pointer {
-	return raw.NSHashInsertIfAbsent(table, pointer)
-}
+var _fnNSCountHashTable func(objc.ID) int
 
-// NSHashInsertKnownAbsent calls [raw.NSHashInsertKnownAbsent] (C function NSHashInsertKnownAbsent).
-func NSHashInsertKnownAbsent(table *raw.NSHashTable[objc.ID], pointer unsafe.Pointer) {
-	raw.NSHashInsertKnownAbsent(table, pointer)
+// NSCountHashTable calls the Foundation framework function NSCountHashTable.
+func NSCountHashTable(table obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSCountHashTable == nil {
+		ebipurego.RegisterLibFunc(&_fnNSCountHashTable, _lib, "NSCountHashTable")
+	}
+	return _fnNSCountHashTable(objref.IDOf(table))
 }
 
-// NSHashRemove calls [raw.NSHashRemove] (C function NSHashRemove).
-func NSHashRemove(table *raw.NSHashTable[objc.ID], pointer unsafe.Pointer) {
-	raw.NSHashRemove(table, pointer)
-}
+var _fnNSCountMapTable func(objc.ID) int
 
-// NSHeight calls [raw.NSHeight] (C function NSHeight).
-func NSHeight(aRect corefoundation.CGRect) float64 {
-	return raw.NSHeight(aRect)
+// NSCountMapTable calls the Foundation framework function NSCountMapTable.
+func NSCountMapTable(table obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSCountMapTable == nil {
+		ebipurego.RegisterLibFunc(&_fnNSCountMapTable, _lib, "NSCountMapTable")
+	}
+	return _fnNSCountMapTable(objref.IDOf(table))
 }
 
-// NSHomeDirectory calls [raw.NSHomeDirectory] (C function NSHomeDirectory).
-func NSHomeDirectory() *raw.NSString {
-	return raw.NSHomeDirectory()
-}
+var _fnNSDeallocateObject func(objc.ID)
 
-// NSHomeDirectoryForUser calls [raw.NSHomeDirectoryForUser] (C function NSHomeDirectoryForUser).
-func NSHomeDirectoryForUser(userName *raw.NSString) *raw.NSString {
-	return raw.NSHomeDirectoryForUser(userName)
-}
+// NSDeallocateObject calls the Foundation framework function NSDeallocateObject.
+func NSDeallocateObject(object obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDeallocateObject == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDeallocateObject, _lib, "NSDeallocateObject")
+	}
+	_fnNSDeallocateObject(objref.IDOf(object))
+}
+
+var _fnNSDecrementExtraRefCountWasZero func(objc.ID) bool
 
-// NSHostByteOrder calls [raw.NSHostByteOrder] (C function NSHostByteOrder).
+// NSDecrementExtraRefCountWasZero calls the Foundation framework function NSDecrementExtraRefCountWasZero.
+func NSDecrementExtraRefCountWasZero(object obj.Object) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSDecrementExtraRefCountWasZero == nil {
+		ebipurego.RegisterLibFunc(&_fnNSDecrementExtraRefCountWasZero, _lib, "NSDecrementExtraRefCountWasZero")
+	}
+	return _fnNSDecrementExtraRefCountWasZero(objref.IDOf(object))
+}
+
+var _fnNSExtraRefCount func(objc.ID) int
+
+// NSExtraRefCount calls the Foundation framework function NSExtraRefCount.
+func NSExtraRefCount(object obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSExtraRefCount == nil {
+		ebipurego.RegisterLibFunc(&_fnNSExtraRefCount, _lib, "NSExtraRefCount")
+	}
+	return _fnNSExtraRefCount(objref.IDOf(object))
+}
+
+var _fnNSFileTypeForHFSTypeCode func(int) objc.ID
+
+// NSFileTypeForHFSTypeCode calls the Foundation framework function NSFileTypeForHFSTypeCode.
+func NSFileTypeForHFSTypeCode(hfsFileTypeCode int) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSFileTypeForHFSTypeCode == nil {
+		ebipurego.RegisterLibFunc(&_fnNSFileTypeForHFSTypeCode, _lib, "NSFileTypeForHFSTypeCode")
+	}
+	_ret := _fnNSFileTypeForHFSTypeCode(hfsFileTypeCode)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
+}
+
+var _fnNSFreeHashTable func(objc.ID)
+
+// NSFreeHashTable calls the Foundation framework function NSFreeHashTable.
+func NSFreeHashTable(table obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSFreeHashTable == nil {
+		ebipurego.RegisterLibFunc(&_fnNSFreeHashTable, _lib, "NSFreeHashTable")
+	}
+	_fnNSFreeHashTable(objref.IDOf(table))
+}
+
+var _fnNSFreeMapTable func(objc.ID)
+
+// NSFreeMapTable calls the Foundation framework function NSFreeMapTable.
+func NSFreeMapTable(table obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSFreeMapTable == nil {
+		ebipurego.RegisterLibFunc(&_fnNSFreeMapTable, _lib, "NSFreeMapTable")
+	}
+	_fnNSFreeMapTable(objref.IDOf(table))
+}
+
+var _fnNSFullUserName func() objc.ID
+
+// NSFullUserName calls the Foundation framework function NSFullUserName.
+func NSFullUserName() string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSFullUserName == nil {
+		ebipurego.RegisterLibFunc(&_fnNSFullUserName, _lib, "NSFullUserName")
+	}
+	_ret := _fnNSFullUserName()
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
+}
+
+var _fnNSHFSTypeCodeFromFileType func(objc.ID) int
+
+// NSHFSTypeCodeFromFileType calls the Foundation framework function NSHFSTypeCodeFromFileType.
+func NSHFSTypeCodeFromFileType(fileTypeString string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSHFSTypeCodeFromFileType == nil {
+		ebipurego.RegisterLibFunc(&_fnNSHFSTypeCodeFromFileType, _lib, "NSHFSTypeCodeFromFileType")
+	}
+	return _fnNSHFSTypeCodeFromFileType(purego.NSString(fileTypeString))
+}
+
+var _fnNSHFSTypeOfFile func(objc.ID) objc.ID
+
+// NSHFSTypeOfFile calls the Foundation framework function NSHFSTypeOfFile.
+func NSHFSTypeOfFile(fullFilePath string) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSHFSTypeOfFile == nil {
+		ebipurego.RegisterLibFunc(&_fnNSHFSTypeOfFile, _lib, "NSHFSTypeOfFile")
+	}
+	_ret := _fnNSHFSTypeOfFile(purego.NSString(fullFilePath))
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
+}
+
+var _fnNSHomeDirectory func() objc.ID
+
+// NSHomeDirectory calls the Foundation framework function NSHomeDirectory.
+func NSHomeDirectory() string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSHomeDirectory == nil {
+		ebipurego.RegisterLibFunc(&_fnNSHomeDirectory, _lib, "NSHomeDirectory")
+	}
+	_ret := _fnNSHomeDirectory()
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
+}
+
+var _fnNSHomeDirectoryForUser func(objc.ID) objc.ID
+
+// NSHomeDirectoryForUser calls the Foundation framework function NSHomeDirectoryForUser.
+func NSHomeDirectoryForUser(userName string) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSHomeDirectoryForUser == nil {
+		ebipurego.RegisterLibFunc(&_fnNSHomeDirectoryForUser, _lib, "NSHomeDirectoryForUser")
+	}
+	_ret := _fnNSHomeDirectoryForUser(purego.NSString(userName))
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
+}
+
+var _fnNSHostByteOrder func() int
+
+// NSHostByteOrder calls the Foundation framework function NSHostByteOrder.
 func NSHostByteOrder() int {
-	return raw.NSHostByteOrder()
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSHostByteOrder == nil {
+		ebipurego.RegisterLibFunc(&_fnNSHostByteOrder, _lib, "NSHostByteOrder")
+	}
+	return _fnNSHostByteOrder()
 }
 
-// NSIncrementExtraRefCount calls [raw.NSIncrementExtraRefCount] (C function NSIncrementExtraRefCount).
-func NSIncrementExtraRefCount(object objc.ID) {
-	raw.NSIncrementExtraRefCount(object)
-}
-
-// NSInsetRect calls [raw.NSInsetRect] (C function NSInsetRect).
-func NSInsetRect(aRect corefoundation.CGRect, dX float64, dY float64) corefoundation.CGRect {
-	return raw.NSInsetRect(aRect, dX, dY)
-}
-
-// NSIntegralRect calls [raw.NSIntegralRect] (C function NSIntegralRect).
-func NSIntegralRect(aRect corefoundation.CGRect) corefoundation.CGRect {
-	return raw.NSIntegralRect(aRect)
-}
-
-// NSIntegralRectWithOptions calls [raw.NSIntegralRectWithOptions] (C function NSIntegralRectWithOptions).
-func NSIntegralRectWithOptions(aRect corefoundation.CGRect, opts NSAlignmentOptions) corefoundation.CGRect {
-	return raw.NSIntegralRectWithOptions(aRect, raw.NSAlignmentOptions(opts))
-}
-
-// NSIntersectionRange calls [raw.NSIntersectionRange] (C function NSIntersectionRange).
-func NSIntersectionRange(range1 raw.NSRange, range2 raw.NSRange) raw.NSRange {
-	return raw.NSIntersectionRange(range1, range2)
-}
-
-// NSIntersectionRect calls [raw.NSIntersectionRect] (C function NSIntersectionRect).
-func NSIntersectionRect(aRect corefoundation.CGRect, bRect corefoundation.CGRect) corefoundation.CGRect {
-	return raw.NSIntersectionRect(aRect, bRect)
-}
-
-// NSIntersectsRect calls [raw.NSIntersectsRect] (C function NSIntersectsRect).
-func NSIntersectsRect(aRect corefoundation.CGRect, bRect corefoundation.CGRect) bool {
-	return raw.NSIntersectsRect(aRect, bRect)
-}
-
-// NSIsEmptyRect calls [raw.NSIsEmptyRect] (C function NSIsEmptyRect).
-func NSIsEmptyRect(aRect corefoundation.CGRect) bool {
-	return raw.NSIsEmptyRect(aRect)
-}
-
-// NSLocationInRange calls [raw.NSLocationInRange] (C function NSLocationInRange).
-func NSLocationInRange(loc uint, range_ raw.NSRange) bool {
-	return raw.NSLocationInRange(loc, range_)
-}
-
-// NSLogPageSize calls [raw.NSLogPageSize] (C function NSLogPageSize).
-func NSLogPageSize() uint {
-	return raw.NSLogPageSize()
-}
-
-// NSLogv calls [raw.NSLogv] (C function NSLogv).
-func NSLogv(arg objc.ID, arg2 string) {
-	raw.NSLogv(arg, arg2)
-}
-
-// NSMakeCollectable calls [raw.NSMakeCollectable] (C function NSMakeCollectable).
-func NSMakeCollectable(cf unsafe.Pointer) unsafe.Pointer {
-	return raw.NSMakeCollectable(cf)
-}
-
-// NSMakePoint calls [raw.NSMakePoint] (C function NSMakePoint).
-func NSMakePoint(x float64, y float64) corefoundation.CGPoint {
-	return raw.NSMakePoint(x, y)
-}
-
-// NSMakeRange calls [raw.NSMakeRange] (C function NSMakeRange).
-func NSMakeRange(loc uint, len_ uint) raw.NSRange {
-	return raw.NSMakeRange(loc, len_)
-}
-
-// NSMakeRect calls [raw.NSMakeRect] (C function NSMakeRect).
-func NSMakeRect(x float64, y float64, w float64, h float64) corefoundation.CGRect {
-	return raw.NSMakeRect(x, y, w, h)
-}
-
-// NSMakeSize calls [raw.NSMakeSize] (C function NSMakeSize).
-func NSMakeSize(w float64, h float64) corefoundation.CGSize {
-	return raw.NSMakeSize(w, h)
-}
-
-// NSMapGet calls [raw.NSMapGet] (C function NSMapGet).
-func NSMapGet(table *raw.NSMapTable[objc.ID, objc.ID], key unsafe.Pointer) unsafe.Pointer {
-	return raw.NSMapGet(table, key)
-}
-
-// NSMapInsert calls [raw.NSMapInsert] (C function NSMapInsert).
-func NSMapInsert(table *raw.NSMapTable[objc.ID, objc.ID], key unsafe.Pointer, value unsafe.Pointer) {
-	raw.NSMapInsert(table, key, value)
-}
-
-// NSMapInsertIfAbsent calls [raw.NSMapInsertIfAbsent] (C function NSMapInsertIfAbsent).
-func NSMapInsertIfAbsent(table *raw.NSMapTable[objc.ID, objc.ID], key unsafe.Pointer, value unsafe.Pointer) unsafe.Pointer {
-	return raw.NSMapInsertIfAbsent(table, key, value)
-}
-
-// NSMapInsertKnownAbsent calls [raw.NSMapInsertKnownAbsent] (C function NSMapInsertKnownAbsent).
-func NSMapInsertKnownAbsent(table *raw.NSMapTable[objc.ID, objc.ID], key unsafe.Pointer, value unsafe.Pointer) {
-	raw.NSMapInsertKnownAbsent(table, key, value)
-}
-
-// NSMapMember calls [raw.NSMapMember] (C function NSMapMember).
-func NSMapMember(table *raw.NSMapTable[objc.ID, objc.ID], key unsafe.Pointer, originalKey unsafe.Pointer, value unsafe.Pointer) bool {
-	return raw.NSMapMember(table, key, originalKey, value)
-}
-
-// NSMapRemove calls [raw.NSMapRemove] (C function NSMapRemove).
-func NSMapRemove(table *raw.NSMapTable[objc.ID, objc.ID], key unsafe.Pointer) {
-	raw.NSMapRemove(table, key)
-}
-
-// NSMaxRange calls [raw.NSMaxRange] (C function NSMaxRange).
-func NSMaxRange(range_ raw.NSRange) uint {
-	return raw.NSMaxRange(range_)
-}
-
-// NSMaxX calls [raw.NSMaxX] (C function NSMaxX).
-func NSMaxX(aRect corefoundation.CGRect) float64 {
-	return raw.NSMaxX(aRect)
-}
-
-// NSMaxY calls [raw.NSMaxY] (C function NSMaxY).
-func NSMaxY(aRect corefoundation.CGRect) float64 {
-	return raw.NSMaxY(aRect)
-}
-
-// NSMidX calls [raw.NSMidX] (C function NSMidX).
-func NSMidX(aRect corefoundation.CGRect) float64 {
-	return raw.NSMidX(aRect)
-}
-
-// NSMidY calls [raw.NSMidY] (C function NSMidY).
-func NSMidY(aRect corefoundation.CGRect) float64 {
-	return raw.NSMidY(aRect)
-}
-
-// NSMinX calls [raw.NSMinX] (C function NSMinX).
-func NSMinX(aRect corefoundation.CGRect) float64 {
-	return raw.NSMinX(aRect)
-}
-
-// NSMinY calls [raw.NSMinY] (C function NSMinY).
-func NSMinY(aRect corefoundation.CGRect) float64 {
-	return raw.NSMinY(aRect)
-}
-
-// NSMouseInRect calls [raw.NSMouseInRect] (C function NSMouseInRect).
-func NSMouseInRect(aPoint corefoundation.CGPoint, aRect corefoundation.CGRect, flipped bool) bool {
-	return raw.NSMouseInRect(aPoint, aRect, flipped)
-}
-
-// NSNextHashEnumeratorItem calls [raw.NSNextHashEnumeratorItem] (C function NSNextHashEnumeratorItem).
-func NSNextHashEnumeratorItem(enumerator *raw.NSHashEnumerator) unsafe.Pointer {
-	return raw.NSNextHashEnumeratorItem(enumerator)
-}
-
-// NSNextMapEnumeratorPair calls [raw.NSNextMapEnumeratorPair] (C function NSNextMapEnumeratorPair).
-func NSNextMapEnumeratorPair(enumerator *raw.NSMapEnumerator, key unsafe.Pointer, value unsafe.Pointer) bool {
-	return raw.NSNextMapEnumeratorPair(enumerator, key, value)
-}
-
-// NSOffsetRect calls [raw.NSOffsetRect] (C function NSOffsetRect).
-func NSOffsetRect(aRect corefoundation.CGRect, dX float64, dY float64) corefoundation.CGRect {
-	return raw.NSOffsetRect(aRect, dX, dY)
-}
-
-// NSOpenStepRootDirectory calls [raw.NSOpenStepRootDirectory] (C function NSOpenStepRootDirectory).
-func NSOpenStepRootDirectory() *raw.NSString {
-	return raw.NSOpenStepRootDirectory()
-}
-
-// NSPageSize calls [raw.NSPageSize] (C function NSPageSize).
-func NSPageSize() uint {
-	return raw.NSPageSize()
-}
-
-// NSPointFromCGPoint calls [raw.NSPointFromCGPoint] (C function NSPointFromCGPoint).
-func NSPointFromCGPoint(cgpoint corefoundation.CGPoint) corefoundation.CGPoint {
-	return raw.NSPointFromCGPoint(cgpoint)
-}
-
-// NSPointFromString calls [raw.NSPointFromString] (C function NSPointFromString).
-func NSPointFromString(aString *raw.NSString) corefoundation.CGPoint {
-	return raw.NSPointFromString(aString)
-}
-
-// NSPointInRect calls [raw.NSPointInRect] (C function NSPointInRect).
-func NSPointInRect(aPoint corefoundation.CGPoint, aRect corefoundation.CGRect) bool {
-	return raw.NSPointInRect(aPoint, aRect)
-}
-
-// NSPointToCGPoint calls [raw.NSPointToCGPoint] (C function NSPointToCGPoint).
-func NSPointToCGPoint(nspoint corefoundation.CGPoint) corefoundation.CGPoint {
-	return raw.NSPointToCGPoint(nspoint)
-}
-
-// NSProtocolFromString calls [raw.NSProtocolFromString] (C function NSProtocolFromString).
-func NSProtocolFromString(namestr *raw.NSString) unsafe.Pointer {
-	return raw.NSProtocolFromString(namestr)
-}
-
-// NSRangeFromString calls [raw.NSRangeFromString] (C function NSRangeFromString).
-func NSRangeFromString(aString *raw.NSString) raw.NSRange {
-	return raw.NSRangeFromString(aString)
-}
-
-// NSRealMemoryAvailable calls [raw.NSRealMemoryAvailable] (C function NSRealMemoryAvailable).
-func NSRealMemoryAvailable() uint {
-	return raw.NSRealMemoryAvailable()
-}
-
-// NSReallocateCollectable calls [raw.NSReallocateCollectable] (C function NSReallocateCollectable).
-func NSReallocateCollectable(ptr unsafe.Pointer, size uint, options uint) unsafe.Pointer {
-	return raw.NSReallocateCollectable(ptr, size, options)
-}
-
-// NSRectFromCGRect calls [raw.NSRectFromCGRect] (C function NSRectFromCGRect).
-func NSRectFromCGRect(cgrect corefoundation.CGRect) corefoundation.CGRect {
-	return raw.NSRectFromCGRect(cgrect)
-}
+var _fnNSIncrementExtraRefCount func(objc.ID)
 
-// NSRectFromString calls [raw.NSRectFromString] (C function NSRectFromString).
-func NSRectFromString(aString *raw.NSString) corefoundation.CGRect {
-	return raw.NSRectFromString(aString)
+// NSIncrementExtraRefCount calls the Foundation framework function NSIncrementExtraRefCount.
+func NSIncrementExtraRefCount(object obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSIncrementExtraRefCount == nil {
+		ebipurego.RegisterLibFunc(&_fnNSIncrementExtraRefCount, _lib, "NSIncrementExtraRefCount")
+	}
+	_fnNSIncrementExtraRefCount(objref.IDOf(object))
 }
 
-// NSRectToCGRect calls [raw.NSRectToCGRect] (C function NSRectToCGRect).
-func NSRectToCGRect(nsrect corefoundation.CGRect) corefoundation.CGRect {
-	return raw.NSRectToCGRect(nsrect)
-}
-
-// NSRecycleZone calls [raw.NSRecycleZone] (C function NSRecycleZone).
-func NSRecycleZone(zone unsafe.Pointer) {
-	raw.NSRecycleZone(zone)
-}
-
-// NSResetHashTable calls [raw.NSResetHashTable] (C function NSResetHashTable).
-func NSResetHashTable(table *raw.NSHashTable[objc.ID]) {
-	raw.NSResetHashTable(table)
-}
-
-// NSResetMapTable calls [raw.NSResetMapTable] (C function NSResetMapTable).
-func NSResetMapTable(table *raw.NSMapTable[objc.ID, objc.ID]) {
-	raw.NSResetMapTable(table)
-}
-
-// NSRoundDownToMultipleOfPageSize calls [raw.NSRoundDownToMultipleOfPageSize] (C function NSRoundDownToMultipleOfPageSize).
-func NSRoundDownToMultipleOfPageSize(bytes_ uint) uint {
-	return raw.NSRoundDownToMultipleOfPageSize(bytes_)
-}
-
-// NSRoundUpToMultipleOfPageSize calls [raw.NSRoundUpToMultipleOfPageSize] (C function NSRoundUpToMultipleOfPageSize).
-func NSRoundUpToMultipleOfPageSize(bytes_ uint) uint {
-	return raw.NSRoundUpToMultipleOfPageSize(bytes_)
-}
-
-// NSSearchPathForDirectoriesInDomains calls [raw.NSSearchPathForDirectoriesInDomains] (C function NSSearchPathForDirectoriesInDomains).
-func NSSearchPathForDirectoriesInDomains(directory NSSearchPathDirectory, domainMask NSSearchPathDomainMask, expandTilde bool) *raw.NSArray[*raw.NSString] {
-	return raw.NSSearchPathForDirectoriesInDomains(raw.NSSearchPathDirectory(directory), raw.NSSearchPathDomainMask(domainMask), expandTilde)
-}
-
-// NSSelectorFromString calls [raw.NSSelectorFromString] (C function NSSelectorFromString).
-func NSSelectorFromString(aSelectorName *raw.NSString) objc.SEL {
-	return raw.NSSelectorFromString(aSelectorName)
-}
+var _fnNSLogPageSize func() int
 
-// NSSetUncaughtExceptionHandler calls [raw.NSSetUncaughtExceptionHandler] (C function NSSetUncaughtExceptionHandler).
-func NSSetUncaughtExceptionHandler(arg unsafe.Pointer) {
-	raw.NSSetUncaughtExceptionHandler(arg)
+// NSLogPageSize calls the Foundation framework function NSLogPageSize.
+func NSLogPageSize() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSLogPageSize == nil {
+		ebipurego.RegisterLibFunc(&_fnNSLogPageSize, _lib, "NSLogPageSize")
+	}
+	return _fnNSLogPageSize()
 }
 
-// NSSetZoneName calls [raw.NSSetZoneName] (C function NSSetZoneName).
-func NSSetZoneName(zone unsafe.Pointer, name *raw.NSString) {
-	raw.NSSetZoneName(zone, name)
-}
-
-// NSShouldRetainWithZone calls [raw.NSShouldRetainWithZone] (C function NSShouldRetainWithZone).
-func NSShouldRetainWithZone(anObject objc.ID, requestedZone unsafe.Pointer) bool {
-	return raw.NSShouldRetainWithZone(anObject, requestedZone)
-}
-
-// NSSizeFromCGSize calls [raw.NSSizeFromCGSize] (C function NSSizeFromCGSize).
-func NSSizeFromCGSize(cgsize corefoundation.CGSize) corefoundation.CGSize {
-	return raw.NSSizeFromCGSize(cgsize)
-}
-
-// NSSizeFromString calls [raw.NSSizeFromString] (C function NSSizeFromString).
-func NSSizeFromString(aString *raw.NSString) corefoundation.CGSize {
-	return raw.NSSizeFromString(aString)
-}
+var _fnNSLogv func(objc.ID, string)
 
-// NSSizeToCGSize calls [raw.NSSizeToCGSize] (C function NSSizeToCGSize).
-func NSSizeToCGSize(nssize corefoundation.CGSize) corefoundation.CGSize {
-	return raw.NSSizeToCGSize(nssize)
+// NSLogv calls the Foundation framework function NSLogv.
+func NSLogv(arg obj.Object, arg2 string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSLogv == nil {
+		ebipurego.RegisterLibFunc(&_fnNSLogv, _lib, "NSLogv")
+	}
+	_fnNSLogv(objref.IDOf(arg), arg2)
 }
 
-// NSStringFromClass calls [raw.NSStringFromClass] (C function NSStringFromClass).
-func NSStringFromClass(aClass objc.Class) *raw.NSString {
-	return raw.NSStringFromClass(aClass)
-}
-
-// NSStringFromHashTable calls [raw.NSStringFromHashTable] (C function NSStringFromHashTable).
-func NSStringFromHashTable(table *raw.NSHashTable[objc.ID]) *raw.NSString {
-	return raw.NSStringFromHashTable(table)
-}
+var _fnNSOpenStepRootDirectory func() objc.ID
 
-// NSStringFromMapTable calls [raw.NSStringFromMapTable] (C function NSStringFromMapTable).
-func NSStringFromMapTable(table *raw.NSMapTable[objc.ID, objc.ID]) *raw.NSString {
-	return raw.NSStringFromMapTable(table)
+// NSOpenStepRootDirectory calls the Foundation framework function NSOpenStepRootDirectory.
+func NSOpenStepRootDirectory() string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSOpenStepRootDirectory == nil {
+		ebipurego.RegisterLibFunc(&_fnNSOpenStepRootDirectory, _lib, "NSOpenStepRootDirectory")
+	}
+	_ret := _fnNSOpenStepRootDirectory()
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// NSStringFromPoint calls [raw.NSStringFromPoint] (C function NSStringFromPoint).
-func NSStringFromPoint(aPoint corefoundation.CGPoint) *raw.NSString {
-	return raw.NSStringFromPoint(aPoint)
-}
+var _fnNSPageSize func() int
 
-// NSStringFromProtocol calls [raw.NSStringFromProtocol] (C function NSStringFromProtocol).
-func NSStringFromProtocol(proto unsafe.Pointer) *raw.NSString {
-	return raw.NSStringFromProtocol(proto)
+// NSPageSize calls the Foundation framework function NSPageSize.
+func NSPageSize() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSPageSize == nil {
+		ebipurego.RegisterLibFunc(&_fnNSPageSize, _lib, "NSPageSize")
+	}
+	return _fnNSPageSize()
 }
 
-// NSStringFromRange calls [raw.NSStringFromRange] (C function NSStringFromRange).
-func NSStringFromRange(range_ raw.NSRange) *raw.NSString {
-	return raw.NSStringFromRange(range_)
-}
+var _fnNSRealMemoryAvailable func() int
 
-// NSStringFromRect calls [raw.NSStringFromRect] (C function NSStringFromRect).
-func NSStringFromRect(aRect corefoundation.CGRect) *raw.NSString {
-	return raw.NSStringFromRect(aRect)
+// NSRealMemoryAvailable calls the Foundation framework function NSRealMemoryAvailable.
+func NSRealMemoryAvailable() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRealMemoryAvailable == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRealMemoryAvailable, _lib, "NSRealMemoryAvailable")
+	}
+	return _fnNSRealMemoryAvailable()
 }
 
-// NSStringFromSelector calls [raw.NSStringFromSelector] (C function NSStringFromSelector).
-func NSStringFromSelector(aSelector objc.SEL) *raw.NSString {
-	return raw.NSStringFromSelector(aSelector)
-}
+var _fnNSResetHashTable func(objc.ID)
 
-// NSStringFromSize calls [raw.NSStringFromSize] (C function NSStringFromSize).
-func NSStringFromSize(aSize corefoundation.CGSize) *raw.NSString {
-	return raw.NSStringFromSize(aSize)
+// NSResetHashTable calls the Foundation framework function NSResetHashTable.
+func NSResetHashTable(table obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSResetHashTable == nil {
+		ebipurego.RegisterLibFunc(&_fnNSResetHashTable, _lib, "NSResetHashTable")
+	}
+	_fnNSResetHashTable(objref.IDOf(table))
 }
 
-// NSSwapBigDoubleToHost calls [raw.NSSwapBigDoubleToHost] (C function NSSwapBigDoubleToHost).
-func NSSwapBigDoubleToHost(x raw.NSSwappedDouble) float64 {
-	return raw.NSSwapBigDoubleToHost(x)
-}
+var _fnNSResetMapTable func(objc.ID)
 
-// NSSwapBigFloatToHost calls [raw.NSSwapBigFloatToHost] (C function NSSwapBigFloatToHost).
-func NSSwapBigFloatToHost(x raw.NSSwappedFloat) float32 {
-	return raw.NSSwapBigFloatToHost(x)
+// NSResetMapTable calls the Foundation framework function NSResetMapTable.
+func NSResetMapTable(table obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSResetMapTable == nil {
+		ebipurego.RegisterLibFunc(&_fnNSResetMapTable, _lib, "NSResetMapTable")
+	}
+	_fnNSResetMapTable(objref.IDOf(table))
 }
 
-// NSSwapBigIntToHost calls [raw.NSSwapBigIntToHost] (C function NSSwapBigIntToHost).
-func NSSwapBigIntToHost(x uint) uint {
-	return raw.NSSwapBigIntToHost(x)
-}
+var _fnNSRoundDownToMultipleOfPageSize func(int) int
 
-// NSSwapBigLongLongToHost calls [raw.NSSwapBigLongLongToHost] (C function NSSwapBigLongLongToHost).
+// NSRoundDownToMultipleOfPageSize calls the Foundation framework function NSRoundDownToMultipleOfPageSize.
+func NSRoundDownToMultipleOfPageSize(bytes_ int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRoundDownToMultipleOfPageSize == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRoundDownToMultipleOfPageSize, _lib, "NSRoundDownToMultipleOfPageSize")
+	}
+	return _fnNSRoundDownToMultipleOfPageSize(bytes_)
+}
+
+var _fnNSRoundUpToMultipleOfPageSize func(int) int
+
+// NSRoundUpToMultipleOfPageSize calls the Foundation framework function NSRoundUpToMultipleOfPageSize.
+func NSRoundUpToMultipleOfPageSize(bytes_ int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSRoundUpToMultipleOfPageSize == nil {
+		ebipurego.RegisterLibFunc(&_fnNSRoundUpToMultipleOfPageSize, _lib, "NSRoundUpToMultipleOfPageSize")
+	}
+	return _fnNSRoundUpToMultipleOfPageSize(bytes_)
+}
+
+var _fnNSSearchPathForDirectoriesInDomains func(SearchPathDirectory, SearchPathDomainMask, bool) objc.ID
+
+// NSSearchPathForDirectoriesInDomains calls the Foundation framework function NSSearchPathForDirectoriesInDomains.
+func NSSearchPathForDirectoriesInDomains(directory SearchPathDirectory, domainMask SearchPathDomainMask, expandTilde bool) []string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSearchPathForDirectoriesInDomains == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSearchPathForDirectoriesInDomains, _lib, "NSSearchPathForDirectoriesInDomains")
+	}
+	_ret := _fnNSSearchPathForDirectoriesInDomains(directory, domainMask, expandTilde)
+	return purego.NSArrayToSlice(_ret, func(_id objc.ID) string { return purego.GoString(_id) })
+}
+
+var _fnNSStringFromHashTable func(objc.ID) objc.ID
+
+// NSStringFromHashTable calls the Foundation framework function NSStringFromHashTable.
+func NSStringFromHashTable(table obj.Object) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSStringFromHashTable == nil {
+		ebipurego.RegisterLibFunc(&_fnNSStringFromHashTable, _lib, "NSStringFromHashTable")
+	}
+	_ret := _fnNSStringFromHashTable(objref.IDOf(table))
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
+}
+
+var _fnNSStringFromMapTable func(objc.ID) objc.ID
+
+// NSStringFromMapTable calls the Foundation framework function NSStringFromMapTable.
+func NSStringFromMapTable(table obj.Object) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSStringFromMapTable == nil {
+		ebipurego.RegisterLibFunc(&_fnNSStringFromMapTable, _lib, "NSStringFromMapTable")
+	}
+	_ret := _fnNSStringFromMapTable(objref.IDOf(table))
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
+}
+
+var _fnNSSwapBigIntToHost func(int) int
+
+// NSSwapBigIntToHost calls the Foundation framework function NSSwapBigIntToHost.
+func NSSwapBigIntToHost(x int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapBigIntToHost == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapBigIntToHost, _lib, "NSSwapBigIntToHost")
+	}
+	return _fnNSSwapBigIntToHost(x)
+}
+
+var _fnNSSwapBigLongLongToHost func(uint64) uint64
+
+// NSSwapBigLongLongToHost calls the Foundation framework function NSSwapBigLongLongToHost.
 func NSSwapBigLongLongToHost(x uint64) uint64 {
-	return raw.NSSwapBigLongLongToHost(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapBigLongLongToHost == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapBigLongLongToHost, _lib, "NSSwapBigLongLongToHost")
+	}
+	return _fnNSSwapBigLongLongToHost(x)
 }
 
-// NSSwapBigLongToHost calls [raw.NSSwapBigLongToHost] (C function NSSwapBigLongToHost).
-func NSSwapBigLongToHost(x uint) uint {
-	return raw.NSSwapBigLongToHost(x)
+var _fnNSSwapBigLongToHost func(int) int
+
+// NSSwapBigLongToHost calls the Foundation framework function NSSwapBigLongToHost.
+func NSSwapBigLongToHost(x int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapBigLongToHost == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapBigLongToHost, _lib, "NSSwapBigLongToHost")
+	}
+	return _fnNSSwapBigLongToHost(x)
 }
 
-// NSSwapBigShortToHost calls [raw.NSSwapBigShortToHost] (C function NSSwapBigShortToHost).
+var _fnNSSwapBigShortToHost func(uint16) uint16
+
+// NSSwapBigShortToHost calls the Foundation framework function NSSwapBigShortToHost.
 func NSSwapBigShortToHost(x uint16) uint16 {
-	return raw.NSSwapBigShortToHost(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapBigShortToHost == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapBigShortToHost, _lib, "NSSwapBigShortToHost")
+	}
+	return _fnNSSwapBigShortToHost(x)
 }
 
-// NSSwapDouble calls [raw.NSSwapDouble] (C function NSSwapDouble).
-func NSSwapDouble(x raw.NSSwappedDouble) raw.NSSwappedDouble {
-	return raw.NSSwapDouble(x)
+var _fnNSSwapHostIntToBig func(int) int
+
+// NSSwapHostIntToBig calls the Foundation framework function NSSwapHostIntToBig.
+func NSSwapHostIntToBig(x int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapHostIntToBig == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapHostIntToBig, _lib, "NSSwapHostIntToBig")
+	}
+	return _fnNSSwapHostIntToBig(x)
 }
 
-// NSSwapFloat calls [raw.NSSwapFloat] (C function NSSwapFloat).
-func NSSwapFloat(x raw.NSSwappedFloat) raw.NSSwappedFloat {
-	return raw.NSSwapFloat(x)
+var _fnNSSwapHostIntToLittle func(int) int
+
+// NSSwapHostIntToLittle calls the Foundation framework function NSSwapHostIntToLittle.
+func NSSwapHostIntToLittle(x int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapHostIntToLittle == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapHostIntToLittle, _lib, "NSSwapHostIntToLittle")
+	}
+	return _fnNSSwapHostIntToLittle(x)
 }
 
-// NSSwapHostDoubleToBig calls [raw.NSSwapHostDoubleToBig] (C function NSSwapHostDoubleToBig).
-func NSSwapHostDoubleToBig(x float64) raw.NSSwappedDouble {
-	return raw.NSSwapHostDoubleToBig(x)
-}
+var _fnNSSwapHostLongLongToBig func(uint64) uint64
 
-// NSSwapHostDoubleToLittle calls [raw.NSSwapHostDoubleToLittle] (C function NSSwapHostDoubleToLittle).
-func NSSwapHostDoubleToLittle(x float64) raw.NSSwappedDouble {
-	return raw.NSSwapHostDoubleToLittle(x)
-}
-
-// NSSwapHostFloatToBig calls [raw.NSSwapHostFloatToBig] (C function NSSwapHostFloatToBig).
-func NSSwapHostFloatToBig(x float32) raw.NSSwappedFloat {
-	return raw.NSSwapHostFloatToBig(x)
-}
-
-// NSSwapHostFloatToLittle calls [raw.NSSwapHostFloatToLittle] (C function NSSwapHostFloatToLittle).
-func NSSwapHostFloatToLittle(x float32) raw.NSSwappedFloat {
-	return raw.NSSwapHostFloatToLittle(x)
-}
-
-// NSSwapHostIntToBig calls [raw.NSSwapHostIntToBig] (C function NSSwapHostIntToBig).
-func NSSwapHostIntToBig(x uint) uint {
-	return raw.NSSwapHostIntToBig(x)
-}
-
-// NSSwapHostIntToLittle calls [raw.NSSwapHostIntToLittle] (C function NSSwapHostIntToLittle).
-func NSSwapHostIntToLittle(x uint) uint {
-	return raw.NSSwapHostIntToLittle(x)
-}
-
-// NSSwapHostLongLongToBig calls [raw.NSSwapHostLongLongToBig] (C function NSSwapHostLongLongToBig).
+// NSSwapHostLongLongToBig calls the Foundation framework function NSSwapHostLongLongToBig.
 func NSSwapHostLongLongToBig(x uint64) uint64 {
-	return raw.NSSwapHostLongLongToBig(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapHostLongLongToBig == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapHostLongLongToBig, _lib, "NSSwapHostLongLongToBig")
+	}
+	return _fnNSSwapHostLongLongToBig(x)
 }
 
-// NSSwapHostLongLongToLittle calls [raw.NSSwapHostLongLongToLittle] (C function NSSwapHostLongLongToLittle).
+var _fnNSSwapHostLongLongToLittle func(uint64) uint64
+
+// NSSwapHostLongLongToLittle calls the Foundation framework function NSSwapHostLongLongToLittle.
 func NSSwapHostLongLongToLittle(x uint64) uint64 {
-	return raw.NSSwapHostLongLongToLittle(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapHostLongLongToLittle == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapHostLongLongToLittle, _lib, "NSSwapHostLongLongToLittle")
+	}
+	return _fnNSSwapHostLongLongToLittle(x)
 }
 
-// NSSwapHostLongToBig calls [raw.NSSwapHostLongToBig] (C function NSSwapHostLongToBig).
-func NSSwapHostLongToBig(x uint) uint {
-	return raw.NSSwapHostLongToBig(x)
+var _fnNSSwapHostLongToBig func(int) int
+
+// NSSwapHostLongToBig calls the Foundation framework function NSSwapHostLongToBig.
+func NSSwapHostLongToBig(x int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapHostLongToBig == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapHostLongToBig, _lib, "NSSwapHostLongToBig")
+	}
+	return _fnNSSwapHostLongToBig(x)
 }
 
-// NSSwapHostLongToLittle calls [raw.NSSwapHostLongToLittle] (C function NSSwapHostLongToLittle).
-func NSSwapHostLongToLittle(x uint) uint {
-	return raw.NSSwapHostLongToLittle(x)
+var _fnNSSwapHostLongToLittle func(int) int
+
+// NSSwapHostLongToLittle calls the Foundation framework function NSSwapHostLongToLittle.
+func NSSwapHostLongToLittle(x int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapHostLongToLittle == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapHostLongToLittle, _lib, "NSSwapHostLongToLittle")
+	}
+	return _fnNSSwapHostLongToLittle(x)
 }
 
-// NSSwapHostShortToBig calls [raw.NSSwapHostShortToBig] (C function NSSwapHostShortToBig).
+var _fnNSSwapHostShortToBig func(uint16) uint16
+
+// NSSwapHostShortToBig calls the Foundation framework function NSSwapHostShortToBig.
 func NSSwapHostShortToBig(x uint16) uint16 {
-	return raw.NSSwapHostShortToBig(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapHostShortToBig == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapHostShortToBig, _lib, "NSSwapHostShortToBig")
+	}
+	return _fnNSSwapHostShortToBig(x)
 }
 
-// NSSwapHostShortToLittle calls [raw.NSSwapHostShortToLittle] (C function NSSwapHostShortToLittle).
+var _fnNSSwapHostShortToLittle func(uint16) uint16
+
+// NSSwapHostShortToLittle calls the Foundation framework function NSSwapHostShortToLittle.
 func NSSwapHostShortToLittle(x uint16) uint16 {
-	return raw.NSSwapHostShortToLittle(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapHostShortToLittle == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapHostShortToLittle, _lib, "NSSwapHostShortToLittle")
+	}
+	return _fnNSSwapHostShortToLittle(x)
 }
 
-// NSSwapInt calls [raw.NSSwapInt] (C function NSSwapInt).
-func NSSwapInt(inv uint) uint {
-	return raw.NSSwapInt(inv)
+var _fnNSSwapInt func(int) int
+
+// NSSwapInt calls the Foundation framework function NSSwapInt.
+func NSSwapInt(inv int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapInt == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapInt, _lib, "NSSwapInt")
+	}
+	return _fnNSSwapInt(inv)
 }
 
-// NSSwapLittleDoubleToHost calls [raw.NSSwapLittleDoubleToHost] (C function NSSwapLittleDoubleToHost).
-func NSSwapLittleDoubleToHost(x raw.NSSwappedDouble) float64 {
-	return raw.NSSwapLittleDoubleToHost(x)
+var _fnNSSwapLittleIntToHost func(int) int
+
+// NSSwapLittleIntToHost calls the Foundation framework function NSSwapLittleIntToHost.
+func NSSwapLittleIntToHost(x int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapLittleIntToHost == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapLittleIntToHost, _lib, "NSSwapLittleIntToHost")
+	}
+	return _fnNSSwapLittleIntToHost(x)
 }
 
-// NSSwapLittleFloatToHost calls [raw.NSSwapLittleFloatToHost] (C function NSSwapLittleFloatToHost).
-func NSSwapLittleFloatToHost(x raw.NSSwappedFloat) float32 {
-	return raw.NSSwapLittleFloatToHost(x)
-}
+var _fnNSSwapLittleLongLongToHost func(uint64) uint64
 
-// NSSwapLittleIntToHost calls [raw.NSSwapLittleIntToHost] (C function NSSwapLittleIntToHost).
-func NSSwapLittleIntToHost(x uint) uint {
-	return raw.NSSwapLittleIntToHost(x)
-}
-
-// NSSwapLittleLongLongToHost calls [raw.NSSwapLittleLongLongToHost] (C function NSSwapLittleLongLongToHost).
+// NSSwapLittleLongLongToHost calls the Foundation framework function NSSwapLittleLongLongToHost.
 func NSSwapLittleLongLongToHost(x uint64) uint64 {
-	return raw.NSSwapLittleLongLongToHost(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapLittleLongLongToHost == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapLittleLongLongToHost, _lib, "NSSwapLittleLongLongToHost")
+	}
+	return _fnNSSwapLittleLongLongToHost(x)
 }
 
-// NSSwapLittleLongToHost calls [raw.NSSwapLittleLongToHost] (C function NSSwapLittleLongToHost).
-func NSSwapLittleLongToHost(x uint) uint {
-	return raw.NSSwapLittleLongToHost(x)
+var _fnNSSwapLittleLongToHost func(int) int
+
+// NSSwapLittleLongToHost calls the Foundation framework function NSSwapLittleLongToHost.
+func NSSwapLittleLongToHost(x int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapLittleLongToHost == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapLittleLongToHost, _lib, "NSSwapLittleLongToHost")
+	}
+	return _fnNSSwapLittleLongToHost(x)
 }
 
-// NSSwapLittleShortToHost calls [raw.NSSwapLittleShortToHost] (C function NSSwapLittleShortToHost).
+var _fnNSSwapLittleShortToHost func(uint16) uint16
+
+// NSSwapLittleShortToHost calls the Foundation framework function NSSwapLittleShortToHost.
 func NSSwapLittleShortToHost(x uint16) uint16 {
-	return raw.NSSwapLittleShortToHost(x)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapLittleShortToHost == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapLittleShortToHost, _lib, "NSSwapLittleShortToHost")
+	}
+	return _fnNSSwapLittleShortToHost(x)
 }
 
-// NSSwapLong calls [raw.NSSwapLong] (C function NSSwapLong).
-func NSSwapLong(inv uint) uint {
-	return raw.NSSwapLong(inv)
+var _fnNSSwapLong func(int) int
+
+// NSSwapLong calls the Foundation framework function NSSwapLong.
+func NSSwapLong(inv int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapLong == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapLong, _lib, "NSSwapLong")
+	}
+	return _fnNSSwapLong(inv)
 }
 
-// NSSwapLongLong calls [raw.NSSwapLongLong] (C function NSSwapLongLong).
+var _fnNSSwapLongLong func(uint64) uint64
+
+// NSSwapLongLong calls the Foundation framework function NSSwapLongLong.
 func NSSwapLongLong(inv uint64) uint64 {
-	return raw.NSSwapLongLong(inv)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapLongLong == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapLongLong, _lib, "NSSwapLongLong")
+	}
+	return _fnNSSwapLongLong(inv)
 }
 
-// NSSwapShort calls [raw.NSSwapShort] (C function NSSwapShort).
+var _fnNSSwapShort func(uint16) uint16
+
+// NSSwapShort calls the Foundation framework function NSSwapShort.
 func NSSwapShort(inv uint16) uint16 {
-	return raw.NSSwapShort(inv)
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSSwapShort == nil {
+		ebipurego.RegisterLibFunc(&_fnNSSwapShort, _lib, "NSSwapShort")
+	}
+	return _fnNSSwapShort(inv)
 }
 
-// NSTemporaryDirectory calls [raw.NSTemporaryDirectory] (C function NSTemporaryDirectory).
-func NSTemporaryDirectory() *raw.NSString {
-	return raw.NSTemporaryDirectory()
+var _fnNSTemporaryDirectory func() objc.ID
+
+// NSTemporaryDirectory calls the Foundation framework function NSTemporaryDirectory.
+func NSTemporaryDirectory() string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSTemporaryDirectory == nil {
+		ebipurego.RegisterLibFunc(&_fnNSTemporaryDirectory, _lib, "NSTemporaryDirectory")
+	}
+	_ret := _fnNSTemporaryDirectory()
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// NSUnionRange calls [raw.NSUnionRange] (C function NSUnionRange).
-func NSUnionRange(range1 raw.NSRange, range2 raw.NSRange) raw.NSRange {
-	return raw.NSUnionRange(range1, range2)
+var _fnNSUserName func() objc.ID
+
+// NSUserName calls the Foundation framework function NSUserName.
+func NSUserName() string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNSUserName == nil {
+		ebipurego.RegisterLibFunc(&_fnNSUserName, _lib, "NSUserName")
+	}
+	_ret := _fnNSUserName()
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// NSUnionRect calls [raw.NSUnionRect] (C function NSUnionRect).
-func NSUnionRect(aRect corefoundation.CGRect, bRect corefoundation.CGRect) corefoundation.CGRect {
-	return raw.NSUnionRect(aRect, bRect)
+var _fnNXReadNSObjectFromCoder func(objc.ID) objc.ID
+
+// NXReadNSObjectFromCoder calls the Foundation framework function NXReadNSObjectFromCoder.
+func NXReadNSObjectFromCoder(decoder *Coder) *Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnNXReadNSObjectFromCoder == nil {
+		ebipurego.RegisterLibFunc(&_fnNXReadNSObjectFromCoder, _lib, "NXReadNSObjectFromCoder")
+	}
+	_ret := _fnNXReadNSObjectFromCoder(objref.IDOf(decoder))
+	return ObjectFromID(_ret)
 }
 
-// NSUserName calls [raw.NSUserName] (C function NSUserName).
-func NSUserName() *raw.NSString {
-	return raw.NSUserName()
-}
+var _fnObjectGetClassName func(objc.ID) string
 
-// NSWidth calls [raw.NSWidth] (C function NSWidth).
-func NSWidth(aRect corefoundation.CGRect) float64 {
-	return raw.NSWidth(aRect)
-}
-
-// NSZoneCalloc calls [raw.NSZoneCalloc] (C function NSZoneCalloc).
-func NSZoneCalloc(zone unsafe.Pointer, numElems uint, byteSize uint) unsafe.Pointer {
-	return raw.NSZoneCalloc(zone, numElems, byteSize)
-}
-
-// NSZoneFree calls [raw.NSZoneFree] (C function NSZoneFree).
-func NSZoneFree(zone unsafe.Pointer, ptr unsafe.Pointer) {
-	raw.NSZoneFree(zone, ptr)
-}
-
-// NSZoneFromPointer calls [raw.NSZoneFromPointer] (C function NSZoneFromPointer).
-func NSZoneFromPointer(ptr unsafe.Pointer) unsafe.Pointer {
-	return raw.NSZoneFromPointer(ptr)
-}
-
-// NSZoneMalloc calls [raw.NSZoneMalloc] (C function NSZoneMalloc).
-func NSZoneMalloc(zone unsafe.Pointer, size uint) unsafe.Pointer {
-	return raw.NSZoneMalloc(zone, size)
-}
-
-// NSZoneName calls [raw.NSZoneName] (C function NSZoneName).
-func NSZoneName(zone unsafe.Pointer) *raw.NSString {
-	return raw.NSZoneName(zone)
-}
-
-// NSZoneRealloc calls [raw.NSZoneRealloc] (C function NSZoneRealloc).
-func NSZoneRealloc(zone unsafe.Pointer, ptr unsafe.Pointer, size uint) unsafe.Pointer {
-	return raw.NSZoneRealloc(zone, ptr, size)
-}
-
-// NXReadNSObjectFromCoder calls [raw.NXReadNSObjectFromCoder] (C function NXReadNSObjectFromCoder).
-func NXReadNSObjectFromCoder(decoder *raw.NSCoder) *raw.NSObject {
-	return raw.NXReadNSObjectFromCoder(decoder)
-}
-
-// ObjectGetClassName calls [raw.ObjectGetClassName] (C function object_getClassName).
-func ObjectGetClassName(obj objc.ID) string {
-	return raw.ObjectGetClassName(obj)
-}
-
-// ObjectGetIndexedIvars calls [raw.ObjectGetIndexedIvars] (C function object_getIndexedIvars).
-func ObjectGetIndexedIvars(obj objc.ID) unsafe.Pointer {
-	return raw.ObjectGetIndexedIvars(obj)
-}
-
-// SelGetName calls [raw.SelGetName] (C function sel_getName).
-func SelGetName(sel objc.SEL) string {
-	return raw.SelGetName(sel)
-}
-
-// SelGetUid calls [raw.SelGetUid] (C function sel_getUid).
-func SelGetUid(str string) objc.SEL {
-	return raw.SelGetUid(str)
-}
-
-// SelIsMapped calls [raw.SelIsMapped] (C function sel_isMapped).
-func SelIsMapped(sel objc.SEL) bool {
-	return raw.SelIsMapped(sel)
-}
-
-// SelRegisterName calls [raw.SelRegisterName] (C function sel_registerName).
-func SelRegisterName(str string) objc.SEL {
-	return raw.SelRegisterName(str)
+// ObjectGetClassName calls the Foundation framework function object_getClassName.
+func ObjectGetClassName(obj_ obj.Object) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnObjectGetClassName == nil {
+		ebipurego.RegisterLibFunc(&_fnObjectGetClassName, _lib, "object_getClassName")
+	}
+	return _fnObjectGetClassName(objref.IDOf(obj_))
 }

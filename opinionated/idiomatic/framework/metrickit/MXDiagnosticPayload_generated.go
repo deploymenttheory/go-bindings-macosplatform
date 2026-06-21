@@ -5,131 +5,132 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that encapsulates a diagnostic report.
 //
-// DiagnosticPayload wraps [raw.MXDiagnosticPayload] with a fluent Go API.
+// DiagnosticPayload is an idiomatic wrapper over the Objective-C class MXDiagnosticPayload.
 type DiagnosticPayload struct {
-	inner *raw.MXDiagnosticPayload
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MXDiagnosticPayload].
-func (x *DiagnosticPayload) Unwrap() *raw.MXDiagnosticPayload { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DiagnosticPayload) ID() objc.ID { return x.inner.Ptr() }
-
-// DiagnosticPayloadFromID adopts an existing object pointer as a DiagnosticPayload (nil for 0).
+// DiagnosticPayloadFromID adopts an existing Objective-C object as a DiagnosticPayload
+// (nil for 0), retaining it and registering a release finalizer.
 func DiagnosticPayloadFromID(id objc.ID) *DiagnosticPayload {
 	if id == 0 {
 		return nil
 	}
-	return &DiagnosticPayload{inner: raw.MXDiagnosticPayloadFromID(id)}
+	x := &DiagnosticPayload{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDiagnosticPayload creates a new [DiagnosticPayload].
+// diagnosticPayloadAdopt wraps an Objective-C object that this code just created as a
+// DiagnosticPayload (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func diagnosticPayloadAdopt(id objc.ID) *DiagnosticPayload {
+	if id == 0 {
+		return nil
+	}
+	x := &DiagnosticPayload{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DiagnosticPayload) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DiagnosticPayload) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DiagnosticPayload) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDiagnosticPayload creates a new DiagnosticPayload.
 func NewDiagnosticPayload() *DiagnosticPayload {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXDiagnosticPayload")), objc.RegisterName("new"))
-	return &DiagnosticPayload{inner: raw.MXDiagnosticPayloadFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXDiagnosticPayload")), objc.RegisterName("new"))
+	return diagnosticPayloadAdopt(_id)
 }
 
 // Returns the contents of the payload in JSON format.
-//
-// JSONRepresentation calls the underlying JSONRepresentation.
-func (x *DiagnosticPayload) JSONRepresentation() *foundation.NSData {
-	return x.inner.JSONRepresentation()
+func (x *DiagnosticPayload) JSONRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
+	return obj.Wrap(_r)
 }
 
 // Returns the results of the payload as a dictionary.
-//
-// DictionaryRepresentation calls the underlying DictionaryRepresentation.
-func (x *DiagnosticPayload) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.DictionaryRepresentation()
+func (x *DiagnosticPayload) DictionaryRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
+	return obj.Wrap(_r)
 }
 
-// @property      cpuExceptionDiagnostics @abstract      An array containing CPU exception diagnostics for this application.
+// An array containing CPU exception diagnostics for this application.
 //
 // CpuExceptionDiagnostics returns the collection as a Go slice.
 func (x *DiagnosticPayload) CpuExceptionDiagnostics() []*CPUExceptionDiagnostic {
-	arr := x.inner.CpuExceptionDiagnostics()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CPUExceptionDiagnostic {
-		return &CPUExceptionDiagnostic{inner: raw.MXCPUExceptionDiagnosticFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cpuExceptionDiagnostics"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CPUExceptionDiagnostic { return CPUExceptionDiagnosticFromID(_id) })
 }
 
-// @property      diskWriteExceptionDiagnostics @abstract      An array containing disk write exception diagnostics for this application.
+// An array containing disk write exception diagnostics for this application.
 //
 // DiskWriteExceptionDiagnostics returns the collection as a Go slice.
 func (x *DiagnosticPayload) DiskWriteExceptionDiagnostics() []*DiskWriteExceptionDiagnostic {
-	arr := x.inner.DiskWriteExceptionDiagnostics()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DiskWriteExceptionDiagnostic {
-		return &DiskWriteExceptionDiagnostic{inner: raw.MXDiskWriteExceptionDiagnosticFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("diskWriteExceptionDiagnostics"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DiskWriteExceptionDiagnostic { return DiskWriteExceptionDiagnosticFromID(_id) })
 }
 
-// @property      hangDiagnostics @abstract      An array containing hang diagnostics for this application.
+// An array containing hang diagnostics for this application.
 //
 // HangDiagnostics returns the collection as a Go slice.
 func (x *DiagnosticPayload) HangDiagnostics() []*HangDiagnostic {
-	arr := x.inner.HangDiagnostics()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *HangDiagnostic {
-		return &HangDiagnostic{inner: raw.MXHangDiagnosticFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hangDiagnostics"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *HangDiagnostic { return HangDiagnosticFromID(_id) })
 }
 
-// @property      crashDiagnostics @abstract      An array containing crash diagnostics for this application.
+// An array containing crash diagnostics for this application.
 //
 // CrashDiagnostics returns the collection as a Go slice.
 func (x *DiagnosticPayload) CrashDiagnostics() []*CrashDiagnostic {
-	arr := x.inner.CrashDiagnostics()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CrashDiagnostic {
-		return &CrashDiagnostic{inner: raw.MXCrashDiagnosticFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("crashDiagnostics"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CrashDiagnostic { return CrashDiagnosticFromID(_id) })
 }
 
-// @property      timeStampBegin @abstract      An NSDate object that indicates the start time for which the payload was generated.
-//
-// TimeStampBegin calls the underlying TimeStampBegin.
-func (x *DiagnosticPayload) TimeStampBegin() *foundation.NSDate {
-	return x.inner.TimeStampBegin()
+// An NSDate object that indicates the start time for which the payload was generated.
+func (x *DiagnosticPayload) TimeStampBegin() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeStampBegin"))
+	return obj.Wrap(_r)
 }
 
-// @property      timeStampEnd @abstract      An NSDate object that indicates the end time for which the payload was generated.
-//
-// TimeStampEnd calls the underlying TimeStampEnd.
-func (x *DiagnosticPayload) TimeStampEnd() *foundation.NSDate {
-	return x.inner.TimeStampEnd()
+// An NSDate object that indicates the end time for which the payload was generated.
+func (x *DiagnosticPayload) TimeStampEnd() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeStampEnd"))
+	return obj.Wrap(_r)
 }
 
 // DiagnosticPayloadable is the interface implemented by [DiagnosticPayload], for mocking and DI.
 type DiagnosticPayloadable interface {
-	Unwrap() *raw.MXDiagnosticPayload
-	JSONRepresentation() *foundation.NSData
-	DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID]
+	obj.Object
+	JSONRepresentation() obj.Object
+	DictionaryRepresentation() obj.Object
 	CpuExceptionDiagnostics() []*CPUExceptionDiagnostic
 	DiskWriteExceptionDiagnostics() []*DiskWriteExceptionDiagnostic
 	HangDiagnostics() []*HangDiagnostic
 	CrashDiagnostics() []*CrashDiagnostic
-	TimeStampBegin() *foundation.NSDate
-	TimeStampEnd() *foundation.NSDate
+	TimeStampBegin() obj.Object
+	TimeStampEnd() obj.Object
 }
 
 var _ DiagnosticPayloadable = (*DiagnosticPayload)(nil)

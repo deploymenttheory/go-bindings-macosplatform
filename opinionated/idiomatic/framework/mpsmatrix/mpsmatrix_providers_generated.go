@@ -5,30 +5,30 @@
 package mpsmatrix
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// MatrixBinaryKernelProvider is implemented by MatrixBinaryKernel and any idiomatic type wrapping a MPSMatrixBinaryKernel subclass.
+// MatrixBinaryKernelProvider is accepted wherever a MPSMatrixBinaryKernel (or one of its subclasses) is expected.
 type MatrixBinaryKernelProvider interface {
-	asMatrixBinaryKernel() *raw.MPSMatrixBinaryKernel
+	objref.Object
 }
 
-// MatrixRandomProvider is implemented by MatrixRandom and any idiomatic type wrapping a MPSMatrixRandom subclass.
+// MatrixRandomProvider is accepted wherever a MPSMatrixRandom (or one of its subclasses) is expected.
 type MatrixRandomProvider interface {
-	asMatrixRandom() *raw.MPSMatrixRandom
+	objref.Object
 }
 
-// MatrixSoftMaxProvider is implemented by MatrixSoftMax and any idiomatic type wrapping a MPSMatrixSoftMax subclass.
+// MatrixSoftMaxProvider is accepted wherever a MPSMatrixSoftMax (or one of its subclasses) is expected.
 type MatrixSoftMaxProvider interface {
-	asMatrixSoftMax() *raw.MPSMatrixSoftMax
+	objref.Object
 }
 
-// MatrixSoftMaxGradientProvider is implemented by MatrixSoftMaxGradient and any idiomatic type wrapping a MPSMatrixSoftMaxGradient subclass.
+// MatrixSoftMaxGradientProvider is accepted wherever a MPSMatrixSoftMaxGradient (or one of its subclasses) is expected.
 type MatrixSoftMaxGradientProvider interface {
-	asMatrixSoftMaxGradient() *raw.MPSMatrixSoftMaxGradient
+	objref.Object
 }
 
-// MatrixUnaryKernelProvider is implemented by MatrixUnaryKernel and any idiomatic type wrapping a MPSMatrixUnaryKernel subclass.
+// MatrixUnaryKernelProvider is accepted wherever a MPSMatrixUnaryKernel (or one of its subclasses) is expected.
 type MatrixUnaryKernelProvider interface {
-	asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel
+	objref.Object
 }

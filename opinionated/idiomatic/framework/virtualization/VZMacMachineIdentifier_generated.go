@@ -5,57 +5,83 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A unique identifier for a VM.
 //
-// MacMachineIdentifier wraps [raw.VZMacMachineIdentifier] with a fluent Go API.
+// MacMachineIdentifier is an idiomatic wrapper over the Objective-C class VZMacMachineIdentifier.
 type MacMachineIdentifier struct {
-	inner *raw.VZMacMachineIdentifier
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZMacMachineIdentifier].
-func (x *MacMachineIdentifier) Unwrap() *raw.VZMacMachineIdentifier { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MacMachineIdentifier) ID() objc.ID { return x.inner.Ptr() }
-
-// MacMachineIdentifierFromID adopts an existing object pointer as a MacMachineIdentifier (nil for 0).
+// MacMachineIdentifierFromID adopts an existing Objective-C object as a MacMachineIdentifier
+// (nil for 0), retaining it and registering a release finalizer.
 func MacMachineIdentifierFromID(id objc.ID) *MacMachineIdentifier {
 	if id == 0 {
 		return nil
 	}
-	return &MacMachineIdentifier{inner: raw.VZMacMachineIdentifierFromID(id)}
+	x := &MacMachineIdentifier{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMacMachineIdentifier creates a new [MacMachineIdentifier].
+// macMachineIdentifierAdopt wraps an Objective-C object that this code just created as a
+// MacMachineIdentifier (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func macMachineIdentifierAdopt(id objc.ID) *MacMachineIdentifier {
+	if id == 0 {
+		return nil
+	}
+	x := &MacMachineIdentifier{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MacMachineIdentifier) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MacMachineIdentifier) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MacMachineIdentifier) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMacMachineIdentifier creates a new MacMachineIdentifier.
 func NewMacMachineIdentifier() *MacMachineIdentifier {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacMachineIdentifier")), objc.RegisterName("new"))
-	return &MacMachineIdentifier{inner: raw.VZMacMachineIdentifierFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZMacMachineIdentifier")), objc.RegisterName("new"))
+	return macMachineIdentifierAdopt(_id)
 }
 
 // Create a machine identifier described by the specified data representation.
 //
-// NewMacMachineIdentifierWithDataRepresentation creates a new [MacMachineIdentifier].
-func NewMacMachineIdentifierWithDataRepresentation(dataRepresentation *foundation.NSData) *MacMachineIdentifier {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacMachineIdentifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:"), dataRepresentation.Ptr())
-	return &MacMachineIdentifier{inner: raw.VZMacMachineIdentifierFromID(_id)}
+// NewMacMachineIdentifierWithDataRepresentation creates a new MacMachineIdentifier.
+func NewMacMachineIdentifierWithDataRepresentation(dataRepresentation obj.Object) *MacMachineIdentifier {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacMachineIdentifier")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:"), objref.IDOf(dataRepresentation))
+	return macMachineIdentifierAdopt(_id)
 }
 
-// DataRepresentation calls the underlying DataRepresentation.
-func (x *MacMachineIdentifier) DataRepresentation() *foundation.NSData {
-	return x.inner.DataRepresentation()
+func (x *MacMachineIdentifier) DataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
+	return obj.Wrap(_r)
 }
 
 // MacMachineIdentifierable is the interface implemented by [MacMachineIdentifier], for mocking and DI.
 type MacMachineIdentifierable interface {
-	Unwrap() *raw.VZMacMachineIdentifier
-	DataRepresentation() *foundation.NSData
+	obj.Object
+	DataRepresentation() obj.Object
 }
 
 var _ MacMachineIdentifierable = (*MacMachineIdentifier)(nil)

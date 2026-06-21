@@ -5,70 +5,90 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Filters a user specifies to redial a call.
 //
-// CallRecordFilter wraps [raw.INCallRecordFilter] with a fluent Go API.
+// CallRecordFilter is an idiomatic wrapper over the Objective-C class INCallRecordFilter.
 type CallRecordFilter struct {
-	inner *raw.INCallRecordFilter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INCallRecordFilter].
-func (x *CallRecordFilter) Unwrap() *raw.INCallRecordFilter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CallRecordFilter) ID() objc.ID { return x.inner.Ptr() }
-
-// CallRecordFilterFromID adopts an existing object pointer as a CallRecordFilter (nil for 0).
+// CallRecordFilterFromID adopts an existing Objective-C object as a CallRecordFilter
+// (nil for 0), retaining it and registering a release finalizer.
 func CallRecordFilterFromID(id objc.ID) *CallRecordFilter {
 	if id == 0 {
 		return nil
 	}
-	return &CallRecordFilter{inner: raw.INCallRecordFilterFromID(id)}
+	x := &CallRecordFilter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// callRecordFilterAdopt wraps an Objective-C object that this code just created as a
+// CallRecordFilter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func callRecordFilterAdopt(id objc.ID) *CallRecordFilter {
+	if id == 0 {
+		return nil
+	}
+	x := &CallRecordFilter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CallRecordFilter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CallRecordFilter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CallRecordFilter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a filtered call record with the details about a call.
 //
-// NewCallRecordFilterWithParticipantsCallTypesCallCapability creates a new [CallRecordFilter].
-func NewCallRecordFilterWithParticipantsCallTypesCallCapability(participants *foundation.NSArray[*raw.INPerson], callTypes INCallRecordTypeOptions, callCapability INCallCapability) *CallRecordFilter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INCallRecordFilter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParticipants:callTypes:callCapability:"), participants.Ptr(), raw.INCallRecordTypeOptions(callTypes), raw.INCallCapability(callCapability))
-	return &CallRecordFilter{inner: raw.INCallRecordFilterFromID(_id)}
+// NewCallRecordFilterWithParticipantsCallTypesCallCapability creates a new CallRecordFilter.
+func NewCallRecordFilterWithParticipantsCallTypesCallCapability(participants []*Person, callTypes CallRecordTypeOptions, callCapability CallCapability) *CallRecordFilter {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INCallRecordFilter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParticipants:callTypes:callCapability:"), purego.SliceToNSArray(participants, func(_v *Person) objc.ID { return objref.IDOf(_v) }), callTypes, callCapability)
+	return callRecordFilterAdopt(_id)
 }
 
 // Participants returns the collection as a Go slice.
 func (x *CallRecordFilter) Participants() []*Person {
-	arr := x.inner.Participants()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Person {
-		return &Person{inner: raw.INPersonFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("participants"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
-// CallTypes calls the underlying CallTypes.
-func (x *CallRecordFilter) CallTypes() INCallRecordTypeOptions {
-	return INCallRecordTypeOptions(x.inner.CallTypes())
+func (x *CallRecordFilter) CallTypes() CallRecordTypeOptions {
+	_r := objc.Send[CallRecordTypeOptions](objref.IDOf(x), objc.RegisterName("callTypes"))
+	return _r
 }
 
-// CallCapability calls the underlying CallCapability.
-func (x *CallRecordFilter) CallCapability() INCallCapability {
-	return INCallCapability(x.inner.CallCapability())
+func (x *CallRecordFilter) CallCapability() CallCapability {
+	_r := objc.Send[CallCapability](objref.IDOf(x), objc.RegisterName("callCapability"))
+	return _r
 }
 
 // CallRecordFilterable is the interface implemented by [CallRecordFilter], for mocking and DI.
 type CallRecordFilterable interface {
-	Unwrap() *raw.INCallRecordFilter
+	obj.Object
 	Participants() []*Person
-	CallTypes() INCallRecordTypeOptions
-	CallCapability() INCallCapability
+	CallTypes() CallRecordTypeOptions
+	CallCapability() CallCapability
 }
 
 var _ CallRecordFilterable = (*CallRecordFilter)(nil)

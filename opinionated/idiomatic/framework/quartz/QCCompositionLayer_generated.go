@@ -5,65 +5,86 @@
 package quartz
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A layer that loads, plays, and controls Quartz Composer compositions in a Core Animation layer hierarchy.
 //
-// QCCompositionLayer wraps [raw.QCCompositionLayer] with a fluent Go API.
+// QCCompositionLayer is an idiomatic wrapper over the Objective-C class QCCompositionLayer.
 type QCCompositionLayer struct {
-	inner *raw.QCCompositionLayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QCCompositionLayer].
-func (x *QCCompositionLayer) Unwrap() *raw.QCCompositionLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QCCompositionLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// QCCompositionLayerFromID adopts an existing object pointer as a QCCompositionLayer (nil for 0).
+// QCCompositionLayerFromID adopts an existing Objective-C object as a QCCompositionLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func QCCompositionLayerFromID(id objc.ID) *QCCompositionLayer {
 	if id == 0 {
 		return nil
 	}
-	return &QCCompositionLayer{inner: raw.QCCompositionLayerFromID(id)}
+	x := &QCCompositionLayer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// qCCompositionLayerAdopt wraps an Objective-C object that this code just created as a
+// QCCompositionLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func qCCompositionLayerAdopt(id objc.ID) *QCCompositionLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &QCCompositionLayer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *QCCompositionLayer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QCCompositionLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QCCompositionLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes and returns a composition layer using the Quartz Composer composition in the specified file.
 //
-// NewQCCompositionLayerWithFile creates a new [QCCompositionLayer].
+// NewQCCompositionLayerWithFile creates a new QCCompositionLayer.
 func NewQCCompositionLayerWithFile(path string) *QCCompositionLayer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QCCompositionLayer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFile:"), foundation.NSStringStringWithUTF8String(path).Ptr())
-	return &QCCompositionLayer{inner: raw.QCCompositionLayerFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("QCCompositionLayer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFile:"), purego.NSString(path))
+	return qCCompositionLayerAdopt(_id)
 }
 
 // Initializes and returns a composition layer using the provided Quartz Composer composition.
 //
-// NewQCCompositionLayerWithComposition creates a new [QCCompositionLayer].
-func NewQCCompositionLayerWithComposition(composition *raw.QCComposition) *QCCompositionLayer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QCCompositionLayer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComposition:"), composition.Ptr())
-	return &QCCompositionLayer{inner: raw.QCCompositionLayerFromID(_id)}
+// NewQCCompositionLayerWithComposition creates a new QCCompositionLayer.
+func NewQCCompositionLayerWithComposition(composition *QCComposition) *QCCompositionLayer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("QCCompositionLayer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComposition:"), objref.IDOf(composition))
+	return qCCompositionLayerAdopt(_id)
 }
 
 // Returns the composition associated with the layer.
-//
-// Composition calls the underlying Composition.
 func (x *QCCompositionLayer) Composition() *QCComposition {
-	_r := x.inner.Composition()
-	if _r == nil {
-		return nil
-	}
-	return &QCComposition{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composition"))
+	return QCCompositionFromID(_r)
 }
 
 // QCCompositionLayerable is the interface implemented by [QCCompositionLayer], for mocking and DI.
 type QCCompositionLayerable interface {
-	Unwrap() *raw.QCCompositionLayer
+	obj.Object
 	Composition() *QCComposition
 }
 

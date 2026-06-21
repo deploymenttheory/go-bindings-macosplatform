@@ -6,42 +6,67 @@ package virtualization
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object you use to install macOS on the specified virtual machine.
 //
-// MacOSInstaller wraps [raw.VZMacOSInstaller] with a fluent Go API.
+// MacOSInstaller is an idiomatic wrapper over the Objective-C class VZMacOSInstaller.
 type MacOSInstaller struct {
-	inner *raw.VZMacOSInstaller
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZMacOSInstaller].
-func (x *MacOSInstaller) Unwrap() *raw.VZMacOSInstaller { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MacOSInstaller) ID() objc.ID { return x.inner.Ptr() }
-
-// MacOSInstallerFromID adopts an existing object pointer as a MacOSInstaller (nil for 0).
+// MacOSInstallerFromID adopts an existing Objective-C object as a MacOSInstaller
+// (nil for 0), retaining it and registering a release finalizer.
 func MacOSInstallerFromID(id objc.ID) *MacOSInstaller {
 	if id == 0 {
 		return nil
 	}
-	return &MacOSInstaller{inner: raw.VZMacOSInstallerFromID(id)}
+	x := &MacOSInstaller{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// macOSInstallerAdopt wraps an Objective-C object that this code just created as a
+// MacOSInstaller (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func macOSInstallerAdopt(id objc.ID) *MacOSInstaller {
+	if id == 0 {
+		return nil
+	}
+	x := &MacOSInstaller{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MacOSInstaller) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MacOSInstaller) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MacOSInstaller) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a macOS installer object.
 //
-// NewMacOSInstallerWithVirtualMachineRestoreImageURL creates a new [MacOSInstaller].
-func NewMacOSInstallerWithVirtualMachineRestoreImageURL(virtualMachine *raw.VZVirtualMachine, restoreImageFileURL string) *MacOSInstaller {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacOSInstaller")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVirtualMachine:restoreImageURL:"), virtualMachine.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(restoreImageFileURL)).Ptr())
-	return &MacOSInstaller{inner: raw.VZMacOSInstallerFromID(_id)}
+// NewMacOSInstallerWithVirtualMachineRestoreImageURL creates a new MacOSInstaller.
+func NewMacOSInstallerWithVirtualMachineRestoreImageURL(virtualMachine *VirtualMachine, restoreImageFileURL string) *MacOSInstaller {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacOSInstaller")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVirtualMachine:restoreImageURL:"), objref.IDOf(virtualMachine), rt.FileURL(restoreImageFileURL))
+	return macOSInstallerAdopt(_id)
 }
 
 // Start installing macOS.
@@ -49,13 +74,12 @@ func NewMacOSInstallerWithVirtualMachineRestoreImageURL(virtualMachine *raw.VZVi
 // Install blocks until the operation completes or ctx is cancelled.
 func (x *MacOSInstaller) Install(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.InstallWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("installWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -64,38 +88,31 @@ func (x *MacOSInstaller) Install(ctx context.Context) error {
 	}
 }
 
-// @abstract An NSProgress object that can be used to observe or cancel installation. @discussion If the progress object is cancelled before installation is started, an exception will be raised.
-//
-// Progress calls the underlying Progress.
-func (x *MacOSInstaller) Progress() *foundation.NSProgress {
-	return x.inner.Progress()
+// An NSProgress object that can be used to observe or cancel installation. If the progress object is cancelled before installation is started, an exception will be raised.
+func (x *MacOSInstaller) Progress() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("progress"))
+	return obj.Wrap(_r)
 }
 
-// @abstract The virtual machine that this installer was initialized with.
-//
-// VirtualMachine calls the underlying VirtualMachine.
+// The virtual machine that this installer was initialized with.
 func (x *MacOSInstaller) VirtualMachine() *VirtualMachine {
-	_r := x.inner.VirtualMachine()
-	if _r == nil {
-		return nil
-	}
-	return &VirtualMachine{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("virtualMachine"))
+	return VirtualMachineFromID(_r)
 }
 
-// @abstract The restore image URL that this installer was initialized with.
-//
-// RestoreImageURL calls the underlying RestoreImageURL.
-func (x *MacOSInstaller) RestoreImageURL() *foundation.NSURL {
-	return x.inner.RestoreImageURL()
+// The restore image URL that this installer was initialized with.
+func (x *MacOSInstaller) RestoreImageURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restoreImageURL"))
+	return obj.Wrap(_r)
 }
 
 // MacOSInstallerable is the interface implemented by [MacOSInstaller], for mocking and DI.
 type MacOSInstallerable interface {
-	Unwrap() *raw.VZMacOSInstaller
+	obj.Object
 	Install(ctx context.Context) error
-	Progress() *foundation.NSProgress
+	Progress() obj.Object
 	VirtualMachine() *VirtualMachine
-	RestoreImageURL() *foundation.NSURL
+	RestoreImageURL() obj.Object
 }
 
 var _ MacOSInstallerable = (*MacOSInstaller)(nil)

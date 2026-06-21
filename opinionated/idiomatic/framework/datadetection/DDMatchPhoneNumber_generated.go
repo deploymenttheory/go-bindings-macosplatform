@@ -5,66 +5,86 @@
 package datadetection
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/datadetection"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains a phone number that the data detection system matches.
 //
-// MatchPhoneNumber wraps [raw.DDMatchPhoneNumber] with a fluent Go API.
+// MatchPhoneNumber is an idiomatic wrapper over the Objective-C class DDMatchPhoneNumber.
 type MatchPhoneNumber struct {
-	inner *raw.DDMatchPhoneNumber
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DDMatchPhoneNumber].
-func (x *MatchPhoneNumber) Unwrap() *raw.DDMatchPhoneNumber { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatchPhoneNumber) ID() objc.ID { return x.inner.Ptr() }
-
-// MatchPhoneNumberFromID adopts an existing object pointer as a MatchPhoneNumber (nil for 0).
+// MatchPhoneNumberFromID adopts an existing Objective-C object as a MatchPhoneNumber
+// (nil for 0), retaining it and registering a release finalizer.
 func MatchPhoneNumberFromID(id objc.ID) *MatchPhoneNumber {
 	if id == 0 {
 		return nil
 	}
-	return &MatchPhoneNumber{inner: raw.DDMatchPhoneNumberFromID(id)}
+	x := &MatchPhoneNumber{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMatchPhoneNumber creates a new [MatchPhoneNumber].
+// matchPhoneNumberAdopt wraps an Objective-C object that this code just created as a
+// MatchPhoneNumber (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matchPhoneNumberAdopt(id objc.ID) *MatchPhoneNumber {
+	if id == 0 {
+		return nil
+	}
+	x := &MatchPhoneNumber{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MatchPhoneNumber) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatchPhoneNumber) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatchPhoneNumber) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMatchPhoneNumber creates a new MatchPhoneNumber.
 func NewMatchPhoneNumber() *MatchPhoneNumber {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DDMatchPhoneNumber")), objc.RegisterName("new"))
-	return &MatchPhoneNumber{inner: raw.DDMatchPhoneNumberFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DDMatchPhoneNumber")), objc.RegisterName("new"))
+	return matchPhoneNumberAdopt(_id)
 }
 
 // A string that represents a phone number.
-//
-// PhoneNumber calls the underlying PhoneNumber.
 func (x *MatchPhoneNumber) PhoneNumber() string {
-	_r := x.inner.PhoneNumber()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneNumber"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // A string that categorizes a phone number, such as Home or Work.
-//
-// Label calls the underlying Label.
 func (x *MatchPhoneNumber) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *MatchPhoneNumber) asMatch() *raw.DDMatch { return &x.inner.DDMatch }
 
 // MatchPhoneNumberable is the interface implemented by [MatchPhoneNumber], for mocking and DI.
 type MatchPhoneNumberable interface {
-	Unwrap() *raw.DDMatchPhoneNumber
+	obj.Object
 	PhoneNumber() string
 	Label() string
 }

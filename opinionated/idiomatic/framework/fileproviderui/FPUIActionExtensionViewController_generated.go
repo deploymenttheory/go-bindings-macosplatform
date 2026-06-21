@@ -5,61 +5,74 @@
 package fileproviderui
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fileproviderui"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The custom user interface used to perform a selected action.
 //
-// ActionExtensionViewController wraps [raw.FPUIActionExtensionViewController] with a fluent Go API.
+// ActionExtensionViewController is an idiomatic wrapper over the Objective-C class FPUIActionExtensionViewController.
 type ActionExtensionViewController struct {
-	inner *raw.FPUIActionExtensionViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FPUIActionExtensionViewController].
-func (x *ActionExtensionViewController) Unwrap() *raw.FPUIActionExtensionViewController {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ActionExtensionViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// ActionExtensionViewControllerFromID adopts an existing object pointer as a ActionExtensionViewController (nil for 0).
+// ActionExtensionViewControllerFromID adopts an existing Objective-C object as a ActionExtensionViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func ActionExtensionViewControllerFromID(id objc.ID) *ActionExtensionViewController {
 	if id == 0 {
 		return nil
 	}
-	return &ActionExtensionViewController{inner: raw.FPUIActionExtensionViewControllerFromID(id)}
+	x := &ActionExtensionViewController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewActionExtensionViewController creates a new [ActionExtensionViewController].
+// actionExtensionViewControllerAdopt wraps an Objective-C object that this code just created as a
+// ActionExtensionViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func actionExtensionViewControllerAdopt(id objc.ID) *ActionExtensionViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &ActionExtensionViewController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ActionExtensionViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ActionExtensionViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ActionExtensionViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewActionExtensionViewController creates a new ActionExtensionViewController.
 func NewActionExtensionViewController() *ActionExtensionViewController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FPUIActionExtensionViewController")), objc.RegisterName("new"))
-	return &ActionExtensionViewController{inner: raw.FPUIActionExtensionViewControllerFromID(_id)}
-}
-
-// Performs any necessary setup or configuration when an authentication error occurs.
-//
-// PrepareForError calls the underlying PrepareForError.
-func (x *ActionExtensionViewController) PrepareForError(error_ unsafe.Pointer) {
-	x.inner.PrepareForError(error_)
+	_id := objc.Send[objc.ID](objc.ID(_class("FPUIActionExtensionViewController")), objc.RegisterName("new"))
+	return actionExtensionViewControllerAdopt(_id)
 }
 
 // Performs any necessary setup or configuration for the specified action.
-//
-// PrepareForActionWithIdentifierItemIdentifiers calls the underlying PrepareForActionWithIdentifierItemIdentifiers.
-func (x *ActionExtensionViewController) PrepareForActionWithIdentifierItemIdentifiers(actionIdentifier string, itemIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	x.inner.PrepareForActionWithIdentifierItemIdentifiers(foundation.NSStringStringWithUTF8String(actionIdentifier), itemIdentifiers)
+func (x *ActionExtensionViewController) PrepareForActionWithIdentifierItemIdentifiers(actionIdentifier string, itemIdentifiers []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareForActionWithIdentifier:itemIdentifiers:"), purego.NSString(actionIdentifier), purego.SliceToNSArray(itemIdentifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ActionExtensionViewControllerable is the interface implemented by [ActionExtensionViewController], for mocking and DI.
 type ActionExtensionViewControllerable interface {
-	Unwrap() *raw.FPUIActionExtensionViewController
-	PrepareForError(error_ unsafe.Pointer)
-	PrepareForActionWithIdentifierItemIdentifiers(actionIdentifier string, itemIdentifiers *foundation.NSArray[*foundation.NSString])
+	obj.Object
+	PrepareForActionWithIdentifierItemIdentifiers(actionIdentifier string, itemIdentifiers []obj.Object)
 }
 
 var _ ActionExtensionViewControllerable = (*ActionExtensionViewController)(nil)

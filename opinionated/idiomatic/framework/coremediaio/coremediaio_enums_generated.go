@@ -10,68 +10,68 @@ import (
 )
 
 // Constants that indicate the clock type of a stream.
-type CMIOExtensionStreamClockType int64
+type ExtensionStreamClockType int64
 
 const (
-	CMIOExtensionStreamClockTypeHostTime                 CMIOExtensionStreamClockType = 0
-	CMIOExtensionStreamClockTypeLinkedCoreAudioDeviceUID CMIOExtensionStreamClockType = 1
-	CMIOExtensionStreamClockTypeCustom                   CMIOExtensionStreamClockType = 2
+	ExtensionStreamClockTypeHostTime                 ExtensionStreamClockType = 0
+	ExtensionStreamClockTypeLinkedCoreAudioDeviceUID ExtensionStreamClockType = 1
+	ExtensionStreamClockTypeCustom                   ExtensionStreamClockType = 2
 )
 
-func (e CMIOExtensionStreamClockType) String() string {
+func (e ExtensionStreamClockType) String() string {
 	switch e {
-	case CMIOExtensionStreamClockTypeHostTime:
-		return "CMIOExtensionStreamClockTypeHostTime"
-	case CMIOExtensionStreamClockTypeLinkedCoreAudioDeviceUID:
-		return "CMIOExtensionStreamClockTypeLinkedCoreAudioDeviceUID"
-	case CMIOExtensionStreamClockTypeCustom:
-		return "CMIOExtensionStreamClockTypeCustom"
+	case ExtensionStreamClockTypeHostTime:
+		return "ExtensionStreamClockTypeHostTime"
+	case ExtensionStreamClockTypeLinkedCoreAudioDeviceUID:
+		return "ExtensionStreamClockTypeLinkedCoreAudioDeviceUID"
+	case ExtensionStreamClockTypeCustom:
+		return "ExtensionStreamClockTypeCustom"
 	default:
-		return fmt.Sprintf("CMIOExtensionStreamClockType(%d)", int64(e))
+		return fmt.Sprintf("ExtensionStreamClockType(%d)", int64(e))
 	}
 }
 
 // Constants that define the data-flow direction of the stream.
-type CMIOExtensionStreamDirection int64
+type ExtensionStreamDirection int64
 
 const (
-	CMIOExtensionStreamDirectionSource CMIOExtensionStreamDirection = 0
-	CMIOExtensionStreamDirectionSink   CMIOExtensionStreamDirection = 1
+	ExtensionStreamDirectionSource ExtensionStreamDirection = 0
+	ExtensionStreamDirectionSink   ExtensionStreamDirection = 1
 )
 
-func (e CMIOExtensionStreamDirection) String() string {
+func (e ExtensionStreamDirection) String() string {
 	switch e {
-	case CMIOExtensionStreamDirectionSource:
-		return "CMIOExtensionStreamDirectionSource"
-	case CMIOExtensionStreamDirectionSink:
-		return "CMIOExtensionStreamDirectionSink"
+	case ExtensionStreamDirectionSource:
+		return "ExtensionStreamDirectionSource"
+	case ExtensionStreamDirectionSink:
+		return "ExtensionStreamDirectionSink"
 	default:
-		return fmt.Sprintf("CMIOExtensionStreamDirection(%d)", int64(e))
+		return fmt.Sprintf("ExtensionStreamDirection(%d)", int64(e))
 	}
 }
 
 // Constants that specify the types of discontinuities that can occur in a media stream.
 // Bitmask — values may be combined with |.
-type CMIOExtensionStreamDiscontinuityFlags int64
+type ExtensionStreamDiscontinuityFlags int64
 
 const (
 	// A flag that indicates there’s no discontinuity in the stream.
-	CMIOExtensionStreamDiscontinuityFlagNone          CMIOExtensionStreamDiscontinuityFlags = 0
-	CMIOExtensionStreamDiscontinuityFlagUnknown       CMIOExtensionStreamDiscontinuityFlags = 1
-	CMIOExtensionStreamDiscontinuityFlagTime          CMIOExtensionStreamDiscontinuityFlags = 2
-	CMIOExtensionStreamDiscontinuityFlagSampleDropped CMIOExtensionStreamDiscontinuityFlags = 64
+	ExtensionStreamDiscontinuityFlagNone          ExtensionStreamDiscontinuityFlags = 0
+	ExtensionStreamDiscontinuityFlagUnknown       ExtensionStreamDiscontinuityFlags = 1
+	ExtensionStreamDiscontinuityFlagTime          ExtensionStreamDiscontinuityFlags = 2
+	ExtensionStreamDiscontinuityFlagSampleDropped ExtensionStreamDiscontinuityFlags = 64
 )
 
-func (e CMIOExtensionStreamDiscontinuityFlags) String() string {
+func (e ExtensionStreamDiscontinuityFlags) String() string {
 	var parts []string
-	if e&CMIOExtensionStreamDiscontinuityFlagUnknown != 0 {
-		parts = append(parts, "CMIOExtensionStreamDiscontinuityFlagUnknown")
+	if e&ExtensionStreamDiscontinuityFlagUnknown != 0 {
+		parts = append(parts, "ExtensionStreamDiscontinuityFlagUnknown")
 	}
-	if e&CMIOExtensionStreamDiscontinuityFlagTime != 0 {
-		parts = append(parts, "CMIOExtensionStreamDiscontinuityFlagTime")
+	if e&ExtensionStreamDiscontinuityFlagTime != 0 {
+		parts = append(parts, "ExtensionStreamDiscontinuityFlagTime")
 	}
-	if e&CMIOExtensionStreamDiscontinuityFlagSampleDropped != 0 {
-		parts = append(parts, "CMIOExtensionStreamDiscontinuityFlagSampleDropped")
+	if e&ExtensionStreamDiscontinuityFlagSampleDropped != 0 {
+		parts = append(parts, "ExtensionStreamDiscontinuityFlagSampleDropped")
 	}
 	if len(parts) == 0 {
 		return "0"

@@ -5,66 +5,88 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A base class that represents a network device in a virtual machine.
 //
-// NetworkDevice wraps [raw.VZNetworkDevice] with a fluent Go API.
+// NetworkDevice is an idiomatic wrapper over the Objective-C class VZNetworkDevice.
 type NetworkDevice struct {
-	inner *raw.VZNetworkDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZNetworkDevice].
-func (x *NetworkDevice) Unwrap() *raw.VZNetworkDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NetworkDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// NetworkDeviceFromID adopts an existing object pointer as a NetworkDevice (nil for 0).
+// NetworkDeviceFromID adopts an existing Objective-C object as a NetworkDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func NetworkDeviceFromID(id objc.ID) *NetworkDevice {
 	if id == 0 {
 		return nil
 	}
-	return &NetworkDevice{inner: raw.VZNetworkDeviceFromID(id)}
+	x := &NetworkDevice{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNetworkDevice creates a new [NetworkDevice].
+// networkDeviceAdopt wraps an Objective-C object that this code just created as a
+// NetworkDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func networkDeviceAdopt(id objc.ID) *NetworkDevice {
+	if id == 0 {
+		return nil
+	}
+	x := &NetworkDevice{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NetworkDevice) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NetworkDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NetworkDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNetworkDevice creates a new NetworkDevice.
 func NewNetworkDevice() *NetworkDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZNetworkDevice")), objc.RegisterName("new"))
-	return &NetworkDevice{inner: raw.VZNetworkDeviceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZNetworkDevice")), objc.RegisterName("new"))
+	return networkDeviceAdopt(_id)
 }
 
 // The network attachment that’s connected to this network device.
 //
-// WithAttachment sets the attachment property and returns the receiver for chaining.
+// WithAttachment sets attachment and returns the receiver so calls can be chained.
 func (x *NetworkDevice) WithAttachment(attachment NetworkDeviceAttachmentProvider) *NetworkDevice {
-	x.inner.SetAttachment(attachment.asNetworkDeviceAttachment())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 	return x
 }
 
-// Attachment calls the underlying Attachment.
 func (x *NetworkDevice) Attachment() *NetworkDeviceAttachment {
-	_r := x.inner.Attachment()
-	if _r == nil {
-		return nil
-	}
-	return &NetworkDeviceAttachment{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachment"))
+	return NetworkDeviceAttachmentFromID(_r)
 }
 
-// SetAttachment calls the underlying SetAttachment.
-func (x *NetworkDevice) SetAttachment(attachment *raw.VZNetworkDeviceAttachment) {
-	x.inner.SetAttachment(attachment)
+func (x *NetworkDevice) SetAttachment(attachment *NetworkDeviceAttachment) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 }
 
 // NetworkDeviceable is the interface implemented by [NetworkDevice], for mocking and DI.
 type NetworkDeviceable interface {
-	Unwrap() *raw.VZNetworkDevice
+	obj.Object
 	WithAttachment(attachment NetworkDeviceAttachmentProvider) *NetworkDevice
 	Attachment() *NetworkDeviceAttachment
-	SetAttachment(attachment *raw.VZNetworkDeviceAttachment)
+	SetAttachment(attachment *NetworkDeviceAttachment)
 }
 
 var _ NetworkDeviceable = (*NetworkDevice)(nil)

@@ -5,43 +5,68 @@
 package photos
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The abstract base class of the framework’s photo library change requests.
 //
-// ChangeRequest wraps [raw.PHChangeRequest] with a fluent Go API.
+// ChangeRequest is an idiomatic wrapper over the Objective-C class PHChangeRequest.
 type ChangeRequest struct {
-	inner *raw.PHChangeRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHChangeRequest].
-func (x *ChangeRequest) Unwrap() *raw.PHChangeRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChangeRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangeRequestFromID adopts an existing object pointer as a ChangeRequest (nil for 0).
+// ChangeRequestFromID adopts an existing Objective-C object as a ChangeRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangeRequestFromID(id objc.ID) *ChangeRequest {
 	if id == 0 {
 		return nil
 	}
-	return &ChangeRequest{inner: raw.PHChangeRequestFromID(id)}
+	x := &ChangeRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewChangeRequest creates a new [ChangeRequest].
+// changeRequestAdopt wraps an Objective-C object that this code just created as a
+// ChangeRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changeRequestAdopt(id objc.ID) *ChangeRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &ChangeRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ChangeRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ChangeRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ChangeRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewChangeRequest creates a new ChangeRequest.
 func NewChangeRequest() *ChangeRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHChangeRequest")), objc.RegisterName("new"))
-	return &ChangeRequest{inner: raw.PHChangeRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHChangeRequest")), objc.RegisterName("new"))
+	return changeRequestAdopt(_id)
 }
-
-func (x *ChangeRequest) asChangeRequest() *raw.PHChangeRequest { return x.inner }
 
 // ChangeRequestable is the interface implemented by [ChangeRequest], for mocking and DI.
 type ChangeRequestable interface {
-	Unwrap() *raw.PHChangeRequest
+	obj.Object
 }
 
 var _ ChangeRequestable = (*ChangeRequest)(nil)

@@ -5,63 +5,82 @@
 package mediaaccessibility
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaaccessibility"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A class that processes a framebuffer object to detect and dim sequences of flashing lights.
 //
-// FlashingLightsProcessor wraps [raw.MAFlashingLightsProcessor] with a fluent Go API.
+// FlashingLightsProcessor is an idiomatic wrapper over the Objective-C class MAFlashingLightsProcessor.
 type FlashingLightsProcessor struct {
-	inner *raw.MAFlashingLightsProcessor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MAFlashingLightsProcessor].
-func (x *FlashingLightsProcessor) Unwrap() *raw.MAFlashingLightsProcessor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FlashingLightsProcessor) ID() objc.ID { return x.inner.Ptr() }
-
-// FlashingLightsProcessorFromID adopts an existing object pointer as a FlashingLightsProcessor (nil for 0).
+// FlashingLightsProcessorFromID adopts an existing Objective-C object as a FlashingLightsProcessor
+// (nil for 0), retaining it and registering a release finalizer.
 func FlashingLightsProcessorFromID(id objc.ID) *FlashingLightsProcessor {
 	if id == 0 {
 		return nil
 	}
-	return &FlashingLightsProcessor{inner: raw.MAFlashingLightsProcessorFromID(id)}
+	x := &FlashingLightsProcessor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFlashingLightsProcessor creates a new [FlashingLightsProcessor].
+// flashingLightsProcessorAdopt wraps an Objective-C object that this code just created as a
+// FlashingLightsProcessor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func flashingLightsProcessorAdopt(id objc.ID) *FlashingLightsProcessor {
+	if id == 0 {
+		return nil
+	}
+	x := &FlashingLightsProcessor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FlashingLightsProcessor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FlashingLightsProcessor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FlashingLightsProcessor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFlashingLightsProcessor creates a new FlashingLightsProcessor.
 func NewFlashingLightsProcessor() *FlashingLightsProcessor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MAFlashingLightsProcessor")), objc.RegisterName("new"))
-	return &FlashingLightsProcessor{inner: raw.MAFlashingLightsProcessorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MAFlashingLightsProcessor")), objc.RegisterName("new"))
+	return flashingLightsProcessorAdopt(_id)
 }
 
 // Returns a Boolean value that indicates whether the flashing lights processor can process the content in the surface for sequences of flashing lights.
-//
-// CanProcessSurface calls the underlying CanProcessSurface.
-func (x *FlashingLightsProcessor) CanProcessSurface(surface unsafe.Pointer) bool {
-	return x.inner.CanProcessSurface(surface)
+func (x *FlashingLightsProcessor) CanProcessSurface(surface obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canProcessSurface:"), objref.IDOf(surface))
+	return _r
 }
 
 // Processes a surface by analyzing pixels for sequences of flashing lights and mitigates them by dimming the content.
-//
-// ProcessSurfaceOutSurfaceTimestampOptions calls the underlying ProcessSurfaceOutSurfaceTimestampOptions.
-func (x *FlashingLightsProcessor) ProcessSurfaceOutSurfaceTimestampOptions(inSurface unsafe.Pointer, outSurface unsafe.Pointer, timestamp float64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *FlashingLightsProcessorResult {
-	_r := x.inner.ProcessSurfaceOutSurfaceTimestampOptions(inSurface, outSurface, timestamp, options)
-	if _r == nil {
-		return nil
-	}
-	return &FlashingLightsProcessorResult{inner: _r}
+func (x *FlashingLightsProcessor) ProcessSurfaceOutSurfaceTimestampOptions(inSurface obj.Object, outSurface obj.Object, timestamp float64, options obj.Object) *FlashingLightsProcessorResult {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processSurface:outSurface:timestamp:options:"), objref.IDOf(inSurface), objref.IDOf(outSurface), timestamp, objref.IDOf(options))
+	return FlashingLightsProcessorResultFromID(_r)
 }
 
 // FlashingLightsProcessorable is the interface implemented by [FlashingLightsProcessor], for mocking and DI.
 type FlashingLightsProcessorable interface {
-	Unwrap() *raw.MAFlashingLightsProcessor
-	CanProcessSurface(surface unsafe.Pointer) bool
-	ProcessSurfaceOutSurfaceTimestampOptions(inSurface unsafe.Pointer, outSurface unsafe.Pointer, timestamp float64, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *FlashingLightsProcessorResult
+	obj.Object
+	CanProcessSurface(surface obj.Object) bool
+	ProcessSurfaceOutSurfaceTimestampOptions(inSurface obj.Object, outSurface obj.Object, timestamp float64, options obj.Object) *FlashingLightsProcessorResult
 }
 
 var _ FlashingLightsProcessorable = (*FlashingLightsProcessor)(nil)

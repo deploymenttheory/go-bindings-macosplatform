@@ -5,78 +5,96 @@
 package networkextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A network packet and its associated properties.
 //
-// NEPacket wraps [raw.NEPacket] with a fluent Go API.
+// NEPacket is an idiomatic wrapper over the Objective-C class NEPacket.
 type NEPacket struct {
-	inner *raw.NEPacket
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEPacket].
-func (x *NEPacket) Unwrap() *raw.NEPacket { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEPacket) ID() objc.ID { return x.inner.Ptr() }
-
-// NEPacketFromID adopts an existing object pointer as a NEPacket (nil for 0).
+// NEPacketFromID adopts an existing Objective-C object as a NEPacket
+// (nil for 0), retaining it and registering a release finalizer.
 func NEPacketFromID(id objc.ID) *NEPacket {
 	if id == 0 {
 		return nil
 	}
-	return &NEPacket{inner: raw.NEPacketFromID(id)}
+	x := &NEPacket{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @method initWithData:protocolFamily: @discussion Initializes a new NEPacket object with data and protocol family. @param data The content of the packet. @param protocolFamily The protocol family of the packet (such as AF_INET or AF_INET6).
-//
-// NewNEPacketWithDataProtocolFamily creates a new [NEPacket].
-func NewNEPacketWithDataProtocolFamily(data *foundation.NSData, protocolFamily uint8) *NEPacket {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NEPacket")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:protocolFamily:"), data.Ptr(), protocolFamily)
-	return &NEPacket{inner: raw.NEPacketFromID(_id)}
-}
-
-// @property data @discussion The data content of the packet.
-//
-// Data calls the underlying Data.
-func (x *NEPacket) Data() *foundation.NSData {
-	return x.inner.Data()
-}
-
-// @property protocolFamily @discussion The protocol family of the packet (such as AF_INET or AF_INET6).
-//
-// ProtocolFamily calls the underlying ProtocolFamily.
-func (x *NEPacket) ProtocolFamily() uint8 {
-	return x.inner.ProtocolFamily()
-}
-
-// @property direction @discussion The direction of the packet.
-//
-// Direction calls the underlying Direction.
-func (x *NEPacket) Direction() NETrafficDirection {
-	return NETrafficDirection(x.inner.Direction())
-}
-
-// @property metadata @discussion Metadata about the source application and flow for this packet. This property will only be non-nil when the routing method for the NEPacketTunnelProvider is NETunnelProviderRoutingMethodSourceApplication.
-//
-// Metadata calls the underlying Metadata.
-func (x *NEPacket) Metadata() *NEFlowMetaData {
-	_r := x.inner.Metadata()
-	if _r == nil {
+// nEPacketAdopt wraps an Objective-C object that this code just created as a
+// NEPacket (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEPacketAdopt(id objc.ID) *NEPacket {
+	if id == 0 {
 		return nil
 	}
-	return &NEFlowMetaData{inner: _r}
+	x := &NEPacket{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NEPacket) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEPacket) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEPacket) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// Initializes a new NEPacket object with data and protocol family.
+//
+// NewNEPacketWithDataProtocolFamily creates a new NEPacket.
+func NewNEPacketWithDataProtocolFamily(data obj.Object, protocolFamily uint8) *NEPacket {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NEPacket")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:protocolFamily:"), objref.IDOf(data), protocolFamily)
+	return nEPacketAdopt(_id)
+}
+
+// The data content of the packet.
+func (x *NEPacket) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
+}
+
+// The protocol family of the packet (such as AF_INET or AF_INET6).
+func (x *NEPacket) ProtocolFamily() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("protocolFamily"))
+	return _r
+}
+
+// The direction of the packet.
+func (x *NEPacket) Direction() NETrafficDirection {
+	_r := objc.Send[NETrafficDirection](objref.IDOf(x), objc.RegisterName("direction"))
+	return _r
+}
+
+// Metadata about the source application and flow for this packet. This property will only be non-nil when the routing method for the NEPacketTunnelProvider is NETunnelProviderRoutingMethodSourceApplication.
+func (x *NEPacket) Metadata() *NEFlowMetaData {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+	return NEFlowMetaDataFromID(_r)
 }
 
 // NEPacketable is the interface implemented by [NEPacket], for mocking and DI.
 type NEPacketable interface {
-	Unwrap() *raw.NEPacket
-	Data() *foundation.NSData
+	obj.Object
+	Data() obj.Object
 	ProtocolFamily() uint8
 	Direction() NETrafficDirection
 	Metadata() *NEFlowMetaData

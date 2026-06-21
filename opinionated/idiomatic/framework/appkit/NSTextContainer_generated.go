@@ -5,353 +5,251 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A region where text layout occurs.
 //
-// TextContainer wraps [raw.NSTextContainer] with a fluent Go API.
+// TextContainer is an idiomatic wrapper over the Objective-C class NSTextContainer.
 type TextContainer struct {
-	inner *raw.NSTextContainer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTextContainer].
-func (x *TextContainer) Unwrap() *raw.NSTextContainer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextContainer) ID() objc.ID { return x.inner.Ptr() }
-
-// TextContainerFromID adopts an existing object pointer as a TextContainer (nil for 0).
+// TextContainerFromID adopts an existing Objective-C object as a TextContainer
+// (nil for 0), retaining it and registering a release finalizer.
 func TextContainerFromID(id objc.ID) *TextContainer {
 	if id == 0 {
 		return nil
 	}
-	return &TextContainer{inner: raw.NSTextContainerFromID(id)}
+	x := &TextContainer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes a text container with a specified bounding rectangle.
-//
-// NewTextContainerWithSize creates a new [TextContainer].
-func NewTextContainerWithSize(size corefoundation.CGSize) *TextContainer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextContainer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSize:"), size)
-	return &TextContainer{inner: raw.NSTextContainerFromID(_id)}
+// textContainerAdopt wraps an Objective-C object that this code just created as a
+// TextContainer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textContainerAdopt(id objc.ID) *TextContainer {
+	if id == 0 {
+		return nil
+	}
+	x := &TextContainer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TextContainer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextContainer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextContainer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a text container from data in an unarchiver.
 //
-// NewTextContainerWithCoder creates a new [TextContainer].
-func NewTextContainerWithCoder(coder *foundation.NSCoder) *TextContainer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextContainer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &TextContainer{inner: raw.NSTextContainerFromID(_id)}
-}
-
-// Initializes a text container with a specified bounding rectangle.
-//
-// NewTextContainerWithContainerSize creates a new [TextContainer].
-func NewTextContainerWithContainerSize(aContainerSize corefoundation.CGSize) *TextContainer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextContainer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerSize:"), aContainerSize)
-	return &TextContainer{inner: raw.NSTextContainerFromID(_id)}
-}
-
-// The size of the text container’s bounding rectangle.
-//
-// WithSize sets the size property and returns the receiver for chaining.
-func (x *TextContainer) WithSize(size corefoundation.CGSize) *TextContainer {
-	x.inner.SetSize(size)
-	return x
+// NewTextContainerWithCoder creates a new TextContainer.
+func NewTextContainerWithCoder(coder obj.Object) *TextContainer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextContainer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return textContainerAdopt(_id)
 }
 
 // The behavior of the last line inside the text container.
 //
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *TextContainer) WithLineBreakMode(lineBreakMode NSLineBreakMode) *TextContainer {
-	x.inner.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+func (x *TextContainer) WithLineBreakMode(lineBreakMode LineBreakMode) *TextContainer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
 // The value for the text inset within line fragment rectangles.
 //
-// WithLineFragmentPadding sets the lineFragmentPadding property and returns the receiver for chaining.
+// WithLineFragmentPadding sets lineFragmentPadding and returns the receiver so calls can be chained.
 func (x *TextContainer) WithLineFragmentPadding(lineFragmentPadding float64) *TextContainer {
-	x.inner.SetLineFragmentPadding(lineFragmentPadding)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineFragmentPadding:"), lineFragmentPadding)
 	return x
 }
 
 // The maximum number of lines that the text container can store.
 //
-// WithMaximumNumberOfLines sets the maximumNumberOfLines property and returns the receiver for chaining.
-func (x *TextContainer) WithMaximumNumberOfLines(maximumNumberOfLines uint) *TextContainer {
-	x.inner.SetMaximumNumberOfLines(maximumNumberOfLines)
+// WithMaximumNumberOfLines sets maximumNumberOfLines and returns the receiver so calls can be chained.
+func (x *TextContainer) WithMaximumNumberOfLines(maximumNumberOfLines int) *TextContainer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfLines:"), maximumNumberOfLines)
 	return x
 }
 
 // A Boolean that controls whether the text container adjusts the width of its bounding rectangle when its text view resizes.
 //
-// WithWidthTracksTextView sets the widthTracksTextView property and returns the receiver for chaining.
+// WithWidthTracksTextView sets widthTracksTextView and returns the receiver so calls can be chained.
 func (x *TextContainer) WithWidthTracksTextView(widthTracksTextView bool) *TextContainer {
-	x.inner.SetWidthTracksTextView(widthTracksTextView)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidthTracksTextView:"), widthTracksTextView)
 	return x
 }
 
 // A Boolean that controls whether the text container adjusts the height of its bounding rectangle when its text view resizes.
 //
-// WithHeightTracksTextView sets the heightTracksTextView property and returns the receiver for chaining.
+// WithHeightTracksTextView sets heightTracksTextView and returns the receiver so calls can be chained.
 func (x *TextContainer) WithHeightTracksTextView(heightTracksTextView bool) *TextContainer {
-	x.inner.SetHeightTracksTextView(heightTracksTextView)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightTracksTextView:"), heightTracksTextView)
 	return x
 }
 
 // The text container’s layout manager.
 //
-// WithLayoutManager sets the layoutManager property and returns the receiver for chaining.
+// WithLayoutManager sets layoutManager and returns the receiver so calls can be chained.
 func (x *TextContainer) WithLayoutManager(layoutManager *LayoutManager) *TextContainer {
-	x.inner.SetLayoutManager(layoutManager.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutManager:"), objref.IDOf(layoutManager))
 	return x
 }
 
 // An array of path objects that represents the regions where text doesn’t display in the text container.
 //
-// WithExclusionPaths sets the collection, converting the Go slice to an NSArray.
-func (x *TextContainer) WithExclusionPaths(items ...*raw.NSBezierPath) *TextContainer {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetExclusionPaths(foundation.NSArrayFromID[*raw.NSBezierPath](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSBezierPath](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetExclusionPaths(_arr)
+// WithExclusionPaths sets the collection and returns the receiver so calls can be chained.
+func (x *TextContainer) WithExclusionPaths(items ...*BezierPath) *TextContainer {
+	_arr := purego.SliceToNSArray(items, func(_v *BezierPath) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExclusionPaths:"), _arr)
 	return x
 }
 
 // The text container’s text view.
 //
-// WithTextView sets the textView property and returns the receiver for chaining.
+// WithTextView sets textView and returns the receiver so calls can be chained.
 func (x *TextContainer) WithTextView(textView *TextView) *TextContainer {
-	x.inner.SetTextView(textView.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextView:"), objref.IDOf(textView))
 	return x
 }
 
-// The size of the text container’s bounding rectangle.
-//
-// WithContainerSize sets the containerSize property and returns the receiver for chaining.
-func (x *TextContainer) WithContainerSize(containerSize corefoundation.CGSize) *TextContainer {
-	x.inner.SetContainerSize(containerSize)
-	return x
-}
-
-// Returns the bounds of a line fragment rectangle inside the text container for the proposed rectangle.
-//
-// LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect calls the underlying LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect.
-func (x *TextContainer) LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect(proposedRect corefoundation.CGRect, characterIndex uint, baseWritingDirection NSWritingDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
-	return x.inner.LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect(proposedRect, characterIndex, raw.NSWritingDirection(baseWritingDirection), remainingRect)
-}
-
-// TextLayoutManager calls the underlying TextLayoutManager.
 func (x *TextContainer) TextLayoutManager() *TextLayoutManager {
-	_r := x.inner.TextLayoutManager()
-	if _r == nil {
-		return nil
-	}
-	return &TextLayoutManager{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textLayoutManager"))
+	return TextLayoutManagerFromID(_r)
 }
 
-// Size calls the underlying Size.
-func (x *TextContainer) Size() corefoundation.CGSize {
-	return x.inner.Size()
+func (x *TextContainer) LineBreakMode() LineBreakMode {
+	_r := objc.Send[LineBreakMode](objref.IDOf(x), objc.RegisterName("lineBreakMode"))
+	return _r
 }
 
-// SetSize calls the underlying SetSize.
-func (x *TextContainer) SetSize(size corefoundation.CGSize) {
-	x.inner.SetSize(size)
+func (x *TextContainer) SetLineBreakMode(lineBreakMode LineBreakMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 }
 
-// LineBreakMode calls the underlying LineBreakMode.
-func (x *TextContainer) LineBreakMode() NSLineBreakMode {
-	return NSLineBreakMode(x.inner.LineBreakMode())
-}
-
-// SetLineBreakMode calls the underlying SetLineBreakMode.
-func (x *TextContainer) SetLineBreakMode(lineBreakMode NSLineBreakMode) {
-	x.inner.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
-}
-
-// LineFragmentPadding calls the underlying LineFragmentPadding.
 func (x *TextContainer) LineFragmentPadding() float64 {
-	return x.inner.LineFragmentPadding()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineFragmentPadding"))
+	return _r
 }
 
-// SetLineFragmentPadding calls the underlying SetLineFragmentPadding.
 func (x *TextContainer) SetLineFragmentPadding(lineFragmentPadding float64) {
-	x.inner.SetLineFragmentPadding(lineFragmentPadding)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineFragmentPadding:"), lineFragmentPadding)
 }
 
-// MaximumNumberOfLines calls the underlying MaximumNumberOfLines.
-func (x *TextContainer) MaximumNumberOfLines() uint {
-	return x.inner.MaximumNumberOfLines()
+func (x *TextContainer) MaximumNumberOfLines() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumNumberOfLines"))
+	return _r
 }
 
-// SetMaximumNumberOfLines calls the underlying SetMaximumNumberOfLines.
-func (x *TextContainer) SetMaximumNumberOfLines(maximumNumberOfLines uint) {
-	x.inner.SetMaximumNumberOfLines(maximumNumberOfLines)
+func (x *TextContainer) SetMaximumNumberOfLines(maximumNumberOfLines int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfLines:"), maximumNumberOfLines)
 }
 
-// IsSimpleRectangularTextContainer calls the underlying IsSimpleRectangularTextContainer.
 func (x *TextContainer) IsSimpleRectangularTextContainer() bool {
-	return x.inner.IsSimpleRectangularTextContainer()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSimpleRectangularTextContainer"))
+	return _r
 }
 
-// WidthTracksTextView calls the underlying WidthTracksTextView.
 func (x *TextContainer) WidthTracksTextView() bool {
-	return x.inner.WidthTracksTextView()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("widthTracksTextView"))
+	return _r
 }
 
-// SetWidthTracksTextView calls the underlying SetWidthTracksTextView.
 func (x *TextContainer) SetWidthTracksTextView(widthTracksTextView bool) {
-	x.inner.SetWidthTracksTextView(widthTracksTextView)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidthTracksTextView:"), widthTracksTextView)
 }
 
-// HeightTracksTextView calls the underlying HeightTracksTextView.
 func (x *TextContainer) HeightTracksTextView() bool {
-	return x.inner.HeightTracksTextView()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("heightTracksTextView"))
+	return _r
 }
 
-// SetHeightTracksTextView calls the underlying SetHeightTracksTextView.
 func (x *TextContainer) SetHeightTracksTextView(heightTracksTextView bool) {
-	x.inner.SetHeightTracksTextView(heightTracksTextView)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightTracksTextView:"), heightTracksTextView)
 }
 
-// LayoutManager calls the underlying LayoutManager.
 func (x *TextContainer) LayoutManager() *LayoutManager {
-	_r := x.inner.LayoutManager()
-	if _r == nil {
-		return nil
-	}
-	return &LayoutManager{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutManager"))
+	return LayoutManagerFromID(_r)
 }
 
-// SetLayoutManager calls the underlying SetLayoutManager.
-func (x *TextContainer) SetLayoutManager(layoutManager *raw.NSLayoutManager) {
-	x.inner.SetLayoutManager(layoutManager)
+func (x *TextContainer) SetLayoutManager(layoutManager *LayoutManager) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutManager:"), objref.IDOf(layoutManager))
 }
 
 // Replaces the layout manager for the group of text system objects that contains the text container.
-//
-// ReplaceLayoutManager calls the underlying ReplaceLayoutManager.
-func (x *TextContainer) ReplaceLayoutManager(newLayoutManager *raw.NSLayoutManager) {
-	x.inner.ReplaceLayoutManager(newLayoutManager)
+func (x *TextContainer) ReplaceLayoutManager(newLayoutManager *LayoutManager) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceLayoutManager:"), objref.IDOf(newLayoutManager))
 }
 
 // ExclusionPaths returns the collection as a Go slice.
 func (x *TextContainer) ExclusionPaths() []*BezierPath {
-	arr := x.inner.ExclusionPaths()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *BezierPath {
-		return &BezierPath{inner: raw.NSBezierPathFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exclusionPaths"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *BezierPath { return BezierPathFromID(_id) })
 }
 
-// SetExclusionPaths calls the underlying SetExclusionPaths.
-func (x *TextContainer) SetExclusionPaths(exclusionPaths *foundation.NSArray[*raw.NSBezierPath]) {
-	x.inner.SetExclusionPaths(exclusionPaths)
+func (x *TextContainer) SetExclusionPaths(exclusionPaths []*BezierPath) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExclusionPaths:"), purego.SliceToNSArray(exclusionPaths, func(_v *BezierPath) objc.ID { return objref.IDOf(_v) }))
 }
 
-// TextView calls the underlying TextView.
 func (x *TextContainer) TextView() *TextView {
-	_r := x.inner.TextView()
-	if _r == nil {
-		return nil
-	}
-	return &TextView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textView"))
+	return TextViewFromID(_r)
 }
 
-// SetTextView calls the underlying SetTextView.
-func (x *TextContainer) SetTextView(textView *raw.NSTextView) {
-	x.inner.SetTextView(textView)
-}
-
-// Calculates and returns the longest rectangle available in the proposed rectangle for displaying text.
-//
-// LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect calls the underlying LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect.
-func (x *TextContainer) LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect(proposedRect corefoundation.CGRect, sweepDirection NSLineSweepDirection, movementDirection NSLineMovementDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect {
-	return x.inner.LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect(proposedRect, raw.NSLineSweepDirection(sweepDirection), raw.NSLineMovementDirection(movementDirection), remainingRect)
-}
-
-// Queries whether a point lies within the text container’s region or on the region’s edge—not simply within its bounding rectangle.
-//
-// ContainsPoint calls the underlying ContainsPoint.
-func (x *TextContainer) ContainsPoint(point corefoundation.CGPoint) bool {
-	return x.inner.ContainsPoint(point)
-}
-
-// ContainerSize calls the underlying ContainerSize.
-func (x *TextContainer) ContainerSize() corefoundation.CGSize {
-	return x.inner.ContainerSize()
-}
-
-// SetContainerSize calls the underlying SetContainerSize.
-func (x *TextContainer) SetContainerSize(containerSize corefoundation.CGSize) {
-	x.inner.SetContainerSize(containerSize)
+func (x *TextContainer) SetTextView(textView *TextView) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextView:"), objref.IDOf(textView))
 }
 
 // TextContainerable is the interface implemented by [TextContainer], for mocking and DI.
 type TextContainerable interface {
-	Unwrap() *raw.NSTextContainer
-	WithSize(size corefoundation.CGSize) *TextContainer
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *TextContainer
+	obj.Object
+	WithLineBreakMode(lineBreakMode LineBreakMode) *TextContainer
 	WithLineFragmentPadding(lineFragmentPadding float64) *TextContainer
-	WithMaximumNumberOfLines(maximumNumberOfLines uint) *TextContainer
+	WithMaximumNumberOfLines(maximumNumberOfLines int) *TextContainer
 	WithWidthTracksTextView(widthTracksTextView bool) *TextContainer
 	WithHeightTracksTextView(heightTracksTextView bool) *TextContainer
 	WithLayoutManager(layoutManager *LayoutManager) *TextContainer
-	WithExclusionPaths(items ...*raw.NSBezierPath) *TextContainer
+	WithExclusionPaths(items ...*BezierPath) *TextContainer
 	WithTextView(textView *TextView) *TextContainer
-	WithContainerSize(containerSize corefoundation.CGSize) *TextContainer
-	LineFragmentRectForProposedRectAtIndexWritingDirectionRemainingRect(proposedRect corefoundation.CGRect, characterIndex uint, baseWritingDirection NSWritingDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect
 	TextLayoutManager() *TextLayoutManager
-	Size() corefoundation.CGSize
-	SetSize(size corefoundation.CGSize)
-	LineBreakMode() NSLineBreakMode
-	SetLineBreakMode(lineBreakMode NSLineBreakMode)
+	LineBreakMode() LineBreakMode
+	SetLineBreakMode(lineBreakMode LineBreakMode)
 	LineFragmentPadding() float64
 	SetLineFragmentPadding(lineFragmentPadding float64)
-	MaximumNumberOfLines() uint
-	SetMaximumNumberOfLines(maximumNumberOfLines uint)
+	MaximumNumberOfLines() int
+	SetMaximumNumberOfLines(maximumNumberOfLines int)
 	IsSimpleRectangularTextContainer() bool
 	WidthTracksTextView() bool
 	SetWidthTracksTextView(widthTracksTextView bool)
 	HeightTracksTextView() bool
 	SetHeightTracksTextView(heightTracksTextView bool)
 	LayoutManager() *LayoutManager
-	SetLayoutManager(layoutManager *raw.NSLayoutManager)
-	ReplaceLayoutManager(newLayoutManager *raw.NSLayoutManager)
+	SetLayoutManager(layoutManager *LayoutManager)
+	ReplaceLayoutManager(newLayoutManager *LayoutManager)
 	ExclusionPaths() []*BezierPath
-	SetExclusionPaths(exclusionPaths *foundation.NSArray[*raw.NSBezierPath])
+	SetExclusionPaths(exclusionPaths []*BezierPath)
 	TextView() *TextView
-	SetTextView(textView *raw.NSTextView)
-	LineFragmentRectForProposedRectSweepDirectionMovementDirectionRemainingRect(proposedRect corefoundation.CGRect, sweepDirection NSLineSweepDirection, movementDirection NSLineMovementDirection, remainingRect *corefoundation.CGRect) corefoundation.CGRect
-	ContainsPoint(point corefoundation.CGPoint) bool
-	ContainerSize() corefoundation.CGSize
-	SetContainerSize(containerSize corefoundation.CGSize)
+	SetTextView(textView *TextView)
 }
 
 var _ TextContainerable = (*TextContainer)(nil)

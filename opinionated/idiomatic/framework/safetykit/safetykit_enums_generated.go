@@ -9,70 +9,70 @@ import (
 )
 
 // An enumeration that represents the current Crash Detection event authorization state.
-type SAAuthorizationStatus int64
+type AuthorizationStatus int64
 
 const (
 	// There isn’t a designated app for receiving Crash Detection events.
-	SAAuthorizationStatusNotDetermined SAAuthorizationStatus = 0
+	AuthorizationStatusNotDetermined AuthorizationStatus = 0
 	// The system denies the app from receiving Crash Detection events because another app has authorization.
-	SAAuthorizationStatusDenied SAAuthorizationStatus = 1
+	AuthorizationStatusDenied AuthorizationStatus = 1
 	// This is the designated app for receiving Crash Detection events.
-	SAAuthorizationStatusAuthorized SAAuthorizationStatus = 2
+	AuthorizationStatusAuthorized AuthorizationStatus = 2
 )
 
-func (e SAAuthorizationStatus) String() string {
+func (e AuthorizationStatus) String() string {
 	switch e {
-	case SAAuthorizationStatusNotDetermined:
-		return "SAAuthorizationStatusNotDetermined"
-	case SAAuthorizationStatusDenied:
-		return "SAAuthorizationStatusDenied"
-	case SAAuthorizationStatusAuthorized:
-		return "SAAuthorizationStatusAuthorized"
+	case AuthorizationStatusNotDetermined:
+		return "AuthorizationStatusNotDetermined"
+	case AuthorizationStatusDenied:
+		return "AuthorizationStatusDenied"
+	case AuthorizationStatusAuthorized:
+		return "AuthorizationStatusAuthorized"
 	default:
-		return fmt.Sprintf("SAAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationStatus(%d)", int64(e))
 	}
 }
 
 // An enumeration that defines possible emergency responses to a Crash Detection event.
-type SACrashDetectionEventResponse int64
+type CrashDetectionEventResponse int64
 
 const (
-	SACrashDetectionEventResponseAttempted SACrashDetectionEventResponse = 0
-	SACrashDetectionEventResponseDisabled  SACrashDetectionEventResponse = 1
+	CrashDetectionEventResponseAttempted CrashDetectionEventResponse = 0
+	CrashDetectionEventResponseDisabled  CrashDetectionEventResponse = 1
 )
 
-func (e SACrashDetectionEventResponse) String() string {
+func (e CrashDetectionEventResponse) String() string {
 	switch e {
-	case SACrashDetectionEventResponseAttempted:
-		return "SACrashDetectionEventResponseAttempted"
-	case SACrashDetectionEventResponseDisabled:
-		return "SACrashDetectionEventResponseDisabled"
+	case CrashDetectionEventResponseAttempted:
+		return "CrashDetectionEventResponseAttempted"
+	case CrashDetectionEventResponseDisabled:
+		return "CrashDetectionEventResponseDisabled"
 	default:
-		return fmt.Sprintf("SACrashDetectionEventResponse(%d)", int64(e))
+		return fmt.Sprintf("CrashDetectionEventResponse(%d)", int64(e))
 	}
 }
 
 // Codes for identifying errors in SafetyKit.
-type SAErrorCode int64
+type ErrorCode int64
 
 const (
-	SAErrorNotAuthorized   SAErrorCode = 1
-	SAErrorNotAllowed      SAErrorCode = 2
-	SAErrorInvalidArgument SAErrorCode = 3
-	SAErrorOperationFailed SAErrorCode = 4
+	ErrorNotAuthorized   ErrorCode = 1
+	ErrorNotAllowed      ErrorCode = 2
+	ErrorInvalidArgument ErrorCode = 3
+	ErrorOperationFailed ErrorCode = 4
 )
 
-func (e SAErrorCode) String() string {
+func (e ErrorCode) String() string {
 	switch e {
-	case SAErrorNotAuthorized:
-		return "SAErrorNotAuthorized"
-	case SAErrorNotAllowed:
-		return "SAErrorNotAllowed"
-	case SAErrorInvalidArgument:
-		return "SAErrorInvalidArgument"
-	case SAErrorOperationFailed:
-		return "SAErrorOperationFailed"
+	case ErrorNotAuthorized:
+		return "ErrorNotAuthorized"
+	case ErrorNotAllowed:
+		return "ErrorNotAllowed"
+	case ErrorInvalidArgument:
+		return "ErrorInvalidArgument"
+	case ErrorOperationFailed:
+		return "ErrorOperationFailed"
 	default:
-		return fmt.Sprintf("SAErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }

@@ -5,65 +5,44 @@
 package osakit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osakit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // AvailableLanguages returns the collection as a Go slice.
 func AvailableLanguages() []*Language {
-	arr := raw.OSALanguageAvailableLanguages()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Language {
-		return &Language{inner: raw.OSALanguageFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("OSALanguage")), objc.RegisterName("availableLanguages"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Language { return LanguageFromID(_id) })
 }
 
-// LanguageForName calls the underlying OSALanguageLanguageForName.
 func LanguageForName(name string) *Language {
-	_r := raw.OSALanguageLanguageForName(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &Language{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("OSALanguage")), objc.RegisterName("languageForName:"), purego.NSString(name))
+	return LanguageFromID(_r)
 }
 
-// LanguageForScriptDataDescriptor calls the underlying OSALanguageLanguageForScriptDataDescriptor.
-func LanguageForScriptDataDescriptor(descriptor *foundation.NSAppleEventDescriptor) *Language {
-	_r := raw.OSALanguageLanguageForScriptDataDescriptor(descriptor)
-	if _r == nil {
-		return nil
-	}
-	return &Language{inner: _r}
+func LanguageForScriptDataDescriptor(descriptor obj.Object) *Language {
+	_r := objc.Send[objc.ID](objc.ID(_class("OSALanguage")), objc.RegisterName("languageForScriptDataDescriptor:"), objref.IDOf(descriptor))
+	return LanguageFromID(_r)
 }
 
-// DefaultLanguage calls the underlying OSALanguageDefaultLanguage.
 func DefaultLanguage() *Language {
-	_r := raw.OSALanguageDefaultLanguage()
-	if _r == nil {
-		return nil
-	}
-	return &Language{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("OSALanguage")), objc.RegisterName("defaultLanguage"))
+	return LanguageFromID(_r)
 }
 
-// SetDefaultLanguage calls the underlying OSALanguageSetDefaultLanguage.
-func SetDefaultLanguage(defaultLanguage *raw.OSALanguage) {
-	raw.OSALanguageSetDefaultLanguage(defaultLanguage)
+func SetDefaultLanguage(defaultLanguage *Language) {
+	objc.Send[objc.ID](objc.ID(_class("OSALanguage")), objc.RegisterName("setDefaultLanguage:"), objref.IDOf(defaultLanguage))
 }
 
-// LanguageInstanceWithLanguage calls the underlying OSALanguageInstanceLanguageInstanceWithLanguage.
-func LanguageInstanceWithLanguage(language *raw.OSALanguage) *LanguageInstance {
-	_r := raw.OSALanguageInstanceLanguageInstanceWithLanguage(language)
-	if _r == nil {
-		return nil
-	}
-	return &LanguageInstance{inner: _r}
+func LanguageInstanceWithLanguage(language *Language) *LanguageInstance {
+	_r := objc.Send[objc.ID](objc.ID(_class("OSALanguageInstance")), objc.RegisterName("languageInstanceWithLanguage:"), objref.IDOf(language))
+	return LanguageInstanceFromID(_r)
 }
 
-// ScriptDataDescriptorWithContentsOfURL calls the underlying OSAScriptScriptDataDescriptorWithContentsOfURL.
-func ScriptDataDescriptorWithContentsOfURL(url string) *foundation.NSAppleEventDescriptor {
-	return raw.OSAScriptScriptDataDescriptorWithContentsOfURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+func ScriptDataDescriptorWithContentsOfURL(url string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("OSAScript")), objc.RegisterName("scriptDataDescriptorWithContentsOfURL:"), rt.FileURL(url))
+	return obj.Wrap(_r)
 }

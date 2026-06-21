@@ -5,15 +5,15 @@
 package symbols
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/symbols"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// SymbolContentTransitionProvider is implemented by SymbolContentTransition and any idiomatic type wrapping a NSSymbolContentTransition subclass.
+// SymbolContentTransitionProvider is accepted wherever a NSSymbolContentTransition (or one of its subclasses) is expected.
 type SymbolContentTransitionProvider interface {
-	asSymbolContentTransition() *raw.NSSymbolContentTransition
+	objref.Object
 }
 
-// SymbolEffectProvider is implemented by SymbolEffect and any idiomatic type wrapping a NSSymbolEffect subclass.
+// SymbolEffectProvider is accepted wherever a NSSymbolEffect (or one of its subclasses) is expected.
 type SymbolEffectProvider interface {
-	asSymbolEffect() *raw.NSSymbolEffect
+	objref.Object
 }

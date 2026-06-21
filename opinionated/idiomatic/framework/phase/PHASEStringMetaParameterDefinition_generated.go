@@ -5,64 +5,80 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A specification for a metaparameter defined by text.
 //
-// StringMetaParameterDefinition wraps [raw.PHASEStringMetaParameterDefinition] with a fluent Go API.
+// StringMetaParameterDefinition is an idiomatic wrapper over the Objective-C class PHASEStringMetaParameterDefinition.
 type StringMetaParameterDefinition struct {
-	inner *raw.PHASEStringMetaParameterDefinition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEStringMetaParameterDefinition].
-func (x *StringMetaParameterDefinition) Unwrap() *raw.PHASEStringMetaParameterDefinition {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StringMetaParameterDefinition) ID() objc.ID { return x.inner.Ptr() }
-
-// StringMetaParameterDefinitionFromID adopts an existing object pointer as a StringMetaParameterDefinition (nil for 0).
+// StringMetaParameterDefinitionFromID adopts an existing Objective-C object as a StringMetaParameterDefinition
+// (nil for 0), retaining it and registering a release finalizer.
 func StringMetaParameterDefinitionFromID(id objc.ID) *StringMetaParameterDefinition {
 	if id == 0 {
 		return nil
 	}
-	return &StringMetaParameterDefinition{inner: raw.PHASEStringMetaParameterDefinitionFromID(id)}
+	x := &StringMetaParameterDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// stringMetaParameterDefinitionAdopt wraps an Objective-C object that this code just created as a
+// StringMetaParameterDefinition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func stringMetaParameterDefinitionAdopt(id objc.ID) *StringMetaParameterDefinition {
+	if id == 0 {
+		return nil
+	}
+	x := &StringMetaParameterDefinition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *StringMetaParameterDefinition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StringMetaParameterDefinition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StringMetaParameterDefinition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a specification for a named textual metaparameter with the given value.
 //
-// NewStringMetaParameterDefinitionWithValueIdentifier creates a new [StringMetaParameterDefinition].
+// NewStringMetaParameterDefinitionWithValueIdentifier creates a new StringMetaParameterDefinition.
 func NewStringMetaParameterDefinitionWithValueIdentifier(value string, identifier string) *StringMetaParameterDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEStringMetaParameterDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:identifier:"), foundation.NSStringStringWithUTF8String(value).Ptr(), foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &StringMetaParameterDefinition{inner: raw.PHASEStringMetaParameterDefinitionFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEStringMetaParameterDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:identifier:"), purego.NSString(value), purego.NSString(identifier))
+	return stringMetaParameterDefinitionAdopt(_id)
 }
 
 // Creates a specification for a textual metaparameter with the given value.
 //
-// NewStringMetaParameterDefinitionWithValue creates a new [StringMetaParameterDefinition].
+// NewStringMetaParameterDefinitionWithValue creates a new StringMetaParameterDefinition.
 func NewStringMetaParameterDefinitionWithValue(value string) *StringMetaParameterDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEStringMetaParameterDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:"), foundation.NSStringStringWithUTF8String(value).Ptr())
-	return &StringMetaParameterDefinition{inner: raw.PHASEStringMetaParameterDefinitionFromID(_id)}
-}
-
-func (x *StringMetaParameterDefinition) asMetaParameterDefinition() *raw.PHASEMetaParameterDefinition {
-	return &x.inner.PHASEMetaParameterDefinition
-}
-
-func (x *StringMetaParameterDefinition) asDefinition() *raw.PHASEDefinition {
-	return &x.inner.PHASEMetaParameterDefinition.PHASEDefinition
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEStringMetaParameterDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:"), purego.NSString(value))
+	return stringMetaParameterDefinitionAdopt(_id)
 }
 
 // StringMetaParameterDefinitionable is the interface implemented by [StringMetaParameterDefinition], for mocking and DI.
 type StringMetaParameterDefinitionable interface {
-	Unwrap() *raw.PHASEStringMetaParameterDefinition
+	obj.Object
 }
 
 var _ StringMetaParameterDefinitionable = (*StringMetaParameterDefinition)(nil)

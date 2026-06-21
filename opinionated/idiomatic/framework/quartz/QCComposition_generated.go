@@ -5,74 +5,96 @@
 package quartz
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The QCComposition class represents a Quartz Composer composition that either:
 //
-// QCComposition wraps [raw.QCComposition] with a fluent Go API.
+// QCComposition is an idiomatic wrapper over the Objective-C class QCComposition.
 type QCComposition struct {
-	inner *raw.QCComposition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QCComposition].
-func (x *QCComposition) Unwrap() *raw.QCComposition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QCComposition) ID() objc.ID { return x.inner.Ptr() }
-
-// QCCompositionFromID adopts an existing object pointer as a QCComposition (nil for 0).
+// QCCompositionFromID adopts an existing Objective-C object as a QCComposition
+// (nil for 0), retaining it and registering a release finalizer.
 func QCCompositionFromID(id objc.ID) *QCComposition {
 	if id == 0 {
 		return nil
 	}
-	return &QCComposition{inner: raw.QCCompositionFromID(id)}
+	x := &QCComposition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewQCComposition creates a new [QCComposition].
+// qCCompositionAdopt wraps an Objective-C object that this code just created as a
+// QCComposition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func qCCompositionAdopt(id objc.ID) *QCComposition {
+	if id == 0 {
+		return nil
+	}
+	x := &QCComposition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *QCComposition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QCComposition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QCComposition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewQCComposition creates a new QCComposition.
 func NewQCComposition() *QCComposition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QCComposition")), objc.RegisterName("new"))
-	return &QCComposition{inner: raw.QCCompositionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QCComposition")), objc.RegisterName("new"))
+	return qCCompositionAdopt(_id)
 }
 
 // Returns the list of protocols to which the composition conforms.
-//
-// Protocols calls the underlying Protocols.
-func (x *QCComposition) Protocols() *foundation.NSArray[objc.ID] {
-	return x.inner.Protocols()
+func (x *QCComposition) Protocols() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocols"))
+	return obj.Wrap(_r)
 }
 
 // Returns the attributes of the composition.
-//
-// Attributes calls the underlying Attributes.
-func (x *QCComposition) Attributes() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.Attributes()
+func (x *QCComposition) Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+	return obj.Wrap(_r)
 }
 
 // Returns an array listing the keys that identify the input ports of the root patch of the composition.
-//
-// InputKeys calls the underlying InputKeys.
-func (x *QCComposition) InputKeys() *foundation.NSArray[objc.ID] {
-	return x.inner.InputKeys()
+func (x *QCComposition) InputKeys() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputKeys"))
+	return obj.Wrap(_r)
 }
 
 // Returns an array listing the keys that identify the output ports of the root patch of the composition.
-//
-// OutputKeys calls the underlying OutputKeys.
-func (x *QCComposition) OutputKeys() *foundation.NSArray[objc.ID] {
-	return x.inner.OutputKeys()
+func (x *QCComposition) OutputKeys() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputKeys"))
+	return obj.Wrap(_r)
 }
 
 // QCCompositionable is the interface implemented by [QCComposition], for mocking and DI.
 type QCCompositionable interface {
-	Unwrap() *raw.QCComposition
-	Protocols() *foundation.NSArray[objc.ID]
-	Attributes() *foundation.NSDictionary[objc.ID, objc.ID]
-	InputKeys() *foundation.NSArray[objc.ID]
-	OutputKeys() *foundation.NSArray[objc.ID]
+	obj.Object
+	Protocols() obj.Object
+	Attributes() obj.Object
+	InputKeys() obj.Object
+	OutputKeys() obj.Object
 }
 
 var _ QCCompositionable = (*QCComposition)(nil)

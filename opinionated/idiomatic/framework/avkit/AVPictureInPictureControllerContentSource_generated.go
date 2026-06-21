@@ -5,78 +5,84 @@
 package avkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents the source of the content to present in Picture in Picture.
 //
-// PictureInPictureControllerContentSource wraps [raw.AVPictureInPictureControllerContentSource] with a fluent Go API.
+// PictureInPictureControllerContentSource is an idiomatic wrapper over the Objective-C class AVPictureInPictureControllerContentSource.
 type PictureInPictureControllerContentSource struct {
-	inner *raw.AVPictureInPictureControllerContentSource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPictureInPictureControllerContentSource].
-func (x *PictureInPictureControllerContentSource) Unwrap() *raw.AVPictureInPictureControllerContentSource {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PictureInPictureControllerContentSource) ID() objc.ID { return x.inner.Ptr() }
-
-// PictureInPictureControllerContentSourceFromID adopts an existing object pointer as a PictureInPictureControllerContentSource (nil for 0).
+// PictureInPictureControllerContentSourceFromID adopts an existing Objective-C object as a PictureInPictureControllerContentSource
+// (nil for 0), retaining it and registering a release finalizer.
 func PictureInPictureControllerContentSourceFromID(id objc.ID) *PictureInPictureControllerContentSource {
 	if id == 0 {
 		return nil
 	}
-	return &PictureInPictureControllerContentSource{inner: raw.AVPictureInPictureControllerContentSourceFromID(id)}
+	x := &PictureInPictureControllerContentSource{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @method     initWithPlayerLayer: @param      playerLayer The player layer to be shown in Picture in Picture. @abstract   Use this initializer for a content source with a player layer.
+// pictureInPictureControllerContentSourceAdopt wraps an Objective-C object that this code just created as a
+// PictureInPictureControllerContentSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pictureInPictureControllerContentSourceAdopt(id objc.ID) *PictureInPictureControllerContentSource {
+	if id == 0 {
+		return nil
+	}
+	x := &PictureInPictureControllerContentSource{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PictureInPictureControllerContentSource) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PictureInPictureControllerContentSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PictureInPictureControllerContentSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// Use this initializer for a content source with a player layer.
 //
-// NewPictureInPictureControllerContentSourceWithPlayerLayer creates a new [PictureInPictureControllerContentSource].
-func NewPictureInPictureControllerContentSourceWithPlayerLayer(playerLayer *avfoundation.AVPlayerLayer) *PictureInPictureControllerContentSource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPictureInPictureControllerContentSource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayerLayer:"), playerLayer.Ptr())
-	return &PictureInPictureControllerContentSource{inner: raw.AVPictureInPictureControllerContentSourceFromID(_id)}
+// NewPictureInPictureControllerContentSourceWithPlayerLayer creates a new PictureInPictureControllerContentSource.
+func NewPictureInPictureControllerContentSourceWithPlayerLayer(playerLayer obj.Object) *PictureInPictureControllerContentSource {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPictureInPictureControllerContentSource")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayerLayer:"), objref.IDOf(playerLayer))
+	return pictureInPictureControllerContentSourceAdopt(_id)
 }
 
-// @method		initWithSampleBufferDisplayLayer: @param		sampleBufferDisplayLayer The sample buffer display layer to be shown in Picture in Picture. @param		playbackDelegate The playback delegate for controlling sample buffer display layer's playback in Picture in Picture. @abstract	Use this initializer for a content source with a sample buffer display layer and playback delegate.
-//
-// NewPictureInPictureControllerContentSourceWithSampleBufferDisplayLayerPlaybackDelegate creates a new [PictureInPictureControllerContentSource].
-func NewPictureInPictureControllerContentSourceWithSampleBufferDisplayLayerPlaybackDelegate(sampleBufferDisplayLayer *avfoundation.AVSampleBufferDisplayLayer, playbackDelegate raw.AVPictureInPictureSampleBufferPlaybackDelegate) *PictureInPictureControllerContentSource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPictureInPictureControllerContentSource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleBufferDisplayLayer:playbackDelegate:"), sampleBufferDisplayLayer.Ptr(), playbackDelegate)
-	return &PictureInPictureControllerContentSource{inner: raw.AVPictureInPictureControllerContentSourceFromID(_id)}
+func (x *PictureInPictureControllerContentSource) PlayerLayer() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerLayer"))
+	return obj.Wrap(_r)
 }
 
-// PlayerLayer calls the underlying PlayerLayer.
-func (x *PictureInPictureControllerContentSource) PlayerLayer() *avfoundation.AVPlayerLayer {
-	return x.inner.PlayerLayer()
-}
-
-// @property	sampleBufferDisplayLayer @abstract	The receiver's sample buffer display layer.
-//
-// SampleBufferDisplayLayer calls the underlying SampleBufferDisplayLayer.
-func (x *PictureInPictureControllerContentSource) SampleBufferDisplayLayer() *avfoundation.AVSampleBufferDisplayLayer {
-	return x.inner.SampleBufferDisplayLayer()
-}
-
-// @property	sampleBufferPlaybackDelegate @abstract	The receiver's sample buffer playback delegate.
-//
-// SampleBufferPlaybackDelegate calls the underlying SampleBufferPlaybackDelegate.
-func (x *PictureInPictureControllerContentSource) SampleBufferPlaybackDelegate() raw.AVPictureInPictureSampleBufferPlaybackDelegate {
-	return x.inner.SampleBufferPlaybackDelegate()
+// The receiver's sample buffer display layer.
+func (x *PictureInPictureControllerContentSource) SampleBufferDisplayLayer() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferDisplayLayer"))
+	return obj.Wrap(_r)
 }
 
 // PictureInPictureControllerContentSourceable is the interface implemented by [PictureInPictureControllerContentSource], for mocking and DI.
 type PictureInPictureControllerContentSourceable interface {
-	Unwrap() *raw.AVPictureInPictureControllerContentSource
-	PlayerLayer() *avfoundation.AVPlayerLayer
-	SampleBufferDisplayLayer() *avfoundation.AVSampleBufferDisplayLayer
-	SampleBufferPlaybackDelegate() raw.AVPictureInPictureSampleBufferPlaybackDelegate
+	obj.Object
+	PlayerLayer() obj.Object
+	SampleBufferDisplayLayer() obj.Object
 }
 
 var _ PictureInPictureControllerContentSourceable = (*PictureInPictureControllerContentSource)(nil)

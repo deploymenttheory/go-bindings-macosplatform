@@ -5,62 +5,88 @@
 package passkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that displays a button either to trigger payments through Apple Pay or to prompt the user to set up a card.
 //
-// PaymentButton wraps [raw.PKPaymentButton] with a fluent Go API.
+// PaymentButton is an idiomatic wrapper over the Objective-C class PKPaymentButton.
 type PaymentButton struct {
-	inner *raw.PKPaymentButton
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKPaymentButton].
-func (x *PaymentButton) Unwrap() *raw.PKPaymentButton { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PaymentButton) ID() objc.ID { return x.inner.Ptr() }
-
-// PaymentButtonFromID adopts an existing object pointer as a PaymentButton (nil for 0).
+// PaymentButtonFromID adopts an existing Objective-C object as a PaymentButton
+// (nil for 0), retaining it and registering a release finalizer.
 func PaymentButtonFromID(id objc.ID) *PaymentButton {
 	if id == 0 {
 		return nil
 	}
-	return &PaymentButton{inner: raw.PKPaymentButtonFromID(id)}
+	x := &PaymentButton{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// paymentButtonAdopt wraps an Objective-C object that this code just created as a
+// PaymentButton (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paymentButtonAdopt(id objc.ID) *PaymentButton {
+	if id == 0 {
+		return nil
+	}
+	x := &PaymentButton{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PaymentButton) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PaymentButton) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PaymentButton) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new payment button with the specified type and style.
 //
-// NewPaymentButtonWithPaymentButtonTypePaymentButtonStyle creates a new [PaymentButton].
-func NewPaymentButtonWithPaymentButtonTypePaymentButtonStyle(type_ PKPaymentButtonType, style PKPaymentButtonStyle) *PaymentButton {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentButton")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentButtonType:paymentButtonStyle:"), raw.PKPaymentButtonType(type_), raw.PKPaymentButtonStyle(style))
-	return &PaymentButton{inner: raw.PKPaymentButtonFromID(_id)}
+// NewPaymentButtonWithPaymentButtonTypePaymentButtonStyle creates a new PaymentButton.
+func NewPaymentButtonWithPaymentButtonTypePaymentButtonStyle(type_ PaymentButtonType, style PaymentButtonStyle) *PaymentButton {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentButton")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentButtonType:paymentButtonStyle:"), type_, style)
+	return paymentButtonAdopt(_id)
 }
 
 // The radius, in points, for the rounded corners on the button.
 //
-// WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
+// WithCornerRadius sets cornerRadius and returns the receiver so calls can be chained.
 func (x *PaymentButton) WithCornerRadius(cornerRadius float64) *PaymentButton {
-	x.inner.SetCornerRadius(cornerRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 	return x
 }
 
-// CornerRadius calls the underlying CornerRadius.
 func (x *PaymentButton) CornerRadius() float64 {
-	return x.inner.CornerRadius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("cornerRadius"))
+	return _r
 }
 
-// SetCornerRadius calls the underlying SetCornerRadius.
 func (x *PaymentButton) SetCornerRadius(cornerRadius float64) {
-	x.inner.SetCornerRadius(cornerRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 }
 
 // PaymentButtonable is the interface implemented by [PaymentButton], for mocking and DI.
 type PaymentButtonable interface {
-	Unwrap() *raw.PKPaymentButton
+	obj.Object
 	WithCornerRadius(cornerRadius float64) *PaymentButton
 	CornerRadius() float64
 	SetCornerRadius(cornerRadius float64)

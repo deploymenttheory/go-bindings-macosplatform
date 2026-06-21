@@ -5,90 +5,96 @@
 package audiovideobridging
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Interface wraps [raw.AVBInterface] with a fluent Go API.
+// Interface is an idiomatic wrapper over the Objective-C class AVBInterface.
 type Interface struct {
-	inner *raw.AVBInterface
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVBInterface].
-func (x *Interface) Unwrap() *raw.AVBInterface { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Interface) ID() objc.ID { return x.inner.Ptr() }
-
-// InterfaceFromID adopts an existing object pointer as a Interface (nil for 0).
+// InterfaceFromID adopts an existing Objective-C object as a Interface
+// (nil for 0), retaining it and registering a release finalizer.
 func InterfaceFromID(id objc.ID) *Interface {
 	if id == 0 {
 		return nil
 	}
-	return &Interface{inner: raw.AVBInterfaceFromID(id)}
+	x := &Interface{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @method		initWithInterfaceName: @abstract	This method initializes the receiver to work on the specified interface. @param		anInterfaceName	The BSD name of the interface. @result		The initialized receiver.
+// interfaceAdopt wraps an Objective-C object that this code just created as a
+// Interface (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func interfaceAdopt(id objc.ID) *Interface {
+	if id == 0 {
+		return nil
+	}
+	x := &Interface{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Interface) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Interface) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Interface) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// This method initializes the receiver to work on the specified interface.
 //
-// NewInterfaceWithInterfaceName creates a new [Interface].
+// NewInterfaceWithInterfaceName creates a new Interface.
 func NewInterfaceWithInterfaceName(anInterfaceName string) *Interface {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVBInterface")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterfaceName:"), foundation.NSStringStringWithUTF8String(anInterfaceName).Ptr())
-	return &Interface{inner: raw.AVBInterfaceFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVBInterface")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterfaceName:"), purego.NSString(anInterfaceName))
+	return interfaceAdopt(_id)
 }
 
-// @property	interfaceName @abstract	The BSD interface name.
-//
-// InterfaceName calls the underlying InterfaceName.
+// The BSD interface name.
 func (x *Interface) InterfaceName() string {
-	_r := x.inner.InterfaceName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interfaceName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property	entityDiscovery @abstract	The IEEE Std 1722.1™-2013 entity discovery for the interface.
-//
-// EntityDiscovery calls the underlying EntityDiscovery.
+// The IEEE Std 1722.1™-2013 entity discovery for the interface.
 func (x *Interface) EntityDiscovery() *AVB17221EntityDiscovery {
-	_r := x.inner.EntityDiscovery()
-	if _r == nil {
-		return nil
-	}
-	return &AVB17221EntityDiscovery{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entityDiscovery"))
+	return AVB17221EntityDiscoveryFromID(_r)
 }
 
-// @property	aecp @abstract	The IEEE Std 1722.1™-2013 AECP interface for the interface.
-//
-// Aecp calls the underlying Aecp.
+// The IEEE Std 1722.1™-2013 AECP interface for the interface.
 func (x *Interface) Aecp() *AVB17221AECPInterface {
-	_r := x.inner.Aecp()
-	if _r == nil {
-		return nil
-	}
-	return &AVB17221AECPInterface{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("aecp"))
+	return AVB17221AECPInterfaceFromID(_r)
 }
 
-// @property	acmp @abstract	The IEEE Std 1722.1™-2013 ACMP interface for the interface.
-//
-// Acmp calls the underlying Acmp.
+// The IEEE Std 1722.1™-2013 ACMP interface for the interface.
 func (x *Interface) Acmp() *AVB17221ACMPInterface {
-	_r := x.inner.Acmp()
-	if _r == nil {
-		return nil
-	}
-	return &AVB17221ACMPInterface{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acmp"))
+	return AVB17221ACMPInterfaceFromID(_r)
 }
-
-func (x *Interface) asInterface() *raw.AVBInterface { return x.inner }
 
 // Interfaceable is the interface implemented by [Interface], for mocking and DI.
 type Interfaceable interface {
-	Unwrap() *raw.AVBInterface
+	obj.Object
 	InterfaceName() string
 	EntityDiscovery() *AVB17221EntityDiscovery
 	Aecp() *AVB17221AECPInterface

@@ -5,227 +5,237 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A configuration that customizes the behavior for a Metal memory heap.
 //
-// HeapDescriptor wraps [raw.MTLHeapDescriptor] with a fluent Go API.
+// HeapDescriptor is an idiomatic wrapper over the Objective-C class MTLHeapDescriptor.
 type HeapDescriptor struct {
-	inner *raw.MTLHeapDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLHeapDescriptor].
-func (x *HeapDescriptor) Unwrap() *raw.MTLHeapDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HeapDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// HeapDescriptorFromID adopts an existing object pointer as a HeapDescriptor (nil for 0).
+// HeapDescriptorFromID adopts an existing Objective-C object as a HeapDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func HeapDescriptorFromID(id objc.ID) *HeapDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &HeapDescriptor{inner: raw.MTLHeapDescriptorFromID(id)}
+	x := &HeapDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewHeapDescriptor creates a new [HeapDescriptor].
+// heapDescriptorAdopt wraps an Objective-C object that this code just created as a
+// HeapDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func heapDescriptorAdopt(id objc.ID) *HeapDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &HeapDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HeapDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HeapDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HeapDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHeapDescriptor creates a new HeapDescriptor.
 func NewHeapDescriptor() *HeapDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLHeapDescriptor")), objc.RegisterName("new"))
-	return &HeapDescriptor{inner: raw.MTLHeapDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLHeapDescriptor")), objc.RegisterName("new"))
+	return heapDescriptorAdopt(_id)
 }
 
 // The total amount of memory, in bytes, for the heaps you create with this descriptor.
 //
-// WithSize sets the size property and returns the receiver for chaining.
-func (x *HeapDescriptor) WithSize(size uint) *HeapDescriptor {
-	x.inner.SetSize(size)
+// WithSize sets size and returns the receiver so calls can be chained.
+func (x *HeapDescriptor) WithSize(size int) *HeapDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
 	return x
 }
 
 // The storage mode for the heaps you create with this descriptor.
 //
-// WithStorageMode sets the storageMode property and returns the receiver for chaining.
-func (x *HeapDescriptor) WithStorageMode(storageMode MTLStorageMode) *HeapDescriptor {
-	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
+// WithStorageMode sets storageMode and returns the receiver so calls can be chained.
+func (x *HeapDescriptor) WithStorageMode(storageMode StorageMode) *HeapDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageMode:"), storageMode)
 	return x
 }
 
 // The CPU cache behavior for any resources you allocate from the heaps you create with this descriptor.
 //
-// WithCpuCacheMode sets the cpuCacheMode property and returns the receiver for chaining.
-func (x *HeapDescriptor) WithCpuCacheMode(cpuCacheMode MTLCPUCacheMode) *HeapDescriptor {
-	x.inner.SetCpuCacheMode(raw.MTLCPUCacheMode(cpuCacheMode))
+// WithCpuCacheMode sets cpuCacheMode and returns the receiver so calls can be chained.
+func (x *HeapDescriptor) WithCpuCacheMode(cpuCacheMode CPUCacheMode) *HeapDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCpuCacheMode:"), cpuCacheMode)
 	return x
 }
 
 // The page size for any resources you allocate from the heaps you create with this descriptor.
 //
-// WithSparsePageSize sets the sparsePageSize property and returns the receiver for chaining.
-func (x *HeapDescriptor) WithSparsePageSize(sparsePageSize MTLSparsePageSize) *HeapDescriptor {
-	x.inner.SetSparsePageSize(raw.MTLSparsePageSize(sparsePageSize))
+// WithSparsePageSize sets sparsePageSize and returns the receiver so calls can be chained.
+func (x *HeapDescriptor) WithSparsePageSize(sparsePageSize SparsePageSize) *HeapDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSparsePageSize:"), sparsePageSize)
 	return x
 }
 
 // The hazard tracking behavior for any resources you allocate from the heaps you create with this descriptor.
 //
-// WithHazardTrackingMode sets the hazardTrackingMode property and returns the receiver for chaining.
-func (x *HeapDescriptor) WithHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) *HeapDescriptor {
-	x.inner.SetHazardTrackingMode(raw.MTLHazardTrackingMode(hazardTrackingMode))
+// WithHazardTrackingMode sets hazardTrackingMode and returns the receiver so calls can be chained.
+func (x *HeapDescriptor) WithHazardTrackingMode(hazardTrackingMode HazardTrackingMode) *HeapDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHazardTrackingMode:"), hazardTrackingMode)
 	return x
 }
 
 // The combined behavior for any resources you allocate from the heaps you create with this descriptor.
 //
-// WithResourceOptions sets the resourceOptions property and returns the receiver for chaining.
-func (x *HeapDescriptor) WithResourceOptions(resourceOptions MTLResourceOptions) *HeapDescriptor {
-	x.inner.SetResourceOptions(raw.MTLResourceOptions(resourceOptions))
+// WithResourceOptions sets resourceOptions and returns the receiver so calls can be chained.
+func (x *HeapDescriptor) WithResourceOptions(resourceOptions ResourceOptions) *HeapDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResourceOptions:"), resourceOptions)
 	return x
 }
 
 // The memory placement strategy for any resources you allocate from the heaps you create with this descriptor.
 //
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *HeapDescriptor) WithType(type_ MTLHeapType) *HeapDescriptor {
-	x.inner.SetType(raw.MTLHeapType(type_))
+// WithType sets type_ and returns the receiver so calls can be chained.
+func (x *HeapDescriptor) WithType(type_ HeapType) *HeapDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
 // Specifies the largest sparse page size that the Metal heap supports.
 //
-// WithMaxCompatiblePlacementSparsePageSize sets the maxCompatiblePlacementSparsePageSize property and returns the receiver for chaining.
-func (x *HeapDescriptor) WithMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize MTLSparsePageSize) *HeapDescriptor {
-	x.inner.SetMaxCompatiblePlacementSparsePageSize(raw.MTLSparsePageSize(maxCompatiblePlacementSparsePageSize))
+// WithMaxCompatiblePlacementSparsePageSize sets maxCompatiblePlacementSparsePageSize and returns the receiver so calls can be chained.
+func (x *HeapDescriptor) WithMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize SparsePageSize) *HeapDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCompatiblePlacementSparsePageSize:"), maxCompatiblePlacementSparsePageSize)
 	return x
 }
 
-// @property size @abstract Requested size of the heap's backing memory. @discussion The size may be rounded up to GPU page granularity.
-//
-// Size calls the underlying Size.
-func (x *HeapDescriptor) Size() uint {
-	return x.inner.Size()
+// Requested size of the heap's backing memory. The size may be rounded up to GPU page granularity.
+func (x *HeapDescriptor) Size() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("size"))
+	return _r
 }
 
-// SetSize calls the underlying SetSize.
-func (x *HeapDescriptor) SetSize(size uint) {
-	x.inner.SetSize(size)
+func (x *HeapDescriptor) SetSize(size int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
 }
 
-// @property storageMode @abstract Storage mode for the heap. Default is MTLStorageModePrivate. @discussion All resources created from this heap share the same storage mode. MTLStorageModeManaged and MTLStorageModeMemoryless are disallowed.
-//
-// StorageMode calls the underlying StorageMode.
-func (x *HeapDescriptor) StorageMode() MTLStorageMode {
-	return MTLStorageMode(x.inner.StorageMode())
+// Storage mode for the heap. Default is MTLStorageModePrivate. All resources created from this heap share the same storage mode. MTLStorageModeManaged and MTLStorageModeMemoryless are disallowed.
+func (x *HeapDescriptor) StorageMode() StorageMode {
+	_r := objc.Send[StorageMode](objref.IDOf(x), objc.RegisterName("storageMode"))
+	return _r
 }
 
-// SetStorageMode calls the underlying SetStorageMode.
-func (x *HeapDescriptor) SetStorageMode(storageMode MTLStorageMode) {
-	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
+func (x *HeapDescriptor) SetStorageMode(storageMode StorageMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageMode:"), storageMode)
 }
 
-// @property cpuCacheMode @abstract CPU cache mode for the heap. Default is MTLCPUCacheModeDefaultCache. @discussion All resources created from this heap share the same cache mode. CPU cache mode is ignored for MTLStorageModePrivate.
-//
-// CpuCacheMode calls the underlying CpuCacheMode.
-func (x *HeapDescriptor) CpuCacheMode() MTLCPUCacheMode {
-	return MTLCPUCacheMode(x.inner.CpuCacheMode())
+// CPU cache mode for the heap. Default is MTLCPUCacheModeDefaultCache. All resources created from this heap share the same cache mode. CPU cache mode is ignored for MTLStorageModePrivate.
+func (x *HeapDescriptor) CpuCacheMode() CPUCacheMode {
+	_r := objc.Send[CPUCacheMode](objref.IDOf(x), objc.RegisterName("cpuCacheMode"))
+	return _r
 }
 
-// SetCpuCacheMode calls the underlying SetCpuCacheMode.
-func (x *HeapDescriptor) SetCpuCacheMode(cpuCacheMode MTLCPUCacheMode) {
-	x.inner.SetCpuCacheMode(raw.MTLCPUCacheMode(cpuCacheMode))
+func (x *HeapDescriptor) SetCpuCacheMode(cpuCacheMode CPUCacheMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCpuCacheMode:"), cpuCacheMode)
 }
 
-// @property sparsePageSize @abstract The sparse page size to use for resources created from the heap.
-//
-// SparsePageSize calls the underlying SparsePageSize.
-func (x *HeapDescriptor) SparsePageSize() MTLSparsePageSize {
-	return MTLSparsePageSize(x.inner.SparsePageSize())
+// The sparse page size to use for resources created from the heap.
+func (x *HeapDescriptor) SparsePageSize() SparsePageSize {
+	_r := objc.Send[SparsePageSize](objref.IDOf(x), objc.RegisterName("sparsePageSize"))
+	return _r
 }
 
-// SetSparsePageSize calls the underlying SetSparsePageSize.
-func (x *HeapDescriptor) SetSparsePageSize(sparsePageSize MTLSparsePageSize) {
-	x.inner.SetSparsePageSize(raw.MTLSparsePageSize(sparsePageSize))
+func (x *HeapDescriptor) SetSparsePageSize(sparsePageSize SparsePageSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSparsePageSize:"), sparsePageSize)
 }
 
-// @property hazardTrackingMode @abstract Set hazard tracking mode for the heap. The default value is MTLHazardTrackingModeDefault. @discussion For heaps, MTLHazardTrackingModeDefault is treated as MTLHazardTrackingModeUntracked. Setting hazardTrackingMode to MTLHazardTrackingModeTracked causes hazard tracking to be enabled heap. When a resource on a hazard tracked heap is modified, reads and writes from all resources suballocated on that heap will be delayed until the modification is complete. Similarly, modifying heap resources will be delayed until all in-flight reads and writes from all resources suballocated on that heap have completed. For optimal performance, perform hazard tracking manually through MTLFence or MTLEvent instead. All resources created from this heap shared the same hazard tracking mode.
-//
-// HazardTrackingMode calls the underlying HazardTrackingMode.
-func (x *HeapDescriptor) HazardTrackingMode() MTLHazardTrackingMode {
-	return MTLHazardTrackingMode(x.inner.HazardTrackingMode())
+// Set hazard tracking mode for the heap. The default value is MTLHazardTrackingModeDefault. For heaps, MTLHazardTrackingModeDefault is treated as MTLHazardTrackingModeUntracked. Setting hazardTrackingMode to MTLHazardTrackingModeTracked causes hazard tracking to be enabled heap. When a resource on a hazard tracked heap is modified, reads and writes from all resources suballocated on that heap will be delayed until the modification is complete. Similarly, modifying heap resources will be delayed until all in-flight reads and writes from all resources suballocated on that heap have completed. For optimal performance, perform hazard tracking manually through MTLFence or MTLEvent instead. All resources created from this heap shared the same hazard tracking mode.
+func (x *HeapDescriptor) HazardTrackingMode() HazardTrackingMode {
+	_r := objc.Send[HazardTrackingMode](objref.IDOf(x), objc.RegisterName("hazardTrackingMode"))
+	return _r
 }
 
-// SetHazardTrackingMode calls the underlying SetHazardTrackingMode.
-func (x *HeapDescriptor) SetHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) {
-	x.inner.SetHazardTrackingMode(raw.MTLHazardTrackingMode(hazardTrackingMode))
+func (x *HeapDescriptor) SetHazardTrackingMode(hazardTrackingMode HazardTrackingMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHazardTrackingMode:"), hazardTrackingMode)
 }
 
-// @property resourceOptions @abstract A packed tuple of the storageMode, cpuCacheMode and hazardTrackingMode properties. @discussion Modifications to this property are reflected in the other properties and vice versa.
-//
-// ResourceOptions calls the underlying ResourceOptions.
-func (x *HeapDescriptor) ResourceOptions() MTLResourceOptions {
-	return MTLResourceOptions(x.inner.ResourceOptions())
+// A packed tuple of the storageMode, cpuCacheMode and hazardTrackingMode properties. Modifications to this property are reflected in the other properties and vice versa.
+func (x *HeapDescriptor) ResourceOptions() ResourceOptions {
+	_r := objc.Send[ResourceOptions](objref.IDOf(x), objc.RegisterName("resourceOptions"))
+	return _r
 }
 
-// SetResourceOptions calls the underlying SetResourceOptions.
-func (x *HeapDescriptor) SetResourceOptions(resourceOptions MTLResourceOptions) {
-	x.inner.SetResourceOptions(raw.MTLResourceOptions(resourceOptions))
+func (x *HeapDescriptor) SetResourceOptions(resourceOptions ResourceOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResourceOptions:"), resourceOptions)
 }
 
-// @property type @abstract The type of the heap. The default value is MTLHeapTypeAutomatic. @discussion This constrains the resource creation functions that are available.
-//
-// Type calls the underlying Type.
-func (x *HeapDescriptor) Type() MTLHeapType {
-	return MTLHeapType(x.inner.Type())
+// The type of the heap. The default value is MTLHeapTypeAutomatic. This constrains the resource creation functions that are available.
+func (x *HeapDescriptor) Type() HeapType {
+	_r := objc.Send[HeapType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// SetType calls the underlying SetType.
-func (x *HeapDescriptor) SetType(type_ MTLHeapType) {
-	x.inner.SetType(raw.MTLHeapType(type_))
+func (x *HeapDescriptor) SetType(type_ HeapType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 }
 
 // Specifies the largest sparse page size that the Metal heap supports. This parameter only affects the heap if you set the “type“ property of this descriptor to “MTLHeapType/MTLHeapTypePlacement“. The value you assign to this property determines the compatibility of the Metal heap with with placement sparse resources, because placement sparse resources require that their sparse page size be less than or equal to the placement sparse page of the Metal heap that this property controls.
-//
-// MaxCompatiblePlacementSparsePageSize calls the underlying MaxCompatiblePlacementSparsePageSize.
-func (x *HeapDescriptor) MaxCompatiblePlacementSparsePageSize() MTLSparsePageSize {
-	return MTLSparsePageSize(x.inner.MaxCompatiblePlacementSparsePageSize())
+func (x *HeapDescriptor) MaxCompatiblePlacementSparsePageSize() SparsePageSize {
+	_r := objc.Send[SparsePageSize](objref.IDOf(x), objc.RegisterName("maxCompatiblePlacementSparsePageSize"))
+	return _r
 }
 
 // Specifies the largest sparse page size that the Metal heap supports. This parameter only affects the heap if you set the “type“ property of this descriptor to “MTLHeapType/MTLHeapTypePlacement“. The value you assign to this property determines the compatibility of the Metal heap with with placement sparse resources, because placement sparse resources require that their sparse page size be less than or equal to the placement sparse page of the Metal heap that this property controls.
-//
-// SetMaxCompatiblePlacementSparsePageSize calls the underlying SetMaxCompatiblePlacementSparsePageSize.
-func (x *HeapDescriptor) SetMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize MTLSparsePageSize) {
-	x.inner.SetMaxCompatiblePlacementSparsePageSize(raw.MTLSparsePageSize(maxCompatiblePlacementSparsePageSize))
+func (x *HeapDescriptor) SetMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize SparsePageSize) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCompatiblePlacementSparsePageSize:"), maxCompatiblePlacementSparsePageSize)
 }
 
 // HeapDescriptorable is the interface implemented by [HeapDescriptor], for mocking and DI.
 type HeapDescriptorable interface {
-	Unwrap() *raw.MTLHeapDescriptor
-	WithSize(size uint) *HeapDescriptor
-	WithStorageMode(storageMode MTLStorageMode) *HeapDescriptor
-	WithCpuCacheMode(cpuCacheMode MTLCPUCacheMode) *HeapDescriptor
-	WithSparsePageSize(sparsePageSize MTLSparsePageSize) *HeapDescriptor
-	WithHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode) *HeapDescriptor
-	WithResourceOptions(resourceOptions MTLResourceOptions) *HeapDescriptor
-	WithType(type_ MTLHeapType) *HeapDescriptor
-	WithMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize MTLSparsePageSize) *HeapDescriptor
-	Size() uint
-	SetSize(size uint)
-	StorageMode() MTLStorageMode
-	SetStorageMode(storageMode MTLStorageMode)
-	CpuCacheMode() MTLCPUCacheMode
-	SetCpuCacheMode(cpuCacheMode MTLCPUCacheMode)
-	SparsePageSize() MTLSparsePageSize
-	SetSparsePageSize(sparsePageSize MTLSparsePageSize)
-	HazardTrackingMode() MTLHazardTrackingMode
-	SetHazardTrackingMode(hazardTrackingMode MTLHazardTrackingMode)
-	ResourceOptions() MTLResourceOptions
-	SetResourceOptions(resourceOptions MTLResourceOptions)
-	Type() MTLHeapType
-	SetType(type_ MTLHeapType)
-	MaxCompatiblePlacementSparsePageSize() MTLSparsePageSize
-	SetMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize MTLSparsePageSize)
+	obj.Object
+	WithSize(size int) *HeapDescriptor
+	WithStorageMode(storageMode StorageMode) *HeapDescriptor
+	WithCpuCacheMode(cpuCacheMode CPUCacheMode) *HeapDescriptor
+	WithSparsePageSize(sparsePageSize SparsePageSize) *HeapDescriptor
+	WithHazardTrackingMode(hazardTrackingMode HazardTrackingMode) *HeapDescriptor
+	WithResourceOptions(resourceOptions ResourceOptions) *HeapDescriptor
+	WithType(type_ HeapType) *HeapDescriptor
+	WithMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize SparsePageSize) *HeapDescriptor
+	Size() int
+	SetSize(size int)
+	StorageMode() StorageMode
+	SetStorageMode(storageMode StorageMode)
+	CpuCacheMode() CPUCacheMode
+	SetCpuCacheMode(cpuCacheMode CPUCacheMode)
+	SparsePageSize() SparsePageSize
+	SetSparsePageSize(sparsePageSize SparsePageSize)
+	HazardTrackingMode() HazardTrackingMode
+	SetHazardTrackingMode(hazardTrackingMode HazardTrackingMode)
+	ResourceOptions() ResourceOptions
+	SetResourceOptions(resourceOptions ResourceOptions)
+	Type() HeapType
+	SetType(type_ HeapType)
+	MaxCompatiblePlacementSparsePageSize() SparsePageSize
+	SetMaxCompatiblePlacementSparsePageSize(maxCompatiblePlacementSparsePageSize SparsePageSize)
 }
 
 var _ HeapDescriptorable = (*HeapDescriptor)(nil)

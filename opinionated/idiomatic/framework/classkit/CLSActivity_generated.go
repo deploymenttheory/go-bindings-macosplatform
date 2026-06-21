@@ -5,159 +5,158 @@
 package classkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/classkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A representation of user interaction with a context.
 //
-// Activity wraps [raw.CLSActivity] with a fluent Go API.
+// Activity is an idiomatic wrapper over the Objective-C class CLSActivity.
 type Activity struct {
-	inner *raw.CLSActivity
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLSActivity].
-func (x *Activity) Unwrap() *raw.CLSActivity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Activity) ID() objc.ID { return x.inner.Ptr() }
-
-// ActivityFromID adopts an existing object pointer as a Activity (nil for 0).
+// ActivityFromID adopts an existing Objective-C object as a Activity
+// (nil for 0), retaining it and registering a release finalizer.
 func ActivityFromID(id objc.ID) *Activity {
 	if id == 0 {
 		return nil
 	}
-	return &Activity{inner: raw.CLSActivityFromID(id)}
+	x := &Activity{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewActivity creates a new [Activity].
+// activityAdopt wraps an Objective-C object that this code just created as a
+// Activity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func activityAdopt(id objc.ID) *Activity {
+	if id == 0 {
+		return nil
+	}
+	x := &Activity{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Activity) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Activity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Activity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewActivity creates a new Activity.
 func NewActivity() *Activity {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLSActivity")), objc.RegisterName("new"))
-	return &Activity{inner: raw.CLSActivityFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CLSActivity")), objc.RegisterName("new"))
+	return activityAdopt(_id)
 }
 
 // A measure of progress through the task, given as a fraction in the range [0, 1].
 //
-// WithProgress sets the progress property and returns the receiver for chaining.
+// WithProgress sets progress and returns the receiver so calls can be chained.
 func (x *Activity) WithProgress(progress float64) *Activity {
-	x.inner.SetProgress(progress)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgress:"), progress)
 	return x
 }
 
 // Adds an activity item to an activity and sets it as the primary activity item.
 //
-// WithPrimaryActivityItem sets the primaryActivityItem property and returns the receiver for chaining.
+// WithPrimaryActivityItem sets primaryActivityItem and returns the receiver so calls can be chained.
 func (x *Activity) WithPrimaryActivityItem(primaryActivityItem ActivityItemProvider) *Activity {
-	x.inner.SetPrimaryActivityItem(primaryActivityItem.asActivityItem())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryActivityItem:"), objref.IDOf(primaryActivityItem))
 	return x
 }
 
 // Adds a progress range to a given activity.
-//
-// AddProgressRangeFromStartToEnd calls the underlying AddProgressRangeFromStartToEnd.
 func (x *Activity) AddProgressRangeFromStartToEnd(start float64, end float64) {
-	x.inner.AddProgressRangeFromStartToEnd(start, end)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addProgressRangeFromStart:toEnd:"), start, end)
 }
 
 // Adds an activity item to an activity.
-//
-// AddAdditionalActivityItem calls the underlying AddAdditionalActivityItem.
-func (x *Activity) AddAdditionalActivityItem(activityItem *raw.CLSActivityItem) {
-	x.inner.AddAdditionalActivityItem(activityItem)
+func (x *Activity) AddAdditionalActivityItem(activityItem *ActivityItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAdditionalActivityItem:"), objref.IDOf(activityItem))
 }
 
-// @abstract      Current progress as a decimal representation of a percentage. @discussion    Should be [0.0, 1.0].
-//
-// Progress calls the underlying Progress.
+// Current progress as a decimal representation of a percentage. Should be [0.0, 1.0].
 func (x *Activity) Progress() float64 {
-	return x.inner.Progress()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("progress"))
+	return _r
 }
 
-// SetProgress calls the underlying SetProgress.
 func (x *Activity) SetProgress(progress float64) {
-	x.inner.SetProgress(progress)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgress:"), progress)
 }
 
-// @abstract      Returns the total time tracked in this activity (excluding any previous activities). @discussion    The time between calling @c -start and @c -stop.
-//
-// Duration calls the underlying Duration.
+// Returns the total time tracked in this activity (excluding any previous activities). The time between calling
 func (x *Activity) Duration() float64 {
-	return x.inner.Duration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+	return _r
 }
 
-// @abstract      The primary activityItem to be reported on. @discussion    This can be nil indicating @c progress property is the primary data instead of any activityItems.
-//
-// PrimaryActivityItem calls the underlying PrimaryActivityItem.
+// The primary activityItem to be reported on. This can be nil indicating
 func (x *Activity) PrimaryActivityItem() *ActivityItem {
-	_r := x.inner.PrimaryActivityItem()
-	if _r == nil {
-		return nil
-	}
-	return &ActivityItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryActivityItem"))
+	return ActivityItemFromID(_r)
 }
 
-// SetPrimaryActivityItem calls the underlying SetPrimaryActivityItem.
-func (x *Activity) SetPrimaryActivityItem(primaryActivityItem *raw.CLSActivityItem) {
-	x.inner.SetPrimaryActivityItem(primaryActivityItem)
+func (x *Activity) SetPrimaryActivityItem(primaryActivityItem *ActivityItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryActivityItem:"), objref.IDOf(primaryActivityItem))
 }
 
-// @abstract      Array of all additional activity items on this CLSActivity.
+// Array of all additional activity items on this CLSActivity.
 //
 // AdditionalActivityItems returns the collection as a Go slice.
 func (x *Activity) AdditionalActivityItems() []*ActivityItem {
-	arr := x.inner.AdditionalActivityItems()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ActivityItem {
-		return &ActivityItem{inner: raw.CLSActivityItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("additionalActivityItems"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ActivityItem { return ActivityItemFromID(_id) })
 }
 
 // Tells an activity to start recording duration and progress for a task.
-//
-// Start calls the underlying Start.
 func (x *Activity) Start() {
-	x.inner.Start()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
 }
 
 // Tells an activity to stop or pause recording duration and progress for a task.
-//
-// Stop calls the underlying Stop.
 func (x *Activity) Stop() {
-	x.inner.Stop()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
 // Deletes all activity items associated with the current activity.
-//
-// RemoveAllActivityItems calls the underlying RemoveAllActivityItems.
 func (x *Activity) RemoveAllActivityItems() {
-	x.inner.RemoveAllActivityItems()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllActivityItems"))
 }
 
-// @abstract      Returns whether this Activity has been started or not.
-//
-// IsStarted calls the underlying IsStarted.
+// Returns whether this Activity has been started or not.
 func (x *Activity) IsStarted() bool {
-	return x.inner.IsStarted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStarted"))
+	return _r
 }
-
-func (x *Activity) asObject() *raw.CLSObject { return &x.inner.CLSObject }
 
 // Activityable is the interface implemented by [Activity], for mocking and DI.
 type Activityable interface {
-	Unwrap() *raw.CLSActivity
+	obj.Object
 	WithProgress(progress float64) *Activity
 	WithPrimaryActivityItem(primaryActivityItem ActivityItemProvider) *Activity
 	AddProgressRangeFromStartToEnd(start float64, end float64)
-	AddAdditionalActivityItem(activityItem *raw.CLSActivityItem)
+	AddAdditionalActivityItem(activityItem *ActivityItem)
 	Progress() float64
 	SetProgress(progress float64)
 	Duration() float64
 	PrimaryActivityItem() *ActivityItem
-	SetPrimaryActivityItem(primaryActivityItem *raw.CLSActivityItem)
+	SetPrimaryActivityItem(primaryActivityItem *ActivityItem)
 	AdditionalActivityItems() []*ActivityItem
 	Start()
 	Stop()

@@ -5,144 +5,128 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRDeviceControllerExternalCertificateParameters wraps [raw.MTRDeviceControllerExternalCertificateParameters] with a fluent Go API.
+// MTRDeviceControllerExternalCertificateParameters is an idiomatic wrapper over the Objective-C class MTRDeviceControllerExternalCertificateParameters.
 type MTRDeviceControllerExternalCertificateParameters struct {
-	inner *raw.MTRDeviceControllerExternalCertificateParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDeviceControllerExternalCertificateParameters].
-func (x *MTRDeviceControllerExternalCertificateParameters) Unwrap() *raw.MTRDeviceControllerExternalCertificateParameters {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceControllerExternalCertificateParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDeviceControllerExternalCertificateParametersFromID adopts an existing object pointer as a MTRDeviceControllerExternalCertificateParameters (nil for 0).
+// MTRDeviceControllerExternalCertificateParametersFromID adopts an existing Objective-C object as a MTRDeviceControllerExternalCertificateParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDeviceControllerExternalCertificateParametersFromID(id objc.ID) *MTRDeviceControllerExternalCertificateParameters {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDeviceControllerExternalCertificateParameters{inner: raw.MTRDeviceControllerExternalCertificateParametersFromID(id)}
+	x := &MTRDeviceControllerExternalCertificateParameters{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Prepare to initialize a controller that is not able to sign operational certificates itself, and therefore needs to be provided with a complete operational certificate chain. A controller created from MTRDeviceControllerStartupParams initialized with this method will not be able to commission devices unless operationalCertificateIssuer and operationalCertificateIssuerQueue are set. The fabric id and node id to use for the controller will be derived from the provided operationalCertificate. @param storageDelegate The storage to use for the controller.  This will be called into on storageDelegateQueue. @param storageDelegateQueue The queue for calls into storageDelegate.  See MTRDeviceControllerStorageDelegate documentation for the rules about what work is allowed to be done on this queue. @param uniqueIdentifier The unique id to assign to the controller. @param vendorID The vendor ID (allocated by the Connectivity Standards Alliance) for this controller. Must not be the "standard" vendor id (0). @param ipk The Identity Protection Key. Must be 16 bytes in length. @param intermediateCertificate Must be nil if operationalCertificate is directly signed by rootCertificate.  Otherwise must be the certificate that signed operationalCertificate.
-//
-// NewMTRDeviceControllerExternalCertificateParametersWithStorageDelegateStorageDelegateQueueUniqueIdentifierIpkVendorIDOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificate creates a new [MTRDeviceControllerExternalCertificateParameters].
-func NewMTRDeviceControllerExternalCertificateParametersWithStorageDelegateStorageDelegateQueueUniqueIdentifierIpkVendorIDOperationalKeypairOperationalCertificateIntermediateCertificateRootCertificate(storageDelegate raw.MTRDeviceControllerStorageDelegate, storageDelegateQueue *foundation.NSObject, uniqueIdentifier *foundation.NSUUID, ipk *foundation.NSData, vendorID *foundation.NSNumber, operationalKeypair raw.MTRKeypair, operationalCertificate *foundation.NSData, intermediateCertificate *foundation.NSData, rootCertificate *foundation.NSData) *MTRDeviceControllerExternalCertificateParameters {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceControllerExternalCertificateParameters")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStorageDelegate:storageDelegateQueue:uniqueIdentifier:ipk:vendorID:operationalKeypair:operationalCertificate:intermediateCertificate:rootCertificate:"), storageDelegate, storageDelegateQueue.Ptr(), uniqueIdentifier.Ptr(), ipk.Ptr(), vendorID.Ptr(), operationalKeypair, operationalCertificate.Ptr(), intermediateCertificate.Ptr(), rootCertificate.Ptr())
-	return &MTRDeviceControllerExternalCertificateParameters{inner: raw.MTRDeviceControllerExternalCertificateParametersFromID(_id)}
+// mTRDeviceControllerExternalCertificateParametersAdopt wraps an Objective-C object that this code just created as a
+// MTRDeviceControllerExternalCertificateParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDeviceControllerExternalCertificateParametersAdopt(id objc.ID) *MTRDeviceControllerExternalCertificateParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDeviceControllerExternalCertificateParameters{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDeviceControllerExternalCertificateParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDeviceControllerExternalCertificateParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDeviceControllerExternalCertificateParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRDeviceControllerExternalCertificateParameters creates a new MTRDeviceControllerExternalCertificateParameters.
+func NewMTRDeviceControllerExternalCertificateParameters() *MTRDeviceControllerExternalCertificateParameters {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceControllerExternalCertificateParameters")), objc.RegisterName("new"))
+	return mTRDeviceControllerExternalCertificateParametersAdopt(_id)
 }
 
 // The Product Attestation Authority certificates that are trusted to sign device attestation information (and in particular to sign Product Attestation Intermediate certificates, which then sign Device Attestation Certificates). Defaults to nil.
 //
-// WithProductAttestationAuthorityCertificates sets the collection, converting the Go slice to an NSArray.
-func (x *MTRDeviceControllerExternalCertificateParameters) WithProductAttestationAuthorityCertificates(items ...*foundation.NSData) *MTRDeviceControllerExternalCertificateParameters {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.MTRDeviceControllerParameters.SetProductAttestationAuthorityCertificates(foundation.NSArrayFromID[*foundation.NSData](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSData](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.MTRDeviceControllerParameters.SetProductAttestationAuthorityCertificates(_arr)
+// WithProductAttestationAuthorityCertificates sets the collection and returns the receiver so calls can be chained.
+func (x *MTRDeviceControllerExternalCertificateParameters) WithProductAttestationAuthorityCertificates(items ...obj.Object) *MTRDeviceControllerExternalCertificateParameters {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductAttestationAuthorityCertificates:"), _arr)
 	return x
 }
 
 // The Certification Declaration certificates whose public keys correspond to private keys that are trusted to sign certification declarations.  Defaults to nil. These certificates are used in addition to, not replacing, the default set of well-known certification declaration signing keys.
 //
-// WithCertificationDeclarationCertificates sets the collection, converting the Go slice to an NSArray.
-func (x *MTRDeviceControllerExternalCertificateParameters) WithCertificationDeclarationCertificates(items ...*foundation.NSData) *MTRDeviceControllerExternalCertificateParameters {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.MTRDeviceControllerParameters.SetCertificationDeclarationCertificates(foundation.NSArrayFromID[*foundation.NSData](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSData](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.MTRDeviceControllerParameters.SetCertificationDeclarationCertificates(_arr)
+// WithCertificationDeclarationCertificates sets the collection and returns the receiver so calls can be chained.
+func (x *MTRDeviceControllerExternalCertificateParameters) WithCertificationDeclarationCertificates(items ...obj.Object) *MTRDeviceControllerExternalCertificateParameters {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificationDeclarationCertificates:"), _arr)
 	return x
 }
 
 // Whether the controller should advertise its operational identity.  Defaults to NO.
 //
-// WithShouldAdvertiseOperational sets the shouldAdvertiseOperational property and returns the receiver for chaining.
+// WithShouldAdvertiseOperational sets shouldAdvertiseOperational and returns the receiver so calls can be chained.
 func (x *MTRDeviceControllerExternalCertificateParameters) WithShouldAdvertiseOperational(shouldAdvertiseOperational bool) *MTRDeviceControllerExternalCertificateParameters {
-	x.inner.MTRDeviceControllerParameters.SetShouldAdvertiseOperational(shouldAdvertiseOperational)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldAdvertiseOperational:"), shouldAdvertiseOperational)
 	return x
 }
 
 // Sets the maximum simultaneous subscription establishments that can be happening at one time for devices on Thread. This defaults to a large number. If this value is 0, the maximum subscription establishments allowed at a time will be set to 1.
 //
-// WithConcurrentSubscriptionEstablishmentsAllowedOnThread sets the concurrentSubscriptionEstablishmentsAllowedOnThread property and returns the receiver for chaining.
-func (x *MTRDeviceControllerExternalCertificateParameters) WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread uint) *MTRDeviceControllerExternalCertificateParameters {
-	x.inner.MTRDeviceControllerParameters.SetConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread)
+// WithConcurrentSubscriptionEstablishmentsAllowedOnThread sets concurrentSubscriptionEstablishmentsAllowedOnThread and returns the receiver so calls can be chained.
+func (x *MTRDeviceControllerExternalCertificateParameters) WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread int) *MTRDeviceControllerExternalCertificateParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConcurrentSubscriptionEstablishmentsAllowedOnThread:"), concurrentSubscriptionEstablishmentsAllowedOnThread)
 	return x
 }
 
 // Sets the storage behavior configuration - see MTRDeviceStorageBehaviorConfiguration.h for details
 //
-// WithStorageBehaviorConfiguration sets the storageBehaviorConfiguration property and returns the receiver for chaining.
+// WithStorageBehaviorConfiguration sets storageBehaviorConfiguration and returns the receiver so calls can be chained.
 func (x *MTRDeviceControllerExternalCertificateParameters) WithStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerExternalCertificateParameters {
-	x.inner.MTRDeviceControllerParameters.SetStorageBehaviorConfiguration(storageBehaviorConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageBehaviorConfiguration:"), objref.IDOf(storageBehaviorConfiguration))
 	return x
 }
 
 // Whether the controller should start out suspended.
 //
-// WithStartSuspended sets the startSuspended property and returns the receiver for chaining.
+// WithStartSuspended sets startSuspended and returns the receiver so calls can be chained.
 func (x *MTRDeviceControllerExternalCertificateParameters) WithStartSuspended(startSuspended bool) *MTRDeviceControllerExternalCertificateParameters {
-	x.inner.MTRDeviceControllerParameters.MTRDeviceControllerAbstractParameters.SetStartSuspended(startSuspended)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSuspended:"), startSuspended)
 	return x
 }
 
-// RootCertificate calls the underlying RootCertificate.
-func (x *MTRDeviceControllerExternalCertificateParameters) RootCertificate() *foundation.NSData {
-	return x.inner.RootCertificate()
-}
-
-func (x *MTRDeviceControllerExternalCertificateParameters) asMTRDeviceControllerParameters() *raw.MTRDeviceControllerParameters {
-	return &x.inner.MTRDeviceControllerParameters
-}
-
-func (x *MTRDeviceControllerExternalCertificateParameters) asMTRDeviceControllerAbstractParameters() *raw.MTRDeviceControllerAbstractParameters {
-	return &x.inner.MTRDeviceControllerParameters.MTRDeviceControllerAbstractParameters
+func (x *MTRDeviceControllerExternalCertificateParameters) RootCertificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootCertificate"))
+	return obj.Wrap(_r)
 }
 
 // MTRDeviceControllerExternalCertificateParametersable is the interface implemented by [MTRDeviceControllerExternalCertificateParameters], for mocking and DI.
 type MTRDeviceControllerExternalCertificateParametersable interface {
-	Unwrap() *raw.MTRDeviceControllerExternalCertificateParameters
-	WithProductAttestationAuthorityCertificates(items ...*foundation.NSData) *MTRDeviceControllerExternalCertificateParameters
-	WithCertificationDeclarationCertificates(items ...*foundation.NSData) *MTRDeviceControllerExternalCertificateParameters
+	obj.Object
+	WithProductAttestationAuthorityCertificates(items ...obj.Object) *MTRDeviceControllerExternalCertificateParameters
+	WithCertificationDeclarationCertificates(items ...obj.Object) *MTRDeviceControllerExternalCertificateParameters
 	WithShouldAdvertiseOperational(shouldAdvertiseOperational bool) *MTRDeviceControllerExternalCertificateParameters
-	WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread uint) *MTRDeviceControllerExternalCertificateParameters
+	WithConcurrentSubscriptionEstablishmentsAllowedOnThread(concurrentSubscriptionEstablishmentsAllowedOnThread int) *MTRDeviceControllerExternalCertificateParameters
 	WithStorageBehaviorConfiguration(storageBehaviorConfiguration *MTRDeviceStorageBehaviorConfiguration) *MTRDeviceControllerExternalCertificateParameters
 	WithStartSuspended(startSuspended bool) *MTRDeviceControllerExternalCertificateParameters
-	RootCertificate() *foundation.NSData
+	RootCertificate() obj.Object
 }
 
 var _ MTRDeviceControllerExternalCertificateParametersable = (*MTRDeviceControllerExternalCertificateParameters)(nil)

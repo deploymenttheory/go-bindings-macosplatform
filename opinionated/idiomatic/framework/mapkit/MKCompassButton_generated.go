@@ -5,87 +5,108 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A specialized view that displays the compass heading for its associated map.
 //
-// CompassButton wraps [raw.MKCompassButton] with a fluent Go API.
+// CompassButton is an idiomatic wrapper over the Objective-C class MKCompassButton.
 type CompassButton struct {
-	inner *raw.MKCompassButton
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKCompassButton].
-func (x *CompassButton) Unwrap() *raw.MKCompassButton { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CompassButton) ID() objc.ID { return x.inner.Ptr() }
-
-// CompassButtonFromID adopts an existing object pointer as a CompassButton (nil for 0).
+// CompassButtonFromID adopts an existing Objective-C object as a CompassButton
+// (nil for 0), retaining it and registering a release finalizer.
 func CompassButtonFromID(id objc.ID) *CompassButton {
 	if id == 0 {
 		return nil
 	}
-	return &CompassButton{inner: raw.MKCompassButtonFromID(id)}
+	x := &CompassButton{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCompassButton creates a new [CompassButton].
+// compassButtonAdopt wraps an Objective-C object that this code just created as a
+// CompassButton (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func compassButtonAdopt(id objc.ID) *CompassButton {
+	if id == 0 {
+		return nil
+	}
+	x := &CompassButton{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CompassButton) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CompassButton) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CompassButton) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCompassButton creates a new CompassButton.
 func NewCompassButton() *CompassButton {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKCompassButton")), objc.RegisterName("new"))
-	return &CompassButton{inner: raw.MKCompassButtonFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKCompassButton")), objc.RegisterName("new"))
+	return compassButtonAdopt(_id)
 }
 
 // The map view that provides the heading information for the compass button.
 //
-// WithMapView sets the mapView property and returns the receiver for chaining.
+// WithMapView sets mapView and returns the receiver so calls can be chained.
 func (x *CompassButton) WithMapView(mapView *MapView) *CompassButton {
-	x.inner.SetMapView(mapView.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
 	return x
 }
 
 // The visibility of the compass button.
 //
-// WithCompassVisibility sets the compassVisibility property and returns the receiver for chaining.
-func (x *CompassButton) WithCompassVisibility(compassVisibility MKFeatureVisibility) *CompassButton {
-	x.inner.SetCompassVisibility(raw.MKFeatureVisibility(compassVisibility))
+// WithCompassVisibility sets compassVisibility and returns the receiver so calls can be chained.
+func (x *CompassButton) WithCompassVisibility(compassVisibility FeatureVisibility) *CompassButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompassVisibility:"), compassVisibility)
 	return x
 }
 
-// MapView calls the underlying MapView.
 func (x *CompassButton) MapView() *MapView {
-	_r := x.inner.MapView()
-	if _r == nil {
-		return nil
-	}
-	return &MapView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapView"))
+	return MapViewFromID(_r)
 }
 
-// SetMapView calls the underlying SetMapView.
-func (x *CompassButton) SetMapView(mapView *raw.MKMapView) {
-	x.inner.SetMapView(mapView)
+func (x *CompassButton) SetMapView(mapView *MapView) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
 }
 
-// CompassVisibility calls the underlying CompassVisibility.
-func (x *CompassButton) CompassVisibility() MKFeatureVisibility {
-	return MKFeatureVisibility(x.inner.CompassVisibility())
+func (x *CompassButton) CompassVisibility() FeatureVisibility {
+	_r := objc.Send[FeatureVisibility](objref.IDOf(x), objc.RegisterName("compassVisibility"))
+	return _r
 }
 
-// SetCompassVisibility calls the underlying SetCompassVisibility.
-func (x *CompassButton) SetCompassVisibility(compassVisibility MKFeatureVisibility) {
-	x.inner.SetCompassVisibility(raw.MKFeatureVisibility(compassVisibility))
+func (x *CompassButton) SetCompassVisibility(compassVisibility FeatureVisibility) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompassVisibility:"), compassVisibility)
 }
 
 // CompassButtonable is the interface implemented by [CompassButton], for mocking and DI.
 type CompassButtonable interface {
-	Unwrap() *raw.MKCompassButton
+	obj.Object
 	WithMapView(mapView *MapView) *CompassButton
-	WithCompassVisibility(compassVisibility MKFeatureVisibility) *CompassButton
+	WithCompassVisibility(compassVisibility FeatureVisibility) *CompassButton
 	MapView() *MapView
-	SetMapView(mapView *raw.MKMapView)
-	CompassVisibility() MKFeatureVisibility
-	SetCompassVisibility(compassVisibility MKFeatureVisibility)
+	SetMapView(mapView *MapView)
+	CompassVisibility() FeatureVisibility
+	SetCompassVisibility(compassVisibility FeatureVisibility)
 }
 
 var _ CompassButtonable = (*CompassButton)(nil)

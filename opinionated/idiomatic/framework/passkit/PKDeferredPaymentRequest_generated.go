@@ -5,205 +5,217 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a request to set up a deferred payment, such as a hotel booking or a pre-order.
 //
-// DeferredPaymentRequest wraps [raw.PKDeferredPaymentRequest] with a fluent Go API.
+// DeferredPaymentRequest is an idiomatic wrapper over the Objective-C class PKDeferredPaymentRequest.
 type DeferredPaymentRequest struct {
-	inner *raw.PKDeferredPaymentRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKDeferredPaymentRequest].
-func (x *DeferredPaymentRequest) Unwrap() *raw.PKDeferredPaymentRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DeferredPaymentRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// DeferredPaymentRequestFromID adopts an existing object pointer as a DeferredPaymentRequest (nil for 0).
+// DeferredPaymentRequestFromID adopts an existing Objective-C object as a DeferredPaymentRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func DeferredPaymentRequestFromID(id objc.ID) *DeferredPaymentRequest {
 	if id == 0 {
 		return nil
 	}
-	return &DeferredPaymentRequest{inner: raw.PKDeferredPaymentRequestFromID(id)}
+	x := &DeferredPaymentRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// deferredPaymentRequestAdopt wraps an Objective-C object that this code just created as a
+// DeferredPaymentRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func deferredPaymentRequestAdopt(id objc.ID) *DeferredPaymentRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &DeferredPaymentRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DeferredPaymentRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DeferredPaymentRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DeferredPaymentRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a deferred payment request with the payment description, deferred billing summary, and management URL you provide.
 //
-// NewDeferredPaymentRequestWithPaymentDescriptionDeferredBillingManagementURL creates a new [DeferredPaymentRequest].
-func NewDeferredPaymentRequestWithPaymentDescriptionDeferredBillingManagementURL(paymentDescription string, deferredBilling *raw.PKDeferredPaymentSummaryItem, managementURL string) *DeferredPaymentRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKDeferredPaymentRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentDescription:deferredBilling:managementURL:"), foundation.NSStringStringWithUTF8String(paymentDescription).Ptr(), deferredBilling.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(managementURL)).Ptr())
-	return &DeferredPaymentRequest{inner: raw.PKDeferredPaymentRequestFromID(_id)}
+// NewDeferredPaymentRequestWithPaymentDescriptionDeferredBillingManagementURL creates a new DeferredPaymentRequest.
+func NewDeferredPaymentRequestWithPaymentDescriptionDeferredBillingManagementURL(paymentDescription string, deferredBilling *DeferredPaymentSummaryItem, managementURL string) *DeferredPaymentRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKDeferredPaymentRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentDescription:deferredBilling:managementURL:"), purego.NSString(paymentDescription), objref.IDOf(deferredBilling), rt.FileURL(managementURL))
+	return deferredPaymentRequestAdopt(_id)
 }
 
 // A description of the deferred payment.
 //
-// WithPaymentDescription sets the paymentDescription property and returns the receiver for chaining.
+// WithPaymentDescription sets paymentDescription and returns the receiver so calls can be chained.
 func (x *DeferredPaymentRequest) WithPaymentDescription(paymentDescription string) *DeferredPaymentRequest {
-	x.inner.SetPaymentDescription(foundation.NSStringStringWithUTF8String(paymentDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentDescription:"), purego.NSString(paymentDescription))
 	return x
 }
 
 // An object that contains details about the deferred payment.
 //
-// WithDeferredBilling sets the deferredBilling property and returns the receiver for chaining.
+// WithDeferredBilling sets deferredBilling and returns the receiver so calls can be chained.
 func (x *DeferredPaymentRequest) WithDeferredBilling(deferredBilling *DeferredPaymentSummaryItem) *DeferredPaymentRequest {
-	x.inner.SetDeferredBilling(deferredBilling.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredBilling:"), objref.IDOf(deferredBilling))
 	return x
 }
 
 // The localized billing agreement the framework displays to the user prior to payment authorization.
 //
-// WithBillingAgreement sets the billingAgreement property and returns the receiver for chaining.
+// WithBillingAgreement sets billingAgreement and returns the receiver so calls can be chained.
 func (x *DeferredPaymentRequest) WithBillingAgreement(billingAgreement string) *DeferredPaymentRequest {
-	x.inner.SetBillingAgreement(foundation.NSStringStringWithUTF8String(billingAgreement))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBillingAgreement:"), purego.NSString(billingAgreement))
 	return x
 }
 
 // A URL that links to a page on your web site where the user can manage the payment method for the deferred payment, including deleting it.
 //
-// WithManagementURL sets the managementURL property and returns the receiver for chaining.
+// WithManagementURL sets managementURL and returns the receiver so calls can be chained.
 func (x *DeferredPaymentRequest) WithManagementURL(managementURL string) *DeferredPaymentRequest {
-	x.inner.SetManagementURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(managementURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagementURL:"), rt.FileURL(managementURL))
 	return x
 }
 
 // A URL to receive life-cycle notifications for the merchant-specific payment token the system issues for the request, if applicable.
 //
-// WithTokenNotificationURL sets the tokenNotificationURL property and returns the receiver for chaining.
+// WithTokenNotificationURL sets tokenNotificationURL and returns the receiver so calls can be chained.
 func (x *DeferredPaymentRequest) WithTokenNotificationURL(tokenNotificationURL string) *DeferredPaymentRequest {
-	x.inner.SetTokenNotificationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(tokenNotificationURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTokenNotificationURL:"), rt.FileURL(tokenNotificationURL))
 	return x
 }
 
 // The date before which you must cancel a deferred payment without incurring any cancellation charges.
 //
-// WithFreeCancellationDate sets the freeCancellationDate property and returns the receiver for chaining.
-func (x *DeferredPaymentRequest) WithFreeCancellationDate(freeCancellationDate *foundation.NSDate) *DeferredPaymentRequest {
-	x.inner.SetFreeCancellationDate(freeCancellationDate)
+// WithFreeCancellationDate sets freeCancellationDate and returns the receiver so calls can be chained.
+func (x *DeferredPaymentRequest) WithFreeCancellationDate(freeCancellationDate obj.Object) *DeferredPaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeCancellationDate:"), objref.IDOf(freeCancellationDate))
 	return x
 }
 
 // The time zone at the destination location of the payment.
 //
-// WithFreeCancellationDateTimeZone sets the freeCancellationDateTimeZone property and returns the receiver for chaining.
-func (x *DeferredPaymentRequest) WithFreeCancellationDateTimeZone(freeCancellationDateTimeZone *foundation.NSTimeZone) *DeferredPaymentRequest {
-	x.inner.SetFreeCancellationDateTimeZone(freeCancellationDateTimeZone)
+// WithFreeCancellationDateTimeZone sets freeCancellationDateTimeZone and returns the receiver so calls can be chained.
+func (x *DeferredPaymentRequest) WithFreeCancellationDateTimeZone(freeCancellationDateTimeZone obj.Object) *DeferredPaymentRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeCancellationDateTimeZone:"), objref.IDOf(freeCancellationDateTimeZone))
 	return x
 }
 
-// PaymentDescription calls the underlying PaymentDescription.
 func (x *DeferredPaymentRequest) PaymentDescription() string {
-	_r := x.inner.PaymentDescription()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentDescription"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPaymentDescription calls the underlying SetPaymentDescription.
 func (x *DeferredPaymentRequest) SetPaymentDescription(paymentDescription string) {
-	x.inner.SetPaymentDescription(foundation.NSStringStringWithUTF8String(paymentDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentDescription:"), purego.NSString(paymentDescription))
 }
 
-// DeferredBilling calls the underlying DeferredBilling.
 func (x *DeferredPaymentRequest) DeferredBilling() *DeferredPaymentSummaryItem {
-	_r := x.inner.DeferredBilling()
-	if _r == nil {
-		return nil
-	}
-	return &DeferredPaymentSummaryItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deferredBilling"))
+	return DeferredPaymentSummaryItemFromID(_r)
 }
 
-// SetDeferredBilling calls the underlying SetDeferredBilling.
-func (x *DeferredPaymentRequest) SetDeferredBilling(deferredBilling *raw.PKDeferredPaymentSummaryItem) {
-	x.inner.SetDeferredBilling(deferredBilling)
+func (x *DeferredPaymentRequest) SetDeferredBilling(deferredBilling *DeferredPaymentSummaryItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredBilling:"), objref.IDOf(deferredBilling))
 }
 
-// BillingAgreement calls the underlying BillingAgreement.
 func (x *DeferredPaymentRequest) BillingAgreement() string {
-	_r := x.inner.BillingAgreement()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("billingAgreement"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBillingAgreement calls the underlying SetBillingAgreement.
 func (x *DeferredPaymentRequest) SetBillingAgreement(billingAgreement string) {
-	x.inner.SetBillingAgreement(foundation.NSStringStringWithUTF8String(billingAgreement))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBillingAgreement:"), purego.NSString(billingAgreement))
 }
 
-// ManagementURL calls the underlying ManagementURL.
-func (x *DeferredPaymentRequest) ManagementURL() *foundation.NSURL {
-	return x.inner.ManagementURL()
+func (x *DeferredPaymentRequest) ManagementURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managementURL"))
+	return obj.Wrap(_r)
 }
 
-// SetManagementURL calls the underlying SetManagementURL.
 func (x *DeferredPaymentRequest) SetManagementURL(managementURL string) {
-	x.inner.SetManagementURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(managementURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagementURL:"), rt.FileURL(managementURL))
 }
 
-// TokenNotificationURL calls the underlying TokenNotificationURL.
-func (x *DeferredPaymentRequest) TokenNotificationURL() *foundation.NSURL {
-	return x.inner.TokenNotificationURL()
+func (x *DeferredPaymentRequest) TokenNotificationURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenNotificationURL"))
+	return obj.Wrap(_r)
 }
 
-// SetTokenNotificationURL calls the underlying SetTokenNotificationURL.
 func (x *DeferredPaymentRequest) SetTokenNotificationURL(tokenNotificationURL string) {
-	x.inner.SetTokenNotificationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(tokenNotificationURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTokenNotificationURL:"), rt.FileURL(tokenNotificationURL))
 }
 
-// FreeCancellationDate calls the underlying FreeCancellationDate.
-func (x *DeferredPaymentRequest) FreeCancellationDate() *foundation.NSDate {
-	return x.inner.FreeCancellationDate()
+func (x *DeferredPaymentRequest) FreeCancellationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("freeCancellationDate"))
+	return obj.Wrap(_r)
 }
 
-// SetFreeCancellationDate calls the underlying SetFreeCancellationDate.
-func (x *DeferredPaymentRequest) SetFreeCancellationDate(freeCancellationDate *foundation.NSDate) {
-	x.inner.SetFreeCancellationDate(freeCancellationDate)
+func (x *DeferredPaymentRequest) SetFreeCancellationDate(freeCancellationDate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeCancellationDate:"), objref.IDOf(freeCancellationDate))
 }
 
-// FreeCancellationDateTimeZone calls the underlying FreeCancellationDateTimeZone.
-func (x *DeferredPaymentRequest) FreeCancellationDateTimeZone() *foundation.NSTimeZone {
-	return x.inner.FreeCancellationDateTimeZone()
+func (x *DeferredPaymentRequest) FreeCancellationDateTimeZone() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("freeCancellationDateTimeZone"))
+	return obj.Wrap(_r)
 }
 
-// SetFreeCancellationDateTimeZone calls the underlying SetFreeCancellationDateTimeZone.
-func (x *DeferredPaymentRequest) SetFreeCancellationDateTimeZone(freeCancellationDateTimeZone *foundation.NSTimeZone) {
-	x.inner.SetFreeCancellationDateTimeZone(freeCancellationDateTimeZone)
+func (x *DeferredPaymentRequest) SetFreeCancellationDateTimeZone(freeCancellationDateTimeZone obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeCancellationDateTimeZone:"), objref.IDOf(freeCancellationDateTimeZone))
 }
 
 // DeferredPaymentRequestable is the interface implemented by [DeferredPaymentRequest], for mocking and DI.
 type DeferredPaymentRequestable interface {
-	Unwrap() *raw.PKDeferredPaymentRequest
+	obj.Object
 	WithPaymentDescription(paymentDescription string) *DeferredPaymentRequest
 	WithDeferredBilling(deferredBilling *DeferredPaymentSummaryItem) *DeferredPaymentRequest
 	WithBillingAgreement(billingAgreement string) *DeferredPaymentRequest
 	WithManagementURL(managementURL string) *DeferredPaymentRequest
 	WithTokenNotificationURL(tokenNotificationURL string) *DeferredPaymentRequest
-	WithFreeCancellationDate(freeCancellationDate *foundation.NSDate) *DeferredPaymentRequest
-	WithFreeCancellationDateTimeZone(freeCancellationDateTimeZone *foundation.NSTimeZone) *DeferredPaymentRequest
+	WithFreeCancellationDate(freeCancellationDate obj.Object) *DeferredPaymentRequest
+	WithFreeCancellationDateTimeZone(freeCancellationDateTimeZone obj.Object) *DeferredPaymentRequest
 	PaymentDescription() string
 	SetPaymentDescription(paymentDescription string)
 	DeferredBilling() *DeferredPaymentSummaryItem
-	SetDeferredBilling(deferredBilling *raw.PKDeferredPaymentSummaryItem)
+	SetDeferredBilling(deferredBilling *DeferredPaymentSummaryItem)
 	BillingAgreement() string
 	SetBillingAgreement(billingAgreement string)
-	ManagementURL() *foundation.NSURL
+	ManagementURL() obj.Object
 	SetManagementURL(managementURL string)
-	TokenNotificationURL() *foundation.NSURL
+	TokenNotificationURL() obj.Object
 	SetTokenNotificationURL(tokenNotificationURL string)
-	FreeCancellationDate() *foundation.NSDate
-	SetFreeCancellationDate(freeCancellationDate *foundation.NSDate)
-	FreeCancellationDateTimeZone() *foundation.NSTimeZone
-	SetFreeCancellationDateTimeZone(freeCancellationDateTimeZone *foundation.NSTimeZone)
+	FreeCancellationDate() obj.Object
+	SetFreeCancellationDate(freeCancellationDate obj.Object)
+	FreeCancellationDateTimeZone() obj.Object
+	SetFreeCancellationDateTimeZone(freeCancellationDateTimeZone obj.Object)
 }
 
 var _ DeferredPaymentRequestable = (*DeferredPaymentRequest)(nil)

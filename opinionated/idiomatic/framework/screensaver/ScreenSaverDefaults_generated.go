@@ -5,41 +5,68 @@
 package screensaver
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screensaver"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that defines a set of methods for saving and restoring user defaults for screen savers.
 //
-// ScreenSaverDefaults wraps [raw.ScreenSaverDefaults] with a fluent Go API.
+// ScreenSaverDefaults is an idiomatic wrapper over the Objective-C class ScreenSaverDefaults.
 type ScreenSaverDefaults struct {
-	inner *raw.ScreenSaverDefaults
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ScreenSaverDefaults].
-func (x *ScreenSaverDefaults) Unwrap() *raw.ScreenSaverDefaults { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScreenSaverDefaults) ID() objc.ID { return x.inner.Ptr() }
-
-// ScreenSaverDefaultsFromID adopts an existing object pointer as a ScreenSaverDefaults (nil for 0).
+// ScreenSaverDefaultsFromID adopts an existing Objective-C object as a ScreenSaverDefaults
+// (nil for 0), retaining it and registering a release finalizer.
 func ScreenSaverDefaultsFromID(id objc.ID) *ScreenSaverDefaults {
 	if id == 0 {
 		return nil
 	}
-	return &ScreenSaverDefaults{inner: raw.ScreenSaverDefaultsFromID(id)}
+	x := &ScreenSaverDefaults{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewScreenSaverDefaults creates a new [ScreenSaverDefaults].
+// screenSaverDefaultsAdopt wraps an Objective-C object that this code just created as a
+// ScreenSaverDefaults (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func screenSaverDefaultsAdopt(id objc.ID) *ScreenSaverDefaults {
+	if id == 0 {
+		return nil
+	}
+	x := &ScreenSaverDefaults{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScreenSaverDefaults) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScreenSaverDefaults) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScreenSaverDefaults) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScreenSaverDefaults creates a new ScreenSaverDefaults.
 func NewScreenSaverDefaults() *ScreenSaverDefaults {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ScreenSaverDefaults")), objc.RegisterName("new"))
-	return &ScreenSaverDefaults{inner: raw.ScreenSaverDefaultsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ScreenSaverDefaults")), objc.RegisterName("new"))
+	return screenSaverDefaultsAdopt(_id)
 }
 
 // ScreenSaverDefaultsable is the interface implemented by [ScreenSaverDefaults], for mocking and DI.
 type ScreenSaverDefaultsable interface {
-	Unwrap() *raw.ScreenSaverDefaults
+	obj.Object
 }
 
 var _ ScreenSaverDefaultsable = (*ScreenSaverDefaults)(nil)

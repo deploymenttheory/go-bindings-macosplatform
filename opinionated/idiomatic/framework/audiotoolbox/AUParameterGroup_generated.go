@@ -5,117 +5,84 @@
 package audiotoolbox
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A parameter group object represents a group of related audio unit parameters.
 //
-// ParameterGroup wraps [raw.AUParameterGroup] with a fluent Go API.
+// ParameterGroup is an idiomatic wrapper over the Objective-C class AUParameterGroup.
 type ParameterGroup struct {
-	inner *raw.AUParameterGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AUParameterGroup].
-func (x *ParameterGroup) Unwrap() *raw.AUParameterGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ParameterGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// ParameterGroupFromID adopts an existing object pointer as a ParameterGroup (nil for 0).
+// ParameterGroupFromID adopts an existing Objective-C object as a ParameterGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func ParameterGroupFromID(id objc.ID) *ParameterGroup {
 	if id == 0 {
 		return nil
 	}
-	return &ParameterGroup{inner: raw.AUParameterGroupFromID(id)}
+	x := &ParameterGroup{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewParameterGroup creates a new [ParameterGroup].
+// parameterGroupAdopt wraps an Objective-C object that this code just created as a
+// ParameterGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func parameterGroupAdopt(id objc.ID) *ParameterGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &ParameterGroup{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ParameterGroup) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ParameterGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ParameterGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewParameterGroup creates a new ParameterGroup.
 func NewParameterGroup() *ParameterGroup {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AUParameterGroup")), objc.RegisterName("new"))
-	return &ParameterGroup{inner: raw.AUParameterGroupFromID(_id)}
-}
-
-// The callback for parameter value changes.
-//
-// WithImplementorValueObserver sets the implementorValueObserver property and returns the receiver for chaining.
-func (x *ParameterGroup) WithImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) *ParameterGroup {
-	x.inner.AUParameterNode.SetImplementorValueObserver(implementorValueObserver)
-	return x
-}
-
-// The callback for refreshing known stale values in a parameter tree.
-//
-// WithImplementorValueProvider sets the implementorValueProvider property and returns the receiver for chaining.
-func (x *ParameterGroup) WithImplementorValueProvider(implementorValueProvider objc.Block) *ParameterGroup {
-	x.inner.AUParameterNode.SetImplementorValueProvider(implementorValueProvider)
-	return x
-}
-
-// The callback for providing a string representation of a parameter value.
-//
-// WithImplementorStringFromValueCallback sets the implementorStringFromValueCallback property and returns the receiver for chaining.
-func (x *ParameterGroup) WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *ParameterGroup {
-	x.inner.AUParameterNode.SetImplementorStringFromValueCallback(implementorStringFromValueCallback)
-	return x
-}
-
-// The callback for converting a string to a parameter value.
-//
-// WithImplementorValueFromStringCallback sets the implementorValueFromStringCallback property and returns the receiver for chaining.
-func (x *ParameterGroup) WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *ParameterGroup {
-	x.inner.AUParameterNode.SetImplementorValueFromStringCallback(implementorValueFromStringCallback)
-	return x
-}
-
-// The callback for obtaining an abbreviated version of a parameter node display name.
-//
-// WithImplementorDisplayNameWithLengthCallback sets the implementorDisplayNameWithLengthCallback property and returns the receiver for chaining.
-func (x *ParameterGroup) WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *ParameterGroup {
-	x.inner.AUParameterNode.SetImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback)
-	return x
+	_id := objc.Send[objc.ID](objc.ID(_class("AUParameterGroup")), objc.RegisterName("new"))
+	return parameterGroupAdopt(_id)
 }
 
 // The group's child nodes (AUParameterGroupNode).
 //
 // Children returns the collection as a Go slice.
 func (x *ParameterGroup) Children() []*ParameterNode {
-	arr := x.inner.Children()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ParameterNode {
-		return &ParameterNode{inner: raw.AUParameterNodeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("children"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ParameterNode { return ParameterNodeFromID(_id) })
 }
 
 // Returns a flat array of all parameters in the group, including those in child groups.
 //
 // AllParameters returns the collection as a Go slice.
 func (x *ParameterGroup) AllParameters() []*Parameter {
-	arr := x.inner.AllParameters()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Parameter {
-		return &Parameter{inner: raw.AUParameterFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allParameters"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Parameter { return ParameterFromID(_id) })
 }
-
-func (x *ParameterGroup) asParameterGroup() *raw.AUParameterGroup { return x.inner }
-
-func (x *ParameterGroup) asParameterNode() *raw.AUParameterNode { return &x.inner.AUParameterNode }
 
 // ParameterGroupable is the interface implemented by [ParameterGroup], for mocking and DI.
 type ParameterGroupable interface {
-	Unwrap() *raw.AUParameterGroup
-	WithImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) *ParameterGroup
-	WithImplementorValueProvider(implementorValueProvider objc.Block) *ParameterGroup
-	WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *ParameterGroup
-	WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *ParameterGroup
-	WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *ParameterGroup
+	obj.Object
 	Children() []*ParameterNode
 	AllParameters() []*Parameter
 }

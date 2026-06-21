@@ -5,267 +5,176 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A layout that organizes items into a flexible and configurable arrangement.
 //
-// CollectionViewFlowLayout wraps [raw.NSCollectionViewFlowLayout] with a fluent Go API.
+// CollectionViewFlowLayout is an idiomatic wrapper over the Objective-C class NSCollectionViewFlowLayout.
 type CollectionViewFlowLayout struct {
-	inner *raw.NSCollectionViewFlowLayout
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCollectionViewFlowLayout].
-func (x *CollectionViewFlowLayout) Unwrap() *raw.NSCollectionViewFlowLayout { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionViewFlowLayout) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionViewFlowLayoutFromID adopts an existing object pointer as a CollectionViewFlowLayout (nil for 0).
+// CollectionViewFlowLayoutFromID adopts an existing Objective-C object as a CollectionViewFlowLayout
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionViewFlowLayoutFromID(id objc.ID) *CollectionViewFlowLayout {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionViewFlowLayout{inner: raw.NSCollectionViewFlowLayoutFromID(id)}
+	x := &CollectionViewFlowLayout{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCollectionViewFlowLayout creates a new [CollectionViewFlowLayout].
+// collectionViewFlowLayoutAdopt wraps an Objective-C object that this code just created as a
+// CollectionViewFlowLayout (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionViewFlowLayoutAdopt(id objc.ID) *CollectionViewFlowLayout {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionViewFlowLayout{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollectionViewFlowLayout) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollectionViewFlowLayout) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollectionViewFlowLayout) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCollectionViewFlowLayout creates a new CollectionViewFlowLayout.
 func NewCollectionViewFlowLayout() *CollectionViewFlowLayout {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionViewFlowLayout")), objc.RegisterName("new"))
-	return &CollectionViewFlowLayout{inner: raw.NSCollectionViewFlowLayoutFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewFlowLayout")), objc.RegisterName("new"))
+	return collectionViewFlowLayoutAdopt(_id)
 }
 
 // The minimum spacing (in points) to use between rows or columns.
 //
-// WithMinimumLineSpacing sets the minimumLineSpacing property and returns the receiver for chaining.
+// WithMinimumLineSpacing sets minimumLineSpacing and returns the receiver so calls can be chained.
 func (x *CollectionViewFlowLayout) WithMinimumLineSpacing(minimumLineSpacing float64) *CollectionViewFlowLayout {
-	x.inner.SetMinimumLineSpacing(minimumLineSpacing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumLineSpacing:"), minimumLineSpacing)
 	return x
 }
 
 // The minimum spacing (in points) to use between items in the same row or column.
 //
-// WithMinimumInteritemSpacing sets the minimumInteritemSpacing property and returns the receiver for chaining.
+// WithMinimumInteritemSpacing sets minimumInteritemSpacing and returns the receiver so calls can be chained.
 func (x *CollectionViewFlowLayout) WithMinimumInteritemSpacing(minimumInteritemSpacing float64) *CollectionViewFlowLayout {
-	x.inner.SetMinimumInteritemSpacing(minimumInteritemSpacing)
-	return x
-}
-
-// The default size to use for items.
-//
-// WithItemSize sets the itemSize property and returns the receiver for chaining.
-func (x *CollectionViewFlowLayout) WithItemSize(itemSize corefoundation.CGSize) *CollectionViewFlowLayout {
-	x.inner.SetItemSize(itemSize)
-	return x
-}
-
-// The estimated size of items in the collection view.
-//
-// WithEstimatedItemSize sets the estimatedItemSize property and returns the receiver for chaining.
-func (x *CollectionViewFlowLayout) WithEstimatedItemSize(estimatedItemSize corefoundation.CGSize) *CollectionViewFlowLayout {
-	x.inner.SetEstimatedItemSize(estimatedItemSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumInteritemSpacing:"), minimumInteritemSpacing)
 	return x
 }
 
 // The scroll direction of the layout.
 //
-// WithScrollDirection sets the scrollDirection property and returns the receiver for chaining.
-func (x *CollectionViewFlowLayout) WithScrollDirection(scrollDirection NSCollectionViewScrollDirection) *CollectionViewFlowLayout {
-	x.inner.SetScrollDirection(raw.NSCollectionViewScrollDirection(scrollDirection))
+// WithScrollDirection sets scrollDirection and returns the receiver so calls can be chained.
+func (x *CollectionViewFlowLayout) WithScrollDirection(scrollDirection CollectionViewScrollDirection) *CollectionViewFlowLayout {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollDirection:"), scrollDirection)
 	return x
 }
 
-// The default size to use for section headers.
-//
-// WithHeaderReferenceSize sets the headerReferenceSize property and returns the receiver for chaining.
-func (x *CollectionViewFlowLayout) WithHeaderReferenceSize(headerReferenceSize corefoundation.CGSize) *CollectionViewFlowLayout {
-	x.inner.SetHeaderReferenceSize(headerReferenceSize)
-	return x
-}
-
-// The default size to use for section footers.
-//
-// WithFooterReferenceSize sets the footerReferenceSize property and returns the receiver for chaining.
-func (x *CollectionViewFlowLayout) WithFooterReferenceSize(footerReferenceSize corefoundation.CGSize) *CollectionViewFlowLayout {
-	x.inner.SetFooterReferenceSize(footerReferenceSize)
-	return x
-}
-
-// The margins used to lay out content in a section.
-//
-// WithSectionInset sets the sectionInset property and returns the receiver for chaining.
-func (x *CollectionViewFlowLayout) WithSectionInset(sectionInset foundation.NSEdgeInsets) *CollectionViewFlowLayout {
-	x.inner.SetSectionInset(sectionInset)
-	return x
-}
-
-// WithSectionHeadersPinToVisibleBounds sets the sectionHeadersPinToVisibleBounds property and returns the receiver for chaining.
+// WithSectionHeadersPinToVisibleBounds sets sectionHeadersPinToVisibleBounds and returns the receiver so calls can be chained.
 func (x *CollectionViewFlowLayout) WithSectionHeadersPinToVisibleBounds(sectionHeadersPinToVisibleBounds bool) *CollectionViewFlowLayout {
-	x.inner.SetSectionHeadersPinToVisibleBounds(sectionHeadersPinToVisibleBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSectionHeadersPinToVisibleBounds:"), sectionHeadersPinToVisibleBounds)
 	return x
 }
 
-// WithSectionFootersPinToVisibleBounds sets the sectionFootersPinToVisibleBounds property and returns the receiver for chaining.
+// WithSectionFootersPinToVisibleBounds sets sectionFootersPinToVisibleBounds and returns the receiver so calls can be chained.
 func (x *CollectionViewFlowLayout) WithSectionFootersPinToVisibleBounds(sectionFootersPinToVisibleBounds bool) *CollectionViewFlowLayout {
-	x.inner.SetSectionFootersPinToVisibleBounds(sectionFootersPinToVisibleBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSectionFootersPinToVisibleBounds:"), sectionFootersPinToVisibleBounds)
 	return x
 }
 
-// SectionAtIndexIsCollapsed calls the underlying SectionAtIndexIsCollapsed.
-func (x *CollectionViewFlowLayout) SectionAtIndexIsCollapsed(sectionIndex uint) bool {
-	return x.inner.SectionAtIndexIsCollapsed(sectionIndex)
+func (x *CollectionViewFlowLayout) SectionAtIndexIsCollapsed(sectionIndex int) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sectionAtIndexIsCollapsed:"), sectionIndex)
+	return _r
 }
 
-// CollapseSectionAtIndex calls the underlying CollapseSectionAtIndex.
-func (x *CollectionViewFlowLayout) CollapseSectionAtIndex(sectionIndex uint) {
-	x.inner.CollapseSectionAtIndex(sectionIndex)
+func (x *CollectionViewFlowLayout) CollapseSectionAtIndex(sectionIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collapseSectionAtIndex:"), sectionIndex)
 }
 
-// ExpandSectionAtIndex calls the underlying ExpandSectionAtIndex.
-func (x *CollectionViewFlowLayout) ExpandSectionAtIndex(sectionIndex uint) {
-	x.inner.ExpandSectionAtIndex(sectionIndex)
+func (x *CollectionViewFlowLayout) ExpandSectionAtIndex(sectionIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expandSectionAtIndex:"), sectionIndex)
 }
 
-// MinimumLineSpacing calls the underlying MinimumLineSpacing.
 func (x *CollectionViewFlowLayout) MinimumLineSpacing() float64 {
-	return x.inner.MinimumLineSpacing()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumLineSpacing"))
+	return _r
 }
 
-// SetMinimumLineSpacing calls the underlying SetMinimumLineSpacing.
 func (x *CollectionViewFlowLayout) SetMinimumLineSpacing(minimumLineSpacing float64) {
-	x.inner.SetMinimumLineSpacing(minimumLineSpacing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumLineSpacing:"), minimumLineSpacing)
 }
 
-// MinimumInteritemSpacing calls the underlying MinimumInteritemSpacing.
 func (x *CollectionViewFlowLayout) MinimumInteritemSpacing() float64 {
-	return x.inner.MinimumInteritemSpacing()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumInteritemSpacing"))
+	return _r
 }
 
-// SetMinimumInteritemSpacing calls the underlying SetMinimumInteritemSpacing.
 func (x *CollectionViewFlowLayout) SetMinimumInteritemSpacing(minimumInteritemSpacing float64) {
-	x.inner.SetMinimumInteritemSpacing(minimumInteritemSpacing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumInteritemSpacing:"), minimumInteritemSpacing)
 }
 
-// ItemSize calls the underlying ItemSize.
-func (x *CollectionViewFlowLayout) ItemSize() corefoundation.CGSize {
-	return x.inner.ItemSize()
+func (x *CollectionViewFlowLayout) ScrollDirection() CollectionViewScrollDirection {
+	_r := objc.Send[CollectionViewScrollDirection](objref.IDOf(x), objc.RegisterName("scrollDirection"))
+	return _r
 }
 
-// SetItemSize calls the underlying SetItemSize.
-func (x *CollectionViewFlowLayout) SetItemSize(itemSize corefoundation.CGSize) {
-	x.inner.SetItemSize(itemSize)
+func (x *CollectionViewFlowLayout) SetScrollDirection(scrollDirection CollectionViewScrollDirection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollDirection:"), scrollDirection)
 }
 
-// EstimatedItemSize calls the underlying EstimatedItemSize.
-func (x *CollectionViewFlowLayout) EstimatedItemSize() corefoundation.CGSize {
-	return x.inner.EstimatedItemSize()
-}
-
-// SetEstimatedItemSize calls the underlying SetEstimatedItemSize.
-func (x *CollectionViewFlowLayout) SetEstimatedItemSize(estimatedItemSize corefoundation.CGSize) {
-	x.inner.SetEstimatedItemSize(estimatedItemSize)
-}
-
-// ScrollDirection calls the underlying ScrollDirection.
-func (x *CollectionViewFlowLayout) ScrollDirection() NSCollectionViewScrollDirection {
-	return NSCollectionViewScrollDirection(x.inner.ScrollDirection())
-}
-
-// SetScrollDirection calls the underlying SetScrollDirection.
-func (x *CollectionViewFlowLayout) SetScrollDirection(scrollDirection NSCollectionViewScrollDirection) {
-	x.inner.SetScrollDirection(raw.NSCollectionViewScrollDirection(scrollDirection))
-}
-
-// HeaderReferenceSize calls the underlying HeaderReferenceSize.
-func (x *CollectionViewFlowLayout) HeaderReferenceSize() corefoundation.CGSize {
-	return x.inner.HeaderReferenceSize()
-}
-
-// SetHeaderReferenceSize calls the underlying SetHeaderReferenceSize.
-func (x *CollectionViewFlowLayout) SetHeaderReferenceSize(headerReferenceSize corefoundation.CGSize) {
-	x.inner.SetHeaderReferenceSize(headerReferenceSize)
-}
-
-// FooterReferenceSize calls the underlying FooterReferenceSize.
-func (x *CollectionViewFlowLayout) FooterReferenceSize() corefoundation.CGSize {
-	return x.inner.FooterReferenceSize()
-}
-
-// SetFooterReferenceSize calls the underlying SetFooterReferenceSize.
-func (x *CollectionViewFlowLayout) SetFooterReferenceSize(footerReferenceSize corefoundation.CGSize) {
-	x.inner.SetFooterReferenceSize(footerReferenceSize)
-}
-
-// SectionInset calls the underlying SectionInset.
-func (x *CollectionViewFlowLayout) SectionInset() foundation.NSEdgeInsets {
-	return x.inner.SectionInset()
-}
-
-// SetSectionInset calls the underlying SetSectionInset.
-func (x *CollectionViewFlowLayout) SetSectionInset(sectionInset foundation.NSEdgeInsets) {
-	x.inner.SetSectionInset(sectionInset)
-}
-
-// SectionHeadersPinToVisibleBounds calls the underlying SectionHeadersPinToVisibleBounds.
 func (x *CollectionViewFlowLayout) SectionHeadersPinToVisibleBounds() bool {
-	return x.inner.SectionHeadersPinToVisibleBounds()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sectionHeadersPinToVisibleBounds"))
+	return _r
 }
 
-// SetSectionHeadersPinToVisibleBounds calls the underlying SetSectionHeadersPinToVisibleBounds.
 func (x *CollectionViewFlowLayout) SetSectionHeadersPinToVisibleBounds(sectionHeadersPinToVisibleBounds bool) {
-	x.inner.SetSectionHeadersPinToVisibleBounds(sectionHeadersPinToVisibleBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSectionHeadersPinToVisibleBounds:"), sectionHeadersPinToVisibleBounds)
 }
 
-// SectionFootersPinToVisibleBounds calls the underlying SectionFootersPinToVisibleBounds.
 func (x *CollectionViewFlowLayout) SectionFootersPinToVisibleBounds() bool {
-	return x.inner.SectionFootersPinToVisibleBounds()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sectionFootersPinToVisibleBounds"))
+	return _r
 }
 
-// SetSectionFootersPinToVisibleBounds calls the underlying SetSectionFootersPinToVisibleBounds.
 func (x *CollectionViewFlowLayout) SetSectionFootersPinToVisibleBounds(sectionFootersPinToVisibleBounds bool) {
-	x.inner.SetSectionFootersPinToVisibleBounds(sectionFootersPinToVisibleBounds)
-}
-
-func (x *CollectionViewFlowLayout) asCollectionViewLayout() *raw.NSCollectionViewLayout {
-	return &x.inner.NSCollectionViewLayout
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSectionFootersPinToVisibleBounds:"), sectionFootersPinToVisibleBounds)
 }
 
 // CollectionViewFlowLayoutable is the interface implemented by [CollectionViewFlowLayout], for mocking and DI.
 type CollectionViewFlowLayoutable interface {
-	Unwrap() *raw.NSCollectionViewFlowLayout
+	obj.Object
 	WithMinimumLineSpacing(minimumLineSpacing float64) *CollectionViewFlowLayout
 	WithMinimumInteritemSpacing(minimumInteritemSpacing float64) *CollectionViewFlowLayout
-	WithItemSize(itemSize corefoundation.CGSize) *CollectionViewFlowLayout
-	WithEstimatedItemSize(estimatedItemSize corefoundation.CGSize) *CollectionViewFlowLayout
-	WithScrollDirection(scrollDirection NSCollectionViewScrollDirection) *CollectionViewFlowLayout
-	WithHeaderReferenceSize(headerReferenceSize corefoundation.CGSize) *CollectionViewFlowLayout
-	WithFooterReferenceSize(footerReferenceSize corefoundation.CGSize) *CollectionViewFlowLayout
-	WithSectionInset(sectionInset foundation.NSEdgeInsets) *CollectionViewFlowLayout
+	WithScrollDirection(scrollDirection CollectionViewScrollDirection) *CollectionViewFlowLayout
 	WithSectionHeadersPinToVisibleBounds(sectionHeadersPinToVisibleBounds bool) *CollectionViewFlowLayout
 	WithSectionFootersPinToVisibleBounds(sectionFootersPinToVisibleBounds bool) *CollectionViewFlowLayout
-	SectionAtIndexIsCollapsed(sectionIndex uint) bool
-	CollapseSectionAtIndex(sectionIndex uint)
-	ExpandSectionAtIndex(sectionIndex uint)
+	SectionAtIndexIsCollapsed(sectionIndex int) bool
+	CollapseSectionAtIndex(sectionIndex int)
+	ExpandSectionAtIndex(sectionIndex int)
 	MinimumLineSpacing() float64
 	SetMinimumLineSpacing(minimumLineSpacing float64)
 	MinimumInteritemSpacing() float64
 	SetMinimumInteritemSpacing(minimumInteritemSpacing float64)
-	ItemSize() corefoundation.CGSize
-	SetItemSize(itemSize corefoundation.CGSize)
-	EstimatedItemSize() corefoundation.CGSize
-	SetEstimatedItemSize(estimatedItemSize corefoundation.CGSize)
-	ScrollDirection() NSCollectionViewScrollDirection
-	SetScrollDirection(scrollDirection NSCollectionViewScrollDirection)
-	HeaderReferenceSize() corefoundation.CGSize
-	SetHeaderReferenceSize(headerReferenceSize corefoundation.CGSize)
-	FooterReferenceSize() corefoundation.CGSize
-	SetFooterReferenceSize(footerReferenceSize corefoundation.CGSize)
-	SectionInset() foundation.NSEdgeInsets
-	SetSectionInset(sectionInset foundation.NSEdgeInsets)
+	ScrollDirection() CollectionViewScrollDirection
+	SetScrollDirection(scrollDirection CollectionViewScrollDirection)
 	SectionHeadersPinToVisibleBounds() bool
 	SetSectionHeadersPinToVisibleBounds(sectionHeadersPinToVisibleBounds bool)
 	SectionFootersPinToVisibleBounds() bool

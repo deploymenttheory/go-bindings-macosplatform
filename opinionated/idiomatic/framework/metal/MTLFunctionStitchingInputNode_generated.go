@@ -5,65 +5,91 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A call graph node that describes an input to the call graph.
 //
-// FunctionStitchingInputNode wraps [raw.MTLFunctionStitchingInputNode] with a fluent Go API.
+// FunctionStitchingInputNode is an idiomatic wrapper over the Objective-C class MTLFunctionStitchingInputNode.
 type FunctionStitchingInputNode struct {
-	inner *raw.MTLFunctionStitchingInputNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLFunctionStitchingInputNode].
-func (x *FunctionStitchingInputNode) Unwrap() *raw.MTLFunctionStitchingInputNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FunctionStitchingInputNode) ID() objc.ID { return x.inner.Ptr() }
-
-// FunctionStitchingInputNodeFromID adopts an existing object pointer as a FunctionStitchingInputNode (nil for 0).
+// FunctionStitchingInputNodeFromID adopts an existing Objective-C object as a FunctionStitchingInputNode
+// (nil for 0), retaining it and registering a release finalizer.
 func FunctionStitchingInputNodeFromID(id objc.ID) *FunctionStitchingInputNode {
 	if id == 0 {
 		return nil
 	}
-	return &FunctionStitchingInputNode{inner: raw.MTLFunctionStitchingInputNodeFromID(id)}
+	x := &FunctionStitchingInputNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// functionStitchingInputNodeAdopt wraps an Objective-C object that this code just created as a
+// FunctionStitchingInputNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func functionStitchingInputNodeAdopt(id objc.ID) *FunctionStitchingInputNode {
+	if id == 0 {
+		return nil
+	}
+	x := &FunctionStitchingInputNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FunctionStitchingInputNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FunctionStitchingInputNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FunctionStitchingInputNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new input node.
 //
-// NewFunctionStitchingInputNodeWithArgumentIndex creates a new [FunctionStitchingInputNode].
-func NewFunctionStitchingInputNodeWithArgumentIndex(argument uint) *FunctionStitchingInputNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLFunctionStitchingInputNode")), objc.RegisterName("alloc"))
+// NewFunctionStitchingInputNodeWithArgumentIndex creates a new FunctionStitchingInputNode.
+func NewFunctionStitchingInputNodeWithArgumentIndex(argument int) *FunctionStitchingInputNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTLFunctionStitchingInputNode")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithArgumentIndex:"), argument)
-	return &FunctionStitchingInputNode{inner: raw.MTLFunctionStitchingInputNodeFromID(_id)}
+	return functionStitchingInputNodeAdopt(_id)
 }
 
 // The index in the command’s buffer argument table that declares which data to read for this input node.
 //
-// WithArgumentIndex sets the argumentIndex property and returns the receiver for chaining.
-func (x *FunctionStitchingInputNode) WithArgumentIndex(argumentIndex uint) *FunctionStitchingInputNode {
-	x.inner.SetArgumentIndex(argumentIndex)
+// WithArgumentIndex sets argumentIndex and returns the receiver so calls can be chained.
+func (x *FunctionStitchingInputNode) WithArgumentIndex(argumentIndex int) *FunctionStitchingInputNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArgumentIndex:"), argumentIndex)
 	return x
 }
 
-// ArgumentIndex calls the underlying ArgumentIndex.
-func (x *FunctionStitchingInputNode) ArgumentIndex() uint {
-	return x.inner.ArgumentIndex()
+func (x *FunctionStitchingInputNode) ArgumentIndex() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("argumentIndex"))
+	return _r
 }
 
-// SetArgumentIndex calls the underlying SetArgumentIndex.
-func (x *FunctionStitchingInputNode) SetArgumentIndex(argumentIndex uint) {
-	x.inner.SetArgumentIndex(argumentIndex)
+func (x *FunctionStitchingInputNode) SetArgumentIndex(argumentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArgumentIndex:"), argumentIndex)
 }
 
 // FunctionStitchingInputNodeable is the interface implemented by [FunctionStitchingInputNode], for mocking and DI.
 type FunctionStitchingInputNodeable interface {
-	Unwrap() *raw.MTLFunctionStitchingInputNode
-	WithArgumentIndex(argumentIndex uint) *FunctionStitchingInputNode
-	ArgumentIndex() uint
-	SetArgumentIndex(argumentIndex uint)
+	obj.Object
+	WithArgumentIndex(argumentIndex int) *FunctionStitchingInputNode
+	ArgumentIndex() int
+	SetArgumentIndex(argumentIndex int)
 }
 
 var _ FunctionStitchingInputNodeable = (*FunctionStitchingInputNode)(nil)

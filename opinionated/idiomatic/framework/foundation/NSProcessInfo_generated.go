@@ -6,210 +6,200 @@ package foundation
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A collection of information about the current process.
 //
-// ProcessInfo wraps [raw.NSProcessInfo] with a fluent Go API.
+// ProcessInfo is an idiomatic wrapper over the Objective-C class NSProcessInfo.
 type ProcessInfo struct {
-	inner *raw.NSProcessInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSProcessInfo].
-func (x *ProcessInfo) Unwrap() *raw.NSProcessInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProcessInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// ProcessInfoFromID adopts an existing object pointer as a ProcessInfo (nil for 0).
+// ProcessInfoFromID adopts an existing Objective-C object as a ProcessInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func ProcessInfoFromID(id objc.ID) *ProcessInfo {
 	if id == 0 {
 		return nil
 	}
-	return &ProcessInfo{inner: raw.NSProcessInfoFromID(id)}
-}
-
-// NewProcessInfo creates a new [ProcessInfo].
-func NewProcessInfo() *ProcessInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSProcessInfo")), objc.RegisterName("new"))
-	return &ProcessInfo{inner: raw.NSProcessInfoFromID(_id)}
-}
-
-// WithProcessName sets the processName property and returns the receiver for chaining.
-func (x *ProcessInfo) WithProcessName(processName string) *ProcessInfo {
-	x.inner.SetProcessName(foundation.NSStringStringWithUTF8String(processName))
+	x := &ProcessInfo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithAutomaticTerminationSupportEnabled sets the automaticTerminationSupportEnabled property and returns the receiver for chaining.
-func (x *ProcessInfo) WithAutomaticTerminationSupportEnabled(automaticTerminationSupportEnabled bool) *ProcessInfo {
-	x.inner.SetAutomaticTerminationSupportEnabled(automaticTerminationSupportEnabled)
-	return x
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *ProcessInfo) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ProcessInfo {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
-	return x
-}
-
-// OperatingSystem calls the underlying OperatingSystem.
-func (x *ProcessInfo) OperatingSystem() uint {
-	return x.inner.OperatingSystem()
-}
-
-// OperatingSystemName calls the underlying OperatingSystemName.
-func (x *ProcessInfo) OperatingSystemName() *String {
-	_r := x.inner.OperatingSystemName()
-	if _r == nil {
+// processInfoAdopt wraps an Objective-C object that this code just created as a
+// ProcessInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func processInfoAdopt(id objc.ID) *ProcessInfo {
+	if id == 0 {
 		return nil
 	}
-	return &String{inner: _r}
+	x := &ProcessInfo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// IsOperatingSystemAtLeastVersion calls the underlying IsOperatingSystemAtLeastVersion.
-func (x *ProcessInfo) IsOperatingSystemAtLeastVersion(version raw.NSOperatingSystemVersion) bool {
-	return x.inner.IsOperatingSystemAtLeastVersion(version)
+// Description returns the object's -description text.
+func (x *ProcessInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// DisableSuddenTermination calls the underlying DisableSuddenTermination.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ProcessInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ProcessInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewProcessInfo creates a new ProcessInfo.
+func NewProcessInfo() *ProcessInfo {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSProcessInfo")), objc.RegisterName("new"))
+	return processInfoAdopt(_id)
+}
+
+// WithProcessName sets processName and returns the receiver so calls can be chained.
+func (x *ProcessInfo) WithProcessName(processName StringProvider) *ProcessInfo {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProcessName:"), objref.IDOf(processName))
+	return x
+}
+
+// WithAutomaticTerminationSupportEnabled sets automaticTerminationSupportEnabled and returns the receiver so calls can be chained.
+func (x *ProcessInfo) WithAutomaticTerminationSupportEnabled(automaticTerminationSupportEnabled bool) *ProcessInfo {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticTerminationSupportEnabled:"), automaticTerminationSupportEnabled)
+	return x
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *ProcessInfo) WithScriptingProperties(scriptingProperties obj.Object) *ProcessInfo {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+func (x *ProcessInfo) OperatingSystem() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("operatingSystem"))
+	return _r
+}
+
+func (x *ProcessInfo) OperatingSystemName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operatingSystemName"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
 func (x *ProcessInfo) DisableSuddenTermination() {
-	x.inner.DisableSuddenTermination()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableSuddenTermination"))
 }
 
-// EnableSuddenTermination calls the underlying EnableSuddenTermination.
 func (x *ProcessInfo) EnableSuddenTermination() {
-	x.inner.EnableSuddenTermination()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableSuddenTermination"))
 }
 
-// DisableAutomaticTermination calls the underlying DisableAutomaticTermination.
 func (x *ProcessInfo) DisableAutomaticTermination(reason string) {
-	x.inner.DisableAutomaticTermination(foundation.NSStringStringWithUTF8String(reason))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableAutomaticTermination:"), purego.NSString(reason))
 }
 
-// EnableAutomaticTermination calls the underlying EnableAutomaticTermination.
 func (x *ProcessInfo) EnableAutomaticTermination(reason string) {
-	x.inner.EnableAutomaticTermination(foundation.NSStringStringWithUTF8String(reason))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableAutomaticTermination:"), purego.NSString(reason))
 }
 
-// Environment calls the underlying Environment.
-func (x *ProcessInfo) Environment() *raw.NSDictionary[*raw.NSString, *raw.NSString] {
-	return x.inner.Environment()
+func (x *ProcessInfo) Environment() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("environment"))
+	return obj.Wrap(_r)
 }
 
 // Arguments returns the collection as a Go slice.
 func (x *ProcessInfo) Arguments() []string {
-	arr := x.inner.Arguments()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arguments"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// HostName calls the underlying HostName.
-func (x *ProcessInfo) HostName() *String {
-	_r := x.inner.HostName()
-	if _r == nil {
-		return nil
+func (x *ProcessInfo) HostName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hostName"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// ProcessName calls the underlying ProcessName.
-func (x *ProcessInfo) ProcessName() *String {
-	_r := x.inner.ProcessName()
-	if _r == nil {
-		return nil
+func (x *ProcessInfo) ProcessName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processName"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetProcessName calls the underlying SetProcessName.
 func (x *ProcessInfo) SetProcessName(processName string) {
-	x.inner.SetProcessName(foundation.NSStringStringWithUTF8String(processName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProcessName:"), purego.NSString(processName))
 }
 
-// ProcessIdentifier calls the underlying ProcessIdentifier.
 func (x *ProcessInfo) ProcessIdentifier() int {
-	return x.inner.ProcessIdentifier()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("processIdentifier"))
+	return _r
 }
 
-// GloballyUniqueString calls the underlying GloballyUniqueString.
-func (x *ProcessInfo) GloballyUniqueString() *String {
-	_r := x.inner.GloballyUniqueString()
-	if _r == nil {
-		return nil
+func (x *ProcessInfo) GloballyUniqueString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("globallyUniqueString"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// OperatingSystemVersionString calls the underlying OperatingSystemVersionString.
-func (x *ProcessInfo) OperatingSystemVersionString() *String {
-	_r := x.inner.OperatingSystemVersionString()
-	if _r == nil {
-		return nil
+func (x *ProcessInfo) OperatingSystemVersionString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operatingSystemVersionString"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// OperatingSystemVersion calls the underlying OperatingSystemVersion.
-func (x *ProcessInfo) OperatingSystemVersion() raw.NSOperatingSystemVersion {
-	return x.inner.OperatingSystemVersion()
+func (x *ProcessInfo) ProcessorCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("processorCount"))
+	return _r
 }
 
-// ProcessorCount calls the underlying ProcessorCount.
-func (x *ProcessInfo) ProcessorCount() uint {
-	return x.inner.ProcessorCount()
+func (x *ProcessInfo) ActiveProcessorCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("activeProcessorCount"))
+	return _r
 }
 
-// ActiveProcessorCount calls the underlying ActiveProcessorCount.
-func (x *ProcessInfo) ActiveProcessorCount() uint {
-	return x.inner.ActiveProcessorCount()
-}
-
-// PhysicalMemory calls the underlying PhysicalMemory.
 func (x *ProcessInfo) PhysicalMemory() uint64 {
-	return x.inner.PhysicalMemory()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("physicalMemory"))
+	return _r
 }
 
-// SystemUptime calls the underlying SystemUptime.
 func (x *ProcessInfo) SystemUptime() float64 {
-	return x.inner.SystemUptime()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("systemUptime"))
+	return _r
 }
 
-// AutomaticTerminationSupportEnabled calls the underlying AutomaticTerminationSupportEnabled.
 func (x *ProcessInfo) AutomaticTerminationSupportEnabled() bool {
-	return x.inner.AutomaticTerminationSupportEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticTerminationSupportEnabled"))
+	return _r
 }
 
-// SetAutomaticTerminationSupportEnabled calls the underlying SetAutomaticTerminationSupportEnabled.
 func (x *ProcessInfo) SetAutomaticTerminationSupportEnabled(automaticTerminationSupportEnabled bool) {
-	x.inner.SetAutomaticTerminationSupportEnabled(automaticTerminationSupportEnabled)
-}
-
-// BeginActivityWithOptionsReason calls the underlying BeginActivityWithOptionsReason.
-func (x *ProcessInfo) BeginActivityWithOptionsReason(options NSActivityOptions, reason string) raw.NSObjectProtocol {
-	return x.inner.BeginActivityWithOptionsReason(raw.NSActivityOptions(options), foundation.NSStringStringWithUTF8String(reason))
-}
-
-// EndActivity calls the underlying EndActivity.
-func (x *ProcessInfo) EndActivity(activity raw.NSObjectProtocol) {
-	x.inner.EndActivity(activity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticTerminationSupportEnabled:"), automaticTerminationSupportEnabled)
 }
 
 // PerformActivityWithOptionsReasonUsing blocks until the operation completes or ctx is cancelled.
-func (x *ProcessInfo) PerformActivityWithOptionsReasonUsing(ctx context.Context, options NSActivityOptions, reason string) error {
+func (x *ProcessInfo) PerformActivityWithOptionsReasonUsing(ctx context.Context, options ActivityOptions, reason string) error {
 	_ch := make(chan error, 1)
-	x.inner.PerformActivityWithOptionsReasonUsing(raw.NSActivityOptions(options), foundation.NSStringStringWithUTF8String(reason), func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performActivityWithOptions:reason:usingBlock:"), options, purego.NSString(reason), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -218,85 +208,77 @@ func (x *ProcessInfo) PerformActivityWithOptionsReasonUsing(ctx context.Context,
 	}
 }
 
-// UserName calls the underlying UserName.
-func (x *ProcessInfo) UserName() *String {
-	_r := x.inner.UserName()
-	if _r == nil {
-		return nil
+func (x *ProcessInfo) UserName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userName"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// FullUserName calls the underlying FullUserName.
-func (x *ProcessInfo) FullUserName() *String {
-	_r := x.inner.FullUserName()
-	if _r == nil {
-		return nil
+func (x *ProcessInfo) FullUserName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullUserName"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// ThermalState calls the underlying ThermalState.
-func (x *ProcessInfo) ThermalState() NSProcessInfoThermalState {
-	return NSProcessInfoThermalState(x.inner.ThermalState())
+func (x *ProcessInfo) ThermalState() ProcessInfoThermalState {
+	_r := objc.Send[ProcessInfoThermalState](objref.IDOf(x), objc.RegisterName("thermalState"))
+	return _r
 }
 
-// IsLowPowerModeEnabled calls the underlying IsLowPowerModeEnabled.
 func (x *ProcessInfo) IsLowPowerModeEnabled() bool {
-	return x.inner.IsLowPowerModeEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLowPowerModeEnabled"))
+	return _r
 }
 
-// IsMacCatalystApp calls the underlying IsMacCatalystApp.
 func (x *ProcessInfo) IsMacCatalystApp() bool {
-	return x.inner.IsMacCatalystApp()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMacCatalystApp"))
+	return _r
 }
 
-// IsiOSAppOnMac calls the underlying IsiOSAppOnMac.
 func (x *ProcessInfo) IsiOSAppOnMac() bool {
-	return x.inner.IsiOSAppOnMac()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isiOSAppOnMac"))
+	return _r
 }
 
-// IsiOSAppOnVision calls the underlying IsiOSAppOnVision.
 func (x *ProcessInfo) IsiOSAppOnVision() bool {
-	return x.inner.IsiOSAppOnVision()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isiOSAppOnVision"))
+	return _r
 }
-
-func (x *ProcessInfo) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // ProcessInfoable is the interface implemented by [ProcessInfo], for mocking and DI.
 type ProcessInfoable interface {
-	Unwrap() *raw.NSProcessInfo
-	WithProcessName(processName string) *ProcessInfo
+	obj.Object
+	WithProcessName(processName StringProvider) *ProcessInfo
 	WithAutomaticTerminationSupportEnabled(automaticTerminationSupportEnabled bool) *ProcessInfo
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ProcessInfo
-	OperatingSystem() uint
-	OperatingSystemName() *String
-	IsOperatingSystemAtLeastVersion(version raw.NSOperatingSystemVersion) bool
+	WithScriptingProperties(scriptingProperties obj.Object) *ProcessInfo
+	OperatingSystem() int
+	OperatingSystemName() string
 	DisableSuddenTermination()
 	EnableSuddenTermination()
 	DisableAutomaticTermination(reason string)
 	EnableAutomaticTermination(reason string)
-	Environment() *raw.NSDictionary[*raw.NSString, *raw.NSString]
+	Environment() obj.Object
 	Arguments() []string
-	HostName() *String
-	ProcessName() *String
+	HostName() string
+	ProcessName() string
 	SetProcessName(processName string)
 	ProcessIdentifier() int
-	GloballyUniqueString() *String
-	OperatingSystemVersionString() *String
-	OperatingSystemVersion() raw.NSOperatingSystemVersion
-	ProcessorCount() uint
-	ActiveProcessorCount() uint
+	GloballyUniqueString() string
+	OperatingSystemVersionString() string
+	ProcessorCount() int
+	ActiveProcessorCount() int
 	PhysicalMemory() uint64
 	SystemUptime() float64
 	AutomaticTerminationSupportEnabled() bool
 	SetAutomaticTerminationSupportEnabled(automaticTerminationSupportEnabled bool)
-	BeginActivityWithOptionsReason(options NSActivityOptions, reason string) raw.NSObjectProtocol
-	EndActivity(activity raw.NSObjectProtocol)
-	PerformActivityWithOptionsReasonUsing(ctx context.Context, options NSActivityOptions, reason string) error
-	UserName() *String
-	FullUserName() *String
-	ThermalState() NSProcessInfoThermalState
+	PerformActivityWithOptionsReasonUsing(ctx context.Context, options ActivityOptions, reason string) error
+	UserName() string
+	FullUserName() string
+	ThermalState() ProcessInfoThermalState
 	IsLowPowerModeEnabled() bool
 	IsMacCatalystApp() bool
 	IsiOSAppOnMac() bool

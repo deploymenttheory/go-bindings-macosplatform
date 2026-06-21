@@ -5,84 +5,102 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRUnitTestingClusterTestListStructOctet wraps [raw.MTRUnitTestingClusterTestListStructOctet] with a fluent Go API.
+// MTRUnitTestingClusterTestListStructOctet is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterTestListStructOctet.
 type MTRUnitTestingClusterTestListStructOctet struct {
-	inner *raw.MTRUnitTestingClusterTestListStructOctet
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRUnitTestingClusterTestListStructOctet].
-func (x *MTRUnitTestingClusterTestListStructOctet) Unwrap() *raw.MTRUnitTestingClusterTestListStructOctet {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRUnitTestingClusterTestListStructOctet) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRUnitTestingClusterTestListStructOctetFromID adopts an existing object pointer as a MTRUnitTestingClusterTestListStructOctet (nil for 0).
+// MTRUnitTestingClusterTestListStructOctetFromID adopts an existing Objective-C object as a MTRUnitTestingClusterTestListStructOctet
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRUnitTestingClusterTestListStructOctetFromID(id objc.ID) *MTRUnitTestingClusterTestListStructOctet {
 	if id == 0 {
 		return nil
 	}
-	return &MTRUnitTestingClusterTestListStructOctet{inner: raw.MTRUnitTestingClusterTestListStructOctetFromID(id)}
+	x := &MTRUnitTestingClusterTestListStructOctet{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRUnitTestingClusterTestListStructOctet creates a new [MTRUnitTestingClusterTestListStructOctet].
+// mTRUnitTestingClusterTestListStructOctetAdopt wraps an Objective-C object that this code just created as a
+// MTRUnitTestingClusterTestListStructOctet (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRUnitTestingClusterTestListStructOctetAdopt(id objc.ID) *MTRUnitTestingClusterTestListStructOctet {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRUnitTestingClusterTestListStructOctet{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRUnitTestingClusterTestListStructOctet) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRUnitTestingClusterTestListStructOctet) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRUnitTestingClusterTestListStructOctet) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRUnitTestingClusterTestListStructOctet creates a new MTRUnitTestingClusterTestListStructOctet.
 func NewMTRUnitTestingClusterTestListStructOctet() *MTRUnitTestingClusterTestListStructOctet {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRUnitTestingClusterTestListStructOctet")), objc.RegisterName("new"))
-	return &MTRUnitTestingClusterTestListStructOctet{inner: raw.MTRUnitTestingClusterTestListStructOctetFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRUnitTestingClusterTestListStructOctet")), objc.RegisterName("new"))
+	return mTRUnitTestingClusterTestListStructOctetAdopt(_id)
 }
 
-// WithMember1 sets the member1 property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterTestListStructOctet) WithMember1(member1 *foundation.NSNumber) *MTRUnitTestingClusterTestListStructOctet {
-	x.inner.SetMember1(member1)
+// WithMember1 sets member1 and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterTestListStructOctet) WithMember1(member1 obj.Object) *MTRUnitTestingClusterTestListStructOctet {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMember1:"), objref.IDOf(member1))
 	return x
 }
 
-// WithMember2 sets the member2 property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterTestListStructOctet) WithMember2(member2 *foundation.NSData) *MTRUnitTestingClusterTestListStructOctet {
-	x.inner.SetMember2(member2)
+// WithMember2 sets member2 and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterTestListStructOctet) WithMember2(member2 obj.Object) *MTRUnitTestingClusterTestListStructOctet {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMember2:"), objref.IDOf(member2))
 	return x
 }
 
-// Member1 calls the underlying Member1.
-func (x *MTRUnitTestingClusterTestListStructOctet) Member1() *foundation.NSNumber {
-	return x.inner.Member1()
+func (x *MTRUnitTestingClusterTestListStructOctet) Member1() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("member1"))
+	return obj.Wrap(_r)
 }
 
-// SetMember1 calls the underlying SetMember1.
-func (x *MTRUnitTestingClusterTestListStructOctet) SetMember1(member1 *foundation.NSNumber) {
-	x.inner.SetMember1(member1)
+func (x *MTRUnitTestingClusterTestListStructOctet) SetMember1(member1 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMember1:"), objref.IDOf(member1))
 }
 
-// Member2 calls the underlying Member2.
-func (x *MTRUnitTestingClusterTestListStructOctet) Member2() *foundation.NSData {
-	return x.inner.Member2()
+func (x *MTRUnitTestingClusterTestListStructOctet) Member2() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("member2"))
+	return obj.Wrap(_r)
 }
 
-// SetMember2 calls the underlying SetMember2.
-func (x *MTRUnitTestingClusterTestListStructOctet) SetMember2(member2 *foundation.NSData) {
-	x.inner.SetMember2(member2)
-}
-
-func (x *MTRUnitTestingClusterTestListStructOctet) asMTRUnitTestingClusterTestListStructOctet() *raw.MTRUnitTestingClusterTestListStructOctet {
-	return x.inner
+func (x *MTRUnitTestingClusterTestListStructOctet) SetMember2(member2 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMember2:"), objref.IDOf(member2))
 }
 
 // MTRUnitTestingClusterTestListStructOctetable is the interface implemented by [MTRUnitTestingClusterTestListStructOctet], for mocking and DI.
 type MTRUnitTestingClusterTestListStructOctetable interface {
-	Unwrap() *raw.MTRUnitTestingClusterTestListStructOctet
-	WithMember1(member1 *foundation.NSNumber) *MTRUnitTestingClusterTestListStructOctet
-	WithMember2(member2 *foundation.NSData) *MTRUnitTestingClusterTestListStructOctet
-	Member1() *foundation.NSNumber
-	SetMember1(member1 *foundation.NSNumber)
-	Member2() *foundation.NSData
-	SetMember2(member2 *foundation.NSData)
+	obj.Object
+	WithMember1(member1 obj.Object) *MTRUnitTestingClusterTestListStructOctet
+	WithMember2(member2 obj.Object) *MTRUnitTestingClusterTestListStructOctet
+	Member1() obj.Object
+	SetMember1(member1 obj.Object)
+	Member2() obj.Object
+	SetMember2(member2 obj.Object)
 }
 
 var _ MTRUnitTestingClusterTestListStructOctetable = (*MTRUnitTestingClusterTestListStructOctet)(nil)

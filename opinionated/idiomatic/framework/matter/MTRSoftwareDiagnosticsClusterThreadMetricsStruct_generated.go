@@ -5,146 +5,159 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRSoftwareDiagnosticsClusterThreadMetricsStruct wraps [raw.MTRSoftwareDiagnosticsClusterThreadMetricsStruct] with a fluent Go API.
+// MTRSoftwareDiagnosticsClusterThreadMetricsStruct is an idiomatic wrapper over the Objective-C class MTRSoftwareDiagnosticsClusterThreadMetricsStruct.
 type MTRSoftwareDiagnosticsClusterThreadMetricsStruct struct {
-	inner *raw.MTRSoftwareDiagnosticsClusterThreadMetricsStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRSoftwareDiagnosticsClusterThreadMetricsStruct].
-func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) Unwrap() *raw.MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRSoftwareDiagnosticsClusterThreadMetricsStructFromID adopts an existing object pointer as a MTRSoftwareDiagnosticsClusterThreadMetricsStruct (nil for 0).
+// MTRSoftwareDiagnosticsClusterThreadMetricsStructFromID adopts an existing Objective-C object as a MTRSoftwareDiagnosticsClusterThreadMetricsStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRSoftwareDiagnosticsClusterThreadMetricsStructFromID(id objc.ID) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRSoftwareDiagnosticsClusterThreadMetricsStruct{inner: raw.MTRSoftwareDiagnosticsClusterThreadMetricsStructFromID(id)}
+	x := &MTRSoftwareDiagnosticsClusterThreadMetricsStruct{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRSoftwareDiagnosticsClusterThreadMetricsStruct creates a new [MTRSoftwareDiagnosticsClusterThreadMetricsStruct].
+// mTRSoftwareDiagnosticsClusterThreadMetricsStructAdopt wraps an Objective-C object that this code just created as a
+// MTRSoftwareDiagnosticsClusterThreadMetricsStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRSoftwareDiagnosticsClusterThreadMetricsStructAdopt(id objc.ID) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRSoftwareDiagnosticsClusterThreadMetricsStruct{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRSoftwareDiagnosticsClusterThreadMetricsStruct creates a new MTRSoftwareDiagnosticsClusterThreadMetricsStruct.
 func NewMTRSoftwareDiagnosticsClusterThreadMetricsStruct() *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRSoftwareDiagnosticsClusterThreadMetricsStruct")), objc.RegisterName("new"))
-	return &MTRSoftwareDiagnosticsClusterThreadMetricsStruct{inner: raw.MTRSoftwareDiagnosticsClusterThreadMetricsStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRSoftwareDiagnosticsClusterThreadMetricsStruct")), objc.RegisterName("new"))
+	return mTRSoftwareDiagnosticsClusterThreadMetricsStructAdopt(_id)
 }
 
-// WithId sets the id_ property and returns the receiver for chaining.
-func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithId(id_ *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
-	x.inner.SetId(id_)
+// WithId sets id_ and returns the receiver so calls can be chained.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithId(id_ obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setId:"), objref.IDOf(id_))
 	return x
 }
 
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithName(name string) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithStackFreeCurrent sets the stackFreeCurrent property and returns the receiver for chaining.
-func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithStackFreeCurrent(stackFreeCurrent *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
-	x.inner.SetStackFreeCurrent(stackFreeCurrent)
+// WithStackFreeCurrent sets stackFreeCurrent and returns the receiver so calls can be chained.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithStackFreeCurrent(stackFreeCurrent obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStackFreeCurrent:"), objref.IDOf(stackFreeCurrent))
 	return x
 }
 
-// WithStackFreeMinimum sets the stackFreeMinimum property and returns the receiver for chaining.
-func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithStackFreeMinimum(stackFreeMinimum *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
-	x.inner.SetStackFreeMinimum(stackFreeMinimum)
+// WithStackFreeMinimum sets stackFreeMinimum and returns the receiver so calls can be chained.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithStackFreeMinimum(stackFreeMinimum obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStackFreeMinimum:"), objref.IDOf(stackFreeMinimum))
 	return x
 }
 
-// WithStackSize sets the stackSize property and returns the receiver for chaining.
-func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithStackSize(stackSize *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
-	x.inner.SetStackSize(stackSize)
+// WithStackSize sets stackSize and returns the receiver so calls can be chained.
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) WithStackSize(stackSize obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStackSize:"), objref.IDOf(stackSize))
 	return x
 }
 
-// Id calls the underlying Id.
-func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) Id() *foundation.NSNumber {
-	return x.inner.Id()
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) Id() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("id"))
+	return obj.Wrap(_r)
 }
 
-// SetId calls the underlying SetId.
-func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetId(id_ *foundation.NSNumber) {
-	x.inner.SetId(id_)
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetId(id_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setId:"), objref.IDOf(id_))
 }
 
-// Name calls the underlying Name.
 func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
 func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// StackFreeCurrent calls the underlying StackFreeCurrent.
-func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackFreeCurrent() *foundation.NSNumber {
-	return x.inner.StackFreeCurrent()
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackFreeCurrent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stackFreeCurrent"))
+	return obj.Wrap(_r)
 }
 
-// SetStackFreeCurrent calls the underlying SetStackFreeCurrent.
-func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetStackFreeCurrent(stackFreeCurrent *foundation.NSNumber) {
-	x.inner.SetStackFreeCurrent(stackFreeCurrent)
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetStackFreeCurrent(stackFreeCurrent obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStackFreeCurrent:"), objref.IDOf(stackFreeCurrent))
 }
 
-// StackFreeMinimum calls the underlying StackFreeMinimum.
-func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackFreeMinimum() *foundation.NSNumber {
-	return x.inner.StackFreeMinimum()
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackFreeMinimum() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stackFreeMinimum"))
+	return obj.Wrap(_r)
 }
 
-// SetStackFreeMinimum calls the underlying SetStackFreeMinimum.
-func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetStackFreeMinimum(stackFreeMinimum *foundation.NSNumber) {
-	x.inner.SetStackFreeMinimum(stackFreeMinimum)
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetStackFreeMinimum(stackFreeMinimum obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStackFreeMinimum:"), objref.IDOf(stackFreeMinimum))
 }
 
-// StackSize calls the underlying StackSize.
-func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackSize() *foundation.NSNumber {
-	return x.inner.StackSize()
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) StackSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stackSize"))
+	return obj.Wrap(_r)
 }
 
-// SetStackSize calls the underlying SetStackSize.
-func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetStackSize(stackSize *foundation.NSNumber) {
-	x.inner.SetStackSize(stackSize)
-}
-
-func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) asMTRSoftwareDiagnosticsClusterThreadMetricsStruct() *raw.MTRSoftwareDiagnosticsClusterThreadMetricsStruct {
-	return x.inner
+func (x *MTRSoftwareDiagnosticsClusterThreadMetricsStruct) SetStackSize(stackSize obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStackSize:"), objref.IDOf(stackSize))
 }
 
 // MTRSoftwareDiagnosticsClusterThreadMetricsStructable is the interface implemented by [MTRSoftwareDiagnosticsClusterThreadMetricsStruct], for mocking and DI.
 type MTRSoftwareDiagnosticsClusterThreadMetricsStructable interface {
-	Unwrap() *raw.MTRSoftwareDiagnosticsClusterThreadMetricsStruct
-	WithId(id_ *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct
+	obj.Object
+	WithId(id_ obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct
 	WithName(name string) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct
-	WithStackFreeCurrent(stackFreeCurrent *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct
-	WithStackFreeMinimum(stackFreeMinimum *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct
-	WithStackSize(stackSize *foundation.NSNumber) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct
-	Id() *foundation.NSNumber
-	SetId(id_ *foundation.NSNumber)
+	WithStackFreeCurrent(stackFreeCurrent obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct
+	WithStackFreeMinimum(stackFreeMinimum obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct
+	WithStackSize(stackSize obj.Object) *MTRSoftwareDiagnosticsClusterThreadMetricsStruct
+	Id() obj.Object
+	SetId(id_ obj.Object)
 	Name() string
 	SetName(name string)
-	StackFreeCurrent() *foundation.NSNumber
-	SetStackFreeCurrent(stackFreeCurrent *foundation.NSNumber)
-	StackFreeMinimum() *foundation.NSNumber
-	SetStackFreeMinimum(stackFreeMinimum *foundation.NSNumber)
-	StackSize() *foundation.NSNumber
-	SetStackSize(stackSize *foundation.NSNumber)
+	StackFreeCurrent() obj.Object
+	SetStackFreeCurrent(stackFreeCurrent obj.Object)
+	StackFreeMinimum() obj.Object
+	SetStackFreeMinimum(stackFreeMinimum obj.Object)
+	StackSize() obj.Object
+	SetStackSize(stackSize obj.Object)
 }
 
 var _ MTRSoftwareDiagnosticsClusterThreadMetricsStructable = (*MTRSoftwareDiagnosticsClusterThreadMetricsStruct)(nil)

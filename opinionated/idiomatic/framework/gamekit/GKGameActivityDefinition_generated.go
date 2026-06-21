@@ -6,63 +6,87 @@ package gamekit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that represents the static metadata you define for the activity.
 //
-// GameActivityDefinition wraps [raw.GKGameActivityDefinition] with a fluent Go API.
+// GameActivityDefinition is an idiomatic wrapper over the Objective-C class GKGameActivityDefinition.
 type GameActivityDefinition struct {
-	inner *raw.GKGameActivityDefinition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKGameActivityDefinition].
-func (x *GameActivityDefinition) Unwrap() *raw.GKGameActivityDefinition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GameActivityDefinition) ID() objc.ID { return x.inner.Ptr() }
-
-// GameActivityDefinitionFromID adopts an existing object pointer as a GameActivityDefinition (nil for 0).
+// GameActivityDefinitionFromID adopts an existing Objective-C object as a GameActivityDefinition
+// (nil for 0), retaining it and registering a release finalizer.
 func GameActivityDefinitionFromID(id objc.ID) *GameActivityDefinition {
 	if id == 0 {
 		return nil
 	}
-	return &GameActivityDefinition{inner: raw.GKGameActivityDefinitionFromID(id)}
+	x := &GameActivityDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGameActivityDefinition creates a new [GameActivityDefinition].
+// gameActivityDefinitionAdopt wraps an Objective-C object that this code just created as a
+// GameActivityDefinition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func gameActivityDefinitionAdopt(id objc.ID) *GameActivityDefinition {
+	if id == 0 {
+		return nil
+	}
+	x := &GameActivityDefinition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GameActivityDefinition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GameActivityDefinition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GameActivityDefinition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGameActivityDefinition creates a new GameActivityDefinition.
 func NewGameActivityDefinition() *GameActivityDefinition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGameActivityDefinition")), objc.RegisterName("new"))
-	return &GameActivityDefinition{inner: raw.GKGameActivityDefinitionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKGameActivityDefinition")), objc.RegisterName("new"))
+	return gameActivityDefinitionAdopt(_id)
 }
 
 // Loads all associated achievements that have defined deep links to this game activity definition.
 //
 // LoadAchievementDescriptions blocks until the operation completes or ctx is cancelled.
-func (x *GameActivityDefinition) LoadAchievementDescriptions(ctx context.Context) (*foundation.NSArray[*raw.GKAchievementDescription], error) {
+func (x *GameActivityDefinition) LoadAchievementDescriptions(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.GKAchievementDescription]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LoadAchievementDescriptionsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.GKAchievementDescription], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadAchievementDescriptionsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.GKAchievementDescription]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -70,154 +94,129 @@ func (x *GameActivityDefinition) LoadAchievementDescriptions(ctx context.Context
 // Loads all associated leaderboards that have defined deep links to this game activity definition.
 //
 // LoadLeaderboards blocks until the operation completes or ctx is cancelled.
-func (x *GameActivityDefinition) LoadLeaderboards(ctx context.Context) (*foundation.NSArray[*raw.GKLeaderboard], error) {
+func (x *GameActivityDefinition) LoadLeaderboards(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.GKLeaderboard]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LoadLeaderboardsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.GKLeaderboard], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadLeaderboardsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.GKLeaderboard]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Asynchronously load the image. Error will be nil on success.
-//
-// LoadImageWithCompletionHandler calls the underlying LoadImageWithCompletionHandler.
-func (x *GameActivityDefinition) LoadImageWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	x.inner.LoadImageWithCompletionHandler(completionHandler)
-}
-
 // The developer defined identifier for a given game activity.
-//
-// Identifier calls the underlying Identifier.
 func (x *GameActivityDefinition) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The group identifier for the activity, if one exists.
-//
-// GroupIdentifier calls the underlying GroupIdentifier.
 func (x *GameActivityDefinition) GroupIdentifier() string {
-	_r := x.inner.GroupIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // A short title for the game activity.
-//
-// Title calls the underlying Title.
 func (x *GameActivityDefinition) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // A more detailed description of the game activity.
-//
-// Details calls the underlying Details.
 func (x *GameActivityDefinition) Details() string {
-	_r := x.inner.Details()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("details"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Default properties defined by the developer for this type of game activity.
-//
-// DefaultProperties calls the underlying DefaultProperties.
-func (x *GameActivityDefinition) DefaultProperties() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	return x.inner.DefaultProperties()
+func (x *GameActivityDefinition) DefaultProperties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultProperties"))
+	return obj.Wrap(_r)
 }
 
 // A fallback URL that can be used to construct a game-specific URL for players to share or join, if the joining device does not support the default URL.
-//
-// FallbackURL calls the underlying FallbackURL.
-func (x *GameActivityDefinition) FallbackURL() *foundation.NSURL {
-	return x.inner.FallbackURL()
+func (x *GameActivityDefinition) FallbackURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fallbackURL"))
+	return obj.Wrap(_r)
 }
 
 // Whether the activity can be joined by others via a party code. - SeeAlso: “-[GKGameActivityListener player:wantsToPlayGameActivity:completionHandler:]“ where you can receive and handle game activities that players want to play in a party with friends.
-//
-// SupportsPartyCode calls the underlying SupportsPartyCode.
 func (x *GameActivityDefinition) SupportsPartyCode() bool {
-	return x.inner.SupportsPartyCode()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsPartyCode"))
+	return _r
 }
 
 // The maximum number of participants that can join the activity. Returns nil when no maximum is set (unlimited players) or when player range is undefined. When not nil, the value is always greater than or equal to `minPlayers`.
-//
-// MaxPlayers calls the underlying MaxPlayers.
-func (x *GameActivityDefinition) MaxPlayers() *foundation.NSNumber {
-	return x.inner.MaxPlayers()
+func (x *GameActivityDefinition) MaxPlayers() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxPlayers"))
+	return obj.Wrap(_r)
 }
 
 // The minimum number of participants that can join the activity.
-//
-// MinPlayers calls the underlying MinPlayers.
-func (x *GameActivityDefinition) MinPlayers() *foundation.NSNumber {
-	return x.inner.MinPlayers()
+func (x *GameActivityDefinition) MinPlayers() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minPlayers"))
+	return obj.Wrap(_r)
 }
 
 // True if the activity supports an unlimited number of players. False if maxPlayers is set to a defined limit or if no player range is provided.
-//
-// SupportsUnlimitedPlayers calls the underlying SupportsUnlimitedPlayers.
 func (x *GameActivityDefinition) SupportsUnlimitedPlayers() bool {
-	return x.inner.SupportsUnlimitedPlayers()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsUnlimitedPlayers"))
+	return _r
 }
 
 // The play style of the game activity.
-//
-// PlayStyle calls the underlying PlayStyle.
-func (x *GameActivityDefinition) PlayStyle() GKGameActivityPlayStyle {
-	return GKGameActivityPlayStyle(x.inner.PlayStyle())
+func (x *GameActivityDefinition) PlayStyle() GameActivityPlayStyle {
+	_r := objc.Send[GameActivityPlayStyle](objref.IDOf(x), objc.RegisterName("playStyle"))
+	return _r
 }
 
 // The release state of the game activity definition in App Store Connect.
-//
-// ReleaseState calls the underlying ReleaseState.
-func (x *GameActivityDefinition) ReleaseState() GKReleaseState {
-	return GKReleaseState(x.inner.ReleaseState())
+func (x *GameActivityDefinition) ReleaseState() ReleaseState {
+	_r := objc.Send[ReleaseState](objref.IDOf(x), objc.RegisterName("releaseState"))
+	return _r
 }
 
 // GameActivityDefinitionable is the interface implemented by [GameActivityDefinition], for mocking and DI.
 type GameActivityDefinitionable interface {
-	Unwrap() *raw.GKGameActivityDefinition
-	LoadAchievementDescriptions(ctx context.Context) (*foundation.NSArray[*raw.GKAchievementDescription], error)
-	LoadLeaderboards(ctx context.Context) (*foundation.NSArray[*raw.GKLeaderboard], error)
-	LoadImageWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer))
+	obj.Object
+	LoadAchievementDescriptions(ctx context.Context) (obj.Object, error)
+	LoadLeaderboards(ctx context.Context) (obj.Object, error)
 	Identifier() string
 	GroupIdentifier() string
 	Title() string
 	Details() string
-	DefaultProperties() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
-	FallbackURL() *foundation.NSURL
+	DefaultProperties() obj.Object
+	FallbackURL() obj.Object
 	SupportsPartyCode() bool
-	MaxPlayers() *foundation.NSNumber
-	MinPlayers() *foundation.NSNumber
+	MaxPlayers() obj.Object
+	MinPlayers() obj.Object
 	SupportsUnlimitedPlayers() bool
-	PlayStyle() GKGameActivityPlayStyle
-	ReleaseState() GKReleaseState
+	PlayStyle() GameActivityPlayStyle
+	ReleaseState() ReleaseState
 }
 
 var _ GameActivityDefinitionable = (*GameActivityDefinition)(nil)

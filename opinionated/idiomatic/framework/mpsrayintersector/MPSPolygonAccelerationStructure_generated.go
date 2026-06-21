@@ -5,335 +5,225 @@
 package mpsrayintersector
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsrayintersector"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// PolygonAccelerationStructure wraps [raw.MPSPolygonAccelerationStructure] with a fluent Go API.
+// PolygonAccelerationStructure is an idiomatic wrapper over the Objective-C class MPSPolygonAccelerationStructure.
 type PolygonAccelerationStructure struct {
-	inner *raw.MPSPolygonAccelerationStructure
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSPolygonAccelerationStructure].
-func (x *PolygonAccelerationStructure) Unwrap() *raw.MPSPolygonAccelerationStructure { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PolygonAccelerationStructure) ID() objc.ID { return x.inner.Ptr() }
-
-// PolygonAccelerationStructureFromID adopts an existing object pointer as a PolygonAccelerationStructure (nil for 0).
+// PolygonAccelerationStructureFromID adopts an existing Objective-C object as a PolygonAccelerationStructure
+// (nil for 0), retaining it and registering a release finalizer.
 func PolygonAccelerationStructureFromID(id objc.ID) *PolygonAccelerationStructure {
 	if id == 0 {
 		return nil
 	}
-	return &PolygonAccelerationStructure{inner: raw.MPSPolygonAccelerationStructureFromID(id)}
+	x := &PolygonAccelerationStructure{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPolygonAccelerationStructure creates a new [PolygonAccelerationStructure].
+// polygonAccelerationStructureAdopt wraps an Objective-C object that this code just created as a
+// PolygonAccelerationStructure (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func polygonAccelerationStructureAdopt(id objc.ID) *PolygonAccelerationStructure {
+	if id == 0 {
+		return nil
+	}
+	x := &PolygonAccelerationStructure{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PolygonAccelerationStructure) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PolygonAccelerationStructure) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PolygonAccelerationStructure) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPolygonAccelerationStructure creates a new PolygonAccelerationStructure.
 func NewPolygonAccelerationStructure() *PolygonAccelerationStructure {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSPolygonAccelerationStructure")), objc.RegisterName("new"))
-	return &PolygonAccelerationStructure{inner: raw.MPSPolygonAccelerationStructureFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSPolygonAccelerationStructure")), objc.RegisterName("new"))
+	return polygonAccelerationStructureAdopt(_id)
 }
 
-// @brief The type of polygon. Defaults to MPSPolygonTypeTriangle. Changes to this property require rebuilding the acceleration structure.
+// The type of polygon. Defaults to MPSPolygonTypeTriangle. Changes to this property require rebuilding the acceleration structure.
 //
-// WithPolygonType sets the polygonType property and returns the receiver for chaining.
-func (x *PolygonAccelerationStructure) WithPolygonType(polygonType MPSPolygonType) *PolygonAccelerationStructure {
-	x.inner.SetPolygonType(raw.MPSPolygonType(polygonType))
+// WithPolygonType sets polygonType and returns the receiver so calls can be chained.
+func (x *PolygonAccelerationStructure) WithPolygonType(polygonType PolygonType) *PolygonAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonType:"), polygonType)
 	return x
 }
 
-// @brief Offset, in bytes, between consecutive vertices in the vertex buffer. Defaults to 0 bytes, indicating that the vertices are packed according to the natural alignment of the vector_float3 type: 16 bytes. @discussion This can be used to skip past any additional per-vertex data which may be stored alongside the position such as the vertex normal and texture coordinates. Must be a multiple of 4 bytes, and must be at least 12 bytes. Changes to this property require rebuilding the acceleration structure.
+// Offset, in bytes, between consecutive vertices in the vertex buffer. Defaults to 0 bytes, indicating that the vertices are packed according to the natural alignment of the vector_float3 type: 16 bytes. This can be used to skip past any additional per-vertex data which may be stored alongside the position such as the vertex normal and texture coordinates. Must be a multiple of 4 bytes, and must be at least 12 bytes. Changes to this property require rebuilding the acceleration structure.
 //
-// WithVertexStride sets the vertexStride property and returns the receiver for chaining.
-func (x *PolygonAccelerationStructure) WithVertexStride(vertexStride uint) *PolygonAccelerationStructure {
-	x.inner.SetVertexStride(vertexStride)
+// WithVertexStride sets vertexStride and returns the receiver so calls can be chained.
+func (x *PolygonAccelerationStructure) WithVertexStride(vertexStride int) *PolygonAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexStride:"), vertexStride)
 	return x
 }
 
-// @brief Index type. Defaults to MPSDataTypeUInt32. Only MPSDataTypeUInt16 and MPSDataTypeUInt32 are supported.
+// Offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].vertexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
 //
-// WithIndexType sets the indexType property and returns the receiver for chaining.
-func (x *PolygonAccelerationStructure) WithIndexType(indexType mpscore.MPSDataType) *PolygonAccelerationStructure {
-	x.inner.SetIndexType(indexType)
+// WithVertexBufferOffset sets vertexBufferOffset and returns the receiver so calls can be chained.
+func (x *PolygonAccelerationStructure) WithVertexBufferOffset(vertexBufferOffset int) *PolygonAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexBufferOffset:"), vertexBufferOffset)
 	return x
 }
 
-// @brief Vertex buffer containing vertex data encoded as three 32 bit floats per vertex. Note that by default each vertex is aligned to the alignment of the vector_float3 type: 16 bytes. This can be changed using the vertexStride property. A vertex buffer must be provided before the acceleration structure is built. When using triangle polygons, degenerate (zero or negative area) triangles are ignored during acceleration structure construction. This can be used to pad triangle indices if needed. Quadrilateral polygons are internally treated as two triangles. If the quadrilateral has vertices v0, v1, v2, and v3, the two triangles will have vertices v0, v1, v2 and v0, v2, v3. A quadrilateral may be used to represent a triangle by repeating the last vertex. If the first triangle is degenerate (zero or negative area), the entire quadrilateral will be ignored. This can be used to pad quadrilateral indices if needed. All four vertices of a quadrilateral must be coplanar and the quadrilateral must be convex. This is an alias for polygonBuffers[0].vertexBuffer. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+// Offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].indexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
 //
-// WithVertexBuffer sets the vertexBuffer property and returns the receiver for chaining.
-func (x *PolygonAccelerationStructure) WithVertexBuffer(vertexBuffer metal.MTLBuffer) *PolygonAccelerationStructure {
-	x.inner.SetVertexBuffer(vertexBuffer)
+// WithIndexBufferOffset sets indexBufferOffset and returns the receiver so calls can be chained.
+func (x *PolygonAccelerationStructure) WithIndexBufferOffset(indexBufferOffset int) *PolygonAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferOffset:"), indexBufferOffset)
 	return x
 }
 
-// @brief Offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].vertexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+// Offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].maskBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
 //
-// WithVertexBufferOffset sets the vertexBufferOffset property and returns the receiver for chaining.
-func (x *PolygonAccelerationStructure) WithVertexBufferOffset(vertexBufferOffset uint) *PolygonAccelerationStructure {
-	x.inner.SetVertexBufferOffset(vertexBufferOffset)
+// WithMaskBufferOffset sets maskBufferOffset and returns the receiver so calls can be chained.
+func (x *PolygonAccelerationStructure) WithMaskBufferOffset(maskBufferOffset int) *PolygonAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskBufferOffset:"), maskBufferOffset)
 	return x
 }
 
-// @brief Index buffer containing index data. Each index references a vertex in the vertex buffer. May be nil. This is an alias for polygonBuffers[0].indexBuffer. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+// Number of polygons. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].polygonCount. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
 //
-// WithIndexBuffer sets the indexBuffer property and returns the receiver for chaining.
-func (x *PolygonAccelerationStructure) WithIndexBuffer(indexBuffer metal.MTLBuffer) *PolygonAccelerationStructure {
-	x.inner.SetIndexBuffer(indexBuffer)
+// WithPolygonCount sets polygonCount and returns the receiver so calls can be chained.
+func (x *PolygonAccelerationStructure) WithPolygonCount(polygonCount int) *PolygonAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonCount:"), polygonCount)
 	return x
 }
 
-// @brief Offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].indexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+// Array of polygon buffers. Each buffer contains a vertex buffer and optional index and mask buffer for an array of polygons. Changing the length of this array requires rebuilding the acceleration structure. Using more than one MPSPolygonBuffer will reduce performance. It is better to concatenate these buffers into a single vertex buffer, index buffer, and mask buffer and use a single MPSPolygonBuffer if possible. This also applies when using an MPSInstanceAccelerationStructure: each instance or subclass of MPSPolygonAccelerationStructure in an instance hierarchy should use the same vertex buffer, index buffer, and mask buffer, although each acceleration structure may use different offsets into these buffers. This allows for the vertex, index, and mask buffers to be bound directly instead of indirectly through an argument buffer. There must be at least one MPSPolygonBuffer. On argument buffer tier 1 devices, there must be be exactly one MPSPolygonBuffer. Use the argumentBuffersSupport property of the MTLDevice to check for support.
 //
-// WithIndexBufferOffset sets the indexBufferOffset property and returns the receiver for chaining.
-func (x *PolygonAccelerationStructure) WithIndexBufferOffset(indexBufferOffset uint) *PolygonAccelerationStructure {
-	x.inner.SetIndexBufferOffset(indexBufferOffset)
+// WithPolygonBuffers sets the collection and returns the receiver so calls can be chained.
+func (x *PolygonAccelerationStructure) WithPolygonBuffers(items ...*PolygonBuffer) *PolygonAccelerationStructure {
+	_arr := purego.SliceToNSArray(items, func(_v *PolygonBuffer) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonBuffers:"), _arr)
 	return x
 }
 
-// @brief Mask buffer containing one uint32_t mask per polygon. May be nil. Otherwise, the mask type must be specified on the MPSRayIntersector with which it is used. This is an alias for polygonBuffers[0].maskBuffer. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+// Acceleration structure usage options. Changes to this property require rebuilding the acceleration structure. Defaults to MPSAccelerationStructureUsageNone.
 //
-// WithMaskBuffer sets the maskBuffer property and returns the receiver for chaining.
-func (x *PolygonAccelerationStructure) WithMaskBuffer(maskBuffer metal.MTLBuffer) *PolygonAccelerationStructure {
-	x.inner.SetMaskBuffer(maskBuffer)
+// WithUsage sets usage and returns the receiver so calls can be chained.
+func (x *PolygonAccelerationStructure) WithUsage(usage AccelerationStructureUsage) *PolygonAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
 	return x
 }
 
-// @brief Offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].maskBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-//
-// WithMaskBufferOffset sets the maskBufferOffset property and returns the receiver for chaining.
-func (x *PolygonAccelerationStructure) WithMaskBufferOffset(maskBufferOffset uint) *PolygonAccelerationStructure {
-	x.inner.SetMaskBufferOffset(maskBufferOffset)
-	return x
+// The type of polygon. Defaults to MPSPolygonTypeTriangle. Changes to this property require rebuilding the acceleration structure.
+func (x *PolygonAccelerationStructure) PolygonType() PolygonType {
+	_r := objc.Send[PolygonType](objref.IDOf(x), objc.RegisterName("polygonType"))
+	return _r
 }
 
-// @brief Number of polygons. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].polygonCount. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-//
-// WithPolygonCount sets the polygonCount property and returns the receiver for chaining.
-func (x *PolygonAccelerationStructure) WithPolygonCount(polygonCount uint) *PolygonAccelerationStructure {
-	x.inner.SetPolygonCount(polygonCount)
-	return x
+func (x *PolygonAccelerationStructure) SetPolygonType(polygonType PolygonType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonType:"), polygonType)
 }
 
-// @brief Array of polygon buffers. Each buffer contains a vertex buffer and optional index and mask buffer for an array of polygons. Changing the length of this array requires rebuilding the acceleration structure. Using more than one MPSPolygonBuffer will reduce performance. It is better to concatenate these buffers into a single vertex buffer, index buffer, and mask buffer and use a single MPSPolygonBuffer if possible. This also applies when using an MPSInstanceAccelerationStructure: each instance or subclass of MPSPolygonAccelerationStructure in an instance hierarchy should use the same vertex buffer, index buffer, and mask buffer, although each acceleration structure may use different offsets into these buffers. This allows for the vertex, index, and mask buffers to be bound directly instead of indirectly through an argument buffer. There must be at least one MPSPolygonBuffer. On argument buffer tier 1 devices, there must be be exactly one MPSPolygonBuffer. Use the argumentBuffersSupport property of the MTLDevice to check for support.
-//
-// WithPolygonBuffers sets the collection, converting the Go slice to an NSArray.
-func (x *PolygonAccelerationStructure) WithPolygonBuffers(items ...*raw.MPSPolygonBuffer) *PolygonAccelerationStructure {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetPolygonBuffers(foundation.NSArrayFromID[*raw.MPSPolygonBuffer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.MPSPolygonBuffer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetPolygonBuffers(_arr)
-	return x
+// Offset, in bytes, between consecutive vertices in the vertex buffer. Defaults to 0 bytes, indicating that the vertices are packed according to the natural alignment of the vector_float3 type: 16 bytes. This can be used to skip past any additional per-vertex data which may be stored alongside the position such as the vertex normal and texture coordinates. Must be a multiple of 4 bytes, and must be at least 12 bytes. Changes to this property require rebuilding the acceleration structure.
+func (x *PolygonAccelerationStructure) VertexStride() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexStride"))
+	return _r
 }
 
-// @brief Acceleration structure usage options. Changes to this property require rebuilding the acceleration structure. Defaults to MPSAccelerationStructureUsageNone.
-//
-// WithUsage sets the usage property and returns the receiver for chaining.
-func (x *PolygonAccelerationStructure) WithUsage(usage MPSAccelerationStructureUsage) *PolygonAccelerationStructure {
-	x.inner.MPSAccelerationStructure.SetUsage(raw.MPSAccelerationStructureUsage(usage))
-	return x
+func (x *PolygonAccelerationStructure) SetVertexStride(vertexStride int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexStride:"), vertexStride)
 }
 
-// @brief The type of polygon. Defaults to MPSPolygonTypeTriangle. Changes to this property require rebuilding the acceleration structure.
-//
-// PolygonType calls the underlying PolygonType.
-func (x *PolygonAccelerationStructure) PolygonType() MPSPolygonType {
-	return MPSPolygonType(x.inner.PolygonType())
+// Offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].vertexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+func (x *PolygonAccelerationStructure) VertexBufferOffset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexBufferOffset"))
+	return _r
 }
 
-// SetPolygonType calls the underlying SetPolygonType.
-func (x *PolygonAccelerationStructure) SetPolygonType(polygonType MPSPolygonType) {
-	x.inner.SetPolygonType(raw.MPSPolygonType(polygonType))
+func (x *PolygonAccelerationStructure) SetVertexBufferOffset(vertexBufferOffset int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexBufferOffset:"), vertexBufferOffset)
 }
 
-// @brief Offset, in bytes, between consecutive vertices in the vertex buffer. Defaults to 0 bytes, indicating that the vertices are packed according to the natural alignment of the vector_float3 type: 16 bytes. @discussion This can be used to skip past any additional per-vertex data which may be stored alongside the position such as the vertex normal and texture coordinates. Must be a multiple of 4 bytes, and must be at least 12 bytes. Changes to this property require rebuilding the acceleration structure.
-//
-// VertexStride calls the underlying VertexStride.
-func (x *PolygonAccelerationStructure) VertexStride() uint {
-	return x.inner.VertexStride()
+// Offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].indexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+func (x *PolygonAccelerationStructure) IndexBufferOffset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexBufferOffset"))
+	return _r
 }
 
-// SetVertexStride calls the underlying SetVertexStride.
-func (x *PolygonAccelerationStructure) SetVertexStride(vertexStride uint) {
-	x.inner.SetVertexStride(vertexStride)
+func (x *PolygonAccelerationStructure) SetIndexBufferOffset(indexBufferOffset int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferOffset:"), indexBufferOffset)
 }
 
-// @brief Index type. Defaults to MPSDataTypeUInt32. Only MPSDataTypeUInt16 and MPSDataTypeUInt32 are supported.
-//
-// IndexType calls the underlying IndexType.
-func (x *PolygonAccelerationStructure) IndexType() mpscore.MPSDataType {
-	return x.inner.IndexType()
+// Offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].maskBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+func (x *PolygonAccelerationStructure) MaskBufferOffset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maskBufferOffset"))
+	return _r
 }
 
-// SetIndexType calls the underlying SetIndexType.
-func (x *PolygonAccelerationStructure) SetIndexType(indexType mpscore.MPSDataType) {
-	x.inner.SetIndexType(indexType)
+func (x *PolygonAccelerationStructure) SetMaskBufferOffset(maskBufferOffset int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskBufferOffset:"), maskBufferOffset)
 }
 
-// @brief Vertex buffer containing vertex data encoded as three 32 bit floats per vertex. Note that by default each vertex is aligned to the alignment of the vector_float3 type: 16 bytes. This can be changed using the vertexStride property. A vertex buffer must be provided before the acceleration structure is built. When using triangle polygons, degenerate (zero or negative area) triangles are ignored during acceleration structure construction. This can be used to pad triangle indices if needed. Quadrilateral polygons are internally treated as two triangles. If the quadrilateral has vertices v0, v1, v2, and v3, the two triangles will have vertices v0, v1, v2 and v0, v2, v3. A quadrilateral may be used to represent a triangle by repeating the last vertex. If the first triangle is degenerate (zero or negative area), the entire quadrilateral will be ignored. This can be used to pad quadrilateral indices if needed. All four vertices of a quadrilateral must be coplanar and the quadrilateral must be convex. This is an alias for polygonBuffers[0].vertexBuffer. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-//
-// VertexBuffer calls the underlying VertexBuffer.
-func (x *PolygonAccelerationStructure) VertexBuffer() metal.MTLBuffer {
-	return x.inner.VertexBuffer()
+// Number of polygons. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].polygonCount. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+func (x *PolygonAccelerationStructure) PolygonCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("polygonCount"))
+	return _r
 }
 
-// SetVertexBuffer calls the underlying SetVertexBuffer.
-func (x *PolygonAccelerationStructure) SetVertexBuffer(vertexBuffer metal.MTLBuffer) {
-	x.inner.SetVertexBuffer(vertexBuffer)
+func (x *PolygonAccelerationStructure) SetPolygonCount(polygonCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonCount:"), polygonCount)
 }
 
-// @brief Offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].vertexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-//
-// VertexBufferOffset calls the underlying VertexBufferOffset.
-func (x *PolygonAccelerationStructure) VertexBufferOffset() uint {
-	return x.inner.VertexBufferOffset()
-}
-
-// SetVertexBufferOffset calls the underlying SetVertexBufferOffset.
-func (x *PolygonAccelerationStructure) SetVertexBufferOffset(vertexBufferOffset uint) {
-	x.inner.SetVertexBufferOffset(vertexBufferOffset)
-}
-
-// @brief Index buffer containing index data. Each index references a vertex in the vertex buffer. May be nil. This is an alias for polygonBuffers[0].indexBuffer. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-//
-// IndexBuffer calls the underlying IndexBuffer.
-func (x *PolygonAccelerationStructure) IndexBuffer() metal.MTLBuffer {
-	return x.inner.IndexBuffer()
-}
-
-// SetIndexBuffer calls the underlying SetIndexBuffer.
-func (x *PolygonAccelerationStructure) SetIndexBuffer(indexBuffer metal.MTLBuffer) {
-	x.inner.SetIndexBuffer(indexBuffer)
-}
-
-// @brief Offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].indexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-//
-// IndexBufferOffset calls the underlying IndexBufferOffset.
-func (x *PolygonAccelerationStructure) IndexBufferOffset() uint {
-	return x.inner.IndexBufferOffset()
-}
-
-// SetIndexBufferOffset calls the underlying SetIndexBufferOffset.
-func (x *PolygonAccelerationStructure) SetIndexBufferOffset(indexBufferOffset uint) {
-	x.inner.SetIndexBufferOffset(indexBufferOffset)
-}
-
-// @brief Mask buffer containing one uint32_t mask per polygon. May be nil. Otherwise, the mask type must be specified on the MPSRayIntersector with which it is used. This is an alias for polygonBuffers[0].maskBuffer. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-//
-// MaskBuffer calls the underlying MaskBuffer.
-func (x *PolygonAccelerationStructure) MaskBuffer() metal.MTLBuffer {
-	return x.inner.MaskBuffer()
-}
-
-// SetMaskBuffer calls the underlying SetMaskBuffer.
-func (x *PolygonAccelerationStructure) SetMaskBuffer(maskBuffer metal.MTLBuffer) {
-	x.inner.SetMaskBuffer(maskBuffer)
-}
-
-// @brief Offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].maskBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-//
-// MaskBufferOffset calls the underlying MaskBufferOffset.
-func (x *PolygonAccelerationStructure) MaskBufferOffset() uint {
-	return x.inner.MaskBufferOffset()
-}
-
-// SetMaskBufferOffset calls the underlying SetMaskBufferOffset.
-func (x *PolygonAccelerationStructure) SetMaskBufferOffset(maskBufferOffset uint) {
-	x.inner.SetMaskBufferOffset(maskBufferOffset)
-}
-
-// @brief Number of polygons. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].polygonCount. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-//
-// PolygonCount calls the underlying PolygonCount.
-func (x *PolygonAccelerationStructure) PolygonCount() uint {
-	return x.inner.PolygonCount()
-}
-
-// SetPolygonCount calls the underlying SetPolygonCount.
-func (x *PolygonAccelerationStructure) SetPolygonCount(polygonCount uint) {
-	x.inner.SetPolygonCount(polygonCount)
-}
-
-// @brief Array of polygon buffers. Each buffer contains a vertex buffer and optional index and mask buffer for an array of polygons. Changing the length of this array requires rebuilding the acceleration structure. Using more than one MPSPolygonBuffer will reduce performance. It is better to concatenate these buffers into a single vertex buffer, index buffer, and mask buffer and use a single MPSPolygonBuffer if possible. This also applies when using an MPSInstanceAccelerationStructure: each instance or subclass of MPSPolygonAccelerationStructure in an instance hierarchy should use the same vertex buffer, index buffer, and mask buffer, although each acceleration structure may use different offsets into these buffers. This allows for the vertex, index, and mask buffers to be bound directly instead of indirectly through an argument buffer. There must be at least one MPSPolygonBuffer. On argument buffer tier 1 devices, there must be be exactly one MPSPolygonBuffer. Use the argumentBuffersSupport property of the MTLDevice to check for support.
+// Array of polygon buffers. Each buffer contains a vertex buffer and optional index and mask buffer for an array of polygons. Changing the length of this array requires rebuilding the acceleration structure. Using more than one MPSPolygonBuffer will reduce performance. It is better to concatenate these buffers into a single vertex buffer, index buffer, and mask buffer and use a single MPSPolygonBuffer if possible. This also applies when using an MPSInstanceAccelerationStructure: each instance or subclass of MPSPolygonAccelerationStructure in an instance hierarchy should use the same vertex buffer, index buffer, and mask buffer, although each acceleration structure may use different offsets into these buffers. This allows for the vertex, index, and mask buffers to be bound directly instead of indirectly through an argument buffer. There must be at least one MPSPolygonBuffer. On argument buffer tier 1 devices, there must be be exactly one MPSPolygonBuffer. Use the argumentBuffersSupport property of the MTLDevice to check for support.
 //
 // PolygonBuffers returns the collection as a Go slice.
 func (x *PolygonAccelerationStructure) PolygonBuffers() []*PolygonBuffer {
-	arr := x.inner.PolygonBuffers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PolygonBuffer {
-		return &PolygonBuffer{inner: raw.MPSPolygonBufferFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("polygonBuffers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PolygonBuffer { return PolygonBufferFromID(_id) })
 }
 
-// SetPolygonBuffers calls the underlying SetPolygonBuffers.
-func (x *PolygonAccelerationStructure) SetPolygonBuffers(polygonBuffers *foundation.NSArray[*raw.MPSPolygonBuffer]) {
-	x.inner.SetPolygonBuffers(polygonBuffers)
-}
-
-func (x *PolygonAccelerationStructure) asPolygonAccelerationStructure() *raw.MPSPolygonAccelerationStructure {
-	return x.inner
-}
-
-func (x *PolygonAccelerationStructure) asAccelerationStructure() *raw.MPSAccelerationStructure {
-	return &x.inner.MPSAccelerationStructure
+func (x *PolygonAccelerationStructure) SetPolygonBuffers(polygonBuffers []*PolygonBuffer) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonBuffers:"), purego.SliceToNSArray(polygonBuffers, func(_v *PolygonBuffer) objc.ID { return objref.IDOf(_v) }))
 }
 
 // PolygonAccelerationStructureable is the interface implemented by [PolygonAccelerationStructure], for mocking and DI.
 type PolygonAccelerationStructureable interface {
-	Unwrap() *raw.MPSPolygonAccelerationStructure
-	WithPolygonType(polygonType MPSPolygonType) *PolygonAccelerationStructure
-	WithVertexStride(vertexStride uint) *PolygonAccelerationStructure
-	WithIndexType(indexType mpscore.MPSDataType) *PolygonAccelerationStructure
-	WithVertexBuffer(vertexBuffer metal.MTLBuffer) *PolygonAccelerationStructure
-	WithVertexBufferOffset(vertexBufferOffset uint) *PolygonAccelerationStructure
-	WithIndexBuffer(indexBuffer metal.MTLBuffer) *PolygonAccelerationStructure
-	WithIndexBufferOffset(indexBufferOffset uint) *PolygonAccelerationStructure
-	WithMaskBuffer(maskBuffer metal.MTLBuffer) *PolygonAccelerationStructure
-	WithMaskBufferOffset(maskBufferOffset uint) *PolygonAccelerationStructure
-	WithPolygonCount(polygonCount uint) *PolygonAccelerationStructure
-	WithPolygonBuffers(items ...*raw.MPSPolygonBuffer) *PolygonAccelerationStructure
-	WithUsage(usage MPSAccelerationStructureUsage) *PolygonAccelerationStructure
-	PolygonType() MPSPolygonType
-	SetPolygonType(polygonType MPSPolygonType)
-	VertexStride() uint
-	SetVertexStride(vertexStride uint)
-	IndexType() mpscore.MPSDataType
-	SetIndexType(indexType mpscore.MPSDataType)
-	VertexBuffer() metal.MTLBuffer
-	SetVertexBuffer(vertexBuffer metal.MTLBuffer)
-	VertexBufferOffset() uint
-	SetVertexBufferOffset(vertexBufferOffset uint)
-	IndexBuffer() metal.MTLBuffer
-	SetIndexBuffer(indexBuffer metal.MTLBuffer)
-	IndexBufferOffset() uint
-	SetIndexBufferOffset(indexBufferOffset uint)
-	MaskBuffer() metal.MTLBuffer
-	SetMaskBuffer(maskBuffer metal.MTLBuffer)
-	MaskBufferOffset() uint
-	SetMaskBufferOffset(maskBufferOffset uint)
-	PolygonCount() uint
-	SetPolygonCount(polygonCount uint)
+	obj.Object
+	WithPolygonType(polygonType PolygonType) *PolygonAccelerationStructure
+	WithVertexStride(vertexStride int) *PolygonAccelerationStructure
+	WithVertexBufferOffset(vertexBufferOffset int) *PolygonAccelerationStructure
+	WithIndexBufferOffset(indexBufferOffset int) *PolygonAccelerationStructure
+	WithMaskBufferOffset(maskBufferOffset int) *PolygonAccelerationStructure
+	WithPolygonCount(polygonCount int) *PolygonAccelerationStructure
+	WithPolygonBuffers(items ...*PolygonBuffer) *PolygonAccelerationStructure
+	WithUsage(usage AccelerationStructureUsage) *PolygonAccelerationStructure
+	PolygonType() PolygonType
+	SetPolygonType(polygonType PolygonType)
+	VertexStride() int
+	SetVertexStride(vertexStride int)
+	VertexBufferOffset() int
+	SetVertexBufferOffset(vertexBufferOffset int)
+	IndexBufferOffset() int
+	SetIndexBufferOffset(indexBufferOffset int)
+	MaskBufferOffset() int
+	SetMaskBufferOffset(maskBufferOffset int)
+	PolygonCount() int
+	SetPolygonCount(polygonCount int)
 	PolygonBuffers() []*PolygonBuffer
-	SetPolygonBuffers(polygonBuffers *foundation.NSArray[*raw.MPSPolygonBuffer])
+	SetPolygonBuffers(polygonBuffers []*PolygonBuffer)
 }
 
 var _ PolygonAccelerationStructureable = (*PolygonAccelerationStructure)(nil)

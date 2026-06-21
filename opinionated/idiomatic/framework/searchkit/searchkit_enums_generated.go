@@ -8,30 +8,6 @@ import (
 	"fmt"
 )
 
-type SKDocumentIndexState int64
-
-const (
-	KSKDocumentStateNotIndexed    SKDocumentIndexState = 0
-	KSKDocumentStateIndexed       SKDocumentIndexState = 1
-	KSKDocumentStateAddPending    SKDocumentIndexState = 2
-	KSKDocumentStateDeletePending SKDocumentIndexState = 3
-)
-
-func (e SKDocumentIndexState) String() string {
-	switch e {
-	case KSKDocumentStateNotIndexed:
-		return "KSKDocumentStateNotIndexed"
-	case KSKDocumentStateIndexed:
-		return "KSKDocumentStateIndexed"
-	case KSKDocumentStateAddPending:
-		return "KSKDocumentStateAddPending"
-	case KSKDocumentStateDeletePending:
-		return "KSKDocumentStateDeletePending"
-	default:
-		return fmt.Sprintf("SKDocumentIndexState(%d)", int64(e))
-	}
-}
-
 type SKIndexType int64
 
 const (

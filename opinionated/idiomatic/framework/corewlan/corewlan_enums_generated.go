@@ -10,19 +10,19 @@ import (
 )
 
 // CoreWLAN channel bands.
-type CWChannelBand int64
+type ChannelBand int64
 
 const (
 	// Unknown channel band.
-	KCWChannelBandUnknown CWChannelBand = 0
+	KCWChannelBandUnknown ChannelBand = 0
 	// 2.4GHz channel band.
-	KCWChannelBand2GHz CWChannelBand = 1
+	KCWChannelBand2GHz ChannelBand = 1
 	// 5GHz channel band.
-	KCWChannelBand5GHz CWChannelBand = 2
-	KCWChannelBand6GHz CWChannelBand = 3
+	KCWChannelBand5GHz ChannelBand = 2
+	KCWChannelBand6GHz ChannelBand = 3
 )
 
-func (e CWChannelBand) String() string {
+func (e ChannelBand) String() string {
 	switch e {
 	case KCWChannelBandUnknown:
 		return "KCWChannelBandUnknown"
@@ -33,27 +33,27 @@ func (e CWChannelBand) String() string {
 	case KCWChannelBand6GHz:
 		return "KCWChannelBand6GHz"
 	default:
-		return fmt.Sprintf("CWChannelBand(%d)", int64(e))
+		return fmt.Sprintf("ChannelBand(%d)", int64(e))
 	}
 }
 
 // CoreWLAN channel widths.
-type CWChannelWidth int64
+type ChannelWidth int64
 
 const (
 	// Unknown channel width.
-	KCWChannelWidthUnknown CWChannelWidth = 0
+	KCWChannelWidthUnknown ChannelWidth = 0
 	// 20MHz channel width.
-	KCWChannelWidth20MHz CWChannelWidth = 1
+	KCWChannelWidth20MHz ChannelWidth = 1
 	// 40MHz channel width.
-	KCWChannelWidth40MHz CWChannelWidth = 2
+	KCWChannelWidth40MHz ChannelWidth = 2
 	// 80MHz channel width.
-	KCWChannelWidth80MHz CWChannelWidth = 3
+	KCWChannelWidth80MHz ChannelWidth = 3
 	// 160MHz channel width.
-	KCWChannelWidth160MHz CWChannelWidth = 4
+	KCWChannelWidth160MHz ChannelWidth = 4
 )
 
-func (e CWChannelWidth) String() string {
+func (e ChannelWidth) String() string {
 	switch e {
 	case KCWChannelWidthUnknown:
 		return "KCWChannelWidthUnknown"
@@ -66,28 +66,28 @@ func (e CWChannelWidth) String() string {
 	case KCWChannelWidth160MHz:
 		return "KCWChannelWidth160MHz"
 	default:
-		return fmt.Sprintf("CWChannelWidth(%d)", int64(e))
+		return fmt.Sprintf("ChannelWidth(%d)", int64(e))
 	}
 }
 
 // Cipher key flags.
 // Bitmask — values may be combined with |.
-type CWCipherKeyFlags uint64
+type CipherKeyFlags uint64
 
 const (
 	// Open System authentication.
-	KCWCipherKeyFlagsNone CWCipherKeyFlags = 0
+	KCWCipherKeyFlagsNone CipherKeyFlags = 0
 	// A flag that indicates to use the cipher key for unicast packets.
-	KCWCipherKeyFlagsUnicast CWCipherKeyFlags = 2
+	KCWCipherKeyFlagsUnicast CipherKeyFlags = 2
 	// A flag that indicates to use the cipher key for multicast packets.
-	KCWCipherKeyFlagsMulticast CWCipherKeyFlags = 4
+	KCWCipherKeyFlagsMulticast CipherKeyFlags = 4
 	// A flag that indicates to use the cipher key for packets sent from the interface.
-	KCWCipherKeyFlagsTx CWCipherKeyFlags = 8
+	KCWCipherKeyFlagsTx CipherKeyFlags = 8
 	// A flag that indicates to use the cipher key for packets received by the interface.
-	KCWCipherKeyFlagsRx CWCipherKeyFlags = 16
+	KCWCipherKeyFlagsRx CipherKeyFlags = 16
 )
 
-func (e CWCipherKeyFlags) String() string {
+func (e CipherKeyFlags) String() string {
 	var parts []string
 	if e&KCWCipherKeyFlagsUnicast != 0 {
 		parts = append(parts, "KCWCipherKeyFlagsUnicast")
@@ -108,74 +108,74 @@ func (e CWCipherKeyFlags) String() string {
 }
 
 // Wi-Fi event types.
-type CWEventType uint64
+type EventType uint64
 
 const (
 	// No specified event type.
-	CWEventTypeNone CWEventType = 0
+	EventTypeNone EventType = 0
 	// Posts when the power state of any Wi-Fi interface changes.
-	CWEventTypePowerDidChange CWEventType = 1
+	EventTypePowerDidChange EventType = 1
 	// Posts when the current SSID of any Wi-Fi interface changes.
-	CWEventTypeSSIDDidChange CWEventType = 2
+	EventTypeSSIDDidChange EventType = 2
 	// Posts when the current BSSID of any Wi-Fi interface changes.
-	CWEventTypeBSSIDDidChange CWEventType = 3
+	EventTypeBSSIDDidChange EventType = 3
 	// Posts when the adopted country code of any Wi-Fi interface changes.
-	CWEventTypeCountryCodeDidChange CWEventType = 4
+	EventTypeCountryCodeDidChange EventType = 4
 	// Posts when the link state for any Wi-Fi interface changes.
-	CWEventTypeLinkDidChange CWEventType = 5
+	EventTypeLinkDidChange EventType = 5
 	// Posts when the RSSI or transmit rate for any Wi-Fi interface changes.
-	CWEventTypeLinkQualityDidChange CWEventType = 6
+	EventTypeLinkQualityDidChange EventType = 6
 	// Posts when the operating mode of any Wi-Fi interface changes.
-	CWEventTypeModeDidChange CWEventType = 7
+	EventTypeModeDidChange EventType = 7
 	// Posts when the scan cache of any Wi-Fi interface is updated with new scan results.
-	CWEventTypeScanCacheUpdated CWEventType = 8
-	CWEventTypeBtCoexStats      CWEventType = 9
+	EventTypeScanCacheUpdated EventType = 8
+	EventTypeBtCoexStats      EventType = 9
 	// Unknown event type.
-	CWEventTypeUnknown CWEventType = 9223372036854775807
+	EventTypeUnknown EventType = 9223372036854775807
 )
 
-func (e CWEventType) String() string {
+func (e EventType) String() string {
 	switch e {
-	case CWEventTypeNone:
-		return "CWEventTypeNone"
-	case CWEventTypePowerDidChange:
-		return "CWEventTypePowerDidChange"
-	case CWEventTypeSSIDDidChange:
-		return "CWEventTypeSSIDDidChange"
-	case CWEventTypeBSSIDDidChange:
-		return "CWEventTypeBSSIDDidChange"
-	case CWEventTypeCountryCodeDidChange:
-		return "CWEventTypeCountryCodeDidChange"
-	case CWEventTypeLinkDidChange:
-		return "CWEventTypeLinkDidChange"
-	case CWEventTypeLinkQualityDidChange:
-		return "CWEventTypeLinkQualityDidChange"
-	case CWEventTypeModeDidChange:
-		return "CWEventTypeModeDidChange"
-	case CWEventTypeScanCacheUpdated:
-		return "CWEventTypeScanCacheUpdated"
-	case CWEventTypeBtCoexStats:
-		return "CWEventTypeBtCoexStats"
-	case CWEventTypeUnknown:
-		return "CWEventTypeUnknown"
+	case EventTypeNone:
+		return "EventTypeNone"
+	case EventTypePowerDidChange:
+		return "EventTypePowerDidChange"
+	case EventTypeSSIDDidChange:
+		return "EventTypeSSIDDidChange"
+	case EventTypeBSSIDDidChange:
+		return "EventTypeBSSIDDidChange"
+	case EventTypeCountryCodeDidChange:
+		return "EventTypeCountryCodeDidChange"
+	case EventTypeLinkDidChange:
+		return "EventTypeLinkDidChange"
+	case EventTypeLinkQualityDidChange:
+		return "EventTypeLinkQualityDidChange"
+	case EventTypeModeDidChange:
+		return "EventTypeModeDidChange"
+	case EventTypeScanCacheUpdated:
+		return "EventTypeScanCacheUpdated"
+	case EventTypeBtCoexStats:
+		return "EventTypeBtCoexStats"
+	case EventTypeUnknown:
+		return "EventTypeUnknown"
 	default:
-		return fmt.Sprintf("CWEventType(%d)", int64(e))
+		return fmt.Sprintf("EventType(%d)", int64(e))
 	}
 }
 
 // IBSS mode security types.
-type CWIBSSModeSecurity int64
+type IBSSModeSecurity int64
 
 const (
 	// Open System authentication.
-	KCWIBSSModeSecurityNone CWIBSSModeSecurity = 0
+	KCWIBSSModeSecurityNone IBSSModeSecurity = 0
 	// WEP security.
-	KCWIBSSModeSecurityWEP40 CWIBSSModeSecurity = 1
+	KCWIBSSModeSecurityWEP40 IBSSModeSecurity = 1
 	// WPA Personal authentication.
-	KCWIBSSModeSecurityWEP104 CWIBSSModeSecurity = 2
+	KCWIBSSModeSecurityWEP104 IBSSModeSecurity = 2
 )
 
-func (e CWIBSSModeSecurity) String() string {
+func (e IBSSModeSecurity) String() string {
 	switch e {
 	case KCWIBSSModeSecurityNone:
 		return "KCWIBSSModeSecurityNone"
@@ -184,25 +184,25 @@ func (e CWIBSSModeSecurity) String() string {
 	case KCWIBSSModeSecurityWEP104:
 		return "KCWIBSSModeSecurityWEP104"
 	default:
-		return fmt.Sprintf("CWIBSSModeSecurity(%d)", int64(e))
+		return fmt.Sprintf("IBSSModeSecurity(%d)", int64(e))
 	}
 }
 
 // Wi-Fi interface operating modes.
-type CWInterfaceMode int64
+type InterfaceMode int64
 
 const (
 	// Interface is not in any mode.
-	KCWInterfaceModeNone CWInterfaceMode = 0
+	KCWInterfaceModeNone InterfaceMode = 0
 	// Interface is participating in an infrastructure network as a non-AP station.
-	KCWInterfaceModeStation CWInterfaceMode = 1
+	KCWInterfaceModeStation InterfaceMode = 1
 	// Interface is participating in an IBSS network.
-	KCWInterfaceModeIBSS CWInterfaceMode = 2
+	KCWInterfaceModeIBSS InterfaceMode = 2
 	// Interface is participating in an infrastructure network as an access point.
-	KCWInterfaceModeHostAP CWInterfaceMode = 3
+	KCWInterfaceModeHostAP InterfaceMode = 3
 )
 
-func (e CWInterfaceMode) String() string {
+func (e InterfaceMode) String() string {
 	switch e {
 	case KCWInterfaceModeNone:
 		return "KCWInterfaceModeNone"
@@ -213,23 +213,23 @@ func (e CWInterfaceMode) String() string {
 	case KCWInterfaceModeHostAP:
 		return "KCWInterfaceModeHostAP"
 	default:
-		return fmt.Sprintf("CWInterfaceMode(%d)", int64(e))
+		return fmt.Sprintf("InterfaceMode(%d)", int64(e))
 	}
 }
 
 // Keychain domain types that CoreWLAN keychain methods use.
-type CWKeychainDomain int64
+type KeychainDomain int64
 
 const (
 	// No keychain domain specified.
-	KCWKeychainDomainNone CWKeychainDomain = 0
+	KCWKeychainDomainNone KeychainDomain = 0
 	// The user keychain domain.
-	KCWKeychainDomainUser CWKeychainDomain = 1
+	KCWKeychainDomainUser KeychainDomain = 1
 	// The system keychain domain.
-	KCWKeychainDomainSystem CWKeychainDomain = 2
+	KCWKeychainDomainSystem KeychainDomain = 2
 )
 
-func (e CWKeychainDomain) String() string {
+func (e KeychainDomain) String() string {
 	switch e {
 	case KCWKeychainDomainNone:
 		return "KCWKeychainDomainNone"
@@ -238,31 +238,31 @@ func (e CWKeychainDomain) String() string {
 	case KCWKeychainDomainSystem:
 		return "KCWKeychainDomainSystem"
 	default:
-		return fmt.Sprintf("CWKeychainDomain(%d)", int64(e))
+		return fmt.Sprintf("KeychainDomain(%d)", int64(e))
 	}
 }
 
 // CoreWLAN physical layer modes.
-type CWPHYMode int64
+type PHYMode int64
 
 const (
 	// No specified mode.
-	KCWPHYModeNone CWPHYMode = 0
+	KCWPHYModeNone PHYMode = 0
 	// IEEE 802.11a PHY.
-	KCWPHYMode11a CWPHYMode = 1
+	KCWPHYMode11a PHYMode = 1
 	// IEEE 802.11b PHY.
-	KCWPHYMode11b CWPHYMode = 2
+	KCWPHYMode11b PHYMode = 2
 	// IEEE 802.11g PHY.
-	KCWPHYMode11g CWPHYMode = 3
+	KCWPHYMode11g PHYMode = 3
 	// IEEE 802.11n PHY.
-	KCWPHYMode11n CWPHYMode = 4
+	KCWPHYMode11n PHYMode = 4
 	// IEEE 802.11ac PHY.
-	KCWPHYMode11ac CWPHYMode = 5
-	KCWPHYMode11ax CWPHYMode = 6
-	KCWPHYMode11be CWPHYMode = 7
+	KCWPHYMode11ac PHYMode = 5
+	KCWPHYMode11ax PHYMode = 6
+	KCWPHYMode11be PHYMode = 7
 )
 
-func (e CWPHYMode) String() string {
+func (e PHYMode) String() string {
 	switch e {
 	case KCWPHYModeNone:
 		return "KCWPHYModeNone"
@@ -281,49 +281,49 @@ func (e CWPHYMode) String() string {
 	case KCWPHYMode11be:
 		return "KCWPHYMode11be"
 	default:
-		return fmt.Sprintf("CWPHYMode(%d)", int64(e))
+		return fmt.Sprintf("PHYMode(%d)", int64(e))
 	}
 }
 
 // CoreWLAN security types.
-type CWSecurity uint64
+type Security uint64
 
 const (
 	// Open System authentication.
-	KCWSecurityNone CWSecurity = 0
+	KCWSecurityNone Security = 0
 	// WEP security.
-	KCWSecurityWEP CWSecurity = 1
+	KCWSecurityWEP Security = 1
 	// WPA Personal authentication.
-	KCWSecurityWPAPersonal CWSecurity = 2
+	KCWSecurityWPAPersonal Security = 2
 	// WPA/WPA2 Personal authentication.
-	KCWSecurityWPAPersonalMixed CWSecurity = 3
+	KCWSecurityWPAPersonalMixed Security = 3
 	// WPA2 Personal authentication.
-	KCWSecurityWPA2Personal CWSecurity = 4
+	KCWSecurityWPA2Personal Security = 4
 	// Personal authentication.
-	KCWSecurityPersonal CWSecurity = 5
+	KCWSecurityPersonal Security = 5
 	// Dynamic WEP security.
-	KCWSecurityDynamicWEP CWSecurity = 6
+	KCWSecurityDynamicWEP Security = 6
 	// WPA Enterprise authentication.
-	KCWSecurityWPAEnterprise CWSecurity = 7
+	KCWSecurityWPAEnterprise Security = 7
 	// WPA/WPA2 Enterprise authentication.
-	KCWSecurityWPAEnterpriseMixed CWSecurity = 8
+	KCWSecurityWPAEnterpriseMixed Security = 8
 	// WPA2 Enterprise authentication.
-	KCWSecurityWPA2Enterprise CWSecurity = 9
+	KCWSecurityWPA2Enterprise Security = 9
 	// Enterprise authentication.
-	KCWSecurityEnterprise CWSecurity = 10
+	KCWSecurityEnterprise Security = 10
 	// WPA3 Personal authentication.
-	KCWSecurityWPA3Personal CWSecurity = 11
+	KCWSecurityWPA3Personal Security = 11
 	// WPA3 Enterprise authentication.
-	KCWSecurityWPA3Enterprise CWSecurity = 12
+	KCWSecurityWPA3Enterprise Security = 12
 	// WPA3 Transition (WPA3/WPA2 Personal) authentication.
-	KCWSecurityWPA3Transition CWSecurity = 13
-	KCWSecurityOWE            CWSecurity = 14
-	KCWSecurityOWETransition  CWSecurity = 15
+	KCWSecurityWPA3Transition Security = 13
+	KCWSecurityOWE            Security = 14
+	KCWSecurityOWETransition  Security = 15
 	// Unknown security type.
-	KCWSecurityUnknown CWSecurity = 9223372036854775807
+	KCWSecurityUnknown Security = 9223372036854775807
 )
 
-func (e CWSecurity) String() string {
+func (e Security) String() string {
 	switch e {
 	case KCWSecurityNone:
 		return "KCWSecurityNone"
@@ -360,6 +360,6 @@ func (e CWSecurity) String() string {
 	case KCWSecurityUnknown:
 		return "KCWSecurityUnknown"
 	default:
-		return fmt.Sprintf("CWSecurity(%d)", int64(e))
+		return fmt.Sprintf("Security(%d)", int64(e))
 	}
 }

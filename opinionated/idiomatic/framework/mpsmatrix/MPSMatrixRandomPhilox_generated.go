@@ -5,90 +5,84 @@
 package mpsmatrix
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MatrixRandomPhilox wraps [raw.MPSMatrixRandomPhilox] with a fluent Go API.
+// MatrixRandomPhilox is an idiomatic wrapper over the Objective-C class MPSMatrixRandomPhilox.
 type MatrixRandomPhilox struct {
-	inner *raw.MPSMatrixRandomPhilox
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSMatrixRandomPhilox].
-func (x *MatrixRandomPhilox) Unwrap() *raw.MPSMatrixRandomPhilox { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatrixRandomPhilox) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixRandomPhiloxFromID adopts an existing object pointer as a MatrixRandomPhilox (nil for 0).
+// MatrixRandomPhiloxFromID adopts an existing Objective-C object as a MatrixRandomPhilox
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixRandomPhiloxFromID(id objc.ID) *MatrixRandomPhilox {
 	if id == 0 {
 		return nil
 	}
-	return &MatrixRandomPhilox{inner: raw.MPSMatrixRandomPhiloxFromID(id)}
-}
-
-// @abstract   initialize a MPSMatrixRandomPhilox filter to generate 32-bit unsigned integer values with an initial seed of 0. @param      device          The device the filter will run on
-//
-// NewMatrixRandomPhiloxWithDevice creates a new [MatrixRandomPhilox].
-func NewMatrixRandomPhiloxWithDevice(device metal.MTLDevice) *MatrixRandomPhilox {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixRandomPhilox")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &MatrixRandomPhilox{inner: raw.MPSMatrixRandomPhiloxFromID(_id)}
-}
-
-// @abstract   initialize a MPSMatrixRandomPhilox filter @param      device                  The device the filter will run on @param      destinationDataType     The data type of the result. @param      seed                    The seed to initialize the random number generators with. @param      distributionDescriptor  A descriptor containing information about the distribution.
-//
-// NewMatrixRandomPhiloxWithDeviceDestinationDataTypeSeedDistributionDescriptor creates a new [MatrixRandomPhilox].
-func NewMatrixRandomPhiloxWithDeviceDestinationDataTypeSeedDistributionDescriptor(device metal.MTLDevice, destinationDataType mpscore.MPSDataType, seed uint, distributionDescriptor *raw.MPSMatrixRandomDistributionDescriptor) *MatrixRandomPhilox {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixRandomPhilox")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:destinationDataType:seed:distributionDescriptor:"), device, destinationDataType, seed, distributionDescriptor.Ptr())
-	return &MatrixRandomPhilox{inner: raw.MPSMatrixRandomPhiloxFromID(_id)}
-}
-
-// @abstract   initialize a MPSMatrixRandomPhilox filter using a default distribution. @param      device                  The device the filter will run on @param      destinationDataType     The data type of the result. @param      seed                    The seed to initialize the random number generators with.
-//
-// NewMatrixRandomPhiloxWithDeviceDestinationDataTypeSeed creates a new [MatrixRandomPhilox].
-func NewMatrixRandomPhiloxWithDeviceDestinationDataTypeSeed(device metal.MTLDevice, destinationDataType mpscore.MPSDataType, seed uint) *MatrixRandomPhilox {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixRandomPhilox")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:destinationDataType:seed:"), device, destinationDataType, seed)
-	return &MatrixRandomPhilox{inner: raw.MPSMatrixRandomPhiloxFromID(_id)}
-}
-
-// NewMatrixRandomPhiloxWithCoderDevice creates a new [MatrixRandomPhilox].
-func NewMatrixRandomPhiloxWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MatrixRandomPhilox {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixRandomPhilox")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &MatrixRandomPhilox{inner: raw.MPSMatrixRandomPhiloxFromID(_id)}
-}
-
-// @property   batchStart @discussion The starting index in the destination batch.
-//
-// WithBatchStart sets the batchStart property and returns the receiver for chaining.
-func (x *MatrixRandomPhilox) WithBatchStart(batchStart uint) *MatrixRandomPhilox {
-	x.inner.MPSMatrixRandom.SetBatchStart(batchStart)
+	x := &MatrixRandomPhilox{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   batchSize @discussion The size of the batch to process.
-//
-// WithBatchSize sets the batchSize property and returns the receiver for chaining.
-func (x *MatrixRandomPhilox) WithBatchSize(batchSize uint) *MatrixRandomPhilox {
-	x.inner.MPSMatrixRandom.SetBatchSize(batchSize)
+// matrixRandomPhiloxAdopt wraps an Objective-C object that this code just created as a
+// MatrixRandomPhilox (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixRandomPhiloxAdopt(id objc.ID) *MatrixRandomPhilox {
+	if id == 0 {
+		return nil
+	}
+	x := &MatrixRandomPhilox{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-func (x *MatrixRandomPhilox) asMatrixRandom() *raw.MPSMatrixRandom { return &x.inner.MPSMatrixRandom }
+// Description returns the object's -description text.
+func (x *MatrixRandomPhilox) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatrixRandomPhilox) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatrixRandomPhilox) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMatrixRandomPhilox creates a new MatrixRandomPhilox.
+func NewMatrixRandomPhilox() *MatrixRandomPhilox {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixRandomPhilox")), objc.RegisterName("new"))
+	return matrixRandomPhiloxAdopt(_id)
+}
+
+// The starting index in the destination batch.
+//
+// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+func (x *MatrixRandomPhilox) WithBatchStart(batchStart int) *MatrixRandomPhilox {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
+	return x
+}
+
+// The size of the batch to process.
+//
+// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+func (x *MatrixRandomPhilox) WithBatchSize(batchSize int) *MatrixRandomPhilox {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
+	return x
+}
 
 // MatrixRandomPhiloxable is the interface implemented by [MatrixRandomPhilox], for mocking and DI.
 type MatrixRandomPhiloxable interface {
-	Unwrap() *raw.MPSMatrixRandomPhilox
-	WithBatchStart(batchStart uint) *MatrixRandomPhilox
-	WithBatchSize(batchSize uint) *MatrixRandomPhilox
+	obj.Object
+	WithBatchStart(batchStart int) *MatrixRandomPhilox
+	WithBatchSize(batchSize int) *MatrixRandomPhilox
 }
 
 var _ MatrixRandomPhiloxable = (*MatrixRandomPhilox)(nil)

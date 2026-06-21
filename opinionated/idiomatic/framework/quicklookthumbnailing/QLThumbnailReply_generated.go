@@ -5,67 +5,89 @@
 package quicklookthumbnailing
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookthumbnailing"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The object that provides a thumbnail for a custom file type.
 //
-// ThumbnailReply wraps [raw.QLThumbnailReply] with a fluent Go API.
+// ThumbnailReply is an idiomatic wrapper over the Objective-C class QLThumbnailReply.
 type ThumbnailReply struct {
-	inner *raw.QLThumbnailReply
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QLThumbnailReply].
-func (x *ThumbnailReply) Unwrap() *raw.QLThumbnailReply { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ThumbnailReply) ID() objc.ID { return x.inner.Ptr() }
-
-// ThumbnailReplyFromID adopts an existing object pointer as a ThumbnailReply (nil for 0).
+// ThumbnailReplyFromID adopts an existing Objective-C object as a ThumbnailReply
+// (nil for 0), retaining it and registering a release finalizer.
 func ThumbnailReplyFromID(id objc.ID) *ThumbnailReply {
 	if id == 0 {
 		return nil
 	}
-	return &ThumbnailReply{inner: raw.QLThumbnailReplyFromID(id)}
+	x := &ThumbnailReply{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewThumbnailReply creates a new [ThumbnailReply].
+// thumbnailReplyAdopt wraps an Objective-C object that this code just created as a
+// ThumbnailReply (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func thumbnailReplyAdopt(id objc.ID) *ThumbnailReply {
+	if id == 0 {
+		return nil
+	}
+	x := &ThumbnailReply{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ThumbnailReply) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ThumbnailReply) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ThumbnailReply) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewThumbnailReply creates a new ThumbnailReply.
 func NewThumbnailReply() *ThumbnailReply {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QLThumbnailReply")), objc.RegisterName("new"))
-	return &ThumbnailReply{inner: raw.QLThumbnailReplyFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QLThumbnailReply")), objc.RegisterName("new"))
+	return thumbnailReplyAdopt(_id)
 }
 
 // A short string that identifies the file type that the system uses as a badge when producing an icon thumbnail.
 //
-// WithExtensionBadge sets the extensionBadge property and returns the receiver for chaining.
+// WithExtensionBadge sets extensionBadge and returns the receiver so calls can be chained.
 func (x *ThumbnailReply) WithExtensionBadge(extensionBadge string) *ThumbnailReply {
-	x.inner.SetExtensionBadge(foundation.NSStringStringWithUTF8String(extensionBadge))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtensionBadge:"), purego.NSString(extensionBadge))
 	return x
 }
 
 // The extensionBadge is a short string identifying the file type used as a badge when producing an icon.
-//
-// ExtensionBadge calls the underlying ExtensionBadge.
 func (x *ThumbnailReply) ExtensionBadge() string {
-	_r := x.inner.ExtensionBadge()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionBadge"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetExtensionBadge calls the underlying SetExtensionBadge.
 func (x *ThumbnailReply) SetExtensionBadge(extensionBadge string) {
-	x.inner.SetExtensionBadge(foundation.NSStringStringWithUTF8String(extensionBadge))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtensionBadge:"), purego.NSString(extensionBadge))
 }
 
 // ThumbnailReplyable is the interface implemented by [ThumbnailReply], for mocking and DI.
 type ThumbnailReplyable interface {
-	Unwrap() *raw.QLThumbnailReply
+	obj.Object
 	WithExtensionBadge(extensionBadge string) *ThumbnailReply
 	ExtensionBadge() string
 	SetExtensionBadge(extensionBadge string)

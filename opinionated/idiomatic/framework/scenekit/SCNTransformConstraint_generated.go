@@ -5,67 +5,92 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A constraint that runs a specified closure, block in Objective-C, to compute a new transform (position, rotation, and scale) for each node that the constraint affects.
 //
-// TransformConstraint wraps [raw.SCNTransformConstraint] with a fluent Go API.
+// TransformConstraint is an idiomatic wrapper over the Objective-C class SCNTransformConstraint.
 type TransformConstraint struct {
-	inner *raw.SCNTransformConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNTransformConstraint].
-func (x *TransformConstraint) Unwrap() *raw.SCNTransformConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TransformConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// TransformConstraintFromID adopts an existing object pointer as a TransformConstraint (nil for 0).
+// TransformConstraintFromID adopts an existing Objective-C object as a TransformConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func TransformConstraintFromID(id objc.ID) *TransformConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &TransformConstraint{inner: raw.SCNTransformConstraintFromID(id)}
+	x := &TransformConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTransformConstraint creates a new [TransformConstraint].
+// transformConstraintAdopt wraps an Objective-C object that this code just created as a
+// TransformConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func transformConstraintAdopt(id objc.ID) *TransformConstraint {
+	if id == 0 {
+		return nil
+	}
+	x := &TransformConstraint{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TransformConstraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TransformConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TransformConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTransformConstraint creates a new TransformConstraint.
 func NewTransformConstraint() *TransformConstraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNTransformConstraint")), objc.RegisterName("new"))
-	return &TransformConstraint{inner: raw.SCNTransformConstraintFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNTransformConstraint")), objc.RegisterName("new"))
+	return transformConstraintAdopt(_id)
 }
 
-// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
+// Determines whether the constraint is enabled or not. Defaults to YES.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *TransformConstraint) WithEnabled(enabled bool) *TransformConstraint {
-	x.inner.SCNConstraint.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // The influence of the constraint on the node’s transformation.
 //
-// WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
+// WithInfluenceFactor sets influenceFactor and returns the receiver so calls can be chained.
 func (x *TransformConstraint) WithInfluenceFactor(influenceFactor float64) *TransformConstraint {
-	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
 	return x
 }
 
-// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+// Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
 //
-// WithIncremental sets the incremental property and returns the receiver for chaining.
+// WithIncremental sets incremental and returns the receiver so calls can be chained.
 func (x *TransformConstraint) WithIncremental(incremental bool) *TransformConstraint {
-	x.inner.SCNConstraint.SetIncremental(incremental)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
 	return x
 }
-
-func (x *TransformConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNConstraint }
 
 // TransformConstraintable is the interface implemented by [TransformConstraint], for mocking and DI.
 type TransformConstraintable interface {
-	Unwrap() *raw.SCNTransformConstraint
+	obj.Object
 	WithEnabled(enabled bool) *TransformConstraint
 	WithInfluenceFactor(influenceFactor float64) *TransformConstraint
 	WithIncremental(incremental bool) *TransformConstraint

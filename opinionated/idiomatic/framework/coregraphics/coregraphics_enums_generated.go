@@ -979,31 +979,6 @@ func (e CGFontPostScriptFormat) String() string {
 	}
 }
 
-// Drawing locations for gradients.
-// Bitmask — values may be combined with |.
-type CGGradientDrawingOptions int64
-
-const (
-	// The fill should extend beyond the starting location. The color that extends beyond the starting point is the solid color defined by the CGGradientRef object to be at location 0.
-	KCGGradientDrawsBeforeStartLocation CGGradientDrawingOptions = 1
-	// The fill should extend beyond the ending location. The color that extends beyond the ending point is the solid color defined by the CGGradientRef object to be at location 1.
-	KCGGradientDrawsAfterEndLocation CGGradientDrawingOptions = 2
-)
-
-func (e CGGradientDrawingOptions) String() string {
-	var parts []string
-	if e&KCGGradientDrawsBeforeStartLocation != 0 {
-		parts = append(parts, "KCGGradientDrawsBeforeStartLocation")
-	}
-	if e&KCGGradientDrawsAfterEndLocation != 0 {
-		parts = append(parts, "KCGGradientDrawsAfterEndLocation")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
 // Storage options for alpha component data.
 type CGImageAlphaInfo int64
 
@@ -1312,31 +1287,6 @@ func (e CGPDFBox) String() string {
 	}
 }
 
-// The encoding format of PDF data.
-type CGPDFDataFormat int64
-
-const (
-	// The data stream is not encoded.
-	CGPDFDataFormatRaw CGPDFDataFormat = 0
-	// The data stream is encoded in JPEG format.
-	CGPDFDataFormatJPEGEncoded CGPDFDataFormat = 1
-	// The data stream is encoded in JPEG-2000 format.
-	CGPDFDataFormatJPEG2000 CGPDFDataFormat = 2
-)
-
-func (e CGPDFDataFormat) String() string {
-	switch e {
-	case CGPDFDataFormatRaw:
-		return "CGPDFDataFormatRaw"
-	case CGPDFDataFormatJPEGEncoded:
-		return "CGPDFDataFormatJPEGEncoded"
-	case CGPDFDataFormatJPEG2000:
-		return "CGPDFDataFormatJPEG2000"
-	default:
-		return fmt.Sprintf("CGPDFDataFormat(%d)", int64(e))
-	}
-}
-
 // Types of PDF object.
 type CGPDFObjectType int64
 
@@ -1581,31 +1531,6 @@ func (e CGPathDrawingMode) String() string {
 	}
 }
 
-// Different methods for rendering a tiled pattern.
-type CGPatternTiling int64
-
-const (
-	// The pattern cell is not distorted when painted.The spacing between pattern cells may vary by as much as 1 devicepixel.
-	KCGPatternTilingNoDistortion CGPatternTiling = 0
-	// Pattern cells are spaced consistently. Thepattern cell may be distorted by as much as 1 device pixel whenthe pattern is painted.
-	KCGPatternTilingConstantSpacingMinimalDistortion CGPatternTiling = 1
-	// Pattern cells are spaced consistently, as with kCGPatternTilingConstantSpacingMinimalDistortion.The pattern cell may be distorted additionally to permit a moreefficient implementation.
-	KCGPatternTilingConstantSpacing CGPatternTiling = 2
-)
-
-func (e CGPatternTiling) String() string {
-	switch e {
-	case KCGPatternTilingNoDistortion:
-		return "KCGPatternTilingNoDistortion"
-	case KCGPatternTilingConstantSpacingMinimalDistortion:
-		return "KCGPatternTilingConstantSpacingMinimalDistortion"
-	case KCGPatternTilingConstantSpacing:
-		return "KCGPatternTilingConstantSpacing"
-	default:
-		return fmt.Sprintf("CGPatternTiling(%d)", int64(e))
-	}
-}
-
 // Types of screen-update operations.
 // Bitmask — values may be combined with |.
 type CGScreenUpdateOperation int64
@@ -1749,44 +1674,6 @@ func (e CGToneMapping) String() string {
 	default:
 		return fmt.Sprintf("CGToneMapping(%d)", int64(e))
 	}
-}
-
-// The data type to use to specify the type of image to be generated for a window.
-// Bitmask — values may be combined with |.
-type CGWindowImageOption int64
-
-const (
-	KCGWindowImageDefault             CGWindowImageOption = 0
-	KCGWindowImageBoundsIgnoreFraming CGWindowImageOption = 1
-	KCGWindowImageShouldBeOpaque      CGWindowImageOption = 2
-	KCGWindowImageOnlyShadows         CGWindowImageOption = 4
-	// When capturing the window, return the best image resolution. The returned image size may be different than the screen size.
-	KCGWindowImageBestResolution CGWindowImageOption = 8
-	// When capturing the window, return the nominal image resolution. The returned image size is the same as the screen size.
-	KCGWindowImageNominalResolution CGWindowImageOption = 16
-)
-
-func (e CGWindowImageOption) String() string {
-	var parts []string
-	if e&KCGWindowImageBoundsIgnoreFraming != 0 {
-		parts = append(parts, "KCGWindowImageBoundsIgnoreFraming")
-	}
-	if e&KCGWindowImageShouldBeOpaque != 0 {
-		parts = append(parts, "KCGWindowImageShouldBeOpaque")
-	}
-	if e&KCGWindowImageOnlyShadows != 0 {
-		parts = append(parts, "KCGWindowImageOnlyShadows")
-	}
-	if e&KCGWindowImageBestResolution != 0 {
-		parts = append(parts, "KCGWindowImageBestResolution")
-	}
-	if e&KCGWindowImageNominalResolution != 0 {
-		parts = append(parts, "KCGWindowImageNominalResolution")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }
 
 // Keys that represent the standard window levels in macOS. Quartz includes these keys to support application frameworks like Cocoa. Applications do not need to use them directly.

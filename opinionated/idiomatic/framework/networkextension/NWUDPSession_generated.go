@@ -6,70 +6,85 @@ package networkextension
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object to manage a UDP session to a network endpoint.
 //
-// NWUDPSession wraps [raw.NWUDPSession] with a fluent Go API.
+// NWUDPSession is an idiomatic wrapper over the Objective-C class NWUDPSession.
 type NWUDPSession struct {
-	inner *raw.NWUDPSession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NWUDPSession].
-func (x *NWUDPSession) Unwrap() *raw.NWUDPSession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NWUDPSession) ID() objc.ID { return x.inner.Ptr() }
-
-// NWUDPSessionFromID adopts an existing object pointer as a NWUDPSession (nil for 0).
+// NWUDPSessionFromID adopts an existing Objective-C object as a NWUDPSession
+// (nil for 0), retaining it and registering a release finalizer.
 func NWUDPSessionFromID(id objc.ID) *NWUDPSession {
 	if id == 0 {
 		return nil
 	}
-	return &NWUDPSession{inner: raw.NWUDPSessionFromID(id)}
+	x := &NWUDPSession{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// nWUDPSessionAdopt wraps an Objective-C object that this code just created as a
+// NWUDPSession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nWUDPSessionAdopt(id objc.ID) *NWUDPSession {
+	if id == 0 {
+		return nil
+	}
+	x := &NWUDPSession{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NWUDPSession) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NWUDPSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NWUDPSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // This convenience initializer can be used to create a new session based on the original session’s endpoint and parameters.
 //
-// NewNWUDPSessionWithUpgradeForSession creates a new [NWUDPSession].
-func NewNWUDPSessionWithUpgradeForSession(session *raw.NWUDPSession) *NWUDPSession {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NWUDPSession")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUpgradeForSession:"), session.Ptr())
-	return &NWUDPSession{inner: raw.NWUDPSessionFromID(_id)}
+// NewNWUDPSessionWithUpgradeForSession creates a new NWUDPSession.
+func NewNWUDPSessionWithUpgradeForSession(session *NWUDPSession) *NWUDPSession {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NWUDPSession")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUpgradeForSession:"), objref.IDOf(session))
+	return nWUDPSessionAdopt(_id)
 }
 
 // Mark the current value of resolvedEndpoint as unusable, and try to switch to the next available endpoint.
-//
-// TryNextResolvedEndpoint calls the underlying TryNextResolvedEndpoint.
 func (x *NWUDPSession) TryNextResolvedEndpoint() {
-	x.inner.TryNextResolvedEndpoint()
-}
-
-// Set a read handler for datagrams.
-//
-// SetReadHandlerMaxDatagrams calls the underlying SetReadHandlerMaxDatagrams.
-func (x *NWUDPSession) SetReadHandlerMaxDatagrams(handler func(*foundation.NSArray[*foundation.NSData], unsafe.Pointer), maxDatagrams uint) {
-	x.inner.SetReadHandlerMaxDatagrams(handler, maxDatagrams)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tryNextResolvedEndpoint"))
 }
 
 // Write multiple datagrams.
 //
 // WriteMultipleDatagrams blocks until the operation completes or ctx is cancelled.
-func (x *NWUDPSession) WriteMultipleDatagrams(ctx context.Context, datagramArray *foundation.NSArray[*foundation.NSData]) error {
+func (x *NWUDPSession) WriteMultipleDatagrams(ctx context.Context, datagramArray []obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.WriteMultipleDatagramsCompletionHandler(datagramArray, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeMultipleDatagrams:completionHandler:"), purego.SliceToNSArray(datagramArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -81,15 +96,14 @@ func (x *NWUDPSession) WriteMultipleDatagrams(ctx context.Context, datagramArray
 // Write a single datagram.
 //
 // WriteDatagram blocks until the operation completes or ctx is cancelled.
-func (x *NWUDPSession) WriteDatagram(ctx context.Context, datagram *foundation.NSData) error {
+func (x *NWUDPSession) WriteDatagram(ctx context.Context, datagram obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.WriteDatagramCompletionHandler(datagram, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeDatagram:completionHandler:"), objref.IDOf(datagram), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -99,80 +113,52 @@ func (x *NWUDPSession) WriteDatagram(ctx context.Context, datagram *foundation.N
 }
 
 // Cancel the session.
-//
-// Cancel calls the underlying Cancel.
 func (x *NWUDPSession) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// @property state @discussion The current state of the UDP session. If the state is NWUDPSessionStateReady, then the connection is eligible for reading and writing. The state will be NWUDPSessionStateFailed if the endpoint could not be resolved, or all endpoints have been rejected. Use KVO to watch for changes.
-//
-// State calls the underlying State.
+// The current state of the UDP session. If the state is NWUDPSessionStateReady, then the connection is eligible for reading and writing. The state will be NWUDPSessionStateFailed if the endpoint could not be resolved, or all endpoints have been rejected. Use KVO to watch for changes.
 func (x *NWUDPSession) State() NWUDPSessionState {
-	return NWUDPSessionState(x.inner.State())
+	_r := objc.Send[NWUDPSessionState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
 }
 
-// @property endpoint @discussion The provided endpoint.
-//
-// Endpoint calls the underlying Endpoint.
-func (x *NWUDPSession) Endpoint() unsafe.Pointer {
-	return x.inner.Endpoint()
-}
-
-// @property resolvedEndpoint @discussion The currently targeted remote endpoint. Use KVO to watch for changes.
-//
-// ResolvedEndpoint calls the underlying ResolvedEndpoint.
-func (x *NWUDPSession) ResolvedEndpoint() unsafe.Pointer {
-	return x.inner.ResolvedEndpoint()
-}
-
-// @property viable @discussion YES if the connection can read and write data, NO otherwise. Use KVO to watch this property.
-//
-// IsViable calls the underlying IsViable.
+// YES if the connection can read and write data, NO otherwise. Use KVO to watch this property.
 func (x *NWUDPSession) IsViable() bool {
-	return x.inner.IsViable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isViable"))
+	return _r
 }
 
-// @property hasBetterPath @discussion YES if there is another path available that is preferred over the currentPath. To take advantage of this path, create a new UDPSession. Use KVO to watch for changes.
-//
-// HasBetterPath calls the underlying HasBetterPath.
+// YES if there is another path available that is preferred over the currentPath. To take advantage of this path, create a new UDPSession. Use KVO to watch for changes.
 func (x *NWUDPSession) HasBetterPath() bool {
-	return x.inner.HasBetterPath()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasBetterPath"))
+	return _r
 }
 
-// @property currentPath @discussion The current evaluated path for the resolvedEndpoint. Use KVO to watch for changes.
-//
-// CurrentPath calls the underlying CurrentPath.
+// The current evaluated path for the resolvedEndpoint. Use KVO to watch for changes.
 func (x *NWUDPSession) CurrentPath() *NWPath {
-	_r := x.inner.CurrentPath()
-	if _r == nil {
-		return nil
-	}
-	return &NWPath{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentPath"))
+	return NWPathFromID(_r)
 }
 
-// @property maximumDatagramLength @discussion The maximum size of a datagram to be written currently. If a datagram is written with a longer length, the datagram may be fragmented or encounter an error. Note that this value is not guaranteed to be the maximum datagram length for end-to-end communication across the network. Use KVO to watch for changes.
-//
-// MaximumDatagramLength calls the underlying MaximumDatagramLength.
-func (x *NWUDPSession) MaximumDatagramLength() uint {
-	return x.inner.MaximumDatagramLength()
+// The maximum size of a datagram to be written currently. If a datagram is written with a longer length, the datagram may be fragmented or encounter an error. Note that this value is not guaranteed to be the maximum datagram length for end-to-end communication across the network. Use KVO to watch for changes.
+func (x *NWUDPSession) MaximumDatagramLength() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumDatagramLength"))
+	return _r
 }
 
 // NWUDPSessionable is the interface implemented by [NWUDPSession], for mocking and DI.
 type NWUDPSessionable interface {
-	Unwrap() *raw.NWUDPSession
+	obj.Object
 	TryNextResolvedEndpoint()
-	SetReadHandlerMaxDatagrams(handler func(*foundation.NSArray[*foundation.NSData], unsafe.Pointer), maxDatagrams uint)
-	WriteMultipleDatagrams(ctx context.Context, datagramArray *foundation.NSArray[*foundation.NSData]) error
-	WriteDatagram(ctx context.Context, datagram *foundation.NSData) error
+	WriteMultipleDatagrams(ctx context.Context, datagramArray []obj.Object) error
+	WriteDatagram(ctx context.Context, datagram obj.Object) error
 	Cancel()
 	State() NWUDPSessionState
-	Endpoint() unsafe.Pointer
-	ResolvedEndpoint() unsafe.Pointer
 	IsViable() bool
 	HasBetterPath() bool
 	CurrentPath() *NWPath
-	MaximumDatagramLength() uint
+	MaximumDatagramLength() int
 }
 
 var _ NWUDPSessionable = (*NWUDPSession)(nil)

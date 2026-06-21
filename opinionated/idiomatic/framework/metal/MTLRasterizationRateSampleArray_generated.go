@@ -5,58 +5,81 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An array instance that contains rasterization rates.
 //
-// RasterizationRateSampleArray wraps [raw.MTLRasterizationRateSampleArray] with a fluent Go API.
+// RasterizationRateSampleArray is an idiomatic wrapper over the Objective-C class MTLRasterizationRateSampleArray.
 type RasterizationRateSampleArray struct {
-	inner *raw.MTLRasterizationRateSampleArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLRasterizationRateSampleArray].
-func (x *RasterizationRateSampleArray) Unwrap() *raw.MTLRasterizationRateSampleArray { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RasterizationRateSampleArray) ID() objc.ID { return x.inner.Ptr() }
-
-// RasterizationRateSampleArrayFromID adopts an existing object pointer as a RasterizationRateSampleArray (nil for 0).
+// RasterizationRateSampleArrayFromID adopts an existing Objective-C object as a RasterizationRateSampleArray
+// (nil for 0), retaining it and registering a release finalizer.
 func RasterizationRateSampleArrayFromID(id objc.ID) *RasterizationRateSampleArray {
 	if id == 0 {
 		return nil
 	}
-	return &RasterizationRateSampleArray{inner: raw.MTLRasterizationRateSampleArrayFromID(id)}
+	x := &RasterizationRateSampleArray{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRasterizationRateSampleArray creates a new [RasterizationRateSampleArray].
+// rasterizationRateSampleArrayAdopt wraps an Objective-C object that this code just created as a
+// RasterizationRateSampleArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rasterizationRateSampleArrayAdopt(id objc.ID) *RasterizationRateSampleArray {
+	if id == 0 {
+		return nil
+	}
+	x := &RasterizationRateSampleArray{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RasterizationRateSampleArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RasterizationRateSampleArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RasterizationRateSampleArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRasterizationRateSampleArray creates a new RasterizationRateSampleArray.
 func NewRasterizationRateSampleArray() *RasterizationRateSampleArray {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLRasterizationRateSampleArray")), objc.RegisterName("new"))
-	return &RasterizationRateSampleArray{inner: raw.MTLRasterizationRateSampleArrayFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLRasterizationRateSampleArray")), objc.RegisterName("new"))
+	return rasterizationRateSampleArrayAdopt(_id)
 }
 
 // Retrieves the sample value at the specified index.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *RasterizationRateSampleArray) ObjectAtIndexedSubscript(index uint) *foundation.NSNumber {
-	return x.inner.ObjectAtIndexedSubscript(index)
+func (x *RasterizationRateSampleArray) ObjectAtIndexedSubscript(index int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
+	return obj.Wrap(_r)
 }
 
 // Stores a sample value at the specified index.
-//
-// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
-func (x *RasterizationRateSampleArray) SetObjectAtIndexedSubscript(value *foundation.NSNumber, index uint) {
-	x.inner.SetObjectAtIndexedSubscript(value, index)
+func (x *RasterizationRateSampleArray) SetObjectAtIndexedSubscript(value obj.Object, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(value), index)
 }
 
 // RasterizationRateSampleArrayable is the interface implemented by [RasterizationRateSampleArray], for mocking and DI.
 type RasterizationRateSampleArrayable interface {
-	Unwrap() *raw.MTLRasterizationRateSampleArray
-	ObjectAtIndexedSubscript(index uint) *foundation.NSNumber
-	SetObjectAtIndexedSubscript(value *foundation.NSNumber, index uint)
+	obj.Object
+	ObjectAtIndexedSubscript(index int) obj.Object
+	SetObjectAtIndexedSubscript(value obj.Object, index int)
 }
 
 var _ RasterizationRateSampleArrayable = (*RasterizationRateSampleArray)(nil)

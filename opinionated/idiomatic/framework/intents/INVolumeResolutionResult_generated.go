@@ -5,45 +5,68 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A resolution result for a volume associated with an intent.
 //
-// VolumeResolutionResult wraps [raw.INVolumeResolutionResult] with a fluent Go API.
+// VolumeResolutionResult is an idiomatic wrapper over the Objective-C class INVolumeResolutionResult.
 type VolumeResolutionResult struct {
-	inner *raw.INVolumeResolutionResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INVolumeResolutionResult].
-func (x *VolumeResolutionResult) Unwrap() *raw.INVolumeResolutionResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VolumeResolutionResult) ID() objc.ID { return x.inner.Ptr() }
-
-// VolumeResolutionResultFromID adopts an existing object pointer as a VolumeResolutionResult (nil for 0).
+// VolumeResolutionResultFromID adopts an existing Objective-C object as a VolumeResolutionResult
+// (nil for 0), retaining it and registering a release finalizer.
 func VolumeResolutionResultFromID(id objc.ID) *VolumeResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	return &VolumeResolutionResult{inner: raw.INVolumeResolutionResultFromID(id)}
+	x := &VolumeResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVolumeResolutionResult creates a new [VolumeResolutionResult].
+// volumeResolutionResultAdopt wraps an Objective-C object that this code just created as a
+// VolumeResolutionResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func volumeResolutionResultAdopt(id objc.ID) *VolumeResolutionResult {
+	if id == 0 {
+		return nil
+	}
+	x := &VolumeResolutionResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VolumeResolutionResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VolumeResolutionResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VolumeResolutionResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVolumeResolutionResult creates a new VolumeResolutionResult.
 func NewVolumeResolutionResult() *VolumeResolutionResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INVolumeResolutionResult")), objc.RegisterName("new"))
-	return &VolumeResolutionResult{inner: raw.INVolumeResolutionResultFromID(_id)}
-}
-
-func (x *VolumeResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
-	return &x.inner.INIntentResolutionResult
+	_id := objc.Send[objc.ID](objc.ID(_class("INVolumeResolutionResult")), objc.RegisterName("new"))
+	return volumeResolutionResultAdopt(_id)
 }
 
 // VolumeResolutionResultable is the interface implemented by [VolumeResolutionResult], for mocking and DI.
 type VolumeResolutionResultable interface {
-	Unwrap() *raw.INVolumeResolutionResult
+	obj.Object
 }
 
 var _ VolumeResolutionResultable = (*VolumeResolutionResult)(nil)

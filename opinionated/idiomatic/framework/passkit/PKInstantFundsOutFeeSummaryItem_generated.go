@@ -5,73 +5,95 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A summary item that represents a fee for an instant funds out transfer.
 //
-// InstantFundsOutFeeSummaryItem wraps [raw.PKInstantFundsOutFeeSummaryItem] with a fluent Go API.
+// InstantFundsOutFeeSummaryItem is an idiomatic wrapper over the Objective-C class PKInstantFundsOutFeeSummaryItem.
 type InstantFundsOutFeeSummaryItem struct {
-	inner *raw.PKInstantFundsOutFeeSummaryItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKInstantFundsOutFeeSummaryItem].
-func (x *InstantFundsOutFeeSummaryItem) Unwrap() *raw.PKInstantFundsOutFeeSummaryItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *InstantFundsOutFeeSummaryItem) ID() objc.ID { return x.inner.Ptr() }
-
-// InstantFundsOutFeeSummaryItemFromID adopts an existing object pointer as a InstantFundsOutFeeSummaryItem (nil for 0).
+// InstantFundsOutFeeSummaryItemFromID adopts an existing Objective-C object as a InstantFundsOutFeeSummaryItem
+// (nil for 0), retaining it and registering a release finalizer.
 func InstantFundsOutFeeSummaryItemFromID(id objc.ID) *InstantFundsOutFeeSummaryItem {
 	if id == 0 {
 		return nil
 	}
-	return &InstantFundsOutFeeSummaryItem{inner: raw.PKInstantFundsOutFeeSummaryItemFromID(id)}
+	x := &InstantFundsOutFeeSummaryItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewInstantFundsOutFeeSummaryItem creates a new [InstantFundsOutFeeSummaryItem].
+// instantFundsOutFeeSummaryItemAdopt wraps an Objective-C object that this code just created as a
+// InstantFundsOutFeeSummaryItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func instantFundsOutFeeSummaryItemAdopt(id objc.ID) *InstantFundsOutFeeSummaryItem {
+	if id == 0 {
+		return nil
+	}
+	x := &InstantFundsOutFeeSummaryItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *InstantFundsOutFeeSummaryItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *InstantFundsOutFeeSummaryItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *InstantFundsOutFeeSummaryItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewInstantFundsOutFeeSummaryItem creates a new InstantFundsOutFeeSummaryItem.
 func NewInstantFundsOutFeeSummaryItem() *InstantFundsOutFeeSummaryItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKInstantFundsOutFeeSummaryItem")), objc.RegisterName("new"))
-	return &InstantFundsOutFeeSummaryItem{inner: raw.PKInstantFundsOutFeeSummaryItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKInstantFundsOutFeeSummaryItem")), objc.RegisterName("new"))
+	return instantFundsOutFeeSummaryItemAdopt(_id)
 }
 
 // A short, localized description of the item.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *InstantFundsOutFeeSummaryItem) WithLabel(label string) *InstantFundsOutFeeSummaryItem {
-	x.inner.PKPaymentSummaryItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // The summary item’s amount.
 //
-// WithAmount sets the amount property and returns the receiver for chaining.
-func (x *InstantFundsOutFeeSummaryItem) WithAmount(amount *foundation.NSDecimalNumber) *InstantFundsOutFeeSummaryItem {
-	x.inner.PKPaymentSummaryItem.SetAmount(amount)
+// WithAmount sets amount and returns the receiver so calls can be chained.
+func (x *InstantFundsOutFeeSummaryItem) WithAmount(amount obj.Object) *InstantFundsOutFeeSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return x
 }
 
 // The summary item’s type that indicates whether the amount is final.
 //
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *InstantFundsOutFeeSummaryItem) WithType(type_ PKPaymentSummaryItemType) *InstantFundsOutFeeSummaryItem {
-	x.inner.PKPaymentSummaryItem.SetType(raw.PKPaymentSummaryItemType(type_))
+// WithType sets type_ and returns the receiver so calls can be chained.
+func (x *InstantFundsOutFeeSummaryItem) WithType(type_ PaymentSummaryItemType) *InstantFundsOutFeeSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
-}
-
-func (x *InstantFundsOutFeeSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem {
-	return &x.inner.PKPaymentSummaryItem
 }
 
 // InstantFundsOutFeeSummaryItemable is the interface implemented by [InstantFundsOutFeeSummaryItem], for mocking and DI.
 type InstantFundsOutFeeSummaryItemable interface {
-	Unwrap() *raw.PKInstantFundsOutFeeSummaryItem
+	obj.Object
 	WithLabel(label string) *InstantFundsOutFeeSummaryItem
-	WithAmount(amount *foundation.NSDecimalNumber) *InstantFundsOutFeeSummaryItem
-	WithType(type_ PKPaymentSummaryItemType) *InstantFundsOutFeeSummaryItem
+	WithAmount(amount obj.Object) *InstantFundsOutFeeSummaryItem
+	WithType(type_ PaymentSummaryItemType) *InstantFundsOutFeeSummaryItem
 }
 
 var _ InstantFundsOutFeeSummaryItemable = (*InstantFundsOutFeeSummaryItem)(nil)

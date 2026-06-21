@@ -5,114 +5,104 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A controller profile that supports the Xbox controller.
 //
-// XboxGamepad wraps [raw.GCXboxGamepad] with a fluent Go API.
+// XboxGamepad is an idiomatic wrapper over the Objective-C class GCXboxGamepad.
 type XboxGamepad struct {
-	inner *raw.GCXboxGamepad
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCXboxGamepad].
-func (x *XboxGamepad) Unwrap() *raw.GCXboxGamepad { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *XboxGamepad) ID() objc.ID { return x.inner.Ptr() }
-
-// XboxGamepadFromID adopts an existing object pointer as a XboxGamepad (nil for 0).
+// XboxGamepadFromID adopts an existing Objective-C object as a XboxGamepad
+// (nil for 0), retaining it and registering a release finalizer.
 func XboxGamepadFromID(id objc.ID) *XboxGamepad {
 	if id == 0 {
 		return nil
 	}
-	return &XboxGamepad{inner: raw.GCXboxGamepadFromID(id)}
+	x := &XboxGamepad{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewXboxGamepad creates a new [XboxGamepad].
+// xboxGamepadAdopt wraps an Objective-C object that this code just created as a
+// XboxGamepad (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func xboxGamepadAdopt(id objc.ID) *XboxGamepad {
+	if id == 0 {
+		return nil
+	}
+	x := &XboxGamepad{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *XboxGamepad) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *XboxGamepad) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *XboxGamepad) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewXboxGamepad creates a new XboxGamepad.
 func NewXboxGamepad() *XboxGamepad {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCXboxGamepad")), objc.RegisterName("new"))
-	return &XboxGamepad{inner: raw.GCXboxGamepadFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GCXboxGamepad")), objc.RegisterName("new"))
+	return xboxGamepadAdopt(_id)
 }
 
 // The block that the profile calls when an element’s value changes.
 //
-// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
-func (x *XboxGamepad) WithValueChangedHandler(valueChangedHandler func(*raw.GCExtendedGamepad, *raw.GCControllerElement)) *XboxGamepad {
-	x.inner.GCExtendedGamepad.SetValueChangedHandler(valueChangedHandler)
+// WithValueDidChangeHandler sets valueDidChangeHandler and returns the receiver so calls can be chained.
+func (x *XboxGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *XboxGamepad {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return x
 }
 
-// The block that the profile calls when an element’s value changes.
-//
-// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
-func (x *XboxGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *XboxGamepad {
-	x.inner.GCExtendedGamepad.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
-	return x
-}
-
-// Some Xbox controller variants can support up to four additional buttons. @example The standard Bluetooth-enabled Xbox Wireless Controller does not have paddle buttons @example The Xbox Elite Wireless Controller has four extra digital buttons. @note The four extra digital buttons on the Xbox Elite Wireless Controller are only directly addressable when the controller is on its default mapping profile. Otherwise, the paddle buttons are directly bound to other inputs on the controller.
-//
-// PaddleButton1 calls the underlying PaddleButton1.
+// Some Xbox controller variants can support up to four additional buttons.
 func (x *XboxGamepad) PaddleButton1() *ControllerButtonInput {
-	_r := x.inner.PaddleButton1()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddleButton1"))
+	return ControllerButtonInputFromID(_r)
 }
 
-// PaddleButton2 calls the underlying PaddleButton2.
 func (x *XboxGamepad) PaddleButton2() *ControllerButtonInput {
-	_r := x.inner.PaddleButton2()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddleButton2"))
+	return ControllerButtonInputFromID(_r)
 }
 
-// PaddleButton3 calls the underlying PaddleButton3.
 func (x *XboxGamepad) PaddleButton3() *ControllerButtonInput {
-	_r := x.inner.PaddleButton3()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddleButton3"))
+	return ControllerButtonInputFromID(_r)
 }
 
-// PaddleButton4 calls the underlying PaddleButton4.
 func (x *XboxGamepad) PaddleButton4() *ControllerButtonInput {
-	_r := x.inner.PaddleButton4()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddleButton4"))
+	return ControllerButtonInputFromID(_r)
 }
 
-// Some Xbox controller variants feature a Share button. @example The Bluetooth-enabled Xbox Wireless Controller introduced with the Xbox Series X and Xbox Series S in 2020 has a Share button. @note The Share button is reserved by the system for screenshot and video recording gestures. If you wish to disable these gestures in your app and take control of the Share button, set buttonShare.preferredSystemGestureState to GCSystemGestureStateDisabled.
-//
-// ButtonShare calls the underlying ButtonShare.
+// Some Xbox controller variants feature a Share button.
 func (x *XboxGamepad) ButtonShare() *ControllerButtonInput {
-	_r := x.inner.ButtonShare()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
-}
-
-func (x *XboxGamepad) asExtendedGamepad() *raw.GCExtendedGamepad { return &x.inner.GCExtendedGamepad }
-
-func (x *XboxGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
-	return &x.inner.GCExtendedGamepad.GCPhysicalInputProfile
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonShare"))
+	return ControllerButtonInputFromID(_r)
 }
 
 // XboxGamepadable is the interface implemented by [XboxGamepad], for mocking and DI.
 type XboxGamepadable interface {
-	Unwrap() *raw.GCXboxGamepad
-	WithValueChangedHandler(valueChangedHandler func(*raw.GCExtendedGamepad, *raw.GCControllerElement)) *XboxGamepad
-	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *XboxGamepad
+	obj.Object
+	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *XboxGamepad
 	PaddleButton1() *ControllerButtonInput
 	PaddleButton2() *ControllerButtonInput
 	PaddleButton3() *ControllerButtonInput

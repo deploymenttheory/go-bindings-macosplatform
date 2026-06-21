@@ -5,43 +5,68 @@
 package coreaudiokit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiokit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A window controller that displays available network audio devices.
 //
-// CANetworkBrowserWindowController wraps [raw.CANetworkBrowserWindowController] with a fluent Go API.
+// CANetworkBrowserWindowController is an idiomatic wrapper over the Objective-C class CANetworkBrowserWindowController.
 type CANetworkBrowserWindowController struct {
-	inner *raw.CANetworkBrowserWindowController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CANetworkBrowserWindowController].
-func (x *CANetworkBrowserWindowController) Unwrap() *raw.CANetworkBrowserWindowController {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CANetworkBrowserWindowController) ID() objc.ID { return x.inner.Ptr() }
-
-// CANetworkBrowserWindowControllerFromID adopts an existing object pointer as a CANetworkBrowserWindowController (nil for 0).
+// CANetworkBrowserWindowControllerFromID adopts an existing Objective-C object as a CANetworkBrowserWindowController
+// (nil for 0), retaining it and registering a release finalizer.
 func CANetworkBrowserWindowControllerFromID(id objc.ID) *CANetworkBrowserWindowController {
 	if id == 0 {
 		return nil
 	}
-	return &CANetworkBrowserWindowController{inner: raw.CANetworkBrowserWindowControllerFromID(id)}
+	x := &CANetworkBrowserWindowController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCANetworkBrowserWindowController creates a new [CANetworkBrowserWindowController].
+// cANetworkBrowserWindowControllerAdopt wraps an Objective-C object that this code just created as a
+// CANetworkBrowserWindowController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cANetworkBrowserWindowControllerAdopt(id objc.ID) *CANetworkBrowserWindowController {
+	if id == 0 {
+		return nil
+	}
+	x := &CANetworkBrowserWindowController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CANetworkBrowserWindowController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CANetworkBrowserWindowController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CANetworkBrowserWindowController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCANetworkBrowserWindowController creates a new CANetworkBrowserWindowController.
 func NewCANetworkBrowserWindowController() *CANetworkBrowserWindowController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CANetworkBrowserWindowController")), objc.RegisterName("new"))
-	return &CANetworkBrowserWindowController{inner: raw.CANetworkBrowserWindowControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CANetworkBrowserWindowController")), objc.RegisterName("new"))
+	return cANetworkBrowserWindowControllerAdopt(_id)
 }
 
 // CANetworkBrowserWindowControllerable is the interface implemented by [CANetworkBrowserWindowController], for mocking and DI.
 type CANetworkBrowserWindowControllerable interface {
-	Unwrap() *raw.CANetworkBrowserWindowController
+	obj.Object
 }
 
 var _ CANetworkBrowserWindowControllerable = (*CANetworkBrowserWindowController)(nil)

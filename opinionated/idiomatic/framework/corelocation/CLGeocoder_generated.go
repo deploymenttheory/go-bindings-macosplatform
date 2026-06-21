@@ -5,122 +5,80 @@
 package corelocation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An interface for converting between geographic coordinates and place names.
 //
-// Geocoder wraps [raw.CLGeocoder] with a fluent Go API.
+// Geocoder is an idiomatic wrapper over the Objective-C class CLGeocoder.
 type Geocoder struct {
-	inner *raw.CLGeocoder
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLGeocoder].
-func (x *Geocoder) Unwrap() *raw.CLGeocoder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Geocoder) ID() objc.ID { return x.inner.Ptr() }
-
-// GeocoderFromID adopts an existing object pointer as a Geocoder (nil for 0).
+// GeocoderFromID adopts an existing Objective-C object as a Geocoder
+// (nil for 0), retaining it and registering a release finalizer.
 func GeocoderFromID(id objc.ID) *Geocoder {
 	if id == 0 {
 		return nil
 	}
-	return &Geocoder{inner: raw.CLGeocoderFromID(id)}
+	x := &Geocoder{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGeocoder creates a new [Geocoder].
+// geocoderAdopt wraps an Objective-C object that this code just created as a
+// Geocoder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func geocoderAdopt(id objc.ID) *Geocoder {
+	if id == 0 {
+		return nil
+	}
+	x := &Geocoder{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Geocoder) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Geocoder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Geocoder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGeocoder creates a new Geocoder.
 func NewGeocoder() *Geocoder {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLGeocoder")), objc.RegisterName("new"))
-	return &Geocoder{inner: raw.CLGeocoderFromID(_id)}
-}
-
-// Submits a reverse-geocoding request for the specified location.
-//
-// ReverseGeocodeLocationCompletionHandler calls the underlying ReverseGeocodeLocationCompletionHandler.
-func (x *Geocoder) ReverseGeocodeLocationCompletionHandler(location unsafe.Pointer, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer)) {
-	x.inner.ReverseGeocodeLocationCompletionHandler(location, completionHandler)
-}
-
-// Submits a reverse-geocoding request for the specified location and locale.
-//
-// ReverseGeocodeLocationPreferredLocaleCompletionHandler calls the underlying ReverseGeocodeLocationPreferredLocaleCompletionHandler.
-func (x *Geocoder) ReverseGeocodeLocationPreferredLocaleCompletionHandler(location unsafe.Pointer, locale *foundation.NSLocale, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer)) {
-	x.inner.ReverseGeocodeLocationPreferredLocaleCompletionHandler(location, locale, completionHandler)
-}
-
-// Submits a forward-geocoding request using the specified address dictionary.
-//
-// GeocodeAddressDictionaryCompletionHandler calls the underlying GeocodeAddressDictionaryCompletionHandler.
-func (x *Geocoder) GeocodeAddressDictionaryCompletionHandler(addressDictionary *foundation.NSDictionary[objc.ID, objc.ID], completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer)) {
-	x.inner.GeocodeAddressDictionaryCompletionHandler(addressDictionary, completionHandler)
-}
-
-// Submits a forward-geocoding request using the specified string and region information.
-//
-// GeocodeAddressStringInRegionCompletionHandler calls the underlying GeocodeAddressStringInRegionCompletionHandler.
-func (x *Geocoder) GeocodeAddressStringInRegionCompletionHandler(addressString string, region *raw.CLRegion, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer)) {
-	x.inner.GeocodeAddressStringInRegionCompletionHandler(foundation.NSStringStringWithUTF8String(addressString), region, completionHandler)
-}
-
-// Submits a forward-geocoding requesting using the specified address string and locale information.
-//
-// GeocodeAddressStringInRegionPreferredLocaleCompletionHandler calls the underlying GeocodeAddressStringInRegionPreferredLocaleCompletionHandler.
-func (x *Geocoder) GeocodeAddressStringInRegionPreferredLocaleCompletionHandler(addressString string, region *raw.CLRegion, locale *foundation.NSLocale, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer)) {
-	x.inner.GeocodeAddressStringInRegionPreferredLocaleCompletionHandler(foundation.NSStringStringWithUTF8String(addressString), region, locale, completionHandler)
-}
-
-// Submits a forward-geocoding request using the specified string.
-//
-// GeocodeAddressStringCompletionHandler calls the underlying GeocodeAddressStringCompletionHandler.
-func (x *Geocoder) GeocodeAddressStringCompletionHandler(addressString string, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer)) {
-	x.inner.GeocodeAddressStringCompletionHandler(foundation.NSStringStringWithUTF8String(addressString), completionHandler)
+	_id := objc.Send[objc.ID](objc.ID(_class("CLGeocoder")), objc.RegisterName("new"))
+	return geocoderAdopt(_id)
 }
 
 // Cancels a pending geocoding request.
-//
-// CancelGeocode calls the underlying CancelGeocode.
 func (x *Geocoder) CancelGeocode() {
-	x.inner.CancelGeocode()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelGeocode"))
 }
 
-// IsGeocoding calls the underlying IsGeocoding.
 func (x *Geocoder) IsGeocoding() bool {
-	return x.inner.IsGeocoding()
-}
-
-// Submits a forward-geocoding requesting using the specified Contacts framework information.
-//
-// GeocodePostalAddressCompletionHandler calls the underlying GeocodePostalAddressCompletionHandler.
-func (x *Geocoder) GeocodePostalAddressCompletionHandler(postalAddress *contacts.CNPostalAddress, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer)) {
-	x.inner.GeocodePostalAddressCompletionHandler(postalAddress, completionHandler)
-}
-
-// Submits a forward-geocoding requesting using the specified locale and Contacts framework information.
-//
-// GeocodePostalAddressPreferredLocaleCompletionHandler calls the underlying GeocodePostalAddressPreferredLocaleCompletionHandler.
-func (x *Geocoder) GeocodePostalAddressPreferredLocaleCompletionHandler(postalAddress *contacts.CNPostalAddress, locale *foundation.NSLocale, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer)) {
-	x.inner.GeocodePostalAddressPreferredLocaleCompletionHandler(postalAddress, locale, completionHandler)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGeocoding"))
+	return _r
 }
 
 // Geocoderable is the interface implemented by [Geocoder], for mocking and DI.
 type Geocoderable interface {
-	Unwrap() *raw.CLGeocoder
-	ReverseGeocodeLocationCompletionHandler(location unsafe.Pointer, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer))
-	ReverseGeocodeLocationPreferredLocaleCompletionHandler(location unsafe.Pointer, locale *foundation.NSLocale, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer))
-	GeocodeAddressDictionaryCompletionHandler(addressDictionary *foundation.NSDictionary[objc.ID, objc.ID], completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer))
-	GeocodeAddressStringInRegionCompletionHandler(addressString string, region *raw.CLRegion, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer))
-	GeocodeAddressStringInRegionPreferredLocaleCompletionHandler(addressString string, region *raw.CLRegion, locale *foundation.NSLocale, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer))
-	GeocodeAddressStringCompletionHandler(addressString string, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer))
+	obj.Object
 	CancelGeocode()
 	IsGeocoding() bool
-	GeocodePostalAddressCompletionHandler(postalAddress *contacts.CNPostalAddress, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer))
-	GeocodePostalAddressPreferredLocaleCompletionHandler(postalAddress *contacts.CNPostalAddress, locale *foundation.NSLocale, completionHandler func(*foundation.NSArray[*raw.CLPlacemark], unsafe.Pointer))
 }
 
 var _ Geocoderable = (*Geocoder)(nil)

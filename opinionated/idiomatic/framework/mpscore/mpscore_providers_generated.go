@@ -5,25 +5,25 @@
 package mpscore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// ImageProvider is implemented by Image and any idiomatic type wrapping a MPSImage subclass.
+// ImageProvider is accepted wherever a MPSImage (or one of its subclasses) is expected.
 type ImageProvider interface {
-	asImage() *raw.MPSImage
+	objref.Object
 }
 
-// MatrixProvider is implemented by Matrix and any idiomatic type wrapping a MPSMatrix subclass.
+// MatrixProvider is accepted wherever a MPSMatrix (or one of its subclasses) is expected.
 type MatrixProvider interface {
-	asMatrix() *raw.MPSMatrix
+	objref.Object
 }
 
-// NDArrayProvider is implemented by NDArray and any idiomatic type wrapping a MPSNDArray subclass.
+// NDArrayProvider is accepted wherever a MPSNDArray (or one of its subclasses) is expected.
 type NDArrayProvider interface {
-	asNDArray() *raw.MPSNDArray
+	objref.Object
 }
 
-// VectorProvider is implemented by Vector and any idiomatic type wrapping a MPSVector subclass.
+// VectorProvider is accepted wherever a MPSVector (or one of its subclasses) is expected.
 type VectorProvider interface {
-	asVector() *raw.MPSVector
+	objref.Object
 }

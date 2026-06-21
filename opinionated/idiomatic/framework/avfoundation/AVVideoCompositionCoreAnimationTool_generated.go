@@ -5,43 +5,68 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object used to incorporate Core Animation into a video composition.
 //
-// VideoCompositionCoreAnimationTool wraps [raw.AVVideoCompositionCoreAnimationTool] with a fluent Go API.
+// VideoCompositionCoreAnimationTool is an idiomatic wrapper over the Objective-C class AVVideoCompositionCoreAnimationTool.
 type VideoCompositionCoreAnimationTool struct {
-	inner *raw.AVVideoCompositionCoreAnimationTool
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVVideoCompositionCoreAnimationTool].
-func (x *VideoCompositionCoreAnimationTool) Unwrap() *raw.AVVideoCompositionCoreAnimationTool {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VideoCompositionCoreAnimationTool) ID() objc.ID { return x.inner.Ptr() }
-
-// VideoCompositionCoreAnimationToolFromID adopts an existing object pointer as a VideoCompositionCoreAnimationTool (nil for 0).
+// VideoCompositionCoreAnimationToolFromID adopts an existing Objective-C object as a VideoCompositionCoreAnimationTool
+// (nil for 0), retaining it and registering a release finalizer.
 func VideoCompositionCoreAnimationToolFromID(id objc.ID) *VideoCompositionCoreAnimationTool {
 	if id == 0 {
 		return nil
 	}
-	return &VideoCompositionCoreAnimationTool{inner: raw.AVVideoCompositionCoreAnimationToolFromID(id)}
+	x := &VideoCompositionCoreAnimationTool{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVideoCompositionCoreAnimationTool creates a new [VideoCompositionCoreAnimationTool].
+// videoCompositionCoreAnimationToolAdopt wraps an Objective-C object that this code just created as a
+// VideoCompositionCoreAnimationTool (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func videoCompositionCoreAnimationToolAdopt(id objc.ID) *VideoCompositionCoreAnimationTool {
+	if id == 0 {
+		return nil
+	}
+	x := &VideoCompositionCoreAnimationTool{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VideoCompositionCoreAnimationTool) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VideoCompositionCoreAnimationTool) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VideoCompositionCoreAnimationTool) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVideoCompositionCoreAnimationTool creates a new VideoCompositionCoreAnimationTool.
 func NewVideoCompositionCoreAnimationTool() *VideoCompositionCoreAnimationTool {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVVideoCompositionCoreAnimationTool")), objc.RegisterName("new"))
-	return &VideoCompositionCoreAnimationTool{inner: raw.AVVideoCompositionCoreAnimationToolFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVVideoCompositionCoreAnimationTool")), objc.RegisterName("new"))
+	return videoCompositionCoreAnimationToolAdopt(_id)
 }
 
 // VideoCompositionCoreAnimationToolable is the interface implemented by [VideoCompositionCoreAnimationTool], for mocking and DI.
 type VideoCompositionCoreAnimationToolable interface {
-	Unwrap() *raw.AVVideoCompositionCoreAnimationTool
+	obj.Object
 }
 
 var _ VideoCompositionCoreAnimationToolable = (*VideoCompositionCoreAnimationTool)(nil)

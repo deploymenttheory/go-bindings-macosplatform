@@ -5,68 +5,80 @@
 package corespotlight
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The kind of suggestion to use in a query.
 //
-// Suggestion wraps [raw.CSSuggestion] with a fluent Go API.
+// Suggestion is an idiomatic wrapper over the Objective-C class CSSuggestion.
 type Suggestion struct {
-	inner *raw.CSSuggestion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CSSuggestion].
-func (x *Suggestion) Unwrap() *raw.CSSuggestion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Suggestion) ID() objc.ID { return x.inner.Ptr() }
-
-// SuggestionFromID adopts an existing object pointer as a Suggestion (nil for 0).
+// SuggestionFromID adopts an existing Objective-C object as a Suggestion
+// (nil for 0), retaining it and registering a release finalizer.
 func SuggestionFromID(id objc.ID) *Suggestion {
 	if id == 0 {
 		return nil
 	}
-	return &Suggestion{inner: raw.CSSuggestionFromID(id)}
+	x := &Suggestion{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSuggestion creates a new [Suggestion].
+// suggestionAdopt wraps an Objective-C object that this code just created as a
+// Suggestion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func suggestionAdopt(id objc.ID) *Suggestion {
+	if id == 0 {
+		return nil
+	}
+	x := &Suggestion{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Suggestion) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Suggestion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Suggestion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSuggestion creates a new Suggestion.
 func NewSuggestion() *Suggestion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CSSuggestion")), objc.RegisterName("new"))
-	return &Suggestion{inner: raw.CSSuggestionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CSSuggestion")), objc.RegisterName("new"))
+	return suggestionAdopt(_id)
 }
 
-// CompareByRank calls the underlying CompareByRank.
-func (x *Suggestion) CompareByRank(other *raw.CSSuggestion) foundation.NSComparisonResult {
-	return x.inner.CompareByRank(other)
+func (x *Suggestion) LocalizedAttributedSuggestion() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedAttributedSuggestion"))
+	return obj.Wrap(_r)
 }
 
-// Compares the suggestion with a second specified suggestion.
-//
-// Compare calls the underlying Compare.
-func (x *Suggestion) Compare(other *raw.CSSuggestion) foundation.NSComparisonResult {
-	return x.inner.Compare(other)
-}
-
-// LocalizedAttributedSuggestion calls the underlying LocalizedAttributedSuggestion.
-func (x *Suggestion) LocalizedAttributedSuggestion() *foundation.NSAttributedString {
-	return x.inner.LocalizedAttributedSuggestion()
-}
-
-// SuggestionKind calls the underlying SuggestionKind.
-func (x *Suggestion) SuggestionKind() CSSuggestionKind {
-	return CSSuggestionKind(x.inner.SuggestionKind())
+func (x *Suggestion) SuggestionKind() SuggestionKind {
+	_r := objc.Send[SuggestionKind](objref.IDOf(x), objc.RegisterName("suggestionKind"))
+	return _r
 }
 
 // Suggestionable is the interface implemented by [Suggestion], for mocking and DI.
 type Suggestionable interface {
-	Unwrap() *raw.CSSuggestion
-	CompareByRank(other *raw.CSSuggestion) foundation.NSComparisonResult
-	Compare(other *raw.CSSuggestion) foundation.NSComparisonResult
-	LocalizedAttributedSuggestion() *foundation.NSAttributedString
-	SuggestionKind() CSSuggestionKind
+	obj.Object
+	LocalizedAttributedSuggestion() obj.Object
+	SuggestionKind() SuggestionKind
 }
 
 var _ Suggestionable = (*Suggestion)(nil)

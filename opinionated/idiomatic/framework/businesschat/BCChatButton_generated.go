@@ -5,50 +5,76 @@
 package businesschat
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/businesschat"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ChatButton wraps [raw.BCChatButton] with a fluent Go API.
+// ChatButton is an idiomatic wrapper over the Objective-C class BCChatButton.
 type ChatButton struct {
-	inner *raw.BCChatButton
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.BCChatButton].
-func (x *ChatButton) Unwrap() *raw.BCChatButton { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChatButton) ID() objc.ID { return x.inner.Ptr() }
-
-// ChatButtonFromID adopts an existing object pointer as a ChatButton (nil for 0).
+// ChatButtonFromID adopts an existing Objective-C object as a ChatButton
+// (nil for 0), retaining it and registering a release finalizer.
 func ChatButtonFromID(id objc.ID) *ChatButton {
 	if id == 0 {
 		return nil
 	}
-	return &ChatButton{inner: raw.BCChatButtonFromID(id)}
+	x := &ChatButton{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates and returns a BCChatButton configured for a given style. @param style The visual style of the button. @return BCChatButton instance.
+// chatButtonAdopt wraps an Objective-C object that this code just created as a
+// ChatButton (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func chatButtonAdopt(id objc.ID) *ChatButton {
+	if id == 0 {
+		return nil
+	}
+	x := &ChatButton{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ChatButton) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ChatButton) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ChatButton) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// Creates and returns a BCChatButton configured for a given style.
 //
-// NewChatButtonWithStyle creates a new [ChatButton].
-func NewChatButtonWithStyle(style BCChatButtonStyle) *ChatButton {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("BCChatButton")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStyle:"), raw.BCChatButtonStyle(style))
-	return &ChatButton{inner: raw.BCChatButtonFromID(_id)}
+// NewChatButtonWithStyle creates a new ChatButton.
+func NewChatButtonWithStyle(style ChatButtonStyle) *ChatButton {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("BCChatButton")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStyle:"), style)
+	return chatButtonAdopt(_id)
 }
 
-// NewChatButtonWithCoder creates a new [ChatButton].
-func NewChatButtonWithCoder(coder *foundation.NSCoder) *ChatButton {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("BCChatButton")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &ChatButton{inner: raw.BCChatButtonFromID(_id)}
+// NewChatButtonWithCoder creates a new ChatButton.
+func NewChatButtonWithCoder(coder obj.Object) *ChatButton {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("BCChatButton")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return chatButtonAdopt(_id)
 }
 
 // ChatButtonable is the interface implemented by [ChatButton], for mocking and DI.
 type ChatButtonable interface {
-	Unwrap() *raw.BCChatButton
+	obj.Object
 }
 
 var _ ChatButtonable = (*ChatButton)(nil)

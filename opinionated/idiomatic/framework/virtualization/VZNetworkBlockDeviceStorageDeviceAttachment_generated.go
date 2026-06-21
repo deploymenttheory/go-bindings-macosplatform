@@ -5,125 +5,118 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // A storage device attachment backed by a Network Block Device (NBD) client.
 //
-// NetworkBlockDeviceStorageDeviceAttachment wraps [raw.VZNetworkBlockDeviceStorageDeviceAttachment] with a fluent Go API.
+// NetworkBlockDeviceStorageDeviceAttachment is an idiomatic wrapper over the Objective-C class VZNetworkBlockDeviceStorageDeviceAttachment.
 type NetworkBlockDeviceStorageDeviceAttachment struct {
-	inner *raw.VZNetworkBlockDeviceStorageDeviceAttachment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZNetworkBlockDeviceStorageDeviceAttachment].
-func (x *NetworkBlockDeviceStorageDeviceAttachment) Unwrap() *raw.VZNetworkBlockDeviceStorageDeviceAttachment {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NetworkBlockDeviceStorageDeviceAttachment) ID() objc.ID { return x.inner.Ptr() }
-
-// NetworkBlockDeviceStorageDeviceAttachmentFromID adopts an existing object pointer as a NetworkBlockDeviceStorageDeviceAttachment (nil for 0).
+// NetworkBlockDeviceStorageDeviceAttachmentFromID adopts an existing Objective-C object as a NetworkBlockDeviceStorageDeviceAttachment
+// (nil for 0), retaining it and registering a release finalizer.
 func NetworkBlockDeviceStorageDeviceAttachmentFromID(id objc.ID) *NetworkBlockDeviceStorageDeviceAttachment {
 	if id == 0 {
 		return nil
 	}
-	return &NetworkBlockDeviceStorageDeviceAttachment{inner: raw.VZNetworkBlockDeviceStorageDeviceAttachmentFromID(id)}
+	x := &NetworkBlockDeviceStorageDeviceAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// networkBlockDeviceStorageDeviceAttachmentAdopt wraps an Objective-C object that this code just created as a
+// NetworkBlockDeviceStorageDeviceAttachment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func networkBlockDeviceStorageDeviceAttachmentAdopt(id objc.ID) *NetworkBlockDeviceStorageDeviceAttachment {
+	if id == 0 {
+		return nil
+	}
+	x := &NetworkBlockDeviceStorageDeviceAttachment{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NetworkBlockDeviceStorageDeviceAttachment) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NetworkBlockDeviceStorageDeviceAttachment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NetworkBlockDeviceStorageDeviceAttachment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new network block device storage attachment from an NBD Uniform Resource Indicator (URI) represented as a URL, timeout value, and read-only and synchronization modes that you provide.
 //
-// NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySynchronizationModeError creates a new [NetworkBlockDeviceStorageDeviceAttachment].
-func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySynchronizationModeError(uRL string, timeout float64, forcedReadOnly bool, synchronizationMode VZDiskSynchronizationMode) (*NetworkBlockDeviceStorageDeviceAttachment, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZNetworkBlockDeviceStorageDeviceAttachment")), objc.RegisterName("alloc"))
+// NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySynchronizationModeError creates a new NetworkBlockDeviceStorageDeviceAttachment.
+func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLTimeoutForcedReadOnlySynchronizationModeError(uRL string, timeout float64, forcedReadOnly bool, synchronizationMode DiskSynchronizationMode) (*NetworkBlockDeviceStorageDeviceAttachment, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZNetworkBlockDeviceStorageDeviceAttachment")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:timeout:forcedReadOnly:synchronizationMode:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), timeout, forcedReadOnly, raw.VZDiskSynchronizationMode(synchronizationMode), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:timeout:forcedReadOnly:synchronizationMode:error:"), rt.FileURL(uRL), timeout, forcedReadOnly, synchronizationMode, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &NetworkBlockDeviceStorageDeviceAttachment{inner: raw.VZNetworkBlockDeviceStorageDeviceAttachmentFromID(_id)}, nil
+	return networkBlockDeviceStorageDeviceAttachmentAdopt(_id), nil
 }
 
 // Creates a new network block device (NBD) storage attachment from an NDB Uniform Resource Indicator (URI) represented as a URL that you provide.
 //
-// NewNetworkBlockDeviceStorageDeviceAttachmentWithURLError creates a new [NetworkBlockDeviceStorageDeviceAttachment].
+// NewNetworkBlockDeviceStorageDeviceAttachmentWithURLError creates a new NetworkBlockDeviceStorageDeviceAttachment.
 func NewNetworkBlockDeviceStorageDeviceAttachmentWithURLError(uRL string) (*NetworkBlockDeviceStorageDeviceAttachment, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZNetworkBlockDeviceStorageDeviceAttachment")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZNetworkBlockDeviceStorageDeviceAttachment")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:error:"), rt.FileURL(uRL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &NetworkBlockDeviceStorageDeviceAttachment{inner: raw.VZNetworkBlockDeviceStorageDeviceAttachmentFromID(_id)}, nil
+	return networkBlockDeviceStorageDeviceAttachmentAdopt(_id), nil
 }
 
-// The object that receives messages about changes to the network block device attachment.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *NetworkBlockDeviceStorageDeviceAttachment) WithDelegate(delegate raw.VZNetworkBlockDeviceStorageDeviceAttachmentDelegate) *NetworkBlockDeviceStorageDeviceAttachment {
-	x.inner.SetDelegate(delegate)
-	return x
+// URL referring to the NBD server to which the NBD client is to be connected.
+func (x *NetworkBlockDeviceStorageDeviceAttachment) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
-// @abstract URL referring to the NBD server to which the NBD client is to be connected.
-//
-// URL calls the underlying URL.
-func (x *NetworkBlockDeviceStorageDeviceAttachment) URL() *foundation.NSURL {
-	return x.inner.URL()
-}
-
-// @abstract The timeout value in seconds for the connection between the client and server. When the timeout expires, an attempt to reconnect with the server will take place.
-//
-// Timeout calls the underlying Timeout.
+// The timeout value in seconds for the connection between the client and server. When the timeout expires, an attempt to reconnect with the server will take place.
 func (x *NetworkBlockDeviceStorageDeviceAttachment) Timeout() float64 {
-	return x.inner.Timeout()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeout"))
+	return _r
 }
 
-// @abstract Whether the underlying disk attachment is forced to be read-only. @discussion The `forcedReadOnly` parameter affects how the NBD client is exposed to the guest operating system by the storage controller. As part of the NBD protocol, whether or not the disk exposed by the NBD client is read-only is advertised by the NBD server during the handshake phase of the protocol. Setting `forcedReadOnly` to YES will force the NBD client to show up as read-only to the guest regardless of whether or not the NBD server advertises itself as read-only.
-//
-// IsForcedReadOnly calls the underlying IsForcedReadOnly.
+// Whether the underlying disk attachment is forced to be read-only. The `forcedReadOnly` parameter affects how the NBD client is exposed to the guest operating system by the storage controller. As part of the NBD protocol, whether or not the disk exposed by the NBD client is read-only is advertised by the NBD server during the handshake phase of the protocol. Setting `forcedReadOnly` to YES will force the NBD client to show up as read-only to the guest regardless of whether or not the NBD server advertises itself as read-only.
 func (x *NetworkBlockDeviceStorageDeviceAttachment) IsForcedReadOnly() bool {
-	return x.inner.IsForcedReadOnly()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isForcedReadOnly"))
+	return _r
 }
 
-// @abstract The mode in which the NBD client synchronizes data with the NBD server.
-//
-// SynchronizationMode calls the underlying SynchronizationMode.
-func (x *NetworkBlockDeviceStorageDeviceAttachment) SynchronizationMode() VZDiskSynchronizationMode {
-	return VZDiskSynchronizationMode(x.inner.SynchronizationMode())
-}
-
-// @abstract The attachment's delegate.
-//
-// Delegate calls the underlying Delegate.
-func (x *NetworkBlockDeviceStorageDeviceAttachment) Delegate() raw.VZNetworkBlockDeviceStorageDeviceAttachmentDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *NetworkBlockDeviceStorageDeviceAttachment) SetDelegate(delegate raw.VZNetworkBlockDeviceStorageDeviceAttachmentDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-func (x *NetworkBlockDeviceStorageDeviceAttachment) asStorageDeviceAttachment() *raw.VZStorageDeviceAttachment {
-	return &x.inner.VZStorageDeviceAttachment
+// The mode in which the NBD client synchronizes data with the NBD server.
+func (x *NetworkBlockDeviceStorageDeviceAttachment) SynchronizationMode() DiskSynchronizationMode {
+	_r := objc.Send[DiskSynchronizationMode](objref.IDOf(x), objc.RegisterName("synchronizationMode"))
+	return _r
 }
 
 // NetworkBlockDeviceStorageDeviceAttachmentable is the interface implemented by [NetworkBlockDeviceStorageDeviceAttachment], for mocking and DI.
 type NetworkBlockDeviceStorageDeviceAttachmentable interface {
-	Unwrap() *raw.VZNetworkBlockDeviceStorageDeviceAttachment
-	WithDelegate(delegate raw.VZNetworkBlockDeviceStorageDeviceAttachmentDelegate) *NetworkBlockDeviceStorageDeviceAttachment
-	URL() *foundation.NSURL
+	obj.Object
+	URL() obj.Object
 	Timeout() float64
 	IsForcedReadOnly() bool
-	SynchronizationMode() VZDiskSynchronizationMode
-	Delegate() raw.VZNetworkBlockDeviceStorageDeviceAttachmentDelegate
-	SetDelegate(delegate raw.VZNetworkBlockDeviceStorageDeviceAttachmentDelegate)
+	SynchronizationMode() DiskSynchronizationMode
 }
 
 var _ NetworkBlockDeviceStorageDeviceAttachmentable = (*NetworkBlockDeviceStorageDeviceAttachment)(nil)

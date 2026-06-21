@@ -5,60 +5,84 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A directory on the host that you can expose to a guest.
 //
-// SharedDirectory wraps [raw.VZSharedDirectory] with a fluent Go API.
+// SharedDirectory is an idiomatic wrapper over the Objective-C class VZSharedDirectory.
 type SharedDirectory struct {
-	inner *raw.VZSharedDirectory
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZSharedDirectory].
-func (x *SharedDirectory) Unwrap() *raw.VZSharedDirectory { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SharedDirectory) ID() objc.ID { return x.inner.Ptr() }
-
-// SharedDirectoryFromID adopts an existing object pointer as a SharedDirectory (nil for 0).
+// SharedDirectoryFromID adopts an existing Objective-C object as a SharedDirectory
+// (nil for 0), retaining it and registering a release finalizer.
 func SharedDirectoryFromID(id objc.ID) *SharedDirectory {
 	if id == 0 {
 		return nil
 	}
-	return &SharedDirectory{inner: raw.VZSharedDirectoryFromID(id)}
+	x := &SharedDirectory{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// sharedDirectoryAdopt wraps an Objective-C object that this code just created as a
+// SharedDirectory (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sharedDirectoryAdopt(id objc.ID) *SharedDirectory {
+	if id == 0 {
+		return nil
+	}
+	x := &SharedDirectory{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SharedDirectory) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SharedDirectory) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SharedDirectory) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize with a host directory.
 //
-// NewSharedDirectoryWithURLReadOnly creates a new [SharedDirectory].
+// NewSharedDirectoryWithURLReadOnly creates a new SharedDirectory.
 func NewSharedDirectoryWithURLReadOnly(url string, readOnly bool) *SharedDirectory {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZSharedDirectory")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:readOnly:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), readOnly)
-	return &SharedDirectory{inner: raw.VZSharedDirectoryFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZSharedDirectory")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:readOnly:"), rt.FileURL(url), readOnly)
+	return sharedDirectoryAdopt(_id)
 }
 
-// @abstract File URL to a directory on the host to expose to the guest. @discussion The URL must point to an existing directory path in the host file system.
-//
-// URL calls the underlying URL.
-func (x *SharedDirectory) URL() *foundation.NSURL {
-	return x.inner.URL()
+// File URL to a directory on the host to expose to the guest. The URL must point to an existing directory path in the host file system.
+func (x *SharedDirectory) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
-// @abstract Whether or not the directory will be exposed as read-only to the guest.
-//
-// IsReadOnly calls the underlying IsReadOnly.
+// Whether or not the directory will be exposed as read-only to the guest.
 func (x *SharedDirectory) IsReadOnly() bool {
-	return x.inner.IsReadOnly()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadOnly"))
+	return _r
 }
 
 // SharedDirectoryable is the interface implemented by [SharedDirectory], for mocking and DI.
 type SharedDirectoryable interface {
-	Unwrap() *raw.VZSharedDirectory
-	URL() *foundation.NSURL
+	obj.Object
+	URL() obj.Object
 	IsReadOnly() bool
 }
 

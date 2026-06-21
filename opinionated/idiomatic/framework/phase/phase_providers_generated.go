@@ -5,65 +5,65 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// AssetProvider is implemented by Asset and any idiomatic type wrapping a PHASEAsset subclass.
+// AssetProvider is accepted wherever a PHASEAsset (or one of its subclasses) is expected.
 type AssetProvider interface {
-	asAsset() *raw.PHASEAsset
+	objref.Object
 }
 
-// DefinitionProvider is implemented by Definition and any idiomatic type wrapping a PHASEDefinition subclass.
+// DefinitionProvider is accepted wherever a PHASEDefinition (or one of its subclasses) is expected.
 type DefinitionProvider interface {
-	asDefinition() *raw.PHASEDefinition
+	objref.Object
 }
 
-// DirectivityModelParametersProvider is implemented by DirectivityModelParameters and any idiomatic type wrapping a PHASEDirectivityModelParameters subclass.
+// DirectivityModelParametersProvider is accepted wherever a PHASEDirectivityModelParameters (or one of its subclasses) is expected.
 type DirectivityModelParametersProvider interface {
-	asDirectivityModelParameters() *raw.PHASEDirectivityModelParameters
+	objref.Object
 }
 
-// DistanceModelParametersProvider is implemented by DistanceModelParameters and any idiomatic type wrapping a PHASEDistanceModelParameters subclass.
+// DistanceModelParametersProvider is accepted wherever a PHASEDistanceModelParameters (or one of its subclasses) is expected.
 type DistanceModelParametersProvider interface {
-	asDistanceModelParameters() *raw.PHASEDistanceModelParameters
+	objref.Object
 }
 
-// GeneratorNodeDefinitionProvider is implemented by GeneratorNodeDefinition and any idiomatic type wrapping a PHASEGeneratorNodeDefinition subclass.
+// GeneratorNodeDefinitionProvider is accepted wherever a PHASEGeneratorNodeDefinition (or one of its subclasses) is expected.
 type GeneratorNodeDefinitionProvider interface {
-	asGeneratorNodeDefinition() *raw.PHASEGeneratorNodeDefinition
+	objref.Object
 }
 
-// MetaParameterProvider is implemented by MetaParameter and any idiomatic type wrapping a PHASEMetaParameter subclass.
+// MetaParameterProvider is accepted wherever a PHASEMetaParameter (or one of its subclasses) is expected.
 type MetaParameterProvider interface {
-	asMetaParameter() *raw.PHASEMetaParameter
+	objref.Object
 }
 
-// MetaParameterDefinitionProvider is implemented by MetaParameterDefinition and any idiomatic type wrapping a PHASEMetaParameterDefinition subclass.
+// MetaParameterDefinitionProvider is accepted wherever a PHASEMetaParameterDefinition (or one of its subclasses) is expected.
 type MetaParameterDefinitionProvider interface {
-	asMetaParameterDefinition() *raw.PHASEMetaParameterDefinition
+	objref.Object
 }
 
-// MixerDefinitionProvider is implemented by MixerDefinition and any idiomatic type wrapping a PHASEMixerDefinition subclass.
+// MixerDefinitionProvider is accepted wherever a PHASEMixerDefinition (or one of its subclasses) is expected.
 type MixerDefinitionProvider interface {
-	asMixerDefinition() *raw.PHASEMixerDefinition
+	objref.Object
 }
 
-// NumberMetaParameterDefinitionProvider is implemented by NumberMetaParameterDefinition and any idiomatic type wrapping a PHASENumberMetaParameterDefinition subclass.
+// NumberMetaParameterDefinitionProvider is accepted wherever a PHASENumberMetaParameterDefinition (or one of its subclasses) is expected.
 type NumberMetaParameterDefinitionProvider interface {
-	asNumberMetaParameterDefinition() *raw.PHASENumberMetaParameterDefinition
+	objref.Object
 }
 
-// ObjectProvider is implemented by Object and any idiomatic type wrapping a PHASEObject subclass.
+// ObjectProvider is accepted wherever a PHASEObject (or one of its subclasses) is expected.
 type ObjectProvider interface {
-	asObject() *raw.PHASEObject
+	objref.Object
 }
 
-// SoundEventNodeDefinitionProvider is implemented by SoundEventNodeDefinition and any idiomatic type wrapping a PHASESoundEventNodeDefinition subclass.
+// SoundEventNodeDefinitionProvider is accepted wherever a PHASESoundEventNodeDefinition (or one of its subclasses) is expected.
 type SoundEventNodeDefinitionProvider interface {
-	asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition
+	objref.Object
 }
 
-// StreamNodeProvider is implemented by StreamNode and any idiomatic type wrapping a PHASEStreamNode subclass.
+// StreamNodeProvider is accepted wherever a PHASEStreamNode (or one of its subclasses) is expected.
 type StreamNodeProvider interface {
-	asStreamNode() *raw.PHASEStreamNode
+	objref.Object
 }

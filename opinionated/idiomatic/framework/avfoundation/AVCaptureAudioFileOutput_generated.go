@@ -5,184 +5,140 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A capture output that records audio and saves the recorded audio to a file.
 //
-// CaptureAudioFileOutput wraps [raw.AVCaptureAudioFileOutput] with a fluent Go API.
+// CaptureAudioFileOutput is an idiomatic wrapper over the Objective-C class AVCaptureAudioFileOutput.
 type CaptureAudioFileOutput struct {
-	inner *raw.AVCaptureAudioFileOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureAudioFileOutput].
-func (x *CaptureAudioFileOutput) Unwrap() *raw.AVCaptureAudioFileOutput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureAudioFileOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureAudioFileOutputFromID adopts an existing object pointer as a CaptureAudioFileOutput (nil for 0).
+// CaptureAudioFileOutputFromID adopts an existing Objective-C object as a CaptureAudioFileOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureAudioFileOutputFromID(id objc.ID) *CaptureAudioFileOutput {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureAudioFileOutput{inner: raw.AVCaptureAudioFileOutputFromID(id)}
+	x := &CaptureAudioFileOutput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCaptureAudioFileOutput creates a new [CaptureAudioFileOutput].
+// captureAudioFileOutputAdopt wraps an Objective-C object that this code just created as a
+// CaptureAudioFileOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureAudioFileOutputAdopt(id objc.ID) *CaptureAudioFileOutput {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureAudioFileOutput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptureAudioFileOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureAudioFileOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureAudioFileOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptureAudioFileOutput creates a new CaptureAudioFileOutput.
 func NewCaptureAudioFileOutput() *CaptureAudioFileOutput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureAudioFileOutput")), objc.RegisterName("new"))
-	return &CaptureAudioFileOutput{inner: raw.AVCaptureAudioFileOutputFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureAudioFileOutput")), objc.RegisterName("new"))
+	return captureAudioFileOutputAdopt(_id)
 }
 
 // A collection of metadata to be written to the receiver’s output files.
 //
-// WithMetadata sets the collection, converting the Go slice to an NSArray.
+// WithMetadata sets the collection and returns the receiver so calls can be chained.
 func (x *CaptureAudioFileOutput) WithMetadata(items ...MetadataItemProvider) *CaptureAudioFileOutput {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetMetadata(foundation.NSArrayFromID[*raw.AVMetadataItem](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asMetadataItem().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.AVMetadataItem](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetMetadata(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v MetadataItemProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), _arr)
 	return x
 }
 
 // The settings used to decode or re-encode audio before it is output by the receiver.
 //
-// WithAudioSettings sets the audioSettings property and returns the receiver for chaining.
-func (x *CaptureAudioFileOutput) WithAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptureAudioFileOutput {
-	x.inner.SetAudioSettings(audioSettings)
-	return x
-}
-
-// The delegate object for the capture file output.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *CaptureAudioFileOutput) WithDelegate(delegate raw.AVCaptureFileOutputDelegate) *CaptureAudioFileOutput {
-	x.inner.AVCaptureFileOutput.SetDelegate(delegate)
-	return x
-}
-
-// The longest duration allowed for the recording.
-//
-// WithMaxRecordedDuration sets the maxRecordedDuration property and returns the receiver for chaining.
-func (x *CaptureAudioFileOutput) WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureAudioFileOutput {
-	x.inner.AVCaptureFileOutput.SetMaxRecordedDuration(maxRecordedDuration)
+// WithAudioSettings sets audioSettings and returns the receiver so calls can be chained.
+func (x *CaptureAudioFileOutput) WithAudioSettings(audioSettings obj.Object) *CaptureAudioFileOutput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioSettings:"), objref.IDOf(audioSettings))
 	return x
 }
 
 // The maximum size, in bytes, of the data that should be recorded by the receiver.
 //
-// WithMaxRecordedFileSize sets the maxRecordedFileSize property and returns the receiver for chaining.
+// WithMaxRecordedFileSize sets maxRecordedFileSize and returns the receiver so calls can be chained.
 func (x *CaptureAudioFileOutput) WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureAudioFileOutput {
-	x.inner.AVCaptureFileOutput.SetMaxRecordedFileSize(maxRecordedFileSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxRecordedFileSize:"), maxRecordedFileSize)
 	return x
 }
 
 // The minimum amount of free space, in bytes, required for recording to continue on a given volume.
 //
-// WithMinFreeDiskSpaceLimit sets the minFreeDiskSpaceLimit property and returns the receiver for chaining.
+// WithMinFreeDiskSpaceLimit sets minFreeDiskSpaceLimit and returns the receiver so calls can be chained.
 func (x *CaptureAudioFileOutput) WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureAudioFileOutput {
-	x.inner.AVCaptureFileOutput.SetMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinFreeDiskSpaceLimit:"), minFreeDiskSpaceLimit)
 	return x
 }
 
 // A Boolean value that indicates whether to defer starting this capture output.
 //
-// WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
+// WithDeferredStartEnabled sets deferredStartEnabled and returns the receiver so calls can be chained.
 func (x *CaptureAudioFileOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioFileOutput {
-	x.inner.AVCaptureFileOutput.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
 	return x
 }
 
-// Tells the receiver to start recording to a new file of the specified format, and specifies a delegate that will be notified when recording is finished.
-//
-// StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate calls the underlying StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate.
-func (x *CaptureAudioFileOutput) StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate(outputFileURL string, fileType *foundation.NSString, delegate raw.AVCaptureFileOutputRecordingDelegate) {
-	x.inner.StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputFileURL)), fileType, delegate)
-}
-
-// @property metadata @abstract A collection of metadata to be written to the receiver's output files. @discussion The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in each output file. Only ID3 v2.2, v2.3, or v2.4 style metadata items are supported.
+// A collection of metadata to be written to the receiver's output files. The value of this property is an array of AVMetadataItem objects representing the collection of top-level metadata to be written in each output file. Only ID3 v2.2, v2.3, or v2.4 style metadata items are supported.
 //
 // Metadata returns the collection as a Go slice.
 func (x *CaptureAudioFileOutput) Metadata() []*MetadataItem {
-	arr := x.inner.Metadata()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
-		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
-// SetMetadata calls the underlying SetMetadata.
-func (x *CaptureAudioFileOutput) SetMetadata(metadata ...MetadataItemProvider) {
-	_ptrs := make([]objc.ID, len(metadata))
-	for _i, _v := range metadata {
-		_ptrs[_i] = _v.asMetadataItem().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.AVMetadataItem]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.AVMetadataItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.AVMetadataItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetMetadata(_arg0)
+func (x *CaptureAudioFileOutput) SetMetadata(metadata []*MetadataItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), purego.SliceToNSArray(metadata, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property audioSettings @abstract Specifies the options the receiver uses to re-encode audio as it is being recorded. @discussion The output settings dictionary can contain values for keys from AVAudioSettings.h. A value of nil indicates that the format of the audio should not be changed before being written to the file.
-//
-// AudioSettings calls the underlying AudioSettings.
-func (x *CaptureAudioFileOutput) AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.AudioSettings()
+// Specifies the options the receiver uses to re-encode audio as it is being recorded. The output settings dictionary can contain values for keys from AVAudioSettings.h. A value of nil indicates that the format of the audio should not be changed before being written to the file.
+func (x *CaptureAudioFileOutput) AudioSettings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioSettings"))
+	return obj.Wrap(_r)
 }
 
-// SetAudioSettings calls the underlying SetAudioSettings.
-func (x *CaptureAudioFileOutput) SetAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.SetAudioSettings(audioSettings)
-}
-
-func (x *CaptureAudioFileOutput) asCaptureFileOutput() *raw.AVCaptureFileOutput {
-	return &x.inner.AVCaptureFileOutput
-}
-
-func (x *CaptureAudioFileOutput) asCaptureOutput() *raw.AVCaptureOutput {
-	return &x.inner.AVCaptureFileOutput.AVCaptureOutput
+func (x *CaptureAudioFileOutput) SetAudioSettings(audioSettings obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioSettings:"), objref.IDOf(audioSettings))
 }
 
 // CaptureAudioFileOutputable is the interface implemented by [CaptureAudioFileOutput], for mocking and DI.
 type CaptureAudioFileOutputable interface {
-	Unwrap() *raw.AVCaptureAudioFileOutput
+	obj.Object
 	WithMetadata(items ...MetadataItemProvider) *CaptureAudioFileOutput
-	WithAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptureAudioFileOutput
-	WithDelegate(delegate raw.AVCaptureFileOutputDelegate) *CaptureAudioFileOutput
-	WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureAudioFileOutput
+	WithAudioSettings(audioSettings obj.Object) *CaptureAudioFileOutput
 	WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureAudioFileOutput
 	WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureAudioFileOutput
 	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioFileOutput
-	StartRecordingToOutputFileURLOutputFileTypeRecordingDelegate(outputFileURL string, fileType *foundation.NSString, delegate raw.AVCaptureFileOutputRecordingDelegate)
 	Metadata() []*MetadataItem
-	SetMetadata(metadata ...MetadataItemProvider)
-	AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SetAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	SetMetadata(metadata []*MetadataItem)
+	AudioSettings() obj.Object
+	SetAudioSettings(audioSettings obj.Object)
 }
 
 var _ CaptureAudioFileOutputable = (*CaptureAudioFileOutput)(nil)

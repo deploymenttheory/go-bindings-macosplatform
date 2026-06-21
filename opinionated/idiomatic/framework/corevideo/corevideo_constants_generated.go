@@ -5,853 +5,898 @@
 package corevideo
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corevideo"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KCVBufferPropagatedAttachmentsKey returns the value of the CoreFoundation reference constant kCVBufferPropagatedAttachmentsKey as an objc.ID.
-func KCVBufferPropagatedAttachmentsKey() objc.ID {
-	return purego.CFConstant(raw.KCVBufferPropagatedAttachmentsKey())
+// KCVBufferPropagatedAttachmentsKey returns the value of the constant kCVBufferPropagatedAttachmentsKey.
+func KCVBufferPropagatedAttachmentsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVBufferPropagatedAttachmentsKey")))
 }
 
-// KCVBufferNonPropagatedAttachmentsKey returns the value of the CoreFoundation reference constant kCVBufferNonPropagatedAttachmentsKey as an objc.ID.
-func KCVBufferNonPropagatedAttachmentsKey() objc.ID {
-	return purego.CFConstant(raw.KCVBufferNonPropagatedAttachmentsKey())
+// KCVBufferNonPropagatedAttachmentsKey returns the value of the constant kCVBufferNonPropagatedAttachmentsKey.
+func KCVBufferNonPropagatedAttachmentsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVBufferNonPropagatedAttachmentsKey")))
 }
 
-// KCVBufferMovieTimeKey returns the value of the CoreFoundation reference constant kCVBufferMovieTimeKey as an objc.ID.
-func KCVBufferMovieTimeKey() objc.ID { return purego.CFConstant(raw.KCVBufferMovieTimeKey()) }
+// KCVBufferMovieTimeKey returns the value of the constant kCVBufferMovieTimeKey.
+func KCVBufferMovieTimeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVBufferMovieTimeKey")))
+}
 
-// KCVBufferTimeValueKey returns the value of the CoreFoundation reference constant kCVBufferTimeValueKey as an objc.ID.
-func KCVBufferTimeValueKey() objc.ID { return purego.CFConstant(raw.KCVBufferTimeValueKey()) }
+// KCVBufferTimeValueKey returns the value of the constant kCVBufferTimeValueKey.
+func KCVBufferTimeValueKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVBufferTimeValueKey")))
+}
 
-// KCVBufferTimeScaleKey returns the value of the CoreFoundation reference constant kCVBufferTimeScaleKey as an objc.ID.
-func KCVBufferTimeScaleKey() objc.ID { return purego.CFConstant(raw.KCVBufferTimeScaleKey()) }
+// KCVBufferTimeScaleKey returns the value of the constant kCVBufferTimeScaleKey.
+func KCVBufferTimeScaleKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVBufferTimeScaleKey")))
+}
 
-// KCVImageBufferCGColorSpaceKey returns the value of the CoreFoundation reference constant kCVImageBufferCGColorSpaceKey as an objc.ID.
-func KCVImageBufferCGColorSpaceKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferCGColorSpaceKey())
+// KCVImageBufferCGColorSpaceKey returns the value of the constant kCVImageBufferCGColorSpaceKey.
+func KCVImageBufferCGColorSpaceKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferCGColorSpaceKey")))
 }
 
-// KCVImageBufferCleanApertureKey returns the value of the CoreFoundation reference constant kCVImageBufferCleanApertureKey as an objc.ID.
-func KCVImageBufferCleanApertureKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferCleanApertureKey())
+// KCVImageBufferCleanApertureKey returns the value of the constant kCVImageBufferCleanApertureKey.
+func KCVImageBufferCleanApertureKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferCleanApertureKey")))
 }
 
-// KCVImageBufferCleanApertureWidthKey returns the value of the CoreFoundation reference constant kCVImageBufferCleanApertureWidthKey as an objc.ID.
-func KCVImageBufferCleanApertureWidthKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferCleanApertureWidthKey())
+// KCVImageBufferCleanApertureWidthKey returns the value of the constant kCVImageBufferCleanApertureWidthKey.
+func KCVImageBufferCleanApertureWidthKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferCleanApertureWidthKey")))
 }
 
-// KCVImageBufferCleanApertureHeightKey returns the value of the CoreFoundation reference constant kCVImageBufferCleanApertureHeightKey as an objc.ID.
-func KCVImageBufferCleanApertureHeightKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferCleanApertureHeightKey())
+// KCVImageBufferCleanApertureHeightKey returns the value of the constant kCVImageBufferCleanApertureHeightKey.
+func KCVImageBufferCleanApertureHeightKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferCleanApertureHeightKey")))
 }
 
-// KCVImageBufferCleanApertureHorizontalOffsetKey returns the value of the CoreFoundation reference constant kCVImageBufferCleanApertureHorizontalOffsetKey as an objc.ID.
-func KCVImageBufferCleanApertureHorizontalOffsetKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferCleanApertureHorizontalOffsetKey())
+// KCVImageBufferCleanApertureHorizontalOffsetKey returns the value of the constant kCVImageBufferCleanApertureHorizontalOffsetKey.
+func KCVImageBufferCleanApertureHorizontalOffsetKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferCleanApertureHorizontalOffsetKey")))
 }
 
-// KCVImageBufferCleanApertureVerticalOffsetKey returns the value of the CoreFoundation reference constant kCVImageBufferCleanApertureVerticalOffsetKey as an objc.ID.
-func KCVImageBufferCleanApertureVerticalOffsetKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferCleanApertureVerticalOffsetKey())
+// KCVImageBufferCleanApertureVerticalOffsetKey returns the value of the constant kCVImageBufferCleanApertureVerticalOffsetKey.
+func KCVImageBufferCleanApertureVerticalOffsetKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferCleanApertureVerticalOffsetKey")))
 }
 
-// KCVImageBufferPreferredCleanApertureKey returns the value of the CoreFoundation reference constant kCVImageBufferPreferredCleanApertureKey as an objc.ID.
-func KCVImageBufferPreferredCleanApertureKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferPreferredCleanApertureKey())
+// KCVImageBufferPreferredCleanApertureKey returns the value of the constant kCVImageBufferPreferredCleanApertureKey.
+func KCVImageBufferPreferredCleanApertureKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferPreferredCleanApertureKey")))
 }
 
-// KCVImageBufferFieldCountKey returns the value of the CoreFoundation reference constant kCVImageBufferFieldCountKey as an objc.ID.
-func KCVImageBufferFieldCountKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferFieldCountKey())
+// KCVImageBufferFieldCountKey returns the value of the constant kCVImageBufferFieldCountKey.
+func KCVImageBufferFieldCountKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferFieldCountKey")))
 }
 
-// KCVImageBufferFieldDetailKey returns the value of the CoreFoundation reference constant kCVImageBufferFieldDetailKey as an objc.ID.
-func KCVImageBufferFieldDetailKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferFieldDetailKey())
+// KCVImageBufferFieldDetailKey returns the value of the constant kCVImageBufferFieldDetailKey.
+func KCVImageBufferFieldDetailKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferFieldDetailKey")))
 }
 
-// KCVImageBufferFieldDetailTemporalTopFirst returns the value of the CoreFoundation reference constant kCVImageBufferFieldDetailTemporalTopFirst as an objc.ID.
-func KCVImageBufferFieldDetailTemporalTopFirst() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferFieldDetailTemporalTopFirst())
+// KCVImageBufferFieldDetailTemporalTopFirst returns the value of the constant kCVImageBufferFieldDetailTemporalTopFirst.
+func KCVImageBufferFieldDetailTemporalTopFirst() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferFieldDetailTemporalTopFirst")))
 }
 
-// KCVImageBufferFieldDetailTemporalBottomFirst returns the value of the CoreFoundation reference constant kCVImageBufferFieldDetailTemporalBottomFirst as an objc.ID.
-func KCVImageBufferFieldDetailTemporalBottomFirst() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferFieldDetailTemporalBottomFirst())
+// KCVImageBufferFieldDetailTemporalBottomFirst returns the value of the constant kCVImageBufferFieldDetailTemporalBottomFirst.
+func KCVImageBufferFieldDetailTemporalBottomFirst() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferFieldDetailTemporalBottomFirst")))
 }
 
-// KCVImageBufferFieldDetailSpatialFirstLineEarly returns the value of the CoreFoundation reference constant kCVImageBufferFieldDetailSpatialFirstLineEarly as an objc.ID.
-func KCVImageBufferFieldDetailSpatialFirstLineEarly() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferFieldDetailSpatialFirstLineEarly())
+// KCVImageBufferFieldDetailSpatialFirstLineEarly returns the value of the constant kCVImageBufferFieldDetailSpatialFirstLineEarly.
+func KCVImageBufferFieldDetailSpatialFirstLineEarly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferFieldDetailSpatialFirstLineEarly")))
 }
 
-// KCVImageBufferFieldDetailSpatialFirstLineLate returns the value of the CoreFoundation reference constant kCVImageBufferFieldDetailSpatialFirstLineLate as an objc.ID.
-func KCVImageBufferFieldDetailSpatialFirstLineLate() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferFieldDetailSpatialFirstLineLate())
+// KCVImageBufferFieldDetailSpatialFirstLineLate returns the value of the constant kCVImageBufferFieldDetailSpatialFirstLineLate.
+func KCVImageBufferFieldDetailSpatialFirstLineLate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferFieldDetailSpatialFirstLineLate")))
 }
 
-// KCVImageBufferPixelAspectRatioKey returns the value of the CoreFoundation reference constant kCVImageBufferPixelAspectRatioKey as an objc.ID.
-func KCVImageBufferPixelAspectRatioKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferPixelAspectRatioKey())
+// KCVImageBufferPixelAspectRatioKey returns the value of the constant kCVImageBufferPixelAspectRatioKey.
+func KCVImageBufferPixelAspectRatioKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferPixelAspectRatioKey")))
 }
 
-// KCVImageBufferPixelAspectRatioHorizontalSpacingKey returns the value of the CoreFoundation reference constant kCVImageBufferPixelAspectRatioHorizontalSpacingKey as an objc.ID.
-func KCVImageBufferPixelAspectRatioHorizontalSpacingKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferPixelAspectRatioHorizontalSpacingKey())
+// KCVImageBufferPixelAspectRatioHorizontalSpacingKey returns the value of the constant kCVImageBufferPixelAspectRatioHorizontalSpacingKey.
+func KCVImageBufferPixelAspectRatioHorizontalSpacingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferPixelAspectRatioHorizontalSpacingKey")))
 }
 
-// KCVImageBufferPixelAspectRatioVerticalSpacingKey returns the value of the CoreFoundation reference constant kCVImageBufferPixelAspectRatioVerticalSpacingKey as an objc.ID.
-func KCVImageBufferPixelAspectRatioVerticalSpacingKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferPixelAspectRatioVerticalSpacingKey())
+// KCVImageBufferPixelAspectRatioVerticalSpacingKey returns the value of the constant kCVImageBufferPixelAspectRatioVerticalSpacingKey.
+func KCVImageBufferPixelAspectRatioVerticalSpacingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferPixelAspectRatioVerticalSpacingKey")))
 }
 
-// KCVImageBufferDisplayDimensionsKey returns the value of the CoreFoundation reference constant kCVImageBufferDisplayDimensionsKey as an objc.ID.
-func KCVImageBufferDisplayDimensionsKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferDisplayDimensionsKey())
+// KCVImageBufferDisplayDimensionsKey returns the value of the constant kCVImageBufferDisplayDimensionsKey.
+func KCVImageBufferDisplayDimensionsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayDimensionsKey")))
 }
 
-// KCVImageBufferDisplayWidthKey returns the value of the CoreFoundation reference constant kCVImageBufferDisplayWidthKey as an objc.ID.
-func KCVImageBufferDisplayWidthKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferDisplayWidthKey())
+// KCVImageBufferDisplayWidthKey returns the value of the constant kCVImageBufferDisplayWidthKey.
+func KCVImageBufferDisplayWidthKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayWidthKey")))
 }
 
-// KCVImageBufferDisplayHeightKey returns the value of the CoreFoundation reference constant kCVImageBufferDisplayHeightKey as an objc.ID.
-func KCVImageBufferDisplayHeightKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferDisplayHeightKey())
+// KCVImageBufferDisplayHeightKey returns the value of the constant kCVImageBufferDisplayHeightKey.
+func KCVImageBufferDisplayHeightKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayHeightKey")))
 }
 
-// KCVImageBufferGammaLevelKey returns the value of the CoreFoundation reference constant kCVImageBufferGammaLevelKey as an objc.ID.
-func KCVImageBufferGammaLevelKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferGammaLevelKey())
+// KCVImageBufferGammaLevelKey returns the value of the constant kCVImageBufferGammaLevelKey.
+func KCVImageBufferGammaLevelKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferGammaLevelKey")))
 }
 
-// KCVImageBufferICCProfileKey returns the value of the CoreFoundation reference constant kCVImageBufferICCProfileKey as an objc.ID.
-func KCVImageBufferICCProfileKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferICCProfileKey())
+// KCVImageBufferICCProfileKey returns the value of the constant kCVImageBufferICCProfileKey.
+func KCVImageBufferICCProfileKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferICCProfileKey")))
 }
 
-// KCVImageBufferYCbCrMatrixKey returns the value of the CoreFoundation reference constant kCVImageBufferYCbCrMatrixKey as an objc.ID.
-func KCVImageBufferYCbCrMatrixKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferYCbCrMatrixKey())
+// KCVImageBufferYCbCrMatrixKey returns the value of the constant kCVImageBufferYCbCrMatrixKey.
+func KCVImageBufferYCbCrMatrixKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferYCbCrMatrixKey")))
 }
 
-// KCVImageBufferYCbCrMatrix_ITU_R_709_2 returns the value of the CoreFoundation reference constant kCVImageBufferYCbCrMatrix_ITU_R_709_2 as an objc.ID.
-func KCVImageBufferYCbCrMatrix_ITU_R_709_2() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferYCbCrMatrix_ITU_R_709_2())
+// KCVImageBufferYCbCrMatrix_ITU_R_709_2 returns the value of the constant kCVImageBufferYCbCrMatrix_ITU_R_709_2.
+func KCVImageBufferYCbCrMatrix_ITU_R_709_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferYCbCrMatrix_ITU_R_709_2")))
 }
 
-// KCVImageBufferYCbCrMatrix_ITU_R_601_4 returns the value of the CoreFoundation reference constant kCVImageBufferYCbCrMatrix_ITU_R_601_4 as an objc.ID.
-func KCVImageBufferYCbCrMatrix_ITU_R_601_4() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferYCbCrMatrix_ITU_R_601_4())
+// KCVImageBufferYCbCrMatrix_ITU_R_601_4 returns the value of the constant kCVImageBufferYCbCrMatrix_ITU_R_601_4.
+func KCVImageBufferYCbCrMatrix_ITU_R_601_4() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferYCbCrMatrix_ITU_R_601_4")))
 }
 
-// KCVImageBufferYCbCrMatrix_SMPTE_240M_1995 returns the value of the CoreFoundation reference constant kCVImageBufferYCbCrMatrix_SMPTE_240M_1995 as an objc.ID.
-func KCVImageBufferYCbCrMatrix_SMPTE_240M_1995() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferYCbCrMatrix_SMPTE_240M_1995())
+// KCVImageBufferYCbCrMatrix_SMPTE_240M_1995 returns the value of the constant kCVImageBufferYCbCrMatrix_SMPTE_240M_1995.
+func KCVImageBufferYCbCrMatrix_SMPTE_240M_1995() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferYCbCrMatrix_SMPTE_240M_1995")))
 }
 
-// KCVImageBufferYCbCrMatrix_DCI_P3 returns the value of the CoreFoundation reference constant kCVImageBufferYCbCrMatrix_DCI_P3 as an objc.ID.
-func KCVImageBufferYCbCrMatrix_DCI_P3() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferYCbCrMatrix_DCI_P3())
+// KCVImageBufferYCbCrMatrix_DCI_P3 returns the value of the constant kCVImageBufferYCbCrMatrix_DCI_P3.
+func KCVImageBufferYCbCrMatrix_DCI_P3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferYCbCrMatrix_DCI_P3")))
 }
 
-// KCVImageBufferYCbCrMatrix_P3_D65 returns the value of the CoreFoundation reference constant kCVImageBufferYCbCrMatrix_P3_D65 as an objc.ID.
-func KCVImageBufferYCbCrMatrix_P3_D65() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferYCbCrMatrix_P3_D65())
+// KCVImageBufferYCbCrMatrix_P3_D65 returns the value of the constant kCVImageBufferYCbCrMatrix_P3_D65.
+func KCVImageBufferYCbCrMatrix_P3_D65() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferYCbCrMatrix_P3_D65")))
 }
 
-// KCVImageBufferYCbCrMatrix_ITU_R_2020 returns the value of the CoreFoundation reference constant kCVImageBufferYCbCrMatrix_ITU_R_2020 as an objc.ID.
-func KCVImageBufferYCbCrMatrix_ITU_R_2020() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferYCbCrMatrix_ITU_R_2020())
+// KCVImageBufferYCbCrMatrix_ITU_R_2020 returns the value of the constant kCVImageBufferYCbCrMatrix_ITU_R_2020.
+func KCVImageBufferYCbCrMatrix_ITU_R_2020() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferYCbCrMatrix_ITU_R_2020")))
 }
 
-// KCVImageBufferColorPrimariesKey returns the value of the CoreFoundation reference constant kCVImageBufferColorPrimariesKey as an objc.ID.
-func KCVImageBufferColorPrimariesKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferColorPrimariesKey())
+// KCVImageBufferColorPrimariesKey returns the value of the constant kCVImageBufferColorPrimariesKey.
+func KCVImageBufferColorPrimariesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferColorPrimariesKey")))
 }
 
-// KCVImageBufferColorPrimaries_ITU_R_709_2 returns the value of the CoreFoundation reference constant kCVImageBufferColorPrimaries_ITU_R_709_2 as an objc.ID.
-func KCVImageBufferColorPrimaries_ITU_R_709_2() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferColorPrimaries_ITU_R_709_2())
+// KCVImageBufferColorPrimaries_ITU_R_709_2 returns the value of the constant kCVImageBufferColorPrimaries_ITU_R_709_2.
+func KCVImageBufferColorPrimaries_ITU_R_709_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferColorPrimaries_ITU_R_709_2")))
 }
 
-// KCVImageBufferColorPrimaries_EBU_3213 returns the value of the CoreFoundation reference constant kCVImageBufferColorPrimaries_EBU_3213 as an objc.ID.
-func KCVImageBufferColorPrimaries_EBU_3213() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferColorPrimaries_EBU_3213())
+// KCVImageBufferColorPrimaries_EBU_3213 returns the value of the constant kCVImageBufferColorPrimaries_EBU_3213.
+func KCVImageBufferColorPrimaries_EBU_3213() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferColorPrimaries_EBU_3213")))
 }
 
-// KCVImageBufferColorPrimaries_SMPTE_C returns the value of the CoreFoundation reference constant kCVImageBufferColorPrimaries_SMPTE_C as an objc.ID.
-func KCVImageBufferColorPrimaries_SMPTE_C() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferColorPrimaries_SMPTE_C())
+// KCVImageBufferColorPrimaries_SMPTE_C returns the value of the constant kCVImageBufferColorPrimaries_SMPTE_C.
+func KCVImageBufferColorPrimaries_SMPTE_C() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferColorPrimaries_SMPTE_C")))
 }
 
-// KCVImageBufferColorPrimaries_P22 returns the value of the CoreFoundation reference constant kCVImageBufferColorPrimaries_P22 as an objc.ID.
-func KCVImageBufferColorPrimaries_P22() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferColorPrimaries_P22())
+// KCVImageBufferColorPrimaries_P22 returns the value of the constant kCVImageBufferColorPrimaries_P22.
+func KCVImageBufferColorPrimaries_P22() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferColorPrimaries_P22")))
 }
 
-// KCVImageBufferColorPrimaries_DCI_P3 returns the value of the CoreFoundation reference constant kCVImageBufferColorPrimaries_DCI_P3 as an objc.ID.
-func KCVImageBufferColorPrimaries_DCI_P3() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferColorPrimaries_DCI_P3())
+// KCVImageBufferColorPrimaries_DCI_P3 returns the value of the constant kCVImageBufferColorPrimaries_DCI_P3.
+func KCVImageBufferColorPrimaries_DCI_P3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferColorPrimaries_DCI_P3")))
 }
 
-// KCVImageBufferColorPrimaries_P3_D65 returns the value of the CoreFoundation reference constant kCVImageBufferColorPrimaries_P3_D65 as an objc.ID.
-func KCVImageBufferColorPrimaries_P3_D65() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferColorPrimaries_P3_D65())
+// KCVImageBufferColorPrimaries_P3_D65 returns the value of the constant kCVImageBufferColorPrimaries_P3_D65.
+func KCVImageBufferColorPrimaries_P3_D65() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferColorPrimaries_P3_D65")))
 }
 
-// KCVImageBufferColorPrimaries_ITU_R_2020 returns the value of the CoreFoundation reference constant kCVImageBufferColorPrimaries_ITU_R_2020 as an objc.ID.
-func KCVImageBufferColorPrimaries_ITU_R_2020() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferColorPrimaries_ITU_R_2020())
+// KCVImageBufferColorPrimaries_ITU_R_2020 returns the value of the constant kCVImageBufferColorPrimaries_ITU_R_2020.
+func KCVImageBufferColorPrimaries_ITU_R_2020() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferColorPrimaries_ITU_R_2020")))
 }
 
-// KCVImageBufferTransferFunctionKey returns the value of the CoreFoundation reference constant kCVImageBufferTransferFunctionKey as an objc.ID.
-func KCVImageBufferTransferFunctionKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferTransferFunctionKey())
+// KCVImageBufferTransferFunctionKey returns the value of the constant kCVImageBufferTransferFunctionKey.
+func KCVImageBufferTransferFunctionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferTransferFunctionKey")))
 }
 
-// KCVImageBufferTransferFunction_ITU_R_709_2 returns the value of the CoreFoundation reference constant kCVImageBufferTransferFunction_ITU_R_709_2 as an objc.ID.
-func KCVImageBufferTransferFunction_ITU_R_709_2() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferTransferFunction_ITU_R_709_2())
+// KCVImageBufferTransferFunction_ITU_R_709_2 returns the value of the constant kCVImageBufferTransferFunction_ITU_R_709_2.
+func KCVImageBufferTransferFunction_ITU_R_709_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferTransferFunction_ITU_R_709_2")))
 }
 
-// KCVImageBufferTransferFunction_SMPTE_240M_1995 returns the value of the CoreFoundation reference constant kCVImageBufferTransferFunction_SMPTE_240M_1995 as an objc.ID.
-func KCVImageBufferTransferFunction_SMPTE_240M_1995() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferTransferFunction_SMPTE_240M_1995())
+// KCVImageBufferTransferFunction_SMPTE_240M_1995 returns the value of the constant kCVImageBufferTransferFunction_SMPTE_240M_1995.
+func KCVImageBufferTransferFunction_SMPTE_240M_1995() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferTransferFunction_SMPTE_240M_1995")))
 }
 
-// KCVImageBufferTransferFunction_UseGamma returns the value of the CoreFoundation reference constant kCVImageBufferTransferFunction_UseGamma as an objc.ID.
-func KCVImageBufferTransferFunction_UseGamma() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferTransferFunction_UseGamma())
+// KCVImageBufferTransferFunction_UseGamma returns the value of the constant kCVImageBufferTransferFunction_UseGamma.
+func KCVImageBufferTransferFunction_UseGamma() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferTransferFunction_UseGamma")))
 }
 
-// KCVImageBufferTransferFunction_EBU_3213 returns the value of the CoreFoundation reference constant kCVImageBufferTransferFunction_EBU_3213 as an objc.ID.
-func KCVImageBufferTransferFunction_EBU_3213() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferTransferFunction_EBU_3213())
+// KCVImageBufferTransferFunction_EBU_3213 returns the value of the constant kCVImageBufferTransferFunction_EBU_3213.
+func KCVImageBufferTransferFunction_EBU_3213() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferTransferFunction_EBU_3213")))
 }
 
-// KCVImageBufferTransferFunction_SMPTE_C returns the value of the CoreFoundation reference constant kCVImageBufferTransferFunction_SMPTE_C as an objc.ID.
-func KCVImageBufferTransferFunction_SMPTE_C() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferTransferFunction_SMPTE_C())
+// KCVImageBufferTransferFunction_SMPTE_C returns the value of the constant kCVImageBufferTransferFunction_SMPTE_C.
+func KCVImageBufferTransferFunction_SMPTE_C() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferTransferFunction_SMPTE_C")))
 }
 
-// KCVImageBufferTransferFunction_sRGB returns the value of the CoreFoundation reference constant kCVImageBufferTransferFunction_sRGB as an objc.ID.
-func KCVImageBufferTransferFunction_sRGB() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferTransferFunction_sRGB())
+// KCVImageBufferTransferFunction_sRGB returns the value of the constant kCVImageBufferTransferFunction_sRGB.
+func KCVImageBufferTransferFunction_sRGB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferTransferFunction_sRGB")))
 }
 
-// KCVImageBufferTransferFunction_ITU_R_2020 returns the value of the CoreFoundation reference constant kCVImageBufferTransferFunction_ITU_R_2020 as an objc.ID.
-func KCVImageBufferTransferFunction_ITU_R_2020() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferTransferFunction_ITU_R_2020())
+// KCVImageBufferTransferFunction_ITU_R_2020 returns the value of the constant kCVImageBufferTransferFunction_ITU_R_2020.
+func KCVImageBufferTransferFunction_ITU_R_2020() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferTransferFunction_ITU_R_2020")))
 }
 
-// KCVImageBufferTransferFunction_SMPTE_ST_428_1 returns the value of the CoreFoundation reference constant kCVImageBufferTransferFunction_SMPTE_ST_428_1 as an objc.ID.
-func KCVImageBufferTransferFunction_SMPTE_ST_428_1() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferTransferFunction_SMPTE_ST_428_1())
+// KCVImageBufferTransferFunction_SMPTE_ST_428_1 returns the value of the constant kCVImageBufferTransferFunction_SMPTE_ST_428_1.
+func KCVImageBufferTransferFunction_SMPTE_ST_428_1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferTransferFunction_SMPTE_ST_428_1")))
 }
 
-// KCVImageBufferTransferFunction_SMPTE_ST_2084_PQ returns the value of the CoreFoundation reference constant kCVImageBufferTransferFunction_SMPTE_ST_2084_PQ as an objc.ID.
-func KCVImageBufferTransferFunction_SMPTE_ST_2084_PQ() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferTransferFunction_SMPTE_ST_2084_PQ())
+// KCVImageBufferTransferFunction_SMPTE_ST_2084_PQ returns the value of the constant kCVImageBufferTransferFunction_SMPTE_ST_2084_PQ.
+func KCVImageBufferTransferFunction_SMPTE_ST_2084_PQ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferTransferFunction_SMPTE_ST_2084_PQ")))
 }
 
-// KCVImageBufferTransferFunction_ITU_R_2100_HLG returns the value of the CoreFoundation reference constant kCVImageBufferTransferFunction_ITU_R_2100_HLG as an objc.ID.
-func KCVImageBufferTransferFunction_ITU_R_2100_HLG() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferTransferFunction_ITU_R_2100_HLG())
+// KCVImageBufferTransferFunction_ITU_R_2100_HLG returns the value of the constant kCVImageBufferTransferFunction_ITU_R_2100_HLG.
+func KCVImageBufferTransferFunction_ITU_R_2100_HLG() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferTransferFunction_ITU_R_2100_HLG")))
 }
 
-// KCVImageBufferTransferFunction_Linear returns the value of the CoreFoundation reference constant kCVImageBufferTransferFunction_Linear as an objc.ID.
-func KCVImageBufferTransferFunction_Linear() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferTransferFunction_Linear())
+// KCVImageBufferTransferFunction_Linear returns the value of the constant kCVImageBufferTransferFunction_Linear.
+func KCVImageBufferTransferFunction_Linear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferTransferFunction_Linear")))
 }
 
-// KCVImageBufferChromaLocationTopFieldKey returns the value of the CoreFoundation reference constant kCVImageBufferChromaLocationTopFieldKey as an objc.ID.
-func KCVImageBufferChromaLocationTopFieldKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferChromaLocationTopFieldKey())
+// KCVImageBufferChromaLocationTopFieldKey returns the value of the constant kCVImageBufferChromaLocationTopFieldKey.
+func KCVImageBufferChromaLocationTopFieldKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferChromaLocationTopFieldKey")))
 }
 
-// KCVImageBufferChromaLocationBottomFieldKey returns the value of the CoreFoundation reference constant kCVImageBufferChromaLocationBottomFieldKey as an objc.ID.
-func KCVImageBufferChromaLocationBottomFieldKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferChromaLocationBottomFieldKey())
+// KCVImageBufferChromaLocationBottomFieldKey returns the value of the constant kCVImageBufferChromaLocationBottomFieldKey.
+func KCVImageBufferChromaLocationBottomFieldKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferChromaLocationBottomFieldKey")))
 }
 
-// KCVImageBufferChromaLocation_Left returns the value of the CoreFoundation reference constant kCVImageBufferChromaLocation_Left as an objc.ID.
-func KCVImageBufferChromaLocation_Left() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferChromaLocation_Left())
+// KCVImageBufferChromaLocation_Left returns the value of the constant kCVImageBufferChromaLocation_Left.
+func KCVImageBufferChromaLocation_Left() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferChromaLocation_Left")))
 }
 
-// KCVImageBufferChromaLocation_Center returns the value of the CoreFoundation reference constant kCVImageBufferChromaLocation_Center as an objc.ID.
-func KCVImageBufferChromaLocation_Center() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferChromaLocation_Center())
+// KCVImageBufferChromaLocation_Center returns the value of the constant kCVImageBufferChromaLocation_Center.
+func KCVImageBufferChromaLocation_Center() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferChromaLocation_Center")))
 }
 
-// KCVImageBufferChromaLocation_TopLeft returns the value of the CoreFoundation reference constant kCVImageBufferChromaLocation_TopLeft as an objc.ID.
-func KCVImageBufferChromaLocation_TopLeft() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferChromaLocation_TopLeft())
+// KCVImageBufferChromaLocation_TopLeft returns the value of the constant kCVImageBufferChromaLocation_TopLeft.
+func KCVImageBufferChromaLocation_TopLeft() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferChromaLocation_TopLeft")))
 }
 
-// KCVImageBufferChromaLocation_Top returns the value of the CoreFoundation reference constant kCVImageBufferChromaLocation_Top as an objc.ID.
-func KCVImageBufferChromaLocation_Top() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferChromaLocation_Top())
+// KCVImageBufferChromaLocation_Top returns the value of the constant kCVImageBufferChromaLocation_Top.
+func KCVImageBufferChromaLocation_Top() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferChromaLocation_Top")))
 }
 
-// KCVImageBufferChromaLocation_BottomLeft returns the value of the CoreFoundation reference constant kCVImageBufferChromaLocation_BottomLeft as an objc.ID.
-func KCVImageBufferChromaLocation_BottomLeft() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferChromaLocation_BottomLeft())
+// KCVImageBufferChromaLocation_BottomLeft returns the value of the constant kCVImageBufferChromaLocation_BottomLeft.
+func KCVImageBufferChromaLocation_BottomLeft() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferChromaLocation_BottomLeft")))
 }
 
-// KCVImageBufferChromaLocation_Bottom returns the value of the CoreFoundation reference constant kCVImageBufferChromaLocation_Bottom as an objc.ID.
-func KCVImageBufferChromaLocation_Bottom() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferChromaLocation_Bottom())
+// KCVImageBufferChromaLocation_Bottom returns the value of the constant kCVImageBufferChromaLocation_Bottom.
+func KCVImageBufferChromaLocation_Bottom() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferChromaLocation_Bottom")))
 }
 
-// KCVImageBufferChromaLocation_DV420 returns the value of the CoreFoundation reference constant kCVImageBufferChromaLocation_DV420 as an objc.ID.
-func KCVImageBufferChromaLocation_DV420() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferChromaLocation_DV420())
+// KCVImageBufferChromaLocation_DV420 returns the value of the constant kCVImageBufferChromaLocation_DV420.
+func KCVImageBufferChromaLocation_DV420() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferChromaLocation_DV420")))
 }
 
-// KCVImageBufferChromaSubsamplingKey returns the value of the CoreFoundation reference constant kCVImageBufferChromaSubsamplingKey as an objc.ID.
-func KCVImageBufferChromaSubsamplingKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferChromaSubsamplingKey())
+// KCVImageBufferChromaSubsamplingKey returns the value of the constant kCVImageBufferChromaSubsamplingKey.
+func KCVImageBufferChromaSubsamplingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferChromaSubsamplingKey")))
 }
 
-// KCVImageBufferChromaSubsampling_420 returns the value of the CoreFoundation reference constant kCVImageBufferChromaSubsampling_420 as an objc.ID.
-func KCVImageBufferChromaSubsampling_420() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferChromaSubsampling_420())
+// KCVImageBufferChromaSubsampling_420 returns the value of the constant kCVImageBufferChromaSubsampling_420.
+func KCVImageBufferChromaSubsampling_420() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferChromaSubsampling_420")))
 }
 
-// KCVImageBufferChromaSubsampling_422 returns the value of the CoreFoundation reference constant kCVImageBufferChromaSubsampling_422 as an objc.ID.
-func KCVImageBufferChromaSubsampling_422() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferChromaSubsampling_422())
+// KCVImageBufferChromaSubsampling_422 returns the value of the constant kCVImageBufferChromaSubsampling_422.
+func KCVImageBufferChromaSubsampling_422() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferChromaSubsampling_422")))
 }
 
-// KCVImageBufferChromaSubsampling_411 returns the value of the CoreFoundation reference constant kCVImageBufferChromaSubsampling_411 as an objc.ID.
-func KCVImageBufferChromaSubsampling_411() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferChromaSubsampling_411())
+// KCVImageBufferChromaSubsampling_411 returns the value of the constant kCVImageBufferChromaSubsampling_411.
+func KCVImageBufferChromaSubsampling_411() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferChromaSubsampling_411")))
 }
 
-// KCVImageBufferAlphaChannelIsOpaque returns the value of the CoreFoundation reference constant kCVImageBufferAlphaChannelIsOpaque as an objc.ID.
-func KCVImageBufferAlphaChannelIsOpaque() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferAlphaChannelIsOpaque())
+// KCVImageBufferAlphaChannelIsOpaque returns the value of the constant kCVImageBufferAlphaChannelIsOpaque.
+func KCVImageBufferAlphaChannelIsOpaque() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferAlphaChannelIsOpaque")))
 }
 
-// KCVImageBufferAlphaChannelModeKey returns the value of the CoreFoundation reference constant kCVImageBufferAlphaChannelModeKey as an objc.ID.
-func KCVImageBufferAlphaChannelModeKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferAlphaChannelModeKey())
+// KCVImageBufferAlphaChannelModeKey returns the value of the constant kCVImageBufferAlphaChannelModeKey.
+func KCVImageBufferAlphaChannelModeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferAlphaChannelModeKey")))
 }
 
-// KCVImageBufferAlphaChannelMode_StraightAlpha returns the value of the CoreFoundation reference constant kCVImageBufferAlphaChannelMode_StraightAlpha as an objc.ID.
-func KCVImageBufferAlphaChannelMode_StraightAlpha() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferAlphaChannelMode_StraightAlpha())
+// KCVImageBufferAlphaChannelMode_StraightAlpha returns the value of the constant kCVImageBufferAlphaChannelMode_StraightAlpha.
+func KCVImageBufferAlphaChannelMode_StraightAlpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferAlphaChannelMode_StraightAlpha")))
 }
 
-// KCVImageBufferAlphaChannelMode_PremultipliedAlpha returns the value of the CoreFoundation reference constant kCVImageBufferAlphaChannelMode_PremultipliedAlpha as an objc.ID.
-func KCVImageBufferAlphaChannelMode_PremultipliedAlpha() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferAlphaChannelMode_PremultipliedAlpha())
+// KCVImageBufferAlphaChannelMode_PremultipliedAlpha returns the value of the constant kCVImageBufferAlphaChannelMode_PremultipliedAlpha.
+func KCVImageBufferAlphaChannelMode_PremultipliedAlpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferAlphaChannelMode_PremultipliedAlpha")))
 }
 
-// KCVImageBufferPostDecodeProcessingSequenceMetadataKey returns the value of the CoreFoundation reference constant kCVImageBufferPostDecodeProcessingSequenceMetadataKey as an objc.ID.
-func KCVImageBufferPostDecodeProcessingSequenceMetadataKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferPostDecodeProcessingSequenceMetadataKey())
+// KCVImageBufferPostDecodeProcessingSequenceMetadataKey returns the value of the constant kCVImageBufferPostDecodeProcessingSequenceMetadataKey.
+func KCVImageBufferPostDecodeProcessingSequenceMetadataKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferPostDecodeProcessingSequenceMetadataKey")))
 }
 
-// KCVImageBufferPostDecodeProcessingFrameMetadataKey returns the value of the CoreFoundation reference constant kCVImageBufferPostDecodeProcessingFrameMetadataKey as an objc.ID.
-func KCVImageBufferPostDecodeProcessingFrameMetadataKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferPostDecodeProcessingFrameMetadataKey())
+// KCVImageBufferPostDecodeProcessingFrameMetadataKey returns the value of the constant kCVImageBufferPostDecodeProcessingFrameMetadataKey.
+func KCVImageBufferPostDecodeProcessingFrameMetadataKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferPostDecodeProcessingFrameMetadataKey")))
 }
 
-// KCVImageBufferMasteringDisplayColorVolumeKey returns the value of the CoreFoundation reference constant kCVImageBufferMasteringDisplayColorVolumeKey as an objc.ID.
-func KCVImageBufferMasteringDisplayColorVolumeKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferMasteringDisplayColorVolumeKey())
+// KCVImageBufferMasteringDisplayColorVolumeKey returns the value of the constant kCVImageBufferMasteringDisplayColorVolumeKey.
+func KCVImageBufferMasteringDisplayColorVolumeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferMasteringDisplayColorVolumeKey")))
 }
 
-// KCVImageBufferContentLightLevelInfoKey returns the value of the CoreFoundation reference constant kCVImageBufferContentLightLevelInfoKey as an objc.ID.
-func KCVImageBufferContentLightLevelInfoKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferContentLightLevelInfoKey())
+// KCVImageBufferContentLightLevelInfoKey returns the value of the constant kCVImageBufferContentLightLevelInfoKey.
+func KCVImageBufferContentLightLevelInfoKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferContentLightLevelInfoKey")))
 }
 
-// KCVImageBufferAmbientViewingEnvironmentKey returns the value of the CoreFoundation reference constant kCVImageBufferAmbientViewingEnvironmentKey as an objc.ID.
-func KCVImageBufferAmbientViewingEnvironmentKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferAmbientViewingEnvironmentKey())
+// KCVImageBufferAmbientViewingEnvironmentKey returns the value of the constant kCVImageBufferAmbientViewingEnvironmentKey.
+func KCVImageBufferAmbientViewingEnvironmentKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferAmbientViewingEnvironmentKey")))
 }
 
-// KCVImageBufferSceneIlluminationKey returns the value of the CoreFoundation reference constant kCVImageBufferSceneIlluminationKey as an objc.ID.
-func KCVImageBufferSceneIlluminationKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferSceneIlluminationKey())
+// KCVImageBufferSceneIlluminationKey returns the value of the constant kCVImageBufferSceneIlluminationKey.
+func KCVImageBufferSceneIlluminationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferSceneIlluminationKey")))
 }
 
-// @constant    kCVImageBufferRegionOfInterestKey @abstract Specifies region of interest that image statistics cover. @discussion This value should be a CGRect dictionary created by CGRectCreateDictionaryRepresentation(). The origin in the CGRect represents the x,y coordinate within the CVPixelBuffer where region of interest is located.
-// KCVImageBufferRegionOfInterestKey returns the value of the CoreFoundation reference constant kCVImageBufferRegionOfInterestKey as an objc.ID.
-func KCVImageBufferRegionOfInterestKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferRegionOfInterestKey())
+// Specifies region of interest that image statistics cover. This value should be a CGRect dictionary created by CGRectCreateDictionaryRepresentation(). The origin in the CGRect represents the x,y coordinate within the CVPixelBuffer where region of interest is located.
+// KCVImageBufferRegionOfInterestKey returns the value of the constant kCVImageBufferRegionOfInterestKey.
+func KCVImageBufferRegionOfInterestKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferRegionOfInterestKey")))
 }
 
-// @constant    kCVImageBufferLogTransferFunctionKey Indicates that the transfer function or gamma of the content is a log format and identifies the specific log curve. @discussion The value is a CFString holding fully specified reverse DNS identifier. Log is a specific video format usually processed in a camera's ISP. A Log video format usually defines: Scene-referred color primaries designed to preserve the chromaticity range captured by a camera sensor. In cinematography, "scene-referred" color primaries refers to a color space designed to accurately preserve the chromaticity and dynamic range directly captured by a camera sensor. A specific gamma curve (or transfer characteristic) tailored to capturing the full dynamic range from the sensor. This gamma curve is usually shaped like a log curve (hence the name Log). A set of matrix transforms to go from RGB to Y'CbCr (Y'CbCr being the most common format used to store the bits compressed into a file). As described above, a Log video format defines a whole color space (even though the “log” part of the name comes only from the “transfer characteristic” or gamma curve) Content captured in Apple Log will have this key set to kCVImageBufferLogTransferFunction_AppleLog or kCVImageBufferLogTransferFunction_AppleLog2. @constant    kCVImageBufferLogTransferFunction_AppleLog Indicates the Apple Log identifier. @constant    kCVImageBufferLogTransferFunction_AppleLog2 Indicates the Apple Log 2 identifier. To use Apple Log 2, set other color attachments as follows: kCVImageBufferColorPrimariesKey = undefined or absent kCVImageBufferTransferFunctionKey = undefined or absent kCVImageBufferYCbCrMatrixKey = kCVImageBufferYCbCrMatrix_ITU_R_2020 https://developer.apple.com/download/all/?q=Apple%20log%20profile @discussion You can download the Apple Log Profile White Paper from the Apple Developer Downloads website.
-// KCVImageBufferLogTransferFunctionKey returns the value of the CoreFoundation reference constant kCVImageBufferLogTransferFunctionKey as an objc.ID.
-func KCVImageBufferLogTransferFunctionKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferLogTransferFunctionKey())
+// The value is a CFString holding fully specified reverse DNS identifier. Log is a specific video format usually processed in a camera's ISP. A Log video format usually defines: Scene-referred color primaries designed to preserve the chromaticity range captured by a camera sensor. In cinematography, "scene-referred" color primaries refers to a color space designed to accurately preserve the chromaticity and dynamic range directly captured by a camera sensor. A specific gamma curve (or transfer characteristic) tailored to capturing the full dynamic range from the sensor. This gamma curve is usually shaped like a log curve (hence the name Log). A set of matrix transforms to go from RGB to Y'CbCr (Y'CbCr being the most common format used to store the bits compressed into a file). As described above, a Log video format defines a whole color space (even though the “log” part of the name comes only from the “transfer characteristic” or gamma curve) Content captured in Apple Log will have this key set to kCVImageBufferLogTransferFunction_AppleLog or kCVImageBufferLogTransferFunction_AppleLog2. You can download the Apple Log Profile White Paper from the Apple Developer Downloads website.
+// KCVImageBufferLogTransferFunctionKey returns the value of the constant kCVImageBufferLogTransferFunctionKey.
+func KCVImageBufferLogTransferFunctionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferLogTransferFunctionKey")))
 }
 
-// KCVImageBufferLogTransferFunction_AppleLog returns the value of the CoreFoundation reference constant kCVImageBufferLogTransferFunction_AppleLog as an objc.ID.
-func KCVImageBufferLogTransferFunction_AppleLog() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferLogTransferFunction_AppleLog())
+// KCVImageBufferLogTransferFunction_AppleLog returns the value of the constant kCVImageBufferLogTransferFunction_AppleLog.
+func KCVImageBufferLogTransferFunction_AppleLog() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferLogTransferFunction_AppleLog")))
 }
 
-// KCVImageBufferLogTransferFunction_AppleLog2 returns the value of the CoreFoundation reference constant kCVImageBufferLogTransferFunction_AppleLog2 as an objc.ID.
-func KCVImageBufferLogTransferFunction_AppleLog2() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferLogTransferFunction_AppleLog2())
+// KCVImageBufferLogTransferFunction_AppleLog2 returns the value of the constant kCVImageBufferLogTransferFunction_AppleLog2.
+func KCVImageBufferLogTransferFunction_AppleLog2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferLogTransferFunction_AppleLog2")))
 }
 
-// @constant    kCVImageBufferDisplayMaskRectangleKey @abstract Specifies the rectangular display area within the image. The left, width, top and height are specified relative to a reference raster width and height that should be scaled to the image buffer dimensions. @discussion Value is a dictionary containing these keys for the raster rectangle: kCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey kCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey kCVImageBufferDisplayMaskRectangle_RectangleLeftKey kCVImageBufferDisplayMaskRectangle_RectangleWidthKey kCVImageBufferDisplayMaskRectangle_RectangleTopKey kCVImageBufferDisplayMaskRectangle_RectangleHeightKey
-// KCVImageBufferDisplayMaskRectangleKey returns the value of the CoreFoundation reference constant kCVImageBufferDisplayMaskRectangleKey as an objc.ID.
-func KCVImageBufferDisplayMaskRectangleKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferDisplayMaskRectangleKey())
+// Specifies the rectangular display area within the image. The left, width, top and height are specified relative to a reference raster width and height that should be scaled to the image buffer dimensions. Value is a dictionary containing these keys for the raster rectangle: kCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey kCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey kCVImageBufferDisplayMaskRectangle_RectangleLeftKey kCVImageBufferDisplayMaskRectangle_RectangleWidthKey kCVImageBufferDisplayMaskRectangle_RectangleTopKey kCVImageBufferDisplayMaskRectangle_RectangleHeightKey
+// KCVImageBufferDisplayMaskRectangleKey returns the value of the constant kCVImageBufferDisplayMaskRectangleKey.
+func KCVImageBufferDisplayMaskRectangleKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangleKey")))
 }
 
-// @constant    kCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey @abstract Specifies the width in pixels of the 2D coordinate system to define the rectangle. 0,0 origin is the top-left. The raster width value is a CFNumber of unsigned 16-bit integer. Usually matches the width of the video or the output device.
-// KCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey returns the value of the CoreFoundation reference constant kCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey as an objc.ID.
-func KCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey())
+// Specifies the width in pixels of the 2D coordinate system to define the rectangle. 0,0 origin is the top-left. The raster width value is a CFNumber of unsigned 16-bit integer. Usually matches the width of the video or the output device.
+// KCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey returns the value of the constant kCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey.
+func KCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey")))
 }
 
-// @constant    kCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey @abstract Specifies the height in pixels of the 2D coordinate system to define the rectangle. 0,0 origin is the top-left. The raster height value is a CFNumber of unsigned 16-bit integer. Usually matches the height of the video or the output device.
-// KCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey returns the value of the CoreFoundation reference constant kCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey as an objc.ID.
-func KCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey())
+// Specifies the height in pixels of the 2D coordinate system to define the rectangle. 0,0 origin is the top-left. The raster height value is a CFNumber of unsigned 16-bit integer. Usually matches the height of the video or the output device.
+// KCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey returns the value of the constant kCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey.
+func KCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey")))
 }
 
-// @constant    kCVImageBufferDisplayMaskRectangle_RectangleLeftKey @abstract Specifies the horizontal pixel offset of the rectangle from the left of the bounding raster. The left offset value is a CFNumber of unsigned 16-bit integer that is less than the reference raster width value.
-// KCVImageBufferDisplayMaskRectangle_RectangleLeftKey returns the value of the CoreFoundation reference constant kCVImageBufferDisplayMaskRectangle_RectangleLeftKey as an objc.ID.
-func KCVImageBufferDisplayMaskRectangle_RectangleLeftKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferDisplayMaskRectangle_RectangleLeftKey())
+// Specifies the horizontal pixel offset of the rectangle from the left of the bounding raster. The left offset value is a CFNumber of unsigned 16-bit integer that is less than the reference raster width value.
+// KCVImageBufferDisplayMaskRectangle_RectangleLeftKey returns the value of the constant kCVImageBufferDisplayMaskRectangle_RectangleLeftKey.
+func KCVImageBufferDisplayMaskRectangle_RectangleLeftKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangle_RectangleLeftKey")))
 }
 
-// @constant    kCVImageBufferDisplayMaskRectangle_RectangleWidthKey @abstract Specifies the width of the rectangle starting at rectangle's left offset toward the rectangle's right edge. The width value is a CFNumber of unsigned 16-bit integer.
-// KCVImageBufferDisplayMaskRectangle_RectangleWidthKey returns the value of the CoreFoundation reference constant kCVImageBufferDisplayMaskRectangle_RectangleWidthKey as an objc.ID.
-func KCVImageBufferDisplayMaskRectangle_RectangleWidthKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferDisplayMaskRectangle_RectangleWidthKey())
+// Specifies the width of the rectangle starting at rectangle's left offset toward the rectangle's right edge. The width value is a CFNumber of unsigned 16-bit integer.
+// KCVImageBufferDisplayMaskRectangle_RectangleWidthKey returns the value of the constant kCVImageBufferDisplayMaskRectangle_RectangleWidthKey.
+func KCVImageBufferDisplayMaskRectangle_RectangleWidthKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangle_RectangleWidthKey")))
 }
 
-// @constant    kCVImageBufferDisplayMaskRectangle_RectangleTopKey @abstract Specifies the vertical pixel offset of the rectangle from the top of the bounding raster. The top offset value is a CFNumber of unsigned 16-bit integer that is less than the reference raster height value.
-// KCVImageBufferDisplayMaskRectangle_RectangleTopKey returns the value of the CoreFoundation reference constant kCVImageBufferDisplayMaskRectangle_RectangleTopKey as an objc.ID.
-func KCVImageBufferDisplayMaskRectangle_RectangleTopKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferDisplayMaskRectangle_RectangleTopKey())
+// Specifies the vertical pixel offset of the rectangle from the top of the bounding raster. The top offset value is a CFNumber of unsigned 16-bit integer that is less than the reference raster height value.
+// KCVImageBufferDisplayMaskRectangle_RectangleTopKey returns the value of the constant kCVImageBufferDisplayMaskRectangle_RectangleTopKey.
+func KCVImageBufferDisplayMaskRectangle_RectangleTopKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangle_RectangleTopKey")))
 }
 
-// @constant    kCVImageBufferDisplayMaskRectangle_RectangleHeightKey @abstract Specifies the height of the rectangle starting at rectangle's top offset toward the rectangle's bottom edge. The height value is a CFNumber of unsigned 16-bit integer.
-// KCVImageBufferDisplayMaskRectangle_RectangleHeightKey returns the value of the CoreFoundation reference constant kCVImageBufferDisplayMaskRectangle_RectangleHeightKey as an objc.ID.
-func KCVImageBufferDisplayMaskRectangle_RectangleHeightKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferDisplayMaskRectangle_RectangleHeightKey())
+// Specifies the height of the rectangle starting at rectangle's top offset toward the rectangle's bottom edge. The height value is a CFNumber of unsigned 16-bit integer.
+// KCVImageBufferDisplayMaskRectangle_RectangleHeightKey returns the value of the constant kCVImageBufferDisplayMaskRectangle_RectangleHeightKey.
+func KCVImageBufferDisplayMaskRectangle_RectangleHeightKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangle_RectangleHeightKey")))
 }
 
-// @constant    kCVImageBufferDisplayMaskRectangleStereoLeftKey @abstract Specifies the rectangular display area within the left eye view of stereo images, using the same keys as with kCVImageBufferDisplayMaskRectangleKey. To address window violations in stereo video, points insetting the left and right edges of the rectangle are supported through additional keys, allowing the description of the "extended raster rectangle". @discussion Value is a dictionary containing these keys for the extended raster rectangle: kCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey kCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey kCVImageBufferDisplayMaskRectangle_RectangleLeftKey kCVImageBufferDisplayMaskRectangle_RectangleWidthKey kCVImageBufferDisplayMaskRectangle_RectangleTopKey kCVImageBufferDisplayMaskRectangle_RectangleHeightKey kCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey kCVImageBufferDisplayMaskRectangle_RightEdgePointsKey
-// KCVImageBufferDisplayMaskRectangleStereoLeftKey returns the value of the CoreFoundation reference constant kCVImageBufferDisplayMaskRectangleStereoLeftKey as an objc.ID.
-func KCVImageBufferDisplayMaskRectangleStereoLeftKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferDisplayMaskRectangleStereoLeftKey())
+// Specifies the rectangular display area within the left eye view of stereo images, using the same keys as with kCVImageBufferDisplayMaskRectangleKey. To address window violations in stereo video, points insetting the left and right edges of the rectangle are supported through additional keys, allowing the description of the "extended raster rectangle". Value is a dictionary containing these keys for the extended raster rectangle: kCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey kCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey kCVImageBufferDisplayMaskRectangle_RectangleLeftKey kCVImageBufferDisplayMaskRectangle_RectangleWidthKey kCVImageBufferDisplayMaskRectangle_RectangleTopKey kCVImageBufferDisplayMaskRectangle_RectangleHeightKey kCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey kCVImageBufferDisplayMaskRectangle_RightEdgePointsKey
+// KCVImageBufferDisplayMaskRectangleStereoLeftKey returns the value of the constant kCVImageBufferDisplayMaskRectangleStereoLeftKey.
+func KCVImageBufferDisplayMaskRectangleStereoLeftKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangleStereoLeftKey")))
 }
 
-// @constant    kCVImageBufferDisplayMaskRectangleStereoRightKey @abstract Specifies the rectangular display area within the right eye view of stereo images, using the same keys as with kCVImageBufferDisplayMaskRectangleKey. To address window violations in stereo video, points insetting the left and right edges of the rectangle are supported through additional keys, allowing the description of the "extended raster rectangle". @discussion Value is a dictionary containing these keys for the extended raster rectangle: kCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey kCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey kCVImageBufferDisplayMaskRectangle_RectangleLeftKey kCVImageBufferDisplayMaskRectangle_RectangleWidthKey kCVImageBufferDisplayMaskRectangle_RectangleTopKey kCVImageBufferDisplayMaskRectangle_RectangleHeightKey kCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey kCVImageBufferDisplayMaskRectangle_RightEdgePointsKey
-// KCVImageBufferDisplayMaskRectangleStereoRightKey returns the value of the CoreFoundation reference constant kCVImageBufferDisplayMaskRectangleStereoRightKey as an objc.ID.
-func KCVImageBufferDisplayMaskRectangleStereoRightKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferDisplayMaskRectangleStereoRightKey())
+// Specifies the rectangular display area within the right eye view of stereo images, using the same keys as with kCVImageBufferDisplayMaskRectangleKey. To address window violations in stereo video, points insetting the left and right edges of the rectangle are supported through additional keys, allowing the description of the "extended raster rectangle". Value is a dictionary containing these keys for the extended raster rectangle: kCVImageBufferDisplayMaskRectangle_ReferenceRasterWidthKey kCVImageBufferDisplayMaskRectangle_ReferenceRasterHeightKey kCVImageBufferDisplayMaskRectangle_RectangleLeftKey kCVImageBufferDisplayMaskRectangle_RectangleWidthKey kCVImageBufferDisplayMaskRectangle_RectangleTopKey kCVImageBufferDisplayMaskRectangle_RectangleHeightKey kCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey kCVImageBufferDisplayMaskRectangle_RightEdgePointsKey
+// KCVImageBufferDisplayMaskRectangleStereoRightKey returns the value of the constant kCVImageBufferDisplayMaskRectangleStereoRightKey.
+func KCVImageBufferDisplayMaskRectangleStereoRightKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangleStereoRightKey")))
 }
 
-// @constant    kCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey @abstract Specifies inset points on the left vertical edge of the rectangle. The points are CFArray of unsigned 16-bit integer CFNumber pairs alternating between inset X and inset Y. Inset X is an unsigned offset from left edge (0) towards the right edge (width). Inset Y is an unsigned offset from top edge (0) towards the bottom edge (height)
-// KCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey returns the value of the CoreFoundation reference constant kCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey as an objc.ID.
-func KCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey())
+// Specifies inset points on the left vertical edge of the rectangle. The points are CFArray of unsigned 16-bit integer CFNumber pairs alternating between inset X and inset Y. Inset X is an unsigned offset from left edge (0) towards the right edge (width). Inset Y is an unsigned offset from top edge (0) towards the bottom edge (height)
+// KCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey returns the value of the constant kCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey.
+func KCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangle_LeftEdgePointsKey")))
 }
 
-// @constant    kCVImageBufferDisplayMaskRectangle_RightEdgePointsKey @abstract Specifies inset points on the right vertical edge of the rectangle. The points are CFArray of unsigned 16-bit integer CFNumber pairs alternating between inset X and inset Y. Inset X is an unsigned offset from right edge (0) towards the left edge (width). Inset Y is an unsigned offset from top edge (0) towards the bottom edge (height)
-// KCVImageBufferDisplayMaskRectangle_RightEdgePointsKey returns the value of the CoreFoundation reference constant kCVImageBufferDisplayMaskRectangle_RightEdgePointsKey as an objc.ID.
-func KCVImageBufferDisplayMaskRectangle_RightEdgePointsKey() objc.ID {
-	return purego.CFConstant(raw.KCVImageBufferDisplayMaskRectangle_RightEdgePointsKey())
+// Specifies inset points on the right vertical edge of the rectangle. The points are CFArray of unsigned 16-bit integer CFNumber pairs alternating between inset X and inset Y. Inset X is an unsigned offset from right edge (0) towards the left edge (width). Inset Y is an unsigned offset from top edge (0) towards the bottom edge (height)
+// KCVImageBufferDisplayMaskRectangle_RightEdgePointsKey returns the value of the constant kCVImageBufferDisplayMaskRectangle_RightEdgePointsKey.
+func KCVImageBufferDisplayMaskRectangle_RightEdgePointsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVImageBufferDisplayMaskRectangle_RightEdgePointsKey")))
 }
 
-// KCVPixelBufferPixelFormatTypeKey returns the value of the CoreFoundation reference constant kCVPixelBufferPixelFormatTypeKey as an objc.ID.
-func KCVPixelBufferPixelFormatTypeKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferPixelFormatTypeKey())
+// KCVPixelBufferPixelFormatTypeKey returns the value of the constant kCVPixelBufferPixelFormatTypeKey.
+func KCVPixelBufferPixelFormatTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferPixelFormatTypeKey")))
 }
 
-// KCVPixelBufferMemoryAllocatorKey returns the value of the CoreFoundation reference constant kCVPixelBufferMemoryAllocatorKey as an objc.ID.
-func KCVPixelBufferMemoryAllocatorKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferMemoryAllocatorKey())
+// KCVPixelBufferMemoryAllocatorKey returns the value of the constant kCVPixelBufferMemoryAllocatorKey.
+func KCVPixelBufferMemoryAllocatorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferMemoryAllocatorKey")))
 }
 
-// KCVPixelBufferWidthKey returns the value of the CoreFoundation reference constant kCVPixelBufferWidthKey as an objc.ID.
-func KCVPixelBufferWidthKey() objc.ID { return purego.CFConstant(raw.KCVPixelBufferWidthKey()) }
+// KCVPixelBufferWidthKey returns the value of the constant kCVPixelBufferWidthKey.
+func KCVPixelBufferWidthKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferWidthKey")))
+}
 
-// KCVPixelBufferHeightKey returns the value of the CoreFoundation reference constant kCVPixelBufferHeightKey as an objc.ID.
-func KCVPixelBufferHeightKey() objc.ID { return purego.CFConstant(raw.KCVPixelBufferHeightKey()) }
+// KCVPixelBufferHeightKey returns the value of the constant kCVPixelBufferHeightKey.
+func KCVPixelBufferHeightKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferHeightKey")))
+}
 
-// KCVPixelBufferExtendedPixelsLeftKey returns the value of the CoreFoundation reference constant kCVPixelBufferExtendedPixelsLeftKey as an objc.ID.
-func KCVPixelBufferExtendedPixelsLeftKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferExtendedPixelsLeftKey())
+// KCVPixelBufferExtendedPixelsLeftKey returns the value of the constant kCVPixelBufferExtendedPixelsLeftKey.
+func KCVPixelBufferExtendedPixelsLeftKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferExtendedPixelsLeftKey")))
 }
 
-// KCVPixelBufferExtendedPixelsTopKey returns the value of the CoreFoundation reference constant kCVPixelBufferExtendedPixelsTopKey as an objc.ID.
-func KCVPixelBufferExtendedPixelsTopKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferExtendedPixelsTopKey())
+// KCVPixelBufferExtendedPixelsTopKey returns the value of the constant kCVPixelBufferExtendedPixelsTopKey.
+func KCVPixelBufferExtendedPixelsTopKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferExtendedPixelsTopKey")))
 }
 
-// KCVPixelBufferExtendedPixelsRightKey returns the value of the CoreFoundation reference constant kCVPixelBufferExtendedPixelsRightKey as an objc.ID.
-func KCVPixelBufferExtendedPixelsRightKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferExtendedPixelsRightKey())
+// KCVPixelBufferExtendedPixelsRightKey returns the value of the constant kCVPixelBufferExtendedPixelsRightKey.
+func KCVPixelBufferExtendedPixelsRightKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferExtendedPixelsRightKey")))
 }
 
-// KCVPixelBufferExtendedPixelsBottomKey returns the value of the CoreFoundation reference constant kCVPixelBufferExtendedPixelsBottomKey as an objc.ID.
-func KCVPixelBufferExtendedPixelsBottomKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferExtendedPixelsBottomKey())
+// KCVPixelBufferExtendedPixelsBottomKey returns the value of the constant kCVPixelBufferExtendedPixelsBottomKey.
+func KCVPixelBufferExtendedPixelsBottomKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferExtendedPixelsBottomKey")))
 }
 
-// KCVPixelBufferBytesPerRowAlignmentKey returns the value of the CoreFoundation reference constant kCVPixelBufferBytesPerRowAlignmentKey as an objc.ID.
-func KCVPixelBufferBytesPerRowAlignmentKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferBytesPerRowAlignmentKey())
+// KCVPixelBufferBytesPerRowAlignmentKey returns the value of the constant kCVPixelBufferBytesPerRowAlignmentKey.
+func KCVPixelBufferBytesPerRowAlignmentKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferBytesPerRowAlignmentKey")))
 }
 
-// KCVPixelBufferCGBitmapContextCompatibilityKey returns the value of the CoreFoundation reference constant kCVPixelBufferCGBitmapContextCompatibilityKey as an objc.ID.
-func KCVPixelBufferCGBitmapContextCompatibilityKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferCGBitmapContextCompatibilityKey())
+// KCVPixelBufferCGBitmapContextCompatibilityKey returns the value of the constant kCVPixelBufferCGBitmapContextCompatibilityKey.
+func KCVPixelBufferCGBitmapContextCompatibilityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferCGBitmapContextCompatibilityKey")))
 }
 
-// KCVPixelBufferCGImageCompatibilityKey returns the value of the CoreFoundation reference constant kCVPixelBufferCGImageCompatibilityKey as an objc.ID.
-func KCVPixelBufferCGImageCompatibilityKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferCGImageCompatibilityKey())
+// KCVPixelBufferCGImageCompatibilityKey returns the value of the constant kCVPixelBufferCGImageCompatibilityKey.
+func KCVPixelBufferCGImageCompatibilityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferCGImageCompatibilityKey")))
 }
 
-// KCVPixelBufferOpenGLCompatibilityKey returns the value of the CoreFoundation reference constant kCVPixelBufferOpenGLCompatibilityKey as an objc.ID.
-func KCVPixelBufferOpenGLCompatibilityKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferOpenGLCompatibilityKey())
+// KCVPixelBufferOpenGLCompatibilityKey returns the value of the constant kCVPixelBufferOpenGLCompatibilityKey.
+func KCVPixelBufferOpenGLCompatibilityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferOpenGLCompatibilityKey")))
 }
 
-// KCVPixelBufferPlaneAlignmentKey returns the value of the CoreFoundation reference constant kCVPixelBufferPlaneAlignmentKey as an objc.ID.
-func KCVPixelBufferPlaneAlignmentKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferPlaneAlignmentKey())
+// KCVPixelBufferPlaneAlignmentKey returns the value of the constant kCVPixelBufferPlaneAlignmentKey.
+func KCVPixelBufferPlaneAlignmentKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferPlaneAlignmentKey")))
 }
 
-// KCVPixelBufferIOSurfacePropertiesKey returns the value of the CoreFoundation reference constant kCVPixelBufferIOSurfacePropertiesKey as an objc.ID.
-func KCVPixelBufferIOSurfacePropertiesKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferIOSurfacePropertiesKey())
+// KCVPixelBufferIOSurfacePropertiesKey returns the value of the constant kCVPixelBufferIOSurfacePropertiesKey.
+func KCVPixelBufferIOSurfacePropertiesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferIOSurfacePropertiesKey")))
 }
 
-// KCVPixelBufferMetalCompatibilityKey returns the value of the CoreFoundation reference constant kCVPixelBufferMetalCompatibilityKey as an objc.ID.
-func KCVPixelBufferMetalCompatibilityKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferMetalCompatibilityKey())
+// KCVPixelBufferMetalCompatibilityKey returns the value of the constant kCVPixelBufferMetalCompatibilityKey.
+func KCVPixelBufferMetalCompatibilityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferMetalCompatibilityKey")))
 }
 
-// KCVPixelBufferOpenGLTextureCacheCompatibilityKey returns the value of the CoreFoundation reference constant kCVPixelBufferOpenGLTextureCacheCompatibilityKey as an objc.ID.
-func KCVPixelBufferOpenGLTextureCacheCompatibilityKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferOpenGLTextureCacheCompatibilityKey())
+// KCVPixelBufferOpenGLTextureCacheCompatibilityKey returns the value of the constant kCVPixelBufferOpenGLTextureCacheCompatibilityKey.
+func KCVPixelBufferOpenGLTextureCacheCompatibilityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferOpenGLTextureCacheCompatibilityKey")))
 }
 
-// @const      kCVPixelBufferVersatileBayerKey_BayerPattern @abstract   Buffer attachment key for code indicating Bayer pattern (sensel arrangement). @discussion Associated attachment is a CFNumber of type kCFNumberSInt32Type.  The value follows the semantics of the ProRes RAW bayer_pattern bitstream syntax element, namely 0, 1, 2, or 3, where 0 means the top-left sensel of the frame is red-filtered ("RGGB"); 1 means the top-left sensel of the frame is green-filtered, with the top row alternating between green- and red-filtered sensels ("GRBG"); 2 means the top-left sensel of the frame is green- filtered, with the top row alternating between green- and blue-filtered sensels ("GBRG"); and 3 means the top-left sensel of the frame is blue-filtered ("BGGR").  This attachment applies only to buffers with VersatileBayer formats.
-// KCVPixelBufferVersatileBayerKey_BayerPattern returns the value of the CoreFoundation reference constant kCVPixelBufferVersatileBayerKey_BayerPattern as an objc.ID.
-func KCVPixelBufferVersatileBayerKey_BayerPattern() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferVersatileBayerKey_BayerPattern())
+// Buffer attachment key for code indicating Bayer pattern (sensel arrangement). Associated attachment is a CFNumber of type kCFNumberSInt32Type.  The value follows the semantics of the ProRes RAW bayer_pattern bitstream syntax element, namely 0, 1, 2, or 3, where 0 means the top-left sensel of the frame is red-filtered ("RGGB"); 1 means the top-left sensel of the frame is green-filtered, with the top row alternating between green- and red-filtered sensels ("GRBG"); 2 means the top-left sensel of the frame is green- filtered, with the top row alternating between green- and blue-filtered sensels ("GBRG"); and 3 means the top-left sensel of the frame is blue-filtered ("BGGR").  This attachment applies only to buffers with VersatileBayer formats.
+// KCVPixelBufferVersatileBayerKey_BayerPattern returns the value of the constant kCVPixelBufferVersatileBayerKey_BayerPattern.
+func KCVPixelBufferVersatileBayerKey_BayerPattern() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferVersatileBayerKey_BayerPattern")))
 }
 
-// @const      kCVPixelBufferProResRAWKey_SenselSitingOffsets @abstract   Buffer attachment key for siting offsets, relative to pixel center, of individual sensels/components constituting each pixel. @discussion Associated attachment is CFData containing an array of 8 32-bit floats.  The eight CFData array elements specify, in order, the following sensel/component offsets from pixel center: red horizontal offset, red vertical offset, green horizontal offset, green vertical offset, blue horizontal offset, blue vertical offset, alpha horizontal offset, and alpha vertical offset.  A positive offset value indicates that the sensel/component lies to the right of or below the center of its pixel, while a negative value indicates that the sensel/component lies to the left of or above the center of its pixel.  Horizontal and vertical offset magnitudes are respectively in terms of the spacing between horizontally- and vertically-adjacent pixel centers.  This attachment applies only to buffers with the bp64 format, and is optional for those buffers; if not present, all offsets are considered to be 0.
-// KCVPixelBufferProResRAWKey_SenselSitingOffsets returns the value of the CoreFoundation reference constant kCVPixelBufferProResRAWKey_SenselSitingOffsets as an objc.ID.
-func KCVPixelBufferProResRAWKey_SenselSitingOffsets() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferProResRAWKey_SenselSitingOffsets())
+// Buffer attachment key for siting offsets, relative to pixel center, of individual sensels/components constituting each pixel. Associated attachment is CFData containing an array of 8 32-bit floats.  The eight CFData array elements specify, in order, the following sensel/component offsets from pixel center: red horizontal offset, red vertical offset, green horizontal offset, green vertical offset, blue horizontal offset, blue vertical offset, alpha horizontal offset, and alpha vertical offset.  A positive offset value indicates that the sensel/component lies to the right of or below the center of its pixel, while a negative value indicates that the sensel/component lies to the left of or above the center of its pixel.  Horizontal and vertical offset magnitudes are respectively in terms of the spacing between horizontally- and vertically-adjacent pixel centers.  This attachment applies only to buffers with the bp64 format, and is optional for those buffers; if not present, all offsets are considered to be 0.
+// KCVPixelBufferProResRAWKey_SenselSitingOffsets returns the value of the constant kCVPixelBufferProResRAWKey_SenselSitingOffsets.
+func KCVPixelBufferProResRAWKey_SenselSitingOffsets() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_SenselSitingOffsets")))
 }
 
-// @const      kCVPixelBufferProResRAWKey_BlackLevel @abstract   Buffer attachment key for sensel black level. @discussion Associated attachment is a CFNumber of type kCFNumberSInt32Type.  The value is the sensel level corresponding to no light exposure.  This attachment is required for buffers with either the bp16 or bp64 format.
-// KCVPixelBufferProResRAWKey_BlackLevel returns the value of the CoreFoundation reference constant kCVPixelBufferProResRAWKey_BlackLevel as an objc.ID.
-func KCVPixelBufferProResRAWKey_BlackLevel() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferProResRAWKey_BlackLevel())
+// Buffer attachment key for sensel black level. Associated attachment is a CFNumber of type kCFNumberSInt32Type.  The value is the sensel level corresponding to no light exposure.  This attachment is required for buffers with either the bp16 or bp64 format.
+// KCVPixelBufferProResRAWKey_BlackLevel returns the value of the constant kCVPixelBufferProResRAWKey_BlackLevel.
+func KCVPixelBufferProResRAWKey_BlackLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_BlackLevel")))
 }
 
-// @const      kCVPixelBufferProResRAWKey_WhiteLevel @abstract   Buffer attachment key for sensel white level. @discussion Associated attachment is a CFNumber of type kCFNumberSInt32Type.  The value is the sensel level corresponding to sensor (or camera A-to-D converter) saturation.  This attachment is required for buffers with either the bp16 or bp64 format.
-// KCVPixelBufferProResRAWKey_WhiteLevel returns the value of the CoreFoundation reference constant kCVPixelBufferProResRAWKey_WhiteLevel as an objc.ID.
-func KCVPixelBufferProResRAWKey_WhiteLevel() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferProResRAWKey_WhiteLevel())
+// Buffer attachment key for sensel white level. Associated attachment is a CFNumber of type kCFNumberSInt32Type.  The value is the sensel level corresponding to sensor (or camera A-to-D converter) saturation.  This attachment is required for buffers with either the bp16 or bp64 format.
+// KCVPixelBufferProResRAWKey_WhiteLevel returns the value of the constant kCVPixelBufferProResRAWKey_WhiteLevel.
+func KCVPixelBufferProResRAWKey_WhiteLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_WhiteLevel")))
 }
 
-// @const      kCVPixelBufferProResRAWKey_WhiteBalanceCCT @abstract   Buffer attachment key for illuminant correlated color temperature. @discussion Associated attachment is a CFNumber of type kCFNumberSInt32Type.  The value is the illuminant correlated color temperature (CCT), in kelvins, selected at the time of capture.  May be 0, indicating that the CCT is unknown or unspecified.  This attachment is optional for buffers with either the bp16 or bp64 format; if not present, the CCT is considered unknown or unspecified.
-// KCVPixelBufferProResRAWKey_WhiteBalanceCCT returns the value of the CoreFoundation reference constant kCVPixelBufferProResRAWKey_WhiteBalanceCCT as an objc.ID.
-func KCVPixelBufferProResRAWKey_WhiteBalanceCCT() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferProResRAWKey_WhiteBalanceCCT())
+// Buffer attachment key for illuminant correlated color temperature. Associated attachment is a CFNumber of type kCFNumberSInt32Type.  The value is the illuminant correlated color temperature (CCT), in kelvins, selected at the time of capture.  May be 0, indicating that the CCT is unknown or unspecified.  This attachment is optional for buffers with either the bp16 or bp64 format; if not present, the CCT is considered unknown or unspecified.
+// KCVPixelBufferProResRAWKey_WhiteBalanceCCT returns the value of the constant kCVPixelBufferProResRAWKey_WhiteBalanceCCT.
+func KCVPixelBufferProResRAWKey_WhiteBalanceCCT() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_WhiteBalanceCCT")))
 }
 
-// @const      kCVPixelBufferProResRAWKey_WhiteBalanceRedFactor @abstract   Buffer attachment key for white balance red factor. @discussion Associated attachment is a CFNumber of type kCFNumberFloat32Type.  The value is the white balance multiplication factor for red-filtered sensels.  This attachment is required for buffers with either the bp16 or bp64 format.
-// KCVPixelBufferProResRAWKey_WhiteBalanceRedFactor returns the value of the CoreFoundation reference constant kCVPixelBufferProResRAWKey_WhiteBalanceRedFactor as an objc.ID.
-func KCVPixelBufferProResRAWKey_WhiteBalanceRedFactor() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferProResRAWKey_WhiteBalanceRedFactor())
+// Buffer attachment key for white balance red factor. Associated attachment is a CFNumber of type kCFNumberFloat32Type.  The value is the white balance multiplication factor for red-filtered sensels.  This attachment is required for buffers with either the bp16 or bp64 format.
+// KCVPixelBufferProResRAWKey_WhiteBalanceRedFactor returns the value of the constant kCVPixelBufferProResRAWKey_WhiteBalanceRedFactor.
+func KCVPixelBufferProResRAWKey_WhiteBalanceRedFactor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_WhiteBalanceRedFactor")))
 }
 
-// @const      kCVPixelBufferProResRAWKey_WhiteBalanceBlueFactor @abstract   Buffer attachment key for white balance blue factor. @discussion Associated attachment is a CFNumber of type kCFNumberFloat32Type.  The value is the white balance multiplication factor for blue-filtered sensels.  This attachment is required for buffers with either the bp16 or bp64 format.
-// KCVPixelBufferProResRAWKey_WhiteBalanceBlueFactor returns the value of the CoreFoundation reference constant kCVPixelBufferProResRAWKey_WhiteBalanceBlueFactor as an objc.ID.
-func KCVPixelBufferProResRAWKey_WhiteBalanceBlueFactor() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferProResRAWKey_WhiteBalanceBlueFactor())
+// Buffer attachment key for white balance blue factor. Associated attachment is a CFNumber of type kCFNumberFloat32Type.  The value is the white balance multiplication factor for blue-filtered sensels.  This attachment is required for buffers with either the bp16 or bp64 format.
+// KCVPixelBufferProResRAWKey_WhiteBalanceBlueFactor returns the value of the constant kCVPixelBufferProResRAWKey_WhiteBalanceBlueFactor.
+func KCVPixelBufferProResRAWKey_WhiteBalanceBlueFactor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_WhiteBalanceBlueFactor")))
 }
 
-// @const      kCVPixelBufferProResRAWKey_ColorMatrix @abstract   Buffer attachment key for color translation matrix. @discussion Associated attachment is CFData containing an array of 9 32-bit floats.  The value is a 3x3 matrix which transforms linear RGB pixel values in the camera native color space to CIE 1931 XYZ values relative to the D65 illuminant, where the matrix entries are stored in the CFData in row-major order.  This attachment is required for buffers with either the bp16 or bp64 format.
-// KCVPixelBufferProResRAWKey_ColorMatrix returns the value of the CoreFoundation reference constant kCVPixelBufferProResRAWKey_ColorMatrix as an objc.ID.
-func KCVPixelBufferProResRAWKey_ColorMatrix() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferProResRAWKey_ColorMatrix())
+// Buffer attachment key for color translation matrix. Associated attachment is CFData containing an array of 9 32-bit floats.  The value is a 3x3 matrix which transforms linear RGB pixel values in the camera native color space to CIE 1931 XYZ values relative to the D65 illuminant, where the matrix entries are stored in the CFData in row-major order.  This attachment is required for buffers with either the bp16 or bp64 format.
+// KCVPixelBufferProResRAWKey_ColorMatrix returns the value of the constant kCVPixelBufferProResRAWKey_ColorMatrix.
+func KCVPixelBufferProResRAWKey_ColorMatrix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_ColorMatrix")))
 }
 
-// @const      kCVPixelBufferProResRAWKey_GainFactor @abstract   Buffer attachment key for gain factor. @discussion Associated attachment is a CFNumber of type kCFNumberFloat32Type.  The value is the overall gain factor for raw conversion.  This attachment is required for buffers with either the bp16 or bp64 format.
-// KCVPixelBufferProResRAWKey_GainFactor returns the value of the CoreFoundation reference constant kCVPixelBufferProResRAWKey_GainFactor as an objc.ID.
-func KCVPixelBufferProResRAWKey_GainFactor() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferProResRAWKey_GainFactor())
+// Buffer attachment key for gain factor. Associated attachment is a CFNumber of type kCFNumberFloat32Type.  The value is the overall gain factor for raw conversion.  This attachment is required for buffers with either the bp16 or bp64 format.
+// KCVPixelBufferProResRAWKey_GainFactor returns the value of the constant kCVPixelBufferProResRAWKey_GainFactor.
+func KCVPixelBufferProResRAWKey_GainFactor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_GainFactor")))
 }
 
-// @const      kCVPixelBufferProResRAWKey_RecommendedCrop @abstract   Buffer attachment key for recommended number of pixels/rows to discard from the sides of the image after raw conversion. @discussion Associated attachment is CFData containing an array of 4 32-bit floats.  The four CFData array elements specify, in order, the recommended number of: pixels to discard from the start (left) of each row of the image; pixels to discard from the end (right) of each row of the image; rows of pixels to discard from the top of the image; and rows of pixels to discard from the bottom of the image.  (Pixels/rows are discarded after raw conversion.)  This attachment is optional for buffers with either the bp16 or bp64 format; if not present, the recommended crop values are considered to be 0.  For buffers with the bp64 format, the values may be nonintegral due to downscaling, in which case the handling of fractional parts is implementation-dependent.
-// KCVPixelBufferProResRAWKey_RecommendedCrop returns the value of the CoreFoundation reference constant kCVPixelBufferProResRAWKey_RecommendedCrop as an objc.ID.
-func KCVPixelBufferProResRAWKey_RecommendedCrop() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferProResRAWKey_RecommendedCrop())
+// Buffer attachment key for recommended number of pixels/rows to discard from the sides of the image after raw conversion. Associated attachment is CFData containing an array of 4 32-bit floats.  The four CFData array elements specify, in order, the recommended number of: pixels to discard from the start (left) of each row of the image; pixels to discard from the end (right) of each row of the image; rows of pixels to discard from the top of the image; and rows of pixels to discard from the bottom of the image.  (Pixels/rows are discarded after raw conversion.)  This attachment is optional for buffers with either the bp16 or bp64 format; if not present, the recommended crop values are considered to be 0.  For buffers with the bp64 format, the values may be nonintegral due to downscaling, in which case the handling of fractional parts is implementation-dependent.
+// KCVPixelBufferProResRAWKey_RecommendedCrop returns the value of the constant kCVPixelBufferProResRAWKey_RecommendedCrop.
+func KCVPixelBufferProResRAWKey_RecommendedCrop() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_RecommendedCrop")))
 }
 
-// @const      kCVPixelBufferProResRAWKey_MetadataExtension @abstract   Buffer attachment key for metadata extension. @discussion Associated attachment is CFData containing ProRes RAW metadata extension. This attachment is optional for buffers with either bp16 or bp64.  The CFData contains a big-endian uint32 representing the size of the item in bytes followed by a 4-character code ('psim') followed by a variable-length pascal string identifying the metadata (like a key string) followed by the metadata payload.
-// KCVPixelBufferProResRAWKey_MetadataExtension returns the value of the CoreFoundation reference constant kCVPixelBufferProResRAWKey_MetadataExtension as an objc.ID.
-func KCVPixelBufferProResRAWKey_MetadataExtension() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferProResRAWKey_MetadataExtension())
+// Buffer attachment key for metadata extension. Associated attachment is CFData containing ProRes RAW metadata extension. This attachment is optional for buffers with either bp16 or bp64.  The CFData contains a big-endian uint32 representing the size of the item in bytes followed by a 4-character code ('psim') followed by a variable-length pascal string identifying the metadata (like a key string) followed by the metadata payload.
+// KCVPixelBufferProResRAWKey_MetadataExtension returns the value of the constant kCVPixelBufferProResRAWKey_MetadataExtension.
+func KCVPixelBufferProResRAWKey_MetadataExtension() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferProResRAWKey_MetadataExtension")))
 }
 
-// @const      kCVPixelBufferIOSurfacePurgeableKey @abstract   Key sets the IOSurface backed memory allocation for CVPixelBuffer as purgable and volatile. @discussion A purgeable IOSurface is capable of being switched between non-volatile, volatile and empty states using IOSurfaceSetPurgeable.  When in the volatile state, the OS is permitted to instantly change its state to empty and remove all its memory pages.  Clients should set the IOSurfaces to the non-volatile state while they are in use and the volatile state when their need and contents is optional/speculative and OK to discard in response to system memory demand.  See IOSurfaceSetPurgeable for more details.  This key is only effective for CVPixelBuffers that are backed by IOSurface.
-// KCVPixelBufferIOSurfacePurgeableKey returns the value of the CoreFoundation reference constant kCVPixelBufferIOSurfacePurgeableKey as an objc.ID.
-func KCVPixelBufferIOSurfacePurgeableKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferIOSurfacePurgeableKey())
+// Key sets the IOSurface backed memory allocation for CVPixelBuffer as purgable and volatile. A purgeable IOSurface is capable of being switched between non-volatile, volatile and empty states using IOSurfaceSetPurgeable.  When in the volatile state, the OS is permitted to instantly change its state to empty and remove all its memory pages.  Clients should set the IOSurfaces to the non-volatile state while they are in use and the volatile state when their need and contents is optional/speculative and OK to discard in response to system memory demand.  See IOSurfaceSetPurgeable for more details.  This key is only effective for CVPixelBuffers that are backed by IOSurface.
+// KCVPixelBufferIOSurfacePurgeableKey returns the value of the constant kCVPixelBufferIOSurfacePurgeableKey.
+func KCVPixelBufferIOSurfacePurgeableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferIOSurfacePurgeableKey")))
 }
 
-// KCVPixelBufferIOSurfaceOpenGLTextureCompatibilityKey returns the value of the CoreFoundation reference constant kCVPixelBufferIOSurfaceOpenGLTextureCompatibilityKey as an objc.ID.
-func KCVPixelBufferIOSurfaceOpenGLTextureCompatibilityKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferIOSurfaceOpenGLTextureCompatibilityKey())
+// KCVPixelBufferIOSurfaceOpenGLTextureCompatibilityKey returns the value of the constant kCVPixelBufferIOSurfaceOpenGLTextureCompatibilityKey.
+func KCVPixelBufferIOSurfaceOpenGLTextureCompatibilityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferIOSurfaceOpenGLTextureCompatibilityKey")))
 }
 
-// KCVPixelBufferIOSurfaceOpenGLFBOCompatibilityKey returns the value of the CoreFoundation reference constant kCVPixelBufferIOSurfaceOpenGLFBOCompatibilityKey as an objc.ID.
-func KCVPixelBufferIOSurfaceOpenGLFBOCompatibilityKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferIOSurfaceOpenGLFBOCompatibilityKey())
+// KCVPixelBufferIOSurfaceOpenGLFBOCompatibilityKey returns the value of the constant kCVPixelBufferIOSurfaceOpenGLFBOCompatibilityKey.
+func KCVPixelBufferIOSurfaceOpenGLFBOCompatibilityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferIOSurfaceOpenGLFBOCompatibilityKey")))
 }
 
-// KCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey returns the value of the CoreFoundation reference constant kCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey as an objc.ID.
-func KCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey())
+// KCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey returns the value of the constant kCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey.
+func KCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferIOSurfaceCoreAnimationCompatibilityKey")))
 }
 
-// KCVPixelBufferPoolMinimumBufferCountKey returns the value of the CoreFoundation reference constant kCVPixelBufferPoolMinimumBufferCountKey as an objc.ID.
-func KCVPixelBufferPoolMinimumBufferCountKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferPoolMinimumBufferCountKey())
+// KCVPixelBufferPoolMinimumBufferCountKey returns the value of the constant kCVPixelBufferPoolMinimumBufferCountKey.
+func KCVPixelBufferPoolMinimumBufferCountKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferPoolMinimumBufferCountKey")))
 }
 
-// KCVPixelBufferPoolMaximumBufferAgeKey returns the value of the CoreFoundation reference constant kCVPixelBufferPoolMaximumBufferAgeKey as an objc.ID.
-func KCVPixelBufferPoolMaximumBufferAgeKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferPoolMaximumBufferAgeKey())
+// KCVPixelBufferPoolMaximumBufferAgeKey returns the value of the constant kCVPixelBufferPoolMaximumBufferAgeKey.
+func KCVPixelBufferPoolMaximumBufferAgeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferPoolMaximumBufferAgeKey")))
 }
 
-// KCVPixelBufferPoolAllocationThresholdKey returns the value of the CoreFoundation reference constant kCVPixelBufferPoolAllocationThresholdKey as an objc.ID.
-func KCVPixelBufferPoolAllocationThresholdKey() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferPoolAllocationThresholdKey())
+// KCVPixelBufferPoolAllocationThresholdKey returns the value of the constant kCVPixelBufferPoolAllocationThresholdKey.
+func KCVPixelBufferPoolAllocationThresholdKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferPoolAllocationThresholdKey")))
 }
 
-// KCVPixelBufferPoolFreeBufferNotification returns the value of the CoreFoundation reference constant kCVPixelBufferPoolFreeBufferNotification as an objc.ID.
-func KCVPixelBufferPoolFreeBufferNotification() objc.ID {
-	return purego.CFConstant(raw.KCVPixelBufferPoolFreeBufferNotification())
+// KCVPixelBufferPoolFreeBufferNotification returns the value of the constant kCVPixelBufferPoolFreeBufferNotification.
+func KCVPixelBufferPoolFreeBufferNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelBufferPoolFreeBufferNotification")))
 }
 
-// KCVOpenGLBufferWidth returns the value of the CoreFoundation reference constant kCVOpenGLBufferWidth as an objc.ID.
-func KCVOpenGLBufferWidth() objc.ID { return purego.CFConstant(raw.KCVOpenGLBufferWidth()) }
+// KCVOpenGLBufferWidth returns the value of the constant kCVOpenGLBufferWidth.
+func KCVOpenGLBufferWidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVOpenGLBufferWidth")))
+}
 
-// KCVOpenGLBufferHeight returns the value of the CoreFoundation reference constant kCVOpenGLBufferHeight as an objc.ID.
-func KCVOpenGLBufferHeight() objc.ID { return purego.CFConstant(raw.KCVOpenGLBufferHeight()) }
+// KCVOpenGLBufferHeight returns the value of the constant kCVOpenGLBufferHeight.
+func KCVOpenGLBufferHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVOpenGLBufferHeight")))
+}
 
-// KCVOpenGLBufferTarget returns the value of the CoreFoundation reference constant kCVOpenGLBufferTarget as an objc.ID.
-func KCVOpenGLBufferTarget() objc.ID { return purego.CFConstant(raw.KCVOpenGLBufferTarget()) }
+// KCVOpenGLBufferTarget returns the value of the constant kCVOpenGLBufferTarget.
+func KCVOpenGLBufferTarget() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVOpenGLBufferTarget")))
+}
 
-// KCVOpenGLBufferInternalFormat returns the value of the CoreFoundation reference constant kCVOpenGLBufferInternalFormat as an objc.ID.
-func KCVOpenGLBufferInternalFormat() objc.ID {
-	return purego.CFConstant(raw.KCVOpenGLBufferInternalFormat())
+// KCVOpenGLBufferInternalFormat returns the value of the constant kCVOpenGLBufferInternalFormat.
+func KCVOpenGLBufferInternalFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVOpenGLBufferInternalFormat")))
 }
 
-// KCVOpenGLBufferMaximumMipmapLevel returns the value of the CoreFoundation reference constant kCVOpenGLBufferMaximumMipmapLevel as an objc.ID.
-func KCVOpenGLBufferMaximumMipmapLevel() objc.ID {
-	return purego.CFConstant(raw.KCVOpenGLBufferMaximumMipmapLevel())
+// KCVOpenGLBufferMaximumMipmapLevel returns the value of the constant kCVOpenGLBufferMaximumMipmapLevel.
+func KCVOpenGLBufferMaximumMipmapLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVOpenGLBufferMaximumMipmapLevel")))
 }
 
-// KCVOpenGLBufferPoolMinimumBufferCountKey returns the value of the CoreFoundation reference constant kCVOpenGLBufferPoolMinimumBufferCountKey as an objc.ID.
-func KCVOpenGLBufferPoolMinimumBufferCountKey() objc.ID {
-	return purego.CFConstant(raw.KCVOpenGLBufferPoolMinimumBufferCountKey())
+// KCVOpenGLBufferPoolMinimumBufferCountKey returns the value of the constant kCVOpenGLBufferPoolMinimumBufferCountKey.
+func KCVOpenGLBufferPoolMinimumBufferCountKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVOpenGLBufferPoolMinimumBufferCountKey")))
 }
 
-// KCVOpenGLBufferPoolMaximumBufferAgeKey returns the value of the CoreFoundation reference constant kCVOpenGLBufferPoolMaximumBufferAgeKey as an objc.ID.
-func KCVOpenGLBufferPoolMaximumBufferAgeKey() objc.ID {
-	return purego.CFConstant(raw.KCVOpenGLBufferPoolMaximumBufferAgeKey())
+// KCVOpenGLBufferPoolMaximumBufferAgeKey returns the value of the constant kCVOpenGLBufferPoolMaximumBufferAgeKey.
+func KCVOpenGLBufferPoolMaximumBufferAgeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVOpenGLBufferPoolMaximumBufferAgeKey")))
 }
 
-// KCVOpenGLTextureCacheChromaSamplingModeKey returns the value of the CoreFoundation reference constant kCVOpenGLTextureCacheChromaSamplingModeKey as an objc.ID.
-func KCVOpenGLTextureCacheChromaSamplingModeKey() objc.ID {
-	return purego.CFConstant(raw.KCVOpenGLTextureCacheChromaSamplingModeKey())
+// KCVOpenGLTextureCacheChromaSamplingModeKey returns the value of the constant kCVOpenGLTextureCacheChromaSamplingModeKey.
+func KCVOpenGLTextureCacheChromaSamplingModeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVOpenGLTextureCacheChromaSamplingModeKey")))
 }
 
-// KCVOpenGLTextureCacheChromaSamplingModeAutomatic returns the value of the CoreFoundation reference constant kCVOpenGLTextureCacheChromaSamplingModeAutomatic as an objc.ID.
-func KCVOpenGLTextureCacheChromaSamplingModeAutomatic() objc.ID {
-	return purego.CFConstant(raw.KCVOpenGLTextureCacheChromaSamplingModeAutomatic())
+// KCVOpenGLTextureCacheChromaSamplingModeAutomatic returns the value of the constant kCVOpenGLTextureCacheChromaSamplingModeAutomatic.
+func KCVOpenGLTextureCacheChromaSamplingModeAutomatic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVOpenGLTextureCacheChromaSamplingModeAutomatic")))
 }
 
-// KCVOpenGLTextureCacheChromaSamplingModeHighestQuality returns the value of the CoreFoundation reference constant kCVOpenGLTextureCacheChromaSamplingModeHighestQuality as an objc.ID.
-func KCVOpenGLTextureCacheChromaSamplingModeHighestQuality() objc.ID {
-	return purego.CFConstant(raw.KCVOpenGLTextureCacheChromaSamplingModeHighestQuality())
+// KCVOpenGLTextureCacheChromaSamplingModeHighestQuality returns the value of the constant kCVOpenGLTextureCacheChromaSamplingModeHighestQuality.
+func KCVOpenGLTextureCacheChromaSamplingModeHighestQuality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVOpenGLTextureCacheChromaSamplingModeHighestQuality")))
 }
 
-// KCVOpenGLTextureCacheChromaSamplingModeBestPerformance returns the value of the CoreFoundation reference constant kCVOpenGLTextureCacheChromaSamplingModeBestPerformance as an objc.ID.
-func KCVOpenGLTextureCacheChromaSamplingModeBestPerformance() objc.ID {
-	return purego.CFConstant(raw.KCVOpenGLTextureCacheChromaSamplingModeBestPerformance())
+// KCVOpenGLTextureCacheChromaSamplingModeBestPerformance returns the value of the constant kCVOpenGLTextureCacheChromaSamplingModeBestPerformance.
+func KCVOpenGLTextureCacheChromaSamplingModeBestPerformance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVOpenGLTextureCacheChromaSamplingModeBestPerformance")))
 }
 
-// @discussion kCVMetalTextureUsage is a property that can be placed on a CVMetalTextureCache to instruct the MTLTextureUsage of the created MTLTexture. Values for this can can be read from MTLTexture.h
-// KCVMetalTextureUsage returns the value of the CoreFoundation reference constant kCVMetalTextureUsage as an objc.ID.
-func KCVMetalTextureUsage() objc.ID { return purego.CFConstant(raw.KCVMetalTextureUsage()) }
+// kCVMetalTextureUsage is a property that can be placed on a CVMetalTextureCache to instruct the MTLTextureUsage of the created MTLTexture. Values for this can can be read from MTLTexture.h
+// KCVMetalTextureUsage returns the value of the constant kCVMetalTextureUsage.
+func KCVMetalTextureUsage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVMetalTextureUsage")))
+}
 
-// @discussion kCVMetalTextureStorageMode is a property that can be placed on a CVMetalTextureCache to instruct the MTLTextureStorageMode of the created MTLTexture. Values for this can can be read from MTLTexture.h
-// KCVMetalTextureStorageMode returns the value of the CoreFoundation reference constant kCVMetalTextureStorageMode as an objc.ID.
-func KCVMetalTextureStorageMode() objc.ID { return purego.CFConstant(raw.KCVMetalTextureStorageMode()) }
+// kCVMetalTextureStorageMode is a property that can be placed on a CVMetalTextureCache to instruct the MTLTextureStorageMode of the created MTLTexture. Values for this can can be read from MTLTexture.h
+// KCVMetalTextureStorageMode returns the value of the constant kCVMetalTextureStorageMode.
+func KCVMetalTextureStorageMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVMetalTextureStorageMode")))
+}
 
-// KCVMetalTextureCacheMaximumTextureAgeKey returns the value of the CoreFoundation reference constant kCVMetalTextureCacheMaximumTextureAgeKey as an objc.ID.
-func KCVMetalTextureCacheMaximumTextureAgeKey() objc.ID {
-	return purego.CFConstant(raw.KCVMetalTextureCacheMaximumTextureAgeKey())
+// KCVMetalTextureCacheMaximumTextureAgeKey returns the value of the constant kCVMetalTextureCacheMaximumTextureAgeKey.
+func KCVMetalTextureCacheMaximumTextureAgeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVMetalTextureCacheMaximumTextureAgeKey")))
 }
 
-// KCVMetalBufferCacheMaximumBufferAgeKey returns the value of the CoreFoundation reference constant kCVMetalBufferCacheMaximumBufferAgeKey as an objc.ID.
-func KCVMetalBufferCacheMaximumBufferAgeKey() objc.ID {
-	return purego.CFConstant(raw.KCVMetalBufferCacheMaximumBufferAgeKey())
+// KCVMetalBufferCacheMaximumBufferAgeKey returns the value of the constant kCVMetalBufferCacheMaximumBufferAgeKey.
+func KCVMetalBufferCacheMaximumBufferAgeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVMetalBufferCacheMaximumBufferAgeKey")))
 }
 
-// KCVPixelFormatName returns the value of the CoreFoundation reference constant kCVPixelFormatName as an objc.ID.
-func KCVPixelFormatName() objc.ID { return purego.CFConstant(raw.KCVPixelFormatName()) }
+// KCVPixelFormatName returns the value of the constant kCVPixelFormatName.
+func KCVPixelFormatName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatName")))
+}
 
-// KCVPixelFormatConstant returns the value of the CoreFoundation reference constant kCVPixelFormatConstant as an objc.ID.
-func KCVPixelFormatConstant() objc.ID { return purego.CFConstant(raw.KCVPixelFormatConstant()) }
+// KCVPixelFormatConstant returns the value of the constant kCVPixelFormatConstant.
+func KCVPixelFormatConstant() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatConstant")))
+}
 
-// KCVPixelFormatCodecType returns the value of the CoreFoundation reference constant kCVPixelFormatCodecType as an objc.ID.
-func KCVPixelFormatCodecType() objc.ID { return purego.CFConstant(raw.KCVPixelFormatCodecType()) }
+// KCVPixelFormatCodecType returns the value of the constant kCVPixelFormatCodecType.
+func KCVPixelFormatCodecType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatCodecType")))
+}
 
-// KCVPixelFormatFourCC returns the value of the CoreFoundation reference constant kCVPixelFormatFourCC as an objc.ID.
-func KCVPixelFormatFourCC() objc.ID { return purego.CFConstant(raw.KCVPixelFormatFourCC()) }
+// KCVPixelFormatFourCC returns the value of the constant kCVPixelFormatFourCC.
+func KCVPixelFormatFourCC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatFourCC")))
+}
 
-// KCVPixelFormatContainsAlpha returns the value of the CoreFoundation reference constant kCVPixelFormatContainsAlpha as an objc.ID.
-func KCVPixelFormatContainsAlpha() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatContainsAlpha())
+// KCVPixelFormatContainsAlpha returns the value of the constant kCVPixelFormatContainsAlpha.
+func KCVPixelFormatContainsAlpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatContainsAlpha")))
 }
 
-// KCVPixelFormatContainsYCbCr returns the value of the CoreFoundation reference constant kCVPixelFormatContainsYCbCr as an objc.ID.
-func KCVPixelFormatContainsYCbCr() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatContainsYCbCr())
+// KCVPixelFormatContainsYCbCr returns the value of the constant kCVPixelFormatContainsYCbCr.
+func KCVPixelFormatContainsYCbCr() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatContainsYCbCr")))
 }
 
-// KCVPixelFormatContainsRGB returns the value of the CoreFoundation reference constant kCVPixelFormatContainsRGB as an objc.ID.
-func KCVPixelFormatContainsRGB() objc.ID { return purego.CFConstant(raw.KCVPixelFormatContainsRGB()) }
+// KCVPixelFormatContainsRGB returns the value of the constant kCVPixelFormatContainsRGB.
+func KCVPixelFormatContainsRGB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatContainsRGB")))
+}
 
-// KCVPixelFormatContainsGrayscale returns the value of the CoreFoundation reference constant kCVPixelFormatContainsGrayscale as an objc.ID.
-func KCVPixelFormatContainsGrayscale() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatContainsGrayscale())
+// KCVPixelFormatContainsGrayscale returns the value of the constant kCVPixelFormatContainsGrayscale.
+func KCVPixelFormatContainsGrayscale() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatContainsGrayscale")))
 }
 
-// KCVPixelFormatContainsSenselArray returns the value of the CoreFoundation reference constant kCVPixelFormatContainsSenselArray as an objc.ID.
-func KCVPixelFormatContainsSenselArray() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatContainsSenselArray())
+// KCVPixelFormatContainsSenselArray returns the value of the constant kCVPixelFormatContainsSenselArray.
+func KCVPixelFormatContainsSenselArray() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatContainsSenselArray")))
 }
 
-// KCVPixelFormatComponentRange returns the value of the CoreFoundation reference constant kCVPixelFormatComponentRange as an objc.ID.
-func KCVPixelFormatComponentRange() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatComponentRange())
+// KCVPixelFormatComponentRange returns the value of the constant kCVPixelFormatComponentRange.
+func KCVPixelFormatComponentRange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatComponentRange")))
 }
 
-// KCVPixelFormatComponentRange_VideoRange returns the value of the CoreFoundation reference constant kCVPixelFormatComponentRange_VideoRange as an objc.ID.
-func KCVPixelFormatComponentRange_VideoRange() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatComponentRange_VideoRange())
+// KCVPixelFormatComponentRange_VideoRange returns the value of the constant kCVPixelFormatComponentRange_VideoRange.
+func KCVPixelFormatComponentRange_VideoRange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatComponentRange_VideoRange")))
 }
 
-// KCVPixelFormatComponentRange_FullRange returns the value of the CoreFoundation reference constant kCVPixelFormatComponentRange_FullRange as an objc.ID.
-func KCVPixelFormatComponentRange_FullRange() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatComponentRange_FullRange())
+// KCVPixelFormatComponentRange_FullRange returns the value of the constant kCVPixelFormatComponentRange_FullRange.
+func KCVPixelFormatComponentRange_FullRange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatComponentRange_FullRange")))
 }
 
-// KCVPixelFormatComponentRange_WideRange returns the value of the CoreFoundation reference constant kCVPixelFormatComponentRange_WideRange as an objc.ID.
-func KCVPixelFormatComponentRange_WideRange() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatComponentRange_WideRange())
+// KCVPixelFormatComponentRange_WideRange returns the value of the constant kCVPixelFormatComponentRange_WideRange.
+func KCVPixelFormatComponentRange_WideRange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatComponentRange_WideRange")))
 }
 
-// KCVPixelFormatPlanes returns the value of the CoreFoundation reference constant kCVPixelFormatPlanes as an objc.ID.
-func KCVPixelFormatPlanes() objc.ID { return purego.CFConstant(raw.KCVPixelFormatPlanes()) }
+// KCVPixelFormatPlanes returns the value of the constant kCVPixelFormatPlanes.
+func KCVPixelFormatPlanes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatPlanes")))
+}
 
-// KCVPixelFormatBlockWidth returns the value of the CoreFoundation reference constant kCVPixelFormatBlockWidth as an objc.ID.
-func KCVPixelFormatBlockWidth() objc.ID { return purego.CFConstant(raw.KCVPixelFormatBlockWidth()) }
+// KCVPixelFormatBlockWidth returns the value of the constant kCVPixelFormatBlockWidth.
+func KCVPixelFormatBlockWidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatBlockWidth")))
+}
 
-// KCVPixelFormatBlockHeight returns the value of the CoreFoundation reference constant kCVPixelFormatBlockHeight as an objc.ID.
-func KCVPixelFormatBlockHeight() objc.ID { return purego.CFConstant(raw.KCVPixelFormatBlockHeight()) }
+// KCVPixelFormatBlockHeight returns the value of the constant kCVPixelFormatBlockHeight.
+func KCVPixelFormatBlockHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatBlockHeight")))
+}
 
-// KCVPixelFormatBitsPerBlock returns the value of the CoreFoundation reference constant kCVPixelFormatBitsPerBlock as an objc.ID.
-func KCVPixelFormatBitsPerBlock() objc.ID { return purego.CFConstant(raw.KCVPixelFormatBitsPerBlock()) }
+// KCVPixelFormatBitsPerBlock returns the value of the constant kCVPixelFormatBitsPerBlock.
+func KCVPixelFormatBitsPerBlock() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatBitsPerBlock")))
+}
 
-// KCVPixelFormatBitsPerComponent returns the value of the CoreFoundation reference constant kCVPixelFormatBitsPerComponent as an objc.ID.
-func KCVPixelFormatBitsPerComponent() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatBitsPerComponent())
+// KCVPixelFormatBitsPerComponent returns the value of the constant kCVPixelFormatBitsPerComponent.
+func KCVPixelFormatBitsPerComponent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatBitsPerComponent")))
 }
 
-// KCVPixelFormatBlockHorizontalAlignment returns the value of the CoreFoundation reference constant kCVPixelFormatBlockHorizontalAlignment as an objc.ID.
-func KCVPixelFormatBlockHorizontalAlignment() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatBlockHorizontalAlignment())
+// KCVPixelFormatBlockHorizontalAlignment returns the value of the constant kCVPixelFormatBlockHorizontalAlignment.
+func KCVPixelFormatBlockHorizontalAlignment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatBlockHorizontalAlignment")))
 }
 
-// KCVPixelFormatBlockVerticalAlignment returns the value of the CoreFoundation reference constant kCVPixelFormatBlockVerticalAlignment as an objc.ID.
-func KCVPixelFormatBlockVerticalAlignment() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatBlockVerticalAlignment())
+// KCVPixelFormatBlockVerticalAlignment returns the value of the constant kCVPixelFormatBlockVerticalAlignment.
+func KCVPixelFormatBlockVerticalAlignment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatBlockVerticalAlignment")))
 }
 
-// KCVPixelFormatBlackBlock returns the value of the CoreFoundation reference constant kCVPixelFormatBlackBlock as an objc.ID.
-func KCVPixelFormatBlackBlock() objc.ID { return purego.CFConstant(raw.KCVPixelFormatBlackBlock()) }
+// KCVPixelFormatBlackBlock returns the value of the constant kCVPixelFormatBlackBlock.
+func KCVPixelFormatBlackBlock() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatBlackBlock")))
+}
 
-// KCVPixelFormatHorizontalSubsampling returns the value of the CoreFoundation reference constant kCVPixelFormatHorizontalSubsampling as an objc.ID.
-func KCVPixelFormatHorizontalSubsampling() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatHorizontalSubsampling())
+// KCVPixelFormatHorizontalSubsampling returns the value of the constant kCVPixelFormatHorizontalSubsampling.
+func KCVPixelFormatHorizontalSubsampling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatHorizontalSubsampling")))
 }
 
-// KCVPixelFormatVerticalSubsampling returns the value of the CoreFoundation reference constant kCVPixelFormatVerticalSubsampling as an objc.ID.
-func KCVPixelFormatVerticalSubsampling() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatVerticalSubsampling())
+// KCVPixelFormatVerticalSubsampling returns the value of the constant kCVPixelFormatVerticalSubsampling.
+func KCVPixelFormatVerticalSubsampling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatVerticalSubsampling")))
 }
 
-// KCVPixelFormatOpenGLFormat returns the value of the CoreFoundation reference constant kCVPixelFormatOpenGLFormat as an objc.ID.
-func KCVPixelFormatOpenGLFormat() objc.ID { return purego.CFConstant(raw.KCVPixelFormatOpenGLFormat()) }
+// KCVPixelFormatOpenGLFormat returns the value of the constant kCVPixelFormatOpenGLFormat.
+func KCVPixelFormatOpenGLFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatOpenGLFormat")))
+}
 
-// KCVPixelFormatOpenGLType returns the value of the CoreFoundation reference constant kCVPixelFormatOpenGLType as an objc.ID.
-func KCVPixelFormatOpenGLType() objc.ID { return purego.CFConstant(raw.KCVPixelFormatOpenGLType()) }
+// KCVPixelFormatOpenGLType returns the value of the constant kCVPixelFormatOpenGLType.
+func KCVPixelFormatOpenGLType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatOpenGLType")))
+}
 
-// KCVPixelFormatOpenGLInternalFormat returns the value of the CoreFoundation reference constant kCVPixelFormatOpenGLInternalFormat as an objc.ID.
-func KCVPixelFormatOpenGLInternalFormat() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatOpenGLInternalFormat())
+// KCVPixelFormatOpenGLInternalFormat returns the value of the constant kCVPixelFormatOpenGLInternalFormat.
+func KCVPixelFormatOpenGLInternalFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatOpenGLInternalFormat")))
 }
 
-// KCVPixelFormatCGBitmapInfo returns the value of the CoreFoundation reference constant kCVPixelFormatCGBitmapInfo as an objc.ID.
-func KCVPixelFormatCGBitmapInfo() objc.ID { return purego.CFConstant(raw.KCVPixelFormatCGBitmapInfo()) }
+// KCVPixelFormatCGBitmapInfo returns the value of the constant kCVPixelFormatCGBitmapInfo.
+func KCVPixelFormatCGBitmapInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatCGBitmapInfo")))
+}
 
-// KCVPixelFormatQDCompatibility returns the value of the CoreFoundation reference constant kCVPixelFormatQDCompatibility as an objc.ID.
-func KCVPixelFormatQDCompatibility() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatQDCompatibility())
+// KCVPixelFormatQDCompatibility returns the value of the constant kCVPixelFormatQDCompatibility.
+func KCVPixelFormatQDCompatibility() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatQDCompatibility")))
 }
 
-// KCVPixelFormatCGBitmapContextCompatibility returns the value of the CoreFoundation reference constant kCVPixelFormatCGBitmapContextCompatibility as an objc.ID.
-func KCVPixelFormatCGBitmapContextCompatibility() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatCGBitmapContextCompatibility())
+// KCVPixelFormatCGBitmapContextCompatibility returns the value of the constant kCVPixelFormatCGBitmapContextCompatibility.
+func KCVPixelFormatCGBitmapContextCompatibility() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatCGBitmapContextCompatibility")))
 }
 
-// KCVPixelFormatCGImageCompatibility returns the value of the CoreFoundation reference constant kCVPixelFormatCGImageCompatibility as an objc.ID.
-func KCVPixelFormatCGImageCompatibility() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatCGImageCompatibility())
+// KCVPixelFormatCGImageCompatibility returns the value of the constant kCVPixelFormatCGImageCompatibility.
+func KCVPixelFormatCGImageCompatibility() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatCGImageCompatibility")))
 }
 
-// KCVPixelFormatOpenGLCompatibility returns the value of the CoreFoundation reference constant kCVPixelFormatOpenGLCompatibility as an objc.ID.
-func KCVPixelFormatOpenGLCompatibility() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatOpenGLCompatibility())
+// KCVPixelFormatOpenGLCompatibility returns the value of the constant kCVPixelFormatOpenGLCompatibility.
+func KCVPixelFormatOpenGLCompatibility() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatOpenGLCompatibility")))
 }
 
-// KCVPixelFormatFillExtendedPixelsCallback returns the value of the CoreFoundation reference constant kCVPixelFormatFillExtendedPixelsCallback as an objc.ID.
-func KCVPixelFormatFillExtendedPixelsCallback() objc.ID {
-	return purego.CFConstant(raw.KCVPixelFormatFillExtendedPixelsCallback())
+// KCVPixelFormatFillExtendedPixelsCallback returns the value of the constant kCVPixelFormatFillExtendedPixelsCallback.
+func KCVPixelFormatFillExtendedPixelsCallback() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCVPixelFormatFillExtendedPixelsCallback")))
 }

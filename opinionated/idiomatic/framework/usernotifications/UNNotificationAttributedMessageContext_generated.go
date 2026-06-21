@@ -5,41 +5,66 @@
 package usernotifications
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NotificationAttributedMessageContext wraps [raw.UNNotificationAttributedMessageContext] with a fluent Go API.
+// NotificationAttributedMessageContext is an idiomatic wrapper over the Objective-C class UNNotificationAttributedMessageContext.
 type NotificationAttributedMessageContext struct {
-	inner *raw.UNNotificationAttributedMessageContext
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.UNNotificationAttributedMessageContext].
-func (x *NotificationAttributedMessageContext) Unwrap() *raw.UNNotificationAttributedMessageContext {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NotificationAttributedMessageContext) ID() objc.ID { return x.inner.Ptr() }
-
-// NotificationAttributedMessageContextFromID adopts an existing object pointer as a NotificationAttributedMessageContext (nil for 0).
+// NotificationAttributedMessageContextFromID adopts an existing Objective-C object as a NotificationAttributedMessageContext
+// (nil for 0), retaining it and registering a release finalizer.
 func NotificationAttributedMessageContextFromID(id objc.ID) *NotificationAttributedMessageContext {
 	if id == 0 {
 		return nil
 	}
-	return &NotificationAttributedMessageContext{inner: raw.UNNotificationAttributedMessageContextFromID(id)}
+	x := &NotificationAttributedMessageContext{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNotificationAttributedMessageContext creates a new [NotificationAttributedMessageContext].
+// notificationAttributedMessageContextAdopt wraps an Objective-C object that this code just created as a
+// NotificationAttributedMessageContext (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func notificationAttributedMessageContextAdopt(id objc.ID) *NotificationAttributedMessageContext {
+	if id == 0 {
+		return nil
+	}
+	x := &NotificationAttributedMessageContext{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NotificationAttributedMessageContext) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NotificationAttributedMessageContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NotificationAttributedMessageContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNotificationAttributedMessageContext creates a new NotificationAttributedMessageContext.
 func NewNotificationAttributedMessageContext() *NotificationAttributedMessageContext {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNNotificationAttributedMessageContext")), objc.RegisterName("new"))
-	return &NotificationAttributedMessageContext{inner: raw.UNNotificationAttributedMessageContextFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("UNNotificationAttributedMessageContext")), objc.RegisterName("new"))
+	return notificationAttributedMessageContextAdopt(_id)
 }
 
 // NotificationAttributedMessageContextable is the interface implemented by [NotificationAttributedMessageContext], for mocking and DI.
 type NotificationAttributedMessageContextable interface {
-	Unwrap() *raw.UNNotificationAttributedMessageContext
+	obj.Object
 }
 
 var _ NotificationAttributedMessageContextable = (*NotificationAttributedMessageContext)(nil)

@@ -5,93 +5,109 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A layer that splits a tensor value into a list of subtensors.
 //
-// SplitLayer wraps [raw.MLCSplitLayer] with a fluent Go API.
+// SplitLayer is an idiomatic wrapper over the Objective-C class MLCSplitLayer.
 type SplitLayer struct {
-	inner *raw.MLCSplitLayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCSplitLayer].
-func (x *SplitLayer) Unwrap() *raw.MLCSplitLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SplitLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// SplitLayerFromID adopts an existing object pointer as a SplitLayer (nil for 0).
+// SplitLayerFromID adopts an existing Objective-C object as a SplitLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func SplitLayerFromID(id objc.ID) *SplitLayer {
 	if id == 0 {
 		return nil
 	}
-	return &SplitLayer{inner: raw.MLCSplitLayerFromID(id)}
+	x := &SplitLayer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSplitLayer creates a new [SplitLayer].
+// splitLayerAdopt wraps an Objective-C object that this code just created as a
+// SplitLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func splitLayerAdopt(id objc.ID) *SplitLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &SplitLayer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SplitLayer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SplitLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SplitLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSplitLayer creates a new SplitLayer.
 func NewSplitLayer() *SplitLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCSplitLayer")), objc.RegisterName("new"))
-	return &SplitLayer{inner: raw.MLCSplitLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCSplitLayer")), objc.RegisterName("new"))
+	return splitLayerAdopt(_id)
 }
 
 // A string that helps identify this layer.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *SplitLayer) WithLabel(label string) *SplitLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 //
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
 func (x *SplitLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SplitLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// @property   dimension @abstract   The dimension (or axis) along which to split tensor
-//
-// Dimension calls the underlying Dimension.
-func (x *SplitLayer) Dimension() uint {
-	return x.inner.Dimension()
+// The dimension (or axis) along which to split tensor
+func (x *SplitLayer) Dimension() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimension"))
+	return _r
 }
 
-// @property   splitCount @abstract   The number of splits. @discussion The tensor will be split into equally sized chunks.  The last chunk may be smaller in size.
-//
-// SplitCount calls the underlying SplitCount.
-func (x *SplitLayer) SplitCount() uint {
-	return x.inner.SplitCount()
+// The number of splits. The tensor will be split into equally sized chunks.  The last chunk may be smaller in size.
+func (x *SplitLayer) SplitCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("splitCount"))
+	return _r
 }
 
-// @property   splitSectionLengths @abstract   Lengths of each split section. @discussion The tensor will be split into chunks along dimensions with sizes given in \p splitSectionLengths .
+// Lengths of each split section. The tensor will be split into chunks along dimensions with sizes given in \p splitSectionLengths .
 //
 // SplitSectionLengths returns the collection as a Go slice.
-func (x *SplitLayer) SplitSectionLengths() []*foundation.NSNumber {
-	arr := x.inner.SplitSectionLengths()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *SplitLayer) SplitSectionLengths() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("splitSectionLengths"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-func (x *SplitLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // SplitLayerable is the interface implemented by [SplitLayer], for mocking and DI.
 type SplitLayerable interface {
-	Unwrap() *raw.MLCSplitLayer
+	obj.Object
 	WithLabel(label string) *SplitLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *SplitLayer
-	Dimension() uint
-	SplitCount() uint
-	SplitSectionLengths() []*foundation.NSNumber
+	Dimension() int
+	SplitCount() int
+	SplitSectionLengths() []obj.Object
 }
 
 var _ SplitLayerable = (*SplitLayer)(nil)

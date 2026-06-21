@@ -9,66 +9,66 @@ import (
 )
 
 // Defines the current state of the authorization view.
-type SFAuthorizationViewState int64
+type AuthorizationViewState int64
 
 const (
-	SFAuthorizationStartupState        SFAuthorizationViewState = 0
-	SFAuthorizationViewLockedState     SFAuthorizationViewState = 1
-	SFAuthorizationViewInProgressState SFAuthorizationViewState = 2
-	SFAuthorizationViewUnlockedState   SFAuthorizationViewState = 3
+	AuthorizationStartupState        AuthorizationViewState = 0
+	AuthorizationViewLockedState     AuthorizationViewState = 1
+	AuthorizationViewInProgressState AuthorizationViewState = 2
+	AuthorizationViewUnlockedState   AuthorizationViewState = 3
 )
 
-func (e SFAuthorizationViewState) String() string {
+func (e AuthorizationViewState) String() string {
 	switch e {
-	case SFAuthorizationStartupState:
-		return "SFAuthorizationStartupState"
-	case SFAuthorizationViewLockedState:
-		return "SFAuthorizationViewLockedState"
-	case SFAuthorizationViewInProgressState:
-		return "SFAuthorizationViewInProgressState"
-	case SFAuthorizationViewUnlockedState:
-		return "SFAuthorizationViewUnlockedState"
+	case AuthorizationStartupState:
+		return "AuthorizationStartupState"
+	case AuthorizationViewLockedState:
+		return "AuthorizationViewLockedState"
+	case AuthorizationViewInProgressState:
+		return "AuthorizationViewInProgressState"
+	case AuthorizationViewUnlockedState:
+		return "AuthorizationViewUnlockedState"
 	default:
-		return fmt.Sprintf("SFAuthorizationViewState(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationViewState(%d)", int64(e))
 	}
 }
 
 // These constants define the button types used by authorization plug-ins.
-type SFButtonType int64
+type ButtonType int64
 
 const (
-	SFButtonTypeCancel SFButtonType = 0
-	SFButtonTypeOK     SFButtonType = 1
-	SFButtonTypeBack   SFButtonType = 0
-	SFButtonTypeLogin  SFButtonType = 1
+	ButtonTypeCancel ButtonType = 0
+	ButtonTypeOK     ButtonType = 1
+	ButtonTypeBack   ButtonType = 0
+	ButtonTypeLogin  ButtonType = 1
 )
 
-func (e SFButtonType) String() string {
+func (e ButtonType) String() string {
 	switch e {
-	case SFButtonTypeCancel:
-		return "SFButtonTypeCancel"
-	case SFButtonTypeOK:
-		return "SFButtonTypeOK"
+	case ButtonTypeCancel:
+		return "ButtonTypeCancel"
+	case ButtonTypeOK:
+		return "ButtonTypeOK"
 	default:
-		return fmt.Sprintf("SFButtonType(%d)", int64(e))
+		return fmt.Sprintf("ButtonType(%d)", int64(e))
 	}
 }
 
 // These constants define the view type requested by the authorization plug-in.
-type SFViewType int64
+type ViewType int64
 
 const (
-	SFViewTypeIdentityAndCredentials SFViewType = 0
-	SFViewTypeCredentials            SFViewType = 1
+	ViewTypeIdentityAndCredentials ViewType = 0
+	ViewTypeCredentials            ViewType = 1
 )
 
-func (e SFViewType) String() string {
+func (e ViewType) String() string {
 	switch e {
-	case SFViewTypeIdentityAndCredentials:
-		return "SFViewTypeIdentityAndCredentials"
-	case SFViewTypeCredentials:
-		return "SFViewTypeCredentials"
+	case ViewTypeIdentityAndCredentials:
+		return "ViewTypeIdentityAndCredentials"
+	case ViewTypeCredentials:
+		return "ViewTypeCredentials"
 	default:
-		return fmt.Sprintf("SFViewType(%d)", int64(e))
+		return fmt.Sprintf("ViewType(%d)", int64(e))
 	}
 }

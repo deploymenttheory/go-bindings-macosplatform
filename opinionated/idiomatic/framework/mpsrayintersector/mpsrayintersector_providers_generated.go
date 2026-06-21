@@ -5,15 +5,15 @@
 package mpsrayintersector
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsrayintersector"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// AccelerationStructureProvider is implemented by AccelerationStructure and any idiomatic type wrapping a MPSAccelerationStructure subclass.
+// AccelerationStructureProvider is accepted wherever a MPSAccelerationStructure (or one of its subclasses) is expected.
 type AccelerationStructureProvider interface {
-	asAccelerationStructure() *raw.MPSAccelerationStructure
+	objref.Object
 }
 
-// PolygonAccelerationStructureProvider is implemented by PolygonAccelerationStructure and any idiomatic type wrapping a MPSPolygonAccelerationStructure subclass.
+// PolygonAccelerationStructureProvider is accepted wherever a MPSPolygonAccelerationStructure (or one of its subclasses) is expected.
 type PolygonAccelerationStructureProvider interface {
-	asPolygonAccelerationStructure() *raw.MPSPolygonAccelerationStructure
+	objref.Object
 }

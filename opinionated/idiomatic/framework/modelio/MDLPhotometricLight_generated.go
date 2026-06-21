@@ -5,215 +5,207 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A light source whose shape, direction, and intensity of illumination are determined by a photometric profile.
 //
-// PhotometricLight wraps [raw.MDLPhotometricLight] with a fluent Go API.
+// PhotometricLight is an idiomatic wrapper over the Objective-C class MDLPhotometricLight.
 type PhotometricLight struct {
-	inner *raw.MDLPhotometricLight
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLPhotometricLight].
-func (x *PhotometricLight) Unwrap() *raw.MDLPhotometricLight { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhotometricLight) ID() objc.ID { return x.inner.Ptr() }
-
-// PhotometricLightFromID adopts an existing object pointer as a PhotometricLight (nil for 0).
+// PhotometricLightFromID adopts an existing Objective-C object as a PhotometricLight
+// (nil for 0), retaining it and registering a release finalizer.
 func PhotometricLightFromID(id objc.ID) *PhotometricLight {
 	if id == 0 {
 		return nil
 	}
-	return &PhotometricLight{inner: raw.MDLPhotometricLightFromID(id)}
+	x := &PhotometricLight{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// photometricLightAdopt wraps an Objective-C object that this code just created as a
+// PhotometricLight (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func photometricLightAdopt(id objc.ID) *PhotometricLight {
+	if id == 0 {
+		return nil
+	}
+	x := &PhotometricLight{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PhotometricLight) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PhotometricLight) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PhotometricLight) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a light from photometry data in the file at the specified URL.
 //
-// NewPhotometricLightWithIESProfile creates a new [PhotometricLight].
+// NewPhotometricLightWithIESProfile creates a new PhotometricLight.
 func NewPhotometricLightWithIESProfile(uRL string) *PhotometricLight {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLPhotometricLight")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIESProfile:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr())
-	return &PhotometricLight{inner: raw.MDLPhotometricLightFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLPhotometricLight")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIESProfile:"), rt.FileURL(uRL))
+	return photometricLightAdopt(_id)
+}
+
+// The color of the light source.
+//
+// WithColor sets color and returns the receiver so calls can be chained.
+func (x *PhotometricLight) WithColor(color obj.Object) *PhotometricLight {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
+	return x
 }
 
 // The total visible intensity of the light source, in lumens.
 //
-// WithLumens sets the lumens property and returns the receiver for chaining.
+// WithLumens sets lumens and returns the receiver so calls can be chained.
 func (x *PhotometricLight) WithLumens(lumens float32) *PhotometricLight {
-	x.inner.MDLPhysicallyPlausibleLight.SetLumens(lumens)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLumens:"), lumens)
 	return x
 }
 
 // The radial angle, in degrees, of the area fully illuminated by the light.
 //
-// WithInnerConeAngle sets the innerConeAngle property and returns the receiver for chaining.
+// WithInnerConeAngle sets innerConeAngle and returns the receiver so calls can be chained.
 func (x *PhotometricLight) WithInnerConeAngle(innerConeAngle float32) *PhotometricLight {
-	x.inner.MDLPhysicallyPlausibleLight.SetInnerConeAngle(innerConeAngle)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerConeAngle:"), innerConeAngle)
 	return x
 }
 
 // The radial angle, in degrees, at which the illumination from a spotlight becomes zero.
 //
-// WithOuterConeAngle sets the outerConeAngle property and returns the receiver for chaining.
+// WithOuterConeAngle sets outerConeAngle and returns the receiver so calls can be chained.
 func (x *PhotometricLight) WithOuterConeAngle(outerConeAngle float32) *PhotometricLight {
-	x.inner.MDLPhysicallyPlausibleLight.SetOuterConeAngle(outerConeAngle)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterConeAngle:"), outerConeAngle)
 	return x
 }
 
 // The distance from the light source, in units of local coordinate space, at which its illumination begins to diminish.
 //
-// WithAttenuationStartDistance sets the attenuationStartDistance property and returns the receiver for chaining.
+// WithAttenuationStartDistance sets attenuationStartDistance and returns the receiver so calls can be chained.
 func (x *PhotometricLight) WithAttenuationStartDistance(attenuationStartDistance float32) *PhotometricLight {
-	x.inner.MDLPhysicallyPlausibleLight.SetAttenuationStartDistance(attenuationStartDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationStartDistance:"), attenuationStartDistance)
 	return x
 }
 
 // The distance from the light source, in units of local coordinate space, at which its illumination becomes zero.
 //
-// WithAttenuationEndDistance sets the attenuationEndDistance property and returns the receiver for chaining.
+// WithAttenuationEndDistance sets attenuationEndDistance and returns the receiver so calls can be chained.
 func (x *PhotometricLight) WithAttenuationEndDistance(attenuationEndDistance float32) *PhotometricLight {
-	x.inner.MDLPhysicallyPlausibleLight.SetAttenuationEndDistance(attenuationEndDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttenuationEndDistance:"), attenuationEndDistance)
 	return x
 }
 
 // The type of the light.
 //
-// WithLightType sets the lightType property and returns the receiver for chaining.
-func (x *PhotometricLight) WithLightType(lightType MDLLightType) *PhotometricLight {
-	x.inner.MDLPhysicallyPlausibleLight.MDLLight.SetLightType(raw.MDLLightType(lightType))
+// WithLightType sets lightType and returns the receiver so calls can be chained.
+func (x *PhotometricLight) WithLightType(lightType LightType) *PhotometricLight {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightType:"), lightType)
 	return x
 }
 
 // The name of the Core Graphics color space to be used for interpreting the light’s color information.
 //
-// WithColorSpace sets the colorSpace property and returns the receiver for chaining.
+// WithColorSpace sets colorSpace and returns the receiver so calls can be chained.
 func (x *PhotometricLight) WithColorSpace(colorSpace string) *PhotometricLight {
-	x.inner.MDLPhysicallyPlausibleLight.MDLLight.SetColorSpace(foundation.NSStringStringWithUTF8String(colorSpace))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
 	return x
 }
 
 // The parent object that contains this object.
 //
-// WithParent sets the parent property and returns the receiver for chaining.
+// WithParent sets parent and returns the receiver so calls can be chained.
 func (x *PhotometricLight) WithParent(parent ObjectProvider) *PhotometricLight {
-	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetParent(parent.asObject())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
 }
 
 // The primary object, if applicable, of which this object is an instance.
 //
-// WithInstance sets the instance property and returns the receiver for chaining.
+// WithInstance sets instance and returns the receiver so calls can be chained.
 func (x *PhotometricLight) WithInstance(instance ObjectProvider) *PhotometricLight {
-	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetInstance(instance.asObject())
-	return x
-}
-
-// A component that manages this object’s spatial transform and its changes over time.
-//
-// WithTransform sets the transform property and returns the receiver for chaining.
-func (x *PhotometricLight) WithTransform(transform raw.MDLTransformComponent) *PhotometricLight {
-	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetTransform(transform)
-	return x
-}
-
-// A component that manages this object’s collection of children.
-//
-// WithChildren sets the children property and returns the receiver for chaining.
-func (x *PhotometricLight) WithChildren(children raw.MDLObjectContainerComponent) *PhotometricLight {
-	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetChildren(children)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return x
 }
 
 // A Boolean value indicating whether this object should be used in rendering.
 //
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *PhotometricLight) WithHidden(hidden bool) *PhotometricLight {
-	x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
 // Generates spherical harmonics information based on the light’s photometry data.
-//
-// GenerateSphericalHarmonicsFromLight calls the underlying GenerateSphericalHarmonicsFromLight.
-func (x *PhotometricLight) GenerateSphericalHarmonicsFromLight(sphericalHarmonicsLevel uint) {
-	x.inner.GenerateSphericalHarmonicsFromLight(sphericalHarmonicsLevel)
+func (x *PhotometricLight) GenerateSphericalHarmonicsFromLight(sphericalHarmonicsLevel int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("generateSphericalHarmonicsFromLight:"), sphericalHarmonicsLevel)
 }
 
 // Generates a cube map texture from the light’s photometry data.
-//
-// GenerateCubemapFromLight calls the underlying GenerateCubemapFromLight.
-func (x *PhotometricLight) GenerateCubemapFromLight(textureSize uint) {
-	x.inner.GenerateCubemapFromLight(textureSize)
+func (x *PhotometricLight) GenerateCubemapFromLight(textureSize int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("generateCubemapFromLight:"), textureSize)
 }
 
-// @method generateTexture @abstract Generate an IES compliant MDLTexture 1D when the number of horizontal angles is one and the innerConeAngle is < 180 2D when the previous statement fails and innerConeAngle < 89 3D in all other cases the parameter textureSize is the size in pixels of the texture image. For a size of N, 1D generates an Nx1 image, 2D generates an NxN image, 3D generates an Nx(N*6) image (i.e. cubemap).
-//
-// GenerateTexture calls the underlying GenerateTexture.
-func (x *PhotometricLight) GenerateTexture(textureSize uint) *Texture {
-	_r := x.inner.GenerateTexture(textureSize)
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+// Generate an IES compliant MDLTexture 1D when the number of horizontal angles is one and the innerConeAngle is < 180 2D when the previous statement fails and innerConeAngle < 89 3D in all other cases the parameter textureSize is the size in pixels of the texture image. For a size of N, 1D generates an Nx1 image, 2D generates an NxN image, 3D generates an Nx(N*6) image (i.e. cubemap).
+func (x *PhotometricLight) GenerateTexture(textureSize int) *Texture {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("generateTexture:"), textureSize)
+	return TextureFromID(_r)
 }
 
-// LightCubeMap calls the underlying LightCubeMap.
 func (x *PhotometricLight) LightCubeMap() *Texture {
-	_r := x.inner.LightCubeMap()
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lightCubeMap"))
+	return TextureFromID(_r)
 }
 
-// SphericalHarmonicsLevel calls the underlying SphericalHarmonicsLevel.
-func (x *PhotometricLight) SphericalHarmonicsLevel() uint {
-	return x.inner.SphericalHarmonicsLevel()
+func (x *PhotometricLight) SphericalHarmonicsLevel() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sphericalHarmonicsLevel"))
+	return _r
 }
 
-// SphericalHarmonicsCoefficients calls the underlying SphericalHarmonicsCoefficients.
-func (x *PhotometricLight) SphericalHarmonicsCoefficients() *foundation.NSData {
-	return x.inner.SphericalHarmonicsCoefficients()
-}
-
-func (x *PhotometricLight) asPhysicallyPlausibleLight() *raw.MDLPhysicallyPlausibleLight {
-	return &x.inner.MDLPhysicallyPlausibleLight
-}
-
-func (x *PhotometricLight) asLight() *raw.MDLLight {
-	return &x.inner.MDLPhysicallyPlausibleLight.MDLLight
-}
-
-func (x *PhotometricLight) asObject() *raw.MDLObject {
-	return &x.inner.MDLPhysicallyPlausibleLight.MDLLight.MDLObject
+func (x *PhotometricLight) SphericalHarmonicsCoefficients() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sphericalHarmonicsCoefficients"))
+	return obj.Wrap(_r)
 }
 
 // PhotometricLightable is the interface implemented by [PhotometricLight], for mocking and DI.
 type PhotometricLightable interface {
-	Unwrap() *raw.MDLPhotometricLight
+	obj.Object
+	WithColor(color obj.Object) *PhotometricLight
 	WithLumens(lumens float32) *PhotometricLight
 	WithInnerConeAngle(innerConeAngle float32) *PhotometricLight
 	WithOuterConeAngle(outerConeAngle float32) *PhotometricLight
 	WithAttenuationStartDistance(attenuationStartDistance float32) *PhotometricLight
 	WithAttenuationEndDistance(attenuationEndDistance float32) *PhotometricLight
-	WithLightType(lightType MDLLightType) *PhotometricLight
+	WithLightType(lightType LightType) *PhotometricLight
 	WithColorSpace(colorSpace string) *PhotometricLight
 	WithParent(parent ObjectProvider) *PhotometricLight
 	WithInstance(instance ObjectProvider) *PhotometricLight
-	WithTransform(transform raw.MDLTransformComponent) *PhotometricLight
-	WithChildren(children raw.MDLObjectContainerComponent) *PhotometricLight
 	WithHidden(hidden bool) *PhotometricLight
-	GenerateSphericalHarmonicsFromLight(sphericalHarmonicsLevel uint)
-	GenerateCubemapFromLight(textureSize uint)
-	GenerateTexture(textureSize uint) *Texture
+	GenerateSphericalHarmonicsFromLight(sphericalHarmonicsLevel int)
+	GenerateCubemapFromLight(textureSize int)
+	GenerateTexture(textureSize int) *Texture
 	LightCubeMap() *Texture
-	SphericalHarmonicsLevel() uint
-	SphericalHarmonicsCoefficients() *foundation.NSData
+	SphericalHarmonicsLevel() int
+	SphericalHarmonicsCoefficients() obj.Object
 }
 
 var _ PhotometricLightable = (*PhotometricLight)(nil)

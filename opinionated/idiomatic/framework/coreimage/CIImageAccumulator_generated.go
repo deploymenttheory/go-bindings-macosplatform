@@ -5,102 +5,92 @@
 package coreimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that manages feedback-based image processing for tasks such as painting or fluid simulation.
 //
-// ImageAccumulator wraps [raw.CIImageAccumulator] with a fluent Go API.
+// ImageAccumulator is an idiomatic wrapper over the Objective-C class CIImageAccumulator.
 type ImageAccumulator struct {
-	inner *raw.CIImageAccumulator
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CIImageAccumulator].
-func (x *ImageAccumulator) Unwrap() *raw.CIImageAccumulator { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageAccumulator) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageAccumulatorFromID adopts an existing object pointer as a ImageAccumulator (nil for 0).
+// ImageAccumulatorFromID adopts an existing Objective-C object as a ImageAccumulator
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageAccumulatorFromID(id objc.ID) *ImageAccumulator {
 	if id == 0 {
 		return nil
 	}
-	return &ImageAccumulator{inner: raw.CIImageAccumulatorFromID(id)}
+	x := &ImageAccumulator{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes an image accumulator with the specified extent and pixel format.
-//
-// NewImageAccumulatorWithExtentFormat creates a new [ImageAccumulator].
-func NewImageAccumulatorWithExtentFormat(extent corefoundation.CGRect, format int) *ImageAccumulator {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImageAccumulator")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExtent:format:"), extent, format)
-	return &ImageAccumulator{inner: raw.CIImageAccumulatorFromID(_id)}
+// imageAccumulatorAdopt wraps an Objective-C object that this code just created as a
+// ImageAccumulator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageAccumulatorAdopt(id objc.ID) *ImageAccumulator {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageAccumulator{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Initializes an image accumulator with the specified extent, pixel format, and color space.
-//
-// NewImageAccumulatorWithExtentFormatColorSpace creates a new [ImageAccumulator].
-func NewImageAccumulatorWithExtentFormatColorSpace(extent corefoundation.CGRect, format int, colorSpace unsafe.Pointer) *ImageAccumulator {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImageAccumulator")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExtent:format:colorSpace:"), extent, format, colorSpace)
-	return &ImageAccumulator{inner: raw.CIImageAccumulatorFromID(_id)}
+// Description returns the object's -description text.
+func (x *ImageAccumulator) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageAccumulator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageAccumulator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageAccumulator creates a new ImageAccumulator.
+func NewImageAccumulator() *ImageAccumulator {
+	_id := objc.Send[objc.ID](objc.ID(_class("CIImageAccumulator")), objc.RegisterName("new"))
+	return imageAccumulatorAdopt(_id)
 }
 
 // Returns the current contents of the image accumulator.
-//
-// Image calls the underlying Image.
 func (x *ImageAccumulator) Image() *Image {
-	_r := x.inner.Image()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+	return ImageFromID(_r)
 }
 
 // Sets the contents of the image accumulator to the contents of the specified image object.
-//
-// SetImage calls the underlying SetImage.
-func (x *ImageAccumulator) SetImage(image *raw.CIImage) {
-	x.inner.SetImage(image)
-}
-
-// Updates an image accumulator with a subregion of an image object.
-//
-// SetImageDirtyRect calls the underlying SetImageDirtyRect.
-func (x *ImageAccumulator) SetImageDirtyRect(image *raw.CIImage, dirtyRect corefoundation.CGRect) {
-	x.inner.SetImageDirtyRect(image, dirtyRect)
+func (x *ImageAccumulator) SetImage(image *Image) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 }
 
 // Resets the accumulator, discarding any pending updates and the current content.
-//
-// Clear calls the underlying Clear.
 func (x *ImageAccumulator) Clear() {
-	x.inner.Clear()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clear"))
 }
 
-// Extent calls the underlying Extent.
-func (x *ImageAccumulator) Extent() corefoundation.CGRect {
-	return x.inner.Extent()
-}
-
-// Format calls the underlying Format.
 func (x *ImageAccumulator) Format() int {
-	return x.inner.Format()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("format"))
+	return _r
 }
 
 // ImageAccumulatorable is the interface implemented by [ImageAccumulator], for mocking and DI.
 type ImageAccumulatorable interface {
-	Unwrap() *raw.CIImageAccumulator
+	obj.Object
 	Image() *Image
-	SetImage(image *raw.CIImage)
-	SetImageDirtyRect(image *raw.CIImage, dirtyRect corefoundation.CGRect)
+	SetImage(image *Image)
 	Clear()
-	Extent() corefoundation.CGRect
 	Format() int
 }
 

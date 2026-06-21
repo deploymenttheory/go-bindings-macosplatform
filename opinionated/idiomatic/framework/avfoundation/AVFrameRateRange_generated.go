@@ -5,74 +5,82 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An immutable type that represents a range of valid frame rates.
 //
-// FrameRateRange wraps [raw.AVFrameRateRange] with a fluent Go API.
+// FrameRateRange is an idiomatic wrapper over the Objective-C class AVFrameRateRange.
 type FrameRateRange struct {
-	inner *raw.AVFrameRateRange
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVFrameRateRange].
-func (x *FrameRateRange) Unwrap() *raw.AVFrameRateRange { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FrameRateRange) ID() objc.ID { return x.inner.Ptr() }
-
-// FrameRateRangeFromID adopts an existing object pointer as a FrameRateRange (nil for 0).
+// FrameRateRangeFromID adopts an existing Objective-C object as a FrameRateRange
+// (nil for 0), retaining it and registering a release finalizer.
 func FrameRateRangeFromID(id objc.ID) *FrameRateRange {
 	if id == 0 {
 		return nil
 	}
-	return &FrameRateRange{inner: raw.AVFrameRateRangeFromID(id)}
+	x := &FrameRateRange{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFrameRateRange creates a new [FrameRateRange].
+// frameRateRangeAdopt wraps an Objective-C object that this code just created as a
+// FrameRateRange (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func frameRateRangeAdopt(id objc.ID) *FrameRateRange {
+	if id == 0 {
+		return nil
+	}
+	x := &FrameRateRange{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FrameRateRange) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FrameRateRange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FrameRateRange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFrameRateRange creates a new FrameRateRange.
 func NewFrameRateRange() *FrameRateRange {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVFrameRateRange")), objc.RegisterName("new"))
-	return &FrameRateRange{inner: raw.AVFrameRateRangeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVFrameRateRange")), objc.RegisterName("new"))
+	return frameRateRangeAdopt(_id)
 }
 
-// @property minFrameRate @abstract A Float64 indicating the minimum frame rate supported by this range. @discussion This read-only property indicates the minimum frame rate supported by this range in frames per second.
-//
-// MinFrameRate calls the underlying MinFrameRate.
+// A Float64 indicating the minimum frame rate supported by this range. This read-only property indicates the minimum frame rate supported by this range in frames per second.
 func (x *FrameRateRange) MinFrameRate() float64 {
-	return x.inner.MinFrameRate()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minFrameRate"))
+	return _r
 }
 
-// @property maxFrameRate @abstract A Float64 indicating the maximum frame rate supported by this range. @discussion This read-only property indicates the maximum frame rate supported by this range in frames per second.
-//
-// MaxFrameRate calls the underlying MaxFrameRate.
+// A Float64 indicating the maximum frame rate supported by this range. This read-only property indicates the maximum frame rate supported by this range in frames per second.
 func (x *FrameRateRange) MaxFrameRate() float64 {
-	return x.inner.MaxFrameRate()
-}
-
-// @property maxFrameDuration @abstract A CMTime indicating the maximum frame duration supported by this range. @discussion This read-only property indicates the maximum frame duration supported by this range. It is the reciprocal of minFrameRate, and expresses minFrameRate as a duration.
-//
-// MaxFrameDuration calls the underlying MaxFrameDuration.
-func (x *FrameRateRange) MaxFrameDuration() coremedia.CMTime {
-	return x.inner.MaxFrameDuration()
-}
-
-// @property minFrameDuration @abstract A CMTime indicating the minimum frame duration supported by this range. @discussion This read-only property indicates the minimum frame duration supported by this range. It is the reciprocal of maxFrameRate, and expresses maxFrameRate as a duration.
-//
-// MinFrameDuration calls the underlying MinFrameDuration.
-func (x *FrameRateRange) MinFrameDuration() coremedia.CMTime {
-	return x.inner.MinFrameDuration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxFrameRate"))
+	return _r
 }
 
 // FrameRateRangeable is the interface implemented by [FrameRateRange], for mocking and DI.
 type FrameRateRangeable interface {
-	Unwrap() *raw.AVFrameRateRange
+	obj.Object
 	MinFrameRate() float64
 	MaxFrameRate() float64
-	MaxFrameDuration() coremedia.CMTime
-	MinFrameDuration() coremedia.CMTime
 }
 
 var _ FrameRateRangeable = (*FrameRateRange)(nil)

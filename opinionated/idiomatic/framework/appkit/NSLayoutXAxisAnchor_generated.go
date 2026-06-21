@@ -5,93 +5,96 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A factory class for creating horizontal layout constraint objects using a fluent API.
 //
-// LayoutXAxisAnchor wraps [raw.NSLayoutXAxisAnchor] with a fluent Go API.
+// LayoutXAxisAnchor is an idiomatic wrapper over the Objective-C class NSLayoutXAxisAnchor.
 type LayoutXAxisAnchor struct {
-	inner *raw.NSLayoutXAxisAnchor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSLayoutXAxisAnchor].
-func (x *LayoutXAxisAnchor) Unwrap() *raw.NSLayoutXAxisAnchor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LayoutXAxisAnchor) ID() objc.ID { return x.inner.Ptr() }
-
-// LayoutXAxisAnchorFromID adopts an existing object pointer as a LayoutXAxisAnchor (nil for 0).
+// LayoutXAxisAnchorFromID adopts an existing Objective-C object as a LayoutXAxisAnchor
+// (nil for 0), retaining it and registering a release finalizer.
 func LayoutXAxisAnchorFromID(id objc.ID) *LayoutXAxisAnchor {
 	if id == 0 {
 		return nil
 	}
-	return &LayoutXAxisAnchor{inner: raw.NSLayoutXAxisAnchorFromID(id)}
+	x := &LayoutXAxisAnchor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLayoutXAxisAnchor creates a new [LayoutXAxisAnchor].
+// layoutXAxisAnchorAdopt wraps an Objective-C object that this code just created as a
+// LayoutXAxisAnchor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func layoutXAxisAnchorAdopt(id objc.ID) *LayoutXAxisAnchor {
+	if id == 0 {
+		return nil
+	}
+	x := &LayoutXAxisAnchor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LayoutXAxisAnchor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LayoutXAxisAnchor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LayoutXAxisAnchor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLayoutXAxisAnchor creates a new LayoutXAxisAnchor.
 func NewLayoutXAxisAnchor() *LayoutXAxisAnchor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLayoutXAxisAnchor")), objc.RegisterName("new"))
-	return &LayoutXAxisAnchor{inner: raw.NSLayoutXAxisAnchorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSLayoutXAxisAnchor")), objc.RegisterName("new"))
+	return layoutXAxisAnchorAdopt(_id)
 }
 
 // Creates a layout dimension object from two anchors.
-//
-// AnchorWithOffsetToAnchor calls the underlying AnchorWithOffsetToAnchor.
-func (x *LayoutXAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *raw.NSLayoutXAxisAnchor) *LayoutDimension {
-	_r := x.inner.AnchorWithOffsetToAnchor(otherAnchor)
-	if _r == nil {
-		return nil
-	}
-	return &LayoutDimension{inner: _r}
+func (x *LayoutXAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *LayoutXAxisAnchor) *LayoutDimension {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anchorWithOffsetToAnchor:"), objref.IDOf(otherAnchor))
+	return LayoutDimensionFromID(_r)
 }
 
 // Returns a constraint that defines by how much the current anchor trails the specified anchor.
-//
-// ConstraintEqualToSystemSpacingAfterAnchorMultiplier calls the underlying ConstraintEqualToSystemSpacingAfterAnchorMultiplier.
-func (x *LayoutXAxisAnchor) ConstraintEqualToSystemSpacingAfterAnchorMultiplier(anchor *raw.NSLayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
-	_r := x.inner.ConstraintEqualToSystemSpacingAfterAnchorMultiplier(anchor, multiplier)
-	if _r == nil {
-		return nil
-	}
-	return &LayoutConstraint{inner: _r}
+func (x *LayoutXAxisAnchor) ConstraintEqualToSystemSpacingAfterAnchorMultiplier(anchor *LayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintEqualToSystemSpacingAfterAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
+	return LayoutConstraintFromID(_r)
 }
 
 // Returns a constraint that defines the minimum amount by which the current anchor trails the specified anchor.
-//
-// ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier calls the underlying ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier.
-func (x *LayoutXAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *raw.NSLayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
-	_r := x.inner.ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor, multiplier)
-	if _r == nil {
-		return nil
-	}
-	return &LayoutConstraint{inner: _r}
+func (x *LayoutXAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *LayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintGreaterThanOrEqualToSystemSpacingAfterAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
+	return LayoutConstraintFromID(_r)
 }
 
 // Returns a constraint that defines the maximum amount by which the current anchor trails the specified anchor.
-//
-// ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier calls the underlying ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier.
-func (x *LayoutXAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *raw.NSLayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
-	_r := x.inner.ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor, multiplier)
-	if _r == nil {
-		return nil
-	}
-	return &LayoutConstraint{inner: _r}
-}
-
-func (x *LayoutXAxisAnchor) asLayoutAnchor() *raw.NSLayoutAnchor[objc.ID] {
-	return &x.inner.NSLayoutAnchor
+func (x *LayoutXAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *LayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintLessThanOrEqualToSystemSpacingAfterAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
+	return LayoutConstraintFromID(_r)
 }
 
 // LayoutXAxisAnchorable is the interface implemented by [LayoutXAxisAnchor], for mocking and DI.
 type LayoutXAxisAnchorable interface {
-	Unwrap() *raw.NSLayoutXAxisAnchor
-	AnchorWithOffsetToAnchor(otherAnchor *raw.NSLayoutXAxisAnchor) *LayoutDimension
-	ConstraintEqualToSystemSpacingAfterAnchorMultiplier(anchor *raw.NSLayoutXAxisAnchor, multiplier float64) *LayoutConstraint
-	ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *raw.NSLayoutXAxisAnchor, multiplier float64) *LayoutConstraint
-	ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *raw.NSLayoutXAxisAnchor, multiplier float64) *LayoutConstraint
+	obj.Object
+	AnchorWithOffsetToAnchor(otherAnchor *LayoutXAxisAnchor) *LayoutDimension
+	ConstraintEqualToSystemSpacingAfterAnchorMultiplier(anchor *LayoutXAxisAnchor, multiplier float64) *LayoutConstraint
+	ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *LayoutXAxisAnchor, multiplier float64) *LayoutConstraint
+	ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *LayoutXAxisAnchor, multiplier float64) *LayoutConstraint
 }
 
 var _ LayoutXAxisAnchorable = (*LayoutXAxisAnchor)(nil)

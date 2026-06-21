@@ -5,121 +5,93 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MatrixRandomMTGP32 wraps [raw.MPSMatrixRandomMTGP32] with a fluent Go API.
+// MatrixRandomMTGP32 is an idiomatic wrapper over the Objective-C class MPSMatrixRandomMTGP32.
 type MatrixRandomMTGP32 struct {
-	inner *raw.MPSMatrixRandomMTGP32
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSMatrixRandomMTGP32].
-func (x *MatrixRandomMTGP32) Unwrap() *raw.MPSMatrixRandomMTGP32 { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatrixRandomMTGP32) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixRandomMTGP32FromID adopts an existing object pointer as a MatrixRandomMTGP32 (nil for 0).
+// MatrixRandomMTGP32FromID adopts an existing Objective-C object as a MatrixRandomMTGP32
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixRandomMTGP32FromID(id objc.ID) *MatrixRandomMTGP32 {
 	if id == 0 {
 		return nil
 	}
-	return &MatrixRandomMTGP32{inner: raw.MPSMatrixRandomMTGP32FromID(id)}
-}
-
-// @abstract   initialize a MPSMatrixRandomMTGP32 filter to generate 32-bit unsigned integer values with an initial seed of 0. @param      device          The device the filter will run on
-//
-// NewMatrixRandomMTGP32WithDevice creates a new [MatrixRandomMTGP32].
-func NewMatrixRandomMTGP32WithDevice(device metal.MTLDevice) *MatrixRandomMTGP32 {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixRandomMTGP32")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &MatrixRandomMTGP32{inner: raw.MPSMatrixRandomMTGP32FromID(_id)}
-}
-
-// @abstract   initialize a MPSMatrixRandomMTGP32 filter @param      device                  The device the filter will run on @param      destinationDataType     The data type of the result. @param      seed                    The seed to initialize the random number generators with. @param      distributionDescriptor  A descriptor containing information about the distribution.
-//
-// NewMatrixRandomMTGP32WithDeviceDestinationDataTypeSeedDistributionDescriptor creates a new [MatrixRandomMTGP32].
-func NewMatrixRandomMTGP32WithDeviceDestinationDataTypeSeedDistributionDescriptor(device metal.MTLDevice, destinationDataType mpscore.MPSDataType, seed uint, distributionDescriptor *mpsmatrix.MPSMatrixRandomDistributionDescriptor) *MatrixRandomMTGP32 {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixRandomMTGP32")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:destinationDataType:seed:distributionDescriptor:"), device, destinationDataType, seed, distributionDescriptor.Ptr())
-	return &MatrixRandomMTGP32{inner: raw.MPSMatrixRandomMTGP32FromID(_id)}
-}
-
-// @abstract   initialize a MPSMatrixRandomMTGP32 filter using a default distribution. @param      device                  The device the filter will run on @param      destinationDataType     The data type of the result. @param      seed                    The seed to initialize the random number generators with.
-//
-// NewMatrixRandomMTGP32WithDeviceDestinationDataTypeSeed creates a new [MatrixRandomMTGP32].
-func NewMatrixRandomMTGP32WithDeviceDestinationDataTypeSeed(device metal.MTLDevice, destinationDataType mpscore.MPSDataType, seed uint) *MatrixRandomMTGP32 {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixRandomMTGP32")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:destinationDataType:seed:"), device, destinationDataType, seed)
-	return &MatrixRandomMTGP32{inner: raw.MPSMatrixRandomMTGP32FromID(_id)}
-}
-
-// NewMatrixRandomMTGP32WithCoderDevice creates a new [MatrixRandomMTGP32].
-func NewMatrixRandomMTGP32WithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MatrixRandomMTGP32 {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixRandomMTGP32")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &MatrixRandomMTGP32{inner: raw.MPSMatrixRandomMTGP32FromID(_id)}
-}
-
-// @property   batchStart @discussion The starting index in the destination batch.
-//
-// WithBatchStart sets the batchStart property and returns the receiver for chaining.
-func (x *MatrixRandomMTGP32) WithBatchStart(batchStart uint) *MatrixRandomMTGP32 {
-	x.inner.MPSMatrixRandom.SetBatchStart(batchStart)
+	x := &MatrixRandomMTGP32{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   batchSize @discussion The size of the batch to process.
-//
-// WithBatchSize sets the batchSize property and returns the receiver for chaining.
-func (x *MatrixRandomMTGP32) WithBatchSize(batchSize uint) *MatrixRandomMTGP32 {
-	x.inner.MPSMatrixRandom.SetBatchSize(batchSize)
+// matrixRandomMTGP32Adopt wraps an Objective-C object that this code just created as a
+// MatrixRandomMTGP32 (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixRandomMTGP32Adopt(id objc.ID) *MatrixRandomMTGP32 {
+	if id == 0 {
+		return nil
+	}
+	x := &MatrixRandomMTGP32{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// The set of options used to run the kernel.
+// Description returns the object's -description text.
+func (x *MatrixRandomMTGP32) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatrixRandomMTGP32) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatrixRandomMTGP32) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMatrixRandomMTGP32 creates a new MatrixRandomMTGP32.
+func NewMatrixRandomMTGP32() *MatrixRandomMTGP32 {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixRandomMTGP32")), objc.RegisterName("new"))
+	return matrixRandomMTGP32Adopt(_id)
+}
+
+// The starting index in the destination batch.
 //
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *MatrixRandomMTGP32) WithOptions(options mpscore.MPSKernelOptions) *MatrixRandomMTGP32 {
-	x.inner.MPSMatrixRandom.MPSKernel.SetOptions(options)
+// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+func (x *MatrixRandomMTGP32) WithBatchStart(batchStart int) *MatrixRandomMTGP32 {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
+	return x
+}
+
+// The size of the batch to process.
+//
+// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+func (x *MatrixRandomMTGP32) WithBatchSize(batchSize int) *MatrixRandomMTGP32 {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *MatrixRandomMTGP32) WithLabel(label string) *MatrixRandomMTGP32 {
-	x.inner.MPSMatrixRandom.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract   Synchronize internal MTGP32 state between GPU and CPU. @param      commandBuffer       The command buffer on which to encode the synchronization.
-//
-// SynchronizeStateOnCommandBuffer calls the underlying SynchronizeStateOnCommandBuffer.
-func (x *MatrixRandomMTGP32) SynchronizeStateOnCommandBuffer(commandBuffer metal.MTLCommandBuffer) {
-	x.inner.SynchronizeStateOnCommandBuffer(commandBuffer)
-}
-
-func (x *MatrixRandomMTGP32) asMatrixRandom() *mpsmatrix.MPSMatrixRandom {
-	return &x.inner.MPSMatrixRandom
-}
-
-func (x *MatrixRandomMTGP32) asKernel() *mpscore.MPSKernel { return &x.inner.MPSMatrixRandom.MPSKernel }
-
 // MatrixRandomMTGP32able is the interface implemented by [MatrixRandomMTGP32], for mocking and DI.
 type MatrixRandomMTGP32able interface {
-	Unwrap() *raw.MPSMatrixRandomMTGP32
-	WithBatchStart(batchStart uint) *MatrixRandomMTGP32
-	WithBatchSize(batchSize uint) *MatrixRandomMTGP32
-	WithOptions(options mpscore.MPSKernelOptions) *MatrixRandomMTGP32
+	obj.Object
+	WithBatchStart(batchStart int) *MatrixRandomMTGP32
+	WithBatchSize(batchSize int) *MatrixRandomMTGP32
 	WithLabel(label string) *MatrixRandomMTGP32
-	SynchronizeStateOnCommandBuffer(commandBuffer metal.MTLCommandBuffer)
 }
 
 var _ MatrixRandomMTGP32able = (*MatrixRandomMTGP32)(nil)

@@ -5,81 +5,89 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A command that indicates to seek to a new time in the item timeline.
 //
-// DelegatingPlaybackCoordinatorSeekCommand wraps [raw.AVDelegatingPlaybackCoordinatorSeekCommand] with a fluent Go API.
+// DelegatingPlaybackCoordinatorSeekCommand is an idiomatic wrapper over the Objective-C class AVDelegatingPlaybackCoordinatorSeekCommand.
 type DelegatingPlaybackCoordinatorSeekCommand struct {
-	inner *raw.AVDelegatingPlaybackCoordinatorSeekCommand
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVDelegatingPlaybackCoordinatorSeekCommand].
-func (x *DelegatingPlaybackCoordinatorSeekCommand) Unwrap() *raw.AVDelegatingPlaybackCoordinatorSeekCommand {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DelegatingPlaybackCoordinatorSeekCommand) ID() objc.ID { return x.inner.Ptr() }
-
-// DelegatingPlaybackCoordinatorSeekCommandFromID adopts an existing object pointer as a DelegatingPlaybackCoordinatorSeekCommand (nil for 0).
+// DelegatingPlaybackCoordinatorSeekCommandFromID adopts an existing Objective-C object as a DelegatingPlaybackCoordinatorSeekCommand
+// (nil for 0), retaining it and registering a release finalizer.
 func DelegatingPlaybackCoordinatorSeekCommandFromID(id objc.ID) *DelegatingPlaybackCoordinatorSeekCommand {
 	if id == 0 {
 		return nil
 	}
-	return &DelegatingPlaybackCoordinatorSeekCommand{inner: raw.AVDelegatingPlaybackCoordinatorSeekCommandFromID(id)}
+	x := &DelegatingPlaybackCoordinatorSeekCommand{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDelegatingPlaybackCoordinatorSeekCommand creates a new [DelegatingPlaybackCoordinatorSeekCommand].
+// delegatingPlaybackCoordinatorSeekCommandAdopt wraps an Objective-C object that this code just created as a
+// DelegatingPlaybackCoordinatorSeekCommand (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func delegatingPlaybackCoordinatorSeekCommandAdopt(id objc.ID) *DelegatingPlaybackCoordinatorSeekCommand {
+	if id == 0 {
+		return nil
+	}
+	x := &DelegatingPlaybackCoordinatorSeekCommand{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DelegatingPlaybackCoordinatorSeekCommand) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DelegatingPlaybackCoordinatorSeekCommand) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DelegatingPlaybackCoordinatorSeekCommand) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDelegatingPlaybackCoordinatorSeekCommand creates a new DelegatingPlaybackCoordinatorSeekCommand.
 func NewDelegatingPlaybackCoordinatorSeekCommand() *DelegatingPlaybackCoordinatorSeekCommand {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVDelegatingPlaybackCoordinatorSeekCommand")), objc.RegisterName("new"))
-	return &DelegatingPlaybackCoordinatorSeekCommand{inner: raw.AVDelegatingPlaybackCoordinatorSeekCommandFromID(_id)}
-}
-
-// The time to seek the currentItem to. Playback should never automatically resume after seeking to this time. The coordinator will issue a new PlayCommand when everyone else is ready to resume.
-//
-// ItemTime calls the underlying ItemTime.
-func (x *DelegatingPlaybackCoordinatorSeekCommand) ItemTime() coremedia.CMTime {
-	return x.inner.ItemTime()
+	_id := objc.Send[objc.ID](objc.ID(_class("AVDelegatingPlaybackCoordinatorSeekCommand")), objc.RegisterName("new"))
+	return delegatingPlaybackCoordinatorSeekCommandAdopt(_id)
 }
 
 // Indicates that playback is anticipated and the player should begin buffering if necessary. When shouldBufferInAnticipationOfPlayback, playback is expected to eventually resume at the rate indicated by the anticipatedPlaybackRate property. This should be treated similar to receiving a separate AVDelegatingPlaybackCoordinatorBufferingCommand. If YES, the command should only be considered complete once the player is ready to receive an AVDelegatingPlaybackCoordinatorPlayCommand with the indicated rate.
-//
-// ShouldBufferInAnticipationOfPlayback calls the underlying ShouldBufferInAnticipationOfPlayback.
 func (x *DelegatingPlaybackCoordinatorSeekCommand) ShouldBufferInAnticipationOfPlayback() bool {
-	return x.inner.ShouldBufferInAnticipationOfPlayback()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBufferInAnticipationOfPlayback"))
+	return _r
 }
 
 // The rate to prepare for if shouldBufferInAnticipationOfPlayback is YES.
-//
-// AnticipatedPlaybackRate calls the underlying AnticipatedPlaybackRate.
 func (x *DelegatingPlaybackCoordinatorSeekCommand) AnticipatedPlaybackRate() float32 {
-	return x.inner.AnticipatedPlaybackRate()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("anticipatedPlaybackRate"))
+	return _r
 }
 
 // Communicates when the coordinator expects the command's completion handler at the latest. A seek command expecting buffering in anticipation of playback does expect the receiver to fire the completion handler by this date at the latest. This is useful in buffering situations where the receiver has not yet buffered enough data to be considered ready to play by the due date. The receiver should then decide to either complete the command as is to try and keep up with the group, or alternatively begin a stall recovery suspension to communicate the situation to the other participants. Completing the command after this date means that the coordinator will likely send a play command for a later time than the receiver buffered for.
-//
-// CompletionDueDate calls the underlying CompletionDueDate.
-func (x *DelegatingPlaybackCoordinatorSeekCommand) CompletionDueDate() *foundation.NSDate {
-	return x.inner.CompletionDueDate()
-}
-
-func (x *DelegatingPlaybackCoordinatorSeekCommand) asDelegatingPlaybackCoordinatorPlaybackControlCommand() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand {
-	return &x.inner.AVDelegatingPlaybackCoordinatorPlaybackControlCommand
+func (x *DelegatingPlaybackCoordinatorSeekCommand) CompletionDueDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completionDueDate"))
+	return obj.Wrap(_r)
 }
 
 // DelegatingPlaybackCoordinatorSeekCommandable is the interface implemented by [DelegatingPlaybackCoordinatorSeekCommand], for mocking and DI.
 type DelegatingPlaybackCoordinatorSeekCommandable interface {
-	Unwrap() *raw.AVDelegatingPlaybackCoordinatorSeekCommand
-	ItemTime() coremedia.CMTime
+	obj.Object
 	ShouldBufferInAnticipationOfPlayback() bool
 	AnticipatedPlaybackRate() float32
-	CompletionDueDate() *foundation.NSDate
+	CompletionDueDate() obj.Object
 }
 
 var _ DelegatingPlaybackCoordinatorSeekCommandable = (*DelegatingPlaybackCoordinatorSeekCommand)(nil)

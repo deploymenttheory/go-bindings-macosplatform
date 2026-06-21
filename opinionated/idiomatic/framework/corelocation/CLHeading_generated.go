@@ -5,85 +5,92 @@
 package corelocation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The orientation of the user’s device, relative to true or magnetic north.
 //
-// Heading wraps [raw.CLHeading] with a fluent Go API.
+// Heading is an idiomatic wrapper over the Objective-C class CLHeading.
 type Heading struct {
-	inner *raw.CLHeading
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLHeading].
-func (x *Heading) Unwrap() *raw.CLHeading { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Heading) ID() objc.ID { return x.inner.Ptr() }
-
-// HeadingFromID adopts an existing object pointer as a Heading (nil for 0).
+// HeadingFromID adopts an existing Objective-C object as a Heading
+// (nil for 0), retaining it and registering a release finalizer.
 func HeadingFromID(id objc.ID) *Heading {
 	if id == 0 {
 		return nil
 	}
-	return &Heading{inner: raw.CLHeadingFromID(id)}
+	x := &Heading{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewHeading creates a new [Heading].
+// headingAdopt wraps an Objective-C object that this code just created as a
+// Heading (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func headingAdopt(id objc.ID) *Heading {
+	if id == 0 {
+		return nil
+	}
+	x := &Heading{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Heading) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Heading) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Heading) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHeading creates a new Heading.
 func NewHeading() *Heading {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLHeading")), objc.RegisterName("new"))
-	return &Heading{inner: raw.CLHeadingFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CLHeading")), objc.RegisterName("new"))
+	return headingAdopt(_id)
 }
 
-// MagneticHeading calls the underlying MagneticHeading.
-func (x *Heading) MagneticHeading() unsafe.Pointer {
-	return x.inner.MagneticHeading()
-}
-
-// TrueHeading calls the underlying TrueHeading.
-func (x *Heading) TrueHeading() unsafe.Pointer {
-	return x.inner.TrueHeading()
-}
-
-// HeadingAccuracy calls the underlying HeadingAccuracy.
-func (x *Heading) HeadingAccuracy() unsafe.Pointer {
-	return x.inner.HeadingAccuracy()
-}
-
-// X calls the underlying X.
 func (x *Heading) X() float64 {
-	return x.inner.X()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("x"))
+	return _r
 }
 
-// Y calls the underlying Y.
 func (x *Heading) Y() float64 {
-	return x.inner.Y()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("y"))
+	return _r
 }
 
-// Z calls the underlying Z.
 func (x *Heading) Z() float64 {
-	return x.inner.Z()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("z"))
+	return _r
 }
 
-// Timestamp calls the underlying Timestamp.
-func (x *Heading) Timestamp() *foundation.NSDate {
-	return x.inner.Timestamp()
+func (x *Heading) Timestamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timestamp"))
+	return obj.Wrap(_r)
 }
 
 // Headingable is the interface implemented by [Heading], for mocking and DI.
 type Headingable interface {
-	Unwrap() *raw.CLHeading
-	MagneticHeading() unsafe.Pointer
-	TrueHeading() unsafe.Pointer
-	HeadingAccuracy() unsafe.Pointer
+	obj.Object
 	X() float64
 	Y() float64
 	Z() float64
-	Timestamp() *foundation.NSDate
+	Timestamp() obj.Object
 }
 
 var _ Headingable = (*Heading)(nil)

@@ -5,142 +5,145 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A dynamic unordered collection of unique objects.
 //
-// MutableSet wraps [raw.NSMutableSet] with a fluent Go API.
+// MutableSet is an idiomatic wrapper over the Objective-C class NSMutableSet.
 type MutableSet struct {
-	inner *raw.NSMutableSet[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSMutableSet].
-func (x *MutableSet) Unwrap() *raw.NSMutableSet[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableSet) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableSetFromID adopts an existing object pointer as a MutableSet (nil for 0).
+// MutableSetFromID adopts an existing Objective-C object as a MutableSet
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableSetFromID(id objc.ID) *MutableSet {
 	if id == 0 {
 		return nil
 	}
-	return &MutableSet{inner: raw.NSMutableSetFromID[objc.ID](id)}
+	x := &MutableSet{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMutableSet creates a new [MutableSet].
+// mutableSetAdopt wraps an Objective-C object that this code just created as a
+// MutableSet (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableSetAdopt(id objc.ID) *MutableSet {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableSet{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MutableSet) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MutableSet) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MutableSet) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMutableSet creates a new MutableSet.
 func NewMutableSet() *MutableSet {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableSet")), objc.RegisterName("new"))
-	return &MutableSet{inner: raw.NSMutableSetFromID[objc.ID](_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSMutableSet")), objc.RegisterName("new"))
+	return mutableSetAdopt(_id)
 }
 
-// NewMutableSetWithCoder creates a new [MutableSet].
-func NewMutableSetWithCoder(coder *raw.NSCoder) *MutableSet {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableSet")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &MutableSet{inner: raw.NSMutableSetFromID[objc.ID](_id)}
+// NewMutableSetWithCoder creates a new MutableSet.
+func NewMutableSetWithCoder(coder *Coder) *MutableSet {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableSet")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return mutableSetAdopt(_id)
 }
 
 // Returns an initialized mutable set with a given initial capacity.
 //
-// NewMutableSetWithCapacity creates a new [MutableSet].
-func NewMutableSetWithCapacity(numItems uint) *MutableSet {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableSet")), objc.RegisterName("alloc"))
+// NewMutableSetWithCapacity creates a new MutableSet.
+func NewMutableSetWithCapacity(numItems int) *MutableSet {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableSet")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCapacity:"), numItems)
-	return &MutableSet{inner: raw.NSMutableSetFromID[objc.ID](_id)}
+	return mutableSetAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MutableSet) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableSet {
-	x.inner.NSSet.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *MutableSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableSet {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Adds a given object to the set, if it is not already a member.
-//
-// AddObject calls the underlying AddObject.
-func (x *MutableSet) AddObject(object objc.ID) {
-	x.inner.AddObject(object)
+func (x *MutableSet) AddObject(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObject:"), objref.IDOf(object))
 }
 
 // Removes a given object from the set.
-//
-// RemoveObject calls the underlying RemoveObject.
-func (x *MutableSet) RemoveObject(object objc.ID) {
-	x.inner.RemoveObject(object)
+func (x *MutableSet) RemoveObject(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObject:"), objref.IDOf(object))
 }
 
 // Adds to the set each object contained in a given array that is not already a member.
-//
-// AddObjectsFromArray calls the underlying AddObjectsFromArray.
-func (x *MutableSet) AddObjectsFromArray(array *raw.NSArray[objc.ID]) {
-	x.inner.AddObjectsFromArray(array)
+func (x *MutableSet) AddObjectsFromArray(array []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObjectsFromArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Removes from the receiving set each object that isn’t a member of another given set.
-//
-// IntersectSet calls the underlying IntersectSet.
-func (x *MutableSet) IntersectSet(otherSet *raw.NSSet[objc.ID]) {
-	x.inner.IntersectSet(otherSet)
+func (x *MutableSet) IntersectSet(otherSet obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intersectSet:"), objref.IDOf(otherSet))
 }
 
 // Removes each object in another given set from the receiving set, if present.
-//
-// MinusSet calls the underlying MinusSet.
-func (x *MutableSet) MinusSet(otherSet *raw.NSSet[objc.ID]) {
-	x.inner.MinusSet(otherSet)
+func (x *MutableSet) MinusSet(otherSet obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minusSet:"), objref.IDOf(otherSet))
 }
 
 // Empties the set of all of its members.
-//
-// RemoveAllObjects calls the underlying RemoveAllObjects.
 func (x *MutableSet) RemoveAllObjects() {
-	x.inner.RemoveAllObjects()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllObjects"))
 }
 
 // Adds each object in another given set to the receiving set, if not present.
-//
-// UnionSet calls the underlying UnionSet.
-func (x *MutableSet) UnionSet(otherSet *raw.NSSet[objc.ID]) {
-	x.inner.UnionSet(otherSet)
+func (x *MutableSet) UnionSet(otherSet obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unionSet:"), objref.IDOf(otherSet))
 }
 
 // Empties the receiving set, then adds each object contained in another given set.
-//
-// SetSet calls the underlying SetSet.
-func (x *MutableSet) SetSet(otherSet *raw.NSSet[objc.ID]) {
-	x.inner.SetSet(otherSet)
+func (x *MutableSet) SetSet(otherSet obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSet:"), objref.IDOf(otherSet))
 }
 
 // Evaluates a given predicate against the set’s content and removes from the set those objects for which the predicate returns false.
-//
-// FilterUsingPredicate calls the underlying FilterUsingPredicate.
-func (x *MutableSet) FilterUsingPredicate(predicate *raw.NSPredicate) {
-	x.inner.FilterUsingPredicate(predicate)
+func (x *MutableSet) FilterUsingPredicate(predicate *Predicate) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterUsingPredicate:"), objref.IDOf(predicate))
 }
-
-func (x *MutableSet) asMutableSet() *raw.NSMutableSet[objc.ID] { return x.inner }
-
-func (x *MutableSet) asSet() *raw.NSSet[objc.ID] { return &x.inner.NSSet }
-
-func (x *MutableSet) asObject() *raw.NSObject { return &x.inner.NSSet.NSObject }
 
 // MutableSetable is the interface implemented by [MutableSet], for mocking and DI.
 type MutableSetable interface {
-	Unwrap() *raw.NSMutableSet[objc.ID]
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableSet
-	AddObject(object objc.ID)
-	RemoveObject(object objc.ID)
-	AddObjectsFromArray(array *raw.NSArray[objc.ID])
-	IntersectSet(otherSet *raw.NSSet[objc.ID])
-	MinusSet(otherSet *raw.NSSet[objc.ID])
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *MutableSet
+	AddObject(object obj.Object)
+	RemoveObject(object obj.Object)
+	AddObjectsFromArray(array []obj.Object)
+	IntersectSet(otherSet obj.Object)
+	MinusSet(otherSet obj.Object)
 	RemoveAllObjects()
-	UnionSet(otherSet *raw.NSSet[objc.ID])
-	SetSet(otherSet *raw.NSSet[objc.ID])
-	FilterUsingPredicate(predicate *raw.NSPredicate)
+	UnionSet(otherSet obj.Object)
+	SetSet(otherSet obj.Object)
+	FilterUsingPredicate(predicate *Predicate)
 }
 
 var _ MutableSetable = (*MutableSet)(nil)

@@ -5,245 +5,158 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A builder object that incrementally constructs a workout.
 //
-// WorkoutBuilder wraps [raw.HKWorkoutBuilder] with a fluent Go API.
+// WorkoutBuilder is an idiomatic wrapper over the Objective-C class HKWorkoutBuilder.
 type WorkoutBuilder struct {
-	inner *raw.HKWorkoutBuilder
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKWorkoutBuilder].
-func (x *WorkoutBuilder) Unwrap() *raw.HKWorkoutBuilder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WorkoutBuilder) ID() objc.ID { return x.inner.Ptr() }
-
-// WorkoutBuilderFromID adopts an existing object pointer as a WorkoutBuilder (nil for 0).
+// WorkoutBuilderFromID adopts an existing Objective-C object as a WorkoutBuilder
+// (nil for 0), retaining it and registering a release finalizer.
 func WorkoutBuilderFromID(id objc.ID) *WorkoutBuilder {
 	if id == 0 {
 		return nil
 	}
-	return &WorkoutBuilder{inner: raw.HKWorkoutBuilderFromID(id)}
+	x := &WorkoutBuilder{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// workoutBuilderAdopt wraps an Objective-C object that this code just created as a
+// WorkoutBuilder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func workoutBuilderAdopt(id objc.ID) *WorkoutBuilder {
+	if id == 0 {
+		return nil
+	}
+	x := &WorkoutBuilder{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WorkoutBuilder) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WorkoutBuilder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WorkoutBuilder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns a new workout builder object that is not connected to a workout session or other data source.
 //
-// NewWorkoutBuilderWithHealthStoreConfigurationDevice creates a new [WorkoutBuilder].
-func NewWorkoutBuilderWithHealthStoreConfigurationDevice(healthStore *raw.HKHealthStore, configuration *raw.HKWorkoutConfiguration, device *raw.HKDevice) *WorkoutBuilder {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWorkoutBuilder")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:configuration:device:"), healthStore.Ptr(), configuration.Ptr(), device.Ptr())
-	return &WorkoutBuilder{inner: raw.HKWorkoutBuilderFromID(_id)}
-}
-
-// Sets the workout’s start date and begins building the workout.
-//
-// BeginCollectionWithStartDateCompletion calls the underlying BeginCollectionWithStartDateCompletion.
-func (x *WorkoutBuilder) BeginCollectionWithStartDateCompletion(startDate *foundation.NSDate, completion func(bool, unsafe.Pointer)) {
-	x.inner.BeginCollectionWithStartDateCompletion(startDate, completion)
-}
-
-// Adds a sample to be associated with the workout.
-//
-// AddSamplesCompletion calls the underlying AddSamplesCompletion.
-func (x *WorkoutBuilder) AddSamplesCompletion(samples *foundation.NSArray[*raw.HKSample], completion func(bool, unsafe.Pointer)) {
-	x.inner.AddSamplesCompletion(samples, completion)
-}
-
-// Adds a workout event to the builder.
-//
-// AddWorkoutEventsCompletion calls the underlying AddWorkoutEventsCompletion.
-func (x *WorkoutBuilder) AddWorkoutEventsCompletion(workoutEvents *foundation.NSArray[*raw.HKWorkoutEvent], completion func(bool, unsafe.Pointer)) {
-	x.inner.AddWorkoutEventsCompletion(workoutEvents, completion)
-}
-
-// Adds metadata to be saved with the workout.
-//
-// AddMetadataCompletion calls the underlying AddMetadataCompletion.
-func (x *WorkoutBuilder) AddMetadataCompletion(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer)) {
-	x.inner.AddMetadataCompletion(metadata, completion)
-}
-
-// Adds a workout activity to the workout builder.
-//
-// AddWorkoutActivityCompletion calls the underlying AddWorkoutActivityCompletion.
-func (x *WorkoutBuilder) AddWorkoutActivityCompletion(workoutActivity *raw.HKWorkoutActivity, completion func(bool, unsafe.Pointer)) {
-	x.inner.AddWorkoutActivityCompletion(workoutActivity, completion)
-}
-
-// Sets the end date for a workout activity that you’ve already added to the workout builder.
-//
-// UpdateActivityWithUUIDEndDateCompletion calls the underlying UpdateActivityWithUUIDEndDateCompletion.
-func (x *WorkoutBuilder) UpdateActivityWithUUIDEndDateCompletion(uUID *foundation.NSUUID, endDate *foundation.NSDate, completion func(bool, unsafe.Pointer)) {
-	x.inner.UpdateActivityWithUUIDEndDateCompletion(uUID, endDate, completion)
-}
-
-// Adds metadata to a workout activity that you’ve already added to the workout builder.
-//
-// UpdateActivityWithUUIDAddMedatataCompletion calls the underlying UpdateActivityWithUUIDAddMedatataCompletion.
-func (x *WorkoutBuilder) UpdateActivityWithUUIDAddMedatataCompletion(uUID *foundation.NSUUID, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer)) {
-	x.inner.UpdateActivityWithUUIDAddMedatataCompletion(uUID, metadata, completion)
-}
-
-// Stops the collection of data, sets the workout’s end date, and deactivates the workout builder.
-//
-// EndCollectionWithEndDateCompletion calls the underlying EndCollectionWithEndDateCompletion.
-func (x *WorkoutBuilder) EndCollectionWithEndDateCompletion(endDate *foundation.NSDate, completion func(bool, unsafe.Pointer)) {
-	x.inner.EndCollectionWithEndDateCompletion(endDate, completion)
-}
-
-// Creates the workout, using the samples and events added to the builder, and saves it to the HealthKit store.
-//
-// FinishWorkoutWithCompletion calls the underlying FinishWorkoutWithCompletion.
-func (x *WorkoutBuilder) FinishWorkoutWithCompletion(completion func(unsafe.Pointer, unsafe.Pointer)) {
-	x.inner.FinishWorkoutWithCompletion(completion)
+// NewWorkoutBuilderWithHealthStoreConfigurationDevice creates a new WorkoutBuilder.
+func NewWorkoutBuilderWithHealthStoreConfigurationDevice(healthStore *HealthStore, configuration *WorkoutConfiguration, device *Device) *WorkoutBuilder {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKWorkoutBuilder")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:configuration:device:"), objref.IDOf(healthStore), objref.IDOf(configuration), objref.IDOf(device))
+	return workoutBuilderAdopt(_id)
 }
 
 // Stops the collection of data and discards the current results without saving the workout.
-//
-// DiscardWorkout calls the underlying DiscardWorkout.
 func (x *WorkoutBuilder) DiscardWorkout() {
-	x.inner.DiscardWorkout()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discardWorkout"))
 }
 
 // Calculates the duration of the workout at the specified time.
-//
-// ElapsedTimeAtDate calls the underlying ElapsedTimeAtDate.
-func (x *WorkoutBuilder) ElapsedTimeAtDate(date *foundation.NSDate) float64 {
-	return x.inner.ElapsedTimeAtDate(date)
+func (x *WorkoutBuilder) ElapsedTimeAtDate(date obj.Object) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("elapsedTimeAtDate:"), objref.IDOf(date))
+	return _r
 }
 
 // Returns the statistics calculated for matching samples added to the workout.
-//
-// StatisticsForType calls the underlying StatisticsForType.
-func (x *WorkoutBuilder) StatisticsForType(quantityType *raw.HKQuantityType) *Statistics {
-	_r := x.inner.StatisticsForType(quantityType)
-	if _r == nil {
-		return nil
-	}
-	return &Statistics{inner: _r}
+func (x *WorkoutBuilder) StatisticsForType(quantityType *QuantityType) *Statistics {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statisticsForType:"), objref.IDOf(quantityType))
+	return StatisticsFromID(_r)
 }
 
 // Returns the series builder for the specified type, creating a new builder, if necessary.
-//
-// SeriesBuilderForType calls the underlying SeriesBuilderForType.
-func (x *WorkoutBuilder) SeriesBuilderForType(seriesType *raw.HKSeriesType) *SeriesBuilder {
-	_r := x.inner.SeriesBuilderForType(seriesType)
-	if _r == nil {
-		return nil
-	}
-	return &SeriesBuilder{inner: _r}
+func (x *WorkoutBuilder) SeriesBuilderForType(seriesType *SeriesType) *SeriesBuilder {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seriesBuilderForType:"), objref.IDOf(seriesType))
+	return SeriesBuilderFromID(_r)
 }
 
-// @property      device @abstract      The HKDevice to be associated with the workout.
-//
-// Device calls the underlying Device.
+// The HKDevice to be associated with the workout.
 func (x *WorkoutBuilder) Device() *Device {
-	_r := x.inner.Device()
-	if _r == nil {
-		return nil
-	}
-	return &Device{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+	return DeviceFromID(_r)
 }
 
-// @property      startDate @abstract      The start date for the workout, as provided by beginCollectionWithStartDate:completion:
-//
-// StartDate calls the underlying StartDate.
-func (x *WorkoutBuilder) StartDate() *foundation.NSDate {
-	return x.inner.StartDate()
+// The start date for the workout, as provided by beginCollectionWithStartDate:completion:
+func (x *WorkoutBuilder) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+	return obj.Wrap(_r)
 }
 
-// @property      endDate @abstract      The end date for the workout, as provided by endCollectionWithEndDate:completion:
-//
-// EndDate calls the underlying EndDate.
-func (x *WorkoutBuilder) EndDate() *foundation.NSDate {
-	return x.inner.EndDate()
+// The end date for the workout, as provided by endCollectionWithEndDate:completion:
+func (x *WorkoutBuilder) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+	return obj.Wrap(_r)
 }
 
-// @property      workoutConfiguration @abstract      The configuration for the workout being built.
-//
-// WorkoutConfiguration calls the underlying WorkoutConfiguration.
+// The configuration for the workout being built.
 func (x *WorkoutBuilder) WorkoutConfiguration() *WorkoutConfiguration {
-	_r := x.inner.WorkoutConfiguration()
-	if _r == nil {
-		return nil
-	}
-	return &WorkoutConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workoutConfiguration"))
+	return WorkoutConfigurationFromID(_r)
 }
 
-// @property      metadata @abstract      The metadata that will be used when the workout is finished.
-//
-// Metadata calls the underlying Metadata.
-func (x *WorkoutBuilder) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.Metadata()
+// The metadata that will be used when the workout is finished.
+func (x *WorkoutBuilder) Metadata() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+	return obj.Wrap(_r)
 }
 
-// @property      workoutEvents @abstract      Workout events that have been added to the builder. @discussion    New events that are added using addWorkoutEvents:completion: will be appended to this array once the completion is called.
+// Workout events that have been added to the builder. New events that are added using addWorkoutEvents:completion: will be appended to this array once the completion is called.
 //
 // WorkoutEvents returns the collection as a Go slice.
 func (x *WorkoutBuilder) WorkoutEvents() []*WorkoutEvent {
-	arr := x.inner.WorkoutEvents()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *WorkoutEvent {
-		return &WorkoutEvent{inner: raw.HKWorkoutEventFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workoutEvents"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WorkoutEvent { return WorkoutEventFromID(_id) })
 }
 
-// @property      workoutActivities @abstract      Workout activities that have been added to the builder. @discussion    New activities that are added using addWorkoutActivity:completion: will be appended to this array once the completion is called.
+// Workout activities that have been added to the builder. New activities that are added using addWorkoutActivity:completion: will be appended to this array once the completion is called.
 //
 // WorkoutActivities returns the collection as a Go slice.
 func (x *WorkoutBuilder) WorkoutActivities() []*WorkoutActivity {
-	arr := x.inner.WorkoutActivities()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *WorkoutActivity {
-		return &WorkoutActivity{inner: raw.HKWorkoutActivityFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workoutActivities"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WorkoutActivity { return WorkoutActivityFromID(_id) })
 }
 
-// @property      allStatistics @abstract      A dictionary of statistics per quantity type added to the builder @discussion    This dictionary will contain HKStatistics objects containing the statistics by quantity sample type for all of the samples that have been added to the builder.
-//
-// AllStatistics calls the underlying AllStatistics.
-func (x *WorkoutBuilder) AllStatistics() *foundation.NSDictionary[*raw.HKQuantityType, *raw.HKStatistics] {
-	return x.inner.AllStatistics()
+// A dictionary of statistics per quantity type added to the builder This dictionary will contain HKStatistics objects containing the statistics by quantity sample type for all of the samples that have been added to the builder.
+func (x *WorkoutBuilder) AllStatistics() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allStatistics"))
+	return obj.Wrap(_r)
 }
-
-func (x *WorkoutBuilder) asWorkoutBuilder() *raw.HKWorkoutBuilder { return x.inner }
 
 // WorkoutBuilderable is the interface implemented by [WorkoutBuilder], for mocking and DI.
 type WorkoutBuilderable interface {
-	Unwrap() *raw.HKWorkoutBuilder
-	BeginCollectionWithStartDateCompletion(startDate *foundation.NSDate, completion func(bool, unsafe.Pointer))
-	AddSamplesCompletion(samples *foundation.NSArray[*raw.HKSample], completion func(bool, unsafe.Pointer))
-	AddWorkoutEventsCompletion(workoutEvents *foundation.NSArray[*raw.HKWorkoutEvent], completion func(bool, unsafe.Pointer))
-	AddMetadataCompletion(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer))
-	AddWorkoutActivityCompletion(workoutActivity *raw.HKWorkoutActivity, completion func(bool, unsafe.Pointer))
-	UpdateActivityWithUUIDEndDateCompletion(uUID *foundation.NSUUID, endDate *foundation.NSDate, completion func(bool, unsafe.Pointer))
-	UpdateActivityWithUUIDAddMedatataCompletion(uUID *foundation.NSUUID, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer))
-	EndCollectionWithEndDateCompletion(endDate *foundation.NSDate, completion func(bool, unsafe.Pointer))
-	FinishWorkoutWithCompletion(completion func(unsafe.Pointer, unsafe.Pointer))
+	obj.Object
 	DiscardWorkout()
-	ElapsedTimeAtDate(date *foundation.NSDate) float64
-	StatisticsForType(quantityType *raw.HKQuantityType) *Statistics
-	SeriesBuilderForType(seriesType *raw.HKSeriesType) *SeriesBuilder
+	ElapsedTimeAtDate(date obj.Object) float64
+	StatisticsForType(quantityType *QuantityType) *Statistics
+	SeriesBuilderForType(seriesType *SeriesType) *SeriesBuilder
 	Device() *Device
-	StartDate() *foundation.NSDate
-	EndDate() *foundation.NSDate
+	StartDate() obj.Object
+	EndDate() obj.Object
 	WorkoutConfiguration() *WorkoutConfiguration
-	Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	Metadata() obj.Object
 	WorkoutEvents() []*WorkoutEvent
 	WorkoutActivities() []*WorkoutActivity
-	AllStatistics() *foundation.NSDictionary[*raw.HKQuantityType, *raw.HKStatistics]
+	AllStatistics() obj.Object
 }
 
 var _ WorkoutBuilderable = (*WorkoutBuilder)(nil)

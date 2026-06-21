@@ -5,102 +5,123 @@
 package shazamkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/shazamkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An object for storing the reference signatures for custom audio recordings and their associated metadata.
 //
-// CustomCatalog wraps [raw.SHCustomCatalog] with a fluent Go API.
+// CustomCatalog is an idiomatic wrapper over the Objective-C class SHCustomCatalog.
 type CustomCatalog struct {
-	inner *raw.SHCustomCatalog
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SHCustomCatalog].
-func (x *CustomCatalog) Unwrap() *raw.SHCustomCatalog { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CustomCatalog) ID() objc.ID { return x.inner.Ptr() }
-
-// CustomCatalogFromID adopts an existing object pointer as a CustomCatalog (nil for 0).
+// CustomCatalogFromID adopts an existing Objective-C object as a CustomCatalog
+// (nil for 0), retaining it and registering a release finalizer.
 func CustomCatalogFromID(id objc.ID) *CustomCatalog {
 	if id == 0 {
 		return nil
 	}
-	return &CustomCatalog{inner: raw.SHCustomCatalogFromID(id)}
+	x := &CustomCatalog{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCustomCatalog creates a new [CustomCatalog].
-func NewCustomCatalog() *CustomCatalog {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SHCustomCatalog")), objc.RegisterName("new"))
-	return &CustomCatalog{inner: raw.SHCustomCatalogFromID(_id)}
-}
-
-// Load a @c SHCustomCatalog from data
-//
-// NewCustomCatalogWithDataRepresentationError creates a new [CustomCatalog].
-func NewCustomCatalogWithDataRepresentationError(dataRepresentation *foundation.NSData) (*CustomCatalog, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SHCustomCatalog")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:error:"), dataRepresentation.Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// customCatalogAdopt wraps an Objective-C object that this code just created as a
+// CustomCatalog (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func customCatalogAdopt(id objc.ID) *CustomCatalog {
+	if id == 0 {
+		return nil
 	}
-	return &CustomCatalog{inner: raw.SHCustomCatalogFromID(_id)}, nil
+	x := &CustomCatalog{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CustomCatalog) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CustomCatalog) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CustomCatalog) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCustomCatalog creates a new CustomCatalog.
+func NewCustomCatalog() *CustomCatalog {
+	_id := objc.Send[objc.ID](objc.ID(_class("SHCustomCatalog")), objc.RegisterName("new"))
+	return customCatalogAdopt(_id)
+}
+
+// Load a
+//
+// NewCustomCatalogWithDataRepresentationError creates a new CustomCatalog.
+func NewCustomCatalogWithDataRepresentationError(dataRepresentation obj.Object) (*CustomCatalog, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SHCustomCatalog")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:error:"), objref.IDOf(dataRepresentation), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return customCatalogAdopt(_id), nil
 }
 
 // Adds a reference signature and its associated metadata to a catalog.
-//
-// AddReferenceSignatureRepresentingMediaItemsError calls the underlying AddReferenceSignatureRepresentingMediaItemsError.
-func (x *CustomCatalog) AddReferenceSignatureRepresentingMediaItemsError(signature *raw.SHSignature, mediaItems ...MediaItemProvider) (bool, error) {
-	_ptrs := make([]objc.ID, len(mediaItems))
-	for _i, _v := range mediaItems {
-		_ptrs[_i] = _v.asMediaItem().Ptr()
+func (x *CustomCatalog) AddReferenceSignatureRepresentingMediaItems(signature *Signature, mediaItems []*MediaItem) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addReferenceSignature:representingMediaItems:error:"), objref.IDOf(signature), purego.SliceToNSArray(mediaItems, func(_v *MediaItem) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	var _arg1 *foundation.NSArray[*raw.SHMediaItem]
-	if len(_ptrs) > 0 {
-		_arg1 = foundation.NSArrayFromID[*raw.SHMediaItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg1 = foundation.NSArrayFromID[*raw.SHMediaItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return x.inner.AddReferenceSignatureRepresentingMediaItemsError(signature, _arg1)
+	return nil
 }
 
 // Loads a saved custom catalog from a file.
-//
-// AddCustomCatalogFromURLError calls the underlying AddCustomCatalogFromURLError.
-func (x *CustomCatalog) AddCustomCatalogFromURLError(customCatalogURL string) (bool, error) {
-	return x.inner.AddCustomCatalogFromURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(customCatalogURL)))
+func (x *CustomCatalog) AddCustomCatalogFromURL(customCatalogURL string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addCustomCatalogFromURL:error:"), rt.FileURL(customCatalogURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Saves the custom catalog to a local file.
-//
-// WriteToURLError calls the underlying WriteToURLError.
-func (x *CustomCatalog) WriteToURLError(destinationURL string) (bool, error) {
-	return x.inner.WriteToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(destinationURL)))
+func (x *CustomCatalog) WriteToURL(destinationURL string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:error:"), rt.FileURL(destinationURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // The data representation of this file, it can be written to disk
-//
-// DataRepresentation calls the underlying DataRepresentation.
-func (x *CustomCatalog) DataRepresentation() *foundation.NSData {
-	return x.inner.DataRepresentation()
+func (x *CustomCatalog) DataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
+	return obj.Wrap(_r)
 }
-
-func (x *CustomCatalog) asCatalog() *raw.SHCatalog { return &x.inner.SHCatalog }
 
 // CustomCatalogable is the interface implemented by [CustomCatalog], for mocking and DI.
 type CustomCatalogable interface {
-	Unwrap() *raw.SHCustomCatalog
-	AddReferenceSignatureRepresentingMediaItemsError(signature *raw.SHSignature, mediaItems ...MediaItemProvider) (bool, error)
-	AddCustomCatalogFromURLError(customCatalogURL string) (bool, error)
-	WriteToURLError(destinationURL string) (bool, error)
-	DataRepresentation() *foundation.NSData
+	obj.Object
+	AddReferenceSignatureRepresentingMediaItems(signature *Signature, mediaItems []*MediaItem) error
+	AddCustomCatalogFromURL(customCatalogURL string) error
+	WriteToURL(destinationURL string) error
+	DataRepresentation() obj.Object
 }
 
 var _ CustomCatalogable = (*CustomCatalog)(nil)

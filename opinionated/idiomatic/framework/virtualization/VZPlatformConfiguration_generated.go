@@ -5,45 +5,68 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The base class for a platform configuration.
 //
-// PlatformConfiguration wraps [raw.VZPlatformConfiguration] with a fluent Go API.
+// PlatformConfiguration is an idiomatic wrapper over the Objective-C class VZPlatformConfiguration.
 type PlatformConfiguration struct {
-	inner *raw.VZPlatformConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZPlatformConfiguration].
-func (x *PlatformConfiguration) Unwrap() *raw.VZPlatformConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlatformConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// PlatformConfigurationFromID adopts an existing object pointer as a PlatformConfiguration (nil for 0).
+// PlatformConfigurationFromID adopts an existing Objective-C object as a PlatformConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func PlatformConfigurationFromID(id objc.ID) *PlatformConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &PlatformConfiguration{inner: raw.VZPlatformConfigurationFromID(id)}
+	x := &PlatformConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPlatformConfiguration creates a new [PlatformConfiguration].
+// platformConfigurationAdopt wraps an Objective-C object that this code just created as a
+// PlatformConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func platformConfigurationAdopt(id objc.ID) *PlatformConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &PlatformConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PlatformConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlatformConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlatformConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPlatformConfiguration creates a new PlatformConfiguration.
 func NewPlatformConfiguration() *PlatformConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZPlatformConfiguration")), objc.RegisterName("new"))
-	return &PlatformConfiguration{inner: raw.VZPlatformConfigurationFromID(_id)}
-}
-
-func (x *PlatformConfiguration) asPlatformConfiguration() *raw.VZPlatformConfiguration {
-	return x.inner
+	_id := objc.Send[objc.ID](objc.ID(_class("VZPlatformConfiguration")), objc.RegisterName("new"))
+	return platformConfigurationAdopt(_id)
 }
 
 // PlatformConfigurationable is the interface implemented by [PlatformConfiguration], for mocking and DI.
 type PlatformConfigurationable interface {
-	Unwrap() *raw.VZPlatformConfiguration
+	obj.Object
 }
 
 var _ PlatformConfigurationable = (*PlatformConfiguration)(nil)

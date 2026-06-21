@@ -5,115 +5,83 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A sample of procedural noise data from which you can read noise values directly or create noise textures.
 //
-// NoiseMap wraps [raw.GKNoiseMap] with a fluent Go API.
+// NoiseMap is an idiomatic wrapper over the Objective-C class GKNoiseMap.
 type NoiseMap struct {
-	inner *raw.GKNoiseMap
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKNoiseMap].
-func (x *NoiseMap) Unwrap() *raw.GKNoiseMap { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NoiseMap) ID() objc.ID { return x.inner.Ptr() }
-
-// NoiseMapFromID adopts an existing object pointer as a NoiseMap (nil for 0).
+// NoiseMapFromID adopts an existing Objective-C object as a NoiseMap
+// (nil for 0), retaining it and registering a release finalizer.
 func NoiseMapFromID(id objc.ID) *NoiseMap {
 	if id == 0 {
 		return nil
 	}
-	return &NoiseMap{inner: raw.GKNoiseMapFromID(id)}
+	x := &NoiseMap{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNoiseMap creates a new [NoiseMap].
+// noiseMapAdopt wraps an Objective-C object that this code just created as a
+// NoiseMap (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func noiseMapAdopt(id objc.ID) *NoiseMap {
+	if id == 0 {
+		return nil
+	}
+	x := &NoiseMap{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NoiseMap) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NoiseMap) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NoiseMap) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNoiseMap creates a new NoiseMap.
 func NewNoiseMap() *NoiseMap {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKNoiseMap")), objc.RegisterName("new"))
-	return &NoiseMap{inner: raw.GKNoiseMapFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKNoiseMap")), objc.RegisterName("new"))
+	return noiseMapAdopt(_id)
 }
 
 // Initializes a noise map by sampling from the specified noise object.
 //
-// NewNoiseMapWithNoise creates a new [NoiseMap].
-func NewNoiseMapWithNoise(noise *raw.GKNoise) *NoiseMap {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKNoiseMap")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNoise:"), noise.Ptr())
-	return &NoiseMap{inner: raw.GKNoiseMapFromID(_id)}
-}
-
-// Creates a noise map by sampling from the specified noise object.
-//
-// NewNoiseMapWithNoiseSizeOriginSampleCountSeamless creates a new [NoiseMap].
-func NewNoiseMapWithNoiseSizeOriginSampleCountSeamless(noise *raw.GKNoise, size unsafe.Pointer, origin unsafe.Pointer, sampleCount unsafe.Pointer, seamless bool) *NoiseMap {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKNoiseMap")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNoise:size:origin:sampleCount:seamless:"), noise.Ptr(), size, origin, sampleCount, seamless)
-	return &NoiseMap{inner: raw.GKNoiseMapFromID(_id)}
-}
-
-// Returns the value at the specified position in the noise map’s discrete sample grid.
-//
-// ValueAtPosition calls the underlying ValueAtPosition.
-func (x *NoiseMap) ValueAtPosition(position unsafe.Pointer) float32 {
-	return x.inner.ValueAtPosition(position)
-}
-
-// Returns the value at the specified position in the noise map, interpolating results for positions not on the discrete sample grid.
-//
-// InterpolatedValueAtPosition calls the underlying InterpolatedValueAtPosition.
-func (x *NoiseMap) InterpolatedValueAtPosition(position unsafe.Pointer) float32 {
-	return x.inner.InterpolatedValueAtPosition(position)
-}
-
-// Sets the value at the specified position in the noise map.
-//
-// SetValueAtPosition calls the underlying SetValueAtPosition.
-func (x *NoiseMap) SetValueAtPosition(value float32, position unsafe.Pointer) {
-	x.inner.SetValueAtPosition(value, position)
-}
-
-// The size of the 2D plane to extract from the 3D noise space, in noise space coordinates.  Used together with origin to determine the bounds of the extracted plane.  A smaller size captures a more "zoomed in" view of the noise, and vice versa. @see origin
-//
-// Size calls the underlying Size.
-func (x *NoiseMap) Size() unsafe.Pointer {
-	return x.inner.Size()
-}
-
-// The origin of the 2D plane to extract from the 3D noise space, in noise space coordinates.  Used together with size to determine the bounds of the extracted plane. @see size
-//
-// Origin calls the underlying Origin.
-func (x *NoiseMap) Origin() unsafe.Pointer {
-	return x.inner.Origin()
-}
-
-// The number of equally-spaced samples to make across the 2D plane.  A higher number of samples produces finer resolution at the expense of increased memory.
-//
-// SampleCount calls the underlying SampleCount.
-func (x *NoiseMap) SampleCount() unsafe.Pointer {
-	return x.inner.SampleCount()
+// NewNoiseMapWithNoise creates a new NoiseMap.
+func NewNoiseMapWithNoise(noise *Noise) *NoiseMap {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKNoiseMap")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNoise:"), objref.IDOf(noise))
+	return noiseMapAdopt(_id)
 }
 
 // Whether the values at the edges of the 2D plane are modified to allow seamless tiling of the extracted noise map.
-//
-// IsSeamless calls the underlying IsSeamless.
 func (x *NoiseMap) IsSeamless() bool {
-	return x.inner.IsSeamless()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSeamless"))
+	return _r
 }
 
 // NoiseMapable is the interface implemented by [NoiseMap], for mocking and DI.
 type NoiseMapable interface {
-	Unwrap() *raw.GKNoiseMap
-	ValueAtPosition(position unsafe.Pointer) float32
-	InterpolatedValueAtPosition(position unsafe.Pointer) float32
-	SetValueAtPosition(value float32, position unsafe.Pointer)
-	Size() unsafe.Pointer
-	Origin() unsafe.Pointer
-	SampleCount() unsafe.Pointer
+	obj.Object
 	IsSeamless() bool
 }
 

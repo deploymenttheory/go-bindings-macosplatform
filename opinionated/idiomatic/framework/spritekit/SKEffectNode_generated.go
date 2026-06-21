@@ -5,391 +5,365 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A node that renders its children into a separate buffer, optionally applying an effect, before drawing the final result.
 //
-// EffectNode wraps [raw.SKEffectNode] with a fluent Go API.
+// EffectNode is an idiomatic wrapper over the Objective-C class SKEffectNode.
 type EffectNode struct {
-	inner *raw.SKEffectNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKEffectNode].
-func (x *EffectNode) Unwrap() *raw.SKEffectNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EffectNode) ID() objc.ID { return x.inner.Ptr() }
-
-// EffectNodeFromID adopts an existing object pointer as a EffectNode (nil for 0).
+// EffectNodeFromID adopts an existing Objective-C object as a EffectNode
+// (nil for 0), retaining it and registering a release finalizer.
 func EffectNodeFromID(id objc.ID) *EffectNode {
 	if id == 0 {
 		return nil
 	}
-	return &EffectNode{inner: raw.SKEffectNodeFromID(id)}
+	x := &EffectNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEffectNode creates a new [EffectNode].
+// effectNodeAdopt wraps an Objective-C object that this code just created as a
+// EffectNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func effectNodeAdopt(id objc.ID) *EffectNode {
+	if id == 0 {
+		return nil
+	}
+	x := &EffectNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EffectNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EffectNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EffectNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEffectNode creates a new EffectNode.
 func NewEffectNode() *EffectNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKEffectNode")), objc.RegisterName("new"))
-	return &EffectNode{inner: raw.SKEffectNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKEffectNode")), objc.RegisterName("new"))
+	return effectNodeAdopt(_id)
 }
 
 // The Core Image filter to apply.
 //
-// WithFilter sets the filter property and returns the receiver for chaining.
-func (x *EffectNode) WithFilter(filter *coreimage.CIFilter) *EffectNode {
-	x.inner.SetFilter(filter)
+// WithFilter sets filter and returns the receiver so calls can be chained.
+func (x *EffectNode) WithFilter(filter obj.Object) *EffectNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilter:"), objref.IDOf(filter))
 	return x
 }
 
 // A Boolean value that determines whether the effect node automatically sets the filter’s image center.
 //
-// WithShouldCenterFilter sets the shouldCenterFilter property and returns the receiver for chaining.
+// WithShouldCenterFilter sets shouldCenterFilter and returns the receiver so calls can be chained.
 func (x *EffectNode) WithShouldCenterFilter(shouldCenterFilter bool) *EffectNode {
-	x.inner.SetShouldCenterFilter(shouldCenterFilter)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCenterFilter:"), shouldCenterFilter)
 	return x
 }
 
 // A Boolean value that determines whether the effect node applies the filter to its children as they are drawn.
 //
-// WithShouldEnableEffects sets the shouldEnableEffects property and returns the receiver for chaining.
+// WithShouldEnableEffects sets shouldEnableEffects and returns the receiver so calls can be chained.
 func (x *EffectNode) WithShouldEnableEffects(shouldEnableEffects bool) *EffectNode {
-	x.inner.SetShouldEnableEffects(shouldEnableEffects)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldEnableEffects:"), shouldEnableEffects)
 	return x
 }
 
 // A Boolean value that indicates whether the results of rendering the child nodes should be cached.
 //
-// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+// WithShouldRasterize sets shouldRasterize and returns the receiver so calls can be chained.
 func (x *EffectNode) WithShouldRasterize(shouldRasterize bool) *EffectNode {
-	x.inner.SetShouldRasterize(shouldRasterize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
 	return x
 }
 
 // The blend mode used to draw the node’s contents into its parent’s framebuffer.
 //
-// WithBlendMode sets the blendMode property and returns the receiver for chaining.
-func (x *EffectNode) WithBlendMode(blendMode SKBlendMode) *EffectNode {
-	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
+// WithBlendMode sets blendMode and returns the receiver so calls can be chained.
+func (x *EffectNode) WithBlendMode(blendMode BlendMode) *EffectNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendMode:"), blendMode)
 	return x
 }
 
 // A custom shader that is called when the effect node is blended into the parent’s framebuffer.
 //
-// WithShader sets the shader property and returns the receiver for chaining.
+// WithShader sets shader and returns the receiver so calls can be chained.
 func (x *EffectNode) WithShader(shader *Shader) *EffectNode {
-	x.inner.SetShader(shader.Unwrap())
-	return x
-}
-
-// The position of the node in its parent’s coordinate system.
-//
-// WithPosition sets the position property and returns the receiver for chaining.
-func (x *EffectNode) WithPosition(position corefoundation.CGPoint) *EffectNode {
-	x.inner.SKNode.SetPosition(position)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShader:"), objref.IDOf(shader))
 	return x
 }
 
 // The height of the node relative to its parent.
 //
-// WithZPosition sets the zPosition property and returns the receiver for chaining.
+// WithZPosition sets zPosition and returns the receiver so calls can be chained.
 func (x *EffectNode) WithZPosition(zPosition float64) *EffectNode {
-	x.inner.SKNode.SetZPosition(zPosition)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
 // The Euler rotation about the z axis (in radians).
 //
-// WithZRotation sets the zRotation property and returns the receiver for chaining.
+// WithZRotation sets zRotation and returns the receiver so calls can be chained.
 func (x *EffectNode) WithZRotation(zRotation float64) *EffectNode {
-	x.inner.SKNode.SetZRotation(zRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
 	return x
 }
 
 // A scaling factor that multiplies the width of a node and its children.
 //
-// WithXScale sets the xScale property and returns the receiver for chaining.
+// WithXScale sets xScale and returns the receiver so calls can be chained.
 func (x *EffectNode) WithXScale(xScale float64) *EffectNode {
-	x.inner.SKNode.SetXScale(xScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
 	return x
 }
 
 // A scaling factor that multiplies the height of a node and its children.
 //
-// WithYScale sets the yScale property and returns the receiver for chaining.
+// WithYScale sets yScale and returns the receiver so calls can be chained.
 func (x *EffectNode) WithYScale(yScale float64) *EffectNode {
-	x.inner.SKNode.SetYScale(yScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
 	return x
 }
 
 // A speed modifier applied to all actions executed by a node and its descendants.
 //
-// WithSpeed sets the speed property and returns the receiver for chaining.
+// WithSpeed sets speed and returns the receiver so calls can be chained.
 func (x *EffectNode) WithSpeed(speed float64) *EffectNode {
-	x.inner.SKNode.SetSpeed(speed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
 // The transparency value applied to the node’s contents.
 //
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha sets alpha and returns the receiver so calls can be chained.
 func (x *EffectNode) WithAlpha(alpha float64) *EffectNode {
-	x.inner.SKNode.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
 // A Boolean value that determines whether actions on the node and its descendants are processed.
 //
-// WithPaused sets the paused property and returns the receiver for chaining.
+// WithPaused sets paused and returns the receiver so calls can be chained.
 func (x *EffectNode) WithPaused(paused bool) *EffectNode {
-	x.inner.SKNode.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
 // A Boolean value that determines whether a node and its descendants are rendered.
 //
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *EffectNode) WithHidden(hidden bool) *EffectNode {
-	x.inner.SKNode.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
 // A Boolean value that indicates whether the node receives touch events.
 //
-// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+// WithUserInteractionEnabled sets userInteractionEnabled and returns the receiver so calls can be chained.
 func (x *EffectNode) WithUserInteractionEnabled(userInteractionEnabled bool) *EffectNode {
-	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
 	return x
 }
 
 // The node’s assignable name.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *EffectNode) WithName(name string) *EffectNode {
-	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // The physics body associated with the node.
 //
-// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+// WithPhysicsBody sets physicsBody and returns the receiver so calls can be chained.
 func (x *EffectNode) WithPhysicsBody(physicsBody *PhysicsBody) *EffectNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
 // A dictionary containing arbitrary data.
 //
-// WithUserData sets the userData property and returns the receiver for chaining.
-func (x *EffectNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *EffectNode {
-	x.inner.SKNode.SetUserData(userData)
+// WithUserData sets userData and returns the receiver so calls can be chained.
+func (x *EffectNode) WithUserData(userData obj.Object) *EffectNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	return x
 }
 
 // The reach constraints to apply to the node when executing a reach action.
 //
-// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+// WithReachConstraints sets reachConstraints and returns the receiver so calls can be chained.
 func (x *EffectNode) WithReachConstraints(reachConstraints *ReachConstraints) *EffectNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	return x
 }
 
 // A list of constraints to apply to the node.
 //
-// WithConstraints sets the collection, converting the Go slice to an NSArray.
-func (x *EffectNode) WithConstraints(items ...*raw.SKConstraint) *EffectNode {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SKNode.SetConstraints(foundation.NSArrayFromID[*raw.SKConstraint](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SKNode.SetConstraints(_arr)
+// WithConstraints sets the collection and returns the receiver so calls can be chained.
+func (x *EffectNode) WithConstraints(items ...*Constraint) *EffectNode {
+	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
 // The values of each attribute associated with the node’s attached shader.
 //
-// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
-func (x *EffectNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *EffectNode {
-	x.inner.SKNode.SetAttributeValues(attributeValues)
+// WithAttributeValues sets attributeValues and returns the receiver so calls can be chained.
+func (x *EffectNode) WithAttributeValues(attributeValues obj.Object) *EffectNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
 	return x
 }
 
 // A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 //
-// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+// WithAccessibilityElement sets accessibilityElement and returns the receiver so calls can be chained.
 func (x *EffectNode) WithAccessibilityElement(accessibilityElement bool) *EffectNode {
-	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
 	return x
 }
 
 // A string value describing the user interface element type; for example, a button.
 //
-// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+// WithAccessibilityRole sets accessibilityRole and returns the receiver so calls can be chained.
 func (x *EffectNode) WithAccessibilityRole(accessibilityRole string) *EffectNode {
-	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
 	return x
 }
 
 // A string value describing the user interface element name and type; for example, the Buy button.
 //
-// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+// WithAccessibilityRoleDescription sets accessibilityRoleDescription and returns the receiver so calls can be chained.
 func (x *EffectNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *EffectNode {
-	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
 	return x
 }
 
 // A string that defines this user interface element’s subrole; for example, a full-screen button.
 //
-// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+// WithAccessibilitySubrole sets accessibilitySubrole and returns the receiver so calls can be chained.
 func (x *EffectNode) WithAccessibilitySubrole(accessibilitySubrole string) *EffectNode {
-	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
-	return x
-}
-
-// The size of this user interface element, in screen points.
-//
-// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
-func (x *EffectNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *EffectNode {
-	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
 	return x
 }
 
 // The user interface element that contains this element.
 //
-// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
-func (x *EffectNode) WithAccessibilityParent(accessibilityParent objc.ID) *EffectNode {
-	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+// WithAccessibilityParent sets accessibilityParent and returns the receiver so calls can be chained.
+func (x *EffectNode) WithAccessibilityParent(accessibilityParent obj.Object) *EffectNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	return x
 }
 
 // The help description of this user interface element; for example, the text shown in a tooltip.
 //
-// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+// WithAccessibilityHelp sets accessibilityHelp and returns the receiver so calls can be chained.
 func (x *EffectNode) WithAccessibilityHelp(accessibilityHelp string) *EffectNode {
-	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
 	return x
 }
 
 // A short description of this user interface element.
 //
-// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+// WithAccessibilityLabel sets accessibilityLabel and returns the receiver so calls can be chained.
 func (x *EffectNode) WithAccessibilityLabel(accessibilityLabel string) *EffectNode {
-	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
 	return x
 }
 
 // A toggle you implement to indicate to the system whether this user interface element should respond to user input.
 //
-// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+// WithAccessibilityEnabled sets accessibilityEnabled and returns the receiver so calls can be chained.
 func (x *EffectNode) WithAccessibilityEnabled(accessibilityEnabled bool) *EffectNode {
-	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
 	return x
 }
 
 // A CIFilter to be used as an effect Any CIFilter that requires only a single "inputImage" and produces an "outputImage" is allowed. The filter is applied to all children of the SKEffectNode. If the filter is nil, the children of this node is flattened before being drawn as long as the SKEffectNode is enabled.
-//
-// Filter calls the underlying Filter.
-func (x *EffectNode) Filter() *coreimage.CIFilter {
-	return x.inner.Filter()
+func (x *EffectNode) Filter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filter"))
+	return obj.Wrap(_r)
 }
 
-// SetFilter calls the underlying SetFilter.
-func (x *EffectNode) SetFilter(filter *coreimage.CIFilter) {
-	x.inner.SetFilter(filter)
+func (x *EffectNode) SetFilter(filter obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilter:"), objref.IDOf(filter))
 }
 
-// ShouldCenterFilter calls the underlying ShouldCenterFilter.
 func (x *EffectNode) ShouldCenterFilter() bool {
-	return x.inner.ShouldCenterFilter()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldCenterFilter"))
+	return _r
 }
 
-// SetShouldCenterFilter calls the underlying SetShouldCenterFilter.
 func (x *EffectNode) SetShouldCenterFilter(shouldCenterFilter bool) {
-	x.inner.SetShouldCenterFilter(shouldCenterFilter)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCenterFilter:"), shouldCenterFilter)
 }
 
 // Enable the SKEffectNode. The SKEffectNode has no effect when appliesEffects is not enabled, this is useful for setting up an effect to use later on. Defaults to YES.
-//
-// ShouldEnableEffects calls the underlying ShouldEnableEffects.
 func (x *EffectNode) ShouldEnableEffects() bool {
-	return x.inner.ShouldEnableEffects()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldEnableEffects"))
+	return _r
 }
 
-// SetShouldEnableEffects calls the underlying SetShouldEnableEffects.
 func (x *EffectNode) SetShouldEnableEffects(shouldEnableEffects bool) {
-	x.inner.SetShouldEnableEffects(shouldEnableEffects)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldEnableEffects:"), shouldEnableEffects)
 }
 
 // Enable the rasterization on the SKEffectNode. The SKEffectNode's output is rasterized and cached internally. This cache is reused when rendering. When the SKEffectNode's children change, the cache is updated, but changing properties on the CIFilter does *not* cause an update (you must disable rasterization and then re-enable it for the changes to apply). This is more expensive than not rasterizing if the node's children change frequently, only enable this option if you know the children is largely static.
-//
-// ShouldRasterize calls the underlying ShouldRasterize.
 func (x *EffectNode) ShouldRasterize() bool {
-	return x.inner.ShouldRasterize()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldRasterize"))
+	return _r
 }
 
-// SetShouldRasterize calls the underlying SetShouldRasterize.
 func (x *EffectNode) SetShouldRasterize(shouldRasterize bool) {
-	x.inner.SetShouldRasterize(shouldRasterize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
 }
 
-// Sets the blend mode to use when composing the effect with the final framebuffer. @see SKNode.SKBlendMode
-//
-// BlendMode calls the underlying BlendMode.
-func (x *EffectNode) BlendMode() SKBlendMode {
-	return SKBlendMode(x.inner.BlendMode())
+// Sets the blend mode to use when composing the effect with the final framebuffer.
+func (x *EffectNode) BlendMode() BlendMode {
+	_r := objc.Send[BlendMode](objref.IDOf(x), objc.RegisterName("blendMode"))
+	return _r
 }
 
-// SetBlendMode calls the underlying SetBlendMode.
-func (x *EffectNode) SetBlendMode(blendMode SKBlendMode) {
-	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
+func (x *EffectNode) SetBlendMode(blendMode BlendMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendMode:"), blendMode)
 }
 
-// Shader calls the underlying Shader.
 func (x *EffectNode) Shader() *Shader {
-	_r := x.inner.Shader()
-	if _r == nil {
-		return nil
-	}
-	return &Shader{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shader"))
+	return ShaderFromID(_r)
 }
 
-// SetShader calls the underlying SetShader.
-func (x *EffectNode) SetShader(shader *raw.SKShader) {
-	x.inner.SetShader(shader)
+func (x *EffectNode) SetShader(shader *Shader) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShader:"), objref.IDOf(shader))
 }
-
-func (x *EffectNode) asEffectNode() *raw.SKEffectNode { return x.inner }
-
-func (x *EffectNode) asNode() *raw.SKNode { return &x.inner.SKNode }
 
 // EffectNodeable is the interface implemented by [EffectNode], for mocking and DI.
 type EffectNodeable interface {
-	Unwrap() *raw.SKEffectNode
-	WithFilter(filter *coreimage.CIFilter) *EffectNode
+	obj.Object
+	WithFilter(filter obj.Object) *EffectNode
 	WithShouldCenterFilter(shouldCenterFilter bool) *EffectNode
 	WithShouldEnableEffects(shouldEnableEffects bool) *EffectNode
 	WithShouldRasterize(shouldRasterize bool) *EffectNode
-	WithBlendMode(blendMode SKBlendMode) *EffectNode
+	WithBlendMode(blendMode BlendMode) *EffectNode
 	WithShader(shader *Shader) *EffectNode
-	WithPosition(position corefoundation.CGPoint) *EffectNode
 	WithZPosition(zPosition float64) *EffectNode
 	WithZRotation(zRotation float64) *EffectNode
 	WithXScale(xScale float64) *EffectNode
@@ -401,31 +375,30 @@ type EffectNodeable interface {
 	WithUserInteractionEnabled(userInteractionEnabled bool) *EffectNode
 	WithName(name string) *EffectNode
 	WithPhysicsBody(physicsBody *PhysicsBody) *EffectNode
-	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *EffectNode
+	WithUserData(userData obj.Object) *EffectNode
 	WithReachConstraints(reachConstraints *ReachConstraints) *EffectNode
-	WithConstraints(items ...*raw.SKConstraint) *EffectNode
-	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *EffectNode
+	WithConstraints(items ...*Constraint) *EffectNode
+	WithAttributeValues(attributeValues obj.Object) *EffectNode
 	WithAccessibilityElement(accessibilityElement bool) *EffectNode
 	WithAccessibilityRole(accessibilityRole string) *EffectNode
 	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *EffectNode
 	WithAccessibilitySubrole(accessibilitySubrole string) *EffectNode
-	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *EffectNode
-	WithAccessibilityParent(accessibilityParent objc.ID) *EffectNode
+	WithAccessibilityParent(accessibilityParent obj.Object) *EffectNode
 	WithAccessibilityHelp(accessibilityHelp string) *EffectNode
 	WithAccessibilityLabel(accessibilityLabel string) *EffectNode
 	WithAccessibilityEnabled(accessibilityEnabled bool) *EffectNode
-	Filter() *coreimage.CIFilter
-	SetFilter(filter *coreimage.CIFilter)
+	Filter() obj.Object
+	SetFilter(filter obj.Object)
 	ShouldCenterFilter() bool
 	SetShouldCenterFilter(shouldCenterFilter bool)
 	ShouldEnableEffects() bool
 	SetShouldEnableEffects(shouldEnableEffects bool)
 	ShouldRasterize() bool
 	SetShouldRasterize(shouldRasterize bool)
-	BlendMode() SKBlendMode
-	SetBlendMode(blendMode SKBlendMode)
+	BlendMode() BlendMode
+	SetBlendMode(blendMode BlendMode)
 	Shader() *Shader
-	SetShader(shader *raw.SKShader)
+	SetShader(shader *Shader)
 }
 
 var _ EffectNodeable = (*EffectNode)(nil)

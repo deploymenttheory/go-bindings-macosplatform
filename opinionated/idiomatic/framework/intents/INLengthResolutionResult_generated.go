@@ -5,45 +5,68 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A resolution result for a length associated with an intent.
 //
-// LengthResolutionResult wraps [raw.INLengthResolutionResult] with a fluent Go API.
+// LengthResolutionResult is an idiomatic wrapper over the Objective-C class INLengthResolutionResult.
 type LengthResolutionResult struct {
-	inner *raw.INLengthResolutionResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INLengthResolutionResult].
-func (x *LengthResolutionResult) Unwrap() *raw.INLengthResolutionResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LengthResolutionResult) ID() objc.ID { return x.inner.Ptr() }
-
-// LengthResolutionResultFromID adopts an existing object pointer as a LengthResolutionResult (nil for 0).
+// LengthResolutionResultFromID adopts an existing Objective-C object as a LengthResolutionResult
+// (nil for 0), retaining it and registering a release finalizer.
 func LengthResolutionResultFromID(id objc.ID) *LengthResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	return &LengthResolutionResult{inner: raw.INLengthResolutionResultFromID(id)}
+	x := &LengthResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLengthResolutionResult creates a new [LengthResolutionResult].
+// lengthResolutionResultAdopt wraps an Objective-C object that this code just created as a
+// LengthResolutionResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func lengthResolutionResultAdopt(id objc.ID) *LengthResolutionResult {
+	if id == 0 {
+		return nil
+	}
+	x := &LengthResolutionResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LengthResolutionResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LengthResolutionResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LengthResolutionResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLengthResolutionResult creates a new LengthResolutionResult.
 func NewLengthResolutionResult() *LengthResolutionResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INLengthResolutionResult")), objc.RegisterName("new"))
-	return &LengthResolutionResult{inner: raw.INLengthResolutionResultFromID(_id)}
-}
-
-func (x *LengthResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
-	return &x.inner.INIntentResolutionResult
+	_id := objc.Send[objc.ID](objc.ID(_class("INLengthResolutionResult")), objc.RegisterName("new"))
+	return lengthResolutionResultAdopt(_id)
 }
 
 // LengthResolutionResultable is the interface implemented by [LengthResolutionResult], for mocking and DI.
 type LengthResolutionResultable interface {
-	Unwrap() *raw.INLengthResolutionResult
+	obj.Object
 }
 
 var _ LengthResolutionResultable = (*LengthResolutionResult)(nil)

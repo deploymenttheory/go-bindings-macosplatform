@@ -5,342 +5,329 @@
 package quartzcomposer
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcomposer"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// QCPlugInAttributeNameKey returns the string constant QCPlugInAttributeNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCPlugInAttributeNameKey() objc.ID {
-	return purego.CFConstant(raw.QCPlugInAttributeNameKey())
+// QCPlugInAttributeNameKey returns the string constant QCPlugInAttributeNameKey, for use as a dictionary key or argument.
+func QCPlugInAttributeNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPlugInAttributeNameKey")))
 }
 
-// QCPlugInAttributeDescriptionKey returns the string constant QCPlugInAttributeDescriptionKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCPlugInAttributeDescriptionKey() objc.ID {
-	return purego.CFConstant(raw.QCPlugInAttributeDescriptionKey())
+// QCPlugInAttributeDescriptionKey returns the string constant QCPlugInAttributeDescriptionKey, for use as a dictionary key or argument.
+func QCPlugInAttributeDescriptionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPlugInAttributeDescriptionKey")))
 }
 
-// QCPlugInAttributeCopyrightKey returns the string constant QCPlugInAttributeCopyrightKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCPlugInAttributeCopyrightKey() objc.ID {
-	return purego.CFConstant(raw.QCPlugInAttributeCopyrightKey())
+// QCPlugInAttributeCopyrightKey returns the string constant QCPlugInAttributeCopyrightKey, for use as a dictionary key or argument.
+func QCPlugInAttributeCopyrightKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPlugInAttributeCopyrightKey")))
 }
 
-// QCPlugInAttributeCategoriesKey returns the string constant QCPlugInAttributeCategoriesKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCPlugInAttributeCategoriesKey() objc.ID {
-	return purego.CFConstant(raw.QCPlugInAttributeCategoriesKey())
+// QCPlugInAttributeCategoriesKey returns the string constant QCPlugInAttributeCategoriesKey, for use as a dictionary key or argument.
+func QCPlugInAttributeCategoriesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPlugInAttributeCategoriesKey")))
 }
 
-// QCPlugInAttributeExamplesKey returns the string constant QCPlugInAttributeExamplesKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCPlugInAttributeExamplesKey() objc.ID {
-	return purego.CFConstant(raw.QCPlugInAttributeExamplesKey())
+// QCPlugInAttributeExamplesKey returns the string constant QCPlugInAttributeExamplesKey, for use as a dictionary key or argument.
+func QCPlugInAttributeExamplesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPlugInAttributeExamplesKey")))
 }
 
-// QCPortAttributeTypeKey returns the string constant QCPortAttributeTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCPortAttributeTypeKey() objc.ID {
-	return purego.CFConstant(raw.QCPortAttributeTypeKey())
+// QCPortAttributeTypeKey returns the string constant QCPortAttributeTypeKey, for use as a dictionary key or argument.
+func QCPortAttributeTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPortAttributeTypeKey")))
 }
 
-// QCPortAttributeNameKey returns the string constant QCPortAttributeNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCPortAttributeNameKey() objc.ID {
-	return purego.CFConstant(raw.QCPortAttributeNameKey())
+// QCPortAttributeNameKey returns the string constant QCPortAttributeNameKey, for use as a dictionary key or argument.
+func QCPortAttributeNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPortAttributeNameKey")))
 }
 
-// QCPortAttributeMinimumValueKey returns the string constant QCPortAttributeMinimumValueKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCPortAttributeMinimumValueKey() objc.ID {
-	return purego.CFConstant(raw.QCPortAttributeMinimumValueKey())
+// QCPortAttributeMinimumValueKey returns the string constant QCPortAttributeMinimumValueKey, for use as a dictionary key or argument.
+func QCPortAttributeMinimumValueKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPortAttributeMinimumValueKey")))
 }
 
-// QCPortAttributeMaximumValueKey returns the string constant QCPortAttributeMaximumValueKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCPortAttributeMaximumValueKey() objc.ID {
-	return purego.CFConstant(raw.QCPortAttributeMaximumValueKey())
+// QCPortAttributeMaximumValueKey returns the string constant QCPortAttributeMaximumValueKey, for use as a dictionary key or argument.
+func QCPortAttributeMaximumValueKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPortAttributeMaximumValueKey")))
 }
 
-// QCPortAttributeDefaultValueKey returns the string constant QCPortAttributeDefaultValueKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCPortAttributeDefaultValueKey() objc.ID {
-	return purego.CFConstant(raw.QCPortAttributeDefaultValueKey())
+// QCPortAttributeDefaultValueKey returns the string constant QCPortAttributeDefaultValueKey, for use as a dictionary key or argument.
+func QCPortAttributeDefaultValueKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPortAttributeDefaultValueKey")))
 }
 
-// QCPortAttributeMenuItemsKey returns the string constant QCPortAttributeMenuItemsKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCPortAttributeMenuItemsKey() objc.ID {
-	return purego.CFConstant(raw.QCPortAttributeMenuItemsKey())
+// QCPortAttributeMenuItemsKey returns the string constant QCPortAttributeMenuItemsKey, for use as a dictionary key or argument.
+func QCPortAttributeMenuItemsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPortAttributeMenuItemsKey")))
 }
 
-// QCPortTypeBoolean returns the string constant QCPortTypeBoolean as an objc.ID, for use as a dictionary key or selector argument.
-func QCPortTypeBoolean() objc.ID {
-	return purego.CFConstant(raw.QCPortTypeBoolean())
-}
+// QCPortTypeBoolean returns the string constant QCPortTypeBoolean, for use as a dictionary key or argument.
+func QCPortTypeBoolean() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("QCPortTypeBoolean"))) }
 
-// QCPortTypeIndex returns the string constant QCPortTypeIndex as an objc.ID, for use as a dictionary key or selector argument.
-func QCPortTypeIndex() objc.ID {
-	return purego.CFConstant(raw.QCPortTypeIndex())
-}
+// QCPortTypeIndex returns the string constant QCPortTypeIndex, for use as a dictionary key or argument.
+func QCPortTypeIndex() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("QCPortTypeIndex"))) }
 
-// QCPortTypeNumber returns the string constant QCPortTypeNumber as an objc.ID, for use as a dictionary key or selector argument.
-func QCPortTypeNumber() objc.ID {
-	return purego.CFConstant(raw.QCPortTypeNumber())
-}
+// QCPortTypeNumber returns the string constant QCPortTypeNumber, for use as a dictionary key or argument.
+func QCPortTypeNumber() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("QCPortTypeNumber"))) }
 
-// QCPortTypeString returns the string constant QCPortTypeString as an objc.ID, for use as a dictionary key or selector argument.
-func QCPortTypeString() objc.ID {
-	return purego.CFConstant(raw.QCPortTypeString())
-}
+// QCPortTypeString returns the string constant QCPortTypeString, for use as a dictionary key or argument.
+func QCPortTypeString() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("QCPortTypeString"))) }
 
-// QCPortTypeColor returns the string constant QCPortTypeColor as an objc.ID, for use as a dictionary key or selector argument.
-func QCPortTypeColor() objc.ID {
-	return purego.CFConstant(raw.QCPortTypeColor())
-}
+// QCPortTypeColor returns the string constant QCPortTypeColor, for use as a dictionary key or argument.
+func QCPortTypeColor() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("QCPortTypeColor"))) }
 
-// QCPortTypeImage returns the string constant QCPortTypeImage as an objc.ID, for use as a dictionary key or selector argument.
-func QCPortTypeImage() objc.ID {
-	return purego.CFConstant(raw.QCPortTypeImage())
-}
+// QCPortTypeImage returns the string constant QCPortTypeImage, for use as a dictionary key or argument.
+func QCPortTypeImage() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("QCPortTypeImage"))) }
 
-// QCPortTypeStructure returns the string constant QCPortTypeStructure as an objc.ID, for use as a dictionary key or selector argument.
-func QCPortTypeStructure() objc.ID {
-	return purego.CFConstant(raw.QCPortTypeStructure())
+// QCPortTypeStructure returns the string constant QCPortTypeStructure, for use as a dictionary key or argument.
+func QCPortTypeStructure() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPortTypeStructure")))
 }
 
-// QCPlugInPixelFormatARGB8 returns the string constant QCPlugInPixelFormatARGB8 as an objc.ID, for use as a dictionary key or selector argument.
-func QCPlugInPixelFormatARGB8() objc.ID {
-	return purego.CFConstant(raw.QCPlugInPixelFormatARGB8())
+// QCPlugInPixelFormatARGB8 returns the string constant QCPlugInPixelFormatARGB8, for use as a dictionary key or argument.
+func QCPlugInPixelFormatARGB8() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPlugInPixelFormatARGB8")))
 }
 
-// QCPlugInPixelFormatBGRA8 returns the string constant QCPlugInPixelFormatBGRA8 as an objc.ID, for use as a dictionary key or selector argument.
-func QCPlugInPixelFormatBGRA8() objc.ID {
-	return purego.CFConstant(raw.QCPlugInPixelFormatBGRA8())
+// QCPlugInPixelFormatBGRA8 returns the string constant QCPlugInPixelFormatBGRA8, for use as a dictionary key or argument.
+func QCPlugInPixelFormatBGRA8() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPlugInPixelFormatBGRA8")))
 }
 
-// QCPlugInPixelFormatRGBAf returns the string constant QCPlugInPixelFormatRGBAf as an objc.ID, for use as a dictionary key or selector argument.
-func QCPlugInPixelFormatRGBAf() objc.ID {
-	return purego.CFConstant(raw.QCPlugInPixelFormatRGBAf())
+// QCPlugInPixelFormatRGBAf returns the string constant QCPlugInPixelFormatRGBAf, for use as a dictionary key or argument.
+func QCPlugInPixelFormatRGBAf() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPlugInPixelFormatRGBAf")))
 }
 
-// QCPlugInPixelFormatI8 returns the string constant QCPlugInPixelFormatI8 as an objc.ID, for use as a dictionary key or selector argument.
-func QCPlugInPixelFormatI8() objc.ID {
-	return purego.CFConstant(raw.QCPlugInPixelFormatI8())
+// QCPlugInPixelFormatI8 returns the string constant QCPlugInPixelFormatI8, for use as a dictionary key or argument.
+func QCPlugInPixelFormatI8() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPlugInPixelFormatI8")))
 }
 
-// QCPlugInPixelFormatIf returns the string constant QCPlugInPixelFormatIf as an objc.ID, for use as a dictionary key or selector argument.
-func QCPlugInPixelFormatIf() objc.ID {
-	return purego.CFConstant(raw.QCPlugInPixelFormatIf())
+// QCPlugInPixelFormatIf returns the string constant QCPlugInPixelFormatIf, for use as a dictionary key or argument.
+func QCPlugInPixelFormatIf() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPlugInPixelFormatIf")))
 }
 
-// QCPlugInExecutionArgumentEventKey returns the string constant QCPlugInExecutionArgumentEventKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCPlugInExecutionArgumentEventKey() objc.ID {
-	return purego.CFConstant(raw.QCPlugInExecutionArgumentEventKey())
+// QCPlugInExecutionArgumentEventKey returns the string constant QCPlugInExecutionArgumentEventKey, for use as a dictionary key or argument.
+func QCPlugInExecutionArgumentEventKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPlugInExecutionArgumentEventKey")))
 }
 
-// QCPlugInExecutionArgumentMouseLocationKey returns the string constant QCPlugInExecutionArgumentMouseLocationKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCPlugInExecutionArgumentMouseLocationKey() objc.ID {
-	return purego.CFConstant(raw.QCPlugInExecutionArgumentMouseLocationKey())
+// QCPlugInExecutionArgumentMouseLocationKey returns the string constant QCPlugInExecutionArgumentMouseLocationKey, for use as a dictionary key or argument.
+func QCPlugInExecutionArgumentMouseLocationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCPlugInExecutionArgumentMouseLocationKey")))
 }
 
-// QCCompositionAttributeNameKey returns the string constant QCCompositionAttributeNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionAttributeNameKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionAttributeNameKey())
+// QCCompositionAttributeNameKey returns the string constant QCCompositionAttributeNameKey, for use as a dictionary key or argument.
+func QCCompositionAttributeNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionAttributeNameKey")))
 }
 
-// QCCompositionAttributeDescriptionKey returns the string constant QCCompositionAttributeDescriptionKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionAttributeDescriptionKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionAttributeDescriptionKey())
+// QCCompositionAttributeDescriptionKey returns the string constant QCCompositionAttributeDescriptionKey, for use as a dictionary key or argument.
+func QCCompositionAttributeDescriptionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionAttributeDescriptionKey")))
 }
 
-// QCCompositionAttributeCopyrightKey returns the string constant QCCompositionAttributeCopyrightKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionAttributeCopyrightKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionAttributeCopyrightKey())
+// QCCompositionAttributeCopyrightKey returns the string constant QCCompositionAttributeCopyrightKey, for use as a dictionary key or argument.
+func QCCompositionAttributeCopyrightKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionAttributeCopyrightKey")))
 }
 
-// QCCompositionAttributeBuiltInKey returns the string constant QCCompositionAttributeBuiltInKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionAttributeBuiltInKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionAttributeBuiltInKey())
+// QCCompositionAttributeBuiltInKey returns the string constant QCCompositionAttributeBuiltInKey, for use as a dictionary key or argument.
+func QCCompositionAttributeBuiltInKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionAttributeBuiltInKey")))
 }
 
-// QCCompositionAttributeIsTimeDependentKey returns the string constant QCCompositionAttributeIsTimeDependentKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionAttributeIsTimeDependentKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionAttributeIsTimeDependentKey())
+// QCCompositionAttributeIsTimeDependentKey returns the string constant QCCompositionAttributeIsTimeDependentKey, for use as a dictionary key or argument.
+func QCCompositionAttributeIsTimeDependentKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionAttributeIsTimeDependentKey")))
 }
 
-// QCCompositionAttributeHasConsumersKey returns the string constant QCCompositionAttributeHasConsumersKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionAttributeHasConsumersKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionAttributeHasConsumersKey())
+// QCCompositionAttributeHasConsumersKey returns the string constant QCCompositionAttributeHasConsumersKey, for use as a dictionary key or argument.
+func QCCompositionAttributeHasConsumersKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionAttributeHasConsumersKey")))
 }
 
-// QCCompositionAttributeCategoryKey returns the string constant QCCompositionAttributeCategoryKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionAttributeCategoryKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionAttributeCategoryKey())
+// QCCompositionAttributeCategoryKey returns the string constant QCCompositionAttributeCategoryKey, for use as a dictionary key or argument.
+func QCCompositionAttributeCategoryKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionAttributeCategoryKey")))
 }
 
-// QCCompositionCategoryDistortion returns the string constant QCCompositionCategoryDistortion as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionCategoryDistortion() objc.ID {
-	return purego.CFConstant(raw.QCCompositionCategoryDistortion())
+// QCCompositionCategoryDistortion returns the string constant QCCompositionCategoryDistortion, for use as a dictionary key or argument.
+func QCCompositionCategoryDistortion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionCategoryDistortion")))
 }
 
-// QCCompositionCategoryStylize returns the string constant QCCompositionCategoryStylize as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionCategoryStylize() objc.ID {
-	return purego.CFConstant(raw.QCCompositionCategoryStylize())
+// QCCompositionCategoryStylize returns the string constant QCCompositionCategoryStylize, for use as a dictionary key or argument.
+func QCCompositionCategoryStylize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionCategoryStylize")))
 }
 
-// QCCompositionCategoryUtility returns the string constant QCCompositionCategoryUtility as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionCategoryUtility() objc.ID {
-	return purego.CFConstant(raw.QCCompositionCategoryUtility())
+// QCCompositionCategoryUtility returns the string constant QCCompositionCategoryUtility, for use as a dictionary key or argument.
+func QCCompositionCategoryUtility() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionCategoryUtility")))
 }
 
-// QCCompositionInputImageKey returns the string constant QCCompositionInputImageKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionInputImageKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionInputImageKey())
+// QCCompositionInputImageKey returns the string constant QCCompositionInputImageKey, for use as a dictionary key or argument.
+func QCCompositionInputImageKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionInputImageKey")))
 }
 
-// QCCompositionInputSourceImageKey returns the string constant QCCompositionInputSourceImageKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionInputSourceImageKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionInputSourceImageKey())
+// QCCompositionInputSourceImageKey returns the string constant QCCompositionInputSourceImageKey, for use as a dictionary key or argument.
+func QCCompositionInputSourceImageKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionInputSourceImageKey")))
 }
 
-// QCCompositionInputDestinationImageKey returns the string constant QCCompositionInputDestinationImageKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionInputDestinationImageKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionInputDestinationImageKey())
+// QCCompositionInputDestinationImageKey returns the string constant QCCompositionInputDestinationImageKey, for use as a dictionary key or argument.
+func QCCompositionInputDestinationImageKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionInputDestinationImageKey")))
 }
 
-// QCCompositionInputRSSFeedURLKey returns the string constant QCCompositionInputRSSFeedURLKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionInputRSSFeedURLKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionInputRSSFeedURLKey())
+// QCCompositionInputRSSFeedURLKey returns the string constant QCCompositionInputRSSFeedURLKey, for use as a dictionary key or argument.
+func QCCompositionInputRSSFeedURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionInputRSSFeedURLKey")))
 }
 
-// QCCompositionInputRSSArticleDurationKey returns the string constant QCCompositionInputRSSArticleDurationKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionInputRSSArticleDurationKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionInputRSSArticleDurationKey())
+// QCCompositionInputRSSArticleDurationKey returns the string constant QCCompositionInputRSSArticleDurationKey, for use as a dictionary key or argument.
+func QCCompositionInputRSSArticleDurationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionInputRSSArticleDurationKey")))
 }
 
-// QCCompositionInputPreviewModeKey returns the string constant QCCompositionInputPreviewModeKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionInputPreviewModeKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionInputPreviewModeKey())
+// QCCompositionInputPreviewModeKey returns the string constant QCCompositionInputPreviewModeKey, for use as a dictionary key or argument.
+func QCCompositionInputPreviewModeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionInputPreviewModeKey")))
 }
 
-// QCCompositionInputXKey returns the string constant QCCompositionInputXKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionInputXKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionInputXKey())
+// QCCompositionInputXKey returns the string constant QCCompositionInputXKey, for use as a dictionary key or argument.
+func QCCompositionInputXKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionInputXKey")))
 }
 
-// QCCompositionInputYKey returns the string constant QCCompositionInputYKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionInputYKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionInputYKey())
+// QCCompositionInputYKey returns the string constant QCCompositionInputYKey, for use as a dictionary key or argument.
+func QCCompositionInputYKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionInputYKey")))
 }
 
-// QCCompositionInputScreenImageKey returns the string constant QCCompositionInputScreenImageKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionInputScreenImageKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionInputScreenImageKey())
+// QCCompositionInputScreenImageKey returns the string constant QCCompositionInputScreenImageKey, for use as a dictionary key or argument.
+func QCCompositionInputScreenImageKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionInputScreenImageKey")))
 }
 
-// QCCompositionInputAudioPeakKey returns the string constant QCCompositionInputAudioPeakKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionInputAudioPeakKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionInputAudioPeakKey())
+// QCCompositionInputAudioPeakKey returns the string constant QCCompositionInputAudioPeakKey, for use as a dictionary key or argument.
+func QCCompositionInputAudioPeakKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionInputAudioPeakKey")))
 }
 
-// QCCompositionInputAudioSpectrumKey returns the string constant QCCompositionInputAudioSpectrumKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionInputAudioSpectrumKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionInputAudioSpectrumKey())
+// QCCompositionInputAudioSpectrumKey returns the string constant QCCompositionInputAudioSpectrumKey, for use as a dictionary key or argument.
+func QCCompositionInputAudioSpectrumKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionInputAudioSpectrumKey")))
 }
 
-// QCCompositionInputTrackPositionKey returns the string constant QCCompositionInputTrackPositionKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionInputTrackPositionKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionInputTrackPositionKey())
+// QCCompositionInputTrackPositionKey returns the string constant QCCompositionInputTrackPositionKey, for use as a dictionary key or argument.
+func QCCompositionInputTrackPositionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionInputTrackPositionKey")))
 }
 
-// QCCompositionInputTrackInfoKey returns the string constant QCCompositionInputTrackInfoKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionInputTrackInfoKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionInputTrackInfoKey())
+// QCCompositionInputTrackInfoKey returns the string constant QCCompositionInputTrackInfoKey, for use as a dictionary key or argument.
+func QCCompositionInputTrackInfoKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionInputTrackInfoKey")))
 }
 
-// QCCompositionInputTrackSignalKey returns the string constant QCCompositionInputTrackSignalKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionInputTrackSignalKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionInputTrackSignalKey())
+// QCCompositionInputTrackSignalKey returns the string constant QCCompositionInputTrackSignalKey, for use as a dictionary key or argument.
+func QCCompositionInputTrackSignalKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionInputTrackSignalKey")))
 }
 
-// QCCompositionInputPrimaryColorKey returns the string constant QCCompositionInputPrimaryColorKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionInputPrimaryColorKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionInputPrimaryColorKey())
+// QCCompositionInputPrimaryColorKey returns the string constant QCCompositionInputPrimaryColorKey, for use as a dictionary key or argument.
+func QCCompositionInputPrimaryColorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionInputPrimaryColorKey")))
 }
 
-// QCCompositionInputSecondaryColorKey returns the string constant QCCompositionInputSecondaryColorKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionInputSecondaryColorKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionInputSecondaryColorKey())
+// QCCompositionInputSecondaryColorKey returns the string constant QCCompositionInputSecondaryColorKey, for use as a dictionary key or argument.
+func QCCompositionInputSecondaryColorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionInputSecondaryColorKey")))
 }
 
-// QCCompositionInputPaceKey returns the string constant QCCompositionInputPaceKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionInputPaceKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionInputPaceKey())
+// QCCompositionInputPaceKey returns the string constant QCCompositionInputPaceKey, for use as a dictionary key or argument.
+func QCCompositionInputPaceKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionInputPaceKey")))
 }
 
-// QCCompositionOutputImageKey returns the string constant QCCompositionOutputImageKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionOutputImageKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionOutputImageKey())
+// QCCompositionOutputImageKey returns the string constant QCCompositionOutputImageKey, for use as a dictionary key or argument.
+func QCCompositionOutputImageKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionOutputImageKey")))
 }
 
-// QCCompositionOutputWebPageURLKey returns the string constant QCCompositionOutputWebPageURLKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionOutputWebPageURLKey() objc.ID {
-	return purego.CFConstant(raw.QCCompositionOutputWebPageURLKey())
+// QCCompositionOutputWebPageURLKey returns the string constant QCCompositionOutputWebPageURLKey, for use as a dictionary key or argument.
+func QCCompositionOutputWebPageURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionOutputWebPageURLKey")))
 }
 
-// QCCompositionProtocolGraphicAnimation returns the string constant QCCompositionProtocolGraphicAnimation as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionProtocolGraphicAnimation() objc.ID {
-	return purego.CFConstant(raw.QCCompositionProtocolGraphicAnimation())
+// QCCompositionProtocolGraphicAnimation returns the string constant QCCompositionProtocolGraphicAnimation, for use as a dictionary key or argument.
+func QCCompositionProtocolGraphicAnimation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionProtocolGraphicAnimation")))
 }
 
-// QCCompositionProtocolGraphicTransition returns the string constant QCCompositionProtocolGraphicTransition as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionProtocolGraphicTransition() objc.ID {
-	return purego.CFConstant(raw.QCCompositionProtocolGraphicTransition())
+// QCCompositionProtocolGraphicTransition returns the string constant QCCompositionProtocolGraphicTransition, for use as a dictionary key or argument.
+func QCCompositionProtocolGraphicTransition() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionProtocolGraphicTransition")))
 }
 
-// QCCompositionProtocolImageFilter returns the string constant QCCompositionProtocolImageFilter as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionProtocolImageFilter() objc.ID {
-	return purego.CFConstant(raw.QCCompositionProtocolImageFilter())
+// QCCompositionProtocolImageFilter returns the string constant QCCompositionProtocolImageFilter, for use as a dictionary key or argument.
+func QCCompositionProtocolImageFilter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionProtocolImageFilter")))
 }
 
-// QCCompositionProtocolScreenSaver returns the string constant QCCompositionProtocolScreenSaver as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionProtocolScreenSaver() objc.ID {
-	return purego.CFConstant(raw.QCCompositionProtocolScreenSaver())
+// QCCompositionProtocolScreenSaver returns the string constant QCCompositionProtocolScreenSaver, for use as a dictionary key or argument.
+func QCCompositionProtocolScreenSaver() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionProtocolScreenSaver")))
 }
 
-// QCCompositionProtocolRSSVisualizer returns the string constant QCCompositionProtocolRSSVisualizer as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionProtocolRSSVisualizer() objc.ID {
-	return purego.CFConstant(raw.QCCompositionProtocolRSSVisualizer())
+// QCCompositionProtocolRSSVisualizer returns the string constant QCCompositionProtocolRSSVisualizer, for use as a dictionary key or argument.
+func QCCompositionProtocolRSSVisualizer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionProtocolRSSVisualizer")))
 }
 
-// QCCompositionProtocolMusicVisualizer returns the string constant QCCompositionProtocolMusicVisualizer as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionProtocolMusicVisualizer() objc.ID {
-	return purego.CFConstant(raw.QCCompositionProtocolMusicVisualizer())
+// QCCompositionProtocolMusicVisualizer returns the string constant QCCompositionProtocolMusicVisualizer, for use as a dictionary key or argument.
+func QCCompositionProtocolMusicVisualizer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionProtocolMusicVisualizer")))
 }
 
-// QCCompositionRepositoryDidUpdateNotification returns the string constant QCCompositionRepositoryDidUpdateNotification as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionRepositoryDidUpdateNotification() objc.ID {
-	return purego.CFConstant(raw.QCCompositionRepositoryDidUpdateNotification())
+// QCCompositionRepositoryDidUpdateNotification returns the string constant QCCompositionRepositoryDidUpdateNotification, for use as a dictionary key or argument.
+func QCCompositionRepositoryDidUpdateNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionRepositoryDidUpdateNotification")))
 }
 
-// QCRendererEventKey returns the string constant QCRendererEventKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCRendererEventKey() objc.ID {
-	return purego.CFConstant(raw.QCRendererEventKey())
+// QCRendererEventKey returns the string constant QCRendererEventKey, for use as a dictionary key or argument.
+func QCRendererEventKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCRendererEventKey")))
 }
 
-// QCRendererMouseLocationKey returns the string constant QCRendererMouseLocationKey as an objc.ID, for use as a dictionary key or selector argument.
-func QCRendererMouseLocationKey() objc.ID {
-	return purego.CFConstant(raw.QCRendererMouseLocationKey())
+// QCRendererMouseLocationKey returns the string constant QCRendererMouseLocationKey, for use as a dictionary key or argument.
+func QCRendererMouseLocationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCRendererMouseLocationKey")))
 }
 
-// QCViewDidStartRenderingNotification returns the string constant QCViewDidStartRenderingNotification as an objc.ID, for use as a dictionary key or selector argument.
-func QCViewDidStartRenderingNotification() objc.ID {
-	return purego.CFConstant(raw.QCViewDidStartRenderingNotification())
+// QCViewDidStartRenderingNotification returns the string constant QCViewDidStartRenderingNotification, for use as a dictionary key or argument.
+func QCViewDidStartRenderingNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCViewDidStartRenderingNotification")))
 }
 
-// QCViewDidStopRenderingNotification returns the string constant QCViewDidStopRenderingNotification as an objc.ID, for use as a dictionary key or selector argument.
-func QCViewDidStopRenderingNotification() objc.ID {
-	return purego.CFConstant(raw.QCViewDidStopRenderingNotification())
+// QCViewDidStopRenderingNotification returns the string constant QCViewDidStopRenderingNotification, for use as a dictionary key or argument.
+func QCViewDidStopRenderingNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCViewDidStopRenderingNotification")))
 }
 
-// QCCompositionPickerViewDidSelectCompositionNotification returns the string constant QCCompositionPickerViewDidSelectCompositionNotification as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionPickerViewDidSelectCompositionNotification() objc.ID {
-	return purego.CFConstant(raw.QCCompositionPickerViewDidSelectCompositionNotification())
+// QCCompositionPickerViewDidSelectCompositionNotification returns the string constant QCCompositionPickerViewDidSelectCompositionNotification, for use as a dictionary key or argument.
+func QCCompositionPickerViewDidSelectCompositionNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionPickerViewDidSelectCompositionNotification")))
 }
 
-// QCCompositionPickerPanelDidSelectCompositionNotification returns the string constant QCCompositionPickerPanelDidSelectCompositionNotification as an objc.ID, for use as a dictionary key or selector argument.
-func QCCompositionPickerPanelDidSelectCompositionNotification() objc.ID {
-	return purego.CFConstant(raw.QCCompositionPickerPanelDidSelectCompositionNotification())
+// QCCompositionPickerPanelDidSelectCompositionNotification returns the string constant QCCompositionPickerPanelDidSelectCompositionNotification, for use as a dictionary key or argument.
+func QCCompositionPickerPanelDidSelectCompositionNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("QCCompositionPickerPanelDidSelectCompositionNotification")))
 }

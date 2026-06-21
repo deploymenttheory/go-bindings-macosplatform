@@ -5,58 +5,75 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A value transformer that converts data to and from classes that support secure coding.
 //
-// SecureUnarchiveFromDataTransformer wraps [raw.NSSecureUnarchiveFromDataTransformer] with a fluent Go API.
+// SecureUnarchiveFromDataTransformer is an idiomatic wrapper over the Objective-C class NSSecureUnarchiveFromDataTransformer.
 type SecureUnarchiveFromDataTransformer struct {
-	inner *raw.NSSecureUnarchiveFromDataTransformer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSecureUnarchiveFromDataTransformer].
-func (x *SecureUnarchiveFromDataTransformer) Unwrap() *raw.NSSecureUnarchiveFromDataTransformer {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SecureUnarchiveFromDataTransformer) ID() objc.ID { return x.inner.Ptr() }
-
-// SecureUnarchiveFromDataTransformerFromID adopts an existing object pointer as a SecureUnarchiveFromDataTransformer (nil for 0).
+// SecureUnarchiveFromDataTransformerFromID adopts an existing Objective-C object as a SecureUnarchiveFromDataTransformer
+// (nil for 0), retaining it and registering a release finalizer.
 func SecureUnarchiveFromDataTransformerFromID(id objc.ID) *SecureUnarchiveFromDataTransformer {
 	if id == 0 {
 		return nil
 	}
-	return &SecureUnarchiveFromDataTransformer{inner: raw.NSSecureUnarchiveFromDataTransformerFromID(id)}
-}
-
-// NewSecureUnarchiveFromDataTransformer creates a new [SecureUnarchiveFromDataTransformer].
-func NewSecureUnarchiveFromDataTransformer() *SecureUnarchiveFromDataTransformer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSecureUnarchiveFromDataTransformer")), objc.RegisterName("new"))
-	return &SecureUnarchiveFromDataTransformer{inner: raw.NSSecureUnarchiveFromDataTransformerFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *SecureUnarchiveFromDataTransformer) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SecureUnarchiveFromDataTransformer {
-	x.inner.NSValueTransformer.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &SecureUnarchiveFromDataTransformer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-func (x *SecureUnarchiveFromDataTransformer) asValueTransformer() *raw.NSValueTransformer {
-	return &x.inner.NSValueTransformer
+// secureUnarchiveFromDataTransformerAdopt wraps an Objective-C object that this code just created as a
+// SecureUnarchiveFromDataTransformer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func secureUnarchiveFromDataTransformerAdopt(id objc.ID) *SecureUnarchiveFromDataTransformer {
+	if id == 0 {
+		return nil
+	}
+	x := &SecureUnarchiveFromDataTransformer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *SecureUnarchiveFromDataTransformer) asObject() *raw.NSObject {
-	return &x.inner.NSValueTransformer.NSObject
+// Description returns the object's -description text.
+func (x *SecureUnarchiveFromDataTransformer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SecureUnarchiveFromDataTransformer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SecureUnarchiveFromDataTransformer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSecureUnarchiveFromDataTransformer creates a new SecureUnarchiveFromDataTransformer.
+func NewSecureUnarchiveFromDataTransformer() *SecureUnarchiveFromDataTransformer {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSecureUnarchiveFromDataTransformer")), objc.RegisterName("new"))
+	return secureUnarchiveFromDataTransformerAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *SecureUnarchiveFromDataTransformer) WithScriptingProperties(scriptingProperties obj.Object) *SecureUnarchiveFromDataTransformer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
 }
 
 // SecureUnarchiveFromDataTransformerable is the interface implemented by [SecureUnarchiveFromDataTransformer], for mocking and DI.
 type SecureUnarchiveFromDataTransformerable interface {
-	Unwrap() *raw.NSSecureUnarchiveFromDataTransformer
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SecureUnarchiveFromDataTransformer
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *SecureUnarchiveFromDataTransformer
 }
 
 var _ SecureUnarchiveFromDataTransformerable = (*SecureUnarchiveFromDataTransformer)(nil)

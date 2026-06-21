@@ -5,104 +5,111 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A definition of logical conditions for constraining a search for a fetch or for in-memory filtering.
 //
-// Predicate wraps [raw.NSPredicate] with a fluent Go API.
+// Predicate is an idiomatic wrapper over the Objective-C class NSPredicate.
 type Predicate struct {
-	inner *raw.NSPredicate
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPredicate].
-func (x *Predicate) Unwrap() *raw.NSPredicate { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Predicate) ID() objc.ID { return x.inner.Ptr() }
-
-// PredicateFromID adopts an existing object pointer as a Predicate (nil for 0).
+// PredicateFromID adopts an existing Objective-C object as a Predicate
+// (nil for 0), retaining it and registering a release finalizer.
 func PredicateFromID(id objc.ID) *Predicate {
 	if id == 0 {
 		return nil
 	}
-	return &Predicate{inner: raw.NSPredicateFromID(id)}
+	x := &Predicate{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPredicate creates a new [Predicate].
+// predicateAdopt wraps an Objective-C object that this code just created as a
+// Predicate (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func predicateAdopt(id objc.ID) *Predicate {
+	if id == 0 {
+		return nil
+	}
+	x := &Predicate{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Predicate) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Predicate) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Predicate) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPredicate creates a new Predicate.
 func NewPredicate() *Predicate {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPredicate")), objc.RegisterName("new"))
-	return &Predicate{inner: raw.NSPredicateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPredicate")), objc.RegisterName("new"))
+	return predicateAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Predicate) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Predicate {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *Predicate) WithScriptingProperties(scriptingProperties obj.Object) *Predicate {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Returns a copy of the predicate and substitutes the predicates variables with specified values from a specified substitution variables dictionary.
-//
-// PredicateWithSubstitutionVariables calls the underlying PredicateWithSubstitutionVariables.
-func (x *Predicate) PredicateWithSubstitutionVariables(variables *raw.NSDictionary[*raw.NSString, objc.ID]) *Predicate {
-	_r := x.inner.PredicateWithSubstitutionVariables(variables)
-	if _r == nil {
-		return nil
-	}
-	return &Predicate{inner: _r}
+func (x *Predicate) PredicateWithSubstitutionVariables(variables obj.Object) *Predicate {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicateWithSubstitutionVariables:"), objref.IDOf(variables))
+	return PredicateFromID(_r)
 }
 
 // Returns a Boolean value that indicates whether the specified object matches the conditions that the predicate specifies.
-//
-// EvaluateWithObject calls the underlying EvaluateWithObject.
-func (x *Predicate) EvaluateWithObject(object objc.ID) bool {
-	return x.inner.EvaluateWithObject(object)
+func (x *Predicate) EvaluateWithObject(object obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("evaluateWithObject:"), objref.IDOf(object))
+	return _r
 }
 
 // Returns a Boolean value that indicates whether the specified object matches the conditions that the predicate specifies after substituting in the values from a specified variables dictionary.
-//
-// EvaluateWithObjectSubstitutionVariables calls the underlying EvaluateWithObjectSubstitutionVariables.
-func (x *Predicate) EvaluateWithObjectSubstitutionVariables(object objc.ID, bindings *raw.NSDictionary[*raw.NSString, objc.ID]) bool {
-	return x.inner.EvaluateWithObjectSubstitutionVariables(object, bindings)
+func (x *Predicate) EvaluateWithObjectSubstitutionVariables(object obj.Object, bindings obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("evaluateWithObject:substitutionVariables:"), objref.IDOf(object), objref.IDOf(bindings))
+	return _r
 }
 
 // Forces a securely decoded predicate to allow evaluation.
-//
-// AllowEvaluation calls the underlying AllowEvaluation.
 func (x *Predicate) AllowEvaluation() {
-	x.inner.AllowEvaluation()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowEvaluation"))
 }
 
-// AllowEvaluationWithValidatorError calls the underlying AllowEvaluationWithValidatorError.
-func (x *Predicate) AllowEvaluationWithValidatorError(validator raw.NSPredicateValidating) (bool, error) {
-	return x.inner.AllowEvaluationWithValidatorError(validator)
-}
-
-// PredicateFormat calls the underlying PredicateFormat.
-func (x *Predicate) PredicateFormat() *String {
-	_r := x.inner.PredicateFormat()
-	if _r == nil {
-		return nil
+func (x *Predicate) PredicateFormat() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicateFormat"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
-
-func (x *Predicate) asPredicate() *raw.NSPredicate { return x.inner }
-
-func (x *Predicate) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Predicateable is the interface implemented by [Predicate], for mocking and DI.
 type Predicateable interface {
-	Unwrap() *raw.NSPredicate
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Predicate
-	PredicateWithSubstitutionVariables(variables *raw.NSDictionary[*raw.NSString, objc.ID]) *Predicate
-	EvaluateWithObject(object objc.ID) bool
-	EvaluateWithObjectSubstitutionVariables(object objc.ID, bindings *raw.NSDictionary[*raw.NSString, objc.ID]) bool
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Predicate
+	PredicateWithSubstitutionVariables(variables obj.Object) *Predicate
+	EvaluateWithObject(object obj.Object) bool
+	EvaluateWithObjectSubstitutionVariables(object obj.Object, bindings obj.Object) bool
 	AllowEvaluation()
-	AllowEvaluationWithValidatorError(validator raw.NSPredicateValidating) (bool, error)
-	PredicateFormat() *String
+	PredicateFormat() string
 }
 
 var _ Predicateable = (*Predicate)(nil)

@@ -5,59 +5,74 @@
 package paravirtualizedgraphics
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/paravirtualizedgraphics"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description of a supported display mode.
 //
-// PGDisplayMode wraps [raw.PGDisplayMode] with a fluent Go API.
+// PGDisplayMode is an idiomatic wrapper over the Objective-C class PGDisplayMode.
 type PGDisplayMode struct {
-	inner *raw.PGDisplayMode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PGDisplayMode].
-func (x *PGDisplayMode) Unwrap() *raw.PGDisplayMode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PGDisplayMode) ID() objc.ID { return x.inner.Ptr() }
-
-// PGDisplayModeFromID adopts an existing object pointer as a PGDisplayMode (nil for 0).
+// PGDisplayModeFromID adopts an existing Objective-C object as a PGDisplayMode
+// (nil for 0), retaining it and registering a release finalizer.
 func PGDisplayModeFromID(id objc.ID) *PGDisplayMode {
 	if id == 0 {
 		return nil
 	}
-	return &PGDisplayMode{inner: raw.PGDisplayModeFromID(id)}
+	x := &PGDisplayMode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a new display mode.
-//
-// NewPGDisplayModeWithSizeInPixelsRefreshRateInHz creates a new [PGDisplayMode].
-func NewPGDisplayModeWithSizeInPixelsRefreshRateInHz(sizeInPixels raw.PGDisplayCoord_t, refreshRateInHz float64) *PGDisplayMode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PGDisplayMode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSizeInPixels:refreshRateInHz:"), sizeInPixels, refreshRateInHz)
-	return &PGDisplayMode{inner: raw.PGDisplayModeFromID(_id)}
+// pGDisplayModeAdopt wraps an Objective-C object that this code just created as a
+// PGDisplayMode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pGDisplayModeAdopt(id objc.ID) *PGDisplayMode {
+	if id == 0 {
+		return nil
+	}
+	x := &PGDisplayMode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property sizeInPixels @abstract Width/height of supported display mode.
-//
-// SizeInPixels calls the underlying SizeInPixels.
-func (x *PGDisplayMode) SizeInPixels() raw.PGDisplayCoord_t {
-	return x.inner.SizeInPixels()
+// Description returns the object's -description text.
+func (x *PGDisplayMode) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property refreshRateInHz @abstract refreshRate of supported display mode.  Consider only supplying modes using a refreshRate equal to that of host OS's physical display where representation is ultimately shown.
-//
-// RefreshRate calls the underlying RefreshRate.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PGDisplayMode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PGDisplayMode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPGDisplayMode creates a new PGDisplayMode.
+func NewPGDisplayMode() *PGDisplayMode {
+	_id := objc.Send[objc.ID](objc.ID(_class("PGDisplayMode")), objc.RegisterName("new"))
+	return pGDisplayModeAdopt(_id)
+}
+
+// refreshRate of supported display mode.  Consider only supplying modes using a refreshRate equal to that of host OS's physical display where representation is ultimately shown.
 func (x *PGDisplayMode) RefreshRate() float64 {
-	return x.inner.RefreshRate()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("refreshRate"))
+	return _r
 }
 
 // PGDisplayModeable is the interface implemented by [PGDisplayMode], for mocking and DI.
 type PGDisplayModeable interface {
-	Unwrap() *raw.PGDisplayMode
-	SizeInPixels() raw.PGDisplayCoord_t
+	obj.Object
 	RefreshRate() float64
 }
 

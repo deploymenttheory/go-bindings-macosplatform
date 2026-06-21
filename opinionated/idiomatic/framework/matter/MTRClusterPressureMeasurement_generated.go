@@ -5,142 +5,160 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterPressureMeasurement wraps [raw.MTRClusterPressureMeasurement] with a fluent Go API.
+// MTRClusterPressureMeasurement is an idiomatic wrapper over the Objective-C class MTRClusterPressureMeasurement.
 type MTRClusterPressureMeasurement struct {
-	inner *raw.MTRClusterPressureMeasurement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterPressureMeasurement].
-func (x *MTRClusterPressureMeasurement) Unwrap() *raw.MTRClusterPressureMeasurement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterPressureMeasurement) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterPressureMeasurementFromID adopts an existing object pointer as a MTRClusterPressureMeasurement (nil for 0).
+// MTRClusterPressureMeasurementFromID adopts an existing Objective-C object as a MTRClusterPressureMeasurement
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterPressureMeasurementFromID(id objc.ID) *MTRClusterPressureMeasurement {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterPressureMeasurement{inner: raw.MTRClusterPressureMeasurementFromID(id)}
+	x := &MTRClusterPressureMeasurement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterPressureMeasurementAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterPressureMeasurement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterPressureMeasurementAdopt(id objc.ID) *MTRClusterPressureMeasurement {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterPressureMeasurement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterPressureMeasurement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterPressureMeasurement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterPressureMeasurement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 //
-// NewMTRClusterPressureMeasurementWithDeviceEndpointIDQueue creates a new [MTRClusterPressureMeasurement].
-func NewMTRClusterPressureMeasurementWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterPressureMeasurement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterPressureMeasurement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterPressureMeasurement{inner: raw.MTRClusterPressureMeasurementFromID(_id)}
+// NewMTRClusterPressureMeasurementWithDeviceEndpointIDQueue creates a new MTRClusterPressureMeasurement.
+func NewMTRClusterPressureMeasurementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterPressureMeasurement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterPressureMeasurement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterPressureMeasurementAdopt(_id)
 }
 
-// NewMTRClusterPressureMeasurementWithDeviceEndpointQueue creates a new [MTRClusterPressureMeasurement].
-func NewMTRClusterPressureMeasurementWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterPressureMeasurement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterPressureMeasurement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterPressureMeasurement{inner: raw.MTRClusterPressureMeasurementFromID(_id)}
+// NewMTRClusterPressureMeasurementWithDeviceEndpointQueue creates a new MTRClusterPressureMeasurement.
+func NewMTRClusterPressureMeasurementWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterPressureMeasurement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterPressureMeasurement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterPressureMeasurementAdopt(_id)
 }
 
-// ReadAttributeMeasuredValueWithParams calls the underlying ReadAttributeMeasuredValueWithParams.
-func (x *MTRClusterPressureMeasurement) ReadAttributeMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMeasuredValueWithParams(params)
+func (x *MTRClusterPressureMeasurement) ReadAttributeMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasuredValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinMeasuredValueWithParams calls the underlying ReadAttributeMinMeasuredValueWithParams.
-func (x *MTRClusterPressureMeasurement) ReadAttributeMinMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMinMeasuredValueWithParams(params)
+func (x *MTRClusterPressureMeasurement) ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinMeasuredValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxMeasuredValueWithParams calls the underlying ReadAttributeMaxMeasuredValueWithParams.
-func (x *MTRClusterPressureMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxMeasuredValueWithParams(params)
+func (x *MTRClusterPressureMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxMeasuredValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeToleranceWithParams calls the underlying ReadAttributeToleranceWithParams.
-func (x *MTRClusterPressureMeasurement) ReadAttributeToleranceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeToleranceWithParams(params)
+func (x *MTRClusterPressureMeasurement) ReadAttributeToleranceWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeToleranceWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeScaledValueWithParams calls the underlying ReadAttributeScaledValueWithParams.
-func (x *MTRClusterPressureMeasurement) ReadAttributeScaledValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeScaledValueWithParams(params)
+func (x *MTRClusterPressureMeasurement) ReadAttributeScaledValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeScaledValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinScaledValueWithParams calls the underlying ReadAttributeMinScaledValueWithParams.
-func (x *MTRClusterPressureMeasurement) ReadAttributeMinScaledValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMinScaledValueWithParams(params)
+func (x *MTRClusterPressureMeasurement) ReadAttributeMinScaledValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinScaledValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxScaledValueWithParams calls the underlying ReadAttributeMaxScaledValueWithParams.
-func (x *MTRClusterPressureMeasurement) ReadAttributeMaxScaledValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxScaledValueWithParams(params)
+func (x *MTRClusterPressureMeasurement) ReadAttributeMaxScaledValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxScaledValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeScaledToleranceWithParams calls the underlying ReadAttributeScaledToleranceWithParams.
-func (x *MTRClusterPressureMeasurement) ReadAttributeScaledToleranceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeScaledToleranceWithParams(params)
+func (x *MTRClusterPressureMeasurement) ReadAttributeScaledToleranceWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeScaledToleranceWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeScaleWithParams calls the underlying ReadAttributeScaleWithParams.
-func (x *MTRClusterPressureMeasurement) ReadAttributeScaleWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeScaleWithParams(params)
+func (x *MTRClusterPressureMeasurement) ReadAttributeScaleWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeScaleWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterPressureMeasurement) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterPressureMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterPressureMeasurement) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterPressureMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterPressureMeasurement) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterPressureMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterPressureMeasurement) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+func (x *MTRClusterPressureMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterPressureMeasurement) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterPressureMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterPressureMeasurement) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterPressureMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterPressureMeasurementable is the interface implemented by [MTRClusterPressureMeasurement], for mocking and DI.
 type MTRClusterPressureMeasurementable interface {
-	Unwrap() *raw.MTRClusterPressureMeasurement
-	ReadAttributeMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMinMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMaxMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeToleranceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeScaledValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMinScaledValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMaxScaledValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeScaledToleranceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeScaleWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeMeasuredValueWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeToleranceWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeScaledValueWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMinScaledValueWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMaxScaledValueWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeScaledToleranceWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeScaleWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterPressureMeasurementable = (*MTRClusterPressureMeasurement)(nil)

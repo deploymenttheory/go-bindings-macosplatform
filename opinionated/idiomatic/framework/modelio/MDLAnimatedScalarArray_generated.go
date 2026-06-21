@@ -5,105 +5,80 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AnimatedScalarArray wraps [raw.MDLAnimatedScalarArray] with a fluent Go API.
+// AnimatedScalarArray is an idiomatic wrapper over the Objective-C class MDLAnimatedScalarArray.
 type AnimatedScalarArray struct {
-	inner *raw.MDLAnimatedScalarArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLAnimatedScalarArray].
-func (x *AnimatedScalarArray) Unwrap() *raw.MDLAnimatedScalarArray { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AnimatedScalarArray) ID() objc.ID { return x.inner.Ptr() }
-
-// AnimatedScalarArrayFromID adopts an existing object pointer as a AnimatedScalarArray (nil for 0).
+// AnimatedScalarArrayFromID adopts an existing Objective-C object as a AnimatedScalarArray
+// (nil for 0), retaining it and registering a release finalizer.
 func AnimatedScalarArrayFromID(id objc.ID) *AnimatedScalarArray {
 	if id == 0 {
 		return nil
 	}
-	return &AnimatedScalarArray{inner: raw.MDLAnimatedScalarArrayFromID(id)}
-}
-
-// NewAnimatedScalarArrayWithElementCount creates a new [AnimatedScalarArray].
-func NewAnimatedScalarArrayWithElementCount(arrayElementCount uint) *AnimatedScalarArray {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLAnimatedScalarArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElementCount:"), arrayElementCount)
-	return &AnimatedScalarArray{inner: raw.MDLAnimatedScalarArrayFromID(_id)}
-}
-
-// WithInterpolation sets the interpolation property and returns the receiver for chaining.
-func (x *AnimatedScalarArray) WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedScalarArray {
-	x.inner.MDLAnimatedValue.SetInterpolation(raw.MDLAnimatedValueInterpolation(interpolation))
+	x := &AnimatedScalarArray{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// SetFloatArrayCountAtTime calls the underlying SetFloatArrayCountAtTime.
-func (x *AnimatedScalarArray) SetFloatArrayCountAtTime(array *float32, count uint, time_ float64) {
-	x.inner.SetFloatArrayCountAtTime(array, count, time_)
+// animatedScalarArrayAdopt wraps an Objective-C object that this code just created as a
+// AnimatedScalarArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func animatedScalarArrayAdopt(id objc.ID) *AnimatedScalarArray {
+	if id == 0 {
+		return nil
+	}
+	x := &AnimatedScalarArray{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetDoubleArrayCountAtTime calls the underlying SetDoubleArrayCountAtTime.
-func (x *AnimatedScalarArray) SetDoubleArrayCountAtTime(array *float64, count uint, time_ float64) {
-	x.inner.SetDoubleArrayCountAtTime(array, count, time_)
+// Description returns the object's -description text.
+func (x *AnimatedScalarArray) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// GetFloatArrayMaxCountAtTime calls the underlying GetFloatArrayMaxCountAtTime.
-func (x *AnimatedScalarArray) GetFloatArrayMaxCountAtTime(array *float32, maxCount uint, time_ float64) uint {
-	return x.inner.GetFloatArrayMaxCountAtTime(array, maxCount, time_)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AnimatedScalarArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// GetDoubleArrayMaxCountAtTime calls the underlying GetDoubleArrayMaxCountAtTime.
-func (x *AnimatedScalarArray) GetDoubleArrayMaxCountAtTime(array *float64, maxCount uint, time_ float64) uint {
-	return x.inner.GetDoubleArrayMaxCountAtTime(array, maxCount, time_)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AnimatedScalarArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// ResetWithFloatArrayCountAtTimesCount calls the underlying ResetWithFloatArrayCountAtTimesCount.
-func (x *AnimatedScalarArray) ResetWithFloatArrayCountAtTimesCount(valuesArray *float32, valuesCount uint, timesArray *float64, timesCount uint) {
-	x.inner.ResetWithFloatArrayCountAtTimesCount(valuesArray, valuesCount, timesArray, timesCount)
+// NewAnimatedScalarArrayWithElementCount creates a new AnimatedScalarArray.
+func NewAnimatedScalarArrayWithElementCount(arrayElementCount int) *AnimatedScalarArray {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLAnimatedScalarArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElementCount:"), arrayElementCount)
+	return animatedScalarArrayAdopt(_id)
 }
 
-// ResetWithDoubleArrayCountAtTimesCount calls the underlying ResetWithDoubleArrayCountAtTimesCount.
-func (x *AnimatedScalarArray) ResetWithDoubleArrayCountAtTimesCount(valuesArray *float64, valuesCount uint, timesArray *float64, timesCount uint) {
-	x.inner.ResetWithDoubleArrayCountAtTimesCount(valuesArray, valuesCount, timesArray, timesCount)
+// WithInterpolation sets interpolation and returns the receiver so calls can be chained.
+func (x *AnimatedScalarArray) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedScalarArray {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
+	return x
 }
 
-// GetFloatArrayMaxCount calls the underlying GetFloatArrayMaxCount.
-func (x *AnimatedScalarArray) GetFloatArrayMaxCount(valuesArray *float32, maxCount uint) uint {
-	return x.inner.GetFloatArrayMaxCount(valuesArray, maxCount)
-}
-
-// GetDoubleArrayMaxCount calls the underlying GetDoubleArrayMaxCount.
-func (x *AnimatedScalarArray) GetDoubleArrayMaxCount(valuesArray *float64, maxCount uint) uint {
-	return x.inner.GetDoubleArrayMaxCount(valuesArray, maxCount)
-}
-
-// ElementCount calls the underlying ElementCount.
-func (x *AnimatedScalarArray) ElementCount() uint {
-	return x.inner.ElementCount()
-}
-
-func (x *AnimatedScalarArray) asAnimatedValue() *raw.MDLAnimatedValue {
-	return &x.inner.MDLAnimatedValue
+func (x *AnimatedScalarArray) ElementCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("elementCount"))
+	return _r
 }
 
 // AnimatedScalarArrayable is the interface implemented by [AnimatedScalarArray], for mocking and DI.
 type AnimatedScalarArrayable interface {
-	Unwrap() *raw.MDLAnimatedScalarArray
-	WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedScalarArray
-	SetFloatArrayCountAtTime(array *float32, count uint, time_ float64)
-	SetDoubleArrayCountAtTime(array *float64, count uint, time_ float64)
-	GetFloatArrayMaxCountAtTime(array *float32, maxCount uint, time_ float64) uint
-	GetDoubleArrayMaxCountAtTime(array *float64, maxCount uint, time_ float64) uint
-	ResetWithFloatArrayCountAtTimesCount(valuesArray *float32, valuesCount uint, timesArray *float64, timesCount uint)
-	ResetWithDoubleArrayCountAtTimesCount(valuesArray *float64, valuesCount uint, timesArray *float64, timesCount uint)
-	GetFloatArrayMaxCount(valuesArray *float32, maxCount uint) uint
-	GetDoubleArrayMaxCount(valuesArray *float64, maxCount uint) uint
-	ElementCount() uint
+	obj.Object
+	WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedScalarArray
+	ElementCount() int
 }
 
 var _ AnimatedScalarArrayable = (*AnimatedScalarArray)(nil)

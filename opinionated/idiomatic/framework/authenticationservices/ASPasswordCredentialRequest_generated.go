@@ -5,44 +5,71 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that represents a request to supply a password credential.
 //
-// PasswordCredentialRequest wraps [raw.ASPasswordCredentialRequest] with a fluent Go API.
+// PasswordCredentialRequest is an idiomatic wrapper over the Objective-C class ASPasswordCredentialRequest.
 type PasswordCredentialRequest struct {
-	inner *raw.ASPasswordCredentialRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASPasswordCredentialRequest].
-func (x *PasswordCredentialRequest) Unwrap() *raw.ASPasswordCredentialRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PasswordCredentialRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// PasswordCredentialRequestFromID adopts an existing object pointer as a PasswordCredentialRequest (nil for 0).
+// PasswordCredentialRequestFromID adopts an existing Objective-C object as a PasswordCredentialRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func PasswordCredentialRequestFromID(id objc.ID) *PasswordCredentialRequest {
 	if id == 0 {
 		return nil
 	}
-	return &PasswordCredentialRequest{inner: raw.ASPasswordCredentialRequestFromID(id)}
+	x := &PasswordCredentialRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// passwordCredentialRequestAdopt wraps an Objective-C object that this code just created as a
+// PasswordCredentialRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func passwordCredentialRequestAdopt(id objc.ID) *PasswordCredentialRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &PasswordCredentialRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PasswordCredentialRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PasswordCredentialRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PasswordCredentialRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a password credential request object.
 //
-// NewPasswordCredentialRequestWithCredentialIdentity creates a new [PasswordCredentialRequest].
-func NewPasswordCredentialRequestWithCredentialIdentity(credentialIdentity *raw.ASPasswordCredentialIdentity) *PasswordCredentialRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasswordCredentialRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialIdentity:"), credentialIdentity.Ptr())
-	return &PasswordCredentialRequest{inner: raw.ASPasswordCredentialRequestFromID(_id)}
+// NewPasswordCredentialRequestWithCredentialIdentity creates a new PasswordCredentialRequest.
+func NewPasswordCredentialRequestWithCredentialIdentity(credentialIdentity *PasswordCredentialIdentity) *PasswordCredentialRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasswordCredentialRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialIdentity:"), objref.IDOf(credentialIdentity))
+	return passwordCredentialRequestAdopt(_id)
 }
 
 // PasswordCredentialRequestable is the interface implemented by [PasswordCredentialRequest], for mocking and DI.
 type PasswordCredentialRequestable interface {
-	Unwrap() *raw.ASPasswordCredentialRequest
+	obj.Object
 }
 
 var _ PasswordCredentialRequestable = (*PasswordCredentialRequest)(nil)

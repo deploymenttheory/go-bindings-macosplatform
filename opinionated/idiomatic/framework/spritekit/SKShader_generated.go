@@ -5,195 +5,168 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that allows you to apply a custom fragment shader.
 //
-// Shader wraps [raw.SKShader] with a fluent Go API.
+// Shader is an idiomatic wrapper over the Objective-C class SKShader.
 type Shader struct {
-	inner *raw.SKShader
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKShader].
-func (x *Shader) Unwrap() *raw.SKShader { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Shader) ID() objc.ID { return x.inner.Ptr() }
-
-// ShaderFromID adopts an existing object pointer as a Shader (nil for 0).
+// ShaderFromID adopts an existing Objective-C object as a Shader
+// (nil for 0), retaining it and registering a release finalizer.
 func ShaderFromID(id objc.ID) *Shader {
 	if id == 0 {
 		return nil
 	}
-	return &Shader{inner: raw.SKShaderFromID(id)}
+	x := &Shader{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// shaderAdopt wraps an Objective-C object that this code just created as a
+// Shader (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shaderAdopt(id objc.ID) *Shader {
+	if id == 0 {
+		return nil
+	}
+	x := &Shader{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Shader) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Shader) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Shader) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a new shader object using the specified source code.
 //
-// NewShaderWithSource creates a new [Shader].
+// NewShaderWithSource creates a new Shader.
 func NewShaderWithSource(source string) *Shader {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKShader")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), foundation.NSStringStringWithUTF8String(source).Ptr())
-	return &Shader{inner: raw.SKShaderFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKShader")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), purego.NSString(source))
+	return shaderAdopt(_id)
 }
 
 // Initializes a new shader object using the specified source and uniform data.
 //
-// NewShaderWithSourceUniforms creates a new [Shader].
-func NewShaderWithSourceUniforms(source string, uniforms *foundation.NSArray[*raw.SKUniform]) *Shader {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKShader")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:uniforms:"), foundation.NSStringStringWithUTF8String(source).Ptr(), uniforms.Ptr())
-	return &Shader{inner: raw.SKShaderFromID(_id)}
+// NewShaderWithSourceUniforms creates a new Shader.
+func NewShaderWithSourceUniforms(source string, uniforms []*Uniform) *Shader {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKShader")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:uniforms:"), purego.NSString(source), purego.SliceToNSArray(uniforms, func(_v *Uniform) objc.ID { return objref.IDOf(_v) }))
+	return shaderAdopt(_id)
 }
 
 // The source code for the shader.
 //
-// WithSource sets the source property and returns the receiver for chaining.
+// WithSource sets source and returns the receiver so calls can be chained.
 func (x *Shader) WithSource(source string) *Shader {
-	x.inner.SetSource(foundation.NSStringStringWithUTF8String(source))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), purego.NSString(source))
 	return x
 }
 
 // The list of uniforms associated with the shader.
 //
-// WithUniforms sets the collection, converting the Go slice to an NSArray.
-func (x *Shader) WithUniforms(items ...*raw.SKUniform) *Shader {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetUniforms(foundation.NSArrayFromID[*raw.SKUniform](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SKUniform](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetUniforms(_arr)
+// WithUniforms sets the collection and returns the receiver so calls can be chained.
+func (x *Shader) WithUniforms(items ...*Uniform) *Shader {
+	_arr := purego.SliceToNSArray(items, func(_v *Uniform) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniforms:"), _arr)
 	return x
 }
 
 // The list of attributes associated with the shader.
 //
-// WithAttributes sets the collection, converting the Go slice to an NSArray.
-func (x *Shader) WithAttributes(items ...*raw.SKAttribute) *Shader {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetAttributes(foundation.NSArrayFromID[*raw.SKAttribute](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SKAttribute](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetAttributes(_arr)
+// WithAttributes sets the collection and returns the receiver so calls can be chained.
+func (x *Shader) WithAttributes(items ...*Attribute) *Shader {
+	_arr := purego.SliceToNSArray(items, func(_v *Attribute) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributes:"), _arr)
 	return x
 }
 
 // Adds a uniform to the shader.
-//
-// AddUniform calls the underlying AddUniform.
-func (x *Shader) AddUniform(uniform *raw.SKUniform) {
-	x.inner.AddUniform(uniform)
+func (x *Shader) AddUniform(uniform *Uniform) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addUniform:"), objref.IDOf(uniform))
 }
 
 // Returns the uniform object corresponding to a particular uniform variable.
-//
-// UniformNamed calls the underlying UniformNamed.
 func (x *Shader) UniformNamed(name string) *Uniform {
-	_r := x.inner.UniformNamed(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &Uniform{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniformNamed:"), purego.NSString(name))
+	return UniformFromID(_r)
 }
 
 // Removes a uniform from the shader.
-//
-// RemoveUniformNamed calls the underlying RemoveUniformNamed.
 func (x *Shader) RemoveUniformNamed(name string) {
-	x.inner.RemoveUniformNamed(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeUniformNamed:"), purego.NSString(name))
 }
 
-// Source calls the underlying Source.
 func (x *Shader) Source() string {
-	_r := x.inner.Source()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSource calls the underlying SetSource.
 func (x *Shader) SetSource(source string) {
-	x.inner.SetSource(foundation.NSStringStringWithUTF8String(source))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), purego.NSString(source))
 }
 
 // You may define additional uniforms to be used in your shader here. There is no need to declare them in you source, just use them by name. All uniforms declared must be used within the source.
 //
 // Uniforms returns the collection as a Go slice.
 func (x *Shader) Uniforms() []*Uniform {
-	arr := x.inner.Uniforms()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Uniform {
-		return &Uniform{inner: raw.SKUniformFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniforms"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Uniform { return UniformFromID(_id) })
 }
 
-// SetUniforms calls the underlying SetUniforms.
-func (x *Shader) SetUniforms(uniforms *foundation.NSArray[*raw.SKUniform]) {
-	x.inner.SetUniforms(uniforms)
+func (x *Shader) SetUniforms(uniforms []*Uniform) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniforms:"), purego.SliceToNSArray(uniforms, func(_v *Uniform) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Attributes returns the collection as a Go slice.
 func (x *Shader) Attributes() []*Attribute {
-	arr := x.inner.Attributes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Attribute {
-		return &Attribute{inner: raw.SKAttributeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Attribute { return AttributeFromID(_id) })
 }
 
-// SetAttributes calls the underlying SetAttributes.
-func (x *Shader) SetAttributes(attributes *foundation.NSArray[*raw.SKAttribute]) {
-	x.inner.SetAttributes(attributes)
+func (x *Shader) SetAttributes(attributes []*Attribute) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributes:"), purego.SliceToNSArray(attributes, func(_v *Attribute) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Shaderable is the interface implemented by [Shader], for mocking and DI.
 type Shaderable interface {
-	Unwrap() *raw.SKShader
+	obj.Object
 	WithSource(source string) *Shader
-	WithUniforms(items ...*raw.SKUniform) *Shader
-	WithAttributes(items ...*raw.SKAttribute) *Shader
-	AddUniform(uniform *raw.SKUniform)
+	WithUniforms(items ...*Uniform) *Shader
+	WithAttributes(items ...*Attribute) *Shader
+	AddUniform(uniform *Uniform)
 	UniformNamed(name string) *Uniform
 	RemoveUniformNamed(name string)
 	Source() string
 	SetSource(source string)
 	Uniforms() []*Uniform
-	SetUniforms(uniforms *foundation.NSArray[*raw.SKUniform])
+	SetUniforms(uniforms []*Uniform)
 	Attributes() []*Attribute
-	SetAttributes(attributes *foundation.NSArray[*raw.SKAttribute])
+	SetAttributes(attributes []*Attribute)
 }
 
 var _ Shaderable = (*Shader)(nil)

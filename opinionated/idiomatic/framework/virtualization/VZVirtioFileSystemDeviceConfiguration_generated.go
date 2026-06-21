@@ -5,106 +5,116 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents the configuration of a Virtio file system device.
 //
-// VirtioFileSystemDeviceConfiguration wraps [raw.VZVirtioFileSystemDeviceConfiguration] with a fluent Go API.
+// VirtioFileSystemDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioFileSystemDeviceConfiguration.
 type VirtioFileSystemDeviceConfiguration struct {
-	inner *raw.VZVirtioFileSystemDeviceConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZVirtioFileSystemDeviceConfiguration].
-func (x *VirtioFileSystemDeviceConfiguration) Unwrap() *raw.VZVirtioFileSystemDeviceConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioFileSystemDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioFileSystemDeviceConfigurationFromID adopts an existing object pointer as a VirtioFileSystemDeviceConfiguration (nil for 0).
+// VirtioFileSystemDeviceConfigurationFromID adopts an existing Objective-C object as a VirtioFileSystemDeviceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioFileSystemDeviceConfigurationFromID(id objc.ID) *VirtioFileSystemDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioFileSystemDeviceConfiguration{inner: raw.VZVirtioFileSystemDeviceConfigurationFromID(id)}
+	x := &VirtioFileSystemDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// virtioFileSystemDeviceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// VirtioFileSystemDeviceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioFileSystemDeviceConfigurationAdopt(id objc.ID) *VirtioFileSystemDeviceConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtioFileSystemDeviceConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VirtioFileSystemDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VirtioFileSystemDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VirtioFileSystemDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a configuration for a VIRTIO file system device.
 //
-// NewVirtioFileSystemDeviceConfigurationWithTag creates a new [VirtioFileSystemDeviceConfiguration].
+// NewVirtioFileSystemDeviceConfigurationWithTag creates a new VirtioFileSystemDeviceConfiguration.
 func NewVirtioFileSystemDeviceConfigurationWithTag(tag string) *VirtioFileSystemDeviceConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioFileSystemDeviceConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTag:"), foundation.NSStringStringWithUTF8String(tag).Ptr())
-	return &VirtioFileSystemDeviceConfiguration{inner: raw.VZVirtioFileSystemDeviceConfigurationFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZVirtioFileSystemDeviceConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTag:"), purego.NSString(tag))
+	return virtioFileSystemDeviceConfigurationAdopt(_id)
 }
 
 // A label that identifies this device in the guest VM.
 //
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag sets tag and returns the receiver so calls can be chained.
 func (x *VirtioFileSystemDeviceConfiguration) WithTag(tag string) *VirtioFileSystemDeviceConfiguration {
-	x.inner.SetTag(foundation.NSStringStringWithUTF8String(tag))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), purego.NSString(tag))
 	return x
 }
 
 // A value that defines how the host exposes resources to the guest virtual machine.
 //
-// WithShare sets the share property and returns the receiver for chaining.
+// WithShare sets share and returns the receiver so calls can be chained.
 func (x *VirtioFileSystemDeviceConfiguration) WithShare(share DirectoryShareProvider) *VirtioFileSystemDeviceConfiguration {
-	x.inner.SetShare(share.asDirectoryShare())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShare:"), objref.IDOf(share))
 	return x
 }
 
-// @abstract The tag is a string identifying the device. @discussion The tag is presented as a label in the guest identifying this device for mounting. The tag must be valid, which can be checked with +[VZVirtioFileSystemDeviceConfiguration validateTag:error:]. @see +[VZVirtioFileSystemDeviceConfiguration validateTag:error:]
-//
-// Tag calls the underlying Tag.
+// The tag is a string identifying the device. The tag is presented as a label in the guest identifying this device for mounting. The tag must be valid, which can be checked with +[VZVirtioFileSystemDeviceConfiguration validateTag:error:].
 func (x *VirtioFileSystemDeviceConfiguration) Tag() string {
-	_r := x.inner.Tag()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tag"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTag calls the underlying SetTag.
 func (x *VirtioFileSystemDeviceConfiguration) SetTag(tag string) {
-	x.inner.SetTag(foundation.NSStringStringWithUTF8String(tag))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), purego.NSString(tag))
 }
 
-// @abstract Directory share. Defines how host resources are exposed to the guest virtual machine. @see VZSingleDirectoryShare @see VZMultipleDirectoryShare @see VZLinuxRosettaDirectoryShare
-//
-// Share calls the underlying Share.
+// Directory share. Defines how host resources are exposed to the guest virtual machine.
 func (x *VirtioFileSystemDeviceConfiguration) Share() *DirectoryShare {
-	_r := x.inner.Share()
-	if _r == nil {
-		return nil
-	}
-	return &DirectoryShare{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("share"))
+	return DirectoryShareFromID(_r)
 }
 
-// SetShare calls the underlying SetShare.
-func (x *VirtioFileSystemDeviceConfiguration) SetShare(share *raw.VZDirectoryShare) {
-	x.inner.SetShare(share)
-}
-
-func (x *VirtioFileSystemDeviceConfiguration) asDirectorySharingDeviceConfiguration() *raw.VZDirectorySharingDeviceConfiguration {
-	return &x.inner.VZDirectorySharingDeviceConfiguration
+func (x *VirtioFileSystemDeviceConfiguration) SetShare(share *DirectoryShare) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShare:"), objref.IDOf(share))
 }
 
 // VirtioFileSystemDeviceConfigurationable is the interface implemented by [VirtioFileSystemDeviceConfiguration], for mocking and DI.
 type VirtioFileSystemDeviceConfigurationable interface {
-	Unwrap() *raw.VZVirtioFileSystemDeviceConfiguration
+	obj.Object
 	WithTag(tag string) *VirtioFileSystemDeviceConfiguration
 	WithShare(share DirectoryShareProvider) *VirtioFileSystemDeviceConfiguration
 	Tag() string
 	SetTag(tag string)
 	Share() *DirectoryShare
-	SetShare(share *raw.VZDirectoryShare)
+	SetShare(share *DirectoryShare)
 }
 
 var _ VirtioFileSystemDeviceConfigurationable = (*VirtioFileSystemDeviceConfiguration)(nil)

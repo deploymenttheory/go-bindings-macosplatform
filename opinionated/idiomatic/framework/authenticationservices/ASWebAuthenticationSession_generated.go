@@ -5,147 +5,129 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A session that an app uses to authenticate a user through a web service.
 //
-// WebAuthenticationSession wraps [raw.ASWebAuthenticationSession] with a fluent Go API.
+// WebAuthenticationSession is an idiomatic wrapper over the Objective-C class ASWebAuthenticationSession.
 type WebAuthenticationSession struct {
-	inner *raw.ASWebAuthenticationSession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASWebAuthenticationSession].
-func (x *WebAuthenticationSession) Unwrap() *raw.ASWebAuthenticationSession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WebAuthenticationSession) ID() objc.ID { return x.inner.Ptr() }
-
-// WebAuthenticationSessionFromID adopts an existing object pointer as a WebAuthenticationSession (nil for 0).
+// WebAuthenticationSessionFromID adopts an existing Objective-C object as a WebAuthenticationSession
+// (nil for 0), retaining it and registering a release finalizer.
 func WebAuthenticationSessionFromID(id objc.ID) *WebAuthenticationSession {
 	if id == 0 {
 		return nil
 	}
-	return &WebAuthenticationSession{inner: raw.ASWebAuthenticationSessionFromID(id)}
-}
-
-// Creates a web authentication session instance.
-//
-// NewWebAuthenticationSessionWithURLCallbackURLSchemeCompletionHandler creates a new [WebAuthenticationSession].
-func NewWebAuthenticationSessionWithURLCallbackURLSchemeCompletionHandler(uRL string, callbackURLScheme string, completionHandler func(*foundation.NSURL, unsafe.Pointer)) *WebAuthenticationSession {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASWebAuthenticationSession")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:callbackURLScheme:completionHandler:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), foundation.NSStringStringWithUTF8String(callbackURLScheme).Ptr(), completionHandler)
-	return &WebAuthenticationSession{inner: raw.ASWebAuthenticationSessionFromID(_id)}
-}
-
-// Creates a web authentication session instance that uses a callback to evaluate a redirection URL.
-//
-// NewWebAuthenticationSessionWithURLCallbackCompletionHandler creates a new [WebAuthenticationSession].
-func NewWebAuthenticationSessionWithURLCallbackCompletionHandler(uRL string, callback *raw.ASWebAuthenticationSessionCallback, completionHandler func(*foundation.NSURL, unsafe.Pointer)) *WebAuthenticationSession {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASWebAuthenticationSession")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:callback:completionHandler:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), callback.Ptr(), completionHandler)
-	return &WebAuthenticationSession{inner: raw.ASWebAuthenticationSessionFromID(_id)}
-}
-
-// A delegate that provides a display context in which the system can present an authentication session to the user.
-//
-// WithPresentationContextProvider sets the presentationContextProvider property and returns the receiver for chaining.
-func (x *WebAuthenticationSession) WithPresentationContextProvider(presentationContextProvider raw.ASWebAuthenticationPresentationContextProviding) *WebAuthenticationSession {
-	x.inner.SetPresentationContextProvider(presentationContextProvider)
+	x := &WebAuthenticationSession{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// webAuthenticationSessionAdopt wraps an Objective-C object that this code just created as a
+// WebAuthenticationSession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func webAuthenticationSessionAdopt(id objc.ID) *WebAuthenticationSession {
+	if id == 0 {
+		return nil
+	}
+	x := &WebAuthenticationSession{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WebAuthenticationSession) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WebAuthenticationSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WebAuthenticationSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWebAuthenticationSession creates a new WebAuthenticationSession.
+func NewWebAuthenticationSession() *WebAuthenticationSession {
+	_id := objc.Send[objc.ID](objc.ID(_class("ASWebAuthenticationSession")), objc.RegisterName("new"))
+	return webAuthenticationSessionAdopt(_id)
 }
 
 // A Boolean value that indicates whether the session should ask the browser for a private authentication session.
 //
-// WithPrefersEphemeralWebBrowserSession sets the prefersEphemeralWebBrowserSession property and returns the receiver for chaining.
+// WithPrefersEphemeralWebBrowserSession sets prefersEphemeralWebBrowserSession and returns the receiver so calls can be chained.
 func (x *WebAuthenticationSession) WithPrefersEphemeralWebBrowserSession(prefersEphemeralWebBrowserSession bool) *WebAuthenticationSession {
-	x.inner.SetPrefersEphemeralWebBrowserSession(prefersEphemeralWebBrowserSession)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersEphemeralWebBrowserSession:"), prefersEphemeralWebBrowserSession)
 	return x
 }
 
 // Any additional header fields to set when loading the initial URL.
 //
-// WithAdditionalHeaderFields sets the additionalHeaderFields property and returns the receiver for chaining.
-func (x *WebAuthenticationSession) WithAdditionalHeaderFields(additionalHeaderFields *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *WebAuthenticationSession {
-	x.inner.SetAdditionalHeaderFields(additionalHeaderFields)
+// WithAdditionalHeaderFields sets additionalHeaderFields and returns the receiver so calls can be chained.
+func (x *WebAuthenticationSession) WithAdditionalHeaderFields(additionalHeaderFields obj.Object) *WebAuthenticationSession {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalHeaderFields:"), objref.IDOf(additionalHeaderFields))
 	return x
 }
 
 // Starts a web authentication session.
-//
-// Start calls the underlying Start.
 func (x *WebAuthenticationSession) Start() bool {
-	return x.inner.Start()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("start"))
+	return _r
 }
 
 // Cancels a web authentication session.
-//
-// Cancel calls the underlying Cancel.
 func (x *WebAuthenticationSession) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// @abstract Provides context to target where in an application's UI the authorization view should be shown. A provider must be set prior to calling -start, otherwise the authorization view cannot be displayed. If deploying to iOS prior to 13.0, the desired window is inferred by the application's key window.
-//
-// PresentationContextProvider calls the underlying PresentationContextProvider.
-func (x *WebAuthenticationSession) PresentationContextProvider() raw.ASWebAuthenticationPresentationContextProviding {
-	return x.inner.PresentationContextProvider()
-}
-
-// SetPresentationContextProvider calls the underlying SetPresentationContextProvider.
-func (x *WebAuthenticationSession) SetPresentationContextProvider(presentationContextProvider raw.ASWebAuthenticationPresentationContextProviding) {
-	x.inner.SetPresentationContextProvider(presentationContextProvider)
-}
-
-// @abstract Indicates whether this session should ask the browser for an ephemeral session. @discussion Ephemeral web browser sessions do not not share cookies or other browsing data with a user's normal browser session. This value is NO by default. Setting this property after calling -[ASWebAuthenticationSession start] has no effect.
-//
-// PrefersEphemeralWebBrowserSession calls the underlying PrefersEphemeralWebBrowserSession.
+// Indicates whether this session should ask the browser for an ephemeral session. Ephemeral web browser sessions do not not share cookies or other browsing data with a user's normal browser session. This value is NO by default. Setting this property after calling -[ASWebAuthenticationSession start] has no effect.
 func (x *WebAuthenticationSession) PrefersEphemeralWebBrowserSession() bool {
-	return x.inner.PrefersEphemeralWebBrowserSession()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("prefersEphemeralWebBrowserSession"))
+	return _r
 }
 
-// SetPrefersEphemeralWebBrowserSession calls the underlying SetPrefersEphemeralWebBrowserSession.
 func (x *WebAuthenticationSession) SetPrefersEphemeralWebBrowserSession(prefersEphemeralWebBrowserSession bool) {
-	x.inner.SetPrefersEphemeralWebBrowserSession(prefersEphemeralWebBrowserSession)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersEphemeralWebBrowserSession:"), prefersEphemeralWebBrowserSession)
 }
 
 // Any additional header fields to be set when loading the initial URL. All header field names must start with the "X-" prefix.
-//
-// AdditionalHeaderFields calls the underlying AdditionalHeaderFields.
-func (x *WebAuthenticationSession) AdditionalHeaderFields() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	return x.inner.AdditionalHeaderFields()
+func (x *WebAuthenticationSession) AdditionalHeaderFields() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("additionalHeaderFields"))
+	return obj.Wrap(_r)
 }
 
-// SetAdditionalHeaderFields calls the underlying SetAdditionalHeaderFields.
-func (x *WebAuthenticationSession) SetAdditionalHeaderFields(additionalHeaderFields *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
-	x.inner.SetAdditionalHeaderFields(additionalHeaderFields)
+func (x *WebAuthenticationSession) SetAdditionalHeaderFields(additionalHeaderFields obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalHeaderFields:"), objref.IDOf(additionalHeaderFields))
 }
 
-// @abstract Returns whether the session can be successfully started. This property returns the same value as calling -start, but without the side effect of actually starting the session.
-//
-// CanStart calls the underlying CanStart.
+// Returns whether the session can be successfully started. This property returns the same value as calling -start, but without the side effect of actually starting the session.
 func (x *WebAuthenticationSession) CanStart() bool {
-	return x.inner.CanStart()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canStart"))
+	return _r
 }
 
 // WebAuthenticationSessionable is the interface implemented by [WebAuthenticationSession], for mocking and DI.
 type WebAuthenticationSessionable interface {
-	Unwrap() *raw.ASWebAuthenticationSession
-	WithPresentationContextProvider(presentationContextProvider raw.ASWebAuthenticationPresentationContextProviding) *WebAuthenticationSession
+	obj.Object
 	WithPrefersEphemeralWebBrowserSession(prefersEphemeralWebBrowserSession bool) *WebAuthenticationSession
-	WithAdditionalHeaderFields(additionalHeaderFields *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *WebAuthenticationSession
+	WithAdditionalHeaderFields(additionalHeaderFields obj.Object) *WebAuthenticationSession
 	Start() bool
 	Cancel()
-	PresentationContextProvider() raw.ASWebAuthenticationPresentationContextProviding
-	SetPresentationContextProvider(presentationContextProvider raw.ASWebAuthenticationPresentationContextProviding)
 	PrefersEphemeralWebBrowserSession() bool
 	SetPrefersEphemeralWebBrowserSession(prefersEphemeralWebBrowserSession bool)
-	AdditionalHeaderFields() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
-	SetAdditionalHeaderFields(additionalHeaderFields *foundation.NSDictionary[*foundation.NSString, *foundation.NSString])
+	AdditionalHeaderFields() obj.Object
+	SetAdditionalHeaderFields(additionalHeaderFields obj.Object)
 	CanStart() bool
 }
 

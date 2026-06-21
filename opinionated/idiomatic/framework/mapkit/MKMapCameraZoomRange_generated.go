@@ -5,69 +5,68 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A camera zoom range that limits the distances to which the user can zoom.
 //
-// MapCameraZoomRange wraps [raw.MKMapCameraZoomRange] with a fluent Go API.
+// MapCameraZoomRange is an idiomatic wrapper over the Objective-C class MKMapCameraZoomRange.
 type MapCameraZoomRange struct {
-	inner *raw.MKMapCameraZoomRange
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKMapCameraZoomRange].
-func (x *MapCameraZoomRange) Unwrap() *raw.MKMapCameraZoomRange { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MapCameraZoomRange) ID() objc.ID { return x.inner.Ptr() }
-
-// MapCameraZoomRangeFromID adopts an existing object pointer as a MapCameraZoomRange (nil for 0).
+// MapCameraZoomRangeFromID adopts an existing Objective-C object as a MapCameraZoomRange
+// (nil for 0), retaining it and registering a release finalizer.
 func MapCameraZoomRangeFromID(id objc.ID) *MapCameraZoomRange {
 	if id == 0 {
 		return nil
 	}
-	return &MapCameraZoomRange{inner: raw.MKMapCameraZoomRangeFromID(id)}
+	x := &MapCameraZoomRange{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMapCameraZoomRangeWithMinCenterCoordinateDistanceMaxCenterCoordinateDistance creates a new [MapCameraZoomRange].
-func NewMapCameraZoomRangeWithMinCenterCoordinateDistanceMaxCenterCoordinateDistance(minDistance unsafe.Pointer, maxDistance unsafe.Pointer) *MapCameraZoomRange {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapCameraZoomRange")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMinCenterCoordinateDistance:maxCenterCoordinateDistance:"), minDistance, maxDistance)
-	return &MapCameraZoomRange{inner: raw.MKMapCameraZoomRangeFromID(_id)}
+// mapCameraZoomRangeAdopt wraps an Objective-C object that this code just created as a
+// MapCameraZoomRange (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mapCameraZoomRangeAdopt(id objc.ID) *MapCameraZoomRange {
+	if id == 0 {
+		return nil
+	}
+	x := &MapCameraZoomRange{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// NewMapCameraZoomRangeWithMinCenterCoordinateDistance creates a new [MapCameraZoomRange].
-func NewMapCameraZoomRangeWithMinCenterCoordinateDistance(minDistance unsafe.Pointer) *MapCameraZoomRange {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapCameraZoomRange")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMinCenterCoordinateDistance:"), minDistance)
-	return &MapCameraZoomRange{inner: raw.MKMapCameraZoomRangeFromID(_id)}
+// Description returns the object's -description text.
+func (x *MapCameraZoomRange) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// NewMapCameraZoomRangeWithMaxCenterCoordinateDistance creates a new [MapCameraZoomRange].
-func NewMapCameraZoomRangeWithMaxCenterCoordinateDistance(maxDistance unsafe.Pointer) *MapCameraZoomRange {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapCameraZoomRange")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMaxCenterCoordinateDistance:"), maxDistance)
-	return &MapCameraZoomRange{inner: raw.MKMapCameraZoomRangeFromID(_id)}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MapCameraZoomRange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// MinCenterCoordinateDistance calls the underlying MinCenterCoordinateDistance.
-func (x *MapCameraZoomRange) MinCenterCoordinateDistance() unsafe.Pointer {
-	return x.inner.MinCenterCoordinateDistance()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MapCameraZoomRange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// MaxCenterCoordinateDistance calls the underlying MaxCenterCoordinateDistance.
-func (x *MapCameraZoomRange) MaxCenterCoordinateDistance() unsafe.Pointer {
-	return x.inner.MaxCenterCoordinateDistance()
+// NewMapCameraZoomRange creates a new MapCameraZoomRange.
+func NewMapCameraZoomRange() *MapCameraZoomRange {
+	_id := objc.Send[objc.ID](objc.ID(_class("MKMapCameraZoomRange")), objc.RegisterName("new"))
+	return mapCameraZoomRangeAdopt(_id)
 }
 
 // MapCameraZoomRangeable is the interface implemented by [MapCameraZoomRange], for mocking and DI.
 type MapCameraZoomRangeable interface {
-	Unwrap() *raw.MKMapCameraZoomRange
-	MinCenterCoordinateDistance() unsafe.Pointer
-	MaxCenterCoordinateDistance() unsafe.Pointer
+	obj.Object
 }
 
 var _ MapCameraZoomRangeable = (*MapCameraZoomRange)(nil)

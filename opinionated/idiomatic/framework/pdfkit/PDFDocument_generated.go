@@ -5,384 +5,297 @@
 package pdfkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that represents PDF data or a PDF file and defines methods for writing, searching, and selecting PDF data.
 //
-// Document wraps [raw.PDFDocument] with a fluent Go API.
+// Document is an idiomatic wrapper over the Objective-C class PDFDocument.
 type Document struct {
-	inner *raw.PDFDocument
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PDFDocument].
-func (x *Document) Unwrap() *raw.PDFDocument { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Document) ID() objc.ID { return x.inner.Ptr() }
-
-// DocumentFromID adopts an existing object pointer as a Document (nil for 0).
+// DocumentFromID adopts an existing Objective-C object as a Document
+// (nil for 0), retaining it and registering a release finalizer.
 func DocumentFromID(id objc.ID) *Document {
 	if id == 0 {
 		return nil
 	}
-	return &Document{inner: raw.PDFDocumentFromID(id)}
+	x := &Document{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDocument creates a new [Document].
+// documentAdopt wraps an Objective-C object that this code just created as a
+// Document (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func documentAdopt(id objc.ID) *Document {
+	if id == 0 {
+		return nil
+	}
+	x := &Document{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Document) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Document) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Document) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDocument creates a new Document.
 func NewDocument() *Document {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFDocument")), objc.RegisterName("new"))
-	return &Document{inner: raw.PDFDocumentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PDFDocument")), objc.RegisterName("new"))
+	return documentAdopt(_id)
 }
 
 // Initializes a PDFDocument object with the contents at the specified URL (if the URL is invalid, this method returns NULL).
 //
-// NewDocumentWithURL creates a new [Document].
+// NewDocumentWithURL creates a new Document.
 func NewDocumentWithURL(url string) *Document {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFDocument")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr())
-	return &Document{inner: raw.PDFDocumentFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFDocument")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
+	return documentAdopt(_id)
 }
 
 // Initializes a PDFDocument object with the passed-in data.
 //
-// NewDocumentWithData creates a new [Document].
-func NewDocumentWithData(data *foundation.NSData) *Document {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFDocument")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), data.Ptr())
-	return &Document{inner: raw.PDFDocumentFromID(_id)}
+// NewDocumentWithData creates a new Document.
+func NewDocumentWithData(data obj.Object) *Document {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFDocument")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
+	return documentAdopt(_id)
 }
 
-// WithDocumentAttributes sets the documentAttributes property and returns the receiver for chaining.
-func (x *Document) WithDocumentAttributes(documentAttributes *foundation.NSDictionary[objc.ID, objc.ID]) *Document {
-	x.inner.SetDocumentAttributes(documentAttributes)
-	return x
-}
-
-// The object acting as the delegate for the PDFDocument object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Document) WithDelegate(delegate raw.PDFDocumentDelegate) *Document {
-	x.inner.SetDelegate(delegate)
+// WithDocumentAttributes sets documentAttributes and returns the receiver so calls can be chained.
+func (x *Document) WithDocumentAttributes(documentAttributes obj.Object) *Document {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentAttributes:"), objref.IDOf(documentAttributes))
 	return x
 }
 
 // Attempts to unlock an encrypted document.
-//
-// UnlockWithPassword calls the underlying UnlockWithPassword.
 func (x *Document) UnlockWithPassword(password string) bool {
-	return x.inner.UnlockWithPassword(foundation.NSStringStringWithUTF8String(password))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("unlockWithPassword:"), purego.NSString(password))
+	return _r
 }
 
-// DataRepresentation calls the underlying DataRepresentation.
-func (x *Document) DataRepresentation() *foundation.NSData {
-	return x.inner.DataRepresentation()
+func (x *Document) DataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
+	return obj.Wrap(_r)
 }
 
-// DataRepresentationWithOptions calls the underlying DataRepresentationWithOptions.
-func (x *Document) DataRepresentationWithOptions(options *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSData {
-	return x.inner.DataRepresentationWithOptions(options)
+func (x *Document) DataRepresentationWithOptions(options obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentationWithOptions:"), objref.IDOf(options))
+	return obj.Wrap(_r)
 }
 
-// WriteToFile calls the underlying WriteToFile.
 func (x *Document) WriteToFile(path string) bool {
-	return x.inner.WriteToFile(foundation.NSStringStringWithUTF8String(path))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToFile:"), purego.NSString(path))
+	return _r
 }
 
-// WriteToFileWithOptions calls the underlying WriteToFileWithOptions.
-func (x *Document) WriteToFileWithOptions(path string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	return x.inner.WriteToFileWithOptions(foundation.NSStringStringWithUTF8String(path), options)
+func (x *Document) WriteToFileWithOptions(path string, options obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToFile:withOptions:"), purego.NSString(path), objref.IDOf(options))
+	return _r
 }
 
-// WriteToURL calls the underlying WriteToURL.
 func (x *Document) WriteToURL(url string) bool {
-	return x.inner.WriteToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:"), rt.FileURL(url))
+	return _r
 }
 
-// WriteToURLWithOptions calls the underlying WriteToURLWithOptions.
-func (x *Document) WriteToURLWithOptions(url string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	return x.inner.WriteToURLWithOptions(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options)
+func (x *Document) WriteToURLWithOptions(url string, options obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:withOptions:"), rt.FileURL(url), objref.IDOf(options))
+	return _r
 }
 
-// OutlineItemForSelection calls the underlying OutlineItemForSelection.
-func (x *Document) OutlineItemForSelection(selection *raw.PDFSelection) *Outline {
-	_r := x.inner.OutlineItemForSelection(selection)
-	if _r == nil {
-		return nil
-	}
-	return &Outline{inner: _r}
+func (x *Document) OutlineItemForSelection(selection *Selection) *Outline {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outlineItemForSelection:"), objref.IDOf(selection))
+	return OutlineFromID(_r)
 }
 
-// PageAtIndex calls the underlying PageAtIndex.
-func (x *Document) PageAtIndex(index uint) *Page {
-	_r := x.inner.PageAtIndex(index)
-	if _r == nil {
-		return nil
-	}
-	return &Page{inner: _r}
+func (x *Document) PageAtIndex(index int) *Page {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pageAtIndex:"), index)
+	return PageFromID(_r)
 }
 
-// IndexForPage calls the underlying IndexForPage.
-func (x *Document) IndexForPage(page *raw.PDFPage) uint {
-	return x.inner.IndexForPage(page)
+func (x *Document) IndexForPage(page *Page) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexForPage:"), objref.IDOf(page))
+	return _r
 }
 
-// InsertPageAtIndex calls the underlying InsertPageAtIndex.
-func (x *Document) InsertPageAtIndex(page *raw.PDFPage, index uint) {
-	x.inner.InsertPageAtIndex(page, index)
+func (x *Document) InsertPageAtIndex(page *Page, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertPage:atIndex:"), objref.IDOf(page), index)
 }
 
-// RemovePageAtIndex calls the underlying RemovePageAtIndex.
-func (x *Document) RemovePageAtIndex(index uint) {
-	x.inner.RemovePageAtIndex(index)
+func (x *Document) RemovePageAtIndex(index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removePageAtIndex:"), index)
 }
 
-// ExchangePageAtIndexWithPageAtIndex calls the underlying ExchangePageAtIndexWithPageAtIndex.
-func (x *Document) ExchangePageAtIndexWithPageAtIndex(indexA uint, indexB uint) {
-	x.inner.ExchangePageAtIndexWithPageAtIndex(indexA, indexB)
+func (x *Document) ExchangePageAtIndexWithPageAtIndex(indexA int, indexB int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exchangePageAtIndex:withPageAtIndex:"), indexA, indexB)
 }
 
-// Synchronously finds all instances of the specified string in the document.
-//
-// FindStringWithOptions calls the underlying FindStringWithOptions.
-func (x *Document) FindStringWithOptions(string_ string, options foundation.NSStringCompareOptions) *foundation.NSArray[*raw.PDFSelection] {
-	return x.inner.FindStringWithOptions(foundation.NSStringStringWithUTF8String(string_), options)
-}
-
-// Asynchronously finds all instances of the specified string in the document.
-//
-// BeginFindStringWithOptions calls the underlying BeginFindStringWithOptions.
-func (x *Document) BeginFindStringWithOptions(string_ string, options foundation.NSStringCompareOptions) {
-	x.inner.BeginFindStringWithOptions(foundation.NSStringStringWithUTF8String(string_), options)
-}
-
-// BeginFindStringsWithOptions calls the underlying BeginFindStringsWithOptions.
-func (x *Document) BeginFindStringsWithOptions(strings_ *foundation.NSArray[*foundation.NSString], options foundation.NSStringCompareOptions) {
-	x.inner.BeginFindStringsWithOptions(strings_, options)
-}
-
-// FindStringFromSelectionWithOptions calls the underlying FindStringFromSelectionWithOptions.
-func (x *Document) FindStringFromSelectionWithOptions(string_ string, selection *raw.PDFSelection, options foundation.NSStringCompareOptions) *Selection {
-	_r := x.inner.FindStringFromSelectionWithOptions(foundation.NSStringStringWithUTF8String(string_), selection, options)
-	if _r == nil {
-		return nil
-	}
-	return &Selection{inner: _r}
-}
-
-// CancelFindString calls the underlying CancelFindString.
 func (x *Document) CancelFindString() {
-	x.inner.CancelFindString()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelFindString"))
 }
 
-// PrintOperationForPrintInfoScalingModeAutoRotate calls the underlying PrintOperationForPrintInfoScalingModeAutoRotate.
-func (x *Document) PrintOperationForPrintInfoScalingModeAutoRotate(printInfo *appkit.NSPrintInfo, scaleMode PDFPrintScalingMode, doRotate bool) *appkit.NSPrintOperation {
-	return x.inner.PrintOperationForPrintInfoScalingModeAutoRotate(printInfo, raw.PDFPrintScalingMode(scaleMode), doRotate)
+func (x *Document) PrintOperationForPrintInfoScalingModeAutoRotate(printInfo obj.Object, scaleMode PrintScalingMode, doRotate bool) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printOperationForPrintInfo:scalingMode:autoRotate:"), objref.IDOf(printInfo), scaleMode, doRotate)
+	return obj.Wrap(_r)
 }
 
-// SelectionFromPageAtPointToPageAtPoint calls the underlying SelectionFromPageAtPointToPageAtPoint.
-func (x *Document) SelectionFromPageAtPointToPageAtPoint(startPage *raw.PDFPage, startPoint corefoundation.CGPoint, endPage *raw.PDFPage, endPoint corefoundation.CGPoint) *Selection {
-	_r := x.inner.SelectionFromPageAtPointToPageAtPoint(startPage, startPoint, endPage, endPoint)
-	if _r == nil {
-		return nil
-	}
-	return &Selection{inner: _r}
+func (x *Document) SelectionFromPageAtCharacterIndexToPageAtCharacterIndex(startPage *Page, startCharacter int, endPage *Page, endCharacter int) *Selection {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionFromPage:atCharacterIndex:toPage:atCharacterIndex:"), objref.IDOf(startPage), startCharacter, objref.IDOf(endPage), endCharacter)
+	return SelectionFromID(_r)
 }
 
-// SelectionFromPageAtPointToPageAtPointWithGranularity calls the underlying SelectionFromPageAtPointToPageAtPointWithGranularity.
-func (x *Document) SelectionFromPageAtPointToPageAtPointWithGranularity(startPage *raw.PDFPage, startPoint corefoundation.CGPoint, endPage *raw.PDFPage, endPoint corefoundation.CGPoint, granularity PDFSelectionGranularity) *Selection {
-	_r := x.inner.SelectionFromPageAtPointToPageAtPointWithGranularity(startPage, startPoint, endPage, endPoint, raw.PDFSelectionGranularity(granularity))
-	if _r == nil {
-		return nil
-	}
-	return &Selection{inner: _r}
+func (x *Document) DocumentURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentURL"))
+	return obj.Wrap(_r)
 }
 
-// SelectionFromPageAtCharacterIndexToPageAtCharacterIndex calls the underlying SelectionFromPageAtCharacterIndexToPageAtCharacterIndex.
-func (x *Document) SelectionFromPageAtCharacterIndexToPageAtCharacterIndex(startPage *raw.PDFPage, startCharacter uint, endPage *raw.PDFPage, endCharacter uint) *Selection {
-	_r := x.inner.SelectionFromPageAtCharacterIndexToPageAtCharacterIndex(startPage, startCharacter, endPage, endCharacter)
-	if _r == nil {
-		return nil
-	}
-	return &Selection{inner: _r}
+func (x *Document) DocumentRef() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentRef"))
+	return obj.Wrap(_r)
 }
 
-// DocumentURL calls the underlying DocumentURL.
-func (x *Document) DocumentURL() *foundation.NSURL {
-	return x.inner.DocumentURL()
+func (x *Document) DocumentAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentAttributes"))
+	return obj.Wrap(_r)
 }
 
-// DocumentRef calls the underlying DocumentRef.
-func (x *Document) DocumentRef() unsafe.Pointer {
-	return x.inner.DocumentRef()
+func (x *Document) SetDocumentAttributes(documentAttributes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentAttributes:"), objref.IDOf(documentAttributes))
 }
 
-// DocumentAttributes calls the underlying DocumentAttributes.
-func (x *Document) DocumentAttributes() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.DocumentAttributes()
-}
-
-// SetDocumentAttributes calls the underlying SetDocumentAttributes.
-func (x *Document) SetDocumentAttributes(documentAttributes *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.SetDocumentAttributes(documentAttributes)
-}
-
-// MajorVersion calls the underlying MajorVersion.
 func (x *Document) MajorVersion() int {
-	return x.inner.MajorVersion()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("majorVersion"))
+	return _r
 }
 
-// MinorVersion calls the underlying MinorVersion.
 func (x *Document) MinorVersion() int {
-	return x.inner.MinorVersion()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minorVersion"))
+	return _r
 }
 
-// IsEncrypted calls the underlying IsEncrypted.
 func (x *Document) IsEncrypted() bool {
-	return x.inner.IsEncrypted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEncrypted"))
+	return _r
 }
 
-// IsLocked calls the underlying IsLocked.
 func (x *Document) IsLocked() bool {
-	return x.inner.IsLocked()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLocked"))
+	return _r
 }
 
-// AllowsPrinting calls the underlying AllowsPrinting.
 func (x *Document) AllowsPrinting() bool {
-	return x.inner.AllowsPrinting()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsPrinting"))
+	return _r
 }
 
-// AllowsCopying calls the underlying AllowsCopying.
 func (x *Document) AllowsCopying() bool {
-	return x.inner.AllowsCopying()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCopying"))
+	return _r
 }
 
-// AllowsDocumentChanges calls the underlying AllowsDocumentChanges.
 func (x *Document) AllowsDocumentChanges() bool {
-	return x.inner.AllowsDocumentChanges()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDocumentChanges"))
+	return _r
 }
 
-// AllowsDocumentAssembly calls the underlying AllowsDocumentAssembly.
 func (x *Document) AllowsDocumentAssembly() bool {
-	return x.inner.AllowsDocumentAssembly()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDocumentAssembly"))
+	return _r
 }
 
-// AllowsContentAccessibility calls the underlying AllowsContentAccessibility.
 func (x *Document) AllowsContentAccessibility() bool {
-	return x.inner.AllowsContentAccessibility()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsContentAccessibility"))
+	return _r
 }
 
-// AllowsCommenting calls the underlying AllowsCommenting.
 func (x *Document) AllowsCommenting() bool {
-	return x.inner.AllowsCommenting()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCommenting"))
+	return _r
 }
 
-// AllowsFormFieldEntry calls the underlying AllowsFormFieldEntry.
 func (x *Document) AllowsFormFieldEntry() bool {
-	return x.inner.AllowsFormFieldEntry()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsFormFieldEntry"))
+	return _r
 }
 
-// AccessPermissions calls the underlying AccessPermissions.
-func (x *Document) AccessPermissions() PDFAccessPermissions {
-	return PDFAccessPermissions(x.inner.AccessPermissions())
+func (x *Document) AccessPermissions() AccessPermissions {
+	_r := objc.Send[AccessPermissions](objref.IDOf(x), objc.RegisterName("accessPermissions"))
+	return _r
 }
 
-// PermissionsStatus calls the underlying PermissionsStatus.
-func (x *Document) PermissionsStatus() PDFDocumentPermissions {
-	return PDFDocumentPermissions(x.inner.PermissionsStatus())
+func (x *Document) PermissionsStatus() DocumentPermissions {
+	_r := objc.Send[DocumentPermissions](objref.IDOf(x), objc.RegisterName("permissionsStatus"))
+	return _r
 }
 
-// String calls the underlying String.
 func (x *Document) String() string {
-	_r := x.inner.String()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("string"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Delegate calls the underlying Delegate.
-func (x *Document) Delegate() raw.PDFDocumentDelegate {
-	return x.inner.Delegate()
+func (x *Document) PageCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pageCount"))
+	return _r
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *Document) SetDelegate(delegate raw.PDFDocumentDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// OutlineRoot calls the underlying OutlineRoot.
-func (x *Document) OutlineRoot() unsafe.Pointer {
-	return x.inner.OutlineRoot()
-}
-
-// SetOutlineRoot calls the underlying SetOutlineRoot.
-func (x *Document) SetOutlineRoot(outlineRoot unsafe.Pointer) {
-	x.inner.SetOutlineRoot(outlineRoot)
-}
-
-// PageCount calls the underlying PageCount.
-func (x *Document) PageCount() uint {
-	return x.inner.PageCount()
-}
-
-// PageClass calls the underlying PageClass.
-func (x *Document) PageClass() objc.Class {
-	return x.inner.PageClass()
-}
-
-// IsFinding calls the underlying IsFinding.
 func (x *Document) IsFinding() bool {
-	return x.inner.IsFinding()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFinding"))
+	return _r
 }
 
-// SelectionForEntireDocument calls the underlying SelectionForEntireDocument.
 func (x *Document) SelectionForEntireDocument() *Selection {
-	_r := x.inner.SelectionForEntireDocument()
-	if _r == nil {
-		return nil
-	}
-	return &Selection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionForEntireDocument"))
+	return SelectionFromID(_r)
 }
 
 // Documentable is the interface implemented by [Document], for mocking and DI.
 type Documentable interface {
-	Unwrap() *raw.PDFDocument
-	WithDocumentAttributes(documentAttributes *foundation.NSDictionary[objc.ID, objc.ID]) *Document
-	WithDelegate(delegate raw.PDFDocumentDelegate) *Document
+	obj.Object
+	WithDocumentAttributes(documentAttributes obj.Object) *Document
 	UnlockWithPassword(password string) bool
-	DataRepresentation() *foundation.NSData
-	DataRepresentationWithOptions(options *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSData
+	DataRepresentation() obj.Object
+	DataRepresentationWithOptions(options obj.Object) obj.Object
 	WriteToFile(path string) bool
-	WriteToFileWithOptions(path string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
+	WriteToFileWithOptions(path string, options obj.Object) bool
 	WriteToURL(url string) bool
-	WriteToURLWithOptions(url string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
-	OutlineItemForSelection(selection *raw.PDFSelection) *Outline
-	PageAtIndex(index uint) *Page
-	IndexForPage(page *raw.PDFPage) uint
-	InsertPageAtIndex(page *raw.PDFPage, index uint)
-	RemovePageAtIndex(index uint)
-	ExchangePageAtIndexWithPageAtIndex(indexA uint, indexB uint)
-	FindStringWithOptions(string_ string, options foundation.NSStringCompareOptions) *foundation.NSArray[*raw.PDFSelection]
-	BeginFindStringWithOptions(string_ string, options foundation.NSStringCompareOptions)
-	BeginFindStringsWithOptions(strings_ *foundation.NSArray[*foundation.NSString], options foundation.NSStringCompareOptions)
-	FindStringFromSelectionWithOptions(string_ string, selection *raw.PDFSelection, options foundation.NSStringCompareOptions) *Selection
+	WriteToURLWithOptions(url string, options obj.Object) bool
+	OutlineItemForSelection(selection *Selection) *Outline
+	PageAtIndex(index int) *Page
+	IndexForPage(page *Page) int
+	InsertPageAtIndex(page *Page, index int)
+	RemovePageAtIndex(index int)
+	ExchangePageAtIndexWithPageAtIndex(indexA int, indexB int)
 	CancelFindString()
-	PrintOperationForPrintInfoScalingModeAutoRotate(printInfo *appkit.NSPrintInfo, scaleMode PDFPrintScalingMode, doRotate bool) *appkit.NSPrintOperation
-	SelectionFromPageAtPointToPageAtPoint(startPage *raw.PDFPage, startPoint corefoundation.CGPoint, endPage *raw.PDFPage, endPoint corefoundation.CGPoint) *Selection
-	SelectionFromPageAtPointToPageAtPointWithGranularity(startPage *raw.PDFPage, startPoint corefoundation.CGPoint, endPage *raw.PDFPage, endPoint corefoundation.CGPoint, granularity PDFSelectionGranularity) *Selection
-	SelectionFromPageAtCharacterIndexToPageAtCharacterIndex(startPage *raw.PDFPage, startCharacter uint, endPage *raw.PDFPage, endCharacter uint) *Selection
-	DocumentURL() *foundation.NSURL
-	DocumentRef() unsafe.Pointer
-	DocumentAttributes() *foundation.NSDictionary[objc.ID, objc.ID]
-	SetDocumentAttributes(documentAttributes *foundation.NSDictionary[objc.ID, objc.ID])
+	PrintOperationForPrintInfoScalingModeAutoRotate(printInfo obj.Object, scaleMode PrintScalingMode, doRotate bool) obj.Object
+	SelectionFromPageAtCharacterIndexToPageAtCharacterIndex(startPage *Page, startCharacter int, endPage *Page, endCharacter int) *Selection
+	DocumentURL() obj.Object
+	DocumentRef() obj.Object
+	DocumentAttributes() obj.Object
+	SetDocumentAttributes(documentAttributes obj.Object)
 	MajorVersion() int
 	MinorVersion() int
 	IsEncrypted() bool
@@ -394,15 +307,10 @@ type Documentable interface {
 	AllowsContentAccessibility() bool
 	AllowsCommenting() bool
 	AllowsFormFieldEntry() bool
-	AccessPermissions() PDFAccessPermissions
-	PermissionsStatus() PDFDocumentPermissions
+	AccessPermissions() AccessPermissions
+	PermissionsStatus() DocumentPermissions
 	String() string
-	Delegate() raw.PDFDocumentDelegate
-	SetDelegate(delegate raw.PDFDocumentDelegate)
-	OutlineRoot() unsafe.Pointer
-	SetOutlineRoot(outlineRoot unsafe.Pointer)
-	PageCount() uint
-	PageClass() objc.Class
+	PageCount() int
 	IsFinding() bool
 	SelectionForEntireDocument() *Selection
 }

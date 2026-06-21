@@ -5,146 +5,153 @@
 package glkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Fog drawing information for use in GLKit rendering effects.
 //
-// EffectPropertyFog wraps [raw.GLKEffectPropertyFog] with a fluent Go API.
+// EffectPropertyFog is an idiomatic wrapper over the Objective-C class GLKEffectPropertyFog.
 type EffectPropertyFog struct {
-	inner *raw.GLKEffectPropertyFog
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GLKEffectPropertyFog].
-func (x *EffectPropertyFog) Unwrap() *raw.GLKEffectPropertyFog { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EffectPropertyFog) ID() objc.ID { return x.inner.Ptr() }
-
-// EffectPropertyFogFromID adopts an existing object pointer as a EffectPropertyFog (nil for 0).
+// EffectPropertyFogFromID adopts an existing Objective-C object as a EffectPropertyFog
+// (nil for 0), retaining it and registering a release finalizer.
 func EffectPropertyFogFromID(id objc.ID) *EffectPropertyFog {
 	if id == 0 {
 		return nil
 	}
-	return &EffectPropertyFog{inner: raw.GLKEffectPropertyFogFromID(id)}
+	x := &EffectPropertyFog{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEffectPropertyFog creates a new [EffectPropertyFog].
+// effectPropertyFogAdopt wraps an Objective-C object that this code just created as a
+// EffectPropertyFog (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func effectPropertyFogAdopt(id objc.ID) *EffectPropertyFog {
+	if id == 0 {
+		return nil
+	}
+	x := &EffectPropertyFog{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EffectPropertyFog) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EffectPropertyFog) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EffectPropertyFog) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEffectPropertyFog creates a new EffectPropertyFog.
 func NewEffectPropertyFog() *EffectPropertyFog {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GLKEffectPropertyFog")), objc.RegisterName("new"))
-	return &EffectPropertyFog{inner: raw.GLKEffectPropertyFogFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GLKEffectPropertyFog")), objc.RegisterName("new"))
+	return effectPropertyFogAdopt(_id)
 }
 
 // A Boolean value that indicates whether fog is applied to the fragment color.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *EffectPropertyFog) WithEnabled(enabled uint8) *EffectPropertyFog {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // The algorithm used to compute the density of the fog applied to the fragment color.
 //
-// WithMode sets the mode property and returns the receiver for chaining.
+// WithMode sets mode and returns the receiver so calls can be chained.
 func (x *EffectPropertyFog) WithMode(mode int32) *EffectPropertyFog {
-	x.inner.SetMode(mode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 	return x
 }
 
 // The rate at which the fog exponent increases.
 //
-// WithDensity sets the density property and returns the receiver for chaining.
+// WithDensity sets density and returns the receiver so calls can be chained.
 func (x *EffectPropertyFog) WithDensity(density float32) *EffectPropertyFog {
-	x.inner.SetDensity(density)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDensity:"), density)
 	return x
 }
 
 // The minimum distance in eye coordinates before fog is applied to the fragment color.
 //
-// WithStart sets the start property and returns the receiver for chaining.
+// WithStart sets start and returns the receiver so calls can be chained.
 func (x *EffectPropertyFog) WithStart(start float32) *EffectPropertyFog {
-	x.inner.SetStart(start)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStart:"), start)
 	return x
 }
 
 // The distance in eye coordinates where fog completely covers the color fragment.
 //
-// WithEnd sets the end property and returns the receiver for chaining.
+// WithEnd sets end and returns the receiver so calls can be chained.
 func (x *EffectPropertyFog) WithEnd(end float32) *EffectPropertyFog {
-	x.inner.SetEnd(end)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnd:"), end)
 	return x
 }
 
-// Enabled calls the underlying Enabled.
 func (x *EffectPropertyFog) Enabled() uint8 {
-	return x.inner.Enabled()
+	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("enabled"))
+	return _r
 }
 
-// SetEnabled calls the underlying SetEnabled.
 func (x *EffectPropertyFog) SetEnabled(enabled uint8) {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
-// Mode calls the underlying Mode.
 func (x *EffectPropertyFog) Mode() int32 {
-	return x.inner.Mode()
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("mode"))
+	return _r
 }
 
-// SetMode calls the underlying SetMode.
 func (x *EffectPropertyFog) SetMode(mode int32) {
-	x.inner.SetMode(mode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 }
 
-// Color calls the underlying Color.
-func (x *EffectPropertyFog) Color() unsafe.Pointer {
-	return x.inner.Color()
-}
-
-// SetColor calls the underlying SetColor.
-func (x *EffectPropertyFog) SetColor(color unsafe.Pointer) {
-	x.inner.SetColor(color)
-}
-
-// Density calls the underlying Density.
 func (x *EffectPropertyFog) Density() float32 {
-	return x.inner.Density()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("density"))
+	return _r
 }
 
-// SetDensity calls the underlying SetDensity.
 func (x *EffectPropertyFog) SetDensity(density float32) {
-	x.inner.SetDensity(density)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDensity:"), density)
 }
 
-// Start calls the underlying Start.
 func (x *EffectPropertyFog) Start() float32 {
-	return x.inner.Start()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("start"))
+	return _r
 }
 
-// SetStart calls the underlying SetStart.
 func (x *EffectPropertyFog) SetStart(start float32) {
-	x.inner.SetStart(start)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStart:"), start)
 }
 
-// End calls the underlying End.
 func (x *EffectPropertyFog) End() float32 {
-	return x.inner.End()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("end"))
+	return _r
 }
 
-// SetEnd calls the underlying SetEnd.
 func (x *EffectPropertyFog) SetEnd(end float32) {
-	x.inner.SetEnd(end)
-}
-
-func (x *EffectPropertyFog) asEffectProperty() *raw.GLKEffectProperty {
-	return &x.inner.GLKEffectProperty
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnd:"), end)
 }
 
 // EffectPropertyFogable is the interface implemented by [EffectPropertyFog], for mocking and DI.
 type EffectPropertyFogable interface {
-	Unwrap() *raw.GLKEffectPropertyFog
+	obj.Object
 	WithEnabled(enabled uint8) *EffectPropertyFog
 	WithMode(mode int32) *EffectPropertyFog
 	WithDensity(density float32) *EffectPropertyFog
@@ -154,8 +161,6 @@ type EffectPropertyFogable interface {
 	SetEnabled(enabled uint8)
 	Mode() int32
 	SetMode(mode int32)
-	Color() unsafe.Pointer
-	SetColor(color unsafe.Pointer)
 	Density() float32
 	SetDensity(density float32)
 	Start() float32

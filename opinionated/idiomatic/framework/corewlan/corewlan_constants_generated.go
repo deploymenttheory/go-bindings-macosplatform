@@ -5,73 +5,70 @@
 package corewlan
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corewlan"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @constant CWErrorDomain @abstract Error domain corresponding to the CWErr type.
-// CWErrorDomain returns the string constant CWErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func CWErrorDomain() objc.ID {
-	return purego.CFConstant(raw.CWErrorDomain())
+// Error domain corresponding to the CWErr type.
+// CWErrorDomain returns the string constant CWErrorDomain, for use as a dictionary key or argument.
+func CWErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CWErrorDomain"))) }
+
+// Posted when the power state of the Wi-Fi interface changes. The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
+// CWPowerDidChangeNotification returns the string constant CWPowerDidChangeNotification, for use as a dictionary key or argument.
+func CWPowerDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CWPowerDidChangeNotification")))
 }
 
-// @constant CWPowerDidChangeNotification @abstract Posted when the power state of the Wi-Fi interface changes. @discussion The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
-// CWPowerDidChangeNotification returns the string constant CWPowerDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func CWPowerDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.CWPowerDidChangeNotification())
+// Posted when the SSID of the Wi-Fi interface changes. The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
+// CWSSIDDidChangeNotification returns the string constant CWSSIDDidChangeNotification, for use as a dictionary key or argument.
+func CWSSIDDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CWSSIDDidChangeNotification")))
 }
 
-// @constant CWSSIDDidChangeNotification @abstract Posted when the SSID of the Wi-Fi interface changes. @discussion The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
-// CWSSIDDidChangeNotification returns the string constant CWSSIDDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func CWSSIDDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.CWSSIDDidChangeNotification())
+// Posted when the BSSID of the Wi-Fi interface changes. The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
+// CWBSSIDDidChangeNotification returns the string constant CWBSSIDDidChangeNotification, for use as a dictionary key or argument.
+func CWBSSIDDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CWBSSIDDidChangeNotification")))
 }
 
-// @constant CWBSSIDDidChangeNotification @abstract Posted when the BSSID of the Wi-Fi interface changes. @discussion The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
-// CWBSSIDDidChangeNotification returns the string constant CWBSSIDDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func CWBSSIDDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.CWBSSIDDidChangeNotification())
+// Posted when the link of the Wi-Fi interface changes. The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
+// CWLinkDidChangeNotification returns the string constant CWLinkDidChangeNotification, for use as a dictionary key or argument.
+func CWLinkDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CWLinkDidChangeNotification")))
 }
 
-// @constant CWLinkDidChangeNotification @abstract Posted when the link of the Wi-Fi interface changes. @discussion The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
-// CWLinkDidChangeNotification returns the string constant CWLinkDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func CWLinkDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.CWLinkDidChangeNotification())
+// Posted when the operating mode of the Wi-Fi interface changes. The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
+// CWModeDidChangeNotification returns the string constant CWModeDidChangeNotification, for use as a dictionary key or argument.
+func CWModeDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CWModeDidChangeNotification")))
 }
 
-// @constant CWModeDidChangeNotification @abstract Posted when the operating mode of the Wi-Fi interface changes. @discussion The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
-// CWModeDidChangeNotification returns the string constant CWModeDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func CWModeDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.CWModeDidChangeNotification())
+// Posted when the adopted country code of the Wi-Fi interface changes. The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
+// CWCountryCodeDidChangeNotification returns the string constant CWCountryCodeDidChangeNotification, for use as a dictionary key or argument.
+func CWCountryCodeDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CWCountryCodeDidChangeNotification")))
 }
 
-// @constant CWCountryCodeDidChangeNotification @abstract Posted when the adopted country code of the Wi-Fi interface changes. @discussion The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
-// CWCountryCodeDidChangeNotification returns the string constant CWCountryCodeDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func CWCountryCodeDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.CWCountryCodeDidChangeNotification())
+// Posted when the scan cache of the Wi-Fi interface is updated with new scan results. The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
+// CWScanCacheDidUpdateNotification returns the string constant CWScanCacheDidUpdateNotification, for use as a dictionary key or argument.
+func CWScanCacheDidUpdateNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CWScanCacheDidUpdateNotification")))
 }
 
-// @constant CWScanCacheDidUpdateNotification @abstract Posted when the scan cache of the Wi-Fi interface is updated with new scan results. @discussion The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
-// CWScanCacheDidUpdateNotification returns the string constant CWScanCacheDidUpdateNotification as an objc.ID, for use as a dictionary key or selector argument.
-func CWScanCacheDidUpdateNotification() objc.ID {
-	return purego.CFConstant(raw.CWScanCacheDidUpdateNotification())
+// Posted when the link quality of the current Wi-Fi association changes. The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
+// CWLinkQualityDidChangeNotification returns the string constant CWLinkQualityDidChangeNotification, for use as a dictionary key or argument.
+func CWLinkQualityDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CWLinkQualityDidChangeNotification")))
 }
 
-// @constant CWLinkQualityDidChangeNotification @abstract Posted when the link quality of the current Wi-Fi association changes. @discussion The <i>object</i> for this notification is the corresponding Wi-Fi interface name. This notification does not contain a <i>userInfo</i> dictionary.
-// CWLinkQualityDidChangeNotification returns the string constant CWLinkQualityDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func CWLinkQualityDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.CWLinkQualityDidChangeNotification())
+// NSNumber containing the current RSSI value for the Wi-Fi interface. Found in the <i>userInfo</i> dictionary for the <i>CWLinkQualityChangedNotification</i>.
+// CWLinkQualityNotificationRSSIKey returns the string constant CWLinkQualityNotificationRSSIKey, for use as a dictionary key or argument.
+func CWLinkQualityNotificationRSSIKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CWLinkQualityNotificationRSSIKey")))
 }
 
-// @constant CWLinkQualityNotificationRSSIKey @abstract NSNumber containing the current RSSI value for the Wi-Fi interface. @discussion Found in the <i>userInfo</i> dictionary for the <i>CWLinkQualityChangedNotification</i>.
-// CWLinkQualityNotificationRSSIKey returns the string constant CWLinkQualityNotificationRSSIKey as an objc.ID, for use as a dictionary key or selector argument.
-func CWLinkQualityNotificationRSSIKey() objc.ID {
-	return purego.CFConstant(raw.CWLinkQualityNotificationRSSIKey())
-}
-
-// @constant CWLinkQualityNotificationTransmitRateKey @abstract NSNumber containing the current transmit rate for the Wi-Fi interface. @discussion Found in the <i>userInfo</i> dictionary for the <i>CWLinkQualityChangedNotification</i>.
-// CWLinkQualityNotificationTransmitRateKey returns the string constant CWLinkQualityNotificationTransmitRateKey as an objc.ID, for use as a dictionary key or selector argument.
-func CWLinkQualityNotificationTransmitRateKey() objc.ID {
-	return purego.CFConstant(raw.CWLinkQualityNotificationTransmitRateKey())
+// NSNumber containing the current transmit rate for the Wi-Fi interface. Found in the <i>userInfo</i> dictionary for the <i>CWLinkQualityChangedNotification</i>.
+// CWLinkQualityNotificationTransmitRateKey returns the string constant CWLinkQualityNotificationTransmitRateKey, for use as a dictionary key or argument.
+func CWLinkQualityNotificationTransmitRateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CWLinkQualityNotificationTransmitRateKey")))
 }

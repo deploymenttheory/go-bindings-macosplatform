@@ -5,101 +5,94 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract   A MPSNNFilterNode representing a MPSCNNBinaryFullyConnected kernel
+// A MPSNNFilterNode representing a MPSCNNBinaryFullyConnected kernel
 //
-// CNNBinaryFullyConnectedNode wraps [raw.MPSCNNBinaryFullyConnectedNode] with a fluent Go API.
+// CNNBinaryFullyConnectedNode is an idiomatic wrapper over the Objective-C class MPSCNNBinaryFullyConnectedNode.
 type CNNBinaryFullyConnectedNode struct {
-	inner *raw.MPSCNNBinaryFullyConnectedNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNBinaryFullyConnectedNode].
-func (x *CNNBinaryFullyConnectedNode) Unwrap() *raw.MPSCNNBinaryFullyConnectedNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNBinaryFullyConnectedNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNBinaryFullyConnectedNodeFromID adopts an existing object pointer as a CNNBinaryFullyConnectedNode (nil for 0).
+// CNNBinaryFullyConnectedNodeFromID adopts an existing Objective-C object as a CNNBinaryFullyConnectedNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNBinaryFullyConnectedNodeFromID(id objc.ID) *CNNBinaryFullyConnectedNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNBinaryFullyConnectedNode{inner: raw.MPSCNNBinaryFullyConnectedNodeFromID(id)}
-}
-
-// @abstract   Init a node representing a MPSCNNBinaryFullyConnected kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      weights                 A pointer to a valid object conforming to the MPSCNNConvolutionDataSource protocol. This object is provided by you to encapsulate storage for convolution weights and biases. @param      scaleValue              A floating point value used to scale the entire convolution. @param      type                    What kind of binarization strategy is to be used. @param      flags                   See documentation of MPSCNNBinaryConvolutionFlags. @return     A new MPSNNFilter node for a MPSCNNBinaryFullyConnected kernel.
-//
-// NewCNNBinaryFullyConnectedNodeWithSourceWeightsScaleValueTypeFlags creates a new [CNNBinaryFullyConnectedNode].
-func NewCNNBinaryFullyConnectedNodeWithSourceWeightsScaleValueTypeFlags(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource, scaleValue float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *CNNBinaryFullyConnectedNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBinaryFullyConnectedNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:weights:scaleValue:type:flags:"), sourceNode.Ptr(), weights, scaleValue, raw.MPSCNNBinaryConvolutionType(type_), raw.MPSCNNBinaryConvolutionFlags(flags))
-	return &CNNBinaryFullyConnectedNode{inner: raw.MPSCNNBinaryFullyConnectedNodeFromID(_id)}
-}
-
-// @abstract   Init a node representing a MPSCNNBinaryFullyConnected kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      weights                 A pointer to a valid object conforming to the MPSCNNConvolutionDataSource protocol. This object is provided by you to encapsulate storage for convolution weights and biases. @param      outputBiasTerms         A pointer to bias terms to be applied to the convolution output. See MPSCNNBinaryConvolution for more details. @param      outputScaleTerms        A pointer to scale terms to be applied to binary convolution results per output feature channel. See MPSCNNBinaryConvolution for more details. @param      inputBiasTerms          A pointer to offset terms to be applied to the input before convolution and before input scaling. See MPSCNNBinaryConvolution for more details. @param      inputScaleTerms         A pointer to scale terms to be applied to the input before convolution, but after input biasing. See MPSCNNBinaryConvolution for more details. @param      type                    What kind of binarization strategy is to be used. @param      flags                   See documentation of MPSCNNBinaryConvolutionFlags. @return     A new MPSNNFilter node for a MPSCNNBinaryFullyConnected kernel.
-//
-// NewCNNBinaryFullyConnectedNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags creates a new [CNNBinaryFullyConnectedNode].
-func NewCNNBinaryFullyConnectedNodeWithSourceWeightsOutputBiasTermsOutputScaleTermsInputBiasTermsInputScaleTermsTypeFlags(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource, outputBiasTerms *float32, outputScaleTerms *float32, inputBiasTerms *float32, inputScaleTerms *float32, type_ MPSCNNBinaryConvolutionType, flags MPSCNNBinaryConvolutionFlags) *CNNBinaryFullyConnectedNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBinaryFullyConnectedNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:weights:outputBiasTerms:outputScaleTerms:inputBiasTerms:inputScaleTerms:type:flags:"), sourceNode.Ptr(), weights, outputBiasTerms, outputScaleTerms, inputBiasTerms, inputScaleTerms, raw.MPSCNNBinaryConvolutionType(type_), raw.MPSCNNBinaryConvolutionFlags(flags))
-	return &CNNBinaryFullyConnectedNode{inner: raw.MPSCNNBinaryFullyConnectedNodeFromID(_id)}
-}
-
-// @abstract   The training style of the forward node will be propagated to gradient nodes made from it
-//
-// WithTrainingStyle sets the trainingStyle property and returns the receiver for chaining.
-func (x *CNNBinaryFullyConnectedNode) WithTrainingStyle(trainingStyle MPSNNTrainingStyle) *CNNBinaryFullyConnectedNode {
-	x.inner.MPSCNNBinaryConvolutionNode.MPSCNNConvolutionNode.SetTrainingStyle(raw.MPSNNTrainingStyle(trainingStyle))
+	x := &CNNBinaryFullyConnectedNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @abstract   Set the floating-point precision used by the convolution accumulator @discussion Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
-//
-// WithAccumulatorPrecision sets the accumulatorPrecision property and returns the receiver for chaining.
-func (x *CNNBinaryFullyConnectedNode) WithAccumulatorPrecision(accumulatorPrecision MPSNNConvolutionAccumulatorPrecisionOption) *CNNBinaryFullyConnectedNode {
-	x.inner.MPSCNNBinaryConvolutionNode.MPSCNNConvolutionNode.SetAccumulatorPrecision(raw.MPSNNConvolutionAccumulatorPrecisionOption(accumulatorPrecision))
+// cNNBinaryFullyConnectedNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNBinaryFullyConnectedNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNBinaryFullyConnectedNodeAdopt(id objc.ID) *CNNBinaryFullyConnectedNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNBinaryFullyConnectedNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
+// Description returns the object's -description text.
+func (x *CNNBinaryFullyConnectedNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNBinaryFullyConnectedNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNBinaryFullyConnectedNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNBinaryFullyConnectedNode creates a new CNNBinaryFullyConnectedNode.
+func NewCNNBinaryFullyConnectedNode() *CNNBinaryFullyConnectedNode {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNBinaryFullyConnectedNode")), objc.RegisterName("new"))
+	return cNNBinaryFullyConnectedNodeAdopt(_id)
+}
+
+// The training style of the forward node will be propagated to gradient nodes made from it
 //
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNBinaryFullyConnectedNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNBinaryFullyConnectedNode {
-	x.inner.MPSCNNBinaryConvolutionNode.MPSCNNConvolutionNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+// WithTrainingStyle sets trainingStyle and returns the receiver so calls can be chained.
+func (x *CNNBinaryFullyConnectedNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNBinaryFullyConnectedNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// Set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithAccumulatorPrecision sets accumulatorPrecision and returns the receiver so calls can be chained.
+func (x *CNNBinaryFullyConnectedNode) WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNBinaryFullyConnectedNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccumulatorPrecision:"), accumulatorPrecision)
+	return x
+}
+
+// A string to help identify this object.
+//
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *CNNBinaryFullyConnectedNode) WithLabel(label string) *CNNBinaryFullyConnectedNode {
-	x.inner.MPSCNNBinaryConvolutionNode.MPSCNNConvolutionNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *CNNBinaryFullyConnectedNode) asCNNBinaryConvolutionNode() *raw.MPSCNNBinaryConvolutionNode {
-	return &x.inner.MPSCNNBinaryConvolutionNode
-}
-
-func (x *CNNBinaryFullyConnectedNode) asCNNConvolutionNode() *raw.MPSCNNConvolutionNode {
-	return &x.inner.MPSCNNBinaryConvolutionNode.MPSCNNConvolutionNode
-}
-
-func (x *CNNBinaryFullyConnectedNode) asNNFilterNode() *raw.MPSNNFilterNode {
-	return &x.inner.MPSCNNBinaryConvolutionNode.MPSCNNConvolutionNode.MPSNNFilterNode
 }
 
 // CNNBinaryFullyConnectedNodeable is the interface implemented by [CNNBinaryFullyConnectedNode], for mocking and DI.
 type CNNBinaryFullyConnectedNodeable interface {
-	Unwrap() *raw.MPSCNNBinaryFullyConnectedNode
-	WithTrainingStyle(trainingStyle MPSNNTrainingStyle) *CNNBinaryFullyConnectedNode
-	WithAccumulatorPrecision(accumulatorPrecision MPSNNConvolutionAccumulatorPrecisionOption) *CNNBinaryFullyConnectedNode
-	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNBinaryFullyConnectedNode
+	obj.Object
+	WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNBinaryFullyConnectedNode
+	WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNBinaryFullyConnectedNode
 	WithLabel(label string) *CNNBinaryFullyConnectedNode
 }
 

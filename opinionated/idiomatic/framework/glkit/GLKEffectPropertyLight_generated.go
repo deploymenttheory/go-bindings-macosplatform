@@ -5,226 +5,187 @@
 package glkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Lighting information for use in GLKit rendering effects.
 //
-// EffectPropertyLight wraps [raw.GLKEffectPropertyLight] with a fluent Go API.
+// EffectPropertyLight is an idiomatic wrapper over the Objective-C class GLKEffectPropertyLight.
 type EffectPropertyLight struct {
-	inner *raw.GLKEffectPropertyLight
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GLKEffectPropertyLight].
-func (x *EffectPropertyLight) Unwrap() *raw.GLKEffectPropertyLight { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EffectPropertyLight) ID() objc.ID { return x.inner.Ptr() }
-
-// EffectPropertyLightFromID adopts an existing object pointer as a EffectPropertyLight (nil for 0).
+// EffectPropertyLightFromID adopts an existing Objective-C object as a EffectPropertyLight
+// (nil for 0), retaining it and registering a release finalizer.
 func EffectPropertyLightFromID(id objc.ID) *EffectPropertyLight {
 	if id == 0 {
 		return nil
 	}
-	return &EffectPropertyLight{inner: raw.GLKEffectPropertyLightFromID(id)}
+	x := &EffectPropertyLight{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEffectPropertyLight creates a new [EffectPropertyLight].
+// effectPropertyLightAdopt wraps an Objective-C object that this code just created as a
+// EffectPropertyLight (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func effectPropertyLightAdopt(id objc.ID) *EffectPropertyLight {
+	if id == 0 {
+		return nil
+	}
+	x := &EffectPropertyLight{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EffectPropertyLight) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EffectPropertyLight) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EffectPropertyLight) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEffectPropertyLight creates a new EffectPropertyLight.
 func NewEffectPropertyLight() *EffectPropertyLight {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GLKEffectPropertyLight")), objc.RegisterName("new"))
-	return &EffectPropertyLight{inner: raw.GLKEffectPropertyLightFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GLKEffectPropertyLight")), objc.RegisterName("new"))
+	return effectPropertyLightAdopt(_id)
 }
 
 // A Boolean value that indicates whether calculations should be performed on this light.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *EffectPropertyLight) WithEnabled(enabled uint8) *EffectPropertyLight {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // A value indicating how focused the spotlight is.
 //
-// WithSpotExponent sets the spotExponent property and returns the receiver for chaining.
+// WithSpotExponent sets spotExponent and returns the receiver so calls can be chained.
 func (x *EffectPropertyLight) WithSpotExponent(spotExponent float32) *EffectPropertyLight {
-	x.inner.SetSpotExponent(spotExponent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpotExponent:"), spotExponent)
 	return x
 }
 
 // The angle in degrees where the spotlight is cut off.
 //
-// WithSpotCutoff sets the spotCutoff property and returns the receiver for chaining.
+// WithSpotCutoff sets spotCutoff and returns the receiver so calls can be chained.
 func (x *EffectPropertyLight) WithSpotCutoff(spotCutoff float32) *EffectPropertyLight {
-	x.inner.SetSpotCutoff(spotCutoff)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpotCutoff:"), spotCutoff)
 	return x
 }
 
 // A constant factor applied to the attenuation of a point light or spotlight.
 //
-// WithConstantAttenuation sets the constantAttenuation property and returns the receiver for chaining.
+// WithConstantAttenuation sets constantAttenuation and returns the receiver so calls can be chained.
 func (x *EffectPropertyLight) WithConstantAttenuation(constantAttenuation float32) *EffectPropertyLight {
-	x.inner.SetConstantAttenuation(constantAttenuation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantAttenuation:"), constantAttenuation)
 	return x
 }
 
 // A linear factor applied to the attenuation of a point light or spotlight.
 //
-// WithLinearAttenuation sets the linearAttenuation property and returns the receiver for chaining.
+// WithLinearAttenuation sets linearAttenuation and returns the receiver so calls can be chained.
 func (x *EffectPropertyLight) WithLinearAttenuation(linearAttenuation float32) *EffectPropertyLight {
-	x.inner.SetLinearAttenuation(linearAttenuation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinearAttenuation:"), linearAttenuation)
 	return x
 }
 
 // A quadratic factor applied to the attenuation of a point light or spotlight.
 //
-// WithQuadraticAttenuation sets the quadraticAttenuation property and returns the receiver for chaining.
+// WithQuadraticAttenuation sets quadraticAttenuation and returns the receiver so calls can be chained.
 func (x *EffectPropertyLight) WithQuadraticAttenuation(quadraticAttenuation float32) *EffectPropertyLight {
-	x.inner.SetQuadraticAttenuation(quadraticAttenuation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuadraticAttenuation:"), quadraticAttenuation)
 	return x
 }
 
 // A transform applied to the light’s position and direction before calculating the contribution of the light.
 //
-// WithTransform sets the transform property and returns the receiver for chaining.
+// WithTransform sets transform and returns the receiver so calls can be chained.
 func (x *EffectPropertyLight) WithTransform(transform *EffectPropertyTransform) *EffectPropertyLight {
-	x.inner.SetTransform(transform.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransform:"), objref.IDOf(transform))
 	return x
 }
 
-// Enabled calls the underlying Enabled.
 func (x *EffectPropertyLight) Enabled() uint8 {
-	return x.inner.Enabled()
+	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("enabled"))
+	return _r
 }
 
-// SetEnabled calls the underlying SetEnabled.
 func (x *EffectPropertyLight) SetEnabled(enabled uint8) {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
-// Position calls the underlying Position.
-func (x *EffectPropertyLight) Position() unsafe.Pointer {
-	return x.inner.Position()
-}
-
-// SetPosition calls the underlying SetPosition.
-func (x *EffectPropertyLight) SetPosition(position unsafe.Pointer) {
-	x.inner.SetPosition(position)
-}
-
-// AmbientColor calls the underlying AmbientColor.
-func (x *EffectPropertyLight) AmbientColor() unsafe.Pointer {
-	return x.inner.AmbientColor()
-}
-
-// SetAmbientColor calls the underlying SetAmbientColor.
-func (x *EffectPropertyLight) SetAmbientColor(ambientColor unsafe.Pointer) {
-	x.inner.SetAmbientColor(ambientColor)
-}
-
-// DiffuseColor calls the underlying DiffuseColor.
-func (x *EffectPropertyLight) DiffuseColor() unsafe.Pointer {
-	return x.inner.DiffuseColor()
-}
-
-// SetDiffuseColor calls the underlying SetDiffuseColor.
-func (x *EffectPropertyLight) SetDiffuseColor(diffuseColor unsafe.Pointer) {
-	x.inner.SetDiffuseColor(diffuseColor)
-}
-
-// SpecularColor calls the underlying SpecularColor.
-func (x *EffectPropertyLight) SpecularColor() unsafe.Pointer {
-	return x.inner.SpecularColor()
-}
-
-// SetSpecularColor calls the underlying SetSpecularColor.
-func (x *EffectPropertyLight) SetSpecularColor(specularColor unsafe.Pointer) {
-	x.inner.SetSpecularColor(specularColor)
-}
-
-// SpotDirection calls the underlying SpotDirection.
-func (x *EffectPropertyLight) SpotDirection() unsafe.Pointer {
-	return x.inner.SpotDirection()
-}
-
-// SetSpotDirection calls the underlying SetSpotDirection.
-func (x *EffectPropertyLight) SetSpotDirection(spotDirection unsafe.Pointer) {
-	x.inner.SetSpotDirection(spotDirection)
-}
-
-// SpotExponent calls the underlying SpotExponent.
 func (x *EffectPropertyLight) SpotExponent() float32 {
-	return x.inner.SpotExponent()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("spotExponent"))
+	return _r
 }
 
-// SetSpotExponent calls the underlying SetSpotExponent.
 func (x *EffectPropertyLight) SetSpotExponent(spotExponent float32) {
-	x.inner.SetSpotExponent(spotExponent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpotExponent:"), spotExponent)
 }
 
-// SpotCutoff calls the underlying SpotCutoff.
 func (x *EffectPropertyLight) SpotCutoff() float32 {
-	return x.inner.SpotCutoff()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("spotCutoff"))
+	return _r
 }
 
-// SetSpotCutoff calls the underlying SetSpotCutoff.
 func (x *EffectPropertyLight) SetSpotCutoff(spotCutoff float32) {
-	x.inner.SetSpotCutoff(spotCutoff)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpotCutoff:"), spotCutoff)
 }
 
-// ConstantAttenuation calls the underlying ConstantAttenuation.
 func (x *EffectPropertyLight) ConstantAttenuation() float32 {
-	return x.inner.ConstantAttenuation()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("constantAttenuation"))
+	return _r
 }
 
-// SetConstantAttenuation calls the underlying SetConstantAttenuation.
 func (x *EffectPropertyLight) SetConstantAttenuation(constantAttenuation float32) {
-	x.inner.SetConstantAttenuation(constantAttenuation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantAttenuation:"), constantAttenuation)
 }
 
-// LinearAttenuation calls the underlying LinearAttenuation.
 func (x *EffectPropertyLight) LinearAttenuation() float32 {
-	return x.inner.LinearAttenuation()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("linearAttenuation"))
+	return _r
 }
 
-// SetLinearAttenuation calls the underlying SetLinearAttenuation.
 func (x *EffectPropertyLight) SetLinearAttenuation(linearAttenuation float32) {
-	x.inner.SetLinearAttenuation(linearAttenuation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinearAttenuation:"), linearAttenuation)
 }
 
-// QuadraticAttenuation calls the underlying QuadraticAttenuation.
 func (x *EffectPropertyLight) QuadraticAttenuation() float32 {
-	return x.inner.QuadraticAttenuation()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("quadraticAttenuation"))
+	return _r
 }
 
-// SetQuadraticAttenuation calls the underlying SetQuadraticAttenuation.
 func (x *EffectPropertyLight) SetQuadraticAttenuation(quadraticAttenuation float32) {
-	x.inner.SetQuadraticAttenuation(quadraticAttenuation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuadraticAttenuation:"), quadraticAttenuation)
 }
 
-// Transform calls the underlying Transform.
 func (x *EffectPropertyLight) Transform() *EffectPropertyTransform {
-	_r := x.inner.Transform()
-	if _r == nil {
-		return nil
-	}
-	return &EffectPropertyTransform{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transform"))
+	return EffectPropertyTransformFromID(_r)
 }
 
-// SetTransform calls the underlying SetTransform.
-func (x *EffectPropertyLight) SetTransform(transform *raw.GLKEffectPropertyTransform) {
-	x.inner.SetTransform(transform)
-}
-
-func (x *EffectPropertyLight) asEffectProperty() *raw.GLKEffectProperty {
-	return &x.inner.GLKEffectProperty
+func (x *EffectPropertyLight) SetTransform(transform *EffectPropertyTransform) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransform:"), objref.IDOf(transform))
 }
 
 // EffectPropertyLightable is the interface implemented by [EffectPropertyLight], for mocking and DI.
 type EffectPropertyLightable interface {
-	Unwrap() *raw.GLKEffectPropertyLight
+	obj.Object
 	WithEnabled(enabled uint8) *EffectPropertyLight
 	WithSpotExponent(spotExponent float32) *EffectPropertyLight
 	WithSpotCutoff(spotCutoff float32) *EffectPropertyLight
@@ -234,16 +195,6 @@ type EffectPropertyLightable interface {
 	WithTransform(transform *EffectPropertyTransform) *EffectPropertyLight
 	Enabled() uint8
 	SetEnabled(enabled uint8)
-	Position() unsafe.Pointer
-	SetPosition(position unsafe.Pointer)
-	AmbientColor() unsafe.Pointer
-	SetAmbientColor(ambientColor unsafe.Pointer)
-	DiffuseColor() unsafe.Pointer
-	SetDiffuseColor(diffuseColor unsafe.Pointer)
-	SpecularColor() unsafe.Pointer
-	SetSpecularColor(specularColor unsafe.Pointer)
-	SpotDirection() unsafe.Pointer
-	SetSpotDirection(spotDirection unsafe.Pointer)
 	SpotExponent() float32
 	SetSpotExponent(spotExponent float32)
 	SpotCutoff() float32
@@ -255,7 +206,7 @@ type EffectPropertyLightable interface {
 	QuadraticAttenuation() float32
 	SetQuadraticAttenuation(quadraticAttenuation float32)
 	Transform() *EffectPropertyTransform
-	SetTransform(transform *raw.GLKEffectPropertyTransform)
+	SetTransform(transform *EffectPropertyTransform)
 }
 
 var _ EffectPropertyLightable = (*EffectPropertyLight)(nil)

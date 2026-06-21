@@ -6,66 +6,88 @@ package matter
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterGroups wraps [raw.MTRClusterGroups] with a fluent Go API.
+// MTRClusterGroups is an idiomatic wrapper over the Objective-C class MTRClusterGroups.
 type MTRClusterGroups struct {
-	inner *raw.MTRClusterGroups
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterGroups].
-func (x *MTRClusterGroups) Unwrap() *raw.MTRClusterGroups { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterGroups) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterGroupsFromID adopts an existing object pointer as a MTRClusterGroups (nil for 0).
+// MTRClusterGroupsFromID adopts an existing Objective-C object as a MTRClusterGroups
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterGroupsFromID(id objc.ID) *MTRClusterGroups {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterGroups{inner: raw.MTRClusterGroupsFromID(id)}
+	x := &MTRClusterGroups{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterGroupsAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterGroups (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterGroupsAdopt(id objc.ID) *MTRClusterGroups {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterGroups{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterGroups) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterGroups) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterGroups) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterGroupsWithDeviceEndpointIDQueue creates a new [MTRClusterGroups].
-func NewMTRClusterGroupsWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterGroups {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterGroups")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterGroups{inner: raw.MTRClusterGroupsFromID(_id)}
+// NewMTRClusterGroupsWithDeviceEndpointIDQueue creates a new MTRClusterGroups.
+func NewMTRClusterGroupsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterGroups {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterGroups")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterGroupsAdopt(_id)
 }
 
-// NewMTRClusterGroupsWithDeviceEndpointQueue creates a new [MTRClusterGroups].
-func NewMTRClusterGroupsWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterGroups {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterGroups")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterGroups{inner: raw.MTRClusterGroupsFromID(_id)}
+// NewMTRClusterGroupsWithDeviceEndpointQueue creates a new MTRClusterGroups.
+func NewMTRClusterGroupsWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterGroups {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterGroups")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterGroupsAdopt(_id)
 }
 
 // AddGroupWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGroups) AddGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGroupsClusterAddGroupParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupsClusterAddGroupResponseParams, error) {
+func (x *MTRClusterGroups) AddGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupsClusterAddGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupsClusterAddGroupResponseParams, error) {
 	type _result struct {
 		val *MTRGroupsClusterAddGroupResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.AddGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGroupsClusterAddGroupResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRGroupsClusterAddGroupResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRGroupsClusterAddGroupResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addGroupWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -76,22 +98,19 @@ func (x *MTRClusterGroups) AddGroupWithParamsExpectedValuesExpectedValueInterval
 }
 
 // ViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGroups) ViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGroupsClusterViewGroupParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupsClusterViewGroupResponseParams, error) {
+func (x *MTRClusterGroups) ViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupsClusterViewGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupsClusterViewGroupResponseParams, error) {
 	type _result struct {
 		val *MTRGroupsClusterViewGroupResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGroupsClusterViewGroupResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRGroupsClusterViewGroupResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRGroupsClusterViewGroupResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewGroupWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -102,22 +121,19 @@ func (x *MTRClusterGroups) ViewGroupWithParamsExpectedValuesExpectedValueInterva
 }
 
 // GetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGroups) GetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGroupsClusterGetGroupMembershipParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupsClusterGetGroupMembershipResponseParams, error) {
+func (x *MTRClusterGroups) GetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupsClusterGetGroupMembershipParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupsClusterGetGroupMembershipResponseParams, error) {
 	type _result struct {
 		val *MTRGroupsClusterGetGroupMembershipResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGroupsClusterGetGroupMembershipResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRGroupsClusterGetGroupMembershipResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRGroupsClusterGetGroupMembershipResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getGroupMembershipWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -128,22 +144,19 @@ func (x *MTRClusterGroups) GetGroupMembershipWithParamsExpectedValuesExpectedVal
 }
 
 // RemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGroups) RemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGroupsClusterRemoveGroupParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupsClusterRemoveGroupResponseParams, error) {
+func (x *MTRClusterGroups) RemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupsClusterRemoveGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupsClusterRemoveGroupResponseParams, error) {
 	type _result struct {
 		val *MTRGroupsClusterRemoveGroupResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGroupsClusterRemoveGroupResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRGroupsClusterRemoveGroupResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRGroupsClusterRemoveGroupResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeGroupWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -153,68 +166,50 @@ func (x *MTRClusterGroups) RemoveGroupWithParamsExpectedValuesExpectedValueInter
 	}
 }
 
-// RemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying RemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterGroups) RemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRGroupsClusterRemoveAllGroupsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.RemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterGroups) ReadAttributeNameSupportWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNameSupportWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// RemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletion calls the underlying RemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterGroups) RemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.RemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+func (x *MTRClusterGroups) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// AddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying AddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterGroups) AddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRGroupsClusterAddGroupIfIdentifyingParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.AddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterGroups) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeNameSupportWithParams calls the underlying ReadAttributeNameSupportWithParams.
-func (x *MTRClusterGroups) ReadAttributeNameSupportWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeNameSupportWithParams(params)
+func (x *MTRClusterGroups) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterGroups) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterGroups) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterGroups) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
-}
-
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterGroups) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
-}
-
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterGroups) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterGroups) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+func (x *MTRClusterGroups) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // AddGroupWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGroups) AddGroupWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRGroupsClusterAddGroupParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupsClusterAddGroupResponseParams, error) {
+func (x *MTRClusterGroups) AddGroupWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupsClusterAddGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupsClusterAddGroupResponseParams, error) {
 	type _result struct {
 		val *MTRGroupsClusterAddGroupResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.AddGroupWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGroupsClusterAddGroupResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRGroupsClusterAddGroupResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRGroupsClusterAddGroupResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addGroupWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -225,22 +220,19 @@ func (x *MTRClusterGroups) AddGroupWithParamsExpectedValuesExpectedValueInterval
 }
 
 // ViewGroupWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGroups) ViewGroupWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRGroupsClusterViewGroupParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupsClusterViewGroupResponseParams, error) {
+func (x *MTRClusterGroups) ViewGroupWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupsClusterViewGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupsClusterViewGroupResponseParams, error) {
 	type _result struct {
 		val *MTRGroupsClusterViewGroupResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGroupsClusterViewGroupResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRGroupsClusterViewGroupResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRGroupsClusterViewGroupResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewGroupWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -251,22 +243,19 @@ func (x *MTRClusterGroups) ViewGroupWithParamsExpectedValuesExpectedValueInterva
 }
 
 // GetGroupMembershipWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGroups) GetGroupMembershipWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRGroupsClusterGetGroupMembershipParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupsClusterGetGroupMembershipResponseParams, error) {
+func (x *MTRClusterGroups) GetGroupMembershipWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupsClusterGetGroupMembershipParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupsClusterGetGroupMembershipResponseParams, error) {
 	type _result struct {
 		val *MTRGroupsClusterGetGroupMembershipResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGroupsClusterGetGroupMembershipResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRGroupsClusterGetGroupMembershipResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRGroupsClusterGetGroupMembershipResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getGroupMembershipWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -277,22 +266,19 @@ func (x *MTRClusterGroups) GetGroupMembershipWithParamsExpectedValuesExpectedVal
 }
 
 // RemoveGroupWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGroups) RemoveGroupWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRGroupsClusterRemoveGroupParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupsClusterRemoveGroupResponseParams, error) {
+func (x *MTRClusterGroups) RemoveGroupWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupsClusterRemoveGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupsClusterRemoveGroupResponseParams, error) {
 	type _result struct {
 		val *MTRGroupsClusterRemoveGroupResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRGroupsClusterRemoveGroupResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRGroupsClusterRemoveGroupResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRGroupsClusterRemoveGroupResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeGroupWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -302,52 +288,23 @@ func (x *MTRClusterGroups) RemoveGroupWithParamsExpectedValuesExpectedValueInter
 	}
 }
 
-// RemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying RemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterGroups) RemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRGroupsClusterRemoveAllGroupsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.RemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// RemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying RemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterGroups) RemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.RemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
-}
-
-// AddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying AddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterGroups) AddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRGroupsClusterAddGroupIfIdentifyingParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.AddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-func (x *MTRClusterGroups) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterGroups) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
-}
-
 // MTRClusterGroupsable is the interface implemented by [MTRClusterGroups], for mocking and DI.
 type MTRClusterGroupsable interface {
-	Unwrap() *raw.MTRClusterGroups
-	AddGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGroupsClusterAddGroupParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupsClusterAddGroupResponseParams, error)
-	ViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGroupsClusterViewGroupParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupsClusterViewGroupResponseParams, error)
-	GetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGroupsClusterGetGroupMembershipParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupsClusterGetGroupMembershipResponseParams, error)
-	RemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRGroupsClusterRemoveGroupParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupsClusterRemoveGroupResponseParams, error)
-	RemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRGroupsClusterRemoveAllGroupsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	RemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	AddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRGroupsClusterAddGroupIfIdentifyingParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeNameSupportWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	AddGroupWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRGroupsClusterAddGroupParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupsClusterAddGroupResponseParams, error)
-	ViewGroupWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRGroupsClusterViewGroupParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupsClusterViewGroupResponseParams, error)
-	GetGroupMembershipWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRGroupsClusterGetGroupMembershipParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupsClusterGetGroupMembershipResponseParams, error)
-	RemoveGroupWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRGroupsClusterRemoveGroupParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRGroupsClusterRemoveGroupResponseParams, error)
-	RemoveAllGroupsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRGroupsClusterRemoveAllGroupsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	RemoveAllGroupsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	AddGroupIfIdentifyingWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRGroupsClusterAddGroupIfIdentifyingParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	obj.Object
+	AddGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupsClusterAddGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupsClusterAddGroupResponseParams, error)
+	ViewGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupsClusterViewGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupsClusterViewGroupResponseParams, error)
+	GetGroupMembershipWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupsClusterGetGroupMembershipParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupsClusterGetGroupMembershipResponseParams, error)
+	RemoveGroupWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGroupsClusterRemoveGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupsClusterRemoveGroupResponseParams, error)
+	ReadAttributeNameSupportWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
+	AddGroupWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupsClusterAddGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupsClusterAddGroupResponseParams, error)
+	ViewGroupWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupsClusterViewGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupsClusterViewGroupResponseParams, error)
+	GetGroupMembershipWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupsClusterGetGroupMembershipParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupsClusterGetGroupMembershipResponseParams, error)
+	RemoveGroupWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGroupsClusterRemoveGroupParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGroupsClusterRemoveGroupResponseParams, error)
 }
 
 var _ MTRClusterGroupsable = (*MTRClusterGroups)(nil)

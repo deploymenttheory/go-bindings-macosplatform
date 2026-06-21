@@ -5,162 +5,179 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // An object that you configure with one or more instrument samples, based on Apple’s Sampler audio unit.
 //
-// AudioUnitSampler wraps [raw.AVAudioUnitSampler] with a fluent Go API.
+// AudioUnitSampler is an idiomatic wrapper over the Objective-C class AVAudioUnitSampler.
 type AudioUnitSampler struct {
-	inner *raw.AVAudioUnitSampler
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioUnitSampler].
-func (x *AudioUnitSampler) Unwrap() *raw.AVAudioUnitSampler { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioUnitSampler) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioUnitSamplerFromID adopts an existing object pointer as a AudioUnitSampler (nil for 0).
+// AudioUnitSamplerFromID adopts an existing Objective-C object as a AudioUnitSampler
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioUnitSamplerFromID(id objc.ID) *AudioUnitSampler {
 	if id == 0 {
 		return nil
 	}
-	return &AudioUnitSampler{inner: raw.AVAudioUnitSamplerFromID(id)}
+	x := &AudioUnitSampler{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAudioUnitSampler creates a new [AudioUnitSampler].
+// audioUnitSamplerAdopt wraps an Objective-C object that this code just created as a
+// AudioUnitSampler (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioUnitSamplerAdopt(id objc.ID) *AudioUnitSampler {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioUnitSampler{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudioUnitSampler) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioUnitSampler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioUnitSampler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAudioUnitSampler creates a new AudioUnitSampler.
 func NewAudioUnitSampler() *AudioUnitSampler {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioUnitSampler")), objc.RegisterName("new"))
-	return &AudioUnitSampler{inner: raw.AVAudioUnitSamplerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioUnitSampler")), objc.RegisterName("new"))
+	return audioUnitSamplerAdopt(_id)
 }
 
 // An adjustment for the stereo panning of all the played notes.
 //
-// WithStereoPan sets the stereoPan property and returns the receiver for chaining.
+// WithStereoPan sets stereoPan and returns the receiver so calls can be chained.
 func (x *AudioUnitSampler) WithStereoPan(stereoPan float32) *AudioUnitSampler {
-	x.inner.SetStereoPan(stereoPan)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStereoPan:"), stereoPan)
 	return x
 }
 
 // An adjustment for the gain of all the played notes, in decibels.
 //
-// WithOverallGain sets the overallGain property and returns the receiver for chaining.
+// WithOverallGain sets overallGain and returns the receiver so calls can be chained.
 func (x *AudioUnitSampler) WithOverallGain(overallGain float32) *AudioUnitSampler {
-	x.inner.SetOverallGain(overallGain)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverallGain:"), overallGain)
 	return x
 }
 
 // An adjustment for the gain of all the played notes, in decibels.
 //
-// WithMasterGain sets the masterGain property and returns the receiver for chaining.
+// WithMasterGain sets masterGain and returns the receiver so calls can be chained.
 func (x *AudioUnitSampler) WithMasterGain(masterGain float32) *AudioUnitSampler {
-	x.inner.SetMasterGain(masterGain)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasterGain:"), masterGain)
 	return x
 }
 
 // An adjustment for the tuning of all the played notes.
 //
-// WithGlobalTuning sets the globalTuning property and returns the receiver for chaining.
+// WithGlobalTuning sets globalTuning and returns the receiver so calls can be chained.
 func (x *AudioUnitSampler) WithGlobalTuning(globalTuning float32) *AudioUnitSampler {
-	x.inner.SetGlobalTuning(globalTuning)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlobalTuning:"), globalTuning)
 	return x
 }
 
 // Loads a specific instrument from the specified soundbank.
-//
-// LoadSoundBankInstrumentAtURLProgramBankMSBBankLSBError calls the underlying LoadSoundBankInstrumentAtURLProgramBankMSBBankLSBError.
-func (x *AudioUnitSampler) LoadSoundBankInstrumentAtURLProgramBankMSBBankLSBError(bankURL string, program uint8, bankMSB uint8, bankLSB uint8) (bool, error) {
-	return x.inner.LoadSoundBankInstrumentAtURLProgramBankMSBBankLSBError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(bankURL)), program, bankMSB, bankLSB)
+func (x *AudioUnitSampler) LoadSoundBankInstrumentAtURLProgramBankMSBBankLSB(bankURL string, program uint8, bankMSB uint8, bankLSB uint8) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadSoundBankInstrumentAtURL:program:bankMSB:bankLSB:error:"), rt.FileURL(bankURL), program, bankMSB, bankLSB, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Configures the sampler with the specified instrument file.
-//
-// LoadInstrumentAtURLError calls the underlying LoadInstrumentAtURLError.
-func (x *AudioUnitSampler) LoadInstrumentAtURLError(instrumentURL string) (bool, error) {
-	return x.inner.LoadInstrumentAtURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(instrumentURL)))
+func (x *AudioUnitSampler) LoadInstrumentAtURL(instrumentURL string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadInstrumentAtURL:error:"), rt.FileURL(instrumentURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Configures the sampler by loading the specified audio files.
-//
-// LoadAudioFilesAtURLsError calls the underlying LoadAudioFilesAtURLsError.
-func (x *AudioUnitSampler) LoadAudioFilesAtURLsError(audioFiles *foundation.NSArray[*foundation.NSURL]) (bool, error) {
-	return x.inner.LoadAudioFilesAtURLsError(audioFiles)
+func (x *AudioUnitSampler) LoadAudioFilesAtURLs(audioFiles []obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadAudioFilesAtURLs:error:"), purego.SliceToNSArray(audioFiles, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @property stereoPan @abstract adjusts the pan for all the notes played. Range:     -100 -> +100 Default:   0
-//
-// StereoPan calls the underlying StereoPan.
+// adjusts the pan for all the notes played. Range:     -100 -> +100 Default:   0
 func (x *AudioUnitSampler) StereoPan() float32 {
-	return x.inner.StereoPan()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("stereoPan"))
+	return _r
 }
 
-// SetStereoPan calls the underlying SetStereoPan.
 func (x *AudioUnitSampler) SetStereoPan(stereoPan float32) {
-	x.inner.SetStereoPan(stereoPan)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStereoPan:"), stereoPan)
 }
 
-// @property overallGain @abstract adjusts the gain of all the notes played Range:     -90.0 -> +12 db Default: 0 db
-//
-// OverallGain calls the underlying OverallGain.
+// adjusts the gain of all the notes played Range:     -90.0 -> +12 db Default: 0 db
 func (x *AudioUnitSampler) OverallGain() float32 {
-	return x.inner.OverallGain()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("overallGain"))
+	return _r
 }
 
-// SetOverallGain calls the underlying SetOverallGain.
 func (x *AudioUnitSampler) SetOverallGain(overallGain float32) {
-	x.inner.SetOverallGain(overallGain)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverallGain:"), overallGain)
 }
 
-// @property masterGain @abstract adjusts the gain of all the notes played Range:     -90.0 -> +12 db Default: 0 db
-//
-// MasterGain calls the underlying MasterGain.
+// adjusts the gain of all the notes played Range:     -90.0 -> +12 db Default: 0 db
 func (x *AudioUnitSampler) MasterGain() float32 {
-	return x.inner.MasterGain()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("masterGain"))
+	return _r
 }
 
-// SetMasterGain calls the underlying SetMasterGain.
 func (x *AudioUnitSampler) SetMasterGain(masterGain float32) {
-	x.inner.SetMasterGain(masterGain)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasterGain:"), masterGain)
 }
 
-// @property globalTuning @abstract adjusts the tuning of all the notes played. Range:     -2400 -> +2400 cents Default:   0
-//
-// GlobalTuning calls the underlying GlobalTuning.
+// adjusts the tuning of all the notes played. Range:     -2400 -> +2400 cents Default:   0
 func (x *AudioUnitSampler) GlobalTuning() float32 {
-	return x.inner.GlobalTuning()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("globalTuning"))
+	return _r
 }
 
-// SetGlobalTuning calls the underlying SetGlobalTuning.
 func (x *AudioUnitSampler) SetGlobalTuning(globalTuning float32) {
-	x.inner.SetGlobalTuning(globalTuning)
-}
-
-func (x *AudioUnitSampler) asAudioUnitMIDIInstrument() *raw.AVAudioUnitMIDIInstrument {
-	return &x.inner.AVAudioUnitMIDIInstrument
-}
-
-func (x *AudioUnitSampler) asAudioUnit() *raw.AVAudioUnit {
-	return &x.inner.AVAudioUnitMIDIInstrument.AVAudioUnit
-}
-
-func (x *AudioUnitSampler) asAudioNode() *raw.AVAudioNode {
-	return &x.inner.AVAudioUnitMIDIInstrument.AVAudioUnit.AVAudioNode
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlobalTuning:"), globalTuning)
 }
 
 // AudioUnitSamplerable is the interface implemented by [AudioUnitSampler], for mocking and DI.
 type AudioUnitSamplerable interface {
-	Unwrap() *raw.AVAudioUnitSampler
+	obj.Object
 	WithStereoPan(stereoPan float32) *AudioUnitSampler
 	WithOverallGain(overallGain float32) *AudioUnitSampler
 	WithMasterGain(masterGain float32) *AudioUnitSampler
 	WithGlobalTuning(globalTuning float32) *AudioUnitSampler
-	LoadSoundBankInstrumentAtURLProgramBankMSBBankLSBError(bankURL string, program uint8, bankMSB uint8, bankLSB uint8) (bool, error)
-	LoadInstrumentAtURLError(instrumentURL string) (bool, error)
-	LoadAudioFilesAtURLsError(audioFiles *foundation.NSArray[*foundation.NSURL]) (bool, error)
+	LoadSoundBankInstrumentAtURLProgramBankMSBBankLSB(bankURL string, program uint8, bankMSB uint8, bankLSB uint8) error
+	LoadInstrumentAtURL(instrumentURL string) error
+	LoadAudioFilesAtURLs(audioFiles []obj.Object) error
 	StereoPan() float32
 	SetStereoPan(stereoPan float32)
 	OverallGain() float32

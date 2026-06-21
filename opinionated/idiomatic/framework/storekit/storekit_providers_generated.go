@@ -5,15 +5,15 @@
 package storekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// PaymentProvider is implemented by Payment and any idiomatic type wrapping a SKPayment subclass.
+// PaymentProvider is accepted wherever a SKPayment (or one of its subclasses) is expected.
 type PaymentProvider interface {
-	asPayment() *raw.SKPayment
+	objref.Object
 }
 
-// RequestProvider is implemented by Request and any idiomatic type wrapping a SKRequest subclass.
+// RequestProvider is accepted wherever a SKRequest (or one of its subclasses) is expected.
 type RequestProvider interface {
-	asRequest() *raw.SKRequest
+	objref.Object
 }

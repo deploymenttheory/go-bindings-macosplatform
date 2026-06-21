@@ -5,71 +5,84 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The route information that Apple servers return in response to your request for directions.
 //
-// DirectionsResponse wraps [raw.MKDirectionsResponse] with a fluent Go API.
+// DirectionsResponse is an idiomatic wrapper over the Objective-C class MKDirectionsResponse.
 type DirectionsResponse struct {
-	inner *raw.MKDirectionsResponse
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKDirectionsResponse].
-func (x *DirectionsResponse) Unwrap() *raw.MKDirectionsResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DirectionsResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// DirectionsResponseFromID adopts an existing object pointer as a DirectionsResponse (nil for 0).
+// DirectionsResponseFromID adopts an existing Objective-C object as a DirectionsResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func DirectionsResponseFromID(id objc.ID) *DirectionsResponse {
 	if id == 0 {
 		return nil
 	}
-	return &DirectionsResponse{inner: raw.MKDirectionsResponseFromID(id)}
+	x := &DirectionsResponse{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDirectionsResponse creates a new [DirectionsResponse].
+// directionsResponseAdopt wraps an Objective-C object that this code just created as a
+// DirectionsResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func directionsResponseAdopt(id objc.ID) *DirectionsResponse {
+	if id == 0 {
+		return nil
+	}
+	x := &DirectionsResponse{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DirectionsResponse) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DirectionsResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DirectionsResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDirectionsResponse creates a new DirectionsResponse.
 func NewDirectionsResponse() *DirectionsResponse {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKDirectionsResponse")), objc.RegisterName("new"))
-	return &DirectionsResponse{inner: raw.MKDirectionsResponseFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKDirectionsResponse")), objc.RegisterName("new"))
+	return directionsResponseAdopt(_id)
 }
 
-// Source calls the underlying Source.
 func (x *DirectionsResponse) Source() *MapItem {
-	_r := x.inner.Source()
-	if _r == nil {
-		return nil
-	}
-	return &MapItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
+	return MapItemFromID(_r)
 }
 
-// Destination calls the underlying Destination.
 func (x *DirectionsResponse) Destination() *MapItem {
-	_r := x.inner.Destination()
-	if _r == nil {
-		return nil
-	}
-	return &MapItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destination"))
+	return MapItemFromID(_r)
 }
 
 // Routes returns the collection as a Go slice.
 func (x *DirectionsResponse) Routes() []*Route {
-	arr := x.inner.Routes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Route {
-		return &Route{inner: raw.MKRouteFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("routes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Route { return RouteFromID(_id) })
 }
 
 // DirectionsResponseable is the interface implemented by [DirectionsResponse], for mocking and DI.
 type DirectionsResponseable interface {
-	Unwrap() *raw.MKDirectionsResponse
+	obj.Object
 	Source() *MapItem
 	Destination() *MapItem
 	Routes() []*Route

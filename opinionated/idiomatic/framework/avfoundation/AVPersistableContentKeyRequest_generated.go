@@ -5,54 +5,81 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // An object that encapsulates information about a persistable content decryption key request issued from a content key session.
 //
-// PersistableContentKeyRequest wraps [raw.AVPersistableContentKeyRequest] with a fluent Go API.
+// PersistableContentKeyRequest is an idiomatic wrapper over the Objective-C class AVPersistableContentKeyRequest.
 type PersistableContentKeyRequest struct {
-	inner *raw.AVPersistableContentKeyRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPersistableContentKeyRequest].
-func (x *PersistableContentKeyRequest) Unwrap() *raw.AVPersistableContentKeyRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersistableContentKeyRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// PersistableContentKeyRequestFromID adopts an existing object pointer as a PersistableContentKeyRequest (nil for 0).
+// PersistableContentKeyRequestFromID adopts an existing Objective-C object as a PersistableContentKeyRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func PersistableContentKeyRequestFromID(id objc.ID) *PersistableContentKeyRequest {
 	if id == 0 {
 		return nil
 	}
-	return &PersistableContentKeyRequest{inner: raw.AVPersistableContentKeyRequestFromID(id)}
+	x := &PersistableContentKeyRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPersistableContentKeyRequest creates a new [PersistableContentKeyRequest].
+// persistableContentKeyRequestAdopt wraps an Objective-C object that this code just created as a
+// PersistableContentKeyRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func persistableContentKeyRequestAdopt(id objc.ID) *PersistableContentKeyRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &PersistableContentKeyRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PersistableContentKeyRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PersistableContentKeyRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PersistableContentKeyRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPersistableContentKeyRequest creates a new PersistableContentKeyRequest.
 func NewPersistableContentKeyRequest() *PersistableContentKeyRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPersistableContentKeyRequest")), objc.RegisterName("new"))
-	return &PersistableContentKeyRequest{inner: raw.AVPersistableContentKeyRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVPersistableContentKeyRequest")), objc.RegisterName("new"))
+	return persistableContentKeyRequestAdopt(_id)
 }
 
 // Creates a persistable content key from the content key context data.
-//
-// PersistableContentKeyFromKeyVendorResponseOptionsError calls the underlying PersistableContentKeyFromKeyVendorResponseOptionsError.
-func (x *PersistableContentKeyRequest) PersistableContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
-	return x.inner.PersistableContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse, options)
-}
-
-func (x *PersistableContentKeyRequest) asContentKeyRequest() *raw.AVContentKeyRequest {
-	return &x.inner.AVContentKeyRequest
+func (x *PersistableContentKeyRequest) PersistableContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse obj.Object, options obj.Object) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistableContentKeyFromKeyVendorResponse:options:error:"), objref.IDOf(keyVendorResponse), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // PersistableContentKeyRequestable is the interface implemented by [PersistableContentKeyRequest], for mocking and DI.
 type PersistableContentKeyRequestable interface {
-	Unwrap() *raw.AVPersistableContentKeyRequest
-	PersistableContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error)
+	obj.Object
+	PersistableContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse obj.Object, options obj.Object) (obj.Object, error)
 }
 
 var _ PersistableContentKeyRequestable = (*PersistableContentKeyRequest)(nil)

@@ -5,231 +5,201 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A collection of material properties that together describe the intended surface appearance for rendering a 3D object.
 //
-// Material wraps [raw.MDLMaterial] with a fluent Go API.
+// Material is an idiomatic wrapper over the Objective-C class MDLMaterial.
 type Material struct {
-	inner *raw.MDLMaterial
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLMaterial].
-func (x *Material) Unwrap() *raw.MDLMaterial { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Material) ID() objc.ID { return x.inner.Ptr() }
-
-// MaterialFromID adopts an existing object pointer as a Material (nil for 0).
+// MaterialFromID adopts an existing Objective-C object as a Material
+// (nil for 0), retaining it and registering a release finalizer.
 func MaterialFromID(id objc.ID) *Material {
 	if id == 0 {
 		return nil
 	}
-	return &Material{inner: raw.MDLMaterialFromID(id)}
+	x := &Material{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// materialAdopt wraps an Objective-C object that this code just created as a
+// Material (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func materialAdopt(id objc.ID) *Material {
+	if id == 0 {
+		return nil
+	}
+	x := &Material{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Material) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Material) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Material) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a material
 //
-// NewMaterialWithNameScatteringFunction creates a new [Material].
-func NewMaterialWithNameScatteringFunction(name string, scatteringFunction *raw.MDLScatteringFunction) *Material {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterial")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:scatteringFunction:"), foundation.NSStringStringWithUTF8String(name).Ptr(), scatteringFunction.Ptr())
-	return &Material{inner: raw.MDLMaterialFromID(_id)}
+// NewMaterialWithNameScatteringFunction creates a new Material.
+func NewMaterialWithNameScatteringFunction(name string, scatteringFunction *ScatteringFunction) *Material {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterial")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:scatteringFunction:"), purego.NSString(name), objref.IDOf(scatteringFunction))
+	return materialAdopt(_id)
 }
 
 // A descriptive name for the material.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *Material) WithName(name string) *Material {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // Another material object from which this material’s properties are derived.
 //
-// WithBaseMaterial sets the baseMaterial property and returns the receiver for chaining.
+// WithBaseMaterial sets baseMaterial and returns the receiver so calls can be chained.
 func (x *Material) WithBaseMaterial(baseMaterial *Material) *Material {
-	x.inner.SetBaseMaterial(baseMaterial.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseMaterial:"), objref.IDOf(baseMaterial))
 	return x
 }
 
 // The surface of an object.
 //
-// WithMaterialFace sets the materialFace property and returns the receiver for chaining.
-func (x *Material) WithMaterialFace(materialFace MDLMaterialFace) *Material {
-	x.inner.SetMaterialFace(raw.MDLMaterialFace(materialFace))
+// WithMaterialFace sets materialFace and returns the receiver so calls can be chained.
+func (x *Material) WithMaterialFace(materialFace MaterialFace) *Material {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterialFace:"), materialFace)
 	return x
 }
 
 // Adds a new material property to or replaces an existing material property in the material.
-//
-// SetProperty calls the underlying SetProperty.
-func (x *Material) SetProperty(property *raw.MDLMaterialProperty) {
-	x.inner.SetProperty(property)
+func (x *Material) SetProperty(property *MaterialProperty) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperty:"), objref.IDOf(property))
 }
 
 // Removes the specified material property from the material.
-//
-// RemoveProperty calls the underlying RemoveProperty.
-func (x *Material) RemoveProperty(property *raw.MDLMaterialProperty) {
-	x.inner.RemoveProperty(property)
+func (x *Material) RemoveProperty(property *MaterialProperty) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeProperty:"), objref.IDOf(property))
 }
 
 // Returns the material property with the specified name.
-//
-// PropertyNamed calls the underlying PropertyNamed.
 func (x *Material) PropertyNamed(name string) *MaterialProperty {
-	_r := x.inner.PropertyNamed(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyNamed:"), purego.NSString(name))
+	return MaterialPropertyFromID(_r)
 }
 
 // Returns the material property for the specified material semantic.
-//
-// PropertyWithSemantic calls the underlying PropertyWithSemantic.
-func (x *Material) PropertyWithSemantic(semantic MDLMaterialSemantic) *MaterialProperty {
-	_r := x.inner.PropertyWithSemantic(raw.MDLMaterialSemantic(semantic))
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+func (x *Material) PropertyWithSemantic(semantic MaterialSemantic) *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyWithSemantic:"), semantic)
+	return MaterialPropertyFromID(_r)
 }
 
 // Returns the complete list of material properties that match the specified material semantic.
-//
-// PropertiesWithSemantic calls the underlying PropertiesWithSemantic.
-func (x *Material) PropertiesWithSemantic(semantic MDLMaterialSemantic) *foundation.NSArray[*raw.MDLMaterialProperty] {
-	return x.inner.PropertiesWithSemantic(raw.MDLMaterialSemantic(semantic))
+func (x *Material) PropertiesWithSemantic(semantic MaterialSemantic) []*MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertiesWithSemantic:"), semantic)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MaterialProperty { return MaterialPropertyFromID(_id) })
 }
 
 // Removes all material properties from the material.
-//
-// RemoveAllProperties calls the underlying RemoveAllProperties.
 func (x *Material) RemoveAllProperties() {
-	x.inner.RemoveAllProperties()
-}
-
-// Resolves all texture string paths as NSURLs with resolver.
-//
-// ResolveTexturesWithResolver calls the underlying ResolveTexturesWithResolver.
-func (x *Material) ResolveTexturesWithResolver(resolver raw.MDLAssetResolver) {
-	x.inner.ResolveTexturesWithResolver(resolver)
-}
-
-// Loads textures using resolver for string paths and NSURLs.
-//
-// LoadTexturesUsingResolver calls the underlying LoadTexturesUsingResolver.
-func (x *Material) LoadTexturesUsingResolver(resolver raw.MDLAssetResolver) {
-	x.inner.LoadTexturesUsingResolver(resolver)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllProperties"))
 }
 
 // Returns the material property at the specified index in the material, for use with subscript syntax.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *Material) ObjectAtIndexedSubscript(idx uint) *MaterialProperty {
-	_r := x.inner.ObjectAtIndexedSubscript(idx)
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+func (x *Material) ObjectAtIndexedSubscript(idx int) *MaterialProperty {
+	errkit.CheckIndex(idx, x.Count())
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), idx)
+	return MaterialPropertyFromID(_r)
 }
 
 // Returns the material property with the specified name, for use with subscript syntax.
-//
-// ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
 func (x *Material) ObjectForKeyedSubscript(name string) *MaterialProperty {
-	_r := x.inner.ObjectForKeyedSubscript(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), purego.NSString(name))
+	return MaterialPropertyFromID(_r)
 }
 
-// ScatteringFunction calls the underlying ScatteringFunction.
 func (x *Material) ScatteringFunction() *ScatteringFunction {
-	_r := x.inner.ScatteringFunction()
-	if _r == nil {
-		return nil
-	}
-	return &ScatteringFunction{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scatteringFunction"))
+	return ScatteringFunctionFromID(_r)
 }
 
-// @see MDLNamed
-//
-// Name calls the underlying Name.
 func (x *Material) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
 func (x *Material) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// BaseMaterial calls the underlying BaseMaterial.
 func (x *Material) BaseMaterial() *Material {
-	_r := x.inner.BaseMaterial()
-	if _r == nil {
-		return nil
-	}
-	return &Material{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseMaterial"))
+	return MaterialFromID(_r)
 }
 
-// SetBaseMaterial calls the underlying SetBaseMaterial.
-func (x *Material) SetBaseMaterial(baseMaterial *raw.MDLMaterial) {
-	x.inner.SetBaseMaterial(baseMaterial)
+func (x *Material) SetBaseMaterial(baseMaterial *Material) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseMaterial:"), objref.IDOf(baseMaterial))
 }
 
-// Count calls the underlying Count.
-func (x *Material) Count() uint {
-	return x.inner.Count()
+func (x *Material) Count() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+	return _r
 }
 
-// MaterialFace calls the underlying MaterialFace.
-func (x *Material) MaterialFace() MDLMaterialFace {
-	return MDLMaterialFace(x.inner.MaterialFace())
+func (x *Material) MaterialFace() MaterialFace {
+	_r := objc.Send[MaterialFace](objref.IDOf(x), objc.RegisterName("materialFace"))
+	return _r
 }
 
-// SetMaterialFace calls the underlying SetMaterialFace.
-func (x *Material) SetMaterialFace(materialFace MDLMaterialFace) {
-	x.inner.SetMaterialFace(raw.MDLMaterialFace(materialFace))
+func (x *Material) SetMaterialFace(materialFace MaterialFace) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterialFace:"), materialFace)
 }
 
 // Materialable is the interface implemented by [Material], for mocking and DI.
 type Materialable interface {
-	Unwrap() *raw.MDLMaterial
+	obj.Object
 	WithName(name string) *Material
 	WithBaseMaterial(baseMaterial *Material) *Material
-	WithMaterialFace(materialFace MDLMaterialFace) *Material
-	SetProperty(property *raw.MDLMaterialProperty)
-	RemoveProperty(property *raw.MDLMaterialProperty)
+	WithMaterialFace(materialFace MaterialFace) *Material
+	SetProperty(property *MaterialProperty)
+	RemoveProperty(property *MaterialProperty)
 	PropertyNamed(name string) *MaterialProperty
-	PropertyWithSemantic(semantic MDLMaterialSemantic) *MaterialProperty
-	PropertiesWithSemantic(semantic MDLMaterialSemantic) *foundation.NSArray[*raw.MDLMaterialProperty]
+	PropertyWithSemantic(semantic MaterialSemantic) *MaterialProperty
+	PropertiesWithSemantic(semantic MaterialSemantic) []*MaterialProperty
 	RemoveAllProperties()
-	ResolveTexturesWithResolver(resolver raw.MDLAssetResolver)
-	LoadTexturesUsingResolver(resolver raw.MDLAssetResolver)
-	ObjectAtIndexedSubscript(idx uint) *MaterialProperty
+	ObjectAtIndexedSubscript(idx int) *MaterialProperty
 	ObjectForKeyedSubscript(name string) *MaterialProperty
 	ScatteringFunction() *ScatteringFunction
 	Name() string
 	SetName(name string)
 	BaseMaterial() *Material
-	SetBaseMaterial(baseMaterial *raw.MDLMaterial)
-	Count() uint
-	MaterialFace() MDLMaterialFace
-	SetMaterialFace(materialFace MDLMaterialFace)
+	SetBaseMaterial(baseMaterial *Material)
+	Count() int
+	MaterialFace() MaterialFace
+	SetMaterialFace(materialFace MaterialFace)
 }
 
 var _ Materialable = (*Material)(nil)

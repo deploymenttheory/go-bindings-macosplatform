@@ -9,679 +9,679 @@ import (
 )
 
 // The type of image capture device.
-type ICDeviceType uint64
+type DeviceType uint64
 
 const (
 	// The device is a camera.
-	ICDeviceTypeCamera ICDeviceType = 1
+	DeviceTypeCamera DeviceType = 1
 	// The device is a scanner.
-	ICDeviceTypeScanner ICDeviceType = 2
+	DeviceTypeScanner DeviceType = 2
 )
 
-func (e ICDeviceType) String() string {
+func (e DeviceType) String() string {
 	switch e {
-	case ICDeviceTypeCamera:
-		return "ICDeviceTypeCamera"
-	case ICDeviceTypeScanner:
-		return "ICDeviceTypeScanner"
+	case DeviceTypeCamera:
+		return "DeviceTypeCamera"
+	case DeviceTypeScanner:
+		return "DeviceTypeScanner"
 	default:
-		return fmt.Sprintf("ICDeviceType(%d)", int64(e))
+		return fmt.Sprintf("DeviceType(%d)", int64(e))
 	}
 }
 
 // Masks for detecting different device types.
-type ICDeviceTypeMask uint64
+type DeviceTypeMask uint64
 
 const (
 	// A mask for detecting a camera.
-	ICDeviceTypeMaskCamera ICDeviceTypeMask = 1
+	DeviceTypeMaskCamera DeviceTypeMask = 1
 	// A mask for detecting a scanner.
-	ICDeviceTypeMaskScanner ICDeviceTypeMask = 2
+	DeviceTypeMaskScanner DeviceTypeMask = 2
 )
 
-func (e ICDeviceTypeMask) String() string {
+func (e DeviceTypeMask) String() string {
 	switch e {
-	case ICDeviceTypeMaskCamera:
-		return "ICDeviceTypeMaskCamera"
-	case ICDeviceTypeMaskScanner:
-		return "ICDeviceTypeMaskScanner"
+	case DeviceTypeMaskCamera:
+		return "DeviceTypeMaskCamera"
+	case DeviceTypeMaskScanner:
+		return "DeviceTypeMaskScanner"
 	default:
-		return fmt.Sprintf("ICDeviceTypeMask(%d)", int64(e))
+		return fmt.Sprintf("DeviceTypeMask(%d)", int64(e))
 	}
 }
 
 // The file’s orientation type.
-type ICEXIFOrientationType uint64
+type EXIFOrientationType uint64
 
 const (
 	// Normal
-	ICEXIFOrientation1 ICEXIFOrientationType = 1
+	EXIFOrientation1 EXIFOrientationType = 1
 	// Flipped horizontally
-	ICEXIFOrientation2 ICEXIFOrientationType = 2
+	EXIFOrientation2 EXIFOrientationType = 2
 	// Rotated 180°
-	ICEXIFOrientation3 ICEXIFOrientationType = 3
+	EXIFOrientation3 EXIFOrientationType = 3
 	// Flipped vertically
-	ICEXIFOrientation4 ICEXIFOrientationType = 4
+	EXIFOrientation4 EXIFOrientationType = 4
 	// Rotated 90° CCW and flipped vertically
-	ICEXIFOrientation5 ICEXIFOrientationType = 5
+	EXIFOrientation5 EXIFOrientationType = 5
 	// Rotated 90° CCW
-	ICEXIFOrientation6 ICEXIFOrientationType = 6
+	EXIFOrientation6 EXIFOrientationType = 6
 	// Rotated 90° CW and flipped vertically
-	ICEXIFOrientation7 ICEXIFOrientationType = 7
+	EXIFOrientation7 EXIFOrientationType = 7
 	// Rotated 90° CW
-	ICEXIFOrientation8 ICEXIFOrientationType = 8
+	EXIFOrientation8 EXIFOrientationType = 8
 )
 
-func (e ICEXIFOrientationType) String() string {
+func (e EXIFOrientationType) String() string {
 	switch e {
-	case ICEXIFOrientation1:
-		return "ICEXIFOrientation1"
-	case ICEXIFOrientation2:
-		return "ICEXIFOrientation2"
-	case ICEXIFOrientation3:
-		return "ICEXIFOrientation3"
-	case ICEXIFOrientation4:
-		return "ICEXIFOrientation4"
-	case ICEXIFOrientation5:
-		return "ICEXIFOrientation5"
-	case ICEXIFOrientation6:
-		return "ICEXIFOrientation6"
-	case ICEXIFOrientation7:
-		return "ICEXIFOrientation7"
-	case ICEXIFOrientation8:
-		return "ICEXIFOrientation8"
+	case EXIFOrientation1:
+		return "EXIFOrientation1"
+	case EXIFOrientation2:
+		return "EXIFOrientation2"
+	case EXIFOrientation3:
+		return "EXIFOrientation3"
+	case EXIFOrientation4:
+		return "EXIFOrientation4"
+	case EXIFOrientation5:
+		return "EXIFOrientation5"
+	case EXIFOrientation6:
+		return "EXIFOrientation6"
+	case EXIFOrientation7:
+		return "EXIFOrientation7"
+	case EXIFOrientation8:
+		return "EXIFOrientation8"
 	default:
-		return fmt.Sprintf("ICEXIFOrientationType(%d)", int64(e))
+		return fmt.Sprintf("EXIFOrientationType(%d)", int64(e))
 	}
 }
 
-type ICMediaPresentation uint64
+type MediaPresentation uint64
 
 const (
-	ICMediaPresentationConvertedAssets ICMediaPresentation = 1
-	ICMediaPresentationOriginalAssets  ICMediaPresentation = 2
+	MediaPresentationConvertedAssets MediaPresentation = 1
+	MediaPresentationOriginalAssets  MediaPresentation = 2
 )
 
-func (e ICMediaPresentation) String() string {
+func (e MediaPresentation) String() string {
 	switch e {
-	case ICMediaPresentationConvertedAssets:
-		return "ICMediaPresentationConvertedAssets"
-	case ICMediaPresentationOriginalAssets:
-		return "ICMediaPresentationOriginalAssets"
+	case MediaPresentationConvertedAssets:
+		return "MediaPresentationConvertedAssets"
+	case MediaPresentationOriginalAssets:
+		return "MediaPresentationOriginalAssets"
 	default:
-		return fmt.Sprintf("ICMediaPresentation(%d)", int64(e))
+		return fmt.Sprintf("MediaPresentation(%d)", int64(e))
 	}
 }
 
-type ICReturnConnectionErrorCode int64
+type ReturnConnectionErrorCode int64
 
 const (
-	ICReturnConnectionDriverExited              ICReturnConnectionErrorCode = -21350
-	ICReturnConnectionClosedSessionSuddenly     ICReturnConnectionErrorCode = -21349
-	ICReturnConnectionEjectedSuddenly           ICReturnConnectionErrorCode = -21348
-	ICReturnConnectionSessionAlreadyOpen        ICReturnConnectionErrorCode = -21347
-	ICReturnConnectionEjectFailed               ICReturnConnectionErrorCode = -21346
-	ICReturnConnectionFailedToOpen              ICReturnConnectionErrorCode = -21345
-	ICReturnConnectionFailedToOpenDevice        ICReturnConnectionErrorCode = -21344
-	ICReturnConnectionNotAuthorizedToOpenDevice ICReturnConnectionErrorCode = -21343
+	ReturnConnectionDriverExited              ReturnConnectionErrorCode = -21350
+	ReturnConnectionClosedSessionSuddenly     ReturnConnectionErrorCode = -21349
+	ReturnConnectionEjectedSuddenly           ReturnConnectionErrorCode = -21348
+	ReturnConnectionSessionAlreadyOpen        ReturnConnectionErrorCode = -21347
+	ReturnConnectionEjectFailed               ReturnConnectionErrorCode = -21346
+	ReturnConnectionFailedToOpen              ReturnConnectionErrorCode = -21345
+	ReturnConnectionFailedToOpenDevice        ReturnConnectionErrorCode = -21344
+	ReturnConnectionNotAuthorizedToOpenDevice ReturnConnectionErrorCode = -21343
 )
 
-func (e ICReturnConnectionErrorCode) String() string {
+func (e ReturnConnectionErrorCode) String() string {
 	switch e {
-	case ICReturnConnectionDriverExited:
-		return "ICReturnConnectionDriverExited"
-	case ICReturnConnectionClosedSessionSuddenly:
-		return "ICReturnConnectionClosedSessionSuddenly"
-	case ICReturnConnectionEjectedSuddenly:
-		return "ICReturnConnectionEjectedSuddenly"
-	case ICReturnConnectionSessionAlreadyOpen:
-		return "ICReturnConnectionSessionAlreadyOpen"
-	case ICReturnConnectionEjectFailed:
-		return "ICReturnConnectionEjectFailed"
-	case ICReturnConnectionFailedToOpen:
-		return "ICReturnConnectionFailedToOpen"
-	case ICReturnConnectionFailedToOpenDevice:
-		return "ICReturnConnectionFailedToOpenDevice"
-	case ICReturnConnectionNotAuthorizedToOpenDevice:
-		return "ICReturnConnectionNotAuthorizedToOpenDevice"
+	case ReturnConnectionDriverExited:
+		return "ReturnConnectionDriverExited"
+	case ReturnConnectionClosedSessionSuddenly:
+		return "ReturnConnectionClosedSessionSuddenly"
+	case ReturnConnectionEjectedSuddenly:
+		return "ReturnConnectionEjectedSuddenly"
+	case ReturnConnectionSessionAlreadyOpen:
+		return "ReturnConnectionSessionAlreadyOpen"
+	case ReturnConnectionEjectFailed:
+		return "ReturnConnectionEjectFailed"
+	case ReturnConnectionFailedToOpen:
+		return "ReturnConnectionFailedToOpen"
+	case ReturnConnectionFailedToOpenDevice:
+		return "ReturnConnectionFailedToOpenDevice"
+	case ReturnConnectionNotAuthorizedToOpenDevice:
+		return "ReturnConnectionNotAuthorizedToOpenDevice"
 	default:
-		return fmt.Sprintf("ICReturnConnectionErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ReturnConnectionErrorCode(%d)", int64(e))
 	}
 }
 
-type ICReturnDownloadErrorCode int64
+type ReturnDownloadErrorCode int64
 
 const (
-	ICReturnDownloadPathInvalid  ICReturnDownloadErrorCode = -21100
-	ICReturnDownloadFileWritable ICReturnDownloadErrorCode = -21099
+	ReturnDownloadPathInvalid  ReturnDownloadErrorCode = -21100
+	ReturnDownloadFileWritable ReturnDownloadErrorCode = -21099
 )
 
-func (e ICReturnDownloadErrorCode) String() string {
+func (e ReturnDownloadErrorCode) String() string {
 	switch e {
-	case ICReturnDownloadPathInvalid:
-		return "ICReturnDownloadPathInvalid"
-	case ICReturnDownloadFileWritable:
-		return "ICReturnDownloadFileWritable"
+	case ReturnDownloadPathInvalid:
+		return "ReturnDownloadPathInvalid"
+	case ReturnDownloadFileWritable:
+		return "ReturnDownloadFileWritable"
 	default:
-		return fmt.Sprintf("ICReturnDownloadErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ReturnDownloadErrorCode(%d)", int64(e))
 	}
 }
 
-type ICReturnMetadataErrorCode int64
+type ReturnMetadataErrorCode int64
 
 const (
-	ICReturnMetadataNotAvailable    ICReturnMetadataErrorCode = -20150
-	ICReturnMetadataAlreadyFetching ICReturnMetadataErrorCode = -20149
-	ICReturnMetadataCanceled        ICReturnMetadataErrorCode = -20148
-	ICReturnMetadataInvalid         ICReturnMetadataErrorCode = -20147
+	ReturnMetadataNotAvailable    ReturnMetadataErrorCode = -20150
+	ReturnMetadataAlreadyFetching ReturnMetadataErrorCode = -20149
+	ReturnMetadataCanceled        ReturnMetadataErrorCode = -20148
+	ReturnMetadataInvalid         ReturnMetadataErrorCode = -20147
 )
 
-func (e ICReturnMetadataErrorCode) String() string {
+func (e ReturnMetadataErrorCode) String() string {
 	switch e {
-	case ICReturnMetadataNotAvailable:
-		return "ICReturnMetadataNotAvailable"
-	case ICReturnMetadataAlreadyFetching:
-		return "ICReturnMetadataAlreadyFetching"
-	case ICReturnMetadataCanceled:
-		return "ICReturnMetadataCanceled"
-	case ICReturnMetadataInvalid:
-		return "ICReturnMetadataInvalid"
+	case ReturnMetadataNotAvailable:
+		return "ReturnMetadataNotAvailable"
+	case ReturnMetadataAlreadyFetching:
+		return "ReturnMetadataAlreadyFetching"
+	case ReturnMetadataCanceled:
+		return "ReturnMetadataCanceled"
+	case ReturnMetadataInvalid:
+		return "ReturnMetadataInvalid"
 	default:
-		return fmt.Sprintf("ICReturnMetadataErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ReturnMetadataErrorCode(%d)", int64(e))
 	}
 }
 
-type ICReturnObjectErrorCode int64
+type ReturnObjectErrorCode int64
 
 const (
-	ICReturnCodeObjectDoesNotExist        ICReturnObjectErrorCode = -21450
-	ICReturnCodeObjectDataOffsetInvalid   ICReturnObjectErrorCode = -21449
-	ICReturnCodeObjectCouldNotBeRead      ICReturnObjectErrorCode = -21448
-	ICReturnCodeObjectDataEmpty           ICReturnObjectErrorCode = -21447
-	ICReturnCodeObjectDataRequestTooLarge ICReturnObjectErrorCode = -21446
+	ReturnCodeObjectDoesNotExist        ReturnObjectErrorCode = -21450
+	ReturnCodeObjectDataOffsetInvalid   ReturnObjectErrorCode = -21449
+	ReturnCodeObjectCouldNotBeRead      ReturnObjectErrorCode = -21448
+	ReturnCodeObjectDataEmpty           ReturnObjectErrorCode = -21447
+	ReturnCodeObjectDataRequestTooLarge ReturnObjectErrorCode = -21446
 )
 
-func (e ICReturnObjectErrorCode) String() string {
+func (e ReturnObjectErrorCode) String() string {
 	switch e {
-	case ICReturnCodeObjectDoesNotExist:
-		return "ICReturnCodeObjectDoesNotExist"
-	case ICReturnCodeObjectDataOffsetInvalid:
-		return "ICReturnCodeObjectDataOffsetInvalid"
-	case ICReturnCodeObjectCouldNotBeRead:
-		return "ICReturnCodeObjectCouldNotBeRead"
-	case ICReturnCodeObjectDataEmpty:
-		return "ICReturnCodeObjectDataEmpty"
-	case ICReturnCodeObjectDataRequestTooLarge:
-		return "ICReturnCodeObjectDataRequestTooLarge"
+	case ReturnCodeObjectDoesNotExist:
+		return "ReturnCodeObjectDoesNotExist"
+	case ReturnCodeObjectDataOffsetInvalid:
+		return "ReturnCodeObjectDataOffsetInvalid"
+	case ReturnCodeObjectCouldNotBeRead:
+		return "ReturnCodeObjectCouldNotBeRead"
+	case ReturnCodeObjectDataEmpty:
+		return "ReturnCodeObjectDataEmpty"
+	case ReturnCodeObjectDataRequestTooLarge:
+		return "ReturnCodeObjectDataRequestTooLarge"
 	default:
-		return fmt.Sprintf("ICReturnObjectErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ReturnObjectErrorCode(%d)", int64(e))
 	}
 }
 
-type ICReturnPTPDeviceErrorCode int64
+type ReturnPTPDeviceErrorCode int64
 
 const (
-	ICReturnPTPFailedToSendCommand        ICReturnPTPDeviceErrorCode = -21250
-	ICReturnPTPNotAuthorizedToSendCommand ICReturnPTPDeviceErrorCode = -21249
+	ReturnPTPFailedToSendCommand        ReturnPTPDeviceErrorCode = -21250
+	ReturnPTPNotAuthorizedToSendCommand ReturnPTPDeviceErrorCode = -21249
 )
 
-func (e ICReturnPTPDeviceErrorCode) String() string {
+func (e ReturnPTPDeviceErrorCode) String() string {
 	switch e {
-	case ICReturnPTPFailedToSendCommand:
-		return "ICReturnPTPFailedToSendCommand"
-	case ICReturnPTPNotAuthorizedToSendCommand:
-		return "ICReturnPTPNotAuthorizedToSendCommand"
+	case ReturnPTPFailedToSendCommand:
+		return "ReturnPTPFailedToSendCommand"
+	case ReturnPTPNotAuthorizedToSendCommand:
+		return "ReturnPTPNotAuthorizedToSendCommand"
 	default:
-		return fmt.Sprintf("ICReturnPTPDeviceErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ReturnPTPDeviceErrorCode(%d)", int64(e))
 	}
 }
 
-type ICReturnThumbnailErrorCode int64
+type ReturnThumbnailErrorCode int64
 
 const (
-	ICReturnThumbnailNotAvailable    ICReturnThumbnailErrorCode = -21000
-	ICReturnThumbnailAlreadyFetching ICReturnThumbnailErrorCode = -20999
-	ICReturnThumbnailCanceled        ICReturnThumbnailErrorCode = -20098
-	ICReturnThumbnailInvalid         ICReturnThumbnailErrorCode = -20097
+	ReturnThumbnailNotAvailable    ReturnThumbnailErrorCode = -21000
+	ReturnThumbnailAlreadyFetching ReturnThumbnailErrorCode = -20999
+	ReturnThumbnailCanceled        ReturnThumbnailErrorCode = -20098
+	ReturnThumbnailInvalid         ReturnThumbnailErrorCode = -20097
 )
 
-func (e ICReturnThumbnailErrorCode) String() string {
+func (e ReturnThumbnailErrorCode) String() string {
 	switch e {
-	case ICReturnThumbnailNotAvailable:
-		return "ICReturnThumbnailNotAvailable"
-	case ICReturnThumbnailAlreadyFetching:
-		return "ICReturnThumbnailAlreadyFetching"
-	case ICReturnThumbnailCanceled:
-		return "ICReturnThumbnailCanceled"
-	case ICReturnThumbnailInvalid:
-		return "ICReturnThumbnailInvalid"
+	case ReturnThumbnailNotAvailable:
+		return "ReturnThumbnailNotAvailable"
+	case ReturnThumbnailAlreadyFetching:
+		return "ReturnThumbnailAlreadyFetching"
+	case ReturnThumbnailCanceled:
+		return "ReturnThumbnailCanceled"
+	case ReturnThumbnailInvalid:
+		return "ReturnThumbnailInvalid"
 	default:
-		return fmt.Sprintf("ICReturnThumbnailErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ReturnThumbnailErrorCode(%d)", int64(e))
 	}
 }
 
 // The number of bits per channel in the scanned image.
-type ICScannerBitDepth uint64
+type ScannerBitDepth uint64
 
 const (
-	ICScannerBitDepth1Bit   ICScannerBitDepth = 1
-	ICScannerBitDepth8Bits  ICScannerBitDepth = 8
-	ICScannerBitDepth16Bits ICScannerBitDepth = 16
+	ScannerBitDepth1Bit   ScannerBitDepth = 1
+	ScannerBitDepth8Bits  ScannerBitDepth = 8
+	ScannerBitDepth16Bits ScannerBitDepth = 16
 )
 
-func (e ICScannerBitDepth) String() string {
+func (e ScannerBitDepth) String() string {
 	switch e {
-	case ICScannerBitDepth1Bit:
-		return "ICScannerBitDepth1Bit"
-	case ICScannerBitDepth8Bits:
-		return "ICScannerBitDepth8Bits"
-	case ICScannerBitDepth16Bits:
-		return "ICScannerBitDepth16Bits"
+	case ScannerBitDepth1Bit:
+		return "ScannerBitDepth1Bit"
+	case ScannerBitDepth8Bits:
+		return "ScannerBitDepth8Bits"
+	case ScannerBitDepth16Bits:
+		return "ScannerBitDepth16Bits"
 	default:
-		return fmt.Sprintf("ICScannerBitDepth(%d)", int64(e))
+		return fmt.Sprintf("ScannerBitDepth(%d)", int64(e))
 	}
 }
 
 // The supported document size types.
-type ICScannerDocumentType uint64
+type ScannerDocumentType uint64
 
 const (
-	ICScannerDocumentTypeDefault      ICScannerDocumentType = 0
-	ICScannerDocumentTypeA4           ICScannerDocumentType = 1
-	ICScannerDocumentTypeB5           ICScannerDocumentType = 2
-	ICScannerDocumentTypeUSLetter     ICScannerDocumentType = 3
-	ICScannerDocumentTypeUSLegal      ICScannerDocumentType = 4
-	ICScannerDocumentTypeA5           ICScannerDocumentType = 5
-	ICScannerDocumentTypeISOB4        ICScannerDocumentType = 6
-	ICScannerDocumentTypeISOB6        ICScannerDocumentType = 7
-	ICScannerDocumentTypeUSLedger     ICScannerDocumentType = 9
-	ICScannerDocumentTypeUSExecutive  ICScannerDocumentType = 10
-	ICScannerDocumentTypeA3           ICScannerDocumentType = 11
-	ICScannerDocumentTypeISOB3        ICScannerDocumentType = 12
-	ICScannerDocumentTypeA6           ICScannerDocumentType = 13
-	ICScannerDocumentTypeC4           ICScannerDocumentType = 14
-	ICScannerDocumentTypeC5           ICScannerDocumentType = 15
-	ICScannerDocumentTypeC6           ICScannerDocumentType = 16
-	ICScannerDocumentType4A0          ICScannerDocumentType = 17
-	ICScannerDocumentType2A0          ICScannerDocumentType = 18
-	ICScannerDocumentTypeA0           ICScannerDocumentType = 19
-	ICScannerDocumentTypeA1           ICScannerDocumentType = 20
-	ICScannerDocumentTypeA2           ICScannerDocumentType = 21
-	ICScannerDocumentTypeA7           ICScannerDocumentType = 22
-	ICScannerDocumentTypeA8           ICScannerDocumentType = 23
-	ICScannerDocumentTypeA9           ICScannerDocumentType = 24
-	ICScannerDocumentType10           ICScannerDocumentType = 25
-	ICScannerDocumentTypeISOB0        ICScannerDocumentType = 26
-	ICScannerDocumentTypeISOB1        ICScannerDocumentType = 27
-	ICScannerDocumentTypeISOB2        ICScannerDocumentType = 28
-	ICScannerDocumentTypeISOB5        ICScannerDocumentType = 29
-	ICScannerDocumentTypeISOB7        ICScannerDocumentType = 30
-	ICScannerDocumentTypeISOB8        ICScannerDocumentType = 31
-	ICScannerDocumentTypeISOB9        ICScannerDocumentType = 32
-	ICScannerDocumentTypeISOB10       ICScannerDocumentType = 33
-	ICScannerDocumentTypeJISB0        ICScannerDocumentType = 34
-	ICScannerDocumentTypeJISB1        ICScannerDocumentType = 35
-	ICScannerDocumentTypeJISB2        ICScannerDocumentType = 36
-	ICScannerDocumentTypeJISB3        ICScannerDocumentType = 37
-	ICScannerDocumentTypeJISB4        ICScannerDocumentType = 38
-	ICScannerDocumentTypeJISB6        ICScannerDocumentType = 39
-	ICScannerDocumentTypeJISB7        ICScannerDocumentType = 40
-	ICScannerDocumentTypeJISB8        ICScannerDocumentType = 41
-	ICScannerDocumentTypeJISB9        ICScannerDocumentType = 42
-	ICScannerDocumentTypeJISB10       ICScannerDocumentType = 43
-	ICScannerDocumentTypeC0           ICScannerDocumentType = 44
-	ICScannerDocumentTypeC1           ICScannerDocumentType = 45
-	ICScannerDocumentTypeC2           ICScannerDocumentType = 46
-	ICScannerDocumentTypeC3           ICScannerDocumentType = 47
-	ICScannerDocumentTypeC7           ICScannerDocumentType = 48
-	ICScannerDocumentTypeC8           ICScannerDocumentType = 49
-	ICScannerDocumentTypeC9           ICScannerDocumentType = 50
-	ICScannerDocumentTypeC10          ICScannerDocumentType = 51
-	ICScannerDocumentTypeUSStatement  ICScannerDocumentType = 52
-	ICScannerDocumentTypeBusinessCard ICScannerDocumentType = 53
-	ICScannerDocumentTypeE            ICScannerDocumentType = 60
-	ICScannerDocumentType3R           ICScannerDocumentType = 61
-	ICScannerDocumentType4R           ICScannerDocumentType = 62
-	ICScannerDocumentType5R           ICScannerDocumentType = 63
-	ICScannerDocumentType6R           ICScannerDocumentType = 64
-	ICScannerDocumentType8R           ICScannerDocumentType = 65
-	ICScannerDocumentTypeS8R          ICScannerDocumentType = 66
-	ICScannerDocumentType10R          ICScannerDocumentType = 67
-	ICScannerDocumentTypeS10R         ICScannerDocumentType = 68
-	ICScannerDocumentType11R          ICScannerDocumentType = 69
-	ICScannerDocumentType12R          ICScannerDocumentType = 70
-	ICScannerDocumentTypeS12R         ICScannerDocumentType = 71
-	ICScannerDocumentType110          ICScannerDocumentType = 72
-	ICScannerDocumentTypeAPSH         ICScannerDocumentType = 73
-	ICScannerDocumentTypeAPSC         ICScannerDocumentType = 74
-	ICScannerDocumentTypeAPSP         ICScannerDocumentType = 75
-	ICScannerDocumentType135          ICScannerDocumentType = 76
-	ICScannerDocumentTypeMF           ICScannerDocumentType = 77
-	ICScannerDocumentTypeLF           ICScannerDocumentType = 78
+	ScannerDocumentTypeDefault      ScannerDocumentType = 0
+	ScannerDocumentTypeA4           ScannerDocumentType = 1
+	ScannerDocumentTypeB5           ScannerDocumentType = 2
+	ScannerDocumentTypeUSLetter     ScannerDocumentType = 3
+	ScannerDocumentTypeUSLegal      ScannerDocumentType = 4
+	ScannerDocumentTypeA5           ScannerDocumentType = 5
+	ScannerDocumentTypeISOB4        ScannerDocumentType = 6
+	ScannerDocumentTypeISOB6        ScannerDocumentType = 7
+	ScannerDocumentTypeUSLedger     ScannerDocumentType = 9
+	ScannerDocumentTypeUSExecutive  ScannerDocumentType = 10
+	ScannerDocumentTypeA3           ScannerDocumentType = 11
+	ScannerDocumentTypeISOB3        ScannerDocumentType = 12
+	ScannerDocumentTypeA6           ScannerDocumentType = 13
+	ScannerDocumentTypeC4           ScannerDocumentType = 14
+	ScannerDocumentTypeC5           ScannerDocumentType = 15
+	ScannerDocumentTypeC6           ScannerDocumentType = 16
+	ScannerDocumentType4A0          ScannerDocumentType = 17
+	ScannerDocumentType2A0          ScannerDocumentType = 18
+	ScannerDocumentTypeA0           ScannerDocumentType = 19
+	ScannerDocumentTypeA1           ScannerDocumentType = 20
+	ScannerDocumentTypeA2           ScannerDocumentType = 21
+	ScannerDocumentTypeA7           ScannerDocumentType = 22
+	ScannerDocumentTypeA8           ScannerDocumentType = 23
+	ScannerDocumentTypeA9           ScannerDocumentType = 24
+	ScannerDocumentType10           ScannerDocumentType = 25
+	ScannerDocumentTypeISOB0        ScannerDocumentType = 26
+	ScannerDocumentTypeISOB1        ScannerDocumentType = 27
+	ScannerDocumentTypeISOB2        ScannerDocumentType = 28
+	ScannerDocumentTypeISOB5        ScannerDocumentType = 29
+	ScannerDocumentTypeISOB7        ScannerDocumentType = 30
+	ScannerDocumentTypeISOB8        ScannerDocumentType = 31
+	ScannerDocumentTypeISOB9        ScannerDocumentType = 32
+	ScannerDocumentTypeISOB10       ScannerDocumentType = 33
+	ScannerDocumentTypeJISB0        ScannerDocumentType = 34
+	ScannerDocumentTypeJISB1        ScannerDocumentType = 35
+	ScannerDocumentTypeJISB2        ScannerDocumentType = 36
+	ScannerDocumentTypeJISB3        ScannerDocumentType = 37
+	ScannerDocumentTypeJISB4        ScannerDocumentType = 38
+	ScannerDocumentTypeJISB6        ScannerDocumentType = 39
+	ScannerDocumentTypeJISB7        ScannerDocumentType = 40
+	ScannerDocumentTypeJISB8        ScannerDocumentType = 41
+	ScannerDocumentTypeJISB9        ScannerDocumentType = 42
+	ScannerDocumentTypeJISB10       ScannerDocumentType = 43
+	ScannerDocumentTypeC0           ScannerDocumentType = 44
+	ScannerDocumentTypeC1           ScannerDocumentType = 45
+	ScannerDocumentTypeC2           ScannerDocumentType = 46
+	ScannerDocumentTypeC3           ScannerDocumentType = 47
+	ScannerDocumentTypeC7           ScannerDocumentType = 48
+	ScannerDocumentTypeC8           ScannerDocumentType = 49
+	ScannerDocumentTypeC9           ScannerDocumentType = 50
+	ScannerDocumentTypeC10          ScannerDocumentType = 51
+	ScannerDocumentTypeUSStatement  ScannerDocumentType = 52
+	ScannerDocumentTypeBusinessCard ScannerDocumentType = 53
+	ScannerDocumentTypeE            ScannerDocumentType = 60
+	ScannerDocumentType3R           ScannerDocumentType = 61
+	ScannerDocumentType4R           ScannerDocumentType = 62
+	ScannerDocumentType5R           ScannerDocumentType = 63
+	ScannerDocumentType6R           ScannerDocumentType = 64
+	ScannerDocumentType8R           ScannerDocumentType = 65
+	ScannerDocumentTypeS8R          ScannerDocumentType = 66
+	ScannerDocumentType10R          ScannerDocumentType = 67
+	ScannerDocumentTypeS10R         ScannerDocumentType = 68
+	ScannerDocumentType11R          ScannerDocumentType = 69
+	ScannerDocumentType12R          ScannerDocumentType = 70
+	ScannerDocumentTypeS12R         ScannerDocumentType = 71
+	ScannerDocumentType110          ScannerDocumentType = 72
+	ScannerDocumentTypeAPSH         ScannerDocumentType = 73
+	ScannerDocumentTypeAPSC         ScannerDocumentType = 74
+	ScannerDocumentTypeAPSP         ScannerDocumentType = 75
+	ScannerDocumentType135          ScannerDocumentType = 76
+	ScannerDocumentTypeMF           ScannerDocumentType = 77
+	ScannerDocumentTypeLF           ScannerDocumentType = 78
 )
 
-func (e ICScannerDocumentType) String() string {
+func (e ScannerDocumentType) String() string {
 	switch e {
-	case ICScannerDocumentTypeDefault:
-		return "ICScannerDocumentTypeDefault"
-	case ICScannerDocumentTypeA4:
-		return "ICScannerDocumentTypeA4"
-	case ICScannerDocumentTypeB5:
-		return "ICScannerDocumentTypeB5"
-	case ICScannerDocumentTypeUSLetter:
-		return "ICScannerDocumentTypeUSLetter"
-	case ICScannerDocumentTypeUSLegal:
-		return "ICScannerDocumentTypeUSLegal"
-	case ICScannerDocumentTypeA5:
-		return "ICScannerDocumentTypeA5"
-	case ICScannerDocumentTypeISOB4:
-		return "ICScannerDocumentTypeISOB4"
-	case ICScannerDocumentTypeISOB6:
-		return "ICScannerDocumentTypeISOB6"
-	case ICScannerDocumentTypeUSLedger:
-		return "ICScannerDocumentTypeUSLedger"
-	case ICScannerDocumentTypeUSExecutive:
-		return "ICScannerDocumentTypeUSExecutive"
-	case ICScannerDocumentTypeA3:
-		return "ICScannerDocumentTypeA3"
-	case ICScannerDocumentTypeISOB3:
-		return "ICScannerDocumentTypeISOB3"
-	case ICScannerDocumentTypeA6:
-		return "ICScannerDocumentTypeA6"
-	case ICScannerDocumentTypeC4:
-		return "ICScannerDocumentTypeC4"
-	case ICScannerDocumentTypeC5:
-		return "ICScannerDocumentTypeC5"
-	case ICScannerDocumentTypeC6:
-		return "ICScannerDocumentTypeC6"
-	case ICScannerDocumentType4A0:
-		return "ICScannerDocumentType4A0"
-	case ICScannerDocumentType2A0:
-		return "ICScannerDocumentType2A0"
-	case ICScannerDocumentTypeA0:
-		return "ICScannerDocumentTypeA0"
-	case ICScannerDocumentTypeA1:
-		return "ICScannerDocumentTypeA1"
-	case ICScannerDocumentTypeA2:
-		return "ICScannerDocumentTypeA2"
-	case ICScannerDocumentTypeA7:
-		return "ICScannerDocumentTypeA7"
-	case ICScannerDocumentTypeA8:
-		return "ICScannerDocumentTypeA8"
-	case ICScannerDocumentTypeA9:
-		return "ICScannerDocumentTypeA9"
-	case ICScannerDocumentType10:
-		return "ICScannerDocumentType10"
-	case ICScannerDocumentTypeISOB0:
-		return "ICScannerDocumentTypeISOB0"
-	case ICScannerDocumentTypeISOB1:
-		return "ICScannerDocumentTypeISOB1"
-	case ICScannerDocumentTypeISOB2:
-		return "ICScannerDocumentTypeISOB2"
-	case ICScannerDocumentTypeISOB5:
-		return "ICScannerDocumentTypeISOB5"
-	case ICScannerDocumentTypeISOB7:
-		return "ICScannerDocumentTypeISOB7"
-	case ICScannerDocumentTypeISOB8:
-		return "ICScannerDocumentTypeISOB8"
-	case ICScannerDocumentTypeISOB9:
-		return "ICScannerDocumentTypeISOB9"
-	case ICScannerDocumentTypeISOB10:
-		return "ICScannerDocumentTypeISOB10"
-	case ICScannerDocumentTypeJISB0:
-		return "ICScannerDocumentTypeJISB0"
-	case ICScannerDocumentTypeJISB1:
-		return "ICScannerDocumentTypeJISB1"
-	case ICScannerDocumentTypeJISB2:
-		return "ICScannerDocumentTypeJISB2"
-	case ICScannerDocumentTypeJISB3:
-		return "ICScannerDocumentTypeJISB3"
-	case ICScannerDocumentTypeJISB4:
-		return "ICScannerDocumentTypeJISB4"
-	case ICScannerDocumentTypeJISB6:
-		return "ICScannerDocumentTypeJISB6"
-	case ICScannerDocumentTypeJISB7:
-		return "ICScannerDocumentTypeJISB7"
-	case ICScannerDocumentTypeJISB8:
-		return "ICScannerDocumentTypeJISB8"
-	case ICScannerDocumentTypeJISB9:
-		return "ICScannerDocumentTypeJISB9"
-	case ICScannerDocumentTypeJISB10:
-		return "ICScannerDocumentTypeJISB10"
-	case ICScannerDocumentTypeC0:
-		return "ICScannerDocumentTypeC0"
-	case ICScannerDocumentTypeC1:
-		return "ICScannerDocumentTypeC1"
-	case ICScannerDocumentTypeC2:
-		return "ICScannerDocumentTypeC2"
-	case ICScannerDocumentTypeC3:
-		return "ICScannerDocumentTypeC3"
-	case ICScannerDocumentTypeC7:
-		return "ICScannerDocumentTypeC7"
-	case ICScannerDocumentTypeC8:
-		return "ICScannerDocumentTypeC8"
-	case ICScannerDocumentTypeC9:
-		return "ICScannerDocumentTypeC9"
-	case ICScannerDocumentTypeC10:
-		return "ICScannerDocumentTypeC10"
-	case ICScannerDocumentTypeUSStatement:
-		return "ICScannerDocumentTypeUSStatement"
-	case ICScannerDocumentTypeBusinessCard:
-		return "ICScannerDocumentTypeBusinessCard"
-	case ICScannerDocumentTypeE:
-		return "ICScannerDocumentTypeE"
-	case ICScannerDocumentType3R:
-		return "ICScannerDocumentType3R"
-	case ICScannerDocumentType4R:
-		return "ICScannerDocumentType4R"
-	case ICScannerDocumentType5R:
-		return "ICScannerDocumentType5R"
-	case ICScannerDocumentType6R:
-		return "ICScannerDocumentType6R"
-	case ICScannerDocumentType8R:
-		return "ICScannerDocumentType8R"
-	case ICScannerDocumentTypeS8R:
-		return "ICScannerDocumentTypeS8R"
-	case ICScannerDocumentType10R:
-		return "ICScannerDocumentType10R"
-	case ICScannerDocumentTypeS10R:
-		return "ICScannerDocumentTypeS10R"
-	case ICScannerDocumentType11R:
-		return "ICScannerDocumentType11R"
-	case ICScannerDocumentType12R:
-		return "ICScannerDocumentType12R"
-	case ICScannerDocumentTypeS12R:
-		return "ICScannerDocumentTypeS12R"
-	case ICScannerDocumentType110:
-		return "ICScannerDocumentType110"
-	case ICScannerDocumentTypeAPSH:
-		return "ICScannerDocumentTypeAPSH"
-	case ICScannerDocumentTypeAPSC:
-		return "ICScannerDocumentTypeAPSC"
-	case ICScannerDocumentTypeAPSP:
-		return "ICScannerDocumentTypeAPSP"
-	case ICScannerDocumentType135:
-		return "ICScannerDocumentType135"
-	case ICScannerDocumentTypeMF:
-		return "ICScannerDocumentTypeMF"
-	case ICScannerDocumentTypeLF:
-		return "ICScannerDocumentTypeLF"
+	case ScannerDocumentTypeDefault:
+		return "ScannerDocumentTypeDefault"
+	case ScannerDocumentTypeA4:
+		return "ScannerDocumentTypeA4"
+	case ScannerDocumentTypeB5:
+		return "ScannerDocumentTypeB5"
+	case ScannerDocumentTypeUSLetter:
+		return "ScannerDocumentTypeUSLetter"
+	case ScannerDocumentTypeUSLegal:
+		return "ScannerDocumentTypeUSLegal"
+	case ScannerDocumentTypeA5:
+		return "ScannerDocumentTypeA5"
+	case ScannerDocumentTypeISOB4:
+		return "ScannerDocumentTypeISOB4"
+	case ScannerDocumentTypeISOB6:
+		return "ScannerDocumentTypeISOB6"
+	case ScannerDocumentTypeUSLedger:
+		return "ScannerDocumentTypeUSLedger"
+	case ScannerDocumentTypeUSExecutive:
+		return "ScannerDocumentTypeUSExecutive"
+	case ScannerDocumentTypeA3:
+		return "ScannerDocumentTypeA3"
+	case ScannerDocumentTypeISOB3:
+		return "ScannerDocumentTypeISOB3"
+	case ScannerDocumentTypeA6:
+		return "ScannerDocumentTypeA6"
+	case ScannerDocumentTypeC4:
+		return "ScannerDocumentTypeC4"
+	case ScannerDocumentTypeC5:
+		return "ScannerDocumentTypeC5"
+	case ScannerDocumentTypeC6:
+		return "ScannerDocumentTypeC6"
+	case ScannerDocumentType4A0:
+		return "ScannerDocumentType4A0"
+	case ScannerDocumentType2A0:
+		return "ScannerDocumentType2A0"
+	case ScannerDocumentTypeA0:
+		return "ScannerDocumentTypeA0"
+	case ScannerDocumentTypeA1:
+		return "ScannerDocumentTypeA1"
+	case ScannerDocumentTypeA2:
+		return "ScannerDocumentTypeA2"
+	case ScannerDocumentTypeA7:
+		return "ScannerDocumentTypeA7"
+	case ScannerDocumentTypeA8:
+		return "ScannerDocumentTypeA8"
+	case ScannerDocumentTypeA9:
+		return "ScannerDocumentTypeA9"
+	case ScannerDocumentType10:
+		return "ScannerDocumentType10"
+	case ScannerDocumentTypeISOB0:
+		return "ScannerDocumentTypeISOB0"
+	case ScannerDocumentTypeISOB1:
+		return "ScannerDocumentTypeISOB1"
+	case ScannerDocumentTypeISOB2:
+		return "ScannerDocumentTypeISOB2"
+	case ScannerDocumentTypeISOB5:
+		return "ScannerDocumentTypeISOB5"
+	case ScannerDocumentTypeISOB7:
+		return "ScannerDocumentTypeISOB7"
+	case ScannerDocumentTypeISOB8:
+		return "ScannerDocumentTypeISOB8"
+	case ScannerDocumentTypeISOB9:
+		return "ScannerDocumentTypeISOB9"
+	case ScannerDocumentTypeISOB10:
+		return "ScannerDocumentTypeISOB10"
+	case ScannerDocumentTypeJISB0:
+		return "ScannerDocumentTypeJISB0"
+	case ScannerDocumentTypeJISB1:
+		return "ScannerDocumentTypeJISB1"
+	case ScannerDocumentTypeJISB2:
+		return "ScannerDocumentTypeJISB2"
+	case ScannerDocumentTypeJISB3:
+		return "ScannerDocumentTypeJISB3"
+	case ScannerDocumentTypeJISB4:
+		return "ScannerDocumentTypeJISB4"
+	case ScannerDocumentTypeJISB6:
+		return "ScannerDocumentTypeJISB6"
+	case ScannerDocumentTypeJISB7:
+		return "ScannerDocumentTypeJISB7"
+	case ScannerDocumentTypeJISB8:
+		return "ScannerDocumentTypeJISB8"
+	case ScannerDocumentTypeJISB9:
+		return "ScannerDocumentTypeJISB9"
+	case ScannerDocumentTypeJISB10:
+		return "ScannerDocumentTypeJISB10"
+	case ScannerDocumentTypeC0:
+		return "ScannerDocumentTypeC0"
+	case ScannerDocumentTypeC1:
+		return "ScannerDocumentTypeC1"
+	case ScannerDocumentTypeC2:
+		return "ScannerDocumentTypeC2"
+	case ScannerDocumentTypeC3:
+		return "ScannerDocumentTypeC3"
+	case ScannerDocumentTypeC7:
+		return "ScannerDocumentTypeC7"
+	case ScannerDocumentTypeC8:
+		return "ScannerDocumentTypeC8"
+	case ScannerDocumentTypeC9:
+		return "ScannerDocumentTypeC9"
+	case ScannerDocumentTypeC10:
+		return "ScannerDocumentTypeC10"
+	case ScannerDocumentTypeUSStatement:
+		return "ScannerDocumentTypeUSStatement"
+	case ScannerDocumentTypeBusinessCard:
+		return "ScannerDocumentTypeBusinessCard"
+	case ScannerDocumentTypeE:
+		return "ScannerDocumentTypeE"
+	case ScannerDocumentType3R:
+		return "ScannerDocumentType3R"
+	case ScannerDocumentType4R:
+		return "ScannerDocumentType4R"
+	case ScannerDocumentType5R:
+		return "ScannerDocumentType5R"
+	case ScannerDocumentType6R:
+		return "ScannerDocumentType6R"
+	case ScannerDocumentType8R:
+		return "ScannerDocumentType8R"
+	case ScannerDocumentTypeS8R:
+		return "ScannerDocumentTypeS8R"
+	case ScannerDocumentType10R:
+		return "ScannerDocumentType10R"
+	case ScannerDocumentTypeS10R:
+		return "ScannerDocumentTypeS10R"
+	case ScannerDocumentType11R:
+		return "ScannerDocumentType11R"
+	case ScannerDocumentType12R:
+		return "ScannerDocumentType12R"
+	case ScannerDocumentTypeS12R:
+		return "ScannerDocumentTypeS12R"
+	case ScannerDocumentType110:
+		return "ScannerDocumentType110"
+	case ScannerDocumentTypeAPSH:
+		return "ScannerDocumentTypeAPSH"
+	case ScannerDocumentTypeAPSC:
+		return "ScannerDocumentTypeAPSC"
+	case ScannerDocumentTypeAPSP:
+		return "ScannerDocumentTypeAPSP"
+	case ScannerDocumentType135:
+		return "ScannerDocumentType135"
+	case ScannerDocumentTypeMF:
+		return "ScannerDocumentTypeMF"
+	case ScannerDocumentTypeLF:
+		return "ScannerDocumentTypeLF"
 	default:
-		return fmt.Sprintf("ICScannerDocumentType(%d)", int64(e))
+		return fmt.Sprintf("ScannerDocumentType(%d)", int64(e))
 	}
 }
 
 // The types of scanner features.
-type ICScannerFeatureType uint64
+type ScannerFeatureType uint64
 
 const (
 	// A feature that can have one of several discrete values, strings, or numbers.
-	ICScannerFeatureTypeEnumeration ICScannerFeatureType = 0
+	ScannerFeatureTypeEnumeration ScannerFeatureType = 0
 	// A feature with a value that lies within a range.
-	ICScannerFeatureTypeRange ICScannerFeatureType = 1
+	ScannerFeatureTypeRange ScannerFeatureType = 1
 	// A feature with a value of YES or NO.
-	ICScannerFeatureTypeBoolean ICScannerFeatureType = 2
+	ScannerFeatureTypeBoolean ScannerFeatureType = 2
 	// A group of one or more rectangular scan areas that can be used with a scanner functional unit.
-	ICScannerFeatureTypeTemplate ICScannerFeatureType = 3
+	ScannerFeatureTypeTemplate ScannerFeatureType = 3
 )
 
-func (e ICScannerFeatureType) String() string {
+func (e ScannerFeatureType) String() string {
 	switch e {
-	case ICScannerFeatureTypeEnumeration:
-		return "ICScannerFeatureTypeEnumeration"
-	case ICScannerFeatureTypeRange:
-		return "ICScannerFeatureTypeRange"
-	case ICScannerFeatureTypeBoolean:
-		return "ICScannerFeatureTypeBoolean"
-	case ICScannerFeatureTypeTemplate:
-		return "ICScannerFeatureTypeTemplate"
+	case ScannerFeatureTypeEnumeration:
+		return "ScannerFeatureTypeEnumeration"
+	case ScannerFeatureTypeRange:
+		return "ScannerFeatureTypeRange"
+	case ScannerFeatureTypeBoolean:
+		return "ScannerFeatureTypeBoolean"
+	case ScannerFeatureTypeTemplate:
+		return "ScannerFeatureTypeTemplate"
 	default:
-		return fmt.Sprintf("ICScannerFeatureType(%d)", int64(e))
+		return fmt.Sprintf("ScannerFeatureType(%d)", int64(e))
 	}
 }
 
 // Flags to indicate the state of the scanner functional unit.
-type ICScannerFunctionalUnitState uint64
+type ScannerFunctionalUnitState uint64
 
 const (
 	// A flag indicating that the functional unit is ready for operation.
-	ICScannerFunctionalUnitStateReady ICScannerFunctionalUnitState = 1
+	ScannerFunctionalUnitStateReady ScannerFunctionalUnitState = 1
 	// A flag indicating that the functional unit is performing a scan.
-	ICScannerFunctionalUnitStateScanInProgress ICScannerFunctionalUnitState = 2
+	ScannerFunctionalUnitStateScanInProgress ScannerFunctionalUnitState = 2
 	// A flag indicating that the functional unit is performing an overview scan.
-	ICScannerFunctionalUnitStateOverviewScanInProgress ICScannerFunctionalUnitState = 4
+	ScannerFunctionalUnitStateOverviewScanInProgress ScannerFunctionalUnitState = 4
 )
 
-func (e ICScannerFunctionalUnitState) String() string {
+func (e ScannerFunctionalUnitState) String() string {
 	switch e {
-	case ICScannerFunctionalUnitStateReady:
-		return "ICScannerFunctionalUnitStateReady"
-	case ICScannerFunctionalUnitStateScanInProgress:
-		return "ICScannerFunctionalUnitStateScanInProgress"
-	case ICScannerFunctionalUnitStateOverviewScanInProgress:
-		return "ICScannerFunctionalUnitStateOverviewScanInProgress"
+	case ScannerFunctionalUnitStateReady:
+		return "ScannerFunctionalUnitStateReady"
+	case ScannerFunctionalUnitStateScanInProgress:
+		return "ScannerFunctionalUnitStateScanInProgress"
+	case ScannerFunctionalUnitStateOverviewScanInProgress:
+		return "ScannerFunctionalUnitStateOverviewScanInProgress"
 	default:
-		return fmt.Sprintf("ICScannerFunctionalUnitState(%d)", int64(e))
+		return fmt.Sprintf("ScannerFunctionalUnitState(%d)", int64(e))
 	}
 }
 
 // The types of scanner functional units.
-type ICScannerFunctionalUnitType uint64
+type ScannerFunctionalUnitType uint64
 
 const (
 	// A flatbed functional unit.
-	ICScannerFunctionalUnitTypeFlatbed ICScannerFunctionalUnitType = 0
+	ScannerFunctionalUnitTypeFlatbed ScannerFunctionalUnitType = 0
 	// A transparency functional unit for scanning positives.
-	ICScannerFunctionalUnitTypePositiveTransparency ICScannerFunctionalUnitType = 1
+	ScannerFunctionalUnitTypePositiveTransparency ScannerFunctionalUnitType = 1
 	// A transparency functional unit for scanning negatives.
-	ICScannerFunctionalUnitTypeNegativeTransparency ICScannerFunctionalUnitType = 2
+	ScannerFunctionalUnitTypeNegativeTransparency ScannerFunctionalUnitType = 2
 	// A document feeder functional unit.
-	ICScannerFunctionalUnitTypeDocumentFeeder ICScannerFunctionalUnitType = 3
+	ScannerFunctionalUnitTypeDocumentFeeder ScannerFunctionalUnitType = 3
 )
 
-func (e ICScannerFunctionalUnitType) String() string {
+func (e ScannerFunctionalUnitType) String() string {
 	switch e {
-	case ICScannerFunctionalUnitTypeFlatbed:
-		return "ICScannerFunctionalUnitTypeFlatbed"
-	case ICScannerFunctionalUnitTypePositiveTransparency:
-		return "ICScannerFunctionalUnitTypePositiveTransparency"
-	case ICScannerFunctionalUnitTypeNegativeTransparency:
-		return "ICScannerFunctionalUnitTypeNegativeTransparency"
-	case ICScannerFunctionalUnitTypeDocumentFeeder:
-		return "ICScannerFunctionalUnitTypeDocumentFeeder"
+	case ScannerFunctionalUnitTypeFlatbed:
+		return "ScannerFunctionalUnitTypeFlatbed"
+	case ScannerFunctionalUnitTypePositiveTransparency:
+		return "ScannerFunctionalUnitTypePositiveTransparency"
+	case ScannerFunctionalUnitTypeNegativeTransparency:
+		return "ScannerFunctionalUnitTypeNegativeTransparency"
+	case ScannerFunctionalUnitTypeDocumentFeeder:
+		return "ScannerFunctionalUnitTypeDocumentFeeder"
 	default:
-		return fmt.Sprintf("ICScannerFunctionalUnitType(%d)", int64(e))
+		return fmt.Sprintf("ScannerFunctionalUnitType(%d)", int64(e))
 	}
 }
 
 // The unit of measurement used by the scanner.
-type ICScannerMeasurementUnit uint64
+type ScannerMeasurementUnit uint64
 
 const (
-	ICScannerMeasurementUnitInches      ICScannerMeasurementUnit = 0
-	ICScannerMeasurementUnitCentimeters ICScannerMeasurementUnit = 1
-	ICScannerMeasurementUnitPicas       ICScannerMeasurementUnit = 2
-	ICScannerMeasurementUnitPoints      ICScannerMeasurementUnit = 3
-	ICScannerMeasurementUnitTwips       ICScannerMeasurementUnit = 4
-	ICScannerMeasurementUnitPixels      ICScannerMeasurementUnit = 5
+	ScannerMeasurementUnitInches      ScannerMeasurementUnit = 0
+	ScannerMeasurementUnitCentimeters ScannerMeasurementUnit = 1
+	ScannerMeasurementUnitPicas       ScannerMeasurementUnit = 2
+	ScannerMeasurementUnitPoints      ScannerMeasurementUnit = 3
+	ScannerMeasurementUnitTwips       ScannerMeasurementUnit = 4
+	ScannerMeasurementUnitPixels      ScannerMeasurementUnit = 5
 )
 
-func (e ICScannerMeasurementUnit) String() string {
+func (e ScannerMeasurementUnit) String() string {
 	switch e {
-	case ICScannerMeasurementUnitInches:
-		return "ICScannerMeasurementUnitInches"
-	case ICScannerMeasurementUnitCentimeters:
-		return "ICScannerMeasurementUnitCentimeters"
-	case ICScannerMeasurementUnitPicas:
-		return "ICScannerMeasurementUnitPicas"
-	case ICScannerMeasurementUnitPoints:
-		return "ICScannerMeasurementUnitPoints"
-	case ICScannerMeasurementUnitTwips:
-		return "ICScannerMeasurementUnitTwips"
-	case ICScannerMeasurementUnitPixels:
-		return "ICScannerMeasurementUnitPixels"
+	case ScannerMeasurementUnitInches:
+		return "ScannerMeasurementUnitInches"
+	case ScannerMeasurementUnitCentimeters:
+		return "ScannerMeasurementUnitCentimeters"
+	case ScannerMeasurementUnitPicas:
+		return "ScannerMeasurementUnitPicas"
+	case ScannerMeasurementUnitPoints:
+		return "ScannerMeasurementUnitPoints"
+	case ScannerMeasurementUnitTwips:
+		return "ScannerMeasurementUnitTwips"
+	case ScannerMeasurementUnitPixels:
+		return "ScannerMeasurementUnitPixels"
 	default:
-		return fmt.Sprintf("ICScannerMeasurementUnit(%d)", int64(e))
+		return fmt.Sprintf("ScannerMeasurementUnit(%d)", int64(e))
 	}
 }
 
 // The pixel data types.
-type ICScannerPixelDataType uint64
+type ScannerPixelDataType uint64
 
 const (
-	ICScannerPixelDataTypeBW      ICScannerPixelDataType = 0
-	ICScannerPixelDataTypeGray    ICScannerPixelDataType = 1
-	ICScannerPixelDataTypeRGB     ICScannerPixelDataType = 2
-	ICScannerPixelDataTypePalette ICScannerPixelDataType = 3
-	ICScannerPixelDataTypeCMY     ICScannerPixelDataType = 4
-	ICScannerPixelDataTypeCMYK    ICScannerPixelDataType = 5
-	ICScannerPixelDataTypeYUV     ICScannerPixelDataType = 6
-	ICScannerPixelDataTypeYUVK    ICScannerPixelDataType = 7
-	ICScannerPixelDataTypeCIEXYZ  ICScannerPixelDataType = 8
+	ScannerPixelDataTypeBW      ScannerPixelDataType = 0
+	ScannerPixelDataTypeGray    ScannerPixelDataType = 1
+	ScannerPixelDataTypeRGB     ScannerPixelDataType = 2
+	ScannerPixelDataTypePalette ScannerPixelDataType = 3
+	ScannerPixelDataTypeCMY     ScannerPixelDataType = 4
+	ScannerPixelDataTypeCMYK    ScannerPixelDataType = 5
+	ScannerPixelDataTypeYUV     ScannerPixelDataType = 6
+	ScannerPixelDataTypeYUVK    ScannerPixelDataType = 7
+	ScannerPixelDataTypeCIEXYZ  ScannerPixelDataType = 8
 )
 
-func (e ICScannerPixelDataType) String() string {
+func (e ScannerPixelDataType) String() string {
 	switch e {
-	case ICScannerPixelDataTypeBW:
-		return "ICScannerPixelDataTypeBW"
-	case ICScannerPixelDataTypeGray:
-		return "ICScannerPixelDataTypeGray"
-	case ICScannerPixelDataTypeRGB:
-		return "ICScannerPixelDataTypeRGB"
-	case ICScannerPixelDataTypePalette:
-		return "ICScannerPixelDataTypePalette"
-	case ICScannerPixelDataTypeCMY:
-		return "ICScannerPixelDataTypeCMY"
-	case ICScannerPixelDataTypeCMYK:
-		return "ICScannerPixelDataTypeCMYK"
-	case ICScannerPixelDataTypeYUV:
-		return "ICScannerPixelDataTypeYUV"
-	case ICScannerPixelDataTypeYUVK:
-		return "ICScannerPixelDataTypeYUVK"
-	case ICScannerPixelDataTypeCIEXYZ:
-		return "ICScannerPixelDataTypeCIEXYZ"
+	case ScannerPixelDataTypeBW:
+		return "ScannerPixelDataTypeBW"
+	case ScannerPixelDataTypeGray:
+		return "ScannerPixelDataTypeGray"
+	case ScannerPixelDataTypeRGB:
+		return "ScannerPixelDataTypeRGB"
+	case ScannerPixelDataTypePalette:
+		return "ScannerPixelDataTypePalette"
+	case ScannerPixelDataTypeCMY:
+		return "ScannerPixelDataTypeCMY"
+	case ScannerPixelDataTypeCMYK:
+		return "ScannerPixelDataTypeCMYK"
+	case ScannerPixelDataTypeYUV:
+		return "ScannerPixelDataTypeYUV"
+	case ScannerPixelDataTypeYUVK:
+		return "ScannerPixelDataTypeYUVK"
+	case ScannerPixelDataTypeCIEXYZ:
+		return "ScannerPixelDataTypeCIEXYZ"
 	default:
-		return fmt.Sprintf("ICScannerPixelDataType(%d)", int64(e))
+		return fmt.Sprintf("ScannerPixelDataType(%d)", int64(e))
 	}
 }
 
 // The modes for transferring scan data from the scanner functional unit.
-type ICScannerTransferMode uint64
+type ScannerTransferMode uint64
 
 const (
 	// The mode for transferring the scan as a file.
-	ICScannerTransferModeFileBased ICScannerTransferMode = 0
+	ScannerTransferModeFileBased ScannerTransferMode = 0
 	// The mode for transferring the scan as data.
-	ICScannerTransferModeMemoryBased ICScannerTransferMode = 1
+	ScannerTransferModeMemoryBased ScannerTransferMode = 1
 )
 
-func (e ICScannerTransferMode) String() string {
+func (e ScannerTransferMode) String() string {
 	switch e {
-	case ICScannerTransferModeFileBased:
-		return "ICScannerTransferModeFileBased"
-	case ICScannerTransferModeMemoryBased:
-		return "ICScannerTransferModeMemoryBased"
+	case ScannerTransferModeFileBased:
+		return "ScannerTransferModeFileBased"
+	case ScannerTransferModeMemoryBased:
+		return "ScannerTransferModeMemoryBased"
 	default:
-		return fmt.Sprintf("ICScannerTransferMode(%d)", int64(e))
+		return fmt.Sprintf("ScannerTransferMode(%d)", int64(e))
 	}
 }

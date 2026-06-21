@@ -5,50 +5,73 @@
 package mediaplayer
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An event requesting a change in the current skip interval.
 //
-// SkipIntervalCommandEvent wraps [raw.MPSkipIntervalCommandEvent] with a fluent Go API.
+// SkipIntervalCommandEvent is an idiomatic wrapper over the Objective-C class MPSkipIntervalCommandEvent.
 type SkipIntervalCommandEvent struct {
-	inner *raw.MPSkipIntervalCommandEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSkipIntervalCommandEvent].
-func (x *SkipIntervalCommandEvent) Unwrap() *raw.MPSkipIntervalCommandEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SkipIntervalCommandEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// SkipIntervalCommandEventFromID adopts an existing object pointer as a SkipIntervalCommandEvent (nil for 0).
+// SkipIntervalCommandEventFromID adopts an existing Objective-C object as a SkipIntervalCommandEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func SkipIntervalCommandEventFromID(id objc.ID) *SkipIntervalCommandEvent {
 	if id == 0 {
 		return nil
 	}
-	return &SkipIntervalCommandEvent{inner: raw.MPSkipIntervalCommandEventFromID(id)}
+	x := &SkipIntervalCommandEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSkipIntervalCommandEvent creates a new [SkipIntervalCommandEvent].
+// skipIntervalCommandEventAdopt wraps an Objective-C object that this code just created as a
+// SkipIntervalCommandEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func skipIntervalCommandEventAdopt(id objc.ID) *SkipIntervalCommandEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &SkipIntervalCommandEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SkipIntervalCommandEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SkipIntervalCommandEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SkipIntervalCommandEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSkipIntervalCommandEvent creates a new SkipIntervalCommandEvent.
 func NewSkipIntervalCommandEvent() *SkipIntervalCommandEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSkipIntervalCommandEvent")), objc.RegisterName("new"))
-	return &SkipIntervalCommandEvent{inner: raw.MPSkipIntervalCommandEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSkipIntervalCommandEvent")), objc.RegisterName("new"))
+	return skipIntervalCommandEventAdopt(_id)
 }
 
-// Interval calls the underlying Interval.
 func (x *SkipIntervalCommandEvent) Interval() float64 {
-	return x.inner.Interval()
-}
-
-func (x *SkipIntervalCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent {
-	return &x.inner.MPRemoteCommandEvent
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("interval"))
+	return _r
 }
 
 // SkipIntervalCommandEventable is the interface implemented by [SkipIntervalCommandEvent], for mocking and DI.
 type SkipIntervalCommandEventable interface {
-	Unwrap() *raw.MPSkipIntervalCommandEvent
+	obj.Object
 	Interval() float64
 }
 

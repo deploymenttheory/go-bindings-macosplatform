@@ -5,131 +5,77 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A kernel that computes the mean for a given region of an image.
 //
-// ImageStatisticsMean wraps [raw.MPSImageStatisticsMean] with a fluent Go API.
+// ImageStatisticsMean is an idiomatic wrapper over the Objective-C class MPSImageStatisticsMean.
 type ImageStatisticsMean struct {
-	inner *raw.MPSImageStatisticsMean
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageStatisticsMean].
-func (x *ImageStatisticsMean) Unwrap() *raw.MPSImageStatisticsMean { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageStatisticsMean) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageStatisticsMeanFromID adopts an existing object pointer as a ImageStatisticsMean (nil for 0).
+// ImageStatisticsMeanFromID adopts an existing Objective-C object as a ImageStatisticsMean
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageStatisticsMeanFromID(id objc.ID) *ImageStatisticsMean {
 	if id == 0 {
 		return nil
 	}
-	return &ImageStatisticsMean{inner: raw.MPSImageStatisticsMeanFromID(id)}
-}
-
-// NewImageStatisticsMeanWithDevice creates a new [ImageStatisticsMean].
-func NewImageStatisticsMeanWithDevice(device metal.MTLDevice) *ImageStatisticsMean {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageStatisticsMean")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ImageStatisticsMean{inner: raw.MPSImageStatisticsMeanFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewImageStatisticsMeanWithCoderDevice creates a new [ImageStatisticsMean].
-func NewImageStatisticsMeanWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageStatisticsMean {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageStatisticsMean")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageStatisticsMean{inner: raw.MPSImageStatisticsMeanFromID(_id)}
-}
-
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the mean value is written.
-//
-// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
-func (x *ImageStatisticsMean) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMean {
-	x.inner.SetClipRectSource(clipRectSource)
+	x := &ImageStatisticsMean{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageStatisticsMean) WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMean {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+// imageStatisticsMeanAdopt wraps an Objective-C object that this code just created as a
+// ImageStatisticsMean (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageStatisticsMeanAdopt(id objc.ID) *ImageStatisticsMean {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageStatisticsMean{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageStatisticsMean) WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMean {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
-	return x
+// Description returns the object's -description text.
+func (x *ImageStatisticsMean) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageStatisticsMean) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageStatisticsMean {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageStatisticsMean) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageStatisticsMean) WithOptions(options mpscore.MPSKernelOptions) *ImageStatisticsMean {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageStatisticsMean) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageStatisticsMean creates a new ImageStatisticsMean.
+func NewImageStatisticsMean() *ImageStatisticsMean {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageStatisticsMean")), objc.RegisterName("new"))
+	return imageStatisticsMeanAdopt(_id)
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ImageStatisticsMean) WithLabel(label string) *ImageStatisticsMean {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the mean value is written.
-//
-// ClipRectSource calls the underlying ClipRectSource.
-func (x *ImageStatisticsMean) ClipRectSource() metal.MTLRegion {
-	return x.inner.ClipRectSource()
-}
-
-// SetClipRectSource calls the underlying SetClipRectSource.
-func (x *ImageStatisticsMean) SetClipRectSource(clipRectSource metal.MTLRegion) {
-	x.inner.SetClipRectSource(clipRectSource)
-}
-
-func (x *ImageStatisticsMean) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
-}
-
-func (x *ImageStatisticsMean) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSUnaryImageKernel.MPSKernel
 }
 
 // ImageStatisticsMeanable is the interface implemented by [ImageStatisticsMean], for mocking and DI.
 type ImageStatisticsMeanable interface {
-	Unwrap() *raw.MPSImageStatisticsMean
-	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMean
-	WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMean
-	WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMean
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageStatisticsMean
-	WithOptions(options mpscore.MPSKernelOptions) *ImageStatisticsMean
+	obj.Object
 	WithLabel(label string) *ImageStatisticsMean
-	ClipRectSource() metal.MTLRegion
-	SetClipRectSource(clipRectSource metal.MTLRegion)
 }
 
 var _ ImageStatisticsMeanable = (*ImageStatisticsMean)(nil)

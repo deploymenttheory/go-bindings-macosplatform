@@ -5,67 +5,82 @@
 package mediaplayer
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An event requesting a change in the language option.
 //
-// ChangeLanguageOptionCommandEvent wraps [raw.MPChangeLanguageOptionCommandEvent] with a fluent Go API.
+// ChangeLanguageOptionCommandEvent is an idiomatic wrapper over the Objective-C class MPChangeLanguageOptionCommandEvent.
 type ChangeLanguageOptionCommandEvent struct {
-	inner *raw.MPChangeLanguageOptionCommandEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPChangeLanguageOptionCommandEvent].
-func (x *ChangeLanguageOptionCommandEvent) Unwrap() *raw.MPChangeLanguageOptionCommandEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChangeLanguageOptionCommandEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangeLanguageOptionCommandEventFromID adopts an existing object pointer as a ChangeLanguageOptionCommandEvent (nil for 0).
+// ChangeLanguageOptionCommandEventFromID adopts an existing Objective-C object as a ChangeLanguageOptionCommandEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangeLanguageOptionCommandEventFromID(id objc.ID) *ChangeLanguageOptionCommandEvent {
 	if id == 0 {
 		return nil
 	}
-	return &ChangeLanguageOptionCommandEvent{inner: raw.MPChangeLanguageOptionCommandEventFromID(id)}
+	x := &ChangeLanguageOptionCommandEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewChangeLanguageOptionCommandEvent creates a new [ChangeLanguageOptionCommandEvent].
+// changeLanguageOptionCommandEventAdopt wraps an Objective-C object that this code just created as a
+// ChangeLanguageOptionCommandEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changeLanguageOptionCommandEventAdopt(id objc.ID) *ChangeLanguageOptionCommandEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &ChangeLanguageOptionCommandEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ChangeLanguageOptionCommandEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ChangeLanguageOptionCommandEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ChangeLanguageOptionCommandEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewChangeLanguageOptionCommandEvent creates a new ChangeLanguageOptionCommandEvent.
 func NewChangeLanguageOptionCommandEvent() *ChangeLanguageOptionCommandEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPChangeLanguageOptionCommandEvent")), objc.RegisterName("new"))
-	return &ChangeLanguageOptionCommandEvent{inner: raw.MPChangeLanguageOptionCommandEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPChangeLanguageOptionCommandEvent")), objc.RegisterName("new"))
+	return changeLanguageOptionCommandEventAdopt(_id)
 }
 
 // The requested language option to change. The supplied language option may be the Automatic Legible Language Option which would mean that best legible language option based on user preferences is being requested. See MPNowPlayingInfoLanguageOption isAutomaticLegibleLanguageOption
-//
-// LanguageOption calls the underlying LanguageOption.
 func (x *ChangeLanguageOptionCommandEvent) LanguageOption() *NowPlayingInfoLanguageOption {
-	_r := x.inner.LanguageOption()
-	if _r == nil {
-		return nil
-	}
-	return &NowPlayingInfoLanguageOption{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageOption"))
+	return NowPlayingInfoLanguageOptionFromID(_r)
 }
 
 // Describes the extent of the changed language option
-//
-// Setting calls the underlying Setting.
-func (x *ChangeLanguageOptionCommandEvent) Setting() MPChangeLanguageOptionSetting {
-	return MPChangeLanguageOptionSetting(x.inner.Setting())
-}
-
-func (x *ChangeLanguageOptionCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent {
-	return &x.inner.MPRemoteCommandEvent
+func (x *ChangeLanguageOptionCommandEvent) Setting() ChangeLanguageOptionSetting {
+	_r := objc.Send[ChangeLanguageOptionSetting](objref.IDOf(x), objc.RegisterName("setting"))
+	return _r
 }
 
 // ChangeLanguageOptionCommandEventable is the interface implemented by [ChangeLanguageOptionCommandEvent], for mocking and DI.
 type ChangeLanguageOptionCommandEventable interface {
-	Unwrap() *raw.MPChangeLanguageOptionCommandEvent
+	obj.Object
 	LanguageOption() *NowPlayingInfoLanguageOption
-	Setting() MPChangeLanguageOptionSetting
+	Setting() ChangeLanguageOptionSetting
 }
 
 var _ ChangeLanguageOptionCommandEventable = (*ChangeLanguageOptionCommandEvent)(nil)

@@ -5,129 +5,111 @@
 package pencilkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A structure that represents the properties of a specific point along a stroke’s path.
 //
-// StrokePoint wraps [raw.PKStrokePoint] with a fluent Go API.
+// StrokePoint is an idiomatic wrapper over the Objective-C class PKStrokePoint.
 type StrokePoint struct {
-	inner *raw.PKStrokePoint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKStrokePoint].
-func (x *StrokePoint) Unwrap() *raw.PKStrokePoint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StrokePoint) ID() objc.ID { return x.inner.Ptr() }
-
-// StrokePointFromID adopts an existing object pointer as a StrokePoint (nil for 0).
+// StrokePointFromID adopts an existing Objective-C object as a StrokePoint
+// (nil for 0), retaining it and registering a release finalizer.
 func StrokePointFromID(id objc.ID) *StrokePoint {
 	if id == 0 {
 		return nil
 	}
-	return &StrokePoint{inner: raw.PKStrokePointFromID(id)}
+	x := &StrokePoint{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Create a new point with the provided properties.
-//
-// NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude creates a new [StrokePoint].
-func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64) *StrokePoint {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKStrokePoint")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:"), location, timeOffset, size, opacity, force, azimuth, altitude)
-	return &StrokePoint{inner: raw.PKStrokePointFromID(_id)}
+// strokePointAdopt wraps an Objective-C object that this code just created as a
+// StrokePoint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func strokePointAdopt(id objc.ID) *StrokePoint {
+	if id == 0 {
+		return nil
+	}
+	x := &StrokePoint{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Create a new point with the provided properties.
-//
-// NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScale creates a new [StrokePoint].
-func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScale(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64, secondaryScale float64) *StrokePoint {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKStrokePoint")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:secondaryScale:"), location, timeOffset, size, opacity, force, azimuth, altitude, secondaryScale)
-	return &StrokePoint{inner: raw.PKStrokePointFromID(_id)}
+// Description returns the object's -description text.
+func (x *StrokePoint) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Create a new point with the provided properties.
-//
-// NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThreshold creates a new [StrokePoint].
-func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondaryScaleThreshold(location corefoundation.CGPoint, timeOffset float64, size corefoundation.CGSize, opacity float64, force float64, azimuth float64, altitude float64, secondaryScale float64, threshold float64) *StrokePoint {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKStrokePoint")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:timeOffset:size:opacity:force:azimuth:altitude:secondaryScale:threshold:"), location, timeOffset, size, opacity, force, azimuth, altitude, secondaryScale, threshold)
-	return &StrokePoint{inner: raw.PKStrokePointFromID(_id)}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StrokePoint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Location of the point.
-//
-// Location calls the underlying Location.
-func (x *StrokePoint) Location() corefoundation.CGPoint {
-	return x.inner.Location()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StrokePoint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewStrokePoint creates a new StrokePoint.
+func NewStrokePoint() *StrokePoint {
+	_id := objc.Send[objc.ID](objc.ID(_class("PKStrokePoint")), objc.RegisterName("new"))
+	return strokePointAdopt(_id)
 }
 
 // Time offset since the start of the stroke path in seconds.
-//
-// TimeOffset calls the underlying TimeOffset.
 func (x *StrokePoint) TimeOffset() float64 {
-	return x.inner.TimeOffset()
-}
-
-// Size of the point.
-//
-// Size calls the underlying Size.
-func (x *StrokePoint) Size() corefoundation.CGSize {
-	return x.inner.Size()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeOffset"))
+	return _r
 }
 
 // Opacity of the point 0-2.
-//
-// Opacity calls the underlying Opacity.
 func (x *StrokePoint) Opacity() float64 {
-	return x.inner.Opacity()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("opacity"))
+	return _r
 }
 
 // Azimuth of the point in radians, 0.0-2π radians
-//
-// Azimuth calls the underlying Azimuth.
 func (x *StrokePoint) Azimuth() float64 {
-	return x.inner.Azimuth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("azimuth"))
+	return _r
 }
 
 // Force used to create this point.
-//
-// Force calls the underlying Force.
 func (x *StrokePoint) Force() float64 {
-	return x.inner.Force()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("force"))
+	return _r
 }
 
 // Altitude used to create this point in radians, 0.0-π/2 radians
-//
-// Altitude calls the underlying Altitude.
 func (x *StrokePoint) Altitude() float64 {
-	return x.inner.Altitude()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("altitude"))
+	return _r
 }
 
 // The scaling of the point for secondary effects. For example the scaling of the pigment in the watercolor ink.
-//
-// SecondaryScale calls the underlying SecondaryScale.
 func (x *StrokePoint) SecondaryScale() float64 {
-	return x.inner.SecondaryScale()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("secondaryScale"))
+	return _r
 }
 
 // The threshold for clipping the stroke rendering. When rendering only pixels with an alpha greater than the threshold are drawn. A threshold of 0 has no affect on rendering, a threshold of 1 does not draw anything. Thresholds are only used for some inks, eg. `PKInkIdentifierReed`.
-//
-// Threshold calls the underlying Threshold.
 func (x *StrokePoint) Threshold() float64 {
-	return x.inner.Threshold()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("threshold"))
+	return _r
 }
 
 // StrokePointable is the interface implemented by [StrokePoint], for mocking and DI.
 type StrokePointable interface {
-	Unwrap() *raw.PKStrokePoint
-	Location() corefoundation.CGPoint
+	obj.Object
 	TimeOffset() float64
-	Size() corefoundation.CGSize
 	Opacity() float64
 	Azimuth() float64
 	Force() float64

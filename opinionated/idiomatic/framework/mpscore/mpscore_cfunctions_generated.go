@@ -5,88 +5,53 @@
 package mpscore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MPSDataTypeBitsCount calls [raw.MPSDataTypeBitsCount] (C function MPSDataTypeBitsCount).
-func MPSDataTypeBitsCount(t MPSDataType) uint {
-	return raw.MPSDataTypeBitsCount(raw.MPSDataType(t))
+var _fnMPSDataTypeBitsCount func(DataType) int
+
+// MPSDataTypeBitsCount calls the MPSCore framework function MPSDataTypeBitsCount.
+func MPSDataTypeBitsCount(t DataType) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSDataTypeBitsCount == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSDataTypeBitsCount, _lib, "MPSDataTypeBitsCount")
+	}
+	return _fnMPSDataTypeBitsCount(t)
 }
 
-// MPSFindIntegerDivisionParams calls [raw.MPSFindIntegerDivisionParams] (C function MPSFindIntegerDivisionParams).
-func MPSFindIntegerDivisionParams(divisor uint16) raw.MPSIntegerDivisionParams {
-	return raw.MPSFindIntegerDivisionParams(divisor)
+var _fnMPSGetImageType func(objc.ID) objc.ID
+
+// MPSGetImageType calls the MPSCore framework function MPSGetImageType.
+func MPSGetImageType(image *Image) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSGetImageType == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSGetImageType, _lib, "MPSGetImageType")
+	}
+	_ret := _fnMPSGetImageType(objref.IDOf(image))
+	return obj.Wrap(_ret)
 }
 
-// MPSGetCustomKernelBatchedDestinationIndex calls [raw.MPSGetCustomKernelBatchedDestinationIndex] (C function MPSGetCustomKernelBatchedDestinationIndex).
-func MPSGetCustomKernelBatchedDestinationIndex(c raw.MPSCustomKernelArgumentCount) uint {
-	return raw.MPSGetCustomKernelBatchedDestinationIndex(c)
+var _fnMPSSizeofMPSDataType func(DataType) int
+
+// MPSSizeofMPSDataType calls the MPSCore framework function MPSSizeofMPSDataType.
+func MPSSizeofMPSDataType(t DataType) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSSizeofMPSDataType == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSSizeofMPSDataType, _lib, "MPSSizeofMPSDataType")
+	}
+	return _fnMPSSizeofMPSDataType(t)
 }
 
-// MPSGetCustomKernelBatchedSourceIndex calls [raw.MPSGetCustomKernelBatchedSourceIndex] (C function MPSGetCustomKernelBatchedSourceIndex).
-func MPSGetCustomKernelBatchedSourceIndex(c raw.MPSCustomKernelArgumentCount, sourceIndex uint, mPSMaxTextures uint) uint {
-	return raw.MPSGetCustomKernelBatchedSourceIndex(c, sourceIndex, mPSMaxTextures)
-}
+var _fnBuiltinClz func(int) int
 
-// MPSGetCustomKernelBroadcastSourceIndex calls [raw.MPSGetCustomKernelBroadcastSourceIndex] (C function MPSGetCustomKernelBroadcastSourceIndex).
-func MPSGetCustomKernelBroadcastSourceIndex(c raw.MPSCustomKernelArgumentCount, sourceIndex uint, mPSMaxTextures uint) uint {
-	return raw.MPSGetCustomKernelBroadcastSourceIndex(c, sourceIndex, mPSMaxTextures)
-}
-
-// MPSGetCustomKernelMaxBatchSize calls [raw.MPSGetCustomKernelMaxBatchSize] (C function MPSGetCustomKernelMaxBatchSize).
-func MPSGetCustomKernelMaxBatchSize(c raw.MPSCustomKernelArgumentCount, mPSMaxTextures uint) uint {
-	return raw.MPSGetCustomKernelMaxBatchSize(c, mPSMaxTextures)
-}
-
-// MPSGetImageType calls [raw.MPSGetImageType] (C function MPSGetImageType).
-func MPSGetImageType(image *raw.MPSImage) objc.ID {
-	return raw.MPSGetImageType(image)
-}
-
-// MPSImageBatchIncrementReadCount calls [raw.MPSImageBatchIncrementReadCount] (C function MPSImageBatchIncrementReadCount).
-func MPSImageBatchIncrementReadCount(batch unsafe.Pointer, amount int) uint {
-	return raw.MPSImageBatchIncrementReadCount(batch, amount)
-}
-
-// MPSImageBatchIterate calls [raw.MPSImageBatchIterate] (C function MPSImageBatchIterate).
-func MPSImageBatchIterate(batch unsafe.Pointer, iteratorBlock func(*raw.MPSImage, uint) int) int {
-	return raw.MPSImageBatchIterate(batch, iteratorBlock)
-}
-
-// MPSImageBatchResourceSize calls [raw.MPSImageBatchResourceSize] (C function MPSImageBatchResourceSize).
-func MPSImageBatchResourceSize(batch unsafe.Pointer) uint {
-	return raw.MPSImageBatchResourceSize(batch)
-}
-
-// MPSImageBatchSynchronize calls [raw.MPSImageBatchSynchronize] (C function MPSImageBatchSynchronize).
-func MPSImageBatchSynchronize(batch unsafe.Pointer, cmdBuf metal.MTLCommandBuffer) {
-	raw.MPSImageBatchSynchronize(batch, cmdBuf)
-}
-
-// MPSSizeofMPSDataType calls [raw.MPSSizeofMPSDataType] (C function MPSSizeofMPSDataType).
-func MPSSizeofMPSDataType(t MPSDataType) uint {
-	return raw.MPSSizeofMPSDataType(raw.MPSDataType(t))
-}
-
-// MPSStateBatchIncrementReadCount calls [raw.MPSStateBatchIncrementReadCount] (C function MPSStateBatchIncrementReadCount).
-func MPSStateBatchIncrementReadCount(batch unsafe.Pointer, amount int) uint {
-	return raw.MPSStateBatchIncrementReadCount(batch, amount)
-}
-
-// MPSStateBatchResourceSize calls [raw.MPSStateBatchResourceSize] (C function MPSStateBatchResourceSize).
-func MPSStateBatchResourceSize(batch unsafe.Pointer) uint {
-	return raw.MPSStateBatchResourceSize(batch)
-}
-
-// MPSStateBatchSynchronize calls [raw.MPSStateBatchSynchronize] (C function MPSStateBatchSynchronize).
-func MPSStateBatchSynchronize(batch unsafe.Pointer, cmdBuf metal.MTLCommandBuffer) {
-	raw.MPSStateBatchSynchronize(batch, cmdBuf)
-}
-
-// BuiltinClz calls [raw.BuiltinClz] (C function __builtin_clz).
-func BuiltinClz(arg uint) int {
-	return raw.BuiltinClz(arg)
+// BuiltinClz calls the MPSCore framework function __builtin_clz.
+func BuiltinClz(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnBuiltinClz == nil {
+		ebipurego.RegisterLibFunc(&_fnBuiltinClz, _lib, "__builtin_clz")
+	}
+	return _fnBuiltinClz(arg)
 }

@@ -5,533 +5,442 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A view that displays OpenGL content in a view.
 //
-// OpenGLView wraps [raw.NSOpenGLView] with a fluent Go API.
+// OpenGLView is an idiomatic wrapper over the Objective-C class NSOpenGLView.
 type OpenGLView struct {
-	inner *raw.NSOpenGLView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSOpenGLView].
-func (x *OpenGLView) Unwrap() *raw.NSOpenGLView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OpenGLView) ID() objc.ID { return x.inner.Ptr() }
-
-// OpenGLViewFromID adopts an existing object pointer as a OpenGLView (nil for 0).
+// OpenGLViewFromID adopts an existing Objective-C object as a OpenGLView
+// (nil for 0), retaining it and registering a release finalizer.
 func OpenGLViewFromID(id objc.ID) *OpenGLView {
 	if id == 0 {
 		return nil
 	}
-	return &OpenGLView{inner: raw.NSOpenGLViewFromID(id)}
+	x := &OpenGLView{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Returns an NSOpenGLView object initialized with the specified frame rectangle and pixel format.
-//
-// NewOpenGLViewWithFramePixelFormat creates a new [OpenGLView].
-func NewOpenGLViewWithFramePixelFormat(frameRect corefoundation.CGRect, format *raw.NSOpenGLPixelFormat) *OpenGLView {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOpenGLView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:pixelFormat:"), frameRect, format.Ptr())
-	return &OpenGLView{inner: raw.NSOpenGLViewFromID(_id)}
+// openGLViewAdopt wraps an Objective-C object that this code just created as a
+// OpenGLView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func openGLViewAdopt(id objc.ID) *OpenGLView {
+	if id == 0 {
+		return nil
+	}
+	x := &OpenGLView{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *OpenGLView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *OpenGLView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *OpenGLView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewOpenGLView creates a new OpenGLView.
+func NewOpenGLView() *OpenGLView {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSOpenGLView")), objc.RegisterName("new"))
+	return openGLViewAdopt(_id)
 }
 
 // The NSOpenGLContext object associated with the receiver.
 //
-// WithOpenGLContext sets the openGLContext property and returns the receiver for chaining.
+// WithOpenGLContext sets openGLContext and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithOpenGLContext(openGLContext *OpenGLContext) *OpenGLView {
-	x.inner.SetOpenGLContext(openGLContext.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpenGLContext:"), objref.IDOf(openGLContext))
 	return x
 }
 
 // The NSOpenGLPixelFormat object associated with the receiver.
 //
-// WithPixelFormat sets the pixelFormat property and returns the receiver for chaining.
+// WithPixelFormat sets pixelFormat and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithPixelFormat(pixelFormat *OpenGLPixelFormat) *OpenGLView {
-	x.inner.SetPixelFormat(pixelFormat.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelFormat:"), objref.IDOf(pixelFormat))
 	return x
 }
 
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
+// WithSubviews sets the collection and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithSubviews(items ...ViewProvider) *OpenGLView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetSubviews(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithHidden(hidden bool) *OpenGLView {
-	x.inner.NSView.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+// WithPostsFrameChangedNotifications sets postsFrameChangedNotifications and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *OpenGLView {
-	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+// WithAutoresizesSubviews sets autoresizesSubviews and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithAutoresizesSubviews(autoresizesSubviews bool) *OpenGLView {
-	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *OpenGLView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *OpenGLView {
-	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
+// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+func (x *OpenGLView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *OpenGLView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
-func (x *OpenGLView) WithFrame(frame corefoundation.CGRect) *OpenGLView {
-	x.inner.NSView.SetFrame(frame)
-	return x
-}
-
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+// WithFrameRotation sets frameRotation and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithFrameRotation(frameRotation float64) *OpenGLView {
-	x.inner.NSView.SetFrameRotation(frameRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+// WithFrameCenterRotation sets frameCenterRotation and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithFrameCenterRotation(frameCenterRotation float64) *OpenGLView {
-	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+// WithBoundsRotation sets boundsRotation and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithBoundsRotation(boundsRotation float64) *OpenGLView {
-	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *OpenGLView) WithBounds(bounds corefoundation.CGRect) *OpenGLView {
-	x.inner.NSView.SetBounds(bounds)
-	return x
-}
-
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+// WithCanDrawConcurrently sets canDrawConcurrently and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithCanDrawConcurrently(canDrawConcurrently bool) *OpenGLView {
-	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
 // A Boolean value that determines whether the view needs to be redrawn before being displayed.
 //
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+// WithNeedsDisplay sets needsDisplay and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithNeedsDisplay(needsDisplay bool) *OpenGLView {
-	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+// WithAcceptsTouchEvents sets acceptsTouchEvents and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *OpenGLView {
-	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+// WithWantsRestingTouches sets wantsRestingTouches and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithWantsRestingTouches(wantsRestingTouches bool) *OpenGLView {
-	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *OpenGLView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *OpenGLView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
+// WithLayerContentsRedrawPolicy sets layerContentsRedrawPolicy and returns the receiver so calls can be chained.
+func (x *OpenGLView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *OpenGLView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *OpenGLView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *OpenGLView {
-	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
+// WithLayerContentsPlacement sets layerContentsPlacement and returns the receiver so calls can be chained.
+func (x *OpenGLView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *OpenGLView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+// WithWantsLayer sets wantsLayer and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithWantsLayer(wantsLayer bool) *OpenGLView {
-	x.inner.NSView.SetWantsLayer(wantsLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *OpenGLView) WithLayer(layer *quartzcore.CALayer) *OpenGLView {
-	x.inner.NSView.SetLayer(layer)
+// WithLayer sets layer and returns the receiver so calls can be chained.
+func (x *OpenGLView) WithLayer(layer obj.Object) *OpenGLView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+// WithCanDrawSubviewsIntoLayer sets canDrawSubviewsIntoLayer and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *OpenGLView {
-	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+// WithNeedsLayout sets needsLayout and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithNeedsLayout(needsLayout bool) *OpenGLView {
-	x.inner.NSView.SetNeedsLayout(needsLayout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithAlphaValue(alphaValue float64) *OpenGLView {
-	x.inner.NSView.SetAlphaValue(alphaValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+// WithLayerUsesCoreImageFilters sets layerUsesCoreImageFilters and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *OpenGLView {
-	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *OpenGLView) WithBackgroundFilters(items ...*coreimage.CIFilter) *OpenGLView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetBackgroundFilters(_arr)
+// WithBackgroundFilters sets the collection and returns the receiver so calls can be chained.
+func (x *OpenGLView) WithBackgroundFilters(items ...obj.Object) *OpenGLView {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *OpenGLView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *OpenGLView {
-	x.inner.NSView.SetCompositingFilter(compositingFilter)
+// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+func (x *OpenGLView) WithCompositingFilter(compositingFilter obj.Object) *OpenGLView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *OpenGLView) WithContentFilters(items ...*coreimage.CIFilter) *OpenGLView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetContentFilters(_arr)
+// WithContentFilters sets the collection and returns the receiver so calls can be chained.
+func (x *OpenGLView) WithContentFilters(items ...obj.Object) *OpenGLView {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets the shadow property and returns the receiver for chaining.
+// WithShadow sets shadow and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithShadow(shadow *Shadow) *OpenGLView {
-	x.inner.NSView.SetShadow(shadow.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+// WithClipsToBounds sets clipsToBounds and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithClipsToBounds(clipsToBounds bool) *OpenGLView {
-	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+// WithPostsBoundsChangedNotifications sets postsBoundsChangedNotifications and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *OpenGLView {
-	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip sets toolTip and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithToolTip(toolTip string) *OpenGLView {
-	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *OpenGLView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *OpenGLView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+func (x *OpenGLView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *OpenGLView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
-func (x *OpenGLView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *OpenGLView {
-	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
-	return x
-}
-
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+// WithNextKeyView sets nextKeyView and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithNextKeyView(nextKeyView ViewProvider) *OpenGLView {
-	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *OpenGLView) WithFocusRingType(focusRingType NSFocusRingType) *OpenGLView {
-	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+func (x *OpenGLView) WithFocusRingType(focusRingType FocusRingType) *OpenGLView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+// WithGestureRecognizers sets the collection and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithGestureRecognizers(items ...GestureRecognizerProvider) *OpenGLView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetGestureRecognizers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *OpenGLView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *OpenGLView {
-	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
-	return x
-}
-
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
-func (x *OpenGLView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *OpenGLView {
-	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+// WithAllowedTouchTypes sets allowedTouchTypes and returns the receiver so calls can be chained.
+func (x *OpenGLView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *OpenGLView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
 // When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+// WithPrefersCompactControlSizeMetrics sets prefersCompactControlSizeMetrics and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *OpenGLView {
-	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+// WithWritingToolsCoordinator sets writingToolsCoordinator and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *OpenGLView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+// WithNeedsUpdateConstraints sets needsUpdateConstraints and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *OpenGLView {
-	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+// WithTranslatesAutoresizingMaskIntoConstraints sets translatesAutoresizingMaskIntoConstraints and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *OpenGLView {
-	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithHorizontalContentSizeConstraintActive sets horizontalContentSizeConstraintActive and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *OpenGLView {
-	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithVerticalContentSizeConstraintActive sets verticalContentSizeConstraintActive and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *OpenGLView {
-	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+// WithWantsBestResolutionOpenGLSurface sets wantsBestResolutionOpenGLSurface and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *OpenGLView {
-	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets wantsExtendedDynamicRangeOpenGLSurface and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *OpenGLView {
-	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+// WithPressureConfiguration sets pressureConfiguration and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *OpenGLView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
 // The next responder after this one, or nil if it has none.
 //
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithNextResponder(nextResponder ResponderProvider) *OpenGLView {
-	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
 // Returns the responder’s menu.
 //
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu sets menu and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithMenu(menu *Menu) *OpenGLView {
-	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
 // An object encapsulating a user activity supported by this responder.
 //
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *OpenGLView) WithUserActivity(userActivity *foundation.NSUserActivity) *OpenGLView {
-	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+func (x *OpenGLView) WithUserActivity(userActivity obj.Object) *OpenGLView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
 // The NSTouchBar object associated with the responder.
 //
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
 func (x *OpenGLView) WithTouchBar(touchBar *TouchBar) *OpenGLView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
 // Releases the NSOpenGLContext object associated with the view.
-//
-// ClearGLContext calls the underlying ClearGLContext.
 func (x *OpenGLView) ClearGLContext() {
-	x.inner.ClearGLContext()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearGLContext"))
 }
 
 // Called by Cocoa when the view’s window moves or when the view itself moves or is resized.
-//
-// Update calls the underlying Update.
 func (x *OpenGLView) Update() {
-	x.inner.Update()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("update"))
 }
 
 // Called by Cocoa when the view’s visible rectangle or bounds change.
-//
-// Reshape calls the underlying Reshape.
 func (x *OpenGLView) Reshape() {
-	x.inner.Reshape()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reshape"))
 }
 
 // Used by subclasses to initialize OpenGL state.
-//
-// PrepareOpenGL calls the underlying PrepareOpenGL.
 func (x *OpenGLView) PrepareOpenGL() {
-	x.inner.PrepareOpenGL()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareOpenGL"))
 }
 
-// OpenGLContext calls the underlying OpenGLContext.
 func (x *OpenGLView) OpenGLContext() *OpenGLContext {
-	_r := x.inner.OpenGLContext()
-	if _r == nil {
-		return nil
-	}
-	return &OpenGLContext{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLContext"))
+	return OpenGLContextFromID(_r)
 }
 
-// SetOpenGLContext calls the underlying SetOpenGLContext.
-func (x *OpenGLView) SetOpenGLContext(openGLContext *raw.NSOpenGLContext) {
-	x.inner.SetOpenGLContext(openGLContext)
+func (x *OpenGLView) SetOpenGLContext(openGLContext *OpenGLContext) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpenGLContext:"), objref.IDOf(openGLContext))
 }
 
-// PixelFormat calls the underlying PixelFormat.
 func (x *OpenGLView) PixelFormat() *OpenGLPixelFormat {
-	_r := x.inner.PixelFormat()
-	if _r == nil {
-		return nil
-	}
-	return &OpenGLPixelFormat{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pixelFormat"))
+	return OpenGLPixelFormatFromID(_r)
 }
 
-// SetPixelFormat calls the underlying SetPixelFormat.
-func (x *OpenGLView) SetPixelFormat(pixelFormat *raw.NSOpenGLPixelFormat) {
-	x.inner.SetPixelFormat(pixelFormat)
+func (x *OpenGLView) SetPixelFormat(pixelFormat *OpenGLPixelFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelFormat:"), objref.IDOf(pixelFormat))
 }
-
-func (x *OpenGLView) asView() *raw.NSView { return &x.inner.NSView }
-
-func (x *OpenGLView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
 
 // OpenGLViewable is the interface implemented by [OpenGLView], for mocking and DI.
 type OpenGLViewable interface {
-	Unwrap() *raw.NSOpenGLView
+	obj.Object
 	WithOpenGLContext(openGLContext *OpenGLContext) *OpenGLView
 	WithPixelFormat(pixelFormat *OpenGLPixelFormat) *OpenGLView
 	WithSubviews(items ...ViewProvider) *OpenGLView
 	WithHidden(hidden bool) *OpenGLView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *OpenGLView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *OpenGLView
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *OpenGLView
-	WithFrame(frame corefoundation.CGRect) *OpenGLView
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *OpenGLView
 	WithFrameRotation(frameRotation float64) *OpenGLView
 	WithFrameCenterRotation(frameCenterRotation float64) *OpenGLView
 	WithBoundsRotation(boundsRotation float64) *OpenGLView
-	WithBounds(bounds corefoundation.CGRect) *OpenGLView
 	WithCanDrawConcurrently(canDrawConcurrently bool) *OpenGLView
 	WithNeedsDisplay(needsDisplay bool) *OpenGLView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *OpenGLView
 	WithWantsRestingTouches(wantsRestingTouches bool) *OpenGLView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *OpenGLView
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *OpenGLView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *OpenGLView
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *OpenGLView
 	WithWantsLayer(wantsLayer bool) *OpenGLView
-	WithLayer(layer *quartzcore.CALayer) *OpenGLView
+	WithLayer(layer obj.Object) *OpenGLView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *OpenGLView
 	WithNeedsLayout(needsLayout bool) *OpenGLView
 	WithAlphaValue(alphaValue float64) *OpenGLView
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *OpenGLView
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *OpenGLView
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *OpenGLView
-	WithContentFilters(items ...*coreimage.CIFilter) *OpenGLView
+	WithBackgroundFilters(items ...obj.Object) *OpenGLView
+	WithCompositingFilter(compositingFilter obj.Object) *OpenGLView
+	WithContentFilters(items ...obj.Object) *OpenGLView
 	WithShadow(shadow *Shadow) *OpenGLView
 	WithClipsToBounds(clipsToBounds bool) *OpenGLView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *OpenGLView
 	WithToolTip(toolTip string) *OpenGLView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *OpenGLView
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *OpenGLView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *OpenGLView
 	WithNextKeyView(nextKeyView ViewProvider) *OpenGLView
-	WithFocusRingType(focusRingType NSFocusRingType) *OpenGLView
+	WithFocusRingType(focusRingType FocusRingType) *OpenGLView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *OpenGLView
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *OpenGLView
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *OpenGLView
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *OpenGLView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *OpenGLView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *OpenGLView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *OpenGLView
@@ -543,16 +452,16 @@ type OpenGLViewable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *OpenGLView
 	WithNextResponder(nextResponder ResponderProvider) *OpenGLView
 	WithMenu(menu *Menu) *OpenGLView
-	WithUserActivity(userActivity *foundation.NSUserActivity) *OpenGLView
+	WithUserActivity(userActivity obj.Object) *OpenGLView
 	WithTouchBar(touchBar *TouchBar) *OpenGLView
 	ClearGLContext()
 	Update()
 	Reshape()
 	PrepareOpenGL()
 	OpenGLContext() *OpenGLContext
-	SetOpenGLContext(openGLContext *raw.NSOpenGLContext)
+	SetOpenGLContext(openGLContext *OpenGLContext)
 	PixelFormat() *OpenGLPixelFormat
-	SetPixelFormat(pixelFormat *raw.NSOpenGLPixelFormat)
+	SetPixelFormat(pixelFormat *OpenGLPixelFormat)
 }
 
 var _ OpenGLViewable = (*OpenGLView)(nil)

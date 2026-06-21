@@ -5,144 +5,143 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Cluster Microwave Oven Control Attributes and commands for configuring the microwave oven control, and reporting cooking stats.
 //
-// MTRClusterMicrowaveOvenControl wraps [raw.MTRClusterMicrowaveOvenControl] with a fluent Go API.
+// MTRClusterMicrowaveOvenControl is an idiomatic wrapper over the Objective-C class MTRClusterMicrowaveOvenControl.
 type MTRClusterMicrowaveOvenControl struct {
-	inner *raw.MTRClusterMicrowaveOvenControl
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterMicrowaveOvenControl].
-func (x *MTRClusterMicrowaveOvenControl) Unwrap() *raw.MTRClusterMicrowaveOvenControl { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterMicrowaveOvenControl) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterMicrowaveOvenControlFromID adopts an existing object pointer as a MTRClusterMicrowaveOvenControl (nil for 0).
+// MTRClusterMicrowaveOvenControlFromID adopts an existing Objective-C object as a MTRClusterMicrowaveOvenControl
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterMicrowaveOvenControlFromID(id objc.ID) *MTRClusterMicrowaveOvenControl {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterMicrowaveOvenControl{inner: raw.MTRClusterMicrowaveOvenControlFromID(id)}
+	x := &MTRClusterMicrowaveOvenControl{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterMicrowaveOvenControlAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterMicrowaveOvenControl (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterMicrowaveOvenControlAdopt(id objc.ID) *MTRClusterMicrowaveOvenControl {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterMicrowaveOvenControl{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterMicrowaveOvenControl) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterMicrowaveOvenControl) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterMicrowaveOvenControl) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterMicrowaveOvenControlWithDeviceEndpointIDQueue creates a new [MTRClusterMicrowaveOvenControl].
-func NewMTRClusterMicrowaveOvenControlWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterMicrowaveOvenControl {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterMicrowaveOvenControl")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterMicrowaveOvenControl{inner: raw.MTRClusterMicrowaveOvenControlFromID(_id)}
+// NewMTRClusterMicrowaveOvenControlWithDeviceEndpointIDQueue creates a new MTRClusterMicrowaveOvenControl.
+func NewMTRClusterMicrowaveOvenControlWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterMicrowaveOvenControl {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterMicrowaveOvenControl")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterMicrowaveOvenControlAdopt(_id)
 }
 
-// SetCookingParametersWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying SetCookingParametersWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterMicrowaveOvenControl) SetCookingParametersWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMicrowaveOvenControlClusterSetCookingParametersParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.SetCookingParametersWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterMicrowaveOvenControl) ReadAttributeCookTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCookTimeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// SetCookingParametersWithExpectedValuesExpectedValueIntervalCompletion calls the underlying SetCookingParametersWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterMicrowaveOvenControl) SetCookingParametersWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.SetCookingParametersWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+func (x *MTRClusterMicrowaveOvenControl) ReadAttributeMaxCookTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxCookTimeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// AddMoreTimeWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying AddMoreTimeWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterMicrowaveOvenControl) AddMoreTimeWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMicrowaveOvenControlClusterAddMoreTimeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.AddMoreTimeWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterMicrowaveOvenControl) ReadAttributePowerSettingWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePowerSettingWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCookTimeWithParams calls the underlying ReadAttributeCookTimeWithParams.
-func (x *MTRClusterMicrowaveOvenControl) ReadAttributeCookTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCookTimeWithParams(params)
+func (x *MTRClusterMicrowaveOvenControl) ReadAttributeMinPowerWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinPowerWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxCookTimeWithParams calls the underlying ReadAttributeMaxCookTimeWithParams.
-func (x *MTRClusterMicrowaveOvenControl) ReadAttributeMaxCookTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxCookTimeWithParams(params)
+func (x *MTRClusterMicrowaveOvenControl) ReadAttributeMaxPowerWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxPowerWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePowerSettingWithParams calls the underlying ReadAttributePowerSettingWithParams.
-func (x *MTRClusterMicrowaveOvenControl) ReadAttributePowerSettingWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePowerSettingWithParams(params)
+func (x *MTRClusterMicrowaveOvenControl) ReadAttributePowerStepWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePowerStepWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinPowerWithParams calls the underlying ReadAttributeMinPowerWithParams.
-func (x *MTRClusterMicrowaveOvenControl) ReadAttributeMinPowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMinPowerWithParams(params)
+func (x *MTRClusterMicrowaveOvenControl) ReadAttributeWattRatingWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWattRatingWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxPowerWithParams calls the underlying ReadAttributeMaxPowerWithParams.
-func (x *MTRClusterMicrowaveOvenControl) ReadAttributeMaxPowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxPowerWithParams(params)
+func (x *MTRClusterMicrowaveOvenControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePowerStepWithParams calls the underlying ReadAttributePowerStepWithParams.
-func (x *MTRClusterMicrowaveOvenControl) ReadAttributePowerStepWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePowerStepWithParams(params)
+func (x *MTRClusterMicrowaveOvenControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeWattRatingWithParams calls the underlying ReadAttributeWattRatingWithParams.
-func (x *MTRClusterMicrowaveOvenControl) ReadAttributeWattRatingWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeWattRatingWithParams(params)
+func (x *MTRClusterMicrowaveOvenControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterMicrowaveOvenControl) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterMicrowaveOvenControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterMicrowaveOvenControl) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
-}
-
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterMicrowaveOvenControl) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
-}
-
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterMicrowaveOvenControl) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterMicrowaveOvenControl) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterMicrowaveOvenControl) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterMicrowaveOvenControl) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterMicrowaveOvenControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterMicrowaveOvenControlable is the interface implemented by [MTRClusterMicrowaveOvenControl], for mocking and DI.
 type MTRClusterMicrowaveOvenControlable interface {
-	Unwrap() *raw.MTRClusterMicrowaveOvenControl
-	SetCookingParametersWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMicrowaveOvenControlClusterSetCookingParametersParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	SetCookingParametersWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	AddMoreTimeWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMicrowaveOvenControlClusterAddMoreTimeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeCookTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMaxCookTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePowerSettingWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMinPowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMaxPowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePowerStepWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeWattRatingWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeCookTimeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMaxCookTimeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePowerSettingWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMinPowerWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMaxPowerWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePowerStepWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeWattRatingWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterMicrowaveOvenControlable = (*MTRClusterMicrowaveOvenControl)(nil)

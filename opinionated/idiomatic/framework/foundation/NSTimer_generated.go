@@ -5,132 +5,142 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A timer that fires after a certain time interval has elapsed, sending a specified message to a target object.
 //
-// Timer wraps [raw.NSTimer] with a fluent Go API.
+// Timer is an idiomatic wrapper over the Objective-C class NSTimer.
 type Timer struct {
-	inner *raw.NSTimer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTimer].
-func (x *Timer) Unwrap() *raw.NSTimer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Timer) ID() objc.ID { return x.inner.Ptr() }
-
-// TimerFromID adopts an existing object pointer as a Timer (nil for 0).
+// TimerFromID adopts an existing Objective-C object as a Timer
+// (nil for 0), retaining it and registering a release finalizer.
 func TimerFromID(id objc.ID) *Timer {
 	if id == 0 {
 		return nil
 	}
-	return &Timer{inner: raw.NSTimerFromID(id)}
+	x := &Timer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// timerAdopt wraps an Objective-C object that this code just created as a
+// Timer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func timerAdopt(id objc.ID) *Timer {
+	if id == 0 {
+		return nil
+	}
+	x := &Timer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Timer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Timer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Timer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a new NSTimer object using the block as the main body of execution for the timer. This timer needs to be scheduled on a run loop (via -[NSRunLoop addTimer:]) before it will fire. - parameter:  fireDate   The time at which the timer should first fire. - parameter:  interval  The number of seconds between firings of the timer. If seconds is less than or equal to 0.0, this method chooses the nonnegative value of 0.1 milliseconds instead - parameter:  repeats  If YES, the timer will repeatedly reschedule itself until invalidated. If NO, the timer will be invalidated after it fires. - parameter:  block  The execution body of the timer; the timer itself is passed as the parameter to this block when executed to aid in avoiding cyclical references
 //
-// NewTimerWithFireDateIntervalRepeatsBlock creates a new [Timer].
-func NewTimerWithFireDateIntervalRepeatsBlock(date *raw.NSDate, interval float64, repeats bool, block func(*raw.NSTimer)) *Timer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTimer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFireDate:interval:repeats:block:"), date.Ptr(), interval, repeats, block)
-	return &Timer{inner: raw.NSTimerFromID(_id)}
+// NewTimerWithFireDateIntervalRepeatsBlock creates a new Timer.
+func NewTimerWithFireDateIntervalRepeatsBlock(date *Date, interval float64, repeats bool, block func(obj.Object)) *Timer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTimer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFireDate:interval:repeats:block:"), objref.IDOf(date), interval, repeats, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { block(obj.Wrap(_b0)) }))
+	return timerAdopt(_id)
 }
 
-// NewTimerWithFireDateIntervalTargetSelectorUserInfoRepeats creates a new [Timer].
-func NewTimerWithFireDateIntervalTargetSelectorUserInfoRepeats(date *raw.NSDate, ti float64, t objc.ID, s objc.SEL, ui objc.ID, rep bool) *Timer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTimer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFireDate:interval:target:selector:userInfo:repeats:"), date.Ptr(), ti, t, s, ui, rep)
-	return &Timer{inner: raw.NSTimerFromID(_id)}
-}
-
-// WithFireDate sets the fireDate property and returns the receiver for chaining.
+// WithFireDate sets fireDate and returns the receiver so calls can be chained.
 func (x *Timer) WithFireDate(fireDate DateProvider) *Timer {
-	x.inner.SetFireDate(fireDate.asDate())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFireDate:"), objref.IDOf(fireDate))
 	return x
 }
 
-// WithTolerance sets the tolerance property and returns the receiver for chaining.
+// WithTolerance sets tolerance and returns the receiver so calls can be chained.
 func (x *Timer) WithTolerance(tolerance float64) *Timer {
-	x.inner.SetTolerance(tolerance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTolerance:"), tolerance)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Timer) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Timer {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *Timer) WithScriptingProperties(scriptingProperties obj.Object) *Timer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Fire calls the underlying Fire.
 func (x *Timer) Fire() {
-	x.inner.Fire()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fire"))
 }
 
-// Invalidate calls the underlying Invalidate.
 func (x *Timer) Invalidate() {
-	x.inner.Invalidate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
-// FireDate calls the underlying FireDate.
 func (x *Timer) FireDate() *Date {
-	_r := x.inner.FireDate()
-	if _r == nil {
-		return nil
-	}
-	return &Date{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fireDate"))
+	return DateFromID(_r)
 }
 
-// SetFireDate calls the underlying SetFireDate.
-func (x *Timer) SetFireDate(fireDate *raw.NSDate) {
-	x.inner.SetFireDate(fireDate)
+func (x *Timer) SetFireDate(fireDate *Date) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFireDate:"), objref.IDOf(fireDate))
 }
 
-// TimeInterval calls the underlying TimeInterval.
 func (x *Timer) TimeInterval() float64 {
-	return x.inner.TimeInterval()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeInterval"))
+	return _r
 }
 
-// Tolerance calls the underlying Tolerance.
 func (x *Timer) Tolerance() float64 {
-	return x.inner.Tolerance()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("tolerance"))
+	return _r
 }
 
-// SetTolerance calls the underlying SetTolerance.
 func (x *Timer) SetTolerance(tolerance float64) {
-	x.inner.SetTolerance(tolerance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTolerance:"), tolerance)
 }
 
-// IsValid calls the underlying IsValid.
 func (x *Timer) IsValid() bool {
-	return x.inner.IsValid()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isValid"))
+	return _r
 }
 
-// UserInfo calls the underlying UserInfo.
-func (x *Timer) UserInfo() objc.ID {
-	return x.inner.UserInfo()
+func (x *Timer) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+	return obj.Wrap(_r)
 }
-
-func (x *Timer) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Timerable is the interface implemented by [Timer], for mocking and DI.
 type Timerable interface {
-	Unwrap() *raw.NSTimer
+	obj.Object
 	WithFireDate(fireDate DateProvider) *Timer
 	WithTolerance(tolerance float64) *Timer
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Timer
+	WithScriptingProperties(scriptingProperties obj.Object) *Timer
 	Fire()
 	Invalidate()
 	FireDate() *Date
-	SetFireDate(fireDate *raw.NSDate)
+	SetFireDate(fireDate *Date)
 	TimeInterval() float64
 	Tolerance() float64
 	SetTolerance(tolerance float64)
 	IsValid() bool
-	UserInfo() objc.ID
+	UserInfo() obj.Object
 }
 
 var _ Timerable = (*Timer)(nil)

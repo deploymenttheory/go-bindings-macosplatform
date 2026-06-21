@@ -5,67 +5,89 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// HangUpCallIntent wraps [raw.INHangUpCallIntent] with a fluent Go API.
+// HangUpCallIntent is an idiomatic wrapper over the Objective-C class INHangUpCallIntent.
 type HangUpCallIntent struct {
-	inner *raw.INHangUpCallIntent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INHangUpCallIntent].
-func (x *HangUpCallIntent) Unwrap() *raw.INHangUpCallIntent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HangUpCallIntent) ID() objc.ID { return x.inner.Ptr() }
-
-// HangUpCallIntentFromID adopts an existing object pointer as a HangUpCallIntent (nil for 0).
+// HangUpCallIntentFromID adopts an existing Objective-C object as a HangUpCallIntent
+// (nil for 0), retaining it and registering a release finalizer.
 func HangUpCallIntentFromID(id objc.ID) *HangUpCallIntent {
 	if id == 0 {
 		return nil
 	}
-	return &HangUpCallIntent{inner: raw.INHangUpCallIntentFromID(id)}
+	x := &HangUpCallIntent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewHangUpCallIntentWithCallIdentifier creates a new [HangUpCallIntent].
+// hangUpCallIntentAdopt wraps an Objective-C object that this code just created as a
+// HangUpCallIntent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hangUpCallIntentAdopt(id objc.ID) *HangUpCallIntent {
+	if id == 0 {
+		return nil
+	}
+	x := &HangUpCallIntent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HangUpCallIntent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HangUpCallIntent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HangUpCallIntent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHangUpCallIntentWithCallIdentifier creates a new HangUpCallIntent.
 func NewHangUpCallIntentWithCallIdentifier(callIdentifier string) *HangUpCallIntent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INHangUpCallIntent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCallIdentifier:"), foundation.NSStringStringWithUTF8String(callIdentifier).Ptr())
-	return &HangUpCallIntent{inner: raw.INHangUpCallIntentFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INHangUpCallIntent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCallIdentifier:"), purego.NSString(callIdentifier))
+	return hangUpCallIntentAdopt(_id)
 }
 
 // The intent’s display name.
 //
-// WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
+// WithSuggestedInvocationPhrase sets suggestedInvocationPhrase and returns the receiver so calls can be chained.
 func (x *HangUpCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *HangUpCallIntent {
-	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
 	return x
 }
 
-// WithDonationMetadata sets the donationMetadata property and returns the receiver for chaining.
+// WithDonationMetadata sets donationMetadata and returns the receiver so calls can be chained.
 func (x *HangUpCallIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *HangUpCallIntent {
-	x.inner.INIntent.SetDonationMetadata(donationMetadata.asIntentDonationMetadata())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return x
 }
 
-// CallIdentifier calls the underlying CallIdentifier.
 func (x *HangUpCallIntent) CallIdentifier() string {
-	_r := x.inner.CallIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *HangUpCallIntent) asIntent() *raw.INIntent { return &x.inner.INIntent }
 
 // HangUpCallIntentable is the interface implemented by [HangUpCallIntent], for mocking and DI.
 type HangUpCallIntentable interface {
-	Unwrap() *raw.INHangUpCallIntent
+	obj.Object
 	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *HangUpCallIntent
 	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *HangUpCallIntent
 	CallIdentifier() string

@@ -5,469 +5,428 @@
 package imagekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// IKImageBrowserPathRepresentationType returns the string constant IKImageBrowserPathRepresentationType as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserPathRepresentationType() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserPathRepresentationType())
+// IKImageBrowserPathRepresentationType returns the string constant IKImageBrowserPathRepresentationType, for use as a dictionary key or argument.
+func IKImageBrowserPathRepresentationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserPathRepresentationType")))
 }
 
-// IKImageBrowserNSURLRepresentationType returns the string constant IKImageBrowserNSURLRepresentationType as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserNSURLRepresentationType() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserNSURLRepresentationType())
+// IKImageBrowserNSURLRepresentationType returns the string constant IKImageBrowserNSURLRepresentationType, for use as a dictionary key or argument.
+func IKImageBrowserNSURLRepresentationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserNSURLRepresentationType")))
 }
 
-// IKImageBrowserNSImageRepresentationType returns the string constant IKImageBrowserNSImageRepresentationType as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserNSImageRepresentationType() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserNSImageRepresentationType())
+// IKImageBrowserNSImageRepresentationType returns the string constant IKImageBrowserNSImageRepresentationType, for use as a dictionary key or argument.
+func IKImageBrowserNSImageRepresentationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserNSImageRepresentationType")))
 }
 
-// IKImageBrowserCGImageRepresentationType returns the string constant IKImageBrowserCGImageRepresentationType as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserCGImageRepresentationType() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserCGImageRepresentationType())
+// IKImageBrowserCGImageRepresentationType returns the string constant IKImageBrowserCGImageRepresentationType, for use as a dictionary key or argument.
+func IKImageBrowserCGImageRepresentationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserCGImageRepresentationType")))
 }
 
-// IKImageBrowserCGImageSourceRepresentationType returns the string constant IKImageBrowserCGImageSourceRepresentationType as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserCGImageSourceRepresentationType() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserCGImageSourceRepresentationType())
+// IKImageBrowserCGImageSourceRepresentationType returns the string constant IKImageBrowserCGImageSourceRepresentationType, for use as a dictionary key or argument.
+func IKImageBrowserCGImageSourceRepresentationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserCGImageSourceRepresentationType")))
 }
 
-// IKImageBrowserNSDataRepresentationType returns the string constant IKImageBrowserNSDataRepresentationType as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserNSDataRepresentationType() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserNSDataRepresentationType())
+// IKImageBrowserNSDataRepresentationType returns the string constant IKImageBrowserNSDataRepresentationType, for use as a dictionary key or argument.
+func IKImageBrowserNSDataRepresentationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserNSDataRepresentationType")))
 }
 
-// IKImageBrowserNSBitmapImageRepresentationType returns the string constant IKImageBrowserNSBitmapImageRepresentationType as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserNSBitmapImageRepresentationType() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserNSBitmapImageRepresentationType())
+// IKImageBrowserNSBitmapImageRepresentationType returns the string constant IKImageBrowserNSBitmapImageRepresentationType, for use as a dictionary key or argument.
+func IKImageBrowserNSBitmapImageRepresentationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserNSBitmapImageRepresentationType")))
 }
 
-// IKImageBrowserQTMovieRepresentationType returns the string constant IKImageBrowserQTMovieRepresentationType as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserQTMovieRepresentationType() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserQTMovieRepresentationType())
+// IKImageBrowserQTMovieRepresentationType returns the string constant IKImageBrowserQTMovieRepresentationType, for use as a dictionary key or argument.
+func IKImageBrowserQTMovieRepresentationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserQTMovieRepresentationType")))
 }
 
-// IKImageBrowserQTMoviePathRepresentationType returns the string constant IKImageBrowserQTMoviePathRepresentationType as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserQTMoviePathRepresentationType() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserQTMoviePathRepresentationType())
+// IKImageBrowserQTMoviePathRepresentationType returns the string constant IKImageBrowserQTMoviePathRepresentationType, for use as a dictionary key or argument.
+func IKImageBrowserQTMoviePathRepresentationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserQTMoviePathRepresentationType")))
 }
 
-// IKImageBrowserQCCompositionRepresentationType returns the string constant IKImageBrowserQCCompositionRepresentationType as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserQCCompositionRepresentationType() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserQCCompositionRepresentationType())
+// IKImageBrowserQCCompositionRepresentationType returns the string constant IKImageBrowserQCCompositionRepresentationType, for use as a dictionary key or argument.
+func IKImageBrowserQCCompositionRepresentationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserQCCompositionRepresentationType")))
 }
 
-// IKImageBrowserQCCompositionPathRepresentationType returns the string constant IKImageBrowserQCCompositionPathRepresentationType as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserQCCompositionPathRepresentationType() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserQCCompositionPathRepresentationType())
+// IKImageBrowserQCCompositionPathRepresentationType returns the string constant IKImageBrowserQCCompositionPathRepresentationType, for use as a dictionary key or argument.
+func IKImageBrowserQCCompositionPathRepresentationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserQCCompositionPathRepresentationType")))
 }
 
-// IKImageBrowserQuickLookPathRepresentationType returns the string constant IKImageBrowserQuickLookPathRepresentationType as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserQuickLookPathRepresentationType() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserQuickLookPathRepresentationType())
+// IKImageBrowserQuickLookPathRepresentationType returns the string constant IKImageBrowserQuickLookPathRepresentationType, for use as a dictionary key or argument.
+func IKImageBrowserQuickLookPathRepresentationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserQuickLookPathRepresentationType")))
 }
 
-// IKImageBrowserIconRefPathRepresentationType returns the string constant IKImageBrowserIconRefPathRepresentationType as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserIconRefPathRepresentationType() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserIconRefPathRepresentationType())
+// IKImageBrowserIconRefPathRepresentationType returns the string constant IKImageBrowserIconRefPathRepresentationType, for use as a dictionary key or argument.
+func IKImageBrowserIconRefPathRepresentationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserIconRefPathRepresentationType")))
 }
 
-// IKImageBrowserIconRefRepresentationType returns the string constant IKImageBrowserIconRefRepresentationType as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserIconRefRepresentationType() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserIconRefRepresentationType())
+// IKImageBrowserIconRefRepresentationType returns the string constant IKImageBrowserIconRefRepresentationType, for use as a dictionary key or argument.
+func IKImageBrowserIconRefRepresentationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserIconRefRepresentationType")))
 }
 
-// IKImageBrowserPDFPageRepresentationType returns the string constant IKImageBrowserPDFPageRepresentationType as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserPDFPageRepresentationType() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserPDFPageRepresentationType())
+// IKImageBrowserPDFPageRepresentationType returns the string constant IKImageBrowserPDFPageRepresentationType, for use as a dictionary key or argument.
+func IKImageBrowserPDFPageRepresentationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserPDFPageRepresentationType")))
 }
 
-// IKImageBrowserBackgroundColorKey returns the string constant IKImageBrowserBackgroundColorKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserBackgroundColorKey() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserBackgroundColorKey())
+// IKImageBrowserBackgroundColorKey returns the string constant IKImageBrowserBackgroundColorKey, for use as a dictionary key or argument.
+func IKImageBrowserBackgroundColorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserBackgroundColorKey")))
 }
 
-// IKImageBrowserSelectionColorKey returns the string constant IKImageBrowserSelectionColorKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserSelectionColorKey() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserSelectionColorKey())
+// IKImageBrowserSelectionColorKey returns the string constant IKImageBrowserSelectionColorKey, for use as a dictionary key or argument.
+func IKImageBrowserSelectionColorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserSelectionColorKey")))
 }
 
-// IKImageBrowserCellsOutlineColorKey returns the string constant IKImageBrowserCellsOutlineColorKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserCellsOutlineColorKey() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserCellsOutlineColorKey())
+// IKImageBrowserCellsOutlineColorKey returns the string constant IKImageBrowserCellsOutlineColorKey, for use as a dictionary key or argument.
+func IKImageBrowserCellsOutlineColorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserCellsOutlineColorKey")))
 }
 
-// IKImageBrowserCellsTitleAttributesKey returns the string constant IKImageBrowserCellsTitleAttributesKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserCellsTitleAttributesKey() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserCellsTitleAttributesKey())
+// IKImageBrowserCellsTitleAttributesKey returns the string constant IKImageBrowserCellsTitleAttributesKey, for use as a dictionary key or argument.
+func IKImageBrowserCellsTitleAttributesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserCellsTitleAttributesKey")))
 }
 
-// IKImageBrowserCellsHighlightedTitleAttributesKey returns the string constant IKImageBrowserCellsHighlightedTitleAttributesKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserCellsHighlightedTitleAttributesKey() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserCellsHighlightedTitleAttributesKey())
+// IKImageBrowserCellsHighlightedTitleAttributesKey returns the string constant IKImageBrowserCellsHighlightedTitleAttributesKey, for use as a dictionary key or argument.
+func IKImageBrowserCellsHighlightedTitleAttributesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserCellsHighlightedTitleAttributesKey")))
 }
 
-// IKImageBrowserCellsSubtitleAttributesKey returns the string constant IKImageBrowserCellsSubtitleAttributesKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserCellsSubtitleAttributesKey() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserCellsSubtitleAttributesKey())
+// IKImageBrowserCellsSubtitleAttributesKey returns the string constant IKImageBrowserCellsSubtitleAttributesKey, for use as a dictionary key or argument.
+func IKImageBrowserCellsSubtitleAttributesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserCellsSubtitleAttributesKey")))
 }
 
-// IKImageBrowserGroupRangeKey returns the string constant IKImageBrowserGroupRangeKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserGroupRangeKey() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserGroupRangeKey())
+// IKImageBrowserGroupRangeKey returns the string constant IKImageBrowserGroupRangeKey, for use as a dictionary key or argument.
+func IKImageBrowserGroupRangeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserGroupRangeKey")))
 }
 
-// IKImageBrowserGroupBackgroundColorKey returns the string constant IKImageBrowserGroupBackgroundColorKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserGroupBackgroundColorKey() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserGroupBackgroundColorKey())
+// IKImageBrowserGroupBackgroundColorKey returns the string constant IKImageBrowserGroupBackgroundColorKey, for use as a dictionary key or argument.
+func IKImageBrowserGroupBackgroundColorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserGroupBackgroundColorKey")))
 }
 
-// IKImageBrowserGroupTitleKey returns the string constant IKImageBrowserGroupTitleKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserGroupTitleKey() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserGroupTitleKey())
+// IKImageBrowserGroupTitleKey returns the string constant IKImageBrowserGroupTitleKey, for use as a dictionary key or argument.
+func IKImageBrowserGroupTitleKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserGroupTitleKey")))
 }
 
-// IKImageBrowserGroupStyleKey returns the string constant IKImageBrowserGroupStyleKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserGroupStyleKey() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserGroupStyleKey())
+// IKImageBrowserGroupStyleKey returns the string constant IKImageBrowserGroupStyleKey, for use as a dictionary key or argument.
+func IKImageBrowserGroupStyleKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserGroupStyleKey")))
 }
 
-// IKImageBrowserGroupHeaderLayer returns the string constant IKImageBrowserGroupHeaderLayer as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserGroupHeaderLayer() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserGroupHeaderLayer())
+// IKImageBrowserGroupHeaderLayer returns the string constant IKImageBrowserGroupHeaderLayer, for use as a dictionary key or argument.
+func IKImageBrowserGroupHeaderLayer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserGroupHeaderLayer")))
 }
 
-// IKImageBrowserGroupFooterLayer returns the string constant IKImageBrowserGroupFooterLayer as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserGroupFooterLayer() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserGroupFooterLayer())
+// IKImageBrowserGroupFooterLayer returns the string constant IKImageBrowserGroupFooterLayer, for use as a dictionary key or argument.
+func IKImageBrowserGroupFooterLayer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserGroupFooterLayer")))
 }
 
-// IKImageBrowserCellBackgroundLayer returns the string constant IKImageBrowserCellBackgroundLayer as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserCellBackgroundLayer() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserCellBackgroundLayer())
+// IKImageBrowserCellBackgroundLayer returns the string constant IKImageBrowserCellBackgroundLayer, for use as a dictionary key or argument.
+func IKImageBrowserCellBackgroundLayer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserCellBackgroundLayer")))
 }
 
-// IKImageBrowserCellForegroundLayer returns the string constant IKImageBrowserCellForegroundLayer as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserCellForegroundLayer() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserCellForegroundLayer())
+// IKImageBrowserCellForegroundLayer returns the string constant IKImageBrowserCellForegroundLayer, for use as a dictionary key or argument.
+func IKImageBrowserCellForegroundLayer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserCellForegroundLayer")))
 }
 
-// IKImageBrowserCellSelectionLayer returns the string constant IKImageBrowserCellSelectionLayer as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserCellSelectionLayer() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserCellSelectionLayer())
+// IKImageBrowserCellSelectionLayer returns the string constant IKImageBrowserCellSelectionLayer, for use as a dictionary key or argument.
+func IKImageBrowserCellSelectionLayer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserCellSelectionLayer")))
 }
 
-// IKImageBrowserCellPlaceHolderLayer returns the string constant IKImageBrowserCellPlaceHolderLayer as an objc.ID, for use as a dictionary key or selector argument.
-func IKImageBrowserCellPlaceHolderLayer() objc.ID {
-	return purego.CFConstant(raw.IKImageBrowserCellPlaceHolderLayer())
+// IKImageBrowserCellPlaceHolderLayer returns the string constant IKImageBrowserCellPlaceHolderLayer, for use as a dictionary key or argument.
+func IKImageBrowserCellPlaceHolderLayer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKImageBrowserCellPlaceHolderLayer")))
 }
 
-// IKPictureTakerAllowsVideoCaptureKey returns the string constant IKPictureTakerAllowsVideoCaptureKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKPictureTakerAllowsVideoCaptureKey() objc.ID {
-	return purego.CFConstant(raw.IKPictureTakerAllowsVideoCaptureKey())
+// IKPictureTakerAllowsVideoCaptureKey returns the string constant IKPictureTakerAllowsVideoCaptureKey, for use as a dictionary key or argument.
+func IKPictureTakerAllowsVideoCaptureKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKPictureTakerAllowsVideoCaptureKey")))
 }
 
-// IKPictureTakerAllowsFileChoosingKey returns the string constant IKPictureTakerAllowsFileChoosingKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKPictureTakerAllowsFileChoosingKey() objc.ID {
-	return purego.CFConstant(raw.IKPictureTakerAllowsFileChoosingKey())
+// IKPictureTakerAllowsFileChoosingKey returns the string constant IKPictureTakerAllowsFileChoosingKey, for use as a dictionary key or argument.
+func IKPictureTakerAllowsFileChoosingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKPictureTakerAllowsFileChoosingKey")))
 }
 
-// IKPictureTakerShowRecentPictureKey returns the string constant IKPictureTakerShowRecentPictureKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKPictureTakerShowRecentPictureKey() objc.ID {
-	return purego.CFConstant(raw.IKPictureTakerShowRecentPictureKey())
+// IKPictureTakerShowRecentPictureKey returns the string constant IKPictureTakerShowRecentPictureKey, for use as a dictionary key or argument.
+func IKPictureTakerShowRecentPictureKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKPictureTakerShowRecentPictureKey")))
 }
 
-// IKPictureTakerUpdateRecentPictureKey returns the string constant IKPictureTakerUpdateRecentPictureKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKPictureTakerUpdateRecentPictureKey() objc.ID {
-	return purego.CFConstant(raw.IKPictureTakerUpdateRecentPictureKey())
+// IKPictureTakerUpdateRecentPictureKey returns the string constant IKPictureTakerUpdateRecentPictureKey, for use as a dictionary key or argument.
+func IKPictureTakerUpdateRecentPictureKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKPictureTakerUpdateRecentPictureKey")))
 }
 
-// IKPictureTakerAllowsEditingKey returns the string constant IKPictureTakerAllowsEditingKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKPictureTakerAllowsEditingKey() objc.ID {
-	return purego.CFConstant(raw.IKPictureTakerAllowsEditingKey())
+// IKPictureTakerAllowsEditingKey returns the string constant IKPictureTakerAllowsEditingKey, for use as a dictionary key or argument.
+func IKPictureTakerAllowsEditingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKPictureTakerAllowsEditingKey")))
 }
 
-// IKPictureTakerShowEffectsKey returns the string constant IKPictureTakerShowEffectsKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKPictureTakerShowEffectsKey() objc.ID {
-	return purego.CFConstant(raw.IKPictureTakerShowEffectsKey())
+// IKPictureTakerShowEffectsKey returns the string constant IKPictureTakerShowEffectsKey, for use as a dictionary key or argument.
+func IKPictureTakerShowEffectsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKPictureTakerShowEffectsKey")))
 }
 
-// IKPictureTakerInformationalTextKey returns the string constant IKPictureTakerInformationalTextKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKPictureTakerInformationalTextKey() objc.ID {
-	return purego.CFConstant(raw.IKPictureTakerInformationalTextKey())
+// IKPictureTakerInformationalTextKey returns the string constant IKPictureTakerInformationalTextKey, for use as a dictionary key or argument.
+func IKPictureTakerInformationalTextKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKPictureTakerInformationalTextKey")))
 }
 
-// IKPictureTakerImageTransformsKey returns the string constant IKPictureTakerImageTransformsKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKPictureTakerImageTransformsKey() objc.ID {
-	return purego.CFConstant(raw.IKPictureTakerImageTransformsKey())
+// IKPictureTakerImageTransformsKey returns the string constant IKPictureTakerImageTransformsKey, for use as a dictionary key or argument.
+func IKPictureTakerImageTransformsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKPictureTakerImageTransformsKey")))
 }
 
-// IKPictureTakerOutputImageMaxSizeKey returns the string constant IKPictureTakerOutputImageMaxSizeKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKPictureTakerOutputImageMaxSizeKey() objc.ID {
-	return purego.CFConstant(raw.IKPictureTakerOutputImageMaxSizeKey())
+// IKPictureTakerOutputImageMaxSizeKey returns the string constant IKPictureTakerOutputImageMaxSizeKey, for use as a dictionary key or argument.
+func IKPictureTakerOutputImageMaxSizeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKPictureTakerOutputImageMaxSizeKey")))
 }
 
-// IKPictureTakerShowAddressBookPictureKey returns the string constant IKPictureTakerShowAddressBookPictureKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKPictureTakerShowAddressBookPictureKey() objc.ID {
-	return purego.CFConstant(raw.IKPictureTakerShowAddressBookPictureKey())
+// IKPictureTakerShowAddressBookPictureKey returns the string constant IKPictureTakerShowAddressBookPictureKey, for use as a dictionary key or argument.
+func IKPictureTakerShowAddressBookPictureKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKPictureTakerShowAddressBookPictureKey")))
 }
 
-// IKPictureTakerShowEmptyPictureKey returns the string constant IKPictureTakerShowEmptyPictureKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKPictureTakerShowEmptyPictureKey() objc.ID {
-	return purego.CFConstant(raw.IKPictureTakerShowEmptyPictureKey())
+// IKPictureTakerShowEmptyPictureKey returns the string constant IKPictureTakerShowEmptyPictureKey, for use as a dictionary key or argument.
+func IKPictureTakerShowEmptyPictureKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKPictureTakerShowEmptyPictureKey")))
 }
 
-// IKPictureTakerRemainOpenAfterValidateKey returns the string constant IKPictureTakerRemainOpenAfterValidateKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKPictureTakerRemainOpenAfterValidateKey() objc.ID {
-	return purego.CFConstant(raw.IKPictureTakerRemainOpenAfterValidateKey())
+// IKPictureTakerRemainOpenAfterValidateKey returns the string constant IKPictureTakerRemainOpenAfterValidateKey, for use as a dictionary key or argument.
+func IKPictureTakerRemainOpenAfterValidateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKPictureTakerRemainOpenAfterValidateKey")))
 }
 
-// @const      IKUISizeFlavor @abstract   IKUISizeFlavor @discussion Key to request the desired size of controls in a filter UIView - defined values are IKUISizeMini, IKUISizeSmall and IKUISizeRegular.
-// IKUISizeFlavor returns the string constant IKUISizeFlavor as an objc.ID, for use as a dictionary key or selector argument.
-func IKUISizeFlavor() objc.ID {
-	if _r := raw.IKUISizeFlavor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// IKUISizeFlavor Key to request the desired size of controls in a filter UIView - defined values are IKUISizeMini, IKUISizeSmall and IKUISizeRegular.
+// IKUISizeFlavor returns the string constant IKUISizeFlavor, for use as a dictionary key or argument.
+func IKUISizeFlavor() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IKUISizeFlavor"))) }
 
-// @const      IKUISizeMini @abstract   IKUISizeMini @discussion Constant for requesting controls in mini size.
-// IKUISizeMini returns the string constant IKUISizeMini as an objc.ID, for use as a dictionary key or selector argument.
-func IKUISizeMini() objc.ID {
-	if _r := raw.IKUISizeMini(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// IKUISizeMini Constant for requesting controls in mini size.
+// IKUISizeMini returns the string constant IKUISizeMini, for use as a dictionary key or argument.
+func IKUISizeMini() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IKUISizeMini"))) }
 
-// @const      IKUISizeSmall @abstract   IKUISizeSmall @discussion Constant for requesting controls in small size.
-// IKUISizeSmall returns the string constant IKUISizeSmall as an objc.ID, for use as a dictionary key or selector argument.
-func IKUISizeSmall() objc.ID {
-	if _r := raw.IKUISizeSmall(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// IKUISizeSmall Constant for requesting controls in small size.
+// IKUISizeSmall returns the string constant IKUISizeSmall, for use as a dictionary key or argument.
+func IKUISizeSmall() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IKUISizeSmall"))) }
 
-// @const      IKUISizeRegular @abstract   IKUISizeRegular @discussion Constant for requesting controls in regular or normal size.
-// IKUISizeRegular returns the string constant IKUISizeRegular as an objc.ID, for use as a dictionary key or selector argument.
-func IKUISizeRegular() objc.ID {
-	if _r := raw.IKUISizeRegular(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// IKUISizeRegular Constant for requesting controls in regular or normal size.
+// IKUISizeRegular returns the string constant IKUISizeRegular, for use as a dictionary key or argument.
+func IKUISizeRegular() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IKUISizeRegular"))) }
 
-// @const      IKUImaxSize @abstract   IKUImaxSize @discussion Maximum allowed dimensions of the view for the filter UI. If width or height is zero it means that that dimension of the view is not restricted.
-// IKUImaxSize returns the string constant IKUImaxSize as an objc.ID, for use as a dictionary key or selector argument.
-func IKUImaxSize() objc.ID {
-	if _r := raw.IKUImaxSize(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// IKUImaxSize Maximum allowed dimensions of the view for the filter UI. If width or height is zero it means that that dimension of the view is not restricted.
+// IKUImaxSize returns the string constant IKUImaxSize, for use as a dictionary key or argument.
+func IKUImaxSize() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IKUImaxSize"))) }
 
-// @const      IKUIFlavorAllowFallback @abstract   IKUIFlavorAllowFallback @discussion Allow the filter to provide a view with controls of a different size and set than requested, if it cannot provide a view for the requested flavor.
-// IKUIFlavorAllowFallback returns the string constant IKUIFlavorAllowFallback as an objc.ID, for use as a dictionary key or selector argument.
-func IKUIFlavorAllowFallback() objc.ID {
-	if _r := raw.IKUIFlavorAllowFallback(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IKUIFlavorAllowFallback Allow the filter to provide a view with controls of a different size and set than requested, if it cannot provide a view for the requested flavor.
+// IKUIFlavorAllowFallback returns the string constant IKUIFlavorAllowFallback, for use as a dictionary key or argument.
+func IKUIFlavorAllowFallback() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKUIFlavorAllowFallback")))
 }
 
-// @const      IKFilterBrowserFilterSelectedNotification @abstract   IKFilterBrowserFilterSelectedNotification @discussion Send when the user clicked on a filter in the Filter Browser. The name of the selected filter is send as the object in the notification
-// IKFilterBrowserFilterSelectedNotification returns the string constant IKFilterBrowserFilterSelectedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func IKFilterBrowserFilterSelectedNotification() objc.ID {
-	return purego.CFConstant(raw.IKFilterBrowserFilterSelectedNotification())
+// IKFilterBrowserFilterSelectedNotification Send when the user clicked on a filter in the Filter Browser. The name of the selected filter is send as the object in the notification
+// IKFilterBrowserFilterSelectedNotification returns the string constant IKFilterBrowserFilterSelectedNotification, for use as a dictionary key or argument.
+func IKFilterBrowserFilterSelectedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKFilterBrowserFilterSelectedNotification")))
 }
 
-// @const      IKFilterBrowserFilterDoubleClickNotification @abstract   IKFilterBrowserFilterDoubleClickNotification @discussion Send when the user made a double click on a filter in the Filter Browser. The name of the selected filter is send as the object in the notification
-// IKFilterBrowserFilterDoubleClickNotification returns the string constant IKFilterBrowserFilterDoubleClickNotification as an objc.ID, for use as a dictionary key or selector argument.
-func IKFilterBrowserFilterDoubleClickNotification() objc.ID {
-	return purego.CFConstant(raw.IKFilterBrowserFilterDoubleClickNotification())
+// IKFilterBrowserFilterDoubleClickNotification Send when the user made a double click on a filter in the Filter Browser. The name of the selected filter is send as the object in the notification
+// IKFilterBrowserFilterDoubleClickNotification returns the string constant IKFilterBrowserFilterDoubleClickNotification, for use as a dictionary key or argument.
+func IKFilterBrowserFilterDoubleClickNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKFilterBrowserFilterDoubleClickNotification")))
 }
 
-// @const      IKFilterBrowserWillPreviewFilterNotification @abstract   IKFilterBrowserWillPreviewFilterNotification @discussion Send before a filter is previewed allowing for setting parameters of that filter. The selected CIFilter object is send as the object in the notification
-// IKFilterBrowserWillPreviewFilterNotification returns the string constant IKFilterBrowserWillPreviewFilterNotification as an objc.ID, for use as a dictionary key or selector argument.
-func IKFilterBrowserWillPreviewFilterNotification() objc.ID {
-	return purego.CFConstant(raw.IKFilterBrowserWillPreviewFilterNotification())
+// IKFilterBrowserWillPreviewFilterNotification Send before a filter is previewed allowing for setting parameters of that filter. The selected CIFilter object is send as the object in the notification
+// IKFilterBrowserWillPreviewFilterNotification returns the string constant IKFilterBrowserWillPreviewFilterNotification, for use as a dictionary key or argument.
+func IKFilterBrowserWillPreviewFilterNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKFilterBrowserWillPreviewFilterNotification")))
 }
 
-// @const      IKFilterBrowserShowCategories @abstract   IKFilterBrowserShowCategories @discussion BOOL - Determines if the filter browser should show the category list
-// IKFilterBrowserShowCategories returns the string constant IKFilterBrowserShowCategories as an objc.ID, for use as a dictionary key or selector argument.
-func IKFilterBrowserShowCategories() objc.ID {
-	return purego.CFConstant(raw.IKFilterBrowserShowCategories())
+// IKFilterBrowserShowCategories BOOL - Determines if the filter browser should show the category list
+// IKFilterBrowserShowCategories returns the string constant IKFilterBrowserShowCategories, for use as a dictionary key or argument.
+func IKFilterBrowserShowCategories() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKFilterBrowserShowCategories")))
 }
 
-// @const      IKFilterBrowserShowPreview @abstract   IKFilterBrowserShowPreview @discussion BOOL - Determines if the filter browser should show the preview well
-// IKFilterBrowserShowPreview returns the string constant IKFilterBrowserShowPreview as an objc.ID, for use as a dictionary key or selector argument.
-func IKFilterBrowserShowPreview() objc.ID {
-	return purego.CFConstant(raw.IKFilterBrowserShowPreview())
+// IKFilterBrowserShowPreview BOOL - Determines if the filter browser should show the preview well
+// IKFilterBrowserShowPreview returns the string constant IKFilterBrowserShowPreview, for use as a dictionary key or argument.
+func IKFilterBrowserShowPreview() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKFilterBrowserShowPreview")))
 }
 
-// @const      IKFilterBrowserExcludeCategories @abstract   IKFilterBrowserExcludeCategories @discussion NSArray - The categories in this array will not be displayed in the browser
-// IKFilterBrowserExcludeCategories returns the string constant IKFilterBrowserExcludeCategories as an objc.ID, for use as a dictionary key or selector argument.
-func IKFilterBrowserExcludeCategories() objc.ID {
-	return purego.CFConstant(raw.IKFilterBrowserExcludeCategories())
+// IKFilterBrowserExcludeCategories NSArray - The categories in this array will not be displayed in the browser
+// IKFilterBrowserExcludeCategories returns the string constant IKFilterBrowserExcludeCategories, for use as a dictionary key or argument.
+func IKFilterBrowserExcludeCategories() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKFilterBrowserExcludeCategories")))
 }
 
-// @const      IKFilterBrowserExcludeFilters @abstract   IKFilterBrowserExcludeFilters @discussion NSArray - The filters in this array will not be displayed in the browser
-// IKFilterBrowserExcludeFilters returns the string constant IKFilterBrowserExcludeFilters as an objc.ID, for use as a dictionary key or selector argument.
-func IKFilterBrowserExcludeFilters() objc.ID {
-	return purego.CFConstant(raw.IKFilterBrowserExcludeFilters())
+// IKFilterBrowserExcludeFilters NSArray - The filters in this array will not be displayed in the browser
+// IKFilterBrowserExcludeFilters returns the string constant IKFilterBrowserExcludeFilters, for use as a dictionary key or argument.
+func IKFilterBrowserExcludeFilters() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKFilterBrowserExcludeFilters")))
 }
 
-// @const      IKFilterBrowserDefaultInputImage @abstract   IKFilterBrowserDefaultInputImage - Allows you to set a custom image to be used as the inputImage for the filter preview. @discussion CIImage* - You can also set the inputImage among other parameters during the IKFilterBrowserWillPreviewFilterNotification. This image will be set before the notification is called. Setting the image to nil falls back to the image suplied by the framework.
-// IKFilterBrowserDefaultInputImage returns the string constant IKFilterBrowserDefaultInputImage as an objc.ID, for use as a dictionary key or selector argument.
-func IKFilterBrowserDefaultInputImage() objc.ID {
-	return purego.CFConstant(raw.IKFilterBrowserDefaultInputImage())
+// IKFilterBrowserDefaultInputImage - Allows you to set a custom image to be used as the inputImage for the filter preview. CIImage* - You can also set the inputImage among other parameters during the IKFilterBrowserWillPreviewFilterNotification. This image will be set before the notification is called. Setting the image to nil falls back to the image suplied by the framework.
+// IKFilterBrowserDefaultInputImage returns the string constant IKFilterBrowserDefaultInputImage, for use as a dictionary key or argument.
+func IKFilterBrowserDefaultInputImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKFilterBrowserDefaultInputImage")))
 }
 
-// IKSlideshowModeImages returns the string constant IKSlideshowModeImages as an objc.ID, for use as a dictionary key or selector argument.
-func IKSlideshowModeImages() objc.ID {
-	return purego.CFConstant(raw.IKSlideshowModeImages())
+// IKSlideshowModeImages returns the string constant IKSlideshowModeImages, for use as a dictionary key or argument.
+func IKSlideshowModeImages() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKSlideshowModeImages")))
 }
 
-// IKSlideshowModePDF returns the string constant IKSlideshowModePDF as an objc.ID, for use as a dictionary key or selector argument.
-func IKSlideshowModePDF() objc.ID {
-	return purego.CFConstant(raw.IKSlideshowModePDF())
+// IKSlideshowModePDF returns the string constant IKSlideshowModePDF, for use as a dictionary key or argument.
+func IKSlideshowModePDF() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKSlideshowModePDF")))
 }
 
-// IKSlideshowModeOther returns the string constant IKSlideshowModeOther as an objc.ID, for use as a dictionary key or selector argument.
-func IKSlideshowModeOther() objc.ID {
-	return purego.CFConstant(raw.IKSlideshowModeOther())
+// IKSlideshowModeOther returns the string constant IKSlideshowModeOther, for use as a dictionary key or argument.
+func IKSlideshowModeOther() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKSlideshowModeOther")))
 }
 
-// IKSlideshowWrapAround returns the string constant IKSlideshowWrapAround as an objc.ID, for use as a dictionary key or selector argument.
-func IKSlideshowWrapAround() objc.ID {
-	return purego.CFConstant(raw.IKSlideshowWrapAround())
+// IKSlideshowWrapAround returns the string constant IKSlideshowWrapAround, for use as a dictionary key or argument.
+func IKSlideshowWrapAround() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKSlideshowWrapAround")))
 }
 
-// IKSlideshowStartPaused returns the string constant IKSlideshowStartPaused as an objc.ID, for use as a dictionary key or selector argument.
-func IKSlideshowStartPaused() objc.ID {
-	return purego.CFConstant(raw.IKSlideshowStartPaused())
+// IKSlideshowStartPaused returns the string constant IKSlideshowStartPaused, for use as a dictionary key or argument.
+func IKSlideshowStartPaused() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKSlideshowStartPaused")))
 }
 
-// IKSlideshowStartIndex returns the string constant IKSlideshowStartIndex as an objc.ID, for use as a dictionary key or selector argument.
-func IKSlideshowStartIndex() objc.ID {
-	return purego.CFConstant(raw.IKSlideshowStartIndex())
+// IKSlideshowStartIndex returns the string constant IKSlideshowStartIndex, for use as a dictionary key or argument.
+func IKSlideshowStartIndex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKSlideshowStartIndex")))
 }
 
-// IKSlideshowScreen returns the string constant IKSlideshowScreen as an objc.ID, for use as a dictionary key or selector argument.
-func IKSlideshowScreen() objc.ID {
-	return purego.CFConstant(raw.IKSlideshowScreen())
-}
+// IKSlideshowScreen returns the string constant IKSlideshowScreen, for use as a dictionary key or argument.
+func IKSlideshowScreen() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IKSlideshowScreen"))) }
 
-// IKSlideshowAudioFile returns the string constant IKSlideshowAudioFile as an objc.ID, for use as a dictionary key or selector argument.
-func IKSlideshowAudioFile() objc.ID {
-	return purego.CFConstant(raw.IKSlideshowAudioFile())
+// IKSlideshowAudioFile returns the string constant IKSlideshowAudioFile, for use as a dictionary key or argument.
+func IKSlideshowAudioFile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKSlideshowAudioFile")))
 }
 
-// IKSlideshowPDFDisplayBox returns the string constant IKSlideshowPDFDisplayBox as an objc.ID, for use as a dictionary key or selector argument.
-func IKSlideshowPDFDisplayBox() objc.ID {
-	return purego.CFConstant(raw.IKSlideshowPDFDisplayBox())
+// IKSlideshowPDFDisplayBox returns the string constant IKSlideshowPDFDisplayBox, for use as a dictionary key or argument.
+func IKSlideshowPDFDisplayBox() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKSlideshowPDFDisplayBox")))
 }
 
-// IKSlideshowPDFDisplayMode returns the string constant IKSlideshowPDFDisplayMode as an objc.ID, for use as a dictionary key or selector argument.
-func IKSlideshowPDFDisplayMode() objc.ID {
-	return purego.CFConstant(raw.IKSlideshowPDFDisplayMode())
+// IKSlideshowPDFDisplayMode returns the string constant IKSlideshowPDFDisplayMode, for use as a dictionary key or argument.
+func IKSlideshowPDFDisplayMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKSlideshowPDFDisplayMode")))
 }
 
-// IKSlideshowPDFDisplaysAsBook returns the string constant IKSlideshowPDFDisplaysAsBook as an objc.ID, for use as a dictionary key or selector argument.
-func IKSlideshowPDFDisplaysAsBook() objc.ID {
-	return purego.CFConstant(raw.IKSlideshowPDFDisplaysAsBook())
+// IKSlideshowPDFDisplaysAsBook returns the string constant IKSlideshowPDFDisplaysAsBook, for use as a dictionary key or argument.
+func IKSlideshowPDFDisplaysAsBook() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKSlideshowPDFDisplaysAsBook")))
 }
 
-// IK_iPhotoBundleIdentifier returns the string constant IK_iPhotoBundleIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func IK_iPhotoBundleIdentifier() objc.ID {
-	return purego.CFConstant(raw.IK_iPhotoBundleIdentifier())
+// IK_iPhotoBundleIdentifier returns the string constant IK_iPhotoBundleIdentifier, for use as a dictionary key or argument.
+func IK_iPhotoBundleIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IK_iPhotoBundleIdentifier")))
 }
 
-// IK_ApertureBundleIdentifier returns the string constant IK_ApertureBundleIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func IK_ApertureBundleIdentifier() objc.ID {
-	return purego.CFConstant(raw.IK_ApertureBundleIdentifier())
+// IK_ApertureBundleIdentifier returns the string constant IK_ApertureBundleIdentifier, for use as a dictionary key or argument.
+func IK_ApertureBundleIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IK_ApertureBundleIdentifier")))
 }
 
-// IK_MailBundleIdentifier returns the string constant IK_MailBundleIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func IK_MailBundleIdentifier() objc.ID {
-	return purego.CFConstant(raw.IK_MailBundleIdentifier())
+// IK_MailBundleIdentifier returns the string constant IK_MailBundleIdentifier, for use as a dictionary key or argument.
+func IK_MailBundleIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IK_MailBundleIdentifier")))
 }
 
-// IK_PhotosBundleIdentifier returns the string constant IK_PhotosBundleIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func IK_PhotosBundleIdentifier() objc.ID {
-	return purego.CFConstant(raw.IK_PhotosBundleIdentifier())
+// IK_PhotosBundleIdentifier returns the string constant IK_PhotosBundleIdentifier, for use as a dictionary key or argument.
+func IK_PhotosBundleIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IK_PhotosBundleIdentifier")))
 }
 
-// IKToolModeNone returns the string constant IKToolModeNone as an objc.ID, for use as a dictionary key or selector argument.
-func IKToolModeNone() objc.ID {
-	return purego.CFConstant(raw.IKToolModeNone())
-}
+// IKToolModeNone returns the string constant IKToolModeNone, for use as a dictionary key or argument.
+func IKToolModeNone() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IKToolModeNone"))) }
 
-// IKToolModeMove returns the string constant IKToolModeMove as an objc.ID, for use as a dictionary key or selector argument.
-func IKToolModeMove() objc.ID {
-	return purego.CFConstant(raw.IKToolModeMove())
-}
+// IKToolModeMove returns the string constant IKToolModeMove, for use as a dictionary key or argument.
+func IKToolModeMove() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IKToolModeMove"))) }
 
-// IKToolModeSelect returns the string constant IKToolModeSelect as an objc.ID, for use as a dictionary key or selector argument.
-func IKToolModeSelect() objc.ID {
-	return purego.CFConstant(raw.IKToolModeSelect())
-}
+// IKToolModeSelect returns the string constant IKToolModeSelect, for use as a dictionary key or argument.
+func IKToolModeSelect() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IKToolModeSelect"))) }
 
-// IKToolModeSelectRect returns the string constant IKToolModeSelectRect as an objc.ID, for use as a dictionary key or selector argument.
-func IKToolModeSelectRect() objc.ID {
-	return purego.CFConstant(raw.IKToolModeSelectRect())
+// IKToolModeSelectRect returns the string constant IKToolModeSelectRect, for use as a dictionary key or argument.
+func IKToolModeSelectRect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKToolModeSelectRect")))
 }
 
-// IKToolModeSelectEllipse returns the string constant IKToolModeSelectEllipse as an objc.ID, for use as a dictionary key or selector argument.
-func IKToolModeSelectEllipse() objc.ID {
-	return purego.CFConstant(raw.IKToolModeSelectEllipse())
+// IKToolModeSelectEllipse returns the string constant IKToolModeSelectEllipse, for use as a dictionary key or argument.
+func IKToolModeSelectEllipse() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKToolModeSelectEllipse")))
 }
 
-// IKToolModeSelectLasso returns the string constant IKToolModeSelectLasso as an objc.ID, for use as a dictionary key or selector argument.
-func IKToolModeSelectLasso() objc.ID {
-	return purego.CFConstant(raw.IKToolModeSelectLasso())
+// IKToolModeSelectLasso returns the string constant IKToolModeSelectLasso, for use as a dictionary key or argument.
+func IKToolModeSelectLasso() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKToolModeSelectLasso")))
 }
 
-// IKToolModeCrop returns the string constant IKToolModeCrop as an objc.ID, for use as a dictionary key or selector argument.
-func IKToolModeCrop() objc.ID {
-	return purego.CFConstant(raw.IKToolModeCrop())
-}
+// IKToolModeCrop returns the string constant IKToolModeCrop, for use as a dictionary key or argument.
+func IKToolModeCrop() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IKToolModeCrop"))) }
 
-// IKToolModeRotate returns the string constant IKToolModeRotate as an objc.ID, for use as a dictionary key or selector argument.
-func IKToolModeRotate() objc.ID {
-	return purego.CFConstant(raw.IKToolModeRotate())
-}
+// IKToolModeRotate returns the string constant IKToolModeRotate, for use as a dictionary key or argument.
+func IKToolModeRotate() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("IKToolModeRotate"))) }
 
-// IKToolModeAnnotate returns the string constant IKToolModeAnnotate as an objc.ID, for use as a dictionary key or selector argument.
-func IKToolModeAnnotate() objc.ID {
-	return purego.CFConstant(raw.IKToolModeAnnotate())
+// IKToolModeAnnotate returns the string constant IKToolModeAnnotate, for use as a dictionary key or argument.
+func IKToolModeAnnotate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKToolModeAnnotate")))
 }
 
-// IKOverlayTypeBackground returns the string constant IKOverlayTypeBackground as an objc.ID, for use as a dictionary key or selector argument.
-func IKOverlayTypeBackground() objc.ID {
-	return purego.CFConstant(raw.IKOverlayTypeBackground())
+// IKOverlayTypeBackground returns the string constant IKOverlayTypeBackground, for use as a dictionary key or argument.
+func IKOverlayTypeBackground() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKOverlayTypeBackground")))
 }
 
-// IKOverlayTypeImage returns the string constant IKOverlayTypeImage as an objc.ID, for use as a dictionary key or selector argument.
-func IKOverlayTypeImage() objc.ID {
-	return purego.CFConstant(raw.IKOverlayTypeImage())
+// IKOverlayTypeImage returns the string constant IKOverlayTypeImage, for use as a dictionary key or argument.
+func IKOverlayTypeImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKOverlayTypeImage")))
 }
 
-// IKPictureTakerShowAddressBookPicture returns the string constant IKPictureTakerShowAddressBookPicture as an objc.ID, for use as a dictionary key or selector argument.
-func IKPictureTakerShowAddressBookPicture() objc.ID {
-	return purego.CFConstant(raw.IKPictureTakerShowAddressBookPicture())
+// IKPictureTakerShowAddressBookPicture returns the string constant IKPictureTakerShowAddressBookPicture, for use as a dictionary key or argument.
+func IKPictureTakerShowAddressBookPicture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKPictureTakerShowAddressBookPicture")))
 }
 
-// IKPictureTakerShowEmptyPicture returns the string constant IKPictureTakerShowEmptyPicture as an objc.ID, for use as a dictionary key or selector argument.
-func IKPictureTakerShowEmptyPicture() objc.ID {
-	return purego.CFConstant(raw.IKPictureTakerShowEmptyPicture())
+// IKPictureTakerShowEmptyPicture returns the string constant IKPictureTakerShowEmptyPicture, for use as a dictionary key or argument.
+func IKPictureTakerShowEmptyPicture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKPictureTakerShowEmptyPicture")))
 }
 
-// IKPictureTakerCropAreaSizeKey returns the string constant IKPictureTakerCropAreaSizeKey as an objc.ID, for use as a dictionary key or selector argument.
-func IKPictureTakerCropAreaSizeKey() objc.ID {
-	return purego.CFConstant(raw.IKPictureTakerCropAreaSizeKey())
+// IKPictureTakerCropAreaSizeKey returns the string constant IKPictureTakerCropAreaSizeKey, for use as a dictionary key or argument.
+func IKPictureTakerCropAreaSizeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IKPictureTakerCropAreaSizeKey")))
 }

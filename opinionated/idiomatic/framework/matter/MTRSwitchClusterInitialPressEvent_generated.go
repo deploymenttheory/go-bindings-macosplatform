@@ -5,61 +5,84 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRSwitchClusterInitialPressEvent wraps [raw.MTRSwitchClusterInitialPressEvent] with a fluent Go API.
+// MTRSwitchClusterInitialPressEvent is an idiomatic wrapper over the Objective-C class MTRSwitchClusterInitialPressEvent.
 type MTRSwitchClusterInitialPressEvent struct {
-	inner *raw.MTRSwitchClusterInitialPressEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRSwitchClusterInitialPressEvent].
-func (x *MTRSwitchClusterInitialPressEvent) Unwrap() *raw.MTRSwitchClusterInitialPressEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRSwitchClusterInitialPressEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRSwitchClusterInitialPressEventFromID adopts an existing object pointer as a MTRSwitchClusterInitialPressEvent (nil for 0).
+// MTRSwitchClusterInitialPressEventFromID adopts an existing Objective-C object as a MTRSwitchClusterInitialPressEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRSwitchClusterInitialPressEventFromID(id objc.ID) *MTRSwitchClusterInitialPressEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRSwitchClusterInitialPressEvent{inner: raw.MTRSwitchClusterInitialPressEventFromID(id)}
-}
-
-// NewMTRSwitchClusterInitialPressEvent creates a new [MTRSwitchClusterInitialPressEvent].
-func NewMTRSwitchClusterInitialPressEvent() *MTRSwitchClusterInitialPressEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRSwitchClusterInitialPressEvent")), objc.RegisterName("new"))
-	return &MTRSwitchClusterInitialPressEvent{inner: raw.MTRSwitchClusterInitialPressEventFromID(_id)}
-}
-
-// WithNewPosition sets the newPosition property and returns the receiver for chaining.
-func (x *MTRSwitchClusterInitialPressEvent) WithNewPosition(newPosition *foundation.NSNumber) *MTRSwitchClusterInitialPressEvent {
-	x.inner.SetNewPosition(newPosition)
+	x := &MTRSwitchClusterInitialPressEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// GetNewPosition calls the underlying GetNewPosition.
-func (x *MTRSwitchClusterInitialPressEvent) GetNewPosition() *foundation.NSNumber {
-	return x.inner.GetNewPosition()
+// mTRSwitchClusterInitialPressEventAdopt wraps an Objective-C object that this code just created as a
+// MTRSwitchClusterInitialPressEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRSwitchClusterInitialPressEventAdopt(id objc.ID) *MTRSwitchClusterInitialPressEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRSwitchClusterInitialPressEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetNewPosition calls the underlying SetNewPosition.
-func (x *MTRSwitchClusterInitialPressEvent) SetNewPosition(newPosition *foundation.NSNumber) {
-	x.inner.SetNewPosition(newPosition)
+// Description returns the object's -description text.
+func (x *MTRSwitchClusterInitialPressEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRSwitchClusterInitialPressEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRSwitchClusterInitialPressEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRSwitchClusterInitialPressEvent creates a new MTRSwitchClusterInitialPressEvent.
+func NewMTRSwitchClusterInitialPressEvent() *MTRSwitchClusterInitialPressEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRSwitchClusterInitialPressEvent")), objc.RegisterName("new"))
+	return mTRSwitchClusterInitialPressEventAdopt(_id)
+}
+
+// WithNewPosition sets newPosition and returns the receiver so calls can be chained.
+func (x *MTRSwitchClusterInitialPressEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterInitialPressEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
+	return x
+}
+
+func (x *MTRSwitchClusterInitialPressEvent) GetNewPosition() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewPosition"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRSwitchClusterInitialPressEvent) SetNewPosition(newPosition obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
 }
 
 // MTRSwitchClusterInitialPressEventable is the interface implemented by [MTRSwitchClusterInitialPressEvent], for mocking and DI.
 type MTRSwitchClusterInitialPressEventable interface {
-	Unwrap() *raw.MTRSwitchClusterInitialPressEvent
-	WithNewPosition(newPosition *foundation.NSNumber) *MTRSwitchClusterInitialPressEvent
-	GetNewPosition() *foundation.NSNumber
-	SetNewPosition(newPosition *foundation.NSNumber)
+	obj.Object
+	WithNewPosition(newPosition obj.Object) *MTRSwitchClusterInitialPressEvent
+	GetNewPosition() obj.Object
+	SetNewPosition(newPosition obj.Object)
 }
 
 var _ MTRSwitchClusterInitialPressEventable = (*MTRSwitchClusterInitialPressEvent)(nil)

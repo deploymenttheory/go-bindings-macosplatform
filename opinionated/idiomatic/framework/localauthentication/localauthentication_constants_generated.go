@@ -5,13 +5,10 @@
 package localauthentication
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
 // LocalAuthentication error domain.
-// LAErrorDomain returns the string constant LAErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func LAErrorDomain() objc.ID {
-	return purego.CFConstant(raw.LAErrorDomain())
-}
+// LAErrorDomain returns the string constant LAErrorDomain, for use as a dictionary key or argument.
+func LAErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("LAErrorDomain"))) }

@@ -5,144 +5,141 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A capture output for capturing still photos.
 //
-// CaptureStillImageOutput wraps [raw.AVCaptureStillImageOutput] with a fluent Go API.
+// CaptureStillImageOutput is an idiomatic wrapper over the Objective-C class AVCaptureStillImageOutput.
 type CaptureStillImageOutput struct {
-	inner *raw.AVCaptureStillImageOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureStillImageOutput].
-func (x *CaptureStillImageOutput) Unwrap() *raw.AVCaptureStillImageOutput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureStillImageOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureStillImageOutputFromID adopts an existing object pointer as a CaptureStillImageOutput (nil for 0).
+// CaptureStillImageOutputFromID adopts an existing Objective-C object as a CaptureStillImageOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureStillImageOutputFromID(id objc.ID) *CaptureStillImageOutput {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureStillImageOutput{inner: raw.AVCaptureStillImageOutputFromID(id)}
+	x := &CaptureStillImageOutput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCaptureStillImageOutput creates a new [CaptureStillImageOutput].
+// captureStillImageOutputAdopt wraps an Objective-C object that this code just created as a
+// CaptureStillImageOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureStillImageOutputAdopt(id objc.ID) *CaptureStillImageOutput {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureStillImageOutput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptureStillImageOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureStillImageOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureStillImageOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptureStillImageOutput creates a new CaptureStillImageOutput.
 func NewCaptureStillImageOutput() *CaptureStillImageOutput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureStillImageOutput")), objc.RegisterName("new"))
-	return &CaptureStillImageOutput{inner: raw.AVCaptureStillImageOutputFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureStillImageOutput")), objc.RegisterName("new"))
+	return captureStillImageOutputAdopt(_id)
 }
 
 // The compression settings for the output.
 //
-// WithOutputSettings sets the outputSettings property and returns the receiver for chaining.
-func (x *CaptureStillImageOutput) WithOutputSettings(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptureStillImageOutput {
-	x.inner.SetOutputSettings(outputSettings)
+// WithOutputSettings sets outputSettings and returns the receiver so calls can be chained.
+func (x *CaptureStillImageOutput) WithOutputSettings(outputSettings obj.Object) *CaptureStillImageOutput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputSettings:"), objref.IDOf(outputSettings))
 	return x
 }
 
 // A Boolean value that indicates whether the receiver should emit still images at the highest resolution supported by its source AVCaptureDevice objects activeFormat property.
 //
-// WithHighResolutionStillImageOutputEnabled sets the highResolutionStillImageOutputEnabled property and returns the receiver for chaining.
+// WithHighResolutionStillImageOutputEnabled sets highResolutionStillImageOutputEnabled and returns the receiver so calls can be chained.
 func (x *CaptureStillImageOutput) WithHighResolutionStillImageOutputEnabled(highResolutionStillImageOutputEnabled bool) *CaptureStillImageOutput {
-	x.inner.SetHighResolutionStillImageOutputEnabled(highResolutionStillImageOutputEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighResolutionStillImageOutputEnabled:"), highResolutionStillImageOutputEnabled)
 	return x
 }
 
 // A Boolean value that indicates whether to defer starting this capture output.
 //
-// WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
+// WithDeferredStartEnabled sets deferredStartEnabled and returns the receiver so calls can be chained.
 func (x *CaptureStillImageOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureStillImageOutput {
-	x.inner.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
 	return x
 }
 
-// Initiates a still image capture and returns immediately.
-//
-// CaptureStillImageAsynchronouslyFromConnectionCompletionHandler calls the underlying CaptureStillImageAsynchronouslyFromConnectionCompletionHandler.
-func (x *CaptureStillImageOutput) CaptureStillImageAsynchronouslyFromConnectionCompletionHandler(connection *raw.AVCaptureConnection, handler func(unsafe.Pointer, unsafe.Pointer)) {
-	x.inner.CaptureStillImageAsynchronouslyFromConnectionCompletionHandler(connection, handler)
+// Specifies the options the receiver uses to encode still images before they are delivered. See AVVideoSettings.h for more information on how to construct an output settings dictionary. On iOS, the only currently supported keys are AVVideoCodecKey and kCVPixelBufferPixelFormatTypeKey. Use -availableImageDataCVPixelFormatTypes and -availableImageDataCodecTypes to determine what codec keys and pixel formats are supported. AVVideoQualityKey is supported on iOS 6.0 and later and may only be used when AVVideoCodecKey is set to AVVideoCodecTypeJPEG.
+func (x *CaptureStillImageOutput) OutputSettings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputSettings"))
+	return obj.Wrap(_r)
 }
 
-// @property outputSettings @abstract Specifies the options the receiver uses to encode still images before they are delivered. @discussion See AVVideoSettings.h for more information on how to construct an output settings dictionary. On iOS, the only currently supported keys are AVVideoCodecKey and kCVPixelBufferPixelFormatTypeKey. Use -availableImageDataCVPixelFormatTypes and -availableImageDataCodecTypes to determine what codec keys and pixel formats are supported. AVVideoQualityKey is supported on iOS 6.0 and later and may only be used when AVVideoCodecKey is set to AVVideoCodecTypeJPEG.
-//
-// OutputSettings calls the underlying OutputSettings.
-func (x *CaptureStillImageOutput) OutputSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.OutputSettings()
+func (x *CaptureStillImageOutput) SetOutputSettings(outputSettings obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputSettings:"), objref.IDOf(outputSettings))
 }
 
-// SetOutputSettings calls the underlying SetOutputSettings.
-func (x *CaptureStillImageOutput) SetOutputSettings(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.SetOutputSettings(outputSettings)
-}
-
-// @property availableImageDataCVPixelFormatTypes @abstract Indicates the supported image pixel formats that can be specified in outputSettings. @discussion The value of this property is an NSArray of NSNumbers that can be used as values for the kCVPixelBufferPixelFormatTypeKey in the receiver's outputSettings property. The first format in the returned list is the most efficient output format.
+// Indicates the supported image pixel formats that can be specified in outputSettings. The value of this property is an NSArray of NSNumbers that can be used as values for the kCVPixelBufferPixelFormatTypeKey in the receiver's outputSettings property. The first format in the returned list is the most efficient output format.
 //
 // AvailableImageDataCVPixelFormatTypes returns the collection as a Go slice.
-func (x *CaptureStillImageOutput) AvailableImageDataCVPixelFormatTypes() []*foundation.NSNumber {
-	arr := x.inner.AvailableImageDataCVPixelFormatTypes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *CaptureStillImageOutput) AvailableImageDataCVPixelFormatTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableImageDataCVPixelFormatTypes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @property availableImageDataCodecTypes @abstract Indicates the supported image codec formats that can be specified in outputSettings. @discussion The value of this property is an NSArray of AVVideoCodecTypes that can be used as values for the AVVideoCodecKey in the receiver's outputSettings property.
+// Indicates the supported image codec formats that can be specified in outputSettings. The value of this property is an NSArray of AVVideoCodecTypes that can be used as values for the AVVideoCodecKey in the receiver's outputSettings property.
 //
 // AvailableImageDataCodecTypes returns the collection as a Go slice.
-func (x *CaptureStillImageOutput) AvailableImageDataCodecTypes() []*foundation.NSString {
-	arr := x.inner.AvailableImageDataCodecTypes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *CaptureStillImageOutput) AvailableImageDataCodecTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableImageDataCodecTypes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @property highResolutionStillImageOutputEnabled @abstract Indicates whether the receiver should emit still images at the highest resolution supported by its source AVCaptureDevice's activeFormat. @discussion By default, AVCaptureStillImageOutput emits images with the same dimensions as its source AVCaptureDevice's activeFormat.formatDescription. However, if you set this property to YES, the receiver emits still images at its source AVCaptureDevice's activeFormat.highResolutionStillImageDimensions. Note that if you enable video stabilization (see AVCaptureConnection's preferredVideoStabilizationMode) for any output, the high resolution still images emitted by AVCaptureStillImageOutput may be smaller by 10 or more percent.
-//
-// IsHighResolutionStillImageOutputEnabled calls the underlying IsHighResolutionStillImageOutputEnabled.
+// Indicates whether the receiver should emit still images at the highest resolution supported by its source AVCaptureDevice's activeFormat. By default, AVCaptureStillImageOutput emits images with the same dimensions as its source AVCaptureDevice's activeFormat.formatDescription. However, if you set this property to YES, the receiver emits still images at its source AVCaptureDevice's activeFormat.highResolutionStillImageDimensions. Note that if you enable video stabilization (see AVCaptureConnection's preferredVideoStabilizationMode) for any output, the high resolution still images emitted by AVCaptureStillImageOutput may be smaller by 10 or more percent.
 func (x *CaptureStillImageOutput) IsHighResolutionStillImageOutputEnabled() bool {
-	return x.inner.IsHighResolutionStillImageOutputEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHighResolutionStillImageOutputEnabled"))
+	return _r
 }
 
-// SetHighResolutionStillImageOutputEnabled calls the underlying SetHighResolutionStillImageOutputEnabled.
 func (x *CaptureStillImageOutput) SetHighResolutionStillImageOutputEnabled(highResolutionStillImageOutputEnabled bool) {
-	x.inner.SetHighResolutionStillImageOutputEnabled(highResolutionStillImageOutputEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighResolutionStillImageOutputEnabled:"), highResolutionStillImageOutputEnabled)
 }
 
-// @property capturingStillImage @abstract A boolean value that becomes true when a still image is being captured. @discussion The value of this property is a BOOL that becomes true when a still image is being captured, and false when no still image capture is underway. This property is key-value observable.
-//
-// IsCapturingStillImage calls the underlying IsCapturingStillImage.
+// A boolean value that becomes true when a still image is being captured. The value of this property is a BOOL that becomes true when a still image is being captured, and false when no still image capture is underway. This property is key-value observable.
 func (x *CaptureStillImageOutput) IsCapturingStillImage() bool {
-	return x.inner.IsCapturingStillImage()
-}
-
-func (x *CaptureStillImageOutput) asCaptureOutput() *raw.AVCaptureOutput {
-	return &x.inner.AVCaptureOutput
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCapturingStillImage"))
+	return _r
 }
 
 // CaptureStillImageOutputable is the interface implemented by [CaptureStillImageOutput], for mocking and DI.
 type CaptureStillImageOutputable interface {
-	Unwrap() *raw.AVCaptureStillImageOutput
-	WithOutputSettings(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptureStillImageOutput
+	obj.Object
+	WithOutputSettings(outputSettings obj.Object) *CaptureStillImageOutput
 	WithHighResolutionStillImageOutputEnabled(highResolutionStillImageOutputEnabled bool) *CaptureStillImageOutput
 	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureStillImageOutput
-	CaptureStillImageAsynchronouslyFromConnectionCompletionHandler(connection *raw.AVCaptureConnection, handler func(unsafe.Pointer, unsafe.Pointer))
-	OutputSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SetOutputSettings(outputSettings *foundation.NSDictionary[*foundation.NSString, objc.ID])
-	AvailableImageDataCVPixelFormatTypes() []*foundation.NSNumber
-	AvailableImageDataCodecTypes() []*foundation.NSString
+	OutputSettings() obj.Object
+	SetOutputSettings(outputSettings obj.Object)
+	AvailableImageDataCVPixelFormatTypes() []obj.Object
+	AvailableImageDataCodecTypes() []obj.Object
 	IsHighResolutionStillImageOutputEnabled() bool
 	SetHighResolutionStillImageOutputEnabled(highResolutionStillImageOutputEnabled bool)
 	IsCapturingStillImage() bool

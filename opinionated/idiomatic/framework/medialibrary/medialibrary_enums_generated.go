@@ -9,26 +9,26 @@ import (
 )
 
 // Specifies the media type associated with a particular media object. These constants are used to specify a media object’s mediaType attribute.
-type MLMediaType uint64
+type MediaType uint64
 
 const (
 	// Audio media type.
-	MLMediaTypeAudio MLMediaType = 1
+	MediaTypeAudio MediaType = 1
 	// Image media type.
-	MLMediaTypeImage MLMediaType = 2
+	MediaTypeImage MediaType = 2
 	// Video media type.
-	MLMediaTypeMovie MLMediaType = 4
+	MediaTypeMovie MediaType = 4
 )
 
-func (e MLMediaType) String() string {
+func (e MediaType) String() string {
 	switch e {
-	case MLMediaTypeAudio:
-		return "MLMediaTypeAudio"
-	case MLMediaTypeImage:
-		return "MLMediaTypeImage"
-	case MLMediaTypeMovie:
-		return "MLMediaTypeMovie"
+	case MediaTypeAudio:
+		return "MediaTypeAudio"
+	case MediaTypeImage:
+		return "MediaTypeImage"
+	case MediaTypeMovie:
+		return "MediaTypeMovie"
 	default:
-		return fmt.Sprintf("MLMediaType(%d)", int64(e))
+		return fmt.Sprintf("MediaType(%d)", int64(e))
 	}
 }

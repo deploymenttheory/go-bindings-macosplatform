@@ -5,64 +5,89 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// VehicleConnectionSession wraps [raw.PKVehicleConnectionSession] with a fluent Go API.
+// VehicleConnectionSession is an idiomatic wrapper over the Objective-C class PKVehicleConnectionSession.
 type VehicleConnectionSession struct {
-	inner *raw.PKVehicleConnectionSession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKVehicleConnectionSession].
-func (x *VehicleConnectionSession) Unwrap() *raw.PKVehicleConnectionSession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VehicleConnectionSession) ID() objc.ID { return x.inner.Ptr() }
-
-// VehicleConnectionSessionFromID adopts an existing object pointer as a VehicleConnectionSession (nil for 0).
+// VehicleConnectionSessionFromID adopts an existing Objective-C object as a VehicleConnectionSession
+// (nil for 0), retaining it and registering a release finalizer.
 func VehicleConnectionSessionFromID(id objc.ID) *VehicleConnectionSession {
 	if id == 0 {
 		return nil
 	}
-	return &VehicleConnectionSession{inner: raw.PKVehicleConnectionSessionFromID(id)}
+	x := &VehicleConnectionSession{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVehicleConnectionSession creates a new [VehicleConnectionSession].
+// vehicleConnectionSessionAdopt wraps an Objective-C object that this code just created as a
+// VehicleConnectionSession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vehicleConnectionSessionAdopt(id objc.ID) *VehicleConnectionSession {
+	if id == 0 {
+		return nil
+	}
+	x := &VehicleConnectionSession{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VehicleConnectionSession) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VehicleConnectionSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VehicleConnectionSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVehicleConnectionSession creates a new VehicleConnectionSession.
 func NewVehicleConnectionSession() *VehicleConnectionSession {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKVehicleConnectionSession")), objc.RegisterName("new"))
-	return &VehicleConnectionSession{inner: raw.PKVehicleConnectionSessionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKVehicleConnectionSession")), objc.RegisterName("new"))
+	return vehicleConnectionSessionAdopt(_id)
 }
 
-// SendDataError calls the underlying SendDataError.
-func (x *VehicleConnectionSession) SendDataError(message *foundation.NSData) (bool, error) {
-	return x.inner.SendDataError(message)
+func (x *VehicleConnectionSession) SendData(message obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendData:error:"), objref.IDOf(message), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Invalidate calls the underlying Invalidate.
 func (x *VehicleConnectionSession) Invalidate() {
-	x.inner.Invalidate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *VehicleConnectionSession) Delegate() raw.PKVehicleConnectionDelegate {
-	return x.inner.Delegate()
-}
-
-// ConnectionStatus calls the underlying ConnectionStatus.
-func (x *VehicleConnectionSession) ConnectionStatus() PKVehicleConnectionSessionConnectionState {
-	return PKVehicleConnectionSessionConnectionState(x.inner.ConnectionStatus())
+func (x *VehicleConnectionSession) ConnectionStatus() VehicleConnectionSessionConnectionState {
+	_r := objc.Send[VehicleConnectionSessionConnectionState](objref.IDOf(x), objc.RegisterName("connectionStatus"))
+	return _r
 }
 
 // VehicleConnectionSessionable is the interface implemented by [VehicleConnectionSession], for mocking and DI.
 type VehicleConnectionSessionable interface {
-	Unwrap() *raw.PKVehicleConnectionSession
-	SendDataError(message *foundation.NSData) (bool, error)
+	obj.Object
+	SendData(message obj.Object) error
 	Invalidate()
-	Delegate() raw.PKVehicleConnectionDelegate
-	ConnectionStatus() PKVehicleConnectionSessionConnectionState
+	ConnectionStatus() VehicleConnectionSessionConnectionState
 }
 
 var _ VehicleConnectionSessionable = (*VehicleConnectionSession)(nil)

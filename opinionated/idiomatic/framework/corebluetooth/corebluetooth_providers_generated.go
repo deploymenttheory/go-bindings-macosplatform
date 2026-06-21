@@ -5,35 +5,35 @@
 package corebluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// AttributeProvider is implemented by Attribute and any idiomatic type wrapping a CBAttribute subclass.
+// AttributeProvider is accepted wherever a CBAttribute (or one of its subclasses) is expected.
 type AttributeProvider interface {
-	asAttribute() *raw.CBAttribute
+	objref.Object
 }
 
-// CharacteristicProvider is implemented by Characteristic and any idiomatic type wrapping a CBCharacteristic subclass.
+// CharacteristicProvider is accepted wherever a CBCharacteristic (or one of its subclasses) is expected.
 type CharacteristicProvider interface {
-	asCharacteristic() *raw.CBCharacteristic
+	objref.Object
 }
 
-// DescriptorProvider is implemented by Descriptor and any idiomatic type wrapping a CBDescriptor subclass.
+// DescriptorProvider is accepted wherever a CBDescriptor (or one of its subclasses) is expected.
 type DescriptorProvider interface {
-	asDescriptor() *raw.CBDescriptor
+	objref.Object
 }
 
-// ManagerProvider is implemented by Manager and any idiomatic type wrapping a CBManager subclass.
+// ManagerProvider is accepted wherever a CBManager (or one of its subclasses) is expected.
 type ManagerProvider interface {
-	asManager() *raw.CBManager
+	objref.Object
 }
 
-// PeerProvider is implemented by Peer and any idiomatic type wrapping a CBPeer subclass.
+// PeerProvider is accepted wherever a CBPeer (or one of its subclasses) is expected.
 type PeerProvider interface {
-	asPeer() *raw.CBPeer
+	objref.Object
 }
 
-// ServiceProvider is implemented by Service and any idiomatic type wrapping a CBService subclass.
+// ServiceProvider is accepted wherever a CBService (or one of its subclasses) is expected.
 type ServiceProvider interface {
-	asService() *raw.CBService
+	objref.Object
 }

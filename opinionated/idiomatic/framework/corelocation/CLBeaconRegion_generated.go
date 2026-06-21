@@ -5,180 +5,198 @@
 package corelocation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A region for detecting the presence of iBeacon devices.
 //
-// BeaconRegion wraps [raw.CLBeaconRegion] with a fluent Go API.
+// BeaconRegion is an idiomatic wrapper over the Objective-C class CLBeaconRegion.
 type BeaconRegion struct {
-	inner *raw.CLBeaconRegion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLBeaconRegion].
-func (x *BeaconRegion) Unwrap() *raw.CLBeaconRegion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BeaconRegion) ID() objc.ID { return x.inner.Ptr() }
-
-// BeaconRegionFromID adopts an existing object pointer as a BeaconRegion (nil for 0).
+// BeaconRegionFromID adopts an existing Objective-C object as a BeaconRegion
+// (nil for 0), retaining it and registering a release finalizer.
 func BeaconRegionFromID(id objc.ID) *BeaconRegion {
 	if id == 0 {
 		return nil
 	}
-	return &BeaconRegion{inner: raw.CLBeaconRegionFromID(id)}
+	x := &BeaconRegion{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// beaconRegionAdopt wraps an Objective-C object that this code just created as a
+// BeaconRegion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func beaconRegionAdopt(id objc.ID) *BeaconRegion {
+	if id == 0 {
+		return nil
+	}
+	x := &BeaconRegion{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BeaconRegion) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BeaconRegion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BeaconRegion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates and returns a region object that targets beacons with the specified UUID.
 //
-// NewBeaconRegionWithUUIDIdentifier creates a new [BeaconRegion].
-func NewBeaconRegionWithUUIDIdentifier(uuid *foundation.NSUUID, identifier string) *BeaconRegion {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLBeaconRegion")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:identifier:"), uuid.Ptr(), foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &BeaconRegion{inner: raw.CLBeaconRegionFromID(_id)}
+// NewBeaconRegionWithUUIDIdentifier creates a new BeaconRegion.
+func NewBeaconRegionWithUUIDIdentifier(uuid obj.Object, identifier string) *BeaconRegion {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CLBeaconRegion")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:identifier:"), objref.IDOf(uuid), purego.NSString(identifier))
+	return beaconRegionAdopt(_id)
 }
 
 // Creates and returns a region object that targets a beacon with the specified UUID.
 //
-// NewBeaconRegionWithProximityUUIDIdentifier creates a new [BeaconRegion].
-func NewBeaconRegionWithProximityUUIDIdentifier(proximityUUID *foundation.NSUUID, identifier string) *BeaconRegion {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLBeaconRegion")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProximityUUID:identifier:"), proximityUUID.Ptr(), foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &BeaconRegion{inner: raw.CLBeaconRegionFromID(_id)}
+// NewBeaconRegionWithProximityUUIDIdentifier creates a new BeaconRegion.
+func NewBeaconRegionWithProximityUUIDIdentifier(proximityUUID obj.Object, identifier string) *BeaconRegion {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CLBeaconRegion")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProximityUUID:identifier:"), objref.IDOf(proximityUUID), purego.NSString(identifier))
+	return beaconRegionAdopt(_id)
 }
 
 // Creates and returns a region object that targets beacons with the specified UUID and major value.
 //
-// NewBeaconRegionWithUUIDMajorIdentifier creates a new [BeaconRegion].
-func NewBeaconRegionWithUUIDMajorIdentifier(uuid *foundation.NSUUID, major uint16, identifier string) *BeaconRegion {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLBeaconRegion")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:major:identifier:"), uuid.Ptr(), major, foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &BeaconRegion{inner: raw.CLBeaconRegionFromID(_id)}
+// NewBeaconRegionWithUUIDMajorIdentifier creates a new BeaconRegion.
+func NewBeaconRegionWithUUIDMajorIdentifier(uuid obj.Object, major uint16, identifier string) *BeaconRegion {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CLBeaconRegion")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:major:identifier:"), objref.IDOf(uuid), major, purego.NSString(identifier))
+	return beaconRegionAdopt(_id)
 }
 
 // Creates and returns a region object that targets a beacon with the specified proximity ID and major value.
 //
-// NewBeaconRegionWithProximityUUIDMajorIdentifier creates a new [BeaconRegion].
-func NewBeaconRegionWithProximityUUIDMajorIdentifier(proximityUUID *foundation.NSUUID, major uint16, identifier string) *BeaconRegion {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLBeaconRegion")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProximityUUID:major:identifier:"), proximityUUID.Ptr(), major, foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &BeaconRegion{inner: raw.CLBeaconRegionFromID(_id)}
+// NewBeaconRegionWithProximityUUIDMajorIdentifier creates a new BeaconRegion.
+func NewBeaconRegionWithProximityUUIDMajorIdentifier(proximityUUID obj.Object, major uint16, identifier string) *BeaconRegion {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CLBeaconRegion")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProximityUUID:major:identifier:"), objref.IDOf(proximityUUID), major, purego.NSString(identifier))
+	return beaconRegionAdopt(_id)
 }
 
 // Creates and returns a region object that targets beacons with the specified UUID, and major and minor values.
 //
-// NewBeaconRegionWithUUIDMajorMinorIdentifier creates a new [BeaconRegion].
-func NewBeaconRegionWithUUIDMajorMinorIdentifier(uuid *foundation.NSUUID, major uint16, minor uint16, identifier string) *BeaconRegion {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLBeaconRegion")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:major:minor:identifier:"), uuid.Ptr(), major, minor, foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &BeaconRegion{inner: raw.CLBeaconRegionFromID(_id)}
+// NewBeaconRegionWithUUIDMajorMinorIdentifier creates a new BeaconRegion.
+func NewBeaconRegionWithUUIDMajorMinorIdentifier(uuid obj.Object, major uint16, minor uint16, identifier string) *BeaconRegion {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CLBeaconRegion")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:major:minor:identifier:"), objref.IDOf(uuid), major, minor, purego.NSString(identifier))
+	return beaconRegionAdopt(_id)
 }
 
 // Creates and returns a region object that targets a beacon with the specified proximity ID, major value, and minor value.
 //
-// NewBeaconRegionWithProximityUUIDMajorMinorIdentifier creates a new [BeaconRegion].
-func NewBeaconRegionWithProximityUUIDMajorMinorIdentifier(proximityUUID *foundation.NSUUID, major uint16, minor uint16, identifier string) *BeaconRegion {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLBeaconRegion")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProximityUUID:major:minor:identifier:"), proximityUUID.Ptr(), major, minor, foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &BeaconRegion{inner: raw.CLBeaconRegionFromID(_id)}
+// NewBeaconRegionWithProximityUUIDMajorMinorIdentifier creates a new BeaconRegion.
+func NewBeaconRegionWithProximityUUIDMajorMinorIdentifier(proximityUUID obj.Object, major uint16, minor uint16, identifier string) *BeaconRegion {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CLBeaconRegion")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProximityUUID:major:minor:identifier:"), objref.IDOf(proximityUUID), major, minor, purego.NSString(identifier))
+	return beaconRegionAdopt(_id)
 }
 
 // Creates and returns a region object that targets beacons that satisfy the specified beacon identity constraints.
 //
-// NewBeaconRegionWithBeaconIdentityConstraintIdentifier creates a new [BeaconRegion].
-func NewBeaconRegionWithBeaconIdentityConstraintIdentifier(beaconIdentityConstraint *raw.CLBeaconIdentityConstraint, identifier string) *BeaconRegion {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLBeaconRegion")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBeaconIdentityConstraint:identifier:"), beaconIdentityConstraint.Ptr(), foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &BeaconRegion{inner: raw.CLBeaconRegionFromID(_id)}
+// NewBeaconRegionWithBeaconIdentityConstraintIdentifier creates a new BeaconRegion.
+func NewBeaconRegionWithBeaconIdentityConstraintIdentifier(beaconIdentityConstraint *BeaconIdentityConstraint, identifier string) *BeaconRegion {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CLBeaconRegion")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBeaconIdentityConstraint:identifier:"), objref.IDOf(beaconIdentityConstraint), purego.NSString(identifier))
+	return beaconRegionAdopt(_id)
 }
 
 // A Boolean value that indicates whether Core Location sends beacon notifications when the device’s display is on.
 //
-// WithNotifyEntryStateOnDisplay sets the notifyEntryStateOnDisplay property and returns the receiver for chaining.
+// WithNotifyEntryStateOnDisplay sets notifyEntryStateOnDisplay and returns the receiver so calls can be chained.
 func (x *BeaconRegion) WithNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay bool) *BeaconRegion {
-	x.inner.SetNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyEntryStateOnDisplay:"), notifyEntryStateOnDisplay)
 	return x
 }
 
 // A Boolean indicating that notifications are generated upon entry into the region.
 //
-// WithNotifyOnEntry sets the notifyOnEntry property and returns the receiver for chaining.
+// WithNotifyOnEntry sets notifyOnEntry and returns the receiver so calls can be chained.
 func (x *BeaconRegion) WithNotifyOnEntry(notifyOnEntry bool) *BeaconRegion {
-	x.inner.CLRegion.SetNotifyOnEntry(notifyOnEntry)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnEntry:"), notifyOnEntry)
 	return x
 }
 
 // A Boolean indicating that notifications are generated upon exit from the region.
 //
-// WithNotifyOnExit sets the notifyOnExit property and returns the receiver for chaining.
+// WithNotifyOnExit sets notifyOnExit and returns the receiver so calls can be chained.
 func (x *BeaconRegion) WithNotifyOnExit(notifyOnExit bool) *BeaconRegion {
-	x.inner.CLRegion.SetNotifyOnExit(notifyOnExit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnExit:"), notifyOnExit)
 	return x
 }
 
 // Retrieves data that you can use to advertise the current device as a beacon.
-//
-// PeripheralDataWithMeasuredPower calls the underlying PeripheralDataWithMeasuredPower.
-func (x *BeaconRegion) PeripheralDataWithMeasuredPower(measuredPower *foundation.NSNumber) *foundation.NSMutableDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.PeripheralDataWithMeasuredPower(measuredPower)
+func (x *BeaconRegion) PeripheralDataWithMeasuredPower(measuredPower obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("peripheralDataWithMeasuredPower:"), objref.IDOf(measuredPower))
+	return obj.Wrap(_r)
 }
 
-// BeaconIdentityConstraint calls the underlying BeaconIdentityConstraint.
 func (x *BeaconRegion) BeaconIdentityConstraint() *BeaconIdentityConstraint {
-	_r := x.inner.BeaconIdentityConstraint()
-	if _r == nil {
-		return nil
-	}
-	return &BeaconIdentityConstraint{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beaconIdentityConstraint"))
+	return BeaconIdentityConstraintFromID(_r)
 }
 
-// UUID calls the underlying UUID.
-func (x *BeaconRegion) UUID() *foundation.NSUUID {
-	return x.inner.UUID()
+func (x *BeaconRegion) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
+	return obj.Wrap(_r)
 }
 
-// ProximityUUID calls the underlying ProximityUUID.
-func (x *BeaconRegion) ProximityUUID() *foundation.NSUUID {
-	return x.inner.ProximityUUID()
+func (x *BeaconRegion) ProximityUUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("proximityUUID"))
+	return obj.Wrap(_r)
 }
 
-// Major calls the underlying Major.
-func (x *BeaconRegion) Major() *foundation.NSNumber {
-	return x.inner.Major()
+func (x *BeaconRegion) Major() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("major"))
+	return obj.Wrap(_r)
 }
 
-// Minor calls the underlying Minor.
-func (x *BeaconRegion) Minor() *foundation.NSNumber {
-	return x.inner.Minor()
+func (x *BeaconRegion) Minor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minor"))
+	return obj.Wrap(_r)
 }
 
-// NotifyEntryStateOnDisplay calls the underlying NotifyEntryStateOnDisplay.
 func (x *BeaconRegion) NotifyEntryStateOnDisplay() bool {
-	return x.inner.NotifyEntryStateOnDisplay()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("notifyEntryStateOnDisplay"))
+	return _r
 }
 
-// SetNotifyEntryStateOnDisplay calls the underlying SetNotifyEntryStateOnDisplay.
 func (x *BeaconRegion) SetNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay bool) {
-	x.inner.SetNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyEntryStateOnDisplay:"), notifyEntryStateOnDisplay)
 }
-
-func (x *BeaconRegion) asRegion() *raw.CLRegion { return &x.inner.CLRegion }
 
 // BeaconRegionable is the interface implemented by [BeaconRegion], for mocking and DI.
 type BeaconRegionable interface {
-	Unwrap() *raw.CLBeaconRegion
+	obj.Object
 	WithNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay bool) *BeaconRegion
 	WithNotifyOnEntry(notifyOnEntry bool) *BeaconRegion
 	WithNotifyOnExit(notifyOnExit bool) *BeaconRegion
-	PeripheralDataWithMeasuredPower(measuredPower *foundation.NSNumber) *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]
+	PeripheralDataWithMeasuredPower(measuredPower obj.Object) obj.Object
 	BeaconIdentityConstraint() *BeaconIdentityConstraint
-	UUID() *foundation.NSUUID
-	ProximityUUID() *foundation.NSUUID
-	Major() *foundation.NSNumber
-	Minor() *foundation.NSNumber
+	UUID() obj.Object
+	ProximityUUID() obj.Object
+	Major() obj.Object
+	Minor() obj.Object
 	NotifyEntryStateOnDisplay() bool
 	SetNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay bool)
 }

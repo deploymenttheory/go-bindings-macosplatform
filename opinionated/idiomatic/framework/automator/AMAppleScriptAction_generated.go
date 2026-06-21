@@ -5,86 +5,106 @@
 package automator
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automator"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osakit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents Automator actions whose runtime behavior is driven by an AppleScript script.
 //
-// AppleScriptAction wraps [raw.AMAppleScriptAction] with a fluent Go API.
+// AppleScriptAction is an idiomatic wrapper over the Objective-C class AMAppleScriptAction.
 type AppleScriptAction struct {
-	inner *raw.AMAppleScriptAction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AMAppleScriptAction].
-func (x *AppleScriptAction) Unwrap() *raw.AMAppleScriptAction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AppleScriptAction) ID() objc.ID { return x.inner.Ptr() }
-
-// AppleScriptActionFromID adopts an existing object pointer as a AppleScriptAction (nil for 0).
+// AppleScriptActionFromID adopts an existing Objective-C object as a AppleScriptAction
+// (nil for 0), retaining it and registering a release finalizer.
 func AppleScriptActionFromID(id objc.ID) *AppleScriptAction {
 	if id == 0 {
 		return nil
 	}
-	return &AppleScriptAction{inner: raw.AMAppleScriptActionFromID(id)}
+	x := &AppleScriptAction{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAppleScriptAction creates a new [AppleScriptAction].
+// appleScriptActionAdopt wraps an Objective-C object that this code just created as a
+// AppleScriptAction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func appleScriptActionAdopt(id objc.ID) *AppleScriptAction {
+	if id == 0 {
+		return nil
+	}
+	x := &AppleScriptAction{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AppleScriptAction) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AppleScriptAction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AppleScriptAction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAppleScriptAction creates a new AppleScriptAction.
 func NewAppleScriptAction() *AppleScriptAction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AMAppleScriptAction")), objc.RegisterName("new"))
-	return &AppleScriptAction{inner: raw.AMAppleScriptActionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AMAppleScriptAction")), objc.RegisterName("new"))
+	return appleScriptActionAdopt(_id)
 }
 
 // An OSAScript object representing the receiver’s script containing the on run command handler.
 //
-// WithScript sets the script property and returns the receiver for chaining.
-func (x *AppleScriptAction) WithScript(script *osakit.OSAScript) *AppleScriptAction {
-	x.inner.SetScript(script)
+// WithScript sets script and returns the receiver so calls can be chained.
+func (x *AppleScriptAction) WithScript(script obj.Object) *AppleScriptAction {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScript:"), objref.IDOf(script))
 	return x
 }
 
 // The action’s parameters.
 //
-// WithParameters sets the parameters property and returns the receiver for chaining.
-func (x *AppleScriptAction) WithParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *AppleScriptAction {
-	x.inner.AMBundleAction.SetParameters(parameters)
+// WithParameters sets parameters and returns the receiver so calls can be chained.
+func (x *AppleScriptAction) WithParameters(parameters obj.Object) *AppleScriptAction {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
 	return x
 }
 
 // A float value between 0 and 1, which indicates how far along the action is while processing.
 //
-// WithProgressValue sets the progressValue property and returns the receiver for chaining.
+// WithProgressValue sets progressValue and returns the receiver so calls can be chained.
 func (x *AppleScriptAction) WithProgressValue(progressValue float64) *AppleScriptAction {
-	x.inner.AMBundleAction.AMAction.SetProgressValue(progressValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressValue:"), progressValue)
 	return x
 }
 
-// Script calls the underlying Script.
-func (x *AppleScriptAction) Script() *osakit.OSAScript {
-	return x.inner.Script()
+func (x *AppleScriptAction) Script() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("script"))
+	return obj.Wrap(_r)
 }
 
-// SetScript calls the underlying SetScript.
-func (x *AppleScriptAction) SetScript(script *osakit.OSAScript) {
-	x.inner.SetScript(script)
+func (x *AppleScriptAction) SetScript(script obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScript:"), objref.IDOf(script))
 }
-
-func (x *AppleScriptAction) asBundleAction() *raw.AMBundleAction { return &x.inner.AMBundleAction }
-
-func (x *AppleScriptAction) asAction() *raw.AMAction { return &x.inner.AMBundleAction.AMAction }
 
 // AppleScriptActionable is the interface implemented by [AppleScriptAction], for mocking and DI.
 type AppleScriptActionable interface {
-	Unwrap() *raw.AMAppleScriptAction
-	WithScript(script *osakit.OSAScript) *AppleScriptAction
-	WithParameters(parameters *foundation.NSMutableDictionary[*foundation.NSString, objc.ID]) *AppleScriptAction
+	obj.Object
+	WithScript(script obj.Object) *AppleScriptAction
+	WithParameters(parameters obj.Object) *AppleScriptAction
 	WithProgressValue(progressValue float64) *AppleScriptAction
-	Script() *osakit.OSAScript
-	SetScript(script *osakit.OSAScript)
+	Script() obj.Object
+	SetScript(script obj.Object)
 }
 
 var _ AppleScriptActionable = (*AppleScriptAction)(nil)

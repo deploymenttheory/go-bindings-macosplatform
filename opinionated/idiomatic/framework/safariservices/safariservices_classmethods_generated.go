@@ -6,24 +6,25 @@ package safariservices
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safariservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
+// Tells Safari to reload the specified extension’s content-blocking rules.
+//
 // ReloadContentBlockerWithIdentifier blocks until the operation completes or ctx is cancelled.
 func ReloadContentBlockerWithIdentifier(ctx context.Context, identifier string) error {
 	_ch := make(chan error, 1)
-	raw.SFContentBlockerManagerReloadContentBlockerWithIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(identifier), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("SFContentBlockerManager")), objc.RegisterName("reloadContentBlockerWithIdentifier:completionHandler:"), purego.NSString(identifier), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -32,6 +33,8 @@ func ReloadContentBlockerWithIdentifier(ctx context.Context, identifier string) 
 	}
 }
 
+// Determines the state of your content blocker.
+//
 // GetStateOfContentBlockerWithIdentifier blocks until the operation completes or ctx is cancelled.
 func GetStateOfContentBlockerWithIdentifier(ctx context.Context, identifier string) (*ContentBlockerState, error) {
 	type _result struct {
@@ -39,16 +42,13 @@ func GetStateOfContentBlockerWithIdentifier(ctx context.Context, identifier stri
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.SFContentBlockerManagerGetStateOfContentBlockerWithIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(identifier), func(_p0 *raw.SFContentBlockerState, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &ContentBlockerState{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ContentBlockerStateFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("SFContentBlockerManager")), objc.RegisterName("getStateOfContentBlockerWithIdentifier:completionHandler:"), purego.NSString(identifier), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -58,6 +58,8 @@ func GetStateOfContentBlockerWithIdentifier(ctx context.Context, identifier stri
 	}
 }
 
+// Calls the completion handler with the active browser window.
+//
 // GetActiveWindow blocks until the operation completes or ctx is cancelled.
 func GetActiveWindow(ctx context.Context) (*SafariWindow, error) {
 	type _result struct {
@@ -65,13 +67,12 @@ func GetActiveWindow(ctx context.Context) (*SafariWindow, error) {
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.SFSafariApplicationGetActiveWindowWithCompletionHandler(func(_p0 *raw.SFSafariWindow) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &SafariWindow{inner: _p0}
-		}
+		_o.val = SafariWindowFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("SFSafariApplication")), objc.RegisterName("getActiveWindowWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -81,27 +82,32 @@ func GetActiveWindow(ctx context.Context) (*SafariWindow, error) {
 	}
 }
 
+// Calls the completion handler with all currently open windows ordered front to back.
+//
 // GetAllWindows blocks until the operation completes or ctx is cancelled.
-func GetAllWindows(ctx context.Context) (*foundation.NSArray[*raw.SFSafariWindow], error) {
+func GetAllWindows(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.SFSafariWindow]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.SFSafariApplicationGetAllWindowsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.SFSafariWindow]) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		_o.val = _p0
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("SFSafariApplication")), objc.RegisterName("getAllWindowsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.SFSafariWindow]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
+// Opens a new window with the desired webpage.
+//
 // OpenWindowWithURL blocks until the operation completes or ctx is cancelled.
 func OpenWindowWithURL(ctx context.Context, url string) (*SafariWindow, error) {
 	type _result struct {
@@ -109,13 +115,12 @@ func OpenWindowWithURL(ctx context.Context, url string) (*SafariWindow, error) {
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.SFSafariApplicationOpenWindowWithURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), func(_p0 *raw.SFSafariWindow) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &SafariWindow{inner: _p0}
-		}
+		_o.val = SafariWindowFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("SFSafariApplication")), objc.RegisterName("openWindowWithURL:completionHandler:"), rt.FileURL(url), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -125,42 +130,46 @@ func OpenWindowWithURL(ctx context.Context, url string) (*SafariWindow, error) {
 	}
 }
 
-// SetToolbarItemsNeedUpdate calls the underlying SFSafariApplicationSetToolbarItemsNeedUpdate.
+// Updates the enabled states and badges of toolbar items.
 func SetToolbarItemsNeedUpdate() {
-	raw.SFSafariApplicationSetToolbarItemsNeedUpdate()
+	objc.Send[objc.ID](objc.ID(_class("SFSafariApplication")), objc.RegisterName("setToolbarItemsNeedUpdate"))
 }
 
+// Gets an NSRunningApplication instance with information about the app that this extension is connected to.
+//
 // GetHostApplication blocks until the operation completes or ctx is cancelled.
-func GetHostApplication(ctx context.Context) (*appkit.NSRunningApplication, error) {
+func GetHostApplication(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *appkit.NSRunningApplication
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.SFSafariApplicationGetHostApplicationWithCompletionHandler(func(_p0 *appkit.NSRunningApplication) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		_o.val = _p0
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("SFSafariApplication")), objc.RegisterName("getHostApplicationWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *appkit.NSRunningApplication
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
+// Launches Safari and opens the preferences panel for a Safari app extension.
+//
 // ShowPreferencesForExtensionWithIdentifier blocks until the operation completes or ctx is cancelled.
 func ShowPreferencesForExtensionWithIdentifier(ctx context.Context, identifier string) error {
 	_ch := make(chan error, 1)
-	raw.SFSafariApplicationShowPreferencesForExtensionWithIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(identifier), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("SFSafariApplication")), objc.RegisterName("showPreferencesForExtensionWithIdentifier:completionHandler:"), purego.NSString(identifier), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -169,16 +178,17 @@ func ShowPreferencesForExtensionWithIdentifier(ctx context.Context, identifier s
 	}
 }
 
+// Sends a message to a Safari app extension, launching Safari if necessary.
+//
 // DispatchMessageWithNameToExtensionWithIdentifierUserInfo blocks until the operation completes or ctx is cancelled.
-func DispatchMessageWithNameToExtensionWithIdentifierUserInfo(ctx context.Context, messageName string, identifier string, userInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) error {
+func DispatchMessageWithNameToExtensionWithIdentifierUserInfo(ctx context.Context, messageName string, identifier string, userInfo obj.Object) error {
 	_ch := make(chan error, 1)
-	raw.SFSafariApplicationDispatchMessageWithNameToExtensionWithIdentifierUserInfoCompletionHandler(foundation.NSStringStringWithUTF8String(messageName), foundation.NSStringStringWithUTF8String(identifier), userInfo, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("SFSafariApplication")), objc.RegisterName("dispatchMessageWithName:toExtensionWithIdentifier:userInfo:completionHandler:"), purego.NSString(messageName), purego.NSString(identifier), objref.IDOf(userInfo), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -187,27 +197,32 @@ func DispatchMessageWithNameToExtensionWithIdentifierUserInfo(ctx context.Contex
 	}
 }
 
+// Calls the completion handler with the base URI of the extension.
+//
 // GetBaseURI blocks until the operation completes or ctx is cancelled.
-func GetBaseURI(ctx context.Context) (*foundation.NSURL, error) {
+func GetBaseURI(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSURL
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.SFSafariExtensionGetBaseURIWithCompletionHandler(func(_p0 *foundation.NSURL) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		_o.val = _p0
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("SFSafariExtension")), objc.RegisterName("getBaseURIWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSURL
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
+// Returns the current state of a Safari extension.
+//
 // GetStateOfSafariExtensionWithIdentifier blocks until the operation completes or ctx is cancelled.
 func GetStateOfSafariExtensionWithIdentifier(ctx context.Context, identifier string) (*SafariExtensionState, error) {
 	type _result struct {
@@ -215,16 +230,13 @@ func GetStateOfSafariExtensionWithIdentifier(ctx context.Context, identifier str
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.SFSafariExtensionManagerGetStateOfSafariExtensionWithIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(identifier), func(_p0 *raw.SFSafariExtensionState, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &SafariExtensionState{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = SafariExtensionStateFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("SFSafariExtensionManager")), objc.RegisterName("getStateOfSafariExtensionWithIdentifier:completionHandler:"), purego.NSString(identifier), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

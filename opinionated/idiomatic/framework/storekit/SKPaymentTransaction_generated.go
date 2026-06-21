@@ -5,97 +5,101 @@
 package storekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object in the payment queue.
 //
-// PaymentTransaction wraps [raw.SKPaymentTransaction] with a fluent Go API.
+// PaymentTransaction is an idiomatic wrapper over the Objective-C class SKPaymentTransaction.
 type PaymentTransaction struct {
-	inner *raw.SKPaymentTransaction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKPaymentTransaction].
-func (x *PaymentTransaction) Unwrap() *raw.SKPaymentTransaction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PaymentTransaction) ID() objc.ID { return x.inner.Ptr() }
-
-// PaymentTransactionFromID adopts an existing object pointer as a PaymentTransaction (nil for 0).
+// PaymentTransactionFromID adopts an existing Objective-C object as a PaymentTransaction
+// (nil for 0), retaining it and registering a release finalizer.
 func PaymentTransactionFromID(id objc.ID) *PaymentTransaction {
 	if id == 0 {
 		return nil
 	}
-	return &PaymentTransaction{inner: raw.SKPaymentTransactionFromID(id)}
+	x := &PaymentTransaction{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPaymentTransaction creates a new [PaymentTransaction].
+// paymentTransactionAdopt wraps an Objective-C object that this code just created as a
+// PaymentTransaction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paymentTransactionAdopt(id objc.ID) *PaymentTransaction {
+	if id == 0 {
+		return nil
+	}
+	x := &PaymentTransaction{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PaymentTransaction) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PaymentTransaction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PaymentTransaction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPaymentTransaction creates a new PaymentTransaction.
 func NewPaymentTransaction() *PaymentTransaction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKPaymentTransaction")), objc.RegisterName("new"))
-	return &PaymentTransaction{inner: raw.SKPaymentTransactionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKPaymentTransaction")), objc.RegisterName("new"))
+	return paymentTransactionAdopt(_id)
 }
 
-// Error calls the underlying Error.
-func (x *PaymentTransaction) Error() unsafe.Pointer {
-	return x.inner.Error()
-}
-
-// OriginalTransaction calls the underlying OriginalTransaction.
 func (x *PaymentTransaction) OriginalTransaction() *PaymentTransaction {
-	_r := x.inner.OriginalTransaction()
-	if _r == nil {
-		return nil
-	}
-	return &PaymentTransaction{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalTransaction"))
+	return PaymentTransactionFromID(_r)
 }
 
-// Payment calls the underlying Payment.
 func (x *PaymentTransaction) Payment() *Payment {
-	_r := x.inner.Payment()
-	if _r == nil {
-		return nil
-	}
-	return &Payment{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("payment"))
+	return PaymentFromID(_r)
 }
 
 // Downloads returns the collection as a Go slice.
 func (x *PaymentTransaction) Downloads() []*Download {
-	arr := x.inner.Downloads()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Download {
-		return &Download{inner: raw.SKDownloadFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloads"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Download { return DownloadFromID(_id) })
 }
 
-// TransactionDate calls the underlying TransactionDate.
-func (x *PaymentTransaction) TransactionDate() *foundation.NSDate {
-	return x.inner.TransactionDate()
+func (x *PaymentTransaction) TransactionDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionDate"))
+	return obj.Wrap(_r)
 }
 
-// TransactionIdentifier calls the underlying TransactionIdentifier.
 func (x *PaymentTransaction) TransactionIdentifier() string {
-	_r := x.inner.TransactionIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // PaymentTransactionable is the interface implemented by [PaymentTransaction], for mocking and DI.
 type PaymentTransactionable interface {
-	Unwrap() *raw.SKPaymentTransaction
-	Error() unsafe.Pointer
+	obj.Object
 	OriginalTransaction() *PaymentTransaction
 	Payment() *Payment
 	Downloads() []*Download
-	TransactionDate() *foundation.NSDate
+	TransactionDate() obj.Object
 	TransactionIdentifier() string
 }
 

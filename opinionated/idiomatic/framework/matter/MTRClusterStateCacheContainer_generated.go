@@ -5,49 +5,66 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterStateCacheContainer wraps [raw.MTRClusterStateCacheContainer] with a fluent Go API.
+// MTRClusterStateCacheContainer is an idiomatic wrapper over the Objective-C class MTRClusterStateCacheContainer.
 type MTRClusterStateCacheContainer struct {
-	inner *raw.MTRClusterStateCacheContainer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterStateCacheContainer].
-func (x *MTRClusterStateCacheContainer) Unwrap() *raw.MTRClusterStateCacheContainer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterStateCacheContainer) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterStateCacheContainerFromID adopts an existing object pointer as a MTRClusterStateCacheContainer (nil for 0).
+// MTRClusterStateCacheContainerFromID adopts an existing Objective-C object as a MTRClusterStateCacheContainer
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterStateCacheContainerFromID(id objc.ID) *MTRClusterStateCacheContainer {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterStateCacheContainer{inner: raw.MTRClusterStateCacheContainerFromID(id)}
+	x := &MTRClusterStateCacheContainer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRClusterStateCacheContainer creates a new [MTRClusterStateCacheContainer].
+// mTRClusterStateCacheContainerAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterStateCacheContainer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterStateCacheContainerAdopt(id objc.ID) *MTRClusterStateCacheContainer {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterStateCacheContainer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterStateCacheContainer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterStateCacheContainer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterStateCacheContainer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRClusterStateCacheContainer creates a new MTRClusterStateCacheContainer.
 func NewMTRClusterStateCacheContainer() *MTRClusterStateCacheContainer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterStateCacheContainer")), objc.RegisterName("new"))
-	return &MTRClusterStateCacheContainer{inner: raw.MTRClusterStateCacheContainerFromID(_id)}
-}
-
-// Reads the given attributes from the cluster state cache inside this cache container. @param endpointID  endpoint ID of the attributes. Nil means wildcard. @param clusterID  cluster ID of the attributes. Nil means wildcard. @param attributeID  attribute ID of the attributes. Nil means wildcard. @param queue  client queue to dispatch the completion handler through @param completion  block to receive the result. "values" received by the block will have the same format of object as the one received by the completion block of the MTRBaseDevice readAttributesWithEndpointID:clusterID:attributeID:queue:completion method. @note: not all combinations of wildcards might be supported.
-//
-// ReadAttributesWithEndpointIDClusterIDAttributeIDQueueCompletion calls the underlying ReadAttributesWithEndpointIDClusterIDAttributeIDQueueCompletion.
-func (x *MTRClusterStateCacheContainer) ReadAttributesWithEndpointIDClusterIDAttributeIDQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer)) {
-	x.inner.ReadAttributesWithEndpointIDClusterIDAttributeIDQueueCompletion(endpointID, clusterID, attributeID, queue, completion)
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRClusterStateCacheContainer")), objc.RegisterName("new"))
+	return mTRClusterStateCacheContainerAdopt(_id)
 }
 
 // MTRClusterStateCacheContainerable is the interface implemented by [MTRClusterStateCacheContainer], for mocking and DI.
 type MTRClusterStateCacheContainerable interface {
-	Unwrap() *raw.MTRClusterStateCacheContainer
-	ReadAttributesWithEndpointIDClusterIDAttributeIDQueueCompletion(endpointID *foundation.NSNumber, clusterID *foundation.NSNumber, attributeID *foundation.NSNumber, queue *foundation.NSObject, completion func(*foundation.NSArray[objc.ID], unsafe.Pointer))
+	obj.Object
 }
 
 var _ MTRClusterStateCacheContainerable = (*MTRClusterStateCacheContainer)(nil)

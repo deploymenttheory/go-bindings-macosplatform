@@ -5,41 +5,66 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRPumpConfigurationAndControlClusterDryRunningEvent wraps [raw.MTRPumpConfigurationAndControlClusterDryRunningEvent] with a fluent Go API.
+// MTRPumpConfigurationAndControlClusterDryRunningEvent is an idiomatic wrapper over the Objective-C class MTRPumpConfigurationAndControlClusterDryRunningEvent.
 type MTRPumpConfigurationAndControlClusterDryRunningEvent struct {
-	inner *raw.MTRPumpConfigurationAndControlClusterDryRunningEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterDryRunningEvent].
-func (x *MTRPumpConfigurationAndControlClusterDryRunningEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterDryRunningEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRPumpConfigurationAndControlClusterDryRunningEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRPumpConfigurationAndControlClusterDryRunningEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterDryRunningEvent (nil for 0).
+// MTRPumpConfigurationAndControlClusterDryRunningEventFromID adopts an existing Objective-C object as a MTRPumpConfigurationAndControlClusterDryRunningEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRPumpConfigurationAndControlClusterDryRunningEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterDryRunningEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRPumpConfigurationAndControlClusterDryRunningEvent{inner: raw.MTRPumpConfigurationAndControlClusterDryRunningEventFromID(id)}
+	x := &MTRPumpConfigurationAndControlClusterDryRunningEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRPumpConfigurationAndControlClusterDryRunningEvent creates a new [MTRPumpConfigurationAndControlClusterDryRunningEvent].
+// mTRPumpConfigurationAndControlClusterDryRunningEventAdopt wraps an Objective-C object that this code just created as a
+// MTRPumpConfigurationAndControlClusterDryRunningEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRPumpConfigurationAndControlClusterDryRunningEventAdopt(id objc.ID) *MTRPumpConfigurationAndControlClusterDryRunningEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRPumpConfigurationAndControlClusterDryRunningEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRPumpConfigurationAndControlClusterDryRunningEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRPumpConfigurationAndControlClusterDryRunningEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRPumpConfigurationAndControlClusterDryRunningEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRPumpConfigurationAndControlClusterDryRunningEvent creates a new MTRPumpConfigurationAndControlClusterDryRunningEvent.
 func NewMTRPumpConfigurationAndControlClusterDryRunningEvent() *MTRPumpConfigurationAndControlClusterDryRunningEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRPumpConfigurationAndControlClusterDryRunningEvent")), objc.RegisterName("new"))
-	return &MTRPumpConfigurationAndControlClusterDryRunningEvent{inner: raw.MTRPumpConfigurationAndControlClusterDryRunningEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterDryRunningEvent")), objc.RegisterName("new"))
+	return mTRPumpConfigurationAndControlClusterDryRunningEventAdopt(_id)
 }
 
 // MTRPumpConfigurationAndControlClusterDryRunningEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterDryRunningEvent], for mocking and DI.
 type MTRPumpConfigurationAndControlClusterDryRunningEventable interface {
-	Unwrap() *raw.MTRPumpConfigurationAndControlClusterDryRunningEvent
+	obj.Object
 }
 
 var _ MTRPumpConfigurationAndControlClusterDryRunningEventable = (*MTRPumpConfigurationAndControlClusterDryRunningEvent)(nil)

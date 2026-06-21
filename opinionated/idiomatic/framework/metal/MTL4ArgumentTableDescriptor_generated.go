@@ -5,172 +5,185 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Groups parameters for the creation of a Metal argument table.
 //
-// MTL4ArgumentTableDescriptor wraps [raw.MTL4ArgumentTableDescriptor] with a fluent Go API.
+// MTL4ArgumentTableDescriptor is an idiomatic wrapper over the Objective-C class MTL4ArgumentTableDescriptor.
 type MTL4ArgumentTableDescriptor struct {
-	inner *raw.MTL4ArgumentTableDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTL4ArgumentTableDescriptor].
-func (x *MTL4ArgumentTableDescriptor) Unwrap() *raw.MTL4ArgumentTableDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTL4ArgumentTableDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MTL4ArgumentTableDescriptorFromID adopts an existing object pointer as a MTL4ArgumentTableDescriptor (nil for 0).
+// MTL4ArgumentTableDescriptorFromID adopts an existing Objective-C object as a MTL4ArgumentTableDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MTL4ArgumentTableDescriptorFromID(id objc.ID) *MTL4ArgumentTableDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MTL4ArgumentTableDescriptor{inner: raw.MTL4ArgumentTableDescriptorFromID(id)}
+	x := &MTL4ArgumentTableDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTL4ArgumentTableDescriptor creates a new [MTL4ArgumentTableDescriptor].
+// mTL4ArgumentTableDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MTL4ArgumentTableDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTL4ArgumentTableDescriptorAdopt(id objc.ID) *MTL4ArgumentTableDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MTL4ArgumentTableDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTL4ArgumentTableDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTL4ArgumentTableDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTL4ArgumentTableDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTL4ArgumentTableDescriptor creates a new MTL4ArgumentTableDescriptor.
 func NewMTL4ArgumentTableDescriptor() *MTL4ArgumentTableDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4ArgumentTableDescriptor")), objc.RegisterName("new"))
-	return &MTL4ArgumentTableDescriptor{inner: raw.MTL4ArgumentTableDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTL4ArgumentTableDescriptor")), objc.RegisterName("new"))
+	return mTL4ArgumentTableDescriptorAdopt(_id)
 }
 
 // Determines the number of buffer-binding slots for the argument table.
 //
-// WithMaxBufferBindCount sets the maxBufferBindCount property and returns the receiver for chaining.
-func (x *MTL4ArgumentTableDescriptor) WithMaxBufferBindCount(maxBufferBindCount uint) *MTL4ArgumentTableDescriptor {
-	x.inner.SetMaxBufferBindCount(maxBufferBindCount)
+// WithMaxBufferBindCount sets maxBufferBindCount and returns the receiver so calls can be chained.
+func (x *MTL4ArgumentTableDescriptor) WithMaxBufferBindCount(maxBufferBindCount int) *MTL4ArgumentTableDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxBufferBindCount:"), maxBufferBindCount)
 	return x
 }
 
 // Determines the number of texture-binding slots for the argument table.
 //
-// WithMaxTextureBindCount sets the maxTextureBindCount property and returns the receiver for chaining.
-func (x *MTL4ArgumentTableDescriptor) WithMaxTextureBindCount(maxTextureBindCount uint) *MTL4ArgumentTableDescriptor {
-	x.inner.SetMaxTextureBindCount(maxTextureBindCount)
+// WithMaxTextureBindCount sets maxTextureBindCount and returns the receiver so calls can be chained.
+func (x *MTL4ArgumentTableDescriptor) WithMaxTextureBindCount(maxTextureBindCount int) *MTL4ArgumentTableDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTextureBindCount:"), maxTextureBindCount)
 	return x
 }
 
 // Determines the number of sampler state-binding slots for the argument table.
 //
-// WithMaxSamplerStateBindCount sets the maxSamplerStateBindCount property and returns the receiver for chaining.
-func (x *MTL4ArgumentTableDescriptor) WithMaxSamplerStateBindCount(maxSamplerStateBindCount uint) *MTL4ArgumentTableDescriptor {
-	x.inner.SetMaxSamplerStateBindCount(maxSamplerStateBindCount)
+// WithMaxSamplerStateBindCount sets maxSamplerStateBindCount and returns the receiver so calls can be chained.
+func (x *MTL4ArgumentTableDescriptor) WithMaxSamplerStateBindCount(maxSamplerStateBindCount int) *MTL4ArgumentTableDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSamplerStateBindCount:"), maxSamplerStateBindCount)
 	return x
 }
 
 // Configures whether Metal initializes the bindings to nil values upon creation of argument table.
 //
-// WithInitializeBindings sets the initializeBindings property and returns the receiver for chaining.
+// WithInitializeBindings sets initializeBindings and returns the receiver so calls can be chained.
 func (x *MTL4ArgumentTableDescriptor) WithInitializeBindings(initializeBindings bool) *MTL4ArgumentTableDescriptor {
-	x.inner.SetInitializeBindings(initializeBindings)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitializeBindings:"), initializeBindings)
 	return x
 }
 
 // Controls whether Metal should reserve memory for attribute strides in the argument table.
 //
-// WithSupportAttributeStrides sets the supportAttributeStrides property and returns the receiver for chaining.
+// WithSupportAttributeStrides sets supportAttributeStrides and returns the receiver so calls can be chained.
 func (x *MTL4ArgumentTableDescriptor) WithSupportAttributeStrides(supportAttributeStrides bool) *MTL4ArgumentTableDescriptor {
-	x.inner.SetSupportAttributeStrides(supportAttributeStrides)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportAttributeStrides:"), supportAttributeStrides)
 	return x
 }
 
 // Assigns an optional label with the argument table for debug purposes.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *MTL4ArgumentTableDescriptor) WithLabel(label string) *MTL4ArgumentTableDescriptor {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // Determines the number of buffer-binding slots for the argument table. The maximum value of this parameter is 31.
-//
-// MaxBufferBindCount calls the underlying MaxBufferBindCount.
-func (x *MTL4ArgumentTableDescriptor) MaxBufferBindCount() uint {
-	return x.inner.MaxBufferBindCount()
+func (x *MTL4ArgumentTableDescriptor) MaxBufferBindCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxBufferBindCount"))
+	return _r
 }
 
-// SetMaxBufferBindCount calls the underlying SetMaxBufferBindCount.
-func (x *MTL4ArgumentTableDescriptor) SetMaxBufferBindCount(maxBufferBindCount uint) {
-	x.inner.SetMaxBufferBindCount(maxBufferBindCount)
+func (x *MTL4ArgumentTableDescriptor) SetMaxBufferBindCount(maxBufferBindCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxBufferBindCount:"), maxBufferBindCount)
 }
 
 // Determines the number of texture-binding slots for the argument table. The maximum value of this parameter is 128.
-//
-// MaxTextureBindCount calls the underlying MaxTextureBindCount.
-func (x *MTL4ArgumentTableDescriptor) MaxTextureBindCount() uint {
-	return x.inner.MaxTextureBindCount()
+func (x *MTL4ArgumentTableDescriptor) MaxTextureBindCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxTextureBindCount"))
+	return _r
 }
 
-// SetMaxTextureBindCount calls the underlying SetMaxTextureBindCount.
-func (x *MTL4ArgumentTableDescriptor) SetMaxTextureBindCount(maxTextureBindCount uint) {
-	x.inner.SetMaxTextureBindCount(maxTextureBindCount)
+func (x *MTL4ArgumentTableDescriptor) SetMaxTextureBindCount(maxTextureBindCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTextureBindCount:"), maxTextureBindCount)
 }
 
 // Determines the number of sampler state-binding slots for the argument table. The maximum value of this parameter is 16.
-//
-// MaxSamplerStateBindCount calls the underlying MaxSamplerStateBindCount.
-func (x *MTL4ArgumentTableDescriptor) MaxSamplerStateBindCount() uint {
-	return x.inner.MaxSamplerStateBindCount()
+func (x *MTL4ArgumentTableDescriptor) MaxSamplerStateBindCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxSamplerStateBindCount"))
+	return _r
 }
 
-// SetMaxSamplerStateBindCount calls the underlying SetMaxSamplerStateBindCount.
-func (x *MTL4ArgumentTableDescriptor) SetMaxSamplerStateBindCount(maxSamplerStateBindCount uint) {
-	x.inner.SetMaxSamplerStateBindCount(maxSamplerStateBindCount)
+func (x *MTL4ArgumentTableDescriptor) SetMaxSamplerStateBindCount(maxSamplerStateBindCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSamplerStateBindCount:"), maxSamplerStateBindCount)
 }
 
-// SetInitializeBindings calls the underlying SetInitializeBindings.
 func (x *MTL4ArgumentTableDescriptor) SetInitializeBindings(initializeBindings bool) {
-	x.inner.SetInitializeBindings(initializeBindings)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitializeBindings:"), initializeBindings)
 }
 
 // Controls whether Metal should reserve memory for attribute strides in the argument table. Set this value to true if you intend to provide dynamic attribute strides when binding vertex array buffers to the argument table by calling “MTL4ArgumentTable/setAddress:attributeStride:atIndex:“ The default value of this property is <doc://com.apple.documentation/documentation/swift/false>.
-//
-// SupportAttributeStrides calls the underlying SupportAttributeStrides.
 func (x *MTL4ArgumentTableDescriptor) SupportAttributeStrides() bool {
-	return x.inner.SupportAttributeStrides()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportAttributeStrides"))
+	return _r
 }
 
-// SetSupportAttributeStrides calls the underlying SetSupportAttributeStrides.
 func (x *MTL4ArgumentTableDescriptor) SetSupportAttributeStrides(supportAttributeStrides bool) {
-	x.inner.SetSupportAttributeStrides(supportAttributeStrides)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportAttributeStrides:"), supportAttributeStrides)
 }
 
 // Assigns an optional label with the argument table for debug purposes.
-//
-// Label calls the underlying Label.
 func (x *MTL4ArgumentTableDescriptor) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
 func (x *MTL4ArgumentTableDescriptor) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
 // MTL4ArgumentTableDescriptorable is the interface implemented by [MTL4ArgumentTableDescriptor], for mocking and DI.
 type MTL4ArgumentTableDescriptorable interface {
-	Unwrap() *raw.MTL4ArgumentTableDescriptor
-	WithMaxBufferBindCount(maxBufferBindCount uint) *MTL4ArgumentTableDescriptor
-	WithMaxTextureBindCount(maxTextureBindCount uint) *MTL4ArgumentTableDescriptor
-	WithMaxSamplerStateBindCount(maxSamplerStateBindCount uint) *MTL4ArgumentTableDescriptor
+	obj.Object
+	WithMaxBufferBindCount(maxBufferBindCount int) *MTL4ArgumentTableDescriptor
+	WithMaxTextureBindCount(maxTextureBindCount int) *MTL4ArgumentTableDescriptor
+	WithMaxSamplerStateBindCount(maxSamplerStateBindCount int) *MTL4ArgumentTableDescriptor
 	WithInitializeBindings(initializeBindings bool) *MTL4ArgumentTableDescriptor
 	WithSupportAttributeStrides(supportAttributeStrides bool) *MTL4ArgumentTableDescriptor
 	WithLabel(label string) *MTL4ArgumentTableDescriptor
-	MaxBufferBindCount() uint
-	SetMaxBufferBindCount(maxBufferBindCount uint)
-	MaxTextureBindCount() uint
-	SetMaxTextureBindCount(maxTextureBindCount uint)
-	MaxSamplerStateBindCount() uint
-	SetMaxSamplerStateBindCount(maxSamplerStateBindCount uint)
+	MaxBufferBindCount() int
+	SetMaxBufferBindCount(maxBufferBindCount int)
+	MaxTextureBindCount() int
+	SetMaxTextureBindCount(maxTextureBindCount int)
+	MaxSamplerStateBindCount() int
+	SetMaxSamplerStateBindCount(maxSamplerStateBindCount int)
 	SetInitializeBindings(initializeBindings bool)
 	SupportAttributeStrides() bool
 	SetSupportAttributeStrides(supportAttributeStrides bool)

@@ -6,136 +6,151 @@ package gamekit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Organizes leaderboards into logical and coherent groups.
 //
-// LeaderboardSet wraps [raw.GKLeaderboardSet] with a fluent Go API.
+// LeaderboardSet is an idiomatic wrapper over the Objective-C class GKLeaderboardSet.
 type LeaderboardSet struct {
-	inner *raw.GKLeaderboardSet
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKLeaderboardSet].
-func (x *LeaderboardSet) Unwrap() *raw.GKLeaderboardSet { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LeaderboardSet) ID() objc.ID { return x.inner.Ptr() }
-
-// LeaderboardSetFromID adopts an existing object pointer as a LeaderboardSet (nil for 0).
+// LeaderboardSetFromID adopts an existing Objective-C object as a LeaderboardSet
+// (nil for 0), retaining it and registering a release finalizer.
 func LeaderboardSetFromID(id objc.ID) *LeaderboardSet {
 	if id == 0 {
 		return nil
 	}
-	return &LeaderboardSet{inner: raw.GKLeaderboardSetFromID(id)}
+	x := &LeaderboardSet{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLeaderboardSet creates a new [LeaderboardSet].
+// leaderboardSetAdopt wraps an Objective-C object that this code just created as a
+// LeaderboardSet (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func leaderboardSetAdopt(id objc.ID) *LeaderboardSet {
+	if id == 0 {
+		return nil
+	}
+	x := &LeaderboardSet{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LeaderboardSet) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LeaderboardSet) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LeaderboardSet) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLeaderboardSet creates a new LeaderboardSet.
 func NewLeaderboardSet() *LeaderboardSet {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKLeaderboardSet")), objc.RegisterName("new"))
-	return &LeaderboardSet{inner: raw.GKLeaderboardSetFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKLeaderboardSet")), objc.RegisterName("new"))
+	return leaderboardSetAdopt(_id)
 }
 
 // The identifier for the leaderboard set.
 //
-// WithIdentifier sets the identifier property and returns the receiver for chaining.
+// WithIdentifier sets identifier and returns the receiver so calls can be chained.
 func (x *LeaderboardSet) WithIdentifier(identifier string) *LeaderboardSet {
-	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 	return x
 }
 
 // Loads the leaderboards in the leaderboard set.
 //
 // LoadLeaderboardsWithHandler blocks until the operation completes or ctx is cancelled.
-func (x *LeaderboardSet) LoadLeaderboardsWithHandler(ctx context.Context) (*foundation.NSArray[*raw.GKLeaderboard], error) {
+func (x *LeaderboardSet) LoadLeaderboardsWithHandler(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.GKLeaderboard]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LoadLeaderboardsWithHandler(func(_p0 *foundation.NSArray[*raw.GKLeaderboard], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadLeaderboardsWithHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.GKLeaderboard]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // Localized set title.
-//
-// Title calls the underlying Title.
 func (x *LeaderboardSet) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // set when leaderboardSets have been designated a game group; set when loadLeaderboardSetsWithCompletionHandler has been called for leaderboards that support game groups
-//
-// GroupIdentifier calls the underlying GroupIdentifier.
 func (x *LeaderboardSet) GroupIdentifier() string {
-	_r := x.inner.GroupIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // leaderboard set.
-//
-// Identifier calls the underlying Identifier.
 func (x *LeaderboardSet) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetIdentifier calls the underlying SetIdentifier.
 func (x *LeaderboardSet) SetIdentifier(identifier string) {
-	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 }
 
 // Loads all of the leaderboards for the current leaderboard set.
 //
 // LoadLeaderboards blocks until the operation completes or ctx is cancelled.
-func (x *LeaderboardSet) LoadLeaderboards(ctx context.Context) (*foundation.NSArray[*raw.GKLeaderboard], error) {
+func (x *LeaderboardSet) LoadLeaderboards(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.GKLeaderboard]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LoadLeaderboardsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.GKLeaderboard], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadLeaderboardsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.GKLeaderboard]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -143,40 +158,39 @@ func (x *LeaderboardSet) LoadLeaderboards(ctx context.Context) (*foundation.NSAr
 // Loads the localized image that you associate with the leaderboard set.
 //
 // LoadImage blocks until the operation completes or ctx is cancelled.
-func (x *LeaderboardSet) LoadImage(ctx context.Context) (*appkit.NSImage, error) {
+func (x *LeaderboardSet) LoadImage(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *appkit.NSImage
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LoadImageWithCompletionHandler(func(_p0 *appkit.NSImage, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadImageWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *appkit.NSImage
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // LeaderboardSetable is the interface implemented by [LeaderboardSet], for mocking and DI.
 type LeaderboardSetable interface {
-	Unwrap() *raw.GKLeaderboardSet
+	obj.Object
 	WithIdentifier(identifier string) *LeaderboardSet
-	LoadLeaderboardsWithHandler(ctx context.Context) (*foundation.NSArray[*raw.GKLeaderboard], error)
+	LoadLeaderboardsWithHandler(ctx context.Context) (obj.Object, error)
 	Title() string
 	GroupIdentifier() string
 	Identifier() string
 	SetIdentifier(identifier string)
-	LoadLeaderboards(ctx context.Context) (*foundation.NSArray[*raw.GKLeaderboard], error)
-	LoadImage(ctx context.Context) (*appkit.NSImage, error)
+	LoadLeaderboards(ctx context.Context) (obj.Object, error)
+	LoadImage(ctx context.Context) (obj.Object, error)
 }
 
 var _ LeaderboardSetable = (*LeaderboardSet)(nil)

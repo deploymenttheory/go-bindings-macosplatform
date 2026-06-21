@@ -5,70 +5,93 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A layer that performs an arithmetic operation.
 //
-// ArithmeticLayer wraps [raw.MLCArithmeticLayer] with a fluent Go API.
+// ArithmeticLayer is an idiomatic wrapper over the Objective-C class MLCArithmeticLayer.
 type ArithmeticLayer struct {
-	inner *raw.MLCArithmeticLayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCArithmeticLayer].
-func (x *ArithmeticLayer) Unwrap() *raw.MLCArithmeticLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArithmeticLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// ArithmeticLayerFromID adopts an existing object pointer as a ArithmeticLayer (nil for 0).
+// ArithmeticLayerFromID adopts an existing Objective-C object as a ArithmeticLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func ArithmeticLayerFromID(id objc.ID) *ArithmeticLayer {
 	if id == 0 {
 		return nil
 	}
-	return &ArithmeticLayer{inner: raw.MLCArithmeticLayerFromID(id)}
+	x := &ArithmeticLayer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewArithmeticLayer creates a new [ArithmeticLayer].
+// arithmeticLayerAdopt wraps an Objective-C object that this code just created as a
+// ArithmeticLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arithmeticLayerAdopt(id objc.ID) *ArithmeticLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &ArithmeticLayer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ArithmeticLayer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ArithmeticLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ArithmeticLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewArithmeticLayer creates a new ArithmeticLayer.
 func NewArithmeticLayer() *ArithmeticLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCArithmeticLayer")), objc.RegisterName("new"))
-	return &ArithmeticLayer{inner: raw.MLCArithmeticLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCArithmeticLayer")), objc.RegisterName("new"))
+	return arithmeticLayerAdopt(_id)
 }
 
 // A string that helps identify this layer.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ArithmeticLayer) WithLabel(label string) *ArithmeticLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 //
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
 func (x *ArithmeticLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ArithmeticLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// @property   operation @abstract   The arithmetic operation.
-//
-// Operation calls the underlying Operation.
-func (x *ArithmeticLayer) Operation() MLCArithmeticOperation {
-	return MLCArithmeticOperation(x.inner.Operation())
+// The arithmetic operation.
+func (x *ArithmeticLayer) Operation() ArithmeticOperation {
+	_r := objc.Send[ArithmeticOperation](objref.IDOf(x), objc.RegisterName("operation"))
+	return _r
 }
-
-func (x *ArithmeticLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // ArithmeticLayerable is the interface implemented by [ArithmeticLayer], for mocking and DI.
 type ArithmeticLayerable interface {
-	Unwrap() *raw.MLCArithmeticLayer
+	obj.Object
 	WithLabel(label string) *ArithmeticLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ArithmeticLayer
-	Operation() MLCArithmeticOperation
+	Operation() ArithmeticOperation
 }
 
 var _ ArithmeticLayerable = (*ArithmeticLayer)(nil)

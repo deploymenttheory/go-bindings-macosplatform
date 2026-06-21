@@ -5,64 +5,88 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description of a tile-shading render pipeline’s color render target.
 //
-// TileRenderPipelineColorAttachmentDescriptor wraps [raw.MTLTileRenderPipelineColorAttachmentDescriptor] with a fluent Go API.
+// TileRenderPipelineColorAttachmentDescriptor is an idiomatic wrapper over the Objective-C class MTLTileRenderPipelineColorAttachmentDescriptor.
 type TileRenderPipelineColorAttachmentDescriptor struct {
-	inner *raw.MTLTileRenderPipelineColorAttachmentDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLTileRenderPipelineColorAttachmentDescriptor].
-func (x *TileRenderPipelineColorAttachmentDescriptor) Unwrap() *raw.MTLTileRenderPipelineColorAttachmentDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TileRenderPipelineColorAttachmentDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// TileRenderPipelineColorAttachmentDescriptorFromID adopts an existing object pointer as a TileRenderPipelineColorAttachmentDescriptor (nil for 0).
+// TileRenderPipelineColorAttachmentDescriptorFromID adopts an existing Objective-C object as a TileRenderPipelineColorAttachmentDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func TileRenderPipelineColorAttachmentDescriptorFromID(id objc.ID) *TileRenderPipelineColorAttachmentDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &TileRenderPipelineColorAttachmentDescriptor{inner: raw.MTLTileRenderPipelineColorAttachmentDescriptorFromID(id)}
+	x := &TileRenderPipelineColorAttachmentDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTileRenderPipelineColorAttachmentDescriptor creates a new [TileRenderPipelineColorAttachmentDescriptor].
+// tileRenderPipelineColorAttachmentDescriptorAdopt wraps an Objective-C object that this code just created as a
+// TileRenderPipelineColorAttachmentDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tileRenderPipelineColorAttachmentDescriptorAdopt(id objc.ID) *TileRenderPipelineColorAttachmentDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &TileRenderPipelineColorAttachmentDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TileRenderPipelineColorAttachmentDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TileRenderPipelineColorAttachmentDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TileRenderPipelineColorAttachmentDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTileRenderPipelineColorAttachmentDescriptor creates a new TileRenderPipelineColorAttachmentDescriptor.
 func NewTileRenderPipelineColorAttachmentDescriptor() *TileRenderPipelineColorAttachmentDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLTileRenderPipelineColorAttachmentDescriptor")), objc.RegisterName("new"))
-	return &TileRenderPipelineColorAttachmentDescriptor{inner: raw.MTLTileRenderPipelineColorAttachmentDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLTileRenderPipelineColorAttachmentDescriptor")), objc.RegisterName("new"))
+	return tileRenderPipelineColorAttachmentDescriptorAdopt(_id)
 }
 
 // The pixel format associated with the tile shading render pipeline.
 //
-// WithPixelFormat sets the pixelFormat property and returns the receiver for chaining.
-func (x *TileRenderPipelineColorAttachmentDescriptor) WithPixelFormat(pixelFormat MTLPixelFormat) *TileRenderPipelineColorAttachmentDescriptor {
-	x.inner.SetPixelFormat(raw.MTLPixelFormat(pixelFormat))
+// WithPixelFormat sets pixelFormat and returns the receiver so calls can be chained.
+func (x *TileRenderPipelineColorAttachmentDescriptor) WithPixelFormat(pixelFormat PixelFormat) *TileRenderPipelineColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelFormat:"), pixelFormat)
 	return x
 }
 
-// PixelFormat calls the underlying PixelFormat.
-func (x *TileRenderPipelineColorAttachmentDescriptor) PixelFormat() MTLPixelFormat {
-	return MTLPixelFormat(x.inner.PixelFormat())
+func (x *TileRenderPipelineColorAttachmentDescriptor) PixelFormat() PixelFormat {
+	_r := objc.Send[PixelFormat](objref.IDOf(x), objc.RegisterName("pixelFormat"))
+	return _r
 }
 
-// SetPixelFormat calls the underlying SetPixelFormat.
-func (x *TileRenderPipelineColorAttachmentDescriptor) SetPixelFormat(pixelFormat MTLPixelFormat) {
-	x.inner.SetPixelFormat(raw.MTLPixelFormat(pixelFormat))
+func (x *TileRenderPipelineColorAttachmentDescriptor) SetPixelFormat(pixelFormat PixelFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelFormat:"), pixelFormat)
 }
 
 // TileRenderPipelineColorAttachmentDescriptorable is the interface implemented by [TileRenderPipelineColorAttachmentDescriptor], for mocking and DI.
 type TileRenderPipelineColorAttachmentDescriptorable interface {
-	Unwrap() *raw.MTLTileRenderPipelineColorAttachmentDescriptor
-	WithPixelFormat(pixelFormat MTLPixelFormat) *TileRenderPipelineColorAttachmentDescriptor
-	PixelFormat() MTLPixelFormat
-	SetPixelFormat(pixelFormat MTLPixelFormat)
+	obj.Object
+	WithPixelFormat(pixelFormat PixelFormat) *TileRenderPipelineColorAttachmentDescriptor
+	PixelFormat() PixelFormat
+	SetPixelFormat(pixelFormat PixelFormat)
 }
 
 var _ TileRenderPipelineColorAttachmentDescriptorable = (*TileRenderPipelineColorAttachmentDescriptor)(nil)

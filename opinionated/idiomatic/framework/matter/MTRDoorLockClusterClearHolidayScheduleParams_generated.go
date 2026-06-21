@@ -5,107 +5,126 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDoorLockClusterClearHolidayScheduleParams wraps [raw.MTRDoorLockClusterClearHolidayScheduleParams] with a fluent Go API.
+// MTRDoorLockClusterClearHolidayScheduleParams is an idiomatic wrapper over the Objective-C class MTRDoorLockClusterClearHolidayScheduleParams.
 type MTRDoorLockClusterClearHolidayScheduleParams struct {
-	inner *raw.MTRDoorLockClusterClearHolidayScheduleParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDoorLockClusterClearHolidayScheduleParams].
-func (x *MTRDoorLockClusterClearHolidayScheduleParams) Unwrap() *raw.MTRDoorLockClusterClearHolidayScheduleParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDoorLockClusterClearHolidayScheduleParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDoorLockClusterClearHolidayScheduleParamsFromID adopts an existing object pointer as a MTRDoorLockClusterClearHolidayScheduleParams (nil for 0).
+// MTRDoorLockClusterClearHolidayScheduleParamsFromID adopts an existing Objective-C object as a MTRDoorLockClusterClearHolidayScheduleParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDoorLockClusterClearHolidayScheduleParamsFromID(id objc.ID) *MTRDoorLockClusterClearHolidayScheduleParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDoorLockClusterClearHolidayScheduleParams{inner: raw.MTRDoorLockClusterClearHolidayScheduleParamsFromID(id)}
+	x := &MTRDoorLockClusterClearHolidayScheduleParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRDoorLockClusterClearHolidayScheduleParams creates a new [MTRDoorLockClusterClearHolidayScheduleParams].
+// mTRDoorLockClusterClearHolidayScheduleParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRDoorLockClusterClearHolidayScheduleParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDoorLockClusterClearHolidayScheduleParamsAdopt(id objc.ID) *MTRDoorLockClusterClearHolidayScheduleParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDoorLockClusterClearHolidayScheduleParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDoorLockClusterClearHolidayScheduleParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDoorLockClusterClearHolidayScheduleParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDoorLockClusterClearHolidayScheduleParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRDoorLockClusterClearHolidayScheduleParams creates a new MTRDoorLockClusterClearHolidayScheduleParams.
 func NewMTRDoorLockClusterClearHolidayScheduleParams() *MTRDoorLockClusterClearHolidayScheduleParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDoorLockClusterClearHolidayScheduleParams")), objc.RegisterName("new"))
-	return &MTRDoorLockClusterClearHolidayScheduleParams{inner: raw.MTRDoorLockClusterClearHolidayScheduleParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterClearHolidayScheduleParams")), objc.RegisterName("new"))
+	return mTRDoorLockClusterClearHolidayScheduleParamsAdopt(_id)
 }
 
-// WithHolidayIndex sets the holidayIndex property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterClearHolidayScheduleParams) WithHolidayIndex(holidayIndex *foundation.NSNumber) *MTRDoorLockClusterClearHolidayScheduleParams {
-	x.inner.SetHolidayIndex(holidayIndex)
+// WithHolidayIndex sets holidayIndex and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterClearHolidayScheduleParams) WithHolidayIndex(holidayIndex obj.Object) *MTRDoorLockClusterClearHolidayScheduleParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHolidayIndex:"), objref.IDOf(holidayIndex))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterClearHolidayScheduleParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterClearHolidayScheduleParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterClearHolidayScheduleParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterClearHolidayScheduleParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterClearHolidayScheduleParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDoorLockClusterClearHolidayScheduleParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterClearHolidayScheduleParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterClearHolidayScheduleParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// HolidayIndex calls the underlying HolidayIndex.
-func (x *MTRDoorLockClusterClearHolidayScheduleParams) HolidayIndex() *foundation.NSNumber {
-	return x.inner.HolidayIndex()
+func (x *MTRDoorLockClusterClearHolidayScheduleParams) HolidayIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("holidayIndex"))
+	return obj.Wrap(_r)
 }
 
-// SetHolidayIndex calls the underlying SetHolidayIndex.
-func (x *MTRDoorLockClusterClearHolidayScheduleParams) SetHolidayIndex(holidayIndex *foundation.NSNumber) {
-	x.inner.SetHolidayIndex(holidayIndex)
+func (x *MTRDoorLockClusterClearHolidayScheduleParams) SetHolidayIndex(holidayIndex obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHolidayIndex:"), objref.IDOf(holidayIndex))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRDoorLockClusterClearHolidayScheduleParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRDoorLockClusterClearHolidayScheduleParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRDoorLockClusterClearHolidayScheduleParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRDoorLockClusterClearHolidayScheduleParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRDoorLockClusterClearHolidayScheduleParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRDoorLockClusterClearHolidayScheduleParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRDoorLockClusterClearHolidayScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRDoorLockClusterClearHolidayScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRDoorLockClusterClearHolidayScheduleParamsable is the interface implemented by [MTRDoorLockClusterClearHolidayScheduleParams], for mocking and DI.
 type MTRDoorLockClusterClearHolidayScheduleParamsable interface {
-	Unwrap() *raw.MTRDoorLockClusterClearHolidayScheduleParams
-	WithHolidayIndex(holidayIndex *foundation.NSNumber) *MTRDoorLockClusterClearHolidayScheduleParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterClearHolidayScheduleParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDoorLockClusterClearHolidayScheduleParams
-	HolidayIndex() *foundation.NSNumber
-	SetHolidayIndex(holidayIndex *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithHolidayIndex(holidayIndex obj.Object) *MTRDoorLockClusterClearHolidayScheduleParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterClearHolidayScheduleParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterClearHolidayScheduleParams
+	HolidayIndex() obj.Object
+	SetHolidayIndex(holidayIndex obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRDoorLockClusterClearHolidayScheduleParamsable = (*MTRDoorLockClusterClearHolidayScheduleParams)(nil)

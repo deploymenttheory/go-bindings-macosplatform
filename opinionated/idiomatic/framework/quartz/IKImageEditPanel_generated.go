@@ -5,81 +5,102 @@
 package quartz
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The IKImageEditPanel class provides a panel, that is, a utility window that floats on top of document windows, optimized for image editing.
 //
-// IKImageEditPanel wraps [raw.IKImageEditPanel] with a fluent Go API.
+// IKImageEditPanel is an idiomatic wrapper over the Objective-C class IKImageEditPanel.
 type IKImageEditPanel struct {
-	inner *raw.IKImageEditPanel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IKImageEditPanel].
-func (x *IKImageEditPanel) Unwrap() *raw.IKImageEditPanel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IKImageEditPanel) ID() objc.ID { return x.inner.Ptr() }
-
-// IKImageEditPanelFromID adopts an existing object pointer as a IKImageEditPanel (nil for 0).
+// IKImageEditPanelFromID adopts an existing Objective-C object as a IKImageEditPanel
+// (nil for 0), retaining it and registering a release finalizer.
 func IKImageEditPanelFromID(id objc.ID) *IKImageEditPanel {
 	if id == 0 {
 		return nil
 	}
-	return &IKImageEditPanel{inner: raw.IKImageEditPanelFromID(id)}
+	x := &IKImageEditPanel{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewIKImageEditPanel creates a new [IKImageEditPanel].
+// iKImageEditPanelAdopt wraps an Objective-C object that this code just created as a
+// IKImageEditPanel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iKImageEditPanelAdopt(id objc.ID) *IKImageEditPanel {
+	if id == 0 {
+		return nil
+	}
+	x := &IKImageEditPanel{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IKImageEditPanel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IKImageEditPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IKImageEditPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewIKImageEditPanel creates a new IKImageEditPanel.
 func NewIKImageEditPanel() *IKImageEditPanel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IKImageEditPanel")), objc.RegisterName("new"))
-	return &IKImageEditPanel{inner: raw.IKImageEditPanelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("IKImageEditPanel")), objc.RegisterName("new"))
+	return iKImageEditPanelAdopt(_id)
 }
 
 // Specifies the edit panel’s dataSource.
 //
-// WithDataSource sets the dataSource property and returns the receiver for chaining.
-func (x *IKImageEditPanel) WithDataSource(dataSource objc.ID) *IKImageEditPanel {
-	x.inner.SetDataSource(dataSource)
+// WithDataSource sets dataSource and returns the receiver so calls can be chained.
+func (x *IKImageEditPanel) WithDataSource(dataSource obj.Object) *IKImageEditPanel {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataSource:"), objref.IDOf(dataSource))
 	return x
 }
 
 // Reloads the data from the data associated with an image editing panel.
-//
-// ReloadData calls the underlying ReloadData.
 func (x *IKImageEditPanel) ReloadData() {
-	x.inner.ReloadData()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadData"))
 }
 
-// @property dataSource @abstract Data source associated with an image editing panel
-//
-// DataSource calls the underlying DataSource.
-func (x *IKImageEditPanel) DataSource() objc.ID {
-	return x.inner.DataSource()
+// Data source associated with an image editing panel
+func (x *IKImageEditPanel) DataSource() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataSource"))
+	return obj.Wrap(_r)
 }
 
-// SetDataSource calls the underlying SetDataSource.
-func (x *IKImageEditPanel) SetDataSource(dataSource objc.ID) {
-	x.inner.SetDataSource(dataSource)
+func (x *IKImageEditPanel) SetDataSource(dataSource obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataSource:"), objref.IDOf(dataSource))
 }
 
-// @property filterArray @abstract Array of filters reflecting the current user adjustments in the adjust or effects tab.
-//
-// FilterArray calls the underlying FilterArray.
-func (x *IKImageEditPanel) FilterArray() *foundation.NSArray[objc.ID] {
-	return x.inner.FilterArray()
+// Array of filters reflecting the current user adjustments in the adjust or effects tab.
+func (x *IKImageEditPanel) FilterArray() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterArray"))
+	return obj.Wrap(_r)
 }
 
 // IKImageEditPanelable is the interface implemented by [IKImageEditPanel], for mocking and DI.
 type IKImageEditPanelable interface {
-	Unwrap() *raw.IKImageEditPanel
-	WithDataSource(dataSource objc.ID) *IKImageEditPanel
+	obj.Object
+	WithDataSource(dataSource obj.Object) *IKImageEditPanel
 	ReloadData()
-	DataSource() objc.ID
-	SetDataSource(dataSource objc.ID)
-	FilterArray() *foundation.NSArray[objc.ID]
+	DataSource() obj.Object
+	SetDataSource(dataSource obj.Object)
+	FilterArray() obj.Object
 }
 
 var _ IKImageEditPanelable = (*IKImageEditPanel)(nil)

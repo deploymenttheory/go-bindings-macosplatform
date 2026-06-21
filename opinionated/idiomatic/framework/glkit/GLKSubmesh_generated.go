@@ -5,94 +5,105 @@
 package glkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Submesh wraps [raw.GLKSubmesh] with a fluent Go API.
+// Submesh is an idiomatic wrapper over the Objective-C class GLKSubmesh.
 type Submesh struct {
-	inner *raw.GLKSubmesh
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GLKSubmesh].
-func (x *Submesh) Unwrap() *raw.GLKSubmesh { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Submesh) ID() objc.ID { return x.inner.Ptr() }
-
-// SubmeshFromID adopts an existing object pointer as a Submesh (nil for 0).
+// SubmeshFromID adopts an existing Objective-C object as a Submesh
+// (nil for 0), retaining it and registering a release finalizer.
 func SubmeshFromID(id objc.ID) *Submesh {
 	if id == 0 {
 		return nil
 	}
-	return &Submesh{inner: raw.GLKSubmeshFromID(id)}
+	x := &Submesh{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSubmesh creates a new [Submesh].
+// submeshAdopt wraps an Objective-C object that this code just created as a
+// Submesh (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func submeshAdopt(id objc.ID) *Submesh {
+	if id == 0 {
+		return nil
+	}
+	x := &Submesh{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Submesh) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Submesh) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Submesh) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSubmesh creates a new Submesh.
 func NewSubmesh() *Submesh {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GLKSubmesh")), objc.RegisterName("new"))
-	return &Submesh{inner: raw.GLKSubmeshFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GLKSubmesh")), objc.RegisterName("new"))
+	return submeshAdopt(_id)
 }
 
-// @property type @abstract Type of data in the elementBuffer (aka indexBuffer) @discussion This value should be used for the type parameter of glDrawElements
-//
-// Type calls the underlying Type.
+// Type of data in the elementBuffer (aka indexBuffer) This value should be used for the type parameter of glDrawElements
 func (x *Submesh) Type() uint32 {
-	return x.inner.Type()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// @property mode @abstract Primitive type mode value of data in the elementBuffer (aka indexBuffer) @discussion This value should be used for the mode parameter in glDrawElements
-//
-// Mode calls the underlying Mode.
+// Primitive type mode value of data in the elementBuffer (aka indexBuffer) This value should be used for the mode parameter in glDrawElements
 func (x *Submesh) Mode() uint32 {
-	return x.inner.Mode()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("mode"))
+	return _r
 }
 
-// @property elementCount @abstract Number of elements (aka indicies) in the elementBuffer (aka indexBuffer) @discussion This value should be used for the count parameter in glDrawElements
-//
-// ElementCount calls the underlying ElementCount.
+// Number of elements (aka indicies) in the elementBuffer (aka indexBuffer) This value should be used for the count parameter in glDrawElements
 func (x *Submesh) ElementCount() int32 {
-	return x.inner.ElementCount()
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("elementCount"))
+	return _r
 }
 
-// @property elementBuffer @abstract Name of buffer object with index data @discussion The buffer name to be used with DrawElements
-//
-// ElementBuffer calls the underlying ElementBuffer.
+// Name of buffer object with index data The buffer name to be used with DrawElements
 func (x *Submesh) ElementBuffer() *MeshBuffer {
-	_r := x.inner.ElementBuffer()
-	if _r == nil {
-		return nil
-	}
-	return &MeshBuffer{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementBuffer"))
+	return MeshBufferFromID(_r)
 }
 
-// @property mesh @abstract Parent GLKit mesh containing vertex data of this object @discussion Buffer of this parent mesh should be set in the encoder before a drawIndexedPrimitives call is made
-//
-// Mesh calls the underlying Mesh.
+// Parent GLKit mesh containing vertex data of this object Buffer of this parent mesh should be set in the encoder before a drawIndexedPrimitives call is made
 func (x *Submesh) Mesh() *Mesh {
-	_r := x.inner.Mesh()
-	if _r == nil {
-		return nil
-	}
-	return &Mesh{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mesh"))
+	return MeshFromID(_r)
 }
 
-// @property name @abstract Name from the original MDLSubmesh object. @discussion Although not directly used by this object, the application may use this to identify the submesh in it renderer/scene/world.
-//
-// Name calls the underlying Name.
+// Name from the original MDLSubmesh object. Although not directly used by this object, the application may use this to identify the submesh in it renderer/scene/world.
 func (x *Submesh) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Submeshable is the interface implemented by [Submesh], for mocking and DI.
 type Submeshable interface {
-	Unwrap() *raw.GLKSubmesh
+	obj.Object
 	Type() uint32
 	Mode() uint32
 	ElementCount() int32

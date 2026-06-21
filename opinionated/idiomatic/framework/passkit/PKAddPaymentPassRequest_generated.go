@@ -5,124 +5,146 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Contains the card data needed to add a card to Apple Pay.
 //
-// AddPaymentPassRequest wraps [raw.PKAddPaymentPassRequest] with a fluent Go API.
+// AddPaymentPassRequest is an idiomatic wrapper over the Objective-C class PKAddPaymentPassRequest.
 type AddPaymentPassRequest struct {
-	inner *raw.PKAddPaymentPassRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKAddPaymentPassRequest].
-func (x *AddPaymentPassRequest) Unwrap() *raw.PKAddPaymentPassRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AddPaymentPassRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// AddPaymentPassRequestFromID adopts an existing object pointer as a AddPaymentPassRequest (nil for 0).
+// AddPaymentPassRequestFromID adopts an existing Objective-C object as a AddPaymentPassRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func AddPaymentPassRequestFromID(id objc.ID) *AddPaymentPassRequest {
 	if id == 0 {
 		return nil
 	}
-	return &AddPaymentPassRequest{inner: raw.PKAddPaymentPassRequestFromID(id)}
+	x := &AddPaymentPassRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAddPaymentPassRequest creates a new [AddPaymentPassRequest].
+// addPaymentPassRequestAdopt wraps an Objective-C object that this code just created as a
+// AddPaymentPassRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func addPaymentPassRequestAdopt(id objc.ID) *AddPaymentPassRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &AddPaymentPassRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AddPaymentPassRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AddPaymentPassRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AddPaymentPassRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAddPaymentPassRequest creates a new AddPaymentPassRequest.
 func NewAddPaymentPassRequest() *AddPaymentPassRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKAddPaymentPassRequest")), objc.RegisterName("new"))
-	return &AddPaymentPassRequest{inner: raw.PKAddPaymentPassRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKAddPaymentPassRequest")), objc.RegisterName("new"))
+	return addPaymentPassRequestAdopt(_id)
 }
 
 // An encrypted JSON file containing the sensitive information needed to add a card to Apple Pay.
 //
-// WithEncryptedPassData sets the encryptedPassData property and returns the receiver for chaining.
-func (x *AddPaymentPassRequest) WithEncryptedPassData(encryptedPassData *foundation.NSData) *AddPaymentPassRequest {
-	x.inner.SetEncryptedPassData(encryptedPassData)
+// WithEncryptedPassData sets encryptedPassData and returns the receiver so calls can be chained.
+func (x *AddPaymentPassRequest) WithEncryptedPassData(encryptedPassData obj.Object) *AddPaymentPassRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncryptedPassData:"), objref.IDOf(encryptedPassData))
 	return x
 }
 
 // The request’s activation data.
 //
-// WithActivationData sets the activationData property and returns the receiver for chaining.
-func (x *AddPaymentPassRequest) WithActivationData(activationData *foundation.NSData) *AddPaymentPassRequest {
-	x.inner.SetActivationData(activationData)
+// WithActivationData sets activationData and returns the receiver so calls can be chained.
+func (x *AddPaymentPassRequest) WithActivationData(activationData obj.Object) *AddPaymentPassRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivationData:"), objref.IDOf(activationData))
 	return x
 }
 
 // The ephemeral public key used by elliptic curve cryptography (ECC).
 //
-// WithEphemeralPublicKey sets the ephemeralPublicKey property and returns the receiver for chaining.
-func (x *AddPaymentPassRequest) WithEphemeralPublicKey(ephemeralPublicKey *foundation.NSData) *AddPaymentPassRequest {
-	x.inner.SetEphemeralPublicKey(ephemeralPublicKey)
+// WithEphemeralPublicKey sets ephemeralPublicKey and returns the receiver so calls can be chained.
+func (x *AddPaymentPassRequest) WithEphemeralPublicKey(ephemeralPublicKey obj.Object) *AddPaymentPassRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEphemeralPublicKey:"), objref.IDOf(ephemeralPublicKey))
 	return x
 }
 
-// WithWrappedKey sets the wrappedKey property and returns the receiver for chaining.
-func (x *AddPaymentPassRequest) WithWrappedKey(wrappedKey *foundation.NSData) *AddPaymentPassRequest {
-	x.inner.SetWrappedKey(wrappedKey)
+// WithWrappedKey sets wrappedKey and returns the receiver so calls can be chained.
+func (x *AddPaymentPassRequest) WithWrappedKey(wrappedKey obj.Object) *AddPaymentPassRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrappedKey:"), objref.IDOf(wrappedKey))
 	return x
 }
 
-// EncryptedPassData calls the underlying EncryptedPassData.
-func (x *AddPaymentPassRequest) EncryptedPassData() *foundation.NSData {
-	return x.inner.EncryptedPassData()
+func (x *AddPaymentPassRequest) EncryptedPassData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encryptedPassData"))
+	return obj.Wrap(_r)
 }
 
-// SetEncryptedPassData calls the underlying SetEncryptedPassData.
-func (x *AddPaymentPassRequest) SetEncryptedPassData(encryptedPassData *foundation.NSData) {
-	x.inner.SetEncryptedPassData(encryptedPassData)
+func (x *AddPaymentPassRequest) SetEncryptedPassData(encryptedPassData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncryptedPassData:"), objref.IDOf(encryptedPassData))
 }
 
-// ActivationData calls the underlying ActivationData.
-func (x *AddPaymentPassRequest) ActivationData() *foundation.NSData {
-	return x.inner.ActivationData()
+func (x *AddPaymentPassRequest) ActivationData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activationData"))
+	return obj.Wrap(_r)
 }
 
-// SetActivationData calls the underlying SetActivationData.
-func (x *AddPaymentPassRequest) SetActivationData(activationData *foundation.NSData) {
-	x.inner.SetActivationData(activationData)
+func (x *AddPaymentPassRequest) SetActivationData(activationData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivationData:"), objref.IDOf(activationData))
 }
 
-// EphemeralPublicKey calls the underlying EphemeralPublicKey.
-func (x *AddPaymentPassRequest) EphemeralPublicKey() *foundation.NSData {
-	return x.inner.EphemeralPublicKey()
+func (x *AddPaymentPassRequest) EphemeralPublicKey() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ephemeralPublicKey"))
+	return obj.Wrap(_r)
 }
 
-// SetEphemeralPublicKey calls the underlying SetEphemeralPublicKey.
-func (x *AddPaymentPassRequest) SetEphemeralPublicKey(ephemeralPublicKey *foundation.NSData) {
-	x.inner.SetEphemeralPublicKey(ephemeralPublicKey)
+func (x *AddPaymentPassRequest) SetEphemeralPublicKey(ephemeralPublicKey obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEphemeralPublicKey:"), objref.IDOf(ephemeralPublicKey))
 }
 
-// WrappedKey calls the underlying WrappedKey.
-func (x *AddPaymentPassRequest) WrappedKey() *foundation.NSData {
-	return x.inner.WrappedKey()
+func (x *AddPaymentPassRequest) WrappedKey() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wrappedKey"))
+	return obj.Wrap(_r)
 }
 
-// SetWrappedKey calls the underlying SetWrappedKey.
-func (x *AddPaymentPassRequest) SetWrappedKey(wrappedKey *foundation.NSData) {
-	x.inner.SetWrappedKey(wrappedKey)
+func (x *AddPaymentPassRequest) SetWrappedKey(wrappedKey obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrappedKey:"), objref.IDOf(wrappedKey))
 }
 
 // AddPaymentPassRequestable is the interface implemented by [AddPaymentPassRequest], for mocking and DI.
 type AddPaymentPassRequestable interface {
-	Unwrap() *raw.PKAddPaymentPassRequest
-	WithEncryptedPassData(encryptedPassData *foundation.NSData) *AddPaymentPassRequest
-	WithActivationData(activationData *foundation.NSData) *AddPaymentPassRequest
-	WithEphemeralPublicKey(ephemeralPublicKey *foundation.NSData) *AddPaymentPassRequest
-	WithWrappedKey(wrappedKey *foundation.NSData) *AddPaymentPassRequest
-	EncryptedPassData() *foundation.NSData
-	SetEncryptedPassData(encryptedPassData *foundation.NSData)
-	ActivationData() *foundation.NSData
-	SetActivationData(activationData *foundation.NSData)
-	EphemeralPublicKey() *foundation.NSData
-	SetEphemeralPublicKey(ephemeralPublicKey *foundation.NSData)
-	WrappedKey() *foundation.NSData
-	SetWrappedKey(wrappedKey *foundation.NSData)
+	obj.Object
+	WithEncryptedPassData(encryptedPassData obj.Object) *AddPaymentPassRequest
+	WithActivationData(activationData obj.Object) *AddPaymentPassRequest
+	WithEphemeralPublicKey(ephemeralPublicKey obj.Object) *AddPaymentPassRequest
+	WithWrappedKey(wrappedKey obj.Object) *AddPaymentPassRequest
+	EncryptedPassData() obj.Object
+	SetEncryptedPassData(encryptedPassData obj.Object)
+	ActivationData() obj.Object
+	SetActivationData(activationData obj.Object)
+	EphemeralPublicKey() obj.Object
+	SetEphemeralPublicKey(ephemeralPublicKey obj.Object)
+	WrappedKey() obj.Object
+	SetWrappedKey(wrappedKey obj.Object)
 }
 
 var _ AddPaymentPassRequestable = (*AddPaymentPassRequest)(nil)

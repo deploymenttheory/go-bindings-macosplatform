@@ -5,462 +5,338 @@
 package hypervisor
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/hypervisor"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// HvGicConfigCreate calls [raw.HvGicConfigCreate] (C function hv_gic_config_create).
-func HvGicConfigCreate() unsafe.Pointer {
-	return raw.HvGicConfigCreate()
+var _fnHvGicConfigSetDistributorBase func(objc.ID, uint64) int
+
+// HvGicConfigSetDistributorBase calls the Hypervisor framework function hv_gic_config_set_distributor_base.
+func HvGicConfigSetDistributorBase(config obj.Object, distributor_base_address uint64) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvGicConfigSetDistributorBase == nil {
+		ebipurego.RegisterLibFunc(&_fnHvGicConfigSetDistributorBase, _lib, "hv_gic_config_set_distributor_base")
+	}
+	return _fnHvGicConfigSetDistributorBase(objref.IDOf(config), distributor_base_address)
 }
 
-// HvGicConfigSetDistributorBase calls [raw.HvGicConfigSetDistributorBase] (C function hv_gic_config_set_distributor_base).
-func HvGicConfigSetDistributorBase(config *foundation.NSObject, distributor_base_address uint64) int {
-	return raw.HvGicConfigSetDistributorBase(config, distributor_base_address)
+var _fnHvGicConfigSetMsiInterruptRange func(objc.ID, uint32, uint32) int
+
+// HvGicConfigSetMsiInterruptRange calls the Hypervisor framework function hv_gic_config_set_msi_interrupt_range.
+func HvGicConfigSetMsiInterruptRange(config obj.Object, msi_intid_base uint32, msi_intid_count uint32) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvGicConfigSetMsiInterruptRange == nil {
+		ebipurego.RegisterLibFunc(&_fnHvGicConfigSetMsiInterruptRange, _lib, "hv_gic_config_set_msi_interrupt_range")
+	}
+	return _fnHvGicConfigSetMsiInterruptRange(objref.IDOf(config), msi_intid_base, msi_intid_count)
 }
 
-// HvGicConfigSetMsiInterruptRange calls [raw.HvGicConfigSetMsiInterruptRange] (C function hv_gic_config_set_msi_interrupt_range).
-func HvGicConfigSetMsiInterruptRange(config *foundation.NSObject, msi_intid_base uint32, msi_intid_count uint32) int {
-	return raw.HvGicConfigSetMsiInterruptRange(config, msi_intid_base, msi_intid_count)
+var _fnHvGicConfigSetMsiRegionBase func(objc.ID, uint64) int
+
+// HvGicConfigSetMsiRegionBase calls the Hypervisor framework function hv_gic_config_set_msi_region_base.
+func HvGicConfigSetMsiRegionBase(config obj.Object, msi_region_base_address uint64) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvGicConfigSetMsiRegionBase == nil {
+		ebipurego.RegisterLibFunc(&_fnHvGicConfigSetMsiRegionBase, _lib, "hv_gic_config_set_msi_region_base")
+	}
+	return _fnHvGicConfigSetMsiRegionBase(objref.IDOf(config), msi_region_base_address)
 }
 
-// HvGicConfigSetMsiRegionBase calls [raw.HvGicConfigSetMsiRegionBase] (C function hv_gic_config_set_msi_region_base).
-func HvGicConfigSetMsiRegionBase(config *foundation.NSObject, msi_region_base_address uint64) int {
-	return raw.HvGicConfigSetMsiRegionBase(config, msi_region_base_address)
+var _fnHvGicConfigSetRedistributorBase func(objc.ID, uint64) int
+
+// HvGicConfigSetRedistributorBase calls the Hypervisor framework function hv_gic_config_set_redistributor_base.
+func HvGicConfigSetRedistributorBase(config obj.Object, redistributor_base_address uint64) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvGicConfigSetRedistributorBase == nil {
+		ebipurego.RegisterLibFunc(&_fnHvGicConfigSetRedistributorBase, _lib, "hv_gic_config_set_redistributor_base")
+	}
+	return _fnHvGicConfigSetRedistributorBase(objref.IDOf(config), redistributor_base_address)
 }
 
-// HvGicConfigSetRedistributorBase calls [raw.HvGicConfigSetRedistributorBase] (C function hv_gic_config_set_redistributor_base).
-func HvGicConfigSetRedistributorBase(config *foundation.NSObject, redistributor_base_address uint64) int {
-	return raw.HvGicConfigSetRedistributorBase(config, redistributor_base_address)
+var _fnHvGicCreate func(objc.ID) int
+
+// HvGicCreate calls the Hypervisor framework function hv_gic_create.
+func HvGicCreate(gic_config obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvGicCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnHvGicCreate, _lib, "hv_gic_create")
+	}
+	return _fnHvGicCreate(objref.IDOf(gic_config))
 }
 
-// HvGicCreate calls [raw.HvGicCreate] (C function hv_gic_create).
-func HvGicCreate(gic_config *foundation.NSObject) int {
-	return raw.HvGicCreate(gic_config)
-}
+var _fnHvGicReset func() int
 
-// HvGicGetDistributorBaseAlignment calls [raw.HvGicGetDistributorBaseAlignment] (C function hv_gic_get_distributor_base_alignment).
-func HvGicGetDistributorBaseAlignment(distributor_base_alignment *uint) int {
-	return raw.HvGicGetDistributorBaseAlignment(distributor_base_alignment)
-}
-
-// HvGicGetDistributorReg calls [raw.HvGicGetDistributorReg] (C function hv_gic_get_distributor_reg).
-func HvGicGetDistributorReg(reg Hv_gic_distributor_reg_t, value *uint64) int {
-	return raw.HvGicGetDistributorReg(raw.Hv_gic_distributor_reg_t(reg), value)
-}
-
-// HvGicGetDistributorSize calls [raw.HvGicGetDistributorSize] (C function hv_gic_get_distributor_size).
-func HvGicGetDistributorSize(distributor_size *uint) int {
-	return raw.HvGicGetDistributorSize(distributor_size)
-}
-
-// HvGicGetIccReg calls [raw.HvGicGetIccReg] (C function hv_gic_get_icc_reg).
-func HvGicGetIccReg(vcpu uint64, reg Hv_gic_icc_reg_t, value *uint64) int {
-	return raw.HvGicGetIccReg(vcpu, raw.Hv_gic_icc_reg_t(reg), value)
-}
-
-// HvGicGetIchReg calls [raw.HvGicGetIchReg] (C function hv_gic_get_ich_reg).
-func HvGicGetIchReg(vcpu uint64, reg Hv_gic_ich_reg_t, value *uint64) int {
-	return raw.HvGicGetIchReg(vcpu, raw.Hv_gic_ich_reg_t(reg), value)
-}
-
-// HvGicGetIcvReg calls [raw.HvGicGetIcvReg] (C function hv_gic_get_icv_reg).
-func HvGicGetIcvReg(vcpu uint64, reg Hv_gic_icv_reg_t, value *uint64) int {
-	return raw.HvGicGetIcvReg(vcpu, raw.Hv_gic_icv_reg_t(reg), value)
-}
-
-// HvGicGetIntid calls [raw.HvGicGetIntid] (C function hv_gic_get_intid).
-func HvGicGetIntid(interrupt Hv_gic_intid_t, intid *uint32) int {
-	return raw.HvGicGetIntid(raw.Hv_gic_intid_t(interrupt), intid)
-}
-
-// HvGicGetMsiReg calls [raw.HvGicGetMsiReg] (C function hv_gic_get_msi_reg).
-func HvGicGetMsiReg(reg Hv_gic_msi_reg_t, value *uint64) int {
-	return raw.HvGicGetMsiReg(raw.Hv_gic_msi_reg_t(reg), value)
-}
-
-// HvGicGetMsiRegionBaseAlignment calls [raw.HvGicGetMsiRegionBaseAlignment] (C function hv_gic_get_msi_region_base_alignment).
-func HvGicGetMsiRegionBaseAlignment(msi_region_base_alignment *uint) int {
-	return raw.HvGicGetMsiRegionBaseAlignment(msi_region_base_alignment)
-}
-
-// HvGicGetMsiRegionSize calls [raw.HvGicGetMsiRegionSize] (C function hv_gic_get_msi_region_size).
-func HvGicGetMsiRegionSize(msi_region_size *uint) int {
-	return raw.HvGicGetMsiRegionSize(msi_region_size)
-}
-
-// HvGicGetRedistributorBase calls [raw.HvGicGetRedistributorBase] (C function hv_gic_get_redistributor_base).
-func HvGicGetRedistributorBase(vcpu uint64, redistributor_base_address *uint64) int {
-	return raw.HvGicGetRedistributorBase(vcpu, redistributor_base_address)
-}
-
-// HvGicGetRedistributorBaseAlignment calls [raw.HvGicGetRedistributorBaseAlignment] (C function hv_gic_get_redistributor_base_alignment).
-func HvGicGetRedistributorBaseAlignment(redistributor_base_alignment *uint) int {
-	return raw.HvGicGetRedistributorBaseAlignment(redistributor_base_alignment)
-}
-
-// HvGicGetRedistributorReg calls [raw.HvGicGetRedistributorReg] (C function hv_gic_get_redistributor_reg).
-func HvGicGetRedistributorReg(vcpu uint64, reg Hv_gic_redistributor_reg_t, value *uint64) int {
-	return raw.HvGicGetRedistributorReg(vcpu, raw.Hv_gic_redistributor_reg_t(reg), value)
-}
-
-// HvGicGetRedistributorRegionSize calls [raw.HvGicGetRedistributorRegionSize] (C function hv_gic_get_redistributor_region_size).
-func HvGicGetRedistributorRegionSize(redistributor_region_size *uint) int {
-	return raw.HvGicGetRedistributorRegionSize(redistributor_region_size)
-}
-
-// HvGicGetRedistributorSize calls [raw.HvGicGetRedistributorSize] (C function hv_gic_get_redistributor_size).
-func HvGicGetRedistributorSize(redistributor_size *uint) int {
-	return raw.HvGicGetRedistributorSize(redistributor_size)
-}
-
-// HvGicGetSpiInterruptRange calls [raw.HvGicGetSpiInterruptRange] (C function hv_gic_get_spi_interrupt_range).
-func HvGicGetSpiInterruptRange(spi_intid_base *uint32, spi_intid_count *uint32) int {
-	return raw.HvGicGetSpiInterruptRange(spi_intid_base, spi_intid_count)
-}
-
-// HvGicReset calls [raw.HvGicReset] (C function hv_gic_reset).
+// HvGicReset calls the Hypervisor framework function hv_gic_reset.
 func HvGicReset() int {
-	return raw.HvGicReset()
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvGicReset == nil {
+		ebipurego.RegisterLibFunc(&_fnHvGicReset, _lib, "hv_gic_reset")
+	}
+	return _fnHvGicReset()
 }
 
-// HvGicSendMsi calls [raw.HvGicSendMsi] (C function hv_gic_send_msi).
+var _fnHvGicSendMsi func(uint64, uint32) int
+
+// HvGicSendMsi calls the Hypervisor framework function hv_gic_send_msi.
 func HvGicSendMsi(address uint64, intid uint32) int {
-	return raw.HvGicSendMsi(address, intid)
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvGicSendMsi == nil {
+		ebipurego.RegisterLibFunc(&_fnHvGicSendMsi, _lib, "hv_gic_send_msi")
+	}
+	return _fnHvGicSendMsi(address, intid)
 }
 
-// HvGicSetDistributorReg calls [raw.HvGicSetDistributorReg] (C function hv_gic_set_distributor_reg).
+var _fnHvGicSetDistributorReg func(Hv_gic_distributor_reg_t, uint64) int
+
+// HvGicSetDistributorReg calls the Hypervisor framework function hv_gic_set_distributor_reg.
 func HvGicSetDistributorReg(reg Hv_gic_distributor_reg_t, value uint64) int {
-	return raw.HvGicSetDistributorReg(raw.Hv_gic_distributor_reg_t(reg), value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvGicSetDistributorReg == nil {
+		ebipurego.RegisterLibFunc(&_fnHvGicSetDistributorReg, _lib, "hv_gic_set_distributor_reg")
+	}
+	return _fnHvGicSetDistributorReg(reg, value)
 }
 
-// HvGicSetIccReg calls [raw.HvGicSetIccReg] (C function hv_gic_set_icc_reg).
+var _fnHvGicSetIccReg func(uint64, Hv_gic_icc_reg_t, uint64) int
+
+// HvGicSetIccReg calls the Hypervisor framework function hv_gic_set_icc_reg.
 func HvGicSetIccReg(vcpu uint64, reg Hv_gic_icc_reg_t, value uint64) int {
-	return raw.HvGicSetIccReg(vcpu, raw.Hv_gic_icc_reg_t(reg), value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvGicSetIccReg == nil {
+		ebipurego.RegisterLibFunc(&_fnHvGicSetIccReg, _lib, "hv_gic_set_icc_reg")
+	}
+	return _fnHvGicSetIccReg(vcpu, reg, value)
 }
 
-// HvGicSetIchReg calls [raw.HvGicSetIchReg] (C function hv_gic_set_ich_reg).
+var _fnHvGicSetIchReg func(uint64, Hv_gic_ich_reg_t, uint64) int
+
+// HvGicSetIchReg calls the Hypervisor framework function hv_gic_set_ich_reg.
 func HvGicSetIchReg(vcpu uint64, reg Hv_gic_ich_reg_t, value uint64) int {
-	return raw.HvGicSetIchReg(vcpu, raw.Hv_gic_ich_reg_t(reg), value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvGicSetIchReg == nil {
+		ebipurego.RegisterLibFunc(&_fnHvGicSetIchReg, _lib, "hv_gic_set_ich_reg")
+	}
+	return _fnHvGicSetIchReg(vcpu, reg, value)
 }
 
-// HvGicSetIcvReg calls [raw.HvGicSetIcvReg] (C function hv_gic_set_icv_reg).
+var _fnHvGicSetIcvReg func(uint64, Hv_gic_icv_reg_t, uint64) int
+
+// HvGicSetIcvReg calls the Hypervisor framework function hv_gic_set_icv_reg.
 func HvGicSetIcvReg(vcpu uint64, reg Hv_gic_icv_reg_t, value uint64) int {
-	return raw.HvGicSetIcvReg(vcpu, raw.Hv_gic_icv_reg_t(reg), value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvGicSetIcvReg == nil {
+		ebipurego.RegisterLibFunc(&_fnHvGicSetIcvReg, _lib, "hv_gic_set_icv_reg")
+	}
+	return _fnHvGicSetIcvReg(vcpu, reg, value)
 }
 
-// HvGicSetMsiReg calls [raw.HvGicSetMsiReg] (C function hv_gic_set_msi_reg).
+var _fnHvGicSetMsiReg func(Hv_gic_msi_reg_t, uint64) int
+
+// HvGicSetMsiReg calls the Hypervisor framework function hv_gic_set_msi_reg.
 func HvGicSetMsiReg(reg Hv_gic_msi_reg_t, value uint64) int {
-	return raw.HvGicSetMsiReg(raw.Hv_gic_msi_reg_t(reg), value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvGicSetMsiReg == nil {
+		ebipurego.RegisterLibFunc(&_fnHvGicSetMsiReg, _lib, "hv_gic_set_msi_reg")
+	}
+	return _fnHvGicSetMsiReg(reg, value)
 }
 
-// HvGicSetRedistributorReg calls [raw.HvGicSetRedistributorReg] (C function hv_gic_set_redistributor_reg).
+var _fnHvGicSetRedistributorReg func(uint64, Hv_gic_redistributor_reg_t, uint64) int
+
+// HvGicSetRedistributorReg calls the Hypervisor framework function hv_gic_set_redistributor_reg.
 func HvGicSetRedistributorReg(vcpu uint64, reg Hv_gic_redistributor_reg_t, value uint64) int {
-	return raw.HvGicSetRedistributorReg(vcpu, raw.Hv_gic_redistributor_reg_t(reg), value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvGicSetRedistributorReg == nil {
+		ebipurego.RegisterLibFunc(&_fnHvGicSetRedistributorReg, _lib, "hv_gic_set_redistributor_reg")
+	}
+	return _fnHvGicSetRedistributorReg(vcpu, reg, value)
 }
 
-// HvGicSetSpi calls [raw.HvGicSetSpi] (C function hv_gic_set_spi).
+var _fnHvGicSetSpi func(uint32, bool) int
+
+// HvGicSetSpi calls the Hypervisor framework function hv_gic_set_spi.
 func HvGicSetSpi(intid uint32, level bool) int {
-	return raw.HvGicSetSpi(intid, level)
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvGicSetSpi == nil {
+		ebipurego.RegisterLibFunc(&_fnHvGicSetSpi, _lib, "hv_gic_set_spi")
+	}
+	return _fnHvGicSetSpi(intid, level)
 }
 
-// HvGicSetState calls [raw.HvGicSetState] (C function hv_gic_set_state).
-func HvGicSetState(gic_state_data unsafe.Pointer, gic_state_size uint) int {
-	return raw.HvGicSetState(gic_state_data, gic_state_size)
-}
+var _fnHvVcpuDestroy func(uint64) int
 
-// HvGicStateCreate calls [raw.HvGicStateCreate] (C function hv_gic_state_create).
-func HvGicStateCreate() unsafe.Pointer {
-	return raw.HvGicStateCreate()
-}
-
-// HvGicStateGetData calls [raw.HvGicStateGetData] (C function hv_gic_state_get_data).
-func HvGicStateGetData(state *foundation.NSObject, gic_state_data unsafe.Pointer) int {
-	return raw.HvGicStateGetData(state, gic_state_data)
-}
-
-// HvGicStateGetSize calls [raw.HvGicStateGetSize] (C function hv_gic_state_get_size).
-func HvGicStateGetSize(state *foundation.NSObject, gic_state_size *uint) int {
-	return raw.HvGicStateGetSize(state, gic_state_size)
-}
-
-// HvSmeConfigGetMaxSvlBytes calls [raw.HvSmeConfigGetMaxSvlBytes] (C function hv_sme_config_get_max_svl_bytes).
-func HvSmeConfigGetMaxSvlBytes(value *uint) int {
-	return raw.HvSmeConfigGetMaxSvlBytes(value)
-}
-
-// HvVcpuConfigCreate calls [raw.HvVcpuConfigCreate] (C function hv_vcpu_config_create).
-func HvVcpuConfigCreate() unsafe.Pointer {
-	return raw.HvVcpuConfigCreate()
-}
-
-// HvVcpuConfigGetCcsidrEl1SysRegValues calls [raw.HvVcpuConfigGetCcsidrEl1SysRegValues] (C function hv_vcpu_config_get_ccsidr_el1_sys_reg_values).
-func HvVcpuConfigGetCcsidrEl1SysRegValues(config *foundation.NSObject, cache_type Hv_cache_type_t, values *uint64) int {
-	return raw.HvVcpuConfigGetCcsidrEl1SysRegValues(config, raw.Hv_cache_type_t(cache_type), values)
-}
-
-// HvVcpuConfigGetFeatureReg calls [raw.HvVcpuConfigGetFeatureReg] (C function hv_vcpu_config_get_feature_reg).
-func HvVcpuConfigGetFeatureReg(config *foundation.NSObject, feature_reg Hv_feature_reg_t, value *uint64) int {
-	return raw.HvVcpuConfigGetFeatureReg(config, raw.Hv_feature_reg_t(feature_reg), value)
-}
-
-// HvVcpuCreate calls [raw.HvVcpuCreate] (C function hv_vcpu_create).
-func HvVcpuCreate(vcpu *uint64, exit *raw.HvVcpuExitT, config *foundation.NSObject) int {
-	return raw.HvVcpuCreate(vcpu, exit, config)
-}
-
-// HvVcpuDestroy calls [raw.HvVcpuDestroy] (C function hv_vcpu_destroy).
+// HvVcpuDestroy calls the Hypervisor framework function hv_vcpu_destroy.
 func HvVcpuDestroy(vcpu uint64) int {
-	return raw.HvVcpuDestroy(vcpu)
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVcpuDestroy == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVcpuDestroy, _lib, "hv_vcpu_destroy")
+	}
+	return _fnHvVcpuDestroy(vcpu)
 }
 
-// HvVcpuGetExecTime calls [raw.HvVcpuGetExecTime] (C function hv_vcpu_get_exec_time).
-func HvVcpuGetExecTime(vcpu uint64, time_ *uint64) int {
-	return raw.HvVcpuGetExecTime(vcpu, time_)
-}
+var _fnHvVcpuRun func(uint64) int
 
-// HvVcpuGetPendingInterrupt calls [raw.HvVcpuGetPendingInterrupt] (C function hv_vcpu_get_pending_interrupt).
-func HvVcpuGetPendingInterrupt(vcpu uint64, type_ Hv_interrupt_type_t, pending unsafe.Pointer) int {
-	return raw.HvVcpuGetPendingInterrupt(vcpu, raw.Hv_interrupt_type_t(type_), pending)
-}
-
-// HvVcpuGetReg calls [raw.HvVcpuGetReg] (C function hv_vcpu_get_reg).
-func HvVcpuGetReg(vcpu uint64, reg Hv_reg_t, value *uint64) int {
-	return raw.HvVcpuGetReg(vcpu, raw.Hv_reg_t(reg), value)
-}
-
-// HvVcpuGetSimdFpReg calls [raw.HvVcpuGetSimdFpReg] (C function hv_vcpu_get_simd_fp_reg).
-func HvVcpuGetSimdFpReg(vcpu uint64, reg Hv_simd_fp_reg_t, value unsafe.Pointer) int {
-	return raw.HvVcpuGetSimdFpReg(vcpu, raw.Hv_simd_fp_reg_t(reg), value)
-}
-
-// HvVcpuGetSmePReg calls [raw.HvVcpuGetSmePReg] (C function hv_vcpu_get_sme_p_reg).
-func HvVcpuGetSmePReg(vcpu uint64, reg Hv_sme_p_reg_t, value *uint8, length uint) int {
-	return raw.HvVcpuGetSmePReg(vcpu, raw.Hv_sme_p_reg_t(reg), value, length)
-}
-
-// HvVcpuGetSmeState calls [raw.HvVcpuGetSmeState] (C function hv_vcpu_get_sme_state).
-func HvVcpuGetSmeState(vcpu uint64, sme_state *raw.HvVcpuSmeStateT) int {
-	return raw.HvVcpuGetSmeState(vcpu, sme_state)
-}
-
-// HvVcpuGetSmeZReg calls [raw.HvVcpuGetSmeZReg] (C function hv_vcpu_get_sme_z_reg).
-func HvVcpuGetSmeZReg(vcpu uint64, reg Hv_sme_z_reg_t, value *uint8, length uint) int {
-	return raw.HvVcpuGetSmeZReg(vcpu, raw.Hv_sme_z_reg_t(reg), value, length)
-}
-
-// HvVcpuGetSmeZaReg calls [raw.HvVcpuGetSmeZaReg] (C function hv_vcpu_get_sme_za_reg).
-func HvVcpuGetSmeZaReg(vcpu uint64, value *uint8, length uint) int {
-	return raw.HvVcpuGetSmeZaReg(vcpu, value, length)
-}
-
-// HvVcpuGetSmeZt0Reg calls [raw.HvVcpuGetSmeZt0Reg] (C function hv_vcpu_get_sme_zt0_reg).
-func HvVcpuGetSmeZt0Reg(vcpu uint64, value unsafe.Pointer) int {
-	return raw.HvVcpuGetSmeZt0Reg(vcpu, value)
-}
-
-// HvVcpuGetSysReg calls [raw.HvVcpuGetSysReg] (C function hv_vcpu_get_sys_reg).
-func HvVcpuGetSysReg(vcpu uint64, reg Hv_sys_reg_t, value *uint64) int {
-	return raw.HvVcpuGetSysReg(vcpu, raw.Hv_sys_reg_t(reg), value)
-}
-
-// HvVcpuGetTrapDebugExceptions calls [raw.HvVcpuGetTrapDebugExceptions] (C function hv_vcpu_get_trap_debug_exceptions).
-func HvVcpuGetTrapDebugExceptions(vcpu uint64, value unsafe.Pointer) int {
-	return raw.HvVcpuGetTrapDebugExceptions(vcpu, value)
-}
-
-// HvVcpuGetTrapDebugRegAccesses calls [raw.HvVcpuGetTrapDebugRegAccesses] (C function hv_vcpu_get_trap_debug_reg_accesses).
-func HvVcpuGetTrapDebugRegAccesses(vcpu uint64, value unsafe.Pointer) int {
-	return raw.HvVcpuGetTrapDebugRegAccesses(vcpu, value)
-}
-
-// HvVcpuGetVtimerMask calls [raw.HvVcpuGetVtimerMask] (C function hv_vcpu_get_vtimer_mask).
-func HvVcpuGetVtimerMask(vcpu uint64, vtimer_is_masked unsafe.Pointer) int {
-	return raw.HvVcpuGetVtimerMask(vcpu, vtimer_is_masked)
-}
-
-// HvVcpuGetVtimerOffset calls [raw.HvVcpuGetVtimerOffset] (C function hv_vcpu_get_vtimer_offset).
-func HvVcpuGetVtimerOffset(vcpu uint64, vtimer_offset *uint64) int {
-	return raw.HvVcpuGetVtimerOffset(vcpu, vtimer_offset)
-}
-
-// HvVcpuRun calls [raw.HvVcpuRun] (C function hv_vcpu_run).
+// HvVcpuRun calls the Hypervisor framework function hv_vcpu_run.
 func HvVcpuRun(vcpu uint64) int {
-	return raw.HvVcpuRun(vcpu)
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVcpuRun == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVcpuRun, _lib, "hv_vcpu_run")
+	}
+	return _fnHvVcpuRun(vcpu)
 }
 
-// HvVcpuSetPendingInterrupt calls [raw.HvVcpuSetPendingInterrupt] (C function hv_vcpu_set_pending_interrupt).
+var _fnHvVcpuSetPendingInterrupt func(uint64, Hv_interrupt_type_t, bool) int
+
+// HvVcpuSetPendingInterrupt calls the Hypervisor framework function hv_vcpu_set_pending_interrupt.
 func HvVcpuSetPendingInterrupt(vcpu uint64, type_ Hv_interrupt_type_t, pending bool) int {
-	return raw.HvVcpuSetPendingInterrupt(vcpu, raw.Hv_interrupt_type_t(type_), pending)
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVcpuSetPendingInterrupt == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVcpuSetPendingInterrupt, _lib, "hv_vcpu_set_pending_interrupt")
+	}
+	return _fnHvVcpuSetPendingInterrupt(vcpu, type_, pending)
 }
 
-// HvVcpuSetReg calls [raw.HvVcpuSetReg] (C function hv_vcpu_set_reg).
+var _fnHvVcpuSetReg func(uint64, Hv_reg_t, uint64) int
+
+// HvVcpuSetReg calls the Hypervisor framework function hv_vcpu_set_reg.
 func HvVcpuSetReg(vcpu uint64, reg Hv_reg_t, value uint64) int {
-	return raw.HvVcpuSetReg(vcpu, raw.Hv_reg_t(reg), value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVcpuSetReg == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVcpuSetReg, _lib, "hv_vcpu_set_reg")
+	}
+	return _fnHvVcpuSetReg(vcpu, reg, value)
 }
 
-// HvVcpuSetSimdFpReg calls [raw.HvVcpuSetSimdFpReg] (C function hv_vcpu_set_simd_fp_reg).
-func HvVcpuSetSimdFpReg(vcpu uint64, reg Hv_simd_fp_reg_t, value unsafe.Pointer) int {
-	return raw.HvVcpuSetSimdFpReg(vcpu, raw.Hv_simd_fp_reg_t(reg), value)
-}
+var _fnHvVcpuSetSysReg func(uint64, Hv_sys_reg_t, uint64) int
 
-// HvVcpuSetSmePReg calls [raw.HvVcpuSetSmePReg] (C function hv_vcpu_set_sme_p_reg).
-func HvVcpuSetSmePReg(vcpu uint64, reg Hv_sme_p_reg_t, value *uint8, length uint) int {
-	return raw.HvVcpuSetSmePReg(vcpu, raw.Hv_sme_p_reg_t(reg), value, length)
-}
-
-// HvVcpuSetSmeState calls [raw.HvVcpuSetSmeState] (C function hv_vcpu_set_sme_state).
-func HvVcpuSetSmeState(vcpu uint64, sme_state *raw.HvVcpuSmeStateT) int {
-	return raw.HvVcpuSetSmeState(vcpu, sme_state)
-}
-
-// HvVcpuSetSmeZReg calls [raw.HvVcpuSetSmeZReg] (C function hv_vcpu_set_sme_z_reg).
-func HvVcpuSetSmeZReg(vcpu uint64, reg Hv_sme_z_reg_t, value *uint8, length uint) int {
-	return raw.HvVcpuSetSmeZReg(vcpu, raw.Hv_sme_z_reg_t(reg), value, length)
-}
-
-// HvVcpuSetSmeZaReg calls [raw.HvVcpuSetSmeZaReg] (C function hv_vcpu_set_sme_za_reg).
-func HvVcpuSetSmeZaReg(vcpu uint64, value *uint8, length uint) int {
-	return raw.HvVcpuSetSmeZaReg(vcpu, value, length)
-}
-
-// HvVcpuSetSmeZt0Reg calls [raw.HvVcpuSetSmeZt0Reg] (C function hv_vcpu_set_sme_zt0_reg).
-func HvVcpuSetSmeZt0Reg(vcpu uint64, value unsafe.Pointer) int {
-	return raw.HvVcpuSetSmeZt0Reg(vcpu, value)
-}
-
-// HvVcpuSetSysReg calls [raw.HvVcpuSetSysReg] (C function hv_vcpu_set_sys_reg).
+// HvVcpuSetSysReg calls the Hypervisor framework function hv_vcpu_set_sys_reg.
 func HvVcpuSetSysReg(vcpu uint64, reg Hv_sys_reg_t, value uint64) int {
-	return raw.HvVcpuSetSysReg(vcpu, raw.Hv_sys_reg_t(reg), value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVcpuSetSysReg == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVcpuSetSysReg, _lib, "hv_vcpu_set_sys_reg")
+	}
+	return _fnHvVcpuSetSysReg(vcpu, reg, value)
 }
 
-// HvVcpuSetTrapDebugExceptions calls [raw.HvVcpuSetTrapDebugExceptions] (C function hv_vcpu_set_trap_debug_exceptions).
+var _fnHvVcpuSetTrapDebugExceptions func(uint64, bool) int
+
+// HvVcpuSetTrapDebugExceptions calls the Hypervisor framework function hv_vcpu_set_trap_debug_exceptions.
 func HvVcpuSetTrapDebugExceptions(vcpu uint64, value bool) int {
-	return raw.HvVcpuSetTrapDebugExceptions(vcpu, value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVcpuSetTrapDebugExceptions == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVcpuSetTrapDebugExceptions, _lib, "hv_vcpu_set_trap_debug_exceptions")
+	}
+	return _fnHvVcpuSetTrapDebugExceptions(vcpu, value)
 }
 
-// HvVcpuSetTrapDebugRegAccesses calls [raw.HvVcpuSetTrapDebugRegAccesses] (C function hv_vcpu_set_trap_debug_reg_accesses).
+var _fnHvVcpuSetTrapDebugRegAccesses func(uint64, bool) int
+
+// HvVcpuSetTrapDebugRegAccesses calls the Hypervisor framework function hv_vcpu_set_trap_debug_reg_accesses.
 func HvVcpuSetTrapDebugRegAccesses(vcpu uint64, value bool) int {
-	return raw.HvVcpuSetTrapDebugRegAccesses(vcpu, value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVcpuSetTrapDebugRegAccesses == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVcpuSetTrapDebugRegAccesses, _lib, "hv_vcpu_set_trap_debug_reg_accesses")
+	}
+	return _fnHvVcpuSetTrapDebugRegAccesses(vcpu, value)
 }
 
-// HvVcpuSetVtimerMask calls [raw.HvVcpuSetVtimerMask] (C function hv_vcpu_set_vtimer_mask).
+var _fnHvVcpuSetVtimerMask func(uint64, bool) int
+
+// HvVcpuSetVtimerMask calls the Hypervisor framework function hv_vcpu_set_vtimer_mask.
 func HvVcpuSetVtimerMask(vcpu uint64, vtimer_is_masked bool) int {
-	return raw.HvVcpuSetVtimerMask(vcpu, vtimer_is_masked)
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVcpuSetVtimerMask == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVcpuSetVtimerMask, _lib, "hv_vcpu_set_vtimer_mask")
+	}
+	return _fnHvVcpuSetVtimerMask(vcpu, vtimer_is_masked)
 }
 
-// HvVcpuSetVtimerOffset calls [raw.HvVcpuSetVtimerOffset] (C function hv_vcpu_set_vtimer_offset).
+var _fnHvVcpuSetVtimerOffset func(uint64, uint64) int
+
+// HvVcpuSetVtimerOffset calls the Hypervisor framework function hv_vcpu_set_vtimer_offset.
 func HvVcpuSetVtimerOffset(vcpu uint64, vtimer_offset uint64) int {
-	return raw.HvVcpuSetVtimerOffset(vcpu, vtimer_offset)
-}
-
-// HvVcpusExit calls [raw.HvVcpusExit] (C function hv_vcpus_exit).
-func HvVcpusExit(vcpus *uint64, vcpu_count uint32) int {
-	return raw.HvVcpusExit(vcpus, vcpu_count)
-}
-
-// HvVmAllocate calls [raw.HvVmAllocate] (C function hv_vm_allocate).
-func HvVmAllocate(uvap unsafe.Pointer, size uint, flags uint64) int {
-	return raw.HvVmAllocate(uvap, size, flags)
-}
-
-// HvVmConfigCreate calls [raw.HvVmConfigCreate] (C function hv_vm_config_create).
-func HvVmConfigCreate() unsafe.Pointer {
-	return raw.HvVmConfigCreate()
-}
-
-// HvVmConfigGetDefaultIpaGranule calls [raw.HvVmConfigGetDefaultIpaGranule] (C function hv_vm_config_get_default_ipa_granule).
-func HvVmConfigGetDefaultIpaGranule(granule *Hv_ipa_granule_t) int {
-	var _granule raw.Hv_ipa_granule_t
-	_ret := raw.HvVmConfigGetDefaultIpaGranule(&_granule)
-	if granule != nil {
-		*granule = Hv_ipa_granule_t(_granule)
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVcpuSetVtimerOffset == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVcpuSetVtimerOffset, _lib, "hv_vcpu_set_vtimer_offset")
 	}
-	return _ret
+	return _fnHvVcpuSetVtimerOffset(vcpu, vtimer_offset)
 }
 
-// HvVmConfigGetDefaultIpaSize calls [raw.HvVmConfigGetDefaultIpaSize] (C function hv_vm_config_get_default_ipa_size).
-func HvVmConfigGetDefaultIpaSize(ipa_bit_length *uint32) int {
-	return raw.HvVmConfigGetDefaultIpaSize(ipa_bit_length)
-}
+var _fnHvVmConfigSetEl2Enabled func(objc.ID, bool) int
 
-// HvVmConfigGetEl2Enabled calls [raw.HvVmConfigGetEl2Enabled] (C function hv_vm_config_get_el2_enabled).
-func HvVmConfigGetEl2Enabled(config *foundation.NSObject, el2_enabled unsafe.Pointer) int {
-	return raw.HvVmConfigGetEl2Enabled(config, el2_enabled)
-}
-
-// HvVmConfigGetEl2Supported calls [raw.HvVmConfigGetEl2Supported] (C function hv_vm_config_get_el2_supported).
-func HvVmConfigGetEl2Supported(el2_supported unsafe.Pointer) int {
-	return raw.HvVmConfigGetEl2Supported(el2_supported)
-}
-
-// HvVmConfigGetIpaGranule calls [raw.HvVmConfigGetIpaGranule] (C function hv_vm_config_get_ipa_granule).
-func HvVmConfigGetIpaGranule(config *foundation.NSObject, granule *Hv_ipa_granule_t) int {
-	var _granule raw.Hv_ipa_granule_t
-	_ret := raw.HvVmConfigGetIpaGranule(config, &_granule)
-	if granule != nil {
-		*granule = Hv_ipa_granule_t(_granule)
+// HvVmConfigSetEl2Enabled calls the Hypervisor framework function hv_vm_config_set_el2_enabled.
+func HvVmConfigSetEl2Enabled(config obj.Object, el2_enabled bool) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVmConfigSetEl2Enabled == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVmConfigSetEl2Enabled, _lib, "hv_vm_config_set_el2_enabled")
 	}
-	return _ret
+	return _fnHvVmConfigSetEl2Enabled(objref.IDOf(config), el2_enabled)
 }
 
-// HvVmConfigGetIpaSize calls [raw.HvVmConfigGetIpaSize] (C function hv_vm_config_get_ipa_size).
-func HvVmConfigGetIpaSize(config *foundation.NSObject, ipa_bit_length *uint32) int {
-	return raw.HvVmConfigGetIpaSize(config, ipa_bit_length)
+var _fnHvVmConfigSetIpaGranule func(objc.ID, Hv_ipa_granule_t) int
+
+// HvVmConfigSetIpaGranule calls the Hypervisor framework function hv_vm_config_set_ipa_granule.
+func HvVmConfigSetIpaGranule(config obj.Object, granule Hv_ipa_granule_t) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVmConfigSetIpaGranule == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVmConfigSetIpaGranule, _lib, "hv_vm_config_set_ipa_granule")
+	}
+	return _fnHvVmConfigSetIpaGranule(objref.IDOf(config), granule)
 }
 
-// HvVmConfigGetMaxIpaSize calls [raw.HvVmConfigGetMaxIpaSize] (C function hv_vm_config_get_max_ipa_size).
-func HvVmConfigGetMaxIpaSize(ipa_bit_length *uint32) int {
-	return raw.HvVmConfigGetMaxIpaSize(ipa_bit_length)
+var _fnHvVmConfigSetIpaSize func(objc.ID, uint32) int
+
+// HvVmConfigSetIpaSize calls the Hypervisor framework function hv_vm_config_set_ipa_size.
+func HvVmConfigSetIpaSize(config obj.Object, ipa_bit_length uint32) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVmConfigSetIpaSize == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVmConfigSetIpaSize, _lib, "hv_vm_config_set_ipa_size")
+	}
+	return _fnHvVmConfigSetIpaSize(objref.IDOf(config), ipa_bit_length)
 }
 
-// HvVmConfigSetEl2Enabled calls [raw.HvVmConfigSetEl2Enabled] (C function hv_vm_config_set_el2_enabled).
-func HvVmConfigSetEl2Enabled(config *foundation.NSObject, el2_enabled bool) int {
-	return raw.HvVmConfigSetEl2Enabled(config, el2_enabled)
+var _fnHvVmCreate func(objc.ID) int
+
+// HvVmCreate calls the Hypervisor framework function hv_vm_create.
+func HvVmCreate(config obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVmCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVmCreate, _lib, "hv_vm_create")
+	}
+	return _fnHvVmCreate(objref.IDOf(config))
 }
 
-// HvVmConfigSetIpaGranule calls [raw.HvVmConfigSetIpaGranule] (C function hv_vm_config_set_ipa_granule).
-func HvVmConfigSetIpaGranule(config *foundation.NSObject, granule Hv_ipa_granule_t) int {
-	return raw.HvVmConfigSetIpaGranule(config, raw.Hv_ipa_granule_t(granule))
-}
+var _fnHvVmDestroy func() int
 
-// HvVmConfigSetIpaSize calls [raw.HvVmConfigSetIpaSize] (C function hv_vm_config_set_ipa_size).
-func HvVmConfigSetIpaSize(config *foundation.NSObject, ipa_bit_length uint32) int {
-	return raw.HvVmConfigSetIpaSize(config, ipa_bit_length)
-}
-
-// HvVmCreate calls [raw.HvVmCreate] (C function hv_vm_create).
-func HvVmCreate(config *foundation.NSObject) int {
-	return raw.HvVmCreate(config)
-}
-
-// HvVmDeallocate calls [raw.HvVmDeallocate] (C function hv_vm_deallocate).
-func HvVmDeallocate(uva unsafe.Pointer, size uint) int {
-	return raw.HvVmDeallocate(uva, size)
-}
-
-// HvVmDestroy calls [raw.HvVmDestroy] (C function hv_vm_destroy).
+// HvVmDestroy calls the Hypervisor framework function hv_vm_destroy.
 func HvVmDestroy() int {
-	return raw.HvVmDestroy()
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVmDestroy == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVmDestroy, _lib, "hv_vm_destroy")
+	}
+	return _fnHvVmDestroy()
 }
 
-// HvVmGetMaxVcpuCount calls [raw.HvVmGetMaxVcpuCount] (C function hv_vm_get_max_vcpu_count).
-func HvVmGetMaxVcpuCount(max_vcpu_count *uint32) int {
-	return raw.HvVmGetMaxVcpuCount(max_vcpu_count)
+var _fnHvVmProtect func(uint64, int, uint64) int
+
+// HvVmProtect calls the Hypervisor framework function hv_vm_protect.
+func HvVmProtect(ipa uint64, size int, flags uint64) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVmProtect == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVmProtect, _lib, "hv_vm_protect")
+	}
+	return _fnHvVmProtect(ipa, size, flags)
 }
 
-// HvVmMap calls [raw.HvVmMap] (C function hv_vm_map).
-func HvVmMap(addr unsafe.Pointer, ipa uint64, size uint, flags uint64) int {
-	return raw.HvVmMap(addr, ipa, size, flags)
-}
+var _fnHvVmUnmap func(uint64, int) int
 
-// HvVmProtect calls [raw.HvVmProtect] (C function hv_vm_protect).
-func HvVmProtect(ipa uint64, size uint, flags uint64) int {
-	return raw.HvVmProtect(ipa, size, flags)
-}
-
-// HvVmUnmap calls [raw.HvVmUnmap] (C function hv_vm_unmap).
-func HvVmUnmap(ipa uint64, size uint) int {
-	return raw.HvVmUnmap(ipa, size)
+// HvVmUnmap calls the Hypervisor framework function hv_vm_unmap.
+func HvVmUnmap(ipa uint64, size int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHvVmUnmap == nil {
+		ebipurego.RegisterLibFunc(&_fnHvVmUnmap, _lib, "hv_vm_unmap")
+	}
+	return _fnHvVmUnmap(ipa, size)
 }

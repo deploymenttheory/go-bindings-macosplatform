@@ -5,75 +5,112 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // A policy object that you use to resolve conflicts between the persistent store and in-memory versions of managed objects.
 //
-// MergePolicy wraps [raw.NSMergePolicy] with a fluent Go API.
+// MergePolicy is an idiomatic wrapper over the Objective-C class NSMergePolicy.
 type MergePolicy struct {
-	inner *raw.NSMergePolicy
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSMergePolicy].
-func (x *MergePolicy) Unwrap() *raw.NSMergePolicy { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MergePolicy) ID() objc.ID { return x.inner.Ptr() }
-
-// MergePolicyFromID adopts an existing object pointer as a MergePolicy (nil for 0).
+// MergePolicyFromID adopts an existing Objective-C object as a MergePolicy
+// (nil for 0), retaining it and registering a release finalizer.
 func MergePolicyFromID(id objc.ID) *MergePolicy {
 	if id == 0 {
 		return nil
 	}
-	return &MergePolicy{inner: raw.NSMergePolicyFromID(id)}
+	x := &MergePolicy{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mergePolicyAdopt wraps an Objective-C object that this code just created as a
+// MergePolicy (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mergePolicyAdopt(id objc.ID) *MergePolicy {
+	if id == 0 {
+		return nil
+	}
+	x := &MergePolicy{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MergePolicy) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MergePolicy) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MergePolicy) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns a merge policy initialized with a given policy type.
 //
-// NewMergePolicyWithMergeType creates a new [MergePolicy].
-func NewMergePolicyWithMergeType(ty NSMergePolicyType) *MergePolicy {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMergePolicy")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMergeType:"), raw.NSMergePolicyType(ty))
-	return &MergePolicy{inner: raw.NSMergePolicyFromID(_id)}
+// NewMergePolicyWithMergeType creates a new MergePolicy.
+func NewMergePolicyWithMergeType(ty MergePolicyType) *MergePolicy {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMergePolicy")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMergeType:"), ty)
+	return mergePolicyAdopt(_id)
 }
 
 // Resolves the conflicts in a given list.
-//
-// ResolveConflictsError calls the underlying ResolveConflictsError.
-func (x *MergePolicy) ResolveConflictsError(list *foundation.NSArray[objc.ID]) (bool, error) {
-	return x.inner.ResolveConflictsError(list)
+func (x *MergePolicy) ResolveConflicts(list obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("resolveConflicts:error:"), objref.IDOf(list), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Resolves the conflicts in a given list.
-//
-// ResolveOptimisticLockingVersionConflictsError calls the underlying ResolveOptimisticLockingVersionConflictsError.
-func (x *MergePolicy) ResolveOptimisticLockingVersionConflictsError(list *foundation.NSArray[*raw.NSMergeConflict]) (bool, error) {
-	return x.inner.ResolveOptimisticLockingVersionConflictsError(list)
+func (x *MergePolicy) ResolveOptimisticLockingVersionConflicts(list []*MergeConflict) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("resolveOptimisticLockingVersionConflicts:error:"), purego.SliceToNSArray(list, func(_v *MergeConflict) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Resolves the conflicts in a given list.
-//
-// ResolveConstraintConflictsError calls the underlying ResolveConstraintConflictsError.
-func (x *MergePolicy) ResolveConstraintConflictsError(list *foundation.NSArray[*raw.NSConstraintConflict]) (bool, error) {
-	return x.inner.ResolveConstraintConflictsError(list)
+func (x *MergePolicy) ResolveConstraintConflicts(list []*ConstraintConflict) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("resolveConstraintConflicts:error:"), purego.SliceToNSArray(list, func(_v *ConstraintConflict) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// MergeType calls the underlying MergeType.
-func (x *MergePolicy) MergeType() NSMergePolicyType {
-	return NSMergePolicyType(x.inner.MergeType())
+func (x *MergePolicy) MergeType() MergePolicyType {
+	_r := objc.Send[MergePolicyType](objref.IDOf(x), objc.RegisterName("mergeType"))
+	return _r
 }
 
 // MergePolicyable is the interface implemented by [MergePolicy], for mocking and DI.
 type MergePolicyable interface {
-	Unwrap() *raw.NSMergePolicy
-	ResolveConflictsError(list *foundation.NSArray[objc.ID]) (bool, error)
-	ResolveOptimisticLockingVersionConflictsError(list *foundation.NSArray[*raw.NSMergeConflict]) (bool, error)
-	ResolveConstraintConflictsError(list *foundation.NSArray[*raw.NSConstraintConflict]) (bool, error)
-	MergeType() NSMergePolicyType
+	obj.Object
+	ResolveConflicts(list obj.Object) error
+	ResolveOptimisticLockingVersionConflicts(list []*MergeConflict) error
+	ResolveConstraintConflicts(list []*ConstraintConflict) error
+	MergeType() MergePolicyType
 }
 
 var _ MergePolicyable = (*MergePolicy)(nil)

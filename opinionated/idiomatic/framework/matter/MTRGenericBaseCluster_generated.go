@@ -5,43 +5,66 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRGenericBaseCluster wraps [raw.MTRGenericBaseCluster] with a fluent Go API.
+// MTRGenericBaseCluster is an idiomatic wrapper over the Objective-C class MTRGenericBaseCluster.
 type MTRGenericBaseCluster struct {
-	inner *raw.MTRGenericBaseCluster
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRGenericBaseCluster].
-func (x *MTRGenericBaseCluster) Unwrap() *raw.MTRGenericBaseCluster { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGenericBaseCluster) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRGenericBaseClusterFromID adopts an existing object pointer as a MTRGenericBaseCluster (nil for 0).
+// MTRGenericBaseClusterFromID adopts an existing Objective-C object as a MTRGenericBaseCluster
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRGenericBaseClusterFromID(id objc.ID) *MTRGenericBaseCluster {
 	if id == 0 {
 		return nil
 	}
-	return &MTRGenericBaseCluster{inner: raw.MTRGenericBaseClusterFromID(id)}
+	x := &MTRGenericBaseCluster{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRGenericBaseCluster creates a new [MTRGenericBaseCluster].
+// mTRGenericBaseClusterAdopt wraps an Objective-C object that this code just created as a
+// MTRGenericBaseCluster (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRGenericBaseClusterAdopt(id objc.ID) *MTRGenericBaseCluster {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRGenericBaseCluster{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRGenericBaseCluster) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRGenericBaseCluster) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRGenericBaseCluster) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRGenericBaseCluster creates a new MTRGenericBaseCluster.
 func NewMTRGenericBaseCluster() *MTRGenericBaseCluster {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGenericBaseCluster")), objc.RegisterName("new"))
-	return &MTRGenericBaseCluster{inner: raw.MTRGenericBaseClusterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRGenericBaseCluster")), objc.RegisterName("new"))
+	return mTRGenericBaseClusterAdopt(_id)
 }
-
-func (x *MTRGenericBaseCluster) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster { return x.inner }
-
-func (x *MTRGenericBaseCluster) asMTRCluster() *raw.MTRCluster { return &x.inner.MTRCluster }
 
 // MTRGenericBaseClusterable is the interface implemented by [MTRGenericBaseCluster], for mocking and DI.
 type MTRGenericBaseClusterable interface {
-	Unwrap() *raw.MTRGenericBaseCluster
+	obj.Object
 }
 
 var _ MTRGenericBaseClusterable = (*MTRGenericBaseCluster)(nil)

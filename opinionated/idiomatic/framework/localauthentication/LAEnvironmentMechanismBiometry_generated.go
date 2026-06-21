@@ -5,83 +5,100 @@
 package localauthentication
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// EnvironmentMechanismBiometry wraps [raw.LAEnvironmentMechanismBiometry] with a fluent Go API.
+// EnvironmentMechanismBiometry is an idiomatic wrapper over the Objective-C class LAEnvironmentMechanismBiometry.
 type EnvironmentMechanismBiometry struct {
-	inner *raw.LAEnvironmentMechanismBiometry
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.LAEnvironmentMechanismBiometry].
-func (x *EnvironmentMechanismBiometry) Unwrap() *raw.LAEnvironmentMechanismBiometry { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EnvironmentMechanismBiometry) ID() objc.ID { return x.inner.Ptr() }
-
-// EnvironmentMechanismBiometryFromID adopts an existing object pointer as a EnvironmentMechanismBiometry (nil for 0).
+// EnvironmentMechanismBiometryFromID adopts an existing Objective-C object as a EnvironmentMechanismBiometry
+// (nil for 0), retaining it and registering a release finalizer.
 func EnvironmentMechanismBiometryFromID(id objc.ID) *EnvironmentMechanismBiometry {
 	if id == 0 {
 		return nil
 	}
-	return &EnvironmentMechanismBiometry{inner: raw.LAEnvironmentMechanismBiometryFromID(id)}
+	x := &EnvironmentMechanismBiometry{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEnvironmentMechanismBiometry creates a new [EnvironmentMechanismBiometry].
+// environmentMechanismBiometryAdopt wraps an Objective-C object that this code just created as a
+// EnvironmentMechanismBiometry (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func environmentMechanismBiometryAdopt(id objc.ID) *EnvironmentMechanismBiometry {
+	if id == 0 {
+		return nil
+	}
+	x := &EnvironmentMechanismBiometry{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EnvironmentMechanismBiometry) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EnvironmentMechanismBiometry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EnvironmentMechanismBiometry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEnvironmentMechanismBiometry creates a new EnvironmentMechanismBiometry.
 func NewEnvironmentMechanismBiometry() *EnvironmentMechanismBiometry {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LAEnvironmentMechanismBiometry")), objc.RegisterName("new"))
-	return &EnvironmentMechanismBiometry{inner: raw.LAEnvironmentMechanismBiometryFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("LAEnvironmentMechanismBiometry")), objc.RegisterName("new"))
+	return environmentMechanismBiometryAdopt(_id)
 }
 
-// @brief Type of biometry supported by the device. @discussion This property does not indicate whether biometry is available or not. It always reads the type of biometry supported by device hardware. You should check @c isUsable property to see if it is available for use.
-//
-// BiometryType calls the underlying BiometryType.
-func (x *EnvironmentMechanismBiometry) BiometryType() LABiometryType {
-	return LABiometryType(x.inner.BiometryType())
+// Type of biometry supported by the device. This property does not indicate whether biometry is available or not. It always reads the type of biometry supported by device hardware. You should check
+func (x *EnvironmentMechanismBiometry) BiometryType() BiometryType {
+	_r := objc.Send[BiometryType](objref.IDOf(x), objc.RegisterName("biometryType"))
+	return _r
 }
 
-// @brief Whether the user has enrolled this biometry. @discussion Even if biometry is enrolled, it does not necessarily mean that it can be used. You should check @c isUsable property to see if it is available for use.
-//
-// IsEnrolled calls the underlying IsEnrolled.
+// Whether the user has enrolled this biometry. Even if biometry is enrolled, it does not necessarily mean that it can be used. You should check
 func (x *EnvironmentMechanismBiometry) IsEnrolled() bool {
-	return x.inner.IsEnrolled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnrolled"))
+	return _r
 }
 
-// @brief Whether biometry is locked out. @discussion The system might lock the user out of biometry for various reasons. For example, with Face ID, the user is locked out after 5 failed match attempts in row. To recover from bio lockout, users need to enter their passcode (e.g. during device ulock).
-//
-// IsLockedOut calls the underlying IsLockedOut.
+// Whether biometry is locked out. The system might lock the user out of biometry for various reasons. For example, with Face ID, the user is locked out after 5 failed match attempts in row. To recover from bio lockout, users need to enter their passcode (e.g. during device ulock).
 func (x *EnvironmentMechanismBiometry) IsLockedOut() bool {
-	return x.inner.IsLockedOut()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLockedOut"))
+	return _r
 }
 
-// @brief The application specific state of the biometric enrollment as returned by @c LAContext.domainState.biometry.stateHash @discussion This value represents the state of the enrollment and changes whenever the biometric enrollment is changed. It does not directly map to the enrolled templates, e.g. if a finger is added to Touch ID enrollment and then removed, the final state would be different. It also returns different values to different apps to prevent tracking of user identity.
-//
-// StateHash calls the underlying StateHash.
-func (x *EnvironmentMechanismBiometry) StateHash() *foundation.NSData {
-	return x.inner.StateHash()
+// The application specific state of the biometric enrollment as returned by This value represents the state of the enrollment and changes whenever the biometric enrollment is changed. It does not directly map to the enrolled templates, e.g. if a finger is added to Touch ID enrollment and then removed, the final state would be different. It also returns different values to different apps to prevent tracking of user identity.
+func (x *EnvironmentMechanismBiometry) StateHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateHash"))
+	return obj.Wrap(_r)
 }
 
-// @brief Whether the built in biometric sensor is inaccessible in the current configuration, preventing the use of biometry. @discussion Currently, the only example of this is a Clamshell Mode on macOS. The user will be not able to use Touch ID if the MacBook lid is closed while connected to external monitor and keyboard, unless the external keyboard has Touch ID.
-//
-// BuiltInSensorInaccessible calls the underlying BuiltInSensorInaccessible.
+// Whether the built in biometric sensor is inaccessible in the current configuration, preventing the use of biometry. Currently, the only example of this is a Clamshell Mode on macOS. The user will be not able to use Touch ID if the MacBook lid is closed while connected to external monitor and keyboard, unless the external keyboard has Touch ID.
 func (x *EnvironmentMechanismBiometry) BuiltInSensorInaccessible() bool {
-	return x.inner.BuiltInSensorInaccessible()
-}
-
-func (x *EnvironmentMechanismBiometry) asEnvironmentMechanism() *raw.LAEnvironmentMechanism {
-	return &x.inner.LAEnvironmentMechanism
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("builtInSensorInaccessible"))
+	return _r
 }
 
 // EnvironmentMechanismBiometryable is the interface implemented by [EnvironmentMechanismBiometry], for mocking and DI.
 type EnvironmentMechanismBiometryable interface {
-	Unwrap() *raw.LAEnvironmentMechanismBiometry
-	BiometryType() LABiometryType
+	obj.Object
+	BiometryType() BiometryType
 	IsEnrolled() bool
 	IsLockedOut() bool
-	StateHash() *foundation.NSData
+	StateHash() obj.Object
 	BuiltInSensorInaccessible() bool
 }
 

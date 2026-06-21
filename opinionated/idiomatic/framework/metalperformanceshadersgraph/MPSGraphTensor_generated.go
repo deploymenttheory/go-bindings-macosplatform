@@ -5,72 +5,74 @@
 package metalperformanceshadersgraph
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The symbolic representation of a compute data type.
 //
-// GraphTensor wraps [raw.MPSGraphTensor] with a fluent Go API.
+// GraphTensor is an idiomatic wrapper over the Objective-C class MPSGraphTensor.
 type GraphTensor struct {
-	inner *raw.MPSGraphTensor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSGraphTensor].
-func (x *GraphTensor) Unwrap() *raw.MPSGraphTensor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphTensor) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphTensorFromID adopts an existing object pointer as a GraphTensor (nil for 0).
+// GraphTensorFromID adopts an existing Objective-C object as a GraphTensor
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphTensorFromID(id objc.ID) *GraphTensor {
 	if id == 0 {
 		return nil
 	}
-	return &GraphTensor{inner: raw.MPSGraphTensorFromID(id)}
+	x := &GraphTensor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGraphTensor creates a new [GraphTensor].
+// graphTensorAdopt wraps an Objective-C object that this code just created as a
+// GraphTensor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphTensorAdopt(id objc.ID) *GraphTensor {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphTensor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GraphTensor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GraphTensor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GraphTensor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGraphTensor creates a new GraphTensor.
 func NewGraphTensor() *GraphTensor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphTensor")), objc.RegisterName("new"))
-	return &GraphTensor{inner: raw.MPSGraphTensorFromID(_id)}
-}
-
-// The shape of the tensor. nil shape represents an unranked tensor. -1 value for a dimension represents that it will be resolved via shape inference at runtime and it can be anything.
-//
-// Shape calls the underlying Shape.
-func (x *GraphTensor) Shape() unsafe.Pointer {
-	return x.inner.Shape()
-}
-
-// The data type of the tensor.
-//
-// DataType calls the underlying DataType.
-func (x *GraphTensor) DataType() mpscore.MPSDataType {
-	return x.inner.DataType()
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphTensor")), objc.RegisterName("new"))
+	return graphTensorAdopt(_id)
 }
 
 // The operation responsible for creating this tensor.
-//
-// Operation calls the underlying Operation.
 func (x *GraphTensor) Operation() *GraphOperation {
-	_r := x.inner.Operation()
-	if _r == nil {
-		return nil
-	}
-	return &GraphOperation{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operation"))
+	return GraphOperationFromID(_r)
 }
-
-func (x *GraphTensor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
 
 // GraphTensorable is the interface implemented by [GraphTensor], for mocking and DI.
 type GraphTensorable interface {
-	Unwrap() *raw.MPSGraphTensor
-	Shape() unsafe.Pointer
-	DataType() mpscore.MPSDataType
+	obj.Object
 	Operation() *GraphOperation
 }
 

@@ -5,214 +5,203 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A sphere (or ball or globe) geometry.
 //
-// Sphere wraps [raw.SCNSphere] with a fluent Go API.
+// Sphere is an idiomatic wrapper over the Objective-C class SCNSphere.
 type Sphere struct {
-	inner *raw.SCNSphere
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNSphere].
-func (x *Sphere) Unwrap() *raw.SCNSphere { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Sphere) ID() objc.ID { return x.inner.Ptr() }
-
-// SphereFromID adopts an existing object pointer as a Sphere (nil for 0).
+// SphereFromID adopts an existing Objective-C object as a Sphere
+// (nil for 0), retaining it and registering a release finalizer.
 func SphereFromID(id objc.ID) *Sphere {
 	if id == 0 {
 		return nil
 	}
-	return &Sphere{inner: raw.SCNSphereFromID(id)}
+	x := &Sphere{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSphere creates a new [Sphere].
+// sphereAdopt wraps an Objective-C object that this code just created as a
+// Sphere (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sphereAdopt(id objc.ID) *Sphere {
+	if id == 0 {
+		return nil
+	}
+	x := &Sphere{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Sphere) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Sphere) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Sphere) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSphere creates a new Sphere.
 func NewSphere() *Sphere {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNSphere")), objc.RegisterName("new"))
-	return &Sphere{inner: raw.SCNSphereFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNSphere")), objc.RegisterName("new"))
+	return sphereAdopt(_id)
 }
 
 // The radius of the sphere. Animatable.
 //
-// WithRadius sets the radius property and returns the receiver for chaining.
+// WithRadius sets radius and returns the receiver so calls can be chained.
 func (x *Sphere) WithRadius(radius float64) *Sphere {
-	x.inner.SetRadius(radius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 	return x
 }
 
 // A Boolean value specifying whether SceneKit uses a geodesic polygon mesh to render the sphere.
 //
-// WithGeodesic sets the geodesic property and returns the receiver for chaining.
+// WithGeodesic sets geodesic and returns the receiver so calls can be chained.
 func (x *Sphere) WithGeodesic(geodesic bool) *Sphere {
-	x.inner.SetGeodesic(geodesic)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeodesic:"), geodesic)
 	return x
 }
 
 // A number determining the detail of the polygon mesh SceneKit uses to render the sphere. Animatable.
 //
-// WithSegmentCount sets the segmentCount property and returns the receiver for chaining.
+// WithSegmentCount sets segmentCount and returns the receiver so calls can be chained.
 func (x *Sphere) WithSegmentCount(segmentCount int) *Sphere {
-	x.inner.SetSegmentCount(segmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentCount:"), segmentCount)
 	return x
 }
 
 // A name associated with the geometry object.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *Sphere) WithName(name string) *Sphere {
-	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
 //
-// WithMaterials sets the collection, converting the Go slice to an NSArray.
-func (x *Sphere) WithMaterials(items ...*raw.SCNMaterial) *Sphere {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SCNGeometry.SetMaterials(foundation.NSArrayFromID[*raw.SCNMaterial](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SCNGeometry.SetMaterials(_arr)
+// WithMaterials sets the collection and returns the receiver so calls can be chained.
+func (x *Sphere) WithMaterials(items ...*Material) *Sphere {
+	_arr := purego.SliceToNSArray(items, func(_v *Material) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterials:"), _arr)
 	return x
 }
 
 // The first material attached to the geometry.
 //
-// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+// WithFirstMaterial sets firstMaterial and returns the receiver so calls can be chained.
 func (x *Sphere) WithFirstMaterial(firstMaterial *Material) *Sphere {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return x
 }
 
 // An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
 //
-// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
-func (x *Sphere) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Sphere {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SCNGeometry.SetLevelsOfDetail(foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+// WithLevelsOfDetail sets the collection and returns the receiver so calls can be chained.
+func (x *Sphere) WithLevelsOfDetail(items ...*LevelOfDetail) *Sphere {
+	_arr := purego.SliceToNSArray(items, func(_v *LevelOfDetail) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetail:"), _arr)
 	return x
 }
 
-// WithTessellator sets the tessellator property and returns the receiver for chaining.
+// WithTessellator sets tessellator and returns the receiver so calls can be chained.
 func (x *Sphere) WithTessellator(tessellator *GeometryTessellator) *Sphere {
-	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return x
 }
 
 // The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
 //
-// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
-func (x *Sphere) WithSubdivisionLevel(subdivisionLevel uint) *Sphere {
-	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+// WithSubdivisionLevel sets subdivisionLevel and returns the receiver so calls can be chained.
+func (x *Sphere) WithSubdivisionLevel(subdivisionLevel int) *Sphere {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
 	return x
 }
 
-// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+// Specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
 //
-// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+// WithWantsAdaptiveSubdivision sets wantsAdaptiveSubdivision and returns the receiver so calls can be chained.
 func (x *Sphere) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Sphere {
-	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
 	return x
 }
 
 // The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 //
-// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+// WithEdgeCreasesElement sets edgeCreasesElement and returns the receiver so calls can be chained.
 func (x *Sphere) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Sphere {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return x
 }
 
 // The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 //
-// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+// WithEdgeCreasesSource sets edgeCreasesSource and returns the receiver so calls can be chained.
 func (x *Sphere) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Sphere {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return x
 }
 
-// @property radius @abstract The sphere radius. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
-//
-// Radius calls the underlying Radius.
+// The sphere radius. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
 func (x *Sphere) Radius() float64 {
-	return x.inner.Radius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("radius"))
+	return _r
 }
 
-// SetRadius calls the underlying SetRadius.
 func (x *Sphere) SetRadius(radius float64) {
-	x.inner.SetRadius(radius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 }
 
-// @property geodesic @abstract Indicate if the geometry is a geosphere. @discussion The default value is NO.
-//
-// IsGeodesic calls the underlying IsGeodesic.
+// Indicate if the geometry is a geosphere. The default value is NO.
 func (x *Sphere) IsGeodesic() bool {
-	return x.inner.IsGeodesic()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGeodesic"))
+	return _r
 }
 
-// SetGeodesic calls the underlying SetGeodesic.
 func (x *Sphere) SetGeodesic(geodesic bool) {
-	x.inner.SetGeodesic(geodesic)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeodesic:"), geodesic)
 }
 
-// @property segmentCount @abstract The number of segments along both spherical coordinates. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
-//
-// SegmentCount calls the underlying SegmentCount.
+// The number of segments along both spherical coordinates. Animatable. If the value is less than 3, the behavior is undefined. The default value is 48.
 func (x *Sphere) SegmentCount() int {
-	return x.inner.SegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("segmentCount"))
+	return _r
 }
 
-// SetSegmentCount calls the underlying SetSegmentCount.
 func (x *Sphere) SetSegmentCount(segmentCount int) {
-	x.inner.SetSegmentCount(segmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentCount:"), segmentCount)
 }
-
-func (x *Sphere) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
 
 // Sphereable is the interface implemented by [Sphere], for mocking and DI.
 type Sphereable interface {
-	Unwrap() *raw.SCNSphere
+	obj.Object
 	WithRadius(radius float64) *Sphere
 	WithGeodesic(geodesic bool) *Sphere
 	WithSegmentCount(segmentCount int) *Sphere
 	WithName(name string) *Sphere
-	WithMaterials(items ...*raw.SCNMaterial) *Sphere
+	WithMaterials(items ...*Material) *Sphere
 	WithFirstMaterial(firstMaterial *Material) *Sphere
-	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Sphere
+	WithLevelsOfDetail(items ...*LevelOfDetail) *Sphere
 	WithTessellator(tessellator *GeometryTessellator) *Sphere
-	WithSubdivisionLevel(subdivisionLevel uint) *Sphere
+	WithSubdivisionLevel(subdivisionLevel int) *Sphere
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Sphere
 	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Sphere
 	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Sphere

@@ -5,107 +5,126 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRWaterHeaterModeClusterChangeToModeParams wraps [raw.MTRWaterHeaterModeClusterChangeToModeParams] with a fluent Go API.
+// MTRWaterHeaterModeClusterChangeToModeParams is an idiomatic wrapper over the Objective-C class MTRWaterHeaterModeClusterChangeToModeParams.
 type MTRWaterHeaterModeClusterChangeToModeParams struct {
-	inner *raw.MTRWaterHeaterModeClusterChangeToModeParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRWaterHeaterModeClusterChangeToModeParams].
-func (x *MTRWaterHeaterModeClusterChangeToModeParams) Unwrap() *raw.MTRWaterHeaterModeClusterChangeToModeParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRWaterHeaterModeClusterChangeToModeParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRWaterHeaterModeClusterChangeToModeParamsFromID adopts an existing object pointer as a MTRWaterHeaterModeClusterChangeToModeParams (nil for 0).
+// MTRWaterHeaterModeClusterChangeToModeParamsFromID adopts an existing Objective-C object as a MTRWaterHeaterModeClusterChangeToModeParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRWaterHeaterModeClusterChangeToModeParamsFromID(id objc.ID) *MTRWaterHeaterModeClusterChangeToModeParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRWaterHeaterModeClusterChangeToModeParams{inner: raw.MTRWaterHeaterModeClusterChangeToModeParamsFromID(id)}
+	x := &MTRWaterHeaterModeClusterChangeToModeParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRWaterHeaterModeClusterChangeToModeParams creates a new [MTRWaterHeaterModeClusterChangeToModeParams].
+// mTRWaterHeaterModeClusterChangeToModeParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRWaterHeaterModeClusterChangeToModeParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRWaterHeaterModeClusterChangeToModeParamsAdopt(id objc.ID) *MTRWaterHeaterModeClusterChangeToModeParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRWaterHeaterModeClusterChangeToModeParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRWaterHeaterModeClusterChangeToModeParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRWaterHeaterModeClusterChangeToModeParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRWaterHeaterModeClusterChangeToModeParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRWaterHeaterModeClusterChangeToModeParams creates a new MTRWaterHeaterModeClusterChangeToModeParams.
 func NewMTRWaterHeaterModeClusterChangeToModeParams() *MTRWaterHeaterModeClusterChangeToModeParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRWaterHeaterModeClusterChangeToModeParams")), objc.RegisterName("new"))
-	return &MTRWaterHeaterModeClusterChangeToModeParams{inner: raw.MTRWaterHeaterModeClusterChangeToModeParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRWaterHeaterModeClusterChangeToModeParams")), objc.RegisterName("new"))
+	return mTRWaterHeaterModeClusterChangeToModeParamsAdopt(_id)
 }
 
-// WithNewMode sets the newMode property and returns the receiver for chaining.
-func (x *MTRWaterHeaterModeClusterChangeToModeParams) WithNewMode(newMode *foundation.NSNumber) *MTRWaterHeaterModeClusterChangeToModeParams {
-	x.inner.SetNewMode(newMode)
+// WithNewMode sets newMode and returns the receiver so calls can be chained.
+func (x *MTRWaterHeaterModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTRWaterHeaterModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke).
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRWaterHeaterModeClusterChangeToModeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRWaterHeaterModeClusterChangeToModeParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRWaterHeaterModeClusterChangeToModeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRWaterHeaterModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRWaterHeaterModeClusterChangeToModeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRWaterHeaterModeClusterChangeToModeParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRWaterHeaterModeClusterChangeToModeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRWaterHeaterModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// GetNewMode calls the underlying GetNewMode.
-func (x *MTRWaterHeaterModeClusterChangeToModeParams) GetNewMode() *foundation.NSNumber {
-	return x.inner.GetNewMode()
+func (x *MTRWaterHeaterModeClusterChangeToModeParams) GetNewMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewMode"))
+	return obj.Wrap(_r)
 }
 
-// SetNewMode calls the underlying SetNewMode.
-func (x *MTRWaterHeaterModeClusterChangeToModeParams) SetNewMode(newMode *foundation.NSNumber) {
-	x.inner.SetNewMode(newMode)
+func (x *MTRWaterHeaterModeClusterChangeToModeParams) SetNewMode(newMode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRWaterHeaterModeClusterChangeToModeParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRWaterHeaterModeClusterChangeToModeParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRWaterHeaterModeClusterChangeToModeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRWaterHeaterModeClusterChangeToModeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRWaterHeaterModeClusterChangeToModeParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRWaterHeaterModeClusterChangeToModeParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRWaterHeaterModeClusterChangeToModeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRWaterHeaterModeClusterChangeToModeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRWaterHeaterModeClusterChangeToModeParamsable is the interface implemented by [MTRWaterHeaterModeClusterChangeToModeParams], for mocking and DI.
 type MTRWaterHeaterModeClusterChangeToModeParamsable interface {
-	Unwrap() *raw.MTRWaterHeaterModeClusterChangeToModeParams
-	WithNewMode(newMode *foundation.NSNumber) *MTRWaterHeaterModeClusterChangeToModeParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRWaterHeaterModeClusterChangeToModeParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRWaterHeaterModeClusterChangeToModeParams
-	GetNewMode() *foundation.NSNumber
-	SetNewMode(newMode *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithNewMode(newMode obj.Object) *MTRWaterHeaterModeClusterChangeToModeParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRWaterHeaterModeClusterChangeToModeParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRWaterHeaterModeClusterChangeToModeParams
+	GetNewMode() obj.Object
+	SetNewMode(newMode obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRWaterHeaterModeClusterChangeToModeParamsable = (*MTRWaterHeaterModeClusterChangeToModeParams)(nil)

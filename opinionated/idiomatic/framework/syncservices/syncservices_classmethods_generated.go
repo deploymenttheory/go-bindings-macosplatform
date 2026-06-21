@@ -5,73 +5,32 @@
 package syncservices
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/syncservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ChangeWithTypeRecordIdentifierChanges calls the underlying ISyncChangeChangeWithTypeRecordIdentifierChanges.
-func ChangeWithTypeRecordIdentifierChanges(type_ int, recordIdentifier string, changes *foundation.NSArray[objc.ID]) objc.ID {
-	return raw.ISyncChangeChangeWithTypeRecordIdentifierChanges(type_, foundation.NSStringStringWithUTF8String(recordIdentifier), changes)
+func ChangeWithTypeRecordIdentifierChanges(type_ int, recordIdentifier string, changes obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("ISyncChange")), objc.RegisterName("changeWithType:recordIdentifier:changes:"), type_, purego.NSString(recordIdentifier), objref.IDOf(changes))
+	return obj.Wrap(_r)
 }
 
-// FilterMatchingAllFilters calls the underlying ISyncFilterFilterMatchingAllFilters.
-func FilterMatchingAllFilters(filters *foundation.NSArray[objc.ID]) raw.ISyncFiltering {
-	return raw.ISyncFilterFilterMatchingAllFilters(filters)
-}
-
-// FilterMatchingAtLeastOneFilter calls the underlying ISyncFilterFilterMatchingAtLeastOneFilter.
-func FilterMatchingAtLeastOneFilter(filters *foundation.NSArray[objc.ID]) raw.ISyncFiltering {
-	return raw.ISyncFilterFilterMatchingAtLeastOneFilter(filters)
-}
-
-// SharedManager calls the underlying ISyncManagerSharedManager.
 func SharedManager() *ISyncManager {
-	_r := raw.ISyncManagerSharedManager()
-	if _r == nil {
-		return nil
-	}
-	return &ISyncManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ISyncManager")), objc.RegisterName("sharedManager"))
+	return ISyncManagerFromID(_r)
 }
 
-// BeginSessionWithClientEntityNamesBeforeDate calls the underlying ISyncSessionBeginSessionWithClientEntityNamesBeforeDate.
-func BeginSessionWithClientEntityNamesBeforeDate(client *raw.ISyncClient, entityNames *foundation.NSArray[objc.ID], date *foundation.NSDate) *ISyncSession {
-	_r := raw.ISyncSessionBeginSessionWithClientEntityNamesBeforeDate(client, entityNames, date)
-	if _r == nil {
-		return nil
-	}
-	return &ISyncSession{inner: _r}
+func BeginSessionWithClientEntityNamesBeforeDate(client *ISyncClient, entityNames obj.Object, date obj.Object) *ISyncSession {
+	_r := objc.Send[objc.ID](objc.ID(_class("ISyncSession")), objc.RegisterName("beginSessionWithClient:entityNames:beforeDate:"), objref.IDOf(client), objref.IDOf(entityNames), objref.IDOf(date))
+	return ISyncSessionFromID(_r)
 }
 
-// BeginSessionInBackgroundWithClientEntityNamesTargetSelector calls the underlying ISyncSessionBeginSessionInBackgroundWithClientEntityNamesTargetSelector.
-func BeginSessionInBackgroundWithClientEntityNamesTargetSelector(client *raw.ISyncClient, entityNames *foundation.NSArray[objc.ID], target objc.ID, selector objc.SEL) {
-	raw.ISyncSessionBeginSessionInBackgroundWithClientEntityNamesTargetSelector(client, entityNames, target, selector)
+func CancelPreviousBeginSessionWithClient(client *ISyncClient) {
+	objc.Send[objc.ID](objc.ID(_class("ISyncSession")), objc.RegisterName("cancelPreviousBeginSessionWithClient:"), objref.IDOf(client))
 }
 
-// CancelPreviousBeginSessionWithClient calls the underlying ISyncSessionCancelPreviousBeginSessionWithClient.
-func CancelPreviousBeginSessionWithClient(client *raw.ISyncClient) {
-	raw.ISyncSessionCancelPreviousBeginSessionWithClient(client)
-}
-
-// BeginSessionWithClientEntityNamesBeforeDateLastAnchors calls the underlying ISyncSessionBeginSessionWithClientEntityNamesBeforeDateLastAnchors.
-func BeginSessionWithClientEntityNamesBeforeDateLastAnchors(client *raw.ISyncClient, entityNames *foundation.NSArray[objc.ID], date *foundation.NSDate, anchors *foundation.NSDictionary[objc.ID, objc.ID]) *ISyncSession {
-	_r := raw.ISyncSessionBeginSessionWithClientEntityNamesBeforeDateLastAnchors(client, entityNames, date, anchors)
-	if _r == nil {
-		return nil
-	}
-	return &ISyncSession{inner: _r}
-}
-
-// BeginSessionInBackgroundWithClientEntityNamesTargetSelectorLastAnchors calls the underlying ISyncSessionBeginSessionInBackgroundWithClientEntityNamesTargetSelectorLastAnchors.
-func BeginSessionInBackgroundWithClientEntityNamesTargetSelectorLastAnchors(client *raw.ISyncClient, entityNames *foundation.NSArray[objc.ID], target objc.ID, selector objc.SEL, anchors *foundation.NSDictionary[objc.ID, objc.ID]) {
-	raw.ISyncSessionBeginSessionInBackgroundWithClientEntityNamesTargetSelectorLastAnchors(client, entityNames, target, selector, anchors)
-}
-
-// SessionDriverWithDataSource calls the underlying ISyncSessionDriverSessionDriverWithDataSource.
-func SessionDriverWithDataSource(dataSource raw.ISyncSessionDriverDataSource) *ISyncSessionDriver {
-	_r := raw.ISyncSessionDriverSessionDriverWithDataSource(dataSource)
-	if _r == nil {
-		return nil
-	}
-	return &ISyncSessionDriver{inner: _r}
+func BeginSessionWithClientEntityNamesBeforeDateLastAnchors(client *ISyncClient, entityNames obj.Object, date obj.Object, anchors obj.Object) *ISyncSession {
+	_r := objc.Send[objc.ID](objc.ID(_class("ISyncSession")), objc.RegisterName("beginSessionWithClient:entityNames:beforeDate:lastAnchors:"), objref.IDOf(client), objref.IDOf(entityNames), objref.IDOf(date), objref.IDOf(anchors))
+	return ISyncSessionFromID(_r)
 }

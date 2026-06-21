@@ -5,61 +5,85 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An immutable object representing a phone number for a contact.
 //
-// PhoneNumber wraps [raw.CNPhoneNumber] with a fluent Go API.
+// PhoneNumber is an idiomatic wrapper over the Objective-C class CNPhoneNumber.
 type PhoneNumber struct {
-	inner *raw.CNPhoneNumber
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNPhoneNumber].
-func (x *PhoneNumber) Unwrap() *raw.CNPhoneNumber { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhoneNumber) ID() objc.ID { return x.inner.Ptr() }
-
-// PhoneNumberFromID adopts an existing object pointer as a PhoneNumber (nil for 0).
+// PhoneNumberFromID adopts an existing Objective-C object as a PhoneNumber
+// (nil for 0), retaining it and registering a release finalizer.
 func PhoneNumberFromID(id objc.ID) *PhoneNumber {
 	if id == 0 {
 		return nil
 	}
-	return &PhoneNumber{inner: raw.CNPhoneNumberFromID(id)}
+	x := &PhoneNumber{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPhoneNumber creates a new [PhoneNumber].
+// phoneNumberAdopt wraps an Objective-C object that this code just created as a
+// PhoneNumber (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func phoneNumberAdopt(id objc.ID) *PhoneNumber {
+	if id == 0 {
+		return nil
+	}
+	x := &PhoneNumber{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PhoneNumber) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PhoneNumber) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PhoneNumber) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPhoneNumber creates a new PhoneNumber.
 func NewPhoneNumber() *PhoneNumber {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNPhoneNumber")), objc.RegisterName("new"))
-	return &PhoneNumber{inner: raw.CNPhoneNumberFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNPhoneNumber")), objc.RegisterName("new"))
+	return phoneNumberAdopt(_id)
 }
 
 // Returns a new phone number object initialized with the specified phone number string.
 //
-// NewPhoneNumberWithStringValue creates a new [PhoneNumber].
+// NewPhoneNumberWithStringValue creates a new PhoneNumber.
 func NewPhoneNumberWithStringValue(string_ string) *PhoneNumber {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNPhoneNumber")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStringValue:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
-	return &PhoneNumber{inner: raw.CNPhoneNumberFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CNPhoneNumber")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStringValue:"), purego.NSString(string_))
+	return phoneNumberAdopt(_id)
 }
 
-// StringValue calls the underlying StringValue.
 func (x *PhoneNumber) StringValue() string {
-	_r := x.inner.StringValue()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // PhoneNumberable is the interface implemented by [PhoneNumber], for mocking and DI.
 type PhoneNumberable interface {
-	Unwrap() *raw.CNPhoneNumber
+	obj.Object
 	StringValue() string
 }
 

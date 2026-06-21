@@ -5,356 +5,317 @@
 package icadevices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/icadevices"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// ICACloseSession calls [raw.ICACloseSession] (C function ICACloseSession).
-func ICACloseSession(pb *raw.ICACloseSessionPB, completion unsafe.Pointer) int16 {
-	return raw.ICACloseSession(pb, completion)
+var _fnICAShowDeviceBrowser func(objc.ID) int16
+
+// ICAShowDeviceBrowser calls the ICADevices framework function ICAShowDeviceBrowser.
+func ICAShowDeviceBrowser(options obj.Object) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICAShowDeviceBrowser == nil {
+		ebipurego.RegisterLibFunc(&_fnICAShowDeviceBrowser, _lib, "ICAShowDeviceBrowser")
+	}
+	return _fnICAShowDeviceBrowser(objref.IDOf(options))
 }
 
-// ICACopyObjectData calls [raw.ICACopyObjectData] (C function ICACopyObjectData).
-func ICACopyObjectData(params *raw.ICACopyObjectDataPB, completionProc unsafe.Pointer) int16 {
-	return raw.ICACopyObjectData(params, completionProc)
+var _fnICDConnectBluetoothDevice func(objc.ID) int16
+
+// ICDConnectBluetoothDevice calls the ICADevices framework function ICDConnectBluetoothDevice.
+func ICDConnectBluetoothDevice(params obj.Object) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDConnectBluetoothDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnICDConnectBluetoothDevice, _lib, "ICDConnectBluetoothDevice")
+	}
+	return _fnICDConnectBluetoothDevice(objref.IDOf(params))
 }
 
-// ICACopyObjectPropertyDictionary calls [raw.ICACopyObjectPropertyDictionary] (C function ICACopyObjectPropertyDictionary).
-func ICACopyObjectPropertyDictionary(pb *raw.ICACopyObjectPropertyDictionaryPB, completion unsafe.Pointer) int16 {
-	return raw.ICACopyObjectPropertyDictionary(pb, completion)
-}
+var _fnICDConnectFWDevice func(uint64) int16
 
-// ICACopyObjectThumbnail calls [raw.ICACopyObjectThumbnail] (C function ICACopyObjectThumbnail).
-func ICACopyObjectThumbnail(pb *raw.ICACopyObjectThumbnailPB, completion unsafe.Pointer) int16 {
-	return raw.ICACopyObjectThumbnail(pb, completion)
-}
-
-// ICADownloadFile calls [raw.ICADownloadFile] (C function ICADownloadFile).
-func ICADownloadFile(pb *raw.ICADownloadFilePB, completion unsafe.Pointer) int16 {
-	return raw.ICADownloadFile(pb, completion)
-}
-
-// ICAGetDeviceList calls [raw.ICAGetDeviceList] (C function ICAGetDeviceList).
-func ICAGetDeviceList(pb *raw.ICAGetDeviceListPB, completion unsafe.Pointer) int16 {
-	return raw.ICAGetDeviceList(pb, completion)
-}
-
-// ICAImportImage calls [raw.ICAImportImage] (C function ICAImportImage).
-func ICAImportImage(pb *raw.ICAImportImagePB, completion unsafe.Pointer) int16 {
-	return raw.ICAImportImage(pb, completion)
-}
-
-// ICALoadDeviceModule calls [raw.ICALoadDeviceModule] (C function ICALoadDeviceModule).
-func ICALoadDeviceModule(pb *raw.ICALoadDeviceModulePB, completion unsafe.Pointer) int16 {
-	return raw.ICALoadDeviceModule(pb, completion)
-}
-
-// ICAObjectSendMessage calls [raw.ICAObjectSendMessage] (C function ICAObjectSendMessage).
-func ICAObjectSendMessage(pb *raw.ICAObjectSendMessagePB, completion unsafe.Pointer) int16 {
-	return raw.ICAObjectSendMessage(pb, completion)
-}
-
-// ICAOpenSession calls [raw.ICAOpenSession] (C function ICAOpenSession).
-func ICAOpenSession(pb *raw.ICAOpenSessionPB, completion unsafe.Pointer) int16 {
-	return raw.ICAOpenSession(pb, completion)
-}
-
-// ICARegisterForEventNotification calls [raw.ICARegisterForEventNotification] (C function ICARegisterForEventNotification).
-func ICARegisterForEventNotification(params *raw.ICARegisterForEventNotificationPB, completionProc unsafe.Pointer) int16 {
-	return raw.ICARegisterForEventNotification(params, completionProc)
-}
-
-// ICAScannerCloseSession calls [raw.ICAScannerCloseSession] (C function ICAScannerCloseSession).
-func ICAScannerCloseSession(pb *raw.ICAScannerCloseSessionPB, completion unsafe.Pointer) int16 {
-	return raw.ICAScannerCloseSession(pb, completion)
-}
-
-// ICAScannerGetParameters calls [raw.ICAScannerGetParameters] (C function ICAScannerGetParameters).
-func ICAScannerGetParameters(pb *raw.ICAScannerGetParametersPB, completion unsafe.Pointer) int16 {
-	return raw.ICAScannerGetParameters(pb, completion)
-}
-
-// ICAScannerInitialize calls [raw.ICAScannerInitialize] (C function ICAScannerInitialize).
-func ICAScannerInitialize(pb *raw.ICAScannerInitializePB, completion unsafe.Pointer) int16 {
-	return raw.ICAScannerInitialize(pb, completion)
-}
-
-// ICAScannerOpenSession calls [raw.ICAScannerOpenSession] (C function ICAScannerOpenSession).
-func ICAScannerOpenSession(pb *raw.ICAScannerOpenSessionPB, completion unsafe.Pointer) int16 {
-	return raw.ICAScannerOpenSession(pb, completion)
-}
-
-// ICAScannerSetParameters calls [raw.ICAScannerSetParameters] (C function ICAScannerSetParameters).
-func ICAScannerSetParameters(pb *raw.ICAScannerSetParametersPB, completion unsafe.Pointer) int16 {
-	return raw.ICAScannerSetParameters(pb, completion)
-}
-
-// ICAScannerStart calls [raw.ICAScannerStart] (C function ICAScannerStart).
-func ICAScannerStart(pb *raw.ICAScannerStartPB, completion unsafe.Pointer) int16 {
-	return raw.ICAScannerStart(pb, completion)
-}
-
-// ICAScannerStatus calls [raw.ICAScannerStatus] (C function ICAScannerStatus).
-func ICAScannerStatus(pb *raw.ICAScannerStatusPB, completion unsafe.Pointer) int16 {
-	return raw.ICAScannerStatus(pb, completion)
-}
-
-// ICASendNotification calls [raw.ICASendNotification] (C function ICASendNotification).
-func ICASendNotification(pb *raw.ICASendNotificationPB) int16 {
-	return raw.ICASendNotification(pb)
-}
-
-// ICASendNotificationAndWaitForReply calls [raw.ICASendNotificationAndWaitForReply] (C function ICASendNotificationAndWaitForReply).
-func ICASendNotificationAndWaitForReply(pb *raw.ICASendNotificationPB) int16 {
-	return raw.ICASendNotificationAndWaitForReply(pb)
-}
-
-// ICAShowDeviceBrowser calls [raw.ICAShowDeviceBrowser] (C function ICAShowDeviceBrowser).
-func ICAShowDeviceBrowser(options unsafe.Pointer) int16 {
-	return raw.ICAShowDeviceBrowser(options)
-}
-
-// ICAUnloadDeviceModule calls [raw.ICAUnloadDeviceModule] (C function ICAUnloadDeviceModule).
-func ICAUnloadDeviceModule(pb *raw.ICAUnloadDeviceModulePB, completion unsafe.Pointer) int16 {
-	return raw.ICAUnloadDeviceModule(pb, completion)
-}
-
-// ICAUploadFile calls [raw.ICAUploadFile] (C function ICAUploadFile).
-func ICAUploadFile(pb *raw.ICAUploadFilePB, completion unsafe.Pointer) int16 {
-	return raw.ICAUploadFile(pb, completion)
-}
-
-// ICDAddBandInfoToNotificationDictionary calls [raw.ICDAddBandInfoToNotificationDictionary] (C function ICDAddBandInfoToNotificationDictionary).
-func ICDAddBandInfoToNotificationDictionary(dict unsafe.Pointer, width uint, height uint, bitsPerPixel uint, bitsPerComponent uint, numComponents uint, endianness uint, pixelDataType uint, bytesPerRow uint, dataStartRow uint, dataNumberOfRows uint, dataSize uint, dataBuffer unsafe.Pointer) int16 {
-	return raw.ICDAddBandInfoToNotificationDictionary(dict, width, height, bitsPerPixel, bitsPerComponent, numComponents, endianness, pixelDataType, bytesPerRow, dataStartRow, dataNumberOfRows, dataSize, dataBuffer)
-}
-
-// ICDAddImageInfoToNotificationDictionary calls [raw.ICDAddImageInfoToNotificationDictionary] (C function ICDAddImageInfoToNotificationDictionary).
-func ICDAddImageInfoToNotificationDictionary(dict unsafe.Pointer, width uint, height uint, bytesPerRow uint, dataStartRow uint, dataNumberOfRows uint, dataSize uint, dataBuffer unsafe.Pointer) int16 {
-	return raw.ICDAddImageInfoToNotificationDictionary(dict, width, height, bytesPerRow, dataStartRow, dataNumberOfRows, dataSize, dataBuffer)
-}
-
-// ICDConnectBluetoothDevice calls [raw.ICDConnectBluetoothDevice] (C function ICDConnectBluetoothDevice).
-func ICDConnectBluetoothDevice(params unsafe.Pointer) int16 {
-	return raw.ICDConnectBluetoothDevice(params)
-}
-
-// ICDConnectFWDevice calls [raw.ICDConnectFWDevice] (C function ICDConnectFWDevice).
+// ICDConnectFWDevice calls the ICADevices framework function ICDConnectFWDevice.
 func ICDConnectFWDevice(guid uint64) int16 {
-	return raw.ICDConnectFWDevice(guid)
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDConnectFWDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnICDConnectFWDevice, _lib, "ICDConnectFWDevice")
+	}
+	return _fnICDConnectFWDevice(guid)
 }
 
-// ICDConnectFWDeviceWithIORegPath calls [raw.ICDConnectFWDeviceWithIORegPath] (C function ICDConnectFWDeviceWithIORegPath).
+var _fnICDConnectFWDeviceWithIORegPath func(uint64, string) int16
+
+// ICDConnectFWDeviceWithIORegPath calls the ICADevices framework function ICDConnectFWDeviceWithIORegPath.
 func ICDConnectFWDeviceWithIORegPath(guid uint64, ioregPath string) int16 {
-	return raw.ICDConnectFWDeviceWithIORegPath(guid, ioregPath)
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDConnectFWDeviceWithIORegPath == nil {
+		ebipurego.RegisterLibFunc(&_fnICDConnectFWDeviceWithIORegPath, _lib, "ICDConnectFWDeviceWithIORegPath")
+	}
+	return _fnICDConnectFWDeviceWithIORegPath(guid, ioregPath)
 }
 
-// ICDConnectTCPIPDevice calls [raw.ICDConnectTCPIPDevice] (C function ICDConnectTCPIPDevice).
-func ICDConnectTCPIPDevice(params unsafe.Pointer) int16 {
-	return raw.ICDConnectTCPIPDevice(params)
+var _fnICDConnectTCPIPDevice func(objc.ID) int16
+
+// ICDConnectTCPIPDevice calls the ICADevices framework function ICDConnectTCPIPDevice.
+func ICDConnectTCPIPDevice(params obj.Object) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDConnectTCPIPDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnICDConnectTCPIPDevice, _lib, "ICDConnectTCPIPDevice")
+	}
+	return _fnICDConnectTCPIPDevice(objref.IDOf(params))
 }
 
-// ICDConnectUSBDevice calls [raw.ICDConnectUSBDevice] (C function ICDConnectUSBDevice).
-func ICDConnectUSBDevice(locationID uint) int16 {
-	return raw.ICDConnectUSBDevice(locationID)
+var _fnICDConnectUSBDevice func(int) int16
+
+// ICDConnectUSBDevice calls the ICADevices framework function ICDConnectUSBDevice.
+func ICDConnectUSBDevice(locationID int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDConnectUSBDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnICDConnectUSBDevice, _lib, "ICDConnectUSBDevice")
+	}
+	return _fnICDConnectUSBDevice(locationID)
 }
 
-// ICDConnectUSBDeviceWithIORegPath calls [raw.ICDConnectUSBDeviceWithIORegPath] (C function ICDConnectUSBDeviceWithIORegPath).
-func ICDConnectUSBDeviceWithIORegPath(locationID uint, ioregPath string) int16 {
-	return raw.ICDConnectUSBDeviceWithIORegPath(locationID, ioregPath)
+var _fnICDConnectUSBDeviceWithIORegPath func(int, string) int16
+
+// ICDConnectUSBDeviceWithIORegPath calls the ICADevices framework function ICDConnectUSBDeviceWithIORegPath.
+func ICDConnectUSBDeviceWithIORegPath(locationID int, ioregPath string) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDConnectUSBDeviceWithIORegPath == nil {
+		ebipurego.RegisterLibFunc(&_fnICDConnectUSBDeviceWithIORegPath, _lib, "ICDConnectUSBDeviceWithIORegPath")
+	}
+	return _fnICDConnectUSBDeviceWithIORegPath(locationID, ioregPath)
 }
 
-// ICDCopyDeviceInfoDictionary calls [raw.ICDCopyDeviceInfoDictionary] (C function ICDCopyDeviceInfoDictionary).
-func ICDCopyDeviceInfoDictionary(deviceName string, theDict unsafe.Pointer) int16 {
-	return raw.ICDCopyDeviceInfoDictionary(deviceName, theDict)
+var _fnICDCreateColorSpace func(int, int, int, objc.ID, objc.ID, string) objc.ID
+
+// ICDCreateColorSpace calls the ICADevices framework function ICDCreateColorSpace.
+func ICDCreateColorSpace(bitsPerPixel int, samplesPerPixel int, icaObject int, colorSyncMode obj.Object, abstractProfile obj.Object, tmpProfilePath string) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDCreateColorSpace == nil {
+		ebipurego.RegisterLibFunc(&_fnICDCreateColorSpace, _lib, "ICDCreateColorSpace")
+	}
+	_ret := _fnICDCreateColorSpace(bitsPerPixel, samplesPerPixel, icaObject, objref.IDOf(colorSyncMode), objref.IDOf(abstractProfile), tmpProfilePath)
+	return obj.Wrap(_ret)
 }
 
-// ICDCreateColorSpace calls [raw.ICDCreateColorSpace] (C function ICDCreateColorSpace).
-func ICDCreateColorSpace(bitsPerPixel uint, samplesPerPixel uint, icaObject uint, colorSyncMode unsafe.Pointer, abstractProfile unsafe.Pointer, tmpProfilePath string) unsafe.Pointer {
-	return raw.ICDCreateColorSpace(bitsPerPixel, samplesPerPixel, icaObject, colorSyncMode, abstractProfile, tmpProfilePath)
+var _fnICDDisconnectBluetoothDevice func(objc.ID) int16
+
+// ICDDisconnectBluetoothDevice calls the ICADevices framework function ICDDisconnectBluetoothDevice.
+func ICDDisconnectBluetoothDevice(params obj.Object) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDDisconnectBluetoothDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnICDDisconnectBluetoothDevice, _lib, "ICDDisconnectBluetoothDevice")
+	}
+	return _fnICDDisconnectBluetoothDevice(objref.IDOf(params))
 }
 
-// ICDCreateEventDataCookie calls [raw.ICDCreateEventDataCookie] (C function ICDCreateEventDataCookie).
-func ICDCreateEventDataCookie(object uint, cookie *uint) int16 {
-	return raw.ICDCreateEventDataCookie(object, cookie)
-}
+var _fnICDDisconnectFWDevice func(uint64) int16
 
-// ICDCreateICAThumbnailFromICNS calls [raw.ICDCreateICAThumbnailFromICNS] (C function ICDCreateICAThumbnailFromICNS).
-func ICDCreateICAThumbnailFromICNS(fileName string, thumbnail unsafe.Pointer) int16 {
-	return raw.ICDCreateICAThumbnailFromICNS(fileName, thumbnail)
-}
-
-// ICDCreateICAThumbnailFromIconRef calls [raw.ICDCreateICAThumbnailFromIconRef] (C function ICDCreateICAThumbnailFromIconRef).
-func ICDCreateICAThumbnailFromIconRef(iconRef unsafe.Pointer, thumbnail unsafe.Pointer) int16 {
-	return raw.ICDCreateICAThumbnailFromIconRef(iconRef, thumbnail)
-}
-
-// ICDDisconnectBluetoothDevice calls [raw.ICDDisconnectBluetoothDevice] (C function ICDDisconnectBluetoothDevice).
-func ICDDisconnectBluetoothDevice(params unsafe.Pointer) int16 {
-	return raw.ICDDisconnectBluetoothDevice(params)
-}
-
-// ICDDisconnectFWDevice calls [raw.ICDDisconnectFWDevice] (C function ICDDisconnectFWDevice).
+// ICDDisconnectFWDevice calls the ICADevices framework function ICDDisconnectFWDevice.
 func ICDDisconnectFWDevice(guid uint64) int16 {
-	return raw.ICDDisconnectFWDevice(guid)
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDDisconnectFWDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnICDDisconnectFWDevice, _lib, "ICDDisconnectFWDevice")
+	}
+	return _fnICDDisconnectFWDevice(guid)
 }
 
-// ICDDisconnectFWDeviceWithIORegPath calls [raw.ICDDisconnectFWDeviceWithIORegPath] (C function ICDDisconnectFWDeviceWithIORegPath).
+var _fnICDDisconnectFWDeviceWithIORegPath func(uint64, string) int16
+
+// ICDDisconnectFWDeviceWithIORegPath calls the ICADevices framework function ICDDisconnectFWDeviceWithIORegPath.
 func ICDDisconnectFWDeviceWithIORegPath(guid uint64, ioregPath string) int16 {
-	return raw.ICDDisconnectFWDeviceWithIORegPath(guid, ioregPath)
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDDisconnectFWDeviceWithIORegPath == nil {
+		ebipurego.RegisterLibFunc(&_fnICDDisconnectFWDeviceWithIORegPath, _lib, "ICDDisconnectFWDeviceWithIORegPath")
+	}
+	return _fnICDDisconnectFWDeviceWithIORegPath(guid, ioregPath)
 }
 
-// ICDDisconnectTCPIPDevice calls [raw.ICDDisconnectTCPIPDevice] (C function ICDDisconnectTCPIPDevice).
-func ICDDisconnectTCPIPDevice(params unsafe.Pointer) int16 {
-	return raw.ICDDisconnectTCPIPDevice(params)
+var _fnICDDisconnectTCPIPDevice func(objc.ID) int16
+
+// ICDDisconnectTCPIPDevice calls the ICADevices framework function ICDDisconnectTCPIPDevice.
+func ICDDisconnectTCPIPDevice(params obj.Object) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDDisconnectTCPIPDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnICDDisconnectTCPIPDevice, _lib, "ICDDisconnectTCPIPDevice")
+	}
+	return _fnICDDisconnectTCPIPDevice(objref.IDOf(params))
 }
 
-// ICDDisconnectUSBDevice calls [raw.ICDDisconnectUSBDevice] (C function ICDDisconnectUSBDevice).
-func ICDDisconnectUSBDevice(locationID uint) int16 {
-	return raw.ICDDisconnectUSBDevice(locationID)
+var _fnICDDisconnectUSBDevice func(int) int16
+
+// ICDDisconnectUSBDevice calls the ICADevices framework function ICDDisconnectUSBDevice.
+func ICDDisconnectUSBDevice(locationID int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDDisconnectUSBDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnICDDisconnectUSBDevice, _lib, "ICDDisconnectUSBDevice")
+	}
+	return _fnICDDisconnectUSBDevice(locationID)
 }
 
-// ICDDisconnectUSBDeviceWithIORegPath calls [raw.ICDDisconnectUSBDeviceWithIORegPath] (C function ICDDisconnectUSBDeviceWithIORegPath).
-func ICDDisconnectUSBDeviceWithIORegPath(locationID uint, ioregPath string) int16 {
-	return raw.ICDDisconnectUSBDeviceWithIORegPath(locationID, ioregPath)
+var _fnICDDisconnectUSBDeviceWithIORegPath func(int, string) int16
+
+// ICDDisconnectUSBDeviceWithIORegPath calls the ICADevices framework function ICDDisconnectUSBDeviceWithIORegPath.
+func ICDDisconnectUSBDeviceWithIORegPath(locationID int, ioregPath string) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDDisconnectUSBDeviceWithIORegPath == nil {
+		ebipurego.RegisterLibFunc(&_fnICDDisconnectUSBDeviceWithIORegPath, _lib, "ICDDisconnectUSBDeviceWithIORegPath")
+	}
+	return _fnICDDisconnectUSBDeviceWithIORegPath(locationID, ioregPath)
 }
 
-// ICDDisposeObject calls [raw.ICDDisposeObject] (C function ICDDisposeObject).
-func ICDDisposeObject(pb *raw.ICD_DisposeObjectPB, completion unsafe.Pointer) int16 {
-	return raw.ICDDisposeObject(pb, completion)
+var _fnICDScannerConnectBluetoothDevice func(objc.ID) int16
+
+// ICDScannerConnectBluetoothDevice calls the ICADevices framework function ICDScannerConnectBluetoothDevice.
+func ICDScannerConnectBluetoothDevice(params obj.Object) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDScannerConnectBluetoothDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnICDScannerConnectBluetoothDevice, _lib, "ICDScannerConnectBluetoothDevice")
+	}
+	return _fnICDScannerConnectBluetoothDevice(objref.IDOf(params))
 }
 
-// ICDGetStandardPropertyData calls [raw.ICDGetStandardPropertyData] (C function ICDGetStandardPropertyData).
-func ICDGetStandardPropertyData(objectInfo *raw.ObjectInfo, pb unsafe.Pointer) int16 {
-	return raw.ICDGetStandardPropertyData(objectInfo, pb)
-}
+var _fnICDScannerConnectFWDevice func(uint64) int16
 
-// ICDInitiateNotificationCallback calls [raw.ICDInitiateNotificationCallback] (C function ICDInitiateNotificationCallback).
-func ICDInitiateNotificationCallback(pb unsafe.Pointer) int16 {
-	return raw.ICDInitiateNotificationCallback(pb)
-}
-
-// ICDNewObject calls [raw.ICDNewObject] (C function ICDNewObject).
-func ICDNewObject(pb *raw.ICD_NewObjectPB, completion unsafe.Pointer) int16 {
-	return raw.ICDNewObject(pb, completion)
-}
-
-// ICDNewObjectCreated calls [raw.ICDNewObjectCreated] (C function ICDNewObjectCreated).
-func ICDNewObjectCreated(parentInfo *raw.ObjectInfo, objectInfo *raw.ObjectInfo, completion unsafe.Pointer) int16 {
-	return raw.ICDNewObjectCreated(parentInfo, objectInfo, completion)
-}
-
-// ICDNewObjectInfoCreated calls [raw.ICDNewObjectInfoCreated] (C function ICDNewObjectInfoCreated).
-func ICDNewObjectInfoCreated(parentInfo *raw.ObjectInfo, index uint, newICAObject *uint) int16 {
-	return raw.ICDNewObjectInfoCreated(parentInfo, index, newICAObject)
-}
-
-// ICDScannerConnectBluetoothDevice calls [raw.ICDScannerConnectBluetoothDevice] (C function ICDScannerConnectBluetoothDevice).
-func ICDScannerConnectBluetoothDevice(params unsafe.Pointer) int16 {
-	return raw.ICDScannerConnectBluetoothDevice(params)
-}
-
-// ICDScannerConnectFWDevice calls [raw.ICDScannerConnectFWDevice] (C function ICDScannerConnectFWDevice).
+// ICDScannerConnectFWDevice calls the ICADevices framework function ICDScannerConnectFWDevice.
 func ICDScannerConnectFWDevice(guid uint64) int16 {
-	return raw.ICDScannerConnectFWDevice(guid)
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDScannerConnectFWDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnICDScannerConnectFWDevice, _lib, "ICDScannerConnectFWDevice")
+	}
+	return _fnICDScannerConnectFWDevice(guid)
 }
 
-// ICDScannerConnectFWDeviceWithIORegPath calls [raw.ICDScannerConnectFWDeviceWithIORegPath] (C function ICDScannerConnectFWDeviceWithIORegPath).
+var _fnICDScannerConnectFWDeviceWithIORegPath func(uint64, string) int16
+
+// ICDScannerConnectFWDeviceWithIORegPath calls the ICADevices framework function ICDScannerConnectFWDeviceWithIORegPath.
 func ICDScannerConnectFWDeviceWithIORegPath(guid uint64, ioregPath string) int16 {
-	return raw.ICDScannerConnectFWDeviceWithIORegPath(guid, ioregPath)
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDScannerConnectFWDeviceWithIORegPath == nil {
+		ebipurego.RegisterLibFunc(&_fnICDScannerConnectFWDeviceWithIORegPath, _lib, "ICDScannerConnectFWDeviceWithIORegPath")
+	}
+	return _fnICDScannerConnectFWDeviceWithIORegPath(guid, ioregPath)
 }
 
-// ICDScannerConnectTCPIPDevice calls [raw.ICDScannerConnectTCPIPDevice] (C function ICDScannerConnectTCPIPDevice).
-func ICDScannerConnectTCPIPDevice(params unsafe.Pointer) int16 {
-	return raw.ICDScannerConnectTCPIPDevice(params)
+var _fnICDScannerConnectTCPIPDevice func(objc.ID) int16
+
+// ICDScannerConnectTCPIPDevice calls the ICADevices framework function ICDScannerConnectTCPIPDevice.
+func ICDScannerConnectTCPIPDevice(params obj.Object) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDScannerConnectTCPIPDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnICDScannerConnectTCPIPDevice, _lib, "ICDScannerConnectTCPIPDevice")
+	}
+	return _fnICDScannerConnectTCPIPDevice(objref.IDOf(params))
 }
 
-// ICDScannerConnectUSBDevice calls [raw.ICDScannerConnectUSBDevice] (C function ICDScannerConnectUSBDevice).
-func ICDScannerConnectUSBDevice(locationID uint) int16 {
-	return raw.ICDScannerConnectUSBDevice(locationID)
+var _fnICDScannerConnectUSBDevice func(int) int16
+
+// ICDScannerConnectUSBDevice calls the ICADevices framework function ICDScannerConnectUSBDevice.
+func ICDScannerConnectUSBDevice(locationID int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDScannerConnectUSBDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnICDScannerConnectUSBDevice, _lib, "ICDScannerConnectUSBDevice")
+	}
+	return _fnICDScannerConnectUSBDevice(locationID)
 }
 
-// ICDScannerConnectUSBDeviceWithIORegPath calls [raw.ICDScannerConnectUSBDeviceWithIORegPath] (C function ICDScannerConnectUSBDeviceWithIORegPath).
-func ICDScannerConnectUSBDeviceWithIORegPath(locationID uint, ioregPath string) int16 {
-	return raw.ICDScannerConnectUSBDeviceWithIORegPath(locationID, ioregPath)
+var _fnICDScannerConnectUSBDeviceWithIORegPath func(int, string) int16
+
+// ICDScannerConnectUSBDeviceWithIORegPath calls the ICADevices framework function ICDScannerConnectUSBDeviceWithIORegPath.
+func ICDScannerConnectUSBDeviceWithIORegPath(locationID int, ioregPath string) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDScannerConnectUSBDeviceWithIORegPath == nil {
+		ebipurego.RegisterLibFunc(&_fnICDScannerConnectUSBDeviceWithIORegPath, _lib, "ICDScannerConnectUSBDeviceWithIORegPath")
+	}
+	return _fnICDScannerConnectUSBDeviceWithIORegPath(locationID, ioregPath)
 }
 
-// ICDScannerCopyDeviceInfoDictionary calls [raw.ICDScannerCopyDeviceInfoDictionary] (C function ICDScannerCopyDeviceInfoDictionary).
-func ICDScannerCopyDeviceInfoDictionary(deviceName string, theDict unsafe.Pointer) int16 {
-	return raw.ICDScannerCopyDeviceInfoDictionary(deviceName, theDict)
+var _fnICDScannerDisconnectBluetoothDevice func(objc.ID) int16
+
+// ICDScannerDisconnectBluetoothDevice calls the ICADevices framework function ICDScannerDisconnectBluetoothDevice.
+func ICDScannerDisconnectBluetoothDevice(params obj.Object) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDScannerDisconnectBluetoothDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnICDScannerDisconnectBluetoothDevice, _lib, "ICDScannerDisconnectBluetoothDevice")
+	}
+	return _fnICDScannerDisconnectBluetoothDevice(objref.IDOf(params))
 }
 
-// ICDScannerCreateEventDataCookie calls [raw.ICDScannerCreateEventDataCookie] (C function ICDScannerCreateEventDataCookie).
-func ICDScannerCreateEventDataCookie(object uint, cookie *uint) int16 {
-	return raw.ICDScannerCreateEventDataCookie(object, cookie)
-}
+var _fnICDScannerDisconnectFWDevice func(uint64) int16
 
-// ICDScannerCreateICAThumbnailFromICNS calls [raw.ICDScannerCreateICAThumbnailFromICNS] (C function ICDScannerCreateICAThumbnailFromICNS).
-func ICDScannerCreateICAThumbnailFromICNS(fileName string, thumbnail unsafe.Pointer) int16 {
-	return raw.ICDScannerCreateICAThumbnailFromICNS(fileName, thumbnail)
-}
-
-// ICDScannerDisconnectBluetoothDevice calls [raw.ICDScannerDisconnectBluetoothDevice] (C function ICDScannerDisconnectBluetoothDevice).
-func ICDScannerDisconnectBluetoothDevice(params unsafe.Pointer) int16 {
-	return raw.ICDScannerDisconnectBluetoothDevice(params)
-}
-
-// ICDScannerDisconnectFWDevice calls [raw.ICDScannerDisconnectFWDevice] (C function ICDScannerDisconnectFWDevice).
+// ICDScannerDisconnectFWDevice calls the ICADevices framework function ICDScannerDisconnectFWDevice.
 func ICDScannerDisconnectFWDevice(guid uint64) int16 {
-	return raw.ICDScannerDisconnectFWDevice(guid)
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDScannerDisconnectFWDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnICDScannerDisconnectFWDevice, _lib, "ICDScannerDisconnectFWDevice")
+	}
+	return _fnICDScannerDisconnectFWDevice(guid)
 }
 
-// ICDScannerDisconnectFWDeviceWithIORegPath calls [raw.ICDScannerDisconnectFWDeviceWithIORegPath] (C function ICDScannerDisconnectFWDeviceWithIORegPath).
+var _fnICDScannerDisconnectFWDeviceWithIORegPath func(uint64, string) int16
+
+// ICDScannerDisconnectFWDeviceWithIORegPath calls the ICADevices framework function ICDScannerDisconnectFWDeviceWithIORegPath.
 func ICDScannerDisconnectFWDeviceWithIORegPath(guid uint64, ioregPath string) int16 {
-	return raw.ICDScannerDisconnectFWDeviceWithIORegPath(guid, ioregPath)
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDScannerDisconnectFWDeviceWithIORegPath == nil {
+		ebipurego.RegisterLibFunc(&_fnICDScannerDisconnectFWDeviceWithIORegPath, _lib, "ICDScannerDisconnectFWDeviceWithIORegPath")
+	}
+	return _fnICDScannerDisconnectFWDeviceWithIORegPath(guid, ioregPath)
 }
 
-// ICDScannerDisconnectTCPIPDevice calls [raw.ICDScannerDisconnectTCPIPDevice] (C function ICDScannerDisconnectTCPIPDevice).
-func ICDScannerDisconnectTCPIPDevice(params unsafe.Pointer) int16 {
-	return raw.ICDScannerDisconnectTCPIPDevice(params)
+var _fnICDScannerDisconnectTCPIPDevice func(objc.ID) int16
+
+// ICDScannerDisconnectTCPIPDevice calls the ICADevices framework function ICDScannerDisconnectTCPIPDevice.
+func ICDScannerDisconnectTCPIPDevice(params obj.Object) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDScannerDisconnectTCPIPDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnICDScannerDisconnectTCPIPDevice, _lib, "ICDScannerDisconnectTCPIPDevice")
+	}
+	return _fnICDScannerDisconnectTCPIPDevice(objref.IDOf(params))
 }
 
-// ICDScannerDisconnectUSBDevice calls [raw.ICDScannerDisconnectUSBDevice] (C function ICDScannerDisconnectUSBDevice).
-func ICDScannerDisconnectUSBDevice(locationID uint) int16 {
-	return raw.ICDScannerDisconnectUSBDevice(locationID)
+var _fnICDScannerDisconnectUSBDevice func(int) int16
+
+// ICDScannerDisconnectUSBDevice calls the ICADevices framework function ICDScannerDisconnectUSBDevice.
+func ICDScannerDisconnectUSBDevice(locationID int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDScannerDisconnectUSBDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnICDScannerDisconnectUSBDevice, _lib, "ICDScannerDisconnectUSBDevice")
+	}
+	return _fnICDScannerDisconnectUSBDevice(locationID)
 }
 
-// ICDScannerDisconnectUSBDeviceWithIORegPath calls [raw.ICDScannerDisconnectUSBDeviceWithIORegPath] (C function ICDScannerDisconnectUSBDeviceWithIORegPath).
-func ICDScannerDisconnectUSBDeviceWithIORegPath(locationID uint, ioregPath string) int16 {
-	return raw.ICDScannerDisconnectUSBDeviceWithIORegPath(locationID, ioregPath)
+var _fnICDScannerDisconnectUSBDeviceWithIORegPath func(int, string) int16
+
+// ICDScannerDisconnectUSBDeviceWithIORegPath calls the ICADevices framework function ICDScannerDisconnectUSBDeviceWithIORegPath.
+func ICDScannerDisconnectUSBDeviceWithIORegPath(locationID int, ioregPath string) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnICDScannerDisconnectUSBDeviceWithIORegPath == nil {
+		ebipurego.RegisterLibFunc(&_fnICDScannerDisconnectUSBDeviceWithIORegPath, _lib, "ICDScannerDisconnectUSBDeviceWithIORegPath")
+	}
+	return _fnICDScannerDisconnectUSBDeviceWithIORegPath(locationID, ioregPath)
 }
 
-// ICDScannerGetStandardPropertyData calls [raw.ICDScannerGetStandardPropertyData] (C function ICDScannerGetStandardPropertyData).
-func ICDScannerGetStandardPropertyData(objectInfo *raw.ScannerObjectInfo, pb unsafe.Pointer) int16 {
-	return raw.ICDScannerGetStandardPropertyData(objectInfo, pb)
-}
+var _fnICD_ScannerMain func(int, string) int
 
-// ICDScannerInitiateNotificationCallback calls [raw.ICDScannerInitiateNotificationCallback] (C function ICDScannerInitiateNotificationCallback).
-func ICDScannerInitiateNotificationCallback(pb unsafe.Pointer) int16 {
-	return raw.ICDScannerInitiateNotificationCallback(pb)
-}
-
-// ICDScannerNewObjectInfoCreated calls [raw.ICDScannerNewObjectInfoCreated] (C function ICDScannerNewObjectInfoCreated).
-func ICDScannerNewObjectInfoCreated(parentInfo *raw.ScannerObjectInfo, index uint, newICAObject *uint) int16 {
-	return raw.ICDScannerNewObjectInfoCreated(parentInfo, index, newICAObject)
-}
-
-// ICDSendNotification calls [raw.ICDSendNotification] (C function ICDSendNotification).
-func ICDSendNotification(pb *raw.ICASendNotificationPB) int16 {
-	return raw.ICDSendNotification(pb)
-}
-
-// ICDSendNotificationAndWaitForReply calls [raw.ICDSendNotificationAndWaitForReply] (C function ICDSendNotificationAndWaitForReply).
-func ICDSendNotificationAndWaitForReply(pb *raw.ICASendNotificationPB) int16 {
-	return raw.ICDSendNotificationAndWaitForReply(pb)
-}
-
-// ICD_ScannerMain calls [raw.ICD_ScannerMain] (C function ICD_ScannerMain).
+// ICD_ScannerMain calls the ICADevices framework function ICD_ScannerMain.
 func ICD_ScannerMain(argc int, argv string) int {
-	return raw.ICD_ScannerMain(argc, argv)
+	_loadOnce.Do(_loadLibrary)
+	if _fnICD_ScannerMain == nil {
+		ebipurego.RegisterLibFunc(&_fnICD_ScannerMain, _lib, "ICD_ScannerMain")
+	}
+	return _fnICD_ScannerMain(argc, argv)
 }
 
-// ICD_main calls [raw.ICD_main] (C function ICD_main).
+var _fnICD_main func(int, string) int
+
+// ICD_main calls the ICADevices framework function ICD_main.
 func ICD_main(argc int, argv string) int {
-	return raw.ICD_main(argc, argv)
+	_loadOnce.Do(_loadLibrary)
+	if _fnICD_main == nil {
+		ebipurego.RegisterLibFunc(&_fnICD_main, _lib, "ICD_main")
+	}
+	return _fnICD_main(argc, argv)
 }

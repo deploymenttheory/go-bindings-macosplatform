@@ -5,82 +5,100 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a MIDI channel pressure message.
 //
-// MIDIChannelPressureEvent wraps [raw.AVMIDIChannelPressureEvent] with a fluent Go API.
+// MIDIChannelPressureEvent is an idiomatic wrapper over the Objective-C class AVMIDIChannelPressureEvent.
 type MIDIChannelPressureEvent struct {
-	inner *raw.AVMIDIChannelPressureEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMIDIChannelPressureEvent].
-func (x *MIDIChannelPressureEvent) Unwrap() *raw.AVMIDIChannelPressureEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MIDIChannelPressureEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MIDIChannelPressureEventFromID adopts an existing object pointer as a MIDIChannelPressureEvent (nil for 0).
+// MIDIChannelPressureEventFromID adopts an existing Objective-C object as a MIDIChannelPressureEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MIDIChannelPressureEventFromID(id objc.ID) *MIDIChannelPressureEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MIDIChannelPressureEvent{inner: raw.AVMIDIChannelPressureEventFromID(id)}
+	x := &MIDIChannelPressureEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mIDIChannelPressureEventAdopt wraps an Objective-C object that this code just created as a
+// MIDIChannelPressureEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mIDIChannelPressureEventAdopt(id objc.ID) *MIDIChannelPressureEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MIDIChannelPressureEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MIDIChannelPressureEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MIDIChannelPressureEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MIDIChannelPressureEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a pressure event with a channel and pressure value.
 //
-// NewMIDIChannelPressureEventWithChannelPressure creates a new [MIDIChannelPressureEvent].
-func NewMIDIChannelPressureEventWithChannelPressure(channel uint, pressure uint) *MIDIChannelPressureEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDIChannelPressureEvent")), objc.RegisterName("alloc"))
+// NewMIDIChannelPressureEventWithChannelPressure creates a new MIDIChannelPressureEvent.
+func NewMIDIChannelPressureEventWithChannelPressure(channel int, pressure int) *MIDIChannelPressureEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMIDIChannelPressureEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannel:pressure:"), channel, pressure)
-	return &MIDIChannelPressureEvent{inner: raw.AVMIDIChannelPressureEventFromID(_id)}
+	return mIDIChannelPressureEventAdopt(_id)
 }
 
 // The MIDI channel pressure.
 //
-// WithPressure sets the pressure property and returns the receiver for chaining.
-func (x *MIDIChannelPressureEvent) WithPressure(pressure uint) *MIDIChannelPressureEvent {
-	x.inner.SetPressure(pressure)
+// WithPressure sets pressure and returns the receiver so calls can be chained.
+func (x *MIDIChannelPressureEvent) WithPressure(pressure int) *MIDIChannelPressureEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressure:"), pressure)
 	return x
 }
 
 // The MIDI channel.
 //
-// WithChannel sets the channel property and returns the receiver for chaining.
-func (x *MIDIChannelPressureEvent) WithChannel(channel uint) *MIDIChannelPressureEvent {
-	x.inner.AVMIDIChannelEvent.SetChannel(channel)
+// WithChannel sets channel and returns the receiver so calls can be chained.
+func (x *MIDIChannelPressureEvent) WithChannel(channel int) *MIDIChannelPressureEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
 	return x
 }
 
-// Pressure calls the underlying Pressure.
-func (x *MIDIChannelPressureEvent) Pressure() uint {
-	return x.inner.Pressure()
+func (x *MIDIChannelPressureEvent) Pressure() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pressure"))
+	return _r
 }
 
-// SetPressure calls the underlying SetPressure.
-func (x *MIDIChannelPressureEvent) SetPressure(pressure uint) {
-	x.inner.SetPressure(pressure)
-}
-
-func (x *MIDIChannelPressureEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent {
-	return &x.inner.AVMIDIChannelEvent
-}
-
-func (x *MIDIChannelPressureEvent) asMusicEvent() *raw.AVMusicEvent {
-	return &x.inner.AVMIDIChannelEvent.AVMusicEvent
+func (x *MIDIChannelPressureEvent) SetPressure(pressure int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressure:"), pressure)
 }
 
 // MIDIChannelPressureEventable is the interface implemented by [MIDIChannelPressureEvent], for mocking and DI.
 type MIDIChannelPressureEventable interface {
-	Unwrap() *raw.AVMIDIChannelPressureEvent
-	WithPressure(pressure uint) *MIDIChannelPressureEvent
-	WithChannel(channel uint) *MIDIChannelPressureEvent
-	Pressure() uint
-	SetPressure(pressure uint)
+	obj.Object
+	WithPressure(pressure int) *MIDIChannelPressureEvent
+	WithChannel(channel int) *MIDIChannelPressureEvent
+	Pressure() int
+	SetPressure(pressure int)
 }
 
 var _ MIDIChannelPressureEventable = (*MIDIChannelPressureEvent)(nil)

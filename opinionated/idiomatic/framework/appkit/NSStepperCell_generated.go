@@ -5,506 +5,514 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An NSStepperCell object controls the appearance and behavior of an NSStepper object.
 //
-// StepperCell wraps [raw.NSStepperCell] with a fluent Go API.
+// StepperCell is an idiomatic wrapper over the Objective-C class NSStepperCell.
 type StepperCell struct {
-	inner *raw.NSStepperCell
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSStepperCell].
-func (x *StepperCell) Unwrap() *raw.NSStepperCell { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StepperCell) ID() objc.ID { return x.inner.Ptr() }
-
-// StepperCellFromID adopts an existing object pointer as a StepperCell (nil for 0).
+// StepperCellFromID adopts an existing Objective-C object as a StepperCell
+// (nil for 0), retaining it and registering a release finalizer.
 func StepperCellFromID(id objc.ID) *StepperCell {
 	if id == 0 {
 		return nil
 	}
-	return &StepperCell{inner: raw.NSStepperCellFromID(id)}
+	x := &StepperCell{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewStepperCell creates a new [StepperCell].
+// stepperCellAdopt wraps an Objective-C object that this code just created as a
+// StepperCell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func stepperCellAdopt(id objc.ID) *StepperCell {
+	if id == 0 {
+		return nil
+	}
+	x := &StepperCell{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *StepperCell) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StepperCell) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StepperCell) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewStepperCell creates a new StepperCell.
 func NewStepperCell() *StepperCell {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSStepperCell")), objc.RegisterName("new"))
-	return &StepperCell{inner: raw.NSStepperCellFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSStepperCell")), objc.RegisterName("new"))
+	return stepperCellAdopt(_id)
 }
 
 // The minimum value for the receiver.
 //
-// WithMinValue sets the minValue property and returns the receiver for chaining.
+// WithMinValue sets minValue and returns the receiver so calls can be chained.
 func (x *StepperCell) WithMinValue(minValue float64) *StepperCell {
-	x.inner.SetMinValue(minValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinValue:"), minValue)
 	return x
 }
 
 // The maximum value for the receiver.
 //
-// WithMaxValue sets the maxValue property and returns the receiver for chaining.
+// WithMaxValue sets maxValue and returns the receiver so calls can be chained.
 func (x *StepperCell) WithMaxValue(maxValue float64) *StepperCell {
-	x.inner.SetMaxValue(maxValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxValue:"), maxValue)
 	return x
 }
 
 // The amount by which the receiver will change per increment or decrement.
 //
-// WithIncrement sets the increment property and returns the receiver for chaining.
+// WithIncrement sets increment and returns the receiver so calls can be chained.
 func (x *StepperCell) WithIncrement(increment float64) *StepperCell {
-	x.inner.SetIncrement(increment)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncrement:"), increment)
 	return x
 }
 
 // A Boolean value indicating whether the receiver wraps around the minimum and maximum values.
 //
-// WithValueWraps sets the valueWraps property and returns the receiver for chaining.
+// WithValueWraps sets valueWraps and returns the receiver so calls can be chained.
 func (x *StepperCell) WithValueWraps(valueWraps bool) *StepperCell {
-	x.inner.SetValueWraps(valueWraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueWraps:"), valueWraps)
 	return x
 }
 
 // A Boolean value indicating how the receiver responds to mouse events.
 //
-// WithAutorepeat sets the autorepeat property and returns the receiver for chaining.
+// WithAutorepeat sets autorepeat and returns the receiver so calls can be chained.
 func (x *StepperCell) WithAutorepeat(autorepeat bool) *StepperCell {
-	x.inner.SetAutorepeat(autorepeat)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutorepeat:"), autorepeat)
 	return x
 }
 
 // The view associated with the cell.
 //
-// WithControlView sets the controlView property and returns the receiver for chaining.
+// WithControlView sets controlView and returns the receiver so calls can be chained.
 func (x *StepperCell) WithControlView(controlView ViewProvider) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	return x
 }
 
 // The type of the cell.
 //
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *StepperCell) WithType(type_ NSCellType) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
+// WithType sets type_ and returns the receiver so calls can be chained.
+func (x *StepperCell) WithType(type_ CellType) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
 // The cell’s current state.
 //
-// WithState sets the state property and returns the receiver for chaining.
+// WithState sets state and returns the receiver so calls can be chained.
 func (x *StepperCell) WithState(state int) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
 // The object that receives the cell’s action messages.
 //
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *StepperCell) WithTarget(target objc.ID) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetTarget(target)
-	return x
-}
-
-// The action performed by the cell.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *StepperCell) WithAction(action objc.SEL) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetAction(action)
+// WithTarget sets target and returns the receiver so calls can be chained.
+func (x *StepperCell) WithTarget(target obj.Object) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
 // A tag for identifying the cell.
 //
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag sets tag and returns the receiver so calls can be chained.
 func (x *StepperCell) WithTag(tag int) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
 // The cell’s title text.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *StepperCell) WithTitle(title string) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // A Boolean value indicating whether the cell is currently enabled.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *StepperCell) WithEnabled(enabled bool) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 //
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous sets continuous and returns the receiver so calls can be chained.
 func (x *StepperCell) WithContinuous(continuous bool) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
 // A Boolean value indicating whether the cell is editable.
 //
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable sets editable and returns the receiver so calls can be chained.
 func (x *StepperCell) WithEditable(editable bool) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
 // A Boolean value indicating whether the cell’s text can be selected.
 //
-// WithSelectable sets the selectable property and returns the receiver for chaining.
+// WithSelectable sets selectable and returns the receiver so calls can be chained.
 func (x *StepperCell) WithSelectable(selectable bool) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
 // A Boolean value indicating whether the cell draws itself outlined with a plain border.
 //
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered sets bordered and returns the receiver so calls can be chained.
 func (x *StepperCell) WithBordered(bordered bool) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
 // A Boolean value indicating whether the cell has a bezeled border.
 //
-// WithBezeled sets the bezeled property and returns the receiver for chaining.
+// WithBezeled sets bezeled and returns the receiver so calls can be chained.
 func (x *StepperCell) WithBezeled(bezeled bool) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
 // A Boolean value indicating whether excess text scrolls past the cell’s bounds.
 //
-// WithScrollable sets the scrollable property and returns the receiver for chaining.
+// WithScrollable sets scrollable and returns the receiver so calls can be chained.
 func (x *StepperCell) WithScrollable(scrollable bool) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
 	return x
 }
 
 // A Boolean value indicating whether the cell has a highlighted appearance.
 //
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
 func (x *StepperCell) WithHighlighted(highlighted bool) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
 // The alignment of the cell’s text.
 //
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *StepperCell) WithAlignment(alignment NSTextAlignment) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment sets alignment and returns the receiver so calls can be chained.
+func (x *StepperCell) WithAlignment(alignment TextAlignment) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
 // A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 //
-// WithWraps sets the wraps property and returns the receiver for chaining.
+// WithWraps sets wraps and returns the receiver so calls can be chained.
 func (x *StepperCell) WithWraps(wraps bool) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetWraps(wraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
 // The font that the cell uses to display text.
 //
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont sets font and returns the receiver so calls can be chained.
 func (x *StepperCell) WithFont(font *Font) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
 // The cell’s formatter object.
 //
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *StepperCell) WithFormatter(formatter *foundation.NSFormatter) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
+// WithFormatter sets formatter and returns the receiver so calls can be chained.
+func (x *StepperCell) WithFormatter(formatter obj.Object) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
 // The cell’s value as an Objective-C object.
 //
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *StepperCell) WithObjectValue(objectValue objc.ID) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
+// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+func (x *StepperCell) WithObjectValue(objectValue obj.Object) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
 // The cell’s value as a string.
 //
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue sets stringValue and returns the receiver so calls can be chained.
 func (x *StepperCell) WithStringValue(stringValue string) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
 // The cell’s value as an integer.
 //
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue sets intValue and returns the receiver so calls can be chained.
 func (x *StepperCell) WithIntValue(intValue int) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
 // The cell’s value as a single-precision floating-point number.
 //
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
 func (x *StepperCell) WithFloatValue(floatValue float32) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
 // The cell’s value as a double-precision floating-point number.
 //
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
 func (x *StepperCell) WithDoubleValue(doubleValue float64) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
 // The cell’s value as an integer value.
 //
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
 func (x *StepperCell) WithIntegerValue(integerValue int) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
 // The image displayed by the cell, if any.
 //
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage sets image and returns the receiver so calls can be chained.
 func (x *StepperCell) WithImage(image *Image) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
 // The size of the cell.
 //
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *StepperCell) WithControlSize(controlSize NSControlSize) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+func (x *StepperCell) WithControlSize(controlSize ControlSize) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
 // The object represented by the cell.
 //
-// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
-func (x *StepperCell) WithRepresentedObject(representedObject objc.ID) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+// WithRepresentedObject sets representedObject and returns the receiver so calls can be chained.
+func (x *StepperCell) WithRepresentedObject(representedObject obj.Object) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
 // The cell’s contextual menu.
 //
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu sets menu and returns the receiver so calls can be chained.
 func (x *StepperCell) WithMenu(menu *Menu) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
 // A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 //
-// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+// WithSendsActionOnEndEditing sets sendsActionOnEndEditing and returns the receiver so calls can be chained.
 func (x *StepperCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
 	return x
 }
 
 // The initial writing direction used to determine the actual writing direction for text.
 //
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *StepperCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+func (x *StepperCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
 // The line break mode to use when drawing text in the cell.
 //
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *StepperCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+func (x *StepperCell) WithLineBreakMode(lineBreakMode LineBreakMode) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
 // A Boolean value indicating whether the cell assumes responsibility for undo operations.
 //
-// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+// WithAllowsUndo sets allowsUndo and returns the receiver so calls can be chained.
 func (x *StepperCell) WithAllowsUndo(allowsUndo bool) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
 	return x
 }
 
 // A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 //
-// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+// WithTruncatesLastVisibleLine sets truncatesLastVisibleLine and returns the receiver so calls can be chained.
 func (x *StepperCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
 	return x
 }
 
 // The layout direction of the user interface.
 //
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *StepperCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+func (x *StepperCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
 // A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 //
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
 func (x *StepperCell) WithUsesSingleLineMode(usesSingleLineMode bool) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
 // A Boolean value indicating whether the cell refuses the first responder status.
 //
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
 func (x *StepperCell) WithRefusesFirstResponder(refusesFirstResponder bool) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
 // A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 //
-// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+// WithShowsFirstResponder sets showsFirstResponder and returns the receiver so calls can be chained.
 func (x *StepperCell) WithShowsFirstResponder(showsFirstResponder bool) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
 	return x
 }
 
 // The type of focus ring to use with the associated view.
 //
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *StepperCell) WithFocusRingType(focusRingType NSFocusRingType) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+func (x *StepperCell) WithFocusRingType(focusRingType FocusRingType) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
 // The cell’s value as an attributed string.
 //
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *StepperCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+func (x *StepperCell) WithAttributedStringValue(attributedStringValue obj.Object) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
 // A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 //
-// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+// WithAllowsEditingTextAttributes sets allowsEditingTextAttributes and returns the receiver so calls can be chained.
 func (x *StepperCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
 // A Boolean value indicating whether the cell supports the importation of images into its text.
 //
-// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+// WithImportsGraphics sets importsGraphics and returns the receiver so calls can be chained.
 func (x *StepperCell) WithImportsGraphics(importsGraphics bool) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
 // A Boolean value indicating whether the cell supports three states instead of two.
 //
-// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+// WithAllowsMixedState sets allowsMixedState and returns the receiver so calls can be chained.
 func (x *StepperCell) WithAllowsMixedState(allowsMixedState bool) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
 // The cell’s background style.
 //
-// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *StepperCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
+// WithBackgroundStyle sets backgroundStyle and returns the receiver so calls can be chained.
+func (x *StepperCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 	return x
 }
 
 // The cell’s control tint.
 //
-// WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *StepperCell) WithControlTint(controlTint NSControlTint) *StepperCell {
-	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
+// WithControlTint sets controlTint and returns the receiver so calls can be chained.
+func (x *StepperCell) WithControlTint(controlTint ControlTint) *StepperCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
 
-// MinValue calls the underlying MinValue.
 func (x *StepperCell) MinValue() float64 {
-	return x.inner.MinValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minValue"))
+	return _r
 }
 
-// SetMinValue calls the underlying SetMinValue.
 func (x *StepperCell) SetMinValue(minValue float64) {
-	x.inner.SetMinValue(minValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinValue:"), minValue)
 }
 
-// MaxValue calls the underlying MaxValue.
 func (x *StepperCell) MaxValue() float64 {
-	return x.inner.MaxValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxValue"))
+	return _r
 }
 
-// SetMaxValue calls the underlying SetMaxValue.
 func (x *StepperCell) SetMaxValue(maxValue float64) {
-	x.inner.SetMaxValue(maxValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxValue:"), maxValue)
 }
 
-// Increment calls the underlying Increment.
 func (x *StepperCell) Increment() float64 {
-	return x.inner.Increment()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("increment"))
+	return _r
 }
 
-// SetIncrement calls the underlying SetIncrement.
 func (x *StepperCell) SetIncrement(increment float64) {
-	x.inner.SetIncrement(increment)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncrement:"), increment)
 }
 
-// ValueWraps calls the underlying ValueWraps.
 func (x *StepperCell) ValueWraps() bool {
-	return x.inner.ValueWraps()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("valueWraps"))
+	return _r
 }
 
-// SetValueWraps calls the underlying SetValueWraps.
 func (x *StepperCell) SetValueWraps(valueWraps bool) {
-	x.inner.SetValueWraps(valueWraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueWraps:"), valueWraps)
 }
 
-// Autorepeat calls the underlying Autorepeat.
 func (x *StepperCell) Autorepeat() bool {
-	return x.inner.Autorepeat()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autorepeat"))
+	return _r
 }
 
-// SetAutorepeat calls the underlying SetAutorepeat.
 func (x *StepperCell) SetAutorepeat(autorepeat bool) {
-	x.inner.SetAutorepeat(autorepeat)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutorepeat:"), autorepeat)
 }
-
-func (x *StepperCell) asActionCell() *raw.NSActionCell { return &x.inner.NSActionCell }
-
-func (x *StepperCell) asCell() *raw.NSCell { return &x.inner.NSActionCell.NSCell }
 
 // StepperCellable is the interface implemented by [StepperCell], for mocking and DI.
 type StepperCellable interface {
-	Unwrap() *raw.NSStepperCell
+	obj.Object
 	WithMinValue(minValue float64) *StepperCell
 	WithMaxValue(maxValue float64) *StepperCell
 	WithIncrement(increment float64) *StepperCell
 	WithValueWraps(valueWraps bool) *StepperCell
 	WithAutorepeat(autorepeat bool) *StepperCell
 	WithControlView(controlView ViewProvider) *StepperCell
-	WithType(type_ NSCellType) *StepperCell
+	WithType(type_ CellType) *StepperCell
 	WithState(state int) *StepperCell
-	WithTarget(target objc.ID) *StepperCell
-	WithAction(action objc.SEL) *StepperCell
+	WithTarget(target obj.Object) *StepperCell
 	WithTag(tag int) *StepperCell
 	WithTitle(title string) *StepperCell
 	WithEnabled(enabled bool) *StepperCell
@@ -515,36 +523,36 @@ type StepperCellable interface {
 	WithBezeled(bezeled bool) *StepperCell
 	WithScrollable(scrollable bool) *StepperCell
 	WithHighlighted(highlighted bool) *StepperCell
-	WithAlignment(alignment NSTextAlignment) *StepperCell
+	WithAlignment(alignment TextAlignment) *StepperCell
 	WithWraps(wraps bool) *StepperCell
 	WithFont(font *Font) *StepperCell
-	WithFormatter(formatter *foundation.NSFormatter) *StepperCell
-	WithObjectValue(objectValue objc.ID) *StepperCell
+	WithFormatter(formatter obj.Object) *StepperCell
+	WithObjectValue(objectValue obj.Object) *StepperCell
 	WithStringValue(stringValue string) *StepperCell
 	WithIntValue(intValue int) *StepperCell
 	WithFloatValue(floatValue float32) *StepperCell
 	WithDoubleValue(doubleValue float64) *StepperCell
 	WithIntegerValue(integerValue int) *StepperCell
 	WithImage(image *Image) *StepperCell
-	WithControlSize(controlSize NSControlSize) *StepperCell
-	WithRepresentedObject(representedObject objc.ID) *StepperCell
+	WithControlSize(controlSize ControlSize) *StepperCell
+	WithRepresentedObject(representedObject obj.Object) *StepperCell
 	WithMenu(menu *Menu) *StepperCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *StepperCell
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *StepperCell
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *StepperCell
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *StepperCell
+	WithLineBreakMode(lineBreakMode LineBreakMode) *StepperCell
 	WithAllowsUndo(allowsUndo bool) *StepperCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *StepperCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *StepperCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *StepperCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *StepperCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *StepperCell
 	WithShowsFirstResponder(showsFirstResponder bool) *StepperCell
-	WithFocusRingType(focusRingType NSFocusRingType) *StepperCell
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *StepperCell
+	WithFocusRingType(focusRingType FocusRingType) *StepperCell
+	WithAttributedStringValue(attributedStringValue obj.Object) *StepperCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *StepperCell
 	WithImportsGraphics(importsGraphics bool) *StepperCell
 	WithAllowsMixedState(allowsMixedState bool) *StepperCell
-	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *StepperCell
-	WithControlTint(controlTint NSControlTint) *StepperCell
+	WithBackgroundStyle(backgroundStyle BackgroundStyle) *StepperCell
+	WithControlTint(controlTint ControlTint) *StepperCell
 	MinValue() float64
 	SetMinValue(minValue float64)
 	MaxValue() float64

@@ -5,70 +5,93 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A layer that fetches data at the locations you specify.
 //
-// GatherLayer wraps [raw.MLCGatherLayer] with a fluent Go API.
+// GatherLayer is an idiomatic wrapper over the Objective-C class MLCGatherLayer.
 type GatherLayer struct {
-	inner *raw.MLCGatherLayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCGatherLayer].
-func (x *GatherLayer) Unwrap() *raw.MLCGatherLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GatherLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// GatherLayerFromID adopts an existing object pointer as a GatherLayer (nil for 0).
+// GatherLayerFromID adopts an existing Objective-C object as a GatherLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func GatherLayerFromID(id objc.ID) *GatherLayer {
 	if id == 0 {
 		return nil
 	}
-	return &GatherLayer{inner: raw.MLCGatherLayerFromID(id)}
+	x := &GatherLayer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGatherLayer creates a new [GatherLayer].
+// gatherLayerAdopt wraps an Objective-C object that this code just created as a
+// GatherLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func gatherLayerAdopt(id objc.ID) *GatherLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &GatherLayer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GatherLayer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GatherLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GatherLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGatherLayer creates a new GatherLayer.
 func NewGatherLayer() *GatherLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCGatherLayer")), objc.RegisterName("new"))
-	return &GatherLayer{inner: raw.MLCGatherLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCGatherLayer")), objc.RegisterName("new"))
+	return gatherLayerAdopt(_id)
 }
 
 // A string that helps identify this layer.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *GatherLayer) WithLabel(label string) *GatherLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 //
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
 func (x *GatherLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *GatherLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// @property   dimension @abstract   The dimension along which to index
-//
-// Dimension calls the underlying Dimension.
-func (x *GatherLayer) Dimension() uint {
-	return x.inner.Dimension()
+// The dimension along which to index
+func (x *GatherLayer) Dimension() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimension"))
+	return _r
 }
-
-func (x *GatherLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // GatherLayerable is the interface implemented by [GatherLayer], for mocking and DI.
 type GatherLayerable interface {
-	Unwrap() *raw.MLCGatherLayer
+	obj.Object
 	WithLabel(label string) *GatherLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *GatherLayer
-	Dimension() uint
+	Dimension() int
 }
 
 var _ GatherLayerable = (*GatherLayer)(nil)

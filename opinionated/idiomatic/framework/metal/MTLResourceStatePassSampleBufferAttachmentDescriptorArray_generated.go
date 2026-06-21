@@ -5,63 +5,81 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An array of sample buffer attachments for a resource state pass.
 //
-// ResourceStatePassSampleBufferAttachmentDescriptorArray wraps [raw.MTLResourceStatePassSampleBufferAttachmentDescriptorArray] with a fluent Go API.
+// ResourceStatePassSampleBufferAttachmentDescriptorArray is an idiomatic wrapper over the Objective-C class MTLResourceStatePassSampleBufferAttachmentDescriptorArray.
 type ResourceStatePassSampleBufferAttachmentDescriptorArray struct {
-	inner *raw.MTLResourceStatePassSampleBufferAttachmentDescriptorArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLResourceStatePassSampleBufferAttachmentDescriptorArray].
-func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) Unwrap() *raw.MTLResourceStatePassSampleBufferAttachmentDescriptorArray {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) ID() objc.ID { return x.inner.Ptr() }
-
-// ResourceStatePassSampleBufferAttachmentDescriptorArrayFromID adopts an existing object pointer as a ResourceStatePassSampleBufferAttachmentDescriptorArray (nil for 0).
+// ResourceStatePassSampleBufferAttachmentDescriptorArrayFromID adopts an existing Objective-C object as a ResourceStatePassSampleBufferAttachmentDescriptorArray
+// (nil for 0), retaining it and registering a release finalizer.
 func ResourceStatePassSampleBufferAttachmentDescriptorArrayFromID(id objc.ID) *ResourceStatePassSampleBufferAttachmentDescriptorArray {
 	if id == 0 {
 		return nil
 	}
-	return &ResourceStatePassSampleBufferAttachmentDescriptorArray{inner: raw.MTLResourceStatePassSampleBufferAttachmentDescriptorArrayFromID(id)}
+	x := &ResourceStatePassSampleBufferAttachmentDescriptorArray{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewResourceStatePassSampleBufferAttachmentDescriptorArray creates a new [ResourceStatePassSampleBufferAttachmentDescriptorArray].
+// resourceStatePassSampleBufferAttachmentDescriptorArrayAdopt wraps an Objective-C object that this code just created as a
+// ResourceStatePassSampleBufferAttachmentDescriptorArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func resourceStatePassSampleBufferAttachmentDescriptorArrayAdopt(id objc.ID) *ResourceStatePassSampleBufferAttachmentDescriptorArray {
+	if id == 0 {
+		return nil
+	}
+	x := &ResourceStatePassSampleBufferAttachmentDescriptorArray{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewResourceStatePassSampleBufferAttachmentDescriptorArray creates a new ResourceStatePassSampleBufferAttachmentDescriptorArray.
 func NewResourceStatePassSampleBufferAttachmentDescriptorArray() *ResourceStatePassSampleBufferAttachmentDescriptorArray {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLResourceStatePassSampleBufferAttachmentDescriptorArray")), objc.RegisterName("new"))
-	return &ResourceStatePassSampleBufferAttachmentDescriptorArray{inner: raw.MTLResourceStatePassSampleBufferAttachmentDescriptorArrayFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLResourceStatePassSampleBufferAttachmentDescriptorArray")), objc.RegisterName("new"))
+	return resourceStatePassSampleBufferAttachmentDescriptorArrayAdopt(_id)
 }
 
 // Returns the descriptor object for the specified sample buffer attachment.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *ResourceStatePassSampleBufferAttachmentDescriptor {
-	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
-	if _r == nil {
-		return nil
-	}
-	return &ResourceStatePassSampleBufferAttachmentDescriptor{inner: _r}
+func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *ResourceStatePassSampleBufferAttachmentDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
+	return ResourceStatePassSampleBufferAttachmentDescriptorFromID(_r)
 }
 
 // Sets the descriptor object for the specified sample buffer attachment.
-//
-// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLResourceStatePassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
-	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)
+func (x *ResourceStatePassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *ResourceStatePassSampleBufferAttachmentDescriptor, attachmentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
 
 // ResourceStatePassSampleBufferAttachmentDescriptorArrayable is the interface implemented by [ResourceStatePassSampleBufferAttachmentDescriptorArray], for mocking and DI.
 type ResourceStatePassSampleBufferAttachmentDescriptorArrayable interface {
-	Unwrap() *raw.MTLResourceStatePassSampleBufferAttachmentDescriptorArray
-	ObjectAtIndexedSubscript(attachmentIndex uint) *ResourceStatePassSampleBufferAttachmentDescriptor
-	SetObjectAtIndexedSubscript(attachment *raw.MTLResourceStatePassSampleBufferAttachmentDescriptor, attachmentIndex uint)
+	obj.Object
+	ObjectAtIndexedSubscript(attachmentIndex int) *ResourceStatePassSampleBufferAttachmentDescriptor
+	SetObjectAtIndexedSubscript(attachment *ResourceStatePassSampleBufferAttachmentDescriptor, attachmentIndex int)
 }
 
 var _ ResourceStatePassSampleBufferAttachmentDescriptorArrayable = (*ResourceStatePassSampleBufferAttachmentDescriptorArray)(nil)

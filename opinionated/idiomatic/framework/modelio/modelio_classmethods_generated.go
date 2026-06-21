@@ -5,180 +5,61 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
+	"github.com/ebitengine/purego/objc"
 )
 
-// CanImportFileExtension calls the underlying MDLAssetCanImportFileExtension.
+// Returns a Boolean value that indicates whether the MDLAsset class can read asset data from files with the specified extension.
 func CanImportFileExtension(extension string) bool {
-	return raw.MDLAssetCanImportFileExtension(foundation.NSStringStringWithUTF8String(extension))
+	_r := objc.Send[bool](objc.ID(_class("MDLAsset")), objc.RegisterName("canImportFileExtension:"), purego.NSString(extension))
+	return _r
 }
 
-// CanExportFileExtension calls the underlying MDLAssetCanExportFileExtension.
+// Returns a Boolean value that indicates whether the MDLAsset class can write asset data as a file with the specified format extension.
 func CanExportFileExtension(extension string) bool {
-	return raw.MDLAssetCanExportFileExtension(foundation.NSStringStringWithUTF8String(extension))
+	_r := objc.Send[bool](objc.ID(_class("MDLAsset")), objc.RegisterName("canExportFileExtension:"), purego.NSString(extension))
+	return _r
 }
 
-// PlaceLightProbesWithDensityHeuristicUsingIrradianceDataSource calls the underlying MDLAssetPlaceLightProbesWithDensityHeuristicUsingIrradianceDataSource.
-func PlaceLightProbesWithDensityHeuristicUsingIrradianceDataSource(value float32, type_ MDLProbePlacement, dataSource raw.MDLLightProbeIrradianceDataSource) *foundation.NSArray[*raw.MDLLightProbe] {
-	return raw.MDLAssetPlaceLightProbesWithDensityHeuristicUsingIrradianceDataSource(value, raw.MDLProbePlacement(type_), dataSource)
+// Creates a light probe representing the shading environment at a specific point in a scene.
+func LightProbeWithTextureSizeForLocationLightsToConsiderObjectsToConsiderReflectiveCubemapIrradianceCubemap(textureSize int, transform *Transform, lightsToConsider []*Light, objectsToConsider []*Object, reflectiveCubemap *Texture, irradianceCubemap *Texture) *LightProbe {
+	_r := objc.Send[objc.ID](objc.ID(_class("MDLLightProbe")), objc.RegisterName("lightProbeWithTextureSize:forLocation:lightsToConsider:objectsToConsider:reflectiveCubemap:irradianceCubemap:"), textureSize, objref.IDOf(transform), purego.SliceToNSArray(lightsToConsider, func(_v *Light) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(objectsToConsider, func(_v *Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(reflectiveCubemap), objref.IDOf(irradianceCubemap))
+	return LightProbeFromID(_r)
 }
 
-// LightProbeWithTextureSizeForLocationLightsToConsiderObjectsToConsiderReflectiveCubemapIrradianceCubemap calls the underlying MDLLightProbeLightProbeWithTextureSizeForLocationLightsToConsiderObjectsToConsiderReflectiveCubemapIrradianceCubemap.
-func LightProbeWithTextureSizeForLocationLightsToConsiderObjectsToConsiderReflectiveCubemapIrradianceCubemap(textureSize int, transform *raw.MDLTransform, lightsToConsider *foundation.NSArray[*raw.MDLLight], objectsToConsider *foundation.NSArray[*raw.MDLObject], reflectiveCubemap *raw.MDLTexture, irradianceCubemap *raw.MDLTexture) *LightProbe {
-	_r := raw.MDLLightProbeLightProbeWithTextureSizeForLocationLightsToConsiderObjectsToConsiderReflectiveCubemapIrradianceCubemap(textureSize, transform, lightsToConsider, objectsToConsider, reflectiveCubemap, irradianceCubemap)
-	if _r == nil {
-		return nil
-	}
-	return &LightProbe{inner: _r}
+// Creates a new mesh by subdividing the specified mesh.
+func NewSubdividedMeshSubmeshIndexSubdivisionLevels(mesh *Mesh, submeshIndex int, subdivisionLevels int) *Mesh {
+	_r := objc.Send[objc.ID](objc.ID(_class("MDLMesh")), objc.RegisterName("newSubdividedMesh:submeshIndex:subdivisionLevels:"), objref.IDOf(mesh), submeshIndex, subdivisionLevels)
+	return MeshFromID(_r)
 }
 
-// NewBoxWithDimensionsSegmentsGeometryTypeInwardNormalsAllocator calls the underlying MDLMeshNewBoxWithDimensionsSegmentsGeometryTypeInwardNormalsAllocator.
-func NewBoxWithDimensionsSegmentsGeometryTypeInwardNormalsAllocator(dimensions unsafe.Pointer, segments unsafe.Pointer, geometryType MDLGeometryType, inwardNormals bool, allocator raw.MDLMeshBufferAllocator) *Mesh {
-	_r := raw.MDLMeshNewBoxWithDimensionsSegmentsGeometryTypeInwardNormalsAllocator(dimensions, segments, raw.MDLGeometryType(geometryType), inwardNormals, allocator)
-	if _r == nil {
-		return nil
-	}
-	return &Mesh{inner: _r}
-}
-
-// NewEllipsoidWithRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsHemisphereAllocator calls the underlying MDLMeshNewEllipsoidWithRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsHemisphereAllocator.
-func NewEllipsoidWithRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsHemisphereAllocator(radii unsafe.Pointer, radialSegments uint, verticalSegments uint, geometryType MDLGeometryType, inwardNormals bool, hemisphere bool, allocator raw.MDLMeshBufferAllocator) *Mesh {
-	_r := raw.MDLMeshNewEllipsoidWithRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsHemisphereAllocator(radii, radialSegments, verticalSegments, raw.MDLGeometryType(geometryType), inwardNormals, hemisphere, allocator)
-	if _r == nil {
-		return nil
-	}
-	return &Mesh{inner: _r}
-}
-
-// NewCylinderWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator calls the underlying MDLMeshNewCylinderWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator.
-func NewCylinderWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator(height float32, radii unsafe.Pointer, radialSegments uint, verticalSegments uint, geometryType MDLGeometryType, inwardNormals bool, allocator raw.MDLMeshBufferAllocator) *Mesh {
-	_r := raw.MDLMeshNewCylinderWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator(height, radii, radialSegments, verticalSegments, raw.MDLGeometryType(geometryType), inwardNormals, allocator)
-	if _r == nil {
-		return nil
-	}
-	return &Mesh{inner: _r}
-}
-
-// NewCapsuleWithHeightRadiiRadialSegmentsVerticalSegmentsHemisphereSegmentsGeometryTypeInwardNormalsAllocator calls the underlying MDLMeshNewCapsuleWithHeightRadiiRadialSegmentsVerticalSegmentsHemisphereSegmentsGeometryTypeInwardNormalsAllocator.
-func NewCapsuleWithHeightRadiiRadialSegmentsVerticalSegmentsHemisphereSegmentsGeometryTypeInwardNormalsAllocator(height float32, radii unsafe.Pointer, radialSegments uint, verticalSegments uint, hemisphereSegments uint, geometryType MDLGeometryType, inwardNormals bool, allocator raw.MDLMeshBufferAllocator) *Mesh {
-	_r := raw.MDLMeshNewCapsuleWithHeightRadiiRadialSegmentsVerticalSegmentsHemisphereSegmentsGeometryTypeInwardNormalsAllocator(height, radii, radialSegments, verticalSegments, hemisphereSegments, raw.MDLGeometryType(geometryType), inwardNormals, allocator)
-	if _r == nil {
-		return nil
-	}
-	return &Mesh{inner: _r}
-}
-
-// NewEllipticalConeWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator calls the underlying MDLMeshNewEllipticalConeWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator.
-func NewEllipticalConeWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator(height float32, radii unsafe.Pointer, radialSegments uint, verticalSegments uint, geometryType MDLGeometryType, inwardNormals bool, allocator raw.MDLMeshBufferAllocator) *Mesh {
-	_r := raw.MDLMeshNewEllipticalConeWithHeightRadiiRadialSegmentsVerticalSegmentsGeometryTypeInwardNormalsAllocator(height, radii, radialSegments, verticalSegments, raw.MDLGeometryType(geometryType), inwardNormals, allocator)
-	if _r == nil {
-		return nil
-	}
-	return &Mesh{inner: _r}
-}
-
-// NewPlaneWithDimensionsSegmentsGeometryTypeAllocator calls the underlying MDLMeshNewPlaneWithDimensionsSegmentsGeometryTypeAllocator.
-func NewPlaneWithDimensionsSegmentsGeometryTypeAllocator(dimensions unsafe.Pointer, segments unsafe.Pointer, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
-	_r := raw.MDLMeshNewPlaneWithDimensionsSegmentsGeometryTypeAllocator(dimensions, segments, raw.MDLGeometryType(geometryType), allocator)
-	if _r == nil {
-		return nil
-	}
-	return &Mesh{inner: _r}
-}
-
-// NewIcosahedronWithRadiusInwardNormalsGeometryTypeAllocator calls the underlying MDLMeshNewIcosahedronWithRadiusInwardNormalsGeometryTypeAllocator.
-func NewIcosahedronWithRadiusInwardNormalsGeometryTypeAllocator(radius float32, inwardNormals bool, geometryType MDLGeometryType, allocator raw.MDLMeshBufferAllocator) *Mesh {
-	_r := raw.MDLMeshNewIcosahedronWithRadiusInwardNormalsGeometryTypeAllocator(radius, inwardNormals, raw.MDLGeometryType(geometryType), allocator)
-	if _r == nil {
-		return nil
-	}
-	return &Mesh{inner: _r}
-}
-
-// NewIcosahedronWithRadiusInwardNormalsAllocator calls the underlying MDLMeshNewIcosahedronWithRadiusInwardNormalsAllocator.
-func NewIcosahedronWithRadiusInwardNormalsAllocator(radius float32, inwardNormals bool, allocator raw.MDLMeshBufferAllocator) *Mesh {
-	_r := raw.MDLMeshNewIcosahedronWithRadiusInwardNormalsAllocator(radius, inwardNormals, allocator)
-	if _r == nil {
-		return nil
-	}
-	return &Mesh{inner: _r}
-}
-
-// NewSubdividedMeshSubmeshIndexSubdivisionLevels calls the underlying MDLMeshNewSubdividedMeshSubmeshIndexSubdivisionLevels.
-func NewSubdividedMeshSubmeshIndexSubdivisionLevels(mesh *raw.MDLMesh, submeshIndex uint, subdivisionLevels uint) *Mesh {
-	_r := raw.MDLMeshNewSubdividedMeshSubmeshIndexSubdivisionLevels(mesh, submeshIndex, subdivisionLevels)
-	if _r == nil {
-		return nil
-	}
-	return &Mesh{inner: _r}
-}
-
-// TextureNamed calls the underlying MDLTextureTextureNamed.
+// Loads the texture with the specified filename from the app’s main bundle.
 func TextureNamed(name string) *Texture {
-	_r := raw.MDLTextureTextureNamed(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MDLTexture")), objc.RegisterName("textureNamed:"), purego.NSString(name))
+	return TextureFromID(_r)
 }
 
-// TextureNamedBundle calls the underlying MDLTextureTextureNamedBundle.
-func TextureNamedBundle(name string, bundleOrNil *foundation.NSBundle) *Texture {
-	_r := raw.MDLTextureTextureNamedBundle(foundation.NSStringStringWithUTF8String(name), bundleOrNil)
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+// Loads the texture with the specified filename from the specified bundle.
+func TextureNamedBundle(name string, bundleOrNil obj.Object) *Texture {
+	_r := objc.Send[objc.ID](objc.ID(_class("MDLTexture")), objc.RegisterName("textureNamed:bundle:"), purego.NSString(name), objref.IDOf(bundleOrNil))
+	return TextureFromID(_r)
 }
 
-// TextureNamedAssetResolver calls the underlying MDLTextureTextureNamedAssetResolver.
-func TextureNamedAssetResolver(name string, resolver raw.MDLAssetResolver) *Texture {
-	_r := raw.MDLTextureTextureNamedAssetResolver(foundation.NSStringStringWithUTF8String(name), resolver)
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+// Loads a cube texture from the specified image files in the app’s main bundle.
+func TextureCubeWithImagesNamed(names []string) *Texture {
+	_r := objc.Send[objc.ID](objc.ID(_class("MDLTexture")), objc.RegisterName("textureCubeWithImagesNamed:"), purego.SliceToNSArray(names, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return TextureFromID(_r)
 }
 
-// TextureCubeWithImagesNamed calls the underlying MDLTextureTextureCubeWithImagesNamed.
-func TextureCubeWithImagesNamed(names *foundation.NSArray[*foundation.NSString]) *Texture {
-	_r := raw.MDLTextureTextureCubeWithImagesNamed(names)
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+// Loads a cube texture from the specified image files in the specified bundle.
+func TextureCubeWithImagesNamedBundle(names []string, bundleOrNil obj.Object) *Texture {
+	_r := objc.Send[objc.ID](objc.ID(_class("MDLTexture")), objc.RegisterName("textureCubeWithImagesNamed:bundle:"), purego.SliceToNSArray(names, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(bundleOrNil))
+	return TextureFromID(_r)
 }
 
-// TextureCubeWithImagesNamedBundle calls the underlying MDLTextureTextureCubeWithImagesNamedBundle.
-func TextureCubeWithImagesNamedBundle(names *foundation.NSArray[*foundation.NSString], bundleOrNil *foundation.NSBundle) *Texture {
-	_r := raw.MDLTextureTextureCubeWithImagesNamedBundle(names, bundleOrNil)
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
-}
-
-// IrradianceTextureCubeWithTextureNameDimensions calls the underlying MDLTextureIrradianceTextureCubeWithTextureNameDimensions.
-func IrradianceTextureCubeWithTextureNameDimensions(texture *raw.MDLTexture, name string, dimensions unsafe.Pointer) *Texture {
-	_r := raw.MDLTextureIrradianceTextureCubeWithTextureNameDimensions(texture, foundation.NSStringStringWithUTF8String(name), dimensions)
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
-}
-
-// IrradianceTextureCubeWithTextureNameDimensionsRoughness calls the underlying MDLTextureIrradianceTextureCubeWithTextureNameDimensionsRoughness.
-func IrradianceTextureCubeWithTextureNameDimensionsRoughness(texture *raw.MDLTexture, name string, dimensions unsafe.Pointer, roughness float32) *Texture {
-	_r := raw.MDLTextureIrradianceTextureCubeWithTextureNameDimensionsRoughness(texture, foundation.NSStringStringWithUTF8String(name), dimensions, roughness)
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
-}
-
-// ConvertToUSDZWriteToURL calls the underlying MDLUtilityConvertToUSDZWriteToURL.
 func ConvertToUSDZWriteToURL(inputURL string, outputURL string) {
-	raw.MDLUtilityConvertToUSDZWriteToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(inputURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputURL)))
+	objc.Send[objc.ID](objc.ID(_class("MDLUtility")), objc.RegisterName("convertToUSDZ:writeToURL:"), rt.FileURL(inputURL), rt.FileURL(outputURL))
 }

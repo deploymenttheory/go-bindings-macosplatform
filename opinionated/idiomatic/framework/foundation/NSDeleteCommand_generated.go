@@ -5,125 +5,143 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A command that deletes a scriptable object.
 //
-// DeleteCommand wraps [raw.NSDeleteCommand] with a fluent Go API.
+// DeleteCommand is an idiomatic wrapper over the Objective-C class NSDeleteCommand.
 type DeleteCommand struct {
-	inner *raw.NSDeleteCommand
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSDeleteCommand].
-func (x *DeleteCommand) Unwrap() *raw.NSDeleteCommand { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DeleteCommand) ID() objc.ID { return x.inner.Ptr() }
-
-// DeleteCommandFromID adopts an existing object pointer as a DeleteCommand (nil for 0).
+// DeleteCommandFromID adopts an existing Objective-C object as a DeleteCommand
+// (nil for 0), retaining it and registering a release finalizer.
 func DeleteCommandFromID(id objc.ID) *DeleteCommand {
 	if id == 0 {
 		return nil
 	}
-	return &DeleteCommand{inner: raw.NSDeleteCommandFromID(id)}
+	x := &DeleteCommand{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDeleteCommand creates a new [DeleteCommand].
+// deleteCommandAdopt wraps an Objective-C object that this code just created as a
+// DeleteCommand (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func deleteCommandAdopt(id objc.ID) *DeleteCommand {
+	if id == 0 {
+		return nil
+	}
+	x := &DeleteCommand{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DeleteCommand) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DeleteCommand) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DeleteCommand) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDeleteCommand creates a new DeleteCommand.
 func NewDeleteCommand() *DeleteCommand {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDeleteCommand")), objc.RegisterName("new"))
-	return &DeleteCommand{inner: raw.NSDeleteCommandFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSDeleteCommand")), objc.RegisterName("new"))
+	return deleteCommandAdopt(_id)
 }
 
 // Sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
 //
-// WithDirectParameter sets the directParameter property and returns the receiver for chaining.
-func (x *DeleteCommand) WithDirectParameter(directParameter objc.ID) *DeleteCommand {
-	x.inner.NSScriptCommand.SetDirectParameter(directParameter)
+// WithDirectParameter sets directParameter and returns the receiver so calls can be chained.
+func (x *DeleteCommand) WithDirectParameter(directParameter obj.Object) *DeleteCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
 	return x
 }
 
 // Sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
 //
-// WithReceiversSpecifier sets the receiversSpecifier property and returns the receiver for chaining.
+// WithReceiversSpecifier sets receiversSpecifier and returns the receiver so calls can be chained.
 func (x *DeleteCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *DeleteCommand {
-	x.inner.NSScriptCommand.SetReceiversSpecifier(receiversSpecifier.asScriptObjectSpecifier())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
 	return x
 }
 
 // Sets the arguments of the command to args.
 //
-// WithArguments sets the arguments property and returns the receiver for chaining.
-func (x *DeleteCommand) WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *DeleteCommand {
-	x.inner.NSScriptCommand.SetArguments(arguments)
+// WithArguments sets arguments and returns the receiver so calls can be chained.
+func (x *DeleteCommand) WithArguments(arguments obj.Object) *DeleteCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
 	return x
 }
 
 // Sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
 //
-// WithScriptErrorNumber sets the scriptErrorNumber property and returns the receiver for chaining.
+// WithScriptErrorNumber sets scriptErrorNumber and returns the receiver so calls can be chained.
 func (x *DeleteCommand) WithScriptErrorNumber(scriptErrorNumber int) *DeleteCommand {
-	x.inner.NSScriptCommand.SetScriptErrorNumber(scriptErrorNumber)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorNumber:"), scriptErrorNumber)
 	return x
 }
 
 // Sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 //
-// WithScriptErrorOffendingObjectDescriptor sets the scriptErrorOffendingObjectDescriptor property and returns the receiver for chaining.
+// WithScriptErrorOffendingObjectDescriptor sets scriptErrorOffendingObjectDescriptor and returns the receiver so calls can be chained.
 func (x *DeleteCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *DeleteCommand {
-	x.inner.NSScriptCommand.SetScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
 	return x
 }
 
 // Sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 //
-// WithScriptErrorExpectedTypeDescriptor sets the scriptErrorExpectedTypeDescriptor property and returns the receiver for chaining.
+// WithScriptErrorExpectedTypeDescriptor sets scriptErrorExpectedTypeDescriptor and returns the receiver so calls can be chained.
 func (x *DeleteCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *DeleteCommand {
-	x.inner.NSScriptCommand.SetScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
 	return x
 }
 
 // Sets a script error string that is associated with execution of the command.
 //
-// WithScriptErrorString sets the scriptErrorString property and returns the receiver for chaining.
-func (x *DeleteCommand) WithScriptErrorString(scriptErrorString string) *DeleteCommand {
-	x.inner.NSScriptCommand.SetScriptErrorString(foundation.NSStringStringWithUTF8String(scriptErrorString))
+// WithScriptErrorString sets scriptErrorString and returns the receiver so calls can be chained.
+func (x *DeleteCommand) WithScriptErrorString(scriptErrorString StringProvider) *DeleteCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *DeleteCommand) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DeleteCommand {
-	x.inner.NSScriptCommand.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *DeleteCommand) WithScriptingProperties(scriptingProperties obj.Object) *DeleteCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// KeySpecifier calls the underlying KeySpecifier.
 func (x *DeleteCommand) KeySpecifier() *ScriptObjectSpecifier {
-	_r := x.inner.KeySpecifier()
-	if _r == nil {
-		return nil
-	}
-	return &ScriptObjectSpecifier{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keySpecifier"))
+	return ScriptObjectSpecifierFromID(_r)
 }
-
-func (x *DeleteCommand) asScriptCommand() *raw.NSScriptCommand { return &x.inner.NSScriptCommand }
-
-func (x *DeleteCommand) asObject() *raw.NSObject { return &x.inner.NSScriptCommand.NSObject }
 
 // DeleteCommandable is the interface implemented by [DeleteCommand], for mocking and DI.
 type DeleteCommandable interface {
-	Unwrap() *raw.NSDeleteCommand
-	WithDirectParameter(directParameter objc.ID) *DeleteCommand
+	obj.Object
+	WithDirectParameter(directParameter obj.Object) *DeleteCommand
 	WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *DeleteCommand
-	WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *DeleteCommand
+	WithArguments(arguments obj.Object) *DeleteCommand
 	WithScriptErrorNumber(scriptErrorNumber int) *DeleteCommand
 	WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *DeleteCommand
 	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *DeleteCommand
-	WithScriptErrorString(scriptErrorString string) *DeleteCommand
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DeleteCommand
+	WithScriptErrorString(scriptErrorString StringProvider) *DeleteCommand
+	WithScriptingProperties(scriptingProperties obj.Object) *DeleteCommand
 	KeySpecifier() *ScriptObjectSpecifier
 }
 

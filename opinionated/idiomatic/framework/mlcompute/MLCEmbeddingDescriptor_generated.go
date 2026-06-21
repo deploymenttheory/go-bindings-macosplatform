@@ -5,89 +5,109 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A configuration object you use to create an embedding layer.
 //
-// EmbeddingDescriptor wraps [raw.MLCEmbeddingDescriptor] with a fluent Go API.
+// EmbeddingDescriptor is an idiomatic wrapper over the Objective-C class MLCEmbeddingDescriptor.
 type EmbeddingDescriptor struct {
-	inner *raw.MLCEmbeddingDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCEmbeddingDescriptor].
-func (x *EmbeddingDescriptor) Unwrap() *raw.MLCEmbeddingDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EmbeddingDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// EmbeddingDescriptorFromID adopts an existing object pointer as a EmbeddingDescriptor (nil for 0).
+// EmbeddingDescriptorFromID adopts an existing Objective-C object as a EmbeddingDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func EmbeddingDescriptorFromID(id objc.ID) *EmbeddingDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &EmbeddingDescriptor{inner: raw.MLCEmbeddingDescriptorFromID(id)}
+	x := &EmbeddingDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEmbeddingDescriptor creates a new [EmbeddingDescriptor].
+// embeddingDescriptorAdopt wraps an Objective-C object that this code just created as a
+// EmbeddingDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func embeddingDescriptorAdopt(id objc.ID) *EmbeddingDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &EmbeddingDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EmbeddingDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EmbeddingDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EmbeddingDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEmbeddingDescriptor creates a new EmbeddingDescriptor.
 func NewEmbeddingDescriptor() *EmbeddingDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCEmbeddingDescriptor")), objc.RegisterName("new"))
-	return &EmbeddingDescriptor{inner: raw.MLCEmbeddingDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCEmbeddingDescriptor")), objc.RegisterName("new"))
+	return embeddingDescriptorAdopt(_id)
 }
 
-// @property   embeddingCount @abstract   The size of the dictionary
-//
-// EmbeddingCount calls the underlying EmbeddingCount.
-func (x *EmbeddingDescriptor) EmbeddingCount() *foundation.NSNumber {
-	return x.inner.EmbeddingCount()
+// The size of the dictionary
+func (x *EmbeddingDescriptor) EmbeddingCount() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("embeddingCount"))
+	return obj.Wrap(_r)
 }
 
-// @property   embeddingDimension @abstract   The dimension of embedding vectors
-//
-// EmbeddingDimension calls the underlying EmbeddingDimension.
-func (x *EmbeddingDescriptor) EmbeddingDimension() *foundation.NSNumber {
-	return x.inner.EmbeddingDimension()
+// The dimension of embedding vectors
+func (x *EmbeddingDescriptor) EmbeddingDimension() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("embeddingDimension"))
+	return obj.Wrap(_r)
 }
 
-// @property   paddingIndex @abstract   If set, the embedding vector at paddingIndex is initialized with zero and will not be updated in gradient pass, Default=nil
-//
-// PaddingIndex calls the underlying PaddingIndex.
-func (x *EmbeddingDescriptor) PaddingIndex() *foundation.NSNumber {
-	return x.inner.PaddingIndex()
+// If set, the embedding vector at paddingIndex is initialized with zero and will not be updated in gradient pass, Default=nil
+func (x *EmbeddingDescriptor) PaddingIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddingIndex"))
+	return obj.Wrap(_r)
 }
 
-// @property   maximumNorm @abstract   A float, if set, in the forward pass only, the selected embedding vectors will be re-normalized to have an Lp norm of less than maximumNorm in the dictionary, Default=nil
-//
-// MaximumNorm calls the underlying MaximumNorm.
-func (x *EmbeddingDescriptor) MaximumNorm() *foundation.NSNumber {
-	return x.inner.MaximumNorm()
+// A float, if set, in the forward pass only, the selected embedding vectors will be re-normalized to have an Lp norm of less than maximumNorm in the dictionary, Default=nil
+func (x *EmbeddingDescriptor) MaximumNorm() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumNorm"))
+	return obj.Wrap(_r)
 }
 
-// @property   pNorm @abstract   A float, the p of the Lp norm, can be set to infinity norm by [NSNumber numberWithFloat:INFINITY]. Default=2.0
-//
-// PNorm calls the underlying PNorm.
-func (x *EmbeddingDescriptor) PNorm() *foundation.NSNumber {
-	return x.inner.PNorm()
+// A float, the p of the Lp norm, can be set to infinity norm by [NSNumber numberWithFloat:INFINITY]. Default=2.0
+func (x *EmbeddingDescriptor) PNorm() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pNorm"))
+	return obj.Wrap(_r)
 }
 
-// @property   scalesGradientByFrequency @abstract   If set, the gradients are scaled by the inverse of the frequency of the words in batch before the weight update. Default=NO
-//
-// ScalesGradientByFrequency calls the underlying ScalesGradientByFrequency.
+// If set, the gradients are scaled by the inverse of the frequency of the words in batch before the weight update. Default=NO
 func (x *EmbeddingDescriptor) ScalesGradientByFrequency() bool {
-	return x.inner.ScalesGradientByFrequency()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("scalesGradientByFrequency"))
+	return _r
 }
 
 // EmbeddingDescriptorable is the interface implemented by [EmbeddingDescriptor], for mocking and DI.
 type EmbeddingDescriptorable interface {
-	Unwrap() *raw.MLCEmbeddingDescriptor
-	EmbeddingCount() *foundation.NSNumber
-	EmbeddingDimension() *foundation.NSNumber
-	PaddingIndex() *foundation.NSNumber
-	MaximumNorm() *foundation.NSNumber
-	PNorm() *foundation.NSNumber
+	obj.Object
+	EmbeddingCount() obj.Object
+	EmbeddingDimension() obj.Object
+	PaddingIndex() obj.Object
+	MaximumNorm() obj.Object
+	PNorm() obj.Object
 	ScalesGradientByFrequency() bool
 }
 

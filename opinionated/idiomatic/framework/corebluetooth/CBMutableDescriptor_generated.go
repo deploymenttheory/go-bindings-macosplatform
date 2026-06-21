@@ -5,48 +5,71 @@
 package corebluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides additional information about a local peripheral’s characteristic.
 //
-// MutableDescriptor wraps [raw.CBMutableDescriptor] with a fluent Go API.
+// MutableDescriptor is an idiomatic wrapper over the Objective-C class CBMutableDescriptor.
 type MutableDescriptor struct {
-	inner *raw.CBMutableDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CBMutableDescriptor].
-func (x *MutableDescriptor) Unwrap() *raw.CBMutableDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableDescriptorFromID adopts an existing object pointer as a MutableDescriptor (nil for 0).
+// MutableDescriptorFromID adopts an existing Objective-C object as a MutableDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableDescriptorFromID(id objc.ID) *MutableDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MutableDescriptor{inner: raw.CBMutableDescriptorFromID(id)}
+	x := &MutableDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mutableDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MutableDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableDescriptorAdopt(id objc.ID) *MutableDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MutableDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MutableDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MutableDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a mutable descriptor with a specified value.
 //
-// NewMutableDescriptorWithTypeValue creates a new [MutableDescriptor].
-func NewMutableDescriptorWithTypeValue(uUID *raw.CBUUID, value objc.ID) *MutableDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CBMutableDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:value:"), uUID.Ptr(), value)
-	return &MutableDescriptor{inner: raw.CBMutableDescriptorFromID(_id)}
+// NewMutableDescriptorWithTypeValue creates a new MutableDescriptor.
+func NewMutableDescriptorWithTypeValue(uUID *UUID, value obj.Object) *MutableDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CBMutableDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:value:"), objref.IDOf(uUID), objref.IDOf(value))
+	return mutableDescriptorAdopt(_id)
 }
-
-func (x *MutableDescriptor) asDescriptor() *raw.CBDescriptor { return &x.inner.CBDescriptor }
-
-func (x *MutableDescriptor) asAttribute() *raw.CBAttribute { return &x.inner.CBDescriptor.CBAttribute }
 
 // MutableDescriptorable is the interface implemented by [MutableDescriptor], for mocking and DI.
 type MutableDescriptorable interface {
-	Unwrap() *raw.CBMutableDescriptor
+	obj.Object
 }
 
 var _ MutableDescriptorable = (*MutableDescriptor)(nil)

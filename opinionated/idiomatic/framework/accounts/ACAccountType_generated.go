@@ -5,65 +5,89 @@
 package accounts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accounts"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that encapsulates information about all accounts of a particular type.
 //
-// AccountType wraps [raw.ACAccountType] with a fluent Go API.
+// AccountType is an idiomatic wrapper over the Objective-C class ACAccountType.
 type AccountType struct {
-	inner *raw.ACAccountType
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ACAccountType].
-func (x *AccountType) Unwrap() *raw.ACAccountType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AccountType) ID() objc.ID { return x.inner.Ptr() }
-
-// AccountTypeFromID adopts an existing object pointer as a AccountType (nil for 0).
+// AccountTypeFromID adopts an existing Objective-C object as a AccountType
+// (nil for 0), retaining it and registering a release finalizer.
 func AccountTypeFromID(id objc.ID) *AccountType {
 	if id == 0 {
 		return nil
 	}
-	return &AccountType{inner: raw.ACAccountTypeFromID(id)}
+	x := &AccountType{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAccountType creates a new [AccountType].
+// accountTypeAdopt wraps an Objective-C object that this code just created as a
+// AccountType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func accountTypeAdopt(id objc.ID) *AccountType {
+	if id == 0 {
+		return nil
+	}
+	x := &AccountType{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AccountType) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AccountType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AccountType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAccountType creates a new AccountType.
 func NewAccountType() *AccountType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ACAccountType")), objc.RegisterName("new"))
-	return &AccountType{inner: raw.ACAccountTypeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ACAccountType")), objc.RegisterName("new"))
+	return accountTypeAdopt(_id)
 }
 
-// AccountTypeDescription calls the underlying AccountTypeDescription.
 func (x *AccountType) AccountTypeDescription() string {
-	_r := x.inner.AccountTypeDescription()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountTypeDescription"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Identifier calls the underlying Identifier.
 func (x *AccountType) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// AccessGranted calls the underlying AccessGranted.
 func (x *AccountType) AccessGranted() bool {
-	return x.inner.AccessGranted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accessGranted"))
+	return _r
 }
 
 // AccountTypeable is the interface implemented by [AccountType], for mocking and DI.
 type AccountTypeable interface {
-	Unwrap() *raw.ACAccountType
+	obj.Object
 	AccountTypeDescription() string
 	Identifier() string
 	AccessGranted() bool

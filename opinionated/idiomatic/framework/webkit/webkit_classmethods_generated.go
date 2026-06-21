@@ -6,76 +6,60 @@ package webkit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// DefaultStore calls the underlying WKContentRuleListStoreDefaultStore.
+// Returns the default content rule list store.
 func DefaultStore() *WKContentRuleListStore {
-	_r := raw.WKContentRuleListStoreDefaultStore()
-	if _r == nil {
-		return nil
-	}
-	return &WKContentRuleListStore{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("WKContentRuleListStore")), objc.RegisterName("defaultStore"))
+	return WKContentRuleListStoreFromID(_r)
 }
 
-// StoreWithURL calls the underlying WKContentRuleListStoreStoreWithURL.
+// Creates a new content rule list store in the specified directory.
 func StoreWithURL(url string) *WKContentRuleListStore {
-	_r := raw.WKContentRuleListStoreStoreWithURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _r == nil {
-		return nil
-	}
-	return &WKContentRuleListStore{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("WKContentRuleListStore")), objc.RegisterName("storeWithURL:"), rt.FileURL(url))
+	return WKContentRuleListStoreFromID(_r)
 }
 
-// WorldWithName calls the underlying WKContentWorldWorldWithName.
+// Returns the custom content world with the specified name.
 func WorldWithName(name string) *WKContentWorld {
-	_r := raw.WKContentWorldWorldWithName(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &WKContentWorld{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("WKContentWorld")), objc.RegisterName("worldWithName:"), purego.NSString(name))
+	return WKContentWorldFromID(_r)
 }
 
-// PageWorld calls the underlying WKContentWorldPageWorld.
+// Retrieve the main world that page content itself uses. When interacting with page content in a WKWebView using the page content world you can disrupt the operation of page content (e.g. by conflicting with variable names in JavaScript set by the web page content itself).
 func PageWorld() *WKContentWorld {
-	_r := raw.WKContentWorldPageWorld()
-	if _r == nil {
-		return nil
-	}
-	return &WKContentWorld{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("WKContentWorld")), objc.RegisterName("pageWorld"))
+	return WKContentWorldFromID(_r)
 }
 
-// DefaultClientWorld calls the underlying WKContentWorldDefaultClientWorld.
+// Retrieve the default world for API client use. When using a content world different from the page content world you can still manipulate the DOM and built-in DOM APIs but without conflicting with other aspects of the page content (e.g. JavaScript from the web page content itself) Repeated calls will retrieve the same WKContentWorld instance.
 func DefaultClientWorld() *WKContentWorld {
-	_r := raw.WKContentWorldDefaultClientWorld()
-	if _r == nil {
-		return nil
-	}
-	return &WKContentWorld{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("WKContentWorld")), objc.RegisterName("defaultClientWorld"))
+	return WKContentWorldFromID(_r)
 }
 
+// Returns a web extension initialized with a specified app extension bundle.
+//
 // ExtensionWithAppExtensionBundle blocks until the operation completes or ctx is cancelled.
-func ExtensionWithAppExtensionBundle(ctx context.Context, appExtensionBundle *foundation.NSBundle) (*WKWebExtension, error) {
+func ExtensionWithAppExtensionBundle(ctx context.Context, appExtensionBundle obj.Object) (*WKWebExtension, error) {
 	type _result struct {
 		val *WKWebExtension
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.WKWebExtensionExtensionWithAppExtensionBundleCompletionHandler(appExtensionBundle, func(_p0 *raw.WKWebExtension, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &WKWebExtension{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = WKWebExtensionFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("WKWebExtension")), objc.RegisterName("extensionWithAppExtensionBundle:completionHandler:"), objref.IDOf(appExtensionBundle), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -85,6 +69,8 @@ func ExtensionWithAppExtensionBundle(ctx context.Context, appExtensionBundle *fo
 	}
 }
 
+// Returns a web extension initialized with a specified resource base URL, which can point to either a directory or a ZIP archive.
+//
 // ExtensionWithResourceBaseURL blocks until the operation completes or ctx is cancelled.
 func ExtensionWithResourceBaseURL(ctx context.Context, resourceBaseURL string) (*WKWebExtension, error) {
 	type _result struct {
@@ -92,16 +78,13 @@ func ExtensionWithResourceBaseURL(ctx context.Context, resourceBaseURL string) (
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.WKWebExtensionExtensionWithResourceBaseURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(resourceBaseURL)), func(_p0 *raw.WKWebExtension, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &WKWebExtension{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = WKWebExtensionFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("WKWebExtension")), objc.RegisterName("extensionWithResourceBaseURL:completionHandler:"), rt.FileURL(resourceBaseURL), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -111,212 +94,167 @@ func ExtensionWithResourceBaseURL(ctx context.Context, resourceBaseURL string) (
 	}
 }
 
-// ContextForExtension calls the underlying WKWebExtensionContextContextForExtension.
-func ContextForExtension(extension *raw.WKWebExtension) *WKWebExtensionContext {
-	_r := raw.WKWebExtensionContextContextForExtension(extension)
-	if _r == nil {
-		return nil
-	}
-	return &WKWebExtensionContext{inner: _r}
+// Returns a web extension context initialized with the specified extension.
+func ContextForExtension(extension *WKWebExtension) *WKWebExtensionContext {
+	_r := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionContext")), objc.RegisterName("contextForExtension:"), objref.IDOf(extension))
+	return WKWebExtensionContextFromID(_r)
 }
 
-// AllExtensionDataTypes calls the underlying WKWebExtensionControllerAllExtensionDataTypes.
-func AllExtensionDataTypes() *foundation.NSSet[*foundation.NSString] {
-	return raw.WKWebExtensionControllerAllExtensionDataTypes()
+// Returns a set of all available extension data types.
+func AllExtensionDataTypes() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionController")), objc.RegisterName("allExtensionDataTypes"))
+	return obj.Wrap(_r)
 }
 
-// DefaultConfiguration calls the underlying WKWebExtensionControllerConfigurationDefaultConfiguration.
+// Returns a new default configuration that is persistent and not unique. If a “WKWebExtensionController“ is associated with a persistent configuration, data will be written to the file system in a common location. When using multiple extension controllers, each controller should use a unique configuration to avoid conflicts.
 func DefaultConfiguration() *WKWebExtensionControllerConfiguration {
-	_r := raw.WKWebExtensionControllerConfigurationDefaultConfiguration()
-	if _r == nil {
-		return nil
-	}
-	return &WKWebExtensionControllerConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionControllerConfiguration")), objc.RegisterName("defaultConfiguration"))
+	return WKWebExtensionControllerConfigurationFromID(_r)
 }
 
-// NonPersistentConfiguration calls the underlying WKWebExtensionControllerConfigurationNonPersistentConfiguration.
+// Returns a new non-persistent configuration. If a “WKWebExtensionController“ is associated with a non-persistent configuration, no data will be written to the file system. This is useful for extensions in "private browsing" situations.
 func NonPersistentConfiguration() *WKWebExtensionControllerConfiguration {
-	_r := raw.WKWebExtensionControllerConfigurationNonPersistentConfiguration()
-	if _r == nil {
-		return nil
-	}
-	return &WKWebExtensionControllerConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionControllerConfiguration")), objc.RegisterName("nonPersistentConfiguration"))
+	return WKWebExtensionControllerConfigurationFromID(_r)
 }
 
-// ConfigurationWithIdentifier calls the underlying WKWebExtensionControllerConfigurationConfigurationWithIdentifier.
-func ConfigurationWithIdentifier(identifier *foundation.NSUUID) *WKWebExtensionControllerConfiguration {
-	_r := raw.WKWebExtensionControllerConfigurationConfigurationWithIdentifier(identifier)
-	if _r == nil {
-		return nil
-	}
-	return &WKWebExtensionControllerConfiguration{inner: _r}
+// Returns a new configuration that is persistent and unique for the specified identifier. If a “WKWebExtensionController“ is associated with a unique persistent configuration, data will be written to the file system in a unique location based on the specified identifier.
+func ConfigurationWithIdentifier(identifier obj.Object) *WKWebExtensionControllerConfiguration {
+	_r := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionControllerConfiguration")), objc.RegisterName("configurationWithIdentifier:"), objref.IDOf(identifier))
+	return WKWebExtensionControllerConfigurationFromID(_r)
 }
 
-// RegisterCustomURLScheme calls the underlying WKWebExtensionMatchPatternRegisterCustomURLScheme.
+// Registers a custom URL scheme that can be used in match patterns. This method should be used to register any custom URL schemes used by the app for the extension base URLs, other than `webkit-extension`, or if extensions should have access to other supported URL schemes when using `<all_urls>`.
 func RegisterCustomURLScheme(urlScheme string) {
-	raw.WKWebExtensionMatchPatternRegisterCustomURLScheme(foundation.NSStringStringWithUTF8String(urlScheme))
+	objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMatchPattern")), objc.RegisterName("registerCustomURLScheme:"), purego.NSString(urlScheme))
 }
 
-// AllURLsMatchPattern calls the underlying WKWebExtensionMatchPatternAllURLsMatchPattern.
+// Returns a pattern object for `<all_urls>`.
 func AllURLsMatchPattern() *WKWebExtensionMatchPattern {
-	_r := raw.WKWebExtensionMatchPatternAllURLsMatchPattern()
-	if _r == nil {
-		return nil
-	}
-	return &WKWebExtensionMatchPattern{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMatchPattern")), objc.RegisterName("allURLsMatchPattern"))
+	return WKWebExtensionMatchPatternFromID(_r)
 }
 
-// AllHostsAndSchemesMatchPattern calls the underlying WKWebExtensionMatchPatternAllHostsAndSchemesMatchPattern.
+// Returns a pattern object that has `*` for scheme, host, and path.
 func AllHostsAndSchemesMatchPattern() *WKWebExtensionMatchPattern {
-	_r := raw.WKWebExtensionMatchPatternAllHostsAndSchemesMatchPattern()
-	if _r == nil {
-		return nil
-	}
-	return &WKWebExtensionMatchPattern{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMatchPattern")), objc.RegisterName("allHostsAndSchemesMatchPattern"))
+	return WKWebExtensionMatchPatternFromID(_r)
 }
 
-// MatchPatternWithString calls the underlying WKWebExtensionMatchPatternMatchPatternWithString.
+// Returns a pattern object for the specified pattern string.
 func MatchPatternWithString(string_ string) *WKWebExtensionMatchPattern {
-	_r := raw.WKWebExtensionMatchPatternMatchPatternWithString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
-	}
-	return &WKWebExtensionMatchPattern{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMatchPattern")), objc.RegisterName("matchPatternWithString:"), purego.NSString(string_))
+	return WKWebExtensionMatchPatternFromID(_r)
 }
 
-// MatchPatternWithSchemeHostPath calls the underlying WKWebExtensionMatchPatternMatchPatternWithSchemeHostPath.
+// Returns a pattern object for the specified scheme, host, and path strings.
 func MatchPatternWithSchemeHostPath(scheme string, host string, path string) *WKWebExtensionMatchPattern {
-	_r := raw.WKWebExtensionMatchPatternMatchPatternWithSchemeHostPath(foundation.NSStringStringWithUTF8String(scheme), foundation.NSStringStringWithUTF8String(host), foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
-	}
-	return &WKWebExtensionMatchPattern{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMatchPattern")), objc.RegisterName("matchPatternWithScheme:host:path:"), purego.NSString(scheme), purego.NSString(host), purego.NSString(path))
+	return WKWebExtensionMatchPatternFromID(_r)
 }
 
-// HandlesURLScheme calls the underlying WKWebViewHandlesURLScheme.
+// Returns a Boolean value that indicates whether WebKit natively supports resources with the specified URL scheme.
 func HandlesURLScheme(urlScheme string) bool {
-	return raw.WKWebViewHandlesURLScheme(foundation.NSStringStringWithUTF8String(urlScheme))
+	_r := objc.Send[bool](objc.ID(_class("WKWebView")), objc.RegisterName("handlesURLScheme:"), purego.NSString(urlScheme))
+	return _r
 }
 
-// DefaultDataStore calls the underlying WKWebsiteDataStoreDefaultDataStore.
+// Returns the default data store, which stores data persistently to disk.
 func DefaultDataStore() *WKWebsiteDataStore {
-	_r := raw.WKWebsiteDataStoreDefaultDataStore()
-	if _r == nil {
-		return nil
-	}
-	return &WKWebsiteDataStore{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("WKWebsiteDataStore")), objc.RegisterName("defaultDataStore"))
+	return WKWebsiteDataStoreFromID(_r)
 }
 
-// NonPersistentDataStore calls the underlying WKWebsiteDataStoreNonPersistentDataStore.
+// Creates a new data store object that stores website data in memory, and doesn’t write that data to disk.
 func NonPersistentDataStore() *WKWebsiteDataStore {
-	_r := raw.WKWebsiteDataStoreNonPersistentDataStore()
-	if _r == nil {
-		return nil
-	}
-	return &WKWebsiteDataStore{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("WKWebsiteDataStore")), objc.RegisterName("nonPersistentDataStore"))
+	return WKWebsiteDataStoreFromID(_r)
 }
 
-// AllWebsiteDataTypes calls the underlying WKWebsiteDataStoreAllWebsiteDataTypes.
-func AllWebsiteDataTypes() *foundation.NSSet[*foundation.NSString] {
-	return raw.WKWebsiteDataStoreAllWebsiteDataTypes()
+// Returns the set of all the available data types.
+func AllWebsiteDataTypes() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("WKWebsiteDataStore")), objc.RegisterName("allWebsiteDataTypes"))
+	return obj.Wrap(_r)
 }
 
-// DataStoreForIdentifier calls the underlying WKWebsiteDataStoreDataStoreForIdentifier.
-func DataStoreForIdentifier(identifier *foundation.NSUUID) *WKWebsiteDataStore {
-	_r := raw.WKWebsiteDataStoreDataStoreForIdentifier(identifier)
-	if _r == nil {
-		return nil
-	}
-	return &WKWebsiteDataStore{inner: _r}
+// Returns the persistent data store with the unique identifier you provide.
+func DataStoreForIdentifier(identifier obj.Object) *WKWebsiteDataStore {
+	_r := objc.Send[objc.ID](objc.ID(_class("WKWebsiteDataStore")), objc.RegisterName("dataStoreForIdentifier:"), objref.IDOf(identifier))
+	return WKWebsiteDataStoreFromID(_r)
 }
 
-// RemoveDataStoreForIdentifierCompletionHandler calls the underlying WKWebsiteDataStoreRemoveDataStoreForIdentifierCompletionHandler.
-func RemoveDataStoreForIdentifierCompletionHandler(identifier *foundation.NSUUID, completionHandler func(unsafe.Pointer)) {
-	raw.WKWebsiteDataStoreRemoveDataStoreForIdentifierCompletionHandler(identifier, completionHandler)
+// Fetches an array of identifiers from existing data stores that have identifiers.
+func FetchAllDataStoreIdentifiers(completionHandler func(obj.Object) int) {
+	objc.Send[objc.ID](objc.ID(_class("WKWebsiteDataStore")), objc.RegisterName("fetchAllDataStoreIdentifiers:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) int { return completionHandler(obj.Wrap(_b0)) }))
 }
 
-// FetchAllDataStoreIdentifiers calls the underlying WKWebsiteDataStoreFetchAllDataStoreIdentifiers.
-func FetchAllDataStoreIdentifiers(completionHandler func(*foundation.NSArray[*foundation.NSUUID])) {
-	raw.WKWebsiteDataStoreFetchAllDataStoreIdentifiers(completionHandler)
-}
-
-// OptionalSharedHistory calls the underlying WebHistoryOptionalSharedHistory.
+// Returns a shared web history object, if one exists.
 func OptionalSharedHistory() *WebHistory {
-	_r := raw.WebHistoryOptionalSharedHistory()
-	if _r == nil {
-		return nil
-	}
-	return &WebHistory{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("WebHistory")), objc.RegisterName("optionalSharedHistory"))
+	return WebHistoryFromID(_r)
 }
 
-// SetOptionalSharedHistory calls the underlying WebHistorySetOptionalSharedHistory.
-func SetOptionalSharedHistory(history *raw.WebHistory) {
-	raw.WebHistorySetOptionalSharedHistory(history)
+// Sets the web history object to share.
+func SetOptionalSharedHistory(history *WebHistory) {
+	objc.Send[objc.ID](objc.ID(_class("WebHistory")), objc.RegisterName("setOptionalSharedHistory:"), objref.IDOf(history))
 }
 
-// StandardPreferences calls the underlying WebPreferencesStandardPreferences.
+// Returns the standard set of preferences that may be used by all WebView objects.
 func StandardPreferences() *WebPreferences {
-	_r := raw.WebPreferencesStandardPreferences()
-	if _r == nil {
-		return nil
-	}
-	return &WebPreferences{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("WebPreferences")), objc.RegisterName("standardPreferences"))
+	return WebPreferencesFromID(_r)
 }
 
-// ThrowException calls the underlying WebScriptObjectThrowException.
+// Raises an exception in the current script execution context.
 func ThrowException(exceptionMessage string) bool {
-	return raw.WebScriptObjectThrowException(foundation.NSStringStringWithUTF8String(exceptionMessage))
+	_r := objc.Send[bool](objc.ID(_class("WebScriptObject")), objc.RegisterName("throwException:"), purego.NSString(exceptionMessage))
+	return _r
 }
 
-// Undefined calls the underlying WebUndefinedUndefined.
+// Returns the shared WebUndefined instance.
 func Undefined() *WebUndefined {
-	_r := raw.WebUndefinedUndefined()
-	if _r == nil {
-		return nil
-	}
-	return &WebUndefined{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("WebUndefined")), objc.RegisterName("undefined"))
+	return WebUndefinedFromID(_r)
 }
 
-// CanShowMIMEType calls the underlying WebViewCanShowMIMEType.
+// Checks if the WebKit can show content of a certain MIME type.
 func CanShowMIMEType(mIMEType string) bool {
-	return raw.WebViewCanShowMIMEType(foundation.NSStringStringWithUTF8String(mIMEType))
+	_r := objc.Send[bool](objc.ID(_class("WebView")), objc.RegisterName("canShowMIMEType:"), purego.NSString(mIMEType))
+	return _r
 }
 
-// CanShowMIMETypeAsHTML calls the underlying WebViewCanShowMIMETypeAsHTML.
+// Checks if the MIME type is a type that the WebKit will interpret as HTML.
 func CanShowMIMETypeAsHTML(mIMEType string) bool {
-	return raw.WebViewCanShowMIMETypeAsHTML(foundation.NSStringStringWithUTF8String(mIMEType))
+	_r := objc.Send[bool](objc.ID(_class("WebView")), objc.RegisterName("canShowMIMETypeAsHTML:"), purego.NSString(mIMEType))
+	return _r
 }
 
-// MIMETypesShownAsHTML calls the underlying WebViewMIMETypesShownAsHTML.
-func MIMETypesShownAsHTML() *foundation.NSArray[objc.ID] {
-	return raw.WebViewMIMETypesShownAsHTML()
+func MIMETypesShownAsHTML() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("WebView")), objc.RegisterName("MIMETypesShownAsHTML"))
+	return obj.Wrap(_r)
 }
 
-// SetMIMETypesShownAsHTML calls the underlying WebViewSetMIMETypesShownAsHTML.
-func SetMIMETypesShownAsHTML(mIMETypes *foundation.NSArray[objc.ID]) {
-	raw.WebViewSetMIMETypesShownAsHTML(mIMETypes)
+// Sets the array of NSString MIME types that WebKit will attempt to render as HTML.  Typically you will retrieve the built-in array using MIMETypesShownAsHTML and add additional MIME types to that array.
+func SetMIMETypesShownAsHTML(mIMETypes obj.Object) {
+	objc.Send[objc.ID](objc.ID(_class("WebView")), objc.RegisterName("setMIMETypesShownAsHTML:"), objref.IDOf(mIMETypes))
 }
 
-// URLFromPasteboard calls the underlying WebViewURLFromPasteboard.
-func URLFromPasteboard(pasteboard *appkit.NSPasteboard) *foundation.NSURL {
-	return raw.WebViewURLFromPasteboard(pasteboard)
+// Returns a URL from a pasteboard This method differs than NSURL's URLFromPasteboard method in that it tries multiple pasteboard types including NSURLPboardType to find a URL on the pasteboard.
+func URLFromPasteboard(pasteboard obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("WebView")), objc.RegisterName("URLFromPasteboard:"), objref.IDOf(pasteboard))
+	return obj.Wrap(_r)
 }
 
-// URLTitleFromPasteboard calls the underlying WebViewURLTitleFromPasteboard.
-func URLTitleFromPasteboard(pasteboard *appkit.NSPasteboard) string {
-	_r := raw.WebViewURLTitleFromPasteboard(pasteboard)
-	if _r == nil {
+// Returns a URL title from a pasteboard This method returns a title that refers a URL on the pasteboard. An example of this is the link label which is the text inside the anchor tag.
+func URLTitleFromPasteboard(pasteboard obj.Object) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("WebView")), objc.RegisterName("URLTitleFromPasteboard:"), objref.IDOf(pasteboard))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// RegisterURLSchemeAsLocal calls the underlying WebViewRegisterURLSchemeAsLocal.
+// Adds the scheme to the list of schemes to be treated as local.
 func RegisterURLSchemeAsLocal(scheme string) {
-	raw.WebViewRegisterURLSchemeAsLocal(foundation.NSStringStringWithUTF8String(scheme))
-}
-
-// RegisterViewClassRepresentationClassForMIMEType calls the underlying WebViewRegisterViewClassRepresentationClassForMIMEType.
-func RegisterViewClassRepresentationClassForMIMEType(viewClass objc.Class, representationClass objc.Class, mIMEType string) {
-	raw.WebViewRegisterViewClassRepresentationClassForMIMEType(viewClass, representationClass, foundation.NSStringStringWithUTF8String(mIMEType))
+	objc.Send[objc.ID](objc.ID(_class("WebView")), objc.RegisterName("registerURLSchemeAsLocal:"), purego.NSString(scheme))
 }

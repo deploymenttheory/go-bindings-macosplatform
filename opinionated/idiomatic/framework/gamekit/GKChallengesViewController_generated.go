@@ -5,58 +5,66 @@
 package gamekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ChallengesViewController wraps [raw.GKChallengesViewController] with a fluent Go API.
+// ChallengesViewController is an idiomatic wrapper over the Objective-C class GKChallengesViewController.
 type ChallengesViewController struct {
-	inner *raw.GKChallengesViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKChallengesViewController].
-func (x *ChallengesViewController) Unwrap() *raw.GKChallengesViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChallengesViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// ChallengesViewControllerFromID adopts an existing object pointer as a ChallengesViewController (nil for 0).
+// ChallengesViewControllerFromID adopts an existing Objective-C object as a ChallengesViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func ChallengesViewControllerFromID(id objc.ID) *ChallengesViewController {
 	if id == 0 {
 		return nil
 	}
-	return &ChallengesViewController{inner: raw.GKChallengesViewControllerFromID(id)}
-}
-
-// NewChallengesViewController creates a new [ChallengesViewController].
-func NewChallengesViewController() *ChallengesViewController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKChallengesViewController")), objc.RegisterName("new"))
-	return &ChallengesViewController{inner: raw.GKChallengesViewControllerFromID(_id)}
-}
-
-// WithChallengeDelegate sets the challengeDelegate property and returns the receiver for chaining.
-func (x *ChallengesViewController) WithChallengeDelegate(challengeDelegate raw.GKChallengesViewControllerDelegate) *ChallengesViewController {
-	x.inner.SetChallengeDelegate(challengeDelegate)
+	x := &ChallengesViewController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// ChallengeDelegate calls the underlying ChallengeDelegate.
-func (x *ChallengesViewController) ChallengeDelegate() raw.GKChallengesViewControllerDelegate {
-	return x.inner.ChallengeDelegate()
+// challengesViewControllerAdopt wraps an Objective-C object that this code just created as a
+// ChallengesViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func challengesViewControllerAdopt(id objc.ID) *ChallengesViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &ChallengesViewController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetChallengeDelegate calls the underlying SetChallengeDelegate.
-func (x *ChallengesViewController) SetChallengeDelegate(challengeDelegate raw.GKChallengesViewControllerDelegate) {
-	x.inner.SetChallengeDelegate(challengeDelegate)
+// Description returns the object's -description text.
+func (x *ChallengesViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ChallengesViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ChallengesViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewChallengesViewController creates a new ChallengesViewController.
+func NewChallengesViewController() *ChallengesViewController {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKChallengesViewController")), objc.RegisterName("new"))
+	return challengesViewControllerAdopt(_id)
 }
 
 // ChallengesViewControllerable is the interface implemented by [ChallengesViewController], for mocking and DI.
 type ChallengesViewControllerable interface {
-	Unwrap() *raw.GKChallengesViewController
-	WithChallengeDelegate(challengeDelegate raw.GKChallengesViewControllerDelegate) *ChallengesViewController
-	ChallengeDelegate() raw.GKChallengesViewControllerDelegate
-	SetChallengeDelegate(challengeDelegate raw.GKChallengesViewControllerDelegate)
+	obj.Object
 }
 
 var _ ChallengesViewControllerable = (*ChallengesViewController)(nil)

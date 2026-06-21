@@ -6,108 +6,107 @@ package networkextension
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The principal class for a filter data provider extension.
 //
-// NEFilterDataProvider wraps [raw.NEFilterDataProvider] with a fluent Go API.
+// NEFilterDataProvider is an idiomatic wrapper over the Objective-C class NEFilterDataProvider.
 type NEFilterDataProvider struct {
-	inner *raw.NEFilterDataProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEFilterDataProvider].
-func (x *NEFilterDataProvider) Unwrap() *raw.NEFilterDataProvider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEFilterDataProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// NEFilterDataProviderFromID adopts an existing object pointer as a NEFilterDataProvider (nil for 0).
+// NEFilterDataProviderFromID adopts an existing Objective-C object as a NEFilterDataProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func NEFilterDataProviderFromID(id objc.ID) *NEFilterDataProvider {
 	if id == 0 {
 		return nil
 	}
-	return &NEFilterDataProvider{inner: raw.NEFilterDataProviderFromID(id)}
+	x := &NEFilterDataProvider{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNEFilterDataProvider creates a new [NEFilterDataProvider].
+// nEFilterDataProviderAdopt wraps an Objective-C object that this code just created as a
+// NEFilterDataProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEFilterDataProviderAdopt(id objc.ID) *NEFilterDataProvider {
+	if id == 0 {
+		return nil
+	}
+	x := &NEFilterDataProvider{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NEFilterDataProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEFilterDataProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEFilterDataProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNEFilterDataProvider creates a new NEFilterDataProvider.
 func NewNEFilterDataProvider() *NEFilterDataProvider {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEFilterDataProvider")), objc.RegisterName("new"))
-	return &NEFilterDataProvider{inner: raw.NEFilterDataProviderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NEFilterDataProvider")), objc.RegisterName("new"))
+	return nEFilterDataProviderAdopt(_id)
 }
 
 // Make a filtering decision for a newly-created flow of network content.
-//
-// HandleNewFlow calls the underlying HandleNewFlow.
-func (x *NEFilterDataProvider) HandleNewFlow(flow *raw.NEFilterFlow) *NEFilterNewFlowVerdict {
-	_r := x.inner.HandleNewFlow(flow)
-	if _r == nil {
-		return nil
-	}
-	return &NEFilterNewFlowVerdict{inner: _r}
+func (x *NEFilterDataProvider) HandleNewFlow(flow *NEFilterFlow) *NEFilterNewFlowVerdict {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleNewFlow:"), objref.IDOf(flow))
+	return NEFilterNewFlowVerdictFromID(_r)
 }
 
 // Make a filtering decision about a chunk of inbound data.
-//
-// HandleInboundDataFromFlowReadBytesStartOffsetReadBytes calls the underlying HandleInboundDataFromFlowReadBytesStartOffsetReadBytes.
-func (x *NEFilterDataProvider) HandleInboundDataFromFlowReadBytesStartOffsetReadBytes(flow *raw.NEFilterFlow, offset uint, readBytes *foundation.NSData) *NEFilterDataVerdict {
-	_r := x.inner.HandleInboundDataFromFlowReadBytesStartOffsetReadBytes(flow, offset, readBytes)
-	if _r == nil {
-		return nil
-	}
-	return &NEFilterDataVerdict{inner: _r}
+func (x *NEFilterDataProvider) HandleInboundDataFromFlowReadBytesStartOffsetReadBytes(flow *NEFilterFlow, offset int, readBytes obj.Object) *NEFilterDataVerdict {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleInboundDataFromFlow:readBytesStartOffset:readBytes:"), objref.IDOf(flow), offset, objref.IDOf(readBytes))
+	return NEFilterDataVerdictFromID(_r)
 }
 
 // Make a filtering decision about a chunk of outbound data.
-//
-// HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes calls the underlying HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes.
-func (x *NEFilterDataProvider) HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes(flow *raw.NEFilterFlow, offset uint, readBytes *foundation.NSData) *NEFilterDataVerdict {
-	_r := x.inner.HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes(flow, offset, readBytes)
-	if _r == nil {
-		return nil
-	}
-	return &NEFilterDataVerdict{inner: _r}
+func (x *NEFilterDataProvider) HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes(flow *NEFilterFlow, offset int, readBytes obj.Object) *NEFilterDataVerdict {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleOutboundDataFromFlow:readBytesStartOffset:readBytes:"), objref.IDOf(flow), offset, objref.IDOf(readBytes))
+	return NEFilterDataVerdictFromID(_r)
 }
 
 // Make a filtering decision after seeing all of the inbound data for a flow.
-//
-// HandleInboundDataCompleteForFlow calls the underlying HandleInboundDataCompleteForFlow.
-func (x *NEFilterDataProvider) HandleInboundDataCompleteForFlow(flow *raw.NEFilterFlow) *NEFilterDataVerdict {
-	_r := x.inner.HandleInboundDataCompleteForFlow(flow)
-	if _r == nil {
-		return nil
-	}
-	return &NEFilterDataVerdict{inner: _r}
+func (x *NEFilterDataProvider) HandleInboundDataCompleteForFlow(flow *NEFilterFlow) *NEFilterDataVerdict {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleInboundDataCompleteForFlow:"), objref.IDOf(flow))
+	return NEFilterDataVerdictFromID(_r)
 }
 
 // Make a filtering decision after seeing all of the outbound data for a flow.
-//
-// HandleOutboundDataCompleteForFlow calls the underlying HandleOutboundDataCompleteForFlow.
-func (x *NEFilterDataProvider) HandleOutboundDataCompleteForFlow(flow *raw.NEFilterFlow) *NEFilterDataVerdict {
-	_r := x.inner.HandleOutboundDataCompleteForFlow(flow)
-	if _r == nil {
-		return nil
-	}
-	return &NEFilterDataVerdict{inner: _r}
+func (x *NEFilterDataProvider) HandleOutboundDataCompleteForFlow(flow *NEFilterFlow) *NEFilterDataVerdict {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleOutboundDataCompleteForFlow:"), objref.IDOf(flow))
+	return NEFilterDataVerdictFromID(_r)
 }
 
 // Applies a set of filtering rules associated with the provider and changes the default filtering action.
 //
 // ApplySettings blocks until the operation completes or ctx is cancelled.
-func (x *NEFilterDataProvider) ApplySettings(ctx context.Context, settings *raw.NEFilterSettings) error {
+func (x *NEFilterDataProvider) ApplySettings(ctx context.Context, settings *NEFilterSettings) error {
 	_ch := make(chan error, 1)
-	x.inner.ApplySettingsCompletionHandler(settings, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applySettings:completionHandler:"), objref.IDOf(settings), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -117,38 +116,26 @@ func (x *NEFilterDataProvider) ApplySettings(ctx context.Context, settings *raw.
 }
 
 // Resumes a previously-paused flow.
-//
-// ResumeFlowWithVerdict calls the underlying ResumeFlowWithVerdict.
-func (x *NEFilterDataProvider) ResumeFlowWithVerdict(flow *raw.NEFilterFlow, verdict *raw.NEFilterVerdict) {
-	x.inner.ResumeFlowWithVerdict(flow, verdict)
+func (x *NEFilterDataProvider) ResumeFlowWithVerdict(flow *NEFilterFlow, verdict *NEFilterVerdict) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeFlow:withVerdict:"), objref.IDOf(flow), objref.IDOf(verdict))
 }
 
 // Updates the verdict for a flow outside the context of any filter data provider callback.
-//
-// UpdateFlowUsingVerdictForDirection calls the underlying UpdateFlowUsingVerdictForDirection.
-func (x *NEFilterDataProvider) UpdateFlowUsingVerdictForDirection(flow *raw.NEFilterSocketFlow, verdict *raw.NEFilterDataVerdict, direction NETrafficDirection) {
-	x.inner.UpdateFlowUsingVerdictForDirection(flow, verdict, raw.NETrafficDirection(direction))
-}
-
-func (x *NEFilterDataProvider) asNEFilterProvider() *raw.NEFilterProvider {
-	return &x.inner.NEFilterProvider
-}
-
-func (x *NEFilterDataProvider) asNEProvider() *raw.NEProvider {
-	return &x.inner.NEFilterProvider.NEProvider
+func (x *NEFilterDataProvider) UpdateFlowUsingVerdictForDirection(flow *NEFilterSocketFlow, verdict *NEFilterDataVerdict, direction NETrafficDirection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateFlow:usingVerdict:forDirection:"), objref.IDOf(flow), objref.IDOf(verdict), direction)
 }
 
 // NEFilterDataProviderable is the interface implemented by [NEFilterDataProvider], for mocking and DI.
 type NEFilterDataProviderable interface {
-	Unwrap() *raw.NEFilterDataProvider
-	HandleNewFlow(flow *raw.NEFilterFlow) *NEFilterNewFlowVerdict
-	HandleInboundDataFromFlowReadBytesStartOffsetReadBytes(flow *raw.NEFilterFlow, offset uint, readBytes *foundation.NSData) *NEFilterDataVerdict
-	HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes(flow *raw.NEFilterFlow, offset uint, readBytes *foundation.NSData) *NEFilterDataVerdict
-	HandleInboundDataCompleteForFlow(flow *raw.NEFilterFlow) *NEFilterDataVerdict
-	HandleOutboundDataCompleteForFlow(flow *raw.NEFilterFlow) *NEFilterDataVerdict
-	ApplySettings(ctx context.Context, settings *raw.NEFilterSettings) error
-	ResumeFlowWithVerdict(flow *raw.NEFilterFlow, verdict *raw.NEFilterVerdict)
-	UpdateFlowUsingVerdictForDirection(flow *raw.NEFilterSocketFlow, verdict *raw.NEFilterDataVerdict, direction NETrafficDirection)
+	obj.Object
+	HandleNewFlow(flow *NEFilterFlow) *NEFilterNewFlowVerdict
+	HandleInboundDataFromFlowReadBytesStartOffsetReadBytes(flow *NEFilterFlow, offset int, readBytes obj.Object) *NEFilterDataVerdict
+	HandleOutboundDataFromFlowReadBytesStartOffsetReadBytes(flow *NEFilterFlow, offset int, readBytes obj.Object) *NEFilterDataVerdict
+	HandleInboundDataCompleteForFlow(flow *NEFilterFlow) *NEFilterDataVerdict
+	HandleOutboundDataCompleteForFlow(flow *NEFilterFlow) *NEFilterDataVerdict
+	ApplySettings(ctx context.Context, settings *NEFilterSettings) error
+	ResumeFlowWithVerdict(flow *NEFilterFlow, verdict *NEFilterVerdict)
+	UpdateFlowUsingVerdictForDirection(flow *NEFilterSocketFlow, verdict *NEFilterDataVerdict, direction NETrafficDirection)
 }
 
 var _ NEFilterDataProviderable = (*NEFilterDataProvider)(nil)

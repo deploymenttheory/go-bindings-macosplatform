@@ -5,88 +5,104 @@
 package naturallanguage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/naturallanguage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A custom model trained to classify or tag natural language text.
 //
-// Model wraps [raw.NLModel] with a fluent Go API.
+// Model is an idiomatic wrapper over the Objective-C class NLModel.
 type Model struct {
-	inner *raw.NLModel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NLModel].
-func (x *Model) Unwrap() *raw.NLModel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Model) ID() objc.ID { return x.inner.Ptr() }
-
-// ModelFromID adopts an existing object pointer as a Model (nil for 0).
+// ModelFromID adopts an existing Objective-C object as a Model
+// (nil for 0), retaining it and registering a release finalizer.
 func ModelFromID(id objc.ID) *Model {
 	if id == 0 {
 		return nil
 	}
-	return &Model{inner: raw.NLModelFromID(id)}
+	x := &Model{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewModel creates a new [Model].
+// modelAdopt wraps an Objective-C object that this code just created as a
+// Model (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func modelAdopt(id objc.ID) *Model {
+	if id == 0 {
+		return nil
+	}
+	x := &Model{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Model) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Model) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Model) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewModel creates a new Model.
 func NewModel() *Model {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NLModel")), objc.RegisterName("new"))
-	return &Model{inner: raw.NLModelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NLModel")), objc.RegisterName("new"))
+	return modelAdopt(_id)
 }
 
 // Predicts a label for the given input string.
-//
-// PredictedLabelForString calls the underlying PredictedLabelForString.
 func (x *Model) PredictedLabelForString(string_ string) string {
-	_r := x.inner.PredictedLabelForString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predictedLabelForString:"), purego.NSString(string_))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Predicts a label for each string in the given array.
-//
-// PredictedLabelsForTokens calls the underlying PredictedLabelsForTokens.
-func (x *Model) PredictedLabelsForTokens(tokens *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*foundation.NSString] {
-	return x.inner.PredictedLabelsForTokens(tokens)
+func (x *Model) PredictedLabelsForTokens(tokens []string) []string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predictedLabelsForTokens:"), purego.SliceToNSArray(tokens, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Predicts multiple possible labels for the given input string.
-//
-// PredictedLabelHypothesesForStringMaximumCount calls the underlying PredictedLabelHypothesesForStringMaximumCount.
-func (x *Model) PredictedLabelHypothesesForStringMaximumCount(string_ string, maximumCount uint) *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber] {
-	return x.inner.PredictedLabelHypothesesForStringMaximumCount(foundation.NSStringStringWithUTF8String(string_), maximumCount)
+func (x *Model) PredictedLabelHypothesesForStringMaximumCount(string_ string, maximumCount int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predictedLabelHypothesesForString:maximumCount:"), purego.NSString(string_), maximumCount)
+	return obj.Wrap(_r)
 }
 
 // Predicts multiple possible labels for each string in the given array.
-//
-// PredictedLabelHypothesesForTokensMaximumCount calls the underlying PredictedLabelHypothesesForTokensMaximumCount.
-func (x *Model) PredictedLabelHypothesesForTokensMaximumCount(tokens *foundation.NSArray[*foundation.NSString], maximumCount uint) *foundation.NSArray[objc.ID] {
-	return x.inner.PredictedLabelHypothesesForTokensMaximumCount(tokens, maximumCount)
+func (x *Model) PredictedLabelHypothesesForTokensMaximumCount(tokens []string, maximumCount int) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predictedLabelHypothesesForTokens:maximumCount:"), purego.SliceToNSArray(tokens, func(_v string) objc.ID { return purego.NSString(_v) }), maximumCount)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Configuration calls the underlying Configuration.
 func (x *Model) Configuration() *ModelConfiguration {
-	_r := x.inner.Configuration()
-	if _r == nil {
-		return nil
-	}
-	return &ModelConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
+	return ModelConfigurationFromID(_r)
 }
 
 // Modelable is the interface implemented by [Model], for mocking and DI.
 type Modelable interface {
-	Unwrap() *raw.NLModel
+	obj.Object
 	PredictedLabelForString(string_ string) string
-	PredictedLabelsForTokens(tokens *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*foundation.NSString]
-	PredictedLabelHypothesesForStringMaximumCount(string_ string, maximumCount uint) *foundation.NSDictionary[*foundation.NSString, *foundation.NSNumber]
-	PredictedLabelHypothesesForTokensMaximumCount(tokens *foundation.NSArray[*foundation.NSString], maximumCount uint) *foundation.NSArray[objc.ID]
+	PredictedLabelsForTokens(tokens []string) []string
+	PredictedLabelHypothesesForStringMaximumCount(string_ string, maximumCount int) obj.Object
+	PredictedLabelHypothesesForTokensMaximumCount(tokens []string, maximumCount int) []obj.Object
 	Configuration() *ModelConfiguration
 }
 

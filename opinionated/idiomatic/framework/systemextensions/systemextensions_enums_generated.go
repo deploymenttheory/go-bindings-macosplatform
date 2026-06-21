@@ -9,53 +9,53 @@ import (
 )
 
 // Error codes for system extensions.
-type OSSystemExtensionErrorCode int64
+type SystemExtensionErrorCode int64
 
 const (
-	OSSystemExtensionErrorUnknown                         OSSystemExtensionErrorCode = 1
-	OSSystemExtensionErrorMissingEntitlement              OSSystemExtensionErrorCode = 2
-	OSSystemExtensionErrorUnsupportedParentBundleLocation OSSystemExtensionErrorCode = 3
-	OSSystemExtensionErrorExtensionNotFound               OSSystemExtensionErrorCode = 4
-	OSSystemExtensionErrorExtensionMissingIdentifier      OSSystemExtensionErrorCode = 5
-	OSSystemExtensionErrorDuplicateExtensionIdentifer     OSSystemExtensionErrorCode = 6
-	OSSystemExtensionErrorUnknownExtensionCategory        OSSystemExtensionErrorCode = 7
-	OSSystemExtensionErrorCodeSignatureInvalid            OSSystemExtensionErrorCode = 8
-	OSSystemExtensionErrorValidationFailed                OSSystemExtensionErrorCode = 9
-	OSSystemExtensionErrorForbiddenBySystemPolicy         OSSystemExtensionErrorCode = 10
-	OSSystemExtensionErrorRequestCanceled                 OSSystemExtensionErrorCode = 11
-	OSSystemExtensionErrorRequestSuperseded               OSSystemExtensionErrorCode = 12
-	OSSystemExtensionErrorAuthorizationRequired           OSSystemExtensionErrorCode = 13
+	SystemExtensionErrorUnknown                         SystemExtensionErrorCode = 1
+	SystemExtensionErrorMissingEntitlement              SystemExtensionErrorCode = 2
+	SystemExtensionErrorUnsupportedParentBundleLocation SystemExtensionErrorCode = 3
+	SystemExtensionErrorExtensionNotFound               SystemExtensionErrorCode = 4
+	SystemExtensionErrorExtensionMissingIdentifier      SystemExtensionErrorCode = 5
+	SystemExtensionErrorDuplicateExtensionIdentifer     SystemExtensionErrorCode = 6
+	SystemExtensionErrorUnknownExtensionCategory        SystemExtensionErrorCode = 7
+	SystemExtensionErrorCodeSignatureInvalid            SystemExtensionErrorCode = 8
+	SystemExtensionErrorValidationFailed                SystemExtensionErrorCode = 9
+	SystemExtensionErrorForbiddenBySystemPolicy         SystemExtensionErrorCode = 10
+	SystemExtensionErrorRequestCanceled                 SystemExtensionErrorCode = 11
+	SystemExtensionErrorRequestSuperseded               SystemExtensionErrorCode = 12
+	SystemExtensionErrorAuthorizationRequired           SystemExtensionErrorCode = 13
 )
 
-func (e OSSystemExtensionErrorCode) String() string {
+func (e SystemExtensionErrorCode) String() string {
 	switch e {
-	case OSSystemExtensionErrorUnknown:
-		return "OSSystemExtensionErrorUnknown"
-	case OSSystemExtensionErrorMissingEntitlement:
-		return "OSSystemExtensionErrorMissingEntitlement"
-	case OSSystemExtensionErrorUnsupportedParentBundleLocation:
-		return "OSSystemExtensionErrorUnsupportedParentBundleLocation"
-	case OSSystemExtensionErrorExtensionNotFound:
-		return "OSSystemExtensionErrorExtensionNotFound"
-	case OSSystemExtensionErrorExtensionMissingIdentifier:
-		return "OSSystemExtensionErrorExtensionMissingIdentifier"
-	case OSSystemExtensionErrorDuplicateExtensionIdentifer:
-		return "OSSystemExtensionErrorDuplicateExtensionIdentifer"
-	case OSSystemExtensionErrorUnknownExtensionCategory:
-		return "OSSystemExtensionErrorUnknownExtensionCategory"
-	case OSSystemExtensionErrorCodeSignatureInvalid:
-		return "OSSystemExtensionErrorCodeSignatureInvalid"
-	case OSSystemExtensionErrorValidationFailed:
-		return "OSSystemExtensionErrorValidationFailed"
-	case OSSystemExtensionErrorForbiddenBySystemPolicy:
-		return "OSSystemExtensionErrorForbiddenBySystemPolicy"
-	case OSSystemExtensionErrorRequestCanceled:
-		return "OSSystemExtensionErrorRequestCanceled"
-	case OSSystemExtensionErrorRequestSuperseded:
-		return "OSSystemExtensionErrorRequestSuperseded"
-	case OSSystemExtensionErrorAuthorizationRequired:
-		return "OSSystemExtensionErrorAuthorizationRequired"
+	case SystemExtensionErrorUnknown:
+		return "SystemExtensionErrorUnknown"
+	case SystemExtensionErrorMissingEntitlement:
+		return "SystemExtensionErrorMissingEntitlement"
+	case SystemExtensionErrorUnsupportedParentBundleLocation:
+		return "SystemExtensionErrorUnsupportedParentBundleLocation"
+	case SystemExtensionErrorExtensionNotFound:
+		return "SystemExtensionErrorExtensionNotFound"
+	case SystemExtensionErrorExtensionMissingIdentifier:
+		return "SystemExtensionErrorExtensionMissingIdentifier"
+	case SystemExtensionErrorDuplicateExtensionIdentifer:
+		return "SystemExtensionErrorDuplicateExtensionIdentifer"
+	case SystemExtensionErrorUnknownExtensionCategory:
+		return "SystemExtensionErrorUnknownExtensionCategory"
+	case SystemExtensionErrorCodeSignatureInvalid:
+		return "SystemExtensionErrorCodeSignatureInvalid"
+	case SystemExtensionErrorValidationFailed:
+		return "SystemExtensionErrorValidationFailed"
+	case SystemExtensionErrorForbiddenBySystemPolicy:
+		return "SystemExtensionErrorForbiddenBySystemPolicy"
+	case SystemExtensionErrorRequestCanceled:
+		return "SystemExtensionErrorRequestCanceled"
+	case SystemExtensionErrorRequestSuperseded:
+		return "SystemExtensionErrorRequestSuperseded"
+	case SystemExtensionErrorAuthorizationRequired:
+		return "SystemExtensionErrorAuthorizationRequired"
 	default:
-		return fmt.Sprintf("OSSystemExtensionErrorCode(%d)", int64(e))
+		return fmt.Sprintf("SystemExtensionErrorCode(%d)", int64(e))
 	}
 }

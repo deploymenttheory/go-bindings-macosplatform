@@ -5,59 +5,84 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTREnergyEVSEClusterRFIDEvent wraps [raw.MTREnergyEVSEClusterRFIDEvent] with a fluent Go API.
+// MTREnergyEVSEClusterRFIDEvent is an idiomatic wrapper over the Objective-C class MTREnergyEVSEClusterRFIDEvent.
 type MTREnergyEVSEClusterRFIDEvent struct {
-	inner *raw.MTREnergyEVSEClusterRFIDEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTREnergyEVSEClusterRFIDEvent].
-func (x *MTREnergyEVSEClusterRFIDEvent) Unwrap() *raw.MTREnergyEVSEClusterRFIDEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTREnergyEVSEClusterRFIDEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTREnergyEVSEClusterRFIDEventFromID adopts an existing object pointer as a MTREnergyEVSEClusterRFIDEvent (nil for 0).
+// MTREnergyEVSEClusterRFIDEventFromID adopts an existing Objective-C object as a MTREnergyEVSEClusterRFIDEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTREnergyEVSEClusterRFIDEventFromID(id objc.ID) *MTREnergyEVSEClusterRFIDEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTREnergyEVSEClusterRFIDEvent{inner: raw.MTREnergyEVSEClusterRFIDEventFromID(id)}
-}
-
-// NewMTREnergyEVSEClusterRFIDEvent creates a new [MTREnergyEVSEClusterRFIDEvent].
-func NewMTREnergyEVSEClusterRFIDEvent() *MTREnergyEVSEClusterRFIDEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTREnergyEVSEClusterRFIDEvent")), objc.RegisterName("new"))
-	return &MTREnergyEVSEClusterRFIDEvent{inner: raw.MTREnergyEVSEClusterRFIDEventFromID(_id)}
-}
-
-// WithUid sets the uid property and returns the receiver for chaining.
-func (x *MTREnergyEVSEClusterRFIDEvent) WithUid(uid *foundation.NSData) *MTREnergyEVSEClusterRFIDEvent {
-	x.inner.SetUid(uid)
+	x := &MTREnergyEVSEClusterRFIDEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Uid calls the underlying Uid.
-func (x *MTREnergyEVSEClusterRFIDEvent) Uid() *foundation.NSData {
-	return x.inner.Uid()
+// mTREnergyEVSEClusterRFIDEventAdopt wraps an Objective-C object that this code just created as a
+// MTREnergyEVSEClusterRFIDEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTREnergyEVSEClusterRFIDEventAdopt(id objc.ID) *MTREnergyEVSEClusterRFIDEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTREnergyEVSEClusterRFIDEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetUid calls the underlying SetUid.
-func (x *MTREnergyEVSEClusterRFIDEvent) SetUid(uid *foundation.NSData) {
-	x.inner.SetUid(uid)
+// Description returns the object's -description text.
+func (x *MTREnergyEVSEClusterRFIDEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTREnergyEVSEClusterRFIDEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTREnergyEVSEClusterRFIDEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTREnergyEVSEClusterRFIDEvent creates a new MTREnergyEVSEClusterRFIDEvent.
+func NewMTREnergyEVSEClusterRFIDEvent() *MTREnergyEVSEClusterRFIDEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTREnergyEVSEClusterRFIDEvent")), objc.RegisterName("new"))
+	return mTREnergyEVSEClusterRFIDEventAdopt(_id)
+}
+
+// WithUid sets uid and returns the receiver so calls can be chained.
+func (x *MTREnergyEVSEClusterRFIDEvent) WithUid(uid obj.Object) *MTREnergyEVSEClusterRFIDEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUid:"), objref.IDOf(uid))
+	return x
+}
+
+func (x *MTREnergyEVSEClusterRFIDEvent) Uid() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uid"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTREnergyEVSEClusterRFIDEvent) SetUid(uid obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUid:"), objref.IDOf(uid))
 }
 
 // MTREnergyEVSEClusterRFIDEventable is the interface implemented by [MTREnergyEVSEClusterRFIDEvent], for mocking and DI.
 type MTREnergyEVSEClusterRFIDEventable interface {
-	Unwrap() *raw.MTREnergyEVSEClusterRFIDEvent
-	WithUid(uid *foundation.NSData) *MTREnergyEVSEClusterRFIDEvent
-	Uid() *foundation.NSData
-	SetUid(uid *foundation.NSData)
+	obj.Object
+	WithUid(uid obj.Object) *MTREnergyEVSEClusterRFIDEvent
+	Uid() obj.Object
+	SetUid(uid obj.Object)
 }
 
 var _ MTREnergyEVSEClusterRFIDEventable = (*MTREnergyEVSEClusterRFIDEvent)(nil)

@@ -5,60 +5,86 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A memory buffer that stores vertex or index data for a Model I/O mesh.
 //
-// MeshBufferData wraps [raw.MDLMeshBufferData] with a fluent Go API.
+// MeshBufferData is an idiomatic wrapper over the Objective-C class MDLMeshBufferData.
 type MeshBufferData struct {
-	inner *raw.MDLMeshBufferData
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLMeshBufferData].
-func (x *MeshBufferData) Unwrap() *raw.MDLMeshBufferData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MeshBufferData) ID() objc.ID { return x.inner.Ptr() }
-
-// MeshBufferDataFromID adopts an existing object pointer as a MeshBufferData (nil for 0).
+// MeshBufferDataFromID adopts an existing Objective-C object as a MeshBufferData
+// (nil for 0), retaining it and registering a release finalizer.
 func MeshBufferDataFromID(id objc.ID) *MeshBufferData {
 	if id == 0 {
 		return nil
 	}
-	return &MeshBufferData{inner: raw.MDLMeshBufferDataFromID(id)}
+	x := &MeshBufferData{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// meshBufferDataAdopt wraps an Objective-C object that this code just created as a
+// MeshBufferData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func meshBufferDataAdopt(id objc.ID) *MeshBufferData {
+	if id == 0 {
+		return nil
+	}
+	x := &MeshBufferData{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MeshBufferData) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MeshBufferData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MeshBufferData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a buffer of the specified length.
 //
-// NewMeshBufferDataWithTypeLength creates a new [MeshBufferData].
-func NewMeshBufferDataWithTypeLength(type_ MDLMeshBufferType, length uint) *MeshBufferData {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMeshBufferData")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:length:"), raw.MDLMeshBufferType(type_), length)
-	return &MeshBufferData{inner: raw.MDLMeshBufferDataFromID(_id)}
+// NewMeshBufferDataWithTypeLength creates a new MeshBufferData.
+func NewMeshBufferDataWithTypeLength(type_ MeshBufferType, length int) *MeshBufferData {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMeshBufferData")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:length:"), type_, length)
+	return meshBufferDataAdopt(_id)
 }
 
 // Initializes a buffer containing the specified data.
 //
-// NewMeshBufferDataWithTypeData creates a new [MeshBufferData].
-func NewMeshBufferDataWithTypeData(type_ MDLMeshBufferType, data *foundation.NSData) *MeshBufferData {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMeshBufferData")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:data:"), raw.MDLMeshBufferType(type_), data.Ptr())
-	return &MeshBufferData{inner: raw.MDLMeshBufferDataFromID(_id)}
+// NewMeshBufferDataWithTypeData creates a new MeshBufferData.
+func NewMeshBufferDataWithTypeData(type_ MeshBufferType, data obj.Object) *MeshBufferData {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMeshBufferData")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:data:"), type_, objref.IDOf(data))
+	return meshBufferDataAdopt(_id)
 }
 
-// Data calls the underlying Data.
-func (x *MeshBufferData) Data() *foundation.NSData {
-	return x.inner.Data()
+func (x *MeshBufferData) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
 
 // MeshBufferDataable is the interface implemented by [MeshBufferData], for mocking and DI.
 type MeshBufferDataable interface {
-	Unwrap() *raw.MDLMeshBufferData
-	Data() *foundation.NSData
+	obj.Object
+	Data() obj.Object
 }
 
 var _ MeshBufferDataable = (*MeshBufferData)(nil)

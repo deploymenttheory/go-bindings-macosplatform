@@ -5,391 +5,370 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Information about linguistic, cultural, and technological conventions for use in formatting data for presentation.
 //
-// Locale wraps [raw.NSLocale] with a fluent Go API.
+// Locale is an idiomatic wrapper over the Objective-C class NSLocale.
 type Locale struct {
-	inner *raw.NSLocale
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSLocale].
-func (x *Locale) Unwrap() *raw.NSLocale { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Locale) ID() objc.ID { return x.inner.Ptr() }
-
-// LocaleFromID adopts an existing object pointer as a Locale (nil for 0).
+// LocaleFromID adopts an existing Objective-C object as a Locale
+// (nil for 0), retaining it and registering a release finalizer.
 func LocaleFromID(id objc.ID) *Locale {
 	if id == 0 {
 		return nil
 	}
-	return &Locale{inner: raw.NSLocaleFromID(id)}
+	x := &Locale{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// localeAdopt wraps an Objective-C object that this code just created as a
+// Locale (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func localeAdopt(id objc.ID) *Locale {
+	if id == 0 {
+		return nil
+	}
+	x := &Locale{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Locale) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Locale) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Locale) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a locale using a given locale identifier.
 //
-// NewLocaleWithLocaleIdentifier creates a new [Locale].
+// NewLocaleWithLocaleIdentifier creates a new Locale.
 func NewLocaleWithLocaleIdentifier(string_ string) *Locale {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLocale")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocaleIdentifier:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
-	return &Locale{inner: raw.NSLocaleFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocaleIdentifier:"), purego.NSString(string_))
+	return localeAdopt(_id)
 }
 
 // Returns a locale initialized from data in the given unarchiver.
 //
-// NewLocaleWithCoder creates a new [Locale].
-func NewLocaleWithCoder(coder *raw.NSCoder) *Locale {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLocale")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &Locale{inner: raw.NSLocaleFromID(_id)}
+// NewLocaleWithCoder creates a new Locale.
+func NewLocaleWithCoder(coder *Coder) *Locale {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSLocale")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return localeAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Locale) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Locale {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *Locale) WithScriptingProperties(scriptingProperties obj.Object) *Locale {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Returns the value of the component corresponding to the specified key.
-//
-// ObjectForKey calls the underlying ObjectForKey.
-func (x *Locale) ObjectForKey(key *raw.NSString) objc.ID {
-	return x.inner.ObjectForKey(key)
+func (x *Locale) ObjectForKey(key *String) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKey:"), objref.IDOf(key))
+	return obj.Wrap(_r)
 }
 
 // Returns the display name for the given locale component value.
-//
-// DisplayNameForKeyValue calls the underlying DisplayNameForKeyValue.
-func (x *Locale) DisplayNameForKeyValue(key *raw.NSString, value objc.ID) *String {
-	_r := x.inner.DisplayNameForKeyValue(key, value)
-	if _r == nil {
-		return nil
+func (x *Locale) DisplayNameForKeyValue(key *String, value obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayNameForKey:value:"), objref.IDOf(key), objref.IDOf(value))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
 // Returns the localized string for the specified locale identifier.
-//
-// LocalizedStringForLocaleIdentifier calls the underlying LocalizedStringForLocaleIdentifier.
-func (x *Locale) LocalizedStringForLocaleIdentifier(localeIdentifier string) *String {
-	_r := x.inner.LocalizedStringForLocaleIdentifier(foundation.NSStringStringWithUTF8String(localeIdentifier))
-	if _r == nil {
-		return nil
+func (x *Locale) LocalizedStringForLocaleIdentifier(localeIdentifier string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForLocaleIdentifier:"), purego.NSString(localeIdentifier))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
 // Returns the localized string for the specified language code.
-//
-// LocalizedStringForLanguageCode calls the underlying LocalizedStringForLanguageCode.
-func (x *Locale) LocalizedStringForLanguageCode(languageCode string) *String {
-	_r := x.inner.LocalizedStringForLanguageCode(foundation.NSStringStringWithUTF8String(languageCode))
-	if _r == nil {
-		return nil
+func (x *Locale) LocalizedStringForLanguageCode(languageCode string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForLanguageCode:"), purego.NSString(languageCode))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
 // Returns the localized string for a country or region code.
-//
-// LocalizedStringForCountryCode calls the underlying LocalizedStringForCountryCode.
-func (x *Locale) LocalizedStringForCountryCode(countryCode string) *String {
-	_r := x.inner.LocalizedStringForCountryCode(foundation.NSStringStringWithUTF8String(countryCode))
-	if _r == nil {
-		return nil
+func (x *Locale) LocalizedStringForCountryCode(countryCode string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForCountryCode:"), purego.NSString(countryCode))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
 // Returns the localized string for the specified script code.
-//
-// LocalizedStringForScriptCode calls the underlying LocalizedStringForScriptCode.
-func (x *Locale) LocalizedStringForScriptCode(scriptCode string) *String {
-	_r := x.inner.LocalizedStringForScriptCode(foundation.NSStringStringWithUTF8String(scriptCode))
-	if _r == nil {
-		return nil
+func (x *Locale) LocalizedStringForScriptCode(scriptCode string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForScriptCode:"), purego.NSString(scriptCode))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
 // Returns the localized string for the specified variant code.
-//
-// LocalizedStringForVariantCode calls the underlying LocalizedStringForVariantCode.
-func (x *Locale) LocalizedStringForVariantCode(variantCode string) *String {
-	_r := x.inner.LocalizedStringForVariantCode(foundation.NSStringStringWithUTF8String(variantCode))
-	if _r == nil {
-		return nil
+func (x *Locale) LocalizedStringForVariantCode(variantCode string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForVariantCode:"), purego.NSString(variantCode))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
 // Returns the localized string for the specified calendar identifier.
-//
-// LocalizedStringForCalendarIdentifier calls the underlying LocalizedStringForCalendarIdentifier.
-func (x *Locale) LocalizedStringForCalendarIdentifier(calendarIdentifier string) *String {
-	_r := x.inner.LocalizedStringForCalendarIdentifier(foundation.NSStringStringWithUTF8String(calendarIdentifier))
-	if _r == nil {
-		return nil
+func (x *Locale) LocalizedStringForCalendarIdentifier(calendarIdentifier string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForCalendarIdentifier:"), purego.NSString(calendarIdentifier))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
 // Returns the localized string for the specified collation identifier.
-//
-// LocalizedStringForCollationIdentifier calls the underlying LocalizedStringForCollationIdentifier.
-func (x *Locale) LocalizedStringForCollationIdentifier(collationIdentifier string) *String {
-	_r := x.inner.LocalizedStringForCollationIdentifier(foundation.NSStringStringWithUTF8String(collationIdentifier))
-	if _r == nil {
-		return nil
+func (x *Locale) LocalizedStringForCollationIdentifier(collationIdentifier string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForCollationIdentifier:"), purego.NSString(collationIdentifier))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
 // Returns the localized string for the specified currency code.
-//
-// LocalizedStringForCurrencyCode calls the underlying LocalizedStringForCurrencyCode.
-func (x *Locale) LocalizedStringForCurrencyCode(currencyCode string) *String {
-	_r := x.inner.LocalizedStringForCurrencyCode(foundation.NSStringStringWithUTF8String(currencyCode))
-	if _r == nil {
-		return nil
+func (x *Locale) LocalizedStringForCurrencyCode(currencyCode string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForCurrencyCode:"), purego.NSString(currencyCode))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
 // Returns the localized string for the specified collator identifier.
-//
-// LocalizedStringForCollatorIdentifier calls the underlying LocalizedStringForCollatorIdentifier.
-func (x *Locale) LocalizedStringForCollatorIdentifier(collatorIdentifier string) *String {
-	_r := x.inner.LocalizedStringForCollatorIdentifier(foundation.NSStringStringWithUTF8String(collatorIdentifier))
-	if _r == nil {
-		return nil
+func (x *Locale) LocalizedStringForCollatorIdentifier(collatorIdentifier string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForCollatorIdentifier:"), purego.NSString(collatorIdentifier))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// LocaleIdentifier calls the underlying LocaleIdentifier.
-func (x *Locale) LocaleIdentifier() *String {
-	_r := x.inner.LocaleIdentifier()
-	if _r == nil {
-		return nil
+func (x *Locale) LocaleIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localeIdentifier"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// LanguageCode calls the underlying LanguageCode.
-func (x *Locale) LanguageCode() *String {
-	_r := x.inner.LanguageCode()
-	if _r == nil {
-		return nil
+func (x *Locale) LanguageCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageCode"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Returns the identifier for the language part of the locale. For example, returns "en-US" for "en_US@rg=gbzzzz"  locale.
-//
-// LanguageIdentifier calls the underlying LanguageIdentifier.
-func (x *Locale) LanguageIdentifier() *String {
-	_r := x.inner.LanguageIdentifier()
-	if _r == nil {
-		return nil
+// Returns the identifier for the language part of the locale. For example, returns "en-US" for "en_US
+func (x *Locale) LanguageIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageIdentifier"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// CountryCode calls the underlying CountryCode.
-func (x *Locale) CountryCode() *String {
-	_r := x.inner.CountryCode()
-	if _r == nil {
-		return nil
+func (x *Locale) CountryCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("countryCode"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Returns the region code of the locale. If the `rg` subtag is present, the value of the subtag will be used. For example,  returns "GB" for "en_US@rg=gbzzzz" locale. If the `localeIdentifier` doesn’t contain a region, returns `nil`.
-//
-// RegionCode calls the underlying RegionCode.
-func (x *Locale) RegionCode() *String {
-	_r := x.inner.RegionCode()
-	if _r == nil {
-		return nil
+// Returns the region code of the locale. If the `rg` subtag is present, the value of the subtag will be used. For example,  returns "GB" for "en_US
+func (x *Locale) RegionCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionCode"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// ScriptCode calls the underlying ScriptCode.
-func (x *Locale) ScriptCode() *String {
-	_r := x.inner.ScriptCode()
-	if _r == nil {
-		return nil
+func (x *Locale) ScriptCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scriptCode"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// VariantCode calls the underlying VariantCode.
-func (x *Locale) VariantCode() *String {
-	_r := x.inner.VariantCode()
-	if _r == nil {
-		return nil
+func (x *Locale) VariantCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variantCode"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// ExemplarCharacterSet calls the underlying ExemplarCharacterSet.
 func (x *Locale) ExemplarCharacterSet() *CharacterSet {
-	_r := x.inner.ExemplarCharacterSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exemplarCharacterSet"))
+	return CharacterSetFromID(_r)
 }
 
-// CalendarIdentifier calls the underlying CalendarIdentifier.
-func (x *Locale) CalendarIdentifier() *String {
-	_r := x.inner.CalendarIdentifier()
-	if _r == nil {
-		return nil
+func (x *Locale) CalendarIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendarIdentifier"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// CollationIdentifier calls the underlying CollationIdentifier.
-func (x *Locale) CollationIdentifier() *String {
-	_r := x.inner.CollationIdentifier()
-	if _r == nil {
-		return nil
+func (x *Locale) CollationIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collationIdentifier"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// UsesMetricSystem calls the underlying UsesMetricSystem.
 func (x *Locale) UsesMetricSystem() bool {
-	return x.inner.UsesMetricSystem()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesMetricSystem"))
+	return _r
 }
 
-// DecimalSeparator calls the underlying DecimalSeparator.
-func (x *Locale) DecimalSeparator() *String {
-	_r := x.inner.DecimalSeparator()
-	if _r == nil {
-		return nil
+func (x *Locale) DecimalSeparator() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decimalSeparator"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// GroupingSeparator calls the underlying GroupingSeparator.
-func (x *Locale) GroupingSeparator() *String {
-	_r := x.inner.GroupingSeparator()
-	if _r == nil {
-		return nil
+func (x *Locale) GroupingSeparator() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupingSeparator"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// CurrencySymbol calls the underlying CurrencySymbol.
-func (x *Locale) CurrencySymbol() *String {
-	_r := x.inner.CurrencySymbol()
-	if _r == nil {
-		return nil
+func (x *Locale) CurrencySymbol() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currencySymbol"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// CurrencyCode calls the underlying CurrencyCode.
-func (x *Locale) CurrencyCode() *String {
-	_r := x.inner.CurrencyCode()
-	if _r == nil {
-		return nil
+func (x *Locale) CurrencyCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currencyCode"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// CollatorIdentifier calls the underlying CollatorIdentifier.
-func (x *Locale) CollatorIdentifier() *String {
-	_r := x.inner.CollatorIdentifier()
-	if _r == nil {
-		return nil
+func (x *Locale) CollatorIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collatorIdentifier"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// QuotationBeginDelimiter calls the underlying QuotationBeginDelimiter.
-func (x *Locale) QuotationBeginDelimiter() *String {
-	_r := x.inner.QuotationBeginDelimiter()
-	if _r == nil {
-		return nil
+func (x *Locale) QuotationBeginDelimiter() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quotationBeginDelimiter"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// QuotationEndDelimiter calls the underlying QuotationEndDelimiter.
-func (x *Locale) QuotationEndDelimiter() *String {
-	_r := x.inner.QuotationEndDelimiter()
-	if _r == nil {
-		return nil
+func (x *Locale) QuotationEndDelimiter() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quotationEndDelimiter"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// AlternateQuotationBeginDelimiter calls the underlying AlternateQuotationBeginDelimiter.
-func (x *Locale) AlternateQuotationBeginDelimiter() *String {
-	_r := x.inner.AlternateQuotationBeginDelimiter()
-	if _r == nil {
-		return nil
+func (x *Locale) AlternateQuotationBeginDelimiter() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternateQuotationBeginDelimiter"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// AlternateQuotationEndDelimiter calls the underlying AlternateQuotationEndDelimiter.
-func (x *Locale) AlternateQuotationEndDelimiter() *String {
-	_r := x.inner.AlternateQuotationEndDelimiter()
-	if _r == nil {
-		return nil
+func (x *Locale) AlternateQuotationEndDelimiter() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternateQuotationEndDelimiter"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
-
-func (x *Locale) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Localeable is the interface implemented by [Locale], for mocking and DI.
 type Localeable interface {
-	Unwrap() *raw.NSLocale
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Locale
-	ObjectForKey(key *raw.NSString) objc.ID
-	DisplayNameForKeyValue(key *raw.NSString, value objc.ID) *String
-	LocalizedStringForLocaleIdentifier(localeIdentifier string) *String
-	LocalizedStringForLanguageCode(languageCode string) *String
-	LocalizedStringForCountryCode(countryCode string) *String
-	LocalizedStringForScriptCode(scriptCode string) *String
-	LocalizedStringForVariantCode(variantCode string) *String
-	LocalizedStringForCalendarIdentifier(calendarIdentifier string) *String
-	LocalizedStringForCollationIdentifier(collationIdentifier string) *String
-	LocalizedStringForCurrencyCode(currencyCode string) *String
-	LocalizedStringForCollatorIdentifier(collatorIdentifier string) *String
-	LocaleIdentifier() *String
-	LanguageCode() *String
-	LanguageIdentifier() *String
-	CountryCode() *String
-	RegionCode() *String
-	ScriptCode() *String
-	VariantCode() *String
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Locale
+	ObjectForKey(key *String) obj.Object
+	DisplayNameForKeyValue(key *String, value obj.Object) string
+	LocalizedStringForLocaleIdentifier(localeIdentifier string) string
+	LocalizedStringForLanguageCode(languageCode string) string
+	LocalizedStringForCountryCode(countryCode string) string
+	LocalizedStringForScriptCode(scriptCode string) string
+	LocalizedStringForVariantCode(variantCode string) string
+	LocalizedStringForCalendarIdentifier(calendarIdentifier string) string
+	LocalizedStringForCollationIdentifier(collationIdentifier string) string
+	LocalizedStringForCurrencyCode(currencyCode string) string
+	LocalizedStringForCollatorIdentifier(collatorIdentifier string) string
+	LocaleIdentifier() string
+	LanguageCode() string
+	LanguageIdentifier() string
+	CountryCode() string
+	RegionCode() string
+	ScriptCode() string
+	VariantCode() string
 	ExemplarCharacterSet() *CharacterSet
-	CalendarIdentifier() *String
-	CollationIdentifier() *String
+	CalendarIdentifier() string
+	CollationIdentifier() string
 	UsesMetricSystem() bool
-	DecimalSeparator() *String
-	GroupingSeparator() *String
-	CurrencySymbol() *String
-	CurrencyCode() *String
-	CollatorIdentifier() *String
-	QuotationBeginDelimiter() *String
-	QuotationEndDelimiter() *String
-	AlternateQuotationBeginDelimiter() *String
-	AlternateQuotationEndDelimiter() *String
+	DecimalSeparator() string
+	GroupingSeparator() string
+	CurrencySymbol() string
+	CurrencyCode() string
+	CollatorIdentifier() string
+	QuotationBeginDelimiter() string
+	QuotationEndDelimiter() string
+	AlternateQuotationBeginDelimiter() string
+	AlternateQuotationEndDelimiter() string
 }
 
 var _ Localeable = (*Locale)(nil)

@@ -6,261 +6,208 @@ package cloudkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An operation that fetches metadata for one or more shares.
 //
-// FetchShareMetadataOperation wraps [raw.CKFetchShareMetadataOperation] with a fluent Go API.
+// FetchShareMetadataOperation is an idiomatic wrapper over the Objective-C class CKFetchShareMetadataOperation.
 type FetchShareMetadataOperation struct {
-	inner *raw.CKFetchShareMetadataOperation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKFetchShareMetadataOperation].
-func (x *FetchShareMetadataOperation) Unwrap() *raw.CKFetchShareMetadataOperation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FetchShareMetadataOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// FetchShareMetadataOperationFromID adopts an existing object pointer as a FetchShareMetadataOperation (nil for 0).
+// FetchShareMetadataOperationFromID adopts an existing Objective-C object as a FetchShareMetadataOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func FetchShareMetadataOperationFromID(id objc.ID) *FetchShareMetadataOperation {
 	if id == 0 {
 		return nil
 	}
-	return &FetchShareMetadataOperation{inner: raw.CKFetchShareMetadataOperationFromID(id)}
+	x := &FetchShareMetadataOperation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFetchShareMetadataOperation creates a new [FetchShareMetadataOperation].
+// fetchShareMetadataOperationAdopt wraps an Objective-C object that this code just created as a
+// FetchShareMetadataOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fetchShareMetadataOperationAdopt(id objc.ID) *FetchShareMetadataOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &FetchShareMetadataOperation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FetchShareMetadataOperation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FetchShareMetadataOperation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FetchShareMetadataOperation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFetchShareMetadataOperation creates a new FetchShareMetadataOperation.
 func NewFetchShareMetadataOperation() *FetchShareMetadataOperation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKFetchShareMetadataOperation")), objc.RegisterName("new"))
-	return &FetchShareMetadataOperation{inner: raw.CKFetchShareMetadataOperationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKFetchShareMetadataOperation")), objc.RegisterName("new"))
+	return fetchShareMetadataOperationAdopt(_id)
 }
 
 // Creates an operation for fetching the metadata for the specified shares.
 //
-// NewFetchShareMetadataOperationWithShareURLs creates a new [FetchShareMetadataOperation].
-func NewFetchShareMetadataOperationWithShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL]) *FetchShareMetadataOperation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKFetchShareMetadataOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShareURLs:"), shareURLs.Ptr())
-	return &FetchShareMetadataOperation{inner: raw.CKFetchShareMetadataOperationFromID(_id)}
+// NewFetchShareMetadataOperationWithShareURLs creates a new FetchShareMetadataOperation.
+func NewFetchShareMetadataOperationWithShareURLs(shareURLs []obj.Object) *FetchShareMetadataOperation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKFetchShareMetadataOperation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShareURLs:"), purego.SliceToNSArray(shareURLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return fetchShareMetadataOperationAdopt(_id)
 }
 
 // The URLs of the shares to fetch.
 //
-// WithShareURLs sets the collection, converting the Go slice to an NSArray.
-func (x *FetchShareMetadataOperation) WithShareURLs(items ...*foundation.NSURL) *FetchShareMetadataOperation {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetShareURLs(foundation.NSArrayFromID[*foundation.NSURL](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSURL](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetShareURLs(_arr)
+// WithShareURLs sets the collection and returns the receiver so calls can be chained.
+func (x *FetchShareMetadataOperation) WithShareURLs(items ...obj.Object) *FetchShareMetadataOperation {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShareURLs:"), _arr)
 	return x
 }
 
 // A Boolean value that indicates whether to retrieve the root record.
 //
-// WithShouldFetchRootRecord sets the shouldFetchRootRecord property and returns the receiver for chaining.
+// WithShouldFetchRootRecord sets shouldFetchRootRecord and returns the receiver so calls can be chained.
 func (x *FetchShareMetadataOperation) WithShouldFetchRootRecord(shouldFetchRootRecord bool) *FetchShareMetadataOperation {
-	x.inner.SetShouldFetchRootRecord(shouldFetchRootRecord)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldFetchRootRecord:"), shouldFetchRootRecord)
 	return x
 }
 
 // The fields to return when fetching the root record.
 //
-// WithRootRecordDesiredKeys sets the collection, converting the Go slice to an NSArray.
-func (x *FetchShareMetadataOperation) WithRootRecordDesiredKeys(items ...*foundation.NSString) *FetchShareMetadataOperation {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetRootRecordDesiredKeys(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetRootRecordDesiredKeys(_arr)
-	return x
-}
-
-// The closure to execute as the operation fetches individual shares.
-//
-// WithPerShareMetadataBlock sets the perShareMetadataBlock property and returns the receiver for chaining.
-func (x *FetchShareMetadataOperation) WithPerShareMetadataBlock(perShareMetadataBlock func(*foundation.NSURL, *raw.CKShareMetadata, unsafe.Pointer)) *FetchShareMetadataOperation {
-	x.inner.SetPerShareMetadataBlock(perShareMetadataBlock)
-	return x
-}
-
-// The closure to execute when the operation finishes.
-//
-// WithFetchShareMetadataCompletionBlock sets the fetchShareMetadataCompletionBlock property and returns the receiver for chaining.
-func (x *FetchShareMetadataOperation) WithFetchShareMetadataCompletionBlock(fetchShareMetadataCompletionBlock func(unsafe.Pointer)) *FetchShareMetadataOperation {
-	x.inner.SetFetchShareMetadataCompletionBlock(fetchShareMetadataCompletionBlock)
+// WithRootRecordDesiredKeys sets the collection and returns the receiver so calls can be chained.
+func (x *FetchShareMetadataOperation) WithRootRecordDesiredKeys(items ...obj.Object) *FetchShareMetadataOperation {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootRecordDesiredKeys:"), _arr)
 	return x
 }
 
 // The operation’s configuration.
 //
-// WithConfiguration sets the configuration property and returns the receiver for chaining.
+// WithConfiguration sets configuration and returns the receiver so calls can be chained.
 func (x *FetchShareMetadataOperation) WithConfiguration(configuration *OperationConfiguration) *FetchShareMetadataOperation {
-	x.inner.CKOperation.SetConfiguration(configuration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
 // The operation’s group.
 //
-// WithGroup sets the group property and returns the receiver for chaining.
+// WithGroup sets group and returns the receiver so calls can be chained.
 func (x *FetchShareMetadataOperation) WithGroup(group *OperationGroup) *FetchShareMetadataOperation {
-	x.inner.CKOperation.SetGroup(group.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
 // The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
-// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
 func (x *FetchShareMetadataOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchShareMetadataOperation {
-	x.inner.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+// The operation's container.
 //
-// WithContainer sets the container property and returns the receiver for chaining.
+// WithContainer sets container and returns the receiver so calls can be chained.
 func (x *FetchShareMetadataOperation) WithContainer(container *Container) *FetchShareMetadataOperation {
-	x.inner.CKOperation.SetContainer(container.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+// A Boolean value that indicates whether the operation can send data over the cellular network.
 //
-// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
 func (x *FetchShareMetadataOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchShareMetadataOperation {
-	x.inner.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
 // A Boolean value that indicates whether the operation is long-lived.
 //
-// WithLongLived sets the longLived property and returns the receiver for chaining.
+// WithLongLived sets longLived and returns the receiver so calls can be chained.
 func (x *FetchShareMetadataOperation) WithLongLived(longLived bool) *FetchShareMetadataOperation {
-	x.inner.CKOperation.SetLongLived(longLived)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+// The timeout interval when waiting for additional data.
 //
-// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
 func (x *FetchShareMetadataOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchShareMetadataOperation {
-	x.inner.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+// The maximum amount of time that a resource request can use.
 //
-// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
 func (x *FetchShareMetadataOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchShareMetadataOperation {
-	x.inner.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
 // The URLs of the shares to fetch. Use this property to view or change the URLs of the shares to fetch. If you intend to specify or change this property's value, do so before you execute the operation or submit it to a queue.
 //
 // ShareURLs returns the collection as a Go slice.
-func (x *FetchShareMetadataOperation) ShareURLs() []*foundation.NSURL {
-	arr := x.inner.ShareURLs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSURL {
-		return foundation.NSURLFromID(purego.Retain(_id))
-	})
+func (x *FetchShareMetadataOperation) ShareURLs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shareURLs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetShareURLs calls the underlying SetShareURLs.
-func (x *FetchShareMetadataOperation) SetShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL]) {
-	x.inner.SetShareURLs(shareURLs)
+func (x *FetchShareMetadataOperation) SetShareURLs(shareURLs []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShareURLs:"), purego.SliceToNSArray(shareURLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // A Boolean value that indicates whether to retrieve the root record. For a shared record hierarchy, set this property to <doc://com.apple.documentation/documentation/swift/true> to include the root record in the fetched share metadata. CloudKit ignores this property for a shared record zone because, unlike a shared record hierarchy, it doesn't have a nominated root record. The default value is <doc://com.apple.documentation/documentation/swift/false>.
-//
-// ShouldFetchRootRecord calls the underlying ShouldFetchRootRecord.
 func (x *FetchShareMetadataOperation) ShouldFetchRootRecord() bool {
-	return x.inner.ShouldFetchRootRecord()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldFetchRootRecord"))
+	return _r
 }
 
-// SetShouldFetchRootRecord calls the underlying SetShouldFetchRootRecord.
 func (x *FetchShareMetadataOperation) SetShouldFetchRootRecord(shouldFetchRootRecord bool) {
-	x.inner.SetShouldFetchRootRecord(shouldFetchRootRecord)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldFetchRootRecord:"), shouldFetchRootRecord)
 }
 
 // The fields to return when fetching the root record. For a shared record hierarchy, and when “CKFetchShareMetadataOperation/shouldFetchRootRecord“ is <doc://com.apple.documentation/documentation/swift/true>, set this property to specify which of the root record's fields the operation fetches. Use `nil` to fetch the entire record. CloudKit ignores this property for a shared record zone because, unlike a hierarchy, it doesn't have a nominated root record. The default value is `nil`.
 //
 // RootRecordDesiredKeys returns the collection as a Go slice.
-func (x *FetchShareMetadataOperation) RootRecordDesiredKeys() []*foundation.NSString {
-	arr := x.inner.RootRecordDesiredKeys()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *FetchShareMetadataOperation) RootRecordDesiredKeys() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootRecordDesiredKeys"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetRootRecordDesiredKeys calls the underlying SetRootRecordDesiredKeys.
-func (x *FetchShareMetadataOperation) SetRootRecordDesiredKeys(rootRecordDesiredKeys *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetRootRecordDesiredKeys(rootRecordDesiredKeys)
-}
-
-// The closure to execute as the operation fetches individual shares. The closure returns no value and takes the following parameters: - The share's URL. - The share metadata, or `nil` if CloudKit can't fetch the metadata. - If CloudKit can't fetch the share metadata, this parameter provides information about the failure; otherwise, it's `nil`. The operation executes this closure once for each URL in the “CKFetchShareMetadataOperation/shareURLs“ property. Each time the closure executes, it executes serially with respect to the other closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
-//
-// PerShareMetadataBlock calls the underlying PerShareMetadataBlock.
-func (x *FetchShareMetadataOperation) PerShareMetadataBlock() objc.Block {
-	return x.inner.PerShareMetadataBlock()
-}
-
-// SetPerShareMetadataBlock calls the underlying SetPerShareMetadataBlock.
-func (x *FetchShareMetadataOperation) SetPerShareMetadataBlock(perShareMetadataBlock func(*foundation.NSURL, *raw.CKShareMetadata, unsafe.Pointer)) {
-	x.inner.SetPerShareMetadataBlock(perShareMetadataBlock)
-}
-
-// The closure to execute when the operation finishes. The closure returns no value and takes the following parameter: - An error that contains information about a problem, or `nil` if CloudKit successfully fetches the metadatas. The operation executes this closure only once. The closure executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The closure reports an error of type “CKError/Code/partialFailure“ when it can't fetch some of the metadatas. The `userInfo` dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary identify the metadatas that CloudKit can't fetch, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
-//
-// FetchShareMetadataCompletionBlock calls the underlying FetchShareMetadataCompletionBlock.
-func (x *FetchShareMetadataOperation) FetchShareMetadataCompletionBlock() objc.Block {
-	return x.inner.FetchShareMetadataCompletionBlock()
+func (x *FetchShareMetadataOperation) SetRootRecordDesiredKeys(rootRecordDesiredKeys []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootRecordDesiredKeys:"), purego.SliceToNSArray(rootRecordDesiredKeys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SetFetchShareMetadataCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (x *FetchShareMetadataOperation) SetFetchShareMetadataCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.SetFetchShareMetadataCompletionBlock(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchShareMetadataCompletionBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -269,16 +216,12 @@ func (x *FetchShareMetadataOperation) SetFetchShareMetadataCompletionBlock(ctx c
 	}
 }
 
-func (x *FetchShareMetadataOperation) asOperation() *raw.CKOperation { return &x.inner.CKOperation }
-
 // FetchShareMetadataOperationable is the interface implemented by [FetchShareMetadataOperation], for mocking and DI.
 type FetchShareMetadataOperationable interface {
-	Unwrap() *raw.CKFetchShareMetadataOperation
-	WithShareURLs(items ...*foundation.NSURL) *FetchShareMetadataOperation
+	obj.Object
+	WithShareURLs(items ...obj.Object) *FetchShareMetadataOperation
 	WithShouldFetchRootRecord(shouldFetchRootRecord bool) *FetchShareMetadataOperation
-	WithRootRecordDesiredKeys(items ...*foundation.NSString) *FetchShareMetadataOperation
-	WithPerShareMetadataBlock(perShareMetadataBlock func(*foundation.NSURL, *raw.CKShareMetadata, unsafe.Pointer)) *FetchShareMetadataOperation
-	WithFetchShareMetadataCompletionBlock(fetchShareMetadataCompletionBlock func(unsafe.Pointer)) *FetchShareMetadataOperation
+	WithRootRecordDesiredKeys(items ...obj.Object) *FetchShareMetadataOperation
 	WithConfiguration(configuration *OperationConfiguration) *FetchShareMetadataOperation
 	WithGroup(group *OperationGroup) *FetchShareMetadataOperation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchShareMetadataOperation
@@ -287,15 +230,12 @@ type FetchShareMetadataOperationable interface {
 	WithLongLived(longLived bool) *FetchShareMetadataOperation
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchShareMetadataOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchShareMetadataOperation
-	ShareURLs() []*foundation.NSURL
-	SetShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL])
+	ShareURLs() []obj.Object
+	SetShareURLs(shareURLs []obj.Object)
 	ShouldFetchRootRecord() bool
 	SetShouldFetchRootRecord(shouldFetchRootRecord bool)
-	RootRecordDesiredKeys() []*foundation.NSString
-	SetRootRecordDesiredKeys(rootRecordDesiredKeys *foundation.NSArray[*foundation.NSString])
-	PerShareMetadataBlock() objc.Block
-	SetPerShareMetadataBlock(perShareMetadataBlock func(*foundation.NSURL, *raw.CKShareMetadata, unsafe.Pointer))
-	FetchShareMetadataCompletionBlock() objc.Block
+	RootRecordDesiredKeys() []obj.Object
+	SetRootRecordDesiredKeys(rootRecordDesiredKeys []obj.Object)
 	SetFetchShareMetadataCompletionBlock(ctx context.Context) error
 }
 

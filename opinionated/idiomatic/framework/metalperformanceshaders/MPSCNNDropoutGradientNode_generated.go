@@ -5,91 +5,89 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A representation of a gradient dropout filter.
 //
-// CNNDropoutGradientNode wraps [raw.MPSCNNDropoutGradientNode] with a fluent Go API.
+// CNNDropoutGradientNode is an idiomatic wrapper over the Objective-C class MPSCNNDropoutGradientNode.
 type CNNDropoutGradientNode struct {
-	inner *raw.MPSCNNDropoutGradientNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNDropoutGradientNode].
-func (x *CNNDropoutGradientNode) Unwrap() *raw.MPSCNNDropoutGradientNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNDropoutGradientNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNDropoutGradientNodeFromID adopts an existing object pointer as a CNNDropoutGradientNode (nil for 0).
+// CNNDropoutGradientNodeFromID adopts an existing Objective-C object as a CNNDropoutGradientNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNDropoutGradientNodeFromID(id objc.ID) *CNNDropoutGradientNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNDropoutGradientNode{inner: raw.MPSCNNDropoutGradientNodeFromID(id)}
-}
-
-// @abstract create a new dropout gradient node @discussion See also -[MPSCNNNeuronNode gradientFilterNodeWithSources:] for an easier way to do this
-//
-// NewCNNDropoutGradientNodeWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels creates a new [CNNDropoutGradientNode].
-func NewCNNDropoutGradientNodeWithSourceGradientSourceImageGradientStateKeepProbabilitySeedMaskStrideInPixels(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode, keepProbability float32, seed uint, maskStrideInPixels metal.MTLSize) *CNNDropoutGradientNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNDropoutGradientNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:keepProbability:seed:maskStrideInPixels:"), sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), keepProbability, seed, maskStrideInPixels)
-	return &CNNDropoutGradientNode{inner: raw.MPSCNNDropoutGradientNodeFromID(_id)}
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNDropoutGradientNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNDropoutGradientNode {
-	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	x := &CNNDropoutGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// cNNDropoutGradientNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNDropoutGradientNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNDropoutGradientNodeAdopt(id objc.ID) *CNNDropoutGradientNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNDropoutGradientNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CNNDropoutGradientNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNDropoutGradientNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNDropoutGradientNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNDropoutGradientNode creates a new CNNDropoutGradientNode.
+func NewCNNDropoutGradientNode() *CNNDropoutGradientNode {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropoutGradientNode")), objc.RegisterName("new"))
+	return cNNDropoutGradientNodeAdopt(_id)
+}
+
+// A string to help identify this object.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *CNNDropoutGradientNode) WithLabel(label string) *CNNDropoutGradientNode {
-	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// KeepProbability calls the underlying KeepProbability.
 func (x *CNNDropoutGradientNode) KeepProbability() float32 {
-	return x.inner.KeepProbability()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("keepProbability"))
+	return _r
 }
 
-// Seed calls the underlying Seed.
-func (x *CNNDropoutGradientNode) Seed() uint {
-	return x.inner.Seed()
-}
-
-// MaskStrideInPixels calls the underlying MaskStrideInPixels.
-func (x *CNNDropoutGradientNode) MaskStrideInPixels() metal.MTLSize {
-	return x.inner.MaskStrideInPixels()
-}
-
-func (x *CNNDropoutGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode {
-	return &x.inner.MPSNNGradientFilterNode
-}
-
-func (x *CNNDropoutGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+func (x *CNNDropoutGradientNode) Seed() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("seed"))
+	return _r
 }
 
 // CNNDropoutGradientNodeable is the interface implemented by [CNNDropoutGradientNode], for mocking and DI.
 type CNNDropoutGradientNodeable interface {
-	Unwrap() *raw.MPSCNNDropoutGradientNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNDropoutGradientNode
+	obj.Object
 	WithLabel(label string) *CNNDropoutGradientNode
 	KeepProbability() float32
-	Seed() uint
-	MaskStrideInPixels() metal.MTLSize
+	Seed() int
 }
 
 var _ CNNDropoutGradientNodeable = (*CNNDropoutGradientNode)(nil)

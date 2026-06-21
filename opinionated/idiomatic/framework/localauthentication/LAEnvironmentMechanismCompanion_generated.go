@@ -5,60 +5,80 @@
 package localauthentication
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// EnvironmentMechanismCompanion wraps [raw.LAEnvironmentMechanismCompanion] with a fluent Go API.
+// EnvironmentMechanismCompanion is an idiomatic wrapper over the Objective-C class LAEnvironmentMechanismCompanion.
 type EnvironmentMechanismCompanion struct {
-	inner *raw.LAEnvironmentMechanismCompanion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.LAEnvironmentMechanismCompanion].
-func (x *EnvironmentMechanismCompanion) Unwrap() *raw.LAEnvironmentMechanismCompanion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EnvironmentMechanismCompanion) ID() objc.ID { return x.inner.Ptr() }
-
-// EnvironmentMechanismCompanionFromID adopts an existing object pointer as a EnvironmentMechanismCompanion (nil for 0).
+// EnvironmentMechanismCompanionFromID adopts an existing Objective-C object as a EnvironmentMechanismCompanion
+// (nil for 0), retaining it and registering a release finalizer.
 func EnvironmentMechanismCompanionFromID(id objc.ID) *EnvironmentMechanismCompanion {
 	if id == 0 {
 		return nil
 	}
-	return &EnvironmentMechanismCompanion{inner: raw.LAEnvironmentMechanismCompanionFromID(id)}
+	x := &EnvironmentMechanismCompanion{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEnvironmentMechanismCompanion creates a new [EnvironmentMechanismCompanion].
+// environmentMechanismCompanionAdopt wraps an Objective-C object that this code just created as a
+// EnvironmentMechanismCompanion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func environmentMechanismCompanionAdopt(id objc.ID) *EnvironmentMechanismCompanion {
+	if id == 0 {
+		return nil
+	}
+	x := &EnvironmentMechanismCompanion{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EnvironmentMechanismCompanion) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EnvironmentMechanismCompanion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EnvironmentMechanismCompanion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEnvironmentMechanismCompanion creates a new EnvironmentMechanismCompanion.
 func NewEnvironmentMechanismCompanion() *EnvironmentMechanismCompanion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LAEnvironmentMechanismCompanion")), objc.RegisterName("new"))
-	return &EnvironmentMechanismCompanion{inner: raw.LAEnvironmentMechanismCompanionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("LAEnvironmentMechanismCompanion")), objc.RegisterName("new"))
+	return environmentMechanismCompanionAdopt(_id)
 }
 
 // Type of the companion.
-//
-// Type calls the underlying Type.
-func (x *EnvironmentMechanismCompanion) Type() LACompanionType {
-	return LACompanionType(x.inner.Type())
+func (x *EnvironmentMechanismCompanion) Type() CompanionType {
+	_r := objc.Send[CompanionType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// @brief Hash of the current companion pairing as returned by @c LAContext.domainState.companion.stateHash(for:) @discussion If no companion are paired for this companion type, @c stateHash property is @c nil. If at least one companion is paired for this companion type, @c stateHash is not @c nil and it changes whenever the set of paired companions of this type is changed.
-//
-// StateHash calls the underlying StateHash.
-func (x *EnvironmentMechanismCompanion) StateHash() *foundation.NSData {
-	return x.inner.StateHash()
-}
-
-func (x *EnvironmentMechanismCompanion) asEnvironmentMechanism() *raw.LAEnvironmentMechanism {
-	return &x.inner.LAEnvironmentMechanism
+// Hash of the current companion pairing as returned by If no companion are paired for this companion type,
+func (x *EnvironmentMechanismCompanion) StateHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateHash"))
+	return obj.Wrap(_r)
 }
 
 // EnvironmentMechanismCompanionable is the interface implemented by [EnvironmentMechanismCompanion], for mocking and DI.
 type EnvironmentMechanismCompanionable interface {
-	Unwrap() *raw.LAEnvironmentMechanismCompanion
-	Type() LACompanionType
-	StateHash() *foundation.NSData
+	obj.Object
+	Type() CompanionType
+	StateHash() obj.Object
 }
 
 var _ EnvironmentMechanismCompanionable = (*EnvironmentMechanismCompanion)(nil)

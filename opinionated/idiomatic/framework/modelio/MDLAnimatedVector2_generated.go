@@ -5,97 +5,73 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// AnimatedVector2 wraps [raw.MDLAnimatedVector2] with a fluent Go API.
+// AnimatedVector2 is an idiomatic wrapper over the Objective-C class MDLAnimatedVector2.
 type AnimatedVector2 struct {
-	inner *raw.MDLAnimatedVector2
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLAnimatedVector2].
-func (x *AnimatedVector2) Unwrap() *raw.MDLAnimatedVector2 { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AnimatedVector2) ID() objc.ID { return x.inner.Ptr() }
-
-// AnimatedVector2FromID adopts an existing object pointer as a AnimatedVector2 (nil for 0).
+// AnimatedVector2FromID adopts an existing Objective-C object as a AnimatedVector2
+// (nil for 0), retaining it and registering a release finalizer.
 func AnimatedVector2FromID(id objc.ID) *AnimatedVector2 {
 	if id == 0 {
 		return nil
 	}
-	return &AnimatedVector2{inner: raw.MDLAnimatedVector2FromID(id)}
-}
-
-// NewAnimatedVector2 creates a new [AnimatedVector2].
-func NewAnimatedVector2() *AnimatedVector2 {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLAnimatedVector2")), objc.RegisterName("new"))
-	return &AnimatedVector2{inner: raw.MDLAnimatedVector2FromID(_id)}
-}
-
-// WithInterpolation sets the interpolation property and returns the receiver for chaining.
-func (x *AnimatedVector2) WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedVector2 {
-	x.inner.MDLAnimatedValue.SetInterpolation(raw.MDLAnimatedValueInterpolation(interpolation))
+	x := &AnimatedVector2{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// SetFloat2AtTime calls the underlying SetFloat2AtTime.
-func (x *AnimatedVector2) SetFloat2AtTime(value unsafe.Pointer, time_ float64) {
-	x.inner.SetFloat2AtTime(value, time_)
+// animatedVector2Adopt wraps an Objective-C object that this code just created as a
+// AnimatedVector2 (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func animatedVector2Adopt(id objc.ID) *AnimatedVector2 {
+	if id == 0 {
+		return nil
+	}
+	x := &AnimatedVector2{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetDouble2AtTime calls the underlying SetDouble2AtTime.
-func (x *AnimatedVector2) SetDouble2AtTime(value unsafe.Pointer, time_ float64) {
-	x.inner.SetDouble2AtTime(value, time_)
+// Description returns the object's -description text.
+func (x *AnimatedVector2) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Float2AtTime calls the underlying Float2AtTime.
-func (x *AnimatedVector2) Float2AtTime(time_ float64) unsafe.Pointer {
-	return x.inner.Float2AtTime(time_)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AnimatedVector2) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Double2AtTime calls the underlying Double2AtTime.
-func (x *AnimatedVector2) Double2AtTime(time_ float64) unsafe.Pointer {
-	return x.inner.Double2AtTime(time_)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AnimatedVector2) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// ResetWithFloat2ArrayAtTimesCount calls the underlying ResetWithFloat2ArrayAtTimesCount.
-func (x *AnimatedVector2) ResetWithFloat2ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint) {
-	x.inner.ResetWithFloat2ArrayAtTimesCount(valuesArray, timesArray, count)
+// NewAnimatedVector2 creates a new AnimatedVector2.
+func NewAnimatedVector2() *AnimatedVector2 {
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLAnimatedVector2")), objc.RegisterName("new"))
+	return animatedVector2Adopt(_id)
 }
 
-// ResetWithDouble2ArrayAtTimesCount calls the underlying ResetWithDouble2ArrayAtTimesCount.
-func (x *AnimatedVector2) ResetWithDouble2ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint) {
-	x.inner.ResetWithDouble2ArrayAtTimesCount(valuesArray, timesArray, count)
+// WithInterpolation sets interpolation and returns the receiver so calls can be chained.
+func (x *AnimatedVector2) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector2 {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
+	return x
 }
-
-// GetFloat2ArrayMaxCount calls the underlying GetFloat2ArrayMaxCount.
-func (x *AnimatedVector2) GetFloat2ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint {
-	return x.inner.GetFloat2ArrayMaxCount(valuesArray, maxCount)
-}
-
-// GetDouble2ArrayMaxCount calls the underlying GetDouble2ArrayMaxCount.
-func (x *AnimatedVector2) GetDouble2ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint {
-	return x.inner.GetDouble2ArrayMaxCount(valuesArray, maxCount)
-}
-
-func (x *AnimatedVector2) asAnimatedValue() *raw.MDLAnimatedValue { return &x.inner.MDLAnimatedValue }
 
 // AnimatedVector2able is the interface implemented by [AnimatedVector2], for mocking and DI.
 type AnimatedVector2able interface {
-	Unwrap() *raw.MDLAnimatedVector2
-	WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedVector2
-	SetFloat2AtTime(value unsafe.Pointer, time_ float64)
-	SetDouble2AtTime(value unsafe.Pointer, time_ float64)
-	Float2AtTime(time_ float64) unsafe.Pointer
-	Double2AtTime(time_ float64) unsafe.Pointer
-	ResetWithFloat2ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint)
-	ResetWithDouble2ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint)
-	GetFloat2ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
-	GetDouble2ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
+	obj.Object
+	WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector2
 }
 
 var _ AnimatedVector2able = (*AnimatedVector2)(nil)

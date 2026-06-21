@@ -5,175 +5,112 @@
 package iousbhost
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iousbhost"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @brief       NSErrorDomain for IOUSBHostFamily. Error codes are IOKit IOReturn codes. @constant    IOUSBHostErrorDomain domain for IOUSBHostFamily errors
-// IOUSBHostErrorDomain returns the string constant IOUSBHostErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostErrorDomain() objc.ID {
-	if _r := raw.IOUSBHostErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSErrorDomain for IOUSBHostFamily. Error codes are IOKit IOReturn codes.
+// IOUSBHostErrorDomain returns the string constant IOUSBHostErrorDomain, for use as a dictionary key or argument.
+func IOUSBHostErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostErrorDomain")))
 }
 
-// IOUSBHostMatchingPropertyKeyVendorID returns the string constant IOUSBHostMatchingPropertyKeyVendorID as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostMatchingPropertyKeyVendorID() objc.ID {
-	if _r := raw.IOUSBHostMatchingPropertyKeyVendorID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostMatchingPropertyKeyVendorID returns the string constant IOUSBHostMatchingPropertyKeyVendorID, for use as a dictionary key or argument.
+func IOUSBHostMatchingPropertyKeyVendorID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostMatchingPropertyKeyVendorID")))
 }
 
-// IOUSBHostMatchingPropertyKeyProductID returns the string constant IOUSBHostMatchingPropertyKeyProductID as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostMatchingPropertyKeyProductID() objc.ID {
-	if _r := raw.IOUSBHostMatchingPropertyKeyProductID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostMatchingPropertyKeyProductID returns the string constant IOUSBHostMatchingPropertyKeyProductID, for use as a dictionary key or argument.
+func IOUSBHostMatchingPropertyKeyProductID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostMatchingPropertyKeyProductID")))
 }
 
-// IOUSBHostMatchingPropertyKeyProductIDMask returns the string constant IOUSBHostMatchingPropertyKeyProductIDMask as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostMatchingPropertyKeyProductIDMask() objc.ID {
-	if _r := raw.IOUSBHostMatchingPropertyKeyProductIDMask(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostMatchingPropertyKeyProductIDMask returns the string constant IOUSBHostMatchingPropertyKeyProductIDMask, for use as a dictionary key or argument.
+func IOUSBHostMatchingPropertyKeyProductIDMask() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostMatchingPropertyKeyProductIDMask")))
 }
 
-// IOUSBHostMatchingPropertyKeyProductIDArray returns the string constant IOUSBHostMatchingPropertyKeyProductIDArray as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostMatchingPropertyKeyProductIDArray() objc.ID {
-	if _r := raw.IOUSBHostMatchingPropertyKeyProductIDArray(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostMatchingPropertyKeyProductIDArray returns the string constant IOUSBHostMatchingPropertyKeyProductIDArray, for use as a dictionary key or argument.
+func IOUSBHostMatchingPropertyKeyProductIDArray() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostMatchingPropertyKeyProductIDArray")))
 }
 
-// IOUSBHostMatchingPropertyKeyInterfaceNumber returns the string constant IOUSBHostMatchingPropertyKeyInterfaceNumber as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostMatchingPropertyKeyInterfaceNumber() objc.ID {
-	if _r := raw.IOUSBHostMatchingPropertyKeyInterfaceNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostMatchingPropertyKeyInterfaceNumber returns the string constant IOUSBHostMatchingPropertyKeyInterfaceNumber, for use as a dictionary key or argument.
+func IOUSBHostMatchingPropertyKeyInterfaceNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostMatchingPropertyKeyInterfaceNumber")))
 }
 
-// IOUSBHostMatchingPropertyKeyConfigurationValue returns the string constant IOUSBHostMatchingPropertyKeyConfigurationValue as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostMatchingPropertyKeyConfigurationValue() objc.ID {
-	if _r := raw.IOUSBHostMatchingPropertyKeyConfigurationValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostMatchingPropertyKeyConfigurationValue returns the string constant IOUSBHostMatchingPropertyKeyConfigurationValue, for use as a dictionary key or argument.
+func IOUSBHostMatchingPropertyKeyConfigurationValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostMatchingPropertyKeyConfigurationValue")))
 }
 
-// IOUSBHostMatchingPropertyKeyDeviceReleaseNumber returns the string constant IOUSBHostMatchingPropertyKeyDeviceReleaseNumber as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostMatchingPropertyKeyDeviceReleaseNumber() objc.ID {
-	if _r := raw.IOUSBHostMatchingPropertyKeyDeviceReleaseNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostMatchingPropertyKeyDeviceReleaseNumber returns the string constant IOUSBHostMatchingPropertyKeyDeviceReleaseNumber, for use as a dictionary key or argument.
+func IOUSBHostMatchingPropertyKeyDeviceReleaseNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostMatchingPropertyKeyDeviceReleaseNumber")))
 }
 
-// IOUSBHostMatchingPropertyKeyInterfaceClass returns the string constant IOUSBHostMatchingPropertyKeyInterfaceClass as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostMatchingPropertyKeyInterfaceClass() objc.ID {
-	if _r := raw.IOUSBHostMatchingPropertyKeyInterfaceClass(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostMatchingPropertyKeyInterfaceClass returns the string constant IOUSBHostMatchingPropertyKeyInterfaceClass, for use as a dictionary key or argument.
+func IOUSBHostMatchingPropertyKeyInterfaceClass() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostMatchingPropertyKeyInterfaceClass")))
 }
 
-// IOUSBHostMatchingPropertyKeyInterfaceSubClass returns the string constant IOUSBHostMatchingPropertyKeyInterfaceSubClass as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostMatchingPropertyKeyInterfaceSubClass() objc.ID {
-	if _r := raw.IOUSBHostMatchingPropertyKeyInterfaceSubClass(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostMatchingPropertyKeyInterfaceSubClass returns the string constant IOUSBHostMatchingPropertyKeyInterfaceSubClass, for use as a dictionary key or argument.
+func IOUSBHostMatchingPropertyKeyInterfaceSubClass() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostMatchingPropertyKeyInterfaceSubClass")))
 }
 
-// IOUSBHostMatchingPropertyKeyInterfaceProtocol returns the string constant IOUSBHostMatchingPropertyKeyInterfaceProtocol as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostMatchingPropertyKeyInterfaceProtocol() objc.ID {
-	if _r := raw.IOUSBHostMatchingPropertyKeyInterfaceProtocol(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostMatchingPropertyKeyInterfaceProtocol returns the string constant IOUSBHostMatchingPropertyKeyInterfaceProtocol, for use as a dictionary key or argument.
+func IOUSBHostMatchingPropertyKeyInterfaceProtocol() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostMatchingPropertyKeyInterfaceProtocol")))
 }
 
-// IOUSBHostMatchingPropertyKeyDeviceClass returns the string constant IOUSBHostMatchingPropertyKeyDeviceClass as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostMatchingPropertyKeyDeviceClass() objc.ID {
-	if _r := raw.IOUSBHostMatchingPropertyKeyDeviceClass(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostMatchingPropertyKeyDeviceClass returns the string constant IOUSBHostMatchingPropertyKeyDeviceClass, for use as a dictionary key or argument.
+func IOUSBHostMatchingPropertyKeyDeviceClass() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostMatchingPropertyKeyDeviceClass")))
 }
 
-// IOUSBHostMatchingPropertyKeyDeviceSubClass returns the string constant IOUSBHostMatchingPropertyKeyDeviceSubClass as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostMatchingPropertyKeyDeviceSubClass() objc.ID {
-	if _r := raw.IOUSBHostMatchingPropertyKeyDeviceSubClass(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostMatchingPropertyKeyDeviceSubClass returns the string constant IOUSBHostMatchingPropertyKeyDeviceSubClass, for use as a dictionary key or argument.
+func IOUSBHostMatchingPropertyKeyDeviceSubClass() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostMatchingPropertyKeyDeviceSubClass")))
 }
 
-// IOUSBHostMatchingPropertyKeyDeviceProtocol returns the string constant IOUSBHostMatchingPropertyKeyDeviceProtocol as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostMatchingPropertyKeyDeviceProtocol() objc.ID {
-	if _r := raw.IOUSBHostMatchingPropertyKeyDeviceProtocol(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostMatchingPropertyKeyDeviceProtocol returns the string constant IOUSBHostMatchingPropertyKeyDeviceProtocol, for use as a dictionary key or argument.
+func IOUSBHostMatchingPropertyKeyDeviceProtocol() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostMatchingPropertyKeyDeviceProtocol")))
 }
 
-// IOUSBHostMatchingPropertyKeySpeed returns the string constant IOUSBHostMatchingPropertyKeySpeed as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostMatchingPropertyKeySpeed() objc.ID {
-	if _r := raw.IOUSBHostMatchingPropertyKeySpeed(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostMatchingPropertyKeySpeed returns the string constant IOUSBHostMatchingPropertyKeySpeed, for use as a dictionary key or argument.
+func IOUSBHostMatchingPropertyKeySpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostMatchingPropertyKeySpeed")))
 }
 
-// IOUSBHostPropertyKeyLocationID returns the string constant IOUSBHostPropertyKeyLocationID as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostPropertyKeyLocationID() objc.ID {
-	if _r := raw.IOUSBHostPropertyKeyLocationID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostPropertyKeyLocationID returns the string constant IOUSBHostPropertyKeyLocationID, for use as a dictionary key or argument.
+func IOUSBHostPropertyKeyLocationID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostPropertyKeyLocationID")))
 }
 
-// IOUSBHostDevicePropertyKeyVendorString returns the string constant IOUSBHostDevicePropertyKeyVendorString as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostDevicePropertyKeyVendorString() objc.ID {
-	if _r := raw.IOUSBHostDevicePropertyKeyVendorString(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostDevicePropertyKeyVendorString returns the string constant IOUSBHostDevicePropertyKeyVendorString, for use as a dictionary key or argument.
+func IOUSBHostDevicePropertyKeyVendorString() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostDevicePropertyKeyVendorString")))
 }
 
-// IOUSBHostDevicePropertyKeySerialNumberString returns the string constant IOUSBHostDevicePropertyKeySerialNumberString as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostDevicePropertyKeySerialNumberString() objc.ID {
-	if _r := raw.IOUSBHostDevicePropertyKeySerialNumberString(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostDevicePropertyKeySerialNumberString returns the string constant IOUSBHostDevicePropertyKeySerialNumberString, for use as a dictionary key or argument.
+func IOUSBHostDevicePropertyKeySerialNumberString() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostDevicePropertyKeySerialNumberString")))
 }
 
-// IOUSBHostDevicePropertyKeyContainerID returns the string constant IOUSBHostDevicePropertyKeyContainerID as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostDevicePropertyKeyContainerID() objc.ID {
-	if _r := raw.IOUSBHostDevicePropertyKeyContainerID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostDevicePropertyKeyContainerID returns the string constant IOUSBHostDevicePropertyKeyContainerID, for use as a dictionary key or argument.
+func IOUSBHostDevicePropertyKeyContainerID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostDevicePropertyKeyContainerID")))
 }
 
-// IOUSBHostDevicePropertyKeyCurrentConfiguration returns the string constant IOUSBHostDevicePropertyKeyCurrentConfiguration as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostDevicePropertyKeyCurrentConfiguration() objc.ID {
-	if _r := raw.IOUSBHostDevicePropertyKeyCurrentConfiguration(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostDevicePropertyKeyCurrentConfiguration returns the string constant IOUSBHostDevicePropertyKeyCurrentConfiguration, for use as a dictionary key or argument.
+func IOUSBHostDevicePropertyKeyCurrentConfiguration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostDevicePropertyKeyCurrentConfiguration")))
 }
 
-// IOUSBHostInterfacePropertyKeyAlternateSetting returns the string constant IOUSBHostInterfacePropertyKeyAlternateSetting as an objc.ID, for use as a dictionary key or selector argument.
-func IOUSBHostInterfacePropertyKeyAlternateSetting() objc.ID {
-	if _r := raw.IOUSBHostInterfacePropertyKeyAlternateSetting(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// IOUSBHostInterfacePropertyKeyAlternateSetting returns the string constant IOUSBHostInterfacePropertyKeyAlternateSetting, for use as a dictionary key or argument.
+func IOUSBHostInterfacePropertyKeyAlternateSetting() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOUSBHostInterfacePropertyKeyAlternateSetting")))
 }

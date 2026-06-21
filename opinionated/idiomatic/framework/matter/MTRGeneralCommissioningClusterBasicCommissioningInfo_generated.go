@@ -5,80 +5,102 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRGeneralCommissioningClusterBasicCommissioningInfo wraps [raw.MTRGeneralCommissioningClusterBasicCommissioningInfo] with a fluent Go API.
+// MTRGeneralCommissioningClusterBasicCommissioningInfo is an idiomatic wrapper over the Objective-C class MTRGeneralCommissioningClusterBasicCommissioningInfo.
 type MTRGeneralCommissioningClusterBasicCommissioningInfo struct {
-	inner *raw.MTRGeneralCommissioningClusterBasicCommissioningInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRGeneralCommissioningClusterBasicCommissioningInfo].
-func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) Unwrap() *raw.MTRGeneralCommissioningClusterBasicCommissioningInfo {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRGeneralCommissioningClusterBasicCommissioningInfoFromID adopts an existing object pointer as a MTRGeneralCommissioningClusterBasicCommissioningInfo (nil for 0).
+// MTRGeneralCommissioningClusterBasicCommissioningInfoFromID adopts an existing Objective-C object as a MTRGeneralCommissioningClusterBasicCommissioningInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRGeneralCommissioningClusterBasicCommissioningInfoFromID(id objc.ID) *MTRGeneralCommissioningClusterBasicCommissioningInfo {
 	if id == 0 {
 		return nil
 	}
-	return &MTRGeneralCommissioningClusterBasicCommissioningInfo{inner: raw.MTRGeneralCommissioningClusterBasicCommissioningInfoFromID(id)}
+	x := &MTRGeneralCommissioningClusterBasicCommissioningInfo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRGeneralCommissioningClusterBasicCommissioningInfo creates a new [MTRGeneralCommissioningClusterBasicCommissioningInfo].
+// mTRGeneralCommissioningClusterBasicCommissioningInfoAdopt wraps an Objective-C object that this code just created as a
+// MTRGeneralCommissioningClusterBasicCommissioningInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRGeneralCommissioningClusterBasicCommissioningInfoAdopt(id objc.ID) *MTRGeneralCommissioningClusterBasicCommissioningInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRGeneralCommissioningClusterBasicCommissioningInfo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRGeneralCommissioningClusterBasicCommissioningInfo creates a new MTRGeneralCommissioningClusterBasicCommissioningInfo.
 func NewMTRGeneralCommissioningClusterBasicCommissioningInfo() *MTRGeneralCommissioningClusterBasicCommissioningInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGeneralCommissioningClusterBasicCommissioningInfo")), objc.RegisterName("new"))
-	return &MTRGeneralCommissioningClusterBasicCommissioningInfo{inner: raw.MTRGeneralCommissioningClusterBasicCommissioningInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRGeneralCommissioningClusterBasicCommissioningInfo")), objc.RegisterName("new"))
+	return mTRGeneralCommissioningClusterBasicCommissioningInfoAdopt(_id)
 }
 
-// WithFailSafeExpiryLengthSeconds sets the failSafeExpiryLengthSeconds property and returns the receiver for chaining.
-func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) WithFailSafeExpiryLengthSeconds(failSafeExpiryLengthSeconds *foundation.NSNumber) *MTRGeneralCommissioningClusterBasicCommissioningInfo {
-	x.inner.SetFailSafeExpiryLengthSeconds(failSafeExpiryLengthSeconds)
+// WithFailSafeExpiryLengthSeconds sets failSafeExpiryLengthSeconds and returns the receiver so calls can be chained.
+func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) WithFailSafeExpiryLengthSeconds(failSafeExpiryLengthSeconds obj.Object) *MTRGeneralCommissioningClusterBasicCommissioningInfo {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFailSafeExpiryLengthSeconds:"), objref.IDOf(failSafeExpiryLengthSeconds))
 	return x
 }
 
-// WithMaxCumulativeFailsafeSeconds sets the maxCumulativeFailsafeSeconds property and returns the receiver for chaining.
-func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) WithMaxCumulativeFailsafeSeconds(maxCumulativeFailsafeSeconds *foundation.NSNumber) *MTRGeneralCommissioningClusterBasicCommissioningInfo {
-	x.inner.SetMaxCumulativeFailsafeSeconds(maxCumulativeFailsafeSeconds)
+// WithMaxCumulativeFailsafeSeconds sets maxCumulativeFailsafeSeconds and returns the receiver so calls can be chained.
+func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) WithMaxCumulativeFailsafeSeconds(maxCumulativeFailsafeSeconds obj.Object) *MTRGeneralCommissioningClusterBasicCommissioningInfo {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCumulativeFailsafeSeconds:"), objref.IDOf(maxCumulativeFailsafeSeconds))
 	return x
 }
 
-// FailSafeExpiryLengthSeconds calls the underlying FailSafeExpiryLengthSeconds.
-func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) FailSafeExpiryLengthSeconds() *foundation.NSNumber {
-	return x.inner.FailSafeExpiryLengthSeconds()
+func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) FailSafeExpiryLengthSeconds() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("failSafeExpiryLengthSeconds"))
+	return obj.Wrap(_r)
 }
 
-// SetFailSafeExpiryLengthSeconds calls the underlying SetFailSafeExpiryLengthSeconds.
-func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) SetFailSafeExpiryLengthSeconds(failSafeExpiryLengthSeconds *foundation.NSNumber) {
-	x.inner.SetFailSafeExpiryLengthSeconds(failSafeExpiryLengthSeconds)
+func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) SetFailSafeExpiryLengthSeconds(failSafeExpiryLengthSeconds obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFailSafeExpiryLengthSeconds:"), objref.IDOf(failSafeExpiryLengthSeconds))
 }
 
-// MaxCumulativeFailsafeSeconds calls the underlying MaxCumulativeFailsafeSeconds.
-func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) MaxCumulativeFailsafeSeconds() *foundation.NSNumber {
-	return x.inner.MaxCumulativeFailsafeSeconds()
+func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) MaxCumulativeFailsafeSeconds() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxCumulativeFailsafeSeconds"))
+	return obj.Wrap(_r)
 }
 
-// SetMaxCumulativeFailsafeSeconds calls the underlying SetMaxCumulativeFailsafeSeconds.
-func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) SetMaxCumulativeFailsafeSeconds(maxCumulativeFailsafeSeconds *foundation.NSNumber) {
-	x.inner.SetMaxCumulativeFailsafeSeconds(maxCumulativeFailsafeSeconds)
+func (x *MTRGeneralCommissioningClusterBasicCommissioningInfo) SetMaxCumulativeFailsafeSeconds(maxCumulativeFailsafeSeconds obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCumulativeFailsafeSeconds:"), objref.IDOf(maxCumulativeFailsafeSeconds))
 }
 
 // MTRGeneralCommissioningClusterBasicCommissioningInfoable is the interface implemented by [MTRGeneralCommissioningClusterBasicCommissioningInfo], for mocking and DI.
 type MTRGeneralCommissioningClusterBasicCommissioningInfoable interface {
-	Unwrap() *raw.MTRGeneralCommissioningClusterBasicCommissioningInfo
-	WithFailSafeExpiryLengthSeconds(failSafeExpiryLengthSeconds *foundation.NSNumber) *MTRGeneralCommissioningClusterBasicCommissioningInfo
-	WithMaxCumulativeFailsafeSeconds(maxCumulativeFailsafeSeconds *foundation.NSNumber) *MTRGeneralCommissioningClusterBasicCommissioningInfo
-	FailSafeExpiryLengthSeconds() *foundation.NSNumber
-	SetFailSafeExpiryLengthSeconds(failSafeExpiryLengthSeconds *foundation.NSNumber)
-	MaxCumulativeFailsafeSeconds() *foundation.NSNumber
-	SetMaxCumulativeFailsafeSeconds(maxCumulativeFailsafeSeconds *foundation.NSNumber)
+	obj.Object
+	WithFailSafeExpiryLengthSeconds(failSafeExpiryLengthSeconds obj.Object) *MTRGeneralCommissioningClusterBasicCommissioningInfo
+	WithMaxCumulativeFailsafeSeconds(maxCumulativeFailsafeSeconds obj.Object) *MTRGeneralCommissioningClusterBasicCommissioningInfo
+	FailSafeExpiryLengthSeconds() obj.Object
+	SetFailSafeExpiryLengthSeconds(failSafeExpiryLengthSeconds obj.Object)
+	MaxCumulativeFailsafeSeconds() obj.Object
+	SetMaxCumulativeFailsafeSeconds(maxCumulativeFailsafeSeconds obj.Object)
 }
 
 var _ MTRGeneralCommissioningClusterBasicCommissioningInfoable = (*MTRGeneralCommissioningClusterBasicCommissioningInfo)(nil)

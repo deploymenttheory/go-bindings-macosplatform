@@ -5,59 +5,24 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// AVCaptionDimensionMake calls [raw.AVCaptionDimensionMake] (C function AVCaptionDimensionMake).
-func AVCaptionDimensionMake(value float64, units AVCaptionUnitsType) raw.AVCaptionDimension {
-	return raw.AVCaptionDimensionMake(value, raw.AVCaptionUnitsType(units))
-}
+var _fnAVCaptureReactionSystemImageNameForType func(objc.ID) objc.ID
 
-// AVCaptionPointMake calls [raw.AVCaptionPointMake] (C function AVCaptionPointMake).
-func AVCaptionPointMake(x raw.AVCaptionDimension, y raw.AVCaptionDimension) raw.AVCaptionPoint {
-	return raw.AVCaptionPointMake(x, y)
-}
-
-// AVCaptionSizeMake calls [raw.AVCaptionSizeMake] (C function AVCaptionSizeMake).
-func AVCaptionSizeMake(width raw.AVCaptionDimension, height raw.AVCaptionDimension) raw.AVCaptionSize {
-	return raw.AVCaptionSizeMake(width, height)
-}
-
-// AVCaptureReactionSystemImageNameForType calls [raw.AVCaptureReactionSystemImageNameForType] (C function AVCaptureReactionSystemImageNameForType).
-func AVCaptureReactionSystemImageNameForType(reactionType *foundation.NSString) *foundation.NSString {
-	return raw.AVCaptureReactionSystemImageNameForType(reactionType)
-}
-
-// AVCaptureTimecodeAdvancedByFrames calls [raw.AVCaptureTimecodeAdvancedByFrames] (C function AVCaptureTimecodeAdvancedByFrames).
-func AVCaptureTimecodeAdvancedByFrames(timecode raw.AVCaptureTimecode, framesToAdd int64) raw.AVCaptureTimecode {
-	return raw.AVCaptureTimecodeAdvancedByFrames(timecode, framesToAdd)
-}
-
-// AVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp calls [raw.AVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp] (C function AVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp).
-func AVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp(timecode raw.AVCaptureTimecode, presentationTimeStamp coremedia.CMTime) unsafe.Pointer {
-	return raw.AVCaptureTimecodeCreateMetadataSampleBufferAssociatedWithPresentationTimeStamp(timecode, presentationTimeStamp)
-}
-
-// AVCaptureTimecodeCreateMetadataSampleBufferForDuration calls [raw.AVCaptureTimecodeCreateMetadataSampleBufferForDuration] (C function AVCaptureTimecodeCreateMetadataSampleBufferForDuration).
-func AVCaptureTimecodeCreateMetadataSampleBufferForDuration(timecode raw.AVCaptureTimecode, duration coremedia.CMTime) unsafe.Pointer {
-	return raw.AVCaptureTimecodeCreateMetadataSampleBufferForDuration(timecode, duration)
-}
-
-// AVMakeRectWithAspectRatioInsideRect calls [raw.AVMakeRectWithAspectRatioInsideRect] (C function AVMakeRectWithAspectRatioInsideRect).
-func AVMakeRectWithAspectRatioInsideRect(aspectRatio corefoundation.CGSize, boundingRect corefoundation.CGRect) corefoundation.CGRect {
-	return raw.AVMakeRectWithAspectRatioInsideRect(aspectRatio, boundingRect)
-}
-
-// AVSampleBufferAttachContentKey calls [raw.AVSampleBufferAttachContentKey] (C function AVSampleBufferAttachContentKey).
-func AVSampleBufferAttachContentKey(sbuf unsafe.Pointer, contentKey *raw.AVContentKey, outError unsafe.Pointer) bool {
-	return raw.AVSampleBufferAttachContentKey(sbuf, contentKey, outError)
-}
-
-// CMTagCollectionCreateWithVideoOutputPreset calls [raw.CMTagCollectionCreateWithVideoOutputPreset] (C function CMTagCollectionCreateWithVideoOutputPreset).
-func CMTagCollectionCreateWithVideoOutputPreset(allocator unsafe.Pointer, preset CMTagCollectionVideoOutputPreset, newCollectionOut unsafe.Pointer) int {
-	return raw.CMTagCollectionCreateWithVideoOutputPreset(allocator, raw.CMTagCollectionVideoOutputPreset(preset), newCollectionOut)
+// AVCaptureReactionSystemImageNameForType calls the AVFoundation framework function AVCaptureReactionSystemImageNameForType.
+func AVCaptureReactionSystemImageNameForType(reactionType obj.Object) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAVCaptureReactionSystemImageNameForType == nil {
+		ebipurego.RegisterLibFunc(&_fnAVCaptureReactionSystemImageNameForType, _lib, "AVCaptureReactionSystemImageNameForType")
+	}
+	_ret := _fnAVCaptureReactionSystemImageNameForType(objref.IDOf(reactionType))
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }

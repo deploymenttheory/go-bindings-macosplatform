@@ -5,20 +5,38 @@
 package eventkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
+	ebipurego "github.com/ebitengine/purego"
 )
 
-// DATETIME_COMPONENTS_DO_NOT_USE calls [raw.DATETIME_COMPONENTS_DO_NOT_USE] (C function DATETIME_COMPONENTS_DO_NOT_USE).
+var _fnDATETIME_COMPONENTS_DO_NOT_USE func()
+
+// DATETIME_COMPONENTS_DO_NOT_USE calls the EventKit framework function DATETIME_COMPONENTS_DO_NOT_USE.
 func DATETIME_COMPONENTS_DO_NOT_USE() {
-	raw.DATETIME_COMPONENTS_DO_NOT_USE()
+	_loadOnce.Do(_loadLibrary)
+	if _fnDATETIME_COMPONENTS_DO_NOT_USE == nil {
+		ebipurego.RegisterLibFunc(&_fnDATETIME_COMPONENTS_DO_NOT_USE, _lib, "DATETIME_COMPONENTS_DO_NOT_USE")
+	}
+	_fnDATETIME_COMPONENTS_DO_NOT_USE()
 }
 
-// DATE_COMPONENTS_DO_NOT_USE calls [raw.DATE_COMPONENTS_DO_NOT_USE] (C function DATE_COMPONENTS_DO_NOT_USE).
+var _fnDATE_COMPONENTS_DO_NOT_USE func()
+
+// DATE_COMPONENTS_DO_NOT_USE calls the EventKit framework function DATE_COMPONENTS_DO_NOT_USE.
 func DATE_COMPONENTS_DO_NOT_USE() {
-	raw.DATE_COMPONENTS_DO_NOT_USE()
+	_loadOnce.Do(_loadLibrary)
+	if _fnDATE_COMPONENTS_DO_NOT_USE == nil {
+		ebipurego.RegisterLibFunc(&_fnDATE_COMPONENTS_DO_NOT_USE, _lib, "DATE_COMPONENTS_DO_NOT_USE")
+	}
+	_fnDATE_COMPONENTS_DO_NOT_USE()
 }
 
-// EK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE calls [raw.EK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE] (C function EK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE).
+var _fnEK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE func()
+
+// EK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE calls the EventKit framework function EK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE.
 func EK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE() {
-	raw.EK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE()
+	_loadOnce.Do(_loadLibrary)
+	if _fnEK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE == nil {
+		ebipurego.RegisterLibFunc(&_fnEK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE, _lib, "EK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE")
+	}
+	_fnEK_LOSE_FRACTIONAL_SECONDS_DO_NOT_USE()
 }

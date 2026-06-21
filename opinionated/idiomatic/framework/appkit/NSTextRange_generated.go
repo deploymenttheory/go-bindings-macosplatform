@@ -5,133 +5,110 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that represents a contiguous range between two locations inside document contents.
 //
-// TextRange wraps [raw.NSTextRange] with a fluent Go API.
+// TextRange is an idiomatic wrapper over the Objective-C class NSTextRange.
 type TextRange struct {
-	inner *raw.NSTextRange
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTextRange].
-func (x *TextRange) Unwrap() *raw.NSTextRange { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextRange) ID() objc.ID { return x.inner.Ptr() }
-
-// TextRangeFromID adopts an existing object pointer as a TextRange (nil for 0).
+// TextRangeFromID adopts an existing Objective-C object as a TextRange
+// (nil for 0), retaining it and registering a release finalizer.
 func TextRangeFromID(id objc.ID) *TextRange {
 	if id == 0 {
 		return nil
 	}
-	return &TextRange{inner: raw.NSTextRangeFromID(id)}
+	x := &TextRange{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a new text range with the starting and ending locations you specify.
-//
-// NewTextRangeWithLocationEndLocation creates a new [TextRange].
-func NewTextRangeWithLocationEndLocation(location raw.NSTextLocation, endLocation raw.NSTextLocation) *TextRange {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextRange")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:endLocation:"), location, endLocation)
-	return &TextRange{inner: raw.NSTextRangeFromID(_id)}
+// textRangeAdopt wraps an Objective-C object that this code just created as a
+// TextRange (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textRangeAdopt(id objc.ID) *TextRange {
+	if id == 0 {
+		return nil
+	}
+	x := &TextRange{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Creates a new text range at the location you specify.
-//
-// NewTextRangeWithLocation creates a new [TextRange].
-func NewTextRangeWithLocation(location raw.NSTextLocation) *TextRange {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextRange")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:"), location)
-	return &TextRange{inner: raw.NSTextRangeFromID(_id)}
+// Description returns the object's -description text.
+func (x *TextRange) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextRange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextRange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTextRange creates a new TextRange.
+func NewTextRange() *TextRange {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSTextRange")), objc.RegisterName("new"))
+	return textRangeAdopt(_id)
 }
 
 // Compares two text ranges.
-//
-// IsEqualToTextRange calls the underlying IsEqualToTextRange.
-func (x *TextRange) IsEqualToTextRange(textRange *raw.NSTextRange) bool {
-	return x.inner.IsEqualToTextRange(textRange)
-}
-
-// Determines if the text location you specify is in the current text range.
-//
-// ContainsLocation calls the underlying ContainsLocation.
-func (x *TextRange) ContainsLocation(location raw.NSTextLocation) bool {
-	return x.inner.ContainsLocation(location)
+func (x *TextRange) IsEqualToTextRange(textRange *TextRange) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToTextRange:"), objref.IDOf(textRange))
+	return _r
 }
 
 // Determines if the text range you specify is in the current text range.
-//
-// ContainsRange calls the underlying ContainsRange.
-func (x *TextRange) ContainsRange(textRange *raw.NSTextRange) bool {
-	return x.inner.ContainsRange(textRange)
+func (x *TextRange) ContainsRange(textRange *TextRange) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsRange:"), objref.IDOf(textRange))
+	return _r
 }
 
 // Determines if two ranges intersect.
-//
-// IntersectsWithTextRange calls the underlying IntersectsWithTextRange.
-func (x *TextRange) IntersectsWithTextRange(textRange *raw.NSTextRange) bool {
-	return x.inner.IntersectsWithTextRange(textRange)
+func (x *TextRange) IntersectsWithTextRange(textRange *TextRange) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("intersectsWithTextRange:"), objref.IDOf(textRange))
+	return _r
 }
 
 // Returns the range, if any, where two text ranges intersect.
-//
-// TextRangeByIntersectingWithTextRange calls the underlying TextRangeByIntersectingWithTextRange.
-func (x *TextRange) TextRangeByIntersectingWithTextRange(textRange *raw.NSTextRange) *TextRange {
-	_r := x.inner.TextRangeByIntersectingWithTextRange(textRange)
-	if _r == nil {
-		return nil
-	}
-	return &TextRange{inner: _r}
+func (x *TextRange) TextRangeByIntersectingWithTextRange(textRange *TextRange) *TextRange {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textRangeByIntersectingWithTextRange:"), objref.IDOf(textRange))
+	return TextRangeFromID(_r)
 }
 
 // Returns a new text range by forming the union with the text range you provide.
-//
-// TextRangeByFormingUnionWithTextRange calls the underlying TextRangeByFormingUnionWithTextRange.
-func (x *TextRange) TextRangeByFormingUnionWithTextRange(textRange *raw.NSTextRange) *TextRange {
-	_r := x.inner.TextRangeByFormingUnionWithTextRange(textRange)
-	if _r == nil {
-		return nil
-	}
-	return &TextRange{inner: _r}
+func (x *TextRange) TextRangeByFormingUnionWithTextRange(textRange *TextRange) *TextRange {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textRangeByFormingUnionWithTextRange:"), objref.IDOf(textRange))
+	return TextRangeFromID(_r)
 }
 
 // Returns whether the text range is empty.
-//
-// IsEmpty calls the underlying IsEmpty.
 func (x *TextRange) IsEmpty() bool {
-	return x.inner.IsEmpty()
-}
-
-// The starting location of the text range.
-//
-// Location calls the underlying Location.
-func (x *TextRange) Location() raw.NSTextLocation {
-	return x.inner.Location()
-}
-
-// The ending location of the text range.
-//
-// EndLocation calls the underlying EndLocation.
-func (x *TextRange) EndLocation() raw.NSTextLocation {
-	return x.inner.EndLocation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEmpty"))
+	return _r
 }
 
 // TextRangeable is the interface implemented by [TextRange], for mocking and DI.
 type TextRangeable interface {
-	Unwrap() *raw.NSTextRange
-	IsEqualToTextRange(textRange *raw.NSTextRange) bool
-	ContainsLocation(location raw.NSTextLocation) bool
-	ContainsRange(textRange *raw.NSTextRange) bool
-	IntersectsWithTextRange(textRange *raw.NSTextRange) bool
-	TextRangeByIntersectingWithTextRange(textRange *raw.NSTextRange) *TextRange
-	TextRangeByFormingUnionWithTextRange(textRange *raw.NSTextRange) *TextRange
+	obj.Object
+	IsEqualToTextRange(textRange *TextRange) bool
+	ContainsRange(textRange *TextRange) bool
+	IntersectsWithTextRange(textRange *TextRange) bool
+	TextRangeByIntersectingWithTextRange(textRange *TextRange) *TextRange
+	TextRangeByFormingUnionWithTextRange(textRange *TextRange) *TextRange
 	IsEmpty() bool
-	Location() raw.NSTextLocation
-	EndLocation() raw.NSTextLocation
 }
 
 var _ TextRangeable = (*TextRange)(nil)

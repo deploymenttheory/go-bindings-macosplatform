@@ -5,85 +5,104 @@
 package eventkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An abstract superclass that represents the account a calendar belongs to.
 //
-// Source wraps [raw.EKSource] with a fluent Go API.
+// Source is an idiomatic wrapper over the Objective-C class EKSource.
 type Source struct {
-	inner *raw.EKSource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.EKSource].
-func (x *Source) Unwrap() *raw.EKSource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Source) ID() objc.ID { return x.inner.Ptr() }
-
-// SourceFromID adopts an existing object pointer as a Source (nil for 0).
+// SourceFromID adopts an existing Objective-C object as a Source
+// (nil for 0), retaining it and registering a release finalizer.
 func SourceFromID(id objc.ID) *Source {
 	if id == 0 {
 		return nil
 	}
-	return &Source{inner: raw.EKSourceFromID(id)}
+	x := &Source{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSource creates a new [Source].
+// sourceAdopt wraps an Objective-C object that this code just created as a
+// Source (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sourceAdopt(id objc.ID) *Source {
+	if id == 0 {
+		return nil
+	}
+	x := &Source{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Source) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Source) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Source) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSource creates a new Source.
 func NewSource() *Source {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("EKSource")), objc.RegisterName("new"))
-	return &Source{inner: raw.EKSourceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("EKSource")), objc.RegisterName("new"))
+	return sourceAdopt(_id)
 }
 
 // Returns the calendars that belong to this source object that support a particular entity type.
-//
-// CalendarsForEntityType calls the underlying CalendarsForEntityType.
-func (x *Source) CalendarsForEntityType(entityType EKEntityType) *foundation.NSSet[*raw.EKCalendar] {
-	return x.inner.CalendarsForEntityType(raw.EKEntityType(entityType))
+func (x *Source) CalendarsForEntityType(entityType EntityType) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendarsForEntityType:"), entityType)
+	return obj.Wrap(_r)
 }
 
-// SourceIdentifier calls the underlying SourceIdentifier.
 func (x *Source) SourceIdentifier() string {
-	_r := x.inner.SourceIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SourceType calls the underlying SourceType.
-func (x *Source) SourceType() EKSourceType {
-	return EKSourceType(x.inner.SourceType())
+func (x *Source) SourceType() SourceType {
+	_r := objc.Send[SourceType](objref.IDOf(x), objc.RegisterName("sourceType"))
+	return _r
 }
 
-// Title calls the underlying Title.
 func (x *Source) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property    isDelegate @abstract    Returns YES if this EKSource represents an account delegated by another user.
-//
-// IsDelegate calls the underlying IsDelegate.
+// Returns YES if this EKSource represents an account delegated by another user.
 func (x *Source) IsDelegate() bool {
-	return x.inner.IsDelegate()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDelegate"))
+	return _r
 }
-
-func (x *Source) asObject() *raw.EKObject { return &x.inner.EKObject }
 
 // Sourceable is the interface implemented by [Source], for mocking and DI.
 type Sourceable interface {
-	Unwrap() *raw.EKSource
-	CalendarsForEntityType(entityType EKEntityType) *foundation.NSSet[*raw.EKCalendar]
+	obj.Object
+	CalendarsForEntityType(entityType EntityType) obj.Object
 	SourceIdentifier() string
-	SourceType() EKSourceType
+	SourceType() SourceType
 	Title() string
 	IsDelegate() bool
 }

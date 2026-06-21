@@ -5,61 +5,76 @@
 package networkextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that implements the client side of a custom transparent network proxy solution.
 //
-// NETransparentProxyProvider wraps [raw.NETransparentProxyProvider] with a fluent Go API.
+// NETransparentProxyProvider is an idiomatic wrapper over the Objective-C class NETransparentProxyProvider.
 type NETransparentProxyProvider struct {
-	inner *raw.NETransparentProxyProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NETransparentProxyProvider].
-func (x *NETransparentProxyProvider) Unwrap() *raw.NETransparentProxyProvider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NETransparentProxyProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// NETransparentProxyProviderFromID adopts an existing object pointer as a NETransparentProxyProvider (nil for 0).
+// NETransparentProxyProviderFromID adopts an existing Objective-C object as a NETransparentProxyProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func NETransparentProxyProviderFromID(id objc.ID) *NETransparentProxyProvider {
 	if id == 0 {
 		return nil
 	}
-	return &NETransparentProxyProvider{inner: raw.NETransparentProxyProviderFromID(id)}
+	x := &NETransparentProxyProvider{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNETransparentProxyProvider creates a new [NETransparentProxyProvider].
+// nETransparentProxyProviderAdopt wraps an Objective-C object that this code just created as a
+// NETransparentProxyProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nETransparentProxyProviderAdopt(id objc.ID) *NETransparentProxyProvider {
+	if id == 0 {
+		return nil
+	}
+	x := &NETransparentProxyProvider{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NETransparentProxyProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NETransparentProxyProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NETransparentProxyProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNETransparentProxyProvider creates a new NETransparentProxyProvider.
 func NewNETransparentProxyProvider() *NETransparentProxyProvider {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NETransparentProxyProvider")), objc.RegisterName("new"))
-	return &NETransparentProxyProvider{inner: raw.NETransparentProxyProviderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NETransparentProxyProvider")), objc.RegisterName("new"))
+	return nETransparentProxyProviderAdopt(_id)
 }
 
 // Indicate to the system that the tunnel is being re-established.
 //
-// WithReasserting sets the reasserting property and returns the receiver for chaining.
+// WithReasserting sets reasserting and returns the receiver so calls can be chained.
 func (x *NETransparentProxyProvider) WithReasserting(reasserting bool) *NETransparentProxyProvider {
-	x.inner.NEAppProxyProvider.NETunnelProvider.SetReasserting(reasserting)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReasserting:"), reasserting)
 	return x
-}
-
-func (x *NETransparentProxyProvider) asNEAppProxyProvider() *raw.NEAppProxyProvider {
-	return &x.inner.NEAppProxyProvider
-}
-
-func (x *NETransparentProxyProvider) asNETunnelProvider() *raw.NETunnelProvider {
-	return &x.inner.NEAppProxyProvider.NETunnelProvider
-}
-
-func (x *NETransparentProxyProvider) asNEProvider() *raw.NEProvider {
-	return &x.inner.NEAppProxyProvider.NETunnelProvider.NEProvider
 }
 
 // NETransparentProxyProviderable is the interface implemented by [NETransparentProxyProvider], for mocking and DI.
 type NETransparentProxyProviderable interface {
-	Unwrap() *raw.NETransparentProxyProvider
+	obj.Object
 	WithReasserting(reasserting bool) *NETransparentProxyProvider
 }
 

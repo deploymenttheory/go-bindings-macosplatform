@@ -5,118 +5,133 @@
 package ituneslibrary
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ituneslibrary"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // This class encapsulates the video information of a video media item.
 //
-// LibMediaItemVideoInfo wraps [raw.ITLibMediaItemVideoInfo] with a fluent Go API.
+// LibMediaItemVideoInfo is an idiomatic wrapper over the Objective-C class ITLibMediaItemVideoInfo.
 type LibMediaItemVideoInfo struct {
-	inner *raw.ITLibMediaItemVideoInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ITLibMediaItemVideoInfo].
-func (x *LibMediaItemVideoInfo) Unwrap() *raw.ITLibMediaItemVideoInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LibMediaItemVideoInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// LibMediaItemVideoInfoFromID adopts an existing object pointer as a LibMediaItemVideoInfo (nil for 0).
+// LibMediaItemVideoInfoFromID adopts an existing Objective-C object as a LibMediaItemVideoInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func LibMediaItemVideoInfoFromID(id objc.ID) *LibMediaItemVideoInfo {
 	if id == 0 {
 		return nil
 	}
-	return &LibMediaItemVideoInfo{inner: raw.ITLibMediaItemVideoInfoFromID(id)}
+	x := &LibMediaItemVideoInfo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLibMediaItemVideoInfo creates a new [LibMediaItemVideoInfo].
+// libMediaItemVideoInfoAdopt wraps an Objective-C object that this code just created as a
+// LibMediaItemVideoInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func libMediaItemVideoInfoAdopt(id objc.ID) *LibMediaItemVideoInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &LibMediaItemVideoInfo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LibMediaItemVideoInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LibMediaItemVideoInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LibMediaItemVideoInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLibMediaItemVideoInfo creates a new LibMediaItemVideoInfo.
 func NewLibMediaItemVideoInfo() *LibMediaItemVideoInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ITLibMediaItemVideoInfo")), objc.RegisterName("new"))
-	return &LibMediaItemVideoInfo{inner: raw.ITLibMediaItemVideoInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ITLibMediaItemVideoInfo")), objc.RegisterName("new"))
+	return libMediaItemVideoInfoAdopt(_id)
 }
 
-// @abstract The name of TV series the video is associated with (implies track is a TV show).
-//
-// Series calls the underlying Series.
+// The name of TV series the video is associated with (implies track is a TV show).
 func (x *LibMediaItemVideoInfo) Series() string {
-	_r := x.inner.Series()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("series"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The name of the TV series the video is associated with that should be used for when sorting (implies the track is a TV show).
-//
-// SortSeries calls the underlying SortSeries.
+// The name of the TV series the video is associated with that should be used for when sorting (implies the track is a TV show).
 func (x *LibMediaItemVideoInfo) SortSeries() string {
-	_r := x.inner.SortSeries()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortSeries"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The name of TV season the video is associated with (implies the track is a TV show).
-//
-// Season calls the underlying Season.
-func (x *LibMediaItemVideoInfo) Season() uint {
-	return x.inner.Season()
+// The name of TV season the video is associated with (implies the track is a TV show).
+func (x *LibMediaItemVideoInfo) Season() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("season"))
+	return _r
 }
 
-// @abstract The TV episode the video is associated with (implies the track is a TV show).
-//
-// Episode calls the underlying Episode.
+// The TV episode the video is associated with (implies the track is a TV show).
 func (x *LibMediaItemVideoInfo) Episode() string {
-	_r := x.inner.Episode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("episode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The TV episode order the video is associated with (implies the track is a TV show).
-//
-// EpisodeOrder calls the underlying EpisodeOrder.
+// The TV episode order the video is associated with (implies the track is a TV show).
 func (x *LibMediaItemVideoInfo) EpisodeOrder() int {
-	return x.inner.EpisodeOrder()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("episodeOrder"))
+	return _r
 }
 
-// @abstract Whether the video is high definition.
-//
-// IsHD calls the underlying IsHD.
+// Whether the video is high definition.
 func (x *LibMediaItemVideoInfo) IsHD() bool {
-	return x.inner.IsHD()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHD"))
+	return _r
 }
 
-// @abstract The width of the video.
-//
-// VideoWidth calls the underlying VideoWidth.
-func (x *LibMediaItemVideoInfo) VideoWidth() uint {
-	return x.inner.VideoWidth()
+// The width of the video.
+func (x *LibMediaItemVideoInfo) VideoWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("videoWidth"))
+	return _r
 }
 
-// @abstract The height of the video.
-//
-// VideoHeight calls the underlying VideoHeight.
-func (x *LibMediaItemVideoInfo) VideoHeight() uint {
-	return x.inner.VideoHeight()
+// The height of the video.
+func (x *LibMediaItemVideoInfo) VideoHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("videoHeight"))
+	return _r
 }
 
 // LibMediaItemVideoInfoable is the interface implemented by [LibMediaItemVideoInfo], for mocking and DI.
 type LibMediaItemVideoInfoable interface {
-	Unwrap() *raw.ITLibMediaItemVideoInfo
+	obj.Object
 	Series() string
 	SortSeries() string
-	Season() uint
+	Season() int
 	Episode() string
 	EpisodeOrder() int
 	IsHD() bool
-	VideoWidth() uint
-	VideoHeight() uint
+	VideoWidth() int
+	VideoHeight() int
 }
 
 var _ LibMediaItemVideoInfoable = (*LibMediaItemVideoInfo)(nil)

@@ -5,53 +5,74 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An abstract base class that defines samples that contain a series of items.
 //
-// SeriesSample wraps [raw.HKSeriesSample] with a fluent Go API.
+// SeriesSample is an idiomatic wrapper over the Objective-C class HKSeriesSample.
 type SeriesSample struct {
-	inner *raw.HKSeriesSample
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKSeriesSample].
-func (x *SeriesSample) Unwrap() *raw.HKSeriesSample { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SeriesSample) ID() objc.ID { return x.inner.Ptr() }
-
-// SeriesSampleFromID adopts an existing object pointer as a SeriesSample (nil for 0).
+// SeriesSampleFromID adopts an existing Objective-C object as a SeriesSample
+// (nil for 0), retaining it and registering a release finalizer.
 func SeriesSampleFromID(id objc.ID) *SeriesSample {
 	if id == 0 {
 		return nil
 	}
-	return &SeriesSample{inner: raw.HKSeriesSampleFromID(id)}
+	x := &SeriesSample{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSeriesSample creates a new [SeriesSample].
+// seriesSampleAdopt wraps an Objective-C object that this code just created as a
+// SeriesSample (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func seriesSampleAdopt(id objc.ID) *SeriesSample {
+	if id == 0 {
+		return nil
+	}
+	x := &SeriesSample{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SeriesSample) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SeriesSample) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SeriesSample) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSeriesSample creates a new SeriesSample.
 func NewSeriesSample() *SeriesSample {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKSeriesSample")), objc.RegisterName("new"))
-	return &SeriesSample{inner: raw.HKSeriesSampleFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKSeriesSample")), objc.RegisterName("new"))
+	return seriesSampleAdopt(_id)
 }
 
-// Count calls the underlying Count.
-func (x *SeriesSample) Count() uint {
-	return x.inner.Count()
+func (x *SeriesSample) Count() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+	return _r
 }
-
-func (x *SeriesSample) asSeriesSample() *raw.HKSeriesSample { return x.inner }
-
-func (x *SeriesSample) asSample() *raw.HKSample { return &x.inner.HKSample }
-
-func (x *SeriesSample) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
 
 // SeriesSampleable is the interface implemented by [SeriesSample], for mocking and DI.
 type SeriesSampleable interface {
-	Unwrap() *raw.HKSeriesSample
-	Count() uint
+	obj.Object
+	Count() int
 }
 
 var _ SeriesSampleable = (*SeriesSample)(nil)

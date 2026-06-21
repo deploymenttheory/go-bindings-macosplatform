@@ -5,77 +5,76 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents zero or more captions that intersect in time.
 //
-// CaptionGroup wraps [raw.AVCaptionGroup] with a fluent Go API.
+// CaptionGroup is an idiomatic wrapper over the Objective-C class AVCaptionGroup.
 type CaptionGroup struct {
-	inner *raw.AVCaptionGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptionGroup].
-func (x *CaptionGroup) Unwrap() *raw.AVCaptionGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptionGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptionGroupFromID adopts an existing object pointer as a CaptionGroup (nil for 0).
+// CaptionGroupFromID adopts an existing Objective-C object as a CaptionGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptionGroupFromID(id objc.ID) *CaptionGroup {
 	if id == 0 {
 		return nil
 	}
-	return &CaptionGroup{inner: raw.AVCaptionGroupFromID(id)}
+	x := &CaptionGroup{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a caption group with captions and a time range.
-//
-// NewCaptionGroupWithCaptionsTimeRange creates a new [CaptionGroup].
-func NewCaptionGroupWithCaptionsTimeRange(captions *foundation.NSArray[*raw.AVCaption], timeRange coremedia.CMTimeRange) *CaptionGroup {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionGroup")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCaptions:timeRange:"), captions.Ptr(), timeRange)
-	return &CaptionGroup{inner: raw.AVCaptionGroupFromID(_id)}
+// captionGroupAdopt wraps an Objective-C object that this code just created as a
+// CaptionGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captionGroupAdopt(id objc.ID) *CaptionGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptionGroup{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Creates a caption group with a time range.
-//
-// NewCaptionGroupWithTimeRange creates a new [CaptionGroup].
-func NewCaptionGroupWithTimeRange(timeRange coremedia.CMTimeRange) *CaptionGroup {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionGroup")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimeRange:"), timeRange)
-	return &CaptionGroup{inner: raw.AVCaptionGroupFromID(_id)}
+// Description returns the object's -description text.
+func (x *CaptionGroup) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property timeRange @abstract The time range represented by the caption group. @discussion If there are no captions in the group (i.e. the value of the captions property is an empty array), then the value of this property represents the time range of a sequence where no captions are present.
-//
-// TimeRange calls the underlying TimeRange.
-func (x *CaptionGroup) TimeRange() coremedia.CMTimeRange {
-	return x.inner.TimeRange()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptionGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property captions @abstract An array of AVCaption objects. @discussion If the value is an empty array, the caption group represents a region of the timeline in which there are no captions.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptionGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptionGroup creates a new CaptionGroup.
+func NewCaptionGroup() *CaptionGroup {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptionGroup")), objc.RegisterName("new"))
+	return captionGroupAdopt(_id)
+}
+
+// An array of AVCaption objects. If the value is an empty array, the caption group represents a region of the timeline in which there are no captions.
 //
 // Captions returns the collection as a Go slice.
 func (x *CaptionGroup) Captions() []*Caption {
-	arr := x.inner.Captions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Caption {
-		return &Caption{inner: raw.AVCaptionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("captions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Caption { return CaptionFromID(_id) })
 }
 
 // CaptionGroupable is the interface implemented by [CaptionGroup], for mocking and DI.
 type CaptionGroupable interface {
-	Unwrap() *raw.AVCaptionGroup
-	TimeRange() coremedia.CMTimeRange
+	obj.Object
 	Captions() []*Caption
 }
 

@@ -5,111 +5,126 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description of the input and output data of a function.
 //
-// StageInputOutputDescriptor wraps [raw.MTLStageInputOutputDescriptor] with a fluent Go API.
+// StageInputOutputDescriptor is an idiomatic wrapper over the Objective-C class MTLStageInputOutputDescriptor.
 type StageInputOutputDescriptor struct {
-	inner *raw.MTLStageInputOutputDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLStageInputOutputDescriptor].
-func (x *StageInputOutputDescriptor) Unwrap() *raw.MTLStageInputOutputDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StageInputOutputDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// StageInputOutputDescriptorFromID adopts an existing object pointer as a StageInputOutputDescriptor (nil for 0).
+// StageInputOutputDescriptorFromID adopts an existing Objective-C object as a StageInputOutputDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func StageInputOutputDescriptorFromID(id objc.ID) *StageInputOutputDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &StageInputOutputDescriptor{inner: raw.MTLStageInputOutputDescriptorFromID(id)}
+	x := &StageInputOutputDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewStageInputOutputDescriptor creates a new [StageInputOutputDescriptor].
+// stageInputOutputDescriptorAdopt wraps an Objective-C object that this code just created as a
+// StageInputOutputDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func stageInputOutputDescriptorAdopt(id objc.ID) *StageInputOutputDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &StageInputOutputDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *StageInputOutputDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StageInputOutputDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StageInputOutputDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewStageInputOutputDescriptor creates a new StageInputOutputDescriptor.
 func NewStageInputOutputDescriptor() *StageInputOutputDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLStageInputOutputDescriptor")), objc.RegisterName("new"))
-	return &StageInputOutputDescriptor{inner: raw.MTLStageInputOutputDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLStageInputOutputDescriptor")), objc.RegisterName("new"))
+	return stageInputOutputDescriptorAdopt(_id)
 }
 
 // The data type of the indices stored in the index buffer.
 //
-// WithIndexType sets the indexType property and returns the receiver for chaining.
-func (x *StageInputOutputDescriptor) WithIndexType(indexType MTLIndexType) *StageInputOutputDescriptor {
-	x.inner.SetIndexType(raw.MTLIndexType(indexType))
+// WithIndexType sets indexType and returns the receiver so calls can be chained.
+func (x *StageInputOutputDescriptor) WithIndexType(indexType IndexType) *StageInputOutputDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexType:"), indexType)
 	return x
 }
 
 // The location of the index buffer for a compute function using indexed thread addressing.
 //
-// WithIndexBufferIndex sets the indexBufferIndex property and returns the receiver for chaining.
-func (x *StageInputOutputDescriptor) WithIndexBufferIndex(indexBufferIndex uint) *StageInputOutputDescriptor {
-	x.inner.SetIndexBufferIndex(indexBufferIndex)
+// WithIndexBufferIndex sets indexBufferIndex and returns the receiver so calls can be chained.
+func (x *StageInputOutputDescriptor) WithIndexBufferIndex(indexBufferIndex int) *StageInputOutputDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferIndex:"), indexBufferIndex)
 	return x
 }
 
 // Resets the default state for the descriptor.
-//
-// Reset calls the underlying Reset.
 func (x *StageInputOutputDescriptor) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// Layouts calls the underlying Layouts.
 func (x *StageInputOutputDescriptor) Layouts() *BufferLayoutDescriptorArray {
-	_r := x.inner.Layouts()
-	if _r == nil {
-		return nil
-	}
-	return &BufferLayoutDescriptorArray{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layouts"))
+	return BufferLayoutDescriptorArrayFromID(_r)
 }
 
-// Attributes calls the underlying Attributes.
 func (x *StageInputOutputDescriptor) Attributes() *AttributeDescriptorArray {
-	_r := x.inner.Attributes()
-	if _r == nil {
-		return nil
-	}
-	return &AttributeDescriptorArray{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+	return AttributeDescriptorArrayFromID(_r)
 }
 
-// IndexType calls the underlying IndexType.
-func (x *StageInputOutputDescriptor) IndexType() MTLIndexType {
-	return MTLIndexType(x.inner.IndexType())
+func (x *StageInputOutputDescriptor) IndexType() IndexType {
+	_r := objc.Send[IndexType](objref.IDOf(x), objc.RegisterName("indexType"))
+	return _r
 }
 
-// SetIndexType calls the underlying SetIndexType.
-func (x *StageInputOutputDescriptor) SetIndexType(indexType MTLIndexType) {
-	x.inner.SetIndexType(raw.MTLIndexType(indexType))
+func (x *StageInputOutputDescriptor) SetIndexType(indexType IndexType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexType:"), indexType)
 }
 
-// IndexBufferIndex calls the underlying IndexBufferIndex.
-func (x *StageInputOutputDescriptor) IndexBufferIndex() uint {
-	return x.inner.IndexBufferIndex()
+func (x *StageInputOutputDescriptor) IndexBufferIndex() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexBufferIndex"))
+	return _r
 }
 
-// SetIndexBufferIndex calls the underlying SetIndexBufferIndex.
-func (x *StageInputOutputDescriptor) SetIndexBufferIndex(indexBufferIndex uint) {
-	x.inner.SetIndexBufferIndex(indexBufferIndex)
+func (x *StageInputOutputDescriptor) SetIndexBufferIndex(indexBufferIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferIndex:"), indexBufferIndex)
 }
 
 // StageInputOutputDescriptorable is the interface implemented by [StageInputOutputDescriptor], for mocking and DI.
 type StageInputOutputDescriptorable interface {
-	Unwrap() *raw.MTLStageInputOutputDescriptor
-	WithIndexType(indexType MTLIndexType) *StageInputOutputDescriptor
-	WithIndexBufferIndex(indexBufferIndex uint) *StageInputOutputDescriptor
+	obj.Object
+	WithIndexType(indexType IndexType) *StageInputOutputDescriptor
+	WithIndexBufferIndex(indexBufferIndex int) *StageInputOutputDescriptor
 	Reset()
 	Layouts() *BufferLayoutDescriptorArray
 	Attributes() *AttributeDescriptorArray
-	IndexType() MTLIndexType
-	SetIndexType(indexType MTLIndexType)
-	IndexBufferIndex() uint
-	SetIndexBufferIndex(indexBufferIndex uint)
+	IndexType() IndexType
+	SetIndexType(indexType IndexType)
+	IndexBufferIndex() int
+	SetIndexBufferIndex(indexBufferIndex int)
 }
 
 var _ StageInputOutputDescriptorable = (*StageInputOutputDescriptor)(nil)

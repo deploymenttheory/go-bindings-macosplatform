@@ -5,87 +5,91 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that facilitates retrieving or generating preview thumbnails, optimized for batch preloading large numbers of assets.
 //
-// CachingImageManager wraps [raw.PHCachingImageManager] with a fluent Go API.
+// CachingImageManager is an idiomatic wrapper over the Objective-C class PHCachingImageManager.
 type CachingImageManager struct {
-	inner *raw.PHCachingImageManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHCachingImageManager].
-func (x *CachingImageManager) Unwrap() *raw.PHCachingImageManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CachingImageManager) ID() objc.ID { return x.inner.Ptr() }
-
-// CachingImageManagerFromID adopts an existing object pointer as a CachingImageManager (nil for 0).
+// CachingImageManagerFromID adopts an existing Objective-C object as a CachingImageManager
+// (nil for 0), retaining it and registering a release finalizer.
 func CachingImageManagerFromID(id objc.ID) *CachingImageManager {
 	if id == 0 {
 		return nil
 	}
-	return &CachingImageManager{inner: raw.PHCachingImageManagerFromID(id)}
+	x := &CachingImageManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCachingImageManager creates a new [CachingImageManager].
+// cachingImageManagerAdopt wraps an Objective-C object that this code just created as a
+// CachingImageManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cachingImageManagerAdopt(id objc.ID) *CachingImageManager {
+	if id == 0 {
+		return nil
+	}
+	x := &CachingImageManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CachingImageManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CachingImageManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CachingImageManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCachingImageManager creates a new CachingImageManager.
 func NewCachingImageManager() *CachingImageManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHCachingImageManager")), objc.RegisterName("new"))
-	return &CachingImageManager{inner: raw.PHCachingImageManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHCachingImageManager")), objc.RegisterName("new"))
+	return cachingImageManagerAdopt(_id)
 }
 
 // A Boolean value that determines whether the image manager prepares high-quality images.
 //
-// WithAllowsCachingHighQualityImages sets the allowsCachingHighQualityImages property and returns the receiver for chaining.
+// WithAllowsCachingHighQualityImages sets allowsCachingHighQualityImages and returns the receiver so calls can be chained.
 func (x *CachingImageManager) WithAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool) *CachingImageManager {
-	x.inner.SetAllowsCachingHighQualityImages(allowsCachingHighQualityImages)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCachingHighQualityImages:"), allowsCachingHighQualityImages)
 	return x
 }
 
-// Prepares image representations of the specified assets for later use.
-//
-// StartCachingImagesForAssetsTargetSizeContentModeOptions calls the underlying StartCachingImagesForAssetsTargetSizeContentModeOptions.
-func (x *CachingImageManager) StartCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*raw.PHAsset], targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHImageRequestOptions) {
-	x.inner.StartCachingImagesForAssetsTargetSizeContentModeOptions(assets, targetSize, raw.PHImageContentMode(contentMode), options)
-}
-
-// Cancels image preparation for the specified assets and options.
-//
-// StopCachingImagesForAssetsTargetSizeContentModeOptions calls the underlying StopCachingImagesForAssetsTargetSizeContentModeOptions.
-func (x *CachingImageManager) StopCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*raw.PHAsset], targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHImageRequestOptions) {
-	x.inner.StopCachingImagesForAssetsTargetSizeContentModeOptions(assets, targetSize, raw.PHImageContentMode(contentMode), options)
-}
-
 // Cancels all image preparation that is currently in progress.
-//
-// StopCachingImagesForAllAssets calls the underlying StopCachingImagesForAllAssets.
 func (x *CachingImageManager) StopCachingImagesForAllAssets() {
-	x.inner.StopCachingImagesForAllAssets()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopCachingImagesForAllAssets"))
 }
 
-// AllowsCachingHighQualityImages calls the underlying AllowsCachingHighQualityImages.
 func (x *CachingImageManager) AllowsCachingHighQualityImages() bool {
-	return x.inner.AllowsCachingHighQualityImages()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCachingHighQualityImages"))
+	return _r
 }
 
-// SetAllowsCachingHighQualityImages calls the underlying SetAllowsCachingHighQualityImages.
 func (x *CachingImageManager) SetAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool) {
-	x.inner.SetAllowsCachingHighQualityImages(allowsCachingHighQualityImages)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCachingHighQualityImages:"), allowsCachingHighQualityImages)
 }
-
-func (x *CachingImageManager) asImageManager() *raw.PHImageManager { return &x.inner.PHImageManager }
 
 // CachingImageManagerable is the interface implemented by [CachingImageManager], for mocking and DI.
 type CachingImageManagerable interface {
-	Unwrap() *raw.PHCachingImageManager
+	obj.Object
 	WithAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool) *CachingImageManager
-	StartCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*raw.PHAsset], targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHImageRequestOptions)
-	StopCachingImagesForAssetsTargetSizeContentModeOptions(assets *foundation.NSArray[*raw.PHAsset], targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHImageRequestOptions)
 	StopCachingImagesForAllAssets()
 	AllowsCachingHighQualityImages() bool
 	SetAllowsCachingHighQualityImages(allowsCachingHighQualityImages bool)

@@ -5,523 +5,392 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The physics simulation attributes attached to a scene graph node.
 //
-// PhysicsBody wraps [raw.SCNPhysicsBody] with a fluent Go API.
+// PhysicsBody is an idiomatic wrapper over the Objective-C class SCNPhysicsBody.
 type PhysicsBody struct {
-	inner *raw.SCNPhysicsBody
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNPhysicsBody].
-func (x *PhysicsBody) Unwrap() *raw.SCNPhysicsBody { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhysicsBody) ID() objc.ID { return x.inner.Ptr() }
-
-// PhysicsBodyFromID adopts an existing object pointer as a PhysicsBody (nil for 0).
+// PhysicsBodyFromID adopts an existing Objective-C object as a PhysicsBody
+// (nil for 0), retaining it and registering a release finalizer.
 func PhysicsBodyFromID(id objc.ID) *PhysicsBody {
 	if id == 0 {
 		return nil
 	}
-	return &PhysicsBody{inner: raw.SCNPhysicsBodyFromID(id)}
+	x := &PhysicsBody{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPhysicsBody creates a new [PhysicsBody].
+// physicsBodyAdopt wraps an Objective-C object that this code just created as a
+// PhysicsBody (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func physicsBodyAdopt(id objc.ID) *PhysicsBody {
+	if id == 0 {
+		return nil
+	}
+	x := &PhysicsBody{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PhysicsBody) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PhysicsBody) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PhysicsBody) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPhysicsBody creates a new PhysicsBody.
 func NewPhysicsBody() *PhysicsBody {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNPhysicsBody")), objc.RegisterName("new"))
-	return &PhysicsBody{inner: raw.SCNPhysicsBodyFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsBody")), objc.RegisterName("new"))
+	return physicsBodyAdopt(_id)
 }
 
 // A constant that determines how the physics body responds to forces and collisions.
 //
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *PhysicsBody) WithType(type_ SCNPhysicsBodyType) *PhysicsBody {
-	x.inner.SetType(raw.SCNPhysicsBodyType(type_))
+// WithType sets type_ and returns the receiver so calls can be chained.
+func (x *PhysicsBody) WithType(type_ PhysicsBodyType) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
 // The mass of the body, in kilograms.
 //
-// WithMass sets the mass property and returns the receiver for chaining.
+// WithMass sets mass and returns the receiver so calls can be chained.
 func (x *PhysicsBody) WithMass(mass float64) *PhysicsBody {
-	x.inner.SetMass(mass)
-	return x
-}
-
-// The body’s moment of inertia, expressed in the local coordinate system of the node that contains the body.
-//
-// WithMomentOfInertia sets the momentOfInertia property and returns the receiver for chaining.
-func (x *PhysicsBody) WithMomentOfInertia(momentOfInertia raw.SCNVector3) *PhysicsBody {
-	x.inner.SetMomentOfInertia(momentOfInertia)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMass:"), mass)
 	return x
 }
 
 // A Boolean value that determines whether SceneKit automatically calculates the body’s moment of inertia or allows setting a custom value.
 //
-// WithUsesDefaultMomentOfInertia sets the usesDefaultMomentOfInertia property and returns the receiver for chaining.
+// WithUsesDefaultMomentOfInertia sets usesDefaultMomentOfInertia and returns the receiver so calls can be chained.
 func (x *PhysicsBody) WithUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia bool) *PhysicsBody {
-	x.inner.SetUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesDefaultMomentOfInertia:"), usesDefaultMomentOfInertia)
 	return x
 }
 
 // The electric charge of the body, in coulombs.
 //
-// WithCharge sets the charge property and returns the receiver for chaining.
+// WithCharge sets charge and returns the receiver so calls can be chained.
 func (x *PhysicsBody) WithCharge(charge float64) *PhysicsBody {
-	x.inner.SetCharge(charge)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharge:"), charge)
 	return x
 }
 
 // The body’s resistance to sliding motion.
 //
-// WithFriction sets the friction property and returns the receiver for chaining.
+// WithFriction sets friction and returns the receiver so calls can be chained.
 func (x *PhysicsBody) WithFriction(friction float64) *PhysicsBody {
-	x.inner.SetFriction(friction)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFriction:"), friction)
 	return x
 }
 
 // A factor that determines how much kinetic energy the body loses or gains in collisions.
 //
-// WithRestitution sets the restitution property and returns the receiver for chaining.
+// WithRestitution sets restitution and returns the receiver so calls can be chained.
 func (x *PhysicsBody) WithRestitution(restitution float64) *PhysicsBody {
-	x.inner.SetRestitution(restitution)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestitution:"), restitution)
 	return x
 }
 
 // The body’s resistance to rolling motion.
 //
-// WithRollingFriction sets the rollingFriction property and returns the receiver for chaining.
+// WithRollingFriction sets rollingFriction and returns the receiver so calls can be chained.
 func (x *PhysicsBody) WithRollingFriction(rollingFriction float64) *PhysicsBody {
-	x.inner.SetRollingFriction(rollingFriction)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRollingFriction:"), rollingFriction)
 	return x
 }
 
 // An object that defines the solid volume of the physics body for use in collision detection.
 //
-// WithPhysicsShape sets the physicsShape property and returns the receiver for chaining.
+// WithPhysicsShape sets physicsShape and returns the receiver so calls can be chained.
 func (x *PhysicsBody) WithPhysicsShape(physicsShape *PhysicsShape) *PhysicsBody {
-	x.inner.SetPhysicsShape(physicsShape.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsShape:"), objref.IDOf(physicsShape))
 	return x
 }
 
 // A Boolean value that specifies whether SceneKit can automatically mark the physics body at rest.
 //
-// WithAllowsResting sets the allowsResting property and returns the receiver for chaining.
+// WithAllowsResting sets allowsResting and returns the receiver so calls can be chained.
 func (x *PhysicsBody) WithAllowsResting(allowsResting bool) *PhysicsBody {
-	x.inner.SetAllowsResting(allowsResting)
-	return x
-}
-
-// A vector describing both the current speed (in meters per second) and direction of motion of the physics body.
-//
-// WithVelocity sets the velocity property and returns the receiver for chaining.
-func (x *PhysicsBody) WithVelocity(velocity raw.SCNVector3) *PhysicsBody {
-	x.inner.SetVelocity(velocity)
-	return x
-}
-
-// A vector describing both the current rotation axis and rotational speed (in radians per second) of the physics body.
-//
-// WithAngularVelocity sets the angularVelocity property and returns the receiver for chaining.
-func (x *PhysicsBody) WithAngularVelocity(angularVelocity raw.SCNVector4) *PhysicsBody {
-	x.inner.SetAngularVelocity(angularVelocity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsResting:"), allowsResting)
 	return x
 }
 
 // A factor that reduces the body’s linear velocity.
 //
-// WithDamping sets the damping property and returns the receiver for chaining.
+// WithDamping sets damping and returns the receiver so calls can be chained.
 func (x *PhysicsBody) WithDamping(damping float64) *PhysicsBody {
-	x.inner.SetDamping(damping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDamping:"), damping)
 	return x
 }
 
 // A factor that reduces the body’s angular velocity.
 //
-// WithAngularDamping sets the angularDamping property and returns the receiver for chaining.
+// WithAngularDamping sets angularDamping and returns the receiver so calls can be chained.
 func (x *PhysicsBody) WithAngularDamping(angularDamping float64) *PhysicsBody {
-	x.inner.SetAngularDamping(angularDamping)
-	return x
-}
-
-// A multiplier affecting how SceneKit applies translations computed by the physics simulation to the node containing the physics body.
-//
-// WithVelocityFactor sets the velocityFactor property and returns the receiver for chaining.
-func (x *PhysicsBody) WithVelocityFactor(velocityFactor raw.SCNVector3) *PhysicsBody {
-	x.inner.SetVelocityFactor(velocityFactor)
-	return x
-}
-
-// A multiplier affecting how SceneKit applies rotations computed by the physics simulation to the node containing the physics body.
-//
-// WithAngularVelocityFactor sets the angularVelocityFactor property and returns the receiver for chaining.
-func (x *PhysicsBody) WithAngularVelocityFactor(angularVelocityFactor raw.SCNVector3) *PhysicsBody {
-	x.inner.SetAngularVelocityFactor(angularVelocityFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAngularDamping:"), angularDamping)
 	return x
 }
 
 // A mask that defines which categories this physics body belongs to.
 //
-// WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
-func (x *PhysicsBody) WithCategoryBitMask(categoryBitMask uint) *PhysicsBody {
-	x.inner.SetCategoryBitMask(categoryBitMask)
+// WithCategoryBitMask sets categoryBitMask and returns the receiver so calls can be chained.
+func (x *PhysicsBody) WithCategoryBitMask(categoryBitMask int) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
 	return x
 }
 
 // A mask that defines which categories of physics bodies can collide with this physics body.
 //
-// WithCollisionBitMask sets the collisionBitMask property and returns the receiver for chaining.
-func (x *PhysicsBody) WithCollisionBitMask(collisionBitMask uint) *PhysicsBody {
-	x.inner.SetCollisionBitMask(collisionBitMask)
+// WithCollisionBitMask sets collisionBitMask and returns the receiver so calls can be chained.
+func (x *PhysicsBody) WithCollisionBitMask(collisionBitMask int) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollisionBitMask:"), collisionBitMask)
 	return x
 }
 
 // A mask that defines which categories of bodies cause intersection notifications with this physics body.
 //
-// WithContactTestBitMask sets the contactTestBitMask property and returns the receiver for chaining.
-func (x *PhysicsBody) WithContactTestBitMask(contactTestBitMask uint) *PhysicsBody {
-	x.inner.SetContactTestBitMask(contactTestBitMask)
+// WithContactTestBitMask sets contactTestBitMask and returns the receiver so calls can be chained.
+func (x *PhysicsBody) WithContactTestBitMask(contactTestBitMask int) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactTestBitMask:"), contactTestBitMask)
 	return x
 }
 
 // A Boolean value that determines whether the constant gravity of a scene accelerates the body.
 //
-// WithAffectedByGravity sets the affectedByGravity property and returns the receiver for chaining.
+// WithAffectedByGravity sets affectedByGravity and returns the receiver so calls can be chained.
 func (x *PhysicsBody) WithAffectedByGravity(affectedByGravity bool) *PhysicsBody {
-	x.inner.SetAffectedByGravity(affectedByGravity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedByGravity:"), affectedByGravity)
 	return x
 }
 
 // The minimum distance the body must travel for SceneKit to apply a more precise (but more costly) algorithm to detect contacts with other bodies.
 //
-// WithContinuousCollisionDetectionThreshold sets the continuousCollisionDetectionThreshold property and returns the receiver for chaining.
+// WithContinuousCollisionDetectionThreshold sets continuousCollisionDetectionThreshold and returns the receiver so calls can be chained.
 func (x *PhysicsBody) WithContinuousCollisionDetectionThreshold(continuousCollisionDetectionThreshold float64) *PhysicsBody {
-	x.inner.SetContinuousCollisionDetectionThreshold(continuousCollisionDetectionThreshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuousCollisionDetectionThreshold:"), continuousCollisionDetectionThreshold)
 	return x
 }
 
-// The position of the body’s center of mass relative to its local coordinate origin.
-//
-// WithCenterOfMassOffset sets the centerOfMassOffset property and returns the receiver for chaining.
-func (x *PhysicsBody) WithCenterOfMassOffset(centerOfMassOffset raw.SCNVector3) *PhysicsBody {
-	x.inner.SetCenterOfMassOffset(centerOfMassOffset)
-	return x
-}
-
-// WithLinearRestingThreshold sets the linearRestingThreshold property and returns the receiver for chaining.
+// WithLinearRestingThreshold sets linearRestingThreshold and returns the receiver so calls can be chained.
 func (x *PhysicsBody) WithLinearRestingThreshold(linearRestingThreshold float64) *PhysicsBody {
-	x.inner.SetLinearRestingThreshold(linearRestingThreshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinearRestingThreshold:"), linearRestingThreshold)
 	return x
 }
 
-// WithAngularRestingThreshold sets the angularRestingThreshold property and returns the receiver for chaining.
+// WithAngularRestingThreshold sets angularRestingThreshold and returns the receiver so calls can be chained.
 func (x *PhysicsBody) WithAngularRestingThreshold(angularRestingThreshold float64) *PhysicsBody {
-	x.inner.SetAngularRestingThreshold(angularRestingThreshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAngularRestingThreshold:"), angularRestingThreshold)
 	return x
-}
-
-// Applies a force or impulse to the body at its center of mass.
-//
-// ApplyForceImpulse calls the underlying ApplyForceImpulse.
-func (x *PhysicsBody) ApplyForceImpulse(direction raw.SCNVector3, impulse bool) {
-	x.inner.ApplyForceImpulse(direction, impulse)
-}
-
-// Applies a force or impulse to the body at a specific point.
-//
-// ApplyForceAtPositionImpulse calls the underlying ApplyForceAtPositionImpulse.
-func (x *PhysicsBody) ApplyForceAtPositionImpulse(direction raw.SCNVector3, position raw.SCNVector3, impulse bool) {
-	x.inner.ApplyForceAtPositionImpulse(direction, position, impulse)
-}
-
-// Applies a net torque or a change in angular momentum to the body.
-//
-// ApplyTorqueImpulse calls the underlying ApplyTorqueImpulse.
-func (x *PhysicsBody) ApplyTorqueImpulse(torque raw.SCNVector4, impulse bool) {
-	x.inner.ApplyTorqueImpulse(torque, impulse)
 }
 
 // Cancels all continuous forces and torques acting on the physics body during the current simulation step.
-//
-// ClearAllForces calls the underlying ClearAllForces.
 func (x *PhysicsBody) ClearAllForces() {
-	x.inner.ClearAllForces()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearAllForces"))
 }
 
 // Updates the position and orientation of a body in the physics simulation to match that of the node to which the body is attached.
-//
-// ResetTransform calls the underlying ResetTransform.
 func (x *PhysicsBody) ResetTransform() {
-	x.inner.ResetTransform()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetTransform"))
 }
 
 // Tells SceneKit whether to treat the body as currently being in motion.
-//
-// SetResting calls the underlying SetResting.
 func (x *PhysicsBody) SetResting(resting bool) {
-	x.inner.SetResting(resting)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResting:"), resting)
 }
 
-// Type calls the underlying Type.
-func (x *PhysicsBody) Type() SCNPhysicsBodyType {
-	return SCNPhysicsBodyType(x.inner.Type())
+func (x *PhysicsBody) Type() PhysicsBodyType {
+	_r := objc.Send[PhysicsBodyType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// SetType calls the underlying SetType.
-func (x *PhysicsBody) SetType(type_ SCNPhysicsBodyType) {
-	x.inner.SetType(raw.SCNPhysicsBodyType(type_))
+func (x *PhysicsBody) SetType(type_ PhysicsBodyType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 }
 
-// Mass calls the underlying Mass.
 func (x *PhysicsBody) Mass() float64 {
-	return x.inner.Mass()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("mass"))
+	return _r
 }
 
-// SetMass calls the underlying SetMass.
 func (x *PhysicsBody) SetMass(mass float64) {
-	x.inner.SetMass(mass)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMass:"), mass)
 }
 
-// MomentOfInertia calls the underlying MomentOfInertia.
-func (x *PhysicsBody) MomentOfInertia() raw.SCNVector3 {
-	return x.inner.MomentOfInertia()
-}
-
-// SetMomentOfInertia calls the underlying SetMomentOfInertia.
-func (x *PhysicsBody) SetMomentOfInertia(momentOfInertia raw.SCNVector3) {
-	x.inner.SetMomentOfInertia(momentOfInertia)
-}
-
-// UsesDefaultMomentOfInertia calls the underlying UsesDefaultMomentOfInertia.
 func (x *PhysicsBody) UsesDefaultMomentOfInertia() bool {
-	return x.inner.UsesDefaultMomentOfInertia()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesDefaultMomentOfInertia"))
+	return _r
 }
 
-// SetUsesDefaultMomentOfInertia calls the underlying SetUsesDefaultMomentOfInertia.
 func (x *PhysicsBody) SetUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia bool) {
-	x.inner.SetUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesDefaultMomentOfInertia:"), usesDefaultMomentOfInertia)
 }
 
-// Charge calls the underlying Charge.
 func (x *PhysicsBody) Charge() float64 {
-	return x.inner.Charge()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("charge"))
+	return _r
 }
 
-// SetCharge calls the underlying SetCharge.
 func (x *PhysicsBody) SetCharge(charge float64) {
-	x.inner.SetCharge(charge)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharge:"), charge)
 }
 
-// Friction calls the underlying Friction.
 func (x *PhysicsBody) Friction() float64 {
-	return x.inner.Friction()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("friction"))
+	return _r
 }
 
-// SetFriction calls the underlying SetFriction.
 func (x *PhysicsBody) SetFriction(friction float64) {
-	x.inner.SetFriction(friction)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFriction:"), friction)
 }
 
-// Restitution calls the underlying Restitution.
 func (x *PhysicsBody) Restitution() float64 {
-	return x.inner.Restitution()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("restitution"))
+	return _r
 }
 
-// SetRestitution calls the underlying SetRestitution.
 func (x *PhysicsBody) SetRestitution(restitution float64) {
-	x.inner.SetRestitution(restitution)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestitution:"), restitution)
 }
 
-// RollingFriction calls the underlying RollingFriction.
 func (x *PhysicsBody) RollingFriction() float64 {
-	return x.inner.RollingFriction()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rollingFriction"))
+	return _r
 }
 
-// SetRollingFriction calls the underlying SetRollingFriction.
 func (x *PhysicsBody) SetRollingFriction(rollingFriction float64) {
-	x.inner.SetRollingFriction(rollingFriction)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRollingFriction:"), rollingFriction)
 }
 
-// PhysicsShape calls the underlying PhysicsShape.
 func (x *PhysicsBody) PhysicsShape() *PhysicsShape {
-	_r := x.inner.PhysicsShape()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsShape{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("physicsShape"))
+	return PhysicsShapeFromID(_r)
 }
 
-// SetPhysicsShape calls the underlying SetPhysicsShape.
-func (x *PhysicsBody) SetPhysicsShape(physicsShape *raw.SCNPhysicsShape) {
-	x.inner.SetPhysicsShape(physicsShape)
+func (x *PhysicsBody) SetPhysicsShape(physicsShape *PhysicsShape) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsShape:"), objref.IDOf(physicsShape))
 }
 
-// IsResting calls the underlying IsResting.
 func (x *PhysicsBody) IsResting() bool {
-	return x.inner.IsResting()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isResting"))
+	return _r
 }
 
-// AllowsResting calls the underlying AllowsResting.
 func (x *PhysicsBody) AllowsResting() bool {
-	return x.inner.AllowsResting()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsResting"))
+	return _r
 }
 
-// SetAllowsResting calls the underlying SetAllowsResting.
 func (x *PhysicsBody) SetAllowsResting(allowsResting bool) {
-	x.inner.SetAllowsResting(allowsResting)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsResting:"), allowsResting)
 }
 
-// Velocity calls the underlying Velocity.
-func (x *PhysicsBody) Velocity() raw.SCNVector3 {
-	return x.inner.Velocity()
-}
-
-// SetVelocity calls the underlying SetVelocity.
-func (x *PhysicsBody) SetVelocity(velocity raw.SCNVector3) {
-	x.inner.SetVelocity(velocity)
-}
-
-// AngularVelocity calls the underlying AngularVelocity.
-func (x *PhysicsBody) AngularVelocity() raw.SCNVector4 {
-	return x.inner.AngularVelocity()
-}
-
-// SetAngularVelocity calls the underlying SetAngularVelocity.
-func (x *PhysicsBody) SetAngularVelocity(angularVelocity raw.SCNVector4) {
-	x.inner.SetAngularVelocity(angularVelocity)
-}
-
-// Damping calls the underlying Damping.
 func (x *PhysicsBody) Damping() float64 {
-	return x.inner.Damping()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("damping"))
+	return _r
 }
 
-// SetDamping calls the underlying SetDamping.
 func (x *PhysicsBody) SetDamping(damping float64) {
-	x.inner.SetDamping(damping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDamping:"), damping)
 }
 
-// AngularDamping calls the underlying AngularDamping.
 func (x *PhysicsBody) AngularDamping() float64 {
-	return x.inner.AngularDamping()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("angularDamping"))
+	return _r
 }
 
-// SetAngularDamping calls the underlying SetAngularDamping.
 func (x *PhysicsBody) SetAngularDamping(angularDamping float64) {
-	x.inner.SetAngularDamping(angularDamping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAngularDamping:"), angularDamping)
 }
 
-// VelocityFactor calls the underlying VelocityFactor.
-func (x *PhysicsBody) VelocityFactor() raw.SCNVector3 {
-	return x.inner.VelocityFactor()
+func (x *PhysicsBody) CategoryBitMask() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("categoryBitMask"))
+	return _r
 }
 
-// SetVelocityFactor calls the underlying SetVelocityFactor.
-func (x *PhysicsBody) SetVelocityFactor(velocityFactor raw.SCNVector3) {
-	x.inner.SetVelocityFactor(velocityFactor)
+func (x *PhysicsBody) SetCategoryBitMask(categoryBitMask int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
 }
 
-// AngularVelocityFactor calls the underlying AngularVelocityFactor.
-func (x *PhysicsBody) AngularVelocityFactor() raw.SCNVector3 {
-	return x.inner.AngularVelocityFactor()
+func (x *PhysicsBody) CollisionBitMask() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("collisionBitMask"))
+	return _r
 }
 
-// SetAngularVelocityFactor calls the underlying SetAngularVelocityFactor.
-func (x *PhysicsBody) SetAngularVelocityFactor(angularVelocityFactor raw.SCNVector3) {
-	x.inner.SetAngularVelocityFactor(angularVelocityFactor)
+func (x *PhysicsBody) SetCollisionBitMask(collisionBitMask int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollisionBitMask:"), collisionBitMask)
 }
 
-// CategoryBitMask calls the underlying CategoryBitMask.
-func (x *PhysicsBody) CategoryBitMask() uint {
-	return x.inner.CategoryBitMask()
+func (x *PhysicsBody) ContactTestBitMask() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("contactTestBitMask"))
+	return _r
 }
 
-// SetCategoryBitMask calls the underlying SetCategoryBitMask.
-func (x *PhysicsBody) SetCategoryBitMask(categoryBitMask uint) {
-	x.inner.SetCategoryBitMask(categoryBitMask)
+func (x *PhysicsBody) SetContactTestBitMask(contactTestBitMask int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactTestBitMask:"), contactTestBitMask)
 }
 
-// CollisionBitMask calls the underlying CollisionBitMask.
-func (x *PhysicsBody) CollisionBitMask() uint {
-	return x.inner.CollisionBitMask()
-}
-
-// SetCollisionBitMask calls the underlying SetCollisionBitMask.
-func (x *PhysicsBody) SetCollisionBitMask(collisionBitMask uint) {
-	x.inner.SetCollisionBitMask(collisionBitMask)
-}
-
-// ContactTestBitMask calls the underlying ContactTestBitMask.
-func (x *PhysicsBody) ContactTestBitMask() uint {
-	return x.inner.ContactTestBitMask()
-}
-
-// SetContactTestBitMask calls the underlying SetContactTestBitMask.
-func (x *PhysicsBody) SetContactTestBitMask(contactTestBitMask uint) {
-	x.inner.SetContactTestBitMask(contactTestBitMask)
-}
-
-// IsAffectedByGravity calls the underlying IsAffectedByGravity.
 func (x *PhysicsBody) IsAffectedByGravity() bool {
-	return x.inner.IsAffectedByGravity()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAffectedByGravity"))
+	return _r
 }
 
-// SetAffectedByGravity calls the underlying SetAffectedByGravity.
 func (x *PhysicsBody) SetAffectedByGravity(affectedByGravity bool) {
-	x.inner.SetAffectedByGravity(affectedByGravity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedByGravity:"), affectedByGravity)
 }
 
-// ContinuousCollisionDetectionThreshold calls the underlying ContinuousCollisionDetectionThreshold.
 func (x *PhysicsBody) ContinuousCollisionDetectionThreshold() float64 {
-	return x.inner.ContinuousCollisionDetectionThreshold()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("continuousCollisionDetectionThreshold"))
+	return _r
 }
 
-// SetContinuousCollisionDetectionThreshold calls the underlying SetContinuousCollisionDetectionThreshold.
 func (x *PhysicsBody) SetContinuousCollisionDetectionThreshold(continuousCollisionDetectionThreshold float64) {
-	x.inner.SetContinuousCollisionDetectionThreshold(continuousCollisionDetectionThreshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuousCollisionDetectionThreshold:"), continuousCollisionDetectionThreshold)
 }
 
-// CenterOfMassOffset calls the underlying CenterOfMassOffset.
-func (x *PhysicsBody) CenterOfMassOffset() raw.SCNVector3 {
-	return x.inner.CenterOfMassOffset()
-}
-
-// SetCenterOfMassOffset calls the underlying SetCenterOfMassOffset.
-func (x *PhysicsBody) SetCenterOfMassOffset(centerOfMassOffset raw.SCNVector3) {
-	x.inner.SetCenterOfMassOffset(centerOfMassOffset)
-}
-
-// LinearRestingThreshold calls the underlying LinearRestingThreshold.
 func (x *PhysicsBody) LinearRestingThreshold() float64 {
-	return x.inner.LinearRestingThreshold()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("linearRestingThreshold"))
+	return _r
 }
 
-// SetLinearRestingThreshold calls the underlying SetLinearRestingThreshold.
 func (x *PhysicsBody) SetLinearRestingThreshold(linearRestingThreshold float64) {
-	x.inner.SetLinearRestingThreshold(linearRestingThreshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinearRestingThreshold:"), linearRestingThreshold)
 }
 
-// AngularRestingThreshold calls the underlying AngularRestingThreshold.
 func (x *PhysicsBody) AngularRestingThreshold() float64 {
-	return x.inner.AngularRestingThreshold()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("angularRestingThreshold"))
+	return _r
 }
 
-// SetAngularRestingThreshold calls the underlying SetAngularRestingThreshold.
 func (x *PhysicsBody) SetAngularRestingThreshold(angularRestingThreshold float64) {
-	x.inner.SetAngularRestingThreshold(angularRestingThreshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAngularRestingThreshold:"), angularRestingThreshold)
 }
 
 // PhysicsBodyable is the interface implemented by [PhysicsBody], for mocking and DI.
 type PhysicsBodyable interface {
-	Unwrap() *raw.SCNPhysicsBody
-	WithType(type_ SCNPhysicsBodyType) *PhysicsBody
+	obj.Object
+	WithType(type_ PhysicsBodyType) *PhysicsBody
 	WithMass(mass float64) *PhysicsBody
-	WithMomentOfInertia(momentOfInertia raw.SCNVector3) *PhysicsBody
 	WithUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia bool) *PhysicsBody
 	WithCharge(charge float64) *PhysicsBody
 	WithFriction(friction float64) *PhysicsBody
@@ -529,32 +398,22 @@ type PhysicsBodyable interface {
 	WithRollingFriction(rollingFriction float64) *PhysicsBody
 	WithPhysicsShape(physicsShape *PhysicsShape) *PhysicsBody
 	WithAllowsResting(allowsResting bool) *PhysicsBody
-	WithVelocity(velocity raw.SCNVector3) *PhysicsBody
-	WithAngularVelocity(angularVelocity raw.SCNVector4) *PhysicsBody
 	WithDamping(damping float64) *PhysicsBody
 	WithAngularDamping(angularDamping float64) *PhysicsBody
-	WithVelocityFactor(velocityFactor raw.SCNVector3) *PhysicsBody
-	WithAngularVelocityFactor(angularVelocityFactor raw.SCNVector3) *PhysicsBody
-	WithCategoryBitMask(categoryBitMask uint) *PhysicsBody
-	WithCollisionBitMask(collisionBitMask uint) *PhysicsBody
-	WithContactTestBitMask(contactTestBitMask uint) *PhysicsBody
+	WithCategoryBitMask(categoryBitMask int) *PhysicsBody
+	WithCollisionBitMask(collisionBitMask int) *PhysicsBody
+	WithContactTestBitMask(contactTestBitMask int) *PhysicsBody
 	WithAffectedByGravity(affectedByGravity bool) *PhysicsBody
 	WithContinuousCollisionDetectionThreshold(continuousCollisionDetectionThreshold float64) *PhysicsBody
-	WithCenterOfMassOffset(centerOfMassOffset raw.SCNVector3) *PhysicsBody
 	WithLinearRestingThreshold(linearRestingThreshold float64) *PhysicsBody
 	WithAngularRestingThreshold(angularRestingThreshold float64) *PhysicsBody
-	ApplyForceImpulse(direction raw.SCNVector3, impulse bool)
-	ApplyForceAtPositionImpulse(direction raw.SCNVector3, position raw.SCNVector3, impulse bool)
-	ApplyTorqueImpulse(torque raw.SCNVector4, impulse bool)
 	ClearAllForces()
 	ResetTransform()
 	SetResting(resting bool)
-	Type() SCNPhysicsBodyType
-	SetType(type_ SCNPhysicsBodyType)
+	Type() PhysicsBodyType
+	SetType(type_ PhysicsBodyType)
 	Mass() float64
 	SetMass(mass float64)
-	MomentOfInertia() raw.SCNVector3
-	SetMomentOfInertia(momentOfInertia raw.SCNVector3)
 	UsesDefaultMomentOfInertia() bool
 	SetUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia bool)
 	Charge() float64
@@ -566,34 +425,24 @@ type PhysicsBodyable interface {
 	RollingFriction() float64
 	SetRollingFriction(rollingFriction float64)
 	PhysicsShape() *PhysicsShape
-	SetPhysicsShape(physicsShape *raw.SCNPhysicsShape)
+	SetPhysicsShape(physicsShape *PhysicsShape)
 	IsResting() bool
 	AllowsResting() bool
 	SetAllowsResting(allowsResting bool)
-	Velocity() raw.SCNVector3
-	SetVelocity(velocity raw.SCNVector3)
-	AngularVelocity() raw.SCNVector4
-	SetAngularVelocity(angularVelocity raw.SCNVector4)
 	Damping() float64
 	SetDamping(damping float64)
 	AngularDamping() float64
 	SetAngularDamping(angularDamping float64)
-	VelocityFactor() raw.SCNVector3
-	SetVelocityFactor(velocityFactor raw.SCNVector3)
-	AngularVelocityFactor() raw.SCNVector3
-	SetAngularVelocityFactor(angularVelocityFactor raw.SCNVector3)
-	CategoryBitMask() uint
-	SetCategoryBitMask(categoryBitMask uint)
-	CollisionBitMask() uint
-	SetCollisionBitMask(collisionBitMask uint)
-	ContactTestBitMask() uint
-	SetContactTestBitMask(contactTestBitMask uint)
+	CategoryBitMask() int
+	SetCategoryBitMask(categoryBitMask int)
+	CollisionBitMask() int
+	SetCollisionBitMask(collisionBitMask int)
+	ContactTestBitMask() int
+	SetContactTestBitMask(contactTestBitMask int)
 	IsAffectedByGravity() bool
 	SetAffectedByGravity(affectedByGravity bool)
 	ContinuousCollisionDetectionThreshold() float64
 	SetContinuousCollisionDetectionThreshold(continuousCollisionDetectionThreshold float64)
-	CenterOfMassOffset() raw.SCNVector3
-	SetCenterOfMassOffset(centerOfMassOffset raw.SCNVector3)
 	LinearRestingThreshold() float64
 	SetLinearRestingThreshold(linearRestingThreshold float64)
 	AngularRestingThreshold() float64

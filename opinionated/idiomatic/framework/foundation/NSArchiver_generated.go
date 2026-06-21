@@ -5,93 +5,105 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A coder that stores an object’s data to an archive.
 //
-// Archiver wraps [raw.NSArchiver] with a fluent Go API.
+// Archiver is an idiomatic wrapper over the Objective-C class NSArchiver.
 type Archiver struct {
-	inner *raw.NSArchiver
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSArchiver].
-func (x *Archiver) Unwrap() *raw.NSArchiver { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Archiver) ID() objc.ID { return x.inner.Ptr() }
-
-// ArchiverFromID adopts an existing object pointer as a Archiver (nil for 0).
+// ArchiverFromID adopts an existing Objective-C object as a Archiver
+// (nil for 0), retaining it and registering a release finalizer.
 func ArchiverFromID(id objc.ID) *Archiver {
 	if id == 0 {
 		return nil
 	}
-	return &Archiver{inner: raw.NSArchiverFromID(id)}
+	x := &Archiver{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// archiverAdopt wraps an Objective-C object that this code just created as a
+// Archiver (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func archiverAdopt(id objc.ID) *Archiver {
+	if id == 0 {
+		return nil
+	}
+	x := &Archiver{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Archiver) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Archiver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Archiver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns an archiver, initialized to encode stream and version information into a given mutable data object.
 //
-// NewArchiverForWritingWithMutableData creates a new [Archiver].
-func NewArchiverForWritingWithMutableData(mdata *raw.NSMutableData) *Archiver {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSArchiver")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWritingWithMutableData:"), mdata.Ptr())
-	return &Archiver{inner: raw.NSArchiverFromID(_id)}
+// NewArchiverForWritingWithMutableData creates a new Archiver.
+func NewArchiverForWritingWithMutableData(mdata *MutableData) *Archiver {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSArchiver")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWritingWithMutableData:"), objref.IDOf(mdata))
+	return archiverAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Archiver) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Archiver {
-	x.inner.NSCoder.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *Archiver) WithScriptingProperties(scriptingProperties obj.Object) *Archiver {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Encodes a substitute name for the class with a given true name.
-//
-// EncodeClassNameIntoClassName calls the underlying EncodeClassNameIntoClassName.
 func (x *Archiver) EncodeClassNameIntoClassName(trueName string, inArchiveName string) {
-	x.inner.EncodeClassNameIntoClassName(foundation.NSStringStringWithUTF8String(trueName), foundation.NSStringStringWithUTF8String(inArchiveName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeClassName:intoClassName:"), purego.NSString(trueName), purego.NSString(inArchiveName))
 }
 
 // Returns the name of the class used to archive instances of the class with a given true name.
-//
-// ClassNameEncodedForTrueClassName calls the underlying ClassNameEncodedForTrueClassName.
-func (x *Archiver) ClassNameEncodedForTrueClassName(trueName string) *String {
-	_r := x.inner.ClassNameEncodedForTrueClassName(foundation.NSStringStringWithUTF8String(trueName))
-	if _r == nil {
-		return nil
+func (x *Archiver) ClassNameEncodedForTrueClassName(trueName string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classNameEncodedForTrueClassName:"), purego.NSString(trueName))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
 // Causes the receiver to treat subsequent requests to encode a given object as though they were requests to encode another given object.
-//
-// ReplaceObjectWithObject calls the underlying ReplaceObjectWithObject.
-func (x *Archiver) ReplaceObjectWithObject(object objc.ID, newObject objc.ID) {
-	x.inner.ReplaceObjectWithObject(object, newObject)
+func (x *Archiver) ReplaceObjectWithObject(object obj.Object, newObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceObject:withObject:"), objref.IDOf(object), objref.IDOf(newObject))
 }
 
-// ArchiverData calls the underlying ArchiverData.
 func (x *Archiver) ArchiverData() *MutableData {
-	_r := x.inner.ArchiverData()
-	if _r == nil {
-		return nil
-	}
-	return &MutableData{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("archiverData"))
+	return MutableDataFromID(_r)
 }
-
-func (x *Archiver) asCoder() *raw.NSCoder { return &x.inner.NSCoder }
-
-func (x *Archiver) asObject() *raw.NSObject { return &x.inner.NSCoder.NSObject }
 
 // Archiverable is the interface implemented by [Archiver], for mocking and DI.
 type Archiverable interface {
-	Unwrap() *raw.NSArchiver
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Archiver
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Archiver
 	EncodeClassNameIntoClassName(trueName string, inArchiveName string)
-	ClassNameEncodedForTrueClassName(trueName string) *String
-	ReplaceObjectWithObject(object objc.ID, newObject objc.ID)
+	ClassNameEncodedForTrueClassName(trueName string) string
+	ReplaceObjectWithObject(object obj.Object, newObject obj.Object)
 	ArchiverData() *MutableData
 }
 

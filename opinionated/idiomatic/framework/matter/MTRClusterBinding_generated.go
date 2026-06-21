@@ -5,106 +5,122 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterBinding wraps [raw.MTRClusterBinding] with a fluent Go API.
+// MTRClusterBinding is an idiomatic wrapper over the Objective-C class MTRClusterBinding.
 type MTRClusterBinding struct {
-	inner *raw.MTRClusterBinding
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterBinding].
-func (x *MTRClusterBinding) Unwrap() *raw.MTRClusterBinding { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterBinding) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterBindingFromID adopts an existing object pointer as a MTRClusterBinding (nil for 0).
+// MTRClusterBindingFromID adopts an existing Objective-C object as a MTRClusterBinding
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterBindingFromID(id objc.ID) *MTRClusterBinding {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterBinding{inner: raw.MTRClusterBindingFromID(id)}
+	x := &MTRClusterBinding{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterBindingAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterBinding (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterBindingAdopt(id objc.ID) *MTRClusterBinding {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterBinding{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterBinding) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterBinding) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterBinding) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 //
-// NewMTRClusterBindingWithDeviceEndpointIDQueue creates a new [MTRClusterBinding].
-func NewMTRClusterBindingWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterBinding {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterBinding")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterBinding{inner: raw.MTRClusterBindingFromID(_id)}
+// NewMTRClusterBindingWithDeviceEndpointIDQueue creates a new MTRClusterBinding.
+func NewMTRClusterBindingWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterBinding {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBinding")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterBindingAdopt(_id)
 }
 
-// NewMTRClusterBindingWithDeviceEndpointQueue creates a new [MTRClusterBinding].
-func NewMTRClusterBindingWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterBinding {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterBinding")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterBinding{inner: raw.MTRClusterBindingFromID(_id)}
+// NewMTRClusterBindingWithDeviceEndpointQueue creates a new MTRClusterBinding.
+func NewMTRClusterBindingWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterBinding {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBinding")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterBindingAdopt(_id)
 }
 
-// ReadAttributeBindingWithParams calls the underlying ReadAttributeBindingWithParams.
-func (x *MTRClusterBinding) ReadAttributeBindingWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBindingWithParams(params)
+func (x *MTRClusterBinding) ReadAttributeBindingWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBindingWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeBindingWithValueExpectedValueInterval calls the underlying WriteAttributeBindingWithValueExpectedValueInterval.
-func (x *MTRClusterBinding) WriteAttributeBindingWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeBindingWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterBinding) WriteAttributeBindingWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeBindingWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeBindingWithValueExpectedValueIntervalParams calls the underlying WriteAttributeBindingWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBinding) WriteAttributeBindingWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeBindingWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterBinding) WriteAttributeBindingWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeBindingWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterBinding) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterBinding) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterBinding) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterBinding) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterBinding) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterBinding) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterBinding) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+func (x *MTRClusterBinding) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterBinding) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterBinding) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterBinding) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterBinding) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterBindingable is the interface implemented by [MTRClusterBinding], for mocking and DI.
 type MTRClusterBindingable interface {
-	Unwrap() *raw.MTRClusterBinding
-	ReadAttributeBindingWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeBindingWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeBindingWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeBindingWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeBindingWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeBindingWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterBindingable = (*MTRClusterBinding)(nil)

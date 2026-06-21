@@ -5,101 +5,119 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Cluster Refrigerator Alarm Attributes and commands for configuring the Refrigerator alarm.
 //
-// MTRClusterRefrigeratorAlarm wraps [raw.MTRClusterRefrigeratorAlarm] with a fluent Go API.
+// MTRClusterRefrigeratorAlarm is an idiomatic wrapper over the Objective-C class MTRClusterRefrigeratorAlarm.
 type MTRClusterRefrigeratorAlarm struct {
-	inner *raw.MTRClusterRefrigeratorAlarm
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterRefrigeratorAlarm].
-func (x *MTRClusterRefrigeratorAlarm) Unwrap() *raw.MTRClusterRefrigeratorAlarm { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterRefrigeratorAlarm) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterRefrigeratorAlarmFromID adopts an existing object pointer as a MTRClusterRefrigeratorAlarm (nil for 0).
+// MTRClusterRefrigeratorAlarmFromID adopts an existing Objective-C object as a MTRClusterRefrigeratorAlarm
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterRefrigeratorAlarmFromID(id objc.ID) *MTRClusterRefrigeratorAlarm {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterRefrigeratorAlarm{inner: raw.MTRClusterRefrigeratorAlarmFromID(id)}
+	x := &MTRClusterRefrigeratorAlarm{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterRefrigeratorAlarmAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterRefrigeratorAlarm (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterRefrigeratorAlarmAdopt(id objc.ID) *MTRClusterRefrigeratorAlarm {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterRefrigeratorAlarm{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterRefrigeratorAlarm) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterRefrigeratorAlarm) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterRefrigeratorAlarm) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 //
-// NewMTRClusterRefrigeratorAlarmWithDeviceEndpointIDQueue creates a new [MTRClusterRefrigeratorAlarm].
-func NewMTRClusterRefrigeratorAlarmWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterRefrigeratorAlarm {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterRefrigeratorAlarm")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterRefrigeratorAlarm{inner: raw.MTRClusterRefrigeratorAlarmFromID(_id)}
+// NewMTRClusterRefrigeratorAlarmWithDeviceEndpointIDQueue creates a new MTRClusterRefrigeratorAlarm.
+func NewMTRClusterRefrigeratorAlarmWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterRefrigeratorAlarm {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterRefrigeratorAlarm")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterRefrigeratorAlarmAdopt(_id)
 }
 
-// ReadAttributeMaskWithParams calls the underlying ReadAttributeMaskWithParams.
-func (x *MTRClusterRefrigeratorAlarm) ReadAttributeMaskWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaskWithParams(params)
+func (x *MTRClusterRefrigeratorAlarm) ReadAttributeMaskWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaskWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeStateWithParams calls the underlying ReadAttributeStateWithParams.
-func (x *MTRClusterRefrigeratorAlarm) ReadAttributeStateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeStateWithParams(params)
+func (x *MTRClusterRefrigeratorAlarm) ReadAttributeStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStateWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeSupportedWithParams calls the underlying ReadAttributeSupportedWithParams.
-func (x *MTRClusterRefrigeratorAlarm) ReadAttributeSupportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSupportedWithParams(params)
+func (x *MTRClusterRefrigeratorAlarm) ReadAttributeSupportedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterRefrigeratorAlarm) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterRefrigeratorAlarm) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterRefrigeratorAlarm) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterRefrigeratorAlarm) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterRefrigeratorAlarm) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterRefrigeratorAlarm) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterRefrigeratorAlarm) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+func (x *MTRClusterRefrigeratorAlarm) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterRefrigeratorAlarm) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterRefrigeratorAlarm) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterRefrigeratorAlarm) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterRefrigeratorAlarm) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterRefrigeratorAlarmable is the interface implemented by [MTRClusterRefrigeratorAlarm], for mocking and DI.
 type MTRClusterRefrigeratorAlarmable interface {
-	Unwrap() *raw.MTRClusterRefrigeratorAlarm
-	ReadAttributeMaskWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeStateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeSupportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeMaskWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeStateWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeSupportedWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterRefrigeratorAlarmable = (*MTRClusterRefrigeratorAlarm)(nil)

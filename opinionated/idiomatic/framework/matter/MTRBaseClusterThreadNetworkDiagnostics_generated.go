@@ -6,155 +6,162 @@ package matter
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRBaseClusterThreadNetworkDiagnostics wraps [raw.MTRBaseClusterThreadNetworkDiagnostics] with a fluent Go API.
+// MTRBaseClusterThreadNetworkDiagnostics is an idiomatic wrapper over the Objective-C class MTRBaseClusterThreadNetworkDiagnostics.
 type MTRBaseClusterThreadNetworkDiagnostics struct {
-	inner *raw.MTRBaseClusterThreadNetworkDiagnostics
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRBaseClusterThreadNetworkDiagnostics].
-func (x *MTRBaseClusterThreadNetworkDiagnostics) Unwrap() *raw.MTRBaseClusterThreadNetworkDiagnostics {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRBaseClusterThreadNetworkDiagnosticsFromID adopts an existing object pointer as a MTRBaseClusterThreadNetworkDiagnostics (nil for 0).
+// MTRBaseClusterThreadNetworkDiagnosticsFromID adopts an existing Objective-C object as a MTRBaseClusterThreadNetworkDiagnostics
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRBaseClusterThreadNetworkDiagnosticsFromID(id objc.ID) *MTRBaseClusterThreadNetworkDiagnostics {
 	if id == 0 {
 		return nil
 	}
-	return &MTRBaseClusterThreadNetworkDiagnostics{inner: raw.MTRBaseClusterThreadNetworkDiagnosticsFromID(id)}
+	x := &MTRBaseClusterThreadNetworkDiagnostics{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRBaseClusterThreadNetworkDiagnosticsAdopt wraps an Objective-C object that this code just created as a
+// MTRBaseClusterThreadNetworkDiagnostics (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRBaseClusterThreadNetworkDiagnosticsAdopt(id objc.ID) *MTRBaseClusterThreadNetworkDiagnostics {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRBaseClusterThreadNetworkDiagnostics{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRBaseClusterThreadNetworkDiagnostics) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRBaseClusterThreadNetworkDiagnostics) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRBaseClusterThreadNetworkDiagnostics) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods (reads, writes, commands) that take a completion, the completion will be called on the provided queue.
 //
-// NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue creates a new [MTRBaseClusterThreadNetworkDiagnostics].
-func NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue(device *raw.MTRBaseDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRBaseClusterThreadNetworkDiagnostics {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterThreadNetworkDiagnostics")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRBaseClusterThreadNetworkDiagnostics{inner: raw.MTRBaseClusterThreadNetworkDiagnosticsFromID(_id)}
+// NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue creates a new MTRBaseClusterThreadNetworkDiagnostics.
+func NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue(device *MTRBaseDevice, endpointID obj.Object, queue obj.Object) *MTRBaseClusterThreadNetworkDiagnostics {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterThreadNetworkDiagnostics")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRBaseClusterThreadNetworkDiagnosticsAdopt(_id)
 }
 
-// NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue creates a new [MTRBaseClusterThreadNetworkDiagnostics].
-func NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue(device *raw.MTRBaseDevice, endpoint uint16, queue *foundation.NSObject) *MTRBaseClusterThreadNetworkDiagnostics {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBaseClusterThreadNetworkDiagnostics")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRBaseClusterThreadNetworkDiagnostics{inner: raw.MTRBaseClusterThreadNetworkDiagnosticsFromID(_id)}
-}
-
-// Command ResetCounts Reception of this command SHALL reset the following attributes to 0:
-//
-// ResetCountsWithParamsCompletion calls the underlying ResetCountsWithParamsCompletion.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ResetCountsWithParamsCompletion(params *raw.MTRThreadNetworkDiagnosticsClusterResetCountsParams, completion func(unsafe.Pointer)) {
-	x.inner.ResetCountsWithParamsCompletion(params, completion)
-}
-
-// ResetCountsWithCompletion calls the underlying ResetCountsWithCompletion.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ResetCountsWithCompletion(completion func(unsafe.Pointer)) {
-	x.inner.ResetCountsWithCompletion(completion)
+// NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue creates a new MTRBaseClusterThreadNetworkDiagnostics.
+func NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue(device *MTRBaseDevice, endpoint uint16, queue obj.Object) *MTRBaseClusterThreadNetworkDiagnostics {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRBaseClusterThreadNetworkDiagnostics")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRBaseClusterThreadNetworkDiagnosticsAdopt(_id)
 }
 
 // ReadAttributeChannelWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeChannelWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChannelWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeChannelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeChannelWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeChannelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRoutingRoleWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRoutingRoleWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRoutingRoleWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRoutingRoleWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRoutingRoleWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRoutingRoleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingRoleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingRoleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRoutingRoleWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRoutingRoleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -166,16 +173,13 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNetworkNameWithCom
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeNetworkNameWithCompletion(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNetworkNameWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -186,22 +190,19 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNetworkNameWithCom
 }
 
 // SubscribeAttributeNetworkNameWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error) {
 	type _result struct {
 		val string
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeNetworkNameWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNetworkNameWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -212,2689 +213,2577 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkNameWi
 }
 
 // ReadAttributePanIdWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePanIdWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePanIdWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributePanIdWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePanIdWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributePanIdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributePanIdWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePanIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeExtendedPanIdWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanIdWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanIdWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeExtendedPanIdWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeExtendedPanIdWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeExtendedPanIdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtendedPanIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtendedPanIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeExtendedPanIdWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeExtendedPanIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeMeshLocalPrefixWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefixWithCompletion(ctx context.Context) (*foundation.NSData, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefixWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeMeshLocalPrefixWithCompletion(func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeshLocalPrefixWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeMeshLocalPrefixWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLocalPrefixWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSData, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLocalPrefixWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeMeshLocalPrefixWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeMeshLocalPrefixWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeOverrunCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOverrunCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOverrunCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeOverrunCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOverrunCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeOverrunCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeNeighborTableWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeNeighborTableWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNeighborTableWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeNeighborTableWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighborTableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighborTableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeNeighborTableWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNeighborTableWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRouteTableWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouteTableWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouteTableWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRouteTableWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRouteTableWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRouteTableWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRouteTableWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRouteTableWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributePartitionIdWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIdWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIdWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributePartitionIdWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePartitionIdWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributePartitionIdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributePartitionIdWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePartitionIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeWeightingWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeWeightingWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeWeightingWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeWeightingWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWeightingWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeWeightingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeWeightingWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeWeightingWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeDataVersionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDataVersionWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDataVersionWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeDataVersionWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDataVersionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeDataVersionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeDataVersionWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDataVersionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeStableDataVersionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersionWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersionWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeStableDataVersionWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStableDataVersionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeStableDataVersionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDataVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDataVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeStableDataVersionWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeStableDataVersionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeLeaderRouterIdWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterIdWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterIdWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeLeaderRouterIdWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLeaderRouterIdWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeLeaderRouterIdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRouterIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRouterIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeLeaderRouterIdWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeLeaderRouterIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeDetachedRoleCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeDetachedRoleCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDetachedRoleCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeDetachedRoleCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetachedRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetachedRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeDetachedRoleCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDetachedRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeChildRoleCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeChildRoleCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChildRoleCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeChildRoleCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeChildRoleCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeChildRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRouterRoleCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRouterRoleCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRouterRoleCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRouterRoleCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRouterRoleCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRouterRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeLeaderRoleCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeLeaderRoleCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLeaderRoleCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeLeaderRoleCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeLeaderRoleCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeLeaderRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeAttachAttemptCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeAttachAttemptCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttachAttemptCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttachAttemptCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributePartitionIdChangeCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIdChangeCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIdChangeCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributePartitionIdChangeCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePartitionIdChangeCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributePartitionIdChangeCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdChangeCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdChangeCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributePartitionIdChangeCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePartitionIdChangeCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeBetterPartitionAttachAttemptCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAttachAttemptCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAttachAttemptCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeBetterPartitionAttachAttemptCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBetterPartitionAttachAttemptCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeBetterPartitionAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPartitionAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPartitionAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeBetterPartitionAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeBetterPartitionAttachAttemptCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeParentChangeCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeParentChangeCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeParentChangeCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeParentChangeCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentChangeCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentChangeCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeParentChangeCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeParentChangeCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxTotalCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxTotalCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxTotalCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxTotalCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxTotalCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxTotalCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxUnicastCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxUnicastCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxUnicastCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxUnicastCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxUnicastCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxUnicastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxBroadcastCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxBroadcastCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxBroadcastCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxBroadcastCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadcastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadcastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxBroadcastCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxBroadcastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxAckRequestedCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxAckRequestedCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxAckRequestedCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxAckRequestedCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckRequestedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckRequestedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxAckRequestedCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxAckRequestedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxAckedCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxAckedCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxAckedCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxAckedCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxAckedCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxAckedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxNoAckRequestedCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxNoAckRequestedCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxNoAckRequestedCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxNoAckRequestedCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckRequestedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckRequestedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxNoAckRequestedCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxNoAckRequestedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxDataCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxDataCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxDataCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxDataCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxDataCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxDataCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxDataPollCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxDataPollCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxDataPollCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxDataPollCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPollCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPollCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxDataPollCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxDataPollCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxBeaconCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxBeaconCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxBeaconCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxBeaconCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxBeaconCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxBeaconCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxBeaconRequestCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxBeaconRequestCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxBeaconRequestCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxBeaconRequestCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxOtherCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxOtherCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxOtherCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxOtherCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxOtherCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxOtherCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxRetryCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxRetryCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxRetryCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxRetryCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxRetryCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxRetryCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxDirectMaxRetryExpiryCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryExpiryCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryExpiryCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxDirectMaxRetryExpiryCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxDirectMaxRetryExpiryCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxDirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxDirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxDirectMaxRetryExpiryCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxIndirectMaxRetryExpiryCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetryExpiryCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetryExpiryCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxIndirectMaxRetryExpiryCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxIndirectMaxRetryExpiryCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxIndirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxIndirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxIndirectMaxRetryExpiryCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxErrCcaCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxErrCcaCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrCcaCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxErrCcaCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCcaCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCcaCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxErrCcaCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxErrCcaCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxErrAbortCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxErrAbortCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrAbortCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxErrAbortCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbortCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbortCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxErrAbortCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxErrAbortCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxErrBusyChannelCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxErrBusyChannelCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrBusyChannelCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxErrBusyChannelCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBusyChannelCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBusyChannelCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxErrBusyChannelCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxErrBusyChannelCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxTotalCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxTotalCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxTotalCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxTotalCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxTotalCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxTotalCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxUnicastCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxUnicastCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxUnicastCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxUnicastCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxUnicastCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxUnicastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxBroadcastCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxBroadcastCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxBroadcastCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxBroadcastCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadcastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadcastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxBroadcastCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxBroadcastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxDataCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxDataCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDataCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxDataCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxDataCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxDataCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxDataPollCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxDataPollCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDataPollCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxDataPollCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPollCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPollCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxDataPollCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxDataPollCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxBeaconCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxBeaconCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxBeaconCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxBeaconCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxBeaconCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxBeaconCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxBeaconRequestCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxBeaconRequestCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxBeaconRequestCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxBeaconRequestCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxOtherCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxOtherCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxOtherCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxOtherCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxOtherCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxOtherCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxAddressFilteredCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxAddressFilteredCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxAddressFilteredCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxAddressFilteredCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddressFilteredCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddressFilteredCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxAddressFilteredCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxAddressFilteredCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxDestAddrFilteredCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFilteredCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFilteredCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxDestAddrFilteredCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDestAddrFilteredCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxDestAddrFilteredCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAddrFilteredCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAddrFilteredCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxDestAddrFilteredCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxDestAddrFilteredCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxDuplicatedCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxDuplicatedCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDuplicatedCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxDuplicatedCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplicatedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplicatedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxDuplicatedCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxDuplicatedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxErrNoFrameCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxErrNoFrameCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrNoFrameCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxErrNoFrameCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoFrameCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoFrameCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxErrNoFrameCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrNoFrameCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxErrUnknownNeighborCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighborCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighborCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxErrUnknownNeighborCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrUnknownNeighborCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxErrUnknownNeighborCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnknownNeighborCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnknownNeighborCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxErrUnknownNeighborCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrUnknownNeighborCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxErrInvalidSrcAddrCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAddrCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAddrCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxErrInvalidSrcAddrCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrInvalidSrcAddrCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxErrInvalidSrcAddrCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInvalidSrcAddrCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInvalidSrcAddrCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxErrInvalidSrcAddrCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrInvalidSrcAddrCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxErrSecCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxErrSecCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrSecCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxErrSecCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSecCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSecCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxErrSecCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrSecCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxErrFcsCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxErrFcsCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrFcsCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxErrFcsCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcsCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcsCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxErrFcsCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrFcsCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxErrOtherCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCountWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxErrOtherCountWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrOtherCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxErrOtherCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxErrOtherCountWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrOtherCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeActiveTimestampWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestampWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestampWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeActiveTimestampWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveTimestampWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeActiveTimestampWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeActiveTimestampWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeActiveTimestampWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributePendingTimestampWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePendingTimestampWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePendingTimestampWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributePendingTimestampWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePendingTimestampWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributePendingTimestampWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributePendingTimestampWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePendingTimestampWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeDelayWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDelayWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDelayWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeDelayWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDelayWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeDelayWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDelayWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -2906,16 +2795,13 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicyWith
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeSecurityPolicyWithCompletion(func(_p0 *raw.MTRThreadNetworkDiagnosticsClusterSecurityPolicy, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRThreadNetworkDiagnosticsClusterSecurityPolicy{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRThreadNetworkDiagnosticsClusterSecurityPolicyFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSecurityPolicyWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2926,22 +2812,19 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicyWith
 }
 
 // SubscribeAttributeSecurityPolicyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurityPolicyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTRThreadNetworkDiagnosticsClusterSecurityPolicy, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurityPolicyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRThreadNetworkDiagnosticsClusterSecurityPolicy, error) {
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterSecurityPolicy
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeSecurityPolicyWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *raw.MTRThreadNetworkDiagnosticsClusterSecurityPolicy, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRThreadNetworkDiagnosticsClusterSecurityPolicy{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRThreadNetworkDiagnosticsClusterSecurityPolicyFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeSecurityPolicyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2952,49 +2835,47 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurityPolic
 }
 
 // ReadAttributeChannelPage0MaskWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0MaskWithCompletion(ctx context.Context) (*foundation.NSData, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0MaskWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeChannelPage0MaskWithCompletion(func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChannelPage0MaskWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeChannelPage0MaskWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelPage0MaskWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSData, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelPage0MaskWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeChannelPage0MaskWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeChannelPage0MaskWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -3006,16 +2887,13 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOperationalDataset
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeOperationalDatasetComponentsWithCompletion(func(_p0 *raw.MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationalDatasetComponentsWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3026,22 +2904,19 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOperationalDataset
 }
 
 // SubscribeAttributeOperationalDatasetComponentsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperationalDatasetComponentsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperationalDatasetComponentsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, error) {
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeOperationalDatasetComponentsWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *raw.MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeOperationalDatasetComponentsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3052,395 +2927,369 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperationalDa
 }
 
 // ReadAttributeActiveNetworkFaultsListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFaultsListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFaultsListWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeActiveNetworkFaultsListWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveNetworkFaultsListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeActiveNetworkFaultsListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNetworkFaultsListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNetworkFaultsListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeActiveNetworkFaultsListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeActiveNetworkFaultsListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeGeneratedCommandListWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeAcceptedCommandListWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttributeListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeAttributeListWithCompletion(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeFeatureMapWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeClusterRevisionWithCompletion(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(params, subscriptionEstablished, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// ResetCountsWithParamsCompletionHandler calls the underlying ResetCountsWithParamsCompletionHandler.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ResetCountsWithParamsCompletionHandler(params *raw.MTRThreadNetworkDiagnosticsClusterResetCountsParams, completionHandler func(unsafe.Pointer)) {
-	x.inner.ResetCountsWithParamsCompletionHandler(params, completionHandler)
-}
-
-// ResetCountsWithCompletionHandler calls the underlying ResetCountsWithCompletionHandler.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ResetCountsWithCompletionHandler(completionHandler func(unsafe.Pointer)) {
-	x.inner.ResetCountsWithCompletionHandler(completionHandler)
-}
-
 // ReadAttributeChannel blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannel(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannel(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeChannelWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChannelWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeChannelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeChannelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeChannelWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRoutingRole blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRoutingRole(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRoutingRole(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRoutingRoleWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRoutingRoleWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRoutingRoleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingRoleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingRoleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRoutingRoleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRoutingRoleWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -3452,16 +3301,13 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNetworkName(ctx co
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeNetworkNameWithCompletionHandler(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNetworkNameWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3472,22 +3318,19 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNetworkName(ctx co
 }
 
 // SubscribeAttributeNetworkNameWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkNameWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (string, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkNameWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (string, error) {
 	type _result struct {
 		val string
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeNetworkNameWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNetworkNameWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3498,2689 +3341,2577 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkNameWi
 }
 
 // ReadAttributePanId blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePanId(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePanId(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributePanIdWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePanIdWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributePanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributePanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePanIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeExtendedPanId blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanId(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanId(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeExtendedPanIdWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeExtendedPanIdWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeExtendedPanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtendedPanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtendedPanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeExtendedPanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeExtendedPanIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeMeshLocalPrefix blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefix(ctx context.Context) (*foundation.NSData, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefix(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeMeshLocalPrefixWithCompletionHandler(func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeshLocalPrefixWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeMeshLocalPrefixWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLocalPrefixWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSData, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLocalPrefixWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeMeshLocalPrefixWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeMeshLocalPrefixWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeOverrunCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOverrunCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOverrunCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeOverrunCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOverrunCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeOverrunCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeNeighborTableList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableList(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableList(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeNeighborTableListWithCompletionHandler(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNeighborTableListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeNeighborTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighborTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighborTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeNeighborTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNeighborTableListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRouteTableList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouteTableList(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouteTableList(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRouteTableListWithCompletionHandler(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRouteTableListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRouteTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRouteTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRouteTableListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributePartitionId blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionId(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionId(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributePartitionIdWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePartitionIdWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributePartitionIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributePartitionIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePartitionIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeWeighting blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeWeighting(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeWeighting(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeWeightingWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWeightingWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeWeightingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeWeightingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeWeightingWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeDataVersion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDataVersion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDataVersion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeDataVersionWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDataVersionWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDataVersionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeStableDataVersion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersion(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeStableDataVersionWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStableDataVersionWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeStableDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeStableDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeStableDataVersionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeLeaderRouterId blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterId(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterId(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeLeaderRouterIdWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLeaderRouterIdWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeLeaderRouterIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRouterIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRouterIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeLeaderRouterIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeLeaderRouterIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeDetachedRoleCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeDetachedRoleCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDetachedRoleCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeDetachedRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetachedRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetachedRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeDetachedRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDetachedRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeChildRoleCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeChildRoleCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChildRoleCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeChildRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeChildRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeChildRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRouterRoleCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRouterRoleCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRouterRoleCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRouterRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRouterRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRouterRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeLeaderRoleCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeLeaderRoleCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLeaderRoleCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeLeaderRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeLeaderRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeLeaderRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeAttachAttemptCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeAttachAttemptCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttachAttemptCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttachAttemptCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributePartitionIdChangeCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIdChangeCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIdChangeCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributePartitionIdChangeCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePartitionIdChangeCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributePartitionIdChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributePartitionIdChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePartitionIdChangeCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeBetterPartitionAttachAttemptCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAttachAttemptCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAttachAttemptCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeBetterPartitionAttachAttemptCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBetterPartitionAttachAttemptCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeBetterPartitionAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPartitionAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPartitionAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeBetterPartitionAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeBetterPartitionAttachAttemptCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeParentChangeCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeParentChangeCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeParentChangeCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeParentChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeParentChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeParentChangeCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxTotalCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxTotalCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxTotalCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxTotalCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxUnicastCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxUnicastCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxUnicastCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxUnicastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxBroadcastCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxBroadcastCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxBroadcastCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxBroadcastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxAckRequestedCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxAckRequestedCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxAckRequestedCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxAckRequestedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxAckedCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxAckedCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxAckedCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxAckedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxAckedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxAckedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxNoAckRequestedCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxNoAckRequestedCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxNoAckRequestedCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxNoAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxNoAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxNoAckRequestedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxDataCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxDataCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxDataCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxDataCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxDataPollCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxDataPollCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxDataPollCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxDataPollCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxBeaconCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxBeaconCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxBeaconCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxBeaconCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxBeaconRequestCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxBeaconRequestCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxBeaconRequestCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxBeaconRequestCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxOtherCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxOtherCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxOtherCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxOtherCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxRetryCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxRetryCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxRetryCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxRetryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxRetryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxRetryCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxDirectMaxRetryExpiryCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryExpiryCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryExpiryCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxDirectMaxRetryExpiryCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxDirectMaxRetryExpiryCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxDirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxDirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxDirectMaxRetryExpiryCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxIndirectMaxRetryExpiryCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetryExpiryCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetryExpiryCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxIndirectMaxRetryExpiryCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxIndirectMaxRetryExpiryCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxIndirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxIndirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxIndirectMaxRetryExpiryCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxErrCcaCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxErrCcaCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrCcaCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxErrCcaCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCcaCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCcaCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxErrCcaCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxErrCcaCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxErrAbortCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxErrAbortCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrAbortCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxErrAbortCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbortCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbortCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxErrAbortCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxErrAbortCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeTxErrBusyChannelCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeTxErrBusyChannelCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrBusyChannelCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeTxErrBusyChannelCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBusyChannelCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBusyChannelCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeTxErrBusyChannelCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxErrBusyChannelCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxTotalCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxTotalCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxTotalCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxTotalCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxUnicastCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxUnicastCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxUnicastCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxUnicastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxBroadcastCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxBroadcastCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxBroadcastCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxBroadcastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxDataCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxDataCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDataCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxDataCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxDataPollCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxDataPollCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDataPollCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxDataPollCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxBeaconCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxBeaconCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxBeaconCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxBeaconCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxBeaconRequestCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxBeaconRequestCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxBeaconRequestCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxBeaconRequestCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxOtherCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxOtherCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxOtherCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxOtherCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxAddressFilteredCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxAddressFilteredCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxAddressFilteredCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxAddressFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddressFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddressFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxAddressFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxAddressFilteredCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxDestAddrFilteredCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFilteredCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFilteredCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxDestAddrFilteredCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDestAddrFilteredCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxDestAddrFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAddrFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAddrFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxDestAddrFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxDestAddrFilteredCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxDuplicatedCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxDuplicatedCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDuplicatedCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxDuplicatedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplicatedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplicatedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxDuplicatedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxDuplicatedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxErrNoFrameCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxErrNoFrameCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrNoFrameCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxErrNoFrameCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoFrameCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoFrameCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxErrNoFrameCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrNoFrameCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxErrUnknownNeighborCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighborCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighborCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxErrUnknownNeighborCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrUnknownNeighborCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxErrUnknownNeighborCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnknownNeighborCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnknownNeighborCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxErrUnknownNeighborCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrUnknownNeighborCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxErrInvalidSrcAddrCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAddrCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAddrCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxErrInvalidSrcAddrCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrInvalidSrcAddrCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxErrInvalidSrcAddrCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInvalidSrcAddrCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInvalidSrcAddrCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxErrInvalidSrcAddrCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrInvalidSrcAddrCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxErrSecCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxErrSecCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrSecCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxErrSecCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSecCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSecCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxErrSecCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrSecCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxErrFcsCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxErrFcsCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrFcsCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxErrFcsCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcsCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcsCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxErrFcsCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrFcsCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeRxErrOtherCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCount(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCount(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeRxErrOtherCountWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrOtherCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeRxErrOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeRxErrOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrOtherCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeActiveTimestamp blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestamp(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestamp(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeActiveTimestampWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveTimestampWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeActiveTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeActiveTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeActiveTimestampWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributePendingTimestamp blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePendingTimestamp(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePendingTimestamp(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributePendingTimestampWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePendingTimestampWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributePendingTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributePendingTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePendingTimestampWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeDelay blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDelay(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDelay(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeDelayWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDelayWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDelayWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -6192,16 +5923,13 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicy(ctx
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeSecurityPolicyWithCompletionHandler(func(_p0 *raw.MTRThreadNetworkDiagnosticsClusterSecurityPolicy, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRThreadNetworkDiagnosticsClusterSecurityPolicy{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRThreadNetworkDiagnosticsClusterSecurityPolicyFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSecurityPolicyWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6212,22 +5940,19 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicy(ctx
 }
 
 // SubscribeAttributeSecurityPolicyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurityPolicyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRThreadNetworkDiagnosticsClusterSecurityPolicy, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurityPolicyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRThreadNetworkDiagnosticsClusterSecurityPolicy, error) {
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterSecurityPolicy
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeSecurityPolicyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *raw.MTRThreadNetworkDiagnosticsClusterSecurityPolicy, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRThreadNetworkDiagnosticsClusterSecurityPolicy{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRThreadNetworkDiagnosticsClusterSecurityPolicyFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeSecurityPolicyWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6238,49 +5963,47 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurityPolic
 }
 
 // ReadAttributeChannelPage0Mask blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0Mask(ctx context.Context) (*foundation.NSData, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0Mask(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeChannelPage0MaskWithCompletionHandler(func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChannelPage0MaskWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeChannelPage0MaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelPage0MaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSData, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelPage0MaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeChannelPage0MaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeChannelPage0MaskWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -6292,16 +6015,13 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOperationalDataset
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeOperationalDatasetComponentsWithCompletionHandler(func(_p0 *raw.MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationalDatasetComponentsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6312,22 +6032,19 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOperationalDataset
 }
 
 // SubscribeAttributeOperationalDatasetComponentsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperationalDatasetComponentsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperationalDatasetComponentsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, error) {
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeOperationalDatasetComponentsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *raw.MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeOperationalDatasetComponentsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6338,580 +6055,556 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperationalDa
 }
 
 // ReadAttributeActiveNetworkFaultsList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFaultsList(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFaultsList(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeActiveNetworkFaultsListWithCompletionHandler(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveNetworkFaultsListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeActiveNetworkFaultsListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNetworkFaultsListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNetworkFaultsListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeActiveNetworkFaultsListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeActiveNetworkFaultsListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandList(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeGeneratedCommandListWithCompletionHandler(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandList(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeAcceptedCommandListWithCompletionHandler(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttributeList(ctx context.Context) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttributeList(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeAttributeListWithCompletionHandler(func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[objc.ID]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSArray[objc.ID], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[objc.ID]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeFeatureMap(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeFeatureMapWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeClusterRevision(ctx context.Context) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadAttributeClusterRevisionWithCompletionHandler(func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error) {
+func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSNumber
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(minInterval, maxInterval, params, subscriptionEstablishedHandler, func(_p0 *foundation.NSNumber, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSNumber
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-func (x *MTRBaseClusterThreadNetworkDiagnostics) asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster {
-	return &x.inner.MTRGenericBaseCluster
-}
-
-func (x *MTRBaseClusterThreadNetworkDiagnostics) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericBaseCluster.MTRCluster
-}
-
 // MTRBaseClusterThreadNetworkDiagnosticsable is the interface implemented by [MTRBaseClusterThreadNetworkDiagnostics], for mocking and DI.
 type MTRBaseClusterThreadNetworkDiagnosticsable interface {
-	Unwrap() *raw.MTRBaseClusterThreadNetworkDiagnostics
-	ResetCountsWithParamsCompletion(params *raw.MTRThreadNetworkDiagnosticsClusterResetCountsParams, completion func(unsafe.Pointer))
-	ResetCountsWithCompletion(completion func(unsafe.Pointer))
-	ReadAttributeChannelWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeChannelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRoutingRoleWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRoutingRoleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	obj.Object
+	ReadAttributeChannelWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeChannelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRoutingRoleWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRoutingRoleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
 	ReadAttributeNetworkNameWithCompletion(ctx context.Context) (string, error)
-	SubscribeAttributeNetworkNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (string, error)
-	ReadAttributePanIdWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributePanIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeExtendedPanIdWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeExtendedPanIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeMeshLocalPrefixWithCompletion(ctx context.Context) (*foundation.NSData, error)
-	SubscribeAttributeMeshLocalPrefixWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSData, error)
-	ReadAttributeOverrunCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeNeighborTableWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
-	SubscribeAttributeNeighborTableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
-	ReadAttributeRouteTableWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
-	SubscribeAttributeRouteTableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
-	ReadAttributePartitionIdWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributePartitionIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeWeightingWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeWeightingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeDataVersionWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeDataVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeStableDataVersionWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeStableDataVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeLeaderRouterIdWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeLeaderRouterIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeDetachedRoleCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeDetachedRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeChildRoleCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeChildRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRouterRoleCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRouterRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeLeaderRoleCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeLeaderRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeAttachAttemptCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributePartitionIdChangeCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributePartitionIdChangeCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeBetterPartitionAttachAttemptCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeBetterPartitionAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeParentChangeCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeParentChangeCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeTxTotalCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxTotalCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeTxUnicastCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxUnicastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeTxBroadcastCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxBroadcastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeTxAckRequestedCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxAckRequestedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeTxAckedCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxAckedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeTxNoAckRequestedCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxNoAckRequestedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeTxDataCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxDataCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeTxDataPollCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxDataPollCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeTxBeaconCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxBeaconCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeTxBeaconRequestCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeTxOtherCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeTxRetryCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxRetryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeTxDirectMaxRetryExpiryCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxDirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeTxIndirectMaxRetryExpiryCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxIndirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeTxErrCcaCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxErrCcaCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeTxErrAbortCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxErrAbortCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeTxErrBusyChannelCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxErrBusyChannelCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRxTotalCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxTotalCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRxUnicastCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxUnicastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRxBroadcastCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxBroadcastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRxDataCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxDataCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRxDataPollCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxDataPollCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRxBeaconCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxBeaconCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRxBeaconRequestCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRxOtherCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRxAddressFilteredCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxAddressFilteredCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRxDestAddrFilteredCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxDestAddrFilteredCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRxDuplicatedCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxDuplicatedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRxErrNoFrameCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxErrNoFrameCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRxErrUnknownNeighborCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxErrUnknownNeighborCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRxErrInvalidSrcAddrCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxErrInvalidSrcAddrCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRxErrSecCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxErrSecCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRxErrFcsCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxErrFcsCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeRxErrOtherCountWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxErrOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeActiveTimestampWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeActiveTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributePendingTimestampWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributePendingTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeDelayWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
+	SubscribeAttributeNetworkNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
+	ReadAttributePanIdWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributePanIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeExtendedPanIdWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeExtendedPanIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeMeshLocalPrefixWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeMeshLocalPrefixWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeOverrunCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeNeighborTableWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeNeighborTableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRouteTableWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRouteTableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributePartitionIdWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributePartitionIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeWeightingWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeWeightingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeDataVersionWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeDataVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeStableDataVersionWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeStableDataVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeLeaderRouterIdWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeLeaderRouterIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeDetachedRoleCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeDetachedRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeChildRoleCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeChildRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRouterRoleCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRouterRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeLeaderRoleCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeLeaderRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeAttachAttemptCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributePartitionIdChangeCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributePartitionIdChangeCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeBetterPartitionAttachAttemptCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeBetterPartitionAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeParentChangeCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeParentChangeCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeTxTotalCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxTotalCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeTxUnicastCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxUnicastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeTxBroadcastCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxBroadcastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeTxAckRequestedCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxAckRequestedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeTxAckedCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxAckedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeTxNoAckRequestedCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxNoAckRequestedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeTxDataCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxDataCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeTxDataPollCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxDataPollCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeTxBeaconCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxBeaconCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeTxBeaconRequestCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeTxOtherCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeTxRetryCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxRetryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeTxDirectMaxRetryExpiryCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxDirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeTxIndirectMaxRetryExpiryCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxIndirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeTxErrCcaCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxErrCcaCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeTxErrAbortCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxErrAbortCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeTxErrBusyChannelCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxErrBusyChannelCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRxTotalCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxTotalCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRxUnicastCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxUnicastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRxBroadcastCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxBroadcastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRxDataCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxDataCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRxDataPollCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxDataPollCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRxBeaconCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxBeaconCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRxBeaconRequestCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRxOtherCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRxAddressFilteredCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxAddressFilteredCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRxDestAddrFilteredCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxDestAddrFilteredCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRxDuplicatedCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxDuplicatedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRxErrNoFrameCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxErrNoFrameCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRxErrUnknownNeighborCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxErrUnknownNeighborCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRxErrInvalidSrcAddrCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxErrInvalidSrcAddrCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRxErrSecCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxErrSecCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRxErrFcsCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxErrFcsCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeRxErrOtherCountWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxErrOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeActiveTimestampWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeActiveTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributePendingTimestampWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributePendingTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeDelayWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
 	ReadAttributeSecurityPolicyWithCompletion(ctx context.Context) (*MTRThreadNetworkDiagnosticsClusterSecurityPolicy, error)
-	SubscribeAttributeSecurityPolicyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTRThreadNetworkDiagnosticsClusterSecurityPolicy, error)
-	ReadAttributeChannelPage0MaskWithCompletion(ctx context.Context) (*foundation.NSData, error)
-	SubscribeAttributeChannelPage0MaskWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSData, error)
+	SubscribeAttributeSecurityPolicyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRThreadNetworkDiagnosticsClusterSecurityPolicy, error)
+	ReadAttributeChannelPage0MaskWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeChannelPage0MaskWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
 	ReadAttributeOperationalDatasetComponentsWithCompletion(ctx context.Context) (*MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, error)
-	SubscribeAttributeOperationalDatasetComponentsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, error)
-	ReadAttributeActiveNetworkFaultsListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
-	SubscribeAttributeActiveNetworkFaultsListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
-	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
-	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
-	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
-	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
-	ReadAttributeAttributeListWithCompletion(ctx context.Context) (*foundation.NSArray[objc.ID], error)
-	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSArray[objc.ID], error)
-	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *raw.MTRSubscribeParams, subscriptionEstablished func()) (*foundation.NSNumber, error)
-	ResetCountsWithParamsCompletionHandler(params *raw.MTRThreadNetworkDiagnosticsClusterResetCountsParams, completionHandler func(unsafe.Pointer))
-	ResetCountsWithCompletionHandler(completionHandler func(unsafe.Pointer))
-	ReadAttributeChannel(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeChannelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRoutingRole(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRoutingRoleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
+	SubscribeAttributeOperationalDatasetComponentsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, error)
+	ReadAttributeActiveNetworkFaultsListWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeActiveNetworkFaultsListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
+	ReadAttributeChannel(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeChannelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRoutingRole(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRoutingRoleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
 	ReadAttributeNetworkName(ctx context.Context) (string, error)
-	SubscribeAttributeNetworkNameWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (string, error)
-	ReadAttributePanId(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributePanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeExtendedPanId(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeExtendedPanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeMeshLocalPrefix(ctx context.Context) (*foundation.NSData, error)
-	SubscribeAttributeMeshLocalPrefixWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSData, error)
-	ReadAttributeOverrunCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeNeighborTableList(ctx context.Context) (*foundation.NSArray[objc.ID], error)
-	SubscribeAttributeNeighborTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error)
-	ReadAttributeRouteTableList(ctx context.Context) (*foundation.NSArray[objc.ID], error)
-	SubscribeAttributeRouteTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error)
-	ReadAttributePartitionId(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributePartitionIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeWeighting(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeWeightingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeDataVersion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeStableDataVersion(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeStableDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeLeaderRouterId(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeLeaderRouterIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeDetachedRoleCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeDetachedRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeChildRoleCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeChildRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRouterRoleCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRouterRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeLeaderRoleCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeLeaderRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeAttachAttemptCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributePartitionIdChangeCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributePartitionIdChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeBetterPartitionAttachAttemptCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeBetterPartitionAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeParentChangeCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeParentChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeTxTotalCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeTxUnicastCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeTxBroadcastCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeTxAckRequestedCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeTxAckedCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxAckedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeTxNoAckRequestedCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxNoAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeTxDataCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeTxDataPollCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeTxBeaconCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeTxBeaconRequestCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeTxOtherCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeTxRetryCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxRetryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeTxDirectMaxRetryExpiryCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxDirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeTxIndirectMaxRetryExpiryCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxIndirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeTxErrCcaCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxErrCcaCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeTxErrAbortCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxErrAbortCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeTxErrBusyChannelCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeTxErrBusyChannelCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRxTotalCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRxUnicastCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRxBroadcastCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRxDataCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRxDataPollCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRxBeaconCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRxBeaconRequestCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRxOtherCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRxAddressFilteredCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxAddressFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRxDestAddrFilteredCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxDestAddrFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRxDuplicatedCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxDuplicatedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRxErrNoFrameCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxErrNoFrameCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRxErrUnknownNeighborCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxErrUnknownNeighborCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRxErrInvalidSrcAddrCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxErrInvalidSrcAddrCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRxErrSecCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxErrSecCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRxErrFcsCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxErrFcsCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeRxErrOtherCount(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeRxErrOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeActiveTimestamp(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeActiveTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributePendingTimestamp(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributePendingTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeDelay(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
+	SubscribeAttributeNetworkNameWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (string, error)
+	ReadAttributePanId(ctx context.Context) (obj.Object, error)
+	SubscribeAttributePanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeExtendedPanId(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeExtendedPanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeMeshLocalPrefix(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeMeshLocalPrefixWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeOverrunCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeNeighborTableList(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeNeighborTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRouteTableList(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRouteTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributePartitionId(ctx context.Context) (obj.Object, error)
+	SubscribeAttributePartitionIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeWeighting(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeWeightingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeDataVersion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeStableDataVersion(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeStableDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeLeaderRouterId(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeLeaderRouterIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeDetachedRoleCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeDetachedRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeChildRoleCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeChildRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRouterRoleCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRouterRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeLeaderRoleCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeLeaderRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeAttachAttemptCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributePartitionIdChangeCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributePartitionIdChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeBetterPartitionAttachAttemptCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeBetterPartitionAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeParentChangeCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeParentChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeTxTotalCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeTxUnicastCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeTxBroadcastCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeTxAckRequestedCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeTxAckedCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxAckedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeTxNoAckRequestedCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxNoAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeTxDataCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeTxDataPollCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeTxBeaconCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeTxBeaconRequestCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeTxOtherCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeTxRetryCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxRetryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeTxDirectMaxRetryExpiryCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxDirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeTxIndirectMaxRetryExpiryCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxIndirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeTxErrCcaCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxErrCcaCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeTxErrAbortCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxErrAbortCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeTxErrBusyChannelCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeTxErrBusyChannelCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRxTotalCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRxUnicastCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRxBroadcastCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRxDataCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRxDataPollCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRxBeaconCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRxBeaconRequestCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRxOtherCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRxAddressFilteredCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxAddressFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRxDestAddrFilteredCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxDestAddrFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRxDuplicatedCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxDuplicatedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRxErrNoFrameCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxErrNoFrameCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRxErrUnknownNeighborCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxErrUnknownNeighborCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRxErrInvalidSrcAddrCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxErrInvalidSrcAddrCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRxErrSecCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxErrSecCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRxErrFcsCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxErrFcsCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeRxErrOtherCount(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeRxErrOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeActiveTimestamp(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeActiveTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributePendingTimestamp(ctx context.Context) (obj.Object, error)
+	SubscribeAttributePendingTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeDelay(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
 	ReadAttributeSecurityPolicy(ctx context.Context) (*MTRThreadNetworkDiagnosticsClusterSecurityPolicy, error)
-	SubscribeAttributeSecurityPolicyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRThreadNetworkDiagnosticsClusterSecurityPolicy, error)
-	ReadAttributeChannelPage0Mask(ctx context.Context) (*foundation.NSData, error)
-	SubscribeAttributeChannelPage0MaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSData, error)
+	SubscribeAttributeSecurityPolicyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRThreadNetworkDiagnosticsClusterSecurityPolicy, error)
+	ReadAttributeChannelPage0Mask(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeChannelPage0MaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
 	ReadAttributeOperationalDatasetComponents(ctx context.Context) (*MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, error)
-	SubscribeAttributeOperationalDatasetComponentsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, error)
-	ReadAttributeActiveNetworkFaultsList(ctx context.Context) (*foundation.NSArray[objc.ID], error)
-	SubscribeAttributeActiveNetworkFaultsListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error)
-	ReadAttributeGeneratedCommandList(ctx context.Context) (*foundation.NSArray[objc.ID], error)
-	SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error)
-	ReadAttributeAcceptedCommandList(ctx context.Context) (*foundation.NSArray[objc.ID], error)
-	SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error)
-	ReadAttributeAttributeList(ctx context.Context) (*foundation.NSArray[objc.ID], error)
-	SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSArray[objc.ID], error)
-	ReadAttributeFeatureMap(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
-	ReadAttributeClusterRevision(ctx context.Context) (*foundation.NSNumber, error)
-	SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval *foundation.NSNumber, maxInterval *foundation.NSNumber, params *raw.MTRSubscribeParams, subscriptionEstablishedHandler func()) (*foundation.NSNumber, error)
+	SubscribeAttributeOperationalDatasetComponentsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, error)
+	ReadAttributeActiveNetworkFaultsList(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeActiveNetworkFaultsListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeAttributeList(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
+	ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error)
+	SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
 }
 
 var _ MTRBaseClusterThreadNetworkDiagnosticsable = (*MTRBaseClusterThreadNetworkDiagnostics)(nil)

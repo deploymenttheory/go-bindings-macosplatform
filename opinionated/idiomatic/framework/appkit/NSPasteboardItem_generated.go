@@ -6,171 +6,154 @@ package appkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An item on a pasteboard.
 //
-// PasteboardItem wraps [raw.NSPasteboardItem] with a fluent Go API.
+// PasteboardItem is an idiomatic wrapper over the Objective-C class NSPasteboardItem.
 type PasteboardItem struct {
-	inner *raw.NSPasteboardItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPasteboardItem].
-func (x *PasteboardItem) Unwrap() *raw.NSPasteboardItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PasteboardItem) ID() objc.ID { return x.inner.Ptr() }
-
-// PasteboardItemFromID adopts an existing object pointer as a PasteboardItem (nil for 0).
+// PasteboardItemFromID adopts an existing Objective-C object as a PasteboardItem
+// (nil for 0), retaining it and registering a release finalizer.
 func PasteboardItemFromID(id objc.ID) *PasteboardItem {
 	if id == 0 {
 		return nil
 	}
-	return &PasteboardItem{inner: raw.NSPasteboardItemFromID(id)}
+	x := &PasteboardItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPasteboardItem creates a new [PasteboardItem].
+// pasteboardItemAdopt wraps an Objective-C object that this code just created as a
+// PasteboardItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pasteboardItemAdopt(id objc.ID) *PasteboardItem {
+	if id == 0 {
+		return nil
+	}
+	x := &PasteboardItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PasteboardItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PasteboardItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PasteboardItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPasteboardItem creates a new PasteboardItem.
 func NewPasteboardItem() *PasteboardItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPasteboardItem")), objc.RegisterName("new"))
-	return &PasteboardItem{inner: raw.NSPasteboardItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPasteboardItem")), objc.RegisterName("new"))
+	return pasteboardItemAdopt(_id)
 }
 
 // Returns from a given array of types the first type within the pasteboard item, according to the ordering of types.
-//
-// AvailableTypeFromArray calls the underlying AvailableTypeFromArray.
-func (x *PasteboardItem) AvailableTypeFromArray(types *foundation.NSArray[*foundation.NSString]) string {
-	_r := x.inner.AvailableTypeFromArray(types)
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// Sets the data provider for the specified types.
-//
-// SetDataProviderForTypes calls the underlying SetDataProviderForTypes.
-func (x *PasteboardItem) SetDataProviderForTypes(dataProvider raw.NSPasteboardItemDataProvider, types *foundation.NSArray[*foundation.NSString]) bool {
-	return x.inner.SetDataProviderForTypes(dataProvider, types)
+func (x *PasteboardItem) AvailableTypeFromArray(types []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableTypeFromArray:"), purego.SliceToNSArray(types, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return obj.Wrap(_r)
 }
 
 // Sets the value for a specified type as a data object.
-//
-// SetDataForType calls the underlying SetDataForType.
-func (x *PasteboardItem) SetDataForType(data *foundation.NSData, type_ *foundation.NSString) bool {
-	return x.inner.SetDataForType(data, type_)
+func (x *PasteboardItem) SetDataForType(data obj.Object, type_ obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setData:forType:"), objref.IDOf(data), objref.IDOf(type_))
+	return _r
 }
 
 // Sets the value for a specified type as a string.
-//
-// SetStringForType calls the underlying SetStringForType.
-func (x *PasteboardItem) SetStringForType(string_ string, type_ *foundation.NSString) bool {
-	return x.inner.SetStringForType(foundation.NSStringStringWithUTF8String(string_), type_)
+func (x *PasteboardItem) SetStringForType(string_ string, type_ obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setString:forType:"), purego.NSString(string_), objref.IDOf(type_))
+	return _r
 }
 
 // Sets the value for a specified type as a property list.
-//
-// SetPropertyListForType calls the underlying SetPropertyListForType.
-func (x *PasteboardItem) SetPropertyListForType(propertyList objc.ID, type_ *foundation.NSString) bool {
-	return x.inner.SetPropertyListForType(propertyList, type_)
+func (x *PasteboardItem) SetPropertyListForType(propertyList obj.Object, type_ obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setPropertyList:forType:"), objref.IDOf(propertyList), objref.IDOf(type_))
+	return _r
 }
 
 // Returns the value for the specified type as a data object.
-//
-// DataForType calls the underlying DataForType.
-func (x *PasteboardItem) DataForType(type_ *foundation.NSString) *foundation.NSData {
-	return x.inner.DataForType(type_)
+func (x *PasteboardItem) DataForType(type_ obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataForType:"), objref.IDOf(type_))
+	return obj.Wrap(_r)
 }
 
 // Returns the value for the specified type as a string.
-//
-// StringForType calls the underlying StringForType.
-func (x *PasteboardItem) StringForType(type_ *foundation.NSString) string {
-	_r := x.inner.StringForType(type_)
-	if _r == nil {
+func (x *PasteboardItem) StringForType(type_ obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringForType:"), objref.IDOf(type_))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Returns the value for the specified type as a property list.
-//
-// PropertyListForType calls the underlying PropertyListForType.
-func (x *PasteboardItem) PropertyListForType(type_ *foundation.NSString) objc.ID {
-	return x.inner.PropertyListForType(type_)
+func (x *PasteboardItem) PropertyListForType(type_ obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyListForType:"), objref.IDOf(type_))
+	return obj.Wrap(_r)
 }
 
 // Determines whether this pasteboard item matches the specified patterns, without notifying the person using the app.
 //
 // DetectPatternsForPatterns blocks until the operation completes or ctx is cancelled.
-func (x *PasteboardItem) DetectPatternsForPatterns(ctx context.Context, patterns *foundation.NSSet[*foundation.NSString]) (*foundation.NSSet[*foundation.NSString], error) {
+func (x *PasteboardItem) DetectPatternsForPatterns(ctx context.Context, patterns obj.Object) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSSet[*foundation.NSString]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.DetectPatternsForPatternsCompletionHandler(patterns, func(_p0 *foundation.NSSet[*foundation.NSString], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detectPatternsForPatterns:completionHandler:"), objref.IDOf(patterns), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSSet[*foundation.NSString]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Determines whether this pasteboard item matches the specified patterns, reading the contents if it finds a match.
-//
-// DetectValuesForPatternsCompletionHandler calls the underlying DetectValuesForPatternsCompletionHandler.
-func (x *PasteboardItem) DetectValuesForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler func(*foundation.NSDictionary[*foundation.NSString, objc.ID], unsafe.Pointer)) {
-	x.inner.DetectValuesForPatternsCompletionHandler(patterns, completionHandler)
-}
-
-// Determines available metadata from the specified metadata types for this pasteboard item, without notifying the person using the app.
-//
-// DetectMetadataForTypesCompletionHandler calls the underlying DetectMetadataForTypesCompletionHandler.
-func (x *PasteboardItem) DetectMetadataForTypesCompletionHandler(types *foundation.NSSet[*foundation.NSString], completionHandler func(*foundation.NSDictionary[*foundation.NSString, objc.ID], unsafe.Pointer)) {
-	x.inner.DetectMetadataForTypesCompletionHandler(types, completionHandler)
-}
-
 // Types returns the collection as a Go slice.
-func (x *PasteboardItem) Types() []*foundation.NSString {
-	arr := x.inner.Types()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *PasteboardItem) Types() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("types"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PasteboardItemable is the interface implemented by [PasteboardItem], for mocking and DI.
 type PasteboardItemable interface {
-	Unwrap() *raw.NSPasteboardItem
-	AvailableTypeFromArray(types *foundation.NSArray[*foundation.NSString]) string
-	SetDataProviderForTypes(dataProvider raw.NSPasteboardItemDataProvider, types *foundation.NSArray[*foundation.NSString]) bool
-	SetDataForType(data *foundation.NSData, type_ *foundation.NSString) bool
-	SetStringForType(string_ string, type_ *foundation.NSString) bool
-	SetPropertyListForType(propertyList objc.ID, type_ *foundation.NSString) bool
-	DataForType(type_ *foundation.NSString) *foundation.NSData
-	StringForType(type_ *foundation.NSString) string
-	PropertyListForType(type_ *foundation.NSString) objc.ID
-	DetectPatternsForPatterns(ctx context.Context, patterns *foundation.NSSet[*foundation.NSString]) (*foundation.NSSet[*foundation.NSString], error)
-	DetectValuesForPatternsCompletionHandler(patterns *foundation.NSSet[*foundation.NSString], completionHandler func(*foundation.NSDictionary[*foundation.NSString, objc.ID], unsafe.Pointer))
-	DetectMetadataForTypesCompletionHandler(types *foundation.NSSet[*foundation.NSString], completionHandler func(*foundation.NSDictionary[*foundation.NSString, objc.ID], unsafe.Pointer))
-	Types() []*foundation.NSString
+	obj.Object
+	AvailableTypeFromArray(types []obj.Object) obj.Object
+	SetDataForType(data obj.Object, type_ obj.Object) bool
+	SetStringForType(string_ string, type_ obj.Object) bool
+	SetPropertyListForType(propertyList obj.Object, type_ obj.Object) bool
+	DataForType(type_ obj.Object) obj.Object
+	StringForType(type_ obj.Object) string
+	PropertyListForType(type_ obj.Object) obj.Object
+	DetectPatternsForPatterns(ctx context.Context, patterns obj.Object) (obj.Object, error)
+	Types() []obj.Object
 }
 
 var _ PasteboardItemable = (*PasteboardItem)(nil)

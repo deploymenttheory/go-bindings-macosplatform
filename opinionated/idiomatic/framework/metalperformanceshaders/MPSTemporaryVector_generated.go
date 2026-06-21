@@ -5,67 +5,89 @@
 package metalperformanceshaders
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A vector allocated on GPU private memory.
 //
-// TemporaryVector wraps [raw.MPSTemporaryVector] with a fluent Go API.
+// TemporaryVector is an idiomatic wrapper over the Objective-C class MPSTemporaryVector.
 type TemporaryVector struct {
-	inner *raw.MPSTemporaryVector
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSTemporaryVector].
-func (x *TemporaryVector) Unwrap() *raw.MPSTemporaryVector { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TemporaryVector) ID() objc.ID { return x.inner.Ptr() }
-
-// TemporaryVectorFromID adopts an existing object pointer as a TemporaryVector (nil for 0).
+// TemporaryVectorFromID adopts an existing Objective-C object as a TemporaryVector
+// (nil for 0), retaining it and registering a release finalizer.
 func TemporaryVectorFromID(id objc.ID) *TemporaryVector {
 	if id == 0 {
 		return nil
 	}
-	return &TemporaryVector{inner: raw.MPSTemporaryVectorFromID(id)}
-}
-
-// NewTemporaryVector creates a new [TemporaryVector].
-func NewTemporaryVector() *TemporaryVector {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSTemporaryVector")), objc.RegisterName("new"))
-	return &TemporaryVector{inner: raw.MPSTemporaryVectorFromID(_id)}
-}
-
-// @abstract       The number of times a temporary vector may be read by a MPSMatrix... kernel before its contents become undefined. @discussion     MPSTemporaryVector objects must release their underlying buffers for reuse immediately after last use. So as to facilitate *prompt* convenient memory recycling, each time a MPSTemporaryVector is read by a MPSMatrix... -encode... method, its readCount is automatically decremented. When the readCount reaches 0, the underlying buffer is automatically made available for reuse to MPS for its own needs and for other MPSTemporaryVector objects prior to return from the -encode.. function. The contents of the buffer become undefined at this time. By default, the readCount is initialized to 1, indicating a matrix that may be overwritten any number of times, but read only once. You may change the readCount as desired to allow MPSMatrix kernels to read the MPSTemporaryVector additional times. However, it is an error to change the readCount once it is zero. It is an error to read or write to a MPSTemporaryVector with a zero readCount. You may set the readCount to 0 yourself to cause the underlying buffer to be returned to MPS. Writing to a MPSTemporaryVector does not adjust the readCount. The Metal API Validation layer will assert if a MPSTemporaryVector is deallocated with non-zero readCount to help identify cases when resources are not returned promptly.
-//
-// WithReadCount sets the readCount property and returns the receiver for chaining.
-func (x *TemporaryVector) WithReadCount(readCount uint) *TemporaryVector {
-	x.inner.SetReadCount(readCount)
+	x := &TemporaryVector{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @abstract       The number of times a temporary vector may be read by a MPSMatrix... kernel before its contents become undefined. @discussion     MPSTemporaryVector objects must release their underlying buffers for reuse immediately after last use. So as to facilitate *prompt* convenient memory recycling, each time a MPSTemporaryVector is read by a MPSMatrix... -encode... method, its readCount is automatically decremented. When the readCount reaches 0, the underlying buffer is automatically made available for reuse to MPS for its own needs and for other MPSTemporaryVector objects prior to return from the -encode.. function. The contents of the buffer become undefined at this time. By default, the readCount is initialized to 1, indicating a matrix that may be overwritten any number of times, but read only once. You may change the readCount as desired to allow MPSMatrix kernels to read the MPSTemporaryVector additional times. However, it is an error to change the readCount once it is zero. It is an error to read or write to a MPSTemporaryVector with a zero readCount. You may set the readCount to 0 yourself to cause the underlying buffer to be returned to MPS. Writing to a MPSTemporaryVector does not adjust the readCount. The Metal API Validation layer will assert if a MPSTemporaryVector is deallocated with non-zero readCount to help identify cases when resources are not returned promptly.
+// temporaryVectorAdopt wraps an Objective-C object that this code just created as a
+// TemporaryVector (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func temporaryVectorAdopt(id objc.ID) *TemporaryVector {
+	if id == 0 {
+		return nil
+	}
+	x := &TemporaryVector{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TemporaryVector) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TemporaryVector) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TemporaryVector) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTemporaryVector creates a new TemporaryVector.
+func NewTemporaryVector() *TemporaryVector {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSTemporaryVector")), objc.RegisterName("new"))
+	return temporaryVectorAdopt(_id)
+}
+
+// The number of times a temporary vector may be read by a MPSMatrix... kernel before its contents become undefined. MPSTemporaryVector objects must release their underlying buffers for reuse immediately after last use. So as to facilitate *prompt* convenient memory recycling, each time a MPSTemporaryVector is read by a MPSMatrix... -encode... method, its readCount is automatically decremented. When the readCount reaches 0, the underlying buffer is automatically made available for reuse to MPS for its own needs and for other MPSTemporaryVector objects prior to return from the -encode.. function. The contents of the buffer become undefined at this time. By default, the readCount is initialized to 1, indicating a matrix that may be overwritten any number of times, but read only once. You may change the readCount as desired to allow MPSMatrix kernels to read the MPSTemporaryVector additional times. However, it is an error to change the readCount once it is zero. It is an error to read or write to a MPSTemporaryVector with a zero readCount. You may set the readCount to 0 yourself to cause the underlying buffer to be returned to MPS. Writing to a MPSTemporaryVector does not adjust the readCount. The Metal API Validation layer will assert if a MPSTemporaryVector is deallocated with non-zero readCount to help identify cases when resources are not returned promptly.
 //
-// ReadCount calls the underlying ReadCount.
-func (x *TemporaryVector) ReadCount() uint {
-	return x.inner.ReadCount()
+// WithReadCount sets readCount and returns the receiver so calls can be chained.
+func (x *TemporaryVector) WithReadCount(readCount int) *TemporaryVector {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
+	return x
 }
 
-// SetReadCount calls the underlying SetReadCount.
-func (x *TemporaryVector) SetReadCount(readCount uint) {
-	x.inner.SetReadCount(readCount)
+// The number of times a temporary vector may be read by a MPSMatrix... kernel before its contents become undefined. MPSTemporaryVector objects must release their underlying buffers for reuse immediately after last use. So as to facilitate *prompt* convenient memory recycling, each time a MPSTemporaryVector is read by a MPSMatrix... -encode... method, its readCount is automatically decremented. When the readCount reaches 0, the underlying buffer is automatically made available for reuse to MPS for its own needs and for other MPSTemporaryVector objects prior to return from the -encode.. function. The contents of the buffer become undefined at this time. By default, the readCount is initialized to 1, indicating a matrix that may be overwritten any number of times, but read only once. You may change the readCount as desired to allow MPSMatrix kernels to read the MPSTemporaryVector additional times. However, it is an error to change the readCount once it is zero. It is an error to read or write to a MPSTemporaryVector with a zero readCount. You may set the readCount to 0 yourself to cause the underlying buffer to be returned to MPS. Writing to a MPSTemporaryVector does not adjust the readCount. The Metal API Validation layer will assert if a MPSTemporaryVector is deallocated with non-zero readCount to help identify cases when resources are not returned promptly.
+func (x *TemporaryVector) ReadCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("readCount"))
+	return _r
 }
 
-func (x *TemporaryVector) asVector() *mpscore.MPSVector { return &x.inner.MPSVector }
+func (x *TemporaryVector) SetReadCount(readCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
+}
 
 // TemporaryVectorable is the interface implemented by [TemporaryVector], for mocking and DI.
 type TemporaryVectorable interface {
-	Unwrap() *raw.MPSTemporaryVector
-	WithReadCount(readCount uint) *TemporaryVector
-	ReadCount() uint
-	SetReadCount(readCount uint)
+	obj.Object
+	WithReadCount(readCount int) *TemporaryVector
+	ReadCount() int
+	SetReadCount(readCount int)
 }
 
 var _ TemporaryVectorable = (*TemporaryVector)(nil)

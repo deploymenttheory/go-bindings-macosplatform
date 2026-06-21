@@ -5,14 +5,11 @@
 package speech
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// SFSpeechErrorDomain returns the string constant SFSpeechErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func SFSpeechErrorDomain() objc.ID {
-	if _r := raw.SFSpeechErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// SFSpeechErrorDomain returns the string constant SFSpeechErrorDomain, for use as a dictionary key or argument.
+func SFSpeechErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SFSpeechErrorDomain")))
 }

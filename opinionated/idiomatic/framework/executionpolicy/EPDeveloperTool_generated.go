@@ -5,55 +5,79 @@
 package executionpolicy
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/executionpolicy"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DeveloperTool wraps [raw.EPDeveloperTool] with a fluent Go API.
+// DeveloperTool is an idiomatic wrapper over the Objective-C class EPDeveloperTool.
 type DeveloperTool struct {
-	inner *raw.EPDeveloperTool
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.EPDeveloperTool].
-func (x *DeveloperTool) Unwrap() *raw.EPDeveloperTool { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DeveloperTool) ID() objc.ID { return x.inner.Ptr() }
-
-// DeveloperToolFromID adopts an existing object pointer as a DeveloperTool (nil for 0).
+// DeveloperToolFromID adopts an existing Objective-C object as a DeveloperTool
+// (nil for 0), retaining it and registering a release finalizer.
 func DeveloperToolFromID(id objc.ID) *DeveloperTool {
 	if id == 0 {
 		return nil
 	}
-	return &DeveloperTool{inner: raw.EPDeveloperToolFromID(id)}
+	x := &DeveloperTool{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDeveloperTool creates a new [DeveloperTool].
+// developerToolAdopt wraps an Objective-C object that this code just created as a
+// DeveloperTool (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func developerToolAdopt(id objc.ID) *DeveloperTool {
+	if id == 0 {
+		return nil
+	}
+	x := &DeveloperTool{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DeveloperTool) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DeveloperTool) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DeveloperTool) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDeveloperTool creates a new DeveloperTool.
 func NewDeveloperTool() *DeveloperTool {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("EPDeveloperTool")), objc.RegisterName("new"))
-	return &DeveloperTool{inner: raw.EPDeveloperToolFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("EPDeveloperTool")), objc.RegisterName("new"))
+	return developerToolAdopt(_id)
 }
 
 // Checks whether developer tool privileges are already available and if not populates an entry in Settings for user approval. This method does not show any UI to the user or guide them towards Settings for approval, if necessary. - Parameter handler: A block called asynchronously with whether the privilege is available. > New info > Concurrency Note: You can call this method from synchronous code using a completion handler, > as shown on this page, or you can call it as an asynchronous method that has the > following declaration: > > ```swift > func requestAccess() async -> Bool > ``` > > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
-//
-// RequestDeveloperToolAccessWithCompletionHandler calls the underlying RequestDeveloperToolAccessWithCompletionHandler.
 func (x *DeveloperTool) RequestDeveloperToolAccessWithCompletionHandler(handler func(bool)) {
-	x.inner.RequestDeveloperToolAccessWithCompletionHandler(handler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestDeveloperToolAccessWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { handler(_b0) }))
 }
 
 // The current authorization status of the current process. - Returns: An EPDeveloperToolStatus indicating whether the current process has developer tool privileges.
-//
-// AuthorizationStatus calls the underlying AuthorizationStatus.
-func (x *DeveloperTool) AuthorizationStatus() EPDeveloperToolStatus {
-	return EPDeveloperToolStatus(x.inner.AuthorizationStatus())
+func (x *DeveloperTool) AuthorizationStatus() DeveloperToolStatus {
+	_r := objc.Send[DeveloperToolStatus](objref.IDOf(x), objc.RegisterName("authorizationStatus"))
+	return _r
 }
 
 // DeveloperToolable is the interface implemented by [DeveloperTool], for mocking and DI.
 type DeveloperToolable interface {
-	Unwrap() *raw.EPDeveloperTool
+	obj.Object
 	RequestDeveloperToolAccessWithCompletionHandler(handler func(bool))
-	AuthorizationStatus() EPDeveloperToolStatus
+	AuthorizationStatus() DeveloperToolStatus
 }
 
 var _ DeveloperToolable = (*DeveloperTool)(nil)

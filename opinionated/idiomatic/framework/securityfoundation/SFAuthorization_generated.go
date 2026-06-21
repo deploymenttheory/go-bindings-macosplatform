@@ -5,100 +5,81 @@
 package securityfoundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/security"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A class that allows you to restrict a user’s access to particular features in your Mac app or daemon.
 //
-// Authorization wraps [raw.SFAuthorization] with a fluent Go API.
+// Authorization is an idiomatic wrapper over the Objective-C class SFAuthorization.
 type Authorization struct {
-	inner *raw.SFAuthorization
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFAuthorization].
-func (x *Authorization) Unwrap() *raw.SFAuthorization { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Authorization) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationFromID adopts an existing object pointer as a Authorization (nil for 0).
+// AuthorizationFromID adopts an existing Objective-C object as a Authorization
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationFromID(id objc.ID) *Authorization {
 	if id == 0 {
 		return nil
 	}
-	return &Authorization{inner: raw.SFAuthorizationFromID(id)}
+	x := &Authorization{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorization creates a new [Authorization].
+// authorizationAdopt wraps an Objective-C object that this code just created as a
+// Authorization (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationAdopt(id objc.ID) *Authorization {
+	if id == 0 {
+		return nil
+	}
+	x := &Authorization{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Authorization) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Authorization) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Authorization) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAuthorization creates a new Authorization.
 func NewAuthorization() *Authorization {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFAuthorization")), objc.RegisterName("new"))
-	return &Authorization{inner: raw.SFAuthorizationFromID(_id)}
-}
-
-// Initializes an authorization object with the specified flags, rights, and environment.
-//
-// NewAuthorizationWithFlagsRightsEnvironment creates a new [Authorization].
-func NewAuthorizationWithFlagsRightsEnvironment(flags security.AuthorizationFlags, rights *security.AuthorizationItemSet, environment *security.AuthorizationItemSet) *Authorization {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SFAuthorization")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFlags:rights:environment:"), flags, rights, environment)
-	return &Authorization{inner: raw.SFAuthorizationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFAuthorization")), objc.RegisterName("new"))
+	return authorizationAdopt(_id)
 }
 
 // Returns the authorization reference for this object.
-//
-// AuthorizationRef calls the underlying AuthorizationRef.
-func (x *Authorization) AuthorizationRef() unsafe.Pointer {
-	return x.inner.AuthorizationRef()
+func (x *Authorization) AuthorizationRef() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorizationRef"))
+	return obj.Wrap(_r)
 }
 
 // Prevents any rights that were obtained by this object from being preserved.
-//
-// InvalidateCredentials calls the underlying InvalidateCredentials.
 func (x *Authorization) InvalidateCredentials() {
-	x.inner.InvalidateCredentials()
-}
-
-// Authorizes and preauthorizes one specific right.
-//
-// ObtainWithRightFlagsError calls the underlying ObtainWithRightFlagsError.
-func (x *Authorization) ObtainWithRightFlagsError(rightName string, flags security.AuthorizationFlags) (bool, error) {
-	return x.inner.ObtainWithRightFlagsError(rightName, flags)
-}
-
-// Authorizes and preauthorizes rights to access a privileged operation and returns the granted rights.
-//
-// ObtainWithRightsFlagsEnvironmentAuthorizedRightsError calls the underlying ObtainWithRightsFlagsEnvironmentAuthorizedRightsError.
-func (x *Authorization) ObtainWithRightsFlagsEnvironmentAuthorizedRightsError(rights *security.AuthorizationItemSet, flags security.AuthorizationFlags, environment *security.AuthorizationItemSet, authorizedRights *security.AuthorizationItemSet) (bool, error) {
-	return x.inner.ObtainWithRightsFlagsEnvironmentAuthorizedRightsError(rights, flags, environment, authorizedRights)
-}
-
-// Authorizes and preauthorizes rights to access a privileged operation and returns the granted rights.
-//
-// PermitWithRightsFlagsEnvironmentAuthorizedRights calls the underlying PermitWithRightsFlagsEnvironmentAuthorizedRights.
-func (x *Authorization) PermitWithRightsFlagsEnvironmentAuthorizedRights(rights *security.AuthorizationItemSet, flags security.AuthorizationFlags, environment *security.AuthorizationItemSet, authorizedRights *security.AuthorizationItemSet) int {
-	return x.inner.PermitWithRightsFlagsEnvironmentAuthorizedRights(rights, flags, environment, authorizedRights)
-}
-
-// Authorizes and preauthorizes one specific right.
-//
-// PermitWithRightFlags calls the underlying PermitWithRightFlags.
-func (x *Authorization) PermitWithRightFlags(rightName string, flags security.AuthorizationFlags) int {
-	return x.inner.PermitWithRightFlags(rightName, flags)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateCredentials"))
 }
 
 // Authorizationable is the interface implemented by [Authorization], for mocking and DI.
 type Authorizationable interface {
-	Unwrap() *raw.SFAuthorization
-	AuthorizationRef() unsafe.Pointer
+	obj.Object
+	AuthorizationRef() obj.Object
 	InvalidateCredentials()
-	ObtainWithRightFlagsError(rightName string, flags security.AuthorizationFlags) (bool, error)
-	ObtainWithRightsFlagsEnvironmentAuthorizedRightsError(rights *security.AuthorizationItemSet, flags security.AuthorizationFlags, environment *security.AuthorizationItemSet, authorizedRights *security.AuthorizationItemSet) (bool, error)
-	PermitWithRightsFlagsEnvironmentAuthorizedRights(rights *security.AuthorizationItemSet, flags security.AuthorizationFlags, environment *security.AuthorizationItemSet, authorizedRights *security.AuthorizationItemSet) int
-	PermitWithRightFlags(rightName string, flags security.AuthorizationFlags) int
 }
 
 var _ Authorizationable = (*Authorization)(nil)

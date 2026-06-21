@@ -5,102 +5,100 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A layout object that lets you combine items in highly adaptive and flexible visual arrangements.
 //
-// CollectionViewCompositionalLayout wraps [raw.NSCollectionViewCompositionalLayout] with a fluent Go API.
+// CollectionViewCompositionalLayout is an idiomatic wrapper over the Objective-C class NSCollectionViewCompositionalLayout.
 type CollectionViewCompositionalLayout struct {
-	inner *raw.NSCollectionViewCompositionalLayout
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCollectionViewCompositionalLayout].
-func (x *CollectionViewCompositionalLayout) Unwrap() *raw.NSCollectionViewCompositionalLayout {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionViewCompositionalLayout) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionViewCompositionalLayoutFromID adopts an existing object pointer as a CollectionViewCompositionalLayout (nil for 0).
+// CollectionViewCompositionalLayoutFromID adopts an existing Objective-C object as a CollectionViewCompositionalLayout
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionViewCompositionalLayoutFromID(id objc.ID) *CollectionViewCompositionalLayout {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionViewCompositionalLayout{inner: raw.NSCollectionViewCompositionalLayoutFromID(id)}
+	x := &CollectionViewCompositionalLayout{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// collectionViewCompositionalLayoutAdopt wraps an Objective-C object that this code just created as a
+// CollectionViewCompositionalLayout (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionViewCompositionalLayoutAdopt(id objc.ID) *CollectionViewCompositionalLayout {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionViewCompositionalLayout{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollectionViewCompositionalLayout) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollectionViewCompositionalLayout) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollectionViewCompositionalLayout) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a compositional layout object with a single section.
 //
-// NewCollectionViewCompositionalLayoutWithSection creates a new [CollectionViewCompositionalLayout].
-func NewCollectionViewCompositionalLayoutWithSection(section *raw.NSCollectionLayoutSection) *CollectionViewCompositionalLayout {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionViewCompositionalLayout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSection:"), section.Ptr())
-	return &CollectionViewCompositionalLayout{inner: raw.NSCollectionViewCompositionalLayoutFromID(_id)}
+// NewCollectionViewCompositionalLayoutWithSection creates a new CollectionViewCompositionalLayout.
+func NewCollectionViewCompositionalLayoutWithSection(section *CollectionLayoutSection) *CollectionViewCompositionalLayout {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewCompositionalLayout")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSection:"), objref.IDOf(section))
+	return collectionViewCompositionalLayoutAdopt(_id)
 }
 
 // Creates a compositional layout object with a single section and an additional configuration.
 //
-// NewCollectionViewCompositionalLayoutWithSectionConfiguration creates a new [CollectionViewCompositionalLayout].
-func NewCollectionViewCompositionalLayoutWithSectionConfiguration(section *raw.NSCollectionLayoutSection, configuration *raw.NSCollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionViewCompositionalLayout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSection:configuration:"), section.Ptr(), configuration.Ptr())
-	return &CollectionViewCompositionalLayout{inner: raw.NSCollectionViewCompositionalLayoutFromID(_id)}
-}
-
-// Creates a compositional layout object with a section provider to supply the layout’s sections.
-//
-// NewCollectionViewCompositionalLayoutWithSectionProvider creates a new [CollectionViewCompositionalLayout].
-func NewCollectionViewCompositionalLayoutWithSectionProvider(sectionProvider objc.Block) *CollectionViewCompositionalLayout {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionViewCompositionalLayout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSectionProvider:"), sectionProvider)
-	return &CollectionViewCompositionalLayout{inner: raw.NSCollectionViewCompositionalLayoutFromID(_id)}
-}
-
-// Creates a compositional layout object with a section provider and an additional configuration.
-//
-// NewCollectionViewCompositionalLayoutWithSectionProviderConfiguration creates a new [CollectionViewCompositionalLayout].
-func NewCollectionViewCompositionalLayoutWithSectionProviderConfiguration(sectionProvider objc.Block, configuration *raw.NSCollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionViewCompositionalLayout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSectionProvider:configuration:"), sectionProvider, configuration.Ptr())
-	return &CollectionViewCompositionalLayout{inner: raw.NSCollectionViewCompositionalLayoutFromID(_id)}
+// NewCollectionViewCompositionalLayoutWithSectionConfiguration creates a new CollectionViewCompositionalLayout.
+func NewCollectionViewCompositionalLayoutWithSectionConfiguration(section *CollectionLayoutSection, configuration *CollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewCompositionalLayout")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSection:configuration:"), objref.IDOf(section), objref.IDOf(configuration))
+	return collectionViewCompositionalLayoutAdopt(_id)
 }
 
 // The layout’s configuration, such as its scroll direction and section spacing.
 //
-// WithConfiguration sets the configuration property and returns the receiver for chaining.
+// WithConfiguration sets configuration and returns the receiver so calls can be chained.
 func (x *CollectionViewCompositionalLayout) WithConfiguration(configuration *CollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout {
-	x.inner.SetConfiguration(configuration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
-// Configuration calls the underlying Configuration.
 func (x *CollectionViewCompositionalLayout) Configuration() *CollectionViewCompositionalLayoutConfiguration {
-	_r := x.inner.Configuration()
-	if _r == nil {
-		return nil
-	}
-	return &CollectionViewCompositionalLayoutConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
+	return CollectionViewCompositionalLayoutConfigurationFromID(_r)
 }
 
-// SetConfiguration calls the underlying SetConfiguration.
-func (x *CollectionViewCompositionalLayout) SetConfiguration(configuration *raw.NSCollectionViewCompositionalLayoutConfiguration) {
-	x.inner.SetConfiguration(configuration)
-}
-
-func (x *CollectionViewCompositionalLayout) asCollectionViewLayout() *raw.NSCollectionViewLayout {
-	return &x.inner.NSCollectionViewLayout
+func (x *CollectionViewCompositionalLayout) SetConfiguration(configuration *CollectionViewCompositionalLayoutConfiguration) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 }
 
 // CollectionViewCompositionalLayoutable is the interface implemented by [CollectionViewCompositionalLayout], for mocking and DI.
 type CollectionViewCompositionalLayoutable interface {
-	Unwrap() *raw.NSCollectionViewCompositionalLayout
+	obj.Object
 	WithConfiguration(configuration *CollectionViewCompositionalLayoutConfiguration) *CollectionViewCompositionalLayout
 	Configuration() *CollectionViewCompositionalLayoutConfiguration
-	SetConfiguration(configuration *raw.NSCollectionViewCompositionalLayoutConfiguration)
+	SetConfiguration(configuration *CollectionViewCompositionalLayoutConfiguration)
 }
 
 var _ CollectionViewCompositionalLayoutable = (*CollectionViewCompositionalLayout)(nil)

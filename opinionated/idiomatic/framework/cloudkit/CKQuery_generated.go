@@ -5,120 +5,118 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A query that describes the criteria to apply when searching for records in a database.
 //
-// Query wraps [raw.CKQuery] with a fluent Go API.
+// Query is an idiomatic wrapper over the Objective-C class CKQuery.
 type Query struct {
-	inner *raw.CKQuery
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKQuery].
-func (x *Query) Unwrap() *raw.CKQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Query) ID() objc.ID { return x.inner.Ptr() }
-
-// QueryFromID adopts an existing object pointer as a Query (nil for 0).
+// QueryFromID adopts an existing Objective-C object as a Query
+// (nil for 0), retaining it and registering a release finalizer.
 func QueryFromID(id objc.ID) *Query {
 	if id == 0 {
 		return nil
 	}
-	return &Query{inner: raw.CKQueryFromID(id)}
+	x := &Query{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// queryAdopt wraps an Objective-C object that this code just created as a
+// Query (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func queryAdopt(id objc.ID) *Query {
+	if id == 0 {
+		return nil
+	}
+	x := &Query{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Query) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Query) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Query) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an operation group from a serialized instance.
 //
-// NewQueryWithCoder creates a new [Query].
-func NewQueryWithCoder(aDecoder *foundation.NSCoder) *Query {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), aDecoder.Ptr())
-	return &Query{inner: raw.CKQueryFromID(_id)}
+// NewQueryWithCoder creates a new Query.
+func NewQueryWithCoder(aDecoder obj.Object) *Query {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
+	return queryAdopt(_id)
 }
 
 // Creates a query with the specified record type and predicate.
 //
-// NewQueryWithRecordTypePredicate creates a new [Query].
-func NewQueryWithRecordTypePredicate(recordType *foundation.NSString, predicate *foundation.NSPredicate) *Query {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordType:predicate:"), recordType.Ptr(), predicate.Ptr())
-	return &Query{inner: raw.CKQueryFromID(_id)}
+// NewQueryWithRecordTypePredicate creates a new Query.
+func NewQueryWithRecordTypePredicate(recordType obj.Object, predicate obj.Object) *Query {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKQuery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordType:predicate:"), objref.IDOf(recordType), objref.IDOf(predicate))
+	return queryAdopt(_id)
 }
 
 // The sort descriptors for organizing the query’s results.
 //
-// WithSortDescriptors sets the collection, converting the Go slice to an NSArray.
-func (x *Query) WithSortDescriptors(items ...*foundation.NSSortDescriptor) *Query {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSortDescriptors(foundation.NSArrayFromID[*foundation.NSSortDescriptor](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSSortDescriptor](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSortDescriptors(_arr)
+// WithSortDescriptors sets the collection and returns the receiver so calls can be chained.
+func (x *Query) WithSortDescriptors(items ...obj.Object) *Query {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), _arr)
 	return x
 }
 
 // The record type to search. A query's results include only records of the specified type. The record type is an app-specific string that you use to distinguish among the records of your app. The records of a particular type all represent different instances of the same information. For example, an employee record type might store the employee's name, phone number, and a reference to the employee's manager.
-//
-// RecordType calls the underlying RecordType.
-func (x *Query) RecordType() string {
-	_r := x.inner.RecordType()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *Query) RecordType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordType"))
+	return obj.Wrap(_r)
 }
 
 // The predicate to use for matching records. A predicate contains one or more expressions that evaluate to <doc://com.apple.documentation/documentation/swift/true> or <doc://com.apple.documentation/documentation/swift/false>. Expressions are often value-based comparisons, but predicates support other types of operators, including string comparisons and aggregate operations. For guidelines on how to construct predicates for your queries, see <doc:CKQuery#Predicate-Rules-for-Query-Objects>.
-//
-// Predicate calls the underlying Predicate.
-func (x *Query) Predicate() *foundation.NSPredicate {
-	return x.inner.Predicate()
+func (x *Query) Predicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
+	return obj.Wrap(_r)
 }
 
 // The sort descriptors for organizing the query's results. You can add sort descriptors to a query and change them later as necessary. Each sort descriptor contains a field name of the intended record type and information about whether to sort values in that field in ascending or descending order. The default value of this property is `nil`, which means that records return in an indeterminate order. The order of the items in the array defines the order that CloudKit applies the sort descriptors to the results. In other words, CloudKit applies the first sort descriptor in the array, then the second sort descriptor, if necessary, then the third, and so on.
 //
 // SortDescriptors returns the collection as a Go slice.
-func (x *Query) SortDescriptors() []*foundation.NSSortDescriptor {
-	arr := x.inner.SortDescriptors()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSSortDescriptor {
-		return foundation.NSSortDescriptorFromID(purego.Retain(_id))
-	})
+func (x *Query) SortDescriptors() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortDescriptors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetSortDescriptors calls the underlying SetSortDescriptors.
-func (x *Query) SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor]) {
-	x.inner.SetSortDescriptors(sortDescriptors)
+func (x *Query) SetSortDescriptors(sortDescriptors []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Queryable is the interface implemented by [Query], for mocking and DI.
 type Queryable interface {
-	Unwrap() *raw.CKQuery
-	WithSortDescriptors(items ...*foundation.NSSortDescriptor) *Query
-	RecordType() string
-	Predicate() *foundation.NSPredicate
-	SortDescriptors() []*foundation.NSSortDescriptor
-	SetSortDescriptors(sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor])
+	obj.Object
+	WithSortDescriptors(items ...obj.Object) *Query
+	RecordType() obj.Object
+	Predicate() obj.Object
+	SortDescriptors() []obj.Object
+	SetSortDescriptors(sortDescriptors []obj.Object)
 }
 
 var _ Queryable = (*Query)(nil)

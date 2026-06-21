@@ -5,50 +5,50 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// MTL4AccelerationStructureDescriptorProvider is implemented by MTL4AccelerationStructureDescriptor and any idiomatic type wrapping a MTL4AccelerationStructureDescriptor subclass.
+// MTL4AccelerationStructureDescriptorProvider is accepted wherever a MTL4AccelerationStructureDescriptor (or one of its subclasses) is expected.
 type MTL4AccelerationStructureDescriptorProvider interface {
-	asMTL4AccelerationStructureDescriptor() *raw.MTL4AccelerationStructureDescriptor
+	objref.Object
 }
 
-// MTL4AccelerationStructureGeometryDescriptorProvider is implemented by MTL4AccelerationStructureGeometryDescriptor and any idiomatic type wrapping a MTL4AccelerationStructureGeometryDescriptor subclass.
+// MTL4AccelerationStructureGeometryDescriptorProvider is accepted wherever a MTL4AccelerationStructureGeometryDescriptor (or one of its subclasses) is expected.
 type MTL4AccelerationStructureGeometryDescriptorProvider interface {
-	asMTL4AccelerationStructureGeometryDescriptor() *raw.MTL4AccelerationStructureGeometryDescriptor
+	objref.Object
 }
 
-// MTL4FunctionDescriptorProvider is implemented by MTL4FunctionDescriptor and any idiomatic type wrapping a MTL4FunctionDescriptor subclass.
+// MTL4FunctionDescriptorProvider is accepted wherever a MTL4FunctionDescriptor (or one of its subclasses) is expected.
 type MTL4FunctionDescriptorProvider interface {
-	asMTL4FunctionDescriptor() *raw.MTL4FunctionDescriptor
+	objref.Object
 }
 
-// MTL4PipelineDescriptorProvider is implemented by MTL4PipelineDescriptor and any idiomatic type wrapping a MTL4PipelineDescriptor subclass.
+// MTL4PipelineDescriptorProvider is accepted wherever a MTL4PipelineDescriptor (or one of its subclasses) is expected.
 type MTL4PipelineDescriptorProvider interface {
-	asMTL4PipelineDescriptor() *raw.MTL4PipelineDescriptor
+	objref.Object
 }
 
-// AccelerationStructureDescriptorProvider is implemented by AccelerationStructureDescriptor and any idiomatic type wrapping a MTLAccelerationStructureDescriptor subclass.
+// AccelerationStructureDescriptorProvider is accepted wherever a MTLAccelerationStructureDescriptor (or one of its subclasses) is expected.
 type AccelerationStructureDescriptorProvider interface {
-	asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor
+	objref.Object
 }
 
-// AccelerationStructureGeometryDescriptorProvider is implemented by AccelerationStructureGeometryDescriptor and any idiomatic type wrapping a MTLAccelerationStructureGeometryDescriptor subclass.
+// AccelerationStructureGeometryDescriptorProvider is accepted wherever a MTLAccelerationStructureGeometryDescriptor (or one of its subclasses) is expected.
 type AccelerationStructureGeometryDescriptorProvider interface {
-	asAccelerationStructureGeometryDescriptor() *raw.MTLAccelerationStructureGeometryDescriptor
+	objref.Object
 }
 
-// FunctionDescriptorProvider is implemented by FunctionDescriptor and any idiomatic type wrapping a MTLFunctionDescriptor subclass.
+// FunctionDescriptorProvider is accepted wherever a MTLFunctionDescriptor (or one of its subclasses) is expected.
 type FunctionDescriptorProvider interface {
-	asFunctionDescriptor() *raw.MTLFunctionDescriptor
+	objref.Object
 }
 
-// RenderPassAttachmentDescriptorProvider is implemented by RenderPassAttachmentDescriptor and any idiomatic type wrapping a MTLRenderPassAttachmentDescriptor subclass.
+// RenderPassAttachmentDescriptorProvider is accepted wherever a MTLRenderPassAttachmentDescriptor (or one of its subclasses) is expected.
 type RenderPassAttachmentDescriptorProvider interface {
-	asRenderPassAttachmentDescriptor() *raw.MTLRenderPassAttachmentDescriptor
+	objref.Object
 }
 
-// TypeProvider is implemented by Type and any idiomatic type wrapping a MTLType subclass.
+// TypeProvider is accepted wherever a MTLType (or one of its subclasses) is expected.
 type TypeProvider interface {
-	asType() *raw.MTLType
+	objref.Object
 }

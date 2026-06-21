@@ -5,92 +5,114 @@
 package fskit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The name of a file, expressed as a data buffer.
 //
-// FileName wraps [raw.FSFileName] with a fluent Go API.
+// FileName is an idiomatic wrapper over the Objective-C class FSFileName.
 type FileName struct {
-	inner *raw.FSFileName
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSFileName].
-func (x *FileName) Unwrap() *raw.FSFileName { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileName) ID() objc.ID { return x.inner.Ptr() }
-
-// FileNameFromID adopts an existing object pointer as a FileName (nil for 0).
+// FileNameFromID adopts an existing Objective-C object as a FileName
+// (nil for 0), retaining it and registering a release finalizer.
 func FileNameFromID(id objc.ID) *FileName {
 	if id == 0 {
 		return nil
 	}
-	return &FileName{inner: raw.FSFileNameFromID(id)}
+	x := &FileName{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// fileNameAdopt wraps an Objective-C object that this code just created as a
+// FileName (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileNameAdopt(id objc.ID) *FileName {
+	if id == 0 {
+		return nil
+	}
+	x := &FileName{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FileName) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileName) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileName) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a filename from a null-terminated character sequence.
 //
-// NewFileNameWithCString creates a new [FileName].
+// NewFileNameWithCString creates a new FileName.
 func NewFileNameWithCString(name string) *FileName {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSFileName")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCString:"), name)
-	return &FileName{inner: raw.FSFileNameFromID(_id)}
+	return fileNameAdopt(_id)
 }
 
 // Initializes a file name by copying a character sequence from a byte array.
 //
-// NewFileNameWithBytesLength creates a new [FileName].
-func NewFileNameWithBytesLength(bytes_ string, length uint) *FileName {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSFileName")), objc.RegisterName("alloc"))
+// NewFileNameWithBytesLength creates a new FileName.
+func NewFileNameWithBytesLength(bytes_ string, length int) *FileName {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:length:"), bytes_, length)
-	return &FileName{inner: raw.FSFileNameFromID(_id)}
+	return fileNameAdopt(_id)
 }
 
 // Creates a filename by copying a character sequence data object.
 //
-// NewFileNameWithData creates a new [FileName].
-func NewFileNameWithData(name *foundation.NSData) *FileName {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSFileName")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), name.Ptr())
-	return &FileName{inner: raw.FSFileNameFromID(_id)}
+// NewFileNameWithData creates a new FileName.
+func NewFileNameWithData(name obj.Object) *FileName {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(name))
+	return fileNameAdopt(_id)
 }
 
 // Creates a filename by copying a character sequence from a string instance.
 //
-// NewFileNameWithString creates a new [FileName].
+// NewFileNameWithString creates a new FileName.
 func NewFileNameWithString(name string) *FileName {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSFileName")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), foundation.NSStringStringWithUTF8String(name).Ptr())
-	return &FileName{inner: raw.FSFileNameFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("FSFileName")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(name))
+	return fileNameAdopt(_id)
 }
 
 // The byte sequence of the filename, as a data object. This property always provides a value.
-//
-// Data calls the underlying Data.
-func (x *FileName) Data() *foundation.NSData {
-	return x.inner.Data()
+func (x *FileName) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
 
 // The filename, represented as a Unicode string. If the value of the filename's “FSFileName/data“ is not a valid UTF-8 byte sequence, this property is empty.
-//
-// String calls the underlying String.
 func (x *FileName) String() string {
-	_r := x.inner.String()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("string"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // FileNameable is the interface implemented by [FileName], for mocking and DI.
 type FileNameable interface {
-	Unwrap() *raw.FSFileName
-	Data() *foundation.NSData
+	obj.Object
+	Data() obj.Object
 	String() string
 }
 

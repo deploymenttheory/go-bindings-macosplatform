@@ -5,1719 +5,1734 @@
 package videotoolbox
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @constant	kVTCompressionPropertyKey_NumberOfPendingFrames @abstract The number of pending frames in the compression session. @discussion This number may decrease asynchronously.
-// KVTCompressionPropertyKey_NumberOfPendingFrames returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_NumberOfPendingFrames as an objc.ID.
-func KVTCompressionPropertyKey_NumberOfPendingFrames() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_NumberOfPendingFrames())
+// The number of pending frames in the compression session. This number may decrease asynchronously.
+// KVTCompressionPropertyKey_NumberOfPendingFrames returns the value of the constant kVTCompressionPropertyKey_NumberOfPendingFrames.
+func KVTCompressionPropertyKey_NumberOfPendingFrames() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_NumberOfPendingFrames")))
 }
 
-// @constant	kVTCompressionPropertyKey_PixelBufferPoolIsShared @abstract Indicates whether the a common pixel buffer pool is shared between the video encoder and the session client. @discussion This is false if separate pools are used because the video encoder's and the client's pixel buffer attributes were incompatible.
-// KVTCompressionPropertyKey_PixelBufferPoolIsShared returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_PixelBufferPoolIsShared as an objc.ID.
-func KVTCompressionPropertyKey_PixelBufferPoolIsShared() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_PixelBufferPoolIsShared())
+// Indicates whether the a common pixel buffer pool is shared between the video encoder and the session client. This is false if separate pools are used because the video encoder's and the client's pixel buffer attributes were incompatible.
+// KVTCompressionPropertyKey_PixelBufferPoolIsShared returns the value of the constant kVTCompressionPropertyKey_PixelBufferPoolIsShared.
+func KVTCompressionPropertyKey_PixelBufferPoolIsShared() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_PixelBufferPoolIsShared")))
 }
 
-// @constant	kVTCompressionPropertyKey_VideoEncoderPixelBufferAttributes @abstract The video encoder's pixel buffer attributes for the compression session. @discussion You can use these to create a pixel buffer pool for source pixel buffers.
-// KVTCompressionPropertyKey_VideoEncoderPixelBufferAttributes returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_VideoEncoderPixelBufferAttributes as an objc.ID.
-func KVTCompressionPropertyKey_VideoEncoderPixelBufferAttributes() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_VideoEncoderPixelBufferAttributes())
+// The video encoder's pixel buffer attributes for the compression session. You can use these to create a pixel buffer pool for source pixel buffers.
+// KVTCompressionPropertyKey_VideoEncoderPixelBufferAttributes returns the value of the constant kVTCompressionPropertyKey_VideoEncoderPixelBufferAttributes.
+func KVTCompressionPropertyKey_VideoEncoderPixelBufferAttributes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_VideoEncoderPixelBufferAttributes")))
 }
 
-// @constant	kVTCompressionPropertyKey_MaxKeyFrameInterval @abstract The maximum interval between key frames, also known as the key frame rate. @discussion Key frames, also known as sync frames, reset inter-frame dependencies; decoding a key frame is sufficient to prepare a decoder for correctly decoding the difference frames that follow. Video encoders are allowed to generate key frames more frequently if this would result in more efficient compression. The default key frame interval is 0, which indicates that the video encoder should choose where to place all key frames. A key frame interval of 1 indicates that every frame must be a key frame, 2 indicates that at least every other frame must be a key frame, etc. See also kVTCompressionPropertyKey_AllowTemporalCompression. This key can be set in conjunction with kVTCompressionPropertyKey_MaxKeyFrameIntervalDuration, and both limits will be enforced - requiring a keyframe every X frames or every Y seconds, whichever comes first.
-// KVTCompressionPropertyKey_MaxKeyFrameInterval returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_MaxKeyFrameInterval as an objc.ID.
-func KVTCompressionPropertyKey_MaxKeyFrameInterval() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_MaxKeyFrameInterval())
+// The maximum interval between key frames, also known as the key frame rate. Key frames, also known as sync frames, reset inter-frame dependencies; decoding a key frame is sufficient to prepare a decoder for correctly decoding the difference frames that follow. Video encoders are allowed to generate key frames more frequently if this would result in more efficient compression. The default key frame interval is 0, which indicates that the video encoder should choose where to place all key frames. A key frame interval of 1 indicates that every frame must be a key frame, 2 indicates that at least every other frame must be a key frame, etc. See also kVTCompressionPropertyKey_AllowTemporalCompression. This key can be set in conjunction with kVTCompressionPropertyKey_MaxKeyFrameIntervalDuration, and both limits will be enforced - requiring a keyframe every X frames or every Y seconds, whichever comes first.
+// KVTCompressionPropertyKey_MaxKeyFrameInterval returns the value of the constant kVTCompressionPropertyKey_MaxKeyFrameInterval.
+func KVTCompressionPropertyKey_MaxKeyFrameInterval() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_MaxKeyFrameInterval")))
 }
 
-// @constant	kVTCompressionPropertyKey_MaxKeyFrameIntervalDuration @abstract The maximum duration from one key frame to the next in seconds. @discussion Zero by default, which means no limit. This property is particularly useful when the frame rate is variable. See kVTCompressionPropertyKey_MaxKeyFrameInterval for more discussion of key frames. This key can be set in conjunction with kVTCompressionPropertyKey_MaxKeyFrameInterval, and both limits will be enforced - requiring a keyframe every X frames or every Y seconds, whichever comes first.
-// KVTCompressionPropertyKey_MaxKeyFrameIntervalDuration returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_MaxKeyFrameIntervalDuration as an objc.ID.
-func KVTCompressionPropertyKey_MaxKeyFrameIntervalDuration() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_MaxKeyFrameIntervalDuration())
+// The maximum duration from one key frame to the next in seconds. Zero by default, which means no limit. This property is particularly useful when the frame rate is variable. See kVTCompressionPropertyKey_MaxKeyFrameInterval for more discussion of key frames. This key can be set in conjunction with kVTCompressionPropertyKey_MaxKeyFrameInterval, and both limits will be enforced - requiring a keyframe every X frames or every Y seconds, whichever comes first.
+// KVTCompressionPropertyKey_MaxKeyFrameIntervalDuration returns the value of the constant kVTCompressionPropertyKey_MaxKeyFrameIntervalDuration.
+func KVTCompressionPropertyKey_MaxKeyFrameIntervalDuration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_MaxKeyFrameIntervalDuration")))
 }
 
-// @constant	kVTCompressionPropertyKey_AllowTemporalCompression @abstract Enables temporal compression. @discussion True by default.  Set this to false to require key-frame-only compression.
-// KVTCompressionPropertyKey_AllowTemporalCompression returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_AllowTemporalCompression as an objc.ID.
-func KVTCompressionPropertyKey_AllowTemporalCompression() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_AllowTemporalCompression())
+// Enables temporal compression. True by default.  Set this to false to require key-frame-only compression.
+// KVTCompressionPropertyKey_AllowTemporalCompression returns the value of the constant kVTCompressionPropertyKey_AllowTemporalCompression.
+func KVTCompressionPropertyKey_AllowTemporalCompression() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_AllowTemporalCompression")))
 }
 
-// @constant	kVTCompressionPropertyKey_AllowFrameReordering @abstract Enables frame reordering. @discussion In order to encode B frames, a video encoder must reorder frames, which means that the order in which they will be emitted and stored (the decode order) is different from the order in which they were presented to the video encoder (the display order). True by default.  Set this to false to prevent frame reordering.
-// KVTCompressionPropertyKey_AllowFrameReordering returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_AllowFrameReordering as an objc.ID.
-func KVTCompressionPropertyKey_AllowFrameReordering() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_AllowFrameReordering())
+// Enables frame reordering. In order to encode B frames, a video encoder must reorder frames, which means that the order in which they will be emitted and stored (the decode order) is different from the order in which they were presented to the video encoder (the display order). True by default.  Set this to false to prevent frame reordering.
+// KVTCompressionPropertyKey_AllowFrameReordering returns the value of the constant kVTCompressionPropertyKey_AllowFrameReordering.
+func KVTCompressionPropertyKey_AllowFrameReordering() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_AllowFrameReordering")))
 }
 
-// @constant	kVTCompressionPropertyKey_AllowOpenGOP @abstract Enables Open GOP (Group Of Pictures) encoding. @discussion Only applicable to certain video encoders.  For HEVC encoding the property value is kCFBooleanTrue by default - which means that the encoder may use Open GOP structures, but it is not guaranteed to. Set this to kCFBooleanFalse to prevent the encoder from using any form of Open GOP during encoding. If set to kCFBooleanFalse, this will mean that the encoder will generate groups of pictures that are independently decodable; there will be no frame dependencies across sync samples (frames where kCMSampleAttachmentKey_NotSync is absent or kCFBooleanFalse) When the value is kCFBooleanTrue, the encoder may use Open GOP frame dependency structures to increase compression efficiency or quality.
-// KVTCompressionPropertyKey_AllowOpenGOP returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_AllowOpenGOP as an objc.ID.
-func KVTCompressionPropertyKey_AllowOpenGOP() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_AllowOpenGOP())
+// Enables Open GOP (Group Of Pictures) encoding. Only applicable to certain video encoders.  For HEVC encoding the property value is kCFBooleanTrue by default - which means that the encoder may use Open GOP structures, but it is not guaranteed to. Set this to kCFBooleanFalse to prevent the encoder from using any form of Open GOP during encoding. If set to kCFBooleanFalse, this will mean that the encoder will generate groups of pictures that are independently decodable; there will be no frame dependencies across sync samples (frames where kCMSampleAttachmentKey_NotSync is absent or kCFBooleanFalse) When the value is kCFBooleanTrue, the encoder may use Open GOP frame dependency structures to increase compression efficiency or quality.
+// KVTCompressionPropertyKey_AllowOpenGOP returns the value of the constant kVTCompressionPropertyKey_AllowOpenGOP.
+func KVTCompressionPropertyKey_AllowOpenGOP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_AllowOpenGOP")))
 }
 
-// @constant	kVTCompressionPropertyKey_AverageBitRate @abstract The long-term desired average bit rate in bits per second. @discussion This is not a hard limit; the bit rate may peak above this. The default bit rate is zero, which indicates that the video encoder should determine the size of compressed data. Note that bit rate settings only have an effect when timing information is provided for source frames, and that some codecs do not support limiting to specified bit rates.
-// KVTCompressionPropertyKey_AverageBitRate returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_AverageBitRate as an objc.ID.
-func KVTCompressionPropertyKey_AverageBitRate() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_AverageBitRate())
+// The long-term desired average bit rate in bits per second. This is not a hard limit; the bit rate may peak above this. The default bit rate is zero, which indicates that the video encoder should determine the size of compressed data. Note that bit rate settings only have an effect when timing information is provided for source frames, and that some codecs do not support limiting to specified bit rates.
+// KVTCompressionPropertyKey_AverageBitRate returns the value of the constant kVTCompressionPropertyKey_AverageBitRate.
+func KVTCompressionPropertyKey_AverageBitRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_AverageBitRate")))
 }
 
-// @constant	kVTCompressionPropertyKey_DataRateLimits @abstract Zero, one or two hard limits on data rate. @discussion Each hard limit is described by a data size in bytes and a duration in seconds, and requires that the total size of compressed data for any contiguous segment of that duration (in decode time) must not exceed the data size. By default, no data rate limits are set. The property is a CFArray of an even number of CFNumbers, alternating between bytes and seconds. Note that data rate settings only have an effect when timing information is provided for source frames, and that some codecs do not support limiting to specified data rates. When both kVTCompressionPropertyKey_DataRateLimits and kVTCompressionPropertyKey_AverageBitRate are supported, it is recommended that kVTCompressionPropertyKey_AverageBitRate be set when kVTCompressionPropertyKey_DataRateLimits is set. If kVTCompressionPropertyKey_AverageBitRate is not specified, an overall average bit rate target will be selected at a safe margin below the kVTCompressionPropertyKey_DataRateLimits target, so that regional overshoot in the encoding will not exceed the kVTCompressionPropertyKey_DataRateLimits. The overall average bitrate target generated from kVTCompressionPropertyKey_DataRateLimits in the absence of kVTCompressionPropertyKey_AverageBitRate may not be ideal for all scenarios. Encoding is more likely to undershoot a requested kVTCompressionPropertyKey_AverageBitRate if the specified target is too close to a hard limit specified by kVTCompressionPropertyKey_DataRateLimits.
-// KVTCompressionPropertyKey_DataRateLimits returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_DataRateLimits as an objc.ID.
-func KVTCompressionPropertyKey_DataRateLimits() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_DataRateLimits())
+// Zero, one or two hard limits on data rate. Each hard limit is described by a data size in bytes and a duration in seconds, and requires that the total size of compressed data for any contiguous segment of that duration (in decode time) must not exceed the data size. By default, no data rate limits are set. The property is a CFArray of an even number of CFNumbers, alternating between bytes and seconds. Note that data rate settings only have an effect when timing information is provided for source frames, and that some codecs do not support limiting to specified data rates. When both kVTCompressionPropertyKey_DataRateLimits and kVTCompressionPropertyKey_AverageBitRate are supported, it is recommended that kVTCompressionPropertyKey_AverageBitRate be set when kVTCompressionPropertyKey_DataRateLimits is set. If kVTCompressionPropertyKey_AverageBitRate is not specified, an overall average bit rate target will be selected at a safe margin below the kVTCompressionPropertyKey_DataRateLimits target, so that regional overshoot in the encoding will not exceed the kVTCompressionPropertyKey_DataRateLimits. The overall average bitrate target generated from kVTCompressionPropertyKey_DataRateLimits in the absence of kVTCompressionPropertyKey_AverageBitRate may not be ideal for all scenarios. Encoding is more likely to undershoot a requested kVTCompressionPropertyKey_AverageBitRate if the specified target is too close to a hard limit specified by kVTCompressionPropertyKey_DataRateLimits.
+// KVTCompressionPropertyKey_DataRateLimits returns the value of the constant kVTCompressionPropertyKey_DataRateLimits.
+func KVTCompressionPropertyKey_DataRateLimits() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_DataRateLimits")))
 }
 
-// @constant	kVTCompressionPropertyKey_Quality @abstract The desired compression quality. @discussion Some encoders, such as JPEG, describe the compression level of each image with a quality value.  This value should be specified as a number in the range of 0.0 to 1.0, where low = 0.25, normal = 0.50, high = 0.75, and 1.0 implies lossless compression for encoders that support it.
-// KVTCompressionPropertyKey_Quality returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_Quality as an objc.ID.
-func KVTCompressionPropertyKey_Quality() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_Quality())
+// The desired compression quality. Some encoders, such as JPEG, describe the compression level of each image with a quality value.  This value should be specified as a number in the range of 0.0 to 1.0, where low = 0.25, normal = 0.50, high = 0.75, and 1.0 implies lossless compression for encoders that support it.
+// KVTCompressionPropertyKey_Quality returns the value of the constant kVTCompressionPropertyKey_Quality.
+func KVTCompressionPropertyKey_Quality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_Quality")))
 }
 
-// @constant	kVTCompressionPropertyKey_TargetQualityForAlpha @abstract The target quality to use for encoding the alpha channel. @discussion The desired compression level to use for encoding the alpha channel. This value should be specified as a number in the range of 0.0 to 1.0. 0.0 is lowest quality and 1.0 implies nearly lossless.  Alpha plane bit rates will tend to increase with increasing values.  When encoding the alpha channel, quality is given priority over bitrate.  Note this parameter is currently only applicable to HEVC with Alpha encoders.
-// KVTCompressionPropertyKey_TargetQualityForAlpha returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_TargetQualityForAlpha as an objc.ID.
-func KVTCompressionPropertyKey_TargetQualityForAlpha() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_TargetQualityForAlpha())
+// The target quality to use for encoding the alpha channel. The desired compression level to use for encoding the alpha channel. This value should be specified as a number in the range of 0.0 to 1.0. 0.0 is lowest quality and 1.0 implies nearly lossless.  Alpha plane bit rates will tend to increase with increasing values.  When encoding the alpha channel, quality is given priority over bitrate.  Note this parameter is currently only applicable to HEVC with Alpha encoders.
+// KVTCompressionPropertyKey_TargetQualityForAlpha returns the value of the constant kVTCompressionPropertyKey_TargetQualityForAlpha.
+func KVTCompressionPropertyKey_TargetQualityForAlpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_TargetQualityForAlpha")))
 }
 
-// @constant	kVTCompressionPropertyKey_MoreFramesBeforeStart @abstract Indicates whether and how a compression session's frames will be concatenated with other compressed frames to form a longer series. @discussion True if frames compressed in a separate session will be concatenated before the beginning of this one.  False if this is a stand-alone session, or if this session will encode the first segment of a multi-segment compression. By default, false. This information enables video encoders to ensure that compressed segments can be concatenated smoothly -- for example, avoiding data rate spikes where segments are joined.
-// KVTCompressionPropertyKey_MoreFramesBeforeStart returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_MoreFramesBeforeStart as an objc.ID.
-func KVTCompressionPropertyKey_MoreFramesBeforeStart() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_MoreFramesBeforeStart())
+// Indicates whether and how a compression session's frames will be concatenated with other compressed frames to form a longer series. True if frames compressed in a separate session will be concatenated before the beginning of this one.  False if this is a stand-alone session, or if this session will encode the first segment of a multi-segment compression. By default, false. This information enables video encoders to ensure that compressed segments can be concatenated smoothly -- for example, avoiding data rate spikes where segments are joined.
+// KVTCompressionPropertyKey_MoreFramesBeforeStart returns the value of the constant kVTCompressionPropertyKey_MoreFramesBeforeStart.
+func KVTCompressionPropertyKey_MoreFramesBeforeStart() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_MoreFramesBeforeStart")))
 }
 
-// @constant	kVTCompressionPropertyKey_MoreFramesAfterEnd @abstract Indicates whether and how a compression session's frames will be concatenated with other compressed frames to form a longer series. @discussion True if frames compressed in a separate session will be concatenated following the end of this one. False if this is a stand-alone session, or if this session will encode the last segment of a multi-segment compression. By default, false.
-// KVTCompressionPropertyKey_MoreFramesAfterEnd returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_MoreFramesAfterEnd as an objc.ID.
-func KVTCompressionPropertyKey_MoreFramesAfterEnd() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_MoreFramesAfterEnd())
+// Indicates whether and how a compression session's frames will be concatenated with other compressed frames to form a longer series. True if frames compressed in a separate session will be concatenated following the end of this one. False if this is a stand-alone session, or if this session will encode the last segment of a multi-segment compression. By default, false.
+// KVTCompressionPropertyKey_MoreFramesAfterEnd returns the value of the constant kVTCompressionPropertyKey_MoreFramesAfterEnd.
+func KVTCompressionPropertyKey_MoreFramesAfterEnd() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_MoreFramesAfterEnd")))
 }
 
-// @constant	kVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality @abstract Hint for the video encoder that it should maximize its speed during encode, sacrificing quality if needed @discussion Video encoders sometimes have a tradeoff available between encoding speed and quality at a given bitrate. For example, by spending more time refining encoding decisions, it may be possible to make marginal improvements on quality. This property lets a client indicate its preference for any such tradeoff. Clients may set this property to kCFBooleanTrue to indicate that the encoder can take steps to maximize its speed by reducing quality, or to kCFBooleanFalse to indicate that the priority should be maximizing quality (at a given bitrate). When the property value is NULL, the video encoder will choose its default behavior. H.264 and HEVC hardware video encoders prioritize quality over speed by default. ProRes hardware encoders currently prioritize speed over quality by default. Not all video encoders support this property. By default, this property is NULL.
-// KVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality as an objc.ID.
-func KVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality())
+// Hint for the video encoder that it should maximize its speed during encode, sacrificing quality if needed Video encoders sometimes have a tradeoff available between encoding speed and quality at a given bitrate. For example, by spending more time refining encoding decisions, it may be possible to make marginal improvements on quality. This property lets a client indicate its preference for any such tradeoff. Clients may set this property to kCFBooleanTrue to indicate that the encoder can take steps to maximize its speed by reducing quality, or to kCFBooleanFalse to indicate that the priority should be maximizing quality (at a given bitrate). When the property value is NULL, the video encoder will choose its default behavior. H.264 and HEVC hardware video encoders prioritize quality over speed by default. ProRes hardware encoders currently prioritize speed over quality by default. Not all video encoders support this property. By default, this property is NULL.
+// KVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality returns the value of the constant kVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality.
+func KVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality")))
 }
 
-// @constant	kVTCompressionPropertyKey_ConstantBitRate @abstract Requires that the encoder use a Constant Bit Rate algorithm. @discussion The property kVTCompressionPropertyKey_ExpectedFrameRate should be set along with kVTCompressionPropertyKey_ConstantBitRate to ensure effective CBR rate control. This property is not compatible with kVTCompressionPropertyKey_DataRateLimits, kVTCompressionPropertyKey_AverageBitRate, and kVTCompressionPropertyKey_VariableBitRate. The encoder will pad the frame if they are smaller than they need to be based on the Constant BitRate. This property is not recommended for general streaming or export scenarios. It is intended for interoperability with certain streaming CDNs which specifically require that data rates not drop even during low motion and activity scenes. This is not supported in all encoders or in all encoder operating modes. kVTPropertyNotSupportedErr will be returned when this option is not supported.
-// KVTCompressionPropertyKey_ConstantBitRate returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_ConstantBitRate as an objc.ID.
-func KVTCompressionPropertyKey_ConstantBitRate() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_ConstantBitRate())
+// Requires that the encoder use a Constant Bit Rate algorithm. The property kVTCompressionPropertyKey_ExpectedFrameRate should be set along with kVTCompressionPropertyKey_ConstantBitRate to ensure effective CBR rate control. This property is not compatible with kVTCompressionPropertyKey_DataRateLimits, kVTCompressionPropertyKey_AverageBitRate, and kVTCompressionPropertyKey_VariableBitRate. The encoder will pad the frame if they are smaller than they need to be based on the Constant BitRate. This property is not recommended for general streaming or export scenarios. It is intended for interoperability with certain streaming CDNs which specifically require that data rates not drop even during low motion and activity scenes. This is not supported in all encoders or in all encoder operating modes. kVTPropertyNotSupportedErr will be returned when this option is not supported.
+// KVTCompressionPropertyKey_ConstantBitRate returns the value of the constant kVTCompressionPropertyKey_ConstantBitRate.
+func KVTCompressionPropertyKey_ConstantBitRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_ConstantBitRate")))
 }
 
-// @constant	kVTCompressionPropertyKey_EstimatedAverageBytesPerFrame @abstract Returns the encoder's estimate of the expected size of a single encoded frame in bytes, based on current configuration. @discussion When supported, this option is intended to allow clients to estimate the output file size for an encoded video stream. This property is not implemented by all video encoders.
-// KVTCompressionPropertyKey_EstimatedAverageBytesPerFrame returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_EstimatedAverageBytesPerFrame as an objc.ID.
-func KVTCompressionPropertyKey_EstimatedAverageBytesPerFrame() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_EstimatedAverageBytesPerFrame())
+// Returns the encoder's estimate of the expected size of a single encoded frame in bytes, based on current configuration. When supported, this option is intended to allow clients to estimate the output file size for an encoded video stream. This property is not implemented by all video encoders.
+// KVTCompressionPropertyKey_EstimatedAverageBytesPerFrame returns the value of the constant kVTCompressionPropertyKey_EstimatedAverageBytesPerFrame.
+func KVTCompressionPropertyKey_EstimatedAverageBytesPerFrame() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_EstimatedAverageBytesPerFrame")))
 }
 
-// @constant    kVTCompressionPropertyKey_VariableBitRate @abstract Requires that the encoder use a variable bitrate (VBR) rate control algorithm and specifies the desired variable bitrate in bits per second. @discussion The actual peak bitrate present in the bitstream may be above or below this value based on other parameters such as kVTCompressionPropertyKey_VBVMaxBitRate. This property key needs to be set to achieve Variable Bitrate (VBR) rate control. This property key is not compatible with: 1. kVTCompressionPropertyKey_AverageBitRate, 2. kVTCompressionPropertyKey_ConstantBitRate, 3. kVTCompressionPropertyKey_DataRateLimits, 4. VTVideoEncoderSpecification_EnableLowLatencyRateControl = True.
-// KVTCompressionPropertyKey_VariableBitRate returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_VariableBitRate as an objc.ID.
-func KVTCompressionPropertyKey_VariableBitRate() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_VariableBitRate())
+// Requires that the encoder use a variable bitrate (VBR) rate control algorithm and specifies the desired variable bitrate in bits per second. The actual peak bitrate present in the bitstream may be above or below this value based on other parameters such as kVTCompressionPropertyKey_VBVMaxBitRate. This property key needs to be set to achieve Variable Bitrate (VBR) rate control. This property key is not compatible with: 1. kVTCompressionPropertyKey_AverageBitRate, 2. kVTCompressionPropertyKey_ConstantBitRate, 3. kVTCompressionPropertyKey_DataRateLimits, 4. VTVideoEncoderSpecification_EnableLowLatencyRateControl = True.
+// KVTCompressionPropertyKey_VariableBitRate returns the value of the constant kVTCompressionPropertyKey_VariableBitRate.
+func KVTCompressionPropertyKey_VariableBitRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_VariableBitRate")))
 }
 
-// @constant    kVTCompressionPropertyKey_VBVMaxBitRate @abstract Defines the maximum bitrate that can enter the video buffering verifier (VBV) model at any time in variable bitrate (VBR) mode. @discussion The value of this property must be greater than zero. This property key is not compatible with: 1. kVTCompressionPropertyKey_AverageBitRate, 2. kVTCompressionPropertyKey_ConstantBitRate, 3. kVTCompressionPropertyKey_DataRateLimits, 4. VTVideoEncoderSpecification_EnableLowLatencyRateControl=True.
-// KVTCompressionPropertyKey_VBVMaxBitRate returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_VBVMaxBitRate as an objc.ID.
-func KVTCompressionPropertyKey_VBVMaxBitRate() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_VBVMaxBitRate())
+// Defines the maximum bitrate that can enter the video buffering verifier (VBV) model at any time in variable bitrate (VBR) mode. The value of this property must be greater than zero. This property key is not compatible with: 1. kVTCompressionPropertyKey_AverageBitRate, 2. kVTCompressionPropertyKey_ConstantBitRate, 3. kVTCompressionPropertyKey_DataRateLimits, 4. VTVideoEncoderSpecification_EnableLowLatencyRateControl=True.
+// KVTCompressionPropertyKey_VBVMaxBitRate returns the value of the constant kVTCompressionPropertyKey_VBVMaxBitRate.
+func KVTCompressionPropertyKey_VBVMaxBitRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_VBVMaxBitRate")))
 }
 
-// @constant    kVTCompressionPropertyKey_VBVBufferDuration @abstract Capacity of the video buffering verifier (VBV) model in seconds. @discussion VBV model allows for larger variations in bitrates while avoiding decoder-side overflows or underflows. A larger VBV model size may improve compression quality, but it requires more memory and may introduce delay. The value of this property must be greater than 0.0. The default value is set as 2.5 seconds. This property key is compatible with constant bitrate (CBR) or variable bitrate (VBR) rate control. This property key is incompatible with: 1. kVTCompressionPropertyKey_AverageBitRate, 2. kVTCompressionPropertyKey_DataRateLimits, 3. VTVideoEncoderSpecification_EnableLowLatencyRateControl=True.
-// KVTCompressionPropertyKey_VBVBufferDuration returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_VBVBufferDuration as an objc.ID.
-func KVTCompressionPropertyKey_VBVBufferDuration() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_VBVBufferDuration())
+// Capacity of the video buffering verifier (VBV) model in seconds. VBV model allows for larger variations in bitrates while avoiding decoder-side overflows or underflows. A larger VBV model size may improve compression quality, but it requires more memory and may introduce delay. The value of this property must be greater than 0.0. The default value is set as 2.5 seconds. This property key is compatible with constant bitrate (CBR) or variable bitrate (VBR) rate control. This property key is incompatible with: 1. kVTCompressionPropertyKey_AverageBitRate, 2. kVTCompressionPropertyKey_DataRateLimits, 3. VTVideoEncoderSpecification_EnableLowLatencyRateControl=True.
+// KVTCompressionPropertyKey_VBVBufferDuration returns the value of the constant kVTCompressionPropertyKey_VBVBufferDuration.
+func KVTCompressionPropertyKey_VBVBufferDuration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_VBVBufferDuration")))
 }
 
-// @constant    kVTCompressionPropertyKey_VBVInitialDelayPercentage @abstract Initial delay of the VBV model between storing the picture in the VBV buffer model and decoding of that picture, as a percentage of VBV buffer duration. @discussion This value should be specified as a number in the range of 0 to 100. Larger value increases the delay but results in smoother playback. Default value is 90, meaning 90% of the VBV buffer duration. This property key is incompatible with: 1. kVTCompressionPropertyKey_AverageBitRate, 2. kVTCompressionPropertyKey_DataRateLimits, 3. VTVideoEncoderSpecification_EnableLowLatencyRateControl=True.
-// KVTCompressionPropertyKey_VBVInitialDelayPercentage returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_VBVInitialDelayPercentage as an objc.ID.
-func KVTCompressionPropertyKey_VBVInitialDelayPercentage() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_VBVInitialDelayPercentage())
+// Initial delay of the VBV model between storing the picture in the VBV buffer model and decoding of that picture, as a percentage of VBV buffer duration. This value should be specified as a number in the range of 0 to 100. Larger value increases the delay but results in smoother playback. Default value is 90, meaning 90% of the VBV buffer duration. This property key is incompatible with: 1. kVTCompressionPropertyKey_AverageBitRate, 2. kVTCompressionPropertyKey_DataRateLimits, 3. VTVideoEncoderSpecification_EnableLowLatencyRateControl=True.
+// KVTCompressionPropertyKey_VBVInitialDelayPercentage returns the value of the constant kVTCompressionPropertyKey_VBVInitialDelayPercentage.
+func KVTCompressionPropertyKey_VBVInitialDelayPercentage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_VBVInitialDelayPercentage")))
 }
 
-// @constant	kVTCompressionPropertyKey_ProfileLevel @abstract Specifies the profile and level for the encoded bitstream. @discussion Available profiles and levels vary across formats and between video encoders. Video encoders should use standard keys where available, and follow standard patterns where not.
-// KVTCompressionPropertyKey_ProfileLevel returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_ProfileLevel as an objc.ID.
-func KVTCompressionPropertyKey_ProfileLevel() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_ProfileLevel())
+// Specifies the profile and level for the encoded bitstream. Available profiles and levels vary across formats and between video encoders. Video encoders should use standard keys where available, and follow standard patterns where not.
+// KVTCompressionPropertyKey_ProfileLevel returns the value of the constant kVTCompressionPropertyKey_ProfileLevel.
+func KVTCompressionPropertyKey_ProfileLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_ProfileLevel")))
 }
 
-// KVTProfileLevel_HEVC_Main_AutoLevel returns the value of the CoreFoundation reference constant kVTProfileLevel_HEVC_Main_AutoLevel as an objc.ID.
-func KVTProfileLevel_HEVC_Main_AutoLevel() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_HEVC_Main_AutoLevel())
+// KVTProfileLevel_HEVC_Main_AutoLevel returns the value of the constant kVTProfileLevel_HEVC_Main_AutoLevel.
+func KVTProfileLevel_HEVC_Main_AutoLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_HEVC_Main_AutoLevel")))
 }
 
-// KVTProfileLevel_HEVC_Main10_AutoLevel returns the value of the CoreFoundation reference constant kVTProfileLevel_HEVC_Main10_AutoLevel as an objc.ID.
-func KVTProfileLevel_HEVC_Main10_AutoLevel() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_HEVC_Main10_AutoLevel())
+// KVTProfileLevel_HEVC_Main10_AutoLevel returns the value of the constant kVTProfileLevel_HEVC_Main10_AutoLevel.
+func KVTProfileLevel_HEVC_Main10_AutoLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_HEVC_Main10_AutoLevel")))
 }
 
-// KVTProfileLevel_HEVC_Main42210_AutoLevel returns the value of the CoreFoundation reference constant kVTProfileLevel_HEVC_Main42210_AutoLevel as an objc.ID.
-func KVTProfileLevel_HEVC_Main42210_AutoLevel() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_HEVC_Main42210_AutoLevel())
+// KVTProfileLevel_HEVC_Main42210_AutoLevel returns the value of the constant kVTProfileLevel_HEVC_Main42210_AutoLevel.
+func KVTProfileLevel_HEVC_Main42210_AutoLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_HEVC_Main42210_AutoLevel")))
 }
 
-// KVTProfileLevel_HEVC_Monochrome_AutoLevel returns the value of the CoreFoundation reference constant kVTProfileLevel_HEVC_Monochrome_AutoLevel as an objc.ID.
-func KVTProfileLevel_HEVC_Monochrome_AutoLevel() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_HEVC_Monochrome_AutoLevel())
+// KVTProfileLevel_HEVC_Monochrome_AutoLevel returns the value of the constant kVTProfileLevel_HEVC_Monochrome_AutoLevel.
+func KVTProfileLevel_HEVC_Monochrome_AutoLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_HEVC_Monochrome_AutoLevel")))
 }
 
-// KVTProfileLevel_HEVC_Monochrome10_AutoLevel returns the value of the CoreFoundation reference constant kVTProfileLevel_HEVC_Monochrome10_AutoLevel as an objc.ID.
-func KVTProfileLevel_HEVC_Monochrome10_AutoLevel() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_HEVC_Monochrome10_AutoLevel())
+// KVTProfileLevel_HEVC_Monochrome10_AutoLevel returns the value of the constant kVTProfileLevel_HEVC_Monochrome10_AutoLevel.
+func KVTProfileLevel_HEVC_Monochrome10_AutoLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_HEVC_Monochrome10_AutoLevel")))
 }
 
-// KVTProfileLevel_H264_Baseline_1_3 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Baseline_1_3 as an objc.ID.
-func KVTProfileLevel_H264_Baseline_1_3() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Baseline_1_3())
+// KVTProfileLevel_H264_Baseline_1_3 returns the value of the constant kVTProfileLevel_H264_Baseline_1_3.
+func KVTProfileLevel_H264_Baseline_1_3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Baseline_1_3")))
 }
 
-// KVTProfileLevel_H264_Baseline_3_0 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Baseline_3_0 as an objc.ID.
-func KVTProfileLevel_H264_Baseline_3_0() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Baseline_3_0())
+// KVTProfileLevel_H264_Baseline_3_0 returns the value of the constant kVTProfileLevel_H264_Baseline_3_0.
+func KVTProfileLevel_H264_Baseline_3_0() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Baseline_3_0")))
 }
 
-// KVTProfileLevel_H264_Baseline_3_1 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Baseline_3_1 as an objc.ID.
-func KVTProfileLevel_H264_Baseline_3_1() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Baseline_3_1())
+// KVTProfileLevel_H264_Baseline_3_1 returns the value of the constant kVTProfileLevel_H264_Baseline_3_1.
+func KVTProfileLevel_H264_Baseline_3_1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Baseline_3_1")))
 }
 
-// KVTProfileLevel_H264_Baseline_3_2 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Baseline_3_2 as an objc.ID.
-func KVTProfileLevel_H264_Baseline_3_2() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Baseline_3_2())
+// KVTProfileLevel_H264_Baseline_3_2 returns the value of the constant kVTProfileLevel_H264_Baseline_3_2.
+func KVTProfileLevel_H264_Baseline_3_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Baseline_3_2")))
 }
 
-// KVTProfileLevel_H264_Baseline_4_0 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Baseline_4_0 as an objc.ID.
-func KVTProfileLevel_H264_Baseline_4_0() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Baseline_4_0())
+// KVTProfileLevel_H264_Baseline_4_0 returns the value of the constant kVTProfileLevel_H264_Baseline_4_0.
+func KVTProfileLevel_H264_Baseline_4_0() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Baseline_4_0")))
 }
 
-// KVTProfileLevel_H264_Baseline_4_1 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Baseline_4_1 as an objc.ID.
-func KVTProfileLevel_H264_Baseline_4_1() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Baseline_4_1())
+// KVTProfileLevel_H264_Baseline_4_1 returns the value of the constant kVTProfileLevel_H264_Baseline_4_1.
+func KVTProfileLevel_H264_Baseline_4_1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Baseline_4_1")))
 }
 
-// KVTProfileLevel_H264_Baseline_4_2 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Baseline_4_2 as an objc.ID.
-func KVTProfileLevel_H264_Baseline_4_2() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Baseline_4_2())
+// KVTProfileLevel_H264_Baseline_4_2 returns the value of the constant kVTProfileLevel_H264_Baseline_4_2.
+func KVTProfileLevel_H264_Baseline_4_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Baseline_4_2")))
 }
 
-// KVTProfileLevel_H264_Baseline_5_0 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Baseline_5_0 as an objc.ID.
-func KVTProfileLevel_H264_Baseline_5_0() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Baseline_5_0())
+// KVTProfileLevel_H264_Baseline_5_0 returns the value of the constant kVTProfileLevel_H264_Baseline_5_0.
+func KVTProfileLevel_H264_Baseline_5_0() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Baseline_5_0")))
 }
 
-// KVTProfileLevel_H264_Baseline_5_1 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Baseline_5_1 as an objc.ID.
-func KVTProfileLevel_H264_Baseline_5_1() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Baseline_5_1())
+// KVTProfileLevel_H264_Baseline_5_1 returns the value of the constant kVTProfileLevel_H264_Baseline_5_1.
+func KVTProfileLevel_H264_Baseline_5_1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Baseline_5_1")))
 }
 
-// KVTProfileLevel_H264_Baseline_5_2 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Baseline_5_2 as an objc.ID.
-func KVTProfileLevel_H264_Baseline_5_2() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Baseline_5_2())
+// KVTProfileLevel_H264_Baseline_5_2 returns the value of the constant kVTProfileLevel_H264_Baseline_5_2.
+func KVTProfileLevel_H264_Baseline_5_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Baseline_5_2")))
 }
 
-// KVTProfileLevel_H264_Baseline_AutoLevel returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Baseline_AutoLevel as an objc.ID.
-func KVTProfileLevel_H264_Baseline_AutoLevel() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Baseline_AutoLevel())
+// KVTProfileLevel_H264_Baseline_AutoLevel returns the value of the constant kVTProfileLevel_H264_Baseline_AutoLevel.
+func KVTProfileLevel_H264_Baseline_AutoLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Baseline_AutoLevel")))
 }
 
-// KVTProfileLevel_H264_ConstrainedBaseline_AutoLevel returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_ConstrainedBaseline_AutoLevel as an objc.ID.
-func KVTProfileLevel_H264_ConstrainedBaseline_AutoLevel() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_ConstrainedBaseline_AutoLevel())
+// KVTProfileLevel_H264_ConstrainedBaseline_AutoLevel returns the value of the constant kVTProfileLevel_H264_ConstrainedBaseline_AutoLevel.
+func KVTProfileLevel_H264_ConstrainedBaseline_AutoLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_ConstrainedBaseline_AutoLevel")))
 }
 
-// KVTProfileLevel_H264_Main_3_0 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Main_3_0 as an objc.ID.
-func KVTProfileLevel_H264_Main_3_0() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Main_3_0())
+// KVTProfileLevel_H264_Main_3_0 returns the value of the constant kVTProfileLevel_H264_Main_3_0.
+func KVTProfileLevel_H264_Main_3_0() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Main_3_0")))
 }
 
-// KVTProfileLevel_H264_Main_3_1 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Main_3_1 as an objc.ID.
-func KVTProfileLevel_H264_Main_3_1() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Main_3_1())
+// KVTProfileLevel_H264_Main_3_1 returns the value of the constant kVTProfileLevel_H264_Main_3_1.
+func KVTProfileLevel_H264_Main_3_1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Main_3_1")))
 }
 
-// KVTProfileLevel_H264_Main_3_2 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Main_3_2 as an objc.ID.
-func KVTProfileLevel_H264_Main_3_2() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Main_3_2())
+// KVTProfileLevel_H264_Main_3_2 returns the value of the constant kVTProfileLevel_H264_Main_3_2.
+func KVTProfileLevel_H264_Main_3_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Main_3_2")))
 }
 
-// KVTProfileLevel_H264_Main_4_0 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Main_4_0 as an objc.ID.
-func KVTProfileLevel_H264_Main_4_0() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Main_4_0())
+// KVTProfileLevel_H264_Main_4_0 returns the value of the constant kVTProfileLevel_H264_Main_4_0.
+func KVTProfileLevel_H264_Main_4_0() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Main_4_0")))
 }
 
-// KVTProfileLevel_H264_Main_4_1 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Main_4_1 as an objc.ID.
-func KVTProfileLevel_H264_Main_4_1() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Main_4_1())
+// KVTProfileLevel_H264_Main_4_1 returns the value of the constant kVTProfileLevel_H264_Main_4_1.
+func KVTProfileLevel_H264_Main_4_1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Main_4_1")))
 }
 
-// KVTProfileLevel_H264_Main_4_2 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Main_4_2 as an objc.ID.
-func KVTProfileLevel_H264_Main_4_2() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Main_4_2())
+// KVTProfileLevel_H264_Main_4_2 returns the value of the constant kVTProfileLevel_H264_Main_4_2.
+func KVTProfileLevel_H264_Main_4_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Main_4_2")))
 }
 
-// KVTProfileLevel_H264_Main_5_0 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Main_5_0 as an objc.ID.
-func KVTProfileLevel_H264_Main_5_0() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Main_5_0())
+// KVTProfileLevel_H264_Main_5_0 returns the value of the constant kVTProfileLevel_H264_Main_5_0.
+func KVTProfileLevel_H264_Main_5_0() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Main_5_0")))
 }
 
-// KVTProfileLevel_H264_Main_5_1 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Main_5_1 as an objc.ID.
-func KVTProfileLevel_H264_Main_5_1() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Main_5_1())
+// KVTProfileLevel_H264_Main_5_1 returns the value of the constant kVTProfileLevel_H264_Main_5_1.
+func KVTProfileLevel_H264_Main_5_1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Main_5_1")))
 }
 
-// KVTProfileLevel_H264_Main_5_2 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Main_5_2 as an objc.ID.
-func KVTProfileLevel_H264_Main_5_2() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Main_5_2())
+// KVTProfileLevel_H264_Main_5_2 returns the value of the constant kVTProfileLevel_H264_Main_5_2.
+func KVTProfileLevel_H264_Main_5_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Main_5_2")))
 }
 
-// KVTProfileLevel_H264_Main_AutoLevel returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Main_AutoLevel as an objc.ID.
-func KVTProfileLevel_H264_Main_AutoLevel() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Main_AutoLevel())
+// KVTProfileLevel_H264_Main_AutoLevel returns the value of the constant kVTProfileLevel_H264_Main_AutoLevel.
+func KVTProfileLevel_H264_Main_AutoLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Main_AutoLevel")))
 }
 
-// KVTProfileLevel_H264_Extended_5_0 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Extended_5_0 as an objc.ID.
-func KVTProfileLevel_H264_Extended_5_0() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Extended_5_0())
+// KVTProfileLevel_H264_Extended_5_0 returns the value of the constant kVTProfileLevel_H264_Extended_5_0.
+func KVTProfileLevel_H264_Extended_5_0() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Extended_5_0")))
 }
 
-// KVTProfileLevel_H264_Extended_AutoLevel returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_Extended_AutoLevel as an objc.ID.
-func KVTProfileLevel_H264_Extended_AutoLevel() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_Extended_AutoLevel())
+// KVTProfileLevel_H264_Extended_AutoLevel returns the value of the constant kVTProfileLevel_H264_Extended_AutoLevel.
+func KVTProfileLevel_H264_Extended_AutoLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_Extended_AutoLevel")))
 }
 
-// KVTProfileLevel_H264_High_3_0 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_High_3_0 as an objc.ID.
-func KVTProfileLevel_H264_High_3_0() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_High_3_0())
+// KVTProfileLevel_H264_High_3_0 returns the value of the constant kVTProfileLevel_H264_High_3_0.
+func KVTProfileLevel_H264_High_3_0() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_High_3_0")))
 }
 
-// KVTProfileLevel_H264_High_3_1 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_High_3_1 as an objc.ID.
-func KVTProfileLevel_H264_High_3_1() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_High_3_1())
+// KVTProfileLevel_H264_High_3_1 returns the value of the constant kVTProfileLevel_H264_High_3_1.
+func KVTProfileLevel_H264_High_3_1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_High_3_1")))
 }
 
-// KVTProfileLevel_H264_High_3_2 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_High_3_2 as an objc.ID.
-func KVTProfileLevel_H264_High_3_2() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_High_3_2())
+// KVTProfileLevel_H264_High_3_2 returns the value of the constant kVTProfileLevel_H264_High_3_2.
+func KVTProfileLevel_H264_High_3_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_High_3_2")))
 }
 
-// KVTProfileLevel_H264_High_4_0 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_High_4_0 as an objc.ID.
-func KVTProfileLevel_H264_High_4_0() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_High_4_0())
+// KVTProfileLevel_H264_High_4_0 returns the value of the constant kVTProfileLevel_H264_High_4_0.
+func KVTProfileLevel_H264_High_4_0() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_High_4_0")))
 }
 
-// KVTProfileLevel_H264_High_4_1 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_High_4_1 as an objc.ID.
-func KVTProfileLevel_H264_High_4_1() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_High_4_1())
+// KVTProfileLevel_H264_High_4_1 returns the value of the constant kVTProfileLevel_H264_High_4_1.
+func KVTProfileLevel_H264_High_4_1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_High_4_1")))
 }
 
-// KVTProfileLevel_H264_High_4_2 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_High_4_2 as an objc.ID.
-func KVTProfileLevel_H264_High_4_2() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_High_4_2())
+// KVTProfileLevel_H264_High_4_2 returns the value of the constant kVTProfileLevel_H264_High_4_2.
+func KVTProfileLevel_H264_High_4_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_High_4_2")))
 }
 
-// KVTProfileLevel_H264_High_5_0 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_High_5_0 as an objc.ID.
-func KVTProfileLevel_H264_High_5_0() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_High_5_0())
+// KVTProfileLevel_H264_High_5_0 returns the value of the constant kVTProfileLevel_H264_High_5_0.
+func KVTProfileLevel_H264_High_5_0() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_High_5_0")))
 }
 
-// KVTProfileLevel_H264_High_5_1 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_High_5_1 as an objc.ID.
-func KVTProfileLevel_H264_High_5_1() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_High_5_1())
+// KVTProfileLevel_H264_High_5_1 returns the value of the constant kVTProfileLevel_H264_High_5_1.
+func KVTProfileLevel_H264_High_5_1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_High_5_1")))
 }
 
-// KVTProfileLevel_H264_High_5_2 returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_High_5_2 as an objc.ID.
-func KVTProfileLevel_H264_High_5_2() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_High_5_2())
+// KVTProfileLevel_H264_High_5_2 returns the value of the constant kVTProfileLevel_H264_High_5_2.
+func KVTProfileLevel_H264_High_5_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_High_5_2")))
 }
 
-// KVTProfileLevel_H264_High_AutoLevel returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_High_AutoLevel as an objc.ID.
-func KVTProfileLevel_H264_High_AutoLevel() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_High_AutoLevel())
+// KVTProfileLevel_H264_High_AutoLevel returns the value of the constant kVTProfileLevel_H264_High_AutoLevel.
+func KVTProfileLevel_H264_High_AutoLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_High_AutoLevel")))
 }
 
-// KVTProfileLevel_H264_ConstrainedHigh_AutoLevel returns the value of the CoreFoundation reference constant kVTProfileLevel_H264_ConstrainedHigh_AutoLevel as an objc.ID.
-func KVTProfileLevel_H264_ConstrainedHigh_AutoLevel() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H264_ConstrainedHigh_AutoLevel())
+// KVTProfileLevel_H264_ConstrainedHigh_AutoLevel returns the value of the constant kVTProfileLevel_H264_ConstrainedHigh_AutoLevel.
+func KVTProfileLevel_H264_ConstrainedHigh_AutoLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H264_ConstrainedHigh_AutoLevel")))
 }
 
-// KVTProfileLevel_MP4V_Simple_L0 returns the value of the CoreFoundation reference constant kVTProfileLevel_MP4V_Simple_L0 as an objc.ID.
-func KVTProfileLevel_MP4V_Simple_L0() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_MP4V_Simple_L0())
+// KVTProfileLevel_MP4V_Simple_L0 returns the value of the constant kVTProfileLevel_MP4V_Simple_L0.
+func KVTProfileLevel_MP4V_Simple_L0() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_MP4V_Simple_L0")))
 }
 
-// KVTProfileLevel_MP4V_Simple_L1 returns the value of the CoreFoundation reference constant kVTProfileLevel_MP4V_Simple_L1 as an objc.ID.
-func KVTProfileLevel_MP4V_Simple_L1() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_MP4V_Simple_L1())
+// KVTProfileLevel_MP4V_Simple_L1 returns the value of the constant kVTProfileLevel_MP4V_Simple_L1.
+func KVTProfileLevel_MP4V_Simple_L1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_MP4V_Simple_L1")))
 }
 
-// KVTProfileLevel_MP4V_Simple_L2 returns the value of the CoreFoundation reference constant kVTProfileLevel_MP4V_Simple_L2 as an objc.ID.
-func KVTProfileLevel_MP4V_Simple_L2() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_MP4V_Simple_L2())
+// KVTProfileLevel_MP4V_Simple_L2 returns the value of the constant kVTProfileLevel_MP4V_Simple_L2.
+func KVTProfileLevel_MP4V_Simple_L2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_MP4V_Simple_L2")))
 }
 
-// KVTProfileLevel_MP4V_Simple_L3 returns the value of the CoreFoundation reference constant kVTProfileLevel_MP4V_Simple_L3 as an objc.ID.
-func KVTProfileLevel_MP4V_Simple_L3() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_MP4V_Simple_L3())
+// KVTProfileLevel_MP4V_Simple_L3 returns the value of the constant kVTProfileLevel_MP4V_Simple_L3.
+func KVTProfileLevel_MP4V_Simple_L3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_MP4V_Simple_L3")))
 }
 
-// KVTProfileLevel_MP4V_Main_L2 returns the value of the CoreFoundation reference constant kVTProfileLevel_MP4V_Main_L2 as an objc.ID.
-func KVTProfileLevel_MP4V_Main_L2() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_MP4V_Main_L2())
+// KVTProfileLevel_MP4V_Main_L2 returns the value of the constant kVTProfileLevel_MP4V_Main_L2.
+func KVTProfileLevel_MP4V_Main_L2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_MP4V_Main_L2")))
 }
 
-// KVTProfileLevel_MP4V_Main_L3 returns the value of the CoreFoundation reference constant kVTProfileLevel_MP4V_Main_L3 as an objc.ID.
-func KVTProfileLevel_MP4V_Main_L3() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_MP4V_Main_L3())
+// KVTProfileLevel_MP4V_Main_L3 returns the value of the constant kVTProfileLevel_MP4V_Main_L3.
+func KVTProfileLevel_MP4V_Main_L3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_MP4V_Main_L3")))
 }
 
-// KVTProfileLevel_MP4V_Main_L4 returns the value of the CoreFoundation reference constant kVTProfileLevel_MP4V_Main_L4 as an objc.ID.
-func KVTProfileLevel_MP4V_Main_L4() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_MP4V_Main_L4())
+// KVTProfileLevel_MP4V_Main_L4 returns the value of the constant kVTProfileLevel_MP4V_Main_L4.
+func KVTProfileLevel_MP4V_Main_L4() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_MP4V_Main_L4")))
 }
 
-// KVTProfileLevel_MP4V_AdvancedSimple_L0 returns the value of the CoreFoundation reference constant kVTProfileLevel_MP4V_AdvancedSimple_L0 as an objc.ID.
-func KVTProfileLevel_MP4V_AdvancedSimple_L0() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_MP4V_AdvancedSimple_L0())
+// KVTProfileLevel_MP4V_AdvancedSimple_L0 returns the value of the constant kVTProfileLevel_MP4V_AdvancedSimple_L0.
+func KVTProfileLevel_MP4V_AdvancedSimple_L0() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_MP4V_AdvancedSimple_L0")))
 }
 
-// KVTProfileLevel_MP4V_AdvancedSimple_L1 returns the value of the CoreFoundation reference constant kVTProfileLevel_MP4V_AdvancedSimple_L1 as an objc.ID.
-func KVTProfileLevel_MP4V_AdvancedSimple_L1() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_MP4V_AdvancedSimple_L1())
+// KVTProfileLevel_MP4V_AdvancedSimple_L1 returns the value of the constant kVTProfileLevel_MP4V_AdvancedSimple_L1.
+func KVTProfileLevel_MP4V_AdvancedSimple_L1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_MP4V_AdvancedSimple_L1")))
 }
 
-// KVTProfileLevel_MP4V_AdvancedSimple_L2 returns the value of the CoreFoundation reference constant kVTProfileLevel_MP4V_AdvancedSimple_L2 as an objc.ID.
-func KVTProfileLevel_MP4V_AdvancedSimple_L2() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_MP4V_AdvancedSimple_L2())
+// KVTProfileLevel_MP4V_AdvancedSimple_L2 returns the value of the constant kVTProfileLevel_MP4V_AdvancedSimple_L2.
+func KVTProfileLevel_MP4V_AdvancedSimple_L2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_MP4V_AdvancedSimple_L2")))
 }
 
-// KVTProfileLevel_MP4V_AdvancedSimple_L3 returns the value of the CoreFoundation reference constant kVTProfileLevel_MP4V_AdvancedSimple_L3 as an objc.ID.
-func KVTProfileLevel_MP4V_AdvancedSimple_L3() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_MP4V_AdvancedSimple_L3())
+// KVTProfileLevel_MP4V_AdvancedSimple_L3 returns the value of the constant kVTProfileLevel_MP4V_AdvancedSimple_L3.
+func KVTProfileLevel_MP4V_AdvancedSimple_L3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_MP4V_AdvancedSimple_L3")))
 }
 
-// KVTProfileLevel_MP4V_AdvancedSimple_L4 returns the value of the CoreFoundation reference constant kVTProfileLevel_MP4V_AdvancedSimple_L4 as an objc.ID.
-func KVTProfileLevel_MP4V_AdvancedSimple_L4() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_MP4V_AdvancedSimple_L4())
+// KVTProfileLevel_MP4V_AdvancedSimple_L4 returns the value of the constant kVTProfileLevel_MP4V_AdvancedSimple_L4.
+func KVTProfileLevel_MP4V_AdvancedSimple_L4() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_MP4V_AdvancedSimple_L4")))
 }
 
-// KVTProfileLevel_H263_Profile0_Level10 returns the value of the CoreFoundation reference constant kVTProfileLevel_H263_Profile0_Level10 as an objc.ID.
-func KVTProfileLevel_H263_Profile0_Level10() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H263_Profile0_Level10())
+// KVTProfileLevel_H263_Profile0_Level10 returns the value of the constant kVTProfileLevel_H263_Profile0_Level10.
+func KVTProfileLevel_H263_Profile0_Level10() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H263_Profile0_Level10")))
 }
 
-// KVTProfileLevel_H263_Profile0_Level45 returns the value of the CoreFoundation reference constant kVTProfileLevel_H263_Profile0_Level45 as an objc.ID.
-func KVTProfileLevel_H263_Profile0_Level45() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H263_Profile0_Level45())
+// KVTProfileLevel_H263_Profile0_Level45 returns the value of the constant kVTProfileLevel_H263_Profile0_Level45.
+func KVTProfileLevel_H263_Profile0_Level45() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H263_Profile0_Level45")))
 }
 
-// KVTProfileLevel_H263_Profile3_Level45 returns the value of the CoreFoundation reference constant kVTProfileLevel_H263_Profile3_Level45 as an objc.ID.
-func KVTProfileLevel_H263_Profile3_Level45() objc.ID {
-	return purego.CFConstant(raw.KVTProfileLevel_H263_Profile3_Level45())
+// KVTProfileLevel_H263_Profile3_Level45 returns the value of the constant kVTProfileLevel_H263_Profile3_Level45.
+func KVTProfileLevel_H263_Profile3_Level45() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProfileLevel_H263_Profile3_Level45")))
 }
 
-// @constant	kVTCompressionPropertyKey_OutputBitDepth @abstract When set, requires the encoder to output bitstream with the requested bit depth, if supported by the configured profile level setting. In the absence of this property, the video encoder will assume the highest bit depth allowable by the configured profile level setting.
-// KVTCompressionPropertyKey_OutputBitDepth returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_OutputBitDepth as an objc.ID.
-func KVTCompressionPropertyKey_OutputBitDepth() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_OutputBitDepth())
+// When set, requires the encoder to output bitstream with the requested bit depth, if supported by the configured profile level setting. In the absence of this property, the video encoder will assume the highest bit depth allowable by the configured profile level setting.
+// KVTCompressionPropertyKey_OutputBitDepth returns the value of the constant kVTCompressionPropertyKey_OutputBitDepth.
+func KVTCompressionPropertyKey_OutputBitDepth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_OutputBitDepth")))
 }
 
-// @constant    kVTCompressionPropertyKey_HDRMetadataInsertionMode @abstract The mode for HDR metadata in the output bitstream. @discussion If set to kVTHDRMetadataInsertionMode_None, no HDR metadata will be present in the output bitstream.  For other modes, VTCompressionSession will determine what type of HDR metadata to insert based on the output color space.  e.g. DolbyVision, HDR10, etc. This property has no effect if the output color space is not HDR, or if there is currently no underlying support for the HDR format. kVTHDRMetadataInsertionMode_RequestSDRRangePreservation will only insert metadata when the following is true: transfer function is kCVImageBufferTransferFunction_SMPTE_ST_2084_PQ color primaries is kCVImageBufferColorPrimaries_ITU_R_2020 color matrix is kCVImageBufferYCbCrMatrix_ITU_R_2020
-// KVTCompressionPropertyKey_HDRMetadataInsertionMode returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_HDRMetadataInsertionMode as an objc.ID.
-func KVTCompressionPropertyKey_HDRMetadataInsertionMode() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_HDRMetadataInsertionMode())
+// The mode for HDR metadata in the output bitstream. If set to kVTHDRMetadataInsertionMode_None, no HDR metadata will be present in the output bitstream.  For other modes, VTCompressionSession will determine what type of HDR metadata to insert based on the output color space.  e.g. DolbyVision, HDR10, etc. This property has no effect if the output color space is not HDR, or if there is currently no underlying support for the HDR format. kVTHDRMetadataInsertionMode_RequestSDRRangePreservation will only insert metadata when the following is true: transfer function is kCVImageBufferTransferFunction_SMPTE_ST_2084_PQ color primaries is kCVImageBufferColorPrimaries_ITU_R_2020 color matrix is kCVImageBufferYCbCrMatrix_ITU_R_2020
+// KVTCompressionPropertyKey_HDRMetadataInsertionMode returns the value of the constant kVTCompressionPropertyKey_HDRMetadataInsertionMode.
+func KVTCompressionPropertyKey_HDRMetadataInsertionMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_HDRMetadataInsertionMode")))
 }
 
-// KVTHDRMetadataInsertionMode_None returns the value of the CoreFoundation reference constant kVTHDRMetadataInsertionMode_None as an objc.ID.
-func KVTHDRMetadataInsertionMode_None() objc.ID {
-	return purego.CFConstant(raw.KVTHDRMetadataInsertionMode_None())
+// KVTHDRMetadataInsertionMode_None returns the value of the constant kVTHDRMetadataInsertionMode_None.
+func KVTHDRMetadataInsertionMode_None() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTHDRMetadataInsertionMode_None")))
 }
 
-// KVTHDRMetadataInsertionMode_Auto returns the value of the CoreFoundation reference constant kVTHDRMetadataInsertionMode_Auto as an objc.ID.
-func KVTHDRMetadataInsertionMode_Auto() objc.ID {
-	return purego.CFConstant(raw.KVTHDRMetadataInsertionMode_Auto())
+// KVTHDRMetadataInsertionMode_Auto returns the value of the constant kVTHDRMetadataInsertionMode_Auto.
+func KVTHDRMetadataInsertionMode_Auto() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTHDRMetadataInsertionMode_Auto")))
 }
 
-// KVTHDRMetadataInsertionMode_RequestSDRRangePreservation returns the value of the CoreFoundation reference constant kVTHDRMetadataInsertionMode_RequestSDRRangePreservation as an objc.ID.
-func KVTHDRMetadataInsertionMode_RequestSDRRangePreservation() objc.ID {
-	return purego.CFConstant(raw.KVTHDRMetadataInsertionMode_RequestSDRRangePreservation())
+// KVTHDRMetadataInsertionMode_RequestSDRRangePreservation returns the value of the constant kVTHDRMetadataInsertionMode_RequestSDRRangePreservation.
+func KVTHDRMetadataInsertionMode_RequestSDRRangePreservation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTHDRMetadataInsertionMode_RequestSDRRangePreservation")))
 }
 
-// @constant	kVTCompressionPropertyKey_H264EntropyMode @abstract The entropy encoding mode for H.264 compression. @discussion If supported by an H.264 encoder, this property controls whether the encoder should use Context-based Adaptive Variable Length Coding (CAVLC) or Context-based Adaptive Binary Arithmetic Coding (CABAC). CABAC generally gives better compression at the expense of higher computational overhead. The default value is encoder-specific and may change depending on other encoder settings. Care should be taken when using this property -- changes may result in a configuration which is not compatible with a requested Profile and Level.  Results in this case are undefined, and could include encode errors or a non-compliant output stream.
-// KVTCompressionPropertyKey_H264EntropyMode returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_H264EntropyMode as an objc.ID.
-func KVTCompressionPropertyKey_H264EntropyMode() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_H264EntropyMode())
+// The entropy encoding mode for H.264 compression. If supported by an H.264 encoder, this property controls whether the encoder should use Context-based Adaptive Variable Length Coding (CAVLC) or Context-based Adaptive Binary Arithmetic Coding (CABAC). CABAC generally gives better compression at the expense of higher computational overhead. The default value is encoder-specific and may change depending on other encoder settings. Care should be taken when using this property -- changes may result in a configuration which is not compatible with a requested Profile and Level.  Results in this case are undefined, and could include encode errors or a non-compliant output stream.
+// KVTCompressionPropertyKey_H264EntropyMode returns the value of the constant kVTCompressionPropertyKey_H264EntropyMode.
+func KVTCompressionPropertyKey_H264EntropyMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_H264EntropyMode")))
 }
 
-// KVTH264EntropyMode_CAVLC returns the value of the CoreFoundation reference constant kVTH264EntropyMode_CAVLC as an objc.ID.
-func KVTH264EntropyMode_CAVLC() objc.ID { return purego.CFConstant(raw.KVTH264EntropyMode_CAVLC()) }
+// KVTH264EntropyMode_CAVLC returns the value of the constant kVTH264EntropyMode_CAVLC.
+func KVTH264EntropyMode_CAVLC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTH264EntropyMode_CAVLC")))
+}
 
-// KVTH264EntropyMode_CABAC returns the value of the CoreFoundation reference constant kVTH264EntropyMode_CABAC as an objc.ID.
-func KVTH264EntropyMode_CABAC() objc.ID { return purego.CFConstant(raw.KVTH264EntropyMode_CABAC()) }
+// KVTH264EntropyMode_CABAC returns the value of the constant kVTH264EntropyMode_CABAC.
+func KVTH264EntropyMode_CABAC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTH264EntropyMode_CABAC")))
+}
 
-// @constant	kVTCompressionPropertyKey_Depth @abstract The pixel depth of the encoded video. @discussion This property is only supported by video encoders for formats that are tied to particular pixel formats (eg, 16-bit RGB, 24-bit RGB).
-// KVTCompressionPropertyKey_Depth returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_Depth as an objc.ID.
-func KVTCompressionPropertyKey_Depth() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_Depth())
+// The pixel depth of the encoded video. This property is only supported by video encoders for formats that are tied to particular pixel formats (eg, 16-bit RGB, 24-bit RGB).
+// KVTCompressionPropertyKey_Depth returns the value of the constant kVTCompressionPropertyKey_Depth.
+func KVTCompressionPropertyKey_Depth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_Depth")))
 }
 
-// @constant	kVTCompressionPropertyKey_PreserveAlphaChannel @abstract Instructs the encoder to encode or discard the alpha channel of input video frames @discussion This property allows a client to  specify whether or not the alpha channel in the source pixelBuffers should be encoded. The client may set this to kCFBooleanFalse in cases where they are not interested in preserving alpha, or if the alpha channel is known to be fully opaque. This property is not supported by all encoders.
-// KVTCompressionPropertyKey_PreserveAlphaChannel returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_PreserveAlphaChannel as an objc.ID.
-func KVTCompressionPropertyKey_PreserveAlphaChannel() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_PreserveAlphaChannel())
+// Instructs the encoder to encode or discard the alpha channel of input video frames This property allows a client to  specify whether or not the alpha channel in the source pixelBuffers should be encoded. The client may set this to kCFBooleanFalse in cases where they are not interested in preserving alpha, or if the alpha channel is known to be fully opaque. This property is not supported by all encoders.
+// KVTCompressionPropertyKey_PreserveAlphaChannel returns the value of the constant kVTCompressionPropertyKey_PreserveAlphaChannel.
+func KVTCompressionPropertyKey_PreserveAlphaChannel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_PreserveAlphaChannel")))
 }
 
-// @constant	kVTCompressionPropertyKey_MaxFrameDelayCount @abstract The maximum frame delay count is the maximum number of frames that a compressor is allowed to hold before it must output a compressed frame. @discussion It limits the number of frames that may be held in the "compression window". If the maximum frame delay count is M, then before the call to encode frame N returns, frame N-M must have been emitted. The default is kVTUnlimitedFrameDelayCount, which sets no limit on the compression window.
-// KVTCompressionPropertyKey_MaxFrameDelayCount returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_MaxFrameDelayCount as an objc.ID.
-func KVTCompressionPropertyKey_MaxFrameDelayCount() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_MaxFrameDelayCount())
+// The maximum frame delay count is the maximum number of frames that a compressor is allowed to hold before it must output a compressed frame. It limits the number of frames that may be held in the "compression window". If the maximum frame delay count is M, then before the call to encode frame N returns, frame N-M must have been emitted. The default is kVTUnlimitedFrameDelayCount, which sets no limit on the compression window.
+// KVTCompressionPropertyKey_MaxFrameDelayCount returns the value of the constant kVTCompressionPropertyKey_MaxFrameDelayCount.
+func KVTCompressionPropertyKey_MaxFrameDelayCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_MaxFrameDelayCount")))
 }
 
-// @constant	kVTCompressionPropertyKey_MaxH264SliceBytes @abstract Specifies the maximum slice size for H.264 encoding @discussion If supported by an H.264 encoder, the value limits the size in bytes of slices produced by the encoder, where possible. By default, no limit is specified.  A value of zero implies default behavior.
-// KVTCompressionPropertyKey_MaxH264SliceBytes returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_MaxH264SliceBytes as an objc.ID.
-func KVTCompressionPropertyKey_MaxH264SliceBytes() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_MaxH264SliceBytes())
+// Specifies the maximum slice size for H.264 encoding If supported by an H.264 encoder, the value limits the size in bytes of slices produced by the encoder, where possible. By default, no limit is specified.  A value of zero implies default behavior.
+// KVTCompressionPropertyKey_MaxH264SliceBytes returns the value of the constant kVTCompressionPropertyKey_MaxH264SliceBytes.
+func KVTCompressionPropertyKey_MaxH264SliceBytes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_MaxH264SliceBytes")))
 }
 
-// @constant	kVTCompressionPropertyKey_RealTime @abstract Hints the video encoder that compression is, or is not, being performed in real time. @discussion For offline compression, clients are advised to set this property to kCFBooleanFalse. This indicates that the timeline of the frames is not connected to wall-clock time at all. This allows the video encoder to run either slower than real-time or faster than real-time, depending upon the situation and device capabilities. For real-time compression, clients are advised to set this property to kCFBooleanTrue. This indicates that the timeline of frames is connected to real time (so, for example, the client expects to encode one second of frames each second, on average). In such a case, it is important that encoding keep up, but it is also not valuable to encode substantially faster than real time. When this property is set to kCFBooleanTrue, the video encoder may use the value of the kVTCompressionPropertyKey_ExpectedFrameRate property to optimize energy usage, by anticipating that encoding requests will happen at this rate. By default, this property is NULL, indicating unknown.
-// KVTCompressionPropertyKey_RealTime returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_RealTime as an objc.ID.
-func KVTCompressionPropertyKey_RealTime() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_RealTime())
+// Hints the video encoder that compression is, or is not, being performed in real time. For offline compression, clients are advised to set this property to kCFBooleanFalse. This indicates that the timeline of the frames is not connected to wall-clock time at all. This allows the video encoder to run either slower than real-time or faster than real-time, depending upon the situation and device capabilities. For real-time compression, clients are advised to set this property to kCFBooleanTrue. This indicates that the timeline of frames is connected to real time (so, for example, the client expects to encode one second of frames each second, on average). In such a case, it is important that encoding keep up, but it is also not valuable to encode substantially faster than real time. When this property is set to kCFBooleanTrue, the video encoder may use the value of the kVTCompressionPropertyKey_ExpectedFrameRate property to optimize energy usage, by anticipating that encoding requests will happen at this rate. By default, this property is NULL, indicating unknown.
+// KVTCompressionPropertyKey_RealTime returns the value of the constant kVTCompressionPropertyKey_RealTime.
+func KVTCompressionPropertyKey_RealTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_RealTime")))
 }
 
-// @constant	kVTCompressionPropertyKey_MaximizePowerEfficiency @abstract Hints to the video encoder that it should maximize power efficiency during encode. @discussion For compression where the client is operating in the background, clients may set this property to kCFBooleanTrue, which indicates that the encoder can take steps to minimize impact on power usage and other system activity. Setting the property to NULL is equivalent to setting it to kCFBooleanFalse. Not all video encoders support this property. By default, this property is NULL. If the kVTCompressionPropertyKey_RealTime property is set to kCFBooleanTrue, the video encoder may act as though this property were set to kCFBooleanFalse.
-// KVTCompressionPropertyKey_MaximizePowerEfficiency returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_MaximizePowerEfficiency as an objc.ID.
-func KVTCompressionPropertyKey_MaximizePowerEfficiency() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_MaximizePowerEfficiency())
+// Hints to the video encoder that it should maximize power efficiency during encode. For compression where the client is operating in the background, clients may set this property to kCFBooleanTrue, which indicates that the encoder can take steps to minimize impact on power usage and other system activity. Setting the property to NULL is equivalent to setting it to kCFBooleanFalse. Not all video encoders support this property. By default, this property is NULL. If the kVTCompressionPropertyKey_RealTime property is set to kCFBooleanTrue, the video encoder may act as though this property were set to kCFBooleanFalse.
+// KVTCompressionPropertyKey_MaximizePowerEfficiency returns the value of the constant kVTCompressionPropertyKey_MaximizePowerEfficiency.
+func KVTCompressionPropertyKey_MaximizePowerEfficiency() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_MaximizePowerEfficiency")))
 }
 
-// @constant	kVTCompressionPropertyKey_SourceFrameCount @abstract Indicates the number of source frames, if known. @discussion This property allows a client to give the video encoder advance guidance as to how many frames will be encoded. If nonzero, this should be the exact number of times that the client calls VTCompressionSessionEncodeFrame in each pass. The default is 0, which indicates that the number of source frames is not known.
-// KVTCompressionPropertyKey_SourceFrameCount returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_SourceFrameCount as an objc.ID.
-func KVTCompressionPropertyKey_SourceFrameCount() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_SourceFrameCount())
+// Indicates the number of source frames, if known. This property allows a client to give the video encoder advance guidance as to how many frames will be encoded. If nonzero, this should be the exact number of times that the client calls VTCompressionSessionEncodeFrame in each pass. The default is 0, which indicates that the number of source frames is not known.
+// KVTCompressionPropertyKey_SourceFrameCount returns the value of the constant kVTCompressionPropertyKey_SourceFrameCount.
+func KVTCompressionPropertyKey_SourceFrameCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_SourceFrameCount")))
 }
 
-// @constant	kVTCompressionPropertyKey_ExpectedFrameRate @abstract Indicates the expected frame rate of the video to be encoded. @discussion The frame rate is measured in frames per second. This property is used to inform the encoder of the expected cadence of the presentation time stamp values of frames that will be submitted to the encoder. The actual frame rate may vary, and will depend on the frame durations calculated by the difference between subsequent presentation time stamps. If kVTCompressionPropertyKey_RealTime has been set to true, the ExpectedFrameRate may be used to optimize energy usage as well as perform internal encoder configuration before compression begins. If kVTCompressionPropertyKey_RealTime is not set, or has been set to false, the ExpectedFrameRate is still helpful and allows the encoder to optimize internal encoder configuration before compression begins. By default, the property has a value of zero indicating "unknown".
-// KVTCompressionPropertyKey_ExpectedFrameRate returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_ExpectedFrameRate as an objc.ID.
-func KVTCompressionPropertyKey_ExpectedFrameRate() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_ExpectedFrameRate())
+// Indicates the expected frame rate of the video to be encoded. The frame rate is measured in frames per second. This property is used to inform the encoder of the expected cadence of the presentation time stamp values of frames that will be submitted to the encoder. The actual frame rate may vary, and will depend on the frame durations calculated by the difference between subsequent presentation time stamps. If kVTCompressionPropertyKey_RealTime has been set to true, the ExpectedFrameRate may be used to optimize energy usage as well as perform internal encoder configuration before compression begins. If kVTCompressionPropertyKey_RealTime is not set, or has been set to false, the ExpectedFrameRate is still helpful and allows the encoder to optimize internal encoder configuration before compression begins. By default, the property has a value of zero indicating "unknown".
+// KVTCompressionPropertyKey_ExpectedFrameRate returns the value of the constant kVTCompressionPropertyKey_ExpectedFrameRate.
+func KVTCompressionPropertyKey_ExpectedFrameRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_ExpectedFrameRate")))
 }
 
-// @constant	kVTCompressionPropertyKey_MaximumRealTimeFrameRate @abstract Indicates the maximum real time rate at which frames could be submitted to the VTCompressionSession @discussion The frame rate is measured in frames per second. This property can be used to inform the encoder of the maximum rate that frames could be submitted to the encoder during realtime encoding.  This allows the encoder to configure itself to ensure this capability. This property can only be used when kVTCompressionPropertyKey_RealTime has been set to true. Unlike kVTCompressionPropertyKey_ExpectedFrameRate, this property informs the maximum possible rate that the VTCompressionSession could see, not the average frame rate that is expected in normal operation. By default, the property has a value of zero indicating "unknown".
-// KVTCompressionPropertyKey_MaximumRealTimeFrameRate returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_MaximumRealTimeFrameRate as an objc.ID.
-func KVTCompressionPropertyKey_MaximumRealTimeFrameRate() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_MaximumRealTimeFrameRate())
+// Indicates the maximum real time rate at which frames could be submitted to the VTCompressionSession The frame rate is measured in frames per second. This property can be used to inform the encoder of the maximum rate that frames could be submitted to the encoder during realtime encoding.  This allows the encoder to configure itself to ensure this capability. This property can only be used when kVTCompressionPropertyKey_RealTime has been set to true. Unlike kVTCompressionPropertyKey_ExpectedFrameRate, this property informs the maximum possible rate that the VTCompressionSession could see, not the average frame rate that is expected in normal operation. By default, the property has a value of zero indicating "unknown".
+// KVTCompressionPropertyKey_MaximumRealTimeFrameRate returns the value of the constant kVTCompressionPropertyKey_MaximumRealTimeFrameRate.
+func KVTCompressionPropertyKey_MaximumRealTimeFrameRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_MaximumRealTimeFrameRate")))
 }
 
-// @constant	kVTCompressionPropertyKey_BaseLayerFrameRateFraction @abstract This property indicates the desired frame rate fraction of the base layer. @discussion This property indicates the fraction of total frames submitted that should be encoded in the base layer. For example, a value of 0.5 means that half of the frames are in the base layer, and half are in the enhancement layer.
-// KVTCompressionPropertyKey_BaseLayerFrameRateFraction returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_BaseLayerFrameRateFraction as an objc.ID.
-func KVTCompressionPropertyKey_BaseLayerFrameRateFraction() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_BaseLayerFrameRateFraction())
+// This property indicates the desired frame rate fraction of the base layer. This property indicates the fraction of total frames submitted that should be encoded in the base layer. For example, a value of 0.5 means that half of the frames are in the base layer, and half are in the enhancement layer.
+// KVTCompressionPropertyKey_BaseLayerFrameRateFraction returns the value of the constant kVTCompressionPropertyKey_BaseLayerFrameRateFraction.
+func KVTCompressionPropertyKey_BaseLayerFrameRateFraction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_BaseLayerFrameRateFraction")))
 }
 
-// @constant	kVTCompressionPropertyKey_BaseLayerBitRateFraction @abstract This property indicates the desired bit rate fraction of the base layer @discussion This is not a hard limit; the encoder will attempt to satisfy this ratio when possible. If not set, the encoder will manage the ratio. For example: If the target bitrate is set to 500kbps and kVTCompressionPropertyKey_BaseLayerBitRateFraction is set to 0.6, the base layer will be given a budget of 300kbps and the enhancement layer 200kbps.
-// KVTCompressionPropertyKey_BaseLayerBitRateFraction returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_BaseLayerBitRateFraction as an objc.ID.
-func KVTCompressionPropertyKey_BaseLayerBitRateFraction() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_BaseLayerBitRateFraction())
+// This property indicates the desired bit rate fraction of the base layer This is not a hard limit; the encoder will attempt to satisfy this ratio when possible. If not set, the encoder will manage the ratio. For example: If the target bitrate is set to 500kbps and kVTCompressionPropertyKey_BaseLayerBitRateFraction is set to 0.6, the base layer will be given a budget of 300kbps and the enhancement layer 200kbps.
+// KVTCompressionPropertyKey_BaseLayerBitRateFraction returns the value of the constant kVTCompressionPropertyKey_BaseLayerBitRateFraction.
+func KVTCompressionPropertyKey_BaseLayerBitRateFraction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_BaseLayerBitRateFraction")))
 }
 
-// @constant	kVTCompressionPropertyKey_ExpectedDuration @abstract Indicates the expected total duration for the compression session, if known. @discussion By default, this is zero, indicating "unknown".
-// KVTCompressionPropertyKey_ExpectedDuration returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_ExpectedDuration as an objc.ID.
-func KVTCompressionPropertyKey_ExpectedDuration() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_ExpectedDuration())
+// Indicates the expected total duration for the compression session, if known. By default, this is zero, indicating "unknown".
+// KVTCompressionPropertyKey_ExpectedDuration returns the value of the constant kVTCompressionPropertyKey_ExpectedDuration.
+func KVTCompressionPropertyKey_ExpectedDuration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_ExpectedDuration")))
 }
 
-// @constant	kVTCompressionPropertyKey_BaseLayerFrameRate @abstract This property indicates the desired frame rate for the base temporal layer used in hierarchical video encoding. @discussion The frame rate is measured in frames per second. This property is only implemented by encoders which support hierarchical frame encoding, and requests that this encoding feature be enabled.
-// KVTCompressionPropertyKey_BaseLayerFrameRate returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_BaseLayerFrameRate as an objc.ID.
-func KVTCompressionPropertyKey_BaseLayerFrameRate() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_BaseLayerFrameRate())
+// This property indicates the desired frame rate for the base temporal layer used in hierarchical video encoding. The frame rate is measured in frames per second. This property is only implemented by encoders which support hierarchical frame encoding, and requests that this encoding feature be enabled.
+// KVTCompressionPropertyKey_BaseLayerFrameRate returns the value of the constant kVTCompressionPropertyKey_BaseLayerFrameRate.
+func KVTCompressionPropertyKey_BaseLayerFrameRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_BaseLayerFrameRate")))
 }
 
-// @constant	kVTCompressionPropertyKey_ReferenceBufferCount @abstract The client will be able to control the the maximum allowed ReferenceBufferCount using this optional key. @discussion This is typically used to force the encoder to use lower count than allowed by the stantard for a level/profile. The encoder will fail and  report an error if the requested value exceeds the limit set by the standard for such a level/profile.
-// KVTCompressionPropertyKey_ReferenceBufferCount returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_ReferenceBufferCount as an objc.ID.
-func KVTCompressionPropertyKey_ReferenceBufferCount() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_ReferenceBufferCount())
+// The client will be able to control the the maximum allowed ReferenceBufferCount using this optional key. This is typically used to force the encoder to use lower count than allowed by the stantard for a level/profile. The encoder will fail and  report an error if the requested value exceeds the limit set by the standard for such a level/profile.
+// KVTCompressionPropertyKey_ReferenceBufferCount returns the value of the constant kVTCompressionPropertyKey_ReferenceBufferCount.
+func KVTCompressionPropertyKey_ReferenceBufferCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_ReferenceBufferCount")))
 }
 
-// @constant	kVTCompressionPropertyKey_CalculateMeanSquaredError @abstract This property requests that the encoder measure and output the Mean Squared Error(MSE) quality metric. @discussion The MSE value returned may be measured using an internal representation of the decoded frame which may lack filtering or processing present in the actual decoded frame.  Because of this, there may be a small delta between the reported MSE and the true MSE. If supported, the MSE values will be returned as sample buffer attachments on the encoded frame using the kVTSampleAttachmentKey_QualityMetrics key.
-// KVTCompressionPropertyKey_CalculateMeanSquaredError returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_CalculateMeanSquaredError as an objc.ID.
-func KVTCompressionPropertyKey_CalculateMeanSquaredError() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_CalculateMeanSquaredError())
+// This property requests that the encoder measure and output the Mean Squared Error(MSE) quality metric. The MSE value returned may be measured using an internal representation of the decoded frame which may lack filtering or processing present in the actual decoded frame.  Because of this, there may be a small delta between the reported MSE and the true MSE. If supported, the MSE values will be returned as sample buffer attachments on the encoded frame using the kVTSampleAttachmentKey_QualityMetrics key.
+// KVTCompressionPropertyKey_CalculateMeanSquaredError returns the value of the constant kVTCompressionPropertyKey_CalculateMeanSquaredError.
+func KVTCompressionPropertyKey_CalculateMeanSquaredError() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_CalculateMeanSquaredError")))
 }
 
-// @constant	kVTSampleAttachmentKey_QualityMetrics @abstract The value for this key contain quality-related metadata from the video encoder for a video frame. @discussion The video encoder will attach this via the CMSampleBufferGetSampleAttachmentsArray interface before emitting the sample buffer.
-// KVTSampleAttachmentKey_QualityMetrics returns the value of the CoreFoundation reference constant kVTSampleAttachmentKey_QualityMetrics as an objc.ID.
-func KVTSampleAttachmentKey_QualityMetrics() objc.ID {
-	return purego.CFConstant(raw.KVTSampleAttachmentKey_QualityMetrics())
+// The value for this key contain quality-related metadata from the video encoder for a video frame. The video encoder will attach this via the CMSampleBufferGetSampleAttachmentsArray interface before emitting the sample buffer.
+// KVTSampleAttachmentKey_QualityMetrics returns the value of the constant kVTSampleAttachmentKey_QualityMetrics.
+func KVTSampleAttachmentKey_QualityMetrics() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTSampleAttachmentKey_QualityMetrics")))
 }
 
-// @constant	kVTSampleAttachmentQualityMetricsKey_LumaMeanSquaredError @abstract Key for mean squared error (MSE) of the encoded Luma channel from the video encoder. @discussion For single-view video, a CFNumber value is returned. For multi-view video, a CFArray value is returned, and each element (CFNumber) in the CFArray includes MSE for the corresponding view. The video encoder will attach this in kVTSampleAttachmentKey_QualityMetrics via the CMSampleBufferGetSampleAttachmentsArray interface before emitting the sample buffer.
-// KVTSampleAttachmentQualityMetricsKey_LumaMeanSquaredError returns the value of the CoreFoundation reference constant kVTSampleAttachmentQualityMetricsKey_LumaMeanSquaredError as an objc.ID.
-func KVTSampleAttachmentQualityMetricsKey_LumaMeanSquaredError() objc.ID {
-	return purego.CFConstant(raw.KVTSampleAttachmentQualityMetricsKey_LumaMeanSquaredError())
+// Key for mean squared error (MSE) of the encoded Luma channel from the video encoder. For single-view video, a CFNumber value is returned. For multi-view video, a CFArray value is returned, and each element (CFNumber) in the CFArray includes MSE for the corresponding view. The video encoder will attach this in kVTSampleAttachmentKey_QualityMetrics via the CMSampleBufferGetSampleAttachmentsArray interface before emitting the sample buffer.
+// KVTSampleAttachmentQualityMetricsKey_LumaMeanSquaredError returns the value of the constant kVTSampleAttachmentQualityMetricsKey_LumaMeanSquaredError.
+func KVTSampleAttachmentQualityMetricsKey_LumaMeanSquaredError() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTSampleAttachmentQualityMetricsKey_LumaMeanSquaredError")))
 }
 
-// @constant	kVTSampleAttachmentQualityMetricsKey_ChromaBlueMeanSquaredError @abstract Key for mean squared error (MSE) of the encoded Chroma Blue channel from the video encoder. @discussion For single-view video, a CFNumber value is returned. For multi-view video, a CFArray value is returned, and each element (CFNumber) in the CFArray includes MSE for the corresponding view. The video encoder will attach this in kVTSampleAttachmentKey_QualityMetrics via the CMSampleBufferGetSampleAttachmentsArray interface before emitting the sample buffer.
-// KVTSampleAttachmentQualityMetricsKey_ChromaBlueMeanSquaredError returns the value of the CoreFoundation reference constant kVTSampleAttachmentQualityMetricsKey_ChromaBlueMeanSquaredError as an objc.ID.
-func KVTSampleAttachmentQualityMetricsKey_ChromaBlueMeanSquaredError() objc.ID {
-	return purego.CFConstant(raw.KVTSampleAttachmentQualityMetricsKey_ChromaBlueMeanSquaredError())
+// Key for mean squared error (MSE) of the encoded Chroma Blue channel from the video encoder. For single-view video, a CFNumber value is returned. For multi-view video, a CFArray value is returned, and each element (CFNumber) in the CFArray includes MSE for the corresponding view. The video encoder will attach this in kVTSampleAttachmentKey_QualityMetrics via the CMSampleBufferGetSampleAttachmentsArray interface before emitting the sample buffer.
+// KVTSampleAttachmentQualityMetricsKey_ChromaBlueMeanSquaredError returns the value of the constant kVTSampleAttachmentQualityMetricsKey_ChromaBlueMeanSquaredError.
+func KVTSampleAttachmentQualityMetricsKey_ChromaBlueMeanSquaredError() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTSampleAttachmentQualityMetricsKey_ChromaBlueMeanSquaredError")))
 }
 
-// @constant	kVTSampleAttachmentQualityMetricsKey_ChromaRedMeanSquaredError @abstract Key for mean squared error (MSE) of the encoded Chroma Red channel from the video encoder. @discussion For single-view video, a CFNumber value is returned. For multi-view video, a CFArray value is returned, and each element (CFNumber) in the CFArray includes MSE for the corresponding view. The video encoder will attach this in kVTSampleAttachmentKey_QualityMetrics via the CMSampleBufferGetSampleAttachmentsArray interface before emitting the sample buffer.
-// KVTSampleAttachmentQualityMetricsKey_ChromaRedMeanSquaredError returns the value of the CoreFoundation reference constant kVTSampleAttachmentQualityMetricsKey_ChromaRedMeanSquaredError as an objc.ID.
-func KVTSampleAttachmentQualityMetricsKey_ChromaRedMeanSquaredError() objc.ID {
-	return purego.CFConstant(raw.KVTSampleAttachmentQualityMetricsKey_ChromaRedMeanSquaredError())
+// Key for mean squared error (MSE) of the encoded Chroma Red channel from the video encoder. For single-view video, a CFNumber value is returned. For multi-view video, a CFArray value is returned, and each element (CFNumber) in the CFArray includes MSE for the corresponding view. The video encoder will attach this in kVTSampleAttachmentKey_QualityMetrics via the CMSampleBufferGetSampleAttachmentsArray interface before emitting the sample buffer.
+// KVTSampleAttachmentQualityMetricsKey_ChromaRedMeanSquaredError returns the value of the constant kVTSampleAttachmentQualityMetricsKey_ChromaRedMeanSquaredError.
+func KVTSampleAttachmentQualityMetricsKey_ChromaRedMeanSquaredError() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTSampleAttachmentQualityMetricsKey_ChromaRedMeanSquaredError")))
 }
 
-// @constant	kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder @abstract If set to kCFBooleanTrue, use a hardware accelerated video encoder if available.  If set to kCFBooleanFalse, hardware encode will never be used. @discussion This key is set in the encoderSpecification passed in to VTCompressionSessionCreate.  Set it to kCFBooleanTrue to allow hardware accelerated encode.  To prevent hardware encode, this property can be set to kCFBooleanFalse. In MacOS 10.15 and later, hardware encode is enabled in VTCompressionSessions by default.
-// KVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder returns the value of the CoreFoundation reference constant kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder as an objc.ID.
-func KVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder())
+// If set to kCFBooleanTrue, use a hardware accelerated video encoder if available.  If set to kCFBooleanFalse, hardware encode will never be used. This key is set in the encoderSpecification passed in to VTCompressionSessionCreate.  Set it to kCFBooleanTrue to allow hardware accelerated encode.  To prevent hardware encode, this property can be set to kCFBooleanFalse. In MacOS 10.15 and later, hardware encode is enabled in VTCompressionSessions by default.
+// KVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder returns the value of the constant kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder.
+func KVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder")))
 }
 
-// @constant	kVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder @abstract If set to kCFBooleanTrue, only use hardware encode and return an error if this isn't possible. Setting this key automatically implies kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder -- there is no need to set both and the Enable key does nothing if the Require key is set. @discussion This key is set in the encoderSpecification passed in to VTCompressionSessionCreate.  Set it to kCFBooleanTrue to require hardware accelerated encode.  If hardware acceleration is not possible, the VTCompressionSessionCreate call will fail. This key is useful for clients that have their own software encode implementation or those that may want to configure software and hardware encode sessions differently. Hardware acceleration may be unavailable for a number of reasons.  A few common cases are: - the machine does not have hardware acceleration capabilities - the requested encoding format or encoding configuration is not supported - the hardware encoding resources on the machine are busy
-// KVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder returns the value of the CoreFoundation reference constant kVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder as an objc.ID.
-func KVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder())
+// If set to kCFBooleanTrue, only use hardware encode and return an error if this isn't possible. Setting this key automatically implies kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder -- there is no need to set both and the Enable key does nothing if the Require key is set. This key is set in the encoderSpecification passed in to VTCompressionSessionCreate.  Set it to kCFBooleanTrue to require hardware accelerated encode.  If hardware acceleration is not possible, the VTCompressionSessionCreate call will fail. This key is useful for clients that have their own software encode implementation or those that may want to configure software and hardware encode sessions differently. Hardware acceleration may be unavailable for a number of reasons.  A few common cases are: - the machine does not have hardware acceleration capabilities - the requested encoding format or encoding configuration is not supported - the hardware encoding resources on the machine are busy
+// KVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder returns the value of the constant kVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder.
+func KVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder")))
 }
 
-// @constant	kVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder @abstract If set to kCFBooleanTrue, a hardware accelerated video encoder is being used. @discussion You can query this property using VTSessionCopyProperty after you have enabled hardware accelerated encode using kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder to see if a hardware accelerated encoder was selected.
-// KVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder as an objc.ID.
-func KVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder())
+// If set to kCFBooleanTrue, a hardware accelerated video encoder is being used. You can query this property using VTSessionCopyProperty after you have enabled hardware accelerated encode using kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder to see if a hardware accelerated encoder was selected.
+// KVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder returns the value of the constant kVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder.
+func KVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_UsingHardwareAcceleratedVideoEncoder")))
 }
 
-// @constant	kVTVideoEncoderSpecification_RequiredEncoderGPURegistryID @abstract If set, the VideoToolbox will only use a hardware encoder running on the GPU specified by the provided GPU registryID. @discussion This specification implies kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder.  A separate hardware encode opt-in is not required. The GPU registryID can be obtained from a MTLDevice using [MTLDevice registryID] or can be obtained from OpenGL or OpenCL.
-// KVTVideoEncoderSpecification_RequiredEncoderGPURegistryID returns the value of the CoreFoundation reference constant kVTVideoEncoderSpecification_RequiredEncoderGPURegistryID as an objc.ID.
-func KVTVideoEncoderSpecification_RequiredEncoderGPURegistryID() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderSpecification_RequiredEncoderGPURegistryID())
+// If set, the VideoToolbox will only use a hardware encoder running on the GPU specified by the provided GPU registryID. This specification implies kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder.  A separate hardware encode opt-in is not required. The GPU registryID can be obtained from a MTLDevice using [MTLDevice registryID] or can be obtained from OpenGL or OpenCL.
+// KVTVideoEncoderSpecification_RequiredEncoderGPURegistryID returns the value of the constant kVTVideoEncoderSpecification_RequiredEncoderGPURegistryID.
+func KVTVideoEncoderSpecification_RequiredEncoderGPURegistryID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderSpecification_RequiredEncoderGPURegistryID")))
 }
 
-// @constant	kVTVideoEncoderSpecification_PreferredEncoderGPURegistryID @abstract If set, the VideoToolbox will try to use a hardware encoder running on the GPU specified by the provided GPU registryID.  If the GPU does not support encode of the specified format, the VideoToolbox will fall back to alternate encoders. @discussion This specification implies kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder.  A separate hardware encode opt-in is not required. If both kVTVideoEncoderSpecification_PreferredEncoderGPURegistryID and kVTVideoEncoderSpecification_RequiredEncoderGPURegistryID are set, kVTVideoEncoderSpecification_PreferredEncoderGPURegistryID will be ignored. This specification can be used in conjunction with kVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder to prevent a fallback to software encode. The GPU registryID can be obtained from a MTLDevice using [MTLDevice registryID] or can be obtained from OpenGL or OpenCL.
-// KVTVideoEncoderSpecification_PreferredEncoderGPURegistryID returns the value of the CoreFoundation reference constant kVTVideoEncoderSpecification_PreferredEncoderGPURegistryID as an objc.ID.
-func KVTVideoEncoderSpecification_PreferredEncoderGPURegistryID() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderSpecification_PreferredEncoderGPURegistryID())
+// If set, the VideoToolbox will try to use a hardware encoder running on the GPU specified by the provided GPU registryID.  If the GPU does not support encode of the specified format, the VideoToolbox will fall back to alternate encoders. This specification implies kVTVideoEncoderSpecification_EnableHardwareAcceleratedVideoEncoder.  A separate hardware encode opt-in is not required. If both kVTVideoEncoderSpecification_PreferredEncoderGPURegistryID and kVTVideoEncoderSpecification_RequiredEncoderGPURegistryID are set, kVTVideoEncoderSpecification_PreferredEncoderGPURegistryID will be ignored. This specification can be used in conjunction with kVTVideoEncoderSpecification_RequireHardwareAcceleratedVideoEncoder to prevent a fallback to software encode. The GPU registryID can be obtained from a MTLDevice using [MTLDevice registryID] or can be obtained from OpenGL or OpenCL.
+// KVTVideoEncoderSpecification_PreferredEncoderGPURegistryID returns the value of the constant kVTVideoEncoderSpecification_PreferredEncoderGPURegistryID.
+func KVTVideoEncoderSpecification_PreferredEncoderGPURegistryID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderSpecification_PreferredEncoderGPURegistryID")))
 }
 
-// @constant	kVTCompressionPropertyKey_UsingGPURegistryID @abstract returns CFNumber indicating the gpu registryID of the encoder that was selected.  NULL indicates a built-in encoder or software encode was used. @discussion You can query this property using VTSessionCopyProperty after building a VTCompressionSession to find out which GPU the encoder is using. If a encoder based on a built-in GPU was used it will return NULL.  If a software encoder is used, it will return NULL
-// KVTCompressionPropertyKey_UsingGPURegistryID returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_UsingGPURegistryID as an objc.ID.
-func KVTCompressionPropertyKey_UsingGPURegistryID() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_UsingGPURegistryID())
+// returns CFNumber indicating the gpu registryID of the encoder that was selected.  NULL indicates a built-in encoder or software encode was used. You can query this property using VTSessionCopyProperty after building a VTCompressionSession to find out which GPU the encoder is using. If a encoder based on a built-in GPU was used it will return NULL.  If a software encoder is used, it will return NULL
+// KVTCompressionPropertyKey_UsingGPURegistryID returns the value of the constant kVTCompressionPropertyKey_UsingGPURegistryID.
+func KVTCompressionPropertyKey_UsingGPURegistryID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_UsingGPURegistryID")))
 }
 
-// @constant  kVTCompressionPropertyKey_SupportsBaseFrameQP @abstract This property can be queried to determine if the encoder supports base frame QP requests. @discussion If this property returns kCFBooleanTrue, it indicates that the encoder supports base frame QP requests through kVTEncodeFrameOptionKey_BaseFrameQP. If it returns false or kVTPropertyNotSupportedErr, base frame QP requests will cause errors on VTCompressionSessionEncodeFrame calls, or will be ignored.
-// KVTCompressionPropertyKey_SupportsBaseFrameQP returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_SupportsBaseFrameQP as an objc.ID.
-func KVTCompressionPropertyKey_SupportsBaseFrameQP() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_SupportsBaseFrameQP())
+// This property can be queried to determine if the encoder supports base frame QP requests. If this property returns kCFBooleanTrue, it indicates that the encoder supports base frame QP requests through kVTEncodeFrameOptionKey_BaseFrameQP. If it returns false or kVTPropertyNotSupportedErr, base frame QP requests will cause errors on VTCompressionSessionEncodeFrame calls, or will be ignored.
+// KVTCompressionPropertyKey_SupportsBaseFrameQP returns the value of the constant kVTCompressionPropertyKey_SupportsBaseFrameQP.
+func KVTCompressionPropertyKey_SupportsBaseFrameQP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_SupportsBaseFrameQP")))
 }
 
-// @constant	kVTEncodeFrameOptionKey_ForceKeyFrame @abstract CFBoolean forcing the current frame to be a key frame @discussion This value is set in the frameProperties CFDictionary passed to VTCompressionSessionEncodeFrame to force the current frame to be a keyframe or not. Note that it may not be possible for the encoder to accomodate all requests.
-// KVTEncodeFrameOptionKey_ForceKeyFrame returns the value of the CoreFoundation reference constant kVTEncodeFrameOptionKey_ForceKeyFrame as an objc.ID.
-func KVTEncodeFrameOptionKey_ForceKeyFrame() objc.ID {
-	return purego.CFConstant(raw.KVTEncodeFrameOptionKey_ForceKeyFrame())
+// CFBoolean forcing the current frame to be a key frame This value is set in the frameProperties CFDictionary passed to VTCompressionSessionEncodeFrame to force the current frame to be a keyframe or not. Note that it may not be possible for the encoder to accomodate all requests.
+// KVTEncodeFrameOptionKey_ForceKeyFrame returns the value of the constant kVTEncodeFrameOptionKey_ForceKeyFrame.
+func KVTEncodeFrameOptionKey_ForceKeyFrame() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTEncodeFrameOptionKey_ForceKeyFrame")))
 }
 
-// @constant  kVTEncodeFrameOptionKey_BaseFrameQP @abstract CFNumberRef requesting the current frame to use the provided base frame QP. @discussion This value is set in the frameProperties CFDictionary passed to VTCompressionSessionEncodeFrame to force the QP value for the current frame. This is an optional parameter. Use it only when you have a specific requirement for the video quality and you are familiar with frame QP and are prepared to assume full responsibility for rate control. Otherwise it is strongly encouraged to rely on the encoder’s rate control for adjusting frame QP. Setting BaseFrameQP turns off standard rate control and will cause the following properties to be ignored:: kVTCompressionPropertyKey_DataRateLimits kVTCompressionPropertyKey_AverageBitRate kVTCompressionPropertyKey_BaseLayerBitRateFraction kVTCompressionPropertyKey_Quality kVTCompressionPropertyKey_MaxAllowedFrameQP kVTCompressionPropertyKey_MinAllowedFrameQP If kVTEncodeFrameOptionKey_BaseFrameQP is used, it must be set for all frames in a session. The QP value specified is frame-level but macro-block level QP may be modulated inside a frame. There will be no rate-control related frame dropping if kVTEncodeFrameOptionKey_BaseFrameQP is used. kVTEncodeFrameOptionKey_BaseFrameQP is only supported if the encoder returns kCFBooleanTrue when the kVTCompressionPropertyKey_SupportsBaseFrameQP is queried. If this FrameOptionKey is set for encoder which does not support it, it will be ignored. Note that it may not be possible for the encoder to accommodate all requests.
-// KVTEncodeFrameOptionKey_BaseFrameQP returns the value of the CoreFoundation reference constant kVTEncodeFrameOptionKey_BaseFrameQP as an objc.ID.
-func KVTEncodeFrameOptionKey_BaseFrameQP() objc.ID {
-	return purego.CFConstant(raw.KVTEncodeFrameOptionKey_BaseFrameQP())
+// CFNumberRef requesting the current frame to use the provided base frame QP. This value is set in the frameProperties CFDictionary passed to VTCompressionSessionEncodeFrame to force the QP value for the current frame. This is an optional parameter. Use it only when you have a specific requirement for the video quality and you are familiar with frame QP and are prepared to assume full responsibility for rate control. Otherwise it is strongly encouraged to rely on the encoder’s rate control for adjusting frame QP. Setting BaseFrameQP turns off standard rate control and will cause the following properties to be ignored:: kVTCompressionPropertyKey_DataRateLimits kVTCompressionPropertyKey_AverageBitRate kVTCompressionPropertyKey_BaseLayerBitRateFraction kVTCompressionPropertyKey_Quality kVTCompressionPropertyKey_MaxAllowedFrameQP kVTCompressionPropertyKey_MinAllowedFrameQP If kVTEncodeFrameOptionKey_BaseFrameQP is used, it must be set for all frames in a session. The QP value specified is frame-level but macro-block level QP may be modulated inside a frame. There will be no rate-control related frame dropping if kVTEncodeFrameOptionKey_BaseFrameQP is used. kVTEncodeFrameOptionKey_BaseFrameQP is only supported if the encoder returns kCFBooleanTrue when the kVTCompressionPropertyKey_SupportsBaseFrameQP is queried. If this FrameOptionKey is set for encoder which does not support it, it will be ignored. Note that it may not be possible for the encoder to accommodate all requests.
+// KVTEncodeFrameOptionKey_BaseFrameQP returns the value of the constant kVTEncodeFrameOptionKey_BaseFrameQP.
+func KVTEncodeFrameOptionKey_BaseFrameQP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTEncodeFrameOptionKey_BaseFrameQP")))
 }
 
-// @constant	kVTCompressionPropertyKey_CleanAperture @abstract Describes the clean aperture for encoded frames. @discussion Some video encoders may enforce specific clean apertures; in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr). The clean aperture will be set on the format description for output samples, and may affect source frame scaling. NULL is a valid value for this property, meaning that the clean aperture is the full width and height.
-// KVTCompressionPropertyKey_CleanAperture returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_CleanAperture as an objc.ID.
-func KVTCompressionPropertyKey_CleanAperture() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_CleanAperture())
+// Describes the clean aperture for encoded frames. Some video encoders may enforce specific clean apertures; in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr). The clean aperture will be set on the format description for output samples, and may affect source frame scaling. NULL is a valid value for this property, meaning that the clean aperture is the full width and height.
+// KVTCompressionPropertyKey_CleanAperture returns the value of the constant kVTCompressionPropertyKey_CleanAperture.
+func KVTCompressionPropertyKey_CleanAperture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_CleanAperture")))
 }
 
-// @constant	kVTCompressionPropertyKey_PixelAspectRatio @abstract Describes the pixel aspect ratio for encoded frames. @discussion Some video encoders may enforce specific pixel aspect ratios; in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr). The pixel aspect ratio will be set on the format description for output samples, and may affect source frame scaling. NULL is a valid value for this property, meaning square pixels (1:1).
-// KVTCompressionPropertyKey_PixelAspectRatio returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_PixelAspectRatio as an objc.ID.
-func KVTCompressionPropertyKey_PixelAspectRatio() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_PixelAspectRatio())
+// Describes the pixel aspect ratio for encoded frames. Some video encoders may enforce specific pixel aspect ratios; in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr). The pixel aspect ratio will be set on the format description for output samples, and may affect source frame scaling. NULL is a valid value for this property, meaning square pixels (1:1).
+// KVTCompressionPropertyKey_PixelAspectRatio returns the value of the constant kVTCompressionPropertyKey_PixelAspectRatio.
+func KVTCompressionPropertyKey_PixelAspectRatio() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_PixelAspectRatio")))
 }
 
-// @constant	kVTCompressionPropertyKey_FieldCount @abstract Indicates whether the frames should be encoded progressive (1) or interlaced (2). @discussion The field count will be set on the format description for output samples, and may affect source frame scaling. NULL is a valid value for this property.
-// KVTCompressionPropertyKey_FieldCount returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_FieldCount as an objc.ID.
-func KVTCompressionPropertyKey_FieldCount() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_FieldCount())
+// Indicates whether the frames should be encoded progressive (1) or interlaced (2). The field count will be set on the format description for output samples, and may affect source frame scaling. NULL is a valid value for this property.
+// KVTCompressionPropertyKey_FieldCount returns the value of the constant kVTCompressionPropertyKey_FieldCount.
+func KVTCompressionPropertyKey_FieldCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_FieldCount")))
 }
 
-// @constant	kVTCompressionPropertyKey_FieldDetail @abstract Indicates field ordering for encoded interlaced frames. @discussion Some video encoders may enforce specific field ordering; in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr). The field detail will be set on the format description for output samples, and may affect source frame scaling. NULL is a valid value for this property.
-// KVTCompressionPropertyKey_FieldDetail returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_FieldDetail as an objc.ID.
-func KVTCompressionPropertyKey_FieldDetail() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_FieldDetail())
+// Indicates field ordering for encoded interlaced frames. Some video encoders may enforce specific field ordering; in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr). The field detail will be set on the format description for output samples, and may affect source frame scaling. NULL is a valid value for this property.
+// KVTCompressionPropertyKey_FieldDetail returns the value of the constant kVTCompressionPropertyKey_FieldDetail.
+func KVTCompressionPropertyKey_FieldDetail() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_FieldDetail")))
 }
 
-// @constant	kVTCompressionPropertyKey_AspectRatio16x9 @abstract Indicates that the DV video stream should have the 16x9 flag set. @discussion This property is supported by the DV25/50 family of encoders. When false, the picture aspect ratio is 4:3. When true, the picture aspect ratio is 16:9. Either way, a fixed PixelAspectRatio is used (the specific value depends on whether the format is NTSC or PAL).
-// KVTCompressionPropertyKey_AspectRatio16x9 returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_AspectRatio16x9 as an objc.ID.
-func KVTCompressionPropertyKey_AspectRatio16x9() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_AspectRatio16x9())
+// Indicates that the DV video stream should have the 16x9 flag set. This property is supported by the DV25/50 family of encoders. When false, the picture aspect ratio is 4:3. When true, the picture aspect ratio is 16:9. Either way, a fixed PixelAspectRatio is used (the specific value depends on whether the format is NTSC or PAL).
+// KVTCompressionPropertyKey_AspectRatio16x9 returns the value of the constant kVTCompressionPropertyKey_AspectRatio16x9.
+func KVTCompressionPropertyKey_AspectRatio16x9() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_AspectRatio16x9")))
 }
 
-// @constant	kVTCompressionPropertyKey_ProgressiveScan @abstract Indicates that the DV video stream should have the progressive flag set. @discussion This property is supported by the DV25/50 family of encoders. If false, content is encoded as interlaced. If true, content is encoded as progressive. The value of this property fixes the FieldCount and FieldDetail properties.
-// KVTCompressionPropertyKey_ProgressiveScan returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_ProgressiveScan as an objc.ID.
-func KVTCompressionPropertyKey_ProgressiveScan() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_ProgressiveScan())
+// Indicates that the DV video stream should have the progressive flag set. This property is supported by the DV25/50 family of encoders. If false, content is encoded as interlaced. If true, content is encoded as progressive. The value of this property fixes the FieldCount and FieldDetail properties.
+// KVTCompressionPropertyKey_ProgressiveScan returns the value of the constant kVTCompressionPropertyKey_ProgressiveScan.
+func KVTCompressionPropertyKey_ProgressiveScan() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_ProgressiveScan")))
 }
 
-// @constant	kVTCompressionPropertyKey_ColorPrimaries @abstract Indicates color primaries for compressed content. @discussion Some video encoders may enforce specific colorimetry; in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr). The value will be set on the format description for output sample buffers.
-// KVTCompressionPropertyKey_ColorPrimaries returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_ColorPrimaries as an objc.ID.
-func KVTCompressionPropertyKey_ColorPrimaries() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_ColorPrimaries())
+// Indicates color primaries for compressed content. Some video encoders may enforce specific colorimetry; in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr). The value will be set on the format description for output sample buffers.
+// KVTCompressionPropertyKey_ColorPrimaries returns the value of the constant kVTCompressionPropertyKey_ColorPrimaries.
+func KVTCompressionPropertyKey_ColorPrimaries() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_ColorPrimaries")))
 }
 
-// @constant	kVTCompressionPropertyKey_TransferFunction @abstract Indicates transfer function for compressed content. @discussion Some video encoders may enforce specific colorimetry; in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr). The value will be set on the format description for output sample buffers.
-// KVTCompressionPropertyKey_TransferFunction returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_TransferFunction as an objc.ID.
-func KVTCompressionPropertyKey_TransferFunction() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_TransferFunction())
+// Indicates transfer function for compressed content. Some video encoders may enforce specific colorimetry; in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr). The value will be set on the format description for output sample buffers.
+// KVTCompressionPropertyKey_TransferFunction returns the value of the constant kVTCompressionPropertyKey_TransferFunction.
+func KVTCompressionPropertyKey_TransferFunction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_TransferFunction")))
 }
 
-// @constant	kVTCompressionPropertyKey_YCbCrMatrix @abstract Indicates YCbCr matrix for compressed content. @discussion Some video encoders may enforce specific colorimetry; in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr). The value will be set on the format description for output sample buffers.
-// KVTCompressionPropertyKey_YCbCrMatrix returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_YCbCrMatrix as an objc.ID.
-func KVTCompressionPropertyKey_YCbCrMatrix() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_YCbCrMatrix())
+// Indicates YCbCr matrix for compressed content. Some video encoders may enforce specific colorimetry; in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr). The value will be set on the format description for output sample buffers.
+// KVTCompressionPropertyKey_YCbCrMatrix returns the value of the constant kVTCompressionPropertyKey_YCbCrMatrix.
+func KVTCompressionPropertyKey_YCbCrMatrix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_YCbCrMatrix")))
 }
 
-// @constant	kVTCompressionPropertyKey_ICCProfile @abstract Indicates ICC profile for compressed content. @discussion Some video encoders may enforce specific colorimetry; in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr). If this property and any of the previous three are all set, they should be set to consistent values, or undefined behavior may occur. The value will be set on the format description for output sample buffers. NULL can be a valid value for this property.
-// KVTCompressionPropertyKey_ICCProfile returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_ICCProfile as an objc.ID.
-func KVTCompressionPropertyKey_ICCProfile() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_ICCProfile())
+// Indicates ICC profile for compressed content. Some video encoders may enforce specific colorimetry; in those cases this property will be read-only (SetProperty will return kVTPropertyReadOnlyErr). If this property and any of the previous three are all set, they should be set to consistent values, or undefined behavior may occur. The value will be set on the format description for output sample buffers. NULL can be a valid value for this property.
+// KVTCompressionPropertyKey_ICCProfile returns the value of the constant kVTCompressionPropertyKey_ICCProfile.
+func KVTCompressionPropertyKey_ICCProfile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_ICCProfile")))
 }
 
-// @constant	kVTCompressionPropertyKey_MasteringDisplayColorVolume @abstract The value is 24 bytes containing a big-endian structure as defined in ISO/IEC 23008-2:2015(E), D.2.28 Mastering display colour volume SEI message. @discussion The value will be set on the format description for output sample buffers, and incorporated into the appropriate SEI NAL unit where supported by the encoder.
-// KVTCompressionPropertyKey_MasteringDisplayColorVolume returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_MasteringDisplayColorVolume as an objc.ID.
-func KVTCompressionPropertyKey_MasteringDisplayColorVolume() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_MasteringDisplayColorVolume())
+// The value is 24 bytes containing a big-endian structure as defined in ISO/IEC 23008-2:2015(E), D.2.28 Mastering display colour volume SEI message. The value will be set on the format description for output sample buffers, and incorporated into the appropriate SEI NAL unit where supported by the encoder.
+// KVTCompressionPropertyKey_MasteringDisplayColorVolume returns the value of the constant kVTCompressionPropertyKey_MasteringDisplayColorVolume.
+func KVTCompressionPropertyKey_MasteringDisplayColorVolume() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_MasteringDisplayColorVolume")))
 }
 
-// @constant	kVTCompressionPropertyKey_ContentLightLevelInfo @abstract The value is 4 bytes containing a big-endian structure as defined in the Content Light Level Info SEI message. @discussion The value will be set on the format description for output sample buffers, and incorporated into the appropriate SEI NAL unit where supported by the encoder.
-// KVTCompressionPropertyKey_ContentLightLevelInfo returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_ContentLightLevelInfo as an objc.ID.
-func KVTCompressionPropertyKey_ContentLightLevelInfo() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_ContentLightLevelInfo())
+// The value is 4 bytes containing a big-endian structure as defined in the Content Light Level Info SEI message. The value will be set on the format description for output sample buffers, and incorporated into the appropriate SEI NAL unit where supported by the encoder.
+// KVTCompressionPropertyKey_ContentLightLevelInfo returns the value of the constant kVTCompressionPropertyKey_ContentLightLevelInfo.
+func KVTCompressionPropertyKey_ContentLightLevelInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_ContentLightLevelInfo")))
 }
 
-// @constant  kVTCompressionPropertyKey_GammaLevel @abstract Indicates gamma level for compressed content. @discussion This property allows the caller to specify a gamma value to include in the CMVideoFormatDescription attached to output CMSampleBuffers. It does not change pixel data being encoded.
-// KVTCompressionPropertyKey_GammaLevel returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_GammaLevel as an objc.ID.
-func KVTCompressionPropertyKey_GammaLevel() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_GammaLevel())
+// Indicates gamma level for compressed content. This property allows the caller to specify a gamma value to include in the CMVideoFormatDescription attached to output CMSampleBuffers. It does not change pixel data being encoded.
+// KVTCompressionPropertyKey_GammaLevel returns the value of the constant kVTCompressionPropertyKey_GammaLevel.
+func KVTCompressionPropertyKey_GammaLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_GammaLevel")))
 }
 
-// @constant	kVTCompressionPropertyKey_AlphaChannelMode @abstract Specifies whether the source images' RGB values have been premultiplied by the alpha channel values. @discussion Video compression will fail if source image buffers have a mismatched value in their kCVImageBufferAlphaChannelMode attachment. If this property is not set, the encoder may read the first source image buffer's kCVImageBufferAlphaChannelMode attachment. If neither the property nor the first buffer's attachment is set, defaults to kVTAlphaChannelMode_PremultipliedAlpha.
-// KVTCompressionPropertyKey_AlphaChannelMode returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_AlphaChannelMode as an objc.ID.
-func KVTCompressionPropertyKey_AlphaChannelMode() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_AlphaChannelMode())
+// Specifies whether the source images' RGB values have been premultiplied by the alpha channel values. Video compression will fail if source image buffers have a mismatched value in their kCVImageBufferAlphaChannelMode attachment. If this property is not set, the encoder may read the first source image buffer's kCVImageBufferAlphaChannelMode attachment. If neither the property nor the first buffer's attachment is set, defaults to kVTAlphaChannelMode_PremultipliedAlpha.
+// KVTCompressionPropertyKey_AlphaChannelMode returns the value of the constant kVTCompressionPropertyKey_AlphaChannelMode.
+func KVTCompressionPropertyKey_AlphaChannelMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_AlphaChannelMode")))
 }
 
-// KVTAlphaChannelMode_StraightAlpha returns the value of the CoreFoundation reference constant kVTAlphaChannelMode_StraightAlpha as an objc.ID.
-func KVTAlphaChannelMode_StraightAlpha() objc.ID {
-	return purego.CFConstant(raw.KVTAlphaChannelMode_StraightAlpha())
+// KVTAlphaChannelMode_StraightAlpha returns the value of the constant kVTAlphaChannelMode_StraightAlpha.
+func KVTAlphaChannelMode_StraightAlpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTAlphaChannelMode_StraightAlpha")))
 }
 
-// KVTAlphaChannelMode_PremultipliedAlpha returns the value of the CoreFoundation reference constant kVTAlphaChannelMode_PremultipliedAlpha as an objc.ID.
-func KVTAlphaChannelMode_PremultipliedAlpha() objc.ID {
-	return purego.CFConstant(raw.KVTAlphaChannelMode_PremultipliedAlpha())
+// KVTAlphaChannelMode_PremultipliedAlpha returns the value of the constant kVTAlphaChannelMode_PremultipliedAlpha.
+func KVTAlphaChannelMode_PremultipliedAlpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTAlphaChannelMode_PremultipliedAlpha")))
 }
 
-// @constant	kVTCompressionPropertyKey_PixelTransferProperties @abstract Specifies properties to configure a VTPixelTransferSession used to transfer source frames from the client's image buffers to the video encoder's image buffers, if necessary. @discussion Setting this property alone does not necessarily guarantee that a VTPixelTransferSession will be created. See VTPixelTransferProperties.h.
-// KVTCompressionPropertyKey_PixelTransferProperties returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_PixelTransferProperties as an objc.ID.
-func KVTCompressionPropertyKey_PixelTransferProperties() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_PixelTransferProperties())
+// Specifies properties to configure a VTPixelTransferSession used to transfer source frames from the client's image buffers to the video encoder's image buffers, if necessary. Setting this property alone does not necessarily guarantee that a VTPixelTransferSession will be created. See VTPixelTransferProperties.h.
+// KVTCompressionPropertyKey_PixelTransferProperties returns the value of the constant kVTCompressionPropertyKey_PixelTransferProperties.
+func KVTCompressionPropertyKey_PixelTransferProperties() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_PixelTransferProperties")))
 }
 
-// @const		kVTCompressionPropertyKey_MultiPassStorage @abstract	Enables multi-pass compression and provides storage for encoder-private data. @discussion Some video encoders support multi-pass encoding.  To determine whether a VTCompressionSession supports multi-pass encoding, you can inspect the dictionary returned by VTSessionCopySupportedPropertyDictionary to see if it contains kVTCompressionPropertyKey_MultiPassStorage. To enable multi-pass encoding, set the kVTCompressionPropertyKey_MultiPassStorage property to a VTMultiPassStorage object, which you can create by calling VTMultiPassStorageCreate.  Then make one or more passes over the source frames.  Bracket each pass with a call to VTCompressionSessionBeginPass at the beginning and VTCompressionSessionEndPass at the end. In the first pass of multi-pass encoding, call VTCompressionSessionEncodeFrame for every source frame (just as in single-pass encoding).  At the end of every pass, call VTCompressionSessionEndPass.  This may take some time as the video encoder determines whether it can improve the encoding by performing another pass.  If the user cancels encoding during this time, call VTCompressionSessionInvalidate to interrupt the processing.  VTCompressionSessionEndPass will indicate via the furtherPassesRequestedOut argument whether the video encoder would like to perform another pass.  There is no particular bound on the number of passes the video encoder may request, but the client is free to disregard this request and use the last-emitted set of frames. If *furtherPassesRequestedOut is set to true and you want to perform another pass, call VTCompressionSessionGetTimeRangesForNextPass to determine the time ranges for the next pass.  Only the source frames within these time ranges need to be passed to VTCompressionSessionEncodeFrame; the video encoder is satisfied with the already-emitted compressed frames outside these ranges and they can be kept for the final output. In second and successive passes, you must pass identical source frames, frame properties and timestamps to VTCompressionSessionEncodeFrame as in the first pass, with the exception that frames not in the requested time ranges should be skipped. You can create and use a VTFrameSilo object to merge sequences of compressed frames across passes during multi-pass encoding.
-// KVTCompressionPropertyKey_MultiPassStorage returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_MultiPassStorage as an objc.ID.
-func KVTCompressionPropertyKey_MultiPassStorage() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_MultiPassStorage())
+// Enables multi-pass compression and provides storage for encoder-private data. Some video encoders support multi-pass encoding.  To determine whether a VTCompressionSession supports multi-pass encoding, you can inspect the dictionary returned by VTSessionCopySupportedPropertyDictionary to see if it contains kVTCompressionPropertyKey_MultiPassStorage. To enable multi-pass encoding, set the kVTCompressionPropertyKey_MultiPassStorage property to a VTMultiPassStorage object, which you can create by calling VTMultiPassStorageCreate.  Then make one or more passes over the source frames.  Bracket each pass with a call to VTCompressionSessionBeginPass at the beginning and VTCompressionSessionEndPass at the end. In the first pass of multi-pass encoding, call VTCompressionSessionEncodeFrame for every source frame (just as in single-pass encoding).  At the end of every pass, call VTCompressionSessionEndPass.  This may take some time as the video encoder determines whether it can improve the encoding by performing another pass.  If the user cancels encoding during this time, call VTCompressionSessionInvalidate to interrupt the processing.  VTCompressionSessionEndPass will indicate via the furtherPassesRequestedOut argument whether the video encoder would like to perform another pass.  There is no particular bound on the number of passes the video encoder may request, but the client is free to disregard this request and use the last-emitted set of frames. If *furtherPassesRequestedOut is set to true and you want to perform another pass, call VTCompressionSessionGetTimeRangesForNextPass to determine the time ranges for the next pass.  Only the source frames within these time ranges need to be passed to VTCompressionSessionEncodeFrame; the video encoder is satisfied with the already-emitted compressed frames outside these ranges and they can be kept for the final output. In second and successive passes, you must pass identical source frames, frame properties and timestamps to VTCompressionSessionEncodeFrame as in the first pass, with the exception that frames not in the requested time ranges should be skipped. You can create and use a VTFrameSilo object to merge sequences of compressed frames across passes during multi-pass encoding.
+// KVTCompressionPropertyKey_MultiPassStorage returns the value of the constant kVTCompressionPropertyKey_MultiPassStorage.
+func KVTCompressionPropertyKey_MultiPassStorage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_MultiPassStorage")))
 }
 
-// @constant	kVTCompressionPropertyKey_EncoderID @abstract Specifies a particular video encoder by its ID string. @discussion Matches the value specified in kVTVideoEncoderSpecification_EncoderID, and the kVTVideoEncoderList_EncoderID value returned from VTCopyVideoEncoderList.
-// KVTCompressionPropertyKey_EncoderID returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_EncoderID as an objc.ID.
-func KVTCompressionPropertyKey_EncoderID() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_EncoderID())
+// Specifies a particular video encoder by its ID string. Matches the value specified in kVTVideoEncoderSpecification_EncoderID, and the kVTVideoEncoderList_EncoderID value returned from VTCopyVideoEncoderList.
+// KVTCompressionPropertyKey_EncoderID returns the value of the constant kVTCompressionPropertyKey_EncoderID.
+func KVTCompressionPropertyKey_EncoderID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_EncoderID")))
 }
 
-// @constant	kVTCompressionPropertyKey_RecommendedParallelizationLimit @abstract If supported by the underlying video encoder, returns the recommended number of VTCompressionSessions to instantiate in a parallel encoding configuration. @discussion Parallel encoding VTCompressionSessions require the use of the properties kVTCompressionPropertyKey_MoreFramesBeforeStart, kVTCompressionPropertyKey_MoreFramesAfterEnd, and kVTCompressionPropertyKey_SourceFrameCount. e.g. If the property returns 4, a setup for 4 VTCompressionSessions on a 400 frame movie might look like: compressionSession1 kVTCompressionPropertyKey_MoreFramesBeforeStart = false kVTCompressionPropertyKey_MoreFramesAfterEnd = true kVTCompressionPropertyKey_SourceFrameCount = 100 compressionSession2 kVTCompressionPropertyKey_MoreFramesBeforeStart = true kVTCompressionPropertyKey_MoreFramesAfterEnd = true kVTCompressionPropertyKey_SourceFrameCount = 100 compressionSession3 kVTCompressionPropertyKey_MoreFramesBeforeStart = true kVTCompressionPropertyKey_MoreFramesAfterEnd = true kVTCompressionPropertyKey_SourceFrameCount = 100 compressionSession4 kVTCompressionPropertyKey_MoreFramesBeforeStart = true kVTCompressionPropertyKey_MoreFramesAfterEnd = false kVTCompressionPropertyKey_SourceFrameCount = 100
-// KVTCompressionPropertyKey_RecommendedParallelizationLimit returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_RecommendedParallelizationLimit as an objc.ID.
-func KVTCompressionPropertyKey_RecommendedParallelizationLimit() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_RecommendedParallelizationLimit())
+// If supported by the underlying video encoder, returns the recommended number of VTCompressionSessions to instantiate in a parallel encoding configuration. Parallel encoding VTCompressionSessions require the use of the properties kVTCompressionPropertyKey_MoreFramesBeforeStart, kVTCompressionPropertyKey_MoreFramesAfterEnd, and kVTCompressionPropertyKey_SourceFrameCount. e.g. If the property returns 4, a setup for 4 VTCompressionSessions on a 400 frame movie might look like: compressionSession1 kVTCompressionPropertyKey_MoreFramesBeforeStart = false kVTCompressionPropertyKey_MoreFramesAfterEnd = true kVTCompressionPropertyKey_SourceFrameCount = 100 compressionSession2 kVTCompressionPropertyKey_MoreFramesBeforeStart = true kVTCompressionPropertyKey_MoreFramesAfterEnd = true kVTCompressionPropertyKey_SourceFrameCount = 100 compressionSession3 kVTCompressionPropertyKey_MoreFramesBeforeStart = true kVTCompressionPropertyKey_MoreFramesAfterEnd = true kVTCompressionPropertyKey_SourceFrameCount = 100 compressionSession4 kVTCompressionPropertyKey_MoreFramesBeforeStart = true kVTCompressionPropertyKey_MoreFramesAfterEnd = false kVTCompressionPropertyKey_SourceFrameCount = 100
+// KVTCompressionPropertyKey_RecommendedParallelizationLimit returns the value of the constant kVTCompressionPropertyKey_RecommendedParallelizationLimit.
+func KVTCompressionPropertyKey_RecommendedParallelizationLimit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_RecommendedParallelizationLimit")))
 }
 
-// @constant	kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumFrameCount @abstract If supported by the underlying video encoder, returns the recommended minimum number of video frames for a given subdivision in a parallel encoding configuration. @discussion For best results, ensure that the total number of frames of a parallelized subdivision is greater than or equal to this returned value. See also kVTCompressionPropertyKey_RecommendedParallelizationLimit See also kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumDuration
-// KVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumFrameCount returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumFrameCount as an objc.ID.
-func KVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumFrameCount() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumFrameCount())
+// If supported by the underlying video encoder, returns the recommended minimum number of video frames for a given subdivision in a parallel encoding configuration. For best results, ensure that the total number of frames of a parallelized subdivision is greater than or equal to this returned value. See also kVTCompressionPropertyKey_RecommendedParallelizationLimit See also kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumDuration
+// KVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumFrameCount returns the value of the constant kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumFrameCount.
+func KVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumFrameCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumFrameCount")))
 }
 
-// @constant	kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumDuration @abstract If supported by the underlying video encoder, returns the recommended minimum duration for a given subdivision in a parallel encoding configuration. @discussion For best results, ensure that the total duration of a parallelized subdivision is greater than or equal to this returned value. See also kVTCompressionPropertyKey_RecommendedParallelizationLimit See also kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumFrameCount
-// KVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumDuration returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumDuration as an objc.ID.
-func KVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumDuration() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumDuration())
+// If supported by the underlying video encoder, returns the recommended minimum duration for a given subdivision in a parallel encoding configuration. For best results, ensure that the total duration of a parallelized subdivision is greater than or equal to this returned value. See also kVTCompressionPropertyKey_RecommendedParallelizationLimit See also kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumFrameCount
+// KVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumDuration returns the value of the constant kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumDuration.
+func KVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumDuration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumDuration")))
 }
 
-// @constant	kVTCompressionPropertyKey_PreserveDynamicHDRMetadata @abstract Controls whether or not to preserve any dynamic HDR metadata on the input pixel buffer @discussion If set to false, and kVTCompressionPropertyKey_HDRMetadataInsertionMode is not kVTHDRMetadataInsertionMode_None, then VTCompressionSession will generate the dynamic HDR metadata for the pixel buffer, if the HDR format is supported.
-// KVTCompressionPropertyKey_PreserveDynamicHDRMetadata returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_PreserveDynamicHDRMetadata as an objc.ID.
-func KVTCompressionPropertyKey_PreserveDynamicHDRMetadata() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_PreserveDynamicHDRMetadata())
+// Controls whether or not to preserve any dynamic HDR metadata on the input pixel buffer If set to false, and kVTCompressionPropertyKey_HDRMetadataInsertionMode is not kVTHDRMetadataInsertionMode_None, then VTCompressionSession will generate the dynamic HDR metadata for the pixel buffer, if the HDR format is supported.
+// KVTCompressionPropertyKey_PreserveDynamicHDRMetadata returns the value of the constant kVTCompressionPropertyKey_PreserveDynamicHDRMetadata.
+func KVTCompressionPropertyKey_PreserveDynamicHDRMetadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_PreserveDynamicHDRMetadata")))
 }
 
-// @constant	kVTVideoEncoderSpecification_EnableLowLatencyRateControl @abstract Requires that an encoder which supports low-latency operation be selected, and enables low-latency mode. @discussion Low latency RateControl enforces the following behaviors: - Infinite GOP (all P frames following the beginning IDR). - No frame reordering (B frame) or looking ahead. - Only High profiles. Levels are left for the encoder to automatically set. - Temporal Layer structure. Also see: kVTCompressionPropertyKey_AverageBitRate kVTCompressionPropertyKey_BaseLayerFrameRateFraction kVTEncodeFrameOptionKey_ForceKeyFrame
-// KVTVideoEncoderSpecification_EnableLowLatencyRateControl returns the value of the CoreFoundation reference constant kVTVideoEncoderSpecification_EnableLowLatencyRateControl as an objc.ID.
-func KVTVideoEncoderSpecification_EnableLowLatencyRateControl() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderSpecification_EnableLowLatencyRateControl())
+// Requires that an encoder which supports low-latency operation be selected, and enables low-latency mode. Low latency RateControl enforces the following behaviors: - Infinite GOP (all P frames following the beginning IDR). - No frame reordering (B frame) or looking ahead. - Only High profiles. Levels are left for the encoder to automatically set. - Temporal Layer structure. Also see: kVTCompressionPropertyKey_AverageBitRate kVTCompressionPropertyKey_BaseLayerFrameRateFraction kVTEncodeFrameOptionKey_ForceKeyFrame
+// KVTVideoEncoderSpecification_EnableLowLatencyRateControl returns the value of the constant kVTVideoEncoderSpecification_EnableLowLatencyRateControl.
+func KVTVideoEncoderSpecification_EnableLowLatencyRateControl() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderSpecification_EnableLowLatencyRateControl")))
 }
 
-// @constant	kVTCompressionPropertyKey_MaxAllowedFrameQP @abstract Specifies the maximum allowed encoded frame QP (Quantization Parameter). @discussion This is an optional parameter. Use it only when you have a specific requirement for the video quality and you are familiar with frame QP. To satisfy this requirement, the encoder may drop frames to maintain bitrate and QP goals. This is not supported in all encoders or in all encoder operating modes. kVTPropertyNotSupportedErr will be returned when this option is not supported.
-// KVTCompressionPropertyKey_MaxAllowedFrameQP returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_MaxAllowedFrameQP as an objc.ID.
-func KVTCompressionPropertyKey_MaxAllowedFrameQP() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_MaxAllowedFrameQP())
+// Specifies the maximum allowed encoded frame QP (Quantization Parameter). This is an optional parameter. Use it only when you have a specific requirement for the video quality and you are familiar with frame QP. To satisfy this requirement, the encoder may drop frames to maintain bitrate and QP goals. This is not supported in all encoders or in all encoder operating modes. kVTPropertyNotSupportedErr will be returned when this option is not supported.
+// KVTCompressionPropertyKey_MaxAllowedFrameQP returns the value of the constant kVTCompressionPropertyKey_MaxAllowedFrameQP.
+func KVTCompressionPropertyKey_MaxAllowedFrameQP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_MaxAllowedFrameQP")))
 }
 
-// @constant	kVTCompressionPropertyKey_MinAllowedFrameQP @abstract Specifies the minimum allowed encoded frame QP (Quantization Parameter). @discussion This is an optional parameter. Use it only when you have a specific requirement for the video quality and you are familiar with frame QP. This is not supported in all encoders or in all encoder operating modes. kVTPropertyNotSupportedErr will be returned when this option is not supported.
-// KVTCompressionPropertyKey_MinAllowedFrameQP returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_MinAllowedFrameQP as an objc.ID.
-func KVTCompressionPropertyKey_MinAllowedFrameQP() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_MinAllowedFrameQP())
+// Specifies the minimum allowed encoded frame QP (Quantization Parameter). This is an optional parameter. Use it only when you have a specific requirement for the video quality and you are familiar with frame QP. This is not supported in all encoders or in all encoder operating modes. kVTPropertyNotSupportedErr will be returned when this option is not supported.
+// KVTCompressionPropertyKey_MinAllowedFrameQP returns the value of the constant kVTCompressionPropertyKey_MinAllowedFrameQP.
+func KVTCompressionPropertyKey_MinAllowedFrameQP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_MinAllowedFrameQP")))
 }
 
-// @constant	kVTCompressionPropertyKey_EnableLTR @abstract Enable Long Term Reference (LTR) frames during encoding @discussion When an LTR frame is encoded, encoder will signal a unique token of the LTR frame in the encoder callback through: kVTSampleAttachmentKey_RequireLTRAcknowledgementToken Clients are responsible for reporting acknowledged LTR frames to the encoder through: kVTEncodeFrameOptionKey_AcknowledgedLTRTokens Client can request a refresh frame at any time through: kVTEncodeFrameOptionKey_ForceLTRRefresh Encoder will encode a P frame by using one of acknowledged LTR frames as the reference. Encoder will encode a new reference frame using an acknowledged LTR, or an IDR if no LTR frames have been acknowledged. Also see: kVTEncodeFrameOptionKey_AcknowledgedLTRTokens kVTEncodeFrameOptionKey_ForceLTRRefresh kVTSampleAttachmentKey_RequireLTRAcknowledgementToken
-// KVTCompressionPropertyKey_EnableLTR returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_EnableLTR as an objc.ID.
-func KVTCompressionPropertyKey_EnableLTR() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_EnableLTR())
+// Enable Long Term Reference (LTR) frames during encoding When an LTR frame is encoded, encoder will signal a unique token of the LTR frame in the encoder callback through: kVTSampleAttachmentKey_RequireLTRAcknowledgementToken Clients are responsible for reporting acknowledged LTR frames to the encoder through: kVTEncodeFrameOptionKey_AcknowledgedLTRTokens Client can request a refresh frame at any time through: kVTEncodeFrameOptionKey_ForceLTRRefresh Encoder will encode a P frame by using one of acknowledged LTR frames as the reference. Encoder will encode a new reference frame using an acknowledged LTR, or an IDR if no LTR frames have been acknowledged. Also see: kVTEncodeFrameOptionKey_AcknowledgedLTRTokens kVTEncodeFrameOptionKey_ForceLTRRefresh kVTSampleAttachmentKey_RequireLTRAcknowledgementToken
+// KVTCompressionPropertyKey_EnableLTR returns the value of the constant kVTCompressionPropertyKey_EnableLTR.
+func KVTCompressionPropertyKey_EnableLTR() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_EnableLTR")))
 }
 
-// @constant	kVTEncodeFrameOptionKey_AcknowledgedLTRTokens @abstract A CFArray of CFNumbers containing the kVTSampleAttachmentKey_RequireLTRAcknowledgementToken values which have been successfully sent to the receiver and can be used as references @discussion When an LTR frame is encoded, the encoder will return a unique token for the LTR frame on the output CMSampleBuffer through kVTSampleAttachmentKey_RequireLTRAcknowledgementToken. This token is then returned to the encoder via kVTEncodeFrameOptionKey_AcknowledgedLTRTokens when the LTR frame is received by the remote consumer(s). Also see: kVTCompressionPropertyKey_EnableLTR kVTEncodeFrameOptionKey_ForceLTRRefresh kVTSampleAttachmentKey_RequireLTRAcknowledgementToken
-// KVTEncodeFrameOptionKey_AcknowledgedLTRTokens returns the value of the CoreFoundation reference constant kVTEncodeFrameOptionKey_AcknowledgedLTRTokens as an objc.ID.
-func KVTEncodeFrameOptionKey_AcknowledgedLTRTokens() objc.ID {
-	return purego.CFConstant(raw.KVTEncodeFrameOptionKey_AcknowledgedLTRTokens())
+// A CFArray of CFNumbers containing the kVTSampleAttachmentKey_RequireLTRAcknowledgementToken values which have been successfully sent to the receiver and can be used as references When an LTR frame is encoded, the encoder will return a unique token for the LTR frame on the output CMSampleBuffer through kVTSampleAttachmentKey_RequireLTRAcknowledgementToken. This token is then returned to the encoder via kVTEncodeFrameOptionKey_AcknowledgedLTRTokens when the LTR frame is received by the remote consumer(s). Also see: kVTCompressionPropertyKey_EnableLTR kVTEncodeFrameOptionKey_ForceLTRRefresh kVTSampleAttachmentKey_RequireLTRAcknowledgementToken
+// KVTEncodeFrameOptionKey_AcknowledgedLTRTokens returns the value of the constant kVTEncodeFrameOptionKey_AcknowledgedLTRTokens.
+func KVTEncodeFrameOptionKey_AcknowledgedLTRTokens() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTEncodeFrameOptionKey_AcknowledgedLTRTokens")))
 }
 
-// @constant	kVTEncodeFrameOptionKey_ForceLTRRefresh @abstract Set this option to kCFBooleanTrue to force an LTR refresh @discussion When the encoder receives this request on an incoming frame, the encoder will encode a new reference frame using a previously acknowledged LTR, or it will encode a new IDR if no LTR frames have been acknowledged. Also see: kVTCompressionPropertyKey_EnableLTR kVTEncodeFrameOptionKey_AcknowledgedLTRTokens kVTSampleAttachmentKey_RequireLTRAcknowledgementToken
-// KVTEncodeFrameOptionKey_ForceLTRRefresh returns the value of the CoreFoundation reference constant kVTEncodeFrameOptionKey_ForceLTRRefresh as an objc.ID.
-func KVTEncodeFrameOptionKey_ForceLTRRefresh() objc.ID {
-	return purego.CFConstant(raw.KVTEncodeFrameOptionKey_ForceLTRRefresh())
+// Set this option to kCFBooleanTrue to force an LTR refresh When the encoder receives this request on an incoming frame, the encoder will encode a new reference frame using a previously acknowledged LTR, or it will encode a new IDR if no LTR frames have been acknowledged. Also see: kVTCompressionPropertyKey_EnableLTR kVTEncodeFrameOptionKey_AcknowledgedLTRTokens kVTSampleAttachmentKey_RequireLTRAcknowledgementToken
+// KVTEncodeFrameOptionKey_ForceLTRRefresh returns the value of the constant kVTEncodeFrameOptionKey_ForceLTRRefresh.
+func KVTEncodeFrameOptionKey_ForceLTRRefresh() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTEncodeFrameOptionKey_ForceLTRRefresh")))
 }
 
-// @constant	kVTSampleAttachmentKey_RequireLTRAcknowledgementToken @abstract CFNumber containing a unique token for this LTR @discussion This CMSampleBuffer attachment contains a unique token which can be returned to the encoder through kVTEncodeFrameOptionKey_AcknowledgedLTRTokens to indicate that the LTR has been received and may be used as a reference. Also see: kVTCompressionPropertyKey_EnableLTR kVTEncodeFrameOptionKey_AcknowledgedLTRTokens kVTEncodeFrameOptionKey_ForceLTRRefresh
-// KVTSampleAttachmentKey_RequireLTRAcknowledgementToken returns the value of the CoreFoundation reference constant kVTSampleAttachmentKey_RequireLTRAcknowledgementToken as an objc.ID.
-func KVTSampleAttachmentKey_RequireLTRAcknowledgementToken() objc.ID {
-	return purego.CFConstant(raw.KVTSampleAttachmentKey_RequireLTRAcknowledgementToken())
+// CFNumber containing a unique token for this LTR This CMSampleBuffer attachment contains a unique token which can be returned to the encoder through kVTEncodeFrameOptionKey_AcknowledgedLTRTokens to indicate that the LTR has been received and may be used as a reference. Also see: kVTCompressionPropertyKey_EnableLTR kVTEncodeFrameOptionKey_AcknowledgedLTRTokens kVTEncodeFrameOptionKey_ForceLTRRefresh
+// KVTSampleAttachmentKey_RequireLTRAcknowledgementToken returns the value of the constant kVTSampleAttachmentKey_RequireLTRAcknowledgementToken.
+func KVTSampleAttachmentKey_RequireLTRAcknowledgementToken() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTSampleAttachmentKey_RequireLTRAcknowledgementToken")))
 }
 
-// @constant	kVTCompressionPropertyKey_MVHEVCVideoLayerIDs @abstract Requests multi-image encoding; advises encoder to expect CMTaggedBufferGroups with specific CMTags referencing these MV-HEVC VideoLayerIDs. @discussion MV-HEVC specific. The property value is a CFArray containing VideoLayerIDs as CFNumbers. The property is NULL by default.
-// KVTCompressionPropertyKey_MVHEVCVideoLayerIDs returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_MVHEVCVideoLayerIDs as an objc.ID.
-func KVTCompressionPropertyKey_MVHEVCVideoLayerIDs() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_MVHEVCVideoLayerIDs())
+// Requests multi-image encoding; advises encoder to expect CMTaggedBufferGroups with specific CMTags referencing these MV-HEVC VideoLayerIDs. MV-HEVC specific. The property value is a CFArray containing VideoLayerIDs as CFNumbers. The property is NULL by default.
+// KVTCompressionPropertyKey_MVHEVCVideoLayerIDs returns the value of the constant kVTCompressionPropertyKey_MVHEVCVideoLayerIDs.
+func KVTCompressionPropertyKey_MVHEVCVideoLayerIDs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_MVHEVCVideoLayerIDs")))
 }
 
-// @constant	kVTCompressionPropertyKey_MVHEVCViewIDs @abstract Specifies the ViewIDs corresponding to the VideoLayerIDs provided via kVTCompressionPropertyKey_MVHEVCVideoLayerIDs. @discussion MV-HEVC specific. The property value is a CFArray containing ViewIDs as CFNumbers. The entries in this array should be in the same order and have the same count as the value set via kVTCompressionPropertyKey_MVHEVCVideoLayerIDs. The property is NULL by default.
-// KVTCompressionPropertyKey_MVHEVCViewIDs returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_MVHEVCViewIDs as an objc.ID.
-func KVTCompressionPropertyKey_MVHEVCViewIDs() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_MVHEVCViewIDs())
+// Specifies the ViewIDs corresponding to the VideoLayerIDs provided via kVTCompressionPropertyKey_MVHEVCVideoLayerIDs. MV-HEVC specific. The property value is a CFArray containing ViewIDs as CFNumbers. The entries in this array should be in the same order and have the same count as the value set via kVTCompressionPropertyKey_MVHEVCVideoLayerIDs. The property is NULL by default.
+// KVTCompressionPropertyKey_MVHEVCViewIDs returns the value of the constant kVTCompressionPropertyKey_MVHEVCViewIDs.
+func KVTCompressionPropertyKey_MVHEVCViewIDs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_MVHEVCViewIDs")))
 }
 
-// @constant	kVTCompressionPropertyKey_MVHEVCLeftAndRightViewIDs @abstract Specifies which of the ViewIDs provided via kVTCompressionPropertyKey_MVHEVCViewIDs is the "left view id" and which is the "right view id". @discussion MV-HEVC specific. These ViewIDs will be incorporated into the 3D Reference Displays Info SEI message. The property value is a CFArray containing two ViewIDs as CFNumbers with the first correspponding to the left eye and the second corresponding to the right eye. The property is NULL by default.
-// KVTCompressionPropertyKey_MVHEVCLeftAndRightViewIDs returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_MVHEVCLeftAndRightViewIDs as an objc.ID.
-func KVTCompressionPropertyKey_MVHEVCLeftAndRightViewIDs() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_MVHEVCLeftAndRightViewIDs())
+// Specifies which of the ViewIDs provided via kVTCompressionPropertyKey_MVHEVCViewIDs is the "left view id" and which is the "right view id". MV-HEVC specific. These ViewIDs will be incorporated into the 3D Reference Displays Info SEI message. The property value is a CFArray containing two ViewIDs as CFNumbers with the first correspponding to the left eye and the second corresponding to the right eye. The property is NULL by default.
+// KVTCompressionPropertyKey_MVHEVCLeftAndRightViewIDs returns the value of the constant kVTCompressionPropertyKey_MVHEVCLeftAndRightViewIDs.
+func KVTCompressionPropertyKey_MVHEVCLeftAndRightViewIDs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_MVHEVCLeftAndRightViewIDs")))
 }
 
-// @constant	kVTCompressionPropertyKey_HeroEye @abstract Specifies the value of kCMFormatDescriptionExtension_HeroEye. @discussion The value will be set on the format description for output samples and may affect the decoded frame presentation.
-// KVTCompressionPropertyKey_HeroEye returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_HeroEye as an objc.ID.
-func KVTCompressionPropertyKey_HeroEye() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_HeroEye())
+// Specifies the value of kCMFormatDescriptionExtension_HeroEye. The value will be set on the format description for output samples and may affect the decoded frame presentation.
+// KVTCompressionPropertyKey_HeroEye returns the value of the constant kVTCompressionPropertyKey_HeroEye.
+func KVTCompressionPropertyKey_HeroEye() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_HeroEye")))
 }
 
-// KVTHeroEye_Left returns the value of the CoreFoundation reference constant kVTHeroEye_Left as an objc.ID.
-func KVTHeroEye_Left() objc.ID { return purego.CFConstant(raw.KVTHeroEye_Left()) }
+// KVTHeroEye_Left returns the value of the constant kVTHeroEye_Left.
+func KVTHeroEye_Left() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kVTHeroEye_Left"))) }
 
-// KVTHeroEye_Right returns the value of the CoreFoundation reference constant kVTHeroEye_Right as an objc.ID.
-func KVTHeroEye_Right() objc.ID { return purego.CFConstant(raw.KVTHeroEye_Right()) }
+// KVTHeroEye_Right returns the value of the constant kVTHeroEye_Right.
+func KVTHeroEye_Right() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kVTHeroEye_Right"))) }
 
-// @constant	kVTCompressionPropertyKey_StereoCameraBaseline @abstract Specifies the value of kCMFormatDescriptionExtension_StereoCameraBaseline. @discussion The value will be set on the format description for output samples and may affect the decoded frame presentation.
-// KVTCompressionPropertyKey_StereoCameraBaseline returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_StereoCameraBaseline as an objc.ID.
-func KVTCompressionPropertyKey_StereoCameraBaseline() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_StereoCameraBaseline())
+// Specifies the value of kCMFormatDescriptionExtension_StereoCameraBaseline. The value will be set on the format description for output samples and may affect the decoded frame presentation.
+// KVTCompressionPropertyKey_StereoCameraBaseline returns the value of the constant kVTCompressionPropertyKey_StereoCameraBaseline.
+func KVTCompressionPropertyKey_StereoCameraBaseline() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_StereoCameraBaseline")))
 }
 
-// KVTCompressionPropertyKey_HorizontalDisparityAdjustment returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_HorizontalDisparityAdjustment as an objc.ID.
-func KVTCompressionPropertyKey_HorizontalDisparityAdjustment() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_HorizontalDisparityAdjustment())
+// KVTCompressionPropertyKey_HorizontalDisparityAdjustment returns the value of the constant kVTCompressionPropertyKey_HorizontalDisparityAdjustment.
+func KVTCompressionPropertyKey_HorizontalDisparityAdjustment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_HorizontalDisparityAdjustment")))
 }
 
-// @constant    kVTCompressionPropertyKey_HasLeftStereoEyeView @abstract Specifies the value of kCMFormatDescriptionExtension_HasLeftStereoEyeView. @discussion The value will be set on the format description for output samples and may affect the decoded frame presentation.
-// KVTCompressionPropertyKey_HasLeftStereoEyeView returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_HasLeftStereoEyeView as an objc.ID.
-func KVTCompressionPropertyKey_HasLeftStereoEyeView() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_HasLeftStereoEyeView())
+// Specifies the value of kCMFormatDescriptionExtension_HasLeftStereoEyeView. The value will be set on the format description for output samples and may affect the decoded frame presentation.
+// KVTCompressionPropertyKey_HasLeftStereoEyeView returns the value of the constant kVTCompressionPropertyKey_HasLeftStereoEyeView.
+func KVTCompressionPropertyKey_HasLeftStereoEyeView() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_HasLeftStereoEyeView")))
 }
 
-// @constant    kVTCompressionPropertyKey_HasRightStereoEyeView @abstract Specifies the value of kCMFormatDescriptionExtension_HasRightStereoEyeView. @discussion The value will be set on the format description for output samples and may affect the decoded frame presentation.
-// KVTCompressionPropertyKey_HasRightStereoEyeView returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_HasRightStereoEyeView as an objc.ID.
-func KVTCompressionPropertyKey_HasRightStereoEyeView() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_HasRightStereoEyeView())
+// Specifies the value of kCMFormatDescriptionExtension_HasRightStereoEyeView. The value will be set on the format description for output samples and may affect the decoded frame presentation.
+// KVTCompressionPropertyKey_HasRightStereoEyeView returns the value of the constant kVTCompressionPropertyKey_HasRightStereoEyeView.
+func KVTCompressionPropertyKey_HasRightStereoEyeView() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_HasRightStereoEyeView")))
 }
 
-// @constant    kVTCompressionPropertyKey_HorizontalFieldOfView @abstract Specifies the value of kCMFormatDescriptionExtension_HorizontalFieldOfView. @discussion The value is a CFNumber holding an unsigned 32-bit integer that is interpreted in millidegree or thousandths of a degree (e.g., 123456 is 123.456 degree). This property is optional and should only be specified if the field of view is known.
-// KVTCompressionPropertyKey_HorizontalFieldOfView returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_HorizontalFieldOfView as an objc.ID.
-func KVTCompressionPropertyKey_HorizontalFieldOfView() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_HorizontalFieldOfView())
+// Specifies the value of kCMFormatDescriptionExtension_HorizontalFieldOfView. The value is a CFNumber holding an unsigned 32-bit integer that is interpreted in millidegree or thousandths of a degree (e.g., 123456 is 123.456 degree). This property is optional and should only be specified if the field of view is known.
+// KVTCompressionPropertyKey_HorizontalFieldOfView returns the value of the constant kVTCompressionPropertyKey_HorizontalFieldOfView.
+func KVTCompressionPropertyKey_HorizontalFieldOfView() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_HorizontalFieldOfView")))
 }
 
-// @constant	kVTCompressionPropertyKey_ProjectionKind @abstract Specifies the value of kCMFormatDescriptionExtension_ProjectionKind. @discussion The value will be set on the format description for output samples and may affect the decoded frame presentation.
-// KVTCompressionPropertyKey_ProjectionKind returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_ProjectionKind as an objc.ID.
-func KVTCompressionPropertyKey_ProjectionKind() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_ProjectionKind())
+// Specifies the value of kCMFormatDescriptionExtension_ProjectionKind. The value will be set on the format description for output samples and may affect the decoded frame presentation.
+// KVTCompressionPropertyKey_ProjectionKind returns the value of the constant kVTCompressionPropertyKey_ProjectionKind.
+func KVTCompressionPropertyKey_ProjectionKind() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_ProjectionKind")))
 }
 
-// KVTProjectionKind_Rectilinear returns the value of the CoreFoundation reference constant kVTProjectionKind_Rectilinear as an objc.ID.
-func KVTProjectionKind_Rectilinear() objc.ID {
-	return purego.CFConstant(raw.KVTProjectionKind_Rectilinear())
+// KVTProjectionKind_Rectilinear returns the value of the constant kVTProjectionKind_Rectilinear.
+func KVTProjectionKind_Rectilinear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProjectionKind_Rectilinear")))
 }
 
-// KVTProjectionKind_Equirectangular returns the value of the CoreFoundation reference constant kVTProjectionKind_Equirectangular as an objc.ID.
-func KVTProjectionKind_Equirectangular() objc.ID {
-	return purego.CFConstant(raw.KVTProjectionKind_Equirectangular())
+// KVTProjectionKind_Equirectangular returns the value of the constant kVTProjectionKind_Equirectangular.
+func KVTProjectionKind_Equirectangular() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProjectionKind_Equirectangular")))
 }
 
-// KVTProjectionKind_HalfEquirectangular returns the value of the CoreFoundation reference constant kVTProjectionKind_HalfEquirectangular as an objc.ID.
-func KVTProjectionKind_HalfEquirectangular() objc.ID {
-	return purego.CFConstant(raw.KVTProjectionKind_HalfEquirectangular())
+// KVTProjectionKind_HalfEquirectangular returns the value of the constant kVTProjectionKind_HalfEquirectangular.
+func KVTProjectionKind_HalfEquirectangular() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProjectionKind_HalfEquirectangular")))
 }
 
-// KVTProjectionKind_ParametricImmersive returns the value of the CoreFoundation reference constant kVTProjectionKind_ParametricImmersive as an objc.ID.
-func KVTProjectionKind_ParametricImmersive() objc.ID {
-	return purego.CFConstant(raw.KVTProjectionKind_ParametricImmersive())
+// KVTProjectionKind_ParametricImmersive returns the value of the constant kVTProjectionKind_ParametricImmersive.
+func KVTProjectionKind_ParametricImmersive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTProjectionKind_ParametricImmersive")))
 }
 
-// @constant	kVTCompressionPropertyKey_ViewPackingKind @abstract Specifies the value of kCMFormatDescriptionExtension_ViewPackingKind. @discussion The value will be set on the format description for output samples and may affect the decoded frame presentation.
-// KVTCompressionPropertyKey_ViewPackingKind returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_ViewPackingKind as an objc.ID.
-func KVTCompressionPropertyKey_ViewPackingKind() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_ViewPackingKind())
+// Specifies the value of kCMFormatDescriptionExtension_ViewPackingKind. The value will be set on the format description for output samples and may affect the decoded frame presentation.
+// KVTCompressionPropertyKey_ViewPackingKind returns the value of the constant kVTCompressionPropertyKey_ViewPackingKind.
+func KVTCompressionPropertyKey_ViewPackingKind() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_ViewPackingKind")))
 }
 
-// KVTViewPackingKind_SideBySide returns the value of the CoreFoundation reference constant kVTViewPackingKind_SideBySide as an objc.ID.
-func KVTViewPackingKind_SideBySide() objc.ID {
-	return purego.CFConstant(raw.KVTViewPackingKind_SideBySide())
+// KVTViewPackingKind_SideBySide returns the value of the constant kVTViewPackingKind_SideBySide.
+func KVTViewPackingKind_SideBySide() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTViewPackingKind_SideBySide")))
 }
 
-// KVTViewPackingKind_OverUnder returns the value of the CoreFoundation reference constant kVTViewPackingKind_OverUnder as an objc.ID.
-func KVTViewPackingKind_OverUnder() objc.ID {
-	return purego.CFConstant(raw.KVTViewPackingKind_OverUnder())
+// KVTViewPackingKind_OverUnder returns the value of the constant kVTViewPackingKind_OverUnder.
+func KVTViewPackingKind_OverUnder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTViewPackingKind_OverUnder")))
 }
 
-// @constant kVTCompressionPropertyKey_CameraCalibrationDataLensCollection @abstract	Specifies intrinsic and extrinsic parameters for single or multiple lenses. @discussion The property value is an array of dictionaries describing the camera calibration data for each lens. The camera calibration data includes intrinsics and extrinics with other parameters. For a stereoscopic camera system, the left and right lens signaling can be done with the kVTCompressionPropertyCameraCalibrationKey_LensRole key and its value.
-// KVTCompressionPropertyKey_CameraCalibrationDataLensCollection returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_CameraCalibrationDataLensCollection as an objc.ID.
-func KVTCompressionPropertyKey_CameraCalibrationDataLensCollection() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_CameraCalibrationDataLensCollection())
+// Specifies intrinsic and extrinsic parameters for single or multiple lenses. The property value is an array of dictionaries describing the camera calibration data for each lens. The camera calibration data includes intrinsics and extrinics with other parameters. For a stereoscopic camera system, the left and right lens signaling can be done with the kVTCompressionPropertyCameraCalibrationKey_LensRole key and its value.
+// KVTCompressionPropertyKey_CameraCalibrationDataLensCollection returns the value of the constant kVTCompressionPropertyKey_CameraCalibrationDataLensCollection.
+func KVTCompressionPropertyKey_CameraCalibrationDataLensCollection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_CameraCalibrationDataLensCollection")))
 }
 
-// The following keys are required in each kVTCompressionPropertyKey_CameraCalibrationDataLensCollection dictionary. @constant kVTCompressionPropertyCameraCalibrationKey_LensAlgorithmKind @abstract	Specifies the camera calibration methodology. @discussion If the algorithm kind is ParametricLens, the camera lens collection requires camera intrinsic and extrinsic parameters. @constant kVTCompressionPropertyCameraCalibrationKey_LensDomain @abstract	Specifies the kind of lens (e.g., color). @constant kVTCompressionPropertyCameraCalibrationKey_LensIdentifier @abstract	Specifies a unique number associated with a lens. @constant kVTCompressionPropertyCameraCalibrationKey_LensRole @abstract	Specifies the particular use of the lens in the camera system (e.g., left or right for a stereo system). @discussion For a stereoscopic camera system, one lens should have the left role and another should have the right role. @constant kVTCompressionPropertyCameraCalibrationKey_LensDistortions @abstract	Specifies the first and second radial distortion coefficients(k1 and k2) used to correct the distortion that appeared as curved lines for straight lines and the first and second tangential distortion coefficients(p1 and p2) used to correct the distortion caused by a lens's improper alignment of physical elements. @discussion The values are in a CFArray of four CFNumbers in k1, k2, p1 and p2 order. @constant kVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialX @abstract    Specifies a three element polynomial for mapping x axis UV parameters with an adjustment using the equation `x' = polynomialX[0] + polynomialX[1]*x + polynomialX[2]*x^3`. @discussion The values are in a CFArray of three CFNumbers(float) in the order polynomialX[0], polynomialX[1] & polynomialX[2]. The polynomial transform origin is at the center of the frame. The default values of elements of polynomialX[] are [0.0, 1.0, 0.0]. @constant kVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialY @abstract    Specifies a three element polynomial for mapping y axis UV parameters with an adjustment using the equation `y' = polynomialY[0] + polynomialY[1]*y + polynomialY[2]*y^3`. @discussion The values are in a CFArray of three CFNumbers(float) in the order polynomialY[0], polynomialY[1] & polynomialY[2]. The polynomial transform origin is at the center of the frame. The default values of elements of polynomialY[] are [0.0, 1.0, 0.0]. @constant kVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit @abstract	Specifies the outer limit of the calibration validity in degrees of angle eccentric from the optical axis. @discussion The value is linked to radial distortion corrections with k1 and k2. @constant kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrix @abstract	Specifies the 3x3 camera intrinsic matrix for camera calibration. @discussion Camera intrinsic matrix is a CFData containing a matrix_float3x3, which is column-major. Each element is in IEEE754 native-endian 32-bit floating point. It has the following contents: fx	s	cx 0	fy	cy 0	0	1 fx and fy are the focal length in pixels. For square pixels, they will have the same value. cx and cy are the coordinates of the principal point. The origin is the upper left of the frame. s is an optional skew factor. @constant kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixProjectionOffset @abstract	Specifies the offset of the point of perspective relative to the rectilinear projection. @constant kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixReferenceDimensions @abstract	Specifies the image dimensions to which the camera’s intrinsic matrix values are relative. @discussion Values are width and height in a CFDictionary. Dictionary keys are compatible with CGSize dictionary, namely "Width" and "Height". @constant kVTCompressionPropertyCameraCalibrationKey_ExtrinsicOriginSource @abstract	Identifies how the origin of the camera system's extrinsics are determined. @discussion The 'blin' value indicates the center of transform is determined by the point mid way along the dimensions indicated by the StereoCameraSystemBaselineBox held in the StereoCameraSystemBox. Each left and right lens within a stereoscopic camera system is equidistant from this point, so the 'blin' value is halved when associated with the respective left and right lenses. @constant kVTCompressionPropertyCameraCalibrationKey_ExtrinsicOrientationQuaternion @abstract	Specifies a camera’s orientation to a world or scene coordinate system. The orientation value is a unit quaternion(ix, iy, and iz) instead of the classical 3x3 matrix. @discussion The values are in a CFArray of three CFNumbers in ix, iy, and iz order.
-// KVTCompressionPropertyCameraCalibrationKey_LensAlgorithmKind returns the value of the CoreFoundation reference constant kVTCompressionPropertyCameraCalibrationKey_LensAlgorithmKind as an objc.ID.
-func KVTCompressionPropertyCameraCalibrationKey_LensAlgorithmKind() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyCameraCalibrationKey_LensAlgorithmKind())
+// The following keys are required in each kVTCompressionPropertyKey_CameraCalibrationDataLensCollection dictionary. Specifies the camera calibration methodology. If the algorithm kind is ParametricLens, the camera lens collection requires camera intrinsic and extrinsic parameters. Specifies the kind of lens (e.g., color). Specifies a unique number associated with a lens. Specifies the particular use of the lens in the camera system (e.g., left or right for a stereo system). For a stereoscopic camera system, one lens should have the left role and another should have the right role. Specifies the first and second radial distortion coefficients(k1 and k2) used to correct the distortion that appeared as curved lines for straight lines and the first and second tangential distortion coefficients(p1 and p2) used to correct the distortion caused by a lens's improper alignment of physical elements. The values are in a CFArray of four CFNumbers in k1, k2, p1 and p2 order. Specifies a three element polynomial for mapping x axis UV parameters with an adjustment using the equation `x' = polynomialX[0] + polynomialX[1]*x + polynomialX[2]*x^3`. The values are in a CFArray of three CFNumbers(float) in the order polynomialX[0], polynomialX[1] & polynomialX[2]. The polynomial transform origin is at the center of the frame. The default values of elements of polynomialX[] are [0.0, 1.0, 0.0]. Specifies a three element polynomial for mapping y axis UV parameters with an adjustment using the equation `y' = polynomialY[0] + polynomialY[1]*y + polynomialY[2]*y^3`. The values are in a CFArray of three CFNumbers(float) in the order polynomialY[0], polynomialY[1] & polynomialY[2]. The polynomial transform origin is at the center of the frame. The default values of elements of polynomialY[] are [0.0, 1.0, 0.0]. Specifies the outer limit of the calibration validity in degrees of angle eccentric from the optical axis. The value is linked to radial distortion corrections with k1 and k2. Specifies the 3x3 camera intrinsic matrix for camera calibration. Camera intrinsic matrix is a CFData containing a matrix_float3x3, which is column-major. Each element is in IEEE754 native-endian 32-bit floating point. It has the following contents: fx	s	cx 0	fy	cy 0	0	1 fx and fy are the focal length in pixels. For square pixels, they will have the same value. cx and cy are the coordinates of the principal point. The origin is the upper left of the frame. s is an optional skew factor. Specifies the offset of the point of perspective relative to the rectilinear projection. Specifies the image dimensions to which the camera’s intrinsic matrix values are relative. Values are width and height in a CFDictionary. Dictionary keys are compatible with CGSize dictionary, namely "Width" and "Height". Identifies how the origin of the camera system's extrinsics are determined. The 'blin' value indicates the center of transform is determined by the point mid way along the dimensions indicated by the StereoCameraSystemBaselineBox held in the StereoCameraSystemBox. Each left and right lens within a stereoscopic camera system is equidistant from this point, so the 'blin' value is halved when associated with the respective left and right lenses. Specifies a camera’s orientation to a world or scene coordinate system. The orientation value is a unit quaternion(ix, iy, and iz) instead of the classical 3x3 matrix. The values are in a CFArray of three CFNumbers in ix, iy, and iz order.
+// KVTCompressionPropertyCameraCalibrationKey_LensAlgorithmKind returns the value of the constant kVTCompressionPropertyCameraCalibrationKey_LensAlgorithmKind.
+func KVTCompressionPropertyCameraCalibrationKey_LensAlgorithmKind() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyCameraCalibrationKey_LensAlgorithmKind")))
 }
 
-// KVTCameraCalibrationLensAlgorithmKind_ParametricLens returns the value of the CoreFoundation reference constant kVTCameraCalibrationLensAlgorithmKind_ParametricLens as an objc.ID.
-func KVTCameraCalibrationLensAlgorithmKind_ParametricLens() objc.ID {
-	return purego.CFConstant(raw.KVTCameraCalibrationLensAlgorithmKind_ParametricLens())
+// KVTCameraCalibrationLensAlgorithmKind_ParametricLens returns the value of the constant kVTCameraCalibrationLensAlgorithmKind_ParametricLens.
+func KVTCameraCalibrationLensAlgorithmKind_ParametricLens() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCameraCalibrationLensAlgorithmKind_ParametricLens")))
 }
 
-// KVTCompressionPropertyCameraCalibrationKey_LensDomain returns the value of the CoreFoundation reference constant kVTCompressionPropertyCameraCalibrationKey_LensDomain as an objc.ID.
-func KVTCompressionPropertyCameraCalibrationKey_LensDomain() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyCameraCalibrationKey_LensDomain())
+// KVTCompressionPropertyCameraCalibrationKey_LensDomain returns the value of the constant kVTCompressionPropertyCameraCalibrationKey_LensDomain.
+func KVTCompressionPropertyCameraCalibrationKey_LensDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyCameraCalibrationKey_LensDomain")))
 }
 
-// KVTCameraCalibrationLensDomain_Color returns the value of the CoreFoundation reference constant kVTCameraCalibrationLensDomain_Color as an objc.ID.
-func KVTCameraCalibrationLensDomain_Color() objc.ID {
-	return purego.CFConstant(raw.KVTCameraCalibrationLensDomain_Color())
+// KVTCameraCalibrationLensDomain_Color returns the value of the constant kVTCameraCalibrationLensDomain_Color.
+func KVTCameraCalibrationLensDomain_Color() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCameraCalibrationLensDomain_Color")))
 }
 
-// KVTCompressionPropertyCameraCalibrationKey_LensIdentifier returns the value of the CoreFoundation reference constant kVTCompressionPropertyCameraCalibrationKey_LensIdentifier as an objc.ID.
-func KVTCompressionPropertyCameraCalibrationKey_LensIdentifier() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyCameraCalibrationKey_LensIdentifier())
+// KVTCompressionPropertyCameraCalibrationKey_LensIdentifier returns the value of the constant kVTCompressionPropertyCameraCalibrationKey_LensIdentifier.
+func KVTCompressionPropertyCameraCalibrationKey_LensIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyCameraCalibrationKey_LensIdentifier")))
 }
 
-// KVTCompressionPropertyCameraCalibrationKey_LensRole returns the value of the CoreFoundation reference constant kVTCompressionPropertyCameraCalibrationKey_LensRole as an objc.ID.
-func KVTCompressionPropertyCameraCalibrationKey_LensRole() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyCameraCalibrationKey_LensRole())
+// KVTCompressionPropertyCameraCalibrationKey_LensRole returns the value of the constant kVTCompressionPropertyCameraCalibrationKey_LensRole.
+func KVTCompressionPropertyCameraCalibrationKey_LensRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyCameraCalibrationKey_LensRole")))
 }
 
-// KVTCameraCalibrationLensRole_Mono returns the value of the CoreFoundation reference constant kVTCameraCalibrationLensRole_Mono as an objc.ID.
-func KVTCameraCalibrationLensRole_Mono() objc.ID {
-	return purego.CFConstant(raw.KVTCameraCalibrationLensRole_Mono())
+// KVTCameraCalibrationLensRole_Mono returns the value of the constant kVTCameraCalibrationLensRole_Mono.
+func KVTCameraCalibrationLensRole_Mono() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCameraCalibrationLensRole_Mono")))
 }
 
-// KVTCameraCalibrationLensRole_Left returns the value of the CoreFoundation reference constant kVTCameraCalibrationLensRole_Left as an objc.ID.
-func KVTCameraCalibrationLensRole_Left() objc.ID {
-	return purego.CFConstant(raw.KVTCameraCalibrationLensRole_Left())
+// KVTCameraCalibrationLensRole_Left returns the value of the constant kVTCameraCalibrationLensRole_Left.
+func KVTCameraCalibrationLensRole_Left() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCameraCalibrationLensRole_Left")))
 }
 
-// KVTCameraCalibrationLensRole_Right returns the value of the CoreFoundation reference constant kVTCameraCalibrationLensRole_Right as an objc.ID.
-func KVTCameraCalibrationLensRole_Right() objc.ID {
-	return purego.CFConstant(raw.KVTCameraCalibrationLensRole_Right())
+// KVTCameraCalibrationLensRole_Right returns the value of the constant kVTCameraCalibrationLensRole_Right.
+func KVTCameraCalibrationLensRole_Right() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCameraCalibrationLensRole_Right")))
 }
 
-// KVTCompressionPropertyCameraCalibrationKey_LensDistortions returns the value of the CoreFoundation reference constant kVTCompressionPropertyCameraCalibrationKey_LensDistortions as an objc.ID.
-func KVTCompressionPropertyCameraCalibrationKey_LensDistortions() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyCameraCalibrationKey_LensDistortions())
+// KVTCompressionPropertyCameraCalibrationKey_LensDistortions returns the value of the constant kVTCompressionPropertyCameraCalibrationKey_LensDistortions.
+func KVTCompressionPropertyCameraCalibrationKey_LensDistortions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyCameraCalibrationKey_LensDistortions")))
 }
 
-// KVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit returns the value of the CoreFoundation reference constant kVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit as an objc.ID.
-func KVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit())
+// KVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit returns the value of the constant kVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit.
+func KVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyCameraCalibrationKey_RadialAngleLimit")))
 }
 
-// KVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialX returns the value of the CoreFoundation reference constant kVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialX as an objc.ID.
-func KVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialX() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialX())
+// KVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialX returns the value of the constant kVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialX.
+func KVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialX() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialX")))
 }
 
-// KVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialY returns the value of the CoreFoundation reference constant kVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialY as an objc.ID.
-func KVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialY() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialY())
+// KVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialY returns the value of the constant kVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialY.
+func KVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialY() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyCameraCalibrationKey_LensFrameAdjustmentsPolynomialY")))
 }
 
-// KVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrix returns the value of the CoreFoundation reference constant kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrix as an objc.ID.
-func KVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrix() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrix())
+// KVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrix returns the value of the constant kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrix.
+func KVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrix")))
 }
 
-// KVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixProjectionOffset returns the value of the CoreFoundation reference constant kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixProjectionOffset as an objc.ID.
-func KVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixProjectionOffset() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixProjectionOffset())
+// KVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixProjectionOffset returns the value of the constant kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixProjectionOffset.
+func KVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixProjectionOffset() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixProjectionOffset")))
 }
 
-// KVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixReferenceDimensions returns the value of the CoreFoundation reference constant kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixReferenceDimensions as an objc.ID.
-func KVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixReferenceDimensions() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixReferenceDimensions())
+// KVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixReferenceDimensions returns the value of the constant kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixReferenceDimensions.
+func KVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixReferenceDimensions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyCameraCalibrationKey_IntrinsicMatrixReferenceDimensions")))
 }
 
-// KVTCompressionPropertyCameraCalibrationKey_ExtrinsicOriginSource returns the value of the CoreFoundation reference constant kVTCompressionPropertyCameraCalibrationKey_ExtrinsicOriginSource as an objc.ID.
-func KVTCompressionPropertyCameraCalibrationKey_ExtrinsicOriginSource() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyCameraCalibrationKey_ExtrinsicOriginSource())
+// KVTCompressionPropertyCameraCalibrationKey_ExtrinsicOriginSource returns the value of the constant kVTCompressionPropertyCameraCalibrationKey_ExtrinsicOriginSource.
+func KVTCompressionPropertyCameraCalibrationKey_ExtrinsicOriginSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyCameraCalibrationKey_ExtrinsicOriginSource")))
 }
 
-// KVTCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline returns the value of the CoreFoundation reference constant kVTCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline as an objc.ID.
-func KVTCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline() objc.ID {
-	return purego.CFConstant(raw.KVTCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline())
+// KVTCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline returns the value of the constant kVTCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline.
+func KVTCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCameraCalibrationExtrinsicOriginSource_StereoCameraSystemBaseline")))
 }
 
-// KVTCompressionPropertyCameraCalibrationKey_ExtrinsicOrientationQuaternion returns the value of the CoreFoundation reference constant kVTCompressionPropertyCameraCalibrationKey_ExtrinsicOrientationQuaternion as an objc.ID.
-func KVTCompressionPropertyCameraCalibrationKey_ExtrinsicOrientationQuaternion() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyCameraCalibrationKey_ExtrinsicOrientationQuaternion())
+// KVTCompressionPropertyCameraCalibrationKey_ExtrinsicOrientationQuaternion returns the value of the constant kVTCompressionPropertyCameraCalibrationKey_ExtrinsicOrientationQuaternion.
+func KVTCompressionPropertyCameraCalibrationKey_ExtrinsicOrientationQuaternion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyCameraCalibrationKey_ExtrinsicOrientationQuaternion")))
 }
 
-// @constant	kVTCompressionPropertyKey_SuggestedLookAheadFrameCount @abstract Requests that the encoder retain the specified number of frames during encoding. These frames will be used for additional analysis and statistics gathering before the frame is finally encoded at the end of the window. When this property is not set, video encoder will automatically determine the number of lookahead frames. @discussion Encoder will choose number of lookahead frames closer to the suggested value based on internal configuration. This property directly affects latency of the video encoder. The following properties also affect look ahead frames: 1. Value of this property must be less than or equal to `kVTCompressionPropertyKey_MaxFrameDelayCount`. 2. This property is ignored when `VTVideoEncoderSpecification_EnableLowLatencyRateControl` is set to true 3. This property is ignored when `kVTCompressionPropertyKey_Quality` is set to 1.0 4. This property can not be used in conjunction with multi-pass feature (`kVTCompressionPropertyKey_MultiPassStorage`)
-// KVTCompressionPropertyKey_SuggestedLookAheadFrameCount returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_SuggestedLookAheadFrameCount as an objc.ID.
-func KVTCompressionPropertyKey_SuggestedLookAheadFrameCount() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_SuggestedLookAheadFrameCount())
+// Requests that the encoder retain the specified number of frames during encoding. These frames will be used for additional analysis and statistics gathering before the frame is finally encoded at the end of the window. When this property is not set, video encoder will automatically determine the number of lookahead frames. Encoder will choose number of lookahead frames closer to the suggested value based on internal configuration. This property directly affects latency of the video encoder. The following properties also affect look ahead frames: 1. Value of this property must be less than or equal to `kVTCompressionPropertyKey_MaxFrameDelayCount`. 2. This property is ignored when `VTVideoEncoderSpecification_EnableLowLatencyRateControl` is set to true 3. This property is ignored when `kVTCompressionPropertyKey_Quality` is set to 1.0 4. This property can not be used in conjunction with multi-pass feature (`kVTCompressionPropertyKey_MultiPassStorage`)
+// KVTCompressionPropertyKey_SuggestedLookAheadFrameCount returns the value of the constant kVTCompressionPropertyKey_SuggestedLookAheadFrameCount.
+func KVTCompressionPropertyKey_SuggestedLookAheadFrameCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_SuggestedLookAheadFrameCount")))
 }
 
-// @constant	kVTCompressionPropertyKey_SpatialAdaptiveQPLevel @abstract Control spatial adaptation of the quantization parameter (QP) based on per-frame statistics. If set to kVTQPModulationLevel_Disable, spatial QP adaptation is not applied based on per-frame statistics. If set to kVTQPModulationLevel_Default, video encoder is allowed to apply spatial QP adaptation for each macro block (or coding unit) within a video frame. QP adaptation is based on spatial characteristics of a frame and the level of spatial QP adaptation is decided internally by the rate controller. @discussion This property must be disabled when low latency rate control is enabled. Support for this property is codec dependent.
-// KVTCompressionPropertyKey_SpatialAdaptiveQPLevel returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_SpatialAdaptiveQPLevel as an objc.ID.
-func KVTCompressionPropertyKey_SpatialAdaptiveQPLevel() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_SpatialAdaptiveQPLevel())
+// Control spatial adaptation of the quantization parameter (QP) based on per-frame statistics. If set to kVTQPModulationLevel_Disable, spatial QP adaptation is not applied based on per-frame statistics. If set to kVTQPModulationLevel_Default, video encoder is allowed to apply spatial QP adaptation for each macro block (or coding unit) within a video frame. QP adaptation is based on spatial characteristics of a frame and the level of spatial QP adaptation is decided internally by the rate controller. This property must be disabled when low latency rate control is enabled. Support for this property is codec dependent.
+// KVTCompressionPropertyKey_SpatialAdaptiveQPLevel returns the value of the constant kVTCompressionPropertyKey_SpatialAdaptiveQPLevel.
+func KVTCompressionPropertyKey_SpatialAdaptiveQPLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_SpatialAdaptiveQPLevel")))
 }
 
-// @constant kVTCompressionPropertyKey_SupportedPresetDictionaries @abstract Where supported by video encoders, returns a dictionary whose keys are the available compression presets (prefixed by `kVTCompressionPreset_`) and the values are dictionaries containing the corresponding settings property key/value pairs. @discussion Clients can select a compression preset for their encoding needs and use its encoder settings to configure the encoder. Clients may also use the encoder settings as a base configuration that they can customize as they require. See also kVTCompressionPreset_HighQuality, kVTCompressionPreset_Balanced, kVTCompressionPreset_HighSpeed, kVTCompressionPreset_VideoConferencing.
-// KVTCompressionPropertyKey_SupportedPresetDictionaries returns the value of the CoreFoundation reference constant kVTCompressionPropertyKey_SupportedPresetDictionaries as an objc.ID.
-func KVTCompressionPropertyKey_SupportedPresetDictionaries() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPropertyKey_SupportedPresetDictionaries())
+// Where supported by video encoders, returns a dictionary whose keys are the available compression presets (prefixed by `kVTCompressionPreset_`) and the values are dictionaries containing the corresponding settings property key/value pairs. Clients can select a compression preset for their encoding needs and use its encoder settings to configure the encoder. Clients may also use the encoder settings as a base configuration that they can customize as they require. See also kVTCompressionPreset_HighQuality, kVTCompressionPreset_Balanced, kVTCompressionPreset_HighSpeed, kVTCompressionPreset_VideoConferencing.
+// KVTCompressionPropertyKey_SupportedPresetDictionaries returns the value of the constant kVTCompressionPropertyKey_SupportedPresetDictionaries.
+func KVTCompressionPropertyKey_SupportedPresetDictionaries() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPropertyKey_SupportedPresetDictionaries")))
 }
 
-// @constant kVTCompressionPreset_HighQuality @abstract A preset to achieve a high compression quality. @discussion An encoder configured using this preset is expected to achieve a higher quality with a slower encoding than an encoder configured with the preset kVTCompressionPreset_Balanced or kVTCompressionPreset_HighSpeed. The presets kVTCompressionPreset_Balanced and kVTCompressionPreset_HighSpeed may be preferred for a faster encoding. See also kVTCompressionPreset_Balanced, kVTCompressionPreset_HighSpeed, kVTCompressionPreset_VideoConferencing.
-// KVTCompressionPreset_HighQuality returns the value of the CoreFoundation reference constant kVTCompressionPreset_HighQuality as an objc.ID.
-func KVTCompressionPreset_HighQuality() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPreset_HighQuality())
+// A preset to achieve a high compression quality. An encoder configured using this preset is expected to achieve a higher quality with a slower encoding than an encoder configured with the preset kVTCompressionPreset_Balanced or kVTCompressionPreset_HighSpeed. The presets kVTCompressionPreset_Balanced and kVTCompressionPreset_HighSpeed may be preferred for a faster encoding. See also kVTCompressionPreset_Balanced, kVTCompressionPreset_HighSpeed, kVTCompressionPreset_VideoConferencing.
+// KVTCompressionPreset_HighQuality returns the value of the constant kVTCompressionPreset_HighQuality.
+func KVTCompressionPreset_HighQuality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPreset_HighQuality")))
 }
 
-// @constant kVTCompressionPreset_Balanced @abstract A preset to provide a balanced compression quality and encoding speed. @discussion An encoder configured using this preset is expected to achieve a higher quality than an encoder configured with the preset kVTCompressionPreset_HighSpeed. The preset kVTCompressionPreset_HighSpeed may be preferred for a faster encoding. The preset kVTCompressionPreset_HighQuality may be preferred for a higher compression quality. See also kVTCompressionPreset_HighQuality, kVTCompressionPreset_HighSpeed, kVTCompressionPreset_VideoConferencing.
-// KVTCompressionPreset_Balanced returns the value of the CoreFoundation reference constant kVTCompressionPreset_Balanced as an objc.ID.
-func KVTCompressionPreset_Balanced() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPreset_Balanced())
+// A preset to provide a balanced compression quality and encoding speed. An encoder configured using this preset is expected to achieve a higher quality than an encoder configured with the preset kVTCompressionPreset_HighSpeed. The preset kVTCompressionPreset_HighSpeed may be preferred for a faster encoding. The preset kVTCompressionPreset_HighQuality may be preferred for a higher compression quality. See also kVTCompressionPreset_HighQuality, kVTCompressionPreset_HighSpeed, kVTCompressionPreset_VideoConferencing.
+// KVTCompressionPreset_Balanced returns the value of the constant kVTCompressionPreset_Balanced.
+func KVTCompressionPreset_Balanced() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPreset_Balanced")))
 }
 
-// @constant kVTCompressionPreset_HighSpeed @abstract A preset to provide a high-speed encoding. @discussion An encoder configured using this preset is expected to achieve a faster encoding at a lower compression quality than an encoder configured with the preset kVTCompressionPreset_HighQuality or kVTCompressionPreset_Balanced. The presets kVTCompressionPreset_HighQuality and kVTCompressionPreset_Balanced may be preferred for a higher compression quality. See also kVTCompressionPreset_HighQuality, kVTCompressionPreset_Balanced, kVTCompressionPreset_VideoConferencing.
-// KVTCompressionPreset_HighSpeed returns the value of the CoreFoundation reference constant kVTCompressionPreset_HighSpeed as an objc.ID.
-func KVTCompressionPreset_HighSpeed() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPreset_HighSpeed())
+// A preset to provide a high-speed encoding. An encoder configured using this preset is expected to achieve a faster encoding at a lower compression quality than an encoder configured with the preset kVTCompressionPreset_HighQuality or kVTCompressionPreset_Balanced. The presets kVTCompressionPreset_HighQuality and kVTCompressionPreset_Balanced may be preferred for a higher compression quality. See also kVTCompressionPreset_HighQuality, kVTCompressionPreset_Balanced, kVTCompressionPreset_VideoConferencing.
+// KVTCompressionPreset_HighSpeed returns the value of the constant kVTCompressionPreset_HighSpeed.
+func KVTCompressionPreset_HighSpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPreset_HighSpeed")))
 }
 
-// @constant kVTCompressionPreset_VideoConferencing @abstract A preset to achieve low-latency encoding for real-time communication applications. @discussion This preset requires setting kVTVideoEncoderSpecification_EnableLowLatencyRateControl to kCFBooleanTrue for encoding in the low-latency mode. See also kVTCompressionPreset_HighQuality, kVTCompressionPreset_Balanced, kVTCompressionPreset_HighSpeed.
-// KVTCompressionPreset_VideoConferencing returns the value of the CoreFoundation reference constant kVTCompressionPreset_VideoConferencing as an objc.ID.
-func KVTCompressionPreset_VideoConferencing() objc.ID {
-	return purego.CFConstant(raw.KVTCompressionPreset_VideoConferencing())
+// A preset to achieve low-latency encoding for real-time communication applications. This preset requires setting kVTVideoEncoderSpecification_EnableLowLatencyRateControl to kCFBooleanTrue for encoding in the low-latency mode. See also kVTCompressionPreset_HighQuality, kVTCompressionPreset_Balanced, kVTCompressionPreset_HighSpeed.
+// KVTCompressionPreset_VideoConferencing returns the value of the constant kVTCompressionPreset_VideoConferencing.
+func KVTCompressionPreset_VideoConferencing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTCompressionPreset_VideoConferencing")))
 }
 
-// KVTPropertyTypeKey returns the value of the CoreFoundation reference constant kVTPropertyTypeKey as an objc.ID.
-func KVTPropertyTypeKey() objc.ID { return purego.CFConstant(raw.KVTPropertyTypeKey()) }
+// KVTPropertyTypeKey returns the value of the constant kVTPropertyTypeKey.
+func KVTPropertyTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPropertyTypeKey")))
+}
 
-// KVTPropertyType_Enumeration returns the value of the CoreFoundation reference constant kVTPropertyType_Enumeration as an objc.ID.
-func KVTPropertyType_Enumeration() objc.ID {
-	return purego.CFConstant(raw.KVTPropertyType_Enumeration())
+// KVTPropertyType_Enumeration returns the value of the constant kVTPropertyType_Enumeration.
+func KVTPropertyType_Enumeration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPropertyType_Enumeration")))
 }
 
-// KVTPropertyType_Boolean returns the value of the CoreFoundation reference constant kVTPropertyType_Boolean as an objc.ID.
-func KVTPropertyType_Boolean() objc.ID { return purego.CFConstant(raw.KVTPropertyType_Boolean()) }
+// KVTPropertyType_Boolean returns the value of the constant kVTPropertyType_Boolean.
+func KVTPropertyType_Boolean() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPropertyType_Boolean")))
+}
 
-// KVTPropertyType_Number returns the value of the CoreFoundation reference constant kVTPropertyType_Number as an objc.ID.
-func KVTPropertyType_Number() objc.ID { return purego.CFConstant(raw.KVTPropertyType_Number()) }
+// KVTPropertyType_Number returns the value of the constant kVTPropertyType_Number.
+func KVTPropertyType_Number() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPropertyType_Number")))
+}
 
-// KVTPropertyReadWriteStatusKey returns the value of the CoreFoundation reference constant kVTPropertyReadWriteStatusKey as an objc.ID.
-func KVTPropertyReadWriteStatusKey() objc.ID {
-	return purego.CFConstant(raw.KVTPropertyReadWriteStatusKey())
+// KVTPropertyReadWriteStatusKey returns the value of the constant kVTPropertyReadWriteStatusKey.
+func KVTPropertyReadWriteStatusKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPropertyReadWriteStatusKey")))
 }
 
-// KVTPropertyReadWriteStatus_ReadOnly returns the value of the CoreFoundation reference constant kVTPropertyReadWriteStatus_ReadOnly as an objc.ID.
-func KVTPropertyReadWriteStatus_ReadOnly() objc.ID {
-	return purego.CFConstant(raw.KVTPropertyReadWriteStatus_ReadOnly())
+// KVTPropertyReadWriteStatus_ReadOnly returns the value of the constant kVTPropertyReadWriteStatus_ReadOnly.
+func KVTPropertyReadWriteStatus_ReadOnly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPropertyReadWriteStatus_ReadOnly")))
 }
 
-// KVTPropertyReadWriteStatus_ReadWrite returns the value of the CoreFoundation reference constant kVTPropertyReadWriteStatus_ReadWrite as an objc.ID.
-func KVTPropertyReadWriteStatus_ReadWrite() objc.ID {
-	return purego.CFConstant(raw.KVTPropertyReadWriteStatus_ReadWrite())
+// KVTPropertyReadWriteStatus_ReadWrite returns the value of the constant kVTPropertyReadWriteStatus_ReadWrite.
+func KVTPropertyReadWriteStatus_ReadWrite() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPropertyReadWriteStatus_ReadWrite")))
 }
 
-// KVTPropertyShouldBeSerializedKey returns the value of the CoreFoundation reference constant kVTPropertyShouldBeSerializedKey as an objc.ID.
-func KVTPropertyShouldBeSerializedKey() objc.ID {
-	return purego.CFConstant(raw.KVTPropertyShouldBeSerializedKey())
+// KVTPropertyShouldBeSerializedKey returns the value of the constant kVTPropertyShouldBeSerializedKey.
+func KVTPropertyShouldBeSerializedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPropertyShouldBeSerializedKey")))
 }
 
-// KVTPropertySupportedValueMinimumKey returns the value of the CoreFoundation reference constant kVTPropertySupportedValueMinimumKey as an objc.ID.
-func KVTPropertySupportedValueMinimumKey() objc.ID {
-	return purego.CFConstant(raw.KVTPropertySupportedValueMinimumKey())
+// KVTPropertySupportedValueMinimumKey returns the value of the constant kVTPropertySupportedValueMinimumKey.
+func KVTPropertySupportedValueMinimumKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPropertySupportedValueMinimumKey")))
 }
 
-// KVTPropertySupportedValueMaximumKey returns the value of the CoreFoundation reference constant kVTPropertySupportedValueMaximumKey as an objc.ID.
-func KVTPropertySupportedValueMaximumKey() objc.ID {
-	return purego.CFConstant(raw.KVTPropertySupportedValueMaximumKey())
+// KVTPropertySupportedValueMaximumKey returns the value of the constant kVTPropertySupportedValueMaximumKey.
+func KVTPropertySupportedValueMaximumKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPropertySupportedValueMaximumKey")))
 }
 
-// KVTPropertySupportedValueListKey returns the value of the CoreFoundation reference constant kVTPropertySupportedValueListKey as an objc.ID.
-func KVTPropertySupportedValueListKey() objc.ID {
-	return purego.CFConstant(raw.KVTPropertySupportedValueListKey())
+// KVTPropertySupportedValueListKey returns the value of the constant kVTPropertySupportedValueListKey.
+func KVTPropertySupportedValueListKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPropertySupportedValueListKey")))
 }
 
-// KVTPropertyDocumentationKey returns the value of the CoreFoundation reference constant kVTPropertyDocumentationKey as an objc.ID.
-func KVTPropertyDocumentationKey() objc.ID {
-	return purego.CFConstant(raw.KVTPropertyDocumentationKey())
+// KVTPropertyDocumentationKey returns the value of the constant kVTPropertyDocumentationKey.
+func KVTPropertyDocumentationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPropertyDocumentationKey")))
 }
 
-// @constant	kVTVideoEncoderSpecification_EncoderID @abstract Specifies a particular video encoder by its ID string. @discussion To specify a particular video encoder when creating a compression session, pass an encoderSpecification CFDictionary containing this key and the EncoderID as its value. The EncoderID CFString may be obtained from the kVTVideoEncoderList_EncoderID entry in the array returned by VTCopyVideoEncoderList.
-// KVTVideoEncoderSpecification_EncoderID returns the value of the CoreFoundation reference constant kVTVideoEncoderSpecification_EncoderID as an objc.ID.
-func KVTVideoEncoderSpecification_EncoderID() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderSpecification_EncoderID())
+// Specifies a particular video encoder by its ID string. To specify a particular video encoder when creating a compression session, pass an encoderSpecification CFDictionary containing this key and the EncoderID as its value. The EncoderID CFString may be obtained from the kVTVideoEncoderList_EncoderID entry in the array returned by VTCopyVideoEncoderList.
+// KVTVideoEncoderSpecification_EncoderID returns the value of the constant kVTVideoEncoderSpecification_EncoderID.
+func KVTVideoEncoderSpecification_EncoderID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderSpecification_EncoderID")))
 }
 
-// @constant	kVTDecompressionPropertyKey_PixelBufferPool @abstract A pixel buffer pool for pixel buffers being output by the decompression session. @discussion This pixel buffer pool is always compatible with the client's pixel buffer attributes as specified when calling VTDecompressionSessionCreate.
-// KVTDecompressionPropertyKey_PixelBufferPool returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_PixelBufferPool as an objc.ID.
-func KVTDecompressionPropertyKey_PixelBufferPool() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_PixelBufferPool())
+// A pixel buffer pool for pixel buffers being output by the decompression session. This pixel buffer pool is always compatible with the client's pixel buffer attributes as specified when calling VTDecompressionSessionCreate.
+// KVTDecompressionPropertyKey_PixelBufferPool returns the value of the constant kVTDecompressionPropertyKey_PixelBufferPool.
+func KVTDecompressionPropertyKey_PixelBufferPool() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_PixelBufferPool")))
 }
 
-// @constant	kVTDecompressionPropertyKey_PixelBufferPoolIsShared @abstract Indicates whether a common pixel buffer pool is shared between the video decoder and the session client. @discussion This is false if separate pools are used because the pixel buffer attributes specified by the video decoder and the client were incompatible.
-// KVTDecompressionPropertyKey_PixelBufferPoolIsShared returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_PixelBufferPoolIsShared as an objc.ID.
-func KVTDecompressionPropertyKey_PixelBufferPoolIsShared() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_PixelBufferPoolIsShared())
+// Indicates whether a common pixel buffer pool is shared between the video decoder and the session client. This is false if separate pools are used because the pixel buffer attributes specified by the video decoder and the client were incompatible.
+// KVTDecompressionPropertyKey_PixelBufferPoolIsShared returns the value of the constant kVTDecompressionPropertyKey_PixelBufferPoolIsShared.
+func KVTDecompressionPropertyKey_PixelBufferPoolIsShared() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_PixelBufferPoolIsShared")))
 }
 
-// @constant	kVTDecompressionPropertyKey_OutputPoolRequestedMinimumBufferCount @abstract Requests that the VTDecompressionSession use the value provided as a minimum buffer count for its output CVPixelBufferPool, not releasing buffers while the number in use is below this level. @discussion This property effectively requests that the kCVPixelBufferPoolMinimumBufferCountKey key be used for the creation of the output CVPixelBufferPool. For general playback cases, standard CVPixelBufferPool age-out behaviour should be sufficient and this property should not be needed.  This property should only be used in unusual playback scenarios where a peak pool level is known, and the potential memory overhead is an acceptable tradeoff for avoiding possible buffer reallocation. Setting this property to NULL or passing in the value 0 will clear this setting and remove the minimum buffer count. Setting this property while a VTDecompressionSession is in use will result in the creation of a new CVPixelBufferPool. This will cause new buffers to be allocated, and existing buffers to be deallocated when they are released.
-// KVTDecompressionPropertyKey_OutputPoolRequestedMinimumBufferCount returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_OutputPoolRequestedMinimumBufferCount as an objc.ID.
-func KVTDecompressionPropertyKey_OutputPoolRequestedMinimumBufferCount() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_OutputPoolRequestedMinimumBufferCount())
+// Requests that the VTDecompressionSession use the value provided as a minimum buffer count for its output CVPixelBufferPool, not releasing buffers while the number in use is below this level. This property effectively requests that the kCVPixelBufferPoolMinimumBufferCountKey key be used for the creation of the output CVPixelBufferPool. For general playback cases, standard CVPixelBufferPool age-out behaviour should be sufficient and this property should not be needed.  This property should only be used in unusual playback scenarios where a peak pool level is known, and the potential memory overhead is an acceptable tradeoff for avoiding possible buffer reallocation. Setting this property to NULL or passing in the value 0 will clear this setting and remove the minimum buffer count. Setting this property while a VTDecompressionSession is in use will result in the creation of a new CVPixelBufferPool. This will cause new buffers to be allocated, and existing buffers to be deallocated when they are released.
+// KVTDecompressionPropertyKey_OutputPoolRequestedMinimumBufferCount returns the value of the constant kVTDecompressionPropertyKey_OutputPoolRequestedMinimumBufferCount.
+func KVTDecompressionPropertyKey_OutputPoolRequestedMinimumBufferCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_OutputPoolRequestedMinimumBufferCount")))
 }
 
-// @constant	kVTDecompressionPropertyKey_NumberOfFramesBeingDecoded @abstract Returns the number of frames currently being decoded. @discussion This number may decrease asynchronously as frames are output.
-// KVTDecompressionPropertyKey_NumberOfFramesBeingDecoded returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_NumberOfFramesBeingDecoded as an objc.ID.
-func KVTDecompressionPropertyKey_NumberOfFramesBeingDecoded() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_NumberOfFramesBeingDecoded())
+// Returns the number of frames currently being decoded. This number may decrease asynchronously as frames are output.
+// KVTDecompressionPropertyKey_NumberOfFramesBeingDecoded returns the value of the constant kVTDecompressionPropertyKey_NumberOfFramesBeingDecoded.
+func KVTDecompressionPropertyKey_NumberOfFramesBeingDecoded() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_NumberOfFramesBeingDecoded")))
 }
 
-// @constant	kVTDecompressionPropertyKey_MinOutputPresentationTimeStampOfFramesBeingDecoded @abstract The minimum output presentation timestamp of the frames currently being decoded. @discussion This may change asynchronously as frames are output.
-// KVTDecompressionPropertyKey_MinOutputPresentationTimeStampOfFramesBeingDecoded returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_MinOutputPresentationTimeStampOfFramesBeingDecoded as an objc.ID.
-func KVTDecompressionPropertyKey_MinOutputPresentationTimeStampOfFramesBeingDecoded() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_MinOutputPresentationTimeStampOfFramesBeingDecoded())
+// The minimum output presentation timestamp of the frames currently being decoded. This may change asynchronously as frames are output.
+// KVTDecompressionPropertyKey_MinOutputPresentationTimeStampOfFramesBeingDecoded returns the value of the constant kVTDecompressionPropertyKey_MinOutputPresentationTimeStampOfFramesBeingDecoded.
+func KVTDecompressionPropertyKey_MinOutputPresentationTimeStampOfFramesBeingDecoded() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_MinOutputPresentationTimeStampOfFramesBeingDecoded")))
 }
 
-// @constant	kVTDecompressionPropertyKey_MaxOutputPresentationTimeStampOfFramesBeingDecoded @abstract The maximum output presentation timestamp of the frames currently being decoded. @discussion This may change asynchronously as frames are output.
-// KVTDecompressionPropertyKey_MaxOutputPresentationTimeStampOfFramesBeingDecoded returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_MaxOutputPresentationTimeStampOfFramesBeingDecoded as an objc.ID.
-func KVTDecompressionPropertyKey_MaxOutputPresentationTimeStampOfFramesBeingDecoded() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_MaxOutputPresentationTimeStampOfFramesBeingDecoded())
+// The maximum output presentation timestamp of the frames currently being decoded. This may change asynchronously as frames are output.
+// KVTDecompressionPropertyKey_MaxOutputPresentationTimeStampOfFramesBeingDecoded returns the value of the constant kVTDecompressionPropertyKey_MaxOutputPresentationTimeStampOfFramesBeingDecoded.
+func KVTDecompressionPropertyKey_MaxOutputPresentationTimeStampOfFramesBeingDecoded() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_MaxOutputPresentationTimeStampOfFramesBeingDecoded")))
 }
 
-// @constant	kVTDecompressionPropertyKey_ContentHasInterframeDependencies @abstract Indicates whether the content being decoded has interframe dependencies, if the decoder knows. @discussion This is an optional property for video decoders to implement.
-// KVTDecompressionPropertyKey_ContentHasInterframeDependencies returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_ContentHasInterframeDependencies as an objc.ID.
-func KVTDecompressionPropertyKey_ContentHasInterframeDependencies() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_ContentHasInterframeDependencies())
+// Indicates whether the content being decoded has interframe dependencies, if the decoder knows. This is an optional property for video decoders to implement.
+// KVTDecompressionPropertyKey_ContentHasInterframeDependencies returns the value of the constant kVTDecompressionPropertyKey_ContentHasInterframeDependencies.
+func KVTDecompressionPropertyKey_ContentHasInterframeDependencies() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_ContentHasInterframeDependencies")))
 }
 
-// @constant	kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder @abstract If set to kCFBooleanTrue, the VideoToolbox will use a hardware accelerated video decoder if available.  If set to kCFBooleanFalse, hardware decode will never be used. @discussion This key is set in the decoderSpecification passed in to VTDecompressionSessionCreate.  Set it to kCFBooleanTrue to allow hardware accelerated decode.  To  prevent hardware decode, this property can be set to kCFBooleanFalse. In MacOS 10.15 and later, hardware decode is enabled in VTDecompressionSessions by default.
-// KVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder returns the value of the CoreFoundation reference constant kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder as an objc.ID.
-func KVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder() objc.ID {
-	return purego.CFConstant(raw.KVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder())
+// If set to kCFBooleanTrue, the VideoToolbox will use a hardware accelerated video decoder if available.  If set to kCFBooleanFalse, hardware decode will never be used. This key is set in the decoderSpecification passed in to VTDecompressionSessionCreate.  Set it to kCFBooleanTrue to allow hardware accelerated decode.  To  prevent hardware decode, this property can be set to kCFBooleanFalse. In MacOS 10.15 and later, hardware decode is enabled in VTDecompressionSessions by default.
+// KVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder returns the value of the constant kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder.
+func KVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder")))
 }
 
-// @constant	kVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder @abstract If set to kCFBooleanTrue, the VideoToolbox will try to allocate a hardware accelerated decoder and return an error if that isn't possible. Setting this key automatically implies kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder -- there is no need to set both and the Enable key does nothing if the Require key is set. @discussion This key is set in the decoderSpecification passed in to VTDecompressionSessionCreate.  Set it to kCFBooleanTrue to require hardware accelerated decode.  If hardware acceleration is not possible, the VTDecompressionSessionCreate call will fail. This key is useful for clients that have their own software decode implementation or those that may want to configure software and hardware decode sessions differently. Hardware acceleration may be unavailable for a number of reasons.  A few common cases are: - the machine does not have hardware acceleration capabilities - the requested decoding format or configuration is not supported - the hardware decode resources on the machine are busy
-// KVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder returns the value of the CoreFoundation reference constant kVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder as an objc.ID.
-func KVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder() objc.ID {
-	return purego.CFConstant(raw.KVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder())
+// If set to kCFBooleanTrue, the VideoToolbox will try to allocate a hardware accelerated decoder and return an error if that isn't possible. Setting this key automatically implies kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder -- there is no need to set both and the Enable key does nothing if the Require key is set. This key is set in the decoderSpecification passed in to VTDecompressionSessionCreate.  Set it to kCFBooleanTrue to require hardware accelerated decode.  If hardware acceleration is not possible, the VTDecompressionSessionCreate call will fail. This key is useful for clients that have their own software decode implementation or those that may want to configure software and hardware decode sessions differently. Hardware acceleration may be unavailable for a number of reasons.  A few common cases are: - the machine does not have hardware acceleration capabilities - the requested decoding format or configuration is not supported - the hardware decode resources on the machine are busy
+// KVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder returns the value of the constant kVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder.
+func KVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder")))
 }
 
-// @constant	kVTDecompressionPropertyKey_UsingHardwareAcceleratedVideoDecoder @abstract If set to kCFBooleanTrue, a hardware accelerated video decoder is being used. @discussion You can query this property using VTSessionCopyProperty after you have enabled hardware accelerated decode using kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder to see if a hardware accelerated decoder was selected.
-// KVTDecompressionPropertyKey_UsingHardwareAcceleratedVideoDecoder returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_UsingHardwareAcceleratedVideoDecoder as an objc.ID.
-func KVTDecompressionPropertyKey_UsingHardwareAcceleratedVideoDecoder() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_UsingHardwareAcceleratedVideoDecoder())
+// If set to kCFBooleanTrue, a hardware accelerated video decoder is being used. You can query this property using VTSessionCopyProperty after you have enabled hardware accelerated decode using kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder to see if a hardware accelerated decoder was selected.
+// KVTDecompressionPropertyKey_UsingHardwareAcceleratedVideoDecoder returns the value of the constant kVTDecompressionPropertyKey_UsingHardwareAcceleratedVideoDecoder.
+func KVTDecompressionPropertyKey_UsingHardwareAcceleratedVideoDecoder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_UsingHardwareAcceleratedVideoDecoder")))
 }
 
-// @constant	kVTDecompressionPropertyKey_RealTime @abstract Hints the video decoder that decompression is, or is not, being performed in real time. @discussion For non-realtime decompression, clients may set this property to kCFBooleanFalse, which indicates that it is OK to run this decode pipeline at a lower priority than is used for realtime decode. By default, the VideoToolbox will treat the VTDecompressionSession as though it is being used for realtime playback.  Setting the property to NULL is equivalent to setting it to kCFBooleanTrue.
-// KVTDecompressionPropertyKey_RealTime returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_RealTime as an objc.ID.
-func KVTDecompressionPropertyKey_RealTime() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_RealTime())
+// Hints the video decoder that decompression is, or is not, being performed in real time. For non-realtime decompression, clients may set this property to kCFBooleanFalse, which indicates that it is OK to run this decode pipeline at a lower priority than is used for realtime decode. By default, the VideoToolbox will treat the VTDecompressionSession as though it is being used for realtime playback.  Setting the property to NULL is equivalent to setting it to kCFBooleanTrue.
+// KVTDecompressionPropertyKey_RealTime returns the value of the constant kVTDecompressionPropertyKey_RealTime.
+func KVTDecompressionPropertyKey_RealTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_RealTime")))
 }
 
-// @constant	kVTDecompressionPropertyKey_MaximizePowerEfficiency @abstract Hints to the video decoder that it should maximize power efficiency during decoding. @discussion For decompression where the client is operating in the background, clients may set this property to kCFBooleanTrue, which indicates that the decoder can take steps to minimize impact on power usage and other system activity. Setting the property to NULL is equivalent to setting it to kCFBooleanFalse. Setting both kVTDecompressionPropertyKey_MaximizePowerEfficiency and kVTDecompressionPropertyKey_RealTime is unsupported and results in undefined behavior. Not all video decoders may support this property By default, this property is NULL.
-// KVTDecompressionPropertyKey_MaximizePowerEfficiency returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_MaximizePowerEfficiency as an objc.ID.
-func KVTDecompressionPropertyKey_MaximizePowerEfficiency() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_MaximizePowerEfficiency())
+// Hints to the video decoder that it should maximize power efficiency during decoding. For decompression where the client is operating in the background, clients may set this property to kCFBooleanTrue, which indicates that the decoder can take steps to minimize impact on power usage and other system activity. Setting the property to NULL is equivalent to setting it to kCFBooleanFalse. Setting both kVTDecompressionPropertyKey_MaximizePowerEfficiency and kVTDecompressionPropertyKey_RealTime is unsupported and results in undefined behavior. Not all video decoders may support this property By default, this property is NULL.
+// KVTDecompressionPropertyKey_MaximizePowerEfficiency returns the value of the constant kVTDecompressionPropertyKey_MaximizePowerEfficiency.
+func KVTDecompressionPropertyKey_MaximizePowerEfficiency() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_MaximizePowerEfficiency")))
 }
 
-// @constant	kVTDecompressionPropertyKey_ThreadCount @abstract Gets number of threads used by codec or suggests number of threads to use. @discussion This is an optional property for video decoders to implement.
-// KVTDecompressionPropertyKey_ThreadCount returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_ThreadCount as an objc.ID.
-func KVTDecompressionPropertyKey_ThreadCount() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_ThreadCount())
+// Gets number of threads used by codec or suggests number of threads to use. This is an optional property for video decoders to implement.
+// KVTDecompressionPropertyKey_ThreadCount returns the value of the constant kVTDecompressionPropertyKey_ThreadCount.
+func KVTDecompressionPropertyKey_ThreadCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_ThreadCount")))
 }
 
-// @constant	kVTDecompressionPropertyKey_FieldMode @abstract Requests special handling of interlaced content. @discussion This is an optional property for video decoders to implement. Decoders should only accept the modes that they will implement.
-// KVTDecompressionPropertyKey_FieldMode returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_FieldMode as an objc.ID.
-func KVTDecompressionPropertyKey_FieldMode() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_FieldMode())
+// Requests special handling of interlaced content. This is an optional property for video decoders to implement. Decoders should only accept the modes that they will implement.
+// KVTDecompressionPropertyKey_FieldMode returns the value of the constant kVTDecompressionPropertyKey_FieldMode.
+func KVTDecompressionPropertyKey_FieldMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_FieldMode")))
 }
 
-// KVTDecompressionProperty_FieldMode_BothFields returns the value of the CoreFoundation reference constant kVTDecompressionProperty_FieldMode_BothFields as an objc.ID.
-func KVTDecompressionProperty_FieldMode_BothFields() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionProperty_FieldMode_BothFields())
+// KVTDecompressionProperty_FieldMode_BothFields returns the value of the constant kVTDecompressionProperty_FieldMode_BothFields.
+func KVTDecompressionProperty_FieldMode_BothFields() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionProperty_FieldMode_BothFields")))
 }
 
-// KVTDecompressionProperty_FieldMode_TopFieldOnly returns the value of the CoreFoundation reference constant kVTDecompressionProperty_FieldMode_TopFieldOnly as an objc.ID.
-func KVTDecompressionProperty_FieldMode_TopFieldOnly() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionProperty_FieldMode_TopFieldOnly())
+// KVTDecompressionProperty_FieldMode_TopFieldOnly returns the value of the constant kVTDecompressionProperty_FieldMode_TopFieldOnly.
+func KVTDecompressionProperty_FieldMode_TopFieldOnly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionProperty_FieldMode_TopFieldOnly")))
 }
 
-// KVTDecompressionProperty_FieldMode_BottomFieldOnly returns the value of the CoreFoundation reference constant kVTDecompressionProperty_FieldMode_BottomFieldOnly as an objc.ID.
-func KVTDecompressionProperty_FieldMode_BottomFieldOnly() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionProperty_FieldMode_BottomFieldOnly())
+// KVTDecompressionProperty_FieldMode_BottomFieldOnly returns the value of the constant kVTDecompressionProperty_FieldMode_BottomFieldOnly.
+func KVTDecompressionProperty_FieldMode_BottomFieldOnly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionProperty_FieldMode_BottomFieldOnly")))
 }
 
-// KVTDecompressionProperty_FieldMode_SingleField returns the value of the CoreFoundation reference constant kVTDecompressionProperty_FieldMode_SingleField as an objc.ID.
-func KVTDecompressionProperty_FieldMode_SingleField() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionProperty_FieldMode_SingleField())
+// KVTDecompressionProperty_FieldMode_SingleField returns the value of the constant kVTDecompressionProperty_FieldMode_SingleField.
+func KVTDecompressionProperty_FieldMode_SingleField() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionProperty_FieldMode_SingleField")))
 }
 
-// KVTDecompressionProperty_FieldMode_DeinterlaceFields returns the value of the CoreFoundation reference constant kVTDecompressionProperty_FieldMode_DeinterlaceFields as an objc.ID.
-func KVTDecompressionProperty_FieldMode_DeinterlaceFields() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionProperty_FieldMode_DeinterlaceFields())
+// KVTDecompressionProperty_FieldMode_DeinterlaceFields returns the value of the constant kVTDecompressionProperty_FieldMode_DeinterlaceFields.
+func KVTDecompressionProperty_FieldMode_DeinterlaceFields() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionProperty_FieldMode_DeinterlaceFields")))
 }
 
-// @constant	kVTDecompressionPropertyKey_DeinterlaceMode @abstract Requests a specific deinterlacing technique. @discussion This is an optional property for video decoders to implement. Decoders should only accept the modes that they will implement. This property is only applicable if kVTDecompressionPropertyKey_FieldMode is set to kVTDecompressionProperty_FieldMode_DeinterlaceFields.
-// KVTDecompressionPropertyKey_DeinterlaceMode returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_DeinterlaceMode as an objc.ID.
-func KVTDecompressionPropertyKey_DeinterlaceMode() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_DeinterlaceMode())
+// Requests a specific deinterlacing technique. This is an optional property for video decoders to implement. Decoders should only accept the modes that they will implement. This property is only applicable if kVTDecompressionPropertyKey_FieldMode is set to kVTDecompressionProperty_FieldMode_DeinterlaceFields.
+// KVTDecompressionPropertyKey_DeinterlaceMode returns the value of the constant kVTDecompressionPropertyKey_DeinterlaceMode.
+func KVTDecompressionPropertyKey_DeinterlaceMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_DeinterlaceMode")))
 }
 
-// KVTDecompressionProperty_DeinterlaceMode_VerticalFilter returns the value of the CoreFoundation reference constant kVTDecompressionProperty_DeinterlaceMode_VerticalFilter as an objc.ID.
-func KVTDecompressionProperty_DeinterlaceMode_VerticalFilter() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionProperty_DeinterlaceMode_VerticalFilter())
+// KVTDecompressionProperty_DeinterlaceMode_VerticalFilter returns the value of the constant kVTDecompressionProperty_DeinterlaceMode_VerticalFilter.
+func KVTDecompressionProperty_DeinterlaceMode_VerticalFilter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionProperty_DeinterlaceMode_VerticalFilter")))
 }
 
-// KVTDecompressionProperty_DeinterlaceMode_Temporal returns the value of the CoreFoundation reference constant kVTDecompressionProperty_DeinterlaceMode_Temporal as an objc.ID.
-func KVTDecompressionProperty_DeinterlaceMode_Temporal() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionProperty_DeinterlaceMode_Temporal())
+// KVTDecompressionProperty_DeinterlaceMode_Temporal returns the value of the constant kVTDecompressionProperty_DeinterlaceMode_Temporal.
+func KVTDecompressionProperty_DeinterlaceMode_Temporal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionProperty_DeinterlaceMode_Temporal")))
 }
 
-// @constant	kVTDecompressionPropertyKey_ReducedResolutionDecode @abstract Requests decoding at a smaller resolution than full-size. @discussion This is an optional property for video decoders to implement. Decoders that only support a fixed set of resolutions should pick the smallest resolution greater than or equal to the requested width x height.
-// KVTDecompressionPropertyKey_ReducedResolutionDecode returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_ReducedResolutionDecode as an objc.ID.
-func KVTDecompressionPropertyKey_ReducedResolutionDecode() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_ReducedResolutionDecode())
+// Requests decoding at a smaller resolution than full-size. This is an optional property for video decoders to implement. Decoders that only support a fixed set of resolutions should pick the smallest resolution greater than or equal to the requested width x height.
+// KVTDecompressionPropertyKey_ReducedResolutionDecode returns the value of the constant kVTDecompressionPropertyKey_ReducedResolutionDecode.
+func KVTDecompressionPropertyKey_ReducedResolutionDecode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_ReducedResolutionDecode")))
 }
 
-// KVTDecompressionResolutionKey_Width returns the value of the CoreFoundation reference constant kVTDecompressionResolutionKey_Width as an objc.ID.
-func KVTDecompressionResolutionKey_Width() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionResolutionKey_Width())
+// KVTDecompressionResolutionKey_Width returns the value of the constant kVTDecompressionResolutionKey_Width.
+func KVTDecompressionResolutionKey_Width() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionResolutionKey_Width")))
 }
 
-// KVTDecompressionResolutionKey_Height returns the value of the CoreFoundation reference constant kVTDecompressionResolutionKey_Height as an objc.ID.
-func KVTDecompressionResolutionKey_Height() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionResolutionKey_Height())
+// KVTDecompressionResolutionKey_Height returns the value of the constant kVTDecompressionResolutionKey_Height.
+func KVTDecompressionResolutionKey_Height() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionResolutionKey_Height")))
 }
 
-// @constant	kVTDecompressionPropertyKey_ReducedCoefficientDecode @abstract Requests approximation during decoding. @discussion This is an optional property for video decoders to implement. Only decoders for which such approximations make sense should implement this property. The meaning of the number of coefficients will be decoder-specific.
-// KVTDecompressionPropertyKey_ReducedCoefficientDecode returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_ReducedCoefficientDecode as an objc.ID.
-func KVTDecompressionPropertyKey_ReducedCoefficientDecode() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_ReducedCoefficientDecode())
+// Requests approximation during decoding. This is an optional property for video decoders to implement. Only decoders for which such approximations make sense should implement this property. The meaning of the number of coefficients will be decoder-specific.
+// KVTDecompressionPropertyKey_ReducedCoefficientDecode returns the value of the constant kVTDecompressionPropertyKey_ReducedCoefficientDecode.
+func KVTDecompressionPropertyKey_ReducedCoefficientDecode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_ReducedCoefficientDecode")))
 }
 
-// @constant	kVTDecompressionPropertyKey_ReducedFrameDelivery @abstract Requests frame dropping. @discussion This is an optional property for video decoders to implement. This number is a fraction between 0.0 and 1.0 that indicates what proportion of frames should be delivered -- others may be dropped. For example, 0.25 would indicate that only one frame in every 4 should be delivered. This is a guideline; actual selection of frames is up to the decoder, which will know which frames can be skipped without harm. If the decoder does not support this property directly, but reports that the content has no interframe dependencies, the video toolbox may step in and perform simple frame dropping.
-// KVTDecompressionPropertyKey_ReducedFrameDelivery returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_ReducedFrameDelivery as an objc.ID.
-func KVTDecompressionPropertyKey_ReducedFrameDelivery() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_ReducedFrameDelivery())
+// Requests frame dropping. This is an optional property for video decoders to implement. This number is a fraction between 0.0 and 1.0 that indicates what proportion of frames should be delivered -- others may be dropped. For example, 0.25 would indicate that only one frame in every 4 should be delivered. This is a guideline; actual selection of frames is up to the decoder, which will know which frames can be skipped without harm. If the decoder does not support this property directly, but reports that the content has no interframe dependencies, the video toolbox may step in and perform simple frame dropping.
+// KVTDecompressionPropertyKey_ReducedFrameDelivery returns the value of the constant kVTDecompressionPropertyKey_ReducedFrameDelivery.
+func KVTDecompressionPropertyKey_ReducedFrameDelivery() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_ReducedFrameDelivery")))
 }
 
-// @constant	kVTDecompressionPropertyKey_OnlyTheseFrames @abstract Requests that frames be filtered by type. @discussion This is an optional property for video decoders to implement. If kVTDecompressionPropertyKey_ReducedFrameDelivery is supported and used in conjunction with this property, the ReducedFrameDelivery is the proportion of the frames selected by this property: 0.25 and IFrames would indicate that only one I frame in every four should be delivered.
-// KVTDecompressionPropertyKey_OnlyTheseFrames returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_OnlyTheseFrames as an objc.ID.
-func KVTDecompressionPropertyKey_OnlyTheseFrames() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_OnlyTheseFrames())
+// Requests that frames be filtered by type. This is an optional property for video decoders to implement. If kVTDecompressionPropertyKey_ReducedFrameDelivery is supported and used in conjunction with this property, the ReducedFrameDelivery is the proportion of the frames selected by this property: 0.25 and IFrames would indicate that only one I frame in every four should be delivered.
+// KVTDecompressionPropertyKey_OnlyTheseFrames returns the value of the constant kVTDecompressionPropertyKey_OnlyTheseFrames.
+func KVTDecompressionPropertyKey_OnlyTheseFrames() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_OnlyTheseFrames")))
 }
 
-// KVTDecompressionProperty_OnlyTheseFrames_AllFrames returns the value of the CoreFoundation reference constant kVTDecompressionProperty_OnlyTheseFrames_AllFrames as an objc.ID.
-func KVTDecompressionProperty_OnlyTheseFrames_AllFrames() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionProperty_OnlyTheseFrames_AllFrames())
+// KVTDecompressionProperty_OnlyTheseFrames_AllFrames returns the value of the constant kVTDecompressionProperty_OnlyTheseFrames_AllFrames.
+func KVTDecompressionProperty_OnlyTheseFrames_AllFrames() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionProperty_OnlyTheseFrames_AllFrames")))
 }
 
-// KVTDecompressionProperty_OnlyTheseFrames_NonDroppableFrames returns the value of the CoreFoundation reference constant kVTDecompressionProperty_OnlyTheseFrames_NonDroppableFrames as an objc.ID.
-func KVTDecompressionProperty_OnlyTheseFrames_NonDroppableFrames() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionProperty_OnlyTheseFrames_NonDroppableFrames())
+// KVTDecompressionProperty_OnlyTheseFrames_NonDroppableFrames returns the value of the constant kVTDecompressionProperty_OnlyTheseFrames_NonDroppableFrames.
+func KVTDecompressionProperty_OnlyTheseFrames_NonDroppableFrames() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionProperty_OnlyTheseFrames_NonDroppableFrames")))
 }
 
-// KVTDecompressionProperty_OnlyTheseFrames_IFrames returns the value of the CoreFoundation reference constant kVTDecompressionProperty_OnlyTheseFrames_IFrames as an objc.ID.
-func KVTDecompressionProperty_OnlyTheseFrames_IFrames() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionProperty_OnlyTheseFrames_IFrames())
+// KVTDecompressionProperty_OnlyTheseFrames_IFrames returns the value of the constant kVTDecompressionProperty_OnlyTheseFrames_IFrames.
+func KVTDecompressionProperty_OnlyTheseFrames_IFrames() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionProperty_OnlyTheseFrames_IFrames")))
 }
 
-// KVTDecompressionProperty_OnlyTheseFrames_KeyFrames returns the value of the CoreFoundation reference constant kVTDecompressionProperty_OnlyTheseFrames_KeyFrames as an objc.ID.
-func KVTDecompressionProperty_OnlyTheseFrames_KeyFrames() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionProperty_OnlyTheseFrames_KeyFrames())
+// KVTDecompressionProperty_OnlyTheseFrames_KeyFrames returns the value of the constant kVTDecompressionProperty_OnlyTheseFrames_KeyFrames.
+func KVTDecompressionProperty_OnlyTheseFrames_KeyFrames() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionProperty_OnlyTheseFrames_KeyFrames")))
 }
 
-// @constant       kVTDecompressionProperty_TemporalLevelLimit @abstract Requests that frames be filtered by temporal level. @discussion This is an optional property for video decoders to implement. If kVTDecompressionProperty_TemporalLevelLimit is supported and the video track is an hierarchical encoding with temporal levels, this property requests that decoding be limited to the specified temporal level and lower. For more information on temporal levels, see kCMSampleAttachmentKey_HEVCTemporalLevelInfo in CoreMedia/CMSampleBuffer.h
-// KVTDecompressionProperty_TemporalLevelLimit returns the value of the CoreFoundation reference constant kVTDecompressionProperty_TemporalLevelLimit as an objc.ID.
-func KVTDecompressionProperty_TemporalLevelLimit() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionProperty_TemporalLevelLimit())
+// Requests that frames be filtered by temporal level. This is an optional property for video decoders to implement. If kVTDecompressionProperty_TemporalLevelLimit is supported and the video track is an hierarchical encoding with temporal levels, this property requests that decoding be limited to the specified temporal level and lower. For more information on temporal levels, see kCMSampleAttachmentKey_HEVCTemporalLevelInfo in CoreMedia/CMSampleBuffer.h
+// KVTDecompressionProperty_TemporalLevelLimit returns the value of the constant kVTDecompressionProperty_TemporalLevelLimit.
+func KVTDecompressionProperty_TemporalLevelLimit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionProperty_TemporalLevelLimit")))
 }
 
-// @constant	kVTDecompressionPropertyKey_SuggestedQualityOfServiceTiers @abstract Suggests how quality-of-service may be lowered in order to maintain realtime playback. @discussion This is an optional property for video decoders to implement. This property value is an array containing either CFDictionaries of property key/value pairs, or the array can contain special key values like kVTDecompressionProperty_TemporalLevelLimit. The first entry in the array should contain the set of properties that restore the default (full) quality of service; later entries should contain property sets with decreasing qualities of service.  Clients may work their way down these tiers until they are able to keep up with the frame rate.
-// KVTDecompressionPropertyKey_SuggestedQualityOfServiceTiers returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_SuggestedQualityOfServiceTiers as an objc.ID.
-func KVTDecompressionPropertyKey_SuggestedQualityOfServiceTiers() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_SuggestedQualityOfServiceTiers())
+// Suggests how quality-of-service may be lowered in order to maintain realtime playback. This is an optional property for video decoders to implement. This property value is an array containing either CFDictionaries of property key/value pairs, or the array can contain special key values like kVTDecompressionProperty_TemporalLevelLimit. The first entry in the array should contain the set of properties that restore the default (full) quality of service; later entries should contain property sets with decreasing qualities of service.  Clients may work their way down these tiers until they are able to keep up with the frame rate.
+// KVTDecompressionPropertyKey_SuggestedQualityOfServiceTiers returns the value of the constant kVTDecompressionPropertyKey_SuggestedQualityOfServiceTiers.
+func KVTDecompressionPropertyKey_SuggestedQualityOfServiceTiers() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_SuggestedQualityOfServiceTiers")))
 }
 
-// @constant	kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByQuality @abstract Provides hints about quality tradeoffs between pixel formats. @discussion This is an optional property for video decoders to implement. This property value is an array containing CFNumbers holding CMPixelFormatType values, ordered by quality from best to worse.
-// KVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByQuality returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByQuality as an objc.ID.
-func KVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByQuality() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByQuality())
+// Provides hints about quality tradeoffs between pixel formats. This is an optional property for video decoders to implement. This property value is an array containing CFNumbers holding CMPixelFormatType values, ordered by quality from best to worse.
+// KVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByQuality returns the value of the constant kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByQuality.
+func KVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByQuality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByQuality")))
 }
 
-// @constant	kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByPerformance @abstract Provides hints about speed tradeoffs between pixel formats. @discussion This is an optional property for video decoders to implement. This property value is an array containing CFNumbers holding CMPixelFormatType values, ordered by speed from fast to slow.
-// KVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByPerformance returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByPerformance as an objc.ID.
-func KVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByPerformance() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByPerformance())
+// Provides hints about speed tradeoffs between pixel formats. This is an optional property for video decoders to implement. This property value is an array containing CFNumbers holding CMPixelFormatType values, ordered by speed from fast to slow.
+// KVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByPerformance returns the value of the constant kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByPerformance.
+func KVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByPerformance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_SupportedPixelFormatsOrderedByPerformance")))
 }
 
-// @constant	kVTDecompressionPropertyKey_PixelFormatsWithReducedResolutionSupport @abstract Indicates which pixel formats support reduced resolution decoding. @discussion This is an optional property for video decoders to implement. This property value is an array containing CFNumbers holding CMPixelFormatType values.
-// KVTDecompressionPropertyKey_PixelFormatsWithReducedResolutionSupport returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_PixelFormatsWithReducedResolutionSupport as an objc.ID.
-func KVTDecompressionPropertyKey_PixelFormatsWithReducedResolutionSupport() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_PixelFormatsWithReducedResolutionSupport())
+// Indicates which pixel formats support reduced resolution decoding. This is an optional property for video decoders to implement. This property value is an array containing CFNumbers holding CMPixelFormatType values.
+// KVTDecompressionPropertyKey_PixelFormatsWithReducedResolutionSupport returns the value of the constant kVTDecompressionPropertyKey_PixelFormatsWithReducedResolutionSupport.
+func KVTDecompressionPropertyKey_PixelFormatsWithReducedResolutionSupport() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_PixelFormatsWithReducedResolutionSupport")))
 }
 
-// KVTDecompressionPropertyKey_AllowBitstreamToChangeFrameDimensions returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_AllowBitstreamToChangeFrameDimensions as an objc.ID.
-func KVTDecompressionPropertyKey_AllowBitstreamToChangeFrameDimensions() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_AllowBitstreamToChangeFrameDimensions())
+// KVTDecompressionPropertyKey_AllowBitstreamToChangeFrameDimensions returns the value of the constant kVTDecompressionPropertyKey_AllowBitstreamToChangeFrameDimensions.
+func KVTDecompressionPropertyKey_AllowBitstreamToChangeFrameDimensions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_AllowBitstreamToChangeFrameDimensions")))
 }
 
-// @constant	kVTDecompressionPropertyKey_PixelTransferProperties @abstract Requests particular pixel transfer features. @discussion This property is implemented by the video toolbox. This property value is a CFDictionary containing properties from VTPixelTransferProperties.h.
-// KVTDecompressionPropertyKey_PixelTransferProperties returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_PixelTransferProperties as an objc.ID.
-func KVTDecompressionPropertyKey_PixelTransferProperties() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_PixelTransferProperties())
+// Requests particular pixel transfer features. This property is implemented by the video toolbox. This property value is a CFDictionary containing properties from VTPixelTransferProperties.h.
+// KVTDecompressionPropertyKey_PixelTransferProperties returns the value of the constant kVTDecompressionPropertyKey_PixelTransferProperties.
+func KVTDecompressionPropertyKey_PixelTransferProperties() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_PixelTransferProperties")))
 }
 
-// @constant	kVTVideoDecoderSpecification_RequiredDecoderGPURegistryID @abstract If set, the VideoToolbox will only use a hardware decoder running on the GPU specified by the provided GPU registryID. @discussion This specification implies kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder.  A separate hardware decode opt-in is not required. The GPU registryID can be obtained from a MTLDevice using [MTLDevice registryID] or can be obtained from OpenGL or OpenCL. This option can only be used to specify a GPU registryID corresponding to a removable GPU (eGPU). If 0 is specified for the required GPU registryID, the VideoToolbox will not utilize removable GPUs for decode.
-// KVTVideoDecoderSpecification_RequiredDecoderGPURegistryID returns the value of the CoreFoundation reference constant kVTVideoDecoderSpecification_RequiredDecoderGPURegistryID as an objc.ID.
-func KVTVideoDecoderSpecification_RequiredDecoderGPURegistryID() objc.ID {
-	return purego.CFConstant(raw.KVTVideoDecoderSpecification_RequiredDecoderGPURegistryID())
+// If set, the VideoToolbox will only use a hardware decoder running on the GPU specified by the provided GPU registryID. This specification implies kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder.  A separate hardware decode opt-in is not required. The GPU registryID can be obtained from a MTLDevice using [MTLDevice registryID] or can be obtained from OpenGL or OpenCL. This option can only be used to specify a GPU registryID corresponding to a removable GPU (eGPU). If 0 is specified for the required GPU registryID, the VideoToolbox will not utilize removable GPUs for decode.
+// KVTVideoDecoderSpecification_RequiredDecoderGPURegistryID returns the value of the constant kVTVideoDecoderSpecification_RequiredDecoderGPURegistryID.
+func KVTVideoDecoderSpecification_RequiredDecoderGPURegistryID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoDecoderSpecification_RequiredDecoderGPURegistryID")))
 }
 
-// @constant	kVTVideoDecoderSpecification_PreferredDecoderGPURegistryID @abstract If set, the VideoToolbox will try to use a hardware decoder running on the GPU specified by the provided GPU registryID.  If the GPU does not support decode of the specified format, the VideoToolbox will fall back to alternate decoders. @discussion This specification implies kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder.  A separate hardware decode opt-in is not required. If both kVTVideoDecoderSpecification_PreferredDecoderGPURegistryID and kVTVideoDecoderSpecification_RequiredDecoderGPURegistryID are set, kVTVideoDecoderSpecification_PreferredDecoderGPURegistryID will be ignored. This specification can be used in conjunction with kVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder to prevent a fallback to software decode. The GPU registryID can be obtained from a MTLDevice using [MTLDevice registryID] or can be obtained from OpenGL or OpenCL. This option can only be used to specify a GPU registryID corresponding to a removable GPU (eGPU).
-// KVTVideoDecoderSpecification_PreferredDecoderGPURegistryID returns the value of the CoreFoundation reference constant kVTVideoDecoderSpecification_PreferredDecoderGPURegistryID as an objc.ID.
-func KVTVideoDecoderSpecification_PreferredDecoderGPURegistryID() objc.ID {
-	return purego.CFConstant(raw.KVTVideoDecoderSpecification_PreferredDecoderGPURegistryID())
+// If set, the VideoToolbox will try to use a hardware decoder running on the GPU specified by the provided GPU registryID.  If the GPU does not support decode of the specified format, the VideoToolbox will fall back to alternate decoders. This specification implies kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder.  A separate hardware decode opt-in is not required. If both kVTVideoDecoderSpecification_PreferredDecoderGPURegistryID and kVTVideoDecoderSpecification_RequiredDecoderGPURegistryID are set, kVTVideoDecoderSpecification_PreferredDecoderGPURegistryID will be ignored. This specification can be used in conjunction with kVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder to prevent a fallback to software decode. The GPU registryID can be obtained from a MTLDevice using [MTLDevice registryID] or can be obtained from OpenGL or OpenCL. This option can only be used to specify a GPU registryID corresponding to a removable GPU (eGPU).
+// KVTVideoDecoderSpecification_PreferredDecoderGPURegistryID returns the value of the constant kVTVideoDecoderSpecification_PreferredDecoderGPURegistryID.
+func KVTVideoDecoderSpecification_PreferredDecoderGPURegistryID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoDecoderSpecification_PreferredDecoderGPURegistryID")))
 }
 
-// @constant	kVTDecompressionPropertyKey_UsingGPURegistryID @abstract returns CFNumber indicating the gpu registryID of the decoder that was selected.  NULL indicates a built-in decoder or software decode was used. @discussion You can query this property using VTSessionCopyProperty after building a VTDecompressionSession to find out which GPU the decoder is using. If a decoder based on a built-in GPU was used it will return NULL.  If a software decoder is used, it will return NULL
-// KVTDecompressionPropertyKey_UsingGPURegistryID returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_UsingGPURegistryID as an objc.ID.
-func KVTDecompressionPropertyKey_UsingGPURegistryID() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_UsingGPURegistryID())
+// returns CFNumber indicating the gpu registryID of the decoder that was selected.  NULL indicates a built-in decoder or software decode was used. You can query this property using VTSessionCopyProperty after building a VTDecompressionSession to find out which GPU the decoder is using. If a decoder based on a built-in GPU was used it will return NULL.  If a software decoder is used, it will return NULL
+// KVTDecompressionPropertyKey_UsingGPURegistryID returns the value of the constant kVTDecompressionPropertyKey_UsingGPURegistryID.
+func KVTDecompressionPropertyKey_UsingGPURegistryID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_UsingGPURegistryID")))
 }
 
-// @constant    kVTDecompressionPropertyKey_PropagatePerFrameHDRDisplayMetadata @abstract This controls whether or not to propagate any per frame HDR display metadata from the input compressed bitstream to the output pixel buffer.
-// KVTDecompressionPropertyKey_PropagatePerFrameHDRDisplayMetadata returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_PropagatePerFrameHDRDisplayMetadata as an objc.ID.
-func KVTDecompressionPropertyKey_PropagatePerFrameHDRDisplayMetadata() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_PropagatePerFrameHDRDisplayMetadata())
+// This controls whether or not to propagate any per frame HDR display metadata from the input compressed bitstream to the output pixel buffer.
+// KVTDecompressionPropertyKey_PropagatePerFrameHDRDisplayMetadata returns the value of the constant kVTDecompressionPropertyKey_PropagatePerFrameHDRDisplayMetadata.
+func KVTDecompressionPropertyKey_PropagatePerFrameHDRDisplayMetadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_PropagatePerFrameHDRDisplayMetadata")))
 }
 
-// @constant       kVTDecompressionPropertyKey_GeneratePerFrameHDRDisplayMetadata @abstract Generates Per Frame HDR Metadata and attaches it to the resulting decoded CVPixelBuffers. @discussion If the color space and YCbCrMatrix matches a supported HDR format such as HLG (kCMFormatDescriptionTransferFunction_ITU_R_2100_HLG) the decoded frame will be analyzed and metadata will be added as an attachment to the CVPixelBuffer.
-// KVTDecompressionPropertyKey_GeneratePerFrameHDRDisplayMetadata returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_GeneratePerFrameHDRDisplayMetadata as an objc.ID.
-func KVTDecompressionPropertyKey_GeneratePerFrameHDRDisplayMetadata() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_GeneratePerFrameHDRDisplayMetadata())
+// Generates Per Frame HDR Metadata and attaches it to the resulting decoded CVPixelBuffers. If the color space and YCbCrMatrix matches a supported HDR format such as HLG (kCMFormatDescriptionTransferFunction_ITU_R_2100_HLG) the decoded frame will be analyzed and metadata will be added as an attachment to the CVPixelBuffer.
+// KVTDecompressionPropertyKey_GeneratePerFrameHDRDisplayMetadata returns the value of the constant kVTDecompressionPropertyKey_GeneratePerFrameHDRDisplayMetadata.
+func KVTDecompressionPropertyKey_GeneratePerFrameHDRDisplayMetadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_GeneratePerFrameHDRDisplayMetadata")))
 }
 
-// @constant       kVTDecompressionPropertyKey_DecoderProducesRAWOutput @abstract Indicates whether the decoder can produce RAW output requiring a VTRAWProcessingSession for post-decode processing. @discussion If this property is not implemented, it is assumed that the decoder does not produce RAW output. If the decoder reports that it produces RAW output the VTDecompressionSession will internally invoke a VTRAWProcessingSession by default to produce processed output. If the client sets kVTDecompressionPropertyKey_RequestRAWOutput, the VTDecompressionSession will do no processing and return the decoder's native RAW output, and any requested destinationImageBufferAttributes on the VTDecompressionSession will be ignored.
-// KVTDecompressionPropertyKey_DecoderProducesRAWOutput returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_DecoderProducesRAWOutput as an objc.ID.
-func KVTDecompressionPropertyKey_DecoderProducesRAWOutput() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_DecoderProducesRAWOutput())
+// Indicates whether the decoder can produce RAW output requiring a VTRAWProcessingSession for post-decode processing. If this property is not implemented, it is assumed that the decoder does not produce RAW output. If the decoder reports that it produces RAW output the VTDecompressionSession will internally invoke a VTRAWProcessingSession by default to produce processed output. If the client sets kVTDecompressionPropertyKey_RequestRAWOutput, the VTDecompressionSession will do no processing and return the decoder's native RAW output, and any requested destinationImageBufferAttributes on the VTDecompressionSession will be ignored.
+// KVTDecompressionPropertyKey_DecoderProducesRAWOutput returns the value of the constant kVTDecompressionPropertyKey_DecoderProducesRAWOutput.
+func KVTDecompressionPropertyKey_DecoderProducesRAWOutput() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_DecoderProducesRAWOutput")))
 }
 
-// @constant       kVTDecompressionPropertyKey_RequestRAWOutput @abstract For decoders which produce RAW output, this property requests that the VTDecompressionSession provide output which has not been processed. @discussion When a decoder produces RAW output (signalled by kVTDecompressionPropertyKey_DecoderProducesRAWOutput) the VTDecompressionSession will automatically invoke a VTRAWProcessingSession with default settings and emit processed frames by default, or when kVTDecompressionPropertyKey_RequestRAWOutput is set to kCFBooleanFalse. If a client wants to run a VTRAWProcessingSession on the RAW output themselves in order to control the post-decode processing of the decoded CVPixelBuffers, they must set kVTDecompressionPropertyKey_RequestRAWOutput to kCFBooleanTrue. If kVTDecompressionPropertyKey_RequestRAWOutput has been enabled and the decoder produces RAW output, the VTDecompressionSession will return CVPixelBuffers in the decoder's native RAW format.  Any destinationImageBufferAttributes set on the VTDecompressionSession will be ignored.
-// KVTDecompressionPropertyKey_RequestRAWOutput returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_RequestRAWOutput as an objc.ID.
-func KVTDecompressionPropertyKey_RequestRAWOutput() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_RequestRAWOutput())
+// For decoders which produce RAW output, this property requests that the VTDecompressionSession provide output which has not been processed. When a decoder produces RAW output (signalled by kVTDecompressionPropertyKey_DecoderProducesRAWOutput) the VTDecompressionSession will automatically invoke a VTRAWProcessingSession with default settings and emit processed frames by default, or when kVTDecompressionPropertyKey_RequestRAWOutput is set to kCFBooleanFalse. If a client wants to run a VTRAWProcessingSession on the RAW output themselves in order to control the post-decode processing of the decoded CVPixelBuffers, they must set kVTDecompressionPropertyKey_RequestRAWOutput to kCFBooleanTrue. If kVTDecompressionPropertyKey_RequestRAWOutput has been enabled and the decoder produces RAW output, the VTDecompressionSession will return CVPixelBuffers in the decoder's native RAW format.  Any destinationImageBufferAttributes set on the VTDecompressionSession will be ignored.
+// KVTDecompressionPropertyKey_RequestRAWOutput returns the value of the constant kVTDecompressionPropertyKey_RequestRAWOutput.
+func KVTDecompressionPropertyKey_RequestRAWOutput() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_RequestRAWOutput")))
 }
 
-// @constant	kVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs @abstract Requests multi-image decoding of specific MV-HEVC VideoLayerIDs. @discussion MV-HEVC specific. Requires that the VTDecompressionSession client use VTDecompressionSessionSetMultiImageCallback to install a callback capable of receiving CMTaggedBufferGroups in response to multi-image DecodeFrame requests. The property value is a CFArray containing VideoLayerIDs as CFNumbers. MV-HEVC VideoLayerIDs not in this list do not need to be output, and the decoder may skip decoding them if not otherwise necessary. The property is NULL by default. If this property is NULL, MV-HEVC shall be decoded ignoring layers other than the base layer. Terminology note: in multi-image decompression, a single video sample (from one CMSampleBuffer) contains a single frame (with one PTS) that is decoded to produce multiple images.
-// KVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs returns the value of the CoreFoundation reference constant kVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs as an objc.ID.
-func KVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs() objc.ID {
-	return purego.CFConstant(raw.KVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs())
+// Requests multi-image decoding of specific MV-HEVC VideoLayerIDs. MV-HEVC specific. Requires that the VTDecompressionSession client use VTDecompressionSessionSetMultiImageCallback to install a callback capable of receiving CMTaggedBufferGroups in response to multi-image DecodeFrame requests. The property value is a CFArray containing VideoLayerIDs as CFNumbers. MV-HEVC VideoLayerIDs not in this list do not need to be output, and the decoder may skip decoding them if not otherwise necessary. The property is NULL by default. If this property is NULL, MV-HEVC shall be decoded ignoring layers other than the base layer. Terminology note: in multi-image decompression, a single video sample (from one CMSampleBuffer) contains a single frame (with one PTS) that is decoded to produce multiple images.
+// KVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs returns the value of the constant kVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs.
+func KVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs")))
 }
 
-// @constant	kVTDecodeFrameOptionKey_ContentAnalyzerRotation @abstract Clockwise rotation (one of 0, 90, 180, 270) to be applied for proper display orientation. @discussion This value is used for content analysis to properly orient the image before analysis. The value should be a CFNumber with values of 0, 90, 180, or 270, representing degrees of clockwise rotation. This key is not used unless you have attached a “SCVideoStreamAnalyzer“ to the decompression session.
-// KVTDecodeFrameOptionKey_ContentAnalyzerRotation returns the value of the CoreFoundation reference constant kVTDecodeFrameOptionKey_ContentAnalyzerRotation as an objc.ID.
-func KVTDecodeFrameOptionKey_ContentAnalyzerRotation() objc.ID {
-	return purego.CFConstant(raw.KVTDecodeFrameOptionKey_ContentAnalyzerRotation())
+// Clockwise rotation (one of 0, 90, 180, 270) to be applied for proper display orientation. This value is used for content analysis to properly orient the image before analysis. The value should be a CFNumber with values of 0, 90, 180, or 270, representing degrees of clockwise rotation. This key is not used unless you have attached a “SCVideoStreamAnalyzer“ to the decompression session.
+// KVTDecodeFrameOptionKey_ContentAnalyzerRotation returns the value of the constant kVTDecodeFrameOptionKey_ContentAnalyzerRotation.
+func KVTDecodeFrameOptionKey_ContentAnalyzerRotation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecodeFrameOptionKey_ContentAnalyzerRotation")))
 }
 
-// @constant	kVTDecodeFrameOptionKey_ContentAnalyzerCropRectangle @abstract CGRect within the image to be used for content analysis, cropped before applying rotation. @discussion This value specifies a rectangle within the original frame that should be used for content analysis. The cropping is applied before any rotation specified by kVTDecodeFrameOptionKey_ContentAnalyzerRotation. The value should be a CFDictionary representing a CGRect created using CGRectCreateDictionaryRepresentation(). This key is not used unless you have attached a “SCVideoStreamAnalyzer“ to the decompression session.
-// KVTDecodeFrameOptionKey_ContentAnalyzerCropRectangle returns the value of the CoreFoundation reference constant kVTDecodeFrameOptionKey_ContentAnalyzerCropRectangle as an objc.ID.
-func KVTDecodeFrameOptionKey_ContentAnalyzerCropRectangle() objc.ID {
-	return purego.CFConstant(raw.KVTDecodeFrameOptionKey_ContentAnalyzerCropRectangle())
+// CGRect within the image to be used for content analysis, cropped before applying rotation. This value specifies a rectangle within the original frame that should be used for content analysis. The cropping is applied before any rotation specified by kVTDecodeFrameOptionKey_ContentAnalyzerRotation. The value should be a CFDictionary representing a CGRect created using CGRectCreateDictionaryRepresentation(). This key is not used unless you have attached a “SCVideoStreamAnalyzer“ to the decompression session.
+// KVTDecodeFrameOptionKey_ContentAnalyzerCropRectangle returns the value of the constant kVTDecodeFrameOptionKey_ContentAnalyzerCropRectangle.
+func KVTDecodeFrameOptionKey_ContentAnalyzerCropRectangle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDecodeFrameOptionKey_ContentAnalyzerCropRectangle")))
 }
 
-// KVTMultiPassStorageCreationOption_DoNotDelete returns the value of the CoreFoundation reference constant kVTMultiPassStorageCreationOption_DoNotDelete as an objc.ID.
-func KVTMultiPassStorageCreationOption_DoNotDelete() objc.ID {
-	return purego.CFConstant(raw.KVTMultiPassStorageCreationOption_DoNotDelete())
+// KVTMultiPassStorageCreationOption_DoNotDelete returns the value of the constant kVTMultiPassStorageCreationOption_DoNotDelete.
+func KVTMultiPassStorageCreationOption_DoNotDelete() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTMultiPassStorageCreationOption_DoNotDelete")))
 }
 
-// KVTVideoEncoderListOption_IncludeStandardDefinitionDVEncoders returns the value of the CoreFoundation reference constant kVTVideoEncoderListOption_IncludeStandardDefinitionDVEncoders as an objc.ID.
-func KVTVideoEncoderListOption_IncludeStandardDefinitionDVEncoders() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderListOption_IncludeStandardDefinitionDVEncoders())
+// KVTVideoEncoderListOption_IncludeStandardDefinitionDVEncoders returns the value of the constant kVTVideoEncoderListOption_IncludeStandardDefinitionDVEncoders.
+func KVTVideoEncoderListOption_IncludeStandardDefinitionDVEncoders() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderListOption_IncludeStandardDefinitionDVEncoders")))
 }
 
-// KVTVideoEncoderList_CodecType returns the value of the CoreFoundation reference constant kVTVideoEncoderList_CodecType as an objc.ID.
-func KVTVideoEncoderList_CodecType() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderList_CodecType())
+// KVTVideoEncoderList_CodecType returns the value of the constant kVTVideoEncoderList_CodecType.
+func KVTVideoEncoderList_CodecType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_CodecType")))
 }
 
-// KVTVideoEncoderList_EncoderID returns the value of the CoreFoundation reference constant kVTVideoEncoderList_EncoderID as an objc.ID.
-func KVTVideoEncoderList_EncoderID() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderList_EncoderID())
+// KVTVideoEncoderList_EncoderID returns the value of the constant kVTVideoEncoderList_EncoderID.
+func KVTVideoEncoderList_EncoderID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_EncoderID")))
 }
 
-// KVTVideoEncoderList_CodecName returns the value of the CoreFoundation reference constant kVTVideoEncoderList_CodecName as an objc.ID.
-func KVTVideoEncoderList_CodecName() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderList_CodecName())
+// KVTVideoEncoderList_CodecName returns the value of the constant kVTVideoEncoderList_CodecName.
+func KVTVideoEncoderList_CodecName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_CodecName")))
 }
 
-// KVTVideoEncoderList_EncoderName returns the value of the CoreFoundation reference constant kVTVideoEncoderList_EncoderName as an objc.ID.
-func KVTVideoEncoderList_EncoderName() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderList_EncoderName())
+// KVTVideoEncoderList_EncoderName returns the value of the constant kVTVideoEncoderList_EncoderName.
+func KVTVideoEncoderList_EncoderName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_EncoderName")))
 }
 
-// KVTVideoEncoderList_DisplayName returns the value of the CoreFoundation reference constant kVTVideoEncoderList_DisplayName as an objc.ID.
-func KVTVideoEncoderList_DisplayName() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderList_DisplayName())
+// KVTVideoEncoderList_DisplayName returns the value of the constant kVTVideoEncoderList_DisplayName.
+func KVTVideoEncoderList_DisplayName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_DisplayName")))
 }
 
-// KVTVideoEncoderList_GPURegistryID returns the value of the CoreFoundation reference constant kVTVideoEncoderList_GPURegistryID as an objc.ID.
-func KVTVideoEncoderList_GPURegistryID() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderList_GPURegistryID())
+// KVTVideoEncoderList_GPURegistryID returns the value of the constant kVTVideoEncoderList_GPURegistryID.
+func KVTVideoEncoderList_GPURegistryID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_GPURegistryID")))
 }
 
-// KVTVideoEncoderList_SupportedSelectionProperties returns the value of the CoreFoundation reference constant kVTVideoEncoderList_SupportedSelectionProperties as an objc.ID.
-func KVTVideoEncoderList_SupportedSelectionProperties() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderList_SupportedSelectionProperties())
+// KVTVideoEncoderList_SupportedSelectionProperties returns the value of the constant kVTVideoEncoderList_SupportedSelectionProperties.
+func KVTVideoEncoderList_SupportedSelectionProperties() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_SupportedSelectionProperties")))
 }
 
-// KVTVideoEncoderList_PerformanceRating returns the value of the CoreFoundation reference constant kVTVideoEncoderList_PerformanceRating as an objc.ID.
-func KVTVideoEncoderList_PerformanceRating() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderList_PerformanceRating())
+// KVTVideoEncoderList_PerformanceRating returns the value of the constant kVTVideoEncoderList_PerformanceRating.
+func KVTVideoEncoderList_PerformanceRating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_PerformanceRating")))
 }
 
-// KVTVideoEncoderList_QualityRating returns the value of the CoreFoundation reference constant kVTVideoEncoderList_QualityRating as an objc.ID.
-func KVTVideoEncoderList_QualityRating() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderList_QualityRating())
+// KVTVideoEncoderList_QualityRating returns the value of the constant kVTVideoEncoderList_QualityRating.
+func KVTVideoEncoderList_QualityRating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_QualityRating")))
 }
 
-// KVTVideoEncoderList_InstanceLimit returns the value of the CoreFoundation reference constant kVTVideoEncoderList_InstanceLimit as an objc.ID.
-func KVTVideoEncoderList_InstanceLimit() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderList_InstanceLimit())
+// KVTVideoEncoderList_InstanceLimit returns the value of the constant kVTVideoEncoderList_InstanceLimit.
+func KVTVideoEncoderList_InstanceLimit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_InstanceLimit")))
 }
 
-// KVTVideoEncoderList_IsHardwareAccelerated returns the value of the CoreFoundation reference constant kVTVideoEncoderList_IsHardwareAccelerated as an objc.ID.
-func KVTVideoEncoderList_IsHardwareAccelerated() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderList_IsHardwareAccelerated())
+// KVTVideoEncoderList_IsHardwareAccelerated returns the value of the constant kVTVideoEncoderList_IsHardwareAccelerated.
+func KVTVideoEncoderList_IsHardwareAccelerated() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_IsHardwareAccelerated")))
 }
 
-// KVTVideoEncoderList_SupportsFrameReordering returns the value of the CoreFoundation reference constant kVTVideoEncoderList_SupportsFrameReordering as an objc.ID.
-func KVTVideoEncoderList_SupportsFrameReordering() objc.ID {
-	return purego.CFConstant(raw.KVTVideoEncoderList_SupportsFrameReordering())
+// KVTVideoEncoderList_SupportsFrameReordering returns the value of the constant kVTVideoEncoderList_SupportsFrameReordering.
+func KVTVideoEncoderList_SupportsFrameReordering() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTVideoEncoderList_SupportsFrameReordering")))
 }
 
-// @constant	kVTPixelTransferPropertyKey_ScalingMode @abstract Indicates how images should be scaled. @discussion Depending on the scaling mode, scaling may take into account: the full image buffer width and height of the source and destination, the clean aperture attachment (kCVImageBufferCleanApertureKey) on the source image buffer, the pixel aspect ratio attachment (kCVImageBufferPixelAspectRatioKey) on the source image buffer, the destination clean aperture (kVTPixelTransferPropertyKey_DestinationCleanAperture), and/or the destination pixel aspect ratio (kVTPixelTransferPropertyKey_DestinationPixelAspectRatio). The destination image buffer's clean aperture and pixel aspect ratio attachments are not taken into account, and will be overwritten.
-// KVTPixelTransferPropertyKey_ScalingMode returns the value of the CoreFoundation reference constant kVTPixelTransferPropertyKey_ScalingMode as an objc.ID.
-func KVTPixelTransferPropertyKey_ScalingMode() objc.ID {
-	return purego.CFConstant(raw.KVTPixelTransferPropertyKey_ScalingMode())
+// Indicates how images should be scaled. Depending on the scaling mode, scaling may take into account: the full image buffer width and height of the source and destination, the clean aperture attachment (kCVImageBufferCleanApertureKey) on the source image buffer, the pixel aspect ratio attachment (kCVImageBufferPixelAspectRatioKey) on the source image buffer, the destination clean aperture (kVTPixelTransferPropertyKey_DestinationCleanAperture), and/or the destination pixel aspect ratio (kVTPixelTransferPropertyKey_DestinationPixelAspectRatio). The destination image buffer's clean aperture and pixel aspect ratio attachments are not taken into account, and will be overwritten.
+// KVTPixelTransferPropertyKey_ScalingMode returns the value of the constant kVTPixelTransferPropertyKey_ScalingMode.
+func KVTPixelTransferPropertyKey_ScalingMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPixelTransferPropertyKey_ScalingMode")))
 }
 
-// KVTScalingMode_Normal returns the value of the CoreFoundation reference constant kVTScalingMode_Normal as an objc.ID.
-func KVTScalingMode_Normal() objc.ID { return purego.CFConstant(raw.KVTScalingMode_Normal()) }
+// KVTScalingMode_Normal returns the value of the constant kVTScalingMode_Normal.
+func KVTScalingMode_Normal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTScalingMode_Normal")))
+}
 
-// KVTScalingMode_CropSourceToCleanAperture returns the value of the CoreFoundation reference constant kVTScalingMode_CropSourceToCleanAperture as an objc.ID.
-func KVTScalingMode_CropSourceToCleanAperture() objc.ID {
-	return purego.CFConstant(raw.KVTScalingMode_CropSourceToCleanAperture())
+// KVTScalingMode_CropSourceToCleanAperture returns the value of the constant kVTScalingMode_CropSourceToCleanAperture.
+func KVTScalingMode_CropSourceToCleanAperture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTScalingMode_CropSourceToCleanAperture")))
 }
 
-// KVTScalingMode_Letterbox returns the value of the CoreFoundation reference constant kVTScalingMode_Letterbox as an objc.ID.
-func KVTScalingMode_Letterbox() objc.ID { return purego.CFConstant(raw.KVTScalingMode_Letterbox()) }
+// KVTScalingMode_Letterbox returns the value of the constant kVTScalingMode_Letterbox.
+func KVTScalingMode_Letterbox() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTScalingMode_Letterbox")))
+}
 
-// KVTScalingMode_Trim returns the value of the CoreFoundation reference constant kVTScalingMode_Trim as an objc.ID.
-func KVTScalingMode_Trim() objc.ID { return purego.CFConstant(raw.KVTScalingMode_Trim()) }
+// KVTScalingMode_Trim returns the value of the constant kVTScalingMode_Trim.
+func KVTScalingMode_Trim() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTScalingMode_Trim")))
+}
 
-// @constant	kVTPixelTransferPropertyKey_DestinationCleanAperture @abstract Specifies the clean aperture for destination image buffers. @discussion The value of this property is a CFDictionary with same keys as used in the kCVImageBufferCleanApertureKey dictionary. This property is ignored in kVTScalingMode_Normal. This property defaults to NULL, meaning the clean aperture is the full width and height.
-// KVTPixelTransferPropertyKey_DestinationCleanAperture returns the value of the CoreFoundation reference constant kVTPixelTransferPropertyKey_DestinationCleanAperture as an objc.ID.
-func KVTPixelTransferPropertyKey_DestinationCleanAperture() objc.ID {
-	return purego.CFConstant(raw.KVTPixelTransferPropertyKey_DestinationCleanAperture())
+// Specifies the clean aperture for destination image buffers. The value of this property is a CFDictionary with same keys as used in the kCVImageBufferCleanApertureKey dictionary. This property is ignored in kVTScalingMode_Normal. This property defaults to NULL, meaning the clean aperture is the full width and height.
+// KVTPixelTransferPropertyKey_DestinationCleanAperture returns the value of the constant kVTPixelTransferPropertyKey_DestinationCleanAperture.
+func KVTPixelTransferPropertyKey_DestinationCleanAperture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPixelTransferPropertyKey_DestinationCleanAperture")))
 }
 
-// @constant	kVTPixelTransferPropertyKey_DestinationPixelAspectRatio @abstract Specifies the pixel aspect ratio for destination image buffers. @discussion The value of this property is a CFDictionary with same keys as used in the kCVImageBufferPixelAspectRatioKey dictionary. This property is ignored in kVTScalingMode_Normal. This property defaults to NULL, meaning 1:1 (for kVTScalingMode_CropSourceToCleanAperture) or no change in pixel aspect ratio (for kVTScalingMode_Letterbox and kVTScalingMode_Trim).
-// KVTPixelTransferPropertyKey_DestinationPixelAspectRatio returns the value of the CoreFoundation reference constant kVTPixelTransferPropertyKey_DestinationPixelAspectRatio as an objc.ID.
-func KVTPixelTransferPropertyKey_DestinationPixelAspectRatio() objc.ID {
-	return purego.CFConstant(raw.KVTPixelTransferPropertyKey_DestinationPixelAspectRatio())
+// Specifies the pixel aspect ratio for destination image buffers. The value of this property is a CFDictionary with same keys as used in the kCVImageBufferPixelAspectRatioKey dictionary. This property is ignored in kVTScalingMode_Normal. This property defaults to NULL, meaning 1:1 (for kVTScalingMode_CropSourceToCleanAperture) or no change in pixel aspect ratio (for kVTScalingMode_Letterbox and kVTScalingMode_Trim).
+// KVTPixelTransferPropertyKey_DestinationPixelAspectRatio returns the value of the constant kVTPixelTransferPropertyKey_DestinationPixelAspectRatio.
+func KVTPixelTransferPropertyKey_DestinationPixelAspectRatio() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPixelTransferPropertyKey_DestinationPixelAspectRatio")))
 }
 
-// @constant	kVTPixelTransferPropertyKey_DownsamplingMode @abstract Requests a specific chroma downsampling technique be used. @discussion This property is ignored if chroma downsampling is not performed.
-// KVTPixelTransferPropertyKey_DownsamplingMode returns the value of the CoreFoundation reference constant kVTPixelTransferPropertyKey_DownsamplingMode as an objc.ID.
-func KVTPixelTransferPropertyKey_DownsamplingMode() objc.ID {
-	return purego.CFConstant(raw.KVTPixelTransferPropertyKey_DownsamplingMode())
+// Requests a specific chroma downsampling technique be used. This property is ignored if chroma downsampling is not performed.
+// KVTPixelTransferPropertyKey_DownsamplingMode returns the value of the constant kVTPixelTransferPropertyKey_DownsamplingMode.
+func KVTPixelTransferPropertyKey_DownsamplingMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPixelTransferPropertyKey_DownsamplingMode")))
 }
 
-// KVTDownsamplingMode_Decimate returns the value of the CoreFoundation reference constant kVTDownsamplingMode_Decimate as an objc.ID.
-func KVTDownsamplingMode_Decimate() objc.ID {
-	return purego.CFConstant(raw.KVTDownsamplingMode_Decimate())
+// KVTDownsamplingMode_Decimate returns the value of the constant kVTDownsamplingMode_Decimate.
+func KVTDownsamplingMode_Decimate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDownsamplingMode_Decimate")))
 }
 
-// KVTDownsamplingMode_Average returns the value of the CoreFoundation reference constant kVTDownsamplingMode_Average as an objc.ID.
-func KVTDownsamplingMode_Average() objc.ID {
-	return purego.CFConstant(raw.KVTDownsamplingMode_Average())
+// KVTDownsamplingMode_Average returns the value of the constant kVTDownsamplingMode_Average.
+func KVTDownsamplingMode_Average() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTDownsamplingMode_Average")))
 }
 
-// @constant	kVTPixelTransferPropertyKey_DestinationColorPrimaries @abstract Specifies the color primaries to be used for destination image buffers. @discussion Specifying this value may lead to performance degradation, as a color matching operation may need to be performed between the source and the destination.
-// KVTPixelTransferPropertyKey_DestinationColorPrimaries returns the value of the CoreFoundation reference constant kVTPixelTransferPropertyKey_DestinationColorPrimaries as an objc.ID.
-func KVTPixelTransferPropertyKey_DestinationColorPrimaries() objc.ID {
-	return purego.CFConstant(raw.KVTPixelTransferPropertyKey_DestinationColorPrimaries())
+// Specifies the color primaries to be used for destination image buffers. Specifying this value may lead to performance degradation, as a color matching operation may need to be performed between the source and the destination.
+// KVTPixelTransferPropertyKey_DestinationColorPrimaries returns the value of the constant kVTPixelTransferPropertyKey_DestinationColorPrimaries.
+func KVTPixelTransferPropertyKey_DestinationColorPrimaries() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPixelTransferPropertyKey_DestinationColorPrimaries")))
 }
 
-// @constant	kVTPixelTransferPropertyKey_DestinationTransferFunction @abstract Specifies the color transfer function to be used for destination image buffers. @discussion Specifying this value may lead to performance degradation, as a color matching operation may need to be performed between the source and the destination.
-// KVTPixelTransferPropertyKey_DestinationTransferFunction returns the value of the CoreFoundation reference constant kVTPixelTransferPropertyKey_DestinationTransferFunction as an objc.ID.
-func KVTPixelTransferPropertyKey_DestinationTransferFunction() objc.ID {
-	return purego.CFConstant(raw.KVTPixelTransferPropertyKey_DestinationTransferFunction())
+// Specifies the color transfer function to be used for destination image buffers. Specifying this value may lead to performance degradation, as a color matching operation may need to be performed between the source and the destination.
+// KVTPixelTransferPropertyKey_DestinationTransferFunction returns the value of the constant kVTPixelTransferPropertyKey_DestinationTransferFunction.
+func KVTPixelTransferPropertyKey_DestinationTransferFunction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPixelTransferPropertyKey_DestinationTransferFunction")))
 }
 
-// @constant	kVTPixelTransferPropertyKey_DestinationICCProfile @abstract Specifies the ICC profile for destination image buffers. @discussion Specifying this value may lead to performance degradation, as a color matching operation may need to be performed between the source and the destination.
-// KVTPixelTransferPropertyKey_DestinationICCProfile returns the value of the CoreFoundation reference constant kVTPixelTransferPropertyKey_DestinationICCProfile as an objc.ID.
-func KVTPixelTransferPropertyKey_DestinationICCProfile() objc.ID {
-	return purego.CFConstant(raw.KVTPixelTransferPropertyKey_DestinationICCProfile())
+// Specifies the ICC profile for destination image buffers. Specifying this value may lead to performance degradation, as a color matching operation may need to be performed between the source and the destination.
+// KVTPixelTransferPropertyKey_DestinationICCProfile returns the value of the constant kVTPixelTransferPropertyKey_DestinationICCProfile.
+func KVTPixelTransferPropertyKey_DestinationICCProfile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPixelTransferPropertyKey_DestinationICCProfile")))
 }
 
-// @constant	kVTPixelTransferPropertyKey_DestinationYCbCrMatrix @abstract Specifies the color matrix to be used for YCbCr->RGB conversions involving the destination image buffers. @discussion Specifying this value may lead to performance degradation, as a color matching operation may need to be performed between the source and the destination.
-// KVTPixelTransferPropertyKey_DestinationYCbCrMatrix returns the value of the CoreFoundation reference constant kVTPixelTransferPropertyKey_DestinationYCbCrMatrix as an objc.ID.
-func KVTPixelTransferPropertyKey_DestinationYCbCrMatrix() objc.ID {
-	return purego.CFConstant(raw.KVTPixelTransferPropertyKey_DestinationYCbCrMatrix())
+// Specifies the color matrix to be used for YCbCr->RGB conversions involving the destination image buffers. Specifying this value may lead to performance degradation, as a color matching operation may need to be performed between the source and the destination.
+// KVTPixelTransferPropertyKey_DestinationYCbCrMatrix returns the value of the constant kVTPixelTransferPropertyKey_DestinationYCbCrMatrix.
+func KVTPixelTransferPropertyKey_DestinationYCbCrMatrix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPixelTransferPropertyKey_DestinationYCbCrMatrix")))
 }
 
-// @constant   kVTPixelTransferPropertyKey_RealTime @abstract Hints the transfer session that the operation is, or is not, being performed in real time. @discussion Set this property to kCFBooleanTrue to indicate that the transfer is part of realtime operation.  If set to true, the VTPixelTransferSession may be given precedence over non-realtime tasks.  This can be set to false for transfers being performed as part of background operations. By default this value is NULL indicating that it is unspecified.
-// KVTPixelTransferPropertyKey_RealTime returns the value of the CoreFoundation reference constant kVTPixelTransferPropertyKey_RealTime as an objc.ID.
-func KVTPixelTransferPropertyKey_RealTime() objc.ID {
-	return purego.CFConstant(raw.KVTPixelTransferPropertyKey_RealTime())
+// Hints the transfer session that the operation is, or is not, being performed in real time. Set this property to kCFBooleanTrue to indicate that the transfer is part of realtime operation.  If set to true, the VTPixelTransferSession may be given precedence over non-realtime tasks.  This can be set to false for transfers being performed as part of background operations. By default this value is NULL indicating that it is unspecified.
+// KVTPixelTransferPropertyKey_RealTime returns the value of the constant kVTPixelTransferPropertyKey_RealTime.
+func KVTPixelTransferPropertyKey_RealTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPixelTransferPropertyKey_RealTime")))
 }
 
-// KVTPixelRotationPropertyKey_Rotation returns the value of the CoreFoundation reference constant kVTPixelRotationPropertyKey_Rotation as an objc.ID.
-func KVTPixelRotationPropertyKey_Rotation() objc.ID {
-	return purego.CFConstant(raw.KVTPixelRotationPropertyKey_Rotation())
+// KVTPixelRotationPropertyKey_Rotation returns the value of the constant kVTPixelRotationPropertyKey_Rotation.
+func KVTPixelRotationPropertyKey_Rotation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPixelRotationPropertyKey_Rotation")))
 }
 
-// KVTRotation_0 returns the value of the CoreFoundation reference constant kVTRotation_0 as an objc.ID.
-func KVTRotation_0() objc.ID { return purego.CFConstant(raw.KVTRotation_0()) }
+// KVTRotation_0 returns the value of the constant kVTRotation_0.
+func KVTRotation_0() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kVTRotation_0"))) }
 
-// KVTRotation_CW90 returns the value of the CoreFoundation reference constant kVTRotation_CW90 as an objc.ID.
-func KVTRotation_CW90() objc.ID { return purego.CFConstant(raw.KVTRotation_CW90()) }
+// KVTRotation_CW90 returns the value of the constant kVTRotation_CW90.
+func KVTRotation_CW90() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kVTRotation_CW90"))) }
 
-// KVTRotation_180 returns the value of the CoreFoundation reference constant kVTRotation_180 as an objc.ID.
-func KVTRotation_180() objc.ID { return purego.CFConstant(raw.KVTRotation_180()) }
+// KVTRotation_180 returns the value of the constant kVTRotation_180.
+func KVTRotation_180() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kVTRotation_180"))) }
 
-// KVTRotation_CCW90 returns the value of the CoreFoundation reference constant kVTRotation_CCW90 as an objc.ID.
-func KVTRotation_CCW90() objc.ID { return purego.CFConstant(raw.KVTRotation_CCW90()) }
+// KVTRotation_CCW90 returns the value of the constant kVTRotation_CCW90.
+func KVTRotation_CCW90() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kVTRotation_CCW90"))) }
 
-// KVTPixelRotationPropertyKey_FlipHorizontalOrientation returns the value of the CoreFoundation reference constant kVTPixelRotationPropertyKey_FlipHorizontalOrientation as an objc.ID.
-func KVTPixelRotationPropertyKey_FlipHorizontalOrientation() objc.ID {
-	return purego.CFConstant(raw.KVTPixelRotationPropertyKey_FlipHorizontalOrientation())
+// KVTPixelRotationPropertyKey_FlipHorizontalOrientation returns the value of the constant kVTPixelRotationPropertyKey_FlipHorizontalOrientation.
+func KVTPixelRotationPropertyKey_FlipHorizontalOrientation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPixelRotationPropertyKey_FlipHorizontalOrientation")))
 }
 
-// KVTPixelRotationPropertyKey_FlipVerticalOrientation returns the value of the CoreFoundation reference constant kVTPixelRotationPropertyKey_FlipVerticalOrientation as an objc.ID.
-func KVTPixelRotationPropertyKey_FlipVerticalOrientation() objc.ID {
-	return purego.CFConstant(raw.KVTPixelRotationPropertyKey_FlipVerticalOrientation())
+// KVTPixelRotationPropertyKey_FlipVerticalOrientation returns the value of the constant kVTPixelRotationPropertyKey_FlipVerticalOrientation.
+func KVTPixelRotationPropertyKey_FlipVerticalOrientation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTPixelRotationPropertyKey_FlipVerticalOrientation")))
 }
 
-// @constant	kVTRAWProcessingParameter_Key @discussion The value corresponding to this key is the string used when specifying this parameter when calling VTRAWProcessingSessionSetProcessingParameters.
-// KVTRAWProcessingParameter_Key returns the value of the CoreFoundation reference constant kVTRAWProcessingParameter_Key as an objc.ID.
-func KVTRAWProcessingParameter_Key() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameter_Key())
+// The value corresponding to this key is the string used when specifying this parameter when calling VTRAWProcessingSessionSetProcessingParameters.
+// KVTRAWProcessingParameter_Key returns the value of the constant kVTRAWProcessingParameter_Key.
+func KVTRAWProcessingParameter_Key() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameter_Key")))
 }
 
-// @constant	kVTRAWProcessingParameter_Name @discussion The value corresponding to this key is a localized string  which can be displayed in UI representing this parameter.
-// KVTRAWProcessingParameter_Name returns the value of the CoreFoundation reference constant kVTRAWProcessingParameter_Name as an objc.ID.
-func KVTRAWProcessingParameter_Name() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameter_Name())
+// The value corresponding to this key is a localized string  which can be displayed in UI representing this parameter.
+// KVTRAWProcessingParameter_Name returns the value of the constant kVTRAWProcessingParameter_Name.
+func KVTRAWProcessingParameter_Name() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameter_Name")))
 }
 
-// @constant	kVTRAWProcessingParameter_Description @discussion The value corresponding to this key is a localized string with a description of the parameter suitable for display in a tooltip or other descriptive UI.
-// KVTRAWProcessingParameter_Description returns the value of the CoreFoundation reference constant kVTRAWProcessingParameter_Description as an objc.ID.
-func KVTRAWProcessingParameter_Description() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameter_Description())
+// The value corresponding to this key is a localized string with a description of the parameter suitable for display in a tooltip or other descriptive UI.
+// KVTRAWProcessingParameter_Description returns the value of the constant kVTRAWProcessingParameter_Description.
+func KVTRAWProcessingParameter_Description() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameter_Description")))
 }
 
-// @constant	kVTRAWProcessingParameter_Enabled @discussion The value corresponding to this key is Boolean indicating whether the parameter is enabled and can be modified.
-// KVTRAWProcessingParameter_Enabled returns the value of the CoreFoundation reference constant kVTRAWProcessingParameter_Enabled as an objc.ID.
-func KVTRAWProcessingParameter_Enabled() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameter_Enabled())
+// The value corresponding to this key is Boolean indicating whether the parameter is enabled and can be modified.
+// KVTRAWProcessingParameter_Enabled returns the value of the constant kVTRAWProcessingParameter_Enabled.
+func KVTRAWProcessingParameter_Enabled() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameter_Enabled")))
 }
 
-// @constant	kVTRAWProcessingParameter_ValueType @discussion The value corresponding to this key is the type of the parameter - a Boolean, Integer, Float, List, or SubGroup.
-// KVTRAWProcessingParameter_ValueType returns the value of the CoreFoundation reference constant kVTRAWProcessingParameter_ValueType as an objc.ID.
-func KVTRAWProcessingParameter_ValueType() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameter_ValueType())
+// The value corresponding to this key is the type of the parameter - a Boolean, Integer, Float, List, or SubGroup.
+// KVTRAWProcessingParameter_ValueType returns the value of the constant kVTRAWProcessingParameter_ValueType.
+func KVTRAWProcessingParameter_ValueType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameter_ValueType")))
 }
 
-// KVTRAWProcessingParameterValueType_Boolean returns the value of the CoreFoundation reference constant kVTRAWProcessingParameterValueType_Boolean as an objc.ID.
-func KVTRAWProcessingParameterValueType_Boolean() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameterValueType_Boolean())
+// KVTRAWProcessingParameterValueType_Boolean returns the value of the constant kVTRAWProcessingParameterValueType_Boolean.
+func KVTRAWProcessingParameterValueType_Boolean() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameterValueType_Boolean")))
 }
 
-// KVTRAWProcessingParameterValueType_Integer returns the value of the CoreFoundation reference constant kVTRAWProcessingParameterValueType_Integer as an objc.ID.
-func KVTRAWProcessingParameterValueType_Integer() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameterValueType_Integer())
+// KVTRAWProcessingParameterValueType_Integer returns the value of the constant kVTRAWProcessingParameterValueType_Integer.
+func KVTRAWProcessingParameterValueType_Integer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameterValueType_Integer")))
 }
 
-// KVTRAWProcessingParameterValueType_Float returns the value of the CoreFoundation reference constant kVTRAWProcessingParameterValueType_Float as an objc.ID.
-func KVTRAWProcessingParameterValueType_Float() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameterValueType_Float())
+// KVTRAWProcessingParameterValueType_Float returns the value of the constant kVTRAWProcessingParameterValueType_Float.
+func KVTRAWProcessingParameterValueType_Float() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameterValueType_Float")))
 }
 
-// KVTRAWProcessingParameterValueType_List returns the value of the CoreFoundation reference constant kVTRAWProcessingParameterValueType_List as an objc.ID.
-func KVTRAWProcessingParameterValueType_List() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameterValueType_List())
+// KVTRAWProcessingParameterValueType_List returns the value of the constant kVTRAWProcessingParameterValueType_List.
+func KVTRAWProcessingParameterValueType_List() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameterValueType_List")))
 }
 
-// KVTRAWProcessingParameterValueType_SubGroup returns the value of the CoreFoundation reference constant kVTRAWProcessingParameterValueType_SubGroup as an objc.ID.
-func KVTRAWProcessingParameterValueType_SubGroup() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameterValueType_SubGroup())
+// KVTRAWProcessingParameterValueType_SubGroup returns the value of the constant kVTRAWProcessingParameterValueType_SubGroup.
+func KVTRAWProcessingParameterValueType_SubGroup() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameterValueType_SubGroup")))
 }
 
-// @constant	kVTRAWProcessingParameter_ListArray @discussion The value corresponding to this key is a CFArray of CFDictionaries describing each element in the list..
-// KVTRAWProcessingParameter_ListArray returns the value of the CoreFoundation reference constant kVTRAWProcessingParameter_ListArray as an objc.ID.
-func KVTRAWProcessingParameter_ListArray() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameter_ListArray())
+// The value corresponding to this key is a CFArray of CFDictionaries describing each element in the list..
+// KVTRAWProcessingParameter_ListArray returns the value of the constant kVTRAWProcessingParameter_ListArray.
+func KVTRAWProcessingParameter_ListArray() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameter_ListArray")))
 }
 
-// KVTRAWProcessingParameterListElement_Label returns the value of the CoreFoundation reference constant kVTRAWProcessingParameterListElement_Label as an objc.ID.
-func KVTRAWProcessingParameterListElement_Label() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameterListElement_Label())
+// KVTRAWProcessingParameterListElement_Label returns the value of the constant kVTRAWProcessingParameterListElement_Label.
+func KVTRAWProcessingParameterListElement_Label() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameterListElement_Label")))
 }
 
-// KVTRAWProcessingParameterListElement_Description returns the value of the CoreFoundation reference constant kVTRAWProcessingParameterListElement_Description as an objc.ID.
-func KVTRAWProcessingParameterListElement_Description() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameterListElement_Description())
+// KVTRAWProcessingParameterListElement_Description returns the value of the constant kVTRAWProcessingParameterListElement_Description.
+func KVTRAWProcessingParameterListElement_Description() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameterListElement_Description")))
 }
 
-// KVTRAWProcessingParameterListElement_ListElementID returns the value of the CoreFoundation reference constant kVTRAWProcessingParameterListElement_ListElementID as an objc.ID.
-func KVTRAWProcessingParameterListElement_ListElementID() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameterListElement_ListElementID())
+// KVTRAWProcessingParameterListElement_ListElementID returns the value of the constant kVTRAWProcessingParameterListElement_ListElementID.
+func KVTRAWProcessingParameterListElement_ListElementID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameterListElement_ListElementID")))
 }
 
-// @constant	kVTRAWProcessingParameter_SubGroup @discussion The value corresponding to this key is a CFArray of CFDictionaries representing the individual sub-parameters in this group.
-// KVTRAWProcessingParameter_SubGroup returns the value of the CoreFoundation reference constant kVTRAWProcessingParameter_SubGroup as an objc.ID.
-func KVTRAWProcessingParameter_SubGroup() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameter_SubGroup())
+// The value corresponding to this key is a CFArray of CFDictionaries representing the individual sub-parameters in this group.
+// KVTRAWProcessingParameter_SubGroup returns the value of the constant kVTRAWProcessingParameter_SubGroup.
+func KVTRAWProcessingParameter_SubGroup() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameter_SubGroup")))
 }
 
-// @constant	kVTRAWProcessingParameter_MaximumValue @discussion The value corresponding to this key is the maximum value allowed for this parameter when calling VTRAWProcessingSessionSetProcessingParameters. This parameter is optional and not required for parameters where it is not appropriate (such as Boolean or List types).
-// KVTRAWProcessingParameter_MaximumValue returns the value of the CoreFoundation reference constant kVTRAWProcessingParameter_MaximumValue as an objc.ID.
-func KVTRAWProcessingParameter_MaximumValue() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameter_MaximumValue())
+// The value corresponding to this key is the maximum value allowed for this parameter when calling VTRAWProcessingSessionSetProcessingParameters. This parameter is optional and not required for parameters where it is not appropriate (such as Boolean or List types).
+// KVTRAWProcessingParameter_MaximumValue returns the value of the constant kVTRAWProcessingParameter_MaximumValue.
+func KVTRAWProcessingParameter_MaximumValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameter_MaximumValue")))
 }
 
-// @constant	kVTRAWProcessingParameter_MinimumValue @discussion The value corresponding to this key is the minimum value allowed for this parameter when calling VTRAWProcessingSessionSetProcessingParameters. This parameter is optional and not required for parameters where it is not appropriate (such as Boolean or List types).
-// KVTRAWProcessingParameter_MinimumValue returns the value of the CoreFoundation reference constant kVTRAWProcessingParameter_MinimumValue as an objc.ID.
-func KVTRAWProcessingParameter_MinimumValue() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameter_MinimumValue())
+// The value corresponding to this key is the minimum value allowed for this parameter when calling VTRAWProcessingSessionSetProcessingParameters. This parameter is optional and not required for parameters where it is not appropriate (such as Boolean or List types).
+// KVTRAWProcessingParameter_MinimumValue returns the value of the constant kVTRAWProcessingParameter_MinimumValue.
+func KVTRAWProcessingParameter_MinimumValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameter_MinimumValue")))
 }
 
-// @constant	kVTRAWProcessingParameter_InitialValue @discussion The value corresponding to this key is the initial value for this parameter as defined by the container and metadata provided at creation time. For List types, this is the ListElementID for the List element.
-// KVTRAWProcessingParameter_InitialValue returns the value of the CoreFoundation reference constant kVTRAWProcessingParameter_InitialValue as an objc.ID.
-func KVTRAWProcessingParameter_InitialValue() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameter_InitialValue())
+// The value corresponding to this key is the initial value for this parameter as defined by the container and metadata provided at creation time. For List types, this is the ListElementID for the List element.
+// KVTRAWProcessingParameter_InitialValue returns the value of the constant kVTRAWProcessingParameter_InitialValue.
+func KVTRAWProcessingParameter_InitialValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameter_InitialValue")))
 }
 
-// @constant	kVTRAWProcessingParameter_NeutralValue @discussion The value corresponding to this key is a neutral setting for the processor. For List types, this is the ListElementID for the List element.
-// KVTRAWProcessingParameter_NeutralValue returns the value of the CoreFoundation reference constant kVTRAWProcessingParameter_NeutralValue as an objc.ID.
-func KVTRAWProcessingParameter_NeutralValue() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameter_NeutralValue())
+// The value corresponding to this key is a neutral setting for the processor. For List types, this is the ListElementID for the List element.
+// KVTRAWProcessingParameter_NeutralValue returns the value of the constant kVTRAWProcessingParameter_NeutralValue.
+func KVTRAWProcessingParameter_NeutralValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameter_NeutralValue")))
 }
 
-// @constant	kVTRAWProcessingParameter_CameraValue @discussion The value corresponding to this key is the "As Shot" value for this parameter as originally captured by the camera. For List types, this is the ListElementID for the List element.
-// KVTRAWProcessingParameter_CameraValue returns the value of the CoreFoundation reference constant kVTRAWProcessingParameter_CameraValue as an objc.ID.
-func KVTRAWProcessingParameter_CameraValue() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameter_CameraValue())
+// The value corresponding to this key is the "As Shot" value for this parameter as originally captured by the camera. For List types, this is the ListElementID for the List element.
+// KVTRAWProcessingParameter_CameraValue returns the value of the constant kVTRAWProcessingParameter_CameraValue.
+func KVTRAWProcessingParameter_CameraValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameter_CameraValue")))
 }
 
-// @constant	kVTRAWProcessingParameter_CurrentValue @discussion The value corresponding to this key is the currently configured value for this parameter.  For List types, this is the ListElementID for the List element.
-// KVTRAWProcessingParameter_CurrentValue returns the value of the CoreFoundation reference constant kVTRAWProcessingParameter_CurrentValue as an objc.ID.
-func KVTRAWProcessingParameter_CurrentValue() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingParameter_CurrentValue())
+// The value corresponding to this key is the currently configured value for this parameter.  For List types, this is the ListElementID for the List element.
+// KVTRAWProcessingParameter_CurrentValue returns the value of the constant kVTRAWProcessingParameter_CurrentValue.
+func KVTRAWProcessingParameter_CurrentValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingParameter_CurrentValue")))
 }
 
-// @constant	kVTRAWProcessingPropertyKey_MetalDeviceRegistryID @abstract This property, if supported, requests that the Metal device corresponding to the specified registryID be used for any Metal related processing @discussion This property is not supported by all RAWProcessors
-// KVTRAWProcessingPropertyKey_MetalDeviceRegistryID returns the value of the CoreFoundation reference constant kVTRAWProcessingPropertyKey_MetalDeviceRegistryID as an objc.ID.
-func KVTRAWProcessingPropertyKey_MetalDeviceRegistryID() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingPropertyKey_MetalDeviceRegistryID())
+// This property, if supported, requests that the Metal device corresponding to the specified registryID be used for any Metal related processing This property is not supported by all RAWProcessors
+// KVTRAWProcessingPropertyKey_MetalDeviceRegistryID returns the value of the constant kVTRAWProcessingPropertyKey_MetalDeviceRegistryID.
+func KVTRAWProcessingPropertyKey_MetalDeviceRegistryID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingPropertyKey_MetalDeviceRegistryID")))
 }
 
-// @constant	kVTRAWProcessingPropertyKey_OutputColorAttachments @abstract Returns the color-related CVImageBuffer keys and values that will be attachments to the returned pixel buffers. @discussion This property may not be supported by all RAW Processors. Only color-related keys from CVImageBuffer.h are permitted in the returned dictionary.
-// KVTRAWProcessingPropertyKey_OutputColorAttachments returns the value of the CoreFoundation reference constant kVTRAWProcessingPropertyKey_OutputColorAttachments as an objc.ID.
-func KVTRAWProcessingPropertyKey_OutputColorAttachments() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingPropertyKey_OutputColorAttachments())
+// Returns the color-related CVImageBuffer keys and values that will be attachments to the returned pixel buffers. This property may not be supported by all RAW Processors. Only color-related keys from CVImageBuffer.h are permitted in the returned dictionary.
+// KVTRAWProcessingPropertyKey_OutputColorAttachments returns the value of the constant kVTRAWProcessingPropertyKey_OutputColorAttachments.
+func KVTRAWProcessingPropertyKey_OutputColorAttachments() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingPropertyKey_OutputColorAttachments")))
 }
 
-// @constant   kVTRAWProcessingPropertyKey_MetadataForSidecarFile @abstract This property, if supported, returns the current processing metadata on the RAW Processor. The returned value can be used by the caller to create, or overwrite an existing sidecar file. @discussion This property is not supported by all RAWProcessors. The metadata returned represents a fully-formed sidecar file, and should be compatible with the MediaExtension FormatReader.
-// KVTRAWProcessingPropertyKey_MetadataForSidecarFile returns the value of the CoreFoundation reference constant kVTRAWProcessingPropertyKey_MetadataForSidecarFile as an objc.ID.
-func KVTRAWProcessingPropertyKey_MetadataForSidecarFile() objc.ID {
-	return purego.CFConstant(raw.KVTRAWProcessingPropertyKey_MetadataForSidecarFile())
+// This property, if supported, returns the current processing metadata on the RAW Processor. The returned value can be used by the caller to create, or overwrite an existing sidecar file. This property is not supported by all RAWProcessors. The metadata returned represents a fully-formed sidecar file, and should be compatible with the MediaExtension FormatReader.
+// KVTRAWProcessingPropertyKey_MetadataForSidecarFile returns the value of the constant kVTRAWProcessingPropertyKey_MetadataForSidecarFile.
+func KVTRAWProcessingPropertyKey_MetadataForSidecarFile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTRAWProcessingPropertyKey_MetadataForSidecarFile")))
 }
 
-// @constant	kVTHDRPerFrameMetadataGenerationOptionsKey_HDRFormats @abstract		Specifies an array of HDR formats that should be generated. @discussion This key represents a CFArrayRef. Only one key is supported ( kVTHDRPerFrameMetadataGenerationHDRFormatType_DolbyVision ).
-// KVTHDRPerFrameMetadataGenerationOptionsKey_HDRFormats returns the value of the CoreFoundation reference constant kVTHDRPerFrameMetadataGenerationOptionsKey_HDRFormats as an objc.ID.
-func KVTHDRPerFrameMetadataGenerationOptionsKey_HDRFormats() objc.ID {
-	return purego.CFConstant(raw.KVTHDRPerFrameMetadataGenerationOptionsKey_HDRFormats())
+// Specifies an array of HDR formats that should be generated. This key represents a CFArrayRef. Only one key is supported ( kVTHDRPerFrameMetadataGenerationHDRFormatType_DolbyVision ).
+// KVTHDRPerFrameMetadataGenerationOptionsKey_HDRFormats returns the value of the constant kVTHDRPerFrameMetadataGenerationOptionsKey_HDRFormats.
+func KVTHDRPerFrameMetadataGenerationOptionsKey_HDRFormats() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTHDRPerFrameMetadataGenerationOptionsKey_HDRFormats")))
 }
 
 // The size of the search blocks that motion estimation session uses. “VTMotionEstimationSessionCreate“ takes a dictionary of creation options, `motionVectorProcessorSelectionOptions`. You can supply “kVTMotionEstimationSessionCreationOption_MotionVectorSize“ with `CFNumber` to override the default search block size. Supported motion vector size is 4 or 16, meaning 4x4 or 16x16 respectively. 16x16 is the default if you don't provide this key.
-// KVTMotionEstimationSessionCreationOption_MotionVectorSize returns the value of the CoreFoundation reference constant kVTMotionEstimationSessionCreationOption_MotionVectorSize as an objc.ID.
-func KVTMotionEstimationSessionCreationOption_MotionVectorSize() objc.ID {
-	return purego.CFConstant(raw.KVTMotionEstimationSessionCreationOption_MotionVectorSize())
+// KVTMotionEstimationSessionCreationOption_MotionVectorSize returns the value of the constant kVTMotionEstimationSessionCreationOption_MotionVectorSize.
+func KVTMotionEstimationSessionCreationOption_MotionVectorSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTMotionEstimationSessionCreationOption_MotionVectorSize")))
 }
 
 // An option to use for higher quality motion estimation. “VTMotionEstimationSessionCreate“ takes a dictionary of creation options, `motionVectorProcessorSelectionOptions`. You can supply “kVTMotionEstimationSessionCreationOption_UseMultiPassSearch“ with `kCFBooleanTrue` to provide higher quality motion estimation. True-motion achieves higher quality by running the motion estimator in multiple passes. The default is `kCFBooleanFalse`.
-// KVTMotionEstimationSessionCreationOption_UseMultiPassSearch returns the value of the CoreFoundation reference constant kVTMotionEstimationSessionCreationOption_UseMultiPassSearch as an objc.ID.
-func KVTMotionEstimationSessionCreationOption_UseMultiPassSearch() objc.ID {
-	return purego.CFConstant(raw.KVTMotionEstimationSessionCreationOption_UseMultiPassSearch())
+// KVTMotionEstimationSessionCreationOption_UseMultiPassSearch returns the value of the constant kVTMotionEstimationSessionCreationOption_UseMultiPassSearch.
+func KVTMotionEstimationSessionCreationOption_UseMultiPassSearch() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTMotionEstimationSessionCreationOption_UseMultiPassSearch")))
 }
 
 // A label you use to log and track resources. “VTMotionEstimationSessionCreate“ takes a dictionary of creation options, `motionVectorProcessorSelectionOptions`. You can supply “kVTMotionEstimationSessionCreationOption_Label“ with `CFString` to specify a label used in logging and resource tracking.
-// KVTMotionEstimationSessionCreationOption_Label returns the value of the CoreFoundation reference constant kVTMotionEstimationSessionCreationOption_Label as an objc.ID.
-func KVTMotionEstimationSessionCreationOption_Label() objc.ID {
-	return purego.CFConstant(raw.KVTMotionEstimationSessionCreationOption_Label())
+// KVTMotionEstimationSessionCreationOption_Label returns the value of the constant kVTMotionEstimationSessionCreationOption_Label.
+func KVTMotionEstimationSessionCreationOption_Label() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kVTMotionEstimationSessionCreationOption_Label")))
 }

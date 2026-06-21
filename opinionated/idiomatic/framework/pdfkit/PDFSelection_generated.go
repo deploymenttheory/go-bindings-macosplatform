@@ -5,176 +5,149 @@
 package pdfkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A PDFSelection object identifies a contiguous or noncontiguous selection of text in a PDF document.
 //
-// Selection wraps [raw.PDFSelection] with a fluent Go API.
+// Selection is an idiomatic wrapper over the Objective-C class PDFSelection.
 type Selection struct {
-	inner *raw.PDFSelection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PDFSelection].
-func (x *Selection) Unwrap() *raw.PDFSelection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Selection) ID() objc.ID { return x.inner.Ptr() }
-
-// SelectionFromID adopts an existing object pointer as a Selection (nil for 0).
+// SelectionFromID adopts an existing Objective-C object as a Selection
+// (nil for 0), retaining it and registering a release finalizer.
 func SelectionFromID(id objc.ID) *Selection {
 	if id == 0 {
 		return nil
 	}
-	return &Selection{inner: raw.PDFSelectionFromID(id)}
+	x := &Selection{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// selectionAdopt wraps an Objective-C object that this code just created as a
+// Selection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func selectionAdopt(id objc.ID) *Selection {
+	if id == 0 {
+		return nil
+	}
+	x := &Selection{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Selection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Selection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Selection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns an empty PDFSelection object.
 //
-// NewSelectionWithDocument creates a new [Selection].
-func NewSelectionWithDocument(document *raw.PDFDocument) *Selection {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFSelection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDocument:"), document.Ptr())
-	return &Selection{inner: raw.PDFSelectionFromID(_id)}
+// NewSelectionWithDocument creates a new Selection.
+func NewSelectionWithDocument(document *Document) *Selection {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFSelection")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDocument:"), objref.IDOf(document))
+	return selectionAdopt(_id)
 }
 
-// Returns the bounds of the selection on the specified page.
-//
-// BoundsForPage calls the underlying BoundsForPage.
-func (x *Selection) BoundsForPage(page *raw.PDFPage) corefoundation.CGRect {
-	return x.inner.BoundsForPage(page)
-}
-
-// NumberOfTextRangesOnPage calls the underlying NumberOfTextRangesOnPage.
-func (x *Selection) NumberOfTextRangesOnPage(page *raw.PDFPage) uint {
-	return x.inner.NumberOfTextRangesOnPage(page)
-}
-
-// RangeAtIndexOnPage calls the underlying RangeAtIndexOnPage.
-func (x *Selection) RangeAtIndexOnPage(index uint, page *raw.PDFPage) foundation.NSRange {
-	return x.inner.RangeAtIndexOnPage(index, page)
+func (x *Selection) NumberOfTextRangesOnPage(page *Page) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfTextRangesOnPage:"), objref.IDOf(page))
+	return _r
 }
 
 // Returns an array of selections, one for each line of text covered by the receiver.
 //
 // SelectionsByLine returns the collection as a Go slice.
 func (x *Selection) SelectionsByLine() []*Selection {
-	arr := x.inner.SelectionsByLine()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Selection {
-		return &Selection{inner: raw.PDFSelectionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionsByLine"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Selection { return SelectionFromID(_id) })
 }
 
 // Adds the specified selection to the receiving selection.
-//
-// AddSelection calls the underlying AddSelection.
-func (x *Selection) AddSelection(selection *raw.PDFSelection) {
-	x.inner.AddSelection(selection)
+func (x *Selection) AddSelection(selection *Selection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSelection:"), objref.IDOf(selection))
 }
 
 // Adds the specified array of selections to the receiving selection.
-//
-// AddSelections calls the underlying AddSelections.
-func (x *Selection) AddSelections(selections *foundation.NSArray[*raw.PDFSelection]) {
-	x.inner.AddSelections(selections)
+func (x *Selection) AddSelections(selections []*Selection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSelections:"), purego.SliceToNSArray(selections, func(_v *Selection) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Extends the selection from its end toward the end of the document.
-//
-// ExtendSelectionAtEnd calls the underlying ExtendSelectionAtEnd.
 func (x *Selection) ExtendSelectionAtEnd(succeed int) {
-	x.inner.ExtendSelectionAtEnd(succeed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendSelectionAtEnd:"), succeed)
 }
 
 // Extends the selection from its start toward the beginning of the document.
-//
-// ExtendSelectionAtStart calls the underlying ExtendSelectionAtStart.
 func (x *Selection) ExtendSelectionAtStart(precede int) {
-	x.inner.ExtendSelectionAtStart(precede)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendSelectionAtStart:"), precede)
 }
 
-// ExtendSelectionForLineBoundaries calls the underlying ExtendSelectionForLineBoundaries.
 func (x *Selection) ExtendSelectionForLineBoundaries() {
-	x.inner.ExtendSelectionForLineBoundaries()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendSelectionForLineBoundaries"))
 }
 
 // Calls drawForPage:withBox:active: with a default value for box parameter.
-//
-// DrawForPageActive calls the underlying DrawForPageActive.
-func (x *Selection) DrawForPageActive(page *raw.PDFPage, active bool) {
-	x.inner.DrawForPageActive(page, active)
+func (x *Selection) DrawForPageActive(page *Page, active bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawForPage:active:"), objref.IDOf(page), active)
 }
 
 // Draws the selection relative to the origin of the specified box in page space.
-//
-// DrawForPageWithBoxActive calls the underlying DrawForPageWithBoxActive.
-func (x *Selection) DrawForPageWithBoxActive(page *raw.PDFPage, box PDFDisplayBox, active bool) {
-	x.inner.DrawForPageWithBoxActive(page, raw.PDFDisplayBox(box), active)
+func (x *Selection) DrawForPageWithBoxActive(page *Page, box DisplayBox, active bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawForPage:withBox:active:"), objref.IDOf(page), box, active)
 }
 
 // Pages returns the collection as a Go slice.
 func (x *Selection) Pages() []*Page {
-	arr := x.inner.Pages()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Page {
-		return &Page{inner: raw.PDFPageFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pages"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Page { return PageFromID(_id) })
 }
 
-// Color calls the underlying Color.
-func (x *Selection) Color() unsafe.Pointer {
-	return x.inner.Color()
-}
-
-// SetColor calls the underlying SetColor.
-func (x *Selection) SetColor(color unsafe.Pointer) {
-	x.inner.SetColor(color)
-}
-
-// String calls the underlying String.
 func (x *Selection) String() string {
-	_r := x.inner.String()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("string"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// AttributedString calls the underlying AttributedString.
-func (x *Selection) AttributedString() *foundation.NSAttributedString {
-	return x.inner.AttributedString()
+func (x *Selection) AttributedString() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedString"))
+	return obj.Wrap(_r)
 }
 
 // Selectionable is the interface implemented by [Selection], for mocking and DI.
 type Selectionable interface {
-	Unwrap() *raw.PDFSelection
-	BoundsForPage(page *raw.PDFPage) corefoundation.CGRect
-	NumberOfTextRangesOnPage(page *raw.PDFPage) uint
-	RangeAtIndexOnPage(index uint, page *raw.PDFPage) foundation.NSRange
+	obj.Object
+	NumberOfTextRangesOnPage(page *Page) int
 	SelectionsByLine() []*Selection
-	AddSelection(selection *raw.PDFSelection)
-	AddSelections(selections *foundation.NSArray[*raw.PDFSelection])
+	AddSelection(selection *Selection)
+	AddSelections(selections []*Selection)
 	ExtendSelectionAtEnd(succeed int)
 	ExtendSelectionAtStart(precede int)
 	ExtendSelectionForLineBoundaries()
-	DrawForPageActive(page *raw.PDFPage, active bool)
-	DrawForPageWithBoxActive(page *raw.PDFPage, box PDFDisplayBox, active bool)
+	DrawForPageActive(page *Page, active bool)
+	DrawForPageWithBoxActive(page *Page, box DisplayBox, active bool)
 	Pages() []*Page
-	Color() unsafe.Pointer
-	SetColor(color unsafe.Pointer)
 	String() string
-	AttributedString() *foundation.NSAttributedString
+	AttributedString() obj.Object
 }
 
 var _ Selectionable = (*Selection)(nil)

@@ -5,150 +5,165 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRChannelClusterRecordProgramParams wraps [raw.MTRChannelClusterRecordProgramParams] with a fluent Go API.
+// MTRChannelClusterRecordProgramParams is an idiomatic wrapper over the Objective-C class MTRChannelClusterRecordProgramParams.
 type MTRChannelClusterRecordProgramParams struct {
-	inner *raw.MTRChannelClusterRecordProgramParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRChannelClusterRecordProgramParams].
-func (x *MTRChannelClusterRecordProgramParams) Unwrap() *raw.MTRChannelClusterRecordProgramParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRChannelClusterRecordProgramParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRChannelClusterRecordProgramParamsFromID adopts an existing object pointer as a MTRChannelClusterRecordProgramParams (nil for 0).
+// MTRChannelClusterRecordProgramParamsFromID adopts an existing Objective-C object as a MTRChannelClusterRecordProgramParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRChannelClusterRecordProgramParamsFromID(id objc.ID) *MTRChannelClusterRecordProgramParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRChannelClusterRecordProgramParams{inner: raw.MTRChannelClusterRecordProgramParamsFromID(id)}
+	x := &MTRChannelClusterRecordProgramParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRChannelClusterRecordProgramParams creates a new [MTRChannelClusterRecordProgramParams].
+// mTRChannelClusterRecordProgramParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRChannelClusterRecordProgramParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRChannelClusterRecordProgramParamsAdopt(id objc.ID) *MTRChannelClusterRecordProgramParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRChannelClusterRecordProgramParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRChannelClusterRecordProgramParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRChannelClusterRecordProgramParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRChannelClusterRecordProgramParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRChannelClusterRecordProgramParams creates a new MTRChannelClusterRecordProgramParams.
 func NewMTRChannelClusterRecordProgramParams() *MTRChannelClusterRecordProgramParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRChannelClusterRecordProgramParams")), objc.RegisterName("new"))
-	return &MTRChannelClusterRecordProgramParams{inner: raw.MTRChannelClusterRecordProgramParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRChannelClusterRecordProgramParams")), objc.RegisterName("new"))
+	return mTRChannelClusterRecordProgramParamsAdopt(_id)
 }
 
-// WithProgramIdentifier sets the programIdentifier property and returns the receiver for chaining.
+// WithProgramIdentifier sets programIdentifier and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterRecordProgramParams) WithProgramIdentifier(programIdentifier string) *MTRChannelClusterRecordProgramParams {
-	x.inner.SetProgramIdentifier(foundation.NSStringStringWithUTF8String(programIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgramIdentifier:"), purego.NSString(programIdentifier))
 	return x
 }
 
-// WithShouldRecordSeries sets the shouldRecordSeries property and returns the receiver for chaining.
-func (x *MTRChannelClusterRecordProgramParams) WithShouldRecordSeries(shouldRecordSeries *foundation.NSNumber) *MTRChannelClusterRecordProgramParams {
-	x.inner.SetShouldRecordSeries(shouldRecordSeries)
+// WithShouldRecordSeries sets shouldRecordSeries and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterRecordProgramParams) WithShouldRecordSeries(shouldRecordSeries obj.Object) *MTRChannelClusterRecordProgramParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRecordSeries:"), objref.IDOf(shouldRecordSeries))
 	return x
 }
 
-// WithData sets the data property and returns the receiver for chaining.
-func (x *MTRChannelClusterRecordProgramParams) WithData(data *foundation.NSData) *MTRChannelClusterRecordProgramParams {
-	x.inner.SetData(data)
+// WithData sets data and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterRecordProgramParams) WithData(data obj.Object) *MTRChannelClusterRecordProgramParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke).
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRChannelClusterRecordProgramParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRChannelClusterRecordProgramParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterRecordProgramParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterRecordProgramParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRChannelClusterRecordProgramParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRChannelClusterRecordProgramParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterRecordProgramParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRChannelClusterRecordProgramParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// ProgramIdentifier calls the underlying ProgramIdentifier.
 func (x *MTRChannelClusterRecordProgramParams) ProgramIdentifier() string {
-	_r := x.inner.ProgramIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("programIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetProgramIdentifier calls the underlying SetProgramIdentifier.
 func (x *MTRChannelClusterRecordProgramParams) SetProgramIdentifier(programIdentifier string) {
-	x.inner.SetProgramIdentifier(foundation.NSStringStringWithUTF8String(programIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgramIdentifier:"), purego.NSString(programIdentifier))
 }
 
-// ShouldRecordSeries calls the underlying ShouldRecordSeries.
-func (x *MTRChannelClusterRecordProgramParams) ShouldRecordSeries() *foundation.NSNumber {
-	return x.inner.ShouldRecordSeries()
+func (x *MTRChannelClusterRecordProgramParams) ShouldRecordSeries() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shouldRecordSeries"))
+	return obj.Wrap(_r)
 }
 
-// SetShouldRecordSeries calls the underlying SetShouldRecordSeries.
-func (x *MTRChannelClusterRecordProgramParams) SetShouldRecordSeries(shouldRecordSeries *foundation.NSNumber) {
-	x.inner.SetShouldRecordSeries(shouldRecordSeries)
+func (x *MTRChannelClusterRecordProgramParams) SetShouldRecordSeries(shouldRecordSeries obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRecordSeries:"), objref.IDOf(shouldRecordSeries))
 }
 
-// Data calls the underlying Data.
-func (x *MTRChannelClusterRecordProgramParams) Data() *foundation.NSData {
-	return x.inner.Data()
+func (x *MTRChannelClusterRecordProgramParams) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
 
-// SetData calls the underlying SetData.
-func (x *MTRChannelClusterRecordProgramParams) SetData(data *foundation.NSData) {
-	x.inner.SetData(data)
+func (x *MTRChannelClusterRecordProgramParams) SetData(data obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRChannelClusterRecordProgramParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRChannelClusterRecordProgramParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRChannelClusterRecordProgramParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRChannelClusterRecordProgramParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRChannelClusterRecordProgramParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRChannelClusterRecordProgramParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRChannelClusterRecordProgramParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRChannelClusterRecordProgramParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRChannelClusterRecordProgramParamsable is the interface implemented by [MTRChannelClusterRecordProgramParams], for mocking and DI.
 type MTRChannelClusterRecordProgramParamsable interface {
-	Unwrap() *raw.MTRChannelClusterRecordProgramParams
+	obj.Object
 	WithProgramIdentifier(programIdentifier string) *MTRChannelClusterRecordProgramParams
-	WithShouldRecordSeries(shouldRecordSeries *foundation.NSNumber) *MTRChannelClusterRecordProgramParams
-	WithData(data *foundation.NSData) *MTRChannelClusterRecordProgramParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRChannelClusterRecordProgramParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRChannelClusterRecordProgramParams
+	WithShouldRecordSeries(shouldRecordSeries obj.Object) *MTRChannelClusterRecordProgramParams
+	WithData(data obj.Object) *MTRChannelClusterRecordProgramParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterRecordProgramParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRChannelClusterRecordProgramParams
 	ProgramIdentifier() string
 	SetProgramIdentifier(programIdentifier string)
-	ShouldRecordSeries() *foundation.NSNumber
-	SetShouldRecordSeries(shouldRecordSeries *foundation.NSNumber)
-	Data() *foundation.NSData
-	SetData(data *foundation.NSData)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	ShouldRecordSeries() obj.Object
+	SetShouldRecordSeries(shouldRecordSeries obj.Object)
+	Data() obj.Object
+	SetData(data obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRChannelClusterRecordProgramParamsable = (*MTRChannelClusterRecordProgramParams)(nil)

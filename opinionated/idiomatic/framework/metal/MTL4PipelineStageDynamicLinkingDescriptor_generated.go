@@ -5,119 +5,113 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Groups together properties to drive the dynamic linking process of a pipeline stage.
 //
-// MTL4PipelineStageDynamicLinkingDescriptor wraps [raw.MTL4PipelineStageDynamicLinkingDescriptor] with a fluent Go API.
+// MTL4PipelineStageDynamicLinkingDescriptor is an idiomatic wrapper over the Objective-C class MTL4PipelineStageDynamicLinkingDescriptor.
 type MTL4PipelineStageDynamicLinkingDescriptor struct {
-	inner *raw.MTL4PipelineStageDynamicLinkingDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTL4PipelineStageDynamicLinkingDescriptor].
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) Unwrap() *raw.MTL4PipelineStageDynamicLinkingDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MTL4PipelineStageDynamicLinkingDescriptorFromID adopts an existing object pointer as a MTL4PipelineStageDynamicLinkingDescriptor (nil for 0).
+// MTL4PipelineStageDynamicLinkingDescriptorFromID adopts an existing Objective-C object as a MTL4PipelineStageDynamicLinkingDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MTL4PipelineStageDynamicLinkingDescriptorFromID(id objc.ID) *MTL4PipelineStageDynamicLinkingDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MTL4PipelineStageDynamicLinkingDescriptor{inner: raw.MTL4PipelineStageDynamicLinkingDescriptorFromID(id)}
+	x := &MTL4PipelineStageDynamicLinkingDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTL4PipelineStageDynamicLinkingDescriptor creates a new [MTL4PipelineStageDynamicLinkingDescriptor].
+// mTL4PipelineStageDynamicLinkingDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MTL4PipelineStageDynamicLinkingDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTL4PipelineStageDynamicLinkingDescriptorAdopt(id objc.ID) *MTL4PipelineStageDynamicLinkingDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MTL4PipelineStageDynamicLinkingDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTL4PipelineStageDynamicLinkingDescriptor creates a new MTL4PipelineStageDynamicLinkingDescriptor.
 func NewMTL4PipelineStageDynamicLinkingDescriptor() *MTL4PipelineStageDynamicLinkingDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4PipelineStageDynamicLinkingDescriptor")), objc.RegisterName("new"))
-	return &MTL4PipelineStageDynamicLinkingDescriptor{inner: raw.MTL4PipelineStageDynamicLinkingDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTL4PipelineStageDynamicLinkingDescriptor")), objc.RegisterName("new"))
+	return mTL4PipelineStageDynamicLinkingDescriptorAdopt(_id)
 }
 
 // Limits the maximum depth of the call stack for indirect function calls in the pipeline stage function.
 //
-// WithMaxCallStackDepth sets the maxCallStackDepth property and returns the receiver for chaining.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) WithMaxCallStackDepth(maxCallStackDepth uint) *MTL4PipelineStageDynamicLinkingDescriptor {
-	x.inner.SetMaxCallStackDepth(maxCallStackDepth)
+// WithMaxCallStackDepth sets maxCallStackDepth and returns the receiver so calls can be chained.
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) WithMaxCallStackDepth(maxCallStackDepth int) *MTL4PipelineStageDynamicLinkingDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCallStackDepth:"), maxCallStackDepth)
 	return x
 }
 
 // Limits the maximum depth of the call stack for indirect function calls in the pipeline stage function.
-//
-// MaxCallStackDepth calls the underlying MaxCallStackDepth.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) MaxCallStackDepth() uint {
-	return x.inner.MaxCallStackDepth()
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) MaxCallStackDepth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxCallStackDepth"))
+	return _r
 }
 
-// SetMaxCallStackDepth calls the underlying SetMaxCallStackDepth.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetMaxCallStackDepth(maxCallStackDepth uint) {
-	x.inner.SetMaxCallStackDepth(maxCallStackDepth)
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetMaxCallStackDepth(maxCallStackDepth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCallStackDepth:"), maxCallStackDepth)
 }
 
 // Provides the array of binary functions to link. Binary functions are shader functions that you compile from Metal IR to machine code ahead of time using instances of “MTL4Compiler“.
-//
-// BinaryLinkedFunctions calls the underlying BinaryLinkedFunctions.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) BinaryLinkedFunctions() *foundation.NSArray[raw.MTL4BinaryFunction] {
-	return x.inner.BinaryLinkedFunctions()
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) BinaryLinkedFunctions() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("binaryLinkedFunctions"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetBinaryLinkedFunctions calls the underlying SetBinaryLinkedFunctions.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetBinaryLinkedFunctions(binaryLinkedFunctions ...purego.IDer) {
-	_ptrs := make([]objc.ID, len(binaryLinkedFunctions))
-	for _i, _v := range binaryLinkedFunctions {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *foundation.NSArray[raw.MTL4BinaryFunction]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.MTL4BinaryFunction](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetBinaryLinkedFunctions(_arg0)
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetBinaryLinkedFunctions(binaryLinkedFunctions []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBinaryLinkedFunctions:"), purego.SliceToNSArray(binaryLinkedFunctions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Provides an array of dynamic libraries the compiler loads when it builds the pipeline.
-//
-// PreloadedLibraries calls the underlying PreloadedLibraries.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) PreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary] {
-	return x.inner.PreloadedLibraries()
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) PreloadedLibraries() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preloadedLibraries"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetPreloadedLibraries calls the underlying SetPreloadedLibraries.
-func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetPreloadedLibraries(preloadedLibraries ...purego.IDer) {
-	_ptrs := make([]objc.ID, len(preloadedLibraries))
-	for _i, _v := range preloadedLibraries {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *foundation.NSArray[raw.MTLDynamicLibrary]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.MTLDynamicLibrary](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetPreloadedLibraries(_arg0)
+func (x *MTL4PipelineStageDynamicLinkingDescriptor) SetPreloadedLibraries(preloadedLibraries []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreloadedLibraries:"), purego.SliceToNSArray(preloadedLibraries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // MTL4PipelineStageDynamicLinkingDescriptorable is the interface implemented by [MTL4PipelineStageDynamicLinkingDescriptor], for mocking and DI.
 type MTL4PipelineStageDynamicLinkingDescriptorable interface {
-	Unwrap() *raw.MTL4PipelineStageDynamicLinkingDescriptor
-	WithMaxCallStackDepth(maxCallStackDepth uint) *MTL4PipelineStageDynamicLinkingDescriptor
-	MaxCallStackDepth() uint
-	SetMaxCallStackDepth(maxCallStackDepth uint)
-	BinaryLinkedFunctions() *foundation.NSArray[raw.MTL4BinaryFunction]
-	SetBinaryLinkedFunctions(binaryLinkedFunctions ...purego.IDer)
-	PreloadedLibraries() *foundation.NSArray[raw.MTLDynamicLibrary]
-	SetPreloadedLibraries(preloadedLibraries ...purego.IDer)
+	obj.Object
+	WithMaxCallStackDepth(maxCallStackDepth int) *MTL4PipelineStageDynamicLinkingDescriptor
+	MaxCallStackDepth() int
+	SetMaxCallStackDepth(maxCallStackDepth int)
+	BinaryLinkedFunctions() []obj.Object
+	SetBinaryLinkedFunctions(binaryLinkedFunctions []obj.Object)
+	PreloadedLibraries() []obj.Object
+	SetPreloadedLibraries(preloadedLibraries []obj.Object)
 }
 
 var _ MTL4PipelineStageDynamicLinkingDescriptorable = (*MTL4PipelineStageDynamicLinkingDescriptor)(nil)

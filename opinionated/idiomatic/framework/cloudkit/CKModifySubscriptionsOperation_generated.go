@@ -6,189 +6,162 @@ package cloudkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An operation for modifying one or more subscriptions.
 //
-// ModifySubscriptionsOperation wraps [raw.CKModifySubscriptionsOperation] with a fluent Go API.
+// ModifySubscriptionsOperation is an idiomatic wrapper over the Objective-C class CKModifySubscriptionsOperation.
 type ModifySubscriptionsOperation struct {
-	inner *raw.CKModifySubscriptionsOperation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKModifySubscriptionsOperation].
-func (x *ModifySubscriptionsOperation) Unwrap() *raw.CKModifySubscriptionsOperation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ModifySubscriptionsOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// ModifySubscriptionsOperationFromID adopts an existing object pointer as a ModifySubscriptionsOperation (nil for 0).
+// ModifySubscriptionsOperationFromID adopts an existing Objective-C object as a ModifySubscriptionsOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func ModifySubscriptionsOperationFromID(id objc.ID) *ModifySubscriptionsOperation {
 	if id == 0 {
 		return nil
 	}
-	return &ModifySubscriptionsOperation{inner: raw.CKModifySubscriptionsOperationFromID(id)}
+	x := &ModifySubscriptionsOperation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewModifySubscriptionsOperation creates a new [ModifySubscriptionsOperation].
+// modifySubscriptionsOperationAdopt wraps an Objective-C object that this code just created as a
+// ModifySubscriptionsOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func modifySubscriptionsOperationAdopt(id objc.ID) *ModifySubscriptionsOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &ModifySubscriptionsOperation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ModifySubscriptionsOperation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ModifySubscriptionsOperation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ModifySubscriptionsOperation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewModifySubscriptionsOperation creates a new ModifySubscriptionsOperation.
 func NewModifySubscriptionsOperation() *ModifySubscriptionsOperation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKModifySubscriptionsOperation")), objc.RegisterName("new"))
-	return &ModifySubscriptionsOperation{inner: raw.CKModifySubscriptionsOperationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKModifySubscriptionsOperation")), objc.RegisterName("new"))
+	return modifySubscriptionsOperationAdopt(_id)
 }
 
 // Creates an operation for saving and deleting the specified subscriptions.
 //
-// NewModifySubscriptionsOperationWithSubscriptionsToSaveSubscriptionIDsToDelete creates a new [ModifySubscriptionsOperation].
-func NewModifySubscriptionsOperationWithSubscriptionsToSaveSubscriptionIDsToDelete(subscriptionsToSave *foundation.NSArray[*raw.CKSubscription], subscriptionIDsToDelete *foundation.NSArray[*foundation.NSString]) *ModifySubscriptionsOperation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKModifySubscriptionsOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubscriptionsToSave:subscriptionIDsToDelete:"), subscriptionsToSave.Ptr(), subscriptionIDsToDelete.Ptr())
-	return &ModifySubscriptionsOperation{inner: raw.CKModifySubscriptionsOperationFromID(_id)}
+// NewModifySubscriptionsOperationWithSubscriptionsToSaveSubscriptionIDsToDelete creates a new ModifySubscriptionsOperation.
+func NewModifySubscriptionsOperationWithSubscriptionsToSaveSubscriptionIDsToDelete(subscriptionsToSave []*Subscription, subscriptionIDsToDelete []obj.Object) *ModifySubscriptionsOperation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKModifySubscriptionsOperation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubscriptionsToSave:subscriptionIDsToDelete:"), purego.SliceToNSArray(subscriptionsToSave, func(_v *Subscription) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(subscriptionIDsToDelete, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return modifySubscriptionsOperationAdopt(_id)
 }
 
 // The subscriptions to save to the database.
 //
-// WithSubscriptionsToSave sets the collection, converting the Go slice to an NSArray.
+// WithSubscriptionsToSave sets the collection and returns the receiver so calls can be chained.
 func (x *ModifySubscriptionsOperation) WithSubscriptionsToSave(items ...SubscriptionProvider) *ModifySubscriptionsOperation {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSubscriptionsToSave(foundation.NSArrayFromID[*raw.CKSubscription](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asSubscription().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CKSubscription](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSubscriptionsToSave(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v SubscriptionProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionsToSave:"), _arr)
 	return x
 }
 
 // The IDs of the subscriptions that you want to delete.
 //
-// WithSubscriptionIDsToDelete sets the collection, converting the Go slice to an NSArray.
-func (x *ModifySubscriptionsOperation) WithSubscriptionIDsToDelete(items ...*foundation.NSString) *ModifySubscriptionsOperation {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSubscriptionIDsToDelete(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSubscriptionIDsToDelete(_arr)
-	return x
-}
-
-// The closure to execute when CloudKit saves a subscription.
-//
-// WithPerSubscriptionSaveBlock sets the perSubscriptionSaveBlock property and returns the receiver for chaining.
-func (x *ModifySubscriptionsOperation) WithPerSubscriptionSaveBlock(perSubscriptionSaveBlock func(*foundation.NSString, *raw.CKSubscription, unsafe.Pointer)) *ModifySubscriptionsOperation {
-	x.inner.SetPerSubscriptionSaveBlock(perSubscriptionSaveBlock)
-	return x
-}
-
-// The closure to execute when CloudKit deletes a subscription.
-//
-// WithPerSubscriptionDeleteBlock sets the perSubscriptionDeleteBlock property and returns the receiver for chaining.
-func (x *ModifySubscriptionsOperation) WithPerSubscriptionDeleteBlock(perSubscriptionDeleteBlock func(*foundation.NSString, unsafe.Pointer)) *ModifySubscriptionsOperation {
-	x.inner.SetPerSubscriptionDeleteBlock(perSubscriptionDeleteBlock)
-	return x
-}
-
-// The closure to execute after the operation modifies the subscriptions.
-//
-// WithModifySubscriptionsCompletionBlock sets the modifySubscriptionsCompletionBlock property and returns the receiver for chaining.
-func (x *ModifySubscriptionsOperation) WithModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock func(*foundation.NSArray[*raw.CKSubscription], *foundation.NSArray[*foundation.NSString], unsafe.Pointer)) *ModifySubscriptionsOperation {
-	x.inner.SetModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock)
+// WithSubscriptionIDsToDelete sets the collection and returns the receiver so calls can be chained.
+func (x *ModifySubscriptionsOperation) WithSubscriptionIDsToDelete(items ...obj.Object) *ModifySubscriptionsOperation {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionIDsToDelete:"), _arr)
 	return x
 }
 
 // The database that the operation uses.
 //
-// WithDatabase sets the database property and returns the receiver for chaining.
+// WithDatabase sets database and returns the receiver so calls can be chained.
 func (x *ModifySubscriptionsOperation) WithDatabase(database *Database) *ModifySubscriptionsOperation {
-	x.inner.CKDatabaseOperation.SetDatabase(database.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return x
 }
 
 // The operation’s configuration.
 //
-// WithConfiguration sets the configuration property and returns the receiver for chaining.
+// WithConfiguration sets configuration and returns the receiver so calls can be chained.
 func (x *ModifySubscriptionsOperation) WithConfiguration(configuration *OperationConfiguration) *ModifySubscriptionsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
 // The operation’s group.
 //
-// WithGroup sets the group property and returns the receiver for chaining.
+// WithGroup sets group and returns the receiver so calls can be chained.
 func (x *ModifySubscriptionsOperation) WithGroup(group *OperationGroup) *ModifySubscriptionsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
 // The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
-// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
 func (x *ModifySubscriptionsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifySubscriptionsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+// The operation's container.
 //
-// WithContainer sets the container property and returns the receiver for chaining.
+// WithContainer sets container and returns the receiver so calls can be chained.
 func (x *ModifySubscriptionsOperation) WithContainer(container *Container) *ModifySubscriptionsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+// A Boolean value that indicates whether the operation can send data over the cellular network.
 //
-// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
 func (x *ModifySubscriptionsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *ModifySubscriptionsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
 // A Boolean value that indicates whether the operation is long-lived.
 //
-// WithLongLived sets the longLived property and returns the receiver for chaining.
+// WithLongLived sets longLived and returns the receiver so calls can be chained.
 func (x *ModifySubscriptionsOperation) WithLongLived(longLived bool) *ModifySubscriptionsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+// The timeout interval when waiting for additional data.
 //
-// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
 func (x *ModifySubscriptionsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifySubscriptionsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+// The maximum amount of time that a resource request can use.
 //
-// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
 func (x *ModifySubscriptionsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifySubscriptionsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
@@ -196,66 +169,24 @@ func (x *ModifySubscriptionsOperation) WithTimeoutIntervalForResource(timeoutInt
 //
 // SubscriptionsToSave returns the collection as a Go slice.
 func (x *ModifySubscriptionsOperation) SubscriptionsToSave() []*Subscription {
-	arr := x.inner.SubscriptionsToSave()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Subscription {
-		return &Subscription{inner: raw.CKSubscriptionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionsToSave"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Subscription { return SubscriptionFromID(_id) })
 }
 
-// SetSubscriptionsToSave calls the underlying SetSubscriptionsToSave.
-func (x *ModifySubscriptionsOperation) SetSubscriptionsToSave(subscriptionsToSave ...SubscriptionProvider) {
-	_ptrs := make([]objc.ID, len(subscriptionsToSave))
-	for _i, _v := range subscriptionsToSave {
-		_ptrs[_i] = _v.asSubscription().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.CKSubscription]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.CKSubscription](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.CKSubscription](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetSubscriptionsToSave(_arg0)
+func (x *ModifySubscriptionsOperation) SetSubscriptionsToSave(subscriptionsToSave []*Subscription) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionsToSave:"), purego.SliceToNSArray(subscriptionsToSave, func(_v *Subscription) objc.ID { return objref.IDOf(_v) }))
 }
 
 // The IDs of the subscriptions that you want to delete. This property contains the IDs of the subscriptions that you want to delete. Its initial value is the array that you pass to the “CKModifySubscriptionsOperation/init(subscriptionsToSave:subscriptionIDsToDelete:)“ method. Modify this property as necessary before you execute the operation or submit it to a queue.
 //
 // SubscriptionIDsToDelete returns the collection as a Go slice.
-func (x *ModifySubscriptionsOperation) SubscriptionIDsToDelete() []*foundation.NSString {
-	arr := x.inner.SubscriptionIDsToDelete()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *ModifySubscriptionsOperation) SubscriptionIDsToDelete() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionIDsToDelete"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetSubscriptionIDsToDelete calls the underlying SetSubscriptionIDsToDelete.
-func (x *ModifySubscriptionsOperation) SetSubscriptionIDsToDelete(subscriptionIDsToDelete *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetSubscriptionIDsToDelete(subscriptionIDsToDelete)
-}
-
-// The closure to execute when CloudKit saves a subscription. This property is a closure that returns no value and has the following parameters: - The ID of the subscription that CloudKit saves. - The subscription that CloudKit saves, or `nil` if CloudKit can't save the subscription. - If CloudKit can't save the subscription, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each subscription in the “CKModifySubscriptionsOperation/subscriptionsToSave“ property. Each time the closure executes, it executes serially with respect to the other subscription completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
-//
-// PerSubscriptionSaveBlock calls the underlying PerSubscriptionSaveBlock.
-func (x *ModifySubscriptionsOperation) PerSubscriptionSaveBlock() objc.Block {
-	return x.inner.PerSubscriptionSaveBlock()
-}
-
-// SetPerSubscriptionSaveBlock calls the underlying SetPerSubscriptionSaveBlock.
-func (x *ModifySubscriptionsOperation) SetPerSubscriptionSaveBlock(perSubscriptionSaveBlock func(*foundation.NSString, *raw.CKSubscription, unsafe.Pointer)) {
-	x.inner.SetPerSubscriptionSaveBlock(perSubscriptionSaveBlock)
-}
-
-// The closure to execute when CloudKit deletes a subscription. This property is a closure that returns no value and has the following parameters: - The ID of the subscription that CloudKit deletes. - If CloudKit can't delete the subscription, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each subscription in the “CKModifySubscriptionsOperation/subscriptionIDsToDelete-14x82“ property. Each time the closure executes, it executes serially with respect to the other subscription completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
-//
-// PerSubscriptionDeleteBlock calls the underlying PerSubscriptionDeleteBlock.
-func (x *ModifySubscriptionsOperation) PerSubscriptionDeleteBlock() objc.Block {
-	return x.inner.PerSubscriptionDeleteBlock()
+func (x *ModifySubscriptionsOperation) SetSubscriptionIDsToDelete(subscriptionIDsToDelete []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionIDsToDelete:"), purego.SliceToNSArray(subscriptionIDsToDelete, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SetPerSubscriptionDeleteBlock blocks until the operation completes or ctx is cancelled.
@@ -265,16 +196,13 @@ func (x *ModifySubscriptionsOperation) SetPerSubscriptionDeleteBlock(ctx context
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SetPerSubscriptionDeleteBlock(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerSubscriptionDeleteBlock:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -284,34 +212,11 @@ func (x *ModifySubscriptionsOperation) SetPerSubscriptionDeleteBlock(ctx context
 	}
 }
 
-// The block to execute after the operation modifies the subscriptions. The block returns no value and takes the following parameters: - term `savedSubscriptions`: The subscriptions to save. - term `deletedSubscriptionIDs`: The IDs of the subscriptions to delete. - term `operationError`: An error that contains information about a problem, or `nil` if CloudKit successfully modifies the subscriptions. The operation executes this block only once, and it's your only opportunity to process the results. The block executes on a background queue, so any tasks that require access to the main queue must dispatch accordingly. The block reports an error of type “CKError/Code/partialFailure“ when it can't modify some of the subscriptions. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the IDs of the subscriptions that CloudKit can't modify, and the corresponding values are errors that contain information about the failures. Set this property's value before you execute the operation or submit it to a queue.
-//
-// ModifySubscriptionsCompletionBlock calls the underlying ModifySubscriptionsCompletionBlock.
-func (x *ModifySubscriptionsOperation) ModifySubscriptionsCompletionBlock() objc.Block {
-	return x.inner.ModifySubscriptionsCompletionBlock()
-}
-
-// SetModifySubscriptionsCompletionBlock calls the underlying SetModifySubscriptionsCompletionBlock.
-func (x *ModifySubscriptionsOperation) SetModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock func(*foundation.NSArray[*raw.CKSubscription], *foundation.NSArray[*foundation.NSString], unsafe.Pointer)) {
-	x.inner.SetModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock)
-}
-
-func (x *ModifySubscriptionsOperation) asDatabaseOperation() *raw.CKDatabaseOperation {
-	return &x.inner.CKDatabaseOperation
-}
-
-func (x *ModifySubscriptionsOperation) asOperation() *raw.CKOperation {
-	return &x.inner.CKDatabaseOperation.CKOperation
-}
-
 // ModifySubscriptionsOperationable is the interface implemented by [ModifySubscriptionsOperation], for mocking and DI.
 type ModifySubscriptionsOperationable interface {
-	Unwrap() *raw.CKModifySubscriptionsOperation
+	obj.Object
 	WithSubscriptionsToSave(items ...SubscriptionProvider) *ModifySubscriptionsOperation
-	WithSubscriptionIDsToDelete(items ...*foundation.NSString) *ModifySubscriptionsOperation
-	WithPerSubscriptionSaveBlock(perSubscriptionSaveBlock func(*foundation.NSString, *raw.CKSubscription, unsafe.Pointer)) *ModifySubscriptionsOperation
-	WithPerSubscriptionDeleteBlock(perSubscriptionDeleteBlock func(*foundation.NSString, unsafe.Pointer)) *ModifySubscriptionsOperation
-	WithModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock func(*foundation.NSArray[*raw.CKSubscription], *foundation.NSArray[*foundation.NSString], unsafe.Pointer)) *ModifySubscriptionsOperation
+	WithSubscriptionIDsToDelete(items ...obj.Object) *ModifySubscriptionsOperation
 	WithDatabase(database *Database) *ModifySubscriptionsOperation
 	WithConfiguration(configuration *OperationConfiguration) *ModifySubscriptionsOperation
 	WithGroup(group *OperationGroup) *ModifySubscriptionsOperation
@@ -322,15 +227,10 @@ type ModifySubscriptionsOperationable interface {
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifySubscriptionsOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifySubscriptionsOperation
 	SubscriptionsToSave() []*Subscription
-	SetSubscriptionsToSave(subscriptionsToSave ...SubscriptionProvider)
-	SubscriptionIDsToDelete() []*foundation.NSString
-	SetSubscriptionIDsToDelete(subscriptionIDsToDelete *foundation.NSArray[*foundation.NSString])
-	PerSubscriptionSaveBlock() objc.Block
-	SetPerSubscriptionSaveBlock(perSubscriptionSaveBlock func(*foundation.NSString, *raw.CKSubscription, unsafe.Pointer))
-	PerSubscriptionDeleteBlock() objc.Block
+	SetSubscriptionsToSave(subscriptionsToSave []*Subscription)
+	SubscriptionIDsToDelete() []obj.Object
+	SetSubscriptionIDsToDelete(subscriptionIDsToDelete []obj.Object)
 	SetPerSubscriptionDeleteBlock(ctx context.Context) (string, error)
-	ModifySubscriptionsCompletionBlock() objc.Block
-	SetModifySubscriptionsCompletionBlock(modifySubscriptionsCompletionBlock func(*foundation.NSArray[*raw.CKSubscription], *foundation.NSArray[*foundation.NSString], unsafe.Pointer))
 }
 
 var _ ModifySubscriptionsOperationable = (*ModifySubscriptionsOperation)(nil)

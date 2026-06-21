@@ -5,151 +5,154 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A formatter that provides localized descriptions of linear distances, such as length and height measurements.
 //
-// LengthFormatter wraps [raw.NSLengthFormatter] with a fluent Go API.
+// LengthFormatter is an idiomatic wrapper over the Objective-C class NSLengthFormatter.
 type LengthFormatter struct {
-	inner *raw.NSLengthFormatter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSLengthFormatter].
-func (x *LengthFormatter) Unwrap() *raw.NSLengthFormatter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LengthFormatter) ID() objc.ID { return x.inner.Ptr() }
-
-// LengthFormatterFromID adopts an existing object pointer as a LengthFormatter (nil for 0).
+// LengthFormatterFromID adopts an existing Objective-C object as a LengthFormatter
+// (nil for 0), retaining it and registering a release finalizer.
 func LengthFormatterFromID(id objc.ID) *LengthFormatter {
 	if id == 0 {
 		return nil
 	}
-	return &LengthFormatter{inner: raw.NSLengthFormatterFromID(id)}
+	x := &LengthFormatter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLengthFormatter creates a new [LengthFormatter].
+// lengthFormatterAdopt wraps an Objective-C object that this code just created as a
+// LengthFormatter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func lengthFormatterAdopt(id objc.ID) *LengthFormatter {
+	if id == 0 {
+		return nil
+	}
+	x := &LengthFormatter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LengthFormatter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LengthFormatter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LengthFormatter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLengthFormatter creates a new LengthFormatter.
 func NewLengthFormatter() *LengthFormatter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLengthFormatter")), objc.RegisterName("new"))
-	return &LengthFormatter{inner: raw.NSLengthFormatterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSLengthFormatter")), objc.RegisterName("new"))
+	return lengthFormatterAdopt(_id)
 }
 
-// WithNumberFormatter sets the numberFormatter property and returns the receiver for chaining.
+// WithNumberFormatter sets numberFormatter and returns the receiver so calls can be chained.
 func (x *LengthFormatter) WithNumberFormatter(numberFormatter *NumberFormatter) *LengthFormatter {
-	x.inner.SetNumberFormatter(numberFormatter.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 	return x
 }
 
-// WithUnitStyle sets the unitStyle property and returns the receiver for chaining.
-func (x *LengthFormatter) WithUnitStyle(unitStyle NSFormattingUnitStyle) *LengthFormatter {
-	x.inner.SetUnitStyle(raw.NSFormattingUnitStyle(unitStyle))
+// WithUnitStyle sets unitStyle and returns the receiver so calls can be chained.
+func (x *LengthFormatter) WithUnitStyle(unitStyle FormattingUnitStyle) *LengthFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitStyle:"), unitStyle)
 	return x
 }
 
-// WithForPersonHeightUse sets the forPersonHeightUse property and returns the receiver for chaining.
+// WithForPersonHeightUse sets forPersonHeightUse and returns the receiver so calls can be chained.
 func (x *LengthFormatter) WithForPersonHeightUse(forPersonHeightUse bool) *LengthFormatter {
-	x.inner.SetForPersonHeightUse(forPersonHeightUse)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForPersonHeightUse:"), forPersonHeightUse)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *LengthFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *LengthFormatter {
-	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *LengthFormatter) WithScriptingProperties(scriptingProperties obj.Object) *LengthFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// StringFromValueUnit calls the underlying StringFromValueUnit.
-func (x *LengthFormatter) StringFromValueUnit(value float64, unit NSLengthFormatterUnit) *String {
-	_r := x.inner.StringFromValueUnit(value, raw.NSLengthFormatterUnit(unit))
-	if _r == nil {
-		return nil
+func (x *LengthFormatter) StringFromValueUnit(value float64, unit LengthFormatterUnit) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromValue:unit:"), value, unit)
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// StringFromMeters calls the underlying StringFromMeters.
-func (x *LengthFormatter) StringFromMeters(numberInMeters float64) *String {
-	_r := x.inner.StringFromMeters(numberInMeters)
-	if _r == nil {
-		return nil
+func (x *LengthFormatter) StringFromMeters(numberInMeters float64) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromMeters:"), numberInMeters)
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// UnitStringFromValueUnit calls the underlying UnitStringFromValueUnit.
-func (x *LengthFormatter) UnitStringFromValueUnit(value float64, unit NSLengthFormatterUnit) *String {
-	_r := x.inner.UnitStringFromValueUnit(value, raw.NSLengthFormatterUnit(unit))
-	if _r == nil {
-		return nil
+func (x *LengthFormatter) UnitStringFromValueUnit(value float64, unit LengthFormatterUnit) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitStringFromValue:unit:"), value, unit)
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// UnitStringFromMetersUsedUnit calls the underlying UnitStringFromMetersUsedUnit.
-func (x *LengthFormatter) UnitStringFromMetersUsedUnit(numberInMeters float64, unitp *raw.NSLengthFormatterUnit) *String {
-	_r := x.inner.UnitStringFromMetersUsedUnit(numberInMeters, unitp)
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// NumberFormatter calls the underlying NumberFormatter.
 func (x *LengthFormatter) NumberFormatter() *NumberFormatter {
-	_r := x.inner.NumberFormatter()
-	if _r == nil {
-		return nil
-	}
-	return &NumberFormatter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberFormatter"))
+	return NumberFormatterFromID(_r)
 }
 
-// SetNumberFormatter calls the underlying SetNumberFormatter.
-func (x *LengthFormatter) SetNumberFormatter(numberFormatter *raw.NSNumberFormatter) {
-	x.inner.SetNumberFormatter(numberFormatter)
+func (x *LengthFormatter) SetNumberFormatter(numberFormatter *NumberFormatter) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberFormatter:"), objref.IDOf(numberFormatter))
 }
 
-// UnitStyle calls the underlying UnitStyle.
-func (x *LengthFormatter) UnitStyle() NSFormattingUnitStyle {
-	return NSFormattingUnitStyle(x.inner.UnitStyle())
+func (x *LengthFormatter) UnitStyle() FormattingUnitStyle {
+	_r := objc.Send[FormattingUnitStyle](objref.IDOf(x), objc.RegisterName("unitStyle"))
+	return _r
 }
 
-// SetUnitStyle calls the underlying SetUnitStyle.
-func (x *LengthFormatter) SetUnitStyle(unitStyle NSFormattingUnitStyle) {
-	x.inner.SetUnitStyle(raw.NSFormattingUnitStyle(unitStyle))
+func (x *LengthFormatter) SetUnitStyle(unitStyle FormattingUnitStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitStyle:"), unitStyle)
 }
 
-// IsForPersonHeightUse calls the underlying IsForPersonHeightUse.
 func (x *LengthFormatter) IsForPersonHeightUse() bool {
-	return x.inner.IsForPersonHeightUse()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isForPersonHeightUse"))
+	return _r
 }
 
-// SetForPersonHeightUse calls the underlying SetForPersonHeightUse.
 func (x *LengthFormatter) SetForPersonHeightUse(forPersonHeightUse bool) {
-	x.inner.SetForPersonHeightUse(forPersonHeightUse)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForPersonHeightUse:"), forPersonHeightUse)
 }
-
-func (x *LengthFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
-
-func (x *LengthFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.NSObject }
 
 // LengthFormatterable is the interface implemented by [LengthFormatter], for mocking and DI.
 type LengthFormatterable interface {
-	Unwrap() *raw.NSLengthFormatter
+	obj.Object
 	WithNumberFormatter(numberFormatter *NumberFormatter) *LengthFormatter
-	WithUnitStyle(unitStyle NSFormattingUnitStyle) *LengthFormatter
+	WithUnitStyle(unitStyle FormattingUnitStyle) *LengthFormatter
 	WithForPersonHeightUse(forPersonHeightUse bool) *LengthFormatter
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *LengthFormatter
-	StringFromValueUnit(value float64, unit NSLengthFormatterUnit) *String
-	StringFromMeters(numberInMeters float64) *String
-	UnitStringFromValueUnit(value float64, unit NSLengthFormatterUnit) *String
-	UnitStringFromMetersUsedUnit(numberInMeters float64, unitp *raw.NSLengthFormatterUnit) *String
+	WithScriptingProperties(scriptingProperties obj.Object) *LengthFormatter
+	StringFromValueUnit(value float64, unit LengthFormatterUnit) string
+	StringFromMeters(numberInMeters float64) string
+	UnitStringFromValueUnit(value float64, unit LengthFormatterUnit) string
 	NumberFormatter() *NumberFormatter
-	SetNumberFormatter(numberFormatter *raw.NSNumberFormatter)
-	UnitStyle() NSFormattingUnitStyle
-	SetUnitStyle(unitStyle NSFormattingUnitStyle)
+	SetNumberFormatter(numberFormatter *NumberFormatter)
+	UnitStyle() FormattingUnitStyle
+	SetUnitStyle(unitStyle FormattingUnitStyle)
 	IsForPersonHeightUse() bool
 	SetForPersonHeightUse(forPersonHeightUse bool)
 }

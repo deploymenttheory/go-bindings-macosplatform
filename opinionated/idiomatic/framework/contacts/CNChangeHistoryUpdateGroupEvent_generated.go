@@ -5,54 +5,73 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents an updated group event.
 //
-// ChangeHistoryUpdateGroupEvent wraps [raw.CNChangeHistoryUpdateGroupEvent] with a fluent Go API.
+// ChangeHistoryUpdateGroupEvent is an idiomatic wrapper over the Objective-C class CNChangeHistoryUpdateGroupEvent.
 type ChangeHistoryUpdateGroupEvent struct {
-	inner *raw.CNChangeHistoryUpdateGroupEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNChangeHistoryUpdateGroupEvent].
-func (x *ChangeHistoryUpdateGroupEvent) Unwrap() *raw.CNChangeHistoryUpdateGroupEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChangeHistoryUpdateGroupEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangeHistoryUpdateGroupEventFromID adopts an existing object pointer as a ChangeHistoryUpdateGroupEvent (nil for 0).
+// ChangeHistoryUpdateGroupEventFromID adopts an existing Objective-C object as a ChangeHistoryUpdateGroupEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangeHistoryUpdateGroupEventFromID(id objc.ID) *ChangeHistoryUpdateGroupEvent {
 	if id == 0 {
 		return nil
 	}
-	return &ChangeHistoryUpdateGroupEvent{inner: raw.CNChangeHistoryUpdateGroupEventFromID(id)}
+	x := &ChangeHistoryUpdateGroupEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewChangeHistoryUpdateGroupEvent creates a new [ChangeHistoryUpdateGroupEvent].
-func NewChangeHistoryUpdateGroupEvent() *ChangeHistoryUpdateGroupEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNChangeHistoryUpdateGroupEvent")), objc.RegisterName("new"))
-	return &ChangeHistoryUpdateGroupEvent{inner: raw.CNChangeHistoryUpdateGroupEventFromID(_id)}
-}
-
-// Group calls the underlying Group.
-func (x *ChangeHistoryUpdateGroupEvent) Group() *Group {
-	_r := x.inner.Group()
-	if _r == nil {
+// changeHistoryUpdateGroupEventAdopt wraps an Objective-C object that this code just created as a
+// ChangeHistoryUpdateGroupEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changeHistoryUpdateGroupEventAdopt(id objc.ID) *ChangeHistoryUpdateGroupEvent {
+	if id == 0 {
 		return nil
 	}
-	return &Group{inner: _r}
+	x := &ChangeHistoryUpdateGroupEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *ChangeHistoryUpdateGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent {
-	return &x.inner.CNChangeHistoryEvent
+// Description returns the object's -description text.
+func (x *ChangeHistoryUpdateGroupEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ChangeHistoryUpdateGroupEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ChangeHistoryUpdateGroupEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewChangeHistoryUpdateGroupEvent creates a new ChangeHistoryUpdateGroupEvent.
+func NewChangeHistoryUpdateGroupEvent() *ChangeHistoryUpdateGroupEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("CNChangeHistoryUpdateGroupEvent")), objc.RegisterName("new"))
+	return changeHistoryUpdateGroupEventAdopt(_id)
+}
+
+func (x *ChangeHistoryUpdateGroupEvent) Group() *Group {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("group"))
+	return GroupFromID(_r)
 }
 
 // ChangeHistoryUpdateGroupEventable is the interface implemented by [ChangeHistoryUpdateGroupEvent], for mocking and DI.
 type ChangeHistoryUpdateGroupEventable interface {
-	Unwrap() *raw.CNChangeHistoryUpdateGroupEvent
+	obj.Object
 	Group() *Group
 }
 

@@ -6,61 +6,83 @@ package matter
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Cluster Service Area The Service Area cluster provides an interface for controlling the areas where a device should operate, and for querying the current area being serviced.
 //
-// MTRClusterServiceArea wraps [raw.MTRClusterServiceArea] with a fluent Go API.
+// MTRClusterServiceArea is an idiomatic wrapper over the Objective-C class MTRClusterServiceArea.
 type MTRClusterServiceArea struct {
-	inner *raw.MTRClusterServiceArea
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterServiceArea].
-func (x *MTRClusterServiceArea) Unwrap() *raw.MTRClusterServiceArea { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterServiceArea) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterServiceAreaFromID adopts an existing object pointer as a MTRClusterServiceArea (nil for 0).
+// MTRClusterServiceAreaFromID adopts an existing Objective-C object as a MTRClusterServiceArea
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterServiceAreaFromID(id objc.ID) *MTRClusterServiceArea {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterServiceArea{inner: raw.MTRClusterServiceAreaFromID(id)}
+	x := &MTRClusterServiceArea{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterServiceAreaAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterServiceArea (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterServiceAreaAdopt(id objc.ID) *MTRClusterServiceArea {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterServiceArea{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterServiceArea) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterServiceArea) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterServiceArea) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterServiceAreaWithDeviceEndpointIDQueue creates a new [MTRClusterServiceArea].
-func NewMTRClusterServiceAreaWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterServiceArea {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterServiceArea")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterServiceArea{inner: raw.MTRClusterServiceAreaFromID(_id)}
+// NewMTRClusterServiceAreaWithDeviceEndpointIDQueue creates a new MTRClusterServiceArea.
+func NewMTRClusterServiceAreaWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterServiceArea {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterServiceArea")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterServiceAreaAdopt(_id)
 }
 
 // SelectAreasWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterServiceArea) SelectAreasWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRServiceAreaClusterSelectAreasParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRServiceAreaClusterSelectAreasResponseParams, error) {
+func (x *MTRClusterServiceArea) SelectAreasWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRServiceAreaClusterSelectAreasParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRServiceAreaClusterSelectAreasResponseParams, error) {
 	type _result struct {
 		val *MTRServiceAreaClusterSelectAreasResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SelectAreasWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRServiceAreaClusterSelectAreasResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRServiceAreaClusterSelectAreasResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRServiceAreaClusterSelectAreasResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectAreasWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -71,22 +93,19 @@ func (x *MTRClusterServiceArea) SelectAreasWithParamsExpectedValuesExpectedValue
 }
 
 // SkipAreaWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterServiceArea) SkipAreaWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRServiceAreaClusterSkipAreaParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRServiceAreaClusterSkipAreaResponseParams, error) {
+func (x *MTRClusterServiceArea) SkipAreaWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRServiceAreaClusterSkipAreaParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRServiceAreaClusterSkipAreaResponseParams, error) {
 	type _result struct {
 		val *MTRServiceAreaClusterSkipAreaResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SkipAreaWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRServiceAreaClusterSkipAreaResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRServiceAreaClusterSkipAreaResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRServiceAreaClusterSkipAreaResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipAreaWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -96,85 +115,77 @@ func (x *MTRClusterServiceArea) SkipAreaWithParamsExpectedValuesExpectedValueInt
 	}
 }
 
-// ReadAttributeSupportedAreasWithParams calls the underlying ReadAttributeSupportedAreasWithParams.
-func (x *MTRClusterServiceArea) ReadAttributeSupportedAreasWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSupportedAreasWithParams(params)
+func (x *MTRClusterServiceArea) ReadAttributeSupportedAreasWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedAreasWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeSupportedMapsWithParams calls the underlying ReadAttributeSupportedMapsWithParams.
-func (x *MTRClusterServiceArea) ReadAttributeSupportedMapsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSupportedMapsWithParams(params)
+func (x *MTRClusterServiceArea) ReadAttributeSupportedMapsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedMapsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeSelectedAreasWithParams calls the underlying ReadAttributeSelectedAreasWithParams.
-func (x *MTRClusterServiceArea) ReadAttributeSelectedAreasWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSelectedAreasWithParams(params)
+func (x *MTRClusterServiceArea) ReadAttributeSelectedAreasWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSelectedAreasWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentAreaWithParams calls the underlying ReadAttributeCurrentAreaWithParams.
-func (x *MTRClusterServiceArea) ReadAttributeCurrentAreaWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentAreaWithParams(params)
+func (x *MTRClusterServiceArea) ReadAttributeCurrentAreaWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentAreaWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeEstimatedEndTimeWithParams calls the underlying ReadAttributeEstimatedEndTimeWithParams.
-func (x *MTRClusterServiceArea) ReadAttributeEstimatedEndTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeEstimatedEndTimeWithParams(params)
+func (x *MTRClusterServiceArea) ReadAttributeEstimatedEndTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEstimatedEndTimeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeProgressWithParams calls the underlying ReadAttributeProgressWithParams.
-func (x *MTRClusterServiceArea) ReadAttributeProgressWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeProgressWithParams(params)
+func (x *MTRClusterServiceArea) ReadAttributeProgressWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProgressWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterServiceArea) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterServiceArea) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterServiceArea) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterServiceArea) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterServiceArea) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterServiceArea) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterServiceArea) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+func (x *MTRClusterServiceArea) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterServiceArea) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterServiceArea) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterServiceArea) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterServiceArea) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterServiceAreaable is the interface implemented by [MTRClusterServiceArea], for mocking and DI.
 type MTRClusterServiceAreaable interface {
-	Unwrap() *raw.MTRClusterServiceArea
-	SelectAreasWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRServiceAreaClusterSelectAreasParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRServiceAreaClusterSelectAreasResponseParams, error)
-	SkipAreaWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRServiceAreaClusterSkipAreaParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRServiceAreaClusterSkipAreaResponseParams, error)
-	ReadAttributeSupportedAreasWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeSupportedMapsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeSelectedAreasWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentAreaWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeEstimatedEndTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeProgressWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	SelectAreasWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRServiceAreaClusterSelectAreasParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRServiceAreaClusterSelectAreasResponseParams, error)
+	SkipAreaWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRServiceAreaClusterSkipAreaParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRServiceAreaClusterSkipAreaResponseParams, error)
+	ReadAttributeSupportedAreasWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeSupportedMapsWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeSelectedAreasWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentAreaWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeEstimatedEndTimeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeProgressWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterServiceAreaable = (*MTRClusterServiceArea)(nil)

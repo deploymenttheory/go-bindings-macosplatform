@@ -5,116 +5,82 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A filter that convolves an image with a Gaussian blur of a given sigma in both the x and y directions.
 //
-// ImageGaussianBlur wraps [raw.MPSImageGaussianBlur] with a fluent Go API.
+// ImageGaussianBlur is an idiomatic wrapper over the Objective-C class MPSImageGaussianBlur.
 type ImageGaussianBlur struct {
-	inner *raw.MPSImageGaussianBlur
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageGaussianBlur].
-func (x *ImageGaussianBlur) Unwrap() *raw.MPSImageGaussianBlur { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageGaussianBlur) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageGaussianBlurFromID adopts an existing object pointer as a ImageGaussianBlur (nil for 0).
+// ImageGaussianBlurFromID adopts an existing Objective-C object as a ImageGaussianBlur
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageGaussianBlurFromID(id objc.ID) *ImageGaussianBlur {
 	if id == 0 {
 		return nil
 	}
-	return &ImageGaussianBlur{inner: raw.MPSImageGaussianBlurFromID(id)}
-}
-
-// Initializes a Gaussian blur filter.
-//
-// NewImageGaussianBlurWithDeviceSigma creates a new [ImageGaussianBlur].
-func NewImageGaussianBlurWithDeviceSigma(device metal.MTLDevice, sigma float32) *ImageGaussianBlur {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageGaussianBlur")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:sigma:"), device, sigma)
-	return &ImageGaussianBlur{inner: raw.MPSImageGaussianBlurFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewImageGaussianBlurWithCoderDevice creates a new [ImageGaussianBlur].
-func NewImageGaussianBlurWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageGaussianBlur {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageGaussianBlur")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageGaussianBlur{inner: raw.MPSImageGaussianBlurFromID(_id)}
-}
-
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageGaussianBlur) WithOffset(offset mpscore.MPSOffset) *ImageGaussianBlur {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	x := &ImageGaussianBlur{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageGaussianBlur) WithClipRect(clipRect metal.MTLRegion) *ImageGaussianBlur {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+// imageGaussianBlurAdopt wraps an Objective-C object that this code just created as a
+// ImageGaussianBlur (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageGaussianBlurAdopt(id objc.ID) *ImageGaussianBlur {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageGaussianBlur{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageGaussianBlur) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageGaussianBlur {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
+// Description returns the object's -description text.
+func (x *ImageGaussianBlur) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageGaussianBlur) WithOptions(options mpscore.MPSKernelOptions) *ImageGaussianBlur {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageGaussianBlur) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageGaussianBlur) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageGaussianBlur creates a new ImageGaussianBlur.
+func NewImageGaussianBlur() *ImageGaussianBlur {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageGaussianBlur")), objc.RegisterName("new"))
+	return imageGaussianBlurAdopt(_id)
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ImageGaussianBlur) WithLabel(label string) *ImageGaussianBlur {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property sigma @abstract Read-only sigma value with which filter was created
-//
-// Sigma calls the underlying Sigma.
+// Read-only sigma value with which filter was created
 func (x *ImageGaussianBlur) Sigma() float32 {
-	return x.inner.Sigma()
-}
-
-func (x *ImageGaussianBlur) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
-}
-
-func (x *ImageGaussianBlur) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSUnaryImageKernel.MPSKernel
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("sigma"))
+	return _r
 }
 
 // ImageGaussianBlurable is the interface implemented by [ImageGaussianBlur], for mocking and DI.
 type ImageGaussianBlurable interface {
-	Unwrap() *raw.MPSImageGaussianBlur
-	WithOffset(offset mpscore.MPSOffset) *ImageGaussianBlur
-	WithClipRect(clipRect metal.MTLRegion) *ImageGaussianBlur
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageGaussianBlur
-	WithOptions(options mpscore.MPSKernelOptions) *ImageGaussianBlur
+	obj.Object
 	WithLabel(label string) *ImageGaussianBlur
 	Sigma() float32
 }

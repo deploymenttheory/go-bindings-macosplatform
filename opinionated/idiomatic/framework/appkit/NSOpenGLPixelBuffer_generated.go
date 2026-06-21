@@ -5,85 +5,111 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that provides access to accelerated offscreen rendering.
 //
-// OpenGLPixelBuffer wraps [raw.NSOpenGLPixelBuffer] with a fluent Go API.
+// OpenGLPixelBuffer is an idiomatic wrapper over the Objective-C class NSOpenGLPixelBuffer.
 type OpenGLPixelBuffer struct {
-	inner *raw.NSOpenGLPixelBuffer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSOpenGLPixelBuffer].
-func (x *OpenGLPixelBuffer) Unwrap() *raw.NSOpenGLPixelBuffer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OpenGLPixelBuffer) ID() objc.ID { return x.inner.Ptr() }
-
-// OpenGLPixelBufferFromID adopts an existing object pointer as a OpenGLPixelBuffer (nil for 0).
+// OpenGLPixelBufferFromID adopts an existing Objective-C object as a OpenGLPixelBuffer
+// (nil for 0), retaining it and registering a release finalizer.
 func OpenGLPixelBufferFromID(id objc.ID) *OpenGLPixelBuffer {
 	if id == 0 {
 		return nil
 	}
-	return &OpenGLPixelBuffer{inner: raw.NSOpenGLPixelBufferFromID(id)}
+	x := &OpenGLPixelBuffer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// openGLPixelBufferAdopt wraps an Objective-C object that this code just created as a
+// OpenGLPixelBuffer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func openGLPixelBufferAdopt(id objc.ID) *OpenGLPixelBuffer {
+	if id == 0 {
+		return nil
+	}
+	x := &OpenGLPixelBuffer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *OpenGLPixelBuffer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *OpenGLPixelBuffer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *OpenGLPixelBuffer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns an NSOpenGLPixelBuffer object initialized with the specified parameters.
 //
-// NewOpenGLPixelBufferWithTextureTargetTextureInternalFormatTextureMaxMipMapLevelPixelsWidePixelsHigh creates a new [OpenGLPixelBuffer].
+// NewOpenGLPixelBufferWithTextureTargetTextureInternalFormatTextureMaxMipMapLevelPixelsWidePixelsHigh creates a new OpenGLPixelBuffer.
 func NewOpenGLPixelBufferWithTextureTargetTextureInternalFormatTextureMaxMipMapLevelPixelsWidePixelsHigh(target uint32, format uint32, maxLevel int32, pixelsWide int32, pixelsHigh int32) *OpenGLPixelBuffer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOpenGLPixelBuffer")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOpenGLPixelBuffer")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextureTarget:textureInternalFormat:textureMaxMipMapLevel:pixelsWide:pixelsHigh:"), target, format, maxLevel, pixelsWide, pixelsHigh)
-	return &OpenGLPixelBuffer{inner: raw.NSOpenGLPixelBufferFromID(_id)}
+	return openGLPixelBufferAdopt(_id)
 }
 
 // Initializes and returns an OpenGL pixel buffer object that encapsulates an existing CGL pixel buffer object.
 //
-// NewOpenGLPixelBufferWithCGLPBufferObj creates a new [OpenGLPixelBuffer].
-func NewOpenGLPixelBufferWithCGLPBufferObj(pbuffer unsafe.Pointer) *OpenGLPixelBuffer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOpenGLPixelBuffer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLPBufferObj:"), pbuffer)
-	return &OpenGLPixelBuffer{inner: raw.NSOpenGLPixelBufferFromID(_id)}
+// NewOpenGLPixelBufferWithCGLPBufferObj creates a new OpenGLPixelBuffer.
+func NewOpenGLPixelBufferWithCGLPBufferObj(pbuffer obj.Object) *OpenGLPixelBuffer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOpenGLPixelBuffer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLPBufferObj:"), objref.IDOf(pbuffer))
+	return openGLPixelBufferAdopt(_id)
 }
 
-// CGLPBufferObj calls the underlying CGLPBufferObj.
-func (x *OpenGLPixelBuffer) CGLPBufferObj() unsafe.Pointer {
-	return x.inner.CGLPBufferObj()
+func (x *OpenGLPixelBuffer) CGLPBufferObj() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGLPBufferObj"))
+	return obj.Wrap(_r)
 }
 
-// PixelsWide calls the underlying PixelsWide.
 func (x *OpenGLPixelBuffer) PixelsWide() int32 {
-	return x.inner.PixelsWide()
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("pixelsWide"))
+	return _r
 }
 
-// PixelsHigh calls the underlying PixelsHigh.
 func (x *OpenGLPixelBuffer) PixelsHigh() int32 {
-	return x.inner.PixelsHigh()
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("pixelsHigh"))
+	return _r
 }
 
-// TextureTarget calls the underlying TextureTarget.
 func (x *OpenGLPixelBuffer) TextureTarget() uint32 {
-	return x.inner.TextureTarget()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("textureTarget"))
+	return _r
 }
 
-// TextureInternalFormat calls the underlying TextureInternalFormat.
 func (x *OpenGLPixelBuffer) TextureInternalFormat() uint32 {
-	return x.inner.TextureInternalFormat()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("textureInternalFormat"))
+	return _r
 }
 
-// TextureMaxMipMapLevel calls the underlying TextureMaxMipMapLevel.
 func (x *OpenGLPixelBuffer) TextureMaxMipMapLevel() int32 {
-	return x.inner.TextureMaxMipMapLevel()
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("textureMaxMipMapLevel"))
+	return _r
 }
 
 // OpenGLPixelBufferable is the interface implemented by [OpenGLPixelBuffer], for mocking and DI.
 type OpenGLPixelBufferable interface {
-	Unwrap() *raw.NSOpenGLPixelBuffer
-	CGLPBufferObj() unsafe.Pointer
+	obj.Object
+	CGLPBufferObj() obj.Object
 	PixelsWide() int32
 	PixelsHigh() int32
 	TextureTarget() uint32

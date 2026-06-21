@@ -5,71 +5,84 @@
 package metalperformanceshaders
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A placeholder node denoting the per-element weight buffer used by loss and gradient loss kernels.
 //
-// NNLabelsNode wraps [raw.MPSNNLabelsNode] with a fluent Go API.
+// NNLabelsNode is an idiomatic wrapper over the Objective-C class MPSNNLabelsNode.
 type NNLabelsNode struct {
-	inner *raw.MPSNNLabelsNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNLabelsNode].
-func (x *NNLabelsNode) Unwrap() *raw.MPSNNLabelsNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNLabelsNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNLabelsNodeFromID adopts an existing object pointer as a NNLabelsNode (nil for 0).
+// NNLabelsNodeFromID adopts an existing Objective-C object as a NNLabelsNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNLabelsNodeFromID(id objc.ID) *NNLabelsNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNLabelsNode{inner: raw.MPSNNLabelsNodeFromID(id)}
+	x := &NNLabelsNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNNLabelsNode creates a new [NNLabelsNode].
+// nNLabelsNodeAdopt wraps an Objective-C object that this code just created as a
+// NNLabelsNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNLabelsNodeAdopt(id objc.ID) *NNLabelsNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNLabelsNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NNLabelsNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNLabelsNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNLabelsNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNNLabelsNode creates a new NNLabelsNode.
 func NewNNLabelsNode() *NNLabelsNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNLabelsNode")), objc.RegisterName("new"))
-	return &NNLabelsNode{inner: raw.MPSNNLabelsNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNLabelsNode")), objc.RegisterName("new"))
+	return nNLabelsNodeAdopt(_id)
 }
 
-// @abstract   MPS resource identification @discussion See MPSHandle protocol reference.  Default: nil
+// Tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
 //
-// WithHandle sets the handle property and returns the receiver for chaining.
-func (x *NNLabelsNode) WithHandle(handle mpsneuralnetwork.MPSHandle) *NNLabelsNode {
-	x.inner.MPSNNStateNode.SetHandle(handle)
-	return x
-}
-
-// @abstract   Tag a state node for view later @discussion Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
-//
-// WithExportFromGraph sets the exportFromGraph property and returns the receiver for chaining.
+// WithExportFromGraph sets exportFromGraph and returns the receiver so calls can be chained.
 func (x *NNLabelsNode) WithExportFromGraph(exportFromGraph bool) *NNLabelsNode {
-	x.inner.MPSNNStateNode.SetExportFromGraph(exportFromGraph)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
 	return x
 }
 
-// @abstract   Set to true to cause the resource to be synchronized with the CPU @discussion Ignored on non-MacOS.
+// Set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
 //
-// WithSynchronizeResource sets the synchronizeResource property and returns the receiver for chaining.
+// WithSynchronizeResource sets synchronizeResource and returns the receiver so calls can be chained.
 func (x *NNLabelsNode) WithSynchronizeResource(synchronizeResource bool) *NNLabelsNode {
-	x.inner.MPSNNStateNode.SetSynchronizeResource(synchronizeResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
 	return x
-}
-
-func (x *NNLabelsNode) asNNStateNode() *mpsneuralnetwork.MPSNNStateNode {
-	return &x.inner.MPSNNStateNode
 }
 
 // NNLabelsNodeable is the interface implemented by [NNLabelsNode], for mocking and DI.
 type NNLabelsNodeable interface {
-	Unwrap() *raw.MPSNNLabelsNode
-	WithHandle(handle mpsneuralnetwork.MPSHandle) *NNLabelsNode
+	obj.Object
 	WithExportFromGraph(exportFromGraph bool) *NNLabelsNode
 	WithSynchronizeResource(synchronizeResource bool) *NNLabelsNode
 }

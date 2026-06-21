@@ -5,78 +5,86 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The input profile for a controller.
 //
-// ControllerLiveInput wraps [raw.GCControllerLiveInput] with a fluent Go API.
+// ControllerLiveInput is an idiomatic wrapper over the Objective-C class GCControllerLiveInput.
 type ControllerLiveInput struct {
-	inner *raw.GCControllerLiveInput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCControllerLiveInput].
-func (x *ControllerLiveInput) Unwrap() *raw.GCControllerLiveInput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ControllerLiveInput) ID() objc.ID { return x.inner.Ptr() }
-
-// ControllerLiveInputFromID adopts an existing object pointer as a ControllerLiveInput (nil for 0).
+// ControllerLiveInputFromID adopts an existing Objective-C object as a ControllerLiveInput
+// (nil for 0), retaining it and registering a release finalizer.
 func ControllerLiveInputFromID(id objc.ID) *ControllerLiveInput {
 	if id == 0 {
 		return nil
 	}
-	return &ControllerLiveInput{inner: raw.GCControllerLiveInputFromID(id)}
+	x := &ControllerLiveInput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewControllerLiveInput creates a new [ControllerLiveInput].
+// controllerLiveInputAdopt wraps an Objective-C object that this code just created as a
+// ControllerLiveInput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func controllerLiveInputAdopt(id objc.ID) *ControllerLiveInput {
+	if id == 0 {
+		return nil
+	}
+	x := &ControllerLiveInput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ControllerLiveInput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ControllerLiveInput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ControllerLiveInput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewControllerLiveInput creates a new ControllerLiveInput.
 func NewControllerLiveInput() *ControllerLiveInput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCControllerLiveInput")), objc.RegisterName("new"))
-	return &ControllerLiveInput{inner: raw.GCControllerLiveInputFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GCControllerLiveInput")), objc.RegisterName("new"))
+	return controllerLiveInputAdopt(_id)
 }
 
 // Returns a snapshot of the physical device inputs.
-//
-// Capture calls the underlying Capture.
 func (x *ControllerLiveInput) Capture() *ControllerInputState {
-	_r := x.inner.Capture()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerInputState{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("capture"))
+	return ControllerInputStateFromID(_r)
 }
 
 // Returns the next device input state from the queue.
-//
-// NextInputState calls the underlying NextInputState.
 func (x *ControllerLiveInput) NextInputState() *ControllerInputState {
-	_r := x.inner.NextInputState()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerInputState{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextInputState"))
+	return ControllerInputStateFromID(_r)
 }
 
 // Get a view of the controller's input without any system-level control remapping applied. Developers should avoid implementing their own control remapping functionality and to instead direct users to the system game controller settings to remap controls.  If you choose to implement your own control remapping functionality, or if your app streams controller input to a remote device that implements control remapping functionality, you should access controller physical input through this interface.
-//
-// UnmappedInput calls the underlying UnmappedInput.
 func (x *ControllerLiveInput) UnmappedInput() *ControllerLiveInput {
-	_r := x.inner.UnmappedInput()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerLiveInput{inner: _r}
-}
-
-func (x *ControllerLiveInput) asControllerInputState() *raw.GCControllerInputState {
-	return &x.inner.GCControllerInputState
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unmappedInput"))
+	return ControllerLiveInputFromID(_r)
 }
 
 // ControllerLiveInputable is the interface implemented by [ControllerLiveInput], for mocking and DI.
 type ControllerLiveInputable interface {
-	Unwrap() *raw.GCControllerLiveInput
+	obj.Object
 	Capture() *ControllerInputState
 	NextInputState() *ControllerInputState
 	UnmappedInput() *ControllerLiveInput

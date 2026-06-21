@@ -5,178 +5,140 @@
 package scriptingbridge
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/launchservices"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scriptingbridge"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The SBApplication class provides a mechanism enabling an Objective-C program to send Apple events to a scriptable application and receive Apple events in response. It thereby makes it possible for that program to control the application and exchange data with it. Scripting Bridge works by bridging data types between Apple event descriptors and Cocoa objects.
 //
-// Application wraps [raw.SBApplication] with a fluent Go API.
+// Application is an idiomatic wrapper over the Objective-C class SBApplication.
 type Application struct {
-	inner *raw.SBApplication
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SBApplication].
-func (x *Application) Unwrap() *raw.SBApplication { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Application) ID() objc.ID { return x.inner.Ptr() }
-
-// ApplicationFromID adopts an existing object pointer as a Application (nil for 0).
+// ApplicationFromID adopts an existing Objective-C object as a Application
+// (nil for 0), retaining it and registering a release finalizer.
 func ApplicationFromID(id objc.ID) *Application {
 	if id == 0 {
 		return nil
 	}
-	return &Application{inner: raw.SBApplicationFromID(id)}
+	x := &Application{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// applicationAdopt wraps an Objective-C object that this code just created as a
+// Application (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func applicationAdopt(id objc.ID) *Application {
+	if id == 0 {
+		return nil
+	}
+	x := &Application{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Application) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Application) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Application) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns an instance of an SBApplication subclass that represents the target application identified by the given bundle identifier.
 //
-// NewApplicationWithBundleIdentifier creates a new [Application].
+// NewApplicationWithBundleIdentifier creates a new Application.
 func NewApplicationWithBundleIdentifier(ident string) *Application {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SBApplication")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:"), foundation.NSStringStringWithUTF8String(ident).Ptr())
-	return &Application{inner: raw.SBApplicationFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SBApplication")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:"), purego.NSString(ident))
+	return applicationAdopt(_id)
 }
 
 // Returns an instance of an SBApplication subclass that represents the target application identified by the given URL.
 //
-// NewApplicationWithURL creates a new [Application].
+// NewApplicationWithURL creates a new Application.
 func NewApplicationWithURL(url string) *Application {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SBApplication")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr())
-	return &Application{inner: raw.SBApplicationFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SBApplication")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
+	return applicationAdopt(_id)
 }
 
 // Returns an instance of an SBApplication subclass that represents the target application identified by the given process identifier.
 //
-// NewApplicationWithProcessIdentifier creates a new [Application].
+// NewApplicationWithProcessIdentifier creates a new Application.
 func NewApplicationWithProcessIdentifier(pid int) *Application {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SBApplication")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SBApplication")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProcessIdentifier:"), pid)
-	return &Application{inner: raw.SBApplicationFromID(_id)}
-}
-
-// The error-handling delegate of the receiver.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Application) WithDelegate(delegate raw.SBApplicationDelegate) *Application {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// The launch flags for the application represented by the receiver.
-//
-// WithLaunchFlags sets the launchFlags property and returns the receiver for chaining.
-func (x *Application) WithLaunchFlags(launchFlags launchservices.LSLaunchFlags) *Application {
-	x.inner.SetLaunchFlags(launchFlags)
-	return x
+	return applicationAdopt(_id)
 }
 
 // The mode for sending Apple events to the target application.
 //
-// WithSendMode sets the sendMode property and returns the receiver for chaining.
+// WithSendMode sets sendMode and returns the receiver so calls can be chained.
 func (x *Application) WithSendMode(sendMode int) *Application {
-	x.inner.SetSendMode(sendMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendMode:"), sendMode)
 	return x
 }
 
 // The period the application will wait to receive reply Apple events.
 //
-// WithTimeout sets the timeout property and returns the receiver for chaining.
+// WithTimeout sets timeout and returns the receiver so calls can be chained.
 func (x *Application) WithTimeout(timeout int) *Application {
-	x.inner.SetTimeout(timeout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), timeout)
 	return x
 }
 
-// Returns a class object that represents a particular class in the target application.
-//
-// ClassForScriptingClass calls the underlying ClassForScriptingClass.
-func (x *Application) ClassForScriptingClass(className string) objc.Class {
-	return x.inner.ClassForScriptingClass(foundation.NSStringStringWithUTF8String(className))
-}
-
 // Moves the target application to the foreground immediately.
-//
-// Activate calls the underlying Activate.
 func (x *Application) Activate() {
-	x.inner.Activate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activate"))
 }
 
 // A Boolean that indicates whether the target application represented by the receiver is running. <doc://com.apple.documentation/documentation/swift/true> if the application is running, <doc://com.apple.documentation/documentation/swift/false> otherwise. This may be <doc://com.apple.documentation/documentation/swift/true> for instances initialized with a bundle identifier or URL because `SBApplication` launches the application only when it's necessary to send it an event.
-//
-// IsRunning calls the underlying IsRunning.
 func (x *Application) IsRunning() bool {
-	return x.inner.IsRunning()
-}
-
-// The error-handling delegate of the receiver. The delegate should implement the “SBApplicationDelegate/eventDidFail:withError:“ method of the “SBApplicationDelegate“ informal protocol.
-//
-// Delegate calls the underlying Delegate.
-func (x *Application) Delegate() raw.SBApplicationDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *Application) SetDelegate(delegate raw.SBApplicationDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// The launch flags for the application represented by the receiver. For more information, see <doc://com.apple.documentation/documentation/coreservices/launch_services>.
-//
-// LaunchFlags calls the underlying LaunchFlags.
-func (x *Application) LaunchFlags() launchservices.LSLaunchFlags {
-	return x.inner.LaunchFlags()
-}
-
-// SetLaunchFlags calls the underlying SetLaunchFlags.
-func (x *Application) SetLaunchFlags(launchFlags launchservices.LSLaunchFlags) {
-	x.inner.SetLaunchFlags(launchFlags)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRunning"))
+	return _r
 }
 
 // The mode for sending Apple events to the target application. For more information, see <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager>. The default send mode is <doc://com.apple.documentation/documentation/coreservices/1542914-anonymous/kaewaitreply>. If the send mode is something other than `kAEWaitReply`, the receiver might not correctly handle reply events from the target application.
-//
-// SendMode calls the underlying SendMode.
 func (x *Application) SendMode() int {
-	return x.inner.SendMode()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sendMode"))
+	return _r
 }
 
-// SetSendMode calls the underlying SetSendMode.
 func (x *Application) SetSendMode(sendMode int) {
-	x.inner.SetSendMode(sendMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendMode:"), sendMode)
 }
 
 // The period the application will wait to receive reply Apple events. For more information, see <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager>. The default timeout value is <doc://com.apple.documentation/documentation/coreservices/1542814-timeout_constants/kaedefaulttimeout>, which is about a minute. If you want the receiver to wait indefinitely for reply Apple events, use <doc://com.apple.documentation/documentation/coreservices/1542814-timeout_constants/knotimeout>. For more information, see <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager>.
-//
-// Timeout calls the underlying Timeout.
 func (x *Application) Timeout() int {
-	return x.inner.Timeout()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeout"))
+	return _r
 }
 
-// SetTimeout calls the underlying SetTimeout.
 func (x *Application) SetTimeout(timeout int) {
-	x.inner.SetTimeout(timeout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), timeout)
 }
-
-func (x *Application) asObject() *raw.SBObject { return &x.inner.SBObject }
 
 // Applicationable is the interface implemented by [Application], for mocking and DI.
 type Applicationable interface {
-	Unwrap() *raw.SBApplication
-	WithDelegate(delegate raw.SBApplicationDelegate) *Application
-	WithLaunchFlags(launchFlags launchservices.LSLaunchFlags) *Application
+	obj.Object
 	WithSendMode(sendMode int) *Application
 	WithTimeout(timeout int) *Application
-	ClassForScriptingClass(className string) objc.Class
 	Activate()
 	IsRunning() bool
-	Delegate() raw.SBApplicationDelegate
-	SetDelegate(delegate raw.SBApplicationDelegate)
-	LaunchFlags() launchservices.LSLaunchFlags
-	SetLaunchFlags(launchFlags launchservices.LSLaunchFlags)
 	SendMode() int
 	SetSendMode(sendMode int)
 	Timeout() int

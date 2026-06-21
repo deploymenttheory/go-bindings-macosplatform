@@ -5,64 +5,86 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object indicating the app or device that created a HealthKit sample
 //
-// Source wraps [raw.HKSource] with a fluent Go API.
+// Source is an idiomatic wrapper over the Objective-C class HKSource.
 type Source struct {
-	inner *raw.HKSource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKSource].
-func (x *Source) Unwrap() *raw.HKSource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Source) ID() objc.ID { return x.inner.Ptr() }
-
-// SourceFromID adopts an existing object pointer as a Source (nil for 0).
+// SourceFromID adopts an existing Objective-C object as a Source
+// (nil for 0), retaining it and registering a release finalizer.
 func SourceFromID(id objc.ID) *Source {
 	if id == 0 {
 		return nil
 	}
-	return &Source{inner: raw.HKSourceFromID(id)}
+	x := &Source{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSource creates a new [Source].
+// sourceAdopt wraps an Objective-C object that this code just created as a
+// Source (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sourceAdopt(id objc.ID) *Source {
+	if id == 0 {
+		return nil
+	}
+	x := &Source{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Source) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Source) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Source) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSource creates a new Source.
 func NewSource() *Source {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKSource")), objc.RegisterName("new"))
-	return &Source{inner: raw.HKSourceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKSource")), objc.RegisterName("new"))
+	return sourceAdopt(_id)
 }
 
-// @property      name @abstract      The name of the source represented by the receiver.  If the source is an app, then the name is the localized name of the app.
-//
-// Name calls the underlying Name.
+// The name of the source represented by the receiver.  If the source is an app, then the name is the localized name of the app.
 func (x *Source) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property  bundleIdentifier @abstract  The bundle identifier of the source represented by the receiver.
-//
-// BundleIdentifier calls the underlying BundleIdentifier.
+// The bundle identifier of the source represented by the receiver.
 func (x *Source) BundleIdentifier() string {
-	_r := x.inner.BundleIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Sourceable is the interface implemented by [Source], for mocking and DI.
 type Sourceable interface {
-	Unwrap() *raw.HKSource
+	obj.Object
 	Name() string
 	BundleIdentifier() string
 }

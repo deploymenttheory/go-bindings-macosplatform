@@ -5,59 +5,86 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The color of a device light.
 //
-// Color wraps [raw.GCColor] with a fluent Go API.
+// Color is an idiomatic wrapper over the Objective-C class GCColor.
 type Color struct {
-	inner *raw.GCColor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCColor].
-func (x *Color) Unwrap() *raw.GCColor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Color) ID() objc.ID { return x.inner.Ptr() }
-
-// ColorFromID adopts an existing object pointer as a Color (nil for 0).
+// ColorFromID adopts an existing Objective-C object as a Color
+// (nil for 0), retaining it and registering a release finalizer.
 func ColorFromID(id objc.ID) *Color {
 	if id == 0 {
 		return nil
 	}
-	return &Color{inner: raw.GCColorFromID(id)}
+	x := &Color{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// colorAdopt wraps an Objective-C object that this code just created as a
+// Color (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func colorAdopt(id objc.ID) *Color {
+	if id == 0 {
+		return nil
+	}
+	x := &Color{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Color) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Color) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Color) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a color with the specified red, green, and blue values.
 //
-// NewColorWithRedGreenBlue creates a new [Color].
+// NewColorWithRedGreenBlue creates a new Color.
 func NewColorWithRedGreenBlue(red float32, green float32, blue float32) *Color {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GCColor")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GCColor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRed:green:blue:"), red, green, blue)
-	return &Color{inner: raw.GCColorFromID(_id)}
+	return colorAdopt(_id)
 }
 
-// Red calls the underlying Red.
 func (x *Color) Red() float32 {
-	return x.inner.Red()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("red"))
+	return _r
 }
 
-// Green calls the underlying Green.
 func (x *Color) Green() float32 {
-	return x.inner.Green()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("green"))
+	return _r
 }
 
-// Blue calls the underlying Blue.
 func (x *Color) Blue() float32 {
-	return x.inner.Blue()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("blue"))
+	return _r
 }
 
 // Colorable is the interface implemented by [Color], for mocking and DI.
 type Colorable interface {
-	Unwrap() *raw.GCColor
+	obj.Object
 	Red() float32
 	Green() float32
 	Blue() float32

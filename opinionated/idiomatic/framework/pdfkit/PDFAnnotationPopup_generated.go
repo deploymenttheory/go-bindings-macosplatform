@@ -5,421 +5,362 @@
 package pdfkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A PDFAnnotationPopup object provides user interactivity on a PDF page in the form of a pop-up menu.
 //
-// AnnotationPopup wraps [raw.PDFAnnotationPopup] with a fluent Go API.
+// AnnotationPopup is an idiomatic wrapper over the Objective-C class PDFAnnotationPopup.
 type AnnotationPopup struct {
-	inner *raw.PDFAnnotationPopup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PDFAnnotationPopup].
-func (x *AnnotationPopup) Unwrap() *raw.PDFAnnotationPopup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AnnotationPopup) ID() objc.ID { return x.inner.Ptr() }
-
-// AnnotationPopupFromID adopts an existing object pointer as a AnnotationPopup (nil for 0).
+// AnnotationPopupFromID adopts an existing Objective-C object as a AnnotationPopup
+// (nil for 0), retaining it and registering a release finalizer.
 func AnnotationPopupFromID(id objc.ID) *AnnotationPopup {
 	if id == 0 {
 		return nil
 	}
-	return &AnnotationPopup{inner: raw.PDFAnnotationPopupFromID(id)}
+	x := &AnnotationPopup{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAnnotationPopup creates a new [AnnotationPopup].
+// annotationPopupAdopt wraps an Objective-C object that this code just created as a
+// AnnotationPopup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func annotationPopupAdopt(id objc.ID) *AnnotationPopup {
+	if id == 0 {
+		return nil
+	}
+	x := &AnnotationPopup{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AnnotationPopup) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AnnotationPopup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AnnotationPopup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAnnotationPopup creates a new AnnotationPopup.
 func NewAnnotationPopup() *AnnotationPopup {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFAnnotationPopup")), objc.RegisterName("new"))
-	return &AnnotationPopup{inner: raw.PDFAnnotationPopupFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PDFAnnotationPopup")), objc.RegisterName("new"))
+	return annotationPopupAdopt(_id)
 }
 
 // Returns the page that the annotation is associated with.
 //
-// WithPage sets the page property and returns the receiver for chaining.
+// WithPage sets page and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithPage(page *Page) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetPage(page.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPage:"), objref.IDOf(page))
 	return x
 }
 
 // Returns the type of the annotation.
 //
-// WithType sets the type_ property and returns the receiver for chaining.
+// WithType sets type_ and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithType(type_ string) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetType(foundation.NSStringStringWithUTF8String(type_))
-	return x
-}
-
-// Returns the bounding box for the annotation in page space.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithBounds(bounds corefoundation.CGRect) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetBounds(bounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 	return x
 }
 
 // Returns a Boolean value indicating whether the annotation should be displayed.
 //
-// WithShouldDisplay sets the shouldDisplay property and returns the receiver for chaining.
+// WithShouldDisplay sets shouldDisplay and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithShouldDisplay(shouldDisplay bool) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetShouldDisplay(shouldDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldDisplay:"), shouldDisplay)
 	return x
 }
 
 // Returns a Boolean value indicating whether the annotation should appear when the document is printed.
 //
-// WithShouldPrint sets the shouldPrint property and returns the receiver for chaining.
+// WithShouldPrint sets shouldPrint and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithShouldPrint(shouldPrint bool) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetShouldPrint(shouldPrint)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldPrint:"), shouldPrint)
 	return x
 }
 
 // A Boolean value that indicates whether the annotation is in a highlighted state, such as when the mouse is down on a link annotation.
 //
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithHighlighted(highlighted bool) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
 // The font the annotation uses to display text.
 //
-// WithFont sets the font property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithFont(font *appkit.NSFont) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetFont(font)
+// WithFont sets font and returns the receiver so calls can be chained.
+func (x *AnnotationPopup) WithFont(font obj.Object) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
 // The font color the annotation uses to display text.
 //
-// WithFontColor sets the fontColor property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithFontColor(fontColor *appkit.NSColor) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetFontColor(fontColor)
+// WithFontColor sets fontColor and returns the receiver so calls can be chained.
+func (x *AnnotationPopup) WithFontColor(fontColor obj.Object) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
 	return x
 }
 
 // The fill color for drawing a circle, line, or square annotation.
 //
-// WithInteriorColor sets the interiorColor property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithInteriorColor(interiorColor *appkit.NSColor) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetInteriorColor(interiorColor)
-	return x
-}
-
-// The alignment of the free text and text widget annotation’s text content.
-//
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithAlignment(alignment appkit.NSTextAlignment) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetAlignment(alignment)
-	return x
-}
-
-// The point where a line begins, in annotation-space coordinates.
-//
-// WithStartPoint sets the startPoint property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetStartPoint(startPoint)
-	return x
-}
-
-// The point where a line ends, in annotation-space coordinates.
-//
-// WithEndPoint sets the endPoint property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetEndPoint(endPoint)
+// WithInteriorColor sets interiorColor and returns the receiver so calls can be chained.
+func (x *AnnotationPopup) WithInteriorColor(interiorColor obj.Object) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
 	return x
 }
 
 // The style of the line annotation’s starting point, such as square or filled arrowhead.
 //
-// WithStartLineStyle sets the startLineStyle property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetStartLineStyle(raw.PDFLineStyle(startLineStyle))
+// WithStartLineStyle sets startLineStyle and returns the receiver so calls can be chained.
+func (x *AnnotationPopup) WithStartLineStyle(startLineStyle LineStyle) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartLineStyle:"), startLineStyle)
 	return x
 }
 
 // The style of the line annotation’s ending point, such as square or filled arrowhead.
 //
-// WithEndLineStyle sets the endLineStyle property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetEndLineStyle(raw.PDFLineStyle(endLineStyle))
+// WithEndLineStyle sets endLineStyle and returns the receiver so calls can be chained.
+func (x *AnnotationPopup) WithEndLineStyle(endLineStyle LineStyle) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndLineStyle:"), endLineStyle)
 	return x
 }
 
 // The type of icon to display for a pop-up text annotation.
 //
-// WithIconType sets the iconType property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithIconType(iconType PDFTextAnnotationIconType) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetIconType(raw.PDFTextAnnotationIconType(iconType))
+// WithIconType sets iconType and returns the receiver so calls can be chained.
+func (x *AnnotationPopup) WithIconType(iconType TextAnnotationIconType) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIconType:"), iconType)
 	return x
 }
 
 // An array of values that represents the points bounding the marked-up text.
 //
-// WithQuadrilateralPoints sets the collection, converting the Go slice to an NSArray.
-func (x *AnnotationPopup) WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationPopup {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.PDFAnnotation.SetQuadrilateralPoints(foundation.NSArrayFromID[*foundation.NSValue](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSValue](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.PDFAnnotation.SetQuadrilateralPoints(_arr)
+// WithQuadrilateralPoints sets the collection and returns the receiver so calls can be chained.
+func (x *AnnotationPopup) WithQuadrilateralPoints(items ...obj.Object) *AnnotationPopup {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuadrilateralPoints:"), _arr)
 	return x
 }
 
 // The markup type that the annotation displays, either highlight, strikethrough, underline, or redact.
 //
-// WithMarkupType sets the markupType property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithMarkupType(markupType PDFMarkupType) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetMarkupType(raw.PDFMarkupType(markupType))
+// WithMarkupType sets markupType and returns the receiver so calls can be chained.
+func (x *AnnotationPopup) WithMarkupType(markupType MarkupType) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarkupType:"), markupType)
 	return x
 }
 
 // The type of button widget control, either radio button, push button, or checkbox.
 //
-// WithWidgetControlType sets the widgetControlType property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetWidgetControlType(raw.PDFWidgetControlType(widgetControlType))
+// WithWidgetControlType sets widgetControlType and returns the receiver so calls can be chained.
+func (x *AnnotationPopup) WithWidgetControlType(widgetControlType WidgetControlType) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetControlType:"), widgetControlType)
 	return x
 }
 
 // A Boolean value that indicates whether the text widget annotation displays multiple lines.
 //
-// WithMultiline sets the multiline property and returns the receiver for chaining.
+// WithMultiline sets multiline and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithMultiline(multiline bool) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetMultiline(multiline)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiline:"), multiline)
 	return x
 }
 
 // A Boolean value that indicates whether the annotation divides the text widget’s bounds into equally spaced segments, such as in a form entry field.
 //
-// WithComb sets the comb property and returns the receiver for chaining.
+// WithComb sets comb and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithComb(comb bool) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetComb(comb)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComb:"), comb)
 	return x
 }
 
 // The maximum number of characters the text widget annotation allows.
 //
-// WithMaximumLength sets the maximumLength property and returns the receiver for chaining.
+// WithMaximumLength sets maximumLength and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithMaximumLength(maximumLength int) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetMaximumLength(maximumLength)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLength:"), maximumLength)
 	return x
 }
 
 // The string value of the widget annotation.
 //
-// WithWidgetStringValue sets the widgetStringValue property and returns the receiver for chaining.
+// WithWidgetStringValue sets widgetStringValue and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithWidgetStringValue(widgetStringValue string) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetWidgetStringValue(foundation.NSStringStringWithUTF8String(widgetStringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetStringValue:"), purego.NSString(widgetStringValue))
 	return x
 }
 
 // The string value that the widget reverts to when performing a reset form action.
 //
-// WithWidgetDefaultStringValue sets the widgetDefaultStringValue property and returns the receiver for chaining.
+// WithWidgetDefaultStringValue sets widgetDefaultStringValue and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithWidgetDefaultStringValue(widgetDefaultStringValue string) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetWidgetDefaultStringValue(foundation.NSStringStringWithUTF8String(widgetDefaultStringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetDefaultStringValue:"), purego.NSString(widgetDefaultStringValue))
 	return x
 }
 
 // A Boolean value that indicates whether clicking or tapping a selected radio button toggles it to an unselected state.
 //
-// WithAllowsToggleToOff sets the allowsToggleToOff property and returns the receiver for chaining.
+// WithAllowsToggleToOff sets allowsToggleToOff and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithAllowsToggleToOff(allowsToggleToOff bool) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetAllowsToggleToOff(allowsToggleToOff)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsToggleToOff:"), allowsToggleToOff)
 	return x
 }
 
 // A Boolean value that indicates whether radio buttons in a group turn on and off in unison.
 //
-// WithRadiosInUnison sets the radiosInUnison property and returns the receiver for chaining.
+// WithRadiosInUnison sets radiosInUnison and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithRadiosInUnison(radiosInUnison bool) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetRadiosInUnison(radiosInUnison)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadiosInUnison:"), radiosInUnison)
 	return x
 }
 
 // A Boolean value that determines whether the widget is editable.
 //
-// WithReadOnly sets the readOnly property and returns the receiver for chaining.
+// WithReadOnly sets readOnly and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithReadOnly(readOnly bool) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetReadOnly(readOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadOnly:"), readOnly)
 	return x
 }
 
 // A Boolean value that indicates whether the choice widget annotation is a list or a pop-up menu.
 //
-// WithListChoice sets the listChoice property and returns the receiver for chaining.
+// WithListChoice sets listChoice and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithListChoice(listChoice bool) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetListChoice(listChoice)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListChoice:"), listChoice)
 	return x
 }
 
 // An array of strings that specifies the options in either a list or a pop-up menu.
 //
-// WithChoices sets the collection, converting the Go slice to an NSArray.
-func (x *AnnotationPopup) WithChoices(items ...*foundation.NSString) *AnnotationPopup {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.PDFAnnotation.SetChoices(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.PDFAnnotation.SetChoices(_arr)
+// WithChoices sets the collection and returns the receiver so calls can be chained.
+func (x *AnnotationPopup) WithChoices(items ...obj.Object) *AnnotationPopup {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChoices:"), _arr)
 	return x
 }
 
 // An array of strings that specifies the export values for items in a list or a pop-up menu.
 //
-// WithValues sets the collection, converting the Go slice to an NSArray.
-func (x *AnnotationPopup) WithValues(items ...*foundation.NSString) *AnnotationPopup {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.PDFAnnotation.SetValues(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.PDFAnnotation.SetValues(_arr)
+// WithValues sets the collection and returns the receiver so calls can be chained.
+func (x *AnnotationPopup) WithValues(items ...obj.Object) *AnnotationPopup {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValues:"), _arr)
 	return x
 }
 
 // The current state of the button widget annotation.
 //
-// WithButtonWidgetState sets the buttonWidgetState property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetButtonWidgetState(raw.PDFWidgetCellState(buttonWidgetState))
+// WithButtonWidgetState sets buttonWidgetState and returns the receiver so calls can be chained.
+func (x *AnnotationPopup) WithButtonWidgetState(buttonWidgetState WidgetCellState) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonWidgetState:"), buttonWidgetState)
 	return x
 }
 
 // A string value that differentiates button widgets in the same group, such as to identify mutually exclusive radio buttons from each other.
 //
-// WithButtonWidgetStateString sets the buttonWidgetStateString property and returns the receiver for chaining.
+// WithButtonWidgetStateString sets buttonWidgetStateString and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetButtonWidgetStateString(foundation.NSStringStringWithUTF8String(buttonWidgetStateString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonWidgetStateString:"), purego.NSString(buttonWidgetStateString))
 	return x
 }
 
 // A Boolean value that indicates whether the pop-up annotation is in an opened state, displaying its text content, or in a closed state, displaying an icon.
 //
-// WithOpen sets the open property and returns the receiver for chaining.
+// WithOpen sets open and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithOpen(open bool) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetOpen(open)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpen:"), open)
 	return x
 }
 
 // The destination for a link annotation.
 //
-// WithDestination sets the destination property and returns the receiver for chaining.
+// WithDestination sets destination and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithDestination(destination *Destination) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetDestination(destination.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return x
 }
 
 // A URL for a link annotation.
 //
-// WithURL sets the uRL property and returns the receiver for chaining.
+// WithURL sets uRL and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithURL(uRL string) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 	return x
 }
 
 // The widget identifier for form annotation actions and behaviors.
 //
-// WithFieldName sets the fieldName property and returns the receiver for chaining.
+// WithFieldName sets fieldName and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithFieldName(fieldName string) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetFieldName(foundation.NSStringStringWithUTF8String(fieldName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldName:"), purego.NSString(fieldName))
 	return x
 }
 
 // The title of push button widget annotations.
 //
-// WithCaption sets the caption property and returns the receiver for chaining.
+// WithCaption sets caption and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithCaption(caption string) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetCaption(foundation.NSStringStringWithUTF8String(caption))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaption:"), purego.NSString(caption))
 	return x
 }
 
 // The color of the widget’s background.
 //
-// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *AnnotationPopup) WithBackgroundColor(backgroundColor *appkit.NSColor) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetBackgroundColor(backgroundColor)
+// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+func (x *AnnotationPopup) WithBackgroundColor(backgroundColor obj.Object) *AnnotationPopup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
 // The name of the stamp, a text or graphics annotation that emulates a rubber stamp effect.
 //
-// WithStampName sets the stampName property and returns the receiver for chaining.
+// WithStampName sets stampName and returns the receiver so calls can be chained.
 func (x *AnnotationPopup) WithStampName(stampName string) *AnnotationPopup {
-	x.inner.PDFAnnotation.SetStampName(foundation.NSStringStringWithUTF8String(stampName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStampName:"), purego.NSString(stampName))
 	return x
 }
 
 // Sets the open state of the pop-up menu.
-//
-// SetIsOpen calls the underlying SetIsOpen.
 func (x *AnnotationPopup) SetIsOpen(isOpen bool) {
-	x.inner.SetIsOpen(isOpen)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsOpen:"), isOpen)
 }
-
-func (x *AnnotationPopup) asAnnotation() *raw.PDFAnnotation { return &x.inner.PDFAnnotation }
 
 // AnnotationPopupable is the interface implemented by [AnnotationPopup], for mocking and DI.
 type AnnotationPopupable interface {
-	Unwrap() *raw.PDFAnnotationPopup
+	obj.Object
 	WithPage(page *Page) *AnnotationPopup
 	WithType(type_ string) *AnnotationPopup
-	WithBounds(bounds corefoundation.CGRect) *AnnotationPopup
 	WithShouldDisplay(shouldDisplay bool) *AnnotationPopup
 	WithShouldPrint(shouldPrint bool) *AnnotationPopup
 	WithHighlighted(highlighted bool) *AnnotationPopup
-	WithFont(font *appkit.NSFont) *AnnotationPopup
-	WithFontColor(fontColor *appkit.NSColor) *AnnotationPopup
-	WithInteriorColor(interiorColor *appkit.NSColor) *AnnotationPopup
-	WithAlignment(alignment appkit.NSTextAlignment) *AnnotationPopup
-	WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationPopup
-	WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationPopup
-	WithStartLineStyle(startLineStyle PDFLineStyle) *AnnotationPopup
-	WithEndLineStyle(endLineStyle PDFLineStyle) *AnnotationPopup
-	WithIconType(iconType PDFTextAnnotationIconType) *AnnotationPopup
-	WithQuadrilateralPoints(items ...*foundation.NSValue) *AnnotationPopup
-	WithMarkupType(markupType PDFMarkupType) *AnnotationPopup
-	WithWidgetControlType(widgetControlType PDFWidgetControlType) *AnnotationPopup
+	WithFont(font obj.Object) *AnnotationPopup
+	WithFontColor(fontColor obj.Object) *AnnotationPopup
+	WithInteriorColor(interiorColor obj.Object) *AnnotationPopup
+	WithStartLineStyle(startLineStyle LineStyle) *AnnotationPopup
+	WithEndLineStyle(endLineStyle LineStyle) *AnnotationPopup
+	WithIconType(iconType TextAnnotationIconType) *AnnotationPopup
+	WithQuadrilateralPoints(items ...obj.Object) *AnnotationPopup
+	WithMarkupType(markupType MarkupType) *AnnotationPopup
+	WithWidgetControlType(widgetControlType WidgetControlType) *AnnotationPopup
 	WithMultiline(multiline bool) *AnnotationPopup
 	WithComb(comb bool) *AnnotationPopup
 	WithMaximumLength(maximumLength int) *AnnotationPopup
@@ -429,16 +370,16 @@ type AnnotationPopupable interface {
 	WithRadiosInUnison(radiosInUnison bool) *AnnotationPopup
 	WithReadOnly(readOnly bool) *AnnotationPopup
 	WithListChoice(listChoice bool) *AnnotationPopup
-	WithChoices(items ...*foundation.NSString) *AnnotationPopup
-	WithValues(items ...*foundation.NSString) *AnnotationPopup
-	WithButtonWidgetState(buttonWidgetState PDFWidgetCellState) *AnnotationPopup
+	WithChoices(items ...obj.Object) *AnnotationPopup
+	WithValues(items ...obj.Object) *AnnotationPopup
+	WithButtonWidgetState(buttonWidgetState WidgetCellState) *AnnotationPopup
 	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationPopup
 	WithOpen(open bool) *AnnotationPopup
 	WithDestination(destination *Destination) *AnnotationPopup
 	WithURL(uRL string) *AnnotationPopup
 	WithFieldName(fieldName string) *AnnotationPopup
 	WithCaption(caption string) *AnnotationPopup
-	WithBackgroundColor(backgroundColor *appkit.NSColor) *AnnotationPopup
+	WithBackgroundColor(backgroundColor obj.Object) *AnnotationPopup
 	WithStampName(stampName string) *AnnotationPopup
 	SetIsOpen(isOpen bool)
 }

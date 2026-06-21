@@ -5,1057 +5,486 @@
 package naturallanguage
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/naturallanguage"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// NLLanguageUndetermined returns the string constant NLLanguageUndetermined as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageUndetermined() objc.ID {
-	if _r := raw.NLLanguageUndetermined(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageUndetermined returns the string constant NLLanguageUndetermined, for use as a dictionary key or argument.
+func NLLanguageUndetermined() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageUndetermined")))
 }
 
-// NLLanguageAmharic returns the string constant NLLanguageAmharic as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageAmharic() objc.ID {
-	if _r := raw.NLLanguageAmharic(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageAmharic returns the string constant NLLanguageAmharic, for use as a dictionary key or argument.
+func NLLanguageAmharic() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageAmharic"))) }
 
-// NLLanguageArabic returns the string constant NLLanguageArabic as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageArabic() objc.ID {
-	if _r := raw.NLLanguageArabic(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageArabic returns the string constant NLLanguageArabic, for use as a dictionary key or argument.
+func NLLanguageArabic() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageArabic"))) }
 
-// NLLanguageArmenian returns the string constant NLLanguageArmenian as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageArmenian() objc.ID {
-	if _r := raw.NLLanguageArmenian(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageArmenian returns the string constant NLLanguageArmenian, for use as a dictionary key or argument.
+func NLLanguageArmenian() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageArmenian")))
 }
 
-// NLLanguageBengali returns the string constant NLLanguageBengali as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageBengali() objc.ID {
-	if _r := raw.NLLanguageBengali(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageBengali returns the string constant NLLanguageBengali, for use as a dictionary key or argument.
+func NLLanguageBengali() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageBengali"))) }
 
-// NLLanguageBulgarian returns the string constant NLLanguageBulgarian as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageBulgarian() objc.ID {
-	if _r := raw.NLLanguageBulgarian(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageBulgarian returns the string constant NLLanguageBulgarian, for use as a dictionary key or argument.
+func NLLanguageBulgarian() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageBulgarian")))
 }
 
-// NLLanguageBurmese returns the string constant NLLanguageBurmese as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageBurmese() objc.ID {
-	if _r := raw.NLLanguageBurmese(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageBurmese returns the string constant NLLanguageBurmese, for use as a dictionary key or argument.
+func NLLanguageBurmese() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageBurmese"))) }
 
-// NLLanguageCatalan returns the string constant NLLanguageCatalan as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageCatalan() objc.ID {
-	if _r := raw.NLLanguageCatalan(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageCatalan returns the string constant NLLanguageCatalan, for use as a dictionary key or argument.
+func NLLanguageCatalan() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageCatalan"))) }
 
-// NLLanguageCherokee returns the string constant NLLanguageCherokee as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageCherokee() objc.ID {
-	if _r := raw.NLLanguageCherokee(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageCherokee returns the string constant NLLanguageCherokee, for use as a dictionary key or argument.
+func NLLanguageCherokee() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageCherokee")))
 }
 
-// NLLanguageCroatian returns the string constant NLLanguageCroatian as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageCroatian() objc.ID {
-	if _r := raw.NLLanguageCroatian(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageCroatian returns the string constant NLLanguageCroatian, for use as a dictionary key or argument.
+func NLLanguageCroatian() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageCroatian")))
 }
 
-// NLLanguageCzech returns the string constant NLLanguageCzech as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageCzech() objc.ID {
-	if _r := raw.NLLanguageCzech(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageCzech returns the string constant NLLanguageCzech, for use as a dictionary key or argument.
+func NLLanguageCzech() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageCzech"))) }
 
-// NLLanguageDanish returns the string constant NLLanguageDanish as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageDanish() objc.ID {
-	if _r := raw.NLLanguageDanish(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageDanish returns the string constant NLLanguageDanish, for use as a dictionary key or argument.
+func NLLanguageDanish() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageDanish"))) }
 
-// NLLanguageDutch returns the string constant NLLanguageDutch as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageDutch() objc.ID {
-	if _r := raw.NLLanguageDutch(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageDutch returns the string constant NLLanguageDutch, for use as a dictionary key or argument.
+func NLLanguageDutch() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageDutch"))) }
 
-// NLLanguageEnglish returns the string constant NLLanguageEnglish as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageEnglish() objc.ID {
-	if _r := raw.NLLanguageEnglish(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageEnglish returns the string constant NLLanguageEnglish, for use as a dictionary key or argument.
+func NLLanguageEnglish() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageEnglish"))) }
 
-// NLLanguageFinnish returns the string constant NLLanguageFinnish as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageFinnish() objc.ID {
-	if _r := raw.NLLanguageFinnish(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageFinnish returns the string constant NLLanguageFinnish, for use as a dictionary key or argument.
+func NLLanguageFinnish() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageFinnish"))) }
 
-// NLLanguageFrench returns the string constant NLLanguageFrench as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageFrench() objc.ID {
-	if _r := raw.NLLanguageFrench(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageFrench returns the string constant NLLanguageFrench, for use as a dictionary key or argument.
+func NLLanguageFrench() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageFrench"))) }
 
-// NLLanguageGeorgian returns the string constant NLLanguageGeorgian as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageGeorgian() objc.ID {
-	if _r := raw.NLLanguageGeorgian(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageGeorgian returns the string constant NLLanguageGeorgian, for use as a dictionary key or argument.
+func NLLanguageGeorgian() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageGeorgian")))
 }
 
-// NLLanguageGerman returns the string constant NLLanguageGerman as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageGerman() objc.ID {
-	if _r := raw.NLLanguageGerman(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageGerman returns the string constant NLLanguageGerman, for use as a dictionary key or argument.
+func NLLanguageGerman() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageGerman"))) }
 
-// NLLanguageGreek returns the string constant NLLanguageGreek as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageGreek() objc.ID {
-	if _r := raw.NLLanguageGreek(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageGreek returns the string constant NLLanguageGreek, for use as a dictionary key or argument.
+func NLLanguageGreek() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageGreek"))) }
 
-// NLLanguageGujarati returns the string constant NLLanguageGujarati as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageGujarati() objc.ID {
-	if _r := raw.NLLanguageGujarati(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageGujarati returns the string constant NLLanguageGujarati, for use as a dictionary key or argument.
+func NLLanguageGujarati() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageGujarati")))
 }
 
-// NLLanguageHebrew returns the string constant NLLanguageHebrew as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageHebrew() objc.ID {
-	if _r := raw.NLLanguageHebrew(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageHebrew returns the string constant NLLanguageHebrew, for use as a dictionary key or argument.
+func NLLanguageHebrew() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageHebrew"))) }
 
-// NLLanguageHindi returns the string constant NLLanguageHindi as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageHindi() objc.ID {
-	if _r := raw.NLLanguageHindi(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageHindi returns the string constant NLLanguageHindi, for use as a dictionary key or argument.
+func NLLanguageHindi() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageHindi"))) }
 
-// NLLanguageHungarian returns the string constant NLLanguageHungarian as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageHungarian() objc.ID {
-	if _r := raw.NLLanguageHungarian(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageHungarian returns the string constant NLLanguageHungarian, for use as a dictionary key or argument.
+func NLLanguageHungarian() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageHungarian")))
 }
 
-// NLLanguageIcelandic returns the string constant NLLanguageIcelandic as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageIcelandic() objc.ID {
-	if _r := raw.NLLanguageIcelandic(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageIcelandic returns the string constant NLLanguageIcelandic, for use as a dictionary key or argument.
+func NLLanguageIcelandic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageIcelandic")))
 }
 
-// NLLanguageIndonesian returns the string constant NLLanguageIndonesian as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageIndonesian() objc.ID {
-	if _r := raw.NLLanguageIndonesian(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageIndonesian returns the string constant NLLanguageIndonesian, for use as a dictionary key or argument.
+func NLLanguageIndonesian() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageIndonesian")))
 }
 
-// NLLanguageItalian returns the string constant NLLanguageItalian as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageItalian() objc.ID {
-	if _r := raw.NLLanguageItalian(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageItalian returns the string constant NLLanguageItalian, for use as a dictionary key or argument.
+func NLLanguageItalian() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageItalian"))) }
 
-// NLLanguageJapanese returns the string constant NLLanguageJapanese as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageJapanese() objc.ID {
-	if _r := raw.NLLanguageJapanese(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageJapanese returns the string constant NLLanguageJapanese, for use as a dictionary key or argument.
+func NLLanguageJapanese() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageJapanese")))
 }
 
-// NLLanguageKannada returns the string constant NLLanguageKannada as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageKannada() objc.ID {
-	if _r := raw.NLLanguageKannada(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageKannada returns the string constant NLLanguageKannada, for use as a dictionary key or argument.
+func NLLanguageKannada() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageKannada"))) }
 
-// NLLanguageKhmer returns the string constant NLLanguageKhmer as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageKhmer() objc.ID {
-	if _r := raw.NLLanguageKhmer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageKhmer returns the string constant NLLanguageKhmer, for use as a dictionary key or argument.
+func NLLanguageKhmer() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageKhmer"))) }
 
-// NLLanguageKorean returns the string constant NLLanguageKorean as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageKorean() objc.ID {
-	if _r := raw.NLLanguageKorean(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageKorean returns the string constant NLLanguageKorean, for use as a dictionary key or argument.
+func NLLanguageKorean() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageKorean"))) }
 
-// NLLanguageLao returns the string constant NLLanguageLao as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageLao() objc.ID {
-	if _r := raw.NLLanguageLao(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageLao returns the string constant NLLanguageLao, for use as a dictionary key or argument.
+func NLLanguageLao() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageLao"))) }
 
-// NLLanguageMalay returns the string constant NLLanguageMalay as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageMalay() objc.ID {
-	if _r := raw.NLLanguageMalay(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageMalay returns the string constant NLLanguageMalay, for use as a dictionary key or argument.
+func NLLanguageMalay() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageMalay"))) }
 
-// NLLanguageMalayalam returns the string constant NLLanguageMalayalam as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageMalayalam() objc.ID {
-	if _r := raw.NLLanguageMalayalam(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageMalayalam returns the string constant NLLanguageMalayalam, for use as a dictionary key or argument.
+func NLLanguageMalayalam() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageMalayalam")))
 }
 
-// NLLanguageMarathi returns the string constant NLLanguageMarathi as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageMarathi() objc.ID {
-	if _r := raw.NLLanguageMarathi(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageMarathi returns the string constant NLLanguageMarathi, for use as a dictionary key or argument.
+func NLLanguageMarathi() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageMarathi"))) }
 
-// NLLanguageMongolian returns the string constant NLLanguageMongolian as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageMongolian() objc.ID {
-	if _r := raw.NLLanguageMongolian(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageMongolian returns the string constant NLLanguageMongolian, for use as a dictionary key or argument.
+func NLLanguageMongolian() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageMongolian")))
 }
 
-// NLLanguageNorwegian returns the string constant NLLanguageNorwegian as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageNorwegian() objc.ID {
-	if _r := raw.NLLanguageNorwegian(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageNorwegian returns the string constant NLLanguageNorwegian, for use as a dictionary key or argument.
+func NLLanguageNorwegian() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageNorwegian")))
 }
 
-// NLLanguageOriya returns the string constant NLLanguageOriya as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageOriya() objc.ID {
-	if _r := raw.NLLanguageOriya(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageOriya returns the string constant NLLanguageOriya, for use as a dictionary key or argument.
+func NLLanguageOriya() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageOriya"))) }
 
-// NLLanguagePersian returns the string constant NLLanguagePersian as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguagePersian() objc.ID {
-	if _r := raw.NLLanguagePersian(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguagePersian returns the string constant NLLanguagePersian, for use as a dictionary key or argument.
+func NLLanguagePersian() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguagePersian"))) }
 
-// NLLanguagePolish returns the string constant NLLanguagePolish as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguagePolish() objc.ID {
-	if _r := raw.NLLanguagePolish(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguagePolish returns the string constant NLLanguagePolish, for use as a dictionary key or argument.
+func NLLanguagePolish() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguagePolish"))) }
 
-// NLLanguagePortuguese returns the string constant NLLanguagePortuguese as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguagePortuguese() objc.ID {
-	if _r := raw.NLLanguagePortuguese(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguagePortuguese returns the string constant NLLanguagePortuguese, for use as a dictionary key or argument.
+func NLLanguagePortuguese() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguagePortuguese")))
 }
 
-// NLLanguagePunjabi returns the string constant NLLanguagePunjabi as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguagePunjabi() objc.ID {
-	if _r := raw.NLLanguagePunjabi(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguagePunjabi returns the string constant NLLanguagePunjabi, for use as a dictionary key or argument.
+func NLLanguagePunjabi() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguagePunjabi"))) }
 
-// NLLanguageRomanian returns the string constant NLLanguageRomanian as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageRomanian() objc.ID {
-	if _r := raw.NLLanguageRomanian(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageRomanian returns the string constant NLLanguageRomanian, for use as a dictionary key or argument.
+func NLLanguageRomanian() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageRomanian")))
 }
 
-// NLLanguageRussian returns the string constant NLLanguageRussian as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageRussian() objc.ID {
-	if _r := raw.NLLanguageRussian(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageRussian returns the string constant NLLanguageRussian, for use as a dictionary key or argument.
+func NLLanguageRussian() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageRussian"))) }
 
-// NLLanguageSimplifiedChinese returns the string constant NLLanguageSimplifiedChinese as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageSimplifiedChinese() objc.ID {
-	if _r := raw.NLLanguageSimplifiedChinese(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageSimplifiedChinese returns the string constant NLLanguageSimplifiedChinese, for use as a dictionary key or argument.
+func NLLanguageSimplifiedChinese() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageSimplifiedChinese")))
 }
 
-// NLLanguageSinhalese returns the string constant NLLanguageSinhalese as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageSinhalese() objc.ID {
-	if _r := raw.NLLanguageSinhalese(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageSinhalese returns the string constant NLLanguageSinhalese, for use as a dictionary key or argument.
+func NLLanguageSinhalese() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageSinhalese")))
 }
 
-// NLLanguageSlovak returns the string constant NLLanguageSlovak as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageSlovak() objc.ID {
-	if _r := raw.NLLanguageSlovak(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageSlovak returns the string constant NLLanguageSlovak, for use as a dictionary key or argument.
+func NLLanguageSlovak() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageSlovak"))) }
 
-// NLLanguageSpanish returns the string constant NLLanguageSpanish as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageSpanish() objc.ID {
-	if _r := raw.NLLanguageSpanish(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageSpanish returns the string constant NLLanguageSpanish, for use as a dictionary key or argument.
+func NLLanguageSpanish() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageSpanish"))) }
 
-// NLLanguageSwedish returns the string constant NLLanguageSwedish as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageSwedish() objc.ID {
-	if _r := raw.NLLanguageSwedish(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageSwedish returns the string constant NLLanguageSwedish, for use as a dictionary key or argument.
+func NLLanguageSwedish() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageSwedish"))) }
 
-// NLLanguageTamil returns the string constant NLLanguageTamil as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageTamil() objc.ID {
-	if _r := raw.NLLanguageTamil(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageTamil returns the string constant NLLanguageTamil, for use as a dictionary key or argument.
+func NLLanguageTamil() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageTamil"))) }
 
-// NLLanguageTelugu returns the string constant NLLanguageTelugu as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageTelugu() objc.ID {
-	if _r := raw.NLLanguageTelugu(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageTelugu returns the string constant NLLanguageTelugu, for use as a dictionary key or argument.
+func NLLanguageTelugu() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageTelugu"))) }
 
-// NLLanguageThai returns the string constant NLLanguageThai as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageThai() objc.ID {
-	if _r := raw.NLLanguageThai(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageThai returns the string constant NLLanguageThai, for use as a dictionary key or argument.
+func NLLanguageThai() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageThai"))) }
 
-// NLLanguageTibetan returns the string constant NLLanguageTibetan as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageTibetan() objc.ID {
-	if _r := raw.NLLanguageTibetan(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageTibetan returns the string constant NLLanguageTibetan, for use as a dictionary key or argument.
+func NLLanguageTibetan() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageTibetan"))) }
 
-// NLLanguageTraditionalChinese returns the string constant NLLanguageTraditionalChinese as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageTraditionalChinese() objc.ID {
-	if _r := raw.NLLanguageTraditionalChinese(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageTraditionalChinese returns the string constant NLLanguageTraditionalChinese, for use as a dictionary key or argument.
+func NLLanguageTraditionalChinese() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageTraditionalChinese")))
 }
 
-// NLLanguageTurkish returns the string constant NLLanguageTurkish as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageTurkish() objc.ID {
-	if _r := raw.NLLanguageTurkish(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageTurkish returns the string constant NLLanguageTurkish, for use as a dictionary key or argument.
+func NLLanguageTurkish() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageTurkish"))) }
 
-// NLLanguageUkrainian returns the string constant NLLanguageUkrainian as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageUkrainian() objc.ID {
-	if _r := raw.NLLanguageUkrainian(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageUkrainian returns the string constant NLLanguageUkrainian, for use as a dictionary key or argument.
+func NLLanguageUkrainian() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageUkrainian")))
 }
 
-// NLLanguageUrdu returns the string constant NLLanguageUrdu as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageUrdu() objc.ID {
-	if _r := raw.NLLanguageUrdu(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageUrdu returns the string constant NLLanguageUrdu, for use as a dictionary key or argument.
+func NLLanguageUrdu() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageUrdu"))) }
 
-// NLLanguageVietnamese returns the string constant NLLanguageVietnamese as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageVietnamese() objc.ID {
-	if _r := raw.NLLanguageVietnamese(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLLanguageVietnamese returns the string constant NLLanguageVietnamese, for use as a dictionary key or argument.
+func NLLanguageVietnamese() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLLanguageVietnamese")))
 }
 
-// NLLanguageKazakh returns the string constant NLLanguageKazakh as an objc.ID, for use as a dictionary key or selector argument.
-func NLLanguageKazakh() objc.ID {
-	if _r := raw.NLLanguageKazakh(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLLanguageKazakh returns the string constant NLLanguageKazakh, for use as a dictionary key or argument.
+func NLLanguageKazakh() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLLanguageKazakh"))) }
 
-// NLScriptUndetermined returns the string constant NLScriptUndetermined as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptUndetermined() objc.ID {
-	if _r := raw.NLScriptUndetermined(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLScriptUndetermined returns the string constant NLScriptUndetermined, for use as a dictionary key or argument.
+func NLScriptUndetermined() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLScriptUndetermined")))
 }
 
-// NLScriptArabic returns the string constant NLScriptArabic as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptArabic() objc.ID {
-	if _r := raw.NLScriptArabic(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptArabic returns the string constant NLScriptArabic, for use as a dictionary key or argument.
+func NLScriptArabic() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptArabic"))) }
 
-// NLScriptArmenian returns the string constant NLScriptArmenian as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptArmenian() objc.ID {
-	if _r := raw.NLScriptArmenian(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptArmenian returns the string constant NLScriptArmenian, for use as a dictionary key or argument.
+func NLScriptArmenian() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptArmenian"))) }
 
-// NLScriptBengali returns the string constant NLScriptBengali as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptBengali() objc.ID {
-	if _r := raw.NLScriptBengali(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptBengali returns the string constant NLScriptBengali, for use as a dictionary key or argument.
+func NLScriptBengali() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptBengali"))) }
 
-// NLScriptCanadianAboriginalSyllabics returns the string constant NLScriptCanadianAboriginalSyllabics as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptCanadianAboriginalSyllabics() objc.ID {
-	if _r := raw.NLScriptCanadianAboriginalSyllabics(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLScriptCanadianAboriginalSyllabics returns the string constant NLScriptCanadianAboriginalSyllabics, for use as a dictionary key or argument.
+func NLScriptCanadianAboriginalSyllabics() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLScriptCanadianAboriginalSyllabics")))
 }
 
-// NLScriptCherokee returns the string constant NLScriptCherokee as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptCherokee() objc.ID {
-	if _r := raw.NLScriptCherokee(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptCherokee returns the string constant NLScriptCherokee, for use as a dictionary key or argument.
+func NLScriptCherokee() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptCherokee"))) }
 
-// NLScriptCyrillic returns the string constant NLScriptCyrillic as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptCyrillic() objc.ID {
-	if _r := raw.NLScriptCyrillic(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptCyrillic returns the string constant NLScriptCyrillic, for use as a dictionary key or argument.
+func NLScriptCyrillic() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptCyrillic"))) }
 
-// NLScriptDevanagari returns the string constant NLScriptDevanagari as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptDevanagari() objc.ID {
-	if _r := raw.NLScriptDevanagari(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLScriptDevanagari returns the string constant NLScriptDevanagari, for use as a dictionary key or argument.
+func NLScriptDevanagari() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLScriptDevanagari")))
 }
 
-// NLScriptEthiopic returns the string constant NLScriptEthiopic as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptEthiopic() objc.ID {
-	if _r := raw.NLScriptEthiopic(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptEthiopic returns the string constant NLScriptEthiopic, for use as a dictionary key or argument.
+func NLScriptEthiopic() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptEthiopic"))) }
 
-// NLScriptGeorgian returns the string constant NLScriptGeorgian as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptGeorgian() objc.ID {
-	if _r := raw.NLScriptGeorgian(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptGeorgian returns the string constant NLScriptGeorgian, for use as a dictionary key or argument.
+func NLScriptGeorgian() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptGeorgian"))) }
 
-// NLScriptGreek returns the string constant NLScriptGreek as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptGreek() objc.ID {
-	if _r := raw.NLScriptGreek(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptGreek returns the string constant NLScriptGreek, for use as a dictionary key or argument.
+func NLScriptGreek() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptGreek"))) }
 
-// NLScriptGujarati returns the string constant NLScriptGujarati as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptGujarati() objc.ID {
-	if _r := raw.NLScriptGujarati(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptGujarati returns the string constant NLScriptGujarati, for use as a dictionary key or argument.
+func NLScriptGujarati() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptGujarati"))) }
 
-// NLScriptGurmukhi returns the string constant NLScriptGurmukhi as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptGurmukhi() objc.ID {
-	if _r := raw.NLScriptGurmukhi(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptGurmukhi returns the string constant NLScriptGurmukhi, for use as a dictionary key or argument.
+func NLScriptGurmukhi() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptGurmukhi"))) }
 
-// NLScriptHebrew returns the string constant NLScriptHebrew as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptHebrew() objc.ID {
-	if _r := raw.NLScriptHebrew(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptHebrew returns the string constant NLScriptHebrew, for use as a dictionary key or argument.
+func NLScriptHebrew() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptHebrew"))) }
 
-// NLScriptJapanese returns the string constant NLScriptJapanese as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptJapanese() objc.ID {
-	if _r := raw.NLScriptJapanese(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptJapanese returns the string constant NLScriptJapanese, for use as a dictionary key or argument.
+func NLScriptJapanese() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptJapanese"))) }
 
-// NLScriptKannada returns the string constant NLScriptKannada as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptKannada() objc.ID {
-	if _r := raw.NLScriptKannada(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptKannada returns the string constant NLScriptKannada, for use as a dictionary key or argument.
+func NLScriptKannada() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptKannada"))) }
 
-// NLScriptKhmer returns the string constant NLScriptKhmer as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptKhmer() objc.ID {
-	if _r := raw.NLScriptKhmer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptKhmer returns the string constant NLScriptKhmer, for use as a dictionary key or argument.
+func NLScriptKhmer() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptKhmer"))) }
 
-// NLScriptKorean returns the string constant NLScriptKorean as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptKorean() objc.ID {
-	if _r := raw.NLScriptKorean(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptKorean returns the string constant NLScriptKorean, for use as a dictionary key or argument.
+func NLScriptKorean() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptKorean"))) }
 
-// NLScriptLao returns the string constant NLScriptLao as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptLao() objc.ID {
-	if _r := raw.NLScriptLao(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptLao returns the string constant NLScriptLao, for use as a dictionary key or argument.
+func NLScriptLao() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptLao"))) }
 
-// NLScriptLatin returns the string constant NLScriptLatin as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptLatin() objc.ID {
-	if _r := raw.NLScriptLatin(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptLatin returns the string constant NLScriptLatin, for use as a dictionary key or argument.
+func NLScriptLatin() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptLatin"))) }
 
-// NLScriptMalayalam returns the string constant NLScriptMalayalam as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptMalayalam() objc.ID {
-	if _r := raw.NLScriptMalayalam(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptMalayalam returns the string constant NLScriptMalayalam, for use as a dictionary key or argument.
+func NLScriptMalayalam() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptMalayalam"))) }
 
-// NLScriptMongolian returns the string constant NLScriptMongolian as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptMongolian() objc.ID {
-	if _r := raw.NLScriptMongolian(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptMongolian returns the string constant NLScriptMongolian, for use as a dictionary key or argument.
+func NLScriptMongolian() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptMongolian"))) }
 
-// NLScriptMyanmar returns the string constant NLScriptMyanmar as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptMyanmar() objc.ID {
-	if _r := raw.NLScriptMyanmar(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptMyanmar returns the string constant NLScriptMyanmar, for use as a dictionary key or argument.
+func NLScriptMyanmar() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptMyanmar"))) }
 
-// NLScriptOriya returns the string constant NLScriptOriya as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptOriya() objc.ID {
-	if _r := raw.NLScriptOriya(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptOriya returns the string constant NLScriptOriya, for use as a dictionary key or argument.
+func NLScriptOriya() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptOriya"))) }
 
-// NLScriptSimplifiedChinese returns the string constant NLScriptSimplifiedChinese as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptSimplifiedChinese() objc.ID {
-	if _r := raw.NLScriptSimplifiedChinese(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLScriptSimplifiedChinese returns the string constant NLScriptSimplifiedChinese, for use as a dictionary key or argument.
+func NLScriptSimplifiedChinese() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLScriptSimplifiedChinese")))
 }
 
-// NLScriptSinhala returns the string constant NLScriptSinhala as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptSinhala() objc.ID {
-	if _r := raw.NLScriptSinhala(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptSinhala returns the string constant NLScriptSinhala, for use as a dictionary key or argument.
+func NLScriptSinhala() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptSinhala"))) }
 
-// NLScriptTamil returns the string constant NLScriptTamil as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptTamil() objc.ID {
-	if _r := raw.NLScriptTamil(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptTamil returns the string constant NLScriptTamil, for use as a dictionary key or argument.
+func NLScriptTamil() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptTamil"))) }
 
-// NLScriptTelugu returns the string constant NLScriptTelugu as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptTelugu() objc.ID {
-	if _r := raw.NLScriptTelugu(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptTelugu returns the string constant NLScriptTelugu, for use as a dictionary key or argument.
+func NLScriptTelugu() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptTelugu"))) }
 
-// NLScriptThai returns the string constant NLScriptThai as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptThai() objc.ID {
-	if _r := raw.NLScriptThai(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptThai returns the string constant NLScriptThai, for use as a dictionary key or argument.
+func NLScriptThai() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptThai"))) }
 
-// NLScriptTibetan returns the string constant NLScriptTibetan as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptTibetan() objc.ID {
-	if _r := raw.NLScriptTibetan(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLScriptTibetan returns the string constant NLScriptTibetan, for use as a dictionary key or argument.
+func NLScriptTibetan() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLScriptTibetan"))) }
 
-// NLScriptTraditionalChinese returns the string constant NLScriptTraditionalChinese as an objc.ID, for use as a dictionary key or selector argument.
-func NLScriptTraditionalChinese() objc.ID {
-	if _r := raw.NLScriptTraditionalChinese(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLScriptTraditionalChinese returns the string constant NLScriptTraditionalChinese, for use as a dictionary key or argument.
+func NLScriptTraditionalChinese() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLScriptTraditionalChinese")))
 }
 
 // A key that identifies the supported languages in a contextual embedding.
-// NLContextualEmbeddingKeyLanguages returns the string constant NLContextualEmbeddingKeyLanguages as an objc.ID, for use as a dictionary key or selector argument.
-func NLContextualEmbeddingKeyLanguages() objc.ID {
-	if _r := raw.NLContextualEmbeddingKeyLanguages(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLContextualEmbeddingKeyLanguages returns the string constant NLContextualEmbeddingKeyLanguages, for use as a dictionary key or argument.
+func NLContextualEmbeddingKeyLanguages() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLContextualEmbeddingKeyLanguages")))
 }
 
 // A key that identifies the writing system that the language uses in a contextual embedding.
-// NLContextualEmbeddingKeyScripts returns the string constant NLContextualEmbeddingKeyScripts as an objc.ID, for use as a dictionary key or selector argument.
-func NLContextualEmbeddingKeyScripts() objc.ID {
-	if _r := raw.NLContextualEmbeddingKeyScripts(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLContextualEmbeddingKeyScripts returns the string constant NLContextualEmbeddingKeyScripts, for use as a dictionary key or argument.
+func NLContextualEmbeddingKeyScripts() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLContextualEmbeddingKeyScripts")))
 }
 
 // A key that identifies the version number the contextual embedding uses.
-// NLContextualEmbeddingKeyRevision returns the string constant NLContextualEmbeddingKeyRevision as an objc.ID, for use as a dictionary key or selector argument.
-func NLContextualEmbeddingKeyRevision() objc.ID {
-	if _r := raw.NLContextualEmbeddingKeyRevision(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLContextualEmbeddingKeyRevision returns the string constant NLContextualEmbeddingKeyRevision, for use as a dictionary key or argument.
+func NLContextualEmbeddingKeyRevision() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLContextualEmbeddingKeyRevision")))
 }
 
-// NLTagSchemeTokenType returns the string constant NLTagSchemeTokenType as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagSchemeTokenType() objc.ID {
-	if _r := raw.NLTagSchemeTokenType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLTagSchemeTokenType returns the string constant NLTagSchemeTokenType, for use as a dictionary key or argument.
+func NLTagSchemeTokenType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLTagSchemeTokenType")))
 }
 
-// NLTagSchemeLexicalClass returns the string constant NLTagSchemeLexicalClass as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagSchemeLexicalClass() objc.ID {
-	if _r := raw.NLTagSchemeLexicalClass(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLTagSchemeLexicalClass returns the string constant NLTagSchemeLexicalClass, for use as a dictionary key or argument.
+func NLTagSchemeLexicalClass() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLTagSchemeLexicalClass")))
 }
 
-// NLTagSchemeNameType returns the string constant NLTagSchemeNameType as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagSchemeNameType() objc.ID {
-	if _r := raw.NLTagSchemeNameType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLTagSchemeNameType returns the string constant NLTagSchemeNameType, for use as a dictionary key or argument.
+func NLTagSchemeNameType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLTagSchemeNameType")))
 }
 
-// NLTagSchemeNameTypeOrLexicalClass returns the string constant NLTagSchemeNameTypeOrLexicalClass as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagSchemeNameTypeOrLexicalClass() objc.ID {
-	if _r := raw.NLTagSchemeNameTypeOrLexicalClass(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLTagSchemeNameTypeOrLexicalClass returns the string constant NLTagSchemeNameTypeOrLexicalClass, for use as a dictionary key or argument.
+func NLTagSchemeNameTypeOrLexicalClass() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLTagSchemeNameTypeOrLexicalClass")))
 }
 
-// NLTagSchemeLemma returns the string constant NLTagSchemeLemma as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagSchemeLemma() objc.ID {
-	if _r := raw.NLTagSchemeLemma(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLTagSchemeLemma returns the string constant NLTagSchemeLemma, for use as a dictionary key or argument.
+func NLTagSchemeLemma() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagSchemeLemma"))) }
+
+// NLTagSchemeLanguage returns the string constant NLTagSchemeLanguage, for use as a dictionary key or argument.
+func NLTagSchemeLanguage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLTagSchemeLanguage")))
 }
 
-// NLTagSchemeLanguage returns the string constant NLTagSchemeLanguage as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagSchemeLanguage() objc.ID {
-	if _r := raw.NLTagSchemeLanguage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLTagSchemeScript returns the string constant NLTagSchemeScript, for use as a dictionary key or argument.
+func NLTagSchemeScript() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagSchemeScript"))) }
+
+// NLTagSchemeSentimentScore returns the string constant NLTagSchemeSentimentScore, for use as a dictionary key or argument.
+func NLTagSchemeSentimentScore() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLTagSchemeSentimentScore")))
 }
 
-// NLTagSchemeScript returns the string constant NLTagSchemeScript as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagSchemeScript() objc.ID {
-	if _r := raw.NLTagSchemeScript(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLTagWord returns the string constant NLTagWord, for use as a dictionary key or argument.
+func NLTagWord() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagWord"))) }
+
+// NLTagPunctuation returns the string constant NLTagPunctuation, for use as a dictionary key or argument.
+func NLTagPunctuation() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagPunctuation"))) }
+
+// NLTagWhitespace returns the string constant NLTagWhitespace, for use as a dictionary key or argument.
+func NLTagWhitespace() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagWhitespace"))) }
+
+// NLTagOther returns the string constant NLTagOther, for use as a dictionary key or argument.
+func NLTagOther() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagOther"))) }
+
+// NLTagNoun returns the string constant NLTagNoun, for use as a dictionary key or argument.
+func NLTagNoun() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagNoun"))) }
+
+// NLTagVerb returns the string constant NLTagVerb, for use as a dictionary key or argument.
+func NLTagVerb() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagVerb"))) }
+
+// NLTagAdjective returns the string constant NLTagAdjective, for use as a dictionary key or argument.
+func NLTagAdjective() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagAdjective"))) }
+
+// NLTagAdverb returns the string constant NLTagAdverb, for use as a dictionary key or argument.
+func NLTagAdverb() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagAdverb"))) }
+
+// NLTagPronoun returns the string constant NLTagPronoun, for use as a dictionary key or argument.
+func NLTagPronoun() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagPronoun"))) }
+
+// NLTagDeterminer returns the string constant NLTagDeterminer, for use as a dictionary key or argument.
+func NLTagDeterminer() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagDeterminer"))) }
+
+// NLTagParticle returns the string constant NLTagParticle, for use as a dictionary key or argument.
+func NLTagParticle() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagParticle"))) }
+
+// NLTagPreposition returns the string constant NLTagPreposition, for use as a dictionary key or argument.
+func NLTagPreposition() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagPreposition"))) }
+
+// NLTagNumber returns the string constant NLTagNumber, for use as a dictionary key or argument.
+func NLTagNumber() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagNumber"))) }
+
+// NLTagConjunction returns the string constant NLTagConjunction, for use as a dictionary key or argument.
+func NLTagConjunction() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagConjunction"))) }
+
+// NLTagInterjection returns the string constant NLTagInterjection, for use as a dictionary key or argument.
+func NLTagInterjection() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagInterjection"))) }
+
+// NLTagClassifier returns the string constant NLTagClassifier, for use as a dictionary key or argument.
+func NLTagClassifier() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagClassifier"))) }
+
+// NLTagIdiom returns the string constant NLTagIdiom, for use as a dictionary key or argument.
+func NLTagIdiom() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagIdiom"))) }
+
+// NLTagOtherWord returns the string constant NLTagOtherWord, for use as a dictionary key or argument.
+func NLTagOtherWord() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagOtherWord"))) }
+
+// NLTagSentenceTerminator returns the string constant NLTagSentenceTerminator, for use as a dictionary key or argument.
+func NLTagSentenceTerminator() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLTagSentenceTerminator")))
 }
 
-// NLTagSchemeSentimentScore returns the string constant NLTagSchemeSentimentScore as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagSchemeSentimentScore() objc.ID {
-	if _r := raw.NLTagSchemeSentimentScore(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLTagOpenQuote returns the string constant NLTagOpenQuote, for use as a dictionary key or argument.
+func NLTagOpenQuote() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagOpenQuote"))) }
+
+// NLTagCloseQuote returns the string constant NLTagCloseQuote, for use as a dictionary key or argument.
+func NLTagCloseQuote() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagCloseQuote"))) }
+
+// NLTagOpenParenthesis returns the string constant NLTagOpenParenthesis, for use as a dictionary key or argument.
+func NLTagOpenParenthesis() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLTagOpenParenthesis")))
 }
 
-// NLTagWord returns the string constant NLTagWord as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagWord() objc.ID {
-	if _r := raw.NLTagWord(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLTagCloseParenthesis returns the string constant NLTagCloseParenthesis, for use as a dictionary key or argument.
+func NLTagCloseParenthesis() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLTagCloseParenthesis")))
 }
 
-// NLTagPunctuation returns the string constant NLTagPunctuation as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagPunctuation() objc.ID {
-	if _r := raw.NLTagPunctuation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLTagWordJoiner returns the string constant NLTagWordJoiner, for use as a dictionary key or argument.
+func NLTagWordJoiner() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagWordJoiner"))) }
+
+// NLTagDash returns the string constant NLTagDash, for use as a dictionary key or argument.
+func NLTagDash() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagDash"))) }
+
+// NLTagOtherPunctuation returns the string constant NLTagOtherPunctuation, for use as a dictionary key or argument.
+func NLTagOtherPunctuation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLTagOtherPunctuation")))
 }
 
-// NLTagWhitespace returns the string constant NLTagWhitespace as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagWhitespace() objc.ID {
-	if _r := raw.NLTagWhitespace(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLTagParagraphBreak returns the string constant NLTagParagraphBreak, for use as a dictionary key or argument.
+func NLTagParagraphBreak() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLTagParagraphBreak")))
 }
 
-// NLTagOther returns the string constant NLTagOther as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagOther() objc.ID {
-	if _r := raw.NLTagOther(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLTagOtherWhitespace returns the string constant NLTagOtherWhitespace, for use as a dictionary key or argument.
+func NLTagOtherWhitespace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLTagOtherWhitespace")))
 }
 
-// NLTagNoun returns the string constant NLTagNoun as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagNoun() objc.ID {
-	if _r := raw.NLTagNoun(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLTagPersonalName returns the string constant NLTagPersonalName, for use as a dictionary key or argument.
+func NLTagPersonalName() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagPersonalName"))) }
 
-// NLTagVerb returns the string constant NLTagVerb as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagVerb() objc.ID {
-	if _r := raw.NLTagVerb(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NLTagPlaceName returns the string constant NLTagPlaceName, for use as a dictionary key or argument.
+func NLTagPlaceName() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NLTagPlaceName"))) }
 
-// NLTagAdjective returns the string constant NLTagAdjective as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagAdjective() objc.ID {
-	if _r := raw.NLTagAdjective(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagAdverb returns the string constant NLTagAdverb as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagAdverb() objc.ID {
-	if _r := raw.NLTagAdverb(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagPronoun returns the string constant NLTagPronoun as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagPronoun() objc.ID {
-	if _r := raw.NLTagPronoun(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagDeterminer returns the string constant NLTagDeterminer as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagDeterminer() objc.ID {
-	if _r := raw.NLTagDeterminer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagParticle returns the string constant NLTagParticle as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagParticle() objc.ID {
-	if _r := raw.NLTagParticle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagPreposition returns the string constant NLTagPreposition as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagPreposition() objc.ID {
-	if _r := raw.NLTagPreposition(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagNumber returns the string constant NLTagNumber as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagNumber() objc.ID {
-	if _r := raw.NLTagNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagConjunction returns the string constant NLTagConjunction as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagConjunction() objc.ID {
-	if _r := raw.NLTagConjunction(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagInterjection returns the string constant NLTagInterjection as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagInterjection() objc.ID {
-	if _r := raw.NLTagInterjection(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagClassifier returns the string constant NLTagClassifier as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagClassifier() objc.ID {
-	if _r := raw.NLTagClassifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagIdiom returns the string constant NLTagIdiom as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagIdiom() objc.ID {
-	if _r := raw.NLTagIdiom(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagOtherWord returns the string constant NLTagOtherWord as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagOtherWord() objc.ID {
-	if _r := raw.NLTagOtherWord(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagSentenceTerminator returns the string constant NLTagSentenceTerminator as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagSentenceTerminator() objc.ID {
-	if _r := raw.NLTagSentenceTerminator(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagOpenQuote returns the string constant NLTagOpenQuote as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagOpenQuote() objc.ID {
-	if _r := raw.NLTagOpenQuote(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagCloseQuote returns the string constant NLTagCloseQuote as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagCloseQuote() objc.ID {
-	if _r := raw.NLTagCloseQuote(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagOpenParenthesis returns the string constant NLTagOpenParenthesis as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagOpenParenthesis() objc.ID {
-	if _r := raw.NLTagOpenParenthesis(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagCloseParenthesis returns the string constant NLTagCloseParenthesis as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagCloseParenthesis() objc.ID {
-	if _r := raw.NLTagCloseParenthesis(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagWordJoiner returns the string constant NLTagWordJoiner as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagWordJoiner() objc.ID {
-	if _r := raw.NLTagWordJoiner(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagDash returns the string constant NLTagDash as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagDash() objc.ID {
-	if _r := raw.NLTagDash(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagOtherPunctuation returns the string constant NLTagOtherPunctuation as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagOtherPunctuation() objc.ID {
-	if _r := raw.NLTagOtherPunctuation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagParagraphBreak returns the string constant NLTagParagraphBreak as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagParagraphBreak() objc.ID {
-	if _r := raw.NLTagParagraphBreak(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagOtherWhitespace returns the string constant NLTagOtherWhitespace as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagOtherWhitespace() objc.ID {
-	if _r := raw.NLTagOtherWhitespace(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagPersonalName returns the string constant NLTagPersonalName as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagPersonalName() objc.ID {
-	if _r := raw.NLTagPersonalName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagPlaceName returns the string constant NLTagPlaceName as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagPlaceName() objc.ID {
-	if _r := raw.NLTagPlaceName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NLTagOrganizationName returns the string constant NLTagOrganizationName as an objc.ID, for use as a dictionary key or selector argument.
-func NLTagOrganizationName() objc.ID {
-	if _r := raw.NLTagOrganizationName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NLTagOrganizationName returns the string constant NLTagOrganizationName, for use as a dictionary key or argument.
+func NLTagOrganizationName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NLTagOrganizationName")))
 }

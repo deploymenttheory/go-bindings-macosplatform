@@ -5,137 +5,128 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterIdentify wraps [raw.MTRClusterIdentify] with a fluent Go API.
+// MTRClusterIdentify is an idiomatic wrapper over the Objective-C class MTRClusterIdentify.
 type MTRClusterIdentify struct {
-	inner *raw.MTRClusterIdentify
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterIdentify].
-func (x *MTRClusterIdentify) Unwrap() *raw.MTRClusterIdentify { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterIdentify) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterIdentifyFromID adopts an existing object pointer as a MTRClusterIdentify (nil for 0).
+// MTRClusterIdentifyFromID adopts an existing Objective-C object as a MTRClusterIdentify
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterIdentifyFromID(id objc.ID) *MTRClusterIdentify {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterIdentify{inner: raw.MTRClusterIdentifyFromID(id)}
+	x := &MTRClusterIdentify{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterIdentifyAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterIdentify (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterIdentifyAdopt(id objc.ID) *MTRClusterIdentify {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterIdentify{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterIdentify) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterIdentify) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterIdentify) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterIdentifyWithDeviceEndpointIDQueue creates a new [MTRClusterIdentify].
-func NewMTRClusterIdentifyWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterIdentify {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterIdentify")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterIdentify{inner: raw.MTRClusterIdentifyFromID(_id)}
+// NewMTRClusterIdentifyWithDeviceEndpointIDQueue creates a new MTRClusterIdentify.
+func NewMTRClusterIdentifyWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterIdentify {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterIdentify")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterIdentifyAdopt(_id)
 }
 
-// NewMTRClusterIdentifyWithDeviceEndpointQueue creates a new [MTRClusterIdentify].
-func NewMTRClusterIdentifyWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterIdentify {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterIdentify")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterIdentify{inner: raw.MTRClusterIdentifyFromID(_id)}
+// NewMTRClusterIdentifyWithDeviceEndpointQueue creates a new MTRClusterIdentify.
+func NewMTRClusterIdentifyWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterIdentify {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterIdentify")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterIdentifyAdopt(_id)
 }
 
-// IdentifyWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying IdentifyWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterIdentify) IdentifyWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRIdentifyClusterIdentifyParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.IdentifyWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterIdentify) ReadAttributeIdentifyTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeIdentifyTimeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// TriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying TriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterIdentify) TriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRIdentifyClusterTriggerEffectParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.TriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterIdentify) WriteAttributeIdentifyTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeIdentifyTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeIdentifyTimeWithParams calls the underlying ReadAttributeIdentifyTimeWithParams.
-func (x *MTRClusterIdentify) ReadAttributeIdentifyTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeIdentifyTimeWithParams(params)
+func (x *MTRClusterIdentify) WriteAttributeIdentifyTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeIdentifyTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeIdentifyTimeWithValueExpectedValueInterval calls the underlying WriteAttributeIdentifyTimeWithValueExpectedValueInterval.
-func (x *MTRClusterIdentify) WriteAttributeIdentifyTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeIdentifyTimeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterIdentify) ReadAttributeIdentifyTypeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeIdentifyTypeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeIdentifyTimeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeIdentifyTimeWithValueExpectedValueIntervalParams.
-func (x *MTRClusterIdentify) WriteAttributeIdentifyTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeIdentifyTimeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterIdentify) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeIdentifyTypeWithParams calls the underlying ReadAttributeIdentifyTypeWithParams.
-func (x *MTRClusterIdentify) ReadAttributeIdentifyTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeIdentifyTypeWithParams(params)
+func (x *MTRClusterIdentify) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterIdentify) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterIdentify) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterIdentify) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterIdentify) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterIdentify) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
-}
-
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterIdentify) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterIdentify) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-// IdentifyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying IdentifyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterIdentify) IdentifyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRIdentifyClusterIdentifyParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.IdentifyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// TriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying TriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterIdentify) TriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRIdentifyClusterTriggerEffectParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.TriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-func (x *MTRClusterIdentify) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterIdentify) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterIdentify) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterIdentifyable is the interface implemented by [MTRClusterIdentify], for mocking and DI.
 type MTRClusterIdentifyable interface {
-	Unwrap() *raw.MTRClusterIdentify
-	IdentifyWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRIdentifyClusterIdentifyParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	TriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRIdentifyClusterTriggerEffectParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeIdentifyTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeIdentifyTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeIdentifyTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeIdentifyTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	IdentifyWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRIdentifyClusterIdentifyParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	TriggerEffectWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRIdentifyClusterTriggerEffectParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	obj.Object
+	ReadAttributeIdentifyTimeWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeIdentifyTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeIdentifyTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeIdentifyTypeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterIdentifyable = (*MTRClusterIdentify)(nil)

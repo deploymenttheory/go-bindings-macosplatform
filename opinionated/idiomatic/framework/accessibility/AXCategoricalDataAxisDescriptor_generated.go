@@ -5,73 +5,83 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that represents an axis of categorical data.
 //
-// CategoricalDataAxisDescriptor wraps [raw.AXCategoricalDataAxisDescriptor] with a fluent Go API.
+// CategoricalDataAxisDescriptor is an idiomatic wrapper over the Objective-C class AXCategoricalDataAxisDescriptor.
 type CategoricalDataAxisDescriptor struct {
-	inner *raw.AXCategoricalDataAxisDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AXCategoricalDataAxisDescriptor].
-func (x *CategoricalDataAxisDescriptor) Unwrap() *raw.AXCategoricalDataAxisDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CategoricalDataAxisDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// CategoricalDataAxisDescriptorFromID adopts an existing object pointer as a CategoricalDataAxisDescriptor (nil for 0).
+// CategoricalDataAxisDescriptorFromID adopts an existing Objective-C object as a CategoricalDataAxisDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func CategoricalDataAxisDescriptorFromID(id objc.ID) *CategoricalDataAxisDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &CategoricalDataAxisDescriptor{inner: raw.AXCategoricalDataAxisDescriptorFromID(id)}
+	x := &CategoricalDataAxisDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// categoricalDataAxisDescriptorAdopt wraps an Objective-C object that this code just created as a
+// CategoricalDataAxisDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func categoricalDataAxisDescriptorAdopt(id objc.ID) *CategoricalDataAxisDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &CategoricalDataAxisDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CategoricalDataAxisDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CategoricalDataAxisDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CategoricalDataAxisDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a categorical data axis with the specified title and an array of categories in the specified order.
 //
-// NewCategoricalDataAxisDescriptorWithTitleCategoryOrder creates a new [CategoricalDataAxisDescriptor].
-func NewCategoricalDataAxisDescriptorWithTitleCategoryOrder(title string, categoryOrder *foundation.NSArray[*foundation.NSString]) *CategoricalDataAxisDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXCategoricalDataAxisDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:categoryOrder:"), foundation.NSStringStringWithUTF8String(title).Ptr(), categoryOrder.Ptr())
-	return &CategoricalDataAxisDescriptor{inner: raw.AXCategoricalDataAxisDescriptorFromID(_id)}
+// NewCategoricalDataAxisDescriptorWithTitleCategoryOrder creates a new CategoricalDataAxisDescriptor.
+func NewCategoricalDataAxisDescriptorWithTitleCategoryOrder(title string, categoryOrder []string) *CategoricalDataAxisDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AXCategoricalDataAxisDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:categoryOrder:"), purego.NSString(title), purego.SliceToNSArray(categoryOrder, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return categoricalDataAxisDescriptorAdopt(_id)
 }
 
 // Creates a categorical data axis with the specified attributed title and an array of categories in the specified order.
 //
-// NewCategoricalDataAxisDescriptorWithAttributedTitleCategoryOrder creates a new [CategoricalDataAxisDescriptor].
-func NewCategoricalDataAxisDescriptorWithAttributedTitleCategoryOrder(attributedTitle *foundation.NSAttributedString, categoryOrder *foundation.NSArray[*foundation.NSString]) *CategoricalDataAxisDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXCategoricalDataAxisDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttributedTitle:categoryOrder:"), attributedTitle.Ptr(), categoryOrder.Ptr())
-	return &CategoricalDataAxisDescriptor{inner: raw.AXCategoricalDataAxisDescriptorFromID(_id)}
+// NewCategoricalDataAxisDescriptorWithAttributedTitleCategoryOrder creates a new CategoricalDataAxisDescriptor.
+func NewCategoricalDataAxisDescriptorWithAttributedTitleCategoryOrder(attributedTitle obj.Object, categoryOrder []string) *CategoricalDataAxisDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AXCategoricalDataAxisDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttributedTitle:categoryOrder:"), objref.IDOf(attributedTitle), purego.SliceToNSArray(categoryOrder, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return categoricalDataAxisDescriptorAdopt(_id)
 }
 
 // A list of every category value for the axis in the order they appear visually in the graph or legend.
 //
-// WithCategoryOrder sets the collection, converting the Go slice to an NSArray.
-func (x *CategoricalDataAxisDescriptor) WithCategoryOrder(items ...*foundation.NSString) *CategoricalDataAxisDescriptor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetCategoryOrder(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetCategoryOrder(_arr)
+// WithCategoryOrder sets the collection and returns the receiver so calls can be chained.
+func (x *CategoricalDataAxisDescriptor) WithCategoryOrder(items ...obj.Object) *CategoricalDataAxisDescriptor {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryOrder:"), _arr)
 	return x
 }
 
@@ -79,26 +89,20 @@ func (x *CategoricalDataAxisDescriptor) WithCategoryOrder(items ...*foundation.N
 //
 // CategoryOrder returns the collection as a Go slice.
 func (x *CategoricalDataAxisDescriptor) CategoryOrder() []string {
-	arr := x.inner.CategoryOrder()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("categoryOrder"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetCategoryOrder calls the underlying SetCategoryOrder.
-func (x *CategoricalDataAxisDescriptor) SetCategoryOrder(categoryOrder *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetCategoryOrder(categoryOrder)
+func (x *CategoricalDataAxisDescriptor) SetCategoryOrder(categoryOrder []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryOrder:"), purego.SliceToNSArray(categoryOrder, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // CategoricalDataAxisDescriptorable is the interface implemented by [CategoricalDataAxisDescriptor], for mocking and DI.
 type CategoricalDataAxisDescriptorable interface {
-	Unwrap() *raw.AXCategoricalDataAxisDescriptor
-	WithCategoryOrder(items ...*foundation.NSString) *CategoricalDataAxisDescriptor
+	obj.Object
+	WithCategoryOrder(items ...obj.Object) *CategoricalDataAxisDescriptor
 	CategoryOrder() []string
-	SetCategoryOrder(categoryOrder *foundation.NSArray[*foundation.NSString])
+	SetCategoryOrder(categoryOrder []string)
 }
 
 var _ CategoricalDataAxisDescriptorable = (*CategoricalDataAxisDescriptor)(nil)

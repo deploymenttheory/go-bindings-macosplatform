@@ -1,11 +1,12 @@
 {{/*
-    providers.tmpl — one provider interface per abstract base class: the
-    as<Base>() accessor a concrete wrapper exposes so it can be passed wherever
-    that base is accepted (the idiomatic stand-in for an abstract superclass).
+    providers.tmpl renders, for an Objective-C class that has subclasses, an
+    interface used to accept "any of its subclasses" as a method or property
+    value. The interface is satisfied by any wrapper object, because it embeds
+    objref.Object.
 */}}
-{{define "providers"}}{{range .Items}}// {{.IfaceName}} is implemented by {{.GoTypeName}} and any idiomatic type wrapping a {{.BaseName}} subclass.
+{{define "providers"}}{{range .Items}}// {{.IfaceName}} is accepted wherever a {{.BaseName}} (or one of its subclasses) is expected.
 type {{.IfaceName}} interface {
-{{.MethName}}() {{.RawType}}
+objref.Object
 }
 
 {{end}}{{end}}

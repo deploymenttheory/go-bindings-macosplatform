@@ -5,117 +5,124 @@
 package sharedfilelist
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedfilelist"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// LSSharedFileListAddObserver calls [raw.LSSharedFileListAddObserver] (C function LSSharedFileListAddObserver).
-func LSSharedFileListAddObserver(inList unsafe.Pointer, inRunloop unsafe.Pointer, inRunloopMode unsafe.Pointer, callback unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.LSSharedFileListAddObserver(inList, inRunloop, inRunloopMode, callback, context_)
+var _fnLSSharedFileListCopyProperty func(objc.ID, objc.ID) objc.ID
+
+// LSSharedFileListCopyProperty calls the SharedFileList framework function LSSharedFileListCopyProperty.
+func LSSharedFileListCopyProperty(inList obj.Object, inPropertyName obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSharedFileListCopyProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSharedFileListCopyProperty, _lib, "LSSharedFileListCopyProperty")
+	}
+	_ret := _fnLSSharedFileListCopyProperty(objref.IDOf(inList), objref.IDOf(inPropertyName))
+	return obj.Wrap(_ret)
 }
 
-// LSSharedFileListCopyProperty calls [raw.LSSharedFileListCopyProperty] (C function LSSharedFileListCopyProperty).
-func LSSharedFileListCopyProperty(inList unsafe.Pointer, inPropertyName unsafe.Pointer) unsafe.Pointer {
-	return raw.LSSharedFileListCopyProperty(inList, inPropertyName)
+var _fnLSSharedFileListCreate func(objc.ID, objc.ID, objc.ID) objc.ID
+
+// LSSharedFileListCreate calls the SharedFileList framework function LSSharedFileListCreate.
+func LSSharedFileListCreate(inAllocator obj.Object, inListType obj.Object, listOptions obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSharedFileListCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSharedFileListCreate, _lib, "LSSharedFileListCreate")
+	}
+	_ret := _fnLSSharedFileListCreate(objref.IDOf(inAllocator), objref.IDOf(inListType), objref.IDOf(listOptions))
+	return obj.Wrap(_ret)
 }
 
-// LSSharedFileListCopySnapshot calls [raw.LSSharedFileListCopySnapshot] (C function LSSharedFileListCopySnapshot).
-func LSSharedFileListCopySnapshot(inList unsafe.Pointer, outSnapshotSeed *uint) unsafe.Pointer {
-	return raw.LSSharedFileListCopySnapshot(inList, outSnapshotSeed)
+var _fnLSSharedFileListGetSeedValue func(objc.ID) int
+
+// LSSharedFileListGetSeedValue calls the SharedFileList framework function LSSharedFileListGetSeedValue.
+func LSSharedFileListGetSeedValue(inList obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSharedFileListGetSeedValue == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSharedFileListGetSeedValue, _lib, "LSSharedFileListGetSeedValue")
+	}
+	return _fnLSSharedFileListGetSeedValue(objref.IDOf(inList))
 }
 
-// LSSharedFileListCreate calls [raw.LSSharedFileListCreate] (C function LSSharedFileListCreate).
-func LSSharedFileListCreate(inAllocator unsafe.Pointer, inListType unsafe.Pointer, listOptions unsafe.Pointer) unsafe.Pointer {
-	return raw.LSSharedFileListCreate(inAllocator, inListType, listOptions)
+var _fnLSSharedFileListGetTypeID func() int
+
+// LSSharedFileListGetTypeID calls the SharedFileList framework function LSSharedFileListGetTypeID.
+func LSSharedFileListGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSharedFileListGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSharedFileListGetTypeID, _lib, "LSSharedFileListGetTypeID")
+	}
+	return _fnLSSharedFileListGetTypeID()
 }
 
-// LSSharedFileListGetSeedValue calls [raw.LSSharedFileListGetSeedValue] (C function LSSharedFileListGetSeedValue).
-func LSSharedFileListGetSeedValue(inList unsafe.Pointer) uint {
-	return raw.LSSharedFileListGetSeedValue(inList)
+var _fnLSSharedFileListInsertItemURL func(objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID, objc.ID) objc.ID
+
+// LSSharedFileListInsertItemURL calls the SharedFileList framework function LSSharedFileListInsertItemURL.
+func LSSharedFileListInsertItemURL(inList obj.Object, insertAfterThisItem obj.Object, inDisplayName obj.Object, inIconRef obj.Object, inURL obj.Object, inPropertiesToSet obj.Object, inPropertiesToClear obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSharedFileListInsertItemURL == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSharedFileListInsertItemURL, _lib, "LSSharedFileListInsertItemURL")
+	}
+	_ret := _fnLSSharedFileListInsertItemURL(objref.IDOf(inList), objref.IDOf(insertAfterThisItem), objref.IDOf(inDisplayName), objref.IDOf(inIconRef), objref.IDOf(inURL), objref.IDOf(inPropertiesToSet), objref.IDOf(inPropertiesToClear))
+	return obj.Wrap(_ret)
 }
 
-// LSSharedFileListGetTypeID calls [raw.LSSharedFileListGetTypeID] (C function LSSharedFileListGetTypeID).
-func LSSharedFileListGetTypeID() uint {
-	return raw.LSSharedFileListGetTypeID()
+var _fnLSSharedFileListItemCopyDisplayName func(objc.ID) objc.ID
+
+// LSSharedFileListItemCopyDisplayName calls the SharedFileList framework function LSSharedFileListItemCopyDisplayName.
+func LSSharedFileListItemCopyDisplayName(inItem obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSharedFileListItemCopyDisplayName == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemCopyDisplayName, _lib, "LSSharedFileListItemCopyDisplayName")
+	}
+	_ret := _fnLSSharedFileListItemCopyDisplayName(objref.IDOf(inItem))
+	return obj.Wrap(_ret)
 }
 
-// LSSharedFileListInsertItemFSRef calls [raw.LSSharedFileListInsertItemFSRef] (C function LSSharedFileListInsertItemFSRef).
-func LSSharedFileListInsertItemFSRef(inList unsafe.Pointer, insertAfterThisItem unsafe.Pointer, inDisplayName unsafe.Pointer, inIconRef unsafe.Pointer, inFSRef *carboncore.FSRef, inPropertiesToSet unsafe.Pointer, inPropertiesToClear unsafe.Pointer) unsafe.Pointer {
-	return raw.LSSharedFileListInsertItemFSRef(inList, insertAfterThisItem, inDisplayName, inIconRef, inFSRef, inPropertiesToSet, inPropertiesToClear)
+var _fnLSSharedFileListItemCopyIconRef func(objc.ID) objc.ID
+
+// LSSharedFileListItemCopyIconRef calls the SharedFileList framework function LSSharedFileListItemCopyIconRef.
+func LSSharedFileListItemCopyIconRef(inItem obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSharedFileListItemCopyIconRef == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemCopyIconRef, _lib, "LSSharedFileListItemCopyIconRef")
+	}
+	_ret := _fnLSSharedFileListItemCopyIconRef(objref.IDOf(inItem))
+	return obj.Wrap(_ret)
 }
 
-// LSSharedFileListInsertItemURL calls [raw.LSSharedFileListInsertItemURL] (C function LSSharedFileListInsertItemURL).
-func LSSharedFileListInsertItemURL(inList unsafe.Pointer, insertAfterThisItem unsafe.Pointer, inDisplayName unsafe.Pointer, inIconRef unsafe.Pointer, inURL unsafe.Pointer, inPropertiesToSet unsafe.Pointer, inPropertiesToClear unsafe.Pointer) unsafe.Pointer {
-	return raw.LSSharedFileListInsertItemURL(inList, insertAfterThisItem, inDisplayName, inIconRef, inURL, inPropertiesToSet, inPropertiesToClear)
+var _fnLSSharedFileListItemCopyProperty func(objc.ID, objc.ID) objc.ID
+
+// LSSharedFileListItemCopyProperty calls the SharedFileList framework function LSSharedFileListItemCopyProperty.
+func LSSharedFileListItemCopyProperty(inItem obj.Object, inPropertyName obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSharedFileListItemCopyProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemCopyProperty, _lib, "LSSharedFileListItemCopyProperty")
+	}
+	_ret := _fnLSSharedFileListItemCopyProperty(objref.IDOf(inItem), objref.IDOf(inPropertyName))
+	return obj.Wrap(_ret)
 }
 
-// LSSharedFileListItemCopyDisplayName calls [raw.LSSharedFileListItemCopyDisplayName] (C function LSSharedFileListItemCopyDisplayName).
-func LSSharedFileListItemCopyDisplayName(inItem unsafe.Pointer) unsafe.Pointer {
-	return raw.LSSharedFileListItemCopyDisplayName(inItem)
+var _fnLSSharedFileListItemGetID func(objc.ID) int
+
+// LSSharedFileListItemGetID calls the SharedFileList framework function LSSharedFileListItemGetID.
+func LSSharedFileListItemGetID(inItem obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSharedFileListItemGetID == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemGetID, _lib, "LSSharedFileListItemGetID")
+	}
+	return _fnLSSharedFileListItemGetID(objref.IDOf(inItem))
 }
 
-// LSSharedFileListItemCopyIconRef calls [raw.LSSharedFileListItemCopyIconRef] (C function LSSharedFileListItemCopyIconRef).
-func LSSharedFileListItemCopyIconRef(inItem unsafe.Pointer) unsafe.Pointer {
-	return raw.LSSharedFileListItemCopyIconRef(inItem)
-}
+var _fnLSSharedFileListItemGetTypeID func() int
 
-// LSSharedFileListItemCopyProperty calls [raw.LSSharedFileListItemCopyProperty] (C function LSSharedFileListItemCopyProperty).
-func LSSharedFileListItemCopyProperty(inItem unsafe.Pointer, inPropertyName unsafe.Pointer) unsafe.Pointer {
-	return raw.LSSharedFileListItemCopyProperty(inItem, inPropertyName)
-}
-
-// LSSharedFileListItemCopyResolvedURL calls [raw.LSSharedFileListItemCopyResolvedURL] (C function LSSharedFileListItemCopyResolvedURL).
-func LSSharedFileListItemCopyResolvedURL(inItem unsafe.Pointer, inFlags uint, outError unsafe.Pointer) unsafe.Pointer {
-	return raw.LSSharedFileListItemCopyResolvedURL(inItem, inFlags, outError)
-}
-
-// LSSharedFileListItemGetID calls [raw.LSSharedFileListItemGetID] (C function LSSharedFileListItemGetID).
-func LSSharedFileListItemGetID(inItem unsafe.Pointer) uint {
-	return raw.LSSharedFileListItemGetID(inItem)
-}
-
-// LSSharedFileListItemGetTypeID calls [raw.LSSharedFileListItemGetTypeID] (C function LSSharedFileListItemGetTypeID).
-func LSSharedFileListItemGetTypeID() uint {
-	return raw.LSSharedFileListItemGetTypeID()
-}
-
-// LSSharedFileListItemMove calls [raw.LSSharedFileListItemMove] (C function LSSharedFileListItemMove).
-func LSSharedFileListItemMove(inList unsafe.Pointer, inItem unsafe.Pointer, inMoveAfterItem unsafe.Pointer) int {
-	return raw.LSSharedFileListItemMove(inList, inItem, inMoveAfterItem)
-}
-
-// LSSharedFileListItemRemove calls [raw.LSSharedFileListItemRemove] (C function LSSharedFileListItemRemove).
-func LSSharedFileListItemRemove(inList unsafe.Pointer, inItem unsafe.Pointer) int {
-	return raw.LSSharedFileListItemRemove(inList, inItem)
-}
-
-// LSSharedFileListItemResolve calls [raw.LSSharedFileListItemResolve] (C function LSSharedFileListItemResolve).
-func LSSharedFileListItemResolve(inItem unsafe.Pointer, inFlags uint, outURL unsafe.Pointer, outRef *carboncore.FSRef) int {
-	return raw.LSSharedFileListItemResolve(inItem, inFlags, outURL, outRef)
-}
-
-// LSSharedFileListItemSetProperty calls [raw.LSSharedFileListItemSetProperty] (C function LSSharedFileListItemSetProperty).
-func LSSharedFileListItemSetProperty(inItem unsafe.Pointer, inPropertyName unsafe.Pointer, inPropertyData unsafe.Pointer) int {
-	return raw.LSSharedFileListItemSetProperty(inItem, inPropertyName, inPropertyData)
-}
-
-// LSSharedFileListRemoveAllItems calls [raw.LSSharedFileListRemoveAllItems] (C function LSSharedFileListRemoveAllItems).
-func LSSharedFileListRemoveAllItems(inList unsafe.Pointer) int {
-	return raw.LSSharedFileListRemoveAllItems(inList)
-}
-
-// LSSharedFileListRemoveObserver calls [raw.LSSharedFileListRemoveObserver] (C function LSSharedFileListRemoveObserver).
-func LSSharedFileListRemoveObserver(inList unsafe.Pointer, inRunloop unsafe.Pointer, inRunloopMode unsafe.Pointer, callback unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.LSSharedFileListRemoveObserver(inList, inRunloop, inRunloopMode, callback, context_)
-}
-
-// LSSharedFileListSetAuthorization calls [raw.LSSharedFileListSetAuthorization] (C function LSSharedFileListSetAuthorization).
-func LSSharedFileListSetAuthorization(inList unsafe.Pointer, inAuthorization unsafe.Pointer) int {
-	return raw.LSSharedFileListSetAuthorization(inList, inAuthorization)
-}
-
-// LSSharedFileListSetProperty calls [raw.LSSharedFileListSetProperty] (C function LSSharedFileListSetProperty).
-func LSSharedFileListSetProperty(inList unsafe.Pointer, inPropertyName unsafe.Pointer, inPropertyData unsafe.Pointer) int {
-	return raw.LSSharedFileListSetProperty(inList, inPropertyName, inPropertyData)
+// LSSharedFileListItemGetTypeID calls the SharedFileList framework function LSSharedFileListItemGetTypeID.
+func LSSharedFileListItemGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSSharedFileListItemGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnLSSharedFileListItemGetTypeID, _lib, "LSSharedFileListItemGetTypeID")
+	}
+	return _fnLSSharedFileListItemGetTypeID()
 }

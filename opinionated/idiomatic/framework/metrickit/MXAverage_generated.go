@@ -5,64 +5,87 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A unit of measure for an average.
 //
-// Average wraps [raw.MXAverage] with a fluent Go API.
+// Average is an idiomatic wrapper over the Objective-C class MXAverage.
 type Average struct {
-	inner *raw.MXAverage[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MXAverage].
-func (x *Average) Unwrap() *raw.MXAverage[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Average) ID() objc.ID { return x.inner.Ptr() }
-
-// AverageFromID adopts an existing object pointer as a Average (nil for 0).
+// AverageFromID adopts an existing Objective-C object as a Average
+// (nil for 0), retaining it and registering a release finalizer.
 func AverageFromID(id objc.ID) *Average {
 	if id == 0 {
 		return nil
 	}
-	return &Average{inner: raw.MXAverageFromID[objc.ID](id)}
+	x := &Average{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAverage creates a new [Average].
+// averageAdopt wraps an Objective-C object that this code just created as a
+// Average (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func averageAdopt(id objc.ID) *Average {
+	if id == 0 {
+		return nil
+	}
+	x := &Average{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Average) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Average) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Average) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAverage creates a new Average.
 func NewAverage() *Average {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXAverage")), objc.RegisterName("new"))
-	return &Average{inner: raw.MXAverageFromID[objc.ID](_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXAverage")), objc.RegisterName("new"))
+	return averageAdopt(_id)
 }
 
-// @property      averageMeasurement @abstract      An NSMeasurement that contains the average measurement.
-//
-// AverageMeasurement calls the underlying AverageMeasurement.
-func (x *Average) AverageMeasurement() *foundation.NSMeasurement[objc.ID] {
-	return x.inner.AverageMeasurement()
+// An NSMeasurement that contains the average measurement.
+func (x *Average) AverageMeasurement() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("averageMeasurement"))
+	return obj.Wrap(_r)
 }
 
-// @property      sampleCount @abstract      An NSInteger representation of the number of samples in the distribution used to formulate the average. @discussion    This value is negative if an unknown number of samples was used to compute the average.
-//
-// SampleCount calls the underlying SampleCount.
+// An NSInteger representation of the number of samples in the distribution used to formulate the average. This value is negative if an unknown number of samples was used to compute the average.
 func (x *Average) SampleCount() int {
-	return x.inner.SampleCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sampleCount"))
+	return _r
 }
 
-// @property      standardDeviation @abstract      An double representation of the standard deviation of the distribution. @discussion    This value is negative an unknown number of samples was used to compute the standard deviation.
-//
-// StandardDeviation calls the underlying StandardDeviation.
+// An double representation of the standard deviation of the distribution. This value is negative an unknown number of samples was used to compute the standard deviation.
 func (x *Average) StandardDeviation() float64 {
-	return x.inner.StandardDeviation()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("standardDeviation"))
+	return _r
 }
 
 // Averageable is the interface implemented by [Average], for mocking and DI.
 type Averageable interface {
-	Unwrap() *raw.MXAverage[objc.ID]
-	AverageMeasurement() *foundation.NSMeasurement[objc.ID]
+	obj.Object
+	AverageMeasurement() obj.Object
 	SampleCount() int
 	StandardDeviation() float64
 }

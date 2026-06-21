@@ -5,62 +5,86 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that defines an inclusive range of zoom values.
 //
-// ZoomRange wraps [raw.AVZoomRange] with a fluent Go API.
+// ZoomRange is an idiomatic wrapper over the Objective-C class AVZoomRange.
 type ZoomRange struct {
-	inner *raw.AVZoomRange
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVZoomRange].
-func (x *ZoomRange) Unwrap() *raw.AVZoomRange { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ZoomRange) ID() objc.ID { return x.inner.Ptr() }
-
-// ZoomRangeFromID adopts an existing object pointer as a ZoomRange (nil for 0).
+// ZoomRangeFromID adopts an existing Objective-C object as a ZoomRange
+// (nil for 0), retaining it and registering a release finalizer.
 func ZoomRangeFromID(id objc.ID) *ZoomRange {
 	if id == 0 {
 		return nil
 	}
-	return &ZoomRange{inner: raw.AVZoomRangeFromID(id)}
+	x := &ZoomRange{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewZoomRange creates a new [ZoomRange].
+// zoomRangeAdopt wraps an Objective-C object that this code just created as a
+// ZoomRange (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func zoomRangeAdopt(id objc.ID) *ZoomRange {
+	if id == 0 {
+		return nil
+	}
+	x := &ZoomRange{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ZoomRange) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ZoomRange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ZoomRange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewZoomRange creates a new ZoomRange.
 func NewZoomRange() *ZoomRange {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVZoomRange")), objc.RegisterName("new"))
-	return &ZoomRange{inner: raw.AVZoomRangeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVZoomRange")), objc.RegisterName("new"))
+	return zoomRangeAdopt(_id)
 }
 
 // Returns a Boolean value that indicates whether the specified zoom factor exists in the range.
-//
-// ContainsZoomFactor calls the underlying ContainsZoomFactor.
 func (x *ZoomRange) ContainsZoomFactor(zoomFactor float64) bool {
-	return x.inner.ContainsZoomFactor(zoomFactor)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsZoomFactor:"), zoomFactor)
+	return _r
 }
 
-// @property minZoomFactor @abstract A CGFloat indicating the minimum zoom factor supported by this range.
-//
-// MinZoomFactor calls the underlying MinZoomFactor.
+// A CGFloat indicating the minimum zoom factor supported by this range.
 func (x *ZoomRange) MinZoomFactor() float64 {
-	return x.inner.MinZoomFactor()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minZoomFactor"))
+	return _r
 }
 
-// @property maxZoomFactor @abstract A CGFloat indicating the maximum zoom factor supported by this range.
-//
-// MaxZoomFactor calls the underlying MaxZoomFactor.
+// A CGFloat indicating the maximum zoom factor supported by this range.
 func (x *ZoomRange) MaxZoomFactor() float64 {
-	return x.inner.MaxZoomFactor()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxZoomFactor"))
+	return _r
 }
 
 // ZoomRangeable is the interface implemented by [ZoomRange], for mocking and DI.
 type ZoomRangeable interface {
-	Unwrap() *raw.AVZoomRange
+	obj.Object
 	ContainsZoomFactor(zoomFactor float64) bool
 	MinZoomFactor() float64
 	MaxZoomFactor() float64

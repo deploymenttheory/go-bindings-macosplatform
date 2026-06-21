@@ -5,82 +5,96 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Information read from the commissionee device during commissioning.
 //
-// MTRCommissioneeInfo wraps [raw.MTRCommissioneeInfo] with a fluent Go API.
+// MTRCommissioneeInfo is an idiomatic wrapper over the Objective-C class MTRCommissioneeInfo.
 type MTRCommissioneeInfo struct {
-	inner *raw.MTRCommissioneeInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRCommissioneeInfo].
-func (x *MTRCommissioneeInfo) Unwrap() *raw.MTRCommissioneeInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRCommissioneeInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRCommissioneeInfoFromID adopts an existing object pointer as a MTRCommissioneeInfo (nil for 0).
+// MTRCommissioneeInfoFromID adopts an existing Objective-C object as a MTRCommissioneeInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRCommissioneeInfoFromID(id objc.ID) *MTRCommissioneeInfo {
 	if id == 0 {
 		return nil
 	}
-	return &MTRCommissioneeInfo{inner: raw.MTRCommissioneeInfoFromID(id)}
+	x := &MTRCommissioneeInfo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRCommissioneeInfo creates a new [MTRCommissioneeInfo].
+// mTRCommissioneeInfoAdopt wraps an Objective-C object that this code just created as a
+// MTRCommissioneeInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRCommissioneeInfoAdopt(id objc.ID) *MTRCommissioneeInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRCommissioneeInfo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRCommissioneeInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRCommissioneeInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRCommissioneeInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRCommissioneeInfo creates a new MTRCommissioneeInfo.
 func NewMTRCommissioneeInfo() *MTRCommissioneeInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRCommissioneeInfo")), objc.RegisterName("new"))
-	return &MTRCommissioneeInfo{inner: raw.MTRCommissioneeInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRCommissioneeInfo")), objc.RegisterName("new"))
+	return mTRCommissioneeInfoAdopt(_id)
 }
 
 // The product identity (VID / PID) of the commissionee.
-//
-// ProductIdentity calls the underlying ProductIdentity.
 func (x *MTRCommissioneeInfo) ProductIdentity() *MTRProductIdentity {
-	_r := x.inner.ProductIdentity()
-	if _r == nil {
-		return nil
-	}
-	return &MTRProductIdentity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentity"))
+	return MTRProductIdentityFromID(_r)
 }
 
 // Endpoint information for all endpoints of the commissionee. Will be present only if readEndpointInformation is set to YES on MTRCommissioningParameters. Use `rootEndpoint` and `-[MTREndpointInfo children]` to traverse endpoints in composition order.
-//
-// EndpointsById calls the underlying EndpointsById.
-func (x *MTRCommissioneeInfo) EndpointsById() *foundation.NSDictionary[*foundation.NSNumber, *raw.MTREndpointInfo] {
-	return x.inner.EndpointsById()
+func (x *MTRCommissioneeInfo) EndpointsById() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpointsById"))
+	return obj.Wrap(_r)
 }
 
 // Endpoint information for the root endpoint of the commissionee. Will be present only if readEndpointInformation is set to YES on MTRCommissioningParameters.
-//
-// RootEndpoint calls the underlying RootEndpoint.
 func (x *MTRCommissioneeInfo) RootEndpoint() *MTREndpointInfo {
-	_r := x.inner.RootEndpoint()
-	if _r == nil {
-		return nil
-	}
-	return &MTREndpointInfo{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootEndpoint"))
+	return MTREndpointInfoFromID(_r)
 }
 
 // Attributes that were read from the commissionee.  This will contain the following, if they are available: 1) The attributes in extraAttributesToRead on MTRCommissioningParameters. 2) The FeatureMap attributes of all Network Commissioning clusters on the commissionee.
-//
-// Attributes calls the underlying Attributes.
-func (x *MTRCommissioneeInfo) Attributes() *foundation.NSDictionary[*raw.MTRAttributePath, objc.ID] {
-	return x.inner.Attributes()
+func (x *MTRCommissioneeInfo) Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+	return obj.Wrap(_r)
 }
 
 // MTRCommissioneeInfoable is the interface implemented by [MTRCommissioneeInfo], for mocking and DI.
 type MTRCommissioneeInfoable interface {
-	Unwrap() *raw.MTRCommissioneeInfo
+	obj.Object
 	ProductIdentity() *MTRProductIdentity
-	EndpointsById() *foundation.NSDictionary[*foundation.NSNumber, *raw.MTREndpointInfo]
+	EndpointsById() obj.Object
 	RootEndpoint() *MTREndpointInfo
-	Attributes() *foundation.NSDictionary[*raw.MTRAttributePath, objc.ID]
+	Attributes() obj.Object
 }
 
 var _ MTRCommissioneeInfoable = (*MTRCommissioneeInfo)(nil)

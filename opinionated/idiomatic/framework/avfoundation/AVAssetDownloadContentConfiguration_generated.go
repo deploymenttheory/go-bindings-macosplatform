@@ -5,86 +5,80 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A configuration object that contains variant qualifiers and media options.
 //
-// AssetDownloadContentConfiguration wraps [raw.AVAssetDownloadContentConfiguration] with a fluent Go API.
+// AssetDownloadContentConfiguration is an idiomatic wrapper over the Objective-C class AVAssetDownloadContentConfiguration.
 type AssetDownloadContentConfiguration struct {
-	inner *raw.AVAssetDownloadContentConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetDownloadContentConfiguration].
-func (x *AssetDownloadContentConfiguration) Unwrap() *raw.AVAssetDownloadContentConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetDownloadContentConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetDownloadContentConfigurationFromID adopts an existing object pointer as a AssetDownloadContentConfiguration (nil for 0).
+// AssetDownloadContentConfigurationFromID adopts an existing Objective-C object as a AssetDownloadContentConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetDownloadContentConfigurationFromID(id objc.ID) *AssetDownloadContentConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &AssetDownloadContentConfiguration{inner: raw.AVAssetDownloadContentConfigurationFromID(id)}
+	x := &AssetDownloadContentConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAssetDownloadContentConfiguration creates a new [AssetDownloadContentConfiguration].
+// assetDownloadContentConfigurationAdopt wraps an Objective-C object that this code just created as a
+// AssetDownloadContentConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetDownloadContentConfigurationAdopt(id objc.ID) *AssetDownloadContentConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetDownloadContentConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetDownloadContentConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetDownloadContentConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetDownloadContentConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAssetDownloadContentConfiguration creates a new AssetDownloadContentConfiguration.
 func NewAssetDownloadContentConfiguration() *AssetDownloadContentConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetDownloadContentConfiguration")), objc.RegisterName("new"))
-	return &AssetDownloadContentConfiguration{inner: raw.AVAssetDownloadContentConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetDownloadContentConfiguration")), objc.RegisterName("new"))
+	return assetDownloadContentConfigurationAdopt(_id)
 }
 
 // The variant qualifiers for this configuration.
 //
-// WithVariantQualifiers sets the collection, converting the Go slice to an NSArray.
-func (x *AssetDownloadContentConfiguration) WithVariantQualifiers(items ...*raw.AVAssetVariantQualifier) *AssetDownloadContentConfiguration {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetVariantQualifiers(foundation.NSArrayFromID[*raw.AVAssetVariantQualifier](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.AVAssetVariantQualifier](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetVariantQualifiers(_arr)
+// WithVariantQualifiers sets the collection and returns the receiver so calls can be chained.
+func (x *AssetDownloadContentConfiguration) WithVariantQualifiers(items ...*AssetVariantQualifier) *AssetDownloadContentConfiguration {
+	_arr := purego.SliceToNSArray(items, func(_v *AssetVariantQualifier) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariantQualifiers:"), _arr)
 	return x
 }
 
 // The media selections of an asset that a task downloads.
 //
-// WithMediaSelections sets the collection, converting the Go slice to an NSArray.
+// WithMediaSelections sets the collection and returns the receiver so calls can be chained.
 func (x *AssetDownloadContentConfiguration) WithMediaSelections(items ...MediaSelectionProvider) *AssetDownloadContentConfiguration {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetMediaSelections(foundation.NSArrayFromID[*raw.AVMediaSelection](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asMediaSelection().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.AVMediaSelection](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetMediaSelections(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v MediaSelectionProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaSelections:"), _arr)
 	return x
 }
 
@@ -92,58 +86,35 @@ func (x *AssetDownloadContentConfiguration) WithMediaSelections(items ...MediaSe
 //
 // VariantQualifiers returns the collection as a Go slice.
 func (x *AssetDownloadContentConfiguration) VariantQualifiers() []*AssetVariantQualifier {
-	arr := x.inner.VariantQualifiers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetVariantQualifier {
-		return &AssetVariantQualifier{inner: raw.AVAssetVariantQualifierFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variantQualifiers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetVariantQualifier { return AssetVariantQualifierFromID(_id) })
 }
 
-// SetVariantQualifiers calls the underlying SetVariantQualifiers.
-func (x *AssetDownloadContentConfiguration) SetVariantQualifiers(variantQualifiers *foundation.NSArray[*raw.AVAssetVariantQualifier]) {
-	x.inner.SetVariantQualifiers(variantQualifiers)
+func (x *AssetDownloadContentConfiguration) SetVariantQualifiers(variantQualifiers []*AssetVariantQualifier) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariantQualifiers:"), purego.SliceToNSArray(variantQualifiers, func(_v *AssetVariantQualifier) objc.ID { return objref.IDOf(_v) }))
 }
 
 // An array of media selections obtained from the AVAsset. If a media selection is not provided, automatic media selection associated with the asset will be used.
 //
 // MediaSelections returns the collection as a Go slice.
 func (x *AssetDownloadContentConfiguration) MediaSelections() []*MediaSelection {
-	arr := x.inner.MediaSelections()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MediaSelection {
-		return &MediaSelection{inner: raw.AVMediaSelectionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSelections"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaSelection { return MediaSelectionFromID(_id) })
 }
 
-// SetMediaSelections calls the underlying SetMediaSelections.
-func (x *AssetDownloadContentConfiguration) SetMediaSelections(mediaSelections ...MediaSelectionProvider) {
-	_ptrs := make([]objc.ID, len(mediaSelections))
-	for _i, _v := range mediaSelections {
-		_ptrs[_i] = _v.asMediaSelection().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.AVMediaSelection]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.AVMediaSelection](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.AVMediaSelection](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetMediaSelections(_arg0)
+func (x *AssetDownloadContentConfiguration) SetMediaSelections(mediaSelections []*MediaSelection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaSelections:"), purego.SliceToNSArray(mediaSelections, func(_v *MediaSelection) objc.ID { return objref.IDOf(_v) }))
 }
 
 // AssetDownloadContentConfigurationable is the interface implemented by [AssetDownloadContentConfiguration], for mocking and DI.
 type AssetDownloadContentConfigurationable interface {
-	Unwrap() *raw.AVAssetDownloadContentConfiguration
-	WithVariantQualifiers(items ...*raw.AVAssetVariantQualifier) *AssetDownloadContentConfiguration
+	obj.Object
+	WithVariantQualifiers(items ...*AssetVariantQualifier) *AssetDownloadContentConfiguration
 	WithMediaSelections(items ...MediaSelectionProvider) *AssetDownloadContentConfiguration
 	VariantQualifiers() []*AssetVariantQualifier
-	SetVariantQualifiers(variantQualifiers *foundation.NSArray[*raw.AVAssetVariantQualifier])
+	SetVariantQualifiers(variantQualifiers []*AssetVariantQualifier)
 	MediaSelections() []*MediaSelection
-	SetMediaSelections(mediaSelections ...MediaSelectionProvider)
+	SetMediaSelections(mediaSelections []*MediaSelection)
 }
 
 var _ AssetDownloadContentConfigurationable = (*AssetDownloadContentConfiguration)(nil)

@@ -5,41 +5,68 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Styles for a scroll view’s edge effect.
 //
-// ScrollEdgeEffectStyle wraps [raw.NSScrollEdgeEffectStyle] with a fluent Go API.
+// ScrollEdgeEffectStyle is an idiomatic wrapper over the Objective-C class NSScrollEdgeEffectStyle.
 type ScrollEdgeEffectStyle struct {
-	inner *raw.NSScrollEdgeEffectStyle
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSScrollEdgeEffectStyle].
-func (x *ScrollEdgeEffectStyle) Unwrap() *raw.NSScrollEdgeEffectStyle { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScrollEdgeEffectStyle) ID() objc.ID { return x.inner.Ptr() }
-
-// ScrollEdgeEffectStyleFromID adopts an existing object pointer as a ScrollEdgeEffectStyle (nil for 0).
+// ScrollEdgeEffectStyleFromID adopts an existing Objective-C object as a ScrollEdgeEffectStyle
+// (nil for 0), retaining it and registering a release finalizer.
 func ScrollEdgeEffectStyleFromID(id objc.ID) *ScrollEdgeEffectStyle {
 	if id == 0 {
 		return nil
 	}
-	return &ScrollEdgeEffectStyle{inner: raw.NSScrollEdgeEffectStyleFromID(id)}
+	x := &ScrollEdgeEffectStyle{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewScrollEdgeEffectStyle creates a new [ScrollEdgeEffectStyle].
+// scrollEdgeEffectStyleAdopt wraps an Objective-C object that this code just created as a
+// ScrollEdgeEffectStyle (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scrollEdgeEffectStyleAdopt(id objc.ID) *ScrollEdgeEffectStyle {
+	if id == 0 {
+		return nil
+	}
+	x := &ScrollEdgeEffectStyle{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScrollEdgeEffectStyle) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScrollEdgeEffectStyle) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScrollEdgeEffectStyle) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScrollEdgeEffectStyle creates a new ScrollEdgeEffectStyle.
 func NewScrollEdgeEffectStyle() *ScrollEdgeEffectStyle {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScrollEdgeEffectStyle")), objc.RegisterName("new"))
-	return &ScrollEdgeEffectStyle{inner: raw.NSScrollEdgeEffectStyleFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSScrollEdgeEffectStyle")), objc.RegisterName("new"))
+	return scrollEdgeEffectStyleAdopt(_id)
 }
 
 // ScrollEdgeEffectStyleable is the interface implemented by [ScrollEdgeEffectStyle], for mocking and DI.
 type ScrollEdgeEffectStyleable interface {
-	Unwrap() *raw.NSScrollEdgeEffectStyle
+	obj.Object
 }
 
 var _ ScrollEdgeEffectStyleable = (*ScrollEdgeEffectStyle)(nil)

@@ -5,88 +5,98 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMProcessingInstruction wraps [raw.DOMProcessingInstruction] with a fluent Go API.
+// DOMProcessingInstruction is an idiomatic wrapper over the Objective-C class DOMProcessingInstruction.
 type DOMProcessingInstruction struct {
-	inner *raw.DOMProcessingInstruction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMProcessingInstruction].
-func (x *DOMProcessingInstruction) Unwrap() *raw.DOMProcessingInstruction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMProcessingInstruction) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMProcessingInstructionFromID adopts an existing object pointer as a DOMProcessingInstruction (nil for 0).
+// DOMProcessingInstructionFromID adopts an existing Objective-C object as a DOMProcessingInstruction
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMProcessingInstructionFromID(id objc.ID) *DOMProcessingInstruction {
 	if id == 0 {
 		return nil
 	}
-	return &DOMProcessingInstruction{inner: raw.DOMProcessingInstructionFromID(id)}
+	x := &DOMProcessingInstruction{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDOMProcessingInstruction creates a new [DOMProcessingInstruction].
+// dOMProcessingInstructionAdopt wraps an Objective-C object that this code just created as a
+// DOMProcessingInstruction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMProcessingInstructionAdopt(id objc.ID) *DOMProcessingInstruction {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMProcessingInstruction{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DOMProcessingInstruction) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMProcessingInstruction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMProcessingInstruction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMProcessingInstruction creates a new DOMProcessingInstruction.
 func NewDOMProcessingInstruction() *DOMProcessingInstruction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMProcessingInstruction")), objc.RegisterName("new"))
-	return &DOMProcessingInstruction{inner: raw.DOMProcessingInstructionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMProcessingInstruction")), objc.RegisterName("new"))
+	return dOMProcessingInstructionAdopt(_id)
 }
 
-// WithData sets the data property and returns the receiver for chaining.
+// WithData sets data and returns the receiver so calls can be chained.
 func (x *DOMProcessingInstruction) WithData(data string) *DOMProcessingInstruction {
-	x.inner.DOMCharacterData.SetData(foundation.NSStringStringWithUTF8String(data))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 	return x
 }
 
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
 func (x *DOMProcessingInstruction) WithNodeValue(nodeValue string) *DOMProcessingInstruction {
-	x.inner.DOMCharacterData.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets the prefix property and returns the receiver for chaining.
+// WithPrefix sets prefix and returns the receiver so calls can be chained.
 func (x *DOMProcessingInstruction) WithPrefix(prefix string) *DOMProcessingInstruction {
-	x.inner.DOMCharacterData.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets the textContent property and returns the receiver for chaining.
+// WithTextContent sets textContent and returns the receiver so calls can be chained.
 func (x *DOMProcessingInstruction) WithTextContent(textContent string) *DOMProcessingInstruction {
-	x.inner.DOMCharacterData.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
-// Target calls the underlying Target.
 func (x *DOMProcessingInstruction) Target() string {
-	_r := x.inner.Target()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *DOMProcessingInstruction) asDOMCharacterData() *raw.DOMCharacterData {
-	return &x.inner.DOMCharacterData
-}
-
-func (x *DOMProcessingInstruction) asDOMNode() *raw.DOMNode { return &x.inner.DOMCharacterData.DOMNode }
-
-func (x *DOMProcessingInstruction) asDOMObject() *raw.DOMObject {
-	return &x.inner.DOMCharacterData.DOMNode.DOMObject
-}
-
-func (x *DOMProcessingInstruction) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMCharacterData.DOMNode.DOMObject.WebScriptObject
+	return purego.GoString(_r)
 }
 
 // DOMProcessingInstructionable is the interface implemented by [DOMProcessingInstruction], for mocking and DI.
 type DOMProcessingInstructionable interface {
-	Unwrap() *raw.DOMProcessingInstruction
+	obj.Object
 	WithData(data string) *DOMProcessingInstruction
 	WithNodeValue(nodeValue string) *DOMProcessingInstruction
 	WithPrefix(prefix string) *DOMProcessingInstruction

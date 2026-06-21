@@ -5,75 +5,91 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a participant in a coordinated playback session.
 //
-// CoordinatedPlaybackParticipant wraps [raw.AVCoordinatedPlaybackParticipant] with a fluent Go API.
+// CoordinatedPlaybackParticipant is an idiomatic wrapper over the Objective-C class AVCoordinatedPlaybackParticipant.
 type CoordinatedPlaybackParticipant struct {
-	inner *raw.AVCoordinatedPlaybackParticipant
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCoordinatedPlaybackParticipant].
-func (x *CoordinatedPlaybackParticipant) Unwrap() *raw.AVCoordinatedPlaybackParticipant {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CoordinatedPlaybackParticipant) ID() objc.ID { return x.inner.Ptr() }
-
-// CoordinatedPlaybackParticipantFromID adopts an existing object pointer as a CoordinatedPlaybackParticipant (nil for 0).
+// CoordinatedPlaybackParticipantFromID adopts an existing Objective-C object as a CoordinatedPlaybackParticipant
+// (nil for 0), retaining it and registering a release finalizer.
 func CoordinatedPlaybackParticipantFromID(id objc.ID) *CoordinatedPlaybackParticipant {
 	if id == 0 {
 		return nil
 	}
-	return &CoordinatedPlaybackParticipant{inner: raw.AVCoordinatedPlaybackParticipantFromID(id)}
+	x := &CoordinatedPlaybackParticipant{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCoordinatedPlaybackParticipant creates a new [CoordinatedPlaybackParticipant].
+// coordinatedPlaybackParticipantAdopt wraps an Objective-C object that this code just created as a
+// CoordinatedPlaybackParticipant (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func coordinatedPlaybackParticipantAdopt(id objc.ID) *CoordinatedPlaybackParticipant {
+	if id == 0 {
+		return nil
+	}
+	x := &CoordinatedPlaybackParticipant{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CoordinatedPlaybackParticipant) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CoordinatedPlaybackParticipant) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CoordinatedPlaybackParticipant) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCoordinatedPlaybackParticipant creates a new CoordinatedPlaybackParticipant.
 func NewCoordinatedPlaybackParticipant() *CoordinatedPlaybackParticipant {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCoordinatedPlaybackParticipant")), objc.RegisterName("new"))
-	return &CoordinatedPlaybackParticipant{inner: raw.AVCoordinatedPlaybackParticipantFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCoordinatedPlaybackParticipant")), objc.RegisterName("new"))
+	return coordinatedPlaybackParticipantAdopt(_id)
 }
 
 // The reason, if any, this participant is currently not participating in coordinated playback.
 //
 // SuspensionReasons returns the collection as a Go slice.
-func (x *CoordinatedPlaybackParticipant) SuspensionReasons() []*foundation.NSString {
-	arr := x.inner.SuspensionReasons()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *CoordinatedPlaybackParticipant) SuspensionReasons() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suspensionReasons"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // YES if the participant is ready to play.
-//
-// IsReadyToPlay calls the underlying IsReadyToPlay.
 func (x *CoordinatedPlaybackParticipant) IsReadyToPlay() bool {
-	return x.inner.IsReadyToPlay()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadyToPlay"))
+	return _r
 }
 
 // A unique id for the participant. Use this identifier to distinguish participants.
-//
-// Identifier calls the underlying Identifier.
-func (x *CoordinatedPlaybackParticipant) Identifier() *foundation.NSUUID {
-	return x.inner.Identifier()
+func (x *CoordinatedPlaybackParticipant) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	return obj.Wrap(_r)
 }
 
 // CoordinatedPlaybackParticipantable is the interface implemented by [CoordinatedPlaybackParticipant], for mocking and DI.
 type CoordinatedPlaybackParticipantable interface {
-	Unwrap() *raw.AVCoordinatedPlaybackParticipant
-	SuspensionReasons() []*foundation.NSString
+	obj.Object
+	SuspensionReasons() []obj.Object
 	IsReadyToPlay() bool
-	Identifier() *foundation.NSUUID
+	Identifier() obj.Object
 }
 
 var _ CoordinatedPlaybackParticipantable = (*CoordinatedPlaybackParticipant)(nil)

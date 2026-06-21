@@ -6,53 +6,77 @@ package videosubscriberaccount
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videosubscriberaccount"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The object that coordinates your app’s user account actions.
 //
-// VSUserAccountManager wraps [raw.VSUserAccountManager] with a fluent Go API.
+// VSUserAccountManager is an idiomatic wrapper over the Objective-C class VSUserAccountManager.
 type VSUserAccountManager struct {
-	inner *raw.VSUserAccountManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VSUserAccountManager].
-func (x *VSUserAccountManager) Unwrap() *raw.VSUserAccountManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VSUserAccountManager) ID() objc.ID { return x.inner.Ptr() }
-
-// VSUserAccountManagerFromID adopts an existing object pointer as a VSUserAccountManager (nil for 0).
+// VSUserAccountManagerFromID adopts an existing Objective-C object as a VSUserAccountManager
+// (nil for 0), retaining it and registering a release finalizer.
 func VSUserAccountManagerFromID(id objc.ID) *VSUserAccountManager {
 	if id == 0 {
 		return nil
 	}
-	return &VSUserAccountManager{inner: raw.VSUserAccountManagerFromID(id)}
+	x := &VSUserAccountManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVSUserAccountManager creates a new [VSUserAccountManager].
+// vSUserAccountManagerAdopt wraps an Objective-C object that this code just created as a
+// VSUserAccountManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vSUserAccountManagerAdopt(id objc.ID) *VSUserAccountManager {
+	if id == 0 {
+		return nil
+	}
+	x := &VSUserAccountManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VSUserAccountManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VSUserAccountManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VSUserAccountManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVSUserAccountManager creates a new VSUserAccountManager.
 func NewVSUserAccountManager() *VSUserAccountManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VSUserAccountManager")), objc.RegisterName("new"))
-	return &VSUserAccountManager{inner: raw.VSUserAccountManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VSUserAccountManager")), objc.RegisterName("new"))
+	return vSUserAccountManagerAdopt(_id)
 }
 
 // Registers a new user account.
 //
 // UpdateUserAccountCompletion blocks until the operation completes or ctx is cancelled.
-func (x *VSUserAccountManager) UpdateUserAccountCompletion(ctx context.Context, account *raw.VSUserAccount) error {
+func (x *VSUserAccountManager) UpdateUserAccountCompletion(ctx context.Context, account *VSUserAccount) error {
 	_ch := make(chan error, 1)
-	x.inner.UpdateUserAccountCompletion(account, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateUserAccount:completion:"), objref.IDOf(account), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -64,25 +88,24 @@ func (x *VSUserAccountManager) UpdateUserAccountCompletion(ctx context.Context, 
 // Returns a list of registered user accounts for your app.
 //
 // QueryUserAccountsWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *VSUserAccountManager) QueryUserAccountsWithOptionsCompletion(ctx context.Context, options VSUserAccountQueryOptions) (*foundation.NSArray[*raw.VSUserAccount], error) {
+func (x *VSUserAccountManager) QueryUserAccountsWithOptionsCompletion(ctx context.Context, options VSUserAccountQueryOptions) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.VSUserAccount]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.QueryUserAccountsWithOptionsCompletion(raw.VSUserAccountQueryOptions(options), func(_p0 *foundation.NSArray[*raw.VSUserAccount], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queryUserAccountsWithOptions:completion:"), options, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.VSUserAccount]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -96,16 +119,13 @@ func (x *VSUserAccountManager) QueryAutoSignInToken(ctx context.Context) (*VSAut
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.QueryAutoSignInTokenWithCompletionHandler(func(_p0 *raw.VSAutoSignInToken, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &VSAutoSignInToken{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = VSAutoSignInTokenFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queryAutoSignInTokenWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -120,13 +140,12 @@ func (x *VSUserAccountManager) QueryAutoSignInToken(ctx context.Context) (*VSAut
 // DeleteAutoSignInToken blocks until the operation completes or ctx is cancelled.
 func (x *VSUserAccountManager) DeleteAutoSignInToken(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.DeleteAutoSignInTokenWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteAutoSignInTokenWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -137,9 +156,9 @@ func (x *VSUserAccountManager) DeleteAutoSignInToken(ctx context.Context) error 
 
 // VSUserAccountManagerable is the interface implemented by [VSUserAccountManager], for mocking and DI.
 type VSUserAccountManagerable interface {
-	Unwrap() *raw.VSUserAccountManager
-	UpdateUserAccountCompletion(ctx context.Context, account *raw.VSUserAccount) error
-	QueryUserAccountsWithOptionsCompletion(ctx context.Context, options VSUserAccountQueryOptions) (*foundation.NSArray[*raw.VSUserAccount], error)
+	obj.Object
+	UpdateUserAccountCompletion(ctx context.Context, account *VSUserAccount) error
+	QueryUserAccountsWithOptionsCompletion(ctx context.Context, options VSUserAccountQueryOptions) (obj.Object, error)
 	QueryAutoSignInToken(ctx context.Context) (*VSAutoSignInToken, error)
 	DeleteAutoSignInToken(ctx context.Context) error
 }

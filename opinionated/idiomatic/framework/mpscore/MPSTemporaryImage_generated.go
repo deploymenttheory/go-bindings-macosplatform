@@ -5,70 +5,93 @@
 package mpscore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// TemporaryImage wraps [raw.MPSTemporaryImage] with a fluent Go API.
+// TemporaryImage is an idiomatic wrapper over the Objective-C class MPSTemporaryImage.
 type TemporaryImage struct {
-	inner *raw.MPSTemporaryImage
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSTemporaryImage].
-func (x *TemporaryImage) Unwrap() *raw.MPSTemporaryImage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TemporaryImage) ID() objc.ID { return x.inner.Ptr() }
-
-// TemporaryImageFromID adopts an existing object pointer as a TemporaryImage (nil for 0).
+// TemporaryImageFromID adopts an existing Objective-C object as a TemporaryImage
+// (nil for 0), retaining it and registering a release finalizer.
 func TemporaryImageFromID(id objc.ID) *TemporaryImage {
 	if id == 0 {
 		return nil
 	}
-	return &TemporaryImage{inner: raw.MPSTemporaryImageFromID(id)}
+	x := &TemporaryImage{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTemporaryImage creates a new [TemporaryImage].
+// temporaryImageAdopt wraps an Objective-C object that this code just created as a
+// TemporaryImage (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func temporaryImageAdopt(id objc.ID) *TemporaryImage {
+	if id == 0 {
+		return nil
+	}
+	x := &TemporaryImage{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TemporaryImage) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TemporaryImage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TemporaryImage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTemporaryImage creates a new TemporaryImage.
 func NewTemporaryImage() *TemporaryImage {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSTemporaryImage")), objc.RegisterName("new"))
-	return &TemporaryImage{inner: raw.MPSTemporaryImageFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSTemporaryImage")), objc.RegisterName("new"))
+	return temporaryImageAdopt(_id)
 }
 
-// WithReadCount sets the readCount property and returns the receiver for chaining.
-func (x *TemporaryImage) WithReadCount(readCount uint) *TemporaryImage {
-	x.inner.SetReadCount(readCount)
+// WithReadCount sets readCount and returns the receiver so calls can be chained.
+func (x *TemporaryImage) WithReadCount(readCount int) *TemporaryImage {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// A string to help identify this object.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *TemporaryImage) WithLabel(label string) *TemporaryImage {
-	x.inner.MPSImage.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// ReadCount calls the underlying ReadCount.
-func (x *TemporaryImage) ReadCount() uint {
-	return x.inner.ReadCount()
+func (x *TemporaryImage) ReadCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("readCount"))
+	return _r
 }
 
-// SetReadCount calls the underlying SetReadCount.
-func (x *TemporaryImage) SetReadCount(readCount uint) {
-	x.inner.SetReadCount(readCount)
+func (x *TemporaryImage) SetReadCount(readCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 }
-
-func (x *TemporaryImage) asImage() *raw.MPSImage { return &x.inner.MPSImage }
 
 // TemporaryImageable is the interface implemented by [TemporaryImage], for mocking and DI.
 type TemporaryImageable interface {
-	Unwrap() *raw.MPSTemporaryImage
-	WithReadCount(readCount uint) *TemporaryImage
+	obj.Object
+	WithReadCount(readCount int) *TemporaryImage
 	WithLabel(label string) *TemporaryImage
-	ReadCount() uint
-	SetReadCount(readCount uint)
+	ReadCount() int
+	SetReadCount(readCount int)
 }
 
 var _ TemporaryImageable = (*TemporaryImage)(nil)

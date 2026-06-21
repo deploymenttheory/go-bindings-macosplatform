@@ -5,80 +5,81 @@
 package mediaextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides information about the chunk of media at the location of a sample.
 //
-// SampleCursorChunk wraps [raw.MESampleCursorChunk] with a fluent Go API.
+// SampleCursorChunk is an idiomatic wrapper over the Objective-C class MESampleCursorChunk.
 type SampleCursorChunk struct {
-	inner *raw.MESampleCursorChunk
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MESampleCursorChunk].
-func (x *SampleCursorChunk) Unwrap() *raw.MESampleCursorChunk { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SampleCursorChunk) ID() objc.ID { return x.inner.Ptr() }
-
-// SampleCursorChunkFromID adopts an existing object pointer as a SampleCursorChunk (nil for 0).
+// SampleCursorChunkFromID adopts an existing Objective-C object as a SampleCursorChunk
+// (nil for 0), retaining it and registering a release finalizer.
 func SampleCursorChunkFromID(id objc.ID) *SampleCursorChunk {
 	if id == 0 {
 		return nil
 	}
-	return &SampleCursorChunk{inner: raw.MESampleCursorChunkFromID(id)}
+	x := &SampleCursorChunk{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a new sample cursor chunk with byte source and chunk data that you provide.
-//
-// NewSampleCursorChunkWithByteSourceChunkStorageRangeChunkInfoSampleIndexWithinChunk creates a new [SampleCursorChunk].
-func NewSampleCursorChunkWithByteSourceChunkStorageRangeChunkInfoSampleIndexWithinChunk(byteSource *raw.MEByteSource, chunkStorageRange avfoundation.AVSampleCursorStorageRange, chunkInfo avfoundation.AVSampleCursorChunkInfo, sampleIndexWithinChunk int) *SampleCursorChunk {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MESampleCursorChunk")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithByteSource:chunkStorageRange:chunkInfo:sampleIndexWithinChunk:"), byteSource.Ptr(), chunkStorageRange, chunkInfo, sampleIndexWithinChunk)
-	return &SampleCursorChunk{inner: raw.MESampleCursorChunkFromID(_id)}
-}
-
-// @property		byteSource @abstract		The MEByteSource to be used to read the data for the sample.
-//
-// ByteSource calls the underlying ByteSource.
-func (x *SampleCursorChunk) ByteSource() *ByteSource {
-	_r := x.inner.ByteSource()
-	if _r == nil {
+// sampleCursorChunkAdopt wraps an Objective-C object that this code just created as a
+// SampleCursorChunk (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sampleCursorChunkAdopt(id objc.ID) *SampleCursorChunk {
+	if id == 0 {
 		return nil
 	}
-	return &ByteSource{inner: _r}
+	x := &SampleCursorChunk{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property		chunkStorageRange @abstract		The offset location and length of the sample's chunk, in bytes, within the MEByteSource. @discussion		The length should be set to 0 if there is no chunk associated with the sample.
-//
-// ChunkStorageRange calls the underlying ChunkStorageRange.
-func (x *SampleCursorChunk) ChunkStorageRange() avfoundation.AVSampleCursorStorageRange {
-	return x.inner.ChunkStorageRange()
+// Description returns the object's -description text.
+func (x *SampleCursorChunk) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property		chunkInfo @abstract		Provides information about the chunk of media samples.
-//
-// ChunkInfo calls the underlying ChunkInfo.
-func (x *SampleCursorChunk) ChunkInfo() avfoundation.AVSampleCursorChunkInfo {
-	return x.inner.ChunkInfo()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SampleCursorChunk) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property		sampleIndexWithinChunk @abstract		The offset of the sample within the chunk, in samples. @discussion		Index value 0 corresponds to the start of the chunk. You would step back this many samples to position the cursor at the start of the chunk. Subtract from the chunkInfo.chunkSampleCount field to obtain the number of samples to the end of the chunk.
-//
-// SampleIndexWithinChunk calls the underlying SampleIndexWithinChunk.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SampleCursorChunk) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSampleCursorChunk creates a new SampleCursorChunk.
+func NewSampleCursorChunk() *SampleCursorChunk {
+	_id := objc.Send[objc.ID](objc.ID(_class("MESampleCursorChunk")), objc.RegisterName("new"))
+	return sampleCursorChunkAdopt(_id)
+}
+
+// The MEByteSource to be used to read the data for the sample.
+func (x *SampleCursorChunk) ByteSource() *ByteSource {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("byteSource"))
+	return ByteSourceFromID(_r)
+}
+
+// The offset of the sample within the chunk, in samples. Index value 0 corresponds to the start of the chunk. You would step back this many samples to position the cursor at the start of the chunk. Subtract from the chunkInfo.chunkSampleCount field to obtain the number of samples to the end of the chunk.
 func (x *SampleCursorChunk) SampleIndexWithinChunk() int {
-	return x.inner.SampleIndexWithinChunk()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sampleIndexWithinChunk"))
+	return _r
 }
 
 // SampleCursorChunkable is the interface implemented by [SampleCursorChunk], for mocking and DI.
 type SampleCursorChunkable interface {
-	Unwrap() *raw.MESampleCursorChunk
+	obj.Object
 	ByteSource() *ByteSource
-	ChunkStorageRange() avfoundation.AVSampleCursorStorageRange
-	ChunkInfo() avfoundation.AVSampleCursorChunkInfo
 	SampleIndexWithinChunk() int
 }
 

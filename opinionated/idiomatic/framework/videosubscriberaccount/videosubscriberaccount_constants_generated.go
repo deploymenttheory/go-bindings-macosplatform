@@ -5,25 +5,24 @@
 package videosubscriberaccount
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videosubscriberaccount"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
 // A boolean indicating whether the user may be prompted to grant access.
-// VSCheckAccessOptionPrompt returns the string constant VSCheckAccessOptionPrompt as an objc.ID, for use as a dictionary key or selector argument.
-func VSCheckAccessOptionPrompt() objc.ID {
-	return purego.CFConstant(raw.VSCheckAccessOptionPrompt())
+// VSCheckAccessOptionPrompt returns the string constant VSCheckAccessOptionPrompt, for use as a dictionary key or argument.
+func VSCheckAccessOptionPrompt() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VSCheckAccessOptionPrompt")))
 }
 
 // The authentication scheme for responses that use the SAML protocol.
-// VSAccountProviderAuthenticationSchemeSAML returns the string constant VSAccountProviderAuthenticationSchemeSAML as an objc.ID, for use as a dictionary key or selector argument.
-func VSAccountProviderAuthenticationSchemeSAML() objc.ID {
-	return purego.CFConstant(raw.VSAccountProviderAuthenticationSchemeSAML())
+// VSAccountProviderAuthenticationSchemeSAML returns the string constant VSAccountProviderAuthenticationSchemeSAML, for use as a dictionary key or argument.
+func VSAccountProviderAuthenticationSchemeSAML() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VSAccountProviderAuthenticationSchemeSAML")))
 }
 
 // The identifier for responses that use any authentication protocol.
-// VSAccountProviderAuthenticationSchemeAPI returns the string constant VSAccountProviderAuthenticationSchemeAPI as an objc.ID, for use as a dictionary key or selector argument.
-func VSAccountProviderAuthenticationSchemeAPI() objc.ID {
-	return purego.CFConstant(raw.VSAccountProviderAuthenticationSchemeAPI())
+// VSAccountProviderAuthenticationSchemeAPI returns the string constant VSAccountProviderAuthenticationSchemeAPI, for use as a dictionary key or argument.
+func VSAccountProviderAuthenticationSchemeAPI() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("VSAccountProviderAuthenticationSchemeAPI")))
 }

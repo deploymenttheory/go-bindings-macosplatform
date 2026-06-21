@@ -8,16 +8,16 @@ import (
 	"fmt"
 )
 
-type JSRelationCondition int64
+type RelationCondition int64
 
 const (
-	KJSRelationConditionUndefined   JSRelationCondition = 0
-	KJSRelationConditionEqual       JSRelationCondition = 1
-	KJSRelationConditionGreaterThan JSRelationCondition = 2
-	KJSRelationConditionLessThan    JSRelationCondition = 3
+	KJSRelationConditionUndefined   RelationCondition = 0
+	KJSRelationConditionEqual       RelationCondition = 1
+	KJSRelationConditionGreaterThan RelationCondition = 2
+	KJSRelationConditionLessThan    RelationCondition = 3
 )
 
-func (e JSRelationCondition) String() string {
+func (e RelationCondition) String() string {
 	switch e {
 	case KJSRelationConditionUndefined:
 		return "KJSRelationConditionUndefined"
@@ -28,25 +28,25 @@ func (e JSRelationCondition) String() string {
 	case KJSRelationConditionLessThan:
 		return "KJSRelationConditionLessThan"
 	default:
-		return fmt.Sprintf("JSRelationCondition(%d)", int64(e))
+		return fmt.Sprintf("RelationCondition(%d)", int64(e))
 	}
 }
 
 // Constants that identify the type of a JavaScript value.
-type JSType int64
+type Type int64
 
 const (
-	KJSTypeUndefined JSType = 0
-	KJSTypeNull      JSType = 1
-	KJSTypeBoolean   JSType = 2
-	KJSTypeNumber    JSType = 3
-	KJSTypeString    JSType = 4
-	KJSTypeObject    JSType = 5
-	KJSTypeSymbol    JSType = 6
-	KJSTypeBigInt    JSType = 7
+	KJSTypeUndefined Type = 0
+	KJSTypeNull      Type = 1
+	KJSTypeBoolean   Type = 2
+	KJSTypeNumber    Type = 3
+	KJSTypeString    Type = 4
+	KJSTypeObject    Type = 5
+	KJSTypeSymbol    Type = 6
+	KJSTypeBigInt    Type = 7
 )
 
-func (e JSType) String() string {
+func (e Type) String() string {
 	switch e {
 	case KJSTypeUndefined:
 		return "KJSTypeUndefined"
@@ -65,30 +65,30 @@ func (e JSType) String() string {
 	case KJSTypeBigInt:
 		return "KJSTypeBigInt"
 	default:
-		return fmt.Sprintf("JSType(%d)", int64(e))
+		return fmt.Sprintf("Type(%d)", int64(e))
 	}
 }
 
 // The type of a JavaScript typed array object.
-type JSTypedArrayType int64
+type TypedArrayType int64
 
 const (
-	KJSTypedArrayTypeInt8Array         JSTypedArrayType = 0
-	KJSTypedArrayTypeInt16Array        JSTypedArrayType = 1
-	KJSTypedArrayTypeInt32Array        JSTypedArrayType = 2
-	KJSTypedArrayTypeUint8Array        JSTypedArrayType = 3
-	KJSTypedArrayTypeUint8ClampedArray JSTypedArrayType = 4
-	KJSTypedArrayTypeUint16Array       JSTypedArrayType = 5
-	KJSTypedArrayTypeUint32Array       JSTypedArrayType = 6
-	KJSTypedArrayTypeFloat32Array      JSTypedArrayType = 7
-	KJSTypedArrayTypeFloat64Array      JSTypedArrayType = 8
-	KJSTypedArrayTypeArrayBuffer       JSTypedArrayType = 9
-	KJSTypedArrayTypeNone              JSTypedArrayType = 10
-	KJSTypedArrayTypeBigInt64Array     JSTypedArrayType = 11
-	KJSTypedArrayTypeBigUint64Array    JSTypedArrayType = 12
+	KJSTypedArrayTypeInt8Array         TypedArrayType = 0
+	KJSTypedArrayTypeInt16Array        TypedArrayType = 1
+	KJSTypedArrayTypeInt32Array        TypedArrayType = 2
+	KJSTypedArrayTypeUint8Array        TypedArrayType = 3
+	KJSTypedArrayTypeUint8ClampedArray TypedArrayType = 4
+	KJSTypedArrayTypeUint16Array       TypedArrayType = 5
+	KJSTypedArrayTypeUint32Array       TypedArrayType = 6
+	KJSTypedArrayTypeFloat32Array      TypedArrayType = 7
+	KJSTypedArrayTypeFloat64Array      TypedArrayType = 8
+	KJSTypedArrayTypeArrayBuffer       TypedArrayType = 9
+	KJSTypedArrayTypeNone              TypedArrayType = 10
+	KJSTypedArrayTypeBigInt64Array     TypedArrayType = 11
+	KJSTypedArrayTypeBigUint64Array    TypedArrayType = 12
 )
 
-func (e JSTypedArrayType) String() string {
+func (e TypedArrayType) String() string {
 	switch e {
 	case KJSTypedArrayTypeInt8Array:
 		return "KJSTypedArrayTypeInt8Array"
@@ -117,6 +117,6 @@ func (e JSTypedArrayType) String() string {
 	case KJSTypedArrayTypeBigUint64Array:
 		return "KJSTypedArrayTypeBigUint64Array"
 	default:
-		return fmt.Sprintf("JSTypedArrayType(%d)", int64(e))
+		return fmt.Sprintf("TypedArrayType(%d)", int64(e))
 	}
 }

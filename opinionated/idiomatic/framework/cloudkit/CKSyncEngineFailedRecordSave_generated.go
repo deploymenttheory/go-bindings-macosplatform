@@ -5,62 +5,75 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A type that describes an unsuccessful attempt to modify an individual record.
 //
-// SyncEngineFailedRecordSave wraps [raw.CKSyncEngineFailedRecordSave] with a fluent Go API.
+// SyncEngineFailedRecordSave is an idiomatic wrapper over the Objective-C class CKSyncEngineFailedRecordSave.
 type SyncEngineFailedRecordSave struct {
-	inner *raw.CKSyncEngineFailedRecordSave
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineFailedRecordSave].
-func (x *SyncEngineFailedRecordSave) Unwrap() *raw.CKSyncEngineFailedRecordSave { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineFailedRecordSave) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineFailedRecordSaveFromID adopts an existing object pointer as a SyncEngineFailedRecordSave (nil for 0).
+// SyncEngineFailedRecordSaveFromID adopts an existing Objective-C object as a SyncEngineFailedRecordSave
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineFailedRecordSaveFromID(id objc.ID) *SyncEngineFailedRecordSave {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineFailedRecordSave{inner: raw.CKSyncEngineFailedRecordSaveFromID(id)}
+	x := &SyncEngineFailedRecordSave{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSyncEngineFailedRecordSave creates a new [SyncEngineFailedRecordSave].
+// syncEngineFailedRecordSaveAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineFailedRecordSave (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineFailedRecordSaveAdopt(id objc.ID) *SyncEngineFailedRecordSave {
+	if id == 0 {
+		return nil
+	}
+	x := &SyncEngineFailedRecordSave{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SyncEngineFailedRecordSave) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEngineFailedRecordSave) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEngineFailedRecordSave) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSyncEngineFailedRecordSave creates a new SyncEngineFailedRecordSave.
 func NewSyncEngineFailedRecordSave() *SyncEngineFailedRecordSave {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineFailedRecordSave")), objc.RegisterName("new"))
-	return &SyncEngineFailedRecordSave{inner: raw.CKSyncEngineFailedRecordSaveFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFailedRecordSave")), objc.RegisterName("new"))
+	return syncEngineFailedRecordSaveAdopt(_id)
 }
 
 // The record that CloudKit is unable to modify.
-//
-// Record calls the underlying Record.
 func (x *SyncEngineFailedRecordSave) Record() *Record {
-	_r := x.inner.Record()
-	if _r == nil {
-		return nil
-	}
-	return &Record{inner: _r}
-}
-
-// A error that describes the reason for the unsuccessful attempt to modify the associated record.
-//
-// Error calls the underlying Error.
-func (x *SyncEngineFailedRecordSave) Error() unsafe.Pointer {
-	return x.inner.Error()
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("record"))
+	return RecordFromID(_r)
 }
 
 // SyncEngineFailedRecordSaveable is the interface implemented by [SyncEngineFailedRecordSave], for mocking and DI.
 type SyncEngineFailedRecordSaveable interface {
-	Unwrap() *raw.CKSyncEngineFailedRecordSave
+	obj.Object
 	Record() *Record
-	Error() unsafe.Pointer
 }
 
 var _ SyncEngineFailedRecordSaveable = (*SyncEngineFailedRecordSave)(nil)

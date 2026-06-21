@@ -5,71 +5,89 @@
 package passkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The properties of a pass used as a ticket for the Suica transportation system.
 //
-// SuicaPassProperties wraps [raw.PKSuicaPassProperties] with a fluent Go API.
+// SuicaPassProperties is an idiomatic wrapper over the Objective-C class PKSuicaPassProperties.
 type SuicaPassProperties struct {
-	inner *raw.PKSuicaPassProperties
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKSuicaPassProperties].
-func (x *SuicaPassProperties) Unwrap() *raw.PKSuicaPassProperties { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SuicaPassProperties) ID() objc.ID { return x.inner.Ptr() }
-
-// SuicaPassPropertiesFromID adopts an existing object pointer as a SuicaPassProperties (nil for 0).
+// SuicaPassPropertiesFromID adopts an existing Objective-C object as a SuicaPassProperties
+// (nil for 0), retaining it and registering a release finalizer.
 func SuicaPassPropertiesFromID(id objc.ID) *SuicaPassProperties {
 	if id == 0 {
 		return nil
 	}
-	return &SuicaPassProperties{inner: raw.PKSuicaPassPropertiesFromID(id)}
+	x := &SuicaPassProperties{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSuicaPassProperties creates a new [SuicaPassProperties].
+// suicaPassPropertiesAdopt wraps an Objective-C object that this code just created as a
+// SuicaPassProperties (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func suicaPassPropertiesAdopt(id objc.ID) *SuicaPassProperties {
+	if id == 0 {
+		return nil
+	}
+	x := &SuicaPassProperties{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SuicaPassProperties) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SuicaPassProperties) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SuicaPassProperties) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSuicaPassProperties creates a new SuicaPassProperties.
 func NewSuicaPassProperties() *SuicaPassProperties {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKSuicaPassProperties")), objc.RegisterName("new"))
-	return &SuicaPassProperties{inner: raw.PKSuicaPassPropertiesFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKSuicaPassProperties")), objc.RegisterName("new"))
+	return suicaPassPropertiesAdopt(_id)
 }
 
 // Note: isInShinkansenStation is not a subset of isInStation.
-//
-// IsInShinkansenStation calls the underlying IsInShinkansenStation.
 func (x *SuicaPassProperties) IsInShinkansenStation() bool {
-	return x.inner.IsInShinkansenStation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInShinkansenStation"))
+	return _r
 }
 
-// IsBalanceAllowedForCommute calls the underlying IsBalanceAllowedForCommute.
 func (x *SuicaPassProperties) IsBalanceAllowedForCommute() bool {
-	return x.inner.IsBalanceAllowedForCommute()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBalanceAllowedForCommute"))
+	return _r
 }
 
-// IsLowBalanceGateNotificationEnabled calls the underlying IsLowBalanceGateNotificationEnabled.
 func (x *SuicaPassProperties) IsLowBalanceGateNotificationEnabled() bool {
-	return x.inner.IsLowBalanceGateNotificationEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLowBalanceGateNotificationEnabled"))
+	return _r
 }
 
-// IsGreenCarTicketUsed calls the underlying IsGreenCarTicketUsed.
 func (x *SuicaPassProperties) IsGreenCarTicketUsed() bool {
-	return x.inner.IsGreenCarTicketUsed()
-}
-
-func (x *SuicaPassProperties) asTransitPassProperties() *raw.PKTransitPassProperties {
-	return &x.inner.PKTransitPassProperties
-}
-
-func (x *SuicaPassProperties) asStoredValuePassProperties() *raw.PKStoredValuePassProperties {
-	return &x.inner.PKTransitPassProperties.PKStoredValuePassProperties
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isGreenCarTicketUsed"))
+	return _r
 }
 
 // SuicaPassPropertiesable is the interface implemented by [SuicaPassProperties], for mocking and DI.
 type SuicaPassPropertiesable interface {
-	Unwrap() *raw.PKSuicaPassProperties
+	obj.Object
 	IsInShinkansenStation() bool
 	IsBalanceAllowedForCommute() bool
 	IsLowBalanceGateNotificationEnabled() bool

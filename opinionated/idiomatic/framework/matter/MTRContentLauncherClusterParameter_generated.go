@@ -5,59 +5,79 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRContentLauncherClusterParameter wraps [raw.MTRContentLauncherClusterParameter] with a fluent Go API.
+// MTRContentLauncherClusterParameter is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterParameter.
 type MTRContentLauncherClusterParameter struct {
-	inner *raw.MTRContentLauncherClusterParameter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRContentLauncherClusterParameter].
-func (x *MTRContentLauncherClusterParameter) Unwrap() *raw.MTRContentLauncherClusterParameter {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRContentLauncherClusterParameter) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRContentLauncherClusterParameterFromID adopts an existing object pointer as a MTRContentLauncherClusterParameter (nil for 0).
+// MTRContentLauncherClusterParameterFromID adopts an existing Objective-C object as a MTRContentLauncherClusterParameter
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRContentLauncherClusterParameterFromID(id objc.ID) *MTRContentLauncherClusterParameter {
 	if id == 0 {
 		return nil
 	}
-	return &MTRContentLauncherClusterParameter{inner: raw.MTRContentLauncherClusterParameterFromID(id)}
+	x := &MTRContentLauncherClusterParameter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRContentLauncherClusterParameter creates a new [MTRContentLauncherClusterParameter].
+// mTRContentLauncherClusterParameterAdopt wraps an Objective-C object that this code just created as a
+// MTRContentLauncherClusterParameter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRContentLauncherClusterParameterAdopt(id objc.ID) *MTRContentLauncherClusterParameter {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRContentLauncherClusterParameter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRContentLauncherClusterParameter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRContentLauncherClusterParameter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRContentLauncherClusterParameter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRContentLauncherClusterParameter creates a new MTRContentLauncherClusterParameter.
 func NewMTRContentLauncherClusterParameter() *MTRContentLauncherClusterParameter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRContentLauncherClusterParameter")), objc.RegisterName("new"))
-	return &MTRContentLauncherClusterParameter{inner: raw.MTRContentLauncherClusterParameterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRContentLauncherClusterParameter")), objc.RegisterName("new"))
+	return mTRContentLauncherClusterParameterAdopt(_id)
 }
 
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *MTRContentLauncherClusterParameter) WithType(type_ *foundation.NSNumber) *MTRContentLauncherClusterParameter {
-	x.inner.MTRContentLauncherClusterParameterStruct.SetType(type_)
+// WithType sets type_ and returns the receiver so calls can be chained.
+func (x *MTRContentLauncherClusterParameter) WithType(type_ obj.Object) *MTRContentLauncherClusterParameter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return x
 }
 
-// WithValue sets the value property and returns the receiver for chaining.
+// WithValue sets value and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterParameter) WithValue(value string) *MTRContentLauncherClusterParameter {
-	x.inner.MTRContentLauncherClusterParameterStruct.SetValue(foundation.NSStringStringWithUTF8String(value))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 	return x
-}
-
-func (x *MTRContentLauncherClusterParameter) asMTRContentLauncherClusterParameterStruct() *raw.MTRContentLauncherClusterParameterStruct {
-	return &x.inner.MTRContentLauncherClusterParameterStruct
 }
 
 // MTRContentLauncherClusterParameterable is the interface implemented by [MTRContentLauncherClusterParameter], for mocking and DI.
 type MTRContentLauncherClusterParameterable interface {
-	Unwrap() *raw.MTRContentLauncherClusterParameter
-	WithType(type_ *foundation.NSNumber) *MTRContentLauncherClusterParameter
+	obj.Object
+	WithType(type_ obj.Object) *MTRContentLauncherClusterParameter
 	WithValue(value string) *MTRContentLauncherClusterParameter
 }
 

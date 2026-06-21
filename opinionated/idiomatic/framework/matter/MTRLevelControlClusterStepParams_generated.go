@@ -5,183 +5,198 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRLevelControlClusterStepParams wraps [raw.MTRLevelControlClusterStepParams] with a fluent Go API.
+// MTRLevelControlClusterStepParams is an idiomatic wrapper over the Objective-C class MTRLevelControlClusterStepParams.
 type MTRLevelControlClusterStepParams struct {
-	inner *raw.MTRLevelControlClusterStepParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRLevelControlClusterStepParams].
-func (x *MTRLevelControlClusterStepParams) Unwrap() *raw.MTRLevelControlClusterStepParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRLevelControlClusterStepParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRLevelControlClusterStepParamsFromID adopts an existing object pointer as a MTRLevelControlClusterStepParams (nil for 0).
+// MTRLevelControlClusterStepParamsFromID adopts an existing Objective-C object as a MTRLevelControlClusterStepParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRLevelControlClusterStepParamsFromID(id objc.ID) *MTRLevelControlClusterStepParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRLevelControlClusterStepParams{inner: raw.MTRLevelControlClusterStepParamsFromID(id)}
+	x := &MTRLevelControlClusterStepParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRLevelControlClusterStepParams creates a new [MTRLevelControlClusterStepParams].
+// mTRLevelControlClusterStepParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRLevelControlClusterStepParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRLevelControlClusterStepParamsAdopt(id objc.ID) *MTRLevelControlClusterStepParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRLevelControlClusterStepParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRLevelControlClusterStepParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRLevelControlClusterStepParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRLevelControlClusterStepParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRLevelControlClusterStepParams creates a new MTRLevelControlClusterStepParams.
 func NewMTRLevelControlClusterStepParams() *MTRLevelControlClusterStepParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRLevelControlClusterStepParams")), objc.RegisterName("new"))
-	return &MTRLevelControlClusterStepParams{inner: raw.MTRLevelControlClusterStepParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRLevelControlClusterStepParams")), objc.RegisterName("new"))
+	return mTRLevelControlClusterStepParamsAdopt(_id)
 }
 
-// WithStepMode sets the stepMode property and returns the receiver for chaining.
-func (x *MTRLevelControlClusterStepParams) WithStepMode(stepMode *foundation.NSNumber) *MTRLevelControlClusterStepParams {
-	x.inner.SetStepMode(stepMode)
+// WithStepMode sets stepMode and returns the receiver so calls can be chained.
+func (x *MTRLevelControlClusterStepParams) WithStepMode(stepMode obj.Object) *MTRLevelControlClusterStepParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepMode:"), objref.IDOf(stepMode))
 	return x
 }
 
-// WithStepSize sets the stepSize property and returns the receiver for chaining.
-func (x *MTRLevelControlClusterStepParams) WithStepSize(stepSize *foundation.NSNumber) *MTRLevelControlClusterStepParams {
-	x.inner.SetStepSize(stepSize)
+// WithStepSize sets stepSize and returns the receiver so calls can be chained.
+func (x *MTRLevelControlClusterStepParams) WithStepSize(stepSize obj.Object) *MTRLevelControlClusterStepParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepSize:"), objref.IDOf(stepSize))
 	return x
 }
 
-// WithTransitionTime sets the transitionTime property and returns the receiver for chaining.
-func (x *MTRLevelControlClusterStepParams) WithTransitionTime(transitionTime *foundation.NSNumber) *MTRLevelControlClusterStepParams {
-	x.inner.SetTransitionTime(transitionTime)
+// WithTransitionTime sets transitionTime and returns the receiver so calls can be chained.
+func (x *MTRLevelControlClusterStepParams) WithTransitionTime(transitionTime obj.Object) *MTRLevelControlClusterStepParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return x
 }
 
-// WithOptionsMask sets the optionsMask property and returns the receiver for chaining.
-func (x *MTRLevelControlClusterStepParams) WithOptionsMask(optionsMask *foundation.NSNumber) *MTRLevelControlClusterStepParams {
-	x.inner.SetOptionsMask(optionsMask)
+// WithOptionsMask sets optionsMask and returns the receiver so calls can be chained.
+func (x *MTRLevelControlClusterStepParams) WithOptionsMask(optionsMask obj.Object) *MTRLevelControlClusterStepParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return x
 }
 
-// WithOptionsOverride sets the optionsOverride property and returns the receiver for chaining.
-func (x *MTRLevelControlClusterStepParams) WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRLevelControlClusterStepParams {
-	x.inner.SetOptionsOverride(optionsOverride)
+// WithOptionsOverride sets optionsOverride and returns the receiver so calls can be chained.
+func (x *MTRLevelControlClusterStepParams) WithOptionsOverride(optionsOverride obj.Object) *MTRLevelControlClusterStepParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRLevelControlClusterStepParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRLevelControlClusterStepParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRLevelControlClusterStepParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLevelControlClusterStepParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRLevelControlClusterStepParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRLevelControlClusterStepParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRLevelControlClusterStepParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLevelControlClusterStepParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// StepMode calls the underlying StepMode.
-func (x *MTRLevelControlClusterStepParams) StepMode() *foundation.NSNumber {
-	return x.inner.StepMode()
+func (x *MTRLevelControlClusterStepParams) StepMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stepMode"))
+	return obj.Wrap(_r)
 }
 
-// SetStepMode calls the underlying SetStepMode.
-func (x *MTRLevelControlClusterStepParams) SetStepMode(stepMode *foundation.NSNumber) {
-	x.inner.SetStepMode(stepMode)
+func (x *MTRLevelControlClusterStepParams) SetStepMode(stepMode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepMode:"), objref.IDOf(stepMode))
 }
 
-// StepSize calls the underlying StepSize.
-func (x *MTRLevelControlClusterStepParams) StepSize() *foundation.NSNumber {
-	return x.inner.StepSize()
+func (x *MTRLevelControlClusterStepParams) StepSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stepSize"))
+	return obj.Wrap(_r)
 }
 
-// SetStepSize calls the underlying SetStepSize.
-func (x *MTRLevelControlClusterStepParams) SetStepSize(stepSize *foundation.NSNumber) {
-	x.inner.SetStepSize(stepSize)
+func (x *MTRLevelControlClusterStepParams) SetStepSize(stepSize obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepSize:"), objref.IDOf(stepSize))
 }
 
-// TransitionTime calls the underlying TransitionTime.
-func (x *MTRLevelControlClusterStepParams) TransitionTime() *foundation.NSNumber {
-	return x.inner.TransitionTime()
+func (x *MTRLevelControlClusterStepParams) TransitionTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionTime"))
+	return obj.Wrap(_r)
 }
 
-// SetTransitionTime calls the underlying SetTransitionTime.
-func (x *MTRLevelControlClusterStepParams) SetTransitionTime(transitionTime *foundation.NSNumber) {
-	x.inner.SetTransitionTime(transitionTime)
+func (x *MTRLevelControlClusterStepParams) SetTransitionTime(transitionTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 }
 
-// OptionsMask calls the underlying OptionsMask.
-func (x *MTRLevelControlClusterStepParams) OptionsMask() *foundation.NSNumber {
-	return x.inner.OptionsMask()
+func (x *MTRLevelControlClusterStepParams) OptionsMask() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsMask"))
+	return obj.Wrap(_r)
 }
 
-// SetOptionsMask calls the underlying SetOptionsMask.
-func (x *MTRLevelControlClusterStepParams) SetOptionsMask(optionsMask *foundation.NSNumber) {
-	x.inner.SetOptionsMask(optionsMask)
+func (x *MTRLevelControlClusterStepParams) SetOptionsMask(optionsMask obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 }
 
-// OptionsOverride calls the underlying OptionsOverride.
-func (x *MTRLevelControlClusterStepParams) OptionsOverride() *foundation.NSNumber {
-	return x.inner.OptionsOverride()
+func (x *MTRLevelControlClusterStepParams) OptionsOverride() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsOverride"))
+	return obj.Wrap(_r)
 }
 
-// SetOptionsOverride calls the underlying SetOptionsOverride.
-func (x *MTRLevelControlClusterStepParams) SetOptionsOverride(optionsOverride *foundation.NSNumber) {
-	x.inner.SetOptionsOverride(optionsOverride)
+func (x *MTRLevelControlClusterStepParams) SetOptionsOverride(optionsOverride obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRLevelControlClusterStepParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRLevelControlClusterStepParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRLevelControlClusterStepParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRLevelControlClusterStepParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRLevelControlClusterStepParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRLevelControlClusterStepParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRLevelControlClusterStepParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRLevelControlClusterStepParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRLevelControlClusterStepParamsable is the interface implemented by [MTRLevelControlClusterStepParams], for mocking and DI.
 type MTRLevelControlClusterStepParamsable interface {
-	Unwrap() *raw.MTRLevelControlClusterStepParams
-	WithStepMode(stepMode *foundation.NSNumber) *MTRLevelControlClusterStepParams
-	WithStepSize(stepSize *foundation.NSNumber) *MTRLevelControlClusterStepParams
-	WithTransitionTime(transitionTime *foundation.NSNumber) *MTRLevelControlClusterStepParams
-	WithOptionsMask(optionsMask *foundation.NSNumber) *MTRLevelControlClusterStepParams
-	WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRLevelControlClusterStepParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRLevelControlClusterStepParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRLevelControlClusterStepParams
-	StepMode() *foundation.NSNumber
-	SetStepMode(stepMode *foundation.NSNumber)
-	StepSize() *foundation.NSNumber
-	SetStepSize(stepSize *foundation.NSNumber)
-	TransitionTime() *foundation.NSNumber
-	SetTransitionTime(transitionTime *foundation.NSNumber)
-	OptionsMask() *foundation.NSNumber
-	SetOptionsMask(optionsMask *foundation.NSNumber)
-	OptionsOverride() *foundation.NSNumber
-	SetOptionsOverride(optionsOverride *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithStepMode(stepMode obj.Object) *MTRLevelControlClusterStepParams
+	WithStepSize(stepSize obj.Object) *MTRLevelControlClusterStepParams
+	WithTransitionTime(transitionTime obj.Object) *MTRLevelControlClusterStepParams
+	WithOptionsMask(optionsMask obj.Object) *MTRLevelControlClusterStepParams
+	WithOptionsOverride(optionsOverride obj.Object) *MTRLevelControlClusterStepParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLevelControlClusterStepParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLevelControlClusterStepParams
+	StepMode() obj.Object
+	SetStepMode(stepMode obj.Object)
+	StepSize() obj.Object
+	SetStepSize(stepSize obj.Object)
+	TransitionTime() obj.Object
+	SetTransitionTime(transitionTime obj.Object)
+	OptionsMask() obj.Object
+	SetOptionsMask(optionsMask obj.Object)
+	OptionsOverride() obj.Object
+	SetOptionsOverride(optionsOverride obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRLevelControlClusterStepParamsable = (*MTRLevelControlClusterStepParams)(nil)

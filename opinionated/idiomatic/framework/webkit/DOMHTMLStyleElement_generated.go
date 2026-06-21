@@ -5,217 +5,219 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMHTMLStyleElement wraps [raw.DOMHTMLStyleElement] with a fluent Go API.
+// DOMHTMLStyleElement is an idiomatic wrapper over the Objective-C class DOMHTMLStyleElement.
 type DOMHTMLStyleElement struct {
-	inner *raw.DOMHTMLStyleElement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMHTMLStyleElement].
-func (x *DOMHTMLStyleElement) Unwrap() *raw.DOMHTMLStyleElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMHTMLStyleElement) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMHTMLStyleElementFromID adopts an existing object pointer as a DOMHTMLStyleElement (nil for 0).
+// DOMHTMLStyleElementFromID adopts an existing Objective-C object as a DOMHTMLStyleElement
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMHTMLStyleElementFromID(id objc.ID) *DOMHTMLStyleElement {
 	if id == 0 {
 		return nil
 	}
-	return &DOMHTMLStyleElement{inner: raw.DOMHTMLStyleElementFromID(id)}
+	x := &DOMHTMLStyleElement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDOMHTMLStyleElement creates a new [DOMHTMLStyleElement].
+// dOMHTMLStyleElementAdopt wraps an Objective-C object that this code just created as a
+// DOMHTMLStyleElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMHTMLStyleElementAdopt(id objc.ID) *DOMHTMLStyleElement {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMHTMLStyleElement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DOMHTMLStyleElement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMHTMLStyleElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMHTMLStyleElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMHTMLStyleElement creates a new DOMHTMLStyleElement.
 func NewDOMHTMLStyleElement() *DOMHTMLStyleElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMHTMLStyleElement")), objc.RegisterName("new"))
-	return &DOMHTMLStyleElement{inner: raw.DOMHTMLStyleElementFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMHTMLStyleElement")), objc.RegisterName("new"))
+	return dOMHTMLStyleElementAdopt(_id)
 }
 
-// WithDisabled sets the disabled property and returns the receiver for chaining.
+// WithDisabled sets disabled and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithDisabled(disabled bool) *DOMHTMLStyleElement {
-	x.inner.SetDisabled(disabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
 	return x
 }
 
-// WithMedia sets the media property and returns the receiver for chaining.
+// WithMedia sets media and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithMedia(media string) *DOMHTMLStyleElement {
-	x.inner.SetMedia(foundation.NSStringStringWithUTF8String(media))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMedia:"), purego.NSString(media))
 	return x
 }
 
-// WithType sets the type_ property and returns the receiver for chaining.
+// WithType sets type_ and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithType(type_ string) *DOMHTMLStyleElement {
-	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 	return x
 }
 
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithTitle(title string) *DOMHTMLStyleElement {
-	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithLang sets the lang property and returns the receiver for chaining.
+// WithLang sets lang and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithLang(lang string) *DOMHTMLStyleElement {
-	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return x
 }
 
-// WithDir sets the dir property and returns the receiver for chaining.
+// WithDir sets dir and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithDir(dir string) *DOMHTMLStyleElement {
-	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return x
 }
 
-// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+// WithTabIndex sets tabIndex and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithTabIndex(tabIndex int) *DOMHTMLStyleElement {
-	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
 	return x
 }
 
-// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+// WithAccessKey sets accessKey and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithAccessKey(accessKey string) *DOMHTMLStyleElement {
-	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return x
 }
 
-// WithInnerText sets the innerText property and returns the receiver for chaining.
+// WithInnerText sets innerText and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithInnerText(innerText string) *DOMHTMLStyleElement {
-	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return x
 }
 
-// WithOuterText sets the outerText property and returns the receiver for chaining.
+// WithOuterText sets outerText and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithOuterText(outerText string) *DOMHTMLStyleElement {
-	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return x
 }
 
-// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+// WithContentEditable sets contentEditable and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithContentEditable(contentEditable string) *DOMHTMLStyleElement {
-	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return x
 }
 
-// WithIdName sets the idName property and returns the receiver for chaining.
+// WithIdName sets idName and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithIdName(idName string) *DOMHTMLStyleElement {
-	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return x
 }
 
-// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+// WithScrollLeft sets scrollLeft and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithScrollLeft(scrollLeft int) *DOMHTMLStyleElement {
-	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return x
 }
 
-// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+// WithScrollTop sets scrollTop and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithScrollTop(scrollTop int) *DOMHTMLStyleElement {
-	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
 	return x
 }
 
-// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+// WithInnerHTML sets innerHTML and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithInnerHTML(innerHTML string) *DOMHTMLStyleElement {
-	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return x
 }
 
-// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+// WithOuterHTML sets outerHTML and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithOuterHTML(outerHTML string) *DOMHTMLStyleElement {
-	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return x
 }
 
-// WithClassName sets the className property and returns the receiver for chaining.
+// WithClassName sets className and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithClassName(className string) *DOMHTMLStyleElement {
-	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return x
 }
 
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithNodeValue(nodeValue string) *DOMHTMLStyleElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets the prefix property and returns the receiver for chaining.
+// WithPrefix sets prefix and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithPrefix(prefix string) *DOMHTMLStyleElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets the textContent property and returns the receiver for chaining.
+// WithTextContent sets textContent and returns the receiver so calls can be chained.
 func (x *DOMHTMLStyleElement) WithTextContent(textContent string) *DOMHTMLStyleElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
-// Disabled calls the underlying Disabled.
 func (x *DOMHTMLStyleElement) Disabled() bool {
-	return x.inner.Disabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("disabled"))
+	return _r
 }
 
-// SetDisabled calls the underlying SetDisabled.
 func (x *DOMHTMLStyleElement) SetDisabled(disabled bool) {
-	x.inner.SetDisabled(disabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
 }
 
-// Media calls the underlying Media.
 func (x *DOMHTMLStyleElement) Media() string {
-	_r := x.inner.Media()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("media"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMedia calls the underlying SetMedia.
 func (x *DOMHTMLStyleElement) SetMedia(media string) {
-	x.inner.SetMedia(foundation.NSStringStringWithUTF8String(media))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMedia:"), purego.NSString(media))
 }
 
-// Type calls the underlying Type.
 func (x *DOMHTMLStyleElement) Type() string {
-	_r := x.inner.Type()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetType calls the underlying SetType.
 func (x *DOMHTMLStyleElement) SetType(type_ string) {
-	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
-}
-
-func (x *DOMHTMLStyleElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
-
-func (x *DOMHTMLStyleElement) asDOMElement() *raw.DOMElement {
-	return &x.inner.DOMHTMLElement.DOMElement
-}
-
-func (x *DOMHTMLStyleElement) asDOMNode() *raw.DOMNode {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
-}
-
-func (x *DOMHTMLStyleElement) asDOMObject() *raw.DOMObject {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
-}
-
-func (x *DOMHTMLStyleElement) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 }
 
 // DOMHTMLStyleElementable is the interface implemented by [DOMHTMLStyleElement], for mocking and DI.
 type DOMHTMLStyleElementable interface {
-	Unwrap() *raw.DOMHTMLStyleElement
+	obj.Object
 	WithDisabled(disabled bool) *DOMHTMLStyleElement
 	WithMedia(media string) *DOMHTMLStyleElement
 	WithType(type_ string) *DOMHTMLStyleElement

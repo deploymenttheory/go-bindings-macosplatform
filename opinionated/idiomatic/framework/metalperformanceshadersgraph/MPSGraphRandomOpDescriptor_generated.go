@@ -5,237 +5,222 @@
 package metalperformanceshadersgraph
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that describes the random operation.
 //
-// GraphRandomOpDescriptor wraps [raw.MPSGraphRandomOpDescriptor] with a fluent Go API.
+// GraphRandomOpDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphRandomOpDescriptor.
 type GraphRandomOpDescriptor struct {
-	inner *raw.MPSGraphRandomOpDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSGraphRandomOpDescriptor].
-func (x *GraphRandomOpDescriptor) Unwrap() *raw.MPSGraphRandomOpDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphRandomOpDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphRandomOpDescriptorFromID adopts an existing object pointer as a GraphRandomOpDescriptor (nil for 0).
+// GraphRandomOpDescriptorFromID adopts an existing Objective-C object as a GraphRandomOpDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphRandomOpDescriptorFromID(id objc.ID) *GraphRandomOpDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &GraphRandomOpDescriptor{inner: raw.MPSGraphRandomOpDescriptorFromID(id)}
+	x := &GraphRandomOpDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGraphRandomOpDescriptor creates a new [GraphRandomOpDescriptor].
+// graphRandomOpDescriptorAdopt wraps an Objective-C object that this code just created as a
+// GraphRandomOpDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphRandomOpDescriptorAdopt(id objc.ID) *GraphRandomOpDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphRandomOpDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GraphRandomOpDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GraphRandomOpDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GraphRandomOpDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGraphRandomOpDescriptor creates a new GraphRandomOpDescriptor.
 func NewGraphRandomOpDescriptor() *GraphRandomOpDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphRandomOpDescriptor")), objc.RegisterName("new"))
-	return &GraphRandomOpDescriptor{inner: raw.MPSGraphRandomOpDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphRandomOpDescriptor")), objc.RegisterName("new"))
+	return graphRandomOpDescriptorAdopt(_id)
 }
 
 // The type of distribution to draw samples from. See MPSGraphRandomDistribution.
 //
-// WithDistribution sets the distribution property and returns the receiver for chaining.
-func (x *GraphRandomOpDescriptor) WithDistribution(distribution MPSGraphRandomDistribution) *GraphRandomOpDescriptor {
-	x.inner.SetDistribution(raw.MPSGraphRandomDistribution(distribution))
-	return x
-}
-
-// The data type of the generated result values.
-//
-// WithDataType sets the dataType property and returns the receiver for chaining.
-func (x *GraphRandomOpDescriptor) WithDataType(dataType mpscore.MPSDataType) *GraphRandomOpDescriptor {
-	x.inner.SetDataType(dataType)
+// WithDistribution sets distribution and returns the receiver so calls can be chained.
+func (x *GraphRandomOpDescriptor) WithDistribution(distribution GraphRandomDistribution) *GraphRandomOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDistribution:"), distribution)
 	return x
 }
 
 // The lower range of the distribution.
 //
-// WithMin sets the min property and returns the receiver for chaining.
+// WithMin sets min and returns the receiver so calls can be chained.
 func (x *GraphRandomOpDescriptor) WithMin(min float32) *GraphRandomOpDescriptor {
-	x.inner.SetMin(min)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMin:"), min)
 	return x
 }
 
 // The upper range of the distribution.
 //
-// WithMax sets the max property and returns the receiver for chaining.
+// WithMax sets max and returns the receiver so calls can be chained.
 func (x *GraphRandomOpDescriptor) WithMax(max float32) *GraphRandomOpDescriptor {
-	x.inner.SetMax(max)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMax:"), max)
 	return x
 }
 
 // The lower range of the distribution.
 //
-// WithMinInteger sets the minInteger property and returns the receiver for chaining.
+// WithMinInteger sets minInteger and returns the receiver so calls can be chained.
 func (x *GraphRandomOpDescriptor) WithMinInteger(minInteger int) *GraphRandomOpDescriptor {
-	x.inner.SetMinInteger(minInteger)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinInteger:"), minInteger)
 	return x
 }
 
 // The upper range of the distribution.
 //
-// WithMaxInteger sets the maxInteger property and returns the receiver for chaining.
+// WithMaxInteger sets maxInteger and returns the receiver so calls can be chained.
 func (x *GraphRandomOpDescriptor) WithMaxInteger(maxInteger int) *GraphRandomOpDescriptor {
-	x.inner.SetMaxInteger(maxInteger)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxInteger:"), maxInteger)
 	return x
 }
 
 // The mean of the distribution.
 //
-// WithMean sets the mean property and returns the receiver for chaining.
+// WithMean sets mean and returns the receiver so calls can be chained.
 func (x *GraphRandomOpDescriptor) WithMean(mean float32) *GraphRandomOpDescriptor {
-	x.inner.SetMean(mean)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMean:"), mean)
 	return x
 }
 
 // The standard deviation of the distribution.
 //
-// WithStandardDeviation sets the standardDeviation property and returns the receiver for chaining.
+// WithStandardDeviation sets standardDeviation and returns the receiver so calls can be chained.
 func (x *GraphRandomOpDescriptor) WithStandardDeviation(standardDeviation float32) *GraphRandomOpDescriptor {
-	x.inner.SetStandardDeviation(standardDeviation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardDeviation:"), standardDeviation)
 	return x
 }
 
 // The sampling method of the distribution.
 //
-// WithSamplingMethod sets the samplingMethod property and returns the receiver for chaining.
-func (x *GraphRandomOpDescriptor) WithSamplingMethod(samplingMethod MPSGraphRandomNormalSamplingMethod) *GraphRandomOpDescriptor {
-	x.inner.SetSamplingMethod(raw.MPSGraphRandomNormalSamplingMethod(samplingMethod))
+// WithSamplingMethod sets samplingMethod and returns the receiver so calls can be chained.
+func (x *GraphRandomOpDescriptor) WithSamplingMethod(samplingMethod GraphRandomNormalSamplingMethod) *GraphRandomOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSamplingMethod:"), samplingMethod)
 	return x
 }
 
 // The type of distribution to draw samples from. See MPSGraphRandomDistribution.
-//
-// Distribution calls the underlying Distribution.
-func (x *GraphRandomOpDescriptor) Distribution() MPSGraphRandomDistribution {
-	return MPSGraphRandomDistribution(x.inner.Distribution())
+func (x *GraphRandomOpDescriptor) Distribution() GraphRandomDistribution {
+	_r := objc.Send[GraphRandomDistribution](objref.IDOf(x), objc.RegisterName("distribution"))
+	return _r
 }
 
-// SetDistribution calls the underlying SetDistribution.
-func (x *GraphRandomOpDescriptor) SetDistribution(distribution MPSGraphRandomDistribution) {
-	x.inner.SetDistribution(raw.MPSGraphRandomDistribution(distribution))
-}
-
-// The data type of the generated result values. When sampling from the uniform distribution, valid types are MPSDataTypeFloat16, MPSDataTypeFloat32, and MPSDataTypeInt32. When sampling from the normal or truncated normal distribution, valid types are MPSDataTypeFloat16 and MPSDataTypeFloat32.
-//
-// DataType calls the underlying DataType.
-func (x *GraphRandomOpDescriptor) DataType() mpscore.MPSDataType {
-	return x.inner.DataType()
-}
-
-// SetDataType calls the underlying SetDataType.
-func (x *GraphRandomOpDescriptor) SetDataType(dataType mpscore.MPSDataType) {
-	x.inner.SetDataType(dataType)
+func (x *GraphRandomOpDescriptor) SetDistribution(distribution GraphRandomDistribution) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDistribution:"), distribution)
 }
 
 // The lower range of the distribution. This value is used for Uniform distributions with float data types and Truncated Normal disributions. Defaults to 0 for uniform distributions and -2 for normal distributions.
-//
-// Min calls the underlying Min.
 func (x *GraphRandomOpDescriptor) Min() float32 {
-	return x.inner.Min()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("min"))
+	return _r
 }
 
-// SetMin calls the underlying SetMin.
 func (x *GraphRandomOpDescriptor) SetMin(min float32) {
-	x.inner.SetMin(min)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMin:"), min)
 }
 
 // The upper range of the distribution. This value is used for Uniform distributions with float data types and Truncated Normal disributions. Defaults to 1 for uniform distributions and 2 for normal distributions.
-//
-// Max calls the underlying Max.
 func (x *GraphRandomOpDescriptor) Max() float32 {
-	return x.inner.Max()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("max"))
+	return _r
 }
 
-// SetMax calls the underlying SetMax.
 func (x *GraphRandomOpDescriptor) SetMax(max float32) {
-	x.inner.SetMax(max)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMax:"), max)
 }
 
 // The lower range of the distribution. This value is used for Uniform with integer data types Defaults to 0.
-//
-// MinInteger calls the underlying MinInteger.
 func (x *GraphRandomOpDescriptor) MinInteger() int {
-	return x.inner.MinInteger()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minInteger"))
+	return _r
 }
 
-// SetMinInteger calls the underlying SetMinInteger.
 func (x *GraphRandomOpDescriptor) SetMinInteger(minInteger int) {
-	x.inner.SetMinInteger(minInteger)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinInteger:"), minInteger)
 }
 
 // The upper range of the distribution. This value is used for Uniform with integer data types Defaults to INT32_MAX for uniform distributions and 0 for normal distributions.
-//
-// MaxInteger calls the underlying MaxInteger.
 func (x *GraphRandomOpDescriptor) MaxInteger() int {
-	return x.inner.MaxInteger()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxInteger"))
+	return _r
 }
 
-// SetMaxInteger calls the underlying SetMaxInteger.
 func (x *GraphRandomOpDescriptor) SetMaxInteger(maxInteger int) {
-	x.inner.SetMaxInteger(maxInteger)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxInteger:"), maxInteger)
 }
 
 // The mean of the distribution. This value is used for Normal and Truncated Normal disributions. Defaults to 0.
-//
-// Mean calls the underlying Mean.
 func (x *GraphRandomOpDescriptor) Mean() float32 {
-	return x.inner.Mean()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("mean"))
+	return _r
 }
 
-// SetMean calls the underlying SetMean.
 func (x *GraphRandomOpDescriptor) SetMean(mean float32) {
-	x.inner.SetMean(mean)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMean:"), mean)
 }
 
 // The standard deviation of the distribution. This value is used for Normal and Truncated Normal disributions. For Truncated Normal distribution this defines the standard deviation parameter of the underlying Normal distribution, that is the width of the Gaussian, not the true standard deviation of the truncated distribution which typically differs from the standard deviation of the original Normal distribution. Defaults to 0 for uniform distributions and 1 for normal distributions.
-//
-// StandardDeviation calls the underlying StandardDeviation.
 func (x *GraphRandomOpDescriptor) StandardDeviation() float32 {
-	return x.inner.StandardDeviation()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("standardDeviation"))
+	return _r
 }
 
-// SetStandardDeviation calls the underlying SetStandardDeviation.
 func (x *GraphRandomOpDescriptor) SetStandardDeviation(standardDeviation float32) {
-	x.inner.SetStandardDeviation(standardDeviation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandardDeviation:"), standardDeviation)
 }
 
 // The sampling method of the distribution. This value is used for Normal and Truncated Normal disributions. See MPSGraphRandomNormalSamplingMethod. Defaults to MPSGraphRandomNormalSamplingInvCDF.
-//
-// SamplingMethod calls the underlying SamplingMethod.
-func (x *GraphRandomOpDescriptor) SamplingMethod() MPSGraphRandomNormalSamplingMethod {
-	return MPSGraphRandomNormalSamplingMethod(x.inner.SamplingMethod())
+func (x *GraphRandomOpDescriptor) SamplingMethod() GraphRandomNormalSamplingMethod {
+	_r := objc.Send[GraphRandomNormalSamplingMethod](objref.IDOf(x), objc.RegisterName("samplingMethod"))
+	return _r
 }
 
-// SetSamplingMethod calls the underlying SetSamplingMethod.
-func (x *GraphRandomOpDescriptor) SetSamplingMethod(samplingMethod MPSGraphRandomNormalSamplingMethod) {
-	x.inner.SetSamplingMethod(raw.MPSGraphRandomNormalSamplingMethod(samplingMethod))
+func (x *GraphRandomOpDescriptor) SetSamplingMethod(samplingMethod GraphRandomNormalSamplingMethod) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSamplingMethod:"), samplingMethod)
 }
-
-func (x *GraphRandomOpDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
 
 // GraphRandomOpDescriptorable is the interface implemented by [GraphRandomOpDescriptor], for mocking and DI.
 type GraphRandomOpDescriptorable interface {
-	Unwrap() *raw.MPSGraphRandomOpDescriptor
-	WithDistribution(distribution MPSGraphRandomDistribution) *GraphRandomOpDescriptor
-	WithDataType(dataType mpscore.MPSDataType) *GraphRandomOpDescriptor
+	obj.Object
+	WithDistribution(distribution GraphRandomDistribution) *GraphRandomOpDescriptor
 	WithMin(min float32) *GraphRandomOpDescriptor
 	WithMax(max float32) *GraphRandomOpDescriptor
 	WithMinInteger(minInteger int) *GraphRandomOpDescriptor
 	WithMaxInteger(maxInteger int) *GraphRandomOpDescriptor
 	WithMean(mean float32) *GraphRandomOpDescriptor
 	WithStandardDeviation(standardDeviation float32) *GraphRandomOpDescriptor
-	WithSamplingMethod(samplingMethod MPSGraphRandomNormalSamplingMethod) *GraphRandomOpDescriptor
-	Distribution() MPSGraphRandomDistribution
-	SetDistribution(distribution MPSGraphRandomDistribution)
-	DataType() mpscore.MPSDataType
-	SetDataType(dataType mpscore.MPSDataType)
+	WithSamplingMethod(samplingMethod GraphRandomNormalSamplingMethod) *GraphRandomOpDescriptor
+	Distribution() GraphRandomDistribution
+	SetDistribution(distribution GraphRandomDistribution)
 	Min() float32
 	SetMin(min float32)
 	Max() float32
@@ -248,8 +233,8 @@ type GraphRandomOpDescriptorable interface {
 	SetMean(mean float32)
 	StandardDeviation() float32
 	SetStandardDeviation(standardDeviation float32)
-	SamplingMethod() MPSGraphRandomNormalSamplingMethod
-	SetSamplingMethod(samplingMethod MPSGraphRandomNormalSamplingMethod)
+	SamplingMethod() GraphRandomNormalSamplingMethod
+	SetSamplingMethod(samplingMethod GraphRandomNormalSamplingMethod)
 }
 
 var _ GraphRandomOpDescriptorable = (*GraphRandomOpDescriptor)(nil)

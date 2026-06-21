@@ -5,107 +5,126 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRMediaPlaybackClusterSkipBackwardParams wraps [raw.MTRMediaPlaybackClusterSkipBackwardParams] with a fluent Go API.
+// MTRMediaPlaybackClusterSkipBackwardParams is an idiomatic wrapper over the Objective-C class MTRMediaPlaybackClusterSkipBackwardParams.
 type MTRMediaPlaybackClusterSkipBackwardParams struct {
-	inner *raw.MTRMediaPlaybackClusterSkipBackwardParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRMediaPlaybackClusterSkipBackwardParams].
-func (x *MTRMediaPlaybackClusterSkipBackwardParams) Unwrap() *raw.MTRMediaPlaybackClusterSkipBackwardParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRMediaPlaybackClusterSkipBackwardParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRMediaPlaybackClusterSkipBackwardParamsFromID adopts an existing object pointer as a MTRMediaPlaybackClusterSkipBackwardParams (nil for 0).
+// MTRMediaPlaybackClusterSkipBackwardParamsFromID adopts an existing Objective-C object as a MTRMediaPlaybackClusterSkipBackwardParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRMediaPlaybackClusterSkipBackwardParamsFromID(id objc.ID) *MTRMediaPlaybackClusterSkipBackwardParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRMediaPlaybackClusterSkipBackwardParams{inner: raw.MTRMediaPlaybackClusterSkipBackwardParamsFromID(id)}
+	x := &MTRMediaPlaybackClusterSkipBackwardParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRMediaPlaybackClusterSkipBackwardParams creates a new [MTRMediaPlaybackClusterSkipBackwardParams].
+// mTRMediaPlaybackClusterSkipBackwardParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRMediaPlaybackClusterSkipBackwardParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRMediaPlaybackClusterSkipBackwardParamsAdopt(id objc.ID) *MTRMediaPlaybackClusterSkipBackwardParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRMediaPlaybackClusterSkipBackwardParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRMediaPlaybackClusterSkipBackwardParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRMediaPlaybackClusterSkipBackwardParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRMediaPlaybackClusterSkipBackwardParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRMediaPlaybackClusterSkipBackwardParams creates a new MTRMediaPlaybackClusterSkipBackwardParams.
 func NewMTRMediaPlaybackClusterSkipBackwardParams() *MTRMediaPlaybackClusterSkipBackwardParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRMediaPlaybackClusterSkipBackwardParams")), objc.RegisterName("new"))
-	return &MTRMediaPlaybackClusterSkipBackwardParams{inner: raw.MTRMediaPlaybackClusterSkipBackwardParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRMediaPlaybackClusterSkipBackwardParams")), objc.RegisterName("new"))
+	return mTRMediaPlaybackClusterSkipBackwardParamsAdopt(_id)
 }
 
-// WithDeltaPositionMilliseconds sets the deltaPositionMilliseconds property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterSkipBackwardParams) WithDeltaPositionMilliseconds(deltaPositionMilliseconds *foundation.NSNumber) *MTRMediaPlaybackClusterSkipBackwardParams {
-	x.inner.SetDeltaPositionMilliseconds(deltaPositionMilliseconds)
+// WithDeltaPositionMilliseconds sets deltaPositionMilliseconds and returns the receiver so calls can be chained.
+func (x *MTRMediaPlaybackClusterSkipBackwardParams) WithDeltaPositionMilliseconds(deltaPositionMilliseconds obj.Object) *MTRMediaPlaybackClusterSkipBackwardParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeltaPositionMilliseconds:"), objref.IDOf(deltaPositionMilliseconds))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterSkipBackwardParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMediaPlaybackClusterSkipBackwardParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRMediaPlaybackClusterSkipBackwardParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaPlaybackClusterSkipBackwardParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterSkipBackwardParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMediaPlaybackClusterSkipBackwardParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRMediaPlaybackClusterSkipBackwardParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMediaPlaybackClusterSkipBackwardParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// DeltaPositionMilliseconds calls the underlying DeltaPositionMilliseconds.
-func (x *MTRMediaPlaybackClusterSkipBackwardParams) DeltaPositionMilliseconds() *foundation.NSNumber {
-	return x.inner.DeltaPositionMilliseconds()
+func (x *MTRMediaPlaybackClusterSkipBackwardParams) DeltaPositionMilliseconds() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deltaPositionMilliseconds"))
+	return obj.Wrap(_r)
 }
 
-// SetDeltaPositionMilliseconds calls the underlying SetDeltaPositionMilliseconds.
-func (x *MTRMediaPlaybackClusterSkipBackwardParams) SetDeltaPositionMilliseconds(deltaPositionMilliseconds *foundation.NSNumber) {
-	x.inner.SetDeltaPositionMilliseconds(deltaPositionMilliseconds)
+func (x *MTRMediaPlaybackClusterSkipBackwardParams) SetDeltaPositionMilliseconds(deltaPositionMilliseconds obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeltaPositionMilliseconds:"), objref.IDOf(deltaPositionMilliseconds))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRMediaPlaybackClusterSkipBackwardParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRMediaPlaybackClusterSkipBackwardParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRMediaPlaybackClusterSkipBackwardParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRMediaPlaybackClusterSkipBackwardParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRMediaPlaybackClusterSkipBackwardParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRMediaPlaybackClusterSkipBackwardParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRMediaPlaybackClusterSkipBackwardParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRMediaPlaybackClusterSkipBackwardParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRMediaPlaybackClusterSkipBackwardParamsable is the interface implemented by [MTRMediaPlaybackClusterSkipBackwardParams], for mocking and DI.
 type MTRMediaPlaybackClusterSkipBackwardParamsable interface {
-	Unwrap() *raw.MTRMediaPlaybackClusterSkipBackwardParams
-	WithDeltaPositionMilliseconds(deltaPositionMilliseconds *foundation.NSNumber) *MTRMediaPlaybackClusterSkipBackwardParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMediaPlaybackClusterSkipBackwardParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMediaPlaybackClusterSkipBackwardParams
-	DeltaPositionMilliseconds() *foundation.NSNumber
-	SetDeltaPositionMilliseconds(deltaPositionMilliseconds *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithDeltaPositionMilliseconds(deltaPositionMilliseconds obj.Object) *MTRMediaPlaybackClusterSkipBackwardParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaPlaybackClusterSkipBackwardParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMediaPlaybackClusterSkipBackwardParams
+	DeltaPositionMilliseconds() obj.Object
+	SetDeltaPositionMilliseconds(deltaPositionMilliseconds obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRMediaPlaybackClusterSkipBackwardParamsable = (*MTRMediaPlaybackClusterSkipBackwardParams)(nil)

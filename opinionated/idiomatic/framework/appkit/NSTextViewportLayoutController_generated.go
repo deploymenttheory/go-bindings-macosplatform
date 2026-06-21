@@ -5,115 +5,94 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Manages the layout process inside the viewport interacting with its delegate.
 //
-// TextViewportLayoutController wraps [raw.NSTextViewportLayoutController] with a fluent Go API.
+// TextViewportLayoutController is an idiomatic wrapper over the Objective-C class NSTextViewportLayoutController.
 type TextViewportLayoutController struct {
-	inner *raw.NSTextViewportLayoutController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTextViewportLayoutController].
-func (x *TextViewportLayoutController) Unwrap() *raw.NSTextViewportLayoutController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextViewportLayoutController) ID() objc.ID { return x.inner.Ptr() }
-
-// TextViewportLayoutControllerFromID adopts an existing object pointer as a TextViewportLayoutController (nil for 0).
+// TextViewportLayoutControllerFromID adopts an existing Objective-C object as a TextViewportLayoutController
+// (nil for 0), retaining it and registering a release finalizer.
 func TextViewportLayoutControllerFromID(id objc.ID) *TextViewportLayoutController {
 	if id == 0 {
 		return nil
 	}
-	return &TextViewportLayoutController{inner: raw.NSTextViewportLayoutControllerFromID(id)}
+	x := &TextViewportLayoutController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// textViewportLayoutControllerAdopt wraps an Objective-C object that this code just created as a
+// TextViewportLayoutController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textViewportLayoutControllerAdopt(id objc.ID) *TextViewportLayoutController {
+	if id == 0 {
+		return nil
+	}
+	x := &TextViewportLayoutController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TextViewportLayoutController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextViewportLayoutController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextViewportLayoutController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new instance with the text layout manager you provide.
 //
-// NewTextViewportLayoutControllerWithTextLayoutManager creates a new [TextViewportLayoutController].
-func NewTextViewportLayoutControllerWithTextLayoutManager(textLayoutManager *raw.NSTextLayoutManager) *TextViewportLayoutController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextViewportLayoutController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextLayoutManager:"), textLayoutManager.Ptr())
-	return &TextViewportLayoutController{inner: raw.NSTextViewportLayoutControllerFromID(_id)}
-}
-
-// The delegate for the text layout manager object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *TextViewportLayoutController) WithDelegate(delegate raw.NSTextViewportLayoutControllerDelegate) *TextViewportLayoutController {
-	x.inner.SetDelegate(delegate)
-	return x
+// NewTextViewportLayoutControllerWithTextLayoutManager creates a new TextViewportLayoutController.
+func NewTextViewportLayoutControllerWithTextLayoutManager(textLayoutManager *TextLayoutManager) *TextViewportLayoutController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextViewportLayoutController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextLayoutManager:"), objref.IDOf(textLayoutManager))
+	return textViewportLayoutControllerAdopt(_id)
 }
 
 // Performs layout in the viewport.
-//
-// LayoutViewport calls the underlying LayoutViewport.
 func (x *TextViewportLayoutController) LayoutViewport() {
-	x.inner.LayoutViewport()
-}
-
-// Relocates the viewport to the location you specify.
-//
-// RelocateViewportToTextLocation calls the underlying RelocateViewportToTextLocation.
-func (x *TextViewportLayoutController) RelocateViewportToTextLocation(textLocation raw.NSTextLocation) float64 {
-	return x.inner.RelocateViewportToTextLocation(textLocation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutViewport"))
 }
 
 // Adjusts the viewport rect by the specified offset if needed.
-//
-// AdjustViewportByVerticalOffset calls the underlying AdjustViewportByVerticalOffset.
 func (x *TextViewportLayoutController) AdjustViewportByVerticalOffset(verticalOffset float64) {
-	x.inner.AdjustViewportByVerticalOffset(verticalOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustViewportByVerticalOffset:"), verticalOffset)
 }
 
-// Delegate calls the underlying Delegate.
-func (x *TextViewportLayoutController) Delegate() raw.NSTextViewportLayoutControllerDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *TextViewportLayoutController) SetDelegate(delegate raw.NSTextViewportLayoutControllerDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// TextLayoutManager calls the underlying TextLayoutManager.
 func (x *TextViewportLayoutController) TextLayoutManager() *TextLayoutManager {
-	_r := x.inner.TextLayoutManager()
-	if _r == nil {
-		return nil
-	}
-	return &TextLayoutManager{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textLayoutManager"))
+	return TextLayoutManagerFromID(_r)
 }
 
-// ViewportBounds calls the underlying ViewportBounds.
-func (x *TextViewportLayoutController) ViewportBounds() corefoundation.CGRect {
-	return x.inner.ViewportBounds()
-}
-
-// ViewportRange calls the underlying ViewportRange.
 func (x *TextViewportLayoutController) ViewportRange() *TextRange {
-	_r := x.inner.ViewportRange()
-	if _r == nil {
-		return nil
-	}
-	return &TextRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewportRange"))
+	return TextRangeFromID(_r)
 }
 
 // TextViewportLayoutControllerable is the interface implemented by [TextViewportLayoutController], for mocking and DI.
 type TextViewportLayoutControllerable interface {
-	Unwrap() *raw.NSTextViewportLayoutController
-	WithDelegate(delegate raw.NSTextViewportLayoutControllerDelegate) *TextViewportLayoutController
+	obj.Object
 	LayoutViewport()
-	RelocateViewportToTextLocation(textLocation raw.NSTextLocation) float64
 	AdjustViewportByVerticalOffset(verticalOffset float64)
-	Delegate() raw.NSTextViewportLayoutControllerDelegate
-	SetDelegate(delegate raw.NSTextViewportLayoutControllerDelegate)
 	TextLayoutManager() *TextLayoutManager
-	ViewportBounds() corefoundation.CGRect
 	ViewportRange() *TextRange
 }
 

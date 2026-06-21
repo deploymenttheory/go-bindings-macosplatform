@@ -5,12 +5,9 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// TKErrorDomain returns the string constant TKErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func TKErrorDomain() objc.ID {
-	return purego.CFConstant(raw.TKErrorDomain())
-}
+// TKErrorDomain returns the string constant TKErrorDomain, for use as a dictionary key or argument.
+func TKErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("TKErrorDomain"))) }

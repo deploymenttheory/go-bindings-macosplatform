@@ -5,272 +5,273 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A token’s key as stored in the keychain.
 //
-// TokenKeychainKey wraps [raw.TKTokenKeychainKey] with a fluent Go API.
+// TokenKeychainKey is an idiomatic wrapper over the Objective-C class TKTokenKeychainKey.
 type TokenKeychainKey struct {
-	inner *raw.TKTokenKeychainKey
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKTokenKeychainKey].
-func (x *TokenKeychainKey) Unwrap() *raw.TKTokenKeychainKey { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TokenKeychainKey) ID() objc.ID { return x.inner.Ptr() }
-
-// TokenKeychainKeyFromID adopts an existing object pointer as a TokenKeychainKey (nil for 0).
+// TokenKeychainKeyFromID adopts an existing Objective-C object as a TokenKeychainKey
+// (nil for 0), retaining it and registering a release finalizer.
 func TokenKeychainKeyFromID(id objc.ID) *TokenKeychainKey {
 	if id == 0 {
 		return nil
 	}
-	return &TokenKeychainKey{inner: raw.TKTokenKeychainKeyFromID(id)}
+	x := &TokenKeychainKey{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// tokenKeychainKeyAdopt wraps an Objective-C object that this code just created as a
+// TokenKeychainKey (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tokenKeychainKeyAdopt(id objc.ID) *TokenKeychainKey {
+	if id == 0 {
+		return nil
+	}
+	x := &TokenKeychainKey{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TokenKeychainKey) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TokenKeychainKey) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TokenKeychainKey) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a token keychain key with data from the specified certificate reference and a given object ID.
 //
-// NewTokenKeychainKeyWithCertificateObjectID creates a new [TokenKeychainKey].
-func NewTokenKeychainKeyWithCertificateObjectID(certificateRef unsafe.Pointer, objectID objc.ID) *TokenKeychainKey {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenKeychainKey")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCertificate:objectID:"), certificateRef, objectID)
-	return &TokenKeychainKey{inner: raw.TKTokenKeychainKeyFromID(_id)}
+// NewTokenKeychainKeyWithCertificateObjectID creates a new TokenKeychainKey.
+func NewTokenKeychainKeyWithCertificateObjectID(certificateRef obj.Object, objectID obj.Object) *TokenKeychainKey {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("TKTokenKeychainKey")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCertificate:objectID:"), objref.IDOf(certificateRef), objref.IDOf(objectID))
+	return tokenKeychainKeyAdopt(_id)
 }
 
 // The type of the key. Currently, only kSecAttrKeyTypeRSA and kSecAttrKeyTypeECSECPrimeRandom are supported values.
 //
-// WithKeyType sets the keyType property and returns the receiver for chaining.
+// WithKeyType sets keyType and returns the receiver so calls can be chained.
 func (x *TokenKeychainKey) WithKeyType(keyType string) *TokenKeychainKey {
-	x.inner.SetKeyType(foundation.NSStringStringWithUTF8String(keyType))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyType:"), purego.NSString(keyType))
 	return x
 }
 
 // The private tag data.
 //
-// WithApplicationTag sets the applicationTag property and returns the receiver for chaining.
-func (x *TokenKeychainKey) WithApplicationTag(applicationTag *foundation.NSData) *TokenKeychainKey {
-	x.inner.SetApplicationTag(applicationTag)
+// WithApplicationTag sets applicationTag and returns the receiver so calls can be chained.
+func (x *TokenKeychainKey) WithApplicationTag(applicationTag obj.Object) *TokenKeychainKey {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationTag:"), objref.IDOf(applicationTag))
 	return x
 }
 
-// @discussion Indicates the number of bits in this key.  The property is an equivalent to kSecAttrKeySizeInBits in SecItem.h
+// Indicates the number of bits in this key.  The property is an equivalent to kSecAttrKeySizeInBits in SecItem.h
 //
-// WithKeySizeInBits sets the keySizeInBits property and returns the receiver for chaining.
+// WithKeySizeInBits sets keySizeInBits and returns the receiver so calls can be chained.
 func (x *TokenKeychainKey) WithKeySizeInBits(keySizeInBits int) *TokenKeychainKey {
-	x.inner.SetKeySizeInBits(keySizeInBits)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeySizeInBits:"), keySizeInBits)
 	return x
 }
 
 // The public key data.
 //
-// WithPublicKeyData sets the publicKeyData property and returns the receiver for chaining.
-func (x *TokenKeychainKey) WithPublicKeyData(publicKeyData *foundation.NSData) *TokenKeychainKey {
-	x.inner.SetPublicKeyData(publicKeyData)
+// WithPublicKeyData sets publicKeyData and returns the receiver so calls can be chained.
+func (x *TokenKeychainKey) WithPublicKeyData(publicKeyData obj.Object) *TokenKeychainKey {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPublicKeyData:"), objref.IDOf(publicKeyData))
 	return x
 }
 
 // The SHA1 hash of the raw public key.
 //
-// WithPublicKeyHash sets the publicKeyHash property and returns the receiver for chaining.
-func (x *TokenKeychainKey) WithPublicKeyHash(publicKeyHash *foundation.NSData) *TokenKeychainKey {
-	x.inner.SetPublicKeyHash(publicKeyHash)
+// WithPublicKeyHash sets publicKeyHash and returns the receiver so calls can be chained.
+func (x *TokenKeychainKey) WithPublicKeyHash(publicKeyHash obj.Object) *TokenKeychainKey {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPublicKeyHash:"), objref.IDOf(publicKeyHash))
 	return x
 }
 
 // Whether the key can be used to decrypt data.
 //
-// WithCanDecrypt sets the canDecrypt property and returns the receiver for chaining.
+// WithCanDecrypt sets canDecrypt and returns the receiver so calls can be chained.
 func (x *TokenKeychainKey) WithCanDecrypt(canDecrypt bool) *TokenKeychainKey {
-	x.inner.SetCanDecrypt(canDecrypt)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDecrypt:"), canDecrypt)
 	return x
 }
 
 // Whether the key can be used to sign data.
 //
-// WithCanSign sets the canSign property and returns the receiver for chaining.
+// WithCanSign sets canSign and returns the receiver so calls can be chained.
 func (x *TokenKeychainKey) WithCanSign(canSign bool) *TokenKeychainKey {
-	x.inner.SetCanSign(canSign)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanSign:"), canSign)
 	return x
 }
 
 // Whether the key can be used to perform Diffie-Hellman style cryptographic key exchange.
 //
-// WithCanPerformKeyExchange sets the canPerformKeyExchange property and returns the receiver for chaining.
+// WithCanPerformKeyExchange sets canPerformKeyExchange and returns the receiver so calls can be chained.
 func (x *TokenKeychainKey) WithCanPerformKeyExchange(canPerformKeyExchange bool) *TokenKeychainKey {
-	x.inner.SetCanPerformKeyExchange(canPerformKeyExchange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanPerformKeyExchange:"), canPerformKeyExchange)
 	return x
 }
 
 // Whether the key can be used for system login.
 //
-// WithSuitableForLogin sets the suitableForLogin property and returns the receiver for chaining.
+// WithSuitableForLogin sets suitableForLogin and returns the receiver so calls can be chained.
 func (x *TokenKeychainKey) WithSuitableForLogin(suitableForLogin bool) *TokenKeychainKey {
-	x.inner.SetSuitableForLogin(suitableForLogin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuitableForLogin:"), suitableForLogin)
 	return x
 }
 
 // The user-visible label for the keychain item.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *TokenKeychainKey) WithLabel(label string) *TokenKeychainKey {
-	x.inner.TKTokenKeychainItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // Access constraints for the keychain item, keyed by TKTokenOperation values wrapped in NSNumber objects.
 //
-// WithConstraints sets the constraints property and returns the receiver for chaining.
-func (x *TokenKeychainKey) WithConstraints(constraints *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *TokenKeychainKey {
-	x.inner.TKTokenKeychainItem.SetConstraints(constraints)
+// WithConstraints sets constraints and returns the receiver so calls can be chained.
+func (x *TokenKeychainKey) WithConstraints(constraints obj.Object) *TokenKeychainKey {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), objref.IDOf(constraints))
 	return x
 }
 
-// @discussion Type of the key, currently kSecAttrKeyTypeRSA and kSecAttrKeyTypeECSECPrimeRandom is supported).  The property is an equivalent to kSecAttrKeyType in SecItem.h
-//
-// KeyType calls the underlying KeyType.
+// Type of the key, currently kSecAttrKeyTypeRSA and kSecAttrKeyTypeECSECPrimeRandom is supported).  The property is an equivalent to kSecAttrKeyType in SecItem.h
 func (x *TokenKeychainKey) KeyType() string {
-	_r := x.inner.KeyType()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyType"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetKeyType calls the underlying SetKeyType.
 func (x *TokenKeychainKey) SetKeyType(keyType string) {
-	x.inner.SetKeyType(foundation.NSStringStringWithUTF8String(keyType))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyType:"), purego.NSString(keyType))
 }
 
-// @discussion Represents private tag data.  The property is an equivalent to kSecAttrApplicationTag in SecItem.h
-//
-// ApplicationTag calls the underlying ApplicationTag.
-func (x *TokenKeychainKey) ApplicationTag() *foundation.NSData {
-	return x.inner.ApplicationTag()
+// Represents private tag data.  The property is an equivalent to kSecAttrApplicationTag in SecItem.h
+func (x *TokenKeychainKey) ApplicationTag() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationTag"))
+	return obj.Wrap(_r)
 }
 
-// SetApplicationTag calls the underlying SetApplicationTag.
-func (x *TokenKeychainKey) SetApplicationTag(applicationTag *foundation.NSData) {
-	x.inner.SetApplicationTag(applicationTag)
+func (x *TokenKeychainKey) SetApplicationTag(applicationTag obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationTag:"), objref.IDOf(applicationTag))
 }
 
-// @discussion Indicates the number of bits in this key.  The property is an equivalent to kSecAttrKeySizeInBits in SecItem.h
-//
-// KeySizeInBits calls the underlying KeySizeInBits.
+// Indicates the number of bits in this key.  The property is an equivalent to kSecAttrKeySizeInBits in SecItem.h
 func (x *TokenKeychainKey) KeySizeInBits() int {
-	return x.inner.KeySizeInBits()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("keySizeInBits"))
+	return _r
 }
 
-// SetKeySizeInBits calls the underlying SetKeySizeInBits.
 func (x *TokenKeychainKey) SetKeySizeInBits(keySizeInBits int) {
-	x.inner.SetKeySizeInBits(keySizeInBits)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeySizeInBits:"), keySizeInBits)
 }
 
-// @discussion Contains raw public key data for this private key.
-//
-// PublicKeyData calls the underlying PublicKeyData.
-func (x *TokenKeychainKey) PublicKeyData() *foundation.NSData {
-	return x.inner.PublicKeyData()
+// Contains raw public key data for this private key.
+func (x *TokenKeychainKey) PublicKeyData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicKeyData"))
+	return obj.Wrap(_r)
 }
 
-// SetPublicKeyData calls the underlying SetPublicKeyData.
-func (x *TokenKeychainKey) SetPublicKeyData(publicKeyData *foundation.NSData) {
-	x.inner.SetPublicKeyData(publicKeyData)
+func (x *TokenKeychainKey) SetPublicKeyData(publicKeyData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPublicKeyData:"), objref.IDOf(publicKeyData))
 }
 
-// @discussion SHA1 hash of the raw public key.  The property is an equivalent to kSecAttrApplicationLabel in SecItem.h
-//
-// PublicKeyHash calls the underlying PublicKeyHash.
-func (x *TokenKeychainKey) PublicKeyHash() *foundation.NSData {
-	return x.inner.PublicKeyHash()
+// SHA1 hash of the raw public key.  The property is an equivalent to kSecAttrApplicationLabel in SecItem.h
+func (x *TokenKeychainKey) PublicKeyHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicKeyHash"))
+	return obj.Wrap(_r)
 }
 
-// SetPublicKeyHash calls the underlying SetPublicKeyHash.
-func (x *TokenKeychainKey) SetPublicKeyHash(publicKeyHash *foundation.NSData) {
-	x.inner.SetPublicKeyHash(publicKeyHash)
+func (x *TokenKeychainKey) SetPublicKeyHash(publicKeyHash obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPublicKeyHash:"), objref.IDOf(publicKeyHash))
 }
 
-// @discussion Indicates whether this key can be used to decrypt data.  The property is an equivalent to kSecAttrCanDecrypt in SecItem.h
-//
-// CanDecrypt calls the underlying CanDecrypt.
+// Indicates whether this key can be used to decrypt data.  The property is an equivalent to kSecAttrCanDecrypt in SecItem.h
 func (x *TokenKeychainKey) CanDecrypt() bool {
-	return x.inner.CanDecrypt()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canDecrypt"))
+	return _r
 }
 
-// SetCanDecrypt calls the underlying SetCanDecrypt.
 func (x *TokenKeychainKey) SetCanDecrypt(canDecrypt bool) {
-	x.inner.SetCanDecrypt(canDecrypt)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDecrypt:"), canDecrypt)
 }
 
-// @discussion Indicates whether this key can be used to create a digital signature.  The property is an equivalent to kSecAttrCanSign in SecItem.h
-//
-// CanSign calls the underlying CanSign.
+// Indicates whether this key can be used to create a digital signature.  The property is an equivalent to kSecAttrCanSign in SecItem.h
 func (x *TokenKeychainKey) CanSign() bool {
-	return x.inner.CanSign()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canSign"))
+	return _r
 }
 
-// SetCanSign calls the underlying SetCanSign.
 func (x *TokenKeychainKey) SetCanSign(canSign bool) {
-	x.inner.SetCanSign(canSign)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanSign:"), canSign)
 }
 
-// @discussion Indicates whether this key can be used to perform Diffie-Hellman style cryptographic key exchange.
-//
-// CanPerformKeyExchange calls the underlying CanPerformKeyExchange.
+// Indicates whether this key can be used to perform Diffie-Hellman style cryptographic key exchange.
 func (x *TokenKeychainKey) CanPerformKeyExchange() bool {
-	return x.inner.CanPerformKeyExchange()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPerformKeyExchange"))
+	return _r
 }
 
-// SetCanPerformKeyExchange calls the underlying SetCanPerformKeyExchange.
 func (x *TokenKeychainKey) SetCanPerformKeyExchange(canPerformKeyExchange bool) {
-	x.inner.SetCanPerformKeyExchange(canPerformKeyExchange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanPerformKeyExchange:"), canPerformKeyExchange)
 }
 
-// @discussion Indicates whether this key can be used for login in to the system.
-//
-// IsSuitableForLogin calls the underlying IsSuitableForLogin.
+// Indicates whether this key can be used for login in to the system.
 func (x *TokenKeychainKey) IsSuitableForLogin() bool {
-	return x.inner.IsSuitableForLogin()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSuitableForLogin"))
+	return _r
 }
 
-// SetSuitableForLogin calls the underlying SetSuitableForLogin.
 func (x *TokenKeychainKey) SetSuitableForLogin(suitableForLogin bool) {
-	x.inner.SetSuitableForLogin(suitableForLogin)
-}
-
-func (x *TokenKeychainKey) asTokenKeychainItem() *raw.TKTokenKeychainItem {
-	return &x.inner.TKTokenKeychainItem
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuitableForLogin:"), suitableForLogin)
 }
 
 // TokenKeychainKeyable is the interface implemented by [TokenKeychainKey], for mocking and DI.
 type TokenKeychainKeyable interface {
-	Unwrap() *raw.TKTokenKeychainKey
+	obj.Object
 	WithKeyType(keyType string) *TokenKeychainKey
-	WithApplicationTag(applicationTag *foundation.NSData) *TokenKeychainKey
+	WithApplicationTag(applicationTag obj.Object) *TokenKeychainKey
 	WithKeySizeInBits(keySizeInBits int) *TokenKeychainKey
-	WithPublicKeyData(publicKeyData *foundation.NSData) *TokenKeychainKey
-	WithPublicKeyHash(publicKeyHash *foundation.NSData) *TokenKeychainKey
+	WithPublicKeyData(publicKeyData obj.Object) *TokenKeychainKey
+	WithPublicKeyHash(publicKeyHash obj.Object) *TokenKeychainKey
 	WithCanDecrypt(canDecrypt bool) *TokenKeychainKey
 	WithCanSign(canSign bool) *TokenKeychainKey
 	WithCanPerformKeyExchange(canPerformKeyExchange bool) *TokenKeychainKey
 	WithSuitableForLogin(suitableForLogin bool) *TokenKeychainKey
 	WithLabel(label string) *TokenKeychainKey
-	WithConstraints(constraints *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *TokenKeychainKey
+	WithConstraints(constraints obj.Object) *TokenKeychainKey
 	KeyType() string
 	SetKeyType(keyType string)
-	ApplicationTag() *foundation.NSData
-	SetApplicationTag(applicationTag *foundation.NSData)
+	ApplicationTag() obj.Object
+	SetApplicationTag(applicationTag obj.Object)
 	KeySizeInBits() int
 	SetKeySizeInBits(keySizeInBits int)
-	PublicKeyData() *foundation.NSData
-	SetPublicKeyData(publicKeyData *foundation.NSData)
-	PublicKeyHash() *foundation.NSData
-	SetPublicKeyHash(publicKeyHash *foundation.NSData)
+	PublicKeyData() obj.Object
+	SetPublicKeyData(publicKeyData obj.Object)
+	PublicKeyHash() obj.Object
+	SetPublicKeyHash(publicKeyHash obj.Object)
 	CanDecrypt() bool
 	SetCanDecrypt(canDecrypt bool)
 	CanSign() bool

@@ -6,101 +6,115 @@ package scenekit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A controller for playback of a positional audio source in a SceneKit scene.
 //
-// AudioPlayer wraps [raw.SCNAudioPlayer] with a fluent Go API.
+// AudioPlayer is an idiomatic wrapper over the Objective-C class SCNAudioPlayer.
 type AudioPlayer struct {
-	inner *raw.SCNAudioPlayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNAudioPlayer].
-func (x *AudioPlayer) Unwrap() *raw.SCNAudioPlayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioPlayer) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioPlayerFromID adopts an existing object pointer as a AudioPlayer (nil for 0).
+// AudioPlayerFromID adopts an existing Objective-C object as a AudioPlayer
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioPlayerFromID(id objc.ID) *AudioPlayer {
 	if id == 0 {
 		return nil
 	}
-	return &AudioPlayer{inner: raw.SCNAudioPlayerFromID(id)}
+	x := &AudioPlayer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// audioPlayerAdopt wraps an Objective-C object that this code just created as a
+// AudioPlayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioPlayerAdopt(id objc.ID) *AudioPlayer {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioPlayer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudioPlayer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioPlayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioPlayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes an audio player for playing the specified simple audio source.
 //
-// NewAudioPlayerWithSource creates a new [AudioPlayer].
-func NewAudioPlayerWithSource(source *raw.SCNAudioSource) *AudioPlayer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNAudioPlayer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), source.Ptr())
-	return &AudioPlayer{inner: raw.SCNAudioPlayerFromID(_id)}
+// NewAudioPlayerWithSource creates a new AudioPlayer.
+func NewAudioPlayerWithSource(source *AudioSource) *AudioPlayer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNAudioPlayer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(source))
+	return audioPlayerAdopt(_id)
 }
 
 // Initializes an audio player for playing the specified AVFoundation audio node.
 //
-// NewAudioPlayerWithAVAudioNode creates a new [AudioPlayer].
-func NewAudioPlayerWithAVAudioNode(audioNode *avfaudio.AVAudioNode) *AudioPlayer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNAudioPlayer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAVAudioNode:"), audioNode.Ptr())
-	return &AudioPlayer{inner: raw.SCNAudioPlayerFromID(_id)}
+// NewAudioPlayerWithAVAudioNode creates a new AudioPlayer.
+func NewAudioPlayerWithAVAudioNode(audioNode obj.Object) *AudioPlayer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SCNAudioPlayer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAVAudioNode:"), objref.IDOf(audioNode))
+	return audioPlayerAdopt(_id)
 }
 
 // A block called by SceneKit when playback of the player’s audio source is about to begin.
 //
-// WithWillStartPlayback sets the willStartPlayback property and returns the receiver for chaining.
+// WithWillStartPlayback sets willStartPlayback and returns the receiver so calls can be chained.
 func (x *AudioPlayer) WithWillStartPlayback(willStartPlayback func()) *AudioPlayer {
-	x.inner.SetWillStartPlayback(willStartPlayback)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWillStartPlayback:"), objc.NewBlock(func(_ objc.Block) { willStartPlayback() }))
 	return x
 }
 
 // A block called by SceneKit when playback of the player’s audio source has completed.
 //
-// WithDidFinishPlayback sets the didFinishPlayback property and returns the receiver for chaining.
+// WithDidFinishPlayback sets didFinishPlayback and returns the receiver so calls can be chained.
 func (x *AudioPlayer) WithDidFinishPlayback(didFinishPlayback func()) *AudioPlayer {
-	x.inner.SetDidFinishPlayback(didFinishPlayback)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDidFinishPlayback:"), objc.NewBlock(func(_ objc.Block) { didFinishPlayback() }))
 	return x
-}
-
-// @property playbackStarted @abstract This block is called when the playback starts in case a valid audio source is present.
-//
-// WillStartPlayback calls the underlying WillStartPlayback.
-func (x *AudioPlayer) WillStartPlayback() objc.Block {
-	return x.inner.WillStartPlayback()
 }
 
 // SetWillStartPlayback blocks until the operation completes or ctx is cancelled.
 func (x *AudioPlayer) SetWillStartPlayback(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.SetWillStartPlayback(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWillStartPlayback:"), _block)
 	select {
 	case err := <-_ch:
 		return err
 	case <-ctx.Done():
 		return ctx.Err()
 	}
-}
-
-// @property playbackFinished @abstract This block is called when the playback stops in case a valid audio source is present.
-//
-// DidFinishPlayback calls the underlying DidFinishPlayback.
-func (x *AudioPlayer) DidFinishPlayback() objc.Block {
-	return x.inner.DidFinishPlayback()
 }
 
 // SetDidFinishPlayback blocks until the operation completes or ctx is cancelled.
 func (x *AudioPlayer) SetDidFinishPlayback(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.SetDidFinishPlayback(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDidFinishPlayback:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -109,34 +123,26 @@ func (x *AudioPlayer) SetDidFinishPlayback(ctx context.Context) error {
 	}
 }
 
-// @property audioNode @abstract The audioNode. If this player was not initialised with a custom AVAudioNode this contains the internal audio player node used by scene kit internally.
-//
-// AudioNode calls the underlying AudioNode.
-func (x *AudioPlayer) AudioNode() *avfaudio.AVAudioNode {
-	return x.inner.AudioNode()
+// The audioNode. If this player was not initialised with a custom AVAudioNode this contains the internal audio player node used by scene kit internally.
+func (x *AudioPlayer) AudioNode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioNode"))
+	return obj.Wrap(_r)
 }
 
-// @property audioSource @abstract The audioSource if there is one.
-//
-// AudioSource calls the underlying AudioSource.
+// The audioSource if there is one.
 func (x *AudioPlayer) AudioSource() *AudioSource {
-	_r := x.inner.AudioSource()
-	if _r == nil {
-		return nil
-	}
-	return &AudioSource{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioSource"))
+	return AudioSourceFromID(_r)
 }
 
 // AudioPlayerable is the interface implemented by [AudioPlayer], for mocking and DI.
 type AudioPlayerable interface {
-	Unwrap() *raw.SCNAudioPlayer
+	obj.Object
 	WithWillStartPlayback(willStartPlayback func()) *AudioPlayer
 	WithDidFinishPlayback(didFinishPlayback func()) *AudioPlayer
-	WillStartPlayback() objc.Block
 	SetWillStartPlayback(ctx context.Context) error
-	DidFinishPlayback() objc.Block
 	SetDidFinishPlayback(ctx context.Context) error
-	AudioNode() *avfaudio.AVAudioNode
+	AudioNode() obj.Object
 	AudioSource() *AudioSource
 }
 

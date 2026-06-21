@@ -5,220 +5,213 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that renders a scene into a custom Metal rendering pipeline and drives the scene update cycle.
 //
-// Renderer wraps [raw.SKRenderer] with a fluent Go API.
+// Renderer is an idiomatic wrapper over the Objective-C class SKRenderer.
 type Renderer struct {
-	inner *raw.SKRenderer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKRenderer].
-func (x *Renderer) Unwrap() *raw.SKRenderer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Renderer) ID() objc.ID { return x.inner.Ptr() }
-
-// RendererFromID adopts an existing object pointer as a Renderer (nil for 0).
+// RendererFromID adopts an existing Objective-C object as a Renderer
+// (nil for 0), retaining it and registering a release finalizer.
 func RendererFromID(id objc.ID) *Renderer {
 	if id == 0 {
 		return nil
 	}
-	return &Renderer{inner: raw.SKRendererFromID(id)}
+	x := &Renderer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRenderer creates a new [Renderer].
+// rendererAdopt wraps an Objective-C object that this code just created as a
+// Renderer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rendererAdopt(id objc.ID) *Renderer {
+	if id == 0 {
+		return nil
+	}
+	x := &Renderer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Renderer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Renderer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Renderer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRenderer creates a new Renderer.
 func NewRenderer() *Renderer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKRenderer")), objc.RegisterName("new"))
-	return &Renderer{inner: raw.SKRendererFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKRenderer")), objc.RegisterName("new"))
+	return rendererAdopt(_id)
 }
 
 // The scene this renderer will draw into the Metal command buffer.
 //
-// WithScene sets the scene property and returns the receiver for chaining.
+// WithScene sets scene and returns the receiver so calls can be chained.
 func (x *Renderer) WithScene(scene *Scene) *Renderer {
-	x.inner.SetScene(scene.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
 	return x
 }
 
 // Ignores sibling and traversal order to sort the rendered contents of a scene into the most efficient batching possible. This will require zPosition to be used in the scenes to properly guarantee elements are in front or behind each other. This defaults to NO, meaning that sibling order overrides efficiency heuristics in the rendering of the scenes in the view. Setting this to YES for a complex scene may substantially increase performance, but care must be taken as only zPosition determines render order before the efficiency heuristics are used.
 //
-// WithIgnoresSiblingOrder sets the ignoresSiblingOrder property and returns the receiver for chaining.
+// WithIgnoresSiblingOrder sets ignoresSiblingOrder and returns the receiver so calls can be chained.
 func (x *Renderer) WithIgnoresSiblingOrder(ignoresSiblingOrder bool) *Renderer {
-	x.inner.SetIgnoresSiblingOrder(ignoresSiblingOrder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresSiblingOrder:"), ignoresSiblingOrder)
 	return x
 }
 
 // A boolean that indicated whether non-visible nodes should be automatically culled when rendering.
 //
-// WithShouldCullNonVisibleNodes sets the shouldCullNonVisibleNodes property and returns the receiver for chaining.
+// WithShouldCullNonVisibleNodes sets shouldCullNonVisibleNodes and returns the receiver so calls can be chained.
 func (x *Renderer) WithShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) *Renderer {
-	x.inner.SetShouldCullNonVisibleNodes(shouldCullNonVisibleNodes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCullNonVisibleNodes:"), shouldCullNonVisibleNodes)
 	return x
 }
 
 // A Boolean value that indicates whether the view displays the number of drawing passes it needed to render the view.
 //
-// WithShowsDrawCount sets the showsDrawCount property and returns the receiver for chaining.
+// WithShowsDrawCount sets showsDrawCount and returns the receiver so calls can be chained.
 func (x *Renderer) WithShowsDrawCount(showsDrawCount bool) *Renderer {
-	x.inner.SetShowsDrawCount(showsDrawCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsDrawCount:"), showsDrawCount)
 	return x
 }
 
 // A Boolean value that indicates whether the view displays an overlay that shows physics bodies that are visible in the scene.
 //
-// WithShowsNodeCount sets the showsNodeCount property and returns the receiver for chaining.
+// WithShowsNodeCount sets showsNodeCount and returns the receiver so calls can be chained.
 func (x *Renderer) WithShowsNodeCount(showsNodeCount bool) *Renderer {
-	x.inner.SetShowsNodeCount(showsNodeCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsNodeCount:"), showsNodeCount)
 	return x
 }
 
 // A Boolean value that indicates whether the view displays the number of rectangles used to render the scene.
 //
-// WithShowsQuadCount sets the showsQuadCount property and returns the receiver for chaining.
+// WithShowsQuadCount sets showsQuadCount and returns the receiver so calls can be chained.
 func (x *Renderer) WithShowsQuadCount(showsQuadCount bool) *Renderer {
-	x.inner.SetShowsQuadCount(showsQuadCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsQuadCount:"), showsQuadCount)
 	return x
 }
 
 // A Boolean value that indicates whether the view displays physics-related debugging information.
 //
-// WithShowsPhysics sets the showsPhysics property and returns the receiver for chaining.
+// WithShowsPhysics sets showsPhysics and returns the receiver so calls can be chained.
 func (x *Renderer) WithShowsPhysics(showsPhysics bool) *Renderer {
-	x.inner.SetShowsPhysics(showsPhysics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsPhysics:"), showsPhysics)
 	return x
 }
 
 // A Boolean value that indicates whether the view displays information about physics fields in the scene.
 //
-// WithShowsFields sets the showsFields property and returns the receiver for chaining.
+// WithShowsFields sets showsFields and returns the receiver so calls can be chained.
 func (x *Renderer) WithShowsFields(showsFields bool) *Renderer {
-	x.inner.SetShowsFields(showsFields)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFields:"), showsFields)
 	return x
 }
 
-// Render the scene content in the specified Metal command buffer. @param viewport The pixel dimensions in which to render. @param commandBuffer The Metal command buffer in which SpriteKit should schedule rendering commands. @param renderPassDescriptor The Metal render pass descriptor describing the rendering target.
-//
-// RenderWithViewportCommandBufferRenderPassDescriptor calls the underlying RenderWithViewportCommandBufferRenderPassDescriptor.
-func (x *Renderer) RenderWithViewportCommandBufferRenderPassDescriptor(viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor) {
-	x.inner.RenderWithViewportCommandBufferRenderPassDescriptor(viewport, commandBuffer, renderPassDescriptor)
-}
-
-// Render the scene content using a specific Metal command encoder. @param viewport The pixel dimensions in which to render. @param renderCommandEncoder The Metal render command encoder that SpriteKit will use to encode rendering commands. This method will not call endEncoding. @param renderPassDescriptor The Metal render pass descriptor describing the rendering target. @param commandQueue The Metal command queue.
-//
-// RenderWithViewportRenderCommandEncoderRenderPassDescriptorCommandQueue calls the underlying RenderWithViewportRenderCommandEncoderRenderPassDescriptorCommandQueue.
-func (x *Renderer) RenderWithViewportRenderCommandEncoderRenderPassDescriptorCommandQueue(viewport corefoundation.CGRect, renderCommandEncoder metal.MTLRenderCommandEncoder, renderPassDescriptor *metal.MTLRenderPassDescriptor, commandQueue metal.MTLCommandQueue) {
-	x.inner.RenderWithViewportRenderCommandEncoderRenderPassDescriptorCommandQueue(viewport, renderCommandEncoder, renderPassDescriptor, commandQueue)
-}
-
-// Update the scene at the specified system time. @param currentTime The timestamp in seconds.
-//
-// UpdateAtTime calls the underlying UpdateAtTime.
+// Update the scene at the specified system time.
 func (x *Renderer) UpdateAtTime(currentTime float64) {
-	x.inner.UpdateAtTime(currentTime)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateAtTime:"), currentTime)
 }
 
 // The currently presented scene, otherwise nil. If in a transition, the 'incoming' scene is returned.
-//
-// Scene calls the underlying Scene.
 func (x *Renderer) Scene() *Scene {
-	_r := x.inner.Scene()
-	if _r == nil {
-		return nil
-	}
-	return &Scene{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scene"))
+	return SceneFromID(_r)
 }
 
-// SetScene calls the underlying SetScene.
-func (x *Renderer) SetScene(scene *raw.SKScene) {
-	x.inner.SetScene(scene)
+func (x *Renderer) SetScene(scene *Scene) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
 }
 
 // Ignores sibling and traversal order to sort the rendered contents of a scene into the most efficient batching possible. This will require zPosition to be used in the scenes to properly guarantee elements are in front or behind each other. This defaults to NO, meaning that sibling order overrides efficiency heuristics in the rendering of the scenes in the view. Setting this to YES for a complex scene may substantially increase performance, but care must be taken as only zPosition determines render order before the efficiency heuristics are used.
-//
-// IgnoresSiblingOrder calls the underlying IgnoresSiblingOrder.
 func (x *Renderer) IgnoresSiblingOrder() bool {
-	return x.inner.IgnoresSiblingOrder()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ignoresSiblingOrder"))
+	return _r
 }
 
-// SetIgnoresSiblingOrder calls the underlying SetIgnoresSiblingOrder.
 func (x *Renderer) SetIgnoresSiblingOrder(ignoresSiblingOrder bool) {
-	x.inner.SetIgnoresSiblingOrder(ignoresSiblingOrder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresSiblingOrder:"), ignoresSiblingOrder)
 }
 
 // A boolean that indicated whether non-visible nodes should be automatically culled when rendering.
-//
-// ShouldCullNonVisibleNodes calls the underlying ShouldCullNonVisibleNodes.
 func (x *Renderer) ShouldCullNonVisibleNodes() bool {
-	return x.inner.ShouldCullNonVisibleNodes()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldCullNonVisibleNodes"))
+	return _r
 }
 
-// SetShouldCullNonVisibleNodes calls the underlying SetShouldCullNonVisibleNodes.
 func (x *Renderer) SetShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) {
-	x.inner.SetShouldCullNonVisibleNodes(shouldCullNonVisibleNodes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCullNonVisibleNodes:"), shouldCullNonVisibleNodes)
 }
 
 // Toggles display of performance stats when rendering. All default to false.
-//
-// ShowsDrawCount calls the underlying ShowsDrawCount.
 func (x *Renderer) ShowsDrawCount() bool {
-	return x.inner.ShowsDrawCount()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsDrawCount"))
+	return _r
 }
 
-// SetShowsDrawCount calls the underlying SetShowsDrawCount.
 func (x *Renderer) SetShowsDrawCount(showsDrawCount bool) {
-	x.inner.SetShowsDrawCount(showsDrawCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsDrawCount:"), showsDrawCount)
 }
 
-// ShowsNodeCount calls the underlying ShowsNodeCount.
 func (x *Renderer) ShowsNodeCount() bool {
-	return x.inner.ShowsNodeCount()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsNodeCount"))
+	return _r
 }
 
-// SetShowsNodeCount calls the underlying SetShowsNodeCount.
 func (x *Renderer) SetShowsNodeCount(showsNodeCount bool) {
-	x.inner.SetShowsNodeCount(showsNodeCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsNodeCount:"), showsNodeCount)
 }
 
-// ShowsQuadCount calls the underlying ShowsQuadCount.
 func (x *Renderer) ShowsQuadCount() bool {
-	return x.inner.ShowsQuadCount()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsQuadCount"))
+	return _r
 }
 
-// SetShowsQuadCount calls the underlying SetShowsQuadCount.
 func (x *Renderer) SetShowsQuadCount(showsQuadCount bool) {
-	x.inner.SetShowsQuadCount(showsQuadCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsQuadCount:"), showsQuadCount)
 }
 
-// ShowsPhysics calls the underlying ShowsPhysics.
 func (x *Renderer) ShowsPhysics() bool {
-	return x.inner.ShowsPhysics()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsPhysics"))
+	return _r
 }
 
-// SetShowsPhysics calls the underlying SetShowsPhysics.
 func (x *Renderer) SetShowsPhysics(showsPhysics bool) {
-	x.inner.SetShowsPhysics(showsPhysics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsPhysics:"), showsPhysics)
 }
 
-// ShowsFields calls the underlying ShowsFields.
 func (x *Renderer) ShowsFields() bool {
-	return x.inner.ShowsFields()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsFields"))
+	return _r
 }
 
-// SetShowsFields calls the underlying SetShowsFields.
 func (x *Renderer) SetShowsFields(showsFields bool) {
-	x.inner.SetShowsFields(showsFields)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFields:"), showsFields)
 }
 
 // Rendererable is the interface implemented by [Renderer], for mocking and DI.
 type Rendererable interface {
-	Unwrap() *raw.SKRenderer
+	obj.Object
 	WithScene(scene *Scene) *Renderer
 	WithIgnoresSiblingOrder(ignoresSiblingOrder bool) *Renderer
 	WithShouldCullNonVisibleNodes(shouldCullNonVisibleNodes bool) *Renderer
@@ -227,11 +220,9 @@ type Rendererable interface {
 	WithShowsQuadCount(showsQuadCount bool) *Renderer
 	WithShowsPhysics(showsPhysics bool) *Renderer
 	WithShowsFields(showsFields bool) *Renderer
-	RenderWithViewportCommandBufferRenderPassDescriptor(viewport corefoundation.CGRect, commandBuffer metal.MTLCommandBuffer, renderPassDescriptor *metal.MTLRenderPassDescriptor)
-	RenderWithViewportRenderCommandEncoderRenderPassDescriptorCommandQueue(viewport corefoundation.CGRect, renderCommandEncoder metal.MTLRenderCommandEncoder, renderPassDescriptor *metal.MTLRenderPassDescriptor, commandQueue metal.MTLCommandQueue)
 	UpdateAtTime(currentTime float64)
 	Scene() *Scene
-	SetScene(scene *raw.SKScene)
+	SetScene(scene *Scene)
 	IgnoresSiblingOrder() bool
 	SetIgnoresSiblingOrder(ignoresSiblingOrder bool)
 	ShouldCullNonVisibleNodes() bool

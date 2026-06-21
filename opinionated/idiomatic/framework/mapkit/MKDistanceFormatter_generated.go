@@ -5,127 +5,128 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A utility object that converts between a geographic distance and a string-based expression of that distance.
 //
-// DistanceFormatter wraps [raw.MKDistanceFormatter] with a fluent Go API.
+// DistanceFormatter is an idiomatic wrapper over the Objective-C class MKDistanceFormatter.
 type DistanceFormatter struct {
-	inner *raw.MKDistanceFormatter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKDistanceFormatter].
-func (x *DistanceFormatter) Unwrap() *raw.MKDistanceFormatter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DistanceFormatter) ID() objc.ID { return x.inner.Ptr() }
-
-// DistanceFormatterFromID adopts an existing object pointer as a DistanceFormatter (nil for 0).
+// DistanceFormatterFromID adopts an existing Objective-C object as a DistanceFormatter
+// (nil for 0), retaining it and registering a release finalizer.
 func DistanceFormatterFromID(id objc.ID) *DistanceFormatter {
 	if id == 0 {
 		return nil
 	}
-	return &DistanceFormatter{inner: raw.MKDistanceFormatterFromID(id)}
+	x := &DistanceFormatter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDistanceFormatter creates a new [DistanceFormatter].
+// distanceFormatterAdopt wraps an Objective-C object that this code just created as a
+// DistanceFormatter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func distanceFormatterAdopt(id objc.ID) *DistanceFormatter {
+	if id == 0 {
+		return nil
+	}
+	x := &DistanceFormatter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DistanceFormatter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DistanceFormatter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DistanceFormatter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDistanceFormatter creates a new DistanceFormatter.
 func NewDistanceFormatter() *DistanceFormatter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKDistanceFormatter")), objc.RegisterName("new"))
-	return &DistanceFormatter{inner: raw.MKDistanceFormatterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKDistanceFormatter")), objc.RegisterName("new"))
+	return distanceFormatterAdopt(_id)
 }
 
 // The locale to use when formatting strings.
 //
-// WithLocale sets the locale property and returns the receiver for chaining.
-func (x *DistanceFormatter) WithLocale(locale *foundation.NSLocale) *DistanceFormatter {
-	x.inner.SetLocale(locale)
+// WithLocale sets locale and returns the receiver so calls can be chained.
+func (x *DistanceFormatter) WithLocale(locale obj.Object) *DistanceFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return x
 }
 
 // The measuring system — imperial or metric — to use for units.
 //
-// WithUnits sets the units property and returns the receiver for chaining.
-func (x *DistanceFormatter) WithUnits(units MKDistanceFormatterUnits) *DistanceFormatter {
-	x.inner.SetUnits(raw.MKDistanceFormatterUnits(units))
+// WithUnits sets units and returns the receiver so calls can be chained.
+func (x *DistanceFormatter) WithUnits(units DistanceFormatterUnits) *DistanceFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnits:"), units)
 	return x
 }
 
 // The preferred style for units.
 //
-// WithUnitStyle sets the unitStyle property and returns the receiver for chaining.
-func (x *DistanceFormatter) WithUnitStyle(unitStyle MKDistanceFormatterUnitStyle) *DistanceFormatter {
-	x.inner.SetUnitStyle(raw.MKDistanceFormatterUnitStyle(unitStyle))
+// WithUnitStyle sets unitStyle and returns the receiver so calls can be chained.
+func (x *DistanceFormatter) WithUnitStyle(unitStyle DistanceFormatterUnitStyle) *DistanceFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitStyle:"), unitStyle)
 	return x
 }
 
-// Creates a string representation of the specified distance.
-//
-// StringFromDistance calls the underlying StringFromDistance.
-func (x *DistanceFormatter) StringFromDistance(distance unsafe.Pointer) string {
-	_r := x.inner.StringFromDistance(distance)
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *DistanceFormatter) Locale() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
+	return obj.Wrap(_r)
 }
 
-// Returns the distance value parsed from the specified string.
-//
-// DistanceFromString calls the underlying DistanceFromString.
-func (x *DistanceFormatter) DistanceFromString(distance string) unsafe.Pointer {
-	return x.inner.DistanceFromString(foundation.NSStringStringWithUTF8String(distance))
+func (x *DistanceFormatter) SetLocale(locale obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 }
 
-// Locale calls the underlying Locale.
-func (x *DistanceFormatter) Locale() *foundation.NSLocale {
-	return x.inner.Locale()
+func (x *DistanceFormatter) Units() DistanceFormatterUnits {
+	_r := objc.Send[DistanceFormatterUnits](objref.IDOf(x), objc.RegisterName("units"))
+	return _r
 }
 
-// SetLocale calls the underlying SetLocale.
-func (x *DistanceFormatter) SetLocale(locale *foundation.NSLocale) {
-	x.inner.SetLocale(locale)
+func (x *DistanceFormatter) SetUnits(units DistanceFormatterUnits) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnits:"), units)
 }
 
-// Units calls the underlying Units.
-func (x *DistanceFormatter) Units() MKDistanceFormatterUnits {
-	return MKDistanceFormatterUnits(x.inner.Units())
+func (x *DistanceFormatter) UnitStyle() DistanceFormatterUnitStyle {
+	_r := objc.Send[DistanceFormatterUnitStyle](objref.IDOf(x), objc.RegisterName("unitStyle"))
+	return _r
 }
 
-// SetUnits calls the underlying SetUnits.
-func (x *DistanceFormatter) SetUnits(units MKDistanceFormatterUnits) {
-	x.inner.SetUnits(raw.MKDistanceFormatterUnits(units))
-}
-
-// UnitStyle calls the underlying UnitStyle.
-func (x *DistanceFormatter) UnitStyle() MKDistanceFormatterUnitStyle {
-	return MKDistanceFormatterUnitStyle(x.inner.UnitStyle())
-}
-
-// SetUnitStyle calls the underlying SetUnitStyle.
-func (x *DistanceFormatter) SetUnitStyle(unitStyle MKDistanceFormatterUnitStyle) {
-	x.inner.SetUnitStyle(raw.MKDistanceFormatterUnitStyle(unitStyle))
+func (x *DistanceFormatter) SetUnitStyle(unitStyle DistanceFormatterUnitStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitStyle:"), unitStyle)
 }
 
 // DistanceFormatterable is the interface implemented by [DistanceFormatter], for mocking and DI.
 type DistanceFormatterable interface {
-	Unwrap() *raw.MKDistanceFormatter
-	WithLocale(locale *foundation.NSLocale) *DistanceFormatter
-	WithUnits(units MKDistanceFormatterUnits) *DistanceFormatter
-	WithUnitStyle(unitStyle MKDistanceFormatterUnitStyle) *DistanceFormatter
-	StringFromDistance(distance unsafe.Pointer) string
-	DistanceFromString(distance string) unsafe.Pointer
-	Locale() *foundation.NSLocale
-	SetLocale(locale *foundation.NSLocale)
-	Units() MKDistanceFormatterUnits
-	SetUnits(units MKDistanceFormatterUnits)
-	UnitStyle() MKDistanceFormatterUnitStyle
-	SetUnitStyle(unitStyle MKDistanceFormatterUnitStyle)
+	obj.Object
+	WithLocale(locale obj.Object) *DistanceFormatter
+	WithUnits(units DistanceFormatterUnits) *DistanceFormatter
+	WithUnitStyle(unitStyle DistanceFormatterUnitStyle) *DistanceFormatter
+	Locale() obj.Object
+	SetLocale(locale obj.Object)
+	Units() DistanceFormatterUnits
+	SetUnits(units DistanceFormatterUnits)
+	UnitStyle() DistanceFormatterUnitStyle
+	SetUnitStyle(unitStyle DistanceFormatterUnitStyle)
 }
 
 var _ DistanceFormatterable = (*DistanceFormatter)(nil)

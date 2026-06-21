@@ -5,123 +5,141 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRMessagesClusterMessageCompleteEvent wraps [raw.MTRMessagesClusterMessageCompleteEvent] with a fluent Go API.
+// MTRMessagesClusterMessageCompleteEvent is an idiomatic wrapper over the Objective-C class MTRMessagesClusterMessageCompleteEvent.
 type MTRMessagesClusterMessageCompleteEvent struct {
-	inner *raw.MTRMessagesClusterMessageCompleteEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRMessagesClusterMessageCompleteEvent].
-func (x *MTRMessagesClusterMessageCompleteEvent) Unwrap() *raw.MTRMessagesClusterMessageCompleteEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRMessagesClusterMessageCompleteEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRMessagesClusterMessageCompleteEventFromID adopts an existing object pointer as a MTRMessagesClusterMessageCompleteEvent (nil for 0).
+// MTRMessagesClusterMessageCompleteEventFromID adopts an existing Objective-C object as a MTRMessagesClusterMessageCompleteEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRMessagesClusterMessageCompleteEventFromID(id objc.ID) *MTRMessagesClusterMessageCompleteEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRMessagesClusterMessageCompleteEvent{inner: raw.MTRMessagesClusterMessageCompleteEventFromID(id)}
+	x := &MTRMessagesClusterMessageCompleteEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRMessagesClusterMessageCompleteEvent creates a new [MTRMessagesClusterMessageCompleteEvent].
+// mTRMessagesClusterMessageCompleteEventAdopt wraps an Objective-C object that this code just created as a
+// MTRMessagesClusterMessageCompleteEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRMessagesClusterMessageCompleteEventAdopt(id objc.ID) *MTRMessagesClusterMessageCompleteEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRMessagesClusterMessageCompleteEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRMessagesClusterMessageCompleteEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRMessagesClusterMessageCompleteEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRMessagesClusterMessageCompleteEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRMessagesClusterMessageCompleteEvent creates a new MTRMessagesClusterMessageCompleteEvent.
 func NewMTRMessagesClusterMessageCompleteEvent() *MTRMessagesClusterMessageCompleteEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRMessagesClusterMessageCompleteEvent")), objc.RegisterName("new"))
-	return &MTRMessagesClusterMessageCompleteEvent{inner: raw.MTRMessagesClusterMessageCompleteEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRMessagesClusterMessageCompleteEvent")), objc.RegisterName("new"))
+	return mTRMessagesClusterMessageCompleteEventAdopt(_id)
 }
 
-// WithMessageID sets the messageID property and returns the receiver for chaining.
-func (x *MTRMessagesClusterMessageCompleteEvent) WithMessageID(messageID *foundation.NSData) *MTRMessagesClusterMessageCompleteEvent {
-	x.inner.SetMessageID(messageID)
+// WithMessageID sets messageID and returns the receiver so calls can be chained.
+func (x *MTRMessagesClusterMessageCompleteEvent) WithMessageID(messageID obj.Object) *MTRMessagesClusterMessageCompleteEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
 	return x
 }
 
-// WithResponseID sets the responseID property and returns the receiver for chaining.
-func (x *MTRMessagesClusterMessageCompleteEvent) WithResponseID(responseID *foundation.NSNumber) *MTRMessagesClusterMessageCompleteEvent {
-	x.inner.SetResponseID(responseID)
+// WithResponseID sets responseID and returns the receiver so calls can be chained.
+func (x *MTRMessagesClusterMessageCompleteEvent) WithResponseID(responseID obj.Object) *MTRMessagesClusterMessageCompleteEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResponseID:"), objref.IDOf(responseID))
 	return x
 }
 
-// WithReply sets the reply property and returns the receiver for chaining.
+// WithReply sets reply and returns the receiver so calls can be chained.
 func (x *MTRMessagesClusterMessageCompleteEvent) WithReply(reply string) *MTRMessagesClusterMessageCompleteEvent {
-	x.inner.SetReply(foundation.NSStringStringWithUTF8String(reply))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReply:"), purego.NSString(reply))
 	return x
 }
 
-// WithFutureMessagesPreference sets the futureMessagesPreference property and returns the receiver for chaining.
-func (x *MTRMessagesClusterMessageCompleteEvent) WithFutureMessagesPreference(futureMessagesPreference *foundation.NSNumber) *MTRMessagesClusterMessageCompleteEvent {
-	x.inner.SetFutureMessagesPreference(futureMessagesPreference)
+// WithFutureMessagesPreference sets futureMessagesPreference and returns the receiver so calls can be chained.
+func (x *MTRMessagesClusterMessageCompleteEvent) WithFutureMessagesPreference(futureMessagesPreference obj.Object) *MTRMessagesClusterMessageCompleteEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFutureMessagesPreference:"), objref.IDOf(futureMessagesPreference))
 	return x
 }
 
-// MessageID calls the underlying MessageID.
-func (x *MTRMessagesClusterMessageCompleteEvent) MessageID() *foundation.NSData {
-	return x.inner.MessageID()
+func (x *MTRMessagesClusterMessageCompleteEvent) MessageID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageID"))
+	return obj.Wrap(_r)
 }
 
-// SetMessageID calls the underlying SetMessageID.
-func (x *MTRMessagesClusterMessageCompleteEvent) SetMessageID(messageID *foundation.NSData) {
-	x.inner.SetMessageID(messageID)
+func (x *MTRMessagesClusterMessageCompleteEvent) SetMessageID(messageID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
 }
 
-// ResponseID calls the underlying ResponseID.
-func (x *MTRMessagesClusterMessageCompleteEvent) ResponseID() *foundation.NSNumber {
-	return x.inner.ResponseID()
+func (x *MTRMessagesClusterMessageCompleteEvent) ResponseID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("responseID"))
+	return obj.Wrap(_r)
 }
 
-// SetResponseID calls the underlying SetResponseID.
-func (x *MTRMessagesClusterMessageCompleteEvent) SetResponseID(responseID *foundation.NSNumber) {
-	x.inner.SetResponseID(responseID)
+func (x *MTRMessagesClusterMessageCompleteEvent) SetResponseID(responseID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResponseID:"), objref.IDOf(responseID))
 }
 
-// Reply calls the underlying Reply.
 func (x *MTRMessagesClusterMessageCompleteEvent) Reply() string {
-	_r := x.inner.Reply()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reply"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetReply calls the underlying SetReply.
 func (x *MTRMessagesClusterMessageCompleteEvent) SetReply(reply string) {
-	x.inner.SetReply(foundation.NSStringStringWithUTF8String(reply))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReply:"), purego.NSString(reply))
 }
 
-// FutureMessagesPreference calls the underlying FutureMessagesPreference.
-func (x *MTRMessagesClusterMessageCompleteEvent) FutureMessagesPreference() *foundation.NSNumber {
-	return x.inner.FutureMessagesPreference()
+func (x *MTRMessagesClusterMessageCompleteEvent) FutureMessagesPreference() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("futureMessagesPreference"))
+	return obj.Wrap(_r)
 }
 
-// SetFutureMessagesPreference calls the underlying SetFutureMessagesPreference.
-func (x *MTRMessagesClusterMessageCompleteEvent) SetFutureMessagesPreference(futureMessagesPreference *foundation.NSNumber) {
-	x.inner.SetFutureMessagesPreference(futureMessagesPreference)
+func (x *MTRMessagesClusterMessageCompleteEvent) SetFutureMessagesPreference(futureMessagesPreference obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFutureMessagesPreference:"), objref.IDOf(futureMessagesPreference))
 }
 
 // MTRMessagesClusterMessageCompleteEventable is the interface implemented by [MTRMessagesClusterMessageCompleteEvent], for mocking and DI.
 type MTRMessagesClusterMessageCompleteEventable interface {
-	Unwrap() *raw.MTRMessagesClusterMessageCompleteEvent
-	WithMessageID(messageID *foundation.NSData) *MTRMessagesClusterMessageCompleteEvent
-	WithResponseID(responseID *foundation.NSNumber) *MTRMessagesClusterMessageCompleteEvent
+	obj.Object
+	WithMessageID(messageID obj.Object) *MTRMessagesClusterMessageCompleteEvent
+	WithResponseID(responseID obj.Object) *MTRMessagesClusterMessageCompleteEvent
 	WithReply(reply string) *MTRMessagesClusterMessageCompleteEvent
-	WithFutureMessagesPreference(futureMessagesPreference *foundation.NSNumber) *MTRMessagesClusterMessageCompleteEvent
-	MessageID() *foundation.NSData
-	SetMessageID(messageID *foundation.NSData)
-	ResponseID() *foundation.NSNumber
-	SetResponseID(responseID *foundation.NSNumber)
+	WithFutureMessagesPreference(futureMessagesPreference obj.Object) *MTRMessagesClusterMessageCompleteEvent
+	MessageID() obj.Object
+	SetMessageID(messageID obj.Object)
+	ResponseID() obj.Object
+	SetResponseID(responseID obj.Object)
 	Reply() string
 	SetReply(reply string)
-	FutureMessagesPreference() *foundation.NSNumber
-	SetFutureMessagesPreference(futureMessagesPreference *foundation.NSNumber)
+	FutureMessagesPreference() obj.Object
+	SetFutureMessagesPreference(futureMessagesPreference obj.Object)
 }
 
 var _ MTRMessagesClusterMessageCompleteEventable = (*MTRMessagesClusterMessageCompleteEvent)(nil)

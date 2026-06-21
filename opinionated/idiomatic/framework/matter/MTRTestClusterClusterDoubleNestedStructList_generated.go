@@ -5,45 +5,66 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRTestClusterClusterDoubleNestedStructList wraps [raw.MTRTestClusterClusterDoubleNestedStructList] with a fluent Go API.
+// MTRTestClusterClusterDoubleNestedStructList is an idiomatic wrapper over the Objective-C class MTRTestClusterClusterDoubleNestedStructList.
 type MTRTestClusterClusterDoubleNestedStructList struct {
-	inner *raw.MTRTestClusterClusterDoubleNestedStructList
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRTestClusterClusterDoubleNestedStructList].
-func (x *MTRTestClusterClusterDoubleNestedStructList) Unwrap() *raw.MTRTestClusterClusterDoubleNestedStructList {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTestClusterClusterDoubleNestedStructList) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRTestClusterClusterDoubleNestedStructListFromID adopts an existing object pointer as a MTRTestClusterClusterDoubleNestedStructList (nil for 0).
+// MTRTestClusterClusterDoubleNestedStructListFromID adopts an existing Objective-C object as a MTRTestClusterClusterDoubleNestedStructList
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRTestClusterClusterDoubleNestedStructListFromID(id objc.ID) *MTRTestClusterClusterDoubleNestedStructList {
 	if id == 0 {
 		return nil
 	}
-	return &MTRTestClusterClusterDoubleNestedStructList{inner: raw.MTRTestClusterClusterDoubleNestedStructListFromID(id)}
+	x := &MTRTestClusterClusterDoubleNestedStructList{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRTestClusterClusterDoubleNestedStructList creates a new [MTRTestClusterClusterDoubleNestedStructList].
+// mTRTestClusterClusterDoubleNestedStructListAdopt wraps an Objective-C object that this code just created as a
+// MTRTestClusterClusterDoubleNestedStructList (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRTestClusterClusterDoubleNestedStructListAdopt(id objc.ID) *MTRTestClusterClusterDoubleNestedStructList {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRTestClusterClusterDoubleNestedStructList{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRTestClusterClusterDoubleNestedStructList) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRTestClusterClusterDoubleNestedStructList) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRTestClusterClusterDoubleNestedStructList) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRTestClusterClusterDoubleNestedStructList creates a new MTRTestClusterClusterDoubleNestedStructList.
 func NewMTRTestClusterClusterDoubleNestedStructList() *MTRTestClusterClusterDoubleNestedStructList {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTestClusterClusterDoubleNestedStructList")), objc.RegisterName("new"))
-	return &MTRTestClusterClusterDoubleNestedStructList{inner: raw.MTRTestClusterClusterDoubleNestedStructListFromID(_id)}
-}
-
-func (x *MTRTestClusterClusterDoubleNestedStructList) asMTRUnitTestingClusterDoubleNestedStructList() *raw.MTRUnitTestingClusterDoubleNestedStructList {
-	return &x.inner.MTRUnitTestingClusterDoubleNestedStructList
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRTestClusterClusterDoubleNestedStructList")), objc.RegisterName("new"))
+	return mTRTestClusterClusterDoubleNestedStructListAdopt(_id)
 }
 
 // MTRTestClusterClusterDoubleNestedStructListable is the interface implemented by [MTRTestClusterClusterDoubleNestedStructList], for mocking and DI.
 type MTRTestClusterClusterDoubleNestedStructListable interface {
-	Unwrap() *raw.MTRTestClusterClusterDoubleNestedStructList
+	obj.Object
 }
 
 var _ MTRTestClusterClusterDoubleNestedStructListable = (*MTRTestClusterClusterDoubleNestedStructList)(nil)

@@ -5,62 +5,84 @@
 package corebluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A universally unique identifier, as defined by Bluetooth standards.
 //
-// UUID wraps [raw.CBUUID] with a fluent Go API.
+// UUID is an idiomatic wrapper over the Objective-C class CBUUID.
 type UUID struct {
-	inner *raw.CBUUID
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CBUUID].
-func (x *UUID) Unwrap() *raw.CBUUID { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UUID) ID() objc.ID { return x.inner.Ptr() }
-
-// UUIDFromID adopts an existing object pointer as a UUID (nil for 0).
+// UUIDFromID adopts an existing Objective-C object as a UUID
+// (nil for 0), retaining it and registering a release finalizer.
 func UUIDFromID(id objc.ID) *UUID {
 	if id == 0 {
 		return nil
 	}
-	return &UUID{inner: raw.CBUUIDFromID(id)}
+	x := &UUID{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewUUID creates a new [UUID].
+// uUIDAdopt wraps an Objective-C object that this code just created as a
+// UUID (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uUIDAdopt(id objc.ID) *UUID {
+	if id == 0 {
+		return nil
+	}
+	x := &UUID{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UUID) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UUID) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UUID) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUUID creates a new UUID.
 func NewUUID() *UUID {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBUUID")), objc.RegisterName("new"))
-	return &UUID{inner: raw.CBUUIDFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CBUUID")), objc.RegisterName("new"))
+	return uUIDAdopt(_id)
 }
 
-// @property data @discussion The UUID as NSData.
-//
-// Data calls the underlying Data.
-func (x *UUID) Data() *foundation.NSData {
-	return x.inner.Data()
+// The UUID as NSData.
+func (x *UUID) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
 
-// @property UUIDString @discussion The UUID as NSString.
-//
-// UUIDString calls the underlying UUIDString.
+// The UUID as NSString.
 func (x *UUID) UUIDString() string {
-	_r := x.inner.UUIDString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUIDString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // UUIDable is the interface implemented by [UUID], for mocking and DI.
 type UUIDable interface {
-	Unwrap() *raw.CBUUID
-	Data() *foundation.NSData
+	obj.Object
+	Data() obj.Object
 	UUIDString() string
 }
 

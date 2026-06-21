@@ -5,62 +5,85 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// PathAssetResolver wraps [raw.MDLPathAssetResolver] with a fluent Go API.
+// PathAssetResolver is an idiomatic wrapper over the Objective-C class MDLPathAssetResolver.
 type PathAssetResolver struct {
-	inner *raw.MDLPathAssetResolver
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLPathAssetResolver].
-func (x *PathAssetResolver) Unwrap() *raw.MDLPathAssetResolver { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PathAssetResolver) ID() objc.ID { return x.inner.Ptr() }
-
-// PathAssetResolverFromID adopts an existing object pointer as a PathAssetResolver (nil for 0).
+// PathAssetResolverFromID adopts an existing Objective-C object as a PathAssetResolver
+// (nil for 0), retaining it and registering a release finalizer.
 func PathAssetResolverFromID(id objc.ID) *PathAssetResolver {
 	if id == 0 {
 		return nil
 	}
-	return &PathAssetResolver{inner: raw.MDLPathAssetResolverFromID(id)}
-}
-
-// NewPathAssetResolverWithPath creates a new [PathAssetResolver].
-func NewPathAssetResolverWithPath(path string) *PathAssetResolver {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLPathAssetResolver")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:"), foundation.NSStringStringWithUTF8String(path).Ptr())
-	return &PathAssetResolver{inner: raw.MDLPathAssetResolverFromID(_id)}
-}
-
-// WithPath sets the path property and returns the receiver for chaining.
-func (x *PathAssetResolver) WithPath(path string) *PathAssetResolver {
-	x.inner.SetPath(foundation.NSStringStringWithUTF8String(path))
+	x := &PathAssetResolver{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Path calls the underlying Path.
-func (x *PathAssetResolver) Path() string {
-	_r := x.inner.Path()
-	if _r == nil {
-		return ""
+// pathAssetResolverAdopt wraps an Objective-C object that this code just created as a
+// PathAssetResolver (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pathAssetResolverAdopt(id objc.ID) *PathAssetResolver {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &PathAssetResolver{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetPath calls the underlying SetPath.
+// Description returns the object's -description text.
+func (x *PathAssetResolver) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PathAssetResolver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PathAssetResolver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPathAssetResolverWithPath creates a new PathAssetResolver.
+func NewPathAssetResolverWithPath(path string) *PathAssetResolver {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLPathAssetResolver")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:"), purego.NSString(path))
+	return pathAssetResolverAdopt(_id)
+}
+
+// WithPath sets path and returns the receiver so calls can be chained.
+func (x *PathAssetResolver) WithPath(path string) *PathAssetResolver {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), purego.NSString(path))
+	return x
+}
+
+func (x *PathAssetResolver) Path() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
 func (x *PathAssetResolver) SetPath(path string) {
-	x.inner.SetPath(foundation.NSStringStringWithUTF8String(path))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), purego.NSString(path))
 }
 
 // PathAssetResolverable is the interface implemented by [PathAssetResolver], for mocking and DI.
 type PathAssetResolverable interface {
-	Unwrap() *raw.MDLPathAssetResolver
+	obj.Object
 	WithPath(path string) *PathAssetResolver
 	Path() string
 	SetPath(path string)

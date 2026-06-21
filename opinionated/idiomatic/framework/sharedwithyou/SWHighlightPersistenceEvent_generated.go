@@ -5,50 +5,77 @@
 package sharedwithyou
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyou"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents persistence activity for a highlight.
 //
-// HighlightPersistenceEvent wraps [raw.SWHighlightPersistenceEvent] with a fluent Go API.
+// HighlightPersistenceEvent is an idiomatic wrapper over the Objective-C class SWHighlightPersistenceEvent.
 type HighlightPersistenceEvent struct {
-	inner *raw.SWHighlightPersistenceEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SWHighlightPersistenceEvent].
-func (x *HighlightPersistenceEvent) Unwrap() *raw.SWHighlightPersistenceEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HighlightPersistenceEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// HighlightPersistenceEventFromID adopts an existing object pointer as a HighlightPersistenceEvent (nil for 0).
+// HighlightPersistenceEventFromID adopts an existing Objective-C object as a HighlightPersistenceEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func HighlightPersistenceEventFromID(id objc.ID) *HighlightPersistenceEvent {
 	if id == 0 {
 		return nil
 	}
-	return &HighlightPersistenceEvent{inner: raw.SWHighlightPersistenceEventFromID(id)}
+	x := &HighlightPersistenceEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// highlightPersistenceEventAdopt wraps an Objective-C object that this code just created as a
+// HighlightPersistenceEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func highlightPersistenceEventAdopt(id objc.ID) *HighlightPersistenceEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &HighlightPersistenceEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HighlightPersistenceEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HighlightPersistenceEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HighlightPersistenceEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates and initializes a persistence event.
 //
-// NewHighlightPersistenceEventWithHighlightTrigger creates a new [HighlightPersistenceEvent].
-func NewHighlightPersistenceEventWithHighlightTrigger(highlight *raw.SWHighlight, trigger SWHighlightPersistenceEventTrigger) *HighlightPersistenceEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWHighlightPersistenceEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), highlight.Ptr(), raw.SWHighlightPersistenceEventTrigger(trigger))
-	return &HighlightPersistenceEvent{inner: raw.SWHighlightPersistenceEventFromID(_id)}
+// NewHighlightPersistenceEventWithHighlightTrigger creates a new HighlightPersistenceEvent.
+func NewHighlightPersistenceEventWithHighlightTrigger(highlight *Highlight, trigger HighlightPersistenceEventTrigger) *HighlightPersistenceEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SWHighlightPersistenceEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:trigger:"), objref.IDOf(highlight), trigger)
+	return highlightPersistenceEventAdopt(_id)
 }
 
-// PersistenceEventTrigger calls the underlying PersistenceEventTrigger.
-func (x *HighlightPersistenceEvent) PersistenceEventTrigger() SWHighlightPersistenceEventTrigger {
-	return SWHighlightPersistenceEventTrigger(x.inner.PersistenceEventTrigger())
+func (x *HighlightPersistenceEvent) PersistenceEventTrigger() HighlightPersistenceEventTrigger {
+	_r := objc.Send[HighlightPersistenceEventTrigger](objref.IDOf(x), objc.RegisterName("persistenceEventTrigger"))
+	return _r
 }
 
 // HighlightPersistenceEventable is the interface implemented by [HighlightPersistenceEvent], for mocking and DI.
 type HighlightPersistenceEventable interface {
-	Unwrap() *raw.SWHighlightPersistenceEvent
-	PersistenceEventTrigger() SWHighlightPersistenceEventTrigger
+	obj.Object
+	PersistenceEventTrigger() HighlightPersistenceEventTrigger
 }
 
 var _ HighlightPersistenceEventable = (*HighlightPersistenceEvent)(nil)

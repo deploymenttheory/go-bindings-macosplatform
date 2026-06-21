@@ -5,120 +5,102 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A dynamic plain-text Unicode string object.
 //
-// MutableString wraps [raw.NSMutableString] with a fluent Go API.
+// MutableString is an idiomatic wrapper over the Objective-C class NSMutableString.
 type MutableString struct {
-	inner *raw.NSMutableString
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSMutableString].
-func (x *MutableString) Unwrap() *raw.NSMutableString { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableString) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableStringFromID adopts an existing object pointer as a MutableString (nil for 0).
+// MutableStringFromID adopts an existing Objective-C object as a MutableString
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableStringFromID(id objc.ID) *MutableString {
 	if id == 0 {
 		return nil
 	}
-	return &MutableString{inner: raw.NSMutableStringFromID(id)}
+	x := &MutableString{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mutableStringAdopt wraps an Objective-C object that this code just created as a
+// MutableString (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableStringAdopt(id objc.ID) *MutableString {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableString{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MutableString) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MutableString) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MutableString) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns an NSMutableString object initialized with initial storage for a given number of characters,
 //
-// NewMutableStringWithCapacity creates a new [MutableString].
-func NewMutableStringWithCapacity(capacity uint) *MutableString {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableString")), objc.RegisterName("alloc"))
+// NewMutableStringWithCapacity creates a new MutableString.
+func NewMutableStringWithCapacity(capacity int) *MutableString {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableString")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCapacity:"), capacity)
-	return &MutableString{inner: raw.NSMutableStringFromID(_id)}
+	return mutableStringAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MutableString) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableString {
-	x.inner.NSString.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *MutableString) WithScriptingProperties(scriptingProperties obj.Object) *MutableString {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Replaces the characters from range with those in aString.
-//
-// ReplaceCharactersInRangeWithString calls the underlying ReplaceCharactersInRangeWithString.
-func (x *MutableString) ReplaceCharactersInRangeWithString(range_ raw.NSRange, aString string) {
-	x.inner.ReplaceCharactersInRangeWithString(range_, foundation.NSStringStringWithUTF8String(aString))
-}
-
 // Inserts into the receiver the characters of a given string at a given location.
-//
-// InsertStringAtIndex calls the underlying InsertStringAtIndex.
-func (x *MutableString) InsertStringAtIndex(aString string, loc uint) {
-	x.inner.InsertStringAtIndex(foundation.NSStringStringWithUTF8String(aString), loc)
-}
-
-// Removes from the receiver the characters in a given range.
-//
-// DeleteCharactersInRange calls the underlying DeleteCharactersInRange.
-func (x *MutableString) DeleteCharactersInRange(range_ raw.NSRange) {
-	x.inner.DeleteCharactersInRange(range_)
+func (x *MutableString) InsertStringAtIndex(aString string, loc int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertString:atIndex:"), purego.NSString(aString), loc)
 }
 
 // Adds to the end of the receiver the characters of a given string.
-//
-// AppendString calls the underlying AppendString.
 func (x *MutableString) AppendString(aString string) {
-	x.inner.AppendString(foundation.NSStringStringWithUTF8String(aString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendString:"), purego.NSString(aString))
 }
 
 // Adds a constructed string to the receiver.
-//
-// AppendFormat calls the underlying AppendFormat.
 func (x *MutableString) AppendFormat(format string) {
-	x.inner.AppendFormat(foundation.NSStringStringWithUTF8String(format))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendFormat:"), purego.NSString(format))
 }
 
 // Replaces the characters of the receiver with those in a given string.
-//
-// SetString calls the underlying SetString.
 func (x *MutableString) SetString(aString string) {
-	x.inner.SetString(foundation.NSStringStringWithUTF8String(aString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), purego.NSString(aString))
 }
-
-// Replaces all occurrences of a given string in a given range with another given string, returning the number of replacements.
-//
-// ReplaceOccurrencesOfStringWithStringOptionsRange calls the underlying ReplaceOccurrencesOfStringWithStringOptionsRange.
-func (x *MutableString) ReplaceOccurrencesOfStringWithStringOptionsRange(target string, replacement string, options NSStringCompareOptions, searchRange raw.NSRange) uint {
-	return x.inner.ReplaceOccurrencesOfStringWithStringOptionsRange(foundation.NSStringStringWithUTF8String(target), foundation.NSStringStringWithUTF8String(replacement), raw.NSStringCompareOptions(options), searchRange)
-}
-
-// Transliterates the receiver by applying a specified ICU string transform.
-//
-// ApplyTransformReverseRangeUpdatedRange calls the underlying ApplyTransformReverseRangeUpdatedRange.
-func (x *MutableString) ApplyTransformReverseRangeUpdatedRange(transform *raw.NSString, reverse bool, range_ raw.NSRange, resultingRange *raw.NSRange) bool {
-	return x.inner.ApplyTransformReverseRangeUpdatedRange(transform, reverse, range_, resultingRange)
-}
-
-func (x *MutableString) asString() *raw.NSString { return &x.inner.NSString }
-
-func (x *MutableString) asObject() *raw.NSObject { return &x.inner.NSString.NSObject }
 
 // MutableStringable is the interface implemented by [MutableString], for mocking and DI.
 type MutableStringable interface {
-	Unwrap() *raw.NSMutableString
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableString
-	ReplaceCharactersInRangeWithString(range_ raw.NSRange, aString string)
-	InsertStringAtIndex(aString string, loc uint)
-	DeleteCharactersInRange(range_ raw.NSRange)
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *MutableString
+	InsertStringAtIndex(aString string, loc int)
 	AppendString(aString string)
 	AppendFormat(format string)
 	SetString(aString string)
-	ReplaceOccurrencesOfStringWithStringOptionsRange(target string, replacement string, options NSStringCompareOptions, searchRange raw.NSRange) uint
-	ApplyTransformReverseRangeUpdatedRange(transform *raw.NSString, reverse bool, range_ raw.NSRange, resultingRange *raw.NSRange) bool
 }
 
 var _ MutableStringable = (*MutableString)(nil)

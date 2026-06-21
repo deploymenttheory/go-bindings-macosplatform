@@ -5,89 +5,76 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A representation of a fully connected convolution layer, also known as an inner product layer.
 //
-// CNNFullyConnectedNode wraps [raw.MPSCNNFullyConnectedNode] with a fluent Go API.
+// CNNFullyConnectedNode is an idiomatic wrapper over the Objective-C class MPSCNNFullyConnectedNode.
 type CNNFullyConnectedNode struct {
-	inner *raw.MPSCNNFullyConnectedNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNFullyConnectedNode].
-func (x *CNNFullyConnectedNode) Unwrap() *raw.MPSCNNFullyConnectedNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNFullyConnectedNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNFullyConnectedNodeFromID adopts an existing object pointer as a CNNFullyConnectedNode (nil for 0).
+// CNNFullyConnectedNodeFromID adopts an existing Objective-C object as a CNNFullyConnectedNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNFullyConnectedNodeFromID(id objc.ID) *CNNFullyConnectedNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNFullyConnectedNode{inner: raw.MPSCNNFullyConnectedNodeFromID(id)}
-}
-
-// @abstract   Init a node representing a MPSCNNFullyConnected kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      weights                 A pointer to a valid object conforming to the MPSCNNConvolutionDataSource protocol. This object is provided by you to encapsulate storage for convolution weights and biases. @return     A new MPSNNFilter node for a MPSCNNFullyConnected kernel.
-//
-// NewCNNFullyConnectedNodeWithSourceWeights creates a new [CNNFullyConnectedNode].
-func NewCNNFullyConnectedNodeWithSourceWeights(sourceNode *mpsneuralnetwork.MPSNNImageNode, weights mpsneuralnetwork.MPSCNNConvolutionDataSource) *CNNFullyConnectedNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNFullyConnectedNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:weights:"), sourceNode.Ptr(), weights)
-	return &CNNFullyConnectedNode{inner: raw.MPSCNNFullyConnectedNodeFromID(_id)}
-}
-
-// @abstract   The training style of the forward node will be propagated to gradient nodes made from it
-//
-// WithTrainingStyle sets the trainingStyle property and returns the receiver for chaining.
-func (x *CNNFullyConnectedNode) WithTrainingStyle(trainingStyle mpsneuralnetwork.MPSNNTrainingStyle) *CNNFullyConnectedNode {
-	x.inner.MPSCNNConvolutionNode.SetTrainingStyle(trainingStyle)
+	x := &CNNFullyConnectedNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @abstract   Set the floating-point precision used by the convolution accumulator @discussion Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
-//
-// WithAccumulatorPrecision sets the accumulatorPrecision property and returns the receiver for chaining.
-func (x *CNNFullyConnectedNode) WithAccumulatorPrecision(accumulatorPrecision mpsneuralnetwork.MPSNNConvolutionAccumulatorPrecisionOption) *CNNFullyConnectedNode {
-	x.inner.MPSCNNConvolutionNode.SetAccumulatorPrecision(accumulatorPrecision)
+// cNNFullyConnectedNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNFullyConnectedNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNFullyConnectedNodeAdopt(id objc.ID) *CNNFullyConnectedNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNFullyConnectedNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNFullyConnectedNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNFullyConnectedNode {
-	x.inner.MPSCNNConvolutionNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
-	return x
+// Description returns the object's -description text.
+func (x *CNNFullyConnectedNode) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property label @abstract A string to help identify this object.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNFullyConnectedNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNFullyConnectedNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNFullyConnectedNode creates a new CNNFullyConnectedNode.
+func NewCNNFullyConnectedNode() *CNNFullyConnectedNode {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNFullyConnectedNode")), objc.RegisterName("new"))
+	return cNNFullyConnectedNodeAdopt(_id)
+}
+
+// A string to help identify this object.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *CNNFullyConnectedNode) WithLabel(label string) *CNNFullyConnectedNode {
-	x.inner.MPSCNNConvolutionNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *CNNFullyConnectedNode) asCNNConvolutionNode() *mpsneuralnetwork.MPSCNNConvolutionNode {
-	return &x.inner.MPSCNNConvolutionNode
-}
-
-func (x *CNNFullyConnectedNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSCNNConvolutionNode.MPSNNFilterNode
 }
 
 // CNNFullyConnectedNodeable is the interface implemented by [CNNFullyConnectedNode], for mocking and DI.
 type CNNFullyConnectedNodeable interface {
-	Unwrap() *raw.MPSCNNFullyConnectedNode
-	WithTrainingStyle(trainingStyle mpsneuralnetwork.MPSNNTrainingStyle) *CNNFullyConnectedNode
-	WithAccumulatorPrecision(accumulatorPrecision mpsneuralnetwork.MPSNNConvolutionAccumulatorPrecisionOption) *CNNFullyConnectedNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNFullyConnectedNode
+	obj.Object
 	WithLabel(label string) *CNNFullyConnectedNode
 }
 

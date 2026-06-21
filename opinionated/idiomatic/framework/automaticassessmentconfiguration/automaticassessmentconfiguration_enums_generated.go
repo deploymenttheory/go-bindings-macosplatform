@@ -10,52 +10,52 @@ import (
 )
 
 // Error codes that the framework returns if a session fails.
-type AEAssessmentErrorCode int64
+type AssessmentErrorCode int64
 
 const (
-	AEAssessmentErrorUnknown                          AEAssessmentErrorCode = 1
-	AEAssessmentErrorUnsupportedPlatform              AEAssessmentErrorCode = 2
-	AEAssessmentErrorMultipleParticipantsNotSupported AEAssessmentErrorCode = 3
-	AEAssessmentErrorConfigurationUpdatesNotSupported AEAssessmentErrorCode = 4
-	AEAssessmentErrorRequiredParticipantsNotAvailable AEAssessmentErrorCode = 5
+	AssessmentErrorUnknown                          AssessmentErrorCode = 1
+	AssessmentErrorUnsupportedPlatform              AssessmentErrorCode = 2
+	AssessmentErrorMultipleParticipantsNotSupported AssessmentErrorCode = 3
+	AssessmentErrorConfigurationUpdatesNotSupported AssessmentErrorCode = 4
+	AssessmentErrorRequiredParticipantsNotAvailable AssessmentErrorCode = 5
 )
 
-func (e AEAssessmentErrorCode) String() string {
+func (e AssessmentErrorCode) String() string {
 	switch e {
-	case AEAssessmentErrorUnknown:
-		return "AEAssessmentErrorUnknown"
-	case AEAssessmentErrorUnsupportedPlatform:
-		return "AEAssessmentErrorUnsupportedPlatform"
-	case AEAssessmentErrorMultipleParticipantsNotSupported:
-		return "AEAssessmentErrorMultipleParticipantsNotSupported"
-	case AEAssessmentErrorConfigurationUpdatesNotSupported:
-		return "AEAssessmentErrorConfigurationUpdatesNotSupported"
-	case AEAssessmentErrorRequiredParticipantsNotAvailable:
-		return "AEAssessmentErrorRequiredParticipantsNotAvailable"
+	case AssessmentErrorUnknown:
+		return "AssessmentErrorUnknown"
+	case AssessmentErrorUnsupportedPlatform:
+		return "AssessmentErrorUnsupportedPlatform"
+	case AssessmentErrorMultipleParticipantsNotSupported:
+		return "AssessmentErrorMultipleParticipantsNotSupported"
+	case AssessmentErrorConfigurationUpdatesNotSupported:
+		return "AssessmentErrorConfigurationUpdatesNotSupported"
+	case AssessmentErrorRequiredParticipantsNotAvailable:
+		return "AssessmentErrorRequiredParticipantsNotAvailable"
 	default:
-		return fmt.Sprintf("AEAssessmentErrorCode(%d)", int64(e))
+		return fmt.Sprintf("AssessmentErrorCode(%d)", int64(e))
 	}
 }
 
 // The set of autocorrect features that you can enable during an assessment.
 // Bitmask — values may be combined with |.
-type AEAutocorrectMode uint64
+type AutocorrectMode uint64
 
 const (
-	AEAutocorrectModeNone AEAutocorrectMode = 0
+	AutocorrectModeNone AutocorrectMode = 0
 	// A mode in which autocorrect checks for spelling as the user types.
-	AEAutocorrectModeSpelling AEAutocorrectMode = 1
+	AutocorrectModeSpelling AutocorrectMode = 1
 	// A mode in which autocorrect checks punctuation as the user types.
-	AEAutocorrectModePunctuation AEAutocorrectMode = 2
+	AutocorrectModePunctuation AutocorrectMode = 2
 )
 
-func (e AEAutocorrectMode) String() string {
+func (e AutocorrectMode) String() string {
 	var parts []string
-	if e&AEAutocorrectModeSpelling != 0 {
-		parts = append(parts, "AEAutocorrectModeSpelling")
+	if e&AutocorrectModeSpelling != 0 {
+		parts = append(parts, "AutocorrectModeSpelling")
 	}
-	if e&AEAutocorrectModePunctuation != 0 {
-		parts = append(parts, "AEAutocorrectModePunctuation")
+	if e&AutocorrectModePunctuation != 0 {
+		parts = append(parts, "AutocorrectModePunctuation")
 	}
 	if len(parts) == 0 {
 		return "0"

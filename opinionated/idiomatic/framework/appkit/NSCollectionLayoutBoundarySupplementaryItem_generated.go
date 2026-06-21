@@ -5,133 +5,132 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object used to add headers or footers to a collection view.
 //
-// CollectionLayoutBoundarySupplementaryItem wraps [raw.NSCollectionLayoutBoundarySupplementaryItem] with a fluent Go API.
+// CollectionLayoutBoundarySupplementaryItem is an idiomatic wrapper over the Objective-C class NSCollectionLayoutBoundarySupplementaryItem.
 type CollectionLayoutBoundarySupplementaryItem struct {
-	inner *raw.NSCollectionLayoutBoundarySupplementaryItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCollectionLayoutBoundarySupplementaryItem].
-func (x *CollectionLayoutBoundarySupplementaryItem) Unwrap() *raw.NSCollectionLayoutBoundarySupplementaryItem {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionLayoutBoundarySupplementaryItem) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionLayoutBoundarySupplementaryItemFromID adopts an existing object pointer as a CollectionLayoutBoundarySupplementaryItem (nil for 0).
+// CollectionLayoutBoundarySupplementaryItemFromID adopts an existing Objective-C object as a CollectionLayoutBoundarySupplementaryItem
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionLayoutBoundarySupplementaryItemFromID(id objc.ID) *CollectionLayoutBoundarySupplementaryItem {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionLayoutBoundarySupplementaryItem{inner: raw.NSCollectionLayoutBoundarySupplementaryItemFromID(id)}
+	x := &CollectionLayoutBoundarySupplementaryItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCollectionLayoutBoundarySupplementaryItem creates a new [CollectionLayoutBoundarySupplementaryItem].
+// collectionLayoutBoundarySupplementaryItemAdopt wraps an Objective-C object that this code just created as a
+// CollectionLayoutBoundarySupplementaryItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionLayoutBoundarySupplementaryItemAdopt(id objc.ID) *CollectionLayoutBoundarySupplementaryItem {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionLayoutBoundarySupplementaryItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollectionLayoutBoundarySupplementaryItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollectionLayoutBoundarySupplementaryItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollectionLayoutBoundarySupplementaryItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCollectionLayoutBoundarySupplementaryItem creates a new CollectionLayoutBoundarySupplementaryItem.
 func NewCollectionLayoutBoundarySupplementaryItem() *CollectionLayoutBoundarySupplementaryItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionLayoutBoundarySupplementaryItem")), objc.RegisterName("new"))
-	return &CollectionLayoutBoundarySupplementaryItem{inner: raw.NSCollectionLayoutBoundarySupplementaryItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutBoundarySupplementaryItem")), objc.RegisterName("new"))
+	return collectionLayoutBoundarySupplementaryItemAdopt(_id)
 }
 
 // A Boolean value that indicates whether a boundary supplementary item extends the content area of the section or layout it’s attached to.
 //
-// WithExtendsBoundary sets the extendsBoundary property and returns the receiver for chaining.
+// WithExtendsBoundary sets extendsBoundary and returns the receiver so calls can be chained.
 func (x *CollectionLayoutBoundarySupplementaryItem) WithExtendsBoundary(extendsBoundary bool) *CollectionLayoutBoundarySupplementaryItem {
-	x.inner.SetExtendsBoundary(extendsBoundary)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendsBoundary:"), extendsBoundary)
 	return x
 }
 
 // A Boolean value that indicates whether a header or footer is pinned to the top or bottom visible boundary of the section or layout it’s attached to.
 //
-// WithPinToVisibleBounds sets the pinToVisibleBounds property and returns the receiver for chaining.
+// WithPinToVisibleBounds sets pinToVisibleBounds and returns the receiver so calls can be chained.
 func (x *CollectionLayoutBoundarySupplementaryItem) WithPinToVisibleBounds(pinToVisibleBounds bool) *CollectionLayoutBoundarySupplementaryItem {
-	x.inner.SetPinToVisibleBounds(pinToVisibleBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPinToVisibleBounds:"), pinToVisibleBounds)
 	return x
 }
 
 // The vertical stacking order of the supplementary item in relation to other items in the section.
 //
-// WithZIndex sets the zIndex property and returns the receiver for chaining.
+// WithZIndex sets zIndex and returns the receiver so calls can be chained.
 func (x *CollectionLayoutBoundarySupplementaryItem) WithZIndex(zIndex int) *CollectionLayoutBoundarySupplementaryItem {
-	x.inner.NSCollectionLayoutSupplementaryItem.SetZIndex(zIndex)
-	return x
-}
-
-// The amount of space added around the content of the item to adjust its final size after its position is computed.
-//
-// WithContentInsets sets the contentInsets property and returns the receiver for chaining.
-func (x *CollectionLayoutBoundarySupplementaryItem) WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutBoundarySupplementaryItem {
-	x.inner.NSCollectionLayoutSupplementaryItem.NSCollectionLayoutItem.SetContentInsets(contentInsets)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZIndex:"), zIndex)
 	return x
 }
 
 // The amount of space added around the boundaries of the item between other items and this item’s container.
 //
-// WithEdgeSpacing sets the edgeSpacing property and returns the receiver for chaining.
+// WithEdgeSpacing sets edgeSpacing and returns the receiver so calls can be chained.
 func (x *CollectionLayoutBoundarySupplementaryItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutBoundarySupplementaryItem {
-	x.inner.NSCollectionLayoutSupplementaryItem.NSCollectionLayoutItem.SetEdgeSpacing(edgeSpacing.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
 	return x
 }
 
-// ExtendsBoundary calls the underlying ExtendsBoundary.
 func (x *CollectionLayoutBoundarySupplementaryItem) ExtendsBoundary() bool {
-	return x.inner.ExtendsBoundary()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("extendsBoundary"))
+	return _r
 }
 
-// SetExtendsBoundary calls the underlying SetExtendsBoundary.
 func (x *CollectionLayoutBoundarySupplementaryItem) SetExtendsBoundary(extendsBoundary bool) {
-	x.inner.SetExtendsBoundary(extendsBoundary)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendsBoundary:"), extendsBoundary)
 }
 
-// PinToVisibleBounds calls the underlying PinToVisibleBounds.
 func (x *CollectionLayoutBoundarySupplementaryItem) PinToVisibleBounds() bool {
-	return x.inner.PinToVisibleBounds()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pinToVisibleBounds"))
+	return _r
 }
 
-// SetPinToVisibleBounds calls the underlying SetPinToVisibleBounds.
 func (x *CollectionLayoutBoundarySupplementaryItem) SetPinToVisibleBounds(pinToVisibleBounds bool) {
-	x.inner.SetPinToVisibleBounds(pinToVisibleBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPinToVisibleBounds:"), pinToVisibleBounds)
 }
 
-// Alignment calls the underlying Alignment.
-func (x *CollectionLayoutBoundarySupplementaryItem) Alignment() NSRectAlignment {
-	return NSRectAlignment(x.inner.Alignment())
-}
-
-// Offset calls the underlying Offset.
-func (x *CollectionLayoutBoundarySupplementaryItem) Offset() corefoundation.CGPoint {
-	return x.inner.Offset()
-}
-
-func (x *CollectionLayoutBoundarySupplementaryItem) asCollectionLayoutSupplementaryItem() *raw.NSCollectionLayoutSupplementaryItem {
-	return &x.inner.NSCollectionLayoutSupplementaryItem
-}
-
-func (x *CollectionLayoutBoundarySupplementaryItem) asCollectionLayoutItem() *raw.NSCollectionLayoutItem {
-	return &x.inner.NSCollectionLayoutSupplementaryItem.NSCollectionLayoutItem
+func (x *CollectionLayoutBoundarySupplementaryItem) Alignment() RectAlignment {
+	_r := objc.Send[RectAlignment](objref.IDOf(x), objc.RegisterName("alignment"))
+	return _r
 }
 
 // CollectionLayoutBoundarySupplementaryItemable is the interface implemented by [CollectionLayoutBoundarySupplementaryItem], for mocking and DI.
 type CollectionLayoutBoundarySupplementaryItemable interface {
-	Unwrap() *raw.NSCollectionLayoutBoundarySupplementaryItem
+	obj.Object
 	WithExtendsBoundary(extendsBoundary bool) *CollectionLayoutBoundarySupplementaryItem
 	WithPinToVisibleBounds(pinToVisibleBounds bool) *CollectionLayoutBoundarySupplementaryItem
 	WithZIndex(zIndex int) *CollectionLayoutBoundarySupplementaryItem
-	WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutBoundarySupplementaryItem
 	WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutBoundarySupplementaryItem
 	ExtendsBoundary() bool
 	SetExtendsBoundary(extendsBoundary bool)
 	PinToVisibleBounds() bool
 	SetPinToVisibleBounds(pinToVisibleBounds bool)
-	Alignment() NSRectAlignment
-	Offset() corefoundation.CGPoint
+	Alignment() RectAlignment
 }
 
 var _ CollectionLayoutBoundarySupplementaryItemable = (*CollectionLayoutBoundarySupplementaryItem)(nil)

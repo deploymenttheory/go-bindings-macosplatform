@@ -5,140 +5,138 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The base class for optimization layers.
 //
-// NNOptimizer wraps [raw.MPSNNOptimizer] with a fluent Go API.
+// NNOptimizer is an idiomatic wrapper over the Objective-C class MPSNNOptimizer.
 type NNOptimizer struct {
-	inner *raw.MPSNNOptimizer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNOptimizer].
-func (x *NNOptimizer) Unwrap() *raw.MPSNNOptimizer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNOptimizer) ID() objc.ID { return x.inner.Ptr() }
-
-// NNOptimizerFromID adopts an existing object pointer as a NNOptimizer (nil for 0).
+// NNOptimizerFromID adopts an existing Objective-C object as a NNOptimizer
+// (nil for 0), retaining it and registering a release finalizer.
 func NNOptimizerFromID(id objc.ID) *NNOptimizer {
 	if id == 0 {
 		return nil
 	}
-	return &NNOptimizer{inner: raw.MPSNNOptimizerFromID(id)}
+	x := &NNOptimizer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNNOptimizer creates a new [NNOptimizer].
+// nNOptimizerAdopt wraps an Objective-C object that this code just created as a
+// NNOptimizer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNOptimizerAdopt(id objc.ID) *NNOptimizer {
+	if id == 0 {
+		return nil
+	}
+	x := &NNOptimizer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NNOptimizer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNOptimizer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNOptimizer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNNOptimizer creates a new NNOptimizer.
 func NewNNOptimizer() *NNOptimizer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNOptimizer")), objc.RegisterName("new"))
-	return &NNOptimizer{inner: raw.MPSNNOptimizerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNOptimizer")), objc.RegisterName("new"))
+	return nNOptimizerAdopt(_id)
 }
 
-// @property   learningRate @abstract   The learningRate at which we update values @discussion The default value is 1e-3
+// The learningRate at which we update values The default value is 1e-3
 //
-// WithLearningRate sets the learningRate property and returns the receiver for chaining.
+// WithLearningRate sets learningRate and returns the receiver so calls can be chained.
 func (x *NNOptimizer) WithLearningRate(learningRate float32) *NNOptimizer {
-	x.inner.SetLearningRate(learningRate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
 	return x
 }
 
-// @property   applyGradientClipping @abstract   A bool which decides if gradient will be clipped @discussion The default value is NO
+// A bool which decides if gradient will be clipped The default value is NO
 //
-// WithApplyGradientClipping sets the applyGradientClipping property and returns the receiver for chaining.
+// WithApplyGradientClipping sets applyGradientClipping and returns the receiver so calls can be chained.
 func (x *NNOptimizer) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizer {
-	x.inner.SetApplyGradientClipping(applyGradientClipping)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NNOptimizer) WithOptions(options mpscore.MPSKernelOptions) *NNOptimizer {
-	x.inner.MPSKernel.SetOptions(options)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplyGradientClipping:"), applyGradientClipping)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *NNOptimizer) WithLabel(label string) *NNOptimizer {
-	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// SetLearningRate calls the underlying SetLearningRate.
 func (x *NNOptimizer) SetLearningRate(newLearningRate float32) {
-	x.inner.SetLearningRate(newLearningRate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), newLearningRate)
 }
 
-// @property   learningRate @abstract   The learningRate at which we update values @discussion The default value is 1e-3
-//
-// LearningRate calls the underlying LearningRate.
+// The learningRate at which we update values The default value is 1e-3
 func (x *NNOptimizer) LearningRate() float32 {
-	return x.inner.LearningRate()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("learningRate"))
+	return _r
 }
 
-// @property   gradientRescale @abstract   The gradientRescale at which we apply to incoming gradient values @discussion The default value is 1.0
-//
-// GradientRescale calls the underlying GradientRescale.
+// The gradientRescale at which we apply to incoming gradient values The default value is 1.0
 func (x *NNOptimizer) GradientRescale() float32 {
-	return x.inner.GradientRescale()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientRescale"))
+	return _r
 }
 
-// @property   applyGradientClipping @abstract   A bool which decides if gradient will be clipped @discussion The default value is NO
-//
-// ApplyGradientClipping calls the underlying ApplyGradientClipping.
+// A bool which decides if gradient will be clipped The default value is NO
 func (x *NNOptimizer) ApplyGradientClipping() bool {
-	return x.inner.ApplyGradientClipping()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("applyGradientClipping"))
+	return _r
 }
 
-// SetApplyGradientClipping calls the underlying SetApplyGradientClipping.
 func (x *NNOptimizer) SetApplyGradientClipping(applyGradientClipping bool) {
-	x.inner.SetApplyGradientClipping(applyGradientClipping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplyGradientClipping:"), applyGradientClipping)
 }
 
-// @property   gradientClipMax @abstract   The maximum value at which incoming gradient will be clipped before rescaling, applyGradientClipping must be true
-//
-// GradientClipMax calls the underlying GradientClipMax.
+// The maximum value at which incoming gradient will be clipped before rescaling, applyGradientClipping must be true
 func (x *NNOptimizer) GradientClipMax() float32 {
-	return x.inner.GradientClipMax()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientClipMax"))
+	return _r
 }
 
-// @property   gradientClipMin @abstract   The minimum value at which incoming gradient will be clipped before rescaling, applyGradientClipping must be true
-//
-// GradientClipMin calls the underlying GradientClipMin.
+// The minimum value at which incoming gradient will be clipped before rescaling, applyGradientClipping must be true
 func (x *NNOptimizer) GradientClipMin() float32 {
-	return x.inner.GradientClipMin()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientClipMin"))
+	return _r
 }
 
-// @property   regularizationScale @abstract   The regularizationScale at which we apply L1 or L2 regularization, it gets ignored if regularization is None @discussion The default value is 0.0
-//
-// RegularizationScale calls the underlying RegularizationScale.
+// The regularizationScale at which we apply L1 or L2 regularization, it gets ignored if regularization is None The default value is 0.0
 func (x *NNOptimizer) RegularizationScale() float32 {
-	return x.inner.RegularizationScale()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("regularizationScale"))
+	return _r
 }
-
-// @property   regularizationType @abstract   The regularizationType which we apply. @discussion The default value is MPSRegularizationTypeNone
-//
-// RegularizationType calls the underlying RegularizationType.
-func (x *NNOptimizer) RegularizationType() mpsneuralnetwork.MPSNNRegularizationType {
-	return x.inner.RegularizationType()
-}
-
-func (x *NNOptimizer) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
 
 // NNOptimizerable is the interface implemented by [NNOptimizer], for mocking and DI.
 type NNOptimizerable interface {
-	Unwrap() *raw.MPSNNOptimizer
+	obj.Object
 	WithLearningRate(learningRate float32) *NNOptimizer
 	WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizer
-	WithOptions(options mpscore.MPSKernelOptions) *NNOptimizer
 	WithLabel(label string) *NNOptimizer
 	SetLearningRate(newLearningRate float32)
 	LearningRate() float32
@@ -148,7 +146,6 @@ type NNOptimizerable interface {
 	GradientClipMax() float32
 	GradientClipMin() float32
 	RegularizationScale() float32
-	RegularizationType() mpsneuralnetwork.MPSNNRegularizationType
 }
 
 var _ NNOptimizerable = (*NNOptimizer)(nil)

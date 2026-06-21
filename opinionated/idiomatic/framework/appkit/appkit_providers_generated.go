@@ -5,216 +5,215 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// ActionCellProvider is implemented by ActionCell and any idiomatic type wrapping a NSActionCell subclass.
+// ActionCellProvider is accepted wherever a NSActionCell (or one of its subclasses) is expected.
 type ActionCellProvider interface {
-	asActionCell() *raw.NSActionCell
+	objref.Object
 }
 
-// AnimationProvider is implemented by Animation and any idiomatic type wrapping a NSAnimation subclass.
+// AnimationProvider is accepted wherever a NSAnimation (or one of its subclasses) is expected.
 type AnimationProvider interface {
-	asAnimation() *raw.NSAnimation
+	objref.Object
 }
 
-// ArrayControllerProvider is implemented by ArrayController and any idiomatic type wrapping a NSArrayController subclass.
+// ArrayControllerProvider is accepted wherever a NSArrayController (or one of its subclasses) is expected.
 type ArrayControllerProvider interface {
-	asArrayController() *raw.NSArrayController
+	objref.Object
 }
 
-// ButtonProvider is implemented by Button and any idiomatic type wrapping a NSButton subclass.
+// ButtonProvider is accepted wherever a NSButton (or one of its subclasses) is expected.
 type ButtonProvider interface {
-	asButton() *raw.NSButton
+	objref.Object
 }
 
-// ButtonCellProvider is implemented by ButtonCell and any idiomatic type wrapping a NSButtonCell subclass.
+// ButtonCellProvider is accepted wherever a NSButtonCell (or one of its subclasses) is expected.
 type ButtonCellProvider interface {
-	asButtonCell() *raw.NSButtonCell
+	objref.Object
 }
 
-// CellProvider is implemented by Cell and any idiomatic type wrapping a NSCell subclass.
+// CellProvider is accepted wherever a NSCell (or one of its subclasses) is expected.
 type CellProvider interface {
-	asCell() *raw.NSCell
+	objref.Object
 }
 
-// CollectionLayoutItemProvider is implemented by CollectionLayoutItem and any idiomatic type wrapping a NSCollectionLayoutItem subclass.
+// CollectionLayoutItemProvider is accepted wherever a NSCollectionLayoutItem (or one of its subclasses) is expected.
 type CollectionLayoutItemProvider interface {
-	asCollectionLayoutItem() *raw.NSCollectionLayoutItem
+	objref.Object
 }
 
-// CollectionLayoutSupplementaryItemProvider is implemented by CollectionLayoutSupplementaryItem and any idiomatic type wrapping a NSCollectionLayoutSupplementaryItem subclass.
+// CollectionLayoutSupplementaryItemProvider is accepted wherever a NSCollectionLayoutSupplementaryItem (or one of its subclasses) is expected.
 type CollectionLayoutSupplementaryItemProvider interface {
-	asCollectionLayoutSupplementaryItem() *raw.NSCollectionLayoutSupplementaryItem
+	objref.Object
 }
 
-// CollectionViewLayoutProvider is implemented by CollectionViewLayout and any idiomatic type wrapping a NSCollectionViewLayout subclass.
+// CollectionViewLayoutProvider is accepted wherever a NSCollectionViewLayout (or one of its subclasses) is expected.
 type CollectionViewLayoutProvider interface {
-	asCollectionViewLayout() *raw.NSCollectionViewLayout
+	objref.Object
 }
 
-// CollectionViewLayoutInvalidationContextProvider is implemented by CollectionViewLayoutInvalidationContext and any idiomatic type wrapping a NSCollectionViewLayoutInvalidationContext subclass.
+// CollectionViewLayoutInvalidationContextProvider is accepted wherever a NSCollectionViewLayoutInvalidationContext (or one of its subclasses) is expected.
 type CollectionViewLayoutInvalidationContextProvider interface {
-	asCollectionViewLayoutInvalidationContext() *raw.NSCollectionViewLayoutInvalidationContext
+	objref.Object
 }
 
-// ControlProvider is implemented by Control and any idiomatic type wrapping a NSControl subclass.
+// ControlProvider is accepted wherever a NSControl (or one of its subclasses) is expected.
 type ControlProvider interface {
-	asControl() *raw.NSControl
+	objref.Object
 }
 
-// ControllerProvider is implemented by Controller and any idiomatic type wrapping a NSController subclass.
+// ControllerProvider is accepted wherever a NSController (or one of its subclasses) is expected.
 type ControllerProvider interface {
-	asController() *raw.NSController
+	objref.Object
 }
 
-// DocumentProvider is implemented by Document and any idiomatic type wrapping a NSDocument subclass.
+// DocumentProvider is accepted wherever a NSDocument (or one of its subclasses) is expected.
 type DocumentProvider interface {
-	asDocument() *raw.NSDocument
+	objref.Object
 }
 
-// FontCollectionProvider is implemented by FontCollection and any idiomatic type wrapping a NSFontCollection subclass.
+// FontCollectionProvider is accepted wherever a NSFontCollection (or one of its subclasses) is expected.
 type FontCollectionProvider interface {
-	asFontCollection() *raw.NSFontCollection
+	objref.Object
 }
 
-// GestureRecognizerProvider is implemented by GestureRecognizer and any idiomatic type wrapping a NSGestureRecognizer subclass.
+// GestureRecognizerProvider is accepted wherever a NSGestureRecognizer (or one of its subclasses) is expected.
 type GestureRecognizerProvider interface {
-	asGestureRecognizer() *raw.NSGestureRecognizer
+	objref.Object
 }
 
-// ImageRepProvider is implemented by ImageRep and any idiomatic type wrapping a NSImageRep subclass.
+// ImageRepProvider is accepted wherever a NSImageRep (or one of its subclasses) is expected.
 type ImageRepProvider interface {
-	asImageRep() *raw.NSImageRep
+	objref.Object
 }
 
-// LayoutAnchorProvider is implemented by LayoutAnchor and any idiomatic type wrapping a NSLayoutAnchor subclass.
+// LayoutAnchorProvider is accepted wherever a NSLayoutAnchor (or one of its subclasses) is expected.
 type LayoutAnchorProvider interface {
-	asLayoutAnchor() *raw.NSLayoutAnchor[objc.ID]
+	objref.Object
 }
 
-// MatrixProvider is implemented by Matrix and any idiomatic type wrapping a NSMatrix subclass.
+// MatrixProvider is accepted wherever a NSMatrix (or one of its subclasses) is expected.
 type MatrixProvider interface {
-	asMatrix() *raw.NSMatrix
+	objref.Object
 }
 
-// MenuItemCellProvider is implemented by MenuItemCell and any idiomatic type wrapping a NSMenuItemCell subclass.
+// MenuItemCellProvider is accepted wherever a NSMenuItemCell (or one of its subclasses) is expected.
 type MenuItemCellProvider interface {
-	asMenuItemCell() *raw.NSMenuItemCell
+	objref.Object
 }
 
-// ObjectControllerProvider is implemented by ObjectController and any idiomatic type wrapping a NSObjectController subclass.
+// ObjectControllerProvider is accepted wherever a NSObjectController (or one of its subclasses) is expected.
 type ObjectControllerProvider interface {
-	asObjectController() *raw.NSObjectController
+	objref.Object
 }
 
-// PanelProvider is implemented by Panel and any idiomatic type wrapping a NSPanel subclass.
+// PanelProvider is accepted wherever a NSPanel (or one of its subclasses) is expected.
 type PanelProvider interface {
-	asPanel() *raw.NSPanel
+	objref.Object
 }
 
-// ParagraphStyleProvider is implemented by ParagraphStyle and any idiomatic type wrapping a NSParagraphStyle subclass.
+// ParagraphStyleProvider is accepted wherever a NSParagraphStyle (or one of its subclasses) is expected.
 type ParagraphStyleProvider interface {
-	asParagraphStyle() *raw.NSParagraphStyle
+	objref.Object
 }
 
-// ResponderProvider is implemented by Responder and any idiomatic type wrapping a NSResponder subclass.
+// ResponderProvider is accepted wherever a NSResponder (or one of its subclasses) is expected.
 type ResponderProvider interface {
-	asResponder() *raw.NSResponder
+	objref.Object
 }
 
-// RuleEditorProvider is implemented by RuleEditor and any idiomatic type wrapping a NSRuleEditor subclass.
+// RuleEditorProvider is accepted wherever a NSRuleEditor (or one of its subclasses) is expected.
 type RuleEditorProvider interface {
-	asRuleEditor() *raw.NSRuleEditor
+	objref.Object
 }
 
-// SavePanelProvider is implemented by SavePanel and any idiomatic type wrapping a NSSavePanel subclass.
+// SavePanelProvider is accepted wherever a NSSavePanel (or one of its subclasses) is expected.
 type SavePanelProvider interface {
-	asSavePanel() *raw.NSSavePanel
+	objref.Object
 }
 
-// ScrubberArrangedViewProvider is implemented by ScrubberArrangedView and any idiomatic type wrapping a NSScrubberArrangedView subclass.
+// ScrubberArrangedViewProvider is accepted wherever a NSScrubberArrangedView (or one of its subclasses) is expected.
 type ScrubberArrangedViewProvider interface {
-	asScrubberArrangedView() *raw.NSScrubberArrangedView
+	objref.Object
 }
 
-// ScrubberItemViewProvider is implemented by ScrubberItemView and any idiomatic type wrapping a NSScrubberItemView subclass.
+// ScrubberItemViewProvider is accepted wherever a NSScrubberItemView (or one of its subclasses) is expected.
 type ScrubberItemViewProvider interface {
-	asScrubberItemView() *raw.NSScrubberItemView
+	objref.Object
 }
 
-// ScrubberLayoutProvider is implemented by ScrubberLayout and any idiomatic type wrapping a NSScrubberLayout subclass.
+// ScrubberLayoutProvider is accepted wherever a NSScrubberLayout (or one of its subclasses) is expected.
 type ScrubberLayoutProvider interface {
-	asScrubberLayout() *raw.NSScrubberLayout
+	objref.Object
 }
 
-// TableViewProvider is implemented by TableView and any idiomatic type wrapping a NSTableView subclass.
+// TableViewProvider is accepted wherever a NSTableView (or one of its subclasses) is expected.
 type TableViewProvider interface {
-	asTableView() *raw.NSTableView
+	objref.Object
 }
 
-// TextProvider is implemented by Text and any idiomatic type wrapping a NSText subclass.
+// TextProvider is accepted wherever a NSText (or one of its subclasses) is expected.
 type TextProvider interface {
-	asText() *raw.NSText
+	objref.Object
 }
 
-// TextBlockProvider is implemented by TextBlock and any idiomatic type wrapping a NSTextBlock subclass.
+// TextBlockProvider is accepted wherever a NSTextBlock (or one of its subclasses) is expected.
 type TextBlockProvider interface {
-	asTextBlock() *raw.NSTextBlock
+	objref.Object
 }
 
-// TextContentManagerProvider is implemented by TextContentManager and any idiomatic type wrapping a NSTextContentManager subclass.
+// TextContentManagerProvider is accepted wherever a NSTextContentManager (or one of its subclasses) is expected.
 type TextContentManagerProvider interface {
-	asTextContentManager() *raw.NSTextContentManager
+	objref.Object
 }
 
-// TextElementProvider is implemented by TextElement and any idiomatic type wrapping a NSTextElement subclass.
+// TextElementProvider is accepted wherever a NSTextElement (or one of its subclasses) is expected.
 type TextElementProvider interface {
-	asTextElement() *raw.NSTextElement
+	objref.Object
 }
 
-// TextFieldProvider is implemented by TextField and any idiomatic type wrapping a NSTextField subclass.
+// TextFieldProvider is accepted wherever a NSTextField (or one of its subclasses) is expected.
 type TextFieldProvider interface {
-	asTextField() *raw.NSTextField
+	objref.Object
 }
 
-// TextFieldCellProvider is implemented by TextFieldCell and any idiomatic type wrapping a NSTextFieldCell subclass.
+// TextFieldCellProvider is accepted wherever a NSTextFieldCell (or one of its subclasses) is expected.
 type TextFieldCellProvider interface {
-	asTextFieldCell() *raw.NSTextFieldCell
+	objref.Object
 }
 
-// TextParagraphProvider is implemented by TextParagraph and any idiomatic type wrapping a NSTextParagraph subclass.
+// TextParagraphProvider is accepted wherever a NSTextParagraph (or one of its subclasses) is expected.
 type TextParagraphProvider interface {
-	asTextParagraph() *raw.NSTextParagraph
+	objref.Object
 }
 
-// ToolbarItemProvider is implemented by ToolbarItem and any idiomatic type wrapping a NSToolbarItem subclass.
+// ToolbarItemProvider is accepted wherever a NSToolbarItem (or one of its subclasses) is expected.
 type ToolbarItemProvider interface {
-	asToolbarItem() *raw.NSToolbarItem
+	objref.Object
 }
 
-// TouchBarItemProvider is implemented by TouchBarItem and any idiomatic type wrapping a NSTouchBarItem subclass.
+// TouchBarItemProvider is accepted wherever a NSTouchBarItem (or one of its subclasses) is expected.
 type TouchBarItemProvider interface {
-	asTouchBarItem() *raw.NSTouchBarItem
+	objref.Object
 }
 
-// TypesetterProvider is implemented by Typesetter and any idiomatic type wrapping a NSTypesetter subclass.
+// TypesetterProvider is accepted wherever a NSTypesetter (or one of its subclasses) is expected.
 type TypesetterProvider interface {
-	asTypesetter() *raw.NSTypesetter
+	objref.Object
 }
 
-// ViewProvider is implemented by View and any idiomatic type wrapping a NSView subclass.
+// ViewProvider is accepted wherever a NSView (or one of its subclasses) is expected.
 type ViewProvider interface {
-	asView() *raw.NSView
+	objref.Object
 }
 
-// ViewControllerProvider is implemented by ViewController and any idiomatic type wrapping a NSViewController subclass.
+// ViewControllerProvider is accepted wherever a NSViewController (or one of its subclasses) is expected.
 type ViewControllerProvider interface {
-	asViewController() *raw.NSViewController
+	objref.Object
 }
 
-// WindowProvider is implemented by Window and any idiomatic type wrapping a NSWindow subclass.
+// WindowProvider is accepted wherever a NSWindow (or one of its subclasses) is expected.
 type WindowProvider interface {
-	asWindow() *raw.NSWindow
+	objref.Object
 }

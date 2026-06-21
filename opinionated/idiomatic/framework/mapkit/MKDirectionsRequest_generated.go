@@ -5,203 +5,213 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The start and end points of a route, along with the planned mode of transportation.
 //
-// DirectionsRequest wraps [raw.MKDirectionsRequest] with a fluent Go API.
+// DirectionsRequest is an idiomatic wrapper over the Objective-C class MKDirectionsRequest.
 type DirectionsRequest struct {
-	inner *raw.MKDirectionsRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKDirectionsRequest].
-func (x *DirectionsRequest) Unwrap() *raw.MKDirectionsRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DirectionsRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// DirectionsRequestFromID adopts an existing object pointer as a DirectionsRequest (nil for 0).
+// DirectionsRequestFromID adopts an existing Objective-C object as a DirectionsRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func DirectionsRequestFromID(id objc.ID) *DirectionsRequest {
 	if id == 0 {
 		return nil
 	}
-	return &DirectionsRequest{inner: raw.MKDirectionsRequestFromID(id)}
+	x := &DirectionsRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDirectionsRequestWithContentsOfURL creates a new [DirectionsRequest].
+// directionsRequestAdopt wraps an Objective-C object that this code just created as a
+// DirectionsRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func directionsRequestAdopt(id objc.ID) *DirectionsRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &DirectionsRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DirectionsRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DirectionsRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DirectionsRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDirectionsRequestWithContentsOfURL creates a new DirectionsRequest.
 func NewDirectionsRequestWithContentsOfURL(url string) *DirectionsRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKDirectionsRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr())
-	return &DirectionsRequest{inner: raw.MKDirectionsRequestFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKDirectionsRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(url))
+	return directionsRequestAdopt(_id)
 }
 
-// WithSource sets the source property and returns the receiver for chaining.
+// WithSource sets source and returns the receiver so calls can be chained.
 func (x *DirectionsRequest) WithSource(source *MapItem) *DirectionsRequest {
-	x.inner.SetSource(source.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), objref.IDOf(source))
 	return x
 }
 
-// WithDestination sets the destination property and returns the receiver for chaining.
+// WithDestination sets destination and returns the receiver so calls can be chained.
 func (x *DirectionsRequest) WithDestination(destination *MapItem) *DirectionsRequest {
-	x.inner.SetDestination(destination.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return x
 }
 
-// WithTransportType sets the transportType property and returns the receiver for chaining.
-func (x *DirectionsRequest) WithTransportType(transportType MKDirectionsTransportType) *DirectionsRequest {
-	x.inner.SetTransportType(raw.MKDirectionsTransportType(transportType))
+// WithTransportType sets transportType and returns the receiver so calls can be chained.
+func (x *DirectionsRequest) WithTransportType(transportType DirectionsTransportType) *DirectionsRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransportType:"), transportType)
 	return x
 }
 
-// WithRequestsAlternateRoutes sets the requestsAlternateRoutes property and returns the receiver for chaining.
+// WithRequestsAlternateRoutes sets requestsAlternateRoutes and returns the receiver so calls can be chained.
 func (x *DirectionsRequest) WithRequestsAlternateRoutes(requestsAlternateRoutes bool) *DirectionsRequest {
-	x.inner.SetRequestsAlternateRoutes(requestsAlternateRoutes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestsAlternateRoutes:"), requestsAlternateRoutes)
 	return x
 }
 
-// WithDepartureDate sets the departureDate property and returns the receiver for chaining.
-func (x *DirectionsRequest) WithDepartureDate(departureDate *foundation.NSDate) *DirectionsRequest {
-	x.inner.SetDepartureDate(departureDate)
+// WithDepartureDate sets departureDate and returns the receiver so calls can be chained.
+func (x *DirectionsRequest) WithDepartureDate(departureDate obj.Object) *DirectionsRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepartureDate:"), objref.IDOf(departureDate))
 	return x
 }
 
-// WithArrivalDate sets the arrivalDate property and returns the receiver for chaining.
-func (x *DirectionsRequest) WithArrivalDate(arrivalDate *foundation.NSDate) *DirectionsRequest {
-	x.inner.SetArrivalDate(arrivalDate)
+// WithArrivalDate sets arrivalDate and returns the receiver so calls can be chained.
+func (x *DirectionsRequest) WithArrivalDate(arrivalDate obj.Object) *DirectionsRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArrivalDate:"), objref.IDOf(arrivalDate))
 	return x
 }
 
-// WithTollPreference sets the tollPreference property and returns the receiver for chaining.
-func (x *DirectionsRequest) WithTollPreference(tollPreference MKDirectionsRoutePreference) *DirectionsRequest {
-	x.inner.SetTollPreference(raw.MKDirectionsRoutePreference(tollPreference))
+// WithTollPreference sets tollPreference and returns the receiver so calls can be chained.
+func (x *DirectionsRequest) WithTollPreference(tollPreference DirectionsRoutePreference) *DirectionsRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTollPreference:"), tollPreference)
 	return x
 }
 
-// WithHighwayPreference sets the highwayPreference property and returns the receiver for chaining.
-func (x *DirectionsRequest) WithHighwayPreference(highwayPreference MKDirectionsRoutePreference) *DirectionsRequest {
-	x.inner.SetHighwayPreference(raw.MKDirectionsRoutePreference(highwayPreference))
+// WithHighwayPreference sets highwayPreference and returns the receiver so calls can be chained.
+func (x *DirectionsRequest) WithHighwayPreference(highwayPreference DirectionsRoutePreference) *DirectionsRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighwayPreference:"), highwayPreference)
 	return x
 }
 
-// SetSource calls the underlying SetSource.
-func (x *DirectionsRequest) SetSource(source *raw.MKMapItem) {
-	x.inner.SetSource(source)
+func (x *DirectionsRequest) SetSource(source *MapItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), objref.IDOf(source))
 }
 
-// SetDestination calls the underlying SetDestination.
-func (x *DirectionsRequest) SetDestination(destination *raw.MKMapItem) {
-	x.inner.SetDestination(destination)
+func (x *DirectionsRequest) SetDestination(destination *MapItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 }
 
-// Source calls the underlying Source.
 func (x *DirectionsRequest) Source() *MapItem {
-	_r := x.inner.Source()
-	if _r == nil {
-		return nil
-	}
-	return &MapItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
+	return MapItemFromID(_r)
 }
 
-// Destination calls the underlying Destination.
 func (x *DirectionsRequest) Destination() *MapItem {
-	_r := x.inner.Destination()
-	if _r == nil {
-		return nil
-	}
-	return &MapItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destination"))
+	return MapItemFromID(_r)
 }
 
-// TransportType calls the underlying TransportType.
-func (x *DirectionsRequest) TransportType() MKDirectionsTransportType {
-	return MKDirectionsTransportType(x.inner.TransportType())
+func (x *DirectionsRequest) TransportType() DirectionsTransportType {
+	_r := objc.Send[DirectionsTransportType](objref.IDOf(x), objc.RegisterName("transportType"))
+	return _r
 }
 
-// SetTransportType calls the underlying SetTransportType.
-func (x *DirectionsRequest) SetTransportType(transportType MKDirectionsTransportType) {
-	x.inner.SetTransportType(raw.MKDirectionsTransportType(transportType))
+func (x *DirectionsRequest) SetTransportType(transportType DirectionsTransportType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransportType:"), transportType)
 }
 
-// RequestsAlternateRoutes calls the underlying RequestsAlternateRoutes.
 func (x *DirectionsRequest) RequestsAlternateRoutes() bool {
-	return x.inner.RequestsAlternateRoutes()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requestsAlternateRoutes"))
+	return _r
 }
 
-// SetRequestsAlternateRoutes calls the underlying SetRequestsAlternateRoutes.
 func (x *DirectionsRequest) SetRequestsAlternateRoutes(requestsAlternateRoutes bool) {
-	x.inner.SetRequestsAlternateRoutes(requestsAlternateRoutes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestsAlternateRoutes:"), requestsAlternateRoutes)
 }
 
-// DepartureDate calls the underlying DepartureDate.
-func (x *DirectionsRequest) DepartureDate() *foundation.NSDate {
-	return x.inner.DepartureDate()
+func (x *DirectionsRequest) DepartureDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departureDate"))
+	return obj.Wrap(_r)
 }
 
-// SetDepartureDate calls the underlying SetDepartureDate.
-func (x *DirectionsRequest) SetDepartureDate(departureDate *foundation.NSDate) {
-	x.inner.SetDepartureDate(departureDate)
+func (x *DirectionsRequest) SetDepartureDate(departureDate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepartureDate:"), objref.IDOf(departureDate))
 }
 
-// ArrivalDate calls the underlying ArrivalDate.
-func (x *DirectionsRequest) ArrivalDate() *foundation.NSDate {
-	return x.inner.ArrivalDate()
+func (x *DirectionsRequest) ArrivalDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalDate"))
+	return obj.Wrap(_r)
 }
 
-// SetArrivalDate calls the underlying SetArrivalDate.
-func (x *DirectionsRequest) SetArrivalDate(arrivalDate *foundation.NSDate) {
-	x.inner.SetArrivalDate(arrivalDate)
+func (x *DirectionsRequest) SetArrivalDate(arrivalDate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArrivalDate:"), objref.IDOf(arrivalDate))
 }
 
-// TollPreference calls the underlying TollPreference.
-func (x *DirectionsRequest) TollPreference() MKDirectionsRoutePreference {
-	return MKDirectionsRoutePreference(x.inner.TollPreference())
+func (x *DirectionsRequest) TollPreference() DirectionsRoutePreference {
+	_r := objc.Send[DirectionsRoutePreference](objref.IDOf(x), objc.RegisterName("tollPreference"))
+	return _r
 }
 
-// SetTollPreference calls the underlying SetTollPreference.
-func (x *DirectionsRequest) SetTollPreference(tollPreference MKDirectionsRoutePreference) {
-	x.inner.SetTollPreference(raw.MKDirectionsRoutePreference(tollPreference))
+func (x *DirectionsRequest) SetTollPreference(tollPreference DirectionsRoutePreference) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTollPreference:"), tollPreference)
 }
 
-// HighwayPreference calls the underlying HighwayPreference.
-func (x *DirectionsRequest) HighwayPreference() MKDirectionsRoutePreference {
-	return MKDirectionsRoutePreference(x.inner.HighwayPreference())
+func (x *DirectionsRequest) HighwayPreference() DirectionsRoutePreference {
+	_r := objc.Send[DirectionsRoutePreference](objref.IDOf(x), objc.RegisterName("highwayPreference"))
+	return _r
 }
 
-// SetHighwayPreference calls the underlying SetHighwayPreference.
-func (x *DirectionsRequest) SetHighwayPreference(highwayPreference MKDirectionsRoutePreference) {
-	x.inner.SetHighwayPreference(raw.MKDirectionsRoutePreference(highwayPreference))
+func (x *DirectionsRequest) SetHighwayPreference(highwayPreference DirectionsRoutePreference) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighwayPreference:"), highwayPreference)
 }
 
 // DirectionsRequestable is the interface implemented by [DirectionsRequest], for mocking and DI.
 type DirectionsRequestable interface {
-	Unwrap() *raw.MKDirectionsRequest
+	obj.Object
 	WithSource(source *MapItem) *DirectionsRequest
 	WithDestination(destination *MapItem) *DirectionsRequest
-	WithTransportType(transportType MKDirectionsTransportType) *DirectionsRequest
+	WithTransportType(transportType DirectionsTransportType) *DirectionsRequest
 	WithRequestsAlternateRoutes(requestsAlternateRoutes bool) *DirectionsRequest
-	WithDepartureDate(departureDate *foundation.NSDate) *DirectionsRequest
-	WithArrivalDate(arrivalDate *foundation.NSDate) *DirectionsRequest
-	WithTollPreference(tollPreference MKDirectionsRoutePreference) *DirectionsRequest
-	WithHighwayPreference(highwayPreference MKDirectionsRoutePreference) *DirectionsRequest
-	SetSource(source *raw.MKMapItem)
-	SetDestination(destination *raw.MKMapItem)
+	WithDepartureDate(departureDate obj.Object) *DirectionsRequest
+	WithArrivalDate(arrivalDate obj.Object) *DirectionsRequest
+	WithTollPreference(tollPreference DirectionsRoutePreference) *DirectionsRequest
+	WithHighwayPreference(highwayPreference DirectionsRoutePreference) *DirectionsRequest
+	SetSource(source *MapItem)
+	SetDestination(destination *MapItem)
 	Source() *MapItem
 	Destination() *MapItem
-	TransportType() MKDirectionsTransportType
-	SetTransportType(transportType MKDirectionsTransportType)
+	TransportType() DirectionsTransportType
+	SetTransportType(transportType DirectionsTransportType)
 	RequestsAlternateRoutes() bool
 	SetRequestsAlternateRoutes(requestsAlternateRoutes bool)
-	DepartureDate() *foundation.NSDate
-	SetDepartureDate(departureDate *foundation.NSDate)
-	ArrivalDate() *foundation.NSDate
-	SetArrivalDate(arrivalDate *foundation.NSDate)
-	TollPreference() MKDirectionsRoutePreference
-	SetTollPreference(tollPreference MKDirectionsRoutePreference)
-	HighwayPreference() MKDirectionsRoutePreference
-	SetHighwayPreference(highwayPreference MKDirectionsRoutePreference)
+	DepartureDate() obj.Object
+	SetDepartureDate(departureDate obj.Object)
+	ArrivalDate() obj.Object
+	SetArrivalDate(arrivalDate obj.Object)
+	TollPreference() DirectionsRoutePreference
+	SetTollPreference(tollPreference DirectionsRoutePreference)
+	HighwayPreference() DirectionsRoutePreference
+	SetHighwayPreference(highwayPreference DirectionsRoutePreference)
 }
 
 var _ DirectionsRequestable = (*DirectionsRequest)(nil)

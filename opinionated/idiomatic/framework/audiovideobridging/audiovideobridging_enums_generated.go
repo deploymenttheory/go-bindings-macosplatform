@@ -13,27 +13,27 @@ import (
 type AVB17221ACMPFlags int64
 
 const (
-	// @constant	AVB17221ACMPFlagsNone @abstract	The IEEE Std 1722.1™-2013 ACMP no flags.
+	// The IEEE Std 1722.1™-2013 ACMP no flags.
 	AVB17221ACMPFlagsNone AVB17221ACMPFlags = 0
-	// @constant	AVB17221ACMPFlagsClassB @abstract	The IEEE Std 1722.1™-2013 ACMP CLASS_B flag.
+	// The IEEE Std 1722.1™-2013 ACMP CLASS_B flag.
 	AVB17221ACMPFlagsClassB AVB17221ACMPFlags = 1
-	// @constant	AVB17221ACMPFlagsFastConnect @abstract	The IEEE Std 1722.1™-2013 ACMP FAST_CONNECT flag.
+	// The IEEE Std 1722.1™-2013 ACMP FAST_CONNECT flag.
 	AVB17221ACMPFlagsFastConnect AVB17221ACMPFlags = 2
-	// @constant	AVB17221ACMPFlagsSavedState @abstract	The IEEE Std 1722.1™-2013 ACMP SAVED_STATE flag.
+	// The IEEE Std 1722.1™-2013 ACMP SAVED_STATE flag.
 	AVB17221ACMPFlagsSavedState AVB17221ACMPFlags = 4
-	// @constant	AVB17221ACMPFlagsStreamingWait @abstract	The IEEE Std 1722.1™-2013 ACMP STREAMING_WAIT flag.
+	// The IEEE Std 1722.1™-2013 ACMP STREAMING_WAIT flag.
 	AVB17221ACMPFlagsStreamingWait AVB17221ACMPFlags = 8
-	// @constant	AVB17221ACMPFlagsSupportsEncrypted @abstract	The IEEE Std 1722.1™-2013 ACMP SUPPORTS_ENCRYPTED flag.
+	// The IEEE Std 1722.1™-2013 ACMP SUPPORTS_ENCRYPTED flag.
 	AVB17221ACMPFlagsSupportsEncrypted AVB17221ACMPFlags = 16
-	// @constant	AVB17221ACMPFlagsEncryptedPDU @abstract	The IEEE Std 1722.1™-2013 ACMP ENCRYPTED_PDU flag.
+	// The IEEE Std 1722.1™-2013 ACMP ENCRYPTED_PDU flag.
 	AVB17221ACMPFlagsEncryptedPDU AVB17221ACMPFlags = 32
-	// @constant	AVB17221ACMPFlagsStreamingTalkerFailed @abstract	The IEEE Std 1722.1™-2013 ACMP TALKER_FAILED flag.
+	// The IEEE Std 1722.1™-2013 ACMP TALKER_FAILED flag.
 	AVB17221ACMPFlagsStreamingTalkerFailed AVB17221ACMPFlags = 64
-	// @constant	AVB17221ACMPFlagsStreamingConnectedListenersValid @abstract	The IEEE Std 1722.1™-2021 ACMP CL_ENTRIES_VALID flag.
+	// The IEEE Std 1722.1™-2021 ACMP CL_ENTRIES_VALID flag.
 	AVB17221ACMPFlagsStreamingConnectedListenersValid AVB17221ACMPFlags = 128
-	// @constant	AVB17221ACMPFlagsStreamingNoStreamReservationProtocol @abstract	The IEEE Std 1722.1™-2021 ACMP NO_SRP flag.
+	// The IEEE Std 1722.1™-2021 ACMP NO_SRP flag.
 	AVB17221ACMPFlagsStreamingNoStreamReservationProtocol AVB17221ACMPFlags = 256
-	// @constant	AVB17221ACMPFlagsStreamingUsingUDP @abstract	The IEEE Std 1722.1™-2021 ACMP UDP flag.
+	// The IEEE Std 1722.1™-2021 ACMP UDP flag.
 	AVB17221ACMPFlagsStreamingUsingUDP AVB17221ACMPFlags = 512
 )
 
@@ -79,7 +79,7 @@ func (e AVB17221ACMPFlags) String() string {
 type AVB17221ACMPIPFlag int64
 
 const (
-	// @constant	AVB17221ACMPIPFlagNone @abstract	The IEEE Std 1722.1™-2021 ACMP no ip_flags.
+	// The IEEE Std 1722.1™-2021 ACMP no ip_flags.
 	AVB17221ACMPIPFlagNone AVB17221ACMPIPFlag = 0
 )
 
@@ -94,33 +94,33 @@ func (e AVB17221ACMPIPFlag) String() string {
 type AVB17221ACMPMessageType int64
 
 const (
-	// @constant	AVB17221ACMPMessageTypeConnectTXCommand @abstract	The IEEE Std 1722.1™-2013 ACMP CONNECT_TX_COMMAND message type.
+	// The IEEE Std 1722.1™-2013 ACMP CONNECT_TX_COMMAND message type.
 	AVB17221ACMPMessageTypeConnectTXCommand AVB17221ACMPMessageType = 0
-	// @constant	AVB17221ACMPMessageTypeConnectTXResponse @abstract	The IEEE Std 1722.1™-2013 ACMP CONNECT_TX_RESPONSE message type.
+	// The IEEE Std 1722.1™-2013 ACMP CONNECT_TX_RESPONSE message type.
 	AVB17221ACMPMessageTypeConnectTXResponse AVB17221ACMPMessageType = 1
-	// @constant	AVB17221ACMPMessageTypeDisconnectTXCommand @abstract	The IEEE Std 1722.1™-2013 ACMP DISCONNECT_TX_COMMAND message type.
+	// The IEEE Std 1722.1™-2013 ACMP DISCONNECT_TX_COMMAND message type.
 	AVB17221ACMPMessageTypeDisconnectTXCommand AVB17221ACMPMessageType = 2
-	// @constant	AVB17221ACMPMessageTypeDisconnectTXResponse @abstract	The IEEE Std 1722.1™-2013 ACMP DISCONNECT_TX_RESPONSE message type.
+	// The IEEE Std 1722.1™-2013 ACMP DISCONNECT_TX_RESPONSE message type.
 	AVB17221ACMPMessageTypeDisconnectTXResponse AVB17221ACMPMessageType = 3
-	// @constant	AVB17221ACMPMessageTypeGetTXStateCommand @abstract	The IEEE Std 1722.1™-2013 ACMP GET_TX_STATE_COMMAND message type.
+	// The IEEE Std 1722.1™-2013 ACMP GET_TX_STATE_COMMAND message type.
 	AVB17221ACMPMessageTypeGetTXStateCommand AVB17221ACMPMessageType = 4
-	// @constant	AVB17221ACMPMessageTypeGetTXStateResponse @abstract	The IEEE Std 1722.1™-2013 ACMP GET_TX_STATE_RESPONSE message type.
+	// The IEEE Std 1722.1™-2013 ACMP GET_TX_STATE_RESPONSE message type.
 	AVB17221ACMPMessageTypeGetTXStateResponse AVB17221ACMPMessageType = 5
-	// @constant	AVB17221ACMPMessageTypeConnectRXCommand @abstract	The IEEE Std 1722.1™-2013 ACMP CONNECT_RX_COMMAND message type.
+	// The IEEE Std 1722.1™-2013 ACMP CONNECT_RX_COMMAND message type.
 	AVB17221ACMPMessageTypeConnectRXCommand AVB17221ACMPMessageType = 6
-	// @constant	AVB17221ACMPMessageTypeConnectRXResponse @abstract	The IEEE Std 1722.1™-2013 ACMP CONNECT_RX_RESPONSE message type.
+	// The IEEE Std 1722.1™-2013 ACMP CONNECT_RX_RESPONSE message type.
 	AVB17221ACMPMessageTypeConnectRXResponse AVB17221ACMPMessageType = 7
-	// @constant	AVB17221ACMPMessageTypeDisconnectRXCommand @abstract	The IEEE Std 1722.1™-2013 ACMP DISCONNECT_RX_COMMAND message type.
+	// The IEEE Std 1722.1™-2013 ACMP DISCONNECT_RX_COMMAND message type.
 	AVB17221ACMPMessageTypeDisconnectRXCommand AVB17221ACMPMessageType = 8
-	// @constant	AVB17221ACMPMessageTypeDisconnectRXResponse @abstract	The IEEE Std 1722.1™-2013 ACMP DISCONNECT_RX_RESPONSE message type.
+	// The IEEE Std 1722.1™-2013 ACMP DISCONNECT_RX_RESPONSE message type.
 	AVB17221ACMPMessageTypeDisconnectRXResponse AVB17221ACMPMessageType = 9
-	// @constant	AVB17221ACMPMessageTypeGetRXStateCommand @abstract	The IEEE Std 1722.1™-2013 ACMP GET_RX_STATE_COMMAND message type.
+	// The IEEE Std 1722.1™-2013 ACMP GET_RX_STATE_COMMAND message type.
 	AVB17221ACMPMessageTypeGetRXStateCommand AVB17221ACMPMessageType = 10
-	// @constant	AVB17221ACMPMessageTypeGetRXStateResponse @abstract	The IEEE Std 1722.1™-2013 ACMP GET_RX_STATE_RESPONSE message type.
+	// The IEEE Std 1722.1™-2013 ACMP GET_RX_STATE_RESPONSE message type.
 	AVB17221ACMPMessageTypeGetRXStateResponse AVB17221ACMPMessageType = 11
-	// @constant	AVB17221ACMPMessageTypeGetTXConnectionCommand @abstract	The IEEE Std 1722.1™-2013 ACMP GET_TX_CONNECTION_COMMAND message type.
+	// The IEEE Std 1722.1™-2013 ACMP GET_TX_CONNECTION_COMMAND message type.
 	AVB17221ACMPMessageTypeGetTXConnectionCommand AVB17221ACMPMessageType = 12
-	// @constant	AVB17221ACMPMessageTypeGetTXConnectionResponse @abstract	The IEEE Std 1722.1™-2013 ACMP GET_TX_CONNECTION_RESPONSE message type.
+	// The IEEE Std 1722.1™-2013 ACMP GET_TX_CONNECTION_RESPONSE message type.
 	AVB17221ACMPMessageTypeGetTXConnectionResponse AVB17221ACMPMessageType = 13
 )
 
@@ -162,47 +162,47 @@ func (e AVB17221ACMPMessageType) String() string {
 type AVB17221ACMPStatusCode int64
 
 const (
-	// @constant	AVB17221ACMPStatusSuccess @abstract	The IEEE Std 1722.1™-2013 ACMP SUCCESS status code.
+	// The IEEE Std 1722.1™-2013 ACMP SUCCESS status code.
 	AVB17221ACMPStatusSuccess AVB17221ACMPStatusCode = 0
-	// @constant	AVB17221ACMPStatusListenerUnknownID @abstract	The IEEE Std 1722.1™-2013 ACMP LISTENER_UNKNOWN_ID status code.
+	// The IEEE Std 1722.1™-2013 ACMP LISTENER_UNKNOWN_ID status code.
 	AVB17221ACMPStatusListenerUnknownID AVB17221ACMPStatusCode = 1
-	// @constant	AVB17221ACMPStatusTalkerUnknownID @abstract	The IEEE Std 1722.1™-2013 ACMP TALKER_UNKNOWN_ID status code.
+	// The IEEE Std 1722.1™-2013 ACMP TALKER_UNKNOWN_ID status code.
 	AVB17221ACMPStatusTalkerUnknownID AVB17221ACMPStatusCode = 2
-	// @constant	AVB17221ACMPStatusTalkerDestMACFail @abstract	The IEEE Std 1722.1™-2013 ACMP TALKER_DEST_MAC_FAIL status code.
+	// The IEEE Std 1722.1™-2013 ACMP TALKER_DEST_MAC_FAIL status code.
 	AVB17221ACMPStatusTalkerDestMACFail AVB17221ACMPStatusCode = 3
-	// @constant	AVB17221ACMPStatusTalkerNoStreamIndex @abstract	The IEEE Std 1722.1™-2013 ACMP TALKER_NO_STREAM_INDEX status code.
+	// The IEEE Std 1722.1™-2013 ACMP TALKER_NO_STREAM_INDEX status code.
 	AVB17221ACMPStatusTalkerNoStreamIndex AVB17221ACMPStatusCode = 4
-	// @constant	AVB17221ACMPStatusTalkerNoBandwidth @abstract	The IEEE Std 1722.1™-2013 ACMP TALKER_NO_BANDWIDTH status code.
+	// The IEEE Std 1722.1™-2013 ACMP TALKER_NO_BANDWIDTH status code.
 	AVB17221ACMPStatusTalkerNoBandwidth AVB17221ACMPStatusCode = 5
-	// @constant	AVB17221ACMPStatusTalkerExclusive @abstract	The IEEE Std 1722.1™-2013 ACMP TALKER_EXCLUSIVE status code.
+	// The IEEE Std 1722.1™-2013 ACMP TALKER_EXCLUSIVE status code.
 	AVB17221ACMPStatusTalkerExclusive AVB17221ACMPStatusCode = 6
-	// @constant	AVB17221ACMPStatusListenerTalkerTimeout @abstract	The IEEE Std 1722.1™-2013 ACMP LISTENER_TALKER_TIMEOUT status code.
+	// The IEEE Std 1722.1™-2013 ACMP LISTENER_TALKER_TIMEOUT status code.
 	AVB17221ACMPStatusListenerTalkerTimeout AVB17221ACMPStatusCode = 7
-	// @constant	AVB17221ACMPStatusListenerExclusive @abstract	The IEEE Std 1722.1™-2013 ACMP LISTENER_EXCLUSIVE status code.
+	// The IEEE Std 1722.1™-2013 ACMP LISTENER_EXCLUSIVE status code.
 	AVB17221ACMPStatusListenerExclusive AVB17221ACMPStatusCode = 8
-	// @constant	AVB17221ACMPStatusStateUnavailable @abstract	The IEEE Std 1722.1™-2013 ACMP STATE_UNAVAILABLE status code.
+	// The IEEE Std 1722.1™-2013 ACMP STATE_UNAVAILABLE status code.
 	AVB17221ACMPStatusStateUnavailable AVB17221ACMPStatusCode = 9
-	// @constant	AVB17221ACMPStatusNotConnected @abstract	The IEEE Std 1722.1™-2013 ACMP NOT_CONNECTED status code.
+	// The IEEE Std 1722.1™-2013 ACMP NOT_CONNECTED status code.
 	AVB17221ACMPStatusNotConnected AVB17221ACMPStatusCode = 10
-	// @constant	AVB17221ACMPStatusNoSuchConnection @abstract	The IEEE Std 1722.1™-2013 ACMP NO_SUCH_CONNECTION status code.
+	// The IEEE Std 1722.1™-2013 ACMP NO_SUCH_CONNECTION status code.
 	AVB17221ACMPStatusNoSuchConnection AVB17221ACMPStatusCode = 11
-	// @constant	AVB17221ACMPStatusUnableToSendMessage @abstract	The IEEE Std 1722.1™-2013 ACMP COULD_NOT_SEND_MESSAGE status code.
+	// The IEEE Std 1722.1™-2013 ACMP COULD_NOT_SEND_MESSAGE status code.
 	AVB17221ACMPStatusUnableToSendMessage AVB17221ACMPStatusCode = 12
-	// @constant	AVB17221ACMPStatusTalkerMisbehaving @abstract	The IEEE Std 1722.1™-2013 ACMP TALKER_MISBEHAVING status code.
+	// The IEEE Std 1722.1™-2013 ACMP TALKER_MISBEHAVING status code.
 	AVB17221ACMPStatusTalkerMisbehaving AVB17221ACMPStatusCode = 13
-	// @constant	AVB17221ACMPStatusListenerMisbehaving @abstract	The IEEE Std 1722.1™-2013 ACMP LISTENER_MISBEHAVING status code.
+	// The IEEE Std 1722.1™-2013 ACMP LISTENER_MISBEHAVING status code.
 	AVB17221ACMPStatusListenerMisbehaving AVB17221ACMPStatusCode = 14
-	// @constant	AVB17221ACMPStatusSRPFace @abstract	The IEEE Std 1722.1™-2013 ACMP SRP_FACE status code.
+	// The IEEE Std 1722.1™-2013 ACMP SRP_FACE status code.
 	AVB17221ACMPStatusSRPFace AVB17221ACMPStatusCode = 15
-	// @constant	AVB17221ACMPStatusControllerNotAuthorized @abstract	The IEEE Std 1722.1™-2013 ACMP CONTROLLER_NOT_AUTHORIZED status code.
+	// The IEEE Std 1722.1™-2013 ACMP CONTROLLER_NOT_AUTHORIZED status code.
 	AVB17221ACMPStatusControllerNotAuthorized AVB17221ACMPStatusCode = 16
-	// @constant	AVB17221ACMPStatusIncompatibleRequest @abstract	The IEEE Std 1722.1™-2013 ACMP INCOMPATIBLE_REQUEST status code.
+	// The IEEE Std 1722.1™-2013 ACMP INCOMPATIBLE_REQUEST status code.
 	AVB17221ACMPStatusIncompatibleRequest AVB17221ACMPStatusCode = 17
-	// @constant	AVB17221ACMPStatusListenerInvalidConnection @abstract	The IEEE Std 1722.1™-2021 ACMP LISTENER_INVALID_CONNECTION status code.
+	// The IEEE Std 1722.1™-2021 ACMP LISTENER_INVALID_CONNECTION status code.
 	AVB17221ACMPStatusListenerInvalidConnection AVB17221ACMPStatusCode = 18
-	// @constant	AVB17221ACMPStatusListenerCanOnlyListenOnce @abstract	The IEEE Std 1722.1™-2021 ACMP LISTENER_CAN_ONLY_LISTEN_ONCE status code.
+	// The IEEE Std 1722.1™-2021 ACMP LISTENER_CAN_ONLY_LISTEN_ONCE status code.
 	AVB17221ACMPStatusListenerCanOnlyListenOnce AVB17221ACMPStatusCode = 19
-	// @constant	AVB17221ACMPStatusNotSupported @abstract	The IEEE Std 1722.1™-2013 ACMP NOT_SUPPORTED status code.
+	// The IEEE Std 1722.1™-2013 ACMP NOT_SUPPORTED status code.
 	AVB17221ACMPStatusNotSupported AVB17221ACMPStatusCode = 31
 )
 
@@ -259,7 +259,7 @@ func (e AVB17221ACMPStatusCode) String() string {
 type AVB17221ADPControllerCapabilities int64
 
 const (
-	// @constant	AVB17221ADPControllerCapabilitiesImplemented @abstract	The IEEE Std 1722.1™-2013 entity has controller capabilities.
+	// The IEEE Std 1722.1™-2013 entity has controller capabilities.
 	AVB17221ADPControllerCapabilitiesImplemented AVB17221ADPControllerCapabilities = 1
 )
 
@@ -277,61 +277,61 @@ func (e AVB17221ADPControllerCapabilities) String() string {
 type AVB17221ADPEntityCapabilities int64
 
 const (
-	// @constant	AVB17221ADPEntityCapabilitiesDFUMode @abstract	The IEEE Std 1722.1™-2013 entity supports firmware upgrade mode.
+	// The IEEE Std 1722.1™-2013 entity supports firmware upgrade mode.
 	AVB17221ADPEntityCapabilitiesDFUMode AVB17221ADPEntityCapabilities = 1
-	// @constant	AVB17221ADPEntityCapabilitiesEFUMode @abstract	The IEEE Std 1722.1™-2013 entity supports firmware upgrade mode.
+	// The IEEE Std 1722.1™-2013 entity supports firmware upgrade mode.
 	AVB17221ADPEntityCapabilitiesEFUMode AVB17221ADPEntityCapabilities = 1
-	// @constant	AVB17221ADPEntityCapabilitiesAddressAccessSupported @abstract	The IEEE Std 1722.1™-2013 entity supports using address access commands and responses.
+	// The IEEE Std 1722.1™-2013 entity supports using address access commands and responses.
 	AVB17221ADPEntityCapabilitiesAddressAccessSupported AVB17221ADPEntityCapabilities = 2
-	// @constant	AVB17221ADPEntityCapabilitiesGatewayEntity @abstract	The IEEE Std 1722.1™-2013 entity functions as a gateway between AVB and another transport.
+	// The IEEE Std 1722.1™-2013 entity functions as a gateway between AVB and another transport.
 	AVB17221ADPEntityCapabilitiesGatewayEntity AVB17221ADPEntityCapabilities = 4
-	// @constant	AVB17221ADPEntityCapabilitiesAEMSupported @abstract	The IEEE Std 1722.1™-2013 entity uses IEEE Std 1722.1™-2013 AVDECC Entity Model for enumeration and control."
+	// The IEEE Std 1722.1™-2013 entity uses IEEE Std 1722.1™-2013 AVDECC Entity Model for enumeration and control."
 	AVB17221ADPEntityCapabilitiesAEMSupported AVB17221ADPEntityCapabilities = 8
-	// @constant	AVB17221ADPEntityCapabilitiesLegacyAVC @abstract	The IEEE Std 1722.1™-2013 entity supports using IEEE 1394 AV/C for enumeration and control."
+	// The IEEE Std 1722.1™-2013 entity supports using IEEE 1394 AV/C for enumeration and control."
 	AVB17221ADPEntityCapabilitiesLegacyAVC AVB17221ADPEntityCapabilities = 16
-	// @constant	AVB17221ADPEntityCapabilitiesAssociationIDSupported @abstract	The IEEE Std 1722.1™-2013 entity supports using the Association ID field.
+	// The IEEE Std 1722.1™-2013 entity supports using the Association ID field.
 	AVB17221ADPEntityCapabilitiesAssociationIDSupported AVB17221ADPEntityCapabilities = 32
-	// @constant	AVB17221ADPEntityCapabilitiesAssociationIDValid @abstract	The IEEE Std 1722.1™-2013 entity has a valid value in the Association ID field.
+	// The IEEE Std 1722.1™-2013 entity has a valid value in the Association ID field.
 	AVB17221ADPEntityCapabilitiesAssociationIDValid AVB17221ADPEntityCapabilities = 64
-	// @constant	AVB17221ADPEntityCapabilitiesVendorUniqueSupported @abstract	The IEEE Std 1722.1™-2013 entity supports vendor unique commands and responses.
+	// The IEEE Std 1722.1™-2013 entity supports vendor unique commands and responses.
 	AVB17221ADPEntityCapabilitiesVendorUniqueSupported AVB17221ADPEntityCapabilities = 128
-	// @constant	AVB17221ADPEntityCapabilitiesClassASupported @abstract	The IEEE Std 1722.1™-2013 entity supports class A streaming.
+	// The IEEE Std 1722.1™-2013 entity supports class A streaming.
 	AVB17221ADPEntityCapabilitiesClassASupported AVB17221ADPEntityCapabilities = 256
-	// @constant	AVB17221ADPEntityCapabilitiesClassBSupported @abstract	The IEEE Std 1722.1™-2013 entity supports class B streaming.
+	// The IEEE Std 1722.1™-2013 entity supports class B streaming.
 	AVB17221ADPEntityCapabilitiesClassBSupported AVB17221ADPEntityCapabilities = 512
-	// @constant	AVB17221ADPEntityCapabilitiesASSupported @abstract	The IEEE Std 1722.1™-2013 entity supports IEEE Std 802.1AS-2011.
+	// The IEEE Std 1722.1™-2013 entity supports IEEE Std 802.1AS-2011.
 	AVB17221ADPEntityCapabilitiesASSupported AVB17221ADPEntityCapabilities = 1024
-	// @constant	AVB17221ADPEntityCapabilitiesGPTPSupported @abstract	The IEEE Std 1722.1™-2013 entity supports IEEE Std 802.1AS-2011.
+	// The IEEE Std 1722.1™-2013 entity supports IEEE Std 802.1AS-2011.
 	AVB17221ADPEntityCapabilitiesGPTPSupported AVB17221ADPEntityCapabilities = 1024
-	// @constant	AVB17221ADPEntityCapabilitiesAEMAuthenticationSupported @abstract	The IEEE Std 1722.1™-2013 entity supports using AEM authentication.
+	// The IEEE Std 1722.1™-2013 entity supports using AEM authentication.
 	AVB17221ADPEntityCapabilitiesAEMAuthenticationSupported AVB17221ADPEntityCapabilities = 2048
-	// @constant	AVB17221ADPEntityCapabilitiesAEMAuthenticationRequired @abstract	The IEEE Std 1722.1™-2013 entity requires a controller to authenticate.
+	// The IEEE Std 1722.1™-2013 entity requires a controller to authenticate.
 	AVB17221ADPEntityCapabilitiesAEMAuthenticationRequired AVB17221ADPEntityCapabilities = 4096
-	// @constant	AVB17221ADPEntityCapabilitiesAEMPersistentAcquireSupported @abstract	The IEEE Std 1722.1™-2013 entity supports being persistentlty aquired.
+	// The IEEE Std 1722.1™-2013 entity supports being persistentlty aquired.
 	AVB17221ADPEntityCapabilitiesAEMPersistentAcquireSupported AVB17221ADPEntityCapabilities = 8192
-	// @constant	AVB17221ADPEntityCapabilitiesAEMIdenitifyControlIndexValid @abstract	The IEEE Std 1722.1™-2013 entity has an idenitfy control and the identify_control_index field contains a valid index.
+	// The IEEE Std 1722.1™-2013 entity has an idenitfy control and the identify_control_index field contains a valid index.
 	AVB17221ADPEntityCapabilitiesAEMIdenitifyControlIndexValid AVB17221ADPEntityCapabilities = 16384
-	// @constant	AVB17221ADPEntityCapabilitiesAEMInterfaceIndexValid @abstract	The IEEE Std 1722.1™-2013 entity has the interface_index field set to a valid index.
+	// The IEEE Std 1722.1™-2013 entity has the interface_index field set to a valid index.
 	AVB17221ADPEntityCapabilitiesAEMInterfaceIndexValid AVB17221ADPEntityCapabilities = 32768
-	// @constant	AVB17221ADPEntityCapabilitiesGeneralControllerIgnore @abstract	The IEEE Std 1722.1™-2013 entity should be ignored by general controllers.
+	// The IEEE Std 1722.1™-2013 entity should be ignored by general controllers.
 	AVB17221ADPEntityCapabilitiesGeneralControllerIgnore AVB17221ADPEntityCapabilities = 65536
-	// @constant	AVB17221ADPEntityCapabilitiesEntityNotReady @abstract	The IEEE Std 1722.1™-2013 entity is not ready to be enumerated or connected by a controller.
+	// The IEEE Std 1722.1™-2013 entity is not ready to be enumerated or connected by a controller.
 	AVB17221ADPEntityCapabilitiesEntityNotReady AVB17221ADPEntityCapabilities = 131072
-	// @constant	AVB17221ADPEntityCapabilitiesACMPAcquireWithAEM @abstract	The IEEE Std 1722.1™-2021 entity ACMP respects the acquisition made with the ACQUIRE_ENTITY command.
+	// The IEEE Std 1722.1™-2021 entity ACMP respects the acquisition made with the ACQUIRE_ENTITY command.
 	AVB17221ADPEntityCapabilitiesACMPAcquireWithAEM AVB17221ADPEntityCapabilities = 262144
-	// @constant	AVB17221ADPEntityCapabilitiesACMPAuthenticateWithAEM @abstract	The IEEE Std 1722.1™-2021 entity ACMP requires the Controller to authenticate with the AEM AUTHENTICATE command.
+	// The IEEE Std 1722.1™-2021 entity ACMP requires the Controller to authenticate with the AEM AUTHENTICATE command.
 	AVB17221ADPEntityCapabilitiesACMPAuthenticateWithAEM AVB17221ADPEntityCapabilities = 524288
-	// @constant	AVB17221ADPEntityCapabilitiesSupportsUDPv4ATDECC @abstract	The IEEE Std 1722.1™-2021 entity supports ATDECC commands using UDP over IPv4.
+	// The IEEE Std 1722.1™-2021 entity supports ATDECC commands using UDP over IPv4.
 	AVB17221ADPEntityCapabilitiesSupportsUDPv4ATDECC AVB17221ADPEntityCapabilities = 1048576
-	// @constant	AVB17221ADPEntityCapabilitiesSupportsUDPv4Streaming @abstract	The IEEE Std 1722.1™-2021 entity supports streaming via AVTP in UDP over IPv4.
+	// The IEEE Std 1722.1™-2021 entity supports streaming via AVTP in UDP over IPv4.
 	AVB17221ADPEntityCapabilitiesSupportsUDPv4Streaming AVB17221ADPEntityCapabilities = 2097152
-	// @constant	AVB17221ADPEntityCapabilitiesSupportsUDPv6ATDECC @abstract	The IEEE Std 1722.1™-2021 entity supports ATDECC commands using UDP over IPv6.
+	// The IEEE Std 1722.1™-2021 entity supports ATDECC commands using UDP over IPv6.
 	AVB17221ADPEntityCapabilitiesSupportsUDPv6ATDECC AVB17221ADPEntityCapabilities = 4194304
-	// @constant	AVB17221ADPEntityCapabilitiesSupportsUDPv6Streaming @abstract	The IEEE Std 1722.1™-2021 entity upports streaming via AVTP in UDP over IPv6.
+	// The IEEE Std 1722.1™-2021 entity upports streaming via AVTP in UDP over IPv6.
 	AVB17221ADPEntityCapabilitiesSupportsUDPv6Streaming AVB17221ADPEntityCapabilities = 8388608
-	// @constant	AVB17221ADPEntityCapabilitiesMultiplePTPInstances @abstract	The IEEE Std 1722.1™-2021 entity has multiple PTP instances using this interface.
+	// The IEEE Std 1722.1™-2021 entity has multiple PTP instances using this interface.
 	AVB17221ADPEntityCapabilitiesMultiplePTPInstances AVB17221ADPEntityCapabilities = 16777216
-	// @constant	AVB17221ADPEntityCapabilitiesAEMConfigurationIndexValid @abstract	The IEEE Std 1722.1™-2021 entity has the current_configuration_index field set to a valid index.
+	// The IEEE Std 1722.1™-2021 entity has the current_configuration_index field set to a valid index.
 	AVB17221ADPEntityCapabilitiesAEMConfigurationIndexValid AVB17221ADPEntityCapabilities = 33554432
 )
 
@@ -398,21 +398,21 @@ func (e AVB17221ADPEntityCapabilities) String() string {
 type AVB17221ADPListenerCapabilities int64
 
 const (
-	// @constant	AVB17221ADPListenerCapabilitiesImplemented @abstract	The IEEE Std 1722.1™-2013 entity has listener capabilities.
+	// The IEEE Std 1722.1™-2013 entity has listener capabilities.
 	AVB17221ADPListenerCapabilitiesImplemented AVB17221ADPListenerCapabilities = 1
-	// @constant	AVB17221ADPListenerCapabilitiesHasOtherSink @abstract	The IEEE Std 1722.1™-2013 entity has stream sinks which are not control, media clock, SMPTE, MIDI, audio or video.
+	// The IEEE Std 1722.1™-2013 entity has stream sinks which are not control, media clock, SMPTE, MIDI, audio or video.
 	AVB17221ADPListenerCapabilitiesHasOtherSink AVB17221ADPListenerCapabilities = 512
-	// @constant	AVB17221ADPListenerCapabilitiesHasControlSink @abstract	The IEEE Std 1722.1™-2013 entity has stream sinks which sink a control stream.
+	// The IEEE Std 1722.1™-2013 entity has stream sinks which sink a control stream.
 	AVB17221ADPListenerCapabilitiesHasControlSink AVB17221ADPListenerCapabilities = 1024
-	// @constant	AVB17221ADPListenerCapabilitiesHasMediaClockSink @abstract	The IEEE Std 1722.1™-2013 entity has stream sinks which sink a media clock stream.
+	// The IEEE Std 1722.1™-2013 entity has stream sinks which sink a media clock stream.
 	AVB17221ADPListenerCapabilitiesHasMediaClockSink AVB17221ADPListenerCapabilities = 2048
-	// @constant	AVB17221ADPListenerCapabilitiesHasSMPTESink @abstract	The IEEE Std 1722.1™-2013 entity has stream sinks which sink a SMPTE stream.
+	// The IEEE Std 1722.1™-2013 entity has stream sinks which sink a SMPTE stream.
 	AVB17221ADPListenerCapabilitiesHasSMPTESink AVB17221ADPListenerCapabilities = 4096
-	// @constant	AVB17221ADPListenerCapabilitiesHasMIDISink @abstract	The IEEE Std 1722.1™-2013 entity has stream sinks which can sink a stream carrying MIDI data.
+	// The IEEE Std 1722.1™-2013 entity has stream sinks which can sink a stream carrying MIDI data.
 	AVB17221ADPListenerCapabilitiesHasMIDISink AVB17221ADPListenerCapabilities = 8192
-	// @constant	AVB17221ADPListenerCapabilitiesHasAudioSink @abstract	The IEEE Std 1722.1™-2013 entity has stream sinks which sink a stream with audio data (not embedded in a video stream).
+	// The IEEE Std 1722.1™-2013 entity has stream sinks which sink a stream with audio data (not embedded in a video stream).
 	AVB17221ADPListenerCapabilitiesHasAudioSink AVB17221ADPListenerCapabilities = 16384
-	// @constant	AVB17221ADPListenerCapabilitiesHasVideoSink @abstract	The IEEE Std 1722.1™-2013 entity has stream sinks which sink a stream with video data (and optionally embedded audio data).
+	// The IEEE Std 1722.1™-2013 entity has stream sinks which sink a stream with video data (and optionally embedded audio data).
 	AVB17221ADPListenerCapabilitiesHasVideoSink AVB17221ADPListenerCapabilities = 32768
 )
 
@@ -452,21 +452,21 @@ func (e AVB17221ADPListenerCapabilities) String() string {
 type AVB17221ADPTalkerCapabilities int64
 
 const (
-	// @constant	AVB17221ADPTalkerCapabilitiesImplemented @abstract	The IEEE Std 1722.1™-2013 entity has talker capabilities.
+	// The IEEE Std 1722.1™-2013 entity has talker capabilities.
 	AVB17221ADPTalkerCapabilitiesImplemented AVB17221ADPTalkerCapabilities = 1
-	// @constant	AVB17221ADPTalkerCapabilitiesHasOtherSource @abstract	The IEEE Std 1722.1™-2013 entity has stream sources which are not control, media clock, SMPTE, MIDI, audio or video.
+	// The IEEE Std 1722.1™-2013 entity has stream sources which are not control, media clock, SMPTE, MIDI, audio or video.
 	AVB17221ADPTalkerCapabilitiesHasOtherSource AVB17221ADPTalkerCapabilities = 512
-	// @constant	AVB17221ADPTalkerCapabilitiesHasControlSource @abstract	The IEEE Std 1722.1™-2013 entity has stream sources which source a control stream.
+	// The IEEE Std 1722.1™-2013 entity has stream sources which source a control stream.
 	AVB17221ADPTalkerCapabilitiesHasControlSource AVB17221ADPTalkerCapabilities = 1024
-	// @constant	AVB17221ADPTalkerCapabilitiesHasMediaClockSource @abstract	The IEEE Std 1722.1™-2013 entity has stream sources which source a media clock stream.
+	// The IEEE Std 1722.1™-2013 entity has stream sources which source a media clock stream.
 	AVB17221ADPTalkerCapabilitiesHasMediaClockSource AVB17221ADPTalkerCapabilities = 2048
-	// @constant	AVB17221ADPTalkerCapabilitiesHasSMPTESource @abstract	The IEEE Std 1722.1™-2013 entity has stream source which source a SMPTE stream.
+	// The IEEE Std 1722.1™-2013 entity has stream source which source a SMPTE stream.
 	AVB17221ADPTalkerCapabilitiesHasSMPTESource AVB17221ADPTalkerCapabilities = 4096
-	// @constant	AVB17221ADPTalkerCapabilitiesHasMIDISource @abstract	The IEEE Std 1722.1™-2013 entity has stream sources which source a stream carrying MIDI data.
+	// The IEEE Std 1722.1™-2013 entity has stream sources which source a stream carrying MIDI data.
 	AVB17221ADPTalkerCapabilitiesHasMIDISource AVB17221ADPTalkerCapabilities = 8192
-	// @constant	AVB17221ADPTalkerCapabilitiesHasAudioSource @abstract	The IEEE Std 1722.1™-2013 entity has stream sources which source a stream with audio data (not embedded in a video stream).
+	// The IEEE Std 1722.1™-2013 entity has stream sources which source a stream with audio data (not embedded in a video stream).
 	AVB17221ADPTalkerCapabilitiesHasAudioSource AVB17221ADPTalkerCapabilities = 16384
-	// @constant	AVB17221ADPTalkerCapabilitiesHasVideoSource @abstract	The IEEE Std 1722.1™-2013 entity has stream sources which source a stream with video data (and optionally embedded audio data).
+	// The IEEE Std 1722.1™-2013 entity has stream sources which source a stream with video data (and optionally embedded audio data).
 	AVB17221ADPTalkerCapabilitiesHasVideoSource AVB17221ADPTalkerCapabilities = 32768
 )
 
@@ -505,11 +505,11 @@ func (e AVB17221ADPTalkerCapabilities) String() string {
 type AVB17221AECPAddressAccessTLVMode int64
 
 const (
-	// @constant	AVB17221AECPAddressAccessTLVModeRead @abstract	The IEEE Std 1722.1™-2013 ACMP SUCCESS status code.
+	// The IEEE Std 1722.1™-2013 ACMP SUCCESS status code.
 	AVB17221AECPAddressAccessTLVModeRead AVB17221AECPAddressAccessTLVMode = 0
-	// @constant	AVB17221AECPAddressAccessTLVModeWrite @abstract	The IEEE Std 1722.1™-2013 ACMP LISTENER_UNKNOWN_ID status code.
+	// The IEEE Std 1722.1™-2013 ACMP LISTENER_UNKNOWN_ID status code.
 	AVB17221AECPAddressAccessTLVModeWrite AVB17221AECPAddressAccessTLVMode = 1
-	// @constant	AVB17221AECPAddressAccessTLVModeExecute @abstract	The IEEE Std 1722.1™-2013 ACMP TALKER_UNKNOWN_ID status code.
+	// The IEEE Std 1722.1™-2013 ACMP TALKER_UNKNOWN_ID status code.
 	AVB17221AECPAddressAccessTLVModeExecute AVB17221AECPAddressAccessTLVMode = 2
 )
 
@@ -529,21 +529,21 @@ func (e AVB17221AECPAddressAccessTLVMode) String() string {
 type AVB17221AECPMessageType int64
 
 const (
-	// @constant	AVB17221AECPMessageTypeAEMCommand @abstract	The IEEE Std 1722.1™-2013 AECP AVDECC Entity Model command message.
+	// The IEEE Std 1722.1™-2013 AECP AVDECC Entity Model command message.
 	AVB17221AECPMessageTypeAEMCommand AVB17221AECPMessageType = 0
-	// @constant	AVB17221AECPMessageTypeAEMResponse @abstract	The IEEE Std 1722.1™-2013 AECP AVDECC Entity Model response message.
+	// The IEEE Std 1722.1™-2013 AECP AVDECC Entity Model response message.
 	AVB17221AECPMessageTypeAEMResponse AVB17221AECPMessageType = 1
-	// @constant	AVB17221AECPMessageTypeAddressAccessCommand @abstract	The IEEE Std 1722.1™-2013 AECP address access command message.
+	// The IEEE Std 1722.1™-2013 AECP address access command message.
 	AVB17221AECPMessageTypeAddressAccessCommand AVB17221AECPMessageType = 2
-	// @constant	AVB17221AECPMessageTypeAddressAccessResponse @abstract	The IEEE Std 1722.1™-2013 AECP address access response message.
+	// The IEEE Std 1722.1™-2013 AECP address access response message.
 	AVB17221AECPMessageTypeAddressAccessResponse AVB17221AECPMessageType = 3
-	// @constant	AVB17221AECPMessageTypeLegacyAVCCommand @abstract	The IEEE Std 1722.1™-2013 AECP AV/C command message.
+	// The IEEE Std 1722.1™-2013 AECP AV/C command message.
 	AVB17221AECPMessageTypeLegacyAVCCommand AVB17221AECPMessageType = 4
-	// @constant	AVB17221AECPMessageTypeLegacyAVCResponse @abstract	The IEEE Std 1722.1™-2013 AECP AV/C response message.
+	// The IEEE Std 1722.1™-2013 AECP AV/C response message.
 	AVB17221AECPMessageTypeLegacyAVCResponse AVB17221AECPMessageType = 5
-	// @constant	AVB17221AECPMessageTypeVendorUniqueCommand @abstract	The IEEE Std 1722.1™-2013 AECP vendor unique command message.
+	// The IEEE Std 1722.1™-2013 AECP vendor unique command message.
 	AVB17221AECPMessageTypeVendorUniqueCommand AVB17221AECPMessageType = 6
-	// @constant	AVB17221AECPMessageTypeVendorUniqueResponse @abstract	The IEEE Std 1722.1™-2013 AECP vendor unique response message.
+	// The IEEE Std 1722.1™-2013 AECP vendor unique response message.
 	AVB17221AECPMessageTypeVendorUniqueResponse AVB17221AECPMessageType = 7
 )
 
@@ -573,45 +573,45 @@ func (e AVB17221AECPMessageType) String() string {
 type AVB17221AECPStatusCode int64
 
 const (
-	// @constant	AVB17221AECPStatusSuccess @abstract	The IEEE Std 1722.1™-2013 AECP SUCCESS status code.
+	// The IEEE Std 1722.1™-2013 AECP SUCCESS status code.
 	AVB17221AECPStatusSuccess AVB17221AECPStatusCode = 0
-	// @constant	AVB17221AECPStatusNotImplemented @abstract	The IEEE Std 1722.1™-2013 AECP NOT_IMPLEMENTED status code.
+	// The IEEE Std 1722.1™-2013 AECP NOT_IMPLEMENTED status code.
 	AVB17221AECPStatusNotImplemented AVB17221AECPStatusCode = 1
-	// @constant	AVB17221AECPStatusNoSuchDescriptor @abstract	The IEEE Std 1722.1™-2013 AECP AEM NO_SUCH_DESCRIPTOR status code.
+	// The IEEE Std 1722.1™-2013 AECP AEM NO_SUCH_DESCRIPTOR status code.
 	AVB17221AECPStatusNoSuchDescriptor AVB17221AECPStatusCode = 2
-	// @constant	AVB17221AECPStatusEntityLocked @abstract	The IEEE Std 1722.1™-2013 AECP AEM ENTITY_LOCKED status code.
+	// The IEEE Std 1722.1™-2013 AECP AEM ENTITY_LOCKED status code.
 	AVB17221AECPStatusEntityLocked AVB17221AECPStatusCode = 3
-	// @constant	AVB17221AECPStatusEntityAcquired @abstract	The IEEE Std 1722.1™-2013 AECP AEM ENTITY_ACQUIRED status code.
+	// The IEEE Std 1722.1™-2013 AECP AEM ENTITY_ACQUIRED status code.
 	AVB17221AECPStatusEntityAcquired AVB17221AECPStatusCode = 4
-	// @constant	AVB17221AECPStatusNotAuthorized @abstract	The IEEE Std 1722.1™-2013 AECP AEM NOT_AUTHORIZED status code.
+	// The IEEE Std 1722.1™-2013 AECP AEM NOT_AUTHORIZED status code.
 	AVB17221AECPStatusNotAuthorized AVB17221AECPStatusCode = 5
-	// @constant	AVB17221AECPStatusInsufficientPrivileges @abstract	The IEEE Std 1722.1™-2013 AECP AEM INSUFFICIENT_PRIVILEGES status code.
+	// The IEEE Std 1722.1™-2013 AECP AEM INSUFFICIENT_PRIVILEGES status code.
 	AVB17221AECPStatusInsufficientPrivileges AVB17221AECPStatusCode = 6
-	// @constant	AVB17221AECPStatusBadArguments @abstract	The IEEE Std 1722.1™-2013 AECP AEM BAD_ARGUMENTS status code.
+	// The IEEE Std 1722.1™-2013 AECP AEM BAD_ARGUMENTS status code.
 	AVB17221AECPStatusBadArguments AVB17221AECPStatusCode = 7
-	// @constant	AVB17221AECPStatusNoResources @abstract	The IEEE Std 1722.1™-2013 AECP AEM NO_RESOURCES status code.
+	// The IEEE Std 1722.1™-2013 AECP AEM NO_RESOURCES status code.
 	AVB17221AECPStatusNoResources AVB17221AECPStatusCode = 8
-	// @constant	AVB17221AECPStatusInProgress @abstract	The IEEE Std 1722.1™-2013 AECP AEM IN_PROGRESS status code.
+	// The IEEE Std 1722.1™-2013 AECP AEM IN_PROGRESS status code.
 	AVB17221AECPStatusInProgress AVB17221AECPStatusCode = 9
-	// @constant	AVB17221AECPStatusEntityMisbehaving @abstract	The IEEE Std 1722.1™-2013 AECP AEM ENTITY_MISBEHAVING status code.
+	// The IEEE Std 1722.1™-2013 AECP AEM ENTITY_MISBEHAVING status code.
 	AVB17221AECPStatusEntityMisbehaving AVB17221AECPStatusCode = 10
-	// @constant	AVB17221AECPStatusNotSupported @abstract	The IEEE Std 1722.1™-2013 AECP AEM NOT_SUPPORTED status code.
+	// The IEEE Std 1722.1™-2013 AECP AEM NOT_SUPPORTED status code.
 	AVB17221AECPStatusNotSupported AVB17221AECPStatusCode = 11
-	// @constant	AVB17221AECPStatusStreamIsRunning @abstract	The IEEE Std 1722.1™-2013 AECP AEM STREAM_IS_RUNNING status code.
+	// The IEEE Std 1722.1™-2013 AECP AEM STREAM_IS_RUNNING status code.
 	AVB17221AECPStatusStreamIsRunning AVB17221AECPStatusCode = 12
-	// @constant	AVB17221AECPStatusAddressAccessAddressTooLow @abstract	The IEEE Std 1722.1™-2013 AECP ADDRESS_ACCESS_ADDRESS_TOO_LOW status code.
+	// The IEEE Std 1722.1™-2013 AECP ADDRESS_ACCESS_ADDRESS_TOO_LOW status code.
 	AVB17221AECPStatusAddressAccessAddressTooLow AVB17221AECPStatusCode = 2
-	// @constant	AVB17221AECPStatusAddressAccessAddressTooHigh @abstract	The IEEE Std 1722.1™-2013 AECP ADDRESS_ACCESS_ADDRESS_TOO_HIGH status code.
+	// The IEEE Std 1722.1™-2013 AECP ADDRESS_ACCESS_ADDRESS_TOO_HIGH status code.
 	AVB17221AECPStatusAddressAccessAddressTooHigh AVB17221AECPStatusCode = 3
-	// @constant	AVB17221AECPStatusAddressAccessAddressInvalid @abstract	The IEEE Std 1722.1™-2013 AECP ADDRESS_ACCESS_ADDRESS_INVALID status code.
+	// The IEEE Std 1722.1™-2013 AECP ADDRESS_ACCESS_ADDRESS_INVALID status code.
 	AVB17221AECPStatusAddressAccessAddressInvalid AVB17221AECPStatusCode = 4
-	// @constant	AVB17221AECPStatusAddressAccessTLVInvalid @abstract	The IEEE Std 1722.1™-2013 AECP ADDRESS_ACCESS_TLV_INVALID status code.
+	// The IEEE Std 1722.1™-2013 AECP ADDRESS_ACCESS_TLV_INVALID status code.
 	AVB17221AECPStatusAddressAccessTLVInvalid AVB17221AECPStatusCode = 5
-	// @constant	AVB17221AECPStatusAddressAccessDataInvalid @abstract	The IEEE Std 1722.1™-2013 AECP ADDRESS_ACCESS_DATA_INVALID status code.
+	// The IEEE Std 1722.1™-2013 AECP ADDRESS_ACCESS_DATA_INVALID status code.
 	AVB17221AECPStatusAddressAccessDataInvalid AVB17221AECPStatusCode = 6
-	// @constant	AVB17221AECPStatusAddressAccessUnsupported @abstract	The IEEE Std 1722.1™-2013 AECP ADDRESS_ACCESS_UNSUPPORTED status code.
+	// The IEEE Std 1722.1™-2013 AECP ADDRESS_ACCESS_UNSUPPORTED status code.
 	AVB17221AECPStatusAddressAccessUnsupported AVB17221AECPStatusCode = 7
-	// @constant	AVB17221AECPStatusAVCFailure @abstract	The IEEE Std 1722.1™-2013 AECP AVC FAILURE status code.
+	// The IEEE Std 1722.1™-2013 AECP AVC FAILURE status code.
 	AVB17221AECPStatusAVCFailure AVB17221AECPStatusCode = 2
 )
 
@@ -651,213 +651,213 @@ func (e AVB17221AECPStatusCode) String() string {
 type AVB17221AEMCommandType int64
 
 const (
-	// @constant	AVB17221AEMCommandTypeAcquireEntity @abstract	The command code for the IEEE Std 1722.1™-2013 AEM ACQUIRE_ENTITY command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM ACQUIRE_ENTITY command.
 	AVB17221AEMCommandTypeAcquireEntity AVB17221AEMCommandType = 0
-	// @constant	AVB17221AEMCommandTypeLockEntity @abstract	The command code for the IEEE Std 1722.1™-2013 AEM LOCK_ENTITY command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM LOCK_ENTITY command.
 	AVB17221AEMCommandTypeLockEntity AVB17221AEMCommandType = 1
-	// @constant	AVB17221AEMCommandTypeEntityAvailable @abstract	The command code for the IEEE Std 1722.1™-2013 AEM ENTITY_AVAILABLE command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM ENTITY_AVAILABLE command.
 	AVB17221AEMCommandTypeEntityAvailable AVB17221AEMCommandType = 2
-	// @constant	AVB17221AEMCommandTypeControllerAvailable @abstract	The command code for the IEEE Std 1722.1™-2013 AEM CONTROLLER_AVAILABLE command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM CONTROLLER_AVAILABLE command.
 	AVB17221AEMCommandTypeControllerAvailable AVB17221AEMCommandType = 3
-	// @constant	AVB17221AEMCommandTypeReadDescriptor @abstract	The command code for the IEEE Std 1722.1™-2013 AEM READ_DESCRIPTOR command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM READ_DESCRIPTOR command.
 	AVB17221AEMCommandTypeReadDescriptor AVB17221AEMCommandType = 4
-	// @constant	AVB17221AEMCommandTypeWriteDescriptor @abstract	The command code for the IEEE Std 1722.1™-2013 AEM WRITE_DESCRIPTOR command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM WRITE_DESCRIPTOR command.
 	AVB17221AEMCommandTypeWriteDescriptor AVB17221AEMCommandType = 5
-	// @constant	AVB17221AEMCommandTypeSetConfiguration @abstract	The command code for the IEEE Std 1722.1™-2013 AEM SET_CONFIGURATION command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM SET_CONFIGURATION command.
 	AVB17221AEMCommandTypeSetConfiguration AVB17221AEMCommandType = 6
-	// @constant	AVB17221AEMCommandTypeGetConfiguration @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_CONFIGURATION command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_CONFIGURATION command.
 	AVB17221AEMCommandTypeGetConfiguration AVB17221AEMCommandType = 7
-	// @constant	AVB17221AEMCommandTypeSetStreamFormat @abstract	The command code for the IEEE Std 1722.1™-2013 AEM SET_STREAM_FORMAT command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM SET_STREAM_FORMAT command.
 	AVB17221AEMCommandTypeSetStreamFormat AVB17221AEMCommandType = 8
-	// @constant	AVB17221AEMCommandTypeGetStreamFormat @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_STREAM_FORMAT command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_STREAM_FORMAT command.
 	AVB17221AEMCommandTypeGetStreamFormat AVB17221AEMCommandType = 9
-	// @constant	AVB17221AEMCommandTypeSetVideoFormat @abstract	The command code for the IEEE Std 1722.1™-2013 AEM SET_VIDEO_FORMAT command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM SET_VIDEO_FORMAT command.
 	AVB17221AEMCommandTypeSetVideoFormat AVB17221AEMCommandType = 10
-	// @constant	AVB17221AEMCommandTypeGetVideoFormat @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_VIDEO_FORMAT command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_VIDEO_FORMAT command.
 	AVB17221AEMCommandTypeGetVideoFormat AVB17221AEMCommandType = 11
-	// @constant	AVB17221AEMCommandTypeSetSensorFormat @abstract	The command code for the IEEE Std 1722.1™-2013 AEM SET_SENSOR_FORMAT command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM SET_SENSOR_FORMAT command.
 	AVB17221AEMCommandTypeSetSensorFormat AVB17221AEMCommandType = 12
-	// @constant	AVB17221AEMCommandTypeGetSensorFormat @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_SENSOR_FORMAT command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_SENSOR_FORMAT command.
 	AVB17221AEMCommandTypeGetSensorFormat AVB17221AEMCommandType = 13
-	// @constant	AVB17221AEMCommandTypeSetStreamInfo @abstract	The command code for the IEEE Std 1722.1™-2013 AEM SET_STREAM_INFO command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM SET_STREAM_INFO command.
 	AVB17221AEMCommandTypeSetStreamInfo AVB17221AEMCommandType = 14
-	// @constant	AVB17221AEMCommandTypeGetStreamInfo @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_STREAM_INFO command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_STREAM_INFO command.
 	AVB17221AEMCommandTypeGetStreamInfo AVB17221AEMCommandType = 15
-	// @constant	AVB17221AEMCommandTypeSetName @abstract	The command code for the IEEE Std 1722.1™-2013 AEM SET_NAME command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM SET_NAME command.
 	AVB17221AEMCommandTypeSetName AVB17221AEMCommandType = 16
-	// @constant	AVB17221AEMCommandTypeGetName @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_NAME command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_NAME command.
 	AVB17221AEMCommandTypeGetName AVB17221AEMCommandType = 17
-	// @constant	AVB17221AEMCommandTypeSetAssociationID @abstract	The command code for the IEEE Std 1722.1™-2013 AEM SET_ASSOCIATION_ID command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM SET_ASSOCIATION_ID command.
 	AVB17221AEMCommandTypeSetAssociationID AVB17221AEMCommandType = 18
-	// @constant	AVB17221AEMCommandTypeGetAssociationID @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_ASSOCIATION_ID command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_ASSOCIATION_ID command.
 	AVB17221AEMCommandTypeGetAssociationID AVB17221AEMCommandType = 19
-	// @constant	AVB17221AEMCommandTypeSetSamplingRate @abstract	The command code for the IEEE Std 1722.1™-2013 AEM SET_SAMPLING_RATE command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM SET_SAMPLING_RATE command.
 	AVB17221AEMCommandTypeSetSamplingRate AVB17221AEMCommandType = 20
-	// @constant	AVB17221AEMCommandTypeGetSamplingRate @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_SAMPLING_RATE command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_SAMPLING_RATE command.
 	AVB17221AEMCommandTypeGetSamplingRate AVB17221AEMCommandType = 21
-	// @constant	AVB17221AEMCommandTypeSetClockSource @abstract	The command code for the IEEE Std 1722.1™-2013 AEM SET_CLOCK_SOURCE command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM SET_CLOCK_SOURCE command.
 	AVB17221AEMCommandTypeSetClockSource AVB17221AEMCommandType = 22
-	// @constant	AVB17221AEMCommandTypeGetClockSource @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_CLOCK_SOURCE command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_CLOCK_SOURCE command.
 	AVB17221AEMCommandTypeGetClockSource AVB17221AEMCommandType = 23
-	// @constant	AVB17221AEMCommandTypeSetControl @abstract	The command code for the IEEE Std 1722.1™-2013 AEM SET_CONTROL command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM SET_CONTROL command.
 	AVB17221AEMCommandTypeSetControl AVB17221AEMCommandType = 24
-	// @constant	AVB17221AEMCommandTypeGetControl @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_CONTROL command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_CONTROL command.
 	AVB17221AEMCommandTypeGetControl AVB17221AEMCommandType = 25
-	// @constant	AVB17221AEMCommandTypeIncrementControlValue @abstract	The command code for the IEEE Std 1722.1™-2013 AEM INCREMENT_CONTROL_VALUE command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM INCREMENT_CONTROL_VALUE command.
 	AVB17221AEMCommandTypeIncrementControl AVB17221AEMCommandType = 26
-	// @constant	AVB17221AEMCommandTypeDecrementControlValue @abstract	The command code for the IEEE Std 1722.1™-2013 AEM DECREMENT_CONTROL_VALIE command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM DECREMENT_CONTROL_VALIE command.
 	AVB17221AEMCommandTypeDecrementControl AVB17221AEMCommandType = 27
-	// @constant	AVB17221AEMCommandTypeSetSignalSelector @abstract	The command code for the IEEE Std 1722.1™-2013 AEM SET_SIGNAL_SELECTOR command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM SET_SIGNAL_SELECTOR command.
 	AVB17221AEMCommandTypeSetSignalSelector AVB17221AEMCommandType = 28
-	// @constant	AVB17221AEMCommandTypeGetSignalSelector @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_SIGNAL_SELECTOR command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_SIGNAL_SELECTOR command.
 	AVB17221AEMCommandTypeGetSignalSelector AVB17221AEMCommandType = 29
-	// @constant	AVB17221AEMCommandTypeSetMixer @abstract	The command code for the IEEE Std 1722.1™-2013 AEM SET_MIXER command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM SET_MIXER command.
 	AVB17221AEMCommandTypeSetMixer AVB17221AEMCommandType = 30
-	// @constant	AVB17221AEMCommandTypeGetMixer @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_MIXER command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_MIXER command.
 	AVB17221AEMCommandTypeGetMixer AVB17221AEMCommandType = 31
-	// @constant	AVB17221AEMCommandTypeSetMatrix @abstract	The command code for the IEEE Std 1722.1™-2013 AEM SET_MATRIX command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM SET_MATRIX command.
 	AVB17221AEMCommandTypeSetMatrix AVB17221AEMCommandType = 32
-	// @constant	AVB17221AEMCommandTypeGetMatrix @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_MATRIX command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_MATRIX command.
 	AVB17221AEMCommandTypeGetMatrix AVB17221AEMCommandType = 33
-	// @constant	AVB17221AEMCommandTypeStartStreaming @abstract	The command code for the IEEE Std 1722.1™-2013 AEM START_STREAMING command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM START_STREAMING command.
 	AVB17221AEMCommandTypeStartStreaming AVB17221AEMCommandType = 34
-	// @constant	AVB17221AEMCommandTypeStopStreaming @abstract	The command code for the IEEE Std 1722.1™-2013 AEM STOP_STREAMING command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM STOP_STREAMING command.
 	AVB17221AEMCommandTypeStopStreaming AVB17221AEMCommandType = 35
-	// @constant	AVB17221AEMCommandTypeRegisterUnsolicitedNotification @abstract	The command code for the IEEE Std 1722.1™-2013 AEM REGISTER_UNSOLICITED_NOTIFICATION command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM REGISTER_UNSOLICITED_NOTIFICATION command.
 	AVB17221AEMCommandTypeRegisterUnsolicitedNotification AVB17221AEMCommandType = 36
-	// @constant	AVB17221AEMCommandTypeDeregisterUnsolicitedNotification @abstract	The command code for the IEEE Std 1722.1™-2013 AEM DEREGISTER_UNSOLICITED_NOTIFICATION command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM DEREGISTER_UNSOLICITED_NOTIFICATION command.
 	AVB17221AEMCommandTypeDeregisterUnsolicitedNotification AVB17221AEMCommandType = 37
-	// @constant	AVB17221AEMCommandTypeIdentifyNotification @abstract	The command code for the IEEE Std 1722.1™-2013 AEM IDENTIFY_NOTIFICATION command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM IDENTIFY_NOTIFICATION command.
 	AVB17221AEMCommandTypeIdentifyNotification AVB17221AEMCommandType = 38
-	// @constant	AVB17221AEMCommandTypeGetAVBInfo @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_AVB_INFO command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_AVB_INFO command.
 	AVB17221AEMCommandTypeGetAVBInfo AVB17221AEMCommandType = 39
-	// @constant	AVB17221AEMCommandTypeGetASPath @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_AS_PATH command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_AS_PATH command.
 	AVB17221AEMCommandTypeGetASPath AVB17221AEMCommandType = 40
-	// @constant	AVB17221AEMCommandTypeGetCounters @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_COUNTERS command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_COUNTERS command.
 	AVB17221AEMCommandTypeGetCounters AVB17221AEMCommandType = 41
-	// @constant	AVB17221AEMCommandTypeReboot @abstract	The command code for the IEEE Std 1722.1™-2013 AEM REBOOT command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM REBOOT command.
 	AVB17221AEMCommandTypeReboot AVB17221AEMCommandType = 42
-	// @constant	AVB17221AEMCommandTypeGetAudioMap @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_AUDIO_MAP command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_AUDIO_MAP command.
 	AVB17221AEMCommandTypeGetAudioMap AVB17221AEMCommandType = 43
-	// @constant	AVB17221AEMCommandTypeAddAudioMapping @abstract	The command code for the IEEE Std 1722.1™-2013 AEM ADD_AUDIO_MAPPING command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM ADD_AUDIO_MAPPING command.
 	AVB17221AEMCommandTypeAddAudioMapping AVB17221AEMCommandType = 44
-	// @constant	AVB17221AEMCommandTypeRemoveAudioMapping @abstract	The command code for the IEEE Std 1722.1™-2013 AEM REMOVE_AUDIO_MAPPING command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM REMOVE_AUDIO_MAPPING command.
 	AVB17221AEMCommandTypeRemoveAudioMapping AVB17221AEMCommandType = 45
-	// @constant	AVB17221AEMCommandTypeGetVideoMap @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_VIDEO_MAP command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_VIDEO_MAP command.
 	AVB17221AEMCommandTypeGetVideoMap AVB17221AEMCommandType = 46
-	// @constant	AVB17221AEMCommandTypeAddVideoMapping @abstract	The command code for the IEEE Std 1722.1™-2013 AEM ADD_VIDEO_MAPPING command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM ADD_VIDEO_MAPPING command.
 	AVB17221AEMCommandTypeAddVideoMapping AVB17221AEMCommandType = 47
-	// @constant	AVB17221AEMCommandTypeRemoveVideoMapping @abstract	The command code for the IEEE Std 1722.1™-2013 AEM REMOVE_VIDEO_MAPPING command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM REMOVE_VIDEO_MAPPING command.
 	AVB17221AEMCommandTypeRemoveVideoMapping AVB17221AEMCommandType = 48
-	// @constant	AVB17221AEMCommandTypeGetSensorMap @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_SENSOR_MAP command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_SENSOR_MAP command.
 	AVB17221AEMCommandTypeGetSensorMap AVB17221AEMCommandType = 49
-	// @constant	AVB17221AEMCommandTypeAddSensorMapping @abstract	The command code for the IEEE Std 1722.1™-2013 AEM ADD_SENSOR_MAPPING command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM ADD_SENSOR_MAPPING command.
 	AVB17221AEMCommandTypeAddSensorMapping AVB17221AEMCommandType = 50
-	// @constant	AVB17221AEMCommandTypeRemoveSensorMapping @abstract	The command code for the IEEE Std 1722.1™-2013 AEM REMOVE_SENSOR_MAPPING command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM REMOVE_SENSOR_MAPPING command.
 	AVB17221AEMCommandTypeRemoveSensorMapping AVB17221AEMCommandType = 51
-	// @constant	AVB17221AEMCommandTypeStartOperation @abstract	The command code for the IEEE Std 1722.1™-2013 AEM START_OPERATION command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM START_OPERATION command.
 	AVB17221AEMCommandTypeStartOperation AVB17221AEMCommandType = 52
-	// @constant	AVB17221AEMCommandTypeAbortOperation @abstract	The command code for the IEEE Std 1722.1™-2013 AEM ABORT_OPERATION command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM ABORT_OPERATION command.
 	AVB17221AEMCommandTypeAbortOperation AVB17221AEMCommandType = 53
-	// @constant	AVB17221AEMCommandTypeOperationStatus @abstract	The command code for the IEEE Std 1722.1™-2013 AEM OPERATION_STATUS command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM OPERATION_STATUS command.
 	AVB17221AEMCommandTypeOperationStatus AVB17221AEMCommandType = 54
-	// @constant	AVB17221AEMCommandTypeAuthenticationAddKey @abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_ADD_KEY command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM AUTH_ADD_KEY command.
 	AVB17221AEMCommandTypeAuthenticationAddKey AVB17221AEMCommandType = 55
-	// @constant	AVB17221AEMCommandTypeAuthenticationDeleteKey @abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_DELETE_KEY command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM AUTH_DELETE_KEY command.
 	AVB17221AEMCommandTypeAuthenticationDeleteKey AVB17221AEMCommandType = 56
-	// @constant	AVB17221AEMCommandTypeAuthenticationGetKeyList @abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_GET_KEY_LIST command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM AUTH_GET_KEY_LIST command.
 	AVB17221AEMCommandTypeAuthenticationGetKeyList AVB17221AEMCommandType = 57
-	// @constant	AVB17221AEMCommandTypeAuthenticationGetKey @abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_GET_KEY command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM AUTH_GET_KEY command.
 	AVB17221AEMCommandTypeAuthenticationGetKey AVB17221AEMCommandType = 58
-	// @constant	AVB17221AEMCommandTypeAuthenticationAddKeyToChain @abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_ADD_KEY_TO_CHAIN command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM AUTH_ADD_KEY_TO_CHAIN command.
 	AVB17221AEMCommandTypeAuthenticationAddKeyToChain AVB17221AEMCommandType = 59
-	// @constant	AVB17221AEMCommandTypeAuthenticationDeleteKeyFromChain @abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_DELETE_KEY_FROM_CHAIN command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM AUTH_DELETE_KEY_FROM_CHAIN command.
 	AVB17221AEMCommandTypeAuthenticationDeleteKeyFromChain AVB17221AEMCommandType = 60
-	// @constant	AVB17221AEMCommandTypeAuthenticationGetKeychainList @abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_GET_KEYCHAIN_LIST command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM AUTH_GET_KEYCHAIN_LIST command.
 	AVB17221AEMCommandTypeAuthenticationGetKeychainList AVB17221AEMCommandType = 61
-	// @constant	AVB17221AEMCommandTypeAuthenticationGetIdentity @abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_GET_IDENTITY command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM AUTH_GET_IDENTITY command.
 	AVB17221AEMCommandTypeAuthenticationGetIdentity AVB17221AEMCommandType = 62
-	// @constant	AVB17221AEMCommandTypeAuthenticationAddToken @abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_ADD_TOKEN command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM AUTH_ADD_TOKEN command.
 	AVB17221AEMCommandTypeAuthenticationAddToken AVB17221AEMCommandType = 63
-	// @constant	AVB17221AEMCommandTypeAuthenticationDeleteToken @abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_DELETE_TOKEN command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM AUTH_DELETE_TOKEN command.
 	AVB17221AEMCommandTypeAuthenticationDeleteToken AVB17221AEMCommandType = 64
-	// @constant	AVB17221AEMCommandTypeAuthenticate @abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTHENTICATE command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM AUTHENTICATE command.
 	AVB17221AEMCommandTypeAuthenticate AVB17221AEMCommandType = 65
-	// @constant	AVB17221AEMCommandTypeDeauthenticate @abstract	The command code for the IEEE Std 1722.1™-2013 AEM DEAUTHENTICATE command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM DEAUTHENTICATE command.
 	AVB17221AEMCommandTypeDeauthenticate AVB17221AEMCommandType = 66
-	// @constant	AVB17221AEMCommandTypeEnableTransportSecurity @abstract	The command code for the IEEE Std 1722.1™-2013 AEM ENABLE_TRANSPORT_SECURITY command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM ENABLE_TRANSPORT_SECURITY command.
 	AVB17221AEMCommandTypeEnableTransportSecurity AVB17221AEMCommandType = 67
-	// @constant	AVB17221AEMCommandTypeDisableTransportSecurity @abstract	The command code for the IEEE Std 1722.1™-2013 AEM DISABLE_TRANSPORT_SECURITY command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM DISABLE_TRANSPORT_SECURITY command.
 	AVB17221AEMCommandTypeDisableTransportSecurity AVB17221AEMCommandType = 68
-	// @constant	AVB17221AEMCommandTypeEnableStreamEncryption @abstract	The command code for the IEEE Std 1722.1™-2013 AEM ENABLE_STREAM_ENCRYPTION command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM ENABLE_STREAM_ENCRYPTION command.
 	AVB17221AEMCommandTypeEnableStreamEncryption AVB17221AEMCommandType = 69
-	// @constant	AVB17221AEMCommandTypeDisableStreamEncryption @abstract	The command code for the IEEE Std 1722.1™-2013 AEM DISABLE_STREAM_ENCRYPTION command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM DISABLE_STREAM_ENCRYPTION command.
 	AVB17221AEMCommandTypeDisableStreamEncryption AVB17221AEMCommandType = 70
-	// @constant	AVB17221AEMCommandTypeSetMemoryObjectLength @abstract	The command code for the IEEE Std 1722.1™-2013 AEM SET_MEMORY_OBJECT_LENGTH command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM SET_MEMORY_OBJECT_LENGTH command.
 	AVB17221AEMCommandTypeSetMemoryObjectLength AVB17221AEMCommandType = 71
-	// @constant	AVB17221AEMCommandTypeGetMemoryObjectLength @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_MEMORY_OBJECT_LENGTH command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_MEMORY_OBJECT_LENGTH command.
 	AVB17221AEMCommandTypeGetMemoryObjectLength AVB17221AEMCommandType = 72
-	// @constant	AVB17221AEMCommandTypeSetStreamBackup @abstract	The command code for the IEEE Std 1722.1™-2013 AEM SET_STREAM_BACKUP command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM SET_STREAM_BACKUP command.
 	AVB17221AEMCommandTypeSetStreamBackup AVB17221AEMCommandType = 73
-	// @constant	AVB17221AEMCommandTypeGetStreamBackup @abstract	The command code for the IEEE Std 1722.1™-2013 AEM GET_STREAM_BACKUP command.
+	// The command code for the IEEE Std 1722.1™-2013 AEM GET_STREAM_BACKUP command.
 	AVB17221AEMCommandTypeGetStreamBackup AVB17221AEMCommandType = 74
-	// @constant	AVB17221AEMCommandTypeGetDynamicInfo @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_DYNAMIC_INFO command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_DYNAMIC_INFO command.
 	AVB17221AEMCommandTypeGetDynamicInfo AVB17221AEMCommandType = 75
-	// @constant	AVB17221AEMCommandTypeSetMaxTransitTime @abstract	The command code for the IEEE Std 1722.1™-2021 AEM  command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM  command.
 	AVB17221AEMCommandTypeSetMaxTransitTime AVB17221AEMCommandType = 76
-	// @constant	AVB17221AEMCommandTypeGetMaxTransitTime @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_MAX_TRANSIT_TIME command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_MAX_TRANSIT_TIME command.
 	AVB17221AEMCommandTypeGetMaxTransitTime AVB17221AEMCommandType = 77
-	// @constant	AVB17221AEMCommandTypeSetSamplingRateRange @abstract	The command code for the IEEE Std 1722.1™-2021 AEM SET_SAMPLING_RATE_RANGE command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM SET_SAMPLING_RATE_RANGE command.
 	AVB17221AEMCommandTypeSetSamplingRateRange AVB17221AEMCommandType = 78
-	// @constant	AVB17221AEMCommandTypeGetSamplingRateRange @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_SAMPLING_RATE_RANGE command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_SAMPLING_RATE_RANGE command.
 	AVB17221AEMCommandTypeGetSamplingRateRange AVB17221AEMCommandType = 79
-	// @constant	AVB17221AEMCommandTypeSetPTPInstanceInfo @abstract	The command code for the IEEE Std 1722.1™-2021 AEM SET_PTP_INSTANCE_INFO command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM SET_PTP_INSTANCE_INFO command.
 	AVB17221AEMCommandTypeSetPTPInstanceInfo AVB17221AEMCommandType = 80
-	// @constant	AVB17221AEMCommandTypeGetPTPInstanceInfo @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_INSTANCE_INFO command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_INSTANCE_INFO command.
 	AVB17221AEMCommandTypeGetPTPInstanceInfo AVB17221AEMCommandType = 81
-	// @constant	AVB17221AEMCommandTypeGetPTPInstanceExtendedInfo @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_INSTANCE_EXTENDED_INFO command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_INSTANCE_EXTENDED_INFO command.
 	AVB17221AEMCommandTypeGetPTPInstanceExtendedInfo AVB17221AEMCommandType = 82
-	// @constant	AVB17221AEMCommandTypeGetPTPInstanceGrandmasterInfo @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_INSTANCE_GRANDMASTER_INFO command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_INSTANCE_GRANDMASTER_INFO command.
 	AVB17221AEMCommandTypeGetPTPInstanceGrandmasterInfo AVB17221AEMCommandType = 83
-	// @constant	AVB17221AEMCommandTypeGetPTPInstancePathCount @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_INSTANCE_PATH_COUNT command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_INSTANCE_PATH_COUNT command.
 	AVB17221AEMCommandTypeGetPTPInstancePathCount AVB17221AEMCommandType = 84
-	// @constant	AVB17221AEMCommandTypeGetPTPInstancePathTrace @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_INSTANCE_PATH_TRACE command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_INSTANCE_PATH_TRACE command.
 	AVB17221AEMCommandTypeGetPTPInstancePathTrace AVB17221AEMCommandType = 85
-	// @constant	AVB17221AEMCommandTypeGetPTPInstancePerformanceMonitoringCount @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_INSTANCE_PERF_MON_COUNT command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_INSTANCE_PERF_MON_COUNT command.
 	AVB17221AEMCommandTypeGetPTPInstancePerformanceMonitoringCount AVB17221AEMCommandType = 86
-	// @constant	AVB17221AEMCommandTypeGetPTPInstancePerformanceMonitoringRecord @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_INSTANCE_PERF_MON_RECORD command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_INSTANCE_PERF_MON_RECORD command.
 	AVB17221AEMCommandTypeGetPTPInstancePerformanceMonitoringRecord AVB17221AEMCommandType = 87
-	// @constant	AVB17221AEMCommandTypeSetPTPPortInitialIntervals @abstract	The command code for the IEEE Std 1722.1™-2021 AEM SET_PTP_PORT_INITIAL_INTERVALS command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM SET_PTP_PORT_INITIAL_INTERVALS command.
 	AVB17221AEMCommandTypeSetPTPPortInitialIntervals AVB17221AEMCommandType = 88
-	// @constant	AVB17221AEMCommandTypeGetPTPPortInitialIntervals @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_PORT_INITIAL_INTERVALS command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_PORT_INITIAL_INTERVALS command.
 	AVB17221AEMCommandTypeGetPTPPortInitialIntervals AVB17221AEMCommandType = 89
-	// @constant	AVB17221AEMCommandTypeGetPTPPortCurrentIntervals @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_PORT_CURRENT_INTERVALS command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_PORT_CURRENT_INTERVALS command.
 	AVB17221AEMCommandTypeGetPTPPortCurrentIntervals AVB17221AEMCommandType = 91
-	// @constant	AVB17221AEMCommandTypeSetPTPPortRemoteIntervals @abstract	The command code for the IEEE Std 1722.1™-2021 AEM SET_PTP_PORT_REMOTE_INTERVALS command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM SET_PTP_PORT_REMOTE_INTERVALS command.
 	AVB17221AEMCommandTypeSetPTPPortRemoteIntervals AVB17221AEMCommandType = 92
-	// @constant	AVB17221AEMCommandTypeGetPTPPortRemoteIntervals @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_PORT_REMOTE_INTERVALS command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_PORT_REMOTE_INTERVALS command.
 	AVB17221AEMCommandTypeGetPTPPortRemoteIntervals AVB17221AEMCommandType = 93
-	// @constant	AVB17221AEMCommandTypeSetPTPPortInfo @abstract	The command code for the IEEE Std 1722.1™-2021 AEM SET_PTP_PORT_INFO command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM SET_PTP_PORT_INFO command.
 	AVB17221AEMCommandTypeSetPTPPortInfo AVB17221AEMCommandType = 94
-	// @constant	AVB17221AEMCommandTypeGetPTPPortInfo @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_PORT_INFO command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_PORT_INFO command.
 	AVB17221AEMCommandTypeGetPTPPortInfo AVB17221AEMCommandType = 95
-	// @constant	AVB17221AEMCommandTypeSetPTPPortOverrides @abstract	The command code for the IEEE Std 1722.1™-2021 AEM SET_PTP_PORT_OVERRIDES command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM SET_PTP_PORT_OVERRIDES command.
 	AVB17221AEMCommandTypeSetPTPPortOverrides AVB17221AEMCommandType = 96
-	// @constant	AVB17221AEMCommandTypeGetPTPPortOverrides @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_PORT_OVERRIDES command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_PORT_OVERRIDES command.
 	AVB17221AEMCommandTypeGetPTPPortOverrides AVB17221AEMCommandType = 97
-	// @constant	AVB17221AEMCommandTypeGetPTPPortPDelayMonitoringCount @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_PORT_PDELAY_MON_COUNT command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_PORT_PDELAY_MON_COUNT command.
 	AVB17221AEMCommandTypeGetPTPPortPDelayMonitoringCount AVB17221AEMCommandType = 98
-	// @constant	AVB17221AEMCommandTypeGetPTPPortPDelayMonitoringRecord @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_PORT_PDELAY_MON_RECORD command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_PORT_PDELAY_MON_RECORD command.
 	AVB17221AEMCommandTypeGetPTPPortPDelayMonitoringRecord AVB17221AEMCommandType = 99
-	// @constant	AVB17221AEMCommandTypeGetPTPPortPerformanceMonitoringCount @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_PORT_PERF_MON_COUNT command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_PORT_PERF_MON_COUNT command.
 	AVB17221AEMCommandTypeGetPTPPortPerformanceMonitoringCount AVB17221AEMCommandType = 100
-	// @constant	AVB17221AEMCommandTypeGetPTPPortPerformanceMonitoringRecord @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_PORT_PERF_MON_RECORD command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_PTP_PORT_PERF_MON_RECORD command.
 	AVB17221AEMCommandTypeGetPTPPortPerformanceMonitoringRecord AVB17221AEMCommandType = 101
-	// @constant	AVB17221AEMCommandTypeGetPathLatency @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_PATH_LATENCY command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM GET_PATH_LATENCY command.
 	AVB17221AEMCommandTypeGetPathLatency AVB17221AEMCommandType = 102
-	// @constant	AVB17221AEMCommandTypeAuthenticationGetNonce @abstract	The command code for the IEEE Std 1722.1™-2021 AEM AUTH_GET_NONCE command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM AUTH_GET_NONCE command.
 	AVB17221AEMCommandTypeAuthenticationGetNonce AVB17221AEMCommandType = 103
-	// @constant	AVB17221AEMCommandTypeAuthenticationAddKeyNonce @abstract	The command code for the IEEE Std 1722.1™-2021 AEM AUTH_ADD_KEY_NONCE command.
+	// The command code for the IEEE Std 1722.1™-2021 AEM AUTH_ADD_KEY_NONCE command.
 	AVB17221AEMCommandTypeAuthenticationAddKeyNonce AVB17221AEMCommandType = 104
 )
 

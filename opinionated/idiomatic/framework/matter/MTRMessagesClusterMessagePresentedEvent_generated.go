@@ -5,61 +5,84 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRMessagesClusterMessagePresentedEvent wraps [raw.MTRMessagesClusterMessagePresentedEvent] with a fluent Go API.
+// MTRMessagesClusterMessagePresentedEvent is an idiomatic wrapper over the Objective-C class MTRMessagesClusterMessagePresentedEvent.
 type MTRMessagesClusterMessagePresentedEvent struct {
-	inner *raw.MTRMessagesClusterMessagePresentedEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRMessagesClusterMessagePresentedEvent].
-func (x *MTRMessagesClusterMessagePresentedEvent) Unwrap() *raw.MTRMessagesClusterMessagePresentedEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRMessagesClusterMessagePresentedEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRMessagesClusterMessagePresentedEventFromID adopts an existing object pointer as a MTRMessagesClusterMessagePresentedEvent (nil for 0).
+// MTRMessagesClusterMessagePresentedEventFromID adopts an existing Objective-C object as a MTRMessagesClusterMessagePresentedEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRMessagesClusterMessagePresentedEventFromID(id objc.ID) *MTRMessagesClusterMessagePresentedEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRMessagesClusterMessagePresentedEvent{inner: raw.MTRMessagesClusterMessagePresentedEventFromID(id)}
-}
-
-// NewMTRMessagesClusterMessagePresentedEvent creates a new [MTRMessagesClusterMessagePresentedEvent].
-func NewMTRMessagesClusterMessagePresentedEvent() *MTRMessagesClusterMessagePresentedEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRMessagesClusterMessagePresentedEvent")), objc.RegisterName("new"))
-	return &MTRMessagesClusterMessagePresentedEvent{inner: raw.MTRMessagesClusterMessagePresentedEventFromID(_id)}
-}
-
-// WithMessageID sets the messageID property and returns the receiver for chaining.
-func (x *MTRMessagesClusterMessagePresentedEvent) WithMessageID(messageID *foundation.NSData) *MTRMessagesClusterMessagePresentedEvent {
-	x.inner.SetMessageID(messageID)
+	x := &MTRMessagesClusterMessagePresentedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// MessageID calls the underlying MessageID.
-func (x *MTRMessagesClusterMessagePresentedEvent) MessageID() *foundation.NSData {
-	return x.inner.MessageID()
+// mTRMessagesClusterMessagePresentedEventAdopt wraps an Objective-C object that this code just created as a
+// MTRMessagesClusterMessagePresentedEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRMessagesClusterMessagePresentedEventAdopt(id objc.ID) *MTRMessagesClusterMessagePresentedEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRMessagesClusterMessagePresentedEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetMessageID calls the underlying SetMessageID.
-func (x *MTRMessagesClusterMessagePresentedEvent) SetMessageID(messageID *foundation.NSData) {
-	x.inner.SetMessageID(messageID)
+// Description returns the object's -description text.
+func (x *MTRMessagesClusterMessagePresentedEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRMessagesClusterMessagePresentedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRMessagesClusterMessagePresentedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRMessagesClusterMessagePresentedEvent creates a new MTRMessagesClusterMessagePresentedEvent.
+func NewMTRMessagesClusterMessagePresentedEvent() *MTRMessagesClusterMessagePresentedEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRMessagesClusterMessagePresentedEvent")), objc.RegisterName("new"))
+	return mTRMessagesClusterMessagePresentedEventAdopt(_id)
+}
+
+// WithMessageID sets messageID and returns the receiver so calls can be chained.
+func (x *MTRMessagesClusterMessagePresentedEvent) WithMessageID(messageID obj.Object) *MTRMessagesClusterMessagePresentedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
+	return x
+}
+
+func (x *MTRMessagesClusterMessagePresentedEvent) MessageID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageID"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRMessagesClusterMessagePresentedEvent) SetMessageID(messageID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
 }
 
 // MTRMessagesClusterMessagePresentedEventable is the interface implemented by [MTRMessagesClusterMessagePresentedEvent], for mocking and DI.
 type MTRMessagesClusterMessagePresentedEventable interface {
-	Unwrap() *raw.MTRMessagesClusterMessagePresentedEvent
-	WithMessageID(messageID *foundation.NSData) *MTRMessagesClusterMessagePresentedEvent
-	MessageID() *foundation.NSData
-	SetMessageID(messageID *foundation.NSData)
+	obj.Object
+	WithMessageID(messageID obj.Object) *MTRMessagesClusterMessagePresentedEvent
+	MessageID() obj.Object
+	SetMessageID(messageID obj.Object)
 }
 
 var _ MTRMessagesClusterMessagePresentedEventable = (*MTRMessagesClusterMessagePresentedEvent)(nil)

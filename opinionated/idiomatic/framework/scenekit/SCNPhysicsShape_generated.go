@@ -5,67 +5,87 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An abstraction of a physics body’s solid volume for tuning collision detection.
 //
-// PhysicsShape wraps [raw.SCNPhysicsShape] with a fluent Go API.
+// PhysicsShape is an idiomatic wrapper over the Objective-C class SCNPhysicsShape.
 type PhysicsShape struct {
-	inner *raw.SCNPhysicsShape
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNPhysicsShape].
-func (x *PhysicsShape) Unwrap() *raw.SCNPhysicsShape { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhysicsShape) ID() objc.ID { return x.inner.Ptr() }
-
-// PhysicsShapeFromID adopts an existing object pointer as a PhysicsShape (nil for 0).
+// PhysicsShapeFromID adopts an existing Objective-C object as a PhysicsShape
+// (nil for 0), retaining it and registering a release finalizer.
 func PhysicsShapeFromID(id objc.ID) *PhysicsShape {
 	if id == 0 {
 		return nil
 	}
-	return &PhysicsShape{inner: raw.SCNPhysicsShapeFromID(id)}
+	x := &PhysicsShape{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPhysicsShape creates a new [PhysicsShape].
+// physicsShapeAdopt wraps an Objective-C object that this code just created as a
+// PhysicsShape (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func physicsShapeAdopt(id objc.ID) *PhysicsShape {
+	if id == 0 {
+		return nil
+	}
+	x := &PhysicsShape{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PhysicsShape) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PhysicsShape) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PhysicsShape) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPhysicsShape creates a new PhysicsShape.
 func NewPhysicsShape() *PhysicsShape {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNPhysicsShape")), objc.RegisterName("new"))
-	return &PhysicsShape{inner: raw.SCNPhysicsShapeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsShape")), objc.RegisterName("new"))
+	return physicsShapeAdopt(_id)
 }
 
-// Options calls the underlying Options.
-func (x *PhysicsShape) Options() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.Options()
+func (x *PhysicsShape) Options() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
+	return obj.Wrap(_r)
 }
 
-// SourceObject calls the underlying SourceObject.
-func (x *PhysicsShape) SourceObject() objc.ID {
-	return x.inner.SourceObject()
+func (x *PhysicsShape) SourceObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceObject"))
+	return obj.Wrap(_r)
 }
 
 // Transforms returns the collection as a Go slice.
-func (x *PhysicsShape) Transforms() []*foundation.NSValue {
-	arr := x.inner.Transforms()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
-		return foundation.NSValueFromID(purego.Retain(_id))
-	})
+func (x *PhysicsShape) Transforms() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transforms"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PhysicsShapeable is the interface implemented by [PhysicsShape], for mocking and DI.
 type PhysicsShapeable interface {
-	Unwrap() *raw.SCNPhysicsShape
-	Options() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SourceObject() objc.ID
-	Transforms() []*foundation.NSValue
+	obj.Object
+	Options() obj.Object
+	SourceObject() obj.Object
+	Transforms() []obj.Object
 }
 
 var _ PhysicsShapeable = (*PhysicsShape)(nil)

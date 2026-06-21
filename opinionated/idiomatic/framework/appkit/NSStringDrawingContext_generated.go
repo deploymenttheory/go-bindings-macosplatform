@@ -5,75 +5,94 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that manages metrics for drawing attributed strings.
 //
-// StringDrawingContext wraps [raw.NSStringDrawingContext] with a fluent Go API.
+// StringDrawingContext is an idiomatic wrapper over the Objective-C class NSStringDrawingContext.
 type StringDrawingContext struct {
-	inner *raw.NSStringDrawingContext
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSStringDrawingContext].
-func (x *StringDrawingContext) Unwrap() *raw.NSStringDrawingContext { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StringDrawingContext) ID() objc.ID { return x.inner.Ptr() }
-
-// StringDrawingContextFromID adopts an existing object pointer as a StringDrawingContext (nil for 0).
+// StringDrawingContextFromID adopts an existing Objective-C object as a StringDrawingContext
+// (nil for 0), retaining it and registering a release finalizer.
 func StringDrawingContextFromID(id objc.ID) *StringDrawingContext {
 	if id == 0 {
 		return nil
 	}
-	return &StringDrawingContext{inner: raw.NSStringDrawingContextFromID(id)}
+	x := &StringDrawingContext{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewStringDrawingContext creates a new [StringDrawingContext].
+// stringDrawingContextAdopt wraps an Objective-C object that this code just created as a
+// StringDrawingContext (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func stringDrawingContextAdopt(id objc.ID) *StringDrawingContext {
+	if id == 0 {
+		return nil
+	}
+	x := &StringDrawingContext{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *StringDrawingContext) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StringDrawingContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StringDrawingContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewStringDrawingContext creates a new StringDrawingContext.
 func NewStringDrawingContext() *StringDrawingContext {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSStringDrawingContext")), objc.RegisterName("new"))
-	return &StringDrawingContext{inner: raw.NSStringDrawingContextFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSStringDrawingContext")), objc.RegisterName("new"))
+	return stringDrawingContextAdopt(_id)
 }
 
 // The scale factor that determines the smallest font size to use during drawing.
 //
-// WithMinimumScaleFactor sets the minimumScaleFactor property and returns the receiver for chaining.
+// WithMinimumScaleFactor sets minimumScaleFactor and returns the receiver so calls can be chained.
 func (x *StringDrawingContext) WithMinimumScaleFactor(minimumScaleFactor float64) *StringDrawingContext {
-	x.inner.SetMinimumScaleFactor(minimumScaleFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumScaleFactor:"), minimumScaleFactor)
 	return x
 }
 
-// MinimumScaleFactor calls the underlying MinimumScaleFactor.
 func (x *StringDrawingContext) MinimumScaleFactor() float64 {
-	return x.inner.MinimumScaleFactor()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumScaleFactor"))
+	return _r
 }
 
-// SetMinimumScaleFactor calls the underlying SetMinimumScaleFactor.
 func (x *StringDrawingContext) SetMinimumScaleFactor(minimumScaleFactor float64) {
-	x.inner.SetMinimumScaleFactor(minimumScaleFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumScaleFactor:"), minimumScaleFactor)
 }
 
-// ActualScaleFactor calls the underlying ActualScaleFactor.
 func (x *StringDrawingContext) ActualScaleFactor() float64 {
-	return x.inner.ActualScaleFactor()
-}
-
-// TotalBounds calls the underlying TotalBounds.
-func (x *StringDrawingContext) TotalBounds() corefoundation.CGRect {
-	return x.inner.TotalBounds()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("actualScaleFactor"))
+	return _r
 }
 
 // StringDrawingContextable is the interface implemented by [StringDrawingContext], for mocking and DI.
 type StringDrawingContextable interface {
-	Unwrap() *raw.NSStringDrawingContext
+	obj.Object
 	WithMinimumScaleFactor(minimumScaleFactor float64) *StringDrawingContext
 	MinimumScaleFactor() float64
 	SetMinimumScaleFactor(minimumScaleFactor float64)
 	ActualScaleFactor() float64
-	TotalBounds() corefoundation.CGRect
 }
 
 var _ StringDrawingContextable = (*StringDrawingContext)(nil)

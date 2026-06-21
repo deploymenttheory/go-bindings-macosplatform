@@ -5,39 +5,66 @@
 package javaruntimesupport
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/javaruntimesupport"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// RenderServer wraps [raw.JRSRenderServer] with a fluent Go API.
+// RenderServer is an idiomatic wrapper over the Objective-C class JRSRenderServer.
 type RenderServer struct {
-	inner *raw.JRSRenderServer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.JRSRenderServer].
-func (x *RenderServer) Unwrap() *raw.JRSRenderServer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RenderServer) ID() objc.ID { return x.inner.Ptr() }
-
-// RenderServerFromID adopts an existing object pointer as a RenderServer (nil for 0).
+// RenderServerFromID adopts an existing Objective-C object as a RenderServer
+// (nil for 0), retaining it and registering a release finalizer.
 func RenderServerFromID(id objc.ID) *RenderServer {
 	if id == 0 {
 		return nil
 	}
-	return &RenderServer{inner: raw.JRSRenderServerFromID(id)}
+	x := &RenderServer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRenderServer creates a new [RenderServer].
+// renderServerAdopt wraps an Objective-C object that this code just created as a
+// RenderServer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func renderServerAdopt(id objc.ID) *RenderServer {
+	if id == 0 {
+		return nil
+	}
+	x := &RenderServer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RenderServer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RenderServer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RenderServer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRenderServer creates a new RenderServer.
 func NewRenderServer() *RenderServer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("JRSRenderServer")), objc.RegisterName("new"))
-	return &RenderServer{inner: raw.JRSRenderServerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("JRSRenderServer")), objc.RegisterName("new"))
+	return renderServerAdopt(_id)
 }
 
 // RenderServerable is the interface implemented by [RenderServer], for mocking and DI.
 type RenderServerable interface {
-	Unwrap() *raw.JRSRenderServer
+	obj.Object
 }
 
 var _ RenderServerable = (*RenderServer)(nil)

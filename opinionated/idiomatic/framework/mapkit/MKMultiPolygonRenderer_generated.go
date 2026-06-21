@@ -5,169 +5,157 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The visual representation of multiple polygon overlays.
 //
-// MultiPolygonRenderer wraps [raw.MKMultiPolygonRenderer] with a fluent Go API.
+// MultiPolygonRenderer is an idiomatic wrapper over the Objective-C class MKMultiPolygonRenderer.
 type MultiPolygonRenderer struct {
-	inner *raw.MKMultiPolygonRenderer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKMultiPolygonRenderer].
-func (x *MultiPolygonRenderer) Unwrap() *raw.MKMultiPolygonRenderer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MultiPolygonRenderer) ID() objc.ID { return x.inner.Ptr() }
-
-// MultiPolygonRendererFromID adopts an existing object pointer as a MultiPolygonRenderer (nil for 0).
+// MultiPolygonRendererFromID adopts an existing Objective-C object as a MultiPolygonRenderer
+// (nil for 0), retaining it and registering a release finalizer.
 func MultiPolygonRendererFromID(id objc.ID) *MultiPolygonRenderer {
 	if id == 0 {
 		return nil
 	}
-	return &MultiPolygonRenderer{inner: raw.MKMultiPolygonRendererFromID(id)}
+	x := &MultiPolygonRenderer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// multiPolygonRendererAdopt wraps an Objective-C object that this code just created as a
+// MultiPolygonRenderer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func multiPolygonRendererAdopt(id objc.ID) *MultiPolygonRenderer {
+	if id == 0 {
+		return nil
+	}
+	x := &MultiPolygonRenderer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MultiPolygonRenderer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MultiPolygonRenderer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MultiPolygonRenderer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates and returns a renderer that handles drawing for the specified multipolygon overlay object.
 //
-// NewMultiPolygonRendererWithMultiPolygon creates a new [MultiPolygonRenderer].
-func NewMultiPolygonRendererWithMultiPolygon(multiPolygon *raw.MKMultiPolygon) *MultiPolygonRenderer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMultiPolygonRenderer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMultiPolygon:"), multiPolygon.Ptr())
-	return &MultiPolygonRenderer{inner: raw.MKMultiPolygonRendererFromID(_id)}
+// NewMultiPolygonRendererWithMultiPolygon creates a new MultiPolygonRenderer.
+func NewMultiPolygonRendererWithMultiPolygon(multiPolygon *MultiPolygon) *MultiPolygonRenderer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMultiPolygonRenderer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMultiPolygon:"), objref.IDOf(multiPolygon))
+	return multiPolygonRendererAdopt(_id)
 }
 
 // The fill color to use for the path.
 //
-// WithFillColor sets the fillColor property and returns the receiver for chaining.
-func (x *MultiPolygonRenderer) WithFillColor(fillColor *appkit.NSColor) *MultiPolygonRenderer {
-	x.inner.MKOverlayPathRenderer.SetFillColor(fillColor)
+// WithFillColor sets fillColor and returns the receiver so calls can be chained.
+func (x *MultiPolygonRenderer) WithFillColor(fillColor obj.Object) *MultiPolygonRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	return x
 }
 
 // The stroke color to use for the path.
 //
-// WithStrokeColor sets the strokeColor property and returns the receiver for chaining.
-func (x *MultiPolygonRenderer) WithStrokeColor(strokeColor *appkit.NSColor) *MultiPolygonRenderer {
-	x.inner.MKOverlayPathRenderer.SetStrokeColor(strokeColor)
+// WithStrokeColor sets strokeColor and returns the receiver so calls can be chained.
+func (x *MultiPolygonRenderer) WithStrokeColor(strokeColor obj.Object) *MultiPolygonRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 	return x
 }
 
 // The stroke width to use for the path.
 //
-// WithLineWidth sets the lineWidth property and returns the receiver for chaining.
+// WithLineWidth sets lineWidth and returns the receiver so calls can be chained.
 func (x *MultiPolygonRenderer) WithLineWidth(lineWidth float64) *MultiPolygonRenderer {
-	x.inner.MKOverlayPathRenderer.SetLineWidth(lineWidth)
-	return x
-}
-
-// The line join style to apply to the corners of the path.
-//
-// WithLineJoin sets the lineJoin property and returns the receiver for chaining.
-func (x *MultiPolygonRenderer) WithLineJoin(lineJoin coregraphics.CGLineJoin) *MultiPolygonRenderer {
-	x.inner.MKOverlayPathRenderer.SetLineJoin(lineJoin)
-	return x
-}
-
-// The line cap style to apply to the open ends of the path.
-//
-// WithLineCap sets the lineCap property and returns the receiver for chaining.
-func (x *MultiPolygonRenderer) WithLineCap(lineCap coregraphics.CGLineCap) *MultiPolygonRenderer {
-	x.inner.MKOverlayPathRenderer.SetLineCap(lineCap)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
 	return x
 }
 
 // The limiting value that helps avoid spikes at junctions between connected line segments.
 //
-// WithMiterLimit sets the miterLimit property and returns the receiver for chaining.
+// WithMiterLimit sets miterLimit and returns the receiver so calls can be chained.
 func (x *MultiPolygonRenderer) WithMiterLimit(miterLimit float64) *MultiPolygonRenderer {
-	x.inner.MKOverlayPathRenderer.SetMiterLimit(miterLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
 	return x
 }
 
 // The offset (in points) at which to start drawing the dash pattern.
 //
-// WithLineDashPhase sets the lineDashPhase property and returns the receiver for chaining.
+// WithLineDashPhase sets lineDashPhase and returns the receiver so calls can be chained.
 func (x *MultiPolygonRenderer) WithLineDashPhase(lineDashPhase float64) *MultiPolygonRenderer {
-	x.inner.MKOverlayPathRenderer.SetLineDashPhase(lineDashPhase)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
 	return x
 }
 
 // An array of numbers specifying the dash pattern to use for the path.
 //
-// WithLineDashPattern sets the collection, converting the Go slice to an NSArray.
-func (x *MultiPolygonRenderer) WithLineDashPattern(items ...*foundation.NSNumber) *MultiPolygonRenderer {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.MKOverlayPathRenderer.SetLineDashPattern(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.MKOverlayPathRenderer.SetLineDashPattern(_arr)
+// WithLineDashPattern sets the collection and returns the receiver so calls can be chained.
+func (x *MultiPolygonRenderer) WithLineDashPattern(items ...obj.Object) *MultiPolygonRenderer {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPattern:"), _arr)
 	return x
 }
 
 // A Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
 //
-// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+// WithShouldRasterize sets shouldRasterize and returns the receiver so calls can be chained.
 func (x *MultiPolygonRenderer) WithShouldRasterize(shouldRasterize bool) *MultiPolygonRenderer {
-	x.inner.MKOverlayPathRenderer.SetShouldRasterize(shouldRasterize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	return x
+}
+
+// The path representing the overlay’s shape.
+//
+// WithPath sets path and returns the receiver so calls can be chained.
+func (x *MultiPolygonRenderer) WithPath(path obj.Object) *MultiPolygonRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return x
 }
 
 // The amount of transparency to apply to the overlay.
 //
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha sets alpha and returns the receiver so calls can be chained.
 func (x *MultiPolygonRenderer) WithAlpha(alpha float64) *MultiPolygonRenderer {
-	x.inner.MKOverlayPathRenderer.MKOverlayRenderer.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// MultiPolygon calls the underlying MultiPolygon.
 func (x *MultiPolygonRenderer) MultiPolygon() *MultiPolygon {
-	_r := x.inner.MultiPolygon()
-	if _r == nil {
-		return nil
-	}
-	return &MultiPolygon{inner: _r}
-}
-
-func (x *MultiPolygonRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer {
-	return &x.inner.MKOverlayPathRenderer
-}
-
-func (x *MultiPolygonRenderer) asOverlayRenderer() *raw.MKOverlayRenderer {
-	return &x.inner.MKOverlayPathRenderer.MKOverlayRenderer
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiPolygon"))
+	return MultiPolygonFromID(_r)
 }
 
 // MultiPolygonRendererable is the interface implemented by [MultiPolygonRenderer], for mocking and DI.
 type MultiPolygonRendererable interface {
-	Unwrap() *raw.MKMultiPolygonRenderer
-	WithFillColor(fillColor *appkit.NSColor) *MultiPolygonRenderer
-	WithStrokeColor(strokeColor *appkit.NSColor) *MultiPolygonRenderer
+	obj.Object
+	WithFillColor(fillColor obj.Object) *MultiPolygonRenderer
+	WithStrokeColor(strokeColor obj.Object) *MultiPolygonRenderer
 	WithLineWidth(lineWidth float64) *MultiPolygonRenderer
-	WithLineJoin(lineJoin coregraphics.CGLineJoin) *MultiPolygonRenderer
-	WithLineCap(lineCap coregraphics.CGLineCap) *MultiPolygonRenderer
 	WithMiterLimit(miterLimit float64) *MultiPolygonRenderer
 	WithLineDashPhase(lineDashPhase float64) *MultiPolygonRenderer
-	WithLineDashPattern(items ...*foundation.NSNumber) *MultiPolygonRenderer
+	WithLineDashPattern(items ...obj.Object) *MultiPolygonRenderer
 	WithShouldRasterize(shouldRasterize bool) *MultiPolygonRenderer
+	WithPath(path obj.Object) *MultiPolygonRenderer
 	WithAlpha(alpha float64) *MultiPolygonRenderer
 	MultiPolygon() *MultiPolygon
 }

@@ -5,96 +5,112 @@
 package discrecording
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// @class		DRFolder @abstract	Represents a folder to be created on the burned disc. @discussion	DRFolders can be either a &ldquo;real&rdquo; folder pointing to an existing folder (residing on a hard drive for example) or can be a &ldquo;virtual&rdquo; folder which exists only on the resulting burned disc. A DRFolder pointing to an existing folder cannot have it's contents changed - only those files/folders which are children of the actual folder on disk will be included on the resulting disc. Virtual folders are entirely created programatically and any virtual folder structure can exist and be burned to disc. It is possible to convert a real folder to a virtual folder using the @link //apple_ref/occ/intm/DRFolder/makeVirtual makeVirtual @/link method.
+// Represents a folder to be created on the burned disc. DRFolders can be either a &ldquo;real&rdquo; folder pointing to an existing folder (residing on a hard drive for example) or can be a &ldquo;virtual&rdquo; folder which exists only on the resulting burned disc. A DRFolder pointing to an existing folder cannot have it's contents changed - only those files/folders which are children of the actual folder on disk will be included on the resulting disc. Virtual folders are entirely created programatically and any virtual folder structure can exist and be burned to disc. It is possible to convert a real folder to a virtual folder using the
 //
-// Folder wraps [raw.DRFolder] with a fluent Go API.
+// Folder is an idiomatic wrapper over the Objective-C class DRFolder.
 type Folder struct {
-	inner *raw.DRFolder
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DRFolder].
-func (x *Folder) Unwrap() *raw.DRFolder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Folder) ID() objc.ID { return x.inner.Ptr() }
-
-// FolderFromID adopts an existing object pointer as a Folder (nil for 0).
+// FolderFromID adopts an existing Objective-C object as a Folder
+// (nil for 0), retaining it and registering a release finalizer.
 func FolderFromID(id objc.ID) *Folder {
 	if id == 0 {
 		return nil
 	}
-	return &Folder{inner: raw.DRFolderFromID(id)}
+	x := &Folder{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @method 		initWithPath: @abstract		Initializes a real file object @discussion		Initializes a DRFolder object that will use the folder contents of the folder located at path as a source. @param 			path	The path to an existing folder. @result  		A DRFolder object.
+// folderAdopt wraps an Objective-C object that this code just created as a
+// Folder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func folderAdopt(id objc.ID) *Folder {
+	if id == 0 {
+		return nil
+	}
+	x := &Folder{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Folder) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Folder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Folder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// Initializes a real file object Initializes a DRFolder object that will use the folder contents of the folder located at path as a source.
 //
-// NewFolderWithPath creates a new [Folder].
+// NewFolderWithPath creates a new Folder.
 func NewFolderWithPath(path string) *Folder {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRFolder")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:"), foundation.NSStringStringWithUTF8String(path).Ptr())
-	return &Folder{inner: raw.DRFolderFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DRFolder")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:"), purego.NSString(path))
+	return folderAdopt(_id)
 }
 
-// @method 		initWithName: @abstract		Initializes a virtual file object @discussion		Initializes a DRFolder object that will be populated with specified @link //apple_ref/occ/cl/DRFile DRFile @/link and DRFolder objects at runtime. @param 			name	The name of the folder on the output disc. @result  		A DRFolder object.
+// Initializes a virtual file object Initializes a DRFolder object that will be populated with specified
 //
-// NewFolderWithName creates a new [Folder].
+// NewFolderWithName creates a new Folder.
 func NewFolderWithName(name string) *Folder {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRFolder")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), foundation.NSStringStringWithUTF8String(name).Ptr())
-	return &Folder{inner: raw.DRFolderFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DRFolder")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:"), purego.NSString(name))
+	return folderAdopt(_id)
 }
 
-// @method 		makeVirtual @abstract		Changes the real DRFolder object into a virtual DRFolder object. @discussion		The virtual folder created in this way is a snapshot of the on-disk folder at the moment of the call.  The newly created virtual folder will contain <b>real</b> folder and file objects corresponding to the on-disk children of the original on-disk folder. If the on-disk folder is modified (eg, if the folder attributes change, or if children are added to or removed from the on-disk tree): <i>during</i> this call, the virtual folder <b>may or may not</b> reflect the changes. If modified <i>after</i> this call, the virtual folder <b>will</b> not reflect the changes.
-//
-// MakeVirtual calls the underlying MakeVirtual.
+// Changes the real DRFolder object into a virtual DRFolder object. The virtual folder created in this way is a snapshot of the on-disk folder at the moment of the call.  The newly created virtual folder will contain <b>real</b> folder and file objects corresponding to the on-disk children of the original on-disk folder. If the on-disk folder is modified (eg, if the folder attributes change, or if children are added to or removed from the on-disk tree): <i>during</i> this call, the virtual folder <b>may or may not</b> reflect the changes. If modified <i>after</i> this call, the virtual folder <b>will</b> not reflect the changes.
 func (x *Folder) MakeVirtual() {
-	x.inner.MakeVirtual()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeVirtual"))
 }
 
-// @method 		addChild: @abstract		Adds an object reference (either a file or folder) as a child of a virtual folder object. @discussion		This method only applies to virtual folders.  Real folders are considered leaf nodes and cannot have children. @param			child	The child to add to the folder
-//
-// AddChild calls the underlying AddChild.
-func (x *Folder) AddChild(child *raw.DRFSObject) {
-	x.inner.AddChild(child)
+// Adds an object reference (either a file or folder) as a child of a virtual folder object. This method only applies to virtual folders.  Real folders are considered leaf nodes and cannot have children.
+func (x *Folder) AddChild(child *FSObject) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addChild:"), objref.IDOf(child))
 }
 
-// @method 		removeChild: @abstract		Removes an object reference (either a file or folder) as a child of a virtual folder object. @discussion		This method only applies to virtual folders.  Real folders are considered leaf nodes and cannot have children. @param			child	The child to remove from the folder
-//
-// RemoveChild calls the underlying RemoveChild.
-func (x *Folder) RemoveChild(child *raw.DRFSObject) {
-	x.inner.RemoveChild(child)
+// Removes an object reference (either a file or folder) as a child of a virtual folder object. This method only applies to virtual folders.  Real folders are considered leaf nodes and cannot have children.
+func (x *Folder) RemoveChild(child *FSObject) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeChild:"), objref.IDOf(child))
 }
 
-// @method 		count @abstract		Returns the number of children of a virtual folder. @discussion		This method returns a shallow count of only those children that are immediately contained within the virtual folder. This method only applies to virtual folders.  Real folders are considered leaf nodes and should not be messaged with this call. @result			A count of the number of children.
-//
-// Count calls the underlying Count.
-func (x *Folder) Count() uint {
-	return x.inner.Count()
+// Returns the number of children of a virtual folder. This method returns a shallow count of only those children that are immediately contained within the virtual folder. This method only applies to virtual folders.  Real folders are considered leaf nodes and should not be messaged with this call.
+func (x *Folder) Count() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+	return _r
 }
 
-// @method 		children @abstract		Returns an array containing the children of a virtual folder. @discussion		The order of children in the array is arbitrary -- since the various filesystems being generated may have different sorting requirements, there is no one true way to sort the children.  The ordering will change only when children are added or removed.  You should sort the children according to the needs of your display, and in a consistent manner. This function only applies to virtual folders.  Real folders are considered leaf nodes and should not be passed into this call. @result			An NSArray of @link //apple_ref/occ/cl/DRFile DRFile @/link and DRFolder objects.
-//
-// Children calls the underlying Children.
-func (x *Folder) Children() *foundation.NSArray[objc.ID] {
-	return x.inner.Children()
+// Returns an array containing the children of a virtual folder. The order of children in the array is arbitrary -- since the various filesystems being generated may have different sorting requirements, there is no one true way to sort the children.  The ordering will change only when children are added or removed.  You should sort the children according to the needs of your display, and in a consistent manner. This function only applies to virtual folders.  Real folders are considered leaf nodes and should not be passed into this call.
+func (x *Folder) Children() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("children"))
+	return obj.Wrap(_r)
 }
-
-func (x *Folder) asFSObject() *raw.DRFSObject { return &x.inner.DRFSObject }
 
 // Folderable is the interface implemented by [Folder], for mocking and DI.
 type Folderable interface {
-	Unwrap() *raw.DRFolder
+	obj.Object
 	MakeVirtual()
-	AddChild(child *raw.DRFSObject)
-	RemoveChild(child *raw.DRFSObject)
-	Count() uint
-	Children() *foundation.NSArray[objc.ID]
+	AddChild(child *FSObject)
+	RemoveChild(child *FSObject)
+	Count() int
+	Children() obj.Object
 }
 
 var _ Folderable = (*Folder)(nil)

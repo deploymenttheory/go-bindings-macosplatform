@@ -5,150 +5,141 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A layer that normalizes a batch of inputs.
 //
-// BatchNormalizationLayer wraps [raw.MLCBatchNormalizationLayer] with a fluent Go API.
+// BatchNormalizationLayer is an idiomatic wrapper over the Objective-C class MLCBatchNormalizationLayer.
 type BatchNormalizationLayer struct {
-	inner *raw.MLCBatchNormalizationLayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCBatchNormalizationLayer].
-func (x *BatchNormalizationLayer) Unwrap() *raw.MLCBatchNormalizationLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BatchNormalizationLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// BatchNormalizationLayerFromID adopts an existing object pointer as a BatchNormalizationLayer (nil for 0).
+// BatchNormalizationLayerFromID adopts an existing Objective-C object as a BatchNormalizationLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func BatchNormalizationLayerFromID(id objc.ID) *BatchNormalizationLayer {
 	if id == 0 {
 		return nil
 	}
-	return &BatchNormalizationLayer{inner: raw.MLCBatchNormalizationLayerFromID(id)}
+	x := &BatchNormalizationLayer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBatchNormalizationLayer creates a new [BatchNormalizationLayer].
+// batchNormalizationLayerAdopt wraps an Objective-C object that this code just created as a
+// BatchNormalizationLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func batchNormalizationLayerAdopt(id objc.ID) *BatchNormalizationLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &BatchNormalizationLayer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BatchNormalizationLayer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BatchNormalizationLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BatchNormalizationLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBatchNormalizationLayer creates a new BatchNormalizationLayer.
 func NewBatchNormalizationLayer() *BatchNormalizationLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCBatchNormalizationLayer")), objc.RegisterName("new"))
-	return &BatchNormalizationLayer{inner: raw.MLCBatchNormalizationLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCBatchNormalizationLayer")), objc.RegisterName("new"))
+	return batchNormalizationLayerAdopt(_id)
 }
 
 // A string that helps identify this layer.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *BatchNormalizationLayer) WithLabel(label string) *BatchNormalizationLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 //
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
 func (x *BatchNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *BatchNormalizationLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// @property   featureChannelCount @abstract   The number of feature channels
-//
-// FeatureChannelCount calls the underlying FeatureChannelCount.
-func (x *BatchNormalizationLayer) FeatureChannelCount() uint {
-	return x.inner.FeatureChannelCount()
+// The number of feature channels
+func (x *BatchNormalizationLayer) FeatureChannelCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("featureChannelCount"))
+	return _r
 }
 
-// @property   mean @abstract   The mean tensor
-//
-// Mean calls the underlying Mean.
+// The mean tensor
 func (x *BatchNormalizationLayer) Mean() *Tensor {
-	_r := x.inner.Mean()
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mean"))
+	return TensorFromID(_r)
 }
 
-// @property   variance @abstract   The variance tensor
-//
-// Variance calls the underlying Variance.
+// The variance tensor
 func (x *BatchNormalizationLayer) Variance() *Tensor {
-	_r := x.inner.Variance()
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variance"))
+	return TensorFromID(_r)
 }
 
-// @property   beta @abstract   The beta tensor
-//
-// Beta calls the underlying Beta.
+// The beta tensor
 func (x *BatchNormalizationLayer) Beta() *Tensor {
-	_r := x.inner.Beta()
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beta"))
+	return TensorFromID(_r)
 }
 
-// @property   gamma @abstract   The gamma tensor
-//
-// Gamma calls the underlying Gamma.
+// The gamma tensor
 func (x *BatchNormalizationLayer) Gamma() *Tensor {
-	_r := x.inner.Gamma()
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gamma"))
+	return TensorFromID(_r)
 }
 
-// @property   betaParameter @abstract   The beta tensor parameter used for optimizer update
-//
-// BetaParameter calls the underlying BetaParameter.
+// The beta tensor parameter used for optimizer update
 func (x *BatchNormalizationLayer) BetaParameter() *TensorParameter {
-	_r := x.inner.BetaParameter()
-	if _r == nil {
-		return nil
-	}
-	return &TensorParameter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("betaParameter"))
+	return TensorParameterFromID(_r)
 }
 
-// @property   gammaParameter @abstract   The gamma tensor parameter used for optimizer update
-//
-// GammaParameter calls the underlying GammaParameter.
+// The gamma tensor parameter used for optimizer update
 func (x *BatchNormalizationLayer) GammaParameter() *TensorParameter {
-	_r := x.inner.GammaParameter()
-	if _r == nil {
-		return nil
-	}
-	return &TensorParameter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gammaParameter"))
+	return TensorParameterFromID(_r)
 }
 
-// @property   varianceEpsilon @abstract   A value used for numerical stability
-//
-// VarianceEpsilon calls the underlying VarianceEpsilon.
+// A value used for numerical stability
 func (x *BatchNormalizationLayer) VarianceEpsilon() float32 {
-	return x.inner.VarianceEpsilon()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("varianceEpsilon"))
+	return _r
 }
 
-// @property   momentum @abstract   The value used for the running mean and variance computation @discussion The default is 0.99f.
-//
-// Momentum calls the underlying Momentum.
+// The value used for the running mean and variance computation The default is 0.99f.
 func (x *BatchNormalizationLayer) Momentum() float32 {
-	return x.inner.Momentum()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("momentum"))
+	return _r
 }
-
-func (x *BatchNormalizationLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // BatchNormalizationLayerable is the interface implemented by [BatchNormalizationLayer], for mocking and DI.
 type BatchNormalizationLayerable interface {
-	Unwrap() *raw.MLCBatchNormalizationLayer
+	obj.Object
 	WithLabel(label string) *BatchNormalizationLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *BatchNormalizationLayer
-	FeatureChannelCount() uint
+	FeatureChannelCount() int
 	Mean() *Tensor
 	Variance() *Tensor
 	Beta() *Tensor

@@ -5,590 +5,581 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The NSFormCell class is used to implement text entry fields in a form. The left part of an NSFormCell object contains a title. The right part contains an editable text entry field.
 //
-// FormCell wraps [raw.NSFormCell] with a fluent Go API.
+// FormCell is an idiomatic wrapper over the Objective-C class NSFormCell.
 type FormCell struct {
-	inner *raw.NSFormCell
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFormCell].
-func (x *FormCell) Unwrap() *raw.NSFormCell { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FormCell) ID() objc.ID { return x.inner.Ptr() }
-
-// FormCellFromID adopts an existing object pointer as a FormCell (nil for 0).
+// FormCellFromID adopts an existing Objective-C object as a FormCell
+// (nil for 0), retaining it and registering a release finalizer.
 func FormCellFromID(id objc.ID) *FormCell {
 	if id == 0 {
 		return nil
 	}
-	return &FormCell{inner: raw.NSFormCellFromID(id)}
+	x := &FormCell{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// formCellAdopt wraps an Objective-C object that this code just created as a
+// FormCell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func formCellAdopt(id objc.ID) *FormCell {
+	if id == 0 {
+		return nil
+	}
+	x := &FormCell{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FormCell) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FormCell) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FormCell) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns an NSFormCell object initialized with the specified title string.
 //
-// NewFormCellTextCell creates a new [FormCell].
+// NewFormCellTextCell creates a new FormCell.
 func NewFormCellTextCell(string_ string) *FormCell {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFormCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
-	return &FormCell{inner: raw.NSFormCellFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFormCell")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
+	return formCellAdopt(_id)
 }
 
-// NewFormCellWithCoder creates a new [FormCell].
-func NewFormCellWithCoder(coder *foundation.NSCoder) *FormCell {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFormCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &FormCell{inner: raw.NSFormCellFromID(_id)}
+// NewFormCellWithCoder creates a new FormCell.
+func NewFormCellWithCoder(coder obj.Object) *FormCell {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFormCell")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return formCellAdopt(_id)
 }
 
 // The width of the title field.
 //
-// WithTitleWidth sets the titleWidth property and returns the receiver for chaining.
+// WithTitleWidth sets titleWidth and returns the receiver so calls can be chained.
 func (x *FormCell) WithTitleWidth(titleWidth float64) *FormCell {
-	x.inner.SetTitleWidth(titleWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleWidth:"), titleWidth)
 	return x
 }
 
 // The font used to draw cell’s title.
 //
-// WithTitleFont sets the titleFont property and returns the receiver for chaining.
+// WithTitleFont sets titleFont and returns the receiver so calls can be chained.
 func (x *FormCell) WithTitleFont(titleFont *Font) *FormCell {
-	x.inner.SetTitleFont(titleFont.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleFont:"), objref.IDOf(titleFont))
 	return x
 }
 
 // The cell’s plain text placeholder string.
 //
-// WithPlaceholderString sets the placeholderString property and returns the receiver for chaining.
+// WithPlaceholderString sets placeholderString and returns the receiver so calls can be chained.
 func (x *FormCell) WithPlaceholderString(placeholderString string) *FormCell {
-	x.inner.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
 	return x
 }
 
 // The cell’s attributed placeholder string.
 //
-// WithPlaceholderAttributedString sets the placeholderAttributedString property and returns the receiver for chaining.
-func (x *FormCell) WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *FormCell {
-	x.inner.SetPlaceholderAttributedString(placeholderAttributedString)
+// WithPlaceholderAttributedString sets placeholderAttributedString and returns the receiver so calls can be chained.
+func (x *FormCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *FormCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	return x
 }
 
 // The alignment of the title.
 //
-// WithTitleAlignment sets the titleAlignment property and returns the receiver for chaining.
-func (x *FormCell) WithTitleAlignment(titleAlignment NSTextAlignment) *FormCell {
-	x.inner.SetTitleAlignment(raw.NSTextAlignment(titleAlignment))
+// WithTitleAlignment sets titleAlignment and returns the receiver so calls can be chained.
+func (x *FormCell) WithTitleAlignment(titleAlignment TextAlignment) *FormCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleAlignment:"), titleAlignment)
 	return x
 }
 
 // The default writing direction used to render the form cell’s title.
 //
-// WithTitleBaseWritingDirection sets the titleBaseWritingDirection property and returns the receiver for chaining.
-func (x *FormCell) WithTitleBaseWritingDirection(titleBaseWritingDirection NSWritingDirection) *FormCell {
-	x.inner.SetTitleBaseWritingDirection(raw.NSWritingDirection(titleBaseWritingDirection))
+// WithTitleBaseWritingDirection sets titleBaseWritingDirection and returns the receiver so calls can be chained.
+func (x *FormCell) WithTitleBaseWritingDirection(titleBaseWritingDirection WritingDirection) *FormCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleBaseWritingDirection:"), titleBaseWritingDirection)
 	return x
 }
 
 // The preferred text field width.
 //
-// WithPreferredTextFieldWidth sets the preferredTextFieldWidth property and returns the receiver for chaining.
+// WithPreferredTextFieldWidth sets preferredTextFieldWidth and returns the receiver so calls can be chained.
 func (x *FormCell) WithPreferredTextFieldWidth(preferredTextFieldWidth float64) *FormCell {
-	x.inner.SetPreferredTextFieldWidth(preferredTextFieldWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredTextFieldWidth:"), preferredTextFieldWidth)
 	return x
 }
 
 // The title of the cell as an attributed string.
 //
-// WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
-func (x *FormCell) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *FormCell {
-	x.inner.SetAttributedTitle(attributedTitle)
+// WithAttributedTitle sets attributedTitle and returns the receiver so calls can be chained.
+func (x *FormCell) WithAttributedTitle(attributedTitle obj.Object) *FormCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	return x
 }
 
 // The view associated with the cell.
 //
-// WithControlView sets the controlView property and returns the receiver for chaining.
+// WithControlView sets controlView and returns the receiver so calls can be chained.
 func (x *FormCell) WithControlView(controlView ViewProvider) *FormCell {
-	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	return x
 }
 
 // The type of the cell.
 //
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *FormCell) WithType(type_ NSCellType) *FormCell {
-	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
+// WithType sets type_ and returns the receiver so calls can be chained.
+func (x *FormCell) WithType(type_ CellType) *FormCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
 // The cell’s current state.
 //
-// WithState sets the state property and returns the receiver for chaining.
+// WithState sets state and returns the receiver so calls can be chained.
 func (x *FormCell) WithState(state int) *FormCell {
-	x.inner.NSActionCell.NSCell.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
 // The object that receives the cell’s action messages.
 //
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *FormCell) WithTarget(target objc.ID) *FormCell {
-	x.inner.NSActionCell.NSCell.SetTarget(target)
-	return x
-}
-
-// The action performed by the cell.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *FormCell) WithAction(action objc.SEL) *FormCell {
-	x.inner.NSActionCell.NSCell.SetAction(action)
+// WithTarget sets target and returns the receiver so calls can be chained.
+func (x *FormCell) WithTarget(target obj.Object) *FormCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
 // A tag for identifying the cell.
 //
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag sets tag and returns the receiver so calls can be chained.
 func (x *FormCell) WithTag(tag int) *FormCell {
-	x.inner.NSActionCell.NSCell.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
 // The cell’s title text.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *FormCell) WithTitle(title string) *FormCell {
-	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // A Boolean value indicating whether the cell is currently enabled.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *FormCell) WithEnabled(enabled bool) *FormCell {
-	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 //
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous sets continuous and returns the receiver so calls can be chained.
 func (x *FormCell) WithContinuous(continuous bool) *FormCell {
-	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
 // A Boolean value indicating whether the cell is editable.
 //
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable sets editable and returns the receiver so calls can be chained.
 func (x *FormCell) WithEditable(editable bool) *FormCell {
-	x.inner.NSActionCell.NSCell.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
 // A Boolean value indicating whether the cell’s text can be selected.
 //
-// WithSelectable sets the selectable property and returns the receiver for chaining.
+// WithSelectable sets selectable and returns the receiver so calls can be chained.
 func (x *FormCell) WithSelectable(selectable bool) *FormCell {
-	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
 // A Boolean value indicating whether the cell draws itself outlined with a plain border.
 //
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered sets bordered and returns the receiver so calls can be chained.
 func (x *FormCell) WithBordered(bordered bool) *FormCell {
-	x.inner.NSActionCell.NSCell.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
 // A Boolean value indicating whether the cell has a bezeled border.
 //
-// WithBezeled sets the bezeled property and returns the receiver for chaining.
+// WithBezeled sets bezeled and returns the receiver so calls can be chained.
 func (x *FormCell) WithBezeled(bezeled bool) *FormCell {
-	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
 // A Boolean value indicating whether excess text scrolls past the cell’s bounds.
 //
-// WithScrollable sets the scrollable property and returns the receiver for chaining.
+// WithScrollable sets scrollable and returns the receiver so calls can be chained.
 func (x *FormCell) WithScrollable(scrollable bool) *FormCell {
-	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
 	return x
 }
 
 // A Boolean value indicating whether the cell has a highlighted appearance.
 //
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
 func (x *FormCell) WithHighlighted(highlighted bool) *FormCell {
-	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
 // The alignment of the cell’s text.
 //
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *FormCell) WithAlignment(alignment NSTextAlignment) *FormCell {
-	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment sets alignment and returns the receiver so calls can be chained.
+func (x *FormCell) WithAlignment(alignment TextAlignment) *FormCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
 // A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 //
-// WithWraps sets the wraps property and returns the receiver for chaining.
+// WithWraps sets wraps and returns the receiver so calls can be chained.
 func (x *FormCell) WithWraps(wraps bool) *FormCell {
-	x.inner.NSActionCell.NSCell.SetWraps(wraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
 // The font that the cell uses to display text.
 //
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont sets font and returns the receiver so calls can be chained.
 func (x *FormCell) WithFont(font *Font) *FormCell {
-	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
 // The cell’s formatter object.
 //
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *FormCell) WithFormatter(formatter *foundation.NSFormatter) *FormCell {
-	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
+// WithFormatter sets formatter and returns the receiver so calls can be chained.
+func (x *FormCell) WithFormatter(formatter obj.Object) *FormCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
 // The cell’s value as an Objective-C object.
 //
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *FormCell) WithObjectValue(objectValue objc.ID) *FormCell {
-	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
+// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+func (x *FormCell) WithObjectValue(objectValue obj.Object) *FormCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
 // The cell’s value as a string.
 //
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue sets stringValue and returns the receiver so calls can be chained.
 func (x *FormCell) WithStringValue(stringValue string) *FormCell {
-	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
 // The cell’s value as an integer.
 //
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue sets intValue and returns the receiver so calls can be chained.
 func (x *FormCell) WithIntValue(intValue int) *FormCell {
-	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
 // The cell’s value as a single-precision floating-point number.
 //
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
 func (x *FormCell) WithFloatValue(floatValue float32) *FormCell {
-	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
 // The cell’s value as a double-precision floating-point number.
 //
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
 func (x *FormCell) WithDoubleValue(doubleValue float64) *FormCell {
-	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
 // The cell’s value as an integer value.
 //
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
 func (x *FormCell) WithIntegerValue(integerValue int) *FormCell {
-	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
 // The image displayed by the cell, if any.
 //
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage sets image and returns the receiver so calls can be chained.
 func (x *FormCell) WithImage(image *Image) *FormCell {
-	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
 // The size of the cell.
 //
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *FormCell) WithControlSize(controlSize NSControlSize) *FormCell {
-	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+func (x *FormCell) WithControlSize(controlSize ControlSize) *FormCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
 // The object represented by the cell.
 //
-// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
-func (x *FormCell) WithRepresentedObject(representedObject objc.ID) *FormCell {
-	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+// WithRepresentedObject sets representedObject and returns the receiver so calls can be chained.
+func (x *FormCell) WithRepresentedObject(representedObject obj.Object) *FormCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
 // The cell’s contextual menu.
 //
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu sets menu and returns the receiver so calls can be chained.
 func (x *FormCell) WithMenu(menu *Menu) *FormCell {
-	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
 // A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 //
-// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+// WithSendsActionOnEndEditing sets sendsActionOnEndEditing and returns the receiver so calls can be chained.
 func (x *FormCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *FormCell {
-	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
 	return x
 }
 
 // The initial writing direction used to determine the actual writing direction for text.
 //
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *FormCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *FormCell {
-	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+func (x *FormCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *FormCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
 // The line break mode to use when drawing text in the cell.
 //
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *FormCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *FormCell {
-	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+func (x *FormCell) WithLineBreakMode(lineBreakMode LineBreakMode) *FormCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
 // A Boolean value indicating whether the cell assumes responsibility for undo operations.
 //
-// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+// WithAllowsUndo sets allowsUndo and returns the receiver so calls can be chained.
 func (x *FormCell) WithAllowsUndo(allowsUndo bool) *FormCell {
-	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
 	return x
 }
 
 // A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 //
-// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+// WithTruncatesLastVisibleLine sets truncatesLastVisibleLine and returns the receiver so calls can be chained.
 func (x *FormCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *FormCell {
-	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
 	return x
 }
 
 // The layout direction of the user interface.
 //
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *FormCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *FormCell {
-	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+func (x *FormCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *FormCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
 // A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 //
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
 func (x *FormCell) WithUsesSingleLineMode(usesSingleLineMode bool) *FormCell {
-	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
 // A Boolean value indicating whether the cell refuses the first responder status.
 //
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
 func (x *FormCell) WithRefusesFirstResponder(refusesFirstResponder bool) *FormCell {
-	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
 // A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 //
-// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+// WithShowsFirstResponder sets showsFirstResponder and returns the receiver so calls can be chained.
 func (x *FormCell) WithShowsFirstResponder(showsFirstResponder bool) *FormCell {
-	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
 	return x
 }
 
 // The type of focus ring to use with the associated view.
 //
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *FormCell) WithFocusRingType(focusRingType NSFocusRingType) *FormCell {
-	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+func (x *FormCell) WithFocusRingType(focusRingType FocusRingType) *FormCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
 // The cell’s value as an attributed string.
 //
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *FormCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *FormCell {
-	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+func (x *FormCell) WithAttributedStringValue(attributedStringValue obj.Object) *FormCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
 // A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 //
-// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+// WithAllowsEditingTextAttributes sets allowsEditingTextAttributes and returns the receiver so calls can be chained.
 func (x *FormCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *FormCell {
-	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
 // A Boolean value indicating whether the cell supports the importation of images into its text.
 //
-// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+// WithImportsGraphics sets importsGraphics and returns the receiver so calls can be chained.
 func (x *FormCell) WithImportsGraphics(importsGraphics bool) *FormCell {
-	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
 // A Boolean value indicating whether the cell supports three states instead of two.
 //
-// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+// WithAllowsMixedState sets allowsMixedState and returns the receiver so calls can be chained.
 func (x *FormCell) WithAllowsMixedState(allowsMixedState bool) *FormCell {
-	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
 // The cell’s background style.
 //
-// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *FormCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *FormCell {
-	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
+// WithBackgroundStyle sets backgroundStyle and returns the receiver so calls can be chained.
+func (x *FormCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *FormCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 	return x
 }
 
 // The cell’s control tint.
 //
-// WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *FormCell) WithControlTint(controlTint NSControlTint) *FormCell {
-	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
+// WithControlTint sets controlTint and returns the receiver so calls can be chained.
+func (x *FormCell) WithControlTint(controlTint ControlTint) *FormCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
 
-// Returns the width of the title field constrained to the specified size.
-//
-// TitleWidth calls the underlying TitleWidth.
-func (x *FormCell) TitleWidth(size corefoundation.CGSize) float64 {
-	return x.inner.TitleWidth(size)
-}
-
-// TitleWidth2 calls the underlying TitleWidth2.
 func (x *FormCell) TitleWidth2() float64 {
-	return x.inner.TitleWidth2()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("titleWidth"))
+	return _r
 }
 
-// SetTitleWidth calls the underlying SetTitleWidth.
 func (x *FormCell) SetTitleWidth(titleWidth float64) {
-	x.inner.SetTitleWidth(titleWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleWidth:"), titleWidth)
 }
 
-// TitleFont calls the underlying TitleFont.
 func (x *FormCell) TitleFont() *Font {
-	_r := x.inner.TitleFont()
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("titleFont"))
+	return FontFromID(_r)
 }
 
-// SetTitleFont calls the underlying SetTitleFont.
-func (x *FormCell) SetTitleFont(titleFont *raw.NSFont) {
-	x.inner.SetTitleFont(titleFont)
+func (x *FormCell) SetTitleFont(titleFont *Font) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleFont:"), objref.IDOf(titleFont))
 }
 
-// PlaceholderString calls the underlying PlaceholderString.
 func (x *FormCell) PlaceholderString() string {
-	_r := x.inner.PlaceholderString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPlaceholderString calls the underlying SetPlaceholderString.
 func (x *FormCell) SetPlaceholderString(placeholderString string) {
-	x.inner.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
 }
 
-// PlaceholderAttributedString calls the underlying PlaceholderAttributedString.
-func (x *FormCell) PlaceholderAttributedString() *foundation.NSAttributedString {
-	return x.inner.PlaceholderAttributedString()
+func (x *FormCell) PlaceholderAttributedString() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderAttributedString"))
+	return obj.Wrap(_r)
 }
 
-// SetPlaceholderAttributedString calls the underlying SetPlaceholderAttributedString.
-func (x *FormCell) SetPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) {
-	x.inner.SetPlaceholderAttributedString(placeholderAttributedString)
+func (x *FormCell) SetPlaceholderAttributedString(placeholderAttributedString obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 }
 
-// TitleAlignment calls the underlying TitleAlignment.
-func (x *FormCell) TitleAlignment() NSTextAlignment {
-	return NSTextAlignment(x.inner.TitleAlignment())
+func (x *FormCell) TitleAlignment() TextAlignment {
+	_r := objc.Send[TextAlignment](objref.IDOf(x), objc.RegisterName("titleAlignment"))
+	return _r
 }
 
-// SetTitleAlignment calls the underlying SetTitleAlignment.
-func (x *FormCell) SetTitleAlignment(titleAlignment NSTextAlignment) {
-	x.inner.SetTitleAlignment(raw.NSTextAlignment(titleAlignment))
+func (x *FormCell) SetTitleAlignment(titleAlignment TextAlignment) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleAlignment:"), titleAlignment)
 }
 
-// TitleBaseWritingDirection calls the underlying TitleBaseWritingDirection.
-func (x *FormCell) TitleBaseWritingDirection() NSWritingDirection {
-	return NSWritingDirection(x.inner.TitleBaseWritingDirection())
+func (x *FormCell) TitleBaseWritingDirection() WritingDirection {
+	_r := objc.Send[WritingDirection](objref.IDOf(x), objc.RegisterName("titleBaseWritingDirection"))
+	return _r
 }
 
-// SetTitleBaseWritingDirection calls the underlying SetTitleBaseWritingDirection.
-func (x *FormCell) SetTitleBaseWritingDirection(titleBaseWritingDirection NSWritingDirection) {
-	x.inner.SetTitleBaseWritingDirection(raw.NSWritingDirection(titleBaseWritingDirection))
+func (x *FormCell) SetTitleBaseWritingDirection(titleBaseWritingDirection WritingDirection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleBaseWritingDirection:"), titleBaseWritingDirection)
 }
 
-// PreferredTextFieldWidth calls the underlying PreferredTextFieldWidth.
 func (x *FormCell) PreferredTextFieldWidth() float64 {
-	return x.inner.PreferredTextFieldWidth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("preferredTextFieldWidth"))
+	return _r
 }
 
-// SetPreferredTextFieldWidth calls the underlying SetPreferredTextFieldWidth.
 func (x *FormCell) SetPreferredTextFieldWidth(preferredTextFieldWidth float64) {
-	x.inner.SetPreferredTextFieldWidth(preferredTextFieldWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredTextFieldWidth:"), preferredTextFieldWidth)
 }
 
-// AttributedTitle calls the underlying AttributedTitle.
-func (x *FormCell) AttributedTitle() *foundation.NSAttributedString {
-	return x.inner.AttributedTitle()
+func (x *FormCell) AttributedTitle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedTitle"))
+	return obj.Wrap(_r)
 }
 
-// SetAttributedTitle calls the underlying SetAttributedTitle.
-func (x *FormCell) SetAttributedTitle(attributedTitle *foundation.NSAttributedString) {
-	x.inner.SetAttributedTitle(attributedTitle)
+func (x *FormCell) SetAttributedTitle(attributedTitle obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 }
-
-func (x *FormCell) asActionCell() *raw.NSActionCell { return &x.inner.NSActionCell }
-
-func (x *FormCell) asCell() *raw.NSCell { return &x.inner.NSActionCell.NSCell }
 
 // FormCellable is the interface implemented by [FormCell], for mocking and DI.
 type FormCellable interface {
-	Unwrap() *raw.NSFormCell
+	obj.Object
 	WithTitleWidth(titleWidth float64) *FormCell
 	WithTitleFont(titleFont *Font) *FormCell
 	WithPlaceholderString(placeholderString string) *FormCell
-	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *FormCell
-	WithTitleAlignment(titleAlignment NSTextAlignment) *FormCell
-	WithTitleBaseWritingDirection(titleBaseWritingDirection NSWritingDirection) *FormCell
+	WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *FormCell
+	WithTitleAlignment(titleAlignment TextAlignment) *FormCell
+	WithTitleBaseWritingDirection(titleBaseWritingDirection WritingDirection) *FormCell
 	WithPreferredTextFieldWidth(preferredTextFieldWidth float64) *FormCell
-	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *FormCell
+	WithAttributedTitle(attributedTitle obj.Object) *FormCell
 	WithControlView(controlView ViewProvider) *FormCell
-	WithType(type_ NSCellType) *FormCell
+	WithType(type_ CellType) *FormCell
 	WithState(state int) *FormCell
-	WithTarget(target objc.ID) *FormCell
-	WithAction(action objc.SEL) *FormCell
+	WithTarget(target obj.Object) *FormCell
 	WithTag(tag int) *FormCell
 	WithTitle(title string) *FormCell
 	WithEnabled(enabled bool) *FormCell
@@ -599,53 +590,52 @@ type FormCellable interface {
 	WithBezeled(bezeled bool) *FormCell
 	WithScrollable(scrollable bool) *FormCell
 	WithHighlighted(highlighted bool) *FormCell
-	WithAlignment(alignment NSTextAlignment) *FormCell
+	WithAlignment(alignment TextAlignment) *FormCell
 	WithWraps(wraps bool) *FormCell
 	WithFont(font *Font) *FormCell
-	WithFormatter(formatter *foundation.NSFormatter) *FormCell
-	WithObjectValue(objectValue objc.ID) *FormCell
+	WithFormatter(formatter obj.Object) *FormCell
+	WithObjectValue(objectValue obj.Object) *FormCell
 	WithStringValue(stringValue string) *FormCell
 	WithIntValue(intValue int) *FormCell
 	WithFloatValue(floatValue float32) *FormCell
 	WithDoubleValue(doubleValue float64) *FormCell
 	WithIntegerValue(integerValue int) *FormCell
 	WithImage(image *Image) *FormCell
-	WithControlSize(controlSize NSControlSize) *FormCell
-	WithRepresentedObject(representedObject objc.ID) *FormCell
+	WithControlSize(controlSize ControlSize) *FormCell
+	WithRepresentedObject(representedObject obj.Object) *FormCell
 	WithMenu(menu *Menu) *FormCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *FormCell
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *FormCell
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *FormCell
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *FormCell
+	WithLineBreakMode(lineBreakMode LineBreakMode) *FormCell
 	WithAllowsUndo(allowsUndo bool) *FormCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *FormCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *FormCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *FormCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *FormCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *FormCell
 	WithShowsFirstResponder(showsFirstResponder bool) *FormCell
-	WithFocusRingType(focusRingType NSFocusRingType) *FormCell
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *FormCell
+	WithFocusRingType(focusRingType FocusRingType) *FormCell
+	WithAttributedStringValue(attributedStringValue obj.Object) *FormCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *FormCell
 	WithImportsGraphics(importsGraphics bool) *FormCell
 	WithAllowsMixedState(allowsMixedState bool) *FormCell
-	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *FormCell
-	WithControlTint(controlTint NSControlTint) *FormCell
-	TitleWidth(size corefoundation.CGSize) float64
+	WithBackgroundStyle(backgroundStyle BackgroundStyle) *FormCell
+	WithControlTint(controlTint ControlTint) *FormCell
 	TitleWidth2() float64
 	SetTitleWidth(titleWidth float64)
 	TitleFont() *Font
-	SetTitleFont(titleFont *raw.NSFont)
+	SetTitleFont(titleFont *Font)
 	PlaceholderString() string
 	SetPlaceholderString(placeholderString string)
-	PlaceholderAttributedString() *foundation.NSAttributedString
-	SetPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString)
-	TitleAlignment() NSTextAlignment
-	SetTitleAlignment(titleAlignment NSTextAlignment)
-	TitleBaseWritingDirection() NSWritingDirection
-	SetTitleBaseWritingDirection(titleBaseWritingDirection NSWritingDirection)
+	PlaceholderAttributedString() obj.Object
+	SetPlaceholderAttributedString(placeholderAttributedString obj.Object)
+	TitleAlignment() TextAlignment
+	SetTitleAlignment(titleAlignment TextAlignment)
+	TitleBaseWritingDirection() WritingDirection
+	SetTitleBaseWritingDirection(titleBaseWritingDirection WritingDirection)
 	PreferredTextFieldWidth() float64
 	SetPreferredTextFieldWidth(preferredTextFieldWidth float64)
-	AttributedTitle() *foundation.NSAttributedString
-	SetAttributedTitle(attributedTitle *foundation.NSAttributedString)
+	AttributedTitle() obj.Object
+	SetAttributedTitle(attributedTitle obj.Object)
 }
 
 var _ FormCellable = (*FormCell)(nil)

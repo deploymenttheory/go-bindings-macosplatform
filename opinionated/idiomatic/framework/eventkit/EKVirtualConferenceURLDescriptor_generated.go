@@ -5,64 +5,86 @@
 package eventkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Details about how users join a virtual conference, including a title and URL.
 //
-// VirtualConferenceURLDescriptor wraps [raw.EKVirtualConferenceURLDescriptor] with a fluent Go API.
+// VirtualConferenceURLDescriptor is an idiomatic wrapper over the Objective-C class EKVirtualConferenceURLDescriptor.
 type VirtualConferenceURLDescriptor struct {
-	inner *raw.EKVirtualConferenceURLDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.EKVirtualConferenceURLDescriptor].
-func (x *VirtualConferenceURLDescriptor) Unwrap() *raw.EKVirtualConferenceURLDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtualConferenceURLDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtualConferenceURLDescriptorFromID adopts an existing object pointer as a VirtualConferenceURLDescriptor (nil for 0).
+// VirtualConferenceURLDescriptorFromID adopts an existing Objective-C object as a VirtualConferenceURLDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtualConferenceURLDescriptorFromID(id objc.ID) *VirtualConferenceURLDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &VirtualConferenceURLDescriptor{inner: raw.EKVirtualConferenceURLDescriptorFromID(id)}
+	x := &VirtualConferenceURLDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// virtualConferenceURLDescriptorAdopt wraps an Objective-C object that this code just created as a
+// VirtualConferenceURLDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtualConferenceURLDescriptorAdopt(id objc.ID) *VirtualConferenceURLDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtualConferenceURLDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VirtualConferenceURLDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VirtualConferenceURLDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VirtualConferenceURLDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a URL descriptor with the given title and URL.
 //
-// NewVirtualConferenceURLDescriptorWithTitleURL creates a new [VirtualConferenceURLDescriptor].
+// NewVirtualConferenceURLDescriptorWithTitleURL creates a new VirtualConferenceURLDescriptor.
 func NewVirtualConferenceURLDescriptorWithTitleURL(title string, uRL string) *VirtualConferenceURLDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("EKVirtualConferenceURLDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:URL:"), foundation.NSStringStringWithUTF8String(title).Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr())
-	return &VirtualConferenceURLDescriptor{inner: raw.EKVirtualConferenceURLDescriptorFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("EKVirtualConferenceURLDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:URL:"), purego.NSString(title), rt.FileURL(uRL))
+	return virtualConferenceURLDescriptorAdopt(_id)
 }
 
-// Title calls the underlying Title.
 func (x *VirtualConferenceURLDescriptor) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// URL calls the underlying URL.
-func (x *VirtualConferenceURLDescriptor) URL() *foundation.NSURL {
-	return x.inner.URL()
+func (x *VirtualConferenceURLDescriptor) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
 // VirtualConferenceURLDescriptorable is the interface implemented by [VirtualConferenceURLDescriptor], for mocking and DI.
 type VirtualConferenceURLDescriptorable interface {
-	Unwrap() *raw.EKVirtualConferenceURLDescriptor
+	obj.Object
 	Title() string
-	URL() *foundation.NSURL
+	URL() obj.Object
 }
 
 var _ VirtualConferenceURLDescriptorable = (*VirtualConferenceURLDescriptor)(nil)

@@ -5,72 +5,80 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A list or range of sizes that augment an image constraint’s default size.
 //
-// ImageSizeConstraint wraps [raw.MLImageSizeConstraint] with a fluent Go API.
+// ImageSizeConstraint is an idiomatic wrapper over the Objective-C class MLImageSizeConstraint.
 type ImageSizeConstraint struct {
-	inner *raw.MLImageSizeConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLImageSizeConstraint].
-func (x *ImageSizeConstraint) Unwrap() *raw.MLImageSizeConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageSizeConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageSizeConstraintFromID adopts an existing object pointer as a ImageSizeConstraint (nil for 0).
+// ImageSizeConstraintFromID adopts an existing Objective-C object as a ImageSizeConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageSizeConstraintFromID(id objc.ID) *ImageSizeConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &ImageSizeConstraint{inner: raw.MLImageSizeConstraintFromID(id)}
+	x := &ImageSizeConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewImageSizeConstraint creates a new [ImageSizeConstraint].
+// imageSizeConstraintAdopt wraps an Objective-C object that this code just created as a
+// ImageSizeConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageSizeConstraintAdopt(id objc.ID) *ImageSizeConstraint {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageSizeConstraint{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ImageSizeConstraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageSizeConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageSizeConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageSizeConstraint creates a new ImageSizeConstraint.
 func NewImageSizeConstraint() *ImageSizeConstraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLImageSizeConstraint")), objc.RegisterName("new"))
-	return &ImageSizeConstraint{inner: raw.MLImageSizeConstraintFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLImageSizeConstraint")), objc.RegisterName("new"))
+	return imageSizeConstraintAdopt(_id)
 }
 
-// Type calls the underlying Type.
-func (x *ImageSizeConstraint) Type() MLImageSizeConstraintType {
-	return MLImageSizeConstraintType(x.inner.Type())
-}
-
-// PixelsWideRange calls the underlying PixelsWideRange.
-func (x *ImageSizeConstraint) PixelsWideRange() foundation.NSRange {
-	return x.inner.PixelsWideRange()
-}
-
-// PixelsHighRange calls the underlying PixelsHighRange.
-func (x *ImageSizeConstraint) PixelsHighRange() foundation.NSRange {
-	return x.inner.PixelsHighRange()
+func (x *ImageSizeConstraint) Type() ImageSizeConstraintType {
+	_r := objc.Send[ImageSizeConstraintType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
 // EnumeratedImageSizes returns the collection as a Go slice.
 func (x *ImageSizeConstraint) EnumeratedImageSizes() []*ImageSize {
-	arr := x.inner.EnumeratedImageSizes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ImageSize {
-		return &ImageSize{inner: raw.MLImageSizeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumeratedImageSizes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ImageSize { return ImageSizeFromID(_id) })
 }
 
 // ImageSizeConstraintable is the interface implemented by [ImageSizeConstraint], for mocking and DI.
 type ImageSizeConstraintable interface {
-	Unwrap() *raw.MLImageSizeConstraint
-	Type() MLImageSizeConstraintType
-	PixelsWideRange() foundation.NSRange
-	PixelsHighRange() foundation.NSRange
+	obj.Object
+	Type() ImageSizeConstraintType
 	EnumeratedImageSizes() []*ImageSize
 }
 

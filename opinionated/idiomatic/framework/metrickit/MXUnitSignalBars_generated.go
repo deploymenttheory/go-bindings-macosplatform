@@ -5,41 +5,68 @@
 package metrickit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A unit of measure for the number of bars of cellular network connectivity.
 //
-// UnitSignalBars wraps [raw.MXUnitSignalBars] with a fluent Go API.
+// UnitSignalBars is an idiomatic wrapper over the Objective-C class MXUnitSignalBars.
 type UnitSignalBars struct {
-	inner *raw.MXUnitSignalBars
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MXUnitSignalBars].
-func (x *UnitSignalBars) Unwrap() *raw.MXUnitSignalBars { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitSignalBars) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitSignalBarsFromID adopts an existing object pointer as a UnitSignalBars (nil for 0).
+// UnitSignalBarsFromID adopts an existing Objective-C object as a UnitSignalBars
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitSignalBarsFromID(id objc.ID) *UnitSignalBars {
 	if id == 0 {
 		return nil
 	}
-	return &UnitSignalBars{inner: raw.MXUnitSignalBarsFromID(id)}
+	x := &UnitSignalBars{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewUnitSignalBars creates a new [UnitSignalBars].
+// unitSignalBarsAdopt wraps an Objective-C object that this code just created as a
+// UnitSignalBars (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitSignalBarsAdopt(id objc.ID) *UnitSignalBars {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitSignalBars{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UnitSignalBars) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UnitSignalBars) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UnitSignalBars) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUnitSignalBars creates a new UnitSignalBars.
 func NewUnitSignalBars() *UnitSignalBars {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXUnitSignalBars")), objc.RegisterName("new"))
-	return &UnitSignalBars{inner: raw.MXUnitSignalBarsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXUnitSignalBars")), objc.RegisterName("new"))
+	return unitSignalBarsAdopt(_id)
 }
 
 // UnitSignalBarsable is the interface implemented by [UnitSignalBars], for mocking and DI.
 type UnitSignalBarsable interface {
-	Unwrap() *raw.MXUnitSignalBars
+	obj.Object
 }
 
 var _ UnitSignalBarsable = (*UnitSignalBars)(nil)

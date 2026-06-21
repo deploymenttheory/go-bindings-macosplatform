@@ -5,15 +5,12 @@
 package adservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/adservices"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
 // The framework attribution error domain.
-// AAAttributionErrorDomain returns the string constant AAAttributionErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func AAAttributionErrorDomain() objc.ID {
-	if _r := raw.AAAttributionErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// AAAttributionErrorDomain returns the string constant AAAttributionErrorDomain, for use as a dictionary key or argument.
+func AAAttributionErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("AAAttributionErrorDomain")))
 }

@@ -8,181 +8,181 @@ import (
 	"fmt"
 )
 
-type CNCinematicErrorCode int64
+type CinematicErrorCode int64
 
 const (
-	CNCinematicErrorCodeUnknown      CNCinematicErrorCode = 1
-	CNCinematicErrorCodeUnreadable   CNCinematicErrorCode = 2
-	CNCinematicErrorCodeIncomplete   CNCinematicErrorCode = 3
-	CNCinematicErrorCodeMalformed    CNCinematicErrorCode = 4
-	CNCinematicErrorCodeUnsupported  CNCinematicErrorCode = 5
-	CNCinematicErrorCodeIncompatible CNCinematicErrorCode = 6
-	CNCinematicErrorCodeCancelled    CNCinematicErrorCode = 7
+	CinematicErrorCodeUnknown      CinematicErrorCode = 1
+	CinematicErrorCodeUnreadable   CinematicErrorCode = 2
+	CinematicErrorCodeIncomplete   CinematicErrorCode = 3
+	CinematicErrorCodeMalformed    CinematicErrorCode = 4
+	CinematicErrorCodeUnsupported  CinematicErrorCode = 5
+	CinematicErrorCodeIncompatible CinematicErrorCode = 6
+	CinematicErrorCodeCancelled    CinematicErrorCode = 7
 )
 
-func (e CNCinematicErrorCode) String() string {
+func (e CinematicErrorCode) String() string {
 	switch e {
-	case CNCinematicErrorCodeUnknown:
-		return "CNCinematicErrorCodeUnknown"
-	case CNCinematicErrorCodeUnreadable:
-		return "CNCinematicErrorCodeUnreadable"
-	case CNCinematicErrorCodeIncomplete:
-		return "CNCinematicErrorCodeIncomplete"
-	case CNCinematicErrorCodeMalformed:
-		return "CNCinematicErrorCodeMalformed"
-	case CNCinematicErrorCodeUnsupported:
-		return "CNCinematicErrorCodeUnsupported"
-	case CNCinematicErrorCodeIncompatible:
-		return "CNCinematicErrorCodeIncompatible"
-	case CNCinematicErrorCodeCancelled:
-		return "CNCinematicErrorCodeCancelled"
+	case CinematicErrorCodeUnknown:
+		return "CinematicErrorCodeUnknown"
+	case CinematicErrorCodeUnreadable:
+		return "CinematicErrorCodeUnreadable"
+	case CinematicErrorCodeIncomplete:
+		return "CinematicErrorCodeIncomplete"
+	case CinematicErrorCodeMalformed:
+		return "CinematicErrorCodeMalformed"
+	case CinematicErrorCodeUnsupported:
+		return "CinematicErrorCodeUnsupported"
+	case CinematicErrorCodeIncompatible:
+		return "CinematicErrorCodeIncompatible"
+	case CinematicErrorCodeCancelled:
+		return "CinematicErrorCodeCancelled"
 	default:
-		return fmt.Sprintf("CNCinematicErrorCode(%d)", int64(e))
+		return fmt.Sprintf("CinematicErrorCode(%d)", int64(e))
 	}
 }
 
 // The type of object detected, such as face, torso, cat, dog and so on.
-type CNDetectionType int64
+type DetectionType int64
 
 const (
-	CNDetectionTypeUnknown    CNDetectionType = 0
-	CNDetectionTypeHumanFace  CNDetectionType = 1
-	CNDetectionTypeHumanHead  CNDetectionType = 2
-	CNDetectionTypeHumanTorso CNDetectionType = 3
-	CNDetectionTypeCatBody    CNDetectionType = 4
-	CNDetectionTypeDogBody    CNDetectionType = 5
-	CNDetectionTypeCatHead    CNDetectionType = 9
-	CNDetectionTypeDogHead    CNDetectionType = 10
-	CNDetectionTypeSportsBall CNDetectionType = 11
-	CNDetectionTypeAutoFocus  CNDetectionType = 100
-	CNDetectionTypeFixedFocus CNDetectionType = 101
-	CNDetectionTypeCustom     CNDetectionType = 102
+	DetectionTypeUnknown    DetectionType = 0
+	DetectionTypeHumanFace  DetectionType = 1
+	DetectionTypeHumanHead  DetectionType = 2
+	DetectionTypeHumanTorso DetectionType = 3
+	DetectionTypeCatBody    DetectionType = 4
+	DetectionTypeDogBody    DetectionType = 5
+	DetectionTypeCatHead    DetectionType = 9
+	DetectionTypeDogHead    DetectionType = 10
+	DetectionTypeSportsBall DetectionType = 11
+	DetectionTypeAutoFocus  DetectionType = 100
+	DetectionTypeFixedFocus DetectionType = 101
+	DetectionTypeCustom     DetectionType = 102
 )
 
-func (e CNDetectionType) String() string {
+func (e DetectionType) String() string {
 	switch e {
-	case CNDetectionTypeUnknown:
-		return "CNDetectionTypeUnknown"
-	case CNDetectionTypeHumanFace:
-		return "CNDetectionTypeHumanFace"
-	case CNDetectionTypeHumanHead:
-		return "CNDetectionTypeHumanHead"
-	case CNDetectionTypeHumanTorso:
-		return "CNDetectionTypeHumanTorso"
-	case CNDetectionTypeCatBody:
-		return "CNDetectionTypeCatBody"
-	case CNDetectionTypeDogBody:
-		return "CNDetectionTypeDogBody"
-	case CNDetectionTypeCatHead:
-		return "CNDetectionTypeCatHead"
-	case CNDetectionTypeDogHead:
-		return "CNDetectionTypeDogHead"
-	case CNDetectionTypeSportsBall:
-		return "CNDetectionTypeSportsBall"
-	case CNDetectionTypeAutoFocus:
-		return "CNDetectionTypeAutoFocus"
-	case CNDetectionTypeFixedFocus:
-		return "CNDetectionTypeFixedFocus"
-	case CNDetectionTypeCustom:
-		return "CNDetectionTypeCustom"
+	case DetectionTypeUnknown:
+		return "DetectionTypeUnknown"
+	case DetectionTypeHumanFace:
+		return "DetectionTypeHumanFace"
+	case DetectionTypeHumanHead:
+		return "DetectionTypeHumanHead"
+	case DetectionTypeHumanTorso:
+		return "DetectionTypeHumanTorso"
+	case DetectionTypeCatBody:
+		return "DetectionTypeCatBody"
+	case DetectionTypeDogBody:
+		return "DetectionTypeDogBody"
+	case DetectionTypeCatHead:
+		return "DetectionTypeCatHead"
+	case DetectionTypeDogHead:
+		return "DetectionTypeDogHead"
+	case DetectionTypeSportsBall:
+		return "DetectionTypeSportsBall"
+	case DetectionTypeAutoFocus:
+		return "DetectionTypeAutoFocus"
+	case DetectionTypeFixedFocus:
+		return "DetectionTypeFixedFocus"
+	case DetectionTypeCustom:
+		return "DetectionTypeCustom"
 	default:
-		return fmt.Sprintf("CNDetectionType(%d)", int64(e))
+		return fmt.Sprintf("DetectionType(%d)", int64(e))
 	}
 }
 
 // The rendering quality, such as thumbnail, preview, export and so on.
-type CNRenderingQuality int64
+type RenderingQuality int64
 
 const (
-	CNRenderingQualityThumbnail  CNRenderingQuality = 0
-	CNRenderingQualityPreview    CNRenderingQuality = 1
-	CNRenderingQualityExport     CNRenderingQuality = 2
-	CNRenderingQualityExportHigh CNRenderingQuality = 3
+	RenderingQualityThumbnail  RenderingQuality = 0
+	RenderingQualityPreview    RenderingQuality = 1
+	RenderingQualityExport     RenderingQuality = 2
+	RenderingQualityExportHigh RenderingQuality = 3
 )
 
-func (e CNRenderingQuality) String() string {
+func (e RenderingQuality) String() string {
 	switch e {
-	case CNRenderingQualityThumbnail:
-		return "CNRenderingQualityThumbnail"
-	case CNRenderingQualityPreview:
-		return "CNRenderingQualityPreview"
-	case CNRenderingQualityExport:
-		return "CNRenderingQualityExport"
-	case CNRenderingQualityExportHigh:
-		return "CNRenderingQualityExportHigh"
+	case RenderingQualityThumbnail:
+		return "RenderingQualityThumbnail"
+	case RenderingQualityPreview:
+		return "RenderingQualityPreview"
+	case RenderingQualityExport:
+		return "RenderingQualityExport"
+	case RenderingQualityExportHigh:
+		return "RenderingQualityExportHigh"
 	default:
-		return fmt.Sprintf("CNRenderingQuality(%d)", int64(e))
+		return fmt.Sprintf("RenderingQuality(%d)", int64(e))
 	}
 }
 
-type CNSpatialAudioContentType int64
+type SpatialAudioContentType int64
 
 const (
 	// Export settings to generate an asset with stereo audio and effect burned in
-	CNSpatialAudioContentTypeStereo CNSpatialAudioContentType = 0
+	SpatialAudioContentTypeStereo SpatialAudioContentType = 0
 	// Export settings to generate an asset with spatial audio and effect burned in
-	CNSpatialAudioContentTypeSpatial CNSpatialAudioContentType = 1
+	SpatialAudioContentTypeSpatial SpatialAudioContentType = 1
 )
 
-func (e CNSpatialAudioContentType) String() string {
+func (e SpatialAudioContentType) String() string {
 	switch e {
-	case CNSpatialAudioContentTypeStereo:
-		return "CNSpatialAudioContentTypeStereo"
-	case CNSpatialAudioContentTypeSpatial:
-		return "CNSpatialAudioContentTypeSpatial"
+	case SpatialAudioContentTypeStereo:
+		return "SpatialAudioContentTypeStereo"
+	case SpatialAudioContentTypeSpatial:
+		return "SpatialAudioContentTypeSpatial"
 	default:
-		return fmt.Sprintf("CNSpatialAudioContentType(%d)", int64(e))
+		return fmt.Sprintf("SpatialAudioContentType(%d)", int64(e))
 	}
 }
 
-type CNSpatialAudioRenderingStyle int64
+type SpatialAudioRenderingStyle int64
 
 const (
 	// Isolates the ambience and place it in a spatial stem. Isolates all voices and place them in a mono stem.
-	CNSpatialAudioRenderingStyleCinematic CNSpatialAudioRenderingStyle = 0
+	SpatialAudioRenderingStyleCinematic SpatialAudioRenderingStyle = 0
 	// Isolates the ambience and place it in a spatial stem. Isolates all voices, add a studio/proximity effect in the voice track and place them in a mono stem.
-	CNSpatialAudioRenderingStyleStudio CNSpatialAudioRenderingStyle = 1
+	SpatialAudioRenderingStyleStudio SpatialAudioRenderingStyle = 1
 	// Isolates the ambience and place it in a spatial stem. Isolates only voices from the camera field of view and place them in a mono stem.
-	CNSpatialAudioRenderingStyleInFrame CNSpatialAudioRenderingStyle = 2
+	SpatialAudioRenderingStyleInFrame SpatialAudioRenderingStyle = 2
 	// Isolates the ambience when foreground is cinematic Audio Mix and place it in a spatial stem. There is no voice stem.
-	CNSpatialAudioRenderingStyleCinematicBackgroundStem CNSpatialAudioRenderingStyle = 3
+	SpatialAudioRenderingStyleCinematicBackgroundStem SpatialAudioRenderingStyle = 3
 	// Isolates all voices and places them in a mono stem. There is no ambience stem.
-	CNSpatialAudioRenderingStyleCinematicForegroundStem CNSpatialAudioRenderingStyle = 4
+	SpatialAudioRenderingStyleCinematicForegroundStem SpatialAudioRenderingStyle = 4
 	// Isolates all voices, add a studio/proximity effect in the voice track and place them in a mono stem. There is no ambience stem.
-	CNSpatialAudioRenderingStyleStudioForegroundStem CNSpatialAudioRenderingStyle = 5
+	SpatialAudioRenderingStyleStudioForegroundStem SpatialAudioRenderingStyle = 5
 	// Isolates only voices from the camera field of view and place them in a mono stem. There is no ambience stem.
-	CNSpatialAudioRenderingStyleInFrameForegroundStem CNSpatialAudioRenderingStyle = 6
+	SpatialAudioRenderingStyleInFrameForegroundStem SpatialAudioRenderingStyle = 6
 	// This produces a spatial stem of the original recording that is unprocessed. This is the default rendering style.
-	CNSpatialAudioRenderingStyleStandard CNSpatialAudioRenderingStyle = 7
+	SpatialAudioRenderingStyleStandard SpatialAudioRenderingStyle = 7
 	// Isolates the ambience when foreground is studio Audio Mix and place it in a spatial stem. There is no voice stem.
-	CNSpatialAudioRenderingStyleStudioBackgroundStem CNSpatialAudioRenderingStyle = 8
+	SpatialAudioRenderingStyleStudioBackgroundStem SpatialAudioRenderingStyle = 8
 	// Isolates the ambience and foreground that is out of frame and place it in a spatial stem. There is no voice stem.
-	CNSpatialAudioRenderingStyleInFrameBackgroundStem CNSpatialAudioRenderingStyle = 9
+	SpatialAudioRenderingStyleInFrameBackgroundStem SpatialAudioRenderingStyle = 9
 )
 
-func (e CNSpatialAudioRenderingStyle) String() string {
+func (e SpatialAudioRenderingStyle) String() string {
 	switch e {
-	case CNSpatialAudioRenderingStyleCinematic:
-		return "CNSpatialAudioRenderingStyleCinematic"
-	case CNSpatialAudioRenderingStyleStudio:
-		return "CNSpatialAudioRenderingStyleStudio"
-	case CNSpatialAudioRenderingStyleInFrame:
-		return "CNSpatialAudioRenderingStyleInFrame"
-	case CNSpatialAudioRenderingStyleCinematicBackgroundStem:
-		return "CNSpatialAudioRenderingStyleCinematicBackgroundStem"
-	case CNSpatialAudioRenderingStyleCinematicForegroundStem:
-		return "CNSpatialAudioRenderingStyleCinematicForegroundStem"
-	case CNSpatialAudioRenderingStyleStudioForegroundStem:
-		return "CNSpatialAudioRenderingStyleStudioForegroundStem"
-	case CNSpatialAudioRenderingStyleInFrameForegroundStem:
-		return "CNSpatialAudioRenderingStyleInFrameForegroundStem"
-	case CNSpatialAudioRenderingStyleStandard:
-		return "CNSpatialAudioRenderingStyleStandard"
-	case CNSpatialAudioRenderingStyleStudioBackgroundStem:
-		return "CNSpatialAudioRenderingStyleStudioBackgroundStem"
-	case CNSpatialAudioRenderingStyleInFrameBackgroundStem:
-		return "CNSpatialAudioRenderingStyleInFrameBackgroundStem"
+	case SpatialAudioRenderingStyleCinematic:
+		return "SpatialAudioRenderingStyleCinematic"
+	case SpatialAudioRenderingStyleStudio:
+		return "SpatialAudioRenderingStyleStudio"
+	case SpatialAudioRenderingStyleInFrame:
+		return "SpatialAudioRenderingStyleInFrame"
+	case SpatialAudioRenderingStyleCinematicBackgroundStem:
+		return "SpatialAudioRenderingStyleCinematicBackgroundStem"
+	case SpatialAudioRenderingStyleCinematicForegroundStem:
+		return "SpatialAudioRenderingStyleCinematicForegroundStem"
+	case SpatialAudioRenderingStyleStudioForegroundStem:
+		return "SpatialAudioRenderingStyleStudioForegroundStem"
+	case SpatialAudioRenderingStyleInFrameForegroundStem:
+		return "SpatialAudioRenderingStyleInFrameForegroundStem"
+	case SpatialAudioRenderingStyleStandard:
+		return "SpatialAudioRenderingStyleStandard"
+	case SpatialAudioRenderingStyleStudioBackgroundStem:
+		return "SpatialAudioRenderingStyleStudioBackgroundStem"
+	case SpatialAudioRenderingStyleInFrameBackgroundStem:
+		return "SpatialAudioRenderingStyleInFrameBackgroundStem"
 	default:
-		return fmt.Sprintf("CNSpatialAudioRenderingStyle(%d)", int64(e))
+		return fmt.Sprintf("SpatialAudioRenderingStyle(%d)", int64(e))
 	}
 }

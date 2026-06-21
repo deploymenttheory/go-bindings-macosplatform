@@ -5,144 +5,129 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A panel that queries the user for information such as paper type and orientation.
 //
-// PageLayout wraps [raw.NSPageLayout] with a fluent Go API.
+// PageLayout is an idiomatic wrapper over the Objective-C class NSPageLayout.
 type PageLayout struct {
-	inner *raw.NSPageLayout
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPageLayout].
-func (x *PageLayout) Unwrap() *raw.NSPageLayout { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PageLayout) ID() objc.ID { return x.inner.Ptr() }
-
-// PageLayoutFromID adopts an existing object pointer as a PageLayout (nil for 0).
+// PageLayoutFromID adopts an existing Objective-C object as a PageLayout
+// (nil for 0), retaining it and registering a release finalizer.
 func PageLayoutFromID(id objc.ID) *PageLayout {
 	if id == 0 {
 		return nil
 	}
-	return &PageLayout{inner: raw.NSPageLayoutFromID(id)}
+	x := &PageLayout{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPageLayout creates a new [PageLayout].
+// pageLayoutAdopt wraps an Objective-C object that this code just created as a
+// PageLayout (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pageLayoutAdopt(id objc.ID) *PageLayout {
+	if id == 0 {
+		return nil
+	}
+	x := &PageLayout{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PageLayout) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PageLayout) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PageLayout) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPageLayout creates a new PageLayout.
 func NewPageLayout() *PageLayout {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPageLayout")), objc.RegisterName("new"))
-	return &PageLayout{inner: raw.NSPageLayoutFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPageLayout")), objc.RegisterName("new"))
+	return pageLayoutAdopt(_id)
 }
 
 // Adds the specified controller of an accessory view to be presented in the page setup panel.
-//
-// AddAccessoryController calls the underlying AddAccessoryController.
-func (x *PageLayout) AddAccessoryController(accessoryController *raw.NSViewController) {
-	x.inner.AddAccessoryController(accessoryController)
+func (x *PageLayout) AddAccessoryController(accessoryController *ViewController) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAccessoryController:"), objref.IDOf(accessoryController))
 }
 
 // Removes the specified controller of an accessory view.
-//
-// RemoveAccessoryController calls the underlying RemoveAccessoryController.
-func (x *PageLayout) RemoveAccessoryController(accessoryController *raw.NSViewController) {
-	x.inner.RemoveAccessoryController(accessoryController)
-}
-
-// BeginSheetUsingPrintInfoOnWindowCompletionHandler calls the underlying BeginSheetUsingPrintInfoOnWindowCompletionHandler.
-func (x *PageLayout) BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo *raw.NSPrintInfo, parentWindow *raw.NSWindow, handler func(NSPageLayoutResult)) {
-	x.inner.BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo, parentWindow, func(_a0 raw.NSPageLayoutResult) { handler(NSPageLayoutResult(_a0)) })
-}
-
-// Presents a page setup sheet for the specified print info object, document-modal relative to the specified window.
-//
-// BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo calls the underlying BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo.
-func (x *PageLayout) BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo(printInfo *raw.NSPrintInfo, docWindow *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo(printInfo, docWindow, delegate, didEndSelector, contextInfo)
+func (x *PageLayout) RemoveAccessoryController(accessoryController *ViewController) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAccessoryController:"), objref.IDOf(accessoryController))
 }
 
 // Displays the page layout panel and begins the modal loop using the specified print info object.
-//
-// RunModalWithPrintInfo calls the underlying RunModalWithPrintInfo.
-func (x *PageLayout) RunModalWithPrintInfo(printInfo *raw.NSPrintInfo) int {
-	return x.inner.RunModalWithPrintInfo(printInfo)
+func (x *PageLayout) RunModalWithPrintInfo(printInfo *PrintInfo) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalWithPrintInfo:"), objref.IDOf(printInfo))
+	return _r
 }
 
 // Displays the page layout panel and begins the modal loop using the shared print info object.
-//
-// RunModal calls the underlying RunModal.
 func (x *PageLayout) RunModal() int {
-	return x.inner.RunModal()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModal"))
+	return _r
 }
 
 // AccessoryControllers returns the collection as a Go slice.
 func (x *PageLayout) AccessoryControllers() []*ViewController {
-	arr := x.inner.AccessoryControllers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ViewController {
-		return &ViewController{inner: raw.NSViewControllerFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryControllers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ViewController { return ViewControllerFromID(_id) })
 }
 
-// PrintInfo calls the underlying PrintInfo.
 func (x *PageLayout) PrintInfo() *PrintInfo {
-	_r := x.inner.PrintInfo()
-	if _r == nil {
-		return nil
-	}
-	return &PrintInfo{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printInfo"))
+	return PrintInfoFromID(_r)
 }
 
 // Adds a view object to the page layout panel.
-//
-// SetAccessoryView calls the underlying SetAccessoryView.
-func (x *PageLayout) SetAccessoryView(accessoryView *raw.NSView) {
-	x.inner.SetAccessoryView(accessoryView)
+func (x *PageLayout) SetAccessoryView(accessoryView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 }
 
 // Returns the page layout panel’s accessory view.
-//
-// AccessoryView calls the underlying AccessoryView.
 func (x *PageLayout) AccessoryView() *View {
-	_r := x.inner.AccessoryView()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryView"))
+	return ViewFromID(_r)
 }
 
 // Sets the page layout’s values to those stored in the print info object used when the page layout panel is run.
-//
-// ReadPrintInfo calls the underlying ReadPrintInfo.
 func (x *PageLayout) ReadPrintInfo() {
-	x.inner.ReadPrintInfo()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readPrintInfo"))
 }
 
 // Writes the page layout’s values to the print info object used when the page layout panel is run.
-//
-// WritePrintInfo calls the underlying WritePrintInfo.
 func (x *PageLayout) WritePrintInfo() {
-	x.inner.WritePrintInfo()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writePrintInfo"))
 }
 
 // PageLayoutable is the interface implemented by [PageLayout], for mocking and DI.
 type PageLayoutable interface {
-	Unwrap() *raw.NSPageLayout
-	AddAccessoryController(accessoryController *raw.NSViewController)
-	RemoveAccessoryController(accessoryController *raw.NSViewController)
-	BeginSheetUsingPrintInfoOnWindowCompletionHandler(printInfo *raw.NSPrintInfo, parentWindow *raw.NSWindow, handler func(NSPageLayoutResult))
-	BeginSheetWithPrintInfoModalForWindowDelegateDidEndSelectorContextInfo(printInfo *raw.NSPrintInfo, docWindow *raw.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
-	RunModalWithPrintInfo(printInfo *raw.NSPrintInfo) int
+	obj.Object
+	AddAccessoryController(accessoryController *ViewController)
+	RemoveAccessoryController(accessoryController *ViewController)
+	RunModalWithPrintInfo(printInfo *PrintInfo) int
 	RunModal() int
 	AccessoryControllers() []*ViewController
 	PrintInfo() *PrintInfo
-	SetAccessoryView(accessoryView *raw.NSView)
+	SetAccessoryView(accessoryView *View)
 	AccessoryView() *View
 	ReadPrintInfo()
 	WritePrintInfo()

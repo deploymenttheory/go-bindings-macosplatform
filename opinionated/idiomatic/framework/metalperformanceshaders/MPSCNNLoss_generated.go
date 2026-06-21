@@ -5,227 +5,137 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A kernel that computes the loss and loss gradient between specified predictions and labels.
 //
-// CNNLoss wraps [raw.MPSCNNLoss] with a fluent Go API.
+// CNNLoss is an idiomatic wrapper over the Objective-C class MPSCNNLoss.
 type CNNLoss struct {
-	inner *raw.MPSCNNLoss
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNLoss].
-func (x *CNNLoss) Unwrap() *raw.MPSCNNLoss { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNLoss) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNLossFromID adopts an existing object pointer as a CNNLoss (nil for 0).
+// CNNLossFromID adopts an existing Objective-C object as a CNNLoss
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNLossFromID(id objc.ID) *CNNLoss {
 	if id == 0 {
 		return nil
 	}
-	return &CNNLoss{inner: raw.MPSCNNLossFromID(id)}
-}
-
-// @abstract   Initialize the loss filter with a loss descriptor. @param      device                   The device the filter will run on. @param      lossDescriptor           The loss descriptor. @return     A valid MPSCNNLoss object or nil, if failure.
-//
-// NewCNNLossWithDeviceLossDescriptor creates a new [CNNLoss].
-func NewCNNLossWithDeviceLossDescriptor(device metal.MTLDevice, lossDescriptor *mpsneuralnetwork.MPSCNNLossDescriptor) *CNNLoss {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNLoss")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:lossDescriptor:"), device, lossDescriptor.Ptr())
-	return &CNNLoss{inner: raw.MPSCNNLossFromID(_id)}
-}
-
-// @abstract <NSSecureCoding> support
-//
-// NewCNNLossWithCoderDevice creates a new [CNNLoss].
-func NewCNNLossWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *CNNLoss {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNLoss")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &CNNLoss{inner: raw.MPSCNNLossFromID(_id)}
-}
-
-// The position of the destination image’s clip rectangle origin, relative to the source image.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *CNNLoss) WithOffset(offset mpscore.MPSOffset) *CNNLoss {
-	x.inner.MPSCNNKernel.SetOffset(offset)
+	x := &CNNLoss{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *CNNLoss) WithClipRect(clipRect metal.MTLRegion) *CNNLoss {
-	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+// cNNLossAdopt wraps an Objective-C object that this code just created as a
+// CNNLoss (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNLossAdopt(id objc.ID) *CNNLoss {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNLoss{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
+}
+
+// Description returns the object's -description text.
+func (x *CNNLoss) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNLoss) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNLoss) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNLoss creates a new CNNLoss.
+func NewCNNLoss() *CNNLoss {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNLoss")), objc.RegisterName("new"))
+	return cNNLossAdopt(_id)
 }
 
 // The number of channels in the destination image to skip before writing output data.
 //
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNLoss) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNLoss {
-	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *CNNLoss) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNLoss {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+// The number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
 //
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNLoss) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNLoss {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset sets sourceFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *CNNLoss) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNLoss {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+// The maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 //
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *CNNLoss) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNLoss {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
-	return x
-}
-
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *CNNLoss) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNLoss {
-	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *CNNLoss) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNLoss {
-	x.inner.MPSCNNKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *CNNLoss) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNLoss {
-	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *CNNLoss) WithOptions(options mpscore.MPSKernelOptions) *CNNLoss {
-	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+// WithSourceFeatureChannelMaxCount sets sourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+func (x *CNNLoss) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNLoss {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *CNNLoss) WithLabel(label string) *CNNLoss {
-	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract   Encode a MPSCNNLoss filter and return a gradient in the destinationImage. @discussion This filter consumes the output of a previous layer, for example, the SoftMax layer containing predictions, and the MPSCNNLossLabels object containing the target data (labels) and optionally, weights for the labels. The destinationImage contains the computed gradient for the loss layer. It serves as a source gradient input image to the first gradient layer (in the backward direction), in our example, the SoftMax gradient layer. @param      commandBuffer       The MTLCommandBuffer on which to encode. @param      sourceImage         The source image from the previous filter in the graph (in the inference direction). @param      labels              The object containing the target data (labels) and optionally, weights for the labels. @param      destinationImage    The MPSImage into which to write the gradient result.
-//
-// EncodeToCommandBufferSourceImageLabelsDestinationImage calls the underlying EncodeToCommandBufferSourceImageLabelsDestinationImage.
-func (x *CNNLoss) EncodeToCommandBufferSourceImageLabelsDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, labels *mpsneuralnetwork.MPSCNNLossLabels, destinationImage *mpscore.MPSImage) {
-	x.inner.EncodeToCommandBufferSourceImageLabelsDestinationImage(commandBuffer, sourceImage, labels, destinationImage)
-}
-
-// @abstract   Encode a MPSCNNLoss filter and return a gradient. @discussion This -encode call is similar to the encodeToCommandBuffer:sourceImage:labels:destinationImage: above, except that it creates and returns the MPSImage with the loss gradient result. @param      commandBuffer       The MTLCommandBuffer on which to encode. @param      sourceImage         The source image from the previous filter in the graph (in the inference direction). @param      labels              The object containing the target data (labels) and optionally, weights for the labels. @return     The MPSImage containing the gradient result.
-//
-// EncodeToCommandBufferSourceImageLabels calls the underlying EncodeToCommandBufferSourceImageLabels.
-func (x *CNNLoss) EncodeToCommandBufferSourceImageLabels(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, labels *mpsneuralnetwork.MPSCNNLossLabels) *mpscore.MPSImage {
-	return x.inner.EncodeToCommandBufferSourceImageLabels(commandBuffer, sourceImage, labels)
-}
-
-// EncodeBatchToCommandBufferSourceImagesLabelsDestinationImages calls the underlying EncodeBatchToCommandBufferSourceImagesLabelsDestinationImages.
-func (x *CNNLoss) EncodeBatchToCommandBufferSourceImagesLabelsDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, labels unsafe.Pointer, destinationImage unsafe.Pointer) {
-	x.inner.EncodeBatchToCommandBufferSourceImagesLabelsDestinationImages(commandBuffer, sourceImage, labels, destinationImage)
-}
-
-// EncodeBatchToCommandBufferSourceImagesLabels calls the underlying EncodeBatchToCommandBufferSourceImagesLabels.
-func (x *CNNLoss) EncodeBatchToCommandBufferSourceImagesLabels(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, labels unsafe.Pointer) unsafe.Pointer {
-	return x.inner.EncodeBatchToCommandBufferSourceImagesLabels(commandBuffer, sourceImage, labels)
-}
-
-// See MPSCNNLossDescriptor for information about the following properties.
-//
-// LossType calls the underlying LossType.
-func (x *CNNLoss) LossType() mpsneuralnetwork.MPSCNNLossType {
-	return x.inner.LossType()
-}
-
-// ReductionType calls the underlying ReductionType.
-func (x *CNNLoss) ReductionType() mpsneuralnetwork.MPSCNNReductionType {
-	return x.inner.ReductionType()
-}
-
-// Weight calls the underlying Weight.
 func (x *CNNLoss) Weight() float32 {
-	return x.inner.Weight()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weight"))
+	return _r
 }
 
-// LabelSmoothing calls the underlying LabelSmoothing.
 func (x *CNNLoss) LabelSmoothing() float32 {
-	return x.inner.LabelSmoothing()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("labelSmoothing"))
+	return _r
 }
 
-// NumberOfClasses calls the underlying NumberOfClasses.
-func (x *CNNLoss) NumberOfClasses() uint {
-	return x.inner.NumberOfClasses()
+func (x *CNNLoss) NumberOfClasses() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfClasses"))
+	return _r
 }
 
-// Epsilon calls the underlying Epsilon.
 func (x *CNNLoss) Epsilon() float32 {
-	return x.inner.Epsilon()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+	return _r
 }
 
-// Delta calls the underlying Delta.
 func (x *CNNLoss) Delta() float32 {
-	return x.inner.Delta()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
+	return _r
 }
 
-// ReduceAcrossBatch calls the underlying ReduceAcrossBatch.
 func (x *CNNLoss) ReduceAcrossBatch() bool {
-	return x.inner.ReduceAcrossBatch()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reduceAcrossBatch"))
+	return _r
 }
-
-func (x *CNNLoss) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
-
-func (x *CNNLoss) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
 
 // CNNLossable is the interface implemented by [CNNLoss], for mocking and DI.
 type CNNLossable interface {
-	Unwrap() *raw.MPSCNNLoss
-	WithOffset(offset mpscore.MPSOffset) *CNNLoss
-	WithClipRect(clipRect metal.MTLRegion) *CNNLoss
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNLoss
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNLoss
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNLoss
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNLoss
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNLoss
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNLoss
-	WithOptions(options mpscore.MPSKernelOptions) *CNNLoss
+	obj.Object
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNLoss
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNLoss
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNLoss
 	WithLabel(label string) *CNNLoss
-	EncodeToCommandBufferSourceImageLabelsDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, labels *mpsneuralnetwork.MPSCNNLossLabels, destinationImage *mpscore.MPSImage)
-	EncodeToCommandBufferSourceImageLabels(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, labels *mpsneuralnetwork.MPSCNNLossLabels) *mpscore.MPSImage
-	EncodeBatchToCommandBufferSourceImagesLabelsDestinationImages(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, labels unsafe.Pointer, destinationImage unsafe.Pointer)
-	EncodeBatchToCommandBufferSourceImagesLabels(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, labels unsafe.Pointer) unsafe.Pointer
-	LossType() mpsneuralnetwork.MPSCNNLossType
-	ReductionType() mpsneuralnetwork.MPSCNNReductionType
 	Weight() float32
 	LabelSmoothing() float32
-	NumberOfClasses() uint
+	NumberOfClasses() int
 	Epsilon() float32
 	Delta() float32
 	ReduceAcrossBatch() bool

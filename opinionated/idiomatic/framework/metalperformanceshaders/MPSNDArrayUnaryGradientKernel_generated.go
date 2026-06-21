@@ -5,95 +5,75 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NDArrayUnaryGradientKernel wraps [raw.MPSNDArrayUnaryGradientKernel] with a fluent Go API.
+// NDArrayUnaryGradientKernel is an idiomatic wrapper over the Objective-C class MPSNDArrayUnaryGradientKernel.
 type NDArrayUnaryGradientKernel struct {
-	inner *raw.MPSNDArrayUnaryGradientKernel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayUnaryGradientKernel].
-func (x *NDArrayUnaryGradientKernel) Unwrap() *raw.MPSNDArrayUnaryGradientKernel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NDArrayUnaryGradientKernel) ID() objc.ID { return x.inner.Ptr() }
-
-// NDArrayUnaryGradientKernelFromID adopts an existing object pointer as a NDArrayUnaryGradientKernel (nil for 0).
+// NDArrayUnaryGradientKernelFromID adopts an existing Objective-C object as a NDArrayUnaryGradientKernel
+// (nil for 0), retaining it and registering a release finalizer.
 func NDArrayUnaryGradientKernelFromID(id objc.ID) *NDArrayUnaryGradientKernel {
 	if id == 0 {
 		return nil
 	}
-	return &NDArrayUnaryGradientKernel{inner: raw.MPSNDArrayUnaryGradientKernelFromID(id)}
-}
-
-// NewNDArrayUnaryGradientKernelWithDevice creates a new [NDArrayUnaryGradientKernel].
-func NewNDArrayUnaryGradientKernelWithDevice(device metal.MTLDevice) *NDArrayUnaryGradientKernel {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayUnaryGradientKernel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &NDArrayUnaryGradientKernel{inner: raw.MPSNDArrayUnaryGradientKernelFromID(_id)}
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *NDArrayUnaryGradientKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayUnaryGradientKernel {
-	x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	x := &NDArrayUnaryGradientKernel{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NDArrayUnaryGradientKernel) WithOptions(options mpscore.MPSKernelOptions) *NDArrayUnaryGradientKernel {
-	x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+// nDArrayUnaryGradientKernelAdopt wraps an Objective-C object that this code just created as a
+// NDArrayUnaryGradientKernel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nDArrayUnaryGradientKernelAdopt(id objc.ID) *NDArrayUnaryGradientKernel {
+	if id == 0 {
+		return nil
+	}
+	x := &NDArrayUnaryGradientKernel{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
+}
+
+// Description returns the object's -description text.
+func (x *NDArrayUnaryGradientKernel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NDArrayUnaryGradientKernel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NDArrayUnaryGradientKernel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNDArrayUnaryGradientKernel creates a new NDArrayUnaryGradientKernel.
+func NewNDArrayUnaryGradientKernel() *NDArrayUnaryGradientKernel {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayUnaryGradientKernel")), objc.RegisterName("new"))
+	return nDArrayUnaryGradientKernelAdopt(_id)
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *NDArrayUnaryGradientKernel) WithLabel(label string) *NDArrayUnaryGradientKernel {
-	x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-// EncodeToCommandBufferSourceArraySourceGradientGradientState calls the underlying EncodeToCommandBufferSourceArraySourceGradientGradientState.
-func (x *NDArrayUnaryGradientKernel) EncodeToCommandBufferSourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray {
-	return x.inner.EncodeToCommandBufferSourceArraySourceGradientGradientState(cmdBuf, sourceArray, gradient, state)
-}
-
-// EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray calls the underlying EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray.
-func (x *NDArrayUnaryGradientKernel) EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray) {
-	x.inner.EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray(cmdBuf, sourceArray, gradient, state, destination)
-}
-
-func (x *NDArrayUnaryGradientKernel) asNDArrayMultiaryGradientKernel() *mpsndarray.MPSNDArrayMultiaryGradientKernel {
-	return &x.inner.MPSNDArrayMultiaryGradientKernel
-}
-
-func (x *NDArrayUnaryGradientKernel) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase
-}
-
-func (x *NDArrayUnaryGradientKernel) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.MPSKernel
 }
 
 // NDArrayUnaryGradientKernelable is the interface implemented by [NDArrayUnaryGradientKernel], for mocking and DI.
 type NDArrayUnaryGradientKernelable interface {
-	Unwrap() *raw.MPSNDArrayUnaryGradientKernel
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayUnaryGradientKernel
-	WithOptions(options mpscore.MPSKernelOptions) *NDArrayUnaryGradientKernel
+	obj.Object
 	WithLabel(label string) *NDArrayUnaryGradientKernel
-	EncodeToCommandBufferSourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray
-	EncodeToCommandBufferSourceArraySourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray)
 }
 
 var _ NDArrayUnaryGradientKernelable = (*NDArrayUnaryGradientKernel)(nil)

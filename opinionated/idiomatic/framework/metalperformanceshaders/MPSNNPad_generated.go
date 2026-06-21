@@ -5,226 +5,121 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNPad wraps [raw.MPSNNPad] with a fluent Go API.
+// NNPad is an idiomatic wrapper over the Objective-C class MPSNNPad.
 type NNPad struct {
-	inner *raw.MPSNNPad
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNPad].
-func (x *NNPad) Unwrap() *raw.MPSNNPad { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNPad) ID() objc.ID { return x.inner.Ptr() }
-
-// NNPadFromID adopts an existing object pointer as a NNPad (nil for 0).
+// NNPadFromID adopts an existing Objective-C object as a NNPad
+// (nil for 0), retaining it and registering a release finalizer.
 func NNPadFromID(id objc.ID) *NNPad {
 	if id == 0 {
 		return nil
 	}
-	return &NNPad{inner: raw.MPSNNPadFromID(id)}
-}
-
-// NewNNPadWithDevice creates a new [NNPad].
-func NewNNPadWithDevice(device metal.MTLDevice) *NNPad {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNPad")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &NNPad{inner: raw.MPSNNPadFromID(_id)}
-}
-
-// NewNNPadWithDevicePaddingSizeBeforePaddingSizeAfter creates a new [NNPad].
-func NewNNPadWithDevicePaddingSizeBeforePaddingSizeAfter(device metal.MTLDevice, paddingSizeBefore mpscore.MPSImageCoordinate, paddingSizeAfter mpscore.MPSImageCoordinate) *NNPad {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNPad")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:paddingSizeBefore:paddingSizeAfter:"), device, paddingSizeBefore, paddingSizeAfter)
-	return &NNPad{inner: raw.MPSNNPadFromID(_id)}
-}
-
-// NewNNPadWithDevicePaddingSizeBeforePaddingSizeAfterFillValueArray creates a new [NNPad].
-func NewNNPadWithDevicePaddingSizeBeforePaddingSizeAfterFillValueArray(device metal.MTLDevice, paddingSizeBefore mpscore.MPSImageCoordinate, paddingSizeAfter mpscore.MPSImageCoordinate, fillValueArray *foundation.NSData) *NNPad {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNPad")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:paddingSizeBefore:paddingSizeAfter:fillValueArray:"), device, paddingSizeBefore, paddingSizeAfter, fillValueArray.Ptr())
-	return &NNPad{inner: raw.MPSNNPadFromID(_id)}
-}
-
-// NewNNPadWithCoderDevice creates a new [NNPad].
-func NewNNPadWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *NNPad {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNPad")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &NNPad{inner: raw.MPSNNPadFromID(_id)}
-}
-
-// @property   paddingSizeBefore @abstract   This property is used for automatically sizing the destination image for the function @ref destinationImageDescriptorForSourceImages:sourceStates:. Defines how much padding to assign on the left, top and smaller feature channel indices of the image. NOTE: the x and y coordinates of this property are only used through @ref destinationImageDescriptorForSourceImages:sourceStates:, since the clipRect and offset together define the padding sizes in those directions, but the 'channel' size defines the amount of padding to be applied in the feature channel dimension, before the feature channels starting from feature channel index @ref sourceFeatureChannelOffset. Default: { 0, 0, 0 }
-//
-// WithPaddingSizeBefore sets the paddingSizeBefore property and returns the receiver for chaining.
-func (x *NNPad) WithPaddingSizeBefore(paddingSizeBefore mpscore.MPSImageCoordinate) *NNPad {
-	x.inner.SetPaddingSizeBefore(paddingSizeBefore)
+	x := &NNPad{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   paddingSizeAfter @abstract   This property is used for automatically sizing the destination image for the function @ref destinationImageDescriptorForSourceImages:sourceStates:. Defines how much padding to assign on the right, bottom and higher feature channel indices of the image. NOTE: the x and y coordinates of this property are only used through @ref destinationImageDescriptorForSourceImages:sourceStates:, since the clipRect and offset together define the padding sizes in those directions, but the 'channel' size defines the amount of padding to be applied in the feature channel dimension after source feature channel index determined by the sum of @ref sourceFeatureChannelOffset and @ref sourceFeatureChannelMaxCount, naturally clipped to fit the feature channels in the provided source image. Default: { 0, 0, 0 }
-//
-// WithPaddingSizeAfter sets the paddingSizeAfter property and returns the receiver for chaining.
-func (x *NNPad) WithPaddingSizeAfter(paddingSizeAfter mpscore.MPSImageCoordinate) *NNPad {
-	x.inner.SetPaddingSizeAfter(paddingSizeAfter)
+// nNPadAdopt wraps an Objective-C object that this code just created as a
+// NNPad (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNPadAdopt(id objc.ID) *NNPad {
+	if id == 0 {
+		return nil
+	}
+	x := &NNPad{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @property   fillValue @abstract   Determines the constant value to apply when using @ref MPSImageEdgeModeConstant. Default: 0.0f. NOTE: this value is ignored if the filter is initialized with a per-channel fill value using @ref initWithDevice:paddingSizeBefore:paddingSizeAfter:fillValueArray:.
+// Description returns the object's -description text.
+func (x *NNPad) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNPad) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNPad) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNNPad creates a new NNPad.
+func NewNNPad() *NNPad {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNPad")), objc.RegisterName("new"))
+	return nNPadAdopt(_id)
+}
+
+// Determines the constant value to apply when using
 //
-// WithFillValue sets the fillValue property and returns the receiver for chaining.
+// WithFillValue sets fillValue and returns the receiver so calls can be chained.
 func (x *NNPad) WithFillValue(fillValue float32) *NNPad {
-	x.inner.SetFillValue(fillValue)
-	return x
-}
-
-// The position of the destination image’s clip rectangle origin, relative to the source image.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *NNPad) WithOffset(offset mpscore.MPSOffset) *NNPad {
-	x.inner.MPSCNNKernel.SetOffset(offset)
-	return x
-}
-
-// An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *NNPad) WithClipRect(clipRect metal.MTLRegion) *NNPad {
-	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillValue:"), fillValue)
 	return x
 }
 
 // The number of channels in the destination image to skip before writing output data.
 //
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNPad) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNPad {
-	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *NNPad) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNPad {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+// The number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
 //
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNPad) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNPad {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset sets sourceFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *NNPad) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNPad {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+// The maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 //
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *NNPad) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNPad {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
-	return x
-}
-
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *NNPad) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNPad {
-	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *NNPad) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNPad {
-	x.inner.MPSCNNKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *NNPad) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNPad {
-	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NNPad) WithOptions(options mpscore.MPSKernelOptions) *NNPad {
-	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+// WithSourceFeatureChannelMaxCount sets sourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+func (x *NNPad) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNPad {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *NNPad) WithLabel(label string) *NNPad {
-	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property   paddingSizeBefore @abstract   This property is used for automatically sizing the destination image for the function @ref destinationImageDescriptorForSourceImages:sourceStates:. Defines how much padding to assign on the left, top and smaller feature channel indices of the image. NOTE: the x and y coordinates of this property are only used through @ref destinationImageDescriptorForSourceImages:sourceStates:, since the clipRect and offset together define the padding sizes in those directions, but the 'channel' size defines the amount of padding to be applied in the feature channel dimension, before the feature channels starting from feature channel index @ref sourceFeatureChannelOffset. Default: { 0, 0, 0 }
-//
-// PaddingSizeBefore calls the underlying PaddingSizeBefore.
-func (x *NNPad) PaddingSizeBefore() mpscore.MPSImageCoordinate {
-	return x.inner.PaddingSizeBefore()
-}
-
-// SetPaddingSizeBefore calls the underlying SetPaddingSizeBefore.
-func (x *NNPad) SetPaddingSizeBefore(paddingSizeBefore mpscore.MPSImageCoordinate) {
-	x.inner.SetPaddingSizeBefore(paddingSizeBefore)
-}
-
-// @property   paddingSizeAfter @abstract   This property is used for automatically sizing the destination image for the function @ref destinationImageDescriptorForSourceImages:sourceStates:. Defines how much padding to assign on the right, bottom and higher feature channel indices of the image. NOTE: the x and y coordinates of this property are only used through @ref destinationImageDescriptorForSourceImages:sourceStates:, since the clipRect and offset together define the padding sizes in those directions, but the 'channel' size defines the amount of padding to be applied in the feature channel dimension after source feature channel index determined by the sum of @ref sourceFeatureChannelOffset and @ref sourceFeatureChannelMaxCount, naturally clipped to fit the feature channels in the provided source image. Default: { 0, 0, 0 }
-//
-// PaddingSizeAfter calls the underlying PaddingSizeAfter.
-func (x *NNPad) PaddingSizeAfter() mpscore.MPSImageCoordinate {
-	return x.inner.PaddingSizeAfter()
-}
-
-// SetPaddingSizeAfter calls the underlying SetPaddingSizeAfter.
-func (x *NNPad) SetPaddingSizeAfter(paddingSizeAfter mpscore.MPSImageCoordinate) {
-	x.inner.SetPaddingSizeAfter(paddingSizeAfter)
-}
-
-// @property   fillValue @abstract   Determines the constant value to apply when using @ref MPSImageEdgeModeConstant. Default: 0.0f. NOTE: this value is ignored if the filter is initialized with a per-channel fill value using @ref initWithDevice:paddingSizeBefore:paddingSizeAfter:fillValueArray:.
-//
-// FillValue calls the underlying FillValue.
+// Determines the constant value to apply when using
 func (x *NNPad) FillValue() float32 {
-	return x.inner.FillValue()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("fillValue"))
+	return _r
 }
 
-// SetFillValue calls the underlying SetFillValue.
 func (x *NNPad) SetFillValue(fillValue float32) {
-	x.inner.SetFillValue(fillValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillValue:"), fillValue)
 }
-
-func (x *NNPad) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
-
-func (x *NNPad) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
 
 // NNPadable is the interface implemented by [NNPad], for mocking and DI.
 type NNPadable interface {
-	Unwrap() *raw.MPSNNPad
-	WithPaddingSizeBefore(paddingSizeBefore mpscore.MPSImageCoordinate) *NNPad
-	WithPaddingSizeAfter(paddingSizeAfter mpscore.MPSImageCoordinate) *NNPad
+	obj.Object
 	WithFillValue(fillValue float32) *NNPad
-	WithOffset(offset mpscore.MPSOffset) *NNPad
-	WithClipRect(clipRect metal.MTLRegion) *NNPad
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNPad
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNPad
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNPad
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNPad
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNPad
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNPad
-	WithOptions(options mpscore.MPSKernelOptions) *NNPad
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNPad
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNPad
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNPad
 	WithLabel(label string) *NNPad
-	PaddingSizeBefore() mpscore.MPSImageCoordinate
-	SetPaddingSizeBefore(paddingSizeBefore mpscore.MPSImageCoordinate)
-	PaddingSizeAfter() mpscore.MPSImageCoordinate
-	SetPaddingSizeAfter(paddingSizeAfter mpscore.MPSImageCoordinate)
 	FillValue() float32
 	SetFillValue(fillValue float32)
 }

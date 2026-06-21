@@ -5,72 +5,90 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The error log associated with a player item.
 //
-// PlayerItemErrorLog wraps [raw.AVPlayerItemErrorLog] with a fluent Go API.
+// PlayerItemErrorLog is an idiomatic wrapper over the Objective-C class AVPlayerItemErrorLog.
 type PlayerItemErrorLog struct {
-	inner *raw.AVPlayerItemErrorLog
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPlayerItemErrorLog].
-func (x *PlayerItemErrorLog) Unwrap() *raw.AVPlayerItemErrorLog { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerItemErrorLog) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerItemErrorLogFromID adopts an existing object pointer as a PlayerItemErrorLog (nil for 0).
+// PlayerItemErrorLogFromID adopts an existing Objective-C object as a PlayerItemErrorLog
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerItemErrorLogFromID(id objc.ID) *PlayerItemErrorLog {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerItemErrorLog{inner: raw.AVPlayerItemErrorLogFromID(id)}
+	x := &PlayerItemErrorLog{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPlayerItemErrorLog creates a new [PlayerItemErrorLog].
+// playerItemErrorLogAdopt wraps an Objective-C object that this code just created as a
+// PlayerItemErrorLog (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerItemErrorLogAdopt(id objc.ID) *PlayerItemErrorLog {
+	if id == 0 {
+		return nil
+	}
+	x := &PlayerItemErrorLog{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PlayerItemErrorLog) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlayerItemErrorLog) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlayerItemErrorLog) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPlayerItemErrorLog creates a new PlayerItemErrorLog.
 func NewPlayerItemErrorLog() *PlayerItemErrorLog {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemErrorLog")), objc.RegisterName("new"))
-	return &PlayerItemErrorLog{inner: raw.AVPlayerItemErrorLogFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemErrorLog")), objc.RegisterName("new"))
+	return playerItemErrorLogAdopt(_id)
 }
 
 // Returns a serialized representation of the error log in the Extended Log File Format.
-//
-// ExtendedLogData calls the underlying ExtendedLogData.
-func (x *PlayerItemErrorLog) ExtendedLogData() *foundation.NSData {
-	return x.inner.ExtendedLogData()
+func (x *PlayerItemErrorLog) ExtendedLogData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedLogData"))
+	return obj.Wrap(_r)
 }
 
 // Returns the NSStringEncoding for extendedLogData, see above. A string suitable for console output is obtainable by: [[NSString alloc] initWithData:[myLog extendedLogData] encoding:[myLog extendedLogDataStringEncoding]]
-//
-// ExtendedLogDataStringEncoding calls the underlying ExtendedLogDataStringEncoding.
-func (x *PlayerItemErrorLog) ExtendedLogDataStringEncoding() uint {
-	return x.inner.ExtendedLogDataStringEncoding()
+func (x *PlayerItemErrorLog) ExtendedLogDataStringEncoding() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("extendedLogDataStringEncoding"))
+	return _r
 }
 
 // An ordered collection of AVPlayerItemErrorLogEvent instances. An ordered collection of AVPlayerItemErrorLogEvent instances that represent the chronological sequence of events contained in the error log. This property is not observable.
 //
 // Events returns the collection as a Go slice.
 func (x *PlayerItemErrorLog) Events() []*PlayerItemErrorLogEvent {
-	arr := x.inner.Events()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerItemErrorLogEvent {
-		return &PlayerItemErrorLogEvent{inner: raw.AVPlayerItemErrorLogEventFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("events"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItemErrorLogEvent { return PlayerItemErrorLogEventFromID(_id) })
 }
 
 // PlayerItemErrorLogable is the interface implemented by [PlayerItemErrorLog], for mocking and DI.
 type PlayerItemErrorLogable interface {
-	Unwrap() *raw.AVPlayerItemErrorLog
-	ExtendedLogData() *foundation.NSData
-	ExtendedLogDataStringEncoding() uint
+	obj.Object
+	ExtendedLogData() obj.Object
+	ExtendedLogDataStringEncoding() int
 	Events() []*PlayerItemErrorLogEvent
 }
 

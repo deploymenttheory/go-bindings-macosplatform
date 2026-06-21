@@ -5,126 +5,131 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The platform configuration for booting macOS on Apple silicon.
 //
-// MacPlatformConfiguration wraps [raw.VZMacPlatformConfiguration] with a fluent Go API.
+// MacPlatformConfiguration is an idiomatic wrapper over the Objective-C class VZMacPlatformConfiguration.
 type MacPlatformConfiguration struct {
-	inner *raw.VZMacPlatformConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZMacPlatformConfiguration].
-func (x *MacPlatformConfiguration) Unwrap() *raw.VZMacPlatformConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MacPlatformConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// MacPlatformConfigurationFromID adopts an existing object pointer as a MacPlatformConfiguration (nil for 0).
+// MacPlatformConfigurationFromID adopts an existing Objective-C object as a MacPlatformConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func MacPlatformConfigurationFromID(id objc.ID) *MacPlatformConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &MacPlatformConfiguration{inner: raw.VZMacPlatformConfigurationFromID(id)}
+	x := &MacPlatformConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMacPlatformConfiguration creates a new [MacPlatformConfiguration].
+// macPlatformConfigurationAdopt wraps an Objective-C object that this code just created as a
+// MacPlatformConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func macPlatformConfigurationAdopt(id objc.ID) *MacPlatformConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &MacPlatformConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MacPlatformConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MacPlatformConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MacPlatformConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMacPlatformConfiguration creates a new MacPlatformConfiguration.
 func NewMacPlatformConfiguration() *MacPlatformConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacPlatformConfiguration")), objc.RegisterName("new"))
-	return &MacPlatformConfiguration{inner: raw.VZMacPlatformConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZMacPlatformConfiguration")), objc.RegisterName("new"))
+	return macPlatformConfigurationAdopt(_id)
 }
 
 // The Mac hardware model.
 //
-// WithHardwareModel sets the hardwareModel property and returns the receiver for chaining.
+// WithHardwareModel sets hardwareModel and returns the receiver so calls can be chained.
 func (x *MacPlatformConfiguration) WithHardwareModel(hardwareModel *MacHardwareModel) *MacPlatformConfiguration {
-	x.inner.SetHardwareModel(hardwareModel.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHardwareModel:"), objref.IDOf(hardwareModel))
 	return x
 }
 
 // The Mac machine identifier.
 //
-// WithMachineIdentifier sets the machineIdentifier property and returns the receiver for chaining.
+// WithMachineIdentifier sets machineIdentifier and returns the receiver so calls can be chained.
 func (x *MacPlatformConfiguration) WithMachineIdentifier(machineIdentifier *MacMachineIdentifier) *MacPlatformConfiguration {
-	x.inner.SetMachineIdentifier(machineIdentifier.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMachineIdentifier:"), objref.IDOf(machineIdentifier))
 	return x
 }
 
 // The Mac auxiliary storage.
 //
-// WithAuxiliaryStorage sets the auxiliaryStorage property and returns the receiver for chaining.
+// WithAuxiliaryStorage sets auxiliaryStorage and returns the receiver so calls can be chained.
 func (x *MacPlatformConfiguration) WithAuxiliaryStorage(auxiliaryStorage *MacAuxiliaryStorage) *MacPlatformConfiguration {
-	x.inner.SetAuxiliaryStorage(auxiliaryStorage.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuxiliaryStorage:"), objref.IDOf(auxiliaryStorage))
 	return x
 }
 
-// @abstract The Mac hardware model.
-//
-// HardwareModel calls the underlying HardwareModel.
+// The Mac hardware model.
 func (x *MacPlatformConfiguration) HardwareModel() *MacHardwareModel {
-	_r := x.inner.HardwareModel()
-	if _r == nil {
-		return nil
-	}
-	return &MacHardwareModel{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hardwareModel"))
+	return MacHardwareModelFromID(_r)
 }
 
-// SetHardwareModel calls the underlying SetHardwareModel.
-func (x *MacPlatformConfiguration) SetHardwareModel(hardwareModel *raw.VZMacHardwareModel) {
-	x.inner.SetHardwareModel(hardwareModel)
+func (x *MacPlatformConfiguration) SetHardwareModel(hardwareModel *MacHardwareModel) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHardwareModel:"), objref.IDOf(hardwareModel))
 }
 
-// @abstract The unique Mac machine identifier. @discussion Running two virtual machines concurrently with the same identifier results in undefined behavior in the guest operating system.
-//
-// MachineIdentifier calls the underlying MachineIdentifier.
+// The unique Mac machine identifier. Running two virtual machines concurrently with the same identifier results in undefined behavior in the guest operating system.
 func (x *MacPlatformConfiguration) MachineIdentifier() *MacMachineIdentifier {
-	_r := x.inner.MachineIdentifier()
-	if _r == nil {
-		return nil
-	}
-	return &MacMachineIdentifier{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("machineIdentifier"))
+	return MacMachineIdentifierFromID(_r)
 }
 
-// SetMachineIdentifier calls the underlying SetMachineIdentifier.
-func (x *MacPlatformConfiguration) SetMachineIdentifier(machineIdentifier *raw.VZMacMachineIdentifier) {
-	x.inner.SetMachineIdentifier(machineIdentifier)
+func (x *MacPlatformConfiguration) SetMachineIdentifier(machineIdentifier *MacMachineIdentifier) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMachineIdentifier:"), objref.IDOf(machineIdentifier))
 }
 
-// @abstract The Mac auxiliary storage. @discussion When creating a virtual machine from scratch, the hardware model of the `auxiliaryStorage` must match the hardware model of the `hardwareModel` property.
-//
-// AuxiliaryStorage calls the underlying AuxiliaryStorage.
+// The Mac auxiliary storage. When creating a virtual machine from scratch, the hardware model of the `auxiliaryStorage` must match the hardware model of the `hardwareModel` property.
 func (x *MacPlatformConfiguration) AuxiliaryStorage() *MacAuxiliaryStorage {
-	_r := x.inner.AuxiliaryStorage()
-	if _r == nil {
-		return nil
-	}
-	return &MacAuxiliaryStorage{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("auxiliaryStorage"))
+	return MacAuxiliaryStorageFromID(_r)
 }
 
-// SetAuxiliaryStorage calls the underlying SetAuxiliaryStorage.
-func (x *MacPlatformConfiguration) SetAuxiliaryStorage(auxiliaryStorage *raw.VZMacAuxiliaryStorage) {
-	x.inner.SetAuxiliaryStorage(auxiliaryStorage)
-}
-
-func (x *MacPlatformConfiguration) asPlatformConfiguration() *raw.VZPlatformConfiguration {
-	return &x.inner.VZPlatformConfiguration
+func (x *MacPlatformConfiguration) SetAuxiliaryStorage(auxiliaryStorage *MacAuxiliaryStorage) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuxiliaryStorage:"), objref.IDOf(auxiliaryStorage))
 }
 
 // MacPlatformConfigurationable is the interface implemented by [MacPlatformConfiguration], for mocking and DI.
 type MacPlatformConfigurationable interface {
-	Unwrap() *raw.VZMacPlatformConfiguration
+	obj.Object
 	WithHardwareModel(hardwareModel *MacHardwareModel) *MacPlatformConfiguration
 	WithMachineIdentifier(machineIdentifier *MacMachineIdentifier) *MacPlatformConfiguration
 	WithAuxiliaryStorage(auxiliaryStorage *MacAuxiliaryStorage) *MacPlatformConfiguration
 	HardwareModel() *MacHardwareModel
-	SetHardwareModel(hardwareModel *raw.VZMacHardwareModel)
+	SetHardwareModel(hardwareModel *MacHardwareModel)
 	MachineIdentifier() *MacMachineIdentifier
-	SetMachineIdentifier(machineIdentifier *raw.VZMacMachineIdentifier)
+	SetMachineIdentifier(machineIdentifier *MacMachineIdentifier)
 	AuxiliaryStorage() *MacAuxiliaryStorage
-	SetAuxiliaryStorage(auxiliaryStorage *raw.VZMacAuxiliaryStorage)
+	SetAuxiliaryStorage(auxiliaryStorage *MacAuxiliaryStorage)
 }
 
 var _ MacPlatformConfigurationable = (*MacPlatformConfiguration)(nil)

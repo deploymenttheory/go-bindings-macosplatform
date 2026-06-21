@@ -5,133 +5,108 @@
 package quartzcore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that allows multiple animations to be grouped and run concurrently.
 //
-// AnimationGroup wraps [raw.CAAnimationGroup] with a fluent Go API.
+// AnimationGroup is an idiomatic wrapper over the Objective-C class CAAnimationGroup.
 type AnimationGroup struct {
-	inner *raw.CAAnimationGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CAAnimationGroup].
-func (x *AnimationGroup) Unwrap() *raw.CAAnimationGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AnimationGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// AnimationGroupFromID adopts an existing object pointer as a AnimationGroup (nil for 0).
+// AnimationGroupFromID adopts an existing Objective-C object as a AnimationGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func AnimationGroupFromID(id objc.ID) *AnimationGroup {
 	if id == 0 {
 		return nil
 	}
-	return &AnimationGroup{inner: raw.CAAnimationGroupFromID(id)}
+	x := &AnimationGroup{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAnimationGroup creates a new [AnimationGroup].
+// animationGroupAdopt wraps an Objective-C object that this code just created as a
+// AnimationGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func animationGroupAdopt(id objc.ID) *AnimationGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &AnimationGroup{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AnimationGroup) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AnimationGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AnimationGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAnimationGroup creates a new AnimationGroup.
 func NewAnimationGroup() *AnimationGroup {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CAAnimationGroup")), objc.RegisterName("new"))
-	return &AnimationGroup{inner: raw.CAAnimationGroupFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CAAnimationGroup")), objc.RegisterName("new"))
+	return animationGroupAdopt(_id)
 }
 
 // An array of CAAnimation objects to be evaluated in the time space of the receiver.
 //
-// WithAnimations sets the collection, converting the Go slice to an NSArray.
+// WithAnimations sets the collection and returns the receiver so calls can be chained.
 func (x *AnimationGroup) WithAnimations(items ...AnimationProvider) *AnimationGroup {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetAnimations(foundation.NSArrayFromID[*raw.CAAnimation](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asAnimation().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CAAnimation](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetAnimations(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v AnimationProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimations:"), _arr)
 	return x
 }
 
 // An optional timing function defining the pacing of the animation.
 //
-// WithTimingFunction sets the timingFunction property and returns the receiver for chaining.
+// WithTimingFunction sets timingFunction and returns the receiver so calls can be chained.
 func (x *AnimationGroup) WithTimingFunction(timingFunction *MediaTimingFunction) *AnimationGroup {
-	x.inner.CAAnimation.SetTimingFunction(timingFunction.Unwrap())
-	return x
-}
-
-// Specifies the receiver’s delegate object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *AnimationGroup) WithDelegate(delegate raw.CAAnimationDelegate) *AnimationGroup {
-	x.inner.CAAnimation.SetDelegate(delegate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
 	return x
 }
 
 // Determines if the animation is removed from the target layer’s animations upon completion.
 //
-// WithRemovedOnCompletion sets the removedOnCompletion property and returns the receiver for chaining.
+// WithRemovedOnCompletion sets removedOnCompletion and returns the receiver so calls can be chained.
 func (x *AnimationGroup) WithRemovedOnCompletion(removedOnCompletion bool) *AnimationGroup {
-	x.inner.CAAnimation.SetRemovedOnCompletion(removedOnCompletion)
-	return x
-}
-
-// WithPreferredFrameRateRange sets the preferredFrameRateRange property and returns the receiver for chaining.
-func (x *AnimationGroup) WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *AnimationGroup {
-	x.inner.CAAnimation.SetPreferredFrameRateRange(preferredFrameRateRange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
 	return x
 }
 
 // Animations returns the collection as a Go slice.
 func (x *AnimationGroup) Animations() []*Animation {
-	arr := x.inner.Animations()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Animation {
-		return &Animation{inner: raw.CAAnimationFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animations"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Animation { return AnimationFromID(_id) })
 }
 
-// SetAnimations calls the underlying SetAnimations.
-func (x *AnimationGroup) SetAnimations(animations ...AnimationProvider) {
-	_ptrs := make([]objc.ID, len(animations))
-	for _i, _v := range animations {
-		_ptrs[_i] = _v.asAnimation().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.CAAnimation]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.CAAnimation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.CAAnimation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetAnimations(_arg0)
+func (x *AnimationGroup) SetAnimations(animations []*Animation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimations:"), purego.SliceToNSArray(animations, func(_v *Animation) objc.ID { return objref.IDOf(_v) }))
 }
-
-func (x *AnimationGroup) asAnimation() *raw.CAAnimation { return &x.inner.CAAnimation }
 
 // AnimationGroupable is the interface implemented by [AnimationGroup], for mocking and DI.
 type AnimationGroupable interface {
-	Unwrap() *raw.CAAnimationGroup
+	obj.Object
 	WithAnimations(items ...AnimationProvider) *AnimationGroup
 	WithTimingFunction(timingFunction *MediaTimingFunction) *AnimationGroup
-	WithDelegate(delegate raw.CAAnimationDelegate) *AnimationGroup
 	WithRemovedOnCompletion(removedOnCompletion bool) *AnimationGroup
-	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *AnimationGroup
 	Animations() []*Animation
-	SetAnimations(animations ...AnimationProvider)
+	SetAnimations(animations []*Animation)
 }
 
 var _ AnimationGroupable = (*AnimationGroup)(nil)

@@ -6,53 +6,78 @@ package fileprovider
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fileprovider"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // A manager object that you use to communicate with the file provider from either your app or your File Provider extension.
 //
-// FileProviderManager wraps [raw.NSFileProviderManager] with a fluent Go API.
+// FileProviderManager is an idiomatic wrapper over the Objective-C class NSFileProviderManager.
 type FileProviderManager struct {
-	inner *raw.NSFileProviderManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFileProviderManager].
-func (x *FileProviderManager) Unwrap() *raw.NSFileProviderManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileProviderManager) ID() objc.ID { return x.inner.Ptr() }
-
-// FileProviderManagerFromID adopts an existing object pointer as a FileProviderManager (nil for 0).
+// FileProviderManagerFromID adopts an existing Objective-C object as a FileProviderManager
+// (nil for 0), retaining it and registering a release finalizer.
 func FileProviderManagerFromID(id objc.ID) *FileProviderManager {
 	if id == 0 {
 		return nil
 	}
-	return &FileProviderManager{inner: raw.NSFileProviderManagerFromID(id)}
+	x := &FileProviderManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFileProviderManager creates a new [FileProviderManager].
+// fileProviderManagerAdopt wraps an Objective-C object that this code just created as a
+// FileProviderManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileProviderManagerAdopt(id objc.ID) *FileProviderManager {
+	if id == 0 {
+		return nil
+	}
+	x := &FileProviderManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FileProviderManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileProviderManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileProviderManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFileProviderManager creates a new FileProviderManager.
 func NewFileProviderManager() *FileProviderManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileProviderManager")), objc.RegisterName("new"))
-	return &FileProviderManager{inner: raw.NSFileProviderManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSFileProviderManager")), objc.RegisterName("new"))
+	return fileProviderManagerAdopt(_id)
 }
 
 // Alerts the system to changes in the specified folder’s content.
 //
 // SignalEnumeratorForContainerItemIdentifier blocks until the operation completes or ctx is cancelled.
-func (x *FileProviderManager) SignalEnumeratorForContainerItemIdentifier(ctx context.Context, containerItemIdentifier *foundation.NSString) error {
+func (x *FileProviderManager) SignalEnumeratorForContainerItemIdentifier(ctx context.Context, containerItemIdentifier obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.SignalEnumeratorForContainerItemIdentifierCompletionHandler(containerItemIdentifier, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signalEnumeratorForContainerItemIdentifier:completionHandler:"), objref.IDOf(containerItemIdentifier), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -64,25 +89,24 @@ func (x *FileProviderManager) SignalEnumeratorForContainerItemIdentifier(ctx con
 // Returns the user-visible URL for an item.
 //
 // GetUserVisibleURLForItemIdentifier blocks until the operation completes or ctx is cancelled.
-func (x *FileProviderManager) GetUserVisibleURLForItemIdentifier(ctx context.Context, itemIdentifier *foundation.NSString) (*foundation.NSURL, error) {
+func (x *FileProviderManager) GetUserVisibleURLForItemIdentifier(ctx context.Context, itemIdentifier obj.Object) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSURL
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetUserVisibleURLForItemIdentifierCompletionHandler(itemIdentifier, func(_p0 *foundation.NSURL, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getUserVisibleURLForItemIdentifier:completionHandler:"), objref.IDOf(itemIdentifier), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSURL
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -90,15 +114,14 @@ func (x *FileProviderManager) GetUserVisibleURLForItemIdentifier(ctx context.Con
 // Registers the URL session task responsible for the specified item.
 //
 // RegisterURLSessionTaskForItemWithIdentifier blocks until the operation completes or ctx is cancelled.
-func (x *FileProviderManager) RegisterURLSessionTaskForItemWithIdentifier(ctx context.Context, task *foundation.NSURLSessionTask, identifier *foundation.NSString) error {
+func (x *FileProviderManager) RegisterURLSessionTaskForItemWithIdentifier(ctx context.Context, task obj.Object, identifier obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.RegisterURLSessionTaskForItemWithIdentifierCompletionHandler(task, identifier, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerURLSessionTask:forItemWithIdentifier:completionHandler:"), objref.IDOf(task), objref.IDOf(identifier), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -108,65 +131,32 @@ func (x *FileProviderManager) RegisterURLSessionTaskForItemWithIdentifier(ctx co
 }
 
 // Returns the URL of a directory that the File Provider extension can use to temporarily store files before passing them to the system.
-//
-// TemporaryDirectoryURLWithError calls the underlying TemporaryDirectoryURLWithError.
-func (x *FileProviderManager) TemporaryDirectoryURLWithError() (*foundation.NSURL, error) {
-	return x.inner.TemporaryDirectoryURLWithError()
-}
-
-// Indicates a resolved error.
-//
-// SignalErrorResolved blocks until the operation completes or ctx is cancelled.
-func (x *FileProviderManager) SignalErrorResolved(ctx context.Context, error_ unsafe.Pointer) error {
-	_ch := make(chan error, 1)
-	x.inner.SignalErrorResolvedCompletionHandler(error_, func(_p0 unsafe.Pointer) {
-		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
-		_ch <- _err
-	})
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
+func (x *FileProviderManager) TemporaryDirectoryURLWithError() (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("temporaryDirectoryURLWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
+	return obj.Wrap(_r), nil
 }
 
 // Returns a progress object that tracks either the uploading or downloading of items from the File Provider extension’s remote storage.
-//
-// GlobalProgressForKind calls the underlying GlobalProgressForKind.
-func (x *FileProviderManager) GlobalProgressForKind(kind *foundation.NSString) *foundation.NSProgress {
-	return x.inner.GlobalProgressForKind(kind)
-}
-
-// Returns an enumerator for all the items the system currently stores on disk.
-//
-// EnumeratorForMaterializedItems calls the underlying EnumeratorForMaterializedItems.
-func (x *FileProviderManager) EnumeratorForMaterializedItems() raw.NSFileProviderEnumerator {
-	return x.inner.EnumeratorForMaterializedItems()
-}
-
-// Returns an enumerator for the set of pending items.
-//
-// EnumeratorForPendingItems calls the underlying EnumeratorForPendingItems.
-func (x *FileProviderManager) EnumeratorForPendingItems() raw.NSFileProviderPendingSetEnumerator {
-	return x.inner.EnumeratorForPendingItems()
+func (x *FileProviderManager) GlobalProgressForKind(kind obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("globalProgressForKind:"), objref.IDOf(kind))
+	return obj.Wrap(_r)
 }
 
 // Tells the system to reimport the item and its content recursively.
 //
 // ReimportItemsBelowItemWithIdentifier blocks until the operation completes or ctx is cancelled.
-func (x *FileProviderManager) ReimportItemsBelowItemWithIdentifier(ctx context.Context, itemIdentifier *foundation.NSString) error {
+func (x *FileProviderManager) ReimportItemsBelowItemWithIdentifier(ctx context.Context, itemIdentifier obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.ReimportItemsBelowItemWithIdentifierCompletionHandler(itemIdentifier, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reimportItemsBelowItemWithIdentifier:completionHandler:"), objref.IDOf(itemIdentifier), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -178,15 +168,14 @@ func (x *FileProviderManager) ReimportItemsBelowItemWithIdentifier(ctx context.C
 // Asks the system to remove an item from its cache.
 //
 // EvictItemWithIdentifier blocks until the operation completes or ctx is cancelled.
-func (x *FileProviderManager) EvictItemWithIdentifier(ctx context.Context, itemIdentifier *foundation.NSString) error {
+func (x *FileProviderManager) EvictItemWithIdentifier(ctx context.Context, itemIdentifier obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.EvictItemWithIdentifierCompletionHandler(itemIdentifier, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evictItemWithIdentifier:completionHandler:"), objref.IDOf(itemIdentifier), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -198,15 +187,14 @@ func (x *FileProviderManager) EvictItemWithIdentifier(ctx context.Context, itemI
 // Requests a notification after the system completes all the specified changes.
 //
 // WaitForChangesOnItemsBelowItemWithIdentifier blocks until the operation completes or ctx is cancelled.
-func (x *FileProviderManager) WaitForChangesOnItemsBelowItemWithIdentifier(ctx context.Context, itemIdentifier *foundation.NSString) error {
+func (x *FileProviderManager) WaitForChangesOnItemsBelowItemWithIdentifier(ctx context.Context, itemIdentifier obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.WaitForChangesOnItemsBelowItemWithIdentifierCompletionHandler(itemIdentifier, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("waitForChangesOnItemsBelowItemWithIdentifier:completionHandler:"), objref.IDOf(itemIdentifier), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -220,13 +208,12 @@ func (x *FileProviderManager) WaitForChangesOnItemsBelowItemWithIdentifier(ctx c
 // WaitForStabilization blocks until the operation completes or ctx is cancelled.
 func (x *FileProviderManager) WaitForStabilization(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.WaitForStabilizationWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("waitForStabilizationWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -238,15 +225,14 @@ func (x *FileProviderManager) WaitForStabilization(ctx context.Context) error {
 // Disconnects the domain from the extension.
 //
 // DisconnectWithReasonOptions blocks until the operation completes or ctx is cancelled.
-func (x *FileProviderManager) DisconnectWithReasonOptions(ctx context.Context, localizedReason string, options NSFileProviderManagerDisconnectionOptions) error {
+func (x *FileProviderManager) DisconnectWithReasonOptions(ctx context.Context, localizedReason string, options FileProviderManagerDisconnectionOptions) error {
 	_ch := make(chan error, 1)
-	x.inner.DisconnectWithReasonOptionsCompletionHandler(foundation.NSStringStringWithUTF8String(localizedReason), raw.NSFileProviderManagerDisconnectionOptions(options), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnectWithReason:options:completionHandler:"), purego.NSString(localizedReason), options, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -260,33 +246,12 @@ func (x *FileProviderManager) DisconnectWithReasonOptions(ctx context.Context, l
 // Reconnect blocks until the operation completes or ctx is cancelled.
 func (x *FileProviderManager) Reconnect(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.ReconnectWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
-	}
-}
-
-// Request that the system schedule a download for an item. The completion handler is called when the system acknowledges the download request, or with an error indicating why it didn't (e.g NSFileProviderErrorNoSuchItem.) The system will then call -fetchContentsForItemWithIdentifier at the earliest convenient time. Set rangeToMaterialize to NSMakeRange(offset, nbytes) to request a partial download. The system will then invoke -fetchPartialContentsForItemWithIdentifier instead of fetchContentsForItemWithIdentifier. For a full download, set rangeToMaterialize to NSMakeRange(NSNotFound, 0). -[NSFileProviderManager evictItemWithIdentifier:completionHandler:] must be called on a partially materialized file before requesting an extent to be downloaded from a later version of the file. This method cannot be used to download directories recursively. When invoked on a dataless directory, it will trigger an enumeration of the directory, causing a materialization of the directory one level down only. All the children of the directory will remain dataless after the enumeration.
-//
-// RequestDownloadForItemWithIdentifierRequestedRange blocks until the operation completes or ctx is cancelled.
-func (x *FileProviderManager) RequestDownloadForItemWithIdentifierRequestedRange(ctx context.Context, itemIdentifier *foundation.NSString, rangeToMaterialize foundation.NSRange) error {
-	_ch := make(chan error, 1)
-	x.inner.RequestDownloadForItemWithIdentifierRequestedRangeCompletionHandler(itemIdentifier, rangeToMaterialize, func(_p0 unsafe.Pointer) {
-		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
-		_ch <- _err
-	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reconnectWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -296,76 +261,46 @@ func (x *FileProviderManager) RequestDownloadForItemWithIdentifierRequestedRange
 }
 
 // Returns a URL for a directory for storing state information for the domain.
-//
-// StateDirectoryURLWithError calls the underlying StateDirectoryURLWithError.
-func (x *FileProviderManager) StateDirectoryURLWithError() (*foundation.NSURL, error) {
-	return x.inner.StateDirectoryURLWithError()
-}
-
-// Requests a diagnostics collection for use when working directly with Apple to improve sync behavior.
-//
-// RequestDiagnosticCollectionForItemWithIdentifierErrorReason blocks until the operation completes or ctx is cancelled.
-func (x *FileProviderManager) RequestDiagnosticCollectionForItemWithIdentifierErrorReason(ctx context.Context, itemIdentifier *foundation.NSString, errorReason unsafe.Pointer) error {
-	_ch := make(chan error, 1)
-	x.inner.RequestDiagnosticCollectionForItemWithIdentifierErrorReasonCompletionHandler(itemIdentifier, errorReason, func(_p0 unsafe.Pointer) {
-		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
-		_ch <- _err
-	})
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
+func (x *FileProviderManager) StateDirectoryURLWithError() (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateDirectoryURLWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-}
-
-// Retrieve the service with the specified named for the specified item.
-//
-// GetServiceWithNameItemIdentifierCompletionHandler calls the underlying GetServiceWithNameItemIdentifierCompletionHandler.
-func (x *FileProviderManager) GetServiceWithNameItemIdentifierCompletionHandler(serviceName *foundation.NSString, itemIdentifier *foundation.NSString, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	x.inner.GetServiceWithNameItemIdentifierCompletionHandler(serviceName, itemIdentifier, completionHandler)
+	return obj.Wrap(_r), nil
 }
 
 // Lists all the operations that are ready for scheduling.
-//
-// ListAvailableTestingOperationsWithError calls the underlying ListAvailableTestingOperationsWithError.
-func (x *FileProviderManager) ListAvailableTestingOperationsWithError() (*foundation.NSArray[raw.NSFileProviderTestingOperation], error) {
-	return x.inner.ListAvailableTestingOperationsWithError()
+func (x *FileProviderManager) ListAvailableTestingOperationsWithError() ([]obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("listAvailableTestingOperationsWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
 // Asks the system to schedule and execute the specified operations.
-//
-// RunTestingOperationsError calls the underlying RunTestingOperationsError.
-func (x *FileProviderManager) RunTestingOperationsError(operations ...purego.IDer) (*foundation.NSDictionary[raw.NSFileProviderTestingOperation, objc.ID], error) {
-	_ptrs := make([]objc.ID, len(operations))
-	for _i, _v := range operations {
-		_ptrs[_i] = _v.ID()
+func (x *FileProviderManager) RunTestingOperationsError(operations []obj.Object) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runTestingOperations:error:"), purego.SliceToNSArray(operations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	var _arg0 *foundation.NSArray[raw.NSFileProviderTestingOperation]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.NSFileProviderTestingOperation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.NSFileProviderTestingOperation](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return x.inner.RunTestingOperationsError(_arg0)
+	return obj.Wrap(_r), nil
 }
 
 // Asks the domain to sync the specified known folders.
 //
 // ClaimKnownFoldersLocalizedReason blocks until the operation completes or ctx is cancelled.
-func (x *FileProviderManager) ClaimKnownFoldersLocalizedReason(ctx context.Context, knownFolders *raw.NSFileProviderKnownFolderLocations, localizedReason string) error {
+func (x *FileProviderManager) ClaimKnownFoldersLocalizedReason(ctx context.Context, knownFolders *FileProviderKnownFolderLocations, localizedReason string) error {
 	_ch := make(chan error, 1)
-	x.inner.ClaimKnownFoldersLocalizedReasonCompletionHandler(knownFolders, foundation.NSStringStringWithUTF8String(localizedReason), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("claimKnownFolders:localizedReason:completionHandler:"), objref.IDOf(knownFolders), purego.NSString(localizedReason), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -377,15 +312,14 @@ func (x *FileProviderManager) ClaimKnownFoldersLocalizedReason(ctx context.Conte
 // Asks the system to stop replicating the specified known folders in the domain.
 //
 // ReleaseKnownFoldersLocalizedReason blocks until the operation completes or ctx is cancelled.
-func (x *FileProviderManager) ReleaseKnownFoldersLocalizedReason(ctx context.Context, knownFolders NSFileProviderKnownFolders, localizedReason string) error {
+func (x *FileProviderManager) ReleaseKnownFoldersLocalizedReason(ctx context.Context, knownFolders FileProviderKnownFolders, localizedReason string) error {
 	_ch := make(chan error, 1)
-	x.inner.ReleaseKnownFoldersLocalizedReasonCompletionHandler(raw.NSFileProviderKnownFolders(knownFolders), foundation.NSStringStringWithUTF8String(localizedReason), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseKnownFolders:localizedReason:completionHandler:"), knownFolders, purego.NSString(localizedReason), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -396,29 +330,23 @@ func (x *FileProviderManager) ReleaseKnownFoldersLocalizedReason(ctx context.Con
 
 // FileProviderManagerable is the interface implemented by [FileProviderManager], for mocking and DI.
 type FileProviderManagerable interface {
-	Unwrap() *raw.NSFileProviderManager
-	SignalEnumeratorForContainerItemIdentifier(ctx context.Context, containerItemIdentifier *foundation.NSString) error
-	GetUserVisibleURLForItemIdentifier(ctx context.Context, itemIdentifier *foundation.NSString) (*foundation.NSURL, error)
-	RegisterURLSessionTaskForItemWithIdentifier(ctx context.Context, task *foundation.NSURLSessionTask, identifier *foundation.NSString) error
-	TemporaryDirectoryURLWithError() (*foundation.NSURL, error)
-	SignalErrorResolved(ctx context.Context, error_ unsafe.Pointer) error
-	GlobalProgressForKind(kind *foundation.NSString) *foundation.NSProgress
-	EnumeratorForMaterializedItems() raw.NSFileProviderEnumerator
-	EnumeratorForPendingItems() raw.NSFileProviderPendingSetEnumerator
-	ReimportItemsBelowItemWithIdentifier(ctx context.Context, itemIdentifier *foundation.NSString) error
-	EvictItemWithIdentifier(ctx context.Context, itemIdentifier *foundation.NSString) error
-	WaitForChangesOnItemsBelowItemWithIdentifier(ctx context.Context, itemIdentifier *foundation.NSString) error
+	obj.Object
+	SignalEnumeratorForContainerItemIdentifier(ctx context.Context, containerItemIdentifier obj.Object) error
+	GetUserVisibleURLForItemIdentifier(ctx context.Context, itemIdentifier obj.Object) (obj.Object, error)
+	RegisterURLSessionTaskForItemWithIdentifier(ctx context.Context, task obj.Object, identifier obj.Object) error
+	TemporaryDirectoryURLWithError() (obj.Object, error)
+	GlobalProgressForKind(kind obj.Object) obj.Object
+	ReimportItemsBelowItemWithIdentifier(ctx context.Context, itemIdentifier obj.Object) error
+	EvictItemWithIdentifier(ctx context.Context, itemIdentifier obj.Object) error
+	WaitForChangesOnItemsBelowItemWithIdentifier(ctx context.Context, itemIdentifier obj.Object) error
 	WaitForStabilization(ctx context.Context) error
-	DisconnectWithReasonOptions(ctx context.Context, localizedReason string, options NSFileProviderManagerDisconnectionOptions) error
+	DisconnectWithReasonOptions(ctx context.Context, localizedReason string, options FileProviderManagerDisconnectionOptions) error
 	Reconnect(ctx context.Context) error
-	RequestDownloadForItemWithIdentifierRequestedRange(ctx context.Context, itemIdentifier *foundation.NSString, rangeToMaterialize foundation.NSRange) error
-	StateDirectoryURLWithError() (*foundation.NSURL, error)
-	RequestDiagnosticCollectionForItemWithIdentifierErrorReason(ctx context.Context, itemIdentifier *foundation.NSString, errorReason unsafe.Pointer) error
-	GetServiceWithNameItemIdentifierCompletionHandler(serviceName *foundation.NSString, itemIdentifier *foundation.NSString, completionHandler func(unsafe.Pointer, unsafe.Pointer))
-	ListAvailableTestingOperationsWithError() (*foundation.NSArray[raw.NSFileProviderTestingOperation], error)
-	RunTestingOperationsError(operations ...purego.IDer) (*foundation.NSDictionary[raw.NSFileProviderTestingOperation, objc.ID], error)
-	ClaimKnownFoldersLocalizedReason(ctx context.Context, knownFolders *raw.NSFileProviderKnownFolderLocations, localizedReason string) error
-	ReleaseKnownFoldersLocalizedReason(ctx context.Context, knownFolders NSFileProviderKnownFolders, localizedReason string) error
+	StateDirectoryURLWithError() (obj.Object, error)
+	ListAvailableTestingOperationsWithError() ([]obj.Object, error)
+	RunTestingOperationsError(operations []obj.Object) (obj.Object, error)
+	ClaimKnownFoldersLocalizedReason(ctx context.Context, knownFolders *FileProviderKnownFolderLocations, localizedReason string) error
+	ReleaseKnownFoldersLocalizedReason(ctx context.Context, knownFolders FileProviderKnownFolders, localizedReason string) error
 }
 
 var _ FileProviderManagerable = (*FileProviderManager)(nil)

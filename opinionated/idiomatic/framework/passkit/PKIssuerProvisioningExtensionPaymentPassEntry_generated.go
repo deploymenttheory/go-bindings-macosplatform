@@ -5,61 +5,76 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that represents a payment card available to add as a payment pass.
 //
-// IssuerProvisioningExtensionPaymentPassEntry wraps [raw.PKIssuerProvisioningExtensionPaymentPassEntry] with a fluent Go API.
+// IssuerProvisioningExtensionPaymentPassEntry is an idiomatic wrapper over the Objective-C class PKIssuerProvisioningExtensionPaymentPassEntry.
 type IssuerProvisioningExtensionPaymentPassEntry struct {
-	inner *raw.PKIssuerProvisioningExtensionPaymentPassEntry
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKIssuerProvisioningExtensionPaymentPassEntry].
-func (x *IssuerProvisioningExtensionPaymentPassEntry) Unwrap() *raw.PKIssuerProvisioningExtensionPaymentPassEntry {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IssuerProvisioningExtensionPaymentPassEntry) ID() objc.ID { return x.inner.Ptr() }
-
-// IssuerProvisioningExtensionPaymentPassEntryFromID adopts an existing object pointer as a IssuerProvisioningExtensionPaymentPassEntry (nil for 0).
+// IssuerProvisioningExtensionPaymentPassEntryFromID adopts an existing Objective-C object as a IssuerProvisioningExtensionPaymentPassEntry
+// (nil for 0), retaining it and registering a release finalizer.
 func IssuerProvisioningExtensionPaymentPassEntryFromID(id objc.ID) *IssuerProvisioningExtensionPaymentPassEntry {
 	if id == 0 {
 		return nil
 	}
-	return &IssuerProvisioningExtensionPaymentPassEntry{inner: raw.PKIssuerProvisioningExtensionPaymentPassEntryFromID(id)}
+	x := &IssuerProvisioningExtensionPaymentPassEntry{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// issuerProvisioningExtensionPaymentPassEntryAdopt wraps an Objective-C object that this code just created as a
+// IssuerProvisioningExtensionPaymentPassEntry (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func issuerProvisioningExtensionPaymentPassEntryAdopt(id objc.ID) *IssuerProvisioningExtensionPaymentPassEntry {
+	if id == 0 {
+		return nil
+	}
+	x := &IssuerProvisioningExtensionPaymentPassEntry{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IssuerProvisioningExtensionPaymentPassEntry) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IssuerProvisioningExtensionPaymentPassEntry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IssuerProvisioningExtensionPaymentPassEntry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new entry for a payment pass that a user adds to Wallet.
 //
-// NewIssuerProvisioningExtensionPaymentPassEntryWithIdentifierTitleArtAddRequestConfiguration creates a new [IssuerProvisioningExtensionPaymentPassEntry].
-func NewIssuerProvisioningExtensionPaymentPassEntryWithIdentifierTitleArtAddRequestConfiguration(identifier string, title string, art unsafe.Pointer, configuration *raw.PKAddPaymentPassRequestConfiguration) *IssuerProvisioningExtensionPaymentPassEntry {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKIssuerProvisioningExtensionPaymentPassEntry")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:title:art:addRequestConfiguration:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), foundation.NSStringStringWithUTF8String(title).Ptr(), art, configuration.Ptr())
-	return &IssuerProvisioningExtensionPaymentPassEntry{inner: raw.PKIssuerProvisioningExtensionPaymentPassEntryFromID(_id)}
+// NewIssuerProvisioningExtensionPaymentPassEntryWithIdentifierTitleArtAddRequestConfiguration creates a new IssuerProvisioningExtensionPaymentPassEntry.
+func NewIssuerProvisioningExtensionPaymentPassEntryWithIdentifierTitleArtAddRequestConfiguration(identifier string, title string, art obj.Object, configuration *AddPaymentPassRequestConfiguration) *IssuerProvisioningExtensionPaymentPassEntry {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKIssuerProvisioningExtensionPaymentPassEntry")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:title:art:addRequestConfiguration:"), purego.NSString(identifier), purego.NSString(title), objref.IDOf(art), objref.IDOf(configuration))
+	return issuerProvisioningExtensionPaymentPassEntryAdopt(_id)
 }
 
-// AddRequestConfiguration calls the underlying AddRequestConfiguration.
 func (x *IssuerProvisioningExtensionPaymentPassEntry) AddRequestConfiguration() *AddPaymentPassRequestConfiguration {
-	_r := x.inner.AddRequestConfiguration()
-	if _r == nil {
-		return nil
-	}
-	return &AddPaymentPassRequestConfiguration{inner: _r}
-}
-
-func (x *IssuerProvisioningExtensionPaymentPassEntry) asIssuerProvisioningExtensionPassEntry() *raw.PKIssuerProvisioningExtensionPassEntry {
-	return &x.inner.PKIssuerProvisioningExtensionPassEntry
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRequestConfiguration"))
+	return AddPaymentPassRequestConfigurationFromID(_r)
 }
 
 // IssuerProvisioningExtensionPaymentPassEntryable is the interface implemented by [IssuerProvisioningExtensionPaymentPassEntry], for mocking and DI.
 type IssuerProvisioningExtensionPaymentPassEntryable interface {
-	Unwrap() *raw.PKIssuerProvisioningExtensionPaymentPassEntry
+	obj.Object
 	AddRequestConfiguration() *AddPaymentPassRequestConfiguration
 }
 

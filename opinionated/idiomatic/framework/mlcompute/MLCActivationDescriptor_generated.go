@@ -5,70 +5,93 @@
 package mlcompute
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A configuration object you use to create an activation layer.
 //
-// ActivationDescriptor wraps [raw.MLCActivationDescriptor] with a fluent Go API.
+// ActivationDescriptor is an idiomatic wrapper over the Objective-C class MLCActivationDescriptor.
 type ActivationDescriptor struct {
-	inner *raw.MLCActivationDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCActivationDescriptor].
-func (x *ActivationDescriptor) Unwrap() *raw.MLCActivationDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ActivationDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// ActivationDescriptorFromID adopts an existing object pointer as a ActivationDescriptor (nil for 0).
+// ActivationDescriptorFromID adopts an existing Objective-C object as a ActivationDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func ActivationDescriptorFromID(id objc.ID) *ActivationDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &ActivationDescriptor{inner: raw.MLCActivationDescriptorFromID(id)}
+	x := &ActivationDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewActivationDescriptor creates a new [ActivationDescriptor].
+// activationDescriptorAdopt wraps an Objective-C object that this code just created as a
+// ActivationDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func activationDescriptorAdopt(id objc.ID) *ActivationDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &ActivationDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ActivationDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ActivationDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ActivationDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewActivationDescriptor creates a new ActivationDescriptor.
 func NewActivationDescriptor() *ActivationDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCActivationDescriptor")), objc.RegisterName("new"))
-	return &ActivationDescriptor{inner: raw.MLCActivationDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCActivationDescriptor")), objc.RegisterName("new"))
+	return activationDescriptorAdopt(_id)
 }
 
-// @property   activationType @abstract   The type of activation function
-//
-// ActivationType calls the underlying ActivationType.
-func (x *ActivationDescriptor) ActivationType() MLCActivationType {
-	return MLCActivationType(x.inner.ActivationType())
+// The type of activation function
+func (x *ActivationDescriptor) ActivationType() ActivationType {
+	_r := objc.Send[ActivationType](objref.IDOf(x), objc.RegisterName("activationType"))
+	return _r
 }
 
-// @property   a @abstract   Parameter to the activation function
-//
-// A calls the underlying A.
+// Parameter to the activation function
 func (x *ActivationDescriptor) A() float32 {
-	return x.inner.A()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("a"))
+	return _r
 }
 
-// @property   b @abstract   Parameter to the activation function
-//
-// B calls the underlying B.
+// Parameter to the activation function
 func (x *ActivationDescriptor) B() float32 {
-	return x.inner.B()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("b"))
+	return _r
 }
 
-// @property   c @abstract   Parameter to the activation function
-//
-// C calls the underlying C.
+// Parameter to the activation function
 func (x *ActivationDescriptor) C() float32 {
-	return x.inner.C()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("c"))
+	return _r
 }
 
 // ActivationDescriptorable is the interface implemented by [ActivationDescriptor], for mocking and DI.
 type ActivationDescriptorable interface {
-	Unwrap() *raw.MLCActivationDescriptor
-	ActivationType() MLCActivationType
+	obj.Object
+	ActivationType() ActivationType
 	A() float32
 	B() float32
 	C() float32

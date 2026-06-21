@@ -5,56 +5,73 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The sync engine finished fetching record zone changes from the server for a specific zone.
 //
-// SyncEngineWillFetchRecordZoneChangesEvent wraps [raw.CKSyncEngineWillFetchRecordZoneChangesEvent] with a fluent Go API.
+// SyncEngineWillFetchRecordZoneChangesEvent is an idiomatic wrapper over the Objective-C class CKSyncEngineWillFetchRecordZoneChangesEvent.
 type SyncEngineWillFetchRecordZoneChangesEvent struct {
-	inner *raw.CKSyncEngineWillFetchRecordZoneChangesEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineWillFetchRecordZoneChangesEvent].
-func (x *SyncEngineWillFetchRecordZoneChangesEvent) Unwrap() *raw.CKSyncEngineWillFetchRecordZoneChangesEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineWillFetchRecordZoneChangesEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineWillFetchRecordZoneChangesEventFromID adopts an existing object pointer as a SyncEngineWillFetchRecordZoneChangesEvent (nil for 0).
+// SyncEngineWillFetchRecordZoneChangesEventFromID adopts an existing Objective-C object as a SyncEngineWillFetchRecordZoneChangesEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineWillFetchRecordZoneChangesEventFromID(id objc.ID) *SyncEngineWillFetchRecordZoneChangesEvent {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineWillFetchRecordZoneChangesEvent{inner: raw.CKSyncEngineWillFetchRecordZoneChangesEventFromID(id)}
+	x := &SyncEngineWillFetchRecordZoneChangesEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSyncEngineWillFetchRecordZoneChangesEvent creates a new [SyncEngineWillFetchRecordZoneChangesEvent].
-func NewSyncEngineWillFetchRecordZoneChangesEvent() *SyncEngineWillFetchRecordZoneChangesEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineWillFetchRecordZoneChangesEvent")), objc.RegisterName("new"))
-	return &SyncEngineWillFetchRecordZoneChangesEvent{inner: raw.CKSyncEngineWillFetchRecordZoneChangesEventFromID(_id)}
-}
-
-// ZoneID calls the underlying ZoneID.
-func (x *SyncEngineWillFetchRecordZoneChangesEvent) ZoneID() *RecordZoneID {
-	_r := x.inner.ZoneID()
-	if _r == nil {
+// syncEngineWillFetchRecordZoneChangesEventAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineWillFetchRecordZoneChangesEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineWillFetchRecordZoneChangesEventAdopt(id objc.ID) *SyncEngineWillFetchRecordZoneChangesEvent {
+	if id == 0 {
 		return nil
 	}
-	return &RecordZoneID{inner: _r}
+	x := &SyncEngineWillFetchRecordZoneChangesEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *SyncEngineWillFetchRecordZoneChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent {
-	return &x.inner.CKSyncEngineEvent
+// Description returns the object's -description text.
+func (x *SyncEngineWillFetchRecordZoneChangesEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEngineWillFetchRecordZoneChangesEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEngineWillFetchRecordZoneChangesEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSyncEngineWillFetchRecordZoneChangesEvent creates a new SyncEngineWillFetchRecordZoneChangesEvent.
+func NewSyncEngineWillFetchRecordZoneChangesEvent() *SyncEngineWillFetchRecordZoneChangesEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineWillFetchRecordZoneChangesEvent")), objc.RegisterName("new"))
+	return syncEngineWillFetchRecordZoneChangesEventAdopt(_id)
+}
+
+func (x *SyncEngineWillFetchRecordZoneChangesEvent) ZoneID() *RecordZoneID {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneID"))
+	return RecordZoneIDFromID(_r)
 }
 
 // SyncEngineWillFetchRecordZoneChangesEventable is the interface implemented by [SyncEngineWillFetchRecordZoneChangesEvent], for mocking and DI.
 type SyncEngineWillFetchRecordZoneChangesEventable interface {
-	Unwrap() *raw.CKSyncEngineWillFetchRecordZoneChangesEvent
+	obj.Object
 	ZoneID() *RecordZoneID
 }
 

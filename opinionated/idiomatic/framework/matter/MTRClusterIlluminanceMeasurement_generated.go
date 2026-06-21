@@ -5,120 +5,136 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterIlluminanceMeasurement wraps [raw.MTRClusterIlluminanceMeasurement] with a fluent Go API.
+// MTRClusterIlluminanceMeasurement is an idiomatic wrapper over the Objective-C class MTRClusterIlluminanceMeasurement.
 type MTRClusterIlluminanceMeasurement struct {
-	inner *raw.MTRClusterIlluminanceMeasurement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterIlluminanceMeasurement].
-func (x *MTRClusterIlluminanceMeasurement) Unwrap() *raw.MTRClusterIlluminanceMeasurement {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterIlluminanceMeasurement) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterIlluminanceMeasurementFromID adopts an existing object pointer as a MTRClusterIlluminanceMeasurement (nil for 0).
+// MTRClusterIlluminanceMeasurementFromID adopts an existing Objective-C object as a MTRClusterIlluminanceMeasurement
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterIlluminanceMeasurementFromID(id objc.ID) *MTRClusterIlluminanceMeasurement {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterIlluminanceMeasurement{inner: raw.MTRClusterIlluminanceMeasurementFromID(id)}
+	x := &MTRClusterIlluminanceMeasurement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterIlluminanceMeasurementAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterIlluminanceMeasurement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterIlluminanceMeasurementAdopt(id objc.ID) *MTRClusterIlluminanceMeasurement {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterIlluminanceMeasurement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterIlluminanceMeasurement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterIlluminanceMeasurement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterIlluminanceMeasurement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 //
-// NewMTRClusterIlluminanceMeasurementWithDeviceEndpointIDQueue creates a new [MTRClusterIlluminanceMeasurement].
-func NewMTRClusterIlluminanceMeasurementWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterIlluminanceMeasurement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterIlluminanceMeasurement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterIlluminanceMeasurement{inner: raw.MTRClusterIlluminanceMeasurementFromID(_id)}
+// NewMTRClusterIlluminanceMeasurementWithDeviceEndpointIDQueue creates a new MTRClusterIlluminanceMeasurement.
+func NewMTRClusterIlluminanceMeasurementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterIlluminanceMeasurement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterIlluminanceMeasurement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterIlluminanceMeasurementAdopt(_id)
 }
 
-// NewMTRClusterIlluminanceMeasurementWithDeviceEndpointQueue creates a new [MTRClusterIlluminanceMeasurement].
-func NewMTRClusterIlluminanceMeasurementWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterIlluminanceMeasurement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterIlluminanceMeasurement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterIlluminanceMeasurement{inner: raw.MTRClusterIlluminanceMeasurementFromID(_id)}
+// NewMTRClusterIlluminanceMeasurementWithDeviceEndpointQueue creates a new MTRClusterIlluminanceMeasurement.
+func NewMTRClusterIlluminanceMeasurementWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterIlluminanceMeasurement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterIlluminanceMeasurement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterIlluminanceMeasurementAdopt(_id)
 }
 
-// ReadAttributeMeasuredValueWithParams calls the underlying ReadAttributeMeasuredValueWithParams.
-func (x *MTRClusterIlluminanceMeasurement) ReadAttributeMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMeasuredValueWithParams(params)
+func (x *MTRClusterIlluminanceMeasurement) ReadAttributeMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasuredValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinMeasuredValueWithParams calls the underlying ReadAttributeMinMeasuredValueWithParams.
-func (x *MTRClusterIlluminanceMeasurement) ReadAttributeMinMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMinMeasuredValueWithParams(params)
+func (x *MTRClusterIlluminanceMeasurement) ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinMeasuredValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxMeasuredValueWithParams calls the underlying ReadAttributeMaxMeasuredValueWithParams.
-func (x *MTRClusterIlluminanceMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxMeasuredValueWithParams(params)
+func (x *MTRClusterIlluminanceMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxMeasuredValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeToleranceWithParams calls the underlying ReadAttributeToleranceWithParams.
-func (x *MTRClusterIlluminanceMeasurement) ReadAttributeToleranceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeToleranceWithParams(params)
+func (x *MTRClusterIlluminanceMeasurement) ReadAttributeToleranceWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeToleranceWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeLightSensorTypeWithParams calls the underlying ReadAttributeLightSensorTypeWithParams.
-func (x *MTRClusterIlluminanceMeasurement) ReadAttributeLightSensorTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeLightSensorTypeWithParams(params)
+func (x *MTRClusterIlluminanceMeasurement) ReadAttributeLightSensorTypeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLightSensorTypeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterIlluminanceMeasurement) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterIlluminanceMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterIlluminanceMeasurement) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterIlluminanceMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterIlluminanceMeasurement) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterIlluminanceMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterIlluminanceMeasurement) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+func (x *MTRClusterIlluminanceMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterIlluminanceMeasurement) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterIlluminanceMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterIlluminanceMeasurement) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterIlluminanceMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterIlluminanceMeasurementable is the interface implemented by [MTRClusterIlluminanceMeasurement], for mocking and DI.
 type MTRClusterIlluminanceMeasurementable interface {
-	Unwrap() *raw.MTRClusterIlluminanceMeasurement
-	ReadAttributeMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMinMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMaxMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeToleranceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeLightSensorTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeMeasuredValueWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeToleranceWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeLightSensorTypeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterIlluminanceMeasurementable = (*MTRClusterIlluminanceMeasurement)(nil)

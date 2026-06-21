@@ -5,45 +5,68 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The configuration object for the USB Extensible Host Controller Interface (XHCI) controller.
 //
-// XHCIControllerConfiguration wraps [raw.VZXHCIControllerConfiguration] with a fluent Go API.
+// XHCIControllerConfiguration is an idiomatic wrapper over the Objective-C class VZXHCIControllerConfiguration.
 type XHCIControllerConfiguration struct {
-	inner *raw.VZXHCIControllerConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZXHCIControllerConfiguration].
-func (x *XHCIControllerConfiguration) Unwrap() *raw.VZXHCIControllerConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *XHCIControllerConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// XHCIControllerConfigurationFromID adopts an existing object pointer as a XHCIControllerConfiguration (nil for 0).
+// XHCIControllerConfigurationFromID adopts an existing Objective-C object as a XHCIControllerConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func XHCIControllerConfigurationFromID(id objc.ID) *XHCIControllerConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &XHCIControllerConfiguration{inner: raw.VZXHCIControllerConfigurationFromID(id)}
+	x := &XHCIControllerConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewXHCIControllerConfiguration creates a new [XHCIControllerConfiguration].
+// xHCIControllerConfigurationAdopt wraps an Objective-C object that this code just created as a
+// XHCIControllerConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func xHCIControllerConfigurationAdopt(id objc.ID) *XHCIControllerConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &XHCIControllerConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *XHCIControllerConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *XHCIControllerConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *XHCIControllerConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewXHCIControllerConfiguration creates a new XHCIControllerConfiguration.
 func NewXHCIControllerConfiguration() *XHCIControllerConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZXHCIControllerConfiguration")), objc.RegisterName("new"))
-	return &XHCIControllerConfiguration{inner: raw.VZXHCIControllerConfigurationFromID(_id)}
-}
-
-func (x *XHCIControllerConfiguration) asUSBControllerConfiguration() *raw.VZUSBControllerConfiguration {
-	return &x.inner.VZUSBControllerConfiguration
+	_id := objc.Send[objc.ID](objc.ID(_class("VZXHCIControllerConfiguration")), objc.RegisterName("new"))
+	return xHCIControllerConfigurationAdopt(_id)
 }
 
 // XHCIControllerConfigurationable is the interface implemented by [XHCIControllerConfiguration], for mocking and DI.
 type XHCIControllerConfigurationable interface {
-	Unwrap() *raw.VZXHCIControllerConfiguration
+	obj.Object
 }
 
 var _ XHCIControllerConfigurationable = (*XHCIControllerConfiguration)(nil)

@@ -5,70 +5,86 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that gives you the ability to choose from system-provided tinting behaviors.
 //
-// TintConfiguration wraps [raw.NSTintConfiguration] with a fluent Go API.
+// TintConfiguration is an idiomatic wrapper over the Objective-C class NSTintConfiguration.
 type TintConfiguration struct {
-	inner *raw.NSTintConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTintConfiguration].
-func (x *TintConfiguration) Unwrap() *raw.NSTintConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TintConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// TintConfigurationFromID adopts an existing object pointer as a TintConfiguration (nil for 0).
+// TintConfigurationFromID adopts an existing Objective-C object as a TintConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func TintConfigurationFromID(id objc.ID) *TintConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &TintConfiguration{inner: raw.NSTintConfigurationFromID(id)}
+	x := &TintConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTintConfiguration creates a new [TintConfiguration].
+// tintConfigurationAdopt wraps an Objective-C object that this code just created as a
+// TintConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tintConfigurationAdopt(id objc.ID) *TintConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &TintConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TintConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TintConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TintConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTintConfiguration creates a new TintConfiguration.
 func NewTintConfiguration() *TintConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTintConfiguration")), objc.RegisterName("new"))
-	return &TintConfiguration{inner: raw.NSTintConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSTintConfiguration")), objc.RegisterName("new"))
+	return tintConfigurationAdopt(_id)
 }
 
 // The base NSColor supplied when creating the tint configuration object. If the receiver wasn't created using a base NSColor, this property returns nil.
-//
-// BaseTintColor calls the underlying BaseTintColor.
 func (x *TintConfiguration) BaseTintColor() *Color {
-	_r := x.inner.BaseTintColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseTintColor"))
+	return ColorFromID(_r)
 }
 
 // An equivalent NSColor matching the effective content tint of the receiver. If the receiver can't be represented as a NSColor, this property returns nil.
-//
-// EquivalentContentTintColor calls the underlying EquivalentContentTintColor.
 func (x *TintConfiguration) EquivalentContentTintColor() *Color {
-	_r := x.inner.EquivalentContentTintColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("equivalentContentTintColor"))
+	return ColorFromID(_r)
 }
 
 // If YES, the tint configuration alters its effect based on the user's preferred Accent Color. Otherwise, the tint configuration produces a constant effect regardless of the Accent Color preference.
-//
-// AdaptsToUserAccentColor calls the underlying AdaptsToUserAccentColor.
 func (x *TintConfiguration) AdaptsToUserAccentColor() bool {
-	return x.inner.AdaptsToUserAccentColor()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("adaptsToUserAccentColor"))
+	return _r
 }
 
 // TintConfigurationable is the interface implemented by [TintConfiguration], for mocking and DI.
 type TintConfigurationable interface {
-	Unwrap() *raw.NSTintConfiguration
+	obj.Object
 	BaseTintColor() *Color
 	EquivalentContentTintColor() *Color
 	AdaptsToUserAccentColor() bool

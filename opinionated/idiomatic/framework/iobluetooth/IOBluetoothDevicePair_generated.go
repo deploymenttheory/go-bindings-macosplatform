@@ -5,112 +5,118 @@
 package iobluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An instance of IOBluetoothDevicePair represents a pairing attempt to a remote Bluetooth device.
 //
-// IOBluetoothDevicePair wraps [raw.IOBluetoothDevicePair] with a fluent Go API.
+// IOBluetoothDevicePair is an idiomatic wrapper over the Objective-C class IOBluetoothDevicePair.
 type IOBluetoothDevicePair struct {
-	inner *raw.IOBluetoothDevicePair
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IOBluetoothDevicePair].
-func (x *IOBluetoothDevicePair) Unwrap() *raw.IOBluetoothDevicePair { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IOBluetoothDevicePair) ID() objc.ID { return x.inner.Ptr() }
-
-// IOBluetoothDevicePairFromID adopts an existing object pointer as a IOBluetoothDevicePair (nil for 0).
+// IOBluetoothDevicePairFromID adopts an existing Objective-C object as a IOBluetoothDevicePair
+// (nil for 0), retaining it and registering a release finalizer.
 func IOBluetoothDevicePairFromID(id objc.ID) *IOBluetoothDevicePair {
 	if id == 0 {
 		return nil
 	}
-	return &IOBluetoothDevicePair{inner: raw.IOBluetoothDevicePairFromID(id)}
+	x := &IOBluetoothDevicePair{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewIOBluetoothDevicePair creates a new [IOBluetoothDevicePair].
+// iOBluetoothDevicePairAdopt wraps an Objective-C object that this code just created as a
+// IOBluetoothDevicePair (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iOBluetoothDevicePairAdopt(id objc.ID) *IOBluetoothDevicePair {
+	if id == 0 {
+		return nil
+	}
+	x := &IOBluetoothDevicePair{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IOBluetoothDevicePair) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IOBluetoothDevicePair) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IOBluetoothDevicePair) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewIOBluetoothDevicePair creates a new IOBluetoothDevicePair.
 func NewIOBluetoothDevicePair() *IOBluetoothDevicePair {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothDevicePair")), objc.RegisterName("new"))
-	return &IOBluetoothDevicePair{inner: raw.IOBluetoothDevicePairFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothDevicePair")), objc.RegisterName("new"))
+	return iOBluetoothDevicePairAdopt(_id)
 }
 
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *IOBluetoothDevicePair) WithDelegate(delegate objc.ID) *IOBluetoothDevicePair {
-	x.inner.SetDelegate(delegate)
+// WithDelegate sets delegate and returns the receiver so calls can be chained.
+func (x *IOBluetoothDevicePair) WithDelegate(delegate obj.Object) *IOBluetoothDevicePair {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return x
 }
 
 // Kicks off the pairing with the device.
-//
-// Start calls the underlying Start.
 func (x *IOBluetoothDevicePair) Start() int {
-	return x.inner.Start()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("start"))
+	return _r
 }
 
 // Stops the current pairing. Removes the delegate and disconnects if device was connected.
-//
-// Stop calls the underlying Stop.
 func (x *IOBluetoothDevicePair) Stop() {
-	x.inner.Stop()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
 // Get the IOBluetoothDevice being used by the object.
-//
-// Device calls the underlying Device.
 func (x *IOBluetoothDevicePair) Device() *IOBluetoothDevice {
-	_r := x.inner.Device()
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothDevice{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+	return IOBluetoothDeviceFromID(_r)
 }
 
 // Set the device object to pair with. It is retained by the object.
-//
-// SetDevice calls the underlying SetDevice.
-func (x *IOBluetoothDevicePair) SetDevice(inDevice *raw.IOBluetoothDevice) {
-	x.inner.SetDevice(inDevice)
-}
-
-// This is the required reply to the devicePairingPINCodeRequest delegate message. Set the PIN code to use during pairing if required.
-//
-// ReplyPINCodePINCode calls the underlying ReplyPINCodePINCode.
-func (x *IOBluetoothDevicePair) ReplyPINCodePINCode(pINCodeSize uint, pINCode *raw.BluetoothPINCode) {
-	x.inner.ReplyPINCodePINCode(pINCodeSize, pINCode)
+func (x *IOBluetoothDevicePair) SetDevice(inDevice *IOBluetoothDevice) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDevice:"), objref.IDOf(inDevice))
 }
 
 // This is the required reply to the devicePairingUserConfirmationRequest delegate message.
-//
-// ReplyUserConfirmation calls the underlying ReplyUserConfirmation.
 func (x *IOBluetoothDevicePair) ReplyUserConfirmation(reply bool) {
-	x.inner.ReplyUserConfirmation(reply)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replyUserConfirmation:"), reply)
 }
 
-// Delegate calls the underlying Delegate.
-func (x *IOBluetoothDevicePair) Delegate() objc.ID {
-	return x.inner.Delegate()
+func (x *IOBluetoothDevicePair) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+	return obj.Wrap(_r)
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *IOBluetoothDevicePair) SetDelegate(delegate objc.ID) {
-	x.inner.SetDelegate(delegate)
+func (x *IOBluetoothDevicePair) SetDelegate(delegate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
 // IOBluetoothDevicePairable is the interface implemented by [IOBluetoothDevicePair], for mocking and DI.
 type IOBluetoothDevicePairable interface {
-	Unwrap() *raw.IOBluetoothDevicePair
-	WithDelegate(delegate objc.ID) *IOBluetoothDevicePair
+	obj.Object
+	WithDelegate(delegate obj.Object) *IOBluetoothDevicePair
 	Start() int
 	Stop()
 	Device() *IOBluetoothDevice
-	SetDevice(inDevice *raw.IOBluetoothDevice)
-	ReplyPINCodePINCode(pINCodeSize uint, pINCode *raw.BluetoothPINCode)
+	SetDevice(inDevice *IOBluetoothDevice)
 	ReplyUserConfirmation(reply bool)
-	Delegate() objc.ID
-	SetDelegate(delegate objc.ID)
+	Delegate() obj.Object
+	SetDelegate(delegate obj.Object)
 }
 
 var _ IOBluetoothDevicePairable = (*IOBluetoothDevicePair)(nil)

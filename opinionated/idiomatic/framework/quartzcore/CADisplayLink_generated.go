@@ -5,126 +5,124 @@
 package quartzcore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A timer object that allows your app to synchronize its drawing to the refresh rate of the display.
 //
-// DisplayLink wraps [raw.CADisplayLink] with a fluent Go API.
+// DisplayLink is an idiomatic wrapper over the Objective-C class CADisplayLink.
 type DisplayLink struct {
-	inner *raw.CADisplayLink
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CADisplayLink].
-func (x *DisplayLink) Unwrap() *raw.CADisplayLink { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DisplayLink) ID() objc.ID { return x.inner.Ptr() }
-
-// DisplayLinkFromID adopts an existing object pointer as a DisplayLink (nil for 0).
+// DisplayLinkFromID adopts an existing Objective-C object as a DisplayLink
+// (nil for 0), retaining it and registering a release finalizer.
 func DisplayLinkFromID(id objc.ID) *DisplayLink {
 	if id == 0 {
 		return nil
 	}
-	return &DisplayLink{inner: raw.CADisplayLinkFromID(id)}
+	x := &DisplayLink{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDisplayLink creates a new [DisplayLink].
+// displayLinkAdopt wraps an Objective-C object that this code just created as a
+// DisplayLink (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func displayLinkAdopt(id objc.ID) *DisplayLink {
+	if id == 0 {
+		return nil
+	}
+	x := &DisplayLink{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DisplayLink) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DisplayLink) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DisplayLink) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDisplayLink creates a new DisplayLink.
 func NewDisplayLink() *DisplayLink {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CADisplayLink")), objc.RegisterName("new"))
-	return &DisplayLink{inner: raw.CADisplayLinkFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CADisplayLink")), objc.RegisterName("new"))
+	return displayLinkAdopt(_id)
 }
 
 // A Boolean value that indicates whether the system suspends the display link’s notifications to the target.
 //
-// WithPaused sets the paused property and returns the receiver for chaining.
+// WithPaused sets paused and returns the receiver so calls can be chained.
 func (x *DisplayLink) WithPaused(paused bool) *DisplayLink {
-	x.inner.SetPaused(paused)
-	return x
-}
-
-// A range of frequencies your app allows for frame updates, affecting how often the system invokes your delegate’s callback.
-//
-// WithPreferredFrameRateRange sets the preferredFrameRateRange property and returns the receiver for chaining.
-func (x *DisplayLink) WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *DisplayLink {
-	x.inner.SetPreferredFrameRateRange(preferredFrameRateRange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
 // Registers the display link with a run loop.
-//
-// AddToRunLoopForMode calls the underlying AddToRunLoopForMode.
-func (x *DisplayLink) AddToRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString) {
-	x.inner.AddToRunLoopForMode(runloop, mode)
+func (x *DisplayLink) AddToRunLoopForMode(runloop obj.Object, mode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addToRunLoop:forMode:"), objref.IDOf(runloop), objref.IDOf(mode))
 }
 
 // Removes the display link from the run loop for the given mode.
-//
-// RemoveFromRunLoopForMode calls the underlying RemoveFromRunLoopForMode.
-func (x *DisplayLink) RemoveFromRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString) {
-	x.inner.RemoveFromRunLoopForMode(runloop, mode)
+func (x *DisplayLink) RemoveFromRunLoopForMode(runloop obj.Object, mode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(runloop), objref.IDOf(mode))
 }
 
 // Removes the display link from all run loop modes.
-//
-// Invalidate calls the underlying Invalidate.
 func (x *DisplayLink) Invalidate() {
-	x.inner.Invalidate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
-// Timestamp calls the underlying Timestamp.
 func (x *DisplayLink) Timestamp() float64 {
-	return x.inner.Timestamp()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timestamp"))
+	return _r
 }
 
-// Duration calls the underlying Duration.
 func (x *DisplayLink) Duration() float64 {
-	return x.inner.Duration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+	return _r
 }
 
-// TargetTimestamp calls the underlying TargetTimestamp.
 func (x *DisplayLink) TargetTimestamp() float64 {
-	return x.inner.TargetTimestamp()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("targetTimestamp"))
+	return _r
 }
 
-// IsPaused calls the underlying IsPaused.
 func (x *DisplayLink) IsPaused() bool {
-	return x.inner.IsPaused()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
+	return _r
 }
 
-// SetPaused calls the underlying SetPaused.
 func (x *DisplayLink) SetPaused(paused bool) {
-	x.inner.SetPaused(paused)
-}
-
-// PreferredFrameRateRange calls the underlying PreferredFrameRateRange.
-func (x *DisplayLink) PreferredFrameRateRange() raw.CAFrameRateRange {
-	return x.inner.PreferredFrameRateRange()
-}
-
-// SetPreferredFrameRateRange calls the underlying SetPreferredFrameRateRange.
-func (x *DisplayLink) SetPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) {
-	x.inner.SetPreferredFrameRateRange(preferredFrameRateRange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 }
 
 // DisplayLinkable is the interface implemented by [DisplayLink], for mocking and DI.
 type DisplayLinkable interface {
-	Unwrap() *raw.CADisplayLink
+	obj.Object
 	WithPaused(paused bool) *DisplayLink
-	WithPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange) *DisplayLink
-	AddToRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString)
-	RemoveFromRunLoopForMode(runloop *foundation.NSRunLoop, mode *foundation.NSString)
+	AddToRunLoopForMode(runloop obj.Object, mode obj.Object)
+	RemoveFromRunLoopForMode(runloop obj.Object, mode obj.Object)
 	Invalidate()
 	Timestamp() float64
 	Duration() float64
 	TargetTimestamp() float64
 	IsPaused() bool
 	SetPaused(paused bool)
-	PreferredFrameRateRange() raw.CAFrameRateRange
-	SetPreferredFrameRateRange(preferredFrameRateRange raw.CAFrameRateRange)
 }
 
 var _ DisplayLinkable = (*DisplayLink)(nil)

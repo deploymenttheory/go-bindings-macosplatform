@@ -5,131 +5,147 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRAudioOutputClusterRenameOutputParams wraps [raw.MTRAudioOutputClusterRenameOutputParams] with a fluent Go API.
+// MTRAudioOutputClusterRenameOutputParams is an idiomatic wrapper over the Objective-C class MTRAudioOutputClusterRenameOutputParams.
 type MTRAudioOutputClusterRenameOutputParams struct {
-	inner *raw.MTRAudioOutputClusterRenameOutputParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRAudioOutputClusterRenameOutputParams].
-func (x *MTRAudioOutputClusterRenameOutputParams) Unwrap() *raw.MTRAudioOutputClusterRenameOutputParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAudioOutputClusterRenameOutputParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRAudioOutputClusterRenameOutputParamsFromID adopts an existing object pointer as a MTRAudioOutputClusterRenameOutputParams (nil for 0).
+// MTRAudioOutputClusterRenameOutputParamsFromID adopts an existing Objective-C object as a MTRAudioOutputClusterRenameOutputParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRAudioOutputClusterRenameOutputParamsFromID(id objc.ID) *MTRAudioOutputClusterRenameOutputParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRAudioOutputClusterRenameOutputParams{inner: raw.MTRAudioOutputClusterRenameOutputParamsFromID(id)}
-}
-
-// NewMTRAudioOutputClusterRenameOutputParams creates a new [MTRAudioOutputClusterRenameOutputParams].
-func NewMTRAudioOutputClusterRenameOutputParams() *MTRAudioOutputClusterRenameOutputParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAudioOutputClusterRenameOutputParams")), objc.RegisterName("new"))
-	return &MTRAudioOutputClusterRenameOutputParams{inner: raw.MTRAudioOutputClusterRenameOutputParamsFromID(_id)}
-}
-
-// WithIndex sets the index property and returns the receiver for chaining.
-func (x *MTRAudioOutputClusterRenameOutputParams) WithIndex(index *foundation.NSNumber) *MTRAudioOutputClusterRenameOutputParams {
-	x.inner.SetIndex(index)
+	x := &MTRAudioOutputClusterRenameOutputParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithName sets the name property and returns the receiver for chaining.
+// mTRAudioOutputClusterRenameOutputParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRAudioOutputClusterRenameOutputParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRAudioOutputClusterRenameOutputParamsAdopt(id objc.ID) *MTRAudioOutputClusterRenameOutputParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRAudioOutputClusterRenameOutputParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRAudioOutputClusterRenameOutputParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRAudioOutputClusterRenameOutputParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRAudioOutputClusterRenameOutputParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRAudioOutputClusterRenameOutputParams creates a new MTRAudioOutputClusterRenameOutputParams.
+func NewMTRAudioOutputClusterRenameOutputParams() *MTRAudioOutputClusterRenameOutputParams {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRAudioOutputClusterRenameOutputParams")), objc.RegisterName("new"))
+	return mTRAudioOutputClusterRenameOutputParamsAdopt(_id)
+}
+
+// WithIndex sets index and returns the receiver so calls can be chained.
+func (x *MTRAudioOutputClusterRenameOutputParams) WithIndex(index obj.Object) *MTRAudioOutputClusterRenameOutputParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), objref.IDOf(index))
+	return x
+}
+
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *MTRAudioOutputClusterRenameOutputParams) WithName(name string) *MTRAudioOutputClusterRenameOutputParams {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRAudioOutputClusterRenameOutputParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRAudioOutputClusterRenameOutputParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRAudioOutputClusterRenameOutputParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAudioOutputClusterRenameOutputParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRAudioOutputClusterRenameOutputParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRAudioOutputClusterRenameOutputParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRAudioOutputClusterRenameOutputParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAudioOutputClusterRenameOutputParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// Index calls the underlying Index.
-func (x *MTRAudioOutputClusterRenameOutputParams) Index() *foundation.NSNumber {
-	return x.inner.Index()
+func (x *MTRAudioOutputClusterRenameOutputParams) Index() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("index"))
+	return obj.Wrap(_r)
 }
 
-// SetIndex calls the underlying SetIndex.
-func (x *MTRAudioOutputClusterRenameOutputParams) SetIndex(index *foundation.NSNumber) {
-	x.inner.SetIndex(index)
+func (x *MTRAudioOutputClusterRenameOutputParams) SetIndex(index obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), objref.IDOf(index))
 }
 
-// Name calls the underlying Name.
 func (x *MTRAudioOutputClusterRenameOutputParams) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
 func (x *MTRAudioOutputClusterRenameOutputParams) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRAudioOutputClusterRenameOutputParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRAudioOutputClusterRenameOutputParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRAudioOutputClusterRenameOutputParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRAudioOutputClusterRenameOutputParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRAudioOutputClusterRenameOutputParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRAudioOutputClusterRenameOutputParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRAudioOutputClusterRenameOutputParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRAudioOutputClusterRenameOutputParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRAudioOutputClusterRenameOutputParamsable is the interface implemented by [MTRAudioOutputClusterRenameOutputParams], for mocking and DI.
 type MTRAudioOutputClusterRenameOutputParamsable interface {
-	Unwrap() *raw.MTRAudioOutputClusterRenameOutputParams
-	WithIndex(index *foundation.NSNumber) *MTRAudioOutputClusterRenameOutputParams
+	obj.Object
+	WithIndex(index obj.Object) *MTRAudioOutputClusterRenameOutputParams
 	WithName(name string) *MTRAudioOutputClusterRenameOutputParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRAudioOutputClusterRenameOutputParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRAudioOutputClusterRenameOutputParams
-	Index() *foundation.NSNumber
-	SetIndex(index *foundation.NSNumber)
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAudioOutputClusterRenameOutputParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAudioOutputClusterRenameOutputParams
+	Index() obj.Object
+	SetIndex(index obj.Object)
 	Name() string
 	SetName(name string)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRAudioOutputClusterRenameOutputParamsable = (*MTRAudioOutputClusterRenameOutputParams)(nil)

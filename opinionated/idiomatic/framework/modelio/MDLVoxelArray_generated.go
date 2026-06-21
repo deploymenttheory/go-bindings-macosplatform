@@ -5,339 +5,223 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A model of a 3D object’s solid volume as a collection of voxels, or cubic units.
 //
-// VoxelArray wraps [raw.MDLVoxelArray] with a fluent Go API.
+// VoxelArray is an idiomatic wrapper over the Objective-C class MDLVoxelArray.
 type VoxelArray struct {
-	inner *raw.MDLVoxelArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLVoxelArray].
-func (x *VoxelArray) Unwrap() *raw.MDLVoxelArray { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VoxelArray) ID() objc.ID { return x.inner.Ptr() }
-
-// VoxelArrayFromID adopts an existing object pointer as a VoxelArray (nil for 0).
+// VoxelArrayFromID adopts an existing Objective-C object as a VoxelArray
+// (nil for 0), retaining it and registering a release finalizer.
 func VoxelArrayFromID(id objc.ID) *VoxelArray {
 	if id == 0 {
 		return nil
 	}
-	return &VoxelArray{inner: raw.MDLVoxelArrayFromID(id)}
+	x := &VoxelArray{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// voxelArrayAdopt wraps an Objective-C object that this code just created as a
+// VoxelArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func voxelArrayAdopt(id objc.ID) *VoxelArray {
+	if id == 0 {
+		return nil
+	}
+	x := &VoxelArray{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VoxelArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VoxelArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VoxelArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize a voxel grid from an MDLAsset. Attempts to create a closed volume model by applying "patches" of radius patchRadius to any holes found in the orginal mesh. Choose a patch radius that will be large enough to fill in the largest hole in the model.
 //
-// NewVoxelArrayWithAssetDivisionsPatchRadius creates a new [VoxelArray].
-func NewVoxelArrayWithAssetDivisionsPatchRadius(asset *raw.MDLAsset, divisions int, patchRadius float32) *VoxelArray {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLVoxelArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:divisions:patchRadius:"), asset.Ptr(), divisions, patchRadius)
-	return &VoxelArray{inner: raw.MDLVoxelArrayFromID(_id)}
-}
-
-// Initializes a voxel array with the specified voxel data.
-//
-// NewVoxelArrayWithDataBoundingBoxVoxelExtent creates a new [VoxelArray].
-func NewVoxelArrayWithDataBoundingBoxVoxelExtent(voxelData *foundation.NSData, boundingBox raw.MDLAxisAlignedBoundingBox, voxelExtent float32) *VoxelArray {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLVoxelArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:boundingBox:voxelExtent:"), voxelData.Ptr(), boundingBox, voxelExtent)
-	return &VoxelArray{inner: raw.MDLVoxelArrayFromID(_id)}
+// NewVoxelArrayWithAssetDivisionsPatchRadius creates a new VoxelArray.
+func NewVoxelArrayWithAssetDivisionsPatchRadius(asset *Asset, divisions int, patchRadius float32) *VoxelArray {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLVoxelArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:divisions:patchRadius:"), objref.IDOf(asset), divisions, patchRadius)
+	return voxelArrayAdopt(_id)
 }
 
 // Initializes a voxel array that models the volume of 3D objects in the specified asset and creates the specified number of voxel shells.
 //
-// NewVoxelArrayWithAssetDivisionsInteriorShellsExteriorShellsPatchRadius creates a new [VoxelArray].
-func NewVoxelArrayWithAssetDivisionsInteriorShellsExteriorShellsPatchRadius(asset *raw.MDLAsset, divisions int, interiorShells int, exteriorShells int, patchRadius float32) *VoxelArray {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLVoxelArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:divisions:interiorShells:exteriorShells:patchRadius:"), asset.Ptr(), divisions, interiorShells, exteriorShells, patchRadius)
-	return &VoxelArray{inner: raw.MDLVoxelArrayFromID(_id)}
+// NewVoxelArrayWithAssetDivisionsInteriorShellsExteriorShellsPatchRadius creates a new VoxelArray.
+func NewVoxelArrayWithAssetDivisionsInteriorShellsExteriorShellsPatchRadius(asset *Asset, divisions int, interiorShells int, exteriorShells int, patchRadius float32) *VoxelArray {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLVoxelArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:divisions:interiorShells:exteriorShells:patchRadius:"), objref.IDOf(asset), divisions, interiorShells, exteriorShells, patchRadius)
+	return voxelArrayAdopt(_id)
 }
 
 // Initializes a voxel array that models the volume of 3D objects in the specified asset, creating voxel shells for the specified distances from the object’s surface.
 //
-// NewVoxelArrayWithAssetDivisionsInteriorNBWidthExteriorNBWidthPatchRadius creates a new [VoxelArray].
-func NewVoxelArrayWithAssetDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(asset *raw.MDLAsset, divisions int, interiorNBWidth float32, exteriorNBWidth float32, patchRadius float32) *VoxelArray {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLVoxelArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:divisions:interiorNBWidth:exteriorNBWidth:patchRadius:"), asset.Ptr(), divisions, interiorNBWidth, exteriorNBWidth, patchRadius)
-	return &VoxelArray{inner: raw.MDLVoxelArrayFromID(_id)}
+// NewVoxelArrayWithAssetDivisionsInteriorNBWidthExteriorNBWidthPatchRadius creates a new VoxelArray.
+func NewVoxelArrayWithAssetDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(asset *Asset, divisions int, interiorNBWidth float32, exteriorNBWidth float32, patchRadius float32) *VoxelArray {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLVoxelArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAsset:divisions:interiorNBWidth:exteriorNBWidth:patchRadius:"), objref.IDOf(asset), divisions, interiorNBWidth, exteriorNBWidth, patchRadius)
+	return voxelArrayAdopt(_id)
 }
 
 // If voxel grid is in a valid signed shell field form, sets the interior thickness to the desired width, as measured from the model surface. If the voxel grid is not in a valid signed shell field form, the value of this property is zero.
 //
-// WithShellFieldInteriorThickness sets the shellFieldInteriorThickness property and returns the receiver for chaining.
+// WithShellFieldInteriorThickness sets shellFieldInteriorThickness and returns the receiver so calls can be chained.
 func (x *VoxelArray) WithShellFieldInteriorThickness(shellFieldInteriorThickness float32) *VoxelArray {
-	x.inner.SetShellFieldInteriorThickness(shellFieldInteriorThickness)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShellFieldInteriorThickness:"), shellFieldInteriorThickness)
 	return x
 }
 
 // If voxel grid is in a valid signed shell field form, sets the exterior thickness to the desired width, as measured from the model surface. If the voxel grid is not in a valid signed shell field form, the value of this property is zero.
 //
-// WithShellFieldExteriorThickness sets the shellFieldExteriorThickness property and returns the receiver for chaining.
+// WithShellFieldExteriorThickness sets shellFieldExteriorThickness and returns the receiver so calls can be chained.
 func (x *VoxelArray) WithShellFieldExteriorThickness(shellFieldExteriorThickness float32) *VoxelArray {
-	x.inner.SetShellFieldExteriorThickness(shellFieldExteriorThickness)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShellFieldExteriorThickness:"), shellFieldExteriorThickness)
 	return x
 }
 
 // The parent object that contains this object.
 //
-// WithParent sets the parent property and returns the receiver for chaining.
+// WithParent sets parent and returns the receiver so calls can be chained.
 func (x *VoxelArray) WithParent(parent ObjectProvider) *VoxelArray {
-	x.inner.MDLObject.SetParent(parent.asObject())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
 }
 
 // The primary object, if applicable, of which this object is an instance.
 //
-// WithInstance sets the instance property and returns the receiver for chaining.
+// WithInstance sets instance and returns the receiver so calls can be chained.
 func (x *VoxelArray) WithInstance(instance ObjectProvider) *VoxelArray {
-	x.inner.MDLObject.SetInstance(instance.asObject())
-	return x
-}
-
-// A component that manages this object’s spatial transform and its changes over time.
-//
-// WithTransform sets the transform property and returns the receiver for chaining.
-func (x *VoxelArray) WithTransform(transform raw.MDLTransformComponent) *VoxelArray {
-	x.inner.MDLObject.SetTransform(transform)
-	return x
-}
-
-// A component that manages this object’s collection of children.
-//
-// WithChildren sets the children property and returns the receiver for chaining.
-func (x *VoxelArray) WithChildren(children raw.MDLObjectContainerComponent) *VoxelArray {
-	x.inner.MDLObject.SetChildren(children)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
 	return x
 }
 
 // A Boolean value indicating whether this object should be used in rendering.
 //
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *VoxelArray) WithHidden(hidden bool) *VoxelArray {
-	x.inner.MDLObject.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// Returns a Boolean value indicating whether the voxel array contains voxel data for the specified index.
-//
-// VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell calls the underlying VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell.
-func (x *VoxelArray) VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell(index unsafe.Pointer, allowAnyX bool, allowAnyY bool, allowAnyZ bool, allowAnyShell bool) bool {
-	return x.inner.VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell(index, allowAnyX, allowAnyY, allowAnyZ, allowAnyShell)
-}
-
-// Returns a data object containing all voxels within the specified volume.
-//
-// VoxelsWithinExtent calls the underlying VoxelsWithinExtent.
-func (x *VoxelArray) VoxelsWithinExtent(extent raw.MDLVoxelIndexExtent) *foundation.NSData {
-	return x.inner.VoxelsWithinExtent(extent)
-}
-
 // Returns a data object containing all voxels within the voxel array.
-//
-// VoxelIndices calls the underlying VoxelIndices.
-func (x *VoxelArray) VoxelIndices() *foundation.NSData {
-	return x.inner.VoxelIndices()
-}
-
-// Sets voxel characteristics at the specified index in the array.
-//
-// SetVoxelAtIndex calls the underlying SetVoxelAtIndex.
-func (x *VoxelArray) SetVoxelAtIndex(index unsafe.Pointer) {
-	x.inner.SetVoxelAtIndex(index)
+func (x *VoxelArray) VoxelIndices() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voxelIndices"))
+	return obj.Wrap(_r)
 }
 
 // Set voxels corresponding to a mesh. Routine will attempt to create a closed volume model by applying "patches" of a given radius to any holes it may find in the mesh.
-//
-// SetVoxelsForMeshDivisionsPatchRadius calls the underlying SetVoxelsForMeshDivisionsPatchRadius.
-func (x *VoxelArray) SetVoxelsForMeshDivisionsPatchRadius(mesh *raw.MDLMesh, divisions int, patchRadius float32) {
-	x.inner.SetVoxelsForMeshDivisionsPatchRadius(mesh, divisions, patchRadius)
+func (x *VoxelArray) SetVoxelsForMeshDivisionsPatchRadius(mesh *Mesh, divisions int, patchRadius float32) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoxelsForMesh:divisions:patchRadius:"), objref.IDOf(mesh), divisions, patchRadius)
 }
 
 // Sets voxel values in the array to model the volume of the specified mesh and creates the specified number of voxel shells.
-//
-// SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius calls the underlying SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius.
-func (x *VoxelArray) SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius(mesh *raw.MDLMesh, divisions int, interiorShells int, exteriorShells int, patchRadius float32) {
-	x.inner.SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius(mesh, divisions, interiorShells, exteriorShells, patchRadius)
+func (x *VoxelArray) SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius(mesh *Mesh, divisions int, interiorShells int, exteriorShells int, patchRadius float32) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoxelsForMesh:divisions:interiorShells:exteriorShells:patchRadius:"), objref.IDOf(mesh), divisions, interiorShells, exteriorShells, patchRadius)
 }
 
 // Sets voxel values in the array to model the volume of the specified mesh and creates voxel shells for the specified distances from the object’s surface.
-//
-// SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius calls the underlying SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius.
-func (x *VoxelArray) SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(mesh *raw.MDLMesh, divisions int, interiorNBWidth float32, exteriorNBWidth float32, patchRadius float32) {
-	x.inner.SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(mesh, divisions, interiorNBWidth, exteriorNBWidth, patchRadius)
+func (x *VoxelArray) SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(mesh *Mesh, divisions int, interiorNBWidth float32, exteriorNBWidth float32, patchRadius float32) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoxelsForMesh:divisions:interiorNBWidth:exteriorNBWidth:patchRadius:"), objref.IDOf(mesh), divisions, interiorNBWidth, exteriorNBWidth, patchRadius)
 }
 
 // Extends the voxel array to also cover the volume of the specified voxel array.
-//
-// UnionWithVoxels calls the underlying UnionWithVoxels.
-func (x *VoxelArray) UnionWithVoxels(voxels *raw.MDLVoxelArray) {
-	x.inner.UnionWithVoxels(voxels)
+func (x *VoxelArray) UnionWithVoxels(voxels *VoxelArray) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unionWithVoxels:"), objref.IDOf(voxels))
 }
 
 // Reduces the voxel array to cover only the volume within both it and another voxel array.
-//
-// IntersectWithVoxels calls the underlying IntersectWithVoxels.
-func (x *VoxelArray) IntersectWithVoxels(voxels *raw.MDLVoxelArray) {
-	x.inner.IntersectWithVoxels(voxels)
+func (x *VoxelArray) IntersectWithVoxels(voxels *VoxelArray) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intersectWithVoxels:"), objref.IDOf(voxels))
 }
 
 // Reduces the voxel array to cover only the portion of its volume not covered by another voxel array.
-//
-// DifferenceWithVoxels calls the underlying DifferenceWithVoxels.
-func (x *VoxelArray) DifferenceWithVoxels(voxels *raw.MDLVoxelArray) {
-	x.inner.DifferenceWithVoxels(voxels)
-}
-
-// Returns voxel information corresponding to the specified point in the world coordinate space of the asset from which the voxel array was created.
-//
-// IndexOfSpatialLocation calls the underlying IndexOfSpatialLocation.
-func (x *VoxelArray) IndexOfSpatialLocation(location unsafe.Pointer) unsafe.Pointer {
-	return x.inner.IndexOfSpatialLocation(location)
-}
-
-// Returns the location of the specified voxel in world coordinate space.
-//
-// SpatialLocationOfIndex calls the underlying SpatialLocationOfIndex.
-func (x *VoxelArray) SpatialLocationOfIndex(index unsafe.Pointer) unsafe.Pointer {
-	return x.inner.SpatialLocationOfIndex(index)
-}
-
-// Returns the extent of the specified voxel’s volume in the world coordinate space of the asset from which the voxel array was created.
-//
-// VoxelBoundingBoxAtIndex calls the underlying VoxelBoundingBoxAtIndex.
-func (x *VoxelArray) VoxelBoundingBoxAtIndex(index unsafe.Pointer) raw.MDLAxisAlignedBoundingBox {
-	return x.inner.VoxelBoundingBoxAtIndex(index)
+func (x *VoxelArray) DifferenceWithVoxels(voxels *VoxelArray) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("differenceWithVoxels:"), objref.IDOf(voxels))
 }
 
 // Converts volume grid into a signed shell field by surrounding the surface voxels, which have shell level values of zero, by an inner layer of voxels with shell level values of negative one and an outer layer of voxels with shell level values of positive one. The volume model must be closed in order to generate a signed shell field.
-//
-// ConvertToSignedShellField calls the underlying ConvertToSignedShellField.
 func (x *VoxelArray) ConvertToSignedShellField() {
-	x.inner.ConvertToSignedShellField()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convertToSignedShellField"))
 }
 
 // Creates a coarse mesh from the voxel grid
-//
-// CoarseMesh calls the underlying CoarseMesh.
 func (x *VoxelArray) CoarseMesh() *Mesh {
-	_r := x.inner.CoarseMesh()
-	if _r == nil {
-		return nil
-	}
-	return &Mesh{inner: _r}
-}
-
-// CoarseMeshUsingAllocator calls the underlying CoarseMeshUsingAllocator.
-func (x *VoxelArray) CoarseMeshUsingAllocator(allocator raw.MDLMeshBufferAllocator) *Mesh {
-	_r := x.inner.CoarseMeshUsingAllocator(allocator)
-	if _r == nil {
-		return nil
-	}
-	return &Mesh{inner: _r}
-}
-
-// Generates a closed polygon mesh around the volume of space the voxel array describes.
-//
-// MeshUsingAllocator calls the underlying MeshUsingAllocator.
-func (x *VoxelArray) MeshUsingAllocator(allocator raw.MDLMeshBufferAllocator) *Mesh {
-	_r := x.inner.MeshUsingAllocator(allocator)
-	if _r == nil {
-		return nil
-	}
-	return &Mesh{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coarseMesh"))
+	return MeshFromID(_r)
 }
 
 // The number of voxels in the grid
-//
-// Count calls the underlying Count.
-func (x *VoxelArray) Count() uint {
-	return x.inner.Count()
-}
-
-// The extent of the voxel grid in index space
-//
-// VoxelIndexExtent calls the underlying VoxelIndexExtent.
-func (x *VoxelArray) VoxelIndexExtent() raw.MDLVoxelIndexExtent {
-	return x.inner.VoxelIndexExtent()
-}
-
-// The extent of the voxel grid in Cartesian space
-//
-// BoundingBox calls the underlying BoundingBox.
-func (x *VoxelArray) BoundingBox() raw.MDLAxisAlignedBoundingBox {
-	return x.inner.BoundingBox()
+func (x *VoxelArray) Count() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+	return _r
 }
 
 // Returns whether or not the volume grid is in a valid signed shell field form. This property will be set to YES after calling generateSignedShellField. All other methods that modify the voxel grid will cause this property to be set to NO. Setting shellFieldInteriorThickness and shellFieldExteriorThickness will not affect the value of this property.
-//
-// IsValidSignedShellField calls the underlying IsValidSignedShellField.
 func (x *VoxelArray) IsValidSignedShellField() bool {
-	return x.inner.IsValidSignedShellField()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isValidSignedShellField"))
+	return _r
 }
 
 // If voxel grid is in a valid signed shell field form, sets the interior thickness to the desired width, as measured from the model surface. If the voxel grid is not in a valid signed shell field form, the value of this property is zero.
-//
-// ShellFieldInteriorThickness calls the underlying ShellFieldInteriorThickness.
 func (x *VoxelArray) ShellFieldInteriorThickness() float32 {
-	return x.inner.ShellFieldInteriorThickness()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("shellFieldInteriorThickness"))
+	return _r
 }
 
-// SetShellFieldInteriorThickness calls the underlying SetShellFieldInteriorThickness.
 func (x *VoxelArray) SetShellFieldInteriorThickness(shellFieldInteriorThickness float32) {
-	x.inner.SetShellFieldInteriorThickness(shellFieldInteriorThickness)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShellFieldInteriorThickness:"), shellFieldInteriorThickness)
 }
 
 // If voxel grid is in a valid signed shell field form, sets the exterior thickness to the desired width, as measured from the model surface. If the voxel grid is not in a valid signed shell field form, the value of this property is zero.
-//
-// ShellFieldExteriorThickness calls the underlying ShellFieldExteriorThickness.
 func (x *VoxelArray) ShellFieldExteriorThickness() float32 {
-	return x.inner.ShellFieldExteriorThickness()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("shellFieldExteriorThickness"))
+	return _r
 }
 
-// SetShellFieldExteriorThickness calls the underlying SetShellFieldExteriorThickness.
 func (x *VoxelArray) SetShellFieldExteriorThickness(shellFieldExteriorThickness float32) {
-	x.inner.SetShellFieldExteriorThickness(shellFieldExteriorThickness)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShellFieldExteriorThickness:"), shellFieldExteriorThickness)
 }
-
-func (x *VoxelArray) asObject() *raw.MDLObject { return &x.inner.MDLObject }
 
 // VoxelArrayable is the interface implemented by [VoxelArray], for mocking and DI.
 type VoxelArrayable interface {
-	Unwrap() *raw.MDLVoxelArray
+	obj.Object
 	WithShellFieldInteriorThickness(shellFieldInteriorThickness float32) *VoxelArray
 	WithShellFieldExteriorThickness(shellFieldExteriorThickness float32) *VoxelArray
 	WithParent(parent ObjectProvider) *VoxelArray
 	WithInstance(instance ObjectProvider) *VoxelArray
-	WithTransform(transform raw.MDLTransformComponent) *VoxelArray
-	WithChildren(children raw.MDLObjectContainerComponent) *VoxelArray
 	WithHidden(hidden bool) *VoxelArray
-	VoxelExistsAtIndexAllowAnyXAllowAnyYAllowAnyZAllowAnyShell(index unsafe.Pointer, allowAnyX bool, allowAnyY bool, allowAnyZ bool, allowAnyShell bool) bool
-	VoxelsWithinExtent(extent raw.MDLVoxelIndexExtent) *foundation.NSData
-	VoxelIndices() *foundation.NSData
-	SetVoxelAtIndex(index unsafe.Pointer)
-	SetVoxelsForMeshDivisionsPatchRadius(mesh *raw.MDLMesh, divisions int, patchRadius float32)
-	SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius(mesh *raw.MDLMesh, divisions int, interiorShells int, exteriorShells int, patchRadius float32)
-	SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(mesh *raw.MDLMesh, divisions int, interiorNBWidth float32, exteriorNBWidth float32, patchRadius float32)
-	UnionWithVoxels(voxels *raw.MDLVoxelArray)
-	IntersectWithVoxels(voxels *raw.MDLVoxelArray)
-	DifferenceWithVoxels(voxels *raw.MDLVoxelArray)
-	IndexOfSpatialLocation(location unsafe.Pointer) unsafe.Pointer
-	SpatialLocationOfIndex(index unsafe.Pointer) unsafe.Pointer
-	VoxelBoundingBoxAtIndex(index unsafe.Pointer) raw.MDLAxisAlignedBoundingBox
+	VoxelIndices() obj.Object
+	SetVoxelsForMeshDivisionsPatchRadius(mesh *Mesh, divisions int, patchRadius float32)
+	SetVoxelsForMeshDivisionsInteriorShellsExteriorShellsPatchRadius(mesh *Mesh, divisions int, interiorShells int, exteriorShells int, patchRadius float32)
+	SetVoxelsForMeshDivisionsInteriorNBWidthExteriorNBWidthPatchRadius(mesh *Mesh, divisions int, interiorNBWidth float32, exteriorNBWidth float32, patchRadius float32)
+	UnionWithVoxels(voxels *VoxelArray)
+	IntersectWithVoxels(voxels *VoxelArray)
+	DifferenceWithVoxels(voxels *VoxelArray)
 	ConvertToSignedShellField()
 	CoarseMesh() *Mesh
-	CoarseMeshUsingAllocator(allocator raw.MDLMeshBufferAllocator) *Mesh
-	MeshUsingAllocator(allocator raw.MDLMeshBufferAllocator) *Mesh
-	Count() uint
-	VoxelIndexExtent() raw.MDLVoxelIndexExtent
-	BoundingBox() raw.MDLAxisAlignedBoundingBox
+	Count() int
 	IsValidSignedShellField() bool
 	ShellFieldInteriorThickness() float32
 	SetShellFieldInteriorThickness(shellFieldInteriorThickness float32)

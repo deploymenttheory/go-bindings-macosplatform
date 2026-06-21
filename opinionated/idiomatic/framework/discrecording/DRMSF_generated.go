@@ -5,129 +5,137 @@
 package discrecording
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MSF wraps [raw.DRMSF] with a fluent Go API.
+// MSF is an idiomatic wrapper over the Objective-C class DRMSF.
 type MSF struct {
-	inner *raw.DRMSF
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DRMSF].
-func (x *MSF) Unwrap() *raw.DRMSF { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MSF) ID() objc.ID { return x.inner.Ptr() }
-
-// MSFFromID adopts an existing object pointer as a MSF (nil for 0).
+// MSFFromID adopts an existing Objective-C object as a MSF
+// (nil for 0), retaining it and registering a release finalizer.
 func MSFFromID(id objc.ID) *MSF {
 	if id == 0 {
 		return nil
 	}
-	return &MSF{inner: raw.DRMSFFromID(id)}
+	x := &MSF{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @method		initWithFrames @abstract	Initializes an msf object whose length is frames. @result		A DRMSF object.
+// mSFAdopt wraps an Objective-C object that this code just created as a
+// MSF (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mSFAdopt(id objc.ID) *MSF {
+	if id == 0 {
+		return nil
+	}
+	x := &MSF{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MSF) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MSF) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MSF) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// Initializes an msf object whose length is frames.
 //
-// NewMSFWithFrames creates a new [MSF].
-func NewMSFWithFrames(frames uint) *MSF {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRMSF")), objc.RegisterName("alloc"))
+// NewMSFWithFrames creates a new MSF.
+func NewMSFWithFrames(frames int) *MSF {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DRMSF")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrames:"), frames)
-	return &MSF{inner: raw.DRMSFFromID(_id)}
+	return mSFAdopt(_id)
 }
 
-// @method		initWithString @abstract	Initializes an msf object initialized to the value represented by string @result		A DRMSF object.
+// Initializes an msf object initialized to the value represented by string
 //
-// NewMSFWithString creates a new [MSF].
+// NewMSFWithString creates a new MSF.
 func NewMSFWithString(string_ string) *MSF {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRMSF")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
-	return &MSF{inner: raw.DRMSFFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DRMSF")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(string_))
+	return mSFAdopt(_id)
 }
 
-// @method		minutes @abstract	Returns the number of minutes represented by the receiver. @discussion	If the receiver represents a non integral number of minutes, only the whole minute value is returned. For example an DRMSF value of 5:30:72 will return 5 from a message to @link //apple_ref/occ/instm/DRMSF/minutes minutes @/link.
-//
-// Minutes calls the underlying Minutes.
-func (x *MSF) Minutes() uint {
-	return x.inner.Minutes()
+// Returns the number of minutes represented by the receiver. If the receiver represents a non integral number of minutes, only the whole minute value is returned. For example an DRMSF value of 5:30:72 will return 5 from a message to
+func (x *MSF) Minutes() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minutes"))
+	return _r
 }
 
-// @method		seconds @abstract	Returns the number of seconds represented by the receiver. @discussion	If the receiver represents a non integral number of seconds, only the whole second value is returned. For example an DRMSF value of 5:30:72 will return 30 from a message to @link //apple_ref/occ/instm/DRMSF/seconds seconds @/link.
-//
-// Seconds calls the underlying Seconds.
-func (x *MSF) Seconds() uint {
-	return x.inner.Seconds()
+// Returns the number of seconds represented by the receiver. If the receiver represents a non integral number of seconds, only the whole second value is returned. For example an DRMSF value of 5:30:72 will return 30 from a message to
+func (x *MSF) Seconds() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("seconds"))
+	return _r
 }
 
-// @method		frames @abstract	Returns the number of frames represented by the receiver. @discussion	This method differs from @link //apple_ref/occ/instm/DFMSF/sectors sectors @/link in that it returns to the caller the number of frames remaining in the current second. For example an DRMSF value of 5:30:72 will return 72 from a message to @link //apple_ref/occ/instm/DRMSF/frames frames @/link.
-//
-// Frames calls the underlying Frames.
-func (x *MSF) Frames() uint {
-	return x.inner.Frames()
+// Returns the number of frames represented by the receiver. This method differs from
+func (x *MSF) Frames() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frames"))
+	return _r
 }
 
-// @method		sectors @abstract	Returns the total number of frames/sectors represented by the receiver. @discussion	This method differs from @link //apple_ref/occ/instm/DRMSF/frames frames @/link in that it returns to the caller the total number of frames/sectors represented by the object. For example an DRMSF value of 5:30:72 will return 24822 from a message to @link //apple_ref/occ/instm/DRMSF/sectors sectors @/link.
-//
-// Sectors calls the underlying Sectors.
-func (x *MSF) Sectors() uint {
-	return x.inner.Sectors()
+// Returns the total number of frames/sectors represented by the receiver. This method differs from
+func (x *MSF) Sectors() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sectors"))
+	return _r
 }
 
-// @method		msfByAdding @abstract	Adds an msf to the receiver. @param		msf	The msf to add to the receiver @result		A new DRMSF object totalling the sum of the reciever and msf
-//
-// MsfByAdding calls the underlying MsfByAdding.
-func (x *MSF) MsfByAdding(msf *raw.DRMSF) *MSF {
-	_r := x.inner.MsfByAdding(msf)
-	if _r == nil {
-		return nil
-	}
-	return &MSF{inner: _r}
+// Adds an msf to the receiver.
+func (x *MSF) MsfByAdding(msf *MSF) *MSF {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("msfByAdding:"), objref.IDOf(msf))
+	return MSFFromID(_r)
 }
 
-// @method		msfBySubtracting @abstract	Subtracts an msf to the receiver. @param		msf	The msf to subtract from the receiver @result		A new DRMSF object totalling the difference of the reciever and msf
-//
-// MsfBySubtracting calls the underlying MsfBySubtracting.
-func (x *MSF) MsfBySubtracting(msf *raw.DRMSF) *MSF {
-	_r := x.inner.MsfBySubtracting(msf)
-	if _r == nil {
-		return nil
-	}
-	return &MSF{inner: _r}
+// Subtracts an msf to the receiver.
+func (x *MSF) MsfBySubtracting(msf *MSF) *MSF {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("msfBySubtracting:"), objref.IDOf(msf))
+	return MSFFromID(_r)
 }
 
-// @method		descriptionWithFormat @abstract	Returns a textual representation of the receiver. @discussion	The format string is very similar to a printf-style format string with %-escaped formatting characters. <ul> <li>%%	A "%" character</li> <li>%m	Minutes as a decimal number</li> <li>%s	Seconds as a decimal number</li> <li>%f	Frames as a decimal number</li> </ul> In addition to these formatting characters an optional length specifier can come between then % and the formatting character. This length specifier will force the field in question to be at least that wide. For example a format specifier of "%02m:%02s" will cause a DRMSF object representing 3 minutes 9 seconds to be formatted as "03:09". A formatter is aware of and respects rounding. If a bit of the msf is not zero, but the format does not display that value, the next higher value will be increased by one to reflect that. Extending our example above, an DRMSF with a value of 3 minutes, 9 seconds, 15 frames using a format specfier of "%02m:%02s", will be formatted as "03:10" since the 15 frames rounds up the seconds to the next value @param		format	The format of the description string. @result		NSString containing a textual representation of the object utilizing the specified format.
-//
-// DescriptionWithFormat calls the underlying DescriptionWithFormat.
+// Returns a textual representation of the receiver. The format string is very similar to a printf-style format string with %-escaped formatting characters. <ul> <li>%%	A "%" character</li> <li>%m	Minutes as a decimal number</li> <li>%s	Seconds as a decimal number</li> <li>%f	Frames as a decimal number</li> </ul> In addition to these formatting characters an optional length specifier can come between then % and the formatting character. This length specifier will force the field in question to be at least that wide. For example a format specifier of "%02m:%02s" will cause a DRMSF object representing 3 minutes 9 seconds to be formatted as "03:09". A formatter is aware of and respects rounding. If a bit of the msf is not zero, but the format does not display that value, the next higher value will be increased by one to reflect that. Extending our example above, an DRMSF with a value of 3 minutes, 9 seconds, 15 frames using a format specfier of "%02m:%02s", will be formatted as "03:10" since the 15 frames rounds up the seconds to the next value
 func (x *MSF) DescriptionWithFormat(format string) string {
-	_r := x.inner.DescriptionWithFormat(foundation.NSStringStringWithUTF8String(format))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithFormat:"), purego.NSString(format))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @method		isEqualToMSF @abstract	Compares on emsf to another. @param		otherDRMSF	The msf to compare to the receiver @result		<i>YES</i> if the two object are equal, <i>NO</i> otherwise.
-//
-// IsEqualToMSF calls the underlying IsEqualToMSF.
-func (x *MSF) IsEqualToMSF(otherDRMSF *raw.DRMSF) bool {
-	return x.inner.IsEqualToMSF(otherDRMSF)
+// Compares on emsf to another.
+func (x *MSF) IsEqualToMSF(otherDRMSF *MSF) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToMSF:"), objref.IDOf(otherDRMSF))
+	return _r
 }
 
 // MSFable is the interface implemented by [MSF], for mocking and DI.
 type MSFable interface {
-	Unwrap() *raw.DRMSF
-	Minutes() uint
-	Seconds() uint
-	Frames() uint
-	Sectors() uint
-	MsfByAdding(msf *raw.DRMSF) *MSF
-	MsfBySubtracting(msf *raw.DRMSF) *MSF
+	obj.Object
+	Minutes() int
+	Seconds() int
+	Frames() int
+	Sectors() int
+	MsfByAdding(msf *MSF) *MSF
+	MsfBySubtracting(msf *MSF) *MSF
 	DescriptionWithFormat(format string) string
-	IsEqualToMSF(otherDRMSF *raw.DRMSF) bool
+	IsEqualToMSF(otherDRMSF *MSF) bool
 }
 
 var _ MSFable = (*MSF)(nil)

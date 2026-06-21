@@ -5,64 +5,82 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams wraps [raw.MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams] with a fluent Go API.
+// MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams is an idiomatic wrapper over the Objective-C class MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams.
 type MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams struct {
-	inner *raw.MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams].
-func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams) Unwrap() *raw.MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams (nil for 0).
+// MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsFromID adopts an existing Objective-C object as a MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsFromID(id objc.ID) *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams{inner: raw.MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsFromID(id)}
+	x := &MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams creates a new [MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams].
+// mTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsAdopt(id objc.ID) *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams creates a new MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams.
 func NewMTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams() *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams")), objc.RegisterName("new"))
-	return &MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams{inner: raw.MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams")), objc.RegisterName("new"))
+	return mTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsAdopt(_id)
 }
 
-// WithValue sets the value property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams) WithValue(value *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams {
-	x.inner.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams.SetValue(value)
+// WithValue sets value and returns the receiver so calls can be chained.
+func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams) WithValue(value obj.Object) *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams {
-	x.inner.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
-}
-
-func (x *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams) asMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams {
-	return &x.inner.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams
 }
 
 // MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsable is the interface implemented by [MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams], for mocking and DI.
 type MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsable interface {
-	Unwrap() *raw.MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams
-	WithValue(value *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams
+	obj.Object
+	WithValue(value obj.Object) *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams
 }
 
 var _ MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsable = (*MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams)(nil)

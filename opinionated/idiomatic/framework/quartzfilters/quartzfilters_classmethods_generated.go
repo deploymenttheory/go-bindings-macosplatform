@@ -5,33 +5,33 @@
 package quartzfilters
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzfilters"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// QuartzFilterWithURL calls the underlying QuartzFilterQuartzFilterWithURL.
-func QuartzFilterWithURL(aURL string) *quartz.QuartzFilter {
-	return raw.QuartzFilterQuartzFilterWithURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(aURL)))
+func QuartzFilterWithURL(aURL string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilter")), objc.RegisterName("quartzFilterWithURL:"), rt.FileURL(aURL))
+	return obj.Wrap(_r)
 }
 
-// QuartzFilterWithProperties calls the underlying QuartzFilterQuartzFilterWithProperties.
-func QuartzFilterWithProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) *quartz.QuartzFilter {
-	return raw.QuartzFilterQuartzFilterWithProperties(properties)
+func QuartzFilterWithProperties(properties obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilter")), objc.RegisterName("quartzFilterWithProperties:"), objref.IDOf(properties))
+	return obj.Wrap(_r)
 }
 
-// QuartzFilterWithOutputIntents calls the underlying QuartzFilterQuartzFilterWithOutputIntents.
-func QuartzFilterWithOutputIntents(outputIntents *foundation.NSArray[objc.ID]) *quartz.QuartzFilter {
-	return raw.QuartzFilterQuartzFilterWithOutputIntents(outputIntents)
+func QuartzFilterWithOutputIntents(outputIntents obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilter")), objc.RegisterName("quartzFilterWithOutputIntents:"), objref.IDOf(outputIntents))
+	return obj.Wrap(_r)
 }
 
-// FilterManager calls the underlying QuartzFilterManagerFilterManager.
-func FilterManager() *quartz.QuartzFilterManager {
-	return raw.QuartzFilterManagerFilterManager()
+func FilterManager() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilterManager")), objc.RegisterName("filterManager"))
+	return obj.Wrap(_r)
 }
 
-// FiltersInDomains calls the underlying QuartzFilterManagerFiltersInDomains.
-func FiltersInDomains(domains *foundation.NSArray[objc.ID]) *foundation.NSArray[objc.ID] {
-	return raw.QuartzFilterManagerFiltersInDomains(domains)
+func FiltersInDomains(domains obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("QuartzFilterManager")), objc.RegisterName("filtersInDomains:"), objref.IDOf(domains))
+	return obj.Wrap(_r)
 }

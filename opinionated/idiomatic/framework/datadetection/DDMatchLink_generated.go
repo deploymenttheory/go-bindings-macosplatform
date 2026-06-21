@@ -5,50 +5,74 @@
 package datadetection
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/datadetection"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains a web link that the data detection system matches.
 //
-// MatchLink wraps [raw.DDMatchLink] with a fluent Go API.
+// MatchLink is an idiomatic wrapper over the Objective-C class DDMatchLink.
 type MatchLink struct {
-	inner *raw.DDMatchLink
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DDMatchLink].
-func (x *MatchLink) Unwrap() *raw.DDMatchLink { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatchLink) ID() objc.ID { return x.inner.Ptr() }
-
-// MatchLinkFromID adopts an existing object pointer as a MatchLink (nil for 0).
+// MatchLinkFromID adopts an existing Objective-C object as a MatchLink
+// (nil for 0), retaining it and registering a release finalizer.
 func MatchLinkFromID(id objc.ID) *MatchLink {
 	if id == 0 {
 		return nil
 	}
-	return &MatchLink{inner: raw.DDMatchLinkFromID(id)}
+	x := &MatchLink{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMatchLink creates a new [MatchLink].
+// matchLinkAdopt wraps an Objective-C object that this code just created as a
+// MatchLink (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matchLinkAdopt(id objc.ID) *MatchLink {
+	if id == 0 {
+		return nil
+	}
+	x := &MatchLink{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MatchLink) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatchLink) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatchLink) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMatchLink creates a new MatchLink.
 func NewMatchLink() *MatchLink {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DDMatchLink")), objc.RegisterName("new"))
-	return &MatchLink{inner: raw.DDMatchLinkFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DDMatchLink")), objc.RegisterName("new"))
+	return matchLinkAdopt(_id)
 }
 
-// URL calls the underlying URL.
-func (x *MatchLink) URL() *foundation.NSURL {
-	return x.inner.URL()
+func (x *MatchLink) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
-
-func (x *MatchLink) asMatch() *raw.DDMatch { return &x.inner.DDMatch }
 
 // MatchLinkable is the interface implemented by [MatchLink], for mocking and DI.
 type MatchLinkable interface {
-	Unwrap() *raw.DDMatchLink
-	URL() *foundation.NSURL
+	obj.Object
+	URL() obj.Object
 }
 
 var _ MatchLinkable = (*MatchLink)(nil)

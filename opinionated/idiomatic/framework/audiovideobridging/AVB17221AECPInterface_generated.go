@@ -5,100 +5,91 @@
 package audiovideobridging
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// AVB17221AECPInterface wraps [raw.AVB17221AECPInterface] with a fluent Go API.
+// AVB17221AECPInterface is an idiomatic wrapper over the Objective-C class AVB17221AECPInterface.
 type AVB17221AECPInterface struct {
-	inner *raw.AVB17221AECPInterface
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVB17221AECPInterface].
-func (x *AVB17221AECPInterface) Unwrap() *raw.AVB17221AECPInterface { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AVB17221AECPInterface) ID() objc.ID { return x.inner.Ptr() }
-
-// AVB17221AECPInterfaceFromID adopts an existing object pointer as a AVB17221AECPInterface (nil for 0).
+// AVB17221AECPInterfaceFromID adopts an existing Objective-C object as a AVB17221AECPInterface
+// (nil for 0), retaining it and registering a release finalizer.
 func AVB17221AECPInterfaceFromID(id objc.ID) *AVB17221AECPInterface {
 	if id == 0 {
 		return nil
 	}
-	return &AVB17221AECPInterface{inner: raw.AVB17221AECPInterfaceFromID(id)}
+	x := &AVB17221AECPInterface{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAVB17221AECPInterface creates a new [AVB17221AECPInterface].
+// aVB17221AECPInterfaceAdopt wraps an Objective-C object that this code just created as a
+// AVB17221AECPInterface (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func aVB17221AECPInterfaceAdopt(id objc.ID) *AVB17221AECPInterface {
+	if id == 0 {
+		return nil
+	}
+	x := &AVB17221AECPInterface{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AVB17221AECPInterface) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AVB17221AECPInterface) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AVB17221AECPInterface) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAVB17221AECPInterface creates a new AVB17221AECPInterface.
 func NewAVB17221AECPInterface() *AVB17221AECPInterface {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVB17221AECPInterface")), objc.RegisterName("new"))
-	return &AVB17221AECPInterface{inner: raw.AVB17221AECPInterfaceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPInterface")), objc.RegisterName("new"))
+	return aVB17221AECPInterfaceAdopt(_id)
 }
 
-// @method		setCommandHandler:forEntityID: @abstract	Add an object implementing the AVB17221AECPClient protocol as a handler for command messages to a specified Entity ID. @param		handler	The object which will handle all of the commands. @param		targetEntityID	The Entity ID of the entity the messages are to. @result		YES if the handler was added, NO if there is already a handler or if the routing ID couldn't be added.
-//
-// SetCommandHandlerForEntityID calls the underlying SetCommandHandlerForEntityID.
-func (x *AVB17221AECPInterface) SetCommandHandlerForEntityID(handler raw.AVB17221AECPClient, targetEntityID uint64) bool {
-	return x.inner.SetCommandHandlerForEntityID(handler, targetEntityID)
-}
-
-// @method		removeCommandHandlerForEntityID: @abstract	Removed a handler for command messages to or from a specified EntityID. @param		targetEntityID	The EntityID of the entity the messages are to.
-//
-// RemoveCommandHandlerForEntityID calls the underlying RemoveCommandHandlerForEntityID.
+// Removed a handler for command messages to or from a specified EntityID.
 func (x *AVB17221AECPInterface) RemoveCommandHandlerForEntityID(targetEntityID uint64) {
-	x.inner.RemoveCommandHandlerForEntityID(targetEntityID)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeCommandHandlerForEntityID:"), targetEntityID)
 }
 
-// @method		setResponseHandler:forControllerEntityID: @abstract	Add an object implementing the AVB17221AECPClient protocol as a handler for response messages for a specified controller EntityID. @param		handler	The object which will handle all of the responses for the Controller Entity ID. @param		controllerEntityID	The Entity ID of the controller the messages are for. @result		YES if the handler was added, NO if there is already a handler or if the routing ID couldn't be added.
-//
-// SetResponseHandlerForControllerEntityID calls the underlying SetResponseHandlerForControllerEntityID.
-func (x *AVB17221AECPInterface) SetResponseHandlerForControllerEntityID(handler raw.AVB17221AECPClient, controllerEntityID uint64) bool {
-	return x.inner.SetResponseHandlerForControllerEntityID(handler, controllerEntityID)
-}
-
-// @method		removeResponseHandlerForControllerEntityID: @abstract	Removed a handler for response messages to or from a specified EntityID. @param		controllerEntityID	The EntityID of the controller the messages are for.
-//
-// RemoveResponseHandlerForControllerEntityID calls the underlying RemoveResponseHandlerForControllerEntityID.
+// Removed a handler for response messages to or from a specified EntityID.
 func (x *AVB17221AECPInterface) RemoveResponseHandlerForControllerEntityID(controllerEntityID uint64) {
-	x.inner.RemoveResponseHandlerForControllerEntityID(controllerEntityID)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeResponseHandlerForControllerEntityID:"), controllerEntityID)
 }
 
-// @method		sendCommand:toMACAddress:completionHandler: @abstract	Send an AECP command message. @param		message	An instance of a subclass of AVB17221AECPMessage which contains the command message. @param		destMAC	The MAC address of the end station to send the message to. @param		completionHandler	A block containing code to execute when the command has been sent or timed out. @result		A BOOL indicating success or failure @discussion	This method synchronizes access to the kernel service providing transport for the message. This method is safe to call from any thread.
-//
-// SendCommandToMACAddressCompletionHandler calls the underlying SendCommandToMACAddressCompletionHandler.
-func (x *AVB17221AECPInterface) SendCommandToMACAddressCompletionHandler(message *raw.AVB17221AECPMessage, destMAC *raw.AVBMACAddress, completionHandler func(unsafe.Pointer, *raw.AVB17221AECPMessage)) bool {
-	return x.inner.SendCommandToMACAddressCompletionHandler(message, destMAC, completionHandler)
-}
-
-// @method		sendResponse:toMACAddress:error: @abstract	Send an AECP response. @param		message	An instance of a subclass of AVB17221AECPMessage which contains the response message. @param		destMAC	The MAC address of the end station to send the message to. This argument needs to points to kIOEthernetAddressSize bytes of memory. @result		IOReturn indicating success or failure and reason for failure. @discussion	This method synchronizes access to the kernel service providing transport for the message. This method is safe to call from any thread.
-//
-// SendResponseToMACAddressError calls the underlying SendResponseToMACAddressError.
-func (x *AVB17221AECPInterface) SendResponseToMACAddressError(message *raw.AVB17221AECPMessage, destMAC *raw.AVBMACAddress) (bool, error) {
-	return x.inner.SendResponseToMACAddressError(message, destMAC)
-}
-
-// @method		sendVendorUniqueCommand:toMACAddress:expectResponseWithinTimeout:completionHandler: @abstract	Send an AECP vendor unique command message expected to receive a matching response. @param		message	An instance of AVB17221AECPVendorMessage which contains the command message. @param		destMAC	The MAC address of the end station to send the message to. @param		timeout	The number of milliseconds before the command times out. @param		completionHandler	A block containing code to execute when the command has been sent or timed out. @result		A BOOL indicating success or failure @discussion	This method synchronizes access to the kernel service providing transport for the message. This method is safe to call from any thread.
-//
-// SendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler calls the underlying SendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler.
-func (x *AVB17221AECPInterface) SendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler(message *raw.AVB17221AECPVendorMessage, destMAC *raw.AVBMACAddress, timeout int64, completionHandler func(unsafe.Pointer, *raw.AVB17221AECPMessage)) bool {
-	return x.inner.SendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler(message, destMAC, timeout, completionHandler)
-}
-
-func (x *AVB17221AECPInterface) asAVB1722ControlInterface() *raw.AVB1722ControlInterface {
-	return &x.inner.AVB1722ControlInterface
+// Send an AECP response. This method synchronizes access to the kernel service providing transport for the message. This method is safe to call from any thread.
+func (x *AVB17221AECPInterface) SendResponseToMACAddress(message *AVB17221AECPMessage, destMAC *MACAddress) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendResponse:toMACAddress:error:"), objref.IDOf(message), objref.IDOf(destMAC), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // AVB17221AECPInterfaceable is the interface implemented by [AVB17221AECPInterface], for mocking and DI.
 type AVB17221AECPInterfaceable interface {
-	Unwrap() *raw.AVB17221AECPInterface
-	SetCommandHandlerForEntityID(handler raw.AVB17221AECPClient, targetEntityID uint64) bool
+	obj.Object
 	RemoveCommandHandlerForEntityID(targetEntityID uint64)
-	SetResponseHandlerForControllerEntityID(handler raw.AVB17221AECPClient, controllerEntityID uint64) bool
 	RemoveResponseHandlerForControllerEntityID(controllerEntityID uint64)
-	SendCommandToMACAddressCompletionHandler(message *raw.AVB17221AECPMessage, destMAC *raw.AVBMACAddress, completionHandler func(unsafe.Pointer, *raw.AVB17221AECPMessage)) bool
-	SendResponseToMACAddressError(message *raw.AVB17221AECPMessage, destMAC *raw.AVBMACAddress) (bool, error)
-	SendVendorUniqueCommandToMACAddressExpectResponseWithinTimeoutCompletionHandler(message *raw.AVB17221AECPVendorMessage, destMAC *raw.AVBMACAddress, timeout int64, completionHandler func(unsafe.Pointer, *raw.AVB17221AECPMessage)) bool
+	SendResponseToMACAddress(message *AVB17221AECPMessage, destMAC *MACAddress) error
 }
 
 var _ AVB17221AECPInterfaceable = (*AVB17221AECPInterface)(nil)

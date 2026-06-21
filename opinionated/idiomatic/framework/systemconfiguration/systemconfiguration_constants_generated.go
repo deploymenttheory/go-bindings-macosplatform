@@ -5,1548 +5,1649 @@
 package systemconfiguration
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/systemconfiguration"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KSCDynamicStoreUseSessionKeys returns the value of the CoreFoundation reference constant kSCDynamicStoreUseSessionKeys as an objc.ID.
-func KSCDynamicStoreUseSessionKeys() objc.ID {
-	return purego.CFConstant(raw.KSCDynamicStoreUseSessionKeys())
+// KSCDynamicStoreUseSessionKeys returns the value of the constant kSCDynamicStoreUseSessionKeys.
+func KSCDynamicStoreUseSessionKeys() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStoreUseSessionKeys")))
 }
 
-// @const kSCResvLink @discussion Value is a CFString
-// KSCResvLink returns the value of the CoreFoundation reference constant kSCResvLink as an objc.ID.
-func KSCResvLink() objc.ID { return purego.CFConstant(raw.KSCResvLink()) }
+// Value is a CFString
+// KSCResvLink returns the value of the constant kSCResvLink.
+func KSCResvLink() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCResvLink"))) }
 
-// @const kSCResvInactive
-// KSCResvInactive returns the value of the CoreFoundation reference constant kSCResvInactive as an objc.ID.
-func KSCResvInactive() objc.ID { return purego.CFConstant(raw.KSCResvInactive()) }
+// KSCResvInactive returns the value of the constant kSCResvInactive.
+func KSCResvInactive() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCResvInactive"))) }
 
-// @const kSCPropInterfaceName @discussion Value is a CFString
-// KSCPropInterfaceName returns the value of the CoreFoundation reference constant kSCPropInterfaceName as an objc.ID.
-func KSCPropInterfaceName() objc.ID { return purego.CFConstant(raw.KSCPropInterfaceName()) }
+// Value is a CFString
+// KSCPropInterfaceName returns the value of the constant kSCPropInterfaceName.
+func KSCPropInterfaceName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropInterfaceName")))
+}
 
-// @const kSCPropMACAddress @discussion Value is a CFString
-// KSCPropMACAddress returns the value of the CoreFoundation reference constant kSCPropMACAddress as an objc.ID.
-func KSCPropMACAddress() objc.ID { return purego.CFConstant(raw.KSCPropMACAddress()) }
+// Value is a CFString
+// KSCPropMACAddress returns the value of the constant kSCPropMACAddress.
+func KSCPropMACAddress() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCPropMACAddress"))) }
 
-// @const kSCPropUserDefinedName @discussion Value is a CFString
-// KSCPropUserDefinedName returns the value of the CoreFoundation reference constant kSCPropUserDefinedName as an objc.ID.
-func KSCPropUserDefinedName() objc.ID { return purego.CFConstant(raw.KSCPropUserDefinedName()) }
+// Value is a CFString
+// KSCPropUserDefinedName returns the value of the constant kSCPropUserDefinedName.
+func KSCPropUserDefinedName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropUserDefinedName")))
+}
 
-// @const kSCPropVersion @discussion Value is a CFString
-// KSCPropVersion returns the value of the CoreFoundation reference constant kSCPropVersion as an objc.ID.
-func KSCPropVersion() objc.ID { return purego.CFConstant(raw.KSCPropVersion()) }
+// Value is a CFString
+// KSCPropVersion returns the value of the constant kSCPropVersion.
+func KSCPropVersion() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCPropVersion"))) }
 
-// @const kSCPrefCurrentSet @discussion Value is a CFString
-// KSCPrefCurrentSet returns the value of the CoreFoundation reference constant kSCPrefCurrentSet as an objc.ID.
-func KSCPrefCurrentSet() objc.ID { return purego.CFConstant(raw.KSCPrefCurrentSet()) }
+// Value is a CFString
+// KSCPrefCurrentSet returns the value of the constant kSCPrefCurrentSet.
+func KSCPrefCurrentSet() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCPrefCurrentSet"))) }
 
-// @const kSCPrefNetworkServices @discussion Value is a CFDictionary
-// KSCPrefNetworkServices returns the value of the CoreFoundation reference constant kSCPrefNetworkServices as an objc.ID.
-func KSCPrefNetworkServices() objc.ID { return purego.CFConstant(raw.KSCPrefNetworkServices()) }
+// Value is a CFDictionary
+// KSCPrefNetworkServices returns the value of the constant kSCPrefNetworkServices.
+func KSCPrefNetworkServices() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPrefNetworkServices")))
+}
 
-// @const kSCPrefSets @discussion Value is a CFDictionary
-// KSCPrefSets returns the value of the CoreFoundation reference constant kSCPrefSets as an objc.ID.
-func KSCPrefSets() objc.ID { return purego.CFConstant(raw.KSCPrefSets()) }
+// Value is a CFDictionary
+// KSCPrefSets returns the value of the constant kSCPrefSets.
+func KSCPrefSets() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCPrefSets"))) }
 
-// @const kSCPrefSystem @discussion Value is a CFDictionary
-// KSCPrefSystem returns the value of the CoreFoundation reference constant kSCPrefSystem as an objc.ID.
-func KSCPrefSystem() objc.ID { return purego.CFConstant(raw.KSCPrefSystem()) }
+// Value is a CFDictionary
+// KSCPrefSystem returns the value of the constant kSCPrefSystem.
+func KSCPrefSystem() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCPrefSystem"))) }
 
-// @const kSCCompNetwork
-// KSCCompNetwork returns the value of the CoreFoundation reference constant kSCCompNetwork as an objc.ID.
-func KSCCompNetwork() objc.ID { return purego.CFConstant(raw.KSCCompNetwork()) }
+// KSCCompNetwork returns the value of the constant kSCCompNetwork.
+func KSCCompNetwork() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCCompNetwork"))) }
 
-// @const kSCCompService
-// KSCCompService returns the value of the CoreFoundation reference constant kSCCompService as an objc.ID.
-func KSCCompService() objc.ID { return purego.CFConstant(raw.KSCCompService()) }
+// KSCCompService returns the value of the constant kSCCompService.
+func KSCCompService() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCCompService"))) }
 
-// @const kSCCompGlobal
-// KSCCompGlobal returns the value of the CoreFoundation reference constant kSCCompGlobal as an objc.ID.
-func KSCCompGlobal() objc.ID { return purego.CFConstant(raw.KSCCompGlobal()) }
+// KSCCompGlobal returns the value of the constant kSCCompGlobal.
+func KSCCompGlobal() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCCompGlobal"))) }
 
-// @const kSCCompHostNames
-// KSCCompHostNames returns the value of the CoreFoundation reference constant kSCCompHostNames as an objc.ID.
-func KSCCompHostNames() objc.ID { return purego.CFConstant(raw.KSCCompHostNames()) }
+// KSCCompHostNames returns the value of the constant kSCCompHostNames.
+func KSCCompHostNames() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCCompHostNames"))) }
 
-// @const kSCCompInterface
-// KSCCompInterface returns the value of the CoreFoundation reference constant kSCCompInterface as an objc.ID.
-func KSCCompInterface() objc.ID { return purego.CFConstant(raw.KSCCompInterface()) }
+// KSCCompInterface returns the value of the constant kSCCompInterface.
+func KSCCompInterface() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCCompInterface"))) }
 
-// @const kSCCompSystem
-// KSCCompSystem returns the value of the CoreFoundation reference constant kSCCompSystem as an objc.ID.
-func KSCCompSystem() objc.ID { return purego.CFConstant(raw.KSCCompSystem()) }
+// KSCCompSystem returns the value of the constant kSCCompSystem.
+func KSCCompSystem() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCCompSystem"))) }
 
-// @const kSCCompUsers
-// KSCCompUsers returns the value of the CoreFoundation reference constant kSCCompUsers as an objc.ID.
-func KSCCompUsers() objc.ID { return purego.CFConstant(raw.KSCCompUsers()) }
+// KSCCompUsers returns the value of the constant kSCCompUsers.
+func KSCCompUsers() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCCompUsers"))) }
 
-// @const kSCCompAnyRegex
-// KSCCompAnyRegex returns the value of the CoreFoundation reference constant kSCCompAnyRegex as an objc.ID.
-func KSCCompAnyRegex() objc.ID { return purego.CFConstant(raw.KSCCompAnyRegex()) }
+// KSCCompAnyRegex returns the value of the constant kSCCompAnyRegex.
+func KSCCompAnyRegex() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCCompAnyRegex"))) }
 
-// @const kSCEntNetAirPort @discussion Value is a CFDictionary
-// KSCEntNetAirPort returns the value of the CoreFoundation reference constant kSCEntNetAirPort as an objc.ID.
-func KSCEntNetAirPort() objc.ID { return purego.CFConstant(raw.KSCEntNetAirPort()) }
+// Value is a CFDictionary
+// KSCEntNetAirPort returns the value of the constant kSCEntNetAirPort.
+func KSCEntNetAirPort() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetAirPort"))) }
 
-// @const kSCEntNetDHCP @discussion Value is a CFDictionary
-// KSCEntNetDHCP returns the value of the CoreFoundation reference constant kSCEntNetDHCP as an objc.ID.
-func KSCEntNetDHCP() objc.ID { return purego.CFConstant(raw.KSCEntNetDHCP()) }
+// Value is a CFDictionary
+// KSCEntNetDHCP returns the value of the constant kSCEntNetDHCP.
+func KSCEntNetDHCP() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetDHCP"))) }
 
-// @const kSCEntNetDNS @discussion Value is a CFDictionary
-// KSCEntNetDNS returns the value of the CoreFoundation reference constant kSCEntNetDNS as an objc.ID.
-func KSCEntNetDNS() objc.ID { return purego.CFConstant(raw.KSCEntNetDNS()) }
+// Value is a CFDictionary
+// KSCEntNetDNS returns the value of the constant kSCEntNetDNS.
+func KSCEntNetDNS() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetDNS"))) }
 
-// @const kSCEntNetEthernet @discussion Value is a CFDictionary
-// KSCEntNetEthernet returns the value of the CoreFoundation reference constant kSCEntNetEthernet as an objc.ID.
-func KSCEntNetEthernet() objc.ID { return purego.CFConstant(raw.KSCEntNetEthernet()) }
+// Value is a CFDictionary
+// KSCEntNetEthernet returns the value of the constant kSCEntNetEthernet.
+func KSCEntNetEthernet() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetEthernet"))) }
 
-// @const kSCEntNetFireWire @discussion Value is a CFDictionary
-// KSCEntNetFireWire returns the value of the CoreFoundation reference constant kSCEntNetFireWire as an objc.ID.
-func KSCEntNetFireWire() objc.ID { return purego.CFConstant(raw.KSCEntNetFireWire()) }
+// Value is a CFDictionary
+// KSCEntNetFireWire returns the value of the constant kSCEntNetFireWire.
+func KSCEntNetFireWire() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetFireWire"))) }
 
-// @const kSCEntNetInterface @discussion Value is a CFDictionary
-// KSCEntNetInterface returns the value of the CoreFoundation reference constant kSCEntNetInterface as an objc.ID.
-func KSCEntNetInterface() objc.ID { return purego.CFConstant(raw.KSCEntNetInterface()) }
+// Value is a CFDictionary
+// KSCEntNetInterface returns the value of the constant kSCEntNetInterface.
+func KSCEntNetInterface() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetInterface")))
+}
 
-// @const kSCEntNetIPSec @discussion Value is a CFDictionary
-// KSCEntNetIPSec returns the value of the CoreFoundation reference constant kSCEntNetIPSec as an objc.ID.
-func KSCEntNetIPSec() objc.ID { return purego.CFConstant(raw.KSCEntNetIPSec()) }
+// Value is a CFDictionary
+// KSCEntNetIPSec returns the value of the constant kSCEntNetIPSec.
+func KSCEntNetIPSec() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetIPSec"))) }
 
-// @const kSCEntNetIPv4 @discussion Value is a CFDictionary
-// KSCEntNetIPv4 returns the value of the CoreFoundation reference constant kSCEntNetIPv4 as an objc.ID.
-func KSCEntNetIPv4() objc.ID { return purego.CFConstant(raw.KSCEntNetIPv4()) }
+// Value is a CFDictionary
+// KSCEntNetIPv4 returns the value of the constant kSCEntNetIPv4.
+func KSCEntNetIPv4() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetIPv4"))) }
 
-// @const kSCEntNetIPv6 @discussion Value is a CFDictionary
-// KSCEntNetIPv6 returns the value of the CoreFoundation reference constant kSCEntNetIPv6 as an objc.ID.
-func KSCEntNetIPv6() objc.ID { return purego.CFConstant(raw.KSCEntNetIPv6()) }
+// Value is a CFDictionary
+// KSCEntNetIPv6 returns the value of the constant kSCEntNetIPv6.
+func KSCEntNetIPv6() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetIPv6"))) }
 
-// @const kSCEntNetL2TP @discussion Value is a CFDictionary
-// KSCEntNetL2TP returns the value of the CoreFoundation reference constant kSCEntNetL2TP as an objc.ID.
-func KSCEntNetL2TP() objc.ID { return purego.CFConstant(raw.KSCEntNetL2TP()) }
+// Value is a CFDictionary
+// KSCEntNetL2TP returns the value of the constant kSCEntNetL2TP.
+func KSCEntNetL2TP() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetL2TP"))) }
 
-// @const kSCEntNetLink @discussion Value is a CFDictionary
-// KSCEntNetLink returns the value of the CoreFoundation reference constant kSCEntNetLink as an objc.ID.
-func KSCEntNetLink() objc.ID { return purego.CFConstant(raw.KSCEntNetLink()) }
+// Value is a CFDictionary
+// KSCEntNetLink returns the value of the constant kSCEntNetLink.
+func KSCEntNetLink() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetLink"))) }
 
-// @const kSCEntNetModem @discussion Value is a CFDictionary
-// KSCEntNetModem returns the value of the CoreFoundation reference constant kSCEntNetModem as an objc.ID.
-func KSCEntNetModem() objc.ID { return purego.CFConstant(raw.KSCEntNetModem()) }
+// Value is a CFDictionary
+// KSCEntNetModem returns the value of the constant kSCEntNetModem.
+func KSCEntNetModem() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetModem"))) }
 
-// @const kSCEntNetPPP @discussion Value is a CFDictionary
-// KSCEntNetPPP returns the value of the CoreFoundation reference constant kSCEntNetPPP as an objc.ID.
-func KSCEntNetPPP() objc.ID { return purego.CFConstant(raw.KSCEntNetPPP()) }
+// Value is a CFDictionary
+// KSCEntNetPPP returns the value of the constant kSCEntNetPPP.
+func KSCEntNetPPP() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetPPP"))) }
 
-// @const kSCEntNetPPPoE @discussion Value is a CFDictionary
-// KSCEntNetPPPoE returns the value of the CoreFoundation reference constant kSCEntNetPPPoE as an objc.ID.
-func KSCEntNetPPPoE() objc.ID { return purego.CFConstant(raw.KSCEntNetPPPoE()) }
+// Value is a CFDictionary
+// KSCEntNetPPPoE returns the value of the constant kSCEntNetPPPoE.
+func KSCEntNetPPPoE() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetPPPoE"))) }
 
-// @const kSCEntNetPPPSerial @discussion Value is a CFDictionary
-// KSCEntNetPPPSerial returns the value of the CoreFoundation reference constant kSCEntNetPPPSerial as an objc.ID.
-func KSCEntNetPPPSerial() objc.ID { return purego.CFConstant(raw.KSCEntNetPPPSerial()) }
+// Value is a CFDictionary
+// KSCEntNetPPPSerial returns the value of the constant kSCEntNetPPPSerial.
+func KSCEntNetPPPSerial() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetPPPSerial")))
+}
 
-// @const kSCEntNetPPTP @discussion Value is a CFDictionary
-// KSCEntNetPPTP returns the value of the CoreFoundation reference constant kSCEntNetPPTP as an objc.ID.
-func KSCEntNetPPTP() objc.ID { return purego.CFConstant(raw.KSCEntNetPPTP()) }
+// Value is a CFDictionary
+// KSCEntNetPPTP returns the value of the constant kSCEntNetPPTP.
+func KSCEntNetPPTP() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetPPTP"))) }
 
-// @const kSCEntNetProxies @discussion Value is a CFDictionary
-// KSCEntNetProxies returns the value of the CoreFoundation reference constant kSCEntNetProxies as an objc.ID.
-func KSCEntNetProxies() objc.ID { return purego.CFConstant(raw.KSCEntNetProxies()) }
+// Value is a CFDictionary
+// KSCEntNetProxies returns the value of the constant kSCEntNetProxies.
+func KSCEntNetProxies() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetProxies"))) }
 
-// @const kSCEntNetSMB @discussion Value is a CFDictionary
-// KSCEntNetSMB returns the value of the CoreFoundation reference constant kSCEntNetSMB as an objc.ID.
-func KSCEntNetSMB() objc.ID { return purego.CFConstant(raw.KSCEntNetSMB()) }
+// Value is a CFDictionary
+// KSCEntNetSMB returns the value of the constant kSCEntNetSMB.
+func KSCEntNetSMB() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNetSMB"))) }
 
-// @const kSCEntNet6to4 @discussion Value is a CFDictionary
-// KSCEntNet6to4 returns the value of the CoreFoundation reference constant kSCEntNet6to4 as an objc.ID.
-func KSCEntNet6to4() objc.ID { return purego.CFConstant(raw.KSCEntNet6to4()) }
+// Value is a CFDictionary
+// KSCEntNet6to4 returns the value of the constant kSCEntNet6to4.
+func KSCEntNet6to4() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSCEntNet6to4"))) }
 
-// @const kSCPropNetOverridePrimary @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetOverridePrimary returns the value of the CoreFoundation reference constant kSCPropNetOverridePrimary as an objc.ID.
-func KSCPropNetOverridePrimary() objc.ID { return purego.CFConstant(raw.KSCPropNetOverridePrimary()) }
+// Value is a CFNumber (0 or 1)
+// KSCPropNetOverridePrimary returns the value of the constant kSCPropNetOverridePrimary.
+func KSCPropNetOverridePrimary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetOverridePrimary")))
+}
 
-// @const kSCPropNetServiceOrder @discussion Value is a CFArray[CFString]
-// KSCPropNetServiceOrder returns the value of the CoreFoundation reference constant kSCPropNetServiceOrder as an objc.ID.
-func KSCPropNetServiceOrder() objc.ID { return purego.CFConstant(raw.KSCPropNetServiceOrder()) }
+// Value is a CFArray[CFString]
+// KSCPropNetServiceOrder returns the value of the constant kSCPropNetServiceOrder.
+func KSCPropNetServiceOrder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetServiceOrder")))
+}
 
-// @const kSCPropNetPPPOverridePrimary @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPOverridePrimary returns the value of the CoreFoundation reference constant kSCPropNetPPPOverridePrimary as an objc.ID.
-func KSCPropNetPPPOverridePrimary() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPOverridePrimary())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPOverridePrimary returns the value of the constant kSCPropNetPPPOverridePrimary.
+func KSCPropNetPPPOverridePrimary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPOverridePrimary")))
 }
 
-// @const kSCPropNetInterfaces @discussion Value is a CFArray[CFString]
-// KSCPropNetInterfaces returns the value of the CoreFoundation reference constant kSCPropNetInterfaces as an objc.ID.
-func KSCPropNetInterfaces() objc.ID { return purego.CFConstant(raw.KSCPropNetInterfaces()) }
+// Value is a CFArray[CFString]
+// KSCPropNetInterfaces returns the value of the constant kSCPropNetInterfaces.
+func KSCPropNetInterfaces() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetInterfaces")))
+}
 
-// @const kSCPropNetLocalHostName @discussion Value is a CFString
-// KSCPropNetLocalHostName returns the value of the CoreFoundation reference constant kSCPropNetLocalHostName as an objc.ID.
-func KSCPropNetLocalHostName() objc.ID { return purego.CFConstant(raw.KSCPropNetLocalHostName()) }
+// Value is a CFString
+// KSCPropNetLocalHostName returns the value of the constant kSCPropNetLocalHostName.
+func KSCPropNetLocalHostName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetLocalHostName")))
+}
 
-// @const kSCPropNetAirPortAllowNetCreation @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetAirPortAllowNetCreation returns the value of the CoreFoundation reference constant kSCPropNetAirPortAllowNetCreation as an objc.ID.
-func KSCPropNetAirPortAllowNetCreation() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetAirPortAllowNetCreation())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetAirPortAllowNetCreation returns the value of the constant kSCPropNetAirPortAllowNetCreation.
+func KSCPropNetAirPortAllowNetCreation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetAirPortAllowNetCreation")))
 }
 
-// @const kSCPropNetAirPortAuthPassword @discussion Value is a CFData
-// KSCPropNetAirPortAuthPassword returns the value of the CoreFoundation reference constant kSCPropNetAirPortAuthPassword as an objc.ID.
-func KSCPropNetAirPortAuthPassword() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetAirPortAuthPassword())
+// Value is a CFData
+// KSCPropNetAirPortAuthPassword returns the value of the constant kSCPropNetAirPortAuthPassword.
+func KSCPropNetAirPortAuthPassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetAirPortAuthPassword")))
 }
 
-// @const kSCPropNetAirPortAuthPasswordEncryption @discussion Value is a CFString
-// KSCPropNetAirPortAuthPasswordEncryption returns the value of the CoreFoundation reference constant kSCPropNetAirPortAuthPasswordEncryption as an objc.ID.
-func KSCPropNetAirPortAuthPasswordEncryption() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetAirPortAuthPasswordEncryption())
+// Value is a CFString
+// KSCPropNetAirPortAuthPasswordEncryption returns the value of the constant kSCPropNetAirPortAuthPasswordEncryption.
+func KSCPropNetAirPortAuthPasswordEncryption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetAirPortAuthPasswordEncryption")))
 }
 
-// @const kSCPropNetAirPortJoinMode @discussion Value is a CFString
-// KSCPropNetAirPortJoinMode returns the value of the CoreFoundation reference constant kSCPropNetAirPortJoinMode as an objc.ID.
-func KSCPropNetAirPortJoinMode() objc.ID { return purego.CFConstant(raw.KSCPropNetAirPortJoinMode()) }
+// Value is a CFString
+// KSCPropNetAirPortJoinMode returns the value of the constant kSCPropNetAirPortJoinMode.
+func KSCPropNetAirPortJoinMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetAirPortJoinMode")))
+}
 
-// @const kSCPropNetAirPortPowerEnabled @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetAirPortPowerEnabled returns the value of the CoreFoundation reference constant kSCPropNetAirPortPowerEnabled as an objc.ID.
-func KSCPropNetAirPortPowerEnabled() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetAirPortPowerEnabled())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetAirPortPowerEnabled returns the value of the constant kSCPropNetAirPortPowerEnabled.
+func KSCPropNetAirPortPowerEnabled() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetAirPortPowerEnabled")))
 }
 
-// @const kSCPropNetAirPortPreferredNetwork @discussion Value is a CFString
-// KSCPropNetAirPortPreferredNetwork returns the value of the CoreFoundation reference constant kSCPropNetAirPortPreferredNetwork as an objc.ID.
-func KSCPropNetAirPortPreferredNetwork() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetAirPortPreferredNetwork())
+// Value is a CFString
+// KSCPropNetAirPortPreferredNetwork returns the value of the constant kSCPropNetAirPortPreferredNetwork.
+func KSCPropNetAirPortPreferredNetwork() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetAirPortPreferredNetwork")))
 }
 
-// @const kSCPropNetAirPortSavePasswords @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetAirPortSavePasswords returns the value of the CoreFoundation reference constant kSCPropNetAirPortSavePasswords as an objc.ID.
-func KSCPropNetAirPortSavePasswords() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetAirPortSavePasswords())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetAirPortSavePasswords returns the value of the constant kSCPropNetAirPortSavePasswords.
+func KSCPropNetAirPortSavePasswords() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetAirPortSavePasswords")))
 }
 
-// @const kSCValNetAirPortJoinModeAutomatic
-// KSCValNetAirPortJoinModeAutomatic returns the value of the CoreFoundation reference constant kSCValNetAirPortJoinModeAutomatic as an objc.ID.
-func KSCValNetAirPortJoinModeAutomatic() objc.ID {
-	return purego.CFConstant(raw.KSCValNetAirPortJoinModeAutomatic())
+// KSCValNetAirPortJoinModeAutomatic returns the value of the constant kSCValNetAirPortJoinModeAutomatic.
+func KSCValNetAirPortJoinModeAutomatic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetAirPortJoinModeAutomatic")))
 }
 
-// @const kSCValNetAirPortJoinModePreferred
-// KSCValNetAirPortJoinModePreferred returns the value of the CoreFoundation reference constant kSCValNetAirPortJoinModePreferred as an objc.ID.
-func KSCValNetAirPortJoinModePreferred() objc.ID {
-	return purego.CFConstant(raw.KSCValNetAirPortJoinModePreferred())
+// KSCValNetAirPortJoinModePreferred returns the value of the constant kSCValNetAirPortJoinModePreferred.
+func KSCValNetAirPortJoinModePreferred() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetAirPortJoinModePreferred")))
 }
 
-// @const kSCValNetAirPortJoinModeRanked
-// KSCValNetAirPortJoinModeRanked returns the value of the CoreFoundation reference constant kSCValNetAirPortJoinModeRanked as an objc.ID.
-func KSCValNetAirPortJoinModeRanked() objc.ID {
-	return purego.CFConstant(raw.KSCValNetAirPortJoinModeRanked())
+// KSCValNetAirPortJoinModeRanked returns the value of the constant kSCValNetAirPortJoinModeRanked.
+func KSCValNetAirPortJoinModeRanked() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetAirPortJoinModeRanked")))
 }
 
-// @const kSCValNetAirPortJoinModeRecent
-// KSCValNetAirPortJoinModeRecent returns the value of the CoreFoundation reference constant kSCValNetAirPortJoinModeRecent as an objc.ID.
-func KSCValNetAirPortJoinModeRecent() objc.ID {
-	return purego.CFConstant(raw.KSCValNetAirPortJoinModeRecent())
+// KSCValNetAirPortJoinModeRecent returns the value of the constant kSCValNetAirPortJoinModeRecent.
+func KSCValNetAirPortJoinModeRecent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetAirPortJoinModeRecent")))
 }
 
-// @const kSCValNetAirPortJoinModeStrongest
-// KSCValNetAirPortJoinModeStrongest returns the value of the CoreFoundation reference constant kSCValNetAirPortJoinModeStrongest as an objc.ID.
-func KSCValNetAirPortJoinModeStrongest() objc.ID {
-	return purego.CFConstant(raw.KSCValNetAirPortJoinModeStrongest())
+// KSCValNetAirPortJoinModeStrongest returns the value of the constant kSCValNetAirPortJoinModeStrongest.
+func KSCValNetAirPortJoinModeStrongest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetAirPortJoinModeStrongest")))
 }
 
-// @const kSCValNetAirPortAuthPasswordEncryptionKeychain
-// KSCValNetAirPortAuthPasswordEncryptionKeychain returns the value of the CoreFoundation reference constant kSCValNetAirPortAuthPasswordEncryptionKeychain as an objc.ID.
-func KSCValNetAirPortAuthPasswordEncryptionKeychain() objc.ID {
-	return purego.CFConstant(raw.KSCValNetAirPortAuthPasswordEncryptionKeychain())
+// KSCValNetAirPortAuthPasswordEncryptionKeychain returns the value of the constant kSCValNetAirPortAuthPasswordEncryptionKeychain.
+func KSCValNetAirPortAuthPasswordEncryptionKeychain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetAirPortAuthPasswordEncryptionKeychain")))
 }
 
-// @const kSCPropNetDNSDomainName @discussion Value is a CFString
-// KSCPropNetDNSDomainName returns the value of the CoreFoundation reference constant kSCPropNetDNSDomainName as an objc.ID.
-func KSCPropNetDNSDomainName() objc.ID { return purego.CFConstant(raw.KSCPropNetDNSDomainName()) }
+// Value is a CFString
+// KSCPropNetDNSDomainName returns the value of the constant kSCPropNetDNSDomainName.
+func KSCPropNetDNSDomainName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSDomainName")))
+}
 
-// @const kSCPropNetDNSOptions @discussion Value is a CFString
-// KSCPropNetDNSOptions returns the value of the CoreFoundation reference constant kSCPropNetDNSOptions as an objc.ID.
-func KSCPropNetDNSOptions() objc.ID { return purego.CFConstant(raw.KSCPropNetDNSOptions()) }
+// Value is a CFString
+// KSCPropNetDNSOptions returns the value of the constant kSCPropNetDNSOptions.
+func KSCPropNetDNSOptions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSOptions")))
+}
 
-// @const kSCPropNetDNSSearchDomains @discussion Value is a CFArray[CFString]
-// KSCPropNetDNSSearchDomains returns the value of the CoreFoundation reference constant kSCPropNetDNSSearchDomains as an objc.ID.
-func KSCPropNetDNSSearchDomains() objc.ID { return purego.CFConstant(raw.KSCPropNetDNSSearchDomains()) }
+// Value is a CFArray[CFString]
+// KSCPropNetDNSSearchDomains returns the value of the constant kSCPropNetDNSSearchDomains.
+func KSCPropNetDNSSearchDomains() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSSearchDomains")))
+}
 
-// @const kSCPropNetDNSSearchOrder @discussion Value is a CFNumber
-// KSCPropNetDNSSearchOrder returns the value of the CoreFoundation reference constant kSCPropNetDNSSearchOrder as an objc.ID.
-func KSCPropNetDNSSearchOrder() objc.ID { return purego.CFConstant(raw.KSCPropNetDNSSearchOrder()) }
+// Value is a CFNumber
+// KSCPropNetDNSSearchOrder returns the value of the constant kSCPropNetDNSSearchOrder.
+func KSCPropNetDNSSearchOrder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSSearchOrder")))
+}
 
-// @const kSCPropNetDNSServerAddresses @discussion Value is a CFArray[CFString]
-// KSCPropNetDNSServerAddresses returns the value of the CoreFoundation reference constant kSCPropNetDNSServerAddresses as an objc.ID.
-func KSCPropNetDNSServerAddresses() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetDNSServerAddresses())
+// Value is a CFArray[CFString]
+// KSCPropNetDNSServerAddresses returns the value of the constant kSCPropNetDNSServerAddresses.
+func KSCPropNetDNSServerAddresses() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSServerAddresses")))
 }
 
-// @const kSCPropNetDNSServerPort @discussion Value is a CFNumber
-// KSCPropNetDNSServerPort returns the value of the CoreFoundation reference constant kSCPropNetDNSServerPort as an objc.ID.
-func KSCPropNetDNSServerPort() objc.ID { return purego.CFConstant(raw.KSCPropNetDNSServerPort()) }
+// Value is a CFNumber
+// KSCPropNetDNSServerPort returns the value of the constant kSCPropNetDNSServerPort.
+func KSCPropNetDNSServerPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSServerPort")))
+}
 
-// @const kSCPropNetDNSServerTimeout @discussion Value is a CFNumber
-// KSCPropNetDNSServerTimeout returns the value of the CoreFoundation reference constant kSCPropNetDNSServerTimeout as an objc.ID.
-func KSCPropNetDNSServerTimeout() objc.ID { return purego.CFConstant(raw.KSCPropNetDNSServerTimeout()) }
+// Value is a CFNumber
+// KSCPropNetDNSServerTimeout returns the value of the constant kSCPropNetDNSServerTimeout.
+func KSCPropNetDNSServerTimeout() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSServerTimeout")))
+}
 
-// @const kSCPropNetDNSSortList @discussion Value is a CFArray[CFString]
-// KSCPropNetDNSSortList returns the value of the CoreFoundation reference constant kSCPropNetDNSSortList as an objc.ID.
-func KSCPropNetDNSSortList() objc.ID { return purego.CFConstant(raw.KSCPropNetDNSSortList()) }
+// Value is a CFArray[CFString]
+// KSCPropNetDNSSortList returns the value of the constant kSCPropNetDNSSortList.
+func KSCPropNetDNSSortList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSSortList")))
+}
 
-// @const kSCPropNetDNSSupplementalMatchDomains @discussion Value is a CFArray[CFString]
-// KSCPropNetDNSSupplementalMatchDomains returns the value of the CoreFoundation reference constant kSCPropNetDNSSupplementalMatchDomains as an objc.ID.
-func KSCPropNetDNSSupplementalMatchDomains() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetDNSSupplementalMatchDomains())
+// Value is a CFArray[CFString]
+// KSCPropNetDNSSupplementalMatchDomains returns the value of the constant kSCPropNetDNSSupplementalMatchDomains.
+func KSCPropNetDNSSupplementalMatchDomains() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSSupplementalMatchDomains")))
 }
 
-// @const kSCPropNetDNSSupplementalMatchOrders @discussion Value is a CFArray[CFNumber]
-// KSCPropNetDNSSupplementalMatchOrders returns the value of the CoreFoundation reference constant kSCPropNetDNSSupplementalMatchOrders as an objc.ID.
-func KSCPropNetDNSSupplementalMatchOrders() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetDNSSupplementalMatchOrders())
+// Value is a CFArray[CFNumber]
+// KSCPropNetDNSSupplementalMatchOrders returns the value of the constant kSCPropNetDNSSupplementalMatchOrders.
+func KSCPropNetDNSSupplementalMatchOrders() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetDNSSupplementalMatchOrders")))
 }
 
-// @const kSCPropNetEthernetMediaSubType @discussion Value is a CFString
-// KSCPropNetEthernetMediaSubType returns the value of the CoreFoundation reference constant kSCPropNetEthernetMediaSubType as an objc.ID.
-func KSCPropNetEthernetMediaSubType() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetEthernetMediaSubType())
+// Value is a CFString
+// KSCPropNetEthernetMediaSubType returns the value of the constant kSCPropNetEthernetMediaSubType.
+func KSCPropNetEthernetMediaSubType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetEthernetMediaSubType")))
 }
 
-// @const kSCPropNetEthernetMediaOptions @discussion Value is a CFArray[CFString]
-// KSCPropNetEthernetMediaOptions returns the value of the CoreFoundation reference constant kSCPropNetEthernetMediaOptions as an objc.ID.
-func KSCPropNetEthernetMediaOptions() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetEthernetMediaOptions())
+// Value is a CFArray[CFString]
+// KSCPropNetEthernetMediaOptions returns the value of the constant kSCPropNetEthernetMediaOptions.
+func KSCPropNetEthernetMediaOptions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetEthernetMediaOptions")))
 }
 
-// @const kSCPropNetEthernetMTU @discussion Value is a CFNumber
-// KSCPropNetEthernetMTU returns the value of the CoreFoundation reference constant kSCPropNetEthernetMTU as an objc.ID.
-func KSCPropNetEthernetMTU() objc.ID { return purego.CFConstant(raw.KSCPropNetEthernetMTU()) }
+// Value is a CFNumber
+// KSCPropNetEthernetMTU returns the value of the constant kSCPropNetEthernetMTU.
+func KSCPropNetEthernetMTU() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetEthernetMTU")))
+}
 
-// @const kSCPropNetInterfaceDeviceName @discussion Value is a CFString
-// KSCPropNetInterfaceDeviceName returns the value of the CoreFoundation reference constant kSCPropNetInterfaceDeviceName as an objc.ID.
-func KSCPropNetInterfaceDeviceName() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetInterfaceDeviceName())
+// Value is a CFString
+// KSCPropNetInterfaceDeviceName returns the value of the constant kSCPropNetInterfaceDeviceName.
+func KSCPropNetInterfaceDeviceName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetInterfaceDeviceName")))
 }
 
-// @const kSCPropNetInterfaceHardware @discussion Value is a CFString
-// KSCPropNetInterfaceHardware returns the value of the CoreFoundation reference constant kSCPropNetInterfaceHardware as an objc.ID.
-func KSCPropNetInterfaceHardware() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetInterfaceHardware())
+// Value is a CFString
+// KSCPropNetInterfaceHardware returns the value of the constant kSCPropNetInterfaceHardware.
+func KSCPropNetInterfaceHardware() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetInterfaceHardware")))
 }
 
-// @const kSCPropNetInterfaceType @discussion Value is a CFString
-// KSCPropNetInterfaceType returns the value of the CoreFoundation reference constant kSCPropNetInterfaceType as an objc.ID.
-func KSCPropNetInterfaceType() objc.ID { return purego.CFConstant(raw.KSCPropNetInterfaceType()) }
+// Value is a CFString
+// KSCPropNetInterfaceType returns the value of the constant kSCPropNetInterfaceType.
+func KSCPropNetInterfaceType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetInterfaceType")))
+}
 
-// @const kSCPropNetInterfaceSubType @discussion Value is a CFString
-// KSCPropNetInterfaceSubType returns the value of the CoreFoundation reference constant kSCPropNetInterfaceSubType as an objc.ID.
-func KSCPropNetInterfaceSubType() objc.ID { return purego.CFConstant(raw.KSCPropNetInterfaceSubType()) }
+// Value is a CFString
+// KSCPropNetInterfaceSubType returns the value of the constant kSCPropNetInterfaceSubType.
+func KSCPropNetInterfaceSubType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetInterfaceSubType")))
+}
 
-// @const kSCPropNetInterfaceSupportsModemOnHold @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetInterfaceSupportsModemOnHold returns the value of the CoreFoundation reference constant kSCPropNetInterfaceSupportsModemOnHold as an objc.ID.
-func KSCPropNetInterfaceSupportsModemOnHold() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetInterfaceSupportsModemOnHold())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetInterfaceSupportsModemOnHold returns the value of the constant kSCPropNetInterfaceSupportsModemOnHold.
+func KSCPropNetInterfaceSupportsModemOnHold() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetInterfaceSupportsModemOnHold")))
 }
 
-// @const kSCValNetInterfaceTypeEthernet
-// KSCValNetInterfaceTypeEthernet returns the value of the CoreFoundation reference constant kSCValNetInterfaceTypeEthernet as an objc.ID.
-func KSCValNetInterfaceTypeEthernet() objc.ID {
-	return purego.CFConstant(raw.KSCValNetInterfaceTypeEthernet())
+// KSCValNetInterfaceTypeEthernet returns the value of the constant kSCValNetInterfaceTypeEthernet.
+func KSCValNetInterfaceTypeEthernet() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetInterfaceTypeEthernet")))
 }
 
-// @const kSCValNetInterfaceTypeFireWire
-// KSCValNetInterfaceTypeFireWire returns the value of the CoreFoundation reference constant kSCValNetInterfaceTypeFireWire as an objc.ID.
-func KSCValNetInterfaceTypeFireWire() objc.ID {
-	return purego.CFConstant(raw.KSCValNetInterfaceTypeFireWire())
+// KSCValNetInterfaceTypeFireWire returns the value of the constant kSCValNetInterfaceTypeFireWire.
+func KSCValNetInterfaceTypeFireWire() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetInterfaceTypeFireWire")))
 }
 
-// @const kSCValNetInterfaceTypePPP
-// KSCValNetInterfaceTypePPP returns the value of the CoreFoundation reference constant kSCValNetInterfaceTypePPP as an objc.ID.
-func KSCValNetInterfaceTypePPP() objc.ID { return purego.CFConstant(raw.KSCValNetInterfaceTypePPP()) }
+// KSCValNetInterfaceTypePPP returns the value of the constant kSCValNetInterfaceTypePPP.
+func KSCValNetInterfaceTypePPP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetInterfaceTypePPP")))
+}
 
-// @const kSCValNetInterfaceType6to4
-// KSCValNetInterfaceType6to4 returns the value of the CoreFoundation reference constant kSCValNetInterfaceType6to4 as an objc.ID.
-func KSCValNetInterfaceType6to4() objc.ID { return purego.CFConstant(raw.KSCValNetInterfaceType6to4()) }
+// KSCValNetInterfaceType6to4 returns the value of the constant kSCValNetInterfaceType6to4.
+func KSCValNetInterfaceType6to4() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetInterfaceType6to4")))
+}
 
-// @const kSCValNetInterfaceTypeIPSec
-// KSCValNetInterfaceTypeIPSec returns the value of the CoreFoundation reference constant kSCValNetInterfaceTypeIPSec as an objc.ID.
-func KSCValNetInterfaceTypeIPSec() objc.ID {
-	return purego.CFConstant(raw.KSCValNetInterfaceTypeIPSec())
+// KSCValNetInterfaceTypeIPSec returns the value of the constant kSCValNetInterfaceTypeIPSec.
+func KSCValNetInterfaceTypeIPSec() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetInterfaceTypeIPSec")))
 }
 
-// @const kSCValNetInterfaceSubTypePPPoE
-// KSCValNetInterfaceSubTypePPPoE returns the value of the CoreFoundation reference constant kSCValNetInterfaceSubTypePPPoE as an objc.ID.
-func KSCValNetInterfaceSubTypePPPoE() objc.ID {
-	return purego.CFConstant(raw.KSCValNetInterfaceSubTypePPPoE())
+// KSCValNetInterfaceSubTypePPPoE returns the value of the constant kSCValNetInterfaceSubTypePPPoE.
+func KSCValNetInterfaceSubTypePPPoE() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetInterfaceSubTypePPPoE")))
 }
 
-// @const kSCValNetInterfaceSubTypePPPSerial
-// KSCValNetInterfaceSubTypePPPSerial returns the value of the CoreFoundation reference constant kSCValNetInterfaceSubTypePPPSerial as an objc.ID.
-func KSCValNetInterfaceSubTypePPPSerial() objc.ID {
-	return purego.CFConstant(raw.KSCValNetInterfaceSubTypePPPSerial())
+// KSCValNetInterfaceSubTypePPPSerial returns the value of the constant kSCValNetInterfaceSubTypePPPSerial.
+func KSCValNetInterfaceSubTypePPPSerial() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetInterfaceSubTypePPPSerial")))
 }
 
-// @const kSCValNetInterfaceSubTypePPTP
-// KSCValNetInterfaceSubTypePPTP returns the value of the CoreFoundation reference constant kSCValNetInterfaceSubTypePPTP as an objc.ID.
-func KSCValNetInterfaceSubTypePPTP() objc.ID {
-	return purego.CFConstant(raw.KSCValNetInterfaceSubTypePPTP())
+// KSCValNetInterfaceSubTypePPTP returns the value of the constant kSCValNetInterfaceSubTypePPTP.
+func KSCValNetInterfaceSubTypePPTP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetInterfaceSubTypePPTP")))
 }
 
-// @const kSCValNetInterfaceSubTypeL2TP
-// KSCValNetInterfaceSubTypeL2TP returns the value of the CoreFoundation reference constant kSCValNetInterfaceSubTypeL2TP as an objc.ID.
-func KSCValNetInterfaceSubTypeL2TP() objc.ID {
-	return purego.CFConstant(raw.KSCValNetInterfaceSubTypeL2TP())
+// KSCValNetInterfaceSubTypeL2TP returns the value of the constant kSCValNetInterfaceSubTypeL2TP.
+func KSCValNetInterfaceSubTypeL2TP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetInterfaceSubTypeL2TP")))
 }
 
-// @const kSCPropNetIPSecAuthenticationMethod @discussion Value is a CFString
-// KSCPropNetIPSecAuthenticationMethod returns the value of the CoreFoundation reference constant kSCPropNetIPSecAuthenticationMethod as an objc.ID.
-func KSCPropNetIPSecAuthenticationMethod() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetIPSecAuthenticationMethod())
+// Value is a CFString
+// KSCPropNetIPSecAuthenticationMethod returns the value of the constant kSCPropNetIPSecAuthenticationMethod.
+func KSCPropNetIPSecAuthenticationMethod() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecAuthenticationMethod")))
 }
 
-// @const kSCPropNetIPSecLocalCertificate @discussion Value is a CFData
-// KSCPropNetIPSecLocalCertificate returns the value of the CoreFoundation reference constant kSCPropNetIPSecLocalCertificate as an objc.ID.
-func KSCPropNetIPSecLocalCertificate() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetIPSecLocalCertificate())
+// Value is a CFData
+// KSCPropNetIPSecLocalCertificate returns the value of the constant kSCPropNetIPSecLocalCertificate.
+func KSCPropNetIPSecLocalCertificate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecLocalCertificate")))
 }
 
-// @const kSCPropNetIPSecLocalIdentifier @discussion Value is a CFString
-// KSCPropNetIPSecLocalIdentifier returns the value of the CoreFoundation reference constant kSCPropNetIPSecLocalIdentifier as an objc.ID.
-func KSCPropNetIPSecLocalIdentifier() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetIPSecLocalIdentifier())
+// Value is a CFString
+// KSCPropNetIPSecLocalIdentifier returns the value of the constant kSCPropNetIPSecLocalIdentifier.
+func KSCPropNetIPSecLocalIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecLocalIdentifier")))
 }
 
-// @const kSCPropNetIPSecLocalIdentifierType @discussion Value is a CFString
-// KSCPropNetIPSecLocalIdentifierType returns the value of the CoreFoundation reference constant kSCPropNetIPSecLocalIdentifierType as an objc.ID.
-func KSCPropNetIPSecLocalIdentifierType() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetIPSecLocalIdentifierType())
+// Value is a CFString
+// KSCPropNetIPSecLocalIdentifierType returns the value of the constant kSCPropNetIPSecLocalIdentifierType.
+func KSCPropNetIPSecLocalIdentifierType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecLocalIdentifierType")))
 }
 
-// @const kSCPropNetIPSecSharedSecret @discussion Value is a CFString
-// KSCPropNetIPSecSharedSecret returns the value of the CoreFoundation reference constant kSCPropNetIPSecSharedSecret as an objc.ID.
-func KSCPropNetIPSecSharedSecret() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetIPSecSharedSecret())
+// Value is a CFString
+// KSCPropNetIPSecSharedSecret returns the value of the constant kSCPropNetIPSecSharedSecret.
+func KSCPropNetIPSecSharedSecret() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecSharedSecret")))
 }
 
-// @const kSCPropNetIPSecSharedSecretEncryption @discussion Value is a CFString
-// KSCPropNetIPSecSharedSecretEncryption returns the value of the CoreFoundation reference constant kSCPropNetIPSecSharedSecretEncryption as an objc.ID.
-func KSCPropNetIPSecSharedSecretEncryption() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetIPSecSharedSecretEncryption())
+// Value is a CFString
+// KSCPropNetIPSecSharedSecretEncryption returns the value of the constant kSCPropNetIPSecSharedSecretEncryption.
+func KSCPropNetIPSecSharedSecretEncryption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecSharedSecretEncryption")))
 }
 
-// @const kSCPropNetIPSecConnectTime @discussion Value is a CFNumber
-// KSCPropNetIPSecConnectTime returns the value of the CoreFoundation reference constant kSCPropNetIPSecConnectTime as an objc.ID.
-func KSCPropNetIPSecConnectTime() objc.ID { return purego.CFConstant(raw.KSCPropNetIPSecConnectTime()) }
+// Value is a CFNumber
+// KSCPropNetIPSecConnectTime returns the value of the constant kSCPropNetIPSecConnectTime.
+func KSCPropNetIPSecConnectTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecConnectTime")))
+}
 
-// @const kSCPropNetIPSecRemoteAddress @discussion Value is a CFString
-// KSCPropNetIPSecRemoteAddress returns the value of the CoreFoundation reference constant kSCPropNetIPSecRemoteAddress as an objc.ID.
-func KSCPropNetIPSecRemoteAddress() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetIPSecRemoteAddress())
+// Value is a CFString
+// KSCPropNetIPSecRemoteAddress returns the value of the constant kSCPropNetIPSecRemoteAddress.
+func KSCPropNetIPSecRemoteAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecRemoteAddress")))
 }
 
-// @const kSCPropNetIPSecStatus @discussion Value is a CFNumber
-// KSCPropNetIPSecStatus returns the value of the CoreFoundation reference constant kSCPropNetIPSecStatus as an objc.ID.
-func KSCPropNetIPSecStatus() objc.ID { return purego.CFConstant(raw.KSCPropNetIPSecStatus()) }
+// Value is a CFNumber
+// KSCPropNetIPSecStatus returns the value of the constant kSCPropNetIPSecStatus.
+func KSCPropNetIPSecStatus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecStatus")))
+}
 
-// @const kSCPropNetIPSecXAuthEnabled @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetIPSecXAuthEnabled returns the value of the CoreFoundation reference constant kSCPropNetIPSecXAuthEnabled as an objc.ID.
-func KSCPropNetIPSecXAuthEnabled() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetIPSecXAuthEnabled())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetIPSecXAuthEnabled returns the value of the constant kSCPropNetIPSecXAuthEnabled.
+func KSCPropNetIPSecXAuthEnabled() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecXAuthEnabled")))
 }
 
-// @const kSCPropNetIPSecXAuthName @discussion Value is a CFString
-// KSCPropNetIPSecXAuthName returns the value of the CoreFoundation reference constant kSCPropNetIPSecXAuthName as an objc.ID.
-func KSCPropNetIPSecXAuthName() objc.ID { return purego.CFConstant(raw.KSCPropNetIPSecXAuthName()) }
+// Value is a CFString
+// KSCPropNetIPSecXAuthName returns the value of the constant kSCPropNetIPSecXAuthName.
+func KSCPropNetIPSecXAuthName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecXAuthName")))
+}
 
-// @const kSCPropNetIPSecXAuthPassword @discussion Value is a CFString
-// KSCPropNetIPSecXAuthPassword returns the value of the CoreFoundation reference constant kSCPropNetIPSecXAuthPassword as an objc.ID.
-func KSCPropNetIPSecXAuthPassword() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetIPSecXAuthPassword())
+// Value is a CFString
+// KSCPropNetIPSecXAuthPassword returns the value of the constant kSCPropNetIPSecXAuthPassword.
+func KSCPropNetIPSecXAuthPassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecXAuthPassword")))
 }
 
-// @const kSCPropNetIPSecXAuthPasswordEncryption @discussion Value is a CFString
-// KSCPropNetIPSecXAuthPasswordEncryption returns the value of the CoreFoundation reference constant kSCPropNetIPSecXAuthPasswordEncryption as an objc.ID.
-func KSCPropNetIPSecXAuthPasswordEncryption() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetIPSecXAuthPasswordEncryption())
+// Value is a CFString
+// KSCPropNetIPSecXAuthPasswordEncryption returns the value of the constant kSCPropNetIPSecXAuthPasswordEncryption.
+func KSCPropNetIPSecXAuthPasswordEncryption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPSecXAuthPasswordEncryption")))
 }
 
-// @const kSCValNetIPSecAuthenticationMethodSharedSecret
-// KSCValNetIPSecAuthenticationMethodSharedSecret returns the value of the CoreFoundation reference constant kSCValNetIPSecAuthenticationMethodSharedSecret as an objc.ID.
-func KSCValNetIPSecAuthenticationMethodSharedSecret() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPSecAuthenticationMethodSharedSecret())
+// KSCValNetIPSecAuthenticationMethodSharedSecret returns the value of the constant kSCValNetIPSecAuthenticationMethodSharedSecret.
+func KSCValNetIPSecAuthenticationMethodSharedSecret() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPSecAuthenticationMethodSharedSecret")))
 }
 
-// @const kSCValNetIPSecAuthenticationMethodCertificate
-// KSCValNetIPSecAuthenticationMethodCertificate returns the value of the CoreFoundation reference constant kSCValNetIPSecAuthenticationMethodCertificate as an objc.ID.
-func KSCValNetIPSecAuthenticationMethodCertificate() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPSecAuthenticationMethodCertificate())
+// KSCValNetIPSecAuthenticationMethodCertificate returns the value of the constant kSCValNetIPSecAuthenticationMethodCertificate.
+func KSCValNetIPSecAuthenticationMethodCertificate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPSecAuthenticationMethodCertificate")))
 }
 
-// @const kSCValNetIPSecAuthenticationMethodHybrid
-// KSCValNetIPSecAuthenticationMethodHybrid returns the value of the CoreFoundation reference constant kSCValNetIPSecAuthenticationMethodHybrid as an objc.ID.
-func KSCValNetIPSecAuthenticationMethodHybrid() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPSecAuthenticationMethodHybrid())
+// KSCValNetIPSecAuthenticationMethodHybrid returns the value of the constant kSCValNetIPSecAuthenticationMethodHybrid.
+func KSCValNetIPSecAuthenticationMethodHybrid() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPSecAuthenticationMethodHybrid")))
 }
 
-// @const kSCValNetIPSecLocalIdentifierTypeKeyID
-// KSCValNetIPSecLocalIdentifierTypeKeyID returns the value of the CoreFoundation reference constant kSCValNetIPSecLocalIdentifierTypeKeyID as an objc.ID.
-func KSCValNetIPSecLocalIdentifierTypeKeyID() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPSecLocalIdentifierTypeKeyID())
+// KSCValNetIPSecLocalIdentifierTypeKeyID returns the value of the constant kSCValNetIPSecLocalIdentifierTypeKeyID.
+func KSCValNetIPSecLocalIdentifierTypeKeyID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPSecLocalIdentifierTypeKeyID")))
 }
 
-// @const kSCValNetIPSecSharedSecretEncryptionKeychain
-// KSCValNetIPSecSharedSecretEncryptionKeychain returns the value of the CoreFoundation reference constant kSCValNetIPSecSharedSecretEncryptionKeychain as an objc.ID.
-func KSCValNetIPSecSharedSecretEncryptionKeychain() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPSecSharedSecretEncryptionKeychain())
+// KSCValNetIPSecSharedSecretEncryptionKeychain returns the value of the constant kSCValNetIPSecSharedSecretEncryptionKeychain.
+func KSCValNetIPSecSharedSecretEncryptionKeychain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPSecSharedSecretEncryptionKeychain")))
 }
 
-// @const kSCValNetIPSecXAuthPasswordEncryptionKeychain
-// KSCValNetIPSecXAuthPasswordEncryptionKeychain returns the value of the CoreFoundation reference constant kSCValNetIPSecXAuthPasswordEncryptionKeychain as an objc.ID.
-func KSCValNetIPSecXAuthPasswordEncryptionKeychain() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPSecXAuthPasswordEncryptionKeychain())
+// KSCValNetIPSecXAuthPasswordEncryptionKeychain returns the value of the constant kSCValNetIPSecXAuthPasswordEncryptionKeychain.
+func KSCValNetIPSecXAuthPasswordEncryptionKeychain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPSecXAuthPasswordEncryptionKeychain")))
 }
 
-// @const kSCValNetIPSecXAuthPasswordEncryptionPrompt
-// KSCValNetIPSecXAuthPasswordEncryptionPrompt returns the value of the CoreFoundation reference constant kSCValNetIPSecXAuthPasswordEncryptionPrompt as an objc.ID.
-func KSCValNetIPSecXAuthPasswordEncryptionPrompt() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPSecXAuthPasswordEncryptionPrompt())
+// KSCValNetIPSecXAuthPasswordEncryptionPrompt returns the value of the constant kSCValNetIPSecXAuthPasswordEncryptionPrompt.
+func KSCValNetIPSecXAuthPasswordEncryptionPrompt() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPSecXAuthPasswordEncryptionPrompt")))
 }
 
-// @const kSCPropNetIPv4Addresses @discussion Value is a CFArray[CFString]
-// KSCPropNetIPv4Addresses returns the value of the CoreFoundation reference constant kSCPropNetIPv4Addresses as an objc.ID.
-func KSCPropNetIPv4Addresses() objc.ID { return purego.CFConstant(raw.KSCPropNetIPv4Addresses()) }
+// Value is a CFArray[CFString]
+// KSCPropNetIPv4Addresses returns the value of the constant kSCPropNetIPv4Addresses.
+func KSCPropNetIPv4Addresses() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv4Addresses")))
+}
 
-// @const kSCPropNetIPv4ConfigMethod @discussion Value is a CFString
-// KSCPropNetIPv4ConfigMethod returns the value of the CoreFoundation reference constant kSCPropNetIPv4ConfigMethod as an objc.ID.
-func KSCPropNetIPv4ConfigMethod() objc.ID { return purego.CFConstant(raw.KSCPropNetIPv4ConfigMethod()) }
+// Value is a CFString
+// KSCPropNetIPv4ConfigMethod returns the value of the constant kSCPropNetIPv4ConfigMethod.
+func KSCPropNetIPv4ConfigMethod() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv4ConfigMethod")))
+}
 
-// @const kSCPropNetIPv4DHCPClientID @discussion Value is a CFString
-// KSCPropNetIPv4DHCPClientID returns the value of the CoreFoundation reference constant kSCPropNetIPv4DHCPClientID as an objc.ID.
-func KSCPropNetIPv4DHCPClientID() objc.ID { return purego.CFConstant(raw.KSCPropNetIPv4DHCPClientID()) }
+// Value is a CFString
+// KSCPropNetIPv4DHCPClientID returns the value of the constant kSCPropNetIPv4DHCPClientID.
+func KSCPropNetIPv4DHCPClientID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv4DHCPClientID")))
+}
 
-// @const kSCPropNetIPv4Router @discussion Value is a CFString
-// KSCPropNetIPv4Router returns the value of the CoreFoundation reference constant kSCPropNetIPv4Router as an objc.ID.
-func KSCPropNetIPv4Router() objc.ID { return purego.CFConstant(raw.KSCPropNetIPv4Router()) }
+// Value is a CFString
+// KSCPropNetIPv4Router returns the value of the constant kSCPropNetIPv4Router.
+func KSCPropNetIPv4Router() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv4Router")))
+}
 
-// @const kSCPropNetIPv4SubnetMasks @discussion Value is a CFArray[CFString]
-// KSCPropNetIPv4SubnetMasks returns the value of the CoreFoundation reference constant kSCPropNetIPv4SubnetMasks as an objc.ID.
-func KSCPropNetIPv4SubnetMasks() objc.ID { return purego.CFConstant(raw.KSCPropNetIPv4SubnetMasks()) }
+// Value is a CFArray[CFString]
+// KSCPropNetIPv4SubnetMasks returns the value of the constant kSCPropNetIPv4SubnetMasks.
+func KSCPropNetIPv4SubnetMasks() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv4SubnetMasks")))
+}
 
-// @const kSCPropNetIPv4DestAddresses @discussion Value is a CFArray[CFString]
-// KSCPropNetIPv4DestAddresses returns the value of the CoreFoundation reference constant kSCPropNetIPv4DestAddresses as an objc.ID.
-func KSCPropNetIPv4DestAddresses() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetIPv4DestAddresses())
+// Value is a CFArray[CFString]
+// KSCPropNetIPv4DestAddresses returns the value of the constant kSCPropNetIPv4DestAddresses.
+func KSCPropNetIPv4DestAddresses() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv4DestAddresses")))
 }
 
-// @const kSCPropNetIPv4BroadcastAddresses @discussion Value is a CFArray[CFString]
-// KSCPropNetIPv4BroadcastAddresses returns the value of the CoreFoundation reference constant kSCPropNetIPv4BroadcastAddresses as an objc.ID.
-func KSCPropNetIPv4BroadcastAddresses() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetIPv4BroadcastAddresses())
+// Value is a CFArray[CFString]
+// KSCPropNetIPv4BroadcastAddresses returns the value of the constant kSCPropNetIPv4BroadcastAddresses.
+func KSCPropNetIPv4BroadcastAddresses() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv4BroadcastAddresses")))
 }
 
-// @const kSCValNetIPv4ConfigMethodAutomatic
-// KSCValNetIPv4ConfigMethodAutomatic returns the value of the CoreFoundation reference constant kSCValNetIPv4ConfigMethodAutomatic as an objc.ID.
-func KSCValNetIPv4ConfigMethodAutomatic() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPv4ConfigMethodAutomatic())
+// KSCValNetIPv4ConfigMethodAutomatic returns the value of the constant kSCValNetIPv4ConfigMethodAutomatic.
+func KSCValNetIPv4ConfigMethodAutomatic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPv4ConfigMethodAutomatic")))
 }
 
-// @const kSCValNetIPv4ConfigMethodBOOTP
-// KSCValNetIPv4ConfigMethodBOOTP returns the value of the CoreFoundation reference constant kSCValNetIPv4ConfigMethodBOOTP as an objc.ID.
-func KSCValNetIPv4ConfigMethodBOOTP() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPv4ConfigMethodBOOTP())
+// KSCValNetIPv4ConfigMethodBOOTP returns the value of the constant kSCValNetIPv4ConfigMethodBOOTP.
+func KSCValNetIPv4ConfigMethodBOOTP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPv4ConfigMethodBOOTP")))
 }
 
-// @const kSCValNetIPv4ConfigMethodDHCP
-// KSCValNetIPv4ConfigMethodDHCP returns the value of the CoreFoundation reference constant kSCValNetIPv4ConfigMethodDHCP as an objc.ID.
-func KSCValNetIPv4ConfigMethodDHCP() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPv4ConfigMethodDHCP())
+// KSCValNetIPv4ConfigMethodDHCP returns the value of the constant kSCValNetIPv4ConfigMethodDHCP.
+func KSCValNetIPv4ConfigMethodDHCP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPv4ConfigMethodDHCP")))
 }
 
-// @const kSCValNetIPv4ConfigMethodINFORM
-// KSCValNetIPv4ConfigMethodINFORM returns the value of the CoreFoundation reference constant kSCValNetIPv4ConfigMethodINFORM as an objc.ID.
-func KSCValNetIPv4ConfigMethodINFORM() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPv4ConfigMethodINFORM())
+// KSCValNetIPv4ConfigMethodINFORM returns the value of the constant kSCValNetIPv4ConfigMethodINFORM.
+func KSCValNetIPv4ConfigMethodINFORM() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPv4ConfigMethodINFORM")))
 }
 
-// @const kSCValNetIPv4ConfigMethodLinkLocal
-// KSCValNetIPv4ConfigMethodLinkLocal returns the value of the CoreFoundation reference constant kSCValNetIPv4ConfigMethodLinkLocal as an objc.ID.
-func KSCValNetIPv4ConfigMethodLinkLocal() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPv4ConfigMethodLinkLocal())
+// KSCValNetIPv4ConfigMethodLinkLocal returns the value of the constant kSCValNetIPv4ConfigMethodLinkLocal.
+func KSCValNetIPv4ConfigMethodLinkLocal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPv4ConfigMethodLinkLocal")))
 }
 
-// @const kSCValNetIPv4ConfigMethodManual
-// KSCValNetIPv4ConfigMethodManual returns the value of the CoreFoundation reference constant kSCValNetIPv4ConfigMethodManual as an objc.ID.
-func KSCValNetIPv4ConfigMethodManual() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPv4ConfigMethodManual())
+// KSCValNetIPv4ConfigMethodManual returns the value of the constant kSCValNetIPv4ConfigMethodManual.
+func KSCValNetIPv4ConfigMethodManual() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPv4ConfigMethodManual")))
 }
 
-// @const kSCValNetIPv4ConfigMethodPPP
-// KSCValNetIPv4ConfigMethodPPP returns the value of the CoreFoundation reference constant kSCValNetIPv4ConfigMethodPPP as an objc.ID.
-func KSCValNetIPv4ConfigMethodPPP() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPv4ConfigMethodPPP())
+// KSCValNetIPv4ConfigMethodPPP returns the value of the constant kSCValNetIPv4ConfigMethodPPP.
+func KSCValNetIPv4ConfigMethodPPP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPv4ConfigMethodPPP")))
 }
 
-// @const kSCPropNetIPv6Addresses @discussion Value is a CFArray[CFString]
-// KSCPropNetIPv6Addresses returns the value of the CoreFoundation reference constant kSCPropNetIPv6Addresses as an objc.ID.
-func KSCPropNetIPv6Addresses() objc.ID { return purego.CFConstant(raw.KSCPropNetIPv6Addresses()) }
+// Value is a CFArray[CFString]
+// KSCPropNetIPv6Addresses returns the value of the constant kSCPropNetIPv6Addresses.
+func KSCPropNetIPv6Addresses() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv6Addresses")))
+}
 
-// @const kSCPropNetIPv6ConfigMethod @discussion Value is a CFString
-// KSCPropNetIPv6ConfigMethod returns the value of the CoreFoundation reference constant kSCPropNetIPv6ConfigMethod as an objc.ID.
-func KSCPropNetIPv6ConfigMethod() objc.ID { return purego.CFConstant(raw.KSCPropNetIPv6ConfigMethod()) }
+// Value is a CFString
+// KSCPropNetIPv6ConfigMethod returns the value of the constant kSCPropNetIPv6ConfigMethod.
+func KSCPropNetIPv6ConfigMethod() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv6ConfigMethod")))
+}
 
-// @const kSCPropNetIPv6DestAddresses @discussion Value is a CFArray[CFString]
-// KSCPropNetIPv6DestAddresses returns the value of the CoreFoundation reference constant kSCPropNetIPv6DestAddresses as an objc.ID.
-func KSCPropNetIPv6DestAddresses() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetIPv6DestAddresses())
+// Value is a CFArray[CFString]
+// KSCPropNetIPv6DestAddresses returns the value of the constant kSCPropNetIPv6DestAddresses.
+func KSCPropNetIPv6DestAddresses() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv6DestAddresses")))
 }
 
-// @const kSCPropNetIPv6Flags @discussion Value is a CFArray[CFNumber]
-// KSCPropNetIPv6Flags returns the value of the CoreFoundation reference constant kSCPropNetIPv6Flags as an objc.ID.
-func KSCPropNetIPv6Flags() objc.ID { return purego.CFConstant(raw.KSCPropNetIPv6Flags()) }
+// Value is a CFArray[CFNumber]
+// KSCPropNetIPv6Flags returns the value of the constant kSCPropNetIPv6Flags.
+func KSCPropNetIPv6Flags() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv6Flags")))
+}
 
-// @const kSCPropNetIPv6PrefixLength @discussion Value is a CFArray[CFNumber]
-// KSCPropNetIPv6PrefixLength returns the value of the CoreFoundation reference constant kSCPropNetIPv6PrefixLength as an objc.ID.
-func KSCPropNetIPv6PrefixLength() objc.ID { return purego.CFConstant(raw.KSCPropNetIPv6PrefixLength()) }
+// Value is a CFArray[CFNumber]
+// KSCPropNetIPv6PrefixLength returns the value of the constant kSCPropNetIPv6PrefixLength.
+func KSCPropNetIPv6PrefixLength() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv6PrefixLength")))
+}
 
-// @const kSCPropNetIPv6Router @discussion Value is a CFString
-// KSCPropNetIPv6Router returns the value of the CoreFoundation reference constant kSCPropNetIPv6Router as an objc.ID.
-func KSCPropNetIPv6Router() objc.ID { return purego.CFConstant(raw.KSCPropNetIPv6Router()) }
+// Value is a CFString
+// KSCPropNetIPv6Router returns the value of the constant kSCPropNetIPv6Router.
+func KSCPropNetIPv6Router() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetIPv6Router")))
+}
 
-// @const kSCValNetIPv6ConfigMethodAutomatic
-// KSCValNetIPv6ConfigMethodAutomatic returns the value of the CoreFoundation reference constant kSCValNetIPv6ConfigMethodAutomatic as an objc.ID.
-func KSCValNetIPv6ConfigMethodAutomatic() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPv6ConfigMethodAutomatic())
+// KSCValNetIPv6ConfigMethodAutomatic returns the value of the constant kSCValNetIPv6ConfigMethodAutomatic.
+func KSCValNetIPv6ConfigMethodAutomatic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPv6ConfigMethodAutomatic")))
 }
 
-// @const kSCValNetIPv6ConfigMethodLinkLocal
-// KSCValNetIPv6ConfigMethodLinkLocal returns the value of the CoreFoundation reference constant kSCValNetIPv6ConfigMethodLinkLocal as an objc.ID.
-func KSCValNetIPv6ConfigMethodLinkLocal() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPv6ConfigMethodLinkLocal())
+// KSCValNetIPv6ConfigMethodLinkLocal returns the value of the constant kSCValNetIPv6ConfigMethodLinkLocal.
+func KSCValNetIPv6ConfigMethodLinkLocal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPv6ConfigMethodLinkLocal")))
 }
 
-// @const kSCValNetIPv6ConfigMethodManual
-// KSCValNetIPv6ConfigMethodManual returns the value of the CoreFoundation reference constant kSCValNetIPv6ConfigMethodManual as an objc.ID.
-func KSCValNetIPv6ConfigMethodManual() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPv6ConfigMethodManual())
+// KSCValNetIPv6ConfigMethodManual returns the value of the constant kSCValNetIPv6ConfigMethodManual.
+func KSCValNetIPv6ConfigMethodManual() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPv6ConfigMethodManual")))
 }
 
-// @const kSCValNetIPv6ConfigMethodRouterAdvertisement
-// KSCValNetIPv6ConfigMethodRouterAdvertisement returns the value of the CoreFoundation reference constant kSCValNetIPv6ConfigMethodRouterAdvertisement as an objc.ID.
-func KSCValNetIPv6ConfigMethodRouterAdvertisement() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPv6ConfigMethodRouterAdvertisement())
+// KSCValNetIPv6ConfigMethodRouterAdvertisement returns the value of the constant kSCValNetIPv6ConfigMethodRouterAdvertisement.
+func KSCValNetIPv6ConfigMethodRouterAdvertisement() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPv6ConfigMethodRouterAdvertisement")))
 }
 
-// @const kSCValNetIPv6ConfigMethod6to4
-// KSCValNetIPv6ConfigMethod6to4 returns the value of the CoreFoundation reference constant kSCValNetIPv6ConfigMethod6to4 as an objc.ID.
-func KSCValNetIPv6ConfigMethod6to4() objc.ID {
-	return purego.CFConstant(raw.KSCValNetIPv6ConfigMethod6to4())
+// KSCValNetIPv6ConfigMethod6to4 returns the value of the constant kSCValNetIPv6ConfigMethod6to4.
+func KSCValNetIPv6ConfigMethod6to4() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetIPv6ConfigMethod6to4")))
 }
 
-// @const kSCPropNet6to4Relay @discussion Value is a CFString
-// KSCPropNet6to4Relay returns the value of the CoreFoundation reference constant kSCPropNet6to4Relay as an objc.ID.
-func KSCPropNet6to4Relay() objc.ID { return purego.CFConstant(raw.KSCPropNet6to4Relay()) }
+// Value is a CFString
+// KSCPropNet6to4Relay returns the value of the constant kSCPropNet6to4Relay.
+func KSCPropNet6to4Relay() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNet6to4Relay")))
+}
 
-// @const kSCPropNetLinkActive @discussion Value is a CFBoolean
-// KSCPropNetLinkActive returns the value of the CoreFoundation reference constant kSCPropNetLinkActive as an objc.ID.
-func KSCPropNetLinkActive() objc.ID { return purego.CFConstant(raw.KSCPropNetLinkActive()) }
+// Value is a CFBoolean
+// KSCPropNetLinkActive returns the value of the constant kSCPropNetLinkActive.
+func KSCPropNetLinkActive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetLinkActive")))
+}
 
-// @const kSCPropNetLinkDetaching @discussion Value is a CFBoolean
-// KSCPropNetLinkDetaching returns the value of the CoreFoundation reference constant kSCPropNetLinkDetaching as an objc.ID.
-func KSCPropNetLinkDetaching() objc.ID { return purego.CFConstant(raw.KSCPropNetLinkDetaching()) }
+// Value is a CFBoolean
+// KSCPropNetLinkDetaching returns the value of the constant kSCPropNetLinkDetaching.
+func KSCPropNetLinkDetaching() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetLinkDetaching")))
+}
 
-// @const kSCPropNetModemAccessPointName @discussion Value is a CFString
-// KSCPropNetModemAccessPointName returns the value of the CoreFoundation reference constant kSCPropNetModemAccessPointName as an objc.ID.
-func KSCPropNetModemAccessPointName() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetModemAccessPointName())
+// Value is a CFString
+// KSCPropNetModemAccessPointName returns the value of the constant kSCPropNetModemAccessPointName.
+func KSCPropNetModemAccessPointName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemAccessPointName")))
 }
 
-// @const kSCPropNetModemConnectionPersonality @discussion Value is a CFString
-// KSCPropNetModemConnectionPersonality returns the value of the CoreFoundation reference constant kSCPropNetModemConnectionPersonality as an objc.ID.
-func KSCPropNetModemConnectionPersonality() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetModemConnectionPersonality())
+// Value is a CFString
+// KSCPropNetModemConnectionPersonality returns the value of the constant kSCPropNetModemConnectionPersonality.
+func KSCPropNetModemConnectionPersonality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemConnectionPersonality")))
 }
 
-// @const kSCPropNetModemConnectionScript @discussion Value is a CFString
-// KSCPropNetModemConnectionScript returns the value of the CoreFoundation reference constant kSCPropNetModemConnectionScript as an objc.ID.
-func KSCPropNetModemConnectionScript() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetModemConnectionScript())
+// Value is a CFString
+// KSCPropNetModemConnectionScript returns the value of the constant kSCPropNetModemConnectionScript.
+func KSCPropNetModemConnectionScript() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemConnectionScript")))
 }
 
-// @const kSCPropNetModemConnectSpeed @discussion Value is a CFNumber
-// KSCPropNetModemConnectSpeed returns the value of the CoreFoundation reference constant kSCPropNetModemConnectSpeed as an objc.ID.
-func KSCPropNetModemConnectSpeed() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetModemConnectSpeed())
+// Value is a CFNumber
+// KSCPropNetModemConnectSpeed returns the value of the constant kSCPropNetModemConnectSpeed.
+func KSCPropNetModemConnectSpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemConnectSpeed")))
 }
 
-// @const kSCPropNetModemDataCompression @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetModemDataCompression returns the value of the CoreFoundation reference constant kSCPropNetModemDataCompression as an objc.ID.
-func KSCPropNetModemDataCompression() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetModemDataCompression())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetModemDataCompression returns the value of the constant kSCPropNetModemDataCompression.
+func KSCPropNetModemDataCompression() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemDataCompression")))
 }
 
-// @const kSCPropNetModemDeviceContextID @discussion Value is a CFString
-// KSCPropNetModemDeviceContextID returns the value of the CoreFoundation reference constant kSCPropNetModemDeviceContextID as an objc.ID.
-func KSCPropNetModemDeviceContextID() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetModemDeviceContextID())
+// Value is a CFString
+// KSCPropNetModemDeviceContextID returns the value of the constant kSCPropNetModemDeviceContextID.
+func KSCPropNetModemDeviceContextID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemDeviceContextID")))
 }
 
-// @const kSCPropNetModemDeviceModel @discussion Value is a CFString
-// KSCPropNetModemDeviceModel returns the value of the CoreFoundation reference constant kSCPropNetModemDeviceModel as an objc.ID.
-func KSCPropNetModemDeviceModel() objc.ID { return purego.CFConstant(raw.KSCPropNetModemDeviceModel()) }
+// Value is a CFString
+// KSCPropNetModemDeviceModel returns the value of the constant kSCPropNetModemDeviceModel.
+func KSCPropNetModemDeviceModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemDeviceModel")))
+}
 
-// @const kSCPropNetModemDeviceVendor @discussion Value is a CFString
-// KSCPropNetModemDeviceVendor returns the value of the CoreFoundation reference constant kSCPropNetModemDeviceVendor as an objc.ID.
-func KSCPropNetModemDeviceVendor() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetModemDeviceVendor())
+// Value is a CFString
+// KSCPropNetModemDeviceVendor returns the value of the constant kSCPropNetModemDeviceVendor.
+func KSCPropNetModemDeviceVendor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemDeviceVendor")))
 }
 
-// @const kSCPropNetModemDialMode @discussion Value is a CFString
-// KSCPropNetModemDialMode returns the value of the CoreFoundation reference constant kSCPropNetModemDialMode as an objc.ID.
-func KSCPropNetModemDialMode() objc.ID { return purego.CFConstant(raw.KSCPropNetModemDialMode()) }
+// Value is a CFString
+// KSCPropNetModemDialMode returns the value of the constant kSCPropNetModemDialMode.
+func KSCPropNetModemDialMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemDialMode")))
+}
 
-// @const kSCPropNetModemErrorCorrection @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetModemErrorCorrection returns the value of the CoreFoundation reference constant kSCPropNetModemErrorCorrection as an objc.ID.
-func KSCPropNetModemErrorCorrection() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetModemErrorCorrection())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetModemErrorCorrection returns the value of the constant kSCPropNetModemErrorCorrection.
+func KSCPropNetModemErrorCorrection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemErrorCorrection")))
 }
 
-// @const kSCPropNetModemHoldCallWaitingAudibleAlert @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetModemHoldCallWaitingAudibleAlert returns the value of the CoreFoundation reference constant kSCPropNetModemHoldCallWaitingAudibleAlert as an objc.ID.
-func KSCPropNetModemHoldCallWaitingAudibleAlert() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetModemHoldCallWaitingAudibleAlert())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetModemHoldCallWaitingAudibleAlert returns the value of the constant kSCPropNetModemHoldCallWaitingAudibleAlert.
+func KSCPropNetModemHoldCallWaitingAudibleAlert() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemHoldCallWaitingAudibleAlert")))
 }
 
-// @const kSCPropNetModemHoldDisconnectOnAnswer @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetModemHoldDisconnectOnAnswer returns the value of the CoreFoundation reference constant kSCPropNetModemHoldDisconnectOnAnswer as an objc.ID.
-func KSCPropNetModemHoldDisconnectOnAnswer() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetModemHoldDisconnectOnAnswer())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetModemHoldDisconnectOnAnswer returns the value of the constant kSCPropNetModemHoldDisconnectOnAnswer.
+func KSCPropNetModemHoldDisconnectOnAnswer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemHoldDisconnectOnAnswer")))
 }
 
-// @const kSCPropNetModemHoldEnabled @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetModemHoldEnabled returns the value of the CoreFoundation reference constant kSCPropNetModemHoldEnabled as an objc.ID.
-func KSCPropNetModemHoldEnabled() objc.ID { return purego.CFConstant(raw.KSCPropNetModemHoldEnabled()) }
+// Value is a CFNumber (0 or 1)
+// KSCPropNetModemHoldEnabled returns the value of the constant kSCPropNetModemHoldEnabled.
+func KSCPropNetModemHoldEnabled() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemHoldEnabled")))
+}
 
-// @const kSCPropNetModemHoldReminder @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetModemHoldReminder returns the value of the CoreFoundation reference constant kSCPropNetModemHoldReminder as an objc.ID.
-func KSCPropNetModemHoldReminder() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetModemHoldReminder())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetModemHoldReminder returns the value of the constant kSCPropNetModemHoldReminder.
+func KSCPropNetModemHoldReminder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemHoldReminder")))
 }
 
-// @const kSCPropNetModemHoldReminderTime @discussion Value is a CFNumber
-// KSCPropNetModemHoldReminderTime returns the value of the CoreFoundation reference constant kSCPropNetModemHoldReminderTime as an objc.ID.
-func KSCPropNetModemHoldReminderTime() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetModemHoldReminderTime())
+// Value is a CFNumber
+// KSCPropNetModemHoldReminderTime returns the value of the constant kSCPropNetModemHoldReminderTime.
+func KSCPropNetModemHoldReminderTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemHoldReminderTime")))
 }
 
-// @const kSCPropNetModemNote @discussion Value is a CFString
-// KSCPropNetModemNote returns the value of the CoreFoundation reference constant kSCPropNetModemNote as an objc.ID.
-func KSCPropNetModemNote() objc.ID { return purego.CFConstant(raw.KSCPropNetModemNote()) }
+// Value is a CFString
+// KSCPropNetModemNote returns the value of the constant kSCPropNetModemNote.
+func KSCPropNetModemNote() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemNote")))
+}
 
-// @const kSCPropNetModemPulseDial @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetModemPulseDial returns the value of the CoreFoundation reference constant kSCPropNetModemPulseDial as an objc.ID.
-func KSCPropNetModemPulseDial() objc.ID { return purego.CFConstant(raw.KSCPropNetModemPulseDial()) }
+// Value is a CFNumber (0 or 1)
+// KSCPropNetModemPulseDial returns the value of the constant kSCPropNetModemPulseDial.
+func KSCPropNetModemPulseDial() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemPulseDial")))
+}
 
-// @const kSCPropNetModemSpeaker @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetModemSpeaker returns the value of the CoreFoundation reference constant kSCPropNetModemSpeaker as an objc.ID.
-func KSCPropNetModemSpeaker() objc.ID { return purego.CFConstant(raw.KSCPropNetModemSpeaker()) }
+// Value is a CFNumber (0 or 1)
+// KSCPropNetModemSpeaker returns the value of the constant kSCPropNetModemSpeaker.
+func KSCPropNetModemSpeaker() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemSpeaker")))
+}
 
-// @const kSCPropNetModemSpeed @discussion Value is a CFNumber
-// KSCPropNetModemSpeed returns the value of the CoreFoundation reference constant kSCPropNetModemSpeed as an objc.ID.
-func KSCPropNetModemSpeed() objc.ID { return purego.CFConstant(raw.KSCPropNetModemSpeed()) }
+// Value is a CFNumber
+// KSCPropNetModemSpeed returns the value of the constant kSCPropNetModemSpeed.
+func KSCPropNetModemSpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetModemSpeed")))
+}
 
-// @const kSCValNetModemDialModeIgnoreDialTone
-// KSCValNetModemDialModeIgnoreDialTone returns the value of the CoreFoundation reference constant kSCValNetModemDialModeIgnoreDialTone as an objc.ID.
-func KSCValNetModemDialModeIgnoreDialTone() objc.ID {
-	return purego.CFConstant(raw.KSCValNetModemDialModeIgnoreDialTone())
+// KSCValNetModemDialModeIgnoreDialTone returns the value of the constant kSCValNetModemDialModeIgnoreDialTone.
+func KSCValNetModemDialModeIgnoreDialTone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetModemDialModeIgnoreDialTone")))
 }
 
-// @const kSCValNetModemDialModeManual
-// KSCValNetModemDialModeManual returns the value of the CoreFoundation reference constant kSCValNetModemDialModeManual as an objc.ID.
-func KSCValNetModemDialModeManual() objc.ID {
-	return purego.CFConstant(raw.KSCValNetModemDialModeManual())
+// KSCValNetModemDialModeManual returns the value of the constant kSCValNetModemDialModeManual.
+func KSCValNetModemDialModeManual() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetModemDialModeManual")))
 }
 
-// @const kSCValNetModemDialModeWaitForDialTone
-// KSCValNetModemDialModeWaitForDialTone returns the value of the CoreFoundation reference constant kSCValNetModemDialModeWaitForDialTone as an objc.ID.
-func KSCValNetModemDialModeWaitForDialTone() objc.ID {
-	return purego.CFConstant(raw.KSCValNetModemDialModeWaitForDialTone())
+// KSCValNetModemDialModeWaitForDialTone returns the value of the constant kSCValNetModemDialModeWaitForDialTone.
+func KSCValNetModemDialModeWaitForDialTone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetModemDialModeWaitForDialTone")))
 }
 
-// @const kSCPropNetPPPACSPEnabled @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPACSPEnabled returns the value of the CoreFoundation reference constant kSCPropNetPPPACSPEnabled as an objc.ID.
-func KSCPropNetPPPACSPEnabled() objc.ID { return purego.CFConstant(raw.KSCPropNetPPPACSPEnabled()) }
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPACSPEnabled returns the value of the constant kSCPropNetPPPACSPEnabled.
+func KSCPropNetPPPACSPEnabled() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPACSPEnabled")))
+}
 
-// @const kSCPropNetPPPConnectTime @discussion Value is a CFNumber
-// KSCPropNetPPPConnectTime returns the value of the CoreFoundation reference constant kSCPropNetPPPConnectTime as an objc.ID.
-func KSCPropNetPPPConnectTime() objc.ID { return purego.CFConstant(raw.KSCPropNetPPPConnectTime()) }
+// Value is a CFNumber
+// KSCPropNetPPPConnectTime returns the value of the constant kSCPropNetPPPConnectTime.
+func KSCPropNetPPPConnectTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPConnectTime")))
+}
 
-// @const kSCPropNetPPPDeviceLastCause @discussion Value is a CFNumber
-// KSCPropNetPPPDeviceLastCause returns the value of the CoreFoundation reference constant kSCPropNetPPPDeviceLastCause as an objc.ID.
-func KSCPropNetPPPDeviceLastCause() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPDeviceLastCause())
+// Value is a CFNumber
+// KSCPropNetPPPDeviceLastCause returns the value of the constant kSCPropNetPPPDeviceLastCause.
+func KSCPropNetPPPDeviceLastCause() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPDeviceLastCause")))
 }
 
-// @const kSCPropNetPPPDialOnDemand @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPDialOnDemand returns the value of the CoreFoundation reference constant kSCPropNetPPPDialOnDemand as an objc.ID.
-func KSCPropNetPPPDialOnDemand() objc.ID { return purego.CFConstant(raw.KSCPropNetPPPDialOnDemand()) }
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPDialOnDemand returns the value of the constant kSCPropNetPPPDialOnDemand.
+func KSCPropNetPPPDialOnDemand() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPDialOnDemand")))
+}
 
-// @const kSCPropNetPPPDisconnectOnFastUserSwitch @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPDisconnectOnFastUserSwitch returns the value of the CoreFoundation reference constant kSCPropNetPPPDisconnectOnFastUserSwitch as an objc.ID.
-func KSCPropNetPPPDisconnectOnFastUserSwitch() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPDisconnectOnFastUserSwitch())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPDisconnectOnFastUserSwitch returns the value of the constant kSCPropNetPPPDisconnectOnFastUserSwitch.
+func KSCPropNetPPPDisconnectOnFastUserSwitch() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPDisconnectOnFastUserSwitch")))
 }
 
-// @const kSCPropNetPPPDisconnectOnIdle @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPDisconnectOnIdle returns the value of the CoreFoundation reference constant kSCPropNetPPPDisconnectOnIdle as an objc.ID.
-func KSCPropNetPPPDisconnectOnIdle() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPDisconnectOnIdle())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPDisconnectOnIdle returns the value of the constant kSCPropNetPPPDisconnectOnIdle.
+func KSCPropNetPPPDisconnectOnIdle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPDisconnectOnIdle")))
 }
 
-// @const kSCPropNetPPPDisconnectOnIdleTimer @discussion Value is a CFNumber
-// KSCPropNetPPPDisconnectOnIdleTimer returns the value of the CoreFoundation reference constant kSCPropNetPPPDisconnectOnIdleTimer as an objc.ID.
-func KSCPropNetPPPDisconnectOnIdleTimer() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPDisconnectOnIdleTimer())
+// Value is a CFNumber
+// KSCPropNetPPPDisconnectOnIdleTimer returns the value of the constant kSCPropNetPPPDisconnectOnIdleTimer.
+func KSCPropNetPPPDisconnectOnIdleTimer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPDisconnectOnIdleTimer")))
 }
 
-// @const kSCPropNetPPPDisconnectOnLogout @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPDisconnectOnLogout returns the value of the CoreFoundation reference constant kSCPropNetPPPDisconnectOnLogout as an objc.ID.
-func KSCPropNetPPPDisconnectOnLogout() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPDisconnectOnLogout())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPDisconnectOnLogout returns the value of the constant kSCPropNetPPPDisconnectOnLogout.
+func KSCPropNetPPPDisconnectOnLogout() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPDisconnectOnLogout")))
 }
 
-// @const kSCPropNetPPPDisconnectOnSleep @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPDisconnectOnSleep returns the value of the CoreFoundation reference constant kSCPropNetPPPDisconnectOnSleep as an objc.ID.
-func KSCPropNetPPPDisconnectOnSleep() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPDisconnectOnSleep())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPDisconnectOnSleep returns the value of the constant kSCPropNetPPPDisconnectOnSleep.
+func KSCPropNetPPPDisconnectOnSleep() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPDisconnectOnSleep")))
 }
 
-// @const kSCPropNetPPPDisconnectTime @discussion Value is a CFNumber
-// KSCPropNetPPPDisconnectTime returns the value of the CoreFoundation reference constant kSCPropNetPPPDisconnectTime as an objc.ID.
-func KSCPropNetPPPDisconnectTime() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPDisconnectTime())
+// Value is a CFNumber
+// KSCPropNetPPPDisconnectTime returns the value of the constant kSCPropNetPPPDisconnectTime.
+func KSCPropNetPPPDisconnectTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPDisconnectTime")))
 }
 
-// @const kSCPropNetPPPIdleReminder @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPIdleReminder returns the value of the CoreFoundation reference constant kSCPropNetPPPIdleReminder as an objc.ID.
-func KSCPropNetPPPIdleReminder() objc.ID { return purego.CFConstant(raw.KSCPropNetPPPIdleReminder()) }
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPIdleReminder returns the value of the constant kSCPropNetPPPIdleReminder.
+func KSCPropNetPPPIdleReminder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPIdleReminder")))
+}
 
-// @const kSCPropNetPPPIdleReminderTimer @discussion Value is a CFNumber
-// KSCPropNetPPPIdleReminderTimer returns the value of the CoreFoundation reference constant kSCPropNetPPPIdleReminderTimer as an objc.ID.
-func KSCPropNetPPPIdleReminderTimer() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPIdleReminderTimer())
+// Value is a CFNumber
+// KSCPropNetPPPIdleReminderTimer returns the value of the constant kSCPropNetPPPIdleReminderTimer.
+func KSCPropNetPPPIdleReminderTimer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPIdleReminderTimer")))
 }
 
-// @const kSCPropNetPPPLastCause @discussion Value is a CFNumber
-// KSCPropNetPPPLastCause returns the value of the CoreFoundation reference constant kSCPropNetPPPLastCause as an objc.ID.
-func KSCPropNetPPPLastCause() objc.ID { return purego.CFConstant(raw.KSCPropNetPPPLastCause()) }
+// Value is a CFNumber
+// KSCPropNetPPPLastCause returns the value of the constant kSCPropNetPPPLastCause.
+func KSCPropNetPPPLastCause() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLastCause")))
+}
 
-// @const kSCPropNetPPPLogfile @discussion Value is a CFString
-// KSCPropNetPPPLogfile returns the value of the CoreFoundation reference constant kSCPropNetPPPLogfile as an objc.ID.
-func KSCPropNetPPPLogfile() objc.ID { return purego.CFConstant(raw.KSCPropNetPPPLogfile()) }
+// Value is a CFString
+// KSCPropNetPPPLogfile returns the value of the constant kSCPropNetPPPLogfile.
+func KSCPropNetPPPLogfile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLogfile")))
+}
 
-// @const kSCPropNetPPPPlugins @discussion Value is a CFArray[CFString]
-// KSCPropNetPPPPlugins returns the value of the CoreFoundation reference constant kSCPropNetPPPPlugins as an objc.ID.
-func KSCPropNetPPPPlugins() objc.ID { return purego.CFConstant(raw.KSCPropNetPPPPlugins()) }
+// Value is a CFArray[CFString]
+// KSCPropNetPPPPlugins returns the value of the constant kSCPropNetPPPPlugins.
+func KSCPropNetPPPPlugins() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPPlugins")))
+}
 
-// @const kSCPropNetPPPRetryConnectTime @discussion Value is a CFNumber
-// KSCPropNetPPPRetryConnectTime returns the value of the CoreFoundation reference constant kSCPropNetPPPRetryConnectTime as an objc.ID.
-func KSCPropNetPPPRetryConnectTime() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPRetryConnectTime())
+// Value is a CFNumber
+// KSCPropNetPPPRetryConnectTime returns the value of the constant kSCPropNetPPPRetryConnectTime.
+func KSCPropNetPPPRetryConnectTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPRetryConnectTime")))
 }
 
-// @const kSCPropNetPPPSessionTimer @discussion Value is a CFNumber
-// KSCPropNetPPPSessionTimer returns the value of the CoreFoundation reference constant kSCPropNetPPPSessionTimer as an objc.ID.
-func KSCPropNetPPPSessionTimer() objc.ID { return purego.CFConstant(raw.KSCPropNetPPPSessionTimer()) }
+// Value is a CFNumber
+// KSCPropNetPPPSessionTimer returns the value of the constant kSCPropNetPPPSessionTimer.
+func KSCPropNetPPPSessionTimer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPSessionTimer")))
+}
 
-// @const kSCPropNetPPPStatus @discussion Value is a CFNumber
-// KSCPropNetPPPStatus returns the value of the CoreFoundation reference constant kSCPropNetPPPStatus as an objc.ID.
-func KSCPropNetPPPStatus() objc.ID { return purego.CFConstant(raw.KSCPropNetPPPStatus()) }
+// Value is a CFNumber
+// KSCPropNetPPPStatus returns the value of the constant kSCPropNetPPPStatus.
+func KSCPropNetPPPStatus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPStatus")))
+}
 
-// @const kSCPropNetPPPUseSessionTimer @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPUseSessionTimer returns the value of the CoreFoundation reference constant kSCPropNetPPPUseSessionTimer as an objc.ID.
-func KSCPropNetPPPUseSessionTimer() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPUseSessionTimer())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPUseSessionTimer returns the value of the constant kSCPropNetPPPUseSessionTimer.
+func KSCPropNetPPPUseSessionTimer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPUseSessionTimer")))
 }
 
-// @const kSCPropNetPPPVerboseLogging @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPVerboseLogging returns the value of the CoreFoundation reference constant kSCPropNetPPPVerboseLogging as an objc.ID.
-func KSCPropNetPPPVerboseLogging() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPVerboseLogging())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPVerboseLogging returns the value of the constant kSCPropNetPPPVerboseLogging.
+func KSCPropNetPPPVerboseLogging() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPVerboseLogging")))
 }
 
-// @const kSCPropNetPPPAuthEAPPlugins @discussion Value is a CFArray[CFString]
-// KSCPropNetPPPAuthEAPPlugins returns the value of the CoreFoundation reference constant kSCPropNetPPPAuthEAPPlugins as an objc.ID.
-func KSCPropNetPPPAuthEAPPlugins() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPAuthEAPPlugins())
+// Value is a CFArray[CFString]
+// KSCPropNetPPPAuthEAPPlugins returns the value of the constant kSCPropNetPPPAuthEAPPlugins.
+func KSCPropNetPPPAuthEAPPlugins() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPAuthEAPPlugins")))
 }
 
-// @const kSCPropNetPPPAuthName @discussion Value is a CFString
-// KSCPropNetPPPAuthName returns the value of the CoreFoundation reference constant kSCPropNetPPPAuthName as an objc.ID.
-func KSCPropNetPPPAuthName() objc.ID { return purego.CFConstant(raw.KSCPropNetPPPAuthName()) }
+// Value is a CFString
+// KSCPropNetPPPAuthName returns the value of the constant kSCPropNetPPPAuthName.
+func KSCPropNetPPPAuthName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPAuthName")))
+}
 
-// @const kSCPropNetPPPAuthPassword @discussion Value is a CFString
-// KSCPropNetPPPAuthPassword returns the value of the CoreFoundation reference constant kSCPropNetPPPAuthPassword as an objc.ID.
-func KSCPropNetPPPAuthPassword() objc.ID { return purego.CFConstant(raw.KSCPropNetPPPAuthPassword()) }
+// Value is a CFString
+// KSCPropNetPPPAuthPassword returns the value of the constant kSCPropNetPPPAuthPassword.
+func KSCPropNetPPPAuthPassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPAuthPassword")))
+}
 
-// @const kSCPropNetPPPAuthPasswordEncryption @discussion Value is a CFString
-// KSCPropNetPPPAuthPasswordEncryption returns the value of the CoreFoundation reference constant kSCPropNetPPPAuthPasswordEncryption as an objc.ID.
-func KSCPropNetPPPAuthPasswordEncryption() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPAuthPasswordEncryption())
+// Value is a CFString
+// KSCPropNetPPPAuthPasswordEncryption returns the value of the constant kSCPropNetPPPAuthPasswordEncryption.
+func KSCPropNetPPPAuthPasswordEncryption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPAuthPasswordEncryption")))
 }
 
-// @const kSCPropNetPPPAuthPrompt @discussion Value is a CFString
-// KSCPropNetPPPAuthPrompt returns the value of the CoreFoundation reference constant kSCPropNetPPPAuthPrompt as an objc.ID.
-func KSCPropNetPPPAuthPrompt() objc.ID { return purego.CFConstant(raw.KSCPropNetPPPAuthPrompt()) }
+// Value is a CFString
+// KSCPropNetPPPAuthPrompt returns the value of the constant kSCPropNetPPPAuthPrompt.
+func KSCPropNetPPPAuthPrompt() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPAuthPrompt")))
+}
 
-// @const kSCPropNetPPPAuthProtocol @discussion Value is a CFArray[CFString]
-// KSCPropNetPPPAuthProtocol returns the value of the CoreFoundation reference constant kSCPropNetPPPAuthProtocol as an objc.ID.
-func KSCPropNetPPPAuthProtocol() objc.ID { return purego.CFConstant(raw.KSCPropNetPPPAuthProtocol()) }
+// Value is a CFArray[CFString]
+// KSCPropNetPPPAuthProtocol returns the value of the constant kSCPropNetPPPAuthProtocol.
+func KSCPropNetPPPAuthProtocol() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPAuthProtocol")))
+}
 
-// @const kSCValNetPPPAuthPasswordEncryptionKeychain
-// KSCValNetPPPAuthPasswordEncryptionKeychain returns the value of the CoreFoundation reference constant kSCValNetPPPAuthPasswordEncryptionKeychain as an objc.ID.
-func KSCValNetPPPAuthPasswordEncryptionKeychain() objc.ID {
-	return purego.CFConstant(raw.KSCValNetPPPAuthPasswordEncryptionKeychain())
+// KSCValNetPPPAuthPasswordEncryptionKeychain returns the value of the constant kSCValNetPPPAuthPasswordEncryptionKeychain.
+func KSCValNetPPPAuthPasswordEncryptionKeychain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetPPPAuthPasswordEncryptionKeychain")))
 }
 
-// @const kSCValNetPPPAuthPasswordEncryptionToken
-// KSCValNetPPPAuthPasswordEncryptionToken returns the value of the CoreFoundation reference constant kSCValNetPPPAuthPasswordEncryptionToken as an objc.ID.
-func KSCValNetPPPAuthPasswordEncryptionToken() objc.ID {
-	return purego.CFConstant(raw.KSCValNetPPPAuthPasswordEncryptionToken())
+// KSCValNetPPPAuthPasswordEncryptionToken returns the value of the constant kSCValNetPPPAuthPasswordEncryptionToken.
+func KSCValNetPPPAuthPasswordEncryptionToken() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetPPPAuthPasswordEncryptionToken")))
 }
 
-// @const kSCValNetPPPAuthPromptBefore @discussion Value is a CFString
-// KSCValNetPPPAuthPromptBefore returns the value of the CoreFoundation reference constant kSCValNetPPPAuthPromptBefore as an objc.ID.
-func KSCValNetPPPAuthPromptBefore() objc.ID {
-	return purego.CFConstant(raw.KSCValNetPPPAuthPromptBefore())
+// Value is a CFString
+// KSCValNetPPPAuthPromptBefore returns the value of the constant kSCValNetPPPAuthPromptBefore.
+func KSCValNetPPPAuthPromptBefore() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetPPPAuthPromptBefore")))
 }
 
-// @const kSCValNetPPPAuthPromptAfter @discussion Value is a CFString
-// KSCValNetPPPAuthPromptAfter returns the value of the CoreFoundation reference constant kSCValNetPPPAuthPromptAfter as an objc.ID.
-func KSCValNetPPPAuthPromptAfter() objc.ID {
-	return purego.CFConstant(raw.KSCValNetPPPAuthPromptAfter())
+// Value is a CFString
+// KSCValNetPPPAuthPromptAfter returns the value of the constant kSCValNetPPPAuthPromptAfter.
+func KSCValNetPPPAuthPromptAfter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetPPPAuthPromptAfter")))
 }
 
-// @const kSCValNetPPPAuthProtocolCHAP @discussion Value is a CFString
-// KSCValNetPPPAuthProtocolCHAP returns the value of the CoreFoundation reference constant kSCValNetPPPAuthProtocolCHAP as an objc.ID.
-func KSCValNetPPPAuthProtocolCHAP() objc.ID {
-	return purego.CFConstant(raw.KSCValNetPPPAuthProtocolCHAP())
+// Value is a CFString
+// KSCValNetPPPAuthProtocolCHAP returns the value of the constant kSCValNetPPPAuthProtocolCHAP.
+func KSCValNetPPPAuthProtocolCHAP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetPPPAuthProtocolCHAP")))
 }
 
-// @const kSCValNetPPPAuthProtocolEAP @discussion Value is a CFString
-// KSCValNetPPPAuthProtocolEAP returns the value of the CoreFoundation reference constant kSCValNetPPPAuthProtocolEAP as an objc.ID.
-func KSCValNetPPPAuthProtocolEAP() objc.ID {
-	return purego.CFConstant(raw.KSCValNetPPPAuthProtocolEAP())
+// Value is a CFString
+// KSCValNetPPPAuthProtocolEAP returns the value of the constant kSCValNetPPPAuthProtocolEAP.
+func KSCValNetPPPAuthProtocolEAP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetPPPAuthProtocolEAP")))
 }
 
-// @const kSCValNetPPPAuthProtocolMSCHAP1 @discussion Value is a CFString
-// KSCValNetPPPAuthProtocolMSCHAP1 returns the value of the CoreFoundation reference constant kSCValNetPPPAuthProtocolMSCHAP1 as an objc.ID.
-func KSCValNetPPPAuthProtocolMSCHAP1() objc.ID {
-	return purego.CFConstant(raw.KSCValNetPPPAuthProtocolMSCHAP1())
+// Value is a CFString
+// KSCValNetPPPAuthProtocolMSCHAP1 returns the value of the constant kSCValNetPPPAuthProtocolMSCHAP1.
+func KSCValNetPPPAuthProtocolMSCHAP1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetPPPAuthProtocolMSCHAP1")))
 }
 
-// @const kSCValNetPPPAuthProtocolMSCHAP2 @discussion Value is a CFString
-// KSCValNetPPPAuthProtocolMSCHAP2 returns the value of the CoreFoundation reference constant kSCValNetPPPAuthProtocolMSCHAP2 as an objc.ID.
-func KSCValNetPPPAuthProtocolMSCHAP2() objc.ID {
-	return purego.CFConstant(raw.KSCValNetPPPAuthProtocolMSCHAP2())
+// Value is a CFString
+// KSCValNetPPPAuthProtocolMSCHAP2 returns the value of the constant kSCValNetPPPAuthProtocolMSCHAP2.
+func KSCValNetPPPAuthProtocolMSCHAP2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetPPPAuthProtocolMSCHAP2")))
 }
 
-// @const kSCValNetPPPAuthProtocolPAP @discussion Value is a CFString
-// KSCValNetPPPAuthProtocolPAP returns the value of the CoreFoundation reference constant kSCValNetPPPAuthProtocolPAP as an objc.ID.
-func KSCValNetPPPAuthProtocolPAP() objc.ID {
-	return purego.CFConstant(raw.KSCValNetPPPAuthProtocolPAP())
+// Value is a CFString
+// KSCValNetPPPAuthProtocolPAP returns the value of the constant kSCValNetPPPAuthProtocolPAP.
+func KSCValNetPPPAuthProtocolPAP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetPPPAuthProtocolPAP")))
 }
 
-// @const kSCPropNetPPPCommAlternateRemoteAddress @discussion Value is a CFString
-// KSCPropNetPPPCommAlternateRemoteAddress returns the value of the CoreFoundation reference constant kSCPropNetPPPCommAlternateRemoteAddress as an objc.ID.
-func KSCPropNetPPPCommAlternateRemoteAddress() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPCommAlternateRemoteAddress())
+// Value is a CFString
+// KSCPropNetPPPCommAlternateRemoteAddress returns the value of the constant kSCPropNetPPPCommAlternateRemoteAddress.
+func KSCPropNetPPPCommAlternateRemoteAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCommAlternateRemoteAddress")))
 }
 
-// @const kSCPropNetPPPCommConnectDelay @discussion Value is a CFNumber
-// KSCPropNetPPPCommConnectDelay returns the value of the CoreFoundation reference constant kSCPropNetPPPCommConnectDelay as an objc.ID.
-func KSCPropNetPPPCommConnectDelay() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPCommConnectDelay())
+// Value is a CFNumber
+// KSCPropNetPPPCommConnectDelay returns the value of the constant kSCPropNetPPPCommConnectDelay.
+func KSCPropNetPPPCommConnectDelay() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCommConnectDelay")))
 }
 
-// @const kSCPropNetPPPCommDisplayTerminalWindow @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPCommDisplayTerminalWindow returns the value of the CoreFoundation reference constant kSCPropNetPPPCommDisplayTerminalWindow as an objc.ID.
-func KSCPropNetPPPCommDisplayTerminalWindow() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPCommDisplayTerminalWindow())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPCommDisplayTerminalWindow returns the value of the constant kSCPropNetPPPCommDisplayTerminalWindow.
+func KSCPropNetPPPCommDisplayTerminalWindow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCommDisplayTerminalWindow")))
 }
 
-// @const kSCPropNetPPPCommRedialCount @discussion Value is a CFNumber
-// KSCPropNetPPPCommRedialCount returns the value of the CoreFoundation reference constant kSCPropNetPPPCommRedialCount as an objc.ID.
-func KSCPropNetPPPCommRedialCount() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPCommRedialCount())
+// Value is a CFNumber
+// KSCPropNetPPPCommRedialCount returns the value of the constant kSCPropNetPPPCommRedialCount.
+func KSCPropNetPPPCommRedialCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCommRedialCount")))
 }
 
-// @const kSCPropNetPPPCommRedialEnabled @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPCommRedialEnabled returns the value of the CoreFoundation reference constant kSCPropNetPPPCommRedialEnabled as an objc.ID.
-func KSCPropNetPPPCommRedialEnabled() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPCommRedialEnabled())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPCommRedialEnabled returns the value of the constant kSCPropNetPPPCommRedialEnabled.
+func KSCPropNetPPPCommRedialEnabled() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCommRedialEnabled")))
 }
 
-// @const kSCPropNetPPPCommRedialInterval @discussion Value is a CFNumber
-// KSCPropNetPPPCommRedialInterval returns the value of the CoreFoundation reference constant kSCPropNetPPPCommRedialInterval as an objc.ID.
-func KSCPropNetPPPCommRedialInterval() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPCommRedialInterval())
+// Value is a CFNumber
+// KSCPropNetPPPCommRedialInterval returns the value of the constant kSCPropNetPPPCommRedialInterval.
+func KSCPropNetPPPCommRedialInterval() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCommRedialInterval")))
 }
 
-// @const kSCPropNetPPPCommRemoteAddress @discussion Value is a CFString
-// KSCPropNetPPPCommRemoteAddress returns the value of the CoreFoundation reference constant kSCPropNetPPPCommRemoteAddress as an objc.ID.
-func KSCPropNetPPPCommRemoteAddress() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPCommRemoteAddress())
+// Value is a CFString
+// KSCPropNetPPPCommRemoteAddress returns the value of the constant kSCPropNetPPPCommRemoteAddress.
+func KSCPropNetPPPCommRemoteAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCommRemoteAddress")))
 }
 
-// @const kSCPropNetPPPCommTerminalScript @discussion Value is a CFString
-// KSCPropNetPPPCommTerminalScript returns the value of the CoreFoundation reference constant kSCPropNetPPPCommTerminalScript as an objc.ID.
-func KSCPropNetPPPCommTerminalScript() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPCommTerminalScript())
+// Value is a CFString
+// KSCPropNetPPPCommTerminalScript returns the value of the constant kSCPropNetPPPCommTerminalScript.
+func KSCPropNetPPPCommTerminalScript() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCommTerminalScript")))
 }
 
-// @const kSCPropNetPPPCommUseTerminalScript @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPCommUseTerminalScript returns the value of the CoreFoundation reference constant kSCPropNetPPPCommUseTerminalScript as an objc.ID.
-func KSCPropNetPPPCommUseTerminalScript() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPCommUseTerminalScript())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPCommUseTerminalScript returns the value of the constant kSCPropNetPPPCommUseTerminalScript.
+func KSCPropNetPPPCommUseTerminalScript() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCommUseTerminalScript")))
 }
 
-// @const kSCPropNetPPPCCPEnabled @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPCCPEnabled returns the value of the CoreFoundation reference constant kSCPropNetPPPCCPEnabled as an objc.ID.
-func KSCPropNetPPPCCPEnabled() objc.ID { return purego.CFConstant(raw.KSCPropNetPPPCCPEnabled()) }
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPCCPEnabled returns the value of the constant kSCPropNetPPPCCPEnabled.
+func KSCPropNetPPPCCPEnabled() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCCPEnabled")))
+}
 
-// @const kSCPropNetPPPCCPMPPE40Enabled @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPCCPMPPE40Enabled returns the value of the CoreFoundation reference constant kSCPropNetPPPCCPMPPE40Enabled as an objc.ID.
-func KSCPropNetPPPCCPMPPE40Enabled() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPCCPMPPE40Enabled())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPCCPMPPE40Enabled returns the value of the constant kSCPropNetPPPCCPMPPE40Enabled.
+func KSCPropNetPPPCCPMPPE40Enabled() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCCPMPPE40Enabled")))
 }
 
-// @const kSCPropNetPPPCCPMPPE128Enabled @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPCCPMPPE128Enabled returns the value of the CoreFoundation reference constant kSCPropNetPPPCCPMPPE128Enabled as an objc.ID.
-func KSCPropNetPPPCCPMPPE128Enabled() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPCCPMPPE128Enabled())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPCCPMPPE128Enabled returns the value of the constant kSCPropNetPPPCCPMPPE128Enabled.
+func KSCPropNetPPPCCPMPPE128Enabled() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPCCPMPPE128Enabled")))
 }
 
-// @const kSCPropNetPPPIPCPCompressionVJ @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPIPCPCompressionVJ returns the value of the CoreFoundation reference constant kSCPropNetPPPIPCPCompressionVJ as an objc.ID.
-func KSCPropNetPPPIPCPCompressionVJ() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPIPCPCompressionVJ())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPIPCPCompressionVJ returns the value of the constant kSCPropNetPPPIPCPCompressionVJ.
+func KSCPropNetPPPIPCPCompressionVJ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPIPCPCompressionVJ")))
 }
 
-// @const kSCPropNetPPPIPCPUsePeerDNS @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPIPCPUsePeerDNS returns the value of the CoreFoundation reference constant kSCPropNetPPPIPCPUsePeerDNS as an objc.ID.
-func KSCPropNetPPPIPCPUsePeerDNS() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPIPCPUsePeerDNS())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPIPCPUsePeerDNS returns the value of the constant kSCPropNetPPPIPCPUsePeerDNS.
+func KSCPropNetPPPIPCPUsePeerDNS() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPIPCPUsePeerDNS")))
 }
 
-// @const kSCPropNetPPPLCPEchoEnabled @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPLCPEchoEnabled returns the value of the CoreFoundation reference constant kSCPropNetPPPLCPEchoEnabled as an objc.ID.
-func KSCPropNetPPPLCPEchoEnabled() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPLCPEchoEnabled())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPLCPEchoEnabled returns the value of the constant kSCPropNetPPPLCPEchoEnabled.
+func KSCPropNetPPPLCPEchoEnabled() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLCPEchoEnabled")))
 }
 
-// @const kSCPropNetPPPLCPEchoFailure @discussion Value is a CFNumber
-// KSCPropNetPPPLCPEchoFailure returns the value of the CoreFoundation reference constant kSCPropNetPPPLCPEchoFailure as an objc.ID.
-func KSCPropNetPPPLCPEchoFailure() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPLCPEchoFailure())
+// Value is a CFNumber
+// KSCPropNetPPPLCPEchoFailure returns the value of the constant kSCPropNetPPPLCPEchoFailure.
+func KSCPropNetPPPLCPEchoFailure() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLCPEchoFailure")))
 }
 
-// @const kSCPropNetPPPLCPEchoInterval @discussion Value is a CFNumber
-// KSCPropNetPPPLCPEchoInterval returns the value of the CoreFoundation reference constant kSCPropNetPPPLCPEchoInterval as an objc.ID.
-func KSCPropNetPPPLCPEchoInterval() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPLCPEchoInterval())
+// Value is a CFNumber
+// KSCPropNetPPPLCPEchoInterval returns the value of the constant kSCPropNetPPPLCPEchoInterval.
+func KSCPropNetPPPLCPEchoInterval() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLCPEchoInterval")))
 }
 
-// @const kSCPropNetPPPLCPCompressionACField @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPLCPCompressionACField returns the value of the CoreFoundation reference constant kSCPropNetPPPLCPCompressionACField as an objc.ID.
-func KSCPropNetPPPLCPCompressionACField() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPLCPCompressionACField())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPLCPCompressionACField returns the value of the constant kSCPropNetPPPLCPCompressionACField.
+func KSCPropNetPPPLCPCompressionACField() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLCPCompressionACField")))
 }
 
-// @const kSCPropNetPPPLCPCompressionPField @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetPPPLCPCompressionPField returns the value of the CoreFoundation reference constant kSCPropNetPPPLCPCompressionPField as an objc.ID.
-func KSCPropNetPPPLCPCompressionPField() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPLCPCompressionPField())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetPPPLCPCompressionPField returns the value of the constant kSCPropNetPPPLCPCompressionPField.
+func KSCPropNetPPPLCPCompressionPField() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLCPCompressionPField")))
 }
 
-// @const kSCPropNetPPPLCPMRU @discussion Value is a CFNumber
-// KSCPropNetPPPLCPMRU returns the value of the CoreFoundation reference constant kSCPropNetPPPLCPMRU as an objc.ID.
-func KSCPropNetPPPLCPMRU() objc.ID { return purego.CFConstant(raw.KSCPropNetPPPLCPMRU()) }
+// Value is a CFNumber
+// KSCPropNetPPPLCPMRU returns the value of the constant kSCPropNetPPPLCPMRU.
+func KSCPropNetPPPLCPMRU() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLCPMRU")))
+}
 
-// @const kSCPropNetPPPLCPMTU @discussion Value is a CFNumber
-// KSCPropNetPPPLCPMTU returns the value of the CoreFoundation reference constant kSCPropNetPPPLCPMTU as an objc.ID.
-func KSCPropNetPPPLCPMTU() objc.ID { return purego.CFConstant(raw.KSCPropNetPPPLCPMTU()) }
+// Value is a CFNumber
+// KSCPropNetPPPLCPMTU returns the value of the constant kSCPropNetPPPLCPMTU.
+func KSCPropNetPPPLCPMTU() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLCPMTU")))
+}
 
-// @const kSCPropNetPPPLCPReceiveACCM @discussion Value is a CFNumber
-// KSCPropNetPPPLCPReceiveACCM returns the value of the CoreFoundation reference constant kSCPropNetPPPLCPReceiveACCM as an objc.ID.
-func KSCPropNetPPPLCPReceiveACCM() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPLCPReceiveACCM())
+// Value is a CFNumber
+// KSCPropNetPPPLCPReceiveACCM returns the value of the constant kSCPropNetPPPLCPReceiveACCM.
+func KSCPropNetPPPLCPReceiveACCM() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLCPReceiveACCM")))
 }
 
-// @const kSCPropNetPPPLCPTransmitACCM @discussion Value is a CFNumber
-// KSCPropNetPPPLCPTransmitACCM returns the value of the CoreFoundation reference constant kSCPropNetPPPLCPTransmitACCM as an objc.ID.
-func KSCPropNetPPPLCPTransmitACCM() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetPPPLCPTransmitACCM())
+// Value is a CFNumber
+// KSCPropNetPPPLCPTransmitACCM returns the value of the constant kSCPropNetPPPLCPTransmitACCM.
+func KSCPropNetPPPLCPTransmitACCM() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetPPPLCPTransmitACCM")))
 }
 
-// @const kSCPropNetL2TPIPSecSharedSecret @discussion Value is a CFString
-// KSCPropNetL2TPIPSecSharedSecret returns the value of the CoreFoundation reference constant kSCPropNetL2TPIPSecSharedSecret as an objc.ID.
-func KSCPropNetL2TPIPSecSharedSecret() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetL2TPIPSecSharedSecret())
+// Value is a CFString
+// KSCPropNetL2TPIPSecSharedSecret returns the value of the constant kSCPropNetL2TPIPSecSharedSecret.
+func KSCPropNetL2TPIPSecSharedSecret() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetL2TPIPSecSharedSecret")))
 }
 
-// @const kSCPropNetL2TPIPSecSharedSecretEncryption @discussion Value is a CFString
-// KSCPropNetL2TPIPSecSharedSecretEncryption returns the value of the CoreFoundation reference constant kSCPropNetL2TPIPSecSharedSecretEncryption as an objc.ID.
-func KSCPropNetL2TPIPSecSharedSecretEncryption() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetL2TPIPSecSharedSecretEncryption())
+// Value is a CFString
+// KSCPropNetL2TPIPSecSharedSecretEncryption returns the value of the constant kSCPropNetL2TPIPSecSharedSecretEncryption.
+func KSCPropNetL2TPIPSecSharedSecretEncryption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetL2TPIPSecSharedSecretEncryption")))
 }
 
-// @const kSCPropNetL2TPTransport @discussion Value is a CFString
-// KSCPropNetL2TPTransport returns the value of the CoreFoundation reference constant kSCPropNetL2TPTransport as an objc.ID.
-func KSCPropNetL2TPTransport() objc.ID { return purego.CFConstant(raw.KSCPropNetL2TPTransport()) }
+// Value is a CFString
+// KSCPropNetL2TPTransport returns the value of the constant kSCPropNetL2TPTransport.
+func KSCPropNetL2TPTransport() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetL2TPTransport")))
+}
 
-// @const kSCValNetL2TPIPSecSharedSecretEncryptionKeychain
-// KSCValNetL2TPIPSecSharedSecretEncryptionKeychain returns the value of the CoreFoundation reference constant kSCValNetL2TPIPSecSharedSecretEncryptionKeychain as an objc.ID.
-func KSCValNetL2TPIPSecSharedSecretEncryptionKeychain() objc.ID {
-	return purego.CFConstant(raw.KSCValNetL2TPIPSecSharedSecretEncryptionKeychain())
+// KSCValNetL2TPIPSecSharedSecretEncryptionKeychain returns the value of the constant kSCValNetL2TPIPSecSharedSecretEncryptionKeychain.
+func KSCValNetL2TPIPSecSharedSecretEncryptionKeychain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetL2TPIPSecSharedSecretEncryptionKeychain")))
 }
 
-// @const kSCValNetL2TPTransportIP
-// KSCValNetL2TPTransportIP returns the value of the CoreFoundation reference constant kSCValNetL2TPTransportIP as an objc.ID.
-func KSCValNetL2TPTransportIP() objc.ID { return purego.CFConstant(raw.KSCValNetL2TPTransportIP()) }
+// KSCValNetL2TPTransportIP returns the value of the constant kSCValNetL2TPTransportIP.
+func KSCValNetL2TPTransportIP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetL2TPTransportIP")))
+}
 
-// @const kSCValNetL2TPTransportIPSec
-// KSCValNetL2TPTransportIPSec returns the value of the CoreFoundation reference constant kSCValNetL2TPTransportIPSec as an objc.ID.
-func KSCValNetL2TPTransportIPSec() objc.ID {
-	return purego.CFConstant(raw.KSCValNetL2TPTransportIPSec())
+// KSCValNetL2TPTransportIPSec returns the value of the constant kSCValNetL2TPTransportIPSec.
+func KSCValNetL2TPTransportIPSec() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetL2TPTransportIPSec")))
 }
 
-// @const kSCPropNetProxiesExceptionsList @discussion Value is a CFArray[CFString]
-// KSCPropNetProxiesExceptionsList returns the value of the CoreFoundation reference constant kSCPropNetProxiesExceptionsList as an objc.ID.
-func KSCPropNetProxiesExceptionsList() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetProxiesExceptionsList())
+// Value is a CFArray[CFString]
+// KSCPropNetProxiesExceptionsList returns the value of the constant kSCPropNetProxiesExceptionsList.
+func KSCPropNetProxiesExceptionsList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesExceptionsList")))
 }
 
-// @const kSCPropNetProxiesExcludeSimpleHostnames @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetProxiesExcludeSimpleHostnames returns the value of the CoreFoundation reference constant kSCPropNetProxiesExcludeSimpleHostnames as an objc.ID.
-func KSCPropNetProxiesExcludeSimpleHostnames() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetProxiesExcludeSimpleHostnames())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetProxiesExcludeSimpleHostnames returns the value of the constant kSCPropNetProxiesExcludeSimpleHostnames.
+func KSCPropNetProxiesExcludeSimpleHostnames() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesExcludeSimpleHostnames")))
 }
 
-// @const kSCPropNetProxiesFTPEnable @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetProxiesFTPEnable returns the value of the CoreFoundation reference constant kSCPropNetProxiesFTPEnable as an objc.ID.
-func KSCPropNetProxiesFTPEnable() objc.ID { return purego.CFConstant(raw.KSCPropNetProxiesFTPEnable()) }
+// Value is a CFNumber (0 or 1)
+// KSCPropNetProxiesFTPEnable returns the value of the constant kSCPropNetProxiesFTPEnable.
+func KSCPropNetProxiesFTPEnable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesFTPEnable")))
+}
 
-// @const kSCPropNetProxiesFTPPassive @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetProxiesFTPPassive returns the value of the CoreFoundation reference constant kSCPropNetProxiesFTPPassive as an objc.ID.
-func KSCPropNetProxiesFTPPassive() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetProxiesFTPPassive())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetProxiesFTPPassive returns the value of the constant kSCPropNetProxiesFTPPassive.
+func KSCPropNetProxiesFTPPassive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesFTPPassive")))
 }
 
-// @const kSCPropNetProxiesFTPPort @discussion Value is a CFNumber
-// KSCPropNetProxiesFTPPort returns the value of the CoreFoundation reference constant kSCPropNetProxiesFTPPort as an objc.ID.
-func KSCPropNetProxiesFTPPort() objc.ID { return purego.CFConstant(raw.KSCPropNetProxiesFTPPort()) }
+// Value is a CFNumber
+// KSCPropNetProxiesFTPPort returns the value of the constant kSCPropNetProxiesFTPPort.
+func KSCPropNetProxiesFTPPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesFTPPort")))
+}
 
-// @const kSCPropNetProxiesFTPProxy @discussion Value is a CFString
-// KSCPropNetProxiesFTPProxy returns the value of the CoreFoundation reference constant kSCPropNetProxiesFTPProxy as an objc.ID.
-func KSCPropNetProxiesFTPProxy() objc.ID { return purego.CFConstant(raw.KSCPropNetProxiesFTPProxy()) }
+// Value is a CFString
+// KSCPropNetProxiesFTPProxy returns the value of the constant kSCPropNetProxiesFTPProxy.
+func KSCPropNetProxiesFTPProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesFTPProxy")))
+}
 
-// @const kSCPropNetProxiesFTPUser @discussion Value is a CFString
-// KSCPropNetProxiesFTPUser returns the value of the CoreFoundation reference constant kSCPropNetProxiesFTPUser as an objc.ID.
-func KSCPropNetProxiesFTPUser() objc.ID { return purego.CFConstant(raw.KSCPropNetProxiesFTPUser()) }
+// Value is a CFString
+// KSCPropNetProxiesFTPUser returns the value of the constant kSCPropNetProxiesFTPUser.
+func KSCPropNetProxiesFTPUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesFTPUser")))
+}
 
-// @const kSCPropNetProxiesGopherEnable @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetProxiesGopherEnable returns the value of the CoreFoundation reference constant kSCPropNetProxiesGopherEnable as an objc.ID.
-func KSCPropNetProxiesGopherEnable() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetProxiesGopherEnable())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetProxiesGopherEnable returns the value of the constant kSCPropNetProxiesGopherEnable.
+func KSCPropNetProxiesGopherEnable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesGopherEnable")))
 }
 
-// @const kSCPropNetProxiesGopherPort @discussion Value is a CFNumber
-// KSCPropNetProxiesGopherPort returns the value of the CoreFoundation reference constant kSCPropNetProxiesGopherPort as an objc.ID.
-func KSCPropNetProxiesGopherPort() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetProxiesGopherPort())
+// Value is a CFNumber
+// KSCPropNetProxiesGopherPort returns the value of the constant kSCPropNetProxiesGopherPort.
+func KSCPropNetProxiesGopherPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesGopherPort")))
 }
 
-// @const kSCPropNetProxiesGopherProxy @discussion Value is a CFString
-// KSCPropNetProxiesGopherProxy returns the value of the CoreFoundation reference constant kSCPropNetProxiesGopherProxy as an objc.ID.
-func KSCPropNetProxiesGopherProxy() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetProxiesGopherProxy())
+// Value is a CFString
+// KSCPropNetProxiesGopherProxy returns the value of the constant kSCPropNetProxiesGopherProxy.
+func KSCPropNetProxiesGopherProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesGopherProxy")))
 }
 
-// @const kSCPropNetProxiesGopherUser @discussion Value is a CFString
-// KSCPropNetProxiesGopherUser returns the value of the CoreFoundation reference constant kSCPropNetProxiesGopherUser as an objc.ID.
-func KSCPropNetProxiesGopherUser() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetProxiesGopherUser())
+// Value is a CFString
+// KSCPropNetProxiesGopherUser returns the value of the constant kSCPropNetProxiesGopherUser.
+func KSCPropNetProxiesGopherUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesGopherUser")))
 }
 
-// @const kSCPropNetProxiesHTTPEnable @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetProxiesHTTPEnable returns the value of the CoreFoundation reference constant kSCPropNetProxiesHTTPEnable as an objc.ID.
-func KSCPropNetProxiesHTTPEnable() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetProxiesHTTPEnable())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetProxiesHTTPEnable returns the value of the constant kSCPropNetProxiesHTTPEnable.
+func KSCPropNetProxiesHTTPEnable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesHTTPEnable")))
 }
 
-// @const kSCPropNetProxiesHTTPPort @discussion Value is a CFNumber
-// KSCPropNetProxiesHTTPPort returns the value of the CoreFoundation reference constant kSCPropNetProxiesHTTPPort as an objc.ID.
-func KSCPropNetProxiesHTTPPort() objc.ID { return purego.CFConstant(raw.KSCPropNetProxiesHTTPPort()) }
+// Value is a CFNumber
+// KSCPropNetProxiesHTTPPort returns the value of the constant kSCPropNetProxiesHTTPPort.
+func KSCPropNetProxiesHTTPPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesHTTPPort")))
+}
 
-// @const kSCPropNetProxiesHTTPProxy @discussion Value is a CFString
-// KSCPropNetProxiesHTTPProxy returns the value of the CoreFoundation reference constant kSCPropNetProxiesHTTPProxy as an objc.ID.
-func KSCPropNetProxiesHTTPProxy() objc.ID { return purego.CFConstant(raw.KSCPropNetProxiesHTTPProxy()) }
+// Value is a CFString
+// KSCPropNetProxiesHTTPProxy returns the value of the constant kSCPropNetProxiesHTTPProxy.
+func KSCPropNetProxiesHTTPProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesHTTPProxy")))
+}
 
-// @const kSCPropNetProxiesHTTPUser @discussion Value is a CFString
-// KSCPropNetProxiesHTTPUser returns the value of the CoreFoundation reference constant kSCPropNetProxiesHTTPUser as an objc.ID.
-func KSCPropNetProxiesHTTPUser() objc.ID { return purego.CFConstant(raw.KSCPropNetProxiesHTTPUser()) }
+// Value is a CFString
+// KSCPropNetProxiesHTTPUser returns the value of the constant kSCPropNetProxiesHTTPUser.
+func KSCPropNetProxiesHTTPUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesHTTPUser")))
+}
 
-// @const kSCPropNetProxiesHTTPSEnable @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetProxiesHTTPSEnable returns the value of the CoreFoundation reference constant kSCPropNetProxiesHTTPSEnable as an objc.ID.
-func KSCPropNetProxiesHTTPSEnable() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetProxiesHTTPSEnable())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetProxiesHTTPSEnable returns the value of the constant kSCPropNetProxiesHTTPSEnable.
+func KSCPropNetProxiesHTTPSEnable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesHTTPSEnable")))
 }
 
-// @const kSCPropNetProxiesHTTPSPort @discussion Value is a CFNumber
-// KSCPropNetProxiesHTTPSPort returns the value of the CoreFoundation reference constant kSCPropNetProxiesHTTPSPort as an objc.ID.
-func KSCPropNetProxiesHTTPSPort() objc.ID { return purego.CFConstant(raw.KSCPropNetProxiesHTTPSPort()) }
+// Value is a CFNumber
+// KSCPropNetProxiesHTTPSPort returns the value of the constant kSCPropNetProxiesHTTPSPort.
+func KSCPropNetProxiesHTTPSPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesHTTPSPort")))
+}
 
-// @const kSCPropNetProxiesHTTPSProxy @discussion Value is a CFString
-// KSCPropNetProxiesHTTPSProxy returns the value of the CoreFoundation reference constant kSCPropNetProxiesHTTPSProxy as an objc.ID.
-func KSCPropNetProxiesHTTPSProxy() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetProxiesHTTPSProxy())
+// Value is a CFString
+// KSCPropNetProxiesHTTPSProxy returns the value of the constant kSCPropNetProxiesHTTPSProxy.
+func KSCPropNetProxiesHTTPSProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesHTTPSProxy")))
 }
 
-// @const kSCPropNetProxiesHTTPSUser @discussion Value is a CFString
-// KSCPropNetProxiesHTTPSUser returns the value of the CoreFoundation reference constant kSCPropNetProxiesHTTPSUser as an objc.ID.
-func KSCPropNetProxiesHTTPSUser() objc.ID { return purego.CFConstant(raw.KSCPropNetProxiesHTTPSUser()) }
+// Value is a CFString
+// KSCPropNetProxiesHTTPSUser returns the value of the constant kSCPropNetProxiesHTTPSUser.
+func KSCPropNetProxiesHTTPSUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesHTTPSUser")))
+}
 
-// @const kSCPropNetProxiesRTSPEnable @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetProxiesRTSPEnable returns the value of the CoreFoundation reference constant kSCPropNetProxiesRTSPEnable as an objc.ID.
-func KSCPropNetProxiesRTSPEnable() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetProxiesRTSPEnable())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetProxiesRTSPEnable returns the value of the constant kSCPropNetProxiesRTSPEnable.
+func KSCPropNetProxiesRTSPEnable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesRTSPEnable")))
 }
 
-// @const kSCPropNetProxiesRTSPPort @discussion Value is a CFNumber
-// KSCPropNetProxiesRTSPPort returns the value of the CoreFoundation reference constant kSCPropNetProxiesRTSPPort as an objc.ID.
-func KSCPropNetProxiesRTSPPort() objc.ID { return purego.CFConstant(raw.KSCPropNetProxiesRTSPPort()) }
+// Value is a CFNumber
+// KSCPropNetProxiesRTSPPort returns the value of the constant kSCPropNetProxiesRTSPPort.
+func KSCPropNetProxiesRTSPPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesRTSPPort")))
+}
 
-// @const kSCPropNetProxiesRTSPProxy @discussion Value is a CFString
-// KSCPropNetProxiesRTSPProxy returns the value of the CoreFoundation reference constant kSCPropNetProxiesRTSPProxy as an objc.ID.
-func KSCPropNetProxiesRTSPProxy() objc.ID { return purego.CFConstant(raw.KSCPropNetProxiesRTSPProxy()) }
+// Value is a CFString
+// KSCPropNetProxiesRTSPProxy returns the value of the constant kSCPropNetProxiesRTSPProxy.
+func KSCPropNetProxiesRTSPProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesRTSPProxy")))
+}
 
-// @const kSCPropNetProxiesRTSPUser @discussion Value is a CFString
-// KSCPropNetProxiesRTSPUser returns the value of the CoreFoundation reference constant kSCPropNetProxiesRTSPUser as an objc.ID.
-func KSCPropNetProxiesRTSPUser() objc.ID { return purego.CFConstant(raw.KSCPropNetProxiesRTSPUser()) }
+// Value is a CFString
+// KSCPropNetProxiesRTSPUser returns the value of the constant kSCPropNetProxiesRTSPUser.
+func KSCPropNetProxiesRTSPUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesRTSPUser")))
+}
 
-// @const kSCPropNetProxiesSOCKSEnable @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetProxiesSOCKSEnable returns the value of the CoreFoundation reference constant kSCPropNetProxiesSOCKSEnable as an objc.ID.
-func KSCPropNetProxiesSOCKSEnable() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetProxiesSOCKSEnable())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetProxiesSOCKSEnable returns the value of the constant kSCPropNetProxiesSOCKSEnable.
+func KSCPropNetProxiesSOCKSEnable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesSOCKSEnable")))
 }
 
-// @const kSCPropNetProxiesSOCKSPort @discussion Value is a CFNumber
-// KSCPropNetProxiesSOCKSPort returns the value of the CoreFoundation reference constant kSCPropNetProxiesSOCKSPort as an objc.ID.
-func KSCPropNetProxiesSOCKSPort() objc.ID { return purego.CFConstant(raw.KSCPropNetProxiesSOCKSPort()) }
+// Value is a CFNumber
+// KSCPropNetProxiesSOCKSPort returns the value of the constant kSCPropNetProxiesSOCKSPort.
+func KSCPropNetProxiesSOCKSPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesSOCKSPort")))
+}
 
-// @const kSCPropNetProxiesSOCKSProxy @discussion Value is a CFString
-// KSCPropNetProxiesSOCKSProxy returns the value of the CoreFoundation reference constant kSCPropNetProxiesSOCKSProxy as an objc.ID.
-func KSCPropNetProxiesSOCKSProxy() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetProxiesSOCKSProxy())
+// Value is a CFString
+// KSCPropNetProxiesSOCKSProxy returns the value of the constant kSCPropNetProxiesSOCKSProxy.
+func KSCPropNetProxiesSOCKSProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesSOCKSProxy")))
 }
 
-// @const kSCPropNetProxiesSOCKSUser @discussion Value is a CFString
-// KSCPropNetProxiesSOCKSUser returns the value of the CoreFoundation reference constant kSCPropNetProxiesSOCKSUser as an objc.ID.
-func KSCPropNetProxiesSOCKSUser() objc.ID { return purego.CFConstant(raw.KSCPropNetProxiesSOCKSUser()) }
+// Value is a CFString
+// KSCPropNetProxiesSOCKSUser returns the value of the constant kSCPropNetProxiesSOCKSUser.
+func KSCPropNetProxiesSOCKSUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesSOCKSUser")))
+}
 
-// @const kSCPropNetProxiesProxyAutoConfigEnable @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetProxiesProxyAutoConfigEnable returns the value of the CoreFoundation reference constant kSCPropNetProxiesProxyAutoConfigEnable as an objc.ID.
-func KSCPropNetProxiesProxyAutoConfigEnable() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetProxiesProxyAutoConfigEnable())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetProxiesProxyAutoConfigEnable returns the value of the constant kSCPropNetProxiesProxyAutoConfigEnable.
+func KSCPropNetProxiesProxyAutoConfigEnable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesProxyAutoConfigEnable")))
 }
 
-// @const kSCPropNetProxiesProxyAutoConfigJavaScript @discussion Value is a CFString
-// KSCPropNetProxiesProxyAutoConfigJavaScript returns the value of the CoreFoundation reference constant kSCPropNetProxiesProxyAutoConfigJavaScript as an objc.ID.
-func KSCPropNetProxiesProxyAutoConfigJavaScript() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetProxiesProxyAutoConfigJavaScript())
+// Value is a CFString
+// KSCPropNetProxiesProxyAutoConfigJavaScript returns the value of the constant kSCPropNetProxiesProxyAutoConfigJavaScript.
+func KSCPropNetProxiesProxyAutoConfigJavaScript() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesProxyAutoConfigJavaScript")))
 }
 
-// @const kSCPropNetProxiesProxyAutoConfigURLString @discussion Value is a CFString
-// KSCPropNetProxiesProxyAutoConfigURLString returns the value of the CoreFoundation reference constant kSCPropNetProxiesProxyAutoConfigURLString as an objc.ID.
-func KSCPropNetProxiesProxyAutoConfigURLString() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetProxiesProxyAutoConfigURLString())
+// Value is a CFString
+// KSCPropNetProxiesProxyAutoConfigURLString returns the value of the constant kSCPropNetProxiesProxyAutoConfigURLString.
+func KSCPropNetProxiesProxyAutoConfigURLString() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesProxyAutoConfigURLString")))
 }
 
-// @const kSCPropNetProxiesProxyAutoDiscoveryEnable @discussion Value is a CFNumber (0 or 1)
-// KSCPropNetProxiesProxyAutoDiscoveryEnable returns the value of the CoreFoundation reference constant kSCPropNetProxiesProxyAutoDiscoveryEnable as an objc.ID.
-func KSCPropNetProxiesProxyAutoDiscoveryEnable() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetProxiesProxyAutoDiscoveryEnable())
+// Value is a CFNumber (0 or 1)
+// KSCPropNetProxiesProxyAutoDiscoveryEnable returns the value of the constant kSCPropNetProxiesProxyAutoDiscoveryEnable.
+func KSCPropNetProxiesProxyAutoDiscoveryEnable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetProxiesProxyAutoDiscoveryEnable")))
 }
 
-// @const kSCPropNetSMBNetBIOSName @discussion Value is a CFString
-// KSCPropNetSMBNetBIOSName returns the value of the CoreFoundation reference constant kSCPropNetSMBNetBIOSName as an objc.ID.
-func KSCPropNetSMBNetBIOSName() objc.ID { return purego.CFConstant(raw.KSCPropNetSMBNetBIOSName()) }
+// Value is a CFString
+// KSCPropNetSMBNetBIOSName returns the value of the constant kSCPropNetSMBNetBIOSName.
+func KSCPropNetSMBNetBIOSName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetSMBNetBIOSName")))
+}
 
-// @const kSCPropNetSMBNetBIOSNodeType @discussion Value is a CFString
-// KSCPropNetSMBNetBIOSNodeType returns the value of the CoreFoundation reference constant kSCPropNetSMBNetBIOSNodeType as an objc.ID.
-func KSCPropNetSMBNetBIOSNodeType() objc.ID {
-	return purego.CFConstant(raw.KSCPropNetSMBNetBIOSNodeType())
+// Value is a CFString
+// KSCPropNetSMBNetBIOSNodeType returns the value of the constant kSCPropNetSMBNetBIOSNodeType.
+func KSCPropNetSMBNetBIOSNodeType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetSMBNetBIOSNodeType")))
 }
 
-// @const kSCPropNetSMBNetBIOSScope @discussion Value is a CFString
-// KSCPropNetSMBNetBIOSScope returns the value of the CoreFoundation reference constant kSCPropNetSMBNetBIOSScope as an objc.ID.
-func KSCPropNetSMBNetBIOSScope() objc.ID { return purego.CFConstant(raw.KSCPropNetSMBNetBIOSScope()) }
+// Value is a CFString
+// KSCPropNetSMBNetBIOSScope returns the value of the constant kSCPropNetSMBNetBIOSScope.
+func KSCPropNetSMBNetBIOSScope() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetSMBNetBIOSScope")))
+}
 
-// @const kSCPropNetSMBWINSAddresses @discussion Value is a CFArray[CFString]
-// KSCPropNetSMBWINSAddresses returns the value of the CoreFoundation reference constant kSCPropNetSMBWINSAddresses as an objc.ID.
-func KSCPropNetSMBWINSAddresses() objc.ID { return purego.CFConstant(raw.KSCPropNetSMBWINSAddresses()) }
+// Value is a CFArray[CFString]
+// KSCPropNetSMBWINSAddresses returns the value of the constant kSCPropNetSMBWINSAddresses.
+func KSCPropNetSMBWINSAddresses() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetSMBWINSAddresses")))
+}
 
-// @const kSCPropNetSMBWorkgroup @discussion Value is a CFString
-// KSCPropNetSMBWorkgroup returns the value of the CoreFoundation reference constant kSCPropNetSMBWorkgroup as an objc.ID.
-func KSCPropNetSMBWorkgroup() objc.ID { return purego.CFConstant(raw.KSCPropNetSMBWorkgroup()) }
+// Value is a CFString
+// KSCPropNetSMBWorkgroup returns the value of the constant kSCPropNetSMBWorkgroup.
+func KSCPropNetSMBWorkgroup() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropNetSMBWorkgroup")))
+}
 
-// @const kSCValNetSMBNetBIOSNodeTypeBroadcast
-// KSCValNetSMBNetBIOSNodeTypeBroadcast returns the value of the CoreFoundation reference constant kSCValNetSMBNetBIOSNodeTypeBroadcast as an objc.ID.
-func KSCValNetSMBNetBIOSNodeTypeBroadcast() objc.ID {
-	return purego.CFConstant(raw.KSCValNetSMBNetBIOSNodeTypeBroadcast())
+// KSCValNetSMBNetBIOSNodeTypeBroadcast returns the value of the constant kSCValNetSMBNetBIOSNodeTypeBroadcast.
+func KSCValNetSMBNetBIOSNodeTypeBroadcast() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetSMBNetBIOSNodeTypeBroadcast")))
 }
 
-// @const kSCValNetSMBNetBIOSNodeTypePeer
-// KSCValNetSMBNetBIOSNodeTypePeer returns the value of the CoreFoundation reference constant kSCValNetSMBNetBIOSNodeTypePeer as an objc.ID.
-func KSCValNetSMBNetBIOSNodeTypePeer() objc.ID {
-	return purego.CFConstant(raw.KSCValNetSMBNetBIOSNodeTypePeer())
+// KSCValNetSMBNetBIOSNodeTypePeer returns the value of the constant kSCValNetSMBNetBIOSNodeTypePeer.
+func KSCValNetSMBNetBIOSNodeTypePeer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetSMBNetBIOSNodeTypePeer")))
 }
 
-// @const kSCValNetSMBNetBIOSNodeTypeMixed
-// KSCValNetSMBNetBIOSNodeTypeMixed returns the value of the CoreFoundation reference constant kSCValNetSMBNetBIOSNodeTypeMixed as an objc.ID.
-func KSCValNetSMBNetBIOSNodeTypeMixed() objc.ID {
-	return purego.CFConstant(raw.KSCValNetSMBNetBIOSNodeTypeMixed())
+// KSCValNetSMBNetBIOSNodeTypeMixed returns the value of the constant kSCValNetSMBNetBIOSNodeTypeMixed.
+func KSCValNetSMBNetBIOSNodeTypeMixed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetSMBNetBIOSNodeTypeMixed")))
 }
 
-// @const kSCValNetSMBNetBIOSNodeTypeHybrid
-// KSCValNetSMBNetBIOSNodeTypeHybrid returns the value of the CoreFoundation reference constant kSCValNetSMBNetBIOSNodeTypeHybrid as an objc.ID.
-func KSCValNetSMBNetBIOSNodeTypeHybrid() objc.ID {
-	return purego.CFConstant(raw.KSCValNetSMBNetBIOSNodeTypeHybrid())
+// KSCValNetSMBNetBIOSNodeTypeHybrid returns the value of the constant kSCValNetSMBNetBIOSNodeTypeHybrid.
+func KSCValNetSMBNetBIOSNodeTypeHybrid() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCValNetSMBNetBIOSNodeTypeHybrid")))
 }
 
-// @const kSCEntUsersConsoleUser
-// KSCEntUsersConsoleUser returns the value of the CoreFoundation reference constant kSCEntUsersConsoleUser as an objc.ID.
-func KSCEntUsersConsoleUser() objc.ID { return purego.CFConstant(raw.KSCEntUsersConsoleUser()) }
+// KSCEntUsersConsoleUser returns the value of the constant kSCEntUsersConsoleUser.
+func KSCEntUsersConsoleUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCEntUsersConsoleUser")))
+}
 
-// @const kSCPropSystemComputerName @discussion Value is a CFString
-// KSCPropSystemComputerName returns the value of the CoreFoundation reference constant kSCPropSystemComputerName as an objc.ID.
-func KSCPropSystemComputerName() objc.ID { return purego.CFConstant(raw.KSCPropSystemComputerName()) }
+// Value is a CFString
+// KSCPropSystemComputerName returns the value of the constant kSCPropSystemComputerName.
+func KSCPropSystemComputerName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropSystemComputerName")))
+}
 
-// @const kSCPropSystemComputerNameEncoding @discussion Value is a CFNumber
-// KSCPropSystemComputerNameEncoding returns the value of the CoreFoundation reference constant kSCPropSystemComputerNameEncoding as an objc.ID.
-func KSCPropSystemComputerNameEncoding() objc.ID {
-	return purego.CFConstant(raw.KSCPropSystemComputerNameEncoding())
+// Value is a CFNumber
+// KSCPropSystemComputerNameEncoding returns the value of the constant kSCPropSystemComputerNameEncoding.
+func KSCPropSystemComputerNameEncoding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropSystemComputerNameEncoding")))
 }
 
-// @const kSCDynamicStoreDomainFile
-// KSCDynamicStoreDomainFile returns the value of the CoreFoundation reference constant kSCDynamicStoreDomainFile as an objc.ID.
-func KSCDynamicStoreDomainFile() objc.ID { return purego.CFConstant(raw.KSCDynamicStoreDomainFile()) }
+// KSCDynamicStoreDomainFile returns the value of the constant kSCDynamicStoreDomainFile.
+func KSCDynamicStoreDomainFile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStoreDomainFile")))
+}
 
-// @const kSCDynamicStoreDomainPlugin
-// KSCDynamicStoreDomainPlugin returns the value of the CoreFoundation reference constant kSCDynamicStoreDomainPlugin as an objc.ID.
-func KSCDynamicStoreDomainPlugin() objc.ID {
-	return purego.CFConstant(raw.KSCDynamicStoreDomainPlugin())
+// KSCDynamicStoreDomainPlugin returns the value of the constant kSCDynamicStoreDomainPlugin.
+func KSCDynamicStoreDomainPlugin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStoreDomainPlugin")))
 }
 
-// @const kSCDynamicStoreDomainSetup
-// KSCDynamicStoreDomainSetup returns the value of the CoreFoundation reference constant kSCDynamicStoreDomainSetup as an objc.ID.
-func KSCDynamicStoreDomainSetup() objc.ID { return purego.CFConstant(raw.KSCDynamicStoreDomainSetup()) }
+// KSCDynamicStoreDomainSetup returns the value of the constant kSCDynamicStoreDomainSetup.
+func KSCDynamicStoreDomainSetup() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStoreDomainSetup")))
+}
 
-// @const kSCDynamicStoreDomainState
-// KSCDynamicStoreDomainState returns the value of the CoreFoundation reference constant kSCDynamicStoreDomainState as an objc.ID.
-func KSCDynamicStoreDomainState() objc.ID { return purego.CFConstant(raw.KSCDynamicStoreDomainState()) }
+// KSCDynamicStoreDomainState returns the value of the constant kSCDynamicStoreDomainState.
+func KSCDynamicStoreDomainState() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStoreDomainState")))
+}
 
-// @const kSCDynamicStoreDomainPrefs
-// KSCDynamicStoreDomainPrefs returns the value of the CoreFoundation reference constant kSCDynamicStoreDomainPrefs as an objc.ID.
-func KSCDynamicStoreDomainPrefs() objc.ID { return purego.CFConstant(raw.KSCDynamicStoreDomainPrefs()) }
+// KSCDynamicStoreDomainPrefs returns the value of the constant kSCDynamicStoreDomainPrefs.
+func KSCDynamicStoreDomainPrefs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStoreDomainPrefs")))
+}
 
-// @const kSCDynamicStorePropSetupCurrentSet @discussion Value is a CFString
-// KSCDynamicStorePropSetupCurrentSet returns the value of the CoreFoundation reference constant kSCDynamicStorePropSetupCurrentSet as an objc.ID.
-func KSCDynamicStorePropSetupCurrentSet() objc.ID {
-	return purego.CFConstant(raw.KSCDynamicStorePropSetupCurrentSet())
+// Value is a CFString
+// KSCDynamicStorePropSetupCurrentSet returns the value of the constant kSCDynamicStorePropSetupCurrentSet.
+func KSCDynamicStorePropSetupCurrentSet() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStorePropSetupCurrentSet")))
 }
 
-// @const kSCDynamicStorePropSetupLastUpdated
-// KSCDynamicStorePropSetupLastUpdated returns the value of the CoreFoundation reference constant kSCDynamicStorePropSetupLastUpdated as an objc.ID.
-func KSCDynamicStorePropSetupLastUpdated() objc.ID {
-	return purego.CFConstant(raw.KSCDynamicStorePropSetupLastUpdated())
+// KSCDynamicStorePropSetupLastUpdated returns the value of the constant kSCDynamicStorePropSetupLastUpdated.
+func KSCDynamicStorePropSetupLastUpdated() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStorePropSetupLastUpdated")))
 }
 
-// @const kSCDynamicStorePropNetInterfaces @discussion Value is a CFArray[CFString]
-// KSCDynamicStorePropNetInterfaces returns the value of the CoreFoundation reference constant kSCDynamicStorePropNetInterfaces as an objc.ID.
-func KSCDynamicStorePropNetInterfaces() objc.ID {
-	return purego.CFConstant(raw.KSCDynamicStorePropNetInterfaces())
+// Value is a CFArray[CFString]
+// KSCDynamicStorePropNetInterfaces returns the value of the constant kSCDynamicStorePropNetInterfaces.
+func KSCDynamicStorePropNetInterfaces() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStorePropNetInterfaces")))
 }
 
-// @const kSCDynamicStorePropNetPrimaryInterface @discussion Value is a CFString
-// KSCDynamicStorePropNetPrimaryInterface returns the value of the CoreFoundation reference constant kSCDynamicStorePropNetPrimaryInterface as an objc.ID.
-func KSCDynamicStorePropNetPrimaryInterface() objc.ID {
-	return purego.CFConstant(raw.KSCDynamicStorePropNetPrimaryInterface())
+// Value is a CFString
+// KSCDynamicStorePropNetPrimaryInterface returns the value of the constant kSCDynamicStorePropNetPrimaryInterface.
+func KSCDynamicStorePropNetPrimaryInterface() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStorePropNetPrimaryInterface")))
 }
 
-// @const kSCDynamicStorePropNetPrimaryService @discussion Value is a CFString
-// KSCDynamicStorePropNetPrimaryService returns the value of the CoreFoundation reference constant kSCDynamicStorePropNetPrimaryService as an objc.ID.
-func KSCDynamicStorePropNetPrimaryService() objc.ID {
-	return purego.CFConstant(raw.KSCDynamicStorePropNetPrimaryService())
+// Value is a CFString
+// KSCDynamicStorePropNetPrimaryService returns the value of the constant kSCDynamicStorePropNetPrimaryService.
+func KSCDynamicStorePropNetPrimaryService() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStorePropNetPrimaryService")))
 }
 
-// @const kSCDynamicStorePropNetServiceIDs @discussion Value is a CFArray[CFString]
-// KSCDynamicStorePropNetServiceIDs returns the value of the CoreFoundation reference constant kSCDynamicStorePropNetServiceIDs as an objc.ID.
-func KSCDynamicStorePropNetServiceIDs() objc.ID {
-	return purego.CFConstant(raw.KSCDynamicStorePropNetServiceIDs())
+// Value is a CFArray[CFString]
+// KSCDynamicStorePropNetServiceIDs returns the value of the constant kSCDynamicStorePropNetServiceIDs.
+func KSCDynamicStorePropNetServiceIDs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCDynamicStorePropNetServiceIDs")))
 }
 
-// @const kSCPropUsersConsoleUserName @discussion Value is a CFString
-// KSCPropUsersConsoleUserName returns the value of the CoreFoundation reference constant kSCPropUsersConsoleUserName as an objc.ID.
-func KSCPropUsersConsoleUserName() objc.ID {
-	return purego.CFConstant(raw.KSCPropUsersConsoleUserName())
+// Value is a CFString
+// KSCPropUsersConsoleUserName returns the value of the constant kSCPropUsersConsoleUserName.
+func KSCPropUsersConsoleUserName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropUsersConsoleUserName")))
 }
 
-// @const kSCPropUsersConsoleUserUID @discussion Value is a CFNumber
-// KSCPropUsersConsoleUserUID returns the value of the CoreFoundation reference constant kSCPropUsersConsoleUserUID as an objc.ID.
-func KSCPropUsersConsoleUserUID() objc.ID { return purego.CFConstant(raw.KSCPropUsersConsoleUserUID()) }
+// Value is a CFNumber
+// KSCPropUsersConsoleUserUID returns the value of the constant kSCPropUsersConsoleUserUID.
+func KSCPropUsersConsoleUserUID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropUsersConsoleUserUID")))
+}
 
-// @const kSCPropUsersConsoleUserGID @discussion Value is a CFNumber
-// KSCPropUsersConsoleUserGID returns the value of the CoreFoundation reference constant kSCPropUsersConsoleUserGID as an objc.ID.
-func KSCPropUsersConsoleUserGID() objc.ID { return purego.CFConstant(raw.KSCPropUsersConsoleUserGID()) }
+// Value is a CFNumber
+// KSCPropUsersConsoleUserGID returns the value of the constant kSCPropUsersConsoleUserGID.
+func KSCPropUsersConsoleUserGID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCPropUsersConsoleUserGID")))
+}
 
-// @const kSCNetworkInterfaceType6to4
-// KSCNetworkInterfaceType6to4 returns the value of the CoreFoundation reference constant kSCNetworkInterfaceType6to4 as an objc.ID.
-func KSCNetworkInterfaceType6to4() objc.ID {
-	return purego.CFConstant(raw.KSCNetworkInterfaceType6to4())
+// KSCNetworkInterfaceType6to4 returns the value of the constant kSCNetworkInterfaceType6to4.
+func KSCNetworkInterfaceType6to4() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkInterfaceType6to4")))
 }
 
-// @const kSCNetworkInterfaceTypeBluetooth
-// KSCNetworkInterfaceTypeBluetooth returns the value of the CoreFoundation reference constant kSCNetworkInterfaceTypeBluetooth as an objc.ID.
-func KSCNetworkInterfaceTypeBluetooth() objc.ID {
-	return purego.CFConstant(raw.KSCNetworkInterfaceTypeBluetooth())
+// KSCNetworkInterfaceTypeBluetooth returns the value of the constant kSCNetworkInterfaceTypeBluetooth.
+func KSCNetworkInterfaceTypeBluetooth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkInterfaceTypeBluetooth")))
 }
 
-// @const kSCNetworkInterfaceTypeBond
-// KSCNetworkInterfaceTypeBond returns the value of the CoreFoundation reference constant kSCNetworkInterfaceTypeBond as an objc.ID.
-func KSCNetworkInterfaceTypeBond() objc.ID {
-	return purego.CFConstant(raw.KSCNetworkInterfaceTypeBond())
+// KSCNetworkInterfaceTypeBond returns the value of the constant kSCNetworkInterfaceTypeBond.
+func KSCNetworkInterfaceTypeBond() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkInterfaceTypeBond")))
 }
 
-// @const kSCNetworkInterfaceTypeEthernet
-// KSCNetworkInterfaceTypeEthernet returns the value of the CoreFoundation reference constant kSCNetworkInterfaceTypeEthernet as an objc.ID.
-func KSCNetworkInterfaceTypeEthernet() objc.ID {
-	return purego.CFConstant(raw.KSCNetworkInterfaceTypeEthernet())
+// KSCNetworkInterfaceTypeEthernet returns the value of the constant kSCNetworkInterfaceTypeEthernet.
+func KSCNetworkInterfaceTypeEthernet() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkInterfaceTypeEthernet")))
 }
 
-// @const kSCNetworkInterfaceTypeFireWire
-// KSCNetworkInterfaceTypeFireWire returns the value of the CoreFoundation reference constant kSCNetworkInterfaceTypeFireWire as an objc.ID.
-func KSCNetworkInterfaceTypeFireWire() objc.ID {
-	return purego.CFConstant(raw.KSCNetworkInterfaceTypeFireWire())
+// KSCNetworkInterfaceTypeFireWire returns the value of the constant kSCNetworkInterfaceTypeFireWire.
+func KSCNetworkInterfaceTypeFireWire() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkInterfaceTypeFireWire")))
 }
 
-// @const kSCNetworkInterfaceTypeIEEE80211
-// KSCNetworkInterfaceTypeIEEE80211 returns the value of the CoreFoundation reference constant kSCNetworkInterfaceTypeIEEE80211 as an objc.ID.
-func KSCNetworkInterfaceTypeIEEE80211() objc.ID {
-	return purego.CFConstant(raw.KSCNetworkInterfaceTypeIEEE80211())
+// KSCNetworkInterfaceTypeIEEE80211 returns the value of the constant kSCNetworkInterfaceTypeIEEE80211.
+func KSCNetworkInterfaceTypeIEEE80211() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkInterfaceTypeIEEE80211")))
 }
 
-// @const kSCNetworkInterfaceTypeIPSec
-// KSCNetworkInterfaceTypeIPSec returns the value of the CoreFoundation reference constant kSCNetworkInterfaceTypeIPSec as an objc.ID.
-func KSCNetworkInterfaceTypeIPSec() objc.ID {
-	return purego.CFConstant(raw.KSCNetworkInterfaceTypeIPSec())
+// KSCNetworkInterfaceTypeIPSec returns the value of the constant kSCNetworkInterfaceTypeIPSec.
+func KSCNetworkInterfaceTypeIPSec() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkInterfaceTypeIPSec")))
 }
 
-// @const kSCNetworkInterfaceTypeIrDA
-// KSCNetworkInterfaceTypeIrDA returns the value of the CoreFoundation reference constant kSCNetworkInterfaceTypeIrDA as an objc.ID.
-func KSCNetworkInterfaceTypeIrDA() objc.ID {
-	return purego.CFConstant(raw.KSCNetworkInterfaceTypeIrDA())
+// KSCNetworkInterfaceTypeIrDA returns the value of the constant kSCNetworkInterfaceTypeIrDA.
+func KSCNetworkInterfaceTypeIrDA() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkInterfaceTypeIrDA")))
 }
 
-// @const kSCNetworkInterfaceTypeL2TP
-// KSCNetworkInterfaceTypeL2TP returns the value of the CoreFoundation reference constant kSCNetworkInterfaceTypeL2TP as an objc.ID.
-func KSCNetworkInterfaceTypeL2TP() objc.ID {
-	return purego.CFConstant(raw.KSCNetworkInterfaceTypeL2TP())
+// KSCNetworkInterfaceTypeL2TP returns the value of the constant kSCNetworkInterfaceTypeL2TP.
+func KSCNetworkInterfaceTypeL2TP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkInterfaceTypeL2TP")))
 }
 
-// @const kSCNetworkInterfaceTypeModem
-// KSCNetworkInterfaceTypeModem returns the value of the CoreFoundation reference constant kSCNetworkInterfaceTypeModem as an objc.ID.
-func KSCNetworkInterfaceTypeModem() objc.ID {
-	return purego.CFConstant(raw.KSCNetworkInterfaceTypeModem())
+// KSCNetworkInterfaceTypeModem returns the value of the constant kSCNetworkInterfaceTypeModem.
+func KSCNetworkInterfaceTypeModem() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkInterfaceTypeModem")))
 }
 
-// @const kSCNetworkInterfaceTypePPP
-// KSCNetworkInterfaceTypePPP returns the value of the CoreFoundation reference constant kSCNetworkInterfaceTypePPP as an objc.ID.
-func KSCNetworkInterfaceTypePPP() objc.ID { return purego.CFConstant(raw.KSCNetworkInterfaceTypePPP()) }
+// KSCNetworkInterfaceTypePPP returns the value of the constant kSCNetworkInterfaceTypePPP.
+func KSCNetworkInterfaceTypePPP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkInterfaceTypePPP")))
+}
 
-// @const kSCNetworkInterfaceTypePPTP
-// KSCNetworkInterfaceTypePPTP returns the value of the CoreFoundation reference constant kSCNetworkInterfaceTypePPTP as an objc.ID.
-func KSCNetworkInterfaceTypePPTP() objc.ID {
-	return purego.CFConstant(raw.KSCNetworkInterfaceTypePPTP())
+// KSCNetworkInterfaceTypePPTP returns the value of the constant kSCNetworkInterfaceTypePPTP.
+func KSCNetworkInterfaceTypePPTP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkInterfaceTypePPTP")))
 }
 
-// @const kSCNetworkInterfaceTypeSerial
-// KSCNetworkInterfaceTypeSerial returns the value of the CoreFoundation reference constant kSCNetworkInterfaceTypeSerial as an objc.ID.
-func KSCNetworkInterfaceTypeSerial() objc.ID {
-	return purego.CFConstant(raw.KSCNetworkInterfaceTypeSerial())
+// KSCNetworkInterfaceTypeSerial returns the value of the constant kSCNetworkInterfaceTypeSerial.
+func KSCNetworkInterfaceTypeSerial() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkInterfaceTypeSerial")))
 }
 
-// @const kSCNetworkInterfaceTypeVLAN
-// KSCNetworkInterfaceTypeVLAN returns the value of the CoreFoundation reference constant kSCNetworkInterfaceTypeVLAN as an objc.ID.
-func KSCNetworkInterfaceTypeVLAN() objc.ID {
-	return purego.CFConstant(raw.KSCNetworkInterfaceTypeVLAN())
+// KSCNetworkInterfaceTypeVLAN returns the value of the constant kSCNetworkInterfaceTypeVLAN.
+func KSCNetworkInterfaceTypeVLAN() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkInterfaceTypeVLAN")))
 }
 
-// @const kSCNetworkInterfaceTypeWWAN
-// KSCNetworkInterfaceTypeWWAN returns the value of the CoreFoundation reference constant kSCNetworkInterfaceTypeWWAN as an objc.ID.
-func KSCNetworkInterfaceTypeWWAN() objc.ID {
-	return purego.CFConstant(raw.KSCNetworkInterfaceTypeWWAN())
+// KSCNetworkInterfaceTypeWWAN returns the value of the constant kSCNetworkInterfaceTypeWWAN.
+func KSCNetworkInterfaceTypeWWAN() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkInterfaceTypeWWAN")))
 }
 
-// @const kSCNetworkInterfaceTypeIPv4
-// KSCNetworkInterfaceTypeIPv4 returns the value of the CoreFoundation reference constant kSCNetworkInterfaceTypeIPv4 as an objc.ID.
-func KSCNetworkInterfaceTypeIPv4() objc.ID {
-	return purego.CFConstant(raw.KSCNetworkInterfaceTypeIPv4())
+// KSCNetworkInterfaceTypeIPv4 returns the value of the constant kSCNetworkInterfaceTypeIPv4.
+func KSCNetworkInterfaceTypeIPv4() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkInterfaceTypeIPv4")))
 }
 
-// @const kSCBondStatusDeviceAggregationStatus
-// KSCBondStatusDeviceAggregationStatus returns the value of the CoreFoundation reference constant kSCBondStatusDeviceAggregationStatus as an objc.ID.
-func KSCBondStatusDeviceAggregationStatus() objc.ID {
-	return purego.CFConstant(raw.KSCBondStatusDeviceAggregationStatus())
+// KSCBondStatusDeviceAggregationStatus returns the value of the constant kSCBondStatusDeviceAggregationStatus.
+func KSCBondStatusDeviceAggregationStatus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCBondStatusDeviceAggregationStatus")))
 }
 
-// @const kSCBondStatusDeviceCollecting
-// KSCBondStatusDeviceCollecting returns the value of the CoreFoundation reference constant kSCBondStatusDeviceCollecting as an objc.ID.
-func KSCBondStatusDeviceCollecting() objc.ID {
-	return purego.CFConstant(raw.KSCBondStatusDeviceCollecting())
+// KSCBondStatusDeviceCollecting returns the value of the constant kSCBondStatusDeviceCollecting.
+func KSCBondStatusDeviceCollecting() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCBondStatusDeviceCollecting")))
 }
 
-// @const kSCBondStatusDeviceDistributing
-// KSCBondStatusDeviceDistributing returns the value of the CoreFoundation reference constant kSCBondStatusDeviceDistributing as an objc.ID.
-func KSCBondStatusDeviceDistributing() objc.ID {
-	return purego.CFConstant(raw.KSCBondStatusDeviceDistributing())
+// KSCBondStatusDeviceDistributing returns the value of the constant kSCBondStatusDeviceDistributing.
+func KSCBondStatusDeviceDistributing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCBondStatusDeviceDistributing")))
 }
 
-// @const kSCNetworkProtocolTypeDNS
-// KSCNetworkProtocolTypeDNS returns the value of the CoreFoundation reference constant kSCNetworkProtocolTypeDNS as an objc.ID.
-func KSCNetworkProtocolTypeDNS() objc.ID { return purego.CFConstant(raw.KSCNetworkProtocolTypeDNS()) }
+// KSCNetworkProtocolTypeDNS returns the value of the constant kSCNetworkProtocolTypeDNS.
+func KSCNetworkProtocolTypeDNS() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkProtocolTypeDNS")))
+}
 
-// @const kSCNetworkProtocolTypeIPv4
-// KSCNetworkProtocolTypeIPv4 returns the value of the CoreFoundation reference constant kSCNetworkProtocolTypeIPv4 as an objc.ID.
-func KSCNetworkProtocolTypeIPv4() objc.ID { return purego.CFConstant(raw.KSCNetworkProtocolTypeIPv4()) }
+// KSCNetworkProtocolTypeIPv4 returns the value of the constant kSCNetworkProtocolTypeIPv4.
+func KSCNetworkProtocolTypeIPv4() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkProtocolTypeIPv4")))
+}
 
-// @const kSCNetworkProtocolTypeIPv6
-// KSCNetworkProtocolTypeIPv6 returns the value of the CoreFoundation reference constant kSCNetworkProtocolTypeIPv6 as an objc.ID.
-func KSCNetworkProtocolTypeIPv6() objc.ID { return purego.CFConstant(raw.KSCNetworkProtocolTypeIPv6()) }
+// KSCNetworkProtocolTypeIPv6 returns the value of the constant kSCNetworkProtocolTypeIPv6.
+func KSCNetworkProtocolTypeIPv6() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkProtocolTypeIPv6")))
+}
 
-// @const kSCNetworkProtocolTypeProxies
-// KSCNetworkProtocolTypeProxies returns the value of the CoreFoundation reference constant kSCNetworkProtocolTypeProxies as an objc.ID.
-func KSCNetworkProtocolTypeProxies() objc.ID {
-	return purego.CFConstant(raw.KSCNetworkProtocolTypeProxies())
+// KSCNetworkProtocolTypeProxies returns the value of the constant kSCNetworkProtocolTypeProxies.
+func KSCNetworkProtocolTypeProxies() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkProtocolTypeProxies")))
 }
 
-// @const kSCNetworkProtocolTypeSMB
-// KSCNetworkProtocolTypeSMB returns the value of the CoreFoundation reference constant kSCNetworkProtocolTypeSMB as an objc.ID.
-func KSCNetworkProtocolTypeSMB() objc.ID { return purego.CFConstant(raw.KSCNetworkProtocolTypeSMB()) }
+// KSCNetworkProtocolTypeSMB returns the value of the constant kSCNetworkProtocolTypeSMB.
+func KSCNetworkProtocolTypeSMB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSCNetworkProtocolTypeSMB")))
+}
 
-// @const kCFErrorDomainSystemConfiguration @discussion CFError domain associated with errors reported by the SystemConfiguration.framework.
-// KCFErrorDomainSystemConfiguration returns the value of the CoreFoundation reference constant kCFErrorDomainSystemConfiguration as an objc.ID.
-func KCFErrorDomainSystemConfiguration() objc.ID {
-	return purego.CFConstant(raw.KCFErrorDomainSystemConfiguration())
+// CFError domain associated with errors reported by the SystemConfiguration.framework.
+// KCFErrorDomainSystemConfiguration returns the value of the constant kCFErrorDomainSystemConfiguration.
+func KCFErrorDomainSystemConfiguration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFErrorDomainSystemConfiguration")))
 }

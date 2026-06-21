@@ -5,169 +5,160 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterEthernetNetworkDiagnostics wraps [raw.MTRClusterEthernetNetworkDiagnostics] with a fluent Go API.
+// MTRClusterEthernetNetworkDiagnostics is an idiomatic wrapper over the Objective-C class MTRClusterEthernetNetworkDiagnostics.
 type MTRClusterEthernetNetworkDiagnostics struct {
-	inner *raw.MTRClusterEthernetNetworkDiagnostics
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterEthernetNetworkDiagnostics].
-func (x *MTRClusterEthernetNetworkDiagnostics) Unwrap() *raw.MTRClusterEthernetNetworkDiagnostics {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterEthernetNetworkDiagnostics) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterEthernetNetworkDiagnosticsFromID adopts an existing object pointer as a MTRClusterEthernetNetworkDiagnostics (nil for 0).
+// MTRClusterEthernetNetworkDiagnosticsFromID adopts an existing Objective-C object as a MTRClusterEthernetNetworkDiagnostics
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterEthernetNetworkDiagnosticsFromID(id objc.ID) *MTRClusterEthernetNetworkDiagnostics {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterEthernetNetworkDiagnostics{inner: raw.MTRClusterEthernetNetworkDiagnosticsFromID(id)}
+	x := &MTRClusterEthernetNetworkDiagnostics{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterEthernetNetworkDiagnosticsAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterEthernetNetworkDiagnostics (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterEthernetNetworkDiagnosticsAdopt(id objc.ID) *MTRClusterEthernetNetworkDiagnostics {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterEthernetNetworkDiagnostics{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterEthernetNetworkDiagnostics) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterEthernetNetworkDiagnostics) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterEthernetNetworkDiagnostics) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterEthernetNetworkDiagnosticsWithDeviceEndpointIDQueue creates a new [MTRClusterEthernetNetworkDiagnostics].
-func NewMTRClusterEthernetNetworkDiagnosticsWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterEthernetNetworkDiagnostics {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterEthernetNetworkDiagnostics")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterEthernetNetworkDiagnostics{inner: raw.MTRClusterEthernetNetworkDiagnosticsFromID(_id)}
+// NewMTRClusterEthernetNetworkDiagnosticsWithDeviceEndpointIDQueue creates a new MTRClusterEthernetNetworkDiagnostics.
+func NewMTRClusterEthernetNetworkDiagnosticsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterEthernetNetworkDiagnostics {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterEthernetNetworkDiagnostics")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterEthernetNetworkDiagnosticsAdopt(_id)
 }
 
-// NewMTRClusterEthernetNetworkDiagnosticsWithDeviceEndpointQueue creates a new [MTRClusterEthernetNetworkDiagnostics].
-func NewMTRClusterEthernetNetworkDiagnosticsWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterEthernetNetworkDiagnostics {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterEthernetNetworkDiagnostics")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterEthernetNetworkDiagnostics{inner: raw.MTRClusterEthernetNetworkDiagnosticsFromID(_id)}
+// NewMTRClusterEthernetNetworkDiagnosticsWithDeviceEndpointQueue creates a new MTRClusterEthernetNetworkDiagnostics.
+func NewMTRClusterEthernetNetworkDiagnosticsWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterEthernetNetworkDiagnostics {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterEthernetNetworkDiagnostics")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterEthernetNetworkDiagnosticsAdopt(_id)
 }
 
-// ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterEthernetNetworkDiagnostics) ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTREthernetNetworkDiagnosticsClusterResetCountsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributePHYRateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePHYRateWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ResetCountsWithExpectedValuesExpectedValueIntervalCompletion calls the underlying ResetCountsWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterEthernetNetworkDiagnostics) ResetCountsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ResetCountsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeFullDuplexWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFullDuplexWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePHYRateWithParams calls the underlying ReadAttributePHYRateWithParams.
-func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributePHYRateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePHYRateWithParams(params)
+func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributePacketRxCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePacketRxCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFullDuplexWithParams calls the underlying ReadAttributeFullDuplexWithParams.
-func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeFullDuplexWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFullDuplexWithParams(params)
+func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributePacketTxCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePacketTxCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePacketRxCountWithParams calls the underlying ReadAttributePacketRxCountWithParams.
-func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributePacketRxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePacketRxCountWithParams(params)
+func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeTxErrCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePacketTxCountWithParams calls the underlying ReadAttributePacketTxCountWithParams.
-func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributePacketTxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePacketTxCountWithParams(params)
+func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeCollisionCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCollisionCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxErrCountWithParams calls the underlying ReadAttributeTxErrCountWithParams.
-func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeTxErrCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTxErrCountWithParams(params)
+func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeOverrunCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOverrunCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCollisionCountWithParams calls the underlying ReadAttributeCollisionCountWithParams.
-func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeCollisionCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCollisionCountWithParams(params)
+func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeCarrierDetectWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCarrierDetectWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeOverrunCountWithParams calls the underlying ReadAttributeOverrunCountWithParams.
-func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeOverrunCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOverrunCountWithParams(params)
+func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeTimeSinceResetWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTimeSinceResetWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCarrierDetectWithParams calls the underlying ReadAttributeCarrierDetectWithParams.
-func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeCarrierDetectWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCarrierDetectWithParams(params)
+func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTimeSinceResetWithParams calls the underlying ReadAttributeTimeSinceResetWithParams.
-func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeTimeSinceResetWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTimeSinceResetWithParams(params)
+func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
-}
-
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-// ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterEthernetNetworkDiagnostics) ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTREthernetNetworkDiagnosticsClusterResetCountsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterEthernetNetworkDiagnostics) ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
-}
-
-func (x *MTRClusterEthernetNetworkDiagnostics) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterEthernetNetworkDiagnostics) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterEthernetNetworkDiagnostics) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterEthernetNetworkDiagnosticsable is the interface implemented by [MTRClusterEthernetNetworkDiagnostics], for mocking and DI.
 type MTRClusterEthernetNetworkDiagnosticsable interface {
-	Unwrap() *raw.MTRClusterEthernetNetworkDiagnostics
-	ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTREthernetNetworkDiagnosticsClusterResetCountsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ResetCountsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributePHYRateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFullDuplexWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePacketRxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePacketTxCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTxErrCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCollisionCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeOverrunCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCarrierDetectWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTimeSinceResetWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTREthernetNetworkDiagnosticsClusterResetCountsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	obj.Object
+	ReadAttributePHYRateWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFullDuplexWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePacketRxCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePacketTxCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTxErrCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCollisionCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeOverrunCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCarrierDetectWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTimeSinceResetWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterEthernetNetworkDiagnosticsable = (*MTRClusterEthernetNetworkDiagnostics)(nil)

@@ -5,97 +5,98 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A representation of a Photos asset grouping, such as a moment, user-created album, or smart album.
 //
-// AssetCollection wraps [raw.PHAssetCollection] with a fluent Go API.
+// AssetCollection is an idiomatic wrapper over the Objective-C class PHAssetCollection.
 type AssetCollection struct {
-	inner *raw.PHAssetCollection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHAssetCollection].
-func (x *AssetCollection) Unwrap() *raw.PHAssetCollection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetCollection) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetCollectionFromID adopts an existing object pointer as a AssetCollection (nil for 0).
+// AssetCollectionFromID adopts an existing Objective-C object as a AssetCollection
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetCollectionFromID(id objc.ID) *AssetCollection {
 	if id == 0 {
 		return nil
 	}
-	return &AssetCollection{inner: raw.PHAssetCollectionFromID(id)}
+	x := &AssetCollection{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAssetCollection creates a new [AssetCollection].
+// assetCollectionAdopt wraps an Objective-C object that this code just created as a
+// AssetCollection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetCollectionAdopt(id objc.ID) *AssetCollection {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetCollection{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetCollection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetCollection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetCollection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAssetCollection creates a new AssetCollection.
 func NewAssetCollection() *AssetCollection {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHAssetCollection")), objc.RegisterName("new"))
-	return &AssetCollection{inner: raw.PHAssetCollectionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHAssetCollection")), objc.RegisterName("new"))
+	return assetCollectionAdopt(_id)
 }
 
-// AssetCollectionType calls the underlying AssetCollectionType.
-func (x *AssetCollection) AssetCollectionType() PHAssetCollectionType {
-	return PHAssetCollectionType(x.inner.AssetCollectionType())
+func (x *AssetCollection) AssetCollectionType() AssetCollectionType {
+	_r := objc.Send[AssetCollectionType](objref.IDOf(x), objc.RegisterName("assetCollectionType"))
+	return _r
 }
 
-// AssetCollectionSubtype calls the underlying AssetCollectionSubtype.
-func (x *AssetCollection) AssetCollectionSubtype() unsafe.Pointer {
-	return x.inner.AssetCollectionSubtype()
+func (x *AssetCollection) EstimatedAssetCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("estimatedAssetCount"))
+	return _r
 }
 
-// EstimatedAssetCount calls the underlying EstimatedAssetCount.
-func (x *AssetCollection) EstimatedAssetCount() uint {
-	return x.inner.EstimatedAssetCount()
+func (x *AssetCollection) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+	return obj.Wrap(_r)
 }
 
-// StartDate calls the underlying StartDate.
-func (x *AssetCollection) StartDate() *foundation.NSDate {
-	return x.inner.StartDate()
-}
-
-// EndDate calls the underlying EndDate.
-func (x *AssetCollection) EndDate() *foundation.NSDate {
-	return x.inner.EndDate()
-}
-
-// ApproximateLocation calls the underlying ApproximateLocation.
-func (x *AssetCollection) ApproximateLocation() unsafe.Pointer {
-	return x.inner.ApproximateLocation()
+func (x *AssetCollection) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+	return obj.Wrap(_r)
 }
 
 // LocalizedLocationNames returns the collection as a Go slice.
 func (x *AssetCollection) LocalizedLocationNames() []string {
-	arr := x.inner.LocalizedLocationNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedLocationNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-func (x *AssetCollection) asAssetCollection() *raw.PHAssetCollection { return x.inner }
-
-func (x *AssetCollection) asCollection() *raw.PHCollection { return &x.inner.PHCollection }
-
-func (x *AssetCollection) asObject() *raw.PHObject { return &x.inner.PHCollection.PHObject }
 
 // AssetCollectionable is the interface implemented by [AssetCollection], for mocking and DI.
 type AssetCollectionable interface {
-	Unwrap() *raw.PHAssetCollection
-	AssetCollectionType() PHAssetCollectionType
-	AssetCollectionSubtype() unsafe.Pointer
-	EstimatedAssetCount() uint
-	StartDate() *foundation.NSDate
-	EndDate() *foundation.NSDate
-	ApproximateLocation() unsafe.Pointer
+	obj.Object
+	AssetCollectionType() AssetCollectionType
+	EstimatedAssetCount() int
+	StartDate() obj.Object
+	EndDate() obj.Object
 	LocalizedLocationNames() []string
 }
 

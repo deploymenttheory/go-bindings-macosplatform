@@ -6,22 +6,22 @@ package authenticationservices
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// ButtonWithTypeStyle calls the underlying ASAuthorizationAppleIDButtonButtonWithTypeStyle.
-func ButtonWithTypeStyle(type_ ASAuthorizationAppleIDButtonType, style ASAuthorizationAppleIDButtonStyle) *AuthorizationAppleIDButton {
-	_r := raw.ASAuthorizationAppleIDButtonButtonWithTypeStyle(raw.ASAuthorizationAppleIDButtonType(type_), raw.ASAuthorizationAppleIDButtonStyle(style))
-	if _r == nil {
-		return nil
-	}
-	return &AuthorizationAppleIDButton{inner: _r}
+// Creates a new Sign In with Apple authorization button with the given type and style.
+func ButtonWithTypeStyle(type_ AuthorizationAppleIDButtonType, style AuthorizationAppleIDButtonStyle) *AuthorizationAppleIDButton {
+	_r := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationAppleIDButton")), objc.RegisterName("buttonWithType:style:"), type_, style)
+	return AuthorizationAppleIDButtonFromID(_r)
 }
 
+// Creates a login configuration using the OpenID configuration.
+//
 // ConfigurationWithOpenIDConfigurationURLClientIDIssuerCompletion blocks until the operation completes or ctx is cancelled.
 func ConfigurationWithOpenIDConfigurationURLClientIDIssuerCompletion(ctx context.Context, openIDConfigurationURL string, clientID string, issuer string) (*AuthorizationProviderExtensionLoginConfiguration, error) {
 	type _result struct {
@@ -29,16 +29,13 @@ func ConfigurationWithOpenIDConfigurationURLClientIDIssuerCompletion(ctx context
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.ASAuthorizationProviderExtensionLoginConfigurationConfigurationWithOpenIDConfigurationURLClientIDIssuerCompletion(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(openIDConfigurationURL)), foundation.NSStringStringWithUTF8String(clientID), foundation.NSStringStringWithUTF8String(issuer), func(_p0 *raw.ASAuthorizationProviderExtensionLoginConfiguration, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &AuthorizationProviderExtensionLoginConfiguration{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = AuthorizationProviderExtensionLoginConfigurationFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("ASAuthorizationProviderExtensionLoginConfiguration")), objc.RegisterName("configurationWithOpenIDConfigurationURL:clientID:issuer:completion:"), rt.FileURL(openIDConfigurationURL), purego.NSString(clientID), purego.NSString(issuer), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -48,120 +45,86 @@ func ConfigurationWithOpenIDConfigurationURLClientIDIssuerCompletion(ctx context
 	}
 }
 
-// CheckForSupport calls the underlying ASAuthorizationPublicKeyCredentialPRFRegistrationInputCheckForSupport.
 func CheckForSupport() *AuthorizationPublicKeyCredentialPRFRegistrationInput {
-	_r := raw.ASAuthorizationPublicKeyCredentialPRFRegistrationInputCheckForSupport()
-	if _r == nil {
-		return nil
-	}
-	return &AuthorizationPublicKeyCredentialPRFRegistrationInput{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialPRFRegistrationInput")), objc.RegisterName("checkForSupport"))
+	return AuthorizationPublicKeyCredentialPRFRegistrationInputFromID(_r)
 }
 
-// AuthorizationProviderWithIdentityProviderURL calls the underlying ASAuthorizationSingleSignOnProviderAuthorizationProviderWithIdentityProviderURL.
+// Creates a single sign-on (SSO) authorization provider.
 func AuthorizationProviderWithIdentityProviderURL(url string) *AuthorizationSingleSignOnProvider {
-	_r := raw.ASAuthorizationSingleSignOnProviderAuthorizationProviderWithIdentityProviderURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _r == nil {
-		return nil
-	}
-	return &AuthorizationSingleSignOnProvider{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationSingleSignOnProvider")), objc.RegisterName("authorizationProviderWithIdentityProviderURL:"), rt.FileURL(url))
+	return AuthorizationSingleSignOnProviderFromID(_r)
 }
 
-// IsDeviceConfiguredForPasskeys calls the underlying ASAuthorizationWebBrowserPublicKeyCredentialManagerIsDeviceConfiguredForPasskeys.
 func IsDeviceConfiguredForPasskeys() bool {
-	return raw.ASAuthorizationWebBrowserPublicKeyCredentialManagerIsDeviceConfiguredForPasskeys()
+	_r := objc.Send[bool](objc.ID(_class("ASAuthorizationWebBrowserPublicKeyCredentialManager")), objc.RegisterName("isDeviceConfiguredForPasskeys"))
+	return _r
 }
 
-// SharedStore calls the underlying ASCredentialIdentityStoreSharedStore.
 func SharedStore() *CredentialIdentityStore {
-	_r := raw.ASCredentialIdentityStoreSharedStore()
-	if _r == nil {
-		return nil
-	}
-	return &CredentialIdentityStore{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ASCredentialIdentityStore")), objc.RegisterName("sharedStore"))
+	return CredentialIdentityStoreFromID(_r)
 }
 
-// CredentialWithCode calls the underlying ASOneTimeCodeCredentialCredentialWithCode.
+// Creates and initializes a new ASOneTimeCodeCredential object.
 func CredentialWithCode(code string) *OneTimeCodeCredential {
-	_r := raw.ASOneTimeCodeCredentialCredentialWithCode(foundation.NSStringStringWithUTF8String(code))
-	if _r == nil {
-		return nil
-	}
-	return &OneTimeCodeCredential{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ASOneTimeCodeCredential")), objc.RegisterName("credentialWithCode:"), purego.NSString(code))
+	return OneTimeCodeCredentialFromID(_r)
 }
 
-// CredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID calls the underlying ASPasskeyAssertionCredentialCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID.
-func CredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID(userHandle *foundation.NSData, relyingParty string, signature *foundation.NSData, clientDataHash *foundation.NSData, authenticatorData *foundation.NSData, credentialID *foundation.NSData) *PasskeyAssertionCredential {
-	_r := raw.ASPasskeyAssertionCredentialCredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID(userHandle, foundation.NSStringStringWithUTF8String(relyingParty), signature, clientDataHash, authenticatorData, credentialID)
-	if _r == nil {
-		return nil
-	}
-	return &PasskeyAssertionCredential{inner: _r}
+// Creates and initializes a new passkey assertion credential.
+func CredentialWithUserHandleRelyingPartySignatureClientDataHashAuthenticatorDataCredentialID(userHandle obj.Object, relyingParty string, signature obj.Object, clientDataHash obj.Object, authenticatorData obj.Object, credentialID obj.Object) *PasskeyAssertionCredential {
+	_r := objc.Send[objc.ID](objc.ID(_class("ASPasskeyAssertionCredential")), objc.RegisterName("credentialWithUserHandle:relyingParty:signature:clientDataHash:authenticatorData:credentialID:"), objref.IDOf(userHandle), purego.NSString(relyingParty), objref.IDOf(signature), objref.IDOf(clientDataHash), objref.IDOf(authenticatorData), objref.IDOf(credentialID))
+	return PasskeyAssertionCredentialFromID(_r)
 }
 
-// IdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier calls the underlying ASPasskeyCredentialIdentityIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier.
-func IdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier(relyingPartyIdentifier string, userName string, credentialID *foundation.NSData, userHandle *foundation.NSData, recordIdentifier string) *PasskeyCredentialIdentity {
-	_r := raw.ASPasskeyCredentialIdentityIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier(foundation.NSStringStringWithUTF8String(relyingPartyIdentifier), foundation.NSStringStringWithUTF8String(userName), credentialID, userHandle, foundation.NSStringStringWithUTF8String(recordIdentifier))
-	if _r == nil {
-		return nil
-	}
-	return &PasskeyCredentialIdentity{inner: _r}
+// Creates and initializes a passkey credential identity.
+func IdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier(relyingPartyIdentifier string, userName string, credentialID obj.Object, userHandle obj.Object, recordIdentifier string) *PasskeyCredentialIdentity {
+	_r := objc.Send[objc.ID](objc.ID(_class("ASPasskeyCredentialIdentity")), objc.RegisterName("identityWithRelyingPartyIdentifier:userName:credentialID:userHandle:recordIdentifier:"), purego.NSString(relyingPartyIdentifier), purego.NSString(userName), objref.IDOf(credentialID), objref.IDOf(userHandle), purego.NSString(recordIdentifier))
+	return PasskeyCredentialIdentityFromID(_r)
 }
 
-// RequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms calls the underlying ASPasskeyCredentialRequestRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms.
-func RequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms(credentialIdentity *raw.ASPasskeyCredentialIdentity, clientDataHash *foundation.NSData, userVerificationPreference *foundation.NSString, supportedAlgorithms *foundation.NSArray[*foundation.NSNumber]) *PasskeyCredentialRequest {
-	_r := raw.ASPasskeyCredentialRequestRequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms(credentialIdentity, clientDataHash, userVerificationPreference, supportedAlgorithms)
-	if _r == nil {
-		return nil
-	}
-	return &PasskeyCredentialRequest{inner: _r}
+// Initializes a passkey credential request, identifying supported algorithms by number.
+func RequestWithCredentialIdentityClientDataHashUserVerificationPreferenceSupportedAlgorithms(credentialIdentity *PasskeyCredentialIdentity, clientDataHash obj.Object, userVerificationPreference obj.Object, supportedAlgorithms []obj.Object) *PasskeyCredentialRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("ASPasskeyCredentialRequest")), objc.RegisterName("requestWithCredentialIdentity:clientDataHash:userVerificationPreference:supportedAlgorithms:"), objref.IDOf(credentialIdentity), objref.IDOf(clientDataHash), objref.IDOf(userVerificationPreference), purego.SliceToNSArray(supportedAlgorithms, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return PasskeyCredentialRequestFromID(_r)
 }
 
-// CredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject calls the underlying ASPasskeyRegistrationCredentialCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject.
-func CredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject(relyingParty string, clientDataHash *foundation.NSData, credentialID *foundation.NSData, attestationObject *foundation.NSData) *PasskeyRegistrationCredential {
-	_r := raw.ASPasskeyRegistrationCredentialCredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject(foundation.NSStringStringWithUTF8String(relyingParty), clientDataHash, credentialID, attestationObject)
-	if _r == nil {
-		return nil
-	}
-	return &PasskeyRegistrationCredential{inner: _r}
+// Creates and initializes a new passkey registration credential.
+func CredentialWithRelyingPartyClientDataHashCredentialIDAttestationObject(relyingParty string, clientDataHash obj.Object, credentialID obj.Object, attestationObject obj.Object) *PasskeyRegistrationCredential {
+	_r := objc.Send[objc.ID](objc.ID(_class("ASPasskeyRegistrationCredential")), objc.RegisterName("credentialWithRelyingParty:clientDataHash:credentialID:attestationObject:"), purego.NSString(relyingParty), objref.IDOf(clientDataHash), objref.IDOf(credentialID), objref.IDOf(attestationObject))
+	return PasskeyRegistrationCredentialFromID(_r)
 }
 
-// CredentialWithUserPassword calls the underlying ASPasswordCredentialCredentialWithUserPassword.
+// Creates a password credential instance with a given user name and password.
 func CredentialWithUserPassword(user string, password string) *PasswordCredential {
-	_r := raw.ASPasswordCredentialCredentialWithUserPassword(foundation.NSStringStringWithUTF8String(user), foundation.NSStringStringWithUTF8String(password))
-	if _r == nil {
-		return nil
-	}
-	return &PasswordCredential{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ASPasswordCredential")), objc.RegisterName("credentialWithUser:password:"), purego.NSString(user), purego.NSString(password))
+	return PasswordCredentialFromID(_r)
 }
 
-// IdentityWithServiceIdentifierUserRecordIdentifier calls the underlying ASPasswordCredentialIdentityIdentityWithServiceIdentifierUserRecordIdentifier.
-func IdentityWithServiceIdentifierUserRecordIdentifier(serviceIdentifier *raw.ASCredentialServiceIdentifier, user string, recordIdentifier string) *PasswordCredentialIdentity {
-	_r := raw.ASPasswordCredentialIdentityIdentityWithServiceIdentifierUserRecordIdentifier(serviceIdentifier, foundation.NSStringStringWithUTF8String(user), foundation.NSStringStringWithUTF8String(recordIdentifier))
-	if _r == nil {
-		return nil
-	}
-	return &PasswordCredentialIdentity{inner: _r}
+// Creates and returns a password credential identity object with a service identifier.
+func IdentityWithServiceIdentifierUserRecordIdentifier(serviceIdentifier *CredentialServiceIdentifier, user string, recordIdentifier string) *PasswordCredentialIdentity {
+	_r := objc.Send[objc.ID](objc.ID(_class("ASPasswordCredentialIdentity")), objc.RegisterName("identityWithServiceIdentifier:user:recordIdentifier:"), objref.IDOf(serviceIdentifier), purego.NSString(user), purego.NSString(recordIdentifier))
+	return PasswordCredentialIdentityFromID(_r)
 }
 
-// RequestWithCredentialIdentity calls the underlying ASPasswordCredentialRequestRequestWithCredentialIdentity.
-func RequestWithCredentialIdentity(credentialIdentity *raw.ASPasswordCredentialIdentity) *PasswordCredentialRequest {
-	_r := raw.ASPasswordCredentialRequestRequestWithCredentialIdentity(credentialIdentity)
-	if _r == nil {
-		return nil
-	}
-	return &PasswordCredentialRequest{inner: _r}
+// Creates and initializes a password credential request object.
+func RequestWithCredentialIdentity(credentialIdentity *PasswordCredentialIdentity) *PasswordCredentialRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("ASPasswordCredentialRequest")), objc.RegisterName("requestWithCredentialIdentity:"), objref.IDOf(credentialIdentity))
+	return PasswordCredentialRequestFromID(_r)
 }
 
+// Open the Settings app and navigate to the AutoFill provider settings.
+//
 // OpenCredentialProviderAppSettings blocks until the operation completes or ctx is cancelled.
 func OpenCredentialProviderAppSettings(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	raw.ASSettingsHelperOpenCredentialProviderAppSettingsWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("ASSettingsHelper")), objc.RegisterName("openCredentialProviderAppSettingsWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -170,16 +133,17 @@ func OpenCredentialProviderAppSettings(ctx context.Context) error {
 	}
 }
 
+// Open the Settings app and navigate to the verification code provider settings.
+//
 // OpenVerificationCodeAppSettings blocks until the operation completes or ctx is cancelled.
 func OpenVerificationCodeAppSettings(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	raw.ASSettingsHelperOpenVerificationCodeAppSettingsWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("ASSettingsHelper")), objc.RegisterName("openVerificationCodeAppSettingsWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -188,34 +152,24 @@ func OpenVerificationCodeAppSettings(ctx context.Context) error {
 	}
 }
 
-// RequestToTurnOnCredentialProviderExtensionWithCompletionHandler calls the underlying ASSettingsHelperRequestToTurnOnCredentialProviderExtensionWithCompletionHandler.
+// Call this method from your containing app to request to turn on a contained Credential Provider Extension. If the extension is not currently enabled, a prompt will be shown to allow it to be turned on. The completion handler is called with YES or NO depending on whether the credential provider is enabled. You need to wait 10 seconds in order to make additional request to this API.
 func RequestToTurnOnCredentialProviderExtensionWithCompletionHandler(completionHandler func(bool)) {
-	raw.ASSettingsHelperRequestToTurnOnCredentialProviderExtensionWithCompletionHandler(completionHandler)
+	objc.Send[objc.ID](objc.ID(_class("ASSettingsHelper")), objc.RegisterName("requestToTurnOnCredentialProviderExtensionWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
-// CallbackWithCustomScheme calls the underlying ASWebAuthenticationSessionCallbackCallbackWithCustomScheme.
+// Creates a callback object that matches against URLs with the given custom scheme.
 func CallbackWithCustomScheme(customScheme string) *WebAuthenticationSessionCallback {
-	_r := raw.ASWebAuthenticationSessionCallbackCallbackWithCustomScheme(foundation.NSStringStringWithUTF8String(customScheme))
-	if _r == nil {
-		return nil
-	}
-	return &WebAuthenticationSessionCallback{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ASWebAuthenticationSessionCallback")), objc.RegisterName("callbackWithCustomScheme:"), purego.NSString(customScheme))
+	return WebAuthenticationSessionCallbackFromID(_r)
 }
 
-// CallbackWithHTTPSHostPath calls the underlying ASWebAuthenticationSessionCallbackCallbackWithHTTPSHostPath.
+// Creates a callback object that matches against HTTPS URLs with the given host and path.
 func CallbackWithHTTPSHostPath(host string, path string) *WebAuthenticationSessionCallback {
-	_r := raw.ASWebAuthenticationSessionCallbackCallbackWithHTTPSHostPath(foundation.NSStringStringWithUTF8String(host), foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
-	}
-	return &WebAuthenticationSessionCallback{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ASWebAuthenticationSessionCallback")), objc.RegisterName("callbackWithHTTPSHost:path:"), purego.NSString(host), purego.NSString(path))
+	return WebAuthenticationSessionCallbackFromID(_r)
 }
 
-// SharedManager calls the underlying ASWebAuthenticationSessionWebBrowserSessionManagerSharedManager.
 func SharedManager() *WebAuthenticationSessionWebBrowserSessionManager {
-	_r := raw.ASWebAuthenticationSessionWebBrowserSessionManagerSharedManager()
-	if _r == nil {
-		return nil
-	}
-	return &WebAuthenticationSessionWebBrowserSessionManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ASWebAuthenticationSessionWebBrowserSessionManager")), objc.RegisterName("sharedManager"))
+	return WebAuthenticationSessionWebBrowserSessionManagerFromID(_r)
 }

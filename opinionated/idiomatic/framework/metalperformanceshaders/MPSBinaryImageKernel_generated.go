@@ -5,240 +5,77 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A kernel that consumes two textures and produces one texture.
 //
-// BinaryImageKernel wraps [raw.MPSBinaryImageKernel] with a fluent Go API.
+// BinaryImageKernel is an idiomatic wrapper over the Objective-C class MPSBinaryImageKernel.
 type BinaryImageKernel struct {
-	inner *raw.MPSBinaryImageKernel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSBinaryImageKernel].
-func (x *BinaryImageKernel) Unwrap() *raw.MPSBinaryImageKernel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BinaryImageKernel) ID() objc.ID { return x.inner.Ptr() }
-
-// BinaryImageKernelFromID adopts an existing object pointer as a BinaryImageKernel (nil for 0).
+// BinaryImageKernelFromID adopts an existing Objective-C object as a BinaryImageKernel
+// (nil for 0), retaining it and registering a release finalizer.
 func BinaryImageKernelFromID(id objc.ID) *BinaryImageKernel {
 	if id == 0 {
 		return nil
 	}
-	return &BinaryImageKernel{inner: raw.MPSBinaryImageKernelFromID(id)}
-}
-
-// @abstract   Standard init with default properties per filter type @param      device      The device that the filter will be used on. May not be NULL. @result     a pointer to the newly initialized object. This will fail, returning nil if the device is not supported. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later.
-//
-// NewBinaryImageKernelWithDevice creates a new [BinaryImageKernel].
-func NewBinaryImageKernelWithDevice(device metal.MTLDevice) *BinaryImageKernel {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSBinaryImageKernel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &BinaryImageKernel{inner: raw.MPSBinaryImageKernelFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewBinaryImageKernelWithCoderDevice creates a new [BinaryImageKernel].
-func NewBinaryImageKernelWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *BinaryImageKernel {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSBinaryImageKernel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &BinaryImageKernel{inner: raw.MPSBinaryImageKernelFromID(_id)}
-}
-
-// The position of the destination clip rectangle origin relative to the primary source buffer.
-//
-// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
-func (x *BinaryImageKernel) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *BinaryImageKernel {
-	x.inner.SetPrimaryOffset(primaryOffset)
+	x := &BinaryImageKernel{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// The position of the destination clip rectangle origin relative to the secondary source buffer.
-//
-// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
-func (x *BinaryImageKernel) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *BinaryImageKernel {
-	x.inner.SetSecondaryOffset(secondaryOffset)
+// binaryImageKernelAdopt wraps an Objective-C object that this code just created as a
+// BinaryImageKernel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func binaryImageKernelAdopt(id objc.ID) *BinaryImageKernel {
+	if id == 0 {
+		return nil
+	}
+	x := &BinaryImageKernel{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of the primary source image.
-//
-// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
-func (x *BinaryImageKernel) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *BinaryImageKernel {
-	x.inner.SetPrimaryEdgeMode(primaryEdgeMode)
-	return x
+// Description returns the object's -description text.
+func (x *BinaryImageKernel) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The edge mode to use when texture reads stray off the edge of the secondary source image.
-//
-// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
-func (x *BinaryImageKernel) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *BinaryImageKernel {
-	x.inner.SetSecondaryEdgeMode(secondaryEdgeMode)
-	return x
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BinaryImageKernel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *BinaryImageKernel) WithClipRect(clipRect metal.MTLRegion) *BinaryImageKernel {
-	x.inner.SetClipRect(clipRect)
-	return x
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BinaryImageKernel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *BinaryImageKernel) WithOptions(options mpscore.MPSKernelOptions) *BinaryImageKernel {
-	x.inner.MPSKernel.SetOptions(options)
-	return x
+// NewBinaryImageKernel creates a new BinaryImageKernel.
+func NewBinaryImageKernel() *BinaryImageKernel {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSBinaryImageKernel")), objc.RegisterName("new"))
+	return binaryImageKernelAdopt(_id)
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *BinaryImageKernel) WithLabel(label string) *BinaryImageKernel {
-	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// This method attempts to apply a kernel in place on a texture.
-//
-// EncodeToCommandBufferPrimaryTextureInPlaceSecondaryTextureFallbackCopyAllocator calls the underlying EncodeToCommandBufferPrimaryTextureInPlaceSecondaryTextureFallbackCopyAllocator.
-func (x *BinaryImageKernel) EncodeToCommandBufferPrimaryTextureInPlaceSecondaryTextureFallbackCopyAllocator(commandBuffer metal.MTLCommandBuffer, primaryTexture metal.MTLTexture, inPlaceSecondaryTexture metal.MTLTexture, copyAllocator func() unsafe.Pointer) bool {
-	return x.inner.EncodeToCommandBufferPrimaryTextureInPlaceSecondaryTextureFallbackCopyAllocator(commandBuffer, primaryTexture, inPlaceSecondaryTexture, copyAllocator)
-}
-
-// This method attempts to apply a kernel in place on a texture.
-//
-// EncodeToCommandBufferInPlacePrimaryTextureSecondaryTextureFallbackCopyAllocator calls the underlying EncodeToCommandBufferInPlacePrimaryTextureSecondaryTextureFallbackCopyAllocator.
-func (x *BinaryImageKernel) EncodeToCommandBufferInPlacePrimaryTextureSecondaryTextureFallbackCopyAllocator(commandBuffer metal.MTLCommandBuffer, inPlacePrimaryTexture metal.MTLTexture, secondaryTexture metal.MTLTexture, copyAllocator func() unsafe.Pointer) bool {
-	return x.inner.EncodeToCommandBufferInPlacePrimaryTextureSecondaryTextureFallbackCopyAllocator(commandBuffer, inPlacePrimaryTexture, secondaryTexture, copyAllocator)
-}
-
-// Encodes a kernel into a command buffer, out-of-place.
-//
-// EncodeToCommandBufferPrimaryTextureSecondaryTextureDestinationTexture calls the underlying EncodeToCommandBufferPrimaryTextureSecondaryTextureDestinationTexture.
-func (x *BinaryImageKernel) EncodeToCommandBufferPrimaryTextureSecondaryTextureDestinationTexture(commandBuffer metal.MTLCommandBuffer, primaryTexture metal.MTLTexture, secondaryTexture metal.MTLTexture, destinationTexture metal.MTLTexture) {
-	x.inner.EncodeToCommandBufferPrimaryTextureSecondaryTextureDestinationTexture(commandBuffer, primaryTexture, secondaryTexture, destinationTexture)
-}
-
-// @abstract   Encode a MPSKernel into a command Buffer.  The operation shall proceed out-of-place. @param      commandBuffer       A valid MTLCommandBuffer to receive the encoded filter @param      primaryImage        A valid MPSImage containing the primary source image. @param      secondaryImage      A valid MPSImage containing the secondary source image. @param      destinationImage    A valid MPSImage to be overwritten by result image. destinationImage may not alias the source images.
-//
-// EncodeToCommandBufferPrimaryImageSecondaryImageDestinationImage calls the underlying EncodeToCommandBufferPrimaryImageSecondaryImageDestinationImage.
-func (x *BinaryImageKernel) EncodeToCommandBufferPrimaryImageSecondaryImageDestinationImage(commandBuffer metal.MTLCommandBuffer, primaryImage *mpscore.MPSImage, secondaryImage *mpscore.MPSImage, destinationImage *mpscore.MPSImage) {
-	x.inner.EncodeToCommandBufferPrimaryImageSecondaryImageDestinationImage(commandBuffer, primaryImage, secondaryImage, destinationImage)
-}
-
-// Determines the region of the primary source texture that will be read for an encode operation.
-//
-// PrimarySourceRegionForDestinationSize calls the underlying PrimarySourceRegionForDestinationSize.
-func (x *BinaryImageKernel) PrimarySourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion {
-	return x.inner.PrimarySourceRegionForDestinationSize(destinationSize)
-}
-
-// Determines the region of the secondary source texture that will be read for an encode operation.
-//
-// SecondarySourceRegionForDestinationSize calls the underlying SecondarySourceRegionForDestinationSize.
-func (x *BinaryImageKernel) SecondarySourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion {
-	return x.inner.SecondarySourceRegionForDestinationSize(destinationSize)
-}
-
-// @property   primaryOffset @abstract   The position of the destination clip rectangle origin relative to the primary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. See Also: @ref MetalPerformanceShaders.h  subsubsection_mpsoffset
-//
-// PrimaryOffset calls the underlying PrimaryOffset.
-func (x *BinaryImageKernel) PrimaryOffset() mpscore.MPSOffset {
-	return x.inner.PrimaryOffset()
-}
-
-// SetPrimaryOffset calls the underlying SetPrimaryOffset.
-func (x *BinaryImageKernel) SetPrimaryOffset(primaryOffset mpscore.MPSOffset) {
-	x.inner.SetPrimaryOffset(primaryOffset)
-}
-
-// @property   secondaryOffset @abstract   The position of the destination clip rectangle origin relative to the secondary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. See Also: @ref MetalPerformanceShaders.h  subsubsection_mpsoffset
-//
-// SecondaryOffset calls the underlying SecondaryOffset.
-func (x *BinaryImageKernel) SecondaryOffset() mpscore.MPSOffset {
-	return x.inner.SecondaryOffset()
-}
-
-// SetSecondaryOffset calls the underlying SetSecondaryOffset.
-func (x *BinaryImageKernel) SetSecondaryOffset(secondaryOffset mpscore.MPSOffset) {
-	x.inner.SetSecondaryOffset(secondaryOffset)
-}
-
-// @property   primaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of a source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h  subsubsection_edgemode
-//
-// PrimaryEdgeMode calls the underlying PrimaryEdgeMode.
-func (x *BinaryImageKernel) PrimaryEdgeMode() mpscore.MPSImageEdgeMode {
-	return x.inner.PrimaryEdgeMode()
-}
-
-// SetPrimaryEdgeMode calls the underlying SetPrimaryEdgeMode.
-func (x *BinaryImageKernel) SetPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) {
-	x.inner.SetPrimaryEdgeMode(primaryEdgeMode)
-}
-
-// @property   secondaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the secondary source image @discussion Most MPSKernel objects can read off the edge of a source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h  subsubsection_edgemode
-//
-// SecondaryEdgeMode calls the underlying SecondaryEdgeMode.
-func (x *BinaryImageKernel) SecondaryEdgeMode() mpscore.MPSImageEdgeMode {
-	return x.inner.SecondaryEdgeMode()
-}
-
-// SetSecondaryEdgeMode calls the underlying SetSecondaryEdgeMode.
-func (x *BinaryImageKernel) SetSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) {
-	x.inner.SetSecondaryEdgeMode(secondaryEdgeMode)
-}
-
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// ClipRect calls the underlying ClipRect.
-func (x *BinaryImageKernel) ClipRect() metal.MTLRegion {
-	return x.inner.ClipRect()
-}
-
-// SetClipRect calls the underlying SetClipRect.
-func (x *BinaryImageKernel) SetClipRect(clipRect metal.MTLRegion) {
-	x.inner.SetClipRect(clipRect)
-}
-
-func (x *BinaryImageKernel) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
-
 // BinaryImageKernelable is the interface implemented by [BinaryImageKernel], for mocking and DI.
 type BinaryImageKernelable interface {
-	Unwrap() *raw.MPSBinaryImageKernel
-	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *BinaryImageKernel
-	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *BinaryImageKernel
-	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *BinaryImageKernel
-	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *BinaryImageKernel
-	WithClipRect(clipRect metal.MTLRegion) *BinaryImageKernel
-	WithOptions(options mpscore.MPSKernelOptions) *BinaryImageKernel
+	obj.Object
 	WithLabel(label string) *BinaryImageKernel
-	EncodeToCommandBufferPrimaryTextureInPlaceSecondaryTextureFallbackCopyAllocator(commandBuffer metal.MTLCommandBuffer, primaryTexture metal.MTLTexture, inPlaceSecondaryTexture metal.MTLTexture, copyAllocator func() unsafe.Pointer) bool
-	EncodeToCommandBufferInPlacePrimaryTextureSecondaryTextureFallbackCopyAllocator(commandBuffer metal.MTLCommandBuffer, inPlacePrimaryTexture metal.MTLTexture, secondaryTexture metal.MTLTexture, copyAllocator func() unsafe.Pointer) bool
-	EncodeToCommandBufferPrimaryTextureSecondaryTextureDestinationTexture(commandBuffer metal.MTLCommandBuffer, primaryTexture metal.MTLTexture, secondaryTexture metal.MTLTexture, destinationTexture metal.MTLTexture)
-	EncodeToCommandBufferPrimaryImageSecondaryImageDestinationImage(commandBuffer metal.MTLCommandBuffer, primaryImage *mpscore.MPSImage, secondaryImage *mpscore.MPSImage, destinationImage *mpscore.MPSImage)
-	PrimarySourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion
-	SecondarySourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion
-	PrimaryOffset() mpscore.MPSOffset
-	SetPrimaryOffset(primaryOffset mpscore.MPSOffset)
-	SecondaryOffset() mpscore.MPSOffset
-	SetSecondaryOffset(secondaryOffset mpscore.MPSOffset)
-	PrimaryEdgeMode() mpscore.MPSImageEdgeMode
-	SetPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode)
-	SecondaryEdgeMode() mpscore.MPSImageEdgeMode
-	SetSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode)
-	ClipRect() metal.MTLRegion
-	SetClipRect(clipRect metal.MTLRegion)
 }
 
 var _ BinaryImageKernelable = (*BinaryImageKernel)(nil)

@@ -5,59 +5,85 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An expression that evaluates the result of a fetch request on a managed object context.
 //
-// FetchRequestExpression wraps [raw.NSFetchRequestExpression] with a fluent Go API.
+// FetchRequestExpression is an idiomatic wrapper over the Objective-C class NSFetchRequestExpression.
 type FetchRequestExpression struct {
-	inner *raw.NSFetchRequestExpression
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFetchRequestExpression].
-func (x *FetchRequestExpression) Unwrap() *raw.NSFetchRequestExpression { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FetchRequestExpression) ID() objc.ID { return x.inner.Ptr() }
-
-// FetchRequestExpressionFromID adopts an existing object pointer as a FetchRequestExpression (nil for 0).
+// FetchRequestExpressionFromID adopts an existing Objective-C object as a FetchRequestExpression
+// (nil for 0), retaining it and registering a release finalizer.
 func FetchRequestExpressionFromID(id objc.ID) *FetchRequestExpression {
 	if id == 0 {
 		return nil
 	}
-	return &FetchRequestExpression{inner: raw.NSFetchRequestExpressionFromID(id)}
+	x := &FetchRequestExpression{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFetchRequestExpression creates a new [FetchRequestExpression].
+// fetchRequestExpressionAdopt wraps an Objective-C object that this code just created as a
+// FetchRequestExpression (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fetchRequestExpressionAdopt(id objc.ID) *FetchRequestExpression {
+	if id == 0 {
+		return nil
+	}
+	x := &FetchRequestExpression{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FetchRequestExpression) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FetchRequestExpression) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FetchRequestExpression) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFetchRequestExpression creates a new FetchRequestExpression.
 func NewFetchRequestExpression() *FetchRequestExpression {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFetchRequestExpression")), objc.RegisterName("new"))
-	return &FetchRequestExpression{inner: raw.NSFetchRequestExpressionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSFetchRequestExpression")), objc.RegisterName("new"))
+	return fetchRequestExpressionAdopt(_id)
 }
 
-// RequestExpression calls the underlying RequestExpression.
-func (x *FetchRequestExpression) RequestExpression() *foundation.NSExpression {
-	return x.inner.RequestExpression()
+func (x *FetchRequestExpression) RequestExpression() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestExpression"))
+	return obj.Wrap(_r)
 }
 
-// ContextExpression calls the underlying ContextExpression.
-func (x *FetchRequestExpression) ContextExpression() *foundation.NSExpression {
-	return x.inner.ContextExpression()
+func (x *FetchRequestExpression) ContextExpression() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contextExpression"))
+	return obj.Wrap(_r)
 }
 
-// IsCountOnlyRequest calls the underlying IsCountOnlyRequest.
 func (x *FetchRequestExpression) IsCountOnlyRequest() bool {
-	return x.inner.IsCountOnlyRequest()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCountOnlyRequest"))
+	return _r
 }
 
 // FetchRequestExpressionable is the interface implemented by [FetchRequestExpression], for mocking and DI.
 type FetchRequestExpressionable interface {
-	Unwrap() *raw.NSFetchRequestExpression
-	RequestExpression() *foundation.NSExpression
-	ContextExpression() *foundation.NSExpression
+	obj.Object
+	RequestExpression() obj.Object
+	ContextExpression() obj.Object
 	IsCountOnlyRequest() bool
 }
 

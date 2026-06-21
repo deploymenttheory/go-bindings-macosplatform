@@ -5,78 +5,96 @@
 package coreimage
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A concrete subclass of Core Image Barcode Descriptor that represents a PDF417 symbol.
 //
-// PDF417CodeDescriptor wraps [raw.CIPDF417CodeDescriptor] with a fluent Go API.
+// PDF417CodeDescriptor is an idiomatic wrapper over the Objective-C class CIPDF417CodeDescriptor.
 type PDF417CodeDescriptor struct {
-	inner *raw.CIPDF417CodeDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CIPDF417CodeDescriptor].
-func (x *PDF417CodeDescriptor) Unwrap() *raw.CIPDF417CodeDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PDF417CodeDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// PDF417CodeDescriptorFromID adopts an existing object pointer as a PDF417CodeDescriptor (nil for 0).
+// PDF417CodeDescriptorFromID adopts an existing Objective-C object as a PDF417CodeDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func PDF417CodeDescriptorFromID(id objc.ID) *PDF417CodeDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &PDF417CodeDescriptor{inner: raw.CIPDF417CodeDescriptorFromID(id)}
+	x := &PDF417CodeDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// pDF417CodeDescriptorAdopt wraps an Objective-C object that this code just created as a
+// PDF417CodeDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pDF417CodeDescriptorAdopt(id objc.ID) *PDF417CodeDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &PDF417CodeDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PDF417CodeDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PDF417CodeDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PDF417CodeDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes an PDF417 code descriptor for the given payload and parameters.
 //
-// NewPDF417CodeDescriptorWithPayloadIsCompactRowCountColumnCount creates a new [PDF417CodeDescriptor].
-func NewPDF417CodeDescriptorWithPayloadIsCompactRowCountColumnCount(errorCorrectedPayload *foundation.NSData, isCompact bool, rowCount int, columnCount int) *PDF417CodeDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIPDF417CodeDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:isCompact:rowCount:columnCount:"), errorCorrectedPayload.Ptr(), isCompact, rowCount, columnCount)
-	return &PDF417CodeDescriptor{inner: raw.CIPDF417CodeDescriptorFromID(_id)}
+// NewPDF417CodeDescriptorWithPayloadIsCompactRowCountColumnCount creates a new PDF417CodeDescriptor.
+func NewPDF417CodeDescriptorWithPayloadIsCompactRowCountColumnCount(errorCorrectedPayload obj.Object, isCompact bool, rowCount int, columnCount int) *PDF417CodeDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIPDF417CodeDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPayload:isCompact:rowCount:columnCount:"), objref.IDOf(errorCorrectedPayload), isCompact, rowCount, columnCount)
+	return pDF417CodeDescriptorAdopt(_id)
 }
 
 // The error-corrected payload containing the data encoded in the PDF417 code symbol. The first codeword indicates the number of data codewords in the errorCorrectedPayload. PDF417 codes are comprised of a start character on the left and a stop character on the right. Each row begins and ends with special characters indicating the current row as well as information about the dimensions of the PDF417 symbol. The errorCorrectedPayload represents the sequence of PDF417 codewords that make up the body of the message. The first codeword indicates the number of codewords in the message. This count includes the "count" codeword and any padding codewords, but does not include the error correction codewords. Each codeword is a 16-bit value in the range of 0...928. The sequence is to be interpreted as described in the PDF417 bar code symbology specification -- ISO/IEC 15438:2006(E).
-//
-// ErrorCorrectedPayload calls the underlying ErrorCorrectedPayload.
-func (x *PDF417CodeDescriptor) ErrorCorrectedPayload() *foundation.NSData {
-	return x.inner.ErrorCorrectedPayload()
+func (x *PDF417CodeDescriptor) ErrorCorrectedPayload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorCorrectedPayload"))
+	return obj.Wrap(_r)
 }
 
 // A boolean value telling if the PDF417 code is compact. Compact PDF417 symbols have abbreviated right-side guard bars.
-//
-// IsCompact calls the underlying IsCompact.
 func (x *PDF417CodeDescriptor) IsCompact() bool {
-	return x.inner.IsCompact()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompact"))
+	return _r
 }
 
 // The number of rows in the PDF417 code symbol. Valid row count values are from 3 to 90.
-//
-// RowCount calls the underlying RowCount.
 func (x *PDF417CodeDescriptor) RowCount() int {
-	return x.inner.RowCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowCount"))
+	return _r
 }
 
 // The number of columns in the PDF417 code symbol. Valid column count values are from 1 to 30. This count excluded the columns used to indicate the symbol structure.
-//
-// ColumnCount calls the underlying ColumnCount.
 func (x *PDF417CodeDescriptor) ColumnCount() int {
-	return x.inner.ColumnCount()
-}
-
-func (x *PDF417CodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor {
-	return &x.inner.CIBarcodeDescriptor
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columnCount"))
+	return _r
 }
 
 // PDF417CodeDescriptorable is the interface implemented by [PDF417CodeDescriptor], for mocking and DI.
 type PDF417CodeDescriptorable interface {
-	Unwrap() *raw.CIPDF417CodeDescriptor
-	ErrorCorrectedPayload() *foundation.NSData
+	obj.Object
+	ErrorCorrectedPayload() obj.Object
 	IsCompact() bool
 	RowCount() int
 	ColumnCount() int

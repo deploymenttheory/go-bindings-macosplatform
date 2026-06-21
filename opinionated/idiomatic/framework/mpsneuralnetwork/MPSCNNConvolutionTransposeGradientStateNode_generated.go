@@ -5,78 +5,82 @@
 package mpsneuralnetwork
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNConvolutionTransposeGradientStateNode wraps [raw.MPSCNNConvolutionTransposeGradientStateNode] with a fluent Go API.
+// CNNConvolutionTransposeGradientStateNode is an idiomatic wrapper over the Objective-C class MPSCNNConvolutionTransposeGradientStateNode.
 type CNNConvolutionTransposeGradientStateNode struct {
-	inner *raw.MPSCNNConvolutionTransposeGradientStateNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNConvolutionTransposeGradientStateNode].
-func (x *CNNConvolutionTransposeGradientStateNode) Unwrap() *raw.MPSCNNConvolutionTransposeGradientStateNode {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNConvolutionTransposeGradientStateNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNConvolutionTransposeGradientStateNodeFromID adopts an existing object pointer as a CNNConvolutionTransposeGradientStateNode (nil for 0).
+// CNNConvolutionTransposeGradientStateNodeFromID adopts an existing Objective-C object as a CNNConvolutionTransposeGradientStateNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNConvolutionTransposeGradientStateNodeFromID(id objc.ID) *CNNConvolutionTransposeGradientStateNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNConvolutionTransposeGradientStateNode{inner: raw.MPSCNNConvolutionTransposeGradientStateNodeFromID(id)}
+	x := &CNNConvolutionTransposeGradientStateNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCNNConvolutionTransposeGradientStateNode creates a new [CNNConvolutionTransposeGradientStateNode].
+// cNNConvolutionTransposeGradientStateNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNConvolutionTransposeGradientStateNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNConvolutionTransposeGradientStateNodeAdopt(id objc.ID) *CNNConvolutionTransposeGradientStateNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNConvolutionTransposeGradientStateNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CNNConvolutionTransposeGradientStateNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNConvolutionTransposeGradientStateNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNConvolutionTransposeGradientStateNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNConvolutionTransposeGradientStateNode creates a new CNNConvolutionTransposeGradientStateNode.
 func NewCNNConvolutionTransposeGradientStateNode() *CNNConvolutionTransposeGradientStateNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNConvolutionTransposeGradientStateNode")), objc.RegisterName("new"))
-	return &CNNConvolutionTransposeGradientStateNode{inner: raw.MPSCNNConvolutionTransposeGradientStateNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNConvolutionTransposeGradientStateNode")), objc.RegisterName("new"))
+	return cNNConvolutionTransposeGradientStateNodeAdopt(_id)
 }
 
-// @abstract   MPS resource identification @discussion See MPSHandle protocol reference.  Default: nil
+// Tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
 //
-// WithHandle sets the handle property and returns the receiver for chaining.
-func (x *CNNConvolutionTransposeGradientStateNode) WithHandle(handle raw.MPSHandle) *CNNConvolutionTransposeGradientStateNode {
-	x.inner.MPSCNNConvolutionGradientStateNode.MPSNNGradientStateNode.MPSNNStateNode.SetHandle(handle)
-	return x
-}
-
-// @abstract   Tag a state node for view later @discussion Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
-//
-// WithExportFromGraph sets the exportFromGraph property and returns the receiver for chaining.
+// WithExportFromGraph sets exportFromGraph and returns the receiver so calls can be chained.
 func (x *CNNConvolutionTransposeGradientStateNode) WithExportFromGraph(exportFromGraph bool) *CNNConvolutionTransposeGradientStateNode {
-	x.inner.MPSCNNConvolutionGradientStateNode.MPSNNGradientStateNode.MPSNNStateNode.SetExportFromGraph(exportFromGraph)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
 	return x
 }
 
-// @abstract   Set to true to cause the resource to be synchronized with the CPU @discussion Ignored on non-MacOS.
+// Set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
 //
-// WithSynchronizeResource sets the synchronizeResource property and returns the receiver for chaining.
+// WithSynchronizeResource sets synchronizeResource and returns the receiver so calls can be chained.
 func (x *CNNConvolutionTransposeGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *CNNConvolutionTransposeGradientStateNode {
-	x.inner.MPSCNNConvolutionGradientStateNode.MPSNNGradientStateNode.MPSNNStateNode.SetSynchronizeResource(synchronizeResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
 	return x
-}
-
-func (x *CNNConvolutionTransposeGradientStateNode) asCNNConvolutionGradientStateNode() *raw.MPSCNNConvolutionGradientStateNode {
-	return &x.inner.MPSCNNConvolutionGradientStateNode
-}
-
-func (x *CNNConvolutionTransposeGradientStateNode) asNNGradientStateNode() *raw.MPSNNGradientStateNode {
-	return &x.inner.MPSCNNConvolutionGradientStateNode.MPSNNGradientStateNode
-}
-
-func (x *CNNConvolutionTransposeGradientStateNode) asNNStateNode() *raw.MPSNNStateNode {
-	return &x.inner.MPSCNNConvolutionGradientStateNode.MPSNNGradientStateNode.MPSNNStateNode
 }
 
 // CNNConvolutionTransposeGradientStateNodeable is the interface implemented by [CNNConvolutionTransposeGradientStateNode], for mocking and DI.
 type CNNConvolutionTransposeGradientStateNodeable interface {
-	Unwrap() *raw.MPSCNNConvolutionTransposeGradientStateNode
-	WithHandle(handle raw.MPSHandle) *CNNConvolutionTransposeGradientStateNode
+	obj.Object
 	WithExportFromGraph(exportFromGraph bool) *CNNConvolutionTransposeGradientStateNode
 	WithSynchronizeResource(synchronizeResource bool) *CNNConvolutionTransposeGradientStateNode
 }

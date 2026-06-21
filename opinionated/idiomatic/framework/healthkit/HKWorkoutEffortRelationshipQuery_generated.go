@@ -5,48 +5,66 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// WorkoutEffortRelationshipQuery wraps [raw.HKWorkoutEffortRelationshipQuery] with a fluent Go API.
+// WorkoutEffortRelationshipQuery is an idiomatic wrapper over the Objective-C class HKWorkoutEffortRelationshipQuery.
 type WorkoutEffortRelationshipQuery struct {
-	inner *raw.HKWorkoutEffortRelationshipQuery
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKWorkoutEffortRelationshipQuery].
-func (x *WorkoutEffortRelationshipQuery) Unwrap() *raw.HKWorkoutEffortRelationshipQuery {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WorkoutEffortRelationshipQuery) ID() objc.ID { return x.inner.Ptr() }
-
-// WorkoutEffortRelationshipQueryFromID adopts an existing object pointer as a WorkoutEffortRelationshipQuery (nil for 0).
+// WorkoutEffortRelationshipQueryFromID adopts an existing Objective-C object as a WorkoutEffortRelationshipQuery
+// (nil for 0), retaining it and registering a release finalizer.
 func WorkoutEffortRelationshipQueryFromID(id objc.ID) *WorkoutEffortRelationshipQuery {
 	if id == 0 {
 		return nil
 	}
-	return &WorkoutEffortRelationshipQuery{inner: raw.HKWorkoutEffortRelationshipQueryFromID(id)}
+	x := &WorkoutEffortRelationshipQuery{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @method        initWithPredicate:anchor:options: @abstract      Returns a query that will retrieve HKWorkoutEffortRelationship matching the given predicate that are newer than the given anchor. @discussion    This is a long running query and it is the responsibility of the caller to stop the query after they have received the results they desire. The first call to resultsHandler will contain the inital results which may be empty and future callbacks will contain new relationships as well as any changes to previous relationships along with a new anchor @param         predicate       The predicate on the workout(s) which samples should match. @param         anchor          The anchor which was returned by a previous HKWorkoutEffortRelationshipQuery result or update handler.  Pass nil when querying for the first time. @param         options         The options for the query, one of types from `HKWorkoutEffortRelationshipQueryOptions` @param         resultsHandler         The block to invoke with related sample results
-//
-// NewWorkoutEffortRelationshipQueryWithPredicateAnchorOptionsResultsHandler creates a new [WorkoutEffortRelationshipQuery].
-func NewWorkoutEffortRelationshipQueryWithPredicateAnchorOptionsResultsHandler(predicate *foundation.NSPredicate, anchor *raw.HKQueryAnchor, options HKWorkoutEffortRelationshipQueryOptions, resultsHandler func(*raw.HKWorkoutEffortRelationshipQuery, *foundation.NSArray[*raw.HKWorkoutEffortRelationship], *raw.HKQueryAnchor, unsafe.Pointer)) *WorkoutEffortRelationshipQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWorkoutEffortRelationshipQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPredicate:anchor:options:resultsHandler:"), predicate.Ptr(), anchor.Ptr(), raw.HKWorkoutEffortRelationshipQueryOptions(options), resultsHandler)
-	return &WorkoutEffortRelationshipQuery{inner: raw.HKWorkoutEffortRelationshipQueryFromID(_id)}
+// workoutEffortRelationshipQueryAdopt wraps an Objective-C object that this code just created as a
+// WorkoutEffortRelationshipQuery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func workoutEffortRelationshipQueryAdopt(id objc.ID) *WorkoutEffortRelationshipQuery {
+	if id == 0 {
+		return nil
+	}
+	x := &WorkoutEffortRelationshipQuery{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *WorkoutEffortRelationshipQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+// Description returns the object's -description text.
+func (x *WorkoutEffortRelationshipQuery) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WorkoutEffortRelationshipQuery) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WorkoutEffortRelationshipQuery) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWorkoutEffortRelationshipQuery creates a new WorkoutEffortRelationshipQuery.
+func NewWorkoutEffortRelationshipQuery() *WorkoutEffortRelationshipQuery {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEffortRelationshipQuery")), objc.RegisterName("new"))
+	return workoutEffortRelationshipQueryAdopt(_id)
+}
 
 // WorkoutEffortRelationshipQueryable is the interface implemented by [WorkoutEffortRelationshipQuery], for mocking and DI.
 type WorkoutEffortRelationshipQueryable interface {
-	Unwrap() *raw.HKWorkoutEffortRelationshipQuery
+	obj.Object
 }
 
 var _ WorkoutEffortRelationshipQueryable = (*WorkoutEffortRelationshipQuery)(nil)

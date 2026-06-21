@@ -5,107 +5,120 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a MIDI poly or key pressure event.
 //
-// MIDIPolyPressureEvent wraps [raw.AVMIDIPolyPressureEvent] with a fluent Go API.
+// MIDIPolyPressureEvent is an idiomatic wrapper over the Objective-C class AVMIDIPolyPressureEvent.
 type MIDIPolyPressureEvent struct {
-	inner *raw.AVMIDIPolyPressureEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMIDIPolyPressureEvent].
-func (x *MIDIPolyPressureEvent) Unwrap() *raw.AVMIDIPolyPressureEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MIDIPolyPressureEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MIDIPolyPressureEventFromID adopts an existing object pointer as a MIDIPolyPressureEvent (nil for 0).
+// MIDIPolyPressureEventFromID adopts an existing Objective-C object as a MIDIPolyPressureEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MIDIPolyPressureEventFromID(id objc.ID) *MIDIPolyPressureEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MIDIPolyPressureEvent{inner: raw.AVMIDIPolyPressureEventFromID(id)}
+	x := &MIDIPolyPressureEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mIDIPolyPressureEventAdopt wraps an Objective-C object that this code just created as a
+// MIDIPolyPressureEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mIDIPolyPressureEventAdopt(id objc.ID) *MIDIPolyPressureEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MIDIPolyPressureEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MIDIPolyPressureEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MIDIPolyPressureEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MIDIPolyPressureEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an event with a channel, MIDI key number, and a key pressure value.
 //
-// NewMIDIPolyPressureEventWithChannelKeyPressure creates a new [MIDIPolyPressureEvent].
-func NewMIDIPolyPressureEventWithChannelKeyPressure(channel uint, key uint, pressure uint) *MIDIPolyPressureEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDIPolyPressureEvent")), objc.RegisterName("alloc"))
+// NewMIDIPolyPressureEventWithChannelKeyPressure creates a new MIDIPolyPressureEvent.
+func NewMIDIPolyPressureEventWithChannelKeyPressure(channel int, key int, pressure int) *MIDIPolyPressureEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMIDIPolyPressureEvent")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannel:key:pressure:"), channel, key, pressure)
-	return &MIDIPolyPressureEvent{inner: raw.AVMIDIPolyPressureEventFromID(_id)}
+	return mIDIPolyPressureEventAdopt(_id)
 }
 
 // The MIDI key number.
 //
-// WithKey sets the key property and returns the receiver for chaining.
-func (x *MIDIPolyPressureEvent) WithKey(key uint) *MIDIPolyPressureEvent {
-	x.inner.SetKey(key)
+// WithKey sets key and returns the receiver so calls can be chained.
+func (x *MIDIPolyPressureEvent) WithKey(key int) *MIDIPolyPressureEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), key)
 	return x
 }
 
 // The poly pressure value for the requested key.
 //
-// WithPressure sets the pressure property and returns the receiver for chaining.
-func (x *MIDIPolyPressureEvent) WithPressure(pressure uint) *MIDIPolyPressureEvent {
-	x.inner.SetPressure(pressure)
+// WithPressure sets pressure and returns the receiver so calls can be chained.
+func (x *MIDIPolyPressureEvent) WithPressure(pressure int) *MIDIPolyPressureEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressure:"), pressure)
 	return x
 }
 
 // The MIDI channel.
 //
-// WithChannel sets the channel property and returns the receiver for chaining.
-func (x *MIDIPolyPressureEvent) WithChannel(channel uint) *MIDIPolyPressureEvent {
-	x.inner.AVMIDIChannelEvent.SetChannel(channel)
+// WithChannel sets channel and returns the receiver so calls can be chained.
+func (x *MIDIPolyPressureEvent) WithChannel(channel int) *MIDIPolyPressureEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
 	return x
 }
 
-// @property key The MIDI key number.
-//
-// Key calls the underlying Key.
-func (x *MIDIPolyPressureEvent) Key() uint {
-	return x.inner.Key()
+func (x *MIDIPolyPressureEvent) Key() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("key"))
+	return _r
 }
 
-// SetKey calls the underlying SetKey.
-func (x *MIDIPolyPressureEvent) SetKey(key uint) {
-	x.inner.SetKey(key)
+func (x *MIDIPolyPressureEvent) SetKey(key int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), key)
 }
 
-// @property pressure The poly pressure value for the requested key.
-//
-// Pressure calls the underlying Pressure.
-func (x *MIDIPolyPressureEvent) Pressure() uint {
-	return x.inner.Pressure()
+func (x *MIDIPolyPressureEvent) Pressure() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pressure"))
+	return _r
 }
 
-// SetPressure calls the underlying SetPressure.
-func (x *MIDIPolyPressureEvent) SetPressure(pressure uint) {
-	x.inner.SetPressure(pressure)
-}
-
-func (x *MIDIPolyPressureEvent) asMIDIChannelEvent() *raw.AVMIDIChannelEvent {
-	return &x.inner.AVMIDIChannelEvent
-}
-
-func (x *MIDIPolyPressureEvent) asMusicEvent() *raw.AVMusicEvent {
-	return &x.inner.AVMIDIChannelEvent.AVMusicEvent
+func (x *MIDIPolyPressureEvent) SetPressure(pressure int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressure:"), pressure)
 }
 
 // MIDIPolyPressureEventable is the interface implemented by [MIDIPolyPressureEvent], for mocking and DI.
 type MIDIPolyPressureEventable interface {
-	Unwrap() *raw.AVMIDIPolyPressureEvent
-	WithKey(key uint) *MIDIPolyPressureEvent
-	WithPressure(pressure uint) *MIDIPolyPressureEvent
-	WithChannel(channel uint) *MIDIPolyPressureEvent
-	Key() uint
-	SetKey(key uint)
-	Pressure() uint
-	SetPressure(pressure uint)
+	obj.Object
+	WithKey(key int) *MIDIPolyPressureEvent
+	WithPressure(pressure int) *MIDIPolyPressureEvent
+	WithChannel(channel int) *MIDIPolyPressureEvent
+	Key() int
+	SetKey(key int)
+	Pressure() int
+	SetPressure(pressure int)
 }
 
 var _ MIDIPolyPressureEventable = (*MIDIPolyPressureEvent)(nil)

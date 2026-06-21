@@ -5,50 +5,50 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// AudioBufferProvider is implemented by AudioBuffer and any idiomatic type wrapping a AVAudioBuffer subclass.
+// AudioBufferProvider is accepted wherever a AVAudioBuffer (or one of its subclasses) is expected.
 type AudioBufferProvider interface {
-	asAudioBuffer() *raw.AVAudioBuffer
+	objref.Object
 }
 
-// AudioIONodeProvider is implemented by AudioIONode and any idiomatic type wrapping a AVAudioIONode subclass.
+// AudioIONodeProvider is accepted wherever a AVAudioIONode (or one of its subclasses) is expected.
 type AudioIONodeProvider interface {
-	asAudioIONode() *raw.AVAudioIONode
+	objref.Object
 }
 
-// AudioNodeProvider is implemented by AudioNode and any idiomatic type wrapping a AVAudioNode subclass.
+// AudioNodeProvider is accepted wherever a AVAudioNode (or one of its subclasses) is expected.
 type AudioNodeProvider interface {
-	asAudioNode() *raw.AVAudioNode
+	objref.Object
 }
 
-// AudioUnitProvider is implemented by AudioUnit and any idiomatic type wrapping a AVAudioUnit subclass.
+// AudioUnitProvider is accepted wherever a AVAudioUnit (or one of its subclasses) is expected.
 type AudioUnitProvider interface {
-	asAudioUnit() *raw.AVAudioUnit
+	objref.Object
 }
 
-// AudioUnitEffectProvider is implemented by AudioUnitEffect and any idiomatic type wrapping a AVAudioUnitEffect subclass.
+// AudioUnitEffectProvider is accepted wherever a AVAudioUnitEffect (or one of its subclasses) is expected.
 type AudioUnitEffectProvider interface {
-	asAudioUnitEffect() *raw.AVAudioUnitEffect
+	objref.Object
 }
 
-// AudioUnitMIDIInstrumentProvider is implemented by AudioUnitMIDIInstrument and any idiomatic type wrapping a AVAudioUnitMIDIInstrument subclass.
+// AudioUnitMIDIInstrumentProvider is accepted wherever a AVAudioUnitMIDIInstrument (or one of its subclasses) is expected.
 type AudioUnitMIDIInstrumentProvider interface {
-	asAudioUnitMIDIInstrument() *raw.AVAudioUnitMIDIInstrument
+	objref.Object
 }
 
-// AudioUnitTimeEffectProvider is implemented by AudioUnitTimeEffect and any idiomatic type wrapping a AVAudioUnitTimeEffect subclass.
+// AudioUnitTimeEffectProvider is accepted wherever a AVAudioUnitTimeEffect (or one of its subclasses) is expected.
 type AudioUnitTimeEffectProvider interface {
-	asAudioUnitTimeEffect() *raw.AVAudioUnitTimeEffect
+	objref.Object
 }
 
-// MIDIChannelEventProvider is implemented by MIDIChannelEvent and any idiomatic type wrapping a AVMIDIChannelEvent subclass.
+// MIDIChannelEventProvider is accepted wherever a AVMIDIChannelEvent (or one of its subclasses) is expected.
 type MIDIChannelEventProvider interface {
-	asMIDIChannelEvent() *raw.AVMIDIChannelEvent
+	objref.Object
 }
 
-// MusicEventProvider is implemented by MusicEvent and any idiomatic type wrapping a AVMusicEvent subclass.
+// MusicEventProvider is accepted wherever a AVMusicEvent (or one of its subclasses) is expected.
 type MusicEventProvider interface {
-	asMusicEvent() *raw.AVMusicEvent
+	objref.Object
 }

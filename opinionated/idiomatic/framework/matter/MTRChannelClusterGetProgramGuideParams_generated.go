@@ -5,199 +5,209 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRChannelClusterGetProgramGuideParams wraps [raw.MTRChannelClusterGetProgramGuideParams] with a fluent Go API.
+// MTRChannelClusterGetProgramGuideParams is an idiomatic wrapper over the Objective-C class MTRChannelClusterGetProgramGuideParams.
 type MTRChannelClusterGetProgramGuideParams struct {
-	inner *raw.MTRChannelClusterGetProgramGuideParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRChannelClusterGetProgramGuideParams].
-func (x *MTRChannelClusterGetProgramGuideParams) Unwrap() *raw.MTRChannelClusterGetProgramGuideParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRChannelClusterGetProgramGuideParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRChannelClusterGetProgramGuideParamsFromID adopts an existing object pointer as a MTRChannelClusterGetProgramGuideParams (nil for 0).
+// MTRChannelClusterGetProgramGuideParamsFromID adopts an existing Objective-C object as a MTRChannelClusterGetProgramGuideParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRChannelClusterGetProgramGuideParamsFromID(id objc.ID) *MTRChannelClusterGetProgramGuideParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRChannelClusterGetProgramGuideParams{inner: raw.MTRChannelClusterGetProgramGuideParamsFromID(id)}
+	x := &MTRChannelClusterGetProgramGuideParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRChannelClusterGetProgramGuideParams creates a new [MTRChannelClusterGetProgramGuideParams].
+// mTRChannelClusterGetProgramGuideParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRChannelClusterGetProgramGuideParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRChannelClusterGetProgramGuideParamsAdopt(id objc.ID) *MTRChannelClusterGetProgramGuideParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRChannelClusterGetProgramGuideParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRChannelClusterGetProgramGuideParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRChannelClusterGetProgramGuideParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRChannelClusterGetProgramGuideParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRChannelClusterGetProgramGuideParams creates a new MTRChannelClusterGetProgramGuideParams.
 func NewMTRChannelClusterGetProgramGuideParams() *MTRChannelClusterGetProgramGuideParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRChannelClusterGetProgramGuideParams")), objc.RegisterName("new"))
-	return &MTRChannelClusterGetProgramGuideParams{inner: raw.MTRChannelClusterGetProgramGuideParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRChannelClusterGetProgramGuideParams")), objc.RegisterName("new"))
+	return mTRChannelClusterGetProgramGuideParamsAdopt(_id)
 }
 
-// WithStartTime sets the startTime property and returns the receiver for chaining.
-func (x *MTRChannelClusterGetProgramGuideParams) WithStartTime(startTime *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams {
-	x.inner.SetStartTime(startTime)
+// WithStartTime sets startTime and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterGetProgramGuideParams) WithStartTime(startTime obj.Object) *MTRChannelClusterGetProgramGuideParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 	return x
 }
 
-// WithEndTime sets the endTime property and returns the receiver for chaining.
-func (x *MTRChannelClusterGetProgramGuideParams) WithEndTime(endTime *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams {
-	x.inner.SetEndTime(endTime)
+// WithEndTime sets endTime and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterGetProgramGuideParams) WithEndTime(endTime obj.Object) *MTRChannelClusterGetProgramGuideParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndTime:"), objref.IDOf(endTime))
 	return x
 }
 
-// WithPageToken sets the pageToken property and returns the receiver for chaining.
+// WithPageToken sets pageToken and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterGetProgramGuideParams) WithPageToken(pageToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterGetProgramGuideParams {
-	x.inner.SetPageToken(pageToken.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageToken:"), objref.IDOf(pageToken))
 	return x
 }
 
-// WithRecordingFlag sets the recordingFlag property and returns the receiver for chaining.
-func (x *MTRChannelClusterGetProgramGuideParams) WithRecordingFlag(recordingFlag *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams {
-	x.inner.SetRecordingFlag(recordingFlag)
+// WithRecordingFlag sets recordingFlag and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterGetProgramGuideParams) WithRecordingFlag(recordingFlag obj.Object) *MTRChannelClusterGetProgramGuideParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordingFlag:"), objref.IDOf(recordingFlag))
 	return x
 }
 
-// WithData sets the data property and returns the receiver for chaining.
-func (x *MTRChannelClusterGetProgramGuideParams) WithData(data *foundation.NSData) *MTRChannelClusterGetProgramGuideParams {
-	x.inner.SetData(data)
+// WithData sets data and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterGetProgramGuideParams) WithData(data obj.Object) *MTRChannelClusterGetProgramGuideParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke).
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRChannelClusterGetProgramGuideParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterGetProgramGuideParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterGetProgramGuideParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRChannelClusterGetProgramGuideParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterGetProgramGuideParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRChannelClusterGetProgramGuideParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// StartTime calls the underlying StartTime.
-func (x *MTRChannelClusterGetProgramGuideParams) StartTime() *foundation.NSNumber {
-	return x.inner.StartTime()
+func (x *MTRChannelClusterGetProgramGuideParams) StartTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTime"))
+	return obj.Wrap(_r)
 }
 
-// SetStartTime calls the underlying SetStartTime.
-func (x *MTRChannelClusterGetProgramGuideParams) SetStartTime(startTime *foundation.NSNumber) {
-	x.inner.SetStartTime(startTime)
+func (x *MTRChannelClusterGetProgramGuideParams) SetStartTime(startTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
 }
 
-// EndTime calls the underlying EndTime.
-func (x *MTRChannelClusterGetProgramGuideParams) EndTime() *foundation.NSNumber {
-	return x.inner.EndTime()
+func (x *MTRChannelClusterGetProgramGuideParams) EndTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endTime"))
+	return obj.Wrap(_r)
 }
 
-// SetEndTime calls the underlying SetEndTime.
-func (x *MTRChannelClusterGetProgramGuideParams) SetEndTime(endTime *foundation.NSNumber) {
-	x.inner.SetEndTime(endTime)
+func (x *MTRChannelClusterGetProgramGuideParams) SetEndTime(endTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndTime:"), objref.IDOf(endTime))
 }
 
-// ChannelList calls the underlying ChannelList.
-func (x *MTRChannelClusterGetProgramGuideParams) ChannelList() *foundation.NSArray[objc.ID] {
-	return x.inner.ChannelList()
+func (x *MTRChannelClusterGetProgramGuideParams) ChannelList() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("channelList"))
+	return obj.Wrap(_r)
 }
 
-// SetChannelList calls the underlying SetChannelList.
-func (x *MTRChannelClusterGetProgramGuideParams) SetChannelList(channelList *foundation.NSArray[objc.ID]) {
-	x.inner.SetChannelList(channelList)
+func (x *MTRChannelClusterGetProgramGuideParams) SetChannelList(channelList obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelList:"), objref.IDOf(channelList))
 }
 
-// PageToken calls the underlying PageToken.
 func (x *MTRChannelClusterGetProgramGuideParams) PageToken() *MTRChannelClusterPageTokenStruct {
-	_r := x.inner.PageToken()
-	if _r == nil {
-		return nil
-	}
-	return &MTRChannelClusterPageTokenStruct{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pageToken"))
+	return MTRChannelClusterPageTokenStructFromID(_r)
 }
 
-// SetPageToken calls the underlying SetPageToken.
-func (x *MTRChannelClusterGetProgramGuideParams) SetPageToken(pageToken *raw.MTRChannelClusterPageTokenStruct) {
-	x.inner.SetPageToken(pageToken)
+func (x *MTRChannelClusterGetProgramGuideParams) SetPageToken(pageToken *MTRChannelClusterPageTokenStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageToken:"), objref.IDOf(pageToken))
 }
 
-// RecordingFlag calls the underlying RecordingFlag.
-func (x *MTRChannelClusterGetProgramGuideParams) RecordingFlag() *foundation.NSNumber {
-	return x.inner.RecordingFlag()
+func (x *MTRChannelClusterGetProgramGuideParams) RecordingFlag() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordingFlag"))
+	return obj.Wrap(_r)
 }
 
-// SetRecordingFlag calls the underlying SetRecordingFlag.
-func (x *MTRChannelClusterGetProgramGuideParams) SetRecordingFlag(recordingFlag *foundation.NSNumber) {
-	x.inner.SetRecordingFlag(recordingFlag)
+func (x *MTRChannelClusterGetProgramGuideParams) SetRecordingFlag(recordingFlag obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordingFlag:"), objref.IDOf(recordingFlag))
 }
 
-// Data calls the underlying Data.
-func (x *MTRChannelClusterGetProgramGuideParams) Data() *foundation.NSData {
-	return x.inner.Data()
+func (x *MTRChannelClusterGetProgramGuideParams) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
 
-// SetData calls the underlying SetData.
-func (x *MTRChannelClusterGetProgramGuideParams) SetData(data *foundation.NSData) {
-	x.inner.SetData(data)
+func (x *MTRChannelClusterGetProgramGuideParams) SetData(data obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRChannelClusterGetProgramGuideParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRChannelClusterGetProgramGuideParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRChannelClusterGetProgramGuideParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRChannelClusterGetProgramGuideParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRChannelClusterGetProgramGuideParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRChannelClusterGetProgramGuideParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRChannelClusterGetProgramGuideParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRChannelClusterGetProgramGuideParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRChannelClusterGetProgramGuideParamsable is the interface implemented by [MTRChannelClusterGetProgramGuideParams], for mocking and DI.
 type MTRChannelClusterGetProgramGuideParamsable interface {
-	Unwrap() *raw.MTRChannelClusterGetProgramGuideParams
-	WithStartTime(startTime *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams
-	WithEndTime(endTime *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams
+	obj.Object
+	WithStartTime(startTime obj.Object) *MTRChannelClusterGetProgramGuideParams
+	WithEndTime(endTime obj.Object) *MTRChannelClusterGetProgramGuideParams
 	WithPageToken(pageToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterGetProgramGuideParams
-	WithRecordingFlag(recordingFlag *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams
-	WithData(data *foundation.NSData) *MTRChannelClusterGetProgramGuideParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRChannelClusterGetProgramGuideParams
-	StartTime() *foundation.NSNumber
-	SetStartTime(startTime *foundation.NSNumber)
-	EndTime() *foundation.NSNumber
-	SetEndTime(endTime *foundation.NSNumber)
-	ChannelList() *foundation.NSArray[objc.ID]
-	SetChannelList(channelList *foundation.NSArray[objc.ID])
+	WithRecordingFlag(recordingFlag obj.Object) *MTRChannelClusterGetProgramGuideParams
+	WithData(data obj.Object) *MTRChannelClusterGetProgramGuideParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterGetProgramGuideParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRChannelClusterGetProgramGuideParams
+	StartTime() obj.Object
+	SetStartTime(startTime obj.Object)
+	EndTime() obj.Object
+	SetEndTime(endTime obj.Object)
+	ChannelList() obj.Object
+	SetChannelList(channelList obj.Object)
 	PageToken() *MTRChannelClusterPageTokenStruct
-	SetPageToken(pageToken *raw.MTRChannelClusterPageTokenStruct)
-	RecordingFlag() *foundation.NSNumber
-	SetRecordingFlag(recordingFlag *foundation.NSNumber)
-	Data() *foundation.NSData
-	SetData(data *foundation.NSData)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	SetPageToken(pageToken *MTRChannelClusterPageTokenStruct)
+	RecordingFlag() obj.Object
+	SetRecordingFlag(recordingFlag obj.Object)
+	Data() obj.Object
+	SetData(data obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRChannelClusterGetProgramGuideParamsable = (*MTRChannelClusterGetProgramGuideParams)(nil)

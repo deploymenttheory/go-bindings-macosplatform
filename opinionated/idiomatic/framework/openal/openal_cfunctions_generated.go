@@ -5,496 +5,335 @@
 package openal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/openal"
-	"unsafe"
+	ebipurego "github.com/ebitengine/purego"
 )
 
-// AlBuffer3f calls [raw.AlBuffer3f] (C function alBuffer3f).
-func AlBuffer3f(bid uint, param int, value1 float32, value2 float32, value3 float32) {
-	raw.AlBuffer3f(bid, param, value1, value2, value3)
+var _fnAlBuffer3f func(int, int, float32, float32, float32)
+
+// AlBuffer3f calls the OpenAL framework function alBuffer3f.
+func AlBuffer3f(bid int, param int, value1 float32, value2 float32, value3 float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlBuffer3f == nil {
+		ebipurego.RegisterLibFunc(&_fnAlBuffer3f, _lib, "alBuffer3f")
+	}
+	_fnAlBuffer3f(bid, param, value1, value2, value3)
 }
 
-// AlBuffer3i calls [raw.AlBuffer3i] (C function alBuffer3i).
-func AlBuffer3i(bid uint, param int, value1 int, value2 int, value3 int) {
-	raw.AlBuffer3i(bid, param, value1, value2, value3)
+var _fnAlBuffer3i func(int, int, int, int, int)
+
+// AlBuffer3i calls the OpenAL framework function alBuffer3i.
+func AlBuffer3i(bid int, param int, value1 int, value2 int, value3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlBuffer3i == nil {
+		ebipurego.RegisterLibFunc(&_fnAlBuffer3i, _lib, "alBuffer3i")
+	}
+	_fnAlBuffer3i(bid, param, value1, value2, value3)
 }
 
-// AlBufferData calls [raw.AlBufferData] (C function alBufferData).
-func AlBufferData(bid uint, format int, data unsafe.Pointer, size int, freq int) {
-	raw.AlBufferData(bid, format, data, size, freq)
+var _fnAlBufferf func(int, int, float32)
+
+// AlBufferf calls the OpenAL framework function alBufferf.
+func AlBufferf(bid int, param int, value float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlBufferf == nil {
+		ebipurego.RegisterLibFunc(&_fnAlBufferf, _lib, "alBufferf")
+	}
+	_fnAlBufferf(bid, param, value)
 }
 
-// AlBufferf calls [raw.AlBufferf] (C function alBufferf).
-func AlBufferf(bid uint, param int, value float32) {
-	raw.AlBufferf(bid, param, value)
+var _fnAlBufferi func(int, int, int)
+
+// AlBufferi calls the OpenAL framework function alBufferi.
+func AlBufferi(bid int, param int, value int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlBufferi == nil {
+		ebipurego.RegisterLibFunc(&_fnAlBufferi, _lib, "alBufferi")
+	}
+	_fnAlBufferi(bid, param, value)
 }
 
-// AlBufferfv calls [raw.AlBufferfv] (C function alBufferfv).
-func AlBufferfv(bid uint, param int, values *float32) {
-	raw.AlBufferfv(bid, param, values)
-}
+var _fnAlDisable func(int)
 
-// AlBufferi calls [raw.AlBufferi] (C function alBufferi).
-func AlBufferi(bid uint, param int, value int) {
-	raw.AlBufferi(bid, param, value)
-}
-
-// AlBufferiv calls [raw.AlBufferiv] (C function alBufferiv).
-func AlBufferiv(bid uint, param int, values *int) {
-	raw.AlBufferiv(bid, param, values)
-}
-
-// AlDeleteBuffers calls [raw.AlDeleteBuffers] (C function alDeleteBuffers).
-func AlDeleteBuffers(n int, buffers *uint) {
-	raw.AlDeleteBuffers(n, buffers)
-}
-
-// AlDeleteSources calls [raw.AlDeleteSources] (C function alDeleteSources).
-func AlDeleteSources(n int, sources *uint) {
-	raw.AlDeleteSources(n, sources)
-}
-
-// AlDisable calls [raw.AlDisable] (C function alDisable).
+// AlDisable calls the OpenAL framework function alDisable.
 func AlDisable(capability int) {
-	raw.AlDisable(capability)
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlDisable == nil {
+		ebipurego.RegisterLibFunc(&_fnAlDisable, _lib, "alDisable")
+	}
+	_fnAlDisable(capability)
 }
 
-// AlDistanceModel calls [raw.AlDistanceModel] (C function alDistanceModel).
+var _fnAlDistanceModel func(int)
+
+// AlDistanceModel calls the OpenAL framework function alDistanceModel.
 func AlDistanceModel(distanceModel int) {
-	raw.AlDistanceModel(distanceModel)
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlDistanceModel == nil {
+		ebipurego.RegisterLibFunc(&_fnAlDistanceModel, _lib, "alDistanceModel")
+	}
+	_fnAlDistanceModel(distanceModel)
 }
 
-// AlDopplerFactor calls [raw.AlDopplerFactor] (C function alDopplerFactor).
+var _fnAlDopplerFactor func(float32)
+
+// AlDopplerFactor calls the OpenAL framework function alDopplerFactor.
 func AlDopplerFactor(value float32) {
-	raw.AlDopplerFactor(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlDopplerFactor == nil {
+		ebipurego.RegisterLibFunc(&_fnAlDopplerFactor, _lib, "alDopplerFactor")
+	}
+	_fnAlDopplerFactor(value)
 }
 
-// AlDopplerVelocity calls [raw.AlDopplerVelocity] (C function alDopplerVelocity).
+var _fnAlDopplerVelocity func(float32)
+
+// AlDopplerVelocity calls the OpenAL framework function alDopplerVelocity.
 func AlDopplerVelocity(value float32) {
-	raw.AlDopplerVelocity(value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlDopplerVelocity == nil {
+		ebipurego.RegisterLibFunc(&_fnAlDopplerVelocity, _lib, "alDopplerVelocity")
+	}
+	_fnAlDopplerVelocity(value)
 }
 
-// AlEnable calls [raw.AlEnable] (C function alEnable).
+var _fnAlEnable func(int)
+
+// AlEnable calls the OpenAL framework function alEnable.
 func AlEnable(capability int) {
-	raw.AlEnable(capability)
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlEnable == nil {
+		ebipurego.RegisterLibFunc(&_fnAlEnable, _lib, "alEnable")
+	}
+	_fnAlEnable(capability)
 }
 
-// AlGenBuffers calls [raw.AlGenBuffers] (C function alGenBuffers).
-func AlGenBuffers(n int, buffers *uint) {
-	raw.AlGenBuffers(n, buffers)
-}
+var _fnAlGetBoolean func(int) int8
 
-// AlGenSources calls [raw.AlGenSources] (C function alGenSources).
-func AlGenSources(n int, sources *uint) {
-	raw.AlGenSources(n, sources)
-}
-
-// AlGetBoolean calls [raw.AlGetBoolean] (C function alGetBoolean).
+// AlGetBoolean calls the OpenAL framework function alGetBoolean.
 func AlGetBoolean(param int) int8 {
-	return raw.AlGetBoolean(param)
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlGetBoolean == nil {
+		ebipurego.RegisterLibFunc(&_fnAlGetBoolean, _lib, "alGetBoolean")
+	}
+	return _fnAlGetBoolean(param)
 }
 
-// AlGetBooleanv calls [raw.AlGetBooleanv] (C function alGetBooleanv).
-func AlGetBooleanv(param int, data *int8) {
-	raw.AlGetBooleanv(param, data)
-}
+var _fnAlGetDouble func(int) float64
 
-// AlGetBuffer3f calls [raw.AlGetBuffer3f] (C function alGetBuffer3f).
-func AlGetBuffer3f(bid uint, param int, value1 *float32, value2 *float32, value3 *float32) {
-	raw.AlGetBuffer3f(bid, param, value1, value2, value3)
-}
-
-// AlGetBuffer3i calls [raw.AlGetBuffer3i] (C function alGetBuffer3i).
-func AlGetBuffer3i(bid uint, param int, value1 *int, value2 *int, value3 *int) {
-	raw.AlGetBuffer3i(bid, param, value1, value2, value3)
-}
-
-// AlGetBufferf calls [raw.AlGetBufferf] (C function alGetBufferf).
-func AlGetBufferf(bid uint, param int, value *float32) {
-	raw.AlGetBufferf(bid, param, value)
-}
-
-// AlGetBufferfv calls [raw.AlGetBufferfv] (C function alGetBufferfv).
-func AlGetBufferfv(bid uint, param int, values *float32) {
-	raw.AlGetBufferfv(bid, param, values)
-}
-
-// AlGetBufferi calls [raw.AlGetBufferi] (C function alGetBufferi).
-func AlGetBufferi(bid uint, param int, value *int) {
-	raw.AlGetBufferi(bid, param, value)
-}
-
-// AlGetBufferiv calls [raw.AlGetBufferiv] (C function alGetBufferiv).
-func AlGetBufferiv(bid uint, param int, values *int) {
-	raw.AlGetBufferiv(bid, param, values)
-}
-
-// AlGetDouble calls [raw.AlGetDouble] (C function alGetDouble).
+// AlGetDouble calls the OpenAL framework function alGetDouble.
 func AlGetDouble(param int) float64 {
-	return raw.AlGetDouble(param)
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlGetDouble == nil {
+		ebipurego.RegisterLibFunc(&_fnAlGetDouble, _lib, "alGetDouble")
+	}
+	return _fnAlGetDouble(param)
 }
 
-// AlGetDoublev calls [raw.AlGetDoublev] (C function alGetDoublev).
-func AlGetDoublev(param int, data *float64) {
-	raw.AlGetDoublev(param, data)
-}
+var _fnAlGetError func() int
 
-// AlGetEnumValue calls [raw.AlGetEnumValue] (C function alGetEnumValue).
-func AlGetEnumValue(ename *int8) int {
-	return raw.AlGetEnumValue(ename)
-}
-
-// AlGetError calls [raw.AlGetError] (C function alGetError).
+// AlGetError calls the OpenAL framework function alGetError.
 func AlGetError() int {
-	return raw.AlGetError()
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlGetError == nil {
+		ebipurego.RegisterLibFunc(&_fnAlGetError, _lib, "alGetError")
+	}
+	return _fnAlGetError()
 }
 
-// AlGetFloat calls [raw.AlGetFloat] (C function alGetFloat).
+var _fnAlGetFloat func(int) float32
+
+// AlGetFloat calls the OpenAL framework function alGetFloat.
 func AlGetFloat(param int) float32 {
-	return raw.AlGetFloat(param)
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlGetFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnAlGetFloat, _lib, "alGetFloat")
+	}
+	return _fnAlGetFloat(param)
 }
 
-// AlGetFloatv calls [raw.AlGetFloatv] (C function alGetFloatv).
-func AlGetFloatv(param int, data *float32) {
-	raw.AlGetFloatv(param, data)
-}
+var _fnAlGetInteger func(int) int
 
-// AlGetInteger calls [raw.AlGetInteger] (C function alGetInteger).
+// AlGetInteger calls the OpenAL framework function alGetInteger.
 func AlGetInteger(param int) int {
-	return raw.AlGetInteger(param)
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlGetInteger == nil {
+		ebipurego.RegisterLibFunc(&_fnAlGetInteger, _lib, "alGetInteger")
+	}
+	return _fnAlGetInteger(param)
 }
 
-// AlGetIntegerv calls [raw.AlGetIntegerv] (C function alGetIntegerv).
-func AlGetIntegerv(param int, data *int) {
-	raw.AlGetIntegerv(param, data)
+var _fnAlIsBuffer func(int) int8
+
+// AlIsBuffer calls the OpenAL framework function alIsBuffer.
+func AlIsBuffer(bid int) int8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlIsBuffer == nil {
+		ebipurego.RegisterLibFunc(&_fnAlIsBuffer, _lib, "alIsBuffer")
+	}
+	return _fnAlIsBuffer(bid)
 }
 
-// AlGetListener3f calls [raw.AlGetListener3f] (C function alGetListener3f).
-func AlGetListener3f(param int, value1 *float32, value2 *float32, value3 *float32) {
-	raw.AlGetListener3f(param, value1, value2, value3)
-}
+var _fnAlIsEnabled func(int) int8
 
-// AlGetListener3i calls [raw.AlGetListener3i] (C function alGetListener3i).
-func AlGetListener3i(param int, value1 *int, value2 *int, value3 *int) {
-	raw.AlGetListener3i(param, value1, value2, value3)
-}
-
-// AlGetListenerf calls [raw.AlGetListenerf] (C function alGetListenerf).
-func AlGetListenerf(param int, value *float32) {
-	raw.AlGetListenerf(param, value)
-}
-
-// AlGetListenerfv calls [raw.AlGetListenerfv] (C function alGetListenerfv).
-func AlGetListenerfv(param int, values *float32) {
-	raw.AlGetListenerfv(param, values)
-}
-
-// AlGetListeneri calls [raw.AlGetListeneri] (C function alGetListeneri).
-func AlGetListeneri(param int, value *int) {
-	raw.AlGetListeneri(param, value)
-}
-
-// AlGetListeneriv calls [raw.AlGetListeneriv] (C function alGetListeneriv).
-func AlGetListeneriv(param int, values *int) {
-	raw.AlGetListeneriv(param, values)
-}
-
-// AlGetProcAddress calls [raw.AlGetProcAddress] (C function alGetProcAddress).
-func AlGetProcAddress(fname *int8) unsafe.Pointer {
-	return raw.AlGetProcAddress(fname)
-}
-
-// AlGetSource3f calls [raw.AlGetSource3f] (C function alGetSource3f).
-func AlGetSource3f(sid uint, param int, value1 *float32, value2 *float32, value3 *float32) {
-	raw.AlGetSource3f(sid, param, value1, value2, value3)
-}
-
-// AlGetSource3i calls [raw.AlGetSource3i] (C function alGetSource3i).
-func AlGetSource3i(sid uint, param int, value1 *int, value2 *int, value3 *int) {
-	raw.AlGetSource3i(sid, param, value1, value2, value3)
-}
-
-// AlGetSourcef calls [raw.AlGetSourcef] (C function alGetSourcef).
-func AlGetSourcef(sid uint, param int, value *float32) {
-	raw.AlGetSourcef(sid, param, value)
-}
-
-// AlGetSourcefv calls [raw.AlGetSourcefv] (C function alGetSourcefv).
-func AlGetSourcefv(sid uint, param int, values *float32) {
-	raw.AlGetSourcefv(sid, param, values)
-}
-
-// AlGetSourcei calls [raw.AlGetSourcei] (C function alGetSourcei).
-func AlGetSourcei(sid uint, param int, value *int) {
-	raw.AlGetSourcei(sid, param, value)
-}
-
-// AlGetSourceiv calls [raw.AlGetSourceiv] (C function alGetSourceiv).
-func AlGetSourceiv(sid uint, param int, values *int) {
-	raw.AlGetSourceiv(sid, param, values)
-}
-
-// AlGetString calls [raw.AlGetString] (C function alGetString).
-func AlGetString(param int) *int8 {
-	return raw.AlGetString(param)
-}
-
-// AlIsBuffer calls [raw.AlIsBuffer] (C function alIsBuffer).
-func AlIsBuffer(bid uint) int8 {
-	return raw.AlIsBuffer(bid)
-}
-
-// AlIsEnabled calls [raw.AlIsEnabled] (C function alIsEnabled).
+// AlIsEnabled calls the OpenAL framework function alIsEnabled.
 func AlIsEnabled(capability int) int8 {
-	return raw.AlIsEnabled(capability)
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlIsEnabled == nil {
+		ebipurego.RegisterLibFunc(&_fnAlIsEnabled, _lib, "alIsEnabled")
+	}
+	return _fnAlIsEnabled(capability)
 }
 
-// AlIsExtensionPresent calls [raw.AlIsExtensionPresent] (C function alIsExtensionPresent).
-func AlIsExtensionPresent(extname *int8) int8 {
-	return raw.AlIsExtensionPresent(extname)
+var _fnAlIsSource func(int) int8
+
+// AlIsSource calls the OpenAL framework function alIsSource.
+func AlIsSource(sid int) int8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlIsSource == nil {
+		ebipurego.RegisterLibFunc(&_fnAlIsSource, _lib, "alIsSource")
+	}
+	return _fnAlIsSource(sid)
 }
 
-// AlIsSource calls [raw.AlIsSource] (C function alIsSource).
-func AlIsSource(sid uint) int8 {
-	return raw.AlIsSource(sid)
-}
+var _fnAlListener3f func(int, float32, float32, float32)
 
-// AlListener3f calls [raw.AlListener3f] (C function alListener3f).
+// AlListener3f calls the OpenAL framework function alListener3f.
 func AlListener3f(param int, value1 float32, value2 float32, value3 float32) {
-	raw.AlListener3f(param, value1, value2, value3)
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlListener3f == nil {
+		ebipurego.RegisterLibFunc(&_fnAlListener3f, _lib, "alListener3f")
+	}
+	_fnAlListener3f(param, value1, value2, value3)
 }
 
-// AlListener3i calls [raw.AlListener3i] (C function alListener3i).
+var _fnAlListener3i func(int, int, int, int)
+
+// AlListener3i calls the OpenAL framework function alListener3i.
 func AlListener3i(param int, value1 int, value2 int, value3 int) {
-	raw.AlListener3i(param, value1, value2, value3)
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlListener3i == nil {
+		ebipurego.RegisterLibFunc(&_fnAlListener3i, _lib, "alListener3i")
+	}
+	_fnAlListener3i(param, value1, value2, value3)
 }
 
-// AlListenerf calls [raw.AlListenerf] (C function alListenerf).
+var _fnAlListenerf func(int, float32)
+
+// AlListenerf calls the OpenAL framework function alListenerf.
 func AlListenerf(param int, value float32) {
-	raw.AlListenerf(param, value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlListenerf == nil {
+		ebipurego.RegisterLibFunc(&_fnAlListenerf, _lib, "alListenerf")
+	}
+	_fnAlListenerf(param, value)
 }
 
-// AlListenerfv calls [raw.AlListenerfv] (C function alListenerfv).
-func AlListenerfv(param int, values *float32) {
-	raw.AlListenerfv(param, values)
-}
+var _fnAlListeneri func(int, int)
 
-// AlListeneri calls [raw.AlListeneri] (C function alListeneri).
+// AlListeneri calls the OpenAL framework function alListeneri.
 func AlListeneri(param int, value int) {
-	raw.AlListeneri(param, value)
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlListeneri == nil {
+		ebipurego.RegisterLibFunc(&_fnAlListeneri, _lib, "alListeneri")
+	}
+	_fnAlListeneri(param, value)
 }
 
-// AlListeneriv calls [raw.AlListeneriv] (C function alListeneriv).
-func AlListeneriv(param int, values *int) {
-	raw.AlListeneriv(param, values)
+var _fnAlSource3f func(int, int, float32, float32, float32)
+
+// AlSource3f calls the OpenAL framework function alSource3f.
+func AlSource3f(sid int, param int, value1 float32, value2 float32, value3 float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlSource3f == nil {
+		ebipurego.RegisterLibFunc(&_fnAlSource3f, _lib, "alSource3f")
+	}
+	_fnAlSource3f(sid, param, value1, value2, value3)
 }
 
-// AlSource3f calls [raw.AlSource3f] (C function alSource3f).
-func AlSource3f(sid uint, param int, value1 float32, value2 float32, value3 float32) {
-	raw.AlSource3f(sid, param, value1, value2, value3)
+var _fnAlSource3i func(int, int, int, int, int)
+
+// AlSource3i calls the OpenAL framework function alSource3i.
+func AlSource3i(sid int, param int, value1 int, value2 int, value3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlSource3i == nil {
+		ebipurego.RegisterLibFunc(&_fnAlSource3i, _lib, "alSource3i")
+	}
+	_fnAlSource3i(sid, param, value1, value2, value3)
 }
 
-// AlSource3i calls [raw.AlSource3i] (C function alSource3i).
-func AlSource3i(sid uint, param int, value1 int, value2 int, value3 int) {
-	raw.AlSource3i(sid, param, value1, value2, value3)
+var _fnAlSourcePause func(int)
+
+// AlSourcePause calls the OpenAL framework function alSourcePause.
+func AlSourcePause(sid int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlSourcePause == nil {
+		ebipurego.RegisterLibFunc(&_fnAlSourcePause, _lib, "alSourcePause")
+	}
+	_fnAlSourcePause(sid)
 }
 
-// AlSourcePause calls [raw.AlSourcePause] (C function alSourcePause).
-func AlSourcePause(sid uint) {
-	raw.AlSourcePause(sid)
+var _fnAlSourcePlay func(int)
+
+// AlSourcePlay calls the OpenAL framework function alSourcePlay.
+func AlSourcePlay(sid int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlSourcePlay == nil {
+		ebipurego.RegisterLibFunc(&_fnAlSourcePlay, _lib, "alSourcePlay")
+	}
+	_fnAlSourcePlay(sid)
 }
 
-// AlSourcePausev calls [raw.AlSourcePausev] (C function alSourcePausev).
-func AlSourcePausev(ns int, sids *uint) {
-	raw.AlSourcePausev(ns, sids)
+var _fnAlSourceRewind func(int)
+
+// AlSourceRewind calls the OpenAL framework function alSourceRewind.
+func AlSourceRewind(sid int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlSourceRewind == nil {
+		ebipurego.RegisterLibFunc(&_fnAlSourceRewind, _lib, "alSourceRewind")
+	}
+	_fnAlSourceRewind(sid)
 }
 
-// AlSourcePlay calls [raw.AlSourcePlay] (C function alSourcePlay).
-func AlSourcePlay(sid uint) {
-	raw.AlSourcePlay(sid)
+var _fnAlSourceStop func(int)
+
+// AlSourceStop calls the OpenAL framework function alSourceStop.
+func AlSourceStop(sid int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlSourceStop == nil {
+		ebipurego.RegisterLibFunc(&_fnAlSourceStop, _lib, "alSourceStop")
+	}
+	_fnAlSourceStop(sid)
 }
 
-// AlSourcePlayv calls [raw.AlSourcePlayv] (C function alSourcePlayv).
-func AlSourcePlayv(ns int, sids *uint) {
-	raw.AlSourcePlayv(ns, sids)
+var _fnAlSourcef func(int, int, float32)
+
+// AlSourcef calls the OpenAL framework function alSourcef.
+func AlSourcef(sid int, param int, value float32) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlSourcef == nil {
+		ebipurego.RegisterLibFunc(&_fnAlSourcef, _lib, "alSourcef")
+	}
+	_fnAlSourcef(sid, param, value)
 }
 
-// AlSourceQueueBuffers calls [raw.AlSourceQueueBuffers] (C function alSourceQueueBuffers).
-func AlSourceQueueBuffers(sid uint, numEntries int, bids *uint) {
-	raw.AlSourceQueueBuffers(sid, numEntries, bids)
+var _fnAlSourcei func(int, int, int)
+
+// AlSourcei calls the OpenAL framework function alSourcei.
+func AlSourcei(sid int, param int, value int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlSourcei == nil {
+		ebipurego.RegisterLibFunc(&_fnAlSourcei, _lib, "alSourcei")
+	}
+	_fnAlSourcei(sid, param, value)
 }
 
-// AlSourceRewind calls [raw.AlSourceRewind] (C function alSourceRewind).
-func AlSourceRewind(sid uint) {
-	raw.AlSourceRewind(sid)
-}
+var _fnAlSpeedOfSound func(float32)
 
-// AlSourceRewindv calls [raw.AlSourceRewindv] (C function alSourceRewindv).
-func AlSourceRewindv(ns int, sids *uint) {
-	raw.AlSourceRewindv(ns, sids)
-}
-
-// AlSourceStop calls [raw.AlSourceStop] (C function alSourceStop).
-func AlSourceStop(sid uint) {
-	raw.AlSourceStop(sid)
-}
-
-// AlSourceStopv calls [raw.AlSourceStopv] (C function alSourceStopv).
-func AlSourceStopv(ns int, sids *uint) {
-	raw.AlSourceStopv(ns, sids)
-}
-
-// AlSourceUnqueueBuffers calls [raw.AlSourceUnqueueBuffers] (C function alSourceUnqueueBuffers).
-func AlSourceUnqueueBuffers(sid uint, numEntries int, bids *uint) {
-	raw.AlSourceUnqueueBuffers(sid, numEntries, bids)
-}
-
-// AlSourcef calls [raw.AlSourcef] (C function alSourcef).
-func AlSourcef(sid uint, param int, value float32) {
-	raw.AlSourcef(sid, param, value)
-}
-
-// AlSourcefv calls [raw.AlSourcefv] (C function alSourcefv).
-func AlSourcefv(sid uint, param int, values *float32) {
-	raw.AlSourcefv(sid, param, values)
-}
-
-// AlSourcei calls [raw.AlSourcei] (C function alSourcei).
-func AlSourcei(sid uint, param int, value int) {
-	raw.AlSourcei(sid, param, value)
-}
-
-// AlSourceiv calls [raw.AlSourceiv] (C function alSourceiv).
-func AlSourceiv(sid uint, param int, values *int) {
-	raw.AlSourceiv(sid, param, values)
-}
-
-// AlSpeedOfSound calls [raw.AlSpeedOfSound] (C function alSpeedOfSound).
+// AlSpeedOfSound calls the OpenAL framework function alSpeedOfSound.
 func AlSpeedOfSound(value float32) {
-	raw.AlSpeedOfSound(value)
-}
-
-// AlcCaptureCloseDevice calls [raw.AlcCaptureCloseDevice] (C function alcCaptureCloseDevice).
-func AlcCaptureCloseDevice(device unsafe.Pointer) int8 {
-	return raw.AlcCaptureCloseDevice(device)
-}
-
-// AlcCaptureOpenDevice calls [raw.AlcCaptureOpenDevice] (C function alcCaptureOpenDevice).
-func AlcCaptureOpenDevice(devicename *int8, frequency uint, format int, buffersize int) unsafe.Pointer {
-	return raw.AlcCaptureOpenDevice(devicename, frequency, format, buffersize)
-}
-
-// AlcCaptureSamples calls [raw.AlcCaptureSamples] (C function alcCaptureSamples).
-func AlcCaptureSamples(device unsafe.Pointer, buffer unsafe.Pointer, samples int) {
-	raw.AlcCaptureSamples(device, buffer, samples)
-}
-
-// AlcCaptureStart calls [raw.AlcCaptureStart] (C function alcCaptureStart).
-func AlcCaptureStart(device unsafe.Pointer) {
-	raw.AlcCaptureStart(device)
-}
-
-// AlcCaptureStop calls [raw.AlcCaptureStop] (C function alcCaptureStop).
-func AlcCaptureStop(device unsafe.Pointer) {
-	raw.AlcCaptureStop(device)
-}
-
-// AlcCloseDevice calls [raw.AlcCloseDevice] (C function alcCloseDevice).
-func AlcCloseDevice(device unsafe.Pointer) int8 {
-	return raw.AlcCloseDevice(device)
-}
-
-// AlcCreateContext calls [raw.AlcCreateContext] (C function alcCreateContext).
-func AlcCreateContext(device unsafe.Pointer, attrlist *int) unsafe.Pointer {
-	return raw.AlcCreateContext(device, attrlist)
-}
-
-// AlcDestroyContext calls [raw.AlcDestroyContext] (C function alcDestroyContext).
-func AlcDestroyContext(context_ unsafe.Pointer) {
-	raw.AlcDestroyContext(context_)
-}
-
-// AlcGetContextsDevice calls [raw.AlcGetContextsDevice] (C function alcGetContextsDevice).
-func AlcGetContextsDevice(context_ unsafe.Pointer) unsafe.Pointer {
-	return raw.AlcGetContextsDevice(context_)
-}
-
-// AlcGetCurrentContext calls [raw.AlcGetCurrentContext] (C function alcGetCurrentContext).
-func AlcGetCurrentContext() unsafe.Pointer {
-	return raw.AlcGetCurrentContext()
-}
-
-// AlcGetEnumValue calls [raw.AlcGetEnumValue] (C function alcGetEnumValue).
-func AlcGetEnumValue(device unsafe.Pointer, enumname *int8) int {
-	return raw.AlcGetEnumValue(device, enumname)
-}
-
-// AlcGetError calls [raw.AlcGetError] (C function alcGetError).
-func AlcGetError(device unsafe.Pointer) int {
-	return raw.AlcGetError(device)
-}
-
-// AlcGetIntegerv calls [raw.AlcGetIntegerv] (C function alcGetIntegerv).
-func AlcGetIntegerv(device unsafe.Pointer, param int, size int, data *int) {
-	raw.AlcGetIntegerv(device, param, size, data)
-}
-
-// AlcGetProcAddress calls [raw.AlcGetProcAddress] (C function alcGetProcAddress).
-func AlcGetProcAddress(device unsafe.Pointer, funcname *int8) unsafe.Pointer {
-	return raw.AlcGetProcAddress(device, funcname)
-}
-
-// AlcGetString calls [raw.AlcGetString] (C function alcGetString).
-func AlcGetString(device unsafe.Pointer, param int) *int8 {
-	return raw.AlcGetString(device, param)
-}
-
-// AlcIsExtensionPresent calls [raw.AlcIsExtensionPresent] (C function alcIsExtensionPresent).
-func AlcIsExtensionPresent(device unsafe.Pointer, extname *int8) int8 {
-	return raw.AlcIsExtensionPresent(device, extname)
-}
-
-// AlcMakeContextCurrent calls [raw.AlcMakeContextCurrent] (C function alcMakeContextCurrent).
-func AlcMakeContextCurrent(context_ unsafe.Pointer) int8 {
-	return raw.AlcMakeContextCurrent(context_)
-}
-
-// AlcOpenDevice calls [raw.AlcOpenDevice] (C function alcOpenDevice).
-func AlcOpenDevice(devicename *int8) unsafe.Pointer {
-	return raw.AlcOpenDevice(devicename)
-}
-
-// AlcProcessContext calls [raw.AlcProcessContext] (C function alcProcessContext).
-func AlcProcessContext(context_ unsafe.Pointer) {
-	raw.AlcProcessContext(context_)
-}
-
-// AlcSuspendContext calls [raw.AlcSuspendContext] (C function alcSuspendContext).
-func AlcSuspendContext(context_ unsafe.Pointer) {
-	raw.AlcSuspendContext(context_)
-}
-
-// AlutExit calls [raw.AlutExit] (C function alutExit).
-func AlutExit() unsafe.Pointer {
-	return raw.AlutExit()
-}
-
-// AlutInit calls [raw.AlutInit] (C function alutInit).
-func AlutInit(argc *int, argv *int8) unsafe.Pointer {
-	return raw.AlutInit(argc, argv)
-}
-
-// AlutLoadWAVFile calls [raw.AlutLoadWAVFile] (C function alutLoadWAVFile).
-func AlutLoadWAVFile(file *int8, format *int, data unsafe.Pointer, size *int, freq *int) unsafe.Pointer {
-	return raw.AlutLoadWAVFile(file, format, data, size, freq)
-}
-
-// AlutLoadWAVMemory calls [raw.AlutLoadWAVMemory] (C function alutLoadWAVMemory).
-func AlutLoadWAVMemory(memory *int8, format *int, data unsafe.Pointer, size *int, freq *int) unsafe.Pointer {
-	return raw.AlutLoadWAVMemory(memory, format, data, size, freq)
-}
-
-// AlutUnloadWAV calls [raw.AlutUnloadWAV] (C function alutUnloadWAV).
-func AlutUnloadWAV(format int, data unsafe.Pointer, size int, freq int) unsafe.Pointer {
-	return raw.AlutUnloadWAV(format, data, size, freq)
+	_loadOnce.Do(_loadLibrary)
+	if _fnAlSpeedOfSound == nil {
+		ebipurego.RegisterLibFunc(&_fnAlSpeedOfSound, _lib, "alSpeedOfSound")
+	}
+	_fnAlSpeedOfSound(value)
 }

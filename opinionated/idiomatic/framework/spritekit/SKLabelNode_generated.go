@@ -5,536 +5,484 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A graphical element that draws text.
 //
-// LabelNode wraps [raw.SKLabelNode] with a fluent Go API.
+// LabelNode is an idiomatic wrapper over the Objective-C class SKLabelNode.
 type LabelNode struct {
-	inner *raw.SKLabelNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKLabelNode].
-func (x *LabelNode) Unwrap() *raw.SKLabelNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LabelNode) ID() objc.ID { return x.inner.Ptr() }
-
-// LabelNodeFromID adopts an existing object pointer as a LabelNode (nil for 0).
+// LabelNodeFromID adopts an existing Objective-C object as a LabelNode
+// (nil for 0), retaining it and registering a release finalizer.
 func LabelNodeFromID(id objc.ID) *LabelNode {
 	if id == 0 {
 		return nil
 	}
-	return &LabelNode{inner: raw.SKLabelNodeFromID(id)}
+	x := &LabelNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// labelNodeAdopt wraps an Objective-C object that this code just created as a
+// LabelNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func labelNodeAdopt(id objc.ID) *LabelNode {
+	if id == 0 {
+		return nil
+	}
+	x := &LabelNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LabelNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LabelNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LabelNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a new label object with a specified font.
 //
-// NewLabelNodeWithFontNamed creates a new [LabelNode].
+// NewLabelNodeWithFontNamed creates a new LabelNode.
 func NewLabelNodeWithFontNamed(fontName string) *LabelNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKLabelNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFontNamed:"), foundation.NSStringStringWithUTF8String(fontName).Ptr())
-	return &LabelNode{inner: raw.SKLabelNodeFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKLabelNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFontNamed:"), purego.NSString(fontName))
+	return labelNodeAdopt(_id)
 }
 
 // The vertical position of the text within the node.
 //
-// WithVerticalAlignmentMode sets the verticalAlignmentMode property and returns the receiver for chaining.
-func (x *LabelNode) WithVerticalAlignmentMode(verticalAlignmentMode SKLabelVerticalAlignmentMode) *LabelNode {
-	x.inner.SetVerticalAlignmentMode(raw.SKLabelVerticalAlignmentMode(verticalAlignmentMode))
+// WithVerticalAlignmentMode sets verticalAlignmentMode and returns the receiver so calls can be chained.
+func (x *LabelNode) WithVerticalAlignmentMode(verticalAlignmentMode LabelVerticalAlignmentMode) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalAlignmentMode:"), verticalAlignmentMode)
 	return x
 }
 
 // The horizontal position of the text within the node.
 //
-// WithHorizontalAlignmentMode sets the horizontalAlignmentMode property and returns the receiver for chaining.
-func (x *LabelNode) WithHorizontalAlignmentMode(horizontalAlignmentMode SKLabelHorizontalAlignmentMode) *LabelNode {
-	x.inner.SetHorizontalAlignmentMode(raw.SKLabelHorizontalAlignmentMode(horizontalAlignmentMode))
+// WithHorizontalAlignmentMode sets horizontalAlignmentMode and returns the receiver so calls can be chained.
+func (x *LabelNode) WithHorizontalAlignmentMode(horizontalAlignmentMode LabelHorizontalAlignmentMode) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalAlignmentMode:"), horizontalAlignmentMode)
 	return x
 }
 
 // Determines the number of lines to draw.
 //
-// WithNumberOfLines sets the numberOfLines property and returns the receiver for chaining.
+// WithNumberOfLines sets numberOfLines and returns the receiver so calls can be chained.
 func (x *LabelNode) WithNumberOfLines(numberOfLines int) *LabelNode {
-	x.inner.SetNumberOfLines(numberOfLines)
-	return x
-}
-
-// Determines the line-break mode for multiple lines.
-//
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *LabelNode) WithLineBreakMode(lineBreakMode appkit.NSLineBreakMode) *LabelNode {
-	x.inner.SetLineBreakMode(lineBreakMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfLines:"), numberOfLines)
 	return x
 }
 
 // The width, in screen points, after which line-break mode should be applied.
 //
-// WithPreferredMaxLayoutWidth sets the preferredMaxLayoutWidth property and returns the receiver for chaining.
+// WithPreferredMaxLayoutWidth sets preferredMaxLayoutWidth and returns the receiver so calls can be chained.
 func (x *LabelNode) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *LabelNode {
-	x.inner.SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
 	return x
 }
 
 // The font used for the text in the label.
 //
-// WithFontName sets the fontName property and returns the receiver for chaining.
+// WithFontName sets fontName and returns the receiver so calls can be chained.
 func (x *LabelNode) WithFontName(fontName string) *LabelNode {
-	x.inner.SetFontName(foundation.NSStringStringWithUTF8String(fontName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontName:"), purego.NSString(fontName))
 	return x
 }
 
 // The string that the label node displays.
 //
-// WithText sets the text property and returns the receiver for chaining.
+// WithText sets text and returns the receiver so calls can be chained.
 func (x *LabelNode) WithText(text string) *LabelNode {
-	x.inner.SetText(foundation.NSStringStringWithUTF8String(text))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setText:"), purego.NSString(text))
 	return x
 }
 
 // The attributed string displayed by the label.
 //
-// WithAttributedText sets the attributedText property and returns the receiver for chaining.
-func (x *LabelNode) WithAttributedText(attributedText *foundation.NSAttributedString) *LabelNode {
-	x.inner.SetAttributedText(attributedText)
+// WithAttributedText sets attributedText and returns the receiver so calls can be chained.
+func (x *LabelNode) WithAttributedText(attributedText obj.Object) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedText:"), objref.IDOf(attributedText))
 	return x
 }
 
 // The size of the font used in the label.
 //
-// WithFontSize sets the fontSize property and returns the receiver for chaining.
+// WithFontSize sets fontSize and returns the receiver so calls can be chained.
 func (x *LabelNode) WithFontSize(fontSize float64) *LabelNode {
-	x.inner.SetFontSize(fontSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontSize:"), fontSize)
 	return x
 }
 
 // The color of the label.
 //
-// WithFontColor sets the fontColor property and returns the receiver for chaining.
-func (x *LabelNode) WithFontColor(fontColor *appkit.NSColor) *LabelNode {
-	x.inner.SetFontColor(fontColor)
+// WithFontColor sets fontColor and returns the receiver so calls can be chained.
+func (x *LabelNode) WithFontColor(fontColor obj.Object) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
 	return x
 }
 
 // A floating-point value that describes how the color is blended with the font color.
 //
-// WithColorBlendFactor sets the colorBlendFactor property and returns the receiver for chaining.
+// WithColorBlendFactor sets colorBlendFactor and returns the receiver so calls can be chained.
 func (x *LabelNode) WithColorBlendFactor(colorBlendFactor float64) *LabelNode {
-	x.inner.SetColorBlendFactor(colorBlendFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorBlendFactor:"), colorBlendFactor)
 	return x
 }
 
 // An alternative to the font color that can be used for animations.
 //
-// WithColor sets the color property and returns the receiver for chaining.
-func (x *LabelNode) WithColor(color *appkit.NSColor) *LabelNode {
-	x.inner.SetColor(color)
+// WithColor sets color and returns the receiver so calls can be chained.
+func (x *LabelNode) WithColor(color obj.Object) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return x
 }
 
 // The blend mode used to draw the label into the parent’s framebuffer.
 //
-// WithBlendMode sets the blendMode property and returns the receiver for chaining.
-func (x *LabelNode) WithBlendMode(blendMode SKBlendMode) *LabelNode {
-	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
-	return x
-}
-
-// The position of the node in its parent’s coordinate system.
-//
-// WithPosition sets the position property and returns the receiver for chaining.
-func (x *LabelNode) WithPosition(position corefoundation.CGPoint) *LabelNode {
-	x.inner.SKNode.SetPosition(position)
+// WithBlendMode sets blendMode and returns the receiver so calls can be chained.
+func (x *LabelNode) WithBlendMode(blendMode BlendMode) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendMode:"), blendMode)
 	return x
 }
 
 // The height of the node relative to its parent.
 //
-// WithZPosition sets the zPosition property and returns the receiver for chaining.
+// WithZPosition sets zPosition and returns the receiver so calls can be chained.
 func (x *LabelNode) WithZPosition(zPosition float64) *LabelNode {
-	x.inner.SKNode.SetZPosition(zPosition)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
 // The Euler rotation about the z axis (in radians).
 //
-// WithZRotation sets the zRotation property and returns the receiver for chaining.
+// WithZRotation sets zRotation and returns the receiver so calls can be chained.
 func (x *LabelNode) WithZRotation(zRotation float64) *LabelNode {
-	x.inner.SKNode.SetZRotation(zRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
 	return x
 }
 
 // A scaling factor that multiplies the width of a node and its children.
 //
-// WithXScale sets the xScale property and returns the receiver for chaining.
+// WithXScale sets xScale and returns the receiver so calls can be chained.
 func (x *LabelNode) WithXScale(xScale float64) *LabelNode {
-	x.inner.SKNode.SetXScale(xScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
 	return x
 }
 
 // A scaling factor that multiplies the height of a node and its children.
 //
-// WithYScale sets the yScale property and returns the receiver for chaining.
+// WithYScale sets yScale and returns the receiver so calls can be chained.
 func (x *LabelNode) WithYScale(yScale float64) *LabelNode {
-	x.inner.SKNode.SetYScale(yScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
 	return x
 }
 
 // A speed modifier applied to all actions executed by a node and its descendants.
 //
-// WithSpeed sets the speed property and returns the receiver for chaining.
+// WithSpeed sets speed and returns the receiver so calls can be chained.
 func (x *LabelNode) WithSpeed(speed float64) *LabelNode {
-	x.inner.SKNode.SetSpeed(speed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
 // The transparency value applied to the node’s contents.
 //
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha sets alpha and returns the receiver so calls can be chained.
 func (x *LabelNode) WithAlpha(alpha float64) *LabelNode {
-	x.inner.SKNode.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
 // A Boolean value that determines whether actions on the node and its descendants are processed.
 //
-// WithPaused sets the paused property and returns the receiver for chaining.
+// WithPaused sets paused and returns the receiver so calls can be chained.
 func (x *LabelNode) WithPaused(paused bool) *LabelNode {
-	x.inner.SKNode.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
 // A Boolean value that determines whether a node and its descendants are rendered.
 //
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *LabelNode) WithHidden(hidden bool) *LabelNode {
-	x.inner.SKNode.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
 // A Boolean value that indicates whether the node receives touch events.
 //
-// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+// WithUserInteractionEnabled sets userInteractionEnabled and returns the receiver so calls can be chained.
 func (x *LabelNode) WithUserInteractionEnabled(userInteractionEnabled bool) *LabelNode {
-	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
 	return x
 }
 
 // The node’s assignable name.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *LabelNode) WithName(name string) *LabelNode {
-	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // The physics body associated with the node.
 //
-// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+// WithPhysicsBody sets physicsBody and returns the receiver so calls can be chained.
 func (x *LabelNode) WithPhysicsBody(physicsBody *PhysicsBody) *LabelNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
 // A dictionary containing arbitrary data.
 //
-// WithUserData sets the userData property and returns the receiver for chaining.
-func (x *LabelNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *LabelNode {
-	x.inner.SKNode.SetUserData(userData)
+// WithUserData sets userData and returns the receiver so calls can be chained.
+func (x *LabelNode) WithUserData(userData obj.Object) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	return x
 }
 
 // The reach constraints to apply to the node when executing a reach action.
 //
-// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+// WithReachConstraints sets reachConstraints and returns the receiver so calls can be chained.
 func (x *LabelNode) WithReachConstraints(reachConstraints *ReachConstraints) *LabelNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	return x
 }
 
 // A list of constraints to apply to the node.
 //
-// WithConstraints sets the collection, converting the Go slice to an NSArray.
-func (x *LabelNode) WithConstraints(items ...*raw.SKConstraint) *LabelNode {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SKNode.SetConstraints(foundation.NSArrayFromID[*raw.SKConstraint](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SKNode.SetConstraints(_arr)
+// WithConstraints sets the collection and returns the receiver so calls can be chained.
+func (x *LabelNode) WithConstraints(items ...*Constraint) *LabelNode {
+	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
 // The values of each attribute associated with the node’s attached shader.
 //
-// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
-func (x *LabelNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *LabelNode {
-	x.inner.SKNode.SetAttributeValues(attributeValues)
+// WithAttributeValues sets attributeValues and returns the receiver so calls can be chained.
+func (x *LabelNode) WithAttributeValues(attributeValues obj.Object) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
 	return x
 }
 
 // A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 //
-// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+// WithAccessibilityElement sets accessibilityElement and returns the receiver so calls can be chained.
 func (x *LabelNode) WithAccessibilityElement(accessibilityElement bool) *LabelNode {
-	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
 	return x
 }
 
 // A string value describing the user interface element type; for example, a button.
 //
-// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+// WithAccessibilityRole sets accessibilityRole and returns the receiver so calls can be chained.
 func (x *LabelNode) WithAccessibilityRole(accessibilityRole string) *LabelNode {
-	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
 	return x
 }
 
 // A string value describing the user interface element name and type; for example, the Buy button.
 //
-// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+// WithAccessibilityRoleDescription sets accessibilityRoleDescription and returns the receiver so calls can be chained.
 func (x *LabelNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *LabelNode {
-	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
 	return x
 }
 
 // A string that defines this user interface element’s subrole; for example, a full-screen button.
 //
-// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+// WithAccessibilitySubrole sets accessibilitySubrole and returns the receiver so calls can be chained.
 func (x *LabelNode) WithAccessibilitySubrole(accessibilitySubrole string) *LabelNode {
-	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
-	return x
-}
-
-// The size of this user interface element, in screen points.
-//
-// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
-func (x *LabelNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *LabelNode {
-	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
 	return x
 }
 
 // The user interface element that contains this element.
 //
-// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
-func (x *LabelNode) WithAccessibilityParent(accessibilityParent objc.ID) *LabelNode {
-	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+// WithAccessibilityParent sets accessibilityParent and returns the receiver so calls can be chained.
+func (x *LabelNode) WithAccessibilityParent(accessibilityParent obj.Object) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	return x
 }
 
 // The help description of this user interface element; for example, the text shown in a tooltip.
 //
-// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+// WithAccessibilityHelp sets accessibilityHelp and returns the receiver so calls can be chained.
 func (x *LabelNode) WithAccessibilityHelp(accessibilityHelp string) *LabelNode {
-	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
 	return x
 }
 
 // A short description of this user interface element.
 //
-// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+// WithAccessibilityLabel sets accessibilityLabel and returns the receiver so calls can be chained.
 func (x *LabelNode) WithAccessibilityLabel(accessibilityLabel string) *LabelNode {
-	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
 	return x
 }
 
 // A toggle you implement to indicate to the system whether this user interface element should respond to user input.
 //
-// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+// WithAccessibilityEnabled sets accessibilityEnabled and returns the receiver so calls can be chained.
 func (x *LabelNode) WithAccessibilityEnabled(accessibilityEnabled bool) *LabelNode {
-	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
 	return x
 }
 
-// VerticalAlignmentMode calls the underlying VerticalAlignmentMode.
-func (x *LabelNode) VerticalAlignmentMode() SKLabelVerticalAlignmentMode {
-	return SKLabelVerticalAlignmentMode(x.inner.VerticalAlignmentMode())
+func (x *LabelNode) VerticalAlignmentMode() LabelVerticalAlignmentMode {
+	_r := objc.Send[LabelVerticalAlignmentMode](objref.IDOf(x), objc.RegisterName("verticalAlignmentMode"))
+	return _r
 }
 
-// SetVerticalAlignmentMode calls the underlying SetVerticalAlignmentMode.
-func (x *LabelNode) SetVerticalAlignmentMode(verticalAlignmentMode SKLabelVerticalAlignmentMode) {
-	x.inner.SetVerticalAlignmentMode(raw.SKLabelVerticalAlignmentMode(verticalAlignmentMode))
+func (x *LabelNode) SetVerticalAlignmentMode(verticalAlignmentMode LabelVerticalAlignmentMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalAlignmentMode:"), verticalAlignmentMode)
 }
 
-// HorizontalAlignmentMode calls the underlying HorizontalAlignmentMode.
-func (x *LabelNode) HorizontalAlignmentMode() SKLabelHorizontalAlignmentMode {
-	return SKLabelHorizontalAlignmentMode(x.inner.HorizontalAlignmentMode())
+func (x *LabelNode) HorizontalAlignmentMode() LabelHorizontalAlignmentMode {
+	_r := objc.Send[LabelHorizontalAlignmentMode](objref.IDOf(x), objc.RegisterName("horizontalAlignmentMode"))
+	return _r
 }
 
-// SetHorizontalAlignmentMode calls the underlying SetHorizontalAlignmentMode.
-func (x *LabelNode) SetHorizontalAlignmentMode(horizontalAlignmentMode SKLabelHorizontalAlignmentMode) {
-	x.inner.SetHorizontalAlignmentMode(raw.SKLabelHorizontalAlignmentMode(horizontalAlignmentMode))
+func (x *LabelNode) SetHorizontalAlignmentMode(horizontalAlignmentMode LabelHorizontalAlignmentMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalAlignmentMode:"), horizontalAlignmentMode)
 }
 
 // Determines the number of lines to draw. The default value is 1 (single line). A value of 0 means no limit. If the height of the text reaches the # of lines the text will be truncated using the line break mode.
-//
-// NumberOfLines calls the underlying NumberOfLines.
 func (x *LabelNode) NumberOfLines() int {
-	return x.inner.NumberOfLines()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfLines"))
+	return _r
 }
 
-// SetNumberOfLines calls the underlying SetNumberOfLines.
 func (x *LabelNode) SetNumberOfLines(numberOfLines int) {
-	x.inner.SetNumberOfLines(numberOfLines)
-}
-
-// Determines the line break mode for multiple lines. Default is NSLineBreakByTruncatingTail
-//
-// LineBreakMode calls the underlying LineBreakMode.
-func (x *LabelNode) LineBreakMode() appkit.NSLineBreakMode {
-	return x.inner.LineBreakMode()
-}
-
-// SetLineBreakMode calls the underlying SetLineBreakMode.
-func (x *LabelNode) SetLineBreakMode(lineBreakMode appkit.NSLineBreakMode) {
-	x.inner.SetLineBreakMode(lineBreakMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfLines:"), numberOfLines)
 }
 
 // If nonzero, this is used when determining layout width for multiline labels. Default is zero.
-//
-// PreferredMaxLayoutWidth calls the underlying PreferredMaxLayoutWidth.
 func (x *LabelNode) PreferredMaxLayoutWidth() float64 {
-	return x.inner.PreferredMaxLayoutWidth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("preferredMaxLayoutWidth"))
+	return _r
 }
 
-// SetPreferredMaxLayoutWidth calls the underlying SetPreferredMaxLayoutWidth.
 func (x *LabelNode) SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) {
-	x.inner.SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
 }
 
-// FontName calls the underlying FontName.
 func (x *LabelNode) FontName() string {
-	_r := x.inner.FontName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetFontName calls the underlying SetFontName.
 func (x *LabelNode) SetFontName(fontName string) {
-	x.inner.SetFontName(foundation.NSStringStringWithUTF8String(fontName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontName:"), purego.NSString(fontName))
 }
 
-// Text calls the underlying Text.
 func (x *LabelNode) Text() string {
-	_r := x.inner.Text()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("text"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetText calls the underlying SetText.
 func (x *LabelNode) SetText(text string) {
-	x.inner.SetText(foundation.NSStringStringWithUTF8String(text))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setText:"), purego.NSString(text))
 }
 
-// AttributedText calls the underlying AttributedText.
-func (x *LabelNode) AttributedText() *foundation.NSAttributedString {
-	return x.inner.AttributedText()
+func (x *LabelNode) AttributedText() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedText"))
+	return obj.Wrap(_r)
 }
 
-// SetAttributedText calls the underlying SetAttributedText.
-func (x *LabelNode) SetAttributedText(attributedText *foundation.NSAttributedString) {
-	x.inner.SetAttributedText(attributedText)
+func (x *LabelNode) SetAttributedText(attributedText obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedText:"), objref.IDOf(attributedText))
 }
 
-// FontSize calls the underlying FontSize.
 func (x *LabelNode) FontSize() float64 {
-	return x.inner.FontSize()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("fontSize"))
+	return _r
 }
 
-// SetFontSize calls the underlying SetFontSize.
 func (x *LabelNode) SetFontSize(fontSize float64) {
-	x.inner.SetFontSize(fontSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontSize:"), fontSize)
 }
 
 // Base color that the text is rendered with (if supported by the font)
-//
-// FontColor calls the underlying FontColor.
-func (x *LabelNode) FontColor() *appkit.NSColor {
-	return x.inner.FontColor()
+func (x *LabelNode) FontColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontColor"))
+	return obj.Wrap(_r)
 }
 
-// SetFontColor calls the underlying SetFontColor.
-func (x *LabelNode) SetFontColor(fontColor *appkit.NSColor) {
-	x.inner.SetFontColor(fontColor)
+func (x *LabelNode) SetFontColor(fontColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
 }
 
 // Controls the blending between the rendered text and a color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
-//
-// ColorBlendFactor calls the underlying ColorBlendFactor.
 func (x *LabelNode) ColorBlendFactor() float64 {
-	return x.inner.ColorBlendFactor()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("colorBlendFactor"))
+	return _r
 }
 
-// SetColorBlendFactor calls the underlying SetColorBlendFactor.
 func (x *LabelNode) SetColorBlendFactor(colorBlendFactor float64) {
-	x.inner.SetColorBlendFactor(colorBlendFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorBlendFactor:"), colorBlendFactor)
 }
 
 // Color to be blended with the text based on the colorBlendFactor
-//
-// Color calls the underlying Color.
-func (x *LabelNode) Color() *appkit.NSColor {
-	return x.inner.Color()
+func (x *LabelNode) Color() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+	return obj.Wrap(_r)
 }
 
-// SetColor calls the underlying SetColor.
-func (x *LabelNode) SetColor(color *appkit.NSColor) {
-	x.inner.SetColor(color)
+func (x *LabelNode) SetColor(color obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 }
 
-// Sets the blend mode to use when composing the sprite with the final framebuffer. @see SKNode.SKBlendMode
-//
-// BlendMode calls the underlying BlendMode.
-func (x *LabelNode) BlendMode() SKBlendMode {
-	return SKBlendMode(x.inner.BlendMode())
+// Sets the blend mode to use when composing the sprite with the final framebuffer.
+func (x *LabelNode) BlendMode() BlendMode {
+	_r := objc.Send[BlendMode](objref.IDOf(x), objc.RegisterName("blendMode"))
+	return _r
 }
 
-// SetBlendMode calls the underlying SetBlendMode.
-func (x *LabelNode) SetBlendMode(blendMode SKBlendMode) {
-	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
+func (x *LabelNode) SetBlendMode(blendMode BlendMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendMode:"), blendMode)
 }
-
-func (x *LabelNode) asNode() *raw.SKNode { return &x.inner.SKNode }
 
 // LabelNodeable is the interface implemented by [LabelNode], for mocking and DI.
 type LabelNodeable interface {
-	Unwrap() *raw.SKLabelNode
-	WithVerticalAlignmentMode(verticalAlignmentMode SKLabelVerticalAlignmentMode) *LabelNode
-	WithHorizontalAlignmentMode(horizontalAlignmentMode SKLabelHorizontalAlignmentMode) *LabelNode
+	obj.Object
+	WithVerticalAlignmentMode(verticalAlignmentMode LabelVerticalAlignmentMode) *LabelNode
+	WithHorizontalAlignmentMode(horizontalAlignmentMode LabelHorizontalAlignmentMode) *LabelNode
 	WithNumberOfLines(numberOfLines int) *LabelNode
-	WithLineBreakMode(lineBreakMode appkit.NSLineBreakMode) *LabelNode
 	WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *LabelNode
 	WithFontName(fontName string) *LabelNode
 	WithText(text string) *LabelNode
-	WithAttributedText(attributedText *foundation.NSAttributedString) *LabelNode
+	WithAttributedText(attributedText obj.Object) *LabelNode
 	WithFontSize(fontSize float64) *LabelNode
-	WithFontColor(fontColor *appkit.NSColor) *LabelNode
+	WithFontColor(fontColor obj.Object) *LabelNode
 	WithColorBlendFactor(colorBlendFactor float64) *LabelNode
-	WithColor(color *appkit.NSColor) *LabelNode
-	WithBlendMode(blendMode SKBlendMode) *LabelNode
-	WithPosition(position corefoundation.CGPoint) *LabelNode
+	WithColor(color obj.Object) *LabelNode
+	WithBlendMode(blendMode BlendMode) *LabelNode
 	WithZPosition(zPosition float64) *LabelNode
 	WithZRotation(zRotation float64) *LabelNode
 	WithXScale(xScale float64) *LabelNode
@@ -546,45 +494,42 @@ type LabelNodeable interface {
 	WithUserInteractionEnabled(userInteractionEnabled bool) *LabelNode
 	WithName(name string) *LabelNode
 	WithPhysicsBody(physicsBody *PhysicsBody) *LabelNode
-	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *LabelNode
+	WithUserData(userData obj.Object) *LabelNode
 	WithReachConstraints(reachConstraints *ReachConstraints) *LabelNode
-	WithConstraints(items ...*raw.SKConstraint) *LabelNode
-	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *LabelNode
+	WithConstraints(items ...*Constraint) *LabelNode
+	WithAttributeValues(attributeValues obj.Object) *LabelNode
 	WithAccessibilityElement(accessibilityElement bool) *LabelNode
 	WithAccessibilityRole(accessibilityRole string) *LabelNode
 	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *LabelNode
 	WithAccessibilitySubrole(accessibilitySubrole string) *LabelNode
-	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *LabelNode
-	WithAccessibilityParent(accessibilityParent objc.ID) *LabelNode
+	WithAccessibilityParent(accessibilityParent obj.Object) *LabelNode
 	WithAccessibilityHelp(accessibilityHelp string) *LabelNode
 	WithAccessibilityLabel(accessibilityLabel string) *LabelNode
 	WithAccessibilityEnabled(accessibilityEnabled bool) *LabelNode
-	VerticalAlignmentMode() SKLabelVerticalAlignmentMode
-	SetVerticalAlignmentMode(verticalAlignmentMode SKLabelVerticalAlignmentMode)
-	HorizontalAlignmentMode() SKLabelHorizontalAlignmentMode
-	SetHorizontalAlignmentMode(horizontalAlignmentMode SKLabelHorizontalAlignmentMode)
+	VerticalAlignmentMode() LabelVerticalAlignmentMode
+	SetVerticalAlignmentMode(verticalAlignmentMode LabelVerticalAlignmentMode)
+	HorizontalAlignmentMode() LabelHorizontalAlignmentMode
+	SetHorizontalAlignmentMode(horizontalAlignmentMode LabelHorizontalAlignmentMode)
 	NumberOfLines() int
 	SetNumberOfLines(numberOfLines int)
-	LineBreakMode() appkit.NSLineBreakMode
-	SetLineBreakMode(lineBreakMode appkit.NSLineBreakMode)
 	PreferredMaxLayoutWidth() float64
 	SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64)
 	FontName() string
 	SetFontName(fontName string)
 	Text() string
 	SetText(text string)
-	AttributedText() *foundation.NSAttributedString
-	SetAttributedText(attributedText *foundation.NSAttributedString)
+	AttributedText() obj.Object
+	SetAttributedText(attributedText obj.Object)
 	FontSize() float64
 	SetFontSize(fontSize float64)
-	FontColor() *appkit.NSColor
-	SetFontColor(fontColor *appkit.NSColor)
+	FontColor() obj.Object
+	SetFontColor(fontColor obj.Object)
 	ColorBlendFactor() float64
 	SetColorBlendFactor(colorBlendFactor float64)
-	Color() *appkit.NSColor
-	SetColor(color *appkit.NSColor)
-	BlendMode() SKBlendMode
-	SetBlendMode(blendMode SKBlendMode)
+	Color() obj.Object
+	SetColor(color obj.Object)
+	BlendMode() BlendMode
+	SetBlendMode(blendMode BlendMode)
 }
 
 var _ LabelNodeable = (*LabelNode)(nil)

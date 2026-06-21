@@ -5,99 +5,88 @@
 package spritekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A container for dynamic shader data associated with a node.
 //
-// AttributeValue wraps [raw.SKAttributeValue] with a fluent Go API.
+// AttributeValue is an idiomatic wrapper over the Objective-C class SKAttributeValue.
 type AttributeValue struct {
-	inner *raw.SKAttributeValue
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKAttributeValue].
-func (x *AttributeValue) Unwrap() *raw.SKAttributeValue { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AttributeValue) ID() objc.ID { return x.inner.Ptr() }
-
-// AttributeValueFromID adopts an existing object pointer as a AttributeValue (nil for 0).
+// AttributeValueFromID adopts an existing Objective-C object as a AttributeValue
+// (nil for 0), retaining it and registering a release finalizer.
 func AttributeValueFromID(id objc.ID) *AttributeValue {
 	if id == 0 {
 		return nil
 	}
-	return &AttributeValue{inner: raw.SKAttributeValueFromID(id)}
+	x := &AttributeValue{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAttributeValue creates a new [AttributeValue].
+// attributeValueAdopt wraps an Objective-C object that this code just created as a
+// AttributeValue (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func attributeValueAdopt(id objc.ID) *AttributeValue {
+	if id == 0 {
+		return nil
+	}
+	x := &AttributeValue{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AttributeValue) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AttributeValue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AttributeValue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAttributeValue creates a new AttributeValue.
 func NewAttributeValue() *AttributeValue {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKAttributeValue")), objc.RegisterName("new"))
-	return &AttributeValue{inner: raw.SKAttributeValueFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKAttributeValue")), objc.RegisterName("new"))
+	return attributeValueAdopt(_id)
 }
 
 // The receiver’s floating point value.
 //
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
 func (x *AttributeValue) WithFloatValue(floatValue float32) *AttributeValue {
-	x.inner.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
-// FloatValue calls the underlying FloatValue.
 func (x *AttributeValue) FloatValue() float32 {
-	return x.inner.FloatValue()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("floatValue"))
+	return _r
 }
 
-// SetFloatValue calls the underlying SetFloatValue.
 func (x *AttributeValue) SetFloatValue(floatValue float32) {
-	x.inner.SetFloatValue(floatValue)
-}
-
-// VectorFloat2Value calls the underlying VectorFloat2Value.
-func (x *AttributeValue) VectorFloat2Value() unsafe.Pointer {
-	return x.inner.VectorFloat2Value()
-}
-
-// SetVectorFloat2Value calls the underlying SetVectorFloat2Value.
-func (x *AttributeValue) SetVectorFloat2Value(vectorFloat2Value unsafe.Pointer) {
-	x.inner.SetVectorFloat2Value(vectorFloat2Value)
-}
-
-// VectorFloat3Value calls the underlying VectorFloat3Value.
-func (x *AttributeValue) VectorFloat3Value() unsafe.Pointer {
-	return x.inner.VectorFloat3Value()
-}
-
-// SetVectorFloat3Value calls the underlying SetVectorFloat3Value.
-func (x *AttributeValue) SetVectorFloat3Value(vectorFloat3Value unsafe.Pointer) {
-	x.inner.SetVectorFloat3Value(vectorFloat3Value)
-}
-
-// VectorFloat4Value calls the underlying VectorFloat4Value.
-func (x *AttributeValue) VectorFloat4Value() unsafe.Pointer {
-	return x.inner.VectorFloat4Value()
-}
-
-// SetVectorFloat4Value calls the underlying SetVectorFloat4Value.
-func (x *AttributeValue) SetVectorFloat4Value(vectorFloat4Value unsafe.Pointer) {
-	x.inner.SetVectorFloat4Value(vectorFloat4Value)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 }
 
 // AttributeValueable is the interface implemented by [AttributeValue], for mocking and DI.
 type AttributeValueable interface {
-	Unwrap() *raw.SKAttributeValue
+	obj.Object
 	WithFloatValue(floatValue float32) *AttributeValue
 	FloatValue() float32
 	SetFloatValue(floatValue float32)
-	VectorFloat2Value() unsafe.Pointer
-	SetVectorFloat2Value(vectorFloat2Value unsafe.Pointer)
-	VectorFloat3Value() unsafe.Pointer
-	SetVectorFloat3Value(vectorFloat3Value unsafe.Pointer)
-	VectorFloat4Value() unsafe.Pointer
-	SetVectorFloat4Value(vectorFloat4Value unsafe.Pointer)
 }
 
 var _ AttributeValueable = (*AttributeValue)(nil)

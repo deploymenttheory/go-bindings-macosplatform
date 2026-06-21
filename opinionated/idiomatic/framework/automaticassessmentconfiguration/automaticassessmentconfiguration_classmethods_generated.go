@@ -5,24 +5,21 @@
 package automaticassessmentconfiguration
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automaticassessmentconfiguration"
+	"github.com/ebitengine/purego/objc"
 )
 
-// New calls the underlying AEAssessmentParticipantConfigurationNew.
+// Creates a new assessment participant configuration instance.
 func New() *AssessmentParticipantConfiguration {
-	_r := raw.AEAssessmentParticipantConfigurationNew()
-	if _r == nil {
-		return nil
-	}
-	return &AssessmentParticipantConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AEAssessmentParticipantConfiguration")), objc.RegisterName("new"))
+	return AssessmentParticipantConfigurationFromID(_r)
 }
 
-// SupportsMultipleParticipants calls the underlying AEAssessmentSessionSupportsMultipleParticipants.
 func SupportsMultipleParticipants() bool {
-	return raw.AEAssessmentSessionSupportsMultipleParticipants()
+	_r := objc.Send[bool](objc.ID(_class("AEAssessmentSession")), objc.RegisterName("supportsMultipleParticipants"))
+	return _r
 }
 
-// SupportsConfigurationUpdates calls the underlying AEAssessmentSessionSupportsConfigurationUpdates.
 func SupportsConfigurationUpdates() bool {
-	return raw.AEAssessmentSessionSupportsConfigurationUpdates()
+	_r := objc.Send[bool](objc.ID(_class("AEAssessmentSession")), objc.RegisterName("supportsConfigurationUpdates"))
+	return _r
 }

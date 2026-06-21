@@ -5,113 +5,86 @@
 package glkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Surface appearance properties for use in GLKit rendering effects.
 //
-// EffectPropertyMaterial wraps [raw.GLKEffectPropertyMaterial] with a fluent Go API.
+// EffectPropertyMaterial is an idiomatic wrapper over the Objective-C class GLKEffectPropertyMaterial.
 type EffectPropertyMaterial struct {
-	inner *raw.GLKEffectPropertyMaterial
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GLKEffectPropertyMaterial].
-func (x *EffectPropertyMaterial) Unwrap() *raw.GLKEffectPropertyMaterial { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EffectPropertyMaterial) ID() objc.ID { return x.inner.Ptr() }
-
-// EffectPropertyMaterialFromID adopts an existing object pointer as a EffectPropertyMaterial (nil for 0).
+// EffectPropertyMaterialFromID adopts an existing Objective-C object as a EffectPropertyMaterial
+// (nil for 0), retaining it and registering a release finalizer.
 func EffectPropertyMaterialFromID(id objc.ID) *EffectPropertyMaterial {
 	if id == 0 {
 		return nil
 	}
-	return &EffectPropertyMaterial{inner: raw.GLKEffectPropertyMaterialFromID(id)}
+	x := &EffectPropertyMaterial{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEffectPropertyMaterial creates a new [EffectPropertyMaterial].
+// effectPropertyMaterialAdopt wraps an Objective-C object that this code just created as a
+// EffectPropertyMaterial (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func effectPropertyMaterialAdopt(id objc.ID) *EffectPropertyMaterial {
+	if id == 0 {
+		return nil
+	}
+	x := &EffectPropertyMaterial{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EffectPropertyMaterial) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EffectPropertyMaterial) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EffectPropertyMaterial) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEffectPropertyMaterial creates a new EffectPropertyMaterial.
 func NewEffectPropertyMaterial() *EffectPropertyMaterial {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GLKEffectPropertyMaterial")), objc.RegisterName("new"))
-	return &EffectPropertyMaterial{inner: raw.GLKEffectPropertyMaterialFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GLKEffectPropertyMaterial")), objc.RegisterName("new"))
+	return effectPropertyMaterialAdopt(_id)
 }
 
 // The shininess of the material, used when calculating specular lighting effects.
 //
-// WithShininess sets the shininess property and returns the receiver for chaining.
+// WithShininess sets shininess and returns the receiver so calls can be chained.
 func (x *EffectPropertyMaterial) WithShininess(shininess float32) *EffectPropertyMaterial {
-	x.inner.SetShininess(shininess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShininess:"), shininess)
 	return x
 }
 
-// AmbientColor calls the underlying AmbientColor.
-func (x *EffectPropertyMaterial) AmbientColor() unsafe.Pointer {
-	return x.inner.AmbientColor()
-}
-
-// SetAmbientColor calls the underlying SetAmbientColor.
-func (x *EffectPropertyMaterial) SetAmbientColor(ambientColor unsafe.Pointer) {
-	x.inner.SetAmbientColor(ambientColor)
-}
-
-// DiffuseColor calls the underlying DiffuseColor.
-func (x *EffectPropertyMaterial) DiffuseColor() unsafe.Pointer {
-	return x.inner.DiffuseColor()
-}
-
-// SetDiffuseColor calls the underlying SetDiffuseColor.
-func (x *EffectPropertyMaterial) SetDiffuseColor(diffuseColor unsafe.Pointer) {
-	x.inner.SetDiffuseColor(diffuseColor)
-}
-
-// SpecularColor calls the underlying SpecularColor.
-func (x *EffectPropertyMaterial) SpecularColor() unsafe.Pointer {
-	return x.inner.SpecularColor()
-}
-
-// SetSpecularColor calls the underlying SetSpecularColor.
-func (x *EffectPropertyMaterial) SetSpecularColor(specularColor unsafe.Pointer) {
-	x.inner.SetSpecularColor(specularColor)
-}
-
-// EmissiveColor calls the underlying EmissiveColor.
-func (x *EffectPropertyMaterial) EmissiveColor() unsafe.Pointer {
-	return x.inner.EmissiveColor()
-}
-
-// SetEmissiveColor calls the underlying SetEmissiveColor.
-func (x *EffectPropertyMaterial) SetEmissiveColor(emissiveColor unsafe.Pointer) {
-	x.inner.SetEmissiveColor(emissiveColor)
-}
-
-// Shininess calls the underlying Shininess.
 func (x *EffectPropertyMaterial) Shininess() float32 {
-	return x.inner.Shininess()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("shininess"))
+	return _r
 }
 
-// SetShininess calls the underlying SetShininess.
 func (x *EffectPropertyMaterial) SetShininess(shininess float32) {
-	x.inner.SetShininess(shininess)
-}
-
-func (x *EffectPropertyMaterial) asEffectProperty() *raw.GLKEffectProperty {
-	return &x.inner.GLKEffectProperty
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShininess:"), shininess)
 }
 
 // EffectPropertyMaterialable is the interface implemented by [EffectPropertyMaterial], for mocking and DI.
 type EffectPropertyMaterialable interface {
-	Unwrap() *raw.GLKEffectPropertyMaterial
+	obj.Object
 	WithShininess(shininess float32) *EffectPropertyMaterial
-	AmbientColor() unsafe.Pointer
-	SetAmbientColor(ambientColor unsafe.Pointer)
-	DiffuseColor() unsafe.Pointer
-	SetDiffuseColor(diffuseColor unsafe.Pointer)
-	SpecularColor() unsafe.Pointer
-	SetSpecularColor(specularColor unsafe.Pointer)
-	EmissiveColor() unsafe.Pointer
-	SetEmissiveColor(emissiveColor unsafe.Pointer)
 	Shininess() float32
 	SetShininess(shininess float32)
 }

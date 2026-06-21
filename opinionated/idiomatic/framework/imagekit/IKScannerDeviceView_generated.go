@@ -5,320 +5,296 @@
 package imagekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ScannerDeviceView wraps [raw.IKScannerDeviceView] with a fluent Go API.
+// ScannerDeviceView is an idiomatic wrapper over the Objective-C class IKScannerDeviceView.
 type ScannerDeviceView struct {
-	inner *raw.IKScannerDeviceView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IKScannerDeviceView].
-func (x *ScannerDeviceView) Unwrap() *raw.IKScannerDeviceView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScannerDeviceView) ID() objc.ID { return x.inner.Ptr() }
-
-// ScannerDeviceViewFromID adopts an existing object pointer as a ScannerDeviceView (nil for 0).
+// ScannerDeviceViewFromID adopts an existing Objective-C object as a ScannerDeviceView
+// (nil for 0), retaining it and registering a release finalizer.
 func ScannerDeviceViewFromID(id objc.ID) *ScannerDeviceView {
 	if id == 0 {
 		return nil
 	}
-	return &ScannerDeviceView{inner: raw.IKScannerDeviceViewFromID(id)}
+	x := &ScannerDeviceView{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewScannerDeviceView creates a new [ScannerDeviceView].
+// scannerDeviceViewAdopt wraps an Objective-C object that this code just created as a
+// ScannerDeviceView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scannerDeviceViewAdopt(id objc.ID) *ScannerDeviceView {
+	if id == 0 {
+		return nil
+	}
+	x := &ScannerDeviceView{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScannerDeviceView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScannerDeviceView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScannerDeviceView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScannerDeviceView creates a new ScannerDeviceView.
 func NewScannerDeviceView() *ScannerDeviceView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IKScannerDeviceView")), objc.RegisterName("new"))
-	return &ScannerDeviceView{inner: raw.IKScannerDeviceViewFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("IKScannerDeviceView")), objc.RegisterName("new"))
+	return scannerDeviceViewAdopt(_id)
 }
 
-// @property delegate @abstract delegate of the IKScannerDeviceView.
+// the scanner device.
 //
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *ScannerDeviceView) WithDelegate(delegate raw.IKScannerDeviceViewDelegate) *ScannerDeviceView {
-	x.inner.SetDelegate(delegate)
+// WithScannerDevice sets scannerDevice and returns the receiver so calls can be chained.
+func (x *ScannerDeviceView) WithScannerDevice(scannerDevice obj.Object) *ScannerDeviceView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScannerDevice:"), objref.IDOf(scannerDevice))
 	return x
 }
 
-// @property scannerDevice @abstract the scanner device.
+// current display mode.
 //
-// WithScannerDevice sets the scannerDevice property and returns the receiver for chaining.
-func (x *ScannerDeviceView) WithScannerDevice(scannerDevice *imagecapturecore.ICScannerDevice) *ScannerDeviceView {
-	x.inner.SetScannerDevice(scannerDevice)
+// WithMode sets mode and returns the receiver so calls can be chained.
+func (x *ScannerDeviceView) WithMode(mode ScannerDeviceViewDisplayMode) *ScannerDeviceView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 	return x
 }
 
-// @property mode @abstract current display mode.
+// support a simple scanning UI.
 //
-// WithMode sets the mode property and returns the receiver for chaining.
-func (x *ScannerDeviceView) WithMode(mode IKScannerDeviceViewDisplayMode) *ScannerDeviceView {
-	x.inner.SetMode(raw.IKScannerDeviceViewDisplayMode(mode))
-	return x
-}
-
-// @property hasDisplayModeSimple @abstract support a simple scanning UI.
-//
-// WithHasDisplayModeSimple sets the hasDisplayModeSimple property and returns the receiver for chaining.
+// WithHasDisplayModeSimple sets hasDisplayModeSimple and returns the receiver so calls can be chained.
 func (x *ScannerDeviceView) WithHasDisplayModeSimple(hasDisplayModeSimple bool) *ScannerDeviceView {
-	x.inner.SetHasDisplayModeSimple(hasDisplayModeSimple)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDisplayModeSimple:"), hasDisplayModeSimple)
 	return x
 }
 
-// @property hasDisplayModeAdvanced @abstract support advanced scanning UI.
+// support advanced scanning UI.
 //
-// WithHasDisplayModeAdvanced sets the hasDisplayModeAdvanced property and returns the receiver for chaining.
+// WithHasDisplayModeAdvanced sets hasDisplayModeAdvanced and returns the receiver so calls can be chained.
 func (x *ScannerDeviceView) WithHasDisplayModeAdvanced(hasDisplayModeAdvanced bool) *ScannerDeviceView {
-	x.inner.SetHasDisplayModeAdvanced(hasDisplayModeAdvanced)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDisplayModeAdvanced:"), hasDisplayModeAdvanced)
 	return x
 }
 
-// @property transferMode @abstract transfer mode either file based - or - in memory.
+// transfer mode either file based - or - in memory.
 //
-// WithTransferMode sets the transferMode property and returns the receiver for chaining.
-func (x *ScannerDeviceView) WithTransferMode(transferMode IKScannerDeviceViewTransferMode) *ScannerDeviceView {
-	x.inner.SetTransferMode(raw.IKScannerDeviceViewTransferMode(transferMode))
+// WithTransferMode sets transferMode and returns the receiver so calls can be chained.
+func (x *ScannerDeviceView) WithTransferMode(transferMode ScannerDeviceViewTransferMode) *ScannerDeviceView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransferMode:"), transferMode)
 	return x
 }
 
-// @property scanControlLabel @abstract label for the 'Scan' control.
+// label for the 'Scan' control.
 //
-// WithScanControlLabel sets the scanControlLabel property and returns the receiver for chaining.
+// WithScanControlLabel sets scanControlLabel and returns the receiver so calls can be chained.
 func (x *ScannerDeviceView) WithScanControlLabel(scanControlLabel string) *ScannerDeviceView {
-	x.inner.SetScanControlLabel(foundation.NSStringStringWithUTF8String(scanControlLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanControlLabel:"), purego.NSString(scanControlLabel))
 	return x
 }
 
-// @property overviewControlLabel @abstract label for the 'Overview' control.
+// label for the 'Overview' control.
 //
-// WithOverviewControlLabel sets the overviewControlLabel property and returns the receiver for chaining.
+// WithOverviewControlLabel sets overviewControlLabel and returns the receiver so calls can be chained.
 func (x *ScannerDeviceView) WithOverviewControlLabel(overviewControlLabel string) *ScannerDeviceView {
-	x.inner.SetOverviewControlLabel(foundation.NSStringStringWithUTF8String(overviewControlLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverviewControlLabel:"), purego.NSString(overviewControlLabel))
 	return x
 }
 
-// @property displaysDownloadsDirectoryControl @abstract show a downloads directory control.
+// show a downloads directory control.
 //
-// WithDisplaysDownloadsDirectoryControl sets the displaysDownloadsDirectoryControl property and returns the receiver for chaining.
+// WithDisplaysDownloadsDirectoryControl sets displaysDownloadsDirectoryControl and returns the receiver so calls can be chained.
 func (x *ScannerDeviceView) WithDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) *ScannerDeviceView {
-	x.inner.SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysDownloadsDirectoryControl:"), displaysDownloadsDirectoryControl)
 	return x
 }
 
-// @property downloadsDirectory @abstract downloads directory.
+// downloads directory.
 //
-// WithDownloadsDirectory sets the downloadsDirectory property and returns the receiver for chaining.
+// WithDownloadsDirectory sets downloadsDirectory and returns the receiver so calls can be chained.
 func (x *ScannerDeviceView) WithDownloadsDirectory(downloadsDirectory string) *ScannerDeviceView {
-	x.inner.SetDownloadsDirectory(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(downloadsDirectory)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownloadsDirectory:"), rt.FileURL(downloadsDirectory))
 	return x
 }
 
-// @property documentName @abstract document name.
+// document name.
 //
-// WithDocumentName sets the documentName property and returns the receiver for chaining.
+// WithDocumentName sets documentName and returns the receiver so calls can be chained.
 func (x *ScannerDeviceView) WithDocumentName(documentName string) *ScannerDeviceView {
-	x.inner.SetDocumentName(foundation.NSStringStringWithUTF8String(documentName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentName:"), purego.NSString(documentName))
 	return x
 }
 
-// @property displaysPostProcessApplicationControl @abstract show a postprocessing application control.
+// show a postprocessing application control.
 //
-// WithDisplaysPostProcessApplicationControl sets the displaysPostProcessApplicationControl property and returns the receiver for chaining.
+// WithDisplaysPostProcessApplicationControl sets displaysPostProcessApplicationControl and returns the receiver so calls can be chained.
 func (x *ScannerDeviceView) WithDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) *ScannerDeviceView {
-	x.inner.SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysPostProcessApplicationControl:"), displaysPostProcessApplicationControl)
 	return x
 }
 
-// @property postProcessApplication @abstract postprocessing application.
+// postprocessing application.
 //
-// WithPostProcessApplication sets the postProcessApplication property and returns the receiver for chaining.
+// WithPostProcessApplication sets postProcessApplication and returns the receiver so calls can be chained.
 func (x *ScannerDeviceView) WithPostProcessApplication(postProcessApplication string) *ScannerDeviceView {
-	x.inner.SetPostProcessApplication(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(postProcessApplication)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostProcessApplication:"), rt.FileURL(postProcessApplication))
 	return x
 }
 
-// @property delegate @abstract delegate of the IKScannerDeviceView.
-//
-// Delegate calls the underlying Delegate.
-func (x *ScannerDeviceView) Delegate() raw.IKScannerDeviceViewDelegate {
-	return x.inner.Delegate()
+// the scanner device.
+func (x *ScannerDeviceView) ScannerDevice() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scannerDevice"))
+	return obj.Wrap(_r)
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *ScannerDeviceView) SetDelegate(delegate raw.IKScannerDeviceViewDelegate) {
-	x.inner.SetDelegate(delegate)
+func (x *ScannerDeviceView) SetScannerDevice(scannerDevice obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScannerDevice:"), objref.IDOf(scannerDevice))
 }
 
-// @property scannerDevice @abstract the scanner device.
-//
-// ScannerDevice calls the underlying ScannerDevice.
-func (x *ScannerDeviceView) ScannerDevice() *imagecapturecore.ICScannerDevice {
-	return x.inner.ScannerDevice()
+// current display mode.
+func (x *ScannerDeviceView) Mode() ScannerDeviceViewDisplayMode {
+	_r := objc.Send[ScannerDeviceViewDisplayMode](objref.IDOf(x), objc.RegisterName("mode"))
+	return _r
 }
 
-// SetScannerDevice calls the underlying SetScannerDevice.
-func (x *ScannerDeviceView) SetScannerDevice(scannerDevice *imagecapturecore.ICScannerDevice) {
-	x.inner.SetScannerDevice(scannerDevice)
+func (x *ScannerDeviceView) SetMode(mode ScannerDeviceViewDisplayMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 }
 
-// @property mode @abstract current display mode.
-//
-// Mode calls the underlying Mode.
-func (x *ScannerDeviceView) Mode() IKScannerDeviceViewDisplayMode {
-	return IKScannerDeviceViewDisplayMode(x.inner.Mode())
-}
-
-// SetMode calls the underlying SetMode.
-func (x *ScannerDeviceView) SetMode(mode IKScannerDeviceViewDisplayMode) {
-	x.inner.SetMode(raw.IKScannerDeviceViewDisplayMode(mode))
-}
-
-// @property hasDisplayModeSimple @abstract support a simple scanning UI.
-//
-// HasDisplayModeSimple calls the underlying HasDisplayModeSimple.
+// support a simple scanning UI.
 func (x *ScannerDeviceView) HasDisplayModeSimple() bool {
-	return x.inner.HasDisplayModeSimple()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasDisplayModeSimple"))
+	return _r
 }
 
-// SetHasDisplayModeSimple calls the underlying SetHasDisplayModeSimple.
 func (x *ScannerDeviceView) SetHasDisplayModeSimple(hasDisplayModeSimple bool) {
-	x.inner.SetHasDisplayModeSimple(hasDisplayModeSimple)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDisplayModeSimple:"), hasDisplayModeSimple)
 }
 
-// @property hasDisplayModeAdvanced @abstract support advanced scanning UI.
-//
-// HasDisplayModeAdvanced calls the underlying HasDisplayModeAdvanced.
+// support advanced scanning UI.
 func (x *ScannerDeviceView) HasDisplayModeAdvanced() bool {
-	return x.inner.HasDisplayModeAdvanced()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasDisplayModeAdvanced"))
+	return _r
 }
 
-// SetHasDisplayModeAdvanced calls the underlying SetHasDisplayModeAdvanced.
 func (x *ScannerDeviceView) SetHasDisplayModeAdvanced(hasDisplayModeAdvanced bool) {
-	x.inner.SetHasDisplayModeAdvanced(hasDisplayModeAdvanced)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDisplayModeAdvanced:"), hasDisplayModeAdvanced)
 }
 
-// @property transferMode @abstract transfer mode either file based - or - in memory.
-//
-// TransferMode calls the underlying TransferMode.
-func (x *ScannerDeviceView) TransferMode() IKScannerDeviceViewTransferMode {
-	return IKScannerDeviceViewTransferMode(x.inner.TransferMode())
+// transfer mode either file based - or - in memory.
+func (x *ScannerDeviceView) TransferMode() ScannerDeviceViewTransferMode {
+	_r := objc.Send[ScannerDeviceViewTransferMode](objref.IDOf(x), objc.RegisterName("transferMode"))
+	return _r
 }
 
-// SetTransferMode calls the underlying SetTransferMode.
-func (x *ScannerDeviceView) SetTransferMode(transferMode IKScannerDeviceViewTransferMode) {
-	x.inner.SetTransferMode(raw.IKScannerDeviceViewTransferMode(transferMode))
+func (x *ScannerDeviceView) SetTransferMode(transferMode ScannerDeviceViewTransferMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransferMode:"), transferMode)
 }
 
-// @property scanControlLabel @abstract label for the 'Scan' control.
-//
-// ScanControlLabel calls the underlying ScanControlLabel.
+// label for the 'Scan' control.
 func (x *ScannerDeviceView) ScanControlLabel() string {
-	_r := x.inner.ScanControlLabel()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scanControlLabel"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetScanControlLabel calls the underlying SetScanControlLabel.
 func (x *ScannerDeviceView) SetScanControlLabel(scanControlLabel string) {
-	x.inner.SetScanControlLabel(foundation.NSStringStringWithUTF8String(scanControlLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanControlLabel:"), purego.NSString(scanControlLabel))
 }
 
-// @property overviewControlLabel @abstract label for the 'Overview' control.
-//
-// OverviewControlLabel calls the underlying OverviewControlLabel.
+// label for the 'Overview' control.
 func (x *ScannerDeviceView) OverviewControlLabel() string {
-	_r := x.inner.OverviewControlLabel()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("overviewControlLabel"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetOverviewControlLabel calls the underlying SetOverviewControlLabel.
 func (x *ScannerDeviceView) SetOverviewControlLabel(overviewControlLabel string) {
-	x.inner.SetOverviewControlLabel(foundation.NSStringStringWithUTF8String(overviewControlLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverviewControlLabel:"), purego.NSString(overviewControlLabel))
 }
 
-// @property displaysDownloadsDirectoryControl @abstract show a downloads directory control.
-//
-// DisplaysDownloadsDirectoryControl calls the underlying DisplaysDownloadsDirectoryControl.
+// show a downloads directory control.
 func (x *ScannerDeviceView) DisplaysDownloadsDirectoryControl() bool {
-	return x.inner.DisplaysDownloadsDirectoryControl()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysDownloadsDirectoryControl"))
+	return _r
 }
 
-// SetDisplaysDownloadsDirectoryControl calls the underlying SetDisplaysDownloadsDirectoryControl.
 func (x *ScannerDeviceView) SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) {
-	x.inner.SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysDownloadsDirectoryControl:"), displaysDownloadsDirectoryControl)
 }
 
-// @property downloadsDirectory @abstract downloads directory.
-//
-// DownloadsDirectory calls the underlying DownloadsDirectory.
-func (x *ScannerDeviceView) DownloadsDirectory() *foundation.NSURL {
-	return x.inner.DownloadsDirectory()
+// downloads directory.
+func (x *ScannerDeviceView) DownloadsDirectory() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadsDirectory"))
+	return obj.Wrap(_r)
 }
 
-// SetDownloadsDirectory calls the underlying SetDownloadsDirectory.
 func (x *ScannerDeviceView) SetDownloadsDirectory(downloadsDirectory string) {
-	x.inner.SetDownloadsDirectory(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(downloadsDirectory)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownloadsDirectory:"), rt.FileURL(downloadsDirectory))
 }
 
-// @property documentName @abstract document name.
-//
-// DocumentName calls the underlying DocumentName.
+// document name.
 func (x *ScannerDeviceView) DocumentName() string {
-	_r := x.inner.DocumentName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetDocumentName calls the underlying SetDocumentName.
 func (x *ScannerDeviceView) SetDocumentName(documentName string) {
-	x.inner.SetDocumentName(foundation.NSStringStringWithUTF8String(documentName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentName:"), purego.NSString(documentName))
 }
 
-// @property displaysPostProcessApplicationControl @abstract show a postprocessing application control.
-//
-// DisplaysPostProcessApplicationControl calls the underlying DisplaysPostProcessApplicationControl.
+// show a postprocessing application control.
 func (x *ScannerDeviceView) DisplaysPostProcessApplicationControl() bool {
-	return x.inner.DisplaysPostProcessApplicationControl()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysPostProcessApplicationControl"))
+	return _r
 }
 
-// SetDisplaysPostProcessApplicationControl calls the underlying SetDisplaysPostProcessApplicationControl.
 func (x *ScannerDeviceView) SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) {
-	x.inner.SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysPostProcessApplicationControl:"), displaysPostProcessApplicationControl)
 }
 
-// @property postProcessApplication @abstract postprocessing application.
-//
-// PostProcessApplication calls the underlying PostProcessApplication.
-func (x *ScannerDeviceView) PostProcessApplication() *foundation.NSURL {
-	return x.inner.PostProcessApplication()
+// postprocessing application.
+func (x *ScannerDeviceView) PostProcessApplication() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postProcessApplication"))
+	return obj.Wrap(_r)
 }
 
-// SetPostProcessApplication calls the underlying SetPostProcessApplication.
 func (x *ScannerDeviceView) SetPostProcessApplication(postProcessApplication string) {
-	x.inner.SetPostProcessApplication(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(postProcessApplication)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostProcessApplication:"), rt.FileURL(postProcessApplication))
 }
 
 // ScannerDeviceViewable is the interface implemented by [ScannerDeviceView], for mocking and DI.
 type ScannerDeviceViewable interface {
-	Unwrap() *raw.IKScannerDeviceView
-	WithDelegate(delegate raw.IKScannerDeviceViewDelegate) *ScannerDeviceView
-	WithScannerDevice(scannerDevice *imagecapturecore.ICScannerDevice) *ScannerDeviceView
-	WithMode(mode IKScannerDeviceViewDisplayMode) *ScannerDeviceView
+	obj.Object
+	WithScannerDevice(scannerDevice obj.Object) *ScannerDeviceView
+	WithMode(mode ScannerDeviceViewDisplayMode) *ScannerDeviceView
 	WithHasDisplayModeSimple(hasDisplayModeSimple bool) *ScannerDeviceView
 	WithHasDisplayModeAdvanced(hasDisplayModeAdvanced bool) *ScannerDeviceView
-	WithTransferMode(transferMode IKScannerDeviceViewTransferMode) *ScannerDeviceView
+	WithTransferMode(transferMode ScannerDeviceViewTransferMode) *ScannerDeviceView
 	WithScanControlLabel(scanControlLabel string) *ScannerDeviceView
 	WithOverviewControlLabel(overviewControlLabel string) *ScannerDeviceView
 	WithDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) *ScannerDeviceView
@@ -326,31 +302,29 @@ type ScannerDeviceViewable interface {
 	WithDocumentName(documentName string) *ScannerDeviceView
 	WithDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) *ScannerDeviceView
 	WithPostProcessApplication(postProcessApplication string) *ScannerDeviceView
-	Delegate() raw.IKScannerDeviceViewDelegate
-	SetDelegate(delegate raw.IKScannerDeviceViewDelegate)
-	ScannerDevice() *imagecapturecore.ICScannerDevice
-	SetScannerDevice(scannerDevice *imagecapturecore.ICScannerDevice)
-	Mode() IKScannerDeviceViewDisplayMode
-	SetMode(mode IKScannerDeviceViewDisplayMode)
+	ScannerDevice() obj.Object
+	SetScannerDevice(scannerDevice obj.Object)
+	Mode() ScannerDeviceViewDisplayMode
+	SetMode(mode ScannerDeviceViewDisplayMode)
 	HasDisplayModeSimple() bool
 	SetHasDisplayModeSimple(hasDisplayModeSimple bool)
 	HasDisplayModeAdvanced() bool
 	SetHasDisplayModeAdvanced(hasDisplayModeAdvanced bool)
-	TransferMode() IKScannerDeviceViewTransferMode
-	SetTransferMode(transferMode IKScannerDeviceViewTransferMode)
+	TransferMode() ScannerDeviceViewTransferMode
+	SetTransferMode(transferMode ScannerDeviceViewTransferMode)
 	ScanControlLabel() string
 	SetScanControlLabel(scanControlLabel string)
 	OverviewControlLabel() string
 	SetOverviewControlLabel(overviewControlLabel string)
 	DisplaysDownloadsDirectoryControl() bool
 	SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool)
-	DownloadsDirectory() *foundation.NSURL
+	DownloadsDirectory() obj.Object
 	SetDownloadsDirectory(downloadsDirectory string)
 	DocumentName() string
 	SetDocumentName(documentName string)
 	DisplaysPostProcessApplicationControl() bool
 	SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool)
-	PostProcessApplication() *foundation.NSURL
+	PostProcessApplication() obj.Object
 	SetPostProcessApplication(postProcessApplication string)
 }
 

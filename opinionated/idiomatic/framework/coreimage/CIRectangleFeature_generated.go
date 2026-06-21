@@ -5,76 +5,68 @@
 package coreimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Information about a rectangular region detected in a still or video image.
 //
-// RectangleFeature wraps [raw.CIRectangleFeature] with a fluent Go API.
+// RectangleFeature is an idiomatic wrapper over the Objective-C class CIRectangleFeature.
 type RectangleFeature struct {
-	inner *raw.CIRectangleFeature
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CIRectangleFeature].
-func (x *RectangleFeature) Unwrap() *raw.CIRectangleFeature { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RectangleFeature) ID() objc.ID { return x.inner.Ptr() }
-
-// RectangleFeatureFromID adopts an existing object pointer as a RectangleFeature (nil for 0).
+// RectangleFeatureFromID adopts an existing Objective-C object as a RectangleFeature
+// (nil for 0), retaining it and registering a release finalizer.
 func RectangleFeatureFromID(id objc.ID) *RectangleFeature {
 	if id == 0 {
 		return nil
 	}
-	return &RectangleFeature{inner: raw.CIRectangleFeatureFromID(id)}
+	x := &RectangleFeature{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRectangleFeature creates a new [RectangleFeature].
+// rectangleFeatureAdopt wraps an Objective-C object that this code just created as a
+// RectangleFeature (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rectangleFeatureAdopt(id objc.ID) *RectangleFeature {
+	if id == 0 {
+		return nil
+	}
+	x := &RectangleFeature{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RectangleFeature) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RectangleFeature) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RectangleFeature) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRectangleFeature creates a new RectangleFeature.
 func NewRectangleFeature() *RectangleFeature {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CIRectangleFeature")), objc.RegisterName("new"))
-	return &RectangleFeature{inner: raw.CIRectangleFeatureFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CIRectangleFeature")), objc.RegisterName("new"))
+	return rectangleFeatureAdopt(_id)
 }
-
-// The image coordinate of the upper-left corner of the detected rectangle.
-//
-// TopLeft calls the underlying TopLeft.
-func (x *RectangleFeature) TopLeft() corefoundation.CGPoint {
-	return x.inner.TopLeft()
-}
-
-// The image coordinate of the upper-right corner of the detected rectangle.
-//
-// TopRight calls the underlying TopRight.
-func (x *RectangleFeature) TopRight() corefoundation.CGPoint {
-	return x.inner.TopRight()
-}
-
-// The image coordinate of the lower-left corner of the detected rectangle.
-//
-// BottomLeft calls the underlying BottomLeft.
-func (x *RectangleFeature) BottomLeft() corefoundation.CGPoint {
-	return x.inner.BottomLeft()
-}
-
-// The image coordinate of the lower-right corner of the detected rectangle.
-//
-// BottomRight calls the underlying BottomRight.
-func (x *RectangleFeature) BottomRight() corefoundation.CGPoint {
-	return x.inner.BottomRight()
-}
-
-func (x *RectangleFeature) asFeature() *raw.CIFeature { return &x.inner.CIFeature }
 
 // RectangleFeatureable is the interface implemented by [RectangleFeature], for mocking and DI.
 type RectangleFeatureable interface {
-	Unwrap() *raw.CIRectangleFeature
-	TopLeft() corefoundation.CGPoint
-	TopRight() corefoundation.CGPoint
-	BottomLeft() corefoundation.CGPoint
-	BottomRight() corefoundation.CGPoint
+	obj.Object
 }
 
 var _ RectangleFeatureable = (*RectangleFeature)(nil)

@@ -5,132 +5,95 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A filter that performs a Euclidean distance transform on an image.
 //
-// ImageEuclideanDistanceTransform wraps [raw.MPSImageEuclideanDistanceTransform] with a fluent Go API.
+// ImageEuclideanDistanceTransform is an idiomatic wrapper over the Objective-C class MPSImageEuclideanDistanceTransform.
 type ImageEuclideanDistanceTransform struct {
-	inner *raw.MPSImageEuclideanDistanceTransform
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageEuclideanDistanceTransform].
-func (x *ImageEuclideanDistanceTransform) Unwrap() *raw.MPSImageEuclideanDistanceTransform {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageEuclideanDistanceTransform) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageEuclideanDistanceTransformFromID adopts an existing object pointer as a ImageEuclideanDistanceTransform (nil for 0).
+// ImageEuclideanDistanceTransformFromID adopts an existing Objective-C object as a ImageEuclideanDistanceTransform
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageEuclideanDistanceTransformFromID(id objc.ID) *ImageEuclideanDistanceTransform {
 	if id == 0 {
 		return nil
 	}
-	return &ImageEuclideanDistanceTransform{inner: raw.MPSImageEuclideanDistanceTransformFromID(id)}
+	x := &ImageEuclideanDistanceTransform{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a Euclidean distance transform that runs on a specified device.
-//
-// NewImageEuclideanDistanceTransformWithDevice creates a new [ImageEuclideanDistanceTransform].
-func NewImageEuclideanDistanceTransformWithDevice(device metal.MTLDevice) *ImageEuclideanDistanceTransform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageEuclideanDistanceTransform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ImageEuclideanDistanceTransform{inner: raw.MPSImageEuclideanDistanceTransformFromID(_id)}
+// imageEuclideanDistanceTransformAdopt wraps an Objective-C object that this code just created as a
+// ImageEuclideanDistanceTransform (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageEuclideanDistanceTransformAdopt(id objc.ID) *ImageEuclideanDistanceTransform {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageEuclideanDistanceTransform{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Creates a Euclidean distance transform that uses a specified decoder for your data and runs on a specified device.
-//
-// NewImageEuclideanDistanceTransformWithCoderDevice creates a new [ImageEuclideanDistanceTransform].
-func NewImageEuclideanDistanceTransformWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageEuclideanDistanceTransform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageEuclideanDistanceTransform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageEuclideanDistanceTransform{inner: raw.MPSImageEuclideanDistanceTransformFromID(_id)}
+// Description returns the object's -description text.
+func (x *ImageEuclideanDistanceTransform) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageEuclideanDistanceTransform) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageEuclideanDistanceTransform) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageEuclideanDistanceTransform creates a new ImageEuclideanDistanceTransform.
+func NewImageEuclideanDistanceTransform() *ImageEuclideanDistanceTransform {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageEuclideanDistanceTransform")), objc.RegisterName("new"))
+	return imageEuclideanDistanceTransformAdopt(_id)
 }
 
 // Limits the search in an image from a pixel to the closest nonzero pixel within a specified radius.
 //
-// WithSearchLimitRadius sets the searchLimitRadius property and returns the receiver for chaining.
+// WithSearchLimitRadius sets searchLimitRadius and returns the receiver so calls can be chained.
 func (x *ImageEuclideanDistanceTransform) WithSearchLimitRadius(searchLimitRadius float32) *ImageEuclideanDistanceTransform {
-	x.inner.SetSearchLimitRadius(searchLimitRadius)
-	return x
-}
-
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageEuclideanDistanceTransform) WithOffset(offset mpscore.MPSOffset) *ImageEuclideanDistanceTransform {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
-	return x
-}
-
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageEuclideanDistanceTransform) WithClipRect(clipRect metal.MTLRegion) *ImageEuclideanDistanceTransform {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
-	return x
-}
-
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageEuclideanDistanceTransform) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageEuclideanDistanceTransform {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageEuclideanDistanceTransform) WithOptions(options mpscore.MPSKernelOptions) *ImageEuclideanDistanceTransform {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchLimitRadius:"), searchLimitRadius)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ImageEuclideanDistanceTransform) WithLabel(label string) *ImageEuclideanDistanceTransform {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property   searchLimitRadius @abstract   Defines a search scope size around output pixel to limit closest non-zero pixel search. Optional variable. @discussion When the non-zeroes in the input image are on average very far away from each other (ie. the distances are large), the distance calculation algorithm has to work harder to find the closest pixel. If you don't care about getting exact results beyond a certain distance you can use this property to limit the search space and speed up the kernels. In case there are no non-zero pixels within this search scope around the output pixel, then the output value will be some number that is larger than this search limit. Normally you should be fine with the default value of FLT_MAX, which results in the exact EDT, so use this only if you need additional performance. Typical good values are: 32, 64, 96, 128. Default: FLT_MAX
-//
-// SearchLimitRadius calls the underlying SearchLimitRadius.
+// Defines a search scope size around output pixel to limit closest non-zero pixel search. Optional variable. When the non-zeroes in the input image are on average very far away from each other (ie. the distances are large), the distance calculation algorithm has to work harder to find the closest pixel. If you don't care about getting exact results beyond a certain distance you can use this property to limit the search space and speed up the kernels. In case there are no non-zero pixels within this search scope around the output pixel, then the output value will be some number that is larger than this search limit. Normally you should be fine with the default value of FLT_MAX, which results in the exact EDT, so use this only if you need additional performance. Typical good values are: 32, 64, 96, 128. Default: FLT_MAX
 func (x *ImageEuclideanDistanceTransform) SearchLimitRadius() float32 {
-	return x.inner.SearchLimitRadius()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("searchLimitRadius"))
+	return _r
 }
 
-// SetSearchLimitRadius calls the underlying SetSearchLimitRadius.
 func (x *ImageEuclideanDistanceTransform) SetSearchLimitRadius(searchLimitRadius float32) {
-	x.inner.SetSearchLimitRadius(searchLimitRadius)
-}
-
-func (x *ImageEuclideanDistanceTransform) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
-}
-
-func (x *ImageEuclideanDistanceTransform) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSUnaryImageKernel.MPSKernel
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchLimitRadius:"), searchLimitRadius)
 }
 
 // ImageEuclideanDistanceTransformable is the interface implemented by [ImageEuclideanDistanceTransform], for mocking and DI.
 type ImageEuclideanDistanceTransformable interface {
-	Unwrap() *raw.MPSImageEuclideanDistanceTransform
+	obj.Object
 	WithSearchLimitRadius(searchLimitRadius float32) *ImageEuclideanDistanceTransform
-	WithOffset(offset mpscore.MPSOffset) *ImageEuclideanDistanceTransform
-	WithClipRect(clipRect metal.MTLRegion) *ImageEuclideanDistanceTransform
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageEuclideanDistanceTransform
-	WithOptions(options mpscore.MPSKernelOptions) *ImageEuclideanDistanceTransform
 	WithLabel(label string) *ImageEuclideanDistanceTransform
 	SearchLimitRadius() float32
 	SetSearchLimitRadius(searchLimitRadius float32)

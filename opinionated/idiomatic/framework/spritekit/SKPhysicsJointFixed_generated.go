@@ -5,59 +5,84 @@
 package spritekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A joint that fuses two physics bodies together at a reference point.
 //
-// PhysicsJointFixed wraps [raw.SKPhysicsJointFixed] with a fluent Go API.
+// PhysicsJointFixed is an idiomatic wrapper over the Objective-C class SKPhysicsJointFixed.
 type PhysicsJointFixed struct {
-	inner *raw.SKPhysicsJointFixed
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKPhysicsJointFixed].
-func (x *PhysicsJointFixed) Unwrap() *raw.SKPhysicsJointFixed { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhysicsJointFixed) ID() objc.ID { return x.inner.Ptr() }
-
-// PhysicsJointFixedFromID adopts an existing object pointer as a PhysicsJointFixed (nil for 0).
+// PhysicsJointFixedFromID adopts an existing Objective-C object as a PhysicsJointFixed
+// (nil for 0), retaining it and registering a release finalizer.
 func PhysicsJointFixedFromID(id objc.ID) *PhysicsJointFixed {
 	if id == 0 {
 		return nil
 	}
-	return &PhysicsJointFixed{inner: raw.SKPhysicsJointFixedFromID(id)}
+	x := &PhysicsJointFixed{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPhysicsJointFixed creates a new [PhysicsJointFixed].
+// physicsJointFixedAdopt wraps an Objective-C object that this code just created as a
+// PhysicsJointFixed (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func physicsJointFixedAdopt(id objc.ID) *PhysicsJointFixed {
+	if id == 0 {
+		return nil
+	}
+	x := &PhysicsJointFixed{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PhysicsJointFixed) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PhysicsJointFixed) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PhysicsJointFixed) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPhysicsJointFixed creates a new PhysicsJointFixed.
 func NewPhysicsJointFixed() *PhysicsJointFixed {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKPhysicsJointFixed")), objc.RegisterName("new"))
-	return &PhysicsJointFixed{inner: raw.SKPhysicsJointFixedFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKPhysicsJointFixed")), objc.RegisterName("new"))
+	return physicsJointFixedAdopt(_id)
 }
 
 // The first body connected by the joint.
 //
-// WithBodyA sets the bodyA property and returns the receiver for chaining.
+// WithBodyA sets bodyA and returns the receiver so calls can be chained.
 func (x *PhysicsJointFixed) WithBodyA(bodyA *PhysicsBody) *PhysicsJointFixed {
-	x.inner.SKPhysicsJoint.SetBodyA(bodyA.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
 	return x
 }
 
 // The second body connected by the joint.
 //
-// WithBodyB sets the bodyB property and returns the receiver for chaining.
+// WithBodyB sets bodyB and returns the receiver so calls can be chained.
 func (x *PhysicsJointFixed) WithBodyB(bodyB *PhysicsBody) *PhysicsJointFixed {
-	x.inner.SKPhysicsJoint.SetBodyB(bodyB.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
 	return x
 }
 
-func (x *PhysicsJointFixed) asPhysicsJoint() *raw.SKPhysicsJoint { return &x.inner.SKPhysicsJoint }
-
 // PhysicsJointFixedable is the interface implemented by [PhysicsJointFixed], for mocking and DI.
 type PhysicsJointFixedable interface {
-	Unwrap() *raw.SKPhysicsJointFixed
+	obj.Object
 	WithBodyA(bodyA *PhysicsBody) *PhysicsJointFixed
 	WithBodyB(bodyB *PhysicsBody) *PhysicsJointFixed
 }

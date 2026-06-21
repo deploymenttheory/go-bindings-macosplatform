@@ -5,590 +5,590 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// MTRAccessControlClusterAccessControlEntryStructProvider is implemented by MTRAccessControlClusterAccessControlEntryStruct and any idiomatic type wrapping a MTRAccessControlClusterAccessControlEntryStruct subclass.
+// MTRAccessControlClusterAccessControlEntryStructProvider is accepted wherever a MTRAccessControlClusterAccessControlEntryStruct (or one of its subclasses) is expected.
 type MTRAccessControlClusterAccessControlEntryStructProvider interface {
-	asMTRAccessControlClusterAccessControlEntryStruct() *raw.MTRAccessControlClusterAccessControlEntryStruct
+	objref.Object
 }
 
-// MTRAccessControlClusterAccessControlExtensionStructProvider is implemented by MTRAccessControlClusterAccessControlExtensionStruct and any idiomatic type wrapping a MTRAccessControlClusterAccessControlExtensionStruct subclass.
+// MTRAccessControlClusterAccessControlExtensionStructProvider is accepted wherever a MTRAccessControlClusterAccessControlExtensionStruct (or one of its subclasses) is expected.
 type MTRAccessControlClusterAccessControlExtensionStructProvider interface {
-	asMTRAccessControlClusterAccessControlExtensionStruct() *raw.MTRAccessControlClusterAccessControlExtensionStruct
+	objref.Object
 }
 
-// MTRAccessControlClusterAccessControlTargetStructProvider is implemented by MTRAccessControlClusterAccessControlTargetStruct and any idiomatic type wrapping a MTRAccessControlClusterAccessControlTargetStruct subclass.
+// MTRAccessControlClusterAccessControlTargetStructProvider is accepted wherever a MTRAccessControlClusterAccessControlTargetStruct (or one of its subclasses) is expected.
 type MTRAccessControlClusterAccessControlTargetStructProvider interface {
-	asMTRAccessControlClusterAccessControlTargetStruct() *raw.MTRAccessControlClusterAccessControlTargetStruct
+	objref.Object
 }
 
-// MTRApplicationBasicClusterApplicationStructProvider is implemented by MTRApplicationBasicClusterApplicationStruct and any idiomatic type wrapping a MTRApplicationBasicClusterApplicationStruct subclass.
+// MTRApplicationBasicClusterApplicationStructProvider is accepted wherever a MTRApplicationBasicClusterApplicationStruct (or one of its subclasses) is expected.
 type MTRApplicationBasicClusterApplicationStructProvider interface {
-	asMTRApplicationBasicClusterApplicationStruct() *raw.MTRApplicationBasicClusterApplicationStruct
+	objref.Object
 }
 
-// MTRApplicationLauncherClusterApplicationEPStructProvider is implemented by MTRApplicationLauncherClusterApplicationEPStruct and any idiomatic type wrapping a MTRApplicationLauncherClusterApplicationEPStruct subclass.
+// MTRApplicationLauncherClusterApplicationEPStructProvider is accepted wherever a MTRApplicationLauncherClusterApplicationEPStruct (or one of its subclasses) is expected.
 type MTRApplicationLauncherClusterApplicationEPStructProvider interface {
-	asMTRApplicationLauncherClusterApplicationEPStruct() *raw.MTRApplicationLauncherClusterApplicationEPStruct
+	objref.Object
 }
 
-// MTRApplicationLauncherClusterApplicationStructProvider is implemented by MTRApplicationLauncherClusterApplicationStruct and any idiomatic type wrapping a MTRApplicationLauncherClusterApplicationStruct subclass.
+// MTRApplicationLauncherClusterApplicationStructProvider is accepted wherever a MTRApplicationLauncherClusterApplicationStruct (or one of its subclasses) is expected.
 type MTRApplicationLauncherClusterApplicationStructProvider interface {
-	asMTRApplicationLauncherClusterApplicationStruct() *raw.MTRApplicationLauncherClusterApplicationStruct
+	objref.Object
 }
 
-// MTRAudioOutputClusterOutputInfoStructProvider is implemented by MTRAudioOutputClusterOutputInfoStruct and any idiomatic type wrapping a MTRAudioOutputClusterOutputInfoStruct subclass.
+// MTRAudioOutputClusterOutputInfoStructProvider is accepted wherever a MTRAudioOutputClusterOutputInfoStruct (or one of its subclasses) is expected.
 type MTRAudioOutputClusterOutputInfoStructProvider interface {
-	asMTRAudioOutputClusterOutputInfoStruct() *raw.MTRAudioOutputClusterOutputInfoStruct
+	objref.Object
 }
 
-// MTRBaseClusterBasicInformationProvider is implemented by MTRBaseClusterBasicInformation and any idiomatic type wrapping a MTRBaseClusterBasicInformation subclass.
+// MTRBaseClusterBasicInformationProvider is accepted wherever a MTRBaseClusterBasicInformation (or one of its subclasses) is expected.
 type MTRBaseClusterBasicInformationProvider interface {
-	asMTRBaseClusterBasicInformation() *raw.MTRBaseClusterBasicInformation
+	objref.Object
 }
 
-// MTRBaseClusterBridgedDeviceBasicInformationProvider is implemented by MTRBaseClusterBridgedDeviceBasicInformation and any idiomatic type wrapping a MTRBaseClusterBridgedDeviceBasicInformation subclass.
+// MTRBaseClusterBridgedDeviceBasicInformationProvider is accepted wherever a MTRBaseClusterBridgedDeviceBasicInformation (or one of its subclasses) is expected.
 type MTRBaseClusterBridgedDeviceBasicInformationProvider interface {
-	asMTRBaseClusterBridgedDeviceBasicInformation() *raw.MTRBaseClusterBridgedDeviceBasicInformation
+	objref.Object
 }
 
-// MTRBaseClusterOTASoftwareUpdateProviderProvider is implemented by MTRBaseClusterOTASoftwareUpdateProvider and any idiomatic type wrapping a MTRBaseClusterOTASoftwareUpdateProvider subclass.
+// MTRBaseClusterOTASoftwareUpdateProviderProvider is accepted wherever a MTRBaseClusterOTASoftwareUpdateProvider (or one of its subclasses) is expected.
 type MTRBaseClusterOTASoftwareUpdateProviderProvider interface {
-	asMTRBaseClusterOTASoftwareUpdateProvider() *raw.MTRBaseClusterOTASoftwareUpdateProvider
+	objref.Object
 }
 
-// MTRBaseClusterOTASoftwareUpdateRequestorProvider is implemented by MTRBaseClusterOTASoftwareUpdateRequestor and any idiomatic type wrapping a MTRBaseClusterOTASoftwareUpdateRequestor subclass.
+// MTRBaseClusterOTASoftwareUpdateRequestorProvider is accepted wherever a MTRBaseClusterOTASoftwareUpdateRequestor (or one of its subclasses) is expected.
 type MTRBaseClusterOTASoftwareUpdateRequestorProvider interface {
-	asMTRBaseClusterOTASoftwareUpdateRequestor() *raw.MTRBaseClusterOTASoftwareUpdateRequestor
+	objref.Object
 }
 
-// MTRBaseClusterUnitTestingProvider is implemented by MTRBaseClusterUnitTesting and any idiomatic type wrapping a MTRBaseClusterUnitTesting subclass.
+// MTRBaseClusterUnitTestingProvider is accepted wherever a MTRBaseClusterUnitTesting (or one of its subclasses) is expected.
 type MTRBaseClusterUnitTestingProvider interface {
-	asMTRBaseClusterUnitTesting() *raw.MTRBaseClusterUnitTesting
+	objref.Object
 }
 
-// MTRBaseClusterWakeOnLANProvider is implemented by MTRBaseClusterWakeOnLAN and any idiomatic type wrapping a MTRBaseClusterWakeOnLAN subclass.
+// MTRBaseClusterWakeOnLANProvider is accepted wherever a MTRBaseClusterWakeOnLAN (or one of its subclasses) is expected.
 type MTRBaseClusterWakeOnLANProvider interface {
-	asMTRBaseClusterWakeOnLAN() *raw.MTRBaseClusterWakeOnLAN
+	objref.Object
 }
 
-// MTRBasicInformationClusterCapabilityMinimaStructProvider is implemented by MTRBasicInformationClusterCapabilityMinimaStruct and any idiomatic type wrapping a MTRBasicInformationClusterCapabilityMinimaStruct subclass.
+// MTRBasicInformationClusterCapabilityMinimaStructProvider is accepted wherever a MTRBasicInformationClusterCapabilityMinimaStruct (or one of its subclasses) is expected.
 type MTRBasicInformationClusterCapabilityMinimaStructProvider interface {
-	asMTRBasicInformationClusterCapabilityMinimaStruct() *raw.MTRBasicInformationClusterCapabilityMinimaStruct
+	objref.Object
 }
 
-// MTRBasicInformationClusterLeaveEventProvider is implemented by MTRBasicInformationClusterLeaveEvent and any idiomatic type wrapping a MTRBasicInformationClusterLeaveEvent subclass.
+// MTRBasicInformationClusterLeaveEventProvider is accepted wherever a MTRBasicInformationClusterLeaveEvent (or one of its subclasses) is expected.
 type MTRBasicInformationClusterLeaveEventProvider interface {
-	asMTRBasicInformationClusterLeaveEvent() *raw.MTRBasicInformationClusterLeaveEvent
+	objref.Object
 }
 
-// MTRBasicInformationClusterReachableChangedEventProvider is implemented by MTRBasicInformationClusterReachableChangedEvent and any idiomatic type wrapping a MTRBasicInformationClusterReachableChangedEvent subclass.
+// MTRBasicInformationClusterReachableChangedEventProvider is accepted wherever a MTRBasicInformationClusterReachableChangedEvent (or one of its subclasses) is expected.
 type MTRBasicInformationClusterReachableChangedEventProvider interface {
-	asMTRBasicInformationClusterReachableChangedEvent() *raw.MTRBasicInformationClusterReachableChangedEvent
+	objref.Object
 }
 
-// MTRBasicInformationClusterShutDownEventProvider is implemented by MTRBasicInformationClusterShutDownEvent and any idiomatic type wrapping a MTRBasicInformationClusterShutDownEvent subclass.
+// MTRBasicInformationClusterShutDownEventProvider is accepted wherever a MTRBasicInformationClusterShutDownEvent (or one of its subclasses) is expected.
 type MTRBasicInformationClusterShutDownEventProvider interface {
-	asMTRBasicInformationClusterShutDownEvent() *raw.MTRBasicInformationClusterShutDownEvent
+	objref.Object
 }
 
-// MTRBasicInformationClusterStartUpEventProvider is implemented by MTRBasicInformationClusterStartUpEvent and any idiomatic type wrapping a MTRBasicInformationClusterStartUpEvent subclass.
+// MTRBasicInformationClusterStartUpEventProvider is accepted wherever a MTRBasicInformationClusterStartUpEvent (or one of its subclasses) is expected.
 type MTRBasicInformationClusterStartUpEventProvider interface {
-	asMTRBasicInformationClusterStartUpEvent() *raw.MTRBasicInformationClusterStartUpEvent
+	objref.Object
 }
 
-// MTRBridgedDeviceBasicInformationClusterLeaveEventProvider is implemented by MTRBridgedDeviceBasicInformationClusterLeaveEvent and any idiomatic type wrapping a MTRBridgedDeviceBasicInformationClusterLeaveEvent subclass.
+// MTRBridgedDeviceBasicInformationClusterLeaveEventProvider is accepted wherever a MTRBridgedDeviceBasicInformationClusterLeaveEvent (or one of its subclasses) is expected.
 type MTRBridgedDeviceBasicInformationClusterLeaveEventProvider interface {
-	asMTRBridgedDeviceBasicInformationClusterLeaveEvent() *raw.MTRBridgedDeviceBasicInformationClusterLeaveEvent
+	objref.Object
 }
 
-// MTRBridgedDeviceBasicInformationClusterReachableChangedEventProvider is implemented by MTRBridgedDeviceBasicInformationClusterReachableChangedEvent and any idiomatic type wrapping a MTRBridgedDeviceBasicInformationClusterReachableChangedEvent subclass.
+// MTRBridgedDeviceBasicInformationClusterReachableChangedEventProvider is accepted wherever a MTRBridgedDeviceBasicInformationClusterReachableChangedEvent (or one of its subclasses) is expected.
 type MTRBridgedDeviceBasicInformationClusterReachableChangedEventProvider interface {
-	asMTRBridgedDeviceBasicInformationClusterReachableChangedEvent() *raw.MTRBridgedDeviceBasicInformationClusterReachableChangedEvent
+	objref.Object
 }
 
-// MTRBridgedDeviceBasicInformationClusterShutDownEventProvider is implemented by MTRBridgedDeviceBasicInformationClusterShutDownEvent and any idiomatic type wrapping a MTRBridgedDeviceBasicInformationClusterShutDownEvent subclass.
+// MTRBridgedDeviceBasicInformationClusterShutDownEventProvider is accepted wherever a MTRBridgedDeviceBasicInformationClusterShutDownEvent (or one of its subclasses) is expected.
 type MTRBridgedDeviceBasicInformationClusterShutDownEventProvider interface {
-	asMTRBridgedDeviceBasicInformationClusterShutDownEvent() *raw.MTRBridgedDeviceBasicInformationClusterShutDownEvent
+	objref.Object
 }
 
-// MTRBridgedDeviceBasicInformationClusterStartUpEventProvider is implemented by MTRBridgedDeviceBasicInformationClusterStartUpEvent and any idiomatic type wrapping a MTRBridgedDeviceBasicInformationClusterStartUpEvent subclass.
+// MTRBridgedDeviceBasicInformationClusterStartUpEventProvider is accepted wherever a MTRBridgedDeviceBasicInformationClusterStartUpEvent (or one of its subclasses) is expected.
 type MTRBridgedDeviceBasicInformationClusterStartUpEventProvider interface {
-	asMTRBridgedDeviceBasicInformationClusterStartUpEvent() *raw.MTRBridgedDeviceBasicInformationClusterStartUpEvent
+	objref.Object
 }
 
-// MTRChannelClusterChannelInfoStructProvider is implemented by MTRChannelClusterChannelInfoStruct and any idiomatic type wrapping a MTRChannelClusterChannelInfoStruct subclass.
+// MTRChannelClusterChannelInfoStructProvider is accepted wherever a MTRChannelClusterChannelInfoStruct (or one of its subclasses) is expected.
 type MTRChannelClusterChannelInfoStructProvider interface {
-	asMTRChannelClusterChannelInfoStruct() *raw.MTRChannelClusterChannelInfoStruct
+	objref.Object
 }
 
-// MTRChannelClusterLineupInfoStructProvider is implemented by MTRChannelClusterLineupInfoStruct and any idiomatic type wrapping a MTRChannelClusterLineupInfoStruct subclass.
+// MTRChannelClusterLineupInfoStructProvider is accepted wherever a MTRChannelClusterLineupInfoStruct (or one of its subclasses) is expected.
 type MTRChannelClusterLineupInfoStructProvider interface {
-	asMTRChannelClusterLineupInfoStruct() *raw.MTRChannelClusterLineupInfoStruct
+	objref.Object
 }
 
-// MTRClusterProvider is implemented by MTRCluster and any idiomatic type wrapping a MTRCluster subclass.
+// MTRClusterProvider is accepted wherever a MTRCluster (or one of its subclasses) is expected.
 type MTRClusterProvider interface {
-	asMTRCluster() *raw.MTRCluster
+	objref.Object
 }
 
-// MTRClusterBasicInformationProvider is implemented by MTRClusterBasicInformation and any idiomatic type wrapping a MTRClusterBasicInformation subclass.
+// MTRClusterBasicInformationProvider is accepted wherever a MTRClusterBasicInformation (or one of its subclasses) is expected.
 type MTRClusterBasicInformationProvider interface {
-	asMTRClusterBasicInformation() *raw.MTRClusterBasicInformation
+	objref.Object
 }
 
-// MTRClusterBridgedDeviceBasicInformationProvider is implemented by MTRClusterBridgedDeviceBasicInformation and any idiomatic type wrapping a MTRClusterBridgedDeviceBasicInformation subclass.
+// MTRClusterBridgedDeviceBasicInformationProvider is accepted wherever a MTRClusterBridgedDeviceBasicInformation (or one of its subclasses) is expected.
 type MTRClusterBridgedDeviceBasicInformationProvider interface {
-	asMTRClusterBridgedDeviceBasicInformation() *raw.MTRClusterBridgedDeviceBasicInformation
+	objref.Object
 }
 
-// MTRClusterOTASoftwareUpdateProviderProvider is implemented by MTRClusterOTASoftwareUpdateProvider and any idiomatic type wrapping a MTRClusterOTASoftwareUpdateProvider subclass.
+// MTRClusterOTASoftwareUpdateProviderProvider is accepted wherever a MTRClusterOTASoftwareUpdateProvider (or one of its subclasses) is expected.
 type MTRClusterOTASoftwareUpdateProviderProvider interface {
-	asMTRClusterOTASoftwareUpdateProvider() *raw.MTRClusterOTASoftwareUpdateProvider
+	objref.Object
 }
 
-// MTRClusterOTASoftwareUpdateRequestorProvider is implemented by MTRClusterOTASoftwareUpdateRequestor and any idiomatic type wrapping a MTRClusterOTASoftwareUpdateRequestor subclass.
+// MTRClusterOTASoftwareUpdateRequestorProvider is accepted wherever a MTRClusterOTASoftwareUpdateRequestor (or one of its subclasses) is expected.
 type MTRClusterOTASoftwareUpdateRequestorProvider interface {
-	asMTRClusterOTASoftwareUpdateRequestor() *raw.MTRClusterOTASoftwareUpdateRequestor
+	objref.Object
 }
 
-// MTRClusterPathProvider is implemented by MTRClusterPath and any idiomatic type wrapping a MTRClusterPath subclass.
+// MTRClusterPathProvider is accepted wherever a MTRClusterPath (or one of its subclasses) is expected.
 type MTRClusterPathProvider interface {
-	asMTRClusterPath() *raw.MTRClusterPath
+	objref.Object
 }
 
-// MTRClusterUnitTestingProvider is implemented by MTRClusterUnitTesting and any idiomatic type wrapping a MTRClusterUnitTesting subclass.
+// MTRClusterUnitTestingProvider is accepted wherever a MTRClusterUnitTesting (or one of its subclasses) is expected.
 type MTRClusterUnitTestingProvider interface {
-	asMTRClusterUnitTesting() *raw.MTRClusterUnitTesting
+	objref.Object
 }
 
-// MTRClusterWakeOnLANProvider is implemented by MTRClusterWakeOnLAN and any idiomatic type wrapping a MTRClusterWakeOnLAN subclass.
+// MTRClusterWakeOnLANProvider is accepted wherever a MTRClusterWakeOnLAN (or one of its subclasses) is expected.
 type MTRClusterWakeOnLANProvider interface {
-	asMTRClusterWakeOnLAN() *raw.MTRClusterWakeOnLAN
+	objref.Object
 }
 
-// MTRContentLauncherClusterAdditionalInfoStructProvider is implemented by MTRContentLauncherClusterAdditionalInfoStruct and any idiomatic type wrapping a MTRContentLauncherClusterAdditionalInfoStruct subclass.
+// MTRContentLauncherClusterAdditionalInfoStructProvider is accepted wherever a MTRContentLauncherClusterAdditionalInfoStruct (or one of its subclasses) is expected.
 type MTRContentLauncherClusterAdditionalInfoStructProvider interface {
-	asMTRContentLauncherClusterAdditionalInfoStruct() *raw.MTRContentLauncherClusterAdditionalInfoStruct
+	objref.Object
 }
 
-// MTRContentLauncherClusterBrandingInformationStructProvider is implemented by MTRContentLauncherClusterBrandingInformationStruct and any idiomatic type wrapping a MTRContentLauncherClusterBrandingInformationStruct subclass.
+// MTRContentLauncherClusterBrandingInformationStructProvider is accepted wherever a MTRContentLauncherClusterBrandingInformationStruct (or one of its subclasses) is expected.
 type MTRContentLauncherClusterBrandingInformationStructProvider interface {
-	asMTRContentLauncherClusterBrandingInformationStruct() *raw.MTRContentLauncherClusterBrandingInformationStruct
+	objref.Object
 }
 
-// MTRContentLauncherClusterContentSearchStructProvider is implemented by MTRContentLauncherClusterContentSearchStruct and any idiomatic type wrapping a MTRContentLauncherClusterContentSearchStruct subclass.
+// MTRContentLauncherClusterContentSearchStructProvider is accepted wherever a MTRContentLauncherClusterContentSearchStruct (or one of its subclasses) is expected.
 type MTRContentLauncherClusterContentSearchStructProvider interface {
-	asMTRContentLauncherClusterContentSearchStruct() *raw.MTRContentLauncherClusterContentSearchStruct
+	objref.Object
 }
 
-// MTRContentLauncherClusterDimensionStructProvider is implemented by MTRContentLauncherClusterDimensionStruct and any idiomatic type wrapping a MTRContentLauncherClusterDimensionStruct subclass.
+// MTRContentLauncherClusterDimensionStructProvider is accepted wherever a MTRContentLauncherClusterDimensionStruct (or one of its subclasses) is expected.
 type MTRContentLauncherClusterDimensionStructProvider interface {
-	asMTRContentLauncherClusterDimensionStruct() *raw.MTRContentLauncherClusterDimensionStruct
+	objref.Object
 }
 
-// MTRContentLauncherClusterLauncherResponseParamsProvider is implemented by MTRContentLauncherClusterLauncherResponseParams and any idiomatic type wrapping a MTRContentLauncherClusterLauncherResponseParams subclass.
+// MTRContentLauncherClusterLauncherResponseParamsProvider is accepted wherever a MTRContentLauncherClusterLauncherResponseParams (or one of its subclasses) is expected.
 type MTRContentLauncherClusterLauncherResponseParamsProvider interface {
-	asMTRContentLauncherClusterLauncherResponseParams() *raw.MTRContentLauncherClusterLauncherResponseParams
+	objref.Object
 }
 
-// MTRContentLauncherClusterParameterStructProvider is implemented by MTRContentLauncherClusterParameterStruct and any idiomatic type wrapping a MTRContentLauncherClusterParameterStruct subclass.
+// MTRContentLauncherClusterParameterStructProvider is accepted wherever a MTRContentLauncherClusterParameterStruct (or one of its subclasses) is expected.
 type MTRContentLauncherClusterParameterStructProvider interface {
-	asMTRContentLauncherClusterParameterStruct() *raw.MTRContentLauncherClusterParameterStruct
+	objref.Object
 }
 
-// MTRContentLauncherClusterStyleInformationStructProvider is implemented by MTRContentLauncherClusterStyleInformationStruct and any idiomatic type wrapping a MTRContentLauncherClusterStyleInformationStruct subclass.
+// MTRContentLauncherClusterStyleInformationStructProvider is accepted wherever a MTRContentLauncherClusterStyleInformationStruct (or one of its subclasses) is expected.
 type MTRContentLauncherClusterStyleInformationStructProvider interface {
-	asMTRContentLauncherClusterStyleInformationStruct() *raw.MTRContentLauncherClusterStyleInformationStruct
+	objref.Object
 }
 
-// MTRDescriptorClusterDeviceTypeStructProvider is implemented by MTRDescriptorClusterDeviceTypeStruct and any idiomatic type wrapping a MTRDescriptorClusterDeviceTypeStruct subclass.
+// MTRDescriptorClusterDeviceTypeStructProvider is accepted wherever a MTRDescriptorClusterDeviceTypeStruct (or one of its subclasses) is expected.
 type MTRDescriptorClusterDeviceTypeStructProvider interface {
-	asMTRDescriptorClusterDeviceTypeStruct() *raw.MTRDescriptorClusterDeviceTypeStruct
+	objref.Object
 }
 
-// MTRDeviceControllerAbstractParametersProvider is implemented by MTRDeviceControllerAbstractParameters and any idiomatic type wrapping a MTRDeviceControllerAbstractParameters subclass.
+// MTRDeviceControllerAbstractParametersProvider is accepted wherever a MTRDeviceControllerAbstractParameters (or one of its subclasses) is expected.
 type MTRDeviceControllerAbstractParametersProvider interface {
-	asMTRDeviceControllerAbstractParameters() *raw.MTRDeviceControllerAbstractParameters
+	objref.Object
 }
 
-// MTRDeviceControllerFactoryParamsProvider is implemented by MTRDeviceControllerFactoryParams and any idiomatic type wrapping a MTRDeviceControllerFactoryParams subclass.
+// MTRDeviceControllerFactoryParamsProvider is accepted wherever a MTRDeviceControllerFactoryParams (or one of its subclasses) is expected.
 type MTRDeviceControllerFactoryParamsProvider interface {
-	asMTRDeviceControllerFactoryParams() *raw.MTRDeviceControllerFactoryParams
+	objref.Object
 }
 
-// MTRDeviceControllerParametersProvider is implemented by MTRDeviceControllerParameters and any idiomatic type wrapping a MTRDeviceControllerParameters subclass.
+// MTRDeviceControllerParametersProvider is accepted wherever a MTRDeviceControllerParameters (or one of its subclasses) is expected.
 type MTRDeviceControllerParametersProvider interface {
-	asMTRDeviceControllerParameters() *raw.MTRDeviceControllerParameters
+	objref.Object
 }
 
-// MTRDoorLockClusterCredentialStructProvider is implemented by MTRDoorLockClusterCredentialStruct and any idiomatic type wrapping a MTRDoorLockClusterCredentialStruct subclass.
+// MTRDoorLockClusterCredentialStructProvider is accepted wherever a MTRDoorLockClusterCredentialStruct (or one of its subclasses) is expected.
 type MTRDoorLockClusterCredentialStructProvider interface {
-	asMTRDoorLockClusterCredentialStruct() *raw.MTRDoorLockClusterCredentialStruct
+	objref.Object
 }
 
-// MTRGeneralDiagnosticsClusterNetworkInterfaceProvider is implemented by MTRGeneralDiagnosticsClusterNetworkInterface and any idiomatic type wrapping a MTRGeneralDiagnosticsClusterNetworkInterface subclass.
+// MTRGeneralDiagnosticsClusterNetworkInterfaceProvider is accepted wherever a MTRGeneralDiagnosticsClusterNetworkInterface (or one of its subclasses) is expected.
 type MTRGeneralDiagnosticsClusterNetworkInterfaceProvider interface {
-	asMTRGeneralDiagnosticsClusterNetworkInterface() *raw.MTRGeneralDiagnosticsClusterNetworkInterface
+	objref.Object
 }
 
-// MTRGenericBaseClusterProvider is implemented by MTRGenericBaseCluster and any idiomatic type wrapping a MTRGenericBaseCluster subclass.
+// MTRGenericBaseClusterProvider is accepted wherever a MTRGenericBaseCluster (or one of its subclasses) is expected.
 type MTRGenericBaseClusterProvider interface {
-	asMTRGenericBaseCluster() *raw.MTRGenericBaseCluster
+	objref.Object
 }
 
-// MTRGenericClusterProvider is implemented by MTRGenericCluster and any idiomatic type wrapping a MTRGenericCluster subclass.
+// MTRGenericClusterProvider is accepted wherever a MTRGenericCluster (or one of its subclasses) is expected.
 type MTRGenericClusterProvider interface {
-	asMTRGenericCluster() *raw.MTRGenericCluster
+	objref.Object
 }
 
-// MTRMediaInputClusterInputInfoStructProvider is implemented by MTRMediaInputClusterInputInfoStruct and any idiomatic type wrapping a MTRMediaInputClusterInputInfoStruct subclass.
+// MTRMediaInputClusterInputInfoStructProvider is accepted wherever a MTRMediaInputClusterInputInfoStruct (or one of its subclasses) is expected.
 type MTRMediaInputClusterInputInfoStructProvider interface {
-	asMTRMediaInputClusterInputInfoStruct() *raw.MTRMediaInputClusterInputInfoStruct
+	objref.Object
 }
 
-// MTRMediaPlaybackClusterPlaybackPositionStructProvider is implemented by MTRMediaPlaybackClusterPlaybackPositionStruct and any idiomatic type wrapping a MTRMediaPlaybackClusterPlaybackPositionStruct subclass.
+// MTRMediaPlaybackClusterPlaybackPositionStructProvider is accepted wherever a MTRMediaPlaybackClusterPlaybackPositionStruct (or one of its subclasses) is expected.
 type MTRMediaPlaybackClusterPlaybackPositionStructProvider interface {
-	asMTRMediaPlaybackClusterPlaybackPositionStruct() *raw.MTRMediaPlaybackClusterPlaybackPositionStruct
+	objref.Object
 }
 
-// MTRMediaPlaybackClusterStopParamsProvider is implemented by MTRMediaPlaybackClusterStopParams and any idiomatic type wrapping a MTRMediaPlaybackClusterStopParams subclass.
+// MTRMediaPlaybackClusterStopParamsProvider is accepted wherever a MTRMediaPlaybackClusterStopParams (or one of its subclasses) is expected.
 type MTRMediaPlaybackClusterStopParamsProvider interface {
-	asMTRMediaPlaybackClusterStopParams() *raw.MTRMediaPlaybackClusterStopParams
+	objref.Object
 }
 
-// MTRModeSelectClusterSemanticTagStructProvider is implemented by MTRModeSelectClusterSemanticTagStruct and any idiomatic type wrapping a MTRModeSelectClusterSemanticTagStruct subclass.
+// MTRModeSelectClusterSemanticTagStructProvider is accepted wherever a MTRModeSelectClusterSemanticTagStruct (or one of its subclasses) is expected.
 type MTRModeSelectClusterSemanticTagStructProvider interface {
-	asMTRModeSelectClusterSemanticTagStruct() *raw.MTRModeSelectClusterSemanticTagStruct
+	objref.Object
 }
 
-// MTRNetworkCommissioningClusterNetworkInfoStructProvider is implemented by MTRNetworkCommissioningClusterNetworkInfoStruct and any idiomatic type wrapping a MTRNetworkCommissioningClusterNetworkInfoStruct subclass.
+// MTRNetworkCommissioningClusterNetworkInfoStructProvider is accepted wherever a MTRNetworkCommissioningClusterNetworkInfoStruct (or one of its subclasses) is expected.
 type MTRNetworkCommissioningClusterNetworkInfoStructProvider interface {
-	asMTRNetworkCommissioningClusterNetworkInfoStruct() *raw.MTRNetworkCommissioningClusterNetworkInfoStruct
+	objref.Object
 }
 
-// MTRNetworkCommissioningClusterThreadInterfaceScanResultStructProvider is implemented by MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct and any idiomatic type wrapping a MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct subclass.
+// MTRNetworkCommissioningClusterThreadInterfaceScanResultStructProvider is accepted wherever a MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct (or one of its subclasses) is expected.
 type MTRNetworkCommissioningClusterThreadInterfaceScanResultStructProvider interface {
-	asMTRNetworkCommissioningClusterThreadInterfaceScanResultStruct() *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
+	objref.Object
 }
 
-// MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructProvider is implemented by MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct and any idiomatic type wrapping a MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct subclass.
+// MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructProvider is accepted wherever a MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct (or one of its subclasses) is expected.
 type MTRNetworkCommissioningClusterWiFiInterfaceScanResultStructProvider interface {
-	asMTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct
+	objref.Object
 }
 
-// MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsProvider is implemented by MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams and any idiomatic type wrapping a MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams subclass.
+// MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsProvider is accepted wherever a MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsProvider interface {
-	asMTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams() *raw.MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams
+	objref.Object
 }
 
-// MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsProvider is implemented by MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams and any idiomatic type wrapping a MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams subclass.
+// MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsProvider is accepted wherever a MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParamsProvider interface {
-	asMTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams() *raw.MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams
+	objref.Object
 }
 
-// MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParamsProvider is implemented by MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams and any idiomatic type wrapping a MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams subclass.
+// MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParamsProvider is accepted wherever a MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParamsProvider interface {
-	asMTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams() *raw.MTROTASoftwareUpdateProviderClusterNotifyUpdateAppliedParams
+	objref.Object
 }
 
-// MTROTASoftwareUpdateProviderClusterQueryImageParamsProvider is implemented by MTROTASoftwareUpdateProviderClusterQueryImageParams and any idiomatic type wrapping a MTROTASoftwareUpdateProviderClusterQueryImageParams subclass.
+// MTROTASoftwareUpdateProviderClusterQueryImageParamsProvider is accepted wherever a MTROTASoftwareUpdateProviderClusterQueryImageParams (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateProviderClusterQueryImageParamsProvider interface {
-	asMTROTASoftwareUpdateProviderClusterQueryImageParams() *raw.MTROTASoftwareUpdateProviderClusterQueryImageParams
+	objref.Object
 }
 
-// MTROTASoftwareUpdateProviderClusterQueryImageResponseParamsProvider is implemented by MTROTASoftwareUpdateProviderClusterQueryImageResponseParams and any idiomatic type wrapping a MTROTASoftwareUpdateProviderClusterQueryImageResponseParams subclass.
+// MTROTASoftwareUpdateProviderClusterQueryImageResponseParamsProvider is accepted wherever a MTROTASoftwareUpdateProviderClusterQueryImageResponseParams (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateProviderClusterQueryImageResponseParamsProvider interface {
-	asMTROTASoftwareUpdateProviderClusterQueryImageResponseParams() *raw.MTROTASoftwareUpdateProviderClusterQueryImageResponseParams
+	objref.Object
 }
 
-// MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsProvider is implemented by MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams and any idiomatic type wrapping a MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams subclass.
+// MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsProvider is accepted wherever a MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParamsProvider interface {
-	asMTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams() *raw.MTROTASoftwareUpdateRequestorClusterAnnounceOTAProviderParams
+	objref.Object
 }
 
-// MTROTASoftwareUpdateRequestorClusterDownloadErrorEventProvider is implemented by MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent and any idiomatic type wrapping a MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent subclass.
+// MTROTASoftwareUpdateRequestorClusterDownloadErrorEventProvider is accepted wherever a MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateRequestorClusterDownloadErrorEventProvider interface {
-	asMTROTASoftwareUpdateRequestorClusterDownloadErrorEvent() *raw.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent
+	objref.Object
 }
 
-// MTROTASoftwareUpdateRequestorClusterProviderLocationProvider is implemented by MTROTASoftwareUpdateRequestorClusterProviderLocation and any idiomatic type wrapping a MTROTASoftwareUpdateRequestorClusterProviderLocation subclass.
+// MTROTASoftwareUpdateRequestorClusterProviderLocationProvider is accepted wherever a MTROTASoftwareUpdateRequestorClusterProviderLocation (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateRequestorClusterProviderLocationProvider interface {
-	asMTROTASoftwareUpdateRequestorClusterProviderLocation() *raw.MTROTASoftwareUpdateRequestorClusterProviderLocation
+	objref.Object
 }
 
-// MTROTASoftwareUpdateRequestorClusterStateTransitionEventProvider is implemented by MTROTASoftwareUpdateRequestorClusterStateTransitionEvent and any idiomatic type wrapping a MTROTASoftwareUpdateRequestorClusterStateTransitionEvent subclass.
+// MTROTASoftwareUpdateRequestorClusterStateTransitionEventProvider is accepted wherever a MTROTASoftwareUpdateRequestorClusterStateTransitionEvent (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateRequestorClusterStateTransitionEventProvider interface {
-	asMTROTASoftwareUpdateRequestorClusterStateTransitionEvent() *raw.MTROTASoftwareUpdateRequestorClusterStateTransitionEvent
+	objref.Object
 }
 
-// MTROTASoftwareUpdateRequestorClusterVersionAppliedEventProvider is implemented by MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent and any idiomatic type wrapping a MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent subclass.
+// MTROTASoftwareUpdateRequestorClusterVersionAppliedEventProvider is accepted wherever a MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent (or one of its subclasses) is expected.
 type MTROTASoftwareUpdateRequestorClusterVersionAppliedEventProvider interface {
-	asMTROTASoftwareUpdateRequestorClusterVersionAppliedEvent() *raw.MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent
+	objref.Object
 }
 
-// MTROperationalCredentialsClusterFabricDescriptorStructProvider is implemented by MTROperationalCredentialsClusterFabricDescriptorStruct and any idiomatic type wrapping a MTROperationalCredentialsClusterFabricDescriptorStruct subclass.
+// MTROperationalCredentialsClusterFabricDescriptorStructProvider is accepted wherever a MTROperationalCredentialsClusterFabricDescriptorStruct (or one of its subclasses) is expected.
 type MTROperationalCredentialsClusterFabricDescriptorStructProvider interface {
-	asMTROperationalCredentialsClusterFabricDescriptorStruct() *raw.MTROperationalCredentialsClusterFabricDescriptorStruct
+	objref.Object
 }
 
-// MTRReadParamsProvider is implemented by MTRReadParams and any idiomatic type wrapping a MTRReadParams subclass.
+// MTRReadParamsProvider is accepted wherever a MTRReadParams (or one of its subclasses) is expected.
 type MTRReadParamsProvider interface {
-	asMTRReadParams() *raw.MTRReadParams
+	objref.Object
 }
 
-// MTRSoftwareDiagnosticsClusterThreadMetricsStructProvider is implemented by MTRSoftwareDiagnosticsClusterThreadMetricsStruct and any idiomatic type wrapping a MTRSoftwareDiagnosticsClusterThreadMetricsStruct subclass.
+// MTRSoftwareDiagnosticsClusterThreadMetricsStructProvider is accepted wherever a MTRSoftwareDiagnosticsClusterThreadMetricsStruct (or one of its subclasses) is expected.
 type MTRSoftwareDiagnosticsClusterThreadMetricsStructProvider interface {
-	asMTRSoftwareDiagnosticsClusterThreadMetricsStruct() *raw.MTRSoftwareDiagnosticsClusterThreadMetricsStruct
+	objref.Object
 }
 
-// MTRTargetNavigatorClusterTargetInfoStructProvider is implemented by MTRTargetNavigatorClusterTargetInfoStruct and any idiomatic type wrapping a MTRTargetNavigatorClusterTargetInfoStruct subclass.
+// MTRTargetNavigatorClusterTargetInfoStructProvider is accepted wherever a MTRTargetNavigatorClusterTargetInfoStruct (or one of its subclasses) is expected.
 type MTRTargetNavigatorClusterTargetInfoStructProvider interface {
-	asMTRTargetNavigatorClusterTargetInfoStruct() *raw.MTRTargetNavigatorClusterTargetInfoStruct
+	objref.Object
 }
 
-// MTRThermostatClusterWeeklyScheduleTransitionStructProvider is implemented by MTRThermostatClusterWeeklyScheduleTransitionStruct and any idiomatic type wrapping a MTRThermostatClusterWeeklyScheduleTransitionStruct subclass.
+// MTRThermostatClusterWeeklyScheduleTransitionStructProvider is accepted wherever a MTRThermostatClusterWeeklyScheduleTransitionStruct (or one of its subclasses) is expected.
 type MTRThermostatClusterWeeklyScheduleTransitionStructProvider interface {
-	asMTRThermostatClusterWeeklyScheduleTransitionStruct() *raw.MTRThermostatClusterWeeklyScheduleTransitionStruct
+	objref.Object
 }
 
-// MTRThreadNetworkDiagnosticsClusterNeighborTableStructProvider is implemented by MTRThreadNetworkDiagnosticsClusterNeighborTableStruct and any idiomatic type wrapping a MTRThreadNetworkDiagnosticsClusterNeighborTableStruct subclass.
+// MTRThreadNetworkDiagnosticsClusterNeighborTableStructProvider is accepted wherever a MTRThreadNetworkDiagnosticsClusterNeighborTableStruct (or one of its subclasses) is expected.
 type MTRThreadNetworkDiagnosticsClusterNeighborTableStructProvider interface {
-	asMTRThreadNetworkDiagnosticsClusterNeighborTableStruct() *raw.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct
+	objref.Object
 }
 
-// MTRThreadNetworkDiagnosticsClusterRouteTableStructProvider is implemented by MTRThreadNetworkDiagnosticsClusterRouteTableStruct and any idiomatic type wrapping a MTRThreadNetworkDiagnosticsClusterRouteTableStruct subclass.
+// MTRThreadNetworkDiagnosticsClusterRouteTableStructProvider is accepted wherever a MTRThreadNetworkDiagnosticsClusterRouteTableStruct (or one of its subclasses) is expected.
 type MTRThreadNetworkDiagnosticsClusterRouteTableStructProvider interface {
-	asMTRThreadNetworkDiagnosticsClusterRouteTableStruct() *raw.MTRThreadNetworkDiagnosticsClusterRouteTableStruct
+	objref.Object
 }
 
-// MTRTimeSynchronizationClusterDSTOffsetStructProvider is implemented by MTRTimeSynchronizationClusterDSTOffsetStruct and any idiomatic type wrapping a MTRTimeSynchronizationClusterDSTOffsetStruct subclass.
+// MTRTimeSynchronizationClusterDSTOffsetStructProvider is accepted wherever a MTRTimeSynchronizationClusterDSTOffsetStruct (or one of its subclasses) is expected.
 type MTRTimeSynchronizationClusterDSTOffsetStructProvider interface {
-	asMTRTimeSynchronizationClusterDSTOffsetStruct() *raw.MTRTimeSynchronizationClusterDSTOffsetStruct
+	objref.Object
 }
 
-// MTRTimeSynchronizationClusterSetUTCTimeParamsProvider is implemented by MTRTimeSynchronizationClusterSetUTCTimeParams and any idiomatic type wrapping a MTRTimeSynchronizationClusterSetUTCTimeParams subclass.
+// MTRTimeSynchronizationClusterSetUTCTimeParamsProvider is accepted wherever a MTRTimeSynchronizationClusterSetUTCTimeParams (or one of its subclasses) is expected.
 type MTRTimeSynchronizationClusterSetUTCTimeParamsProvider interface {
-	asMTRTimeSynchronizationClusterSetUTCTimeParams() *raw.MTRTimeSynchronizationClusterSetUTCTimeParams
+	objref.Object
 }
 
-// MTRTimeSynchronizationClusterTimeZoneStructProvider is implemented by MTRTimeSynchronizationClusterTimeZoneStruct and any idiomatic type wrapping a MTRTimeSynchronizationClusterTimeZoneStruct subclass.
+// MTRTimeSynchronizationClusterTimeZoneStructProvider is accepted wherever a MTRTimeSynchronizationClusterTimeZoneStruct (or one of its subclasses) is expected.
 type MTRTimeSynchronizationClusterTimeZoneStructProvider interface {
-	asMTRTimeSynchronizationClusterTimeZoneStruct() *raw.MTRTimeSynchronizationClusterTimeZoneStruct
+	objref.Object
 }
 
-// MTRUnitTestingClusterBooleanResponseParamsProvider is implemented by MTRUnitTestingClusterBooleanResponseParams and any idiomatic type wrapping a MTRUnitTestingClusterBooleanResponseParams subclass.
+// MTRUnitTestingClusterBooleanResponseParamsProvider is accepted wherever a MTRUnitTestingClusterBooleanResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterBooleanResponseParamsProvider interface {
-	asMTRUnitTestingClusterBooleanResponseParams() *raw.MTRUnitTestingClusterBooleanResponseParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterDoubleNestedStructListProvider is implemented by MTRUnitTestingClusterDoubleNestedStructList and any idiomatic type wrapping a MTRUnitTestingClusterDoubleNestedStructList subclass.
+// MTRUnitTestingClusterDoubleNestedStructListProvider is accepted wherever a MTRUnitTestingClusterDoubleNestedStructList (or one of its subclasses) is expected.
 type MTRUnitTestingClusterDoubleNestedStructListProvider interface {
-	asMTRUnitTestingClusterDoubleNestedStructList() *raw.MTRUnitTestingClusterDoubleNestedStructList
+	objref.Object
 }
 
-// MTRUnitTestingClusterNestedStructProvider is implemented by MTRUnitTestingClusterNestedStruct and any idiomatic type wrapping a MTRUnitTestingClusterNestedStruct subclass.
+// MTRUnitTestingClusterNestedStructProvider is accepted wherever a MTRUnitTestingClusterNestedStruct (or one of its subclasses) is expected.
 type MTRUnitTestingClusterNestedStructProvider interface {
-	asMTRUnitTestingClusterNestedStruct() *raw.MTRUnitTestingClusterNestedStruct
+	objref.Object
 }
 
-// MTRUnitTestingClusterNestedStructListProvider is implemented by MTRUnitTestingClusterNestedStructList and any idiomatic type wrapping a MTRUnitTestingClusterNestedStructList subclass.
+// MTRUnitTestingClusterNestedStructListProvider is accepted wherever a MTRUnitTestingClusterNestedStructList (or one of its subclasses) is expected.
 type MTRUnitTestingClusterNestedStructListProvider interface {
-	asMTRUnitTestingClusterNestedStructList() *raw.MTRUnitTestingClusterNestedStructList
+	objref.Object
 }
 
-// MTRUnitTestingClusterNullablesAndOptionalsStructProvider is implemented by MTRUnitTestingClusterNullablesAndOptionalsStruct and any idiomatic type wrapping a MTRUnitTestingClusterNullablesAndOptionalsStruct subclass.
+// MTRUnitTestingClusterNullablesAndOptionalsStructProvider is accepted wherever a MTRUnitTestingClusterNullablesAndOptionalsStruct (or one of its subclasses) is expected.
 type MTRUnitTestingClusterNullablesAndOptionalsStructProvider interface {
-	asMTRUnitTestingClusterNullablesAndOptionalsStruct() *raw.MTRUnitTestingClusterNullablesAndOptionalsStruct
+	objref.Object
 }
 
-// MTRUnitTestingClusterSimpleStructProvider is implemented by MTRUnitTestingClusterSimpleStruct and any idiomatic type wrapping a MTRUnitTestingClusterSimpleStruct subclass.
+// MTRUnitTestingClusterSimpleStructProvider is accepted wherever a MTRUnitTestingClusterSimpleStruct (or one of its subclasses) is expected.
 type MTRUnitTestingClusterSimpleStructProvider interface {
-	asMTRUnitTestingClusterSimpleStruct() *raw.MTRUnitTestingClusterSimpleStruct
+	objref.Object
 }
 
-// MTRUnitTestingClusterSimpleStructEchoRequestParamsProvider is implemented by MTRUnitTestingClusterSimpleStructEchoRequestParams and any idiomatic type wrapping a MTRUnitTestingClusterSimpleStructEchoRequestParams subclass.
+// MTRUnitTestingClusterSimpleStructEchoRequestParamsProvider is accepted wherever a MTRUnitTestingClusterSimpleStructEchoRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterSimpleStructEchoRequestParamsProvider interface {
-	asMTRUnitTestingClusterSimpleStructEchoRequestParams() *raw.MTRUnitTestingClusterSimpleStructEchoRequestParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterSimpleStructResponseParamsProvider is implemented by MTRUnitTestingClusterSimpleStructResponseParams and any idiomatic type wrapping a MTRUnitTestingClusterSimpleStructResponseParams subclass.
+// MTRUnitTestingClusterSimpleStructResponseParamsProvider is accepted wherever a MTRUnitTestingClusterSimpleStructResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterSimpleStructResponseParamsProvider interface {
-	asMTRUnitTestingClusterSimpleStructResponseParams() *raw.MTRUnitTestingClusterSimpleStructResponseParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestAddArgumentsParamsProvider is implemented by MTRUnitTestingClusterTestAddArgumentsParams and any idiomatic type wrapping a MTRUnitTestingClusterTestAddArgumentsParams subclass.
+// MTRUnitTestingClusterTestAddArgumentsParamsProvider is accepted wherever a MTRUnitTestingClusterTestAddArgumentsParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestAddArgumentsParamsProvider interface {
-	asMTRUnitTestingClusterTestAddArgumentsParams() *raw.MTRUnitTestingClusterTestAddArgumentsParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestAddArgumentsResponseParamsProvider is implemented by MTRUnitTestingClusterTestAddArgumentsResponseParams and any idiomatic type wrapping a MTRUnitTestingClusterTestAddArgumentsResponseParams subclass.
+// MTRUnitTestingClusterTestAddArgumentsResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestAddArgumentsResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestAddArgumentsResponseParamsProvider interface {
-	asMTRUnitTestingClusterTestAddArgumentsResponseParams() *raw.MTRUnitTestingClusterTestAddArgumentsResponseParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsProvider is implemented by MTRUnitTestingClusterTestComplexNullableOptionalRequestParams and any idiomatic type wrapping a MTRUnitTestingClusterTestComplexNullableOptionalRequestParams subclass.
+// MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestComplexNullableOptionalRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestComplexNullableOptionalRequestParamsProvider interface {
-	asMTRUnitTestingClusterTestComplexNullableOptionalRequestParams() *raw.MTRUnitTestingClusterTestComplexNullableOptionalRequestParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsProvider is implemented by MTRUnitTestingClusterTestComplexNullableOptionalResponseParams and any idiomatic type wrapping a MTRUnitTestingClusterTestComplexNullableOptionalResponseParams subclass.
+// MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestComplexNullableOptionalResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsProvider interface {
-	asMTRUnitTestingClusterTestComplexNullableOptionalResponseParams() *raw.MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestEmitTestEventRequestParamsProvider is implemented by MTRUnitTestingClusterTestEmitTestEventRequestParams and any idiomatic type wrapping a MTRUnitTestingClusterTestEmitTestEventRequestParams subclass.
+// MTRUnitTestingClusterTestEmitTestEventRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestEmitTestEventRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestEmitTestEventRequestParamsProvider interface {
-	asMTRUnitTestingClusterTestEmitTestEventRequestParams() *raw.MTRUnitTestingClusterTestEmitTestEventRequestParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestEmitTestEventResponseParamsProvider is implemented by MTRUnitTestingClusterTestEmitTestEventResponseParams and any idiomatic type wrapping a MTRUnitTestingClusterTestEmitTestEventResponseParams subclass.
+// MTRUnitTestingClusterTestEmitTestEventResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestEmitTestEventResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestEmitTestEventResponseParamsProvider interface {
-	asMTRUnitTestingClusterTestEmitTestEventResponseParams() *raw.MTRUnitTestingClusterTestEmitTestEventResponseParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsProvider is implemented by MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams and any idiomatic type wrapping a MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams subclass.
+// MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsProvider interface {
-	asMTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsProvider is implemented by MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams and any idiomatic type wrapping a MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams subclass.
+// MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsProvider interface {
-	asMTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams() *raw.MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestEnumsRequestParamsProvider is implemented by MTRUnitTestingClusterTestEnumsRequestParams and any idiomatic type wrapping a MTRUnitTestingClusterTestEnumsRequestParams subclass.
+// MTRUnitTestingClusterTestEnumsRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestEnumsRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestEnumsRequestParamsProvider interface {
-	asMTRUnitTestingClusterTestEnumsRequestParams() *raw.MTRUnitTestingClusterTestEnumsRequestParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestEnumsResponseParamsProvider is implemented by MTRUnitTestingClusterTestEnumsResponseParams and any idiomatic type wrapping a MTRUnitTestingClusterTestEnumsResponseParams subclass.
+// MTRUnitTestingClusterTestEnumsResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestEnumsResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestEnumsResponseParamsProvider interface {
-	asMTRUnitTestingClusterTestEnumsResponseParams() *raw.MTRUnitTestingClusterTestEnumsResponseParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestEventEventProvider is implemented by MTRUnitTestingClusterTestEventEvent and any idiomatic type wrapping a MTRUnitTestingClusterTestEventEvent subclass.
+// MTRUnitTestingClusterTestEventEventProvider is accepted wherever a MTRUnitTestingClusterTestEventEvent (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestEventEventProvider interface {
-	asMTRUnitTestingClusterTestEventEvent() *raw.MTRUnitTestingClusterTestEventEvent
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestFabricScopedProvider is implemented by MTRUnitTestingClusterTestFabricScoped and any idiomatic type wrapping a MTRUnitTestingClusterTestFabricScoped subclass.
+// MTRUnitTestingClusterTestFabricScopedProvider is accepted wherever a MTRUnitTestingClusterTestFabricScoped (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestFabricScopedProvider interface {
-	asMTRUnitTestingClusterTestFabricScoped() *raw.MTRUnitTestingClusterTestFabricScoped
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestFabricScopedEventEventProvider is implemented by MTRUnitTestingClusterTestFabricScopedEventEvent and any idiomatic type wrapping a MTRUnitTestingClusterTestFabricScopedEventEvent subclass.
+// MTRUnitTestingClusterTestFabricScopedEventEventProvider is accepted wherever a MTRUnitTestingClusterTestFabricScopedEventEvent (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestFabricScopedEventEventProvider interface {
-	asMTRUnitTestingClusterTestFabricScopedEventEvent() *raw.MTRUnitTestingClusterTestFabricScopedEventEvent
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestListInt8UArgumentRequestParamsProvider is implemented by MTRUnitTestingClusterTestListInt8UArgumentRequestParams and any idiomatic type wrapping a MTRUnitTestingClusterTestListInt8UArgumentRequestParams subclass.
+// MTRUnitTestingClusterTestListInt8UArgumentRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestListInt8UArgumentRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestListInt8UArgumentRequestParamsProvider interface {
-	asMTRUnitTestingClusterTestListInt8UArgumentRequestParams() *raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestListInt8UReverseRequestParamsProvider is implemented by MTRUnitTestingClusterTestListInt8UReverseRequestParams and any idiomatic type wrapping a MTRUnitTestingClusterTestListInt8UReverseRequestParams subclass.
+// MTRUnitTestingClusterTestListInt8UReverseRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestListInt8UReverseRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestListInt8UReverseRequestParamsProvider interface {
-	asMTRUnitTestingClusterTestListInt8UReverseRequestParams() *raw.MTRUnitTestingClusterTestListInt8UReverseRequestParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestListInt8UReverseResponseParamsProvider is implemented by MTRUnitTestingClusterTestListInt8UReverseResponseParams and any idiomatic type wrapping a MTRUnitTestingClusterTestListInt8UReverseResponseParams subclass.
+// MTRUnitTestingClusterTestListInt8UReverseResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestListInt8UReverseResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestListInt8UReverseResponseParamsProvider interface {
-	asMTRUnitTestingClusterTestListInt8UReverseResponseParams() *raw.MTRUnitTestingClusterTestListInt8UReverseResponseParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestListNestedStructListArgumentRequestParamsProvider is implemented by MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams and any idiomatic type wrapping a MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams subclass.
+// MTRUnitTestingClusterTestListNestedStructListArgumentRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestListNestedStructListArgumentRequestParamsProvider interface {
-	asMTRUnitTestingClusterTestListNestedStructListArgumentRequestParams() *raw.MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestListStructArgumentRequestParamsProvider is implemented by MTRUnitTestingClusterTestListStructArgumentRequestParams and any idiomatic type wrapping a MTRUnitTestingClusterTestListStructArgumentRequestParams subclass.
+// MTRUnitTestingClusterTestListStructArgumentRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestListStructArgumentRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestListStructArgumentRequestParamsProvider interface {
-	asMTRUnitTestingClusterTestListStructArgumentRequestParams() *raw.MTRUnitTestingClusterTestListStructArgumentRequestParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestListStructOctetProvider is implemented by MTRUnitTestingClusterTestListStructOctet and any idiomatic type wrapping a MTRUnitTestingClusterTestListStructOctet subclass.
+// MTRUnitTestingClusterTestListStructOctetProvider is accepted wherever a MTRUnitTestingClusterTestListStructOctet (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestListStructOctetProvider interface {
-	asMTRUnitTestingClusterTestListStructOctet() *raw.MTRUnitTestingClusterTestListStructOctet
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestNestedStructArgumentRequestParamsProvider is implemented by MTRUnitTestingClusterTestNestedStructArgumentRequestParams and any idiomatic type wrapping a MTRUnitTestingClusterTestNestedStructArgumentRequestParams subclass.
+// MTRUnitTestingClusterTestNestedStructArgumentRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestNestedStructArgumentRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestNestedStructArgumentRequestParamsProvider interface {
-	asMTRUnitTestingClusterTestNestedStructArgumentRequestParams() *raw.MTRUnitTestingClusterTestNestedStructArgumentRequestParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestNestedStructListArgumentRequestParamsProvider is implemented by MTRUnitTestingClusterTestNestedStructListArgumentRequestParams and any idiomatic type wrapping a MTRUnitTestingClusterTestNestedStructListArgumentRequestParams subclass.
+// MTRUnitTestingClusterTestNestedStructListArgumentRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestNestedStructListArgumentRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestNestedStructListArgumentRequestParamsProvider interface {
-	asMTRUnitTestingClusterTestNestedStructListArgumentRequestParams() *raw.MTRUnitTestingClusterTestNestedStructListArgumentRequestParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestNotHandledParamsProvider is implemented by MTRUnitTestingClusterTestNotHandledParams and any idiomatic type wrapping a MTRUnitTestingClusterTestNotHandledParams subclass.
+// MTRUnitTestingClusterTestNotHandledParamsProvider is accepted wherever a MTRUnitTestingClusterTestNotHandledParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestNotHandledParamsProvider interface {
-	asMTRUnitTestingClusterTestNotHandledParams() *raw.MTRUnitTestingClusterTestNotHandledParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestNullableOptionalRequestParamsProvider is implemented by MTRUnitTestingClusterTestNullableOptionalRequestParams and any idiomatic type wrapping a MTRUnitTestingClusterTestNullableOptionalRequestParams subclass.
+// MTRUnitTestingClusterTestNullableOptionalRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestNullableOptionalRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestNullableOptionalRequestParamsProvider interface {
-	asMTRUnitTestingClusterTestNullableOptionalRequestParams() *raw.MTRUnitTestingClusterTestNullableOptionalRequestParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestNullableOptionalResponseParamsProvider is implemented by MTRUnitTestingClusterTestNullableOptionalResponseParams and any idiomatic type wrapping a MTRUnitTestingClusterTestNullableOptionalResponseParams subclass.
+// MTRUnitTestingClusterTestNullableOptionalResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestNullableOptionalResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestNullableOptionalResponseParamsProvider interface {
-	asMTRUnitTestingClusterTestNullableOptionalResponseParams() *raw.MTRUnitTestingClusterTestNullableOptionalResponseParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestParamsProvider is implemented by MTRUnitTestingClusterTestParams and any idiomatic type wrapping a MTRUnitTestingClusterTestParams subclass.
+// MTRUnitTestingClusterTestParamsProvider is accepted wherever a MTRUnitTestingClusterTestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestParamsProvider interface {
-	asMTRUnitTestingClusterTestParams() *raw.MTRUnitTestingClusterTestParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestSimpleArgumentRequestParamsProvider is implemented by MTRUnitTestingClusterTestSimpleArgumentRequestParams and any idiomatic type wrapping a MTRUnitTestingClusterTestSimpleArgumentRequestParams subclass.
+// MTRUnitTestingClusterTestSimpleArgumentRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestSimpleArgumentRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestSimpleArgumentRequestParamsProvider interface {
-	asMTRUnitTestingClusterTestSimpleArgumentRequestParams() *raw.MTRUnitTestingClusterTestSimpleArgumentRequestParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestSimpleArgumentResponseParamsProvider is implemented by MTRUnitTestingClusterTestSimpleArgumentResponseParams and any idiomatic type wrapping a MTRUnitTestingClusterTestSimpleArgumentResponseParams subclass.
+// MTRUnitTestingClusterTestSimpleArgumentResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestSimpleArgumentResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestSimpleArgumentResponseParamsProvider interface {
-	asMTRUnitTestingClusterTestSimpleArgumentResponseParams() *raw.MTRUnitTestingClusterTestSimpleArgumentResponseParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParamsProvider is implemented by MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams and any idiomatic type wrapping a MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams subclass.
+// MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParamsProvider interface {
-	asMTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams() *raw.MTRUnitTestingClusterTestSimpleOptionalArgumentRequestParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestSpecificParamsProvider is implemented by MTRUnitTestingClusterTestSpecificParams and any idiomatic type wrapping a MTRUnitTestingClusterTestSpecificParams subclass.
+// MTRUnitTestingClusterTestSpecificParamsProvider is accepted wherever a MTRUnitTestingClusterTestSpecificParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestSpecificParamsProvider interface {
-	asMTRUnitTestingClusterTestSpecificParams() *raw.MTRUnitTestingClusterTestSpecificParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestSpecificResponseParamsProvider is implemented by MTRUnitTestingClusterTestSpecificResponseParams and any idiomatic type wrapping a MTRUnitTestingClusterTestSpecificResponseParams subclass.
+// MTRUnitTestingClusterTestSpecificResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestSpecificResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestSpecificResponseParamsProvider interface {
-	asMTRUnitTestingClusterTestSpecificResponseParams() *raw.MTRUnitTestingClusterTestSpecificResponseParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestStructArgumentRequestParamsProvider is implemented by MTRUnitTestingClusterTestStructArgumentRequestParams and any idiomatic type wrapping a MTRUnitTestingClusterTestStructArgumentRequestParams subclass.
+// MTRUnitTestingClusterTestStructArgumentRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestStructArgumentRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestStructArgumentRequestParamsProvider interface {
-	asMTRUnitTestingClusterTestStructArgumentRequestParams() *raw.MTRUnitTestingClusterTestStructArgumentRequestParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestStructArrayArgumentRequestParamsProvider is implemented by MTRUnitTestingClusterTestStructArrayArgumentRequestParams and any idiomatic type wrapping a MTRUnitTestingClusterTestStructArrayArgumentRequestParams subclass.
+// MTRUnitTestingClusterTestStructArrayArgumentRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTestStructArrayArgumentRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestStructArrayArgumentRequestParamsProvider interface {
-	asMTRUnitTestingClusterTestStructArrayArgumentRequestParams() *raw.MTRUnitTestingClusterTestStructArrayArgumentRequestParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestStructArrayArgumentResponseParamsProvider is implemented by MTRUnitTestingClusterTestStructArrayArgumentResponseParams and any idiomatic type wrapping a MTRUnitTestingClusterTestStructArrayArgumentResponseParams subclass.
+// MTRUnitTestingClusterTestStructArrayArgumentResponseParamsProvider is accepted wherever a MTRUnitTestingClusterTestStructArrayArgumentResponseParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestStructArrayArgumentResponseParamsProvider interface {
-	asMTRUnitTestingClusterTestStructArrayArgumentResponseParams() *raw.MTRUnitTestingClusterTestStructArrayArgumentResponseParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTestUnknownCommandParamsProvider is implemented by MTRUnitTestingClusterTestUnknownCommandParams and any idiomatic type wrapping a MTRUnitTestingClusterTestUnknownCommandParams subclass.
+// MTRUnitTestingClusterTestUnknownCommandParamsProvider is accepted wherever a MTRUnitTestingClusterTestUnknownCommandParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTestUnknownCommandParamsProvider interface {
-	asMTRUnitTestingClusterTestUnknownCommandParams() *raw.MTRUnitTestingClusterTestUnknownCommandParams
+	objref.Object
 }
 
-// MTRUnitTestingClusterTimedInvokeRequestParamsProvider is implemented by MTRUnitTestingClusterTimedInvokeRequestParams and any idiomatic type wrapping a MTRUnitTestingClusterTimedInvokeRequestParams subclass.
+// MTRUnitTestingClusterTimedInvokeRequestParamsProvider is accepted wherever a MTRUnitTestingClusterTimedInvokeRequestParams (or one of its subclasses) is expected.
 type MTRUnitTestingClusterTimedInvokeRequestParamsProvider interface {
-	asMTRUnitTestingClusterTimedInvokeRequestParams() *raw.MTRUnitTestingClusterTimedInvokeRequestParams
+	objref.Object
 }

@@ -5,36 +5,26 @@
 package mediaplayer
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DefaultCenter calls the underlying MPNowPlayingInfoCenterDefaultCenter.
+// Returns the singleton Now Playing info center.
 func DefaultCenter() *NowPlayingInfoCenter {
-	_r := raw.MPNowPlayingInfoCenterDefaultCenter()
-	if _r == nil {
-		return nil
-	}
-	return &NowPlayingInfoCenter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MPNowPlayingInfoCenter")), objc.RegisterName("defaultCenter"))
+	return NowPlayingInfoCenterFromID(_r)
 }
 
+// Keys related to animated artwork that are supported by the current platform. If you specify an instance of animated artwork (an `MPMediaItemAnimatedArtwork`) to `nowPlayingInfo` using any key not in this collection it will be ignored.
+//
 // SupportedAnimatedArtworkKeys returns the collection as a Go slice.
 func SupportedAnimatedArtworkKeys() []string {
-	arr := raw.MPNowPlayingInfoCenterSupportedAnimatedArtworkKeys()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("MPNowPlayingInfoCenter")), objc.RegisterName("supportedAnimatedArtworkKeys"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SharedCommandCenter calls the underlying MPRemoteCommandCenterSharedCommandCenter.
+// Returns the shared object you use to access the system’s remote command objects.
 func SharedCommandCenter() *RemoteCommandCenter {
-	_r := raw.MPRemoteCommandCenterSharedCommandCenter()
-	if _r == nil {
-		return nil
-	}
-	return &RemoteCommandCenter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MPRemoteCommandCenter")), objc.RegisterName("sharedCommandCenter"))
+	return RemoteCommandCenterFromID(_r)
 }

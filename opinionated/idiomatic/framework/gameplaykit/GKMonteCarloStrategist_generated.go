@@ -5,87 +5,110 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An AI that chooses moves in turn-based games using a probabilistic strategy.
 //
-// MonteCarloStrategist wraps [raw.GKMonteCarloStrategist] with a fluent Go API.
+// MonteCarloStrategist is an idiomatic wrapper over the Objective-C class GKMonteCarloStrategist.
 type MonteCarloStrategist struct {
-	inner *raw.GKMonteCarloStrategist
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKMonteCarloStrategist].
-func (x *MonteCarloStrategist) Unwrap() *raw.GKMonteCarloStrategist { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MonteCarloStrategist) ID() objc.ID { return x.inner.Ptr() }
-
-// MonteCarloStrategistFromID adopts an existing object pointer as a MonteCarloStrategist (nil for 0).
+// MonteCarloStrategistFromID adopts an existing Objective-C object as a MonteCarloStrategist
+// (nil for 0), retaining it and registering a release finalizer.
 func MonteCarloStrategistFromID(id objc.ID) *MonteCarloStrategist {
 	if id == 0 {
 		return nil
 	}
-	return &MonteCarloStrategist{inner: raw.GKMonteCarloStrategistFromID(id)}
+	x := &MonteCarloStrategist{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMonteCarloStrategist creates a new [MonteCarloStrategist].
+// monteCarloStrategistAdopt wraps an Objective-C object that this code just created as a
+// MonteCarloStrategist (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func monteCarloStrategistAdopt(id objc.ID) *MonteCarloStrategist {
+	if id == 0 {
+		return nil
+	}
+	x := &MonteCarloStrategist{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MonteCarloStrategist) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MonteCarloStrategist) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MonteCarloStrategist) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMonteCarloStrategist creates a new MonteCarloStrategist.
 func NewMonteCarloStrategist() *MonteCarloStrategist {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKMonteCarloStrategist")), objc.RegisterName("new"))
-	return &MonteCarloStrategist{inner: raw.GKMonteCarloStrategistFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKMonteCarloStrategist")), objc.RegisterName("new"))
+	return monteCarloStrategistAdopt(_id)
 }
 
 // The maximum number of game model states the strategist will examine when searching for a move.
 //
-// WithBudget sets the budget property and returns the receiver for chaining.
-func (x *MonteCarloStrategist) WithBudget(budget uint) *MonteCarloStrategist {
-	x.inner.SetBudget(budget)
+// WithBudget sets budget and returns the receiver so calls can be chained.
+func (x *MonteCarloStrategist) WithBudget(budget int) *MonteCarloStrategist {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBudget:"), budget)
 	return x
 }
 
 // A value that influences whether the strategist searches more broadly or more deeply for winning game model states.
 //
-// WithExplorationParameter sets the explorationParameter property and returns the receiver for chaining.
-func (x *MonteCarloStrategist) WithExplorationParameter(explorationParameter uint) *MonteCarloStrategist {
-	x.inner.SetExplorationParameter(explorationParameter)
+// WithExplorationParameter sets explorationParameter and returns the receiver so calls can be chained.
+func (x *MonteCarloStrategist) WithExplorationParameter(explorationParameter int) *MonteCarloStrategist {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExplorationParameter:"), explorationParameter)
 	return x
 }
 
 // The maximum number of samples that will be processed when searching for a move.
-//
-// Budget calls the underlying Budget.
-func (x *MonteCarloStrategist) Budget() uint {
-	return x.inner.Budget()
+func (x *MonteCarloStrategist) Budget() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("budget"))
+	return _r
 }
 
-// SetBudget calls the underlying SetBudget.
-func (x *MonteCarloStrategist) SetBudget(budget uint) {
-	x.inner.SetBudget(budget)
+func (x *MonteCarloStrategist) SetBudget(budget int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBudget:"), budget)
 }
 
 // A weight that encourages exploration of less visited updates versus the continued exploitation of previously visited updates.
-//
-// ExplorationParameter calls the underlying ExplorationParameter.
-func (x *MonteCarloStrategist) ExplorationParameter() uint {
-	return x.inner.ExplorationParameter()
+func (x *MonteCarloStrategist) ExplorationParameter() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("explorationParameter"))
+	return _r
 }
 
-// SetExplorationParameter calls the underlying SetExplorationParameter.
-func (x *MonteCarloStrategist) SetExplorationParameter(explorationParameter uint) {
-	x.inner.SetExplorationParameter(explorationParameter)
+func (x *MonteCarloStrategist) SetExplorationParameter(explorationParameter int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExplorationParameter:"), explorationParameter)
 }
 
 // MonteCarloStrategistable is the interface implemented by [MonteCarloStrategist], for mocking and DI.
 type MonteCarloStrategistable interface {
-	Unwrap() *raw.GKMonteCarloStrategist
-	WithBudget(budget uint) *MonteCarloStrategist
-	WithExplorationParameter(explorationParameter uint) *MonteCarloStrategist
-	Budget() uint
-	SetBudget(budget uint)
-	ExplorationParameter() uint
-	SetExplorationParameter(explorationParameter uint)
+	obj.Object
+	WithBudget(budget int) *MonteCarloStrategist
+	WithExplorationParameter(explorationParameter int) *MonteCarloStrategist
+	Budget() int
+	SetBudget(budget int)
+	ExplorationParameter() int
+	SetExplorationParameter(explorationParameter int)
 }
 
 var _ MonteCarloStrategistable = (*MonteCarloStrategist)(nil)

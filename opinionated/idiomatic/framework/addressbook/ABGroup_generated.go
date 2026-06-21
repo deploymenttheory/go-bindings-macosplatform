@@ -5,121 +5,134 @@
 package addressbook
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/addressbook"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a group of records in the Address Book database.
 //
-// Group wraps [raw.ABGroup] with a fluent Go API.
+// Group is an idiomatic wrapper over the Objective-C class ABGroup.
 type Group struct {
-	inner *raw.ABGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ABGroup].
-func (x *Group) Unwrap() *raw.ABGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Group) ID() objc.ID { return x.inner.Ptr() }
-
-// GroupFromID adopts an existing object pointer as a Group (nil for 0).
+// GroupFromID adopts an existing Objective-C object as a Group
+// (nil for 0), retaining it and registering a release finalizer.
 func GroupFromID(id objc.ID) *Group {
 	if id == 0 {
 		return nil
 	}
-	return &Group{inner: raw.ABGroupFromID(id)}
+	x := &Group{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGroup creates a new [Group].
+// groupAdopt wraps an Objective-C object that this code just created as a
+// Group (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func groupAdopt(id objc.ID) *Group {
+	if id == 0 {
+		return nil
+	}
+	x := &Group{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Group) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Group) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Group) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGroup creates a new Group.
 func NewGroup() *Group {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ABGroup")), objc.RegisterName("new"))
-	return &Group{inner: raw.ABGroupFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ABGroup")), objc.RegisterName("new"))
+	return groupAdopt(_id)
 }
 
 // Returns an array of persons in a group.
-//
-// Members calls the underlying Members.
-func (x *Group) Members() *foundation.NSArray[objc.ID] {
-	return x.inner.Members()
+func (x *Group) Members() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("members"))
+	return obj.Wrap(_r)
 }
 
 // Adds a person to a group.
-//
-// AddMember calls the underlying AddMember.
-func (x *Group) AddMember(person *raw.ABPerson) bool {
-	return x.inner.AddMember(person)
+func (x *Group) AddMember(person *Person) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addMember:"), objref.IDOf(person))
+	return _r
 }
 
 // Removes a person from a group.
-//
-// RemoveMember calls the underlying RemoveMember.
-func (x *Group) RemoveMember(person *raw.ABPerson) bool {
-	return x.inner.RemoveMember(person)
+func (x *Group) RemoveMember(person *Person) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeMember:"), objref.IDOf(person))
+	return _r
 }
 
 // Returns an array containing a group’s subgroups.
-//
-// Subgroups calls the underlying Subgroups.
-func (x *Group) Subgroups() *foundation.NSArray[objc.ID] {
-	return x.inner.Subgroups()
+func (x *Group) Subgroups() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subgroups"))
+	return obj.Wrap(_r)
 }
 
 // Adds a subgroup to another group.
-//
-// AddSubgroup calls the underlying AddSubgroup.
-func (x *Group) AddSubgroup(group *raw.ABGroup) bool {
-	return x.inner.AddSubgroup(group)
+func (x *Group) AddSubgroup(group *Group) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addSubgroup:"), objref.IDOf(group))
+	return _r
 }
 
 // Removes a subgroup from a group.
-//
-// RemoveSubgroup calls the underlying RemoveSubgroup.
-func (x *Group) RemoveSubgroup(group *raw.ABGroup) bool {
-	return x.inner.RemoveSubgroup(group)
+func (x *Group) RemoveSubgroup(group *Group) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeSubgroup:"), objref.IDOf(group))
+	return _r
 }
 
 // Returns an array containing a group’s parents—that is, the groups that a group belongs to.
-//
-// ParentGroups calls the underlying ParentGroups.
-func (x *Group) ParentGroups() *foundation.NSArray[objc.ID] {
-	return x.inner.ParentGroups()
+func (x *Group) ParentGroups() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentGroups"))
+	return obj.Wrap(_r)
 }
 
 // Assigns a specific distribution identifier for a person’s multivalue list property so that the group can be used as a distribution list.
-//
-// SetDistributionIdentifierForPropertyPerson calls the underlying SetDistributionIdentifierForPropertyPerson.
-func (x *Group) SetDistributionIdentifierForPropertyPerson(identifier string, property string, person *raw.ABPerson) bool {
-	return x.inner.SetDistributionIdentifierForPropertyPerson(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(property), person)
+func (x *Group) SetDistributionIdentifierForPropertyPerson(identifier string, property string, person *Person) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setDistributionIdentifier:forProperty:person:"), purego.NSString(identifier), purego.NSString(property), objref.IDOf(person))
+	return _r
 }
 
 // Returns the distribution identifier for the given property and person.
-//
-// DistributionIdentifierForPropertyPerson calls the underlying DistributionIdentifierForPropertyPerson.
-func (x *Group) DistributionIdentifierForPropertyPerson(property string, person *raw.ABPerson) string {
-	_r := x.inner.DistributionIdentifierForPropertyPerson(foundation.NSStringStringWithUTF8String(property), person)
-	if _r == nil {
+func (x *Group) DistributionIdentifierForPropertyPerson(property string, person *Person) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("distributionIdentifierForProperty:person:"), purego.NSString(property), objref.IDOf(person))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *Group) asRecord() *raw.ABRecord { return &x.inner.ABRecord }
 
 // Groupable is the interface implemented by [Group], for mocking and DI.
 type Groupable interface {
-	Unwrap() *raw.ABGroup
-	Members() *foundation.NSArray[objc.ID]
-	AddMember(person *raw.ABPerson) bool
-	RemoveMember(person *raw.ABPerson) bool
-	Subgroups() *foundation.NSArray[objc.ID]
-	AddSubgroup(group *raw.ABGroup) bool
-	RemoveSubgroup(group *raw.ABGroup) bool
-	ParentGroups() *foundation.NSArray[objc.ID]
-	SetDistributionIdentifierForPropertyPerson(identifier string, property string, person *raw.ABPerson) bool
-	DistributionIdentifierForPropertyPerson(property string, person *raw.ABPerson) string
+	obj.Object
+	Members() obj.Object
+	AddMember(person *Person) bool
+	RemoveMember(person *Person) bool
+	Subgroups() obj.Object
+	AddSubgroup(group *Group) bool
+	RemoveSubgroup(group *Group) bool
+	ParentGroups() obj.Object
+	SetDistributionIdentifierForPropertyPerson(identifier string, property string, person *Person) bool
+	DistributionIdentifierForPropertyPerson(property string, person *Person) string
 }
 
 var _ Groupable = (*Group)(nil)

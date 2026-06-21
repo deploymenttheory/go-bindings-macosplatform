@@ -5,74 +5,81 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A collection of key-value observations which may be registered with multiple observable objects
 //
-// KeyValueSharedObservers wraps [raw.NSKeyValueSharedObservers] with a fluent Go API.
+// KeyValueSharedObservers is an idiomatic wrapper over the Objective-C class NSKeyValueSharedObservers.
 type KeyValueSharedObservers struct {
-	inner *raw.NSKeyValueSharedObservers
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSKeyValueSharedObservers].
-func (x *KeyValueSharedObservers) Unwrap() *raw.NSKeyValueSharedObservers { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *KeyValueSharedObservers) ID() objc.ID { return x.inner.Ptr() }
-
-// KeyValueSharedObserversFromID adopts an existing object pointer as a KeyValueSharedObservers (nil for 0).
+// KeyValueSharedObserversFromID adopts an existing Objective-C object as a KeyValueSharedObservers
+// (nil for 0), retaining it and registering a release finalizer.
 func KeyValueSharedObserversFromID(id objc.ID) *KeyValueSharedObservers {
 	if id == 0 {
 		return nil
 	}
-	return &KeyValueSharedObservers{inner: raw.NSKeyValueSharedObserversFromID(id)}
-}
-
-// A new collection of observables for an observable object of the given class
-//
-// NewKeyValueSharedObserversWithObservableClass creates a new [KeyValueSharedObservers].
-func NewKeyValueSharedObserversWithObservableClass(observableClass objc.Class) *KeyValueSharedObservers {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSKeyValueSharedObservers")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObservableClass:"), observableClass)
-	return &KeyValueSharedObservers{inner: raw.NSKeyValueSharedObserversFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *KeyValueSharedObservers) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *KeyValueSharedObservers {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &KeyValueSharedObservers{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Add a new observer to the collection.
-//
-// AddSharedObserverForKeyOptionsContext calls the underlying AddSharedObserverForKeyOptionsContext.
-func (x *KeyValueSharedObservers) AddSharedObserverForKeyOptionsContext(observer *raw.NSObject, key string, options NSKeyValueObservingOptions, context_ unsafe.Pointer) {
-	x.inner.AddSharedObserverForKeyOptionsContext(observer, foundation.NSStringStringWithUTF8String(key), raw.NSKeyValueObservingOptions(options), context_)
+// keyValueSharedObserversAdopt wraps an Objective-C object that this code just created as a
+// KeyValueSharedObservers (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func keyValueSharedObserversAdopt(id objc.ID) *KeyValueSharedObservers {
+	if id == 0 {
+		return nil
+	}
+	x := &KeyValueSharedObservers{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *KeyValueSharedObservers) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *KeyValueSharedObservers) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *KeyValueSharedObservers) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewKeyValueSharedObservers creates a new KeyValueSharedObservers.
+func NewKeyValueSharedObservers() *KeyValueSharedObservers {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSKeyValueSharedObservers")), objc.RegisterName("new"))
+	return keyValueSharedObserversAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *KeyValueSharedObservers) WithScriptingProperties(scriptingProperties obj.Object) *KeyValueSharedObservers {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
 }
 
 // A momentary snapshot of all observers added to the collection thus far, that can be assigned to an observable using -[NSObject setSharedObservers:]
-//
-// Snapshot calls the underlying Snapshot.
 func (x *KeyValueSharedObservers) Snapshot() *KeyValueSharedObserversSnapshot {
-	_r := x.inner.Snapshot()
-	if _r == nil {
-		return nil
-	}
-	return &KeyValueSharedObserversSnapshot{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshot"))
+	return KeyValueSharedObserversSnapshotFromID(_r)
 }
-
-func (x *KeyValueSharedObservers) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // KeyValueSharedObserversable is the interface implemented by [KeyValueSharedObservers], for mocking and DI.
 type KeyValueSharedObserversable interface {
-	Unwrap() *raw.NSKeyValueSharedObservers
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *KeyValueSharedObservers
-	AddSharedObserverForKeyOptionsContext(observer *raw.NSObject, key string, options NSKeyValueObservingOptions, context_ unsafe.Pointer)
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *KeyValueSharedObservers
 	Snapshot() *KeyValueSharedObserversSnapshot
 }
 

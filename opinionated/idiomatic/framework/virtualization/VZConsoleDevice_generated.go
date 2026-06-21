@@ -5,43 +5,68 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that represents a console device in a VM.
 //
-// ConsoleDevice wraps [raw.VZConsoleDevice] with a fluent Go API.
+// ConsoleDevice is an idiomatic wrapper over the Objective-C class VZConsoleDevice.
 type ConsoleDevice struct {
-	inner *raw.VZConsoleDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZConsoleDevice].
-func (x *ConsoleDevice) Unwrap() *raw.VZConsoleDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ConsoleDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// ConsoleDeviceFromID adopts an existing object pointer as a ConsoleDevice (nil for 0).
+// ConsoleDeviceFromID adopts an existing Objective-C object as a ConsoleDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func ConsoleDeviceFromID(id objc.ID) *ConsoleDevice {
 	if id == 0 {
 		return nil
 	}
-	return &ConsoleDevice{inner: raw.VZConsoleDeviceFromID(id)}
+	x := &ConsoleDevice{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewConsoleDevice creates a new [ConsoleDevice].
+// consoleDeviceAdopt wraps an Objective-C object that this code just created as a
+// ConsoleDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func consoleDeviceAdopt(id objc.ID) *ConsoleDevice {
+	if id == 0 {
+		return nil
+	}
+	x := &ConsoleDevice{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ConsoleDevice) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ConsoleDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ConsoleDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewConsoleDevice creates a new ConsoleDevice.
 func NewConsoleDevice() *ConsoleDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZConsoleDevice")), objc.RegisterName("new"))
-	return &ConsoleDevice{inner: raw.VZConsoleDeviceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZConsoleDevice")), objc.RegisterName("new"))
+	return consoleDeviceAdopt(_id)
 }
-
-func (x *ConsoleDevice) asConsoleDevice() *raw.VZConsoleDevice { return x.inner }
 
 // ConsoleDeviceable is the interface implemented by [ConsoleDevice], for mocking and DI.
 type ConsoleDeviceable interface {
-	Unwrap() *raw.VZConsoleDevice
+	obj.Object
 }
 
 var _ ConsoleDeviceable = (*ConsoleDevice)(nil)

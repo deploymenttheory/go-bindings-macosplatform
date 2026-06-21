@@ -5,56 +5,80 @@
 package localauthentication
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DomainStateBiometry wraps [raw.LADomainStateBiometry] with a fluent Go API.
+// DomainStateBiometry is an idiomatic wrapper over the Objective-C class LADomainStateBiometry.
 type DomainStateBiometry struct {
-	inner *raw.LADomainStateBiometry
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.LADomainStateBiometry].
-func (x *DomainStateBiometry) Unwrap() *raw.LADomainStateBiometry { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DomainStateBiometry) ID() objc.ID { return x.inner.Ptr() }
-
-// DomainStateBiometryFromID adopts an existing object pointer as a DomainStateBiometry (nil for 0).
+// DomainStateBiometryFromID adopts an existing Objective-C object as a DomainStateBiometry
+// (nil for 0), retaining it and registering a release finalizer.
 func DomainStateBiometryFromID(id objc.ID) *DomainStateBiometry {
 	if id == 0 {
 		return nil
 	}
-	return &DomainStateBiometry{inner: raw.LADomainStateBiometryFromID(id)}
+	x := &DomainStateBiometry{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDomainStateBiometry creates a new [DomainStateBiometry].
+// domainStateBiometryAdopt wraps an Objective-C object that this code just created as a
+// DomainStateBiometry (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func domainStateBiometryAdopt(id objc.ID) *DomainStateBiometry {
+	if id == 0 {
+		return nil
+	}
+	x := &DomainStateBiometry{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DomainStateBiometry) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DomainStateBiometry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DomainStateBiometry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDomainStateBiometry creates a new DomainStateBiometry.
 func NewDomainStateBiometry() *DomainStateBiometry {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LADomainStateBiometry")), objc.RegisterName("new"))
-	return &DomainStateBiometry{inner: raw.LADomainStateBiometryFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("LADomainStateBiometry")), objc.RegisterName("new"))
+	return domainStateBiometryAdopt(_id)
 }
 
 // Indicates biometry type available on the device.
-//
-// BiometryType calls the underlying BiometryType.
-func (x *DomainStateBiometry) BiometryType() LABiometryType {
-	return LABiometryType(x.inner.BiometryType())
+func (x *DomainStateBiometry) BiometryType() BiometryType {
+	_r := objc.Send[BiometryType](objref.IDOf(x), objc.RegisterName("biometryType"))
+	return _r
 }
 
-// Contains state hash data for the available biometry type. Returns `nil` if no biometry entities are enrolled. @discussion  If biometric database was modified (fingers, faces were removed or added), `stateHash` data will change. Nature of such database changes cannot be determined but comparing data of `stateHash` after different evaluatePolicy calls will reveal the fact database was changed between the calls. @warning Please note that the value returned by this property can change exceptionally between major OS versions even if the state of biometry has not changed.
-//
-// StateHash calls the underlying StateHash.
-func (x *DomainStateBiometry) StateHash() *foundation.NSData {
-	return x.inner.StateHash()
+// Contains state hash data for the available biometry type. Returns `nil` if no biometry entities are enrolled. If biometric database was modified (fingers, faces were removed or added), `stateHash` data will change. Nature of such database changes cannot be determined but comparing data of `stateHash` after different evaluatePolicy calls will reveal the fact database was changed between the calls.
+func (x *DomainStateBiometry) StateHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateHash"))
+	return obj.Wrap(_r)
 }
 
 // DomainStateBiometryable is the interface implemented by [DomainStateBiometry], for mocking and DI.
 type DomainStateBiometryable interface {
-	Unwrap() *raw.LADomainStateBiometry
-	BiometryType() LABiometryType
-	StateHash() *foundation.NSData
+	obj.Object
+	BiometryType() BiometryType
+	StateHash() obj.Object
 }
 
 var _ DomainStateBiometryable = (*DomainStateBiometry)(nil)

@@ -5,60 +5,82 @@
 package photosui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// PickerResult wraps [raw.PHPickerResult] with a fluent Go API.
+// PickerResult is an idiomatic wrapper over the Objective-C class PHPickerResult.
 type PickerResult struct {
-	inner *raw.PHPickerResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHPickerResult].
-func (x *PickerResult) Unwrap() *raw.PHPickerResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PickerResult) ID() objc.ID { return x.inner.Ptr() }
-
-// PickerResultFromID adopts an existing object pointer as a PickerResult (nil for 0).
+// PickerResultFromID adopts an existing Objective-C object as a PickerResult
+// (nil for 0), retaining it and registering a release finalizer.
 func PickerResultFromID(id objc.ID) *PickerResult {
 	if id == 0 {
 		return nil
 	}
-	return &PickerResult{inner: raw.PHPickerResultFromID(id)}
+	x := &PickerResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPickerResult creates a new [PickerResult].
+// pickerResultAdopt wraps an Objective-C object that this code just created as a
+// PickerResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pickerResultAdopt(id objc.ID) *PickerResult {
+	if id == 0 {
+		return nil
+	}
+	x := &PickerResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PickerResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PickerResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PickerResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPickerResult creates a new PickerResult.
 func NewPickerResult() *PickerResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHPickerResult")), objc.RegisterName("new"))
-	return &PickerResult{inner: raw.PHPickerResultFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHPickerResult")), objc.RegisterName("new"))
+	return pickerResultAdopt(_id)
 }
 
 // Representations of the selected asset.
-//
-// ItemProvider calls the underlying ItemProvider.
-func (x *PickerResult) ItemProvider() *foundation.NSItemProvider {
-	return x.inner.ItemProvider()
+func (x *PickerResult) ItemProvider() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemProvider"))
+	return obj.Wrap(_r)
 }
 
 // The local identifier of the selected asset.
-//
-// AssetIdentifier calls the underlying AssetIdentifier.
 func (x *PickerResult) AssetIdentifier() string {
-	_r := x.inner.AssetIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // PickerResultable is the interface implemented by [PickerResult], for mocking and DI.
 type PickerResultable interface {
-	Unwrap() *raw.PHPickerResult
-	ItemProvider() *foundation.NSItemProvider
+	obj.Object
+	ItemProvider() obj.Object
 	AssetIdentifier() string
 }
 

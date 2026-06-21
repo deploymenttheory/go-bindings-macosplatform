@@ -5,41 +5,68 @@
 package usernotifications
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An icon associated with an action.
 //
-// NotificationActionIcon wraps [raw.UNNotificationActionIcon] with a fluent Go API.
+// NotificationActionIcon is an idiomatic wrapper over the Objective-C class UNNotificationActionIcon.
 type NotificationActionIcon struct {
-	inner *raw.UNNotificationActionIcon
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.UNNotificationActionIcon].
-func (x *NotificationActionIcon) Unwrap() *raw.UNNotificationActionIcon { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NotificationActionIcon) ID() objc.ID { return x.inner.Ptr() }
-
-// NotificationActionIconFromID adopts an existing object pointer as a NotificationActionIcon (nil for 0).
+// NotificationActionIconFromID adopts an existing Objective-C object as a NotificationActionIcon
+// (nil for 0), retaining it and registering a release finalizer.
 func NotificationActionIconFromID(id objc.ID) *NotificationActionIcon {
 	if id == 0 {
 		return nil
 	}
-	return &NotificationActionIcon{inner: raw.UNNotificationActionIconFromID(id)}
+	x := &NotificationActionIcon{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNotificationActionIcon creates a new [NotificationActionIcon].
+// notificationActionIconAdopt wraps an Objective-C object that this code just created as a
+// NotificationActionIcon (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func notificationActionIconAdopt(id objc.ID) *NotificationActionIcon {
+	if id == 0 {
+		return nil
+	}
+	x := &NotificationActionIcon{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NotificationActionIcon) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NotificationActionIcon) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NotificationActionIcon) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNotificationActionIcon creates a new NotificationActionIcon.
 func NewNotificationActionIcon() *NotificationActionIcon {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNNotificationActionIcon")), objc.RegisterName("new"))
-	return &NotificationActionIcon{inner: raw.UNNotificationActionIconFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("UNNotificationActionIcon")), objc.RegisterName("new"))
+	return notificationActionIconAdopt(_id)
 }
 
 // NotificationActionIconable is the interface implemented by [NotificationActionIcon], for mocking and DI.
 type NotificationActionIconable interface {
-	Unwrap() *raw.UNNotificationActionIcon
+	obj.Object
 }
 
 var _ NotificationActionIconable = (*NotificationActionIcon)(nil)

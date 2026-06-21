@@ -5,97 +5,116 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRWaterHeaterModeClusterModeOptionStruct wraps [raw.MTRWaterHeaterModeClusterModeOptionStruct] with a fluent Go API.
+// MTRWaterHeaterModeClusterModeOptionStruct is an idiomatic wrapper over the Objective-C class MTRWaterHeaterModeClusterModeOptionStruct.
 type MTRWaterHeaterModeClusterModeOptionStruct struct {
-	inner *raw.MTRWaterHeaterModeClusterModeOptionStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRWaterHeaterModeClusterModeOptionStruct].
-func (x *MTRWaterHeaterModeClusterModeOptionStruct) Unwrap() *raw.MTRWaterHeaterModeClusterModeOptionStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRWaterHeaterModeClusterModeOptionStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRWaterHeaterModeClusterModeOptionStructFromID adopts an existing object pointer as a MTRWaterHeaterModeClusterModeOptionStruct (nil for 0).
+// MTRWaterHeaterModeClusterModeOptionStructFromID adopts an existing Objective-C object as a MTRWaterHeaterModeClusterModeOptionStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRWaterHeaterModeClusterModeOptionStructFromID(id objc.ID) *MTRWaterHeaterModeClusterModeOptionStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRWaterHeaterModeClusterModeOptionStruct{inner: raw.MTRWaterHeaterModeClusterModeOptionStructFromID(id)}
+	x := &MTRWaterHeaterModeClusterModeOptionStruct{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRWaterHeaterModeClusterModeOptionStruct creates a new [MTRWaterHeaterModeClusterModeOptionStruct].
+// mTRWaterHeaterModeClusterModeOptionStructAdopt wraps an Objective-C object that this code just created as a
+// MTRWaterHeaterModeClusterModeOptionStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRWaterHeaterModeClusterModeOptionStructAdopt(id objc.ID) *MTRWaterHeaterModeClusterModeOptionStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRWaterHeaterModeClusterModeOptionStruct{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRWaterHeaterModeClusterModeOptionStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRWaterHeaterModeClusterModeOptionStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRWaterHeaterModeClusterModeOptionStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRWaterHeaterModeClusterModeOptionStruct creates a new MTRWaterHeaterModeClusterModeOptionStruct.
 func NewMTRWaterHeaterModeClusterModeOptionStruct() *MTRWaterHeaterModeClusterModeOptionStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRWaterHeaterModeClusterModeOptionStruct")), objc.RegisterName("new"))
-	return &MTRWaterHeaterModeClusterModeOptionStruct{inner: raw.MTRWaterHeaterModeClusterModeOptionStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRWaterHeaterModeClusterModeOptionStruct")), objc.RegisterName("new"))
+	return mTRWaterHeaterModeClusterModeOptionStructAdopt(_id)
 }
 
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *MTRWaterHeaterModeClusterModeOptionStruct) WithLabel(label string) *MTRWaterHeaterModeClusterModeOptionStruct {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// WithMode sets the mode property and returns the receiver for chaining.
-func (x *MTRWaterHeaterModeClusterModeOptionStruct) WithMode(mode *foundation.NSNumber) *MTRWaterHeaterModeClusterModeOptionStruct {
-	x.inner.SetMode(mode)
+// WithMode sets mode and returns the receiver so calls can be chained.
+func (x *MTRWaterHeaterModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRWaterHeaterModeClusterModeOptionStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return x
 }
 
-// Label calls the underlying Label.
 func (x *MTRWaterHeaterModeClusterModeOptionStruct) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
 func (x *MTRWaterHeaterModeClusterModeOptionStruct) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// Mode calls the underlying Mode.
-func (x *MTRWaterHeaterModeClusterModeOptionStruct) Mode() *foundation.NSNumber {
-	return x.inner.Mode()
+func (x *MTRWaterHeaterModeClusterModeOptionStruct) Mode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mode"))
+	return obj.Wrap(_r)
 }
 
-// SetMode calls the underlying SetMode.
-func (x *MTRWaterHeaterModeClusterModeOptionStruct) SetMode(mode *foundation.NSNumber) {
-	x.inner.SetMode(mode)
+func (x *MTRWaterHeaterModeClusterModeOptionStruct) SetMode(mode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 }
 
-// ModeTags calls the underlying ModeTags.
-func (x *MTRWaterHeaterModeClusterModeOptionStruct) ModeTags() *foundation.NSArray[objc.ID] {
-	return x.inner.ModeTags()
+func (x *MTRWaterHeaterModeClusterModeOptionStruct) ModeTags() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modeTags"))
+	return obj.Wrap(_r)
 }
 
-// SetModeTags calls the underlying SetModeTags.
-func (x *MTRWaterHeaterModeClusterModeOptionStruct) SetModeTags(modeTags *foundation.NSArray[objc.ID]) {
-	x.inner.SetModeTags(modeTags)
+func (x *MTRWaterHeaterModeClusterModeOptionStruct) SetModeTags(modeTags obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeTags:"), objref.IDOf(modeTags))
 }
 
 // MTRWaterHeaterModeClusterModeOptionStructable is the interface implemented by [MTRWaterHeaterModeClusterModeOptionStruct], for mocking and DI.
 type MTRWaterHeaterModeClusterModeOptionStructable interface {
-	Unwrap() *raw.MTRWaterHeaterModeClusterModeOptionStruct
+	obj.Object
 	WithLabel(label string) *MTRWaterHeaterModeClusterModeOptionStruct
-	WithMode(mode *foundation.NSNumber) *MTRWaterHeaterModeClusterModeOptionStruct
+	WithMode(mode obj.Object) *MTRWaterHeaterModeClusterModeOptionStruct
 	Label() string
 	SetLabel(label string)
-	Mode() *foundation.NSNumber
-	SetMode(mode *foundation.NSNumber)
-	ModeTags() *foundation.NSArray[objc.ID]
-	SetModeTags(modeTags *foundation.NSArray[objc.ID])
+	Mode() obj.Object
+	SetMode(mode obj.Object)
+	ModeTags() obj.Object
+	SetModeTags(modeTags obj.Object)
 }
 
 var _ MTRWaterHeaterModeClusterModeOptionStructable = (*MTRWaterHeaterModeClusterModeOptionStruct)(nil)

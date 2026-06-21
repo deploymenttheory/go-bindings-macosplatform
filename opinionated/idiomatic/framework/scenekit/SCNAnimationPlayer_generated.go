@@ -5,131 +5,141 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AnimationPlayer wraps [raw.SCNAnimationPlayer] with a fluent Go API.
+// AnimationPlayer is an idiomatic wrapper over the Objective-C class SCNAnimationPlayer.
 type AnimationPlayer struct {
-	inner *raw.SCNAnimationPlayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNAnimationPlayer].
-func (x *AnimationPlayer) Unwrap() *raw.SCNAnimationPlayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AnimationPlayer) ID() objc.ID { return x.inner.Ptr() }
-
-// AnimationPlayerFromID adopts an existing object pointer as a AnimationPlayer (nil for 0).
+// AnimationPlayerFromID adopts an existing Objective-C object as a AnimationPlayer
+// (nil for 0), retaining it and registering a release finalizer.
 func AnimationPlayerFromID(id objc.ID) *AnimationPlayer {
 	if id == 0 {
 		return nil
 	}
-	return &AnimationPlayer{inner: raw.SCNAnimationPlayerFromID(id)}
+	x := &AnimationPlayer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAnimationPlayer creates a new [AnimationPlayer].
+// animationPlayerAdopt wraps an Objective-C object that this code just created as a
+// AnimationPlayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func animationPlayerAdopt(id objc.ID) *AnimationPlayer {
+	if id == 0 {
+		return nil
+	}
+	x := &AnimationPlayer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AnimationPlayer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AnimationPlayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AnimationPlayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAnimationPlayer creates a new AnimationPlayer.
 func NewAnimationPlayer() *AnimationPlayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNAnimationPlayer")), objc.RegisterName("new"))
-	return &AnimationPlayer{inner: raw.SCNAnimationPlayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNAnimationPlayer")), objc.RegisterName("new"))
+	return animationPlayerAdopt(_id)
 }
 
 // The speed to play the animation at. Defaults to 1.0. Animatable
 //
-// WithSpeed sets the speed property and returns the receiver for chaining.
+// WithSpeed sets speed and returns the receiver so calls can be chained.
 func (x *AnimationPlayer) WithSpeed(speed float64) *AnimationPlayer {
-	x.inner.SetSpeed(speed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
 // Controls the influence of the played animation. When set to 1 the animation is applied without any blending. When set to less than 1, the animation value is blent with the current presentation value of the animated property. Defaults to 1.0. Animatable.
 //
-// WithBlendFactor sets the blendFactor property and returns the receiver for chaining.
+// WithBlendFactor sets blendFactor and returns the receiver so calls can be chained.
 func (x *AnimationPlayer) WithBlendFactor(blendFactor float64) *AnimationPlayer {
-	x.inner.SetBlendFactor(blendFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendFactor:"), blendFactor)
 	return x
 }
 
 // Specifies if the animation is paused. Defaults to NO.
 //
-// WithPaused sets the paused property and returns the receiver for chaining.
+// WithPaused sets paused and returns the receiver so calls can be chained.
 func (x *AnimationPlayer) WithPaused(paused bool) *AnimationPlayer {
-	x.inner.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
 // Set paused to NO and restart playing from the beginning of the animation.
-//
-// Play calls the underlying Play.
 func (x *AnimationPlayer) Play() {
-	x.inner.Play()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("play"))
 }
 
 // Stop the animation.
-//
-// Stop calls the underlying Stop.
 func (x *AnimationPlayer) Stop() {
-	x.inner.Stop()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
 // Stop the animation and smoothly blend out the animation over the specified duration.
-//
-// StopWithBlendOutDuration calls the underlying StopWithBlendOutDuration.
 func (x *AnimationPlayer) StopWithBlendOutDuration(duration float64) {
-	x.inner.StopWithBlendOutDuration(duration)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopWithBlendOutDuration:"), duration)
 }
 
 // The played animation
-//
-// Animation calls the underlying Animation.
 func (x *AnimationPlayer) Animation() *Animation {
-	_r := x.inner.Animation()
-	if _r == nil {
-		return nil
-	}
-	return &Animation{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animation"))
+	return AnimationFromID(_r)
 }
 
 // The speed to play the animation at. Defaults to 1.0. Animatable
-//
-// Speed calls the underlying Speed.
 func (x *AnimationPlayer) Speed() float64 {
-	return x.inner.Speed()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speed"))
+	return _r
 }
 
-// SetSpeed calls the underlying SetSpeed.
 func (x *AnimationPlayer) SetSpeed(speed float64) {
-	x.inner.SetSpeed(speed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 }
 
 // Controls the influence of the played animation. When set to 1 the animation is applied without any blending. When set to less than 1, the animation value is blent with the current presentation value of the animated property. Defaults to 1.0. Animatable.
-//
-// BlendFactor calls the underlying BlendFactor.
 func (x *AnimationPlayer) BlendFactor() float64 {
-	return x.inner.BlendFactor()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("blendFactor"))
+	return _r
 }
 
-// SetBlendFactor calls the underlying SetBlendFactor.
 func (x *AnimationPlayer) SetBlendFactor(blendFactor float64) {
-	x.inner.SetBlendFactor(blendFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendFactor:"), blendFactor)
 }
 
 // Specifies if the animation is paused. Defaults to NO.
-//
-// Paused calls the underlying Paused.
 func (x *AnimationPlayer) Paused() bool {
-	return x.inner.Paused()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("paused"))
+	return _r
 }
 
-// SetPaused calls the underlying SetPaused.
 func (x *AnimationPlayer) SetPaused(paused bool) {
-	x.inner.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 }
 
 // AnimationPlayerable is the interface implemented by [AnimationPlayer], for mocking and DI.
 type AnimationPlayerable interface {
-	Unwrap() *raw.SCNAnimationPlayer
+	obj.Object
 	WithSpeed(speed float64) *AnimationPlayer
 	WithBlendFactor(blendFactor float64) *AnimationPlayer
 	WithPaused(paused bool) *AnimationPlayer

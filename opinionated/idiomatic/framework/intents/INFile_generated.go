@@ -5,119 +5,135 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that describes a file.
 //
-// File wraps [raw.INFile] with a fluent Go API.
+// File is an idiomatic wrapper over the Objective-C class INFile.
 type File struct {
-	inner *raw.INFile
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INFile].
-func (x *File) Unwrap() *raw.INFile { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *File) ID() objc.ID { return x.inner.Ptr() }
-
-// FileFromID adopts an existing object pointer as a File (nil for 0).
+// FileFromID adopts an existing Objective-C object as a File
+// (nil for 0), retaining it and registering a release finalizer.
 func FileFromID(id objc.ID) *File {
 	if id == 0 {
 		return nil
 	}
-	return &File{inner: raw.INFileFromID(id)}
+	x := &File{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFile creates a new [File].
+// fileAdopt wraps an Objective-C object that this code just created as a
+// File (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileAdopt(id objc.ID) *File {
+	if id == 0 {
+		return nil
+	}
+	x := &File{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *File) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *File) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *File) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFile creates a new File.
 func NewFile() *File {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INFile")), objc.RegisterName("new"))
-	return &File{inner: raw.INFileFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("INFile")), objc.RegisterName("new"))
+	return fileAdopt(_id)
 }
 
 // The name of the file.
 //
-// WithFilename sets the filename property and returns the receiver for chaining.
+// WithFilename sets filename and returns the receiver so calls can be chained.
 func (x *File) WithFilename(filename string) *File {
-	x.inner.SetFilename(foundation.NSStringStringWithUTF8String(filename))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilename:"), purego.NSString(filename))
 	return x
 }
 
 // Indicates whether the file should be automatically deleted from disk when the Shortcut is done running. `false` by default.
 //
-// WithRemovedOnCompletion sets the removedOnCompletion property and returns the receiver for chaining.
+// WithRemovedOnCompletion sets removedOnCompletion and returns the receiver so calls can be chained.
 func (x *File) WithRemovedOnCompletion(removedOnCompletion bool) *File {
-	x.inner.SetRemovedOnCompletion(removedOnCompletion)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
 	return x
 }
 
 // The contents of the file. If the file was created with a URL, accessing this property will memory map the file contents.
-//
-// Data calls the underlying Data.
-func (x *File) Data() *foundation.NSData {
-	return x.inner.Data()
+func (x *File) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
 
 // The human-readable name of the file, which will be displayed to the user.
-//
-// Filename calls the underlying Filename.
 func (x *File) Filename() string {
-	_r := x.inner.Filename()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filename"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetFilename calls the underlying SetFilename.
 func (x *File) SetFilename(filename string) {
-	x.inner.SetFilename(foundation.NSStringStringWithUTF8String(filename))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilename:"), purego.NSString(filename))
 }
 
 // The uniform type identifier of the file. (i.e. "public.json", "public.png", or any custom type) More information about uniform type identifiers can be found in <CoreServices/UTCoreTypes.h>
-//
-// TypeIdentifier calls the underlying TypeIdentifier.
 func (x *File) TypeIdentifier() string {
-	_r := x.inner.TypeIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typeIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // URL to the file on disk, if any. If the file isn't stored on disk, access the contents using the `data` property. If the file was created elsewhere on the system, make sure to surround access to file contents with `-[NSURL startAccessingSecurityScopedResource]` and `-[NSURL stopAccessingSecurityScopedResource]`.
-//
-// FileURL calls the underlying FileURL.
-func (x *File) FileURL() *foundation.NSURL {
-	return x.inner.FileURL()
+func (x *File) FileURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileURL"))
+	return obj.Wrap(_r)
 }
 
 // Indicates whether the file should be automatically deleted from disk when the Shortcut is done running. `false` by default.
-//
-// RemovedOnCompletion calls the underlying RemovedOnCompletion.
 func (x *File) RemovedOnCompletion() bool {
-	return x.inner.RemovedOnCompletion()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removedOnCompletion"))
+	return _r
 }
 
-// SetRemovedOnCompletion calls the underlying SetRemovedOnCompletion.
 func (x *File) SetRemovedOnCompletion(removedOnCompletion bool) {
-	x.inner.SetRemovedOnCompletion(removedOnCompletion)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
 }
 
 // Fileable is the interface implemented by [File], for mocking and DI.
 type Fileable interface {
-	Unwrap() *raw.INFile
+	obj.Object
 	WithFilename(filename string) *File
 	WithRemovedOnCompletion(removedOnCompletion bool) *File
-	Data() *foundation.NSData
+	Data() obj.Object
 	Filename() string
 	SetFilename(filename string)
 	TypeIdentifier() string
-	FileURL() *foundation.NSURL
+	FileURL() obj.Object
 	RemovedOnCompletion() bool
 	SetRemovedOnCompletion(removedOnCompletion bool)
 }

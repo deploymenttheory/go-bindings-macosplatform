@@ -10,302 +10,31 @@ import (
 )
 
 // Bitmask — values may be combined with |.
-type MPSCNNBatchNormalizationFlags uint64
+type CNNBatchNormalizationFlags uint64
 
 const (
 	// Default Settings
-	MPSCNNBatchNormalizationFlagsDefault MPSCNNBatchNormalizationFlags = 0
+	CNNBatchNormalizationFlagsDefault CNNBatchNormalizationFlags = 0
 	// Statistics are calculated if another node consumes the gradient node (training). The data source is used otherwise.
-	MPSCNNBatchNormalizationFlagsCalculateStatisticsAutomatic MPSCNNBatchNormalizationFlags = 0
+	CNNBatchNormalizationFlagsCalculateStatisticsAutomatic CNNBatchNormalizationFlags = 0
 	// Statistics are calculated always
-	MPSCNNBatchNormalizationFlagsCalculateStatisticsAlways MPSCNNBatchNormalizationFlags = 1
+	CNNBatchNormalizationFlagsCalculateStatisticsAlways CNNBatchNormalizationFlags = 1
 	// Statistics are never calculated. Predefined values from the data source are used instead
-	MPSCNNBatchNormalizationFlagsCalculateStatisticsNever MPSCNNBatchNormalizationFlags = 2
+	CNNBatchNormalizationFlagsCalculateStatisticsNever CNNBatchNormalizationFlags = 2
 	// Bits used for  MPSCNNBatchNormalizationFlagsCalculateStatistics
-	MPSCNNBatchNormalizationFlagsCalculateStatisticsMask MPSCNNBatchNormalizationFlags = 3
+	CNNBatchNormalizationFlagsCalculateStatisticsMask CNNBatchNormalizationFlags = 3
 )
 
-func (e MPSCNNBatchNormalizationFlags) String() string {
+func (e CNNBatchNormalizationFlags) String() string {
 	var parts []string
-	if e&MPSCNNBatchNormalizationFlagsCalculateStatisticsAlways != 0 {
-		parts = append(parts, "MPSCNNBatchNormalizationFlagsCalculateStatisticsAlways")
+	if e&CNNBatchNormalizationFlagsCalculateStatisticsAlways != 0 {
+		parts = append(parts, "CNNBatchNormalizationFlagsCalculateStatisticsAlways")
 	}
-	if e&MPSCNNBatchNormalizationFlagsCalculateStatisticsNever != 0 {
-		parts = append(parts, "MPSCNNBatchNormalizationFlagsCalculateStatisticsNever")
+	if e&CNNBatchNormalizationFlagsCalculateStatisticsNever != 0 {
+		parts = append(parts, "CNNBatchNormalizationFlagsCalculateStatisticsNever")
 	}
-	if e&MPSCNNBatchNormalizationFlagsCalculateStatisticsMask != 0 {
-		parts = append(parts, "MPSCNNBatchNormalizationFlagsCalculateStatisticsMask")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-type MPSCNNBinaryConvolutionFlags uint64
-
-const (
-	// Use default in binary convolution options
-	MPSCNNBinaryConvolutionFlagsNone MPSCNNBinaryConvolutionFlags = 0
-	// Scale the binary convolution operation using the beta-image option as detailed in MPSCNNBinaryConvolution
-	MPSCNNBinaryConvolutionFlagsUseBetaScaling MPSCNNBinaryConvolutionFlags = 1
-)
-
-func (e MPSCNNBinaryConvolutionFlags) String() string {
-	switch e {
-	case MPSCNNBinaryConvolutionFlagsNone:
-		return "MPSCNNBinaryConvolutionFlagsNone"
-	case MPSCNNBinaryConvolutionFlagsUseBetaScaling:
-		return "MPSCNNBinaryConvolutionFlagsUseBetaScaling"
-	default:
-		return fmt.Sprintf("MPSCNNBinaryConvolutionFlags(%d)", int64(e))
-	}
-}
-
-type MPSCNNBinaryConvolutionType uint64
-
-const (
-	// Otherwise a normal convolution operation, except that the weights are binary values
-	MPSCNNBinaryConvolutionTypeBinaryWeights MPSCNNBinaryConvolutionType = 0
-	// Use input image binarization and the XNOR-operation to perform the actual convolution - See MPSCNNBinaryConvolution for details
-	MPSCNNBinaryConvolutionTypeXNOR MPSCNNBinaryConvolutionType = 1
-	// Use input image binarization and the AND-operation to perform the actual convolution - See MPSCNNBinaryConvolution for details
-	MPSCNNBinaryConvolutionTypeAND MPSCNNBinaryConvolutionType = 2
-)
-
-func (e MPSCNNBinaryConvolutionType) String() string {
-	switch e {
-	case MPSCNNBinaryConvolutionTypeBinaryWeights:
-		return "MPSCNNBinaryConvolutionTypeBinaryWeights"
-	case MPSCNNBinaryConvolutionTypeXNOR:
-		return "MPSCNNBinaryConvolutionTypeXNOR"
-	case MPSCNNBinaryConvolutionTypeAND:
-		return "MPSCNNBinaryConvolutionTypeAND"
-	default:
-		return fmt.Sprintf("MPSCNNBinaryConvolutionType(%d)", int64(e))
-	}
-}
-
-type MPSCNNConvolutionFlags uint64
-
-const (
-	// Use default options
-	MPSCNNConvolutionFlagsNone MPSCNNConvolutionFlags = 0
-)
-
-func (e MPSCNNConvolutionFlags) String() string {
-	switch e {
-	case MPSCNNConvolutionFlagsNone:
-		return "MPSCNNConvolutionFlagsNone"
-	default:
-		return fmt.Sprintf("MPSCNNConvolutionFlags(%d)", int64(e))
-	}
-}
-
-// Bitmask — values may be combined with |.
-type MPSCNNConvolutionGradientOption uint64
-
-const (
-	MPSCNNConvolutionGradientOptionGradientWithData           MPSCNNConvolutionGradientOption = 1
-	MPSCNNConvolutionGradientOptionGradientWithWeightsAndBias MPSCNNConvolutionGradientOption = 2
-	MPSCNNConvolutionGradientOptionAll                        MPSCNNConvolutionGradientOption = 3
-)
-
-func (e MPSCNNConvolutionGradientOption) String() string {
-	var parts []string
-	if e&MPSCNNConvolutionGradientOptionGradientWithData != 0 {
-		parts = append(parts, "MPSCNNConvolutionGradientOptionGradientWithData")
-	}
-	if e&MPSCNNConvolutionGradientOptionGradientWithWeightsAndBias != 0 {
-		parts = append(parts, "MPSCNNConvolutionGradientOptionGradientWithWeightsAndBias")
-	}
-	if e&MPSCNNConvolutionGradientOptionAll != 0 {
-		parts = append(parts, "MPSCNNConvolutionGradientOptionAll")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-type MPSCNNConvolutionWeightsLayout int64
-
-const (
-	MPSCNNConvolutionWeightsLayoutOHWI MPSCNNConvolutionWeightsLayout = 0
-)
-
-func (e MPSCNNConvolutionWeightsLayout) String() string {
-	switch e {
-	case MPSCNNConvolutionWeightsLayoutOHWI:
-		return "MPSCNNConvolutionWeightsLayoutOHWI"
-	default:
-		return fmt.Sprintf("MPSCNNConvolutionWeightsLayout(%d)", int64(e))
-	}
-}
-
-type MPSCNNLossType int64
-
-const (
-	MPSCNNLossTypeMeanAbsoluteError         MPSCNNLossType = 0
-	MPSCNNLossTypeMeanSquaredError          MPSCNNLossType = 1
-	MPSCNNLossTypeSoftMaxCrossEntropy       MPSCNNLossType = 2
-	MPSCNNLossTypeSigmoidCrossEntropy       MPSCNNLossType = 3
-	MPSCNNLossTypeCategoricalCrossEntropy   MPSCNNLossType = 4
-	MPSCNNLossTypeHinge                     MPSCNNLossType = 5
-	MPSCNNLossTypeHuber                     MPSCNNLossType = 6
-	MPSCNNLossTypeCosineDistance            MPSCNNLossType = 7
-	MPSCNNLossTypeLog                       MPSCNNLossType = 8
-	MPSCNNLossTypeKullbackLeiblerDivergence MPSCNNLossType = 9
-	MPSCNNLossTypeCount                     MPSCNNLossType = 10
-)
-
-func (e MPSCNNLossType) String() string {
-	switch e {
-	case MPSCNNLossTypeMeanAbsoluteError:
-		return "MPSCNNLossTypeMeanAbsoluteError"
-	case MPSCNNLossTypeMeanSquaredError:
-		return "MPSCNNLossTypeMeanSquaredError"
-	case MPSCNNLossTypeSoftMaxCrossEntropy:
-		return "MPSCNNLossTypeSoftMaxCrossEntropy"
-	case MPSCNNLossTypeSigmoidCrossEntropy:
-		return "MPSCNNLossTypeSigmoidCrossEntropy"
-	case MPSCNNLossTypeCategoricalCrossEntropy:
-		return "MPSCNNLossTypeCategoricalCrossEntropy"
-	case MPSCNNLossTypeHinge:
-		return "MPSCNNLossTypeHinge"
-	case MPSCNNLossTypeHuber:
-		return "MPSCNNLossTypeHuber"
-	case MPSCNNLossTypeCosineDistance:
-		return "MPSCNNLossTypeCosineDistance"
-	case MPSCNNLossTypeLog:
-		return "MPSCNNLossTypeLog"
-	case MPSCNNLossTypeKullbackLeiblerDivergence:
-		return "MPSCNNLossTypeKullbackLeiblerDivergence"
-	case MPSCNNLossTypeCount:
-		return "MPSCNNLossTypeCount"
-	default:
-		return fmt.Sprintf("MPSCNNLossType(%d)", int64(e))
-	}
-}
-
-type MPSCNNNeuronType int64
-
-const (
-	MPSCNNNeuronTypeNone        MPSCNNNeuronType = 0
-	MPSCNNNeuronTypeReLU        MPSCNNNeuronType = 1
-	MPSCNNNeuronTypeLinear      MPSCNNNeuronType = 2
-	MPSCNNNeuronTypeSigmoid     MPSCNNNeuronType = 3
-	MPSCNNNeuronTypeHardSigmoid MPSCNNNeuronType = 4
-	MPSCNNNeuronTypeTanH        MPSCNNNeuronType = 5
-	MPSCNNNeuronTypeAbsolute    MPSCNNNeuronType = 6
-	MPSCNNNeuronTypeSoftPlus    MPSCNNNeuronType = 7
-	MPSCNNNeuronTypeSoftSign    MPSCNNNeuronType = 8
-	MPSCNNNeuronTypeELU         MPSCNNNeuronType = 9
-	MPSCNNNeuronTypePReLU       MPSCNNNeuronType = 10
-	MPSCNNNeuronTypeReLUN       MPSCNNNeuronType = 11
-	MPSCNNNeuronTypePower       MPSCNNNeuronType = 12
-	MPSCNNNeuronTypeExponential MPSCNNNeuronType = 13
-	MPSCNNNeuronTypeLogarithm   MPSCNNNeuronType = 14
-	MPSCNNNeuronTypeGeLU        MPSCNNNeuronType = 15
-	MPSCNNNeuronTypeCount       MPSCNNNeuronType = 16
-)
-
-func (e MPSCNNNeuronType) String() string {
-	switch e {
-	case MPSCNNNeuronTypeNone:
-		return "MPSCNNNeuronTypeNone"
-	case MPSCNNNeuronTypeReLU:
-		return "MPSCNNNeuronTypeReLU"
-	case MPSCNNNeuronTypeLinear:
-		return "MPSCNNNeuronTypeLinear"
-	case MPSCNNNeuronTypeSigmoid:
-		return "MPSCNNNeuronTypeSigmoid"
-	case MPSCNNNeuronTypeHardSigmoid:
-		return "MPSCNNNeuronTypeHardSigmoid"
-	case MPSCNNNeuronTypeTanH:
-		return "MPSCNNNeuronTypeTanH"
-	case MPSCNNNeuronTypeAbsolute:
-		return "MPSCNNNeuronTypeAbsolute"
-	case MPSCNNNeuronTypeSoftPlus:
-		return "MPSCNNNeuronTypeSoftPlus"
-	case MPSCNNNeuronTypeSoftSign:
-		return "MPSCNNNeuronTypeSoftSign"
-	case MPSCNNNeuronTypeELU:
-		return "MPSCNNNeuronTypeELU"
-	case MPSCNNNeuronTypePReLU:
-		return "MPSCNNNeuronTypePReLU"
-	case MPSCNNNeuronTypeReLUN:
-		return "MPSCNNNeuronTypeReLUN"
-	case MPSCNNNeuronTypePower:
-		return "MPSCNNNeuronTypePower"
-	case MPSCNNNeuronTypeExponential:
-		return "MPSCNNNeuronTypeExponential"
-	case MPSCNNNeuronTypeLogarithm:
-		return "MPSCNNNeuronTypeLogarithm"
-	case MPSCNNNeuronTypeGeLU:
-		return "MPSCNNNeuronTypeGeLU"
-	case MPSCNNNeuronTypeCount:
-		return "MPSCNNNeuronTypeCount"
-	default:
-		return fmt.Sprintf("MPSCNNNeuronType(%d)", int64(e))
-	}
-}
-
-type MPSCNNReductionType int64
-
-const (
-	MPSCNNReductionTypeNone                MPSCNNReductionType = 0
-	MPSCNNReductionTypeSum                 MPSCNNReductionType = 1
-	MPSCNNReductionTypeMean                MPSCNNReductionType = 2
-	MPSCNNReductionTypeSumByNonZeroWeights MPSCNNReductionType = 3
-	MPSCNNReductionTypeCount               MPSCNNReductionType = 4
-)
-
-func (e MPSCNNReductionType) String() string {
-	switch e {
-	case MPSCNNReductionTypeNone:
-		return "MPSCNNReductionTypeNone"
-	case MPSCNNReductionTypeSum:
-		return "MPSCNNReductionTypeSum"
-	case MPSCNNReductionTypeMean:
-		return "MPSCNNReductionTypeMean"
-	case MPSCNNReductionTypeSumByNonZeroWeights:
-		return "MPSCNNReductionTypeSumByNonZeroWeights"
-	case MPSCNNReductionTypeCount:
-		return "MPSCNNReductionTypeCount"
-	default:
-		return fmt.Sprintf("MPSCNNReductionType(%d)", int64(e))
-	}
-}
-
-// Bitmask — values may be combined with |.
-type MPSNNComparisonType uint64
-
-const (
-	MPSNNComparisonTypeEqual          MPSNNComparisonType = 0
-	MPSNNComparisonTypeNotEqual       MPSNNComparisonType = 1
-	MPSNNComparisonTypeLess           MPSNNComparisonType = 2
-	MPSNNComparisonTypeLessOrEqual    MPSNNComparisonType = 3
-	MPSNNComparisonTypeGreater        MPSNNComparisonType = 4
-	MPSNNComparisonTypeGreaterOrEqual MPSNNComparisonType = 5
-)
-
-func (e MPSNNComparisonType) String() string {
-	var parts []string
-	if e&MPSNNComparisonTypeNotEqual != 0 {
-		parts = append(parts, "MPSNNComparisonTypeNotEqual")
-	}
-	if e&MPSNNComparisonTypeLess != 0 {
-		parts = append(parts, "MPSNNComparisonTypeLess")
-	}
-	if e&MPSNNComparisonTypeLessOrEqual != 0 {
-		parts = append(parts, "MPSNNComparisonTypeLessOrEqual")
-	}
-	if e&MPSNNComparisonTypeGreater != 0 {
-		parts = append(parts, "MPSNNComparisonTypeGreater")
-	}
-	if e&MPSNNComparisonTypeGreaterOrEqual != 0 {
-		parts = append(parts, "MPSNNComparisonTypeGreaterOrEqual")
+	if e&CNNBatchNormalizationFlagsCalculateStatisticsMask != 0 {
+		parts = append(parts, "CNNBatchNormalizationFlagsCalculateStatisticsMask")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -314,19 +43,230 @@ func (e MPSNNComparisonType) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MPSNNConvolutionAccumulatorPrecisionOption uint64
+type CNNConvolutionGradientOption uint64
+
+const (
+	CNNConvolutionGradientOptionGradientWithData           CNNConvolutionGradientOption = 1
+	CNNConvolutionGradientOptionGradientWithWeightsAndBias CNNConvolutionGradientOption = 2
+	CNNConvolutionGradientOptionAll                        CNNConvolutionGradientOption = 3
+)
+
+func (e CNNConvolutionGradientOption) String() string {
+	var parts []string
+	if e&CNNConvolutionGradientOptionGradientWithData != 0 {
+		parts = append(parts, "CNNConvolutionGradientOptionGradientWithData")
+	}
+	if e&CNNConvolutionGradientOptionGradientWithWeightsAndBias != 0 {
+		parts = append(parts, "CNNConvolutionGradientOptionGradientWithWeightsAndBias")
+	}
+	if e&CNNConvolutionGradientOptionAll != 0 {
+		parts = append(parts, "CNNConvolutionGradientOptionAll")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+type CNNConvolutionWeightsLayout int64
+
+const (
+	CNNConvolutionWeightsLayoutOHWI CNNConvolutionWeightsLayout = 0
+)
+
+func (e CNNConvolutionWeightsLayout) String() string {
+	switch e {
+	case CNNConvolutionWeightsLayoutOHWI:
+		return "CNNConvolutionWeightsLayoutOHWI"
+	default:
+		return fmt.Sprintf("CNNConvolutionWeightsLayout(%d)", int64(e))
+	}
+}
+
+type CNNLossType int64
+
+const (
+	CNNLossTypeMeanAbsoluteError         CNNLossType = 0
+	CNNLossTypeMeanSquaredError          CNNLossType = 1
+	CNNLossTypeSoftMaxCrossEntropy       CNNLossType = 2
+	CNNLossTypeSigmoidCrossEntropy       CNNLossType = 3
+	CNNLossTypeCategoricalCrossEntropy   CNNLossType = 4
+	CNNLossTypeHinge                     CNNLossType = 5
+	CNNLossTypeHuber                     CNNLossType = 6
+	CNNLossTypeCosineDistance            CNNLossType = 7
+	CNNLossTypeLog                       CNNLossType = 8
+	CNNLossTypeKullbackLeiblerDivergence CNNLossType = 9
+	CNNLossTypeCount                     CNNLossType = 10
+)
+
+func (e CNNLossType) String() string {
+	switch e {
+	case CNNLossTypeMeanAbsoluteError:
+		return "CNNLossTypeMeanAbsoluteError"
+	case CNNLossTypeMeanSquaredError:
+		return "CNNLossTypeMeanSquaredError"
+	case CNNLossTypeSoftMaxCrossEntropy:
+		return "CNNLossTypeSoftMaxCrossEntropy"
+	case CNNLossTypeSigmoidCrossEntropy:
+		return "CNNLossTypeSigmoidCrossEntropy"
+	case CNNLossTypeCategoricalCrossEntropy:
+		return "CNNLossTypeCategoricalCrossEntropy"
+	case CNNLossTypeHinge:
+		return "CNNLossTypeHinge"
+	case CNNLossTypeHuber:
+		return "CNNLossTypeHuber"
+	case CNNLossTypeCosineDistance:
+		return "CNNLossTypeCosineDistance"
+	case CNNLossTypeLog:
+		return "CNNLossTypeLog"
+	case CNNLossTypeKullbackLeiblerDivergence:
+		return "CNNLossTypeKullbackLeiblerDivergence"
+	case CNNLossTypeCount:
+		return "CNNLossTypeCount"
+	default:
+		return fmt.Sprintf("CNNLossType(%d)", int64(e))
+	}
+}
+
+type CNNNeuronType int64
+
+const (
+	CNNNeuronTypeNone        CNNNeuronType = 0
+	CNNNeuronTypeReLU        CNNNeuronType = 1
+	CNNNeuronTypeLinear      CNNNeuronType = 2
+	CNNNeuronTypeSigmoid     CNNNeuronType = 3
+	CNNNeuronTypeHardSigmoid CNNNeuronType = 4
+	CNNNeuronTypeTanH        CNNNeuronType = 5
+	CNNNeuronTypeAbsolute    CNNNeuronType = 6
+	CNNNeuronTypeSoftPlus    CNNNeuronType = 7
+	CNNNeuronTypeSoftSign    CNNNeuronType = 8
+	CNNNeuronTypeELU         CNNNeuronType = 9
+	CNNNeuronTypePReLU       CNNNeuronType = 10
+	CNNNeuronTypeReLUN       CNNNeuronType = 11
+	CNNNeuronTypePower       CNNNeuronType = 12
+	CNNNeuronTypeExponential CNNNeuronType = 13
+	CNNNeuronTypeLogarithm   CNNNeuronType = 14
+	CNNNeuronTypeGeLU        CNNNeuronType = 15
+	CNNNeuronTypeCount       CNNNeuronType = 16
+)
+
+func (e CNNNeuronType) String() string {
+	switch e {
+	case CNNNeuronTypeNone:
+		return "CNNNeuronTypeNone"
+	case CNNNeuronTypeReLU:
+		return "CNNNeuronTypeReLU"
+	case CNNNeuronTypeLinear:
+		return "CNNNeuronTypeLinear"
+	case CNNNeuronTypeSigmoid:
+		return "CNNNeuronTypeSigmoid"
+	case CNNNeuronTypeHardSigmoid:
+		return "CNNNeuronTypeHardSigmoid"
+	case CNNNeuronTypeTanH:
+		return "CNNNeuronTypeTanH"
+	case CNNNeuronTypeAbsolute:
+		return "CNNNeuronTypeAbsolute"
+	case CNNNeuronTypeSoftPlus:
+		return "CNNNeuronTypeSoftPlus"
+	case CNNNeuronTypeSoftSign:
+		return "CNNNeuronTypeSoftSign"
+	case CNNNeuronTypeELU:
+		return "CNNNeuronTypeELU"
+	case CNNNeuronTypePReLU:
+		return "CNNNeuronTypePReLU"
+	case CNNNeuronTypeReLUN:
+		return "CNNNeuronTypeReLUN"
+	case CNNNeuronTypePower:
+		return "CNNNeuronTypePower"
+	case CNNNeuronTypeExponential:
+		return "CNNNeuronTypeExponential"
+	case CNNNeuronTypeLogarithm:
+		return "CNNNeuronTypeLogarithm"
+	case CNNNeuronTypeGeLU:
+		return "CNNNeuronTypeGeLU"
+	case CNNNeuronTypeCount:
+		return "CNNNeuronTypeCount"
+	default:
+		return fmt.Sprintf("CNNNeuronType(%d)", int64(e))
+	}
+}
+
+type CNNReductionType int64
+
+const (
+	CNNReductionTypeNone                CNNReductionType = 0
+	CNNReductionTypeSum                 CNNReductionType = 1
+	CNNReductionTypeMean                CNNReductionType = 2
+	CNNReductionTypeSumByNonZeroWeights CNNReductionType = 3
+	CNNReductionTypeCount               CNNReductionType = 4
+)
+
+func (e CNNReductionType) String() string {
+	switch e {
+	case CNNReductionTypeNone:
+		return "CNNReductionTypeNone"
+	case CNNReductionTypeSum:
+		return "CNNReductionTypeSum"
+	case CNNReductionTypeMean:
+		return "CNNReductionTypeMean"
+	case CNNReductionTypeSumByNonZeroWeights:
+		return "CNNReductionTypeSumByNonZeroWeights"
+	case CNNReductionTypeCount:
+		return "CNNReductionTypeCount"
+	default:
+		return fmt.Sprintf("CNNReductionType(%d)", int64(e))
+	}
+}
+
+// Bitmask — values may be combined with |.
+type NNComparisonType uint64
+
+const (
+	NNComparisonTypeEqual          NNComparisonType = 0
+	NNComparisonTypeNotEqual       NNComparisonType = 1
+	NNComparisonTypeLess           NNComparisonType = 2
+	NNComparisonTypeLessOrEqual    NNComparisonType = 3
+	NNComparisonTypeGreater        NNComparisonType = 4
+	NNComparisonTypeGreaterOrEqual NNComparisonType = 5
+)
+
+func (e NNComparisonType) String() string {
+	var parts []string
+	if e&NNComparisonTypeNotEqual != 0 {
+		parts = append(parts, "NNComparisonTypeNotEqual")
+	}
+	if e&NNComparisonTypeLess != 0 {
+		parts = append(parts, "NNComparisonTypeLess")
+	}
+	if e&NNComparisonTypeLessOrEqual != 0 {
+		parts = append(parts, "NNComparisonTypeLessOrEqual")
+	}
+	if e&NNComparisonTypeGreater != 0 {
+		parts = append(parts, "NNComparisonTypeGreater")
+	}
+	if e&NNComparisonTypeGreaterOrEqual != 0 {
+		parts = append(parts, "NNComparisonTypeGreaterOrEqual")
+	}
+	if len(parts) == 0 {
+		return "0"
+	}
+	return strings.Join(parts, "|")
+}
+
+// Bitmask — values may be combined with |.
+type NNConvolutionAccumulatorPrecisionOption uint64
 
 const (
 	// Set accumulator type to half precision float.
-	MPSNNConvolutionAccumulatorPrecisionOptionHalf MPSNNConvolutionAccumulatorPrecisionOption = 0
+	NNConvolutionAccumulatorPrecisionOptionHalf NNConvolutionAccumulatorPrecisionOption = 0
 	// Set accumulator type to single precision float.
-	MPSNNConvolutionAccumulatorPrecisionOptionFloat MPSNNConvolutionAccumulatorPrecisionOption = 1
+	NNConvolutionAccumulatorPrecisionOptionFloat NNConvolutionAccumulatorPrecisionOption = 1
 )
 
-func (e MPSNNConvolutionAccumulatorPrecisionOption) String() string {
+func (e NNConvolutionAccumulatorPrecisionOption) String() string {
 	var parts []string
-	if e&MPSNNConvolutionAccumulatorPrecisionOptionFloat != 0 {
-		parts = append(parts, "MPSNNConvolutionAccumulatorPrecisionOptionFloat")
+	if e&NNConvolutionAccumulatorPrecisionOptionFloat != 0 {
+		parts = append(parts, "NNConvolutionAccumulatorPrecisionOptionFloat")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -335,80 +275,80 @@ func (e MPSNNConvolutionAccumulatorPrecisionOption) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type MPSNNPaddingMethod uint64
+type NNPaddingMethod uint64
 
 const (
-	MPSNNPaddingMethodAlignCentered                MPSNNPaddingMethod = 0
-	MPSNNPaddingMethodAlignTopLeft                 MPSNNPaddingMethod = 1
-	MPSNNPaddingMethodAlignBottomRight             MPSNNPaddingMethod = 2
-	MPSNNPaddingMethodAlign_reserved               MPSNNPaddingMethod = 3
-	MPSNNPaddingMethodAlignMask                    MPSNNPaddingMethod = 3
-	MPSNNPaddingMethodAddRemainderToTopLeft        MPSNNPaddingMethod = 0
-	MPSNNPaddingMethodAddRemainderToTopRight       MPSNNPaddingMethod = 4
-	MPSNNPaddingMethodAddRemainderToBottomLeft     MPSNNPaddingMethod = 8
-	MPSNNPaddingMethodAddRemainderToBottomRight    MPSNNPaddingMethod = 12
-	MPSNNPaddingMethodAddRemainderToMask           MPSNNPaddingMethod = 12
-	MPSNNPaddingMethodSizeValidOnly                MPSNNPaddingMethod = 0
-	MPSNNPaddingMethodSizeSame                     MPSNNPaddingMethod = 16
-	MPSNNPaddingMethodSizeFull                     MPSNNPaddingMethod = 32
-	MPSNNPaddingMethodSize_reserved                MPSNNPaddingMethod = 48
-	MPSNNPaddingMethodCustomWhitelistForNodeFusion MPSNNPaddingMethod = 8192
-	MPSNNPaddingMethodCustomAllowForNodeFusion     MPSNNPaddingMethod = 8192
-	MPSNNPaddingMethodCustom                       MPSNNPaddingMethod = 16384
-	MPSNNPaddingMethodSizeMask                     MPSNNPaddingMethod = 2032
+	NNPaddingMethodAlignCentered                NNPaddingMethod = 0
+	NNPaddingMethodAlignTopLeft                 NNPaddingMethod = 1
+	NNPaddingMethodAlignBottomRight             NNPaddingMethod = 2
+	NNPaddingMethodAlign_reserved               NNPaddingMethod = 3
+	NNPaddingMethodAlignMask                    NNPaddingMethod = 3
+	NNPaddingMethodAddRemainderToTopLeft        NNPaddingMethod = 0
+	NNPaddingMethodAddRemainderToTopRight       NNPaddingMethod = 4
+	NNPaddingMethodAddRemainderToBottomLeft     NNPaddingMethod = 8
+	NNPaddingMethodAddRemainderToBottomRight    NNPaddingMethod = 12
+	NNPaddingMethodAddRemainderToMask           NNPaddingMethod = 12
+	NNPaddingMethodSizeValidOnly                NNPaddingMethod = 0
+	NNPaddingMethodSizeSame                     NNPaddingMethod = 16
+	NNPaddingMethodSizeFull                     NNPaddingMethod = 32
+	NNPaddingMethodSize_reserved                NNPaddingMethod = 48
+	NNPaddingMethodCustomWhitelistForNodeFusion NNPaddingMethod = 8192
+	NNPaddingMethodCustomAllowForNodeFusion     NNPaddingMethod = 8192
+	NNPaddingMethodCustom                       NNPaddingMethod = 16384
+	NNPaddingMethodSizeMask                     NNPaddingMethod = 2032
 	// The caffe framework constrains the average pooling area to the limits of the padding area in cases where a pixel would read beyond the padding area. Set this bit for Caffe emulation with average pooling.
-	MPSNNPaddingMethodExcludeEdges MPSNNPaddingMethod = 32768
+	NNPaddingMethodExcludeEdges NNPaddingMethod = 32768
 )
 
-func (e MPSNNPaddingMethod) String() string {
+func (e NNPaddingMethod) String() string {
 	var parts []string
-	if e&MPSNNPaddingMethodAlignTopLeft != 0 {
-		parts = append(parts, "MPSNNPaddingMethodAlignTopLeft")
+	if e&NNPaddingMethodAlignTopLeft != 0 {
+		parts = append(parts, "NNPaddingMethodAlignTopLeft")
 	}
-	if e&MPSNNPaddingMethodAlignBottomRight != 0 {
-		parts = append(parts, "MPSNNPaddingMethodAlignBottomRight")
+	if e&NNPaddingMethodAlignBottomRight != 0 {
+		parts = append(parts, "NNPaddingMethodAlignBottomRight")
 	}
-	if e&MPSNNPaddingMethodAlign_reserved != 0 {
-		parts = append(parts, "MPSNNPaddingMethodAlign_reserved")
+	if e&NNPaddingMethodAlign_reserved != 0 {
+		parts = append(parts, "NNPaddingMethodAlign_reserved")
 	}
-	if e&MPSNNPaddingMethodAlignMask != 0 {
-		parts = append(parts, "MPSNNPaddingMethodAlignMask")
+	if e&NNPaddingMethodAlignMask != 0 {
+		parts = append(parts, "NNPaddingMethodAlignMask")
 	}
-	if e&MPSNNPaddingMethodAddRemainderToTopRight != 0 {
-		parts = append(parts, "MPSNNPaddingMethodAddRemainderToTopRight")
+	if e&NNPaddingMethodAddRemainderToTopRight != 0 {
+		parts = append(parts, "NNPaddingMethodAddRemainderToTopRight")
 	}
-	if e&MPSNNPaddingMethodAddRemainderToBottomLeft != 0 {
-		parts = append(parts, "MPSNNPaddingMethodAddRemainderToBottomLeft")
+	if e&NNPaddingMethodAddRemainderToBottomLeft != 0 {
+		parts = append(parts, "NNPaddingMethodAddRemainderToBottomLeft")
 	}
-	if e&MPSNNPaddingMethodAddRemainderToBottomRight != 0 {
-		parts = append(parts, "MPSNNPaddingMethodAddRemainderToBottomRight")
+	if e&NNPaddingMethodAddRemainderToBottomRight != 0 {
+		parts = append(parts, "NNPaddingMethodAddRemainderToBottomRight")
 	}
-	if e&MPSNNPaddingMethodAddRemainderToMask != 0 {
-		parts = append(parts, "MPSNNPaddingMethodAddRemainderToMask")
+	if e&NNPaddingMethodAddRemainderToMask != 0 {
+		parts = append(parts, "NNPaddingMethodAddRemainderToMask")
 	}
-	if e&MPSNNPaddingMethodSizeSame != 0 {
-		parts = append(parts, "MPSNNPaddingMethodSizeSame")
+	if e&NNPaddingMethodSizeSame != 0 {
+		parts = append(parts, "NNPaddingMethodSizeSame")
 	}
-	if e&MPSNNPaddingMethodSizeFull != 0 {
-		parts = append(parts, "MPSNNPaddingMethodSizeFull")
+	if e&NNPaddingMethodSizeFull != 0 {
+		parts = append(parts, "NNPaddingMethodSizeFull")
 	}
-	if e&MPSNNPaddingMethodSize_reserved != 0 {
-		parts = append(parts, "MPSNNPaddingMethodSize_reserved")
+	if e&NNPaddingMethodSize_reserved != 0 {
+		parts = append(parts, "NNPaddingMethodSize_reserved")
 	}
-	if e&MPSNNPaddingMethodCustomWhitelistForNodeFusion != 0 {
-		parts = append(parts, "MPSNNPaddingMethodCustomWhitelistForNodeFusion")
+	if e&NNPaddingMethodCustomWhitelistForNodeFusion != 0 {
+		parts = append(parts, "NNPaddingMethodCustomWhitelistForNodeFusion")
 	}
-	if e&MPSNNPaddingMethodCustomAllowForNodeFusion != 0 {
-		parts = append(parts, "MPSNNPaddingMethodCustomAllowForNodeFusion")
+	if e&NNPaddingMethodCustomAllowForNodeFusion != 0 {
+		parts = append(parts, "NNPaddingMethodCustomAllowForNodeFusion")
 	}
-	if e&MPSNNPaddingMethodCustom != 0 {
-		parts = append(parts, "MPSNNPaddingMethodCustom")
+	if e&NNPaddingMethodCustom != 0 {
+		parts = append(parts, "NNPaddingMethodCustom")
 	}
-	if e&MPSNNPaddingMethodSizeMask != 0 {
-		parts = append(parts, "MPSNNPaddingMethodSizeMask")
+	if e&NNPaddingMethodSizeMask != 0 {
+		parts = append(parts, "NNPaddingMethodSizeMask")
 	}
-	if e&MPSNNPaddingMethodExcludeEdges != 0 {
-		parts = append(parts, "MPSNNPaddingMethodExcludeEdges")
+	if e&NNPaddingMethodExcludeEdges != 0 {
+		parts = append(parts, "NNPaddingMethodExcludeEdges")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -416,48 +356,48 @@ func (e MPSNNPaddingMethod) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MPSNNRegularizationType uint64
+type NNRegularizationType uint64
 
 const (
-	MPSNNRegularizationTypeNone MPSNNRegularizationType = 0
+	NNRegularizationTypeNone NNRegularizationType = 0
 	// Apply L1 regularization. L1 norm of weights, will be considered to be added to the loss to be minimized. the gradient of the regularization loss turns to be 1 scaled with regularizationScale, so we add that to the incoming gradient of value.
-	MPSNNRegularizationTypeL1 MPSNNRegularizationType = 1
+	NNRegularizationTypeL1 NNRegularizationType = 1
 	// Apply L2 regularization. L2 norm of weights, will be considered to be added to the loss to be minimized. the gradient of the regularization loss turns to be the original value scaled with regularizationScale, so we add that to the incoming gradient of value.
-	MPSNNRegularizationTypeL2 MPSNNRegularizationType = 2
+	NNRegularizationTypeL2 NNRegularizationType = 2
 )
 
-func (e MPSNNRegularizationType) String() string {
+func (e NNRegularizationType) String() string {
 	switch e {
-	case MPSNNRegularizationTypeNone:
-		return "MPSNNRegularizationTypeNone"
-	case MPSNNRegularizationTypeL1:
-		return "MPSNNRegularizationTypeL1"
-	case MPSNNRegularizationTypeL2:
-		return "MPSNNRegularizationTypeL2"
+	case NNRegularizationTypeNone:
+		return "NNRegularizationTypeNone"
+	case NNRegularizationTypeL1:
+		return "NNRegularizationTypeL1"
+	case NNRegularizationTypeL2:
+		return "NNRegularizationTypeL2"
 	default:
-		return fmt.Sprintf("MPSNNRegularizationType(%d)", int64(e))
+		return fmt.Sprintf("NNRegularizationType(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type MPSNNTrainingStyle uint64
+type NNTrainingStyle uint64
 
 const (
 	// Do not train this node, for example in transfer learning
-	MPSNNTrainingStyleUpdateDeviceNone MPSNNTrainingStyle = 0
+	NNTrainingStyleUpdateDeviceNone NNTrainingStyle = 0
 	// The weight update pass will be called in a command buffer completion callback, with a nil command buffer
-	MPSNNTrainingStyleUpdateDeviceCPU MPSNNTrainingStyle = 1
+	NNTrainingStyleUpdateDeviceCPU NNTrainingStyle = 1
 	// The weight update pass will be called immediately after the gradient pass is encoded, with a nonnull command buffer
-	MPSNNTrainingStyleUpdateDeviceGPU MPSNNTrainingStyle = 2
+	NNTrainingStyleUpdateDeviceGPU NNTrainingStyle = 2
 )
 
-func (e MPSNNTrainingStyle) String() string {
+func (e NNTrainingStyle) String() string {
 	var parts []string
-	if e&MPSNNTrainingStyleUpdateDeviceCPU != 0 {
-		parts = append(parts, "MPSNNTrainingStyleUpdateDeviceCPU")
+	if e&NNTrainingStyleUpdateDeviceCPU != 0 {
+		parts = append(parts, "NNTrainingStyleUpdateDeviceCPU")
 	}
-	if e&MPSNNTrainingStyleUpdateDeviceGPU != 0 {
-		parts = append(parts, "MPSNNTrainingStyleUpdateDeviceGPU")
+	if e&NNTrainingStyleUpdateDeviceGPU != 0 {
+		parts = append(parts, "NNTrainingStyleUpdateDeviceGPU")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -465,148 +405,46 @@ func (e MPSNNTrainingStyle) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MPSRNNBidirectionalCombineMode uint64
+type RNNBidirectionalCombineMode uint64
 
 const (
 	// The two sequences are kept separate
-	MPSRNNBidirectionalCombineModeNone MPSRNNBidirectionalCombineMode = 0
+	RNNBidirectionalCombineModeNone RNNBidirectionalCombineMode = 0
 	// The two sequences are summed together to form a single output
-	MPSRNNBidirectionalCombineModeAdd MPSRNNBidirectionalCombineMode = 1
+	RNNBidirectionalCombineModeAdd RNNBidirectionalCombineMode = 1
 	// The two sequences are concatenated together along the feature channels to form a single output
-	MPSRNNBidirectionalCombineModeConcatenate MPSRNNBidirectionalCombineMode = 2
+	RNNBidirectionalCombineModeConcatenate RNNBidirectionalCombineMode = 2
 )
 
-func (e MPSRNNBidirectionalCombineMode) String() string {
+func (e RNNBidirectionalCombineMode) String() string {
 	switch e {
-	case MPSRNNBidirectionalCombineModeNone:
-		return "MPSRNNBidirectionalCombineModeNone"
-	case MPSRNNBidirectionalCombineModeAdd:
-		return "MPSRNNBidirectionalCombineModeAdd"
-	case MPSRNNBidirectionalCombineModeConcatenate:
-		return "MPSRNNBidirectionalCombineModeConcatenate"
+	case RNNBidirectionalCombineModeNone:
+		return "RNNBidirectionalCombineModeNone"
+	case RNNBidirectionalCombineModeAdd:
+		return "RNNBidirectionalCombineModeAdd"
+	case RNNBidirectionalCombineModeConcatenate:
+		return "RNNBidirectionalCombineModeConcatenate"
 	default:
-		return fmt.Sprintf("MPSRNNBidirectionalCombineMode(%d)", int64(e))
+		return fmt.Sprintf("RNNBidirectionalCombineMode(%d)", int64(e))
 	}
 }
 
-type MPSRNNMatrixId uint64
-
-const (
-	MPSRNNMatrixIdSingleGateInputWeights           MPSRNNMatrixId = 0
-	MPSRNNMatrixIdSingleGateRecurrentWeights       MPSRNNMatrixId = 1
-	MPSRNNMatrixIdSingleGateBiasTerms              MPSRNNMatrixId = 2
-	MPSRNNMatrixIdLSTMInputGateInputWeights        MPSRNNMatrixId = 3
-	MPSRNNMatrixIdLSTMInputGateRecurrentWeights    MPSRNNMatrixId = 4
-	MPSRNNMatrixIdLSTMInputGateMemoryWeights       MPSRNNMatrixId = 5
-	MPSRNNMatrixIdLSTMInputGateBiasTerms           MPSRNNMatrixId = 6
-	MPSRNNMatrixIdLSTMForgetGateInputWeights       MPSRNNMatrixId = 7
-	MPSRNNMatrixIdLSTMForgetGateRecurrentWeights   MPSRNNMatrixId = 8
-	MPSRNNMatrixIdLSTMForgetGateMemoryWeights      MPSRNNMatrixId = 9
-	MPSRNNMatrixIdLSTMForgetGateBiasTerms          MPSRNNMatrixId = 10
-	MPSRNNMatrixIdLSTMMemoryGateInputWeights       MPSRNNMatrixId = 11
-	MPSRNNMatrixIdLSTMMemoryGateRecurrentWeights   MPSRNNMatrixId = 12
-	MPSRNNMatrixIdLSTMMemoryGateMemoryWeights      MPSRNNMatrixId = 13
-	MPSRNNMatrixIdLSTMMemoryGateBiasTerms          MPSRNNMatrixId = 14
-	MPSRNNMatrixIdLSTMOutputGateInputWeights       MPSRNNMatrixId = 15
-	MPSRNNMatrixIdLSTMOutputGateRecurrentWeights   MPSRNNMatrixId = 16
-	MPSRNNMatrixIdLSTMOutputGateMemoryWeights      MPSRNNMatrixId = 17
-	MPSRNNMatrixIdLSTMOutputGateBiasTerms          MPSRNNMatrixId = 18
-	MPSRNNMatrixIdGRUInputGateInputWeights         MPSRNNMatrixId = 19
-	MPSRNNMatrixIdGRUInputGateRecurrentWeights     MPSRNNMatrixId = 20
-	MPSRNNMatrixIdGRUInputGateBiasTerms            MPSRNNMatrixId = 21
-	MPSRNNMatrixIdGRURecurrentGateInputWeights     MPSRNNMatrixId = 22
-	MPSRNNMatrixIdGRURecurrentGateRecurrentWeights MPSRNNMatrixId = 23
-	MPSRNNMatrixIdGRURecurrentGateBiasTerms        MPSRNNMatrixId = 24
-	MPSRNNMatrixIdGRUOutputGateInputWeights        MPSRNNMatrixId = 25
-	MPSRNNMatrixIdGRUOutputGateRecurrentWeights    MPSRNNMatrixId = 26
-	MPSRNNMatrixIdGRUOutputGateInputGateWeights    MPSRNNMatrixId = 27
-	MPSRNNMatrixIdGRUOutputGateBiasTerms           MPSRNNMatrixId = 28
-	MPSRNNMatrixId_count                           MPSRNNMatrixId = 29
-)
-
-func (e MPSRNNMatrixId) String() string {
-	switch e {
-	case MPSRNNMatrixIdSingleGateInputWeights:
-		return "MPSRNNMatrixIdSingleGateInputWeights"
-	case MPSRNNMatrixIdSingleGateRecurrentWeights:
-		return "MPSRNNMatrixIdSingleGateRecurrentWeights"
-	case MPSRNNMatrixIdSingleGateBiasTerms:
-		return "MPSRNNMatrixIdSingleGateBiasTerms"
-	case MPSRNNMatrixIdLSTMInputGateInputWeights:
-		return "MPSRNNMatrixIdLSTMInputGateInputWeights"
-	case MPSRNNMatrixIdLSTMInputGateRecurrentWeights:
-		return "MPSRNNMatrixIdLSTMInputGateRecurrentWeights"
-	case MPSRNNMatrixIdLSTMInputGateMemoryWeights:
-		return "MPSRNNMatrixIdLSTMInputGateMemoryWeights"
-	case MPSRNNMatrixIdLSTMInputGateBiasTerms:
-		return "MPSRNNMatrixIdLSTMInputGateBiasTerms"
-	case MPSRNNMatrixIdLSTMForgetGateInputWeights:
-		return "MPSRNNMatrixIdLSTMForgetGateInputWeights"
-	case MPSRNNMatrixIdLSTMForgetGateRecurrentWeights:
-		return "MPSRNNMatrixIdLSTMForgetGateRecurrentWeights"
-	case MPSRNNMatrixIdLSTMForgetGateMemoryWeights:
-		return "MPSRNNMatrixIdLSTMForgetGateMemoryWeights"
-	case MPSRNNMatrixIdLSTMForgetGateBiasTerms:
-		return "MPSRNNMatrixIdLSTMForgetGateBiasTerms"
-	case MPSRNNMatrixIdLSTMMemoryGateInputWeights:
-		return "MPSRNNMatrixIdLSTMMemoryGateInputWeights"
-	case MPSRNNMatrixIdLSTMMemoryGateRecurrentWeights:
-		return "MPSRNNMatrixIdLSTMMemoryGateRecurrentWeights"
-	case MPSRNNMatrixIdLSTMMemoryGateMemoryWeights:
-		return "MPSRNNMatrixIdLSTMMemoryGateMemoryWeights"
-	case MPSRNNMatrixIdLSTMMemoryGateBiasTerms:
-		return "MPSRNNMatrixIdLSTMMemoryGateBiasTerms"
-	case MPSRNNMatrixIdLSTMOutputGateInputWeights:
-		return "MPSRNNMatrixIdLSTMOutputGateInputWeights"
-	case MPSRNNMatrixIdLSTMOutputGateRecurrentWeights:
-		return "MPSRNNMatrixIdLSTMOutputGateRecurrentWeights"
-	case MPSRNNMatrixIdLSTMOutputGateMemoryWeights:
-		return "MPSRNNMatrixIdLSTMOutputGateMemoryWeights"
-	case MPSRNNMatrixIdLSTMOutputGateBiasTerms:
-		return "MPSRNNMatrixIdLSTMOutputGateBiasTerms"
-	case MPSRNNMatrixIdGRUInputGateInputWeights:
-		return "MPSRNNMatrixIdGRUInputGateInputWeights"
-	case MPSRNNMatrixIdGRUInputGateRecurrentWeights:
-		return "MPSRNNMatrixIdGRUInputGateRecurrentWeights"
-	case MPSRNNMatrixIdGRUInputGateBiasTerms:
-		return "MPSRNNMatrixIdGRUInputGateBiasTerms"
-	case MPSRNNMatrixIdGRURecurrentGateInputWeights:
-		return "MPSRNNMatrixIdGRURecurrentGateInputWeights"
-	case MPSRNNMatrixIdGRURecurrentGateRecurrentWeights:
-		return "MPSRNNMatrixIdGRURecurrentGateRecurrentWeights"
-	case MPSRNNMatrixIdGRURecurrentGateBiasTerms:
-		return "MPSRNNMatrixIdGRURecurrentGateBiasTerms"
-	case MPSRNNMatrixIdGRUOutputGateInputWeights:
-		return "MPSRNNMatrixIdGRUOutputGateInputWeights"
-	case MPSRNNMatrixIdGRUOutputGateRecurrentWeights:
-		return "MPSRNNMatrixIdGRUOutputGateRecurrentWeights"
-	case MPSRNNMatrixIdGRUOutputGateInputGateWeights:
-		return "MPSRNNMatrixIdGRUOutputGateInputGateWeights"
-	case MPSRNNMatrixIdGRUOutputGateBiasTerms:
-		return "MPSRNNMatrixIdGRUOutputGateBiasTerms"
-	case MPSRNNMatrixId_count:
-		return "MPSRNNMatrixId_count"
-	default:
-		return fmt.Sprintf("MPSRNNMatrixId(%d)", int64(e))
-	}
-}
-
-type MPSRNNSequenceDirection uint64
+type RNNSequenceDirection uint64
 
 const (
 	// The input sequence is processed from index zero to array length minus one
-	MPSRNNSequenceDirectionForward MPSRNNSequenceDirection = 0
+	RNNSequenceDirectionForward RNNSequenceDirection = 0
 	// The input sequence is processed from index array length minus one to zero
-	MPSRNNSequenceDirectionBackward MPSRNNSequenceDirection = 1
+	RNNSequenceDirectionBackward RNNSequenceDirection = 1
 )
 
-func (e MPSRNNSequenceDirection) String() string {
+func (e RNNSequenceDirection) String() string {
 	switch e {
-	case MPSRNNSequenceDirectionForward:
-		return "MPSRNNSequenceDirectionForward"
-	case MPSRNNSequenceDirectionBackward:
-		return "MPSRNNSequenceDirectionBackward"
+	case RNNSequenceDirectionForward:
+		return "RNNSequenceDirectionForward"
+	case RNNSequenceDirectionBackward:
+		return "RNNSequenceDirectionBackward"
 	default:
-		return fmt.Sprintf("MPSRNNSequenceDirection(%d)", int64(e))
+		return fmt.Sprintf("RNNSequenceDirection(%d)", int64(e))
 	}
 }

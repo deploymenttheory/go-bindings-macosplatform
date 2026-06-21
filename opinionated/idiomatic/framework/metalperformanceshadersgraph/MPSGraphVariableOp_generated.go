@@ -5,67 +5,68 @@
 package metalperformanceshadersgraph
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The class that defines the parameters for a variable.
 //
-// GraphVariableOp wraps [raw.MPSGraphVariableOp] with a fluent Go API.
+// GraphVariableOp is an idiomatic wrapper over the Objective-C class MPSGraphVariableOp.
 type GraphVariableOp struct {
-	inner *raw.MPSGraphVariableOp
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSGraphVariableOp].
-func (x *GraphVariableOp) Unwrap() *raw.MPSGraphVariableOp { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphVariableOp) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphVariableOpFromID adopts an existing object pointer as a GraphVariableOp (nil for 0).
+// GraphVariableOpFromID adopts an existing Objective-C object as a GraphVariableOp
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphVariableOpFromID(id objc.ID) *GraphVariableOp {
 	if id == 0 {
 		return nil
 	}
-	return &GraphVariableOp{inner: raw.MPSGraphVariableOpFromID(id)}
+	x := &GraphVariableOp{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGraphVariableOp creates a new [GraphVariableOp].
+// graphVariableOpAdopt wraps an Objective-C object that this code just created as a
+// GraphVariableOp (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphVariableOpAdopt(id objc.ID) *GraphVariableOp {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphVariableOp{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GraphVariableOp) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GraphVariableOp) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GraphVariableOp) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGraphVariableOp creates a new GraphVariableOp.
 func NewGraphVariableOp() *GraphVariableOp {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphVariableOp")), objc.RegisterName("new"))
-	return &GraphVariableOp{inner: raw.MPSGraphVariableOpFromID(_id)}
-}
-
-// The shape of the variable.
-//
-// Shape calls the underlying Shape.
-func (x *GraphVariableOp) Shape() unsafe.Pointer {
-	return x.inner.Shape()
-}
-
-// The data type of the variable.
-//
-// DataType calls the underlying DataType.
-func (x *GraphVariableOp) DataType() mpscore.MPSDataType {
-	return x.inner.DataType()
-}
-
-func (x *GraphVariableOp) asGraphOperation() *raw.MPSGraphOperation {
-	return &x.inner.MPSGraphOperation
-}
-
-func (x *GraphVariableOp) asGraphObject() *raw.MPSGraphObject {
-	return &x.inner.MPSGraphOperation.MPSGraphObject
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphVariableOp")), objc.RegisterName("new"))
+	return graphVariableOpAdopt(_id)
 }
 
 // GraphVariableOpable is the interface implemented by [GraphVariableOp], for mocking and DI.
 type GraphVariableOpable interface {
-	Unwrap() *raw.MPSGraphVariableOp
-	Shape() unsafe.Pointer
-	DataType() mpscore.MPSDataType
+	obj.Object
 }
 
 var _ GraphVariableOpable = (*GraphVariableOp)(nil)

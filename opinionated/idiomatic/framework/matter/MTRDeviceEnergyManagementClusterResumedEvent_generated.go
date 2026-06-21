@@ -5,61 +5,84 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDeviceEnergyManagementClusterResumedEvent wraps [raw.MTRDeviceEnergyManagementClusterResumedEvent] with a fluent Go API.
+// MTRDeviceEnergyManagementClusterResumedEvent is an idiomatic wrapper over the Objective-C class MTRDeviceEnergyManagementClusterResumedEvent.
 type MTRDeviceEnergyManagementClusterResumedEvent struct {
-	inner *raw.MTRDeviceEnergyManagementClusterResumedEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterResumedEvent].
-func (x *MTRDeviceEnergyManagementClusterResumedEvent) Unwrap() *raw.MTRDeviceEnergyManagementClusterResumedEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceEnergyManagementClusterResumedEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDeviceEnergyManagementClusterResumedEventFromID adopts an existing object pointer as a MTRDeviceEnergyManagementClusterResumedEvent (nil for 0).
+// MTRDeviceEnergyManagementClusterResumedEventFromID adopts an existing Objective-C object as a MTRDeviceEnergyManagementClusterResumedEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDeviceEnergyManagementClusterResumedEventFromID(id objc.ID) *MTRDeviceEnergyManagementClusterResumedEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDeviceEnergyManagementClusterResumedEvent{inner: raw.MTRDeviceEnergyManagementClusterResumedEventFromID(id)}
-}
-
-// NewMTRDeviceEnergyManagementClusterResumedEvent creates a new [MTRDeviceEnergyManagementClusterResumedEvent].
-func NewMTRDeviceEnergyManagementClusterResumedEvent() *MTRDeviceEnergyManagementClusterResumedEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceEnergyManagementClusterResumedEvent")), objc.RegisterName("new"))
-	return &MTRDeviceEnergyManagementClusterResumedEvent{inner: raw.MTRDeviceEnergyManagementClusterResumedEventFromID(_id)}
-}
-
-// WithCause sets the cause property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterResumedEvent) WithCause(cause *foundation.NSNumber) *MTRDeviceEnergyManagementClusterResumedEvent {
-	x.inner.SetCause(cause)
+	x := &MTRDeviceEnergyManagementClusterResumedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Cause calls the underlying Cause.
-func (x *MTRDeviceEnergyManagementClusterResumedEvent) Cause() *foundation.NSNumber {
-	return x.inner.Cause()
+// mTRDeviceEnergyManagementClusterResumedEventAdopt wraps an Objective-C object that this code just created as a
+// MTRDeviceEnergyManagementClusterResumedEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDeviceEnergyManagementClusterResumedEventAdopt(id objc.ID) *MTRDeviceEnergyManagementClusterResumedEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDeviceEnergyManagementClusterResumedEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetCause calls the underlying SetCause.
-func (x *MTRDeviceEnergyManagementClusterResumedEvent) SetCause(cause *foundation.NSNumber) {
-	x.inner.SetCause(cause)
+// Description returns the object's -description text.
+func (x *MTRDeviceEnergyManagementClusterResumedEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDeviceEnergyManagementClusterResumedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDeviceEnergyManagementClusterResumedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRDeviceEnergyManagementClusterResumedEvent creates a new MTRDeviceEnergyManagementClusterResumedEvent.
+func NewMTRDeviceEnergyManagementClusterResumedEvent() *MTRDeviceEnergyManagementClusterResumedEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementClusterResumedEvent")), objc.RegisterName("new"))
+	return mTRDeviceEnergyManagementClusterResumedEventAdopt(_id)
+}
+
+// WithCause sets cause and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterResumedEvent) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterResumedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
+	return x
+}
+
+func (x *MTRDeviceEnergyManagementClusterResumedEvent) Cause() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cause"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRDeviceEnergyManagementClusterResumedEvent) SetCause(cause obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
 }
 
 // MTRDeviceEnergyManagementClusterResumedEventable is the interface implemented by [MTRDeviceEnergyManagementClusterResumedEvent], for mocking and DI.
 type MTRDeviceEnergyManagementClusterResumedEventable interface {
-	Unwrap() *raw.MTRDeviceEnergyManagementClusterResumedEvent
-	WithCause(cause *foundation.NSNumber) *MTRDeviceEnergyManagementClusterResumedEvent
-	Cause() *foundation.NSNumber
-	SetCause(cause *foundation.NSNumber)
+	obj.Object
+	WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterResumedEvent
+	Cause() obj.Object
+	SetCause(cause obj.Object)
 }
 
 var _ MTRDeviceEnergyManagementClusterResumedEventable = (*MTRDeviceEnergyManagementClusterResumedEvent)(nil)

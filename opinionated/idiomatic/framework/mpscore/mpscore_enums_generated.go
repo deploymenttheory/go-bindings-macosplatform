@@ -9,227 +9,173 @@ import (
 	"strings"
 )
 
-// Bitmask — values may be combined with |.
-type MPSAliasingStrategy uint64
+type DataType int64
 
 const (
-	MPSAliasingStrategyDefault                  MPSAliasingStrategy = 0
-	MPSAliasingStrategyDontCare                 MPSAliasingStrategy = 0
-	MPSAliasingStrategyShallAlias               MPSAliasingStrategy = 1
-	MPSAliasingStrategyShallNotAlias            MPSAliasingStrategy = 2
-	MPSAliasingStrategyAliasingReserved         MPSAliasingStrategy = 3
-	MPSAliasingStrategyPreferTemporaryMemory    MPSAliasingStrategy = 4
-	MPSAliasingStrategyPreferNonTemporaryMemory MPSAliasingStrategy = 8
+	DataTypeInvalid              DataType = 0
+	DataTypeFloatBit             DataType = 268435456
+	DataTypeFloat32              DataType = 268435488
+	DataTypeFloat16              DataType = 268435472
+	DataTypeComplexBit           DataType = 16777216
+	DataTypeComplexFloat32       DataType = 285212736
+	DataTypeComplexFloat16       DataType = 285212704
+	DataTypeSignedBit            DataType = 536870912
+	DataTypeIntBit               DataType = 536870912
+	DataTypeInt2                 DataType = 536870914
+	DataTypeInt4                 DataType = 536870916
+	DataTypeInt8                 DataType = 536870920
+	DataTypeInt16                DataType = 536870928
+	DataTypeInt32                DataType = 536870944
+	DataTypeInt64                DataType = 536870976
+	DataTypeUInt2                DataType = 2
+	DataTypeUInt4                DataType = 4
+	DataTypeUInt8                DataType = 8
+	DataTypeUInt16               DataType = 16
+	DataTypeUInt32               DataType = 32
+	DataTypeUInt64               DataType = 64
+	DataTypeAlternateEncodingBit DataType = 2147483648
+	DataTypeBool                 DataType = 2147483656
+	DataTypeBFloat16             DataType = 2415919120
+	DataTypeComplexBFloat16      DataType = 2432696352
+	DataTypeNormalizedBit        DataType = 1073741824
+	DataTypeUnorm1               DataType = 1073741825
+	DataTypeUnorm8               DataType = 1073741832
 )
 
-func (e MPSAliasingStrategy) String() string {
-	var parts []string
-	if e&MPSAliasingStrategyShallAlias != 0 {
-		parts = append(parts, "MPSAliasingStrategyShallAlias")
-	}
-	if e&MPSAliasingStrategyShallNotAlias != 0 {
-		parts = append(parts, "MPSAliasingStrategyShallNotAlias")
-	}
-	if e&MPSAliasingStrategyAliasingReserved != 0 {
-		parts = append(parts, "MPSAliasingStrategyAliasingReserved")
-	}
-	if e&MPSAliasingStrategyPreferTemporaryMemory != 0 {
-		parts = append(parts, "MPSAliasingStrategyPreferTemporaryMemory")
-	}
-	if e&MPSAliasingStrategyPreferNonTemporaryMemory != 0 {
-		parts = append(parts, "MPSAliasingStrategyPreferNonTemporaryMemory")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-type MPSDataLayout uint64
-
-const (
-	MPSDataLayoutHeightxWidthxFeatureChannels MPSDataLayout = 0
-	MPSDataLayoutFeatureChannelsxHeightxWidth MPSDataLayout = 1
-)
-
-func (e MPSDataLayout) String() string {
+func (e DataType) String() string {
 	switch e {
-	case MPSDataLayoutHeightxWidthxFeatureChannels:
-		return "MPSDataLayoutHeightxWidthxFeatureChannels"
-	case MPSDataLayoutFeatureChannelsxHeightxWidth:
-		return "MPSDataLayoutFeatureChannelsxHeightxWidth"
+	case DataTypeInvalid:
+		return "DataTypeInvalid"
+	case DataTypeFloatBit:
+		return "DataTypeFloatBit"
+	case DataTypeFloat32:
+		return "DataTypeFloat32"
+	case DataTypeFloat16:
+		return "DataTypeFloat16"
+	case DataTypeComplexBit:
+		return "DataTypeComplexBit"
+	case DataTypeComplexFloat32:
+		return "DataTypeComplexFloat32"
+	case DataTypeComplexFloat16:
+		return "DataTypeComplexFloat16"
+	case DataTypeSignedBit:
+		return "DataTypeSignedBit"
+	case DataTypeInt2:
+		return "DataTypeInt2"
+	case DataTypeInt4:
+		return "DataTypeInt4"
+	case DataTypeInt8:
+		return "DataTypeInt8"
+	case DataTypeInt16:
+		return "DataTypeInt16"
+	case DataTypeInt32:
+		return "DataTypeInt32"
+	case DataTypeInt64:
+		return "DataTypeInt64"
+	case DataTypeUInt2:
+		return "DataTypeUInt2"
+	case DataTypeUInt4:
+		return "DataTypeUInt4"
+	case DataTypeUInt8:
+		return "DataTypeUInt8"
+	case DataTypeUInt16:
+		return "DataTypeUInt16"
+	case DataTypeUInt32:
+		return "DataTypeUInt32"
+	case DataTypeUInt64:
+		return "DataTypeUInt64"
+	case DataTypeAlternateEncodingBit:
+		return "DataTypeAlternateEncodingBit"
+	case DataTypeBool:
+		return "DataTypeBool"
+	case DataTypeBFloat16:
+		return "DataTypeBFloat16"
+	case DataTypeComplexBFloat16:
+		return "DataTypeComplexBFloat16"
+	case DataTypeNormalizedBit:
+		return "DataTypeNormalizedBit"
+	case DataTypeUnorm1:
+		return "DataTypeUnorm1"
+	case DataTypeUnorm8:
+		return "DataTypeUnorm8"
 	default:
-		return fmt.Sprintf("MPSDataLayout(%d)", int64(e))
+		return fmt.Sprintf("DataType(%d)", int64(e))
 	}
 }
 
-type MPSDataType int64
-
-const (
-	MPSDataTypeInvalid              MPSDataType = 0
-	MPSDataTypeFloatBit             MPSDataType = 268435456
-	MPSDataTypeFloat32              MPSDataType = 268435488
-	MPSDataTypeFloat16              MPSDataType = 268435472
-	MPSDataTypeComplexBit           MPSDataType = 16777216
-	MPSDataTypeComplexFloat32       MPSDataType = 285212736
-	MPSDataTypeComplexFloat16       MPSDataType = 285212704
-	MPSDataTypeSignedBit            MPSDataType = 536870912
-	MPSDataTypeIntBit               MPSDataType = 536870912
-	MPSDataTypeInt2                 MPSDataType = 536870914
-	MPSDataTypeInt4                 MPSDataType = 536870916
-	MPSDataTypeInt8                 MPSDataType = 536870920
-	MPSDataTypeInt16                MPSDataType = 536870928
-	MPSDataTypeInt32                MPSDataType = 536870944
-	MPSDataTypeInt64                MPSDataType = 536870976
-	MPSDataTypeUInt2                MPSDataType = 2
-	MPSDataTypeUInt4                MPSDataType = 4
-	MPSDataTypeUInt8                MPSDataType = 8
-	MPSDataTypeUInt16               MPSDataType = 16
-	MPSDataTypeUInt32               MPSDataType = 32
-	MPSDataTypeUInt64               MPSDataType = 64
-	MPSDataTypeAlternateEncodingBit MPSDataType = 2147483648
-	MPSDataTypeBool                 MPSDataType = 2147483656
-	MPSDataTypeBFloat16             MPSDataType = 2415919120
-	MPSDataTypeComplexBFloat16      MPSDataType = 2432696352
-	MPSDataTypeNormalizedBit        MPSDataType = 1073741824
-	MPSDataTypeUnorm1               MPSDataType = 1073741825
-	MPSDataTypeUnorm8               MPSDataType = 1073741832
-)
-
-func (e MPSDataType) String() string {
-	switch e {
-	case MPSDataTypeInvalid:
-		return "MPSDataTypeInvalid"
-	case MPSDataTypeFloatBit:
-		return "MPSDataTypeFloatBit"
-	case MPSDataTypeFloat32:
-		return "MPSDataTypeFloat32"
-	case MPSDataTypeFloat16:
-		return "MPSDataTypeFloat16"
-	case MPSDataTypeComplexBit:
-		return "MPSDataTypeComplexBit"
-	case MPSDataTypeComplexFloat32:
-		return "MPSDataTypeComplexFloat32"
-	case MPSDataTypeComplexFloat16:
-		return "MPSDataTypeComplexFloat16"
-	case MPSDataTypeSignedBit:
-		return "MPSDataTypeSignedBit"
-	case MPSDataTypeInt2:
-		return "MPSDataTypeInt2"
-	case MPSDataTypeInt4:
-		return "MPSDataTypeInt4"
-	case MPSDataTypeInt8:
-		return "MPSDataTypeInt8"
-	case MPSDataTypeInt16:
-		return "MPSDataTypeInt16"
-	case MPSDataTypeInt32:
-		return "MPSDataTypeInt32"
-	case MPSDataTypeInt64:
-		return "MPSDataTypeInt64"
-	case MPSDataTypeUInt2:
-		return "MPSDataTypeUInt2"
-	case MPSDataTypeUInt4:
-		return "MPSDataTypeUInt4"
-	case MPSDataTypeUInt8:
-		return "MPSDataTypeUInt8"
-	case MPSDataTypeUInt16:
-		return "MPSDataTypeUInt16"
-	case MPSDataTypeUInt32:
-		return "MPSDataTypeUInt32"
-	case MPSDataTypeUInt64:
-		return "MPSDataTypeUInt64"
-	case MPSDataTypeAlternateEncodingBit:
-		return "MPSDataTypeAlternateEncodingBit"
-	case MPSDataTypeBool:
-		return "MPSDataTypeBool"
-	case MPSDataTypeBFloat16:
-		return "MPSDataTypeBFloat16"
-	case MPSDataTypeComplexBFloat16:
-		return "MPSDataTypeComplexBFloat16"
-	case MPSDataTypeNormalizedBit:
-		return "MPSDataTypeNormalizedBit"
-	case MPSDataTypeUnorm1:
-		return "MPSDataTypeUnorm1"
-	case MPSDataTypeUnorm8:
-		return "MPSDataTypeUnorm8"
-	default:
-		return fmt.Sprintf("MPSDataType(%d)", int64(e))
-	}
-}
-
-type MPSImageFeatureChannelFormat uint64
+type ImageFeatureChannelFormat uint64
 
 const (
 	// No format. This can mean  according to context invalid format or any format.  In the latter case, it is an invitation to MPS to pick a format.
-	MPSImageFeatureChannelFormatNone MPSImageFeatureChannelFormat = 0
+	ImageFeatureChannelFormatNone ImageFeatureChannelFormat = 0
 	// uint8_t with value [0,255] encoding [0,1.0]
-	MPSImageFeatureChannelFormatUnorm8 MPSImageFeatureChannelFormat = 1
+	ImageFeatureChannelFormatUnorm8 ImageFeatureChannelFormat = 1
 	// uint16_t with value [0,65535] encoding [0,1.0]
-	MPSImageFeatureChannelFormatUnorm16 MPSImageFeatureChannelFormat = 2
+	ImageFeatureChannelFormatUnorm16 ImageFeatureChannelFormat = 2
 	// IEEE-754 16-bit floating-point value. "half precision" Representable normal range is +-[2**-14, 65504], 0, Infinity, NaN. 11 bits of precision + exponent.
-	MPSImageFeatureChannelFormatFloat16 MPSImageFeatureChannelFormat = 3
+	ImageFeatureChannelFormatFloat16 ImageFeatureChannelFormat = 3
 	// IEEE-754 32-bit floating-point value.  "single precision" (standard float type in C) 24 bits of precision + exponent
-	MPSImageFeatureChannelFormatFloat32 MPSImageFeatureChannelFormat = 4
+	ImageFeatureChannelFormatFloat32 ImageFeatureChannelFormat = 4
 	// Reserved for later expansion
-	MPSImageFeatureChannelFormat_reserved0 MPSImageFeatureChannelFormat = 5
-	MPSImageFeatureChannelFormatCount      MPSImageFeatureChannelFormat = 6
+	ImageFeatureChannelFormat_reserved0 ImageFeatureChannelFormat = 5
+	ImageFeatureChannelFormatCount      ImageFeatureChannelFormat = 6
 )
 
-func (e MPSImageFeatureChannelFormat) String() string {
+func (e ImageFeatureChannelFormat) String() string {
 	switch e {
-	case MPSImageFeatureChannelFormatNone:
-		return "MPSImageFeatureChannelFormatNone"
-	case MPSImageFeatureChannelFormatUnorm8:
-		return "MPSImageFeatureChannelFormatUnorm8"
-	case MPSImageFeatureChannelFormatUnorm16:
-		return "MPSImageFeatureChannelFormatUnorm16"
-	case MPSImageFeatureChannelFormatFloat16:
-		return "MPSImageFeatureChannelFormatFloat16"
-	case MPSImageFeatureChannelFormatFloat32:
-		return "MPSImageFeatureChannelFormatFloat32"
-	case MPSImageFeatureChannelFormat_reserved0:
-		return "MPSImageFeatureChannelFormat_reserved0"
-	case MPSImageFeatureChannelFormatCount:
-		return "MPSImageFeatureChannelFormatCount"
+	case ImageFeatureChannelFormatNone:
+		return "ImageFeatureChannelFormatNone"
+	case ImageFeatureChannelFormatUnorm8:
+		return "ImageFeatureChannelFormatUnorm8"
+	case ImageFeatureChannelFormatUnorm16:
+		return "ImageFeatureChannelFormatUnorm16"
+	case ImageFeatureChannelFormatFloat16:
+		return "ImageFeatureChannelFormatFloat16"
+	case ImageFeatureChannelFormatFloat32:
+		return "ImageFeatureChannelFormatFloat32"
+	case ImageFeatureChannelFormat_reserved0:
+		return "ImageFeatureChannelFormat_reserved0"
+	case ImageFeatureChannelFormatCount:
+		return "ImageFeatureChannelFormatCount"
 	default:
-		return fmt.Sprintf("MPSImageFeatureChannelFormat(%d)", int64(e))
+		return fmt.Sprintf("ImageFeatureChannelFormat(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type MPSKernelOptions uint64
+type KernelOptions uint64
 
 const (
 	// Use default options
-	MPSKernelOptionsNone MPSKernelOptions = 0
+	KernelOptionsNone KernelOptions = 0
 	// Most MPS functions will sanity check their arguments. This has a small but non-zero CPU cost. Setting the MPSKernelOptionsSkipAPIValidation will skip these checks. MPSKernelOptionsSkipAPIValidation does not skip checks for memory allocation failure. Caution:  turning on MPSKernelOptionsSkipAPIValidation can result in undefined behavior if the requested operation can not be completed for some reason. Most error states will be passed through to Metal which may do nothing or abort the program if Metal API validation is turned on.
-	MPSKernelOptionsSkipAPIValidation MPSKernelOptions = 1
+	KernelOptionsSkipAPIValidation KernelOptions = 1
 	// When possible, MPSKernels use a higher precision data representation internally than the destination storage format to avoid excessive accumulation of computational rounding error in the result. MPSKernelOptionsAllowReducedPrecision advises the MPSKernel that the destination storage format already has too much precision for what is ultimately required downstream, and the MPSKernel may use reduced precision internally when it feels that a less precise result would yield better performance. The expected performance win is often small, perhaps 0-20%. When enabled, the precision of the result may vary by hardware and operating system.
-	MPSKernelOptionsAllowReducedPrecision MPSKernelOptions = 2
+	KernelOptionsAllowReducedPrecision KernelOptions = 2
 	// Some MPSKernels may automatically split up the work internally into multiple tiles. This improves performance on larger textures and reduces the amount of memory needed by MPS for temporary storage. However, if you are using your own tiling scheme to achieve similar results, your tile sizes and MPS's choice of tile sizes may interfere with one another causing MPS to subdivide your tiles for its own use inefficiently. Pass MPSKernelOptionsDisableInternalTiling to force MPS to process your data tile as a single chunk.
-	MPSKernelOptionsDisableInternalTiling MPSKernelOptions = 4
+	KernelOptionsDisableInternalTiling KernelOptions = 4
 	// Enabling this bit will cause various -encode... methods to call MTLCommandEncoder push/popDebugGroup.  The debug string will be drawn from MPSKernel.label, if any or the name of the class otherwise.
-	MPSKernelOptionsInsertDebugGroups MPSKernelOptions = 8
-	// Some parts of MPS can provide debug commentary and tuning advice when run. Setting this bit to 1 will cause the commentary to be emitted to stderr. Otherwise, the code is silent.  This is especially useful for debugging MPSNNGraph. This option is on by default when the MPS_LOG_INFO environment variable is defined.  For even more detailed output on a MPS object, you can use the po command in llvm with MPS objects: @code llvm>  po  <MPS object pointer> @endcode
-	MPSKernelOptionsVerbose MPSKernelOptions = 16
+	KernelOptionsInsertDebugGroups KernelOptions = 8
+	// Some parts of MPS can provide debug commentary and tuning advice when run. Setting this bit to 1 will cause the commentary to be emitted to stderr. Otherwise, the code is silent.  This is especially useful for debugging MPSNNGraph. This option is on by default when the MPS_LOG_INFO environment variable is defined.  For even more detailed output on a MPS object, you can use the po command in llvm with MPS objects:
+	KernelOptionsVerbose KernelOptions = 16
 )
 
-func (e MPSKernelOptions) String() string {
+func (e KernelOptions) String() string {
 	var parts []string
-	if e&MPSKernelOptionsSkipAPIValidation != 0 {
-		parts = append(parts, "MPSKernelOptionsSkipAPIValidation")
+	if e&KernelOptionsSkipAPIValidation != 0 {
+		parts = append(parts, "KernelOptionsSkipAPIValidation")
 	}
-	if e&MPSKernelOptionsAllowReducedPrecision != 0 {
-		parts = append(parts, "MPSKernelOptionsAllowReducedPrecision")
+	if e&KernelOptionsAllowReducedPrecision != 0 {
+		parts = append(parts, "KernelOptionsAllowReducedPrecision")
 	}
-	if e&MPSKernelOptionsDisableInternalTiling != 0 {
-		parts = append(parts, "MPSKernelOptionsDisableInternalTiling")
+	if e&KernelOptionsDisableInternalTiling != 0 {
+		parts = append(parts, "KernelOptionsDisableInternalTiling")
 	}
-	if e&MPSKernelOptionsInsertDebugGroups != 0 {
-		parts = append(parts, "MPSKernelOptionsInsertDebugGroups")
+	if e&KernelOptionsInsertDebugGroups != 0 {
+		parts = append(parts, "KernelOptionsInsertDebugGroups")
 	}
-	if e&MPSKernelOptionsVerbose != 0 {
-		parts = append(parts, "MPSKernelOptionsVerbose")
+	if e&KernelOptionsVerbose != 0 {
+		parts = append(parts, "KernelOptionsVerbose")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -237,50 +183,50 @@ func (e MPSKernelOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MPSPurgeableState uint64
+type PurgeableState uint64
 
 const (
-	MPSPurgeableStateAllocationDeferred MPSPurgeableState = 0
-	MPSPurgeableStateKeepCurrent        MPSPurgeableState = 1
-	MPSPurgeableStateNonVolatile        MPSPurgeableState = 2
-	MPSPurgeableStateVolatile           MPSPurgeableState = 3
-	MPSPurgeableStateEmpty              MPSPurgeableState = 4
+	PurgeableStateAllocationDeferred PurgeableState = 0
+	PurgeableStateKeepCurrent        PurgeableState = 1
+	PurgeableStateNonVolatile        PurgeableState = 2
+	PurgeableStateVolatile           PurgeableState = 3
+	PurgeableStateEmpty              PurgeableState = 4
 )
 
-func (e MPSPurgeableState) String() string {
+func (e PurgeableState) String() string {
 	switch e {
-	case MPSPurgeableStateAllocationDeferred:
-		return "MPSPurgeableStateAllocationDeferred"
-	case MPSPurgeableStateKeepCurrent:
-		return "MPSPurgeableStateKeepCurrent"
-	case MPSPurgeableStateNonVolatile:
-		return "MPSPurgeableStateNonVolatile"
-	case MPSPurgeableStateVolatile:
-		return "MPSPurgeableStateVolatile"
-	case MPSPurgeableStateEmpty:
-		return "MPSPurgeableStateEmpty"
+	case PurgeableStateAllocationDeferred:
+		return "PurgeableStateAllocationDeferred"
+	case PurgeableStateKeepCurrent:
+		return "PurgeableStateKeepCurrent"
+	case PurgeableStateNonVolatile:
+		return "PurgeableStateNonVolatile"
+	case PurgeableStateVolatile:
+		return "PurgeableStateVolatile"
+	case PurgeableStateEmpty:
+		return "PurgeableStateEmpty"
 	default:
-		return fmt.Sprintf("MPSPurgeableState(%d)", int64(e))
+		return fmt.Sprintf("PurgeableState(%d)", int64(e))
 	}
 }
 
-type MPSStateResourceType uint64
+type StateResourceType uint64
 
 const (
-	MPSStateResourceTypeNone    MPSStateResourceType = 0
-	MPSStateResourceTypeBuffer  MPSStateResourceType = 1
-	MPSStateResourceTypeTexture MPSStateResourceType = 2
+	StateResourceTypeNone    StateResourceType = 0
+	StateResourceTypeBuffer  StateResourceType = 1
+	StateResourceTypeTexture StateResourceType = 2
 )
 
-func (e MPSStateResourceType) String() string {
+func (e StateResourceType) String() string {
 	switch e {
-	case MPSStateResourceTypeNone:
-		return "MPSStateResourceTypeNone"
-	case MPSStateResourceTypeBuffer:
-		return "MPSStateResourceTypeBuffer"
-	case MPSStateResourceTypeTexture:
-		return "MPSStateResourceTypeTexture"
+	case StateResourceTypeNone:
+		return "StateResourceTypeNone"
+	case StateResourceTypeBuffer:
+		return "StateResourceTypeBuffer"
+	case StateResourceTypeTexture:
+		return "StateResourceTypeTexture"
 	default:
-		return fmt.Sprintf("MPSStateResourceType(%d)", int64(e))
+		return fmt.Sprintf("StateResourceType(%d)", int64(e))
 	}
 }

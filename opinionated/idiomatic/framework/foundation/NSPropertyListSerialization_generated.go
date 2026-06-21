@@ -5,50 +5,75 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that converts between a property list and one of several serialized representations.
 //
-// PropertyListSerialization wraps [raw.NSPropertyListSerialization] with a fluent Go API.
+// PropertyListSerialization is an idiomatic wrapper over the Objective-C class NSPropertyListSerialization.
 type PropertyListSerialization struct {
-	inner *raw.NSPropertyListSerialization
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPropertyListSerialization].
-func (x *PropertyListSerialization) Unwrap() *raw.NSPropertyListSerialization { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PropertyListSerialization) ID() objc.ID { return x.inner.Ptr() }
-
-// PropertyListSerializationFromID adopts an existing object pointer as a PropertyListSerialization (nil for 0).
+// PropertyListSerializationFromID adopts an existing Objective-C object as a PropertyListSerialization
+// (nil for 0), retaining it and registering a release finalizer.
 func PropertyListSerializationFromID(id objc.ID) *PropertyListSerialization {
 	if id == 0 {
 		return nil
 	}
-	return &PropertyListSerialization{inner: raw.NSPropertyListSerializationFromID(id)}
-}
-
-// NewPropertyListSerialization creates a new [PropertyListSerialization].
-func NewPropertyListSerialization() *PropertyListSerialization {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPropertyListSerialization")), objc.RegisterName("new"))
-	return &PropertyListSerialization{inner: raw.NSPropertyListSerializationFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *PropertyListSerialization) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PropertyListSerialization {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &PropertyListSerialization{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-func (x *PropertyListSerialization) asObject() *raw.NSObject { return &x.inner.NSObject }
+// propertyListSerializationAdopt wraps an Objective-C object that this code just created as a
+// PropertyListSerialization (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func propertyListSerializationAdopt(id objc.ID) *PropertyListSerialization {
+	if id == 0 {
+		return nil
+	}
+	x := &PropertyListSerialization{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PropertyListSerialization) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PropertyListSerialization) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PropertyListSerialization) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPropertyListSerialization creates a new PropertyListSerialization.
+func NewPropertyListSerialization() *PropertyListSerialization {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPropertyListSerialization")), objc.RegisterName("new"))
+	return propertyListSerializationAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *PropertyListSerialization) WithScriptingProperties(scriptingProperties obj.Object) *PropertyListSerialization {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // PropertyListSerializationable is the interface implemented by [PropertyListSerialization], for mocking and DI.
 type PropertyListSerializationable interface {
-	Unwrap() *raw.NSPropertyListSerialization
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PropertyListSerialization
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *PropertyListSerialization
 }
 
 var _ PropertyListSerializationable = (*PropertyListSerialization)(nil)

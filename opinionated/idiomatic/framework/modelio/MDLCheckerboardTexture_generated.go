@@ -5,111 +5,146 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A generator of texel data that creates a checkerboard pattern with two specified colors.
 //
-// CheckerboardTexture wraps [raw.MDLCheckerboardTexture] with a fluent Go API.
+// CheckerboardTexture is an idiomatic wrapper over the Objective-C class MDLCheckerboardTexture.
 type CheckerboardTexture struct {
-	inner *raw.MDLCheckerboardTexture
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLCheckerboardTexture].
-func (x *CheckerboardTexture) Unwrap() *raw.MDLCheckerboardTexture { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CheckerboardTexture) ID() objc.ID { return x.inner.Ptr() }
-
-// CheckerboardTextureFromID adopts an existing object pointer as a CheckerboardTexture (nil for 0).
+// CheckerboardTextureFromID adopts an existing Objective-C object as a CheckerboardTexture
+// (nil for 0), retaining it and registering a release finalizer.
 func CheckerboardTextureFromID(id objc.ID) *CheckerboardTexture {
 	if id == 0 {
 		return nil
 	}
-	return &CheckerboardTexture{inner: raw.MDLCheckerboardTextureFromID(id)}
+	x := &CheckerboardTexture{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes a checkerboard texture with the specified colors and other properties.
-//
-// NewCheckerboardTextureWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2 creates a new [CheckerboardTexture].
-func NewCheckerboardTextureWithDivisionsNameDimensionsChannelCountChannelEncodingColor1Color2(divisions float32, name string, dimensions unsafe.Pointer, channelCount int, channelEncoding MDLTextureChannelEncoding, color1 unsafe.Pointer, color2 unsafe.Pointer) *CheckerboardTexture {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLCheckerboardTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDivisions:name:dimensions:channelCount:channelEncoding:color1:color2:"), divisions, foundation.NSStringStringWithUTF8String(name).Ptr(), dimensions, channelCount, raw.MDLTextureChannelEncoding(channelEncoding), color1, color2)
-	return &CheckerboardTexture{inner: raw.MDLCheckerboardTextureFromID(_id)}
+// checkerboardTextureAdopt wraps an Objective-C object that this code just created as a
+// CheckerboardTexture (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func checkerboardTextureAdopt(id objc.ID) *CheckerboardTexture {
+	if id == 0 {
+		return nil
+	}
+	x := &CheckerboardTexture{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CheckerboardTexture) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CheckerboardTexture) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CheckerboardTexture) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCheckerboardTexture creates a new CheckerboardTexture.
+func NewCheckerboardTexture() *CheckerboardTexture {
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLCheckerboardTexture")), objc.RegisterName("new"))
+	return checkerboardTextureAdopt(_id)
 }
 
 // The number of squares along each dimension in the checkerboard pattern.
 //
-// WithDivisions sets the divisions property and returns the receiver for chaining.
+// WithDivisions sets divisions and returns the receiver so calls can be chained.
 func (x *CheckerboardTexture) WithDivisions(divisions float32) *CheckerboardTexture {
-	x.inner.SetDivisions(divisions)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDivisions:"), divisions)
+	return x
+}
+
+// The color for half of the squares in the checkerboard pattern.
+//
+// WithColor1 sets color1 and returns the receiver so calls can be chained.
+func (x *CheckerboardTexture) WithColor1(color1 obj.Object) *CheckerboardTexture {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor1:"), objref.IDOf(color1))
+	return x
+}
+
+// The color for the other half of the squares in the checkerboard pattern.
+//
+// WithColor2 sets color2 and returns the receiver so calls can be chained.
+func (x *CheckerboardTexture) WithColor2(color2 obj.Object) *CheckerboardTexture {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor2:"), objref.IDOf(color2))
 	return x
 }
 
 // A Boolean value that indicates whether the texture is a cube textures.
 //
-// WithIsCube sets the isCube property and returns the receiver for chaining.
+// WithIsCube sets isCube and returns the receiver so calls can be chained.
 func (x *CheckerboardTexture) WithIsCube(isCube bool) *CheckerboardTexture {
-	x.inner.MDLTexture.SetIsCube(isCube)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCube:"), isCube)
 	return x
 }
 
-// hasAlphaValues @summary Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
+// hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
 //
-// WithHasAlphaValues sets the hasAlphaValues property and returns the receiver for chaining.
+// WithHasAlphaValues sets hasAlphaValues and returns the receiver so calls can be chained.
 func (x *CheckerboardTexture) WithHasAlphaValues(hasAlphaValues bool) *CheckerboardTexture {
-	x.inner.MDLTexture.SetHasAlphaValues(hasAlphaValues)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
 	return x
 }
 
-// Divisions calls the underlying Divisions.
 func (x *CheckerboardTexture) Divisions() float32 {
-	return x.inner.Divisions()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("divisions"))
+	return _r
 }
 
-// SetDivisions calls the underlying SetDivisions.
 func (x *CheckerboardTexture) SetDivisions(divisions float32) {
-	x.inner.SetDivisions(divisions)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDivisions:"), divisions)
 }
 
-// Color1 calls the underlying Color1.
-func (x *CheckerboardTexture) Color1() unsafe.Pointer {
-	return x.inner.Color1()
+func (x *CheckerboardTexture) Color1() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color1"))
+	return obj.Wrap(_r)
 }
 
-// SetColor1 calls the underlying SetColor1.
-func (x *CheckerboardTexture) SetColor1(color1 unsafe.Pointer) {
-	x.inner.SetColor1(color1)
+func (x *CheckerboardTexture) SetColor1(color1 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor1:"), objref.IDOf(color1))
 }
 
-// Color2 calls the underlying Color2.
-func (x *CheckerboardTexture) Color2() unsafe.Pointer {
-	return x.inner.Color2()
+func (x *CheckerboardTexture) Color2() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color2"))
+	return obj.Wrap(_r)
 }
 
-// SetColor2 calls the underlying SetColor2.
-func (x *CheckerboardTexture) SetColor2(color2 unsafe.Pointer) {
-	x.inner.SetColor2(color2)
+func (x *CheckerboardTexture) SetColor2(color2 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor2:"), objref.IDOf(color2))
 }
-
-func (x *CheckerboardTexture) asTexture() *raw.MDLTexture { return &x.inner.MDLTexture }
 
 // CheckerboardTextureable is the interface implemented by [CheckerboardTexture], for mocking and DI.
 type CheckerboardTextureable interface {
-	Unwrap() *raw.MDLCheckerboardTexture
+	obj.Object
 	WithDivisions(divisions float32) *CheckerboardTexture
+	WithColor1(color1 obj.Object) *CheckerboardTexture
+	WithColor2(color2 obj.Object) *CheckerboardTexture
 	WithIsCube(isCube bool) *CheckerboardTexture
 	WithHasAlphaValues(hasAlphaValues bool) *CheckerboardTexture
 	Divisions() float32
 	SetDivisions(divisions float32)
-	Color1() unsafe.Pointer
-	SetColor1(color1 unsafe.Pointer)
-	Color2() unsafe.Pointer
-	SetColor2(color2 unsafe.Pointer)
+	Color1() obj.Object
+	SetColor1(color1 obj.Object)
+	Color2() obj.Object
+	SetColor2(color2 obj.Object)
 }
 
 var _ CheckerboardTextureable = (*CheckerboardTexture)(nil)

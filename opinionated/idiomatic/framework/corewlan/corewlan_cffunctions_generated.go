@@ -5,116 +5,238 @@
 package corewlan
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corewlan"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// CWKeychainCopyEAPIdentityList wraps [raw.CWKeychainCopyEAPIdentityList], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CWKeychainCopyEAPIdentityList() (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.CWKeychainCopyEAPIdentityList(unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+var _fnCWKeychainCopyEAPIdentityList func(unsafe.Pointer) int32
+
+// CWKeychainCopyEAPIdentityList reports an error if the CoreWLAN framework function CWKeychainCopyEAPIdentityList fails.
+func CWKeychainCopyEAPIdentityList() (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCWKeychainCopyEAPIdentityList == nil {
+		ebipurego.RegisterLibFunc(&_fnCWKeychainCopyEAPIdentityList, _lib, "CWKeychainCopyEAPIdentityList")
 	}
-	return objc.ID(_out0), nil
+	var _out0 uintptr
+	_rc := _fnCWKeychainCopyEAPIdentityList(unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// CWKeychainCopyEAPUsernameAndPassword wraps [raw.CWKeychainCopyEAPUsernameAndPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CWKeychainCopyEAPUsernameAndPassword(ssidData objc.ID) (objc.ID, objc.ID, error) {
+var _fnCWKeychainCopyEAPUsernameAndPassword func(objc.ID, unsafe.Pointer, unsafe.Pointer) int32
+
+// CWKeychainCopyEAPUsernameAndPassword reports an error if the CoreWLAN framework function CWKeychainCopyEAPUsernameAndPassword fails.
+func CWKeychainCopyEAPUsernameAndPassword(ssidData obj.Object) (obj.Object, obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCWKeychainCopyEAPUsernameAndPassword == nil {
+		ebipurego.RegisterLibFunc(&_fnCWKeychainCopyEAPUsernameAndPassword, _lib, "CWKeychainCopyEAPUsernameAndPassword")
+	}
 	var _out0 uintptr
 	var _out1 uintptr
-	if _err := purego.NewOSStatus(raw.CWKeychainCopyEAPUsernameAndPassword(purego.CFRef(ssidData), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))).Err(); _err != nil {
-		return 0, 0, _err
+	_rc := _fnCWKeychainCopyEAPUsernameAndPassword(objref.IDOf(ssidData), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, nil, _err
 	}
-	return objc.ID(_out0), objc.ID(_out1), nil
+	return obj.Wrap(objc.ID(_out0)), obj.Wrap(objc.ID(_out1)), nil
 }
 
-// CWKeychainCopyPassword wraps [raw.CWKeychainCopyPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CWKeychainCopyPassword(ssidData objc.ID) (objc.ID, error) {
+var _fnCWKeychainCopyPassword func(objc.ID, unsafe.Pointer) int32
+
+// CWKeychainCopyPassword reports an error if the CoreWLAN framework function CWKeychainCopyPassword fails.
+func CWKeychainCopyPassword(ssidData obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCWKeychainCopyPassword == nil {
+		ebipurego.RegisterLibFunc(&_fnCWKeychainCopyPassword, _lib, "CWKeychainCopyPassword")
+	}
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.CWKeychainCopyPassword(purego.CFRef(ssidData), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnCWKeychainCopyPassword(objref.IDOf(ssidData), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// CWKeychainDeleteEAPUsernameAndPassword wraps [raw.CWKeychainDeleteEAPUsernameAndPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CWKeychainDeleteEAPUsernameAndPassword(ssidData objc.ID) error {
-	if _err := purego.NewOSStatus(raw.CWKeychainDeleteEAPUsernameAndPassword(purego.CFRef(ssidData))).Err(); _err != nil {
+var _fnCWKeychainDeleteEAPUsernameAndPassword func(objc.ID) int32
+
+// CWKeychainDeleteEAPUsernameAndPassword reports an error if the CoreWLAN framework function CWKeychainDeleteEAPUsernameAndPassword fails.
+func CWKeychainDeleteEAPUsernameAndPassword(ssidData obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCWKeychainDeleteEAPUsernameAndPassword == nil {
+		ebipurego.RegisterLibFunc(&_fnCWKeychainDeleteEAPUsernameAndPassword, _lib, "CWKeychainDeleteEAPUsernameAndPassword")
+	}
+	_rc := _fnCWKeychainDeleteEAPUsernameAndPassword(objref.IDOf(ssidData))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CWKeychainDeletePassword wraps [raw.CWKeychainDeletePassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CWKeychainDeletePassword(ssidData objc.ID) error {
-	if _err := purego.NewOSStatus(raw.CWKeychainDeletePassword(purego.CFRef(ssidData))).Err(); _err != nil {
+var _fnCWKeychainDeletePassword func(objc.ID) int32
+
+// CWKeychainDeletePassword reports an error if the CoreWLAN framework function CWKeychainDeletePassword fails.
+func CWKeychainDeletePassword(ssidData obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCWKeychainDeletePassword == nil {
+		ebipurego.RegisterLibFunc(&_fnCWKeychainDeletePassword, _lib, "CWKeychainDeletePassword")
+	}
+	_rc := _fnCWKeychainDeletePassword(objref.IDOf(ssidData))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CWKeychainDeleteWiFiEAPUsernameAndPassword wraps [raw.CWKeychainDeleteWiFiEAPUsernameAndPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CWKeychainDeleteWiFiEAPUsernameAndPassword(domain CWKeychainDomain, ssid *foundation.NSData) error {
-	if _err := purego.NewOSStatus(raw.CWKeychainDeleteWiFiEAPUsernameAndPassword(raw.CWKeychainDomain(domain), ssid)).Err(); _err != nil {
+var _fnCWKeychainDeleteWiFiEAPUsernameAndPassword func(KeychainDomain, objc.ID) int32
+
+// CWKeychainDeleteWiFiEAPUsernameAndPassword reports an error if the CoreWLAN framework function CWKeychainDeleteWiFiEAPUsernameAndPassword fails.
+func CWKeychainDeleteWiFiEAPUsernameAndPassword(domain KeychainDomain, ssid obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCWKeychainDeleteWiFiEAPUsernameAndPassword == nil {
+		ebipurego.RegisterLibFunc(&_fnCWKeychainDeleteWiFiEAPUsernameAndPassword, _lib, "CWKeychainDeleteWiFiEAPUsernameAndPassword")
+	}
+	_rc := _fnCWKeychainDeleteWiFiEAPUsernameAndPassword(domain, objref.IDOf(ssid))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CWKeychainDeleteWiFiPassword wraps [raw.CWKeychainDeleteWiFiPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CWKeychainDeleteWiFiPassword(domain CWKeychainDomain, ssid *foundation.NSData) error {
-	if _err := purego.NewOSStatus(raw.CWKeychainDeleteWiFiPassword(raw.CWKeychainDomain(domain), ssid)).Err(); _err != nil {
+var _fnCWKeychainDeleteWiFiPassword func(KeychainDomain, objc.ID) int32
+
+// CWKeychainDeleteWiFiPassword reports an error if the CoreWLAN framework function CWKeychainDeleteWiFiPassword fails.
+func CWKeychainDeleteWiFiPassword(domain KeychainDomain, ssid obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCWKeychainDeleteWiFiPassword == nil {
+		ebipurego.RegisterLibFunc(&_fnCWKeychainDeleteWiFiPassword, _lib, "CWKeychainDeleteWiFiPassword")
+	}
+	_rc := _fnCWKeychainDeleteWiFiPassword(domain, objref.IDOf(ssid))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CWKeychainFindWiFiEAPUsernameAndPassword wraps [raw.CWKeychainFindWiFiEAPUsernameAndPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CWKeychainFindWiFiEAPUsernameAndPassword(domain CWKeychainDomain, ssid *foundation.NSData, username *foundation.NSString, password *foundation.NSString) error {
-	if _err := purego.NewOSStatus(raw.CWKeychainFindWiFiEAPUsernameAndPassword(raw.CWKeychainDomain(domain), ssid, username, password)).Err(); _err != nil {
+var _fnCWKeychainFindWiFiEAPUsernameAndPassword func(KeychainDomain, objc.ID, objc.ID, objc.ID) int32
+
+// CWKeychainFindWiFiEAPUsernameAndPassword reports an error if the CoreWLAN framework function CWKeychainFindWiFiEAPUsernameAndPassword fails.
+func CWKeychainFindWiFiEAPUsernameAndPassword(domain KeychainDomain, ssid obj.Object, username string, password string) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCWKeychainFindWiFiEAPUsernameAndPassword == nil {
+		ebipurego.RegisterLibFunc(&_fnCWKeychainFindWiFiEAPUsernameAndPassword, _lib, "CWKeychainFindWiFiEAPUsernameAndPassword")
+	}
+	_rc := _fnCWKeychainFindWiFiEAPUsernameAndPassword(domain, objref.IDOf(ssid), purego.NSString(username), purego.NSString(password))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CWKeychainFindWiFiPassword wraps [raw.CWKeychainFindWiFiPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CWKeychainFindWiFiPassword(domain CWKeychainDomain, ssid *foundation.NSData, password *foundation.NSString) error {
-	if _err := purego.NewOSStatus(raw.CWKeychainFindWiFiPassword(raw.CWKeychainDomain(domain), ssid, password)).Err(); _err != nil {
+var _fnCWKeychainFindWiFiPassword func(KeychainDomain, objc.ID, objc.ID) int32
+
+// CWKeychainFindWiFiPassword reports an error if the CoreWLAN framework function CWKeychainFindWiFiPassword fails.
+func CWKeychainFindWiFiPassword(domain KeychainDomain, ssid obj.Object, password string) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCWKeychainFindWiFiPassword == nil {
+		ebipurego.RegisterLibFunc(&_fnCWKeychainFindWiFiPassword, _lib, "CWKeychainFindWiFiPassword")
+	}
+	_rc := _fnCWKeychainFindWiFiPassword(domain, objref.IDOf(ssid), purego.NSString(password))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CWKeychainSetEAPUsernameAndPassword wraps [raw.CWKeychainSetEAPUsernameAndPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CWKeychainSetEAPUsernameAndPassword(ssidData objc.ID, username objc.ID, password objc.ID) error {
-	if _err := purego.NewOSStatus(raw.CWKeychainSetEAPUsernameAndPassword(purego.CFRef(ssidData), purego.CFRef(username), purego.CFRef(password))).Err(); _err != nil {
+var _fnCWKeychainSetEAPIdentity func(objc.ID, objc.ID) int32
+
+// CWKeychainSetEAPIdentity reports an error if the CoreWLAN framework function CWKeychainSetEAPIdentity fails.
+func CWKeychainSetEAPIdentity(ssidData obj.Object, identity obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCWKeychainSetEAPIdentity == nil {
+		ebipurego.RegisterLibFunc(&_fnCWKeychainSetEAPIdentity, _lib, "CWKeychainSetEAPIdentity")
+	}
+	_rc := _fnCWKeychainSetEAPIdentity(objref.IDOf(ssidData), objref.IDOf(identity))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CWKeychainSetPassword wraps [raw.CWKeychainSetPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CWKeychainSetPassword(ssidData objc.ID, password objc.ID) error {
-	if _err := purego.NewOSStatus(raw.CWKeychainSetPassword(purego.CFRef(ssidData), purego.CFRef(password))).Err(); _err != nil {
+var _fnCWKeychainSetEAPUsernameAndPassword func(objc.ID, objc.ID, objc.ID) int32
+
+// CWKeychainSetEAPUsernameAndPassword reports an error if the CoreWLAN framework function CWKeychainSetEAPUsernameAndPassword fails.
+func CWKeychainSetEAPUsernameAndPassword(ssidData obj.Object, username obj.Object, password obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCWKeychainSetEAPUsernameAndPassword == nil {
+		ebipurego.RegisterLibFunc(&_fnCWKeychainSetEAPUsernameAndPassword, _lib, "CWKeychainSetEAPUsernameAndPassword")
+	}
+	_rc := _fnCWKeychainSetEAPUsernameAndPassword(objref.IDOf(ssidData), objref.IDOf(username), objref.IDOf(password))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CWKeychainSetWiFiEAPUsernameAndPassword wraps [raw.CWKeychainSetWiFiEAPUsernameAndPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CWKeychainSetWiFiEAPUsernameAndPassword(domain CWKeychainDomain, ssid *foundation.NSData, username *foundation.NSString, password *foundation.NSString) error {
-	if _err := purego.NewOSStatus(raw.CWKeychainSetWiFiEAPUsernameAndPassword(raw.CWKeychainDomain(domain), ssid, username, password)).Err(); _err != nil {
+var _fnCWKeychainSetPassword func(objc.ID, objc.ID) int32
+
+// CWKeychainSetPassword reports an error if the CoreWLAN framework function CWKeychainSetPassword fails.
+func CWKeychainSetPassword(ssidData obj.Object, password obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCWKeychainSetPassword == nil {
+		ebipurego.RegisterLibFunc(&_fnCWKeychainSetPassword, _lib, "CWKeychainSetPassword")
+	}
+	_rc := _fnCWKeychainSetPassword(objref.IDOf(ssidData), objref.IDOf(password))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CWKeychainSetWiFiPassword wraps [raw.CWKeychainSetWiFiPassword], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CWKeychainSetWiFiPassword(domain CWKeychainDomain, ssid *foundation.NSData, password *foundation.NSString) error {
-	if _err := purego.NewOSStatus(raw.CWKeychainSetWiFiPassword(raw.CWKeychainDomain(domain), ssid, password)).Err(); _err != nil {
+var _fnCWKeychainSetWiFiEAPIdentity func(KeychainDomain, objc.ID, objc.ID) int32
+
+// CWKeychainSetWiFiEAPIdentity reports an error if the CoreWLAN framework function CWKeychainSetWiFiEAPIdentity fails.
+func CWKeychainSetWiFiEAPIdentity(domain KeychainDomain, ssid obj.Object, identity obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCWKeychainSetWiFiEAPIdentity == nil {
+		ebipurego.RegisterLibFunc(&_fnCWKeychainSetWiFiEAPIdentity, _lib, "CWKeychainSetWiFiEAPIdentity")
+	}
+	_rc := _fnCWKeychainSetWiFiEAPIdentity(domain, objref.IDOf(ssid), objref.IDOf(identity))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCWKeychainSetWiFiEAPUsernameAndPassword func(KeychainDomain, objc.ID, objc.ID, objc.ID) int32
+
+// CWKeychainSetWiFiEAPUsernameAndPassword reports an error if the CoreWLAN framework function CWKeychainSetWiFiEAPUsernameAndPassword fails.
+func CWKeychainSetWiFiEAPUsernameAndPassword(domain KeychainDomain, ssid obj.Object, username string, password string) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCWKeychainSetWiFiEAPUsernameAndPassword == nil {
+		ebipurego.RegisterLibFunc(&_fnCWKeychainSetWiFiEAPUsernameAndPassword, _lib, "CWKeychainSetWiFiEAPUsernameAndPassword")
+	}
+	_rc := _fnCWKeychainSetWiFiEAPUsernameAndPassword(domain, objref.IDOf(ssid), purego.NSString(username), purego.NSString(password))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCWKeychainSetWiFiPassword func(KeychainDomain, objc.ID, objc.ID) int32
+
+// CWKeychainSetWiFiPassword reports an error if the CoreWLAN framework function CWKeychainSetWiFiPassword fails.
+func CWKeychainSetWiFiPassword(domain KeychainDomain, ssid obj.Object, password string) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCWKeychainSetWiFiPassword == nil {
+		ebipurego.RegisterLibFunc(&_fnCWKeychainSetWiFiPassword, _lib, "CWKeychainSetWiFiPassword")
+	}
+	_rc := _fnCWKeychainSetWiFiPassword(domain, objref.IDOf(ssid), purego.NSString(password))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil

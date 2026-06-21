@@ -5,58 +5,75 @@
 package fskit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A type that represents a container’s status.
 //
-// ContainerStatus wraps [raw.FSContainerStatus] with a fluent Go API.
+// ContainerStatus is an idiomatic wrapper over the Objective-C class FSContainerStatus.
 type ContainerStatus struct {
-	inner *raw.FSContainerStatus
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSContainerStatus].
-func (x *ContainerStatus) Unwrap() *raw.FSContainerStatus { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContainerStatus) ID() objc.ID { return x.inner.Ptr() }
-
-// ContainerStatusFromID adopts an existing object pointer as a ContainerStatus (nil for 0).
+// ContainerStatusFromID adopts an existing Objective-C object as a ContainerStatus
+// (nil for 0), retaining it and registering a release finalizer.
 func ContainerStatusFromID(id objc.ID) *ContainerStatus {
 	if id == 0 {
 		return nil
 	}
-	return &ContainerStatus{inner: raw.FSContainerStatusFromID(id)}
+	x := &ContainerStatus{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewContainerStatus creates a new [ContainerStatus].
+// containerStatusAdopt wraps an Objective-C object that this code just created as a
+// ContainerStatus (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func containerStatusAdopt(id objc.ID) *ContainerStatus {
+	if id == 0 {
+		return nil
+	}
+	x := &ContainerStatus{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ContainerStatus) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ContainerStatus) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ContainerStatus) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewContainerStatus creates a new ContainerStatus.
 func NewContainerStatus() *ContainerStatus {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSContainerStatus")), objc.RegisterName("new"))
-	return &ContainerStatus{inner: raw.FSContainerStatusFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("FSContainerStatus")), objc.RegisterName("new"))
+	return containerStatusAdopt(_id)
 }
 
 // A value that represents the container state, such as ready, active, or blocked.
-//
-// State calls the underlying State.
-func (x *ContainerStatus) State() FSContainerState {
-	return FSContainerState(x.inner.State())
-}
-
-// An optional error that provides further information about the state.
-//
-// Status calls the underlying Status.
-func (x *ContainerStatus) Status() unsafe.Pointer {
-	return x.inner.Status()
+func (x *ContainerStatus) State() ContainerState {
+	_r := objc.Send[ContainerState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
 }
 
 // ContainerStatusable is the interface implemented by [ContainerStatus], for mocking and DI.
 type ContainerStatusable interface {
-	Unwrap() *raw.FSContainerStatus
-	State() FSContainerState
-	Status() unsafe.Pointer
+	obj.Object
+	State() ContainerState
 }
 
 var _ ContainerStatusable = (*ContainerStatus)(nil)

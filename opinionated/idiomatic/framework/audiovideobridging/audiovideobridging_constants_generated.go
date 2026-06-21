@@ -5,13 +5,10 @@
 package audiovideobridging
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @constant	AVBErrorDomain @abstract	The string defining the error domain for AudioVideoBridging errors.
-// AVBErrorDomain returns the string constant AVBErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func AVBErrorDomain() objc.ID {
-	return purego.CFConstant(raw.AVBErrorDomain())
-}
+// The string defining the error domain for AudioVideoBridging errors.
+// AVBErrorDomain returns the string constant AVBErrorDomain, for use as a dictionary key or argument.
+func AVBErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("AVBErrorDomain"))) }

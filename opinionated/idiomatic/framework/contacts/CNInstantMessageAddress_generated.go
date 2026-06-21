@@ -5,64 +5,87 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An immutable object representing an instant message address for the contact.
 //
-// InstantMessageAddress wraps [raw.CNInstantMessageAddress] with a fluent Go API.
+// InstantMessageAddress is an idiomatic wrapper over the Objective-C class CNInstantMessageAddress.
 type InstantMessageAddress struct {
-	inner *raw.CNInstantMessageAddress
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNInstantMessageAddress].
-func (x *InstantMessageAddress) Unwrap() *raw.CNInstantMessageAddress { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *InstantMessageAddress) ID() objc.ID { return x.inner.Ptr() }
-
-// InstantMessageAddressFromID adopts an existing object pointer as a InstantMessageAddress (nil for 0).
+// InstantMessageAddressFromID adopts an existing Objective-C object as a InstantMessageAddress
+// (nil for 0), retaining it and registering a release finalizer.
 func InstantMessageAddressFromID(id objc.ID) *InstantMessageAddress {
 	if id == 0 {
 		return nil
 	}
-	return &InstantMessageAddress{inner: raw.CNInstantMessageAddressFromID(id)}
+	x := &InstantMessageAddress{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// instantMessageAddressAdopt wraps an Objective-C object that this code just created as a
+// InstantMessageAddress (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func instantMessageAddressAdopt(id objc.ID) *InstantMessageAddress {
+	if id == 0 {
+		return nil
+	}
+	x := &InstantMessageAddress{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *InstantMessageAddress) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *InstantMessageAddress) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *InstantMessageAddress) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns a CNInstantMessageAddress object initialized with the specified user name and service.
 //
-// NewInstantMessageAddressWithUsernameService creates a new [InstantMessageAddress].
+// NewInstantMessageAddressWithUsernameService creates a new InstantMessageAddress.
 func NewInstantMessageAddressWithUsernameService(username string, service string) *InstantMessageAddress {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNInstantMessageAddress")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUsername:service:"), foundation.NSStringStringWithUTF8String(username).Ptr(), foundation.NSStringStringWithUTF8String(service).Ptr())
-	return &InstantMessageAddress{inner: raw.CNInstantMessageAddressFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CNInstantMessageAddress")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUsername:service:"), purego.NSString(username), purego.NSString(service))
+	return instantMessageAddressAdopt(_id)
 }
 
-// Username calls the underlying Username.
 func (x *InstantMessageAddress) Username() string {
-	_r := x.inner.Username()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("username"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Service calls the underlying Service.
 func (x *InstantMessageAddress) Service() string {
-	_r := x.inner.Service()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("service"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // InstantMessageAddressable is the interface implemented by [InstantMessageAddress], for mocking and DI.
 type InstantMessageAddressable interface {
-	Unwrap() *raw.CNInstantMessageAddress
+	obj.Object
 	Username() string
 	Service() string
 }

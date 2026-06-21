@@ -5,1829 +5,850 @@
 package coremedia
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// CMAudioDeviceClockCreate calls [raw.CMAudioDeviceClockCreate] (C function CMAudioDeviceClockCreate).
-func CMAudioDeviceClockCreate(allocator unsafe.Pointer, deviceUID unsafe.Pointer, clockOut unsafe.Pointer) int {
-	return raw.CMAudioDeviceClockCreate(allocator, deviceUID, clockOut)
-}
-
-// CMAudioDeviceClockCreateFromAudioDeviceID calls [raw.CMAudioDeviceClockCreateFromAudioDeviceID] (C function CMAudioDeviceClockCreateFromAudioDeviceID).
-func CMAudioDeviceClockCreateFromAudioDeviceID(allocator unsafe.Pointer, deviceID uint, clockOut unsafe.Pointer) int {
-	return raw.CMAudioDeviceClockCreateFromAudioDeviceID(allocator, deviceID, clockOut)
-}
-
-// CMAudioDeviceClockGetAudioDevice calls [raw.CMAudioDeviceClockGetAudioDevice] (C function CMAudioDeviceClockGetAudioDevice).
-func CMAudioDeviceClockGetAudioDevice(clock unsafe.Pointer, deviceUIDOut unsafe.Pointer, deviceIDOut *uint, trackingDefaultDeviceOut *uint8) int {
-	return raw.CMAudioDeviceClockGetAudioDevice(clock, deviceUIDOut, deviceIDOut, trackingDefaultDeviceOut)
-}
-
-// CMAudioDeviceClockSetAudioDeviceID calls [raw.CMAudioDeviceClockSetAudioDeviceID] (C function CMAudioDeviceClockSetAudioDeviceID).
-func CMAudioDeviceClockSetAudioDeviceID(clock unsafe.Pointer, deviceID uint) int {
-	return raw.CMAudioDeviceClockSetAudioDeviceID(clock, deviceID)
-}
-
-// CMAudioDeviceClockSetAudioDeviceUID calls [raw.CMAudioDeviceClockSetAudioDeviceUID] (C function CMAudioDeviceClockSetAudioDeviceUID).
-func CMAudioDeviceClockSetAudioDeviceUID(clock unsafe.Pointer, deviceUID unsafe.Pointer) int {
-	return raw.CMAudioDeviceClockSetAudioDeviceUID(clock, deviceUID)
-}
-
-// CMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockBuffer calls [raw.CMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockBuffer] (C function CMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockBuffer).
-func CMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockBuffer(allocator unsafe.Pointer, audioFormatDescription unsafe.Pointer, flavor unsafe.Pointer, blockBufferOut unsafe.Pointer) int {
-	return raw.CMAudioFormatDescriptionCopyAsBigEndianSoundDescriptionBlockBuffer(allocator, audioFormatDescription, flavor, blockBufferOut)
-}
-
-// CMAudioFormatDescriptionCreate calls [raw.CMAudioFormatDescriptionCreate] (C function CMAudioFormatDescriptionCreate).
-func CMAudioFormatDescriptionCreate(allocator unsafe.Pointer, asbd *coreaudiotypes.AudioStreamBasicDescription, layoutSize uint, layout *coreaudiotypes.AudioChannelLayout, magicCookieSize uint, magicCookie unsafe.Pointer, extensions unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMAudioFormatDescriptionCreate(allocator, asbd, layoutSize, layout, magicCookieSize, magicCookie, extensions, formatDescriptionOut)
-}
-
-// CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionBlockBuffer calls [raw.CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionBlockBuffer] (C function CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionBlockBuffer).
-func CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionBlockBuffer(allocator unsafe.Pointer, soundDescriptionBlockBuffer unsafe.Pointer, flavor unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionBlockBuffer(allocator, soundDescriptionBlockBuffer, flavor, formatDescriptionOut)
-}
-
-// CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData calls [raw.CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData] (C function CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData).
-func CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData(allocator unsafe.Pointer, soundDescriptionData *uint8, size uint, flavor unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMAudioFormatDescriptionCreateFromBigEndianSoundDescriptionData(allocator, soundDescriptionData, size, flavor, formatDescriptionOut)
-}
-
-// CMAudioFormatDescriptionCreateSummary calls [raw.CMAudioFormatDescriptionCreateSummary] (C function CMAudioFormatDescriptionCreateSummary).
-func CMAudioFormatDescriptionCreateSummary(allocator unsafe.Pointer, formatDescriptionArray unsafe.Pointer, flags uint32, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMAudioFormatDescriptionCreateSummary(allocator, formatDescriptionArray, flags, formatDescriptionOut)
-}
-
-// CMAudioFormatDescriptionEqual calls [raw.CMAudioFormatDescriptionEqual] (C function CMAudioFormatDescriptionEqual).
-func CMAudioFormatDescriptionEqual(formatDescription unsafe.Pointer, otherFormatDescription unsafe.Pointer, equalityMask uint32, equalityMaskOut *uint32) uint8 {
-	return raw.CMAudioFormatDescriptionEqual(formatDescription, otherFormatDescription, equalityMask, equalityMaskOut)
-}
-
-// CMAudioFormatDescriptionGetChannelLayout calls [raw.CMAudioFormatDescriptionGetChannelLayout] (C function CMAudioFormatDescriptionGetChannelLayout).
-func CMAudioFormatDescriptionGetChannelLayout(desc unsafe.Pointer, sizeOut *uint) *coreaudiotypes.AudioChannelLayout {
-	return raw.CMAudioFormatDescriptionGetChannelLayout(desc, sizeOut)
-}
-
-// CMAudioFormatDescriptionGetFormatList calls [raw.CMAudioFormatDescriptionGetFormatList] (C function CMAudioFormatDescriptionGetFormatList).
-func CMAudioFormatDescriptionGetFormatList(desc unsafe.Pointer, sizeOut *uint) *coreaudiotypes.AudioFormatListItem {
-	return raw.CMAudioFormatDescriptionGetFormatList(desc, sizeOut)
-}
-
-// CMAudioFormatDescriptionGetMagicCookie calls [raw.CMAudioFormatDescriptionGetMagicCookie] (C function CMAudioFormatDescriptionGetMagicCookie).
-func CMAudioFormatDescriptionGetMagicCookie(desc unsafe.Pointer, sizeOut *uint) unsafe.Pointer {
-	return raw.CMAudioFormatDescriptionGetMagicCookie(desc, sizeOut)
-}
-
-// CMAudioFormatDescriptionGetMostCompatibleFormat calls [raw.CMAudioFormatDescriptionGetMostCompatibleFormat] (C function CMAudioFormatDescriptionGetMostCompatibleFormat).
-func CMAudioFormatDescriptionGetMostCompatibleFormat(desc unsafe.Pointer) *coreaudiotypes.AudioFormatListItem {
-	return raw.CMAudioFormatDescriptionGetMostCompatibleFormat(desc)
-}
-
-// CMAudioFormatDescriptionGetRichestDecodableFormat calls [raw.CMAudioFormatDescriptionGetRichestDecodableFormat] (C function CMAudioFormatDescriptionGetRichestDecodableFormat).
-func CMAudioFormatDescriptionGetRichestDecodableFormat(desc unsafe.Pointer) *coreaudiotypes.AudioFormatListItem {
-	return raw.CMAudioFormatDescriptionGetRichestDecodableFormat(desc)
-}
-
-// CMAudioFormatDescriptionGetStreamBasicDescription calls [raw.CMAudioFormatDescriptionGetStreamBasicDescription] (C function CMAudioFormatDescriptionGetStreamBasicDescription).
-func CMAudioFormatDescriptionGetStreamBasicDescription(desc unsafe.Pointer) *coreaudiotypes.AudioStreamBasicDescription {
-	return raw.CMAudioFormatDescriptionGetStreamBasicDescription(desc)
-}
-
-// CMAudioSampleBufferCreateReadyWithPacketDescriptions calls [raw.CMAudioSampleBufferCreateReadyWithPacketDescriptions] (C function CMAudioSampleBufferCreateReadyWithPacketDescriptions).
-func CMAudioSampleBufferCreateReadyWithPacketDescriptions(allocator unsafe.Pointer, dataBuffer unsafe.Pointer, formatDescription unsafe.Pointer, numSamples int, presentationTimeStamp raw.CMTime, packetDescriptions *coreaudiotypes.AudioStreamPacketDescription, sampleBufferOut unsafe.Pointer) int {
-	return raw.CMAudioSampleBufferCreateReadyWithPacketDescriptions(allocator, dataBuffer, formatDescription, numSamples, presentationTimeStamp, packetDescriptions, sampleBufferOut)
-}
-
-// CMAudioSampleBufferCreateWithPacketDescriptions calls [raw.CMAudioSampleBufferCreateWithPacketDescriptions] (C function CMAudioSampleBufferCreateWithPacketDescriptions).
-func CMAudioSampleBufferCreateWithPacketDescriptions(allocator unsafe.Pointer, dataBuffer unsafe.Pointer, dataReady uint8, makeDataReadyCallback unsafe.Pointer, makeDataReadyRefcon unsafe.Pointer, formatDescription unsafe.Pointer, numSamples int, presentationTimeStamp raw.CMTime, packetDescriptions *coreaudiotypes.AudioStreamPacketDescription, sampleBufferOut unsafe.Pointer) int {
-	return raw.CMAudioSampleBufferCreateWithPacketDescriptions(allocator, dataBuffer, dataReady, makeDataReadyCallback, makeDataReadyRefcon, formatDescription, numSamples, presentationTimeStamp, packetDescriptions, sampleBufferOut)
-}
-
-// CMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler calls [raw.CMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler] (C function CMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler).
-func CMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler(allocator unsafe.Pointer, dataBuffer unsafe.Pointer, dataReady uint8, formatDescription unsafe.Pointer, numSamples int, presentationTimeStamp raw.CMTime, packetDescriptions *coreaudiotypes.AudioStreamPacketDescription, sampleBufferOut unsafe.Pointer, makeDataReadyHandler func(unsafe.Pointer) int) int {
-	return raw.CMAudioSampleBufferCreateWithPacketDescriptionsAndMakeDataReadyHandler(allocator, dataBuffer, dataReady, formatDescription, numSamples, presentationTimeStamp, packetDescriptions, sampleBufferOut, makeDataReadyHandler)
-}
-
-// CMBlockBufferAccessDataBytes calls [raw.CMBlockBufferAccessDataBytes] (C function CMBlockBufferAccessDataBytes).
-func CMBlockBufferAccessDataBytes(theBuffer unsafe.Pointer, offset uint, length uint, temporaryBlock unsafe.Pointer, returnedPointerOut string) int {
-	return raw.CMBlockBufferAccessDataBytes(theBuffer, offset, length, temporaryBlock, returnedPointerOut)
-}
-
-// CMBlockBufferAppendBufferReference calls [raw.CMBlockBufferAppendBufferReference] (C function CMBlockBufferAppendBufferReference).
-func CMBlockBufferAppendBufferReference(theBuffer unsafe.Pointer, targetBBuf unsafe.Pointer, offsetToData uint, dataLength uint, flags uint32) int {
-	return raw.CMBlockBufferAppendBufferReference(theBuffer, targetBBuf, offsetToData, dataLength, flags)
-}
-
-// CMBlockBufferAppendMemoryBlock calls [raw.CMBlockBufferAppendMemoryBlock] (C function CMBlockBufferAppendMemoryBlock).
-func CMBlockBufferAppendMemoryBlock(theBuffer unsafe.Pointer, memoryBlock unsafe.Pointer, blockLength uint, blockAllocator unsafe.Pointer, customBlockSource *raw.CMBlockBufferCustomBlockSource, offsetToData uint, dataLength uint, flags uint32) int {
-	return raw.CMBlockBufferAppendMemoryBlock(theBuffer, memoryBlock, blockLength, blockAllocator, customBlockSource, offsetToData, dataLength, flags)
-}
-
-// CMBlockBufferAssureBlockMemory calls [raw.CMBlockBufferAssureBlockMemory] (C function CMBlockBufferAssureBlockMemory).
-func CMBlockBufferAssureBlockMemory(theBuffer unsafe.Pointer) int {
-	return raw.CMBlockBufferAssureBlockMemory(theBuffer)
-}
-
-// CMBlockBufferCopyDataBytes calls [raw.CMBlockBufferCopyDataBytes] (C function CMBlockBufferCopyDataBytes).
-func CMBlockBufferCopyDataBytes(theSourceBuffer unsafe.Pointer, offsetToData uint, dataLength uint, destination unsafe.Pointer) int {
-	return raw.CMBlockBufferCopyDataBytes(theSourceBuffer, offsetToData, dataLength, destination)
-}
-
-// CMBlockBufferCreateContiguous calls [raw.CMBlockBufferCreateContiguous] (C function CMBlockBufferCreateContiguous).
-func CMBlockBufferCreateContiguous(structureAllocator unsafe.Pointer, sourceBuffer unsafe.Pointer, blockAllocator unsafe.Pointer, customBlockSource *raw.CMBlockBufferCustomBlockSource, offsetToData uint, dataLength uint, flags uint32, blockBufferOut unsafe.Pointer) int {
-	return raw.CMBlockBufferCreateContiguous(structureAllocator, sourceBuffer, blockAllocator, customBlockSource, offsetToData, dataLength, flags, blockBufferOut)
-}
-
-// CMBlockBufferCreateEmpty calls [raw.CMBlockBufferCreateEmpty] (C function CMBlockBufferCreateEmpty).
-func CMBlockBufferCreateEmpty(structureAllocator unsafe.Pointer, subBlockCapacity uint32, flags uint32, blockBufferOut unsafe.Pointer) int {
-	return raw.CMBlockBufferCreateEmpty(structureAllocator, subBlockCapacity, flags, blockBufferOut)
-}
-
-// CMBlockBufferCreateWithBufferReference calls [raw.CMBlockBufferCreateWithBufferReference] (C function CMBlockBufferCreateWithBufferReference).
-func CMBlockBufferCreateWithBufferReference(structureAllocator unsafe.Pointer, bufferReference unsafe.Pointer, offsetToData uint, dataLength uint, flags uint32, blockBufferOut unsafe.Pointer) int {
-	return raw.CMBlockBufferCreateWithBufferReference(structureAllocator, bufferReference, offsetToData, dataLength, flags, blockBufferOut)
-}
-
-// CMBlockBufferCreateWithMemoryBlock calls [raw.CMBlockBufferCreateWithMemoryBlock] (C function CMBlockBufferCreateWithMemoryBlock).
-func CMBlockBufferCreateWithMemoryBlock(structureAllocator unsafe.Pointer, memoryBlock unsafe.Pointer, blockLength uint, blockAllocator unsafe.Pointer, customBlockSource *raw.CMBlockBufferCustomBlockSource, offsetToData uint, dataLength uint, flags uint32, blockBufferOut unsafe.Pointer) int {
-	return raw.CMBlockBufferCreateWithMemoryBlock(structureAllocator, memoryBlock, blockLength, blockAllocator, customBlockSource, offsetToData, dataLength, flags, blockBufferOut)
-}
-
-// CMBlockBufferFillDataBytes calls [raw.CMBlockBufferFillDataBytes] (C function CMBlockBufferFillDataBytes).
-func CMBlockBufferFillDataBytes(fillByte int8, destinationBuffer unsafe.Pointer, offsetIntoDestination uint, dataLength uint) int {
-	return raw.CMBlockBufferFillDataBytes(fillByte, destinationBuffer, offsetIntoDestination, dataLength)
-}
-
-// CMBlockBufferGetDataLength calls [raw.CMBlockBufferGetDataLength] (C function CMBlockBufferGetDataLength).
-func CMBlockBufferGetDataLength(theBuffer unsafe.Pointer) uint {
-	return raw.CMBlockBufferGetDataLength(theBuffer)
-}
-
-// CMBlockBufferGetDataPointer calls [raw.CMBlockBufferGetDataPointer] (C function CMBlockBufferGetDataPointer).
-func CMBlockBufferGetDataPointer(theBuffer unsafe.Pointer, offset uint, lengthAtOffsetOut *uint, totalLengthOut *uint, dataPointerOut string) int {
-	return raw.CMBlockBufferGetDataPointer(theBuffer, offset, lengthAtOffsetOut, totalLengthOut, dataPointerOut)
-}
-
-// CMBlockBufferGetTypeID calls [raw.CMBlockBufferGetTypeID] (C function CMBlockBufferGetTypeID).
-func CMBlockBufferGetTypeID() uint {
-	return raw.CMBlockBufferGetTypeID()
-}
-
-// CMBlockBufferIsEmpty calls [raw.CMBlockBufferIsEmpty] (C function CMBlockBufferIsEmpty).
-func CMBlockBufferIsEmpty(theBuffer unsafe.Pointer) uint8 {
-	return raw.CMBlockBufferIsEmpty(theBuffer)
-}
-
-// CMBlockBufferIsRangeContiguous calls [raw.CMBlockBufferIsRangeContiguous] (C function CMBlockBufferIsRangeContiguous).
-func CMBlockBufferIsRangeContiguous(theBuffer unsafe.Pointer, offset uint, length uint) uint8 {
-	return raw.CMBlockBufferIsRangeContiguous(theBuffer, offset, length)
-}
-
-// CMBlockBufferReplaceDataBytes calls [raw.CMBlockBufferReplaceDataBytes] (C function CMBlockBufferReplaceDataBytes).
-func CMBlockBufferReplaceDataBytes(sourceBytes unsafe.Pointer, destinationBuffer unsafe.Pointer, offsetIntoDestination uint, dataLength uint) int {
-	return raw.CMBlockBufferReplaceDataBytes(sourceBytes, destinationBuffer, offsetIntoDestination, dataLength)
-}
-
-// CMBufferQueueCallForEachBuffer calls [raw.CMBufferQueueCallForEachBuffer] (C function CMBufferQueueCallForEachBuffer).
-func CMBufferQueueCallForEachBuffer(queue unsafe.Pointer, callback unsafe.Pointer, refcon unsafe.Pointer) int {
-	return raw.CMBufferQueueCallForEachBuffer(queue, callback, refcon)
-}
-
-// CMBufferQueueContainsEndOfData calls [raw.CMBufferQueueContainsEndOfData] (C function CMBufferQueueContainsEndOfData).
-func CMBufferQueueContainsEndOfData(queue unsafe.Pointer) uint8 {
-	return raw.CMBufferQueueContainsEndOfData(queue)
-}
-
-// CMBufferQueueCopyHead calls [raw.CMBufferQueueCopyHead] (C function CMBufferQueueCopyHead).
-func CMBufferQueueCopyHead(queue unsafe.Pointer) unsafe.Pointer {
-	return raw.CMBufferQueueCopyHead(queue)
-}
-
-// CMBufferQueueCreate calls [raw.CMBufferQueueCreate] (C function CMBufferQueueCreate).
-func CMBufferQueueCreate(allocator unsafe.Pointer, capacity int, callbacks *raw.CMBufferCallbacks, queueOut unsafe.Pointer) int {
-	return raw.CMBufferQueueCreate(allocator, capacity, callbacks, queueOut)
-}
-
-// CMBufferQueueCreateWithHandlers calls [raw.CMBufferQueueCreateWithHandlers] (C function CMBufferQueueCreateWithHandlers).
-func CMBufferQueueCreateWithHandlers(allocator unsafe.Pointer, capacity int, handlers *raw.CMBufferHandlers, queueOut unsafe.Pointer) int {
-	return raw.CMBufferQueueCreateWithHandlers(allocator, capacity, handlers, queueOut)
-}
-
-// CMBufferQueueDequeueAndRetain calls [raw.CMBufferQueueDequeueAndRetain] (C function CMBufferQueueDequeueAndRetain).
-func CMBufferQueueDequeueAndRetain(queue unsafe.Pointer) unsafe.Pointer {
-	return raw.CMBufferQueueDequeueAndRetain(queue)
-}
-
-// CMBufferQueueDequeueIfDataReadyAndRetain calls [raw.CMBufferQueueDequeueIfDataReadyAndRetain] (C function CMBufferQueueDequeueIfDataReadyAndRetain).
-func CMBufferQueueDequeueIfDataReadyAndRetain(queue unsafe.Pointer) unsafe.Pointer {
-	return raw.CMBufferQueueDequeueIfDataReadyAndRetain(queue)
-}
-
-// CMBufferQueueEnqueue calls [raw.CMBufferQueueEnqueue] (C function CMBufferQueueEnqueue).
-func CMBufferQueueEnqueue(queue unsafe.Pointer, buf unsafe.Pointer) int {
-	return raw.CMBufferQueueEnqueue(queue, buf)
-}
-
-// CMBufferQueueGetBufferCount calls [raw.CMBufferQueueGetBufferCount] (C function CMBufferQueueGetBufferCount).
-func CMBufferQueueGetBufferCount(queue unsafe.Pointer) int {
-	return raw.CMBufferQueueGetBufferCount(queue)
-}
-
-// CMBufferQueueGetCallbacksForSampleBuffersSortedByOutputPTS calls [raw.CMBufferQueueGetCallbacksForSampleBuffersSortedByOutputPTS] (C function CMBufferQueueGetCallbacksForSampleBuffersSortedByOutputPTS).
-func CMBufferQueueGetCallbacksForSampleBuffersSortedByOutputPTS() *raw.CMBufferCallbacks {
-	return raw.CMBufferQueueGetCallbacksForSampleBuffersSortedByOutputPTS()
-}
-
-// CMBufferQueueGetCallbacksForUnsortedSampleBuffers calls [raw.CMBufferQueueGetCallbacksForUnsortedSampleBuffers] (C function CMBufferQueueGetCallbacksForUnsortedSampleBuffers).
-func CMBufferQueueGetCallbacksForUnsortedSampleBuffers() *raw.CMBufferCallbacks {
-	return raw.CMBufferQueueGetCallbacksForUnsortedSampleBuffers()
-}
-
-// CMBufferQueueGetDuration calls [raw.CMBufferQueueGetDuration] (C function CMBufferQueueGetDuration).
-func CMBufferQueueGetDuration(queue unsafe.Pointer) raw.CMTime {
-	return raw.CMBufferQueueGetDuration(queue)
-}
-
-// CMBufferQueueGetEndPresentationTimeStamp calls [raw.CMBufferQueueGetEndPresentationTimeStamp] (C function CMBufferQueueGetEndPresentationTimeStamp).
-func CMBufferQueueGetEndPresentationTimeStamp(queue unsafe.Pointer) raw.CMTime {
-	return raw.CMBufferQueueGetEndPresentationTimeStamp(queue)
-}
-
-// CMBufferQueueGetFirstDecodeTimeStamp calls [raw.CMBufferQueueGetFirstDecodeTimeStamp] (C function CMBufferQueueGetFirstDecodeTimeStamp).
-func CMBufferQueueGetFirstDecodeTimeStamp(queue unsafe.Pointer) raw.CMTime {
-	return raw.CMBufferQueueGetFirstDecodeTimeStamp(queue)
-}
-
-// CMBufferQueueGetFirstPresentationTimeStamp calls [raw.CMBufferQueueGetFirstPresentationTimeStamp] (C function CMBufferQueueGetFirstPresentationTimeStamp).
-func CMBufferQueueGetFirstPresentationTimeStamp(queue unsafe.Pointer) raw.CMTime {
-	return raw.CMBufferQueueGetFirstPresentationTimeStamp(queue)
-}
-
-// CMBufferQueueGetHead calls [raw.CMBufferQueueGetHead] (C function CMBufferQueueGetHead).
-func CMBufferQueueGetHead(queue unsafe.Pointer) unsafe.Pointer {
-	return raw.CMBufferQueueGetHead(queue)
-}
-
-// CMBufferQueueGetMaxPresentationTimeStamp calls [raw.CMBufferQueueGetMaxPresentationTimeStamp] (C function CMBufferQueueGetMaxPresentationTimeStamp).
-func CMBufferQueueGetMaxPresentationTimeStamp(queue unsafe.Pointer) raw.CMTime {
-	return raw.CMBufferQueueGetMaxPresentationTimeStamp(queue)
-}
-
-// CMBufferQueueGetMinDecodeTimeStamp calls [raw.CMBufferQueueGetMinDecodeTimeStamp] (C function CMBufferQueueGetMinDecodeTimeStamp).
-func CMBufferQueueGetMinDecodeTimeStamp(queue unsafe.Pointer) raw.CMTime {
-	return raw.CMBufferQueueGetMinDecodeTimeStamp(queue)
-}
-
-// CMBufferQueueGetMinPresentationTimeStamp calls [raw.CMBufferQueueGetMinPresentationTimeStamp] (C function CMBufferQueueGetMinPresentationTimeStamp).
-func CMBufferQueueGetMinPresentationTimeStamp(queue unsafe.Pointer) raw.CMTime {
-	return raw.CMBufferQueueGetMinPresentationTimeStamp(queue)
-}
-
-// CMBufferQueueGetTotalSize calls [raw.CMBufferQueueGetTotalSize] (C function CMBufferQueueGetTotalSize).
-func CMBufferQueueGetTotalSize(queue unsafe.Pointer) uint {
-	return raw.CMBufferQueueGetTotalSize(queue)
-}
-
-// CMBufferQueueGetTypeID calls [raw.CMBufferQueueGetTypeID] (C function CMBufferQueueGetTypeID).
-func CMBufferQueueGetTypeID() uint {
-	return raw.CMBufferQueueGetTypeID()
-}
-
-// CMBufferQueueInstallTrigger calls [raw.CMBufferQueueInstallTrigger] (C function CMBufferQueueInstallTrigger).
-func CMBufferQueueInstallTrigger(queue unsafe.Pointer, callback unsafe.Pointer, refcon unsafe.Pointer, condition int32, time_ raw.CMTime, triggerTokenOut unsafe.Pointer) int {
-	return raw.CMBufferQueueInstallTrigger(queue, callback, refcon, condition, time_, triggerTokenOut)
-}
-
-// CMBufferQueueInstallTriggerHandler calls [raw.CMBufferQueueInstallTriggerHandler] (C function CMBufferQueueInstallTriggerHandler).
-func CMBufferQueueInstallTriggerHandler(queue unsafe.Pointer, condition int32, time_ raw.CMTime, triggerTokenOut unsafe.Pointer, handler func(unsafe.Pointer)) int {
-	return raw.CMBufferQueueInstallTriggerHandler(queue, condition, time_, triggerTokenOut, handler)
-}
-
-// CMBufferQueueInstallTriggerHandlerWithIntegerThreshold calls [raw.CMBufferQueueInstallTriggerHandlerWithIntegerThreshold] (C function CMBufferQueueInstallTriggerHandlerWithIntegerThreshold).
-func CMBufferQueueInstallTriggerHandlerWithIntegerThreshold(queue unsafe.Pointer, condition int32, threshold int, triggerTokenOut unsafe.Pointer, handler func(unsafe.Pointer)) int {
-	return raw.CMBufferQueueInstallTriggerHandlerWithIntegerThreshold(queue, condition, threshold, triggerTokenOut, handler)
-}
-
-// CMBufferQueueInstallTriggerWithIntegerThreshold calls [raw.CMBufferQueueInstallTriggerWithIntegerThreshold] (C function CMBufferQueueInstallTriggerWithIntegerThreshold).
-func CMBufferQueueInstallTriggerWithIntegerThreshold(queue unsafe.Pointer, callback unsafe.Pointer, refcon unsafe.Pointer, condition int32, threshold int, triggerTokenOut unsafe.Pointer) int {
-	return raw.CMBufferQueueInstallTriggerWithIntegerThreshold(queue, callback, refcon, condition, threshold, triggerTokenOut)
-}
-
-// CMBufferQueueIsAtEndOfData calls [raw.CMBufferQueueIsAtEndOfData] (C function CMBufferQueueIsAtEndOfData).
-func CMBufferQueueIsAtEndOfData(queue unsafe.Pointer) uint8 {
-	return raw.CMBufferQueueIsAtEndOfData(queue)
-}
-
-// CMBufferQueueIsEmpty calls [raw.CMBufferQueueIsEmpty] (C function CMBufferQueueIsEmpty).
-func CMBufferQueueIsEmpty(queue unsafe.Pointer) uint8 {
-	return raw.CMBufferQueueIsEmpty(queue)
-}
-
-// CMBufferQueueMarkEndOfData calls [raw.CMBufferQueueMarkEndOfData] (C function CMBufferQueueMarkEndOfData).
-func CMBufferQueueMarkEndOfData(queue unsafe.Pointer) int {
-	return raw.CMBufferQueueMarkEndOfData(queue)
-}
-
-// CMBufferQueueRemoveTrigger calls [raw.CMBufferQueueRemoveTrigger] (C function CMBufferQueueRemoveTrigger).
-func CMBufferQueueRemoveTrigger(queue unsafe.Pointer, triggerToken unsafe.Pointer) int {
-	return raw.CMBufferQueueRemoveTrigger(queue, triggerToken)
-}
-
-// CMBufferQueueReset calls [raw.CMBufferQueueReset] (C function CMBufferQueueReset).
-func CMBufferQueueReset(queue unsafe.Pointer) int {
-	return raw.CMBufferQueueReset(queue)
-}
-
-// CMBufferQueueResetWithCallback calls [raw.CMBufferQueueResetWithCallback] (C function CMBufferQueueResetWithCallback).
-func CMBufferQueueResetWithCallback(queue unsafe.Pointer, callback unsafe.Pointer, refcon unsafe.Pointer) int {
-	return raw.CMBufferQueueResetWithCallback(queue, callback, refcon)
-}
-
-// CMBufferQueueSetValidationCallback calls [raw.CMBufferQueueSetValidationCallback] (C function CMBufferQueueSetValidationCallback).
-func CMBufferQueueSetValidationCallback(queue unsafe.Pointer, callback unsafe.Pointer, refcon unsafe.Pointer) int {
-	return raw.CMBufferQueueSetValidationCallback(queue, callback, refcon)
-}
-
-// CMBufferQueueSetValidationHandler calls [raw.CMBufferQueueSetValidationHandler] (C function CMBufferQueueSetValidationHandler).
-func CMBufferQueueSetValidationHandler(queue unsafe.Pointer, handler func(unsafe.Pointer, unsafe.Pointer) int) int {
-	return raw.CMBufferQueueSetValidationHandler(queue, handler)
-}
-
-// CMBufferQueueTestTrigger calls [raw.CMBufferQueueTestTrigger] (C function CMBufferQueueTestTrigger).
-func CMBufferQueueTestTrigger(queue unsafe.Pointer, triggerToken unsafe.Pointer) uint8 {
-	return raw.CMBufferQueueTestTrigger(queue, triggerToken)
-}
-
-// CMClockConvertHostTimeToSystemUnits calls [raw.CMClockConvertHostTimeToSystemUnits] (C function CMClockConvertHostTimeToSystemUnits).
-func CMClockConvertHostTimeToSystemUnits(hostTime raw.CMTime) uint64 {
-	return raw.CMClockConvertHostTimeToSystemUnits(hostTime)
-}
-
-// CMClockGetAnchorTime calls [raw.CMClockGetAnchorTime] (C function CMClockGetAnchorTime).
-func CMClockGetAnchorTime(clock unsafe.Pointer, clockTimeOut *raw.CMTime, referenceClockTimeOut *raw.CMTime) int {
-	return raw.CMClockGetAnchorTime(clock, clockTimeOut, referenceClockTimeOut)
-}
-
-// CMClockGetHostTimeClock calls [raw.CMClockGetHostTimeClock] (C function CMClockGetHostTimeClock).
-func CMClockGetHostTimeClock() unsafe.Pointer {
-	return raw.CMClockGetHostTimeClock()
-}
-
-// CMClockGetTime calls [raw.CMClockGetTime] (C function CMClockGetTime).
-func CMClockGetTime(clock unsafe.Pointer) raw.CMTime {
-	return raw.CMClockGetTime(clock)
-}
-
-// CMClockGetTypeID calls [raw.CMClockGetTypeID] (C function CMClockGetTypeID).
-func CMClockGetTypeID() uint {
-	return raw.CMClockGetTypeID()
-}
-
-// CMClockInvalidate calls [raw.CMClockInvalidate] (C function CMClockInvalidate).
-func CMClockInvalidate(clock unsafe.Pointer) {
-	raw.CMClockInvalidate(clock)
-}
-
-// CMClockMakeHostTimeFromSystemUnits calls [raw.CMClockMakeHostTimeFromSystemUnits] (C function CMClockMakeHostTimeFromSystemUnits).
-func CMClockMakeHostTimeFromSystemUnits(hostTime uint64) raw.CMTime {
-	return raw.CMClockMakeHostTimeFromSystemUnits(hostTime)
-}
-
-// CMClockMightDrift calls [raw.CMClockMightDrift] (C function CMClockMightDrift).
-func CMClockMightDrift(clock unsafe.Pointer, otherClock unsafe.Pointer) uint8 {
-	return raw.CMClockMightDrift(clock, otherClock)
-}
-
-// CMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionDescriptionBlockBuffer calls [raw.CMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionDescriptionBlockBuffer] (C function CMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionDescriptionBlockBuffer).
-func CMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionDescriptionBlockBuffer(allocator unsafe.Pointer, closedCaptionFormatDescription unsafe.Pointer, flavor unsafe.Pointer, blockBufferOut unsafe.Pointer) int {
-	return raw.CMClosedCaptionFormatDescriptionCopyAsBigEndianClosedCaptionDescriptionBlockBuffer(allocator, closedCaptionFormatDescription, flavor, blockBufferOut)
-}
-
-// CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionBlockBuffer calls [raw.CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionBlockBuffer] (C function CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionBlockBuffer).
-func CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionBlockBuffer(allocator unsafe.Pointer, closedCaptionDescriptionBlockBuffer unsafe.Pointer, flavor unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionBlockBuffer(allocator, closedCaptionDescriptionBlockBuffer, flavor, formatDescriptionOut)
-}
-
-// CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData calls [raw.CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData] (C function CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData).
-func CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData(allocator unsafe.Pointer, closedCaptionDescriptionData *uint8, size uint, flavor unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMClosedCaptionFormatDescriptionCreateFromBigEndianClosedCaptionDescriptionData(allocator, closedCaptionDescriptionData, size, flavor, formatDescriptionOut)
-}
-
-// CMCopyDictionaryOfAttachments calls [raw.CMCopyDictionaryOfAttachments] (C function CMCopyDictionaryOfAttachments).
-func CMCopyDictionaryOfAttachments(allocator unsafe.Pointer, target unsafe.Pointer, attachmentMode uint32) unsafe.Pointer {
-	return raw.CMCopyDictionaryOfAttachments(allocator, target, attachmentMode)
-}
-
-// CMDoesBigEndianSoundDescriptionRequireLegacyCBRSampleTableLayout calls [raw.CMDoesBigEndianSoundDescriptionRequireLegacyCBRSampleTableLayout] (C function CMDoesBigEndianSoundDescriptionRequireLegacyCBRSampleTableLayout).
-func CMDoesBigEndianSoundDescriptionRequireLegacyCBRSampleTableLayout(soundDescriptionBlockBuffer unsafe.Pointer, flavor unsafe.Pointer) uint8 {
-	return raw.CMDoesBigEndianSoundDescriptionRequireLegacyCBRSampleTableLayout(soundDescriptionBlockBuffer, flavor)
-}
-
-// CMFormatDescriptionCreate calls [raw.CMFormatDescriptionCreate] (C function CMFormatDescriptionCreate).
-func CMFormatDescriptionCreate(allocator unsafe.Pointer, mediaType uint, mediaSubType uint, extensions unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMFormatDescriptionCreate(allocator, mediaType, mediaSubType, extensions, formatDescriptionOut)
-}
-
-// CMFormatDescriptionEqual calls [raw.CMFormatDescriptionEqual] (C function CMFormatDescriptionEqual).
-func CMFormatDescriptionEqual(formatDescription unsafe.Pointer, otherFormatDescription unsafe.Pointer) uint8 {
-	return raw.CMFormatDescriptionEqual(formatDescription, otherFormatDescription)
-}
-
-// CMFormatDescriptionEqualIgnoringExtensionKeys calls [raw.CMFormatDescriptionEqualIgnoringExtensionKeys] (C function CMFormatDescriptionEqualIgnoringExtensionKeys).
-func CMFormatDescriptionEqualIgnoringExtensionKeys(formatDescription unsafe.Pointer, otherFormatDescription unsafe.Pointer, formatDescriptionExtensionKeysToIgnore unsafe.Pointer, sampleDescriptionExtensionAtomKeysToIgnore unsafe.Pointer) uint8 {
-	return raw.CMFormatDescriptionEqualIgnoringExtensionKeys(formatDescription, otherFormatDescription, formatDescriptionExtensionKeysToIgnore, sampleDescriptionExtensionAtomKeysToIgnore)
-}
-
-// CMFormatDescriptionGetExtension calls [raw.CMFormatDescriptionGetExtension] (C function CMFormatDescriptionGetExtension).
-func CMFormatDescriptionGetExtension(desc unsafe.Pointer, extensionKey unsafe.Pointer) unsafe.Pointer {
-	return raw.CMFormatDescriptionGetExtension(desc, extensionKey)
-}
-
-// CMFormatDescriptionGetExtensions calls [raw.CMFormatDescriptionGetExtensions] (C function CMFormatDescriptionGetExtensions).
-func CMFormatDescriptionGetExtensions(desc unsafe.Pointer) unsafe.Pointer {
-	return raw.CMFormatDescriptionGetExtensions(desc)
-}
-
-// CMFormatDescriptionGetMediaSubType calls [raw.CMFormatDescriptionGetMediaSubType] (C function CMFormatDescriptionGetMediaSubType).
-func CMFormatDescriptionGetMediaSubType(desc unsafe.Pointer) uint {
-	return raw.CMFormatDescriptionGetMediaSubType(desc)
-}
-
-// CMFormatDescriptionGetMediaType calls [raw.CMFormatDescriptionGetMediaType] (C function CMFormatDescriptionGetMediaType).
-func CMFormatDescriptionGetMediaType(desc unsafe.Pointer) uint {
-	return raw.CMFormatDescriptionGetMediaType(desc)
-}
-
-// CMFormatDescriptionGetTypeID calls [raw.CMFormatDescriptionGetTypeID] (C function CMFormatDescriptionGetTypeID).
-func CMFormatDescriptionGetTypeID() uint {
-	return raw.CMFormatDescriptionGetTypeID()
-}
-
-// CMGetAttachment calls [raw.CMGetAttachment] (C function CMGetAttachment).
-func CMGetAttachment(target unsafe.Pointer, key unsafe.Pointer, attachmentModeOut *uint32) unsafe.Pointer {
-	return raw.CMGetAttachment(target, key, attachmentModeOut)
-}
-
-// CMMemoryPoolCreate calls [raw.CMMemoryPoolCreate] (C function CMMemoryPoolCreate).
-func CMMemoryPoolCreate(options unsafe.Pointer) unsafe.Pointer {
-	return raw.CMMemoryPoolCreate(options)
-}
-
-// CMMemoryPoolFlush calls [raw.CMMemoryPoolFlush] (C function CMMemoryPoolFlush).
-func CMMemoryPoolFlush(pool unsafe.Pointer) {
-	raw.CMMemoryPoolFlush(pool)
-}
-
-// CMMemoryPoolGetAllocator calls [raw.CMMemoryPoolGetAllocator] (C function CMMemoryPoolGetAllocator).
-func CMMemoryPoolGetAllocator(pool unsafe.Pointer) unsafe.Pointer {
-	return raw.CMMemoryPoolGetAllocator(pool)
-}
-
-// CMMemoryPoolGetTypeID calls [raw.CMMemoryPoolGetTypeID] (C function CMMemoryPoolGetTypeID).
-func CMMemoryPoolGetTypeID() uint {
-	return raw.CMMemoryPoolGetTypeID()
-}
-
-// CMMemoryPoolInvalidate calls [raw.CMMemoryPoolInvalidate] (C function CMMemoryPoolInvalidate).
-func CMMemoryPoolInvalidate(pool unsafe.Pointer) {
-	raw.CMMemoryPoolInvalidate(pool)
-}
-
-// CMMetadataDataTypeRegistryDataTypeConformsToDataType calls [raw.CMMetadataDataTypeRegistryDataTypeConformsToDataType] (C function CMMetadataDataTypeRegistryDataTypeConformsToDataType).
-func CMMetadataDataTypeRegistryDataTypeConformsToDataType(dataType unsafe.Pointer, conformsToDataType unsafe.Pointer) uint8 {
-	return raw.CMMetadataDataTypeRegistryDataTypeConformsToDataType(dataType, conformsToDataType)
-}
-
-// CMMetadataDataTypeRegistryDataTypeIsBaseDataType calls [raw.CMMetadataDataTypeRegistryDataTypeIsBaseDataType] (C function CMMetadataDataTypeRegistryDataTypeIsBaseDataType).
-func CMMetadataDataTypeRegistryDataTypeIsBaseDataType(dataType unsafe.Pointer) uint8 {
-	return raw.CMMetadataDataTypeRegistryDataTypeIsBaseDataType(dataType)
-}
-
-// CMMetadataDataTypeRegistryDataTypeIsRegistered calls [raw.CMMetadataDataTypeRegistryDataTypeIsRegistered] (C function CMMetadataDataTypeRegistryDataTypeIsRegistered).
-func CMMetadataDataTypeRegistryDataTypeIsRegistered(dataType unsafe.Pointer) uint8 {
-	return raw.CMMetadataDataTypeRegistryDataTypeIsRegistered(dataType)
-}
-
-// CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType calls [raw.CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType] (C function CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType).
-func CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType(dataType unsafe.Pointer) unsafe.Pointer {
-	return raw.CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType(dataType)
-}
-
-// CMMetadataDataTypeRegistryGetBaseDataTypes calls [raw.CMMetadataDataTypeRegistryGetBaseDataTypes] (C function CMMetadataDataTypeRegistryGetBaseDataTypes).
-func CMMetadataDataTypeRegistryGetBaseDataTypes() unsafe.Pointer {
-	return raw.CMMetadataDataTypeRegistryGetBaseDataTypes()
-}
-
-// CMMetadataDataTypeRegistryGetConformingDataTypes calls [raw.CMMetadataDataTypeRegistryGetConformingDataTypes] (C function CMMetadataDataTypeRegistryGetConformingDataTypes).
-func CMMetadataDataTypeRegistryGetConformingDataTypes(dataType unsafe.Pointer) unsafe.Pointer {
-	return raw.CMMetadataDataTypeRegistryGetConformingDataTypes(dataType)
-}
-
-// CMMetadataDataTypeRegistryGetDataTypeDescription calls [raw.CMMetadataDataTypeRegistryGetDataTypeDescription] (C function CMMetadataDataTypeRegistryGetDataTypeDescription).
-func CMMetadataDataTypeRegistryGetDataTypeDescription(dataType unsafe.Pointer) unsafe.Pointer {
-	return raw.CMMetadataDataTypeRegistryGetDataTypeDescription(dataType)
-}
-
-// CMMetadataFormatDescriptionCopyAsBigEndianMetadataDescriptionBlockBuffer calls [raw.CMMetadataFormatDescriptionCopyAsBigEndianMetadataDescriptionBlockBuffer] (C function CMMetadataFormatDescriptionCopyAsBigEndianMetadataDescriptionBlockBuffer).
-func CMMetadataFormatDescriptionCopyAsBigEndianMetadataDescriptionBlockBuffer(allocator unsafe.Pointer, metadataFormatDescription unsafe.Pointer, flavor unsafe.Pointer, blockBufferOut unsafe.Pointer) int {
-	return raw.CMMetadataFormatDescriptionCopyAsBigEndianMetadataDescriptionBlockBuffer(allocator, metadataFormatDescription, flavor, blockBufferOut)
-}
-
-// CMMetadataFormatDescriptionCreateByMergingMetadataFormatDescriptions calls [raw.CMMetadataFormatDescriptionCreateByMergingMetadataFormatDescriptions] (C function CMMetadataFormatDescriptionCreateByMergingMetadataFormatDescriptions).
-func CMMetadataFormatDescriptionCreateByMergingMetadataFormatDescriptions(allocator unsafe.Pointer, sourceDescription unsafe.Pointer, otherSourceDescription unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMMetadataFormatDescriptionCreateByMergingMetadataFormatDescriptions(allocator, sourceDescription, otherSourceDescription, formatDescriptionOut)
-}
-
-// CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionBlockBuffer calls [raw.CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionBlockBuffer] (C function CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionBlockBuffer).
-func CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionBlockBuffer(allocator unsafe.Pointer, metadataDescriptionBlockBuffer unsafe.Pointer, flavor unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionBlockBuffer(allocator, metadataDescriptionBlockBuffer, flavor, formatDescriptionOut)
-}
-
-// CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData calls [raw.CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData] (C function CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData).
-func CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData(allocator unsafe.Pointer, metadataDescriptionData *uint8, size uint, flavor unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMMetadataFormatDescriptionCreateFromBigEndianMetadataDescriptionData(allocator, metadataDescriptionData, size, flavor, formatDescriptionOut)
-}
-
-// CMMetadataFormatDescriptionCreateWithKeys calls [raw.CMMetadataFormatDescriptionCreateWithKeys] (C function CMMetadataFormatDescriptionCreateWithKeys).
-func CMMetadataFormatDescriptionCreateWithKeys(allocator unsafe.Pointer, metadataType uint, keys unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMMetadataFormatDescriptionCreateWithKeys(allocator, metadataType, keys, formatDescriptionOut)
-}
-
-// CMMetadataFormatDescriptionCreateWithMetadataFormatDescriptionAndMetadataSpecifications calls [raw.CMMetadataFormatDescriptionCreateWithMetadataFormatDescriptionAndMetadataSpecifications] (C function CMMetadataFormatDescriptionCreateWithMetadataFormatDescriptionAndMetadataSpecifications).
-func CMMetadataFormatDescriptionCreateWithMetadataFormatDescriptionAndMetadataSpecifications(allocator unsafe.Pointer, sourceDescription unsafe.Pointer, metadataSpecifications unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMMetadataFormatDescriptionCreateWithMetadataFormatDescriptionAndMetadataSpecifications(allocator, sourceDescription, metadataSpecifications, formatDescriptionOut)
-}
-
-// CMMetadataFormatDescriptionCreateWithMetadataSpecifications calls [raw.CMMetadataFormatDescriptionCreateWithMetadataSpecifications] (C function CMMetadataFormatDescriptionCreateWithMetadataSpecifications).
-func CMMetadataFormatDescriptionCreateWithMetadataSpecifications(allocator unsafe.Pointer, metadataType uint, metadataSpecifications unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMMetadataFormatDescriptionCreateWithMetadataSpecifications(allocator, metadataType, metadataSpecifications, formatDescriptionOut)
-}
-
-// CMMetadataFormatDescriptionGetIdentifiers calls [raw.CMMetadataFormatDescriptionGetIdentifiers] (C function CMMetadataFormatDescriptionGetIdentifiers).
-func CMMetadataFormatDescriptionGetIdentifiers(desc unsafe.Pointer) unsafe.Pointer {
-	return raw.CMMetadataFormatDescriptionGetIdentifiers(desc)
-}
-
-// CMMetadataFormatDescriptionGetKeyWithLocalID calls [raw.CMMetadataFormatDescriptionGetKeyWithLocalID] (C function CMMetadataFormatDescriptionGetKeyWithLocalID).
-func CMMetadataFormatDescriptionGetKeyWithLocalID(desc unsafe.Pointer, localKeyID uint) unsafe.Pointer {
-	return raw.CMMetadataFormatDescriptionGetKeyWithLocalID(desc, localKeyID)
-}
-
-// CMMuxedFormatDescriptionCreate calls [raw.CMMuxedFormatDescriptionCreate] (C function CMMuxedFormatDescriptionCreate).
-func CMMuxedFormatDescriptionCreate(allocator unsafe.Pointer, muxType uint, extensions unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMMuxedFormatDescriptionCreate(allocator, muxType, extensions, formatDescriptionOut)
-}
-
-// CMPropagateAttachments calls [raw.CMPropagateAttachments] (C function CMPropagateAttachments).
-func CMPropagateAttachments(source unsafe.Pointer, destination unsafe.Pointer) {
-	raw.CMPropagateAttachments(source, destination)
-}
-
-// CMRemoveAllAttachments calls [raw.CMRemoveAllAttachments] (C function CMRemoveAllAttachments).
-func CMRemoveAllAttachments(target unsafe.Pointer) {
-	raw.CMRemoveAllAttachments(target)
-}
-
-// CMRemoveAttachment calls [raw.CMRemoveAttachment] (C function CMRemoveAttachment).
-func CMRemoveAttachment(target unsafe.Pointer, key unsafe.Pointer) {
-	raw.CMRemoveAttachment(target, key)
-}
-
-// CMSampleBufferCallBlockForEachSample calls [raw.CMSampleBufferCallBlockForEachSample] (C function CMSampleBufferCallBlockForEachSample).
-func CMSampleBufferCallBlockForEachSample(sbuf unsafe.Pointer, handler func(unsafe.Pointer, int) unsafe.Pointer) int {
-	return raw.CMSampleBufferCallBlockForEachSample(sbuf, handler)
-}
-
-// CMSampleBufferCallForEachSample calls [raw.CMSampleBufferCallForEachSample] (C function CMSampleBufferCallForEachSample).
-func CMSampleBufferCallForEachSample(sbuf unsafe.Pointer, callback unsafe.Pointer, refcon unsafe.Pointer) int {
-	return raw.CMSampleBufferCallForEachSample(sbuf, callback, refcon)
-}
-
-// CMSampleBufferCopyPCMDataIntoAudioBufferList calls [raw.CMSampleBufferCopyPCMDataIntoAudioBufferList] (C function CMSampleBufferCopyPCMDataIntoAudioBufferList).
-func CMSampleBufferCopyPCMDataIntoAudioBufferList(sbuf unsafe.Pointer, frameOffset int32, numFrames int32, bufferList *coreaudiotypes.AudioBufferList) int {
-	return raw.CMSampleBufferCopyPCMDataIntoAudioBufferList(sbuf, frameOffset, numFrames, bufferList)
-}
-
-// CMSampleBufferCopySampleBufferForRange calls [raw.CMSampleBufferCopySampleBufferForRange] (C function CMSampleBufferCopySampleBufferForRange).
-func CMSampleBufferCopySampleBufferForRange(allocator unsafe.Pointer, sbuf unsafe.Pointer, sampleRange corefoundation.CFRange, sampleBufferOut unsafe.Pointer) int {
-	return raw.CMSampleBufferCopySampleBufferForRange(allocator, sbuf, sampleRange, sampleBufferOut)
-}
-
-// CMSampleBufferCreate calls [raw.CMSampleBufferCreate] (C function CMSampleBufferCreate).
-func CMSampleBufferCreate(allocator unsafe.Pointer, dataBuffer unsafe.Pointer, dataReady uint8, makeDataReadyCallback unsafe.Pointer, makeDataReadyRefcon unsafe.Pointer, formatDescription unsafe.Pointer, numSamples int, numSampleTimingEntries int, sampleTimingArray *raw.CMSampleTimingInfo, numSampleSizeEntries int, sampleSizeArray *uint, sampleBufferOut unsafe.Pointer) int {
-	return raw.CMSampleBufferCreate(allocator, dataBuffer, dataReady, makeDataReadyCallback, makeDataReadyRefcon, formatDescription, numSamples, numSampleTimingEntries, sampleTimingArray, numSampleSizeEntries, sampleSizeArray, sampleBufferOut)
-}
-
-// CMSampleBufferCreateCopy calls [raw.CMSampleBufferCreateCopy] (C function CMSampleBufferCreateCopy).
-func CMSampleBufferCreateCopy(allocator unsafe.Pointer, sbuf unsafe.Pointer, sampleBufferOut unsafe.Pointer) int {
-	return raw.CMSampleBufferCreateCopy(allocator, sbuf, sampleBufferOut)
-}
-
-// CMSampleBufferCreateCopyWithNewTiming calls [raw.CMSampleBufferCreateCopyWithNewTiming] (C function CMSampleBufferCreateCopyWithNewTiming).
-func CMSampleBufferCreateCopyWithNewTiming(allocator unsafe.Pointer, originalSBuf unsafe.Pointer, numSampleTimingEntries int, sampleTimingArray *raw.CMSampleTimingInfo, sampleBufferOut unsafe.Pointer) int {
-	return raw.CMSampleBufferCreateCopyWithNewTiming(allocator, originalSBuf, numSampleTimingEntries, sampleTimingArray, sampleBufferOut)
-}
-
-// CMSampleBufferCreateForImageBuffer calls [raw.CMSampleBufferCreateForImageBuffer] (C function CMSampleBufferCreateForImageBuffer).
-func CMSampleBufferCreateForImageBuffer(allocator unsafe.Pointer, imageBuffer unsafe.Pointer, dataReady uint8, makeDataReadyCallback unsafe.Pointer, makeDataReadyRefcon unsafe.Pointer, formatDescription unsafe.Pointer, sampleTiming *raw.CMSampleTimingInfo, sampleBufferOut unsafe.Pointer) int {
-	return raw.CMSampleBufferCreateForImageBuffer(allocator, imageBuffer, dataReady, makeDataReadyCallback, makeDataReadyRefcon, formatDescription, sampleTiming, sampleBufferOut)
-}
-
-// CMSampleBufferCreateForImageBufferWithMakeDataReadyHandler calls [raw.CMSampleBufferCreateForImageBufferWithMakeDataReadyHandler] (C function CMSampleBufferCreateForImageBufferWithMakeDataReadyHandler).
-func CMSampleBufferCreateForImageBufferWithMakeDataReadyHandler(allocator unsafe.Pointer, imageBuffer unsafe.Pointer, dataReady uint8, formatDescription unsafe.Pointer, sampleTiming *raw.CMSampleTimingInfo, sampleBufferOut unsafe.Pointer, makeDataReadyHandler func(unsafe.Pointer) int) int {
-	return raw.CMSampleBufferCreateForImageBufferWithMakeDataReadyHandler(allocator, imageBuffer, dataReady, formatDescription, sampleTiming, sampleBufferOut, makeDataReadyHandler)
-}
-
-// CMSampleBufferCreateForTaggedBufferGroup calls [raw.CMSampleBufferCreateForTaggedBufferGroup] (C function CMSampleBufferCreateForTaggedBufferGroup).
-func CMSampleBufferCreateForTaggedBufferGroup(allocator unsafe.Pointer, taggedBufferGroup unsafe.Pointer, sbufPTS raw.CMTime, sbufDuration raw.CMTime, formatDescription unsafe.Pointer, sBufOut unsafe.Pointer) int {
-	return raw.CMSampleBufferCreateForTaggedBufferGroup(allocator, taggedBufferGroup, sbufPTS, sbufDuration, formatDescription, sBufOut)
-}
-
-// CMSampleBufferCreateReady calls [raw.CMSampleBufferCreateReady] (C function CMSampleBufferCreateReady).
-func CMSampleBufferCreateReady(allocator unsafe.Pointer, dataBuffer unsafe.Pointer, formatDescription unsafe.Pointer, numSamples int, numSampleTimingEntries int, sampleTimingArray *raw.CMSampleTimingInfo, numSampleSizeEntries int, sampleSizeArray *uint, sampleBufferOut unsafe.Pointer) int {
-	return raw.CMSampleBufferCreateReady(allocator, dataBuffer, formatDescription, numSamples, numSampleTimingEntries, sampleTimingArray, numSampleSizeEntries, sampleSizeArray, sampleBufferOut)
-}
-
-// CMSampleBufferCreateReadyWithImageBuffer calls [raw.CMSampleBufferCreateReadyWithImageBuffer] (C function CMSampleBufferCreateReadyWithImageBuffer).
-func CMSampleBufferCreateReadyWithImageBuffer(allocator unsafe.Pointer, imageBuffer unsafe.Pointer, formatDescription unsafe.Pointer, sampleTiming *raw.CMSampleTimingInfo, sampleBufferOut unsafe.Pointer) int {
-	return raw.CMSampleBufferCreateReadyWithImageBuffer(allocator, imageBuffer, formatDescription, sampleTiming, sampleBufferOut)
-}
-
-// CMSampleBufferCreateWithMakeDataReadyHandler calls [raw.CMSampleBufferCreateWithMakeDataReadyHandler] (C function CMSampleBufferCreateWithMakeDataReadyHandler).
-func CMSampleBufferCreateWithMakeDataReadyHandler(allocator unsafe.Pointer, dataBuffer unsafe.Pointer, dataReady uint8, formatDescription unsafe.Pointer, numSamples int, numSampleTimingEntries int, sampleTimingArray *raw.CMSampleTimingInfo, numSampleSizeEntries int, sampleSizeArray *uint, sampleBufferOut unsafe.Pointer, makeDataReadyHandler func(unsafe.Pointer) int) int {
-	return raw.CMSampleBufferCreateWithMakeDataReadyHandler(allocator, dataBuffer, dataReady, formatDescription, numSamples, numSampleTimingEntries, sampleTimingArray, numSampleSizeEntries, sampleSizeArray, sampleBufferOut, makeDataReadyHandler)
-}
-
-// CMSampleBufferDataIsReady calls [raw.CMSampleBufferDataIsReady] (C function CMSampleBufferDataIsReady).
-func CMSampleBufferDataIsReady(sbuf unsafe.Pointer) uint8 {
-	return raw.CMSampleBufferDataIsReady(sbuf)
-}
-
-// CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer calls [raw.CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer] (C function CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer).
-func CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(sbuf unsafe.Pointer, bufferListSizeNeededOut *uint, bufferListOut *coreaudiotypes.AudioBufferList, bufferListSize uint, blockBufferStructureAllocator unsafe.Pointer, blockBufferBlockAllocator unsafe.Pointer, flags uint32, blockBufferOut unsafe.Pointer) int {
-	return raw.CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(sbuf, bufferListSizeNeededOut, bufferListOut, bufferListSize, blockBufferStructureAllocator, blockBufferBlockAllocator, flags, blockBufferOut)
-}
-
-// CMSampleBufferGetAudioStreamPacketDescriptions calls [raw.CMSampleBufferGetAudioStreamPacketDescriptions] (C function CMSampleBufferGetAudioStreamPacketDescriptions).
-func CMSampleBufferGetAudioStreamPacketDescriptions(sbuf unsafe.Pointer, packetDescriptionsSize uint, packetDescriptionsOut *coreaudiotypes.AudioStreamPacketDescription, packetDescriptionsSizeNeededOut *uint) int {
-	return raw.CMSampleBufferGetAudioStreamPacketDescriptions(sbuf, packetDescriptionsSize, packetDescriptionsOut, packetDescriptionsSizeNeededOut)
-}
-
-// CMSampleBufferGetAudioStreamPacketDescriptionsPtr calls [raw.CMSampleBufferGetAudioStreamPacketDescriptionsPtr] (C function CMSampleBufferGetAudioStreamPacketDescriptionsPtr).
-func CMSampleBufferGetAudioStreamPacketDescriptionsPtr(sbuf unsafe.Pointer, packetDescriptionsPointerOut *coreaudiotypes.AudioStreamPacketDescription, packetDescriptionsSizeOut *uint) int {
-	return raw.CMSampleBufferGetAudioStreamPacketDescriptionsPtr(sbuf, packetDescriptionsPointerOut, packetDescriptionsSizeOut)
-}
-
-// CMSampleBufferGetDataBuffer calls [raw.CMSampleBufferGetDataBuffer] (C function CMSampleBufferGetDataBuffer).
-func CMSampleBufferGetDataBuffer(sbuf unsafe.Pointer) unsafe.Pointer {
-	return raw.CMSampleBufferGetDataBuffer(sbuf)
-}
-
-// CMSampleBufferGetDecodeTimeStamp calls [raw.CMSampleBufferGetDecodeTimeStamp] (C function CMSampleBufferGetDecodeTimeStamp).
-func CMSampleBufferGetDecodeTimeStamp(sbuf unsafe.Pointer) raw.CMTime {
-	return raw.CMSampleBufferGetDecodeTimeStamp(sbuf)
-}
-
-// CMSampleBufferGetDuration calls [raw.CMSampleBufferGetDuration] (C function CMSampleBufferGetDuration).
-func CMSampleBufferGetDuration(sbuf unsafe.Pointer) raw.CMTime {
-	return raw.CMSampleBufferGetDuration(sbuf)
-}
-
-// CMSampleBufferGetFormatDescription calls [raw.CMSampleBufferGetFormatDescription] (C function CMSampleBufferGetFormatDescription).
-func CMSampleBufferGetFormatDescription(sbuf unsafe.Pointer) unsafe.Pointer {
-	return raw.CMSampleBufferGetFormatDescription(sbuf)
-}
-
-// CMSampleBufferGetImageBuffer calls [raw.CMSampleBufferGetImageBuffer] (C function CMSampleBufferGetImageBuffer).
-func CMSampleBufferGetImageBuffer(sbuf unsafe.Pointer) unsafe.Pointer {
-	return raw.CMSampleBufferGetImageBuffer(sbuf)
-}
-
-// CMSampleBufferGetNumSamples calls [raw.CMSampleBufferGetNumSamples] (C function CMSampleBufferGetNumSamples).
-func CMSampleBufferGetNumSamples(sbuf unsafe.Pointer) int {
-	return raw.CMSampleBufferGetNumSamples(sbuf)
-}
-
-// CMSampleBufferGetOutputDecodeTimeStamp calls [raw.CMSampleBufferGetOutputDecodeTimeStamp] (C function CMSampleBufferGetOutputDecodeTimeStamp).
-func CMSampleBufferGetOutputDecodeTimeStamp(sbuf unsafe.Pointer) raw.CMTime {
-	return raw.CMSampleBufferGetOutputDecodeTimeStamp(sbuf)
-}
-
-// CMSampleBufferGetOutputDuration calls [raw.CMSampleBufferGetOutputDuration] (C function CMSampleBufferGetOutputDuration).
-func CMSampleBufferGetOutputDuration(sbuf unsafe.Pointer) raw.CMTime {
-	return raw.CMSampleBufferGetOutputDuration(sbuf)
-}
-
-// CMSampleBufferGetOutputPresentationTimeStamp calls [raw.CMSampleBufferGetOutputPresentationTimeStamp] (C function CMSampleBufferGetOutputPresentationTimeStamp).
-func CMSampleBufferGetOutputPresentationTimeStamp(sbuf unsafe.Pointer) raw.CMTime {
-	return raw.CMSampleBufferGetOutputPresentationTimeStamp(sbuf)
-}
-
-// CMSampleBufferGetOutputSampleTimingInfoArray calls [raw.CMSampleBufferGetOutputSampleTimingInfoArray] (C function CMSampleBufferGetOutputSampleTimingInfoArray).
-func CMSampleBufferGetOutputSampleTimingInfoArray(sbuf unsafe.Pointer, timingArrayEntries int, timingArrayOut *raw.CMSampleTimingInfo, timingArrayEntriesNeededOut *int) int {
-	return raw.CMSampleBufferGetOutputSampleTimingInfoArray(sbuf, timingArrayEntries, timingArrayOut, timingArrayEntriesNeededOut)
-}
-
-// CMSampleBufferGetPresentationTimeStamp calls [raw.CMSampleBufferGetPresentationTimeStamp] (C function CMSampleBufferGetPresentationTimeStamp).
-func CMSampleBufferGetPresentationTimeStamp(sbuf unsafe.Pointer) raw.CMTime {
-	return raw.CMSampleBufferGetPresentationTimeStamp(sbuf)
-}
-
-// CMSampleBufferGetSampleAttachmentsArray calls [raw.CMSampleBufferGetSampleAttachmentsArray] (C function CMSampleBufferGetSampleAttachmentsArray).
-func CMSampleBufferGetSampleAttachmentsArray(sbuf unsafe.Pointer, createIfNecessary uint8) unsafe.Pointer {
-	return raw.CMSampleBufferGetSampleAttachmentsArray(sbuf, createIfNecessary)
-}
-
-// CMSampleBufferGetSampleSize calls [raw.CMSampleBufferGetSampleSize] (C function CMSampleBufferGetSampleSize).
-func CMSampleBufferGetSampleSize(sbuf unsafe.Pointer, sampleIndex int) uint {
-	return raw.CMSampleBufferGetSampleSize(sbuf, sampleIndex)
-}
-
-// CMSampleBufferGetSampleSizeArray calls [raw.CMSampleBufferGetSampleSizeArray] (C function CMSampleBufferGetSampleSizeArray).
-func CMSampleBufferGetSampleSizeArray(sbuf unsafe.Pointer, sizeArrayEntries int, sizeArrayOut *uint, sizeArrayEntriesNeededOut *int) int {
-	return raw.CMSampleBufferGetSampleSizeArray(sbuf, sizeArrayEntries, sizeArrayOut, sizeArrayEntriesNeededOut)
-}
-
-// CMSampleBufferGetSampleTimingInfo calls [raw.CMSampleBufferGetSampleTimingInfo] (C function CMSampleBufferGetSampleTimingInfo).
-func CMSampleBufferGetSampleTimingInfo(sbuf unsafe.Pointer, sampleIndex int, timingInfoOut *raw.CMSampleTimingInfo) int {
-	return raw.CMSampleBufferGetSampleTimingInfo(sbuf, sampleIndex, timingInfoOut)
-}
-
-// CMSampleBufferGetSampleTimingInfoArray calls [raw.CMSampleBufferGetSampleTimingInfoArray] (C function CMSampleBufferGetSampleTimingInfoArray).
-func CMSampleBufferGetSampleTimingInfoArray(sbuf unsafe.Pointer, numSampleTimingEntries int, timingArrayOut *raw.CMSampleTimingInfo, timingArrayEntriesNeededOut *int) int {
-	return raw.CMSampleBufferGetSampleTimingInfoArray(sbuf, numSampleTimingEntries, timingArrayOut, timingArrayEntriesNeededOut)
-}
-
-// CMSampleBufferGetTaggedBufferGroup calls [raw.CMSampleBufferGetTaggedBufferGroup] (C function CMSampleBufferGetTaggedBufferGroup).
-func CMSampleBufferGetTaggedBufferGroup(sbuf unsafe.Pointer) unsafe.Pointer {
-	return raw.CMSampleBufferGetTaggedBufferGroup(sbuf)
-}
-
-// CMSampleBufferGetTotalSampleSize calls [raw.CMSampleBufferGetTotalSampleSize] (C function CMSampleBufferGetTotalSampleSize).
-func CMSampleBufferGetTotalSampleSize(sbuf unsafe.Pointer) uint {
-	return raw.CMSampleBufferGetTotalSampleSize(sbuf)
-}
-
-// CMSampleBufferGetTypeID calls [raw.CMSampleBufferGetTypeID] (C function CMSampleBufferGetTypeID).
-func CMSampleBufferGetTypeID() uint {
-	return raw.CMSampleBufferGetTypeID()
-}
-
-// CMSampleBufferHasDataFailed calls [raw.CMSampleBufferHasDataFailed] (C function CMSampleBufferHasDataFailed).
-func CMSampleBufferHasDataFailed(sbuf unsafe.Pointer, statusOut *int) uint8 {
-	return raw.CMSampleBufferHasDataFailed(sbuf, statusOut)
-}
-
-// CMSampleBufferInvalidate calls [raw.CMSampleBufferInvalidate] (C function CMSampleBufferInvalidate).
-func CMSampleBufferInvalidate(sbuf unsafe.Pointer) int {
-	return raw.CMSampleBufferInvalidate(sbuf)
-}
-
-// CMSampleBufferIsValid calls [raw.CMSampleBufferIsValid] (C function CMSampleBufferIsValid).
-func CMSampleBufferIsValid(sbuf unsafe.Pointer) uint8 {
-	return raw.CMSampleBufferIsValid(sbuf)
-}
-
-// CMSampleBufferMakeDataReady calls [raw.CMSampleBufferMakeDataReady] (C function CMSampleBufferMakeDataReady).
-func CMSampleBufferMakeDataReady(sbuf unsafe.Pointer) int {
-	return raw.CMSampleBufferMakeDataReady(sbuf)
-}
-
-// CMSampleBufferSetDataBuffer calls [raw.CMSampleBufferSetDataBuffer] (C function CMSampleBufferSetDataBuffer).
-func CMSampleBufferSetDataBuffer(sbuf unsafe.Pointer, dataBuffer unsafe.Pointer) int {
-	return raw.CMSampleBufferSetDataBuffer(sbuf, dataBuffer)
-}
-
-// CMSampleBufferSetDataBufferFromAudioBufferList calls [raw.CMSampleBufferSetDataBufferFromAudioBufferList] (C function CMSampleBufferSetDataBufferFromAudioBufferList).
-func CMSampleBufferSetDataBufferFromAudioBufferList(sbuf unsafe.Pointer, blockBufferStructureAllocator unsafe.Pointer, blockBufferBlockAllocator unsafe.Pointer, flags uint32, bufferList *coreaudiotypes.AudioBufferList) int {
-	return raw.CMSampleBufferSetDataBufferFromAudioBufferList(sbuf, blockBufferStructureAllocator, blockBufferBlockAllocator, flags, bufferList)
-}
-
-// CMSampleBufferSetDataFailed calls [raw.CMSampleBufferSetDataFailed] (C function CMSampleBufferSetDataFailed).
-func CMSampleBufferSetDataFailed(sbuf unsafe.Pointer, status int) int {
-	return raw.CMSampleBufferSetDataFailed(sbuf, status)
-}
-
-// CMSampleBufferSetDataReady calls [raw.CMSampleBufferSetDataReady] (C function CMSampleBufferSetDataReady).
-func CMSampleBufferSetDataReady(sbuf unsafe.Pointer) int {
-	return raw.CMSampleBufferSetDataReady(sbuf)
-}
-
-// CMSampleBufferSetInvalidateCallback calls [raw.CMSampleBufferSetInvalidateCallback] (C function CMSampleBufferSetInvalidateCallback).
-func CMSampleBufferSetInvalidateCallback(sbuf unsafe.Pointer, invalidateCallback unsafe.Pointer, invalidateRefCon uint64) int {
-	return raw.CMSampleBufferSetInvalidateCallback(sbuf, invalidateCallback, invalidateRefCon)
-}
-
-// CMSampleBufferSetInvalidateHandler calls [raw.CMSampleBufferSetInvalidateHandler] (C function CMSampleBufferSetInvalidateHandler).
-func CMSampleBufferSetInvalidateHandler(sbuf unsafe.Pointer, invalidateHandler func(unsafe.Pointer)) int {
-	return raw.CMSampleBufferSetInvalidateHandler(sbuf, invalidateHandler)
-}
-
-// CMSampleBufferSetOutputPresentationTimeStamp calls [raw.CMSampleBufferSetOutputPresentationTimeStamp] (C function CMSampleBufferSetOutputPresentationTimeStamp).
-func CMSampleBufferSetOutputPresentationTimeStamp(sbuf unsafe.Pointer, outputPresentationTimeStamp raw.CMTime) int {
-	return raw.CMSampleBufferSetOutputPresentationTimeStamp(sbuf, outputPresentationTimeStamp)
-}
-
-// CMSampleBufferTrackDataReadiness calls [raw.CMSampleBufferTrackDataReadiness] (C function CMSampleBufferTrackDataReadiness).
-func CMSampleBufferTrackDataReadiness(sbuf unsafe.Pointer, sampleBufferToTrack unsafe.Pointer) int {
-	return raw.CMSampleBufferTrackDataReadiness(sbuf, sampleBufferToTrack)
-}
-
-// CMSetAttachment calls [raw.CMSetAttachment] (C function CMSetAttachment).
-func CMSetAttachment(target unsafe.Pointer, key unsafe.Pointer, value unsafe.Pointer, attachmentMode uint32) {
-	raw.CMSetAttachment(target, key, value, attachmentMode)
-}
-
-// CMSetAttachments calls [raw.CMSetAttachments] (C function CMSetAttachments).
-func CMSetAttachments(target unsafe.Pointer, theAttachments unsafe.Pointer, attachmentMode uint32) {
-	raw.CMSetAttachments(target, theAttachments, attachmentMode)
-}
-
-// CMSimpleQueueCreate calls [raw.CMSimpleQueueCreate] (C function CMSimpleQueueCreate).
-func CMSimpleQueueCreate(allocator unsafe.Pointer, capacity int32, queueOut unsafe.Pointer) int {
-	return raw.CMSimpleQueueCreate(allocator, capacity, queueOut)
-}
-
-// CMSimpleQueueDequeue calls [raw.CMSimpleQueueDequeue] (C function CMSimpleQueueDequeue).
-func CMSimpleQueueDequeue(queue unsafe.Pointer) unsafe.Pointer {
-	return raw.CMSimpleQueueDequeue(queue)
-}
-
-// CMSimpleQueueEnqueue calls [raw.CMSimpleQueueEnqueue] (C function CMSimpleQueueEnqueue).
-func CMSimpleQueueEnqueue(queue unsafe.Pointer, element unsafe.Pointer) int {
-	return raw.CMSimpleQueueEnqueue(queue, element)
-}
-
-// CMSimpleQueueGetCapacity calls [raw.CMSimpleQueueGetCapacity] (C function CMSimpleQueueGetCapacity).
-func CMSimpleQueueGetCapacity(queue unsafe.Pointer) int32 {
-	return raw.CMSimpleQueueGetCapacity(queue)
-}
-
-// CMSimpleQueueGetCount calls [raw.CMSimpleQueueGetCount] (C function CMSimpleQueueGetCount).
-func CMSimpleQueueGetCount(queue unsafe.Pointer) int32 {
-	return raw.CMSimpleQueueGetCount(queue)
-}
-
-// CMSimpleQueueGetHead calls [raw.CMSimpleQueueGetHead] (C function CMSimpleQueueGetHead).
-func CMSimpleQueueGetHead(queue unsafe.Pointer) unsafe.Pointer {
-	return raw.CMSimpleQueueGetHead(queue)
-}
-
-// CMSimpleQueueGetTypeID calls [raw.CMSimpleQueueGetTypeID] (C function CMSimpleQueueGetTypeID).
-func CMSimpleQueueGetTypeID() uint {
-	return raw.CMSimpleQueueGetTypeID()
-}
-
-// CMSimpleQueueReset calls [raw.CMSimpleQueueReset] (C function CMSimpleQueueReset).
-func CMSimpleQueueReset(queue unsafe.Pointer) int {
-	return raw.CMSimpleQueueReset(queue)
-}
-
-// CMSyncConvertTime calls [raw.CMSyncConvertTime] (C function CMSyncConvertTime).
-func CMSyncConvertTime(time_ raw.CMTime, fromClockOrTimebase unsafe.Pointer, toClockOrTimebase unsafe.Pointer) raw.CMTime {
-	return raw.CMSyncConvertTime(time_, fromClockOrTimebase, toClockOrTimebase)
-}
-
-// CMSyncGetRelativeRate calls [raw.CMSyncGetRelativeRate] (C function CMSyncGetRelativeRate).
-func CMSyncGetRelativeRate(ofClockOrTimebase unsafe.Pointer, relativeToClockOrTimebase unsafe.Pointer) float64 {
-	return raw.CMSyncGetRelativeRate(ofClockOrTimebase, relativeToClockOrTimebase)
-}
-
-// CMSyncGetRelativeRateAndAnchorTime calls [raw.CMSyncGetRelativeRateAndAnchorTime] (C function CMSyncGetRelativeRateAndAnchorTime).
-func CMSyncGetRelativeRateAndAnchorTime(ofClockOrTimebase unsafe.Pointer, relativeToClockOrTimebase unsafe.Pointer, outRelativeRate *float64, outOfClockOrTimebaseAnchorTime *raw.CMTime, outRelativeToClockOrTimebaseAnchorTime *raw.CMTime) int {
-	return raw.CMSyncGetRelativeRateAndAnchorTime(ofClockOrTimebase, relativeToClockOrTimebase, outRelativeRate, outOfClockOrTimebaseAnchorTime, outRelativeToClockOrTimebaseAnchorTime)
-}
-
-// CMSyncGetTime calls [raw.CMSyncGetTime] (C function CMSyncGetTime).
-func CMSyncGetTime(clockOrTimebase unsafe.Pointer) raw.CMTime {
-	return raw.CMSyncGetTime(clockOrTimebase)
-}
-
-// CMSyncMightDrift calls [raw.CMSyncMightDrift] (C function CMSyncMightDrift).
-func CMSyncMightDrift(clockOrTimebase1 unsafe.Pointer, clockOrTimebase2 unsafe.Pointer) uint8 {
-	return raw.CMSyncMightDrift(clockOrTimebase1, clockOrTimebase2)
-}
-
-// CMTagCategoryEqualToTagCategory calls [raw.CMTagCategoryEqualToTagCategory] (C function CMTagCategoryEqualToTagCategory).
-func CMTagCategoryEqualToTagCategory(tag1 raw.CMTag, tag2 raw.CMTag) uint8 {
-	return raw.CMTagCategoryEqualToTagCategory(tag1, tag2)
-}
-
-// CMTagCategoryValueEqualToValue calls [raw.CMTagCategoryValueEqualToValue] (C function CMTagCategoryValueEqualToValue).
-func CMTagCategoryValueEqualToValue(tag1 raw.CMTag, tag2 raw.CMTag) uint8 {
-	return raw.CMTagCategoryValueEqualToValue(tag1, tag2)
-}
-
-// CMTagCollectionAddTag calls [raw.CMTagCollectionAddTag] (C function CMTagCollectionAddTag).
-func CMTagCollectionAddTag(tagCollection unsafe.Pointer, tagToAdd raw.CMTag) int {
-	return raw.CMTagCollectionAddTag(tagCollection, tagToAdd)
-}
-
-// CMTagCollectionAddTagsFromArray calls [raw.CMTagCollectionAddTagsFromArray] (C function CMTagCollectionAddTagsFromArray).
-func CMTagCollectionAddTagsFromArray(tagCollection unsafe.Pointer, tags *raw.CMTag, tagCount int) int {
-	return raw.CMTagCollectionAddTagsFromArray(tagCollection, tags, tagCount)
-}
-
-// CMTagCollectionAddTagsFromCollection calls [raw.CMTagCollectionAddTagsFromCollection] (C function CMTagCollectionAddTagsFromCollection).
-func CMTagCollectionAddTagsFromCollection(tagCollection unsafe.Pointer, collectionWithTagsToAdd unsafe.Pointer) int {
-	return raw.CMTagCollectionAddTagsFromCollection(tagCollection, collectionWithTagsToAdd)
-}
-
-// CMTagCollectionApply calls [raw.CMTagCollectionApply] (C function CMTagCollectionApply).
-func CMTagCollectionApply(tagCollection unsafe.Pointer, applier unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.CMTagCollectionApply(tagCollection, applier, context_)
-}
-
-// CMTagCollectionApplyUntil calls [raw.CMTagCollectionApplyUntil] (C function CMTagCollectionApplyUntil).
-func CMTagCollectionApplyUntil(tagCollection unsafe.Pointer, applier unsafe.Pointer, context_ unsafe.Pointer) raw.CMTag {
-	return raw.CMTagCollectionApplyUntil(tagCollection, applier, context_)
-}
-
-// CMTagCollectionContainsCategory calls [raw.CMTagCollectionContainsCategory] (C function CMTagCollectionContainsCategory).
-func CMTagCollectionContainsCategory(tagCollection unsafe.Pointer, category CMTagCategory) uint8 {
-	return raw.CMTagCollectionContainsCategory(tagCollection, raw.CMTagCategory(category))
-}
-
-// CMTagCollectionContainsSpecifiedTags calls [raw.CMTagCollectionContainsSpecifiedTags] (C function CMTagCollectionContainsSpecifiedTags).
-func CMTagCollectionContainsSpecifiedTags(tagCollection unsafe.Pointer, containedTags *raw.CMTag, containedTagCount int) uint8 {
-	return raw.CMTagCollectionContainsSpecifiedTags(tagCollection, containedTags, containedTagCount)
-}
-
-// CMTagCollectionContainsTag calls [raw.CMTagCollectionContainsTag] (C function CMTagCollectionContainsTag).
-func CMTagCollectionContainsTag(tagCollection unsafe.Pointer, tag raw.CMTag) uint8 {
-	return raw.CMTagCollectionContainsTag(tagCollection, tag)
-}
-
-// CMTagCollectionContainsTagsOfCollection calls [raw.CMTagCollectionContainsTagsOfCollection] (C function CMTagCollectionContainsTagsOfCollection).
-func CMTagCollectionContainsTagsOfCollection(tagCollection unsafe.Pointer, containedTagCollection unsafe.Pointer) uint8 {
-	return raw.CMTagCollectionContainsTagsOfCollection(tagCollection, containedTagCollection)
-}
-
-// CMTagCollectionCopyAsData calls [raw.CMTagCollectionCopyAsData] (C function CMTagCollectionCopyAsData).
-func CMTagCollectionCopyAsData(tagCollection unsafe.Pointer, allocator unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTagCollectionCopyAsData(tagCollection, allocator)
-}
-
-// CMTagCollectionCopyAsDictionary calls [raw.CMTagCollectionCopyAsDictionary] (C function CMTagCollectionCopyAsDictionary).
-func CMTagCollectionCopyAsDictionary(tagCollection unsafe.Pointer, allocator unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTagCollectionCopyAsDictionary(tagCollection, allocator)
-}
-
-// CMTagCollectionCopyDescription calls [raw.CMTagCollectionCopyDescription] (C function CMTagCollectionCopyDescription).
-func CMTagCollectionCopyDescription(allocator unsafe.Pointer, tagCollection unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTagCollectionCopyDescription(allocator, tagCollection)
-}
-
-// CMTagCollectionCopyTagsOfCategories calls [raw.CMTagCollectionCopyTagsOfCategories] (C function CMTagCollectionCopyTagsOfCategories).
-func CMTagCollectionCopyTagsOfCategories(allocator unsafe.Pointer, tagCollection unsafe.Pointer, categories *CMTagCategory, categoriesCount int, collectionWithTagsOfCategories unsafe.Pointer) int {
-	var _categories raw.CMTagCategory
-	_ret := raw.CMTagCollectionCopyTagsOfCategories(allocator, tagCollection, &_categories, categoriesCount, collectionWithTagsOfCategories)
-	if categories != nil {
-		*categories = CMTagCategory(_categories)
+var _fnCMBlockBufferGetDataLength func(objc.ID) int
+
+// CMBlockBufferGetDataLength calls the CoreMedia framework function CMBlockBufferGetDataLength.
+func CMBlockBufferGetDataLength(theBuffer obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBlockBufferGetDataLength == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBlockBufferGetDataLength, _lib, "CMBlockBufferGetDataLength")
 	}
-	return _ret
+	return _fnCMBlockBufferGetDataLength(objref.IDOf(theBuffer))
 }
 
-// CMTagCollectionCountTagsWithFilterFunction calls [raw.CMTagCollectionCountTagsWithFilterFunction] (C function CMTagCollectionCountTagsWithFilterFunction).
-func CMTagCollectionCountTagsWithFilterFunction(tagCollection unsafe.Pointer, filterApplier unsafe.Pointer, context_ unsafe.Pointer) int {
-	return raw.CMTagCollectionCountTagsWithFilterFunction(tagCollection, filterApplier, context_)
-}
-
-// CMTagCollectionCreate calls [raw.CMTagCollectionCreate] (C function CMTagCollectionCreate).
-func CMTagCollectionCreate(allocator unsafe.Pointer, tags *raw.CMTag, tagCount int, newCollectionOut unsafe.Pointer) int {
-	return raw.CMTagCollectionCreate(allocator, tags, tagCount, newCollectionOut)
-}
-
-// CMTagCollectionCreateCopy calls [raw.CMTagCollectionCreateCopy] (C function CMTagCollectionCreateCopy).
-func CMTagCollectionCreateCopy(tagCollection unsafe.Pointer, allocator unsafe.Pointer, newCollectionCopyOut unsafe.Pointer) int {
-	return raw.CMTagCollectionCreateCopy(tagCollection, allocator, newCollectionCopyOut)
-}
-
-// CMTagCollectionCreateDifference calls [raw.CMTagCollectionCreateDifference] (C function CMTagCollectionCreateDifference).
-func CMTagCollectionCreateDifference(tagCollectionMinuend unsafe.Pointer, tagCollectionSubtrahend unsafe.Pointer, tagCollectionOut unsafe.Pointer) int {
-	return raw.CMTagCollectionCreateDifference(tagCollectionMinuend, tagCollectionSubtrahend, tagCollectionOut)
-}
-
-// CMTagCollectionCreateExclusiveOr calls [raw.CMTagCollectionCreateExclusiveOr] (C function CMTagCollectionCreateExclusiveOr).
-func CMTagCollectionCreateExclusiveOr(tagCollection1 unsafe.Pointer, tagCollection2 unsafe.Pointer, tagCollectionOut unsafe.Pointer) int {
-	return raw.CMTagCollectionCreateExclusiveOr(tagCollection1, tagCollection2, tagCollectionOut)
-}
-
-// CMTagCollectionCreateFromData calls [raw.CMTagCollectionCreateFromData] (C function CMTagCollectionCreateFromData).
-func CMTagCollectionCreateFromData(data unsafe.Pointer, allocator unsafe.Pointer, newCollectionOut unsafe.Pointer) int {
-	return raw.CMTagCollectionCreateFromData(data, allocator, newCollectionOut)
-}
-
-// CMTagCollectionCreateFromDictionary calls [raw.CMTagCollectionCreateFromDictionary] (C function CMTagCollectionCreateFromDictionary).
-func CMTagCollectionCreateFromDictionary(dict unsafe.Pointer, allocator unsafe.Pointer, newCollectionOut unsafe.Pointer) int {
-	return raw.CMTagCollectionCreateFromDictionary(dict, allocator, newCollectionOut)
-}
-
-// CMTagCollectionCreateIntersection calls [raw.CMTagCollectionCreateIntersection] (C function CMTagCollectionCreateIntersection).
-func CMTagCollectionCreateIntersection(tagCollection1 unsafe.Pointer, tagCollection2 unsafe.Pointer, tagCollectionOut unsafe.Pointer) int {
-	return raw.CMTagCollectionCreateIntersection(tagCollection1, tagCollection2, tagCollectionOut)
-}
-
-// CMTagCollectionCreateMutable calls [raw.CMTagCollectionCreateMutable] (C function CMTagCollectionCreateMutable).
-func CMTagCollectionCreateMutable(allocator unsafe.Pointer, capacity int, newMutableCollectionOut unsafe.Pointer) int {
-	return raw.CMTagCollectionCreateMutable(allocator, capacity, newMutableCollectionOut)
-}
-
-// CMTagCollectionCreateMutableCopy calls [raw.CMTagCollectionCreateMutableCopy] (C function CMTagCollectionCreateMutableCopy).
-func CMTagCollectionCreateMutableCopy(tagCollection unsafe.Pointer, allocator unsafe.Pointer, newMutableCollectionCopyOut unsafe.Pointer) int {
-	return raw.CMTagCollectionCreateMutableCopy(tagCollection, allocator, newMutableCollectionCopyOut)
-}
-
-// CMTagCollectionCreateUnion calls [raw.CMTagCollectionCreateUnion] (C function CMTagCollectionCreateUnion).
-func CMTagCollectionCreateUnion(tagCollection1 unsafe.Pointer, tagCollection2 unsafe.Pointer, tagCollectionOut unsafe.Pointer) int {
-	return raw.CMTagCollectionCreateUnion(tagCollection1, tagCollection2, tagCollectionOut)
-}
-
-// CMTagCollectionGetCount calls [raw.CMTagCollectionGetCount] (C function CMTagCollectionGetCount).
-func CMTagCollectionGetCount(tagCollection unsafe.Pointer) int {
-	return raw.CMTagCollectionGetCount(tagCollection)
-}
-
-// CMTagCollectionGetCountOfCategory calls [raw.CMTagCollectionGetCountOfCategory] (C function CMTagCollectionGetCountOfCategory).
-func CMTagCollectionGetCountOfCategory(tagCollection unsafe.Pointer, category CMTagCategory) int {
-	return raw.CMTagCollectionGetCountOfCategory(tagCollection, raw.CMTagCategory(category))
-}
-
-// CMTagCollectionGetTags calls [raw.CMTagCollectionGetTags] (C function CMTagCollectionGetTags).
-func CMTagCollectionGetTags(tagCollection unsafe.Pointer, tagBuffer *raw.CMTag, tagBufferCount int, numberOfTagsCopied *int) int {
-	return raw.CMTagCollectionGetTags(tagCollection, tagBuffer, tagBufferCount, numberOfTagsCopied)
-}
-
-// CMTagCollectionGetTagsWithCategory calls [raw.CMTagCollectionGetTagsWithCategory] (C function CMTagCollectionGetTagsWithCategory).
-func CMTagCollectionGetTagsWithCategory(tagCollection unsafe.Pointer, category CMTagCategory, tagBuffer *raw.CMTag, tagBufferCount int, numberOfTagsCopied *int) int {
-	return raw.CMTagCollectionGetTagsWithCategory(tagCollection, raw.CMTagCategory(category), tagBuffer, tagBufferCount, numberOfTagsCopied)
-}
+var _fnCMBlockBufferGetTypeID func() int
 
-// CMTagCollectionGetTagsWithFilterFunction calls [raw.CMTagCollectionGetTagsWithFilterFunction] (C function CMTagCollectionGetTagsWithFilterFunction).
-func CMTagCollectionGetTagsWithFilterFunction(tagCollection unsafe.Pointer, tagBuffer *raw.CMTag, tagBufferCount int, numberOfTagsCopied *int, filter unsafe.Pointer, context_ unsafe.Pointer) int {
-	return raw.CMTagCollectionGetTagsWithFilterFunction(tagCollection, tagBuffer, tagBufferCount, numberOfTagsCopied, filter, context_)
+// CMBlockBufferGetTypeID calls the CoreMedia framework function CMBlockBufferGetTypeID.
+func CMBlockBufferGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBlockBufferGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBlockBufferGetTypeID, _lib, "CMBlockBufferGetTypeID")
+	}
+	return _fnCMBlockBufferGetTypeID()
 }
 
-// CMTagCollectionGetTypeID calls [raw.CMTagCollectionGetTypeID] (C function CMTagCollectionGetTypeID).
-func CMTagCollectionGetTypeID() uint {
-	return raw.CMTagCollectionGetTypeID()
-}
-
-// CMTagCollectionIsEmpty calls [raw.CMTagCollectionIsEmpty] (C function CMTagCollectionIsEmpty).
-func CMTagCollectionIsEmpty(tagCollection unsafe.Pointer) uint8 {
-	return raw.CMTagCollectionIsEmpty(tagCollection)
-}
-
-// CMTagCollectionRemoveAllTags calls [raw.CMTagCollectionRemoveAllTags] (C function CMTagCollectionRemoveAllTags).
-func CMTagCollectionRemoveAllTags(tagCollection unsafe.Pointer) int {
-	return raw.CMTagCollectionRemoveAllTags(tagCollection)
-}
-
-// CMTagCollectionRemoveAllTagsOfCategory calls [raw.CMTagCollectionRemoveAllTagsOfCategory] (C function CMTagCollectionRemoveAllTagsOfCategory).
-func CMTagCollectionRemoveAllTagsOfCategory(tagCollection unsafe.Pointer, category CMTagCategory) int {
-	return raw.CMTagCollectionRemoveAllTagsOfCategory(tagCollection, raw.CMTagCategory(category))
-}
-
-// CMTagCollectionRemoveTag calls [raw.CMTagCollectionRemoveTag] (C function CMTagCollectionRemoveTag).
-func CMTagCollectionRemoveTag(tagCollection unsafe.Pointer, tagToRemove raw.CMTag) int {
-	return raw.CMTagCollectionRemoveTag(tagCollection, tagToRemove)
-}
-
-// CMTagCompare calls [raw.CMTagCompare] (C function CMTagCompare).
-func CMTagCompare(tag1 raw.CMTag, tag2 raw.CMTag) corefoundation.CFComparisonResult {
-	return raw.CMTagCompare(tag1, tag2)
-}
-
-// CMTagCopyAsDictionary calls [raw.CMTagCopyAsDictionary] (C function CMTagCopyAsDictionary).
-func CMTagCopyAsDictionary(tag raw.CMTag, allocator unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTagCopyAsDictionary(tag, allocator)
-}
-
-// CMTagCopyDescription calls [raw.CMTagCopyDescription] (C function CMTagCopyDescription).
-func CMTagCopyDescription(allocator unsafe.Pointer, tag raw.CMTag) unsafe.Pointer {
-	return raw.CMTagCopyDescription(allocator, tag)
-}
-
-// CMTagEqualToTag calls [raw.CMTagEqualToTag] (C function CMTagEqualToTag).
-func CMTagEqualToTag(tag1 raw.CMTag, tag2 raw.CMTag) uint8 {
-	return raw.CMTagEqualToTag(tag1, tag2)
-}
+var _fnCMBlockBufferIsEmpty func(objc.ID) uint8
 
-// CMTagGetCategory calls [raw.CMTagGetCategory] (C function CMTagGetCategory).
-func CMTagGetCategory(tag raw.CMTag) CMTagCategory {
-	return CMTagCategory(raw.CMTagGetCategory(tag))
+// CMBlockBufferIsEmpty calls the CoreMedia framework function CMBlockBufferIsEmpty.
+func CMBlockBufferIsEmpty(theBuffer obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBlockBufferIsEmpty == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBlockBufferIsEmpty, _lib, "CMBlockBufferIsEmpty")
+	}
+	return _fnCMBlockBufferIsEmpty(objref.IDOf(theBuffer))
 }
 
-// CMTagGetFlagsValue calls [raw.CMTagGetFlagsValue] (C function CMTagGetFlagsValue).
-func CMTagGetFlagsValue(tag raw.CMTag) uint64 {
-	return raw.CMTagGetFlagsValue(tag)
-}
+var _fnCMBlockBufferIsRangeContiguous func(objc.ID, int, int) uint8
 
-// CMTagGetFloat64Value calls [raw.CMTagGetFloat64Value] (C function CMTagGetFloat64Value).
-func CMTagGetFloat64Value(tag raw.CMTag) float64 {
-	return raw.CMTagGetFloat64Value(tag)
+// CMBlockBufferIsRangeContiguous calls the CoreMedia framework function CMBlockBufferIsRangeContiguous.
+func CMBlockBufferIsRangeContiguous(theBuffer obj.Object, offset int, length int) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBlockBufferIsRangeContiguous == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBlockBufferIsRangeContiguous, _lib, "CMBlockBufferIsRangeContiguous")
+	}
+	return _fnCMBlockBufferIsRangeContiguous(objref.IDOf(theBuffer), offset, length)
 }
 
-// CMTagGetOSTypeValue calls [raw.CMTagGetOSTypeValue] (C function CMTagGetOSTypeValue).
-func CMTagGetOSTypeValue(tag raw.CMTag) uint {
-	return raw.CMTagGetOSTypeValue(tag)
-}
+var _fnCMBufferQueueContainsEndOfData func(objc.ID) uint8
 
-// CMTagGetSInt64Value calls [raw.CMTagGetSInt64Value] (C function CMTagGetSInt64Value).
-func CMTagGetSInt64Value(tag raw.CMTag) int64 {
-	return raw.CMTagGetSInt64Value(tag)
+// CMBufferQueueContainsEndOfData calls the CoreMedia framework function CMBufferQueueContainsEndOfData.
+func CMBufferQueueContainsEndOfData(queue obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBufferQueueContainsEndOfData == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBufferQueueContainsEndOfData, _lib, "CMBufferQueueContainsEndOfData")
+	}
+	return _fnCMBufferQueueContainsEndOfData(objref.IDOf(queue))
 }
 
-// CMTagGetValue calls [raw.CMTagGetValue] (C function CMTagGetValue).
-func CMTagGetValue(tag raw.CMTag) uint64 {
-	return raw.CMTagGetValue(tag)
-}
+var _fnCMBufferQueueGetBufferCount func(objc.ID) int
 
-// CMTagGetValueDataType calls [raw.CMTagGetValueDataType] (C function CMTagGetValueDataType).
-func CMTagGetValueDataType(tag raw.CMTag) CMTagDataType {
-	return CMTagDataType(raw.CMTagGetValueDataType(tag))
+// CMBufferQueueGetBufferCount calls the CoreMedia framework function CMBufferQueueGetBufferCount.
+func CMBufferQueueGetBufferCount(queue obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBufferQueueGetBufferCount == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBufferQueueGetBufferCount, _lib, "CMBufferQueueGetBufferCount")
+	}
+	return _fnCMBufferQueueGetBufferCount(objref.IDOf(queue))
 }
 
-// CMTagHasCategory calls [raw.CMTagHasCategory] (C function CMTagHasCategory).
-func CMTagHasCategory(tag raw.CMTag, category CMTagCategory) uint8 {
-	return raw.CMTagHasCategory(tag, raw.CMTagCategory(category))
-}
+var _fnCMBufferQueueGetTotalSize func(objc.ID) int
 
-// CMTagHasFlagsValue calls [raw.CMTagHasFlagsValue] (C function CMTagHasFlagsValue).
-func CMTagHasFlagsValue(tag raw.CMTag) uint8 {
-	return raw.CMTagHasFlagsValue(tag)
+// CMBufferQueueGetTotalSize calls the CoreMedia framework function CMBufferQueueGetTotalSize.
+func CMBufferQueueGetTotalSize(queue obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBufferQueueGetTotalSize == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBufferQueueGetTotalSize, _lib, "CMBufferQueueGetTotalSize")
+	}
+	return _fnCMBufferQueueGetTotalSize(objref.IDOf(queue))
 }
 
-// CMTagHasFloat64Value calls [raw.CMTagHasFloat64Value] (C function CMTagHasFloat64Value).
-func CMTagHasFloat64Value(tag raw.CMTag) uint8 {
-	return raw.CMTagHasFloat64Value(tag)
-}
+var _fnCMBufferQueueGetTypeID func() int
 
-// CMTagHasOSTypeValue calls [raw.CMTagHasOSTypeValue] (C function CMTagHasOSTypeValue).
-func CMTagHasOSTypeValue(tag raw.CMTag) uint8 {
-	return raw.CMTagHasOSTypeValue(tag)
+// CMBufferQueueGetTypeID calls the CoreMedia framework function CMBufferQueueGetTypeID.
+func CMBufferQueueGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBufferQueueGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBufferQueueGetTypeID, _lib, "CMBufferQueueGetTypeID")
+	}
+	return _fnCMBufferQueueGetTypeID()
 }
 
-// CMTagHasSInt64Value calls [raw.CMTagHasSInt64Value] (C function CMTagHasSInt64Value).
-func CMTagHasSInt64Value(tag raw.CMTag) uint8 {
-	return raw.CMTagHasSInt64Value(tag)
-}
+var _fnCMBufferQueueIsAtEndOfData func(objc.ID) uint8
 
-// CMTagHash calls [raw.CMTagHash] (C function CMTagHash).
-func CMTagHash(tag raw.CMTag) uint {
-	return raw.CMTagHash(tag)
+// CMBufferQueueIsAtEndOfData calls the CoreMedia framework function CMBufferQueueIsAtEndOfData.
+func CMBufferQueueIsAtEndOfData(queue obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBufferQueueIsAtEndOfData == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBufferQueueIsAtEndOfData, _lib, "CMBufferQueueIsAtEndOfData")
+	}
+	return _fnCMBufferQueueIsAtEndOfData(objref.IDOf(queue))
 }
 
-// CMTagIsValid calls [raw.CMTagIsValid] (C function CMTagIsValid).
-func CMTagIsValid(tag raw.CMTag) uint8 {
-	return raw.CMTagIsValid(tag)
-}
+var _fnCMBufferQueueIsEmpty func(objc.ID) uint8
 
-// CMTagMakeFromDictionary calls [raw.CMTagMakeFromDictionary] (C function CMTagMakeFromDictionary).
-func CMTagMakeFromDictionary(dict unsafe.Pointer) raw.CMTag {
-	return raw.CMTagMakeFromDictionary(dict)
+// CMBufferQueueIsEmpty calls the CoreMedia framework function CMBufferQueueIsEmpty.
+func CMBufferQueueIsEmpty(queue obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBufferQueueIsEmpty == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBufferQueueIsEmpty, _lib, "CMBufferQueueIsEmpty")
+	}
+	return _fnCMBufferQueueIsEmpty(objref.IDOf(queue))
 }
 
-// CMTagMakeWithFlagsValue calls [raw.CMTagMakeWithFlagsValue] (C function CMTagMakeWithFlagsValue).
-func CMTagMakeWithFlagsValue(category CMTagCategory, flagsForTag uint64) raw.CMTag {
-	return raw.CMTagMakeWithFlagsValue(raw.CMTagCategory(category), flagsForTag)
-}
+var _fnCMBufferQueueTestTrigger func(objc.ID, objc.ID) uint8
 
-// CMTagMakeWithFloat64Value calls [raw.CMTagMakeWithFloat64Value] (C function CMTagMakeWithFloat64Value).
-func CMTagMakeWithFloat64Value(category CMTagCategory, value float64) raw.CMTag {
-	return raw.CMTagMakeWithFloat64Value(raw.CMTagCategory(category), value)
+// CMBufferQueueTestTrigger calls the CoreMedia framework function CMBufferQueueTestTrigger.
+func CMBufferQueueTestTrigger(queue obj.Object, triggerToken obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBufferQueueTestTrigger == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBufferQueueTestTrigger, _lib, "CMBufferQueueTestTrigger")
+	}
+	return _fnCMBufferQueueTestTrigger(objref.IDOf(queue), objref.IDOf(triggerToken))
 }
 
-// CMTagMakeWithOSTypeValue calls [raw.CMTagMakeWithOSTypeValue] (C function CMTagMakeWithOSTypeValue).
-func CMTagMakeWithOSTypeValue(category CMTagCategory, value uint) raw.CMTag {
-	return raw.CMTagMakeWithOSTypeValue(raw.CMTagCategory(category), value)
-}
+var _fnCMClockGetHostTimeClock func() objc.ID
 
-// CMTagMakeWithSInt64Value calls [raw.CMTagMakeWithSInt64Value] (C function CMTagMakeWithSInt64Value).
-func CMTagMakeWithSInt64Value(category CMTagCategory, value int64) raw.CMTag {
-	return raw.CMTagMakeWithSInt64Value(raw.CMTagCategory(category), value)
+// CMClockGetHostTimeClock calls the CoreMedia framework function CMClockGetHostTimeClock.
+func CMClockGetHostTimeClock() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMClockGetHostTimeClock == nil {
+		ebipurego.RegisterLibFunc(&_fnCMClockGetHostTimeClock, _lib, "CMClockGetHostTimeClock")
+	}
+	_ret := _fnCMClockGetHostTimeClock()
+	return obj.Wrap(_ret)
 }
 
-// CMTaggedBufferGroupCreate calls [raw.CMTaggedBufferGroupCreate] (C function CMTaggedBufferGroupCreate).
-func CMTaggedBufferGroupCreate(allocator unsafe.Pointer, tagCollections unsafe.Pointer, buffers unsafe.Pointer, groupOut unsafe.Pointer) int {
-	return raw.CMTaggedBufferGroupCreate(allocator, tagCollections, buffers, groupOut)
-}
+var _fnCMClockGetTypeID func() int
 
-// CMTaggedBufferGroupCreateCombined calls [raw.CMTaggedBufferGroupCreateCombined] (C function CMTaggedBufferGroupCreateCombined).
-func CMTaggedBufferGroupCreateCombined(allocator unsafe.Pointer, taggedBufferGroups unsafe.Pointer, groupOut unsafe.Pointer) int {
-	return raw.CMTaggedBufferGroupCreateCombined(allocator, taggedBufferGroups, groupOut)
+// CMClockGetTypeID calls the CoreMedia framework function CMClockGetTypeID.
+func CMClockGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMClockGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCMClockGetTypeID, _lib, "CMClockGetTypeID")
+	}
+	return _fnCMClockGetTypeID()
 }
 
-// CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroup calls [raw.CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroup] (C function CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroup).
-func CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroup(allocator unsafe.Pointer, taggedBufferGroup unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroup(allocator, taggedBufferGroup, formatDescriptionOut)
-}
+var _fnCMClockInvalidate func(objc.ID)
 
-// CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroupWithExtensions calls [raw.CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroupWithExtensions] (C function CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroupWithExtensions).
-func CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroupWithExtensions(allocator unsafe.Pointer, taggedBufferGroup unsafe.Pointer, extensions unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroupWithExtensions(allocator, taggedBufferGroup, extensions, formatDescriptionOut)
+// CMClockInvalidate calls the CoreMedia framework function CMClockInvalidate.
+func CMClockInvalidate(clock obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMClockInvalidate == nil {
+		ebipurego.RegisterLibFunc(&_fnCMClockInvalidate, _lib, "CMClockInvalidate")
+	}
+	_fnCMClockInvalidate(objref.IDOf(clock))
 }
 
-// CMTaggedBufferGroupFormatDescriptionMatchesTaggedBufferGroup calls [raw.CMTaggedBufferGroupFormatDescriptionMatchesTaggedBufferGroup] (C function CMTaggedBufferGroupFormatDescriptionMatchesTaggedBufferGroup).
-func CMTaggedBufferGroupFormatDescriptionMatchesTaggedBufferGroup(desc unsafe.Pointer, taggedBufferGroup unsafe.Pointer) uint8 {
-	return raw.CMTaggedBufferGroupFormatDescriptionMatchesTaggedBufferGroup(desc, taggedBufferGroup)
-}
+var _fnCMClockMightDrift func(objc.ID, objc.ID) uint8
 
-// CMTaggedBufferGroupGetCMSampleBufferAtIndex calls [raw.CMTaggedBufferGroupGetCMSampleBufferAtIndex] (C function CMTaggedBufferGroupGetCMSampleBufferAtIndex).
-func CMTaggedBufferGroupGetCMSampleBufferAtIndex(group unsafe.Pointer, index int) unsafe.Pointer {
-	return raw.CMTaggedBufferGroupGetCMSampleBufferAtIndex(group, index)
+// CMClockMightDrift calls the CoreMedia framework function CMClockMightDrift.
+func CMClockMightDrift(clock obj.Object, otherClock obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMClockMightDrift == nil {
+		ebipurego.RegisterLibFunc(&_fnCMClockMightDrift, _lib, "CMClockMightDrift")
+	}
+	return _fnCMClockMightDrift(objref.IDOf(clock), objref.IDOf(otherClock))
 }
 
-// CMTaggedBufferGroupGetCMSampleBufferForTag calls [raw.CMTaggedBufferGroupGetCMSampleBufferForTag] (C function CMTaggedBufferGroupGetCMSampleBufferForTag).
-func CMTaggedBufferGroupGetCMSampleBufferForTag(group unsafe.Pointer, tag raw.CMTag, indexOut *int) unsafe.Pointer {
-	return raw.CMTaggedBufferGroupGetCMSampleBufferForTag(group, tag, indexOut)
-}
+var _fnCMFormatDescriptionEqual func(objc.ID, objc.ID) uint8
 
-// CMTaggedBufferGroupGetCMSampleBufferForTagCollection calls [raw.CMTaggedBufferGroupGetCMSampleBufferForTagCollection] (C function CMTaggedBufferGroupGetCMSampleBufferForTagCollection).
-func CMTaggedBufferGroupGetCMSampleBufferForTagCollection(group unsafe.Pointer, tagCollection unsafe.Pointer, indexOut *int) unsafe.Pointer {
-	return raw.CMTaggedBufferGroupGetCMSampleBufferForTagCollection(group, tagCollection, indexOut)
+// CMFormatDescriptionEqual calls the CoreMedia framework function CMFormatDescriptionEqual.
+func CMFormatDescriptionEqual(formatDescription obj.Object, otherFormatDescription obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMFormatDescriptionEqual == nil {
+		ebipurego.RegisterLibFunc(&_fnCMFormatDescriptionEqual, _lib, "CMFormatDescriptionEqual")
+	}
+	return _fnCMFormatDescriptionEqual(objref.IDOf(formatDescription), objref.IDOf(otherFormatDescription))
 }
 
-// CMTaggedBufferGroupGetCVPixelBufferAtIndex calls [raw.CMTaggedBufferGroupGetCVPixelBufferAtIndex] (C function CMTaggedBufferGroupGetCVPixelBufferAtIndex).
-func CMTaggedBufferGroupGetCVPixelBufferAtIndex(group unsafe.Pointer, index int) unsafe.Pointer {
-	return raw.CMTaggedBufferGroupGetCVPixelBufferAtIndex(group, index)
-}
+var _fnCMFormatDescriptionEqualIgnoringExtensionKeys func(objc.ID, objc.ID, objc.ID, objc.ID) uint8
 
-// CMTaggedBufferGroupGetCVPixelBufferForTag calls [raw.CMTaggedBufferGroupGetCVPixelBufferForTag] (C function CMTaggedBufferGroupGetCVPixelBufferForTag).
-func CMTaggedBufferGroupGetCVPixelBufferForTag(group unsafe.Pointer, tag raw.CMTag, indexOut *int) unsafe.Pointer {
-	return raw.CMTaggedBufferGroupGetCVPixelBufferForTag(group, tag, indexOut)
+// CMFormatDescriptionEqualIgnoringExtensionKeys calls the CoreMedia framework function CMFormatDescriptionEqualIgnoringExtensionKeys.
+func CMFormatDescriptionEqualIgnoringExtensionKeys(formatDescription obj.Object, otherFormatDescription obj.Object, formatDescriptionExtensionKeysToIgnore obj.Object, sampleDescriptionExtensionAtomKeysToIgnore obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMFormatDescriptionEqualIgnoringExtensionKeys == nil {
+		ebipurego.RegisterLibFunc(&_fnCMFormatDescriptionEqualIgnoringExtensionKeys, _lib, "CMFormatDescriptionEqualIgnoringExtensionKeys")
+	}
+	return _fnCMFormatDescriptionEqualIgnoringExtensionKeys(objref.IDOf(formatDescription), objref.IDOf(otherFormatDescription), objref.IDOf(formatDescriptionExtensionKeysToIgnore), objref.IDOf(sampleDescriptionExtensionAtomKeysToIgnore))
 }
 
-// CMTaggedBufferGroupGetCVPixelBufferForTagCollection calls [raw.CMTaggedBufferGroupGetCVPixelBufferForTagCollection] (C function CMTaggedBufferGroupGetCVPixelBufferForTagCollection).
-func CMTaggedBufferGroupGetCVPixelBufferForTagCollection(group unsafe.Pointer, tagCollection unsafe.Pointer, indexOut *int) unsafe.Pointer {
-	return raw.CMTaggedBufferGroupGetCVPixelBufferForTagCollection(group, tagCollection, indexOut)
-}
+var _fnCMFormatDescriptionGetExtension func(objc.ID, objc.ID) objc.ID
 
-// CMTaggedBufferGroupGetCount calls [raw.CMTaggedBufferGroupGetCount] (C function CMTaggedBufferGroupGetCount).
-func CMTaggedBufferGroupGetCount(group unsafe.Pointer) int {
-	return raw.CMTaggedBufferGroupGetCount(group)
+// CMFormatDescriptionGetExtension calls the CoreMedia framework function CMFormatDescriptionGetExtension.
+func CMFormatDescriptionGetExtension(desc obj.Object, extensionKey obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMFormatDescriptionGetExtension == nil {
+		ebipurego.RegisterLibFunc(&_fnCMFormatDescriptionGetExtension, _lib, "CMFormatDescriptionGetExtension")
+	}
+	_ret := _fnCMFormatDescriptionGetExtension(objref.IDOf(desc), objref.IDOf(extensionKey))
+	return obj.Wrap(_ret)
 }
 
-// CMTaggedBufferGroupGetNumberOfMatchesForTagCollection calls [raw.CMTaggedBufferGroupGetNumberOfMatchesForTagCollection] (C function CMTaggedBufferGroupGetNumberOfMatchesForTagCollection).
-func CMTaggedBufferGroupGetNumberOfMatchesForTagCollection(group unsafe.Pointer, tagCollection unsafe.Pointer) int {
-	return raw.CMTaggedBufferGroupGetNumberOfMatchesForTagCollection(group, tagCollection)
-}
+var _fnCMFormatDescriptionGetExtensions func(objc.ID) objc.ID
 
-// CMTaggedBufferGroupGetTagCollectionAtIndex calls [raw.CMTaggedBufferGroupGetTagCollectionAtIndex] (C function CMTaggedBufferGroupGetTagCollectionAtIndex).
-func CMTaggedBufferGroupGetTagCollectionAtIndex(group unsafe.Pointer, index int) unsafe.Pointer {
-	return raw.CMTaggedBufferGroupGetTagCollectionAtIndex(group, index)
+// CMFormatDescriptionGetExtensions calls the CoreMedia framework function CMFormatDescriptionGetExtensions.
+func CMFormatDescriptionGetExtensions(desc obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMFormatDescriptionGetExtensions == nil {
+		ebipurego.RegisterLibFunc(&_fnCMFormatDescriptionGetExtensions, _lib, "CMFormatDescriptionGetExtensions")
+	}
+	_ret := _fnCMFormatDescriptionGetExtensions(objref.IDOf(desc))
+	return obj.Wrap(_ret)
 }
 
-// CMTaggedBufferGroupGetTypeID calls [raw.CMTaggedBufferGroupGetTypeID] (C function CMTaggedBufferGroupGetTypeID).
-func CMTaggedBufferGroupGetTypeID() uint {
-	return raw.CMTaggedBufferGroupGetTypeID()
-}
+var _fnCMFormatDescriptionGetMediaSubType func(objc.ID) int
 
-// CMTextFormatDescriptionCopyAsBigEndianTextDescriptionBlockBuffer calls [raw.CMTextFormatDescriptionCopyAsBigEndianTextDescriptionBlockBuffer] (C function CMTextFormatDescriptionCopyAsBigEndianTextDescriptionBlockBuffer).
-func CMTextFormatDescriptionCopyAsBigEndianTextDescriptionBlockBuffer(allocator unsafe.Pointer, textFormatDescription unsafe.Pointer, flavor unsafe.Pointer, blockBufferOut unsafe.Pointer) int {
-	return raw.CMTextFormatDescriptionCopyAsBigEndianTextDescriptionBlockBuffer(allocator, textFormatDescription, flavor, blockBufferOut)
+// CMFormatDescriptionGetMediaSubType calls the CoreMedia framework function CMFormatDescriptionGetMediaSubType.
+func CMFormatDescriptionGetMediaSubType(desc obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMFormatDescriptionGetMediaSubType == nil {
+		ebipurego.RegisterLibFunc(&_fnCMFormatDescriptionGetMediaSubType, _lib, "CMFormatDescriptionGetMediaSubType")
+	}
+	return _fnCMFormatDescriptionGetMediaSubType(objref.IDOf(desc))
 }
 
-// CMTextFormatDescriptionCreateFromBigEndianTextDescriptionBlockBuffer calls [raw.CMTextFormatDescriptionCreateFromBigEndianTextDescriptionBlockBuffer] (C function CMTextFormatDescriptionCreateFromBigEndianTextDescriptionBlockBuffer).
-func CMTextFormatDescriptionCreateFromBigEndianTextDescriptionBlockBuffer(allocator unsafe.Pointer, textDescriptionBlockBuffer unsafe.Pointer, flavor unsafe.Pointer, mediaType uint, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMTextFormatDescriptionCreateFromBigEndianTextDescriptionBlockBuffer(allocator, textDescriptionBlockBuffer, flavor, mediaType, formatDescriptionOut)
-}
+var _fnCMFormatDescriptionGetMediaType func(objc.ID) int
 
-// CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData calls [raw.CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData] (C function CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData).
-func CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData(allocator unsafe.Pointer, textDescriptionData *uint8, size uint, flavor unsafe.Pointer, mediaType uint, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMTextFormatDescriptionCreateFromBigEndianTextDescriptionData(allocator, textDescriptionData, size, flavor, mediaType, formatDescriptionOut)
+// CMFormatDescriptionGetMediaType calls the CoreMedia framework function CMFormatDescriptionGetMediaType.
+func CMFormatDescriptionGetMediaType(desc obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMFormatDescriptionGetMediaType == nil {
+		ebipurego.RegisterLibFunc(&_fnCMFormatDescriptionGetMediaType, _lib, "CMFormatDescriptionGetMediaType")
+	}
+	return _fnCMFormatDescriptionGetMediaType(objref.IDOf(desc))
 }
 
-// CMTextFormatDescriptionGetDefaultStyle calls [raw.CMTextFormatDescriptionGetDefaultStyle] (C function CMTextFormatDescriptionGetDefaultStyle).
-func CMTextFormatDescriptionGetDefaultStyle(desc unsafe.Pointer, localFontIDOut *uint16, boldOut *uint8, italicOut *uint8, underlineOut *uint8, fontSizeOut *float64, colorComponentsOut *float64) int {
-	return raw.CMTextFormatDescriptionGetDefaultStyle(desc, localFontIDOut, boldOut, italicOut, underlineOut, fontSizeOut, colorComponentsOut)
-}
+var _fnCMFormatDescriptionGetTypeID func() int
 
-// CMTextFormatDescriptionGetDefaultTextBox calls [raw.CMTextFormatDescriptionGetDefaultTextBox] (C function CMTextFormatDescriptionGetDefaultTextBox).
-func CMTextFormatDescriptionGetDefaultTextBox(desc unsafe.Pointer, originIsAtTopLeft uint8, heightOfTextTrack float64, defaultTextBoxOut *corefoundation.CGRect) int {
-	return raw.CMTextFormatDescriptionGetDefaultTextBox(desc, originIsAtTopLeft, heightOfTextTrack, defaultTextBoxOut)
+// CMFormatDescriptionGetTypeID calls the CoreMedia framework function CMFormatDescriptionGetTypeID.
+func CMFormatDescriptionGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMFormatDescriptionGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCMFormatDescriptionGetTypeID, _lib, "CMFormatDescriptionGetTypeID")
+	}
+	return _fnCMFormatDescriptionGetTypeID()
 }
 
-// CMTextFormatDescriptionGetDisplayFlags calls [raw.CMTextFormatDescriptionGetDisplayFlags] (C function CMTextFormatDescriptionGetDisplayFlags).
-func CMTextFormatDescriptionGetDisplayFlags(desc unsafe.Pointer, displayFlagsOut *uint32) int {
-	return raw.CMTextFormatDescriptionGetDisplayFlags(desc, displayFlagsOut)
-}
+var _fnCMMemoryPoolCreate func(objc.ID) objc.ID
 
-// CMTextFormatDescriptionGetFontName calls [raw.CMTextFormatDescriptionGetFontName] (C function CMTextFormatDescriptionGetFontName).
-func CMTextFormatDescriptionGetFontName(desc unsafe.Pointer, localFontID uint16, fontNameOut unsafe.Pointer) int {
-	return raw.CMTextFormatDescriptionGetFontName(desc, localFontID, fontNameOut)
+// CMMemoryPoolCreate calls the CoreMedia framework function CMMemoryPoolCreate.
+func CMMemoryPoolCreate(options obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMMemoryPoolCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnCMMemoryPoolCreate, _lib, "CMMemoryPoolCreate")
+	}
+	_ret := _fnCMMemoryPoolCreate(objref.IDOf(options))
+	return obj.Wrap(_ret)
 }
 
-// CMTextFormatDescriptionGetJustification calls [raw.CMTextFormatDescriptionGetJustification] (C function CMTextFormatDescriptionGetJustification).
-func CMTextFormatDescriptionGetJustification(desc unsafe.Pointer, horizontaJustificationlOut *int8, verticalJustificationOut *int8) int {
-	return raw.CMTextFormatDescriptionGetJustification(desc, horizontaJustificationlOut, verticalJustificationOut)
-}
+var _fnCMMemoryPoolFlush func(objc.ID)
 
-// CMTimeAbsoluteValue calls [raw.CMTimeAbsoluteValue] (C function CMTimeAbsoluteValue).
-func CMTimeAbsoluteValue(time_ raw.CMTime) raw.CMTime {
-	return raw.CMTimeAbsoluteValue(time_)
+// CMMemoryPoolFlush calls the CoreMedia framework function CMMemoryPoolFlush.
+func CMMemoryPoolFlush(pool obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMMemoryPoolFlush == nil {
+		ebipurego.RegisterLibFunc(&_fnCMMemoryPoolFlush, _lib, "CMMemoryPoolFlush")
+	}
+	_fnCMMemoryPoolFlush(objref.IDOf(pool))
 }
 
-// CMTimeAdd calls [raw.CMTimeAdd] (C function CMTimeAdd).
-func CMTimeAdd(lhs raw.CMTime, rhs raw.CMTime) raw.CMTime {
-	return raw.CMTimeAdd(lhs, rhs)
-}
+var _fnCMMemoryPoolGetAllocator func(objc.ID) objc.ID
 
-// CMTimeClampToRange calls [raw.CMTimeClampToRange] (C function CMTimeClampToRange).
-func CMTimeClampToRange(time_ raw.CMTime, range_ raw.CMTimeRange) raw.CMTime {
-	return raw.CMTimeClampToRange(time_, range_)
+// CMMemoryPoolGetAllocator calls the CoreMedia framework function CMMemoryPoolGetAllocator.
+func CMMemoryPoolGetAllocator(pool obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMMemoryPoolGetAllocator == nil {
+		ebipurego.RegisterLibFunc(&_fnCMMemoryPoolGetAllocator, _lib, "CMMemoryPoolGetAllocator")
+	}
+	_ret := _fnCMMemoryPoolGetAllocator(objref.IDOf(pool))
+	return obj.Wrap(_ret)
 }
 
-// CMTimeCodeFormatDescriptionCopyAsBigEndianTimeCodeDescriptionBlockBuffer calls [raw.CMTimeCodeFormatDescriptionCopyAsBigEndianTimeCodeDescriptionBlockBuffer] (C function CMTimeCodeFormatDescriptionCopyAsBigEndianTimeCodeDescriptionBlockBuffer).
-func CMTimeCodeFormatDescriptionCopyAsBigEndianTimeCodeDescriptionBlockBuffer(allocator unsafe.Pointer, timeCodeFormatDescription unsafe.Pointer, flavor unsafe.Pointer, blockBufferOut unsafe.Pointer) int {
-	return raw.CMTimeCodeFormatDescriptionCopyAsBigEndianTimeCodeDescriptionBlockBuffer(allocator, timeCodeFormatDescription, flavor, blockBufferOut)
-}
+var _fnCMMemoryPoolGetTypeID func() int
 
-// CMTimeCodeFormatDescriptionCreate calls [raw.CMTimeCodeFormatDescriptionCreate] (C function CMTimeCodeFormatDescriptionCreate).
-func CMTimeCodeFormatDescriptionCreate(allocator unsafe.Pointer, timeCodeFormatType uint, frameDuration raw.CMTime, frameQuanta uint32, flags uint32, extensions unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMTimeCodeFormatDescriptionCreate(allocator, timeCodeFormatType, frameDuration, frameQuanta, flags, extensions, formatDescriptionOut)
+// CMMemoryPoolGetTypeID calls the CoreMedia framework function CMMemoryPoolGetTypeID.
+func CMMemoryPoolGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMMemoryPoolGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCMMemoryPoolGetTypeID, _lib, "CMMemoryPoolGetTypeID")
+	}
+	return _fnCMMemoryPoolGetTypeID()
 }
 
-// CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionBlockBuffer calls [raw.CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionBlockBuffer] (C function CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionBlockBuffer).
-func CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionBlockBuffer(allocator unsafe.Pointer, timeCodeDescriptionBlockBuffer unsafe.Pointer, flavor unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionBlockBuffer(allocator, timeCodeDescriptionBlockBuffer, flavor, formatDescriptionOut)
-}
+var _fnCMMemoryPoolInvalidate func(objc.ID)
 
-// CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData calls [raw.CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData] (C function CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData).
-func CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData(allocator unsafe.Pointer, timeCodeDescriptionData *uint8, size uint, flavor unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMTimeCodeFormatDescriptionCreateFromBigEndianTimeCodeDescriptionData(allocator, timeCodeDescriptionData, size, flavor, formatDescriptionOut)
+// CMMemoryPoolInvalidate calls the CoreMedia framework function CMMemoryPoolInvalidate.
+func CMMemoryPoolInvalidate(pool obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMMemoryPoolInvalidate == nil {
+		ebipurego.RegisterLibFunc(&_fnCMMemoryPoolInvalidate, _lib, "CMMemoryPoolInvalidate")
+	}
+	_fnCMMemoryPoolInvalidate(objref.IDOf(pool))
 }
 
-// CMTimeCodeFormatDescriptionGetFrameDuration calls [raw.CMTimeCodeFormatDescriptionGetFrameDuration] (C function CMTimeCodeFormatDescriptionGetFrameDuration).
-func CMTimeCodeFormatDescriptionGetFrameDuration(timeCodeFormatDescription unsafe.Pointer) raw.CMTime {
-	return raw.CMTimeCodeFormatDescriptionGetFrameDuration(timeCodeFormatDescription)
-}
+var _fnCMMetadataDataTypeRegistryDataTypeConformsToDataType func(objc.ID, objc.ID) uint8
 
-// CMTimeCodeFormatDescriptionGetFrameQuanta calls [raw.CMTimeCodeFormatDescriptionGetFrameQuanta] (C function CMTimeCodeFormatDescriptionGetFrameQuanta).
-func CMTimeCodeFormatDescriptionGetFrameQuanta(timeCodeFormatDescription unsafe.Pointer) uint32 {
-	return raw.CMTimeCodeFormatDescriptionGetFrameQuanta(timeCodeFormatDescription)
+// CMMetadataDataTypeRegistryDataTypeConformsToDataType calls the CoreMedia framework function CMMetadataDataTypeRegistryDataTypeConformsToDataType.
+func CMMetadataDataTypeRegistryDataTypeConformsToDataType(dataType obj.Object, conformsToDataType obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMMetadataDataTypeRegistryDataTypeConformsToDataType == nil {
+		ebipurego.RegisterLibFunc(&_fnCMMetadataDataTypeRegistryDataTypeConformsToDataType, _lib, "CMMetadataDataTypeRegistryDataTypeConformsToDataType")
+	}
+	return _fnCMMetadataDataTypeRegistryDataTypeConformsToDataType(objref.IDOf(dataType), objref.IDOf(conformsToDataType))
 }
 
-// CMTimeCodeFormatDescriptionGetTimeCodeFlags calls [raw.CMTimeCodeFormatDescriptionGetTimeCodeFlags] (C function CMTimeCodeFormatDescriptionGetTimeCodeFlags).
-func CMTimeCodeFormatDescriptionGetTimeCodeFlags(desc unsafe.Pointer) uint32 {
-	return raw.CMTimeCodeFormatDescriptionGetTimeCodeFlags(desc)
-}
+var _fnCMMetadataDataTypeRegistryDataTypeIsBaseDataType func(objc.ID) uint8
 
-// CMTimeCompare calls [raw.CMTimeCompare] (C function CMTimeCompare).
-func CMTimeCompare(time1 raw.CMTime, time2 raw.CMTime) int32 {
-	return raw.CMTimeCompare(time1, time2)
+// CMMetadataDataTypeRegistryDataTypeIsBaseDataType calls the CoreMedia framework function CMMetadataDataTypeRegistryDataTypeIsBaseDataType.
+func CMMetadataDataTypeRegistryDataTypeIsBaseDataType(dataType obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMMetadataDataTypeRegistryDataTypeIsBaseDataType == nil {
+		ebipurego.RegisterLibFunc(&_fnCMMetadataDataTypeRegistryDataTypeIsBaseDataType, _lib, "CMMetadataDataTypeRegistryDataTypeIsBaseDataType")
+	}
+	return _fnCMMetadataDataTypeRegistryDataTypeIsBaseDataType(objref.IDOf(dataType))
 }
 
-// CMTimeConvertScale calls [raw.CMTimeConvertScale] (C function CMTimeConvertScale).
-func CMTimeConvertScale(time_ raw.CMTime, newTimescale int32, method CMTimeRoundingMethod) raw.CMTime {
-	return raw.CMTimeConvertScale(time_, newTimescale, raw.CMTimeRoundingMethod(method))
-}
+var _fnCMMetadataDataTypeRegistryDataTypeIsRegistered func(objc.ID) uint8
 
-// CMTimeCopyAsDictionary calls [raw.CMTimeCopyAsDictionary] (C function CMTimeCopyAsDictionary).
-func CMTimeCopyAsDictionary(time_ raw.CMTime, allocator unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTimeCopyAsDictionary(time_, allocator)
+// CMMetadataDataTypeRegistryDataTypeIsRegistered calls the CoreMedia framework function CMMetadataDataTypeRegistryDataTypeIsRegistered.
+func CMMetadataDataTypeRegistryDataTypeIsRegistered(dataType obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMMetadataDataTypeRegistryDataTypeIsRegistered == nil {
+		ebipurego.RegisterLibFunc(&_fnCMMetadataDataTypeRegistryDataTypeIsRegistered, _lib, "CMMetadataDataTypeRegistryDataTypeIsRegistered")
+	}
+	return _fnCMMetadataDataTypeRegistryDataTypeIsRegistered(objref.IDOf(dataType))
 }
 
-// CMTimeCopyDescription calls [raw.CMTimeCopyDescription] (C function CMTimeCopyDescription).
-func CMTimeCopyDescription(allocator unsafe.Pointer, time_ raw.CMTime) unsafe.Pointer {
-	return raw.CMTimeCopyDescription(allocator, time_)
-}
+var _fnCMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType func(objc.ID) objc.ID
 
-// CMTimeFoldIntoRange calls [raw.CMTimeFoldIntoRange] (C function CMTimeFoldIntoRange).
-func CMTimeFoldIntoRange(time_ raw.CMTime, foldRange raw.CMTimeRange) raw.CMTime {
-	return raw.CMTimeFoldIntoRange(time_, foldRange)
+// CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType calls the CoreMedia framework function CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType.
+func CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType(dataType obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType == nil {
+		ebipurego.RegisterLibFunc(&_fnCMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType, _lib, "CMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType")
+	}
+	_ret := _fnCMMetadataDataTypeRegistryGetBaseDataTypeForConformingDataType(objref.IDOf(dataType))
+	return obj.Wrap(_ret)
 }
 
-// CMTimeGetSeconds calls [raw.CMTimeGetSeconds] (C function CMTimeGetSeconds).
-func CMTimeGetSeconds(time_ raw.CMTime) float64 {
-	return raw.CMTimeGetSeconds(time_)
-}
+var _fnCMMetadataDataTypeRegistryGetBaseDataTypes func() objc.ID
 
-// CMTimeMake calls [raw.CMTimeMake] (C function CMTimeMake).
-func CMTimeMake(value int64, timescale int32) raw.CMTime {
-	return raw.CMTimeMake(value, timescale)
+// CMMetadataDataTypeRegistryGetBaseDataTypes calls the CoreMedia framework function CMMetadataDataTypeRegistryGetBaseDataTypes.
+func CMMetadataDataTypeRegistryGetBaseDataTypes() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMMetadataDataTypeRegistryGetBaseDataTypes == nil {
+		ebipurego.RegisterLibFunc(&_fnCMMetadataDataTypeRegistryGetBaseDataTypes, _lib, "CMMetadataDataTypeRegistryGetBaseDataTypes")
+	}
+	_ret := _fnCMMetadataDataTypeRegistryGetBaseDataTypes()
+	return obj.Wrap(_ret)
 }
 
-// CMTimeMakeFromDictionary calls [raw.CMTimeMakeFromDictionary] (C function CMTimeMakeFromDictionary).
-func CMTimeMakeFromDictionary(dictionaryRepresentation unsafe.Pointer) raw.CMTime {
-	return raw.CMTimeMakeFromDictionary(dictionaryRepresentation)
-}
+var _fnCMMetadataDataTypeRegistryGetConformingDataTypes func(objc.ID) objc.ID
 
-// CMTimeMakeWithEpoch calls [raw.CMTimeMakeWithEpoch] (C function CMTimeMakeWithEpoch).
-func CMTimeMakeWithEpoch(value int64, timescale int32, epoch int64) raw.CMTime {
-	return raw.CMTimeMakeWithEpoch(value, timescale, epoch)
+// CMMetadataDataTypeRegistryGetConformingDataTypes calls the CoreMedia framework function CMMetadataDataTypeRegistryGetConformingDataTypes.
+func CMMetadataDataTypeRegistryGetConformingDataTypes(dataType obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMMetadataDataTypeRegistryGetConformingDataTypes == nil {
+		ebipurego.RegisterLibFunc(&_fnCMMetadataDataTypeRegistryGetConformingDataTypes, _lib, "CMMetadataDataTypeRegistryGetConformingDataTypes")
+	}
+	_ret := _fnCMMetadataDataTypeRegistryGetConformingDataTypes(objref.IDOf(dataType))
+	return obj.Wrap(_ret)
 }
 
-// CMTimeMakeWithSeconds calls [raw.CMTimeMakeWithSeconds] (C function CMTimeMakeWithSeconds).
-func CMTimeMakeWithSeconds(seconds float64, preferredTimescale int32) raw.CMTime {
-	return raw.CMTimeMakeWithSeconds(seconds, preferredTimescale)
-}
+var _fnCMMetadataDataTypeRegistryGetDataTypeDescription func(objc.ID) objc.ID
 
-// CMTimeMapDurationFromRangeToRange calls [raw.CMTimeMapDurationFromRangeToRange] (C function CMTimeMapDurationFromRangeToRange).
-func CMTimeMapDurationFromRangeToRange(dur raw.CMTime, fromRange raw.CMTimeRange, toRange raw.CMTimeRange) raw.CMTime {
-	return raw.CMTimeMapDurationFromRangeToRange(dur, fromRange, toRange)
+// CMMetadataDataTypeRegistryGetDataTypeDescription calls the CoreMedia framework function CMMetadataDataTypeRegistryGetDataTypeDescription.
+func CMMetadataDataTypeRegistryGetDataTypeDescription(dataType obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMMetadataDataTypeRegistryGetDataTypeDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnCMMetadataDataTypeRegistryGetDataTypeDescription, _lib, "CMMetadataDataTypeRegistryGetDataTypeDescription")
+	}
+	_ret := _fnCMMetadataDataTypeRegistryGetDataTypeDescription(objref.IDOf(dataType))
+	return obj.Wrap(_ret)
 }
 
-// CMTimeMapTimeFromRangeToRange calls [raw.CMTimeMapTimeFromRangeToRange] (C function CMTimeMapTimeFromRangeToRange).
-func CMTimeMapTimeFromRangeToRange(t raw.CMTime, fromRange raw.CMTimeRange, toRange raw.CMTimeRange) raw.CMTime {
-	return raw.CMTimeMapTimeFromRangeToRange(t, fromRange, toRange)
-}
+var _fnCMSampleBufferDataIsReady func(objc.ID) uint8
 
-// CMTimeMappingCopyAsDictionary calls [raw.CMTimeMappingCopyAsDictionary] (C function CMTimeMappingCopyAsDictionary).
-func CMTimeMappingCopyAsDictionary(mapping raw.CMTimeMapping, allocator unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTimeMappingCopyAsDictionary(mapping, allocator)
+// CMSampleBufferDataIsReady calls the CoreMedia framework function CMSampleBufferDataIsReady.
+func CMSampleBufferDataIsReady(sbuf obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferDataIsReady == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferDataIsReady, _lib, "CMSampleBufferDataIsReady")
+	}
+	return _fnCMSampleBufferDataIsReady(objref.IDOf(sbuf))
 }
 
-// CMTimeMappingCopyDescription calls [raw.CMTimeMappingCopyDescription] (C function CMTimeMappingCopyDescription).
-func CMTimeMappingCopyDescription(allocator unsafe.Pointer, mapping raw.CMTimeMapping) unsafe.Pointer {
-	return raw.CMTimeMappingCopyDescription(allocator, mapping)
-}
+var _fnCMSampleBufferGetDataBuffer func(objc.ID) objc.ID
 
-// CMTimeMappingMake calls [raw.CMTimeMappingMake] (C function CMTimeMappingMake).
-func CMTimeMappingMake(source raw.CMTimeRange, target raw.CMTimeRange) raw.CMTimeMapping {
-	return raw.CMTimeMappingMake(source, target)
+// CMSampleBufferGetDataBuffer calls the CoreMedia framework function CMSampleBufferGetDataBuffer.
+func CMSampleBufferGetDataBuffer(sbuf obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferGetDataBuffer == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferGetDataBuffer, _lib, "CMSampleBufferGetDataBuffer")
+	}
+	_ret := _fnCMSampleBufferGetDataBuffer(objref.IDOf(sbuf))
+	return obj.Wrap(_ret)
 }
 
-// CMTimeMappingMakeEmpty calls [raw.CMTimeMappingMakeEmpty] (C function CMTimeMappingMakeEmpty).
-func CMTimeMappingMakeEmpty(target raw.CMTimeRange) raw.CMTimeMapping {
-	return raw.CMTimeMappingMakeEmpty(target)
-}
+var _fnCMSampleBufferGetFormatDescription func(objc.ID) objc.ID
 
-// CMTimeMappingMakeFromDictionary calls [raw.CMTimeMappingMakeFromDictionary] (C function CMTimeMappingMakeFromDictionary).
-func CMTimeMappingMakeFromDictionary(dictionaryRepresentation unsafe.Pointer) raw.CMTimeMapping {
-	return raw.CMTimeMappingMakeFromDictionary(dictionaryRepresentation)
+// CMSampleBufferGetFormatDescription calls the CoreMedia framework function CMSampleBufferGetFormatDescription.
+func CMSampleBufferGetFormatDescription(sbuf obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferGetFormatDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferGetFormatDescription, _lib, "CMSampleBufferGetFormatDescription")
+	}
+	_ret := _fnCMSampleBufferGetFormatDescription(objref.IDOf(sbuf))
+	return obj.Wrap(_ret)
 }
 
-// CMTimeMappingShow calls [raw.CMTimeMappingShow] (C function CMTimeMappingShow).
-func CMTimeMappingShow(mapping raw.CMTimeMapping) {
-	raw.CMTimeMappingShow(mapping)
-}
+var _fnCMSampleBufferGetNumSamples func(objc.ID) int
 
-// CMTimeMaximum calls [raw.CMTimeMaximum] (C function CMTimeMaximum).
-func CMTimeMaximum(time1 raw.CMTime, time2 raw.CMTime) raw.CMTime {
-	return raw.CMTimeMaximum(time1, time2)
+// CMSampleBufferGetNumSamples calls the CoreMedia framework function CMSampleBufferGetNumSamples.
+func CMSampleBufferGetNumSamples(sbuf obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferGetNumSamples == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferGetNumSamples, _lib, "CMSampleBufferGetNumSamples")
+	}
+	return _fnCMSampleBufferGetNumSamples(objref.IDOf(sbuf))
 }
 
-// CMTimeMinimum calls [raw.CMTimeMinimum] (C function CMTimeMinimum).
-func CMTimeMinimum(time1 raw.CMTime, time2 raw.CMTime) raw.CMTime {
-	return raw.CMTimeMinimum(time1, time2)
-}
+var _fnCMSampleBufferGetSampleAttachmentsArray func(objc.ID, uint8) objc.ID
 
-// CMTimeMultiply calls [raw.CMTimeMultiply] (C function CMTimeMultiply).
-func CMTimeMultiply(time_ raw.CMTime, multiplier int32) raw.CMTime {
-	return raw.CMTimeMultiply(time_, multiplier)
+// CMSampleBufferGetSampleAttachmentsArray calls the CoreMedia framework function CMSampleBufferGetSampleAttachmentsArray.
+func CMSampleBufferGetSampleAttachmentsArray(sbuf obj.Object, createIfNecessary uint8) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferGetSampleAttachmentsArray == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferGetSampleAttachmentsArray, _lib, "CMSampleBufferGetSampleAttachmentsArray")
+	}
+	_ret := _fnCMSampleBufferGetSampleAttachmentsArray(objref.IDOf(sbuf), createIfNecessary)
+	return obj.Wrap(_ret)
 }
 
-// CMTimeMultiplyByFloat64 calls [raw.CMTimeMultiplyByFloat64] (C function CMTimeMultiplyByFloat64).
-func CMTimeMultiplyByFloat64(time_ raw.CMTime, multiplier float64) raw.CMTime {
-	return raw.CMTimeMultiplyByFloat64(time_, multiplier)
-}
+var _fnCMSampleBufferGetSampleSize func(objc.ID, int) int
 
-// CMTimeMultiplyByRatio calls [raw.CMTimeMultiplyByRatio] (C function CMTimeMultiplyByRatio).
-func CMTimeMultiplyByRatio(time_ raw.CMTime, multiplier int32, divisor int32) raw.CMTime {
-	return raw.CMTimeMultiplyByRatio(time_, multiplier, divisor)
+// CMSampleBufferGetSampleSize calls the CoreMedia framework function CMSampleBufferGetSampleSize.
+func CMSampleBufferGetSampleSize(sbuf obj.Object, sampleIndex int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferGetSampleSize == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferGetSampleSize, _lib, "CMSampleBufferGetSampleSize")
+	}
+	return _fnCMSampleBufferGetSampleSize(objref.IDOf(sbuf), sampleIndex)
 }
 
-// CMTimeRangeContainsTime calls [raw.CMTimeRangeContainsTime] (C function CMTimeRangeContainsTime).
-func CMTimeRangeContainsTime(range_ raw.CMTimeRange, time_ raw.CMTime) uint8 {
-	return raw.CMTimeRangeContainsTime(range_, time_)
-}
+var _fnCMSampleBufferGetTaggedBufferGroup func(objc.ID) objc.ID
 
-// CMTimeRangeContainsTimeRange calls [raw.CMTimeRangeContainsTimeRange] (C function CMTimeRangeContainsTimeRange).
-func CMTimeRangeContainsTimeRange(range_ raw.CMTimeRange, otherRange raw.CMTimeRange) uint8 {
-	return raw.CMTimeRangeContainsTimeRange(range_, otherRange)
+// CMSampleBufferGetTaggedBufferGroup calls the CoreMedia framework function CMSampleBufferGetTaggedBufferGroup.
+func CMSampleBufferGetTaggedBufferGroup(sbuf obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferGetTaggedBufferGroup == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferGetTaggedBufferGroup, _lib, "CMSampleBufferGetTaggedBufferGroup")
+	}
+	_ret := _fnCMSampleBufferGetTaggedBufferGroup(objref.IDOf(sbuf))
+	return obj.Wrap(_ret)
 }
 
-// CMTimeRangeCopyAsDictionary calls [raw.CMTimeRangeCopyAsDictionary] (C function CMTimeRangeCopyAsDictionary).
-func CMTimeRangeCopyAsDictionary(range_ raw.CMTimeRange, allocator unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTimeRangeCopyAsDictionary(range_, allocator)
-}
+var _fnCMSampleBufferGetTotalSampleSize func(objc.ID) int
 
-// CMTimeRangeCopyDescription calls [raw.CMTimeRangeCopyDescription] (C function CMTimeRangeCopyDescription).
-func CMTimeRangeCopyDescription(allocator unsafe.Pointer, range_ raw.CMTimeRange) unsafe.Pointer {
-	return raw.CMTimeRangeCopyDescription(allocator, range_)
+// CMSampleBufferGetTotalSampleSize calls the CoreMedia framework function CMSampleBufferGetTotalSampleSize.
+func CMSampleBufferGetTotalSampleSize(sbuf obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferGetTotalSampleSize == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferGetTotalSampleSize, _lib, "CMSampleBufferGetTotalSampleSize")
+	}
+	return _fnCMSampleBufferGetTotalSampleSize(objref.IDOf(sbuf))
 }
 
-// CMTimeRangeEqual calls [raw.CMTimeRangeEqual] (C function CMTimeRangeEqual).
-func CMTimeRangeEqual(range1 raw.CMTimeRange, range2 raw.CMTimeRange) uint8 {
-	return raw.CMTimeRangeEqual(range1, range2)
-}
+var _fnCMSampleBufferGetTypeID func() int
 
-// CMTimeRangeFromTimeToTime calls [raw.CMTimeRangeFromTimeToTime] (C function CMTimeRangeFromTimeToTime).
-func CMTimeRangeFromTimeToTime(start raw.CMTime, end raw.CMTime) raw.CMTimeRange {
-	return raw.CMTimeRangeFromTimeToTime(start, end)
+// CMSampleBufferGetTypeID calls the CoreMedia framework function CMSampleBufferGetTypeID.
+func CMSampleBufferGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferGetTypeID, _lib, "CMSampleBufferGetTypeID")
+	}
+	return _fnCMSampleBufferGetTypeID()
 }
 
-// CMTimeRangeGetEnd calls [raw.CMTimeRangeGetEnd] (C function CMTimeRangeGetEnd).
-func CMTimeRangeGetEnd(range_ raw.CMTimeRange) raw.CMTime {
-	return raw.CMTimeRangeGetEnd(range_)
-}
+var _fnCMSampleBufferIsValid func(objc.ID) uint8
 
-// CMTimeRangeGetIntersection calls [raw.CMTimeRangeGetIntersection] (C function CMTimeRangeGetIntersection).
-func CMTimeRangeGetIntersection(range_ raw.CMTimeRange, otherRange raw.CMTimeRange) raw.CMTimeRange {
-	return raw.CMTimeRangeGetIntersection(range_, otherRange)
+// CMSampleBufferIsValid calls the CoreMedia framework function CMSampleBufferIsValid.
+func CMSampleBufferIsValid(sbuf obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferIsValid == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferIsValid, _lib, "CMSampleBufferIsValid")
+	}
+	return _fnCMSampleBufferIsValid(objref.IDOf(sbuf))
 }
 
-// CMTimeRangeGetUnion calls [raw.CMTimeRangeGetUnion] (C function CMTimeRangeGetUnion).
-func CMTimeRangeGetUnion(range_ raw.CMTimeRange, otherRange raw.CMTimeRange) raw.CMTimeRange {
-	return raw.CMTimeRangeGetUnion(range_, otherRange)
-}
+var _fnCMSimpleQueueGetCapacity func(objc.ID) int32
 
-// CMTimeRangeMake calls [raw.CMTimeRangeMake] (C function CMTimeRangeMake).
-func CMTimeRangeMake(start raw.CMTime, duration raw.CMTime) raw.CMTimeRange {
-	return raw.CMTimeRangeMake(start, duration)
+// CMSimpleQueueGetCapacity calls the CoreMedia framework function CMSimpleQueueGetCapacity.
+func CMSimpleQueueGetCapacity(queue obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSimpleQueueGetCapacity == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSimpleQueueGetCapacity, _lib, "CMSimpleQueueGetCapacity")
+	}
+	return _fnCMSimpleQueueGetCapacity(objref.IDOf(queue))
 }
 
-// CMTimeRangeMakeFromDictionary calls [raw.CMTimeRangeMakeFromDictionary] (C function CMTimeRangeMakeFromDictionary).
-func CMTimeRangeMakeFromDictionary(dictionaryRepresentation unsafe.Pointer) raw.CMTimeRange {
-	return raw.CMTimeRangeMakeFromDictionary(dictionaryRepresentation)
-}
+var _fnCMSimpleQueueGetCount func(objc.ID) int32
 
-// CMTimeRangeShow calls [raw.CMTimeRangeShow] (C function CMTimeRangeShow).
-func CMTimeRangeShow(range_ raw.CMTimeRange) {
-	raw.CMTimeRangeShow(range_)
+// CMSimpleQueueGetCount calls the CoreMedia framework function CMSimpleQueueGetCount.
+func CMSimpleQueueGetCount(queue obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSimpleQueueGetCount == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSimpleQueueGetCount, _lib, "CMSimpleQueueGetCount")
+	}
+	return _fnCMSimpleQueueGetCount(objref.IDOf(queue))
 }
 
-// CMTimeShow calls [raw.CMTimeShow] (C function CMTimeShow).
-func CMTimeShow(time_ raw.CMTime) {
-	raw.CMTimeShow(time_)
-}
+var _fnCMSimpleQueueGetTypeID func() int
 
-// CMTimeSubtract calls [raw.CMTimeSubtract] (C function CMTimeSubtract).
-func CMTimeSubtract(lhs raw.CMTime, rhs raw.CMTime) raw.CMTime {
-	return raw.CMTimeSubtract(lhs, rhs)
+// CMSimpleQueueGetTypeID calls the CoreMedia framework function CMSimpleQueueGetTypeID.
+func CMSimpleQueueGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSimpleQueueGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSimpleQueueGetTypeID, _lib, "CMSimpleQueueGetTypeID")
+	}
+	return _fnCMSimpleQueueGetTypeID()
 }
 
-// CMTimebaseAddTimer calls [raw.CMTimebaseAddTimer] (C function CMTimebaseAddTimer).
-func CMTimebaseAddTimer(timebase unsafe.Pointer, timer unsafe.Pointer, runloop unsafe.Pointer) int {
-	return raw.CMTimebaseAddTimer(timebase, timer, runloop)
-}
+var _fnCMTagCollectionContainsCategory func(objc.ID, CMTagCategory) uint8
 
-// CMTimebaseAddTimerDispatchSource calls [raw.CMTimebaseAddTimerDispatchSource] (C function CMTimebaseAddTimerDispatchSource).
-func CMTimebaseAddTimerDispatchSource(timebase unsafe.Pointer, timerSource *foundation.NSObject) int {
-	return raw.CMTimebaseAddTimerDispatchSource(timebase, timerSource)
+// CMTagCollectionContainsCategory calls the CoreMedia framework function CMTagCollectionContainsCategory.
+func CMTagCollectionContainsCategory(tagCollection obj.Object, category CMTagCategory) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCollectionContainsCategory == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCollectionContainsCategory, _lib, "CMTagCollectionContainsCategory")
+	}
+	return _fnCMTagCollectionContainsCategory(objref.IDOf(tagCollection), category)
 }
 
-// CMTimebaseCopyMaster calls [raw.CMTimebaseCopyMaster] (C function CMTimebaseCopyMaster).
-func CMTimebaseCopyMaster(timebase unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTimebaseCopyMaster(timebase)
-}
+var _fnCMTagCollectionContainsTagsOfCollection func(objc.ID, objc.ID) uint8
 
-// CMTimebaseCopyMasterClock calls [raw.CMTimebaseCopyMasterClock] (C function CMTimebaseCopyMasterClock).
-func CMTimebaseCopyMasterClock(timebase unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTimebaseCopyMasterClock(timebase)
+// CMTagCollectionContainsTagsOfCollection calls the CoreMedia framework function CMTagCollectionContainsTagsOfCollection.
+func CMTagCollectionContainsTagsOfCollection(tagCollection obj.Object, containedTagCollection obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCollectionContainsTagsOfCollection == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCollectionContainsTagsOfCollection, _lib, "CMTagCollectionContainsTagsOfCollection")
+	}
+	return _fnCMTagCollectionContainsTagsOfCollection(objref.IDOf(tagCollection), objref.IDOf(containedTagCollection))
 }
 
-// CMTimebaseCopyMasterTimebase calls [raw.CMTimebaseCopyMasterTimebase] (C function CMTimebaseCopyMasterTimebase).
-func CMTimebaseCopyMasterTimebase(timebase unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTimebaseCopyMasterTimebase(timebase)
-}
+var _fnCMTagCollectionCopyAsData func(objc.ID, objc.ID) objc.ID
 
-// CMTimebaseCopySource calls [raw.CMTimebaseCopySource] (C function CMTimebaseCopySource).
-func CMTimebaseCopySource(timebase unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTimebaseCopySource(timebase)
+// CMTagCollectionCopyAsData calls the CoreMedia framework function CMTagCollectionCopyAsData.
+func CMTagCollectionCopyAsData(tagCollection obj.Object, allocator obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCollectionCopyAsData == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCollectionCopyAsData, _lib, "CMTagCollectionCopyAsData")
+	}
+	_ret := _fnCMTagCollectionCopyAsData(objref.IDOf(tagCollection), objref.IDOf(allocator))
+	return obj.Wrap(_ret)
 }
 
-// CMTimebaseCopySourceClock calls [raw.CMTimebaseCopySourceClock] (C function CMTimebaseCopySourceClock).
-func CMTimebaseCopySourceClock(timebase unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTimebaseCopySourceClock(timebase)
-}
+var _fnCMTagCollectionCopyAsDictionary func(objc.ID, objc.ID) objc.ID
 
-// CMTimebaseCopySourceTimebase calls [raw.CMTimebaseCopySourceTimebase] (C function CMTimebaseCopySourceTimebase).
-func CMTimebaseCopySourceTimebase(timebase unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTimebaseCopySourceTimebase(timebase)
+// CMTagCollectionCopyAsDictionary calls the CoreMedia framework function CMTagCollectionCopyAsDictionary.
+func CMTagCollectionCopyAsDictionary(tagCollection obj.Object, allocator obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCollectionCopyAsDictionary == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCollectionCopyAsDictionary, _lib, "CMTagCollectionCopyAsDictionary")
+	}
+	_ret := _fnCMTagCollectionCopyAsDictionary(objref.IDOf(tagCollection), objref.IDOf(allocator))
+	return obj.Wrap(_ret)
 }
 
-// CMTimebaseCopyUltimateMasterClock calls [raw.CMTimebaseCopyUltimateMasterClock] (C function CMTimebaseCopyUltimateMasterClock).
-func CMTimebaseCopyUltimateMasterClock(timebase unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTimebaseCopyUltimateMasterClock(timebase)
-}
+var _fnCMTagCollectionCopyDescription func(objc.ID, objc.ID) objc.ID
 
-// CMTimebaseCopyUltimateSourceClock calls [raw.CMTimebaseCopyUltimateSourceClock] (C function CMTimebaseCopyUltimateSourceClock).
-func CMTimebaseCopyUltimateSourceClock(timebase unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTimebaseCopyUltimateSourceClock(timebase)
+// CMTagCollectionCopyDescription calls the CoreMedia framework function CMTagCollectionCopyDescription.
+func CMTagCollectionCopyDescription(allocator obj.Object, tagCollection obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCollectionCopyDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCollectionCopyDescription, _lib, "CMTagCollectionCopyDescription")
+	}
+	_ret := _fnCMTagCollectionCopyDescription(objref.IDOf(allocator), objref.IDOf(tagCollection))
+	return obj.Wrap(_ret)
 }
 
-// CMTimebaseCreateWithMasterClock calls [raw.CMTimebaseCreateWithMasterClock] (C function CMTimebaseCreateWithMasterClock).
-func CMTimebaseCreateWithMasterClock(allocator unsafe.Pointer, masterClock unsafe.Pointer, timebaseOut unsafe.Pointer) int {
-	return raw.CMTimebaseCreateWithMasterClock(allocator, masterClock, timebaseOut)
-}
+var _fnCMTagCollectionGetCount func(objc.ID) int
 
-// CMTimebaseCreateWithMasterTimebase calls [raw.CMTimebaseCreateWithMasterTimebase] (C function CMTimebaseCreateWithMasterTimebase).
-func CMTimebaseCreateWithMasterTimebase(allocator unsafe.Pointer, masterTimebase unsafe.Pointer, timebaseOut unsafe.Pointer) int {
-	return raw.CMTimebaseCreateWithMasterTimebase(allocator, masterTimebase, timebaseOut)
+// CMTagCollectionGetCount calls the CoreMedia framework function CMTagCollectionGetCount.
+func CMTagCollectionGetCount(tagCollection obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCollectionGetCount == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCollectionGetCount, _lib, "CMTagCollectionGetCount")
+	}
+	return _fnCMTagCollectionGetCount(objref.IDOf(tagCollection))
 }
 
-// CMTimebaseCreateWithSourceClock calls [raw.CMTimebaseCreateWithSourceClock] (C function CMTimebaseCreateWithSourceClock).
-func CMTimebaseCreateWithSourceClock(allocator unsafe.Pointer, sourceClock unsafe.Pointer, timebaseOut unsafe.Pointer) int {
-	return raw.CMTimebaseCreateWithSourceClock(allocator, sourceClock, timebaseOut)
-}
+var _fnCMTagCollectionGetCountOfCategory func(objc.ID, CMTagCategory) int
 
-// CMTimebaseCreateWithSourceTimebase calls [raw.CMTimebaseCreateWithSourceTimebase] (C function CMTimebaseCreateWithSourceTimebase).
-func CMTimebaseCreateWithSourceTimebase(allocator unsafe.Pointer, sourceTimebase unsafe.Pointer, timebaseOut unsafe.Pointer) int {
-	return raw.CMTimebaseCreateWithSourceTimebase(allocator, sourceTimebase, timebaseOut)
+// CMTagCollectionGetCountOfCategory calls the CoreMedia framework function CMTagCollectionGetCountOfCategory.
+func CMTagCollectionGetCountOfCategory(tagCollection obj.Object, category CMTagCategory) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCollectionGetCountOfCategory == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCollectionGetCountOfCategory, _lib, "CMTagCollectionGetCountOfCategory")
+	}
+	return _fnCMTagCollectionGetCountOfCategory(objref.IDOf(tagCollection), category)
 }
 
-// CMTimebaseGetEffectiveRate calls [raw.CMTimebaseGetEffectiveRate] (C function CMTimebaseGetEffectiveRate).
-func CMTimebaseGetEffectiveRate(timebase unsafe.Pointer) float64 {
-	return raw.CMTimebaseGetEffectiveRate(timebase)
-}
+var _fnCMTagCollectionGetTypeID func() int
 
-// CMTimebaseGetMaster calls [raw.CMTimebaseGetMaster] (C function CMTimebaseGetMaster).
-func CMTimebaseGetMaster(timebase unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTimebaseGetMaster(timebase)
+// CMTagCollectionGetTypeID calls the CoreMedia framework function CMTagCollectionGetTypeID.
+func CMTagCollectionGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCollectionGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCollectionGetTypeID, _lib, "CMTagCollectionGetTypeID")
+	}
+	return _fnCMTagCollectionGetTypeID()
 }
 
-// CMTimebaseGetMasterClock calls [raw.CMTimebaseGetMasterClock] (C function CMTimebaseGetMasterClock).
-func CMTimebaseGetMasterClock(timebase unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTimebaseGetMasterClock(timebase)
-}
+var _fnCMTagCollectionIsEmpty func(objc.ID) uint8
 
-// CMTimebaseGetMasterTimebase calls [raw.CMTimebaseGetMasterTimebase] (C function CMTimebaseGetMasterTimebase).
-func CMTimebaseGetMasterTimebase(timebase unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTimebaseGetMasterTimebase(timebase)
+// CMTagCollectionIsEmpty calls the CoreMedia framework function CMTagCollectionIsEmpty.
+func CMTagCollectionIsEmpty(tagCollection obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCollectionIsEmpty == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCollectionIsEmpty, _lib, "CMTagCollectionIsEmpty")
+	}
+	return _fnCMTagCollectionIsEmpty(objref.IDOf(tagCollection))
 }
 
-// CMTimebaseGetRate calls [raw.CMTimebaseGetRate] (C function CMTimebaseGetRate).
-func CMTimebaseGetRate(timebase unsafe.Pointer) float64 {
-	return raw.CMTimebaseGetRate(timebase)
-}
+var _fnCMTaggedBufferGroupGetCMSampleBufferAtIndex func(objc.ID, int) objc.ID
 
-// CMTimebaseGetTime calls [raw.CMTimebaseGetTime] (C function CMTimebaseGetTime).
-func CMTimebaseGetTime(timebase unsafe.Pointer) raw.CMTime {
-	return raw.CMTimebaseGetTime(timebase)
+// CMTaggedBufferGroupGetCMSampleBufferAtIndex calls the CoreMedia framework function CMTaggedBufferGroupGetCMSampleBufferAtIndex.
+func CMTaggedBufferGroupGetCMSampleBufferAtIndex(group obj.Object, index int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTaggedBufferGroupGetCMSampleBufferAtIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTaggedBufferGroupGetCMSampleBufferAtIndex, _lib, "CMTaggedBufferGroupGetCMSampleBufferAtIndex")
+	}
+	_ret := _fnCMTaggedBufferGroupGetCMSampleBufferAtIndex(objref.IDOf(group), index)
+	return obj.Wrap(_ret)
 }
 
-// CMTimebaseGetTimeAndRate calls [raw.CMTimebaseGetTimeAndRate] (C function CMTimebaseGetTimeAndRate).
-func CMTimebaseGetTimeAndRate(timebase unsafe.Pointer, timeOut *raw.CMTime, rateOut *float64) int {
-	return raw.CMTimebaseGetTimeAndRate(timebase, timeOut, rateOut)
-}
+var _fnCMTaggedBufferGroupGetCount func(objc.ID) int
 
-// CMTimebaseGetTimeWithTimeScale calls [raw.CMTimebaseGetTimeWithTimeScale] (C function CMTimebaseGetTimeWithTimeScale).
-func CMTimebaseGetTimeWithTimeScale(timebase unsafe.Pointer, timescale int32, method CMTimeRoundingMethod) raw.CMTime {
-	return raw.CMTimebaseGetTimeWithTimeScale(timebase, timescale, raw.CMTimeRoundingMethod(method))
+// CMTaggedBufferGroupGetCount calls the CoreMedia framework function CMTaggedBufferGroupGetCount.
+func CMTaggedBufferGroupGetCount(group obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTaggedBufferGroupGetCount == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTaggedBufferGroupGetCount, _lib, "CMTaggedBufferGroupGetCount")
+	}
+	return _fnCMTaggedBufferGroupGetCount(objref.IDOf(group))
 }
 
-// CMTimebaseGetTypeID calls [raw.CMTimebaseGetTypeID] (C function CMTimebaseGetTypeID).
-func CMTimebaseGetTypeID() uint {
-	return raw.CMTimebaseGetTypeID()
-}
+var _fnCMTaggedBufferGroupGetNumberOfMatchesForTagCollection func(objc.ID, objc.ID) int
 
-// CMTimebaseGetUltimateMasterClock calls [raw.CMTimebaseGetUltimateMasterClock] (C function CMTimebaseGetUltimateMasterClock).
-func CMTimebaseGetUltimateMasterClock(timebase unsafe.Pointer) unsafe.Pointer {
-	return raw.CMTimebaseGetUltimateMasterClock(timebase)
+// CMTaggedBufferGroupGetNumberOfMatchesForTagCollection calls the CoreMedia framework function CMTaggedBufferGroupGetNumberOfMatchesForTagCollection.
+func CMTaggedBufferGroupGetNumberOfMatchesForTagCollection(group obj.Object, tagCollection obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTaggedBufferGroupGetNumberOfMatchesForTagCollection == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTaggedBufferGroupGetNumberOfMatchesForTagCollection, _lib, "CMTaggedBufferGroupGetNumberOfMatchesForTagCollection")
+	}
+	return _fnCMTaggedBufferGroupGetNumberOfMatchesForTagCollection(objref.IDOf(group), objref.IDOf(tagCollection))
 }
 
-// CMTimebaseNotificationBarrier calls [raw.CMTimebaseNotificationBarrier] (C function CMTimebaseNotificationBarrier).
-func CMTimebaseNotificationBarrier(timebase unsafe.Pointer) int {
-	return raw.CMTimebaseNotificationBarrier(timebase)
-}
+var _fnCMTaggedBufferGroupGetTagCollectionAtIndex func(objc.ID, int) objc.ID
 
-// CMTimebaseRemoveTimer calls [raw.CMTimebaseRemoveTimer] (C function CMTimebaseRemoveTimer).
-func CMTimebaseRemoveTimer(timebase unsafe.Pointer, timer unsafe.Pointer) int {
-	return raw.CMTimebaseRemoveTimer(timebase, timer)
+// CMTaggedBufferGroupGetTagCollectionAtIndex calls the CoreMedia framework function CMTaggedBufferGroupGetTagCollectionAtIndex.
+func CMTaggedBufferGroupGetTagCollectionAtIndex(group obj.Object, index int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTaggedBufferGroupGetTagCollectionAtIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTaggedBufferGroupGetTagCollectionAtIndex, _lib, "CMTaggedBufferGroupGetTagCollectionAtIndex")
+	}
+	_ret := _fnCMTaggedBufferGroupGetTagCollectionAtIndex(objref.IDOf(group), index)
+	return obj.Wrap(_ret)
 }
 
-// CMTimebaseRemoveTimerDispatchSource calls [raw.CMTimebaseRemoveTimerDispatchSource] (C function CMTimebaseRemoveTimerDispatchSource).
-func CMTimebaseRemoveTimerDispatchSource(timebase unsafe.Pointer, timerSource *foundation.NSObject) int {
-	return raw.CMTimebaseRemoveTimerDispatchSource(timebase, timerSource)
-}
+var _fnCMTaggedBufferGroupGetTypeID func() int
 
-// CMTimebaseSetAnchorTime calls [raw.CMTimebaseSetAnchorTime] (C function CMTimebaseSetAnchorTime).
-func CMTimebaseSetAnchorTime(timebase unsafe.Pointer, timebaseTime raw.CMTime, immediateSourceTime raw.CMTime) int {
-	return raw.CMTimebaseSetAnchorTime(timebase, timebaseTime, immediateSourceTime)
+// CMTaggedBufferGroupGetTypeID calls the CoreMedia framework function CMTaggedBufferGroupGetTypeID.
+func CMTaggedBufferGroupGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTaggedBufferGroupGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTaggedBufferGroupGetTypeID, _lib, "CMTaggedBufferGroupGetTypeID")
+	}
+	return _fnCMTaggedBufferGroupGetTypeID()
 }
 
-// CMTimebaseSetMasterClock calls [raw.CMTimebaseSetMasterClock] (C function CMTimebaseSetMasterClock).
-func CMTimebaseSetMasterClock(timebase unsafe.Pointer, newMasterClock unsafe.Pointer) int {
-	return raw.CMTimebaseSetMasterClock(timebase, newMasterClock)
-}
+var _fnCMTimebaseCopyMasterClock func(objc.ID) objc.ID
 
-// CMTimebaseSetMasterTimebase calls [raw.CMTimebaseSetMasterTimebase] (C function CMTimebaseSetMasterTimebase).
-func CMTimebaseSetMasterTimebase(timebase unsafe.Pointer, newMasterTimebase unsafe.Pointer) int {
-	return raw.CMTimebaseSetMasterTimebase(timebase, newMasterTimebase)
+// CMTimebaseCopyMasterClock calls the CoreMedia framework function CMTimebaseCopyMasterClock.
+func CMTimebaseCopyMasterClock(timebase obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseCopyMasterClock == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseCopyMasterClock, _lib, "CMTimebaseCopyMasterClock")
+	}
+	_ret := _fnCMTimebaseCopyMasterClock(objref.IDOf(timebase))
+	return obj.Wrap(_ret)
 }
 
-// CMTimebaseSetRate calls [raw.CMTimebaseSetRate] (C function CMTimebaseSetRate).
-func CMTimebaseSetRate(timebase unsafe.Pointer, rate float64) int {
-	return raw.CMTimebaseSetRate(timebase, rate)
-}
+var _fnCMTimebaseCopyMasterTimebase func(objc.ID) objc.ID
 
-// CMTimebaseSetRateAndAnchorTime calls [raw.CMTimebaseSetRateAndAnchorTime] (C function CMTimebaseSetRateAndAnchorTime).
-func CMTimebaseSetRateAndAnchorTime(timebase unsafe.Pointer, rate float64, timebaseTime raw.CMTime, immediateSourceTime raw.CMTime) int {
-	return raw.CMTimebaseSetRateAndAnchorTime(timebase, rate, timebaseTime, immediateSourceTime)
+// CMTimebaseCopyMasterTimebase calls the CoreMedia framework function CMTimebaseCopyMasterTimebase.
+func CMTimebaseCopyMasterTimebase(timebase obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseCopyMasterTimebase == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseCopyMasterTimebase, _lib, "CMTimebaseCopyMasterTimebase")
+	}
+	_ret := _fnCMTimebaseCopyMasterTimebase(objref.IDOf(timebase))
+	return obj.Wrap(_ret)
 }
 
-// CMTimebaseSetSourceClock calls [raw.CMTimebaseSetSourceClock] (C function CMTimebaseSetSourceClock).
-func CMTimebaseSetSourceClock(timebase unsafe.Pointer, newSourceClock unsafe.Pointer) int {
-	return raw.CMTimebaseSetSourceClock(timebase, newSourceClock)
-}
+var _fnCMTimebaseCopySourceClock func(objc.ID) objc.ID
 
-// CMTimebaseSetSourceTimebase calls [raw.CMTimebaseSetSourceTimebase] (C function CMTimebaseSetSourceTimebase).
-func CMTimebaseSetSourceTimebase(timebase unsafe.Pointer, newSourceTimebase unsafe.Pointer) int {
-	return raw.CMTimebaseSetSourceTimebase(timebase, newSourceTimebase)
+// CMTimebaseCopySourceClock calls the CoreMedia framework function CMTimebaseCopySourceClock.
+func CMTimebaseCopySourceClock(timebase obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseCopySourceClock == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseCopySourceClock, _lib, "CMTimebaseCopySourceClock")
+	}
+	_ret := _fnCMTimebaseCopySourceClock(objref.IDOf(timebase))
+	return obj.Wrap(_ret)
 }
 
-// CMTimebaseSetTime calls [raw.CMTimebaseSetTime] (C function CMTimebaseSetTime).
-func CMTimebaseSetTime(timebase unsafe.Pointer, time_ raw.CMTime) int {
-	return raw.CMTimebaseSetTime(timebase, time_)
-}
+var _fnCMTimebaseCopySourceTimebase func(objc.ID) objc.ID
 
-// CMTimebaseSetTimerDispatchSourceNextFireTime calls [raw.CMTimebaseSetTimerDispatchSourceNextFireTime] (C function CMTimebaseSetTimerDispatchSourceNextFireTime).
-func CMTimebaseSetTimerDispatchSourceNextFireTime(timebase unsafe.Pointer, timerSource *foundation.NSObject, fireTime raw.CMTime, flags uint32) int {
-	return raw.CMTimebaseSetTimerDispatchSourceNextFireTime(timebase, timerSource, fireTime, flags)
+// CMTimebaseCopySourceTimebase calls the CoreMedia framework function CMTimebaseCopySourceTimebase.
+func CMTimebaseCopySourceTimebase(timebase obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseCopySourceTimebase == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseCopySourceTimebase, _lib, "CMTimebaseCopySourceTimebase")
+	}
+	_ret := _fnCMTimebaseCopySourceTimebase(objref.IDOf(timebase))
+	return obj.Wrap(_ret)
 }
 
-// CMTimebaseSetTimerDispatchSourceToFireImmediately calls [raw.CMTimebaseSetTimerDispatchSourceToFireImmediately] (C function CMTimebaseSetTimerDispatchSourceToFireImmediately).
-func CMTimebaseSetTimerDispatchSourceToFireImmediately(timebase unsafe.Pointer, timerSource *foundation.NSObject) int {
-	return raw.CMTimebaseSetTimerDispatchSourceToFireImmediately(timebase, timerSource)
-}
+var _fnCMTimebaseCopyUltimateMasterClock func(objc.ID) objc.ID
 
-// CMTimebaseSetTimerNextFireTime calls [raw.CMTimebaseSetTimerNextFireTime] (C function CMTimebaseSetTimerNextFireTime).
-func CMTimebaseSetTimerNextFireTime(timebase unsafe.Pointer, timer unsafe.Pointer, fireTime raw.CMTime, flags uint32) int {
-	return raw.CMTimebaseSetTimerNextFireTime(timebase, timer, fireTime, flags)
+// CMTimebaseCopyUltimateMasterClock calls the CoreMedia framework function CMTimebaseCopyUltimateMasterClock.
+func CMTimebaseCopyUltimateMasterClock(timebase obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseCopyUltimateMasterClock == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseCopyUltimateMasterClock, _lib, "CMTimebaseCopyUltimateMasterClock")
+	}
+	_ret := _fnCMTimebaseCopyUltimateMasterClock(objref.IDOf(timebase))
+	return obj.Wrap(_ret)
 }
 
-// CMTimebaseSetTimerToFireImmediately calls [raw.CMTimebaseSetTimerToFireImmediately] (C function CMTimebaseSetTimerToFireImmediately).
-func CMTimebaseSetTimerToFireImmediately(timebase unsafe.Pointer, timer unsafe.Pointer) int {
-	return raw.CMTimebaseSetTimerToFireImmediately(timebase, timer)
-}
+var _fnCMTimebaseCopyUltimateSourceClock func(objc.ID) objc.ID
 
-// CMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer calls [raw.CMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer] (C function CMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer).
-func CMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer(allocator unsafe.Pointer, videoFormatDescription unsafe.Pointer, stringEncoding uint, flavor unsafe.Pointer, blockBufferOut unsafe.Pointer) int {
-	return raw.CMVideoFormatDescriptionCopyAsBigEndianImageDescriptionBlockBuffer(allocator, videoFormatDescription, stringEncoding, flavor, blockBufferOut)
+// CMTimebaseCopyUltimateSourceClock calls the CoreMedia framework function CMTimebaseCopyUltimateSourceClock.
+func CMTimebaseCopyUltimateSourceClock(timebase obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseCopyUltimateSourceClock == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseCopyUltimateSourceClock, _lib, "CMTimebaseCopyUltimateSourceClock")
+	}
+	_ret := _fnCMTimebaseCopyUltimateSourceClock(objref.IDOf(timebase))
+	return obj.Wrap(_ret)
 }
 
-// CMVideoFormatDescriptionCopyTagCollectionArray calls [raw.CMVideoFormatDescriptionCopyTagCollectionArray] (C function CMVideoFormatDescriptionCopyTagCollectionArray).
-func CMVideoFormatDescriptionCopyTagCollectionArray(formatDescription unsafe.Pointer, tagCollectionsOut unsafe.Pointer) int {
-	return raw.CMVideoFormatDescriptionCopyTagCollectionArray(formatDescription, tagCollectionsOut)
-}
+var _fnCMTimebaseGetEffectiveRate func(objc.ID) float64
 
-// CMVideoFormatDescriptionCreate calls [raw.CMVideoFormatDescriptionCreate] (C function CMVideoFormatDescriptionCreate).
-func CMVideoFormatDescriptionCreate(allocator unsafe.Pointer, codecType uint, width int32, height int32, extensions unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMVideoFormatDescriptionCreate(allocator, codecType, width, height, extensions, formatDescriptionOut)
+// CMTimebaseGetEffectiveRate calls the CoreMedia framework function CMTimebaseGetEffectiveRate.
+func CMTimebaseGetEffectiveRate(timebase obj.Object) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseGetEffectiveRate == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseGetEffectiveRate, _lib, "CMTimebaseGetEffectiveRate")
+	}
+	return _fnCMTimebaseGetEffectiveRate(objref.IDOf(timebase))
 }
 
-// CMVideoFormatDescriptionCreateForImageBuffer calls [raw.CMVideoFormatDescriptionCreateForImageBuffer] (C function CMVideoFormatDescriptionCreateForImageBuffer).
-func CMVideoFormatDescriptionCreateForImageBuffer(allocator unsafe.Pointer, imageBuffer unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMVideoFormatDescriptionCreateForImageBuffer(allocator, imageBuffer, formatDescriptionOut)
-}
+var _fnCMTimebaseGetMasterClock func(objc.ID) objc.ID
 
-// CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionBlockBuffer calls [raw.CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionBlockBuffer] (C function CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionBlockBuffer).
-func CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionBlockBuffer(allocator unsafe.Pointer, imageDescriptionBlockBuffer unsafe.Pointer, stringEncoding uint, flavor unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionBlockBuffer(allocator, imageDescriptionBlockBuffer, stringEncoding, flavor, formatDescriptionOut)
+// CMTimebaseGetMasterClock calls the CoreMedia framework function CMTimebaseGetMasterClock.
+func CMTimebaseGetMasterClock(timebase obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseGetMasterClock == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseGetMasterClock, _lib, "CMTimebaseGetMasterClock")
+	}
+	_ret := _fnCMTimebaseGetMasterClock(objref.IDOf(timebase))
+	return obj.Wrap(_ret)
 }
 
-// CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData calls [raw.CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData] (C function CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData).
-func CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData(allocator unsafe.Pointer, imageDescriptionData *uint8, size uint, stringEncoding uint, flavor unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMVideoFormatDescriptionCreateFromBigEndianImageDescriptionData(allocator, imageDescriptionData, size, stringEncoding, flavor, formatDescriptionOut)
-}
+var _fnCMTimebaseGetMasterTimebase func(objc.ID) objc.ID
 
-// CMVideoFormatDescriptionCreateFromH264ParameterSets calls [raw.CMVideoFormatDescriptionCreateFromH264ParameterSets] (C function CMVideoFormatDescriptionCreateFromH264ParameterSets).
-func CMVideoFormatDescriptionCreateFromH264ParameterSets(allocator unsafe.Pointer, parameterSetCount uint, parameterSetPointers unsafe.Pointer, parameterSetSizes *uint, nALUnitHeaderLength int, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMVideoFormatDescriptionCreateFromH264ParameterSets(allocator, parameterSetCount, parameterSetPointers, parameterSetSizes, nALUnitHeaderLength, formatDescriptionOut)
+// CMTimebaseGetMasterTimebase calls the CoreMedia framework function CMTimebaseGetMasterTimebase.
+func CMTimebaseGetMasterTimebase(timebase obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseGetMasterTimebase == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseGetMasterTimebase, _lib, "CMTimebaseGetMasterTimebase")
+	}
+	_ret := _fnCMTimebaseGetMasterTimebase(objref.IDOf(timebase))
+	return obj.Wrap(_ret)
 }
 
-// CMVideoFormatDescriptionCreateFromHEVCParameterSets calls [raw.CMVideoFormatDescriptionCreateFromHEVCParameterSets] (C function CMVideoFormatDescriptionCreateFromHEVCParameterSets).
-func CMVideoFormatDescriptionCreateFromHEVCParameterSets(allocator unsafe.Pointer, parameterSetCount uint, parameterSetPointers unsafe.Pointer, parameterSetSizes *uint, nALUnitHeaderLength int, extensions unsafe.Pointer, formatDescriptionOut unsafe.Pointer) int {
-	return raw.CMVideoFormatDescriptionCreateFromHEVCParameterSets(allocator, parameterSetCount, parameterSetPointers, parameterSetSizes, nALUnitHeaderLength, extensions, formatDescriptionOut)
-}
+var _fnCMTimebaseGetRate func(objc.ID) float64
 
-// CMVideoFormatDescriptionGetCleanAperture calls [raw.CMVideoFormatDescriptionGetCleanAperture] (C function CMVideoFormatDescriptionGetCleanAperture).
-func CMVideoFormatDescriptionGetCleanAperture(videoDesc unsafe.Pointer, originIsAtTopLeft uint8) corefoundation.CGRect {
-	return raw.CMVideoFormatDescriptionGetCleanAperture(videoDesc, originIsAtTopLeft)
+// CMTimebaseGetRate calls the CoreMedia framework function CMTimebaseGetRate.
+func CMTimebaseGetRate(timebase obj.Object) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseGetRate == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseGetRate, _lib, "CMTimebaseGetRate")
+	}
+	return _fnCMTimebaseGetRate(objref.IDOf(timebase))
 }
 
-// CMVideoFormatDescriptionGetDimensions calls [raw.CMVideoFormatDescriptionGetDimensions] (C function CMVideoFormatDescriptionGetDimensions).
-func CMVideoFormatDescriptionGetDimensions(videoDesc unsafe.Pointer) raw.CMVideoDimensions {
-	return raw.CMVideoFormatDescriptionGetDimensions(videoDesc)
-}
+var _fnCMTimebaseGetTypeID func() int
 
-// CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers calls [raw.CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers] (C function CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers).
-func CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers() unsafe.Pointer {
-	return raw.CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers()
+// CMTimebaseGetTypeID calls the CoreMedia framework function CMTimebaseGetTypeID.
+func CMTimebaseGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseGetTypeID, _lib, "CMTimebaseGetTypeID")
+	}
+	return _fnCMTimebaseGetTypeID()
 }
 
-// CMVideoFormatDescriptionGetH264ParameterSetAtIndex calls [raw.CMVideoFormatDescriptionGetH264ParameterSetAtIndex] (C function CMVideoFormatDescriptionGetH264ParameterSetAtIndex).
-func CMVideoFormatDescriptionGetH264ParameterSetAtIndex(videoDesc unsafe.Pointer, parameterSetIndex uint, parameterSetPointerOut *uint8, parameterSetSizeOut *uint, parameterSetCountOut *uint, nALUnitHeaderLengthOut *int32) int {
-	return raw.CMVideoFormatDescriptionGetH264ParameterSetAtIndex(videoDesc, parameterSetIndex, parameterSetPointerOut, parameterSetSizeOut, parameterSetCountOut, nALUnitHeaderLengthOut)
-}
+var _fnCMTimebaseGetUltimateMasterClock func(objc.ID) objc.ID
 
-// CMVideoFormatDescriptionGetHEVCParameterSetAtIndex calls [raw.CMVideoFormatDescriptionGetHEVCParameterSetAtIndex] (C function CMVideoFormatDescriptionGetHEVCParameterSetAtIndex).
-func CMVideoFormatDescriptionGetHEVCParameterSetAtIndex(videoDesc unsafe.Pointer, parameterSetIndex uint, parameterSetPointerOut *uint8, parameterSetSizeOut *uint, parameterSetCountOut *uint, nALUnitHeaderLengthOut *int32) int {
-	return raw.CMVideoFormatDescriptionGetHEVCParameterSetAtIndex(videoDesc, parameterSetIndex, parameterSetPointerOut, parameterSetSizeOut, parameterSetCountOut, nALUnitHeaderLengthOut)
+// CMTimebaseGetUltimateMasterClock calls the CoreMedia framework function CMTimebaseGetUltimateMasterClock.
+func CMTimebaseGetUltimateMasterClock(timebase obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseGetUltimateMasterClock == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseGetUltimateMasterClock, _lib, "CMTimebaseGetUltimateMasterClock")
+	}
+	_ret := _fnCMTimebaseGetUltimateMasterClock(objref.IDOf(timebase))
+	return obj.Wrap(_ret)
 }
 
-// CMVideoFormatDescriptionGetPresentationDimensions calls [raw.CMVideoFormatDescriptionGetPresentationDimensions] (C function CMVideoFormatDescriptionGetPresentationDimensions).
-func CMVideoFormatDescriptionGetPresentationDimensions(videoDesc unsafe.Pointer, usePixelAspectRatio uint8, useCleanAperture uint8) corefoundation.CGSize {
-	return raw.CMVideoFormatDescriptionGetPresentationDimensions(videoDesc, usePixelAspectRatio, useCleanAperture)
-}
+var _fnCMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers func() objc.ID
 
-// CMVideoFormatDescriptionMatchesImageBuffer calls [raw.CMVideoFormatDescriptionMatchesImageBuffer] (C function CMVideoFormatDescriptionMatchesImageBuffer).
-func CMVideoFormatDescriptionMatchesImageBuffer(desc unsafe.Pointer, imageBuffer unsafe.Pointer) uint8 {
-	return raw.CMVideoFormatDescriptionMatchesImageBuffer(desc, imageBuffer)
+// CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers calls the CoreMedia framework function CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers.
+func CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers == nil {
+		ebipurego.RegisterLibFunc(&_fnCMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers, _lib, "CMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers")
+	}
+	_ret := _fnCMVideoFormatDescriptionGetExtensionKeysCommonWithImageBuffers()
+	return obj.Wrap(_ret)
 }

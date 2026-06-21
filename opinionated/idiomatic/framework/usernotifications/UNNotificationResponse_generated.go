@@ -5,62 +5,81 @@
 package usernotifications
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The user’s response to an actionable notification.
 //
-// NotificationResponse wraps [raw.UNNotificationResponse] with a fluent Go API.
+// NotificationResponse is an idiomatic wrapper over the Objective-C class UNNotificationResponse.
 type NotificationResponse struct {
-	inner *raw.UNNotificationResponse
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.UNNotificationResponse].
-func (x *NotificationResponse) Unwrap() *raw.UNNotificationResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NotificationResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// NotificationResponseFromID adopts an existing object pointer as a NotificationResponse (nil for 0).
+// NotificationResponseFromID adopts an existing Objective-C object as a NotificationResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func NotificationResponseFromID(id objc.ID) *NotificationResponse {
 	if id == 0 {
 		return nil
 	}
-	return &NotificationResponse{inner: raw.UNNotificationResponseFromID(id)}
+	x := &NotificationResponse{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNotificationResponse creates a new [NotificationResponse].
-func NewNotificationResponse() *NotificationResponse {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNNotificationResponse")), objc.RegisterName("new"))
-	return &NotificationResponse{inner: raw.UNNotificationResponseFromID(_id)}
-}
-
-// Notification calls the underlying Notification.
-func (x *NotificationResponse) Notification() *Notification {
-	_r := x.inner.Notification()
-	if _r == nil {
+// notificationResponseAdopt wraps an Objective-C object that this code just created as a
+// NotificationResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func notificationResponseAdopt(id objc.ID) *NotificationResponse {
+	if id == 0 {
 		return nil
 	}
-	return &Notification{inner: _r}
+	x := &NotificationResponse{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// ActionIdentifier calls the underlying ActionIdentifier.
+// Description returns the object's -description text.
+func (x *NotificationResponse) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NotificationResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NotificationResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNotificationResponse creates a new NotificationResponse.
+func NewNotificationResponse() *NotificationResponse {
+	_id := objc.Send[objc.ID](objc.ID(_class("UNNotificationResponse")), objc.RegisterName("new"))
+	return notificationResponseAdopt(_id)
+}
+
+func (x *NotificationResponse) Notification() *Notification {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notification"))
+	return NotificationFromID(_r)
+}
+
 func (x *NotificationResponse) ActionIdentifier() string {
-	_r := x.inner.ActionIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actionIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *NotificationResponse) asNotificationResponse() *raw.UNNotificationResponse { return x.inner }
 
 // NotificationResponseable is the interface implemented by [NotificationResponse], for mocking and DI.
 type NotificationResponseable interface {
-	Unwrap() *raw.UNNotificationResponse
+	obj.Object
 	Notification() *Notification
 	ActionIdentifier() string
 }

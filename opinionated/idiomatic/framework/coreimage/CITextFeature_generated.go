@@ -5,85 +5,75 @@
 package coreimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Information about a text that was detected in a still or video image.
 //
-// TextFeature wraps [raw.CITextFeature] with a fluent Go API.
+// TextFeature is an idiomatic wrapper over the Objective-C class CITextFeature.
 type TextFeature struct {
-	inner *raw.CITextFeature
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CITextFeature].
-func (x *TextFeature) Unwrap() *raw.CITextFeature { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextFeature) ID() objc.ID { return x.inner.Ptr() }
-
-// TextFeatureFromID adopts an existing object pointer as a TextFeature (nil for 0).
+// TextFeatureFromID adopts an existing Objective-C object as a TextFeature
+// (nil for 0), retaining it and registering a release finalizer.
 func TextFeatureFromID(id objc.ID) *TextFeature {
 	if id == 0 {
 		return nil
 	}
-	return &TextFeature{inner: raw.CITextFeatureFromID(id)}
+	x := &TextFeature{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTextFeature creates a new [TextFeature].
+// textFeatureAdopt wraps an Objective-C object that this code just created as a
+// TextFeature (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textFeatureAdopt(id objc.ID) *TextFeature {
+	if id == 0 {
+		return nil
+	}
+	x := &TextFeature{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TextFeature) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextFeature) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextFeature) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTextFeature creates a new TextFeature.
 func NewTextFeature() *TextFeature {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CITextFeature")), objc.RegisterName("new"))
-	return &TextFeature{inner: raw.CITextFeatureFromID(_id)}
-}
-
-// The image coordinate of the upper-left corner of the detected text.
-//
-// TopLeft calls the underlying TopLeft.
-func (x *TextFeature) TopLeft() corefoundation.CGPoint {
-	return x.inner.TopLeft()
-}
-
-// The image coordinate of the upper-right corner of the detected text.
-//
-// TopRight calls the underlying TopRight.
-func (x *TextFeature) TopRight() corefoundation.CGPoint {
-	return x.inner.TopRight()
-}
-
-// The image coordinate of the lower-left corner of the detected text.
-//
-// BottomLeft calls the underlying BottomLeft.
-func (x *TextFeature) BottomLeft() corefoundation.CGPoint {
-	return x.inner.BottomLeft()
-}
-
-// The image coordinate of the lower-right corner of the detected text.
-//
-// BottomRight calls the underlying BottomRight.
-func (x *TextFeature) BottomRight() corefoundation.CGPoint {
-	return x.inner.BottomRight()
+	_id := objc.Send[objc.ID](objc.ID(_class("CITextFeature")), objc.RegisterName("new"))
+	return textFeatureAdopt(_id)
 }
 
 // An array containing additional features detected within the feature. A text detector can identify both a major region that is likely to contain text as well as the areas within that region that likely to contain individual text features. Such features might be single characters, groups of closely-packed characters, or entire words. To detect sub-features, “/CIDetector/featuresInImage:options:“ needs to be called with the “CIDetectorReturnSubFeatures“ option set to true.
-//
-// SubFeatures calls the underlying SubFeatures.
-func (x *TextFeature) SubFeatures() *foundation.NSArray[objc.ID] {
-	return x.inner.SubFeatures()
+func (x *TextFeature) SubFeatures() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subFeatures"))
+	return obj.Wrap(_r)
 }
-
-func (x *TextFeature) asFeature() *raw.CIFeature { return &x.inner.CIFeature }
 
 // TextFeatureable is the interface implemented by [TextFeature], for mocking and DI.
 type TextFeatureable interface {
-	Unwrap() *raw.CITextFeature
-	TopLeft() corefoundation.CGPoint
-	TopRight() corefoundation.CGPoint
-	BottomLeft() corefoundation.CGPoint
-	BottomRight() corefoundation.CGPoint
-	SubFeatures() *foundation.NSArray[objc.ID]
+	obj.Object
+	SubFeatures() obj.Object
 }
 
 var _ TextFeatureable = (*TextFeature)(nil)

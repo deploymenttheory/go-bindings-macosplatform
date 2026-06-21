@@ -5,122 +5,122 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An abstract superclass that implements the default color picking protocol.
 //
-// ColorPicker wraps [raw.NSColorPicker] with a fluent Go API.
+// ColorPicker is an idiomatic wrapper over the Objective-C class NSColorPicker.
 type ColorPicker struct {
-	inner *raw.NSColorPicker
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSColorPicker].
-func (x *ColorPicker) Unwrap() *raw.NSColorPicker { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ColorPicker) ID() objc.ID { return x.inner.Ptr() }
-
-// ColorPickerFromID adopts an existing object pointer as a ColorPicker (nil for 0).
+// ColorPickerFromID adopts an existing Objective-C object as a ColorPicker
+// (nil for 0), retaining it and registering a release finalizer.
 func ColorPickerFromID(id objc.ID) *ColorPicker {
 	if id == 0 {
 		return nil
 	}
-	return &ColorPicker{inner: raw.NSColorPickerFromID(id)}
+	x := &ColorPicker{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// colorPickerAdopt wraps an Objective-C object that this code just created as a
+// ColorPicker (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func colorPickerAdopt(id objc.ID) *ColorPicker {
+	if id == 0 {
+		return nil
+	}
+	x := &ColorPicker{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ColorPicker) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ColorPicker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ColorPicker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes the color picker with the specified color panel and color picker mode mask.
 //
-// NewColorPickerWithPickerMaskColorPanel creates a new [ColorPicker].
-func NewColorPickerWithPickerMaskColorPanel(mask uint, owningColorPanel *raw.NSColorPanel) *ColorPicker {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSColorPicker")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPickerMask:colorPanel:"), mask, owningColorPanel.Ptr())
-	return &ColorPicker{inner: raw.NSColorPickerFromID(_id)}
+// NewColorPickerWithPickerMaskColorPanel creates a new ColorPicker.
+func NewColorPickerWithPickerMaskColorPanel(mask int, owningColorPanel *ColorPanel) *ColorPicker {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSColorPicker")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPickerMask:colorPanel:"), mask, objref.IDOf(owningColorPanel))
+	return colorPickerAdopt(_id)
 }
 
 // Sets the image used for the specified button cell.
-//
-// InsertNewButtonImageIn calls the underlying InsertNewButtonImageIn.
-func (x *ColorPicker) InsertNewButtonImageIn(newButtonImage *raw.NSImage, buttonCell *raw.NSButtonCell) {
-	x.inner.InsertNewButtonImageIn(newButtonImage, buttonCell)
+func (x *ColorPicker) InsertNewButtonImageIn(newButtonImage *Image, buttonCell *ButtonCell) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertNewButtonImage:in:"), objref.IDOf(newButtonImage), objref.IDOf(buttonCell))
 }
 
 // Overriden to respond to a size change.
-//
-// ViewSizeChanged calls the underlying ViewSizeChanged.
-func (x *ColorPicker) ViewSizeChanged(sender objc.ID) {
-	x.inner.ViewSizeChanged(sender)
+func (x *ColorPicker) ViewSizeChanged(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewSizeChanged:"), objref.IDOf(sender))
 }
 
 // Overriden to attach a color list to a color picker.
-//
-// AttachColorList calls the underlying AttachColorList.
-func (x *ColorPicker) AttachColorList(colorList *raw.NSColorList) {
-	x.inner.AttachColorList(colorList)
+func (x *ColorPicker) AttachColorList(colorList *ColorList) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachColorList:"), objref.IDOf(colorList))
 }
 
 // Overriden to detach a color list from a color picker.
-//
-// DetachColorList calls the underlying DetachColorList.
-func (x *ColorPicker) DetachColorList(colorList *raw.NSColorList) {
-	x.inner.DetachColorList(colorList)
+func (x *ColorPicker) DetachColorList(colorList *ColorList) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detachColorList:"), objref.IDOf(colorList))
 }
 
 // Overriden to set the color picker’s mode.
-//
-// SetMode calls the underlying SetMode.
-func (x *ColorPicker) SetMode(mode NSColorPanelMode) {
-	x.inner.SetMode(raw.NSColorPanelMode(mode))
+func (x *ColorPicker) SetMode(mode ColorPanelMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 }
 
-// ColorPanel calls the underlying ColorPanel.
 func (x *ColorPicker) ColorPanel() *ColorPanel {
-	_r := x.inner.ColorPanel()
-	if _r == nil {
-		return nil
-	}
-	return &ColorPanel{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorPanel"))
+	return ColorPanelFromID(_r)
 }
 
-// ProvideNewButtonImage calls the underlying ProvideNewButtonImage.
 func (x *ColorPicker) ProvideNewButtonImage() *Image {
-	_r := x.inner.ProvideNewButtonImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provideNewButtonImage"))
+	return ImageFromID(_r)
 }
 
-// ButtonToolTip calls the underlying ButtonToolTip.
 func (x *ColorPicker) ButtonToolTip() string {
-	_r := x.inner.ButtonToolTip()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonToolTip"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-// MinContentSize calls the underlying MinContentSize.
-func (x *ColorPicker) MinContentSize() corefoundation.CGSize {
-	return x.inner.MinContentSize()
+	return purego.GoString(_r)
 }
 
 // ColorPickerable is the interface implemented by [ColorPicker], for mocking and DI.
 type ColorPickerable interface {
-	Unwrap() *raw.NSColorPicker
-	InsertNewButtonImageIn(newButtonImage *raw.NSImage, buttonCell *raw.NSButtonCell)
-	ViewSizeChanged(sender objc.ID)
-	AttachColorList(colorList *raw.NSColorList)
-	DetachColorList(colorList *raw.NSColorList)
-	SetMode(mode NSColorPanelMode)
+	obj.Object
+	InsertNewButtonImageIn(newButtonImage *Image, buttonCell *ButtonCell)
+	ViewSizeChanged(sender obj.Object)
+	AttachColorList(colorList *ColorList)
+	DetachColorList(colorList *ColorList)
+	SetMode(mode ColorPanelMode)
 	ColorPanel() *ColorPanel
 	ProvideNewButtonImage() *Image
 	ButtonToolTip() string
-	MinContentSize() corefoundation.CGSize
 }
 
 var _ ColorPickerable = (*ColorPicker)(nil)

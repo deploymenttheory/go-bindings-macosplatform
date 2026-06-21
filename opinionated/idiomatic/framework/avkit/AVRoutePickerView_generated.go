@@ -5,126 +5,121 @@
 package avkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A view that presents a list of nearby media receivers.
 //
-// RoutePickerView wraps [raw.AVRoutePickerView] with a fluent Go API.
+// RoutePickerView is an idiomatic wrapper over the Objective-C class AVRoutePickerView.
 type RoutePickerView struct {
-	inner *raw.AVRoutePickerView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVRoutePickerView].
-func (x *RoutePickerView) Unwrap() *raw.AVRoutePickerView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RoutePickerView) ID() objc.ID { return x.inner.Ptr() }
-
-// RoutePickerViewFromID adopts an existing object pointer as a RoutePickerView (nil for 0).
+// RoutePickerViewFromID adopts an existing Objective-C object as a RoutePickerView
+// (nil for 0), retaining it and registering a release finalizer.
 func RoutePickerViewFromID(id objc.ID) *RoutePickerView {
 	if id == 0 {
 		return nil
 	}
-	return &RoutePickerView{inner: raw.AVRoutePickerViewFromID(id)}
-}
-
-// NewRoutePickerView creates a new [RoutePickerView].
-func NewRoutePickerView() *RoutePickerView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVRoutePickerView")), objc.RegisterName("new"))
-	return &RoutePickerView{inner: raw.AVRoutePickerViewFromID(_id)}
-}
-
-// The delegate object for the route picker.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *RoutePickerView) WithDelegate(delegate raw.AVRoutePickerViewDelegate) *RoutePickerView {
-	x.inner.SetDelegate(delegate)
+	x := &RoutePickerView{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// routePickerViewAdopt wraps an Objective-C object that this code just created as a
+// RoutePickerView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func routePickerViewAdopt(id objc.ID) *RoutePickerView {
+	if id == 0 {
+		return nil
+	}
+	x := &RoutePickerView{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RoutePickerView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RoutePickerView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RoutePickerView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRoutePickerView creates a new RoutePickerView.
+func NewRoutePickerView() *RoutePickerView {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVRoutePickerView")), objc.RegisterName("new"))
+	return routePickerViewAdopt(_id)
 }
 
 // The player object to perform routing operations for.
 //
-// WithPlayer sets the player property and returns the receiver for chaining.
-func (x *RoutePickerView) WithPlayer(player *avfoundation.AVPlayer) *RoutePickerView {
-	x.inner.SetPlayer(player)
+// WithPlayer sets player and returns the receiver so calls can be chained.
+func (x *RoutePickerView) WithPlayer(player obj.Object) *RoutePickerView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:"), objref.IDOf(player))
 	return x
 }
 
 // A Boolean value that indicates whether the route picker button has a border.
 //
-// WithRoutePickerButtonBordered sets the routePickerButtonBordered property and returns the receiver for chaining.
+// WithRoutePickerButtonBordered sets routePickerButtonBordered and returns the receiver so calls can be chained.
 func (x *RoutePickerView) WithRoutePickerButtonBordered(routePickerButtonBordered bool) *RoutePickerView {
-	x.inner.SetRoutePickerButtonBordered(routePickerButtonBordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoutePickerButtonBordered:"), routePickerButtonBordered)
 	return x
 }
 
 // Returns the color of the picker button for the specified state.
-//
-// RoutePickerButtonColorForState calls the underlying RoutePickerButtonColorForState.
-func (x *RoutePickerView) RoutePickerButtonColorForState(state AVRoutePickerViewButtonState) *appkit.NSColor {
-	return x.inner.RoutePickerButtonColorForState(raw.AVRoutePickerViewButtonState(state))
+func (x *RoutePickerView) RoutePickerButtonColorForState(state RoutePickerViewButtonState) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("routePickerButtonColorForState:"), state)
+	return obj.Wrap(_r)
 }
 
 // Sets the route picker button color for the specified state.
-//
-// SetRoutePickerButtonColorForState calls the underlying SetRoutePickerButtonColorForState.
-func (x *RoutePickerView) SetRoutePickerButtonColorForState(color *appkit.NSColor, state AVRoutePickerViewButtonState) {
-	x.inner.SetRoutePickerButtonColorForState(color, raw.AVRoutePickerViewButtonState(state))
+func (x *RoutePickerView) SetRoutePickerButtonColorForState(color obj.Object, state RoutePickerViewButtonState) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoutePickerButtonColor:forState:"), objref.IDOf(color), state)
 }
 
-// @property		delegate @abstract		The route picker view's delegate.
-//
-// Delegate calls the underlying Delegate.
-func (x *RoutePickerView) Delegate() raw.AVRoutePickerViewDelegate {
-	return x.inner.Delegate()
+// The player for which to perform routing operations.
+func (x *RoutePickerView) Player() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
+	return obj.Wrap(_r)
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *RoutePickerView) SetDelegate(delegate raw.AVRoutePickerViewDelegate) {
-	x.inner.SetDelegate(delegate)
+func (x *RoutePickerView) SetPlayer(player obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:"), objref.IDOf(player))
 }
 
-// @property 		player @abstract		The player for which to perform routing operations.
-//
-// Player calls the underlying Player.
-func (x *RoutePickerView) Player() *avfoundation.AVPlayer {
-	return x.inner.Player()
-}
-
-// SetPlayer calls the underlying SetPlayer.
-func (x *RoutePickerView) SetPlayer(player *avfoundation.AVPlayer) {
-	x.inner.SetPlayer(player)
-}
-
-// @property		routePickerButtonBordered @abstract		Whether or not the picker button has a border. Default is YES.
-//
-// IsRoutePickerButtonBordered calls the underlying IsRoutePickerButtonBordered.
+// Whether or not the picker button has a border. Default is YES.
 func (x *RoutePickerView) IsRoutePickerButtonBordered() bool {
-	return x.inner.IsRoutePickerButtonBordered()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRoutePickerButtonBordered"))
+	return _r
 }
 
-// SetRoutePickerButtonBordered calls the underlying SetRoutePickerButtonBordered.
 func (x *RoutePickerView) SetRoutePickerButtonBordered(routePickerButtonBordered bool) {
-	x.inner.SetRoutePickerButtonBordered(routePickerButtonBordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoutePickerButtonBordered:"), routePickerButtonBordered)
 }
 
 // RoutePickerViewable is the interface implemented by [RoutePickerView], for mocking and DI.
 type RoutePickerViewable interface {
-	Unwrap() *raw.AVRoutePickerView
-	WithDelegate(delegate raw.AVRoutePickerViewDelegate) *RoutePickerView
-	WithPlayer(player *avfoundation.AVPlayer) *RoutePickerView
+	obj.Object
+	WithPlayer(player obj.Object) *RoutePickerView
 	WithRoutePickerButtonBordered(routePickerButtonBordered bool) *RoutePickerView
-	RoutePickerButtonColorForState(state AVRoutePickerViewButtonState) *appkit.NSColor
-	SetRoutePickerButtonColorForState(color *appkit.NSColor, state AVRoutePickerViewButtonState)
-	Delegate() raw.AVRoutePickerViewDelegate
-	SetDelegate(delegate raw.AVRoutePickerViewDelegate)
-	Player() *avfoundation.AVPlayer
-	SetPlayer(player *avfoundation.AVPlayer)
+	RoutePickerButtonColorForState(state RoutePickerViewButtonState) obj.Object
+	SetRoutePickerButtonColorForState(color obj.Object, state RoutePickerViewButtonState)
+	Player() obj.Object
+	SetPlayer(player obj.Object)
 	IsRoutePickerButtonBordered() bool
 	SetRoutePickerButtonBordered(routePickerButtonBordered bool)
 }

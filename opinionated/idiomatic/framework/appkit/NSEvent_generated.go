@@ -5,401 +5,374 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that contains information about an input action, such as a mouse click or a key press.
 //
-// Event wraps [raw.NSEvent] with a fluent Go API.
+// Event is an idiomatic wrapper over the Objective-C class NSEvent.
 type Event struct {
-	inner *raw.NSEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSEvent].
-func (x *Event) Unwrap() *raw.NSEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Event) ID() objc.ID { return x.inner.Ptr() }
-
-// EventFromID adopts an existing object pointer as a Event (nil for 0).
+// EventFromID adopts an existing Objective-C object as a Event
+// (nil for 0), retaining it and registering a release finalizer.
 func EventFromID(id objc.ID) *Event {
 	if id == 0 {
 		return nil
 	}
-	return &Event{inner: raw.NSEventFromID(id)}
+	x := &Event{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEvent creates a new [Event].
+// eventAdopt wraps an Objective-C object that this code just created as a
+// Event (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func eventAdopt(id objc.ID) *Event {
+	if id == 0 {
+		return nil
+	}
+	x := &Event{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Event) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Event) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Event) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEvent creates a new Event.
 func NewEvent() *Event {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSEvent")), objc.RegisterName("new"))
-	return &Event{inner: raw.NSEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSEvent")), objc.RegisterName("new"))
+	return eventAdopt(_id)
 }
 
 // Returns the new characters that result if you apply the specified modifier keys to the event.
-//
-// CharactersByApplyingModifiers calls the underlying CharactersByApplyingModifiers.
-func (x *Event) CharactersByApplyingModifiers(modifiers NSEventModifierFlags) string {
-	_r := x.inner.CharactersByApplyingModifiers(raw.NSEventModifierFlags(modifiers))
-	if _r == nil {
+func (x *Event) CharactersByApplyingModifiers(modifiers EventModifierFlags) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("charactersByApplyingModifiers:"), modifiers)
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Returns the touch objects associated with the specified phase.
-//
-// TouchesMatchingPhaseInView calls the underlying TouchesMatchingPhaseInView.
-func (x *Event) TouchesMatchingPhaseInView(phase NSTouchPhase, view *raw.NSView) *foundation.NSSet[*raw.NSTouch] {
-	return x.inner.TouchesMatchingPhaseInView(raw.NSTouchPhase(phase), view)
+func (x *Event) TouchesMatchingPhaseInView(phase TouchPhase, view *View) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchesMatchingPhase:inView:"), phase, objref.IDOf(view))
+	return obj.Wrap(_r)
 }
 
 // Returns all touch objects associated with the event.
-//
-// AllTouches calls the underlying AllTouches.
-func (x *Event) AllTouches() *foundation.NSSet[*raw.NSTouch] {
-	return x.inner.AllTouches()
+func (x *Event) AllTouches() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allTouches"))
+	return obj.Wrap(_r)
 }
 
 // Returns the touch objects from the event that belong to the specified view.
-//
-// TouchesForView calls the underlying TouchesForView.
-func (x *Event) TouchesForView(view *raw.NSView) *foundation.NSSet[*raw.NSTouch] {
-	return x.inner.TouchesForView(view)
+func (x *Event) TouchesForView(view *View) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchesForView:"), objref.IDOf(view))
+	return obj.Wrap(_r)
 }
 
 // Returns all of the touch objects associated with the specified main touch.
-//
-// CoalescedTouchesForTouch calls the underlying CoalescedTouchesForTouch.
-func (x *Event) CoalescedTouchesForTouch(touch *raw.NSTouch) *foundation.NSArray[*raw.NSTouch] {
-	return x.inner.CoalescedTouchesForTouch(touch)
+func (x *Event) CoalescedTouchesForTouch(touch *Touch) []*Touch {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coalescedTouchesForTouch:"), objref.IDOf(touch))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Touch { return TouchFromID(_id) })
 }
 
-// Allows tracking and user interface feedback of scroll wheel events.
-//
-// TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler calls the underlying TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler.
-func (x *Event) TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler(options NSEventSwipeTrackingOptions, minDampenThreshold float64, maxDampenThreshold float64, trackingHandler func(float64, NSEventPhase, bool, *bool)) {
-	x.inner.TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler(raw.NSEventSwipeTrackingOptions(options), minDampenThreshold, maxDampenThreshold, func(_a0 float64, _a1 raw.NSEventPhase, _a2 bool, _a3 *bool) {
-		trackingHandler(_a0, NSEventPhase(_a1), _a2, _a3)
-	})
+func (x *Event) Type() EventType {
+	_r := objc.Send[EventType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// Type calls the underlying Type.
-func (x *Event) Type() NSEventType {
-	return NSEventType(x.inner.Type())
+func (x *Event) ModifierFlags() EventModifierFlags {
+	_r := objc.Send[EventModifierFlags](objref.IDOf(x), objc.RegisterName("modifierFlags"))
+	return _r
 }
 
-// ModifierFlags calls the underlying ModifierFlags.
-func (x *Event) ModifierFlags() NSEventModifierFlags {
-	return NSEventModifierFlags(x.inner.ModifierFlags())
-}
-
-// Timestamp calls the underlying Timestamp.
 func (x *Event) Timestamp() float64 {
-	return x.inner.Timestamp()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timestamp"))
+	return _r
 }
 
-// Window calls the underlying Window.
 func (x *Event) Window() *Window {
-	_r := x.inner.Window()
-	if _r == nil {
-		return nil
-	}
-	return &Window{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("window"))
+	return WindowFromID(_r)
 }
 
-// WindowNumber calls the underlying WindowNumber.
 func (x *Event) WindowNumber() int {
-	return x.inner.WindowNumber()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("windowNumber"))
+	return _r
 }
 
-// Context calls the underlying Context.
 func (x *Event) Context() *GraphicsContext {
-	_r := x.inner.Context()
-	if _r == nil {
-		return nil
-	}
-	return &GraphicsContext{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
+	return GraphicsContextFromID(_r)
 }
 
-// ClickCount calls the underlying ClickCount.
 func (x *Event) ClickCount() int {
-	return x.inner.ClickCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("clickCount"))
+	return _r
 }
 
-// ButtonNumber calls the underlying ButtonNumber.
 func (x *Event) ButtonNumber() int {
-	return x.inner.ButtonNumber()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("buttonNumber"))
+	return _r
 }
 
-// EventNumber calls the underlying EventNumber.
 func (x *Event) EventNumber() int {
-	return x.inner.EventNumber()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("eventNumber"))
+	return _r
 }
 
-// Pressure calls the underlying Pressure.
 func (x *Event) Pressure() float32 {
-	return x.inner.Pressure()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("pressure"))
+	return _r
 }
 
-// LocationInWindow calls the underlying LocationInWindow.
-func (x *Event) LocationInWindow() corefoundation.CGPoint {
-	return x.inner.LocationInWindow()
-}
-
-// DeltaX calls the underlying DeltaX.
 func (x *Event) DeltaX() float64 {
-	return x.inner.DeltaX()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("deltaX"))
+	return _r
 }
 
-// DeltaY calls the underlying DeltaY.
 func (x *Event) DeltaY() float64 {
-	return x.inner.DeltaY()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("deltaY"))
+	return _r
 }
 
-// DeltaZ calls the underlying DeltaZ.
 func (x *Event) DeltaZ() float64 {
-	return x.inner.DeltaZ()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("deltaZ"))
+	return _r
 }
 
-// HasPreciseScrollingDeltas calls the underlying HasPreciseScrollingDeltas.
 func (x *Event) HasPreciseScrollingDeltas() bool {
-	return x.inner.HasPreciseScrollingDeltas()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasPreciseScrollingDeltas"))
+	return _r
 }
 
-// ScrollingDeltaX calls the underlying ScrollingDeltaX.
 func (x *Event) ScrollingDeltaX() float64 {
-	return x.inner.ScrollingDeltaX()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scrollingDeltaX"))
+	return _r
 }
 
-// ScrollingDeltaY calls the underlying ScrollingDeltaY.
 func (x *Event) ScrollingDeltaY() float64 {
-	return x.inner.ScrollingDeltaY()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scrollingDeltaY"))
+	return _r
 }
 
-// MomentumPhase calls the underlying MomentumPhase.
-func (x *Event) MomentumPhase() NSEventPhase {
-	return NSEventPhase(x.inner.MomentumPhase())
+func (x *Event) MomentumPhase() EventPhase {
+	_r := objc.Send[EventPhase](objref.IDOf(x), objc.RegisterName("momentumPhase"))
+	return _r
 }
 
-// IsDirectionInvertedFromDevice calls the underlying IsDirectionInvertedFromDevice.
 func (x *Event) IsDirectionInvertedFromDevice() bool {
-	return x.inner.IsDirectionInvertedFromDevice()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDirectionInvertedFromDevice"))
+	return _r
 }
 
-// Characters calls the underlying Characters.
 func (x *Event) Characters() string {
-	_r := x.inner.Characters()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("characters"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// CharactersIgnoringModifiers calls the underlying CharactersIgnoringModifiers.
 func (x *Event) CharactersIgnoringModifiers() string {
-	_r := x.inner.CharactersIgnoringModifiers()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("charactersIgnoringModifiers"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// IsARepeat calls the underlying IsARepeat.
 func (x *Event) IsARepeat() bool {
-	return x.inner.IsARepeat()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isARepeat"))
+	return _r
 }
 
-// KeyCode calls the underlying KeyCode.
 func (x *Event) KeyCode() uint16 {
-	return x.inner.KeyCode()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("keyCode"))
+	return _r
 }
 
-// TrackingNumber calls the underlying TrackingNumber.
 func (x *Event) TrackingNumber() int {
-	return x.inner.TrackingNumber()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("trackingNumber"))
+	return _r
 }
 
-// UserData calls the underlying UserData.
-func (x *Event) UserData() unsafe.Pointer {
-	return x.inner.UserData()
-}
-
-// TrackingArea calls the underlying TrackingArea.
 func (x *Event) TrackingArea() *TrackingArea {
-	_r := x.inner.TrackingArea()
-	if _r == nil {
-		return nil
-	}
-	return &TrackingArea{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackingArea"))
+	return TrackingAreaFromID(_r)
 }
 
-// Subtype calls the underlying Subtype.
-func (x *Event) Subtype() NSEventSubtype {
-	return NSEventSubtype(x.inner.Subtype())
+func (x *Event) Subtype() EventSubtype {
+	_r := objc.Send[EventSubtype](objref.IDOf(x), objc.RegisterName("subtype"))
+	return _r
 }
 
-// Data1 calls the underlying Data1.
 func (x *Event) Data1() int {
-	return x.inner.Data1()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("data1"))
+	return _r
 }
 
-// Data2 calls the underlying Data2.
 func (x *Event) Data2() int {
-	return x.inner.Data2()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("data2"))
+	return _r
 }
 
-// EventRef calls the underlying EventRef.
-func (x *Event) EventRef() unsafe.Pointer {
-	return x.inner.EventRef()
+func (x *Event) CGEvent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGEvent"))
+	return obj.Wrap(_r)
 }
 
-// CGEvent calls the underlying CGEvent.
-func (x *Event) CGEvent() unsafe.Pointer {
-	return x.inner.CGEvent()
-}
-
-// Magnification calls the underlying Magnification.
 func (x *Event) Magnification() float64 {
-	return x.inner.Magnification()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("magnification"))
+	return _r
 }
 
-// DeviceID calls the underlying DeviceID.
-func (x *Event) DeviceID() uint {
-	return x.inner.DeviceID()
+func (x *Event) DeviceID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("deviceID"))
+	return _r
 }
 
-// Rotation calls the underlying Rotation.
 func (x *Event) Rotation() float32 {
-	return x.inner.Rotation()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rotation"))
+	return _r
 }
 
-// AbsoluteX calls the underlying AbsoluteX.
 func (x *Event) AbsoluteX() int {
-	return x.inner.AbsoluteX()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("absoluteX"))
+	return _r
 }
 
-// AbsoluteY calls the underlying AbsoluteY.
 func (x *Event) AbsoluteY() int {
-	return x.inner.AbsoluteY()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("absoluteY"))
+	return _r
 }
 
-// AbsoluteZ calls the underlying AbsoluteZ.
 func (x *Event) AbsoluteZ() int {
-	return x.inner.AbsoluteZ()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("absoluteZ"))
+	return _r
 }
 
-// ButtonMask calls the underlying ButtonMask.
-func (x *Event) ButtonMask() NSEventButtonMask {
-	return NSEventButtonMask(x.inner.ButtonMask())
+func (x *Event) ButtonMask() EventButtonMask {
+	_r := objc.Send[EventButtonMask](objref.IDOf(x), objc.RegisterName("buttonMask"))
+	return _r
 }
 
-// Tilt calls the underlying Tilt.
-func (x *Event) Tilt() corefoundation.CGPoint {
-	return x.inner.Tilt()
-}
-
-// TangentialPressure calls the underlying TangentialPressure.
 func (x *Event) TangentialPressure() float32 {
-	return x.inner.TangentialPressure()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("tangentialPressure"))
+	return _r
 }
 
-// VendorDefined calls the underlying VendorDefined.
-func (x *Event) VendorDefined() objc.ID {
-	return x.inner.VendorDefined()
+func (x *Event) VendorDefined() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorDefined"))
+	return obj.Wrap(_r)
 }
 
-// VendorID calls the underlying VendorID.
-func (x *Event) VendorID() uint {
-	return x.inner.VendorID()
+func (x *Event) VendorID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vendorID"))
+	return _r
 }
 
-// TabletID calls the underlying TabletID.
-func (x *Event) TabletID() uint {
-	return x.inner.TabletID()
+func (x *Event) TabletID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tabletID"))
+	return _r
 }
 
-// PointingDeviceID calls the underlying PointingDeviceID.
-func (x *Event) PointingDeviceID() uint {
-	return x.inner.PointingDeviceID()
+func (x *Event) PointingDeviceID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pointingDeviceID"))
+	return _r
 }
 
-// SystemTabletID calls the underlying SystemTabletID.
-func (x *Event) SystemTabletID() uint {
-	return x.inner.SystemTabletID()
+func (x *Event) SystemTabletID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("systemTabletID"))
+	return _r
 }
 
-// VendorPointingDeviceType calls the underlying VendorPointingDeviceType.
-func (x *Event) VendorPointingDeviceType() uint {
-	return x.inner.VendorPointingDeviceType()
+func (x *Event) VendorPointingDeviceType() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vendorPointingDeviceType"))
+	return _r
 }
 
-// PointingDeviceSerialNumber calls the underlying PointingDeviceSerialNumber.
-func (x *Event) PointingDeviceSerialNumber() uint {
-	return x.inner.PointingDeviceSerialNumber()
+func (x *Event) PointingDeviceSerialNumber() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pointingDeviceSerialNumber"))
+	return _r
 }
 
-// UniqueID calls the underlying UniqueID.
 func (x *Event) UniqueID() uint64 {
-	return x.inner.UniqueID()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("uniqueID"))
+	return _r
 }
 
-// CapabilityMask calls the underlying CapabilityMask.
-func (x *Event) CapabilityMask() uint {
-	return x.inner.CapabilityMask()
+func (x *Event) CapabilityMask() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("capabilityMask"))
+	return _r
 }
 
-// PointingDeviceType calls the underlying PointingDeviceType.
-func (x *Event) PointingDeviceType() NSPointingDeviceType {
-	return NSPointingDeviceType(x.inner.PointingDeviceType())
+func (x *Event) PointingDeviceType() PointingDeviceType {
+	_r := objc.Send[PointingDeviceType](objref.IDOf(x), objc.RegisterName("pointingDeviceType"))
+	return _r
 }
 
-// IsEnteringProximity calls the underlying IsEnteringProximity.
 func (x *Event) IsEnteringProximity() bool {
-	return x.inner.IsEnteringProximity()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnteringProximity"))
+	return _r
 }
 
-// Phase calls the underlying Phase.
-func (x *Event) Phase() NSEventPhase {
-	return NSEventPhase(x.inner.Phase())
+func (x *Event) Phase() EventPhase {
+	_r := objc.Send[EventPhase](objref.IDOf(x), objc.RegisterName("phase"))
+	return _r
 }
 
-// Stage calls the underlying Stage.
 func (x *Event) Stage() int {
-	return x.inner.Stage()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stage"))
+	return _r
 }
 
-// StageTransition calls the underlying StageTransition.
 func (x *Event) StageTransition() float64 {
-	return x.inner.StageTransition()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("stageTransition"))
+	return _r
 }
 
-// AssociatedEventsMask calls the underlying AssociatedEventsMask.
-func (x *Event) AssociatedEventsMask() NSEventMask {
-	return NSEventMask(x.inner.AssociatedEventsMask())
+func (x *Event) AssociatedEventsMask() EventMask {
+	_r := objc.Send[EventMask](objref.IDOf(x), objc.RegisterName("associatedEventsMask"))
+	return _r
 }
 
-// PressureBehavior calls the underlying PressureBehavior.
-func (x *Event) PressureBehavior() NSPressureBehavior {
-	return NSPressureBehavior(x.inner.PressureBehavior())
+func (x *Event) PressureBehavior() PressureBehavior {
+	_r := objc.Send[PressureBehavior](objref.IDOf(x), objc.RegisterName("pressureBehavior"))
+	return _r
 }
 
 // Eventable is the interface implemented by [Event], for mocking and DI.
 type Eventable interface {
-	Unwrap() *raw.NSEvent
-	CharactersByApplyingModifiers(modifiers NSEventModifierFlags) string
-	TouchesMatchingPhaseInView(phase NSTouchPhase, view *raw.NSView) *foundation.NSSet[*raw.NSTouch]
-	AllTouches() *foundation.NSSet[*raw.NSTouch]
-	TouchesForView(view *raw.NSView) *foundation.NSSet[*raw.NSTouch]
-	CoalescedTouchesForTouch(touch *raw.NSTouch) *foundation.NSArray[*raw.NSTouch]
-	TrackSwipeEventWithOptionsDampenAmountThresholdMinMaxUsingHandler(options NSEventSwipeTrackingOptions, minDampenThreshold float64, maxDampenThreshold float64, trackingHandler func(float64, NSEventPhase, bool, *bool))
-	Type() NSEventType
-	ModifierFlags() NSEventModifierFlags
+	obj.Object
+	CharactersByApplyingModifiers(modifiers EventModifierFlags) string
+	TouchesMatchingPhaseInView(phase TouchPhase, view *View) obj.Object
+	AllTouches() obj.Object
+	TouchesForView(view *View) obj.Object
+	CoalescedTouchesForTouch(touch *Touch) []*Touch
+	Type() EventType
+	ModifierFlags() EventModifierFlags
 	Timestamp() float64
 	Window() *Window
 	WindowNumber() int
@@ -408,52 +381,48 @@ type Eventable interface {
 	ButtonNumber() int
 	EventNumber() int
 	Pressure() float32
-	LocationInWindow() corefoundation.CGPoint
 	DeltaX() float64
 	DeltaY() float64
 	DeltaZ() float64
 	HasPreciseScrollingDeltas() bool
 	ScrollingDeltaX() float64
 	ScrollingDeltaY() float64
-	MomentumPhase() NSEventPhase
+	MomentumPhase() EventPhase
 	IsDirectionInvertedFromDevice() bool
 	Characters() string
 	CharactersIgnoringModifiers() string
 	IsARepeat() bool
 	KeyCode() uint16
 	TrackingNumber() int
-	UserData() unsafe.Pointer
 	TrackingArea() *TrackingArea
-	Subtype() NSEventSubtype
+	Subtype() EventSubtype
 	Data1() int
 	Data2() int
-	EventRef() unsafe.Pointer
-	CGEvent() unsafe.Pointer
+	CGEvent() obj.Object
 	Magnification() float64
-	DeviceID() uint
+	DeviceID() int
 	Rotation() float32
 	AbsoluteX() int
 	AbsoluteY() int
 	AbsoluteZ() int
-	ButtonMask() NSEventButtonMask
-	Tilt() corefoundation.CGPoint
+	ButtonMask() EventButtonMask
 	TangentialPressure() float32
-	VendorDefined() objc.ID
-	VendorID() uint
-	TabletID() uint
-	PointingDeviceID() uint
-	SystemTabletID() uint
-	VendorPointingDeviceType() uint
-	PointingDeviceSerialNumber() uint
+	VendorDefined() obj.Object
+	VendorID() int
+	TabletID() int
+	PointingDeviceID() int
+	SystemTabletID() int
+	VendorPointingDeviceType() int
+	PointingDeviceSerialNumber() int
 	UniqueID() uint64
-	CapabilityMask() uint
-	PointingDeviceType() NSPointingDeviceType
+	CapabilityMask() int
+	PointingDeviceType() PointingDeviceType
 	IsEnteringProximity() bool
-	Phase() NSEventPhase
+	Phase() EventPhase
 	Stage() int
 	StageTransition() float64
-	AssociatedEventsMask() NSEventMask
-	PressureBehavior() NSPressureBehavior
+	AssociatedEventsMask() EventMask
+	PressureBehavior() PressureBehavior
 }
 
 var _ Eventable = (*Event)(nil)

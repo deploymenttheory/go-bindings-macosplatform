@@ -5,48 +5,68 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A query that returns a list of sources, such as apps and devices, that have saved matching queries to the HealthKit store.
 //
-// SourceQuery wraps [raw.HKSourceQuery] with a fluent Go API.
+// SourceQuery is an idiomatic wrapper over the Objective-C class HKSourceQuery.
 type SourceQuery struct {
-	inner *raw.HKSourceQuery
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKSourceQuery].
-func (x *SourceQuery) Unwrap() *raw.HKSourceQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SourceQuery) ID() objc.ID { return x.inner.Ptr() }
-
-// SourceQueryFromID adopts an existing object pointer as a SourceQuery (nil for 0).
+// SourceQueryFromID adopts an existing Objective-C object as a SourceQuery
+// (nil for 0), retaining it and registering a release finalizer.
 func SourceQueryFromID(id objc.ID) *SourceQuery {
 	if id == 0 {
 		return nil
 	}
-	return &SourceQuery{inner: raw.HKSourceQueryFromID(id)}
+	x := &SourceQuery{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Instantiates and returns a source query.
-//
-// NewSourceQueryWithSampleTypeSamplePredicateCompletionHandler creates a new [SourceQuery].
-func NewSourceQueryWithSampleTypeSamplePredicateCompletionHandler(sampleType *raw.HKSampleType, objectPredicate *foundation.NSPredicate, completionHandler func(*raw.HKSourceQuery, *foundation.NSSet[*raw.HKSource], unsafe.Pointer)) *SourceQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKSourceQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleType:samplePredicate:completionHandler:"), sampleType.Ptr(), objectPredicate.Ptr(), completionHandler)
-	return &SourceQuery{inner: raw.HKSourceQueryFromID(_id)}
+// sourceQueryAdopt wraps an Objective-C object that this code just created as a
+// SourceQuery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sourceQueryAdopt(id objc.ID) *SourceQuery {
+	if id == 0 {
+		return nil
+	}
+	x := &SourceQuery{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *SourceQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+// Description returns the object's -description text.
+func (x *SourceQuery) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SourceQuery) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SourceQuery) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSourceQuery creates a new SourceQuery.
+func NewSourceQuery() *SourceQuery {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKSourceQuery")), objc.RegisterName("new"))
+	return sourceQueryAdopt(_id)
+}
 
 // SourceQueryable is the interface implemented by [SourceQuery], for mocking and DI.
 type SourceQueryable interface {
-	Unwrap() *raw.HKSourceQuery
+	obj.Object
 }
 
 var _ SourceQueryable = (*SourceQuery)(nil)

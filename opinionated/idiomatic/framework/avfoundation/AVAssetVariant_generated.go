@@ -5,90 +5,103 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a bit rate variant.
 //
-// AssetVariant wraps [raw.AVAssetVariant] with a fluent Go API.
+// AssetVariant is an idiomatic wrapper over the Objective-C class AVAssetVariant.
 type AssetVariant struct {
-	inner *raw.AVAssetVariant
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetVariant].
-func (x *AssetVariant) Unwrap() *raw.AVAssetVariant { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetVariant) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetVariantFromID adopts an existing object pointer as a AssetVariant (nil for 0).
+// AssetVariantFromID adopts an existing Objective-C object as a AssetVariant
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetVariantFromID(id objc.ID) *AssetVariant {
 	if id == 0 {
 		return nil
 	}
-	return &AssetVariant{inner: raw.AVAssetVariantFromID(id)}
+	x := &AssetVariant{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAssetVariant creates a new [AssetVariant].
+// assetVariantAdopt wraps an Objective-C object that this code just created as a
+// AssetVariant (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetVariantAdopt(id objc.ID) *AssetVariant {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetVariant{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetVariant) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetVariant) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetVariant) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAssetVariant creates a new AssetVariant.
 func NewAssetVariant() *AssetVariant {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetVariant")), objc.RegisterName("new"))
-	return &AssetVariant{inner: raw.AVAssetVariantFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetVariant")), objc.RegisterName("new"))
+	return assetVariantAdopt(_id)
 }
 
 // If it is not declared, the value will be negative.
-//
-// PeakBitRate calls the underlying PeakBitRate.
 func (x *AssetVariant) PeakBitRate() float64 {
-	return x.inner.PeakBitRate()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("peakBitRate"))
+	return _r
 }
 
 // If it is not declared, the value will be negative.
-//
-// AverageBitRate calls the underlying AverageBitRate.
 func (x *AssetVariant) AverageBitRate() float64 {
-	return x.inner.AverageBitRate()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("averageBitRate"))
+	return _r
 }
 
 // Provides variant's video rendition attributes. If no video attributes are declared, it will be nil.
-//
-// VideoAttributes calls the underlying VideoAttributes.
 func (x *AssetVariant) VideoAttributes() *AssetVariantVideoAttributes {
-	_r := x.inner.VideoAttributes()
-	if _r == nil {
-		return nil
-	}
-	return &AssetVariantVideoAttributes{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoAttributes"))
+	return AssetVariantVideoAttributesFromID(_r)
 }
 
 // Provides variant's audio rendition attributes. If no audio attributes are declared, it will be nil.
-//
-// AudioAttributes calls the underlying AudioAttributes.
 func (x *AssetVariant) AudioAttributes() *AssetVariantAudioAttributes {
-	_r := x.inner.AudioAttributes()
-	if _r == nil {
-		return nil
-	}
-	return &AssetVariantAudioAttributes{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioAttributes"))
+	return AssetVariantAudioAttributesFromID(_r)
 }
 
 // Provides URL to media playlist corresponding to variant
-//
-// URL calls the underlying URL.
-func (x *AssetVariant) URL() *foundation.NSURL {
-	return x.inner.URL()
+func (x *AssetVariant) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
 // AssetVariantable is the interface implemented by [AssetVariant], for mocking and DI.
 type AssetVariantable interface {
-	Unwrap() *raw.AVAssetVariant
+	obj.Object
 	PeakBitRate() float64
 	AverageBitRate() float64
 	VideoAttributes() *AssetVariantVideoAttributes
 	AudioAttributes() *AssetVariantAudioAttributes
-	URL() *foundation.NSURL
+	URL() obj.Object
 }
 
 var _ AssetVariantable = (*AssetVariant)(nil)

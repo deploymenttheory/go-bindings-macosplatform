@@ -5,79 +5,95 @@
 package corehaptics
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corehaptics"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A static parameter value that represents a single property of the haptic pattern.
 //
-// HapticEventParameter wraps [raw.CHHapticEventParameter] with a fluent Go API.
+// HapticEventParameter is an idiomatic wrapper over the Objective-C class CHHapticEventParameter.
 type HapticEventParameter struct {
-	inner *raw.CHHapticEventParameter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CHHapticEventParameter].
-func (x *HapticEventParameter) Unwrap() *raw.CHHapticEventParameter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HapticEventParameter) ID() objc.ID { return x.inner.Ptr() }
-
-// HapticEventParameterFromID adopts an existing object pointer as a HapticEventParameter (nil for 0).
+// HapticEventParameterFromID adopts an existing Objective-C object as a HapticEventParameter
+// (nil for 0), retaining it and registering a release finalizer.
 func HapticEventParameterFromID(id objc.ID) *HapticEventParameter {
 	if id == 0 {
 		return nil
 	}
-	return &HapticEventParameter{inner: raw.CHHapticEventParameterFromID(id)}
+	x := &HapticEventParameter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// hapticEventParameterAdopt wraps an Objective-C object that this code just created as a
+// HapticEventParameter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hapticEventParameterAdopt(id objc.ID) *HapticEventParameter {
+	if id == 0 {
+		return nil
+	}
+	x := &HapticEventParameter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HapticEventParameter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HapticEventParameter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HapticEventParameter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a haptic event parameter from its ID and value.
 //
-// NewHapticEventParameterWithParameterIDValue creates a new [HapticEventParameter].
-func NewHapticEventParameterWithParameterIDValue(parameterID *foundation.NSString, value float32) *HapticEventParameter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CHHapticEventParameter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParameterID:value:"), parameterID.Ptr(), value)
-	return &HapticEventParameter{inner: raw.CHHapticEventParameterFromID(_id)}
+// NewHapticEventParameterWithParameterIDValue creates a new HapticEventParameter.
+func NewHapticEventParameterWithParameterIDValue(parameterID obj.Object, value float32) *HapticEventParameter {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticEventParameter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParameterID:value:"), objref.IDOf(parameterID), value)
+	return hapticEventParameterAdopt(_id)
 }
 
 // The value of the parameter.
 //
-// WithValue sets the value property and returns the receiver for chaining.
+// WithValue sets value and returns the receiver so calls can be chained.
 func (x *HapticEventParameter) WithValue(value float32) *HapticEventParameter {
-	x.inner.SetValue(value)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 	return x
 }
 
-// @property parameterID The ID of the event parameter to use.
-//
-// ParameterID calls the underlying ParameterID.
-func (x *HapticEventParameter) ParameterID() string {
-	_r := x.inner.ParameterID()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *HapticEventParameter) ParameterID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameterID"))
+	return obj.Wrap(_r)
 }
 
-// @property value The value of the event parameter.
-//
-// Value calls the underlying Value.
 func (x *HapticEventParameter) Value() float32 {
-	return x.inner.Value()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("value"))
+	return _r
 }
 
-// SetValue calls the underlying SetValue.
 func (x *HapticEventParameter) SetValue(value float32) {
-	x.inner.SetValue(value)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 }
 
 // HapticEventParameterable is the interface implemented by [HapticEventParameter], for mocking and DI.
 type HapticEventParameterable interface {
-	Unwrap() *raw.CHHapticEventParameter
+	obj.Object
 	WithValue(value float32) *HapticEventParameter
-	ParameterID() string
+	ParameterID() obj.Object
 	Value() float32
 	SetValue(value float32)
 }

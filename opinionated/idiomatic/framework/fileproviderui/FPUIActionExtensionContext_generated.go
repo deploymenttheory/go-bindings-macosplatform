@@ -5,62 +5,81 @@
 package fileproviderui
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fileproviderui"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An extension context provided to File Provider UI extensions.
 //
-// ActionExtensionContext wraps [raw.FPUIActionExtensionContext] with a fluent Go API.
+// ActionExtensionContext is an idiomatic wrapper over the Objective-C class FPUIActionExtensionContext.
 type ActionExtensionContext struct {
-	inner *raw.FPUIActionExtensionContext
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FPUIActionExtensionContext].
-func (x *ActionExtensionContext) Unwrap() *raw.FPUIActionExtensionContext { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ActionExtensionContext) ID() objc.ID { return x.inner.Ptr() }
-
-// ActionExtensionContextFromID adopts an existing object pointer as a ActionExtensionContext (nil for 0).
+// ActionExtensionContextFromID adopts an existing Objective-C object as a ActionExtensionContext
+// (nil for 0), retaining it and registering a release finalizer.
 func ActionExtensionContextFromID(id objc.ID) *ActionExtensionContext {
 	if id == 0 {
 		return nil
 	}
-	return &ActionExtensionContext{inner: raw.FPUIActionExtensionContextFromID(id)}
+	x := &ActionExtensionContext{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewActionExtensionContext creates a new [ActionExtensionContext].
+// actionExtensionContextAdopt wraps an Objective-C object that this code just created as a
+// ActionExtensionContext (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func actionExtensionContextAdopt(id objc.ID) *ActionExtensionContext {
+	if id == 0 {
+		return nil
+	}
+	x := &ActionExtensionContext{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ActionExtensionContext) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ActionExtensionContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ActionExtensionContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewActionExtensionContext creates a new ActionExtensionContext.
 func NewActionExtensionContext() *ActionExtensionContext {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FPUIActionExtensionContext")), objc.RegisterName("new"))
-	return &ActionExtensionContext{inner: raw.FPUIActionExtensionContextFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("FPUIActionExtensionContext")), objc.RegisterName("new"))
+	return actionExtensionContextAdopt(_id)
 }
 
 // Marks the action as complete.
-//
-// CompleteRequest calls the underlying CompleteRequest.
 func (x *ActionExtensionContext) CompleteRequest() {
-	x.inner.CompleteRequest()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeRequest"))
 }
 
 // The identifier for the domain managed by the current file provider.
-//
-// DomainIdentifier calls the underlying DomainIdentifier.
-func (x *ActionExtensionContext) DomainIdentifier() string {
-	_r := x.inner.DomainIdentifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *ActionExtensionContext) DomainIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domainIdentifier"))
+	return obj.Wrap(_r)
 }
 
 // ActionExtensionContextable is the interface implemented by [ActionExtensionContext], for mocking and DI.
 type ActionExtensionContextable interface {
-	Unwrap() *raw.FPUIActionExtensionContext
+	obj.Object
 	CompleteRequest()
-	DomainIdentifier() string
+	DomainIdentifier() obj.Object
 }
 
 var _ ActionExtensionContextable = (*ActionExtensionContext)(nil)

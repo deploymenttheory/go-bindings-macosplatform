@@ -5,122 +5,122 @@
 package metalkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A container for the vertex data of a Model I/O mesh, suitable for use in a Metal app.
 //
-// Mesh wraps [raw.MTKMesh] with a fluent Go API.
+// Mesh is an idiomatic wrapper over the Objective-C class MTKMesh.
 type Mesh struct {
-	inner *raw.MTKMesh
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTKMesh].
-func (x *Mesh) Unwrap() *raw.MTKMesh { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Mesh) ID() objc.ID { return x.inner.Ptr() }
-
-// MeshFromID adopts an existing object pointer as a Mesh (nil for 0).
+// MeshFromID adopts an existing Objective-C object as a Mesh
+// (nil for 0), retaining it and registering a release finalizer.
 func MeshFromID(id objc.ID) *Mesh {
 	if id == 0 {
 		return nil
 	}
-	return &Mesh{inner: raw.MTKMeshFromID(id)}
+	x := &Mesh{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes a MetalKit mesh and its submeshes from a Model I/O mesh.
-//
-// NewMeshWithMeshDeviceError creates a new [Mesh].
-func NewMeshWithMeshDeviceError(mesh *modelio.MDLMesh, device metal.MTLDevice) (*Mesh, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTKMesh")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMesh:device:error:"), mesh.Ptr(), device, unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// meshAdopt wraps an Objective-C object that this code just created as a
+// Mesh (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func meshAdopt(id objc.ID) *Mesh {
+	if id == 0 {
+		return nil
 	}
-	return &Mesh{inner: raw.MTKMeshFromID(_id)}, nil
+	x := &Mesh{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Mesh) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Mesh) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Mesh) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMesh creates a new Mesh.
+func NewMesh() *Mesh {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTKMesh")), objc.RegisterName("new"))
+	return meshAdopt(_id)
 }
 
 // The name of the mesh.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *Mesh) WithName(name string) *Mesh {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// @property vertexBuffers @abstract Array of buffers in which mesh vertex data resides. @discussion This is filled with mesh buffer objects using the layout described by the vertexDescriptor property.  Elements in this array can be [NSNull null] if the vertexDescriptor does not specify elements for buffer for the given index
+// Array of buffers in which mesh vertex data resides. This is filled with mesh buffer objects using the layout described by the vertexDescriptor property.  Elements in this array can be [NSNull null] if the vertexDescriptor does not specify elements for buffer for the given index
 //
 // VertexBuffers returns the collection as a Go slice.
 func (x *Mesh) VertexBuffers() []*MeshBuffer {
-	arr := x.inner.VertexBuffers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MeshBuffer {
-		return &MeshBuffer{inner: raw.MTKMeshBufferFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexBuffers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MeshBuffer { return MeshBufferFromID(_id) })
 }
 
-// @property vertexDescriptor @abstract Model I/O vertex descriptor specifying the layout of data in vertexBuffers. @discussion This is not directly used by this object, but the application can use this information to determine rendering state or create a Metal vertex descriptor to build a RenderPipelineState object capable of interpreting data in 'vertexBuffers'.  Changing propties in the object will not result in the relayout data in vertex descriptor and thus will make the vertex descriptor no loger describe the layout of vertes data and verticies. (i.e. don't change properties in this vertexDescriptor)
-//
-// VertexDescriptor calls the underlying VertexDescriptor.
-func (x *Mesh) VertexDescriptor() *modelio.MDLVertexDescriptor {
-	return x.inner.VertexDescriptor()
+// Model I/O vertex descriptor specifying the layout of data in vertexBuffers. This is not directly used by this object, but the application can use this information to determine rendering state or create a Metal vertex descriptor to build a RenderPipelineState object capable of interpreting data in 'vertexBuffers'.  Changing propties in the object will not result in the relayout data in vertex descriptor and thus will make the vertex descriptor no loger describe the layout of vertes data and verticies. (i.e. don't change properties in this vertexDescriptor)
+func (x *Mesh) VertexDescriptor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexDescriptor"))
+	return obj.Wrap(_r)
 }
 
-// @property submeshes @abstract Submeshes containing index buffers to rendering mesh vertices.
+// Submeshes containing index buffers to rendering mesh vertices.
 //
 // Submeshes returns the collection as a Go slice.
 func (x *Mesh) Submeshes() []*Submesh {
-	arr := x.inner.Submeshes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Submesh {
-		return &Submesh{inner: raw.MTKSubmeshFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("submeshes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Submesh { return SubmeshFromID(_id) })
 }
 
-// @property vertexCount @abstract Number of vertices in the vertexBuffers.
-//
-// VertexCount calls the underlying VertexCount.
-func (x *Mesh) VertexCount() uint {
-	return x.inner.VertexCount()
+// Number of vertices in the vertexBuffers.
+func (x *Mesh) VertexCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexCount"))
+	return _r
 }
 
-// @property name @abstract Name of the mesh copies from the originating Model I/O mesh. @discussion Can be used by the app to identify the mesh in its scene/world/renderer etc.
-//
-// Name calls the underlying Name.
+// Name of the mesh copies from the originating Model I/O mesh. Can be used by the app to identify the mesh in its scene/world/renderer etc.
 func (x *Mesh) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
 func (x *Mesh) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
 // Meshable is the interface implemented by [Mesh], for mocking and DI.
 type Meshable interface {
-	Unwrap() *raw.MTKMesh
+	obj.Object
 	WithName(name string) *Mesh
 	VertexBuffers() []*MeshBuffer
-	VertexDescriptor() *modelio.MDLVertexDescriptor
+	VertexDescriptor() obj.Object
 	Submeshes() []*Submesh
-	VertexCount() uint
+	VertexCount() int
 	Name() string
 	SetName(name string)
 }

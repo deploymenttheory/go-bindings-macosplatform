@@ -5,78 +5,74 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNReductionFeatureChannelsMinNode wraps [raw.MPSNNReductionFeatureChannelsMinNode] with a fluent Go API.
+// NNReductionFeatureChannelsMinNode is an idiomatic wrapper over the Objective-C class MPSNNReductionFeatureChannelsMinNode.
 type NNReductionFeatureChannelsMinNode struct {
-	inner *raw.MPSNNReductionFeatureChannelsMinNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNReductionFeatureChannelsMinNode].
-func (x *NNReductionFeatureChannelsMinNode) Unwrap() *raw.MPSNNReductionFeatureChannelsMinNode {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNReductionFeatureChannelsMinNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNReductionFeatureChannelsMinNodeFromID adopts an existing object pointer as a NNReductionFeatureChannelsMinNode (nil for 0).
+// NNReductionFeatureChannelsMinNodeFromID adopts an existing Objective-C object as a NNReductionFeatureChannelsMinNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNReductionFeatureChannelsMinNodeFromID(id objc.ID) *NNReductionFeatureChannelsMinNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNReductionFeatureChannelsMinNode{inner: raw.MPSNNReductionFeatureChannelsMinNodeFromID(id)}
+	x := &NNReductionFeatureChannelsMinNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNNReductionFeatureChannelsMinNode creates a new [NNReductionFeatureChannelsMinNode].
+// nNReductionFeatureChannelsMinNodeAdopt wraps an Objective-C object that this code just created as a
+// NNReductionFeatureChannelsMinNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNReductionFeatureChannelsMinNodeAdopt(id objc.ID) *NNReductionFeatureChannelsMinNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNReductionFeatureChannelsMinNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NNReductionFeatureChannelsMinNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNReductionFeatureChannelsMinNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNReductionFeatureChannelsMinNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNNReductionFeatureChannelsMinNode creates a new NNReductionFeatureChannelsMinNode.
 func NewNNReductionFeatureChannelsMinNode() *NNReductionFeatureChannelsMinNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNReductionFeatureChannelsMinNode")), objc.RegisterName("new"))
-	return &NNReductionFeatureChannelsMinNode{inner: raw.MPSNNReductionFeatureChannelsMinNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNReductionFeatureChannelsMinNode")), objc.RegisterName("new"))
+	return nNReductionFeatureChannelsMinNodeAdopt(_id)
 }
 
-// @abstract   The clip rectangle to apply to the source image.
+// A string to help identify this object.
 //
-// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
-func (x *NNReductionFeatureChannelsMinNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsMinNode {
-	x.inner.MPSNNUnaryReductionNode.SetClipRectSource(clipRectSource)
-	return x
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *NNReductionFeatureChannelsMinNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNReductionFeatureChannelsMinNode {
-	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
-	return x
-}
-
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *NNReductionFeatureChannelsMinNode) WithLabel(label string) *NNReductionFeatureChannelsMinNode {
-	x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *NNReductionFeatureChannelsMinNode) asNNUnaryReductionNode() *mpsneuralnetwork.MPSNNUnaryReductionNode {
-	return &x.inner.MPSNNUnaryReductionNode
-}
-
-func (x *NNReductionFeatureChannelsMinNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSNNUnaryReductionNode.MPSNNFilterNode
 }
 
 // NNReductionFeatureChannelsMinNodeable is the interface implemented by [NNReductionFeatureChannelsMinNode], for mocking and DI.
 type NNReductionFeatureChannelsMinNodeable interface {
-	Unwrap() *raw.MPSNNReductionFeatureChannelsMinNode
-	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsMinNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNReductionFeatureChannelsMinNode
+	obj.Object
 	WithLabel(label string) *NNReductionFeatureChannelsMinNode
 }
 

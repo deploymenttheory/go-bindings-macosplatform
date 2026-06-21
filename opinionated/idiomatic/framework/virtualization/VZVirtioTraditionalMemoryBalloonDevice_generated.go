@@ -5,65 +5,85 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The object you use to change the amount of memory allocated to the guest system.
 //
-// VirtioTraditionalMemoryBalloonDevice wraps [raw.VZVirtioTraditionalMemoryBalloonDevice] with a fluent Go API.
+// VirtioTraditionalMemoryBalloonDevice is an idiomatic wrapper over the Objective-C class VZVirtioTraditionalMemoryBalloonDevice.
 type VirtioTraditionalMemoryBalloonDevice struct {
-	inner *raw.VZVirtioTraditionalMemoryBalloonDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZVirtioTraditionalMemoryBalloonDevice].
-func (x *VirtioTraditionalMemoryBalloonDevice) Unwrap() *raw.VZVirtioTraditionalMemoryBalloonDevice {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioTraditionalMemoryBalloonDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioTraditionalMemoryBalloonDeviceFromID adopts an existing object pointer as a VirtioTraditionalMemoryBalloonDevice (nil for 0).
+// VirtioTraditionalMemoryBalloonDeviceFromID adopts an existing Objective-C object as a VirtioTraditionalMemoryBalloonDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioTraditionalMemoryBalloonDeviceFromID(id objc.ID) *VirtioTraditionalMemoryBalloonDevice {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioTraditionalMemoryBalloonDevice{inner: raw.VZVirtioTraditionalMemoryBalloonDeviceFromID(id)}
+	x := &VirtioTraditionalMemoryBalloonDevice{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVirtioTraditionalMemoryBalloonDevice creates a new [VirtioTraditionalMemoryBalloonDevice].
+// virtioTraditionalMemoryBalloonDeviceAdopt wraps an Objective-C object that this code just created as a
+// VirtioTraditionalMemoryBalloonDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioTraditionalMemoryBalloonDeviceAdopt(id objc.ID) *VirtioTraditionalMemoryBalloonDevice {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtioTraditionalMemoryBalloonDevice{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VirtioTraditionalMemoryBalloonDevice) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VirtioTraditionalMemoryBalloonDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VirtioTraditionalMemoryBalloonDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVirtioTraditionalMemoryBalloonDevice creates a new VirtioTraditionalMemoryBalloonDevice.
 func NewVirtioTraditionalMemoryBalloonDevice() *VirtioTraditionalMemoryBalloonDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioTraditionalMemoryBalloonDevice")), objc.RegisterName("new"))
-	return &VirtioTraditionalMemoryBalloonDevice{inner: raw.VZVirtioTraditionalMemoryBalloonDeviceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioTraditionalMemoryBalloonDevice")), objc.RegisterName("new"))
+	return virtioTraditionalMemoryBalloonDeviceAdopt(_id)
 }
 
 // The target amount of memory, in bytes, to make available to the virtual machine.
 //
-// WithTargetVirtualMachineMemorySize sets the targetVirtualMachineMemorySize property and returns the receiver for chaining.
+// WithTargetVirtualMachineMemorySize sets targetVirtualMachineMemorySize and returns the receiver so calls can be chained.
 func (x *VirtioTraditionalMemoryBalloonDevice) WithTargetVirtualMachineMemorySize(targetVirtualMachineMemorySize uint64) *VirtioTraditionalMemoryBalloonDevice {
-	x.inner.SetTargetVirtualMachineMemorySize(targetVirtualMachineMemorySize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetVirtualMachineMemorySize:"), targetVirtualMachineMemorySize)
 	return x
 }
 
-// TargetVirtualMachineMemorySize calls the underlying TargetVirtualMachineMemorySize.
 func (x *VirtioTraditionalMemoryBalloonDevice) TargetVirtualMachineMemorySize() uint64 {
-	return x.inner.TargetVirtualMachineMemorySize()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("targetVirtualMachineMemorySize"))
+	return _r
 }
 
-// SetTargetVirtualMachineMemorySize calls the underlying SetTargetVirtualMachineMemorySize.
 func (x *VirtioTraditionalMemoryBalloonDevice) SetTargetVirtualMachineMemorySize(targetVirtualMachineMemorySize uint64) {
-	x.inner.SetTargetVirtualMachineMemorySize(targetVirtualMachineMemorySize)
-}
-
-func (x *VirtioTraditionalMemoryBalloonDevice) asMemoryBalloonDevice() *raw.VZMemoryBalloonDevice {
-	return &x.inner.VZMemoryBalloonDevice
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetVirtualMachineMemorySize:"), targetVirtualMachineMemorySize)
 }
 
 // VirtioTraditionalMemoryBalloonDeviceable is the interface implemented by [VirtioTraditionalMemoryBalloonDevice], for mocking and DI.
 type VirtioTraditionalMemoryBalloonDeviceable interface {
-	Unwrap() *raw.VZVirtioTraditionalMemoryBalloonDevice
+	obj.Object
 	WithTargetVirtualMachineMemorySize(targetVirtualMachineMemorySize uint64) *VirtioTraditionalMemoryBalloonDevice
 	TargetVirtualMachineMemorySize() uint64
 	SetTargetVirtualMachineMemorySize(targetVirtualMachineMemorySize uint64)

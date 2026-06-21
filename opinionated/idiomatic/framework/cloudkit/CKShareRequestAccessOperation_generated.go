@@ -6,217 +6,190 @@ package cloudkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// ShareRequestAccessOperation wraps [raw.CKShareRequestAccessOperation] with a fluent Go API.
+// ShareRequestAccessOperation is an idiomatic wrapper over the Objective-C class CKShareRequestAccessOperation.
 type ShareRequestAccessOperation struct {
-	inner *raw.CKShareRequestAccessOperation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKShareRequestAccessOperation].
-func (x *ShareRequestAccessOperation) Unwrap() *raw.CKShareRequestAccessOperation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ShareRequestAccessOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// ShareRequestAccessOperationFromID adopts an existing object pointer as a ShareRequestAccessOperation (nil for 0).
+// ShareRequestAccessOperationFromID adopts an existing Objective-C object as a ShareRequestAccessOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func ShareRequestAccessOperationFromID(id objc.ID) *ShareRequestAccessOperation {
 	if id == 0 {
 		return nil
 	}
-	return &ShareRequestAccessOperation{inner: raw.CKShareRequestAccessOperationFromID(id)}
+	x := &ShareRequestAccessOperation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewShareRequestAccessOperation creates a new [ShareRequestAccessOperation].
+// shareRequestAccessOperationAdopt wraps an Objective-C object that this code just created as a
+// ShareRequestAccessOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shareRequestAccessOperationAdopt(id objc.ID) *ShareRequestAccessOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &ShareRequestAccessOperation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ShareRequestAccessOperation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ShareRequestAccessOperation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ShareRequestAccessOperation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewShareRequestAccessOperation creates a new ShareRequestAccessOperation.
 func NewShareRequestAccessOperation() *ShareRequestAccessOperation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKShareRequestAccessOperation")), objc.RegisterName("new"))
-	return &ShareRequestAccessOperation{inner: raw.CKShareRequestAccessOperationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKShareRequestAccessOperation")), objc.RegisterName("new"))
+	return shareRequestAccessOperationAdopt(_id)
 }
 
 // Creates a share request access operation configured with specified share URLs.
 //
-// NewShareRequestAccessOperationWithShareURLs creates a new [ShareRequestAccessOperation].
-func NewShareRequestAccessOperationWithShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL]) *ShareRequestAccessOperation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKShareRequestAccessOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShareURLs:"), shareURLs.Ptr())
-	return &ShareRequestAccessOperation{inner: raw.CKShareRequestAccessOperationFromID(_id)}
+// NewShareRequestAccessOperationWithShareURLs creates a new ShareRequestAccessOperation.
+func NewShareRequestAccessOperationWithShareURLs(shareURLs []obj.Object) *ShareRequestAccessOperation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKShareRequestAccessOperation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShareURLs:"), purego.SliceToNSArray(shareURLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return shareRequestAccessOperationAdopt(_id)
 }
 
 // The URLs of the shares to request access to.
 //
-// WithShareURLs sets the collection, converting the Go slice to an NSArray.
-func (x *ShareRequestAccessOperation) WithShareURLs(items ...*foundation.NSURL) *ShareRequestAccessOperation {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetShareURLs(foundation.NSArrayFromID[*foundation.NSURL](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSURL](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetShareURLs(_arr)
-	return x
-}
-
-// The closure to execute when CloudKit processes a share access request.
-//
-// WithPerShareAccessRequestCompletionBlock sets the perShareAccessRequestCompletionBlock property and returns the receiver for chaining.
-func (x *ShareRequestAccessOperation) WithPerShareAccessRequestCompletionBlock(perShareAccessRequestCompletionBlock func(*foundation.NSURL, unsafe.Pointer)) *ShareRequestAccessOperation {
-	x.inner.SetPerShareAccessRequestCompletionBlock(perShareAccessRequestCompletionBlock)
-	return x
-}
-
-// The closure to execute after CloudKit processes all share access requests.
-//
-// WithShareRequestAccessCompletionBlock sets the shareRequestAccessCompletionBlock property and returns the receiver for chaining.
-func (x *ShareRequestAccessOperation) WithShareRequestAccessCompletionBlock(shareRequestAccessCompletionBlock func(unsafe.Pointer)) *ShareRequestAccessOperation {
-	x.inner.SetShareRequestAccessCompletionBlock(shareRequestAccessCompletionBlock)
+// WithShareURLs sets the collection and returns the receiver so calls can be chained.
+func (x *ShareRequestAccessOperation) WithShareURLs(items ...obj.Object) *ShareRequestAccessOperation {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShareURLs:"), _arr)
 	return x
 }
 
 // The operation’s configuration.
 //
-// WithConfiguration sets the configuration property and returns the receiver for chaining.
+// WithConfiguration sets configuration and returns the receiver so calls can be chained.
 func (x *ShareRequestAccessOperation) WithConfiguration(configuration *OperationConfiguration) *ShareRequestAccessOperation {
-	x.inner.CKOperation.SetConfiguration(configuration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
 // The operation’s group.
 //
-// WithGroup sets the group property and returns the receiver for chaining.
+// WithGroup sets group and returns the receiver so calls can be chained.
 func (x *ShareRequestAccessOperation) WithGroup(group *OperationGroup) *ShareRequestAccessOperation {
-	x.inner.CKOperation.SetGroup(group.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
 // The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
-// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
 func (x *ShareRequestAccessOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ShareRequestAccessOperation {
-	x.inner.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+// The operation's container.
 //
-// WithContainer sets the container property and returns the receiver for chaining.
+// WithContainer sets container and returns the receiver so calls can be chained.
 func (x *ShareRequestAccessOperation) WithContainer(container *Container) *ShareRequestAccessOperation {
-	x.inner.CKOperation.SetContainer(container.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+// A Boolean value that indicates whether the operation can send data over the cellular network.
 //
-// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
 func (x *ShareRequestAccessOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *ShareRequestAccessOperation {
-	x.inner.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
 // A Boolean value that indicates whether the operation is long-lived.
 //
-// WithLongLived sets the longLived property and returns the receiver for chaining.
+// WithLongLived sets longLived and returns the receiver so calls can be chained.
 func (x *ShareRequestAccessOperation) WithLongLived(longLived bool) *ShareRequestAccessOperation {
-	x.inner.CKOperation.SetLongLived(longLived)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+// The timeout interval when waiting for additional data.
 //
-// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
 func (x *ShareRequestAccessOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ShareRequestAccessOperation {
-	x.inner.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+// The maximum amount of time that a resource request can use.
 //
-// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
 func (x *ShareRequestAccessOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ShareRequestAccessOperation {
-	x.inner.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
 // The URLs of the shares to request access to. Include multiple URLs to request access to multiple shares simultaneously. The server processes each URL independently.
 //
 // ShareURLs returns the collection as a Go slice.
-func (x *ShareRequestAccessOperation) ShareURLs() []*foundation.NSURL {
-	arr := x.inner.ShareURLs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSURL {
-		return foundation.NSURLFromID(purego.Retain(_id))
-	})
+func (x *ShareRequestAccessOperation) ShareURLs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shareURLs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetShareURLs calls the underlying SetShareURLs.
-func (x *ShareRequestAccessOperation) SetShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL]) {
-	x.inner.SetShareURLs(shareURLs)
-}
-
-// The closure to execute when CloudKit processes a share access request. The server does not disclose share existence to protect user privacy. This property is a closure that returns no value and has the following parameters: - The URL of the share that was processed. - An error describing why the access request failed, or `nil` if successful. The closure executes once for each URL in the “CKShareRequestAccessOperation/shareURLs“ property. Each time the closure executes, it executes serially with respect to the other closure of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
-//
-// PerShareAccessRequestCompletionBlock calls the underlying PerShareAccessRequestCompletionBlock.
-func (x *ShareRequestAccessOperation) PerShareAccessRequestCompletionBlock() objc.Block {
-	return x.inner.PerShareAccessRequestCompletionBlock()
+func (x *ShareRequestAccessOperation) SetShareURLs(shareURLs []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShareURLs:"), purego.SliceToNSArray(shareURLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SetPerShareAccessRequestCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (x *ShareRequestAccessOperation) SetPerShareAccessRequestCompletionBlock(ctx context.Context) (*foundation.NSURL, error) {
+func (x *ShareRequestAccessOperation) SetPerShareAccessRequestCompletionBlock(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSURL
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SetPerShareAccessRequestCompletionBlock(func(_p0 *foundation.NSURL, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerShareAccessRequestCompletionBlock:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSURL
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
-}
-
-// The closure to execute after CloudKit processes all share access requests. This property is a closure that returns no value and has the following parameter: - An error that contains information about a problem, or `nil` if the system successfully processes the share access requests. The closure executes only once, and represents your final opportunity to process the operation's results. It executes after all share access request completion closures finish. The closure executes serially with respect to the other closures of the operation. The closure reports an error of type “CKError/Code/partialFailure“ when it processes only some of the share access requests successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the URLs of the shares whose access requests can't be processed by the operation. The corresponding values are errors that contain information about the failures. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
-//
-// ShareRequestAccessCompletionBlock calls the underlying ShareRequestAccessCompletionBlock.
-func (x *ShareRequestAccessOperation) ShareRequestAccessCompletionBlock() objc.Block {
-	return x.inner.ShareRequestAccessCompletionBlock()
 }
 
 // SetShareRequestAccessCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (x *ShareRequestAccessOperation) SetShareRequestAccessCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.SetShareRequestAccessCompletionBlock(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShareRequestAccessCompletionBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -225,14 +198,10 @@ func (x *ShareRequestAccessOperation) SetShareRequestAccessCompletionBlock(ctx c
 	}
 }
 
-func (x *ShareRequestAccessOperation) asOperation() *raw.CKOperation { return &x.inner.CKOperation }
-
 // ShareRequestAccessOperationable is the interface implemented by [ShareRequestAccessOperation], for mocking and DI.
 type ShareRequestAccessOperationable interface {
-	Unwrap() *raw.CKShareRequestAccessOperation
-	WithShareURLs(items ...*foundation.NSURL) *ShareRequestAccessOperation
-	WithPerShareAccessRequestCompletionBlock(perShareAccessRequestCompletionBlock func(*foundation.NSURL, unsafe.Pointer)) *ShareRequestAccessOperation
-	WithShareRequestAccessCompletionBlock(shareRequestAccessCompletionBlock func(unsafe.Pointer)) *ShareRequestAccessOperation
+	obj.Object
+	WithShareURLs(items ...obj.Object) *ShareRequestAccessOperation
 	WithConfiguration(configuration *OperationConfiguration) *ShareRequestAccessOperation
 	WithGroup(group *OperationGroup) *ShareRequestAccessOperation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ShareRequestAccessOperation
@@ -241,11 +210,9 @@ type ShareRequestAccessOperationable interface {
 	WithLongLived(longLived bool) *ShareRequestAccessOperation
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ShareRequestAccessOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ShareRequestAccessOperation
-	ShareURLs() []*foundation.NSURL
-	SetShareURLs(shareURLs *foundation.NSArray[*foundation.NSURL])
-	PerShareAccessRequestCompletionBlock() objc.Block
-	SetPerShareAccessRequestCompletionBlock(ctx context.Context) (*foundation.NSURL, error)
-	ShareRequestAccessCompletionBlock() objc.Block
+	ShareURLs() []obj.Object
+	SetShareURLs(shareURLs []obj.Object)
+	SetPerShareAccessRequestCompletionBlock(ctx context.Context) (obj.Object, error)
 	SetShareRequestAccessCompletionBlock(ctx context.Context) error
 }
 

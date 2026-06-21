@@ -5,66 +5,88 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that generates audio output.
 //
-// AudioUnitGenerator wraps [raw.AVAudioUnitGenerator] with a fluent Go API.
+// AudioUnitGenerator is an idiomatic wrapper over the Objective-C class AVAudioUnitGenerator.
 type AudioUnitGenerator struct {
-	inner *raw.AVAudioUnitGenerator
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioUnitGenerator].
-func (x *AudioUnitGenerator) Unwrap() *raw.AVAudioUnitGenerator { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioUnitGenerator) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioUnitGeneratorFromID adopts an existing object pointer as a AudioUnitGenerator (nil for 0).
+// AudioUnitGeneratorFromID adopts an existing Objective-C object as a AudioUnitGenerator
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioUnitGeneratorFromID(id objc.ID) *AudioUnitGenerator {
 	if id == 0 {
 		return nil
 	}
-	return &AudioUnitGenerator{inner: raw.AVAudioUnitGeneratorFromID(id)}
+	x := &AudioUnitGenerator{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// audioUnitGeneratorAdopt wraps an Objective-C object that this code just created as a
+// AudioUnitGenerator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioUnitGeneratorAdopt(id objc.ID) *AudioUnitGenerator {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioUnitGenerator{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudioUnitGenerator) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioUnitGenerator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioUnitGenerator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a generator audio unit with the specified description.
 //
-// NewAudioUnitGeneratorWithAudioComponentDescription creates a new [AudioUnitGenerator].
-func NewAudioUnitGeneratorWithAudioComponentDescription(audioComponentDescription objc.ID) *AudioUnitGenerator {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioUnitGenerator")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioComponentDescription:"), audioComponentDescription)
-	return &AudioUnitGenerator{inner: raw.AVAudioUnitGeneratorFromID(_id)}
+// NewAudioUnitGeneratorWithAudioComponentDescription creates a new AudioUnitGenerator.
+func NewAudioUnitGeneratorWithAudioComponentDescription(audioComponentDescription obj.Object) *AudioUnitGenerator {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioUnitGenerator")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioComponentDescription:"), objref.IDOf(audioComponentDescription))
+	return audioUnitGeneratorAdopt(_id)
 }
 
 // The bypass state of the audio unit.
 //
-// WithBypass sets the bypass property and returns the receiver for chaining.
+// WithBypass sets bypass and returns the receiver so calls can be chained.
 func (x *AudioUnitGenerator) WithBypass(bypass bool) *AudioUnitGenerator {
-	x.inner.SetBypass(bypass)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
 	return x
 }
 
-// Bypass calls the underlying Bypass.
 func (x *AudioUnitGenerator) Bypass() bool {
-	return x.inner.Bypass()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bypass"))
+	return _r
 }
 
-// SetBypass calls the underlying SetBypass.
 func (x *AudioUnitGenerator) SetBypass(bypass bool) {
-	x.inner.SetBypass(bypass)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBypass:"), bypass)
 }
-
-func (x *AudioUnitGenerator) asAudioUnit() *raw.AVAudioUnit { return &x.inner.AVAudioUnit }
-
-func (x *AudioUnitGenerator) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioUnit.AVAudioNode }
 
 // AudioUnitGeneratorable is the interface implemented by [AudioUnitGenerator], for mocking and DI.
 type AudioUnitGeneratorable interface {
-	Unwrap() *raw.AVAudioUnitGenerator
+	obj.Object
 	WithBypass(bypass bool) *AudioUnitGenerator
 	Bypass() bool
 	SetBypass(bypass bool)

@@ -5,54 +5,75 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A unit of measure for fuel efficiency.
 //
-// UnitFuelEfficiency wraps [raw.NSUnitFuelEfficiency] with a fluent Go API.
+// UnitFuelEfficiency is an idiomatic wrapper over the Objective-C class NSUnitFuelEfficiency.
 type UnitFuelEfficiency struct {
-	inner *raw.NSUnitFuelEfficiency
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSUnitFuelEfficiency].
-func (x *UnitFuelEfficiency) Unwrap() *raw.NSUnitFuelEfficiency { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitFuelEfficiency) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitFuelEfficiencyFromID adopts an existing object pointer as a UnitFuelEfficiency (nil for 0).
+// UnitFuelEfficiencyFromID adopts an existing Objective-C object as a UnitFuelEfficiency
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitFuelEfficiencyFromID(id objc.ID) *UnitFuelEfficiency {
 	if id == 0 {
 		return nil
 	}
-	return &UnitFuelEfficiency{inner: raw.NSUnitFuelEfficiencyFromID(id)}
-}
-
-// NewUnitFuelEfficiency creates a new [UnitFuelEfficiency].
-func NewUnitFuelEfficiency() *UnitFuelEfficiency {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitFuelEfficiency")), objc.RegisterName("new"))
-	return &UnitFuelEfficiency{inner: raw.NSUnitFuelEfficiencyFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitFuelEfficiency) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitFuelEfficiency {
-	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitFuelEfficiency{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-func (x *UnitFuelEfficiency) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
+// unitFuelEfficiencyAdopt wraps an Objective-C object that this code just created as a
+// UnitFuelEfficiency (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitFuelEfficiencyAdopt(id objc.ID) *UnitFuelEfficiency {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitFuelEfficiency{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
 
-func (x *UnitFuelEfficiency) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
+// Description returns the object's -description text.
+func (x *UnitFuelEfficiency) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
 
-func (x *UnitFuelEfficiency) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UnitFuelEfficiency) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UnitFuelEfficiency) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUnitFuelEfficiency creates a new UnitFuelEfficiency.
+func NewUnitFuelEfficiency() *UnitFuelEfficiency {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitFuelEfficiency")), objc.RegisterName("new"))
+	return unitFuelEfficiencyAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *UnitFuelEfficiency) WithScriptingProperties(scriptingProperties obj.Object) *UnitFuelEfficiency {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // UnitFuelEfficiencyable is the interface implemented by [UnitFuelEfficiency], for mocking and DI.
 type UnitFuelEfficiencyable interface {
-	Unwrap() *raw.NSUnitFuelEfficiency
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitFuelEfficiency
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitFuelEfficiency
 }
 
 var _ UnitFuelEfficiencyable = (*UnitFuelEfficiency)(nil)

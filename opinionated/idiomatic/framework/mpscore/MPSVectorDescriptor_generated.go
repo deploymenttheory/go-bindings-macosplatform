@@ -5,101 +5,122 @@
 package mpscore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// VectorDescriptor wraps [raw.MPSVectorDescriptor] with a fluent Go API.
+// VectorDescriptor is an idiomatic wrapper over the Objective-C class MPSVectorDescriptor.
 type VectorDescriptor struct {
-	inner *raw.MPSVectorDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSVectorDescriptor].
-func (x *VectorDescriptor) Unwrap() *raw.MPSVectorDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VectorDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// VectorDescriptorFromID adopts an existing object pointer as a VectorDescriptor (nil for 0).
+// VectorDescriptorFromID adopts an existing Objective-C object as a VectorDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func VectorDescriptorFromID(id objc.ID) *VectorDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &VectorDescriptor{inner: raw.MPSVectorDescriptorFromID(id)}
+	x := &VectorDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVectorDescriptor creates a new [VectorDescriptor].
+// vectorDescriptorAdopt wraps an Objective-C object that this code just created as a
+// VectorDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vectorDescriptorAdopt(id objc.ID) *VectorDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &VectorDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VectorDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VectorDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VectorDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVectorDescriptor creates a new VectorDescriptor.
 func NewVectorDescriptor() *VectorDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSVectorDescriptor")), objc.RegisterName("new"))
-	return &VectorDescriptor{inner: raw.MPSVectorDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSVectorDescriptor")), objc.RegisterName("new"))
+	return vectorDescriptorAdopt(_id)
 }
 
-// @property   length @discussion The number of elements in the vector.
+// The number of elements in the vector.
 //
-// WithLength sets the length property and returns the receiver for chaining.
-func (x *VectorDescriptor) WithLength(length uint) *VectorDescriptor {
-	x.inner.SetLength(length)
+// WithLength sets length and returns the receiver so calls can be chained.
+func (x *VectorDescriptor) WithLength(length int) *VectorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
 	return x
 }
 
-// @property   dataType @discussion The type of the data which makes up the values of the vector.
+// The type of the data which makes up the values of the vector.
 //
-// WithDataType sets the dataType property and returns the receiver for chaining.
-func (x *VectorDescriptor) WithDataType(dataType MPSDataType) *VectorDescriptor {
-	x.inner.SetDataType(raw.MPSDataType(dataType))
+// WithDataType sets dataType and returns the receiver so calls can be chained.
+func (x *VectorDescriptor) WithDataType(dataType DataType) *VectorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataType:"), dataType)
 	return x
 }
 
-// @property   length @discussion The number of elements in the vector.
-//
-// Length calls the underlying Length.
-func (x *VectorDescriptor) Length() uint {
-	return x.inner.Length()
+// The number of elements in the vector.
+func (x *VectorDescriptor) Length() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
-// SetLength calls the underlying SetLength.
-func (x *VectorDescriptor) SetLength(length uint) {
-	x.inner.SetLength(length)
+func (x *VectorDescriptor) SetLength(length int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
 }
 
-// @property   vectors @discussion The number of vectors.
-//
-// Vectors calls the underlying Vectors.
-func (x *VectorDescriptor) Vectors() uint {
-	return x.inner.Vectors()
+// The number of vectors.
+func (x *VectorDescriptor) Vectors() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectors"))
+	return _r
 }
 
-// @property   dataType @discussion The type of the data which makes up the values of the vector.
-//
-// DataType calls the underlying DataType.
-func (x *VectorDescriptor) DataType() MPSDataType {
-	return MPSDataType(x.inner.DataType())
+// The type of the data which makes up the values of the vector.
+func (x *VectorDescriptor) DataType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("dataType"))
+	return _r
 }
 
-// SetDataType calls the underlying SetDataType.
-func (x *VectorDescriptor) SetDataType(dataType MPSDataType) {
-	x.inner.SetDataType(raw.MPSDataType(dataType))
+func (x *VectorDescriptor) SetDataType(dataType DataType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataType:"), dataType)
 }
 
-// @property   vectorBytes @discussion The stride, in bytes, between corresponding elements of consecutive vectors.  Must be a multiple of the element size
-//
-// VectorBytes calls the underlying VectorBytes.
-func (x *VectorDescriptor) VectorBytes() uint {
-	return x.inner.VectorBytes()
+// The stride, in bytes, between corresponding elements of consecutive vectors.  Must be a multiple of the element size
+func (x *VectorDescriptor) VectorBytes() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectorBytes"))
+	return _r
 }
 
 // VectorDescriptorable is the interface implemented by [VectorDescriptor], for mocking and DI.
 type VectorDescriptorable interface {
-	Unwrap() *raw.MPSVectorDescriptor
-	WithLength(length uint) *VectorDescriptor
-	WithDataType(dataType MPSDataType) *VectorDescriptor
-	Length() uint
-	SetLength(length uint)
-	Vectors() uint
-	DataType() MPSDataType
-	SetDataType(dataType MPSDataType)
-	VectorBytes() uint
+	obj.Object
+	WithLength(length int) *VectorDescriptor
+	WithDataType(dataType DataType) *VectorDescriptor
+	Length() int
+	SetLength(length int)
+	Vectors() int
+	DataType() DataType
+	SetDataType(dataType DataType)
+	VectorBytes() int
 }
 
 var _ VectorDescriptorable = (*VectorDescriptor)(nil)

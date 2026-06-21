@@ -5,93 +5,92 @@
 package gameplaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A data structure that adaptively organizes objects based on their locations in a two-dimensional space.
 //
-// RTree wraps [raw.GKRTree] with a fluent Go API.
+// RTree is an idiomatic wrapper over the Objective-C class GKRTree.
 type RTree struct {
-	inner *raw.GKRTree[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKRTree].
-func (x *RTree) Unwrap() *raw.GKRTree[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RTree) ID() objc.ID { return x.inner.Ptr() }
-
-// RTreeFromID adopts an existing object pointer as a RTree (nil for 0).
+// RTreeFromID adopts an existing Objective-C object as a RTree
+// (nil for 0), retaining it and registering a release finalizer.
 func RTreeFromID(id objc.ID) *RTree {
 	if id == 0 {
 		return nil
 	}
-	return &RTree{inner: raw.GKRTreeFromID[objc.ID](id)}
+	x := &RTree{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// rTreeAdopt wraps an Objective-C object that this code just created as a
+// RTree (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rTreeAdopt(id objc.ID) *RTree {
+	if id == 0 {
+		return nil
+	}
+	x := &RTree{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RTree) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RTree) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RTree) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a new R-tree object.
 //
-// NewRTreeWithMaxNumberOfChildren creates a new [RTree].
-func NewRTreeWithMaxNumberOfChildren(maxNumberOfChildren uint) *RTree {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKRTree")), objc.RegisterName("alloc"))
+// NewRTreeWithMaxNumberOfChildren creates a new RTree.
+func NewRTreeWithMaxNumberOfChildren(maxNumberOfChildren int) *RTree {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKRTree")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMaxNumberOfChildren:"), maxNumberOfChildren)
-	return &RTree{inner: raw.GKRTreeFromID[objc.ID](_id)}
+	return rTreeAdopt(_id)
 }
 
 // The number of elements to reserve space for when searching.
 //
-// WithQueryReserve sets the queryReserve property and returns the receiver for chaining.
-func (x *RTree) WithQueryReserve(queryReserve uint) *RTree {
-	x.inner.SetQueryReserve(queryReserve)
+// WithQueryReserve sets queryReserve and returns the receiver so calls can be chained.
+func (x *RTree) WithQueryReserve(queryReserve int) *RTree {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueryReserve:"), queryReserve)
 	return x
 }
 
-// Adds the specified object to the tree.
-//
-// AddElementBoundingRectMinBoundingRectMaxSplitStrategy calls the underlying AddElementBoundingRectMinBoundingRectMaxSplitStrategy.
-func (x *RTree) AddElementBoundingRectMinBoundingRectMaxSplitStrategy(element objc.ID, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer, splitStrategy GKRTreeSplitStrategy) {
-	x.inner.AddElementBoundingRectMinBoundingRectMaxSplitStrategy(element, boundingRectMin, boundingRectMax, raw.GKRTreeSplitStrategy(splitStrategy))
-}
-
-// Removes the specified object from the tree.
-//
-// RemoveElementBoundingRectMinBoundingRectMax calls the underlying RemoveElementBoundingRectMinBoundingRectMax.
-func (x *RTree) RemoveElementBoundingRectMinBoundingRectMax(element objc.ID, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer) {
-	x.inner.RemoveElementBoundingRectMinBoundingRectMax(element, boundingRectMin, boundingRectMax)
-}
-
-// Searches the tree and returns all elements found within the specified bounding region.
-//
-// ElementsInBoundingRectMinRectMax calls the underlying ElementsInBoundingRectMinRectMax.
-func (x *RTree) ElementsInBoundingRectMinRectMax(rectMin unsafe.Pointer, rectMax unsafe.Pointer) *foundation.NSArray[objc.ID] {
-	return x.inner.ElementsInBoundingRectMinRectMax(rectMin, rectMax)
-}
-
 // Amount of array items to reserve before a query. This improves query performance at the cost of memory
-//
-// QueryReserve calls the underlying QueryReserve.
-func (x *RTree) QueryReserve() uint {
-	return x.inner.QueryReserve()
+func (x *RTree) QueryReserve() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("queryReserve"))
+	return _r
 }
 
-// SetQueryReserve calls the underlying SetQueryReserve.
-func (x *RTree) SetQueryReserve(queryReserve uint) {
-	x.inner.SetQueryReserve(queryReserve)
+func (x *RTree) SetQueryReserve(queryReserve int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueryReserve:"), queryReserve)
 }
 
 // RTreeable is the interface implemented by [RTree], for mocking and DI.
 type RTreeable interface {
-	Unwrap() *raw.GKRTree[objc.ID]
-	WithQueryReserve(queryReserve uint) *RTree
-	AddElementBoundingRectMinBoundingRectMaxSplitStrategy(element objc.ID, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer, splitStrategy GKRTreeSplitStrategy)
-	RemoveElementBoundingRectMinBoundingRectMax(element objc.ID, boundingRectMin unsafe.Pointer, boundingRectMax unsafe.Pointer)
-	ElementsInBoundingRectMinRectMax(rectMin unsafe.Pointer, rectMax unsafe.Pointer) *foundation.NSArray[objc.ID]
-	QueryReserve() uint
-	SetQueryReserve(queryReserve uint)
+	obj.Object
+	WithQueryReserve(queryReserve int) *RTree
+	QueryReserve() int
+	SetQueryReserve(queryReserve int)
 }
 
 var _ RTreeable = (*RTree)(nil)

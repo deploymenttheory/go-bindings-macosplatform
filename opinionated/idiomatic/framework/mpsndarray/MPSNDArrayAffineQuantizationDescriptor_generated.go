@@ -5,115 +5,120 @@
 package mpsndarray
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ArrayAffineQuantizationDescriptor wraps [raw.MPSNDArrayAffineQuantizationDescriptor] with a fluent Go API.
+// ArrayAffineQuantizationDescriptor is an idiomatic wrapper over the Objective-C class MPSNDArrayAffineQuantizationDescriptor.
 type ArrayAffineQuantizationDescriptor struct {
-	inner *raw.MPSNDArrayAffineQuantizationDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayAffineQuantizationDescriptor].
-func (x *ArrayAffineQuantizationDescriptor) Unwrap() *raw.MPSNDArrayAffineQuantizationDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArrayAffineQuantizationDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// ArrayAffineQuantizationDescriptorFromID adopts an existing object pointer as a ArrayAffineQuantizationDescriptor (nil for 0).
+// ArrayAffineQuantizationDescriptorFromID adopts an existing Objective-C object as a ArrayAffineQuantizationDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func ArrayAffineQuantizationDescriptorFromID(id objc.ID) *ArrayAffineQuantizationDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &ArrayAffineQuantizationDescriptor{inner: raw.MPSNDArrayAffineQuantizationDescriptorFromID(id)}
+	x := &ArrayAffineQuantizationDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewArrayAffineQuantizationDescriptor creates a new [ArrayAffineQuantizationDescriptor].
+// arrayAffineQuantizationDescriptorAdopt wraps an Objective-C object that this code just created as a
+// ArrayAffineQuantizationDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arrayAffineQuantizationDescriptorAdopt(id objc.ID) *ArrayAffineQuantizationDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &ArrayAffineQuantizationDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ArrayAffineQuantizationDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ArrayAffineQuantizationDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ArrayAffineQuantizationDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewArrayAffineQuantizationDescriptor creates a new ArrayAffineQuantizationDescriptor.
 func NewArrayAffineQuantizationDescriptor() *ArrayAffineQuantizationDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayAffineQuantizationDescriptor")), objc.RegisterName("new"))
-	return &ArrayAffineQuantizationDescriptor{inner: raw.MPSNDArrayAffineQuantizationDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayAffineQuantizationDescriptor")), objc.RegisterName("new"))
+	return arrayAffineQuantizationDescriptorAdopt(_id)
 }
 
-// @abstract   Initializes an affine quantization descriptor. @param      quantizationDataType    Which quantized datatype is used. @param      hasZeroPoint        A flag indicating that a zero-point input is expected. @param      hasMinValue        A flag indicating that a minimum value input is expected. @result     A new quantization descriptor.
+// If yes then asymmetric quantization is used. See MPSNDArrayQuantizationScheme.
 //
-// NewArrayAffineQuantizationDescriptorWithDataTypeHasZeroPointHasMinValue creates a new [ArrayAffineQuantizationDescriptor].
-func NewArrayAffineQuantizationDescriptorWithDataTypeHasZeroPointHasMinValue(quantizationDataType mpscore.MPSDataType, hasZeroPoint bool, hasMinValue bool) *ArrayAffineQuantizationDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayAffineQuantizationDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataType:hasZeroPoint:hasMinValue:"), quantizationDataType, hasZeroPoint, hasMinValue)
-	return &ArrayAffineQuantizationDescriptor{inner: raw.MPSNDArrayAffineQuantizationDescriptorFromID(_id)}
-}
-
-// @property  hasZeroPoint @abstract  If yes then asymmetric quantization is used. See MPSNDArrayQuantizationScheme.
-//
-// WithHasZeroPoint sets the hasZeroPoint property and returns the receiver for chaining.
+// WithHasZeroPoint sets hasZeroPoint and returns the receiver so calls can be chained.
 func (x *ArrayAffineQuantizationDescriptor) WithHasZeroPoint(hasZeroPoint bool) *ArrayAffineQuantizationDescriptor {
-	x.inner.SetHasZeroPoint(hasZeroPoint)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasZeroPoint:"), hasZeroPoint)
 	return x
 }
 
-// @property  hasMinValue @abstract  If yes then offset is used. See MPSNDArrayQuantizationScheme.
+// If yes then offset is used. See MPSNDArrayQuantizationScheme.
 //
-// WithHasMinValue sets the hasMinValue property and returns the receiver for chaining.
+// WithHasMinValue sets hasMinValue and returns the receiver so calls can be chained.
 func (x *ArrayAffineQuantizationDescriptor) WithHasMinValue(hasMinValue bool) *ArrayAffineQuantizationDescriptor {
-	x.inner.SetHasMinValue(hasMinValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasMinValue:"), hasMinValue)
 	return x
 }
 
-// @property implicitZeroPoint @abstract If true and quantized values are signed, these are assumed to be stored with an implicit offset or zero-point of 2^(quantizationBitWidth-1) added to bring signed values into unsigned range. e.g. Int4 values are in range [-8,7]. If we add 8 to it values are in range [0,15] and can be encoded/stored as UInt4. Default is false. Its only currently applicable to Int4. Implementation will generate error for any other data type;
+// If true and quantized values are signed, these are assumed to be stored with an implicit offset or zero-point of 2^(quantizationBitWidth-1) added to bring signed values into unsigned range. e.g. Int4 values are in range [-8,7]. If we add 8 to it values are in range [0,15] and can be encoded/stored as UInt4. Default is false. Its only currently applicable to Int4. Implementation will generate error for any other data type;
 //
-// WithImplicitZeroPoint sets the implicitZeroPoint property and returns the receiver for chaining.
+// WithImplicitZeroPoint sets implicitZeroPoint and returns the receiver so calls can be chained.
 func (x *ArrayAffineQuantizationDescriptor) WithImplicitZeroPoint(implicitZeroPoint bool) *ArrayAffineQuantizationDescriptor {
-	x.inner.SetImplicitZeroPoint(implicitZeroPoint)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImplicitZeroPoint:"), implicitZeroPoint)
 	return x
 }
 
-// @property  hasZeroPoint @abstract  If yes then asymmetric quantization is used. See MPSNDArrayQuantizationScheme.
-//
-// HasZeroPoint calls the underlying HasZeroPoint.
+// If yes then asymmetric quantization is used. See MPSNDArrayQuantizationScheme.
 func (x *ArrayAffineQuantizationDescriptor) HasZeroPoint() bool {
-	return x.inner.HasZeroPoint()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasZeroPoint"))
+	return _r
 }
 
-// SetHasZeroPoint calls the underlying SetHasZeroPoint.
 func (x *ArrayAffineQuantizationDescriptor) SetHasZeroPoint(hasZeroPoint bool) {
-	x.inner.SetHasZeroPoint(hasZeroPoint)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasZeroPoint:"), hasZeroPoint)
 }
 
-// @property  hasMinValue @abstract  If yes then offset is used. See MPSNDArrayQuantizationScheme.
-//
-// HasMinValue calls the underlying HasMinValue.
+// If yes then offset is used. See MPSNDArrayQuantizationScheme.
 func (x *ArrayAffineQuantizationDescriptor) HasMinValue() bool {
-	return x.inner.HasMinValue()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasMinValue"))
+	return _r
 }
 
-// SetHasMinValue calls the underlying SetHasMinValue.
 func (x *ArrayAffineQuantizationDescriptor) SetHasMinValue(hasMinValue bool) {
-	x.inner.SetHasMinValue(hasMinValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasMinValue:"), hasMinValue)
 }
 
-// @property implicitZeroPoint @abstract If true and quantized values are signed, these are assumed to be stored with an implicit offset or zero-point of 2^(quantizationBitWidth-1) added to bring signed values into unsigned range. e.g. Int4 values are in range [-8,7]. If we add 8 to it values are in range [0,15] and can be encoded/stored as UInt4. Default is false. Its only currently applicable to Int4. Implementation will generate error for any other data type;
-//
-// ImplicitZeroPoint calls the underlying ImplicitZeroPoint.
+// If true and quantized values are signed, these are assumed to be stored with an implicit offset or zero-point of 2^(quantizationBitWidth-1) added to bring signed values into unsigned range. e.g. Int4 values are in range [-8,7]. If we add 8 to it values are in range [0,15] and can be encoded/stored as UInt4. Default is false. Its only currently applicable to Int4. Implementation will generate error for any other data type;
 func (x *ArrayAffineQuantizationDescriptor) ImplicitZeroPoint() bool {
-	return x.inner.ImplicitZeroPoint()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("implicitZeroPoint"))
+	return _r
 }
 
-// SetImplicitZeroPoint calls the underlying SetImplicitZeroPoint.
 func (x *ArrayAffineQuantizationDescriptor) SetImplicitZeroPoint(implicitZeroPoint bool) {
-	x.inner.SetImplicitZeroPoint(implicitZeroPoint)
-}
-
-func (x *ArrayAffineQuantizationDescriptor) asArrayQuantizationDescriptor() *raw.MPSNDArrayQuantizationDescriptor {
-	return &x.inner.MPSNDArrayQuantizationDescriptor
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImplicitZeroPoint:"), implicitZeroPoint)
 }
 
 // ArrayAffineQuantizationDescriptorable is the interface implemented by [ArrayAffineQuantizationDescriptor], for mocking and DI.
 type ArrayAffineQuantizationDescriptorable interface {
-	Unwrap() *raw.MPSNDArrayAffineQuantizationDescriptor
+	obj.Object
 	WithHasZeroPoint(hasZeroPoint bool) *ArrayAffineQuantizationDescriptor
 	WithHasMinValue(hasMinValue bool) *ArrayAffineQuantizationDescriptor
 	WithImplicitZeroPoint(implicitZeroPoint bool) *ArrayAffineQuantizationDescriptor

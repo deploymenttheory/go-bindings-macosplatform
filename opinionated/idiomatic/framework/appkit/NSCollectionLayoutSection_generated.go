@@ -5,233 +5,174 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A container that combines a set of groups into distinct visual groupings.
 //
-// CollectionLayoutSection wraps [raw.NSCollectionLayoutSection] with a fluent Go API.
+// CollectionLayoutSection is an idiomatic wrapper over the Objective-C class NSCollectionLayoutSection.
 type CollectionLayoutSection struct {
-	inner *raw.NSCollectionLayoutSection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCollectionLayoutSection].
-func (x *CollectionLayoutSection) Unwrap() *raw.NSCollectionLayoutSection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionLayoutSection) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionLayoutSectionFromID adopts an existing object pointer as a CollectionLayoutSection (nil for 0).
+// CollectionLayoutSectionFromID adopts an existing Objective-C object as a CollectionLayoutSection
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionLayoutSectionFromID(id objc.ID) *CollectionLayoutSection {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionLayoutSection{inner: raw.NSCollectionLayoutSectionFromID(id)}
-}
-
-// NewCollectionLayoutSection creates a new [CollectionLayoutSection].
-func NewCollectionLayoutSection() *CollectionLayoutSection {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionLayoutSection")), objc.RegisterName("new"))
-	return &CollectionLayoutSection{inner: raw.NSCollectionLayoutSectionFromID(_id)}
-}
-
-// The amount of space between the content of the section and its boundaries.
-//
-// WithContentInsets sets the contentInsets property and returns the receiver for chaining.
-func (x *CollectionLayoutSection) WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutSection {
-	x.inner.SetContentInsets(contentInsets)
+	x := &CollectionLayoutSection{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// collectionLayoutSectionAdopt wraps an Objective-C object that this code just created as a
+// CollectionLayoutSection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionLayoutSectionAdopt(id objc.ID) *CollectionLayoutSection {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionLayoutSection{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollectionLayoutSection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollectionLayoutSection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollectionLayoutSection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCollectionLayoutSection creates a new CollectionLayoutSection.
+func NewCollectionLayoutSection() *CollectionLayoutSection {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutSection")), objc.RegisterName("new"))
+	return collectionLayoutSectionAdopt(_id)
 }
 
 // The amount of space between the groups in the section.
 //
-// WithInterGroupSpacing sets the interGroupSpacing property and returns the receiver for chaining.
+// WithInterGroupSpacing sets interGroupSpacing and returns the receiver so calls can be chained.
 func (x *CollectionLayoutSection) WithInterGroupSpacing(interGroupSpacing float64) *CollectionLayoutSection {
-	x.inner.SetInterGroupSpacing(interGroupSpacing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterGroupSpacing:"), interGroupSpacing)
 	return x
 }
 
 // The section’s scrolling behavior in relation to the main layout axis.
 //
-// WithOrthogonalScrollingBehavior sets the orthogonalScrollingBehavior property and returns the receiver for chaining.
-func (x *CollectionLayoutSection) WithOrthogonalScrollingBehavior(orthogonalScrollingBehavior NSCollectionLayoutSectionOrthogonalScrollingBehavior) *CollectionLayoutSection {
-	x.inner.SetOrthogonalScrollingBehavior(raw.NSCollectionLayoutSectionOrthogonalScrollingBehavior(orthogonalScrollingBehavior))
+// WithOrthogonalScrollingBehavior sets orthogonalScrollingBehavior and returns the receiver so calls can be chained.
+func (x *CollectionLayoutSection) WithOrthogonalScrollingBehavior(orthogonalScrollingBehavior CollectionLayoutSectionOrthogonalScrollingBehavior) *CollectionLayoutSection {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrthogonalScrollingBehavior:"), orthogonalScrollingBehavior)
 	return x
 }
 
 // An array of the supplementary items that are associated with the boundary edges of the section, such as headers and footers.
 //
-// WithBoundarySupplementaryItems sets the collection, converting the Go slice to an NSArray.
-func (x *CollectionLayoutSection) WithBoundarySupplementaryItems(items ...*raw.NSCollectionLayoutBoundarySupplementaryItem) *CollectionLayoutSection {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetBoundarySupplementaryItems(foundation.NSArrayFromID[*raw.NSCollectionLayoutBoundarySupplementaryItem](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSCollectionLayoutBoundarySupplementaryItem](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetBoundarySupplementaryItems(_arr)
+// WithBoundarySupplementaryItems sets the collection and returns the receiver so calls can be chained.
+func (x *CollectionLayoutSection) WithBoundarySupplementaryItems(items ...*CollectionLayoutBoundarySupplementaryItem) *CollectionLayoutSection {
+	_arr := purego.SliceToNSArray(items, func(_v *CollectionLayoutBoundarySupplementaryItem) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundarySupplementaryItems:"), _arr)
 	return x
 }
 
 // A Boolean value that indicates whether the section’s supplementary items follow the specified content insets for the section.
 //
-// WithSupplementariesFollowContentInsets sets the supplementariesFollowContentInsets property and returns the receiver for chaining.
+// WithSupplementariesFollowContentInsets sets supplementariesFollowContentInsets and returns the receiver so calls can be chained.
 func (x *CollectionLayoutSection) WithSupplementariesFollowContentInsets(supplementariesFollowContentInsets bool) *CollectionLayoutSection {
-	x.inner.SetSupplementariesFollowContentInsets(supplementariesFollowContentInsets)
-	return x
-}
-
-// A closure called before each layout cycle to allow modification of the items in the section immediately before they’re displayed.
-//
-// WithVisibleItemsInvalidationHandler sets the visibleItemsInvalidationHandler property and returns the receiver for chaining.
-func (x *CollectionLayoutSection) WithVisibleItemsInvalidationHandler(visibleItemsInvalidationHandler objc.Block) *CollectionLayoutSection {
-	x.inner.SetVisibleItemsInvalidationHandler(visibleItemsInvalidationHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupplementariesFollowContentInsets:"), supplementariesFollowContentInsets)
 	return x
 }
 
 // An array of the decoration items that are anchored to the section, such as background decoration views.
 //
-// WithDecorationItems sets the collection, converting the Go slice to an NSArray.
-func (x *CollectionLayoutSection) WithDecorationItems(items ...*raw.NSCollectionLayoutDecorationItem) *CollectionLayoutSection {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetDecorationItems(foundation.NSArrayFromID[*raw.NSCollectionLayoutDecorationItem](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSCollectionLayoutDecorationItem](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetDecorationItems(_arr)
+// WithDecorationItems sets the collection and returns the receiver so calls can be chained.
+func (x *CollectionLayoutSection) WithDecorationItems(items ...*CollectionLayoutDecorationItem) *CollectionLayoutSection {
+	_arr := purego.SliceToNSArray(items, func(_v *CollectionLayoutDecorationItem) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecorationItems:"), _arr)
 	return x
 }
 
-// ContentInsets calls the underlying ContentInsets.
-func (x *CollectionLayoutSection) ContentInsets() raw.NSDirectionalEdgeInsets {
-	return x.inner.ContentInsets()
-}
-
-// SetContentInsets calls the underlying SetContentInsets.
-func (x *CollectionLayoutSection) SetContentInsets(contentInsets raw.NSDirectionalEdgeInsets) {
-	x.inner.SetContentInsets(contentInsets)
-}
-
-// InterGroupSpacing calls the underlying InterGroupSpacing.
 func (x *CollectionLayoutSection) InterGroupSpacing() float64 {
-	return x.inner.InterGroupSpacing()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("interGroupSpacing"))
+	return _r
 }
 
-// SetInterGroupSpacing calls the underlying SetInterGroupSpacing.
 func (x *CollectionLayoutSection) SetInterGroupSpacing(interGroupSpacing float64) {
-	x.inner.SetInterGroupSpacing(interGroupSpacing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterGroupSpacing:"), interGroupSpacing)
 }
 
-// OrthogonalScrollingBehavior calls the underlying OrthogonalScrollingBehavior.
-func (x *CollectionLayoutSection) OrthogonalScrollingBehavior() NSCollectionLayoutSectionOrthogonalScrollingBehavior {
-	return NSCollectionLayoutSectionOrthogonalScrollingBehavior(x.inner.OrthogonalScrollingBehavior())
+func (x *CollectionLayoutSection) OrthogonalScrollingBehavior() CollectionLayoutSectionOrthogonalScrollingBehavior {
+	_r := objc.Send[CollectionLayoutSectionOrthogonalScrollingBehavior](objref.IDOf(x), objc.RegisterName("orthogonalScrollingBehavior"))
+	return _r
 }
 
-// SetOrthogonalScrollingBehavior calls the underlying SetOrthogonalScrollingBehavior.
-func (x *CollectionLayoutSection) SetOrthogonalScrollingBehavior(orthogonalScrollingBehavior NSCollectionLayoutSectionOrthogonalScrollingBehavior) {
-	x.inner.SetOrthogonalScrollingBehavior(raw.NSCollectionLayoutSectionOrthogonalScrollingBehavior(orthogonalScrollingBehavior))
+func (x *CollectionLayoutSection) SetOrthogonalScrollingBehavior(orthogonalScrollingBehavior CollectionLayoutSectionOrthogonalScrollingBehavior) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrthogonalScrollingBehavior:"), orthogonalScrollingBehavior)
 }
 
 // BoundarySupplementaryItems returns the collection as a Go slice.
 func (x *CollectionLayoutSection) BoundarySupplementaryItems() []*CollectionLayoutBoundarySupplementaryItem {
-	arr := x.inner.BoundarySupplementaryItems()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CollectionLayoutBoundarySupplementaryItem {
-		return &CollectionLayoutBoundarySupplementaryItem{inner: raw.NSCollectionLayoutBoundarySupplementaryItemFromID(purego.Retain(_id))}
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boundarySupplementaryItems"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollectionLayoutBoundarySupplementaryItem {
+		return CollectionLayoutBoundarySupplementaryItemFromID(_id)
 	})
 }
 
-// SetBoundarySupplementaryItems calls the underlying SetBoundarySupplementaryItems.
-func (x *CollectionLayoutSection) SetBoundarySupplementaryItems(boundarySupplementaryItems *foundation.NSArray[*raw.NSCollectionLayoutBoundarySupplementaryItem]) {
-	x.inner.SetBoundarySupplementaryItems(boundarySupplementaryItems)
+func (x *CollectionLayoutSection) SetBoundarySupplementaryItems(boundarySupplementaryItems []*CollectionLayoutBoundarySupplementaryItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundarySupplementaryItems:"), purego.SliceToNSArray(boundarySupplementaryItems, func(_v *CollectionLayoutBoundarySupplementaryItem) objc.ID { return objref.IDOf(_v) }))
 }
 
-// SupplementariesFollowContentInsets calls the underlying SupplementariesFollowContentInsets.
 func (x *CollectionLayoutSection) SupplementariesFollowContentInsets() bool {
-	return x.inner.SupplementariesFollowContentInsets()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supplementariesFollowContentInsets"))
+	return _r
 }
 
-// SetSupplementariesFollowContentInsets calls the underlying SetSupplementariesFollowContentInsets.
 func (x *CollectionLayoutSection) SetSupplementariesFollowContentInsets(supplementariesFollowContentInsets bool) {
-	x.inner.SetSupplementariesFollowContentInsets(supplementariesFollowContentInsets)
-}
-
-// VisibleItemsInvalidationHandler calls the underlying VisibleItemsInvalidationHandler.
-func (x *CollectionLayoutSection) VisibleItemsInvalidationHandler() objc.Block {
-	return x.inner.VisibleItemsInvalidationHandler()
-}
-
-// SetVisibleItemsInvalidationHandler calls the underlying SetVisibleItemsInvalidationHandler.
-func (x *CollectionLayoutSection) SetVisibleItemsInvalidationHandler(visibleItemsInvalidationHandler objc.Block) {
-	x.inner.SetVisibleItemsInvalidationHandler(visibleItemsInvalidationHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupplementariesFollowContentInsets:"), supplementariesFollowContentInsets)
 }
 
 // DecorationItems returns the collection as a Go slice.
 func (x *CollectionLayoutSection) DecorationItems() []*CollectionLayoutDecorationItem {
-	arr := x.inner.DecorationItems()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CollectionLayoutDecorationItem {
-		return &CollectionLayoutDecorationItem{inner: raw.NSCollectionLayoutDecorationItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decorationItems"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollectionLayoutDecorationItem { return CollectionLayoutDecorationItemFromID(_id) })
 }
 
-// SetDecorationItems calls the underlying SetDecorationItems.
-func (x *CollectionLayoutSection) SetDecorationItems(decorationItems *foundation.NSArray[*raw.NSCollectionLayoutDecorationItem]) {
-	x.inner.SetDecorationItems(decorationItems)
+func (x *CollectionLayoutSection) SetDecorationItems(decorationItems []*CollectionLayoutDecorationItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecorationItems:"), purego.SliceToNSArray(decorationItems, func(_v *CollectionLayoutDecorationItem) objc.ID { return objref.IDOf(_v) }))
 }
 
 // CollectionLayoutSectionable is the interface implemented by [CollectionLayoutSection], for mocking and DI.
 type CollectionLayoutSectionable interface {
-	Unwrap() *raw.NSCollectionLayoutSection
-	WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutSection
+	obj.Object
 	WithInterGroupSpacing(interGroupSpacing float64) *CollectionLayoutSection
-	WithOrthogonalScrollingBehavior(orthogonalScrollingBehavior NSCollectionLayoutSectionOrthogonalScrollingBehavior) *CollectionLayoutSection
-	WithBoundarySupplementaryItems(items ...*raw.NSCollectionLayoutBoundarySupplementaryItem) *CollectionLayoutSection
+	WithOrthogonalScrollingBehavior(orthogonalScrollingBehavior CollectionLayoutSectionOrthogonalScrollingBehavior) *CollectionLayoutSection
+	WithBoundarySupplementaryItems(items ...*CollectionLayoutBoundarySupplementaryItem) *CollectionLayoutSection
 	WithSupplementariesFollowContentInsets(supplementariesFollowContentInsets bool) *CollectionLayoutSection
-	WithVisibleItemsInvalidationHandler(visibleItemsInvalidationHandler objc.Block) *CollectionLayoutSection
-	WithDecorationItems(items ...*raw.NSCollectionLayoutDecorationItem) *CollectionLayoutSection
-	ContentInsets() raw.NSDirectionalEdgeInsets
-	SetContentInsets(contentInsets raw.NSDirectionalEdgeInsets)
+	WithDecorationItems(items ...*CollectionLayoutDecorationItem) *CollectionLayoutSection
 	InterGroupSpacing() float64
 	SetInterGroupSpacing(interGroupSpacing float64)
-	OrthogonalScrollingBehavior() NSCollectionLayoutSectionOrthogonalScrollingBehavior
-	SetOrthogonalScrollingBehavior(orthogonalScrollingBehavior NSCollectionLayoutSectionOrthogonalScrollingBehavior)
+	OrthogonalScrollingBehavior() CollectionLayoutSectionOrthogonalScrollingBehavior
+	SetOrthogonalScrollingBehavior(orthogonalScrollingBehavior CollectionLayoutSectionOrthogonalScrollingBehavior)
 	BoundarySupplementaryItems() []*CollectionLayoutBoundarySupplementaryItem
-	SetBoundarySupplementaryItems(boundarySupplementaryItems *foundation.NSArray[*raw.NSCollectionLayoutBoundarySupplementaryItem])
+	SetBoundarySupplementaryItems(boundarySupplementaryItems []*CollectionLayoutBoundarySupplementaryItem)
 	SupplementariesFollowContentInsets() bool
 	SetSupplementariesFollowContentInsets(supplementariesFollowContentInsets bool)
-	VisibleItemsInvalidationHandler() objc.Block
-	SetVisibleItemsInvalidationHandler(visibleItemsInvalidationHandler objc.Block)
 	DecorationItems() []*CollectionLayoutDecorationItem
-	SetDecorationItems(decorationItems *foundation.NSArray[*raw.NSCollectionLayoutDecorationItem])
+	SetDecorationItems(decorationItems []*CollectionLayoutDecorationItem)
 }
 
 var _ CollectionLayoutSectionable = (*CollectionLayoutSection)(nil)

@@ -5,72 +5,84 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A sample that represents a quantity, including the value and the units.
 //
-// QuantitySample wraps [raw.HKQuantitySample] with a fluent Go API.
+// QuantitySample is an idiomatic wrapper over the Objective-C class HKQuantitySample.
 type QuantitySample struct {
-	inner *raw.HKQuantitySample
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKQuantitySample].
-func (x *QuantitySample) Unwrap() *raw.HKQuantitySample { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QuantitySample) ID() objc.ID { return x.inner.Ptr() }
-
-// QuantitySampleFromID adopts an existing object pointer as a QuantitySample (nil for 0).
+// QuantitySampleFromID adopts an existing Objective-C object as a QuantitySample
+// (nil for 0), retaining it and registering a release finalizer.
 func QuantitySampleFromID(id objc.ID) *QuantitySample {
 	if id == 0 {
 		return nil
 	}
-	return &QuantitySample{inner: raw.HKQuantitySampleFromID(id)}
+	x := &QuantitySample{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewQuantitySample creates a new [QuantitySample].
+// quantitySampleAdopt wraps an Objective-C object that this code just created as a
+// QuantitySample (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func quantitySampleAdopt(id objc.ID) *QuantitySample {
+	if id == 0 {
+		return nil
+	}
+	x := &QuantitySample{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *QuantitySample) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QuantitySample) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QuantitySample) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewQuantitySample creates a new QuantitySample.
 func NewQuantitySample() *QuantitySample {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKQuantitySample")), objc.RegisterName("new"))
-	return &QuantitySample{inner: raw.HKQuantitySampleFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKQuantitySample")), objc.RegisterName("new"))
+	return quantitySampleAdopt(_id)
 }
 
-// QuantityType calls the underlying QuantityType.
 func (x *QuantitySample) QuantityType() *QuantityType {
-	_r := x.inner.QuantityType()
-	if _r == nil {
-		return nil
-	}
-	return &QuantityType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quantityType"))
+	return QuantityTypeFromID(_r)
 }
 
-// Quantity calls the underlying Quantity.
 func (x *QuantitySample) Quantity() *Quantity {
-	_r := x.inner.Quantity()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quantity"))
+	return QuantityFromID(_r)
 }
 
-// @property      count @abstract      The number of individual values making up the receiver's quantity. @discussion    Requests for the individual series quantities can be made using HKQuantitySeriesSampleQuery.
-//
-// Count calls the underlying Count.
+// The number of individual values making up the receiver's quantity. Requests for the individual series quantities can be made using HKQuantitySeriesSampleQuery.
 func (x *QuantitySample) Count() int {
-	return x.inner.Count()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+	return _r
 }
-
-func (x *QuantitySample) asQuantitySample() *raw.HKQuantitySample { return x.inner }
-
-func (x *QuantitySample) asSample() *raw.HKSample { return &x.inner.HKSample }
-
-func (x *QuantitySample) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
 
 // QuantitySampleable is the interface implemented by [QuantitySample], for mocking and DI.
 type QuantitySampleable interface {
-	Unwrap() *raw.HKQuantitySample
+	obj.Object
 	QuantityType() *QuantityType
 	Quantity() *Quantity
 	Count() int

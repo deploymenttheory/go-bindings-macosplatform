@@ -5,87 +5,108 @@
 package spritekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A specification for constraining a node’s position or rotation.
 //
-// Constraint wraps [raw.SKConstraint] with a fluent Go API.
+// Constraint is an idiomatic wrapper over the Objective-C class SKConstraint.
 type Constraint struct {
-	inner *raw.SKConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKConstraint].
-func (x *Constraint) Unwrap() *raw.SKConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Constraint) ID() objc.ID { return x.inner.Ptr() }
-
-// ConstraintFromID adopts an existing object pointer as a Constraint (nil for 0).
+// ConstraintFromID adopts an existing Objective-C object as a Constraint
+// (nil for 0), retaining it and registering a release finalizer.
 func ConstraintFromID(id objc.ID) *Constraint {
 	if id == 0 {
 		return nil
 	}
-	return &Constraint{inner: raw.SKConstraintFromID(id)}
+	x := &Constraint{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewConstraint creates a new [Constraint].
+// constraintAdopt wraps an Objective-C object that this code just created as a
+// Constraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func constraintAdopt(id objc.ID) *Constraint {
+	if id == 0 {
+		return nil
+	}
+	x := &Constraint{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Constraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Constraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Constraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewConstraint creates a new Constraint.
 func NewConstraint() *Constraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKConstraint")), objc.RegisterName("new"))
-	return &Constraint{inner: raw.SKConstraintFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKConstraint")), objc.RegisterName("new"))
+	return constraintAdopt(_id)
 }
 
 // A Boolean value that specifies whether the constraint is applied.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *Constraint) WithEnabled(enabled bool) *Constraint {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // The node whose coordinate system should be used to apply the constraint.
 //
-// WithReferenceNode sets the referenceNode property and returns the receiver for chaining.
+// WithReferenceNode sets referenceNode and returns the receiver so calls can be chained.
 func (x *Constraint) WithReferenceNode(referenceNode NodeProvider) *Constraint {
-	x.inner.SetReferenceNode(referenceNode.asNode())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReferenceNode:"), objref.IDOf(referenceNode))
 	return x
 }
 
-// Enabled calls the underlying Enabled.
 func (x *Constraint) Enabled() bool {
-	return x.inner.Enabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enabled"))
+	return _r
 }
 
-// SetEnabled calls the underlying SetEnabled.
 func (x *Constraint) SetEnabled(enabled bool) {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
-// ReferenceNode calls the underlying ReferenceNode.
 func (x *Constraint) ReferenceNode() *Node {
-	_r := x.inner.ReferenceNode()
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("referenceNode"))
+	return NodeFromID(_r)
 }
 
-// SetReferenceNode calls the underlying SetReferenceNode.
-func (x *Constraint) SetReferenceNode(referenceNode *raw.SKNode) {
-	x.inner.SetReferenceNode(referenceNode)
+func (x *Constraint) SetReferenceNode(referenceNode *Node) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReferenceNode:"), objref.IDOf(referenceNode))
 }
 
 // Constraintable is the interface implemented by [Constraint], for mocking and DI.
 type Constraintable interface {
-	Unwrap() *raw.SKConstraint
+	obj.Object
 	WithEnabled(enabled bool) *Constraint
 	WithReferenceNode(referenceNode NodeProvider) *Constraint
 	Enabled() bool
 	SetEnabled(enabled bool)
 	ReferenceNode() *Node
-	SetReferenceNode(referenceNode *raw.SKNode)
+	SetReferenceNode(referenceNode *Node)
 }
 
 var _ Constraintable = (*Constraint)(nil)

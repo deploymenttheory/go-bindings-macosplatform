@@ -5,216 +5,158 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that describes how to compose video frames at particular points in time.
 //
-// VideoComposition wraps [raw.AVVideoComposition] with a fluent Go API.
+// VideoComposition is an idiomatic wrapper over the Objective-C class AVVideoComposition.
 type VideoComposition struct {
-	inner *raw.AVVideoComposition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVVideoComposition].
-func (x *VideoComposition) Unwrap() *raw.AVVideoComposition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VideoComposition) ID() objc.ID { return x.inner.Ptr() }
-
-// VideoCompositionFromID adopts an existing object pointer as a VideoComposition (nil for 0).
+// VideoCompositionFromID adopts an existing Objective-C object as a VideoComposition
+// (nil for 0), retaining it and registering a release finalizer.
 func VideoCompositionFromID(id objc.ID) *VideoComposition {
 	if id == 0 {
 		return nil
 	}
-	return &VideoComposition{inner: raw.AVVideoCompositionFromID(id)}
+	x := &VideoComposition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVideoComposition creates a new [VideoComposition].
+// videoCompositionAdopt wraps an Objective-C object that this code just created as a
+// VideoComposition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func videoCompositionAdopt(id objc.ID) *VideoComposition {
+	if id == 0 {
+		return nil
+	}
+	x := &VideoComposition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VideoComposition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VideoComposition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VideoComposition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVideoComposition creates a new VideoComposition.
 func NewVideoComposition() *VideoComposition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVVideoComposition")), objc.RegisterName("new"))
-	return &VideoComposition{inner: raw.AVVideoCompositionFromID(_id)}
-}
-
-// Indicates a custom compositor class to use. The class must implement the AVVideoCompositing protocol. If nil, the default, internal video compositor is used
-//
-// CustomVideoCompositorClass calls the underlying CustomVideoCompositorClass.
-func (x *VideoComposition) CustomVideoCompositorClass() unsafe.Pointer {
-	return x.inner.CustomVideoCompositorClass()
-}
-
-// Indicates the interval which the video composition, when enabled, should render composed video frames
-//
-// FrameDuration calls the underlying FrameDuration.
-func (x *VideoComposition) FrameDuration() coremedia.CMTime {
-	return x.inner.FrameDuration()
+	_id := objc.Send[objc.ID](objc.ID(_class("AVVideoComposition")), objc.RegisterName("new"))
+	return videoCompositionAdopt(_id)
 }
 
 // If sourceTrackIDForFrameTiming is not kCMPersistentTrackID_Invalid, frame timing for the video composition is derived from the source asset's track with the corresponding ID. This may be used to preserve a source asset's variable frame timing. If an empty edit is encountered in the source asset’s track, the compositor composes frames as needed up to the frequency specified in frameDuration property. */
-//
-// SourceTrackIDForFrameTiming calls the underlying SourceTrackIDForFrameTiming.
 func (x *VideoComposition) SourceTrackIDForFrameTiming() int32 {
-	return x.inner.SourceTrackIDForFrameTiming()
-}
-
-// Indicates the size at which the video composition, when enabled, should render
-//
-// RenderSize calls the underlying RenderSize.
-func (x *VideoComposition) RenderSize() corefoundation.CGSize {
-	return x.inner.RenderSize()
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("sourceTrackIDForFrameTiming"))
+	return _r
 }
 
 // Indicates the scale at which the video composition should render. May only be other than 1.0 for a video composition set on an AVPlayerItem
-//
-// RenderScale calls the underlying RenderScale.
 func (x *VideoComposition) RenderScale() float32 {
-	return x.inner.RenderScale()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("renderScale"))
+	return _r
 }
 
 // Indicates instructions for video composition via an NSArray of instances of classes implementing the AVVideoCompositionInstruction protocol. For the first instruction in the array, timeRange.start must be less than or equal to the earliest time for which playback or other processing will be attempted (note that this will typically be kCMTimeZero). For subsequent instructions, timeRange.start must be equal to the prior instruction's end time. The end time of the last instruction must be greater than or equal to the latest time for which playback or other processing will be attempted (note that this will often be the duration of the asset with which the instance of AVVideoComposition is associated).
-//
-// Instructions calls the underlying Instructions.
-func (x *VideoComposition) Instructions() *foundation.NSArray[raw.AVVideoCompositionInstructionProtocol] {
-	return x.inner.Instructions()
+func (x *VideoComposition) Instructions() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instructions"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Indicates a special video composition tool for use of Core Animation; may be nil
-//
-// AnimationTool calls the underlying AnimationTool.
 func (x *VideoComposition) AnimationTool() *VideoCompositionCoreAnimationTool {
-	_r := x.inner.AnimationTool()
-	if _r == nil {
-		return nil
-	}
-	return &VideoCompositionCoreAnimationTool{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animationTool"))
+	return VideoCompositionCoreAnimationToolFromID(_r)
 }
 
 // List of all track IDs for tracks from which sample data should be presented to the compositor at any point in the overall composition. The sample data will be delivered to the custom compositor via AVAsynchronousVideoCompositionRequest.
 //
 // SourceSampleDataTrackIDs returns the collection as a Go slice.
-func (x *VideoComposition) SourceSampleDataTrackIDs() []*foundation.NSNumber {
-	arr := x.inner.SourceSampleDataTrackIDs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *VideoComposition) SourceSampleDataTrackIDs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceSampleDataTrackIDs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // The output buffers of the video composition can be specified with the outputBufferDescription. The value is an array of CMTagCollectionRef objects that describes the output buffers. If the video composition will output tagged buffers, the details of those buffers should be specified with CMTags. Specifically, the StereoView (eyes) and ProjectionKind must be specified. The behavior is undefined if the output tagged buffers do not match the outputBufferDescription. The default is nil, which means monoscopic output. Note that an empty array is not valid. An exception will be thrown if the objects in the array are not of type CMTagCollectionRef. Note that tagged buffers are only supported for custom compositors.
-//
-// OutputBufferDescription calls the underlying OutputBufferDescription.
-func (x *VideoComposition) OutputBufferDescription() *foundation.NSArray[objc.ID] {
-	return x.inner.OutputBufferDescription()
+func (x *VideoComposition) OutputBufferDescription() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputBufferDescription"))
+	return obj.Wrap(_r)
 }
 
 // Indicates the spatial configurations that are available to associate with the output of the video composition. A custom compositor can output spatial video by specifying one of these spatial configurations. A spatial configuration with all nil values indicates the video is not spatial. A nil spatial configuration also indicates the video is not spatial. The value can be nil, which indicates the output will not be spatial. NOTE: If this property is not empty, then the client must attach one of the spatial configurations in this array to all of the pixel buffers, otherwise an exception will be thrown.
 //
 // SpatialVideoConfigurations returns the collection as a Go slice.
 func (x *VideoComposition) SpatialVideoConfigurations() []*SpatialVideoConfiguration {
-	arr := x.inner.SpatialVideoConfigurations()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SpatialVideoConfiguration {
-		return &SpatialVideoConfiguration{inner: raw.AVSpatialVideoConfigurationFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("spatialVideoConfigurations"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SpatialVideoConfiguration { return SpatialVideoConfigurationFromID(_id) })
 }
 
 // Rendering will use these primaries and frames will be tagged as such. If the value of this property is nil then the source's primaries will be propagated and used. Default is nil. Valid values are those suitable for AVVideoColorPrimariesKey. Generally set as a triple along with colorYCbCrMatrix and colorTransferFunction.
-//
-// ColorPrimaries calls the underlying ColorPrimaries.
 func (x *VideoComposition) ColorPrimaries() string {
-	_r := x.inner.ColorPrimaries()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorPrimaries"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Rendering will use this matrix and frames will be tagged as such. If the value of this property is nil then the source's matrix will be propagated and used. Default is nil. Valid values are those suitable for AVVideoYCbCrMatrixKey. Generally set as a triple along with colorPrimaries and colorTransferFunction.
-//
-// ColorYCbCrMatrix calls the underlying ColorYCbCrMatrix.
 func (x *VideoComposition) ColorYCbCrMatrix() string {
-	_r := x.inner.ColorYCbCrMatrix()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorYCbCrMatrix"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Rendering will use this transfer function and frames will be tagged as such. If the value of this property is nil then the source's transfer function will be propagated and used. Default is nil. Valid values are those suitable for AVVideoTransferFunctionKey. Generally set as a triple along with colorYCbCrMatrix and colorYCbCrMatrix.
-//
-// ColorTransferFunction calls the underlying ColorTransferFunction.
 func (x *VideoComposition) ColorTransferFunction() string {
-	_r := x.inner.ColorTransferFunction()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorTransferFunction"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Configures policy for per frame HDR display metadata on the rendered frame Allows the system to identify situations where HDR metadata can be generated and attached to the rendered video frame. Default is AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate. Any HDR metadata attached to the composed frame will be propagated to the rendered video frames.
-//
-// PerFrameHDRDisplayMetadataPolicy calls the underlying PerFrameHDRDisplayMetadataPolicy.
-func (x *VideoComposition) PerFrameHDRDisplayMetadataPolicy() string {
-	_r := x.inner.PerFrameHDRDisplayMetadataPolicy()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *VideoComposition) PerFrameHDRDisplayMetadataPolicy() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("perFrameHDRDisplayMetadataPolicy"))
+	return obj.Wrap(_r)
 }
-
-// Indicates whether the time ranges of the composition’s instructions conform to validation requirements.
-//
-// IsValidForAssetTimeRangeValidationDelegate calls the underlying IsValidForAssetTimeRangeValidationDelegate.
-func (x *VideoComposition) IsValidForAssetTimeRangeValidationDelegate(asset *raw.AVAsset, timeRange coremedia.CMTimeRange, validationDelegate raw.AVVideoCompositionValidationHandling) bool {
-	return x.inner.IsValidForAssetTimeRangeValidationDelegate(asset, timeRange, validationDelegate)
-}
-
-// Determines whether the time ranges of the composition’s instructions conform to validation requirements.
-//
-// DetermineValidityForAssetTimeRangeValidationDelegateCompletionHandler calls the underlying DetermineValidityForAssetTimeRangeValidationDelegateCompletionHandler.
-func (x *VideoComposition) DetermineValidityForAssetTimeRangeValidationDelegateCompletionHandler(asset *raw.AVAsset, timeRange coremedia.CMTimeRange, validationDelegate raw.AVVideoCompositionValidationHandling, completionHandler func(bool, unsafe.Pointer)) {
-	x.inner.DetermineValidityForAssetTimeRangeValidationDelegateCompletionHandler(asset, timeRange, validationDelegate, completionHandler)
-}
-
-// Indicates whether the time ranges of the composition’s instructions conform to validation requirements.
-//
-// IsValidForTracksAssetDurationTimeRangeValidationDelegate calls the underlying IsValidForTracksAssetDurationTimeRangeValidationDelegate.
-func (x *VideoComposition) IsValidForTracksAssetDurationTimeRangeValidationDelegate(tracks *foundation.NSArray[*raw.AVAssetTrack], duration coremedia.CMTime, timeRange coremedia.CMTimeRange, validationDelegate raw.AVVideoCompositionValidationHandling) bool {
-	return x.inner.IsValidForTracksAssetDurationTimeRangeValidationDelegate(tracks, duration, timeRange, validationDelegate)
-}
-
-func (x *VideoComposition) asVideoComposition() *raw.AVVideoComposition { return x.inner }
 
 // VideoCompositionable is the interface implemented by [VideoComposition], for mocking and DI.
 type VideoCompositionable interface {
-	Unwrap() *raw.AVVideoComposition
-	CustomVideoCompositorClass() unsafe.Pointer
-	FrameDuration() coremedia.CMTime
+	obj.Object
 	SourceTrackIDForFrameTiming() int32
-	RenderSize() corefoundation.CGSize
 	RenderScale() float32
-	Instructions() *foundation.NSArray[raw.AVVideoCompositionInstructionProtocol]
+	Instructions() []obj.Object
 	AnimationTool() *VideoCompositionCoreAnimationTool
-	SourceSampleDataTrackIDs() []*foundation.NSNumber
-	OutputBufferDescription() *foundation.NSArray[objc.ID]
+	SourceSampleDataTrackIDs() []obj.Object
+	OutputBufferDescription() obj.Object
 	SpatialVideoConfigurations() []*SpatialVideoConfiguration
 	ColorPrimaries() string
 	ColorYCbCrMatrix() string
 	ColorTransferFunction() string
-	PerFrameHDRDisplayMetadataPolicy() string
-	IsValidForAssetTimeRangeValidationDelegate(asset *raw.AVAsset, timeRange coremedia.CMTimeRange, validationDelegate raw.AVVideoCompositionValidationHandling) bool
-	DetermineValidityForAssetTimeRangeValidationDelegateCompletionHandler(asset *raw.AVAsset, timeRange coremedia.CMTimeRange, validationDelegate raw.AVVideoCompositionValidationHandling, completionHandler func(bool, unsafe.Pointer))
-	IsValidForTracksAssetDurationTimeRangeValidationDelegate(tracks *foundation.NSArray[*raw.AVAssetTrack], duration coremedia.CMTime, timeRange coremedia.CMTimeRange, validationDelegate raw.AVVideoCompositionValidationHandling) bool
+	PerFrameHDRDisplayMetadataPolicy() obj.Object
 }
 
 var _ VideoCompositionable = (*VideoComposition)(nil)

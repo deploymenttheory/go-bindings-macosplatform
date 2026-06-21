@@ -5,143 +5,158 @@
 package corewlan
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corewlan"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // A wrapper around the entire Wi-Fi subsystem that you use to access interfaces and set up event notifications.
 //
-// WiFiClient wraps [raw.CWWiFiClient] with a fluent Go API.
+// WiFiClient is an idiomatic wrapper over the Objective-C class CWWiFiClient.
 type WiFiClient struct {
-	inner *raw.CWWiFiClient
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CWWiFiClient].
-func (x *WiFiClient) Unwrap() *raw.CWWiFiClient { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WiFiClient) ID() objc.ID { return x.inner.Ptr() }
-
-// WiFiClientFromID adopts an existing object pointer as a WiFiClient (nil for 0).
+// WiFiClientFromID adopts an existing Objective-C object as a WiFiClient
+// (nil for 0), retaining it and registering a release finalizer.
 func WiFiClientFromID(id objc.ID) *WiFiClient {
 	if id == 0 {
 		return nil
 	}
-	return &WiFiClient{inner: raw.CWWiFiClientFromID(id)}
+	x := &WiFiClient{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWiFiClient creates a new [WiFiClient].
+// wiFiClientAdopt wraps an Objective-C object that this code just created as a
+// WiFiClient (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wiFiClientAdopt(id objc.ID) *WiFiClient {
+	if id == 0 {
+		return nil
+	}
+	x := &WiFiClient{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WiFiClient) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WiFiClient) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WiFiClient) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWiFiClient creates a new WiFiClient.
 func NewWiFiClient() *WiFiClient {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CWWiFiClient")), objc.RegisterName("new"))
-	return &WiFiClient{inner: raw.CWWiFiClientFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CWWiFiClient")), objc.RegisterName("new"))
+	return wiFiClientAdopt(_id)
 }
 
 // An object that provides Wi-Fi event handling.
 //
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *WiFiClient) WithDelegate(delegate objc.ID) *WiFiClient {
-	x.inner.SetDelegate(delegate)
+// WithDelegate sets delegate and returns the receiver so calls can be chained.
+func (x *WiFiClient) WithDelegate(delegate obj.Object) *WiFiClient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return x
 }
 
 // Returns the default Wi-Fi interface.
-//
-// Interface calls the underlying Interface.
 func (x *WiFiClient) Interface() *Interface {
-	_r := x.inner.Interface()
-	if _r == nil {
-		return nil
-	}
-	return &Interface{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interface"))
+	return InterfaceFromID(_r)
 }
 
-// @method @result An NSArray of NSString objects corresponding to Wi-Fi interface names. @abstract Returns the list of available Wi-Fi interface names (e.g. "en0"). @discussion If no Wi-Fi interfaces are available, this method will return an empty array. Returns nil if an error occurs.
+// Returns the list of available Wi-Fi interface names (e.g. "en0"). If no Wi-Fi interfaces are available, this method will return an empty array. Returns nil if an error occurs.
 //
 // InterfaceNames returns the collection as a Go slice.
 func (x *WiFiClient) InterfaceNames() []string {
-	arr := x.inner.InterfaceNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interfaceNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Returns the Wi-Fi interface with the given name.
-//
-// InterfaceWithName calls the underlying InterfaceWithName.
 func (x *WiFiClient) InterfaceWithName(interfaceName string) *Interface {
-	_r := x.inner.InterfaceWithName(foundation.NSStringStringWithUTF8String(interfaceName))
-	if _r == nil {
-		return nil
-	}
-	return &Interface{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interfaceWithName:"), purego.NSString(interfaceName))
+	return InterfaceFromID(_r)
 }
 
 // Returns all available Wi-Fi interfaces.
 //
 // Interfaces returns the collection as a Go slice.
 func (x *WiFiClient) Interfaces() []*Interface {
-	arr := x.inner.Interfaces()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Interface {
-		return &Interface{inner: raw.CWInterfaceFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interfaces"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Interface { return InterfaceFromID(_id) })
 }
 
 // Register for specific Wi-Fi event notifications.
-//
-// StartMonitoringEventWithTypeError calls the underlying StartMonitoringEventWithTypeError.
-func (x *WiFiClient) StartMonitoringEventWithTypeError(type_ CWEventType) (bool, error) {
-	return x.inner.StartMonitoringEventWithTypeError(raw.CWEventType(type_))
+func (x *WiFiClient) StartMonitoringEventWithType(type_ EventType) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("startMonitoringEventWithType:error:"), type_, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Unregister for specific Wi-Fi event notifications.
-//
-// StopMonitoringEventWithTypeError calls the underlying StopMonitoringEventWithTypeError.
-func (x *WiFiClient) StopMonitoringEventWithTypeError(type_ CWEventType) (bool, error) {
-	return x.inner.StopMonitoringEventWithTypeError(raw.CWEventType(type_))
+func (x *WiFiClient) StopMonitoringEventWithType(type_ EventType) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("stopMonitoringEventWithType:error:"), type_, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Unregister for all Wi-Fi event notifications.
 //
-// StopMonitoringAllEventsAndReturnError returns any validation error.
+// StopMonitoringAllEventsAndReturnError returns an error if the operation did not succeed.
 func (x *WiFiClient) StopMonitoringAllEventsAndReturnError() error {
-	_, err := x.inner.StopMonitoringAllEventsAndReturnError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("stopMonitoringAllEventsAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @property @abstract Sets the delegate to the specified object, which may implement CWWiFiEventDelegate protocol for Wi-Fi event handling. @discussion Clients may register for specific Wi-Fi events using -[CWWiFiClient startMonitoringEventWithType:error:].
-//
-// Delegate calls the underlying Delegate.
-func (x *WiFiClient) Delegate() objc.ID {
-	return x.inner.Delegate()
+// Sets the delegate to the specified object, which may implement CWWiFiEventDelegate protocol for Wi-Fi event handling. Clients may register for specific Wi-Fi events using -[CWWiFiClient startMonitoringEventWithType:error:].
+func (x *WiFiClient) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+	return obj.Wrap(_r)
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *WiFiClient) SetDelegate(delegate objc.ID) {
-	x.inner.SetDelegate(delegate)
+func (x *WiFiClient) SetDelegate(delegate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
 // WiFiClientable is the interface implemented by [WiFiClient], for mocking and DI.
 type WiFiClientable interface {
-	Unwrap() *raw.CWWiFiClient
-	WithDelegate(delegate objc.ID) *WiFiClient
+	obj.Object
+	WithDelegate(delegate obj.Object) *WiFiClient
 	Interface() *Interface
 	InterfaceNames() []string
 	InterfaceWithName(interfaceName string) *Interface
 	Interfaces() []*Interface
-	StartMonitoringEventWithTypeError(type_ CWEventType) (bool, error)
-	StopMonitoringEventWithTypeError(type_ CWEventType) (bool, error)
+	StartMonitoringEventWithType(type_ EventType) error
+	StopMonitoringEventWithType(type_ EventType) error
 	StopMonitoringAllEventsAndReturnError() error
-	Delegate() objc.ID
-	SetDelegate(delegate objc.ID)
+	Delegate() obj.Object
+	SetDelegate(delegate obj.Object)
 }
 
 var _ WiFiClientable = (*WiFiClient)(nil)

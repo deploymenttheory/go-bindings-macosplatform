@@ -5,114 +5,111 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A single object in a dragging item.
 //
-// DraggingImageComponent wraps [raw.NSDraggingImageComponent] with a fluent Go API.
+// DraggingImageComponent is an idiomatic wrapper over the Objective-C class NSDraggingImageComponent.
 type DraggingImageComponent struct {
-	inner *raw.NSDraggingImageComponent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSDraggingImageComponent].
-func (x *DraggingImageComponent) Unwrap() *raw.NSDraggingImageComponent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DraggingImageComponent) ID() objc.ID { return x.inner.Ptr() }
-
-// DraggingImageComponentFromID adopts an existing object pointer as a DraggingImageComponent (nil for 0).
+// DraggingImageComponentFromID adopts an existing Objective-C object as a DraggingImageComponent
+// (nil for 0), retaining it and registering a release finalizer.
 func DraggingImageComponentFromID(id objc.ID) *DraggingImageComponent {
 	if id == 0 {
 		return nil
 	}
-	return &DraggingImageComponent{inner: raw.NSDraggingImageComponentFromID(id)}
+	x := &DraggingImageComponent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// draggingImageComponentAdopt wraps an Objective-C object that this code just created as a
+// DraggingImageComponent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func draggingImageComponentAdopt(id objc.ID) *DraggingImageComponent {
+	if id == 0 {
+		return nil
+	}
+	x := &DraggingImageComponent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DraggingImageComponent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DraggingImageComponent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DraggingImageComponent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes and returns a dragging image component with the specified key.
 //
-// NewDraggingImageComponentWithKey creates a new [DraggingImageComponent].
-func NewDraggingImageComponentWithKey(key *foundation.NSString) *DraggingImageComponent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDraggingImageComponent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKey:"), key.Ptr())
-	return &DraggingImageComponent{inner: raw.NSDraggingImageComponentFromID(_id)}
+// NewDraggingImageComponentWithKey creates a new DraggingImageComponent.
+func NewDraggingImageComponentWithKey(key obj.Object) *DraggingImageComponent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDraggingImageComponent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKey:"), objref.IDOf(key))
+	return draggingImageComponentAdopt(_id)
 }
 
 // The unique name of this image component instance.
 //
-// WithKey sets the key property and returns the receiver for chaining.
-func (x *DraggingImageComponent) WithKey(key *foundation.NSString) *DraggingImageComponent {
-	x.inner.SetKey(key)
+// WithKey sets key and returns the receiver so calls can be chained.
+func (x *DraggingImageComponent) WithKey(key obj.Object) *DraggingImageComponent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return x
 }
 
 // An object providing the image contents of the component.
 //
-// WithContents sets the contents property and returns the receiver for chaining.
-func (x *DraggingImageComponent) WithContents(contents objc.ID) *DraggingImageComponent {
-	x.inner.SetContents(contents)
+// WithContents sets contents and returns the receiver so calls can be chained.
+func (x *DraggingImageComponent) WithContents(contents obj.Object) *DraggingImageComponent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
 	return x
 }
 
-// The coordinate space is the bounds of the parent dragging item.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
-func (x *DraggingImageComponent) WithFrame(frame corefoundation.CGRect) *DraggingImageComponent {
-	x.inner.SetFrame(frame)
-	return x
+func (x *DraggingImageComponent) Key() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
+	return obj.Wrap(_r)
 }
 
-// Key calls the underlying Key.
-func (x *DraggingImageComponent) Key() string {
-	_r := x.inner.Key()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *DraggingImageComponent) SetKey(key obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
 }
 
-// SetKey calls the underlying SetKey.
-func (x *DraggingImageComponent) SetKey(key *foundation.NSString) {
-	x.inner.SetKey(key)
+func (x *DraggingImageComponent) Contents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contents"))
+	return obj.Wrap(_r)
 }
 
-// Contents calls the underlying Contents.
-func (x *DraggingImageComponent) Contents() objc.ID {
-	return x.inner.Contents()
-}
-
-// SetContents calls the underlying SetContents.
-func (x *DraggingImageComponent) SetContents(contents objc.ID) {
-	x.inner.SetContents(contents)
-}
-
-// Frame calls the underlying Frame.
-func (x *DraggingImageComponent) Frame() corefoundation.CGRect {
-	return x.inner.Frame()
-}
-
-// SetFrame calls the underlying SetFrame.
-func (x *DraggingImageComponent) SetFrame(frame corefoundation.CGRect) {
-	x.inner.SetFrame(frame)
+func (x *DraggingImageComponent) SetContents(contents obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
 }
 
 // DraggingImageComponentable is the interface implemented by [DraggingImageComponent], for mocking and DI.
 type DraggingImageComponentable interface {
-	Unwrap() *raw.NSDraggingImageComponent
-	WithKey(key *foundation.NSString) *DraggingImageComponent
-	WithContents(contents objc.ID) *DraggingImageComponent
-	WithFrame(frame corefoundation.CGRect) *DraggingImageComponent
-	Key() string
-	SetKey(key *foundation.NSString)
-	Contents() objc.ID
-	SetContents(contents objc.ID)
-	Frame() corefoundation.CGRect
-	SetFrame(frame corefoundation.CGRect)
+	obj.Object
+	WithKey(key obj.Object) *DraggingImageComponent
+	WithContents(contents obj.Object) *DraggingImageComponent
+	Key() obj.Object
+	SetKey(key obj.Object)
+	Contents() obj.Object
+	SetContents(contents obj.Object)
 }
 
 var _ DraggingImageComponentable = (*DraggingImageComponent)(nil)

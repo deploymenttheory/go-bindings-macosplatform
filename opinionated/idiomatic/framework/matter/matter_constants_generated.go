@@ -5,188 +5,155 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// MTRAttributePathKey returns the string constant MTRAttributePathKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTRAttributePathKey() objc.ID {
-	return purego.CFConstant(raw.MTRAttributePathKey())
+// MTRAttributePathKey returns the string constant MTRAttributePathKey, for use as a dictionary key or argument.
+func MTRAttributePathKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTRAttributePathKey")))
 }
 
-// MTRCommandPathKey returns the string constant MTRCommandPathKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTRCommandPathKey() objc.ID {
-	return purego.CFConstant(raw.MTRCommandPathKey())
+// MTRCommandPathKey returns the string constant MTRCommandPathKey, for use as a dictionary key or argument.
+func MTRCommandPathKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTRCommandPathKey"))) }
+
+// MTREventPathKey returns the string constant MTREventPathKey, for use as a dictionary key or argument.
+func MTREventPathKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTREventPathKey"))) }
+
+// MTRDataKey returns the string constant MTRDataKey, for use as a dictionary key or argument.
+func MTRDataKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTRDataKey"))) }
+
+// MTRErrorKey returns the string constant MTRErrorKey, for use as a dictionary key or argument.
+func MTRErrorKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTRErrorKey"))) }
+
+// MTRTypeKey returns the string constant MTRTypeKey, for use as a dictionary key or argument.
+func MTRTypeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTRTypeKey"))) }
+
+// MTRValueKey returns the string constant MTRValueKey, for use as a dictionary key or argument.
+func MTRValueKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTRValueKey"))) }
+
+// MTRContextTagKey returns the string constant MTRContextTagKey, for use as a dictionary key or argument.
+func MTRContextTagKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTRContextTagKey"))) }
+
+// MTRSignedIntegerValueType returns the string constant MTRSignedIntegerValueType, for use as a dictionary key or argument.
+func MTRSignedIntegerValueType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTRSignedIntegerValueType")))
 }
 
-// MTREventPathKey returns the string constant MTREventPathKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTREventPathKey() objc.ID {
-	return purego.CFConstant(raw.MTREventPathKey())
+// MTRUnsignedIntegerValueType returns the string constant MTRUnsignedIntegerValueType, for use as a dictionary key or argument.
+func MTRUnsignedIntegerValueType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTRUnsignedIntegerValueType")))
 }
 
-// MTRDataKey returns the string constant MTRDataKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTRDataKey() objc.ID {
-	return purego.CFConstant(raw.MTRDataKey())
+// MTRBooleanValueType returns the string constant MTRBooleanValueType, for use as a dictionary key or argument.
+func MTRBooleanValueType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTRBooleanValueType")))
 }
 
-// MTRErrorKey returns the string constant MTRErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTRErrorKey() objc.ID {
-	return purego.CFConstant(raw.MTRErrorKey())
+// MTRUTF8StringValueType returns the string constant MTRUTF8StringValueType, for use as a dictionary key or argument.
+func MTRUTF8StringValueType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTRUTF8StringValueType")))
 }
 
-// MTRTypeKey returns the string constant MTRTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTRTypeKey() objc.ID {
-	return purego.CFConstant(raw.MTRTypeKey())
+// MTROctetStringValueType returns the string constant MTROctetStringValueType, for use as a dictionary key or argument.
+func MTROctetStringValueType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTROctetStringValueType")))
 }
 
-// MTRValueKey returns the string constant MTRValueKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTRValueKey() objc.ID {
-	return purego.CFConstant(raw.MTRValueKey())
+// MTRFloatValueType returns the string constant MTRFloatValueType, for use as a dictionary key or argument.
+func MTRFloatValueType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTRFloatValueType"))) }
+
+// MTRDoubleValueType returns the string constant MTRDoubleValueType, for use as a dictionary key or argument.
+func MTRDoubleValueType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTRDoubleValueType")))
 }
 
-// MTRContextTagKey returns the string constant MTRContextTagKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTRContextTagKey() objc.ID {
-	return purego.CFConstant(raw.MTRContextTagKey())
+// MTRNullValueType returns the string constant MTRNullValueType, for use as a dictionary key or argument.
+func MTRNullValueType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTRNullValueType"))) }
+
+// MTRStructureValueType returns the string constant MTRStructureValueType, for use as a dictionary key or argument.
+func MTRStructureValueType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTRStructureValueType")))
 }
 
-// MTRSignedIntegerValueType returns the string constant MTRSignedIntegerValueType as an objc.ID, for use as a dictionary key or selector argument.
-func MTRSignedIntegerValueType() objc.ID {
-	return purego.CFConstant(raw.MTRSignedIntegerValueType())
+// MTRArrayValueType returns the string constant MTRArrayValueType, for use as a dictionary key or argument.
+func MTRArrayValueType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTRArrayValueType"))) }
+
+// MTREventNumberKey returns the string constant MTREventNumberKey, for use as a dictionary key or argument.
+func MTREventNumberKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTREventNumberKey"))) }
+
+// MTREventPriorityKey returns the string constant MTREventPriorityKey, for use as a dictionary key or argument.
+func MTREventPriorityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTREventPriorityKey")))
 }
 
-// MTRUnsignedIntegerValueType returns the string constant MTRUnsignedIntegerValueType as an objc.ID, for use as a dictionary key or selector argument.
-func MTRUnsignedIntegerValueType() objc.ID {
-	return purego.CFConstant(raw.MTRUnsignedIntegerValueType())
+// MTREventTimeTypeKey returns the string constant MTREventTimeTypeKey, for use as a dictionary key or argument.
+func MTREventTimeTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTREventTimeTypeKey")))
 }
 
-// MTRBooleanValueType returns the string constant MTRBooleanValueType as an objc.ID, for use as a dictionary key or selector argument.
-func MTRBooleanValueType() objc.ID {
-	return purego.CFConstant(raw.MTRBooleanValueType())
+// MTREventSystemUpTimeKey returns the string constant MTREventSystemUpTimeKey, for use as a dictionary key or argument.
+func MTREventSystemUpTimeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTREventSystemUpTimeKey")))
 }
 
-// MTRUTF8StringValueType returns the string constant MTRUTF8StringValueType as an objc.ID, for use as a dictionary key or selector argument.
-func MTRUTF8StringValueType() objc.ID {
-	return purego.CFConstant(raw.MTRUTF8StringValueType())
+// MTREventTimestampDateKey returns the string constant MTREventTimestampDateKey, for use as a dictionary key or argument.
+func MTREventTimestampDateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTREventTimestampDateKey")))
 }
 
-// MTROctetStringValueType returns the string constant MTROctetStringValueType as an objc.ID, for use as a dictionary key or selector argument.
-func MTROctetStringValueType() objc.ID {
-	return purego.CFConstant(raw.MTROctetStringValueType())
+// MTREventIsHistoricalKey returns the string constant MTREventIsHistoricalKey, for use as a dictionary key or argument.
+func MTREventIsHistoricalKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTREventIsHistoricalKey")))
 }
 
-// MTRFloatValueType returns the string constant MTRFloatValueType as an objc.ID, for use as a dictionary key or selector argument.
-func MTRFloatValueType() objc.ID {
-	return purego.CFConstant(raw.MTRFloatValueType())
+// MTRPreviousDataKey returns the string constant MTRPreviousDataKey, for use as a dictionary key or argument.
+func MTRPreviousDataKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTRPreviousDataKey")))
 }
 
-// MTRDoubleValueType returns the string constant MTRDoubleValueType as an objc.ID, for use as a dictionary key or selector argument.
-func MTRDoubleValueType() objc.ID {
-	return purego.CFConstant(raw.MTRDoubleValueType())
+// MTRDataVersionKey returns the string constant MTRDataVersionKey, for use as a dictionary key or argument.
+func MTRDataVersionKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTRDataVersionKey"))) }
+
+// MTRErrorDomain returns the string constant MTRErrorDomain, for use as a dictionary key or argument.
+func MTRErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTRErrorDomain"))) }
+
+// MTRInteractionErrorDomain returns the string constant MTRInteractionErrorDomain, for use as a dictionary key or argument.
+func MTRInteractionErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTRInteractionErrorDomain")))
 }
 
-// MTRNullValueType returns the string constant MTRNullValueType as an objc.ID, for use as a dictionary key or selector argument.
-func MTRNullValueType() objc.ID {
-	return purego.CFConstant(raw.MTRNullValueType())
+// MTRDeviceControllerRegistrationNodeIDsKey returns the string constant MTRDeviceControllerRegistrationNodeIDsKey, for use as a dictionary key or argument.
+func MTRDeviceControllerRegistrationNodeIDsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTRDeviceControllerRegistrationNodeIDsKey")))
 }
 
-// MTRStructureValueType returns the string constant MTRStructureValueType as an objc.ID, for use as a dictionary key or selector argument.
-func MTRStructureValueType() objc.ID {
-	return purego.CFConstant(raw.MTRStructureValueType())
+// MTRDeviceControllerRegistrationNodeIDKey returns the string constant MTRDeviceControllerRegistrationNodeIDKey, for use as a dictionary key or argument.
+func MTRDeviceControllerRegistrationNodeIDKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTRDeviceControllerRegistrationNodeIDKey")))
 }
 
-// MTRArrayValueType returns the string constant MTRArrayValueType as an objc.ID, for use as a dictionary key or selector argument.
-func MTRArrayValueType() objc.ID {
-	return purego.CFConstant(raw.MTRArrayValueType())
+// MTRDeviceControllerRegistrationControllerContextKey returns the string constant MTRDeviceControllerRegistrationControllerContextKey, for use as a dictionary key or argument.
+func MTRDeviceControllerRegistrationControllerContextKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTRDeviceControllerRegistrationControllerContextKey")))
 }
 
-// MTREventNumberKey returns the string constant MTREventNumberKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTREventNumberKey() objc.ID {
-	return purego.CFConstant(raw.MTREventNumberKey())
+// MTRDeviceControllerRegistrationControllerNodeIDKey returns the string constant MTRDeviceControllerRegistrationControllerNodeIDKey, for use as a dictionary key or argument.
+func MTRDeviceControllerRegistrationControllerNodeIDKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTRDeviceControllerRegistrationControllerNodeIDKey")))
 }
 
-// MTREventPriorityKey returns the string constant MTREventPriorityKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTREventPriorityKey() objc.ID {
-	return purego.CFConstant(raw.MTREventPriorityKey())
+// MTRDeviceControllerRegistrationControllerIsRunningKey returns the string constant MTRDeviceControllerRegistrationControllerIsRunningKey, for use as a dictionary key or argument.
+func MTRDeviceControllerRegistrationControllerIsRunningKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTRDeviceControllerRegistrationControllerIsRunningKey")))
 }
 
-// MTREventTimeTypeKey returns the string constant MTREventTimeTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTREventTimeTypeKey() objc.ID {
-	return purego.CFConstant(raw.MTREventTimeTypeKey())
+// MTRDeviceControllerRegistrationDeviceInternalStateKey returns the string constant MTRDeviceControllerRegistrationDeviceInternalStateKey, for use as a dictionary key or argument.
+func MTRDeviceControllerRegistrationDeviceInternalStateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTRDeviceControllerRegistrationDeviceInternalStateKey")))
 }
 
-// MTREventSystemUpTimeKey returns the string constant MTREventSystemUpTimeKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTREventSystemUpTimeKey() objc.ID {
-	return purego.CFConstant(raw.MTREventSystemUpTimeKey())
-}
-
-// MTREventTimestampDateKey returns the string constant MTREventTimestampDateKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTREventTimestampDateKey() objc.ID {
-	return purego.CFConstant(raw.MTREventTimestampDateKey())
-}
-
-// MTREventIsHistoricalKey returns the string constant MTREventIsHistoricalKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTREventIsHistoricalKey() objc.ID {
-	return purego.CFConstant(raw.MTREventIsHistoricalKey())
-}
-
-// MTRPreviousDataKey returns the string constant MTRPreviousDataKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTRPreviousDataKey() objc.ID {
-	return purego.CFConstant(raw.MTRPreviousDataKey())
-}
-
-// MTRDataVersionKey returns the string constant MTRDataVersionKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTRDataVersionKey() objc.ID {
-	return purego.CFConstant(raw.MTRDataVersionKey())
-}
-
-// MTRErrorDomain returns the string constant MTRErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MTRErrorDomain() objc.ID {
-	if _r := raw.MTRErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// MTRInteractionErrorDomain returns the string constant MTRInteractionErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MTRInteractionErrorDomain() objc.ID {
-	if _r := raw.MTRInteractionErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// MTRDeviceControllerRegistrationNodeIDsKey returns the string constant MTRDeviceControllerRegistrationNodeIDsKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTRDeviceControllerRegistrationNodeIDsKey() objc.ID {
-	return purego.CFConstant(raw.MTRDeviceControllerRegistrationNodeIDsKey())
-}
-
-// MTRDeviceControllerRegistrationNodeIDKey returns the string constant MTRDeviceControllerRegistrationNodeIDKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTRDeviceControllerRegistrationNodeIDKey() objc.ID {
-	return purego.CFConstant(raw.MTRDeviceControllerRegistrationNodeIDKey())
-}
-
-// MTRDeviceControllerRegistrationControllerContextKey returns the string constant MTRDeviceControllerRegistrationControllerContextKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTRDeviceControllerRegistrationControllerContextKey() objc.ID {
-	return purego.CFConstant(raw.MTRDeviceControllerRegistrationControllerContextKey())
-}
-
-// MTRDeviceControllerRegistrationControllerNodeIDKey returns the string constant MTRDeviceControllerRegistrationControllerNodeIDKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTRDeviceControllerRegistrationControllerNodeIDKey() objc.ID {
-	return purego.CFConstant(raw.MTRDeviceControllerRegistrationControllerNodeIDKey())
-}
-
-// MTRDeviceControllerRegistrationControllerIsRunningKey returns the string constant MTRDeviceControllerRegistrationControllerIsRunningKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTRDeviceControllerRegistrationControllerIsRunningKey() objc.ID {
-	return purego.CFConstant(raw.MTRDeviceControllerRegistrationControllerIsRunningKey())
-}
-
-// MTRDeviceControllerRegistrationDeviceInternalStateKey returns the string constant MTRDeviceControllerRegistrationDeviceInternalStateKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTRDeviceControllerRegistrationDeviceInternalStateKey() objc.ID {
-	return purego.CFConstant(raw.MTRDeviceControllerRegistrationDeviceInternalStateKey())
-}
-
-// MTRDeviceControllerRegistrationControllerCompressedFabricIDKey returns the string constant MTRDeviceControllerRegistrationControllerCompressedFabricIDKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTRDeviceControllerRegistrationControllerCompressedFabricIDKey() objc.ID {
-	return purego.CFConstant(raw.MTRDeviceControllerRegistrationControllerCompressedFabricIDKey())
+// MTRDeviceControllerRegistrationControllerCompressedFabricIDKey returns the string constant MTRDeviceControllerRegistrationControllerCompressedFabricIDKey, for use as a dictionary key or argument.
+func MTRDeviceControllerRegistrationControllerCompressedFabricIDKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTRDeviceControllerRegistrationControllerCompressedFabricIDKey")))
 }

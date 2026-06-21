@@ -5,70 +5,86 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents the text to synthesize and the voice to use.
 //
-// SpeechSynthesisProviderRequest wraps [raw.AVSpeechSynthesisProviderRequest] with a fluent Go API.
+// SpeechSynthesisProviderRequest is an idiomatic wrapper over the Objective-C class AVSpeechSynthesisProviderRequest.
 type SpeechSynthesisProviderRequest struct {
-	inner *raw.AVSpeechSynthesisProviderRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVSpeechSynthesisProviderRequest].
-func (x *SpeechSynthesisProviderRequest) Unwrap() *raw.AVSpeechSynthesisProviderRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpeechSynthesisProviderRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// SpeechSynthesisProviderRequestFromID adopts an existing object pointer as a SpeechSynthesisProviderRequest (nil for 0).
+// SpeechSynthesisProviderRequestFromID adopts an existing Objective-C object as a SpeechSynthesisProviderRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func SpeechSynthesisProviderRequestFromID(id objc.ID) *SpeechSynthesisProviderRequest {
 	if id == 0 {
 		return nil
 	}
-	return &SpeechSynthesisProviderRequest{inner: raw.AVSpeechSynthesisProviderRequestFromID(id)}
+	x := &SpeechSynthesisProviderRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// speechSynthesisProviderRequestAdopt wraps an Objective-C object that this code just created as a
+// SpeechSynthesisProviderRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func speechSynthesisProviderRequestAdopt(id objc.ID) *SpeechSynthesisProviderRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &SpeechSynthesisProviderRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SpeechSynthesisProviderRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SpeechSynthesisProviderRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SpeechSynthesisProviderRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a request with a voice and a description.
 //
-// NewSpeechSynthesisProviderRequestWithSSMLRepresentationVoice creates a new [SpeechSynthesisProviderRequest].
-func NewSpeechSynthesisProviderRequestWithSSMLRepresentationVoice(text string, voice *raw.AVSpeechSynthesisProviderVoice) *SpeechSynthesisProviderRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSpeechSynthesisProviderRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSSMLRepresentation:voice:"), foundation.NSStringStringWithUTF8String(text).Ptr(), voice.Ptr())
-	return &SpeechSynthesisProviderRequest{inner: raw.AVSpeechSynthesisProviderRequestFromID(_id)}
+// NewSpeechSynthesisProviderRequestWithSSMLRepresentationVoice creates a new SpeechSynthesisProviderRequest.
+func NewSpeechSynthesisProviderRequestWithSSMLRepresentationVoice(text string, voice *SpeechSynthesisProviderVoice) *SpeechSynthesisProviderRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVSpeechSynthesisProviderRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSSMLRepresentation:voice:"), purego.NSString(text), objref.IDOf(voice))
+	return speechSynthesisProviderRequestAdopt(_id)
 }
 
-// @abstract The SSML representation of the text to be synthesized with the corresponding speech synthesis attributes for customization of pitch, rate, intonation, and more. @see https://www.w3.org/TR/speech-synthesis11/
-//
-// SsmlRepresentation calls the underlying SsmlRepresentation.
+// The SSML representation of the text to be synthesized with the corresponding speech synthesis attributes for customization of pitch, rate, intonation, and more.
 func (x *SpeechSynthesisProviderRequest) SsmlRepresentation() string {
-	_r := x.inner.SsmlRepresentation()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ssmlRepresentation"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The voice to be used in this speech request
-//
-// Voice calls the underlying Voice.
+// The voice to be used in this speech request
 func (x *SpeechSynthesisProviderRequest) Voice() *SpeechSynthesisProviderVoice {
-	_r := x.inner.Voice()
-	if _r == nil {
-		return nil
-	}
-	return &SpeechSynthesisProviderVoice{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voice"))
+	return SpeechSynthesisProviderVoiceFromID(_r)
 }
 
 // SpeechSynthesisProviderRequestable is the interface implemented by [SpeechSynthesisProviderRequest], for mocking and DI.
 type SpeechSynthesisProviderRequestable interface {
-	Unwrap() *raw.AVSpeechSynthesisProviderRequest
+	obj.Object
 	SsmlRepresentation() string
 	Voice() *SpeechSynthesisProviderVoice
 }

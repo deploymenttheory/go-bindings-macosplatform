@@ -5,131 +5,128 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that vends attributed strings for media with a legible characteristic.
 //
-// PlayerItemLegibleOutput wraps [raw.AVPlayerItemLegibleOutput] with a fluent Go API.
+// PlayerItemLegibleOutput is an idiomatic wrapper over the Objective-C class AVPlayerItemLegibleOutput.
 type PlayerItemLegibleOutput struct {
-	inner *raw.AVPlayerItemLegibleOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPlayerItemLegibleOutput].
-func (x *PlayerItemLegibleOutput) Unwrap() *raw.AVPlayerItemLegibleOutput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerItemLegibleOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerItemLegibleOutputFromID adopts an existing object pointer as a PlayerItemLegibleOutput (nil for 0).
+// PlayerItemLegibleOutputFromID adopts an existing Objective-C object as a PlayerItemLegibleOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerItemLegibleOutputFromID(id objc.ID) *PlayerItemLegibleOutput {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerItemLegibleOutput{inner: raw.AVPlayerItemLegibleOutputFromID(id)}
+	x := &PlayerItemLegibleOutput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// playerItemLegibleOutputAdopt wraps an Objective-C object that this code just created as a
+// PlayerItemLegibleOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerItemLegibleOutputAdopt(id objc.ID) *PlayerItemLegibleOutput {
+	if id == 0 {
+		return nil
+	}
+	x := &PlayerItemLegibleOutput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PlayerItemLegibleOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlayerItemLegibleOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlayerItemLegibleOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an initialized legible-output object.
 //
-// NewPlayerItemLegibleOutputWithMediaSubtypesForNativeRepresentation creates a new [PlayerItemLegibleOutput].
-func NewPlayerItemLegibleOutputWithMediaSubtypesForNativeRepresentation(subtypes *foundation.NSArray[*foundation.NSNumber]) *PlayerItemLegibleOutput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemLegibleOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMediaSubtypesForNativeRepresentation:"), subtypes.Ptr())
-	return &PlayerItemLegibleOutput{inner: raw.AVPlayerItemLegibleOutputFromID(_id)}
+// NewPlayerItemLegibleOutputWithMediaSubtypesForNativeRepresentation creates a new PlayerItemLegibleOutput.
+func NewPlayerItemLegibleOutputWithMediaSubtypesForNativeRepresentation(subtypes []obj.Object) *PlayerItemLegibleOutput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemLegibleOutput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMediaSubtypesForNativeRepresentation:"), purego.SliceToNSArray(subtypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return playerItemLegibleOutputAdopt(_id)
 }
 
 // The time interval, in seconds, that a player item legible output object messages its delegate earlier than normal.
 //
-// WithAdvanceIntervalForDelegateInvocation sets the advanceIntervalForDelegateInvocation property and returns the receiver for chaining.
+// WithAdvanceIntervalForDelegateInvocation sets advanceIntervalForDelegateInvocation and returns the receiver so calls can be chained.
 func (x *PlayerItemLegibleOutput) WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemLegibleOutput {
-	x.inner.SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdvanceIntervalForDelegateInvocation:"), advanceIntervalForDelegateInvocation)
 	return x
 }
 
 // A string identifier indicating the degree of text styling to be applied to attributed strings vended by the object.
 //
-// WithTextStylingResolution sets the textStylingResolution property and returns the receiver for chaining.
-func (x *PlayerItemLegibleOutput) WithTextStylingResolution(textStylingResolution *foundation.NSString) *PlayerItemLegibleOutput {
-	x.inner.SetTextStylingResolution(textStylingResolution)
+// WithTextStylingResolution sets textStylingResolution and returns the receiver so calls can be chained.
+func (x *PlayerItemLegibleOutput) WithTextStylingResolution(textStylingResolution obj.Object) *PlayerItemLegibleOutput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextStylingResolution:"), objref.IDOf(textStylingResolution))
 	return x
 }
 
 // A Boolean value that indicates whether the player object renders the receiver’s output.
 //
-// WithSuppressesPlayerRendering sets the suppressesPlayerRendering property and returns the receiver for chaining.
+// WithSuppressesPlayerRendering sets suppressesPlayerRendering and returns the receiver so calls can be chained.
 func (x *PlayerItemLegibleOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemLegibleOutput {
-	x.inner.AVPlayerItemOutput.SetSuppressesPlayerRendering(suppressesPlayerRendering)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
 	return x
 }
 
-// Sets the receiver’s delegate and a dispatch queue on which the delegate is called.
-//
-// SetDelegateQueue calls the underlying SetDelegateQueue.
-func (x *PlayerItemLegibleOutput) SetDelegateQueue(delegate raw.AVPlayerItemLegibleOutputPushDelegate, delegateQueue *foundation.NSObject) {
-	x.inner.SetDelegateQueue(delegate, delegateQueue)
+// The dispatch queue where the delegate is messaged. This property is not key-value observable.
+func (x *PlayerItemLegibleOutput) DelegateQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateQueue"))
+	return obj.Wrap(_r)
 }
 
-// @property		delegate @abstract		The receiver's delegate. @discussion The delegate is held using a zeroing-weak reference, so this property will have a value of nil after a delegate that was previously set has been deallocated.  This property is not key-value observable.
-//
-// Delegate calls the underlying Delegate.
-func (x *PlayerItemLegibleOutput) Delegate() raw.AVPlayerItemLegibleOutputPushDelegate {
-	return x.inner.Delegate()
-}
-
-// @property		delegateQueue @abstract		The dispatch queue where the delegate is messaged. @discussion This property is not key-value observable.
-//
-// DelegateQueue calls the underlying DelegateQueue.
-func (x *PlayerItemLegibleOutput) DelegateQueue() *foundation.NSObject {
-	return x.inner.DelegateQueue()
-}
-
-// @property		advanceIntervalForDelegateInvocation @abstract		Permits advance invocation of the associated delegate, if any. @discussion If it is possible, an AVPlayerItemLegibleOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemLegibleOutput is prepared to act on them, the delegate will be invoked as soon as possible.
-//
-// AdvanceIntervalForDelegateInvocation calls the underlying AdvanceIntervalForDelegateInvocation.
+// Permits advance invocation of the associated delegate, if any. If it is possible, an AVPlayerItemLegibleOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemLegibleOutput is prepared to act on them, the delegate will be invoked as soon as possible.
 func (x *PlayerItemLegibleOutput) AdvanceIntervalForDelegateInvocation() float64 {
-	return x.inner.AdvanceIntervalForDelegateInvocation()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("advanceIntervalForDelegateInvocation"))
+	return _r
 }
 
-// SetAdvanceIntervalForDelegateInvocation calls the underlying SetAdvanceIntervalForDelegateInvocation.
 func (x *PlayerItemLegibleOutput) SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) {
-	x.inner.SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdvanceIntervalForDelegateInvocation:"), advanceIntervalForDelegateInvocation)
 }
 
-// TextStylingResolution calls the underlying TextStylingResolution.
-func (x *PlayerItemLegibleOutput) TextStylingResolution() string {
-	_r := x.inner.TextStylingResolution()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *PlayerItemLegibleOutput) TextStylingResolution() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textStylingResolution"))
+	return obj.Wrap(_r)
 }
 
-// SetTextStylingResolution calls the underlying SetTextStylingResolution.
-func (x *PlayerItemLegibleOutput) SetTextStylingResolution(textStylingResolution *foundation.NSString) {
-	x.inner.SetTextStylingResolution(textStylingResolution)
-}
-
-func (x *PlayerItemLegibleOutput) asPlayerItemOutput() *raw.AVPlayerItemOutput {
-	return &x.inner.AVPlayerItemOutput
+func (x *PlayerItemLegibleOutput) SetTextStylingResolution(textStylingResolution obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextStylingResolution:"), objref.IDOf(textStylingResolution))
 }
 
 // PlayerItemLegibleOutputable is the interface implemented by [PlayerItemLegibleOutput], for mocking and DI.
 type PlayerItemLegibleOutputable interface {
-	Unwrap() *raw.AVPlayerItemLegibleOutput
+	obj.Object
 	WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemLegibleOutput
-	WithTextStylingResolution(textStylingResolution *foundation.NSString) *PlayerItemLegibleOutput
+	WithTextStylingResolution(textStylingResolution obj.Object) *PlayerItemLegibleOutput
 	WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemLegibleOutput
-	SetDelegateQueue(delegate raw.AVPlayerItemLegibleOutputPushDelegate, delegateQueue *foundation.NSObject)
-	Delegate() raw.AVPlayerItemLegibleOutputPushDelegate
-	DelegateQueue() *foundation.NSObject
+	DelegateQueue() obj.Object
 	AdvanceIntervalForDelegateInvocation() float64
 	SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64)
-	TextStylingResolution() string
-	SetTextStylingResolution(textStylingResolution *foundation.NSString)
+	TextStylingResolution() obj.Object
+	SetTextStylingResolution(textStylingResolution obj.Object)
 }
 
 var _ PlayerItemLegibleOutputable = (*PlayerItemLegibleOutput)(nil)

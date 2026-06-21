@@ -5,15 +5,15 @@
 package metrickit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// DiagnosticProvider is implemented by Diagnostic and any idiomatic type wrapping a MXDiagnostic subclass.
+// DiagnosticProvider is accepted wherever a MXDiagnostic (or one of its subclasses) is expected.
 type DiagnosticProvider interface {
-	asDiagnostic() *raw.MXDiagnostic
+	objref.Object
 }
 
-// MetricProvider is implemented by Metric and any idiomatic type wrapping a MXMetric subclass.
+// MetricProvider is accepted wherever a MXMetric (or one of its subclasses) is expected.
 type MetricProvider interface {
-	asMetric() *raw.MXMetric
+	objref.Object
 }

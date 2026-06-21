@@ -5,10 +5,10 @@
 package collaboration
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/collaboration"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// IdentityProvider is implemented by Identity and any idiomatic type wrapping a CBIdentity subclass.
+// IdentityProvider is accepted wherever a CBIdentity (or one of its subclasses) is expected.
 type IdentityProvider interface {
-	asIdentity() *raw.CBIdentity
+	objref.Object
 }

@@ -5503,7 +5503,7 @@ const (
 	HV_SYS_REG_ID_AA64MMFR1_EL1 Hv_sys_reg_t = 49209
 	HV_SYS_REG_ID_AA64MMFR2_EL1 Hv_sys_reg_t = 49210
 	HV_SYS_REG_SCTLR_EL1        Hv_sys_reg_t = 49280
-	// @abstract The ACTLR_EL1 register @discussion This only allows getting / setting of the ACTLR_EL1.EnTSO bit (index 1). Setting this bit to 1 will cause the vcpu to use a TSO memory model, whereas clearing it will cause the vcpu to use the default ARM64 memory model (weakly ordered loads / stores).
+	// The ACTLR_EL1 register This only allows getting / setting of the ACTLR_EL1.EnTSO bit (index 1). Setting this bit to 1 will cause the vcpu to use a TSO memory model, whereas clearing it will cause the vcpu to use the default ARM64 memory model (weakly ordered loads / stores).
 	HV_SYS_REG_ACTLR_EL1      Hv_sys_reg_t = 49281
 	HV_SYS_REG_CPACR_EL1      Hv_sys_reg_t = 49282
 	HV_SYS_REG_SMPRI_EL1      Hv_sys_reg_t = 49300

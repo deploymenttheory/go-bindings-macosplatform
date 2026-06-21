@@ -5,53 +5,67 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterWakeOnLan wraps [raw.MTRClusterWakeOnLan] with a fluent Go API.
+// MTRClusterWakeOnLan is an idiomatic wrapper over the Objective-C class MTRClusterWakeOnLan.
 type MTRClusterWakeOnLan struct {
-	inner *raw.MTRClusterWakeOnLan
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterWakeOnLan].
-func (x *MTRClusterWakeOnLan) Unwrap() *raw.MTRClusterWakeOnLan { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterWakeOnLan) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterWakeOnLanFromID adopts an existing object pointer as a MTRClusterWakeOnLan (nil for 0).
+// MTRClusterWakeOnLanFromID adopts an existing Objective-C object as a MTRClusterWakeOnLan
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterWakeOnLanFromID(id objc.ID) *MTRClusterWakeOnLan {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterWakeOnLan{inner: raw.MTRClusterWakeOnLanFromID(id)}
+	x := &MTRClusterWakeOnLan{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRClusterWakeOnLanWithDeviceEndpointQueue creates a new [MTRClusterWakeOnLan].
-func NewMTRClusterWakeOnLanWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterWakeOnLan {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterWakeOnLan")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterWakeOnLan{inner: raw.MTRClusterWakeOnLanFromID(_id)}
+// mTRClusterWakeOnLanAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterWakeOnLan (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterWakeOnLanAdopt(id objc.ID) *MTRClusterWakeOnLan {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterWakeOnLan{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *MTRClusterWakeOnLan) asMTRClusterWakeOnLAN() *raw.MTRClusterWakeOnLAN {
-	return &x.inner.MTRClusterWakeOnLAN
+// Description returns the object's -description text.
+func (x *MTRClusterWakeOnLan) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *MTRClusterWakeOnLan) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRClusterWakeOnLAN.MTRGenericCluster
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterWakeOnLan) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-func (x *MTRClusterWakeOnLan) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRClusterWakeOnLAN.MTRGenericCluster.MTRCluster
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterWakeOnLan) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRClusterWakeOnLanWithDeviceEndpointQueue creates a new MTRClusterWakeOnLan.
+func NewMTRClusterWakeOnLanWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterWakeOnLan {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterWakeOnLan")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterWakeOnLanAdopt(_id)
 }
 
 // MTRClusterWakeOnLanable is the interface implemented by [MTRClusterWakeOnLan], for mocking and DI.
 type MTRClusterWakeOnLanable interface {
-	Unwrap() *raw.MTRClusterWakeOnLan
+	obj.Object
 }
 
 var _ MTRClusterWakeOnLanable = (*MTRClusterWakeOnLan)(nil)

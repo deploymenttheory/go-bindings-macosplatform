@@ -5,82 +5,103 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A data object representing the captured data for a custom metric.
 //
-// SignpostIntervalData wraps [raw.MXSignpostIntervalData] with a fluent Go API.
+// SignpostIntervalData is an idiomatic wrapper over the Objective-C class MXSignpostIntervalData.
 type SignpostIntervalData struct {
-	inner *raw.MXSignpostIntervalData
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MXSignpostIntervalData].
-func (x *SignpostIntervalData) Unwrap() *raw.MXSignpostIntervalData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SignpostIntervalData) ID() objc.ID { return x.inner.Ptr() }
-
-// SignpostIntervalDataFromID adopts an existing object pointer as a SignpostIntervalData (nil for 0).
+// SignpostIntervalDataFromID adopts an existing Objective-C object as a SignpostIntervalData
+// (nil for 0), retaining it and registering a release finalizer.
 func SignpostIntervalDataFromID(id objc.ID) *SignpostIntervalData {
 	if id == 0 {
 		return nil
 	}
-	return &SignpostIntervalData{inner: raw.MXSignpostIntervalDataFromID(id)}
+	x := &SignpostIntervalData{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSignpostIntervalData creates a new [SignpostIntervalData].
+// signpostIntervalDataAdopt wraps an Objective-C object that this code just created as a
+// SignpostIntervalData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func signpostIntervalDataAdopt(id objc.ID) *SignpostIntervalData {
+	if id == 0 {
+		return nil
+	}
+	x := &SignpostIntervalData{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SignpostIntervalData) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SignpostIntervalData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SignpostIntervalData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSignpostIntervalData creates a new SignpostIntervalData.
 func NewSignpostIntervalData() *SignpostIntervalData {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXSignpostIntervalData")), objc.RegisterName("new"))
-	return &SignpostIntervalData{inner: raw.MXSignpostIntervalDataFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXSignpostIntervalData")), objc.RegisterName("new"))
+	return signpostIntervalDataAdopt(_id)
 }
 
-// @property      histogrammedSignpostDuration @abstract      A histogram of signpost intervals durations associated with the given signposts with signpostName and signpostCategory.
-//
-// HistogrammedSignpostDuration calls the underlying HistogrammedSignpostDuration.
-func (x *SignpostIntervalData) HistogrammedSignpostDuration() *raw.MXHistogram[*foundation.NSUnitDuration] {
-	return x.inner.HistogrammedSignpostDuration()
+// A histogram of signpost intervals durations associated with the given signposts with signpostName and signpostCategory.
+func (x *SignpostIntervalData) HistogrammedSignpostDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("histogrammedSignpostDuration"))
+	return obj.Wrap(_r)
 }
 
-// @property      cumulativeCPUTime @abstract      Cumulative CPU time aggregated over the MXSignpost intervals. @discussion    This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
-//
-// CumulativeCPUTime calls the underlying CumulativeCPUTime.
-func (x *SignpostIntervalData) CumulativeCPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	return x.inner.CumulativeCPUTime()
+// Cumulative CPU time aggregated over the MXSignpost intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
+func (x *SignpostIntervalData) CumulativeCPUTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeCPUTime"))
+	return obj.Wrap(_r)
 }
 
-// @property      averageMemory @abstract      Average value of memory snapshots taken at beginning and end of MXSignpost intervals @discussion    This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
-//
-// AverageMemory calls the underlying AverageMemory.
-func (x *SignpostIntervalData) AverageMemory() *raw.MXAverage[*foundation.NSUnitInformationStorage] {
-	return x.inner.AverageMemory()
+// Average value of memory snapshots taken at beginning and end of MXSignpost intervals This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
+func (x *SignpostIntervalData) AverageMemory() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("averageMemory"))
+	return obj.Wrap(_r)
 }
 
-// @property      cumulativeLogicalWrites @abstract      Cumulative logical writes aggregated over the MXSignpost intervals. @discussion    This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
-//
-// CumulativeLogicalWrites calls the underlying CumulativeLogicalWrites.
-func (x *SignpostIntervalData) CumulativeLogicalWrites() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	return x.inner.CumulativeLogicalWrites()
+// Cumulative logical writes aggregated over the MXSignpost intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
+func (x *SignpostIntervalData) CumulativeLogicalWrites() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeLogicalWrites"))
+	return obj.Wrap(_r)
 }
 
-// @property      cumulativeHitchTimeRatio @abstract      Cumulative hitch time ratio aggregated over the MXSignpostAnimation intervals. @discussion    This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
-//
-// CumulativeHitchTimeRatio calls the underlying CumulativeHitchTimeRatio.
-func (x *SignpostIntervalData) CumulativeHitchTimeRatio() *foundation.NSMeasurement[*foundation.NSUnit] {
-	return x.inner.CumulativeHitchTimeRatio()
+// Cumulative hitch time ratio aggregated over the MXSignpostAnimation intervals. This property is null when signposts with the associated signpostName and signpostCategory contain no interval metric data.
+func (x *SignpostIntervalData) CumulativeHitchTimeRatio() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeHitchTimeRatio"))
+	return obj.Wrap(_r)
 }
 
 // SignpostIntervalDataable is the interface implemented by [SignpostIntervalData], for mocking and DI.
 type SignpostIntervalDataable interface {
-	Unwrap() *raw.MXSignpostIntervalData
-	HistogrammedSignpostDuration() *raw.MXHistogram[*foundation.NSUnitDuration]
-	CumulativeCPUTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
-	AverageMemory() *raw.MXAverage[*foundation.NSUnitInformationStorage]
-	CumulativeLogicalWrites() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
-	CumulativeHitchTimeRatio() *foundation.NSMeasurement[*foundation.NSUnit]
+	obj.Object
+	HistogrammedSignpostDuration() obj.Object
+	CumulativeCPUTime() obj.Object
+	AverageMemory() obj.Object
+	CumulativeLogicalWrites() obj.Object
+	CumulativeHitchTimeRatio() obj.Object
 }
 
 var _ SignpostIntervalDataable = (*SignpostIntervalData)(nil)

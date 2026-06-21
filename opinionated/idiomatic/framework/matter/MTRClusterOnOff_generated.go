@@ -5,275 +5,166 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterOnOff wraps [raw.MTRClusterOnOff] with a fluent Go API.
+// MTRClusterOnOff is an idiomatic wrapper over the Objective-C class MTRClusterOnOff.
 type MTRClusterOnOff struct {
-	inner *raw.MTRClusterOnOff
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterOnOff].
-func (x *MTRClusterOnOff) Unwrap() *raw.MTRClusterOnOff { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterOnOff) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterOnOffFromID adopts an existing object pointer as a MTRClusterOnOff (nil for 0).
+// MTRClusterOnOffFromID adopts an existing Objective-C object as a MTRClusterOnOff
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterOnOffFromID(id objc.ID) *MTRClusterOnOff {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterOnOff{inner: raw.MTRClusterOnOffFromID(id)}
+	x := &MTRClusterOnOff{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterOnOffAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterOnOff (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterOnOffAdopt(id objc.ID) *MTRClusterOnOff {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterOnOff{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterOnOff) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterOnOff) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterOnOff) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterOnOffWithDeviceEndpointIDQueue creates a new [MTRClusterOnOff].
-func NewMTRClusterOnOffWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterOnOff {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterOnOff")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterOnOff{inner: raw.MTRClusterOnOffFromID(_id)}
+// NewMTRClusterOnOffWithDeviceEndpointIDQueue creates a new MTRClusterOnOff.
+func NewMTRClusterOnOffWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterOnOff {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterOnOff")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterOnOffAdopt(_id)
 }
 
-// NewMTRClusterOnOffWithDeviceEndpointQueue creates a new [MTRClusterOnOff].
-func NewMTRClusterOnOffWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterOnOff {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterOnOff")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterOnOff{inner: raw.MTRClusterOnOffFromID(_id)}
+// NewMTRClusterOnOffWithDeviceEndpointQueue creates a new MTRClusterOnOff.
+func NewMTRClusterOnOffWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterOnOff {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterOnOff")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterOnOffAdopt(_id)
 }
 
-// OffWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying OffWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterOnOff) OffWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTROnOffClusterOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.OffWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterOnOff) ReadAttributeOnOffWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOnOffWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// OffWithExpectedValuesExpectedValueIntervalCompletion calls the underlying OffWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterOnOff) OffWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.OffWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+func (x *MTRClusterOnOff) ReadAttributeGlobalSceneControlWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGlobalSceneControlWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// OnWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying OnWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterOnOff) OnWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTROnOffClusterOnParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.OnWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterOnOff) ReadAttributeOnTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOnTimeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// OnWithExpectedValuesExpectedValueIntervalCompletion calls the underlying OnWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterOnOff) OnWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.OnWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+func (x *MTRClusterOnOff) WriteAttributeOnTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOnTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ToggleWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying ToggleWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterOnOff) ToggleWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTROnOffClusterToggleParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ToggleWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterOnOff) WriteAttributeOnTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOnTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ToggleWithExpectedValuesExpectedValueIntervalCompletion calls the underlying ToggleWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterOnOff) ToggleWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ToggleWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+func (x *MTRClusterOnOff) ReadAttributeOffWaitTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOffWaitTimeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// OffWithEffectWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying OffWithEffectWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterOnOff) OffWithEffectWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTROnOffClusterOffWithEffectParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.OffWithEffectWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterOnOff) WriteAttributeOffWaitTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOffWaitTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// OnWithRecallGlobalSceneWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying OnWithRecallGlobalSceneWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterOnOff) OnWithRecallGlobalSceneWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTROnOffClusterOnWithRecallGlobalSceneParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.OnWithRecallGlobalSceneWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterOnOff) WriteAttributeOffWaitTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOffWaitTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// OnWithRecallGlobalSceneWithExpectedValuesExpectedValueIntervalCompletion calls the underlying OnWithRecallGlobalSceneWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterOnOff) OnWithRecallGlobalSceneWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.OnWithRecallGlobalSceneWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+func (x *MTRClusterOnOff) ReadAttributeStartUpOnOffWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStartUpOnOffWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// OnWithTimedOffWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying OnWithTimedOffWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterOnOff) OnWithTimedOffWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTROnOffClusterOnWithTimedOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.OnWithTimedOffWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterOnOff) WriteAttributeStartUpOnOffWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeStartUpOnOffWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeOnOffWithParams calls the underlying ReadAttributeOnOffWithParams.
-func (x *MTRClusterOnOff) ReadAttributeOnOffWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOnOffWithParams(params)
+func (x *MTRClusterOnOff) WriteAttributeStartUpOnOffWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeStartUpOnOffWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGlobalSceneControlWithParams calls the underlying ReadAttributeGlobalSceneControlWithParams.
-func (x *MTRClusterOnOff) ReadAttributeGlobalSceneControlWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGlobalSceneControlWithParams(params)
+func (x *MTRClusterOnOff) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeOnTimeWithParams calls the underlying ReadAttributeOnTimeWithParams.
-func (x *MTRClusterOnOff) ReadAttributeOnTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOnTimeWithParams(params)
+func (x *MTRClusterOnOff) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeOnTimeWithValueExpectedValueInterval calls the underlying WriteAttributeOnTimeWithValueExpectedValueInterval.
-func (x *MTRClusterOnOff) WriteAttributeOnTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeOnTimeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterOnOff) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeOnTimeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeOnTimeWithValueExpectedValueIntervalParams.
-func (x *MTRClusterOnOff) WriteAttributeOnTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeOnTimeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterOnOff) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeOffWaitTimeWithParams calls the underlying ReadAttributeOffWaitTimeWithParams.
-func (x *MTRClusterOnOff) ReadAttributeOffWaitTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOffWaitTimeWithParams(params)
-}
-
-// WriteAttributeOffWaitTimeWithValueExpectedValueInterval calls the underlying WriteAttributeOffWaitTimeWithValueExpectedValueInterval.
-func (x *MTRClusterOnOff) WriteAttributeOffWaitTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeOffWaitTimeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
-}
-
-// WriteAttributeOffWaitTimeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeOffWaitTimeWithValueExpectedValueIntervalParams.
-func (x *MTRClusterOnOff) WriteAttributeOffWaitTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeOffWaitTimeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
-}
-
-// ReadAttributeStartUpOnOffWithParams calls the underlying ReadAttributeStartUpOnOffWithParams.
-func (x *MTRClusterOnOff) ReadAttributeStartUpOnOffWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeStartUpOnOffWithParams(params)
-}
-
-// WriteAttributeStartUpOnOffWithValueExpectedValueInterval calls the underlying WriteAttributeStartUpOnOffWithValueExpectedValueInterval.
-func (x *MTRClusterOnOff) WriteAttributeStartUpOnOffWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeStartUpOnOffWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
-}
-
-// WriteAttributeStartUpOnOffWithValueExpectedValueIntervalParams calls the underlying WriteAttributeStartUpOnOffWithValueExpectedValueIntervalParams.
-func (x *MTRClusterOnOff) WriteAttributeStartUpOnOffWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeStartUpOnOffWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
-}
-
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterOnOff) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
-}
-
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterOnOff) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
-}
-
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterOnOff) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
-}
-
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterOnOff) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterOnOff) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-// OffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying OffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterOnOff) OffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROnOffClusterOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.OffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// OffWithExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying OffWithExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterOnOff) OffWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.OffWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
-}
-
-// OnWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying OnWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterOnOff) OnWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROnOffClusterOnParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.OnWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// OnWithExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying OnWithExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterOnOff) OnWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.OnWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
-}
-
-// ToggleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying ToggleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterOnOff) ToggleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROnOffClusterToggleParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.ToggleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// ToggleWithExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying ToggleWithExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterOnOff) ToggleWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.ToggleWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
-}
-
-// OffWithEffectWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying OffWithEffectWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterOnOff) OffWithEffectWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROnOffClusterOffWithEffectParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.OffWithEffectWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// OnWithRecallGlobalSceneWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying OnWithRecallGlobalSceneWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterOnOff) OnWithRecallGlobalSceneWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROnOffClusterOnWithRecallGlobalSceneParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.OnWithRecallGlobalSceneWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// OnWithRecallGlobalSceneWithExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying OnWithRecallGlobalSceneWithExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterOnOff) OnWithRecallGlobalSceneWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.OnWithRecallGlobalSceneWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
-}
-
-// OnWithTimedOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying OnWithTimedOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterOnOff) OnWithTimedOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROnOffClusterOnWithTimedOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.OnWithTimedOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-func (x *MTRClusterOnOff) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterOnOff) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterOnOff) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterOnOffable is the interface implemented by [MTRClusterOnOff], for mocking and DI.
 type MTRClusterOnOffable interface {
-	Unwrap() *raw.MTRClusterOnOff
-	OffWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTROnOffClusterOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	OffWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	OnWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTROnOffClusterOnParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	OnWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ToggleWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTROnOffClusterToggleParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ToggleWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	OffWithEffectWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTROnOffClusterOffWithEffectParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	OnWithRecallGlobalSceneWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTROnOffClusterOnWithRecallGlobalSceneParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	OnWithRecallGlobalSceneWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	OnWithTimedOffWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTROnOffClusterOnWithTimedOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeOnOffWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGlobalSceneControlWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeOnTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeOnTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeOnTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeOffWaitTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeOffWaitTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeOffWaitTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeStartUpOnOffWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeStartUpOnOffWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeStartUpOnOffWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	OffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROnOffClusterOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	OffWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	OnWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROnOffClusterOnParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	OnWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	ToggleWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROnOffClusterToggleParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	ToggleWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	OffWithEffectWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROnOffClusterOffWithEffectParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	OnWithRecallGlobalSceneWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROnOffClusterOnWithRecallGlobalSceneParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	OnWithRecallGlobalSceneWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	OnWithTimedOffWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROnOffClusterOnWithTimedOffParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	obj.Object
+	ReadAttributeOnOffWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGlobalSceneControlWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeOnTimeWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeOnTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeOnTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeOffWaitTimeWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeOffWaitTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeOffWaitTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeStartUpOnOffWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeStartUpOnOffWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeStartUpOnOffWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterOnOffable = (*MTRClusterOnOff)(nil)

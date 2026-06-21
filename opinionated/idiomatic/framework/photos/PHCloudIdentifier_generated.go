@@ -5,57 +5,80 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that identifies an asset or collection that syncs through iCloud Photos.
 //
-// CloudIdentifier wraps [raw.PHCloudIdentifier] with a fluent Go API.
+// CloudIdentifier is an idiomatic wrapper over the Objective-C class PHCloudIdentifier.
 type CloudIdentifier struct {
-	inner *raw.PHCloudIdentifier
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHCloudIdentifier].
-func (x *CloudIdentifier) Unwrap() *raw.PHCloudIdentifier { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CloudIdentifier) ID() objc.ID { return x.inner.Ptr() }
-
-// CloudIdentifierFromID adopts an existing object pointer as a CloudIdentifier (nil for 0).
+// CloudIdentifierFromID adopts an existing Objective-C object as a CloudIdentifier
+// (nil for 0), retaining it and registering a release finalizer.
 func CloudIdentifierFromID(id objc.ID) *CloudIdentifier {
 	if id == 0 {
 		return nil
 	}
-	return &CloudIdentifier{inner: raw.PHCloudIdentifierFromID(id)}
+	x := &CloudIdentifier{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// cloudIdentifierAdopt wraps an Objective-C object that this code just created as a
+// CloudIdentifier (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cloudIdentifierAdopt(id objc.ID) *CloudIdentifier {
+	if id == 0 {
+		return nil
+	}
+	x := &CloudIdentifier{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CloudIdentifier) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CloudIdentifier) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CloudIdentifier) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Deserializes a cloud identifier from its string value.
 //
-// NewCloudIdentifierWithStringValue creates a new [CloudIdentifier].
+// NewCloudIdentifierWithStringValue creates a new CloudIdentifier.
 func NewCloudIdentifierWithStringValue(stringValue string) *CloudIdentifier {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHCloudIdentifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStringValue:"), foundation.NSStringStringWithUTF8String(stringValue).Ptr())
-	return &CloudIdentifier{inner: raw.PHCloudIdentifierFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHCloudIdentifier")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStringValue:"), purego.NSString(stringValue))
+	return cloudIdentifierAdopt(_id)
 }
 
 // For use in serialization
-//
-// StringValue calls the underlying StringValue.
 func (x *CloudIdentifier) StringValue() string {
-	_r := x.inner.StringValue()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // CloudIdentifierable is the interface implemented by [CloudIdentifier], for mocking and DI.
 type CloudIdentifierable interface {
-	Unwrap() *raw.PHCloudIdentifier
+	obj.Object
 	StringValue() string
 }
 

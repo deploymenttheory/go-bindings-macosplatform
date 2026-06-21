@@ -5,61 +5,84 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent wraps [raw.MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent] with a fluent Go API.
+// MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent is an idiomatic wrapper over the Objective-C class MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent.
 type MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent struct {
-	inner *raw.MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent].
-func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRThreadNetworkDiagnosticsClusterConnectionStatusEventFromID adopts an existing object pointer as a MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent (nil for 0).
+// MTRThreadNetworkDiagnosticsClusterConnectionStatusEventFromID adopts an existing Objective-C object as a MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRThreadNetworkDiagnosticsClusterConnectionStatusEventFromID(id objc.ID) *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent{inner: raw.MTRThreadNetworkDiagnosticsClusterConnectionStatusEventFromID(id)}
-}
-
-// NewMTRThreadNetworkDiagnosticsClusterConnectionStatusEvent creates a new [MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent].
-func NewMTRThreadNetworkDiagnosticsClusterConnectionStatusEvent() *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent")), objc.RegisterName("new"))
-	return &MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent{inner: raw.MTRThreadNetworkDiagnosticsClusterConnectionStatusEventFromID(_id)}
-}
-
-// WithConnectionStatus sets the connectionStatus property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) WithConnectionStatus(connectionStatus *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent {
-	x.inner.SetConnectionStatus(connectionStatus)
+	x := &MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// ConnectionStatus calls the underlying ConnectionStatus.
-func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() *foundation.NSNumber {
-	return x.inner.ConnectionStatus()
+// mTRThreadNetworkDiagnosticsClusterConnectionStatusEventAdopt wraps an Objective-C object that this code just created as a
+// MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRThreadNetworkDiagnosticsClusterConnectionStatusEventAdopt(id objc.ID) *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetConnectionStatus calls the underlying SetConnectionStatus.
-func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) SetConnectionStatus(connectionStatus *foundation.NSNumber) {
-	x.inner.SetConnectionStatus(connectionStatus)
+// Description returns the object's -description text.
+func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRThreadNetworkDiagnosticsClusterConnectionStatusEvent creates a new MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent.
+func NewMTRThreadNetworkDiagnosticsClusterConnectionStatusEvent() *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent")), objc.RegisterName("new"))
+	return mTRThreadNetworkDiagnosticsClusterConnectionStatusEventAdopt(_id)
+}
+
+// WithConnectionStatus sets connectionStatus and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) WithConnectionStatus(connectionStatus obj.Object) *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionStatus:"), objref.IDOf(connectionStatus))
+	return x
+}
+
+func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectionStatus"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) SetConnectionStatus(connectionStatus obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionStatus:"), objref.IDOf(connectionStatus))
 }
 
 // MTRThreadNetworkDiagnosticsClusterConnectionStatusEventable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent], for mocking and DI.
 type MTRThreadNetworkDiagnosticsClusterConnectionStatusEventable interface {
-	Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent
-	WithConnectionStatus(connectionStatus *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent
-	ConnectionStatus() *foundation.NSNumber
-	SetConnectionStatus(connectionStatus *foundation.NSNumber)
+	obj.Object
+	WithConnectionStatus(connectionStatus obj.Object) *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent
+	ConnectionStatus() obj.Object
+	SetConnectionStatus(connectionStatus obj.Object)
 }
 
 var _ MTRThreadNetworkDiagnosticsClusterConnectionStatusEventable = (*MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent)(nil)

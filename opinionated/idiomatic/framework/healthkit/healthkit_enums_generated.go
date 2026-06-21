@@ -10,669 +10,644 @@ import (
 )
 
 // Constants that specify the value measured by the Move ring on the user’s device.
-type HKActivityMoveMode int64
+type ActivityMoveMode int64
 
 const (
 	// A value that indicates the Move ring measures active energy burned.
-	HKActivityMoveModeActiveEnergy HKActivityMoveMode = 1
+	ActivityMoveModeActiveEnergy ActivityMoveMode = 1
 	// A value that indicates the Activity app’s Move ring measures Apple Move Time.
-	HKActivityMoveModeAppleMoveTime HKActivityMoveMode = 2
+	ActivityMoveModeAppleMoveTime ActivityMoveMode = 2
 )
 
-func (e HKActivityMoveMode) String() string {
+func (e ActivityMoveMode) String() string {
 	switch e {
-	case HKActivityMoveModeActiveEnergy:
-		return "HKActivityMoveModeActiveEnergy"
-	case HKActivityMoveModeAppleMoveTime:
-		return "HKActivityMoveModeAppleMoveTime"
+	case ActivityMoveModeActiveEnergy:
+		return "ActivityMoveModeActiveEnergy"
+	case ActivityMoveModeAppleMoveTime:
+		return "ActivityMoveModeAppleMoveTime"
 	default:
-		return fmt.Sprintf("HKActivityMoveMode(%d)", int64(e))
+		return fmt.Sprintf("ActivityMoveMode(%d)", int64(e))
 	}
 }
 
-type HKAppleSleepingBreathingDisturbancesClassification int64
+type AppleSleepingBreathingDisturbancesClassification int64
 
 const (
-	HKAppleSleepingBreathingDisturbancesClassificationNotElevated HKAppleSleepingBreathingDisturbancesClassification = 0
-	HKAppleSleepingBreathingDisturbancesClassificationElevated    HKAppleSleepingBreathingDisturbancesClassification = 1
+	AppleSleepingBreathingDisturbancesClassificationNotElevated AppleSleepingBreathingDisturbancesClassification = 0
+	AppleSleepingBreathingDisturbancesClassificationElevated    AppleSleepingBreathingDisturbancesClassification = 1
 )
 
-func (e HKAppleSleepingBreathingDisturbancesClassification) String() string {
+func (e AppleSleepingBreathingDisturbancesClassification) String() string {
 	switch e {
-	case HKAppleSleepingBreathingDisturbancesClassificationNotElevated:
-		return "HKAppleSleepingBreathingDisturbancesClassificationNotElevated"
-	case HKAppleSleepingBreathingDisturbancesClassificationElevated:
-		return "HKAppleSleepingBreathingDisturbancesClassificationElevated"
+	case AppleSleepingBreathingDisturbancesClassificationNotElevated:
+		return "AppleSleepingBreathingDisturbancesClassificationNotElevated"
+	case AppleSleepingBreathingDisturbancesClassificationElevated:
+		return "AppleSleepingBreathingDisturbancesClassificationElevated"
 	default:
-		return fmt.Sprintf("HKAppleSleepingBreathingDisturbancesClassification(%d)", int64(e))
+		return fmt.Sprintf("AppleSleepingBreathingDisturbancesClassification(%d)", int64(e))
 	}
 }
 
 // A classification of a score based on the steadiness of the user’s gait.
-type HKAppleWalkingSteadinessClassification int64
+type AppleWalkingSteadinessClassification int64
 
 const (
 	// A classification indicating that the stability of the user’s gait is within the normal range.
-	HKAppleWalkingSteadinessClassificationOK HKAppleWalkingSteadinessClassification = 1
+	AppleWalkingSteadinessClassificationOK AppleWalkingSteadinessClassification = 1
 	// A classification indicating that the stability of the user’s gate is below normal.
-	HKAppleWalkingSteadinessClassificationLow HKAppleWalkingSteadinessClassification = 2
+	AppleWalkingSteadinessClassificationLow AppleWalkingSteadinessClassification = 2
 	// A classification indicating that the stability of the user’s gate is considerably below normal.
-	HKAppleWalkingSteadinessClassificationVeryLow HKAppleWalkingSteadinessClassification = 3
+	AppleWalkingSteadinessClassificationVeryLow AppleWalkingSteadinessClassification = 3
 )
 
-func (e HKAppleWalkingSteadinessClassification) String() string {
+func (e AppleWalkingSteadinessClassification) String() string {
 	switch e {
-	case HKAppleWalkingSteadinessClassificationOK:
-		return "HKAppleWalkingSteadinessClassificationOK"
-	case HKAppleWalkingSteadinessClassificationLow:
-		return "HKAppleWalkingSteadinessClassificationLow"
-	case HKAppleWalkingSteadinessClassificationVeryLow:
-		return "HKAppleWalkingSteadinessClassificationVeryLow"
+	case AppleWalkingSteadinessClassificationOK:
+		return "AppleWalkingSteadinessClassificationOK"
+	case AppleWalkingSteadinessClassificationLow:
+		return "AppleWalkingSteadinessClassificationLow"
+	case AppleWalkingSteadinessClassificationVeryLow:
+		return "AppleWalkingSteadinessClassificationVeryLow"
 	default:
-		return fmt.Sprintf("HKAppleWalkingSteadinessClassification(%d)", int64(e))
+		return fmt.Sprintf("AppleWalkingSteadinessClassification(%d)", int64(e))
 	}
 }
 
-type HKAudiogramConductionType int64
+type AudiogramConductionType int64
 
 const (
-	HKAudiogramConductionTypeAir HKAudiogramConductionType = 0
+	AudiogramConductionTypeAir AudiogramConductionType = 0
 )
 
-func (e HKAudiogramConductionType) String() string {
+func (e AudiogramConductionType) String() string {
 	switch e {
-	case HKAudiogramConductionTypeAir:
-		return "HKAudiogramConductionTypeAir"
+	case AudiogramConductionTypeAir:
+		return "AudiogramConductionTypeAir"
 	default:
-		return fmt.Sprintf("HKAudiogramConductionType(%d)", int64(e))
+		return fmt.Sprintf("AudiogramConductionType(%d)", int64(e))
 	}
 }
 
-type HKAudiogramSensitivityTestSide int64
+type AudiogramSensitivityTestSide int64
 
 const (
-	HKAudiogramSensitivityTestSideLeft  HKAudiogramSensitivityTestSide = 0
-	HKAudiogramSensitivityTestSideRight HKAudiogramSensitivityTestSide = 1
+	AudiogramSensitivityTestSideLeft  AudiogramSensitivityTestSide = 0
+	AudiogramSensitivityTestSideRight AudiogramSensitivityTestSide = 1
 )
 
-func (e HKAudiogramSensitivityTestSide) String() string {
+func (e AudiogramSensitivityTestSide) String() string {
 	switch e {
-	case HKAudiogramSensitivityTestSideLeft:
-		return "HKAudiogramSensitivityTestSideLeft"
-	case HKAudiogramSensitivityTestSideRight:
-		return "HKAudiogramSensitivityTestSideRight"
+	case AudiogramSensitivityTestSideLeft:
+		return "AudiogramSensitivityTestSideLeft"
+	case AudiogramSensitivityTestSideRight:
+		return "AudiogramSensitivityTestSideRight"
 	default:
-		return fmt.Sprintf("HKAudiogramSensitivityTestSide(%d)", int64(e))
-	}
-}
-
-// Values that indicate whether your app needs to request authorization from the user.
-type HKAuthorizationRequestStatus int64
-
-const (
-	// The authorization request status could not be determined because an error occurred.
-	HKAuthorizationRequestStatusUnknown HKAuthorizationRequestStatus = 0
-	// The application has not yet requested authorization for all the specified data types.
-	HKAuthorizationRequestStatusShouldRequest HKAuthorizationRequestStatus = 1
-	// The application has already requested authorization for all the specified data types.
-	HKAuthorizationRequestStatusUnnecessary HKAuthorizationRequestStatus = 2
-)
-
-func (e HKAuthorizationRequestStatus) String() string {
-	switch e {
-	case HKAuthorizationRequestStatusUnknown:
-		return "HKAuthorizationRequestStatusUnknown"
-	case HKAuthorizationRequestStatusShouldRequest:
-		return "HKAuthorizationRequestStatusShouldRequest"
-	case HKAuthorizationRequestStatusUnnecessary:
-		return "HKAuthorizationRequestStatusUnnecessary"
-	default:
-		return fmt.Sprintf("HKAuthorizationRequestStatus(%d)", int64(e))
+		return fmt.Sprintf("AudiogramSensitivityTestSide(%d)", int64(e))
 	}
 }
 
 // Constants indicating the authorization status for a particular data type.
-type HKAuthorizationStatus int64
+type AuthorizationStatus int64
 
 const (
 	// The user has not yet chosen to authorize access to the specified data type.
-	HKAuthorizationStatusNotDetermined HKAuthorizationStatus = 0
+	AuthorizationStatusNotDetermined AuthorizationStatus = 0
 	// The user has explicitly denied your app permission to save data of the specified type.
-	HKAuthorizationStatusSharingDenied HKAuthorizationStatus = 1
+	AuthorizationStatusSharingDenied AuthorizationStatus = 1
 	// The user has explicitly authorized your app to save data of the specified type.
-	HKAuthorizationStatusSharingAuthorized HKAuthorizationStatus = 2
+	AuthorizationStatusSharingAuthorized AuthorizationStatus = 2
 )
 
-func (e HKAuthorizationStatus) String() string {
+func (e AuthorizationStatus) String() string {
 	switch e {
-	case HKAuthorizationStatusNotDetermined:
-		return "HKAuthorizationStatusNotDetermined"
-	case HKAuthorizationStatusSharingDenied:
-		return "HKAuthorizationStatusSharingDenied"
-	case HKAuthorizationStatusSharingAuthorized:
-		return "HKAuthorizationStatusSharingAuthorized"
+	case AuthorizationStatusNotDetermined:
+		return "AuthorizationStatusNotDetermined"
+	case AuthorizationStatusSharingDenied:
+		return "AuthorizationStatusSharingDenied"
+	case AuthorizationStatusSharingAuthorized:
+		return "AuthorizationStatusSharingAuthorized"
 	default:
-		return fmt.Sprintf("HKAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationStatus(%d)", int64(e))
 	}
 }
 
 // Constants indicating the user’s sex.
-type HKBiologicalSex int64
+type BiologicalSex int64
 
 const (
 	// A constant indicating that either the user’s biological sex characteristic type is not set, or the user has not granted your app permission to read that characteristic type.
-	HKBiologicalSexNotSet HKBiologicalSex = 0
+	BiologicalSexNotSet BiologicalSex = 0
 	// A constant indicating that the user is female.
-	HKBiologicalSexFemale HKBiologicalSex = 1
+	BiologicalSexFemale BiologicalSex = 1
 	// A constant indicating that the user is male.
-	HKBiologicalSexMale HKBiologicalSex = 2
+	BiologicalSexMale BiologicalSex = 2
 	// A constant indicating that the user is otherwise not categorized as either male or female.
-	HKBiologicalSexOther HKBiologicalSex = 3
+	BiologicalSexOther BiologicalSex = 3
 )
 
-func (e HKBiologicalSex) String() string {
+func (e BiologicalSex) String() string {
 	switch e {
-	case HKBiologicalSexNotSet:
-		return "HKBiologicalSexNotSet"
-	case HKBiologicalSexFemale:
-		return "HKBiologicalSexFemale"
-	case HKBiologicalSexMale:
-		return "HKBiologicalSexMale"
-	case HKBiologicalSexOther:
-		return "HKBiologicalSexOther"
+	case BiologicalSexNotSet:
+		return "BiologicalSexNotSet"
+	case BiologicalSexFemale:
+		return "BiologicalSexFemale"
+	case BiologicalSexMale:
+		return "BiologicalSexMale"
+	case BiologicalSexOther:
+		return "BiologicalSexOther"
 	default:
-		return fmt.Sprintf("HKBiologicalSex(%d)", int64(e))
+		return fmt.Sprintf("BiologicalSex(%d)", int64(e))
 	}
 }
 
 // Constants indicating the user’s blood type.
-type HKBloodType int64
+type BloodType int64
 
 const (
 	// Either the user’s blood type is not set, or the user has not granted your app permission to read the blood type.
-	HKBloodTypeNotSet HKBloodType = 0
+	BloodTypeNotSet BloodType = 0
 	// The user has an A+ blood type.
-	HKBloodTypeAPositive HKBloodType = 1
+	BloodTypeAPositive BloodType = 1
 	// The user has an A– blood type.
-	HKBloodTypeANegative HKBloodType = 2
+	BloodTypeANegative BloodType = 2
 	// The user has an B+ blood type.
-	HKBloodTypeBPositive HKBloodType = 3
+	BloodTypeBPositive BloodType = 3
 	// The user has an B– blood type.
-	HKBloodTypeBNegative HKBloodType = 4
+	BloodTypeBNegative BloodType = 4
 	// The user has an AB+ blood type.
-	HKBloodTypeABPositive HKBloodType = 5
+	BloodTypeABPositive BloodType = 5
 	// The user has an AB– blood type.
-	HKBloodTypeABNegative HKBloodType = 6
+	BloodTypeABNegative BloodType = 6
 	// The user has an O+ blood type.
-	HKBloodTypeOPositive HKBloodType = 7
+	BloodTypeOPositive BloodType = 7
 	// The user has an O– blood type.
-	HKBloodTypeONegative HKBloodType = 8
+	BloodTypeONegative BloodType = 8
 )
 
-func (e HKBloodType) String() string {
+func (e BloodType) String() string {
 	switch e {
-	case HKBloodTypeNotSet:
-		return "HKBloodTypeNotSet"
-	case HKBloodTypeAPositive:
-		return "HKBloodTypeAPositive"
-	case HKBloodTypeANegative:
-		return "HKBloodTypeANegative"
-	case HKBloodTypeBPositive:
-		return "HKBloodTypeBPositive"
-	case HKBloodTypeBNegative:
-		return "HKBloodTypeBNegative"
-	case HKBloodTypeABPositive:
-		return "HKBloodTypeABPositive"
-	case HKBloodTypeABNegative:
-		return "HKBloodTypeABNegative"
-	case HKBloodTypeOPositive:
-		return "HKBloodTypeOPositive"
-	case HKBloodTypeONegative:
-		return "HKBloodTypeONegative"
+	case BloodTypeNotSet:
+		return "BloodTypeNotSet"
+	case BloodTypeAPositive:
+		return "BloodTypeAPositive"
+	case BloodTypeANegative:
+		return "BloodTypeANegative"
+	case BloodTypeBPositive:
+		return "BloodTypeBPositive"
+	case BloodTypeBNegative:
+		return "BloodTypeBNegative"
+	case BloodTypeABPositive:
+		return "BloodTypeABPositive"
+	case BloodTypeABNegative:
+		return "BloodTypeABNegative"
+	case BloodTypeOPositive:
+		return "BloodTypeOPositive"
+	case BloodTypeONegative:
+		return "BloodTypeONegative"
 	default:
-		return fmt.Sprintf("HKBloodType(%d)", int64(e))
+		return fmt.Sprintf("BloodType(%d)", int64(e))
 	}
 }
 
 // Classifications returned by Apple Watch’s ECG algorithm.
-type HKElectrocardiogramClassification int64
+type ElectrocardiogramClassification int64
 
 const (
-	HKElectrocardiogramClassificationNotSet                    HKElectrocardiogramClassification = 0
-	HKElectrocardiogramClassificationSinusRhythm               HKElectrocardiogramClassification = 1
-	HKElectrocardiogramClassificationAtrialFibrillation        HKElectrocardiogramClassification = 2
-	HKElectrocardiogramClassificationInconclusiveLowHeartRate  HKElectrocardiogramClassification = 3
-	HKElectrocardiogramClassificationInconclusiveHighHeartRate HKElectrocardiogramClassification = 4
-	HKElectrocardiogramClassificationInconclusivePoorReading   HKElectrocardiogramClassification = 5
-	HKElectrocardiogramClassificationInconclusiveOther         HKElectrocardiogramClassification = 6
-	HKElectrocardiogramClassificationUnrecognized              HKElectrocardiogramClassification = 100
+	ElectrocardiogramClassificationNotSet                    ElectrocardiogramClassification = 0
+	ElectrocardiogramClassificationSinusRhythm               ElectrocardiogramClassification = 1
+	ElectrocardiogramClassificationAtrialFibrillation        ElectrocardiogramClassification = 2
+	ElectrocardiogramClassificationInconclusiveLowHeartRate  ElectrocardiogramClassification = 3
+	ElectrocardiogramClassificationInconclusiveHighHeartRate ElectrocardiogramClassification = 4
+	ElectrocardiogramClassificationInconclusivePoorReading   ElectrocardiogramClassification = 5
+	ElectrocardiogramClassificationInconclusiveOther         ElectrocardiogramClassification = 6
+	ElectrocardiogramClassificationUnrecognized              ElectrocardiogramClassification = 100
 )
 
-func (e HKElectrocardiogramClassification) String() string {
+func (e ElectrocardiogramClassification) String() string {
 	switch e {
-	case HKElectrocardiogramClassificationNotSet:
-		return "HKElectrocardiogramClassificationNotSet"
-	case HKElectrocardiogramClassificationSinusRhythm:
-		return "HKElectrocardiogramClassificationSinusRhythm"
-	case HKElectrocardiogramClassificationAtrialFibrillation:
-		return "HKElectrocardiogramClassificationAtrialFibrillation"
-	case HKElectrocardiogramClassificationInconclusiveLowHeartRate:
-		return "HKElectrocardiogramClassificationInconclusiveLowHeartRate"
-	case HKElectrocardiogramClassificationInconclusiveHighHeartRate:
-		return "HKElectrocardiogramClassificationInconclusiveHighHeartRate"
-	case HKElectrocardiogramClassificationInconclusivePoorReading:
-		return "HKElectrocardiogramClassificationInconclusivePoorReading"
-	case HKElectrocardiogramClassificationInconclusiveOther:
-		return "HKElectrocardiogramClassificationInconclusiveOther"
-	case HKElectrocardiogramClassificationUnrecognized:
-		return "HKElectrocardiogramClassificationUnrecognized"
+	case ElectrocardiogramClassificationNotSet:
+		return "ElectrocardiogramClassificationNotSet"
+	case ElectrocardiogramClassificationSinusRhythm:
+		return "ElectrocardiogramClassificationSinusRhythm"
+	case ElectrocardiogramClassificationAtrialFibrillation:
+		return "ElectrocardiogramClassificationAtrialFibrillation"
+	case ElectrocardiogramClassificationInconclusiveLowHeartRate:
+		return "ElectrocardiogramClassificationInconclusiveLowHeartRate"
+	case ElectrocardiogramClassificationInconclusiveHighHeartRate:
+		return "ElectrocardiogramClassificationInconclusiveHighHeartRate"
+	case ElectrocardiogramClassificationInconclusivePoorReading:
+		return "ElectrocardiogramClassificationInconclusivePoorReading"
+	case ElectrocardiogramClassificationInconclusiveOther:
+		return "ElectrocardiogramClassificationInconclusiveOther"
+	case ElectrocardiogramClassificationUnrecognized:
+		return "ElectrocardiogramClassificationUnrecognized"
 	default:
-		return fmt.Sprintf("HKElectrocardiogramClassification(%d)", int64(e))
+		return fmt.Sprintf("ElectrocardiogramClassification(%d)", int64(e))
 	}
 }
 
 // The lead used to record a voltage measurement.
-type HKElectrocardiogramLead int64
+type ElectrocardiogramLead int64
 
 const (
-	HKElectrocardiogramLeadAppleWatchSimilarToLeadI HKElectrocardiogramLead = 1
+	ElectrocardiogramLeadAppleWatchSimilarToLeadI ElectrocardiogramLead = 1
 )
 
-func (e HKElectrocardiogramLead) String() string {
+func (e ElectrocardiogramLead) String() string {
 	switch e {
-	case HKElectrocardiogramLeadAppleWatchSimilarToLeadI:
-		return "HKElectrocardiogramLeadAppleWatchSimilarToLeadI"
+	case ElectrocardiogramLeadAppleWatchSimilarToLeadI:
+		return "ElectrocardiogramLeadAppleWatchSimilarToLeadI"
 	default:
-		return fmt.Sprintf("HKElectrocardiogramLead(%d)", int64(e))
+		return fmt.Sprintf("ElectrocardiogramLead(%d)", int64(e))
 	}
 }
 
 // Values indicating whether the user entered a symptom when they recorded the ECG.
-type HKElectrocardiogramSymptomsStatus int64
+type ElectrocardiogramSymptomsStatus int64
 
 const (
-	HKElectrocardiogramSymptomsStatusNotSet  HKElectrocardiogramSymptomsStatus = 0
-	HKElectrocardiogramSymptomsStatusNone    HKElectrocardiogramSymptomsStatus = 1
-	HKElectrocardiogramSymptomsStatusPresent HKElectrocardiogramSymptomsStatus = 2
+	ElectrocardiogramSymptomsStatusNotSet  ElectrocardiogramSymptomsStatus = 0
+	ElectrocardiogramSymptomsStatusNone    ElectrocardiogramSymptomsStatus = 1
+	ElectrocardiogramSymptomsStatusPresent ElectrocardiogramSymptomsStatus = 2
 )
 
-func (e HKElectrocardiogramSymptomsStatus) String() string {
+func (e ElectrocardiogramSymptomsStatus) String() string {
 	switch e {
-	case HKElectrocardiogramSymptomsStatusNotSet:
-		return "HKElectrocardiogramSymptomsStatusNotSet"
-	case HKElectrocardiogramSymptomsStatusNone:
-		return "HKElectrocardiogramSymptomsStatusNone"
-	case HKElectrocardiogramSymptomsStatusPresent:
-		return "HKElectrocardiogramSymptomsStatusPresent"
+	case ElectrocardiogramSymptomsStatusNotSet:
+		return "ElectrocardiogramSymptomsStatusNotSet"
+	case ElectrocardiogramSymptomsStatusNone:
+		return "ElectrocardiogramSymptomsStatusNone"
+	case ElectrocardiogramSymptomsStatusPresent:
+		return "ElectrocardiogramSymptomsStatusPresent"
 	default:
-		return fmt.Sprintf("HKElectrocardiogramSymptomsStatus(%d)", int64(e))
+		return fmt.Sprintf("ElectrocardiogramSymptomsStatus(%d)", int64(e))
 	}
 }
 
 // Error codes returned by HealthKit.
-type HKErrorCode int64
+type ErrorCode int64
 
 const (
-	HKUnknownError HKErrorCode = 0
+	UnknownError ErrorCode = 0
 	// No error occurred.
-	HKNoError                                 HKErrorCode = 0
-	HKErrorHealthDataUnavailable              HKErrorCode = 1
-	HKErrorHealthDataRestricted               HKErrorCode = 2
-	HKErrorInvalidArgument                    HKErrorCode = 3
-	HKErrorAuthorizationDenied                HKErrorCode = 4
-	HKErrorAuthorizationNotDetermined         HKErrorCode = 5
-	HKErrorDatabaseInaccessible               HKErrorCode = 6
-	HKErrorUserCanceled                       HKErrorCode = 7
-	HKErrorAnotherWorkoutSessionStarted       HKErrorCode = 8
-	HKErrorUserExitedWorkoutSession           HKErrorCode = 9
-	HKErrorRequiredAuthorizationDenied        HKErrorCode = 10
-	HKErrorNoData                             HKErrorCode = 11
-	HKErrorWorkoutActivityNotAllowed          HKErrorCode = 12
-	HKErrorDataSizeExceeded                   HKErrorCode = 13
-	HKErrorBackgroundWorkoutSessionNotAllowed HKErrorCode = 14
-	HKErrorNotPermissibleForGuestUserMode     HKErrorCode = 15
+	NoError                                 ErrorCode = 0
+	ErrorHealthDataUnavailable              ErrorCode = 1
+	ErrorHealthDataRestricted               ErrorCode = 2
+	ErrorInvalidArgument                    ErrorCode = 3
+	ErrorAuthorizationDenied                ErrorCode = 4
+	ErrorAuthorizationNotDetermined         ErrorCode = 5
+	ErrorDatabaseInaccessible               ErrorCode = 6
+	ErrorUserCanceled                       ErrorCode = 7
+	ErrorAnotherWorkoutSessionStarted       ErrorCode = 8
+	ErrorUserExitedWorkoutSession           ErrorCode = 9
+	ErrorRequiredAuthorizationDenied        ErrorCode = 10
+	ErrorNoData                             ErrorCode = 11
+	ErrorWorkoutActivityNotAllowed          ErrorCode = 12
+	ErrorDataSizeExceeded                   ErrorCode = 13
+	ErrorBackgroundWorkoutSessionNotAllowed ErrorCode = 14
+	ErrorNotPermissibleForGuestUserMode     ErrorCode = 15
 )
 
-func (e HKErrorCode) String() string {
+func (e ErrorCode) String() string {
 	switch e {
-	case HKUnknownError:
-		return "HKUnknownError"
-	case HKErrorHealthDataUnavailable:
-		return "HKErrorHealthDataUnavailable"
-	case HKErrorHealthDataRestricted:
-		return "HKErrorHealthDataRestricted"
-	case HKErrorInvalidArgument:
-		return "HKErrorInvalidArgument"
-	case HKErrorAuthorizationDenied:
-		return "HKErrorAuthorizationDenied"
-	case HKErrorAuthorizationNotDetermined:
-		return "HKErrorAuthorizationNotDetermined"
-	case HKErrorDatabaseInaccessible:
-		return "HKErrorDatabaseInaccessible"
-	case HKErrorUserCanceled:
-		return "HKErrorUserCanceled"
-	case HKErrorAnotherWorkoutSessionStarted:
-		return "HKErrorAnotherWorkoutSessionStarted"
-	case HKErrorUserExitedWorkoutSession:
-		return "HKErrorUserExitedWorkoutSession"
-	case HKErrorRequiredAuthorizationDenied:
-		return "HKErrorRequiredAuthorizationDenied"
-	case HKErrorNoData:
-		return "HKErrorNoData"
-	case HKErrorWorkoutActivityNotAllowed:
-		return "HKErrorWorkoutActivityNotAllowed"
-	case HKErrorDataSizeExceeded:
-		return "HKErrorDataSizeExceeded"
-	case HKErrorBackgroundWorkoutSessionNotAllowed:
-		return "HKErrorBackgroundWorkoutSessionNotAllowed"
-	case HKErrorNotPermissibleForGuestUserMode:
-		return "HKErrorNotPermissibleForGuestUserMode"
+	case UnknownError:
+		return "UnknownError"
+	case ErrorHealthDataUnavailable:
+		return "ErrorHealthDataUnavailable"
+	case ErrorHealthDataRestricted:
+		return "ErrorHealthDataRestricted"
+	case ErrorInvalidArgument:
+		return "ErrorInvalidArgument"
+	case ErrorAuthorizationDenied:
+		return "ErrorAuthorizationDenied"
+	case ErrorAuthorizationNotDetermined:
+		return "ErrorAuthorizationNotDetermined"
+	case ErrorDatabaseInaccessible:
+		return "ErrorDatabaseInaccessible"
+	case ErrorUserCanceled:
+		return "ErrorUserCanceled"
+	case ErrorAnotherWorkoutSessionStarted:
+		return "ErrorAnotherWorkoutSessionStarted"
+	case ErrorUserExitedWorkoutSession:
+		return "ErrorUserExitedWorkoutSession"
+	case ErrorRequiredAuthorizationDenied:
+		return "ErrorRequiredAuthorizationDenied"
+	case ErrorNoData:
+		return "ErrorNoData"
+	case ErrorWorkoutActivityNotAllowed:
+		return "ErrorWorkoutActivityNotAllowed"
+	case ErrorDataSizeExceeded:
+		return "ErrorDataSizeExceeded"
+	case ErrorBackgroundWorkoutSessionNotAllowed:
+		return "ErrorBackgroundWorkoutSessionNotAllowed"
+	case ErrorNotPermissibleForGuestUserMode:
+		return "ErrorNotPermissibleForGuestUserMode"
 	default:
-		return fmt.Sprintf("HKErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }
 
 // Categories representing the user’s skin type based on the Fitzpatrick scale.
-type HKFitzpatrickSkinType int64
+type FitzpatrickSkinType int64
 
 const (
 	// Either the user’s skin type is not set, or the user has not granted your app permission to read the skin type.
-	HKFitzpatrickSkinTypeNotSet HKFitzpatrickSkinType = 0
+	FitzpatrickSkinTypeNotSet FitzpatrickSkinType = 0
 	// Pale white skin that always burns easily in the sun and never tans.
-	HKFitzpatrickSkinTypeI HKFitzpatrickSkinType = 1
+	FitzpatrickSkinTypeI FitzpatrickSkinType = 1
 	// White skin that burns easily and tans minimally.
-	HKFitzpatrickSkinTypeII HKFitzpatrickSkinType = 2
+	FitzpatrickSkinTypeII FitzpatrickSkinType = 2
 	// White to light brown skin that burns moderately and tans uniformly.
-	HKFitzpatrickSkinTypeIII HKFitzpatrickSkinType = 3
+	FitzpatrickSkinTypeIII FitzpatrickSkinType = 3
 	// Beige-olive, lightly tanned skin that burns minimally and tans moderately.
-	HKFitzpatrickSkinTypeIV HKFitzpatrickSkinType = 4
+	FitzpatrickSkinTypeIV FitzpatrickSkinType = 4
 	// Brown skin that rarely burns and tans profusely.
-	HKFitzpatrickSkinTypeV HKFitzpatrickSkinType = 5
+	FitzpatrickSkinTypeV FitzpatrickSkinType = 5
 	// Dark brown to black skin that never burns and tans profusely.
-	HKFitzpatrickSkinTypeVI HKFitzpatrickSkinType = 6
+	FitzpatrickSkinTypeVI FitzpatrickSkinType = 6
 )
 
-func (e HKFitzpatrickSkinType) String() string {
+func (e FitzpatrickSkinType) String() string {
 	switch e {
-	case HKFitzpatrickSkinTypeNotSet:
-		return "HKFitzpatrickSkinTypeNotSet"
-	case HKFitzpatrickSkinTypeI:
-		return "HKFitzpatrickSkinTypeI"
-	case HKFitzpatrickSkinTypeII:
-		return "HKFitzpatrickSkinTypeII"
-	case HKFitzpatrickSkinTypeIII:
-		return "HKFitzpatrickSkinTypeIII"
-	case HKFitzpatrickSkinTypeIV:
-		return "HKFitzpatrickSkinTypeIV"
-	case HKFitzpatrickSkinTypeV:
-		return "HKFitzpatrickSkinTypeV"
-	case HKFitzpatrickSkinTypeVI:
-		return "HKFitzpatrickSkinTypeVI"
+	case FitzpatrickSkinTypeNotSet:
+		return "FitzpatrickSkinTypeNotSet"
+	case FitzpatrickSkinTypeI:
+		return "FitzpatrickSkinTypeI"
+	case FitzpatrickSkinTypeII:
+		return "FitzpatrickSkinTypeII"
+	case FitzpatrickSkinTypeIII:
+		return "FitzpatrickSkinTypeIII"
+	case FitzpatrickSkinTypeIV:
+		return "FitzpatrickSkinTypeIV"
+	case FitzpatrickSkinTypeV:
+		return "FitzpatrickSkinTypeV"
+	case FitzpatrickSkinTypeVI:
+		return "FitzpatrickSkinTypeVI"
 	default:
-		return fmt.Sprintf("HKFitzpatrickSkinType(%d)", int64(e))
+		return fmt.Sprintf("FitzpatrickSkinType(%d)", int64(e))
 	}
 }
 
-type HKGAD7AssessmentRisk int64
+type GAD7AssessmentRisk int64
 
 const (
-	HKGAD7AssessmentRiskNoneToMinimal HKGAD7AssessmentRisk = 1
-	HKGAD7AssessmentRiskMild          HKGAD7AssessmentRisk = 2
-	HKGAD7AssessmentRiskModerate      HKGAD7AssessmentRisk = 3
-	HKGAD7AssessmentRiskSevere        HKGAD7AssessmentRisk = 4
+	GAD7AssessmentRiskNoneToMinimal GAD7AssessmentRisk = 1
+	GAD7AssessmentRiskMild          GAD7AssessmentRisk = 2
+	GAD7AssessmentRiskModerate      GAD7AssessmentRisk = 3
+	GAD7AssessmentRiskSevere        GAD7AssessmentRisk = 4
 )
 
-func (e HKGAD7AssessmentRisk) String() string {
+func (e GAD7AssessmentRisk) String() string {
 	switch e {
-	case HKGAD7AssessmentRiskNoneToMinimal:
-		return "HKGAD7AssessmentRiskNoneToMinimal"
-	case HKGAD7AssessmentRiskMild:
-		return "HKGAD7AssessmentRiskMild"
-	case HKGAD7AssessmentRiskModerate:
-		return "HKGAD7AssessmentRiskModerate"
-	case HKGAD7AssessmentRiskSevere:
-		return "HKGAD7AssessmentRiskSevere"
+	case GAD7AssessmentRiskNoneToMinimal:
+		return "GAD7AssessmentRiskNoneToMinimal"
+	case GAD7AssessmentRiskMild:
+		return "GAD7AssessmentRiskMild"
+	case GAD7AssessmentRiskModerate:
+		return "GAD7AssessmentRiskModerate"
+	case GAD7AssessmentRiskSevere:
+		return "GAD7AssessmentRiskSevere"
 	default:
-		return fmt.Sprintf("HKGAD7AssessmentRisk(%d)", int64(e))
+		return fmt.Sprintf("GAD7AssessmentRisk(%d)", int64(e))
 	}
 }
 
-type HKMedicationDoseEventLogStatus int64
+type MedicationDoseEventLogStatus int64
 
 const (
 	// The person doesn't interact with a scheduled medication reminder. The system generates this to represent an untouched reminder slot.
-	HKMedicationDoseEventLogStatusNotInteracted HKMedicationDoseEventLogStatus = 1
+	MedicationDoseEventLogStatusNotInteracted MedicationDoseEventLogStatus = 1
 	// The system assigns this status when it fails to deliver a scheduled medication notification. The system can generate this status because of a person's notification restrictions or issues with notification delivery.
-	HKMedicationDoseEventLogStatusNotificationNotSent HKMedicationDoseEventLogStatus = 2
+	MedicationDoseEventLogStatusNotificationNotSent MedicationDoseEventLogStatus = 2
 	// The person snoozes a scheduled medication notification.
-	HKMedicationDoseEventLogStatusSnoozed HKMedicationDoseEventLogStatus = 3
+	MedicationDoseEventLogStatusSnoozed MedicationDoseEventLogStatus = 3
 	// The person logs that they took the medication dose.
-	HKMedicationDoseEventLogStatusTaken HKMedicationDoseEventLogStatus = 4
+	MedicationDoseEventLogStatusTaken MedicationDoseEventLogStatus = 4
 	// The person logs that they skipped the medication dose.
-	HKMedicationDoseEventLogStatusSkipped HKMedicationDoseEventLogStatus = 5
+	MedicationDoseEventLogStatusSkipped MedicationDoseEventLogStatus = 5
 	// The person undoes a previously logged medication status. The system clears the prior status.
-	HKMedicationDoseEventLogStatusNotLogged HKMedicationDoseEventLogStatus = 6
+	MedicationDoseEventLogStatusNotLogged MedicationDoseEventLogStatus = 6
 )
 
-func (e HKMedicationDoseEventLogStatus) String() string {
+func (e MedicationDoseEventLogStatus) String() string {
 	switch e {
-	case HKMedicationDoseEventLogStatusNotInteracted:
-		return "HKMedicationDoseEventLogStatusNotInteracted"
-	case HKMedicationDoseEventLogStatusNotificationNotSent:
-		return "HKMedicationDoseEventLogStatusNotificationNotSent"
-	case HKMedicationDoseEventLogStatusSnoozed:
-		return "HKMedicationDoseEventLogStatusSnoozed"
-	case HKMedicationDoseEventLogStatusTaken:
-		return "HKMedicationDoseEventLogStatusTaken"
-	case HKMedicationDoseEventLogStatusSkipped:
-		return "HKMedicationDoseEventLogStatusSkipped"
-	case HKMedicationDoseEventLogStatusNotLogged:
-		return "HKMedicationDoseEventLogStatusNotLogged"
+	case MedicationDoseEventLogStatusNotInteracted:
+		return "MedicationDoseEventLogStatusNotInteracted"
+	case MedicationDoseEventLogStatusNotificationNotSent:
+		return "MedicationDoseEventLogStatusNotificationNotSent"
+	case MedicationDoseEventLogStatusSnoozed:
+		return "MedicationDoseEventLogStatusSnoozed"
+	case MedicationDoseEventLogStatusTaken:
+		return "MedicationDoseEventLogStatusTaken"
+	case MedicationDoseEventLogStatusSkipped:
+		return "MedicationDoseEventLogStatusSkipped"
+	case MedicationDoseEventLogStatusNotLogged:
+		return "MedicationDoseEventLogStatusNotLogged"
 	default:
-		return fmt.Sprintf("HKMedicationDoseEventLogStatus(%d)", int64(e))
+		return fmt.Sprintf("MedicationDoseEventLogStatus(%d)", int64(e))
 	}
 }
 
-type HKMedicationDoseEventScheduleType int64
+type MedicationDoseEventScheduleType int64
 
 const (
 	// The person logged this dose event ad-hoc, outside of any scheduled reminder.
-	HKMedicationDoseEventScheduleTypeAsNeeded HKMedicationDoseEventScheduleType = 1
+	MedicationDoseEventScheduleTypeAsNeeded MedicationDoseEventScheduleType = 1
 	// The person logged this dose event in response to a scheduled medication reminder.
-	HKMedicationDoseEventScheduleTypeSchedule HKMedicationDoseEventScheduleType = 2
+	MedicationDoseEventScheduleTypeSchedule MedicationDoseEventScheduleType = 2
 )
 
-func (e HKMedicationDoseEventScheduleType) String() string {
+func (e MedicationDoseEventScheduleType) String() string {
 	switch e {
-	case HKMedicationDoseEventScheduleTypeAsNeeded:
-		return "HKMedicationDoseEventScheduleTypeAsNeeded"
-	case HKMedicationDoseEventScheduleTypeSchedule:
-		return "HKMedicationDoseEventScheduleTypeSchedule"
+	case MedicationDoseEventScheduleTypeAsNeeded:
+		return "MedicationDoseEventScheduleTypeAsNeeded"
+	case MedicationDoseEventScheduleTypeSchedule:
+		return "MedicationDoseEventScheduleTypeSchedule"
 	default:
-		return fmt.Sprintf("HKMedicationDoseEventScheduleType(%d)", int64(e))
+		return fmt.Sprintf("MedicationDoseEventScheduleType(%d)", int64(e))
 	}
 }
 
 // Prefixes that can be added to SI units to change the order of magnitude.
-type HKMetricPrefix int64
+type MetricPrefix int64
 
 const (
 	// A prefix that does not modify the base unit.
-	HKMetricPrefixNone HKMetricPrefix = 0
+	MetricPrefixNone MetricPrefix = 0
 	// A prefix that multiplies the base unit by 1e-15.
-	HKMetricPrefixFemto HKMetricPrefix = 13
+	MetricPrefixFemto MetricPrefix = 13
 	// A prefix that multiplies the base unit by 1e-12.
-	HKMetricPrefixPico HKMetricPrefix = 1
+	MetricPrefixPico MetricPrefix = 1
 	// A prefix that multiplies the base unit by 1e-9.
-	HKMetricPrefixNano HKMetricPrefix = 2
+	MetricPrefixNano MetricPrefix = 2
 	// A prefix that multiplies the base unit by 1e-6.
-	HKMetricPrefixMicro HKMetricPrefix = 3
+	MetricPrefixMicro MetricPrefix = 3
 	// A prefix that multiplies the base unit by 0.001.
-	HKMetricPrefixMilli HKMetricPrefix = 4
+	MetricPrefixMilli MetricPrefix = 4
 	// A prefix that multiplies the base unit by 0.01.
-	HKMetricPrefixCenti HKMetricPrefix = 5
+	MetricPrefixCenti MetricPrefix = 5
 	// A prefix that multiplies the base unit by 0.1.
-	HKMetricPrefixDeci HKMetricPrefix = 6
+	MetricPrefixDeci MetricPrefix = 6
 	// A prefix that multiplies the base unit by 10.
-	HKMetricPrefixDeca HKMetricPrefix = 7
+	MetricPrefixDeca MetricPrefix = 7
 	// A prefix that multiplies the base unit by 100.
-	HKMetricPrefixHecto HKMetricPrefix = 8
+	MetricPrefixHecto MetricPrefix = 8
 	// A prefix that multiplies the base unit by 1000.
-	HKMetricPrefixKilo HKMetricPrefix = 9
+	MetricPrefixKilo MetricPrefix = 9
 	// A prefix that multiplies the base unit by 1e6.
-	HKMetricPrefixMega HKMetricPrefix = 10
+	MetricPrefixMega MetricPrefix = 10
 	// A prefix that multiplies the base unit by 1e9.
-	HKMetricPrefixGiga HKMetricPrefix = 11
+	MetricPrefixGiga MetricPrefix = 11
 	// A prefix that multiplies the base unit by 1e12.
-	HKMetricPrefixTera HKMetricPrefix = 12
+	MetricPrefixTera MetricPrefix = 12
 )
 
-func (e HKMetricPrefix) String() string {
+func (e MetricPrefix) String() string {
 	switch e {
-	case HKMetricPrefixNone:
-		return "HKMetricPrefixNone"
-	case HKMetricPrefixFemto:
-		return "HKMetricPrefixFemto"
-	case HKMetricPrefixPico:
-		return "HKMetricPrefixPico"
-	case HKMetricPrefixNano:
-		return "HKMetricPrefixNano"
-	case HKMetricPrefixMicro:
-		return "HKMetricPrefixMicro"
-	case HKMetricPrefixMilli:
-		return "HKMetricPrefixMilli"
-	case HKMetricPrefixCenti:
-		return "HKMetricPrefixCenti"
-	case HKMetricPrefixDeci:
-		return "HKMetricPrefixDeci"
-	case HKMetricPrefixDeca:
-		return "HKMetricPrefixDeca"
-	case HKMetricPrefixHecto:
-		return "HKMetricPrefixHecto"
-	case HKMetricPrefixKilo:
-		return "HKMetricPrefixKilo"
-	case HKMetricPrefixMega:
-		return "HKMetricPrefixMega"
-	case HKMetricPrefixGiga:
-		return "HKMetricPrefixGiga"
-	case HKMetricPrefixTera:
-		return "HKMetricPrefixTera"
+	case MetricPrefixNone:
+		return "MetricPrefixNone"
+	case MetricPrefixFemto:
+		return "MetricPrefixFemto"
+	case MetricPrefixPico:
+		return "MetricPrefixPico"
+	case MetricPrefixNano:
+		return "MetricPrefixNano"
+	case MetricPrefixMicro:
+		return "MetricPrefixMicro"
+	case MetricPrefixMilli:
+		return "MetricPrefixMilli"
+	case MetricPrefixCenti:
+		return "MetricPrefixCenti"
+	case MetricPrefixDeci:
+		return "MetricPrefixDeci"
+	case MetricPrefixDeca:
+		return "MetricPrefixDeca"
+	case MetricPrefixHecto:
+		return "MetricPrefixHecto"
+	case MetricPrefixKilo:
+		return "MetricPrefixKilo"
+	case MetricPrefixMega:
+		return "MetricPrefixMega"
+	case MetricPrefixGiga:
+		return "MetricPrefixGiga"
+	case MetricPrefixTera:
+		return "MetricPrefixTera"
 	default:
-		return fmt.Sprintf("HKMetricPrefix(%d)", int64(e))
+		return fmt.Sprintf("MetricPrefix(%d)", int64(e))
 	}
 }
 
-type HKPHQ9AssessmentRisk int64
+type PHQ9AssessmentRisk int64
 
 const (
-	HKPHQ9AssessmentRiskNoneToMinimal    HKPHQ9AssessmentRisk = 1
-	HKPHQ9AssessmentRiskMild             HKPHQ9AssessmentRisk = 2
-	HKPHQ9AssessmentRiskModerate         HKPHQ9AssessmentRisk = 3
-	HKPHQ9AssessmentRiskModeratelySevere HKPHQ9AssessmentRisk = 4
-	HKPHQ9AssessmentRiskSevere           HKPHQ9AssessmentRisk = 5
+	PHQ9AssessmentRiskNoneToMinimal    PHQ9AssessmentRisk = 1
+	PHQ9AssessmentRiskMild             PHQ9AssessmentRisk = 2
+	PHQ9AssessmentRiskModerate         PHQ9AssessmentRisk = 3
+	PHQ9AssessmentRiskModeratelySevere PHQ9AssessmentRisk = 4
+	PHQ9AssessmentRiskSevere           PHQ9AssessmentRisk = 5
 )
 
-func (e HKPHQ9AssessmentRisk) String() string {
+func (e PHQ9AssessmentRisk) String() string {
 	switch e {
-	case HKPHQ9AssessmentRiskNoneToMinimal:
-		return "HKPHQ9AssessmentRiskNoneToMinimal"
-	case HKPHQ9AssessmentRiskMild:
-		return "HKPHQ9AssessmentRiskMild"
-	case HKPHQ9AssessmentRiskModerate:
-		return "HKPHQ9AssessmentRiskModerate"
-	case HKPHQ9AssessmentRiskModeratelySevere:
-		return "HKPHQ9AssessmentRiskModeratelySevere"
-	case HKPHQ9AssessmentRiskSevere:
-		return "HKPHQ9AssessmentRiskSevere"
+	case PHQ9AssessmentRiskNoneToMinimal:
+		return "PHQ9AssessmentRiskNoneToMinimal"
+	case PHQ9AssessmentRiskMild:
+		return "PHQ9AssessmentRiskMild"
+	case PHQ9AssessmentRiskModerate:
+		return "PHQ9AssessmentRiskModerate"
+	case PHQ9AssessmentRiskModeratelySevere:
+		return "PHQ9AssessmentRiskModeratelySevere"
+	case PHQ9AssessmentRiskSevere:
+		return "PHQ9AssessmentRiskSevere"
 	default:
-		return fmt.Sprintf("HKPHQ9AssessmentRisk(%d)", int64(e))
+		return fmt.Sprintf("PHQ9AssessmentRisk(%d)", int64(e))
 	}
 }
 
 // The orientation of the prism correction, represented by the location of the prism’s base (the thickest part of the prism).
-type HKPrismBase int64
+type PrismBase int64
 
 const (
 	// No prism correction.
-	HKPrismBaseNone HKPrismBase = 0
+	PrismBaseNone PrismBase = 0
 	// The prism’s base is at the top of the lens.
-	HKPrismBaseUp HKPrismBase = 1
+	PrismBaseUp PrismBase = 1
 	// The prism’s base is at the bottom of the lens.
-	HKPrismBaseDown HKPrismBase = 2
+	PrismBaseDown PrismBase = 2
 	// The prism base is on the inside edge of the lens.
-	HKPrismBaseIn HKPrismBase = 3
+	PrismBaseIn PrismBase = 3
 	// The prism base is on the outside edge of the lens.
-	HKPrismBaseOut HKPrismBase = 4
+	PrismBaseOut PrismBase = 4
 )
 
-func (e HKPrismBase) String() string {
+func (e PrismBase) String() string {
 	switch e {
-	case HKPrismBaseNone:
-		return "HKPrismBaseNone"
-	case HKPrismBaseUp:
-		return "HKPrismBaseUp"
-	case HKPrismBaseDown:
-		return "HKPrismBaseDown"
-	case HKPrismBaseIn:
-		return "HKPrismBaseIn"
-	case HKPrismBaseOut:
-		return "HKPrismBaseOut"
+	case PrismBaseNone:
+		return "PrismBaseNone"
+	case PrismBaseUp:
+		return "PrismBaseUp"
+	case PrismBaseDown:
+		return "PrismBaseDown"
+	case PrismBaseIn:
+		return "PrismBaseIn"
+	case PrismBaseOut:
+		return "PrismBaseOut"
 	default:
-		return fmt.Sprintf("HKPrismBase(%d)", int64(e))
+		return fmt.Sprintf("PrismBase(%d)", int64(e))
 	}
 }
 
 // Constant values that describe how quantities can be aggregated over time.
-type HKQuantityAggregationStyle int64
+type QuantityAggregationStyle int64
 
 const (
 	// Cumulative samples that can be summed over time.
-	HKQuantityAggregationStyleCumulative HKQuantityAggregationStyle = 0
+	QuantityAggregationStyleCumulative QuantityAggregationStyle = 0
 	// Discrete samples that can be averaged over time using an arithmetic mean.
-	HKQuantityAggregationStyleDiscreteArithmetic HKQuantityAggregationStyle = 1
+	QuantityAggregationStyleDiscreteArithmetic QuantityAggregationStyle = 1
 	// Discrete samples may be averaged over time.
-	HKQuantityAggregationStyleDiscrete HKQuantityAggregationStyle = 1
+	QuantityAggregationStyleDiscrete QuantityAggregationStyle = 1
 	// Discrete samples that can be averaged over a time interval using a temporally weighted integration function.
-	HKQuantityAggregationStyleDiscreteTemporallyWeighted HKQuantityAggregationStyle = 2
+	QuantityAggregationStyleDiscreteTemporallyWeighted QuantityAggregationStyle = 2
 	// Discrete samples that can be combined over a time interval by computing the equivalent continuous sound level.
-	HKQuantityAggregationStyleDiscreteEquivalentContinuousLevel HKQuantityAggregationStyle = 3
+	QuantityAggregationStyleDiscreteEquivalentContinuousLevel QuantityAggregationStyle = 3
 )
 
-func (e HKQuantityAggregationStyle) String() string {
+func (e QuantityAggregationStyle) String() string {
 	switch e {
-	case HKQuantityAggregationStyleCumulative:
-		return "HKQuantityAggregationStyleCumulative"
-	case HKQuantityAggregationStyleDiscreteArithmetic:
-		return "HKQuantityAggregationStyleDiscreteArithmetic"
-	case HKQuantityAggregationStyleDiscreteTemporallyWeighted:
-		return "HKQuantityAggregationStyleDiscreteTemporallyWeighted"
-	case HKQuantityAggregationStyleDiscreteEquivalentContinuousLevel:
-		return "HKQuantityAggregationStyleDiscreteEquivalentContinuousLevel"
+	case QuantityAggregationStyleCumulative:
+		return "QuantityAggregationStyleCumulative"
+	case QuantityAggregationStyleDiscreteArithmetic:
+		return "QuantityAggregationStyleDiscreteArithmetic"
+	case QuantityAggregationStyleDiscreteTemporallyWeighted:
+		return "QuantityAggregationStyleDiscreteTemporallyWeighted"
+	case QuantityAggregationStyleDiscreteEquivalentContinuousLevel:
+		return "QuantityAggregationStyleDiscreteEquivalentContinuousLevel"
 	default:
-		return fmt.Sprintf("HKQuantityAggregationStyle(%d)", int64(e))
+		return fmt.Sprintf("QuantityAggregationStyle(%d)", int64(e))
 	}
 }
 
 // Constants that describe how a sample’s time period overlaps with the target time period.
 // Bitmask — values may be combined with |.
-type HKQueryOptions uint64
+type QueryOptions uint64
 
 const (
 	// The sample’s time period must overlap part of the target time period.
-	HKQueryOptionNone HKQueryOptions = 0
+	QueryOptionNone QueryOptions = 0
 	// The sample’s start time must fall within the target time period.
-	HKQueryOptionStrictStartDate HKQueryOptions = 1
+	QueryOptionStrictStartDate QueryOptions = 1
 	// The sample’s end time must fall within the target time period.
-	HKQueryOptionStrictEndDate HKQueryOptions = 2
+	QueryOptionStrictEndDate QueryOptions = 2
 )
 
-func (e HKQueryOptions) String() string {
+func (e QueryOptions) String() string {
 	var parts []string
-	if e&HKQueryOptionStrictStartDate != 0 {
-		parts = append(parts, "HKQueryOptionStrictStartDate")
+	if e&QueryOptionStrictStartDate != 0 {
+		parts = append(parts, "QueryOptionStrictStartDate")
 	}
-	if e&HKQueryOptionStrictEndDate != 0 {
-		parts = append(parts, "HKQueryOptionStrictEndDate")
+	if e&QueryOptionStrictEndDate != 0 {
+		parts = append(parts, "QueryOptionStrictEndDate")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -680,299 +655,299 @@ func (e HKQueryOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type HKStateOfMindAssociation int64
+type StateOfMindAssociation int64
 
 const (
-	HKStateOfMindAssociationCommunity     HKStateOfMindAssociation = 1
-	HKStateOfMindAssociationCurrentEvents HKStateOfMindAssociation = 2
-	HKStateOfMindAssociationDating        HKStateOfMindAssociation = 3
-	HKStateOfMindAssociationEducation     HKStateOfMindAssociation = 4
-	HKStateOfMindAssociationFamily        HKStateOfMindAssociation = 5
-	HKStateOfMindAssociationFitness       HKStateOfMindAssociation = 6
-	HKStateOfMindAssociationFriends       HKStateOfMindAssociation = 7
-	HKStateOfMindAssociationHealth        HKStateOfMindAssociation = 8
-	HKStateOfMindAssociationHobbies       HKStateOfMindAssociation = 9
-	HKStateOfMindAssociationIdentity      HKStateOfMindAssociation = 10
-	HKStateOfMindAssociationMoney         HKStateOfMindAssociation = 11
-	HKStateOfMindAssociationPartner       HKStateOfMindAssociation = 12
-	HKStateOfMindAssociationSelfCare      HKStateOfMindAssociation = 13
-	HKStateOfMindAssociationSpirituality  HKStateOfMindAssociation = 14
-	HKStateOfMindAssociationTasks         HKStateOfMindAssociation = 15
-	HKStateOfMindAssociationTravel        HKStateOfMindAssociation = 16
-	HKStateOfMindAssociationWork          HKStateOfMindAssociation = 17
-	HKStateOfMindAssociationWeather       HKStateOfMindAssociation = 18
+	StateOfMindAssociationCommunity     StateOfMindAssociation = 1
+	StateOfMindAssociationCurrentEvents StateOfMindAssociation = 2
+	StateOfMindAssociationDating        StateOfMindAssociation = 3
+	StateOfMindAssociationEducation     StateOfMindAssociation = 4
+	StateOfMindAssociationFamily        StateOfMindAssociation = 5
+	StateOfMindAssociationFitness       StateOfMindAssociation = 6
+	StateOfMindAssociationFriends       StateOfMindAssociation = 7
+	StateOfMindAssociationHealth        StateOfMindAssociation = 8
+	StateOfMindAssociationHobbies       StateOfMindAssociation = 9
+	StateOfMindAssociationIdentity      StateOfMindAssociation = 10
+	StateOfMindAssociationMoney         StateOfMindAssociation = 11
+	StateOfMindAssociationPartner       StateOfMindAssociation = 12
+	StateOfMindAssociationSelfCare      StateOfMindAssociation = 13
+	StateOfMindAssociationSpirituality  StateOfMindAssociation = 14
+	StateOfMindAssociationTasks         StateOfMindAssociation = 15
+	StateOfMindAssociationTravel        StateOfMindAssociation = 16
+	StateOfMindAssociationWork          StateOfMindAssociation = 17
+	StateOfMindAssociationWeather       StateOfMindAssociation = 18
 )
 
-func (e HKStateOfMindAssociation) String() string {
+func (e StateOfMindAssociation) String() string {
 	switch e {
-	case HKStateOfMindAssociationCommunity:
-		return "HKStateOfMindAssociationCommunity"
-	case HKStateOfMindAssociationCurrentEvents:
-		return "HKStateOfMindAssociationCurrentEvents"
-	case HKStateOfMindAssociationDating:
-		return "HKStateOfMindAssociationDating"
-	case HKStateOfMindAssociationEducation:
-		return "HKStateOfMindAssociationEducation"
-	case HKStateOfMindAssociationFamily:
-		return "HKStateOfMindAssociationFamily"
-	case HKStateOfMindAssociationFitness:
-		return "HKStateOfMindAssociationFitness"
-	case HKStateOfMindAssociationFriends:
-		return "HKStateOfMindAssociationFriends"
-	case HKStateOfMindAssociationHealth:
-		return "HKStateOfMindAssociationHealth"
-	case HKStateOfMindAssociationHobbies:
-		return "HKStateOfMindAssociationHobbies"
-	case HKStateOfMindAssociationIdentity:
-		return "HKStateOfMindAssociationIdentity"
-	case HKStateOfMindAssociationMoney:
-		return "HKStateOfMindAssociationMoney"
-	case HKStateOfMindAssociationPartner:
-		return "HKStateOfMindAssociationPartner"
-	case HKStateOfMindAssociationSelfCare:
-		return "HKStateOfMindAssociationSelfCare"
-	case HKStateOfMindAssociationSpirituality:
-		return "HKStateOfMindAssociationSpirituality"
-	case HKStateOfMindAssociationTasks:
-		return "HKStateOfMindAssociationTasks"
-	case HKStateOfMindAssociationTravel:
-		return "HKStateOfMindAssociationTravel"
-	case HKStateOfMindAssociationWork:
-		return "HKStateOfMindAssociationWork"
-	case HKStateOfMindAssociationWeather:
-		return "HKStateOfMindAssociationWeather"
+	case StateOfMindAssociationCommunity:
+		return "StateOfMindAssociationCommunity"
+	case StateOfMindAssociationCurrentEvents:
+		return "StateOfMindAssociationCurrentEvents"
+	case StateOfMindAssociationDating:
+		return "StateOfMindAssociationDating"
+	case StateOfMindAssociationEducation:
+		return "StateOfMindAssociationEducation"
+	case StateOfMindAssociationFamily:
+		return "StateOfMindAssociationFamily"
+	case StateOfMindAssociationFitness:
+		return "StateOfMindAssociationFitness"
+	case StateOfMindAssociationFriends:
+		return "StateOfMindAssociationFriends"
+	case StateOfMindAssociationHealth:
+		return "StateOfMindAssociationHealth"
+	case StateOfMindAssociationHobbies:
+		return "StateOfMindAssociationHobbies"
+	case StateOfMindAssociationIdentity:
+		return "StateOfMindAssociationIdentity"
+	case StateOfMindAssociationMoney:
+		return "StateOfMindAssociationMoney"
+	case StateOfMindAssociationPartner:
+		return "StateOfMindAssociationPartner"
+	case StateOfMindAssociationSelfCare:
+		return "StateOfMindAssociationSelfCare"
+	case StateOfMindAssociationSpirituality:
+		return "StateOfMindAssociationSpirituality"
+	case StateOfMindAssociationTasks:
+		return "StateOfMindAssociationTasks"
+	case StateOfMindAssociationTravel:
+		return "StateOfMindAssociationTravel"
+	case StateOfMindAssociationWork:
+		return "StateOfMindAssociationWork"
+	case StateOfMindAssociationWeather:
+		return "StateOfMindAssociationWeather"
 	default:
-		return fmt.Sprintf("HKStateOfMindAssociation(%d)", int64(e))
+		return fmt.Sprintf("StateOfMindAssociation(%d)", int64(e))
 	}
 }
 
-type HKStateOfMindKind int64
+type StateOfMindKind int64
 
 const (
-	HKStateOfMindKindMomentaryEmotion HKStateOfMindKind = 1
-	HKStateOfMindKindDailyMood        HKStateOfMindKind = 2
+	StateOfMindKindMomentaryEmotion StateOfMindKind = 1
+	StateOfMindKindDailyMood        StateOfMindKind = 2
 )
 
-func (e HKStateOfMindKind) String() string {
+func (e StateOfMindKind) String() string {
 	switch e {
-	case HKStateOfMindKindMomentaryEmotion:
-		return "HKStateOfMindKindMomentaryEmotion"
-	case HKStateOfMindKindDailyMood:
-		return "HKStateOfMindKindDailyMood"
+	case StateOfMindKindMomentaryEmotion:
+		return "StateOfMindKindMomentaryEmotion"
+	case StateOfMindKindDailyMood:
+		return "StateOfMindKindDailyMood"
 	default:
-		return fmt.Sprintf("HKStateOfMindKind(%d)", int64(e))
+		return fmt.Sprintf("StateOfMindKind(%d)", int64(e))
 	}
 }
 
-type HKStateOfMindLabel int64
+type StateOfMindLabel int64
 
 const (
-	HKStateOfMindLabelAmazed       HKStateOfMindLabel = 1
-	HKStateOfMindLabelAmused       HKStateOfMindLabel = 2
-	HKStateOfMindLabelAngry        HKStateOfMindLabel = 3
-	HKStateOfMindLabelAnxious      HKStateOfMindLabel = 4
-	HKStateOfMindLabelAshamed      HKStateOfMindLabel = 5
-	HKStateOfMindLabelBrave        HKStateOfMindLabel = 6
-	HKStateOfMindLabelCalm         HKStateOfMindLabel = 7
-	HKStateOfMindLabelContent      HKStateOfMindLabel = 8
-	HKStateOfMindLabelDisappointed HKStateOfMindLabel = 9
-	HKStateOfMindLabelDiscouraged  HKStateOfMindLabel = 10
-	HKStateOfMindLabelDisgusted    HKStateOfMindLabel = 11
-	HKStateOfMindLabelEmbarrassed  HKStateOfMindLabel = 12
-	HKStateOfMindLabelExcited      HKStateOfMindLabel = 13
-	HKStateOfMindLabelFrustrated   HKStateOfMindLabel = 14
-	HKStateOfMindLabelGrateful     HKStateOfMindLabel = 15
-	HKStateOfMindLabelGuilty       HKStateOfMindLabel = 16
-	HKStateOfMindLabelHappy        HKStateOfMindLabel = 17
-	HKStateOfMindLabelHopeless     HKStateOfMindLabel = 18
-	HKStateOfMindLabelIrritated    HKStateOfMindLabel = 19
-	HKStateOfMindLabelJealous      HKStateOfMindLabel = 20
-	HKStateOfMindLabelJoyful       HKStateOfMindLabel = 21
-	HKStateOfMindLabelLonely       HKStateOfMindLabel = 22
-	HKStateOfMindLabelPassionate   HKStateOfMindLabel = 23
-	HKStateOfMindLabelPeaceful     HKStateOfMindLabel = 24
-	HKStateOfMindLabelProud        HKStateOfMindLabel = 25
-	HKStateOfMindLabelRelieved     HKStateOfMindLabel = 26
-	HKStateOfMindLabelSad          HKStateOfMindLabel = 27
-	HKStateOfMindLabelScared       HKStateOfMindLabel = 28
-	HKStateOfMindLabelStressed     HKStateOfMindLabel = 29
-	HKStateOfMindLabelSurprised    HKStateOfMindLabel = 30
-	HKStateOfMindLabelWorried      HKStateOfMindLabel = 31
-	HKStateOfMindLabelAnnoyed      HKStateOfMindLabel = 32
-	HKStateOfMindLabelConfident    HKStateOfMindLabel = 33
-	HKStateOfMindLabelDrained      HKStateOfMindLabel = 34
-	HKStateOfMindLabelHopeful      HKStateOfMindLabel = 35
-	HKStateOfMindLabelIndifferent  HKStateOfMindLabel = 36
-	HKStateOfMindLabelOverwhelmed  HKStateOfMindLabel = 37
-	HKStateOfMindLabelSatisfied    HKStateOfMindLabel = 38
+	StateOfMindLabelAmazed       StateOfMindLabel = 1
+	StateOfMindLabelAmused       StateOfMindLabel = 2
+	StateOfMindLabelAngry        StateOfMindLabel = 3
+	StateOfMindLabelAnxious      StateOfMindLabel = 4
+	StateOfMindLabelAshamed      StateOfMindLabel = 5
+	StateOfMindLabelBrave        StateOfMindLabel = 6
+	StateOfMindLabelCalm         StateOfMindLabel = 7
+	StateOfMindLabelContent      StateOfMindLabel = 8
+	StateOfMindLabelDisappointed StateOfMindLabel = 9
+	StateOfMindLabelDiscouraged  StateOfMindLabel = 10
+	StateOfMindLabelDisgusted    StateOfMindLabel = 11
+	StateOfMindLabelEmbarrassed  StateOfMindLabel = 12
+	StateOfMindLabelExcited      StateOfMindLabel = 13
+	StateOfMindLabelFrustrated   StateOfMindLabel = 14
+	StateOfMindLabelGrateful     StateOfMindLabel = 15
+	StateOfMindLabelGuilty       StateOfMindLabel = 16
+	StateOfMindLabelHappy        StateOfMindLabel = 17
+	StateOfMindLabelHopeless     StateOfMindLabel = 18
+	StateOfMindLabelIrritated    StateOfMindLabel = 19
+	StateOfMindLabelJealous      StateOfMindLabel = 20
+	StateOfMindLabelJoyful       StateOfMindLabel = 21
+	StateOfMindLabelLonely       StateOfMindLabel = 22
+	StateOfMindLabelPassionate   StateOfMindLabel = 23
+	StateOfMindLabelPeaceful     StateOfMindLabel = 24
+	StateOfMindLabelProud        StateOfMindLabel = 25
+	StateOfMindLabelRelieved     StateOfMindLabel = 26
+	StateOfMindLabelSad          StateOfMindLabel = 27
+	StateOfMindLabelScared       StateOfMindLabel = 28
+	StateOfMindLabelStressed     StateOfMindLabel = 29
+	StateOfMindLabelSurprised    StateOfMindLabel = 30
+	StateOfMindLabelWorried      StateOfMindLabel = 31
+	StateOfMindLabelAnnoyed      StateOfMindLabel = 32
+	StateOfMindLabelConfident    StateOfMindLabel = 33
+	StateOfMindLabelDrained      StateOfMindLabel = 34
+	StateOfMindLabelHopeful      StateOfMindLabel = 35
+	StateOfMindLabelIndifferent  StateOfMindLabel = 36
+	StateOfMindLabelOverwhelmed  StateOfMindLabel = 37
+	StateOfMindLabelSatisfied    StateOfMindLabel = 38
 )
 
-func (e HKStateOfMindLabel) String() string {
+func (e StateOfMindLabel) String() string {
 	switch e {
-	case HKStateOfMindLabelAmazed:
-		return "HKStateOfMindLabelAmazed"
-	case HKStateOfMindLabelAmused:
-		return "HKStateOfMindLabelAmused"
-	case HKStateOfMindLabelAngry:
-		return "HKStateOfMindLabelAngry"
-	case HKStateOfMindLabelAnxious:
-		return "HKStateOfMindLabelAnxious"
-	case HKStateOfMindLabelAshamed:
-		return "HKStateOfMindLabelAshamed"
-	case HKStateOfMindLabelBrave:
-		return "HKStateOfMindLabelBrave"
-	case HKStateOfMindLabelCalm:
-		return "HKStateOfMindLabelCalm"
-	case HKStateOfMindLabelContent:
-		return "HKStateOfMindLabelContent"
-	case HKStateOfMindLabelDisappointed:
-		return "HKStateOfMindLabelDisappointed"
-	case HKStateOfMindLabelDiscouraged:
-		return "HKStateOfMindLabelDiscouraged"
-	case HKStateOfMindLabelDisgusted:
-		return "HKStateOfMindLabelDisgusted"
-	case HKStateOfMindLabelEmbarrassed:
-		return "HKStateOfMindLabelEmbarrassed"
-	case HKStateOfMindLabelExcited:
-		return "HKStateOfMindLabelExcited"
-	case HKStateOfMindLabelFrustrated:
-		return "HKStateOfMindLabelFrustrated"
-	case HKStateOfMindLabelGrateful:
-		return "HKStateOfMindLabelGrateful"
-	case HKStateOfMindLabelGuilty:
-		return "HKStateOfMindLabelGuilty"
-	case HKStateOfMindLabelHappy:
-		return "HKStateOfMindLabelHappy"
-	case HKStateOfMindLabelHopeless:
-		return "HKStateOfMindLabelHopeless"
-	case HKStateOfMindLabelIrritated:
-		return "HKStateOfMindLabelIrritated"
-	case HKStateOfMindLabelJealous:
-		return "HKStateOfMindLabelJealous"
-	case HKStateOfMindLabelJoyful:
-		return "HKStateOfMindLabelJoyful"
-	case HKStateOfMindLabelLonely:
-		return "HKStateOfMindLabelLonely"
-	case HKStateOfMindLabelPassionate:
-		return "HKStateOfMindLabelPassionate"
-	case HKStateOfMindLabelPeaceful:
-		return "HKStateOfMindLabelPeaceful"
-	case HKStateOfMindLabelProud:
-		return "HKStateOfMindLabelProud"
-	case HKStateOfMindLabelRelieved:
-		return "HKStateOfMindLabelRelieved"
-	case HKStateOfMindLabelSad:
-		return "HKStateOfMindLabelSad"
-	case HKStateOfMindLabelScared:
-		return "HKStateOfMindLabelScared"
-	case HKStateOfMindLabelStressed:
-		return "HKStateOfMindLabelStressed"
-	case HKStateOfMindLabelSurprised:
-		return "HKStateOfMindLabelSurprised"
-	case HKStateOfMindLabelWorried:
-		return "HKStateOfMindLabelWorried"
-	case HKStateOfMindLabelAnnoyed:
-		return "HKStateOfMindLabelAnnoyed"
-	case HKStateOfMindLabelConfident:
-		return "HKStateOfMindLabelConfident"
-	case HKStateOfMindLabelDrained:
-		return "HKStateOfMindLabelDrained"
-	case HKStateOfMindLabelHopeful:
-		return "HKStateOfMindLabelHopeful"
-	case HKStateOfMindLabelIndifferent:
-		return "HKStateOfMindLabelIndifferent"
-	case HKStateOfMindLabelOverwhelmed:
-		return "HKStateOfMindLabelOverwhelmed"
-	case HKStateOfMindLabelSatisfied:
-		return "HKStateOfMindLabelSatisfied"
+	case StateOfMindLabelAmazed:
+		return "StateOfMindLabelAmazed"
+	case StateOfMindLabelAmused:
+		return "StateOfMindLabelAmused"
+	case StateOfMindLabelAngry:
+		return "StateOfMindLabelAngry"
+	case StateOfMindLabelAnxious:
+		return "StateOfMindLabelAnxious"
+	case StateOfMindLabelAshamed:
+		return "StateOfMindLabelAshamed"
+	case StateOfMindLabelBrave:
+		return "StateOfMindLabelBrave"
+	case StateOfMindLabelCalm:
+		return "StateOfMindLabelCalm"
+	case StateOfMindLabelContent:
+		return "StateOfMindLabelContent"
+	case StateOfMindLabelDisappointed:
+		return "StateOfMindLabelDisappointed"
+	case StateOfMindLabelDiscouraged:
+		return "StateOfMindLabelDiscouraged"
+	case StateOfMindLabelDisgusted:
+		return "StateOfMindLabelDisgusted"
+	case StateOfMindLabelEmbarrassed:
+		return "StateOfMindLabelEmbarrassed"
+	case StateOfMindLabelExcited:
+		return "StateOfMindLabelExcited"
+	case StateOfMindLabelFrustrated:
+		return "StateOfMindLabelFrustrated"
+	case StateOfMindLabelGrateful:
+		return "StateOfMindLabelGrateful"
+	case StateOfMindLabelGuilty:
+		return "StateOfMindLabelGuilty"
+	case StateOfMindLabelHappy:
+		return "StateOfMindLabelHappy"
+	case StateOfMindLabelHopeless:
+		return "StateOfMindLabelHopeless"
+	case StateOfMindLabelIrritated:
+		return "StateOfMindLabelIrritated"
+	case StateOfMindLabelJealous:
+		return "StateOfMindLabelJealous"
+	case StateOfMindLabelJoyful:
+		return "StateOfMindLabelJoyful"
+	case StateOfMindLabelLonely:
+		return "StateOfMindLabelLonely"
+	case StateOfMindLabelPassionate:
+		return "StateOfMindLabelPassionate"
+	case StateOfMindLabelPeaceful:
+		return "StateOfMindLabelPeaceful"
+	case StateOfMindLabelProud:
+		return "StateOfMindLabelProud"
+	case StateOfMindLabelRelieved:
+		return "StateOfMindLabelRelieved"
+	case StateOfMindLabelSad:
+		return "StateOfMindLabelSad"
+	case StateOfMindLabelScared:
+		return "StateOfMindLabelScared"
+	case StateOfMindLabelStressed:
+		return "StateOfMindLabelStressed"
+	case StateOfMindLabelSurprised:
+		return "StateOfMindLabelSurprised"
+	case StateOfMindLabelWorried:
+		return "StateOfMindLabelWorried"
+	case StateOfMindLabelAnnoyed:
+		return "StateOfMindLabelAnnoyed"
+	case StateOfMindLabelConfident:
+		return "StateOfMindLabelConfident"
+	case StateOfMindLabelDrained:
+		return "StateOfMindLabelDrained"
+	case StateOfMindLabelHopeful:
+		return "StateOfMindLabelHopeful"
+	case StateOfMindLabelIndifferent:
+		return "StateOfMindLabelIndifferent"
+	case StateOfMindLabelOverwhelmed:
+		return "StateOfMindLabelOverwhelmed"
+	case StateOfMindLabelSatisfied:
+		return "StateOfMindLabelSatisfied"
 	default:
-		return fmt.Sprintf("HKStateOfMindLabel(%d)", int64(e))
+		return fmt.Sprintf("StateOfMindLabel(%d)", int64(e))
 	}
 }
 
-type HKStateOfMindValenceClassification int64
+type StateOfMindValenceClassification int64
 
 const (
-	HKStateOfMindValenceClassificationVeryUnpleasant     HKStateOfMindValenceClassification = 1
-	HKStateOfMindValenceClassificationUnpleasant         HKStateOfMindValenceClassification = 2
-	HKStateOfMindValenceClassificationSlightlyUnpleasant HKStateOfMindValenceClassification = 3
-	HKStateOfMindValenceClassificationNeutral            HKStateOfMindValenceClassification = 4
-	HKStateOfMindValenceClassificationSlightlyPleasant   HKStateOfMindValenceClassification = 5
-	HKStateOfMindValenceClassificationPleasant           HKStateOfMindValenceClassification = 6
-	HKStateOfMindValenceClassificationVeryPleasant       HKStateOfMindValenceClassification = 7
+	StateOfMindValenceClassificationVeryUnpleasant     StateOfMindValenceClassification = 1
+	StateOfMindValenceClassificationUnpleasant         StateOfMindValenceClassification = 2
+	StateOfMindValenceClassificationSlightlyUnpleasant StateOfMindValenceClassification = 3
+	StateOfMindValenceClassificationNeutral            StateOfMindValenceClassification = 4
+	StateOfMindValenceClassificationSlightlyPleasant   StateOfMindValenceClassification = 5
+	StateOfMindValenceClassificationPleasant           StateOfMindValenceClassification = 6
+	StateOfMindValenceClassificationVeryPleasant       StateOfMindValenceClassification = 7
 )
 
-func (e HKStateOfMindValenceClassification) String() string {
+func (e StateOfMindValenceClassification) String() string {
 	switch e {
-	case HKStateOfMindValenceClassificationVeryUnpleasant:
-		return "HKStateOfMindValenceClassificationVeryUnpleasant"
-	case HKStateOfMindValenceClassificationUnpleasant:
-		return "HKStateOfMindValenceClassificationUnpleasant"
-	case HKStateOfMindValenceClassificationSlightlyUnpleasant:
-		return "HKStateOfMindValenceClassificationSlightlyUnpleasant"
-	case HKStateOfMindValenceClassificationNeutral:
-		return "HKStateOfMindValenceClassificationNeutral"
-	case HKStateOfMindValenceClassificationSlightlyPleasant:
-		return "HKStateOfMindValenceClassificationSlightlyPleasant"
-	case HKStateOfMindValenceClassificationPleasant:
-		return "HKStateOfMindValenceClassificationPleasant"
-	case HKStateOfMindValenceClassificationVeryPleasant:
-		return "HKStateOfMindValenceClassificationVeryPleasant"
+	case StateOfMindValenceClassificationVeryUnpleasant:
+		return "StateOfMindValenceClassificationVeryUnpleasant"
+	case StateOfMindValenceClassificationUnpleasant:
+		return "StateOfMindValenceClassificationUnpleasant"
+	case StateOfMindValenceClassificationSlightlyUnpleasant:
+		return "StateOfMindValenceClassificationSlightlyUnpleasant"
+	case StateOfMindValenceClassificationNeutral:
+		return "StateOfMindValenceClassificationNeutral"
+	case StateOfMindValenceClassificationSlightlyPleasant:
+		return "StateOfMindValenceClassificationSlightlyPleasant"
+	case StateOfMindValenceClassificationPleasant:
+		return "StateOfMindValenceClassificationPleasant"
+	case StateOfMindValenceClassificationVeryPleasant:
+		return "StateOfMindValenceClassificationVeryPleasant"
 	default:
-		return fmt.Sprintf("HKStateOfMindValenceClassification(%d)", int64(e))
+		return fmt.Sprintf("StateOfMindValenceClassification(%d)", int64(e))
 	}
 }
 
 // Options for specifying the statistic to calculate.
 // Bitmask — values may be combined with |.
-type HKStatisticsOptions uint64
+type StatisticsOptions uint64
 
 const (
 	// An option indicating that the system will not calculate any statistics values.
-	HKStatisticsOptionNone HKStatisticsOptions = 0
+	StatisticsOptionNone StatisticsOptions = 0
 	// An option indicating that the system calculates the specified statistics separately for each source.
-	HKStatisticsOptionSeparateBySource HKStatisticsOptions = 1
+	StatisticsOptionSeparateBySource StatisticsOptions = 1
 	// An option indicating that the system calculates the average quantity for the samples.
-	HKStatisticsOptionDiscreteAverage HKStatisticsOptions = 2
+	StatisticsOptionDiscreteAverage StatisticsOptions = 2
 	// An option indicating that the system calculates the minimum quantity for the samples.
-	HKStatisticsOptionDiscreteMin HKStatisticsOptions = 4
+	StatisticsOptionDiscreteMin StatisticsOptions = 4
 	// An option indicating that the system calculates the maximum quantity for the samples.
-	HKStatisticsOptionDiscreteMax HKStatisticsOptions = 8
+	StatisticsOptionDiscreteMax StatisticsOptions = 8
 	// An option indicating that the system calculates the sum of all the quantities for the samples.
-	HKStatisticsOptionCumulativeSum HKStatisticsOptions = 16
+	StatisticsOptionCumulativeSum StatisticsOptions = 16
 	// An option indicating that the system returns the most recent quantity from the matching samples.
-	HKStatisticsOptionMostRecent HKStatisticsOptions = 32
+	StatisticsOptionMostRecent StatisticsOptions = 32
 	// An option indicating that the system returns the most recent quantity from the matching samples.
-	HKStatisticsOptionDiscreteMostRecent HKStatisticsOptions = 32
+	StatisticsOptionDiscreteMostRecent StatisticsOptions = 32
 	// An option indicating that the system calculates the total duration covering all the samples.
-	HKStatisticsOptionDuration HKStatisticsOptions = 64
+	StatisticsOptionDuration StatisticsOptions = 64
 )
 
-func (e HKStatisticsOptions) String() string {
+func (e StatisticsOptions) String() string {
 	var parts []string
-	if e&HKStatisticsOptionSeparateBySource != 0 {
-		parts = append(parts, "HKStatisticsOptionSeparateBySource")
+	if e&StatisticsOptionSeparateBySource != 0 {
+		parts = append(parts, "StatisticsOptionSeparateBySource")
 	}
-	if e&HKStatisticsOptionDiscreteAverage != 0 {
-		parts = append(parts, "HKStatisticsOptionDiscreteAverage")
+	if e&StatisticsOptionDiscreteAverage != 0 {
+		parts = append(parts, "StatisticsOptionDiscreteAverage")
 	}
-	if e&HKStatisticsOptionDiscreteMin != 0 {
-		parts = append(parts, "HKStatisticsOptionDiscreteMin")
+	if e&StatisticsOptionDiscreteMin != 0 {
+		parts = append(parts, "StatisticsOptionDiscreteMin")
 	}
-	if e&HKStatisticsOptionDiscreteMax != 0 {
-		parts = append(parts, "HKStatisticsOptionDiscreteMax")
+	if e&StatisticsOptionDiscreteMax != 0 {
+		parts = append(parts, "StatisticsOptionDiscreteMax")
 	}
-	if e&HKStatisticsOptionCumulativeSum != 0 {
-		parts = append(parts, "HKStatisticsOptionCumulativeSum")
+	if e&StatisticsOptionCumulativeSum != 0 {
+		parts = append(parts, "StatisticsOptionCumulativeSum")
 	}
-	if e&HKStatisticsOptionMostRecent != 0 {
-		parts = append(parts, "HKStatisticsOptionMostRecent")
+	if e&StatisticsOptionMostRecent != 0 {
+		parts = append(parts, "StatisticsOptionMostRecent")
 	}
-	if e&HKStatisticsOptionDiscreteMostRecent != 0 {
-		parts = append(parts, "HKStatisticsOptionDiscreteMostRecent")
+	if e&StatisticsOptionDiscreteMostRecent != 0 {
+		parts = append(parts, "StatisticsOptionDiscreteMostRecent")
 	}
-	if e&HKStatisticsOptionDuration != 0 {
-		parts = append(parts, "HKStatisticsOptionDuration")
+	if e&StatisticsOptionDuration != 0 {
+		parts = append(parts, "StatisticsOptionDuration")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -981,617 +956,617 @@ func (e HKStatisticsOptions) String() string {
 }
 
 // Constants that determine how often the system launches your app in response to changes to HealthKit data.
-type HKUpdateFrequency int64
+type UpdateFrequency int64
 
 const (
 	// The system launches your app every time it detects a change.
-	HKUpdateFrequencyImmediate HKUpdateFrequency = 1
+	UpdateFrequencyImmediate UpdateFrequency = 1
 	// The system launches your app at most once an hour in response to changes.
-	HKUpdateFrequencyHourly HKUpdateFrequency = 2
+	UpdateFrequencyHourly UpdateFrequency = 2
 	// The system launches your app at most once a day in response to changes.
-	HKUpdateFrequencyDaily HKUpdateFrequency = 3
+	UpdateFrequencyDaily UpdateFrequency = 3
 	// The system launches your app at most once per week in response to changes.
-	HKUpdateFrequencyWeekly HKUpdateFrequency = 4
+	UpdateFrequencyWeekly UpdateFrequency = 4
 )
 
-func (e HKUpdateFrequency) String() string {
+func (e UpdateFrequency) String() string {
 	switch e {
-	case HKUpdateFrequencyImmediate:
-		return "HKUpdateFrequencyImmediate"
-	case HKUpdateFrequencyHourly:
-		return "HKUpdateFrequencyHourly"
-	case HKUpdateFrequencyDaily:
-		return "HKUpdateFrequencyDaily"
-	case HKUpdateFrequencyWeekly:
-		return "HKUpdateFrequencyWeekly"
+	case UpdateFrequencyImmediate:
+		return "UpdateFrequencyImmediate"
+	case UpdateFrequencyHourly:
+		return "UpdateFrequencyHourly"
+	case UpdateFrequencyDaily:
+		return "UpdateFrequencyDaily"
+	case UpdateFrequencyWeekly:
+		return "UpdateFrequencyWeekly"
 	default:
-		return fmt.Sprintf("HKUpdateFrequency(%d)", int64(e))
+		return fmt.Sprintf("UpdateFrequency(%d)", int64(e))
 	}
 }
 
 // A value that specifies the eye for a vision prescription.
-type HKVisionEye int64
+type VisionEye int64
 
 const (
 	// The left eye.
-	HKVisionEyeLeft HKVisionEye = 1
+	VisionEyeLeft VisionEye = 1
 	// The right eye.
-	HKVisionEyeRight HKVisionEye = 2
+	VisionEyeRight VisionEye = 2
 )
 
-func (e HKVisionEye) String() string {
+func (e VisionEye) String() string {
 	switch e {
-	case HKVisionEyeLeft:
-		return "HKVisionEyeLeft"
-	case HKVisionEyeRight:
-		return "HKVisionEyeRight"
+	case VisionEyeLeft:
+		return "VisionEyeLeft"
+	case VisionEyeRight:
+		return "VisionEyeRight"
 	default:
-		return fmt.Sprintf("HKVisionEye(%d)", int64(e))
+		return fmt.Sprintf("VisionEye(%d)", int64(e))
 	}
 }
 
 // The type of vision prescription, for example a prescription for glasses or for contacts.
-type HKVisionPrescriptionType uint64
+type VisionPrescriptionType uint64
 
 const (
 	// A prescription for glasses.
-	HKVisionPrescriptionTypeGlasses HKVisionPrescriptionType = 1
+	VisionPrescriptionTypeGlasses VisionPrescriptionType = 1
 	// A prescription for contacts.
-	HKVisionPrescriptionTypeContacts HKVisionPrescriptionType = 2
+	VisionPrescriptionTypeContacts VisionPrescriptionType = 2
 )
 
-func (e HKVisionPrescriptionType) String() string {
+func (e VisionPrescriptionType) String() string {
 	switch e {
-	case HKVisionPrescriptionTypeGlasses:
-		return "HKVisionPrescriptionTypeGlasses"
-	case HKVisionPrescriptionTypeContacts:
-		return "HKVisionPrescriptionTypeContacts"
+	case VisionPrescriptionTypeGlasses:
+		return "VisionPrescriptionTypeGlasses"
+	case VisionPrescriptionTypeContacts:
+		return "VisionPrescriptionTypeContacts"
 	default:
-		return fmt.Sprintf("HKVisionPrescriptionType(%d)", int64(e))
+		return fmt.Sprintf("VisionPrescriptionType(%d)", int64(e))
 	}
 }
 
 // Constants indicating the user’s wheelchair use.
-type HKWheelchairUse int64
+type WheelchairUse int64
 
 const (
 	// Either the wheelchair use is not set or the user has not granted your app permission to read that information.
-	HKWheelchairUseNotSet HKWheelchairUse = 0
+	WheelchairUseNotSet WheelchairUse = 0
 	// The user does not use a wheelchair.
-	HKWheelchairUseNo HKWheelchairUse = 1
+	WheelchairUseNo WheelchairUse = 1
 	// The user uses a wheelchair.
-	HKWheelchairUseYes HKWheelchairUse = 2
+	WheelchairUseYes WheelchairUse = 2
 )
 
-func (e HKWheelchairUse) String() string {
+func (e WheelchairUse) String() string {
 	switch e {
-	case HKWheelchairUseNotSet:
-		return "HKWheelchairUseNotSet"
-	case HKWheelchairUseNo:
-		return "HKWheelchairUseNo"
-	case HKWheelchairUseYes:
-		return "HKWheelchairUseYes"
+	case WheelchairUseNotSet:
+		return "WheelchairUseNotSet"
+	case WheelchairUseNo:
+		return "WheelchairUseNo"
+	case WheelchairUseYes:
+		return "WheelchairUseYes"
 	default:
-		return fmt.Sprintf("HKWheelchairUse(%d)", int64(e))
+		return fmt.Sprintf("WheelchairUse(%d)", int64(e))
 	}
 }
 
 // The type of activity performed during a workout.
-type HKWorkoutActivityType uint64
+type WorkoutActivityType uint64
 
 const (
 	// The constant for playing American football.
-	HKWorkoutActivityTypeAmericanFootball HKWorkoutActivityType = 1
+	WorkoutActivityTypeAmericanFootball WorkoutActivityType = 1
 	// The constant for shooting archery.
-	HKWorkoutActivityTypeArchery HKWorkoutActivityType = 2
+	WorkoutActivityTypeArchery WorkoutActivityType = 2
 	// The constant for playing Australian football.
-	HKWorkoutActivityTypeAustralianFootball HKWorkoutActivityType = 3
+	WorkoutActivityTypeAustralianFootball WorkoutActivityType = 3
 	// The constant for playing badminton.
-	HKWorkoutActivityTypeBadminton HKWorkoutActivityType = 4
+	WorkoutActivityTypeBadminton WorkoutActivityType = 4
 	// The constant for playing baseball.
-	HKWorkoutActivityTypeBaseball HKWorkoutActivityType = 5
+	WorkoutActivityTypeBaseball WorkoutActivityType = 5
 	// The constant for playing basketball.
-	HKWorkoutActivityTypeBasketball HKWorkoutActivityType = 6
+	WorkoutActivityTypeBasketball WorkoutActivityType = 6
 	// The constant for bowling.
-	HKWorkoutActivityTypeBowling HKWorkoutActivityType = 7
+	WorkoutActivityTypeBowling WorkoutActivityType = 7
 	// The constant for boxing.
-	HKWorkoutActivityTypeBoxing HKWorkoutActivityType = 8
+	WorkoutActivityTypeBoxing WorkoutActivityType = 8
 	// The constant for climbing.
-	HKWorkoutActivityTypeClimbing HKWorkoutActivityType = 9
+	WorkoutActivityTypeClimbing WorkoutActivityType = 9
 	// The constant for playing cricket.
-	HKWorkoutActivityTypeCricket HKWorkoutActivityType = 10
+	WorkoutActivityTypeCricket WorkoutActivityType = 10
 	// The constant for exercise that includes any mixture of cardio, strength, and/or flexibility training.
-	HKWorkoutActivityTypeCrossTraining HKWorkoutActivityType = 11
+	WorkoutActivityTypeCrossTraining WorkoutActivityType = 11
 	// The constant for curling.
-	HKWorkoutActivityTypeCurling HKWorkoutActivityType = 12
+	WorkoutActivityTypeCurling WorkoutActivityType = 12
 	// The constant for cycling.
-	HKWorkoutActivityTypeCycling HKWorkoutActivityType = 13
+	WorkoutActivityTypeCycling WorkoutActivityType = 13
 	// The constant for dancing.
-	HKWorkoutActivityTypeDance HKWorkoutActivityType = 14
+	WorkoutActivityTypeDance WorkoutActivityType = 14
 	// The constant for workouts inspired by dance, including Pilates, Barre, and Feldenkrais.
-	HKWorkoutActivityTypeDanceInspiredTraining HKWorkoutActivityType = 15
+	WorkoutActivityTypeDanceInspiredTraining WorkoutActivityType = 15
 	// The constant for workouts on an elliptical machine.
-	HKWorkoutActivityTypeElliptical HKWorkoutActivityType = 16
+	WorkoutActivityTypeElliptical WorkoutActivityType = 16
 	// The constant for activities that involve riding a horse, including polo, horse racing, and horse riding.
-	HKWorkoutActivityTypeEquestrianSports HKWorkoutActivityType = 17
+	WorkoutActivityTypeEquestrianSports WorkoutActivityType = 17
 	// The constant for fencing.
-	HKWorkoutActivityTypeFencing HKWorkoutActivityType = 18
+	WorkoutActivityTypeFencing WorkoutActivityType = 18
 	// The constant for fishing.
-	HKWorkoutActivityTypeFishing HKWorkoutActivityType = 19
+	WorkoutActivityTypeFishing WorkoutActivityType = 19
 	// The constant for strength training, primarily with free weights and body weight.
-	HKWorkoutActivityTypeFunctionalStrengthTraining HKWorkoutActivityType = 20
+	WorkoutActivityTypeFunctionalStrengthTraining WorkoutActivityType = 20
 	// The constant for playing golf.
-	HKWorkoutActivityTypeGolf HKWorkoutActivityType = 21
+	WorkoutActivityTypeGolf WorkoutActivityType = 21
 	// Performing gymnastics.
-	HKWorkoutActivityTypeGymnastics HKWorkoutActivityType = 22
+	WorkoutActivityTypeGymnastics WorkoutActivityType = 22
 	// The constant for playing handball.
-	HKWorkoutActivityTypeHandball HKWorkoutActivityType = 23
+	WorkoutActivityTypeHandball WorkoutActivityType = 23
 	// The constant for hiking.
-	HKWorkoutActivityTypeHiking HKWorkoutActivityType = 24
+	WorkoutActivityTypeHiking WorkoutActivityType = 24
 	// The constant for playing hockey, including ice hockey, field hockey, and related sports.
-	HKWorkoutActivityTypeHockey HKWorkoutActivityType = 25
+	WorkoutActivityTypeHockey WorkoutActivityType = 25
 	// The constant for hunting.
-	HKWorkoutActivityTypeHunting HKWorkoutActivityType = 26
+	WorkoutActivityTypeHunting WorkoutActivityType = 26
 	// The constant for playing lacrosse.
-	HKWorkoutActivityTypeLacrosse HKWorkoutActivityType = 27
+	WorkoutActivityTypeLacrosse WorkoutActivityType = 27
 	// The constant for practicing martial arts.
-	HKWorkoutActivityTypeMartialArts HKWorkoutActivityType = 28
+	WorkoutActivityTypeMartialArts WorkoutActivityType = 28
 	// The constant for performing activities like walking meditation, Gyrotonic exercise, and Qigong.
-	HKWorkoutActivityTypeMindAndBody HKWorkoutActivityType = 29
+	WorkoutActivityTypeMindAndBody WorkoutActivityType = 29
 	// The constant for performing any mix of cardio-focused exercises.
-	HKWorkoutActivityTypeMixedMetabolicCardioTraining HKWorkoutActivityType = 30
+	WorkoutActivityTypeMixedMetabolicCardioTraining WorkoutActivityType = 30
 	// The constant for canoeing, kayaking, paddling an outrigger, paddling a stand-up paddle board, and related sports.
-	HKWorkoutActivityTypePaddleSports HKWorkoutActivityType = 31
+	WorkoutActivityTypePaddleSports WorkoutActivityType = 31
 	// The constant for play-based activities like tag, dodgeball, hopscotch, tetherball, and playing on a jungle gym.
-	HKWorkoutActivityTypePlay HKWorkoutActivityType = 32
+	WorkoutActivityTypePlay WorkoutActivityType = 32
 	// The constant for warm-up and therapeutic activities like foam rolling and stretching.
-	HKWorkoutActivityTypePreparationAndRecovery HKWorkoutActivityType = 33
+	WorkoutActivityTypePreparationAndRecovery WorkoutActivityType = 33
 	// The constant for playing racquetball.
-	HKWorkoutActivityTypeRacquetball HKWorkoutActivityType = 34
+	WorkoutActivityTypeRacquetball WorkoutActivityType = 34
 	// The constant for rowing.
-	HKWorkoutActivityTypeRowing HKWorkoutActivityType = 35
+	WorkoutActivityTypeRowing WorkoutActivityType = 35
 	// The constant for playing rugby.
-	HKWorkoutActivityTypeRugby HKWorkoutActivityType = 36
+	WorkoutActivityTypeRugby WorkoutActivityType = 36
 	// The constant for running and jogging.
-	HKWorkoutActivityTypeRunning HKWorkoutActivityType = 37
+	WorkoutActivityTypeRunning WorkoutActivityType = 37
 	// The constant for sailing.
-	HKWorkoutActivityTypeSailing HKWorkoutActivityType = 38
+	WorkoutActivityTypeSailing WorkoutActivityType = 38
 	// The constant for skating activities, including ice skating, speed skating, inline skating, and skateboarding.
-	HKWorkoutActivityTypeSkatingSports HKWorkoutActivityType = 39
+	WorkoutActivityTypeSkatingSports WorkoutActivityType = 39
 	// The constant for a variety of snow sports, including sledding, snowmobiling, or building a snowman.
-	HKWorkoutActivityTypeSnowSports HKWorkoutActivityType = 40
+	WorkoutActivityTypeSnowSports WorkoutActivityType = 40
 	// The constant for playing soccer.
-	HKWorkoutActivityTypeSoccer HKWorkoutActivityType = 41
+	WorkoutActivityTypeSoccer WorkoutActivityType = 41
 	// The constant for playing softball.
-	HKWorkoutActivityTypeSoftball HKWorkoutActivityType = 42
+	WorkoutActivityTypeSoftball WorkoutActivityType = 42
 	// The constant for playing squash.
-	HKWorkoutActivityTypeSquash HKWorkoutActivityType = 43
+	WorkoutActivityTypeSquash WorkoutActivityType = 43
 	// The constant for workouts using a stair climbing machine.
-	HKWorkoutActivityTypeStairClimbing HKWorkoutActivityType = 44
+	WorkoutActivityTypeStairClimbing WorkoutActivityType = 44
 	// The constant for a variety of surf sports, including surfing, kite surfing, and wind surfing.
-	HKWorkoutActivityTypeSurfingSports HKWorkoutActivityType = 45
+	WorkoutActivityTypeSurfingSports WorkoutActivityType = 45
 	// The constant for swimming.
-	HKWorkoutActivityTypeSwimming HKWorkoutActivityType = 46
+	WorkoutActivityTypeSwimming WorkoutActivityType = 46
 	// The constant for playing table tennis.
-	HKWorkoutActivityTypeTableTennis HKWorkoutActivityType = 47
+	WorkoutActivityTypeTableTennis WorkoutActivityType = 47
 	// The constant for playing tennis.
-	HKWorkoutActivityTypeTennis HKWorkoutActivityType = 48
+	WorkoutActivityTypeTennis WorkoutActivityType = 48
 	// Participating in track and field events, including shot put, javelin, pole vaulting, and related sports.
-	HKWorkoutActivityTypeTrackAndField HKWorkoutActivityType = 49
+	WorkoutActivityTypeTrackAndField WorkoutActivityType = 49
 	// The constant for strength training exercises primarily using machines or free weights.
-	HKWorkoutActivityTypeTraditionalStrengthTraining HKWorkoutActivityType = 50
+	WorkoutActivityTypeTraditionalStrengthTraining WorkoutActivityType = 50
 	// The constant for playing volleyball.
-	HKWorkoutActivityTypeVolleyball HKWorkoutActivityType = 51
+	WorkoutActivityTypeVolleyball WorkoutActivityType = 51
 	// The constant for walking.
-	HKWorkoutActivityTypeWalking HKWorkoutActivityType = 52
+	WorkoutActivityTypeWalking WorkoutActivityType = 52
 	// The constant for aerobic exercise performed in shallow water.
-	HKWorkoutActivityTypeWaterFitness HKWorkoutActivityType = 53
+	WorkoutActivityTypeWaterFitness WorkoutActivityType = 53
 	// The constant for playing water polo.
-	HKWorkoutActivityTypeWaterPolo HKWorkoutActivityType = 54
+	WorkoutActivityTypeWaterPolo WorkoutActivityType = 54
 	// The constant for a variety of water sports, including water skiing, wake boarding, and related activities.
-	HKWorkoutActivityTypeWaterSports HKWorkoutActivityType = 55
+	WorkoutActivityTypeWaterSports WorkoutActivityType = 55
 	// The constant for wrestling.
-	HKWorkoutActivityTypeWrestling HKWorkoutActivityType = 56
+	WorkoutActivityTypeWrestling WorkoutActivityType = 56
 	// The constant for practicing yoga.
-	HKWorkoutActivityTypeYoga HKWorkoutActivityType = 57
+	WorkoutActivityTypeYoga WorkoutActivityType = 57
 	// The constant for barre workout.
-	HKWorkoutActivityTypeBarre HKWorkoutActivityType = 58
+	WorkoutActivityTypeBarre WorkoutActivityType = 58
 	// The constant for core training.
-	HKWorkoutActivityTypeCoreTraining HKWorkoutActivityType = 59
+	WorkoutActivityTypeCoreTraining WorkoutActivityType = 59
 	// The constant for cross country skiing.
-	HKWorkoutActivityTypeCrossCountrySkiing HKWorkoutActivityType = 60
+	WorkoutActivityTypeCrossCountrySkiing WorkoutActivityType = 60
 	// The constant for downhill skiing.
-	HKWorkoutActivityTypeDownhillSkiing HKWorkoutActivityType = 61
+	WorkoutActivityTypeDownhillSkiing WorkoutActivityType = 61
 	// The constant for a flexibility workout.
-	HKWorkoutActivityTypeFlexibility HKWorkoutActivityType = 62
+	WorkoutActivityTypeFlexibility WorkoutActivityType = 62
 	// The constant for high intensity interval training.
-	HKWorkoutActivityTypeHighIntensityIntervalTraining HKWorkoutActivityType = 63
+	WorkoutActivityTypeHighIntensityIntervalTraining WorkoutActivityType = 63
 	// The constant for jumping rope.
-	HKWorkoutActivityTypeJumpRope HKWorkoutActivityType = 64
+	WorkoutActivityTypeJumpRope WorkoutActivityType = 64
 	// The constant for kickboxing.
-	HKWorkoutActivityTypeKickboxing HKWorkoutActivityType = 65
+	WorkoutActivityTypeKickboxing WorkoutActivityType = 65
 	// The constant for a pilates workout.
-	HKWorkoutActivityTypePilates HKWorkoutActivityType = 66
+	WorkoutActivityTypePilates WorkoutActivityType = 66
 	// The constant for snowboarding.
-	HKWorkoutActivityTypeSnowboarding HKWorkoutActivityType = 67
+	WorkoutActivityTypeSnowboarding WorkoutActivityType = 67
 	// The constant for running, walking, or other drills using stairs (for example, in a stadium or inside a multilevel building).
-	HKWorkoutActivityTypeStairs HKWorkoutActivityType = 68
+	WorkoutActivityTypeStairs WorkoutActivityType = 68
 	// The constant for training using a step bench.
-	HKWorkoutActivityTypeStepTraining HKWorkoutActivityType = 69
+	WorkoutActivityTypeStepTraining WorkoutActivityType = 69
 	// The constant for a wheelchair workout at walking pace.
-	HKWorkoutActivityTypeWheelchairWalkPace HKWorkoutActivityType = 70
+	WorkoutActivityTypeWheelchairWalkPace WorkoutActivityType = 70
 	// The constant for wheelchair workout at running pace.
-	HKWorkoutActivityTypeWheelchairRunPace HKWorkoutActivityType = 71
+	WorkoutActivityTypeWheelchairRunPace WorkoutActivityType = 71
 	// The constant for tai chi.
-	HKWorkoutActivityTypeTaiChi HKWorkoutActivityType = 72
+	WorkoutActivityTypeTaiChi WorkoutActivityType = 72
 	// The constant for workouts that mix a variety of cardio exercise machines or modalities.
-	HKWorkoutActivityTypeMixedCardio HKWorkoutActivityType = 73
+	WorkoutActivityTypeMixedCardio WorkoutActivityType = 73
 	// The constant for hand cycling.
-	HKWorkoutActivityTypeHandCycling HKWorkoutActivityType = 74
+	WorkoutActivityTypeHandCycling WorkoutActivityType = 74
 	// The constant for playing disc sports such as Ultimate and Disc Golf.
-	HKWorkoutActivityTypeDiscSports HKWorkoutActivityType = 75
+	WorkoutActivityTypeDiscSports WorkoutActivityType = 75
 	// The constant for playing fitness-based video games.
-	HKWorkoutActivityTypeFitnessGaming HKWorkoutActivityType = 76
+	WorkoutActivityTypeFitnessGaming WorkoutActivityType = 76
 	// The constant for cardiovascular dance workouts.
-	HKWorkoutActivityTypeCardioDance HKWorkoutActivityType = 77
+	WorkoutActivityTypeCardioDance WorkoutActivityType = 77
 	// The constant for dancing with a partner or partners, such as swing, salsa, or folk dances.
-	HKWorkoutActivityTypeSocialDance HKWorkoutActivityType = 78
+	WorkoutActivityTypeSocialDance WorkoutActivityType = 78
 	// The constant for playing pickleball.
-	HKWorkoutActivityTypePickleball HKWorkoutActivityType = 79
+	WorkoutActivityTypePickleball WorkoutActivityType = 79
 	// The constant for low intensity stretching and mobility exercises following a more vigorous workout.
-	HKWorkoutActivityTypeCooldown HKWorkoutActivityType = 80
+	WorkoutActivityTypeCooldown WorkoutActivityType = 80
 	// The constant for multisport activities like triathlons.
-	HKWorkoutActivityTypeSwimBikeRun HKWorkoutActivityType = 82
+	WorkoutActivityTypeSwimBikeRun WorkoutActivityType = 82
 	// A constant for the transition time between activities in a multisport workout.
-	HKWorkoutActivityTypeTransition HKWorkoutActivityType = 83
+	WorkoutActivityTypeTransition WorkoutActivityType = 83
 	// The constant for underwater diving.
-	HKWorkoutActivityTypeUnderwaterDiving HKWorkoutActivityType = 84
+	WorkoutActivityTypeUnderwaterDiving WorkoutActivityType = 84
 	// The constant for a workout that does not match any of the other workout activity types.
-	HKWorkoutActivityTypeOther HKWorkoutActivityType = 3000
+	WorkoutActivityTypeOther WorkoutActivityType = 3000
 )
 
-func (e HKWorkoutActivityType) String() string {
+func (e WorkoutActivityType) String() string {
 	switch e {
-	case HKWorkoutActivityTypeAmericanFootball:
-		return "HKWorkoutActivityTypeAmericanFootball"
-	case HKWorkoutActivityTypeArchery:
-		return "HKWorkoutActivityTypeArchery"
-	case HKWorkoutActivityTypeAustralianFootball:
-		return "HKWorkoutActivityTypeAustralianFootball"
-	case HKWorkoutActivityTypeBadminton:
-		return "HKWorkoutActivityTypeBadminton"
-	case HKWorkoutActivityTypeBaseball:
-		return "HKWorkoutActivityTypeBaseball"
-	case HKWorkoutActivityTypeBasketball:
-		return "HKWorkoutActivityTypeBasketball"
-	case HKWorkoutActivityTypeBowling:
-		return "HKWorkoutActivityTypeBowling"
-	case HKWorkoutActivityTypeBoxing:
-		return "HKWorkoutActivityTypeBoxing"
-	case HKWorkoutActivityTypeClimbing:
-		return "HKWorkoutActivityTypeClimbing"
-	case HKWorkoutActivityTypeCricket:
-		return "HKWorkoutActivityTypeCricket"
-	case HKWorkoutActivityTypeCrossTraining:
-		return "HKWorkoutActivityTypeCrossTraining"
-	case HKWorkoutActivityTypeCurling:
-		return "HKWorkoutActivityTypeCurling"
-	case HKWorkoutActivityTypeCycling:
-		return "HKWorkoutActivityTypeCycling"
-	case HKWorkoutActivityTypeDance:
-		return "HKWorkoutActivityTypeDance"
-	case HKWorkoutActivityTypeDanceInspiredTraining:
-		return "HKWorkoutActivityTypeDanceInspiredTraining"
-	case HKWorkoutActivityTypeElliptical:
-		return "HKWorkoutActivityTypeElliptical"
-	case HKWorkoutActivityTypeEquestrianSports:
-		return "HKWorkoutActivityTypeEquestrianSports"
-	case HKWorkoutActivityTypeFencing:
-		return "HKWorkoutActivityTypeFencing"
-	case HKWorkoutActivityTypeFishing:
-		return "HKWorkoutActivityTypeFishing"
-	case HKWorkoutActivityTypeFunctionalStrengthTraining:
-		return "HKWorkoutActivityTypeFunctionalStrengthTraining"
-	case HKWorkoutActivityTypeGolf:
-		return "HKWorkoutActivityTypeGolf"
-	case HKWorkoutActivityTypeGymnastics:
-		return "HKWorkoutActivityTypeGymnastics"
-	case HKWorkoutActivityTypeHandball:
-		return "HKWorkoutActivityTypeHandball"
-	case HKWorkoutActivityTypeHiking:
-		return "HKWorkoutActivityTypeHiking"
-	case HKWorkoutActivityTypeHockey:
-		return "HKWorkoutActivityTypeHockey"
-	case HKWorkoutActivityTypeHunting:
-		return "HKWorkoutActivityTypeHunting"
-	case HKWorkoutActivityTypeLacrosse:
-		return "HKWorkoutActivityTypeLacrosse"
-	case HKWorkoutActivityTypeMartialArts:
-		return "HKWorkoutActivityTypeMartialArts"
-	case HKWorkoutActivityTypeMindAndBody:
-		return "HKWorkoutActivityTypeMindAndBody"
-	case HKWorkoutActivityTypeMixedMetabolicCardioTraining:
-		return "HKWorkoutActivityTypeMixedMetabolicCardioTraining"
-	case HKWorkoutActivityTypePaddleSports:
-		return "HKWorkoutActivityTypePaddleSports"
-	case HKWorkoutActivityTypePlay:
-		return "HKWorkoutActivityTypePlay"
-	case HKWorkoutActivityTypePreparationAndRecovery:
-		return "HKWorkoutActivityTypePreparationAndRecovery"
-	case HKWorkoutActivityTypeRacquetball:
-		return "HKWorkoutActivityTypeRacquetball"
-	case HKWorkoutActivityTypeRowing:
-		return "HKWorkoutActivityTypeRowing"
-	case HKWorkoutActivityTypeRugby:
-		return "HKWorkoutActivityTypeRugby"
-	case HKWorkoutActivityTypeRunning:
-		return "HKWorkoutActivityTypeRunning"
-	case HKWorkoutActivityTypeSailing:
-		return "HKWorkoutActivityTypeSailing"
-	case HKWorkoutActivityTypeSkatingSports:
-		return "HKWorkoutActivityTypeSkatingSports"
-	case HKWorkoutActivityTypeSnowSports:
-		return "HKWorkoutActivityTypeSnowSports"
-	case HKWorkoutActivityTypeSoccer:
-		return "HKWorkoutActivityTypeSoccer"
-	case HKWorkoutActivityTypeSoftball:
-		return "HKWorkoutActivityTypeSoftball"
-	case HKWorkoutActivityTypeSquash:
-		return "HKWorkoutActivityTypeSquash"
-	case HKWorkoutActivityTypeStairClimbing:
-		return "HKWorkoutActivityTypeStairClimbing"
-	case HKWorkoutActivityTypeSurfingSports:
-		return "HKWorkoutActivityTypeSurfingSports"
-	case HKWorkoutActivityTypeSwimming:
-		return "HKWorkoutActivityTypeSwimming"
-	case HKWorkoutActivityTypeTableTennis:
-		return "HKWorkoutActivityTypeTableTennis"
-	case HKWorkoutActivityTypeTennis:
-		return "HKWorkoutActivityTypeTennis"
-	case HKWorkoutActivityTypeTrackAndField:
-		return "HKWorkoutActivityTypeTrackAndField"
-	case HKWorkoutActivityTypeTraditionalStrengthTraining:
-		return "HKWorkoutActivityTypeTraditionalStrengthTraining"
-	case HKWorkoutActivityTypeVolleyball:
-		return "HKWorkoutActivityTypeVolleyball"
-	case HKWorkoutActivityTypeWalking:
-		return "HKWorkoutActivityTypeWalking"
-	case HKWorkoutActivityTypeWaterFitness:
-		return "HKWorkoutActivityTypeWaterFitness"
-	case HKWorkoutActivityTypeWaterPolo:
-		return "HKWorkoutActivityTypeWaterPolo"
-	case HKWorkoutActivityTypeWaterSports:
-		return "HKWorkoutActivityTypeWaterSports"
-	case HKWorkoutActivityTypeWrestling:
-		return "HKWorkoutActivityTypeWrestling"
-	case HKWorkoutActivityTypeYoga:
-		return "HKWorkoutActivityTypeYoga"
-	case HKWorkoutActivityTypeBarre:
-		return "HKWorkoutActivityTypeBarre"
-	case HKWorkoutActivityTypeCoreTraining:
-		return "HKWorkoutActivityTypeCoreTraining"
-	case HKWorkoutActivityTypeCrossCountrySkiing:
-		return "HKWorkoutActivityTypeCrossCountrySkiing"
-	case HKWorkoutActivityTypeDownhillSkiing:
-		return "HKWorkoutActivityTypeDownhillSkiing"
-	case HKWorkoutActivityTypeFlexibility:
-		return "HKWorkoutActivityTypeFlexibility"
-	case HKWorkoutActivityTypeHighIntensityIntervalTraining:
-		return "HKWorkoutActivityTypeHighIntensityIntervalTraining"
-	case HKWorkoutActivityTypeJumpRope:
-		return "HKWorkoutActivityTypeJumpRope"
-	case HKWorkoutActivityTypeKickboxing:
-		return "HKWorkoutActivityTypeKickboxing"
-	case HKWorkoutActivityTypePilates:
-		return "HKWorkoutActivityTypePilates"
-	case HKWorkoutActivityTypeSnowboarding:
-		return "HKWorkoutActivityTypeSnowboarding"
-	case HKWorkoutActivityTypeStairs:
-		return "HKWorkoutActivityTypeStairs"
-	case HKWorkoutActivityTypeStepTraining:
-		return "HKWorkoutActivityTypeStepTraining"
-	case HKWorkoutActivityTypeWheelchairWalkPace:
-		return "HKWorkoutActivityTypeWheelchairWalkPace"
-	case HKWorkoutActivityTypeWheelchairRunPace:
-		return "HKWorkoutActivityTypeWheelchairRunPace"
-	case HKWorkoutActivityTypeTaiChi:
-		return "HKWorkoutActivityTypeTaiChi"
-	case HKWorkoutActivityTypeMixedCardio:
-		return "HKWorkoutActivityTypeMixedCardio"
-	case HKWorkoutActivityTypeHandCycling:
-		return "HKWorkoutActivityTypeHandCycling"
-	case HKWorkoutActivityTypeDiscSports:
-		return "HKWorkoutActivityTypeDiscSports"
-	case HKWorkoutActivityTypeFitnessGaming:
-		return "HKWorkoutActivityTypeFitnessGaming"
-	case HKWorkoutActivityTypeCardioDance:
-		return "HKWorkoutActivityTypeCardioDance"
-	case HKWorkoutActivityTypeSocialDance:
-		return "HKWorkoutActivityTypeSocialDance"
-	case HKWorkoutActivityTypePickleball:
-		return "HKWorkoutActivityTypePickleball"
-	case HKWorkoutActivityTypeCooldown:
-		return "HKWorkoutActivityTypeCooldown"
-	case HKWorkoutActivityTypeSwimBikeRun:
-		return "HKWorkoutActivityTypeSwimBikeRun"
-	case HKWorkoutActivityTypeTransition:
-		return "HKWorkoutActivityTypeTransition"
-	case HKWorkoutActivityTypeUnderwaterDiving:
-		return "HKWorkoutActivityTypeUnderwaterDiving"
-	case HKWorkoutActivityTypeOther:
-		return "HKWorkoutActivityTypeOther"
+	case WorkoutActivityTypeAmericanFootball:
+		return "WorkoutActivityTypeAmericanFootball"
+	case WorkoutActivityTypeArchery:
+		return "WorkoutActivityTypeArchery"
+	case WorkoutActivityTypeAustralianFootball:
+		return "WorkoutActivityTypeAustralianFootball"
+	case WorkoutActivityTypeBadminton:
+		return "WorkoutActivityTypeBadminton"
+	case WorkoutActivityTypeBaseball:
+		return "WorkoutActivityTypeBaseball"
+	case WorkoutActivityTypeBasketball:
+		return "WorkoutActivityTypeBasketball"
+	case WorkoutActivityTypeBowling:
+		return "WorkoutActivityTypeBowling"
+	case WorkoutActivityTypeBoxing:
+		return "WorkoutActivityTypeBoxing"
+	case WorkoutActivityTypeClimbing:
+		return "WorkoutActivityTypeClimbing"
+	case WorkoutActivityTypeCricket:
+		return "WorkoutActivityTypeCricket"
+	case WorkoutActivityTypeCrossTraining:
+		return "WorkoutActivityTypeCrossTraining"
+	case WorkoutActivityTypeCurling:
+		return "WorkoutActivityTypeCurling"
+	case WorkoutActivityTypeCycling:
+		return "WorkoutActivityTypeCycling"
+	case WorkoutActivityTypeDance:
+		return "WorkoutActivityTypeDance"
+	case WorkoutActivityTypeDanceInspiredTraining:
+		return "WorkoutActivityTypeDanceInspiredTraining"
+	case WorkoutActivityTypeElliptical:
+		return "WorkoutActivityTypeElliptical"
+	case WorkoutActivityTypeEquestrianSports:
+		return "WorkoutActivityTypeEquestrianSports"
+	case WorkoutActivityTypeFencing:
+		return "WorkoutActivityTypeFencing"
+	case WorkoutActivityTypeFishing:
+		return "WorkoutActivityTypeFishing"
+	case WorkoutActivityTypeFunctionalStrengthTraining:
+		return "WorkoutActivityTypeFunctionalStrengthTraining"
+	case WorkoutActivityTypeGolf:
+		return "WorkoutActivityTypeGolf"
+	case WorkoutActivityTypeGymnastics:
+		return "WorkoutActivityTypeGymnastics"
+	case WorkoutActivityTypeHandball:
+		return "WorkoutActivityTypeHandball"
+	case WorkoutActivityTypeHiking:
+		return "WorkoutActivityTypeHiking"
+	case WorkoutActivityTypeHockey:
+		return "WorkoutActivityTypeHockey"
+	case WorkoutActivityTypeHunting:
+		return "WorkoutActivityTypeHunting"
+	case WorkoutActivityTypeLacrosse:
+		return "WorkoutActivityTypeLacrosse"
+	case WorkoutActivityTypeMartialArts:
+		return "WorkoutActivityTypeMartialArts"
+	case WorkoutActivityTypeMindAndBody:
+		return "WorkoutActivityTypeMindAndBody"
+	case WorkoutActivityTypeMixedMetabolicCardioTraining:
+		return "WorkoutActivityTypeMixedMetabolicCardioTraining"
+	case WorkoutActivityTypePaddleSports:
+		return "WorkoutActivityTypePaddleSports"
+	case WorkoutActivityTypePlay:
+		return "WorkoutActivityTypePlay"
+	case WorkoutActivityTypePreparationAndRecovery:
+		return "WorkoutActivityTypePreparationAndRecovery"
+	case WorkoutActivityTypeRacquetball:
+		return "WorkoutActivityTypeRacquetball"
+	case WorkoutActivityTypeRowing:
+		return "WorkoutActivityTypeRowing"
+	case WorkoutActivityTypeRugby:
+		return "WorkoutActivityTypeRugby"
+	case WorkoutActivityTypeRunning:
+		return "WorkoutActivityTypeRunning"
+	case WorkoutActivityTypeSailing:
+		return "WorkoutActivityTypeSailing"
+	case WorkoutActivityTypeSkatingSports:
+		return "WorkoutActivityTypeSkatingSports"
+	case WorkoutActivityTypeSnowSports:
+		return "WorkoutActivityTypeSnowSports"
+	case WorkoutActivityTypeSoccer:
+		return "WorkoutActivityTypeSoccer"
+	case WorkoutActivityTypeSoftball:
+		return "WorkoutActivityTypeSoftball"
+	case WorkoutActivityTypeSquash:
+		return "WorkoutActivityTypeSquash"
+	case WorkoutActivityTypeStairClimbing:
+		return "WorkoutActivityTypeStairClimbing"
+	case WorkoutActivityTypeSurfingSports:
+		return "WorkoutActivityTypeSurfingSports"
+	case WorkoutActivityTypeSwimming:
+		return "WorkoutActivityTypeSwimming"
+	case WorkoutActivityTypeTableTennis:
+		return "WorkoutActivityTypeTableTennis"
+	case WorkoutActivityTypeTennis:
+		return "WorkoutActivityTypeTennis"
+	case WorkoutActivityTypeTrackAndField:
+		return "WorkoutActivityTypeTrackAndField"
+	case WorkoutActivityTypeTraditionalStrengthTraining:
+		return "WorkoutActivityTypeTraditionalStrengthTraining"
+	case WorkoutActivityTypeVolleyball:
+		return "WorkoutActivityTypeVolleyball"
+	case WorkoutActivityTypeWalking:
+		return "WorkoutActivityTypeWalking"
+	case WorkoutActivityTypeWaterFitness:
+		return "WorkoutActivityTypeWaterFitness"
+	case WorkoutActivityTypeWaterPolo:
+		return "WorkoutActivityTypeWaterPolo"
+	case WorkoutActivityTypeWaterSports:
+		return "WorkoutActivityTypeWaterSports"
+	case WorkoutActivityTypeWrestling:
+		return "WorkoutActivityTypeWrestling"
+	case WorkoutActivityTypeYoga:
+		return "WorkoutActivityTypeYoga"
+	case WorkoutActivityTypeBarre:
+		return "WorkoutActivityTypeBarre"
+	case WorkoutActivityTypeCoreTraining:
+		return "WorkoutActivityTypeCoreTraining"
+	case WorkoutActivityTypeCrossCountrySkiing:
+		return "WorkoutActivityTypeCrossCountrySkiing"
+	case WorkoutActivityTypeDownhillSkiing:
+		return "WorkoutActivityTypeDownhillSkiing"
+	case WorkoutActivityTypeFlexibility:
+		return "WorkoutActivityTypeFlexibility"
+	case WorkoutActivityTypeHighIntensityIntervalTraining:
+		return "WorkoutActivityTypeHighIntensityIntervalTraining"
+	case WorkoutActivityTypeJumpRope:
+		return "WorkoutActivityTypeJumpRope"
+	case WorkoutActivityTypeKickboxing:
+		return "WorkoutActivityTypeKickboxing"
+	case WorkoutActivityTypePilates:
+		return "WorkoutActivityTypePilates"
+	case WorkoutActivityTypeSnowboarding:
+		return "WorkoutActivityTypeSnowboarding"
+	case WorkoutActivityTypeStairs:
+		return "WorkoutActivityTypeStairs"
+	case WorkoutActivityTypeStepTraining:
+		return "WorkoutActivityTypeStepTraining"
+	case WorkoutActivityTypeWheelchairWalkPace:
+		return "WorkoutActivityTypeWheelchairWalkPace"
+	case WorkoutActivityTypeWheelchairRunPace:
+		return "WorkoutActivityTypeWheelchairRunPace"
+	case WorkoutActivityTypeTaiChi:
+		return "WorkoutActivityTypeTaiChi"
+	case WorkoutActivityTypeMixedCardio:
+		return "WorkoutActivityTypeMixedCardio"
+	case WorkoutActivityTypeHandCycling:
+		return "WorkoutActivityTypeHandCycling"
+	case WorkoutActivityTypeDiscSports:
+		return "WorkoutActivityTypeDiscSports"
+	case WorkoutActivityTypeFitnessGaming:
+		return "WorkoutActivityTypeFitnessGaming"
+	case WorkoutActivityTypeCardioDance:
+		return "WorkoutActivityTypeCardioDance"
+	case WorkoutActivityTypeSocialDance:
+		return "WorkoutActivityTypeSocialDance"
+	case WorkoutActivityTypePickleball:
+		return "WorkoutActivityTypePickleball"
+	case WorkoutActivityTypeCooldown:
+		return "WorkoutActivityTypeCooldown"
+	case WorkoutActivityTypeSwimBikeRun:
+		return "WorkoutActivityTypeSwimBikeRun"
+	case WorkoutActivityTypeTransition:
+		return "WorkoutActivityTypeTransition"
+	case WorkoutActivityTypeUnderwaterDiving:
+		return "WorkoutActivityTypeUnderwaterDiving"
+	case WorkoutActivityTypeOther:
+		return "WorkoutActivityTypeOther"
 	default:
-		return fmt.Sprintf("HKWorkoutActivityType(%d)", int64(e))
+		return fmt.Sprintf("WorkoutActivityType(%d)", int64(e))
 	}
 }
 
-type HKWorkoutEffortRelationshipQueryOptions int64
+type WorkoutEffortRelationshipQueryOptions int64
 
 const (
-	HKWorkoutEffortRelationshipQueryOptionsDefault      HKWorkoutEffortRelationshipQueryOptions = 0
-	HKWorkoutEffortRelationshipQueryOptionsMostRelevant HKWorkoutEffortRelationshipQueryOptions = 1
+	WorkoutEffortRelationshipQueryOptionsDefault      WorkoutEffortRelationshipQueryOptions = 0
+	WorkoutEffortRelationshipQueryOptionsMostRelevant WorkoutEffortRelationshipQueryOptions = 1
 )
 
-func (e HKWorkoutEffortRelationshipQueryOptions) String() string {
+func (e WorkoutEffortRelationshipQueryOptions) String() string {
 	switch e {
-	case HKWorkoutEffortRelationshipQueryOptionsDefault:
-		return "HKWorkoutEffortRelationshipQueryOptionsDefault"
-	case HKWorkoutEffortRelationshipQueryOptionsMostRelevant:
-		return "HKWorkoutEffortRelationshipQueryOptionsMostRelevant"
+	case WorkoutEffortRelationshipQueryOptionsDefault:
+		return "WorkoutEffortRelationshipQueryOptionsDefault"
+	case WorkoutEffortRelationshipQueryOptionsMostRelevant:
+		return "WorkoutEffortRelationshipQueryOptionsMostRelevant"
 	default:
-		return fmt.Sprintf("HKWorkoutEffortRelationshipQueryOptions(%d)", int64(e))
+		return fmt.Sprintf("WorkoutEffortRelationshipQueryOptions(%d)", int64(e))
 	}
 }
 
 // Constants that represent events occurring during a workout.
-type HKWorkoutEventType int64
+type WorkoutEventType int64
 
 const (
 	// A constant indicating that the workout has paused.
-	HKWorkoutEventTypePause HKWorkoutEventType = 1
+	WorkoutEventTypePause WorkoutEventType = 1
 	// A constant indicating that the workout has resumed.
-	HKWorkoutEventTypeResume HKWorkoutEventType = 2
+	WorkoutEventTypeResume WorkoutEventType = 2
 	// A constant indicating a lap.
-	HKWorkoutEventTypeLap HKWorkoutEventType = 3
+	WorkoutEventTypeLap WorkoutEventType = 3
 	// A constant indicating a point of interest during a workout session.
-	HKWorkoutEventTypeMarker HKWorkoutEventType = 4
+	WorkoutEventTypeMarker WorkoutEventType = 4
 	// A constant indicating that the system has automatically paused a workout session.
-	HKWorkoutEventTypeMotionPaused HKWorkoutEventType = 5
+	WorkoutEventTypeMotionPaused WorkoutEventType = 5
 	// A constant indicating that the system has automatically resumed a workout session.
-	HKWorkoutEventTypeMotionResumed HKWorkoutEventType = 6
+	WorkoutEventTypeMotionResumed WorkoutEventType = 6
 	// A constant indicating a period of time of interest during a workout.
-	HKWorkoutEventTypeSegment HKWorkoutEventType = 7
+	WorkoutEventTypeSegment WorkoutEventType = 7
 	// A constant indicating that the user has requested a pause or resume.
-	HKWorkoutEventTypePauseOrResumeRequest HKWorkoutEventType = 8
+	WorkoutEventTypePauseOrResumeRequest WorkoutEventType = 8
 )
 
-func (e HKWorkoutEventType) String() string {
+func (e WorkoutEventType) String() string {
 	switch e {
-	case HKWorkoutEventTypePause:
-		return "HKWorkoutEventTypePause"
-	case HKWorkoutEventTypeResume:
-		return "HKWorkoutEventTypeResume"
-	case HKWorkoutEventTypeLap:
-		return "HKWorkoutEventTypeLap"
-	case HKWorkoutEventTypeMarker:
-		return "HKWorkoutEventTypeMarker"
-	case HKWorkoutEventTypeMotionPaused:
-		return "HKWorkoutEventTypeMotionPaused"
-	case HKWorkoutEventTypeMotionResumed:
-		return "HKWorkoutEventTypeMotionResumed"
-	case HKWorkoutEventTypeSegment:
-		return "HKWorkoutEventTypeSegment"
-	case HKWorkoutEventTypePauseOrResumeRequest:
-		return "HKWorkoutEventTypePauseOrResumeRequest"
+	case WorkoutEventTypePause:
+		return "WorkoutEventTypePause"
+	case WorkoutEventTypeResume:
+		return "WorkoutEventTypeResume"
+	case WorkoutEventTypeLap:
+		return "WorkoutEventTypeLap"
+	case WorkoutEventTypeMarker:
+		return "WorkoutEventTypeMarker"
+	case WorkoutEventTypeMotionPaused:
+		return "WorkoutEventTypeMotionPaused"
+	case WorkoutEventTypeMotionResumed:
+		return "WorkoutEventTypeMotionResumed"
+	case WorkoutEventTypeSegment:
+		return "WorkoutEventTypeSegment"
+	case WorkoutEventTypePauseOrResumeRequest:
+		return "WorkoutEventTypePauseOrResumeRequest"
 	default:
-		return fmt.Sprintf("HKWorkoutEventType(%d)", int64(e))
+		return fmt.Sprintf("WorkoutEventType(%d)", int64(e))
 	}
 }
 
 // A constant indicating whether the workout session takes place indoors or outdoors.
-type HKWorkoutSessionLocationType int64
+type WorkoutSessionLocationType int64
 
 const (
 	// It is not known whether the workout session is taking place indoors or outdoors.
-	HKWorkoutSessionLocationTypeUnknown HKWorkoutSessionLocationType = 1
+	WorkoutSessionLocationTypeUnknown WorkoutSessionLocationType = 1
 	// The workout session is indoors.
-	HKWorkoutSessionLocationTypeIndoor HKWorkoutSessionLocationType = 2
+	WorkoutSessionLocationTypeIndoor WorkoutSessionLocationType = 2
 	// The workout session is outdoors.
-	HKWorkoutSessionLocationTypeOutdoor HKWorkoutSessionLocationType = 3
+	WorkoutSessionLocationTypeOutdoor WorkoutSessionLocationType = 3
 )
 
-func (e HKWorkoutSessionLocationType) String() string {
+func (e WorkoutSessionLocationType) String() string {
 	switch e {
-	case HKWorkoutSessionLocationTypeUnknown:
-		return "HKWorkoutSessionLocationTypeUnknown"
-	case HKWorkoutSessionLocationTypeIndoor:
-		return "HKWorkoutSessionLocationTypeIndoor"
-	case HKWorkoutSessionLocationTypeOutdoor:
-		return "HKWorkoutSessionLocationTypeOutdoor"
+	case WorkoutSessionLocationTypeUnknown:
+		return "WorkoutSessionLocationTypeUnknown"
+	case WorkoutSessionLocationTypeIndoor:
+		return "WorkoutSessionLocationTypeIndoor"
+	case WorkoutSessionLocationTypeOutdoor:
+		return "WorkoutSessionLocationTypeOutdoor"
 	default:
-		return fmt.Sprintf("HKWorkoutSessionLocationType(%d)", int64(e))
+		return fmt.Sprintf("WorkoutSessionLocationType(%d)", int64(e))
 	}
 }
 
 // A workout session’s state.
-type HKWorkoutSessionState int64
+type WorkoutSessionState int64
 
 const (
 	// The workout session has not started.
-	HKWorkoutSessionStateNotStarted HKWorkoutSessionState = 1
+	WorkoutSessionStateNotStarted WorkoutSessionState = 1
 	// The workout session is running.
-	HKWorkoutSessionStateRunning HKWorkoutSessionState = 2
+	WorkoutSessionStateRunning WorkoutSessionState = 2
 	// The workout session has ended.
-	HKWorkoutSessionStateEnded HKWorkoutSessionState = 3
+	WorkoutSessionStateEnded WorkoutSessionState = 3
 	// The workout session has paused.
-	HKWorkoutSessionStatePaused HKWorkoutSessionState = 4
+	WorkoutSessionStatePaused WorkoutSessionState = 4
 	// The session is ready but not yet running.
-	HKWorkoutSessionStatePrepared HKWorkoutSessionState = 5
+	WorkoutSessionStatePrepared WorkoutSessionState = 5
 	// The session has stopped.
-	HKWorkoutSessionStateStopped HKWorkoutSessionState = 6
+	WorkoutSessionStateStopped WorkoutSessionState = 6
 )
 
-func (e HKWorkoutSessionState) String() string {
+func (e WorkoutSessionState) String() string {
 	switch e {
-	case HKWorkoutSessionStateNotStarted:
-		return "HKWorkoutSessionStateNotStarted"
-	case HKWorkoutSessionStateRunning:
-		return "HKWorkoutSessionStateRunning"
-	case HKWorkoutSessionStateEnded:
-		return "HKWorkoutSessionStateEnded"
-	case HKWorkoutSessionStatePaused:
-		return "HKWorkoutSessionStatePaused"
-	case HKWorkoutSessionStatePrepared:
-		return "HKWorkoutSessionStatePrepared"
-	case HKWorkoutSessionStateStopped:
-		return "HKWorkoutSessionStateStopped"
+	case WorkoutSessionStateNotStarted:
+		return "WorkoutSessionStateNotStarted"
+	case WorkoutSessionStateRunning:
+		return "WorkoutSessionStateRunning"
+	case WorkoutSessionStateEnded:
+		return "WorkoutSessionStateEnded"
+	case WorkoutSessionStatePaused:
+		return "WorkoutSessionStatePaused"
+	case WorkoutSessionStatePrepared:
+		return "WorkoutSessionStatePrepared"
+	case WorkoutSessionStateStopped:
+		return "WorkoutSessionStateStopped"
 	default:
-		return fmt.Sprintf("HKWorkoutSessionState(%d)", int64(e))
+		return fmt.Sprintf("WorkoutSessionState(%d)", int64(e))
 	}
 }
 
 // The type of session.
-type HKWorkoutSessionType int64
+type WorkoutSessionType int64
 
 const (
 	// A primary session running on watchOS.
-	HKWorkoutSessionTypePrimary HKWorkoutSessionType = 0
+	WorkoutSessionTypePrimary WorkoutSessionType = 0
 	// A mirrored session, running on the companion iOS device.
-	HKWorkoutSessionTypeMirrored HKWorkoutSessionType = 1
+	WorkoutSessionTypeMirrored WorkoutSessionType = 1
 )
 
-func (e HKWorkoutSessionType) String() string {
+func (e WorkoutSessionType) String() string {
 	switch e {
-	case HKWorkoutSessionTypePrimary:
-		return "HKWorkoutSessionTypePrimary"
-	case HKWorkoutSessionTypeMirrored:
-		return "HKWorkoutSessionTypeMirrored"
+	case WorkoutSessionTypePrimary:
+		return "WorkoutSessionTypePrimary"
+	case WorkoutSessionTypeMirrored:
+		return "WorkoutSessionTypeMirrored"
 	default:
-		return fmt.Sprintf("HKWorkoutSessionType(%d)", int64(e))
+		return fmt.Sprintf("WorkoutSessionType(%d)", int64(e))
 	}
 }
 
 // The possible locations for swimming.
-type HKWorkoutSwimmingLocationType int64
+type WorkoutSwimmingLocationType int64
 
 const (
 	// The swimming location could not be determined.
-	HKWorkoutSwimmingLocationTypeUnknown HKWorkoutSwimmingLocationType = 0
+	WorkoutSwimmingLocationTypeUnknown WorkoutSwimmingLocationType = 0
 	// The user swam in a pool.
-	HKWorkoutSwimmingLocationTypePool HKWorkoutSwimmingLocationType = 1
+	WorkoutSwimmingLocationTypePool WorkoutSwimmingLocationType = 1
 	// The user swam in open water like a lake or ocean.
-	HKWorkoutSwimmingLocationTypeOpenWater HKWorkoutSwimmingLocationType = 2
+	WorkoutSwimmingLocationTypeOpenWater WorkoutSwimmingLocationType = 2
 )
 
-func (e HKWorkoutSwimmingLocationType) String() string {
+func (e WorkoutSwimmingLocationType) String() string {
 	switch e {
-	case HKWorkoutSwimmingLocationTypeUnknown:
-		return "HKWorkoutSwimmingLocationTypeUnknown"
-	case HKWorkoutSwimmingLocationTypePool:
-		return "HKWorkoutSwimmingLocationTypePool"
-	case HKWorkoutSwimmingLocationTypeOpenWater:
-		return "HKWorkoutSwimmingLocationTypeOpenWater"
+	case WorkoutSwimmingLocationTypeUnknown:
+		return "WorkoutSwimmingLocationTypeUnknown"
+	case WorkoutSwimmingLocationTypePool:
+		return "WorkoutSwimmingLocationTypePool"
+	case WorkoutSwimmingLocationTypeOpenWater:
+		return "WorkoutSwimmingLocationTypeOpenWater"
 	default:
-		return fmt.Sprintf("HKWorkoutSwimmingLocationType(%d)", int64(e))
+		return fmt.Sprintf("WorkoutSwimmingLocationType(%d)", int64(e))
 	}
 }

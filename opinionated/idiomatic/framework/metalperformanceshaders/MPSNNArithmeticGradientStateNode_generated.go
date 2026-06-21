@@ -5,77 +5,84 @@
 package metalperformanceshaders
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A representation of the clamp mask used by gradient arithmetic operators.
 //
-// NNArithmeticGradientStateNode wraps [raw.MPSNNArithmeticGradientStateNode] with a fluent Go API.
+// NNArithmeticGradientStateNode is an idiomatic wrapper over the Objective-C class MPSNNArithmeticGradientStateNode.
 type NNArithmeticGradientStateNode struct {
-	inner *raw.MPSNNArithmeticGradientStateNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNArithmeticGradientStateNode].
-func (x *NNArithmeticGradientStateNode) Unwrap() *raw.MPSNNArithmeticGradientStateNode {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNArithmeticGradientStateNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNArithmeticGradientStateNodeFromID adopts an existing object pointer as a NNArithmeticGradientStateNode (nil for 0).
+// NNArithmeticGradientStateNodeFromID adopts an existing Objective-C object as a NNArithmeticGradientStateNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNArithmeticGradientStateNodeFromID(id objc.ID) *NNArithmeticGradientStateNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNArithmeticGradientStateNode{inner: raw.MPSNNArithmeticGradientStateNodeFromID(id)}
+	x := &NNArithmeticGradientStateNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNNArithmeticGradientStateNode creates a new [NNArithmeticGradientStateNode].
+// nNArithmeticGradientStateNodeAdopt wraps an Objective-C object that this code just created as a
+// NNArithmeticGradientStateNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNArithmeticGradientStateNodeAdopt(id objc.ID) *NNArithmeticGradientStateNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNArithmeticGradientStateNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NNArithmeticGradientStateNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNArithmeticGradientStateNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNArithmeticGradientStateNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNNArithmeticGradientStateNode creates a new NNArithmeticGradientStateNode.
 func NewNNArithmeticGradientStateNode() *NNArithmeticGradientStateNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNArithmeticGradientStateNode")), objc.RegisterName("new"))
-	return &NNArithmeticGradientStateNode{inner: raw.MPSNNArithmeticGradientStateNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNArithmeticGradientStateNode")), objc.RegisterName("new"))
+	return nNArithmeticGradientStateNodeAdopt(_id)
 }
 
-// @abstract   MPS resource identification @discussion See MPSHandle protocol reference.  Default: nil
+// Tag a state node for view later Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
 //
-// WithHandle sets the handle property and returns the receiver for chaining.
-func (x *NNArithmeticGradientStateNode) WithHandle(handle mpsneuralnetwork.MPSHandle) *NNArithmeticGradientStateNode {
-	x.inner.MPSNNBinaryGradientStateNode.MPSNNStateNode.SetHandle(handle)
-	return x
-}
-
-// @abstract   Tag a state node for view later @discussion Most state nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... resultStates:... list. CAUTION: exporting an state from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the state. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
-//
-// WithExportFromGraph sets the exportFromGraph property and returns the receiver for chaining.
+// WithExportFromGraph sets exportFromGraph and returns the receiver so calls can be chained.
 func (x *NNArithmeticGradientStateNode) WithExportFromGraph(exportFromGraph bool) *NNArithmeticGradientStateNode {
-	x.inner.MPSNNBinaryGradientStateNode.MPSNNStateNode.SetExportFromGraph(exportFromGraph)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
 	return x
 }
 
-// @abstract   Set to true to cause the resource to be synchronized with the CPU @discussion Ignored on non-MacOS.
+// Set to true to cause the resource to be synchronized with the CPU Ignored on non-MacOS.
 //
-// WithSynchronizeResource sets the synchronizeResource property and returns the receiver for chaining.
+// WithSynchronizeResource sets synchronizeResource and returns the receiver so calls can be chained.
 func (x *NNArithmeticGradientStateNode) WithSynchronizeResource(synchronizeResource bool) *NNArithmeticGradientStateNode {
-	x.inner.MPSNNBinaryGradientStateNode.MPSNNStateNode.SetSynchronizeResource(synchronizeResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
 	return x
-}
-
-func (x *NNArithmeticGradientStateNode) asNNBinaryGradientStateNode() *mpsneuralnetwork.MPSNNBinaryGradientStateNode {
-	return &x.inner.MPSNNBinaryGradientStateNode
-}
-
-func (x *NNArithmeticGradientStateNode) asNNStateNode() *mpsneuralnetwork.MPSNNStateNode {
-	return &x.inner.MPSNNBinaryGradientStateNode.MPSNNStateNode
 }
 
 // NNArithmeticGradientStateNodeable is the interface implemented by [NNArithmeticGradientStateNode], for mocking and DI.
 type NNArithmeticGradientStateNodeable interface {
-	Unwrap() *raw.MPSNNArithmeticGradientStateNode
-	WithHandle(handle mpsneuralnetwork.MPSHandle) *NNArithmeticGradientStateNode
+	obj.Object
 	WithExportFromGraph(exportFromGraph bool) *NNArithmeticGradientStateNode
 	WithSynchronizeResource(synchronizeResource bool) *NNArithmeticGradientStateNode
 }

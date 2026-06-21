@@ -5,76 +5,97 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// EditMessageIntent wraps [raw.INEditMessageIntent] with a fluent Go API.
+// EditMessageIntent is an idiomatic wrapper over the Objective-C class INEditMessageIntent.
 type EditMessageIntent struct {
-	inner *raw.INEditMessageIntent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INEditMessageIntent].
-func (x *EditMessageIntent) Unwrap() *raw.INEditMessageIntent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EditMessageIntent) ID() objc.ID { return x.inner.Ptr() }
-
-// EditMessageIntentFromID adopts an existing object pointer as a EditMessageIntent (nil for 0).
+// EditMessageIntentFromID adopts an existing Objective-C object as a EditMessageIntent
+// (nil for 0), retaining it and registering a release finalizer.
 func EditMessageIntentFromID(id objc.ID) *EditMessageIntent {
 	if id == 0 {
 		return nil
 	}
-	return &EditMessageIntent{inner: raw.INEditMessageIntentFromID(id)}
+	x := &EditMessageIntent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEditMessageIntentWithMessageIdentifierEditedContent creates a new [EditMessageIntent].
+// editMessageIntentAdopt wraps an Objective-C object that this code just created as a
+// EditMessageIntent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func editMessageIntentAdopt(id objc.ID) *EditMessageIntent {
+	if id == 0 {
+		return nil
+	}
+	x := &EditMessageIntent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EditMessageIntent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EditMessageIntent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EditMessageIntent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEditMessageIntentWithMessageIdentifierEditedContent creates a new EditMessageIntent.
 func NewEditMessageIntentWithMessageIdentifierEditedContent(messageIdentifier string, editedContent string) *EditMessageIntent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INEditMessageIntent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMessageIdentifier:editedContent:"), foundation.NSStringStringWithUTF8String(messageIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(editedContent).Ptr())
-	return &EditMessageIntent{inner: raw.INEditMessageIntentFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INEditMessageIntent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMessageIdentifier:editedContent:"), purego.NSString(messageIdentifier), purego.NSString(editedContent))
+	return editMessageIntentAdopt(_id)
 }
 
 // The intent’s display name.
 //
-// WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
+// WithSuggestedInvocationPhrase sets suggestedInvocationPhrase and returns the receiver so calls can be chained.
 func (x *EditMessageIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *EditMessageIntent {
-	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
 	return x
 }
 
-// WithDonationMetadata sets the donationMetadata property and returns the receiver for chaining.
+// WithDonationMetadata sets donationMetadata and returns the receiver so calls can be chained.
 func (x *EditMessageIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *EditMessageIntent {
-	x.inner.INIntent.SetDonationMetadata(donationMetadata.asIntentDonationMetadata())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return x
 }
 
-// MessageIdentifier calls the underlying MessageIdentifier.
 func (x *EditMessageIntent) MessageIdentifier() string {
-	_r := x.inner.MessageIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// EditedContent calls the underlying EditedContent.
 func (x *EditMessageIntent) EditedContent() string {
-	_r := x.inner.EditedContent()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("editedContent"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *EditMessageIntent) asIntent() *raw.INIntent { return &x.inner.INIntent }
 
 // EditMessageIntentable is the interface implemented by [EditMessageIntent], for mocking and DI.
 type EditMessageIntentable interface {
-	Unwrap() *raw.INEditMessageIntent
+	obj.Object
 	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *EditMessageIntent
 	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *EditMessageIntent
 	MessageIdentifier() string

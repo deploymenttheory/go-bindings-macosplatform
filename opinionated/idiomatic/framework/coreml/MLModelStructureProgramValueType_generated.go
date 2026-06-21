@@ -5,43 +5,68 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class representing the type of a value or a variable in the Program.
 //
-// ModelStructureProgramValueType wraps [raw.MLModelStructureProgramValueType] with a fluent Go API.
+// ModelStructureProgramValueType is an idiomatic wrapper over the Objective-C class MLModelStructureProgramValueType.
 type ModelStructureProgramValueType struct {
-	inner *raw.MLModelStructureProgramValueType
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLModelStructureProgramValueType].
-func (x *ModelStructureProgramValueType) Unwrap() *raw.MLModelStructureProgramValueType {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ModelStructureProgramValueType) ID() objc.ID { return x.inner.Ptr() }
-
-// ModelStructureProgramValueTypeFromID adopts an existing object pointer as a ModelStructureProgramValueType (nil for 0).
+// ModelStructureProgramValueTypeFromID adopts an existing Objective-C object as a ModelStructureProgramValueType
+// (nil for 0), retaining it and registering a release finalizer.
 func ModelStructureProgramValueTypeFromID(id objc.ID) *ModelStructureProgramValueType {
 	if id == 0 {
 		return nil
 	}
-	return &ModelStructureProgramValueType{inner: raw.MLModelStructureProgramValueTypeFromID(id)}
+	x := &ModelStructureProgramValueType{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewModelStructureProgramValueType creates a new [ModelStructureProgramValueType].
+// modelStructureProgramValueTypeAdopt wraps an Objective-C object that this code just created as a
+// ModelStructureProgramValueType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func modelStructureProgramValueTypeAdopt(id objc.ID) *ModelStructureProgramValueType {
+	if id == 0 {
+		return nil
+	}
+	x := &ModelStructureProgramValueType{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ModelStructureProgramValueType) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ModelStructureProgramValueType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ModelStructureProgramValueType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewModelStructureProgramValueType creates a new ModelStructureProgramValueType.
 func NewModelStructureProgramValueType() *ModelStructureProgramValueType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLModelStructureProgramValueType")), objc.RegisterName("new"))
-	return &ModelStructureProgramValueType{inner: raw.MLModelStructureProgramValueTypeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructureProgramValueType")), objc.RegisterName("new"))
+	return modelStructureProgramValueTypeAdopt(_id)
 }
 
 // ModelStructureProgramValueTypeable is the interface implemented by [ModelStructureProgramValueType], for mocking and DI.
 type ModelStructureProgramValueTypeable interface {
-	Unwrap() *raw.MLModelStructureProgramValueType
+	obj.Object
 }
 
 var _ ModelStructureProgramValueTypeable = (*ModelStructureProgramValueType)(nil)

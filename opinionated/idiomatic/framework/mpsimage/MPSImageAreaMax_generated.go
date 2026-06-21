@@ -5,103 +5,80 @@
 package mpsimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ImageAreaMax wraps [raw.MPSImageAreaMax] with a fluent Go API.
+// ImageAreaMax is an idiomatic wrapper over the Objective-C class MPSImageAreaMax.
 type ImageAreaMax struct {
-	inner *raw.MPSImageAreaMax
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageAreaMax].
-func (x *ImageAreaMax) Unwrap() *raw.MPSImageAreaMax { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageAreaMax) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageAreaMaxFromID adopts an existing object pointer as a ImageAreaMax (nil for 0).
+// ImageAreaMaxFromID adopts an existing Objective-C object as a ImageAreaMax
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageAreaMaxFromID(id objc.ID) *ImageAreaMax {
 	if id == 0 {
 		return nil
 	}
-	return &ImageAreaMax{inner: raw.MPSImageAreaMaxFromID(id)}
-}
-
-// @abstract Set the kernel height and width @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel. Must be an odd number. @param      kernelHeight        The height of the kernel. Must be an odd number.
-//
-// NewImageAreaMaxWithDeviceKernelWidthKernelHeight creates a new [ImageAreaMax].
-func NewImageAreaMaxWithDeviceKernelWidthKernelHeight(device metal.MTLDevice, kernelWidth uint, kernelHeight uint) *ImageAreaMax {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageAreaMax")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:"), device, kernelWidth, kernelHeight)
-	return &ImageAreaMax{inner: raw.MPSImageAreaMaxFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewImageAreaMaxWithCoderDevice creates a new [ImageAreaMax].
-func NewImageAreaMaxWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageAreaMax {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageAreaMax")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageAreaMax{inner: raw.MPSImageAreaMaxFromID(_id)}
-}
-
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageAreaMax) WithOffset(offset mpscore.MPSOffset) *ImageAreaMax {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	x := &ImageAreaMax{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageAreaMax) WithClipRect(clipRect metal.MTLRegion) *ImageAreaMax {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+// imageAreaMaxAdopt wraps an Objective-C object that this code just created as a
+// ImageAreaMax (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageAreaMaxAdopt(id objc.ID) *ImageAreaMax {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageAreaMax{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageAreaMax) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageAreaMax {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
+// Description returns the object's -description text.
+func (x *ImageAreaMax) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property kernelHeight @abstract  The height of the filter window. Must be an odd number.
-//
-// KernelHeight calls the underlying KernelHeight.
-func (x *ImageAreaMax) KernelHeight() uint {
-	return x.inner.KernelHeight()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageAreaMax) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property kernelWidth @abstract  The width of the filter window. Must be an odd number.
-//
-// KernelWidth calls the underlying KernelWidth.
-func (x *ImageAreaMax) KernelWidth() uint {
-	return x.inner.KernelWidth()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageAreaMax) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-func (x *ImageAreaMax) asImageAreaMax() *raw.MPSImageAreaMax { return x.inner }
+// NewImageAreaMax creates a new ImageAreaMax.
+func NewImageAreaMax() *ImageAreaMax {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageAreaMax")), objc.RegisterName("new"))
+	return imageAreaMaxAdopt(_id)
+}
 
-func (x *ImageAreaMax) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
+// The height of the filter window. Must be an odd number.
+func (x *ImageAreaMax) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+	return _r
+}
+
+// The width of the filter window. Must be an odd number.
+func (x *ImageAreaMax) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+	return _r
 }
 
 // ImageAreaMaxable is the interface implemented by [ImageAreaMax], for mocking and DI.
 type ImageAreaMaxable interface {
-	Unwrap() *raw.MPSImageAreaMax
-	WithOffset(offset mpscore.MPSOffset) *ImageAreaMax
-	WithClipRect(clipRect metal.MTLRegion) *ImageAreaMax
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageAreaMax
-	KernelHeight() uint
-	KernelWidth() uint
+	obj.Object
+	KernelHeight() int
+	KernelWidth() int
 }
 
 var _ ImageAreaMaxable = (*ImageAreaMax)(nil)

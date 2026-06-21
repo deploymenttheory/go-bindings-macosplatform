@@ -5,80 +5,92 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A proxy for objects in other applications or threads.
 //
-// DistantObject wraps [raw.NSDistantObject] with a fluent Go API.
+// DistantObject is an idiomatic wrapper over the Objective-C class NSDistantObject.
 type DistantObject struct {
-	inner *raw.NSDistantObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSDistantObject].
-func (x *DistantObject) Unwrap() *raw.NSDistantObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DistantObject) ID() objc.ID { return x.inner.Ptr() }
-
-// DistantObjectFromID adopts an existing object pointer as a DistantObject (nil for 0).
+// DistantObjectFromID adopts an existing Objective-C object as a DistantObject
+// (nil for 0), retaining it and registering a release finalizer.
 func DistantObjectFromID(id objc.ID) *DistantObject {
 	if id == 0 {
 		return nil
 	}
-	return &DistantObject{inner: raw.NSDistantObjectFromID(id)}
+	x := &DistantObject{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// distantObjectAdopt wraps an Objective-C object that this code just created as a
+// DistantObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func distantObjectAdopt(id objc.ID) *DistantObject {
+	if id == 0 {
+		return nil
+	}
+	x := &DistantObject{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DistantObject) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DistantObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DistantObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a newly allocated NSDistantObject as a remote proxy for target, which is an id in another thread or another application’s address space.
 //
-// NewDistantObjectWithTargetConnection creates a new [DistantObject].
-func NewDistantObjectWithTargetConnection(target objc.ID, connection *raw.NSConnection) *DistantObject {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDistantObject")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTarget:connection:"), target, connection.Ptr())
-	return &DistantObject{inner: raw.NSDistantObjectFromID(_id)}
+// NewDistantObjectWithTargetConnection creates a new DistantObject.
+func NewDistantObjectWithTargetConnection(target obj.Object, connection *Connection) *DistantObject {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDistantObject")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTarget:connection:"), objref.IDOf(target), objref.IDOf(connection))
+	return distantObjectAdopt(_id)
 }
 
 // Initializes an NSDistantObject object as a local proxy for a given object.
 //
-// NewDistantObjectWithLocalConnection creates a new [DistantObject].
-func NewDistantObjectWithLocalConnection(target objc.ID, connection *raw.NSConnection) *DistantObject {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDistantObject")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocal:connection:"), target, connection.Ptr())
-	return &DistantObject{inner: raw.NSDistantObjectFromID(_id)}
+// NewDistantObjectWithLocalConnection creates a new DistantObject.
+func NewDistantObjectWithLocalConnection(target obj.Object, connection *Connection) *DistantObject {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDistantObject")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocal:connection:"), objref.IDOf(target), objref.IDOf(connection))
+	return distantObjectAdopt(_id)
 }
 
-// NewDistantObjectWithCoder creates a new [DistantObject].
-func NewDistantObjectWithCoder(inCoder *raw.NSCoder) *DistantObject {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDistantObject")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), inCoder.Ptr())
-	return &DistantObject{inner: raw.NSDistantObjectFromID(_id)}
+// NewDistantObjectWithCoder creates a new DistantObject.
+func NewDistantObjectWithCoder(inCoder *Coder) *DistantObject {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDistantObject")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(inCoder))
+	return distantObjectAdopt(_id)
 }
 
-// Sets the methods known to be handled by the receiver to those in a given protocol.
-//
-// SetProtocolForProxy calls the underlying SetProtocolForProxy.
-func (x *DistantObject) SetProtocolForProxy(proto unsafe.Pointer) {
-	x.inner.SetProtocolForProxy(proto)
-}
-
-// ConnectionForProxy calls the underlying ConnectionForProxy.
 func (x *DistantObject) ConnectionForProxy() *Connection {
-	_r := x.inner.ConnectionForProxy()
-	if _r == nil {
-		return nil
-	}
-	return &Connection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectionForProxy"))
+	return ConnectionFromID(_r)
 }
-
-func (x *DistantObject) asProxy() *raw.NSProxy { return &x.inner.NSProxy }
 
 // DistantObjectable is the interface implemented by [DistantObject], for mocking and DI.
 type DistantObjectable interface {
-	Unwrap() *raw.NSDistantObject
-	SetProtocolForProxy(proto unsafe.Pointer)
+	obj.Object
 	ConnectionForProxy() *Connection
 }
 

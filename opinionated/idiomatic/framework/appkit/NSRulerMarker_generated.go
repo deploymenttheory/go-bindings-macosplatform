@@ -5,226 +5,173 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A symbol on a ruler view, indicating a location for the graphics element it represents in the client of the ruler view.
 //
-// RulerMarker wraps [raw.NSRulerMarker] with a fluent Go API.
+// RulerMarker is an idiomatic wrapper over the Objective-C class NSRulerMarker.
 type RulerMarker struct {
-	inner *raw.NSRulerMarker
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSRulerMarker].
-func (x *RulerMarker) Unwrap() *raw.NSRulerMarker { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RulerMarker) ID() objc.ID { return x.inner.Ptr() }
-
-// RulerMarkerFromID adopts an existing object pointer as a RulerMarker (nil for 0).
+// RulerMarkerFromID adopts an existing Objective-C object as a RulerMarker
+// (nil for 0), retaining it and registering a release finalizer.
 func RulerMarkerFromID(id objc.ID) *RulerMarker {
 	if id == 0 {
 		return nil
 	}
-	return &RulerMarker{inner: raw.NSRulerMarkerFromID(id)}
+	x := &RulerMarker{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes a newly allocated ruler marker, associating it with (but not adding it to) a specified ruler view and assigning the attributes provided.
-//
-// NewRulerMarkerWithRulerViewMarkerLocationImageImageOrigin creates a new [RulerMarker].
-func NewRulerMarkerWithRulerViewMarkerLocationImageImageOrigin(ruler *raw.NSRulerView, location float64, image *raw.NSImage, imageOrigin corefoundation.CGPoint) *RulerMarker {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSRulerMarker")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRulerView:markerLocation:image:imageOrigin:"), ruler.Ptr(), location, image.Ptr(), imageOrigin)
-	return &RulerMarker{inner: raw.NSRulerMarkerFromID(_id)}
+// rulerMarkerAdopt wraps an Objective-C object that this code just created as a
+// RulerMarker (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rulerMarkerAdopt(id objc.ID) *RulerMarker {
+	if id == 0 {
+		return nil
+	}
+	x := &RulerMarker{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// NewRulerMarkerWithCoder creates a new [RulerMarker].
-func NewRulerMarkerWithCoder(coder *foundation.NSCoder) *RulerMarker {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSRulerMarker")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &RulerMarker{inner: raw.NSRulerMarkerFromID(_id)}
+// Description returns the object's -description text.
+func (x *RulerMarker) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RulerMarker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RulerMarker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRulerMarkerWithCoder creates a new RulerMarker.
+func NewRulerMarkerWithCoder(coder obj.Object) *RulerMarker {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSRulerMarker")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return rulerMarkerAdopt(_id)
 }
 
 // The location of the receiver in the coordinate system of the ruler view’s client view.
 //
-// WithMarkerLocation sets the markerLocation property and returns the receiver for chaining.
+// WithMarkerLocation sets markerLocation and returns the receiver so calls can be chained.
 func (x *RulerMarker) WithMarkerLocation(markerLocation float64) *RulerMarker {
-	x.inner.SetMarkerLocation(markerLocation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarkerLocation:"), markerLocation)
 	return x
 }
 
 // The receiver’s image.
 //
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage sets image and returns the receiver so calls can be chained.
 func (x *RulerMarker) WithImage(image *Image) *RulerMarker {
-	x.inner.SetImage(image.Unwrap())
-	return x
-}
-
-// The point in the receiver’s image that is positioned at the receiver’s location on the ruler view.
-//
-// WithImageOrigin sets the imageOrigin property and returns the receiver for chaining.
-func (x *RulerMarker) WithImageOrigin(imageOrigin corefoundation.CGPoint) *RulerMarker {
-	x.inner.SetImageOrigin(imageOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
 // A Boolean that indicates whether the user can move the receiver in its ruler view.
 //
-// WithMovable sets the movable property and returns the receiver for chaining.
+// WithMovable sets movable and returns the receiver so calls can be chained.
 func (x *RulerMarker) WithMovable(movable bool) *RulerMarker {
-	x.inner.SetMovable(movable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovable:"), movable)
 	return x
 }
 
 // A Boolean that indicates whether the user can remove the receiver from its ruler view.
 //
-// WithRemovable sets the removable property and returns the receiver for chaining.
+// WithRemovable sets removable and returns the receiver so calls can be chained.
 func (x *RulerMarker) WithRemovable(removable bool) *RulerMarker {
-	x.inner.SetRemovable(removable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovable:"), removable)
 	return x
-}
-
-// The object the receiver represents.
-//
-// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
-func (x *RulerMarker) WithRepresentedObject(representedObject foundation.NSCopying) *RulerMarker {
-	x.inner.SetRepresentedObject(representedObject)
-	return x
-}
-
-// Draws the receiver’s image that appears in the supplied rectangle.
-//
-// DrawRect calls the underlying DrawRect.
-func (x *RulerMarker) DrawRect(rect corefoundation.CGRect) {
-	x.inner.DrawRect(rect)
 }
 
 // Handles user manipulation of the receiver in its ruler view.
-//
-// TrackMouseAdding calls the underlying TrackMouseAdding.
-func (x *RulerMarker) TrackMouseAdding(mouseDownEvent *raw.NSEvent, isAdding bool) bool {
-	return x.inner.TrackMouseAdding(mouseDownEvent, isAdding)
+func (x *RulerMarker) TrackMouseAdding(mouseDownEvent *Event, isAdding bool) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("trackMouse:adding:"), objref.IDOf(mouseDownEvent), isAdding)
+	return _r
 }
 
-// Ruler calls the underlying Ruler.
 func (x *RulerMarker) Ruler() *RulerView {
-	_r := x.inner.Ruler()
-	if _r == nil {
-		return nil
-	}
-	return &RulerView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ruler"))
+	return RulerViewFromID(_r)
 }
 
-// MarkerLocation calls the underlying MarkerLocation.
 func (x *RulerMarker) MarkerLocation() float64 {
-	return x.inner.MarkerLocation()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("markerLocation"))
+	return _r
 }
 
-// SetMarkerLocation calls the underlying SetMarkerLocation.
 func (x *RulerMarker) SetMarkerLocation(markerLocation float64) {
-	x.inner.SetMarkerLocation(markerLocation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarkerLocation:"), markerLocation)
 }
 
-// Image calls the underlying Image.
 func (x *RulerMarker) Image() *Image {
-	_r := x.inner.Image()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+	return ImageFromID(_r)
 }
 
-// SetImage calls the underlying SetImage.
-func (x *RulerMarker) SetImage(image *raw.NSImage) {
-	x.inner.SetImage(image)
+func (x *RulerMarker) SetImage(image *Image) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 }
 
-// ImageOrigin calls the underlying ImageOrigin.
-func (x *RulerMarker) ImageOrigin() corefoundation.CGPoint {
-	return x.inner.ImageOrigin()
-}
-
-// SetImageOrigin calls the underlying SetImageOrigin.
-func (x *RulerMarker) SetImageOrigin(imageOrigin corefoundation.CGPoint) {
-	x.inner.SetImageOrigin(imageOrigin)
-}
-
-// IsMovable calls the underlying IsMovable.
 func (x *RulerMarker) IsMovable() bool {
-	return x.inner.IsMovable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMovable"))
+	return _r
 }
 
-// SetMovable calls the underlying SetMovable.
 func (x *RulerMarker) SetMovable(movable bool) {
-	x.inner.SetMovable(movable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovable:"), movable)
 }
 
-// IsRemovable calls the underlying IsRemovable.
 func (x *RulerMarker) IsRemovable() bool {
-	return x.inner.IsRemovable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRemovable"))
+	return _r
 }
 
-// SetRemovable calls the underlying SetRemovable.
 func (x *RulerMarker) SetRemovable(removable bool) {
-	x.inner.SetRemovable(removable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovable:"), removable)
 }
 
-// IsDragging calls the underlying IsDragging.
 func (x *RulerMarker) IsDragging() bool {
-	return x.inner.IsDragging()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDragging"))
+	return _r
 }
 
-// RepresentedObject calls the underlying RepresentedObject.
-func (x *RulerMarker) RepresentedObject() foundation.NSCopying {
-	return x.inner.RepresentedObject()
-}
-
-// SetRepresentedObject calls the underlying SetRepresentedObject.
-func (x *RulerMarker) SetRepresentedObject(representedObject foundation.NSCopying) {
-	x.inner.SetRepresentedObject(representedObject)
-}
-
-// ImageRectInRuler calls the underlying ImageRectInRuler.
-func (x *RulerMarker) ImageRectInRuler() corefoundation.CGRect {
-	return x.inner.ImageRectInRuler()
-}
-
-// ThicknessRequiredInRuler calls the underlying ThicknessRequiredInRuler.
 func (x *RulerMarker) ThicknessRequiredInRuler() float64 {
-	return x.inner.ThicknessRequiredInRuler()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("thicknessRequiredInRuler"))
+	return _r
 }
 
 // RulerMarkerable is the interface implemented by [RulerMarker], for mocking and DI.
 type RulerMarkerable interface {
-	Unwrap() *raw.NSRulerMarker
+	obj.Object
 	WithMarkerLocation(markerLocation float64) *RulerMarker
 	WithImage(image *Image) *RulerMarker
-	WithImageOrigin(imageOrigin corefoundation.CGPoint) *RulerMarker
 	WithMovable(movable bool) *RulerMarker
 	WithRemovable(removable bool) *RulerMarker
-	WithRepresentedObject(representedObject foundation.NSCopying) *RulerMarker
-	DrawRect(rect corefoundation.CGRect)
-	TrackMouseAdding(mouseDownEvent *raw.NSEvent, isAdding bool) bool
+	TrackMouseAdding(mouseDownEvent *Event, isAdding bool) bool
 	Ruler() *RulerView
 	MarkerLocation() float64
 	SetMarkerLocation(markerLocation float64)
 	Image() *Image
-	SetImage(image *raw.NSImage)
-	ImageOrigin() corefoundation.CGPoint
-	SetImageOrigin(imageOrigin corefoundation.CGPoint)
+	SetImage(image *Image)
 	IsMovable() bool
 	SetMovable(movable bool)
 	IsRemovable() bool
 	SetRemovable(removable bool)
 	IsDragging() bool
-	RepresentedObject() foundation.NSCopying
-	SetRepresentedObject(representedObject foundation.NSCopying)
-	ImageRectInRuler() corefoundation.CGRect
 	ThicknessRequiredInRuler() float64
 }
 

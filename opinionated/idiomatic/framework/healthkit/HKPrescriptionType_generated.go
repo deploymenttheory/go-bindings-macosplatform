@@ -5,47 +5,68 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A type that identifies samples that store a prescription.
 //
-// PrescriptionType wraps [raw.HKPrescriptionType] with a fluent Go API.
+// PrescriptionType is an idiomatic wrapper over the Objective-C class HKPrescriptionType.
 type PrescriptionType struct {
-	inner *raw.HKPrescriptionType
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKPrescriptionType].
-func (x *PrescriptionType) Unwrap() *raw.HKPrescriptionType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PrescriptionType) ID() objc.ID { return x.inner.Ptr() }
-
-// PrescriptionTypeFromID adopts an existing object pointer as a PrescriptionType (nil for 0).
+// PrescriptionTypeFromID adopts an existing Objective-C object as a PrescriptionType
+// (nil for 0), retaining it and registering a release finalizer.
 func PrescriptionTypeFromID(id objc.ID) *PrescriptionType {
 	if id == 0 {
 		return nil
 	}
-	return &PrescriptionType{inner: raw.HKPrescriptionTypeFromID(id)}
+	x := &PrescriptionType{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPrescriptionType creates a new [PrescriptionType].
+// prescriptionTypeAdopt wraps an Objective-C object that this code just created as a
+// PrescriptionType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func prescriptionTypeAdopt(id objc.ID) *PrescriptionType {
+	if id == 0 {
+		return nil
+	}
+	x := &PrescriptionType{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PrescriptionType) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PrescriptionType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PrescriptionType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPrescriptionType creates a new PrescriptionType.
 func NewPrescriptionType() *PrescriptionType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKPrescriptionType")), objc.RegisterName("new"))
-	return &PrescriptionType{inner: raw.HKPrescriptionTypeFromID(_id)}
-}
-
-func (x *PrescriptionType) asSampleType() *raw.HKSampleType { return &x.inner.HKSampleType }
-
-func (x *PrescriptionType) asObjectType() *raw.HKObjectType {
-	return &x.inner.HKSampleType.HKObjectType
+	_id := objc.Send[objc.ID](objc.ID(_class("HKPrescriptionType")), objc.RegisterName("new"))
+	return prescriptionTypeAdopt(_id)
 }
 
 // PrescriptionTypeable is the interface implemented by [PrescriptionType], for mocking and DI.
 type PrescriptionTypeable interface {
-	Unwrap() *raw.HKPrescriptionType
+	obj.Object
 }
 
 var _ PrescriptionTypeable = (*PrescriptionType)(nil)

@@ -5,49 +5,107 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRAttributeNameForID calls [raw.MTRAttributeNameForID] (C function MTRAttributeNameForID).
-func MTRAttributeNameForID(clusterID MTRClusterIDType, attributeID MTRAttributeIDType) *foundation.NSString {
-	return raw.MTRAttributeNameForID(raw.MTRClusterIDType(clusterID), raw.MTRAttributeIDType(attributeID))
+var _fnMTRAttributeNameForID func(MTRClusterIDType, MTRAttributeIDType) objc.ID
+
+// MTRAttributeNameForID calls the Matter framework function MTRAttributeNameForID.
+func MTRAttributeNameForID(clusterID MTRClusterIDType, attributeID MTRAttributeIDType) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTRAttributeNameForID == nil {
+		ebipurego.RegisterLibFunc(&_fnMTRAttributeNameForID, _lib, "MTRAttributeNameForID")
+	}
+	_ret := _fnMTRAttributeNameForID(clusterID, attributeID)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// MTRClusterNameForID calls [raw.MTRClusterNameForID] (C function MTRClusterNameForID).
-func MTRClusterNameForID(clusterID MTRClusterIDType) *foundation.NSString {
-	return raw.MTRClusterNameForID(raw.MTRClusterIDType(clusterID))
+var _fnMTRClusterNameForID func(MTRClusterIDType) objc.ID
+
+// MTRClusterNameForID calls the Matter framework function MTRClusterNameForID.
+func MTRClusterNameForID(clusterID MTRClusterIDType) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTRClusterNameForID == nil {
+		ebipurego.RegisterLibFunc(&_fnMTRClusterNameForID, _lib, "MTRClusterNameForID")
+	}
+	_ret := _fnMTRClusterNameForID(clusterID)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// MTRDeviceControllerStorageClasses calls [raw.MTRDeviceControllerStorageClasses] (C function MTRDeviceControllerStorageClasses).
-func MTRDeviceControllerStorageClasses() *foundation.NSSet[objc.Class] {
-	return raw.MTRDeviceControllerStorageClasses()
+var _fnMTRDeviceControllerStorageClasses func() objc.ID
+
+// MTRDeviceControllerStorageClasses calls the Matter framework function MTRDeviceControllerStorageClasses.
+func MTRDeviceControllerStorageClasses() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTRDeviceControllerStorageClasses == nil {
+		ebipurego.RegisterLibFunc(&_fnMTRDeviceControllerStorageClasses, _lib, "MTRDeviceControllerStorageClasses")
+	}
+	_ret := _fnMTRDeviceControllerStorageClasses()
+	return obj.Wrap(_ret)
 }
 
-// MTREventNameForID calls [raw.MTREventNameForID] (C function MTREventNameForID).
-func MTREventNameForID(clusterID MTRClusterIDType, eventID MTREventIDType) *foundation.NSString {
-	return raw.MTREventNameForID(raw.MTRClusterIDType(clusterID), raw.MTREventIDType(eventID))
+var _fnMTREventNameForID func(MTRClusterIDType, MTREventIDType) objc.ID
+
+// MTREventNameForID calls the Matter framework function MTREventNameForID.
+func MTREventNameForID(clusterID MTRClusterIDType, eventID MTREventIDType) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTREventNameForID == nil {
+		ebipurego.RegisterLibFunc(&_fnMTREventNameForID, _lib, "MTREventNameForID")
+	}
+	_ret := _fnMTREventNameForID(clusterID, eventID)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// MTRRequestCommandNameForID calls [raw.MTRRequestCommandNameForID] (C function MTRRequestCommandNameForID).
-func MTRRequestCommandNameForID(clusterID MTRClusterIDType, commandID MTRCommandIDType) *foundation.NSString {
-	return raw.MTRRequestCommandNameForID(raw.MTRClusterIDType(clusterID), raw.MTRCommandIDType(commandID))
+var _fnMTRRequestCommandNameForID func(MTRClusterIDType, MTRCommandIDType) objc.ID
+
+// MTRRequestCommandNameForID calls the Matter framework function MTRRequestCommandNameForID.
+func MTRRequestCommandNameForID(clusterID MTRClusterIDType, commandID MTRCommandIDType) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTRRequestCommandNameForID == nil {
+		ebipurego.RegisterLibFunc(&_fnMTRRequestCommandNameForID, _lib, "MTRRequestCommandNameForID")
+	}
+	_ret := _fnMTRRequestCommandNameForID(clusterID, commandID)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// MTRResponseCommandNameForID calls [raw.MTRResponseCommandNameForID] (C function MTRResponseCommandNameForID).
-func MTRResponseCommandNameForID(clusterID MTRClusterIDType, commandID MTRCommandIDType) *foundation.NSString {
-	return raw.MTRResponseCommandNameForID(raw.MTRClusterIDType(clusterID), raw.MTRCommandIDType(commandID))
+var _fnMTRResponseCommandNameForID func(MTRClusterIDType, MTRCommandIDType) objc.ID
+
+// MTRResponseCommandNameForID calls the Matter framework function MTRResponseCommandNameForID.
+func MTRResponseCommandNameForID(clusterID MTRClusterIDType, commandID MTRCommandIDType) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTRResponseCommandNameForID == nil {
+		ebipurego.RegisterLibFunc(&_fnMTRResponseCommandNameForID, _lib, "MTRResponseCommandNameForID")
+	}
+	_ret := _fnMTRResponseCommandNameForID(clusterID, commandID)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// MTRSetLogCallback calls [raw.MTRSetLogCallback] (C function MTRSetLogCallback).
-func MTRSetLogCallback(logTypeThreshold MTRLogType, callback func(MTRLogType, *foundation.NSString, *foundation.NSString)) {
-	raw.MTRSetLogCallback(raw.MTRLogType(logTypeThreshold), func(_a0 raw.MTRLogType, _a1 *foundation.NSString, _a2 *foundation.NSString) {
-		callback(MTRLogType(_a0), _a1, _a2)
-	})
-}
+var _fnMTRSetMessageReliabilityParameters func(objc.ID, objc.ID, objc.ID, objc.ID)
 
-// MTRSetMessageReliabilityParameters calls [raw.MTRSetMessageReliabilityParameters] (C function MTRSetMessageReliabilityParameters).
-func MTRSetMessageReliabilityParameters(idleRetransmitMs *foundation.NSNumber, activeRetransmitMs *foundation.NSNumber, activeThresholdMs *foundation.NSNumber, additionalRetransmitDelayMs *foundation.NSNumber) {
-	raw.MTRSetMessageReliabilityParameters(idleRetransmitMs, activeRetransmitMs, activeThresholdMs, additionalRetransmitDelayMs)
+// MTRSetMessageReliabilityParameters calls the Matter framework function MTRSetMessageReliabilityParameters.
+func MTRSetMessageReliabilityParameters(idleRetransmitMs obj.Object, activeRetransmitMs obj.Object, activeThresholdMs obj.Object, additionalRetransmitDelayMs obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTRSetMessageReliabilityParameters == nil {
+		ebipurego.RegisterLibFunc(&_fnMTRSetMessageReliabilityParameters, _lib, "MTRSetMessageReliabilityParameters")
+	}
+	_fnMTRSetMessageReliabilityParameters(objref.IDOf(idleRetransmitMs), objref.IDOf(activeRetransmitMs), objref.IDOf(activeThresholdMs), objref.IDOf(additionalRetransmitDelayMs))
 }

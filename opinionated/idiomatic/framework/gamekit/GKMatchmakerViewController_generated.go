@@ -5,201 +5,186 @@
 package gamekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An interface that allows a player to invite other players to a real-time game and automatch to fill any empty slots.
 //
-// MatchmakerViewController wraps [raw.GKMatchmakerViewController] with a fluent Go API.
+// MatchmakerViewController is an idiomatic wrapper over the Objective-C class GKMatchmakerViewController.
 type MatchmakerViewController struct {
-	inner *raw.GKMatchmakerViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKMatchmakerViewController].
-func (x *MatchmakerViewController) Unwrap() *raw.GKMatchmakerViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatchmakerViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// MatchmakerViewControllerFromID adopts an existing object pointer as a MatchmakerViewController (nil for 0).
+// MatchmakerViewControllerFromID adopts an existing Objective-C object as a MatchmakerViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func MatchmakerViewControllerFromID(id objc.ID) *MatchmakerViewController {
 	if id == 0 {
 		return nil
 	}
-	return &MatchmakerViewController{inner: raw.GKMatchmakerViewControllerFromID(id)}
+	x := &MatchmakerViewController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// matchmakerViewControllerAdopt wraps an Objective-C object that this code just created as a
+// MatchmakerViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matchmakerViewControllerAdopt(id objc.ID) *MatchmakerViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &MatchmakerViewController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MatchmakerViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatchmakerViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatchmakerViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a matchmaker view controller for the local player to start inviting other players.
 //
-// NewMatchmakerViewControllerWithMatchRequest creates a new [MatchmakerViewController].
-func NewMatchmakerViewControllerWithMatchRequest(request *raw.GKMatchRequest) *MatchmakerViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKMatchmakerViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMatchRequest:"), request.Ptr())
-	return &MatchmakerViewController{inner: raw.GKMatchmakerViewControllerFromID(_id)}
+// NewMatchmakerViewControllerWithMatchRequest creates a new MatchmakerViewController.
+func NewMatchmakerViewControllerWithMatchRequest(request *MatchRequest) *MatchmakerViewController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKMatchmakerViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMatchRequest:"), objref.IDOf(request))
+	return matchmakerViewControllerAdopt(_id)
 }
 
 // Creates a matchmaker view controller to present to a player who accepts an invitation.
 //
-// NewMatchmakerViewControllerWithInvite creates a new [MatchmakerViewController].
-func NewMatchmakerViewControllerWithInvite(invite *raw.GKInvite) *MatchmakerViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKMatchmakerViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInvite:"), invite.Ptr())
-	return &MatchmakerViewController{inner: raw.GKMatchmakerViewControllerFromID(_id)}
-}
-
-// The object that handles matchmaker view controller changes.
-//
-// WithMatchmakerDelegate sets the matchmakerDelegate property and returns the receiver for chaining.
-func (x *MatchmakerViewController) WithMatchmakerDelegate(matchmakerDelegate raw.GKMatchmakerViewControllerDelegate) *MatchmakerViewController {
-	x.inner.SetMatchmakerDelegate(matchmakerDelegate)
-	return x
+// NewMatchmakerViewControllerWithInvite creates a new MatchmakerViewController.
+func NewMatchmakerViewControllerWithInvite(invite *Invite) *MatchmakerViewController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKMatchmakerViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInvite:"), objref.IDOf(invite))
+	return matchmakerViewControllerAdopt(_id)
 }
 
 // A Boolean value that indicates whether the match is hosted or peer-to-peer.
 //
-// WithHosted sets the hosted property and returns the receiver for chaining.
+// WithHosted sets hosted and returns the receiver so calls can be chained.
 func (x *MatchmakerViewController) WithHosted(hosted bool) *MatchmakerViewController {
-	x.inner.SetHosted(hosted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHosted:"), hosted)
 	return x
 }
 
 // The mode that a multiplayer game uses to find players.
 //
-// WithMatchmakingMode sets the matchmakingMode property and returns the receiver for chaining.
-func (x *MatchmakerViewController) WithMatchmakingMode(matchmakingMode GKMatchmakingMode) *MatchmakerViewController {
-	x.inner.SetMatchmakingMode(raw.GKMatchmakingMode(matchmakingMode))
+// WithMatchmakingMode sets matchmakingMode and returns the receiver so calls can be chained.
+func (x *MatchmakerViewController) WithMatchmakingMode(matchmakingMode MatchmakingMode) *MatchmakerViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchmakingMode:"), matchmakingMode)
 	return x
 }
 
 // A Boolean value that indicates whether your game can start after a minimum number of players join a match.
 //
-// WithCanStartWithMinimumPlayers sets the canStartWithMinimumPlayers property and returns the receiver for chaining.
+// WithCanStartWithMinimumPlayers sets canStartWithMinimumPlayers and returns the receiver so calls can be chained.
 func (x *MatchmakerViewController) WithCanStartWithMinimumPlayers(canStartWithMinimumPlayers bool) *MatchmakerViewController {
-	x.inner.SetCanStartWithMinimumPlayers(canStartWithMinimumPlayers)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanStartWithMinimumPlayers:"), canStartWithMinimumPlayers)
 	return x
 }
 
 // The default invitation message sent to a player.
 //
-// WithDefaultInvitationMessage sets the defaultInvitationMessage property and returns the receiver for chaining.
+// WithDefaultInvitationMessage sets defaultInvitationMessage and returns the receiver so calls can be chained.
 func (x *MatchmakerViewController) WithDefaultInvitationMessage(defaultInvitationMessage string) *MatchmakerViewController {
-	x.inner.SetDefaultInvitationMessage(foundation.NSStringStringWithUTF8String(defaultInvitationMessage))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultInvitationMessage:"), purego.NSString(defaultInvitationMessage))
 	return x
 }
 
 // Invites additional players to join an existing match.
-//
-// AddPlayersToMatch calls the underlying AddPlayersToMatch.
-func (x *MatchmakerViewController) AddPlayersToMatch(match *raw.GKMatch) {
-	x.inner.AddPlayersToMatch(match)
+func (x *MatchmakerViewController) AddPlayersToMatch(match *Match) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addPlayersToMatch:"), objref.IDOf(match))
 }
 
 // Updates the connection status of a player in a hosted game.
-//
-// SetHostedPlayerDidConnect calls the underlying SetHostedPlayerDidConnect.
-func (x *MatchmakerViewController) SetHostedPlayerDidConnect(player *raw.GKPlayer, connected bool) {
-	x.inner.SetHostedPlayerDidConnect(player, connected)
+func (x *MatchmakerViewController) SetHostedPlayerDidConnect(player *Player, connected bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHostedPlayer:didConnect:"), objref.IDOf(player), connected)
 }
 
-// MatchmakerDelegate calls the underlying MatchmakerDelegate.
-func (x *MatchmakerViewController) MatchmakerDelegate() raw.GKMatchmakerViewControllerDelegate {
-	return x.inner.MatchmakerDelegate()
-}
-
-// SetMatchmakerDelegate calls the underlying SetMatchmakerDelegate.
-func (x *MatchmakerViewController) SetMatchmakerDelegate(matchmakerDelegate raw.GKMatchmakerViewControllerDelegate) {
-	x.inner.SetMatchmakerDelegate(matchmakerDelegate)
-}
-
-// MatchRequest calls the underlying MatchRequest.
 func (x *MatchmakerViewController) MatchRequest() *MatchRequest {
-	_r := x.inner.MatchRequest()
-	if _r == nil {
-		return nil
-	}
-	return &MatchRequest{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchRequest"))
+	return MatchRequestFromID(_r)
 }
 
 // set to YES to receive hosted (eg. not peer-to-peer) match results. Will cause the controller to return an array of players instead of a match.
-//
-// IsHosted calls the underlying IsHosted.
 func (x *MatchmakerViewController) IsHosted() bool {
-	return x.inner.IsHosted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHosted"))
+	return _r
 }
 
-// SetHosted calls the underlying SetHosted.
 func (x *MatchmakerViewController) SetHosted(hosted bool) {
-	x.inner.SetHosted(hosted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHosted:"), hosted)
 }
 
 // this controls which mode of matchmaking to support in the UI (all, nearby only, automatch only, invite only).  Throws an exeption if you can not set to the desired mode (due to restrictions)
-//
-// MatchmakingMode calls the underlying MatchmakingMode.
-func (x *MatchmakerViewController) MatchmakingMode() GKMatchmakingMode {
-	return GKMatchmakingMode(x.inner.MatchmakingMode())
+func (x *MatchmakerViewController) MatchmakingMode() MatchmakingMode {
+	_r := objc.Send[MatchmakingMode](objref.IDOf(x), objc.RegisterName("matchmakingMode"))
+	return _r
 }
 
-// SetMatchmakingMode calls the underlying SetMatchmakingMode.
-func (x *MatchmakerViewController) SetMatchmakingMode(matchmakingMode GKMatchmakingMode) {
-	x.inner.SetMatchmakingMode(raw.GKMatchmakingMode(matchmakingMode))
+func (x *MatchmakerViewController) SetMatchmakingMode(matchmakingMode MatchmakingMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchmakingMode:"), matchmakingMode)
 }
 
 // A BOOL value to allow the GKMatchMakerViewController to return control to the game once the minimum number of players are connected. By default the value is NO, and the multiplayer match can only proceed after all players are connected. If the value is set to YES, then once the number of connected players is greater than or equal to minPlayers of the match request, matchmakerViewController:didFindMatch: will be called and the game can get the match instance, and update the game scene accordingly. The remaining players wil continue to connect.
-//
-// CanStartWithMinimumPlayers calls the underlying CanStartWithMinimumPlayers.
 func (x *MatchmakerViewController) CanStartWithMinimumPlayers() bool {
-	return x.inner.CanStartWithMinimumPlayers()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canStartWithMinimumPlayers"))
+	return _r
 }
 
-// SetCanStartWithMinimumPlayers calls the underlying SetCanStartWithMinimumPlayers.
 func (x *MatchmakerViewController) SetCanStartWithMinimumPlayers(canStartWithMinimumPlayers bool) {
-	x.inner.SetCanStartWithMinimumPlayers(canStartWithMinimumPlayers)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanStartWithMinimumPlayers:"), canStartWithMinimumPlayers)
 }
 
 // deprecated, set the message on the match request instead
-//
-// DefaultInvitationMessage calls the underlying DefaultInvitationMessage.
 func (x *MatchmakerViewController) DefaultInvitationMessage() string {
-	_r := x.inner.DefaultInvitationMessage()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultInvitationMessage"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetDefaultInvitationMessage calls the underlying SetDefaultInvitationMessage.
 func (x *MatchmakerViewController) SetDefaultInvitationMessage(defaultInvitationMessage string) {
-	x.inner.SetDefaultInvitationMessage(foundation.NSStringStringWithUTF8String(defaultInvitationMessage))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultInvitationMessage:"), purego.NSString(defaultInvitationMessage))
 }
 
 // Updates a player’s status on the view to show that the player has connected or disconnected from your server.
-//
-// SetHostedPlayerConnected calls the underlying SetHostedPlayerConnected.
 func (x *MatchmakerViewController) SetHostedPlayerConnected(playerID string, connected bool) {
-	x.inner.SetHostedPlayerConnected(foundation.NSStringStringWithUTF8String(playerID), connected)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHostedPlayer:connected:"), purego.NSString(playerID), connected)
 }
 
 // MatchmakerViewControllerable is the interface implemented by [MatchmakerViewController], for mocking and DI.
 type MatchmakerViewControllerable interface {
-	Unwrap() *raw.GKMatchmakerViewController
-	WithMatchmakerDelegate(matchmakerDelegate raw.GKMatchmakerViewControllerDelegate) *MatchmakerViewController
+	obj.Object
 	WithHosted(hosted bool) *MatchmakerViewController
-	WithMatchmakingMode(matchmakingMode GKMatchmakingMode) *MatchmakerViewController
+	WithMatchmakingMode(matchmakingMode MatchmakingMode) *MatchmakerViewController
 	WithCanStartWithMinimumPlayers(canStartWithMinimumPlayers bool) *MatchmakerViewController
 	WithDefaultInvitationMessage(defaultInvitationMessage string) *MatchmakerViewController
-	AddPlayersToMatch(match *raw.GKMatch)
-	SetHostedPlayerDidConnect(player *raw.GKPlayer, connected bool)
-	MatchmakerDelegate() raw.GKMatchmakerViewControllerDelegate
-	SetMatchmakerDelegate(matchmakerDelegate raw.GKMatchmakerViewControllerDelegate)
+	AddPlayersToMatch(match *Match)
+	SetHostedPlayerDidConnect(player *Player, connected bool)
 	MatchRequest() *MatchRequest
 	IsHosted() bool
 	SetHosted(hosted bool)
-	MatchmakingMode() GKMatchmakingMode
-	SetMatchmakingMode(matchmakingMode GKMatchmakingMode)
+	MatchmakingMode() MatchmakingMode
+	SetMatchmakingMode(matchmakingMode MatchmakingMode)
 	CanStartWithMinimumPlayers() bool
 	SetCanStartWithMinimumPlayers(canStartWithMinimumPlayers bool)
 	DefaultInvitationMessage() string

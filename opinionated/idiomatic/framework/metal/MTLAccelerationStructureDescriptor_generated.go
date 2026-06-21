@@ -5,68 +5,88 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A base class for classes that define the configuration for a new acceleration structure.
 //
-// AccelerationStructureDescriptor wraps [raw.MTLAccelerationStructureDescriptor] with a fluent Go API.
+// AccelerationStructureDescriptor is an idiomatic wrapper over the Objective-C class MTLAccelerationStructureDescriptor.
 type AccelerationStructureDescriptor struct {
-	inner *raw.MTLAccelerationStructureDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLAccelerationStructureDescriptor].
-func (x *AccelerationStructureDescriptor) Unwrap() *raw.MTLAccelerationStructureDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AccelerationStructureDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// AccelerationStructureDescriptorFromID adopts an existing object pointer as a AccelerationStructureDescriptor (nil for 0).
+// AccelerationStructureDescriptorFromID adopts an existing Objective-C object as a AccelerationStructureDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func AccelerationStructureDescriptorFromID(id objc.ID) *AccelerationStructureDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &AccelerationStructureDescriptor{inner: raw.MTLAccelerationStructureDescriptorFromID(id)}
+	x := &AccelerationStructureDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAccelerationStructureDescriptor creates a new [AccelerationStructureDescriptor].
+// accelerationStructureDescriptorAdopt wraps an Objective-C object that this code just created as a
+// AccelerationStructureDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func accelerationStructureDescriptorAdopt(id objc.ID) *AccelerationStructureDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &AccelerationStructureDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AccelerationStructureDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AccelerationStructureDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AccelerationStructureDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAccelerationStructureDescriptor creates a new AccelerationStructureDescriptor.
 func NewAccelerationStructureDescriptor() *AccelerationStructureDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLAccelerationStructureDescriptor")), objc.RegisterName("new"))
-	return &AccelerationStructureDescriptor{inner: raw.MTLAccelerationStructureDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLAccelerationStructureDescriptor")), objc.RegisterName("new"))
+	return accelerationStructureDescriptorAdopt(_id)
 }
 
 // The options that describe how you intend to use the acceleration structure.
 //
-// WithUsage sets the usage property and returns the receiver for chaining.
-func (x *AccelerationStructureDescriptor) WithUsage(usage MTLAccelerationStructureUsage) *AccelerationStructureDescriptor {
-	x.inner.SetUsage(raw.MTLAccelerationStructureUsage(usage))
+// WithUsage sets usage and returns the receiver so calls can be chained.
+func (x *AccelerationStructureDescriptor) WithUsage(usage AccelerationStructureUsage) *AccelerationStructureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
 	return x
 }
 
-// Usage calls the underlying Usage.
-func (x *AccelerationStructureDescriptor) Usage() MTLAccelerationStructureUsage {
-	return MTLAccelerationStructureUsage(x.inner.Usage())
+func (x *AccelerationStructureDescriptor) Usage() AccelerationStructureUsage {
+	_r := objc.Send[AccelerationStructureUsage](objref.IDOf(x), objc.RegisterName("usage"))
+	return _r
 }
 
-// SetUsage calls the underlying SetUsage.
-func (x *AccelerationStructureDescriptor) SetUsage(usage MTLAccelerationStructureUsage) {
-	x.inner.SetUsage(raw.MTLAccelerationStructureUsage(usage))
-}
-
-func (x *AccelerationStructureDescriptor) asAccelerationStructureDescriptor() *raw.MTLAccelerationStructureDescriptor {
-	return x.inner
+func (x *AccelerationStructureDescriptor) SetUsage(usage AccelerationStructureUsage) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
 }
 
 // AccelerationStructureDescriptorable is the interface implemented by [AccelerationStructureDescriptor], for mocking and DI.
 type AccelerationStructureDescriptorable interface {
-	Unwrap() *raw.MTLAccelerationStructureDescriptor
-	WithUsage(usage MTLAccelerationStructureUsage) *AccelerationStructureDescriptor
-	Usage() MTLAccelerationStructureUsage
-	SetUsage(usage MTLAccelerationStructureUsage)
+	obj.Object
+	WithUsage(usage AccelerationStructureUsage) *AccelerationStructureDescriptor
+	Usage() AccelerationStructureUsage
+	SetUsage(usage AccelerationStructureUsage)
 }
 
 var _ AccelerationStructureDescriptorable = (*AccelerationStructureDescriptor)(nil)

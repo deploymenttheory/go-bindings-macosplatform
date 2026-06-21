@@ -5,596 +5,516 @@
 package iobluetooth
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An instance of IOBluetoothDevice represents a single remote Bluetooth device.
 //
-// IOBluetoothDevice wraps [raw.IOBluetoothDevice] with a fluent Go API.
+// IOBluetoothDevice is an idiomatic wrapper over the Objective-C class IOBluetoothDevice.
 type IOBluetoothDevice struct {
-	inner *raw.IOBluetoothDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IOBluetoothDevice].
-func (x *IOBluetoothDevice) Unwrap() *raw.IOBluetoothDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IOBluetoothDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// IOBluetoothDeviceFromID adopts an existing object pointer as a IOBluetoothDevice (nil for 0).
+// IOBluetoothDeviceFromID adopts an existing Objective-C object as a IOBluetoothDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func IOBluetoothDeviceFromID(id objc.ID) *IOBluetoothDevice {
 	if id == 0 {
 		return nil
 	}
-	return &IOBluetoothDevice{inner: raw.IOBluetoothDeviceFromID(id)}
+	x := &IOBluetoothDevice{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewIOBluetoothDevice creates a new [IOBluetoothDevice].
-func NewIOBluetoothDevice() *IOBluetoothDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothDevice")), objc.RegisterName("new"))
-	return &IOBluetoothDevice{inner: raw.IOBluetoothDeviceFromID(_id)}
-}
-
-// Allows a client to register for device disconnect notification.
-//
-// RegisterForDisconnectNotificationSelector calls the underlying RegisterForDisconnectNotificationSelector.
-func (x *IOBluetoothDevice) RegisterForDisconnectNotificationSelector(observer objc.ID, inSelector objc.SEL) *IOBluetoothUserNotification {
-	_r := x.inner.RegisterForDisconnectNotificationSelector(observer, inSelector)
-	if _r == nil {
+// iOBluetoothDeviceAdopt wraps an Objective-C object that this code just created as a
+// IOBluetoothDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iOBluetoothDeviceAdopt(id objc.ID) *IOBluetoothDevice {
+	if id == 0 {
 		return nil
 	}
-	return &IOBluetoothUserNotification{inner: _r}
+	x := &IOBluetoothDevice{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IOBluetoothDevice) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IOBluetoothDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IOBluetoothDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewIOBluetoothDevice creates a new IOBluetoothDevice.
+func NewIOBluetoothDevice() *IOBluetoothDevice {
+	_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothDevice")), objc.RegisterName("new"))
+	return iOBluetoothDeviceAdopt(_id)
 }
 
 // Returns an IOBluetoothDeviceRef representation of the target IOBluetoothDevice object.
-//
-// GetDeviceRef calls the underlying GetDeviceRef.
-func (x *IOBluetoothDevice) GetDeviceRef() unsafe.Pointer {
-	return x.inner.GetDeviceRef()
+func (x *IOBluetoothDevice) GetDeviceRef() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getDeviceRef"))
+	return obj.Wrap(_r)
 }
 
 // Opens a new L2CAP channel to the target device. Returns only after the channel is opened.
-//
-// OpenL2CAPChannelSyncWithPSMDelegate calls the underlying OpenL2CAPChannelSyncWithPSMDelegate.
-func (x *IOBluetoothDevice) OpenL2CAPChannelSyncWithPSMDelegate(newChannel *raw.IOBluetoothL2CAPChannel, psm uint16, channelDelegate objc.ID) int {
-	return x.inner.OpenL2CAPChannelSyncWithPSMDelegate(newChannel, psm, channelDelegate)
+func (x *IOBluetoothDevice) OpenL2CAPChannelSyncWithPSMDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelDelegate obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openL2CAPChannelSync:withPSM:delegate:"), objref.IDOf(newChannel), psm, objref.IDOf(channelDelegate))
+	return _r
 }
 
 // Opens a new L2CAP channel to the target device. Returns immediately after starting the opening process.
-//
-// OpenL2CAPChannelAsyncWithPSMDelegate calls the underlying OpenL2CAPChannelAsyncWithPSMDelegate.
-func (x *IOBluetoothDevice) OpenL2CAPChannelAsyncWithPSMDelegate(newChannel *raw.IOBluetoothL2CAPChannel, psm uint16, channelDelegate objc.ID) int {
-	return x.inner.OpenL2CAPChannelAsyncWithPSMDelegate(newChannel, psm, channelDelegate)
+func (x *IOBluetoothDevice) OpenL2CAPChannelAsyncWithPSMDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelDelegate obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openL2CAPChannelAsync:withPSM:delegate:"), objref.IDOf(newChannel), psm, objref.IDOf(channelDelegate))
+	return _r
 }
 
 // Opens a new L2CAP channel to the target device. Returns immedialty after starting the opening process.
-//
-// OpenL2CAPChannelFindExistingNewChannel calls the underlying OpenL2CAPChannelFindExistingNewChannel.
-func (x *IOBluetoothDevice) OpenL2CAPChannelFindExistingNewChannel(psm uint16, findExisting bool, newChannel *raw.IOBluetoothL2CAPChannel) int {
-	return x.inner.OpenL2CAPChannelFindExistingNewChannel(psm, findExisting, newChannel)
-}
-
-// Send an echo request over the L2CAP connection to a remote device.
-//
-// SendL2CAPEchoRequestLength calls the underlying SendL2CAPEchoRequestLength.
-func (x *IOBluetoothDevice) SendL2CAPEchoRequestLength(data unsafe.Pointer, length uint16) int {
-	return x.inner.SendL2CAPEchoRequestLength(data, length)
+func (x *IOBluetoothDevice) OpenL2CAPChannelFindExistingNewChannel(psm uint16, findExisting bool, newChannel *IOBluetoothL2CAPChannel) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openL2CAPChannel:findExisting:newChannel:"), psm, findExisting, objref.IDOf(newChannel))
+	return _r
 }
 
 // Opens a new RFCOMM channel to the target device. Returns only once the channel is open or failed to open.
-//
-// OpenRFCOMMChannelChannel calls the underlying OpenRFCOMMChannelChannel.
-func (x *IOBluetoothDevice) OpenRFCOMMChannelChannel(channelID uint8, rfcommChannel *raw.IOBluetoothRFCOMMChannel) int {
-	return x.inner.OpenRFCOMMChannelChannel(channelID, rfcommChannel)
+func (x *IOBluetoothDevice) OpenRFCOMMChannelChannel(channelID uint8, rfcommChannel *IOBluetoothRFCOMMChannel) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openRFCOMMChannel:channel:"), channelID, objref.IDOf(rfcommChannel))
+	return _r
 }
 
 // Opens a new RFCOMM channel to the target device. Returns only once the channel is open or failed to open.
-//
-// OpenRFCOMMChannelSyncWithChannelIDDelegate calls the underlying OpenRFCOMMChannelSyncWithChannelIDDelegate.
-func (x *IOBluetoothDevice) OpenRFCOMMChannelSyncWithChannelIDDelegate(rfcommChannel *raw.IOBluetoothRFCOMMChannel, channelID uint8, channelDelegate objc.ID) int {
-	return x.inner.OpenRFCOMMChannelSyncWithChannelIDDelegate(rfcommChannel, channelID, channelDelegate)
+func (x *IOBluetoothDevice) OpenRFCOMMChannelSyncWithChannelIDDelegate(rfcommChannel *IOBluetoothRFCOMMChannel, channelID uint8, channelDelegate obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openRFCOMMChannelSync:withChannelID:delegate:"), objref.IDOf(rfcommChannel), channelID, objref.IDOf(channelDelegate))
+	return _r
 }
 
 // Opens a new RFCOMM channel to the target device. Returns immediately.
-//
-// OpenRFCOMMChannelAsyncWithChannelIDDelegate calls the underlying OpenRFCOMMChannelAsyncWithChannelIDDelegate.
-func (x *IOBluetoothDevice) OpenRFCOMMChannelAsyncWithChannelIDDelegate(rfcommChannel *raw.IOBluetoothRFCOMMChannel, channelID uint8, channelDelegate objc.ID) int {
-	return x.inner.OpenRFCOMMChannelAsyncWithChannelIDDelegate(rfcommChannel, channelID, channelDelegate)
+func (x *IOBluetoothDevice) OpenRFCOMMChannelAsyncWithChannelIDDelegate(rfcommChannel *IOBluetoothRFCOMMChannel, channelID uint8, channelDelegate obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openRFCOMMChannelAsync:withChannelID:delegate:"), objref.IDOf(rfcommChannel), channelID, objref.IDOf(channelDelegate))
+	return _r
 }
 
 // Gets the full class of device value for the remote device.
-//
-// GetClassOfDevice calls the underlying GetClassOfDevice.
 func (x *IOBluetoothDevice) GetClassOfDevice() uint32 {
-	return x.inner.GetClassOfDevice()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("getClassOfDevice"))
+	return _r
 }
 
 // Get the major service class of the device.
-//
-// GetServiceClassMajor calls the underlying GetServiceClassMajor.
 func (x *IOBluetoothDevice) GetServiceClassMajor() uint32 {
-	return x.inner.GetServiceClassMajor()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("getServiceClassMajor"))
+	return _r
 }
 
 // Get the major device class of the device.
-//
-// GetDeviceClassMajor calls the underlying GetDeviceClassMajor.
 func (x *IOBluetoothDevice) GetDeviceClassMajor() uint32 {
-	return x.inner.GetDeviceClassMajor()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("getDeviceClassMajor"))
+	return _r
 }
 
 // Get the minor service class of the device.
-//
-// GetDeviceClassMinor calls the underlying GetDeviceClassMinor.
 func (x *IOBluetoothDevice) GetDeviceClassMinor() uint32 {
-	return x.inner.GetDeviceClassMinor()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("getDeviceClassMinor"))
+	return _r
 }
 
 // Get the human readable name of the remote device.
-//
-// GetName calls the underlying GetName.
 func (x *IOBluetoothDevice) GetName() string {
-	_r := x.inner.GetName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Get the human readable name of the remote device. If the name is not present, it will return a string containing the device’s address.
-//
-// GetNameOrAddress calls the underlying GetNameOrAddress.
 func (x *IOBluetoothDevice) GetNameOrAddress() string {
-	_r := x.inner.GetNameOrAddress()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNameOrAddress"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Get the date/time of the last successful remote name request.
-//
-// GetLastNameUpdate calls the underlying GetLastNameUpdate.
-func (x *IOBluetoothDevice) GetLastNameUpdate() *foundation.NSDate {
-	return x.inner.GetLastNameUpdate()
-}
-
-// Get the Bluetooth device address for the target device.
-//
-// GetAddress calls the underlying GetAddress.
-func (x *IOBluetoothDevice) GetAddress() *raw.BluetoothDeviceAddress {
-	return x.inner.GetAddress()
+func (x *IOBluetoothDevice) GetLastNameUpdate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getLastNameUpdate"))
+	return obj.Wrap(_r)
 }
 
 // Get a string representation of the Bluetooth device address for the target device. The format of the string is the same as returned by IOBluetoothNSStringFromDeviceAddress().
-//
-// GetAddressString calls the underlying GetAddressString.
 func (x *IOBluetoothDevice) GetAddressString() string {
-	_r := x.inner.GetAddressString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getAddressString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Get the value of the page scan repetition mode for the device.
-//
-// GetPageScanRepetitionMode calls the underlying GetPageScanRepetitionMode.
 func (x *IOBluetoothDevice) GetPageScanRepetitionMode() uint8 {
-	return x.inner.GetPageScanRepetitionMode()
+	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("getPageScanRepetitionMode"))
+	return _r
 }
 
 // Get the value of the page scan period mode for the device.
-//
-// GetPageScanPeriodMode calls the underlying GetPageScanPeriodMode.
 func (x *IOBluetoothDevice) GetPageScanPeriodMode() uint8 {
-	return x.inner.GetPageScanPeriodMode()
+	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("getPageScanPeriodMode"))
+	return _r
 }
 
 // Get the page scan mode for the device.
-//
-// GetPageScanMode calls the underlying GetPageScanMode.
 func (x *IOBluetoothDevice) GetPageScanMode() uint8 {
-	return x.inner.GetPageScanMode()
+	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("getPageScanMode"))
+	return _r
 }
 
 // Get the clock offset value of the device.
-//
-// GetClockOffset calls the underlying GetClockOffset.
 func (x *IOBluetoothDevice) GetClockOffset() uint16 {
-	return x.inner.GetClockOffset()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getClockOffset"))
+	return _r
 }
 
 // Get the date/time of the last time the device was returned during an inquiry.
-//
-// GetLastInquiryUpdate calls the underlying GetLastInquiryUpdate.
-func (x *IOBluetoothDevice) GetLastInquiryUpdate() *foundation.NSDate {
-	return x.inner.GetLastInquiryUpdate()
+func (x *IOBluetoothDevice) GetLastInquiryUpdate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getLastInquiryUpdate"))
+	return obj.Wrap(_r)
 }
 
 // Get the RSSI device (if connected), above or below the golden range. If the RSSI is within the golden range, a value of 0 is returned. For the actual RSSI value, use getRawRSSI. For more information, see the Bluetooth 4.0 Core Specification.
-//
-// RSSI calls the underlying RSSI.
 func (x *IOBluetoothDevice) RSSI() int8 {
-	return x.inner.RSSI()
+	_r := objc.Send[int8](objref.IDOf(x), objc.RegisterName("RSSI"))
+	return _r
 }
 
 // Get the raw RSSI device (if connected).
-//
-// RawRSSI calls the underlying RawRSSI.
 func (x *IOBluetoothDevice) RawRSSI() int8 {
-	return x.inner.RawRSSI()
+	_r := objc.Send[int8](objref.IDOf(x), objc.RegisterName("rawRSSI"))
+	return _r
 }
 
 // Indicates whether a baseband connection to the device exists.
-//
-// IsConnected calls the underlying IsConnected.
 func (x *IOBluetoothDevice) IsConnected() bool {
-	return x.inner.IsConnected()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConnected"))
+	return _r
 }
 
 // Create a baseband connection to the device.
-//
-// OpenConnection calls the underlying OpenConnection.
 func (x *IOBluetoothDevice) OpenConnection() int {
-	return x.inner.OpenConnection()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openConnection"))
+	return _r
 }
 
 // Create a baseband connection to the device.
-//
-// OpenConnection2 calls the underlying OpenConnection2.
-func (x *IOBluetoothDevice) OpenConnection2(target objc.ID) int {
-	return x.inner.OpenConnection2(target)
+func (x *IOBluetoothDevice) OpenConnection2(target obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openConnection:"), objref.IDOf(target))
+	return _r
 }
 
 // Create a baseband connection to the device.
-//
-// OpenConnectionWithPageTimeoutAuthenticationRequired calls the underlying OpenConnectionWithPageTimeoutAuthenticationRequired.
-func (x *IOBluetoothDevice) OpenConnectionWithPageTimeoutAuthenticationRequired(target objc.ID, pageTimeoutValue uint16, authenticationRequired bool) int {
-	return x.inner.OpenConnectionWithPageTimeoutAuthenticationRequired(target, pageTimeoutValue, authenticationRequired)
+func (x *IOBluetoothDevice) OpenConnectionWithPageTimeoutAuthenticationRequired(target obj.Object, pageTimeoutValue uint16, authenticationRequired bool) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openConnection:withPageTimeout:authenticationRequired:"), objref.IDOf(target), pageTimeoutValue, authenticationRequired)
+	return _r
 }
 
 // Close down the baseband connection to the device.
-//
-// CloseConnection calls the underlying CloseConnection.
 func (x *IOBluetoothDevice) CloseConnection() int {
-	return x.inner.CloseConnection()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("closeConnection"))
+	return _r
 }
 
 // Issues a remote name request to the target device.
-//
-// RemoteNameRequest calls the underlying RemoteNameRequest.
-func (x *IOBluetoothDevice) RemoteNameRequest(target objc.ID) int {
-	return x.inner.RemoteNameRequest(target)
+func (x *IOBluetoothDevice) RemoteNameRequest(target obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("remoteNameRequest:"), objref.IDOf(target))
+	return _r
 }
 
 // Issues a remote name request to the target device.
-//
-// RemoteNameRequestWithPageTimeout calls the underlying RemoteNameRequestWithPageTimeout.
-func (x *IOBluetoothDevice) RemoteNameRequestWithPageTimeout(target objc.ID, pageTimeoutValue uint16) int {
-	return x.inner.RemoteNameRequestWithPageTimeout(target, pageTimeoutValue)
+func (x *IOBluetoothDevice) RemoteNameRequestWithPageTimeout(target obj.Object, pageTimeoutValue uint16) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("remoteNameRequest:withPageTimeout:"), objref.IDOf(target), pageTimeoutValue)
+	return _r
 }
 
 // Requests that the existing baseband connection be authenticated.
-//
-// RequestAuthentication calls the underlying RequestAuthentication.
 func (x *IOBluetoothDevice) RequestAuthentication() int {
-	return x.inner.RequestAuthentication()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("requestAuthentication"))
+	return _r
 }
 
 // Get the connection handle for the baseband connection.
-//
-// GetConnectionHandle calls the underlying GetConnectionHandle.
 func (x *IOBluetoothDevice) GetConnectionHandle() uint16 {
-	return x.inner.GetConnectionHandle()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getConnectionHandle"))
+	return _r
 }
 
 // Returns TRUE if the device connection was generated by the remote host.
-//
-// IsIncoming calls the underlying IsIncoming.
 func (x *IOBluetoothDevice) IsIncoming() bool {
-	return x.inner.IsIncoming()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIncoming"))
+	return _r
 }
 
 // Get the link type for the baseband connection.
-//
-// GetLinkType calls the underlying GetLinkType.
 func (x *IOBluetoothDevice) GetLinkType() uint8 {
-	return x.inner.GetLinkType()
+	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("getLinkType"))
+	return _r
 }
 
 // Get the encryption mode for the baseband connection.
-//
-// GetEncryptionMode calls the underlying GetEncryptionMode.
 func (x *IOBluetoothDevice) GetEncryptionMode() uint8 {
-	return x.inner.GetEncryptionMode()
+	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("getEncryptionMode"))
+	return _r
 }
 
 // Performs an SDP query on the target device.
-//
-// PerformSDPQuery calls the underlying PerformSDPQuery.
-func (x *IOBluetoothDevice) PerformSDPQuery(target objc.ID) int {
-	return x.inner.PerformSDPQuery(target)
+func (x *IOBluetoothDevice) PerformSDPQuery(target obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("performSDPQuery:"), objref.IDOf(target))
+	return _r
 }
 
 // Performs an SDP query on the target device with the specified service UUIDs.
-//
-// PerformSDPQueryUuids calls the underlying PerformSDPQueryUuids.
-func (x *IOBluetoothDevice) PerformSDPQueryUuids(target objc.ID, uuidArray *foundation.NSArray[objc.ID]) int {
-	return x.inner.PerformSDPQueryUuids(target, uuidArray)
+func (x *IOBluetoothDevice) PerformSDPQueryUuids(target obj.Object, uuidArray obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("performSDPQuery:uuids:"), objref.IDOf(target), objref.IDOf(uuidArray))
+	return _r
 }
 
-// GetServices calls the underlying GetServices.
-func (x *IOBluetoothDevice) GetServices() *foundation.NSArray[objc.ID] {
-	return x.inner.GetServices()
+func (x *IOBluetoothDevice) GetServices() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getServices"))
+	return obj.Wrap(_r)
 }
 
 // Get the date/time of the last SDP query.
-//
-// GetLastServicesUpdate calls the underlying GetLastServicesUpdate.
-func (x *IOBluetoothDevice) GetLastServicesUpdate() *foundation.NSDate {
-	return x.inner.GetLastServicesUpdate()
+func (x *IOBluetoothDevice) GetLastServicesUpdate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getLastServicesUpdate"))
+	return obj.Wrap(_r)
 }
 
 // Search for a service record containing the given UUID.
-//
-// GetServiceRecordForUUID calls the underlying GetServiceRecordForUUID.
-func (x *IOBluetoothDevice) GetServiceRecordForUUID(sdpUUID *raw.IOBluetoothSDPUUID) *IOBluetoothSDPServiceRecord {
-	_r := x.inner.GetServiceRecordForUUID(sdpUUID)
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothSDPServiceRecord{inner: _r}
+func (x *IOBluetoothDevice) GetServiceRecordForUUID(sdpUUID *IOBluetoothSDPUUID) *IOBluetoothSDPServiceRecord {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getServiceRecordForUUID:"), objref.IDOf(sdpUUID))
+	return IOBluetoothSDPServiceRecordFromID(_r)
 }
 
 // Reports whether the target device is a favorite for the user.
-//
-// IsFavorite calls the underlying IsFavorite.
 func (x *IOBluetoothDevice) IsFavorite() bool {
-	return x.inner.IsFavorite()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFavorite"))
+	return _r
 }
 
 // Adds the target device to the user’s favorite devices list.
-//
-// AddToFavorites calls the underlying AddToFavorites.
 func (x *IOBluetoothDevice) AddToFavorites() int {
-	return x.inner.AddToFavorites()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("addToFavorites"))
+	return _r
 }
 
 // Removes the target device from the user’s favorite devices list.
-//
-// RemoveFromFavorites calls the underlying RemoveFromFavorites.
 func (x *IOBluetoothDevice) RemoveFromFavorites() int {
-	return x.inner.RemoveFromFavorites()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("removeFromFavorites"))
+	return _r
 }
 
 // Returns the date/time of the most recent access of the target device.
-//
-// RecentAccessDate calls the underlying RecentAccessDate.
-func (x *IOBluetoothDevice) RecentAccessDate() *foundation.NSDate {
-	return x.inner.RecentAccessDate()
+func (x *IOBluetoothDevice) RecentAccessDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recentAccessDate"))
+	return obj.Wrap(_r)
 }
 
 // Returns whether the target device is paired.
-//
-// IsPaired calls the underlying IsPaired.
 func (x *IOBluetoothDevice) IsPaired() bool {
-	return x.inner.IsPaired()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaired"))
+	return _r
 }
 
 // Sets the connection supervision timeout.
-//
-// SetSupervisionTimeout calls the underlying SetSupervisionTimeout.
 func (x *IOBluetoothDevice) SetSupervisionTimeout(timeout uint16) int {
-	return x.inner.SetSupervisionTimeout(timeout)
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("setSupervisionTimeout:"), timeout)
+	return _r
 }
 
 // Opens a new L2CAP channel to the target device. Returns only after the channel is opened.
-//
-// OpenL2CAPChannelSyncWithPSMWithConfigurationDelegate calls the underlying OpenL2CAPChannelSyncWithPSMWithConfigurationDelegate.
-func (x *IOBluetoothDevice) OpenL2CAPChannelSyncWithPSMWithConfigurationDelegate(newChannel *raw.IOBluetoothL2CAPChannel, psm uint16, channelConfiguration *foundation.NSDictionary[objc.ID, objc.ID], channelDelegate objc.ID) int {
-	return x.inner.OpenL2CAPChannelSyncWithPSMWithConfigurationDelegate(newChannel, psm, channelConfiguration, channelDelegate)
+func (x *IOBluetoothDevice) OpenL2CAPChannelSyncWithPSMWithConfigurationDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelConfiguration obj.Object, channelDelegate obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openL2CAPChannelSync:withPSM:withConfiguration:delegate:"), objref.IDOf(newChannel), psm, objref.IDOf(channelConfiguration), objref.IDOf(channelDelegate))
+	return _r
 }
 
 // Opens a new L2CAP channel to the target device. Returns immediately after starting the opening process.
-//
-// OpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate calls the underlying OpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate.
-func (x *IOBluetoothDevice) OpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate(newChannel *raw.IOBluetoothL2CAPChannel, psm uint16, channelConfiguration *foundation.NSDictionary[objc.ID, objc.ID], channelDelegate objc.ID) int {
-	return x.inner.OpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate(newChannel, psm, channelConfiguration, channelDelegate)
+func (x *IOBluetoothDevice) OpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelConfiguration obj.Object, channelDelegate obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("openL2CAPChannelAsync:withPSM:withConfiguration:delegate:"), objref.IDOf(newChannel), psm, objref.IDOf(channelConfiguration), objref.IDOf(channelDelegate))
+	return _r
 }
 
-// ClassOfDevice calls the underlying ClassOfDevice.
 func (x *IOBluetoothDevice) ClassOfDevice() uint32 {
-	return x.inner.ClassOfDevice()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("classOfDevice"))
+	return _r
 }
 
-// ServiceClassMajor calls the underlying ServiceClassMajor.
 func (x *IOBluetoothDevice) ServiceClassMajor() uint32 {
-	return x.inner.ServiceClassMajor()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("serviceClassMajor"))
+	return _r
 }
 
-// DeviceClassMajor calls the underlying DeviceClassMajor.
 func (x *IOBluetoothDevice) DeviceClassMajor() uint32 {
-	return x.inner.DeviceClassMajor()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("deviceClassMajor"))
+	return _r
 }
 
-// DeviceClassMinor calls the underlying DeviceClassMinor.
 func (x *IOBluetoothDevice) DeviceClassMinor() uint32 {
-	return x.inner.DeviceClassMinor()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("deviceClassMinor"))
+	return _r
 }
 
-// Name calls the underlying Name.
 func (x *IOBluetoothDevice) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// NameOrAddress calls the underlying NameOrAddress.
 func (x *IOBluetoothDevice) NameOrAddress() string {
-	_r := x.inner.NameOrAddress()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nameOrAddress"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// LastNameUpdate calls the underlying LastNameUpdate.
-func (x *IOBluetoothDevice) LastNameUpdate() *foundation.NSDate {
-	return x.inner.LastNameUpdate()
+func (x *IOBluetoothDevice) LastNameUpdate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastNameUpdate"))
+	return obj.Wrap(_r)
 }
 
-// AddressString calls the underlying AddressString.
 func (x *IOBluetoothDevice) AddressString() string {
-	_r := x.inner.AddressString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ConnectionHandle calls the underlying ConnectionHandle.
 func (x *IOBluetoothDevice) ConnectionHandle() uint16 {
-	return x.inner.ConnectionHandle()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("connectionHandle"))
+	return _r
 }
 
-// Services calls the underlying Services.
-func (x *IOBluetoothDevice) Services() *foundation.NSArray[objc.ID] {
-	return x.inner.Services()
+func (x *IOBluetoothDevice) Services() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("services"))
+	return obj.Wrap(_r)
 }
 
-// @method		handsFreeAudioGatewayDriverID @abstract		Return the hands free gateway driver ID @discussion	Returns the hands free gateway driver ID which is unique based on BT Address. @result		The hands free gateway driver ID
-//
-// HandsFreeAudioGatewayDriverID calls the underlying HandsFreeAudioGatewayDriverID.
+// Return the hands free gateway driver ID Returns the hands free gateway driver ID which is unique based on BT Address.
 func (x *IOBluetoothDevice) HandsFreeAudioGatewayDriverID() string {
-	_r := x.inner.HandsFreeAudioGatewayDriverID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handsFreeAudioGatewayDriverID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @method		handsFreeAudioGatewayServiceRecord @abstract		Return the hands free gateway SDP record @discussion	Returns the hands free gateway SDP record. @result		The hands free gateway SDP record
-//
-// HandsFreeAudioGatewayServiceRecord calls the underlying HandsFreeAudioGatewayServiceRecord.
+// Return the hands free gateway SDP record Returns the hands free gateway SDP record.
 func (x *IOBluetoothDevice) HandsFreeAudioGatewayServiceRecord() *IOBluetoothSDPServiceRecord {
-	_r := x.inner.HandsFreeAudioGatewayServiceRecord()
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothSDPServiceRecord{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handsFreeAudioGatewayServiceRecord"))
+	return IOBluetoothSDPServiceRecordFromID(_r)
 }
 
-// @method		handsFreeDeviceDriverID @abstract		Return the hands free device driver ID @discussion	Returns the hands free device driver ID which is unique based on BT Address. @result		The hands free device driver ID
-//
-// HandsFreeDeviceDriverID calls the underlying HandsFreeDeviceDriverID.
+// Return the hands free device driver ID Returns the hands free device driver ID which is unique based on BT Address.
 func (x *IOBluetoothDevice) HandsFreeDeviceDriverID() string {
-	_r := x.inner.HandsFreeDeviceDriverID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handsFreeDeviceDriverID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @method		handsFreeDeviceServiceRecord @abstract		Return the hands free device SDP record @discussion	Returns the hands free device SDP record. @result		The hands free device SDP record
-//
-// HandsFreeDeviceServiceRecord calls the underlying HandsFreeDeviceServiceRecord.
+// Return the hands free device SDP record Returns the hands free device SDP record.
 func (x *IOBluetoothDevice) HandsFreeDeviceServiceRecord() *IOBluetoothSDPServiceRecord {
-	_r := x.inner.HandsFreeDeviceServiceRecord()
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothSDPServiceRecord{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handsFreeDeviceServiceRecord"))
+	return IOBluetoothSDPServiceRecordFromID(_r)
 }
 
-// @method		isHandsFreeAudioGateway @abstract		Return the devices support for hands free gateway @discussion	Returns the devices support for hands free gateway (obtained from the devices SDP record). @result		YES if the device supports hands free gateway; otherwise, NO.
-//
-// IsHandsFreeAudioGateway calls the underlying IsHandsFreeAudioGateway.
+// Return the devices support for hands free gateway Returns the devices support for hands free gateway (obtained from the devices SDP record).
 func (x *IOBluetoothDevice) IsHandsFreeAudioGateway() bool {
-	return x.inner.IsHandsFreeAudioGateway()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHandsFreeAudioGateway"))
+	return _r
 }
 
-// @method		isHandsFreeDevice @abstract		Return the devices support for hands free device @discussion	Returns the devices support for hands free device (obtained from the devices SDP record). @result		YES if the device supports hands free device; otherwise, NO.
-//
-// IsHandsFreeDevice calls the underlying IsHandsFreeDevice.
+// Return the devices support for hands free device Returns the devices support for hands free device (obtained from the devices SDP record).
 func (x *IOBluetoothDevice) IsHandsFreeDevice() bool {
-	return x.inner.IsHandsFreeDevice()
-}
-
-func (x *IOBluetoothDevice) asIOBluetoothObject() *raw.IOBluetoothObject {
-	return &x.inner.IOBluetoothObject
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHandsFreeDevice"))
+	return _r
 }
 
 // IOBluetoothDeviceable is the interface implemented by [IOBluetoothDevice], for mocking and DI.
 type IOBluetoothDeviceable interface {
-	Unwrap() *raw.IOBluetoothDevice
-	RegisterForDisconnectNotificationSelector(observer objc.ID, inSelector objc.SEL) *IOBluetoothUserNotification
-	GetDeviceRef() unsafe.Pointer
-	OpenL2CAPChannelSyncWithPSMDelegate(newChannel *raw.IOBluetoothL2CAPChannel, psm uint16, channelDelegate objc.ID) int
-	OpenL2CAPChannelAsyncWithPSMDelegate(newChannel *raw.IOBluetoothL2CAPChannel, psm uint16, channelDelegate objc.ID) int
-	OpenL2CAPChannelFindExistingNewChannel(psm uint16, findExisting bool, newChannel *raw.IOBluetoothL2CAPChannel) int
-	SendL2CAPEchoRequestLength(data unsafe.Pointer, length uint16) int
-	OpenRFCOMMChannelChannel(channelID uint8, rfcommChannel *raw.IOBluetoothRFCOMMChannel) int
-	OpenRFCOMMChannelSyncWithChannelIDDelegate(rfcommChannel *raw.IOBluetoothRFCOMMChannel, channelID uint8, channelDelegate objc.ID) int
-	OpenRFCOMMChannelAsyncWithChannelIDDelegate(rfcommChannel *raw.IOBluetoothRFCOMMChannel, channelID uint8, channelDelegate objc.ID) int
+	obj.Object
+	GetDeviceRef() obj.Object
+	OpenL2CAPChannelSyncWithPSMDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelDelegate obj.Object) int
+	OpenL2CAPChannelAsyncWithPSMDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelDelegate obj.Object) int
+	OpenL2CAPChannelFindExistingNewChannel(psm uint16, findExisting bool, newChannel *IOBluetoothL2CAPChannel) int
+	OpenRFCOMMChannelChannel(channelID uint8, rfcommChannel *IOBluetoothRFCOMMChannel) int
+	OpenRFCOMMChannelSyncWithChannelIDDelegate(rfcommChannel *IOBluetoothRFCOMMChannel, channelID uint8, channelDelegate obj.Object) int
+	OpenRFCOMMChannelAsyncWithChannelIDDelegate(rfcommChannel *IOBluetoothRFCOMMChannel, channelID uint8, channelDelegate obj.Object) int
 	GetClassOfDevice() uint32
 	GetServiceClassMajor() uint32
 	GetDeviceClassMajor() uint32
 	GetDeviceClassMinor() uint32
 	GetName() string
 	GetNameOrAddress() string
-	GetLastNameUpdate() *foundation.NSDate
-	GetAddress() *raw.BluetoothDeviceAddress
+	GetLastNameUpdate() obj.Object
 	GetAddressString() string
 	GetPageScanRepetitionMode() uint8
 	GetPageScanPeriodMode() uint8
 	GetPageScanMode() uint8
 	GetClockOffset() uint16
-	GetLastInquiryUpdate() *foundation.NSDate
+	GetLastInquiryUpdate() obj.Object
 	RSSI() int8
 	RawRSSI() int8
 	IsConnected() bool
 	OpenConnection() int
-	OpenConnection2(target objc.ID) int
-	OpenConnectionWithPageTimeoutAuthenticationRequired(target objc.ID, pageTimeoutValue uint16, authenticationRequired bool) int
+	OpenConnection2(target obj.Object) int
+	OpenConnectionWithPageTimeoutAuthenticationRequired(target obj.Object, pageTimeoutValue uint16, authenticationRequired bool) int
 	CloseConnection() int
-	RemoteNameRequest(target objc.ID) int
-	RemoteNameRequestWithPageTimeout(target objc.ID, pageTimeoutValue uint16) int
+	RemoteNameRequest(target obj.Object) int
+	RemoteNameRequestWithPageTimeout(target obj.Object, pageTimeoutValue uint16) int
 	RequestAuthentication() int
 	GetConnectionHandle() uint16
 	IsIncoming() bool
 	GetLinkType() uint8
 	GetEncryptionMode() uint8
-	PerformSDPQuery(target objc.ID) int
-	PerformSDPQueryUuids(target objc.ID, uuidArray *foundation.NSArray[objc.ID]) int
-	GetServices() *foundation.NSArray[objc.ID]
-	GetLastServicesUpdate() *foundation.NSDate
-	GetServiceRecordForUUID(sdpUUID *raw.IOBluetoothSDPUUID) *IOBluetoothSDPServiceRecord
+	PerformSDPQuery(target obj.Object) int
+	PerformSDPQueryUuids(target obj.Object, uuidArray obj.Object) int
+	GetServices() obj.Object
+	GetLastServicesUpdate() obj.Object
+	GetServiceRecordForUUID(sdpUUID *IOBluetoothSDPUUID) *IOBluetoothSDPServiceRecord
 	IsFavorite() bool
 	AddToFavorites() int
 	RemoveFromFavorites() int
-	RecentAccessDate() *foundation.NSDate
+	RecentAccessDate() obj.Object
 	IsPaired() bool
 	SetSupervisionTimeout(timeout uint16) int
-	OpenL2CAPChannelSyncWithPSMWithConfigurationDelegate(newChannel *raw.IOBluetoothL2CAPChannel, psm uint16, channelConfiguration *foundation.NSDictionary[objc.ID, objc.ID], channelDelegate objc.ID) int
-	OpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate(newChannel *raw.IOBluetoothL2CAPChannel, psm uint16, channelConfiguration *foundation.NSDictionary[objc.ID, objc.ID], channelDelegate objc.ID) int
+	OpenL2CAPChannelSyncWithPSMWithConfigurationDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelConfiguration obj.Object, channelDelegate obj.Object) int
+	OpenL2CAPChannelAsyncWithPSMWithConfigurationDelegate(newChannel *IOBluetoothL2CAPChannel, psm uint16, channelConfiguration obj.Object, channelDelegate obj.Object) int
 	ClassOfDevice() uint32
 	ServiceClassMajor() uint32
 	DeviceClassMajor() uint32
 	DeviceClassMinor() uint32
 	Name() string
 	NameOrAddress() string
-	LastNameUpdate() *foundation.NSDate
+	LastNameUpdate() obj.Object
 	AddressString() string
 	ConnectionHandle() uint16
-	Services() *foundation.NSArray[objc.ID]
+	Services() obj.Object
 	HandsFreeAudioGatewayDriverID() string
 	HandsFreeAudioGatewayServiceRecord() *IOBluetoothSDPServiceRecord
 	HandsFreeDeviceDriverID() string

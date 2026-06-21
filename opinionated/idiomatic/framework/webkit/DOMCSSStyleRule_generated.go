@@ -5,84 +5,95 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMCSSStyleRule wraps [raw.DOMCSSStyleRule] with a fluent Go API.
+// DOMCSSStyleRule is an idiomatic wrapper over the Objective-C class DOMCSSStyleRule.
 type DOMCSSStyleRule struct {
-	inner *raw.DOMCSSStyleRule
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMCSSStyleRule].
-func (x *DOMCSSStyleRule) Unwrap() *raw.DOMCSSStyleRule { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMCSSStyleRule) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMCSSStyleRuleFromID adopts an existing object pointer as a DOMCSSStyleRule (nil for 0).
+// DOMCSSStyleRuleFromID adopts an existing Objective-C object as a DOMCSSStyleRule
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMCSSStyleRuleFromID(id objc.ID) *DOMCSSStyleRule {
 	if id == 0 {
 		return nil
 	}
-	return &DOMCSSStyleRule{inner: raw.DOMCSSStyleRuleFromID(id)}
-}
-
-// NewDOMCSSStyleRule creates a new [DOMCSSStyleRule].
-func NewDOMCSSStyleRule() *DOMCSSStyleRule {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMCSSStyleRule")), objc.RegisterName("new"))
-	return &DOMCSSStyleRule{inner: raw.DOMCSSStyleRuleFromID(_id)}
-}
-
-// WithSelectorText sets the selectorText property and returns the receiver for chaining.
-func (x *DOMCSSStyleRule) WithSelectorText(selectorText string) *DOMCSSStyleRule {
-	x.inner.SetSelectorText(foundation.NSStringStringWithUTF8String(selectorText))
+	x := &DOMCSSStyleRule{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithCssText sets the cssText property and returns the receiver for chaining.
-func (x *DOMCSSStyleRule) WithCssText(cssText string) *DOMCSSStyleRule {
-	x.inner.DOMCSSRule.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
-	return x
-}
-
-// SelectorText calls the underlying SelectorText.
-func (x *DOMCSSStyleRule) SelectorText() string {
-	_r := x.inner.SelectorText()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetSelectorText calls the underlying SetSelectorText.
-func (x *DOMCSSStyleRule) SetSelectorText(selectorText string) {
-	x.inner.SetSelectorText(foundation.NSStringStringWithUTF8String(selectorText))
-}
-
-// Style calls the underlying Style.
-func (x *DOMCSSStyleRule) Style() *DOMCSSStyleDeclaration {
-	_r := x.inner.Style()
-	if _r == nil {
+// dOMCSSStyleRuleAdopt wraps an Objective-C object that this code just created as a
+// DOMCSSStyleRule (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMCSSStyleRuleAdopt(id objc.ID) *DOMCSSStyleRule {
+	if id == 0 {
 		return nil
 	}
-	return &DOMCSSStyleDeclaration{inner: _r}
+	x := &DOMCSSStyleRule{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *DOMCSSStyleRule) asDOMCSSRule() *raw.DOMCSSRule { return &x.inner.DOMCSSRule }
+// Description returns the object's -description text.
+func (x *DOMCSSStyleRule) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
 
-func (x *DOMCSSStyleRule) asDOMObject() *raw.DOMObject { return &x.inner.DOMCSSRule.DOMObject }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMCSSStyleRule) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
 
-func (x *DOMCSSStyleRule) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMCSSRule.DOMObject.WebScriptObject
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMCSSStyleRule) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMCSSStyleRule creates a new DOMCSSStyleRule.
+func NewDOMCSSStyleRule() *DOMCSSStyleRule {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMCSSStyleRule")), objc.RegisterName("new"))
+	return dOMCSSStyleRuleAdopt(_id)
+}
+
+// WithSelectorText sets selectorText and returns the receiver so calls can be chained.
+func (x *DOMCSSStyleRule) WithSelectorText(selectorText string) *DOMCSSStyleRule {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectorText:"), purego.NSString(selectorText))
+	return x
+}
+
+// WithCssText sets cssText and returns the receiver so calls can be chained.
+func (x *DOMCSSStyleRule) WithCssText(cssText string) *DOMCSSStyleRule {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return x
+}
+
+func (x *DOMCSSStyleRule) SelectorText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectorText"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *DOMCSSStyleRule) SetSelectorText(selectorText string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectorText:"), purego.NSString(selectorText))
+}
+
+func (x *DOMCSSStyleRule) Style() *DOMCSSStyleDeclaration {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("style"))
+	return DOMCSSStyleDeclarationFromID(_r)
 }
 
 // DOMCSSStyleRuleable is the interface implemented by [DOMCSSStyleRule], for mocking and DI.
 type DOMCSSStyleRuleable interface {
-	Unwrap() *raw.DOMCSSStyleRule
+	obj.Object
 	WithSelectorText(selectorText string) *DOMCSSStyleRule
 	WithCssText(cssText string) *DOMCSSStyleRule
 	SelectorText() string

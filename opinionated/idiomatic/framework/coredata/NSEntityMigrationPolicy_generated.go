@@ -5,97 +5,147 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // A policy instance that customizes the migration process for an entity mapping.
 //
-// EntityMigrationPolicy wraps [raw.NSEntityMigrationPolicy] with a fluent Go API.
+// EntityMigrationPolicy is an idiomatic wrapper over the Objective-C class NSEntityMigrationPolicy.
 type EntityMigrationPolicy struct {
-	inner *raw.NSEntityMigrationPolicy
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSEntityMigrationPolicy].
-func (x *EntityMigrationPolicy) Unwrap() *raw.NSEntityMigrationPolicy { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EntityMigrationPolicy) ID() objc.ID { return x.inner.Ptr() }
-
-// EntityMigrationPolicyFromID adopts an existing object pointer as a EntityMigrationPolicy (nil for 0).
+// EntityMigrationPolicyFromID adopts an existing Objective-C object as a EntityMigrationPolicy
+// (nil for 0), retaining it and registering a release finalizer.
 func EntityMigrationPolicyFromID(id objc.ID) *EntityMigrationPolicy {
 	if id == 0 {
 		return nil
 	}
-	return &EntityMigrationPolicy{inner: raw.NSEntityMigrationPolicyFromID(id)}
+	x := &EntityMigrationPolicy{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEntityMigrationPolicy creates a new [EntityMigrationPolicy].
+// entityMigrationPolicyAdopt wraps an Objective-C object that this code just created as a
+// EntityMigrationPolicy (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func entityMigrationPolicyAdopt(id objc.ID) *EntityMigrationPolicy {
+	if id == 0 {
+		return nil
+	}
+	x := &EntityMigrationPolicy{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EntityMigrationPolicy) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EntityMigrationPolicy) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EntityMigrationPolicy) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEntityMigrationPolicy creates a new EntityMigrationPolicy.
 func NewEntityMigrationPolicy() *EntityMigrationPolicy {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSEntityMigrationPolicy")), objc.RegisterName("new"))
-	return &EntityMigrationPolicy{inner: raw.NSEntityMigrationPolicyFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSEntityMigrationPolicy")), objc.RegisterName("new"))
+	return entityMigrationPolicyAdopt(_id)
 }
 
 // Sets up state information before the start of a given entity mapping.
-//
-// BeginEntityMappingManagerError calls the underlying BeginEntityMappingManagerError.
-func (x *EntityMigrationPolicy) BeginEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
-	return x.inner.BeginEntityMappingManagerError(mapping, manager)
+func (x *EntityMigrationPolicy) BeginEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("beginEntityMapping:manager:error:"), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Creates the destination instance(s) for a given source instance.
-//
-// CreateDestinationInstancesForSourceInstanceEntityMappingManagerError calls the underlying CreateDestinationInstancesForSourceInstanceEntityMappingManagerError.
-func (x *EntityMigrationPolicy) CreateDestinationInstancesForSourceInstanceEntityMappingManagerError(sInstance *raw.NSManagedObject, mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
-	return x.inner.CreateDestinationInstancesForSourceInstanceEntityMappingManagerError(sInstance, mapping, manager)
+func (x *EntityMigrationPolicy) CreateDestinationInstancesForSourceInstanceEntityMappingManager(sInstance *ManagedObject, mapping *EntityMapping, manager *MigrationManager) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("createDestinationInstancesForSourceInstance:entityMapping:manager:error:"), objref.IDOf(sInstance), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Indicates the end of the instance creation stage for the specified entity mapping, and the precursor to the next migration stage.
-//
-// EndInstanceCreationForEntityMappingManagerError calls the underlying EndInstanceCreationForEntityMappingManagerError.
-func (x *EntityMigrationPolicy) EndInstanceCreationForEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
-	return x.inner.EndInstanceCreationForEntityMappingManagerError(mapping, manager)
+func (x *EntityMigrationPolicy) EndInstanceCreationForEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("endInstanceCreationForEntityMapping:manager:error:"), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Constructs the relationships between the newly-created destination instances.
-//
-// CreateRelationshipsForDestinationInstanceEntityMappingManagerError calls the underlying CreateRelationshipsForDestinationInstanceEntityMappingManagerError.
-func (x *EntityMigrationPolicy) CreateRelationshipsForDestinationInstanceEntityMappingManagerError(dInstance *raw.NSManagedObject, mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
-	return x.inner.CreateRelationshipsForDestinationInstanceEntityMappingManagerError(dInstance, mapping, manager)
+func (x *EntityMigrationPolicy) CreateRelationshipsForDestinationInstanceEntityMappingManager(dInstance *ManagedObject, mapping *EntityMapping, manager *MigrationManager) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("createRelationshipsForDestinationInstance:entityMapping:manager:error:"), objref.IDOf(dInstance), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Indicates the end of the relationship creation stage for the specified entity mapping.
-//
-// EndRelationshipCreationForEntityMappingManagerError calls the underlying EndRelationshipCreationForEntityMappingManagerError.
-func (x *EntityMigrationPolicy) EndRelationshipCreationForEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
-	return x.inner.EndRelationshipCreationForEntityMappingManagerError(mapping, manager)
+func (x *EntityMigrationPolicy) EndRelationshipCreationForEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("endRelationshipCreationForEntityMapping:manager:error:"), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Provides the option to perform custom validation on migrated objects during the validation stage of the entity migration policy.
-//
-// PerformCustomValidationForEntityMappingManagerError calls the underlying PerformCustomValidationForEntityMappingManagerError.
-func (x *EntityMigrationPolicy) PerformCustomValidationForEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
-	return x.inner.PerformCustomValidationForEntityMappingManagerError(mapping, manager)
+func (x *EntityMigrationPolicy) PerformCustomValidationForEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performCustomValidationForEntityMapping:manager:error:"), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Performs cleanup at the end of the migration, from any phase of the mapping.
-//
-// EndEntityMappingManagerError calls the underlying EndEntityMappingManagerError.
-func (x *EntityMigrationPolicy) EndEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error) {
-	return x.inner.EndEntityMappingManagerError(mapping, manager)
+func (x *EntityMigrationPolicy) EndEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("endEntityMapping:manager:error:"), objref.IDOf(mapping), objref.IDOf(manager), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // EntityMigrationPolicyable is the interface implemented by [EntityMigrationPolicy], for mocking and DI.
 type EntityMigrationPolicyable interface {
-	Unwrap() *raw.NSEntityMigrationPolicy
-	BeginEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error)
-	CreateDestinationInstancesForSourceInstanceEntityMappingManagerError(sInstance *raw.NSManagedObject, mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error)
-	EndInstanceCreationForEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error)
-	CreateRelationshipsForDestinationInstanceEntityMappingManagerError(dInstance *raw.NSManagedObject, mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error)
-	EndRelationshipCreationForEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error)
-	PerformCustomValidationForEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error)
-	EndEntityMappingManagerError(mapping *raw.NSEntityMapping, manager *raw.NSMigrationManager) (bool, error)
+	obj.Object
+	BeginEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error
+	CreateDestinationInstancesForSourceInstanceEntityMappingManager(sInstance *ManagedObject, mapping *EntityMapping, manager *MigrationManager) error
+	EndInstanceCreationForEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error
+	CreateRelationshipsForDestinationInstanceEntityMappingManager(dInstance *ManagedObject, mapping *EntityMapping, manager *MigrationManager) error
+	EndRelationshipCreationForEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error
+	PerformCustomValidationForEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error
+	EndEntityMappingManager(mapping *EntityMapping, manager *MigrationManager) error
 }
 
 var _ EntityMigrationPolicyable = (*EntityMigrationPolicy)(nil)

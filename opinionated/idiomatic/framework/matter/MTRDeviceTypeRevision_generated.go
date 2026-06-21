@@ -5,75 +5,96 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDeviceTypeRevision wraps [raw.MTRDeviceTypeRevision] with a fluent Go API.
+// MTRDeviceTypeRevision is an idiomatic wrapper over the Objective-C class MTRDeviceTypeRevision.
 type MTRDeviceTypeRevision struct {
-	inner *raw.MTRDeviceTypeRevision
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDeviceTypeRevision].
-func (x *MTRDeviceTypeRevision) Unwrap() *raw.MTRDeviceTypeRevision { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceTypeRevision) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDeviceTypeRevisionFromID adopts an existing object pointer as a MTRDeviceTypeRevision (nil for 0).
+// MTRDeviceTypeRevisionFromID adopts an existing Objective-C object as a MTRDeviceTypeRevision
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDeviceTypeRevisionFromID(id objc.ID) *MTRDeviceTypeRevision {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDeviceTypeRevision{inner: raw.MTRDeviceTypeRevisionFromID(id)}
+	x := &MTRDeviceTypeRevision{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRDeviceTypeRevisionAdopt wraps an Objective-C object that this code just created as a
+// MTRDeviceTypeRevision (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDeviceTypeRevisionAdopt(id objc.ID) *MTRDeviceTypeRevision {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDeviceTypeRevision{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDeviceTypeRevision) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDeviceTypeRevision) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDeviceTypeRevision) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // The provided deviceTypeID must be in the range 0xVVVV0000-0xVVVVBFFF, where VVVV is the vendor identifier (0 for standard device types). The provided deviceTypeRevision must be in the range 1-65535.
 //
-// NewMTRDeviceTypeRevisionWithDeviceTypeIDRevision creates a new [MTRDeviceTypeRevision].
-func NewMTRDeviceTypeRevisionWithDeviceTypeIDRevision(deviceTypeID *foundation.NSNumber, revision *foundation.NSNumber) *MTRDeviceTypeRevision {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceTypeRevision")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDeviceTypeID:revision:"), deviceTypeID.Ptr(), revision.Ptr())
-	return &MTRDeviceTypeRevision{inner: raw.MTRDeviceTypeRevisionFromID(_id)}
+// NewMTRDeviceTypeRevisionWithDeviceTypeIDRevision creates a new MTRDeviceTypeRevision.
+func NewMTRDeviceTypeRevisionWithDeviceTypeIDRevision(deviceTypeID obj.Object, revision obj.Object) *MTRDeviceTypeRevision {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRDeviceTypeRevision")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDeviceTypeID:revision:"), objref.IDOf(deviceTypeID), objref.IDOf(revision))
+	return mTRDeviceTypeRevisionAdopt(_id)
 }
 
 // Initializes the receiver based on the values in the specified struct.
 //
-// NewMTRDeviceTypeRevisionWithDeviceTypeStruct creates a new [MTRDeviceTypeRevision].
-func NewMTRDeviceTypeRevisionWithDeviceTypeStruct(deviceTypeStruct *raw.MTRDescriptorClusterDeviceTypeStruct) *MTRDeviceTypeRevision {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceTypeRevision")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDeviceTypeStruct:"), deviceTypeStruct.Ptr())
-	return &MTRDeviceTypeRevision{inner: raw.MTRDeviceTypeRevisionFromID(_id)}
+// NewMTRDeviceTypeRevisionWithDeviceTypeStruct creates a new MTRDeviceTypeRevision.
+func NewMTRDeviceTypeRevisionWithDeviceTypeStruct(deviceTypeStruct *MTRDescriptorClusterDeviceTypeStruct) *MTRDeviceTypeRevision {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRDeviceTypeRevision")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDeviceTypeStruct:"), objref.IDOf(deviceTypeStruct))
+	return mTRDeviceTypeRevisionAdopt(_id)
 }
 
-// DeviceTypeID calls the underlying DeviceTypeID.
-func (x *MTRDeviceTypeRevision) DeviceTypeID() *foundation.NSNumber {
-	return x.inner.DeviceTypeID()
+func (x *MTRDeviceTypeRevision) DeviceTypeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceTypeID"))
+	return obj.Wrap(_r)
 }
 
-// DeviceTypeRevision calls the underlying DeviceTypeRevision.
-func (x *MTRDeviceTypeRevision) DeviceTypeRevision() *foundation.NSNumber {
-	return x.inner.DeviceTypeRevision()
+func (x *MTRDeviceTypeRevision) DeviceTypeRevision() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceTypeRevision"))
+	return obj.Wrap(_r)
 }
 
 // Returns the MTRDeviceType corresponding to deviceTypeID, or nil if deviceTypeID does not represent a known device type.
-//
-// TypeInformation calls the underlying TypeInformation.
 func (x *MTRDeviceTypeRevision) TypeInformation() *MTRDeviceType {
-	_r := x.inner.TypeInformation()
-	if _r == nil {
-		return nil
-	}
-	return &MTRDeviceType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typeInformation"))
+	return MTRDeviceTypeFromID(_r)
 }
 
 // MTRDeviceTypeRevisionable is the interface implemented by [MTRDeviceTypeRevision], for mocking and DI.
 type MTRDeviceTypeRevisionable interface {
-	Unwrap() *raw.MTRDeviceTypeRevision
-	DeviceTypeID() *foundation.NSNumber
-	DeviceTypeRevision() *foundation.NSNumber
+	obj.Object
+	DeviceTypeID() obj.Object
+	DeviceTypeRevision() obj.Object
 	TypeInformation() *MTRDeviceType
 }
 

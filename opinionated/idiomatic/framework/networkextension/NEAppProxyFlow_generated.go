@@ -6,61 +6,85 @@ package networkextension
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An abstract base class shared by NEAppProxyTCPFlow and NEAppProxyUDPFlow.
 //
-// NEAppProxyFlow wraps [raw.NEAppProxyFlow] with a fluent Go API.
+// NEAppProxyFlow is an idiomatic wrapper over the Objective-C class NEAppProxyFlow.
 type NEAppProxyFlow struct {
-	inner *raw.NEAppProxyFlow
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEAppProxyFlow].
-func (x *NEAppProxyFlow) Unwrap() *raw.NEAppProxyFlow { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEAppProxyFlow) ID() objc.ID { return x.inner.Ptr() }
-
-// NEAppProxyFlowFromID adopts an existing object pointer as a NEAppProxyFlow (nil for 0).
+// NEAppProxyFlowFromID adopts an existing Objective-C object as a NEAppProxyFlow
+// (nil for 0), retaining it and registering a release finalizer.
 func NEAppProxyFlowFromID(id objc.ID) *NEAppProxyFlow {
 	if id == 0 {
 		return nil
 	}
-	return &NEAppProxyFlow{inner: raw.NEAppProxyFlowFromID(id)}
+	x := &NEAppProxyFlow{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNEAppProxyFlow creates a new [NEAppProxyFlow].
+// nEAppProxyFlowAdopt wraps an Objective-C object that this code just created as a
+// NEAppProxyFlow (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEAppProxyFlowAdopt(id objc.ID) *NEAppProxyFlow {
+	if id == 0 {
+		return nil
+	}
+	x := &NEAppProxyFlow{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NEAppProxyFlow) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEAppProxyFlow) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEAppProxyFlow) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNEAppProxyFlow creates a new NEAppProxyFlow.
 func NewNEAppProxyFlow() *NEAppProxyFlow {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEAppProxyFlow")), objc.RegisterName("new"))
-	return &NEAppProxyFlow{inner: raw.NEAppProxyFlowFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NEAppProxyFlow")), objc.RegisterName("new"))
+	return nEAppProxyFlowAdopt(_id)
 }
 
 // The network interface, if any, used by this flow.
 //
-// WithNetworkInterface sets the networkInterface property and returns the receiver for chaining.
-func (x *NEAppProxyFlow) WithNetworkInterface(networkInterface *foundation.NSObject) *NEAppProxyFlow {
-	x.inner.SetNetworkInterface(networkInterface)
+// WithNetworkInterface sets networkInterface and returns the receiver so calls can be chained.
+func (x *NEAppProxyFlow) WithNetworkInterface(networkInterface obj.Object) *NEAppProxyFlow {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkInterface:"), objref.IDOf(networkInterface))
 	return x
 }
 
-// @method openWithLocalFlowEndpoint:completionHandler: @discussion This function is used by an NEProvider implementation to indicate that it is ready to handle flow data. @param localEndpoint The address and port that should be used as the local endpoint of the socket associated with this flow. If the source application already specified a local endpoint by binding the socket then this parameter is ignored. @param completionHandler A block that is called when the process of opening flow is complete. A nil value passed to this block indicates that the flow was opened successfully. A non-nil NSError value indicates that the flow failed to open successfully.
+// This function is used by an NEProvider implementation to indicate that it is ready to handle flow data.
 //
 // OpenWithLocalFlowEndpoint blocks until the operation completes or ctx is cancelled.
-func (x *NEAppProxyFlow) OpenWithLocalFlowEndpoint(ctx context.Context, localEndpoint *foundation.NSObject) error {
+func (x *NEAppProxyFlow) OpenWithLocalFlowEndpoint(ctx context.Context, localEndpoint obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.OpenWithLocalFlowEndpointCompletionHandler(localEndpoint, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openWithLocalFlowEndpoint:completionHandler:"), objref.IDOf(localEndpoint), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -72,15 +96,14 @@ func (x *NEAppProxyFlow) OpenWithLocalFlowEndpoint(ctx context.Context, localEnd
 // Opens the flow, indicating to the system that the caller is ready to start receiving and sending data.
 //
 // OpenWithLocalEndpoint blocks until the operation completes or ctx is cancelled.
-func (x *NEAppProxyFlow) OpenWithLocalEndpoint(ctx context.Context, localEndpoint *raw.NWHostEndpoint) error {
+func (x *NEAppProxyFlow) OpenWithLocalEndpoint(ctx context.Context, localEndpoint *NWHostEndpoint) error {
 	_ch := make(chan error, 1)
-	x.inner.OpenWithLocalEndpointCompletionHandler(localEndpoint, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openWithLocalEndpoint:completionHandler:"), objref.IDOf(localEndpoint), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -89,82 +112,52 @@ func (x *NEAppProxyFlow) OpenWithLocalEndpoint(ctx context.Context, localEndpoin
 	}
 }
 
-// Close the flow for further read operations.
-//
-// CloseReadWithError calls the underlying CloseReadWithError.
-func (x *NEAppProxyFlow) CloseReadWithError(error_ unsafe.Pointer) {
-	x.inner.CloseReadWithError(error_)
-}
-
-// Close the flow for further write operations.
-//
-// CloseWriteWithError calls the underlying CloseWriteWithError.
-func (x *NEAppProxyFlow) CloseWriteWithError(error_ unsafe.Pointer) {
-	x.inner.CloseWriteWithError(error_)
-}
-
 // Sets the flow’s metadata for use by proxy providers.
-//
-// SetMetadata calls the underlying SetMetadata.
-func (x *NEAppProxyFlow) SetMetadata(parameters *foundation.NSObject) {
-	x.inner.SetMetadata(parameters)
+func (x *NEAppProxyFlow) SetMetadata(parameters obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), objref.IDOf(parameters))
 }
 
-// @property metaData @discussion An NEFlowMetaData object containing meta data for the flow.
-//
-// MetaData calls the underlying MetaData.
+// An NEFlowMetaData object containing meta data for the flow.
 func (x *NEAppProxyFlow) MetaData() *NEFlowMetaData {
-	_r := x.inner.MetaData()
-	if _r == nil {
-		return nil
-	}
-	return &NEFlowMetaData{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metaData"))
+	return NEFlowMetaDataFromID(_r)
 }
 
-// @property networkInterface @discussion An nw_interface_t containing information about the network interface used by the flow. If the flow's data is transported using a different interface, this property should be set to that interface.
-//
-// NetworkInterface calls the underlying NetworkInterface.
-func (x *NEAppProxyFlow) NetworkInterface() *foundation.NSObject {
-	return x.inner.NetworkInterface()
+// An nw_interface_t containing information about the network interface used by the flow. If the flow's data is transported using a different interface, this property should be set to that interface.
+func (x *NEAppProxyFlow) NetworkInterface() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkInterface"))
+	return obj.Wrap(_r)
 }
 
-// SetNetworkInterface calls the underlying SetNetworkInterface.
-func (x *NEAppProxyFlow) SetNetworkInterface(networkInterface *foundation.NSObject) {
-	x.inner.SetNetworkInterface(networkInterface)
+func (x *NEAppProxyFlow) SetNetworkInterface(networkInterface obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkInterface:"), objref.IDOf(networkInterface))
 }
 
-// @property remoteHostname @discussion If the flow was created by passing a hostname to a "connect by name" API such as NSURLSession or Network.framework, this property is set to the remote hostname.
-//
-// RemoteHostname calls the underlying RemoteHostname.
+// If the flow was created by passing a hostname to a "connect by name" API such as NSURLSession or Network.framework, this property is set to the remote hostname.
 func (x *NEAppProxyFlow) RemoteHostname() string {
-	_r := x.inner.RemoteHostname()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remoteHostname"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property isBound @discussion YES if the flow was bound by the application to a specific interface (contained in the networkInterface property), NO otherwise.
-//
-// IsBound calls the underlying IsBound.
+// YES if the flow was bound by the application to a specific interface (contained in the networkInterface property), NO otherwise.
 func (x *NEAppProxyFlow) IsBound() bool {
-	return x.inner.IsBound()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBound"))
+	return _r
 }
-
-func (x *NEAppProxyFlow) asNEAppProxyFlow() *raw.NEAppProxyFlow { return x.inner }
 
 // NEAppProxyFlowable is the interface implemented by [NEAppProxyFlow], for mocking and DI.
 type NEAppProxyFlowable interface {
-	Unwrap() *raw.NEAppProxyFlow
-	WithNetworkInterface(networkInterface *foundation.NSObject) *NEAppProxyFlow
-	OpenWithLocalFlowEndpoint(ctx context.Context, localEndpoint *foundation.NSObject) error
-	OpenWithLocalEndpoint(ctx context.Context, localEndpoint *raw.NWHostEndpoint) error
-	CloseReadWithError(error_ unsafe.Pointer)
-	CloseWriteWithError(error_ unsafe.Pointer)
-	SetMetadata(parameters *foundation.NSObject)
+	obj.Object
+	WithNetworkInterface(networkInterface obj.Object) *NEAppProxyFlow
+	OpenWithLocalFlowEndpoint(ctx context.Context, localEndpoint obj.Object) error
+	OpenWithLocalEndpoint(ctx context.Context, localEndpoint *NWHostEndpoint) error
+	SetMetadata(parameters obj.Object)
 	MetaData() *NEFlowMetaData
-	NetworkInterface() *foundation.NSObject
-	SetNetworkInterface(networkInterface *foundation.NSObject)
+	NetworkInterface() obj.Object
+	SetNetworkInterface(networkInterface obj.Object)
 	RemoteHostname() string
 	IsBound() bool
 }

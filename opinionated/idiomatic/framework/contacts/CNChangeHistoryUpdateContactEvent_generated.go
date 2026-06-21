@@ -5,56 +5,73 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a user updating a contact.
 //
-// ChangeHistoryUpdateContactEvent wraps [raw.CNChangeHistoryUpdateContactEvent] with a fluent Go API.
+// ChangeHistoryUpdateContactEvent is an idiomatic wrapper over the Objective-C class CNChangeHistoryUpdateContactEvent.
 type ChangeHistoryUpdateContactEvent struct {
-	inner *raw.CNChangeHistoryUpdateContactEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNChangeHistoryUpdateContactEvent].
-func (x *ChangeHistoryUpdateContactEvent) Unwrap() *raw.CNChangeHistoryUpdateContactEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChangeHistoryUpdateContactEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangeHistoryUpdateContactEventFromID adopts an existing object pointer as a ChangeHistoryUpdateContactEvent (nil for 0).
+// ChangeHistoryUpdateContactEventFromID adopts an existing Objective-C object as a ChangeHistoryUpdateContactEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangeHistoryUpdateContactEventFromID(id objc.ID) *ChangeHistoryUpdateContactEvent {
 	if id == 0 {
 		return nil
 	}
-	return &ChangeHistoryUpdateContactEvent{inner: raw.CNChangeHistoryUpdateContactEventFromID(id)}
+	x := &ChangeHistoryUpdateContactEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewChangeHistoryUpdateContactEvent creates a new [ChangeHistoryUpdateContactEvent].
-func NewChangeHistoryUpdateContactEvent() *ChangeHistoryUpdateContactEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNChangeHistoryUpdateContactEvent")), objc.RegisterName("new"))
-	return &ChangeHistoryUpdateContactEvent{inner: raw.CNChangeHistoryUpdateContactEventFromID(_id)}
-}
-
-// Contact calls the underlying Contact.
-func (x *ChangeHistoryUpdateContactEvent) Contact() *Contact {
-	_r := x.inner.Contact()
-	if _r == nil {
+// changeHistoryUpdateContactEventAdopt wraps an Objective-C object that this code just created as a
+// ChangeHistoryUpdateContactEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changeHistoryUpdateContactEventAdopt(id objc.ID) *ChangeHistoryUpdateContactEvent {
+	if id == 0 {
 		return nil
 	}
-	return &Contact{inner: _r}
+	x := &ChangeHistoryUpdateContactEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *ChangeHistoryUpdateContactEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent {
-	return &x.inner.CNChangeHistoryEvent
+// Description returns the object's -description text.
+func (x *ChangeHistoryUpdateContactEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ChangeHistoryUpdateContactEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ChangeHistoryUpdateContactEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewChangeHistoryUpdateContactEvent creates a new ChangeHistoryUpdateContactEvent.
+func NewChangeHistoryUpdateContactEvent() *ChangeHistoryUpdateContactEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("CNChangeHistoryUpdateContactEvent")), objc.RegisterName("new"))
+	return changeHistoryUpdateContactEventAdopt(_id)
+}
+
+func (x *ChangeHistoryUpdateContactEvent) Contact() *Contact {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contact"))
+	return ContactFromID(_r)
 }
 
 // ChangeHistoryUpdateContactEventable is the interface implemented by [ChangeHistoryUpdateContactEvent], for mocking and DI.
 type ChangeHistoryUpdateContactEventable interface {
-	Unwrap() *raw.CNChangeHistoryUpdateContactEvent
+	obj.Object
 	Contact() *Contact
 }
 

@@ -5,75 +5,49 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
 // Key for CGRect describing a crop region of interest of image source in normalized coordinates
-// MLFeatureValueImageOptionCropRect returns the string constant MLFeatureValueImageOptionCropRect as an objc.ID, for use as a dictionary key or selector argument.
-func MLFeatureValueImageOptionCropRect() objc.ID {
-	if _r := raw.MLFeatureValueImageOptionCropRect(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MLFeatureValueImageOptionCropRect returns the string constant MLFeatureValueImageOptionCropRect, for use as a dictionary key or argument.
+func MLFeatureValueImageOptionCropRect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLFeatureValueImageOptionCropRect")))
 }
 
 // Key for VNImageCropAndScaleOption describing how to crop and scale the image (or region of interest) to the desired size
-// MLFeatureValueImageOptionCropAndScale returns the string constant MLFeatureValueImageOptionCropAndScale as an objc.ID, for use as a dictionary key or selector argument.
-func MLFeatureValueImageOptionCropAndScale() objc.ID {
-	if _r := raw.MLFeatureValueImageOptionCropAndScale(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MLFeatureValueImageOptionCropAndScale returns the string constant MLFeatureValueImageOptionCropAndScale, for use as a dictionary key or argument.
+func MLFeatureValueImageOptionCropAndScale() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLFeatureValueImageOptionCropAndScale")))
 }
 
 // A short description of what the model does and/or its purpose
-// MLModelDescriptionKey returns the string constant MLModelDescriptionKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLModelDescriptionKey() objc.ID {
-	if _r := raw.MLModelDescriptionKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MLModelDescriptionKey returns the string constant MLModelDescriptionKey, for use as a dictionary key or argument.
+func MLModelDescriptionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLModelDescriptionKey")))
 }
 
 // A version number encoded as a string
-// MLModelVersionStringKey returns the string constant MLModelVersionStringKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLModelVersionStringKey() objc.ID {
-	if _r := raw.MLModelVersionStringKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MLModelVersionStringKey returns the string constant MLModelVersionStringKey, for use as a dictionary key or argument.
+func MLModelVersionStringKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLModelVersionStringKey")))
 }
 
 // The author of this model
-// MLModelAuthorKey returns the string constant MLModelAuthorKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLModelAuthorKey() objc.ID {
-	if _r := raw.MLModelAuthorKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// MLModelAuthorKey returns the string constant MLModelAuthorKey, for use as a dictionary key or argument.
+func MLModelAuthorKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MLModelAuthorKey"))) }
 
 // License information for the model
-// MLModelLicenseKey returns the string constant MLModelLicenseKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLModelLicenseKey() objc.ID {
-	if _r := raw.MLModelLicenseKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// MLModelLicenseKey returns the string constant MLModelLicenseKey, for use as a dictionary key or argument.
+func MLModelLicenseKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MLModelLicenseKey"))) }
 
 // Any additional pertinent information specified by the model creator
-// MLModelCreatorDefinedKey returns the string constant MLModelCreatorDefinedKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLModelCreatorDefinedKey() objc.ID {
-	if _r := raw.MLModelCreatorDefinedKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MLModelCreatorDefinedKey returns the string constant MLModelCreatorDefinedKey, for use as a dictionary key or argument.
+func MLModelCreatorDefinedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLModelCreatorDefinedKey")))
 }
 
-// MLModelErrorDomain returns the string constant MLModelErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MLModelErrorDomain() objc.ID {
-	return purego.CFConstant(raw.MLModelErrorDomain())
+// MLModelErrorDomain returns the string constant MLModelErrorDomain, for use as a dictionary key or argument.
+func MLModelErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLModelErrorDomain")))
 }

@@ -5,58 +5,79 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// TransformTranslateOp wraps [raw.MDLTransformTranslateOp] with a fluent Go API.
+// TransformTranslateOp is an idiomatic wrapper over the Objective-C class MDLTransformTranslateOp.
 type TransformTranslateOp struct {
-	inner *raw.MDLTransformTranslateOp
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLTransformTranslateOp].
-func (x *TransformTranslateOp) Unwrap() *raw.MDLTransformTranslateOp { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TransformTranslateOp) ID() objc.ID { return x.inner.Ptr() }
-
-// TransformTranslateOpFromID adopts an existing object pointer as a TransformTranslateOp (nil for 0).
+// TransformTranslateOpFromID adopts an existing Objective-C object as a TransformTranslateOp
+// (nil for 0), retaining it and registering a release finalizer.
 func TransformTranslateOpFromID(id objc.ID) *TransformTranslateOp {
 	if id == 0 {
 		return nil
 	}
-	return &TransformTranslateOp{inner: raw.MDLTransformTranslateOpFromID(id)}
+	x := &TransformTranslateOp{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTransformTranslateOp creates a new [TransformTranslateOp].
-func NewTransformTranslateOp() *TransformTranslateOp {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTransformTranslateOp")), objc.RegisterName("new"))
-	return &TransformTranslateOp{inner: raw.MDLTransformTranslateOpFromID(_id)}
-}
-
-// Name calls the underlying Name.
-func (x *TransformTranslateOp) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// AnimatedValue calls the underlying AnimatedValue.
-func (x *TransformTranslateOp) AnimatedValue() *AnimatedVector3 {
-	_r := x.inner.AnimatedValue()
-	if _r == nil {
+// transformTranslateOpAdopt wraps an Objective-C object that this code just created as a
+// TransformTranslateOp (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func transformTranslateOpAdopt(id objc.ID) *TransformTranslateOp {
+	if id == 0 {
 		return nil
 	}
-	return &AnimatedVector3{inner: _r}
+	x := &TransformTranslateOp{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TransformTranslateOp) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TransformTranslateOp) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TransformTranslateOp) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTransformTranslateOp creates a new TransformTranslateOp.
+func NewTransformTranslateOp() *TransformTranslateOp {
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLTransformTranslateOp")), objc.RegisterName("new"))
+	return transformTranslateOpAdopt(_id)
+}
+
+func (x *TransformTranslateOp) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *TransformTranslateOp) AnimatedValue() *AnimatedVector3 {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animatedValue"))
+	return AnimatedVector3FromID(_r)
 }
 
 // TransformTranslateOpable is the interface implemented by [TransformTranslateOp], for mocking and DI.
 type TransformTranslateOpable interface {
-	Unwrap() *raw.MDLTransformTranslateOp
+	obj.Object
 	Name() string
 	AnimatedValue() *AnimatedVector3
 }

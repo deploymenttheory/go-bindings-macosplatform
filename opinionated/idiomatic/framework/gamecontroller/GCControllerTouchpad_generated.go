@@ -5,221 +5,159 @@
 package gamecontroller
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A control element that represents a touch event on a touchpad.
 //
-// ControllerTouchpad wraps [raw.GCControllerTouchpad] with a fluent Go API.
+// ControllerTouchpad is an idiomatic wrapper over the Objective-C class GCControllerTouchpad.
 type ControllerTouchpad struct {
-	inner *raw.GCControllerTouchpad
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCControllerTouchpad].
-func (x *ControllerTouchpad) Unwrap() *raw.GCControllerTouchpad { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ControllerTouchpad) ID() objc.ID { return x.inner.Ptr() }
-
-// ControllerTouchpadFromID adopts an existing object pointer as a ControllerTouchpad (nil for 0).
+// ControllerTouchpadFromID adopts an existing Objective-C object as a ControllerTouchpad
+// (nil for 0), retaining it and registering a release finalizer.
 func ControllerTouchpadFromID(id objc.ID) *ControllerTouchpad {
 	if id == 0 {
 		return nil
 	}
-	return &ControllerTouchpad{inner: raw.GCControllerTouchpadFromID(id)}
+	x := &ControllerTouchpad{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewControllerTouchpad creates a new [ControllerTouchpad].
+// controllerTouchpadAdopt wraps an Objective-C object that this code just created as a
+// ControllerTouchpad (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func controllerTouchpadAdopt(id objc.ID) *ControllerTouchpad {
+	if id == 0 {
+		return nil
+	}
+	x := &ControllerTouchpad{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ControllerTouchpad) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ControllerTouchpad) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ControllerTouchpad) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewControllerTouchpad creates a new ControllerTouchpad.
 func NewControllerTouchpad() *ControllerTouchpad {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCControllerTouchpad")), objc.RegisterName("new"))
-	return &ControllerTouchpad{inner: raw.GCControllerTouchpadFromID(_id)}
-}
-
-// The block that the element calls when the user begins touching the touchpad.
-//
-// WithTouchDown sets the touchDown property and returns the receiver for chaining.
-func (x *ControllerTouchpad) WithTouchDown(touchDown func(*raw.GCControllerTouchpad, float32, float32, float32, bool)) *ControllerTouchpad {
-	x.inner.SetTouchDown(touchDown)
-	return x
-}
-
-// The block that the element calls when the user continues touching the touchpad, not when the user begins or ends touching the touchpad.
-//
-// WithTouchMoved sets the touchMoved property and returns the receiver for chaining.
-func (x *ControllerTouchpad) WithTouchMoved(touchMoved func(*raw.GCControllerTouchpad, float32, float32, float32, bool)) *ControllerTouchpad {
-	x.inner.SetTouchMoved(touchMoved)
-	return x
-}
-
-// The block that the element calls when the user finishes touching the touchpad.
-//
-// WithTouchUp sets the touchUp property and returns the receiver for chaining.
-func (x *ControllerTouchpad) WithTouchUp(touchUp func(*raw.GCControllerTouchpad, float32, float32, float32, bool)) *ControllerTouchpad {
-	x.inner.SetTouchUp(touchUp)
-	return x
+	_id := objc.Send[objc.ID](objc.ID(_class("GCControllerTouchpad")), objc.RegisterName("new"))
+	return controllerTouchpadAdopt(_id)
 }
 
 // A Boolean value that determines whether the touch values are absolute or relative.
 //
-// WithReportsAbsoluteTouchSurfaceValues sets the reportsAbsoluteTouchSurfaceValues property and returns the receiver for chaining.
+// WithReportsAbsoluteTouchSurfaceValues sets reportsAbsoluteTouchSurfaceValues and returns the receiver so calls can be chained.
 func (x *ControllerTouchpad) WithReportsAbsoluteTouchSurfaceValues(reportsAbsoluteTouchSurfaceValues bool) *ControllerTouchpad {
-	x.inner.SetReportsAbsoluteTouchSurfaceValues(reportsAbsoluteTouchSurfaceValues)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportsAbsoluteTouchSurfaceValues:"), reportsAbsoluteTouchSurfaceValues)
 	return x
 }
 
 // The preferred state for handling input when the user binds the element to a system gesture.
 //
-// WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
-func (x *ControllerTouchpad) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerTouchpad {
-	x.inner.GCControllerElement.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
+// WithPreferredSystemGestureState sets preferredSystemGestureState and returns the receiver so calls can be chained.
+func (x *ControllerTouchpad) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerTouchpad {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
 	return x
 }
 
 // A system symbol for the element or the remapped element.
 //
-// WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
+// WithSfSymbolsName sets sfSymbolsName and returns the receiver so calls can be chained.
 func (x *ControllerTouchpad) WithSfSymbolsName(sfSymbolsName string) *ControllerTouchpad {
-	x.inner.GCControllerElement.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
 	return x
 }
 
 // The localized name for the element or the remapped element.
 //
-// WithLocalizedName sets the localizedName property and returns the receiver for chaining.
+// WithLocalizedName sets localizedName and returns the receiver so calls can be chained.
 func (x *ControllerTouchpad) WithLocalizedName(localizedName string) *ControllerTouchpad {
-	x.inner.GCControllerElement.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
 	return x
 }
 
 // The element’s system symbol, not the remapped symbol.
 //
-// WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
+// WithUnmappedSfSymbolsName sets unmappedSfSymbolsName and returns the receiver so calls can be chained.
 func (x *ControllerTouchpad) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerTouchpad {
-	x.inner.GCControllerElement.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
 	return x
 }
 
 // The element’s localized name, not the remapped name.
 //
-// WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
+// WithUnmappedLocalizedName sets unmappedLocalizedName and returns the receiver so calls can be chained.
 func (x *ControllerTouchpad) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerTouchpad {
-	x.inner.GCControllerElement.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
 	return x
 }
 
 // Sets the input values of a snapshot of a touchpad.
-//
-// SetValueForXAxisYAxisTouchDownButtonValue calls the underlying SetValueForXAxisYAxisTouchDownButtonValue.
 func (x *ControllerTouchpad) SetValueForXAxisYAxisTouchDownButtonValue(xAxis float32, yAxis float32, touchDown bool, buttonValue float32) {
-	x.inner.SetValueForXAxisYAxisTouchDownButtonValue(xAxis, yAxis, touchDown, buttonValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueForXAxis:yAxis:touchDown:buttonValue:"), xAxis, yAxis, touchDown, buttonValue)
 }
 
 // Button is the button built into the touch surface.
-//
-// Button calls the underlying Button.
 func (x *ControllerTouchpad) Button() *ControllerButtonInput {
-	_r := x.inner.Button()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("button"))
+	return ControllerButtonInputFromID(_r)
 }
 
-// Called when a touch event begins on the touchpad.
-//
-// TouchDown calls the underlying TouchDown.
-func (x *ControllerTouchpad) TouchDown() objc.Block {
-	return x.inner.TouchDown()
-}
-
-// SetTouchDown calls the underlying SetTouchDown.
-func (x *ControllerTouchpad) SetTouchDown(touchDown func(*raw.GCControllerTouchpad, float32, float32, float32, bool)) {
-	x.inner.SetTouchDown(touchDown)
-}
-
-// Called when a touch event continues on the touchpad, but not when it begins or ends.
-//
-// TouchMoved calls the underlying TouchMoved.
-func (x *ControllerTouchpad) TouchMoved() objc.Block {
-	return x.inner.TouchMoved()
-}
-
-// SetTouchMoved calls the underlying SetTouchMoved.
-func (x *ControllerTouchpad) SetTouchMoved(touchMoved func(*raw.GCControllerTouchpad, float32, float32, float32, bool)) {
-	x.inner.SetTouchMoved(touchMoved)
-}
-
-// Called when a touch event ends on the touchpad.
-//
-// TouchUp calls the underlying TouchUp.
-func (x *ControllerTouchpad) TouchUp() objc.Block {
-	return x.inner.TouchUp()
-}
-
-// SetTouchUp calls the underlying SetTouchUp.
-func (x *ControllerTouchpad) SetTouchUp(touchUp func(*raw.GCControllerTouchpad, float32, float32, float32, bool)) {
-	x.inner.SetTouchUp(touchUp)
-}
-
-// The touch surface is a 2-axis control that represents the position of a touch event on the touchpad. The axes will indicate the most recent touch position - a non-zero value does not indicate that the surface is being touched, and a value of (0, 0) does not indicate the surface is not being touched. @see touchState - Should be polled in conjunction with touchSurface to determine if values are valid
-//
-// TouchSurface calls the underlying TouchSurface.
+// The touch surface is a 2-axis control that represents the position of a touch event on the touchpad. The axes will indicate the most recent touch position - a non-zero value does not indicate that the surface is being touched, and a value of (0, 0) does not indicate the surface is not being touched.
 func (x *ControllerTouchpad) TouchSurface() *ControllerDirectionPad {
-	_r := x.inner.TouchSurface()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerDirectionPad{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchSurface"))
+	return ControllerDirectionPadFromID(_r)
 }
 
 // Indicates the current state of the touch event on the touchpad.
-//
-// TouchState calls the underlying TouchState.
-func (x *ControllerTouchpad) TouchState() GCTouchState {
-	return GCTouchState(x.inner.TouchState())
+func (x *ControllerTouchpad) TouchState() TouchState {
+	_r := objc.Send[TouchState](objref.IDOf(x), objc.RegisterName("touchState"))
+	return _r
 }
 
 // The touchpad can use the raw position values of its surface as D-pad values, or it can create a virtual dpad centered around the first contact point with the surface. If NO; a smaller sliding window is created around the initial touch point and subsequent movement is relative to that center. Movement outside the window will slide the window with it to re-center it. This is great for surfaces where there is no clear sense of a middle and drift over time is an issue. If YES; the absolute values are used and any drift will have to managed manually either through user traning or by a developer using the dpad. The default value for this property is YES, meaning the touch surface's raw positional values are reported.
-//
-// ReportsAbsoluteTouchSurfaceValues calls the underlying ReportsAbsoluteTouchSurfaceValues.
 func (x *ControllerTouchpad) ReportsAbsoluteTouchSurfaceValues() bool {
-	return x.inner.ReportsAbsoluteTouchSurfaceValues()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reportsAbsoluteTouchSurfaceValues"))
+	return _r
 }
 
-// SetReportsAbsoluteTouchSurfaceValues calls the underlying SetReportsAbsoluteTouchSurfaceValues.
 func (x *ControllerTouchpad) SetReportsAbsoluteTouchSurfaceValues(reportsAbsoluteTouchSurfaceValues bool) {
-	x.inner.SetReportsAbsoluteTouchSurfaceValues(reportsAbsoluteTouchSurfaceValues)
-}
-
-func (x *ControllerTouchpad) asControllerElement() *raw.GCControllerElement {
-	return &x.inner.GCControllerElement
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportsAbsoluteTouchSurfaceValues:"), reportsAbsoluteTouchSurfaceValues)
 }
 
 // ControllerTouchpadable is the interface implemented by [ControllerTouchpad], for mocking and DI.
 type ControllerTouchpadable interface {
-	Unwrap() *raw.GCControllerTouchpad
-	WithTouchDown(touchDown func(*raw.GCControllerTouchpad, float32, float32, float32, bool)) *ControllerTouchpad
-	WithTouchMoved(touchMoved func(*raw.GCControllerTouchpad, float32, float32, float32, bool)) *ControllerTouchpad
-	WithTouchUp(touchUp func(*raw.GCControllerTouchpad, float32, float32, float32, bool)) *ControllerTouchpad
+	obj.Object
 	WithReportsAbsoluteTouchSurfaceValues(reportsAbsoluteTouchSurfaceValues bool) *ControllerTouchpad
-	WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerTouchpad
+	WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerTouchpad
 	WithSfSymbolsName(sfSymbolsName string) *ControllerTouchpad
 	WithLocalizedName(localizedName string) *ControllerTouchpad
 	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerTouchpad
 	WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerTouchpad
 	SetValueForXAxisYAxisTouchDownButtonValue(xAxis float32, yAxis float32, touchDown bool, buttonValue float32)
 	Button() *ControllerButtonInput
-	TouchDown() objc.Block
-	SetTouchDown(touchDown func(*raw.GCControllerTouchpad, float32, float32, float32, bool))
-	TouchMoved() objc.Block
-	SetTouchMoved(touchMoved func(*raw.GCControllerTouchpad, float32, float32, float32, bool))
-	TouchUp() objc.Block
-	SetTouchUp(touchUp func(*raw.GCControllerTouchpad, float32, float32, float32, bool))
 	TouchSurface() *ControllerDirectionPad
-	TouchState() GCTouchState
+	TouchState() TouchState
 	ReportsAbsoluteTouchSurfaceValues() bool
 	SetReportsAbsoluteTouchSurfaceValues(reportsAbsoluteTouchSurfaceValues bool)
 }

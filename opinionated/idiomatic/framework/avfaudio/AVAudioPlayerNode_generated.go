@@ -5,184 +5,141 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object for scheduling the playback of buffers or segments of audio files.
 //
-// AudioPlayerNode wraps [raw.AVAudioPlayerNode] with a fluent Go API.
+// AudioPlayerNode is an idiomatic wrapper over the Objective-C class AVAudioPlayerNode.
 type AudioPlayerNode struct {
-	inner *raw.AVAudioPlayerNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioPlayerNode].
-func (x *AudioPlayerNode) Unwrap() *raw.AVAudioPlayerNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioPlayerNode) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioPlayerNodeFromID adopts an existing object pointer as a AudioPlayerNode (nil for 0).
+// AudioPlayerNodeFromID adopts an existing Objective-C object as a AudioPlayerNode
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioPlayerNodeFromID(id objc.ID) *AudioPlayerNode {
 	if id == 0 {
 		return nil
 	}
-	return &AudioPlayerNode{inner: raw.AVAudioPlayerNodeFromID(id)}
+	x := &AudioPlayerNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAudioPlayerNode creates a new [AudioPlayerNode].
+// audioPlayerNodeAdopt wraps an Objective-C object that this code just created as a
+// AudioPlayerNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioPlayerNodeAdopt(id objc.ID) *AudioPlayerNode {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioPlayerNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudioPlayerNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioPlayerNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioPlayerNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAudioPlayerNode creates a new AudioPlayerNode.
 func NewAudioPlayerNode() *AudioPlayerNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioPlayerNode")), objc.RegisterName("new"))
-	return &AudioPlayerNode{inner: raw.AVAudioPlayerNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioPlayerNode")), objc.RegisterName("new"))
+	return audioPlayerNodeAdopt(_id)
 }
 
 // Schedules the playing samples from an audio buffer.
-//
-// ScheduleBufferCompletionHandler calls the underlying ScheduleBufferCompletionHandler.
-func (x *AudioPlayerNode) ScheduleBufferCompletionHandler(buffer *raw.AVAudioPCMBuffer, completionHandler func()) {
-	x.inner.ScheduleBufferCompletionHandler(buffer, completionHandler)
-}
-
-// Schedules the playing samples from an audio buffer with the callback option you specify.
-//
-// ScheduleBufferCompletionCallbackTypeCompletionHandler calls the underlying ScheduleBufferCompletionCallbackTypeCompletionHandler.
-func (x *AudioPlayerNode) ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer *raw.AVAudioPCMBuffer, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType)) {
-	x.inner.ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer, raw.AVAudioPlayerNodeCompletionCallbackType(callbackType), func(_a0 raw.AVAudioPlayerNodeCompletionCallbackType) {
-		completionHandler(AVAudioPlayerNodeCompletionCallbackType(_a0))
-	})
+func (x *AudioPlayerNode) ScheduleBufferCompletionHandler(buffer *AudioPCMBuffer, completionHandler func()) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleBuffer:completionHandler:"), objref.IDOf(buffer), completionHandler)
 }
 
 // Schedules the playing samples from an audio buffer at the time and playback options you specify.
-//
-// ScheduleBufferAtTimeOptionsCompletionHandler calls the underlying ScheduleBufferAtTimeOptionsCompletionHandler.
-func (x *AudioPlayerNode) ScheduleBufferAtTimeOptionsCompletionHandler(buffer *raw.AVAudioPCMBuffer, when *raw.AVAudioTime, options AVAudioPlayerNodeBufferOptions, completionHandler func()) {
-	x.inner.ScheduleBufferAtTimeOptionsCompletionHandler(buffer, when, raw.AVAudioPlayerNodeBufferOptions(options), completionHandler)
-}
-
-// Schedules the playing samples from an audio buffer with the playback options you specify.
-//
-// ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler calls the underlying ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler.
-func (x *AudioPlayerNode) ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer *raw.AVAudioPCMBuffer, when *raw.AVAudioTime, options AVAudioPlayerNodeBufferOptions, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType)) {
-	x.inner.ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer, when, raw.AVAudioPlayerNodeBufferOptions(options), raw.AVAudioPlayerNodeCompletionCallbackType(callbackType), func(_a0 raw.AVAudioPlayerNodeCompletionCallbackType) {
-		completionHandler(AVAudioPlayerNodeCompletionCallbackType(_a0))
-	})
+func (x *AudioPlayerNode) ScheduleBufferAtTimeOptionsCompletionHandler(buffer *AudioPCMBuffer, when *AudioTime, options AudioPlayerNodeBufferOptions, completionHandler func()) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleBuffer:atTime:options:completionHandler:"), objref.IDOf(buffer), objref.IDOf(when), options, completionHandler)
 }
 
 // Schedules the playing of an entire audio file.
-//
-// ScheduleFileAtTimeCompletionHandler calls the underlying ScheduleFileAtTimeCompletionHandler.
-func (x *AudioPlayerNode) ScheduleFileAtTimeCompletionHandler(file *raw.AVAudioFile, when *raw.AVAudioTime, completionHandler func()) {
-	x.inner.ScheduleFileAtTimeCompletionHandler(file, when, completionHandler)
-}
-
-// Schedules the playing of an entire audio file with a callback option you specify.
-//
-// ScheduleFileAtTimeCompletionCallbackTypeCompletionHandler calls the underlying ScheduleFileAtTimeCompletionCallbackTypeCompletionHandler.
-func (x *AudioPlayerNode) ScheduleFileAtTimeCompletionCallbackTypeCompletionHandler(file *raw.AVAudioFile, when *raw.AVAudioTime, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType)) {
-	x.inner.ScheduleFileAtTimeCompletionCallbackTypeCompletionHandler(file, when, raw.AVAudioPlayerNodeCompletionCallbackType(callbackType), func(_a0 raw.AVAudioPlayerNodeCompletionCallbackType) {
-		completionHandler(AVAudioPlayerNodeCompletionCallbackType(_a0))
-	})
+func (x *AudioPlayerNode) ScheduleFileAtTimeCompletionHandler(file *AudioFile, when *AudioTime, completionHandler func()) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleFile:atTime:completionHandler:"), objref.IDOf(file), objref.IDOf(when), completionHandler)
 }
 
 // Schedules the playing of an audio file segment.
-//
-// ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler calls the underlying ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler.
-func (x *AudioPlayerNode) ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler(file *raw.AVAudioFile, startFrame int64, numberFrames uint32, when *raw.AVAudioTime, completionHandler func()) {
-	x.inner.ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler(file, startFrame, numberFrames, when, completionHandler)
-}
-
-// Schedules the playing of an audio file segment with a callback option you specify.
-//
-// ScheduleSegmentStartingFrameFrameCountAtTimeCompletionCallbackTypeCompletionHandler calls the underlying ScheduleSegmentStartingFrameFrameCountAtTimeCompletionCallbackTypeCompletionHandler.
-func (x *AudioPlayerNode) ScheduleSegmentStartingFrameFrameCountAtTimeCompletionCallbackTypeCompletionHandler(file *raw.AVAudioFile, startFrame int64, numberFrames uint32, when *raw.AVAudioTime, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType)) {
-	x.inner.ScheduleSegmentStartingFrameFrameCountAtTimeCompletionCallbackTypeCompletionHandler(file, startFrame, numberFrames, when, raw.AVAudioPlayerNodeCompletionCallbackType(callbackType), func(_a0 raw.AVAudioPlayerNodeCompletionCallbackType) {
-		completionHandler(AVAudioPlayerNodeCompletionCallbackType(_a0))
-	})
+func (x *AudioPlayerNode) ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler(file *AudioFile, startFrame int64, numberFrames uint32, when *AudioTime, completionHandler func()) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleSegment:startingFrame:frameCount:atTime:completionHandler:"), objref.IDOf(file), startFrame, numberFrames, objref.IDOf(when), completionHandler)
 }
 
 // Clears all of the node’s events you schedule and stops playback.
-//
-// Stop calls the underlying Stop.
 func (x *AudioPlayerNode) Stop() {
-	x.inner.Stop()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
 // Prepares the file regions or buffers you schedule for playback.
-//
-// PrepareWithFrameCount calls the underlying PrepareWithFrameCount.
 func (x *AudioPlayerNode) PrepareWithFrameCount(frameCount uint32) {
-	x.inner.PrepareWithFrameCount(frameCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareWithFrameCount:"), frameCount)
 }
 
 // Starts or resumes playback immediately.
-//
-// Play calls the underlying Play.
 func (x *AudioPlayerNode) Play() {
-	x.inner.Play()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("play"))
 }
 
 // Starts or resumes playback at a time you specify.
-//
-// PlayAtTime calls the underlying PlayAtTime.
-func (x *AudioPlayerNode) PlayAtTime(when *raw.AVAudioTime) {
-	x.inner.PlayAtTime(when)
+func (x *AudioPlayerNode) PlayAtTime(when *AudioTime) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playAtTime:"), objref.IDOf(when))
 }
 
 // Pauses the node’s playback.
-//
-// Pause calls the underlying Pause.
 func (x *AudioPlayerNode) Pause() {
-	x.inner.Pause()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause"))
 }
 
 // Converts from player time to node time.
-//
-// NodeTimeForPlayerTime calls the underlying NodeTimeForPlayerTime.
-func (x *AudioPlayerNode) NodeTimeForPlayerTime(playerTime *raw.AVAudioTime) *AudioTime {
-	_r := x.inner.NodeTimeForPlayerTime(playerTime)
-	if _r == nil {
-		return nil
-	}
-	return &AudioTime{inner: _r}
+func (x *AudioPlayerNode) NodeTimeForPlayerTime(playerTime *AudioTime) *AudioTime {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeTimeForPlayerTime:"), objref.IDOf(playerTime))
+	return AudioTimeFromID(_r)
 }
 
 // Converts from node time to player time.
-//
-// PlayerTimeForNodeTime calls the underlying PlayerTimeForNodeTime.
-func (x *AudioPlayerNode) PlayerTimeForNodeTime(nodeTime *raw.AVAudioTime) *AudioTime {
-	_r := x.inner.PlayerTimeForNodeTime(nodeTime)
-	if _r == nil {
-		return nil
-	}
-	return &AudioTime{inner: _r}
+func (x *AudioPlayerNode) PlayerTimeForNodeTime(nodeTime *AudioTime) *AudioTime {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerTimeForNodeTime:"), objref.IDOf(nodeTime))
+	return AudioTimeFromID(_r)
 }
 
-// IsPlaying calls the underlying IsPlaying.
 func (x *AudioPlayerNode) IsPlaying() bool {
-	return x.inner.IsPlaying()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPlaying"))
+	return _r
 }
-
-func (x *AudioPlayerNode) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioNode }
 
 // AudioPlayerNodeable is the interface implemented by [AudioPlayerNode], for mocking and DI.
 type AudioPlayerNodeable interface {
-	Unwrap() *raw.AVAudioPlayerNode
-	ScheduleBufferCompletionHandler(buffer *raw.AVAudioPCMBuffer, completionHandler func())
-	ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer *raw.AVAudioPCMBuffer, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType))
-	ScheduleBufferAtTimeOptionsCompletionHandler(buffer *raw.AVAudioPCMBuffer, when *raw.AVAudioTime, options AVAudioPlayerNodeBufferOptions, completionHandler func())
-	ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer *raw.AVAudioPCMBuffer, when *raw.AVAudioTime, options AVAudioPlayerNodeBufferOptions, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType))
-	ScheduleFileAtTimeCompletionHandler(file *raw.AVAudioFile, when *raw.AVAudioTime, completionHandler func())
-	ScheduleFileAtTimeCompletionCallbackTypeCompletionHandler(file *raw.AVAudioFile, when *raw.AVAudioTime, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType))
-	ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler(file *raw.AVAudioFile, startFrame int64, numberFrames uint32, when *raw.AVAudioTime, completionHandler func())
-	ScheduleSegmentStartingFrameFrameCountAtTimeCompletionCallbackTypeCompletionHandler(file *raw.AVAudioFile, startFrame int64, numberFrames uint32, when *raw.AVAudioTime, callbackType AVAudioPlayerNodeCompletionCallbackType, completionHandler func(AVAudioPlayerNodeCompletionCallbackType))
+	obj.Object
+	ScheduleBufferCompletionHandler(buffer *AudioPCMBuffer, completionHandler func())
+	ScheduleBufferAtTimeOptionsCompletionHandler(buffer *AudioPCMBuffer, when *AudioTime, options AudioPlayerNodeBufferOptions, completionHandler func())
+	ScheduleFileAtTimeCompletionHandler(file *AudioFile, when *AudioTime, completionHandler func())
+	ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler(file *AudioFile, startFrame int64, numberFrames uint32, when *AudioTime, completionHandler func())
 	Stop()
 	PrepareWithFrameCount(frameCount uint32)
 	Play()
-	PlayAtTime(when *raw.AVAudioTime)
+	PlayAtTime(when *AudioTime)
 	Pause()
-	NodeTimeForPlayerTime(playerTime *raw.AVAudioTime) *AudioTime
-	PlayerTimeForNodeTime(nodeTime *raw.AVAudioTime) *AudioTime
+	NodeTimeForPlayerTime(playerTime *AudioTime) *AudioTime
+	PlayerTimeForNodeTime(nodeTime *AudioTime) *AudioTime
 	IsPlaying() bool
 }
 

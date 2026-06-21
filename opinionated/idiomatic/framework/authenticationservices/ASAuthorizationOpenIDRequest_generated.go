@@ -5,177 +5,161 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An OpenID authorization request.
 //
-// AuthorizationOpenIDRequest wraps [raw.ASAuthorizationOpenIDRequest] with a fluent Go API.
+// AuthorizationOpenIDRequest is an idiomatic wrapper over the Objective-C class ASAuthorizationOpenIDRequest.
 type AuthorizationOpenIDRequest struct {
-	inner *raw.ASAuthorizationOpenIDRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationOpenIDRequest].
-func (x *AuthorizationOpenIDRequest) Unwrap() *raw.ASAuthorizationOpenIDRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationOpenIDRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationOpenIDRequestFromID adopts an existing object pointer as a AuthorizationOpenIDRequest (nil for 0).
+// AuthorizationOpenIDRequestFromID adopts an existing Objective-C object as a AuthorizationOpenIDRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationOpenIDRequestFromID(id objc.ID) *AuthorizationOpenIDRequest {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationOpenIDRequest{inner: raw.ASAuthorizationOpenIDRequestFromID(id)}
+	x := &AuthorizationOpenIDRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorizationOpenIDRequest creates a new [AuthorizationOpenIDRequest].
+// authorizationOpenIDRequestAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationOpenIDRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationOpenIDRequestAdopt(id objc.ID) *AuthorizationOpenIDRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationOpenIDRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthorizationOpenIDRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationOpenIDRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationOpenIDRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAuthorizationOpenIDRequest creates a new AuthorizationOpenIDRequest.
 func NewAuthorizationOpenIDRequest() *AuthorizationOpenIDRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationOpenIDRequest")), objc.RegisterName("new"))
-	return &AuthorizationOpenIDRequest{inner: raw.ASAuthorizationOpenIDRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationOpenIDRequest")), objc.RegisterName("new"))
+	return authorizationOpenIDRequestAdopt(_id)
 }
 
 // The contact information to be requested from the user during authentication.
 //
-// WithRequestedScopes sets the collection, converting the Go slice to an NSArray.
-func (x *AuthorizationOpenIDRequest) WithRequestedScopes(items ...*foundation.NSString) *AuthorizationOpenIDRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetRequestedScopes(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetRequestedScopes(_arr)
+// WithRequestedScopes sets the collection and returns the receiver so calls can be chained.
+func (x *AuthorizationOpenIDRequest) WithRequestedScopes(items ...obj.Object) *AuthorizationOpenIDRequest {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestedScopes:"), _arr)
 	return x
 }
 
 // Data that’s returned to you unmodified in the corresponding credential after a successful authentication.
 //
-// WithState sets the state property and returns the receiver for chaining.
+// WithState sets state and returns the receiver so calls can be chained.
 func (x *AuthorizationOpenIDRequest) WithState(state string) *AuthorizationOpenIDRequest {
-	x.inner.SetState(foundation.NSStringStringWithUTF8String(state))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), purego.NSString(state))
 	return x
 }
 
 // A string value to pass to the identity provider.
 //
-// WithNonce sets the nonce property and returns the receiver for chaining.
+// WithNonce sets nonce and returns the receiver so calls can be chained.
 func (x *AuthorizationOpenIDRequest) WithNonce(nonce string) *AuthorizationOpenIDRequest {
-	x.inner.SetNonce(foundation.NSStringStringWithUTF8String(nonce))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNonce:"), purego.NSString(nonce))
 	return x
 }
 
 // The OpenID authentication operation you want this request to perform.
 //
-// WithRequestedOperation sets the requestedOperation property and returns the receiver for chaining.
-func (x *AuthorizationOpenIDRequest) WithRequestedOperation(requestedOperation *foundation.NSString) *AuthorizationOpenIDRequest {
-	x.inner.SetRequestedOperation(requestedOperation)
+// WithRequestedOperation sets requestedOperation and returns the receiver so calls can be chained.
+func (x *AuthorizationOpenIDRequest) WithRequestedOperation(requestedOperation obj.Object) *AuthorizationOpenIDRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestedOperation:"), objref.IDOf(requestedOperation))
 	return x
 }
 
-// @abstract The contact information to be requested from the user.  Only scopes for which this app was authorized for will be returned.
+// The contact information to be requested from the user.  Only scopes for which this app was authorized for will be returned.
 //
 // RequestedScopes returns the collection as a Go slice.
-func (x *AuthorizationOpenIDRequest) RequestedScopes() []*foundation.NSString {
-	arr := x.inner.RequestedScopes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *AuthorizationOpenIDRequest) RequestedScopes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestedScopes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetRequestedScopes calls the underlying SetRequestedScopes.
-func (x *AuthorizationOpenIDRequest) SetRequestedScopes(requestedScopes *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetRequestedScopes(requestedScopes)
+func (x *AuthorizationOpenIDRequest) SetRequestedScopes(requestedScopes []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestedScopes:"), purego.SliceToNSArray(requestedScopes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @abstract State to be passed to the identity provider.  This value will be returned as a part of successful ASAuthorization response. @note The state size may depend on the actual technology used and an error might be returned by the request execution.
-//
-// State calls the underlying State.
+// State to be passed to the identity provider.  This value will be returned as a part of successful ASAuthorization response.
 func (x *AuthorizationOpenIDRequest) State() string {
-	_r := x.inner.State()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetState calls the underlying SetState.
 func (x *AuthorizationOpenIDRequest) SetState(state string) {
-	x.inner.SetState(foundation.NSStringStringWithUTF8String(state))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), purego.NSString(state))
 }
 
-// @abstract Nonce to be passed to the identity provider.  This value can be verified with the identity token provided as a part of successful ASAuthorization response. @note The nonce size may depend on the actual technology used and an error might be returned by the request execution.
-//
-// Nonce calls the underlying Nonce.
+// Nonce to be passed to the identity provider.  This value can be verified with the identity token provided as a part of successful ASAuthorization response.
 func (x *AuthorizationOpenIDRequest) Nonce() string {
-	_r := x.inner.Nonce()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nonce"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetNonce calls the underlying SetNonce.
 func (x *AuthorizationOpenIDRequest) SetNonce(nonce string) {
-	x.inner.SetNonce(foundation.NSStringStringWithUTF8String(nonce))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNonce:"), purego.NSString(nonce))
 }
 
-// @abstract Operation to be executed by the request. The ASAuthorizationOperationImplicit operation interpretation depends on the credential provider implementation.
-//
-// RequestedOperation calls the underlying RequestedOperation.
-func (x *AuthorizationOpenIDRequest) RequestedOperation() string {
-	_r := x.inner.RequestedOperation()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// Operation to be executed by the request. The ASAuthorizationOperationImplicit operation interpretation depends on the credential provider implementation.
+func (x *AuthorizationOpenIDRequest) RequestedOperation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestedOperation"))
+	return obj.Wrap(_r)
 }
 
-// SetRequestedOperation calls the underlying SetRequestedOperation.
-func (x *AuthorizationOpenIDRequest) SetRequestedOperation(requestedOperation *foundation.NSString) {
-	x.inner.SetRequestedOperation(requestedOperation)
-}
-
-func (x *AuthorizationOpenIDRequest) asAuthorizationOpenIDRequest() *raw.ASAuthorizationOpenIDRequest {
-	return x.inner
-}
-
-func (x *AuthorizationOpenIDRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest {
-	return &x.inner.ASAuthorizationRequest
+func (x *AuthorizationOpenIDRequest) SetRequestedOperation(requestedOperation obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestedOperation:"), objref.IDOf(requestedOperation))
 }
 
 // AuthorizationOpenIDRequestable is the interface implemented by [AuthorizationOpenIDRequest], for mocking and DI.
 type AuthorizationOpenIDRequestable interface {
-	Unwrap() *raw.ASAuthorizationOpenIDRequest
-	WithRequestedScopes(items ...*foundation.NSString) *AuthorizationOpenIDRequest
+	obj.Object
+	WithRequestedScopes(items ...obj.Object) *AuthorizationOpenIDRequest
 	WithState(state string) *AuthorizationOpenIDRequest
 	WithNonce(nonce string) *AuthorizationOpenIDRequest
-	WithRequestedOperation(requestedOperation *foundation.NSString) *AuthorizationOpenIDRequest
-	RequestedScopes() []*foundation.NSString
-	SetRequestedScopes(requestedScopes *foundation.NSArray[*foundation.NSString])
+	WithRequestedOperation(requestedOperation obj.Object) *AuthorizationOpenIDRequest
+	RequestedScopes() []obj.Object
+	SetRequestedScopes(requestedScopes []obj.Object)
 	State() string
 	SetState(state string)
 	Nonce() string
 	SetNonce(nonce string)
-	RequestedOperation() string
-	SetRequestedOperation(requestedOperation *foundation.NSString)
+	RequestedOperation() obj.Object
+	SetRequestedOperation(requestedOperation obj.Object)
 }
 
 var _ AuthorizationOpenIDRequestable = (*AuthorizationOpenIDRequest)(nil)

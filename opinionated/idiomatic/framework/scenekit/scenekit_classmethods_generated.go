@@ -6,1221 +6,700 @@ package scenekit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// SCNAccelerationConstraintAccelerationConstraint calls the underlying SCNAccelerationConstraintAccelerationConstraint.
+// Creates and returns a SCNAccelerationConstraint object.
 func SCNAccelerationConstraintAccelerationConstraint() *AccelerationConstraint {
-	_r := raw.SCNAccelerationConstraintAccelerationConstraint()
-	if _r == nil {
-		return nil
-	}
-	return &AccelerationConstraint{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAccelerationConstraint")), objc.RegisterName("accelerationConstraint"))
+	return AccelerationConstraintFromID(_r)
 }
 
-// MoveByXYZDuration calls the underlying SCNActionMoveByXYZDuration.
+// Creates an action that moves a node relative to its current position.
 func MoveByXYZDuration(deltaX float64, deltaY float64, deltaZ float64, duration float64) *Action {
-	_r := raw.SCNActionMoveByXYZDuration(deltaX, deltaY, deltaZ, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("moveByX:y:z:duration:"), deltaX, deltaY, deltaZ, duration)
+	return ActionFromID(_r)
 }
 
-// MoveByDuration calls the underlying SCNActionMoveByDuration.
-func MoveByDuration(delta raw.SCNVector3, duration float64) *Action {
-	_r := raw.SCNActionMoveByDuration(delta, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
-}
-
-// MoveToDuration calls the underlying SCNActionMoveToDuration.
-func MoveToDuration(location raw.SCNVector3, duration float64) *Action {
-	_r := raw.SCNActionMoveToDuration(location, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
-}
-
-// RotateByXYZDuration calls the underlying SCNActionRotateByXYZDuration.
+// Creates an action that rotates the node in each of the three principal axes by angles relative to its current orientation.
 func RotateByXYZDuration(xAngle float64, yAngle float64, zAngle float64, duration float64) *Action {
-	_r := raw.SCNActionRotateByXYZDuration(xAngle, yAngle, zAngle, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("rotateByX:y:z:duration:"), xAngle, yAngle, zAngle, duration)
+	return ActionFromID(_r)
 }
 
-// RotateToXYZDuration calls the underlying SCNActionRotateToXYZDuration.
+// Creates an action that rotates the node to absolute angles in each of the three principal axes.
 func RotateToXYZDuration(xAngle float64, yAngle float64, zAngle float64, duration float64) *Action {
-	_r := raw.SCNActionRotateToXYZDuration(xAngle, yAngle, zAngle, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("rotateToX:y:z:duration:"), xAngle, yAngle, zAngle, duration)
+	return ActionFromID(_r)
 }
 
-// RotateToXYZDurationShortestUnitArc calls the underlying SCNActionRotateToXYZDurationShortestUnitArc.
+// Creates an action that rotates the node to absolute angles in each of the three principal axes.
 func RotateToXYZDurationShortestUnitArc(xAngle float64, yAngle float64, zAngle float64, duration float64, shortestUnitArc bool) *Action {
-	_r := raw.SCNActionRotateToXYZDurationShortestUnitArc(xAngle, yAngle, zAngle, duration, shortestUnitArc)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("rotateToX:y:z:duration:shortestUnitArc:"), xAngle, yAngle, zAngle, duration, shortestUnitArc)
+	return ActionFromID(_r)
 }
 
-// RotateByAngleAroundAxisDuration calls the underlying SCNActionRotateByAngleAroundAxisDuration.
-func RotateByAngleAroundAxisDuration(angle float64, axis raw.SCNVector3, duration float64) *Action {
-	_r := raw.SCNActionRotateByAngleAroundAxisDuration(angle, axis, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
-}
-
-// RotateToAxisAngleDuration calls the underlying SCNActionRotateToAxisAngleDuration.
-func RotateToAxisAngleDuration(axisAngle raw.SCNVector4, duration float64) *Action {
-	_r := raw.SCNActionRotateToAxisAngleDuration(axisAngle, duration)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
-}
-
-// ScaleByDuration calls the underlying SCNActionScaleByDuration.
+// Creates an action that uniformly changes the scale factor of a node by a relative value.
 func ScaleByDuration(scale float64, sec float64) *Action {
-	_r := raw.SCNActionScaleByDuration(scale, sec)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("scaleBy:duration:"), scale, sec)
+	return ActionFromID(_r)
 }
 
-// ScaleToDuration calls the underlying SCNActionScaleToDuration.
+// Creates an action that uniformly changes the scale factor of a node to an absolute value.
 func ScaleToDuration(scale float64, sec float64) *Action {
-	_r := raw.SCNActionScaleToDuration(scale, sec)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("scaleTo:duration:"), scale, sec)
+	return ActionFromID(_r)
 }
 
-// Sequence calls the underlying SCNActionSequence.
-func Sequence(actions *foundation.NSArray[*raw.SCNAction]) *Action {
-	_r := raw.SCNActionSequence(actions)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// Creates an action that runs a collection of actions sequentially.
+func Sequence(actions []*Action) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("sequence:"), purego.SliceToNSArray(actions, func(_v *Action) objc.ID { return objref.IDOf(_v) }))
+	return ActionFromID(_r)
 }
 
-// Group calls the underlying SCNActionGroup.
-func Group(actions *foundation.NSArray[*raw.SCNAction]) *Action {
-	_r := raw.SCNActionGroup(actions)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// Creates an action that runs a collection of actions in parallel.
+func Group(actions []*Action) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("group:"), purego.SliceToNSArray(actions, func(_v *Action) objc.ID { return objref.IDOf(_v) }))
+	return ActionFromID(_r)
 }
 
-// RepeatActionCount calls the underlying SCNActionRepeatActionCount.
-func RepeatActionCount(action *raw.SCNAction, count uint) *Action {
-	_r := raw.SCNActionRepeatActionCount(action, count)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// Creates an action that repeats another action a specified number of times.
+func RepeatActionCount(action *Action, count int) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("repeatAction:count:"), objref.IDOf(action), count)
+	return ActionFromID(_r)
 }
 
-// RepeatActionForever calls the underlying SCNActionRepeatActionForever.
-func RepeatActionForever(action *raw.SCNAction) *Action {
-	_r := raw.SCNActionRepeatActionForever(action)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// Creates an action that repeats another action forever.
+func RepeatActionForever(action *Action) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("repeatActionForever:"), objref.IDOf(action))
+	return ActionFromID(_r)
 }
 
-// FadeInWithDuration calls the underlying SCNActionFadeInWithDuration.
+// Creates an action that changes the opacity of the node to 1.0.
 func FadeInWithDuration(sec float64) *Action {
-	_r := raw.SCNActionFadeInWithDuration(sec)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("fadeInWithDuration:"), sec)
+	return ActionFromID(_r)
 }
 
-// FadeOutWithDuration calls the underlying SCNActionFadeOutWithDuration.
+// Creates an action that changes the opacity of the node to 0.0.
 func FadeOutWithDuration(sec float64) *Action {
-	_r := raw.SCNActionFadeOutWithDuration(sec)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("fadeOutWithDuration:"), sec)
+	return ActionFromID(_r)
 }
 
-// FadeOpacityByDuration calls the underlying SCNActionFadeOpacityByDuration.
+// Creates an action that adjusts the opacity of a node by a relative value.
 func FadeOpacityByDuration(factor float64, sec float64) *Action {
-	_r := raw.SCNActionFadeOpacityByDuration(factor, sec)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("fadeOpacityBy:duration:"), factor, sec)
+	return ActionFromID(_r)
 }
 
-// FadeOpacityToDuration calls the underlying SCNActionFadeOpacityToDuration.
+// Creates an action that adjusts the opacity of a node to a new value.
 func FadeOpacityToDuration(opacity float64, sec float64) *Action {
-	_r := raw.SCNActionFadeOpacityToDuration(opacity, sec)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("fadeOpacityTo:duration:"), opacity, sec)
+	return ActionFromID(_r)
 }
 
-// Hide calls the underlying SCNActionHide.
+// Creates an action that hides a node.
 func Hide() *Action {
-	_r := raw.SCNActionHide()
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("hide"))
+	return ActionFromID(_r)
 }
 
-// Unhide calls the underlying SCNActionUnhide.
+// Creates an action that ensures a node is not hidden.
 func Unhide() *Action {
-	_r := raw.SCNActionUnhide()
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("unhide"))
+	return ActionFromID(_r)
 }
 
-// WaitForDuration calls the underlying SCNActionWaitForDuration.
+// Creates an action that idles for a specified period of time.
 func WaitForDuration(sec float64) *Action {
-	_r := raw.SCNActionWaitForDuration(sec)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("waitForDuration:"), sec)
+	return ActionFromID(_r)
 }
 
-// WaitForDurationWithRange calls the underlying SCNActionWaitForDurationWithRange.
+// Creates an action that idles for a randomized period of time.
 func WaitForDurationWithRange(sec float64, durationRange float64) *Action {
-	_r := raw.SCNActionWaitForDurationWithRange(sec, durationRange)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("waitForDuration:withRange:"), sec, durationRange)
+	return ActionFromID(_r)
 }
 
-// RemoveFromParentNode calls the underlying SCNActionRemoveFromParentNode.
+// Creates an action that removes the node from its parent.
 func RemoveFromParentNode() *Action {
-	_r := raw.SCNActionRemoveFromParentNode()
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("removeFromParentNode"))
+	return ActionFromID(_r)
 }
 
-// RunBlock calls the underlying SCNActionRunBlock.
-func RunBlock(block func(*raw.SCNNode)) *Action {
-	_r := raw.SCNActionRunBlock(block)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// Creates an action that executes a block.
+func RunBlock(block func(obj.Object)) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("runBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { block(obj.Wrap(_b0)) }))
+	return ActionFromID(_r)
 }
 
-// RunBlockQueue calls the underlying SCNActionRunBlockQueue.
-func RunBlockQueue(block func(*raw.SCNNode), queue *foundation.NSObject) *Action {
-	_r := raw.SCNActionRunBlockQueue(block, queue)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// Creates an action that executes a block on a specific dispatch queue.
+func RunBlockQueue(block func(obj.Object), queue obj.Object) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("runBlock:queue:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { block(obj.Wrap(_b0)) }), objref.IDOf(queue))
+	return ActionFromID(_r)
 }
 
-// JavaScriptActionWithScriptDuration calls the underlying SCNActionJavaScriptActionWithScriptDuration.
+// Creates an action that executes a JavaScript script periodically over a specified duration.
 func JavaScriptActionWithScriptDuration(script string, seconds float64) *Action {
-	_r := raw.SCNActionJavaScriptActionWithScriptDuration(foundation.NSStringStringWithUTF8String(script), seconds)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("javaScriptActionWithScript:duration:"), purego.NSString(script), seconds)
+	return ActionFromID(_r)
 }
 
-// CustomActionWithDurationActionBlock calls the underlying SCNActionCustomActionWithDurationActionBlock.
-func CustomActionWithDurationActionBlock(seconds float64, block func(*raw.SCNNode, float64)) *Action {
-	_r := raw.SCNActionCustomActionWithDurationActionBlock(seconds, block)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// Creates an action that executes a block periodically over a specified duration.
+func CustomActionWithDurationActionBlock(seconds float64, block func(obj.Object, float64)) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("customActionWithDuration:actionBlock:"), seconds, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64) { block(obj.Wrap(_b0), _b1) }))
+	return ActionFromID(_r)
 }
 
-// PlayAudioSourceWaitForCompletion calls the underlying SCNActionPlayAudioSourceWaitForCompletion.
-func PlayAudioSourceWaitForCompletion(source *raw.SCNAudioSource, wait bool) *Action {
-	_r := raw.SCNActionPlayAudioSourceWaitForCompletion(source, wait)
-	if _r == nil {
-		return nil
-	}
-	return &Action{inner: _r}
+// Creates an action that plays an audio source.
+func PlayAudioSourceWaitForCompletion(source *AudioSource, wait bool) *Action {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAction")), objc.RegisterName("playAudioSource:waitForCompletion:"), objref.IDOf(source), wait)
+	return ActionFromID(_r)
 }
 
-// AnimationWithContentsOfURL calls the underlying SCNAnimationAnimationWithContentsOfURL.
+// Loads and returns an animation loaded from the specified URL.
 func AnimationWithContentsOfURL(animationUrl string) *Animation {
-	_r := raw.SCNAnimationAnimationWithContentsOfURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(animationUrl)))
-	if _r == nil {
-		return nil
-	}
-	return &Animation{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAnimation")), objc.RegisterName("animationWithContentsOfURL:"), rt.FileURL(animationUrl))
+	return AnimationFromID(_r)
 }
 
-// AnimationNamed calls the underlying SCNAnimationAnimationNamed.
+// Loads and returns the animation with the specified name in the current application bundle.
 func AnimationNamed(animationName string) *Animation {
-	_r := raw.SCNAnimationAnimationNamed(foundation.NSStringStringWithUTF8String(animationName))
-	if _r == nil {
-		return nil
-	}
-	return &Animation{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAnimation")), objc.RegisterName("animationNamed:"), purego.NSString(animationName))
+	return AnimationFromID(_r)
 }
 
-// AnimationWithCAAnimation calls the underlying SCNAnimationAnimationWithCAAnimation.
-func AnimationWithCAAnimation(caAnimation *quartzcore.CAAnimation) *Animation {
-	_r := raw.SCNAnimationAnimationWithCAAnimation(caAnimation)
-	if _r == nil {
-		return nil
-	}
-	return &Animation{inner: _r}
+// Returns a SCNAnimation initialized from a CAAnimation. Only CABasicAnimation, CAKeyframeAnimation and CAAnimationGroup are currently supported.
+func AnimationWithCAAnimation(caAnimation obj.Object) *Animation {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAnimation")), objc.RegisterName("animationWithCAAnimation:"), objref.IDOf(caAnimation))
+	return AnimationFromID(_r)
 }
 
-// AnimationEventWithKeyTimeBlock calls the underlying SCNAnimationEventAnimationEventWithKeyTimeBlock.
-func AnimationEventWithKeyTimeBlock(time_ float64, eventBlock func(objc.ID, objc.ID, bool)) *AnimationEvent {
-	_r := raw.SCNAnimationEventAnimationEventWithKeyTimeBlock(time_, eventBlock)
-	if _r == nil {
-		return nil
-	}
-	return &AnimationEvent{inner: _r}
+// Initialize an animation player with an animation
+func AnimationPlayerWithAnimation(animation *Animation) *AnimationPlayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAnimationPlayer")), objc.RegisterName("animationPlayerWithAnimation:"), objref.IDOf(animation))
+	return AnimationPlayerFromID(_r)
 }
 
-// AnimationPlayerWithAnimation calls the underlying SCNAnimationPlayerAnimationPlayerWithAnimation.
-func AnimationPlayerWithAnimation(animation *raw.SCNAnimation) *AnimationPlayer {
-	_r := raw.SCNAnimationPlayerAnimationPlayerWithAnimation(animation)
-	if _r == nil {
-		return nil
-	}
-	return &AnimationPlayer{inner: _r}
+// Returns an audio player (creating one if necessary) to play a simple audio source.
+func AudioPlayerWithSource(source *AudioSource) *AudioPlayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAudioPlayer")), objc.RegisterName("audioPlayerWithSource:"), objref.IDOf(source))
+	return AudioPlayerFromID(_r)
 }
 
-// AudioPlayerWithSource calls the underlying SCNAudioPlayerAudioPlayerWithSource.
-func AudioPlayerWithSource(source *raw.SCNAudioSource) *AudioPlayer {
-	_r := raw.SCNAudioPlayerAudioPlayerWithSource(source)
-	if _r == nil {
-		return nil
-	}
-	return &AudioPlayer{inner: _r}
+// Returns an audio player (creating one if necessary) to play an audio node.
+func AudioPlayerWithAVAudioNode(audioNode obj.Object) *AudioPlayer {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAudioPlayer")), objc.RegisterName("audioPlayerWithAVAudioNode:"), objref.IDOf(audioNode))
+	return AudioPlayerFromID(_r)
 }
 
-// AudioPlayerWithAVAudioNode calls the underlying SCNAudioPlayerAudioPlayerWithAVAudioNode.
-func AudioPlayerWithAVAudioNode(audioNode *avfaudio.AVAudioNode) *AudioPlayer {
-	_r := raw.SCNAudioPlayerAudioPlayerWithAVAudioNode(audioNode)
-	if _r == nil {
-		return nil
-	}
-	return &AudioPlayer{inner: _r}
-}
-
-// AudioSourceNamed calls the underlying SCNAudioSourceAudioSourceNamed.
+// Returns the audio source associated with the specified filename.
 func AudioSourceNamed(fileName string) *AudioSource {
-	_r := raw.SCNAudioSourceAudioSourceNamed(foundation.NSStringStringWithUTF8String(fileName))
-	if _r == nil {
-		return nil
-	}
-	return &AudioSource{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAudioSource")), objc.RegisterName("audioSourceNamed:"), purego.NSString(fileName))
+	return AudioSourceFromID(_r)
 }
 
-// AvoidOccluderConstraintWithTarget calls the underlying SCNAvoidOccluderConstraintAvoidOccluderConstraintWithTarget.
-func AvoidOccluderConstraintWithTarget(target *raw.SCNNode) *AvoidOccluderConstraint {
-	_r := raw.SCNAvoidOccluderConstraintAvoidOccluderConstraintWithTarget(target)
-	if _r == nil {
-		return nil
-	}
-	return &AvoidOccluderConstraint{inner: _r}
+// Creates and returns a SCNAvoidOccluderConstraint object.
+func AvoidOccluderConstraintWithTarget(target *Node) *AvoidOccluderConstraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNAvoidOccluderConstraint")), objc.RegisterName("avoidOccluderConstraintWithTarget:"), objref.IDOf(target))
+	return AvoidOccluderConstraintFromID(_r)
 }
 
-// SCNBillboardConstraintBillboardConstraint calls the underlying SCNBillboardConstraintBillboardConstraint.
+// Creates a new billboard constraint.
 func SCNBillboardConstraintBillboardConstraint() *BillboardConstraint {
-	_r := raw.SCNBillboardConstraintBillboardConstraint()
-	if _r == nil {
-		return nil
-	}
-	return &BillboardConstraint{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNBillboardConstraint")), objc.RegisterName("billboardConstraint"))
+	return BillboardConstraintFromID(_r)
 }
 
-// BoxWithWidthHeightLengthChamferRadius calls the underlying SCNBoxBoxWithWidthHeightLengthChamferRadius.
+// Creates a box geometry with the specified width, height, length, and chamfer radius.
 func BoxWithWidthHeightLengthChamferRadius(width float64, height float64, length float64, chamferRadius float64) *Box {
-	_r := raw.SCNBoxBoxWithWidthHeightLengthChamferRadius(width, height, length, chamferRadius)
-	if _r == nil {
-		return nil
-	}
-	return &Box{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNBox")), objc.RegisterName("boxWithWidth:height:length:chamferRadius:"), width, height, length, chamferRadius)
+	return BoxFromID(_r)
 }
 
-// SCNCameraCamera calls the underlying SCNCameraCamera.
+// Creates a new camera object.
 func SCNCameraCamera() *Camera {
-	_r := raw.SCNCameraCamera()
-	if _r == nil {
-		return nil
-	}
-	return &Camera{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNCamera")), objc.RegisterName("camera"))
+	return CameraFromID(_r)
 }
 
-// CapsuleWithCapRadiusHeight calls the underlying SCNCapsuleCapsuleWithCapRadiusHeight.
+// Creates a capsule geometry with the specified radius and height.
 func CapsuleWithCapRadiusHeight(capRadius float64, height float64) *Capsule {
-	_r := raw.SCNCapsuleCapsuleWithCapRadiusHeight(capRadius, height)
-	if _r == nil {
-		return nil
-	}
-	return &Capsule{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNCapsule")), objc.RegisterName("capsuleWithCapRadius:height:"), capRadius, height)
+	return CapsuleFromID(_r)
 }
 
-// ConeWithTopRadiusBottomRadiusHeight calls the underlying SCNConeConeWithTopRadiusBottomRadiusHeight.
+// Creates a cone geometry with the given top radius, bottom radius, and height.
 func ConeWithTopRadiusBottomRadiusHeight(topRadius float64, bottomRadius float64, height float64) *Cone {
-	_r := raw.SCNConeConeWithTopRadiusBottomRadiusHeight(topRadius, bottomRadius, height)
-	if _r == nil {
-		return nil
-	}
-	return &Cone{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNCone")), objc.RegisterName("coneWithTopRadius:bottomRadius:height:"), topRadius, bottomRadius, height)
+	return ConeFromID(_r)
 }
 
-// CylinderWithRadiusHeight calls the underlying SCNCylinderCylinderWithRadiusHeight.
+// Creates a cylinder geometry with the specified radius and height.
 func CylinderWithRadiusHeight(radius float64, height float64) *Cylinder {
-	_r := raw.SCNCylinderCylinderWithRadiusHeight(radius, height)
-	if _r == nil {
-		return nil
-	}
-	return &Cylinder{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNCylinder")), objc.RegisterName("cylinderWithRadius:height:"), radius, height)
+	return CylinderFromID(_r)
 }
 
-// DistanceConstraintWithTarget calls the underlying SCNDistanceConstraintDistanceConstraintWithTarget.
-func DistanceConstraintWithTarget(target *raw.SCNNode) *DistanceConstraint {
-	_r := raw.SCNDistanceConstraintDistanceConstraintWithTarget(target)
-	if _r == nil {
-		return nil
-	}
-	return &DistanceConstraint{inner: _r}
+// Creates and returns a SCNDistanceConstraint constraint.
+func DistanceConstraintWithTarget(target *Node) *DistanceConstraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNDistanceConstraint")), objc.RegisterName("distanceConstraintWithTarget:"), objref.IDOf(target))
+	return DistanceConstraintFromID(_r)
 }
 
-// SCNFloorFloor calls the underlying SCNFloorFloor.
+// Creates a floor geometry.
 func SCNFloorFloor() *Floor {
-	_r := raw.SCNFloorFloor()
-	if _r == nil {
-		return nil
-	}
-	return &Floor{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNFloor")), objc.RegisterName("floor"))
+	return FloorFromID(_r)
 }
 
-// SCNGeometryGeometry calls the underlying SCNGeometryGeometry.
+// Creates a new geometry object with no content (or default content).
 func SCNGeometryGeometry() *Geometry {
-	_r := raw.SCNGeometryGeometry()
-	if _r == nil {
-		return nil
-	}
-	return &Geometry{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNGeometry")), objc.RegisterName("geometry"))
+	return GeometryFromID(_r)
 }
 
-// GeometryWithSourcesElements calls the underlying SCNGeometryGeometryWithSourcesElements.
-func GeometryWithSourcesElements(sources *foundation.NSArray[*raw.SCNGeometrySource], elements *foundation.NSArray[*raw.SCNGeometryElement]) *Geometry {
-	_r := raw.SCNGeometryGeometryWithSourcesElements(sources, elements)
-	if _r == nil {
-		return nil
-	}
-	return &Geometry{inner: _r}
+// Creates a new geometry built from the specified geometry sources and elements.
+func GeometryWithSourcesElements(sources []*GeometrySource, elements []*GeometryElement) *Geometry {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNGeometry")), objc.RegisterName("geometryWithSources:elements:"), purego.SliceToNSArray(sources, func(_v *GeometrySource) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(elements, func(_v *GeometryElement) objc.ID { return objref.IDOf(_v) }))
+	return GeometryFromID(_r)
 }
 
-// GeometryWithSourcesElementsSourceChannels calls the underlying SCNGeometryGeometryWithSourcesElementsSourceChannels.
-func GeometryWithSourcesElementsSourceChannels(sources *foundation.NSArray[*raw.SCNGeometrySource], elements *foundation.NSArray[*raw.SCNGeometryElement], sourceChannels *foundation.NSArray[*foundation.NSNumber]) *Geometry {
-	_r := raw.SCNGeometryGeometryWithSourcesElementsSourceChannels(sources, elements, sourceChannels)
-	if _r == nil {
-		return nil
-	}
-	return &Geometry{inner: _r}
+// Creates and returns a new geometry built from geometry sources and geometry elements, with per-source indexed geometry data. ``` Example: geometry made of 3 primitives (2 quads, 1 pentagon) using different indices to reference position and UV data (2 channels) Positions         ┆   POS0           POS3           POS4    ┆             quad   quad   pentagon    quad   quad   pentagon    ┆   SCNGeometryElement *element = [SCNGeometryElement geometryElementWithData:… 0 │ (0.0, 0.0, 0.0)   ┆        ┌───────────┬───────────┐        ┆           ┌─────┐ ┌─────┐ ┌───────┐ ┌─────┐ ┌─────┐ ┌───────┐   ┆                                                               primitiveType:SCNGeometryPrimitiveTypePolygon 1 │ (0.0, 1.0, 0.0)   ┆        │UV0     UV3│UV0     UV3│        ┆     4 4 5 0 1 2 3 5 4 3 2 7 6 5 2 1 0 1 2 3 2 3 0 1 1 2 3 4 0   ┆                                                              primitiveCount:3 2 │ (1.0, 0.0, 0.0)   ┆        │           │           │        ┆     └───┘ └───────────────────────┘ └───────────────────────┘   ┆                                                         indicesChannelCount:2 3 │ (1.0, 1.0, 0.0)   ┆        │     A     │     B     │        ┆   polygons        channel 0                 channel 1           ┆                                                  interleavedIndicesChannels:… 4 │ (2.0, 0.0, 0.0)   ┆        │           │           │        ┆                  (positions)                  (UVs)             ┆                                                               bytesPerIndex:…]; 5 │ (2.0, 1.0, 0.0)   ┆        │UV1     UV2│UV1     UV2│        ┆                                                                 ┆ 6 │ (2.0, 2.0, 0.0)   ┆   POS1 ├───────────┴───────────┤ POS5   ┆                                                                 ┆   SCNGeometry *geometry = [SCNGeometry geometryWithSources:
+func GeometryWithSourcesElementsSourceChannels(sources []*GeometrySource, elements []*GeometryElement, sourceChannels []obj.Object) *Geometry {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNGeometry")), objc.RegisterName("geometryWithSources:elements:sourceChannels:"), purego.SliceToNSArray(sources, func(_v *GeometrySource) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(elements, func(_v *GeometryElement) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(sourceChannels, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return GeometryFromID(_r)
 }
 
-// GeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex calls the underlying SCNGeometryElementGeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex.
-func GeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex(data *foundation.NSData, primitiveType SCNGeometryPrimitiveType, primitiveCount int, bytesPerIndex int) *GeometryElement {
-	_r := raw.SCNGeometryElementGeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex(data, raw.SCNGeometryPrimitiveType(primitiveType), primitiveCount, bytesPerIndex)
-	if _r == nil {
-		return nil
-	}
-	return &GeometryElement{inner: _r}
+// Creates a geometry element from the specified data and options.
+func GeometryElementWithDataPrimitiveTypePrimitiveCountBytesPerIndex(data obj.Object, primitiveType GeometryPrimitiveType, primitiveCount int, bytesPerIndex int) *GeometryElement {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNGeometryElement")), objc.RegisterName("geometryElementWithData:primitiveType:primitiveCount:bytesPerIndex:"), objref.IDOf(data), primitiveType, primitiveCount, bytesPerIndex)
+	return GeometryElementFromID(_r)
 }
 
-// GeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex calls the underlying SCNGeometryElementGeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex.
-func GeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex(data *foundation.NSData, primitiveType SCNGeometryPrimitiveType, primitiveCount int, indicesChannelCount int, interleavedIndicesChannels bool, bytesPerIndex int) *GeometryElement {
-	_r := raw.SCNGeometryElementGeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex(data, raw.SCNGeometryPrimitiveType(primitiveType), primitiveCount, indicesChannelCount, interleavedIndicesChannels, bytesPerIndex)
-	if _r == nil {
-		return nil
-	}
-	return &GeometryElement{inner: _r}
+func GeometryElementWithDataPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex(data obj.Object, primitiveType GeometryPrimitiveType, primitiveCount int, indicesChannelCount int, interleavedIndicesChannels bool, bytesPerIndex int) *GeometryElement {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNGeometryElement")), objc.RegisterName("geometryElementWithData:primitiveType:primitiveCount:indicesChannelCount:interleavedIndicesChannels:bytesPerIndex:"), objref.IDOf(data), primitiveType, primitiveCount, indicesChannelCount, interleavedIndicesChannels, bytesPerIndex)
+	return GeometryElementFromID(_r)
 }
 
-// GeometryElementWithBufferPrimitiveTypePrimitiveCountBytesPerIndex calls the underlying SCNGeometryElementGeometryElementWithBufferPrimitiveTypePrimitiveCountBytesPerIndex.
-func GeometryElementWithBufferPrimitiveTypePrimitiveCountBytesPerIndex(buffer metal.MTLBuffer, primitiveType SCNGeometryPrimitiveType, primitiveCount int, bytesPerIndex int) *GeometryElement {
-	_r := raw.SCNGeometryElementGeometryElementWithBufferPrimitiveTypePrimitiveCountBytesPerIndex(buffer, raw.SCNGeometryPrimitiveType(primitiveType), primitiveCount, bytesPerIndex)
-	if _r == nil {
-		return nil
-	}
-	return &GeometryElement{inner: _r}
+// Creates a geometry source from the specified data and options.
+func GeometrySourceWithDataSemanticVectorCountFloatComponentsComponentsPerVectorBytesPerComponentDataOffsetDataStride(data obj.Object, semantic obj.Object, vectorCount int, floatComponents bool, componentsPerVector int, bytesPerComponent int, offset int, stride int) *GeometrySource {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNGeometrySource")), objc.RegisterName("geometrySourceWithData:semantic:vectorCount:floatComponents:componentsPerVector:bytesPerComponent:dataOffset:dataStride:"), objref.IDOf(data), objref.IDOf(semantic), vectorCount, floatComponents, componentsPerVector, bytesPerComponent, offset, stride)
+	return GeometrySourceFromID(_r)
 }
 
-// GeometryElementWithBufferPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex calls the underlying SCNGeometryElementGeometryElementWithBufferPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex.
-func GeometryElementWithBufferPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex(buffer metal.MTLBuffer, primitiveType SCNGeometryPrimitiveType, primitiveCount int, indicesChannelCount int, interleavedIndicesChannels bool, bytesPerIndex int) *GeometryElement {
-	_r := raw.SCNGeometryElementGeometryElementWithBufferPrimitiveTypePrimitiveCountIndicesChannelCountInterleavedIndicesChannelsBytesPerIndex(buffer, raw.SCNGeometryPrimitiveType(primitiveType), primitiveCount, indicesChannelCount, interleavedIndicesChannels, bytesPerIndex)
-	if _r == nil {
-		return nil
-	}
-	return &GeometryElement{inner: _r}
+// Creates an inverse kinematics constraint whose chain of nodes begins with the specified node.
+func InverseKinematicsConstraintWithChainRootNode(chainRootNode *Node) *IKConstraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNIKConstraint")), objc.RegisterName("inverseKinematicsConstraintWithChainRootNode:"), objref.IDOf(chainRootNode))
+	return IKConstraintFromID(_r)
 }
 
-// GeometrySourceWithDataSemanticVectorCountFloatComponentsComponentsPerVectorBytesPerComponentDataOffsetDataStride calls the underlying SCNGeometrySourceGeometrySourceWithDataSemanticVectorCountFloatComponentsComponentsPerVectorBytesPerComponentDataOffsetDataStride.
-func GeometrySourceWithDataSemanticVectorCountFloatComponentsComponentsPerVectorBytesPerComponentDataOffsetDataStride(data *foundation.NSData, semantic *foundation.NSString, vectorCount int, floatComponents bool, componentsPerVector int, bytesPerComponent int, offset int, stride int) *GeometrySource {
-	_r := raw.SCNGeometrySourceGeometrySourceWithDataSemanticVectorCountFloatComponentsComponentsPerVectorBytesPerComponentDataOffsetDataStride(data, semantic, vectorCount, floatComponents, componentsPerVector, bytesPerComponent, offset, stride)
-	if _r == nil {
-		return nil
-	}
-	return &GeometrySource{inner: _r}
+// Creates a level of detail with the specified geometry and threshold pixel radius.
+func LevelOfDetailWithGeometryScreenSpaceRadius(geometry *Geometry, radius float64) *LevelOfDetail {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNLevelOfDetail")), objc.RegisterName("levelOfDetailWithGeometry:screenSpaceRadius:"), objref.IDOf(geometry), radius)
+	return LevelOfDetailFromID(_r)
 }
 
-// GeometrySourceWithVerticesCount calls the underlying SCNGeometrySourceGeometrySourceWithVerticesCount.
-func GeometrySourceWithVerticesCount(vertices *raw.SCNVector3, count int) *GeometrySource {
-	_r := raw.SCNGeometrySourceGeometrySourceWithVerticesCount(vertices, count)
-	if _r == nil {
-		return nil
-	}
-	return &GeometrySource{inner: _r}
+// Creates a level of detail with the specified geometry and threshold camera distance.
+func LevelOfDetailWithGeometryWorldSpaceDistance(geometry *Geometry, distance float64) *LevelOfDetail {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNLevelOfDetail")), objc.RegisterName("levelOfDetailWithGeometry:worldSpaceDistance:"), objref.IDOf(geometry), distance)
+	return LevelOfDetailFromID(_r)
 }
 
-// GeometrySourceWithNormalsCount calls the underlying SCNGeometrySourceGeometrySourceWithNormalsCount.
-func GeometrySourceWithNormalsCount(normals *raw.SCNVector3, count int) *GeometrySource {
-	_r := raw.SCNGeometrySourceGeometrySourceWithNormalsCount(normals, count)
-	if _r == nil {
-		return nil
-	}
-	return &GeometrySource{inner: _r}
-}
-
-// GeometrySourceWithTextureCoordinatesCount calls the underlying SCNGeometrySourceGeometrySourceWithTextureCoordinatesCount.
-func GeometrySourceWithTextureCoordinatesCount(texcoord *corefoundation.CGPoint, count int) *GeometrySource {
-	_r := raw.SCNGeometrySourceGeometrySourceWithTextureCoordinatesCount(texcoord, count)
-	if _r == nil {
-		return nil
-	}
-	return &GeometrySource{inner: _r}
-}
-
-// GeometrySourceWithBufferVertexFormatSemanticVertexCountDataOffsetDataStride calls the underlying SCNGeometrySourceGeometrySourceWithBufferVertexFormatSemanticVertexCountDataOffsetDataStride.
-func GeometrySourceWithBufferVertexFormatSemanticVertexCountDataOffsetDataStride(buffer metal.MTLBuffer, vertexFormat metal.MTLVertexFormat, semantic *foundation.NSString, vertexCount int, offset int, stride int) *GeometrySource {
-	_r := raw.SCNGeometrySourceGeometrySourceWithBufferVertexFormatSemanticVertexCountDataOffsetDataStride(buffer, vertexFormat, semantic, vertexCount, offset, stride)
-	if _r == nil {
-		return nil
-	}
-	return &GeometrySource{inner: _r}
-}
-
-// InverseKinematicsConstraintWithChainRootNode calls the underlying SCNIKConstraintInverseKinematicsConstraintWithChainRootNode.
-func InverseKinematicsConstraintWithChainRootNode(chainRootNode *raw.SCNNode) *IKConstraint {
-	_r := raw.SCNIKConstraintInverseKinematicsConstraintWithChainRootNode(chainRootNode)
-	if _r == nil {
-		return nil
-	}
-	return &IKConstraint{inner: _r}
-}
-
-// LevelOfDetailWithGeometryScreenSpaceRadius calls the underlying SCNLevelOfDetailLevelOfDetailWithGeometryScreenSpaceRadius.
-func LevelOfDetailWithGeometryScreenSpaceRadius(geometry *raw.SCNGeometry, radius float64) *LevelOfDetail {
-	_r := raw.SCNLevelOfDetailLevelOfDetailWithGeometryScreenSpaceRadius(geometry, radius)
-	if _r == nil {
-		return nil
-	}
-	return &LevelOfDetail{inner: _r}
-}
-
-// LevelOfDetailWithGeometryWorldSpaceDistance calls the underlying SCNLevelOfDetailLevelOfDetailWithGeometryWorldSpaceDistance.
-func LevelOfDetailWithGeometryWorldSpaceDistance(geometry *raw.SCNGeometry, distance float64) *LevelOfDetail {
-	_r := raw.SCNLevelOfDetailLevelOfDetailWithGeometryWorldSpaceDistance(geometry, distance)
-	if _r == nil {
-		return nil
-	}
-	return &LevelOfDetail{inner: _r}
-}
-
-// SCNLightLight calls the underlying SCNLightLight.
+// Creates a new light object.
 func SCNLightLight() *Light {
-	_r := raw.SCNLightLight()
-	if _r == nil {
-		return nil
-	}
-	return &Light{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNLight")), objc.RegisterName("light"))
+	return LightFromID(_r)
 }
 
-// LookAtConstraintWithTarget calls the underlying SCNLookAtConstraintLookAtConstraintWithTarget.
-func LookAtConstraintWithTarget(target *raw.SCNNode) *LookAtConstraint {
-	_r := raw.SCNLookAtConstraintLookAtConstraintWithTarget(target)
-	if _r == nil {
-		return nil
-	}
-	return &LookAtConstraint{inner: _r}
+// Creates a look-at constraint for a specified target node.
+func LookAtConstraintWithTarget(target *Node) *LookAtConstraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNLookAtConstraint")), objc.RegisterName("lookAtConstraintWithTarget:"), objref.IDOf(target))
+	return LookAtConstraintFromID(_r)
 }
 
-// SCNMaterialMaterial calls the underlying SCNMaterialMaterial.
+// Creates a new material object.
 func SCNMaterialMaterial() *Material {
-	_r := raw.SCNMaterialMaterial()
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNMaterial")), objc.RegisterName("material"))
+	return MaterialFromID(_r)
+}
+
+// Creates a new material property object with the specified contents.
+func MaterialPropertyWithContents(contents obj.Object) *MaterialProperty {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNMaterialProperty")), objc.RegisterName("materialPropertyWithContents:"), objref.IDOf(contents))
+	return MaterialPropertyFromID(_r)
+}
+
+// Returns an object suitable for a scene's `lightingEnvironment.contents` and initialized with data that was previously created by `+precomputedLightingEnvironmentDataForContents:device:error:`.
+func PrecomputedLightingEnvironmentContentsWithURLError(url string) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNMaterialProperty")), objc.RegisterName("precomputedLightingEnvironmentContentsWithURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Material{inner: _r}
+	return obj.Wrap(_r), nil
 }
 
-// MaterialPropertyWithContents calls the underlying SCNMaterialPropertyMaterialPropertyWithContents.
-func MaterialPropertyWithContents(contents objc.ID) *MaterialProperty {
-	_r := raw.SCNMaterialPropertyMaterialPropertyWithContents(contents)
-	if _r == nil {
-		return nil
+// Returns an object suitable for a scene's `lightingEnvironment.contents` and initialized with data that was previously created by `+precomputedLightingEnvironmentDataForContents:device:error:`.
+func PrecomputedLightingEnvironmentContentsWithDataError(data obj.Object) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNMaterialProperty")), objc.RegisterName("precomputedLightingEnvironmentContentsWithData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &MaterialProperty{inner: _r}
+	return obj.Wrap(_r), nil
 }
 
-// PrecomputedLightingEnvironmentContentsWithURLError calls the underlying SCNMaterialPropertyPrecomputedLightingEnvironmentContentsWithURLError.
-func PrecomputedLightingEnvironmentContentsWithURLError(url string) (objc.ID, error) {
-	return raw.SCNMaterialPropertyPrecomputedLightingEnvironmentContentsWithURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-}
-
-// PrecomputedLightingEnvironmentContentsWithDataError calls the underlying SCNMaterialPropertyPrecomputedLightingEnvironmentContentsWithDataError.
-func PrecomputedLightingEnvironmentContentsWithDataError(data *foundation.NSData) (objc.ID, error) {
-	return raw.SCNMaterialPropertyPrecomputedLightingEnvironmentContentsWithDataError(data)
-}
-
-// PrecomputedLightingEnvironmentDataForContentsDeviceError calls the underlying SCNMaterialPropertyPrecomputedLightingEnvironmentDataForContentsDeviceError.
-func PrecomputedLightingEnvironmentDataForContentsDeviceError(contents objc.ID, device metal.MTLDevice) (*foundation.NSData, error) {
-	return raw.SCNMaterialPropertyPrecomputedLightingEnvironmentDataForContentsDeviceError(contents, device)
-}
-
-// SCNNodeNode calls the underlying SCNNodeNode.
+// Creates and returns a node object.
 func SCNNodeNode() *Node {
-	_r := raw.SCNNodeNode()
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNNode")), objc.RegisterName("node"))
+	return NodeFromID(_r)
 }
 
-// NodeWithGeometry calls the underlying SCNNodeNodeWithGeometry.
-func NodeWithGeometry(geometry *raw.SCNGeometry) *Node {
-	_r := raw.SCNNodeNodeWithGeometry(geometry)
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
+// Creates and returns a node object with the specified geometry attached.
+func NodeWithGeometry(geometry *Geometry) *Node {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNNode")), objc.RegisterName("nodeWithGeometry:"), objref.IDOf(geometry))
+	return NodeFromID(_r)
 }
 
-// LocalUp calls the underlying SCNNodeLocalUp.
-func LocalUp() raw.SCNVector3 {
-	return raw.SCNNodeLocalUp()
+// Creates a particle property controller with the specified Core Animation animation.
+func ControllerWithAnimation(animation obj.Object) *ParticlePropertyController {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNParticlePropertyController")), objc.RegisterName("controllerWithAnimation:"), objref.IDOf(animation))
+	return ParticlePropertyControllerFromID(_r)
 }
 
-// LocalRight calls the underlying SCNNodeLocalRight.
-func LocalRight() raw.SCNVector3 {
-	return raw.SCNNodeLocalRight()
-}
-
-// LocalFront calls the underlying SCNNodeLocalFront.
-func LocalFront() raw.SCNVector3 {
-	return raw.SCNNodeLocalFront()
-}
-
-// SimdLocalUp calls the underlying SCNNodeSimdLocalUp.
-func SimdLocalUp() unsafe.Pointer {
-	return raw.SCNNodeSimdLocalUp()
-}
-
-// SimdLocalRight calls the underlying SCNNodeSimdLocalRight.
-func SimdLocalRight() unsafe.Pointer {
-	return raw.SCNNodeSimdLocalRight()
-}
-
-// SimdLocalFront calls the underlying SCNNodeSimdLocalFront.
-func SimdLocalFront() unsafe.Pointer {
-	return raw.SCNNodeSimdLocalFront()
-}
-
-// ControllerWithAnimation calls the underlying SCNParticlePropertyControllerControllerWithAnimation.
-func ControllerWithAnimation(animation *quartzcore.CAAnimation) *ParticlePropertyController {
-	_r := raw.SCNParticlePropertyControllerControllerWithAnimation(animation)
-	if _r == nil {
-		return nil
-	}
-	return &ParticlePropertyController{inner: _r}
-}
-
-// SCNParticleSystemParticleSystem calls the underlying SCNParticleSystemParticleSystem.
+// Creates a new particle system.
 func SCNParticleSystemParticleSystem() *ParticleSystem {
-	_r := raw.SCNParticleSystemParticleSystem()
-	if _r == nil {
-		return nil
-	}
-	return &ParticleSystem{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNParticleSystem")), objc.RegisterName("particleSystem"))
+	return ParticleSystemFromID(_r)
 }
 
-// ParticleSystemNamedInDirectory calls the underlying SCNParticleSystemParticleSystemNamedInDirectory.
+// Loads a particle system from a file in the app’s bundle resources.
 func ParticleSystemNamedInDirectory(name string, directory string) *ParticleSystem {
-	_r := raw.SCNParticleSystemParticleSystemNamedInDirectory(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(directory))
-	if _r == nil {
-		return nil
-	}
-	return &ParticleSystem{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNParticleSystem")), objc.RegisterName("particleSystemNamed:inDirectory:"), purego.NSString(name), purego.NSString(directory))
+	return ParticleSystemFromID(_r)
 }
 
-// JointWithBodyAAnchorABodyBAnchorB calls the underlying SCNPhysicsBallSocketJointJointWithBodyAAnchorABodyBAnchorB.
-func JointWithBodyAAnchorABodyBAnchorB(bodyA *raw.SCNPhysicsBody, anchorA raw.SCNVector3, bodyB *raw.SCNPhysicsBody, anchorB raw.SCNVector3) *PhysicsBallSocketJoint {
-	_r := raw.SCNPhysicsBallSocketJointJointWithBodyAAnchorABodyBAnchorB(bodyA, anchorA, bodyB, anchorB)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBallSocketJoint{inner: _r}
-}
-
-// JointWithBodyAnchor calls the underlying SCNPhysicsBallSocketJointJointWithBodyAnchor.
-func JointWithBodyAnchor(body *raw.SCNPhysicsBody, anchor raw.SCNVector3) *PhysicsBallSocketJoint {
-	_r := raw.SCNPhysicsBallSocketJointJointWithBodyAnchor(body, anchor)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBallSocketJoint{inner: _r}
-}
-
-// StaticBody calls the underlying SCNPhysicsBodyStaticBody.
+// Creates a physics body that is unaffected by forces or collisions and that cannot move.
 func StaticBody() *PhysicsBody {
-	_r := raw.SCNPhysicsBodyStaticBody()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsBody")), objc.RegisterName("staticBody"))
+	return PhysicsBodyFromID(_r)
 }
 
-// DynamicBody calls the underlying SCNPhysicsBodyDynamicBody.
+// Creates a physics body that can be affected by forces and collisions.
 func DynamicBody() *PhysicsBody {
-	_r := raw.SCNPhysicsBodyDynamicBody()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsBody")), objc.RegisterName("dynamicBody"))
+	return PhysicsBodyFromID(_r)
 }
 
-// KinematicBody calls the underlying SCNPhysicsBodyKinematicBody.
+// Creates a physics body that is unaffected by forces or collisions but that can cause collisions affecting other bodies when moved.
 func KinematicBody() *PhysicsBody {
-	_r := raw.SCNPhysicsBodyKinematicBody()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsBody")), objc.RegisterName("kinematicBody"))
+	return PhysicsBodyFromID(_r)
 }
 
-// BodyWithTypeShape calls the underlying SCNPhysicsBodyBodyWithTypeShape.
-func BodyWithTypeShape(type_ SCNPhysicsBodyType, shape *raw.SCNPhysicsShape) *PhysicsBody {
-	_r := raw.SCNPhysicsBodyBodyWithTypeShape(raw.SCNPhysicsBodyType(type_), shape)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+// Creates a physics body with the specified type and shape.
+func BodyWithTypeShape(type_ PhysicsBodyType, shape *PhysicsShape) *PhysicsBody {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsBody")), objc.RegisterName("bodyWithType:shape:"), type_, objref.IDOf(shape))
+	return PhysicsBodyFromID(_r)
 }
 
-// JointWithBodyAFrameABodyBFrameB calls the underlying SCNPhysicsConeTwistJointJointWithBodyAFrameABodyBFrameB.
-func JointWithBodyAFrameABodyBFrameB(bodyA *raw.SCNPhysicsBody, frameA quartzcore.CATransform3D, bodyB *raw.SCNPhysicsBody, frameB quartzcore.CATransform3D) *PhysicsConeTwistJoint {
-	_r := raw.SCNPhysicsConeTwistJointJointWithBodyAFrameABodyBFrameB(bodyA, frameA, bodyB, frameB)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsConeTwistJoint{inner: _r}
-}
-
-// JointWithBodyFrame calls the underlying SCNPhysicsConeTwistJointJointWithBodyFrame.
-func JointWithBodyFrame(body *raw.SCNPhysicsBody, frame quartzcore.CATransform3D) *PhysicsConeTwistJoint {
-	_r := raw.SCNPhysicsConeTwistJointJointWithBodyFrame(body, frame)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsConeTwistJoint{inner: _r}
-}
-
-// DragField calls the underlying SCNPhysicsFieldDragField.
+// Creates a field that slows any object in its area of effect with a force proportional to the object’s velocity.
 func DragField() *PhysicsField {
-	_r := raw.SCNPhysicsFieldDragField()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsField{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("dragField"))
+	return PhysicsFieldFromID(_r)
 }
 
-// VortexField calls the underlying SCNPhysicsFieldVortexField.
+// Creates a field whose forces circulate around an axis.
 func VortexField() *PhysicsField {
-	_r := raw.SCNPhysicsFieldVortexField()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsField{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("vortexField"))
+	return PhysicsFieldFromID(_r)
 }
 
-// RadialGravityField calls the underlying SCNPhysicsFieldRadialGravityField.
+// Creates a field that accelerates objects toward its center.
 func RadialGravityField() *PhysicsField {
-	_r := raw.SCNPhysicsFieldRadialGravityField()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsField{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("radialGravityField"))
+	return PhysicsFieldFromID(_r)
 }
 
-// LinearGravityField calls the underlying SCNPhysicsFieldLinearGravityField.
+// Creates a field that accelerates objects in a specific direction.
 func LinearGravityField() *PhysicsField {
-	_r := raw.SCNPhysicsFieldLinearGravityField()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsField{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("linearGravityField"))
+	return PhysicsFieldFromID(_r)
 }
 
-// NoiseFieldWithSmoothnessAnimationSpeed calls the underlying SCNPhysicsFieldNoiseFieldWithSmoothnessAnimationSpeed.
+// Creates a field that applies random forces to objects in its area of effect.
 func NoiseFieldWithSmoothnessAnimationSpeed(smoothness float64, speed float64) *PhysicsField {
-	_r := raw.SCNPhysicsFieldNoiseFieldWithSmoothnessAnimationSpeed(smoothness, speed)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsField{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("noiseFieldWithSmoothness:animationSpeed:"), smoothness, speed)
+	return PhysicsFieldFromID(_r)
 }
 
-// TurbulenceFieldWithSmoothnessAnimationSpeed calls the underlying SCNPhysicsFieldTurbulenceFieldWithSmoothnessAnimationSpeed.
+// Creates a field that applies random forces to objects in its area of effect, with magnitudes proportional to those objects’ velocities.
 func TurbulenceFieldWithSmoothnessAnimationSpeed(smoothness float64, speed float64) *PhysicsField {
-	_r := raw.SCNPhysicsFieldTurbulenceFieldWithSmoothnessAnimationSpeed(smoothness, speed)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsField{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("turbulenceFieldWithSmoothness:animationSpeed:"), smoothness, speed)
+	return PhysicsFieldFromID(_r)
 }
 
-// SpringField calls the underlying SCNPhysicsFieldSpringField.
+// Creates a field that pulls objects toward its center with a spring-like force.
 func SpringField() *PhysicsField {
-	_r := raw.SCNPhysicsFieldSpringField()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsField{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("springField"))
+	return PhysicsFieldFromID(_r)
 }
 
-// ElectricField calls the underlying SCNPhysicsFieldElectricField.
+// Creates a field that attracts or repels objects based on their electrical charge and on their distance from the field’s center.
 func ElectricField() *PhysicsField {
-	_r := raw.SCNPhysicsFieldElectricField()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsField{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("electricField"))
+	return PhysicsFieldFromID(_r)
 }
 
-// MagneticField calls the underlying SCNPhysicsFieldMagneticField.
+// Creates a field that attracts or repels objects based on their electrical charge, velocity, and distance from the field’s axis.
 func MagneticField() *PhysicsField {
-	_r := raw.SCNPhysicsFieldMagneticField()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsField{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsField")), objc.RegisterName("magneticField"))
+	return PhysicsFieldFromID(_r)
 }
 
-// CustomFieldWithEvaluationBlock calls the underlying SCNPhysicsFieldCustomFieldWithEvaluationBlock.
-func CustomFieldWithEvaluationBlock(block objc.Block) *PhysicsField {
-	_r := raw.SCNPhysicsFieldCustomFieldWithEvaluationBlock(block)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsField{inner: _r}
+// Creates a physics shape based on a geometry object.
+func ShapeWithGeometryOptions(geometry *Geometry, options obj.Object) *PhysicsShape {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsShape")), objc.RegisterName("shapeWithGeometry:options:"), objref.IDOf(geometry), objref.IDOf(options))
+	return PhysicsShapeFromID(_r)
 }
 
-// JointWithBodyAAxisAAnchorABodyBAxisBAnchorB calls the underlying SCNPhysicsHingeJointJointWithBodyAAxisAAnchorABodyBAxisBAnchorB.
-func JointWithBodyAAxisAAnchorABodyBAxisBAnchorB(bodyA *raw.SCNPhysicsBody, axisA raw.SCNVector3, anchorA raw.SCNVector3, bodyB *raw.SCNPhysicsBody, axisB raw.SCNVector3, anchorB raw.SCNVector3) *PhysicsHingeJoint {
-	_r := raw.SCNPhysicsHingeJointJointWithBodyAAxisAAnchorABodyBAxisBAnchorB(bodyA, axisA, anchorA, bodyB, axisB, anchorB)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsHingeJoint{inner: _r}
+// Creates a physics shape from a node or hierarchy of nodes.
+func ShapeWithNodeOptions(node *Node, options obj.Object) *PhysicsShape {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsShape")), objc.RegisterName("shapeWithNode:options:"), objref.IDOf(node), objref.IDOf(options))
+	return PhysicsShapeFromID(_r)
 }
 
-// JointWithBodyAxisAnchor calls the underlying SCNPhysicsHingeJointJointWithBodyAxisAnchor.
-func JointWithBodyAxisAnchor(body *raw.SCNPhysicsBody, axis raw.SCNVector3, anchor raw.SCNVector3) *PhysicsHingeJoint {
-	_r := raw.SCNPhysicsHingeJointJointWithBodyAxisAnchor(body, axis, anchor)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsHingeJoint{inner: _r}
+// Creates a new physics shape by combining others.
+func ShapeWithShapesTransforms(shapes []*PhysicsShape, transforms []obj.Object) *PhysicsShape {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsShape")), objc.RegisterName("shapeWithShapes:transforms:"), purego.SliceToNSArray(shapes, func(_v *PhysicsShape) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(transforms, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return PhysicsShapeFromID(_r)
 }
 
-// ShapeWithGeometryOptions calls the underlying SCNPhysicsShapeShapeWithGeometryOptions.
-func ShapeWithGeometryOptions(geometry *raw.SCNGeometry, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PhysicsShape {
-	_r := raw.SCNPhysicsShapeShapeWithGeometryOptions(geometry, options)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsShape{inner: _r}
+// Creates a vehicle behavior.
+func VehicleWithChassisBodyWheels(chassisBody *PhysicsBody, wheels []*PhysicsVehicleWheel) *PhysicsVehicle {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsVehicle")), objc.RegisterName("vehicleWithChassisBody:wheels:"), objref.IDOf(chassisBody), purego.SliceToNSArray(wheels, func(_v *PhysicsVehicleWheel) objc.ID { return objref.IDOf(_v) }))
+	return PhysicsVehicleFromID(_r)
 }
 
-// ShapeWithNodeOptions calls the underlying SCNPhysicsShapeShapeWithNodeOptions.
-func ShapeWithNodeOptions(node *raw.SCNNode, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *PhysicsShape {
-	_r := raw.SCNPhysicsShapeShapeWithNodeOptions(node, options)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsShape{inner: _r}
+// Creates a wheel object.
+func WheelWithNode(node *Node) *PhysicsVehicleWheel {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsVehicleWheel")), objc.RegisterName("wheelWithNode:"), objref.IDOf(node))
+	return PhysicsVehicleWheelFromID(_r)
 }
 
-// ShapeWithShapesTransforms calls the underlying SCNPhysicsShapeShapeWithShapesTransforms.
-func ShapeWithShapesTransforms(shapes *foundation.NSArray[*raw.SCNPhysicsShape], transforms *foundation.NSArray[*foundation.NSValue]) *PhysicsShape {
-	_r := raw.SCNPhysicsShapeShapeWithShapesTransforms(shapes, transforms)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsShape{inner: _r}
-}
-
-// SCNPhysicsSliderJointJointWithBodyAAxisAAnchorABodyBAxisBAnchorB calls the underlying SCNPhysicsSliderJointJointWithBodyAAxisAAnchorABodyBAxisBAnchorB.
-func SCNPhysicsSliderJointJointWithBodyAAxisAAnchorABodyBAxisBAnchorB(bodyA *raw.SCNPhysicsBody, axisA raw.SCNVector3, anchorA raw.SCNVector3, bodyB *raw.SCNPhysicsBody, axisB raw.SCNVector3, anchorB raw.SCNVector3) *PhysicsSliderJoint {
-	_r := raw.SCNPhysicsSliderJointJointWithBodyAAxisAAnchorABodyBAxisBAnchorB(bodyA, axisA, anchorA, bodyB, axisB, anchorB)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsSliderJoint{inner: _r}
-}
-
-// SCNPhysicsSliderJointJointWithBodyAxisAnchor calls the underlying SCNPhysicsSliderJointJointWithBodyAxisAnchor.
-func SCNPhysicsSliderJointJointWithBodyAxisAnchor(body *raw.SCNPhysicsBody, axis raw.SCNVector3, anchor raw.SCNVector3) *PhysicsSliderJoint {
-	_r := raw.SCNPhysicsSliderJointJointWithBodyAxisAnchor(body, axis, anchor)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsSliderJoint{inner: _r}
-}
-
-// VehicleWithChassisBodyWheels calls the underlying SCNPhysicsVehicleVehicleWithChassisBodyWheels.
-func VehicleWithChassisBodyWheels(chassisBody *raw.SCNPhysicsBody, wheels *foundation.NSArray[*raw.SCNPhysicsVehicleWheel]) *PhysicsVehicle {
-	_r := raw.SCNPhysicsVehicleVehicleWithChassisBodyWheels(chassisBody, wheels)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsVehicle{inner: _r}
-}
-
-// WheelWithNode calls the underlying SCNPhysicsVehicleWheelWheelWithNode.
-func WheelWithNode(node *raw.SCNNode) *PhysicsVehicleWheel {
-	_r := raw.SCNPhysicsVehicleWheelWheelWithNode(node)
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsVehicleWheel{inner: _r}
-}
-
-// PlaneWithWidthHeight calls the underlying SCNPlanePlaneWithWidthHeight.
+// Creates a plane geometry with the specified width and height.
 func PlaneWithWidthHeight(width float64, height float64) *Plane {
-	_r := raw.SCNPlanePlaneWithWidthHeight(width, height)
-	if _r == nil {
-		return nil
-	}
-	return &Plane{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPlane")), objc.RegisterName("planeWithWidth:height:"), width, height)
+	return PlaneFromID(_r)
 }
 
-// SCNProgramProgram calls the underlying SCNProgramProgram.
+// Creates a new program object.
 func SCNProgramProgram() *Program {
-	_r := raw.SCNProgramProgram()
-	if _r == nil {
-		return nil
-	}
-	return &Program{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNProgram")), objc.RegisterName("program"))
+	return ProgramFromID(_r)
 }
 
-// PyramidWithWidthHeightLength calls the underlying SCNPyramidPyramidWithWidthHeightLength.
+// Creates a pyramid geometry with the specified width, height, and length.
 func PyramidWithWidthHeightLength(width float64, height float64, length float64) *Pyramid {
-	_r := raw.SCNPyramidPyramidWithWidthHeightLength(width, height, length)
-	if _r == nil {
-		return nil
-	}
-	return &Pyramid{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNPyramid")), objc.RegisterName("pyramidWithWidth:height:length:"), width, height, length)
+	return PyramidFromID(_r)
 }
 
-// ReferenceNodeWithURL calls the underlying SCNReferenceNodeReferenceNodeWithURL.
+// Creates a node whose content is to be loaded from the referenced URL.
 func ReferenceNodeWithURL(referenceURL string) *ReferenceNode {
-	_r := raw.SCNReferenceNodeReferenceNodeWithURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(referenceURL)))
-	if _r == nil {
-		return nil
-	}
-	return &ReferenceNode{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNReferenceNode")), objc.RegisterName("referenceNodeWithURL:"), rt.FileURL(referenceURL))
+	return ReferenceNodeFromID(_r)
 }
 
-// RendererWithContextOptions calls the underlying SCNRendererRendererWithContextOptions.
-func RendererWithContextOptions(context_ unsafe.Pointer, options *foundation.NSDictionary[objc.ID, objc.ID]) *Renderer {
-	_r := raw.SCNRendererRendererWithContextOptions(context_, options)
-	if _r == nil {
-		return nil
-	}
-	return &Renderer{inner: _r}
+// Creates a renderer with the specified OpenGL context.
+func RendererWithContextOptions(context_ obj.Object, options obj.Object) *Renderer {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNRenderer")), objc.RegisterName("rendererWithContext:options:"), objref.IDOf(context_), objref.IDOf(options))
+	return RendererFromID(_r)
 }
 
-// RendererWithDeviceOptions calls the underlying SCNRendererRendererWithDeviceOptions.
-func RendererWithDeviceOptions(device metal.MTLDevice, options *foundation.NSDictionary[objc.ID, objc.ID]) *Renderer {
-	_r := raw.SCNRendererRendererWithDeviceOptions(device, options)
-	if _r == nil {
-		return nil
-	}
-	return &Renderer{inner: _r}
+// Creates and returns a SCNReplicatorConstraint constraint.
+func ReplicatorConstraintWithTarget(target *Node) *ReplicatorConstraint {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNReplicatorConstraint")), objc.RegisterName("replicatorConstraintWithTarget:"), objref.IDOf(target))
+	return ReplicatorConstraintFromID(_r)
 }
 
-// ReplicatorConstraintWithTarget calls the underlying SCNReplicatorConstraintReplicatorConstraintWithTarget.
-func ReplicatorConstraintWithTarget(target *raw.SCNNode) *ReplicatorConstraint {
-	_r := raw.SCNReplicatorConstraintReplicatorConstraintWithTarget(target)
-	if _r == nil {
-		return nil
-	}
-	return &ReplicatorConstraint{inner: _r}
-}
-
-// SCNSceneScene calls the underlying SCNSceneScene.
+// Creates and returns an empty scene.
 func SCNSceneScene() *Scene {
-	_r := raw.SCNSceneScene()
-	if _r == nil {
-		return nil
-	}
-	return &Scene{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNScene")), objc.RegisterName("scene"))
+	return SceneFromID(_r)
 }
 
-// SceneNamed calls the underlying SCNSceneSceneNamed.
+// Loads a scene from a file with the specified name in the app’s main bundle.
 func SceneNamed(name string) *Scene {
-	_r := raw.SCNSceneSceneNamed(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &Scene{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNScene")), objc.RegisterName("sceneNamed:"), purego.NSString(name))
+	return SceneFromID(_r)
 }
 
-// SceneNamedInDirectoryOptions calls the underlying SCNSceneSceneNamedInDirectoryOptions.
-func SceneNamedInDirectoryOptions(name string, directory string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Scene {
-	_r := raw.SCNSceneSceneNamedInDirectoryOptions(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(directory), options)
-	if _r == nil {
-		return nil
-	}
-	return &Scene{inner: _r}
+// Loads a scene from a file with the specified name in a specific subdirectory of the app’s main bundle.
+func SceneNamedInDirectoryOptions(name string, directory string, options obj.Object) *Scene {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNScene")), objc.RegisterName("sceneNamed:inDirectory:options:"), purego.NSString(name), purego.NSString(directory), objref.IDOf(options))
+	return SceneFromID(_r)
 }
 
-// SceneWithURLOptionsError calls the underlying SCNSceneSceneWithURLOptionsError.
-func SceneWithURLOptionsError(url string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*Scene, error) {
-	_r, _err := raw.SCNSceneSceneWithURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options)
-	if _err != nil {
-		return nil, _err
+// Loads a scene from the specified URL.
+func SceneWithURLOptionsError(url string, options obj.Object) (*Scene, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNScene")), objc.RegisterName("sceneWithURL:options:error:"), rt.FileURL(url), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Scene{inner: _r}, nil
+	return SceneFromID(_r), nil
 }
 
-// SceneSourceWithURLOptions calls the underlying SCNSceneSourceSceneSourceWithURLOptions.
-func SceneSourceWithURLOptions(url string, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SceneSource {
-	_r := raw.SCNSceneSourceSceneSourceWithURLOptions(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options)
-	if _r == nil {
-		return nil
-	}
-	return &SceneSource{inner: _r}
+// Creates a scene source that reads the scene graph from a specified file.
+func SceneSourceWithURLOptions(url string, options obj.Object) *SceneSource {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNSceneSource")), objc.RegisterName("sceneSourceWithURL:options:"), rt.FileURL(url), objref.IDOf(options))
+	return SceneSourceFromID(_r)
 }
 
-// SceneSourceWithDataOptions calls the underlying SCNSceneSourceSceneSourceWithDataOptions.
-func SceneSourceWithDataOptions(data *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *SceneSource {
-	_r := raw.SCNSceneSourceSceneSourceWithDataOptions(data, options)
-	if _r == nil {
-		return nil
-	}
-	return &SceneSource{inner: _r}
+// Creates a scene source that reads the scene graph contained in an NSData object.
+func SceneSourceWithDataOptions(data obj.Object, options obj.Object) *SceneSource {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNSceneSource")), objc.RegisterName("sceneSourceWithData:options:"), objref.IDOf(data), objref.IDOf(options))
+	return SceneSourceFromID(_r)
 }
 
-// ShapeWithPathExtrusionDepth calls the underlying SCNShapeShapeWithPathExtrusionDepth.
-func ShapeWithPathExtrusionDepth(path *appkit.NSBezierPath, extrusionDepth float64) *Shape {
-	_r := raw.SCNShapeShapeWithPathExtrusionDepth(path, extrusionDepth)
-	if _r == nil {
-		return nil
-	}
-	return &Shape{inner: _r}
+// Creates a shape geometry with the specified path and extrusion depth.
+func ShapeWithPathExtrusionDepth(path obj.Object, extrusionDepth float64) *Shape {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNShape")), objc.RegisterName("shapeWithPath:extrusionDepth:"), objref.IDOf(path), extrusionDepth)
+	return ShapeFromID(_r)
 }
 
-// SkinnerWithBaseGeometryBonesBoneInverseBindTransformsBoneWeightsBoneIndices calls the underlying SCNSkinnerSkinnerWithBaseGeometryBonesBoneInverseBindTransformsBoneWeightsBoneIndices.
-func SkinnerWithBaseGeometryBonesBoneInverseBindTransformsBoneWeightsBoneIndices(baseGeometry *raw.SCNGeometry, bones *foundation.NSArray[*raw.SCNNode], boneInverseBindTransforms *foundation.NSArray[*foundation.NSValue], boneWeights *raw.SCNGeometrySource, boneIndices *raw.SCNGeometrySource) *Skinner {
-	_r := raw.SCNSkinnerSkinnerWithBaseGeometryBonesBoneInverseBindTransformsBoneWeightsBoneIndices(baseGeometry, bones, boneInverseBindTransforms, boneWeights, boneIndices)
-	if _r == nil {
-		return nil
-	}
-	return &Skinner{inner: _r}
+// Creates a skinner object with the specified visible geometry and skeleton information.
+func SkinnerWithBaseGeometryBonesBoneInverseBindTransformsBoneWeightsBoneIndices(baseGeometry *Geometry, bones []*Node, boneInverseBindTransforms []obj.Object, boneWeights *GeometrySource, boneIndices *GeometrySource) *Skinner {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNSkinner")), objc.RegisterName("skinnerWithBaseGeometry:bones:boneInverseBindTransforms:boneWeights:boneIndices:"), objref.IDOf(baseGeometry), purego.SliceToNSArray(bones, func(_v *Node) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(boneInverseBindTransforms, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(boneWeights), objref.IDOf(boneIndices))
+	return SkinnerFromID(_r)
 }
 
-// SCNSliderConstraintSliderConstraint calls the underlying SCNSliderConstraintSliderConstraint.
+// Creates and returns a SCNSliderConstraint object.
 func SCNSliderConstraintSliderConstraint() *SliderConstraint {
-	_r := raw.SCNSliderConstraintSliderConstraint()
-	if _r == nil {
-		return nil
-	}
-	return &SliderConstraint{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNSliderConstraint")), objc.RegisterName("sliderConstraint"))
+	return SliderConstraintFromID(_r)
 }
 
-// SphereWithRadius calls the underlying SCNSphereSphereWithRadius.
+// Creates a sphere geometry with the specified radius.
 func SphereWithRadius(radius float64) *Sphere {
-	_r := raw.SCNSphereSphereWithRadius(radius)
-	if _r == nil {
-		return nil
-	}
-	return &Sphere{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNSphere")), objc.RegisterName("sphereWithRadius:"), radius)
+	return SphereFromID(_r)
 }
 
-// TechniqueWithDictionary calls the underlying SCNTechniqueTechniqueWithDictionary.
-func TechniqueWithDictionary(dictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *Technique {
-	_r := raw.SCNTechniqueTechniqueWithDictionary(dictionary)
-	if _r == nil {
-		return nil
-	}
-	return &Technique{inner: _r}
+// Creates a technique from a technique definition dictionary.,
+func TechniqueWithDictionary(dictionary obj.Object) *Technique {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNTechnique")), objc.RegisterName("techniqueWithDictionary:"), objref.IDOf(dictionary))
+	return TechniqueFromID(_r)
 }
 
-// TechniqueBySequencingTechniques calls the underlying SCNTechniqueTechniqueBySequencingTechniques.
-func TechniqueBySequencingTechniques(techniques *foundation.NSArray[*raw.SCNTechnique]) *Technique {
-	_r := raw.SCNTechniqueTechniqueBySequencingTechniques(techniques)
-	if _r == nil {
-		return nil
-	}
-	return &Technique{inner: _r}
+// Creates a new rendering technique that combines a series of techniques.
+func TechniqueBySequencingTechniques(techniques []*Technique) *Technique {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNTechnique")), objc.RegisterName("techniqueBySequencingTechniques:"), purego.SliceToNSArray(techniques, func(_v *Technique) objc.ID { return objref.IDOf(_v) }))
+	return TechniqueFromID(_r)
 }
 
-// TextWithStringExtrusionDepth calls the underlying SCNTextTextWithStringExtrusionDepth.
-func TextWithStringExtrusionDepth(string_ objc.ID, extrusionDepth float64) *Text {
-	_r := raw.SCNTextTextWithStringExtrusionDepth(string_, extrusionDepth)
-	if _r == nil {
-		return nil
-	}
-	return &Text{inner: _r}
+// Creates a text geometry from a specified string, extruded with a specified depth.
+func TextWithStringExtrusionDepth(string_ obj.Object, extrusionDepth float64) *Text {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNText")), objc.RegisterName("textWithString:extrusionDepth:"), objref.IDOf(string_), extrusionDepth)
+	return TextFromID(_r)
 }
 
-// FunctionWithTimingMode calls the underlying SCNTimingFunctionFunctionWithTimingMode.
-func FunctionWithTimingMode(timingMode SCNActionTimingMode) *TimingFunction {
-	_r := raw.SCNTimingFunctionFunctionWithTimingMode(raw.SCNActionTimingMode(timingMode))
-	if _r == nil {
-		return nil
-	}
-	return &TimingFunction{inner: _r}
+func FunctionWithTimingMode(timingMode ActionTimingMode) *TimingFunction {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNTimingFunction")), objc.RegisterName("functionWithTimingMode:"), timingMode)
+	return TimingFunctionFromID(_r)
 }
 
-// FunctionWithCAMediaTimingFunction calls the underlying SCNTimingFunctionFunctionWithCAMediaTimingFunction.
-func FunctionWithCAMediaTimingFunction(caTimingFunction *quartzcore.CAMediaTimingFunction) *TimingFunction {
-	_r := raw.SCNTimingFunctionFunctionWithCAMediaTimingFunction(caTimingFunction)
-	if _r == nil {
-		return nil
-	}
-	return &TimingFunction{inner: _r}
+func FunctionWithCAMediaTimingFunction(caTimingFunction obj.Object) *TimingFunction {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNTimingFunction")), objc.RegisterName("functionWithCAMediaTimingFunction:"), objref.IDOf(caTimingFunction))
+	return TimingFunctionFromID(_r)
 }
 
-// TorusWithRingRadiusPipeRadius calls the underlying SCNTorusTorusWithRingRadiusPipeRadius.
+// Creates a torus geometry with the specified ring radius and pipe radius.
 func TorusWithRingRadiusPipeRadius(ringRadius float64, pipeRadius float64) *Torus {
-	_r := raw.SCNTorusTorusWithRingRadiusPipeRadius(ringRadius, pipeRadius)
-	if _r == nil {
-		return nil
-	}
-	return &Torus{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNTorus")), objc.RegisterName("torusWithRingRadius:pipeRadius:"), ringRadius, pipeRadius)
+	return TorusFromID(_r)
 }
 
-// Begin calls the underlying SCNTransactionBegin.
+// Begins a new transaction for the current thread.
 func Begin() {
-	raw.SCNTransactionBegin()
+	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("begin"))
 }
 
-// Commit calls the underlying SCNTransactionCommit.
+// Commits all changes made during the current transaction.
 func Commit() {
-	raw.SCNTransactionCommit()
+	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("commit"))
 }
 
-// Flush calls the underlying SCNTransactionFlush.
+// Applies all changes from the current automatic transaction.
 func Flush() {
-	raw.SCNTransactionFlush()
+	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("flush"))
 }
 
-// Lock calls the underlying SCNTransactionLock.
+// Attempts to acquire a recursive spinlock to ensure the validity of values you retrieve during the transaction.
 func Lock() {
-	raw.SCNTransactionLock()
+	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("lock"))
 }
 
-// Unlock calls the underlying SCNTransactionUnlock.
+// Relinquishes a previously acquired transaction lock.
 func Unlock() {
-	raw.SCNTransactionUnlock()
+	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("unlock"))
 }
 
-// ValueForKey calls the underlying SCNTransactionValueForKey.
-func ValueForKey(key string) objc.ID {
-	return raw.SCNTransactionValueForKey(foundation.NSStringStringWithUTF8String(key))
+// Returns the object previously associated with the current transaction using the specified key.
+func ValueForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("valueForKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// SetValueForKey calls the underlying SCNTransactionSetValueForKey.
-func SetValueForKey(value objc.ID, key string) {
-	raw.SCNTransactionSetValueForKey(value, foundation.NSStringStringWithUTF8String(key))
+// Associates an arbitrary object with the current transaction using the specified key.
+func SetValueForKey(value obj.Object, key string) {
+	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("setValue:forKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
-// AnimationDuration calls the underlying SCNTransactionAnimationDuration.
 func AnimationDuration() float64 {
-	return raw.SCNTransactionAnimationDuration()
+	_r := objc.Send[float64](objc.ID(_class("SCNTransaction")), objc.RegisterName("animationDuration"))
+	return _r
 }
 
-// SetAnimationDuration calls the underlying SCNTransactionSetAnimationDuration.
 func SetAnimationDuration(animationDuration float64) {
-	raw.SCNTransactionSetAnimationDuration(animationDuration)
+	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("setAnimationDuration:"), animationDuration)
 }
 
-// AnimationTimingFunction calls the underlying SCNTransactionAnimationTimingFunction.
-func AnimationTimingFunction() *quartzcore.CAMediaTimingFunction {
-	return raw.SCNTransactionAnimationTimingFunction()
+func AnimationTimingFunction() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("animationTimingFunction"))
+	return obj.Wrap(_r)
 }
 
-// SetAnimationTimingFunction calls the underlying SCNTransactionSetAnimationTimingFunction.
-func SetAnimationTimingFunction(animationTimingFunction *quartzcore.CAMediaTimingFunction) {
-	raw.SCNTransactionSetAnimationTimingFunction(animationTimingFunction)
+func SetAnimationTimingFunction(animationTimingFunction obj.Object) {
+	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("setAnimationTimingFunction:"), objref.IDOf(animationTimingFunction))
 }
 
-// DisableActions calls the underlying SCNTransactionDisableActions.
 func DisableActions() bool {
-	return raw.SCNTransactionDisableActions()
+	_r := objc.Send[bool](objc.ID(_class("SCNTransaction")), objc.RegisterName("disableActions"))
+	return _r
 }
 
-// SetDisableActions calls the underlying SCNTransactionSetDisableActions.
 func SetDisableActions(disableActions bool) {
-	raw.SCNTransactionSetDisableActions(disableActions)
-}
-
-// CompletionBlock calls the underlying SCNTransactionCompletionBlock.
-func CompletionBlock() objc.Block {
-	return raw.SCNTransactionCompletionBlock()
+	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("setDisableActions:"), disableActions)
 }
 
 // SetCompletionBlock blocks until the operation completes or ctx is cancelled.
 func SetCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	raw.SCNTransactionSetCompletionBlock(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("setCompletionBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -1229,38 +708,8 @@ func SetCompletionBlock(ctx context.Context) error {
 	}
 }
 
-// TransformConstraintInWorldSpaceWith calls the underlying SCNTransformConstraintTransformConstraintInWorldSpaceWith.
-func TransformConstraintInWorldSpaceWith(world bool, block objc.Block) *TransformConstraint {
-	_r := raw.SCNTransformConstraintTransformConstraintInWorldSpaceWith(world, block)
-	if _r == nil {
-		return nil
-	}
-	return &TransformConstraint{inner: _r}
-}
-
-// PositionConstraintInWorldSpaceWith calls the underlying SCNTransformConstraintPositionConstraintInWorldSpaceWith.
-func PositionConstraintInWorldSpaceWith(world bool, block objc.Block) *TransformConstraint {
-	_r := raw.SCNTransformConstraintPositionConstraintInWorldSpaceWith(world, block)
-	if _r == nil {
-		return nil
-	}
-	return &TransformConstraint{inner: _r}
-}
-
-// OrientationConstraintInWorldSpaceWith calls the underlying SCNTransformConstraintOrientationConstraintInWorldSpaceWith.
-func OrientationConstraintInWorldSpaceWith(world bool, block objc.Block) *TransformConstraint {
-	_r := raw.SCNTransformConstraintOrientationConstraintInWorldSpaceWith(world, block)
-	if _r == nil {
-		return nil
-	}
-	return &TransformConstraint{inner: _r}
-}
-
-// TubeWithInnerRadiusOuterRadiusHeight calls the underlying SCNTubeTubeWithInnerRadiusOuterRadiusHeight.
+// Creates a tube geometry with the specified inner radius, outer radius, and height.
 func TubeWithInnerRadiusOuterRadiusHeight(innerRadius float64, outerRadius float64, height float64) *Tube {
-	_r := raw.SCNTubeTubeWithInnerRadiusOuterRadiusHeight(innerRadius, outerRadius, height)
-	if _r == nil {
-		return nil
-	}
-	return &Tube{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SCNTube")), objc.RegisterName("tubeWithInnerRadius:outerRadius:height:"), innerRadius, outerRadius, height)
+	return TubeFromID(_r)
 }

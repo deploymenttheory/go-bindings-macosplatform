@@ -5,97 +5,115 @@
 package cinematic
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AssetSpatialAudioInfo wraps [raw.CNAssetSpatialAudioInfo] with a fluent Go API.
+// AssetSpatialAudioInfo is an idiomatic wrapper over the Objective-C class CNAssetSpatialAudioInfo.
 type AssetSpatialAudioInfo struct {
-	inner *raw.CNAssetSpatialAudioInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNAssetSpatialAudioInfo].
-func (x *AssetSpatialAudioInfo) Unwrap() *raw.CNAssetSpatialAudioInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetSpatialAudioInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetSpatialAudioInfoFromID adopts an existing object pointer as a AssetSpatialAudioInfo (nil for 0).
+// AssetSpatialAudioInfoFromID adopts an existing Objective-C object as a AssetSpatialAudioInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetSpatialAudioInfoFromID(id objc.ID) *AssetSpatialAudioInfo {
 	if id == 0 {
 		return nil
 	}
-	return &AssetSpatialAudioInfo{inner: raw.CNAssetSpatialAudioInfoFromID(id)}
+	x := &AssetSpatialAudioInfo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAssetSpatialAudioInfo creates a new [AssetSpatialAudioInfo].
+// assetSpatialAudioInfoAdopt wraps an Objective-C object that this code just created as a
+// AssetSpatialAudioInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetSpatialAudioInfoAdopt(id objc.ID) *AssetSpatialAudioInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetSpatialAudioInfo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetSpatialAudioInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetSpatialAudioInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetSpatialAudioInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAssetSpatialAudioInfo creates a new AssetSpatialAudioInfo.
 func NewAssetSpatialAudioInfo() *AssetSpatialAudioInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNAssetSpatialAudioInfo")), objc.RegisterName("new"))
-	return &AssetSpatialAudioInfo{inner: raw.CNAssetSpatialAudioInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNAssetSpatialAudioInfo")), objc.RegisterName("new"))
+	return assetSpatialAudioInfoAdopt(_id)
 }
 
-// @property		defaulSpatialAudioTrack @abstract		default `AVAssetTrack` containing Spatial Audio
-//
-// DefaultSpatialAudioTrack calls the underlying DefaultSpatialAudioTrack.
-func (x *AssetSpatialAudioInfo) DefaultSpatialAudioTrack() *avfoundation.AVAssetTrack {
-	return x.inner.DefaultSpatialAudioTrack()
+// default `AVAssetTrack` containing Spatial Audio
+func (x *AssetSpatialAudioInfo) DefaultSpatialAudioTrack() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultSpatialAudioTrack"))
+	return obj.Wrap(_r)
 }
 
-// @property		defaultEffectIntensity @abstract		default effect intensity value as provided by the system. Supported range is [0.0-1.0]
-//
-// DefaultEffectIntensity calls the underlying DefaultEffectIntensity.
+// default effect intensity value as provided by the system. Supported range is [0.0-1.0]
 func (x *AssetSpatialAudioInfo) DefaultEffectIntensity() float32 {
-	return x.inner.DefaultEffectIntensity()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("defaultEffectIntensity"))
+	return _r
 }
 
-// @method		defaultRenderingStyle @abstract		default rendering style as provided by the system
-//
-// DefaultRenderingStyle calls the underlying DefaultRenderingStyle.
-func (x *AssetSpatialAudioInfo) DefaultRenderingStyle() CNSpatialAudioRenderingStyle {
-	return CNSpatialAudioRenderingStyle(x.inner.DefaultRenderingStyle())
+// default rendering style as provided by the system
+func (x *AssetSpatialAudioInfo) DefaultRenderingStyle() SpatialAudioRenderingStyle {
+	_r := objc.Send[SpatialAudioRenderingStyle](objref.IDOf(x), objc.RegisterName("defaultRenderingStyle"))
+	return _r
 }
 
-// @method		spatialAudioMixMetadata @abstract		The result of audio analysis during recording which contains metadata necessary to properly configure the Audio Mix feature during playback or editing.. Can be used with `AUAudioUnit` instances that support AudioUnitPropertyID `kProperty_SpatialAudioMixMetadata`
-//
-// SpatialAudioMixMetadata calls the underlying SpatialAudioMixMetadata.
-func (x *AssetSpatialAudioInfo) SpatialAudioMixMetadata() *foundation.NSData {
-	return x.inner.SpatialAudioMixMetadata()
+// The result of audio analysis during recording which contains metadata necessary to properly configure the Audio Mix feature during playback or editing.. Can be used with `AUAudioUnit` instances that support AudioUnitPropertyID `kProperty_SpatialAudioMixMetadata`
+func (x *AssetSpatialAudioInfo) SpatialAudioMixMetadata() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("spatialAudioMixMetadata"))
+	return obj.Wrap(_r)
 }
 
-// @method		audioMixWithEffectIntensity:renderingStyle: @abstract		returns an instance of `AVAudioMix` encapsulating all spatial audio related data with specified effect intensity and rendering style. @discussion    Returns an `AVAudioMix` containing all the necessary state to operate on the asset with Spatial Audio effects enabled
-//
-// AudioMixWithEffectIntensityRenderingStyle calls the underlying AudioMixWithEffectIntensityRenderingStyle.
-func (x *AssetSpatialAudioInfo) AudioMixWithEffectIntensityRenderingStyle(effectIntensity float32, renderingStyle CNSpatialAudioRenderingStyle) *avfoundation.AVAudioMix {
-	return x.inner.AudioMixWithEffectIntensityRenderingStyle(effectIntensity, raw.CNSpatialAudioRenderingStyle(renderingStyle))
+// returns an instance of `AVAudioMix` encapsulating all spatial audio related data with specified effect intensity and rendering style. Returns an `AVAudioMix` containing all the necessary state to operate on the asset with Spatial Audio effects enabled
+func (x *AssetSpatialAudioInfo) AudioMixWithEffectIntensityRenderingStyle(effectIntensity float32, renderingStyle SpatialAudioRenderingStyle) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioMixWithEffectIntensity:renderingStyle:"), effectIntensity, renderingStyle)
+	return obj.Wrap(_r)
 }
 
-// @method		assetReaderOutputSettingsForContentType @abstract		Returns a dictionary of settings and the source track that should be used to fetch LPCM samples from this track with the effect applied @discussion    Use the returned NSDictionary with the `defaulSpatialAudioTrack` to initialize an instance of `AVAssetReaderAudioMixOutput`
-//
-// AssetReaderOutputSettingsForContentType calls the underlying AssetReaderOutputSettingsForContentType.
-func (x *AssetSpatialAudioInfo) AssetReaderOutputSettingsForContentType(contentType CNSpatialAudioContentType) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.AssetReaderOutputSettingsForContentType(raw.CNSpatialAudioContentType(contentType))
+// Returns a dictionary of settings and the source track that should be used to fetch LPCM samples from this track with the effect applied Use the returned NSDictionary with the `defaulSpatialAudioTrack` to initialize an instance of `AVAssetReaderAudioMixOutput`
+func (x *AssetSpatialAudioInfo) AssetReaderOutputSettingsForContentType(contentType SpatialAudioContentType) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetReaderOutputSettingsForContentType:"), contentType)
+	return obj.Wrap(_r)
 }
 
-// @method		assetWriterInputSettingsForContentType @abstract		Returns a dictionary of settings that should be used to encode LPCM samples using `AVAssetWriterInput`
-//
-// AssetWriterInputSettingsForContentType calls the underlying AssetWriterInputSettingsForContentType.
-func (x *AssetSpatialAudioInfo) AssetWriterInputSettingsForContentType(contentType CNSpatialAudioContentType) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.AssetWriterInputSettingsForContentType(raw.CNSpatialAudioContentType(contentType))
+// Returns a dictionary of settings that should be used to encode LPCM samples using `AVAssetWriterInput`
+func (x *AssetSpatialAudioInfo) AssetWriterInputSettingsForContentType(contentType SpatialAudioContentType) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetWriterInputSettingsForContentType:"), contentType)
+	return obj.Wrap(_r)
 }
 
 // AssetSpatialAudioInfoable is the interface implemented by [AssetSpatialAudioInfo], for mocking and DI.
 type AssetSpatialAudioInfoable interface {
-	Unwrap() *raw.CNAssetSpatialAudioInfo
-	DefaultSpatialAudioTrack() *avfoundation.AVAssetTrack
+	obj.Object
+	DefaultSpatialAudioTrack() obj.Object
 	DefaultEffectIntensity() float32
-	DefaultRenderingStyle() CNSpatialAudioRenderingStyle
-	SpatialAudioMixMetadata() *foundation.NSData
-	AudioMixWithEffectIntensityRenderingStyle(effectIntensity float32, renderingStyle CNSpatialAudioRenderingStyle) *avfoundation.AVAudioMix
-	AssetReaderOutputSettingsForContentType(contentType CNSpatialAudioContentType) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	AssetWriterInputSettingsForContentType(contentType CNSpatialAudioContentType) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	DefaultRenderingStyle() SpatialAudioRenderingStyle
+	SpatialAudioMixMetadata() obj.Object
+	AudioMixWithEffectIntensityRenderingStyle(effectIntensity float32, renderingStyle SpatialAudioRenderingStyle) obj.Object
+	AssetReaderOutputSettingsForContentType(contentType SpatialAudioContentType) obj.Object
+	AssetWriterInputSettingsForContentType(contentType SpatialAudioContentType) obj.Object
 }
 
 var _ AssetSpatialAudioInfoable = (*AssetSpatialAudioInfo)(nil)

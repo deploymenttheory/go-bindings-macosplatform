@@ -5,199 +5,160 @@
 package mpsrayintersector
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsrayintersector"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// TriangleAccelerationStructure wraps [raw.MPSTriangleAccelerationStructure] with a fluent Go API.
+// TriangleAccelerationStructure is an idiomatic wrapper over the Objective-C class MPSTriangleAccelerationStructure.
 type TriangleAccelerationStructure struct {
-	inner *raw.MPSTriangleAccelerationStructure
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSTriangleAccelerationStructure].
-func (x *TriangleAccelerationStructure) Unwrap() *raw.MPSTriangleAccelerationStructure {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TriangleAccelerationStructure) ID() objc.ID { return x.inner.Ptr() }
-
-// TriangleAccelerationStructureFromID adopts an existing object pointer as a TriangleAccelerationStructure (nil for 0).
+// TriangleAccelerationStructureFromID adopts an existing Objective-C object as a TriangleAccelerationStructure
+// (nil for 0), retaining it and registering a release finalizer.
 func TriangleAccelerationStructureFromID(id objc.ID) *TriangleAccelerationStructure {
 	if id == 0 {
 		return nil
 	}
-	return &TriangleAccelerationStructure{inner: raw.MPSTriangleAccelerationStructureFromID(id)}
+	x := &TriangleAccelerationStructure{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTriangleAccelerationStructure creates a new [TriangleAccelerationStructure].
+// triangleAccelerationStructureAdopt wraps an Objective-C object that this code just created as a
+// TriangleAccelerationStructure (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func triangleAccelerationStructureAdopt(id objc.ID) *TriangleAccelerationStructure {
+	if id == 0 {
+		return nil
+	}
+	x := &TriangleAccelerationStructure{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TriangleAccelerationStructure) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TriangleAccelerationStructure) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TriangleAccelerationStructure) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTriangleAccelerationStructure creates a new TriangleAccelerationStructure.
 func NewTriangleAccelerationStructure() *TriangleAccelerationStructure {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSTriangleAccelerationStructure")), objc.RegisterName("new"))
-	return &TriangleAccelerationStructure{inner: raw.MPSTriangleAccelerationStructureFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSTriangleAccelerationStructure")), objc.RegisterName("new"))
+	return triangleAccelerationStructureAdopt(_id)
 }
 
-// @brief Number of triangles. Changes to this property require rebuilding the acceleration structure. Note that this property is an alias for the polygonCount property.
+// Number of triangles. Changes to this property require rebuilding the acceleration structure. Note that this property is an alias for the polygonCount property.
 //
-// WithTriangleCount sets the triangleCount property and returns the receiver for chaining.
-func (x *TriangleAccelerationStructure) WithTriangleCount(triangleCount uint) *TriangleAccelerationStructure {
-	x.inner.SetTriangleCount(triangleCount)
+// WithTriangleCount sets triangleCount and returns the receiver so calls can be chained.
+func (x *TriangleAccelerationStructure) WithTriangleCount(triangleCount int) *TriangleAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTriangleCount:"), triangleCount)
 	return x
 }
 
-// @brief The type of polygon. Defaults to MPSPolygonTypeTriangle. Changes to this property require rebuilding the acceleration structure.
+// The type of polygon. Defaults to MPSPolygonTypeTriangle. Changes to this property require rebuilding the acceleration structure.
 //
-// WithPolygonType sets the polygonType property and returns the receiver for chaining.
-func (x *TriangleAccelerationStructure) WithPolygonType(polygonType MPSPolygonType) *TriangleAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetPolygonType(raw.MPSPolygonType(polygonType))
+// WithPolygonType sets polygonType and returns the receiver so calls can be chained.
+func (x *TriangleAccelerationStructure) WithPolygonType(polygonType PolygonType) *TriangleAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonType:"), polygonType)
 	return x
 }
 
-// @brief Offset, in bytes, between consecutive vertices in the vertex buffer. Defaults to 0 bytes, indicating that the vertices are packed according to the natural alignment of the vector_float3 type: 16 bytes. @discussion This can be used to skip past any additional per-vertex data which may be stored alongside the position such as the vertex normal and texture coordinates. Must be a multiple of 4 bytes, and must be at least 12 bytes. Changes to this property require rebuilding the acceleration structure.
+// Offset, in bytes, between consecutive vertices in the vertex buffer. Defaults to 0 bytes, indicating that the vertices are packed according to the natural alignment of the vector_float3 type: 16 bytes. This can be used to skip past any additional per-vertex data which may be stored alongside the position such as the vertex normal and texture coordinates. Must be a multiple of 4 bytes, and must be at least 12 bytes. Changes to this property require rebuilding the acceleration structure.
 //
-// WithVertexStride sets the vertexStride property and returns the receiver for chaining.
-func (x *TriangleAccelerationStructure) WithVertexStride(vertexStride uint) *TriangleAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetVertexStride(vertexStride)
+// WithVertexStride sets vertexStride and returns the receiver so calls can be chained.
+func (x *TriangleAccelerationStructure) WithVertexStride(vertexStride int) *TriangleAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexStride:"), vertexStride)
 	return x
 }
 
-// @brief Index type. Defaults to MPSDataTypeUInt32. Only MPSDataTypeUInt16 and MPSDataTypeUInt32 are supported.
+// Offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].vertexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
 //
-// WithIndexType sets the indexType property and returns the receiver for chaining.
-func (x *TriangleAccelerationStructure) WithIndexType(indexType mpscore.MPSDataType) *TriangleAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetIndexType(indexType)
+// WithVertexBufferOffset sets vertexBufferOffset and returns the receiver so calls can be chained.
+func (x *TriangleAccelerationStructure) WithVertexBufferOffset(vertexBufferOffset int) *TriangleAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexBufferOffset:"), vertexBufferOffset)
 	return x
 }
 
-// @brief Vertex buffer containing vertex data encoded as three 32 bit floats per vertex. Note that by default each vertex is aligned to the alignment of the vector_float3 type: 16 bytes. This can be changed using the vertexStride property. A vertex buffer must be provided before the acceleration structure is built. When using triangle polygons, degenerate (zero or negative area) triangles are ignored during acceleration structure construction. This can be used to pad triangle indices if needed. Quadrilateral polygons are internally treated as two triangles. If the quadrilateral has vertices v0, v1, v2, and v3, the two triangles will have vertices v0, v1, v2 and v0, v2, v3. A quadrilateral may be used to represent a triangle by repeating the last vertex. If the first triangle is degenerate (zero or negative area), the entire quadrilateral will be ignored. This can be used to pad quadrilateral indices if needed. All four vertices of a quadrilateral must be coplanar and the quadrilateral must be convex. This is an alias for polygonBuffers[0].vertexBuffer. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+// Offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].indexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
 //
-// WithVertexBuffer sets the vertexBuffer property and returns the receiver for chaining.
-func (x *TriangleAccelerationStructure) WithVertexBuffer(vertexBuffer metal.MTLBuffer) *TriangleAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetVertexBuffer(vertexBuffer)
+// WithIndexBufferOffset sets indexBufferOffset and returns the receiver so calls can be chained.
+func (x *TriangleAccelerationStructure) WithIndexBufferOffset(indexBufferOffset int) *TriangleAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferOffset:"), indexBufferOffset)
 	return x
 }
 
-// @brief Offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].vertexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+// Offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].maskBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
 //
-// WithVertexBufferOffset sets the vertexBufferOffset property and returns the receiver for chaining.
-func (x *TriangleAccelerationStructure) WithVertexBufferOffset(vertexBufferOffset uint) *TriangleAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetVertexBufferOffset(vertexBufferOffset)
+// WithMaskBufferOffset sets maskBufferOffset and returns the receiver so calls can be chained.
+func (x *TriangleAccelerationStructure) WithMaskBufferOffset(maskBufferOffset int) *TriangleAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskBufferOffset:"), maskBufferOffset)
 	return x
 }
 
-// @brief Index buffer containing index data. Each index references a vertex in the vertex buffer. May be nil. This is an alias for polygonBuffers[0].indexBuffer. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+// Number of polygons. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].polygonCount. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
 //
-// WithIndexBuffer sets the indexBuffer property and returns the receiver for chaining.
-func (x *TriangleAccelerationStructure) WithIndexBuffer(indexBuffer metal.MTLBuffer) *TriangleAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetIndexBuffer(indexBuffer)
+// WithPolygonCount sets polygonCount and returns the receiver so calls can be chained.
+func (x *TriangleAccelerationStructure) WithPolygonCount(polygonCount int) *TriangleAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonCount:"), polygonCount)
 	return x
 }
 
-// @brief Offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].indexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+// Array of polygon buffers. Each buffer contains a vertex buffer and optional index and mask buffer for an array of polygons. Changing the length of this array requires rebuilding the acceleration structure. Using more than one MPSPolygonBuffer will reduce performance. It is better to concatenate these buffers into a single vertex buffer, index buffer, and mask buffer and use a single MPSPolygonBuffer if possible. This also applies when using an MPSInstanceAccelerationStructure: each instance or subclass of MPSPolygonAccelerationStructure in an instance hierarchy should use the same vertex buffer, index buffer, and mask buffer, although each acceleration structure may use different offsets into these buffers. This allows for the vertex, index, and mask buffers to be bound directly instead of indirectly through an argument buffer. There must be at least one MPSPolygonBuffer. On argument buffer tier 1 devices, there must be be exactly one MPSPolygonBuffer. Use the argumentBuffersSupport property of the MTLDevice to check for support.
 //
-// WithIndexBufferOffset sets the indexBufferOffset property and returns the receiver for chaining.
-func (x *TriangleAccelerationStructure) WithIndexBufferOffset(indexBufferOffset uint) *TriangleAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetIndexBufferOffset(indexBufferOffset)
+// WithPolygonBuffers sets the collection and returns the receiver so calls can be chained.
+func (x *TriangleAccelerationStructure) WithPolygonBuffers(items ...*PolygonBuffer) *TriangleAccelerationStructure {
+	_arr := purego.SliceToNSArray(items, func(_v *PolygonBuffer) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonBuffers:"), _arr)
 	return x
 }
 
-// @brief Mask buffer containing one uint32_t mask per polygon. May be nil. Otherwise, the mask type must be specified on the MPSRayIntersector with which it is used. This is an alias for polygonBuffers[0].maskBuffer. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+// Acceleration structure usage options. Changes to this property require rebuilding the acceleration structure. Defaults to MPSAccelerationStructureUsageNone.
 //
-// WithMaskBuffer sets the maskBuffer property and returns the receiver for chaining.
-func (x *TriangleAccelerationStructure) WithMaskBuffer(maskBuffer metal.MTLBuffer) *TriangleAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetMaskBuffer(maskBuffer)
+// WithUsage sets usage and returns the receiver so calls can be chained.
+func (x *TriangleAccelerationStructure) WithUsage(usage AccelerationStructureUsage) *TriangleAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
 	return x
 }
 
-// @brief Offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].maskBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-//
-// WithMaskBufferOffset sets the maskBufferOffset property and returns the receiver for chaining.
-func (x *TriangleAccelerationStructure) WithMaskBufferOffset(maskBufferOffset uint) *TriangleAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetMaskBufferOffset(maskBufferOffset)
-	return x
+// Number of triangles. Changes to this property require rebuilding the acceleration structure. Note that this property is an alias for the polygonCount property.
+func (x *TriangleAccelerationStructure) TriangleCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("triangleCount"))
+	return _r
 }
 
-// @brief Number of polygons. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].polygonCount. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-//
-// WithPolygonCount sets the polygonCount property and returns the receiver for chaining.
-func (x *TriangleAccelerationStructure) WithPolygonCount(polygonCount uint) *TriangleAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.SetPolygonCount(polygonCount)
-	return x
-}
-
-// @brief Array of polygon buffers. Each buffer contains a vertex buffer and optional index and mask buffer for an array of polygons. Changing the length of this array requires rebuilding the acceleration structure. Using more than one MPSPolygonBuffer will reduce performance. It is better to concatenate these buffers into a single vertex buffer, index buffer, and mask buffer and use a single MPSPolygonBuffer if possible. This also applies when using an MPSInstanceAccelerationStructure: each instance or subclass of MPSPolygonAccelerationStructure in an instance hierarchy should use the same vertex buffer, index buffer, and mask buffer, although each acceleration structure may use different offsets into these buffers. This allows for the vertex, index, and mask buffers to be bound directly instead of indirectly through an argument buffer. There must be at least one MPSPolygonBuffer. On argument buffer tier 1 devices, there must be be exactly one MPSPolygonBuffer. Use the argumentBuffersSupport property of the MTLDevice to check for support.
-//
-// WithPolygonBuffers sets the collection, converting the Go slice to an NSArray.
-func (x *TriangleAccelerationStructure) WithPolygonBuffers(items ...*raw.MPSPolygonBuffer) *TriangleAccelerationStructure {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.MPSPolygonAccelerationStructure.SetPolygonBuffers(foundation.NSArrayFromID[*raw.MPSPolygonBuffer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.MPSPolygonBuffer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.MPSPolygonAccelerationStructure.SetPolygonBuffers(_arr)
-	return x
-}
-
-// @brief Acceleration structure usage options. Changes to this property require rebuilding the acceleration structure. Defaults to MPSAccelerationStructureUsageNone.
-//
-// WithUsage sets the usage property and returns the receiver for chaining.
-func (x *TriangleAccelerationStructure) WithUsage(usage MPSAccelerationStructureUsage) *TriangleAccelerationStructure {
-	x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure.SetUsage(raw.MPSAccelerationStructureUsage(usage))
-	return x
-}
-
-// @brief Number of triangles. Changes to this property require rebuilding the acceleration structure. Note that this property is an alias for the polygonCount property.
-//
-// TriangleCount calls the underlying TriangleCount.
-func (x *TriangleAccelerationStructure) TriangleCount() uint {
-	return x.inner.TriangleCount()
-}
-
-// SetTriangleCount calls the underlying SetTriangleCount.
-func (x *TriangleAccelerationStructure) SetTriangleCount(triangleCount uint) {
-	x.inner.SetTriangleCount(triangleCount)
-}
-
-func (x *TriangleAccelerationStructure) asPolygonAccelerationStructure() *raw.MPSPolygonAccelerationStructure {
-	return &x.inner.MPSPolygonAccelerationStructure
-}
-
-func (x *TriangleAccelerationStructure) asAccelerationStructure() *raw.MPSAccelerationStructure {
-	return &x.inner.MPSPolygonAccelerationStructure.MPSAccelerationStructure
+func (x *TriangleAccelerationStructure) SetTriangleCount(triangleCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTriangleCount:"), triangleCount)
 }
 
 // TriangleAccelerationStructureable is the interface implemented by [TriangleAccelerationStructure], for mocking and DI.
 type TriangleAccelerationStructureable interface {
-	Unwrap() *raw.MPSTriangleAccelerationStructure
-	WithTriangleCount(triangleCount uint) *TriangleAccelerationStructure
-	WithPolygonType(polygonType MPSPolygonType) *TriangleAccelerationStructure
-	WithVertexStride(vertexStride uint) *TriangleAccelerationStructure
-	WithIndexType(indexType mpscore.MPSDataType) *TriangleAccelerationStructure
-	WithVertexBuffer(vertexBuffer metal.MTLBuffer) *TriangleAccelerationStructure
-	WithVertexBufferOffset(vertexBufferOffset uint) *TriangleAccelerationStructure
-	WithIndexBuffer(indexBuffer metal.MTLBuffer) *TriangleAccelerationStructure
-	WithIndexBufferOffset(indexBufferOffset uint) *TriangleAccelerationStructure
-	WithMaskBuffer(maskBuffer metal.MTLBuffer) *TriangleAccelerationStructure
-	WithMaskBufferOffset(maskBufferOffset uint) *TriangleAccelerationStructure
-	WithPolygonCount(polygonCount uint) *TriangleAccelerationStructure
-	WithPolygonBuffers(items ...*raw.MPSPolygonBuffer) *TriangleAccelerationStructure
-	WithUsage(usage MPSAccelerationStructureUsage) *TriangleAccelerationStructure
-	TriangleCount() uint
-	SetTriangleCount(triangleCount uint)
+	obj.Object
+	WithTriangleCount(triangleCount int) *TriangleAccelerationStructure
+	WithPolygonType(polygonType PolygonType) *TriangleAccelerationStructure
+	WithVertexStride(vertexStride int) *TriangleAccelerationStructure
+	WithVertexBufferOffset(vertexBufferOffset int) *TriangleAccelerationStructure
+	WithIndexBufferOffset(indexBufferOffset int) *TriangleAccelerationStructure
+	WithMaskBufferOffset(maskBufferOffset int) *TriangleAccelerationStructure
+	WithPolygonCount(polygonCount int) *TriangleAccelerationStructure
+	WithPolygonBuffers(items ...*PolygonBuffer) *TriangleAccelerationStructure
+	WithUsage(usage AccelerationStructureUsage) *TriangleAccelerationStructure
+	TriangleCount() int
+	SetTriangleCount(triangleCount int)
 }
 
 var _ TriangleAccelerationStructureable = (*TriangleAccelerationStructure)(nil)

@@ -5,72 +5,93 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams wraps [raw.MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams] with a fluent Go API.
+// MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams is an idiomatic wrapper over the Objective-C class MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams.
 type MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams struct {
-	inner *raw.MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams].
-func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) Unwrap() *raw.MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsFromID adopts an existing object pointer as a MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams (nil for 0).
+// MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsFromID adopts an existing Objective-C object as a MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsFromID(id objc.ID) *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams{inner: raw.MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsFromID(id)}
+	x := &MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsAdopt(id objc.ID) *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize an MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
 //
-// NewMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsWithResponseValueError creates a new [MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams].
-func NewMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams")), objc.RegisterName("alloc"))
+// NewMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsWithResponseValueError creates a new MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams.
+func NewMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams{inner: raw.MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsFromID(_id)}, nil
+	return mTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsAdopt(_id), nil
 }
 
-// WithOperationalDataset sets the operationalDataset property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) WithOperationalDataset(operationalDataset *foundation.NSData) *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams {
-	x.inner.SetOperationalDataset(operationalDataset)
+// WithOperationalDataset sets operationalDataset and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) WithOperationalDataset(operationalDataset obj.Object) *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalDataset:"), objref.IDOf(operationalDataset))
 	return x
 }
 
-// OperationalDataset calls the underlying OperationalDataset.
-func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) OperationalDataset() *foundation.NSData {
-	return x.inner.OperationalDataset()
+func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) OperationalDataset() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationalDataset"))
+	return obj.Wrap(_r)
 }
 
-// SetOperationalDataset calls the underlying SetOperationalDataset.
-func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) SetOperationalDataset(operationalDataset *foundation.NSData) {
-	x.inner.SetOperationalDataset(operationalDataset)
+func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) SetOperationalDataset(operationalDataset obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalDataset:"), objref.IDOf(operationalDataset))
 }
 
 // MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsable is the interface implemented by [MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams], for mocking and DI.
 type MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsable interface {
-	Unwrap() *raw.MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams
-	WithOperationalDataset(operationalDataset *foundation.NSData) *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams
-	OperationalDataset() *foundation.NSData
-	SetOperationalDataset(operationalDataset *foundation.NSData)
+	obj.Object
+	WithOperationalDataset(operationalDataset obj.Object) *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams
+	OperationalDataset() obj.Object
+	SetOperationalDataset(operationalDataset obj.Object)
 }
 
 var _ MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsable = (*MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams)(nil)

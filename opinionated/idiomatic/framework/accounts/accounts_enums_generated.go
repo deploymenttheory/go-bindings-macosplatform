@@ -8,109 +8,84 @@ import (
 	"fmt"
 )
 
-// Status codes of credential renewal requests.
-type ACAccountCredentialRenewResult int64
-
-const (
-	// The account’s credentials have been renewed and are now associated with the account.
-	ACAccountCredentialRenewResultRenewed ACAccountCredentialRenewResult = 0
-	// Renewal failed because the user revoked your access to their account.
-	ACAccountCredentialRenewResultRejected ACAccountCredentialRenewResult = 1
-	// A non-user-initiated cancel of the prompt.
-	ACAccountCredentialRenewResultFailed ACAccountCredentialRenewResult = 2
-)
-
-func (e ACAccountCredentialRenewResult) String() string {
-	switch e {
-	case ACAccountCredentialRenewResultRenewed:
-		return "ACAccountCredentialRenewResultRenewed"
-	case ACAccountCredentialRenewResultRejected:
-		return "ACAccountCredentialRenewResultRejected"
-	case ACAccountCredentialRenewResultFailed:
-		return "ACAccountCredentialRenewResultFailed"
-	default:
-		return fmt.Sprintf("ACAccountCredentialRenewResult(%d)", int64(e))
-	}
-}
-
 // Codes for errors that may occur.
-type ACErrorCode int64
+type ErrorCode int64
 
 const (
-	ACErrorUnknown                        ACErrorCode = 1
-	ACErrorAccountMissingRequiredProperty ACErrorCode = 2
-	ACErrorAccountAuthenticationFailed    ACErrorCode = 3
-	ACErrorAccountTypeInvalid             ACErrorCode = 4
-	ACErrorAccountAlreadyExists           ACErrorCode = 5
-	ACErrorAccountNotFound                ACErrorCode = 6
-	ACErrorPermissionDenied               ACErrorCode = 7
-	ACErrorAccessInfoInvalid              ACErrorCode = 8
-	ACErrorClientPermissionDenied         ACErrorCode = 9
-	ACErrorAccessDeniedByProtectionPolicy ACErrorCode = 10
-	ACErrorCredentialNotFound             ACErrorCode = 11
-	ACErrorFetchCredentialFailed          ACErrorCode = 12
-	ACErrorStoreCredentialFailed          ACErrorCode = 13
-	ACErrorRemoveCredentialFailed         ACErrorCode = 14
-	ACErrorUpdatingNonexistentAccount     ACErrorCode = 15
-	ACErrorInvalidClientBundleID          ACErrorCode = 16
-	ACErrorDeniedByPlugin                 ACErrorCode = 17
-	ACErrorCoreDataSaveFailed             ACErrorCode = 18
-	ACErrorFailedSerializingAccountInfo   ACErrorCode = 19
-	ACErrorInvalidCommand                 ACErrorCode = 20
-	ACErrorMissingTransportMessageID      ACErrorCode = 21
-	ACErrorCredentialItemNotFound         ACErrorCode = 22
-	ACErrorCredentialItemNotExpired       ACErrorCode = 23
+	ErrorUnknown                        ErrorCode = 1
+	ErrorAccountMissingRequiredProperty ErrorCode = 2
+	ErrorAccountAuthenticationFailed    ErrorCode = 3
+	ErrorAccountTypeInvalid             ErrorCode = 4
+	ErrorAccountAlreadyExists           ErrorCode = 5
+	ErrorAccountNotFound                ErrorCode = 6
+	ErrorPermissionDenied               ErrorCode = 7
+	ErrorAccessInfoInvalid              ErrorCode = 8
+	ErrorClientPermissionDenied         ErrorCode = 9
+	ErrorAccessDeniedByProtectionPolicy ErrorCode = 10
+	ErrorCredentialNotFound             ErrorCode = 11
+	ErrorFetchCredentialFailed          ErrorCode = 12
+	ErrorStoreCredentialFailed          ErrorCode = 13
+	ErrorRemoveCredentialFailed         ErrorCode = 14
+	ErrorUpdatingNonexistentAccount     ErrorCode = 15
+	ErrorInvalidClientBundleID          ErrorCode = 16
+	ErrorDeniedByPlugin                 ErrorCode = 17
+	ErrorCoreDataSaveFailed             ErrorCode = 18
+	ErrorFailedSerializingAccountInfo   ErrorCode = 19
+	ErrorInvalidCommand                 ErrorCode = 20
+	ErrorMissingTransportMessageID      ErrorCode = 21
+	ErrorCredentialItemNotFound         ErrorCode = 22
+	ErrorCredentialItemNotExpired       ErrorCode = 23
 )
 
-func (e ACErrorCode) String() string {
+func (e ErrorCode) String() string {
 	switch e {
-	case ACErrorUnknown:
-		return "ACErrorUnknown"
-	case ACErrorAccountMissingRequiredProperty:
-		return "ACErrorAccountMissingRequiredProperty"
-	case ACErrorAccountAuthenticationFailed:
-		return "ACErrorAccountAuthenticationFailed"
-	case ACErrorAccountTypeInvalid:
-		return "ACErrorAccountTypeInvalid"
-	case ACErrorAccountAlreadyExists:
-		return "ACErrorAccountAlreadyExists"
-	case ACErrorAccountNotFound:
-		return "ACErrorAccountNotFound"
-	case ACErrorPermissionDenied:
-		return "ACErrorPermissionDenied"
-	case ACErrorAccessInfoInvalid:
-		return "ACErrorAccessInfoInvalid"
-	case ACErrorClientPermissionDenied:
-		return "ACErrorClientPermissionDenied"
-	case ACErrorAccessDeniedByProtectionPolicy:
-		return "ACErrorAccessDeniedByProtectionPolicy"
-	case ACErrorCredentialNotFound:
-		return "ACErrorCredentialNotFound"
-	case ACErrorFetchCredentialFailed:
-		return "ACErrorFetchCredentialFailed"
-	case ACErrorStoreCredentialFailed:
-		return "ACErrorStoreCredentialFailed"
-	case ACErrorRemoveCredentialFailed:
-		return "ACErrorRemoveCredentialFailed"
-	case ACErrorUpdatingNonexistentAccount:
-		return "ACErrorUpdatingNonexistentAccount"
-	case ACErrorInvalidClientBundleID:
-		return "ACErrorInvalidClientBundleID"
-	case ACErrorDeniedByPlugin:
-		return "ACErrorDeniedByPlugin"
-	case ACErrorCoreDataSaveFailed:
-		return "ACErrorCoreDataSaveFailed"
-	case ACErrorFailedSerializingAccountInfo:
-		return "ACErrorFailedSerializingAccountInfo"
-	case ACErrorInvalidCommand:
-		return "ACErrorInvalidCommand"
-	case ACErrorMissingTransportMessageID:
-		return "ACErrorMissingTransportMessageID"
-	case ACErrorCredentialItemNotFound:
-		return "ACErrorCredentialItemNotFound"
-	case ACErrorCredentialItemNotExpired:
-		return "ACErrorCredentialItemNotExpired"
+	case ErrorUnknown:
+		return "ErrorUnknown"
+	case ErrorAccountMissingRequiredProperty:
+		return "ErrorAccountMissingRequiredProperty"
+	case ErrorAccountAuthenticationFailed:
+		return "ErrorAccountAuthenticationFailed"
+	case ErrorAccountTypeInvalid:
+		return "ErrorAccountTypeInvalid"
+	case ErrorAccountAlreadyExists:
+		return "ErrorAccountAlreadyExists"
+	case ErrorAccountNotFound:
+		return "ErrorAccountNotFound"
+	case ErrorPermissionDenied:
+		return "ErrorPermissionDenied"
+	case ErrorAccessInfoInvalid:
+		return "ErrorAccessInfoInvalid"
+	case ErrorClientPermissionDenied:
+		return "ErrorClientPermissionDenied"
+	case ErrorAccessDeniedByProtectionPolicy:
+		return "ErrorAccessDeniedByProtectionPolicy"
+	case ErrorCredentialNotFound:
+		return "ErrorCredentialNotFound"
+	case ErrorFetchCredentialFailed:
+		return "ErrorFetchCredentialFailed"
+	case ErrorStoreCredentialFailed:
+		return "ErrorStoreCredentialFailed"
+	case ErrorRemoveCredentialFailed:
+		return "ErrorRemoveCredentialFailed"
+	case ErrorUpdatingNonexistentAccount:
+		return "ErrorUpdatingNonexistentAccount"
+	case ErrorInvalidClientBundleID:
+		return "ErrorInvalidClientBundleID"
+	case ErrorDeniedByPlugin:
+		return "ErrorDeniedByPlugin"
+	case ErrorCoreDataSaveFailed:
+		return "ErrorCoreDataSaveFailed"
+	case ErrorFailedSerializingAccountInfo:
+		return "ErrorFailedSerializingAccountInfo"
+	case ErrorInvalidCommand:
+		return "ErrorInvalidCommand"
+	case ErrorMissingTransportMessageID:
+		return "ErrorMissingTransportMessageID"
+	case ErrorCredentialItemNotFound:
+		return "ErrorCredentialItemNotFound"
+	case ErrorCredentialItemNotExpired:
+		return "ErrorCredentialItemNotExpired"
 	default:
-		return fmt.Sprintf("ACErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }

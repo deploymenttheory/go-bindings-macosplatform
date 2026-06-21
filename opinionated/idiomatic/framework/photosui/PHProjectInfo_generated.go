@@ -5,111 +5,120 @@
 package photosui
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Information about the project extension.
 //
-// ProjectInfo wraps [raw.PHProjectInfo] with a fluent Go API.
+// ProjectInfo is an idiomatic wrapper over the Objective-C class PHProjectInfo.
 type ProjectInfo struct {
-	inner *raw.PHProjectInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHProjectInfo].
-func (x *ProjectInfo) Unwrap() *raw.PHProjectInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProjectInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// ProjectInfoFromID adopts an existing object pointer as a ProjectInfo (nil for 0).
+// ProjectInfoFromID adopts an existing Objective-C object as a ProjectInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func ProjectInfoFromID(id objc.ID) *ProjectInfo {
 	if id == 0 {
 		return nil
 	}
-	return &ProjectInfo{inner: raw.PHProjectInfoFromID(id)}
+	x := &ProjectInfo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewProjectInfo creates a new [ProjectInfo].
+// projectInfoAdopt wraps an Objective-C object that this code just created as a
+// ProjectInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func projectInfoAdopt(id objc.ID) *ProjectInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &ProjectInfo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ProjectInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ProjectInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ProjectInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewProjectInfo creates a new ProjectInfo.
 func NewProjectInfo() *ProjectInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHProjectInfo")), objc.RegisterName("new"))
-	return &ProjectInfo{inner: raw.PHProjectInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHProjectInfo")), objc.RegisterName("new"))
+	return projectInfoAdopt(_id)
 }
 
 // Source from which the project was created.
-//
-// CreationSource calls the underlying CreationSource.
-func (x *ProjectInfo) CreationSource() PHProjectCreationSource {
-	return PHProjectCreationSource(x.inner.CreationSource())
+func (x *ProjectInfo) CreationSource() ProjectCreationSource {
+	_r := objc.Send[ProjectCreationSource](objref.IDOf(x), objc.RegisterName("creationSource"))
+	return _r
 }
 
 // Selected projectType value from the extensions options as defined in -[PHProjectExtensionController supportedProjectTypes]. See PHProjectExtensionController.h for more information on configuring the options.
-//
-// ProjectType calls the underlying ProjectType.
-func (x *ProjectInfo) ProjectType() string {
-	_r := x.inner.ProjectType()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *ProjectInfo) ProjectType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("projectType"))
+	return obj.Wrap(_r)
 }
 
 // Array of project sections each containing one or more PHProjectSectionContent objects.
 //
 // Sections returns the collection as a Go slice.
 func (x *ProjectInfo) Sections() []*ProjectSection {
-	arr := x.inner.Sections()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ProjectSection {
-		return &ProjectSection{inner: raw.PHProjectSectionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sections"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ProjectSection { return ProjectSectionFromID(_id) })
 }
 
 // The following properties are only used when the user creates a new project from an existing Apple Print Product. YES if the source project had branding enabled.
-//
-// BrandingEnabled calls the underlying BrandingEnabled.
 func (x *ProjectInfo) BrandingEnabled() bool {
-	return x.inner.BrandingEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("brandingEnabled"))
+	return _r
 }
 
 // YES if the source project had page numbers enabled.
-//
-// PageNumbersEnabled calls the underlying PageNumbersEnabled.
 func (x *ProjectInfo) PageNumbersEnabled() bool {
-	return x.inner.PageNumbersEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pageNumbersEnabled"))
+	return _r
 }
 
 // The product identifier of the originating Apple Print Product.
-//
-// ProductIdentifier calls the underlying ProductIdentifier.
 func (x *ProjectInfo) ProductIdentifier() string {
-	_r := x.inner.ProductIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The product theme identifier of the originating Apple Print Product.
-//
-// ThemeIdentifier calls the underlying ThemeIdentifier.
 func (x *ProjectInfo) ThemeIdentifier() string {
-	_r := x.inner.ThemeIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("themeIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // ProjectInfoable is the interface implemented by [ProjectInfo], for mocking and DI.
 type ProjectInfoable interface {
-	Unwrap() *raw.PHProjectInfo
-	CreationSource() PHProjectCreationSource
-	ProjectType() string
+	obj.Object
+	CreationSource() ProjectCreationSource
+	ProjectType() obj.Object
 	Sections() []*ProjectSection
 	BrandingEnabled() bool
 	PageNumbersEnabled() bool

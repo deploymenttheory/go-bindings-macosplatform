@@ -5,105 +5,96 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A concrete layout object that arranges items end-to-end in a linear strip.
 //
-// ScrubberFlowLayout wraps [raw.NSScrubberFlowLayout] with a fluent Go API.
+// ScrubberFlowLayout is an idiomatic wrapper over the Objective-C class NSScrubberFlowLayout.
 type ScrubberFlowLayout struct {
-	inner *raw.NSScrubberFlowLayout
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSScrubberFlowLayout].
-func (x *ScrubberFlowLayout) Unwrap() *raw.NSScrubberFlowLayout { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScrubberFlowLayout) ID() objc.ID { return x.inner.Ptr() }
-
-// ScrubberFlowLayoutFromID adopts an existing object pointer as a ScrubberFlowLayout (nil for 0).
+// ScrubberFlowLayoutFromID adopts an existing Objective-C object as a ScrubberFlowLayout
+// (nil for 0), retaining it and registering a release finalizer.
 func ScrubberFlowLayoutFromID(id objc.ID) *ScrubberFlowLayout {
 	if id == 0 {
 		return nil
 	}
-	return &ScrubberFlowLayout{inner: raw.NSScrubberFlowLayoutFromID(id)}
+	x := &ScrubberFlowLayout{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewScrubberFlowLayout creates a new [ScrubberFlowLayout].
+// scrubberFlowLayoutAdopt wraps an Objective-C object that this code just created as a
+// ScrubberFlowLayout (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scrubberFlowLayoutAdopt(id objc.ID) *ScrubberFlowLayout {
+	if id == 0 {
+		return nil
+	}
+	x := &ScrubberFlowLayout{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScrubberFlowLayout) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScrubberFlowLayout) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScrubberFlowLayout) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScrubberFlowLayout creates a new ScrubberFlowLayout.
 func NewScrubberFlowLayout() *ScrubberFlowLayout {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScrubberFlowLayout")), objc.RegisterName("new"))
-	return &ScrubberFlowLayout{inner: raw.NSScrubberFlowLayoutFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSScrubberFlowLayout")), objc.RegisterName("new"))
+	return scrubberFlowLayoutAdopt(_id)
 }
 
 // The horizontal spacing between items, specified in points.
 //
-// WithItemSpacing sets the itemSpacing property and returns the receiver for chaining.
+// WithItemSpacing sets itemSpacing and returns the receiver so calls can be chained.
 func (x *ScrubberFlowLayout) WithItemSpacing(itemSpacing float64) *ScrubberFlowLayout {
-	x.inner.SetItemSpacing(itemSpacing)
-	return x
-}
-
-// The frame size for each item in the scrubber.
-//
-// WithItemSize sets the itemSize property and returns the receiver for chaining.
-func (x *ScrubberFlowLayout) WithItemSize(itemSize corefoundation.CGSize) *ScrubberFlowLayout {
-	x.inner.SetItemSize(itemSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemSpacing:"), itemSpacing)
 	return x
 }
 
 // Informs the scrubber that it should perform a new layout pass for the items at the specified indexes.
-//
-// InvalidateLayoutForItemsAtIndexes calls the underlying InvalidateLayoutForItemsAtIndexes.
-func (x *ScrubberFlowLayout) InvalidateLayoutForItemsAtIndexes(invalidItemIndexes *foundation.NSIndexSet) {
-	x.inner.InvalidateLayoutForItemsAtIndexes(invalidItemIndexes)
+func (x *ScrubberFlowLayout) InvalidateLayoutForItemsAtIndexes(invalidItemIndexes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateLayoutForItemsAtIndexes:"), objref.IDOf(invalidItemIndexes))
 }
 
 // The amount of horizontal spacing between items in points. The default value is 0.0.
-//
-// ItemSpacing calls the underlying ItemSpacing.
 func (x *ScrubberFlowLayout) ItemSpacing() float64 {
-	return x.inner.ItemSpacing()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("itemSpacing"))
+	return _r
 }
 
 // The amount of horizontal spacing between items in points. The default value is 0.0.
-//
-// SetItemSpacing calls the underlying SetItemSpacing.
 func (x *ScrubberFlowLayout) SetItemSpacing(itemSpacing float64) {
-	x.inner.SetItemSpacing(itemSpacing)
-}
-
-// The frame size for each item, if not provided by the scrubber's delegate. The default value is { 50.0, 30.0 }.
-//
-// ItemSize calls the underlying ItemSize.
-func (x *ScrubberFlowLayout) ItemSize() corefoundation.CGSize {
-	return x.inner.ItemSize()
-}
-
-// The frame size for each item, if not provided by the scrubber's delegate. The default value is { 50.0, 30.0 }.
-//
-// SetItemSize calls the underlying SetItemSize.
-func (x *ScrubberFlowLayout) SetItemSize(itemSize corefoundation.CGSize) {
-	x.inner.SetItemSize(itemSize)
-}
-
-func (x *ScrubberFlowLayout) asScrubberLayout() *raw.NSScrubberLayout {
-	return &x.inner.NSScrubberLayout
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItemSpacing:"), itemSpacing)
 }
 
 // ScrubberFlowLayoutable is the interface implemented by [ScrubberFlowLayout], for mocking and DI.
 type ScrubberFlowLayoutable interface {
-	Unwrap() *raw.NSScrubberFlowLayout
+	obj.Object
 	WithItemSpacing(itemSpacing float64) *ScrubberFlowLayout
-	WithItemSize(itemSize corefoundation.CGSize) *ScrubberFlowLayout
-	InvalidateLayoutForItemsAtIndexes(invalidItemIndexes *foundation.NSIndexSet)
+	InvalidateLayoutForItemsAtIndexes(invalidItemIndexes obj.Object)
 	ItemSpacing() float64
 	SetItemSpacing(itemSpacing float64)
-	ItemSize() corefoundation.CGSize
-	SetItemSize(itemSize corefoundation.CGSize)
 }
 
 var _ ScrubberFlowLayoutable = (*ScrubberFlowLayout)(nil)

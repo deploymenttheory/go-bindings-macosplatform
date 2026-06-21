@@ -5,31 +5,82 @@
 package devicediscoveryextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/devicediscoveryextension"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// DDDeviceCategoryToString calls [raw.DDDeviceCategoryToString] (C function DDDeviceCategoryToString).
-func DDDeviceCategoryToString(inValue DDDeviceCategory) *foundation.NSString {
-	return raw.DDDeviceCategoryToString(raw.DDDeviceCategory(inValue))
+var _fnDDDeviceCategoryToString func(DDDeviceCategory) objc.ID
+
+// DDDeviceCategoryToString calls the DeviceDiscoveryExtension framework function DDDeviceCategoryToString.
+func DDDeviceCategoryToString(inValue DDDeviceCategory) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDDDeviceCategoryToString == nil {
+		ebipurego.RegisterLibFunc(&_fnDDDeviceCategoryToString, _lib, "DDDeviceCategoryToString")
+	}
+	_ret := _fnDDDeviceCategoryToString(inValue)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// DDDeviceMediaPlaybackStateToString calls [raw.DDDeviceMediaPlaybackStateToString] (C function DDDeviceMediaPlaybackStateToString).
-func DDDeviceMediaPlaybackStateToString(inValue DDDeviceMediaPlaybackState) *foundation.NSString {
-	return raw.DDDeviceMediaPlaybackStateToString(raw.DDDeviceMediaPlaybackState(inValue))
+var _fnDDDeviceMediaPlaybackStateToString func(DDDeviceMediaPlaybackState) objc.ID
+
+// DDDeviceMediaPlaybackStateToString calls the DeviceDiscoveryExtension framework function DDDeviceMediaPlaybackStateToString.
+func DDDeviceMediaPlaybackStateToString(inValue DDDeviceMediaPlaybackState) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDDDeviceMediaPlaybackStateToString == nil {
+		ebipurego.RegisterLibFunc(&_fnDDDeviceMediaPlaybackStateToString, _lib, "DDDeviceMediaPlaybackStateToString")
+	}
+	_ret := _fnDDDeviceMediaPlaybackStateToString(inValue)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// DDDeviceProtocolToString calls [raw.DDDeviceProtocolToString] (C function DDDeviceProtocolToString).
-func DDDeviceProtocolToString(inValue DDDeviceProtocol) *foundation.NSString {
-	return raw.DDDeviceProtocolToString(raw.DDDeviceProtocol(inValue))
+var _fnDDDeviceProtocolToString func(DDDeviceProtocol) objc.ID
+
+// DDDeviceProtocolToString calls the DeviceDiscoveryExtension framework function DDDeviceProtocolToString.
+func DDDeviceProtocolToString(inValue DDDeviceProtocol) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDDDeviceProtocolToString == nil {
+		ebipurego.RegisterLibFunc(&_fnDDDeviceProtocolToString, _lib, "DDDeviceProtocolToString")
+	}
+	_ret := _fnDDDeviceProtocolToString(inValue)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// DDDeviceStateToString calls [raw.DDDeviceStateToString] (C function DDDeviceStateToString).
-func DDDeviceStateToString(inValue DDDeviceState) *foundation.NSString {
-	return raw.DDDeviceStateToString(raw.DDDeviceState(inValue))
+var _fnDDDeviceStateToString func(DDDeviceState) objc.ID
+
+// DDDeviceStateToString calls the DeviceDiscoveryExtension framework function DDDeviceStateToString.
+func DDDeviceStateToString(inValue DDDeviceState) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDDDeviceStateToString == nil {
+		ebipurego.RegisterLibFunc(&_fnDDDeviceStateToString, _lib, "DDDeviceStateToString")
+	}
+	_ret := _fnDDDeviceStateToString(inValue)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// DDEventTypeToString calls [raw.DDEventTypeToString] (C function DDEventTypeToString).
-func DDEventTypeToString(inValue DDEventType) *foundation.NSString {
-	return raw.DDEventTypeToString(raw.DDEventType(inValue))
+var _fnDDEventTypeToString func(DDEventType) objc.ID
+
+// DDEventTypeToString calls the DeviceDiscoveryExtension framework function DDEventTypeToString.
+func DDEventTypeToString(inValue DDEventType) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDDEventTypeToString == nil {
+		ebipurego.RegisterLibFunc(&_fnDDEventTypeToString, _lib, "DDEventTypeToString")
+	}
+	_ret := _fnDDEventTypeToString(inValue)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }

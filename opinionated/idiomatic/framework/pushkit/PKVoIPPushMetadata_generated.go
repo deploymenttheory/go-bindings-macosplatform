@@ -5,46 +5,73 @@
 package pushkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pushkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains metadata about a received PushKit VoIP notification.
 //
-// VoIPPushMetadata wraps [raw.PKVoIPPushMetadata] with a fluent Go API.
+// VoIPPushMetadata is an idiomatic wrapper over the Objective-C class PKVoIPPushMetadata.
 type VoIPPushMetadata struct {
-	inner *raw.PKVoIPPushMetadata
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKVoIPPushMetadata].
-func (x *VoIPPushMetadata) Unwrap() *raw.PKVoIPPushMetadata { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VoIPPushMetadata) ID() objc.ID { return x.inner.Ptr() }
-
-// VoIPPushMetadataFromID adopts an existing object pointer as a VoIPPushMetadata (nil for 0).
+// VoIPPushMetadataFromID adopts an existing Objective-C object as a VoIPPushMetadata
+// (nil for 0), retaining it and registering a release finalizer.
 func VoIPPushMetadataFromID(id objc.ID) *VoIPPushMetadata {
 	if id == 0 {
 		return nil
 	}
-	return &VoIPPushMetadata{inner: raw.PKVoIPPushMetadataFromID(id)}
+	x := &VoIPPushMetadata{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVoIPPushMetadata creates a new [VoIPPushMetadata].
+// voIPPushMetadataAdopt wraps an Objective-C object that this code just created as a
+// VoIPPushMetadata (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func voIPPushMetadataAdopt(id objc.ID) *VoIPPushMetadata {
+	if id == 0 {
+		return nil
+	}
+	x := &VoIPPushMetadata{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VoIPPushMetadata) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VoIPPushMetadata) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VoIPPushMetadata) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVoIPPushMetadata creates a new VoIPPushMetadata.
 func NewVoIPPushMetadata() *VoIPPushMetadata {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKVoIPPushMetadata")), objc.RegisterName("new"))
-	return &VoIPPushMetadata{inner: raw.PKVoIPPushMetadataFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKVoIPPushMetadata")), objc.RegisterName("new"))
+	return voIPPushMetadataAdopt(_id)
 }
 
-// MustReport calls the underlying MustReport.
 func (x *VoIPPushMetadata) MustReport() bool {
-	return x.inner.MustReport()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mustReport"))
+	return _r
 }
 
 // VoIPPushMetadataable is the interface implemented by [VoIPPushMetadata], for mocking and DI.
 type VoIPPushMetadataable interface {
-	Unwrap() *raw.PKVoIPPushMetadata
+	obj.Object
 	MustReport() bool
 }
 

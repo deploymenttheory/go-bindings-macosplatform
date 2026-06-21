@@ -10,124 +10,124 @@ import (
 )
 
 // A value indicating whether an alarm is triggered by entering or exiting a region.
-type EKAlarmProximity int64
+type AlarmProximity int64
 
 const (
 	// The alarm has no proximity trigger.
-	EKAlarmProximityNone EKAlarmProximity = 0
+	AlarmProximityNone AlarmProximity = 0
 	// The alarm is set to fire when entering a region.
-	EKAlarmProximityEnter EKAlarmProximity = 1
+	AlarmProximityEnter AlarmProximity = 1
 	// The alarm is set to fire when leaving a region.
-	EKAlarmProximityLeave EKAlarmProximity = 2
+	AlarmProximityLeave AlarmProximity = 2
 )
 
-func (e EKAlarmProximity) String() string {
+func (e AlarmProximity) String() string {
 	switch e {
-	case EKAlarmProximityNone:
-		return "EKAlarmProximityNone"
-	case EKAlarmProximityEnter:
-		return "EKAlarmProximityEnter"
-	case EKAlarmProximityLeave:
-		return "EKAlarmProximityLeave"
+	case AlarmProximityNone:
+		return "AlarmProximityNone"
+	case AlarmProximityEnter:
+		return "AlarmProximityEnter"
+	case AlarmProximityLeave:
+		return "AlarmProximityLeave"
 	default:
-		return fmt.Sprintf("EKAlarmProximity(%d)", int64(e))
+		return fmt.Sprintf("AlarmProximity(%d)", int64(e))
 	}
 }
 
 // A value that specifies what type of action occurs when the alarm triggers.
-type EKAlarmType int64
+type AlarmType int64
 
 const (
 	// The alarm displays a message.
-	EKAlarmTypeDisplay EKAlarmType = 0
+	AlarmTypeDisplay AlarmType = 0
 	// The alarm plays a sound.
-	EKAlarmTypeAudio EKAlarmType = 1
+	AlarmTypeAudio AlarmType = 1
 	// The alarm opens a URL.
-	EKAlarmTypeProcedure EKAlarmType = 2
+	AlarmTypeProcedure AlarmType = 2
 	// The alarm sends an email.
-	EKAlarmTypeEmail EKAlarmType = 3
+	AlarmTypeEmail AlarmType = 3
 )
 
-func (e EKAlarmType) String() string {
+func (e AlarmType) String() string {
 	switch e {
-	case EKAlarmTypeDisplay:
-		return "EKAlarmTypeDisplay"
-	case EKAlarmTypeAudio:
-		return "EKAlarmTypeAudio"
-	case EKAlarmTypeProcedure:
-		return "EKAlarmTypeProcedure"
-	case EKAlarmTypeEmail:
-		return "EKAlarmTypeEmail"
+	case AlarmTypeDisplay:
+		return "AlarmTypeDisplay"
+	case AlarmTypeAudio:
+		return "AlarmTypeAudio"
+	case AlarmTypeProcedure:
+		return "AlarmTypeProcedure"
+	case AlarmTypeEmail:
+		return "AlarmTypeEmail"
 	default:
-		return fmt.Sprintf("EKAlarmType(%d)", int64(e))
+		return fmt.Sprintf("AlarmType(%d)", int64(e))
 	}
 }
 
 // The current authorization status for a specific entity type.
-type EKAuthorizationStatus int64
+type AuthorizationStatus int64
 
 const (
 	// The person hasn’t chosen whether the app may access the service.
-	EKAuthorizationStatusNotDetermined EKAuthorizationStatus = 0
+	AuthorizationStatusNotDetermined AuthorizationStatus = 0
 	// The app isn’t authorized to access the service.
-	EKAuthorizationStatusRestricted EKAuthorizationStatus = 1
+	AuthorizationStatusRestricted AuthorizationStatus = 1
 	// The person explicitly denied access to the service for the app.
-	EKAuthorizationStatusDenied EKAuthorizationStatus = 2
+	AuthorizationStatusDenied AuthorizationStatus = 2
 	// The app has both read and write access to the requested entity type.
-	EKAuthorizationStatusFullAccess EKAuthorizationStatus = 3
+	AuthorizationStatusFullAccess AuthorizationStatus = 3
 	// The app has write-only access to the requested entity type.
-	EKAuthorizationStatusWriteOnly EKAuthorizationStatus = 4
+	AuthorizationStatusWriteOnly AuthorizationStatus = 4
 	// The app can access the service.
-	EKAuthorizationStatusAuthorized EKAuthorizationStatus = 3
+	AuthorizationStatusAuthorized AuthorizationStatus = 3
 )
 
-func (e EKAuthorizationStatus) String() string {
+func (e AuthorizationStatus) String() string {
 	switch e {
-	case EKAuthorizationStatusNotDetermined:
-		return "EKAuthorizationStatusNotDetermined"
-	case EKAuthorizationStatusRestricted:
-		return "EKAuthorizationStatusRestricted"
-	case EKAuthorizationStatusDenied:
-		return "EKAuthorizationStatusDenied"
-	case EKAuthorizationStatusFullAccess:
-		return "EKAuthorizationStatusFullAccess"
-	case EKAuthorizationStatusWriteOnly:
-		return "EKAuthorizationStatusWriteOnly"
+	case AuthorizationStatusNotDetermined:
+		return "AuthorizationStatusNotDetermined"
+	case AuthorizationStatusRestricted:
+		return "AuthorizationStatusRestricted"
+	case AuthorizationStatusDenied:
+		return "AuthorizationStatusDenied"
+	case AuthorizationStatusFullAccess:
+		return "AuthorizationStatusFullAccess"
+	case AuthorizationStatusWriteOnly:
+		return "AuthorizationStatusWriteOnly"
 	default:
-		return fmt.Sprintf("EKAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationStatus(%d)", int64(e))
 	}
 }
 
 // A bitmask indicating the event availability settings that the calendar can support.
 // Bitmask — values may be combined with |.
-type EKCalendarEventAvailabilityMask uint64
+type CalendarEventAvailabilityMask uint64
 
 const (
 	// The calendar does not support event availability settings.
-	EKCalendarEventAvailabilityNone EKCalendarEventAvailabilityMask = 0
+	CalendarEventAvailabilityNone CalendarEventAvailabilityMask = 0
 	// The calendar supports the busy event availability setting.
-	EKCalendarEventAvailabilityBusy EKCalendarEventAvailabilityMask = 1
+	CalendarEventAvailabilityBusy CalendarEventAvailabilityMask = 1
 	// The calendar supports the free event availability setting.
-	EKCalendarEventAvailabilityFree EKCalendarEventAvailabilityMask = 2
+	CalendarEventAvailabilityFree CalendarEventAvailabilityMask = 2
 	// The calendar supports the tentative event availability setting.
-	EKCalendarEventAvailabilityTentative EKCalendarEventAvailabilityMask = 4
+	CalendarEventAvailabilityTentative CalendarEventAvailabilityMask = 4
 	// The calendar supports the unavailable event availability setting.
-	EKCalendarEventAvailabilityUnavailable EKCalendarEventAvailabilityMask = 8
+	CalendarEventAvailabilityUnavailable CalendarEventAvailabilityMask = 8
 )
 
-func (e EKCalendarEventAvailabilityMask) String() string {
+func (e CalendarEventAvailabilityMask) String() string {
 	var parts []string
-	if e&EKCalendarEventAvailabilityBusy != 0 {
-		parts = append(parts, "EKCalendarEventAvailabilityBusy")
+	if e&CalendarEventAvailabilityBusy != 0 {
+		parts = append(parts, "CalendarEventAvailabilityBusy")
 	}
-	if e&EKCalendarEventAvailabilityFree != 0 {
-		parts = append(parts, "EKCalendarEventAvailabilityFree")
+	if e&CalendarEventAvailabilityFree != 0 {
+		parts = append(parts, "CalendarEventAvailabilityFree")
 	}
-	if e&EKCalendarEventAvailabilityTentative != 0 {
-		parts = append(parts, "EKCalendarEventAvailabilityTentative")
+	if e&CalendarEventAvailabilityTentative != 0 {
+		parts = append(parts, "CalendarEventAvailabilityTentative")
 	}
-	if e&EKCalendarEventAvailabilityUnavailable != 0 {
-		parts = append(parts, "EKCalendarEventAvailabilityUnavailable")
+	if e&CalendarEventAvailabilityUnavailable != 0 {
+		parts = append(parts, "CalendarEventAvailabilityUnavailable")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -136,56 +136,56 @@ func (e EKCalendarEventAvailabilityMask) String() string {
 }
 
 // Possible calendar types.
-type EKCalendarType int64
+type CalendarType int64
 
 const (
 	// A local calendar.
-	EKCalendarTypeLocal EKCalendarType = 0
+	CalendarTypeLocal CalendarType = 0
 	// A CalDAV or iCloud calendar.
-	EKCalendarTypeCalDAV EKCalendarType = 1
+	CalendarTypeCalDAV CalendarType = 1
 	// An Exchange calendar.
-	EKCalendarTypeExchange EKCalendarType = 2
+	CalendarTypeExchange CalendarType = 2
 	// A locally subscribed calendar.
-	EKCalendarTypeSubscription EKCalendarType = 3
+	CalendarTypeSubscription CalendarType = 3
 	// A birthday calendar.
-	EKCalendarTypeBirthday EKCalendarType = 4
+	CalendarTypeBirthday CalendarType = 4
 )
 
-func (e EKCalendarType) String() string {
+func (e CalendarType) String() string {
 	switch e {
-	case EKCalendarTypeLocal:
-		return "EKCalendarTypeLocal"
-	case EKCalendarTypeCalDAV:
-		return "EKCalendarTypeCalDAV"
-	case EKCalendarTypeExchange:
-		return "EKCalendarTypeExchange"
-	case EKCalendarTypeSubscription:
-		return "EKCalendarTypeSubscription"
-	case EKCalendarTypeBirthday:
-		return "EKCalendarTypeBirthday"
+	case CalendarTypeLocal:
+		return "CalendarTypeLocal"
+	case CalendarTypeCalDAV:
+		return "CalendarTypeCalDAV"
+	case CalendarTypeExchange:
+		return "CalendarTypeExchange"
+	case CalendarTypeSubscription:
+		return "CalendarTypeSubscription"
+	case CalendarTypeBirthday:
+		return "CalendarTypeBirthday"
 	default:
-		return fmt.Sprintf("EKCalendarType(%d)", int64(e))
+		return fmt.Sprintf("CalendarType(%d)", int64(e))
 	}
 }
 
 // A bitmask of EKEntityType for specifying multiple entities at once.
 // Bitmask — values may be combined with |.
-type EKEntityMask uint64
+type EntityMask uint64
 
 const (
 	// Represents an event.
-	EKEntityMaskEvent EKEntityMask = 1
+	EntityMaskEvent EntityMask = 1
 	// Represents a reminder.
-	EKEntityMaskReminder EKEntityMask = 2
+	EntityMaskReminder EntityMask = 2
 )
 
-func (e EKEntityMask) String() string {
+func (e EntityMask) String() string {
 	var parts []string
-	if e&EKEntityMaskEvent != 0 {
-		parts = append(parts, "EKEntityMaskEvent")
+	if e&EntityMaskEvent != 0 {
+		parts = append(parts, "EntityMaskEvent")
 	}
-	if e&EKEntityMaskReminder != 0 {
-		parts = append(parts, "EKEntityMaskReminder")
+	if e&EntityMaskReminder != 0 {
+		parts = append(parts, "EntityMaskReminder")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -194,464 +194,464 @@ func (e EKEntityMask) String() string {
 }
 
 // The type of entities allowed for a source.
-type EKEntityType uint64
+type EntityType uint64
 
 const (
 	// Represents an event.
-	EKEntityTypeEvent EKEntityType = 0
+	EntityTypeEvent EntityType = 0
 	// Represents a reminder.
-	EKEntityTypeReminder EKEntityType = 1
+	EntityTypeReminder EntityType = 1
 )
 
-func (e EKEntityType) String() string {
+func (e EntityType) String() string {
 	switch e {
-	case EKEntityTypeEvent:
-		return "EKEntityTypeEvent"
-	case EKEntityTypeReminder:
-		return "EKEntityTypeReminder"
+	case EntityTypeEvent:
+		return "EntityTypeEvent"
+	case EntityTypeReminder:
+		return "EntityTypeReminder"
 	default:
-		return fmt.Sprintf("EKEntityType(%d)", int64(e))
+		return fmt.Sprintf("EntityType(%d)", int64(e))
 	}
 }
 
 // Error codes for EventKit errors.
-type EKErrorCode int64
+type ErrorCode int64
 
 const (
-	EKErrorEventNotMutable                      EKErrorCode = 0
-	EKErrorNoCalendar                           EKErrorCode = 1
-	EKErrorNoStartDate                          EKErrorCode = 2
-	EKErrorNoEndDate                            EKErrorCode = 3
-	EKErrorDatesInverted                        EKErrorCode = 4
-	EKErrorInternalFailure                      EKErrorCode = 5
-	EKErrorCalendarReadOnly                     EKErrorCode = 6
-	EKErrorDurationGreaterThanRecurrence        EKErrorCode = 7
-	EKErrorAlarmGreaterThanRecurrence           EKErrorCode = 8
-	EKErrorStartDateTooFarInFuture              EKErrorCode = 9
-	EKErrorStartDateCollidesWithOtherOccurrence EKErrorCode = 10
-	EKErrorObjectBelongsToDifferentStore        EKErrorCode = 11
-	EKErrorInvitesCannotBeMoved                 EKErrorCode = 12
-	EKErrorInvalidSpan                          EKErrorCode = 13
-	EKErrorCalendarHasNoSource                  EKErrorCode = 14
-	EKErrorCalendarSourceCannotBeModified       EKErrorCode = 15
-	EKErrorCalendarIsImmutable                  EKErrorCode = 16
-	EKErrorSourceDoesNotAllowCalendarAddDelete  EKErrorCode = 17
-	EKErrorRecurringReminderRequiresDueDate     EKErrorCode = 18
-	EKErrorStructuredLocationsNotSupported      EKErrorCode = 19
-	EKErrorReminderLocationsNotSupported        EKErrorCode = 20
-	EKErrorAlarmProximityNotSupported           EKErrorCode = 21
-	EKErrorCalendarDoesNotAllowEvents           EKErrorCode = 22
-	EKErrorCalendarDoesNotAllowReminders        EKErrorCode = 23
-	EKErrorSourceDoesNotAllowReminders          EKErrorCode = 24
-	EKErrorSourceDoesNotAllowEvents             EKErrorCode = 25
-	EKErrorPriorityIsInvalid                    EKErrorCode = 26
-	EKErrorInvalidEntityType                    EKErrorCode = 27
-	EKErrorProcedureAlarmsNotMutable            EKErrorCode = 28
-	EKErrorEventStoreNotAuthorized              EKErrorCode = 29
-	EKErrorOSNotSupported                       EKErrorCode = 30
-	EKErrorInvalidInviteReplyCalendar           EKErrorCode = 31
-	EKErrorNotificationsCollectionFlagNotSet    EKErrorCode = 32
-	EKErrorSourceMismatch                       EKErrorCode = 33
-	EKErrorNotificationCollectionMismatch       EKErrorCode = 34
-	EKErrorNotificationSavedWithoutCollection   EKErrorCode = 35
-	EKErrorReminderAlarmContainsEmailOrUrl      EKErrorCode = 36
-	EKErrorLast                                 EKErrorCode = 37
+	ErrorEventNotMutable                      ErrorCode = 0
+	ErrorNoCalendar                           ErrorCode = 1
+	ErrorNoStartDate                          ErrorCode = 2
+	ErrorNoEndDate                            ErrorCode = 3
+	ErrorDatesInverted                        ErrorCode = 4
+	ErrorInternalFailure                      ErrorCode = 5
+	ErrorCalendarReadOnly                     ErrorCode = 6
+	ErrorDurationGreaterThanRecurrence        ErrorCode = 7
+	ErrorAlarmGreaterThanRecurrence           ErrorCode = 8
+	ErrorStartDateTooFarInFuture              ErrorCode = 9
+	ErrorStartDateCollidesWithOtherOccurrence ErrorCode = 10
+	ErrorObjectBelongsToDifferentStore        ErrorCode = 11
+	ErrorInvitesCannotBeMoved                 ErrorCode = 12
+	ErrorInvalidSpan                          ErrorCode = 13
+	ErrorCalendarHasNoSource                  ErrorCode = 14
+	ErrorCalendarSourceCannotBeModified       ErrorCode = 15
+	ErrorCalendarIsImmutable                  ErrorCode = 16
+	ErrorSourceDoesNotAllowCalendarAddDelete  ErrorCode = 17
+	ErrorRecurringReminderRequiresDueDate     ErrorCode = 18
+	ErrorStructuredLocationsNotSupported      ErrorCode = 19
+	ErrorReminderLocationsNotSupported        ErrorCode = 20
+	ErrorAlarmProximityNotSupported           ErrorCode = 21
+	ErrorCalendarDoesNotAllowEvents           ErrorCode = 22
+	ErrorCalendarDoesNotAllowReminders        ErrorCode = 23
+	ErrorSourceDoesNotAllowReminders          ErrorCode = 24
+	ErrorSourceDoesNotAllowEvents             ErrorCode = 25
+	ErrorPriorityIsInvalid                    ErrorCode = 26
+	ErrorInvalidEntityType                    ErrorCode = 27
+	ErrorProcedureAlarmsNotMutable            ErrorCode = 28
+	ErrorEventStoreNotAuthorized              ErrorCode = 29
+	ErrorOSNotSupported                       ErrorCode = 30
+	ErrorInvalidInviteReplyCalendar           ErrorCode = 31
+	ErrorNotificationsCollectionFlagNotSet    ErrorCode = 32
+	ErrorSourceMismatch                       ErrorCode = 33
+	ErrorNotificationCollectionMismatch       ErrorCode = 34
+	ErrorNotificationSavedWithoutCollection   ErrorCode = 35
+	ErrorReminderAlarmContainsEmailOrUrl      ErrorCode = 36
+	ErrorLast                                 ErrorCode = 37
 )
 
-func (e EKErrorCode) String() string {
+func (e ErrorCode) String() string {
 	switch e {
-	case EKErrorEventNotMutable:
-		return "EKErrorEventNotMutable"
-	case EKErrorNoCalendar:
-		return "EKErrorNoCalendar"
-	case EKErrorNoStartDate:
-		return "EKErrorNoStartDate"
-	case EKErrorNoEndDate:
-		return "EKErrorNoEndDate"
-	case EKErrorDatesInverted:
-		return "EKErrorDatesInverted"
-	case EKErrorInternalFailure:
-		return "EKErrorInternalFailure"
-	case EKErrorCalendarReadOnly:
-		return "EKErrorCalendarReadOnly"
-	case EKErrorDurationGreaterThanRecurrence:
-		return "EKErrorDurationGreaterThanRecurrence"
-	case EKErrorAlarmGreaterThanRecurrence:
-		return "EKErrorAlarmGreaterThanRecurrence"
-	case EKErrorStartDateTooFarInFuture:
-		return "EKErrorStartDateTooFarInFuture"
-	case EKErrorStartDateCollidesWithOtherOccurrence:
-		return "EKErrorStartDateCollidesWithOtherOccurrence"
-	case EKErrorObjectBelongsToDifferentStore:
-		return "EKErrorObjectBelongsToDifferentStore"
-	case EKErrorInvitesCannotBeMoved:
-		return "EKErrorInvitesCannotBeMoved"
-	case EKErrorInvalidSpan:
-		return "EKErrorInvalidSpan"
-	case EKErrorCalendarHasNoSource:
-		return "EKErrorCalendarHasNoSource"
-	case EKErrorCalendarSourceCannotBeModified:
-		return "EKErrorCalendarSourceCannotBeModified"
-	case EKErrorCalendarIsImmutable:
-		return "EKErrorCalendarIsImmutable"
-	case EKErrorSourceDoesNotAllowCalendarAddDelete:
-		return "EKErrorSourceDoesNotAllowCalendarAddDelete"
-	case EKErrorRecurringReminderRequiresDueDate:
-		return "EKErrorRecurringReminderRequiresDueDate"
-	case EKErrorStructuredLocationsNotSupported:
-		return "EKErrorStructuredLocationsNotSupported"
-	case EKErrorReminderLocationsNotSupported:
-		return "EKErrorReminderLocationsNotSupported"
-	case EKErrorAlarmProximityNotSupported:
-		return "EKErrorAlarmProximityNotSupported"
-	case EKErrorCalendarDoesNotAllowEvents:
-		return "EKErrorCalendarDoesNotAllowEvents"
-	case EKErrorCalendarDoesNotAllowReminders:
-		return "EKErrorCalendarDoesNotAllowReminders"
-	case EKErrorSourceDoesNotAllowReminders:
-		return "EKErrorSourceDoesNotAllowReminders"
-	case EKErrorSourceDoesNotAllowEvents:
-		return "EKErrorSourceDoesNotAllowEvents"
-	case EKErrorPriorityIsInvalid:
-		return "EKErrorPriorityIsInvalid"
-	case EKErrorInvalidEntityType:
-		return "EKErrorInvalidEntityType"
-	case EKErrorProcedureAlarmsNotMutable:
-		return "EKErrorProcedureAlarmsNotMutable"
-	case EKErrorEventStoreNotAuthorized:
-		return "EKErrorEventStoreNotAuthorized"
-	case EKErrorOSNotSupported:
-		return "EKErrorOSNotSupported"
-	case EKErrorInvalidInviteReplyCalendar:
-		return "EKErrorInvalidInviteReplyCalendar"
-	case EKErrorNotificationsCollectionFlagNotSet:
-		return "EKErrorNotificationsCollectionFlagNotSet"
-	case EKErrorSourceMismatch:
-		return "EKErrorSourceMismatch"
-	case EKErrorNotificationCollectionMismatch:
-		return "EKErrorNotificationCollectionMismatch"
-	case EKErrorNotificationSavedWithoutCollection:
-		return "EKErrorNotificationSavedWithoutCollection"
-	case EKErrorReminderAlarmContainsEmailOrUrl:
-		return "EKErrorReminderAlarmContainsEmailOrUrl"
-	case EKErrorLast:
-		return "EKErrorLast"
+	case ErrorEventNotMutable:
+		return "ErrorEventNotMutable"
+	case ErrorNoCalendar:
+		return "ErrorNoCalendar"
+	case ErrorNoStartDate:
+		return "ErrorNoStartDate"
+	case ErrorNoEndDate:
+		return "ErrorNoEndDate"
+	case ErrorDatesInverted:
+		return "ErrorDatesInverted"
+	case ErrorInternalFailure:
+		return "ErrorInternalFailure"
+	case ErrorCalendarReadOnly:
+		return "ErrorCalendarReadOnly"
+	case ErrorDurationGreaterThanRecurrence:
+		return "ErrorDurationGreaterThanRecurrence"
+	case ErrorAlarmGreaterThanRecurrence:
+		return "ErrorAlarmGreaterThanRecurrence"
+	case ErrorStartDateTooFarInFuture:
+		return "ErrorStartDateTooFarInFuture"
+	case ErrorStartDateCollidesWithOtherOccurrence:
+		return "ErrorStartDateCollidesWithOtherOccurrence"
+	case ErrorObjectBelongsToDifferentStore:
+		return "ErrorObjectBelongsToDifferentStore"
+	case ErrorInvitesCannotBeMoved:
+		return "ErrorInvitesCannotBeMoved"
+	case ErrorInvalidSpan:
+		return "ErrorInvalidSpan"
+	case ErrorCalendarHasNoSource:
+		return "ErrorCalendarHasNoSource"
+	case ErrorCalendarSourceCannotBeModified:
+		return "ErrorCalendarSourceCannotBeModified"
+	case ErrorCalendarIsImmutable:
+		return "ErrorCalendarIsImmutable"
+	case ErrorSourceDoesNotAllowCalendarAddDelete:
+		return "ErrorSourceDoesNotAllowCalendarAddDelete"
+	case ErrorRecurringReminderRequiresDueDate:
+		return "ErrorRecurringReminderRequiresDueDate"
+	case ErrorStructuredLocationsNotSupported:
+		return "ErrorStructuredLocationsNotSupported"
+	case ErrorReminderLocationsNotSupported:
+		return "ErrorReminderLocationsNotSupported"
+	case ErrorAlarmProximityNotSupported:
+		return "ErrorAlarmProximityNotSupported"
+	case ErrorCalendarDoesNotAllowEvents:
+		return "ErrorCalendarDoesNotAllowEvents"
+	case ErrorCalendarDoesNotAllowReminders:
+		return "ErrorCalendarDoesNotAllowReminders"
+	case ErrorSourceDoesNotAllowReminders:
+		return "ErrorSourceDoesNotAllowReminders"
+	case ErrorSourceDoesNotAllowEvents:
+		return "ErrorSourceDoesNotAllowEvents"
+	case ErrorPriorityIsInvalid:
+		return "ErrorPriorityIsInvalid"
+	case ErrorInvalidEntityType:
+		return "ErrorInvalidEntityType"
+	case ErrorProcedureAlarmsNotMutable:
+		return "ErrorProcedureAlarmsNotMutable"
+	case ErrorEventStoreNotAuthorized:
+		return "ErrorEventStoreNotAuthorized"
+	case ErrorOSNotSupported:
+		return "ErrorOSNotSupported"
+	case ErrorInvalidInviteReplyCalendar:
+		return "ErrorInvalidInviteReplyCalendar"
+	case ErrorNotificationsCollectionFlagNotSet:
+		return "ErrorNotificationsCollectionFlagNotSet"
+	case ErrorSourceMismatch:
+		return "ErrorSourceMismatch"
+	case ErrorNotificationCollectionMismatch:
+		return "ErrorNotificationCollectionMismatch"
+	case ErrorNotificationSavedWithoutCollection:
+		return "ErrorNotificationSavedWithoutCollection"
+	case ErrorReminderAlarmContainsEmailOrUrl:
+		return "ErrorReminderAlarmContainsEmailOrUrl"
+	case ErrorLast:
+		return "ErrorLast"
 	default:
-		return fmt.Sprintf("EKErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }
 
 // The event’s availability setting for scheduling purposes.
-type EKEventAvailability int64
+type EventAvailability int64
 
 const (
 	// Availability settings are not supported by the event’s calendar.
-	EKEventAvailabilityNotSupported EKEventAvailability = -1
+	EventAvailabilityNotSupported EventAvailability = -1
 	// The event has a busy availability setting.
-	EKEventAvailabilityBusy EKEventAvailability = 0
+	EventAvailabilityBusy EventAvailability = 0
 	// The event has a free availability setting.
-	EKEventAvailabilityFree EKEventAvailability = 1
+	EventAvailabilityFree EventAvailability = 1
 	// The event has a tentative availability setting.
-	EKEventAvailabilityTentative EKEventAvailability = 2
+	EventAvailabilityTentative EventAvailability = 2
 	// The event has an unavailable availability setting.
-	EKEventAvailabilityUnavailable EKEventAvailability = 3
+	EventAvailabilityUnavailable EventAvailability = 3
 )
 
-func (e EKEventAvailability) String() string {
+func (e EventAvailability) String() string {
 	switch e {
-	case EKEventAvailabilityNotSupported:
-		return "EKEventAvailabilityNotSupported"
-	case EKEventAvailabilityBusy:
-		return "EKEventAvailabilityBusy"
-	case EKEventAvailabilityFree:
-		return "EKEventAvailabilityFree"
-	case EKEventAvailabilityTentative:
-		return "EKEventAvailabilityTentative"
-	case EKEventAvailabilityUnavailable:
-		return "EKEventAvailabilityUnavailable"
+	case EventAvailabilityNotSupported:
+		return "EventAvailabilityNotSupported"
+	case EventAvailabilityBusy:
+		return "EventAvailabilityBusy"
+	case EventAvailabilityFree:
+		return "EventAvailabilityFree"
+	case EventAvailabilityTentative:
+		return "EventAvailabilityTentative"
+	case EventAvailabilityUnavailable:
+		return "EventAvailabilityUnavailable"
 	default:
-		return fmt.Sprintf("EKEventAvailability(%d)", int64(e))
+		return fmt.Sprintf("EventAvailability(%d)", int64(e))
 	}
 }
 
 // The event’s status.
-type EKEventStatus int64
+type EventStatus int64
 
 const (
 	// The event has no status.
-	EKEventStatusNone EKEventStatus = 0
+	EventStatusNone EventStatus = 0
 	// The event is confirmed.
-	EKEventStatusConfirmed EKEventStatus = 1
+	EventStatusConfirmed EventStatus = 1
 	// The event is tentative.
-	EKEventStatusTentative EKEventStatus = 2
+	EventStatusTentative EventStatus = 2
 	// The event is canceled.
-	EKEventStatusCanceled EKEventStatus = 3
+	EventStatusCanceled EventStatus = 3
 )
 
-func (e EKEventStatus) String() string {
+func (e EventStatus) String() string {
 	switch e {
-	case EKEventStatusNone:
-		return "EKEventStatusNone"
-	case EKEventStatusConfirmed:
-		return "EKEventStatusConfirmed"
-	case EKEventStatusTentative:
-		return "EKEventStatusTentative"
-	case EKEventStatusCanceled:
-		return "EKEventStatusCanceled"
+	case EventStatusNone:
+		return "EventStatusNone"
+	case EventStatusConfirmed:
+		return "EventStatusConfirmed"
+	case EventStatusTentative:
+		return "EventStatusTentative"
+	case EventStatusCanceled:
+		return "EventStatusCanceled"
 	default:
-		return fmt.Sprintf("EKEventStatus(%d)", int64(e))
+		return fmt.Sprintf("EventStatus(%d)", int64(e))
 	}
 }
 
 // The participant’s role for an event.
-type EKParticipantRole int64
+type ParticipantRole int64
 
 const (
 	// The participant’s role is unknown.
-	EKParticipantRoleUnknown EKParticipantRole = 0
+	ParticipantRoleUnknown ParticipantRole = 0
 	// The participant’s attendance is required.
-	EKParticipantRoleRequired EKParticipantRole = 1
+	ParticipantRoleRequired ParticipantRole = 1
 	// The participant’s attendance is optional.
-	EKParticipantRoleOptional EKParticipantRole = 2
+	ParticipantRoleOptional ParticipantRole = 2
 	// The participant is the chair of the event.
-	EKParticipantRoleChair EKParticipantRole = 3
+	ParticipantRoleChair ParticipantRole = 3
 	// The participant does not have an active role in the event.
-	EKParticipantRoleNonParticipant EKParticipantRole = 4
+	ParticipantRoleNonParticipant ParticipantRole = 4
 )
 
-func (e EKParticipantRole) String() string {
+func (e ParticipantRole) String() string {
 	switch e {
-	case EKParticipantRoleUnknown:
-		return "EKParticipantRoleUnknown"
-	case EKParticipantRoleRequired:
-		return "EKParticipantRoleRequired"
-	case EKParticipantRoleOptional:
-		return "EKParticipantRoleOptional"
-	case EKParticipantRoleChair:
-		return "EKParticipantRoleChair"
-	case EKParticipantRoleNonParticipant:
-		return "EKParticipantRoleNonParticipant"
+	case ParticipantRoleUnknown:
+		return "ParticipantRoleUnknown"
+	case ParticipantRoleRequired:
+		return "ParticipantRoleRequired"
+	case ParticipantRoleOptional:
+		return "ParticipantRoleOptional"
+	case ParticipantRoleChair:
+		return "ParticipantRoleChair"
+	case ParticipantRoleNonParticipant:
+		return "ParticipantRoleNonParticipant"
 	default:
-		return fmt.Sprintf("EKParticipantRole(%d)", int64(e))
+		return fmt.Sprintf("ParticipantRole(%d)", int64(e))
 	}
 }
 
 // The participant’s attendance status for an event.
-type EKParticipantStatus int64
+type ParticipantStatus int64
 
 const (
 	// The participant’s attendance status is unknown.
-	EKParticipantStatusUnknown EKParticipantStatus = 0
+	ParticipantStatusUnknown ParticipantStatus = 0
 	// The participant has yet to respond to the event.
-	EKParticipantStatusPending EKParticipantStatus = 1
+	ParticipantStatusPending ParticipantStatus = 1
 	// The participant has accepted the event.
-	EKParticipantStatusAccepted EKParticipantStatus = 2
+	ParticipantStatusAccepted ParticipantStatus = 2
 	// The participant has declined the event.
-	EKParticipantStatusDeclined EKParticipantStatus = 3
+	ParticipantStatusDeclined ParticipantStatus = 3
 	// The participant’s attendance status is tentative.
-	EKParticipantStatusTentative EKParticipantStatus = 4
+	ParticipantStatusTentative ParticipantStatus = 4
 	// The participant has delegated attendance to another participant.
-	EKParticipantStatusDelegated EKParticipantStatus = 5
+	ParticipantStatusDelegated ParticipantStatus = 5
 	// The participant’s event has completed.
-	EKParticipantStatusCompleted EKParticipantStatus = 6
+	ParticipantStatusCompleted ParticipantStatus = 6
 	// The participant’s event is currently in process.
-	EKParticipantStatusInProcess EKParticipantStatus = 7
+	ParticipantStatusInProcess ParticipantStatus = 7
 )
 
-func (e EKParticipantStatus) String() string {
+func (e ParticipantStatus) String() string {
 	switch e {
-	case EKParticipantStatusUnknown:
-		return "EKParticipantStatusUnknown"
-	case EKParticipantStatusPending:
-		return "EKParticipantStatusPending"
-	case EKParticipantStatusAccepted:
-		return "EKParticipantStatusAccepted"
-	case EKParticipantStatusDeclined:
-		return "EKParticipantStatusDeclined"
-	case EKParticipantStatusTentative:
-		return "EKParticipantStatusTentative"
-	case EKParticipantStatusDelegated:
-		return "EKParticipantStatusDelegated"
-	case EKParticipantStatusCompleted:
-		return "EKParticipantStatusCompleted"
-	case EKParticipantStatusInProcess:
-		return "EKParticipantStatusInProcess"
+	case ParticipantStatusUnknown:
+		return "ParticipantStatusUnknown"
+	case ParticipantStatusPending:
+		return "ParticipantStatusPending"
+	case ParticipantStatusAccepted:
+		return "ParticipantStatusAccepted"
+	case ParticipantStatusDeclined:
+		return "ParticipantStatusDeclined"
+	case ParticipantStatusTentative:
+		return "ParticipantStatusTentative"
+	case ParticipantStatusDelegated:
+		return "ParticipantStatusDelegated"
+	case ParticipantStatusCompleted:
+		return "ParticipantStatusCompleted"
+	case ParticipantStatusInProcess:
+		return "ParticipantStatusInProcess"
 	default:
-		return fmt.Sprintf("EKParticipantStatus(%d)", int64(e))
+		return fmt.Sprintf("ParticipantStatus(%d)", int64(e))
 	}
 }
 
 // The type of participant.
-type EKParticipantType int64
+type ParticipantType int64
 
 const (
 	// The participant’s type is unknown.
-	EKParticipantTypeUnknown EKParticipantType = 0
+	ParticipantTypeUnknown ParticipantType = 0
 	// The participant is a person.
-	EKParticipantTypePerson EKParticipantType = 1
+	ParticipantTypePerson ParticipantType = 1
 	// The participant is a room.
-	EKParticipantTypeRoom EKParticipantType = 2
+	ParticipantTypeRoom ParticipantType = 2
 	// The participant is a resource.
-	EKParticipantTypeResource EKParticipantType = 3
+	ParticipantTypeResource ParticipantType = 3
 	// The participant is a group.
-	EKParticipantTypeGroup EKParticipantType = 4
+	ParticipantTypeGroup ParticipantType = 4
 )
 
-func (e EKParticipantType) String() string {
+func (e ParticipantType) String() string {
 	switch e {
-	case EKParticipantTypeUnknown:
-		return "EKParticipantTypeUnknown"
-	case EKParticipantTypePerson:
-		return "EKParticipantTypePerson"
-	case EKParticipantTypeRoom:
-		return "EKParticipantTypeRoom"
-	case EKParticipantTypeResource:
-		return "EKParticipantTypeResource"
-	case EKParticipantTypeGroup:
-		return "EKParticipantTypeGroup"
+	case ParticipantTypeUnknown:
+		return "ParticipantTypeUnknown"
+	case ParticipantTypePerson:
+		return "ParticipantTypePerson"
+	case ParticipantTypeRoom:
+		return "ParticipantTypeRoom"
+	case ParticipantTypeResource:
+		return "ParticipantTypeResource"
+	case ParticipantTypeGroup:
+		return "ParticipantTypeGroup"
 	default:
-		return fmt.Sprintf("EKParticipantType(%d)", int64(e))
+		return fmt.Sprintf("ParticipantType(%d)", int64(e))
 	}
 }
 
 // The frequency for recurrence rules.
-type EKRecurrenceFrequency int64
+type RecurrenceFrequency int64
 
 const (
 	// Indicates a daily recurrence rule.
-	EKRecurrenceFrequencyDaily EKRecurrenceFrequency = 0
+	RecurrenceFrequencyDaily RecurrenceFrequency = 0
 	// Indicates a weekly recurrence rule.
-	EKRecurrenceFrequencyWeekly EKRecurrenceFrequency = 1
+	RecurrenceFrequencyWeekly RecurrenceFrequency = 1
 	// Indicates a monthly recurrence rule.
-	EKRecurrenceFrequencyMonthly EKRecurrenceFrequency = 2
+	RecurrenceFrequencyMonthly RecurrenceFrequency = 2
 	// Indicates a yearly recurrence rule.
-	EKRecurrenceFrequencyYearly EKRecurrenceFrequency = 3
+	RecurrenceFrequencyYearly RecurrenceFrequency = 3
 )
 
-func (e EKRecurrenceFrequency) String() string {
+func (e RecurrenceFrequency) String() string {
 	switch e {
-	case EKRecurrenceFrequencyDaily:
-		return "EKRecurrenceFrequencyDaily"
-	case EKRecurrenceFrequencyWeekly:
-		return "EKRecurrenceFrequencyWeekly"
-	case EKRecurrenceFrequencyMonthly:
-		return "EKRecurrenceFrequencyMonthly"
-	case EKRecurrenceFrequencyYearly:
-		return "EKRecurrenceFrequencyYearly"
+	case RecurrenceFrequencyDaily:
+		return "RecurrenceFrequencyDaily"
+	case RecurrenceFrequencyWeekly:
+		return "RecurrenceFrequencyWeekly"
+	case RecurrenceFrequencyMonthly:
+		return "RecurrenceFrequencyMonthly"
+	case RecurrenceFrequencyYearly:
+		return "RecurrenceFrequencyYearly"
 	default:
-		return fmt.Sprintf("EKRecurrenceFrequency(%d)", int64(e))
+		return fmt.Sprintf("RecurrenceFrequency(%d)", int64(e))
 	}
 }
 
 // The type of source object.
-type EKSourceType int64
+type SourceType int64
 
 const (
 	// Represents a local source.
-	EKSourceTypeLocal EKSourceType = 0
+	SourceTypeLocal SourceType = 0
 	// Represents an Exchange source.
-	EKSourceTypeExchange EKSourceType = 1
+	SourceTypeExchange SourceType = 1
 	// Represents a CalDAV or iCloud source.
-	EKSourceTypeCalDAV EKSourceType = 2
+	SourceTypeCalDAV SourceType = 2
 	// Represents a MobileMe source.
-	EKSourceTypeMobileMe EKSourceType = 3
+	SourceTypeMobileMe SourceType = 3
 	// Represents a subscribed source.
-	EKSourceTypeSubscribed EKSourceType = 4
+	SourceTypeSubscribed SourceType = 4
 	// Represents a birthday source.
-	EKSourceTypeBirthdays EKSourceType = 5
+	SourceTypeBirthdays SourceType = 5
 )
 
-func (e EKSourceType) String() string {
+func (e SourceType) String() string {
 	switch e {
-	case EKSourceTypeLocal:
-		return "EKSourceTypeLocal"
-	case EKSourceTypeExchange:
-		return "EKSourceTypeExchange"
-	case EKSourceTypeCalDAV:
-		return "EKSourceTypeCalDAV"
-	case EKSourceTypeMobileMe:
-		return "EKSourceTypeMobileMe"
-	case EKSourceTypeSubscribed:
-		return "EKSourceTypeSubscribed"
-	case EKSourceTypeBirthdays:
-		return "EKSourceTypeBirthdays"
+	case SourceTypeLocal:
+		return "SourceTypeLocal"
+	case SourceTypeExchange:
+		return "SourceTypeExchange"
+	case SourceTypeCalDAV:
+		return "SourceTypeCalDAV"
+	case SourceTypeMobileMe:
+		return "SourceTypeMobileMe"
+	case SourceTypeSubscribed:
+		return "SourceTypeSubscribed"
+	case SourceTypeBirthdays:
+		return "SourceTypeBirthdays"
 	default:
-		return fmt.Sprintf("EKSourceType(%d)", int64(e))
+		return fmt.Sprintf("SourceType(%d)", int64(e))
 	}
 }
 
 // An object that indicates whether modifications should apply to a single event or all future events of a recurring event.
-type EKSpan int64
+type Span int64
 
 const (
 	// Modifications to this event instance should affect only this instance.
-	EKSpanThisEvent EKSpan = 0
+	SpanThisEvent Span = 0
 	// Modifications to this event instance should also affect future instances of this event.
-	EKSpanFutureEvents EKSpan = 1
+	SpanFutureEvents Span = 1
 )
 
-func (e EKSpan) String() string {
+func (e Span) String() string {
 	switch e {
-	case EKSpanThisEvent:
-		return "EKSpanThisEvent"
-	case EKSpanFutureEvents:
-		return "EKSpanFutureEvents"
+	case SpanThisEvent:
+		return "SpanThisEvent"
+	case SpanFutureEvents:
+		return "SpanFutureEvents"
 	default:
-		return fmt.Sprintf("EKSpan(%d)", int64(e))
+		return fmt.Sprintf("Span(%d)", int64(e))
 	}
 }
 
 // The day of the week.
-type EKWeekday int64
+type Weekday int64
 
 const (
 	// The value for Sunday.
-	EKWeekdaySunday EKWeekday = 1
+	WeekdaySunday Weekday = 1
 	// The value for Monday.
-	EKWeekdayMonday EKWeekday = 2
+	WeekdayMonday Weekday = 2
 	// The value for Tuesday.
-	EKWeekdayTuesday EKWeekday = 3
+	WeekdayTuesday Weekday = 3
 	// The value for Wednesday.
-	EKWeekdayWednesday EKWeekday = 4
+	WeekdayWednesday Weekday = 4
 	// The value for Thursday.
-	EKWeekdayThursday EKWeekday = 5
+	WeekdayThursday Weekday = 5
 	// The value for Friday.
-	EKWeekdayFriday EKWeekday = 6
+	WeekdayFriday Weekday = 6
 	// The value for Saturday.
-	EKWeekdaySaturday EKWeekday = 7
+	WeekdaySaturday Weekday = 7
 	// The value for Sunday.
-	EKSunday EKWeekday = 1
+	Sunday Weekday = 1
 	// The value for Monday.
-	EKMonday EKWeekday = 2
+	Monday Weekday = 2
 	// The value for Tuesday.
-	EKTuesday EKWeekday = 3
+	Tuesday Weekday = 3
 	// The value for Wednesday.
-	EKWednesday EKWeekday = 4
+	Wednesday Weekday = 4
 	// The value for Thursday.
-	EKThursday EKWeekday = 5
+	Thursday Weekday = 5
 	// The value for Friday.
-	EKFriday EKWeekday = 6
+	Friday Weekday = 6
 	// The value for Saturday.
-	EKSaturday EKWeekday = 7
+	Saturday Weekday = 7
 )
 
-func (e EKWeekday) String() string {
+func (e Weekday) String() string {
 	switch e {
-	case EKWeekdaySunday:
-		return "EKWeekdaySunday"
-	case EKWeekdayMonday:
-		return "EKWeekdayMonday"
-	case EKWeekdayTuesday:
-		return "EKWeekdayTuesday"
-	case EKWeekdayWednesday:
-		return "EKWeekdayWednesday"
-	case EKWeekdayThursday:
-		return "EKWeekdayThursday"
-	case EKWeekdayFriday:
-		return "EKWeekdayFriday"
-	case EKWeekdaySaturday:
-		return "EKWeekdaySaturday"
+	case WeekdaySunday:
+		return "WeekdaySunday"
+	case WeekdayMonday:
+		return "WeekdayMonday"
+	case WeekdayTuesday:
+		return "WeekdayTuesday"
+	case WeekdayWednesday:
+		return "WeekdayWednesday"
+	case WeekdayThursday:
+		return "WeekdayThursday"
+	case WeekdayFriday:
+		return "WeekdayFriday"
+	case WeekdaySaturday:
+		return "WeekdaySaturday"
 	default:
-		return fmt.Sprintf("EKWeekday(%d)", int64(e))
+		return fmt.Sprintf("Weekday(%d)", int64(e))
 	}
 }

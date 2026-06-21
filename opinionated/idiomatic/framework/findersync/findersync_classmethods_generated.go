@@ -5,24 +5,20 @@
 package findersync
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/findersync"
+	"github.com/ebitengine/purego/objc"
 )
 
-// DefaultController calls the underlying FIFinderSyncControllerDefaultController.
+// Returns the shared Finder Sync controller object.
 func DefaultController() *FinderSyncController {
-	_r := raw.FIFinderSyncControllerDefaultController()
-	if _r == nil {
-		return nil
-	}
-	return &FinderSyncController{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("FIFinderSyncController")), objc.RegisterName("defaultController"))
+	return FinderSyncControllerFromID(_r)
 }
 
-// ShowExtensionManagementInterface calls the underlying FIFinderSyncControllerShowExtensionManagementInterface.
 func ShowExtensionManagementInterface() {
-	raw.FIFinderSyncControllerShowExtensionManagementInterface()
+	objc.Send[objc.ID](objc.ID(_class("FIFinderSyncController")), objc.RegisterName("showExtensionManagementInterface"))
 }
 
-// IsExtensionEnabled calls the underlying FIFinderSyncControllerIsExtensionEnabled.
 func IsExtensionEnabled() bool {
-	return raw.FIFinderSyncControllerIsExtensionEnabled()
+	_r := objc.Send[bool](objc.ID(_class("FIFinderSyncController")), objc.RegisterName("isExtensionEnabled"))
+	return _r
 }

@@ -5,118 +5,120 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMStyleSheet wraps [raw.DOMStyleSheet] with a fluent Go API.
+// DOMStyleSheet is an idiomatic wrapper over the Objective-C class DOMStyleSheet.
 type DOMStyleSheet struct {
-	inner *raw.DOMStyleSheet
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMStyleSheet].
-func (x *DOMStyleSheet) Unwrap() *raw.DOMStyleSheet { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMStyleSheet) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMStyleSheetFromID adopts an existing object pointer as a DOMStyleSheet (nil for 0).
+// DOMStyleSheetFromID adopts an existing Objective-C object as a DOMStyleSheet
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMStyleSheetFromID(id objc.ID) *DOMStyleSheet {
 	if id == 0 {
 		return nil
 	}
-	return &DOMStyleSheet{inner: raw.DOMStyleSheetFromID(id)}
-}
-
-// NewDOMStyleSheet creates a new [DOMStyleSheet].
-func NewDOMStyleSheet() *DOMStyleSheet {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMStyleSheet")), objc.RegisterName("new"))
-	return &DOMStyleSheet{inner: raw.DOMStyleSheetFromID(_id)}
-}
-
-// WithDisabled sets the disabled property and returns the receiver for chaining.
-func (x *DOMStyleSheet) WithDisabled(disabled bool) *DOMStyleSheet {
-	x.inner.SetDisabled(disabled)
+	x := &DOMStyleSheet{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Type calls the underlying Type.
+// dOMStyleSheetAdopt wraps an Objective-C object that this code just created as a
+// DOMStyleSheet (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMStyleSheetAdopt(id objc.ID) *DOMStyleSheet {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMStyleSheet{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DOMStyleSheet) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMStyleSheet) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMStyleSheet) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMStyleSheet creates a new DOMStyleSheet.
+func NewDOMStyleSheet() *DOMStyleSheet {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMStyleSheet")), objc.RegisterName("new"))
+	return dOMStyleSheetAdopt(_id)
+}
+
+// WithDisabled sets disabled and returns the receiver so calls can be chained.
+func (x *DOMStyleSheet) WithDisabled(disabled bool) *DOMStyleSheet {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
+	return x
+}
+
 func (x *DOMStyleSheet) Type() string {
-	_r := x.inner.Type()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Disabled calls the underlying Disabled.
 func (x *DOMStyleSheet) Disabled() bool {
-	return x.inner.Disabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("disabled"))
+	return _r
 }
 
-// SetDisabled calls the underlying SetDisabled.
 func (x *DOMStyleSheet) SetDisabled(disabled bool) {
-	x.inner.SetDisabled(disabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
 }
 
-// OwnerNode calls the underlying OwnerNode.
 func (x *DOMStyleSheet) OwnerNode() *DOMNode {
-	_r := x.inner.OwnerNode()
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerNode"))
+	return DOMNodeFromID(_r)
 }
 
-// ParentStyleSheet calls the underlying ParentStyleSheet.
 func (x *DOMStyleSheet) ParentStyleSheet() *DOMStyleSheet {
-	_r := x.inner.ParentStyleSheet()
-	if _r == nil {
-		return nil
-	}
-	return &DOMStyleSheet{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentStyleSheet"))
+	return DOMStyleSheetFromID(_r)
 }
 
-// Href calls the underlying Href.
 func (x *DOMStyleSheet) Href() string {
-	_r := x.inner.Href()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("href"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Title calls the underlying Title.
 func (x *DOMStyleSheet) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Media calls the underlying Media.
 func (x *DOMStyleSheet) Media() *DOMMediaList {
-	_r := x.inner.Media()
-	if _r == nil {
-		return nil
-	}
-	return &DOMMediaList{inner: _r}
-}
-
-func (x *DOMStyleSheet) asDOMStyleSheet() *raw.DOMStyleSheet { return x.inner }
-
-func (x *DOMStyleSheet) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
-
-func (x *DOMStyleSheet) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMObject.WebScriptObject
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("media"))
+	return DOMMediaListFromID(_r)
 }
 
 // DOMStyleSheetable is the interface implemented by [DOMStyleSheet], for mocking and DI.
 type DOMStyleSheetable interface {
-	Unwrap() *raw.DOMStyleSheet
+	obj.Object
 	WithDisabled(disabled bool) *DOMStyleSheet
 	Type() string
 	Disabled() bool

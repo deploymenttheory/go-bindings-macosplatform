@@ -5,58 +5,75 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The anticipated compute devices to use for executing a layer or operation.
 //
-// ComputePlanDeviceUsage wraps [raw.MLComputePlanDeviceUsage] with a fluent Go API.
+// ComputePlanDeviceUsage is an idiomatic wrapper over the Objective-C class MLComputePlanDeviceUsage.
 type ComputePlanDeviceUsage struct {
-	inner *raw.MLComputePlanDeviceUsage
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLComputePlanDeviceUsage].
-func (x *ComputePlanDeviceUsage) Unwrap() *raw.MLComputePlanDeviceUsage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ComputePlanDeviceUsage) ID() objc.ID { return x.inner.Ptr() }
-
-// ComputePlanDeviceUsageFromID adopts an existing object pointer as a ComputePlanDeviceUsage (nil for 0).
+// ComputePlanDeviceUsageFromID adopts an existing Objective-C object as a ComputePlanDeviceUsage
+// (nil for 0), retaining it and registering a release finalizer.
 func ComputePlanDeviceUsageFromID(id objc.ID) *ComputePlanDeviceUsage {
 	if id == 0 {
 		return nil
 	}
-	return &ComputePlanDeviceUsage{inner: raw.MLComputePlanDeviceUsageFromID(id)}
+	x := &ComputePlanDeviceUsage{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewComputePlanDeviceUsage creates a new [ComputePlanDeviceUsage].
+// computePlanDeviceUsageAdopt wraps an Objective-C object that this code just created as a
+// ComputePlanDeviceUsage (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func computePlanDeviceUsageAdopt(id objc.ID) *ComputePlanDeviceUsage {
+	if id == 0 {
+		return nil
+	}
+	x := &ComputePlanDeviceUsage{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ComputePlanDeviceUsage) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ComputePlanDeviceUsage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ComputePlanDeviceUsage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewComputePlanDeviceUsage creates a new ComputePlanDeviceUsage.
 func NewComputePlanDeviceUsage() *ComputePlanDeviceUsage {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLComputePlanDeviceUsage")), objc.RegisterName("new"))
-	return &ComputePlanDeviceUsage{inner: raw.MLComputePlanDeviceUsageFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLComputePlanDeviceUsage")), objc.RegisterName("new"))
+	return computePlanDeviceUsageAdopt(_id)
 }
 
 // The compute devices that can execute the layer/operation.
-//
-// SupportedComputeDevices calls the underlying SupportedComputeDevices.
-func (x *ComputePlanDeviceUsage) SupportedComputeDevices() *foundation.NSArray[raw.MLComputeDeviceProtocol] {
-	return x.inner.SupportedComputeDevices()
-}
-
-// The compute device that the framework prefers to execute the layer/operation.
-//
-// PreferredComputeDevice calls the underlying PreferredComputeDevice.
-func (x *ComputePlanDeviceUsage) PreferredComputeDevice() raw.MLComputeDeviceProtocol {
-	return x.inner.PreferredComputeDevice()
+func (x *ComputePlanDeviceUsage) SupportedComputeDevices() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedComputeDevices"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ComputePlanDeviceUsageable is the interface implemented by [ComputePlanDeviceUsage], for mocking and DI.
 type ComputePlanDeviceUsageable interface {
-	Unwrap() *raw.MLComputePlanDeviceUsage
-	SupportedComputeDevices() *foundation.NSArray[raw.MLComputeDeviceProtocol]
-	PreferredComputeDevice() raw.MLComputeDeviceProtocol
+	obj.Object
+	SupportedComputeDevices() []obj.Object
 }
 
 var _ ComputePlanDeviceUsageable = (*ComputePlanDeviceUsage)(nil)

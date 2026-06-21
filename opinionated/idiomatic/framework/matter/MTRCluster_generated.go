@@ -5,48 +5,72 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRCluster wraps [raw.MTRCluster] with a fluent Go API.
+// MTRCluster is an idiomatic wrapper over the Objective-C class MTRCluster.
 type MTRCluster struct {
-	inner *raw.MTRCluster
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRCluster].
-func (x *MTRCluster) Unwrap() *raw.MTRCluster { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRCluster) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterFromID adopts an existing object pointer as a MTRCluster (nil for 0).
+// MTRClusterFromID adopts an existing Objective-C object as a MTRCluster
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterFromID(id objc.ID) *MTRCluster {
 	if id == 0 {
 		return nil
 	}
-	return &MTRCluster{inner: raw.MTRClusterFromID(id)}
+	x := &MTRCluster{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRCluster creates a new [MTRCluster].
+// mTRClusterAdopt wraps an Objective-C object that this code just created as a
+// MTRCluster (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterAdopt(id objc.ID) *MTRCluster {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRCluster{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRCluster) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRCluster) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRCluster) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRCluster creates a new MTRCluster.
 func NewMTRCluster() *MTRCluster {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRCluster")), objc.RegisterName("new"))
-	return &MTRCluster{inner: raw.MTRClusterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRCluster")), objc.RegisterName("new"))
+	return mTRClusterAdopt(_id)
 }
 
-// EndpointID calls the underlying EndpointID.
-func (x *MTRCluster) EndpointID() *foundation.NSNumber {
-	return x.inner.EndpointID()
+func (x *MTRCluster) EndpointID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpointID"))
+	return obj.Wrap(_r)
 }
-
-func (x *MTRCluster) asMTRCluster() *raw.MTRCluster { return x.inner }
 
 // MTRClusterable is the interface implemented by [MTRCluster], for mocking and DI.
 type MTRClusterable interface {
-	Unwrap() *raw.MTRCluster
-	EndpointID() *foundation.NSNumber
+	obj.Object
+	EndpointID() obj.Object
 }
 
 var _ MTRClusterable = (*MTRCluster)(nil)

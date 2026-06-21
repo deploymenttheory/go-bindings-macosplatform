@@ -5,100 +5,98 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A snapshot of a particular touch at an instant in time.
 //
-// Touch wraps [raw.NSTouch] with a fluent Go API.
+// Touch is an idiomatic wrapper over the Objective-C class NSTouch.
 type Touch struct {
-	inner *raw.NSTouch
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTouch].
-func (x *Touch) Unwrap() *raw.NSTouch { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Touch) ID() objc.ID { return x.inner.Ptr() }
-
-// TouchFromID adopts an existing object pointer as a Touch (nil for 0).
+// TouchFromID adopts an existing Objective-C object as a Touch
+// (nil for 0), retaining it and registering a release finalizer.
 func TouchFromID(id objc.ID) *Touch {
 	if id == 0 {
 		return nil
 	}
-	return &Touch{inner: raw.NSTouchFromID(id)}
+	x := &Touch{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTouch creates a new [Touch].
+// touchAdopt wraps an Objective-C object that this code just created as a
+// Touch (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func touchAdopt(id objc.ID) *Touch {
+	if id == 0 {
+		return nil
+	}
+	x := &Touch{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Touch) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Touch) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Touch) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTouch creates a new Touch.
 func NewTouch() *Touch {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTouch")), objc.RegisterName("new"))
-	return &Touch{inner: raw.NSTouchFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSTouch")), objc.RegisterName("new"))
+	return touchAdopt(_id)
 }
 
-// Identity calls the underlying Identity.
-func (x *Touch) Identity() objc.ID {
-	return x.inner.Identity()
+func (x *Touch) Identity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identity"))
+	return obj.Wrap(_r)
 }
 
-// Phase calls the underlying Phase.
-func (x *Touch) Phase() NSTouchPhase {
-	return NSTouchPhase(x.inner.Phase())
+func (x *Touch) Phase() TouchPhase {
+	_r := objc.Send[TouchPhase](objref.IDOf(x), objc.RegisterName("phase"))
+	return _r
 }
 
-// NormalizedPosition calls the underlying NormalizedPosition.
-func (x *Touch) NormalizedPosition() corefoundation.CGPoint {
-	return x.inner.NormalizedPosition()
-}
-
-// IsResting calls the underlying IsResting.
 func (x *Touch) IsResting() bool {
-	return x.inner.IsResting()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isResting"))
+	return _r
 }
 
-// Device calls the underlying Device.
-func (x *Touch) Device() objc.ID {
-	return x.inner.Device()
+func (x *Touch) Device() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+	return obj.Wrap(_r)
 }
 
-// DeviceSize calls the underlying DeviceSize.
-func (x *Touch) DeviceSize() corefoundation.CGSize {
-	return x.inner.DeviceSize()
-}
-
-// Indicates the location of the touch in the view’s coordinates.
-//
-// LocationInView calls the underlying LocationInView.
-func (x *Touch) LocationInView(view *raw.NSView) corefoundation.CGPoint {
-	return x.inner.LocationInView(view)
-}
-
-// Indicates the previous location of the touch in the view’s coordinates.
-//
-// PreviousLocationInView calls the underlying PreviousLocationInView.
-func (x *Touch) PreviousLocationInView(view *raw.NSView) corefoundation.CGPoint {
-	return x.inner.PreviousLocationInView(view)
-}
-
-// Type calls the underlying Type.
-func (x *Touch) Type() NSTouchType {
-	return NSTouchType(x.inner.Type())
+func (x *Touch) Type() TouchType {
+	_r := objc.Send[TouchType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
 // Touchable is the interface implemented by [Touch], for mocking and DI.
 type Touchable interface {
-	Unwrap() *raw.NSTouch
-	Identity() objc.ID
-	Phase() NSTouchPhase
-	NormalizedPosition() corefoundation.CGPoint
+	obj.Object
+	Identity() obj.Object
+	Phase() TouchPhase
 	IsResting() bool
-	Device() objc.ID
-	DeviceSize() corefoundation.CGSize
-	LocationInView(view *raw.NSView) corefoundation.CGPoint
-	PreviousLocationInView(view *raw.NSView) corefoundation.CGPoint
-	Type() NSTouchType
+	Device() obj.Object
+	Type() TouchType
 }
 
 var _ Touchable = (*Touch)(nil)

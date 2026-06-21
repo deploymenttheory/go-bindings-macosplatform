@@ -5,64 +5,86 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A distinct input source on a capture device.
 //
-// CaptureDeviceInputSource wraps [raw.AVCaptureDeviceInputSource] with a fluent Go API.
+// CaptureDeviceInputSource is an idiomatic wrapper over the Objective-C class AVCaptureDeviceInputSource.
 type CaptureDeviceInputSource struct {
-	inner *raw.AVCaptureDeviceInputSource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureDeviceInputSource].
-func (x *CaptureDeviceInputSource) Unwrap() *raw.AVCaptureDeviceInputSource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureDeviceInputSource) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureDeviceInputSourceFromID adopts an existing object pointer as a CaptureDeviceInputSource (nil for 0).
+// CaptureDeviceInputSourceFromID adopts an existing Objective-C object as a CaptureDeviceInputSource
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureDeviceInputSourceFromID(id objc.ID) *CaptureDeviceInputSource {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureDeviceInputSource{inner: raw.AVCaptureDeviceInputSourceFromID(id)}
+	x := &CaptureDeviceInputSource{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCaptureDeviceInputSource creates a new [CaptureDeviceInputSource].
+// captureDeviceInputSourceAdopt wraps an Objective-C object that this code just created as a
+// CaptureDeviceInputSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureDeviceInputSourceAdopt(id objc.ID) *CaptureDeviceInputSource {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureDeviceInputSource{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptureDeviceInputSource) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureDeviceInputSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureDeviceInputSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptureDeviceInputSource creates a new CaptureDeviceInputSource.
 func NewCaptureDeviceInputSource() *CaptureDeviceInputSource {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureDeviceInputSource")), objc.RegisterName("new"))
-	return &CaptureDeviceInputSource{inner: raw.AVCaptureDeviceInputSourceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureDeviceInputSource")), objc.RegisterName("new"))
+	return captureDeviceInputSourceAdopt(_id)
 }
 
-// @property inputSourceID @abstract An ID unique among the inputSources exposed by a given AVCaptureDevice. @discussion An AVCaptureDevice's inputSources array must contain AVCaptureInputSource objects with unique inputSourceIDs.
-//
-// InputSourceID calls the underlying InputSourceID.
+// An ID unique among the inputSources exposed by a given AVCaptureDevice. An AVCaptureDevice's inputSources array must contain AVCaptureInputSource objects with unique inputSourceIDs.
 func (x *CaptureDeviceInputSource) InputSourceID() string {
-	_r := x.inner.InputSourceID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputSourceID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property localizedName @abstract A localized human-readable name for the receiver. @discussion This property can be used for displaying the name of the capture device input source in a user interface.
-//
-// LocalizedName calls the underlying LocalizedName.
+// A localized human-readable name for the receiver. This property can be used for displaying the name of the capture device input source in a user interface.
 func (x *CaptureDeviceInputSource) LocalizedName() string {
-	_r := x.inner.LocalizedName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // CaptureDeviceInputSourceable is the interface implemented by [CaptureDeviceInputSource], for mocking and DI.
 type CaptureDeviceInputSourceable interface {
-	Unwrap() *raw.AVCaptureDeviceInputSource
+	obj.Object
 	InputSourceID() string
 	LocalizedName() string
 }

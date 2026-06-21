@@ -6,66 +6,88 @@ package matter
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterContentLauncher wraps [raw.MTRClusterContentLauncher] with a fluent Go API.
+// MTRClusterContentLauncher is an idiomatic wrapper over the Objective-C class MTRClusterContentLauncher.
 type MTRClusterContentLauncher struct {
-	inner *raw.MTRClusterContentLauncher
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterContentLauncher].
-func (x *MTRClusterContentLauncher) Unwrap() *raw.MTRClusterContentLauncher { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterContentLauncher) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterContentLauncherFromID adopts an existing object pointer as a MTRClusterContentLauncher (nil for 0).
+// MTRClusterContentLauncherFromID adopts an existing Objective-C object as a MTRClusterContentLauncher
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterContentLauncherFromID(id objc.ID) *MTRClusterContentLauncher {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterContentLauncher{inner: raw.MTRClusterContentLauncherFromID(id)}
+	x := &MTRClusterContentLauncher{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterContentLauncherAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterContentLauncher (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterContentLauncherAdopt(id objc.ID) *MTRClusterContentLauncher {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterContentLauncher{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterContentLauncher) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterContentLauncher) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterContentLauncher) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterContentLauncherWithDeviceEndpointIDQueue creates a new [MTRClusterContentLauncher].
-func NewMTRClusterContentLauncherWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterContentLauncher {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterContentLauncher")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterContentLauncher{inner: raw.MTRClusterContentLauncherFromID(_id)}
+// NewMTRClusterContentLauncherWithDeviceEndpointIDQueue creates a new MTRClusterContentLauncher.
+func NewMTRClusterContentLauncherWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterContentLauncher {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterContentLauncher")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterContentLauncherAdopt(_id)
 }
 
-// NewMTRClusterContentLauncherWithDeviceEndpointQueue creates a new [MTRClusterContentLauncher].
-func NewMTRClusterContentLauncherWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterContentLauncher {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterContentLauncher")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterContentLauncher{inner: raw.MTRClusterContentLauncherFromID(_id)}
+// NewMTRClusterContentLauncherWithDeviceEndpointQueue creates a new MTRClusterContentLauncher.
+func NewMTRClusterContentLauncherWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterContentLauncher {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterContentLauncher")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterContentLauncherAdopt(_id)
 }
 
 // LaunchContentWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterContentLauncher) LaunchContentWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRContentLauncherClusterLaunchContentParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRContentLauncherClusterLauncherResponseParams, error) {
+func (x *MTRClusterContentLauncher) LaunchContentWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRContentLauncherClusterLaunchContentParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRContentLauncherClusterLauncherResponseParams, error) {
 	type _result struct {
 		val *MTRContentLauncherClusterLauncherResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LaunchContentWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRContentLauncherClusterLauncherResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRContentLauncherClusterLauncherResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRContentLauncherClusterLauncherResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("launchContentWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -76,22 +98,19 @@ func (x *MTRClusterContentLauncher) LaunchContentWithParamsExpectedValuesExpecte
 }
 
 // LaunchURLWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterContentLauncher) LaunchURLWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRContentLauncherClusterLaunchURLParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRContentLauncherClusterLauncherResponseParams, error) {
+func (x *MTRClusterContentLauncher) LaunchURLWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRContentLauncherClusterLaunchURLParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRContentLauncherClusterLauncherResponseParams, error) {
 	type _result struct {
 		val *MTRContentLauncherClusterLauncherResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LaunchURLWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRContentLauncherClusterLauncherResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRContentLauncherClusterLauncherResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRContentLauncherClusterLauncherResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("launchURLWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -101,68 +120,63 @@ func (x *MTRClusterContentLauncher) LaunchURLWithParamsExpectedValuesExpectedVal
 	}
 }
 
-// ReadAttributeAcceptHeaderWithParams calls the underlying ReadAttributeAcceptHeaderWithParams.
-func (x *MTRClusterContentLauncher) ReadAttributeAcceptHeaderWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptHeaderWithParams(params)
+func (x *MTRClusterContentLauncher) ReadAttributeAcceptHeaderWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptHeaderWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeSupportedStreamingProtocolsWithParams calls the underlying ReadAttributeSupportedStreamingProtocolsWithParams.
-func (x *MTRClusterContentLauncher) ReadAttributeSupportedStreamingProtocolsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSupportedStreamingProtocolsWithParams(params)
+func (x *MTRClusterContentLauncher) ReadAttributeSupportedStreamingProtocolsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedStreamingProtocolsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueInterval calls the underlying WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueInterval.
-func (x *MTRClusterContentLauncher) WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterContentLauncher) WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSupportedStreamingProtocolsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueIntervalParams calls the underlying WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueIntervalParams.
-func (x *MTRClusterContentLauncher) WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterContentLauncher) WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSupportedStreamingProtocolsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterContentLauncher) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterContentLauncher) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterContentLauncher) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterContentLauncher) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterContentLauncher) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterContentLauncher) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterContentLauncher) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+func (x *MTRClusterContentLauncher) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterContentLauncher) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+func (x *MTRClusterContentLauncher) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // LaunchContentWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterContentLauncher) LaunchContentWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRContentLauncherClusterLaunchContentParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRContentLauncherClusterLaunchResponseParams, error) {
+func (x *MTRClusterContentLauncher) LaunchContentWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRContentLauncherClusterLaunchContentParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRContentLauncherClusterLaunchResponseParams, error) {
 	type _result struct {
 		val *MTRContentLauncherClusterLaunchResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LaunchContentWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRContentLauncherClusterLaunchResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRContentLauncherClusterLaunchResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRContentLauncherClusterLaunchResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("launchContentWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -173,22 +187,19 @@ func (x *MTRClusterContentLauncher) LaunchContentWithParamsExpectedValuesExpecte
 }
 
 // LaunchURLWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterContentLauncher) LaunchURLWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRContentLauncherClusterLaunchURLParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRContentLauncherClusterLaunchResponseParams, error) {
+func (x *MTRClusterContentLauncher) LaunchURLWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRContentLauncherClusterLaunchURLParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRContentLauncherClusterLaunchResponseParams, error) {
 	type _result struct {
 		val *MTRContentLauncherClusterLaunchResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LaunchURLWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRContentLauncherClusterLaunchResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRContentLauncherClusterLaunchResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRContentLauncherClusterLaunchResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("launchURLWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -198,30 +209,22 @@ func (x *MTRClusterContentLauncher) LaunchURLWithParamsExpectedValuesExpectedVal
 	}
 }
 
-func (x *MTRClusterContentLauncher) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterContentLauncher) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
-}
-
 // MTRClusterContentLauncherable is the interface implemented by [MTRClusterContentLauncher], for mocking and DI.
 type MTRClusterContentLauncherable interface {
-	Unwrap() *raw.MTRClusterContentLauncher
-	LaunchContentWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRContentLauncherClusterLaunchContentParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRContentLauncherClusterLauncherResponseParams, error)
-	LaunchURLWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRContentLauncherClusterLaunchURLParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRContentLauncherClusterLauncherResponseParams, error)
-	ReadAttributeAcceptHeaderWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeSupportedStreamingProtocolsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	LaunchContentWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRContentLauncherClusterLaunchContentParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRContentLauncherClusterLaunchResponseParams, error)
-	LaunchURLWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRContentLauncherClusterLaunchURLParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRContentLauncherClusterLaunchResponseParams, error)
+	obj.Object
+	LaunchContentWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRContentLauncherClusterLaunchContentParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRContentLauncherClusterLauncherResponseParams, error)
+	LaunchURLWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRContentLauncherClusterLaunchURLParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRContentLauncherClusterLauncherResponseParams, error)
+	ReadAttributeAcceptHeaderWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeSupportedStreamingProtocolsWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeSupportedStreamingProtocolsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
+	LaunchContentWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRContentLauncherClusterLaunchContentParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRContentLauncherClusterLaunchResponseParams, error)
+	LaunchURLWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRContentLauncherClusterLaunchURLParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRContentLauncherClusterLaunchResponseParams, error)
 }
 
 var _ MTRClusterContentLauncherable = (*MTRClusterContentLauncher)(nil)

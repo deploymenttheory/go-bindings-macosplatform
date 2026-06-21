@@ -5,328 +5,336 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // A representation of a node (a file, directory, or symbolic link) in the file system.
 //
-// FileWrapper wraps [raw.NSFileWrapper] with a fluent Go API.
+// FileWrapper is an idiomatic wrapper over the Objective-C class NSFileWrapper.
 type FileWrapper struct {
-	inner *raw.NSFileWrapper
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFileWrapper].
-func (x *FileWrapper) Unwrap() *raw.NSFileWrapper { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileWrapper) ID() objc.ID { return x.inner.Ptr() }
-
-// FileWrapperFromID adopts an existing object pointer as a FileWrapper (nil for 0).
+// FileWrapperFromID adopts an existing Objective-C object as a FileWrapper
+// (nil for 0), retaining it and registering a release finalizer.
 func FileWrapperFromID(id objc.ID) *FileWrapper {
 	if id == 0 {
 		return nil
 	}
-	return &FileWrapper{inner: raw.NSFileWrapperFromID(id)}
+	x := &FileWrapper{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFileWrapperWithURLOptionsError creates a new [FileWrapper].
-func NewFileWrapperWithURLOptionsError(url string, options NSFileWrapperReadingOptions) (*FileWrapper, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileWrapper")), objc.RegisterName("alloc"))
+// fileWrapperAdopt wraps an Objective-C object that this code just created as a
+// FileWrapper (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileWrapperAdopt(id objc.ID) *FileWrapper {
+	if id == 0 {
+		return nil
+	}
+	x := &FileWrapper{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FileWrapper) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileWrapper) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileWrapper) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFileWrapperWithURLOptionsError creates a new FileWrapper.
+func NewFileWrapperWithURLOptionsError(url string, options FileWrapperReadingOptions) (*FileWrapper, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileWrapper")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), raw.NSFileWrapperReadingOptions(options), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:options:error:"), rt.FileURL(url), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &FileWrapper{inner: raw.NSFileWrapperFromID(_id)}, nil
+	return fileWrapperAdopt(_id), nil
 }
 
-// NewFileWrapperDirectoryWithFileWrappers creates a new [FileWrapper].
-func NewFileWrapperDirectoryWithFileWrappers(childrenByPreferredName purego.IDer) *FileWrapper {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileWrapper")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initDirectoryWithFileWrappers:"), childrenByPreferredName.ID())
-	return &FileWrapper{inner: raw.NSFileWrapperFromID(_id)}
+// NewFileWrapperDirectoryWithFileWrappers creates a new FileWrapper.
+func NewFileWrapperDirectoryWithFileWrappers(childrenByPreferredName obj.Object) *FileWrapper {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileWrapper")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initDirectoryWithFileWrappers:"), objref.IDOf(childrenByPreferredName))
+	return fileWrapperAdopt(_id)
 }
 
-// NewFileWrapperRegularFileWithContents creates a new [FileWrapper].
-func NewFileWrapperRegularFileWithContents(contents *raw.NSData) *FileWrapper {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileWrapper")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRegularFileWithContents:"), contents.Ptr())
-	return &FileWrapper{inner: raw.NSFileWrapperFromID(_id)}
+// NewFileWrapperRegularFileWithContents creates a new FileWrapper.
+func NewFileWrapperRegularFileWithContents(contents *Data) *FileWrapper {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileWrapper")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRegularFileWithContents:"), objref.IDOf(contents))
+	return fileWrapperAdopt(_id)
 }
 
-// NewFileWrapperSymbolicLinkWithDestinationURL creates a new [FileWrapper].
+// NewFileWrapperSymbolicLinkWithDestinationURL creates a new FileWrapper.
 func NewFileWrapperSymbolicLinkWithDestinationURL(url string) *FileWrapper {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileWrapper")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initSymbolicLinkWithDestinationURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr())
-	return &FileWrapper{inner: raw.NSFileWrapperFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileWrapper")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initSymbolicLinkWithDestinationURL:"), rt.FileURL(url))
+	return fileWrapperAdopt(_id)
 }
 
-// NewFileWrapperWithSerializedRepresentation creates a new [FileWrapper].
-func NewFileWrapperWithSerializedRepresentation(serializeRepresentation *raw.NSData) *FileWrapper {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileWrapper")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSerializedRepresentation:"), serializeRepresentation.Ptr())
-	return &FileWrapper{inner: raw.NSFileWrapperFromID(_id)}
+// NewFileWrapperWithSerializedRepresentation creates a new FileWrapper.
+func NewFileWrapperWithSerializedRepresentation(serializeRepresentation *Data) *FileWrapper {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileWrapper")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSerializedRepresentation:"), objref.IDOf(serializeRepresentation))
+	return fileWrapperAdopt(_id)
 }
 
-// NewFileWrapperWithCoder creates a new [FileWrapper].
-func NewFileWrapperWithCoder(inCoder *raw.NSCoder) *FileWrapper {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileWrapper")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), inCoder.Ptr())
-	return &FileWrapper{inner: raw.NSFileWrapperFromID(_id)}
+// NewFileWrapperWithCoder creates a new FileWrapper.
+func NewFileWrapperWithCoder(inCoder *Coder) *FileWrapper {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileWrapper")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(inCoder))
+	return fileWrapperAdopt(_id)
 }
 
-// NewFileWrapperWithPath creates a new [FileWrapper].
+// NewFileWrapperWithPath creates a new FileWrapper.
 func NewFileWrapperWithPath(path string) *FileWrapper {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileWrapper")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:"), foundation.NSStringStringWithUTF8String(path).Ptr())
-	return &FileWrapper{inner: raw.NSFileWrapperFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileWrapper")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:"), purego.NSString(path))
+	return fileWrapperAdopt(_id)
 }
 
-// NewFileWrapperSymbolicLinkWithDestination creates a new [FileWrapper].
+// NewFileWrapperSymbolicLinkWithDestination creates a new FileWrapper.
 func NewFileWrapperSymbolicLinkWithDestination(path string) *FileWrapper {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileWrapper")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initSymbolicLinkWithDestination:"), foundation.NSStringStringWithUTF8String(path).Ptr())
-	return &FileWrapper{inner: raw.NSFileWrapperFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileWrapper")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initSymbolicLinkWithDestination:"), purego.NSString(path))
+	return fileWrapperAdopt(_id)
 }
 
-// WithPreferredFilename sets the preferredFilename property and returns the receiver for chaining.
-func (x *FileWrapper) WithPreferredFilename(preferredFilename string) *FileWrapper {
-	x.inner.SetPreferredFilename(foundation.NSStringStringWithUTF8String(preferredFilename))
+// WithPreferredFilename sets preferredFilename and returns the receiver so calls can be chained.
+func (x *FileWrapper) WithPreferredFilename(preferredFilename StringProvider) *FileWrapper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredFilename:"), objref.IDOf(preferredFilename))
 	return x
 }
 
-// WithFilename sets the filename property and returns the receiver for chaining.
-func (x *FileWrapper) WithFilename(filename string) *FileWrapper {
-	x.inner.SetFilename(foundation.NSStringStringWithUTF8String(filename))
+// WithFilename sets filename and returns the receiver so calls can be chained.
+func (x *FileWrapper) WithFilename(filename StringProvider) *FileWrapper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilename:"), objref.IDOf(filename))
 	return x
 }
 
-// WithFileAttributes sets the fileAttributes property and returns the receiver for chaining.
-func (x *FileWrapper) WithFileAttributes(fileAttributes *raw.NSDictionary[*raw.NSString, objc.ID]) *FileWrapper {
-	x.inner.SetFileAttributes(fileAttributes)
+// WithFileAttributes sets fileAttributes and returns the receiver so calls can be chained.
+func (x *FileWrapper) WithFileAttributes(fileAttributes obj.Object) *FileWrapper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileAttributes:"), objref.IDOf(fileAttributes))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *FileWrapper) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileWrapper {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *FileWrapper) WithScriptingProperties(scriptingProperties obj.Object) *FileWrapper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// MatchesContentsOfURL calls the underlying MatchesContentsOfURL.
 func (x *FileWrapper) MatchesContentsOfURL(url string) bool {
-	return x.inner.MatchesContentsOfURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchesContentsOfURL:"), rt.FileURL(url))
+	return _r
 }
 
-// ReadFromURLOptionsError calls the underlying ReadFromURLOptionsError.
-func (x *FileWrapper) ReadFromURLOptionsError(url string, options NSFileWrapperReadingOptions) (bool, error) {
-	return x.inner.ReadFromURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileWrapperReadingOptions(options))
-}
-
-// WriteToURLOptionsOriginalContentsURLError calls the underlying WriteToURLOptionsOriginalContentsURLError.
-func (x *FileWrapper) WriteToURLOptionsOriginalContentsURLError(url string, options NSFileWrapperWritingOptions, originalContentsURL string) (bool, error) {
-	return x.inner.WriteToURLOptionsOriginalContentsURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileWrapperWritingOptions(options), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(originalContentsURL)))
-}
-
-// AddFileWrapper calls the underlying AddFileWrapper.
-func (x *FileWrapper) AddFileWrapper(child *raw.NSFileWrapper) *String {
-	_r := x.inner.AddFileWrapper(child)
-	if _r == nil {
-		return nil
+func (x *FileWrapper) ReadFromURLOptions(url string, options FileWrapperReadingOptions) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("readFromURL:options:error:"), rt.FileURL(url), options, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &String{inner: _r}
+	return nil
 }
 
-// AddRegularFileWithContentsPreferredFilename calls the underlying AddRegularFileWithContentsPreferredFilename.
-func (x *FileWrapper) AddRegularFileWithContentsPreferredFilename(data *raw.NSData, fileName string) *String {
-	_r := x.inner.AddRegularFileWithContentsPreferredFilename(data, foundation.NSStringStringWithUTF8String(fileName))
-	if _r == nil {
-		return nil
+func (x *FileWrapper) WriteToURLOptionsOriginalContentsURL(url string, options FileWrapperWritingOptions, originalContentsURL string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:options:originalContentsURL:error:"), rt.FileURL(url), options, rt.FileURL(originalContentsURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &String{inner: _r}
+	return nil
 }
 
-// RemoveFileWrapper calls the underlying RemoveFileWrapper.
-func (x *FileWrapper) RemoveFileWrapper(child *raw.NSFileWrapper) {
-	x.inner.RemoveFileWrapper(child)
-}
-
-// KeyForFileWrapper calls the underlying KeyForFileWrapper.
-func (x *FileWrapper) KeyForFileWrapper(child *raw.NSFileWrapper) *String {
-	_r := x.inner.KeyForFileWrapper(child)
-	if _r == nil {
-		return nil
+func (x *FileWrapper) AddFileWrapper(child *FileWrapper) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addFileWrapper:"), objref.IDOf(child))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// IsDirectory calls the underlying IsDirectory.
+func (x *FileWrapper) AddRegularFileWithContentsPreferredFilename(data *Data, fileName string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRegularFileWithContents:preferredFilename:"), objref.IDOf(data), purego.NSString(fileName))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *FileWrapper) RemoveFileWrapper(child *FileWrapper) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFileWrapper:"), objref.IDOf(child))
+}
+
+func (x *FileWrapper) KeyForFileWrapper(child *FileWrapper) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyForFileWrapper:"), objref.IDOf(child))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
 func (x *FileWrapper) IsDirectory() bool {
-	return x.inner.IsDirectory()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDirectory"))
+	return _r
 }
 
-// IsRegularFile calls the underlying IsRegularFile.
 func (x *FileWrapper) IsRegularFile() bool {
-	return x.inner.IsRegularFile()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRegularFile"))
+	return _r
 }
 
-// IsSymbolicLink calls the underlying IsSymbolicLink.
 func (x *FileWrapper) IsSymbolicLink() bool {
-	return x.inner.IsSymbolicLink()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSymbolicLink"))
+	return _r
 }
 
-// PreferredFilename calls the underlying PreferredFilename.
-func (x *FileWrapper) PreferredFilename() *String {
-	_r := x.inner.PreferredFilename()
-	if _r == nil {
-		return nil
+func (x *FileWrapper) PreferredFilename() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredFilename"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetPreferredFilename calls the underlying SetPreferredFilename.
 func (x *FileWrapper) SetPreferredFilename(preferredFilename string) {
-	x.inner.SetPreferredFilename(foundation.NSStringStringWithUTF8String(preferredFilename))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredFilename:"), purego.NSString(preferredFilename))
 }
 
-// Filename calls the underlying Filename.
-func (x *FileWrapper) Filename() *String {
-	_r := x.inner.Filename()
-	if _r == nil {
-		return nil
+func (x *FileWrapper) Filename() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filename"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetFilename calls the underlying SetFilename.
 func (x *FileWrapper) SetFilename(filename string) {
-	x.inner.SetFilename(foundation.NSStringStringWithUTF8String(filename))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilename:"), purego.NSString(filename))
 }
 
-// FileAttributes calls the underlying FileAttributes.
-func (x *FileWrapper) FileAttributes() *raw.NSDictionary[*raw.NSString, objc.ID] {
-	return x.inner.FileAttributes()
+func (x *FileWrapper) FileAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileAttributes"))
+	return obj.Wrap(_r)
 }
 
-// SetFileAttributes calls the underlying SetFileAttributes.
-func (x *FileWrapper) SetFileAttributes(fileAttributes *raw.NSDictionary[*raw.NSString, objc.ID]) {
-	x.inner.SetFileAttributes(fileAttributes)
+func (x *FileWrapper) SetFileAttributes(fileAttributes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileAttributes:"), objref.IDOf(fileAttributes))
 }
 
-// SerializedRepresentation calls the underlying SerializedRepresentation.
 func (x *FileWrapper) SerializedRepresentation() *Data {
-	_r := x.inner.SerializedRepresentation()
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serializedRepresentation"))
+	return DataFromID(_r)
 }
 
-// FileWrappers calls the underlying FileWrappers.
-func (x *FileWrapper) FileWrappers() *raw.NSDictionary[*raw.NSString, *raw.NSFileWrapper] {
-	return x.inner.FileWrappers()
+func (x *FileWrapper) FileWrappers() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileWrappers"))
+	return obj.Wrap(_r)
 }
 
-// RegularFileContents calls the underlying RegularFileContents.
 func (x *FileWrapper) RegularFileContents() *Data {
-	_r := x.inner.RegularFileContents()
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regularFileContents"))
+	return DataFromID(_r)
 }
 
-// SymbolicLinkDestinationURL calls the underlying SymbolicLinkDestinationURL.
 func (x *FileWrapper) SymbolicLinkDestinationURL() *URL {
-	_r := x.inner.SymbolicLinkDestinationURL()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("symbolicLinkDestinationURL"))
+	return URLFromID(_r)
 }
 
-// NeedsToBeUpdatedFromPath calls the underlying NeedsToBeUpdatedFromPath.
 func (x *FileWrapper) NeedsToBeUpdatedFromPath(path string) bool {
-	return x.inner.NeedsToBeUpdatedFromPath(foundation.NSStringStringWithUTF8String(path))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsToBeUpdatedFromPath:"), purego.NSString(path))
+	return _r
 }
 
-// UpdateFromPath calls the underlying UpdateFromPath.
 func (x *FileWrapper) UpdateFromPath(path string) bool {
-	return x.inner.UpdateFromPath(foundation.NSStringStringWithUTF8String(path))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("updateFromPath:"), purego.NSString(path))
+	return _r
 }
 
-// WriteToFileAtomicallyUpdateFilenames calls the underlying WriteToFileAtomicallyUpdateFilenames.
 func (x *FileWrapper) WriteToFileAtomicallyUpdateFilenames(path string, atomicFlag bool, updateFilenamesFlag bool) bool {
-	return x.inner.WriteToFileAtomicallyUpdateFilenames(foundation.NSStringStringWithUTF8String(path), atomicFlag, updateFilenamesFlag)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToFile:atomically:updateFilenames:"), purego.NSString(path), atomicFlag, updateFilenamesFlag)
+	return _r
 }
 
-// AddFileWithPath calls the underlying AddFileWithPath.
-func (x *FileWrapper) AddFileWithPath(path string) *String {
-	_r := x.inner.AddFileWithPath(foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
+func (x *FileWrapper) AddFileWithPath(path string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addFileWithPath:"), purego.NSString(path))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// AddSymbolicLinkWithDestinationPreferredFilename calls the underlying AddSymbolicLinkWithDestinationPreferredFilename.
-func (x *FileWrapper) AddSymbolicLinkWithDestinationPreferredFilename(path string, filename string) *String {
-	_r := x.inner.AddSymbolicLinkWithDestinationPreferredFilename(foundation.NSStringStringWithUTF8String(path), foundation.NSStringStringWithUTF8String(filename))
-	if _r == nil {
-		return nil
+func (x *FileWrapper) AddSymbolicLinkWithDestinationPreferredFilename(path string, filename string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSymbolicLinkWithDestination:preferredFilename:"), purego.NSString(path), purego.NSString(filename))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SymbolicLinkDestination calls the underlying SymbolicLinkDestination.
-func (x *FileWrapper) SymbolicLinkDestination() *String {
-	_r := x.inner.SymbolicLinkDestination()
-	if _r == nil {
-		return nil
+func (x *FileWrapper) SymbolicLinkDestination() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("symbolicLinkDestination"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
-
-func (x *FileWrapper) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // FileWrapperable is the interface implemented by [FileWrapper], for mocking and DI.
 type FileWrapperable interface {
-	Unwrap() *raw.NSFileWrapper
-	WithPreferredFilename(preferredFilename string) *FileWrapper
-	WithFilename(filename string) *FileWrapper
-	WithFileAttributes(fileAttributes *raw.NSDictionary[*raw.NSString, objc.ID]) *FileWrapper
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileWrapper
+	obj.Object
+	WithPreferredFilename(preferredFilename StringProvider) *FileWrapper
+	WithFilename(filename StringProvider) *FileWrapper
+	WithFileAttributes(fileAttributes obj.Object) *FileWrapper
+	WithScriptingProperties(scriptingProperties obj.Object) *FileWrapper
 	MatchesContentsOfURL(url string) bool
-	ReadFromURLOptionsError(url string, options NSFileWrapperReadingOptions) (bool, error)
-	WriteToURLOptionsOriginalContentsURLError(url string, options NSFileWrapperWritingOptions, originalContentsURL string) (bool, error)
-	AddFileWrapper(child *raw.NSFileWrapper) *String
-	AddRegularFileWithContentsPreferredFilename(data *raw.NSData, fileName string) *String
-	RemoveFileWrapper(child *raw.NSFileWrapper)
-	KeyForFileWrapper(child *raw.NSFileWrapper) *String
+	ReadFromURLOptions(url string, options FileWrapperReadingOptions) error
+	WriteToURLOptionsOriginalContentsURL(url string, options FileWrapperWritingOptions, originalContentsURL string) error
+	AddFileWrapper(child *FileWrapper) string
+	AddRegularFileWithContentsPreferredFilename(data *Data, fileName string) string
+	RemoveFileWrapper(child *FileWrapper)
+	KeyForFileWrapper(child *FileWrapper) string
 	IsDirectory() bool
 	IsRegularFile() bool
 	IsSymbolicLink() bool
-	PreferredFilename() *String
+	PreferredFilename() string
 	SetPreferredFilename(preferredFilename string)
-	Filename() *String
+	Filename() string
 	SetFilename(filename string)
-	FileAttributes() *raw.NSDictionary[*raw.NSString, objc.ID]
-	SetFileAttributes(fileAttributes *raw.NSDictionary[*raw.NSString, objc.ID])
+	FileAttributes() obj.Object
+	SetFileAttributes(fileAttributes obj.Object)
 	SerializedRepresentation() *Data
-	FileWrappers() *raw.NSDictionary[*raw.NSString, *raw.NSFileWrapper]
+	FileWrappers() obj.Object
 	RegularFileContents() *Data
 	SymbolicLinkDestinationURL() *URL
 	NeedsToBeUpdatedFromPath(path string) bool
 	UpdateFromPath(path string) bool
 	WriteToFileAtomicallyUpdateFilenames(path string, atomicFlag bool, updateFilenamesFlag bool) bool
-	AddFileWithPath(path string) *String
-	AddSymbolicLinkWithDestinationPreferredFilename(path string, filename string) *String
-	SymbolicLinkDestination() *String
+	AddFileWithPath(path string) string
+	AddSymbolicLinkWithDestinationPreferredFilename(path string, filename string) string
+	SymbolicLinkDestination() string
 }
 
 var _ FileWrapperable = (*FileWrapper)(nil)

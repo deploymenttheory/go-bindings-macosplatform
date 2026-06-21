@@ -5,82 +5,90 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMHTMLCollection wraps [raw.DOMHTMLCollection] with a fluent Go API.
+// DOMHTMLCollection is an idiomatic wrapper over the Objective-C class DOMHTMLCollection.
 type DOMHTMLCollection struct {
-	inner *raw.DOMHTMLCollection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMHTMLCollection].
-func (x *DOMHTMLCollection) Unwrap() *raw.DOMHTMLCollection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMHTMLCollection) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMHTMLCollectionFromID adopts an existing object pointer as a DOMHTMLCollection (nil for 0).
+// DOMHTMLCollectionFromID adopts an existing Objective-C object as a DOMHTMLCollection
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMHTMLCollectionFromID(id objc.ID) *DOMHTMLCollection {
 	if id == 0 {
 		return nil
 	}
-	return &DOMHTMLCollection{inner: raw.DOMHTMLCollectionFromID(id)}
+	x := &DOMHTMLCollection{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDOMHTMLCollection creates a new [DOMHTMLCollection].
+// dOMHTMLCollectionAdopt wraps an Objective-C object that this code just created as a
+// DOMHTMLCollection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMHTMLCollectionAdopt(id objc.ID) *DOMHTMLCollection {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMHTMLCollection{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DOMHTMLCollection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMHTMLCollection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMHTMLCollection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMHTMLCollection creates a new DOMHTMLCollection.
 func NewDOMHTMLCollection() *DOMHTMLCollection {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMHTMLCollection")), objc.RegisterName("new"))
-	return &DOMHTMLCollection{inner: raw.DOMHTMLCollectionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMHTMLCollection")), objc.RegisterName("new"))
+	return dOMHTMLCollectionAdopt(_id)
 }
 
-// Item calls the underlying Item.
-func (x *DOMHTMLCollection) Item(index uint) *DOMNode {
-	_r := x.inner.Item(index)
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+func (x *DOMHTMLCollection) Item(index int) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
+	return DOMNodeFromID(_r)
 }
 
-// NamedItem calls the underlying NamedItem.
 func (x *DOMHTMLCollection) NamedItem(name string) *DOMNode {
-	_r := x.inner.NamedItem(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &DOMNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("namedItem:"), purego.NSString(name))
+	return DOMNodeFromID(_r)
 }
 
-// Tags calls the underlying Tags.
 func (x *DOMHTMLCollection) Tags(name string) *DOMNodeList {
-	_r := x.inner.Tags(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &DOMNodeList{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tags:"), purego.NSString(name))
+	return DOMNodeListFromID(_r)
 }
 
-// Length calls the underlying Length.
-func (x *DOMHTMLCollection) Length() uint {
-	return x.inner.Length()
-}
-
-func (x *DOMHTMLCollection) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
-
-func (x *DOMHTMLCollection) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMObject.WebScriptObject
+func (x *DOMHTMLCollection) Length() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
 // DOMHTMLCollectionable is the interface implemented by [DOMHTMLCollection], for mocking and DI.
 type DOMHTMLCollectionable interface {
-	Unwrap() *raw.DOMHTMLCollection
-	Item(index uint) *DOMNode
+	obj.Object
+	Item(index int) *DOMNode
 	NamedItem(name string) *DOMNode
 	Tags(name string) *DOMNodeList
-	Length() uint
+	Length() int
 }
 
 var _ DOMHTMLCollectionable = (*DOMHTMLCollection)(nil)

@@ -5,239 +5,227 @@
 package quartz
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The QCView class is a custom NSView class that loads, plays, and controls Quartz Composer compositions. It is an autonomous view that is driven by an internal timer running on the main thread.
 //
-// QCView wraps [raw.QCView] with a fluent Go API.
+// QCView is an idiomatic wrapper over the Objective-C class QCView.
 type QCView struct {
-	inner *raw.QCView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QCView].
-func (x *QCView) Unwrap() *raw.QCView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QCView) ID() objc.ID { return x.inner.Ptr() }
-
-// QCViewFromID adopts an existing object pointer as a QCView (nil for 0).
+// QCViewFromID adopts an existing Objective-C object as a QCView
+// (nil for 0), retaining it and registering a release finalizer.
 func QCViewFromID(id objc.ID) *QCView {
 	if id == 0 {
 		return nil
 	}
-	return &QCView{inner: raw.QCViewFromID(id)}
+	x := &QCView{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewQCView creates a new [QCView].
+// qCViewAdopt wraps an Objective-C object that this code just created as a
+// QCView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func qCViewAdopt(id objc.ID) *QCView {
+	if id == 0 {
+		return nil
+	}
+	x := &QCView{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *QCView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QCView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QCView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewQCView creates a new QCView.
 func NewQCView() *QCView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QCView")), objc.RegisterName("new"))
-	return &QCView{inner: raw.QCViewFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QCView")), objc.RegisterName("new"))
+	return qCViewAdopt(_id)
 }
 
 // Loads the composition file located at the specified path.
-//
-// LoadCompositionFromFile calls the underlying LoadCompositionFromFile.
 func (x *QCView) LoadCompositionFromFile(path string) bool {
-	return x.inner.LoadCompositionFromFile(foundation.NSStringStringWithUTF8String(path))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadCompositionFromFile:"), purego.NSString(path))
+	return _r
 }
 
 // Loads a QCComposition object into the view.
-//
-// LoadComposition calls the underlying LoadComposition.
-func (x *QCView) LoadComposition(composition *raw.QCComposition) bool {
-	return x.inner.LoadComposition(composition)
+func (x *QCView) LoadComposition(composition *QCComposition) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadComposition:"), objref.IDOf(composition))
+	return _r
 }
 
 // Returns the composition loaded in the view.
-//
-// LoadedComposition calls the underlying LoadedComposition.
 func (x *QCView) LoadedComposition() *QCComposition {
-	_r := x.inner.LoadedComposition()
-	if _r == nil {
-		return nil
-	}
-	return &QCComposition{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadedComposition"))
+	return QCCompositionFromID(_r)
 }
 
 // Unloads the composition from the view.
-//
-// UnloadComposition calls the underlying UnloadComposition.
 func (x *QCView) UnloadComposition() {
-	x.inner.UnloadComposition()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unloadComposition"))
 }
 
 // Sets whether the composition that is in the view starts rendering automatically when the view is put on the screen.
-//
-// SetAutostartsRendering calls the underlying SetAutostartsRendering.
 func (x *QCView) SetAutostartsRendering(flag bool) {
-	x.inner.SetAutostartsRendering(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutostartsRendering:"), flag)
 }
 
 // Checks whether the view is set to start rendering automatically.
-//
-// AutostartsRendering calls the underlying AutostartsRendering.
 func (x *QCView) AutostartsRendering() bool {
-	return x.inner.AutostartsRendering()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autostartsRendering"))
+	return _r
 }
 
 // Sets the color used to erase the view.
-//
-// SetEraseColor calls the underlying SetEraseColor.
-func (x *QCView) SetEraseColor(color *appkit.NSColor) {
-	x.inner.SetEraseColor(color)
+func (x *QCView) SetEraseColor(color obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEraseColor:"), objref.IDOf(color))
 }
 
 // Retrieves the current color used to erase the view.
-//
-// EraseColor calls the underlying EraseColor.
-func (x *QCView) EraseColor() *appkit.NSColor {
-	return x.inner.EraseColor()
+func (x *QCView) EraseColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eraseColor"))
+	return obj.Wrap(_r)
 }
 
 // Sets the mask used to filter which types of events are forwarded from the view to the composition during rendering.
-//
-// SetEventForwardingMask calls the underlying SetEventForwardingMask.
-func (x *QCView) SetEventForwardingMask(mask uint) {
-	x.inner.SetEventForwardingMask(mask)
+func (x *QCView) SetEventForwardingMask(mask int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEventForwardingMask:"), mask)
 }
 
 // Retrieves the mask used to filter which types of events are forwarded from the view to the composition during rendering.
-//
-// EventForwardingMask calls the underlying EventForwardingMask.
-func (x *QCView) EventForwardingMask() uint {
-	return x.inner.EventForwardingMask()
+func (x *QCView) EventForwardingMask() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("eventForwardingMask"))
+	return _r
 }
 
 // Sets the maximum rendering frame rate.
-//
-// SetMaxRenderingFrameRate calls the underlying SetMaxRenderingFrameRate.
 func (x *QCView) SetMaxRenderingFrameRate(maxFPS float32) {
-	x.inner.SetMaxRenderingFrameRate(maxFPS)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxRenderingFrameRate:"), maxFPS)
 }
 
 // Returns the maximum frame rate for rendering.
-//
-// MaxRenderingFrameRate calls the underlying MaxRenderingFrameRate.
 func (x *QCView) MaxRenderingFrameRate() float32 {
-	return x.inner.MaxRenderingFrameRate()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maxRenderingFrameRate"))
+	return _r
 }
 
 // Clears the view using the current erase color.
-//
-// Erase calls the underlying Erase.
 func (x *QCView) Erase() {
-	x.inner.Erase()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("erase"))
 }
 
 // Starts rendering the composition that is in the view.
-//
-// StartRendering calls the underlying StartRendering.
 func (x *QCView) StartRendering() bool {
-	return x.inner.StartRendering()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startRendering"))
+	return _r
 }
 
 // Overrides to perform your custom operations prior to or after rendering a frame of a composition.
-//
-// RenderAtTimeArguments calls the underlying RenderAtTimeArguments.
-func (x *QCView) RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool {
-	return x.inner.RenderAtTimeArguments(time_, arguments)
+func (x *QCView) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("renderAtTime:arguments:"), time_, objref.IDOf(arguments))
+	return _r
 }
 
 // Pauses rendering in the view.
-//
-// PauseRendering calls the underlying PauseRendering.
 func (x *QCView) PauseRendering() {
-	x.inner.PauseRendering()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseRendering"))
 }
 
 // Returns whether or not the rendering in the view is paused.
-//
-// IsPausedRendering calls the underlying IsPausedRendering.
 func (x *QCView) IsPausedRendering() bool {
-	return x.inner.IsPausedRendering()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPausedRendering"))
+	return _r
 }
 
 // Resumes rendering a paused composition.
-//
-// ResumeRendering calls the underlying ResumeRendering.
 func (x *QCView) ResumeRendering() {
-	x.inner.ResumeRendering()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeRendering"))
 }
 
 // Stops rendering the composition that is in the view.
-//
-// StopRendering calls the underlying StopRendering.
 func (x *QCView) StopRendering() {
-	x.inner.StopRendering()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopRendering"))
 }
 
 // Checks whether a composition is rendering in the view.
-//
-// IsRendering calls the underlying IsRendering.
 func (x *QCView) IsRendering() bool {
-	return x.inner.IsRendering()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRendering"))
+	return _r
 }
 
 // Returns an NSImage object of the current image in the view.
-//
-// SnapshotImage calls the underlying SnapshotImage.
-func (x *QCView) SnapshotImage() *appkit.NSImage {
-	return x.inner.SnapshotImage()
+func (x *QCView) SnapshotImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotImage"))
+	return obj.Wrap(_r)
 }
 
 // Returns the current image in the view as an image object of the provided image type.
-//
-// CreateSnapshotImageOfType calls the underlying CreateSnapshotImageOfType.
-func (x *QCView) CreateSnapshotImageOfType(type_ string) objc.ID {
-	return x.inner.CreateSnapshotImageOfType(foundation.NSStringStringWithUTF8String(type_))
+func (x *QCView) CreateSnapshotImageOfType(type_ string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createSnapshotImageOfType:"), purego.NSString(type_))
+	return obj.Wrap(_r)
 }
 
 // Returns the OpenGL context used by the view.
-//
-// OpenGLContext calls the underlying OpenGLContext.
-func (x *QCView) OpenGLContext() *appkit.NSOpenGLContext {
-	return x.inner.OpenGLContext()
+func (x *QCView) OpenGLContext() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLContext"))
+	return obj.Wrap(_r)
 }
 
 // Returns the OpenGL pixel format used by the view.
-//
-// OpenGLPixelFormat calls the underlying OpenGLPixelFormat.
-func (x *QCView) OpenGLPixelFormat() *appkit.NSOpenGLPixelFormat {
-	return x.inner.OpenGLPixelFormat()
+func (x *QCView) OpenGLPixelFormat() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLPixelFormat"))
+	return obj.Wrap(_r)
 }
 
 // QCViewable is the interface implemented by [QCView], for mocking and DI.
 type QCViewable interface {
-	Unwrap() *raw.QCView
+	obj.Object
 	LoadCompositionFromFile(path string) bool
-	LoadComposition(composition *raw.QCComposition) bool
+	LoadComposition(composition *QCComposition) bool
 	LoadedComposition() *QCComposition
 	UnloadComposition()
 	SetAutostartsRendering(flag bool)
 	AutostartsRendering() bool
-	SetEraseColor(color *appkit.NSColor)
-	EraseColor() *appkit.NSColor
-	SetEventForwardingMask(mask uint)
-	EventForwardingMask() uint
+	SetEraseColor(color obj.Object)
+	EraseColor() obj.Object
+	SetEventForwardingMask(mask int)
+	EventForwardingMask() int
 	SetMaxRenderingFrameRate(maxFPS float32)
 	MaxRenderingFrameRate() float32
 	Erase()
 	StartRendering() bool
-	RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool
+	RenderAtTimeArguments(time_ float64, arguments obj.Object) bool
 	PauseRendering()
 	IsPausedRendering() bool
 	ResumeRendering()
 	StopRendering()
 	IsRendering() bool
-	SnapshotImage() *appkit.NSImage
-	CreateSnapshotImageOfType(type_ string) objc.ID
-	OpenGLContext() *appkit.NSOpenGLContext
-	OpenGLPixelFormat() *appkit.NSOpenGLPixelFormat
+	SnapshotImage() obj.Object
+	CreateSnapshotImageOfType(type_ string) obj.Object
+	OpenGLContext() obj.Object
+	OpenGLPixelFormat() obj.Object
 }
 
 var _ QCViewable = (*QCView)(nil)

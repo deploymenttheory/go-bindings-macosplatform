@@ -5,264 +5,229 @@
 package quartz
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The QCCompositionPickerView class allows users to browse compositions that are in the Quartz Composer composition repository, and to preview them. You can set the default input parameters for a composition preview by using the method setDefaultValue:forInputKey:.
 //
-// QCCompositionPickerView wraps [raw.QCCompositionPickerView] with a fluent Go API.
+// QCCompositionPickerView is an idiomatic wrapper over the Objective-C class QCCompositionPickerView.
 type QCCompositionPickerView struct {
-	inner *raw.QCCompositionPickerView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QCCompositionPickerView].
-func (x *QCCompositionPickerView) Unwrap() *raw.QCCompositionPickerView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QCCompositionPickerView) ID() objc.ID { return x.inner.Ptr() }
-
-// QCCompositionPickerViewFromID adopts an existing object pointer as a QCCompositionPickerView (nil for 0).
+// QCCompositionPickerViewFromID adopts an existing Objective-C object as a QCCompositionPickerView
+// (nil for 0), retaining it and registering a release finalizer.
 func QCCompositionPickerViewFromID(id objc.ID) *QCCompositionPickerView {
 	if id == 0 {
 		return nil
 	}
-	return &QCCompositionPickerView{inner: raw.QCCompositionPickerViewFromID(id)}
+	x := &QCCompositionPickerView{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewQCCompositionPickerView creates a new [QCCompositionPickerView].
+// qCCompositionPickerViewAdopt wraps an Objective-C object that this code just created as a
+// QCCompositionPickerView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func qCCompositionPickerViewAdopt(id objc.ID) *QCCompositionPickerView {
+	if id == 0 {
+		return nil
+	}
+	x := &QCCompositionPickerView{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *QCCompositionPickerView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QCCompositionPickerView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QCCompositionPickerView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewQCCompositionPickerView creates a new QCCompositionPickerView.
 func NewQCCompositionPickerView() *QCCompositionPickerView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QCCompositionPickerView")), objc.RegisterName("new"))
-	return &QCCompositionPickerView{inner: raw.QCCompositionPickerViewFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionPickerView")), objc.RegisterName("new"))
+	return qCCompositionPickerViewAdopt(_id)
 }
 
 // Sets the compositions in the composition picker view to those that match the specified criteria.
-//
-// SetCompositionsFromRepositoryWithProtocolAndAttributes calls the underlying SetCompositionsFromRepositoryWithProtocolAndAttributes.
-func (x *QCCompositionPickerView) SetCompositionsFromRepositoryWithProtocolAndAttributes(protocol string, attributes *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.SetCompositionsFromRepositoryWithProtocolAndAttributes(foundation.NSStringStringWithUTF8String(protocol), attributes)
+func (x *QCCompositionPickerView) SetCompositionsFromRepositoryWithProtocolAndAttributes(protocol string, attributes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositionsFromRepositoryWithProtocol:andAttributes:"), purego.NSString(protocol), objref.IDOf(attributes))
 }
 
 // Returns the list of compositions that are currently in the composition picker view.
-//
-// Compositions calls the underlying Compositions.
-func (x *QCCompositionPickerView) Compositions() *foundation.NSArray[objc.ID] {
-	return x.inner.Compositions()
+func (x *QCCompositionPickerView) Compositions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositions"))
+	return obj.Wrap(_r)
 }
 
 // Sets the composition picker view delegate.
-//
-// SetDelegate calls the underlying SetDelegate.
-func (x *QCCompositionPickerView) SetDelegate(delegate objc.ID) {
-	x.inner.SetDelegate(delegate)
+func (x *QCCompositionPickerView) SetDelegate(delegate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
 // Retrieves the composition picker view delegate.
-//
-// Delegate calls the underlying Delegate.
-func (x *QCCompositionPickerView) Delegate() objc.ID {
-	return x.inner.Delegate()
+func (x *QCCompositionPickerView) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+	return obj.Wrap(_r)
 }
 
 // Enables the display of composition names in the composition picker view.
-//
-// SetShowsCompositionNames calls the underlying SetShowsCompositionNames.
 func (x *QCCompositionPickerView) SetShowsCompositionNames(flag bool) {
-	x.inner.SetShowsCompositionNames(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsCompositionNames:"), flag)
 }
 
 // Retrieves whether composition names can be shown in the composition picker view.
-//
-// ShowsCompositionNames calls the underlying ShowsCompositionNames.
 func (x *QCCompositionPickerView) ShowsCompositionNames() bool {
-	return x.inner.ShowsCompositionNames()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsCompositionNames"))
+	return _r
 }
 
 // Sets whether to allow an empty selection in the composition picker view.
-//
-// SetAllowsEmptySelection calls the underlying SetAllowsEmptySelection.
 func (x *QCCompositionPickerView) SetAllowsEmptySelection(flag bool) {
-	x.inner.SetAllowsEmptySelection(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEmptySelection:"), flag)
 }
 
 // Retrieves the empty-selection state of the composition picker view.
-//
-// AllowsEmptySelection calls the underlying AllowsEmptySelection.
 func (x *QCCompositionPickerView) AllowsEmptySelection() bool {
-	return x.inner.AllowsEmptySelection()
-}
-
-// Sets the aspect ratio used to display compositions in the composition picker view.
-//
-// SetCompositionAspectRatio calls the underlying SetCompositionAspectRatio.
-func (x *QCCompositionPickerView) SetCompositionAspectRatio(ratio corefoundation.CGSize) {
-	x.inner.SetCompositionAspectRatio(ratio)
-}
-
-// Retrieves the aspect ratio used to display compositions in the composition picker view.
-//
-// CompositionAspectRatio calls the underlying CompositionAspectRatio.
-func (x *QCCompositionPickerView) CompositionAspectRatio() corefoundation.CGSize {
-	return x.inner.CompositionAspectRatio()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsEmptySelection"))
+	return _r
 }
 
 // Sets the default value to use for a composition input parameter.
-//
-// SetDefaultValueForInputKey calls the underlying SetDefaultValueForInputKey.
-func (x *QCCompositionPickerView) SetDefaultValueForInputKey(value objc.ID, key string) {
-	x.inner.SetDefaultValueForInputKey(value, foundation.NSStringStringWithUTF8String(key))
+func (x *QCCompositionPickerView) SetDefaultValueForInputKey(value obj.Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultValue:forInputKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
 // Clears all previously set default values for composition input parameters.
-//
-// ResetDefaultInputValues calls the underlying ResetDefaultInputValues.
 func (x *QCCompositionPickerView) ResetDefaultInputValues() {
-	x.inner.ResetDefaultInputValues()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetDefaultInputValues"))
 }
 
 // Sets a composition as selected in the composition picker view.
-//
-// SetSelectedComposition calls the underlying SetSelectedComposition.
-func (x *QCCompositionPickerView) SetSelectedComposition(composition *raw.QCComposition) {
-	x.inner.SetSelectedComposition(composition)
+func (x *QCCompositionPickerView) SetSelectedComposition(composition *QCComposition) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedComposition:"), objref.IDOf(composition))
 }
 
 // Returns the composition that is currently selected in the composition picker view.
-//
-// SelectedComposition calls the underlying SelectedComposition.
 func (x *QCCompositionPickerView) SelectedComposition() *QCComposition {
-	_r := x.inner.SelectedComposition()
-	if _r == nil {
-		return nil
-	}
-	return &QCComposition{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedComposition"))
+	return QCCompositionFromID(_r)
 }
 
 // Starts animating the composition in the composition picker view.
-//
-// StartAnimation calls the underlying StartAnimation.
-func (x *QCCompositionPickerView) StartAnimation(sender objc.ID) {
-	x.inner.StartAnimation(sender)
+func (x *QCCompositionPickerView) StartAnimation(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startAnimation:"), objref.IDOf(sender))
 }
 
 // Stops animating the composition that is currently animating in the composition picker view.
-//
-// StopAnimation calls the underlying StopAnimation.
-func (x *QCCompositionPickerView) StopAnimation(sender objc.ID) {
-	x.inner.StopAnimation(sender)
+func (x *QCCompositionPickerView) StopAnimation(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopAnimation:"), objref.IDOf(sender))
 }
 
 // Returns whether or not the composition picker view is currently animating its composition.
-//
-// IsAnimating calls the underlying IsAnimating.
 func (x *QCCompositionPickerView) IsAnimating() bool {
-	return x.inner.IsAnimating()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAnimating"))
+	return _r
 }
 
 // Sets the maximum frame rate for animating compositions.
-//
-// SetMaxAnimationFrameRate calls the underlying SetMaxAnimationFrameRate.
 func (x *QCCompositionPickerView) SetMaxAnimationFrameRate(maxFPS float32) {
-	x.inner.SetMaxAnimationFrameRate(maxFPS)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAnimationFrameRate:"), maxFPS)
 }
 
 // Retrieves the maximum frame rate for animating compositions.
-//
-// MaxAnimationFrameRate calls the underlying MaxAnimationFrameRate.
 func (x *QCCompositionPickerView) MaxAnimationFrameRate() float32 {
-	return x.inner.MaxAnimationFrameRate()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maxAnimationFrameRate"))
+	return _r
 }
 
 // Sets the background color for the composition picker view.
-//
-// SetBackgroundColor calls the underlying SetBackgroundColor.
-func (x *QCCompositionPickerView) SetBackgroundColor(color *appkit.NSColor) {
-	x.inner.SetBackgroundColor(color)
+func (x *QCCompositionPickerView) SetBackgroundColor(color obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(color))
 }
 
 // Returns the background color of the composition picker view.
-//
-// BackgroundColor calls the underlying BackgroundColor.
-func (x *QCCompositionPickerView) BackgroundColor() *appkit.NSColor {
-	return x.inner.BackgroundColor()
+func (x *QCCompositionPickerView) BackgroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+	return obj.Wrap(_r)
 }
 
 // Sets whether the composition picker view draws its background.
-//
-// SetDrawsBackground calls the underlying SetDrawsBackground.
 func (x *QCCompositionPickerView) SetDrawsBackground(flag bool) {
-	x.inner.SetDrawsBackground(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), flag)
 }
 
 // Returns whether the composition picker view draws its background.
-//
-// DrawsBackground calls the underlying DrawsBackground.
 func (x *QCCompositionPickerView) DrawsBackground() bool {
-	return x.inner.DrawsBackground()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsBackground"))
+	return _r
 }
 
 // Retrieves the number of columns in the composition picker view.
-//
-// NumberOfColumns calls the underlying NumberOfColumns.
-func (x *QCCompositionPickerView) NumberOfColumns() uint {
-	return x.inner.NumberOfColumns()
+func (x *QCCompositionPickerView) NumberOfColumns() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfColumns"))
+	return _r
 }
 
 // Sets the number of columns in the composition picker view.
-//
-// SetNumberOfColumns calls the underlying SetNumberOfColumns.
-func (x *QCCompositionPickerView) SetNumberOfColumns(columns uint) {
-	x.inner.SetNumberOfColumns(columns)
+func (x *QCCompositionPickerView) SetNumberOfColumns(columns int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfColumns:"), columns)
 }
 
 // Retrieves the number of rows in the composition picker view.
-//
-// NumberOfRows calls the underlying NumberOfRows.
-func (x *QCCompositionPickerView) NumberOfRows() uint {
-	return x.inner.NumberOfRows()
+func (x *QCCompositionPickerView) NumberOfRows() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfRows"))
+	return _r
 }
 
 // Sets the number of rows in the composition picker view.
-//
-// SetNumberOfRows calls the underlying SetNumberOfRows.
-func (x *QCCompositionPickerView) SetNumberOfRows(rows uint) {
-	x.inner.SetNumberOfRows(rows)
+func (x *QCCompositionPickerView) SetNumberOfRows(rows int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfRows:"), rows)
 }
 
 // QCCompositionPickerViewable is the interface implemented by [QCCompositionPickerView], for mocking and DI.
 type QCCompositionPickerViewable interface {
-	Unwrap() *raw.QCCompositionPickerView
-	SetCompositionsFromRepositoryWithProtocolAndAttributes(protocol string, attributes *foundation.NSDictionary[objc.ID, objc.ID])
-	Compositions() *foundation.NSArray[objc.ID]
-	SetDelegate(delegate objc.ID)
-	Delegate() objc.ID
+	obj.Object
+	SetCompositionsFromRepositoryWithProtocolAndAttributes(protocol string, attributes obj.Object)
+	Compositions() obj.Object
+	SetDelegate(delegate obj.Object)
+	Delegate() obj.Object
 	SetShowsCompositionNames(flag bool)
 	ShowsCompositionNames() bool
 	SetAllowsEmptySelection(flag bool)
 	AllowsEmptySelection() bool
-	SetCompositionAspectRatio(ratio corefoundation.CGSize)
-	CompositionAspectRatio() corefoundation.CGSize
-	SetDefaultValueForInputKey(value objc.ID, key string)
+	SetDefaultValueForInputKey(value obj.Object, key string)
 	ResetDefaultInputValues()
-	SetSelectedComposition(composition *raw.QCComposition)
+	SetSelectedComposition(composition *QCComposition)
 	SelectedComposition() *QCComposition
-	StartAnimation(sender objc.ID)
-	StopAnimation(sender objc.ID)
+	StartAnimation(sender obj.Object)
+	StopAnimation(sender obj.Object)
 	IsAnimating() bool
 	SetMaxAnimationFrameRate(maxFPS float32)
 	MaxAnimationFrameRate() float32
-	SetBackgroundColor(color *appkit.NSColor)
-	BackgroundColor() *appkit.NSColor
+	SetBackgroundColor(color obj.Object)
+	BackgroundColor() obj.Object
 	SetDrawsBackground(flag bool)
 	DrawsBackground() bool
-	NumberOfColumns() uint
-	SetNumberOfColumns(columns uint)
-	NumberOfRows() uint
-	SetNumberOfRows(rows uint)
+	NumberOfColumns() int
+	SetNumberOfColumns(columns int)
+	NumberOfRows() int
+	SetNumberOfRows(rows int)
 }
 
 var _ QCCompositionPickerViewable = (*QCCompositionPickerView)(nil)

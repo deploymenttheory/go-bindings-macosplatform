@@ -5,148 +5,103 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A kernel that extracts a slice from an image.
 //
-// NNSlice wraps [raw.MPSNNSlice] with a fluent Go API.
+// NNSlice is an idiomatic wrapper over the Objective-C class MPSNNSlice.
 type NNSlice struct {
-	inner *raw.MPSNNSlice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNSlice].
-func (x *NNSlice) Unwrap() *raw.MPSNNSlice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNSlice) ID() objc.ID { return x.inner.Ptr() }
-
-// NNSliceFromID adopts an existing object pointer as a NNSlice (nil for 0).
+// NNSliceFromID adopts an existing Objective-C object as a NNSlice
+// (nil for 0), retaining it and registering a release finalizer.
 func NNSliceFromID(id objc.ID) *NNSlice {
 	if id == 0 {
 		return nil
 	}
-	return &NNSlice{inner: raw.MPSNNSliceFromID(id)}
-}
-
-// @abstract Initialize a MPSNNSlice kernel @param    device            The device the filter will run on @return   A valid MPSNNSlice object or nil, if failure.
-//
-// NewNNSliceWithDevice creates a new [NNSlice].
-func NewNNSliceWithDevice(device metal.MTLDevice) *NNSlice {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNSlice")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &NNSlice{inner: raw.MPSNNSliceFromID(_id)}
-}
-
-// NewNNSliceWithCoderDevice creates a new [NNSlice].
-func NewNNSliceWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *NNSlice {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNSlice")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &NNSlice{inner: raw.MPSNNSliceFromID(_id)}
-}
-
-// The position of the destination image’s clip rectangle origin, relative to the source image.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *NNSlice) WithOffset(offset mpscore.MPSOffset) *NNSlice {
-	x.inner.MPSCNNKernel.SetOffset(offset)
+	x := &NNSlice{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *NNSlice) WithClipRect(clipRect metal.MTLRegion) *NNSlice {
-	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+// nNSliceAdopt wraps an Objective-C object that this code just created as a
+// NNSlice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNSliceAdopt(id objc.ID) *NNSlice {
+	if id == 0 {
+		return nil
+	}
+	x := &NNSlice{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
+}
+
+// Description returns the object's -description text.
+func (x *NNSlice) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNSlice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNSlice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNNSlice creates a new NNSlice.
+func NewNNSlice() *NNSlice {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNSlice")), objc.RegisterName("new"))
+	return nNSliceAdopt(_id)
 }
 
 // The number of channels in the destination image to skip before writing output data.
 //
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNSlice) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNSlice {
-	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *NNSlice) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNSlice {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+// The number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
 //
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNSlice) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNSlice {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset sets sourceFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *NNSlice) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNSlice {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+// The maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 //
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *NNSlice) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNSlice {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
-	return x
-}
-
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *NNSlice) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNSlice {
-	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *NNSlice) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNSlice {
-	x.inner.MPSCNNKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *NNSlice) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNSlice {
-	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NNSlice) WithOptions(options mpscore.MPSKernelOptions) *NNSlice {
-	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+// WithSourceFeatureChannelMaxCount sets sourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+func (x *NNSlice) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNSlice {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *NNSlice) WithLabel(label string) *NNSlice {
-	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-func (x *NNSlice) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
-
-func (x *NNSlice) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
-
 // NNSliceable is the interface implemented by [NNSlice], for mocking and DI.
 type NNSliceable interface {
-	Unwrap() *raw.MPSNNSlice
-	WithOffset(offset mpscore.MPSOffset) *NNSlice
-	WithClipRect(clipRect metal.MTLRegion) *NNSlice
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNSlice
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNSlice
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNSlice
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNSlice
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNSlice
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNSlice
-	WithOptions(options mpscore.MPSKernelOptions) *NNSlice
+	obj.Object
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNSlice
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNSlice
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNSlice
 	WithLabel(label string) *NNSlice
 }
 

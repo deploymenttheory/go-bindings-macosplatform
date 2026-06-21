@@ -5,79 +5,97 @@
 package storekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A request to the App Store to process payment for additional functionality that your app offers.
 //
-// Payment wraps [raw.SKPayment] with a fluent Go API.
+// Payment is an idiomatic wrapper over the Objective-C class SKPayment.
 type Payment struct {
-	inner *raw.SKPayment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKPayment].
-func (x *Payment) Unwrap() *raw.SKPayment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Payment) ID() objc.ID { return x.inner.Ptr() }
-
-// PaymentFromID adopts an existing object pointer as a Payment (nil for 0).
+// PaymentFromID adopts an existing Objective-C object as a Payment
+// (nil for 0), retaining it and registering a release finalizer.
 func PaymentFromID(id objc.ID) *Payment {
 	if id == 0 {
 		return nil
 	}
-	return &Payment{inner: raw.SKPaymentFromID(id)}
+	x := &Payment{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPayment creates a new [Payment].
-func NewPayment() *Payment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKPayment")), objc.RegisterName("new"))
-	return &Payment{inner: raw.SKPaymentFromID(_id)}
-}
-
-// RequestData calls the underlying RequestData.
-func (x *Payment) RequestData() *foundation.NSData {
-	return x.inner.RequestData()
-}
-
-// Quantity calls the underlying Quantity.
-func (x *Payment) Quantity() int {
-	return x.inner.Quantity()
-}
-
-// ApplicationUsername calls the underlying ApplicationUsername.
-func (x *Payment) ApplicationUsername() string {
-	_r := x.inner.ApplicationUsername()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SimulatesAskToBuyInSandbox calls the underlying SimulatesAskToBuyInSandbox.
-func (x *Payment) SimulatesAskToBuyInSandbox() bool {
-	return x.inner.SimulatesAskToBuyInSandbox()
-}
-
-// PaymentDiscount calls the underlying PaymentDiscount.
-func (x *Payment) PaymentDiscount() *PaymentDiscount {
-	_r := x.inner.PaymentDiscount()
-	if _r == nil {
+// paymentAdopt wraps an Objective-C object that this code just created as a
+// Payment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paymentAdopt(id objc.ID) *Payment {
+	if id == 0 {
 		return nil
 	}
-	return &PaymentDiscount{inner: _r}
+	x := &Payment{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *Payment) asPayment() *raw.SKPayment { return x.inner }
+// Description returns the object's -description text.
+func (x *Payment) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Payment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Payment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPayment creates a new Payment.
+func NewPayment() *Payment {
+	_id := objc.Send[objc.ID](objc.ID(_class("SKPayment")), objc.RegisterName("new"))
+	return paymentAdopt(_id)
+}
+
+func (x *Payment) RequestData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestData"))
+	return obj.Wrap(_r)
+}
+
+func (x *Payment) Quantity() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("quantity"))
+	return _r
+}
+
+func (x *Payment) ApplicationUsername() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationUsername"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *Payment) SimulatesAskToBuyInSandbox() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("simulatesAskToBuyInSandbox"))
+	return _r
+}
+
+func (x *Payment) PaymentDiscount() *PaymentDiscount {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentDiscount"))
+	return PaymentDiscountFromID(_r)
+}
 
 // Paymentable is the interface implemented by [Payment], for mocking and DI.
 type Paymentable interface {
-	Unwrap() *raw.SKPayment
-	RequestData() *foundation.NSData
+	obj.Object
+	RequestData() obj.Object
 	Quantity() int
 	ApplicationUsername() string
 	SimulatesAskToBuyInSandbox() bool

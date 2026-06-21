@@ -5,114 +5,128 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterOnOffSwitchConfiguration wraps [raw.MTRClusterOnOffSwitchConfiguration] with a fluent Go API.
+// MTRClusterOnOffSwitchConfiguration is an idiomatic wrapper over the Objective-C class MTRClusterOnOffSwitchConfiguration.
 type MTRClusterOnOffSwitchConfiguration struct {
-	inner *raw.MTRClusterOnOffSwitchConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterOnOffSwitchConfiguration].
-func (x *MTRClusterOnOffSwitchConfiguration) Unwrap() *raw.MTRClusterOnOffSwitchConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterOnOffSwitchConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterOnOffSwitchConfigurationFromID adopts an existing object pointer as a MTRClusterOnOffSwitchConfiguration (nil for 0).
+// MTRClusterOnOffSwitchConfigurationFromID adopts an existing Objective-C object as a MTRClusterOnOffSwitchConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterOnOffSwitchConfigurationFromID(id objc.ID) *MTRClusterOnOffSwitchConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterOnOffSwitchConfiguration{inner: raw.MTRClusterOnOffSwitchConfigurationFromID(id)}
+	x := &MTRClusterOnOffSwitchConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterOnOffSwitchConfigurationAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterOnOffSwitchConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterOnOffSwitchConfigurationAdopt(id objc.ID) *MTRClusterOnOffSwitchConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterOnOffSwitchConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterOnOffSwitchConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterOnOffSwitchConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterOnOffSwitchConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 //
-// NewMTRClusterOnOffSwitchConfigurationWithDeviceEndpointIDQueue creates a new [MTRClusterOnOffSwitchConfiguration].
-func NewMTRClusterOnOffSwitchConfigurationWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterOnOffSwitchConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterOnOffSwitchConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterOnOffSwitchConfiguration{inner: raw.MTRClusterOnOffSwitchConfigurationFromID(_id)}
+// NewMTRClusterOnOffSwitchConfigurationWithDeviceEndpointIDQueue creates a new MTRClusterOnOffSwitchConfiguration.
+func NewMTRClusterOnOffSwitchConfigurationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterOnOffSwitchConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterOnOffSwitchConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterOnOffSwitchConfigurationAdopt(_id)
 }
 
-// NewMTRClusterOnOffSwitchConfigurationWithDeviceEndpointQueue creates a new [MTRClusterOnOffSwitchConfiguration].
-func NewMTRClusterOnOffSwitchConfigurationWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterOnOffSwitchConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterOnOffSwitchConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterOnOffSwitchConfiguration{inner: raw.MTRClusterOnOffSwitchConfigurationFromID(_id)}
+// NewMTRClusterOnOffSwitchConfigurationWithDeviceEndpointQueue creates a new MTRClusterOnOffSwitchConfiguration.
+func NewMTRClusterOnOffSwitchConfigurationWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterOnOffSwitchConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterOnOffSwitchConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterOnOffSwitchConfigurationAdopt(_id)
 }
 
-// ReadAttributeSwitchTypeWithParams calls the underlying ReadAttributeSwitchTypeWithParams.
-func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeSwitchTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSwitchTypeWithParams(params)
+func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeSwitchTypeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSwitchTypeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeSwitchActionsWithParams calls the underlying ReadAttributeSwitchActionsWithParams.
-func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeSwitchActionsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSwitchActionsWithParams(params)
+func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeSwitchActionsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSwitchActionsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeSwitchActionsWithValueExpectedValueInterval calls the underlying WriteAttributeSwitchActionsWithValueExpectedValueInterval.
-func (x *MTRClusterOnOffSwitchConfiguration) WriteAttributeSwitchActionsWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeSwitchActionsWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterOnOffSwitchConfiguration) WriteAttributeSwitchActionsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSwitchActionsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeSwitchActionsWithValueExpectedValueIntervalParams calls the underlying WriteAttributeSwitchActionsWithValueExpectedValueIntervalParams.
-func (x *MTRClusterOnOffSwitchConfiguration) WriteAttributeSwitchActionsWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeSwitchActionsWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterOnOffSwitchConfiguration) WriteAttributeSwitchActionsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSwitchActionsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterOnOffSwitchConfiguration) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterOnOffSwitchConfiguration) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterOnOffSwitchConfigurationable is the interface implemented by [MTRClusterOnOffSwitchConfiguration], for mocking and DI.
 type MTRClusterOnOffSwitchConfigurationable interface {
-	Unwrap() *raw.MTRClusterOnOffSwitchConfiguration
-	ReadAttributeSwitchTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeSwitchActionsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeSwitchActionsWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeSwitchActionsWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeSwitchTypeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeSwitchActionsWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeSwitchActionsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeSwitchActionsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterOnOffSwitchConfigurationable = (*MTRClusterOnOffSwitchConfiguration)(nil)

@@ -5,171 +5,180 @@
 package opendirectory
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/opendirectory"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Mappings wraps [raw.ODMappings] with a fluent Go API.
+// Mappings is an idiomatic wrapper over the Objective-C class ODMappings.
 type Mappings struct {
-	inner *raw.ODMappings
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ODMappings].
-func (x *Mappings) Unwrap() *raw.ODMappings { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Mappings) ID() objc.ID { return x.inner.Ptr() }
-
-// MappingsFromID adopts an existing object pointer as a Mappings (nil for 0).
+// MappingsFromID adopts an existing Objective-C object as a Mappings
+// (nil for 0), retaining it and registering a release finalizer.
 func MappingsFromID(id objc.ID) *Mappings {
 	if id == 0 {
 		return nil
 	}
-	return &Mappings{inner: raw.ODMappingsFromID(id)}
-}
-
-// NewMappings creates a new [Mappings].
-func NewMappings() *Mappings {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ODMappings")), objc.RegisterName("new"))
-	return &Mappings{inner: raw.ODMappingsFromID(_id)}
-}
-
-// WithComment sets the comment property and returns the receiver for chaining.
-func (x *Mappings) WithComment(comment string) *Mappings {
-	x.inner.SetComment(foundation.NSStringStringWithUTF8String(comment))
+	x := &Mappings{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithTemplateName sets the templateName property and returns the receiver for chaining.
-func (x *Mappings) WithTemplateName(templateName string) *Mappings {
-	x.inner.SetTemplateName(foundation.NSStringStringWithUTF8String(templateName))
-	return x
-}
-
-// WithIdentifier sets the identifier property and returns the receiver for chaining.
-func (x *Mappings) WithIdentifier(identifier string) *Mappings {
-	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
-	return x
-}
-
-// WithFunction sets the function property and returns the receiver for chaining.
-func (x *Mappings) WithFunction(function string) *Mappings {
-	x.inner.SetFunction(foundation.NSStringStringWithUTF8String(function))
-	return x
-}
-
-// @method recordType: @abstract Returns an ODRecordMap associated with the provided recordtype. @discussion Returns an ODRecordMap associated with the provided recordtype.
-//
-// RecordMapForStandardRecordType calls the underlying RecordMapForStandardRecordType.
-func (x *Mappings) RecordMapForStandardRecordType(stdType string) *RecordMap {
-	_r := x.inner.RecordMapForStandardRecordType(foundation.NSStringStringWithUTF8String(stdType))
-	if _r == nil {
+// mappingsAdopt wraps an Objective-C object that this code just created as a
+// Mappings (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mappingsAdopt(id objc.ID) *Mappings {
+	if id == 0 {
 		return nil
 	}
-	return &RecordMap{inner: _r}
+	x := &Mappings{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @method setRecordMap:forRecordType: @abstract Sets a particular ODRecordMap for a given standard record type. @discussion Sets a particular ODRecordMap for a given standard record type.
-//
-// SetRecordMapForStandardRecordType calls the underlying SetRecordMapForStandardRecordType.
-func (x *Mappings) SetRecordMapForStandardRecordType(map_ *raw.ODRecordMap, stdType string) {
-	x.inner.SetRecordMapForStandardRecordType(map_, foundation.NSStringStringWithUTF8String(stdType))
+// Description returns the object's -description text.
+func (x *Mappings) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Comment calls the underlying Comment.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Mappings) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Mappings) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMappings creates a new Mappings.
+func NewMappings() *Mappings {
+	_id := objc.Send[objc.ID](objc.ID(_class("ODMappings")), objc.RegisterName("new"))
+	return mappingsAdopt(_id)
+}
+
+// WithComment sets comment and returns the receiver so calls can be chained.
+func (x *Mappings) WithComment(comment string) *Mappings {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComment:"), purego.NSString(comment))
+	return x
+}
+
+// WithTemplateName sets templateName and returns the receiver so calls can be chained.
+func (x *Mappings) WithTemplateName(templateName string) *Mappings {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemplateName:"), purego.NSString(templateName))
+	return x
+}
+
+// WithIdentifier sets identifier and returns the receiver so calls can be chained.
+func (x *Mappings) WithIdentifier(identifier string) *Mappings {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
+	return x
+}
+
+// WithFunction sets function and returns the receiver so calls can be chained.
+func (x *Mappings) WithFunction(function string) *Mappings {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunction:"), purego.NSString(function))
+	return x
+}
+
+// Returns an ODRecordMap associated with the provided recordtype. Returns an ODRecordMap associated with the provided recordtype.
+func (x *Mappings) RecordMapForStandardRecordType(stdType string) *RecordMap {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordMapForStandardRecordType:"), purego.NSString(stdType))
+	return RecordMapFromID(_r)
+}
+
+// Sets a particular ODRecordMap for a given standard record type. Sets a particular ODRecordMap for a given standard record type.
+func (x *Mappings) SetRecordMapForStandardRecordType(map_ *RecordMap, stdType string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordMap:forStandardRecordType:"), objref.IDOf(map_), purego.NSString(stdType))
+}
+
 func (x *Mappings) Comment() string {
-	_r := x.inner.Comment()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("comment"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetComment calls the underlying SetComment.
 func (x *Mappings) SetComment(comment string) {
-	x.inner.SetComment(foundation.NSStringStringWithUTF8String(comment))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComment:"), purego.NSString(comment))
 }
 
-// TemplateName calls the underlying TemplateName.
 func (x *Mappings) TemplateName() string {
-	_r := x.inner.TemplateName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("templateName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTemplateName calls the underlying SetTemplateName.
 func (x *Mappings) SetTemplateName(templateName string) {
-	x.inner.SetTemplateName(foundation.NSStringStringWithUTF8String(templateName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemplateName:"), purego.NSString(templateName))
 }
 
-// Identifier calls the underlying Identifier.
 func (x *Mappings) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetIdentifier calls the underlying SetIdentifier.
 func (x *Mappings) SetIdentifier(identifier string) {
-	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 }
 
-// RecordTypes calls the underlying RecordTypes.
-func (x *Mappings) RecordTypes() *foundation.NSArray[objc.ID] {
-	return x.inner.RecordTypes()
+func (x *Mappings) RecordTypes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordTypes"))
+	return obj.Wrap(_r)
 }
 
-// Function calls the underlying Function.
 func (x *Mappings) Function() string {
-	_r := x.inner.Function()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("function"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetFunction calls the underlying SetFunction.
 func (x *Mappings) SetFunction(function string) {
-	x.inner.SetFunction(foundation.NSStringStringWithUTF8String(function))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunction:"), purego.NSString(function))
 }
 
-// FunctionAttributes calls the underlying FunctionAttributes.
-func (x *Mappings) FunctionAttributes() *foundation.NSArray[objc.ID] {
-	return x.inner.FunctionAttributes()
+func (x *Mappings) FunctionAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("functionAttributes"))
+	return obj.Wrap(_r)
 }
 
-// SetFunctionAttributes calls the underlying SetFunctionAttributes.
-func (x *Mappings) SetFunctionAttributes(functionAttributes *foundation.NSArray[objc.ID]) {
-	x.inner.SetFunctionAttributes(functionAttributes)
+func (x *Mappings) SetFunctionAttributes(functionAttributes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionAttributes:"), objref.IDOf(functionAttributes))
 }
 
 // Mappingsable is the interface implemented by [Mappings], for mocking and DI.
 type Mappingsable interface {
-	Unwrap() *raw.ODMappings
+	obj.Object
 	WithComment(comment string) *Mappings
 	WithTemplateName(templateName string) *Mappings
 	WithIdentifier(identifier string) *Mappings
 	WithFunction(function string) *Mappings
 	RecordMapForStandardRecordType(stdType string) *RecordMap
-	SetRecordMapForStandardRecordType(map_ *raw.ODRecordMap, stdType string)
+	SetRecordMapForStandardRecordType(map_ *RecordMap, stdType string)
 	Comment() string
 	SetComment(comment string)
 	TemplateName() string
 	SetTemplateName(templateName string)
 	Identifier() string
 	SetIdentifier(identifier string)
-	RecordTypes() *foundation.NSArray[objc.ID]
+	RecordTypes() obj.Object
 	Function() string
 	SetFunction(function string)
-	FunctionAttributes() *foundation.NSArray[objc.ID]
-	SetFunctionAttributes(functionAttributes *foundation.NSArray[objc.ID])
+	FunctionAttributes() obj.Object
+	SetFunctionAttributes(functionAttributes obj.Object)
 }
 
 var _ Mappingsable = (*Mappings)(nil)

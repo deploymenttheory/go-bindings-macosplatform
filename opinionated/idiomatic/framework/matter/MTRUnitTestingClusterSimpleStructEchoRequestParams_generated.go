@@ -5,115 +5,126 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRUnitTestingClusterSimpleStructEchoRequestParams wraps [raw.MTRUnitTestingClusterSimpleStructEchoRequestParams] with a fluent Go API.
+// MTRUnitTestingClusterSimpleStructEchoRequestParams is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterSimpleStructEchoRequestParams.
 type MTRUnitTestingClusterSimpleStructEchoRequestParams struct {
-	inner *raw.MTRUnitTestingClusterSimpleStructEchoRequestParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRUnitTestingClusterSimpleStructEchoRequestParams].
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) Unwrap() *raw.MTRUnitTestingClusterSimpleStructEchoRequestParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRUnitTestingClusterSimpleStructEchoRequestParamsFromID adopts an existing object pointer as a MTRUnitTestingClusterSimpleStructEchoRequestParams (nil for 0).
+// MTRUnitTestingClusterSimpleStructEchoRequestParamsFromID adopts an existing Objective-C object as a MTRUnitTestingClusterSimpleStructEchoRequestParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRUnitTestingClusterSimpleStructEchoRequestParamsFromID(id objc.ID) *MTRUnitTestingClusterSimpleStructEchoRequestParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRUnitTestingClusterSimpleStructEchoRequestParams{inner: raw.MTRUnitTestingClusterSimpleStructEchoRequestParamsFromID(id)}
-}
-
-// NewMTRUnitTestingClusterSimpleStructEchoRequestParams creates a new [MTRUnitTestingClusterSimpleStructEchoRequestParams].
-func NewMTRUnitTestingClusterSimpleStructEchoRequestParams() *MTRUnitTestingClusterSimpleStructEchoRequestParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRUnitTestingClusterSimpleStructEchoRequestParams")), objc.RegisterName("new"))
-	return &MTRUnitTestingClusterSimpleStructEchoRequestParams{inner: raw.MTRUnitTestingClusterSimpleStructEchoRequestParamsFromID(_id)}
-}
-
-// WithArg1 sets the arg1 property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) WithArg1(arg1 MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterSimpleStructEchoRequestParams {
-	x.inner.SetArg1(arg1.asMTRUnitTestingClusterSimpleStruct())
+	x := &MTRUnitTestingClusterSimpleStructEchoRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterSimpleStructEchoRequestParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
-	return x
-}
-
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterSimpleStructEchoRequestParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
-	return x
-}
-
-// Arg1 calls the underlying Arg1.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) Arg1() *MTRUnitTestingClusterSimpleStruct {
-	_r := x.inner.Arg1()
-	if _r == nil {
+// mTRUnitTestingClusterSimpleStructEchoRequestParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRUnitTestingClusterSimpleStructEchoRequestParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRUnitTestingClusterSimpleStructEchoRequestParamsAdopt(id objc.ID) *MTRUnitTestingClusterSimpleStructEchoRequestParams {
+	if id == 0 {
 		return nil
 	}
-	return &MTRUnitTestingClusterSimpleStruct{inner: _r}
+	x := &MTRUnitTestingClusterSimpleStructEchoRequestParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetArg1 calls the underlying SetArg1.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) SetArg1(arg1 *raw.MTRUnitTestingClusterSimpleStruct) {
-	x.inner.SetArg1(arg1)
+// Description returns the object's -description text.
+func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRUnitTestingClusterSimpleStructEchoRequestParams creates a new MTRUnitTestingClusterSimpleStructEchoRequestParams.
+func NewMTRUnitTestingClusterSimpleStructEchoRequestParams() *MTRUnitTestingClusterSimpleStructEchoRequestParams {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRUnitTestingClusterSimpleStructEchoRequestParams")), objc.RegisterName("new"))
+	return mTRUnitTestingClusterSimpleStructEchoRequestParamsAdopt(_id)
+}
+
+// WithArg1 sets arg1 and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) WithArg1(arg1 MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterSimpleStructEchoRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
+	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
-}
-
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterSimpleStructEchoRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterSimpleStructEchoRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return x
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) Arg1() *MTRUnitTestingClusterSimpleStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg1"))
+	return MTRUnitTestingClusterSimpleStructFromID(_r)
 }
 
-func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) asMTRUnitTestingClusterSimpleStructEchoRequestParams() *raw.MTRUnitTestingClusterSimpleStructEchoRequestParams {
-	return x.inner
+func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) SetArg1(arg1 *MTRUnitTestingClusterSimpleStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
+}
+
+// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+}
+
+// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRUnitTestingClusterSimpleStructEchoRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRUnitTestingClusterSimpleStructEchoRequestParamsable is the interface implemented by [MTRUnitTestingClusterSimpleStructEchoRequestParams], for mocking and DI.
 type MTRUnitTestingClusterSimpleStructEchoRequestParamsable interface {
-	Unwrap() *raw.MTRUnitTestingClusterSimpleStructEchoRequestParams
+	obj.Object
 	WithArg1(arg1 MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterSimpleStructEchoRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterSimpleStructEchoRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterSimpleStructEchoRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterSimpleStructEchoRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterSimpleStructEchoRequestParams
 	Arg1() *MTRUnitTestingClusterSimpleStruct
-	SetArg1(arg1 *raw.MTRUnitTestingClusterSimpleStruct)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	SetArg1(arg1 *MTRUnitTestingClusterSimpleStruct)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRUnitTestingClusterSimpleStructEchoRequestParamsable = (*MTRUnitTestingClusterSimpleStructEchoRequestParams)(nil)

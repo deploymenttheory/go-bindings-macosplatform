@@ -5,41 +5,68 @@
 package photos
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An opaque object that tracks the state of the Photos library between runs, and that you can copy and serialize for future use.
 //
-// PersistentChangeToken wraps [raw.PHPersistentChangeToken] with a fluent Go API.
+// PersistentChangeToken is an idiomatic wrapper over the Objective-C class PHPersistentChangeToken.
 type PersistentChangeToken struct {
-	inner *raw.PHPersistentChangeToken
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHPersistentChangeToken].
-func (x *PersistentChangeToken) Unwrap() *raw.PHPersistentChangeToken { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersistentChangeToken) ID() objc.ID { return x.inner.Ptr() }
-
-// PersistentChangeTokenFromID adopts an existing object pointer as a PersistentChangeToken (nil for 0).
+// PersistentChangeTokenFromID adopts an existing Objective-C object as a PersistentChangeToken
+// (nil for 0), retaining it and registering a release finalizer.
 func PersistentChangeTokenFromID(id objc.ID) *PersistentChangeToken {
 	if id == 0 {
 		return nil
 	}
-	return &PersistentChangeToken{inner: raw.PHPersistentChangeTokenFromID(id)}
+	x := &PersistentChangeToken{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPersistentChangeToken creates a new [PersistentChangeToken].
+// persistentChangeTokenAdopt wraps an Objective-C object that this code just created as a
+// PersistentChangeToken (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func persistentChangeTokenAdopt(id objc.ID) *PersistentChangeToken {
+	if id == 0 {
+		return nil
+	}
+	x := &PersistentChangeToken{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PersistentChangeToken) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PersistentChangeToken) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PersistentChangeToken) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPersistentChangeToken creates a new PersistentChangeToken.
 func NewPersistentChangeToken() *PersistentChangeToken {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHPersistentChangeToken")), objc.RegisterName("new"))
-	return &PersistentChangeToken{inner: raw.PHPersistentChangeTokenFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHPersistentChangeToken")), objc.RegisterName("new"))
+	return persistentChangeTokenAdopt(_id)
 }
 
 // PersistentChangeTokenable is the interface implemented by [PersistentChangeToken], for mocking and DI.
 type PersistentChangeTokenable interface {
-	Unwrap() *raw.PHPersistentChangeToken
+	obj.Object
 }
 
 var _ PersistentChangeTokenable = (*PersistentChangeToken)(nil)

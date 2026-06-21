@@ -5,61 +5,79 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A sample with values from a short list of possible values.
 //
-// CategorySample wraps [raw.HKCategorySample] with a fluent Go API.
+// CategorySample is an idiomatic wrapper over the Objective-C class HKCategorySample.
 type CategorySample struct {
-	inner *raw.HKCategorySample
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKCategorySample].
-func (x *CategorySample) Unwrap() *raw.HKCategorySample { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CategorySample) ID() objc.ID { return x.inner.Ptr() }
-
-// CategorySampleFromID adopts an existing object pointer as a CategorySample (nil for 0).
+// CategorySampleFromID adopts an existing Objective-C object as a CategorySample
+// (nil for 0), retaining it and registering a release finalizer.
 func CategorySampleFromID(id objc.ID) *CategorySample {
 	if id == 0 {
 		return nil
 	}
-	return &CategorySample{inner: raw.HKCategorySampleFromID(id)}
+	x := &CategorySample{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCategorySample creates a new [CategorySample].
-func NewCategorySample() *CategorySample {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKCategorySample")), objc.RegisterName("new"))
-	return &CategorySample{inner: raw.HKCategorySampleFromID(_id)}
-}
-
-// CategoryType calls the underlying CategoryType.
-func (x *CategorySample) CategoryType() *CategoryType {
-	_r := x.inner.CategoryType()
-	if _r == nil {
+// categorySampleAdopt wraps an Objective-C object that this code just created as a
+// CategorySample (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func categorySampleAdopt(id objc.ID) *CategorySample {
+	if id == 0 {
 		return nil
 	}
-	return &CategoryType{inner: _r}
+	x := &CategorySample{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property   value @discussion The preferred enum for the value is determined by the receiver's category type.
-//
-// Value calls the underlying Value.
+// Description returns the object's -description text.
+func (x *CategorySample) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CategorySample) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CategorySample) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCategorySample creates a new CategorySample.
+func NewCategorySample() *CategorySample {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKCategorySample")), objc.RegisterName("new"))
+	return categorySampleAdopt(_id)
+}
+
+func (x *CategorySample) CategoryType() *CategoryType {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("categoryType"))
+	return CategoryTypeFromID(_r)
+}
+
+// The preferred enum for the value is determined by the receiver's category type.
 func (x *CategorySample) Value() int {
-	return x.inner.Value()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("value"))
+	return _r
 }
-
-func (x *CategorySample) asSample() *raw.HKSample { return &x.inner.HKSample }
-
-func (x *CategorySample) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
 
 // CategorySampleable is the interface implemented by [CategorySample], for mocking and DI.
 type CategorySampleable interface {
-	Unwrap() *raw.HKCategorySample
+	obj.Object
 	CategoryType() *CategoryType
 	Value() int
 }

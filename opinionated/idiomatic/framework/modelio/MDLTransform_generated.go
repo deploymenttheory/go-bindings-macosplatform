@@ -5,210 +5,74 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A description of the local coordinate space transformations for a 3D object.
 //
-// Transform wraps [raw.MDLTransform] with a fluent Go API.
+// Transform is an idiomatic wrapper over the Objective-C class MDLTransform.
 type Transform struct {
-	inner *raw.MDLTransform
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLTransform].
-func (x *Transform) Unwrap() *raw.MDLTransform { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Transform) ID() objc.ID { return x.inner.Ptr() }
-
-// TransformFromID adopts an existing object pointer as a Transform (nil for 0).
+// TransformFromID adopts an existing Objective-C object as a Transform
+// (nil for 0), retaining it and registering a release finalizer.
 func TransformFromID(id objc.ID) *Transform {
 	if id == 0 {
 		return nil
 	}
-	return &Transform{inner: raw.MDLTransformFromID(id)}
+	x := &Transform{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTransform creates a new [Transform].
+// transformAdopt wraps an Objective-C object that this code just created as a
+// Transform (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func transformAdopt(id objc.ID) *Transform {
+	if id == 0 {
+		return nil
+	}
+	x := &Transform{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Transform) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Transform) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Transform) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTransform creates a new Transform.
 func NewTransform() *Transform {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTransform")), objc.RegisterName("new"))
-	return &Transform{inner: raw.MDLTransformFromID(_id)}
-}
-
-// Initializes a transform object to match the specified transform component.
-//
-// NewTransformWithTransformComponent creates a new [Transform].
-func NewTransformWithTransformComponent(component raw.MDLTransformComponent) *Transform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTransform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTransformComponent:"), component)
-	return &Transform{inner: raw.MDLTransformFromID(_id)}
-}
-
-// NewTransformWithTransformComponentResetsTransform creates a new [Transform].
-func NewTransformWithTransformComponentResetsTransform(component raw.MDLTransformComponent, resetsTransform bool) *Transform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTransform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTransformComponent:resetsTransform:"), component, resetsTransform)
-	return &Transform{inner: raw.MDLTransformFromID(_id)}
-}
-
-// Initializes a transform object with the specified transform matrix.
-//
-// NewTransformWithMatrix creates a new [Transform].
-func NewTransformWithMatrix(matrix unsafe.Pointer) *Transform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTransform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMatrix:"), matrix)
-	return &Transform{inner: raw.MDLTransformFromID(_id)}
-}
-
-// NewTransformWithMatrixResetsTransform creates a new [Transform].
-func NewTransformWithMatrixResetsTransform(matrix unsafe.Pointer, resetsTransform bool) *Transform {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTransform")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMatrix:resetsTransform:"), matrix, resetsTransform)
-	return &Transform{inner: raw.MDLTransformFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLTransform")), objc.RegisterName("new"))
+	return transformAdopt(_id)
 }
 
 // Sets all factors of the transform to those of the identity transformation.
-//
-// SetIdentity calls the underlying SetIdentity.
 func (x *Transform) SetIdentity() {
-	x.inner.SetIdentity()
-}
-
-// Returns the x-, y-, and z-axis offsets of the transform relative to its parent coordinate space, as of the specified time sample.
-//
-// TranslationAtTime calls the underlying TranslationAtTime.
-func (x *Transform) TranslationAtTime(time_ float64) unsafe.Pointer {
-	return x.inner.TranslationAtTime(time_)
-}
-
-// Returns the orientation of the transform relative to its parent coordinate space, as of the specified time sample.
-//
-// RotationAtTime calls the underlying RotationAtTime.
-func (x *Transform) RotationAtTime(time_ float64) unsafe.Pointer {
-	return x.inner.RotationAtTime(time_)
-}
-
-// Returns the x-, y-, and z-axis shear factors of the transform relative to its parent coordinate space, as of the specified time sample.
-//
-// ShearAtTime calls the underlying ShearAtTime.
-func (x *Transform) ShearAtTime(time_ float64) unsafe.Pointer {
-	return x.inner.ShearAtTime(time_)
-}
-
-// Returns the x-, y-, and z-axis scale factors of the transform relative to its parent coordinate space, as of the specified time sample.
-//
-// ScaleAtTime calls the underlying ScaleAtTime.
-func (x *Transform) ScaleAtTime(time_ float64) unsafe.Pointer {
-	return x.inner.ScaleAtTime(time_)
-}
-
-// SetMatrixForTime calls the underlying SetMatrixForTime.
-func (x *Transform) SetMatrixForTime(matrix unsafe.Pointer, time_ float64) {
-	x.inner.SetMatrixForTime(matrix, time_)
-}
-
-// Sets the x-, y-, and z-axis offsets of the transform for the specified time sample.
-//
-// SetTranslationForTime calls the underlying SetTranslationForTime.
-func (x *Transform) SetTranslationForTime(translation unsafe.Pointer, time_ float64) {
-	x.inner.SetTranslationForTime(translation, time_)
-}
-
-// Sets the orientation of the transform for the specified time sample.
-//
-// SetRotationForTime calls the underlying SetRotationForTime.
-func (x *Transform) SetRotationForTime(rotation unsafe.Pointer, time_ float64) {
-	x.inner.SetRotationForTime(rotation, time_)
-}
-
-// Sets the x-, y-, and z-axis shear factors of the transform for the specified time sample.
-//
-// SetShearForTime calls the underlying SetShearForTime.
-func (x *Transform) SetShearForTime(shear unsafe.Pointer, time_ float64) {
-	x.inner.SetShearForTime(shear, time_)
-}
-
-// Sets the x-, y-, and z-axis scale factors of the transform for the specified time sample.
-//
-// SetScaleForTime calls the underlying SetScaleForTime.
-func (x *Transform) SetScaleForTime(scale unsafe.Pointer, time_ float64) {
-	x.inner.SetScaleForTime(scale, time_)
-}
-
-// Returns the orientation of the transform as a rotation matrix, as of the specified time sample.
-//
-// RotationMatrixAtTime calls the underlying RotationMatrixAtTime.
-func (x *Transform) RotationMatrixAtTime(time_ float64) unsafe.Pointer {
-	return x.inner.RotationMatrixAtTime(time_)
-}
-
-// If these properties are read and animation data exists the earliest value is returned. Otherwise, if there is no animation data, the value of the property is the same at all times and that value is returned. If written, timing information for said property is removed. To retain or add timing information, use the set:forTime selectors instead.
-//
-// Translation calls the underlying Translation.
-func (x *Transform) Translation() unsafe.Pointer {
-	return x.inner.Translation()
-}
-
-// SetTranslation calls the underlying SetTranslation.
-func (x *Transform) SetTranslation(translation unsafe.Pointer) {
-	x.inner.SetTranslation(translation)
-}
-
-// Rotation calls the underlying Rotation.
-func (x *Transform) Rotation() unsafe.Pointer {
-	return x.inner.Rotation()
-}
-
-// SetRotation calls the underlying SetRotation.
-func (x *Transform) SetRotation(rotation unsafe.Pointer) {
-	x.inner.SetRotation(rotation)
-}
-
-// Shear calls the underlying Shear.
-func (x *Transform) Shear() unsafe.Pointer {
-	return x.inner.Shear()
-}
-
-// SetShear calls the underlying SetShear.
-func (x *Transform) SetShear(shear unsafe.Pointer) {
-	x.inner.SetShear(shear)
-}
-
-// Scale calls the underlying Scale.
-func (x *Transform) Scale() unsafe.Pointer {
-	return x.inner.Scale()
-}
-
-// SetScale calls the underlying SetScale.
-func (x *Transform) SetScale(scale unsafe.Pointer) {
-	x.inner.SetScale(scale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentity"))
 }
 
 // Transformable is the interface implemented by [Transform], for mocking and DI.
 type Transformable interface {
-	Unwrap() *raw.MDLTransform
+	obj.Object
 	SetIdentity()
-	TranslationAtTime(time_ float64) unsafe.Pointer
-	RotationAtTime(time_ float64) unsafe.Pointer
-	ShearAtTime(time_ float64) unsafe.Pointer
-	ScaleAtTime(time_ float64) unsafe.Pointer
-	SetMatrixForTime(matrix unsafe.Pointer, time_ float64)
-	SetTranslationForTime(translation unsafe.Pointer, time_ float64)
-	SetRotationForTime(rotation unsafe.Pointer, time_ float64)
-	SetShearForTime(shear unsafe.Pointer, time_ float64)
-	SetScaleForTime(scale unsafe.Pointer, time_ float64)
-	RotationMatrixAtTime(time_ float64) unsafe.Pointer
-	Translation() unsafe.Pointer
-	SetTranslation(translation unsafe.Pointer)
-	Rotation() unsafe.Pointer
-	SetRotation(rotation unsafe.Pointer)
-	Shear() unsafe.Pointer
-	SetShear(shear unsafe.Pointer)
-	Scale() unsafe.Pointer
-	SetScale(scale unsafe.Pointer)
 }
 
 var _ Transformable = (*Transform)(nil)

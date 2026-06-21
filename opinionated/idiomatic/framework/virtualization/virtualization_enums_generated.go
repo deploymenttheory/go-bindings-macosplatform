@@ -10,88 +10,88 @@ import (
 )
 
 // An integer that describes the disk image caching mode.
-type VZDiskImageCachingMode int64
+type DiskImageCachingMode int64
 
 const (
 	// Allows the virtualization framework to automatically determine whether to enable data caching.
-	VZDiskImageCachingModeAutomatic VZDiskImageCachingMode = 0
+	DiskImageCachingModeAutomatic DiskImageCachingMode = 0
 	// Disables data caching.
-	VZDiskImageCachingModeUncached VZDiskImageCachingMode = 1
+	DiskImageCachingModeUncached DiskImageCachingMode = 1
 	// Enables data caching.
-	VZDiskImageCachingModeCached VZDiskImageCachingMode = 2
+	DiskImageCachingModeCached DiskImageCachingMode = 2
 )
 
-func (e VZDiskImageCachingMode) String() string {
+func (e DiskImageCachingMode) String() string {
 	switch e {
-	case VZDiskImageCachingModeAutomatic:
-		return "VZDiskImageCachingModeAutomatic"
-	case VZDiskImageCachingModeUncached:
-		return "VZDiskImageCachingModeUncached"
-	case VZDiskImageCachingModeCached:
-		return "VZDiskImageCachingModeCached"
+	case DiskImageCachingModeAutomatic:
+		return "DiskImageCachingModeAutomatic"
+	case DiskImageCachingModeUncached:
+		return "DiskImageCachingModeUncached"
+	case DiskImageCachingModeCached:
+		return "DiskImageCachingModeCached"
 	default:
-		return fmt.Sprintf("VZDiskImageCachingMode(%d)", int64(e))
+		return fmt.Sprintf("DiskImageCachingMode(%d)", int64(e))
 	}
 }
 
 // An integer that describes the disk image synchronization mode.
-type VZDiskImageSynchronizationMode int64
+type DiskImageSynchronizationMode int64
 
 const (
 	// Synchronizes data to the permanent storage holding the disk image.
-	VZDiskImageSynchronizationModeFull VZDiskImageSynchronizationMode = 1
+	DiskImageSynchronizationModeFull DiskImageSynchronizationMode = 1
 	// Synchronizes data to the drive using the system’s best-effort synchronization mode.
-	VZDiskImageSynchronizationModeFsync VZDiskImageSynchronizationMode = 2
+	DiskImageSynchronizationModeFsync DiskImageSynchronizationMode = 2
 	// Disables data synchronization with the permanent storage.
-	VZDiskImageSynchronizationModeNone VZDiskImageSynchronizationMode = 3
+	DiskImageSynchronizationModeNone DiskImageSynchronizationMode = 3
 )
 
-func (e VZDiskImageSynchronizationMode) String() string {
+func (e DiskImageSynchronizationMode) String() string {
 	switch e {
-	case VZDiskImageSynchronizationModeFull:
-		return "VZDiskImageSynchronizationModeFull"
-	case VZDiskImageSynchronizationModeFsync:
-		return "VZDiskImageSynchronizationModeFsync"
-	case VZDiskImageSynchronizationModeNone:
-		return "VZDiskImageSynchronizationModeNone"
+	case DiskImageSynchronizationModeFull:
+		return "DiskImageSynchronizationModeFull"
+	case DiskImageSynchronizationModeFsync:
+		return "DiskImageSynchronizationModeFsync"
+	case DiskImageSynchronizationModeNone:
+		return "DiskImageSynchronizationModeNone"
 	default:
-		return fmt.Sprintf("VZDiskImageSynchronizationMode(%d)", int64(e))
+		return fmt.Sprintf("DiskImageSynchronizationMode(%d)", int64(e))
 	}
 }
 
 // Values that describe the synchronization modes available to the guest OS.
-type VZDiskSynchronizationMode int64
+type DiskSynchronizationMode int64
 
 const (
 	// Perform all synchronization operations as requested by the guest OS.
-	VZDiskSynchronizationModeFull VZDiskSynchronizationMode = 0
+	DiskSynchronizationModeFull DiskSynchronizationMode = 0
 	// Don’t synchronize the data with the permanent storage.
-	VZDiskSynchronizationModeNone VZDiskSynchronizationMode = 1
+	DiskSynchronizationModeNone DiskSynchronizationMode = 1
 )
 
-func (e VZDiskSynchronizationMode) String() string {
+func (e DiskSynchronizationMode) String() string {
 	switch e {
-	case VZDiskSynchronizationModeFull:
-		return "VZDiskSynchronizationModeFull"
-	case VZDiskSynchronizationModeNone:
-		return "VZDiskSynchronizationModeNone"
+	case DiskSynchronizationModeFull:
+		return "DiskSynchronizationModeFull"
+	case DiskSynchronizationModeNone:
+		return "DiskSynchronizationModeNone"
 	default:
-		return fmt.Sprintf("VZDiskSynchronizationMode(%d)", int64(e))
+		return fmt.Sprintf("DiskSynchronizationMode(%d)", int64(e))
 	}
 }
 
 // Constants that describe the options available when creating a new Extensible Firmware Interface (EFI) variable store.
 // Bitmask — values may be combined with |.
-type VZEFIVariableStoreInitializationOptions uint64
+type EFIVariableStoreInitializationOptions uint64
 
 const (
-	VZEFIVariableStoreInitializationOptionAllowOverwrite VZEFIVariableStoreInitializationOptions = 1
+	EFIVariableStoreInitializationOptionAllowOverwrite EFIVariableStoreInitializationOptions = 1
 )
 
-func (e VZEFIVariableStoreInitializationOptions) String() string {
+func (e EFIVariableStoreInitializationOptions) String() string {
 	var parts []string
-	if e&VZEFIVariableStoreInitializationOptionAllowOverwrite != 0 {
-		parts = append(parts, "VZEFIVariableStoreInitializationOptionAllowOverwrite")
+	if e&EFIVariableStoreInitializationOptionAllowOverwrite != 0 {
+		parts = append(parts, "EFIVariableStoreInitializationOptionAllowOverwrite")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -100,131 +100,131 @@ func (e VZEFIVariableStoreInitializationOptions) String() string {
 }
 
 // Errors you might encounter when configuring or using a virtual machine.
-type VZErrorCode int64
+type ErrorCode int64
 
 const (
-	VZErrorInternal                             VZErrorCode = 1
-	VZErrorInvalidVirtualMachineConfiguration   VZErrorCode = 2
-	VZErrorInvalidVirtualMachineState           VZErrorCode = 3
-	VZErrorInvalidVirtualMachineStateTransition VZErrorCode = 4
-	VZErrorInvalidDiskImage                     VZErrorCode = 5
-	VZErrorVirtualMachineLimitExceeded          VZErrorCode = 6
-	VZErrorNetworkError                         VZErrorCode = 7
-	VZErrorOutOfDiskSpace                       VZErrorCode = 8
-	VZErrorOperationCancelled                   VZErrorCode = 9
-	VZErrorNotSupported                         VZErrorCode = 10
-	VZErrorSave                                 VZErrorCode = 11
-	VZErrorRestore                              VZErrorCode = 12
-	VZErrorRestoreImageCatalogLoadFailed        VZErrorCode = 10001
-	VZErrorInvalidRestoreImageCatalog           VZErrorCode = 10002
-	VZErrorNoSupportedRestoreImagesInCatalog    VZErrorCode = 10003
-	VZErrorRestoreImageLoadFailed               VZErrorCode = 10004
-	VZErrorInvalidRestoreImage                  VZErrorCode = 10005
-	VZErrorInstallationRequiresUpdate           VZErrorCode = 10006
-	VZErrorInstallationFailed                   VZErrorCode = 10007
-	VZErrorNetworkBlockDeviceNegotiationFailed  VZErrorCode = 20001
-	VZErrorNetworkBlockDeviceDisconnected       VZErrorCode = 20002
-	VZErrorUSBControllerNotFound                VZErrorCode = 30001
-	VZErrorDeviceAlreadyAttached                VZErrorCode = 30002
-	VZErrorDeviceInitializationFailure          VZErrorCode = 30003
-	VZErrorDeviceNotFound                       VZErrorCode = 30004
+	ErrorInternal                             ErrorCode = 1
+	ErrorInvalidVirtualMachineConfiguration   ErrorCode = 2
+	ErrorInvalidVirtualMachineState           ErrorCode = 3
+	ErrorInvalidVirtualMachineStateTransition ErrorCode = 4
+	ErrorInvalidDiskImage                     ErrorCode = 5
+	ErrorVirtualMachineLimitExceeded          ErrorCode = 6
+	ErrorNetworkError                         ErrorCode = 7
+	ErrorOutOfDiskSpace                       ErrorCode = 8
+	ErrorOperationCancelled                   ErrorCode = 9
+	ErrorNotSupported                         ErrorCode = 10
+	ErrorSave                                 ErrorCode = 11
+	ErrorRestore                              ErrorCode = 12
+	ErrorRestoreImageCatalogLoadFailed        ErrorCode = 10001
+	ErrorInvalidRestoreImageCatalog           ErrorCode = 10002
+	ErrorNoSupportedRestoreImagesInCatalog    ErrorCode = 10003
+	ErrorRestoreImageLoadFailed               ErrorCode = 10004
+	ErrorInvalidRestoreImage                  ErrorCode = 10005
+	ErrorInstallationRequiresUpdate           ErrorCode = 10006
+	ErrorInstallationFailed                   ErrorCode = 10007
+	ErrorNetworkBlockDeviceNegotiationFailed  ErrorCode = 20001
+	ErrorNetworkBlockDeviceDisconnected       ErrorCode = 20002
+	ErrorUSBControllerNotFound                ErrorCode = 30001
+	ErrorDeviceAlreadyAttached                ErrorCode = 30002
+	ErrorDeviceInitializationFailure          ErrorCode = 30003
+	ErrorDeviceNotFound                       ErrorCode = 30004
 )
 
-func (e VZErrorCode) String() string {
+func (e ErrorCode) String() string {
 	switch e {
-	case VZErrorInternal:
-		return "VZErrorInternal"
-	case VZErrorInvalidVirtualMachineConfiguration:
-		return "VZErrorInvalidVirtualMachineConfiguration"
-	case VZErrorInvalidVirtualMachineState:
-		return "VZErrorInvalidVirtualMachineState"
-	case VZErrorInvalidVirtualMachineStateTransition:
-		return "VZErrorInvalidVirtualMachineStateTransition"
-	case VZErrorInvalidDiskImage:
-		return "VZErrorInvalidDiskImage"
-	case VZErrorVirtualMachineLimitExceeded:
-		return "VZErrorVirtualMachineLimitExceeded"
-	case VZErrorNetworkError:
-		return "VZErrorNetworkError"
-	case VZErrorOutOfDiskSpace:
-		return "VZErrorOutOfDiskSpace"
-	case VZErrorOperationCancelled:
-		return "VZErrorOperationCancelled"
-	case VZErrorNotSupported:
-		return "VZErrorNotSupported"
-	case VZErrorSave:
-		return "VZErrorSave"
-	case VZErrorRestore:
-		return "VZErrorRestore"
-	case VZErrorRestoreImageCatalogLoadFailed:
-		return "VZErrorRestoreImageCatalogLoadFailed"
-	case VZErrorInvalidRestoreImageCatalog:
-		return "VZErrorInvalidRestoreImageCatalog"
-	case VZErrorNoSupportedRestoreImagesInCatalog:
-		return "VZErrorNoSupportedRestoreImagesInCatalog"
-	case VZErrorRestoreImageLoadFailed:
-		return "VZErrorRestoreImageLoadFailed"
-	case VZErrorInvalidRestoreImage:
-		return "VZErrorInvalidRestoreImage"
-	case VZErrorInstallationRequiresUpdate:
-		return "VZErrorInstallationRequiresUpdate"
-	case VZErrorInstallationFailed:
-		return "VZErrorInstallationFailed"
-	case VZErrorNetworkBlockDeviceNegotiationFailed:
-		return "VZErrorNetworkBlockDeviceNegotiationFailed"
-	case VZErrorNetworkBlockDeviceDisconnected:
-		return "VZErrorNetworkBlockDeviceDisconnected"
-	case VZErrorUSBControllerNotFound:
-		return "VZErrorUSBControllerNotFound"
-	case VZErrorDeviceAlreadyAttached:
-		return "VZErrorDeviceAlreadyAttached"
-	case VZErrorDeviceInitializationFailure:
-		return "VZErrorDeviceInitializationFailure"
-	case VZErrorDeviceNotFound:
-		return "VZErrorDeviceNotFound"
+	case ErrorInternal:
+		return "ErrorInternal"
+	case ErrorInvalidVirtualMachineConfiguration:
+		return "ErrorInvalidVirtualMachineConfiguration"
+	case ErrorInvalidVirtualMachineState:
+		return "ErrorInvalidVirtualMachineState"
+	case ErrorInvalidVirtualMachineStateTransition:
+		return "ErrorInvalidVirtualMachineStateTransition"
+	case ErrorInvalidDiskImage:
+		return "ErrorInvalidDiskImage"
+	case ErrorVirtualMachineLimitExceeded:
+		return "ErrorVirtualMachineLimitExceeded"
+	case ErrorNetworkError:
+		return "ErrorNetworkError"
+	case ErrorOutOfDiskSpace:
+		return "ErrorOutOfDiskSpace"
+	case ErrorOperationCancelled:
+		return "ErrorOperationCancelled"
+	case ErrorNotSupported:
+		return "ErrorNotSupported"
+	case ErrorSave:
+		return "ErrorSave"
+	case ErrorRestore:
+		return "ErrorRestore"
+	case ErrorRestoreImageCatalogLoadFailed:
+		return "ErrorRestoreImageCatalogLoadFailed"
+	case ErrorInvalidRestoreImageCatalog:
+		return "ErrorInvalidRestoreImageCatalog"
+	case ErrorNoSupportedRestoreImagesInCatalog:
+		return "ErrorNoSupportedRestoreImagesInCatalog"
+	case ErrorRestoreImageLoadFailed:
+		return "ErrorRestoreImageLoadFailed"
+	case ErrorInvalidRestoreImage:
+		return "ErrorInvalidRestoreImage"
+	case ErrorInstallationRequiresUpdate:
+		return "ErrorInstallationRequiresUpdate"
+	case ErrorInstallationFailed:
+		return "ErrorInstallationFailed"
+	case ErrorNetworkBlockDeviceNegotiationFailed:
+		return "ErrorNetworkBlockDeviceNegotiationFailed"
+	case ErrorNetworkBlockDeviceDisconnected:
+		return "ErrorNetworkBlockDeviceDisconnected"
+	case ErrorUSBControllerNotFound:
+		return "ErrorUSBControllerNotFound"
+	case ErrorDeviceAlreadyAttached:
+		return "ErrorDeviceAlreadyAttached"
+	case ErrorDeviceInitializationFailure:
+		return "ErrorDeviceInitializationFailure"
+	case ErrorDeviceNotFound:
+		return "ErrorDeviceNotFound"
 	default:
-		return fmt.Sprintf("VZErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }
 
 // Constants that describe the availability and installation status of Rosetta.
-type VZLinuxRosettaAvailability int64
+type LinuxRosettaAvailability int64
 
 const (
 	// The current hardware or software configuration doesn’t support Rosetta.
-	VZLinuxRosettaAvailabilityNotSupported VZLinuxRosettaAvailability = 0
+	LinuxRosettaAvailabilityNotSupported LinuxRosettaAvailability = 0
 	// Rosetta isn’t installed.
-	VZLinuxRosettaAvailabilityNotInstalled VZLinuxRosettaAvailability = 1
+	LinuxRosettaAvailabilityNotInstalled LinuxRosettaAvailability = 1
 	// Rosetta is available on the host system.
-	VZLinuxRosettaAvailabilityInstalled VZLinuxRosettaAvailability = 2
+	LinuxRosettaAvailabilityInstalled LinuxRosettaAvailability = 2
 )
 
-func (e VZLinuxRosettaAvailability) String() string {
+func (e LinuxRosettaAvailability) String() string {
 	switch e {
-	case VZLinuxRosettaAvailabilityNotSupported:
-		return "VZLinuxRosettaAvailabilityNotSupported"
-	case VZLinuxRosettaAvailabilityNotInstalled:
-		return "VZLinuxRosettaAvailabilityNotInstalled"
-	case VZLinuxRosettaAvailabilityInstalled:
-		return "VZLinuxRosettaAvailabilityInstalled"
+	case LinuxRosettaAvailabilityNotSupported:
+		return "LinuxRosettaAvailabilityNotSupported"
+	case LinuxRosettaAvailabilityNotInstalled:
+		return "LinuxRosettaAvailabilityNotInstalled"
+	case LinuxRosettaAvailabilityInstalled:
+		return "LinuxRosettaAvailabilityInstalled"
 	default:
-		return fmt.Sprintf("VZLinuxRosettaAvailability(%d)", int64(e))
+		return fmt.Sprintf("LinuxRosettaAvailability(%d)", int64(e))
 	}
 }
 
 // Options you can set when creating new auxiliary storage.
 // Bitmask — values may be combined with |.
-type VZMacAuxiliaryStorageInitializationOptions uint64
+type MacAuxiliaryStorageInitializationOptions uint64
 
 const (
 	// Overwrite an existing auxiliary storage.
-	VZMacAuxiliaryStorageInitializationOptionAllowOverwrite VZMacAuxiliaryStorageInitializationOptions = 1
+	MacAuxiliaryStorageInitializationOptionAllowOverwrite MacAuxiliaryStorageInitializationOptions = 1
 )
 
-func (e VZMacAuxiliaryStorageInitializationOptions) String() string {
+func (e MacAuxiliaryStorageInitializationOptions) String() string {
 	var parts []string
-	if e&VZMacAuxiliaryStorageInitializationOptionAllowOverwrite != 0 {
-		parts = append(parts, "VZMacAuxiliaryStorageInitializationOptionAllowOverwrite")
+	if e&MacAuxiliaryStorageInitializationOptionAllowOverwrite != 0 {
+		parts = append(parts, "MacAuxiliaryStorageInitializationOptionAllowOverwrite")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -233,54 +233,54 @@ func (e VZMacAuxiliaryStorageInitializationOptions) String() string {
 }
 
 // The execution states of the VM.
-type VZVirtualMachineState int64
+type VirtualMachineState int64
 
 const (
 	// Initial state before the virtual machine is started.
-	VZVirtualMachineStateStopped VZVirtualMachineState = 0
+	VirtualMachineStateStopped VirtualMachineState = 0
 	// Running virtual machine.
-	VZVirtualMachineStateRunning VZVirtualMachineState = 1
+	VirtualMachineStateRunning VirtualMachineState = 1
 	// A started virtual machine is paused. This state can only be transitioned from VZVirtualMachineStatePausing.
-	VZVirtualMachineStatePaused VZVirtualMachineState = 2
+	VirtualMachineStatePaused VirtualMachineState = 2
 	// The virtual machine has encountered an internal error.
-	VZVirtualMachineStateError VZVirtualMachineState = 3
+	VirtualMachineStateError VirtualMachineState = 3
 	// The virtual machine is configuring the hardware and starting.
-	VZVirtualMachineStateStarting VZVirtualMachineState = 4
+	VirtualMachineStateStarting VirtualMachineState = 4
 	// The virtual machine is being paused. This is the intermediate state between VZVirtualMachineStateRunning and VZVirtualMachineStatePaused.
-	VZVirtualMachineStatePausing VZVirtualMachineState = 5
+	VirtualMachineStatePausing VirtualMachineState = 5
 	// The virtual machine is being resumed. This is the intermediate state between VZVirtualMachineStatePaused and VZVirtualMachineStateRunning.
-	VZVirtualMachineStateResuming VZVirtualMachineState = 6
+	VirtualMachineStateResuming VirtualMachineState = 6
 	// The virtual machine is being stopped. This is the intermediate state between VZVirtualMachineStateRunning and VZVirtualMachineStateStop.
-	VZVirtualMachineStateStopping VZVirtualMachineState = 7
+	VirtualMachineStateStopping VirtualMachineState = 7
 	// The virtual machine is being saved. This is the intermediate state between VZVirtualMachineStatePaused and VZVirtualMachineStatePaused.
-	VZVirtualMachineStateSaving VZVirtualMachineState = 8
+	VirtualMachineStateSaving VirtualMachineState = 8
 	// The virtual machine is being restored. This is the intermediate state between VZVirtualMachineStateStopped and either VZVirtualMachineStatePaused on success or VZVirtualMachineStateStopped on failure.
-	VZVirtualMachineStateRestoring VZVirtualMachineState = 9
+	VirtualMachineStateRestoring VirtualMachineState = 9
 )
 
-func (e VZVirtualMachineState) String() string {
+func (e VirtualMachineState) String() string {
 	switch e {
-	case VZVirtualMachineStateStopped:
-		return "VZVirtualMachineStateStopped"
-	case VZVirtualMachineStateRunning:
-		return "VZVirtualMachineStateRunning"
-	case VZVirtualMachineStatePaused:
-		return "VZVirtualMachineStatePaused"
-	case VZVirtualMachineStateError:
-		return "VZVirtualMachineStateError"
-	case VZVirtualMachineStateStarting:
-		return "VZVirtualMachineStateStarting"
-	case VZVirtualMachineStatePausing:
-		return "VZVirtualMachineStatePausing"
-	case VZVirtualMachineStateResuming:
-		return "VZVirtualMachineStateResuming"
-	case VZVirtualMachineStateStopping:
-		return "VZVirtualMachineStateStopping"
-	case VZVirtualMachineStateSaving:
-		return "VZVirtualMachineStateSaving"
-	case VZVirtualMachineStateRestoring:
-		return "VZVirtualMachineStateRestoring"
+	case VirtualMachineStateStopped:
+		return "VirtualMachineStateStopped"
+	case VirtualMachineStateRunning:
+		return "VirtualMachineStateRunning"
+	case VirtualMachineStatePaused:
+		return "VirtualMachineStatePaused"
+	case VirtualMachineStateError:
+		return "VirtualMachineStateError"
+	case VirtualMachineStateStarting:
+		return "VirtualMachineStateStarting"
+	case VirtualMachineStatePausing:
+		return "VirtualMachineStatePausing"
+	case VirtualMachineStateResuming:
+		return "VirtualMachineStateResuming"
+	case VirtualMachineStateStopping:
+		return "VirtualMachineStateStopping"
+	case VirtualMachineStateSaving:
+		return "VirtualMachineStateSaving"
+	case VirtualMachineStateRestoring:
+		return "VirtualMachineStateRestoring"
 	default:
-		return fmt.Sprintf("VZVirtualMachineState(%d)", int64(e))
+		return fmt.Sprintf("VirtualMachineState(%d)", int64(e))
 	}
 }

@@ -5,71 +5,91 @@
 package pdfkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // PDFActionGoTo, a subclass of PDFAction, defines methods for getting and setting the destination of a go-to action.
 //
-// ActionGoTo wraps [raw.PDFActionGoTo] with a fluent Go API.
+// ActionGoTo is an idiomatic wrapper over the Objective-C class PDFActionGoTo.
 type ActionGoTo struct {
-	inner *raw.PDFActionGoTo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PDFActionGoTo].
-func (x *ActionGoTo) Unwrap() *raw.PDFActionGoTo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ActionGoTo) ID() objc.ID { return x.inner.Ptr() }
-
-// ActionGoToFromID adopts an existing object pointer as a ActionGoTo (nil for 0).
+// ActionGoToFromID adopts an existing Objective-C object as a ActionGoTo
+// (nil for 0), retaining it and registering a release finalizer.
 func ActionGoToFromID(id objc.ID) *ActionGoTo {
 	if id == 0 {
 		return nil
 	}
-	return &ActionGoTo{inner: raw.PDFActionGoToFromID(id)}
+	x := &ActionGoTo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// actionGoToAdopt wraps an Objective-C object that this code just created as a
+// ActionGoTo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func actionGoToAdopt(id objc.ID) *ActionGoTo {
+	if id == 0 {
+		return nil
+	}
+	x := &ActionGoTo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ActionGoTo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ActionGoTo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ActionGoTo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes the go-to action.
 //
-// NewActionGoToWithDestination creates a new [ActionGoTo].
-func NewActionGoToWithDestination(destination *raw.PDFDestination) *ActionGoTo {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFActionGoTo")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestination:"), destination.Ptr())
-	return &ActionGoTo{inner: raw.PDFActionGoToFromID(_id)}
+// NewActionGoToWithDestination creates a new ActionGoTo.
+func NewActionGoToWithDestination(destination *Destination) *ActionGoTo {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFActionGoTo")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestination:"), objref.IDOf(destination))
+	return actionGoToAdopt(_id)
 }
 
 // Returns the destination associated with the action.
 //
-// WithDestination sets the destination property and returns the receiver for chaining.
+// WithDestination sets destination and returns the receiver so calls can be chained.
 func (x *ActionGoTo) WithDestination(destination *Destination) *ActionGoTo {
-	x.inner.SetDestination(destination.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return x
 }
 
-// Destination calls the underlying Destination.
 func (x *ActionGoTo) Destination() *Destination {
-	_r := x.inner.Destination()
-	if _r == nil {
-		return nil
-	}
-	return &Destination{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destination"))
+	return DestinationFromID(_r)
 }
 
-// SetDestination calls the underlying SetDestination.
-func (x *ActionGoTo) SetDestination(destination *raw.PDFDestination) {
-	x.inner.SetDestination(destination)
+func (x *ActionGoTo) SetDestination(destination *Destination) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 }
-
-func (x *ActionGoTo) asAction() *raw.PDFAction { return &x.inner.PDFAction }
 
 // ActionGoToable is the interface implemented by [ActionGoTo], for mocking and DI.
 type ActionGoToable interface {
-	Unwrap() *raw.PDFActionGoTo
+	obj.Object
 	WithDestination(destination *Destination) *ActionGoTo
 	Destination() *Destination
-	SetDestination(destination *raw.PDFDestination)
+	SetDestination(destination *Destination)
 }
 
 var _ ActionGoToable = (*ActionGoTo)(nil)

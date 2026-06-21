@@ -5,102 +5,82 @@
 package gameplaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A data structure for organizing objects based on their locations in a three-dimensional space.
 //
-// Octree wraps [raw.GKOctree] with a fluent Go API.
+// Octree is an idiomatic wrapper over the Objective-C class GKOctree.
 type Octree struct {
-	inner *raw.GKOctree[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKOctree].
-func (x *Octree) Unwrap() *raw.GKOctree[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Octree) ID() objc.ID { return x.inner.Ptr() }
-
-// OctreeFromID adopts an existing object pointer as a Octree (nil for 0).
+// OctreeFromID adopts an existing Objective-C object as a Octree
+// (nil for 0), retaining it and registering a release finalizer.
 func OctreeFromID(id objc.ID) *Octree {
 	if id == 0 {
 		return nil
 	}
-	return &Octree{inner: raw.GKOctreeFromID[objc.ID](id)}
+	x := &Octree{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes an octree with the specified dimensions.
-//
-// NewOctreeWithBoundingBoxMinimumCellSize creates a new [Octree].
-func NewOctreeWithBoundingBoxMinimumCellSize(box raw.GKBox, minCellSize float32) *Octree {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKOctree")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBoundingBox:minimumCellSize:"), box, minCellSize)
-	return &Octree{inner: raw.GKOctreeFromID[objc.ID](_id)}
-}
-
-// Adds an object to the tree corresponding to the specified point in 3D space.
-//
-// AddElementWithPoint calls the underlying AddElementWithPoint.
-func (x *Octree) AddElementWithPoint(element objc.ID, point unsafe.Pointer) *OctreeNode {
-	_r := x.inner.AddElementWithPoint(element, point)
-	if _r == nil {
+// octreeAdopt wraps an Objective-C object that this code just created as a
+// Octree (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func octreeAdopt(id objc.ID) *Octree {
+	if id == 0 {
 		return nil
 	}
-	return &OctreeNode{inner: _r}
+	x := &Octree{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Adds an object to the tree corresponding to the specified volume of 3D space.
-//
-// AddElementWithBox calls the underlying AddElementWithBox.
-func (x *Octree) AddElementWithBox(element objc.ID, box raw.GKBox) *OctreeNode {
-	_r := x.inner.AddElementWithBox(element, box)
-	if _r == nil {
-		return nil
-	}
-	return &OctreeNode{inner: _r}
+// Description returns the object's -description text.
+func (x *Octree) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns all objects whose corresponding locations overlap the specified point.
-//
-// ElementsAtPoint calls the underlying ElementsAtPoint.
-func (x *Octree) ElementsAtPoint(point unsafe.Pointer) *foundation.NSArray[objc.ID] {
-	return x.inner.ElementsAtPoint(point)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Octree) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Returns all objects whose corresponding locations overlap the specified volume.
-//
-// ElementsInBox calls the underlying ElementsInBox.
-func (x *Octree) ElementsInBox(box raw.GKBox) *foundation.NSArray[objc.ID] {
-	return x.inner.ElementsInBox(box)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Octree) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewOctree creates a new Octree.
+func NewOctree() *Octree {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKOctree")), objc.RegisterName("new"))
+	return octreeAdopt(_id)
 }
 
 // Searches for the specified object and removes it from the tree.
-//
-// RemoveElement calls the underlying RemoveElement.
-func (x *Octree) RemoveElement(element objc.ID) bool {
-	return x.inner.RemoveElement(element)
+func (x *Octree) RemoveElement(element obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeElement:"), objref.IDOf(element))
+	return _r
 }
 
 // Removes the specified object from the tree, using a reference to its containing node.
-//
-// RemoveElementWithNode calls the underlying RemoveElementWithNode.
-func (x *Octree) RemoveElementWithNode(element objc.ID, node *raw.GKOctreeNode) bool {
-	return x.inner.RemoveElementWithNode(element, node)
+func (x *Octree) RemoveElementWithNode(element obj.Object, node *OctreeNode) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeElement:withNode:"), objref.IDOf(element), objref.IDOf(node))
+	return _r
 }
 
 // Octreeable is the interface implemented by [Octree], for mocking and DI.
 type Octreeable interface {
-	Unwrap() *raw.GKOctree[objc.ID]
-	AddElementWithPoint(element objc.ID, point unsafe.Pointer) *OctreeNode
-	AddElementWithBox(element objc.ID, box raw.GKBox) *OctreeNode
-	ElementsAtPoint(point unsafe.Pointer) *foundation.NSArray[objc.ID]
-	ElementsInBox(box raw.GKBox) *foundation.NSArray[objc.ID]
-	RemoveElement(element objc.ID) bool
-	RemoveElementWithNode(element objc.ID, node *raw.GKOctreeNode) bool
+	obj.Object
+	RemoveElement(element obj.Object) bool
+	RemoveElementWithNode(element obj.Object, node *OctreeNode) bool
 }
 
 var _ Octreeable = (*Octree)(nil)

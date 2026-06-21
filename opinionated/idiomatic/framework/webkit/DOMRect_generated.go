@@ -5,79 +5,86 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMRect wraps [raw.DOMRect] with a fluent Go API.
+// DOMRect is an idiomatic wrapper over the Objective-C class DOMRect.
 type DOMRect struct {
-	inner *raw.DOMRect
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMRect].
-func (x *DOMRect) Unwrap() *raw.DOMRect { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMRect) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMRectFromID adopts an existing object pointer as a DOMRect (nil for 0).
+// DOMRectFromID adopts an existing Objective-C object as a DOMRect
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMRectFromID(id objc.ID) *DOMRect {
 	if id == 0 {
 		return nil
 	}
-	return &DOMRect{inner: raw.DOMRectFromID(id)}
+	x := &DOMRect{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDOMRect creates a new [DOMRect].
+// dOMRectAdopt wraps an Objective-C object that this code just created as a
+// DOMRect (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMRectAdopt(id objc.ID) *DOMRect {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMRect{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DOMRect) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMRect) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMRect) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMRect creates a new DOMRect.
 func NewDOMRect() *DOMRect {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMRect")), objc.RegisterName("new"))
-	return &DOMRect{inner: raw.DOMRectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMRect")), objc.RegisterName("new"))
+	return dOMRectAdopt(_id)
 }
 
-// Top calls the underlying Top.
 func (x *DOMRect) Top() *DOMCSSPrimitiveValue {
-	_r := x.inner.Top()
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSPrimitiveValue{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("top"))
+	return DOMCSSPrimitiveValueFromID(_r)
 }
 
-// Right calls the underlying Right.
 func (x *DOMRect) Right() *DOMCSSPrimitiveValue {
-	_r := x.inner.Right()
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSPrimitiveValue{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("right"))
+	return DOMCSSPrimitiveValueFromID(_r)
 }
 
-// Bottom calls the underlying Bottom.
 func (x *DOMRect) Bottom() *DOMCSSPrimitiveValue {
-	_r := x.inner.Bottom()
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSPrimitiveValue{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bottom"))
+	return DOMCSSPrimitiveValueFromID(_r)
 }
 
-// Left calls the underlying Left.
 func (x *DOMRect) Left() *DOMCSSPrimitiveValue {
-	_r := x.inner.Left()
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSPrimitiveValue{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("left"))
+	return DOMCSSPrimitiveValueFromID(_r)
 }
-
-func (x *DOMRect) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
-
-func (x *DOMRect) asWebScriptObject() *raw.WebScriptObject { return &x.inner.DOMObject.WebScriptObject }
 
 // DOMRectable is the interface implemented by [DOMRect], for mocking and DI.
 type DOMRectable interface {
-	Unwrap() *raw.DOMRect
+	obj.Object
 	Top() *DOMCSSPrimitiveValue
 	Right() *DOMCSSPrimitiveValue
 	Bottom() *DOMCSSPrimitiveValue

@@ -5,109 +5,100 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that manages the sync engine’s state.
 //
-// SyncEngineState wraps [raw.CKSyncEngineState] with a fluent Go API.
+// SyncEngineState is an idiomatic wrapper over the Objective-C class CKSyncEngineState.
 type SyncEngineState struct {
-	inner *raw.CKSyncEngineState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineState].
-func (x *SyncEngineState) Unwrap() *raw.CKSyncEngineState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineState) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineStateFromID adopts an existing object pointer as a SyncEngineState (nil for 0).
+// SyncEngineStateFromID adopts an existing Objective-C object as a SyncEngineState
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineStateFromID(id objc.ID) *SyncEngineState {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineState{inner: raw.CKSyncEngineStateFromID(id)}
+	x := &SyncEngineState{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSyncEngineState creates a new [SyncEngineState].
+// syncEngineStateAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineStateAdopt(id objc.ID) *SyncEngineState {
+	if id == 0 {
+		return nil
+	}
+	x := &SyncEngineState{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SyncEngineState) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEngineState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEngineState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSyncEngineState creates a new SyncEngineState.
 func NewSyncEngineState() *SyncEngineState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineState")), objc.RegisterName("new"))
-	return &SyncEngineState{inner: raw.CKSyncEngineStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineState")), objc.RegisterName("new"))
+	return syncEngineStateAdopt(_id)
 }
 
 // A Boolean value that indicates whether there are pending changes that the sync engine is unaware of.
 //
-// WithHasPendingUntrackedChanges sets the hasPendingUntrackedChanges property and returns the receiver for chaining.
+// WithHasPendingUntrackedChanges sets hasPendingUntrackedChanges and returns the receiver so calls can be chained.
 func (x *SyncEngineState) WithHasPendingUntrackedChanges(hasPendingUntrackedChanges bool) *SyncEngineState {
-	x.inner.SetHasPendingUntrackedChanges(hasPendingUntrackedChanges)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasPendingUntrackedChanges:"), hasPendingUntrackedChanges)
 	return x
 }
 
 // Adds the specified record zone changes to the state.
-//
-// AddPendingRecordZoneChanges calls the underlying AddPendingRecordZoneChanges.
-func (x *SyncEngineState) AddPendingRecordZoneChanges(changes *foundation.NSArray[*raw.CKSyncEnginePendingRecordZoneChange]) {
-	x.inner.AddPendingRecordZoneChanges(changes)
+func (x *SyncEngineState) AddPendingRecordZoneChanges(changes []*SyncEnginePendingRecordZoneChange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addPendingRecordZoneChanges:"), purego.SliceToNSArray(changes, func(_v *SyncEnginePendingRecordZoneChange) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Removes the specified record zone changes from the state.
-//
-// RemovePendingRecordZoneChanges calls the underlying RemovePendingRecordZoneChanges.
-func (x *SyncEngineState) RemovePendingRecordZoneChanges(changes *foundation.NSArray[*raw.CKSyncEnginePendingRecordZoneChange]) {
-	x.inner.RemovePendingRecordZoneChanges(changes)
+func (x *SyncEngineState) RemovePendingRecordZoneChanges(changes []*SyncEnginePendingRecordZoneChange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removePendingRecordZoneChanges:"), purego.SliceToNSArray(changes, func(_v *SyncEnginePendingRecordZoneChange) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Adds the specified database changes to the state.
-//
-// AddPendingDatabaseChanges calls the underlying AddPendingDatabaseChanges.
-func (x *SyncEngineState) AddPendingDatabaseChanges(changes ...SyncEnginePendingDatabaseChangeProvider) {
-	_ptrs := make([]objc.ID, len(changes))
-	for _i, _v := range changes {
-		_ptrs[_i] = _v.asSyncEnginePendingDatabaseChange().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.CKSyncEnginePendingDatabaseChange]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.CKSyncEnginePendingDatabaseChange](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.CKSyncEnginePendingDatabaseChange](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.AddPendingDatabaseChanges(_arg0)
+func (x *SyncEngineState) AddPendingDatabaseChanges(changes []*SyncEnginePendingDatabaseChange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addPendingDatabaseChanges:"), purego.SliceToNSArray(changes, func(_v *SyncEnginePendingDatabaseChange) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Removes the specified database changes from the state.
-//
-// RemovePendingDatabaseChanges calls the underlying RemovePendingDatabaseChanges.
-func (x *SyncEngineState) RemovePendingDatabaseChanges(changes ...SyncEnginePendingDatabaseChangeProvider) {
-	_ptrs := make([]objc.ID, len(changes))
-	for _i, _v := range changes {
-		_ptrs[_i] = _v.asSyncEnginePendingDatabaseChange().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.CKSyncEnginePendingDatabaseChange]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.CKSyncEnginePendingDatabaseChange](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.CKSyncEnginePendingDatabaseChange](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.RemovePendingDatabaseChanges(_arg0)
+func (x *SyncEngineState) RemovePendingDatabaseChanges(changes []*SyncEnginePendingDatabaseChange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removePendingDatabaseChanges:"), purego.SliceToNSArray(changes, func(_v *SyncEnginePendingDatabaseChange) objc.ID { return objref.IDOf(_v) }))
 }
 
 // A list of record zone changes that the sync engine has yet to send to the iCloud servers. This array contains any pending record zone changes to send to the iCloud servers. After the sync engine sends those changes, your app's sync delegate receives an event of type “CKSyncEngineSentRecordZoneChangesEvent“. The sync engine keeps this list up-to-date while sending changes to the server. For example, when it successfully saves a record, it removes that change from this list. If it fails to send a change due to some retryable error (e.g. a network failure), it keeps that change in this list. Use the “CKSyncEngineState/addPendingRecordZoneChanges:“ and “CKSyncEngineState/removePendingRecordZoneChanges:“ methods to modify the array's contents.
 //
 // PendingRecordZoneChanges returns the collection as a Go slice.
 func (x *SyncEngineState) PendingRecordZoneChanges() []*SyncEnginePendingRecordZoneChange {
-	arr := x.inner.PendingRecordZoneChanges()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SyncEnginePendingRecordZoneChange {
-		return &SyncEnginePendingRecordZoneChange{inner: raw.CKSyncEnginePendingRecordZoneChangeFromID(purego.Retain(_id))}
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pendingRecordZoneChanges"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SyncEnginePendingRecordZoneChange {
+		return SyncEnginePendingRecordZoneChangeFromID(_id)
 	})
 }
 
@@ -115,48 +106,36 @@ func (x *SyncEngineState) PendingRecordZoneChanges() []*SyncEnginePendingRecordZ
 //
 // PendingDatabaseChanges returns the collection as a Go slice.
 func (x *SyncEngineState) PendingDatabaseChanges() []*SyncEnginePendingDatabaseChange {
-	arr := x.inner.PendingDatabaseChanges()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SyncEnginePendingDatabaseChange {
-		return &SyncEnginePendingDatabaseChange{inner: raw.CKSyncEnginePendingDatabaseChangeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pendingDatabaseChanges"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SyncEnginePendingDatabaseChange { return SyncEnginePendingDatabaseChangeFromID(_id) })
 }
 
 // A Boolean value that indicates whether there are pending changes that the sync engine is unaware of. Use this property to inform the sync engine that there are pending changes other than those available in “CKSyncEngineState/pendingRecordZoneChanges“. After you set this property, the sync engine automatically schedules a send operation and, when that operation executes, asks your delegate to provide those changes by invoking the “CKSyncEngineDelegate/syncEngine:nextRecordZoneChangeBatchForContext:“ method. Using this property is optional and is necessary only if you track pending changes manually, outside of the sync engine's state.
-//
-// HasPendingUntrackedChanges calls the underlying HasPendingUntrackedChanges.
 func (x *SyncEngineState) HasPendingUntrackedChanges() bool {
-	return x.inner.HasPendingUntrackedChanges()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasPendingUntrackedChanges"))
+	return _r
 }
 
-// SetHasPendingUntrackedChanges calls the underlying SetHasPendingUntrackedChanges.
 func (x *SyncEngineState) SetHasPendingUntrackedChanges(hasPendingUntrackedChanges bool) {
-	x.inner.SetHasPendingUntrackedChanges(hasPendingUntrackedChanges)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasPendingUntrackedChanges:"), hasPendingUntrackedChanges)
 }
 
 // The identifiers of zones with changes on the server that have not yet been fetched. The sync engine populates this list automatically, for example when receiving a push notification indicating new changes.
 //
 // ZoneIDsWithUnfetchedServerChanges returns the collection as a Go slice.
 func (x *SyncEngineState) ZoneIDsWithUnfetchedServerChanges() []*RecordZoneID {
-	arr := x.inner.ZoneIDsWithUnfetchedServerChanges()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordZoneID {
-		return &RecordZoneID{inner: raw.CKRecordZoneIDFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneIDsWithUnfetchedServerChanges"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }
 
 // SyncEngineStateable is the interface implemented by [SyncEngineState], for mocking and DI.
 type SyncEngineStateable interface {
-	Unwrap() *raw.CKSyncEngineState
+	obj.Object
 	WithHasPendingUntrackedChanges(hasPendingUntrackedChanges bool) *SyncEngineState
-	AddPendingRecordZoneChanges(changes *foundation.NSArray[*raw.CKSyncEnginePendingRecordZoneChange])
-	RemovePendingRecordZoneChanges(changes *foundation.NSArray[*raw.CKSyncEnginePendingRecordZoneChange])
-	AddPendingDatabaseChanges(changes ...SyncEnginePendingDatabaseChangeProvider)
-	RemovePendingDatabaseChanges(changes ...SyncEnginePendingDatabaseChangeProvider)
+	AddPendingRecordZoneChanges(changes []*SyncEnginePendingRecordZoneChange)
+	RemovePendingRecordZoneChanges(changes []*SyncEnginePendingRecordZoneChange)
+	AddPendingDatabaseChanges(changes []*SyncEnginePendingDatabaseChange)
+	RemovePendingDatabaseChanges(changes []*SyncEnginePendingDatabaseChange)
 	PendingRecordZoneChanges() []*SyncEnginePendingRecordZoneChange
 	PendingDatabaseChanges() []*SyncEnginePendingDatabaseChange
 	HasPendingUntrackedChanges() bool

@@ -6,189 +6,162 @@ package cloudkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An operation that modifies one or more record zones.
 //
-// ModifyRecordZonesOperation wraps [raw.CKModifyRecordZonesOperation] with a fluent Go API.
+// ModifyRecordZonesOperation is an idiomatic wrapper over the Objective-C class CKModifyRecordZonesOperation.
 type ModifyRecordZonesOperation struct {
-	inner *raw.CKModifyRecordZonesOperation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKModifyRecordZonesOperation].
-func (x *ModifyRecordZonesOperation) Unwrap() *raw.CKModifyRecordZonesOperation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ModifyRecordZonesOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// ModifyRecordZonesOperationFromID adopts an existing object pointer as a ModifyRecordZonesOperation (nil for 0).
+// ModifyRecordZonesOperationFromID adopts an existing Objective-C object as a ModifyRecordZonesOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func ModifyRecordZonesOperationFromID(id objc.ID) *ModifyRecordZonesOperation {
 	if id == 0 {
 		return nil
 	}
-	return &ModifyRecordZonesOperation{inner: raw.CKModifyRecordZonesOperationFromID(id)}
+	x := &ModifyRecordZonesOperation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewModifyRecordZonesOperation creates a new [ModifyRecordZonesOperation].
+// modifyRecordZonesOperationAdopt wraps an Objective-C object that this code just created as a
+// ModifyRecordZonesOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func modifyRecordZonesOperationAdopt(id objc.ID) *ModifyRecordZonesOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &ModifyRecordZonesOperation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ModifyRecordZonesOperation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ModifyRecordZonesOperation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ModifyRecordZonesOperation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewModifyRecordZonesOperation creates a new ModifyRecordZonesOperation.
 func NewModifyRecordZonesOperation() *ModifyRecordZonesOperation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKModifyRecordZonesOperation")), objc.RegisterName("new"))
-	return &ModifyRecordZonesOperation{inner: raw.CKModifyRecordZonesOperationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKModifyRecordZonesOperation")), objc.RegisterName("new"))
+	return modifyRecordZonesOperationAdopt(_id)
 }
 
 // Creates an operation for modifying the specified record zones.
 //
-// NewModifyRecordZonesOperationWithRecordZonesToSaveRecordZoneIDsToDelete creates a new [ModifyRecordZonesOperation].
-func NewModifyRecordZonesOperationWithRecordZonesToSaveRecordZoneIDsToDelete(recordZonesToSave *foundation.NSArray[*raw.CKRecordZone], recordZoneIDsToDelete *foundation.NSArray[*raw.CKRecordZoneID]) *ModifyRecordZonesOperation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKModifyRecordZonesOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordZonesToSave:recordZoneIDsToDelete:"), recordZonesToSave.Ptr(), recordZoneIDsToDelete.Ptr())
-	return &ModifyRecordZonesOperation{inner: raw.CKModifyRecordZonesOperationFromID(_id)}
+// NewModifyRecordZonesOperationWithRecordZonesToSaveRecordZoneIDsToDelete creates a new ModifyRecordZonesOperation.
+func NewModifyRecordZonesOperationWithRecordZonesToSaveRecordZoneIDsToDelete(recordZonesToSave []*RecordZone, recordZoneIDsToDelete []*RecordZoneID) *ModifyRecordZonesOperation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKModifyRecordZonesOperation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordZonesToSave:recordZoneIDsToDelete:"), purego.SliceToNSArray(recordZonesToSave, func(_v *RecordZone) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(recordZoneIDsToDelete, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) }))
+	return modifyRecordZonesOperationAdopt(_id)
 }
 
 // The record zones to save to the database.
 //
-// WithRecordZonesToSave sets the collection, converting the Go slice to an NSArray.
-func (x *ModifyRecordZonesOperation) WithRecordZonesToSave(items ...*raw.CKRecordZone) *ModifyRecordZonesOperation {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetRecordZonesToSave(foundation.NSArrayFromID[*raw.CKRecordZone](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CKRecordZone](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetRecordZonesToSave(_arr)
+// WithRecordZonesToSave sets the collection and returns the receiver so calls can be chained.
+func (x *ModifyRecordZonesOperation) WithRecordZonesToSave(items ...*RecordZone) *ModifyRecordZonesOperation {
+	_arr := purego.SliceToNSArray(items, func(_v *RecordZone) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZonesToSave:"), _arr)
 	return x
 }
 
 // The IDs of the record zones to delete permanently from the database.
 //
-// WithRecordZoneIDsToDelete sets the collection, converting the Go slice to an NSArray.
-func (x *ModifyRecordZonesOperation) WithRecordZoneIDsToDelete(items ...*raw.CKRecordZoneID) *ModifyRecordZonesOperation {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetRecordZoneIDsToDelete(foundation.NSArrayFromID[*raw.CKRecordZoneID](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CKRecordZoneID](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetRecordZoneIDsToDelete(_arr)
-	return x
-}
-
-// The closure to execute when CloudKit saves a record zone.
-//
-// WithPerRecordZoneSaveBlock sets the perRecordZoneSaveBlock property and returns the receiver for chaining.
-func (x *ModifyRecordZonesOperation) WithPerRecordZoneSaveBlock(perRecordZoneSaveBlock func(*raw.CKRecordZoneID, *raw.CKRecordZone, unsafe.Pointer)) *ModifyRecordZonesOperation {
-	x.inner.SetPerRecordZoneSaveBlock(perRecordZoneSaveBlock)
-	return x
-}
-
-// The closure to execute when CloudKit deletes a record zone.
-//
-// WithPerRecordZoneDeleteBlock sets the perRecordZoneDeleteBlock property and returns the receiver for chaining.
-func (x *ModifyRecordZonesOperation) WithPerRecordZoneDeleteBlock(perRecordZoneDeleteBlock func(*raw.CKRecordZoneID, unsafe.Pointer)) *ModifyRecordZonesOperation {
-	x.inner.SetPerRecordZoneDeleteBlock(perRecordZoneDeleteBlock)
-	return x
-}
-
-// The closure to execute after CloudKit modifies all of the record zones.
-//
-// WithModifyRecordZonesCompletionBlock sets the modifyRecordZonesCompletionBlock property and returns the receiver for chaining.
-func (x *ModifyRecordZonesOperation) WithModifyRecordZonesCompletionBlock(modifyRecordZonesCompletionBlock func(*foundation.NSArray[*raw.CKRecordZone], *foundation.NSArray[*raw.CKRecordZoneID], unsafe.Pointer)) *ModifyRecordZonesOperation {
-	x.inner.SetModifyRecordZonesCompletionBlock(modifyRecordZonesCompletionBlock)
+// WithRecordZoneIDsToDelete sets the collection and returns the receiver so calls can be chained.
+func (x *ModifyRecordZonesOperation) WithRecordZoneIDsToDelete(items ...*RecordZoneID) *ModifyRecordZonesOperation {
+	_arr := purego.SliceToNSArray(items, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneIDsToDelete:"), _arr)
 	return x
 }
 
 // The database that the operation uses.
 //
-// WithDatabase sets the database property and returns the receiver for chaining.
+// WithDatabase sets database and returns the receiver so calls can be chained.
 func (x *ModifyRecordZonesOperation) WithDatabase(database *Database) *ModifyRecordZonesOperation {
-	x.inner.CKDatabaseOperation.SetDatabase(database.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return x
 }
 
 // The operation’s configuration.
 //
-// WithConfiguration sets the configuration property and returns the receiver for chaining.
+// WithConfiguration sets configuration and returns the receiver so calls can be chained.
 func (x *ModifyRecordZonesOperation) WithConfiguration(configuration *OperationConfiguration) *ModifyRecordZonesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
 // The operation’s group.
 //
-// WithGroup sets the group property and returns the receiver for chaining.
+// WithGroup sets group and returns the receiver so calls can be chained.
 func (x *ModifyRecordZonesOperation) WithGroup(group *OperationGroup) *ModifyRecordZonesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
 // The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
-// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
 func (x *ModifyRecordZonesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *ModifyRecordZonesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+// The operation's container.
 //
-// WithContainer sets the container property and returns the receiver for chaining.
+// WithContainer sets container and returns the receiver so calls can be chained.
 func (x *ModifyRecordZonesOperation) WithContainer(container *Container) *ModifyRecordZonesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+// A Boolean value that indicates whether the operation can send data over the cellular network.
 //
-// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
 func (x *ModifyRecordZonesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *ModifyRecordZonesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
 // A Boolean value that indicates whether the operation is long-lived.
 //
-// WithLongLived sets the longLived property and returns the receiver for chaining.
+// WithLongLived sets longLived and returns the receiver so calls can be chained.
 func (x *ModifyRecordZonesOperation) WithLongLived(longLived bool) *ModifyRecordZonesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+// The timeout interval when waiting for additional data.
 //
-// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
 func (x *ModifyRecordZonesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifyRecordZonesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+// The maximum amount of time that a resource request can use.
 //
-// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
 func (x *ModifyRecordZonesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifyRecordZonesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
@@ -196,55 +169,24 @@ func (x *ModifyRecordZonesOperation) WithTimeoutIntervalForResource(timeoutInter
 //
 // RecordZonesToSave returns the collection as a Go slice.
 func (x *ModifyRecordZonesOperation) RecordZonesToSave() []*RecordZone {
-	arr := x.inner.RecordZonesToSave()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordZone {
-		return &RecordZone{inner: raw.CKRecordZoneFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordZonesToSave"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZone { return RecordZoneFromID(_id) })
 }
 
-// SetRecordZonesToSave calls the underlying SetRecordZonesToSave.
-func (x *ModifyRecordZonesOperation) SetRecordZonesToSave(recordZonesToSave *foundation.NSArray[*raw.CKRecordZone]) {
-	x.inner.SetRecordZonesToSave(recordZonesToSave)
+func (x *ModifyRecordZonesOperation) SetRecordZonesToSave(recordZonesToSave []*RecordZone) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZonesToSave:"), purego.SliceToNSArray(recordZonesToSave, func(_v *RecordZone) objc.ID { return objref.IDOf(_v) }))
 }
 
 // The IDs of the record zones to delete permanently from the database. The initial value of the property is the array of zone IDs that you provide to the “CKModifyRecordZonesOperation/init(recordZonesToSave:recordZoneIDsToDelete:)“ method. You can modify this array as necessary before you execute the operation. The record zones must all target the same database. You can specify `nil`, or an empty array, for this property. If you intend to change the value of this property, do so before you execute the operation or submit the operation to a queue.
 //
 // RecordZoneIDsToDelete returns the collection as a Go slice.
 func (x *ModifyRecordZonesOperation) RecordZoneIDsToDelete() []*RecordZoneID {
-	arr := x.inner.RecordZoneIDsToDelete()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordZoneID {
-		return &RecordZoneID{inner: raw.CKRecordZoneIDFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordZoneIDsToDelete"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }
 
-// SetRecordZoneIDsToDelete calls the underlying SetRecordZoneIDsToDelete.
-func (x *ModifyRecordZonesOperation) SetRecordZoneIDsToDelete(recordZoneIDsToDelete *foundation.NSArray[*raw.CKRecordZoneID]) {
-	x.inner.SetRecordZoneIDsToDelete(recordZoneIDsToDelete)
-}
-
-// The closure to execute when CloudKit saves a record zone. This property is a closure that returns no value and has the following parameters: - The ID of the record zone that CloudKit saves. - The record zone that CloudKit saves, or `nil` if CloudKit can't save the record zone. - If CloudKit can't save the record zone, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each record zone in the “CKModifyRecordZonesOperation/recordZonesToSave“ property. Each time the closure executes, it executes serially with respect to the other record zone completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
-//
-// PerRecordZoneSaveBlock calls the underlying PerRecordZoneSaveBlock.
-func (x *ModifyRecordZonesOperation) PerRecordZoneSaveBlock() objc.Block {
-	return x.inner.PerRecordZoneSaveBlock()
-}
-
-// SetPerRecordZoneSaveBlock calls the underlying SetPerRecordZoneSaveBlock.
-func (x *ModifyRecordZonesOperation) SetPerRecordZoneSaveBlock(perRecordZoneSaveBlock func(*raw.CKRecordZoneID, *raw.CKRecordZone, unsafe.Pointer)) {
-	x.inner.SetPerRecordZoneSaveBlock(perRecordZoneSaveBlock)
-}
-
-// The closure to execute when CloudKit deletes a record zone. This property is a closure that returns no value and has the following parameters: - The ID of the record zone that CloudKit deletes. - If CloudKit can't delete the record zone, an error that provides information about the failure; otherwise, `nil`. The closure executes once for each record zone in the “CKModifyRecordZonesOperation/recordZoneIDsToDelete“ property. Each time the closure executes, it executes serially with respect to the other record zone completion blocks of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
-//
-// PerRecordZoneDeleteBlock calls the underlying PerRecordZoneDeleteBlock.
-func (x *ModifyRecordZonesOperation) PerRecordZoneDeleteBlock() objc.Block {
-	return x.inner.PerRecordZoneDeleteBlock()
+func (x *ModifyRecordZonesOperation) SetRecordZoneIDsToDelete(recordZoneIDsToDelete []*RecordZoneID) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneIDsToDelete:"), purego.SliceToNSArray(recordZoneIDsToDelete, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SetPerRecordZoneDeleteBlock blocks until the operation completes or ctx is cancelled.
@@ -254,16 +196,13 @@ func (x *ModifyRecordZonesOperation) SetPerRecordZoneDeleteBlock(ctx context.Con
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SetPerRecordZoneDeleteBlock(func(_p0 *raw.CKRecordZoneID, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &RecordZoneID{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = RecordZoneIDFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerRecordZoneDeleteBlock:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -273,34 +212,11 @@ func (x *ModifyRecordZonesOperation) SetPerRecordZoneDeleteBlock(ctx context.Con
 	}
 }
 
-// The closure to execute after CloudKit modifies all of the record zones. This property is a closure that returns no value and has the following parameters: - The record zones that CloudKit saves. - The IDs of the record zones that CloudKit deletes. - If CloudKit can't modify any of the record zones, this parameter provides information about the failure; otherwise, it's `nil`. The closure executes once, and represents your only opportunity to process the results. The closure reports an error of type “CKError/Code/partialFailure“ when it modifies only some of the record zones successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the IDs of the record zones that the operation can't modify, and the corresponding values are errors that contain information about the failures. If you intend to use this closure to process the results, set it before you execute the operation or submit the operation to a queue.
-//
-// ModifyRecordZonesCompletionBlock calls the underlying ModifyRecordZonesCompletionBlock.
-func (x *ModifyRecordZonesOperation) ModifyRecordZonesCompletionBlock() objc.Block {
-	return x.inner.ModifyRecordZonesCompletionBlock()
-}
-
-// SetModifyRecordZonesCompletionBlock calls the underlying SetModifyRecordZonesCompletionBlock.
-func (x *ModifyRecordZonesOperation) SetModifyRecordZonesCompletionBlock(modifyRecordZonesCompletionBlock func(*foundation.NSArray[*raw.CKRecordZone], *foundation.NSArray[*raw.CKRecordZoneID], unsafe.Pointer)) {
-	x.inner.SetModifyRecordZonesCompletionBlock(modifyRecordZonesCompletionBlock)
-}
-
-func (x *ModifyRecordZonesOperation) asDatabaseOperation() *raw.CKDatabaseOperation {
-	return &x.inner.CKDatabaseOperation
-}
-
-func (x *ModifyRecordZonesOperation) asOperation() *raw.CKOperation {
-	return &x.inner.CKDatabaseOperation.CKOperation
-}
-
 // ModifyRecordZonesOperationable is the interface implemented by [ModifyRecordZonesOperation], for mocking and DI.
 type ModifyRecordZonesOperationable interface {
-	Unwrap() *raw.CKModifyRecordZonesOperation
-	WithRecordZonesToSave(items ...*raw.CKRecordZone) *ModifyRecordZonesOperation
-	WithRecordZoneIDsToDelete(items ...*raw.CKRecordZoneID) *ModifyRecordZonesOperation
-	WithPerRecordZoneSaveBlock(perRecordZoneSaveBlock func(*raw.CKRecordZoneID, *raw.CKRecordZone, unsafe.Pointer)) *ModifyRecordZonesOperation
-	WithPerRecordZoneDeleteBlock(perRecordZoneDeleteBlock func(*raw.CKRecordZoneID, unsafe.Pointer)) *ModifyRecordZonesOperation
-	WithModifyRecordZonesCompletionBlock(modifyRecordZonesCompletionBlock func(*foundation.NSArray[*raw.CKRecordZone], *foundation.NSArray[*raw.CKRecordZoneID], unsafe.Pointer)) *ModifyRecordZonesOperation
+	obj.Object
+	WithRecordZonesToSave(items ...*RecordZone) *ModifyRecordZonesOperation
+	WithRecordZoneIDsToDelete(items ...*RecordZoneID) *ModifyRecordZonesOperation
 	WithDatabase(database *Database) *ModifyRecordZonesOperation
 	WithConfiguration(configuration *OperationConfiguration) *ModifyRecordZonesOperation
 	WithGroup(group *OperationGroup) *ModifyRecordZonesOperation
@@ -311,15 +227,10 @@ type ModifyRecordZonesOperationable interface {
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *ModifyRecordZonesOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *ModifyRecordZonesOperation
 	RecordZonesToSave() []*RecordZone
-	SetRecordZonesToSave(recordZonesToSave *foundation.NSArray[*raw.CKRecordZone])
+	SetRecordZonesToSave(recordZonesToSave []*RecordZone)
 	RecordZoneIDsToDelete() []*RecordZoneID
-	SetRecordZoneIDsToDelete(recordZoneIDsToDelete *foundation.NSArray[*raw.CKRecordZoneID])
-	PerRecordZoneSaveBlock() objc.Block
-	SetPerRecordZoneSaveBlock(perRecordZoneSaveBlock func(*raw.CKRecordZoneID, *raw.CKRecordZone, unsafe.Pointer))
-	PerRecordZoneDeleteBlock() objc.Block
+	SetRecordZoneIDsToDelete(recordZoneIDsToDelete []*RecordZoneID)
 	SetPerRecordZoneDeleteBlock(ctx context.Context) (*RecordZoneID, error)
-	ModifyRecordZonesCompletionBlock() objc.Block
-	SetModifyRecordZonesCompletionBlock(modifyRecordZonesCompletionBlock func(*foundation.NSArray[*raw.CKRecordZone], *foundation.NSArray[*raw.CKRecordZoneID], unsafe.Pointer))
 }
 
 var _ ModifyRecordZonesOperationable = (*ModifyRecordZonesOperation)(nil)

@@ -6,59 +6,79 @@ package matter
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterOtaSoftwareUpdateProvider wraps [raw.MTRClusterOtaSoftwareUpdateProvider] with a fluent Go API.
+// MTRClusterOtaSoftwareUpdateProvider is an idiomatic wrapper over the Objective-C class MTRClusterOtaSoftwareUpdateProvider.
 type MTRClusterOtaSoftwareUpdateProvider struct {
-	inner *raw.MTRClusterOtaSoftwareUpdateProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterOtaSoftwareUpdateProvider].
-func (x *MTRClusterOtaSoftwareUpdateProvider) Unwrap() *raw.MTRClusterOtaSoftwareUpdateProvider {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterOtaSoftwareUpdateProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterOtaSoftwareUpdateProviderFromID adopts an existing object pointer as a MTRClusterOtaSoftwareUpdateProvider (nil for 0).
+// MTRClusterOtaSoftwareUpdateProviderFromID adopts an existing Objective-C object as a MTRClusterOtaSoftwareUpdateProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterOtaSoftwareUpdateProviderFromID(id objc.ID) *MTRClusterOtaSoftwareUpdateProvider {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterOtaSoftwareUpdateProvider{inner: raw.MTRClusterOtaSoftwareUpdateProviderFromID(id)}
+	x := &MTRClusterOtaSoftwareUpdateProvider{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRClusterOtaSoftwareUpdateProviderWithDeviceEndpointQueue creates a new [MTRClusterOtaSoftwareUpdateProvider].
-func NewMTRClusterOtaSoftwareUpdateProviderWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterOtaSoftwareUpdateProvider {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterOtaSoftwareUpdateProvider")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterOtaSoftwareUpdateProvider{inner: raw.MTRClusterOtaSoftwareUpdateProviderFromID(_id)}
+// mTRClusterOtaSoftwareUpdateProviderAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterOtaSoftwareUpdateProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterOtaSoftwareUpdateProviderAdopt(id objc.ID) *MTRClusterOtaSoftwareUpdateProvider {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterOtaSoftwareUpdateProvider{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterOtaSoftwareUpdateProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterOtaSoftwareUpdateProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterOtaSoftwareUpdateProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRClusterOtaSoftwareUpdateProviderWithDeviceEndpointQueue creates a new MTRClusterOtaSoftwareUpdateProvider.
+func NewMTRClusterOtaSoftwareUpdateProviderWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterOtaSoftwareUpdateProvider {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterOtaSoftwareUpdateProvider")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterOtaSoftwareUpdateProviderAdopt(_id)
 }
 
 // QueryImageWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOtaSoftwareUpdateProvider) QueryImageWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROtaSoftwareUpdateProviderClusterQueryImageParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams, error) {
+func (x *MTRClusterOtaSoftwareUpdateProvider) QueryImageWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROtaSoftwareUpdateProviderClusterQueryImageParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams, error) {
 	type _result struct {
 		val *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.QueryImageWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTROtaSoftwareUpdateProviderClusterQueryImageResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queryImageWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -69,22 +89,19 @@ func (x *MTRClusterOtaSoftwareUpdateProvider) QueryImageWithParamsExpectedValues
 }
 
 // ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOtaSoftwareUpdateProvider) ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams, error) {
+func (x *MTRClusterOtaSoftwareUpdateProvider) ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams, error) {
 	type _result struct {
 		val *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ApplyUpdateRequestWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyUpdateRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -94,29 +111,11 @@ func (x *MTRClusterOtaSoftwareUpdateProvider) ApplyUpdateRequestWithParamsExpect
 	}
 }
 
-// NotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying NotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterOtaSoftwareUpdateProvider) NotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.NotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-func (x *MTRClusterOtaSoftwareUpdateProvider) asMTRClusterOTASoftwareUpdateProvider() *raw.MTRClusterOTASoftwareUpdateProvider {
-	return &x.inner.MTRClusterOTASoftwareUpdateProvider
-}
-
-func (x *MTRClusterOtaSoftwareUpdateProvider) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRClusterOTASoftwareUpdateProvider.MTRGenericCluster
-}
-
-func (x *MTRClusterOtaSoftwareUpdateProvider) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRClusterOTASoftwareUpdateProvider.MTRGenericCluster.MTRCluster
-}
-
 // MTRClusterOtaSoftwareUpdateProviderable is the interface implemented by [MTRClusterOtaSoftwareUpdateProvider], for mocking and DI.
 type MTRClusterOtaSoftwareUpdateProviderable interface {
-	Unwrap() *raw.MTRClusterOtaSoftwareUpdateProvider
-	QueryImageWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROtaSoftwareUpdateProviderClusterQueryImageParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams, error)
-	ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams, error)
-	NotifyUpdateAppliedWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTROtaSoftwareUpdateProviderClusterNotifyUpdateAppliedParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	obj.Object
+	QueryImageWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROtaSoftwareUpdateProviderClusterQueryImageParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams, error)
+	ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams, error)
 }
 
 var _ MTRClusterOtaSoftwareUpdateProviderable = (*MTRClusterOtaSoftwareUpdateProvider)(nil)

@@ -5,66 +5,88 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A specialized view that displays and controls the pitch angle of the map view.
 //
-// PitchControl wraps [raw.MKPitchControl] with a fluent Go API.
+// PitchControl is an idiomatic wrapper over the Objective-C class MKPitchControl.
 type PitchControl struct {
-	inner *raw.MKPitchControl
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKPitchControl].
-func (x *PitchControl) Unwrap() *raw.MKPitchControl { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PitchControl) ID() objc.ID { return x.inner.Ptr() }
-
-// PitchControlFromID adopts an existing object pointer as a PitchControl (nil for 0).
+// PitchControlFromID adopts an existing Objective-C object as a PitchControl
+// (nil for 0), retaining it and registering a release finalizer.
 func PitchControlFromID(id objc.ID) *PitchControl {
 	if id == 0 {
 		return nil
 	}
-	return &PitchControl{inner: raw.MKPitchControlFromID(id)}
+	x := &PitchControl{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPitchControl creates a new [PitchControl].
+// pitchControlAdopt wraps an Objective-C object that this code just created as a
+// PitchControl (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pitchControlAdopt(id objc.ID) *PitchControl {
+	if id == 0 {
+		return nil
+	}
+	x := &PitchControl{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PitchControl) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PitchControl) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PitchControl) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPitchControl creates a new PitchControl.
 func NewPitchControl() *PitchControl {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPitchControl")), objc.RegisterName("new"))
-	return &PitchControl{inner: raw.MKPitchControlFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKPitchControl")), objc.RegisterName("new"))
+	return pitchControlAdopt(_id)
 }
 
 // The map view associated with this control.
 //
-// WithMapView sets the mapView property and returns the receiver for chaining.
+// WithMapView sets mapView and returns the receiver so calls can be chained.
 func (x *PitchControl) WithMapView(mapView *MapView) *PitchControl {
-	x.inner.SetMapView(mapView.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
 	return x
 }
 
-// MapView calls the underlying MapView.
 func (x *PitchControl) MapView() *MapView {
-	_r := x.inner.MapView()
-	if _r == nil {
-		return nil
-	}
-	return &MapView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapView"))
+	return MapViewFromID(_r)
 }
 
-// SetMapView calls the underlying SetMapView.
-func (x *PitchControl) SetMapView(mapView *raw.MKMapView) {
-	x.inner.SetMapView(mapView)
+func (x *PitchControl) SetMapView(mapView *MapView) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
 }
 
 // PitchControlable is the interface implemented by [PitchControl], for mocking and DI.
 type PitchControlable interface {
-	Unwrap() *raw.MKPitchControl
+	obj.Object
 	WithMapView(mapView *MapView) *PitchControl
 	MapView() *MapView
-	SetMapView(mapView *raw.MKMapView)
+	SetMapView(mapView *MapView)
 }
 
 var _ PitchControlable = (*PitchControl)(nil)

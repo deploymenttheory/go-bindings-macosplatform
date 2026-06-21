@@ -5,83 +5,102 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRChannelClusterSeriesInfoStruct wraps [raw.MTRChannelClusterSeriesInfoStruct] with a fluent Go API.
+// MTRChannelClusterSeriesInfoStruct is an idiomatic wrapper over the Objective-C class MTRChannelClusterSeriesInfoStruct.
 type MTRChannelClusterSeriesInfoStruct struct {
-	inner *raw.MTRChannelClusterSeriesInfoStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRChannelClusterSeriesInfoStruct].
-func (x *MTRChannelClusterSeriesInfoStruct) Unwrap() *raw.MTRChannelClusterSeriesInfoStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRChannelClusterSeriesInfoStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRChannelClusterSeriesInfoStructFromID adopts an existing object pointer as a MTRChannelClusterSeriesInfoStruct (nil for 0).
+// MTRChannelClusterSeriesInfoStructFromID adopts an existing Objective-C object as a MTRChannelClusterSeriesInfoStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRChannelClusterSeriesInfoStructFromID(id objc.ID) *MTRChannelClusterSeriesInfoStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRChannelClusterSeriesInfoStruct{inner: raw.MTRChannelClusterSeriesInfoStructFromID(id)}
+	x := &MTRChannelClusterSeriesInfoStruct{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRChannelClusterSeriesInfoStruct creates a new [MTRChannelClusterSeriesInfoStruct].
+// mTRChannelClusterSeriesInfoStructAdopt wraps an Objective-C object that this code just created as a
+// MTRChannelClusterSeriesInfoStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRChannelClusterSeriesInfoStructAdopt(id objc.ID) *MTRChannelClusterSeriesInfoStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRChannelClusterSeriesInfoStruct{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRChannelClusterSeriesInfoStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRChannelClusterSeriesInfoStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRChannelClusterSeriesInfoStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRChannelClusterSeriesInfoStruct creates a new MTRChannelClusterSeriesInfoStruct.
 func NewMTRChannelClusterSeriesInfoStruct() *MTRChannelClusterSeriesInfoStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRChannelClusterSeriesInfoStruct")), objc.RegisterName("new"))
-	return &MTRChannelClusterSeriesInfoStruct{inner: raw.MTRChannelClusterSeriesInfoStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRChannelClusterSeriesInfoStruct")), objc.RegisterName("new"))
+	return mTRChannelClusterSeriesInfoStructAdopt(_id)
 }
 
-// WithSeason sets the season property and returns the receiver for chaining.
+// WithSeason sets season and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterSeriesInfoStruct) WithSeason(season string) *MTRChannelClusterSeriesInfoStruct {
-	x.inner.SetSeason(foundation.NSStringStringWithUTF8String(season))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeason:"), purego.NSString(season))
 	return x
 }
 
-// WithEpisode sets the episode property and returns the receiver for chaining.
+// WithEpisode sets episode and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterSeriesInfoStruct) WithEpisode(episode string) *MTRChannelClusterSeriesInfoStruct {
-	x.inner.SetEpisode(foundation.NSStringStringWithUTF8String(episode))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpisode:"), purego.NSString(episode))
 	return x
 }
 
-// Season calls the underlying Season.
 func (x *MTRChannelClusterSeriesInfoStruct) Season() string {
-	_r := x.inner.Season()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("season"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSeason calls the underlying SetSeason.
 func (x *MTRChannelClusterSeriesInfoStruct) SetSeason(season string) {
-	x.inner.SetSeason(foundation.NSStringStringWithUTF8String(season))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeason:"), purego.NSString(season))
 }
 
-// Episode calls the underlying Episode.
 func (x *MTRChannelClusterSeriesInfoStruct) Episode() string {
-	_r := x.inner.Episode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("episode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetEpisode calls the underlying SetEpisode.
 func (x *MTRChannelClusterSeriesInfoStruct) SetEpisode(episode string) {
-	x.inner.SetEpisode(foundation.NSStringStringWithUTF8String(episode))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpisode:"), purego.NSString(episode))
 }
 
 // MTRChannelClusterSeriesInfoStructable is the interface implemented by [MTRChannelClusterSeriesInfoStruct], for mocking and DI.
 type MTRChannelClusterSeriesInfoStructable interface {
-	Unwrap() *raw.MTRChannelClusterSeriesInfoStruct
+	obj.Object
 	WithSeason(season string) *MTRChannelClusterSeriesInfoStruct
 	WithEpisode(episode string) *MTRChannelClusterSeriesInfoStruct
 	Season() string

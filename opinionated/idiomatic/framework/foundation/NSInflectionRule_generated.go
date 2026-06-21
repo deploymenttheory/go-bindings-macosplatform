@@ -5,52 +5,75 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A rule that affects how an attributed string performs automatic grammatical agreement.
 //
-// InflectionRule wraps [raw.NSInflectionRule] with a fluent Go API.
+// InflectionRule is an idiomatic wrapper over the Objective-C class NSInflectionRule.
 type InflectionRule struct {
-	inner *raw.NSInflectionRule
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSInflectionRule].
-func (x *InflectionRule) Unwrap() *raw.NSInflectionRule { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *InflectionRule) ID() objc.ID { return x.inner.Ptr() }
-
-// InflectionRuleFromID adopts an existing object pointer as a InflectionRule (nil for 0).
+// InflectionRuleFromID adopts an existing Objective-C object as a InflectionRule
+// (nil for 0), retaining it and registering a release finalizer.
 func InflectionRuleFromID(id objc.ID) *InflectionRule {
 	if id == 0 {
 		return nil
 	}
-	return &InflectionRule{inner: raw.NSInflectionRuleFromID(id)}
-}
-
-// NewInflectionRule creates a new [InflectionRule].
-func NewInflectionRule() *InflectionRule {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSInflectionRule")), objc.RegisterName("new"))
-	return &InflectionRule{inner: raw.NSInflectionRuleFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *InflectionRule) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *InflectionRule {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &InflectionRule{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-func (x *InflectionRule) asInflectionRule() *raw.NSInflectionRule { return x.inner }
+// inflectionRuleAdopt wraps an Objective-C object that this code just created as a
+// InflectionRule (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func inflectionRuleAdopt(id objc.ID) *InflectionRule {
+	if id == 0 {
+		return nil
+	}
+	x := &InflectionRule{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
 
-func (x *InflectionRule) asObject() *raw.NSObject { return &x.inner.NSObject }
+// Description returns the object's -description text.
+func (x *InflectionRule) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *InflectionRule) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *InflectionRule) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewInflectionRule creates a new InflectionRule.
+func NewInflectionRule() *InflectionRule {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSInflectionRule")), objc.RegisterName("new"))
+	return inflectionRuleAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *InflectionRule) WithScriptingProperties(scriptingProperties obj.Object) *InflectionRule {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // InflectionRuleable is the interface implemented by [InflectionRule], for mocking and DI.
 type InflectionRuleable interface {
-	Unwrap() *raw.NSInflectionRule
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *InflectionRule
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *InflectionRule
 }
 
 var _ InflectionRuleable = (*InflectionRule)(nil)

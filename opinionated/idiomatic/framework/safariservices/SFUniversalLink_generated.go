@@ -5,82 +5,104 @@
 package safariservices
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safariservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides browsers with the ability to discover associations between an app and a website.
 //
-// UniversalLink wraps [raw.SFUniversalLink] with a fluent Go API.
+// UniversalLink is an idiomatic wrapper over the Objective-C class SFUniversalLink.
 type UniversalLink struct {
-	inner *raw.SFUniversalLink
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFUniversalLink].
-func (x *UniversalLink) Unwrap() *raw.SFUniversalLink { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UniversalLink) ID() objc.ID { return x.inner.Ptr() }
-
-// UniversalLinkFromID adopts an existing object pointer as a UniversalLink (nil for 0).
+// UniversalLinkFromID adopts an existing Objective-C object as a UniversalLink
+// (nil for 0), retaining it and registering a release finalizer.
 func UniversalLinkFromID(id objc.ID) *UniversalLink {
 	if id == 0 {
 		return nil
 	}
-	return &UniversalLink{inner: raw.SFUniversalLinkFromID(id)}
+	x := &UniversalLink{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// universalLinkAdopt wraps an Objective-C object that this code just created as a
+// UniversalLink (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func universalLinkAdopt(id objc.ID) *UniversalLink {
+	if id == 0 {
+		return nil
+	}
+	x := &UniversalLink{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UniversalLink) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UniversalLink) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UniversalLink) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a universal link object with the URL.
 //
-// NewUniversalLinkWithWebpageURL creates a new [UniversalLink].
+// NewUniversalLinkWithWebpageURL creates a new UniversalLink.
 func NewUniversalLinkWithWebpageURL(url string) *UniversalLink {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SFUniversalLink")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWebpageURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr())
-	return &UniversalLink{inner: raw.SFUniversalLinkFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SFUniversalLink")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWebpageURL:"), rt.FileURL(url))
+	return universalLinkAdopt(_id)
 }
 
 // A flag that indicates whether the universal link is enabled.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *UniversalLink) WithEnabled(enabled bool) *UniversalLink {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // The URL passed when initializing the receiver.
-//
-// WebpageURL calls the underlying WebpageURL.
-func (x *UniversalLink) WebpageURL() *foundation.NSURL {
-	return x.inner.WebpageURL()
+func (x *UniversalLink) WebpageURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webpageURL"))
+	return obj.Wrap(_r)
 }
 
 // The file URL to the application that can handle this universal link.
-//
-// ApplicationURL calls the underlying ApplicationURL.
-func (x *UniversalLink) ApplicationURL() *foundation.NSURL {
-	return x.inner.ApplicationURL()
+func (x *UniversalLink) ApplicationURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationURL"))
+	return obj.Wrap(_r)
 }
 
 // Whether or not this universal link is enabled. If it is enabled, the URL will open in the application instead of the browser. Set this property when the user indicates they wish to enable or disable this universal link.
-//
-// IsEnabled calls the underlying IsEnabled.
 func (x *UniversalLink) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// SetEnabled calls the underlying SetEnabled.
 func (x *UniversalLink) SetEnabled(enabled bool) {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
 // UniversalLinkable is the interface implemented by [UniversalLink], for mocking and DI.
 type UniversalLinkable interface {
-	Unwrap() *raw.SFUniversalLink
+	obj.Object
 	WithEnabled(enabled bool) *UniversalLink
-	WebpageURL() *foundation.NSURL
-	ApplicationURL() *foundation.NSURL
+	WebpageURL() obj.Object
+	ApplicationURL() obj.Object
 	IsEnabled() bool
 	SetEnabled(enabled bool)
 }

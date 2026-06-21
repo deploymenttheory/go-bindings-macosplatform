@@ -5,135 +5,108 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A filter that convolves an image with a Laplacian filter.
 //
-// ImageLaplacianPyramid wraps [raw.MPSImageLaplacianPyramid] with a fluent Go API.
+// ImageLaplacianPyramid is an idiomatic wrapper over the Objective-C class MPSImageLaplacianPyramid.
 type ImageLaplacianPyramid struct {
-	inner *raw.MPSImageLaplacianPyramid
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageLaplacianPyramid].
-func (x *ImageLaplacianPyramid) Unwrap() *raw.MPSImageLaplacianPyramid { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageLaplacianPyramid) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageLaplacianPyramidFromID adopts an existing object pointer as a ImageLaplacianPyramid (nil for 0).
+// ImageLaplacianPyramidFromID adopts an existing Objective-C object as a ImageLaplacianPyramid
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageLaplacianPyramidFromID(id objc.ID) *ImageLaplacianPyramid {
 	if id == 0 {
 		return nil
 	}
-	return &ImageLaplacianPyramid{inner: raw.MPSImageLaplacianPyramidFromID(id)}
+	x := &ImageLaplacianPyramid{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewImageLaplacianPyramid creates a new [ImageLaplacianPyramid].
+// imageLaplacianPyramidAdopt wraps an Objective-C object that this code just created as a
+// ImageLaplacianPyramid (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageLaplacianPyramidAdopt(id objc.ID) *ImageLaplacianPyramid {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageLaplacianPyramid{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ImageLaplacianPyramid) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageLaplacianPyramid) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageLaplacianPyramid) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageLaplacianPyramid creates a new ImageLaplacianPyramid.
 func NewImageLaplacianPyramid() *ImageLaplacianPyramid {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageLaplacianPyramid")), objc.RegisterName("new"))
-	return &ImageLaplacianPyramid{inner: raw.MPSImageLaplacianPyramidFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageLaplacianPyramid")), objc.RegisterName("new"))
+	return imageLaplacianPyramidAdopt(_id)
 }
 
-// WithLaplacianBias sets the laplacianBias property and returns the receiver for chaining.
+// WithLaplacianBias sets laplacianBias and returns the receiver so calls can be chained.
 func (x *ImageLaplacianPyramid) WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramid {
-	x.inner.SetLaplacianBias(laplacianBias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLaplacianBias:"), laplacianBias)
 	return x
 }
 
-// WithLaplacianScale sets the laplacianScale property and returns the receiver for chaining.
+// WithLaplacianScale sets laplacianScale and returns the receiver so calls can be chained.
 func (x *ImageLaplacianPyramid) WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramid {
-	x.inner.SetLaplacianScale(laplacianScale)
-	return x
-}
-
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageLaplacianPyramid) WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramid {
-	x.inner.MPSImagePyramid.MPSUnaryImageKernel.SetOffset(offset)
-	return x
-}
-
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageLaplacianPyramid) WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramid {
-	x.inner.MPSImagePyramid.MPSUnaryImageKernel.SetClipRect(clipRect)
-	return x
-}
-
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageLaplacianPyramid) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacianPyramid {
-	x.inner.MPSImagePyramid.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageLaplacianPyramid) WithOptions(options mpscore.MPSKernelOptions) *ImageLaplacianPyramid {
-	x.inner.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLaplacianScale:"), laplacianScale)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ImageLaplacianPyramid) WithLabel(label string) *ImageLaplacianPyramid {
-	x.inner.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// GetLaplacianBias calls the underlying GetLaplacianBias.
 func (x *ImageLaplacianPyramid) GetLaplacianBias() float32 {
-	return x.inner.GetLaplacianBias()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("getLaplacianBias"))
+	return _r
 }
 
-// SetLaplacianBias calls the underlying SetLaplacianBias.
 func (x *ImageLaplacianPyramid) SetLaplacianBias(laplacianBias float32) {
-	x.inner.SetLaplacianBias(laplacianBias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLaplacianBias:"), laplacianBias)
 }
 
-// GetLaplacianScale calls the underlying GetLaplacianScale.
 func (x *ImageLaplacianPyramid) GetLaplacianScale() float32 {
-	return x.inner.GetLaplacianScale()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("getLaplacianScale"))
+	return _r
 }
 
-// SetLaplacianScale calls the underlying SetLaplacianScale.
 func (x *ImageLaplacianPyramid) SetLaplacianScale(laplacianScale float32) {
-	x.inner.SetLaplacianScale(laplacianScale)
-}
-
-func (x *ImageLaplacianPyramid) asImagePyramid() *mpsimage.MPSImagePyramid {
-	return &x.inner.MPSImagePyramid
-}
-
-func (x *ImageLaplacianPyramid) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSImagePyramid.MPSUnaryImageKernel
-}
-
-func (x *ImageLaplacianPyramid) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSImagePyramid.MPSUnaryImageKernel.MPSKernel
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLaplacianScale:"), laplacianScale)
 }
 
 // ImageLaplacianPyramidable is the interface implemented by [ImageLaplacianPyramid], for mocking and DI.
 type ImageLaplacianPyramidable interface {
-	Unwrap() *raw.MPSImageLaplacianPyramid
+	obj.Object
 	WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramid
 	WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramid
-	WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramid
-	WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramid
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacianPyramid
-	WithOptions(options mpscore.MPSKernelOptions) *ImageLaplacianPyramid
 	WithLabel(label string) *ImageLaplacianPyramid
 	GetLaplacianBias() float32
 	SetLaplacianBias(laplacianBias float32)

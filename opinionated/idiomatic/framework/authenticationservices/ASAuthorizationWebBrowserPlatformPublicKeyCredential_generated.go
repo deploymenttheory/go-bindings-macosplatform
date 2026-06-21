@@ -5,108 +5,121 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A structure that describes a passkey stored in the keychain, or managed by a third-party credential manager.
 //
-// AuthorizationWebBrowserPlatformPublicKeyCredential wraps [raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential] with a fluent Go API.
+// AuthorizationWebBrowserPlatformPublicKeyCredential is an idiomatic wrapper over the Objective-C class ASAuthorizationWebBrowserPlatformPublicKeyCredential.
 type AuthorizationWebBrowserPlatformPublicKeyCredential struct {
-	inner *raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential].
-func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) Unwrap() *raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationWebBrowserPlatformPublicKeyCredentialFromID adopts an existing object pointer as a AuthorizationWebBrowserPlatformPublicKeyCredential (nil for 0).
+// AuthorizationWebBrowserPlatformPublicKeyCredentialFromID adopts an existing Objective-C object as a AuthorizationWebBrowserPlatformPublicKeyCredential
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationWebBrowserPlatformPublicKeyCredentialFromID(id objc.ID) *AuthorizationWebBrowserPlatformPublicKeyCredential {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationWebBrowserPlatformPublicKeyCredential{inner: raw.ASAuthorizationWebBrowserPlatformPublicKeyCredentialFromID(id)}
+	x := &AuthorizationWebBrowserPlatformPublicKeyCredential{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorizationWebBrowserPlatformPublicKeyCredential creates a new [AuthorizationWebBrowserPlatformPublicKeyCredential].
+// authorizationWebBrowserPlatformPublicKeyCredentialAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationWebBrowserPlatformPublicKeyCredential (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationWebBrowserPlatformPublicKeyCredentialAdopt(id objc.ID) *AuthorizationWebBrowserPlatformPublicKeyCredential {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationWebBrowserPlatformPublicKeyCredential{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAuthorizationWebBrowserPlatformPublicKeyCredential creates a new AuthorizationWebBrowserPlatformPublicKeyCredential.
 func NewAuthorizationWebBrowserPlatformPublicKeyCredential() *AuthorizationWebBrowserPlatformPublicKeyCredential {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationWebBrowserPlatformPublicKeyCredential")), objc.RegisterName("new"))
-	return &AuthorizationWebBrowserPlatformPublicKeyCredential{inner: raw.ASAuthorizationWebBrowserPlatformPublicKeyCredentialFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationWebBrowserPlatformPublicKeyCredential")), objc.RegisterName("new"))
+	return authorizationWebBrowserPlatformPublicKeyCredentialAdopt(_id)
 }
 
 // The user name of the saved credential.
-//
-// Name calls the underlying Name.
 func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // A user-specified title for the credential.
-//
-// CustomTitle calls the underlying CustomTitle.
 func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) CustomTitle() string {
-	_r := x.inner.CustomTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The "relying party" (generally website) the credential was saved for.
-//
-// RelyingParty calls the underlying RelyingParty.
 func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) RelyingParty() string {
-	_r := x.inner.RelyingParty()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relyingParty"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // A unique identifier for this credential.
-//
-// CredentialID calls the underlying CredentialID.
-func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) CredentialID() *foundation.NSData {
-	return x.inner.CredentialID()
+func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) CredentialID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialID"))
+	return obj.Wrap(_r)
 }
 
 // A unique identifier for the user account associated with this credential. One account may have multiple associated credentials.
-//
-// UserHandle calls the underlying UserHandle.
-func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) UserHandle() *foundation.NSData {
-	return x.inner.UserHandle()
+func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) UserHandle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userHandle"))
+	return obj.Wrap(_r)
 }
 
 // The localized name of the credential provider that provided this passkey.
-//
-// ProviderName calls the underlying ProviderName.
 func (x *AuthorizationWebBrowserPlatformPublicKeyCredential) ProviderName() string {
-	_r := x.inner.ProviderName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("providerName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // AuthorizationWebBrowserPlatformPublicKeyCredentialable is the interface implemented by [AuthorizationWebBrowserPlatformPublicKeyCredential], for mocking and DI.
 type AuthorizationWebBrowserPlatformPublicKeyCredentialable interface {
-	Unwrap() *raw.ASAuthorizationWebBrowserPlatformPublicKeyCredential
+	obj.Object
 	Name() string
 	CustomTitle() string
 	RelyingParty() string
-	CredentialID() *foundation.NSData
-	UserHandle() *foundation.NSData
+	CredentialID() obj.Object
+	UserHandle() obj.Object
 	ProviderName() string
 }
 

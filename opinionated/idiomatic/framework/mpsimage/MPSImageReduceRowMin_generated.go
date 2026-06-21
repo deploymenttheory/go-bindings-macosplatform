@@ -5,86 +5,66 @@
 package mpsimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ImageReduceRowMin wraps [raw.MPSImageReduceRowMin] with a fluent Go API.
+// ImageReduceRowMin is an idiomatic wrapper over the Objective-C class MPSImageReduceRowMin.
 type ImageReduceRowMin struct {
-	inner *raw.MPSImageReduceRowMin
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageReduceRowMin].
-func (x *ImageReduceRowMin) Unwrap() *raw.MPSImageReduceRowMin { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageReduceRowMin) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageReduceRowMinFromID adopts an existing object pointer as a ImageReduceRowMin (nil for 0).
+// ImageReduceRowMinFromID adopts an existing Objective-C object as a ImageReduceRowMin
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageReduceRowMinFromID(id objc.ID) *ImageReduceRowMin {
 	if id == 0 {
 		return nil
 	}
-	return &ImageReduceRowMin{inner: raw.MPSImageReduceRowMinFromID(id)}
-}
-
-// NewImageReduceRowMinWithDevice creates a new [ImageReduceRowMin].
-func NewImageReduceRowMinWithDevice(device metal.MTLDevice) *ImageReduceRowMin {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageReduceRowMin")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ImageReduceRowMin{inner: raw.MPSImageReduceRowMinFromID(_id)}
-}
-
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
-//
-// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
-func (x *ImageReduceRowMin) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMin {
-	x.inner.MPSImageReduceUnary.SetClipRectSource(clipRectSource)
+	x := &ImageReduceRowMin{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageReduceRowMin) WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMin {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetOffset(offset)
+// imageReduceRowMinAdopt wraps an Objective-C object that this code just created as a
+// ImageReduceRowMin (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageReduceRowMinAdopt(id objc.ID) *ImageReduceRowMin {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageReduceRowMin{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageReduceRowMin) WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMin {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetClipRect(clipRect)
-	return x
+// Description returns the object's -description text.
+func (x *ImageReduceRowMin) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageReduceRowMin) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowMin {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageReduceRowMin) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-func (x *ImageReduceRowMin) asImageReduceUnary() *raw.MPSImageReduceUnary {
-	return &x.inner.MPSImageReduceUnary
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageReduceRowMin) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-func (x *ImageReduceRowMin) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
-	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel
+// NewImageReduceRowMin creates a new ImageReduceRowMin.
+func NewImageReduceRowMin() *ImageReduceRowMin {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageReduceRowMin")), objc.RegisterName("new"))
+	return imageReduceRowMinAdopt(_id)
 }
 
 // ImageReduceRowMinable is the interface implemented by [ImageReduceRowMin], for mocking and DI.
 type ImageReduceRowMinable interface {
-	Unwrap() *raw.MPSImageReduceRowMin
-	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMin
-	WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMin
-	WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMin
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowMin
+	obj.Object
 }
 
 var _ ImageReduceRowMinable = (*ImageReduceRowMin)(nil)

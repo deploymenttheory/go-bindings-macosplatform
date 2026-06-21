@@ -5,72 +5,93 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRAccessControlClusterReviewFabricRestrictionsResponseParams wraps [raw.MTRAccessControlClusterReviewFabricRestrictionsResponseParams] with a fluent Go API.
+// MTRAccessControlClusterReviewFabricRestrictionsResponseParams is an idiomatic wrapper over the Objective-C class MTRAccessControlClusterReviewFabricRestrictionsResponseParams.
 type MTRAccessControlClusterReviewFabricRestrictionsResponseParams struct {
-	inner *raw.MTRAccessControlClusterReviewFabricRestrictionsResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRAccessControlClusterReviewFabricRestrictionsResponseParams].
-func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) Unwrap() *raw.MTRAccessControlClusterReviewFabricRestrictionsResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRAccessControlClusterReviewFabricRestrictionsResponseParamsFromID adopts an existing object pointer as a MTRAccessControlClusterReviewFabricRestrictionsResponseParams (nil for 0).
+// MTRAccessControlClusterReviewFabricRestrictionsResponseParamsFromID adopts an existing Objective-C object as a MTRAccessControlClusterReviewFabricRestrictionsResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRAccessControlClusterReviewFabricRestrictionsResponseParamsFromID(id objc.ID) *MTRAccessControlClusterReviewFabricRestrictionsResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRAccessControlClusterReviewFabricRestrictionsResponseParams{inner: raw.MTRAccessControlClusterReviewFabricRestrictionsResponseParamsFromID(id)}
+	x := &MTRAccessControlClusterReviewFabricRestrictionsResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRAccessControlClusterReviewFabricRestrictionsResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRAccessControlClusterReviewFabricRestrictionsResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRAccessControlClusterReviewFabricRestrictionsResponseParamsAdopt(id objc.ID) *MTRAccessControlClusterReviewFabricRestrictionsResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRAccessControlClusterReviewFabricRestrictionsResponseParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize an MTRAccessControlClusterReviewFabricRestrictionsResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
 //
-// NewMTRAccessControlClusterReviewFabricRestrictionsResponseParamsWithResponseValueError creates a new [MTRAccessControlClusterReviewFabricRestrictionsResponseParams].
-func NewMTRAccessControlClusterReviewFabricRestrictionsResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRAccessControlClusterReviewFabricRestrictionsResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAccessControlClusterReviewFabricRestrictionsResponseParams")), objc.RegisterName("alloc"))
+// NewMTRAccessControlClusterReviewFabricRestrictionsResponseParamsWithResponseValueError creates a new MTRAccessControlClusterReviewFabricRestrictionsResponseParams.
+func NewMTRAccessControlClusterReviewFabricRestrictionsResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRAccessControlClusterReviewFabricRestrictionsResponseParams, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRAccessControlClusterReviewFabricRestrictionsResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &MTRAccessControlClusterReviewFabricRestrictionsResponseParams{inner: raw.MTRAccessControlClusterReviewFabricRestrictionsResponseParamsFromID(_id)}, nil
+	return mTRAccessControlClusterReviewFabricRestrictionsResponseParamsAdopt(_id), nil
 }
 
-// WithToken sets the token property and returns the receiver for chaining.
-func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) WithToken(token *foundation.NSNumber) *MTRAccessControlClusterReviewFabricRestrictionsResponseParams {
-	x.inner.SetToken(token)
+// WithToken sets token and returns the receiver so calls can be chained.
+func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) WithToken(token obj.Object) *MTRAccessControlClusterReviewFabricRestrictionsResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToken:"), objref.IDOf(token))
 	return x
 }
 
-// Token calls the underlying Token.
-func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) Token() *foundation.NSNumber {
-	return x.inner.Token()
+func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) Token() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("token"))
+	return obj.Wrap(_r)
 }
 
-// SetToken calls the underlying SetToken.
-func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) SetToken(token *foundation.NSNumber) {
-	x.inner.SetToken(token)
+func (x *MTRAccessControlClusterReviewFabricRestrictionsResponseParams) SetToken(token obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToken:"), objref.IDOf(token))
 }
 
 // MTRAccessControlClusterReviewFabricRestrictionsResponseParamsable is the interface implemented by [MTRAccessControlClusterReviewFabricRestrictionsResponseParams], for mocking and DI.
 type MTRAccessControlClusterReviewFabricRestrictionsResponseParamsable interface {
-	Unwrap() *raw.MTRAccessControlClusterReviewFabricRestrictionsResponseParams
-	WithToken(token *foundation.NSNumber) *MTRAccessControlClusterReviewFabricRestrictionsResponseParams
-	Token() *foundation.NSNumber
-	SetToken(token *foundation.NSNumber)
+	obj.Object
+	WithToken(token obj.Object) *MTRAccessControlClusterReviewFabricRestrictionsResponseParams
+	Token() obj.Object
+	SetToken(token obj.Object)
 }
 
 var _ MTRAccessControlClusterReviewFabricRestrictionsResponseParamsable = (*MTRAccessControlClusterReviewFabricRestrictionsResponseParams)(nil)

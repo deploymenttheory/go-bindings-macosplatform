@@ -5,194 +5,138 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// ImageCanny wraps [raw.MPSImageCanny] with a fluent Go API.
+// ImageCanny is an idiomatic wrapper over the Objective-C class MPSImageCanny.
 type ImageCanny struct {
-	inner *raw.MPSImageCanny
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageCanny].
-func (x *ImageCanny) Unwrap() *raw.MPSImageCanny { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageCanny) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageCannyFromID adopts an existing object pointer as a ImageCanny (nil for 0).
+// ImageCannyFromID adopts an existing Objective-C object as a ImageCanny
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageCannyFromID(id objc.ID) *ImageCanny {
 	if id == 0 {
 		return nil
 	}
-	return &ImageCanny{inner: raw.MPSImageCannyFromID(id)}
+	x := &ImageCanny{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initialize a Canny filter on a given device using the default color transform and default sigma value for Gaussian blur. Default transform: BT.601/JPEG {0.299f, 0.587f, 0.114f} Default sigma: sqrt(2) For non-default parameters, use -initWithDevice:linearGrayColorTransform:sigma: @param      device  The device the filter will run on @return     A valid object or nil, if failure.
-//
-// NewImageCannyWithDevice creates a new [ImageCanny].
-func NewImageCannyWithDevice(device metal.MTLDevice) *ImageCanny {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageCanny")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ImageCanny{inner: raw.MPSImageCannyFromID(_id)}
+// imageCannyAdopt wraps an Objective-C object that this code just created as a
+// ImageCanny (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageCannyAdopt(id objc.ID) *ImageCanny {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageCanny{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initialize a Canny filter on a given device with a non-default color transform and non-default sigma. @param      device             The device the filter will run on @param      transform       Array of three floats describing the rgb to gray scale color transform. @code Luminance = transform[0] * pixel.x + transform[1] * pixel.y + transform[2] * pixel.z; @endcode @param      sigma               The standard deviation of gaussian blur filter. Gaussian weight, centered at 0, at integer grid n is given as @code w(i) = 1/sqrt(2*pi*sigma) * exp(-n^2/2*sigma^2) @endcode If we take cut off at 1% of w(0) (max weight) beyond which weights are considered 0, we have @code ceil (sqrt(-log(0.01)*2)*sigma) ~ ceil(3.7*sigma) @endcode as rough estimate of filter width @return     A valid object or nil, if failure.
-//
-// NewImageCannyWithDeviceLinearToGrayScaleTransformSigma creates a new [ImageCanny].
-func NewImageCannyWithDeviceLinearToGrayScaleTransformSigma(device metal.MTLDevice, transform *float32, sigma unsafe.Pointer) *ImageCanny {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageCanny")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:linearToGrayScaleTransform:sigma:"), device, transform, sigma)
-	return &ImageCanny{inner: raw.MPSImageCannyFromID(_id)}
+// Description returns the object's -description text.
+func (x *ImageCanny) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewImageCannyWithCoderDevice creates a new [ImageCanny].
-func NewImageCannyWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageCanny {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageCanny")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageCanny{inner: raw.MPSImageCannyFromID(_id)}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageCanny) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property highThreshold @abstract Read-write value used to set the high threshold for double thresholding, value is normalized. Default is 0.4
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageCanny) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageCanny creates a new ImageCanny.
+func NewImageCanny() *ImageCanny {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageCanny")), objc.RegisterName("new"))
+	return imageCannyAdopt(_id)
+}
+
+// Read-write value used to set the high threshold for double thresholding, value is normalized. Default is 0.4
 //
-// WithHighThreshold sets the highThreshold property and returns the receiver for chaining.
+// WithHighThreshold sets highThreshold and returns the receiver so calls can be chained.
 func (x *ImageCanny) WithHighThreshold(highThreshold float32) *ImageCanny {
-	x.inner.SetHighThreshold(highThreshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighThreshold:"), highThreshold)
 	return x
 }
 
-// @property lowThreshold @abstract Read-write value used to set the low threshold for double thresholding, value is normalized. Default is 0.2
+// Read-write value used to set the low threshold for double thresholding, value is normalized. Default is 0.2
 //
-// WithLowThreshold sets the lowThreshold property and returns the receiver for chaining.
+// WithLowThreshold sets lowThreshold and returns the receiver so calls can be chained.
 func (x *ImageCanny) WithLowThreshold(lowThreshold float32) *ImageCanny {
-	x.inner.SetLowThreshold(lowThreshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowThreshold:"), lowThreshold)
 	return x
 }
 
-// @property useFastMode @abstract Read-write value used to change algorithm to an approximation of the true Canny Edge detection Algorithm. When true, a limit is placed on how far a single strong edge can extend. The result will be similar to a true output but some edges may terminate early, resulting in minor differences for cases with long, weak edges. The performance for the approximate canny implementation is improved and should provide similar enough results for most cases. Extra tuning of the high and low thresholds as well as sigma may help achieve a more similar output in this mode. Default is YES
+// Read-write value used to change algorithm to an approximation of the true Canny Edge detection Algorithm. When true, a limit is placed on how far a single strong edge can extend. The result will be similar to a true output but some edges may terminate early, resulting in minor differences for cases with long, weak edges. The performance for the approximate canny implementation is improved and should provide similar enough results for most cases. Extra tuning of the high and low thresholds as well as sigma may help achieve a more similar output in this mode. Default is YES
 //
-// WithUseFastMode sets the useFastMode property and returns the receiver for chaining.
+// WithUseFastMode sets useFastMode and returns the receiver so calls can be chained.
 func (x *ImageCanny) WithUseFastMode(useFastMode bool) *ImageCanny {
-	x.inner.SetUseFastMode(useFastMode)
-	return x
-}
-
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageCanny) WithOffset(offset mpscore.MPSOffset) *ImageCanny {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
-	return x
-}
-
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageCanny) WithClipRect(clipRect metal.MTLRegion) *ImageCanny {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
-	return x
-}
-
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageCanny) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageCanny {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageCanny) WithOptions(options mpscore.MPSKernelOptions) *ImageCanny {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseFastMode:"), useFastMode)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ImageCanny) WithLabel(label string) *ImageCanny {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property    colorTransform @discussion  Returns a pointer to the array of three floats used to convert RGBA, RGB or RG images to the destination format when the destination is monochrome. Value is readonly and user should not modify or free.
-//
-// ColorTransform calls the underlying ColorTransform.
-func (x *ImageCanny) ColorTransform() *float32 {
-	return x.inner.ColorTransform()
-}
-
-// @property sigma @abstract Read-only sigma value used in performing Gaussian blur of the image
-//
-// Sigma calls the underlying Sigma.
+// Read-only sigma value used in performing Gaussian blur of the image
 func (x *ImageCanny) Sigma() float32 {
-	return x.inner.Sigma()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("sigma"))
+	return _r
 }
 
-// @property highThreshold @abstract Read-write value used to set the high threshold for double thresholding, value is normalized. Default is 0.4
-//
-// HighThreshold calls the underlying HighThreshold.
+// Read-write value used to set the high threshold for double thresholding, value is normalized. Default is 0.4
 func (x *ImageCanny) HighThreshold() float32 {
-	return x.inner.HighThreshold()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("highThreshold"))
+	return _r
 }
 
-// SetHighThreshold calls the underlying SetHighThreshold.
 func (x *ImageCanny) SetHighThreshold(highThreshold float32) {
-	x.inner.SetHighThreshold(highThreshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighThreshold:"), highThreshold)
 }
 
-// @property lowThreshold @abstract Read-write value used to set the low threshold for double thresholding, value is normalized. Default is 0.2
-//
-// LowThreshold calls the underlying LowThreshold.
+// Read-write value used to set the low threshold for double thresholding, value is normalized. Default is 0.2
 func (x *ImageCanny) LowThreshold() float32 {
-	return x.inner.LowThreshold()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("lowThreshold"))
+	return _r
 }
 
-// SetLowThreshold calls the underlying SetLowThreshold.
 func (x *ImageCanny) SetLowThreshold(lowThreshold float32) {
-	x.inner.SetLowThreshold(lowThreshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowThreshold:"), lowThreshold)
 }
 
-// @property useFastMode @abstract Read-write value used to change algorithm to an approximation of the true Canny Edge detection Algorithm. When true, a limit is placed on how far a single strong edge can extend. The result will be similar to a true output but some edges may terminate early, resulting in minor differences for cases with long, weak edges. The performance for the approximate canny implementation is improved and should provide similar enough results for most cases. Extra tuning of the high and low thresholds as well as sigma may help achieve a more similar output in this mode. Default is YES
-//
-// UseFastMode calls the underlying UseFastMode.
+// Read-write value used to change algorithm to an approximation of the true Canny Edge detection Algorithm. When true, a limit is placed on how far a single strong edge can extend. The result will be similar to a true output but some edges may terminate early, resulting in minor differences for cases with long, weak edges. The performance for the approximate canny implementation is improved and should provide similar enough results for most cases. Extra tuning of the high and low thresholds as well as sigma may help achieve a more similar output in this mode. Default is YES
 func (x *ImageCanny) UseFastMode() bool {
-	return x.inner.UseFastMode()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("useFastMode"))
+	return _r
 }
 
-// SetUseFastMode calls the underlying SetUseFastMode.
 func (x *ImageCanny) SetUseFastMode(useFastMode bool) {
-	x.inner.SetUseFastMode(useFastMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseFastMode:"), useFastMode)
 }
-
-func (x *ImageCanny) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
-}
-
-func (x *ImageCanny) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
 // ImageCannyable is the interface implemented by [ImageCanny], for mocking and DI.
 type ImageCannyable interface {
-	Unwrap() *raw.MPSImageCanny
+	obj.Object
 	WithHighThreshold(highThreshold float32) *ImageCanny
 	WithLowThreshold(lowThreshold float32) *ImageCanny
 	WithUseFastMode(useFastMode bool) *ImageCanny
-	WithOffset(offset mpscore.MPSOffset) *ImageCanny
-	WithClipRect(clipRect metal.MTLRegion) *ImageCanny
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageCanny
-	WithOptions(options mpscore.MPSKernelOptions) *ImageCanny
 	WithLabel(label string) *ImageCanny
-	ColorTransform() *float32
 	Sigma() float32
 	HighThreshold() float32
 	SetHighThreshold(highThreshold float32)

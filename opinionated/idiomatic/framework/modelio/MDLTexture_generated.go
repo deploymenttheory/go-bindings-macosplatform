@@ -5,202 +5,198 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A source of texel data to be used in rendering material surface appearances.
 //
-// Texture wraps [raw.MDLTexture] with a fluent Go API.
+// Texture is an idiomatic wrapper over the Objective-C class MDLTexture.
 type Texture struct {
-	inner *raw.MDLTexture
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLTexture].
-func (x *Texture) Unwrap() *raw.MDLTexture { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Texture) ID() objc.ID { return x.inner.Ptr() }
-
-// TextureFromID adopts an existing object pointer as a Texture (nil for 0).
+// TextureFromID adopts an existing Objective-C object as a Texture
+// (nil for 0), retaining it and registering a release finalizer.
 func TextureFromID(id objc.ID) *Texture {
 	if id == 0 {
 		return nil
 	}
-	return &Texture{inner: raw.MDLTextureFromID(id)}
+	x := &Texture{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTexture creates a new [Texture].
+// textureAdopt wraps an Objective-C object that this code just created as a
+// Texture (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textureAdopt(id objc.ID) *Texture {
+	if id == 0 {
+		return nil
+	}
+	x := &Texture{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Texture) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Texture) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Texture) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTexture creates a new Texture.
 func NewTexture() *Texture {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTexture")), objc.RegisterName("new"))
-	return &Texture{inner: raw.MDLTextureFromID(_id)}
-}
-
-// Initializes a texture object with the specified image data and properties.
-//
-// NewTextureWithDataTopLeftOriginNameDimensionsRowStrideChannelCountChannelEncodingIsCube creates a new [Texture].
-func NewTextureWithDataTopLeftOriginNameDimensionsRowStrideChannelCountChannelEncodingIsCube(pixelData *foundation.NSData, topLeftOrigin bool, name string, dimensions unsafe.Pointer, rowStride int, channelCount uint, channelEncoding MDLTextureChannelEncoding, isCube bool) *Texture {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:topLeftOrigin:name:dimensions:rowStride:channelCount:channelEncoding:isCube:"), pixelData.Ptr(), topLeftOrigin, foundation.NSStringStringWithUTF8String(name).Ptr(), dimensions, rowStride, channelCount, raw.MDLTextureChannelEncoding(channelEncoding), isCube)
-	return &Texture{inner: raw.MDLTextureFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLTexture")), objc.RegisterName("new"))
+	return textureAdopt(_id)
 }
 
 // A Boolean value that indicates whether the texture is a cube textures.
 //
-// WithIsCube sets the isCube property and returns the receiver for chaining.
+// WithIsCube sets isCube and returns the receiver so calls can be chained.
 func (x *Texture) WithIsCube(isCube bool) *Texture {
-	x.inner.SetIsCube(isCube)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCube:"), isCube)
 	return x
 }
 
-// hasAlphaValues @summary Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
+// hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
 //
-// WithHasAlphaValues sets the hasAlphaValues property and returns the receiver for chaining.
+// WithHasAlphaValues sets hasAlphaValues and returns the receiver so calls can be chained.
 func (x *Texture) WithHasAlphaValues(hasAlphaValues bool) *Texture {
-	x.inner.SetHasAlphaValues(hasAlphaValues)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
 	return x
 }
 
 // Exports the texture data to an image file at the specified URL.
-//
-// WriteToURL calls the underlying WriteToURL.
 func (x *Texture) WriteToURL(uRL string) bool {
-	return x.inner.WriteToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:"), rt.FileURL(uRL))
+	return _r
 }
 
 // write a particular level of a mipped texture to URL, deducing type from path extension
-//
-// WriteToURLLevel calls the underlying WriteToURLLevel.
-func (x *Texture) WriteToURLLevel(uRL string, level uint) bool {
-	return x.inner.WriteToURLLevel(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)), level)
+func (x *Texture) WriteToURLLevel(uRL string, level int) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:level:"), rt.FileURL(uRL), level)
+	return _r
 }
 
 // Exports the texture data to an image file at the specified URL, of the specified type.
-//
-// WriteToURLType calls the underlying WriteToURLType.
-func (x *Texture) WriteToURLType(nsurl string, type_ unsafe.Pointer) bool {
-	return x.inner.WriteToURLType(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(nsurl)), type_)
+func (x *Texture) WriteToURLType(nsurl string, type_ obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:type:"), rt.FileURL(nsurl), objref.IDOf(type_))
+	return _r
 }
 
 // write a particular level of a mipped texture to URL, using a specific UT type
-//
-// WriteToURLTypeLevel calls the underlying WriteToURLTypeLevel.
-func (x *Texture) WriteToURLTypeLevel(nsurl string, type_ unsafe.Pointer, level uint) bool {
-	return x.inner.WriteToURLTypeLevel(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(nsurl)), type_, level)
+func (x *Texture) WriteToURLTypeLevel(nsurl string, type_ obj.Object, level int) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:type:level:"), rt.FileURL(nsurl), objref.IDOf(type_), level)
+	return _r
 }
 
 // Exports the texture data as a CoreGraphics image.
-//
-// ImageFromTexture calls the underlying ImageFromTexture.
-func (x *Texture) ImageFromTexture() unsafe.Pointer {
-	return x.inner.ImageFromTexture()
+func (x *Texture) ImageFromTexture() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageFromTexture"))
+	return obj.Wrap(_r)
 }
 
-// ImageFromTextureAtLevel calls the underlying ImageFromTextureAtLevel.
-func (x *Texture) ImageFromTextureAtLevel(level uint) unsafe.Pointer {
-	return x.inner.ImageFromTextureAtLevel(level)
+func (x *Texture) ImageFromTextureAtLevel(level int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageFromTextureAtLevel:"), level)
+	return obj.Wrap(_r)
 }
 
 // Returns the texture’s image data, organized such that its first pixel represents the top-left corner of the image.
-//
-// TexelDataWithTopLeftOrigin calls the underlying TexelDataWithTopLeftOrigin.
-func (x *Texture) TexelDataWithTopLeftOrigin() *foundation.NSData {
-	return x.inner.TexelDataWithTopLeftOrigin()
+func (x *Texture) TexelDataWithTopLeftOrigin() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("texelDataWithTopLeftOrigin"))
+	return obj.Wrap(_r)
 }
 
 // Returns the texture’s image data, organized such that its first pixel represents the bottom-left corner of the image.
-//
-// TexelDataWithBottomLeftOrigin calls the underlying TexelDataWithBottomLeftOrigin.
-func (x *Texture) TexelDataWithBottomLeftOrigin() *foundation.NSData {
-	return x.inner.TexelDataWithBottomLeftOrigin()
+func (x *Texture) TexelDataWithBottomLeftOrigin() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("texelDataWithBottomLeftOrigin"))
+	return obj.Wrap(_r)
 }
 
 // Returns the texture’s image data for the specified mipmap level, organized such that its first pixel represents the top-left corner of the image.
-//
-// TexelDataWithTopLeftOriginAtMipLevelCreate calls the underlying TexelDataWithTopLeftOriginAtMipLevelCreate.
-func (x *Texture) TexelDataWithTopLeftOriginAtMipLevelCreate(level int, create bool) *foundation.NSData {
-	return x.inner.TexelDataWithTopLeftOriginAtMipLevelCreate(level, create)
+func (x *Texture) TexelDataWithTopLeftOriginAtMipLevelCreate(level int, create bool) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("texelDataWithTopLeftOriginAtMipLevel:create:"), level, create)
+	return obj.Wrap(_r)
 }
 
 // Returns the texture’s image data for the specified mipmap level, organized such that its first pixel represents the bottom-left corner of the image.
-//
-// TexelDataWithBottomLeftOriginAtMipLevelCreate calls the underlying TexelDataWithBottomLeftOriginAtMipLevelCreate.
-func (x *Texture) TexelDataWithBottomLeftOriginAtMipLevelCreate(level int, create bool) *foundation.NSData {
-	return x.inner.TexelDataWithBottomLeftOriginAtMipLevelCreate(level, create)
+func (x *Texture) TexelDataWithBottomLeftOriginAtMipLevelCreate(level int, create bool) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("texelDataWithBottomLeftOriginAtMipLevel:create:"), level, create)
+	return obj.Wrap(_r)
 }
 
-// Dimensions calls the underlying Dimensions.
-func (x *Texture) Dimensions() unsafe.Pointer {
-	return x.inner.Dimensions()
-}
-
-// RowStride calls the underlying RowStride.
 func (x *Texture) RowStride() int {
-	return x.inner.RowStride()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowStride"))
+	return _r
 }
 
-// ChannelCount calls the underlying ChannelCount.
-func (x *Texture) ChannelCount() uint {
-	return x.inner.ChannelCount()
+func (x *Texture) ChannelCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("channelCount"))
+	return _r
 }
 
-// MipLevelCount calls the underlying MipLevelCount.
-func (x *Texture) MipLevelCount() uint {
-	return x.inner.MipLevelCount()
+func (x *Texture) MipLevelCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mipLevelCount"))
+	return _r
 }
 
-// ChannelEncoding calls the underlying ChannelEncoding.
-func (x *Texture) ChannelEncoding() MDLTextureChannelEncoding {
-	return MDLTextureChannelEncoding(x.inner.ChannelEncoding())
+func (x *Texture) ChannelEncoding() TextureChannelEncoding {
+	_r := objc.Send[TextureChannelEncoding](objref.IDOf(x), objc.RegisterName("channelEncoding"))
+	return _r
 }
 
-// IsCube calls the underlying IsCube.
 func (x *Texture) IsCube() bool {
-	return x.inner.IsCube()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCube"))
+	return _r
 }
 
-// SetIsCube calls the underlying SetIsCube.
 func (x *Texture) SetIsCube(isCube bool) {
-	x.inner.SetIsCube(isCube)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCube:"), isCube)
 }
 
-// hasAlphaValues @summary Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
-//
-// HasAlphaValues calls the underlying HasAlphaValues.
+// hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
 func (x *Texture) HasAlphaValues() bool {
-	return x.inner.HasAlphaValues()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAlphaValues"))
+	return _r
 }
 
-// SetHasAlphaValues calls the underlying SetHasAlphaValues.
 func (x *Texture) SetHasAlphaValues(hasAlphaValues bool) {
-	x.inner.SetHasAlphaValues(hasAlphaValues)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
 }
-
-func (x *Texture) asTexture() *raw.MDLTexture { return x.inner }
 
 // Textureable is the interface implemented by [Texture], for mocking and DI.
 type Textureable interface {
-	Unwrap() *raw.MDLTexture
+	obj.Object
 	WithIsCube(isCube bool) *Texture
 	WithHasAlphaValues(hasAlphaValues bool) *Texture
 	WriteToURL(uRL string) bool
-	WriteToURLLevel(uRL string, level uint) bool
-	WriteToURLType(nsurl string, type_ unsafe.Pointer) bool
-	WriteToURLTypeLevel(nsurl string, type_ unsafe.Pointer, level uint) bool
-	ImageFromTexture() unsafe.Pointer
-	ImageFromTextureAtLevel(level uint) unsafe.Pointer
-	TexelDataWithTopLeftOrigin() *foundation.NSData
-	TexelDataWithBottomLeftOrigin() *foundation.NSData
-	TexelDataWithTopLeftOriginAtMipLevelCreate(level int, create bool) *foundation.NSData
-	TexelDataWithBottomLeftOriginAtMipLevelCreate(level int, create bool) *foundation.NSData
-	Dimensions() unsafe.Pointer
+	WriteToURLLevel(uRL string, level int) bool
+	WriteToURLType(nsurl string, type_ obj.Object) bool
+	WriteToURLTypeLevel(nsurl string, type_ obj.Object, level int) bool
+	ImageFromTexture() obj.Object
+	ImageFromTextureAtLevel(level int) obj.Object
+	TexelDataWithTopLeftOrigin() obj.Object
+	TexelDataWithBottomLeftOrigin() obj.Object
+	TexelDataWithTopLeftOriginAtMipLevelCreate(level int, create bool) obj.Object
+	TexelDataWithBottomLeftOriginAtMipLevelCreate(level int, create bool) obj.Object
 	RowStride() int
-	ChannelCount() uint
-	MipLevelCount() uint
-	ChannelEncoding() MDLTextureChannelEncoding
+	ChannelCount() int
+	MipLevelCount() int
+	ChannelEncoding() TextureChannelEncoding
 	IsCube() bool
 	SetIsCube(isCube bool)
 	HasAlphaValues() bool

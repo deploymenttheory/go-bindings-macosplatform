@@ -5,167 +5,158 @@
 package securityinterface
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityinterface"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A panel or sheet containing a list of identities that a user can choose from.
 //
-// ChooseIdentityPanel wraps [raw.SFChooseIdentityPanel] with a fluent Go API.
+// ChooseIdentityPanel is an idiomatic wrapper over the Objective-C class SFChooseIdentityPanel.
 type ChooseIdentityPanel struct {
-	inner *raw.SFChooseIdentityPanel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFChooseIdentityPanel].
-func (x *ChooseIdentityPanel) Unwrap() *raw.SFChooseIdentityPanel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChooseIdentityPanel) ID() objc.ID { return x.inner.Ptr() }
-
-// ChooseIdentityPanelFromID adopts an existing object pointer as a ChooseIdentityPanel (nil for 0).
+// ChooseIdentityPanelFromID adopts an existing Objective-C object as a ChooseIdentityPanel
+// (nil for 0), retaining it and registering a release finalizer.
 func ChooseIdentityPanelFromID(id objc.ID) *ChooseIdentityPanel {
 	if id == 0 {
 		return nil
 	}
-	return &ChooseIdentityPanel{inner: raw.SFChooseIdentityPanelFromID(id)}
+	x := &ChooseIdentityPanel{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewChooseIdentityPanel creates a new [ChooseIdentityPanel].
+// chooseIdentityPanelAdopt wraps an Objective-C object that this code just created as a
+// ChooseIdentityPanel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func chooseIdentityPanelAdopt(id objc.ID) *ChooseIdentityPanel {
+	if id == 0 {
+		return nil
+	}
+	x := &ChooseIdentityPanel{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ChooseIdentityPanel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ChooseIdentityPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ChooseIdentityPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewChooseIdentityPanel creates a new ChooseIdentityPanel.
 func NewChooseIdentityPanel() *ChooseIdentityPanel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFChooseIdentityPanel")), objc.RegisterName("new"))
-	return &ChooseIdentityPanel{inner: raw.SFChooseIdentityPanelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFChooseIdentityPanel")), objc.RegisterName("new"))
+	return chooseIdentityPanelAdopt(_id)
 }
 
 // Displays a list of identities in a modal panel.
-//
-// RunModalForIdentitiesMessage calls the underlying RunModalForIdentitiesMessage.
-func (x *ChooseIdentityPanel) RunModalForIdentitiesMessage(identities *foundation.NSArray[objc.ID], message string) int {
-	return x.inner.RunModalForIdentitiesMessage(identities, foundation.NSStringStringWithUTF8String(message))
-}
-
-// Displays a list of identities in a modal sheet from which the user can select an identity.
-//
-// BeginSheetForWindowModalDelegateDidEndSelectorContextInfoIdentitiesMessage calls the underlying BeginSheetForWindowModalDelegateDidEndSelectorContextInfoIdentitiesMessage.
-func (x *ChooseIdentityPanel) BeginSheetForWindowModalDelegateDidEndSelectorContextInfoIdentitiesMessage(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, identities *foundation.NSArray[objc.ID], message string) {
-	x.inner.BeginSheetForWindowModalDelegateDidEndSelectorContextInfoIdentitiesMessage(docWindow, delegate, didEndSelector, contextInfo, identities, foundation.NSStringStringWithUTF8String(message))
+func (x *ChooseIdentityPanel) RunModalForIdentitiesMessage(identities obj.Object, message string) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalForIdentities:message:"), objref.IDOf(identities), purego.NSString(message))
+	return _r
 }
 
 // Returns the identity that the user chose in the panel or sheet.
-//
-// Identity calls the underlying Identity.
-func (x *ChooseIdentityPanel) Identity() unsafe.Pointer {
-	return x.inner.Identity()
+func (x *ChooseIdentityPanel) Identity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identity"))
+	return obj.Wrap(_r)
 }
 
 // Specifies one or more policies that apply to the displayed certificates.
-//
-// SetPolicies calls the underlying SetPolicies.
-func (x *ChooseIdentityPanel) SetPolicies(policies objc.ID) {
-	x.inner.SetPolicies(policies)
+func (x *ChooseIdentityPanel) SetPolicies(policies obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolicies:"), objref.IDOf(policies))
 }
 
 // Returns an array of policies used to evaluate the status of the displayed certificates.
-//
-// Policies calls the underlying Policies.
-func (x *ChooseIdentityPanel) Policies() *foundation.NSArray[objc.ID] {
-	return x.inner.Policies()
+func (x *ChooseIdentityPanel) Policies() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("policies"))
+	return obj.Wrap(_r)
 }
 
 // Customizes the title of the default button.
-//
-// SetDefaultButtonTitle calls the underlying SetDefaultButtonTitle.
 func (x *ChooseIdentityPanel) SetDefaultButtonTitle(title string) {
-	x.inner.SetDefaultButtonTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultButtonTitle:"), purego.NSString(title))
 }
 
 // Customizes the title of the alternate button.
-//
-// SetAlternateButtonTitle calls the underlying SetAlternateButtonTitle.
 func (x *ChooseIdentityPanel) SetAlternateButtonTitle(title string) {
-	x.inner.SetAlternateButtonTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateButtonTitle:"), purego.NSString(title))
 }
 
 // Displays a Help button in the sheet or panel.
-//
-// SetShowsHelp calls the underlying SetShowsHelp.
 func (x *ChooseIdentityPanel) SetShowsHelp(showsHelp bool) {
-	x.inner.SetShowsHelp(showsHelp)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsHelp:"), showsHelp)
 }
 
 // Indicates whether the help button is currently set to be displayed.
-//
-// ShowsHelp calls the underlying ShowsHelp.
 func (x *ChooseIdentityPanel) ShowsHelp() bool {
-	return x.inner.ShowsHelp()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsHelp"))
+	return _r
 }
 
 // Sets the help anchor string for the sheet or modal panel.
-//
-// SetHelpAnchor calls the underlying SetHelpAnchor.
 func (x *ChooseIdentityPanel) SetHelpAnchor(anchor string) {
-	x.inner.SetHelpAnchor(foundation.NSStringStringWithUTF8String(anchor))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpAnchor:"), purego.NSString(anchor))
 }
 
 // Returns the current help anchor string for the sheet or panel.
-//
-// HelpAnchor calls the underlying HelpAnchor.
 func (x *ChooseIdentityPanel) HelpAnchor() string {
-	_r := x.inner.HelpAnchor()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("helpAnchor"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Sets the optional informative text displayed in the panel.
-//
-// SetInformativeText calls the underlying SetInformativeText.
 func (x *ChooseIdentityPanel) SetInformativeText(informativeText string) {
-	x.inner.SetInformativeText(foundation.NSStringStringWithUTF8String(informativeText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInformativeText:"), purego.NSString(informativeText))
 }
 
 // Returns the informative text currently displayed in the panel.
-//
-// InformativeText calls the underlying InformativeText.
 func (x *ChooseIdentityPanel) InformativeText() string {
-	_r := x.inner.InformativeText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("informativeText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Sets an optional domain in which the identity is to be used.
-//
-// SetDomain calls the underlying SetDomain.
 func (x *ChooseIdentityPanel) SetDomain(domainString string) {
-	x.inner.SetDomain(foundation.NSStringStringWithUTF8String(domainString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDomain:"), purego.NSString(domainString))
 }
 
 // Returns the domain that will be associated with the chosen identity.
-//
-// Domain calls the underlying Domain.
 func (x *ChooseIdentityPanel) Domain() string {
-	_r := x.inner.Domain()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // ChooseIdentityPanelable is the interface implemented by [ChooseIdentityPanel], for mocking and DI.
 type ChooseIdentityPanelable interface {
-	Unwrap() *raw.SFChooseIdentityPanel
-	RunModalForIdentitiesMessage(identities *foundation.NSArray[objc.ID], message string) int
-	BeginSheetForWindowModalDelegateDidEndSelectorContextInfoIdentitiesMessage(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, identities *foundation.NSArray[objc.ID], message string)
-	Identity() unsafe.Pointer
-	SetPolicies(policies objc.ID)
-	Policies() *foundation.NSArray[objc.ID]
+	obj.Object
+	RunModalForIdentitiesMessage(identities obj.Object, message string) int
+	Identity() obj.Object
+	SetPolicies(policies obj.Object)
+	Policies() obj.Object
 	SetDefaultButtonTitle(title string)
 	SetAlternateButtonTitle(title string)
 	SetShowsHelp(showsHelp bool)

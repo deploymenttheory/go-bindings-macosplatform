@@ -5,10 +5,10 @@
 package speech
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// SpeechRecognitionRequestProvider is implemented by SpeechRecognitionRequest and any idiomatic type wrapping a SFSpeechRecognitionRequest subclass.
+// SpeechRecognitionRequestProvider is accepted wherever a SFSpeechRecognitionRequest (or one of its subclasses) is expected.
 type SpeechRecognitionRequestProvider interface {
-	asSpeechRecognitionRequest() *raw.SFSpeechRecognitionRequest
+	objref.Object
 }

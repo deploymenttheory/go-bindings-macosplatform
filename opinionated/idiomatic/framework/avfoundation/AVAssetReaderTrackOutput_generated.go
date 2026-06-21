@@ -5,115 +5,124 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that reads media data from a single track of an asset.
 //
-// AssetReaderTrackOutput wraps [raw.AVAssetReaderTrackOutput] with a fluent Go API.
+// AssetReaderTrackOutput is an idiomatic wrapper over the Objective-C class AVAssetReaderTrackOutput.
 type AssetReaderTrackOutput struct {
-	inner *raw.AVAssetReaderTrackOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetReaderTrackOutput].
-func (x *AssetReaderTrackOutput) Unwrap() *raw.AVAssetReaderTrackOutput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetReaderTrackOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetReaderTrackOutputFromID adopts an existing object pointer as a AssetReaderTrackOutput (nil for 0).
+// AssetReaderTrackOutputFromID adopts an existing Objective-C object as a AssetReaderTrackOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetReaderTrackOutputFromID(id objc.ID) *AssetReaderTrackOutput {
 	if id == 0 {
 		return nil
 	}
-	return &AssetReaderTrackOutput{inner: raw.AVAssetReaderTrackOutputFromID(id)}
+	x := &AssetReaderTrackOutput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// assetReaderTrackOutputAdopt wraps an Objective-C object that this code just created as a
+// AssetReaderTrackOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetReaderTrackOutputAdopt(id objc.ID) *AssetReaderTrackOutput {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetReaderTrackOutput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetReaderTrackOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetReaderTrackOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetReaderTrackOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an object that reads media data from an asset track.
 //
-// NewAssetReaderTrackOutputWithTrackOutputSettings creates a new [AssetReaderTrackOutput].
-func NewAssetReaderTrackOutputWithTrackOutputSettings(track *raw.AVAssetTrack, outputSettings purego.IDer) *AssetReaderTrackOutput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetReaderTrackOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrack:outputSettings:"), track.Ptr(), outputSettings.ID())
-	return &AssetReaderTrackOutput{inner: raw.AVAssetReaderTrackOutputFromID(_id)}
+// NewAssetReaderTrackOutputWithTrackOutputSettings creates a new AssetReaderTrackOutput.
+func NewAssetReaderTrackOutputWithTrackOutputSettings(track *AssetTrack, outputSettings obj.Object) *AssetReaderTrackOutput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetReaderTrackOutput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrack:outputSettings:"), objref.IDOf(track), objref.IDOf(outputSettings))
+	return assetReaderTrackOutputAdopt(_id)
 }
 
 // The processing algorithm to use for scaled audio edits.
 //
-// WithAudioTimePitchAlgorithm sets the audioTimePitchAlgorithm property and returns the receiver for chaining.
-func (x *AssetReaderTrackOutput) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *AssetReaderTrackOutput {
-	x.inner.SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm)
+// WithAudioTimePitchAlgorithm sets audioTimePitchAlgorithm and returns the receiver so calls can be chained.
+func (x *AssetReaderTrackOutput) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *AssetReaderTrackOutput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
 	return x
 }
 
 // A Boolean value that indicates whether the output vends copied sample data.
 //
-// WithAlwaysCopiesSampleData sets the alwaysCopiesSampleData property and returns the receiver for chaining.
+// WithAlwaysCopiesSampleData sets alwaysCopiesSampleData and returns the receiver so calls can be chained.
 func (x *AssetReaderTrackOutput) WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderTrackOutput {
-	x.inner.AVAssetReaderOutput.SetAlwaysCopiesSampleData(alwaysCopiesSampleData)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlwaysCopiesSampleData:"), alwaysCopiesSampleData)
 	return x
 }
 
 // A Boolean value that indicates whether the output supports reconfiguring the time ranges it reads.
 //
-// WithSupportsRandomAccess sets the supportsRandomAccess property and returns the receiver for chaining.
+// WithSupportsRandomAccess sets supportsRandomAccess and returns the receiver so calls can be chained.
 func (x *AssetReaderTrackOutput) WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderTrackOutput {
-	x.inner.AVAssetReaderOutput.SetSupportsRandomAccess(supportsRandomAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsRandomAccess:"), supportsRandomAccess)
 	return x
 }
 
-// @property track @abstract The track from which the receiver reads sample buffers. @discussion The value of this property is an AVAssetTrack owned by the target AVAssetReader's asset.
-//
-// Track calls the underlying Track.
+// The track from which the receiver reads sample buffers. The value of this property is an AVAssetTrack owned by the target AVAssetReader's asset.
 func (x *AssetReaderTrackOutput) Track() *AssetTrack {
-	_r := x.inner.Track()
-	if _r == nil {
-		return nil
-	}
-	return &AssetTrack{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("track"))
+	return AssetTrackFromID(_r)
 }
 
-// @property outputSettings @abstract The output settings used by the receiver. @discussion The value of this property is an NSDictionary that contains values for keys as specified by either AVAudioSettings.h for audio tracks or AVVideoSettings.h for video tracks.  A value of nil indicates that the receiver will vend samples in their original format as stored in the target track.
-//
-// OutputSettings calls the underlying OutputSettings.
-func (x *AssetReaderTrackOutput) OutputSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.OutputSettings()
+// The output settings used by the receiver. The value of this property is an NSDictionary that contains values for keys as specified by either AVAudioSettings.h for audio tracks or AVVideoSettings.h for video tracks.  A value of nil indicates that the receiver will vend samples in their original format as stored in the target track.
+func (x *AssetReaderTrackOutput) OutputSettings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputSettings"))
+	return obj.Wrap(_r)
 }
 
-// @property audioTimePitchAlgorithm @abstract Indicates the processing algorithm used to manage audio pitch for scaled audio edits. @discussion Constants for various time pitch algorithms, e.g. AVAudioTimePitchAlgorithmSpectral, are defined in AVAudioProcessingSettings.h.  An NSInvalidArgumentException will be raised if this property is set to a value other than the constants defined in that file. The default value is AVAudioTimePitchAlgorithmSpectral. This property throws an exception for any of the following reasons: - a value is set value after reading has started - a value is set other than AVAudioTimePitchAlgorithmSpectral, AVAudioTimePitchAlgorithmTimeDomain, or AVAudioTimePitchAlgorithmVarispeed.
-//
-// AudioTimePitchAlgorithm calls the underlying AudioTimePitchAlgorithm.
-func (x *AssetReaderTrackOutput) AudioTimePitchAlgorithm() string {
-	_r := x.inner.AudioTimePitchAlgorithm()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// Indicates the processing algorithm used to manage audio pitch for scaled audio edits. Constants for various time pitch algorithms, e.g. AVAudioTimePitchAlgorithmSpectral, are defined in AVAudioProcessingSettings.h.  An NSInvalidArgumentException will be raised if this property is set to a value other than the constants defined in that file. The default value is AVAudioTimePitchAlgorithmSpectral. This property throws an exception for any of the following reasons: - a value is set value after reading has started - a value is set other than AVAudioTimePitchAlgorithmSpectral, AVAudioTimePitchAlgorithmTimeDomain, or AVAudioTimePitchAlgorithmVarispeed.
+func (x *AssetReaderTrackOutput) AudioTimePitchAlgorithm() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioTimePitchAlgorithm"))
+	return obj.Wrap(_r)
 }
 
-// SetAudioTimePitchAlgorithm calls the underlying SetAudioTimePitchAlgorithm.
-func (x *AssetReaderTrackOutput) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) {
-	x.inner.SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm)
-}
-
-func (x *AssetReaderTrackOutput) asAssetReaderOutput() *raw.AVAssetReaderOutput {
-	return &x.inner.AVAssetReaderOutput
+func (x *AssetReaderTrackOutput) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
 }
 
 // AssetReaderTrackOutputable is the interface implemented by [AssetReaderTrackOutput], for mocking and DI.
 type AssetReaderTrackOutputable interface {
-	Unwrap() *raw.AVAssetReaderTrackOutput
-	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *AssetReaderTrackOutput
+	obj.Object
+	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *AssetReaderTrackOutput
 	WithAlwaysCopiesSampleData(alwaysCopiesSampleData bool) *AssetReaderTrackOutput
 	WithSupportsRandomAccess(supportsRandomAccess bool) *AssetReaderTrackOutput
 	Track() *AssetTrack
-	OutputSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	AudioTimePitchAlgorithm() string
-	SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString)
+	OutputSettings() obj.Object
+	AudioTimePitchAlgorithm() obj.Object
+	SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object)
 }
 
 var _ AssetReaderTrackOutputable = (*AssetReaderTrackOutput)(nil)

@@ -5,84 +5,103 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRCommissionableBrowserResult wraps [raw.MTRCommissionableBrowserResult] with a fluent Go API.
+// MTRCommissionableBrowserResult is an idiomatic wrapper over the Objective-C class MTRCommissionableBrowserResult.
 type MTRCommissionableBrowserResult struct {
-	inner *raw.MTRCommissionableBrowserResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRCommissionableBrowserResult].
-func (x *MTRCommissionableBrowserResult) Unwrap() *raw.MTRCommissionableBrowserResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRCommissionableBrowserResult) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRCommissionableBrowserResultFromID adopts an existing object pointer as a MTRCommissionableBrowserResult (nil for 0).
+// MTRCommissionableBrowserResultFromID adopts an existing Objective-C object as a MTRCommissionableBrowserResult
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRCommissionableBrowserResultFromID(id objc.ID) *MTRCommissionableBrowserResult {
 	if id == 0 {
 		return nil
 	}
-	return &MTRCommissionableBrowserResult{inner: raw.MTRCommissionableBrowserResultFromID(id)}
+	x := &MTRCommissionableBrowserResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRCommissionableBrowserResult creates a new [MTRCommissionableBrowserResult].
+// mTRCommissionableBrowserResultAdopt wraps an Objective-C object that this code just created as a
+// MTRCommissionableBrowserResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRCommissionableBrowserResultAdopt(id objc.ID) *MTRCommissionableBrowserResult {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRCommissionableBrowserResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRCommissionableBrowserResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRCommissionableBrowserResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRCommissionableBrowserResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRCommissionableBrowserResult creates a new MTRCommissionableBrowserResult.
 func NewMTRCommissionableBrowserResult() *MTRCommissionableBrowserResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRCommissionableBrowserResult")), objc.RegisterName("new"))
-	return &MTRCommissionableBrowserResult{inner: raw.MTRCommissionableBrowserResultFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRCommissionableBrowserResult")), objc.RegisterName("new"))
+	return mTRCommissionableBrowserResultAdopt(_id)
 }
 
 // For a node advertising over DNS-SD, the instance name is a dynamic, pseudo-randomly selected, 64-bit temporary unique identifier, expressed as a fixed-length sixteen-character hexadecimal string, encoded as ASCII text using capital letters. For a node advertising over Bluetooth Low Energy, the instance name is always "BLE".
-//
-// InstanceName calls the underlying InstanceName.
 func (x *MTRCommissionableBrowserResult) InstanceName() string {
-	_r := x.inner.InstanceName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instanceName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // A 16-bit unsigned value identifying the device manufacturer.
-//
-// VendorID calls the underlying VendorID.
-func (x *MTRCommissionableBrowserResult) VendorID() *foundation.NSNumber {
-	return x.inner.VendorID()
+func (x *MTRCommissionableBrowserResult) VendorID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorID"))
+	return obj.Wrap(_r)
 }
 
 // A 16-bit unsigned value identifying the product.
-//
-// ProductID calls the underlying ProductID.
-func (x *MTRCommissionableBrowserResult) ProductID() *foundation.NSNumber {
-	return x.inner.ProductID()
+func (x *MTRCommissionableBrowserResult) ProductID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productID"))
+	return obj.Wrap(_r)
 }
 
 // A 12-bit value matching the field of the same name in MTRSetupPayload.
-//
-// Discriminator calls the underlying Discriminator.
-func (x *MTRCommissionableBrowserResult) Discriminator() *foundation.NSNumber {
-	return x.inner.Discriminator()
+func (x *MTRCommissionableBrowserResult) Discriminator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discriminator"))
+	return obj.Wrap(_r)
 }
 
 // A boolean indicating whether the device has a commissioning window open.
-//
-// CommissioningMode calls the underlying CommissioningMode.
 func (x *MTRCommissionableBrowserResult) CommissioningMode() bool {
-	return x.inner.CommissioningMode()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("commissioningMode"))
+	return _r
 }
 
 // MTRCommissionableBrowserResultable is the interface implemented by [MTRCommissionableBrowserResult], for mocking and DI.
 type MTRCommissionableBrowserResultable interface {
-	Unwrap() *raw.MTRCommissionableBrowserResult
+	obj.Object
 	InstanceName() string
-	VendorID() *foundation.NSNumber
-	ProductID() *foundation.NSNumber
-	Discriminator() *foundation.NSNumber
+	VendorID() obj.Object
+	ProductID() obj.Object
+	Discriminator() obj.Object
 	CommissioningMode() bool
 }
 

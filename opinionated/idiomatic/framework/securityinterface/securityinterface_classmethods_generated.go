@@ -5,50 +5,35 @@
 package securityinterface
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityinterface"
+	"github.com/ebitengine/purego/objc"
 )
 
-// SharedCertificatePanel calls the underlying SFCertificatePanelSharedCertificatePanel.
+// Returns a fully initialized, singleton certificate panel object.
 func SharedCertificatePanel() *CertificatePanel {
-	_r := raw.SFCertificatePanelSharedCertificatePanel()
-	if _r == nil {
-		return nil
-	}
-	return &CertificatePanel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SFCertificatePanel")), objc.RegisterName("sharedCertificatePanel"))
+	return CertificatePanelFromID(_r)
 }
 
-// SharedCertificateTrustPanel calls the underlying SFCertificateTrustPanelSharedCertificateTrustPanel.
+// Returns a fully initialized, singleton certificate trust panel object.
 func SharedCertificateTrustPanel() *CertificateTrustPanel {
-	_r := raw.SFCertificateTrustPanelSharedCertificateTrustPanel()
-	if _r == nil {
-		return nil
-	}
-	return &CertificateTrustPanel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SFCertificateTrustPanel")), objc.RegisterName("sharedCertificateTrustPanel"))
+	return CertificateTrustPanelFromID(_r)
 }
 
-// SharedChooseIdentityPanel calls the underlying SFChooseIdentityPanelSharedChooseIdentityPanel.
+// Returns a fully initialized, singleton choose identity panel object.
 func SharedChooseIdentityPanel() *ChooseIdentityPanel {
-	_r := raw.SFChooseIdentityPanelSharedChooseIdentityPanel()
-	if _r == nil {
-		return nil
-	}
-	return &ChooseIdentityPanel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SFChooseIdentityPanel")), objc.RegisterName("sharedChooseIdentityPanel"))
+	return ChooseIdentityPanelFromID(_r)
 }
 
-// SharedKeychainSavePanel calls the underlying SFKeychainSavePanelSharedKeychainSavePanel.
+// Returns a shared keychain save panel object.
 func SharedKeychainSavePanel() *KeychainSavePanel {
-	_r := raw.SFKeychainSavePanelSharedKeychainSavePanel()
-	if _r == nil {
-		return nil
-	}
-	return &KeychainSavePanel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SFKeychainSavePanel")), objc.RegisterName("sharedKeychainSavePanel"))
+	return KeychainSavePanelFromID(_r)
 }
 
-// SharedKeychainSettingsPanel calls the underlying SFKeychainSettingsPanelSharedKeychainSettingsPanel.
+// Returns a shared keychain settings panel object.
 func SharedKeychainSettingsPanel() *KeychainSettingsPanel {
-	_r := raw.SFKeychainSettingsPanelSharedKeychainSettingsPanel()
-	if _r == nil {
-		return nil
-	}
-	return &KeychainSettingsPanel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SFKeychainSettingsPanel")), objc.RegisterName("sharedKeychainSettingsPanel"))
+	return KeychainSettingsPanelFromID(_r)
 }

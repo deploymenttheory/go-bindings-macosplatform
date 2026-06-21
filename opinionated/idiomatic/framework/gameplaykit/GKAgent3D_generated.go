@@ -5,168 +5,143 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An agent that operates in a three-dimensional space.
 //
-// Agent3D wraps [raw.GKAgent3D] with a fluent Go API.
+// Agent3D is an idiomatic wrapper over the Objective-C class GKAgent3D.
 type Agent3D struct {
-	inner *raw.GKAgent3D
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKAgent3D].
-func (x *Agent3D) Unwrap() *raw.GKAgent3D { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Agent3D) ID() objc.ID { return x.inner.Ptr() }
-
-// Agent3DFromID adopts an existing object pointer as a Agent3D (nil for 0).
+// Agent3DFromID adopts an existing Objective-C object as a Agent3D
+// (nil for 0), retaining it and registering a release finalizer.
 func Agent3DFromID(id objc.ID) *Agent3D {
 	if id == 0 {
 		return nil
 	}
-	return &Agent3D{inner: raw.GKAgent3DFromID(id)}
+	x := &Agent3D{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAgent3D creates a new [Agent3D].
+// agent3DAdopt wraps an Objective-C object that this code just created as a
+// Agent3D (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func agent3DAdopt(id objc.ID) *Agent3D {
+	if id == 0 {
+		return nil
+	}
+	x := &Agent3D{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Agent3D) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Agent3D) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Agent3D) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAgent3D creates a new Agent3D.
 func NewAgent3D() *Agent3D {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKAgent3D")), objc.RegisterName("new"))
-	return &Agent3D{inner: raw.GKAgent3DFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKAgent3D")), objc.RegisterName("new"))
+	return agent3DAdopt(_id)
 }
 
 // Should this vehicle operate in a right-handed coordinate system? NO means it will be left-handed
 //
-// WithRightHanded sets the rightHanded property and returns the receiver for chaining.
+// WithRightHanded sets rightHanded and returns the receiver so calls can be chained.
 func (x *Agent3D) WithRightHanded(rightHanded bool) *Agent3D {
-	x.inner.SetRightHanded(rightHanded)
-	return x
-}
-
-// An object that prepares for or responds to updates in the agent simulation.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Agent3D) WithDelegate(delegate raw.GKAgentDelegate) *Agent3D {
-	x.inner.GKAgent.SetDelegate(delegate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightHanded:"), rightHanded)
 	return x
 }
 
 // A weighted collection of goals that influence the agent’s movement.
 //
-// WithBehavior sets the behavior property and returns the receiver for chaining.
+// WithBehavior sets behavior and returns the receiver so calls can be chained.
 func (x *Agent3D) WithBehavior(behavior BehaviorProvider) *Agent3D {
-	x.inner.GKAgent.SetBehavior(behavior.asBehavior())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
 	return x
 }
 
 // The resistance of the agent to changes in speed or direction.
 //
-// WithMass sets the mass property and returns the receiver for chaining.
+// WithMass sets mass and returns the receiver so calls can be chained.
 func (x *Agent3D) WithMass(mass float32) *Agent3D {
-	x.inner.GKAgent.SetMass(mass)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMass:"), mass)
 	return x
 }
 
 // The agent’s radius.
 //
-// WithRadius sets the radius property and returns the receiver for chaining.
+// WithRadius sets radius and returns the receiver so calls can be chained.
 func (x *Agent3D) WithRadius(radius float32) *Agent3D {
-	x.inner.GKAgent.SetRadius(radius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 	return x
 }
 
 // The agent’s current forward speed, in units per second.
 //
-// WithSpeed sets the speed property and returns the receiver for chaining.
+// WithSpeed sets speed and returns the receiver so calls can be chained.
 func (x *Agent3D) WithSpeed(speed float32) *Agent3D {
-	x.inner.GKAgent.SetSpeed(speed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
 // The upper limit to changes in the agent’s speed or direction.
 //
-// WithMaxAcceleration sets the maxAcceleration property and returns the receiver for chaining.
+// WithMaxAcceleration sets maxAcceleration and returns the receiver so calls can be chained.
 func (x *Agent3D) WithMaxAcceleration(maxAcceleration float32) *Agent3D {
-	x.inner.GKAgent.SetMaxAcceleration(maxAcceleration)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAcceleration:"), maxAcceleration)
 	return x
 }
 
 // The agent’s maximum forward speed, in units per second.
 //
-// WithMaxSpeed sets the maxSpeed property and returns the receiver for chaining.
+// WithMaxSpeed sets maxSpeed and returns the receiver so calls can be chained.
 func (x *Agent3D) WithMaxSpeed(maxSpeed float32) *Agent3D {
-	x.inner.GKAgent.SetMaxSpeed(maxSpeed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSpeed:"), maxSpeed)
 	return x
 }
 
-// Position of the agent on the logical XYZ plane
-//
-// Position calls the underlying Position.
-func (x *Agent3D) Position() unsafe.Pointer {
-	return x.inner.Position()
-}
-
-// SetPosition calls the underlying SetPosition.
-func (x *Agent3D) SetPosition(position unsafe.Pointer) {
-	x.inner.SetPosition(position)
-}
-
-// Current logical velocity of the agent. The forward vector can be derived by normalizing this.
-//
-// Velocity calls the underlying Velocity.
-func (x *Agent3D) Velocity() unsafe.Pointer {
-	return x.inner.Velocity()
-}
-
 // Should this vehicle operate in a right-handed coordinate system? NO means it will be left-handed
-//
-// RightHanded calls the underlying RightHanded.
 func (x *Agent3D) RightHanded() bool {
-	return x.inner.RightHanded()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("rightHanded"))
+	return _r
 }
 
-// SetRightHanded calls the underlying SetRightHanded.
 func (x *Agent3D) SetRightHanded(rightHanded bool) {
-	x.inner.SetRightHanded(rightHanded)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightHanded:"), rightHanded)
 }
-
-// The 3x3 rotation matrix that defines the orientation of this agent in 3D space columns[0] is forward, columns[1] is up, columns[2] is side
-//
-// Rotation calls the underlying Rotation.
-func (x *Agent3D) Rotation() unsafe.Pointer {
-	return x.inner.Rotation()
-}
-
-// SetRotation calls the underlying SetRotation.
-func (x *Agent3D) SetRotation(rotation unsafe.Pointer) {
-	x.inner.SetRotation(rotation)
-}
-
-func (x *Agent3D) asAgent() *raw.GKAgent { return &x.inner.GKAgent }
-
-func (x *Agent3D) asComponent() *raw.GKComponent { return &x.inner.GKAgent.GKComponent }
 
 // Agent3Dable is the interface implemented by [Agent3D], for mocking and DI.
 type Agent3Dable interface {
-	Unwrap() *raw.GKAgent3D
+	obj.Object
 	WithRightHanded(rightHanded bool) *Agent3D
-	WithDelegate(delegate raw.GKAgentDelegate) *Agent3D
 	WithBehavior(behavior BehaviorProvider) *Agent3D
 	WithMass(mass float32) *Agent3D
 	WithRadius(radius float32) *Agent3D
 	WithSpeed(speed float32) *Agent3D
 	WithMaxAcceleration(maxAcceleration float32) *Agent3D
 	WithMaxSpeed(maxSpeed float32) *Agent3D
-	Position() unsafe.Pointer
-	SetPosition(position unsafe.Pointer)
-	Velocity() unsafe.Pointer
 	RightHanded() bool
 	SetRightHanded(rightHanded bool)
-	Rotation() unsafe.Pointer
-	SetRotation(rotation unsafe.Pointer)
 }
 
 var _ Agent3Dable = (*Agent3D)(nil)

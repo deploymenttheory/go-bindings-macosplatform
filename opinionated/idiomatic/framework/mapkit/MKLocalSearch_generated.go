@@ -5,74 +5,90 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A utility object for initiating map-based searches and processing the results.
 //
-// LocalSearch wraps [raw.MKLocalSearch] with a fluent Go API.
+// LocalSearch is an idiomatic wrapper over the Objective-C class MKLocalSearch.
 type LocalSearch struct {
-	inner *raw.MKLocalSearch
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKLocalSearch].
-func (x *LocalSearch) Unwrap() *raw.MKLocalSearch { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LocalSearch) ID() objc.ID { return x.inner.Ptr() }
-
-// LocalSearchFromID adopts an existing object pointer as a LocalSearch (nil for 0).
+// LocalSearchFromID adopts an existing Objective-C object as a LocalSearch
+// (nil for 0), retaining it and registering a release finalizer.
 func LocalSearchFromID(id objc.ID) *LocalSearch {
 	if id == 0 {
 		return nil
 	}
-	return &LocalSearch{inner: raw.MKLocalSearchFromID(id)}
+	x := &LocalSearch{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// localSearchAdopt wraps an Objective-C object that this code just created as a
+// LocalSearch (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func localSearchAdopt(id objc.ID) *LocalSearch {
+	if id == 0 {
+		return nil
+	}
+	x := &LocalSearch{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LocalSearch) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LocalSearch) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LocalSearch) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates and returns a search object with the specified parameters.
 //
-// NewLocalSearchWithRequest creates a new [LocalSearch].
-func NewLocalSearchWithRequest(request *raw.MKLocalSearchRequest) *LocalSearch {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLocalSearch")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:"), request.Ptr())
-	return &LocalSearch{inner: raw.MKLocalSearchFromID(_id)}
+// NewLocalSearchWithRequest creates a new LocalSearch.
+func NewLocalSearchWithRequest(request *LocalSearchRequest) *LocalSearch {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLocalSearch")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequest:"), objref.IDOf(request))
+	return localSearchAdopt(_id)
 }
 
 // Creates and returns a search object for fetching points of interest.
 //
-// NewLocalSearchWithPointsOfInterestRequest creates a new [LocalSearch].
-func NewLocalSearchWithPointsOfInterestRequest(request *raw.MKLocalPointsOfInterestRequest) *LocalSearch {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLocalSearch")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPointsOfInterestRequest:"), request.Ptr())
-	return &LocalSearch{inner: raw.MKLocalSearchFromID(_id)}
-}
-
-// Starts the search and delivers the results to the specified completion handler.
-//
-// StartWithCompletionHandler calls the underlying StartWithCompletionHandler.
-func (x *LocalSearch) StartWithCompletionHandler(completionHandler func(*raw.MKLocalSearchResponse, unsafe.Pointer)) {
-	x.inner.StartWithCompletionHandler(completionHandler)
+// NewLocalSearchWithPointsOfInterestRequest creates a new LocalSearch.
+func NewLocalSearchWithPointsOfInterestRequest(request *LocalPointsOfInterestRequest) *LocalSearch {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLocalSearch")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPointsOfInterestRequest:"), objref.IDOf(request))
+	return localSearchAdopt(_id)
 }
 
 // Cancels an in-progress search operation.
-//
-// Cancel calls the underlying Cancel.
 func (x *LocalSearch) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// IsSearching calls the underlying IsSearching.
 func (x *LocalSearch) IsSearching() bool {
-	return x.inner.IsSearching()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSearching"))
+	return _r
 }
 
 // LocalSearchable is the interface implemented by [LocalSearch], for mocking and DI.
 type LocalSearchable interface {
-	Unwrap() *raw.MKLocalSearch
-	StartWithCompletionHandler(completionHandler func(*raw.MKLocalSearchResponse, unsafe.Pointer))
+	obj.Object
 	Cancel()
 	IsSearching() bool
 }

@@ -5,81 +5,90 @@
 package speech
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A collection of vocal analysis metrics.
 //
-// VoiceAnalytics wraps [raw.SFVoiceAnalytics] with a fluent Go API.
+// VoiceAnalytics is an idiomatic wrapper over the Objective-C class SFVoiceAnalytics.
 type VoiceAnalytics struct {
-	inner *raw.SFVoiceAnalytics
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFVoiceAnalytics].
-func (x *VoiceAnalytics) Unwrap() *raw.SFVoiceAnalytics { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VoiceAnalytics) ID() objc.ID { return x.inner.Ptr() }
-
-// VoiceAnalyticsFromID adopts an existing object pointer as a VoiceAnalytics (nil for 0).
+// VoiceAnalyticsFromID adopts an existing Objective-C object as a VoiceAnalytics
+// (nil for 0), retaining it and registering a release finalizer.
 func VoiceAnalyticsFromID(id objc.ID) *VoiceAnalytics {
 	if id == 0 {
 		return nil
 	}
-	return &VoiceAnalytics{inner: raw.SFVoiceAnalyticsFromID(id)}
+	x := &VoiceAnalytics{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVoiceAnalytics creates a new [VoiceAnalytics].
-func NewVoiceAnalytics() *VoiceAnalytics {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFVoiceAnalytics")), objc.RegisterName("new"))
-	return &VoiceAnalytics{inner: raw.SFVoiceAnalyticsFromID(_id)}
-}
-
-// Jitter calls the underlying Jitter.
-func (x *VoiceAnalytics) Jitter() *AcousticFeature {
-	_r := x.inner.Jitter()
-	if _r == nil {
+// voiceAnalyticsAdopt wraps an Objective-C object that this code just created as a
+// VoiceAnalytics (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func voiceAnalyticsAdopt(id objc.ID) *VoiceAnalytics {
+	if id == 0 {
 		return nil
 	}
-	return &AcousticFeature{inner: _r}
+	x := &VoiceAnalytics{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VoiceAnalytics) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VoiceAnalytics) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VoiceAnalytics) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVoiceAnalytics creates a new VoiceAnalytics.
+func NewVoiceAnalytics() *VoiceAnalytics {
+	_id := objc.Send[objc.ID](objc.ID(_class("SFVoiceAnalytics")), objc.RegisterName("new"))
+	return voiceAnalyticsAdopt(_id)
+}
+
+func (x *VoiceAnalytics) Jitter() *AcousticFeature {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jitter"))
+	return AcousticFeatureFromID(_r)
 }
 
 // The variation in vocal volume stability (amplitude) in each frame of a transcription segment, expressed in decibels.
-//
-// Shimmer calls the underlying Shimmer.
 func (x *VoiceAnalytics) Shimmer() *AcousticFeature {
-	_r := x.inner.Shimmer()
-	if _r == nil {
-		return nil
-	}
-	return &AcousticFeature{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shimmer"))
+	return AcousticFeatureFromID(_r)
 }
 
 // The highness or lowness of the tone (fundamental frequency) in each frame of a transcription segment, expressed as a logarithm. The value is a logarithm (base `e`) of the normalized pitch estimate for each frame.
-//
-// Pitch calls the underlying Pitch.
 func (x *VoiceAnalytics) Pitch() *AcousticFeature {
-	_r := x.inner.Pitch()
-	if _r == nil {
-		return nil
-	}
-	return &AcousticFeature{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pitch"))
+	return AcousticFeatureFromID(_r)
 }
 
-// Voicing calls the underlying Voicing.
 func (x *VoiceAnalytics) Voicing() *AcousticFeature {
-	_r := x.inner.Voicing()
-	if _r == nil {
-		return nil
-	}
-	return &AcousticFeature{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voicing"))
+	return AcousticFeatureFromID(_r)
 }
 
 // VoiceAnalyticsable is the interface implemented by [VoiceAnalytics], for mocking and DI.
 type VoiceAnalyticsable interface {
-	Unwrap() *raw.SFVoiceAnalytics
+	obj.Object
 	Jitter() *AcousticFeature
 	Shimmer() *AcousticFeature
 	Pitch() *AcousticFeature

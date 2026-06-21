@@ -5,45 +5,68 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The abstract class for VM start options.
 //
-// VirtualMachineStartOptions wraps [raw.VZVirtualMachineStartOptions] with a fluent Go API.
+// VirtualMachineStartOptions is an idiomatic wrapper over the Objective-C class VZVirtualMachineStartOptions.
 type VirtualMachineStartOptions struct {
-	inner *raw.VZVirtualMachineStartOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZVirtualMachineStartOptions].
-func (x *VirtualMachineStartOptions) Unwrap() *raw.VZVirtualMachineStartOptions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtualMachineStartOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtualMachineStartOptionsFromID adopts an existing object pointer as a VirtualMachineStartOptions (nil for 0).
+// VirtualMachineStartOptionsFromID adopts an existing Objective-C object as a VirtualMachineStartOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtualMachineStartOptionsFromID(id objc.ID) *VirtualMachineStartOptions {
 	if id == 0 {
 		return nil
 	}
-	return &VirtualMachineStartOptions{inner: raw.VZVirtualMachineStartOptionsFromID(id)}
+	x := &VirtualMachineStartOptions{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVirtualMachineStartOptions creates a new [VirtualMachineStartOptions].
+// virtualMachineStartOptionsAdopt wraps an Objective-C object that this code just created as a
+// VirtualMachineStartOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtualMachineStartOptionsAdopt(id objc.ID) *VirtualMachineStartOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtualMachineStartOptions{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VirtualMachineStartOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VirtualMachineStartOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VirtualMachineStartOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVirtualMachineStartOptions creates a new VirtualMachineStartOptions.
 func NewVirtualMachineStartOptions() *VirtualMachineStartOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtualMachineStartOptions")), objc.RegisterName("new"))
-	return &VirtualMachineStartOptions{inner: raw.VZVirtualMachineStartOptionsFromID(_id)}
-}
-
-func (x *VirtualMachineStartOptions) asVirtualMachineStartOptions() *raw.VZVirtualMachineStartOptions {
-	return x.inner
+	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtualMachineStartOptions")), objc.RegisterName("new"))
+	return virtualMachineStartOptionsAdopt(_id)
 }
 
 // VirtualMachineStartOptionsable is the interface implemented by [VirtualMachineStartOptions], for mocking and DI.
 type VirtualMachineStartOptionsable interface {
-	Unwrap() *raw.VZVirtualMachineStartOptions
+	obj.Object
 }
 
 var _ VirtualMachineStartOptionsable = (*VirtualMachineStartOptions)(nil)

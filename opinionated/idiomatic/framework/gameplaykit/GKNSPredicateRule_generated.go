@@ -5,64 +5,87 @@
 package gameplaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A rule for use in a rule system that uses a Foundation NSPredicate object to evaluate itself.
 //
-// NSPredicateRule wraps [raw.GKNSPredicateRule] with a fluent Go API.
+// NSPredicateRule is an idiomatic wrapper over the Objective-C class GKNSPredicateRule.
 type NSPredicateRule struct {
-	inner *raw.GKNSPredicateRule
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKNSPredicateRule].
-func (x *NSPredicateRule) Unwrap() *raw.GKNSPredicateRule { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NSPredicateRule) ID() objc.ID { return x.inner.Ptr() }
-
-// NSPredicateRuleFromID adopts an existing object pointer as a NSPredicateRule (nil for 0).
+// NSPredicateRuleFromID adopts an existing Objective-C object as a NSPredicateRule
+// (nil for 0), retaining it and registering a release finalizer.
 func NSPredicateRuleFromID(id objc.ID) *NSPredicateRule {
 	if id == 0 {
 		return nil
 	}
-	return &NSPredicateRule{inner: raw.GKNSPredicateRuleFromID(id)}
+	x := &NSPredicateRule{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// nSPredicateRuleAdopt wraps an Objective-C object that this code just created as a
+// NSPredicateRule (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nSPredicateRuleAdopt(id objc.ID) *NSPredicateRule {
+	if id == 0 {
+		return nil
+	}
+	x := &NSPredicateRule{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NSPredicateRule) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NSPredicateRule) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NSPredicateRule) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a rule with the specified predicate.
 //
-// NewNSPredicateRuleWithPredicate creates a new [NSPredicateRule].
-func NewNSPredicateRuleWithPredicate(predicate *foundation.NSPredicate) *NSPredicateRule {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKNSPredicateRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPredicate:"), predicate.Ptr())
-	return &NSPredicateRule{inner: raw.GKNSPredicateRuleFromID(_id)}
+// NewNSPredicateRuleWithPredicate creates a new NSPredicateRule.
+func NewNSPredicateRuleWithPredicate(predicate obj.Object) *NSPredicateRule {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKNSPredicateRule")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPredicate:"), objref.IDOf(predicate))
+	return nSPredicateRuleAdopt(_id)
 }
 
 // The importance of the rule relative to others in a rule system’s agenda.
 //
-// WithSalience sets the salience property and returns the receiver for chaining.
+// WithSalience sets salience and returns the receiver so calls can be chained.
 func (x *NSPredicateRule) WithSalience(salience int) *NSPredicateRule {
-	x.inner.GKRule.SetSalience(salience)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSalience:"), salience)
 	return x
 }
 
-// The NSPredicate that is used inside this subclass's implementation of evaluatePredicateWithSystem: In order to effectively use this class you must still override performActionWithSystem: @see GKRule.evaluatePredicateWithSystem:
-//
-// Predicate calls the underlying Predicate.
-func (x *NSPredicateRule) Predicate() *foundation.NSPredicate {
-	return x.inner.Predicate()
+// The NSPredicate that is used inside this subclass's implementation of evaluatePredicateWithSystem: In order to effectively use this class you must still override performActionWithSystem:
+func (x *NSPredicateRule) Predicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
+	return obj.Wrap(_r)
 }
-
-func (x *NSPredicateRule) asRule() *raw.GKRule { return &x.inner.GKRule }
 
 // NSPredicateRuleable is the interface implemented by [NSPredicateRule], for mocking and DI.
 type NSPredicateRuleable interface {
-	Unwrap() *raw.GKNSPredicateRule
+	obj.Object
 	WithSalience(salience int) *NSPredicateRule
-	Predicate() *foundation.NSPredicate
+	Predicate() obj.Object
 }
 
 var _ NSPredicateRuleable = (*NSPredicateRule)(nil)

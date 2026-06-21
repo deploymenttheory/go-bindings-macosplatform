@@ -5,103 +5,122 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The abstract superclass for objects that automatically adjust the position, rotation, or scale of a node based on specified rules.
 //
-// Constraint wraps [raw.SCNConstraint] with a fluent Go API.
+// Constraint is an idiomatic wrapper over the Objective-C class SCNConstraint.
 type Constraint struct {
-	inner *raw.SCNConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNConstraint].
-func (x *Constraint) Unwrap() *raw.SCNConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Constraint) ID() objc.ID { return x.inner.Ptr() }
-
-// ConstraintFromID adopts an existing object pointer as a Constraint (nil for 0).
+// ConstraintFromID adopts an existing Objective-C object as a Constraint
+// (nil for 0), retaining it and registering a release finalizer.
 func ConstraintFromID(id objc.ID) *Constraint {
 	if id == 0 {
 		return nil
 	}
-	return &Constraint{inner: raw.SCNConstraintFromID(id)}
+	x := &Constraint{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewConstraint creates a new [Constraint].
+// constraintAdopt wraps an Objective-C object that this code just created as a
+// Constraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func constraintAdopt(id objc.ID) *Constraint {
+	if id == 0 {
+		return nil
+	}
+	x := &Constraint{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Constraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Constraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Constraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewConstraint creates a new Constraint.
 func NewConstraint() *Constraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNConstraint")), objc.RegisterName("new"))
-	return &Constraint{inner: raw.SCNConstraintFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNConstraint")), objc.RegisterName("new"))
+	return constraintAdopt(_id)
 }
 
-// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
+// Determines whether the constraint is enabled or not. Defaults to YES.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *Constraint) WithEnabled(enabled bool) *Constraint {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // The influence of the constraint on the node’s transformation.
 //
-// WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
+// WithInfluenceFactor sets influenceFactor and returns the receiver so calls can be chained.
 func (x *Constraint) WithInfluenceFactor(influenceFactor float64) *Constraint {
-	x.inner.SetInfluenceFactor(influenceFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
 	return x
 }
 
-// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+// Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
 //
-// WithIncremental sets the incremental property and returns the receiver for chaining.
+// WithIncremental sets incremental and returns the receiver so calls can be chained.
 func (x *Constraint) WithIncremental(incremental bool) *Constraint {
-	x.inner.SetIncremental(incremental)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
 	return x
 }
 
-// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
-//
-// IsEnabled calls the underlying IsEnabled.
+// Determines whether the constraint is enabled or not. Defaults to YES.
 func (x *Constraint) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// SetEnabled calls the underlying SetEnabled.
 func (x *Constraint) SetEnabled(enabled bool) {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
-// @property influenceFactor @abstract Specifies the inflence factor of the receiver. Defaults to 1. Animatable
-//
-// InfluenceFactor calls the underlying InfluenceFactor.
+// Specifies the inflence factor of the receiver. Defaults to 1. Animatable
 func (x *Constraint) InfluenceFactor() float64 {
-	return x.inner.InfluenceFactor()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("influenceFactor"))
+	return _r
 }
 
-// SetInfluenceFactor calls the underlying SetInfluenceFactor.
 func (x *Constraint) SetInfluenceFactor(influenceFactor float64) {
-	x.inner.SetInfluenceFactor(influenceFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
 }
 
-// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-//
-// IsIncremental calls the underlying IsIncremental.
+// Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
 func (x *Constraint) IsIncremental() bool {
-	return x.inner.IsIncremental()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIncremental"))
+	return _r
 }
 
-// SetIncremental calls the underlying SetIncremental.
 func (x *Constraint) SetIncremental(incremental bool) {
-	x.inner.SetIncremental(incremental)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
 }
-
-func (x *Constraint) asConstraint() *raw.SCNConstraint { return x.inner }
 
 // Constraintable is the interface implemented by [Constraint], for mocking and DI.
 type Constraintable interface {
-	Unwrap() *raw.SCNConstraint
+	obj.Object
 	WithEnabled(enabled bool) *Constraint
 	WithInfluenceFactor(influenceFactor float64) *Constraint
 	WithIncremental(incremental bool) *Constraint

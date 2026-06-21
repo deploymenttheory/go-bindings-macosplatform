@@ -5,84 +5,108 @@
 package corespotlight
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A key associated with a custom attribute for a searchable item.
 //
-// CustomAttributeKey wraps [raw.CSCustomAttributeKey] with a fluent Go API.
+// CustomAttributeKey is an idiomatic wrapper over the Objective-C class CSCustomAttributeKey.
 type CustomAttributeKey struct {
-	inner *raw.CSCustomAttributeKey
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CSCustomAttributeKey].
-func (x *CustomAttributeKey) Unwrap() *raw.CSCustomAttributeKey { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CustomAttributeKey) ID() objc.ID { return x.inner.Ptr() }
-
-// CustomAttributeKeyFromID adopts an existing object pointer as a CustomAttributeKey (nil for 0).
+// CustomAttributeKeyFromID adopts an existing Objective-C object as a CustomAttributeKey
+// (nil for 0), retaining it and registering a release finalizer.
 func CustomAttributeKeyFromID(id objc.ID) *CustomAttributeKey {
 	if id == 0 {
 		return nil
 	}
-	return &CustomAttributeKey{inner: raw.CSCustomAttributeKeyFromID(id)}
+	x := &CustomAttributeKey{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// customAttributeKeyAdopt wraps an Objective-C object that this code just created as a
+// CustomAttributeKey (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func customAttributeKeyAdopt(id objc.ID) *CustomAttributeKey {
+	if id == 0 {
+		return nil
+	}
+	x := &CustomAttributeKey{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CustomAttributeKey) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CustomAttributeKey) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CustomAttributeKey) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns a new custom attribute key with the specified name.
 //
-// NewCustomAttributeKeyWithKeyName creates a new [CustomAttributeKey].
+// NewCustomAttributeKeyWithKeyName creates a new CustomAttributeKey.
 func NewCustomAttributeKeyWithKeyName(keyName string) *CustomAttributeKey {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CSCustomAttributeKey")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKeyName:"), foundation.NSStringStringWithUTF8String(keyName).Ptr())
-	return &CustomAttributeKey{inner: raw.CSCustomAttributeKeyFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CSCustomAttributeKey")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKeyName:"), purego.NSString(keyName))
+	return customAttributeKeyAdopt(_id)
 }
 
 // Returns a new custom attribute key with the specified name and properties.
 //
-// NewCustomAttributeKeyWithKeyNameSearchableSearchableByDefaultUniqueMultiValued creates a new [CustomAttributeKey].
+// NewCustomAttributeKeyWithKeyNameSearchableSearchableByDefaultUniqueMultiValued creates a new CustomAttributeKey.
 func NewCustomAttributeKeyWithKeyNameSearchableSearchableByDefaultUniqueMultiValued(keyName string, searchable bool, searchableByDefault bool, unique bool, multiValued bool) *CustomAttributeKey {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CSCustomAttributeKey")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKeyName:searchable:searchableByDefault:unique:multiValued:"), foundation.NSStringStringWithUTF8String(keyName).Ptr(), searchable, searchableByDefault, unique, multiValued)
-	return &CustomAttributeKey{inner: raw.CSCustomAttributeKeyFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CSCustomAttributeKey")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKeyName:searchable:searchableByDefault:unique:multiValued:"), purego.NSString(keyName), searchable, searchableByDefault, unique, multiValued)
+	return customAttributeKeyAdopt(_id)
 }
 
-// KeyName calls the underlying KeyName.
 func (x *CustomAttributeKey) KeyName() string {
-	_r := x.inner.KeyName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// IsSearchable calls the underlying IsSearchable.
 func (x *CustomAttributeKey) IsSearchable() bool {
-	return x.inner.IsSearchable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSearchable"))
+	return _r
 }
 
-// IsSearchableByDefault calls the underlying IsSearchableByDefault.
 func (x *CustomAttributeKey) IsSearchableByDefault() bool {
-	return x.inner.IsSearchableByDefault()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSearchableByDefault"))
+	return _r
 }
 
-// IsUnique calls the underlying IsUnique.
 func (x *CustomAttributeKey) IsUnique() bool {
-	return x.inner.IsUnique()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUnique"))
+	return _r
 }
 
-// IsMultiValued calls the underlying IsMultiValued.
 func (x *CustomAttributeKey) IsMultiValued() bool {
-	return x.inner.IsMultiValued()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMultiValued"))
+	return _r
 }
 
 // CustomAttributeKeyable is the interface implemented by [CustomAttributeKey], for mocking and DI.
 type CustomAttributeKeyable interface {
-	Unwrap() *raw.CSCustomAttributeKey
+	obj.Object
 	KeyName() string
 	IsSearchable() bool
 	IsSearchableByDefault() bool

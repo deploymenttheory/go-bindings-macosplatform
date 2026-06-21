@@ -5,1870 +5,1628 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMCSSStyleDeclaration wraps [raw.DOMCSSStyleDeclaration] with a fluent Go API.
+// DOMCSSStyleDeclaration is an idiomatic wrapper over the Objective-C class DOMCSSStyleDeclaration.
 type DOMCSSStyleDeclaration struct {
-	inner *raw.DOMCSSStyleDeclaration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMCSSStyleDeclaration].
-func (x *DOMCSSStyleDeclaration) Unwrap() *raw.DOMCSSStyleDeclaration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMCSSStyleDeclaration) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMCSSStyleDeclarationFromID adopts an existing object pointer as a DOMCSSStyleDeclaration (nil for 0).
+// DOMCSSStyleDeclarationFromID adopts an existing Objective-C object as a DOMCSSStyleDeclaration
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMCSSStyleDeclarationFromID(id objc.ID) *DOMCSSStyleDeclaration {
 	if id == 0 {
 		return nil
 	}
-	return &DOMCSSStyleDeclaration{inner: raw.DOMCSSStyleDeclarationFromID(id)}
-}
-
-// NewDOMCSSStyleDeclaration creates a new [DOMCSSStyleDeclaration].
-func NewDOMCSSStyleDeclaration() *DOMCSSStyleDeclaration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMCSSStyleDeclaration")), objc.RegisterName("new"))
-	return &DOMCSSStyleDeclaration{inner: raw.DOMCSSStyleDeclarationFromID(_id)}
-}
-
-// WithCssText sets the cssText property and returns the receiver for chaining.
-func (x *DOMCSSStyleDeclaration) WithCssText(cssText string) *DOMCSSStyleDeclaration {
-	x.inner.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	x := &DOMCSSStyleDeclaration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// GetPropertyValue calls the underlying GetPropertyValue.
+// dOMCSSStyleDeclarationAdopt wraps an Objective-C object that this code just created as a
+// DOMCSSStyleDeclaration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMCSSStyleDeclarationAdopt(id objc.ID) *DOMCSSStyleDeclaration {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMCSSStyleDeclaration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DOMCSSStyleDeclaration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMCSSStyleDeclaration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMCSSStyleDeclaration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMCSSStyleDeclaration creates a new DOMCSSStyleDeclaration.
+func NewDOMCSSStyleDeclaration() *DOMCSSStyleDeclaration {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMCSSStyleDeclaration")), objc.RegisterName("new"))
+	return dOMCSSStyleDeclarationAdopt(_id)
+}
+
+// WithCssText sets cssText and returns the receiver so calls can be chained.
+func (x *DOMCSSStyleDeclaration) WithCssText(cssText string) *DOMCSSStyleDeclaration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return x
+}
+
 func (x *DOMCSSStyleDeclaration) GetPropertyValue(propertyName string) string {
-	_r := x.inner.GetPropertyValue(foundation.NSStringStringWithUTF8String(propertyName))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getPropertyValue:"), purego.NSString(propertyName))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// GetPropertyCSSValue calls the underlying GetPropertyCSSValue.
 func (x *DOMCSSStyleDeclaration) GetPropertyCSSValue(propertyName string) *DOMCSSValue {
-	_r := x.inner.GetPropertyCSSValue(foundation.NSStringStringWithUTF8String(propertyName))
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSValue{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getPropertyCSSValue:"), purego.NSString(propertyName))
+	return DOMCSSValueFromID(_r)
 }
 
-// RemoveProperty calls the underlying RemoveProperty.
 func (x *DOMCSSStyleDeclaration) RemoveProperty(propertyName string) string {
-	_r := x.inner.RemoveProperty(foundation.NSStringStringWithUTF8String(propertyName))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeProperty:"), purego.NSString(propertyName))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// GetPropertyPriority calls the underlying GetPropertyPriority.
 func (x *DOMCSSStyleDeclaration) GetPropertyPriority(propertyName string) string {
-	_r := x.inner.GetPropertyPriority(foundation.NSStringStringWithUTF8String(propertyName))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getPropertyPriority:"), purego.NSString(propertyName))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPropertyValuePriority calls the underlying SetPropertyValuePriority.
 func (x *DOMCSSStyleDeclaration) SetPropertyValuePriority(propertyName string, value string, priority string) {
-	x.inner.SetPropertyValuePriority(foundation.NSStringStringWithUTF8String(propertyName), foundation.NSStringStringWithUTF8String(value), foundation.NSStringStringWithUTF8String(priority))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperty:value:priority:"), purego.NSString(propertyName), purego.NSString(value), purego.NSString(priority))
 }
 
-// Item calls the underlying Item.
-func (x *DOMCSSStyleDeclaration) Item(index uint) string {
-	_r := x.inner.Item(index)
-	if _r == nil {
+func (x *DOMCSSStyleDeclaration) Item(index int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// GetPropertyShorthand calls the underlying GetPropertyShorthand.
 func (x *DOMCSSStyleDeclaration) GetPropertyShorthand(propertyName string) string {
-	_r := x.inner.GetPropertyShorthand(foundation.NSStringStringWithUTF8String(propertyName))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getPropertyShorthand:"), purego.NSString(propertyName))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// IsPropertyImplicit calls the underlying IsPropertyImplicit.
 func (x *DOMCSSStyleDeclaration) IsPropertyImplicit(propertyName string) bool {
-	return x.inner.IsPropertyImplicit(foundation.NSStringStringWithUTF8String(propertyName))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPropertyImplicit:"), purego.NSString(propertyName))
+	return _r
 }
 
-// CssText calls the underlying CssText.
 func (x *DOMCSSStyleDeclaration) CssText() string {
-	_r := x.inner.CssText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cssText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCssText calls the underlying SetCssText.
 func (x *DOMCSSStyleDeclaration) SetCssText(cssText string) {
-	x.inner.SetCssText(foundation.NSStringStringWithUTF8String(cssText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
 }
 
-// Length calls the underlying Length.
-func (x *DOMCSSStyleDeclaration) Length() uint {
-	return x.inner.Length()
+func (x *DOMCSSStyleDeclaration) Length() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
-// ParentRule calls the underlying ParentRule.
 func (x *DOMCSSStyleDeclaration) ParentRule() *DOMCSSRule {
-	_r := x.inner.ParentRule()
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSRule{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentRule"))
+	return DOMCSSRuleFromID(_r)
 }
 
-// SetProperty calls the underlying SetProperty.
 func (x *DOMCSSStyleDeclaration) SetProperty(propertyName string, value string, priority string) {
-	x.inner.SetProperty(foundation.NSStringStringWithUTF8String(propertyName), foundation.NSStringStringWithUTF8String(value), foundation.NSStringStringWithUTF8String(priority))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperty:::"), purego.NSString(propertyName), purego.NSString(value), purego.NSString(priority))
 }
 
-// Azimuth calls the underlying Azimuth.
 func (x *DOMCSSStyleDeclaration) Azimuth() string {
-	_r := x.inner.Azimuth()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("azimuth"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetAzimuth calls the underlying SetAzimuth.
 func (x *DOMCSSStyleDeclaration) SetAzimuth(azimuth string) {
-	x.inner.SetAzimuth(foundation.NSStringStringWithUTF8String(azimuth))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAzimuth:"), purego.NSString(azimuth))
 }
 
-// Background calls the underlying Background.
 func (x *DOMCSSStyleDeclaration) Background() string {
-	_r := x.inner.Background()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("background"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBackground calls the underlying SetBackground.
 func (x *DOMCSSStyleDeclaration) SetBackground(background string) {
-	x.inner.SetBackground(foundation.NSStringStringWithUTF8String(background))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackground:"), purego.NSString(background))
 }
 
-// BackgroundAttachment calls the underlying BackgroundAttachment.
 func (x *DOMCSSStyleDeclaration) BackgroundAttachment() string {
-	_r := x.inner.BackgroundAttachment()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundAttachment"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBackgroundAttachment calls the underlying SetBackgroundAttachment.
 func (x *DOMCSSStyleDeclaration) SetBackgroundAttachment(backgroundAttachment string) {
-	x.inner.SetBackgroundAttachment(foundation.NSStringStringWithUTF8String(backgroundAttachment))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundAttachment:"), purego.NSString(backgroundAttachment))
 }
 
-// BackgroundColor calls the underlying BackgroundColor.
 func (x *DOMCSSStyleDeclaration) BackgroundColor() string {
-	_r := x.inner.BackgroundColor()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBackgroundColor calls the underlying SetBackgroundColor.
 func (x *DOMCSSStyleDeclaration) SetBackgroundColor(backgroundColor string) {
-	x.inner.SetBackgroundColor(foundation.NSStringStringWithUTF8String(backgroundColor))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), purego.NSString(backgroundColor))
 }
 
-// BackgroundImage calls the underlying BackgroundImage.
 func (x *DOMCSSStyleDeclaration) BackgroundImage() string {
-	_r := x.inner.BackgroundImage()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundImage"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBackgroundImage calls the underlying SetBackgroundImage.
 func (x *DOMCSSStyleDeclaration) SetBackgroundImage(backgroundImage string) {
-	x.inner.SetBackgroundImage(foundation.NSStringStringWithUTF8String(backgroundImage))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundImage:"), purego.NSString(backgroundImage))
 }
 
-// BackgroundPosition calls the underlying BackgroundPosition.
 func (x *DOMCSSStyleDeclaration) BackgroundPosition() string {
-	_r := x.inner.BackgroundPosition()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundPosition"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBackgroundPosition calls the underlying SetBackgroundPosition.
 func (x *DOMCSSStyleDeclaration) SetBackgroundPosition(backgroundPosition string) {
-	x.inner.SetBackgroundPosition(foundation.NSStringStringWithUTF8String(backgroundPosition))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundPosition:"), purego.NSString(backgroundPosition))
 }
 
-// BackgroundRepeat calls the underlying BackgroundRepeat.
 func (x *DOMCSSStyleDeclaration) BackgroundRepeat() string {
-	_r := x.inner.BackgroundRepeat()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundRepeat"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBackgroundRepeat calls the underlying SetBackgroundRepeat.
 func (x *DOMCSSStyleDeclaration) SetBackgroundRepeat(backgroundRepeat string) {
-	x.inner.SetBackgroundRepeat(foundation.NSStringStringWithUTF8String(backgroundRepeat))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundRepeat:"), purego.NSString(backgroundRepeat))
 }
 
-// Border calls the underlying Border.
 func (x *DOMCSSStyleDeclaration) Border() string {
-	_r := x.inner.Border()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("border"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorder calls the underlying SetBorder.
 func (x *DOMCSSStyleDeclaration) SetBorder(border string) {
-	x.inner.SetBorder(foundation.NSStringStringWithUTF8String(border))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorder:"), purego.NSString(border))
 }
 
-// BorderCollapse calls the underlying BorderCollapse.
 func (x *DOMCSSStyleDeclaration) BorderCollapse() string {
-	_r := x.inner.BorderCollapse()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderCollapse"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderCollapse calls the underlying SetBorderCollapse.
 func (x *DOMCSSStyleDeclaration) SetBorderCollapse(borderCollapse string) {
-	x.inner.SetBorderCollapse(foundation.NSStringStringWithUTF8String(borderCollapse))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderCollapse:"), purego.NSString(borderCollapse))
 }
 
-// BorderColor calls the underlying BorderColor.
 func (x *DOMCSSStyleDeclaration) BorderColor() string {
-	_r := x.inner.BorderColor()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderColor"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderColor calls the underlying SetBorderColor.
 func (x *DOMCSSStyleDeclaration) SetBorderColor(borderColor string) {
-	x.inner.SetBorderColor(foundation.NSStringStringWithUTF8String(borderColor))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), purego.NSString(borderColor))
 }
 
-// BorderSpacing calls the underlying BorderSpacing.
 func (x *DOMCSSStyleDeclaration) BorderSpacing() string {
-	_r := x.inner.BorderSpacing()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderSpacing"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderSpacing calls the underlying SetBorderSpacing.
 func (x *DOMCSSStyleDeclaration) SetBorderSpacing(borderSpacing string) {
-	x.inner.SetBorderSpacing(foundation.NSStringStringWithUTF8String(borderSpacing))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderSpacing:"), purego.NSString(borderSpacing))
 }
 
-// BorderStyle calls the underlying BorderStyle.
 func (x *DOMCSSStyleDeclaration) BorderStyle() string {
-	_r := x.inner.BorderStyle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderStyle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderStyle calls the underlying SetBorderStyle.
 func (x *DOMCSSStyleDeclaration) SetBorderStyle(borderStyle string) {
-	x.inner.SetBorderStyle(foundation.NSStringStringWithUTF8String(borderStyle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderStyle:"), purego.NSString(borderStyle))
 }
 
-// BorderTop calls the underlying BorderTop.
 func (x *DOMCSSStyleDeclaration) BorderTop() string {
-	_r := x.inner.BorderTop()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderTop"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderTop calls the underlying SetBorderTop.
 func (x *DOMCSSStyleDeclaration) SetBorderTop(borderTop string) {
-	x.inner.SetBorderTop(foundation.NSStringStringWithUTF8String(borderTop))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderTop:"), purego.NSString(borderTop))
 }
 
-// BorderRight calls the underlying BorderRight.
 func (x *DOMCSSStyleDeclaration) BorderRight() string {
-	_r := x.inner.BorderRight()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderRight"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderRight calls the underlying SetBorderRight.
 func (x *DOMCSSStyleDeclaration) SetBorderRight(borderRight string) {
-	x.inner.SetBorderRight(foundation.NSStringStringWithUTF8String(borderRight))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderRight:"), purego.NSString(borderRight))
 }
 
-// BorderBottom calls the underlying BorderBottom.
 func (x *DOMCSSStyleDeclaration) BorderBottom() string {
-	_r := x.inner.BorderBottom()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderBottom"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderBottom calls the underlying SetBorderBottom.
 func (x *DOMCSSStyleDeclaration) SetBorderBottom(borderBottom string) {
-	x.inner.SetBorderBottom(foundation.NSStringStringWithUTF8String(borderBottom))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderBottom:"), purego.NSString(borderBottom))
 }
 
-// BorderLeft calls the underlying BorderLeft.
 func (x *DOMCSSStyleDeclaration) BorderLeft() string {
-	_r := x.inner.BorderLeft()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderLeft"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderLeft calls the underlying SetBorderLeft.
 func (x *DOMCSSStyleDeclaration) SetBorderLeft(borderLeft string) {
-	x.inner.SetBorderLeft(foundation.NSStringStringWithUTF8String(borderLeft))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderLeft:"), purego.NSString(borderLeft))
 }
 
-// BorderTopColor calls the underlying BorderTopColor.
 func (x *DOMCSSStyleDeclaration) BorderTopColor() string {
-	_r := x.inner.BorderTopColor()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderTopColor"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderTopColor calls the underlying SetBorderTopColor.
 func (x *DOMCSSStyleDeclaration) SetBorderTopColor(borderTopColor string) {
-	x.inner.SetBorderTopColor(foundation.NSStringStringWithUTF8String(borderTopColor))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderTopColor:"), purego.NSString(borderTopColor))
 }
 
-// BorderRightColor calls the underlying BorderRightColor.
 func (x *DOMCSSStyleDeclaration) BorderRightColor() string {
-	_r := x.inner.BorderRightColor()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderRightColor"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderRightColor calls the underlying SetBorderRightColor.
 func (x *DOMCSSStyleDeclaration) SetBorderRightColor(borderRightColor string) {
-	x.inner.SetBorderRightColor(foundation.NSStringStringWithUTF8String(borderRightColor))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderRightColor:"), purego.NSString(borderRightColor))
 }
 
-// BorderBottomColor calls the underlying BorderBottomColor.
 func (x *DOMCSSStyleDeclaration) BorderBottomColor() string {
-	_r := x.inner.BorderBottomColor()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderBottomColor"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderBottomColor calls the underlying SetBorderBottomColor.
 func (x *DOMCSSStyleDeclaration) SetBorderBottomColor(borderBottomColor string) {
-	x.inner.SetBorderBottomColor(foundation.NSStringStringWithUTF8String(borderBottomColor))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderBottomColor:"), purego.NSString(borderBottomColor))
 }
 
-// BorderLeftColor calls the underlying BorderLeftColor.
 func (x *DOMCSSStyleDeclaration) BorderLeftColor() string {
-	_r := x.inner.BorderLeftColor()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderLeftColor"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderLeftColor calls the underlying SetBorderLeftColor.
 func (x *DOMCSSStyleDeclaration) SetBorderLeftColor(borderLeftColor string) {
-	x.inner.SetBorderLeftColor(foundation.NSStringStringWithUTF8String(borderLeftColor))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderLeftColor:"), purego.NSString(borderLeftColor))
 }
 
-// BorderTopStyle calls the underlying BorderTopStyle.
 func (x *DOMCSSStyleDeclaration) BorderTopStyle() string {
-	_r := x.inner.BorderTopStyle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderTopStyle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderTopStyle calls the underlying SetBorderTopStyle.
 func (x *DOMCSSStyleDeclaration) SetBorderTopStyle(borderTopStyle string) {
-	x.inner.SetBorderTopStyle(foundation.NSStringStringWithUTF8String(borderTopStyle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderTopStyle:"), purego.NSString(borderTopStyle))
 }
 
-// BorderRightStyle calls the underlying BorderRightStyle.
 func (x *DOMCSSStyleDeclaration) BorderRightStyle() string {
-	_r := x.inner.BorderRightStyle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderRightStyle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderRightStyle calls the underlying SetBorderRightStyle.
 func (x *DOMCSSStyleDeclaration) SetBorderRightStyle(borderRightStyle string) {
-	x.inner.SetBorderRightStyle(foundation.NSStringStringWithUTF8String(borderRightStyle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderRightStyle:"), purego.NSString(borderRightStyle))
 }
 
-// BorderBottomStyle calls the underlying BorderBottomStyle.
 func (x *DOMCSSStyleDeclaration) BorderBottomStyle() string {
-	_r := x.inner.BorderBottomStyle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderBottomStyle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderBottomStyle calls the underlying SetBorderBottomStyle.
 func (x *DOMCSSStyleDeclaration) SetBorderBottomStyle(borderBottomStyle string) {
-	x.inner.SetBorderBottomStyle(foundation.NSStringStringWithUTF8String(borderBottomStyle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderBottomStyle:"), purego.NSString(borderBottomStyle))
 }
 
-// BorderLeftStyle calls the underlying BorderLeftStyle.
 func (x *DOMCSSStyleDeclaration) BorderLeftStyle() string {
-	_r := x.inner.BorderLeftStyle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderLeftStyle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderLeftStyle calls the underlying SetBorderLeftStyle.
 func (x *DOMCSSStyleDeclaration) SetBorderLeftStyle(borderLeftStyle string) {
-	x.inner.SetBorderLeftStyle(foundation.NSStringStringWithUTF8String(borderLeftStyle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderLeftStyle:"), purego.NSString(borderLeftStyle))
 }
 
-// BorderTopWidth calls the underlying BorderTopWidth.
 func (x *DOMCSSStyleDeclaration) BorderTopWidth() string {
-	_r := x.inner.BorderTopWidth()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderTopWidth"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderTopWidth calls the underlying SetBorderTopWidth.
 func (x *DOMCSSStyleDeclaration) SetBorderTopWidth(borderTopWidth string) {
-	x.inner.SetBorderTopWidth(foundation.NSStringStringWithUTF8String(borderTopWidth))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderTopWidth:"), purego.NSString(borderTopWidth))
 }
 
-// BorderRightWidth calls the underlying BorderRightWidth.
 func (x *DOMCSSStyleDeclaration) BorderRightWidth() string {
-	_r := x.inner.BorderRightWidth()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderRightWidth"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderRightWidth calls the underlying SetBorderRightWidth.
 func (x *DOMCSSStyleDeclaration) SetBorderRightWidth(borderRightWidth string) {
-	x.inner.SetBorderRightWidth(foundation.NSStringStringWithUTF8String(borderRightWidth))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderRightWidth:"), purego.NSString(borderRightWidth))
 }
 
-// BorderBottomWidth calls the underlying BorderBottomWidth.
 func (x *DOMCSSStyleDeclaration) BorderBottomWidth() string {
-	_r := x.inner.BorderBottomWidth()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderBottomWidth"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderBottomWidth calls the underlying SetBorderBottomWidth.
 func (x *DOMCSSStyleDeclaration) SetBorderBottomWidth(borderBottomWidth string) {
-	x.inner.SetBorderBottomWidth(foundation.NSStringStringWithUTF8String(borderBottomWidth))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderBottomWidth:"), purego.NSString(borderBottomWidth))
 }
 
-// BorderLeftWidth calls the underlying BorderLeftWidth.
 func (x *DOMCSSStyleDeclaration) BorderLeftWidth() string {
-	_r := x.inner.BorderLeftWidth()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderLeftWidth"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderLeftWidth calls the underlying SetBorderLeftWidth.
 func (x *DOMCSSStyleDeclaration) SetBorderLeftWidth(borderLeftWidth string) {
-	x.inner.SetBorderLeftWidth(foundation.NSStringStringWithUTF8String(borderLeftWidth))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderLeftWidth:"), purego.NSString(borderLeftWidth))
 }
 
-// BorderWidth calls the underlying BorderWidth.
 func (x *DOMCSSStyleDeclaration) BorderWidth() string {
-	_r := x.inner.BorderWidth()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderWidth"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBorderWidth calls the underlying SetBorderWidth.
 func (x *DOMCSSStyleDeclaration) SetBorderWidth(borderWidth string) {
-	x.inner.SetBorderWidth(foundation.NSStringStringWithUTF8String(borderWidth))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderWidth:"), purego.NSString(borderWidth))
 }
 
-// Bottom calls the underlying Bottom.
 func (x *DOMCSSStyleDeclaration) Bottom() string {
-	_r := x.inner.Bottom()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bottom"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBottom calls the underlying SetBottom.
 func (x *DOMCSSStyleDeclaration) SetBottom(bottom string) {
-	x.inner.SetBottom(foundation.NSStringStringWithUTF8String(bottom))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBottom:"), purego.NSString(bottom))
 }
 
-// CaptionSide calls the underlying CaptionSide.
 func (x *DOMCSSStyleDeclaration) CaptionSide() string {
-	_r := x.inner.CaptionSide()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("captionSide"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCaptionSide calls the underlying SetCaptionSide.
 func (x *DOMCSSStyleDeclaration) SetCaptionSide(captionSide string) {
-	x.inner.SetCaptionSide(foundation.NSStringStringWithUTF8String(captionSide))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptionSide:"), purego.NSString(captionSide))
 }
 
-// Clear calls the underlying Clear.
 func (x *DOMCSSStyleDeclaration) Clear() string {
-	_r := x.inner.Clear()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clear"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetClear calls the underlying SetClear.
 func (x *DOMCSSStyleDeclaration) SetClear(clear string) {
-	x.inner.SetClear(foundation.NSStringStringWithUTF8String(clear))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClear:"), purego.NSString(clear))
 }
 
-// Clip calls the underlying Clip.
 func (x *DOMCSSStyleDeclaration) Clip() string {
-	_r := x.inner.Clip()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clip"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetClip calls the underlying SetClip.
 func (x *DOMCSSStyleDeclaration) SetClip(clip string) {
-	x.inner.SetClip(foundation.NSStringStringWithUTF8String(clip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClip:"), purego.NSString(clip))
 }
 
-// Color calls the underlying Color.
 func (x *DOMCSSStyleDeclaration) Color() string {
-	_r := x.inner.Color()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetColor calls the underlying SetColor.
 func (x *DOMCSSStyleDeclaration) SetColor(color string) {
-	x.inner.SetColor(foundation.NSStringStringWithUTF8String(color))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), purego.NSString(color))
 }
 
-// Content calls the underlying Content.
 func (x *DOMCSSStyleDeclaration) Content() string {
-	_r := x.inner.Content()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("content"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetContent calls the underlying SetContent.
 func (x *DOMCSSStyleDeclaration) SetContent(content string) {
-	x.inner.SetContent(foundation.NSStringStringWithUTF8String(content))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContent:"), purego.NSString(content))
 }
 
-// CounterIncrement calls the underlying CounterIncrement.
 func (x *DOMCSSStyleDeclaration) CounterIncrement() string {
-	_r := x.inner.CounterIncrement()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("counterIncrement"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCounterIncrement calls the underlying SetCounterIncrement.
 func (x *DOMCSSStyleDeclaration) SetCounterIncrement(counterIncrement string) {
-	x.inner.SetCounterIncrement(foundation.NSStringStringWithUTF8String(counterIncrement))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCounterIncrement:"), purego.NSString(counterIncrement))
 }
 
-// CounterReset calls the underlying CounterReset.
 func (x *DOMCSSStyleDeclaration) CounterReset() string {
-	_r := x.inner.CounterReset()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("counterReset"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCounterReset calls the underlying SetCounterReset.
 func (x *DOMCSSStyleDeclaration) SetCounterReset(counterReset string) {
-	x.inner.SetCounterReset(foundation.NSStringStringWithUTF8String(counterReset))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCounterReset:"), purego.NSString(counterReset))
 }
 
-// Cue calls the underlying Cue.
 func (x *DOMCSSStyleDeclaration) Cue() string {
-	_r := x.inner.Cue()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cue"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCue calls the underlying SetCue.
 func (x *DOMCSSStyleDeclaration) SetCue(cue string) {
-	x.inner.SetCue(foundation.NSStringStringWithUTF8String(cue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCue:"), purego.NSString(cue))
 }
 
-// CueAfter calls the underlying CueAfter.
 func (x *DOMCSSStyleDeclaration) CueAfter() string {
-	_r := x.inner.CueAfter()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cueAfter"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCueAfter calls the underlying SetCueAfter.
 func (x *DOMCSSStyleDeclaration) SetCueAfter(cueAfter string) {
-	x.inner.SetCueAfter(foundation.NSStringStringWithUTF8String(cueAfter))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCueAfter:"), purego.NSString(cueAfter))
 }
 
-// CueBefore calls the underlying CueBefore.
 func (x *DOMCSSStyleDeclaration) CueBefore() string {
-	_r := x.inner.CueBefore()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cueBefore"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCueBefore calls the underlying SetCueBefore.
 func (x *DOMCSSStyleDeclaration) SetCueBefore(cueBefore string) {
-	x.inner.SetCueBefore(foundation.NSStringStringWithUTF8String(cueBefore))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCueBefore:"), purego.NSString(cueBefore))
 }
 
-// Cursor calls the underlying Cursor.
 func (x *DOMCSSStyleDeclaration) Cursor() string {
-	_r := x.inner.Cursor()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cursor"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCursor calls the underlying SetCursor.
 func (x *DOMCSSStyleDeclaration) SetCursor(cursor string) {
-	x.inner.SetCursor(foundation.NSStringStringWithUTF8String(cursor))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCursor:"), purego.NSString(cursor))
 }
 
-// Direction calls the underlying Direction.
 func (x *DOMCSSStyleDeclaration) Direction() string {
-	_r := x.inner.Direction()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("direction"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetDirection calls the underlying SetDirection.
 func (x *DOMCSSStyleDeclaration) SetDirection(direction string) {
-	x.inner.SetDirection(foundation.NSStringStringWithUTF8String(direction))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirection:"), purego.NSString(direction))
 }
 
-// Display calls the underlying Display.
 func (x *DOMCSSStyleDeclaration) Display() string {
-	_r := x.inner.Display()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("display"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetDisplay calls the underlying SetDisplay.
 func (x *DOMCSSStyleDeclaration) SetDisplay(display string) {
-	x.inner.SetDisplay(foundation.NSStringStringWithUTF8String(display))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplay:"), purego.NSString(display))
 }
 
-// Elevation calls the underlying Elevation.
 func (x *DOMCSSStyleDeclaration) Elevation() string {
-	_r := x.inner.Elevation()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elevation"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetElevation calls the underlying SetElevation.
 func (x *DOMCSSStyleDeclaration) SetElevation(elevation string) {
-	x.inner.SetElevation(foundation.NSStringStringWithUTF8String(elevation))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElevation:"), purego.NSString(elevation))
 }
 
-// EmptyCells calls the underlying EmptyCells.
 func (x *DOMCSSStyleDeclaration) EmptyCells() string {
-	_r := x.inner.EmptyCells()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emptyCells"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetEmptyCells calls the underlying SetEmptyCells.
 func (x *DOMCSSStyleDeclaration) SetEmptyCells(emptyCells string) {
-	x.inner.SetEmptyCells(foundation.NSStringStringWithUTF8String(emptyCells))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmptyCells:"), purego.NSString(emptyCells))
 }
 
-// CssFloat calls the underlying CssFloat.
 func (x *DOMCSSStyleDeclaration) CssFloat() string {
-	_r := x.inner.CssFloat()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cssFloat"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCssFloat calls the underlying SetCssFloat.
 func (x *DOMCSSStyleDeclaration) SetCssFloat(cssFloat string) {
-	x.inner.SetCssFloat(foundation.NSStringStringWithUTF8String(cssFloat))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssFloat:"), purego.NSString(cssFloat))
 }
 
-// Font calls the underlying Font.
 func (x *DOMCSSStyleDeclaration) Font() string {
-	_r := x.inner.Font()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("font"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetFont calls the underlying SetFont.
 func (x *DOMCSSStyleDeclaration) SetFont(font string) {
-	x.inner.SetFont(foundation.NSStringStringWithUTF8String(font))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), purego.NSString(font))
 }
 
-// FontFamily calls the underlying FontFamily.
 func (x *DOMCSSStyleDeclaration) FontFamily() string {
-	_r := x.inner.FontFamily()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontFamily"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetFontFamily calls the underlying SetFontFamily.
 func (x *DOMCSSStyleDeclaration) SetFontFamily(fontFamily string) {
-	x.inner.SetFontFamily(foundation.NSStringStringWithUTF8String(fontFamily))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontFamily:"), purego.NSString(fontFamily))
 }
 
-// FontSize calls the underlying FontSize.
 func (x *DOMCSSStyleDeclaration) FontSize() string {
-	_r := x.inner.FontSize()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontSize"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetFontSize calls the underlying SetFontSize.
 func (x *DOMCSSStyleDeclaration) SetFontSize(fontSize string) {
-	x.inner.SetFontSize(foundation.NSStringStringWithUTF8String(fontSize))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontSize:"), purego.NSString(fontSize))
 }
 
-// FontSizeAdjust calls the underlying FontSizeAdjust.
 func (x *DOMCSSStyleDeclaration) FontSizeAdjust() string {
-	_r := x.inner.FontSizeAdjust()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontSizeAdjust"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetFontSizeAdjust calls the underlying SetFontSizeAdjust.
 func (x *DOMCSSStyleDeclaration) SetFontSizeAdjust(fontSizeAdjust string) {
-	x.inner.SetFontSizeAdjust(foundation.NSStringStringWithUTF8String(fontSizeAdjust))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontSizeAdjust:"), purego.NSString(fontSizeAdjust))
 }
 
-// FontStretch calls the underlying FontStretch.
 func (x *DOMCSSStyleDeclaration) FontStretch() string {
-	_r := x.inner.FontStretch()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontStretch"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetFontStretch calls the underlying SetFontStretch.
 func (x *DOMCSSStyleDeclaration) SetFontStretch(fontStretch string) {
-	x.inner.SetFontStretch(foundation.NSStringStringWithUTF8String(fontStretch))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontStretch:"), purego.NSString(fontStretch))
 }
 
-// FontStyle calls the underlying FontStyle.
 func (x *DOMCSSStyleDeclaration) FontStyle() string {
-	_r := x.inner.FontStyle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontStyle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetFontStyle calls the underlying SetFontStyle.
 func (x *DOMCSSStyleDeclaration) SetFontStyle(fontStyle string) {
-	x.inner.SetFontStyle(foundation.NSStringStringWithUTF8String(fontStyle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontStyle:"), purego.NSString(fontStyle))
 }
 
-// FontVariant calls the underlying FontVariant.
 func (x *DOMCSSStyleDeclaration) FontVariant() string {
-	_r := x.inner.FontVariant()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontVariant"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetFontVariant calls the underlying SetFontVariant.
 func (x *DOMCSSStyleDeclaration) SetFontVariant(fontVariant string) {
-	x.inner.SetFontVariant(foundation.NSStringStringWithUTF8String(fontVariant))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontVariant:"), purego.NSString(fontVariant))
 }
 
-// FontWeight calls the underlying FontWeight.
 func (x *DOMCSSStyleDeclaration) FontWeight() string {
-	_r := x.inner.FontWeight()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontWeight"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetFontWeight calls the underlying SetFontWeight.
 func (x *DOMCSSStyleDeclaration) SetFontWeight(fontWeight string) {
-	x.inner.SetFontWeight(foundation.NSStringStringWithUTF8String(fontWeight))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontWeight:"), purego.NSString(fontWeight))
 }
 
-// Height calls the underlying Height.
 func (x *DOMCSSStyleDeclaration) Height() string {
-	_r := x.inner.Height()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("height"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetHeight calls the underlying SetHeight.
 func (x *DOMCSSStyleDeclaration) SetHeight(height string) {
-	x.inner.SetHeight(foundation.NSStringStringWithUTF8String(height))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), purego.NSString(height))
 }
 
-// Left calls the underlying Left.
 func (x *DOMCSSStyleDeclaration) Left() string {
-	_r := x.inner.Left()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("left"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLeft calls the underlying SetLeft.
 func (x *DOMCSSStyleDeclaration) SetLeft(left string) {
-	x.inner.SetLeft(foundation.NSStringStringWithUTF8String(left))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeft:"), purego.NSString(left))
 }
 
-// LetterSpacing calls the underlying LetterSpacing.
 func (x *DOMCSSStyleDeclaration) LetterSpacing() string {
-	_r := x.inner.LetterSpacing()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("letterSpacing"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLetterSpacing calls the underlying SetLetterSpacing.
 func (x *DOMCSSStyleDeclaration) SetLetterSpacing(letterSpacing string) {
-	x.inner.SetLetterSpacing(foundation.NSStringStringWithUTF8String(letterSpacing))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLetterSpacing:"), purego.NSString(letterSpacing))
 }
 
-// LineHeight calls the underlying LineHeight.
 func (x *DOMCSSStyleDeclaration) LineHeight() string {
-	_r := x.inner.LineHeight()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lineHeight"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLineHeight calls the underlying SetLineHeight.
 func (x *DOMCSSStyleDeclaration) SetLineHeight(lineHeight string) {
-	x.inner.SetLineHeight(foundation.NSStringStringWithUTF8String(lineHeight))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineHeight:"), purego.NSString(lineHeight))
 }
 
-// ListStyle calls the underlying ListStyle.
 func (x *DOMCSSStyleDeclaration) ListStyle() string {
-	_r := x.inner.ListStyle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("listStyle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetListStyle calls the underlying SetListStyle.
 func (x *DOMCSSStyleDeclaration) SetListStyle(listStyle string) {
-	x.inner.SetListStyle(foundation.NSStringStringWithUTF8String(listStyle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListStyle:"), purego.NSString(listStyle))
 }
 
-// ListStyleImage calls the underlying ListStyleImage.
 func (x *DOMCSSStyleDeclaration) ListStyleImage() string {
-	_r := x.inner.ListStyleImage()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("listStyleImage"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetListStyleImage calls the underlying SetListStyleImage.
 func (x *DOMCSSStyleDeclaration) SetListStyleImage(listStyleImage string) {
-	x.inner.SetListStyleImage(foundation.NSStringStringWithUTF8String(listStyleImage))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListStyleImage:"), purego.NSString(listStyleImage))
 }
 
-// ListStylePosition calls the underlying ListStylePosition.
 func (x *DOMCSSStyleDeclaration) ListStylePosition() string {
-	_r := x.inner.ListStylePosition()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("listStylePosition"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetListStylePosition calls the underlying SetListStylePosition.
 func (x *DOMCSSStyleDeclaration) SetListStylePosition(listStylePosition string) {
-	x.inner.SetListStylePosition(foundation.NSStringStringWithUTF8String(listStylePosition))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListStylePosition:"), purego.NSString(listStylePosition))
 }
 
-// ListStyleType calls the underlying ListStyleType.
 func (x *DOMCSSStyleDeclaration) ListStyleType() string {
-	_r := x.inner.ListStyleType()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("listStyleType"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetListStyleType calls the underlying SetListStyleType.
 func (x *DOMCSSStyleDeclaration) SetListStyleType(listStyleType string) {
-	x.inner.SetListStyleType(foundation.NSStringStringWithUTF8String(listStyleType))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListStyleType:"), purego.NSString(listStyleType))
 }
 
-// Margin calls the underlying Margin.
 func (x *DOMCSSStyleDeclaration) Margin() string {
-	_r := x.inner.Margin()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("margin"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMargin calls the underlying SetMargin.
 func (x *DOMCSSStyleDeclaration) SetMargin(margin string) {
-	x.inner.SetMargin(foundation.NSStringStringWithUTF8String(margin))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMargin:"), purego.NSString(margin))
 }
 
-// MarginTop calls the underlying MarginTop.
 func (x *DOMCSSStyleDeclaration) MarginTop() string {
-	_r := x.inner.MarginTop()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("marginTop"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMarginTop calls the underlying SetMarginTop.
 func (x *DOMCSSStyleDeclaration) SetMarginTop(marginTop string) {
-	x.inner.SetMarginTop(foundation.NSStringStringWithUTF8String(marginTop))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarginTop:"), purego.NSString(marginTop))
 }
 
-// MarginRight calls the underlying MarginRight.
 func (x *DOMCSSStyleDeclaration) MarginRight() string {
-	_r := x.inner.MarginRight()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("marginRight"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMarginRight calls the underlying SetMarginRight.
 func (x *DOMCSSStyleDeclaration) SetMarginRight(marginRight string) {
-	x.inner.SetMarginRight(foundation.NSStringStringWithUTF8String(marginRight))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarginRight:"), purego.NSString(marginRight))
 }
 
-// MarginBottom calls the underlying MarginBottom.
 func (x *DOMCSSStyleDeclaration) MarginBottom() string {
-	_r := x.inner.MarginBottom()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("marginBottom"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMarginBottom calls the underlying SetMarginBottom.
 func (x *DOMCSSStyleDeclaration) SetMarginBottom(marginBottom string) {
-	x.inner.SetMarginBottom(foundation.NSStringStringWithUTF8String(marginBottom))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarginBottom:"), purego.NSString(marginBottom))
 }
 
-// MarginLeft calls the underlying MarginLeft.
 func (x *DOMCSSStyleDeclaration) MarginLeft() string {
-	_r := x.inner.MarginLeft()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("marginLeft"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMarginLeft calls the underlying SetMarginLeft.
 func (x *DOMCSSStyleDeclaration) SetMarginLeft(marginLeft string) {
-	x.inner.SetMarginLeft(foundation.NSStringStringWithUTF8String(marginLeft))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarginLeft:"), purego.NSString(marginLeft))
 }
 
-// MarkerOffset calls the underlying MarkerOffset.
 func (x *DOMCSSStyleDeclaration) MarkerOffset() string {
-	_r := x.inner.MarkerOffset()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markerOffset"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMarkerOffset calls the underlying SetMarkerOffset.
 func (x *DOMCSSStyleDeclaration) SetMarkerOffset(markerOffset string) {
-	x.inner.SetMarkerOffset(foundation.NSStringStringWithUTF8String(markerOffset))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarkerOffset:"), purego.NSString(markerOffset))
 }
 
-// Marks calls the underlying Marks.
 func (x *DOMCSSStyleDeclaration) Marks() string {
-	_r := x.inner.Marks()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("marks"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMarks calls the underlying SetMarks.
 func (x *DOMCSSStyleDeclaration) SetMarks(marks string) {
-	x.inner.SetMarks(foundation.NSStringStringWithUTF8String(marks))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarks:"), purego.NSString(marks))
 }
 
-// MaxHeight calls the underlying MaxHeight.
 func (x *DOMCSSStyleDeclaration) MaxHeight() string {
-	_r := x.inner.MaxHeight()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxHeight"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMaxHeight calls the underlying SetMaxHeight.
 func (x *DOMCSSStyleDeclaration) SetMaxHeight(maxHeight string) {
-	x.inner.SetMaxHeight(foundation.NSStringStringWithUTF8String(maxHeight))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxHeight:"), purego.NSString(maxHeight))
 }
 
-// MaxWidth calls the underlying MaxWidth.
 func (x *DOMCSSStyleDeclaration) MaxWidth() string {
-	_r := x.inner.MaxWidth()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxWidth"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMaxWidth calls the underlying SetMaxWidth.
 func (x *DOMCSSStyleDeclaration) SetMaxWidth(maxWidth string) {
-	x.inner.SetMaxWidth(foundation.NSStringStringWithUTF8String(maxWidth))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxWidth:"), purego.NSString(maxWidth))
 }
 
-// MinHeight calls the underlying MinHeight.
 func (x *DOMCSSStyleDeclaration) MinHeight() string {
-	_r := x.inner.MinHeight()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minHeight"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMinHeight calls the underlying SetMinHeight.
 func (x *DOMCSSStyleDeclaration) SetMinHeight(minHeight string) {
-	x.inner.SetMinHeight(foundation.NSStringStringWithUTF8String(minHeight))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinHeight:"), purego.NSString(minHeight))
 }
 
-// MinWidth calls the underlying MinWidth.
 func (x *DOMCSSStyleDeclaration) MinWidth() string {
-	_r := x.inner.MinWidth()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minWidth"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMinWidth calls the underlying SetMinWidth.
 func (x *DOMCSSStyleDeclaration) SetMinWidth(minWidth string) {
-	x.inner.SetMinWidth(foundation.NSStringStringWithUTF8String(minWidth))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinWidth:"), purego.NSString(minWidth))
 }
 
-// Orphans calls the underlying Orphans.
 func (x *DOMCSSStyleDeclaration) Orphans() string {
-	_r := x.inner.Orphans()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orphans"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetOrphans calls the underlying SetOrphans.
 func (x *DOMCSSStyleDeclaration) SetOrphans(orphans string) {
-	x.inner.SetOrphans(foundation.NSStringStringWithUTF8String(orphans))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrphans:"), purego.NSString(orphans))
 }
 
-// Outline calls the underlying Outline.
 func (x *DOMCSSStyleDeclaration) Outline() string {
-	_r := x.inner.Outline()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outline"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetOutline calls the underlying SetOutline.
 func (x *DOMCSSStyleDeclaration) SetOutline(outline string) {
-	x.inner.SetOutline(foundation.NSStringStringWithUTF8String(outline))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutline:"), purego.NSString(outline))
 }
 
-// OutlineColor calls the underlying OutlineColor.
 func (x *DOMCSSStyleDeclaration) OutlineColor() string {
-	_r := x.inner.OutlineColor()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outlineColor"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetOutlineColor calls the underlying SetOutlineColor.
 func (x *DOMCSSStyleDeclaration) SetOutlineColor(outlineColor string) {
-	x.inner.SetOutlineColor(foundation.NSStringStringWithUTF8String(outlineColor))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutlineColor:"), purego.NSString(outlineColor))
 }
 
-// OutlineStyle calls the underlying OutlineStyle.
 func (x *DOMCSSStyleDeclaration) OutlineStyle() string {
-	_r := x.inner.OutlineStyle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outlineStyle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetOutlineStyle calls the underlying SetOutlineStyle.
 func (x *DOMCSSStyleDeclaration) SetOutlineStyle(outlineStyle string) {
-	x.inner.SetOutlineStyle(foundation.NSStringStringWithUTF8String(outlineStyle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutlineStyle:"), purego.NSString(outlineStyle))
 }
 
-// OutlineWidth calls the underlying OutlineWidth.
 func (x *DOMCSSStyleDeclaration) OutlineWidth() string {
-	_r := x.inner.OutlineWidth()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outlineWidth"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetOutlineWidth calls the underlying SetOutlineWidth.
 func (x *DOMCSSStyleDeclaration) SetOutlineWidth(outlineWidth string) {
-	x.inner.SetOutlineWidth(foundation.NSStringStringWithUTF8String(outlineWidth))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutlineWidth:"), purego.NSString(outlineWidth))
 }
 
-// Overflow calls the underlying Overflow.
 func (x *DOMCSSStyleDeclaration) Overflow() string {
-	_r := x.inner.Overflow()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("overflow"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetOverflow calls the underlying SetOverflow.
 func (x *DOMCSSStyleDeclaration) SetOverflow(overflow string) {
-	x.inner.SetOverflow(foundation.NSStringStringWithUTF8String(overflow))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverflow:"), purego.NSString(overflow))
 }
 
-// Padding calls the underlying Padding.
 func (x *DOMCSSStyleDeclaration) Padding() string {
-	_r := x.inner.Padding()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("padding"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPadding calls the underlying SetPadding.
 func (x *DOMCSSStyleDeclaration) SetPadding(padding string) {
-	x.inner.SetPadding(foundation.NSStringStringWithUTF8String(padding))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPadding:"), purego.NSString(padding))
 }
 
-// PaddingTop calls the underlying PaddingTop.
 func (x *DOMCSSStyleDeclaration) PaddingTop() string {
-	_r := x.inner.PaddingTop()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddingTop"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPaddingTop calls the underlying SetPaddingTop.
 func (x *DOMCSSStyleDeclaration) SetPaddingTop(paddingTop string) {
-	x.inner.SetPaddingTop(foundation.NSStringStringWithUTF8String(paddingTop))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingTop:"), purego.NSString(paddingTop))
 }
 
-// PaddingRight calls the underlying PaddingRight.
 func (x *DOMCSSStyleDeclaration) PaddingRight() string {
-	_r := x.inner.PaddingRight()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddingRight"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPaddingRight calls the underlying SetPaddingRight.
 func (x *DOMCSSStyleDeclaration) SetPaddingRight(paddingRight string) {
-	x.inner.SetPaddingRight(foundation.NSStringStringWithUTF8String(paddingRight))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingRight:"), purego.NSString(paddingRight))
 }
 
-// PaddingBottom calls the underlying PaddingBottom.
 func (x *DOMCSSStyleDeclaration) PaddingBottom() string {
-	_r := x.inner.PaddingBottom()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddingBottom"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPaddingBottom calls the underlying SetPaddingBottom.
 func (x *DOMCSSStyleDeclaration) SetPaddingBottom(paddingBottom string) {
-	x.inner.SetPaddingBottom(foundation.NSStringStringWithUTF8String(paddingBottom))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingBottom:"), purego.NSString(paddingBottom))
 }
 
-// PaddingLeft calls the underlying PaddingLeft.
 func (x *DOMCSSStyleDeclaration) PaddingLeft() string {
-	_r := x.inner.PaddingLeft()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddingLeft"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPaddingLeft calls the underlying SetPaddingLeft.
 func (x *DOMCSSStyleDeclaration) SetPaddingLeft(paddingLeft string) {
-	x.inner.SetPaddingLeft(foundation.NSStringStringWithUTF8String(paddingLeft))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingLeft:"), purego.NSString(paddingLeft))
 }
 
-// Page calls the underlying Page.
 func (x *DOMCSSStyleDeclaration) Page() string {
-	_r := x.inner.Page()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("page"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPage calls the underlying SetPage.
 func (x *DOMCSSStyleDeclaration) SetPage(page string) {
-	x.inner.SetPage(foundation.NSStringStringWithUTF8String(page))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPage:"), purego.NSString(page))
 }
 
-// PageBreakAfter calls the underlying PageBreakAfter.
 func (x *DOMCSSStyleDeclaration) PageBreakAfter() string {
-	_r := x.inner.PageBreakAfter()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pageBreakAfter"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPageBreakAfter calls the underlying SetPageBreakAfter.
 func (x *DOMCSSStyleDeclaration) SetPageBreakAfter(pageBreakAfter string) {
-	x.inner.SetPageBreakAfter(foundation.NSStringStringWithUTF8String(pageBreakAfter))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageBreakAfter:"), purego.NSString(pageBreakAfter))
 }
 
-// PageBreakBefore calls the underlying PageBreakBefore.
 func (x *DOMCSSStyleDeclaration) PageBreakBefore() string {
-	_r := x.inner.PageBreakBefore()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pageBreakBefore"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPageBreakBefore calls the underlying SetPageBreakBefore.
 func (x *DOMCSSStyleDeclaration) SetPageBreakBefore(pageBreakBefore string) {
-	x.inner.SetPageBreakBefore(foundation.NSStringStringWithUTF8String(pageBreakBefore))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageBreakBefore:"), purego.NSString(pageBreakBefore))
 }
 
-// PageBreakInside calls the underlying PageBreakInside.
 func (x *DOMCSSStyleDeclaration) PageBreakInside() string {
-	_r := x.inner.PageBreakInside()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pageBreakInside"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPageBreakInside calls the underlying SetPageBreakInside.
 func (x *DOMCSSStyleDeclaration) SetPageBreakInside(pageBreakInside string) {
-	x.inner.SetPageBreakInside(foundation.NSStringStringWithUTF8String(pageBreakInside))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageBreakInside:"), purego.NSString(pageBreakInside))
 }
 
-// Pause calls the underlying Pause.
 func (x *DOMCSSStyleDeclaration) Pause() string {
-	_r := x.inner.Pause()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPause calls the underlying SetPause.
 func (x *DOMCSSStyleDeclaration) SetPause(pause string) {
-	x.inner.SetPause(foundation.NSStringStringWithUTF8String(pause))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPause:"), purego.NSString(pause))
 }
 
-// PauseAfter calls the underlying PauseAfter.
 func (x *DOMCSSStyleDeclaration) PauseAfter() string {
-	_r := x.inner.PauseAfter()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseAfter"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPauseAfter calls the underlying SetPauseAfter.
 func (x *DOMCSSStyleDeclaration) SetPauseAfter(pauseAfter string) {
-	x.inner.SetPauseAfter(foundation.NSStringStringWithUTF8String(pauseAfter))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPauseAfter:"), purego.NSString(pauseAfter))
 }
 
-// PauseBefore calls the underlying PauseBefore.
 func (x *DOMCSSStyleDeclaration) PauseBefore() string {
-	_r := x.inner.PauseBefore()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseBefore"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPauseBefore calls the underlying SetPauseBefore.
 func (x *DOMCSSStyleDeclaration) SetPauseBefore(pauseBefore string) {
-	x.inner.SetPauseBefore(foundation.NSStringStringWithUTF8String(pauseBefore))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPauseBefore:"), purego.NSString(pauseBefore))
 }
 
-// Pitch calls the underlying Pitch.
 func (x *DOMCSSStyleDeclaration) Pitch() string {
-	_r := x.inner.Pitch()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pitch"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPitch calls the underlying SetPitch.
 func (x *DOMCSSStyleDeclaration) SetPitch(pitch string) {
-	x.inner.SetPitch(foundation.NSStringStringWithUTF8String(pitch))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitch:"), purego.NSString(pitch))
 }
 
-// PitchRange calls the underlying PitchRange.
 func (x *DOMCSSStyleDeclaration) PitchRange() string {
-	_r := x.inner.PitchRange()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pitchRange"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPitchRange calls the underlying SetPitchRange.
 func (x *DOMCSSStyleDeclaration) SetPitchRange(pitchRange string) {
-	x.inner.SetPitchRange(foundation.NSStringStringWithUTF8String(pitchRange))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitchRange:"), purego.NSString(pitchRange))
 }
 
-// PlayDuring calls the underlying PlayDuring.
 func (x *DOMCSSStyleDeclaration) PlayDuring() string {
-	_r := x.inner.PlayDuring()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playDuring"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPlayDuring calls the underlying SetPlayDuring.
 func (x *DOMCSSStyleDeclaration) SetPlayDuring(playDuring string) {
-	x.inner.SetPlayDuring(foundation.NSStringStringWithUTF8String(playDuring))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayDuring:"), purego.NSString(playDuring))
 }
 
-// Position calls the underlying Position.
 func (x *DOMCSSStyleDeclaration) Position() string {
-	_r := x.inner.Position()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("position"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPosition calls the underlying SetPosition.
 func (x *DOMCSSStyleDeclaration) SetPosition(position string) {
-	x.inner.SetPosition(foundation.NSStringStringWithUTF8String(position))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), purego.NSString(position))
 }
 
-// Quotes calls the underlying Quotes.
 func (x *DOMCSSStyleDeclaration) Quotes() string {
-	_r := x.inner.Quotes()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quotes"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetQuotes calls the underlying SetQuotes.
 func (x *DOMCSSStyleDeclaration) SetQuotes(quotes string) {
-	x.inner.SetQuotes(foundation.NSStringStringWithUTF8String(quotes))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuotes:"), purego.NSString(quotes))
 }
 
-// Richness calls the underlying Richness.
 func (x *DOMCSSStyleDeclaration) Richness() string {
-	_r := x.inner.Richness()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("richness"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetRichness calls the underlying SetRichness.
 func (x *DOMCSSStyleDeclaration) SetRichness(richness string) {
-	x.inner.SetRichness(foundation.NSStringStringWithUTF8String(richness))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRichness:"), purego.NSString(richness))
 }
 
-// Right calls the underlying Right.
 func (x *DOMCSSStyleDeclaration) Right() string {
-	_r := x.inner.Right()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("right"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetRight calls the underlying SetRight.
 func (x *DOMCSSStyleDeclaration) SetRight(right string) {
-	x.inner.SetRight(foundation.NSStringStringWithUTF8String(right))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRight:"), purego.NSString(right))
 }
 
-// Size calls the underlying Size.
 func (x *DOMCSSStyleDeclaration) Size() string {
-	_r := x.inner.Size()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("size"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSize calls the underlying SetSize.
 func (x *DOMCSSStyleDeclaration) SetSize(size string) {
-	x.inner.SetSize(foundation.NSStringStringWithUTF8String(size))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), purego.NSString(size))
 }
 
-// Speak calls the underlying Speak.
 func (x *DOMCSSStyleDeclaration) Speak() string {
-	_r := x.inner.Speak()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("speak"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSpeak calls the underlying SetSpeak.
 func (x *DOMCSSStyleDeclaration) SetSpeak(speak string) {
-	x.inner.SetSpeak(foundation.NSStringStringWithUTF8String(speak))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeak:"), purego.NSString(speak))
 }
 
-// SpeakHeader calls the underlying SpeakHeader.
 func (x *DOMCSSStyleDeclaration) SpeakHeader() string {
-	_r := x.inner.SpeakHeader()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("speakHeader"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSpeakHeader calls the underlying SetSpeakHeader.
 func (x *DOMCSSStyleDeclaration) SetSpeakHeader(speakHeader string) {
-	x.inner.SetSpeakHeader(foundation.NSStringStringWithUTF8String(speakHeader))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeakHeader:"), purego.NSString(speakHeader))
 }
 
-// SpeakNumeral calls the underlying SpeakNumeral.
 func (x *DOMCSSStyleDeclaration) SpeakNumeral() string {
-	_r := x.inner.SpeakNumeral()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("speakNumeral"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSpeakNumeral calls the underlying SetSpeakNumeral.
 func (x *DOMCSSStyleDeclaration) SetSpeakNumeral(speakNumeral string) {
-	x.inner.SetSpeakNumeral(foundation.NSStringStringWithUTF8String(speakNumeral))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeakNumeral:"), purego.NSString(speakNumeral))
 }
 
-// SpeakPunctuation calls the underlying SpeakPunctuation.
 func (x *DOMCSSStyleDeclaration) SpeakPunctuation() string {
-	_r := x.inner.SpeakPunctuation()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("speakPunctuation"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSpeakPunctuation calls the underlying SetSpeakPunctuation.
 func (x *DOMCSSStyleDeclaration) SetSpeakPunctuation(speakPunctuation string) {
-	x.inner.SetSpeakPunctuation(foundation.NSStringStringWithUTF8String(speakPunctuation))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeakPunctuation:"), purego.NSString(speakPunctuation))
 }
 
-// SpeechRate calls the underlying SpeechRate.
 func (x *DOMCSSStyleDeclaration) SpeechRate() string {
-	_r := x.inner.SpeechRate()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("speechRate"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSpeechRate calls the underlying SetSpeechRate.
 func (x *DOMCSSStyleDeclaration) SetSpeechRate(speechRate string) {
-	x.inner.SetSpeechRate(foundation.NSStringStringWithUTF8String(speechRate))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeechRate:"), purego.NSString(speechRate))
 }
 
-// Stress calls the underlying Stress.
 func (x *DOMCSSStyleDeclaration) Stress() string {
-	_r := x.inner.Stress()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stress"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetStress calls the underlying SetStress.
 func (x *DOMCSSStyleDeclaration) SetStress(stress string) {
-	x.inner.SetStress(foundation.NSStringStringWithUTF8String(stress))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStress:"), purego.NSString(stress))
 }
 
-// TableLayout calls the underlying TableLayout.
 func (x *DOMCSSStyleDeclaration) TableLayout() string {
-	_r := x.inner.TableLayout()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tableLayout"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTableLayout calls the underlying SetTableLayout.
 func (x *DOMCSSStyleDeclaration) SetTableLayout(tableLayout string) {
-	x.inner.SetTableLayout(foundation.NSStringStringWithUTF8String(tableLayout))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTableLayout:"), purego.NSString(tableLayout))
 }
 
-// TextAlign calls the underlying TextAlign.
 func (x *DOMCSSStyleDeclaration) TextAlign() string {
-	_r := x.inner.TextAlign()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textAlign"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTextAlign calls the underlying SetTextAlign.
 func (x *DOMCSSStyleDeclaration) SetTextAlign(textAlign string) {
-	x.inner.SetTextAlign(foundation.NSStringStringWithUTF8String(textAlign))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAlign:"), purego.NSString(textAlign))
 }
 
-// TextDecoration calls the underlying TextDecoration.
 func (x *DOMCSSStyleDeclaration) TextDecoration() string {
-	_r := x.inner.TextDecoration()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textDecoration"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTextDecoration calls the underlying SetTextDecoration.
 func (x *DOMCSSStyleDeclaration) SetTextDecoration(textDecoration string) {
-	x.inner.SetTextDecoration(foundation.NSStringStringWithUTF8String(textDecoration))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextDecoration:"), purego.NSString(textDecoration))
 }
 
-// TextIndent calls the underlying TextIndent.
 func (x *DOMCSSStyleDeclaration) TextIndent() string {
-	_r := x.inner.TextIndent()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textIndent"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTextIndent calls the underlying SetTextIndent.
 func (x *DOMCSSStyleDeclaration) SetTextIndent(textIndent string) {
-	x.inner.SetTextIndent(foundation.NSStringStringWithUTF8String(textIndent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextIndent:"), purego.NSString(textIndent))
 }
 
-// TextShadow calls the underlying TextShadow.
 func (x *DOMCSSStyleDeclaration) TextShadow() string {
-	_r := x.inner.TextShadow()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textShadow"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTextShadow calls the underlying SetTextShadow.
 func (x *DOMCSSStyleDeclaration) SetTextShadow(textShadow string) {
-	x.inner.SetTextShadow(foundation.NSStringStringWithUTF8String(textShadow))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextShadow:"), purego.NSString(textShadow))
 }
 
-// TextTransform calls the underlying TextTransform.
 func (x *DOMCSSStyleDeclaration) TextTransform() string {
-	_r := x.inner.TextTransform()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textTransform"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTextTransform calls the underlying SetTextTransform.
 func (x *DOMCSSStyleDeclaration) SetTextTransform(textTransform string) {
-	x.inner.SetTextTransform(foundation.NSStringStringWithUTF8String(textTransform))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextTransform:"), purego.NSString(textTransform))
 }
 
-// Top calls the underlying Top.
 func (x *DOMCSSStyleDeclaration) Top() string {
-	_r := x.inner.Top()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("top"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTop calls the underlying SetTop.
 func (x *DOMCSSStyleDeclaration) SetTop(top string) {
-	x.inner.SetTop(foundation.NSStringStringWithUTF8String(top))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTop:"), purego.NSString(top))
 }
 
-// UnicodeBidi calls the underlying UnicodeBidi.
 func (x *DOMCSSStyleDeclaration) UnicodeBidi() string {
-	_r := x.inner.UnicodeBidi()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unicodeBidi"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetUnicodeBidi calls the underlying SetUnicodeBidi.
 func (x *DOMCSSStyleDeclaration) SetUnicodeBidi(unicodeBidi string) {
-	x.inner.SetUnicodeBidi(foundation.NSStringStringWithUTF8String(unicodeBidi))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnicodeBidi:"), purego.NSString(unicodeBidi))
 }
 
-// VerticalAlign calls the underlying VerticalAlign.
 func (x *DOMCSSStyleDeclaration) VerticalAlign() string {
-	_r := x.inner.VerticalAlign()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("verticalAlign"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetVerticalAlign calls the underlying SetVerticalAlign.
 func (x *DOMCSSStyleDeclaration) SetVerticalAlign(verticalAlign string) {
-	x.inner.SetVerticalAlign(foundation.NSStringStringWithUTF8String(verticalAlign))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalAlign:"), purego.NSString(verticalAlign))
 }
 
-// Visibility calls the underlying Visibility.
 func (x *DOMCSSStyleDeclaration) Visibility() string {
-	_r := x.inner.Visibility()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("visibility"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetVisibility calls the underlying SetVisibility.
 func (x *DOMCSSStyleDeclaration) SetVisibility(visibility string) {
-	x.inner.SetVisibility(foundation.NSStringStringWithUTF8String(visibility))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibility:"), purego.NSString(visibility))
 }
 
-// VoiceFamily calls the underlying VoiceFamily.
 func (x *DOMCSSStyleDeclaration) VoiceFamily() string {
-	_r := x.inner.VoiceFamily()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voiceFamily"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetVoiceFamily calls the underlying SetVoiceFamily.
 func (x *DOMCSSStyleDeclaration) SetVoiceFamily(voiceFamily string) {
-	x.inner.SetVoiceFamily(foundation.NSStringStringWithUTF8String(voiceFamily))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceFamily:"), purego.NSString(voiceFamily))
 }
 
-// Volume calls the underlying Volume.
 func (x *DOMCSSStyleDeclaration) Volume() string {
-	_r := x.inner.Volume()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("volume"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetVolume calls the underlying SetVolume.
 func (x *DOMCSSStyleDeclaration) SetVolume(volume string) {
-	x.inner.SetVolume(foundation.NSStringStringWithUTF8String(volume))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), purego.NSString(volume))
 }
 
-// WhiteSpace calls the underlying WhiteSpace.
 func (x *DOMCSSStyleDeclaration) WhiteSpace() string {
-	_r := x.inner.WhiteSpace()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("whiteSpace"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetWhiteSpace calls the underlying SetWhiteSpace.
 func (x *DOMCSSStyleDeclaration) SetWhiteSpace(whiteSpace string) {
-	x.inner.SetWhiteSpace(foundation.NSStringStringWithUTF8String(whiteSpace))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWhiteSpace:"), purego.NSString(whiteSpace))
 }
 
-// Widows calls the underlying Widows.
 func (x *DOMCSSStyleDeclaration) Widows() string {
-	_r := x.inner.Widows()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("widows"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetWidows calls the underlying SetWidows.
 func (x *DOMCSSStyleDeclaration) SetWidows(widows string) {
-	x.inner.SetWidows(foundation.NSStringStringWithUTF8String(widows))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidows:"), purego.NSString(widows))
 }
 
-// Width calls the underlying Width.
 func (x *DOMCSSStyleDeclaration) Width() string {
-	_r := x.inner.Width()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("width"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetWidth calls the underlying SetWidth.
 func (x *DOMCSSStyleDeclaration) SetWidth(width string) {
-	x.inner.SetWidth(foundation.NSStringStringWithUTF8String(width))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), purego.NSString(width))
 }
 
-// WordSpacing calls the underlying WordSpacing.
 func (x *DOMCSSStyleDeclaration) WordSpacing() string {
-	_r := x.inner.WordSpacing()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wordSpacing"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetWordSpacing calls the underlying SetWordSpacing.
 func (x *DOMCSSStyleDeclaration) SetWordSpacing(wordSpacing string) {
-	x.inner.SetWordSpacing(foundation.NSStringStringWithUTF8String(wordSpacing))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWordSpacing:"), purego.NSString(wordSpacing))
 }
 
-// ZIndex calls the underlying ZIndex.
 func (x *DOMCSSStyleDeclaration) ZIndex() string {
-	_r := x.inner.ZIndex()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zIndex"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetZIndex calls the underlying SetZIndex.
 func (x *DOMCSSStyleDeclaration) SetZIndex(zIndex string) {
-	x.inner.SetZIndex(foundation.NSStringStringWithUTF8String(zIndex))
-}
-
-func (x *DOMCSSStyleDeclaration) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
-
-func (x *DOMCSSStyleDeclaration) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMObject.WebScriptObject
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZIndex:"), purego.NSString(zIndex))
 }
 
 // DOMCSSStyleDeclarationable is the interface implemented by [DOMCSSStyleDeclaration], for mocking and DI.
 type DOMCSSStyleDeclarationable interface {
-	Unwrap() *raw.DOMCSSStyleDeclaration
+	obj.Object
 	WithCssText(cssText string) *DOMCSSStyleDeclaration
 	GetPropertyValue(propertyName string) string
 	GetPropertyCSSValue(propertyName string) *DOMCSSValue
 	RemoveProperty(propertyName string) string
 	GetPropertyPriority(propertyName string) string
 	SetPropertyValuePriority(propertyName string, value string, priority string)
-	Item(index uint) string
+	Item(index int) string
 	GetPropertyShorthand(propertyName string) string
 	IsPropertyImplicit(propertyName string) bool
 	CssText() string
 	SetCssText(cssText string)
-	Length() uint
+	Length() int
 	ParentRule() *DOMCSSRule
 	SetProperty(propertyName string, value string, priority string)
 	Azimuth() string

@@ -5,110 +5,119 @@
 package syncservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/syncservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// ISyncSessionDriver wraps [raw.ISyncSessionDriver] with a fluent Go API.
+// ISyncSessionDriver is an idiomatic wrapper over the Objective-C class ISyncSessionDriver.
 type ISyncSessionDriver struct {
-	inner *raw.ISyncSessionDriver
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ISyncSessionDriver].
-func (x *ISyncSessionDriver) Unwrap() *raw.ISyncSessionDriver { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ISyncSessionDriver) ID() objc.ID { return x.inner.Ptr() }
-
-// ISyncSessionDriverFromID adopts an existing object pointer as a ISyncSessionDriver (nil for 0).
+// ISyncSessionDriverFromID adopts an existing Objective-C object as a ISyncSessionDriver
+// (nil for 0), retaining it and registering a release finalizer.
 func ISyncSessionDriverFromID(id objc.ID) *ISyncSessionDriver {
 	if id == 0 {
 		return nil
 	}
-	return &ISyncSessionDriver{inner: raw.ISyncSessionDriverFromID(id)}
+	x := &ISyncSessionDriver{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewISyncSessionDriver creates a new [ISyncSessionDriver].
+// iSyncSessionDriverAdopt wraps an Objective-C object that this code just created as a
+// ISyncSessionDriver (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iSyncSessionDriverAdopt(id objc.ID) *ISyncSessionDriver {
+	if id == 0 {
+		return nil
+	}
+	x := &ISyncSessionDriver{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ISyncSessionDriver) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ISyncSessionDriver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ISyncSessionDriver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewISyncSessionDriver creates a new ISyncSessionDriver.
 func NewISyncSessionDriver() *ISyncSessionDriver {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ISyncSessionDriver")), objc.RegisterName("new"))
-	return &ISyncSessionDriver{inner: raw.ISyncSessionDriverFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ISyncSessionDriver")), objc.RegisterName("new"))
+	return iSyncSessionDriverAdopt(_id)
 }
 
-// Sync calls the underlying Sync.
 func (x *ISyncSessionDriver) Sync() bool {
-	return x.inner.Sync()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sync"))
+	return _r
 }
 
-// StartAsynchronousSync returns any validation error.
+// StartAsynchronousSync returns an error if the operation did not succeed.
 func (x *ISyncSessionDriver) StartAsynchronousSync() error {
-	_, err := x.inner.StartAsynchronousSync()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("startAsynchronousSync:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// LastError calls the underlying LastError.
-func (x *ISyncSessionDriver) LastError() unsafe.Pointer {
-	return x.inner.LastError()
+func (x *ISyncSessionDriver) SetDelegate(delegate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
-// DataSource calls the underlying DataSource.
-func (x *ISyncSessionDriver) DataSource() raw.ISyncSessionDriverDataSource {
-	return x.inner.DataSource()
+func (x *ISyncSessionDriver) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+	return obj.Wrap(_r)
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *ISyncSessionDriver) SetDelegate(delegate objc.ID) {
-	x.inner.SetDelegate(delegate)
-}
-
-// Delegate calls the underlying Delegate.
-func (x *ISyncSessionDriver) Delegate() objc.ID {
-	return x.inner.Delegate()
-}
-
-// SetHandlesSyncAlerts calls the underlying SetHandlesSyncAlerts.
 func (x *ISyncSessionDriver) SetHandlesSyncAlerts(yesOrNo bool) {
-	x.inner.SetHandlesSyncAlerts(yesOrNo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHandlesSyncAlerts:"), yesOrNo)
 }
 
-// HandlesSyncAlerts calls the underlying HandlesSyncAlerts.
 func (x *ISyncSessionDriver) HandlesSyncAlerts() bool {
-	return x.inner.HandlesSyncAlerts()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("handlesSyncAlerts"))
+	return _r
 }
 
-// Client calls the underlying Client.
 func (x *ISyncSessionDriver) Client() *ISyncClient {
-	_r := x.inner.Client()
-	if _r == nil {
-		return nil
-	}
-	return &ISyncClient{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("client"))
+	return ISyncClientFromID(_r)
 }
 
-// Session calls the underlying Session.
 func (x *ISyncSessionDriver) Session() *ISyncSession {
-	_r := x.inner.Session()
-	if _r == nil {
-		return nil
-	}
-	return &ISyncSession{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("session"))
+	return ISyncSessionFromID(_r)
 }
 
-// FinishSyncing calls the underlying FinishSyncing.
 func (x *ISyncSessionDriver) FinishSyncing() {
-	x.inner.FinishSyncing()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishSyncing"))
 }
 
 // ISyncSessionDriverable is the interface implemented by [ISyncSessionDriver], for mocking and DI.
 type ISyncSessionDriverable interface {
-	Unwrap() *raw.ISyncSessionDriver
+	obj.Object
 	Sync() bool
 	StartAsynchronousSync() error
-	LastError() unsafe.Pointer
-	DataSource() raw.ISyncSessionDriverDataSource
-	SetDelegate(delegate objc.ID)
-	Delegate() objc.ID
+	SetDelegate(delegate obj.Object)
+	Delegate() obj.Object
 	SetHandlesSyncAlerts(yesOrNo bool)
 	HandlesSyncAlerts() bool
 	Client() *ISyncClient

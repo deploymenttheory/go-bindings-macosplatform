@@ -5,53 +5,78 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// MTRQRCodeSetupPayloadParser wraps [raw.MTRQRCodeSetupPayloadParser] with a fluent Go API.
+// MTRQRCodeSetupPayloadParser is an idiomatic wrapper over the Objective-C class MTRQRCodeSetupPayloadParser.
 type MTRQRCodeSetupPayloadParser struct {
-	inner *raw.MTRQRCodeSetupPayloadParser
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRQRCodeSetupPayloadParser].
-func (x *MTRQRCodeSetupPayloadParser) Unwrap() *raw.MTRQRCodeSetupPayloadParser { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRQRCodeSetupPayloadParser) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRQRCodeSetupPayloadParserFromID adopts an existing object pointer as a MTRQRCodeSetupPayloadParser (nil for 0).
+// MTRQRCodeSetupPayloadParserFromID adopts an existing Objective-C object as a MTRQRCodeSetupPayloadParser
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRQRCodeSetupPayloadParserFromID(id objc.ID) *MTRQRCodeSetupPayloadParser {
 	if id == 0 {
 		return nil
 	}
-	return &MTRQRCodeSetupPayloadParser{inner: raw.MTRQRCodeSetupPayloadParserFromID(id)}
+	x := &MTRQRCodeSetupPayloadParser{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRQRCodeSetupPayloadParserWithBase38Representation creates a new [MTRQRCodeSetupPayloadParser].
+// mTRQRCodeSetupPayloadParserAdopt wraps an Objective-C object that this code just created as a
+// MTRQRCodeSetupPayloadParser (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRQRCodeSetupPayloadParserAdopt(id objc.ID) *MTRQRCodeSetupPayloadParser {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRQRCodeSetupPayloadParser{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRQRCodeSetupPayloadParser) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRQRCodeSetupPayloadParser) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRQRCodeSetupPayloadParser) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRQRCodeSetupPayloadParserWithBase38Representation creates a new MTRQRCodeSetupPayloadParser.
 func NewMTRQRCodeSetupPayloadParserWithBase38Representation(base38Representation string) *MTRQRCodeSetupPayloadParser {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRQRCodeSetupPayloadParser")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBase38Representation:"), foundation.NSStringStringWithUTF8String(base38Representation).Ptr())
-	return &MTRQRCodeSetupPayloadParser{inner: raw.MTRQRCodeSetupPayloadParserFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRQRCodeSetupPayloadParser")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBase38Representation:"), purego.NSString(base38Representation))
+	return mTRQRCodeSetupPayloadParserAdopt(_id)
 }
 
-// PopulatePayload calls the underlying PopulatePayload.
 func (x *MTRQRCodeSetupPayloadParser) PopulatePayload() (*MTRSetupPayload, error) {
-	_r, _err := x.inner.PopulatePayload()
-	if _err != nil {
-		return nil, _err
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("populatePayload:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &MTRSetupPayload{inner: _r}, nil
+	return MTRSetupPayloadFromID(_r), nil
 }
 
 // MTRQRCodeSetupPayloadParserable is the interface implemented by [MTRQRCodeSetupPayloadParser], for mocking and DI.
 type MTRQRCodeSetupPayloadParserable interface {
-	Unwrap() *raw.MTRQRCodeSetupPayloadParser
+	obj.Object
 	PopulatePayload() (*MTRSetupPayload, error)
 }
 

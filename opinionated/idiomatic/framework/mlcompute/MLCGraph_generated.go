@@ -5,248 +5,203 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A graph of layers you use to build a training or inference graph.
 //
-// Graph wraps [raw.MLCGraph] with a fluent Go API.
+// Graph is an idiomatic wrapper over the Objective-C class MLCGraph.
 type Graph struct {
-	inner *raw.MLCGraph
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCGraph].
-func (x *Graph) Unwrap() *raw.MLCGraph { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Graph) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphFromID adopts an existing object pointer as a Graph (nil for 0).
+// GraphFromID adopts an existing Objective-C object as a Graph
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphFromID(id objc.ID) *Graph {
 	if id == 0 {
 		return nil
 	}
-	return &Graph{inner: raw.MLCGraphFromID(id)}
+	x := &Graph{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGraph creates a new [Graph].
+// graphAdopt wraps an Objective-C object that this code just created as a
+// Graph (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphAdopt(id objc.ID) *Graph {
+	if id == 0 {
+		return nil
+	}
+	x := &Graph{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Graph) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Graph) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Graph) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGraph creates a new Graph.
 func NewGraph() *Graph {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCGraph")), objc.RegisterName("new"))
-	return &Graph{inner: raw.MLCGraphFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCGraph")), objc.RegisterName("new"))
+	return graphAdopt(_id)
 }
 
 // Adds the layer and source tensor that you specify to the graph.
-//
-// NodeWithLayerSource calls the underlying NodeWithLayerSource.
-func (x *Graph) NodeWithLayerSource(layer *raw.MLCLayer, source *raw.MLCTensor) *Tensor {
-	_r := x.inner.NodeWithLayerSource(layer, source)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+func (x *Graph) NodeWithLayerSource(layer *Layer, source *Tensor) *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeWithLayer:source:"), objref.IDOf(layer), objref.IDOf(source))
+	return TensorFromID(_r)
 }
 
 // Adds the layer and source tensors that you specify to the graph.
-//
-// NodeWithLayerSources calls the underlying NodeWithLayerSources.
-func (x *Graph) NodeWithLayerSources(layer *raw.MLCLayer, sources *foundation.NSArray[*raw.MLCTensor]) *Tensor {
-	_r := x.inner.NodeWithLayerSources(layer, sources)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+func (x *Graph) NodeWithLayerSources(layer *Layer, sources []*Tensor) *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeWithLayer:sources:"), objref.IDOf(layer), purego.SliceToNSArray(sources, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }))
+	return TensorFromID(_r)
 }
 
 // Adds the layer, source tensors, and option to disable optimizer updates that you specify to the graph.
-//
-// NodeWithLayerSourcesDisableUpdate calls the underlying NodeWithLayerSourcesDisableUpdate.
-func (x *Graph) NodeWithLayerSourcesDisableUpdate(layer *raw.MLCLayer, sources *foundation.NSArray[*raw.MLCTensor], disableUpdate bool) *Tensor {
-	_r := x.inner.NodeWithLayerSourcesDisableUpdate(layer, sources, disableUpdate)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+func (x *Graph) NodeWithLayerSourcesDisableUpdate(layer *Layer, sources []*Tensor, disableUpdate bool) *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeWithLayer:sources:disableUpdate:"), objref.IDOf(layer), purego.SliceToNSArray(sources, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), disableUpdate)
+	return TensorFromID(_r)
 }
 
 // Adds the layer, sources, and loss labels tensors that you specify to the graph.
-//
-// NodeWithLayerSourcesLossLabels calls the underlying NodeWithLayerSourcesLossLabels.
-func (x *Graph) NodeWithLayerSourcesLossLabels(layer *raw.MLCLayer, sources *foundation.NSArray[*raw.MLCTensor], lossLabels *foundation.NSArray[*raw.MLCTensor]) *Tensor {
-	_r := x.inner.NodeWithLayerSourcesLossLabels(layer, sources, lossLabels)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+func (x *Graph) NodeWithLayerSourcesLossLabels(layer *Layer, sources []*Tensor, lossLabels []*Tensor) *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeWithLayer:sources:lossLabels:"), objref.IDOf(layer), purego.SliceToNSArray(sources, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(lossLabels, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }))
+	return TensorFromID(_r)
 }
 
 // Adds a new split layer to the graph using the source tensor, number of splits, and dimension to split the source tensor that you specify.
-//
-// SplitWithSourceSplitCountDimension calls the underlying SplitWithSourceSplitCountDimension.
-func (x *Graph) SplitWithSourceSplitCountDimension(source *raw.MLCTensor, splitCount uint, dimension uint) *foundation.NSArray[*raw.MLCTensor] {
-	return x.inner.SplitWithSourceSplitCountDimension(source, splitCount, dimension)
+func (x *Graph) SplitWithSourceSplitCountDimension(source *Tensor, splitCount int, dimension int) []*Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("splitWithSource:splitCount:dimension:"), objref.IDOf(source), splitCount, dimension)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
 // Adds a new split layer to the graph using the source tensor, lengths of each split section, and dimension to split the source tensor that you specify.
-//
-// SplitWithSourceSplitSectionLengthsDimension calls the underlying SplitWithSourceSplitSectionLengthsDimension.
-func (x *Graph) SplitWithSourceSplitSectionLengthsDimension(source *raw.MLCTensor, splitSectionLengths *foundation.NSArray[*foundation.NSNumber], dimension uint) *foundation.NSArray[*raw.MLCTensor] {
-	return x.inner.SplitWithSourceSplitSectionLengthsDimension(source, splitSectionLengths, dimension)
+func (x *Graph) SplitWithSourceSplitSectionLengthsDimension(source *Tensor, splitSectionLengths []obj.Object, dimension int) []*Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("splitWithSource:splitSectionLengths:dimension:"), objref.IDOf(source), purego.SliceToNSArray(splitSectionLengths, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), dimension)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
 // Adds a new concatenation layer to the graph using the source tensors and concatenation dimension you specify.
-//
-// ConcatenateWithSourcesDimension calls the underlying ConcatenateWithSourcesDimension.
-func (x *Graph) ConcatenateWithSourcesDimension(sources *foundation.NSArray[*raw.MLCTensor], dimension uint) *Tensor {
-	_r := x.inner.ConcatenateWithSourcesDimension(sources, dimension)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+func (x *Graph) ConcatenateWithSourcesDimension(sources []*Tensor, dimension int) *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("concatenateWithSources:dimension:"), purego.SliceToNSArray(sources, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), dimension)
+	return TensorFromID(_r)
 }
 
 // Adds a new reshape layer to the graph using the shape and source tensor you specify.
-//
-// ReshapeWithShapeSource calls the underlying ReshapeWithShapeSource.
-func (x *Graph) ReshapeWithShapeSource(shape *foundation.NSArray[*foundation.NSNumber], source *raw.MLCTensor) *Tensor {
-	_r := x.inner.ReshapeWithShapeSource(shape, source)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+func (x *Graph) ReshapeWithShapeSource(shape []obj.Object, source *Tensor) *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reshapeWithShape:source:"), purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(source))
+	return TensorFromID(_r)
 }
 
 // Adds a new transpose layer to the graph using the dimensions and source tensor you specify.
-//
-// TransposeWithDimensionsSource calls the underlying TransposeWithDimensionsSource.
-func (x *Graph) TransposeWithDimensionsSource(dimensions *foundation.NSArray[*foundation.NSNumber], source *raw.MLCTensor) *Tensor {
-	_r := x.inner.TransposeWithDimensionsSource(dimensions, source)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+func (x *Graph) TransposeWithDimensionsSource(dimensions []obj.Object, source *Tensor) *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transposeWithDimensions:source:"), purego.SliceToNSArray(dimensions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(source))
+	return TensorFromID(_r)
 }
 
 // Adds a select layer to the graph using the condition mask and source tensors you specify.
-//
-// SelectWithSourcesCondition calls the underlying SelectWithSourcesCondition.
-func (x *Graph) SelectWithSourcesCondition(sources *foundation.NSArray[*raw.MLCTensor], condition *raw.MLCTensor) *Tensor {
-	_r := x.inner.SelectWithSourcesCondition(sources, condition)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+func (x *Graph) SelectWithSourcesCondition(sources []*Tensor, condition *Tensor) *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectWithSources:condition:"), purego.SliceToNSArray(sources, func(_v *Tensor) objc.ID { return objref.IDOf(_v) }), objref.IDOf(condition))
+	return TensorFromID(_r)
 }
 
 // Adds a scatter layer to the graph.
-//
-// ScatterWithDimensionSourceIndicesCopyFromReductionType calls the underlying ScatterWithDimensionSourceIndicesCopyFromReductionType.
-func (x *Graph) ScatterWithDimensionSourceIndicesCopyFromReductionType(dimension uint, source *raw.MLCTensor, indices *raw.MLCTensor, copyFrom *raw.MLCTensor, reductionType MLCReductionType) *Tensor {
-	_r := x.inner.ScatterWithDimensionSourceIndicesCopyFromReductionType(dimension, source, indices, copyFrom, raw.MLCReductionType(reductionType))
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+func (x *Graph) ScatterWithDimensionSourceIndicesCopyFromReductionType(dimension int, source *Tensor, indices *Tensor, copyFrom *Tensor, reductionType ReductionType) *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scatterWithDimension:source:indices:copyFrom:reductionType:"), dimension, objref.IDOf(source), objref.IDOf(indices), objref.IDOf(copyFrom), reductionType)
+	return TensorFromID(_r)
 }
 
 // Adds a gather layer to the graph using the source tensor, dimension along which to index, and the indices you specify.
-//
-// GatherWithDimensionSourceIndices calls the underlying GatherWithDimensionSourceIndices.
-func (x *Graph) GatherWithDimensionSourceIndices(dimension uint, source *raw.MLCTensor, indices *raw.MLCTensor) *Tensor {
-	_r := x.inner.GatherWithDimensionSourceIndices(dimension, source, indices)
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+func (x *Graph) GatherWithDimensionSourceIndices(dimension int, source *Tensor, indices *Tensor) *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gatherWithDimension:source:indices:"), dimension, objref.IDOf(source), objref.IDOf(indices))
+	return TensorFromID(_r)
 }
 
 // Associates the given data with the input tensors, and if the device is a GPU, also copies the data to the device memory.
-//
-// BindAndWriteDataForInputsToDeviceBatchSizeSynchronous calls the underlying BindAndWriteDataForInputsToDeviceBatchSizeSynchronous.
-func (x *Graph) BindAndWriteDataForInputsToDeviceBatchSizeSynchronous(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], device *raw.MLCDevice, batchSize uint, synchronous bool) bool {
-	return x.inner.BindAndWriteDataForInputsToDeviceBatchSizeSynchronous(inputsData, inputTensors, device, batchSize, synchronous)
+func (x *Graph) BindAndWriteDataForInputsToDeviceBatchSizeSynchronous(inputsData obj.Object, inputTensors obj.Object, device *Device, batchSize int, synchronous bool) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bindAndWriteData:forInputs:toDevice:batchSize:synchronous:"), objref.IDOf(inputsData), objref.IDOf(inputTensors), objref.IDOf(device), batchSize, synchronous)
+	return _r
 }
 
 // Associates the given data with the input tensors, and if the device is a GPU, also copies the data to the device memory.
-//
-// BindAndWriteDataForInputsToDeviceSynchronous calls the underlying BindAndWriteDataForInputsToDeviceSynchronous.
-func (x *Graph) BindAndWriteDataForInputsToDeviceSynchronous(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], device *raw.MLCDevice, synchronous bool) bool {
-	return x.inner.BindAndWriteDataForInputsToDeviceSynchronous(inputsData, inputTensors, device, synchronous)
+func (x *Graph) BindAndWriteDataForInputsToDeviceSynchronous(inputsData obj.Object, inputTensors obj.Object, device *Device, synchronous bool) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bindAndWriteData:forInputs:toDevice:synchronous:"), objref.IDOf(inputsData), objref.IDOf(inputTensors), objref.IDOf(device), synchronous)
+	return _r
 }
 
 // Gets the source tensors for a layer in the training graph.
-//
-// SourceTensorsForLayer calls the underlying SourceTensorsForLayer.
-func (x *Graph) SourceTensorsForLayer(layer *raw.MLCLayer) *foundation.NSArray[*raw.MLCTensor] {
-	return x.inner.SourceTensorsForLayer(layer)
+func (x *Graph) SourceTensorsForLayer(layer *Layer) []*Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceTensorsForLayer:"), objref.IDOf(layer))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
 // Gets the result tensors for a layer in the training graph.
-//
-// ResultTensorsForLayer calls the underlying ResultTensorsForLayer.
-func (x *Graph) ResultTensorsForLayer(layer *raw.MLCLayer) *foundation.NSArray[*raw.MLCTensor] {
-	return x.inner.ResultTensorsForLayer(layer)
+func (x *Graph) ResultTensorsForLayer(layer *Layer) []*Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultTensorsForLayer:"), objref.IDOf(layer))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Tensor { return TensorFromID(_id) })
 }
 
-// @abstract   The device to be used when compiling and executing a graph
-//
-// Device calls the underlying Device.
+// The device to be used when compiling and executing a graph
 func (x *Graph) Device() *Device {
-	_r := x.inner.Device()
-	if _r == nil {
-		return nil
-	}
-	return &Device{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+	return DeviceFromID(_r)
 }
 
-// @abstract   Layers in the graph
+// Layers in the graph
 //
 // Layers returns the collection as a Go slice.
 func (x *Graph) Layers() []*Layer {
-	arr := x.inner.Layers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Layer {
-		return &Layer{inner: raw.MLCLayerFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Layer { return LayerFromID(_id) })
 }
 
-// @abstract A DOT representation of the graph. @discussion For more info on the DOT language, refer to https://en.wikipedia.org/wiki/DOT_(graph_description_language). Edges that have a dashed lines are those that have stop gradients, while those with solid lines don't.
-//
-// SummarizedDOTDescription calls the underlying SummarizedDOTDescription.
+// A DOT representation of the graph. For more info on the DOT language, refer to https://en.wikipedia.org/wiki/DOT_(graph_description_language). Edges that have a dashed lines are those that have stop gradients, while those with solid lines don't.
 func (x *Graph) SummarizedDOTDescription() string {
-	_r := x.inner.SummarizedDOTDescription()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("summarizedDOTDescription"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *Graph) asGraph() *raw.MLCGraph { return x.inner }
 
 // Graphable is the interface implemented by [Graph], for mocking and DI.
 type Graphable interface {
-	Unwrap() *raw.MLCGraph
-	NodeWithLayerSource(layer *raw.MLCLayer, source *raw.MLCTensor) *Tensor
-	NodeWithLayerSources(layer *raw.MLCLayer, sources *foundation.NSArray[*raw.MLCTensor]) *Tensor
-	NodeWithLayerSourcesDisableUpdate(layer *raw.MLCLayer, sources *foundation.NSArray[*raw.MLCTensor], disableUpdate bool) *Tensor
-	NodeWithLayerSourcesLossLabels(layer *raw.MLCLayer, sources *foundation.NSArray[*raw.MLCTensor], lossLabels *foundation.NSArray[*raw.MLCTensor]) *Tensor
-	SplitWithSourceSplitCountDimension(source *raw.MLCTensor, splitCount uint, dimension uint) *foundation.NSArray[*raw.MLCTensor]
-	SplitWithSourceSplitSectionLengthsDimension(source *raw.MLCTensor, splitSectionLengths *foundation.NSArray[*foundation.NSNumber], dimension uint) *foundation.NSArray[*raw.MLCTensor]
-	ConcatenateWithSourcesDimension(sources *foundation.NSArray[*raw.MLCTensor], dimension uint) *Tensor
-	ReshapeWithShapeSource(shape *foundation.NSArray[*foundation.NSNumber], source *raw.MLCTensor) *Tensor
-	TransposeWithDimensionsSource(dimensions *foundation.NSArray[*foundation.NSNumber], source *raw.MLCTensor) *Tensor
-	SelectWithSourcesCondition(sources *foundation.NSArray[*raw.MLCTensor], condition *raw.MLCTensor) *Tensor
-	ScatterWithDimensionSourceIndicesCopyFromReductionType(dimension uint, source *raw.MLCTensor, indices *raw.MLCTensor, copyFrom *raw.MLCTensor, reductionType MLCReductionType) *Tensor
-	GatherWithDimensionSourceIndices(dimension uint, source *raw.MLCTensor, indices *raw.MLCTensor) *Tensor
-	BindAndWriteDataForInputsToDeviceBatchSizeSynchronous(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], device *raw.MLCDevice, batchSize uint, synchronous bool) bool
-	BindAndWriteDataForInputsToDeviceSynchronous(inputsData *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensorData], inputTensors *foundation.NSDictionary[*foundation.NSString, *raw.MLCTensor], device *raw.MLCDevice, synchronous bool) bool
-	SourceTensorsForLayer(layer *raw.MLCLayer) *foundation.NSArray[*raw.MLCTensor]
-	ResultTensorsForLayer(layer *raw.MLCLayer) *foundation.NSArray[*raw.MLCTensor]
+	obj.Object
+	NodeWithLayerSource(layer *Layer, source *Tensor) *Tensor
+	NodeWithLayerSources(layer *Layer, sources []*Tensor) *Tensor
+	NodeWithLayerSourcesDisableUpdate(layer *Layer, sources []*Tensor, disableUpdate bool) *Tensor
+	NodeWithLayerSourcesLossLabels(layer *Layer, sources []*Tensor, lossLabels []*Tensor) *Tensor
+	SplitWithSourceSplitCountDimension(source *Tensor, splitCount int, dimension int) []*Tensor
+	SplitWithSourceSplitSectionLengthsDimension(source *Tensor, splitSectionLengths []obj.Object, dimension int) []*Tensor
+	ConcatenateWithSourcesDimension(sources []*Tensor, dimension int) *Tensor
+	ReshapeWithShapeSource(shape []obj.Object, source *Tensor) *Tensor
+	TransposeWithDimensionsSource(dimensions []obj.Object, source *Tensor) *Tensor
+	SelectWithSourcesCondition(sources []*Tensor, condition *Tensor) *Tensor
+	ScatterWithDimensionSourceIndicesCopyFromReductionType(dimension int, source *Tensor, indices *Tensor, copyFrom *Tensor, reductionType ReductionType) *Tensor
+	GatherWithDimensionSourceIndices(dimension int, source *Tensor, indices *Tensor) *Tensor
+	BindAndWriteDataForInputsToDeviceBatchSizeSynchronous(inputsData obj.Object, inputTensors obj.Object, device *Device, batchSize int, synchronous bool) bool
+	BindAndWriteDataForInputsToDeviceSynchronous(inputsData obj.Object, inputTensors obj.Object, device *Device, synchronous bool) bool
+	SourceTensorsForLayer(layer *Layer) []*Tensor
+	ResultTensorsForLayer(layer *Layer) []*Tensor
 	Device() *Device
 	Layers() []*Layer
 	SummarizedDOTDescription() string

@@ -5,271 +5,210 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that encapsulates a daily metrics report.
 //
-// MetricPayload wraps [raw.MXMetricPayload] with a fluent Go API.
+// MetricPayload is an idiomatic wrapper over the Objective-C class MXMetricPayload.
 type MetricPayload struct {
-	inner *raw.MXMetricPayload
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MXMetricPayload].
-func (x *MetricPayload) Unwrap() *raw.MXMetricPayload { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetricPayload) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricPayloadFromID adopts an existing object pointer as a MetricPayload (nil for 0).
+// MetricPayloadFromID adopts an existing Objective-C object as a MetricPayload
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricPayloadFromID(id objc.ID) *MetricPayload {
 	if id == 0 {
 		return nil
 	}
-	return &MetricPayload{inner: raw.MXMetricPayloadFromID(id)}
+	x := &MetricPayload{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMetricPayload creates a new [MetricPayload].
+// metricPayloadAdopt wraps an Objective-C object that this code just created as a
+// MetricPayload (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricPayloadAdopt(id objc.ID) *MetricPayload {
+	if id == 0 {
+		return nil
+	}
+	x := &MetricPayload{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetricPayload) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetricPayload) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetricPayload) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMetricPayload creates a new MetricPayload.
 func NewMetricPayload() *MetricPayload {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXMetricPayload")), objc.RegisterName("new"))
-	return &MetricPayload{inner: raw.MXMetricPayloadFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXMetricPayload")), objc.RegisterName("new"))
+	return metricPayloadAdopt(_id)
 }
 
 // Returns the contents of the payload in JSON format.
-//
-// JSONRepresentation calls the underlying JSONRepresentation.
-func (x *MetricPayload) JSONRepresentation() *foundation.NSData {
-	return x.inner.JSONRepresentation()
+func (x *MetricPayload) JSONRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
+	return obj.Wrap(_r)
 }
 
 // Returns the results of the payload as a dictionary.
-//
-// DictionaryRepresentation calls the underlying DictionaryRepresentation.
-func (x *MetricPayload) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.DictionaryRepresentation()
+func (x *MetricPayload) DictionaryRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
+	return obj.Wrap(_r)
 }
 
-// @property      latestApplicationVersion @abstract      An NSString representation of the application version from which this payload was generated. @discussion    If the application version was changed during the aggregation of this data, this value will reflect the latest application version at the time of retrieval.
-//
-// LatestApplicationVersion calls the underlying LatestApplicationVersion.
+// An NSString representation of the application version from which this payload was generated. If the application version was changed during the aggregation of this data, this value will reflect the latest application version at the time of retrieval.
 func (x *MetricPayload) LatestApplicationVersion() string {
-	_r := x.inner.LatestApplicationVersion()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("latestApplicationVersion"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// IncludesMultipleApplicationVersions calls the underlying IncludesMultipleApplicationVersions.
 func (x *MetricPayload) IncludesMultipleApplicationVersions() bool {
-	return x.inner.IncludesMultipleApplicationVersions()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesMultipleApplicationVersions"))
+	return _r
 }
 
-// @property      timeStampBegin @abstract      An NSDate object that indicates the time which the payload was generated.
-//
-// TimeStampBegin calls the underlying TimeStampBegin.
-func (x *MetricPayload) TimeStampBegin() *foundation.NSDate {
-	return x.inner.TimeStampBegin()
+// An NSDate object that indicates the time which the payload was generated.
+func (x *MetricPayload) TimeStampBegin() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeStampBegin"))
+	return obj.Wrap(_r)
 }
 
-// @property      timeStampEnd @abstract      An NSDate object that indicates the time which the payload was generated.
-//
-// TimeStampEnd calls the underlying TimeStampEnd.
-func (x *MetricPayload) TimeStampEnd() *foundation.NSDate {
-	return x.inner.TimeStampEnd()
+// An NSDate object that indicates the time which the payload was generated.
+func (x *MetricPayload) TimeStampEnd() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeStampEnd"))
+	return obj.Wrap(_r)
 }
 
-// @property      cpuMetrics @abstract      An object containing CPU metrics for this application.
-//
-// CpuMetrics calls the underlying CpuMetrics.
+// An object containing CPU metrics for this application.
 func (x *MetricPayload) CpuMetrics() *CPUMetric {
-	_r := x.inner.CpuMetrics()
-	if _r == nil {
-		return nil
-	}
-	return &CPUMetric{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cpuMetrics"))
+	return CPUMetricFromID(_r)
 }
 
-// @property      gpuMetrics @abstract      An object containing GPU metrics for this application.
-//
-// GpuMetrics calls the underlying GpuMetrics.
+// An object containing GPU metrics for this application.
 func (x *MetricPayload) GpuMetrics() *GPUMetric {
-	_r := x.inner.GpuMetrics()
-	if _r == nil {
-		return nil
-	}
-	return &GPUMetric{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gpuMetrics"))
+	return GPUMetricFromID(_r)
 }
 
-// @property      cellularConditionMetrics @abstract      An object containing a cellular condition metrics for this application.
-//
-// CellularConditionMetrics calls the underlying CellularConditionMetrics.
+// An object containing a cellular condition metrics for this application.
 func (x *MetricPayload) CellularConditionMetrics() *CellularConditionMetric {
-	_r := x.inner.CellularConditionMetrics()
-	if _r == nil {
-		return nil
-	}
-	return &CellularConditionMetric{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cellularConditionMetrics"))
+	return CellularConditionMetricFromID(_r)
 }
 
-// @property      applicationTimeMetrics @abstract      An object containing running mode metrics for this application.
-//
-// ApplicationTimeMetrics calls the underlying ApplicationTimeMetrics.
+// An object containing running mode metrics for this application.
 func (x *MetricPayload) ApplicationTimeMetrics() *AppRunTimeMetric {
-	_r := x.inner.ApplicationTimeMetrics()
-	if _r == nil {
-		return nil
-	}
-	return &AppRunTimeMetric{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationTimeMetrics"))
+	return AppRunTimeMetricFromID(_r)
 }
 
-// @property      locationActivityMetrics @abstract      An object containing location activity metrics for this application.
-//
-// LocationActivityMetrics calls the underlying LocationActivityMetrics.
+// An object containing location activity metrics for this application.
 func (x *MetricPayload) LocationActivityMetrics() *LocationActivityMetric {
-	_r := x.inner.LocationActivityMetrics()
-	if _r == nil {
-		return nil
-	}
-	return &LocationActivityMetric{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locationActivityMetrics"))
+	return LocationActivityMetricFromID(_r)
 }
 
-// @property      networkTransferMetrics @abstract      An object containing network transfer metrics for this application.
-//
-// NetworkTransferMetrics calls the underlying NetworkTransferMetrics.
+// An object containing network transfer metrics for this application.
 func (x *MetricPayload) NetworkTransferMetrics() *NetworkTransferMetric {
-	_r := x.inner.NetworkTransferMetrics()
-	if _r == nil {
-		return nil
-	}
-	return &NetworkTransferMetric{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkTransferMetrics"))
+	return NetworkTransferMetricFromID(_r)
 }
 
-// @property      applicationLaunchMetrics @abstract      An object containing launch metrics for this application.
-//
-// ApplicationLaunchMetrics calls the underlying ApplicationLaunchMetrics.
+// An object containing launch metrics for this application.
 func (x *MetricPayload) ApplicationLaunchMetrics() *AppLaunchMetric {
-	_r := x.inner.ApplicationLaunchMetrics()
-	if _r == nil {
-		return nil
-	}
-	return &AppLaunchMetric{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationLaunchMetrics"))
+	return AppLaunchMetricFromID(_r)
 }
 
-// @property      applicationResponsivenessMetrics @abstract      An object containing hang metrics for this application.
-//
-// ApplicationResponsivenessMetrics calls the underlying ApplicationResponsivenessMetrics.
+// An object containing hang metrics for this application.
 func (x *MetricPayload) ApplicationResponsivenessMetrics() *AppResponsivenessMetric {
-	_r := x.inner.ApplicationResponsivenessMetrics()
-	if _r == nil {
-		return nil
-	}
-	return &AppResponsivenessMetric{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationResponsivenessMetrics"))
+	return AppResponsivenessMetricFromID(_r)
 }
 
-// @property      diskIOMetrics @abstract      An object containing disk IO metrics for this application.
-//
-// DiskIOMetrics calls the underlying DiskIOMetrics.
+// An object containing disk IO metrics for this application.
 func (x *MetricPayload) DiskIOMetrics() *DiskIOMetric {
-	_r := x.inner.DiskIOMetrics()
-	if _r == nil {
-		return nil
-	}
-	return &DiskIOMetric{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("diskIOMetrics"))
+	return DiskIOMetricFromID(_r)
 }
 
-// @property      memoryMetrics @abstract      An object containing memory metrics for this application.
-//
-// MemoryMetrics calls the underlying MemoryMetrics.
+// An object containing memory metrics for this application.
 func (x *MetricPayload) MemoryMetrics() *MemoryMetric {
-	_r := x.inner.MemoryMetrics()
-	if _r == nil {
-		return nil
-	}
-	return &MemoryMetric{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("memoryMetrics"))
+	return MemoryMetricFromID(_r)
 }
 
-// @property      displayMetrics @abstract      An object containing display metrics for this application.
-//
-// DisplayMetrics calls the underlying DisplayMetrics.
+// An object containing display metrics for this application.
 func (x *MetricPayload) DisplayMetrics() *DisplayMetric {
-	_r := x.inner.DisplayMetrics()
-	if _r == nil {
-		return nil
-	}
-	return &DisplayMetric{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayMetrics"))
+	return DisplayMetricFromID(_r)
 }
 
-// @property      animationMetrics @abstract      An object containing animation metrics for this application.
-//
-// AnimationMetrics calls the underlying AnimationMetrics.
+// An object containing animation metrics for this application.
 func (x *MetricPayload) AnimationMetrics() *AnimationMetric {
-	_r := x.inner.AnimationMetrics()
-	if _r == nil {
-		return nil
-	}
-	return &AnimationMetric{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animationMetrics"))
+	return AnimationMetricFromID(_r)
 }
 
-// @property      applicationExitMetrics @abstract      An object containing exit metrics for this application.
-//
-// ApplicationExitMetrics calls the underlying ApplicationExitMetrics.
+// An object containing exit metrics for this application.
 func (x *MetricPayload) ApplicationExitMetrics() *AppExitMetric {
-	_r := x.inner.ApplicationExitMetrics()
-	if _r == nil {
-		return nil
-	}
-	return &AppExitMetric{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationExitMetrics"))
+	return AppExitMetricFromID(_r)
 }
 
-// @property      diskSpaceUsageMetrics @abstract      An object containing disk space usage metrics for this application.
-//
-// DiskSpaceUsageMetrics calls the underlying DiskSpaceUsageMetrics.
+// An object containing disk space usage metrics for this application.
 func (x *MetricPayload) DiskSpaceUsageMetrics() *DiskSpaceUsageMetric {
-	_r := x.inner.DiskSpaceUsageMetrics()
-	if _r == nil {
-		return nil
-	}
-	return &DiskSpaceUsageMetric{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("diskSpaceUsageMetrics"))
+	return DiskSpaceUsageMetricFromID(_r)
 }
 
-// @property      signpostMetrics @abstract      An array containing signpost metrics for this application.
+// An array containing signpost metrics for this application.
 //
 // SignpostMetrics returns the collection as a Go slice.
 func (x *MetricPayload) SignpostMetrics() []*SignpostMetric {
-	arr := x.inner.SignpostMetrics()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SignpostMetric {
-		return &SignpostMetric{inner: raw.MXSignpostMetricFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signpostMetrics"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SignpostMetric { return SignpostMetricFromID(_id) })
 }
 
-// @property      metaData @abstract      An object containing extra metadata for this payload.
-//
-// MetaData calls the underlying MetaData.
+// An object containing extra metadata for this payload.
 func (x *MetricPayload) MetaData() *MetaData {
-	_r := x.inner.MetaData()
-	if _r == nil {
-		return nil
-	}
-	return &MetaData{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metaData"))
+	return MetaDataFromID(_r)
 }
 
 // MetricPayloadable is the interface implemented by [MetricPayload], for mocking and DI.
 type MetricPayloadable interface {
-	Unwrap() *raw.MXMetricPayload
-	JSONRepresentation() *foundation.NSData
-	DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID]
+	obj.Object
+	JSONRepresentation() obj.Object
+	DictionaryRepresentation() obj.Object
 	LatestApplicationVersion() string
 	IncludesMultipleApplicationVersions() bool
-	TimeStampBegin() *foundation.NSDate
-	TimeStampEnd() *foundation.NSDate
+	TimeStampBegin() obj.Object
+	TimeStampEnd() obj.Object
 	CpuMetrics() *CPUMetric
 	GpuMetrics() *GPUMetric
 	CellularConditionMetrics() *CellularConditionMetric

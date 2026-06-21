@@ -5,43 +5,68 @@
 package spritekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A definition for a deformation of nodes that conform to SKWarpable.
 //
-// WarpGeometry wraps [raw.SKWarpGeometry] with a fluent Go API.
+// WarpGeometry is an idiomatic wrapper over the Objective-C class SKWarpGeometry.
 type WarpGeometry struct {
-	inner *raw.SKWarpGeometry
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKWarpGeometry].
-func (x *WarpGeometry) Unwrap() *raw.SKWarpGeometry { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WarpGeometry) ID() objc.ID { return x.inner.Ptr() }
-
-// WarpGeometryFromID adopts an existing object pointer as a WarpGeometry (nil for 0).
+// WarpGeometryFromID adopts an existing Objective-C object as a WarpGeometry
+// (nil for 0), retaining it and registering a release finalizer.
 func WarpGeometryFromID(id objc.ID) *WarpGeometry {
 	if id == 0 {
 		return nil
 	}
-	return &WarpGeometry{inner: raw.SKWarpGeometryFromID(id)}
+	x := &WarpGeometry{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWarpGeometry creates a new [WarpGeometry].
+// warpGeometryAdopt wraps an Objective-C object that this code just created as a
+// WarpGeometry (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func warpGeometryAdopt(id objc.ID) *WarpGeometry {
+	if id == 0 {
+		return nil
+	}
+	x := &WarpGeometry{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WarpGeometry) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WarpGeometry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WarpGeometry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWarpGeometry creates a new WarpGeometry.
 func NewWarpGeometry() *WarpGeometry {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKWarpGeometry")), objc.RegisterName("new"))
-	return &WarpGeometry{inner: raw.SKWarpGeometryFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKWarpGeometry")), objc.RegisterName("new"))
+	return warpGeometryAdopt(_id)
 }
-
-func (x *WarpGeometry) asWarpGeometry() *raw.SKWarpGeometry { return x.inner }
 
 // WarpGeometryable is the interface implemented by [WarpGeometry], for mocking and DI.
 type WarpGeometryable interface {
-	Unwrap() *raw.SKWarpGeometry
+	obj.Object
 }
 
 var _ WarpGeometryable = (*WarpGeometry)(nil)

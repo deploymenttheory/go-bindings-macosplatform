@@ -5,60 +5,84 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A specification for the hardware elements and configurations present in a particular Mac hardware model.
 //
-// MacHardwareModel wraps [raw.VZMacHardwareModel] with a fluent Go API.
+// MacHardwareModel is an idiomatic wrapper over the Objective-C class VZMacHardwareModel.
 type MacHardwareModel struct {
-	inner *raw.VZMacHardwareModel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZMacHardwareModel].
-func (x *MacHardwareModel) Unwrap() *raw.VZMacHardwareModel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MacHardwareModel) ID() objc.ID { return x.inner.Ptr() }
-
-// MacHardwareModelFromID adopts an existing object pointer as a MacHardwareModel (nil for 0).
+// MacHardwareModelFromID adopts an existing Objective-C object as a MacHardwareModel
+// (nil for 0), retaining it and registering a release finalizer.
 func MacHardwareModelFromID(id objc.ID) *MacHardwareModel {
 	if id == 0 {
 		return nil
 	}
-	return &MacHardwareModel{inner: raw.VZMacHardwareModelFromID(id)}
+	x := &MacHardwareModel{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// macHardwareModelAdopt wraps an Objective-C object that this code just created as a
+// MacHardwareModel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func macHardwareModelAdopt(id objc.ID) *MacHardwareModel {
+	if id == 0 {
+		return nil
+	}
+	x := &MacHardwareModel{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MacHardwareModel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MacHardwareModel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MacHardwareModel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an instance of the hardware model described by the specified data representation.
 //
-// NewMacHardwareModelWithDataRepresentation creates a new [MacHardwareModel].
-func NewMacHardwareModelWithDataRepresentation(dataRepresentation *foundation.NSData) *MacHardwareModel {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacHardwareModel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:"), dataRepresentation.Ptr())
-	return &MacHardwareModel{inner: raw.VZMacHardwareModelFromID(_id)}
+// NewMacHardwareModelWithDataRepresentation creates a new MacHardwareModel.
+func NewMacHardwareModelWithDataRepresentation(dataRepresentation obj.Object) *MacHardwareModel {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacHardwareModel")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:"), objref.IDOf(dataRepresentation))
+	return macHardwareModelAdopt(_id)
 }
 
-// @abstract Opaque data representation of the hardware model. @discussion This can be used to recreate the same hardware model with -[VZMacHardwareModel initWithDataRepresentation:].
-//
-// DataRepresentation calls the underlying DataRepresentation.
-func (x *MacHardwareModel) DataRepresentation() *foundation.NSData {
-	return x.inner.DataRepresentation()
+// Opaque data representation of the hardware model. This can be used to recreate the same hardware model with -[VZMacHardwareModel initWithDataRepresentation:].
+func (x *MacHardwareModel) DataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
+	return obj.Wrap(_r)
 }
 
-// @abstract Indicate whether this hardware model is supported by the host. @discussion If this hardware model is not supported by the host, no VZVirtualMachineConfiguration using it will validate. The validation error of the VZVirtualMachineConfiguration provides more information about why the hardware model is unsupported.
-//
-// IsSupported calls the underlying IsSupported.
+// Indicate whether this hardware model is supported by the host. If this hardware model is not supported by the host, no VZVirtualMachineConfiguration using it will validate. The validation error of the VZVirtualMachineConfiguration provides more information about why the hardware model is unsupported.
 func (x *MacHardwareModel) IsSupported() bool {
-	return x.inner.IsSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSupported"))
+	return _r
 }
 
 // MacHardwareModelable is the interface implemented by [MacHardwareModel], for mocking and DI.
 type MacHardwareModelable interface {
-	Unwrap() *raw.VZMacHardwareModel
-	DataRepresentation() *foundation.NSData
+	obj.Object
+	DataRepresentation() obj.Object
 	IsSupported() bool
 }
 

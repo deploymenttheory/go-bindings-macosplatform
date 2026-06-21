@@ -5,186 +5,195 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct wraps [raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct] with a fluent Go API.
+// MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct is an idiomatic wrapper over the Objective-C class MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct.
 type MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct struct {
-	inner *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct].
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Unwrap() *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRNetworkCommissioningClusterThreadInterfaceScanResultStructFromID adopts an existing object pointer as a MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct (nil for 0).
+// MTRNetworkCommissioningClusterThreadInterfaceScanResultStructFromID adopts an existing Objective-C object as a MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRNetworkCommissioningClusterThreadInterfaceScanResultStructFromID(id objc.ID) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct{inner: raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStructFromID(id)}
+	x := &MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRNetworkCommissioningClusterThreadInterfaceScanResultStruct creates a new [MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct].
+// mTRNetworkCommissioningClusterThreadInterfaceScanResultStructAdopt wraps an Objective-C object that this code just created as a
+// MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRNetworkCommissioningClusterThreadInterfaceScanResultStructAdopt(id objc.ID) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRNetworkCommissioningClusterThreadInterfaceScanResultStruct creates a new MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct.
 func NewMTRNetworkCommissioningClusterThreadInterfaceScanResultStruct() *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct")), objc.RegisterName("new"))
-	return &MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct{inner: raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct")), objc.RegisterName("new"))
+	return mTRNetworkCommissioningClusterThreadInterfaceScanResultStructAdopt(_id)
 }
 
-// WithPanId sets the panId property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithPanId(panId *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
-	x.inner.SetPanId(panId)
+// WithPanId sets panId and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithPanId(panId obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPanId:"), objref.IDOf(panId))
 	return x
 }
 
-// WithExtendedPanId sets the extendedPanId property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithExtendedPanId(extendedPanId *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
-	x.inner.SetExtendedPanId(extendedPanId)
+// WithExtendedPanId sets extendedPanId and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithExtendedPanId(extendedPanId obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedPanId:"), objref.IDOf(extendedPanId))
 	return x
 }
 
-// WithNetworkName sets the networkName property and returns the receiver for chaining.
+// WithNetworkName sets networkName and returns the receiver so calls can be chained.
 func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithNetworkName(networkName string) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
-	x.inner.SetNetworkName(foundation.NSStringStringWithUTF8String(networkName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkName:"), purego.NSString(networkName))
 	return x
 }
 
-// WithChannel sets the channel property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithChannel(channel *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
-	x.inner.SetChannel(channel)
+// WithChannel sets channel and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithChannel(channel obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 	return x
 }
 
-// WithExtendedAddress sets the extendedAddress property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithExtendedAddress(extendedAddress *foundation.NSData) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
-	x.inner.SetExtendedAddress(extendedAddress)
+// WithExtendedAddress sets extendedAddress and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithExtendedAddress(extendedAddress obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedAddress:"), objref.IDOf(extendedAddress))
 	return x
 }
 
-// WithRssi sets the rssi property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithRssi(rssi *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
-	x.inner.SetRssi(rssi)
+// WithRssi sets rssi and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithRssi(rssi obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRssi:"), objref.IDOf(rssi))
 	return x
 }
 
-// WithLqi sets the lqi property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithLqi(lqi *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
-	x.inner.SetLqi(lqi)
+// WithLqi sets lqi and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) WithLqi(lqi obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLqi:"), objref.IDOf(lqi))
 	return x
 }
 
-// PanId calls the underlying PanId.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) PanId() *foundation.NSNumber {
-	return x.inner.PanId()
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) PanId() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("panId"))
+	return obj.Wrap(_r)
 }
 
-// SetPanId calls the underlying SetPanId.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetPanId(panId *foundation.NSNumber) {
-	x.inner.SetPanId(panId)
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetPanId(panId obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPanId:"), objref.IDOf(panId))
 }
 
-// ExtendedPanId calls the underlying ExtendedPanId.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) ExtendedPanId() *foundation.NSNumber {
-	return x.inner.ExtendedPanId()
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) ExtendedPanId() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedPanId"))
+	return obj.Wrap(_r)
 }
 
-// SetExtendedPanId calls the underlying SetExtendedPanId.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetExtendedPanId(extendedPanId *foundation.NSNumber) {
-	x.inner.SetExtendedPanId(extendedPanId)
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetExtendedPanId(extendedPanId obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedPanId:"), objref.IDOf(extendedPanId))
 }
 
-// NetworkName calls the underlying NetworkName.
 func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) NetworkName() string {
-	_r := x.inner.NetworkName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetNetworkName calls the underlying SetNetworkName.
 func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetNetworkName(networkName string) {
-	x.inner.SetNetworkName(foundation.NSStringStringWithUTF8String(networkName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkName:"), purego.NSString(networkName))
 }
 
-// Channel calls the underlying Channel.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Channel() *foundation.NSNumber {
-	return x.inner.Channel()
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Channel() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("channel"))
+	return obj.Wrap(_r)
 }
 
-// SetChannel calls the underlying SetChannel.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetChannel(channel *foundation.NSNumber) {
-	x.inner.SetChannel(channel)
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetChannel(channel obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 }
 
-// ExtendedAddress calls the underlying ExtendedAddress.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) ExtendedAddress() *foundation.NSData {
-	return x.inner.ExtendedAddress()
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) ExtendedAddress() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedAddress"))
+	return obj.Wrap(_r)
 }
 
-// SetExtendedAddress calls the underlying SetExtendedAddress.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetExtendedAddress(extendedAddress *foundation.NSData) {
-	x.inner.SetExtendedAddress(extendedAddress)
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetExtendedAddress(extendedAddress obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedAddress:"), objref.IDOf(extendedAddress))
 }
 
-// Rssi calls the underlying Rssi.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Rssi() *foundation.NSNumber {
-	return x.inner.Rssi()
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Rssi() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rssi"))
+	return obj.Wrap(_r)
 }
 
-// SetRssi calls the underlying SetRssi.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetRssi(rssi *foundation.NSNumber) {
-	x.inner.SetRssi(rssi)
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetRssi(rssi obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRssi:"), objref.IDOf(rssi))
 }
 
-// Lqi calls the underlying Lqi.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Lqi() *foundation.NSNumber {
-	return x.inner.Lqi()
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) Lqi() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lqi"))
+	return obj.Wrap(_r)
 }
 
-// SetLqi calls the underlying SetLqi.
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetLqi(lqi *foundation.NSNumber) {
-	x.inner.SetLqi(lqi)
-}
-
-func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) asMTRNetworkCommissioningClusterThreadInterfaceScanResultStruct() *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct {
-	return x.inner
+func (x *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct) SetLqi(lqi obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLqi:"), objref.IDOf(lqi))
 }
 
 // MTRNetworkCommissioningClusterThreadInterfaceScanResultStructable is the interface implemented by [MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct], for mocking and DI.
 type MTRNetworkCommissioningClusterThreadInterfaceScanResultStructable interface {
-	Unwrap() *raw.MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
-	WithPanId(panId *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
-	WithExtendedPanId(extendedPanId *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
+	obj.Object
+	WithPanId(panId obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
+	WithExtendedPanId(extendedPanId obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
 	WithNetworkName(networkName string) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
-	WithChannel(channel *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
-	WithExtendedAddress(extendedAddress *foundation.NSData) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
-	WithRssi(rssi *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
-	WithLqi(lqi *foundation.NSNumber) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
-	PanId() *foundation.NSNumber
-	SetPanId(panId *foundation.NSNumber)
-	ExtendedPanId() *foundation.NSNumber
-	SetExtendedPanId(extendedPanId *foundation.NSNumber)
+	WithChannel(channel obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
+	WithExtendedAddress(extendedAddress obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
+	WithRssi(rssi obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
+	WithLqi(lqi obj.Object) *MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct
+	PanId() obj.Object
+	SetPanId(panId obj.Object)
+	ExtendedPanId() obj.Object
+	SetExtendedPanId(extendedPanId obj.Object)
 	NetworkName() string
 	SetNetworkName(networkName string)
-	Channel() *foundation.NSNumber
-	SetChannel(channel *foundation.NSNumber)
-	ExtendedAddress() *foundation.NSData
-	SetExtendedAddress(extendedAddress *foundation.NSData)
-	Rssi() *foundation.NSNumber
-	SetRssi(rssi *foundation.NSNumber)
-	Lqi() *foundation.NSNumber
-	SetLqi(lqi *foundation.NSNumber)
+	Channel() obj.Object
+	SetChannel(channel obj.Object)
+	ExtendedAddress() obj.Object
+	SetExtendedAddress(extendedAddress obj.Object)
+	Rssi() obj.Object
+	SetRssi(rssi obj.Object)
+	Lqi() obj.Object
+	SetLqi(lqi obj.Object)
 }
 
 var _ MTRNetworkCommissioningClusterThreadInterfaceScanResultStructable = (*MTRNetworkCommissioningClusterThreadInterfaceScanResultStruct)(nil)

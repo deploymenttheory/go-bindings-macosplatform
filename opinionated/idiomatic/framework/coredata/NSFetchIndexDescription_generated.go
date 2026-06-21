@@ -5,145 +5,142 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The description of the index.
 //
-// FetchIndexDescription wraps [raw.NSFetchIndexDescription] with a fluent Go API.
+// FetchIndexDescription is an idiomatic wrapper over the Objective-C class NSFetchIndexDescription.
 type FetchIndexDescription struct {
-	inner *raw.NSFetchIndexDescription
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFetchIndexDescription].
-func (x *FetchIndexDescription) Unwrap() *raw.NSFetchIndexDescription { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FetchIndexDescription) ID() objc.ID { return x.inner.Ptr() }
-
-// FetchIndexDescriptionFromID adopts an existing object pointer as a FetchIndexDescription (nil for 0).
+// FetchIndexDescriptionFromID adopts an existing Objective-C object as a FetchIndexDescription
+// (nil for 0), retaining it and registering a release finalizer.
 func FetchIndexDescriptionFromID(id objc.ID) *FetchIndexDescription {
 	if id == 0 {
 		return nil
 	}
-	return &FetchIndexDescription{inner: raw.NSFetchIndexDescriptionFromID(id)}
+	x := &FetchIndexDescription{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// fetchIndexDescriptionAdopt wraps an Objective-C object that this code just created as a
+// FetchIndexDescription (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fetchIndexDescriptionAdopt(id objc.ID) *FetchIndexDescription {
+	if id == 0 {
+		return nil
+	}
+	x := &FetchIndexDescription{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FetchIndexDescription) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FetchIndexDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FetchIndexDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a fetch index description using the specified name and element descriptions.
 //
-// NewFetchIndexDescriptionWithNameElements creates a new [FetchIndexDescription].
-func NewFetchIndexDescriptionWithNameElements(name string, elements *foundation.NSArray[*raw.NSFetchIndexElementDescription]) *FetchIndexDescription {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFetchIndexDescription")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:elements:"), foundation.NSStringStringWithUTF8String(name).Ptr(), elements.Ptr())
-	return &FetchIndexDescription{inner: raw.NSFetchIndexDescriptionFromID(_id)}
+// NewFetchIndexDescriptionWithNameElements creates a new FetchIndexDescription.
+func NewFetchIndexDescriptionWithNameElements(name string, elements []*FetchIndexElementDescription) *FetchIndexDescription {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFetchIndexDescription")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:elements:"), purego.NSString(name), purego.SliceToNSArray(elements, func(_v *FetchIndexElementDescription) objc.ID { return objref.IDOf(_v) }))
+	return fetchIndexDescriptionAdopt(_id)
 }
 
 // The name of the fetch index description.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *FetchIndexDescription) WithName(name string) *FetchIndexDescription {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // An array of fetch index element descriptions.
 //
-// WithElements sets the collection, converting the Go slice to an NSArray.
-func (x *FetchIndexDescription) WithElements(items ...*raw.NSFetchIndexElementDescription) *FetchIndexDescription {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetElements(foundation.NSArrayFromID[*raw.NSFetchIndexElementDescription](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSFetchIndexElementDescription](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetElements(_arr)
+// WithElements sets the collection and returns the receiver so calls can be chained.
+func (x *FetchIndexDescription) WithElements(items ...*FetchIndexElementDescription) *FetchIndexDescription {
+	_arr := purego.SliceToNSArray(items, func(_v *FetchIndexElementDescription) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElements:"), _arr)
 	return x
 }
 
 // A predicate that selects rows for indexing, if the index is a partial index.
 //
-// WithPartialIndexPredicate sets the partialIndexPredicate property and returns the receiver for chaining.
-func (x *FetchIndexDescription) WithPartialIndexPredicate(partialIndexPredicate *foundation.NSPredicate) *FetchIndexDescription {
-	x.inner.SetPartialIndexPredicate(partialIndexPredicate)
+// WithPartialIndexPredicate sets partialIndexPredicate and returns the receiver so calls can be chained.
+func (x *FetchIndexDescription) WithPartialIndexPredicate(partialIndexPredicate obj.Object) *FetchIndexDescription {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPartialIndexPredicate:"), objref.IDOf(partialIndexPredicate))
 	return x
 }
 
-// Name calls the underlying Name.
 func (x *FetchIndexDescription) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
 func (x *FetchIndexDescription) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
 // Elements returns the collection as a Go slice.
 func (x *FetchIndexDescription) Elements() []*FetchIndexElementDescription {
-	arr := x.inner.Elements()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FetchIndexElementDescription {
-		return &FetchIndexElementDescription{inner: raw.NSFetchIndexElementDescriptionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elements"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FetchIndexElementDescription { return FetchIndexElementDescriptionFromID(_id) })
 }
 
-// SetElements calls the underlying SetElements.
-func (x *FetchIndexDescription) SetElements(elements *foundation.NSArray[*raw.NSFetchIndexElementDescription]) {
-	x.inner.SetElements(elements)
+func (x *FetchIndexDescription) SetElements(elements []*FetchIndexElementDescription) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElements:"), purego.SliceToNSArray(elements, func(_v *FetchIndexElementDescription) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Entity calls the underlying Entity.
 func (x *FetchIndexDescription) Entity() *EntityDescription {
-	_r := x.inner.Entity()
-	if _r == nil {
-		return nil
-	}
-	return &EntityDescription{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entity"))
+	return EntityDescriptionFromID(_r)
 }
 
-// PartialIndexPredicate calls the underlying PartialIndexPredicate.
-func (x *FetchIndexDescription) PartialIndexPredicate() *foundation.NSPredicate {
-	return x.inner.PartialIndexPredicate()
+func (x *FetchIndexDescription) PartialIndexPredicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("partialIndexPredicate"))
+	return obj.Wrap(_r)
 }
 
-// SetPartialIndexPredicate calls the underlying SetPartialIndexPredicate.
-func (x *FetchIndexDescription) SetPartialIndexPredicate(partialIndexPredicate *foundation.NSPredicate) {
-	x.inner.SetPartialIndexPredicate(partialIndexPredicate)
+func (x *FetchIndexDescription) SetPartialIndexPredicate(partialIndexPredicate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPartialIndexPredicate:"), objref.IDOf(partialIndexPredicate))
 }
 
 // FetchIndexDescriptionable is the interface implemented by [FetchIndexDescription], for mocking and DI.
 type FetchIndexDescriptionable interface {
-	Unwrap() *raw.NSFetchIndexDescription
+	obj.Object
 	WithName(name string) *FetchIndexDescription
-	WithElements(items ...*raw.NSFetchIndexElementDescription) *FetchIndexDescription
-	WithPartialIndexPredicate(partialIndexPredicate *foundation.NSPredicate) *FetchIndexDescription
+	WithElements(items ...*FetchIndexElementDescription) *FetchIndexDescription
+	WithPartialIndexPredicate(partialIndexPredicate obj.Object) *FetchIndexDescription
 	Name() string
 	SetName(name string)
 	Elements() []*FetchIndexElementDescription
-	SetElements(elements *foundation.NSArray[*raw.NSFetchIndexElementDescription])
+	SetElements(elements []*FetchIndexElementDescription)
 	Entity() *EntityDescription
-	PartialIndexPredicate() *foundation.NSPredicate
-	SetPartialIndexPredicate(partialIndexPredicate *foundation.NSPredicate)
+	PartialIndexPredicate() obj.Object
+	SetPartialIndexPredicate(partialIndexPredicate obj.Object)
 }
 
 var _ FetchIndexDescriptionable = (*FetchIndexDescription)(nil)

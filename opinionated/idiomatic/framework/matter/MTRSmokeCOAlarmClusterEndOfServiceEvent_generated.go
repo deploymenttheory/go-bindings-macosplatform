@@ -5,41 +5,66 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRSmokeCOAlarmClusterEndOfServiceEvent wraps [raw.MTRSmokeCOAlarmClusterEndOfServiceEvent] with a fluent Go API.
+// MTRSmokeCOAlarmClusterEndOfServiceEvent is an idiomatic wrapper over the Objective-C class MTRSmokeCOAlarmClusterEndOfServiceEvent.
 type MTRSmokeCOAlarmClusterEndOfServiceEvent struct {
-	inner *raw.MTRSmokeCOAlarmClusterEndOfServiceEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRSmokeCOAlarmClusterEndOfServiceEvent].
-func (x *MTRSmokeCOAlarmClusterEndOfServiceEvent) Unwrap() *raw.MTRSmokeCOAlarmClusterEndOfServiceEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRSmokeCOAlarmClusterEndOfServiceEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRSmokeCOAlarmClusterEndOfServiceEventFromID adopts an existing object pointer as a MTRSmokeCOAlarmClusterEndOfServiceEvent (nil for 0).
+// MTRSmokeCOAlarmClusterEndOfServiceEventFromID adopts an existing Objective-C object as a MTRSmokeCOAlarmClusterEndOfServiceEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRSmokeCOAlarmClusterEndOfServiceEventFromID(id objc.ID) *MTRSmokeCOAlarmClusterEndOfServiceEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRSmokeCOAlarmClusterEndOfServiceEvent{inner: raw.MTRSmokeCOAlarmClusterEndOfServiceEventFromID(id)}
+	x := &MTRSmokeCOAlarmClusterEndOfServiceEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRSmokeCOAlarmClusterEndOfServiceEvent creates a new [MTRSmokeCOAlarmClusterEndOfServiceEvent].
+// mTRSmokeCOAlarmClusterEndOfServiceEventAdopt wraps an Objective-C object that this code just created as a
+// MTRSmokeCOAlarmClusterEndOfServiceEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRSmokeCOAlarmClusterEndOfServiceEventAdopt(id objc.ID) *MTRSmokeCOAlarmClusterEndOfServiceEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRSmokeCOAlarmClusterEndOfServiceEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRSmokeCOAlarmClusterEndOfServiceEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRSmokeCOAlarmClusterEndOfServiceEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRSmokeCOAlarmClusterEndOfServiceEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRSmokeCOAlarmClusterEndOfServiceEvent creates a new MTRSmokeCOAlarmClusterEndOfServiceEvent.
 func NewMTRSmokeCOAlarmClusterEndOfServiceEvent() *MTRSmokeCOAlarmClusterEndOfServiceEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRSmokeCOAlarmClusterEndOfServiceEvent")), objc.RegisterName("new"))
-	return &MTRSmokeCOAlarmClusterEndOfServiceEvent{inner: raw.MTRSmokeCOAlarmClusterEndOfServiceEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRSmokeCOAlarmClusterEndOfServiceEvent")), objc.RegisterName("new"))
+	return mTRSmokeCOAlarmClusterEndOfServiceEventAdopt(_id)
 }
 
 // MTRSmokeCOAlarmClusterEndOfServiceEventable is the interface implemented by [MTRSmokeCOAlarmClusterEndOfServiceEvent], for mocking and DI.
 type MTRSmokeCOAlarmClusterEndOfServiceEventable interface {
-	Unwrap() *raw.MTRSmokeCOAlarmClusterEndOfServiceEvent
+	obj.Object
 }
 
 var _ MTRSmokeCOAlarmClusterEndOfServiceEventable = (*MTRSmokeCOAlarmClusterEndOfServiceEvent)(nil)

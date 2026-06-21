@@ -5,144 +5,164 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRThreadNetworkDiagnosticsClusterNeighborTable wraps [raw.MTRThreadNetworkDiagnosticsClusterNeighborTable] with a fluent Go API.
+// MTRThreadNetworkDiagnosticsClusterNeighborTable is an idiomatic wrapper over the Objective-C class MTRThreadNetworkDiagnosticsClusterNeighborTable.
 type MTRThreadNetworkDiagnosticsClusterNeighborTable struct {
-	inner *raw.MTRThreadNetworkDiagnosticsClusterNeighborTable
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRThreadNetworkDiagnosticsClusterNeighborTable].
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterNeighborTable {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRThreadNetworkDiagnosticsClusterNeighborTableFromID adopts an existing object pointer as a MTRThreadNetworkDiagnosticsClusterNeighborTable (nil for 0).
+// MTRThreadNetworkDiagnosticsClusterNeighborTableFromID adopts an existing Objective-C object as a MTRThreadNetworkDiagnosticsClusterNeighborTable
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRThreadNetworkDiagnosticsClusterNeighborTableFromID(id objc.ID) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
 	if id == 0 {
 		return nil
 	}
-	return &MTRThreadNetworkDiagnosticsClusterNeighborTable{inner: raw.MTRThreadNetworkDiagnosticsClusterNeighborTableFromID(id)}
+	x := &MTRThreadNetworkDiagnosticsClusterNeighborTable{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRThreadNetworkDiagnosticsClusterNeighborTable creates a new [MTRThreadNetworkDiagnosticsClusterNeighborTable].
+// mTRThreadNetworkDiagnosticsClusterNeighborTableAdopt wraps an Objective-C object that this code just created as a
+// MTRThreadNetworkDiagnosticsClusterNeighborTable (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRThreadNetworkDiagnosticsClusterNeighborTableAdopt(id objc.ID) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRThreadNetworkDiagnosticsClusterNeighborTable{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRThreadNetworkDiagnosticsClusterNeighborTable creates a new MTRThreadNetworkDiagnosticsClusterNeighborTable.
 func NewMTRThreadNetworkDiagnosticsClusterNeighborTable() *MTRThreadNetworkDiagnosticsClusterNeighborTable {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRThreadNetworkDiagnosticsClusterNeighborTable")), objc.RegisterName("new"))
-	return &MTRThreadNetworkDiagnosticsClusterNeighborTable{inner: raw.MTRThreadNetworkDiagnosticsClusterNeighborTableFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRThreadNetworkDiagnosticsClusterNeighborTable")), objc.RegisterName("new"))
+	return mTRThreadNetworkDiagnosticsClusterNeighborTableAdopt(_id)
 }
 
-// WithExtAddress sets the extAddress property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithExtAddress(extAddress *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
-	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetExtAddress(extAddress)
+// WithExtAddress sets extAddress and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithExtAddress(extAddress obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtAddress:"), objref.IDOf(extAddress))
 	return x
 }
 
-// WithAge sets the age property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithAge(age *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
-	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetAge(age)
+// WithAge sets age and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithAge(age obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAge:"), objref.IDOf(age))
 	return x
 }
 
-// WithRloc16 sets the rloc16 property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithRloc16(rloc16 *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
-	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetRloc16(rloc16)
+// WithRloc16 sets rloc16 and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithRloc16(rloc16 obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRloc16:"), objref.IDOf(rloc16))
 	return x
 }
 
-// WithLinkFrameCounter sets the linkFrameCounter property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithLinkFrameCounter(linkFrameCounter *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
-	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetLinkFrameCounter(linkFrameCounter)
+// WithLinkFrameCounter sets linkFrameCounter and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithLinkFrameCounter(linkFrameCounter obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkFrameCounter:"), objref.IDOf(linkFrameCounter))
 	return x
 }
 
-// WithMleFrameCounter sets the mleFrameCounter property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithMleFrameCounter(mleFrameCounter *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
-	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetMleFrameCounter(mleFrameCounter)
+// WithMleFrameCounter sets mleFrameCounter and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithMleFrameCounter(mleFrameCounter obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMleFrameCounter:"), objref.IDOf(mleFrameCounter))
 	return x
 }
 
-// WithLqi sets the lqi property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithLqi(lqi *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
-	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetLqi(lqi)
+// WithLqi sets lqi and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithLqi(lqi obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLqi:"), objref.IDOf(lqi))
 	return x
 }
 
-// WithAverageRssi sets the averageRssi property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithAverageRssi(averageRssi *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
-	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetAverageRssi(averageRssi)
+// WithAverageRssi sets averageRssi and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithAverageRssi(averageRssi obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAverageRssi:"), objref.IDOf(averageRssi))
 	return x
 }
 
-// WithLastRssi sets the lastRssi property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithLastRssi(lastRssi *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
-	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetLastRssi(lastRssi)
+// WithLastRssi sets lastRssi and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithLastRssi(lastRssi obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastRssi:"), objref.IDOf(lastRssi))
 	return x
 }
 
-// WithFrameErrorRate sets the frameErrorRate property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithFrameErrorRate(frameErrorRate *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
-	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetFrameErrorRate(frameErrorRate)
+// WithFrameErrorRate sets frameErrorRate and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithFrameErrorRate(frameErrorRate obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameErrorRate:"), objref.IDOf(frameErrorRate))
 	return x
 }
 
-// WithMessageErrorRate sets the messageErrorRate property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithMessageErrorRate(messageErrorRate *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
-	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetMessageErrorRate(messageErrorRate)
+// WithMessageErrorRate sets messageErrorRate and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithMessageErrorRate(messageErrorRate obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageErrorRate:"), objref.IDOf(messageErrorRate))
 	return x
 }
 
-// WithRxOnWhenIdle sets the rxOnWhenIdle property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithRxOnWhenIdle(rxOnWhenIdle *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
-	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetRxOnWhenIdle(rxOnWhenIdle)
+// WithRxOnWhenIdle sets rxOnWhenIdle and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithRxOnWhenIdle(rxOnWhenIdle obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRxOnWhenIdle:"), objref.IDOf(rxOnWhenIdle))
 	return x
 }
 
-// WithFullThreadDevice sets the fullThreadDevice property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithFullThreadDevice(fullThreadDevice *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
-	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetFullThreadDevice(fullThreadDevice)
+// WithFullThreadDevice sets fullThreadDevice and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithFullThreadDevice(fullThreadDevice obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullThreadDevice:"), objref.IDOf(fullThreadDevice))
 	return x
 }
 
-// WithFullNetworkData sets the fullNetworkData property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithFullNetworkData(fullNetworkData *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
-	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetFullNetworkData(fullNetworkData)
+// WithFullNetworkData sets fullNetworkData and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithFullNetworkData(fullNetworkData obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFullNetworkData:"), objref.IDOf(fullNetworkData))
 	return x
 }
 
-// WithIsChild sets the isChild property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithIsChild(isChild *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
-	x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct.SetIsChild(isChild)
+// WithIsChild sets isChild and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) WithIsChild(isChild obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsChild:"), objref.IDOf(isChild))
 	return x
-}
-
-func (x *MTRThreadNetworkDiagnosticsClusterNeighborTable) asMTRThreadNetworkDiagnosticsClusterNeighborTableStruct() *raw.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct {
-	return &x.inner.MTRThreadNetworkDiagnosticsClusterNeighborTableStruct
 }
 
 // MTRThreadNetworkDiagnosticsClusterNeighborTableable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterNeighborTable], for mocking and DI.
 type MTRThreadNetworkDiagnosticsClusterNeighborTableable interface {
-	Unwrap() *raw.MTRThreadNetworkDiagnosticsClusterNeighborTable
-	WithExtAddress(extAddress *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
-	WithAge(age *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
-	WithRloc16(rloc16 *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
-	WithLinkFrameCounter(linkFrameCounter *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
-	WithMleFrameCounter(mleFrameCounter *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
-	WithLqi(lqi *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
-	WithAverageRssi(averageRssi *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
-	WithLastRssi(lastRssi *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
-	WithFrameErrorRate(frameErrorRate *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
-	WithMessageErrorRate(messageErrorRate *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
-	WithRxOnWhenIdle(rxOnWhenIdle *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
-	WithFullThreadDevice(fullThreadDevice *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
-	WithFullNetworkData(fullNetworkData *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
-	WithIsChild(isChild *foundation.NSNumber) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	obj.Object
+	WithExtAddress(extAddress obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithAge(age obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithRloc16(rloc16 obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithLinkFrameCounter(linkFrameCounter obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithMleFrameCounter(mleFrameCounter obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithLqi(lqi obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithAverageRssi(averageRssi obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithLastRssi(lastRssi obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithFrameErrorRate(frameErrorRate obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithMessageErrorRate(messageErrorRate obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithRxOnWhenIdle(rxOnWhenIdle obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithFullThreadDevice(fullThreadDevice obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithFullNetworkData(fullNetworkData obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable
+	WithIsChild(isChild obj.Object) *MTRThreadNetworkDiagnosticsClusterNeighborTable
 }
 
 var _ MTRThreadNetworkDiagnosticsClusterNeighborTableable = (*MTRThreadNetworkDiagnosticsClusterNeighborTable)(nil)

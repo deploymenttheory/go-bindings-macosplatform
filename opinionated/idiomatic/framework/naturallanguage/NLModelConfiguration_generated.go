@@ -5,64 +5,86 @@
 package naturallanguage
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/naturallanguage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The configuration parameters of a natural language model.
 //
-// ModelConfiguration wraps [raw.NLModelConfiguration] with a fluent Go API.
+// ModelConfiguration is an idiomatic wrapper over the Objective-C class NLModelConfiguration.
 type ModelConfiguration struct {
-	inner *raw.NLModelConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NLModelConfiguration].
-func (x *ModelConfiguration) Unwrap() *raw.NLModelConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ModelConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// ModelConfigurationFromID adopts an existing object pointer as a ModelConfiguration (nil for 0).
+// ModelConfigurationFromID adopts an existing Objective-C object as a ModelConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func ModelConfigurationFromID(id objc.ID) *ModelConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &ModelConfiguration{inner: raw.NLModelConfigurationFromID(id)}
+	x := &ModelConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewModelConfiguration creates a new [ModelConfiguration].
-func NewModelConfiguration() *ModelConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NLModelConfiguration")), objc.RegisterName("new"))
-	return &ModelConfiguration{inner: raw.NLModelConfigurationFromID(_id)}
-}
-
-// Type calls the underlying Type.
-func (x *ModelConfiguration) Type() NLModelType {
-	return NLModelType(x.inner.Type())
-}
-
-// Language calls the underlying Language.
-func (x *ModelConfiguration) Language() string {
-	_r := x.inner.Language()
-	if _r == nil {
-		return ""
+// modelConfigurationAdopt wraps an Objective-C object that this code just created as a
+// ModelConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func modelConfigurationAdopt(id objc.ID) *ModelConfiguration {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &ModelConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Revision calls the underlying Revision.
-func (x *ModelConfiguration) Revision() uint {
-	return x.inner.Revision()
+// Description returns the object's -description text.
+func (x *ModelConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ModelConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ModelConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewModelConfiguration creates a new ModelConfiguration.
+func NewModelConfiguration() *ModelConfiguration {
+	_id := objc.Send[objc.ID](objc.ID(_class("NLModelConfiguration")), objc.RegisterName("new"))
+	return modelConfigurationAdopt(_id)
+}
+
+func (x *ModelConfiguration) Type() ModelType {
+	_r := objc.Send[ModelType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
+}
+
+func (x *ModelConfiguration) Language() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
+	return obj.Wrap(_r)
+}
+
+func (x *ModelConfiguration) Revision() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("revision"))
+	return _r
 }
 
 // ModelConfigurationable is the interface implemented by [ModelConfiguration], for mocking and DI.
 type ModelConfigurationable interface {
-	Unwrap() *raw.NLModelConfiguration
-	Type() NLModelType
-	Language() string
-	Revision() uint
+	obj.Object
+	Type() ModelType
+	Language() obj.Object
+	Revision() int
 }
 
 var _ ModelConfigurationable = (*ModelConfiguration)(nil)

@@ -5,115 +5,104 @@
 package naturallanguage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/naturallanguage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A tokenizer that segments natural language text into semantic units.
 //
-// Tokenizer wraps [raw.NLTokenizer] with a fluent Go API.
+// Tokenizer is an idiomatic wrapper over the Objective-C class NLTokenizer.
 type Tokenizer struct {
-	inner *raw.NLTokenizer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NLTokenizer].
-func (x *Tokenizer) Unwrap() *raw.NLTokenizer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Tokenizer) ID() objc.ID { return x.inner.Ptr() }
-
-// TokenizerFromID adopts an existing object pointer as a Tokenizer (nil for 0).
+// TokenizerFromID adopts an existing Objective-C object as a Tokenizer
+// (nil for 0), retaining it and registering a release finalizer.
 func TokenizerFromID(id objc.ID) *Tokenizer {
 	if id == 0 {
 		return nil
 	}
-	return &Tokenizer{inner: raw.NLTokenizerFromID(id)}
+	x := &Tokenizer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// tokenizerAdopt wraps an Objective-C object that this code just created as a
+// Tokenizer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tokenizerAdopt(id objc.ID) *Tokenizer {
+	if id == 0 {
+		return nil
+	}
+	x := &Tokenizer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Tokenizer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Tokenizer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Tokenizer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a tokenizer with the specified unit.
 //
-// NewTokenizerWithUnit creates a new [Tokenizer].
-func NewTokenizerWithUnit(unit NLTokenUnit) *Tokenizer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NLTokenizer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUnit:"), raw.NLTokenUnit(unit))
-	return &Tokenizer{inner: raw.NLTokenizerFromID(_id)}
+// NewTokenizerWithUnit creates a new Tokenizer.
+func NewTokenizerWithUnit(unit TokenUnit) *Tokenizer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NLTokenizer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUnit:"), unit)
+	return tokenizerAdopt(_id)
 }
 
 // The text to be tokenized.
 //
-// WithString sets the string_ property and returns the receiver for chaining.
+// WithString sets string_ and returns the receiver so calls can be chained.
 func (x *Tokenizer) WithString(string_ string) *Tokenizer {
-	x.inner.SetString(foundation.NSStringStringWithUTF8String(string_))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), purego.NSString(string_))
 	return x
 }
 
 // Sets the language of the text to be tokenized.
-//
-// SetLanguage calls the underlying SetLanguage.
-func (x *Tokenizer) SetLanguage(language *foundation.NSString) {
-	x.inner.SetLanguage(language)
+func (x *Tokenizer) SetLanguage(language obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguage:"), objref.IDOf(language))
 }
 
-// Finds the range of the token at the given index.
-//
-// TokenRangeAtIndex calls the underlying TokenRangeAtIndex.
-func (x *Tokenizer) TokenRangeAtIndex(characterIndex uint) foundation.NSRange {
-	return x.inner.TokenRangeAtIndex(characterIndex)
+func (x *Tokenizer) Unit() TokenUnit {
+	_r := objc.Send[TokenUnit](objref.IDOf(x), objc.RegisterName("unit"))
+	return _r
 }
 
-// Finds the entire range of all tokens contained completely or partially within the specified range.
-//
-// TokenRangeForRange calls the underlying TokenRangeForRange.
-func (x *Tokenizer) TokenRangeForRange(range_ foundation.NSRange) foundation.NSRange {
-	return x.inner.TokenRangeForRange(range_)
-}
-
-// Tokenizes the string within the provided range.
-//
-// TokensForRange calls the underlying TokensForRange.
-func (x *Tokenizer) TokensForRange(range_ foundation.NSRange) *foundation.NSArray[*foundation.NSValue] {
-	return x.inner.TokensForRange(range_)
-}
-
-// Enumerates over a given range of the string and calls the specified block for each token.
-//
-// EnumerateTokensInRangeUsing calls the underlying EnumerateTokensInRangeUsing.
-func (x *Tokenizer) EnumerateTokensInRangeUsing(range_ foundation.NSRange, block objc.Block) {
-	x.inner.EnumerateTokensInRangeUsing(range_, block)
-}
-
-// Unit calls the underlying Unit.
-func (x *Tokenizer) Unit() NLTokenUnit {
-	return NLTokenUnit(x.inner.Unit())
-}
-
-// String calls the underlying String.
 func (x *Tokenizer) String() string {
-	_r := x.inner.String()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("string"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetString calls the underlying SetString.
 func (x *Tokenizer) SetString(string_ string) {
-	x.inner.SetString(foundation.NSStringStringWithUTF8String(string_))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), purego.NSString(string_))
 }
 
 // Tokenizerable is the interface implemented by [Tokenizer], for mocking and DI.
 type Tokenizerable interface {
-	Unwrap() *raw.NLTokenizer
+	obj.Object
 	WithString(string_ string) *Tokenizer
-	SetLanguage(language *foundation.NSString)
-	TokenRangeAtIndex(characterIndex uint) foundation.NSRange
-	TokenRangeForRange(range_ foundation.NSRange) foundation.NSRange
-	TokensForRange(range_ foundation.NSRange) *foundation.NSArray[*foundation.NSValue]
-	EnumerateTokensInRangeUsing(range_ foundation.NSRange, block objc.Block)
-	Unit() NLTokenUnit
+	SetLanguage(language obj.Object)
+	Unit() TokenUnit
 	String() string
 	SetString(string_ string)
 }

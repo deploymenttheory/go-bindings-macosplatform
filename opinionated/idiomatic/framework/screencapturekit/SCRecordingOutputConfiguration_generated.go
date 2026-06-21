@@ -5,146 +5,147 @@
 package screencapturekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// RecordingOutputConfiguration wraps [raw.SCRecordingOutputConfiguration] with a fluent Go API.
+// RecordingOutputConfiguration is an idiomatic wrapper over the Objective-C class SCRecordingOutputConfiguration.
 type RecordingOutputConfiguration struct {
-	inner *raw.SCRecordingOutputConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCRecordingOutputConfiguration].
-func (x *RecordingOutputConfiguration) Unwrap() *raw.SCRecordingOutputConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RecordingOutputConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// RecordingOutputConfigurationFromID adopts an existing object pointer as a RecordingOutputConfiguration (nil for 0).
+// RecordingOutputConfigurationFromID adopts an existing Objective-C object as a RecordingOutputConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func RecordingOutputConfigurationFromID(id objc.ID) *RecordingOutputConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &RecordingOutputConfiguration{inner: raw.SCRecordingOutputConfigurationFromID(id)}
+	x := &RecordingOutputConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRecordingOutputConfiguration creates a new [RecordingOutputConfiguration].
+// recordingOutputConfigurationAdopt wraps an Objective-C object that this code just created as a
+// RecordingOutputConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func recordingOutputConfigurationAdopt(id objc.ID) *RecordingOutputConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &RecordingOutputConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RecordingOutputConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RecordingOutputConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RecordingOutputConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRecordingOutputConfiguration creates a new RecordingOutputConfiguration.
 func NewRecordingOutputConfiguration() *RecordingOutputConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCRecordingOutputConfiguration")), objc.RegisterName("new"))
-	return &RecordingOutputConfiguration{inner: raw.SCRecordingOutputConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCRecordingOutputConfiguration")), objc.RegisterName("new"))
+	return recordingOutputConfigurationAdopt(_id)
 }
 
-// @abstract Specifies output URL to save the recording.
+// Specifies output URL to save the recording.
 //
-// WithOutputURL sets the outputURL property and returns the receiver for chaining.
+// WithOutputURL sets outputURL and returns the receiver so calls can be chained.
 func (x *RecordingOutputConfiguration) WithOutputURL(outputURL string) *RecordingOutputConfiguration {
-	x.inner.SetOutputURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputURL:"), rt.FileURL(outputURL))
 	return x
 }
 
-// @abstract Specifies video codec for the recording output, default is AVVideoCodecTypeH264, supported values can be obtained using availableVideoCodecTypes
+// Specifies video codec for the recording output, default is AVVideoCodecTypeH264, supported values can be obtained using availableVideoCodecTypes
 //
-// WithVideoCodecType sets the videoCodecType property and returns the receiver for chaining.
-func (x *RecordingOutputConfiguration) WithVideoCodecType(videoCodecType *foundation.NSString) *RecordingOutputConfiguration {
-	x.inner.SetVideoCodecType(videoCodecType)
+// WithVideoCodecType sets videoCodecType and returns the receiver so calls can be chained.
+func (x *RecordingOutputConfiguration) WithVideoCodecType(videoCodecType obj.Object) *RecordingOutputConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoCodecType:"), objref.IDOf(videoCodecType))
 	return x
 }
 
-// @abstract Specifies file type for the recording output, default is AVFileTypeMPEG4, supported values can be obtained using availableOutputFileTypes
+// Specifies file type for the recording output, default is AVFileTypeMPEG4, supported values can be obtained using availableOutputFileTypes
 //
-// WithOutputFileType sets the outputFileType property and returns the receiver for chaining.
-func (x *RecordingOutputConfiguration) WithOutputFileType(outputFileType *foundation.NSString) *RecordingOutputConfiguration {
-	x.inner.SetOutputFileType(outputFileType)
+// WithOutputFileType sets outputFileType and returns the receiver so calls can be chained.
+func (x *RecordingOutputConfiguration) WithOutputFileType(outputFileType obj.Object) *RecordingOutputConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFileType:"), objref.IDOf(outputFileType))
 	return x
 }
 
-// @abstract Specifies output URL to save the recording.
-//
-// OutputURL calls the underlying OutputURL.
-func (x *RecordingOutputConfiguration) OutputURL() *foundation.NSURL {
-	return x.inner.OutputURL()
+// Specifies output URL to save the recording.
+func (x *RecordingOutputConfiguration) OutputURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputURL"))
+	return obj.Wrap(_r)
 }
 
-// SetOutputURL calls the underlying SetOutputURL.
 func (x *RecordingOutputConfiguration) SetOutputURL(outputURL string) {
-	x.inner.SetOutputURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputURL:"), rt.FileURL(outputURL))
 }
 
-// @abstract Specifies video codec for the recording output, default is AVVideoCodecTypeH264, supported values can be obtained using availableVideoCodecTypes
-//
-// VideoCodecType calls the underlying VideoCodecType.
-func (x *RecordingOutputConfiguration) VideoCodecType() string {
-	_r := x.inner.VideoCodecType()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// Specifies video codec for the recording output, default is AVVideoCodecTypeH264, supported values can be obtained using availableVideoCodecTypes
+func (x *RecordingOutputConfiguration) VideoCodecType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoCodecType"))
+	return obj.Wrap(_r)
 }
 
-// SetVideoCodecType calls the underlying SetVideoCodecType.
-func (x *RecordingOutputConfiguration) SetVideoCodecType(videoCodecType *foundation.NSString) {
-	x.inner.SetVideoCodecType(videoCodecType)
+func (x *RecordingOutputConfiguration) SetVideoCodecType(videoCodecType obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoCodecType:"), objref.IDOf(videoCodecType))
 }
 
-// @abstract Specifies file type for the recording output, default is AVFileTypeMPEG4, supported values can be obtained using availableOutputFileTypes
-//
-// OutputFileType calls the underlying OutputFileType.
-func (x *RecordingOutputConfiguration) OutputFileType() string {
-	_r := x.inner.OutputFileType()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// Specifies file type for the recording output, default is AVFileTypeMPEG4, supported values can be obtained using availableOutputFileTypes
+func (x *RecordingOutputConfiguration) OutputFileType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputFileType"))
+	return obj.Wrap(_r)
 }
 
-// SetOutputFileType calls the underlying SetOutputFileType.
-func (x *RecordingOutputConfiguration) SetOutputFileType(outputFileType *foundation.NSString) {
-	x.inner.SetOutputFileType(outputFileType)
+func (x *RecordingOutputConfiguration) SetOutputFileType(outputFileType obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFileType:"), objref.IDOf(outputFileType))
 }
 
-// @abstract Returns an array of supported video codec formats that can be specified in SCRecordingOutputConfiguration for videoCodecType
+// Returns an array of supported video codec formats that can be specified in SCRecordingOutputConfiguration for videoCodecType
 //
 // AvailableVideoCodecTypes returns the collection as a Go slice.
-func (x *RecordingOutputConfiguration) AvailableVideoCodecTypes() []*foundation.NSString {
-	arr := x.inner.AvailableVideoCodecTypes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *RecordingOutputConfiguration) AvailableVideoCodecTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableVideoCodecTypes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @abstract Returns an array of supported file types that can be specified in SCRecordingOutputConfiguration for outputFileType Provides the file types AVCaptureAudioFileOutput can write.
+// Returns an array of supported file types that can be specified in SCRecordingOutputConfiguration for outputFileType Provides the file types AVCaptureAudioFileOutput can write.
 //
 // AvailableOutputFileTypes returns the collection as a Go slice.
-func (x *RecordingOutputConfiguration) AvailableOutputFileTypes() []*foundation.NSString {
-	arr := x.inner.AvailableOutputFileTypes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *RecordingOutputConfiguration) AvailableOutputFileTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableOutputFileTypes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // RecordingOutputConfigurationable is the interface implemented by [RecordingOutputConfiguration], for mocking and DI.
 type RecordingOutputConfigurationable interface {
-	Unwrap() *raw.SCRecordingOutputConfiguration
+	obj.Object
 	WithOutputURL(outputURL string) *RecordingOutputConfiguration
-	WithVideoCodecType(videoCodecType *foundation.NSString) *RecordingOutputConfiguration
-	WithOutputFileType(outputFileType *foundation.NSString) *RecordingOutputConfiguration
-	OutputURL() *foundation.NSURL
+	WithVideoCodecType(videoCodecType obj.Object) *RecordingOutputConfiguration
+	WithOutputFileType(outputFileType obj.Object) *RecordingOutputConfiguration
+	OutputURL() obj.Object
 	SetOutputURL(outputURL string)
-	VideoCodecType() string
-	SetVideoCodecType(videoCodecType *foundation.NSString)
-	OutputFileType() string
-	SetOutputFileType(outputFileType *foundation.NSString)
-	AvailableVideoCodecTypes() []*foundation.NSString
-	AvailableOutputFileTypes() []*foundation.NSString
+	VideoCodecType() obj.Object
+	SetVideoCodecType(videoCodecType obj.Object)
+	OutputFileType() obj.Object
+	SetOutputFileType(outputFileType obj.Object)
+	AvailableVideoCodecTypes() []obj.Object
+	AvailableOutputFileTypes() []obj.Object
 }
 
 var _ RecordingOutputConfigurationable = (*RecordingOutputConfiguration)(nil)

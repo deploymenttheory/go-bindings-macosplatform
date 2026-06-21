@@ -5,117 +5,231 @@
 package fsevents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fsevents"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// FSEventStreamCopyDescription calls [raw.FSEventStreamCopyDescription] (C function FSEventStreamCopyDescription).
-func FSEventStreamCopyDescription(streamRef unsafe.Pointer) unsafe.Pointer {
-	return raw.FSEventStreamCopyDescription(streamRef)
+var _fnFSEventStreamCopyDescription func(objc.ID) objc.ID
+
+// FSEventStreamCopyDescription calls the FSEvents framework function FSEventStreamCopyDescription.
+func FSEventStreamCopyDescription(streamRef obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventStreamCopyDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventStreamCopyDescription, _lib, "FSEventStreamCopyDescription")
+	}
+	_ret := _fnFSEventStreamCopyDescription(objref.IDOf(streamRef))
+	return obj.Wrap(_ret)
 }
 
-// FSEventStreamCopyPathsBeingWatched calls [raw.FSEventStreamCopyPathsBeingWatched] (C function FSEventStreamCopyPathsBeingWatched).
-func FSEventStreamCopyPathsBeingWatched(streamRef unsafe.Pointer) unsafe.Pointer {
-	return raw.FSEventStreamCopyPathsBeingWatched(streamRef)
+var _fnFSEventStreamCopyPathsBeingWatched func(objc.ID) objc.ID
+
+// FSEventStreamCopyPathsBeingWatched calls the FSEvents framework function FSEventStreamCopyPathsBeingWatched.
+func FSEventStreamCopyPathsBeingWatched(streamRef obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventStreamCopyPathsBeingWatched == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventStreamCopyPathsBeingWatched, _lib, "FSEventStreamCopyPathsBeingWatched")
+	}
+	_ret := _fnFSEventStreamCopyPathsBeingWatched(objref.IDOf(streamRef))
+	return obj.Wrap(_ret)
 }
 
-// FSEventStreamCreate calls [raw.FSEventStreamCreate] (C function FSEventStreamCreate).
-func FSEventStreamCreate(allocator unsafe.Pointer, callback unsafe.Pointer, context_ *raw.FSEventStreamContext, pathsToWatch unsafe.Pointer, sinceWhen uint64, latency float64, flags uint) unsafe.Pointer {
-	return raw.FSEventStreamCreate(allocator, callback, context_, pathsToWatch, sinceWhen, latency, flags)
+var _fnFSEventStreamFlushAsync func(objc.ID) uint64
+
+// FSEventStreamFlushAsync calls the FSEvents framework function FSEventStreamFlushAsync.
+func FSEventStreamFlushAsync(streamRef obj.Object) uint64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventStreamFlushAsync == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventStreamFlushAsync, _lib, "FSEventStreamFlushAsync")
+	}
+	return _fnFSEventStreamFlushAsync(objref.IDOf(streamRef))
 }
 
-// FSEventStreamCreateRelativeToDevice calls [raw.FSEventStreamCreateRelativeToDevice] (C function FSEventStreamCreateRelativeToDevice).
-func FSEventStreamCreateRelativeToDevice(allocator unsafe.Pointer, callback unsafe.Pointer, context_ *raw.FSEventStreamContext, deviceToWatch int, pathsToWatchRelativeToDevice unsafe.Pointer, sinceWhen uint64, latency float64, flags uint) unsafe.Pointer {
-	return raw.FSEventStreamCreateRelativeToDevice(allocator, callback, context_, deviceToWatch, pathsToWatchRelativeToDevice, sinceWhen, latency, flags)
+var _fnFSEventStreamFlushSync func(objc.ID)
+
+// FSEventStreamFlushSync calls the FSEvents framework function FSEventStreamFlushSync.
+func FSEventStreamFlushSync(streamRef obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventStreamFlushSync == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventStreamFlushSync, _lib, "FSEventStreamFlushSync")
+	}
+	_fnFSEventStreamFlushSync(objref.IDOf(streamRef))
 }
 
-// FSEventStreamFlushAsync calls [raw.FSEventStreamFlushAsync] (C function FSEventStreamFlushAsync).
-func FSEventStreamFlushAsync(streamRef unsafe.Pointer) uint64 {
-	return raw.FSEventStreamFlushAsync(streamRef)
+var _fnFSEventStreamGetDeviceBeingWatched func(objc.ID) int
+
+// FSEventStreamGetDeviceBeingWatched calls the FSEvents framework function FSEventStreamGetDeviceBeingWatched.
+func FSEventStreamGetDeviceBeingWatched(streamRef obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventStreamGetDeviceBeingWatched == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventStreamGetDeviceBeingWatched, _lib, "FSEventStreamGetDeviceBeingWatched")
+	}
+	return _fnFSEventStreamGetDeviceBeingWatched(objref.IDOf(streamRef))
 }
 
-// FSEventStreamFlushSync calls [raw.FSEventStreamFlushSync] (C function FSEventStreamFlushSync).
-func FSEventStreamFlushSync(streamRef unsafe.Pointer) {
-	raw.FSEventStreamFlushSync(streamRef)
+var _fnFSEventStreamGetLatestEventId func(objc.ID) uint64
+
+// FSEventStreamGetLatestEventId calls the FSEvents framework function FSEventStreamGetLatestEventId.
+func FSEventStreamGetLatestEventId(streamRef obj.Object) uint64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventStreamGetLatestEventId == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventStreamGetLatestEventId, _lib, "FSEventStreamGetLatestEventId")
+	}
+	return _fnFSEventStreamGetLatestEventId(objref.IDOf(streamRef))
 }
 
-// FSEventStreamGetDeviceBeingWatched calls [raw.FSEventStreamGetDeviceBeingWatched] (C function FSEventStreamGetDeviceBeingWatched).
-func FSEventStreamGetDeviceBeingWatched(streamRef unsafe.Pointer) int {
-	return raw.FSEventStreamGetDeviceBeingWatched(streamRef)
+var _fnFSEventStreamInvalidate func(objc.ID)
+
+// FSEventStreamInvalidate calls the FSEvents framework function FSEventStreamInvalidate.
+func FSEventStreamInvalidate(streamRef obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventStreamInvalidate == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventStreamInvalidate, _lib, "FSEventStreamInvalidate")
+	}
+	_fnFSEventStreamInvalidate(objref.IDOf(streamRef))
 }
 
-// FSEventStreamGetLatestEventId calls [raw.FSEventStreamGetLatestEventId] (C function FSEventStreamGetLatestEventId).
-func FSEventStreamGetLatestEventId(streamRef unsafe.Pointer) uint64 {
-	return raw.FSEventStreamGetLatestEventId(streamRef)
+var _fnFSEventStreamRelease func(objc.ID)
+
+// FSEventStreamRelease calls the FSEvents framework function FSEventStreamRelease.
+func FSEventStreamRelease(streamRef obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventStreamRelease == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventStreamRelease, _lib, "FSEventStreamRelease")
+	}
+	_fnFSEventStreamRelease(objref.IDOf(streamRef))
 }
 
-// FSEventStreamInvalidate calls [raw.FSEventStreamInvalidate] (C function FSEventStreamInvalidate).
-func FSEventStreamInvalidate(streamRef unsafe.Pointer) {
-	raw.FSEventStreamInvalidate(streamRef)
+var _fnFSEventStreamRetain func(objc.ID)
+
+// FSEventStreamRetain calls the FSEvents framework function FSEventStreamRetain.
+func FSEventStreamRetain(streamRef obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventStreamRetain == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventStreamRetain, _lib, "FSEventStreamRetain")
+	}
+	_fnFSEventStreamRetain(objref.IDOf(streamRef))
 }
 
-// FSEventStreamRelease calls [raw.FSEventStreamRelease] (C function FSEventStreamRelease).
-func FSEventStreamRelease(streamRef unsafe.Pointer) {
-	raw.FSEventStreamRelease(streamRef)
+var _fnFSEventStreamScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID)
+
+// FSEventStreamScheduleWithRunLoop calls the FSEvents framework function FSEventStreamScheduleWithRunLoop.
+func FSEventStreamScheduleWithRunLoop(streamRef obj.Object, runLoop obj.Object, runLoopMode obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventStreamScheduleWithRunLoop == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventStreamScheduleWithRunLoop, _lib, "FSEventStreamScheduleWithRunLoop")
+	}
+	_fnFSEventStreamScheduleWithRunLoop(objref.IDOf(streamRef), objref.IDOf(runLoop), objref.IDOf(runLoopMode))
 }
 
-// FSEventStreamRetain calls [raw.FSEventStreamRetain] (C function FSEventStreamRetain).
-func FSEventStreamRetain(streamRef unsafe.Pointer) {
-	raw.FSEventStreamRetain(streamRef)
+var _fnFSEventStreamSetDispatchQueue func(objc.ID, objc.ID)
+
+// FSEventStreamSetDispatchQueue calls the FSEvents framework function FSEventStreamSetDispatchQueue.
+func FSEventStreamSetDispatchQueue(streamRef obj.Object, q obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventStreamSetDispatchQueue == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventStreamSetDispatchQueue, _lib, "FSEventStreamSetDispatchQueue")
+	}
+	_fnFSEventStreamSetDispatchQueue(objref.IDOf(streamRef), objref.IDOf(q))
 }
 
-// FSEventStreamScheduleWithRunLoop calls [raw.FSEventStreamScheduleWithRunLoop] (C function FSEventStreamScheduleWithRunLoop).
-func FSEventStreamScheduleWithRunLoop(streamRef unsafe.Pointer, runLoop unsafe.Pointer, runLoopMode unsafe.Pointer) {
-	raw.FSEventStreamScheduleWithRunLoop(streamRef, runLoop, runLoopMode)
+var _fnFSEventStreamSetExclusionPaths func(objc.ID, objc.ID) uint8
+
+// FSEventStreamSetExclusionPaths calls the FSEvents framework function FSEventStreamSetExclusionPaths.
+func FSEventStreamSetExclusionPaths(streamRef obj.Object, pathsToExclude obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventStreamSetExclusionPaths == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventStreamSetExclusionPaths, _lib, "FSEventStreamSetExclusionPaths")
+	}
+	return _fnFSEventStreamSetExclusionPaths(objref.IDOf(streamRef), objref.IDOf(pathsToExclude))
 }
 
-// FSEventStreamSetDispatchQueue calls [raw.FSEventStreamSetDispatchQueue] (C function FSEventStreamSetDispatchQueue).
-func FSEventStreamSetDispatchQueue(streamRef unsafe.Pointer, q *foundation.NSObject) {
-	raw.FSEventStreamSetDispatchQueue(streamRef, q)
+var _fnFSEventStreamShow func(objc.ID)
+
+// FSEventStreamShow calls the FSEvents framework function FSEventStreamShow.
+func FSEventStreamShow(streamRef obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventStreamShow == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventStreamShow, _lib, "FSEventStreamShow")
+	}
+	_fnFSEventStreamShow(objref.IDOf(streamRef))
 }
 
-// FSEventStreamSetExclusionPaths calls [raw.FSEventStreamSetExclusionPaths] (C function FSEventStreamSetExclusionPaths).
-func FSEventStreamSetExclusionPaths(streamRef unsafe.Pointer, pathsToExclude unsafe.Pointer) uint8 {
-	return raw.FSEventStreamSetExclusionPaths(streamRef, pathsToExclude)
+var _fnFSEventStreamStart func(objc.ID) uint8
+
+// FSEventStreamStart calls the FSEvents framework function FSEventStreamStart.
+func FSEventStreamStart(streamRef obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventStreamStart == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventStreamStart, _lib, "FSEventStreamStart")
+	}
+	return _fnFSEventStreamStart(objref.IDOf(streamRef))
 }
 
-// FSEventStreamShow calls [raw.FSEventStreamShow] (C function FSEventStreamShow).
-func FSEventStreamShow(streamRef unsafe.Pointer) {
-	raw.FSEventStreamShow(streamRef)
+var _fnFSEventStreamStop func(objc.ID)
+
+// FSEventStreamStop calls the FSEvents framework function FSEventStreamStop.
+func FSEventStreamStop(streamRef obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventStreamStop == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventStreamStop, _lib, "FSEventStreamStop")
+	}
+	_fnFSEventStreamStop(objref.IDOf(streamRef))
 }
 
-// FSEventStreamStart calls [raw.FSEventStreamStart] (C function FSEventStreamStart).
-func FSEventStreamStart(streamRef unsafe.Pointer) uint8 {
-	return raw.FSEventStreamStart(streamRef)
+var _fnFSEventStreamUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID)
+
+// FSEventStreamUnscheduleFromRunLoop calls the FSEvents framework function FSEventStreamUnscheduleFromRunLoop.
+func FSEventStreamUnscheduleFromRunLoop(streamRef obj.Object, runLoop obj.Object, runLoopMode obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventStreamUnscheduleFromRunLoop == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventStreamUnscheduleFromRunLoop, _lib, "FSEventStreamUnscheduleFromRunLoop")
+	}
+	_fnFSEventStreamUnscheduleFromRunLoop(objref.IDOf(streamRef), objref.IDOf(runLoop), objref.IDOf(runLoopMode))
 }
 
-// FSEventStreamStop calls [raw.FSEventStreamStop] (C function FSEventStreamStop).
-func FSEventStreamStop(streamRef unsafe.Pointer) {
-	raw.FSEventStreamStop(streamRef)
+var _fnFSEventsCopyUUIDForDevice func(int) objc.ID
+
+// FSEventsCopyUUIDForDevice calls the FSEvents framework function FSEventsCopyUUIDForDevice.
+func FSEventsCopyUUIDForDevice(dev int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventsCopyUUIDForDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventsCopyUUIDForDevice, _lib, "FSEventsCopyUUIDForDevice")
+	}
+	_ret := _fnFSEventsCopyUUIDForDevice(dev)
+	return obj.Wrap(_ret)
 }
 
-// FSEventStreamUnscheduleFromRunLoop calls [raw.FSEventStreamUnscheduleFromRunLoop] (C function FSEventStreamUnscheduleFromRunLoop).
-func FSEventStreamUnscheduleFromRunLoop(streamRef unsafe.Pointer, runLoop unsafe.Pointer, runLoopMode unsafe.Pointer) {
-	raw.FSEventStreamUnscheduleFromRunLoop(streamRef, runLoop, runLoopMode)
-}
+var _fnFSEventsGetCurrentEventId func() uint64
 
-// FSEventsCopyUUIDForDevice calls [raw.FSEventsCopyUUIDForDevice] (C function FSEventsCopyUUIDForDevice).
-func FSEventsCopyUUIDForDevice(dev int) unsafe.Pointer {
-	return raw.FSEventsCopyUUIDForDevice(dev)
-}
-
-// FSEventsGetCurrentEventId calls [raw.FSEventsGetCurrentEventId] (C function FSEventsGetCurrentEventId).
+// FSEventsGetCurrentEventId calls the FSEvents framework function FSEventsGetCurrentEventId.
 func FSEventsGetCurrentEventId() uint64 {
-	return raw.FSEventsGetCurrentEventId()
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventsGetCurrentEventId == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventsGetCurrentEventId, _lib, "FSEventsGetCurrentEventId")
+	}
+	return _fnFSEventsGetCurrentEventId()
 }
 
-// FSEventsGetLastEventIdForDeviceBeforeTime calls [raw.FSEventsGetLastEventIdForDeviceBeforeTime] (C function FSEventsGetLastEventIdForDeviceBeforeTime).
+var _fnFSEventsGetLastEventIdForDeviceBeforeTime func(int, float64) uint64
+
+// FSEventsGetLastEventIdForDeviceBeforeTime calls the FSEvents framework function FSEventsGetLastEventIdForDeviceBeforeTime.
 func FSEventsGetLastEventIdForDeviceBeforeTime(dev int, time_ float64) uint64 {
-	return raw.FSEventsGetLastEventIdForDeviceBeforeTime(dev, time_)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventsGetLastEventIdForDeviceBeforeTime == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventsGetLastEventIdForDeviceBeforeTime, _lib, "FSEventsGetLastEventIdForDeviceBeforeTime")
+	}
+	return _fnFSEventsGetLastEventIdForDeviceBeforeTime(dev, time_)
 }
 
-// FSEventsPurgeEventsForDeviceUpToEventId calls [raw.FSEventsPurgeEventsForDeviceUpToEventId] (C function FSEventsPurgeEventsForDeviceUpToEventId).
+var _fnFSEventsPurgeEventsForDeviceUpToEventId func(int, uint64) uint8
+
+// FSEventsPurgeEventsForDeviceUpToEventId calls the FSEvents framework function FSEventsPurgeEventsForDeviceUpToEventId.
 func FSEventsPurgeEventsForDeviceUpToEventId(dev int, eventId uint64) uint8 {
-	return raw.FSEventsPurgeEventsForDeviceUpToEventId(dev, eventId)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSEventsPurgeEventsForDeviceUpToEventId == nil {
+		ebipurego.RegisterLibFunc(&_fnFSEventsPurgeEventsForDeviceUpToEventId, _lib, "FSEventsPurgeEventsForDeviceUpToEventId")
+	}
+	return _fnFSEventsPurgeEventsForDeviceUpToEventId(dev, eventId)
 }

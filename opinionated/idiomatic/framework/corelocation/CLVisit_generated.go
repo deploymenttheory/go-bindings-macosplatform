@@ -5,67 +5,80 @@
 package corelocation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Information about the user’s location during a specific period of time.
 //
-// Visit wraps [raw.CLVisit] with a fluent Go API.
+// Visit is an idiomatic wrapper over the Objective-C class CLVisit.
 type Visit struct {
-	inner *raw.CLVisit
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLVisit].
-func (x *Visit) Unwrap() *raw.CLVisit { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Visit) ID() objc.ID { return x.inner.Ptr() }
-
-// VisitFromID adopts an existing object pointer as a Visit (nil for 0).
+// VisitFromID adopts an existing Objective-C object as a Visit
+// (nil for 0), retaining it and registering a release finalizer.
 func VisitFromID(id objc.ID) *Visit {
 	if id == 0 {
 		return nil
 	}
-	return &Visit{inner: raw.CLVisitFromID(id)}
+	x := &Visit{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVisit creates a new [Visit].
+// visitAdopt wraps an Objective-C object that this code just created as a
+// Visit (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func visitAdopt(id objc.ID) *Visit {
+	if id == 0 {
+		return nil
+	}
+	x := &Visit{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Visit) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Visit) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Visit) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVisit creates a new Visit.
 func NewVisit() *Visit {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLVisit")), objc.RegisterName("new"))
-	return &Visit{inner: raw.CLVisitFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CLVisit")), objc.RegisterName("new"))
+	return visitAdopt(_id)
 }
 
-// ArrivalDate calls the underlying ArrivalDate.
-func (x *Visit) ArrivalDate() *foundation.NSDate {
-	return x.inner.ArrivalDate()
+func (x *Visit) ArrivalDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalDate"))
+	return obj.Wrap(_r)
 }
 
-// DepartureDate calls the underlying DepartureDate.
-func (x *Visit) DepartureDate() *foundation.NSDate {
-	return x.inner.DepartureDate()
-}
-
-// Coordinate calls the underlying Coordinate.
-func (x *Visit) Coordinate() unsafe.Pointer {
-	return x.inner.Coordinate()
-}
-
-// HorizontalAccuracy calls the underlying HorizontalAccuracy.
-func (x *Visit) HorizontalAccuracy() unsafe.Pointer {
-	return x.inner.HorizontalAccuracy()
+func (x *Visit) DepartureDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departureDate"))
+	return obj.Wrap(_r)
 }
 
 // Visitable is the interface implemented by [Visit], for mocking and DI.
 type Visitable interface {
-	Unwrap() *raw.CLVisit
-	ArrivalDate() *foundation.NSDate
-	DepartureDate() *foundation.NSDate
-	Coordinate() unsafe.Pointer
-	HorizontalAccuracy() unsafe.Pointer
+	obj.Object
+	ArrivalDate() obj.Object
+	DepartureDate() obj.Object
 }
 
 var _ Visitable = (*Visit)(nil)

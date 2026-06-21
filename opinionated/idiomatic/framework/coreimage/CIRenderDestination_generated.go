@@ -5,268 +5,243 @@
 package coreimage
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A specification for configuring all attributes of a render task’s destination and issuing asynchronous render tasks.
 //
-// RenderDestination wraps [raw.CIRenderDestination] with a fluent Go API.
+// RenderDestination is an idiomatic wrapper over the Objective-C class CIRenderDestination.
 type RenderDestination struct {
-	inner *raw.CIRenderDestination
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CIRenderDestination].
-func (x *RenderDestination) Unwrap() *raw.CIRenderDestination { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RenderDestination) ID() objc.ID { return x.inner.Ptr() }
-
-// RenderDestinationFromID adopts an existing object pointer as a RenderDestination (nil for 0).
+// RenderDestinationFromID adopts an existing Objective-C object as a RenderDestination
+// (nil for 0), retaining it and registering a release finalizer.
 func RenderDestinationFromID(id objc.ID) *RenderDestination {
 	if id == 0 {
 		return nil
 	}
-	return &RenderDestination{inner: raw.CIRenderDestinationFromID(id)}
+	x := &RenderDestination{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a render destination based on a Core Video pixel buffer.
-//
-// NewRenderDestinationWithPixelBuffer creates a new [RenderDestination].
-func NewRenderDestinationWithPixelBuffer(pixelBuffer unsafe.Pointer) *RenderDestination {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIRenderDestination")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPixelBuffer:"), pixelBuffer)
-	return &RenderDestination{inner: raw.CIRenderDestinationFromID(_id)}
+// renderDestinationAdopt wraps an Objective-C object that this code just created as a
+// RenderDestination (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func renderDestinationAdopt(id objc.ID) *RenderDestination {
+	if id == 0 {
+		return nil
+	}
+	x := &RenderDestination{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Creates a render destination based on an IOSurface object.
-//
-// NewRenderDestinationWithIOSurface creates a new [RenderDestination].
-func NewRenderDestinationWithIOSurface(surface unsafe.Pointer) *RenderDestination {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIRenderDestination")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIOSurface:"), surface)
-	return &RenderDestination{inner: raw.CIRenderDestinationFromID(_id)}
+// Description returns the object's -description text.
+func (x *RenderDestination) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Creates a render destination based on a Metal texture.
-//
-// NewRenderDestinationWithMTLTextureCommandBuffer creates a new [RenderDestination].
-func NewRenderDestinationWithMTLTextureCommandBuffer(texture metal.MTLTexture, commandBuffer metal.MTLCommandBuffer) *RenderDestination {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIRenderDestination")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMTLTexture:commandBuffer:"), texture, commandBuffer)
-	return &RenderDestination{inner: raw.CIRenderDestinationFromID(_id)}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RenderDestination) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Creates a render destination based on a Metal texture with specified pixel format.
-//
-// NewRenderDestinationWithWidthHeightPixelFormatCommandBufferMtlTextureProvider creates a new [RenderDestination].
-func NewRenderDestinationWithWidthHeightPixelFormatCommandBufferMtlTextureProvider(width uint, height uint, pixelFormat metal.MTLPixelFormat, commandBuffer metal.MTLCommandBuffer, block objc.Block) *RenderDestination {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIRenderDestination")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWidth:height:pixelFormat:commandBuffer:mtlTextureProvider:"), width, height, pixelFormat, commandBuffer, block)
-	return &RenderDestination{inner: raw.CIRenderDestinationFromID(_id)}
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RenderDestination) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a render destination based on an OpenGL texture.
 //
-// NewRenderDestinationWithGLTextureTargetWidthHeight creates a new [RenderDestination].
-func NewRenderDestinationWithGLTextureTargetWidthHeight(texture uint, target uint, width uint, height uint) *RenderDestination {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIRenderDestination")), objc.RegisterName("alloc"))
+// NewRenderDestinationWithGLTextureTargetWidthHeight creates a new RenderDestination.
+func NewRenderDestinationWithGLTextureTargetWidthHeight(texture int, target int, width int, height int) *RenderDestination {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIRenderDestination")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGLTexture:target:width:height:"), texture, target, width, height)
-	return &RenderDestination{inner: raw.CIRenderDestinationFromID(_id)}
-}
-
-// Creates a render destination based on a client-managed buffer.
-//
-// NewRenderDestinationWithBitmapDataWidthHeightBytesPerRowFormat creates a new [RenderDestination].
-func NewRenderDestinationWithBitmapDataWidthHeightBytesPerRowFormat(data unsafe.Pointer, width uint, height uint, bytesPerRow uint, format int) *RenderDestination {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIRenderDestination")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBitmapData:width:height:bytesPerRow:format:"), data, width, height, bytesPerRow, format)
-	return &RenderDestination{inner: raw.CIRenderDestinationFromID(_id)}
+	return renderDestinationAdopt(_id)
 }
 
 // The render destination’s representation of alpha (transparency) values.
 //
-// WithAlphaMode sets the alphaMode property and returns the receiver for chaining.
-func (x *RenderDestination) WithAlphaMode(alphaMode CIRenderDestinationAlphaMode) *RenderDestination {
-	x.inner.SetAlphaMode(raw.CIRenderDestinationAlphaMode(alphaMode))
+// WithAlphaMode sets alphaMode and returns the receiver so calls can be chained.
+func (x *RenderDestination) WithAlphaMode(alphaMode RenderDestinationAlphaMode) *RenderDestination {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaMode:"), alphaMode)
 	return x
 }
 
 // Indicator of whether the destination is flipped.
 //
-// WithFlipped sets the flipped property and returns the receiver for chaining.
+// WithFlipped sets flipped and returns the receiver so calls can be chained.
 func (x *RenderDestination) WithFlipped(flipped bool) *RenderDestination {
-	x.inner.SetFlipped(flipped)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlipped:"), flipped)
 	return x
 }
 
 // Indicator of whether or not the destination dithers.
 //
-// WithDithered sets the dithered property and returns the receiver for chaining.
+// WithDithered sets dithered and returns the receiver so calls can be chained.
 func (x *RenderDestination) WithDithered(dithered bool) *RenderDestination {
-	x.inner.SetDithered(dithered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDithered:"), dithered)
 	return x
 }
 
 // Indicator of whether or not the destination clamps.
 //
-// WithClamped sets the clamped property and returns the receiver for chaining.
+// WithClamped sets clamped and returns the receiver so calls can be chained.
 func (x *RenderDestination) WithClamped(clamped bool) *RenderDestination {
-	x.inner.SetClamped(clamped)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClamped:"), clamped)
+	return x
+}
+
+// The destination’s color space.
+//
+// WithColorSpace sets colorSpace and returns the receiver so calls can be chained.
+func (x *RenderDestination) WithColorSpace(colorSpace obj.Object) *RenderDestination {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
 	return x
 }
 
 // The destination’s blend kernel.
 //
-// WithBlendKernel sets the blendKernel property and returns the receiver for chaining.
+// WithBlendKernel sets blendKernel and returns the receiver so calls can be chained.
 func (x *RenderDestination) WithBlendKernel(blendKernel *BlendKernel) *RenderDestination {
-	x.inner.SetBlendKernel(blendKernel.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendKernel:"), objref.IDOf(blendKernel))
 	return x
 }
 
 // Indicator of whether to blend in the destination’s color space.
 //
-// WithBlendsInDestinationColorSpace sets the blendsInDestinationColorSpace property and returns the receiver for chaining.
+// WithBlendsInDestinationColorSpace sets blendsInDestinationColorSpace and returns the receiver so calls can be chained.
 func (x *RenderDestination) WithBlendsInDestinationColorSpace(blendsInDestinationColorSpace bool) *RenderDestination {
-	x.inner.SetBlendsInDestinationColorSpace(blendsInDestinationColorSpace)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendsInDestinationColorSpace:"), blendsInDestinationColorSpace)
 	return x
 }
 
 // Tell the next render using this destination to capture a Metal trace.
 //
-// WithCaptureTraceURL sets the captureTraceURL property and returns the receiver for chaining.
+// WithCaptureTraceURL sets captureTraceURL and returns the receiver so calls can be chained.
 func (x *RenderDestination) WithCaptureTraceURL(captureTraceURL string) *RenderDestination {
-	x.inner.SetCaptureTraceURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(captureTraceURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptureTraceURL:"), rt.FileURL(captureTraceURL))
 	return x
 }
 
-// Width calls the underlying Width.
-func (x *RenderDestination) Width() uint {
-	return x.inner.Width()
+func (x *RenderDestination) Width() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("width"))
+	return _r
 }
 
-// Height calls the underlying Height.
-func (x *RenderDestination) Height() uint {
-	return x.inner.Height()
+func (x *RenderDestination) Height() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("height"))
+	return _r
 }
 
-// AlphaMode calls the underlying AlphaMode.
-func (x *RenderDestination) AlphaMode() CIRenderDestinationAlphaMode {
-	return CIRenderDestinationAlphaMode(x.inner.AlphaMode())
+func (x *RenderDestination) AlphaMode() RenderDestinationAlphaMode {
+	_r := objc.Send[RenderDestinationAlphaMode](objref.IDOf(x), objc.RegisterName("alphaMode"))
+	return _r
 }
 
-// SetAlphaMode calls the underlying SetAlphaMode.
-func (x *RenderDestination) SetAlphaMode(alphaMode CIRenderDestinationAlphaMode) {
-	x.inner.SetAlphaMode(raw.CIRenderDestinationAlphaMode(alphaMode))
+func (x *RenderDestination) SetAlphaMode(alphaMode RenderDestinationAlphaMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaMode:"), alphaMode)
 }
 
-// IsFlipped calls the underlying IsFlipped.
 func (x *RenderDestination) IsFlipped() bool {
-	return x.inner.IsFlipped()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFlipped"))
+	return _r
 }
 
-// SetFlipped calls the underlying SetFlipped.
 func (x *RenderDestination) SetFlipped(flipped bool) {
-	x.inner.SetFlipped(flipped)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlipped:"), flipped)
 }
 
-// IsDithered calls the underlying IsDithered.
 func (x *RenderDestination) IsDithered() bool {
-	return x.inner.IsDithered()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDithered"))
+	return _r
 }
 
-// SetDithered calls the underlying SetDithered.
 func (x *RenderDestination) SetDithered(dithered bool) {
-	x.inner.SetDithered(dithered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDithered:"), dithered)
 }
 
-// IsClamped calls the underlying IsClamped.
 func (x *RenderDestination) IsClamped() bool {
-	return x.inner.IsClamped()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isClamped"))
+	return _r
 }
 
-// SetClamped calls the underlying SetClamped.
 func (x *RenderDestination) SetClamped(clamped bool) {
-	x.inner.SetClamped(clamped)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClamped:"), clamped)
 }
 
-// ColorSpace calls the underlying ColorSpace.
-func (x *RenderDestination) ColorSpace() unsafe.Pointer {
-	return x.inner.ColorSpace()
+func (x *RenderDestination) ColorSpace() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorSpace"))
+	return obj.Wrap(_r)
 }
 
-// SetColorSpace calls the underlying SetColorSpace.
-func (x *RenderDestination) SetColorSpace(colorSpace unsafe.Pointer) {
-	x.inner.SetColorSpace(colorSpace)
+func (x *RenderDestination) SetColorSpace(colorSpace obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
 }
 
-// BlendKernel calls the underlying BlendKernel.
 func (x *RenderDestination) BlendKernel() *BlendKernel {
-	_r := x.inner.BlendKernel()
-	if _r == nil {
-		return nil
-	}
-	return &BlendKernel{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("blendKernel"))
+	return BlendKernelFromID(_r)
 }
 
-// SetBlendKernel calls the underlying SetBlendKernel.
-func (x *RenderDestination) SetBlendKernel(blendKernel *raw.CIBlendKernel) {
-	x.inner.SetBlendKernel(blendKernel)
+func (x *RenderDestination) SetBlendKernel(blendKernel *BlendKernel) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendKernel:"), objref.IDOf(blendKernel))
 }
 
-// BlendsInDestinationColorSpace calls the underlying BlendsInDestinationColorSpace.
 func (x *RenderDestination) BlendsInDestinationColorSpace() bool {
-	return x.inner.BlendsInDestinationColorSpace()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("blendsInDestinationColorSpace"))
+	return _r
 }
 
-// SetBlendsInDestinationColorSpace calls the underlying SetBlendsInDestinationColorSpace.
 func (x *RenderDestination) SetBlendsInDestinationColorSpace(blendsInDestinationColorSpace bool) {
-	x.inner.SetBlendsInDestinationColorSpace(blendsInDestinationColorSpace)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendsInDestinationColorSpace:"), blendsInDestinationColorSpace)
 }
 
 // Tell the next render using this destination to capture a Metal trace. If this property is set to a file-based URL, then the next render using this destination will capture a Metal trace, deleting any existing file if present. This property is nil by default.
-//
-// CaptureTraceURL calls the underlying CaptureTraceURL.
-func (x *RenderDestination) CaptureTraceURL() *foundation.NSURL {
-	return x.inner.CaptureTraceURL()
+func (x *RenderDestination) CaptureTraceURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("captureTraceURL"))
+	return obj.Wrap(_r)
 }
 
-// SetCaptureTraceURL calls the underlying SetCaptureTraceURL.
 func (x *RenderDestination) SetCaptureTraceURL(captureTraceURL string) {
-	x.inner.SetCaptureTraceURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(captureTraceURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptureTraceURL:"), rt.FileURL(captureTraceURL))
 }
 
 // RenderDestinationable is the interface implemented by [RenderDestination], for mocking and DI.
 type RenderDestinationable interface {
-	Unwrap() *raw.CIRenderDestination
-	WithAlphaMode(alphaMode CIRenderDestinationAlphaMode) *RenderDestination
+	obj.Object
+	WithAlphaMode(alphaMode RenderDestinationAlphaMode) *RenderDestination
 	WithFlipped(flipped bool) *RenderDestination
 	WithDithered(dithered bool) *RenderDestination
 	WithClamped(clamped bool) *RenderDestination
+	WithColorSpace(colorSpace obj.Object) *RenderDestination
 	WithBlendKernel(blendKernel *BlendKernel) *RenderDestination
 	WithBlendsInDestinationColorSpace(blendsInDestinationColorSpace bool) *RenderDestination
 	WithCaptureTraceURL(captureTraceURL string) *RenderDestination
-	Width() uint
-	Height() uint
-	AlphaMode() CIRenderDestinationAlphaMode
-	SetAlphaMode(alphaMode CIRenderDestinationAlphaMode)
+	Width() int
+	Height() int
+	AlphaMode() RenderDestinationAlphaMode
+	SetAlphaMode(alphaMode RenderDestinationAlphaMode)
 	IsFlipped() bool
 	SetFlipped(flipped bool)
 	IsDithered() bool
 	SetDithered(dithered bool)
 	IsClamped() bool
 	SetClamped(clamped bool)
-	ColorSpace() unsafe.Pointer
-	SetColorSpace(colorSpace unsafe.Pointer)
+	ColorSpace() obj.Object
+	SetColorSpace(colorSpace obj.Object)
 	BlendKernel() *BlendKernel
-	SetBlendKernel(blendKernel *raw.CIBlendKernel)
+	SetBlendKernel(blendKernel *BlendKernel)
 	BlendsInDestinationColorSpace() bool
 	SetBlendsInDestinationColorSpace(blendsInDestinationColorSpace bool)
-	CaptureTraceURL() *foundation.NSURL
+	CaptureTraceURL() obj.Object
 	SetCaptureTraceURL(captureTraceURL string)
 }
 

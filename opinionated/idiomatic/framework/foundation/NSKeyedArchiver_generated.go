@@ -5,166 +5,138 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An encoder that stores an object’s data to an archive referenced by keys.
 //
-// KeyedArchiver wraps [raw.NSKeyedArchiver] with a fluent Go API.
+// KeyedArchiver is an idiomatic wrapper over the Objective-C class NSKeyedArchiver.
 type KeyedArchiver struct {
-	inner *raw.NSKeyedArchiver
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSKeyedArchiver].
-func (x *KeyedArchiver) Unwrap() *raw.NSKeyedArchiver { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *KeyedArchiver) ID() objc.ID { return x.inner.Ptr() }
-
-// KeyedArchiverFromID adopts an existing object pointer as a KeyedArchiver (nil for 0).
+// KeyedArchiverFromID adopts an existing Objective-C object as a KeyedArchiver
+// (nil for 0), retaining it and registering a release finalizer.
 func KeyedArchiverFromID(id objc.ID) *KeyedArchiver {
 	if id == 0 {
 		return nil
 	}
-	return &KeyedArchiver{inner: raw.NSKeyedArchiverFromID(id)}
+	x := &KeyedArchiver{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewKeyedArchiver creates a new [KeyedArchiver].
+// keyedArchiverAdopt wraps an Objective-C object that this code just created as a
+// KeyedArchiver (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func keyedArchiverAdopt(id objc.ID) *KeyedArchiver {
+	if id == 0 {
+		return nil
+	}
+	x := &KeyedArchiver{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *KeyedArchiver) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *KeyedArchiver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *KeyedArchiver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewKeyedArchiver creates a new KeyedArchiver.
 func NewKeyedArchiver() *KeyedArchiver {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSKeyedArchiver")), objc.RegisterName("new"))
-	return &KeyedArchiver{inner: raw.NSKeyedArchiverFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSKeyedArchiver")), objc.RegisterName("new"))
+	return keyedArchiverAdopt(_id)
 }
 
 // Creates an archiver to encode data, and optionally disables secure coding.
 //
-// NewKeyedArchiverRequiringSecureCoding creates a new [KeyedArchiver].
+// NewKeyedArchiverRequiringSecureCoding creates a new KeyedArchiver.
 func NewKeyedArchiverRequiringSecureCoding(requiresSecureCoding bool) *KeyedArchiver {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSKeyedArchiver")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSKeyedArchiver")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRequiringSecureCoding:"), requiresSecureCoding)
-	return &KeyedArchiver{inner: raw.NSKeyedArchiverFromID(_id)}
+	return keyedArchiverAdopt(_id)
 }
 
 // Initializes an archiver to encode data into a given a mutable-data object.
 //
-// NewKeyedArchiverForWritingWithMutableData creates a new [KeyedArchiver].
-func NewKeyedArchiverForWritingWithMutableData(data *raw.NSMutableData) *KeyedArchiver {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSKeyedArchiver")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWritingWithMutableData:"), data.Ptr())
-	return &KeyedArchiver{inner: raw.NSKeyedArchiverFromID(_id)}
-}
-
-// The archiver’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *KeyedArchiver) WithDelegate(delegate raw.NSKeyedArchiverDelegate) *KeyedArchiver {
-	x.inner.SetDelegate(delegate)
-	return x
+// NewKeyedArchiverForWritingWithMutableData creates a new KeyedArchiver.
+func NewKeyedArchiverForWritingWithMutableData(data *MutableData) *KeyedArchiver {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSKeyedArchiver")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForWritingWithMutableData:"), objref.IDOf(data))
+	return keyedArchiverAdopt(_id)
 }
 
 // The format in which the receiver encodes its data.
 //
-// WithOutputFormat sets the outputFormat property and returns the receiver for chaining.
-func (x *KeyedArchiver) WithOutputFormat(outputFormat NSPropertyListFormat) *KeyedArchiver {
-	x.inner.SetOutputFormat(raw.NSPropertyListFormat(outputFormat))
+// WithOutputFormat sets outputFormat and returns the receiver so calls can be chained.
+func (x *KeyedArchiver) WithOutputFormat(outputFormat PropertyListFormat) *KeyedArchiver {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFormat:"), outputFormat)
 	return x
 }
 
 // Indicates whether the archiver requires all archived classes to resist object substitution attacks.
 //
-// WithRequiresSecureCoding sets the requiresSecureCoding property and returns the receiver for chaining.
+// WithRequiresSecureCoding sets requiresSecureCoding and returns the receiver so calls can be chained.
 func (x *KeyedArchiver) WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedArchiver {
-	x.inner.SetRequiresSecureCoding(requiresSecureCoding)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSecureCoding:"), requiresSecureCoding)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *KeyedArchiver) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *KeyedArchiver {
-	x.inner.NSCoder.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *KeyedArchiver) WithScriptingProperties(scriptingProperties obj.Object) *KeyedArchiver {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Instructs the receiver to construct the final data stream.
-//
-// FinishEncoding calls the underlying FinishEncoding.
 func (x *KeyedArchiver) FinishEncoding() {
-	x.inner.FinishEncoding()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishEncoding"))
 }
 
-// Sets a mapping for this archiver to encode instances of a given class with the provided name, rather than their real name.
-//
-// SetClassNameForClass calls the underlying SetClassNameForClass.
-func (x *KeyedArchiver) SetClassNameForClass(codedName string, cls objc.Class) {
-	x.inner.SetClassNameForClass(foundation.NSStringStringWithUTF8String(codedName), cls)
+func (x *KeyedArchiver) OutputFormat() PropertyListFormat {
+	_r := objc.Send[PropertyListFormat](objref.IDOf(x), objc.RegisterName("outputFormat"))
+	return _r
 }
 
-// Returns the class name with which this archiver encodes instances of a given class.
-//
-// ClassNameForClass calls the underlying ClassNameForClass.
-func (x *KeyedArchiver) ClassNameForClass(cls objc.Class) *String {
-	_r := x.inner.ClassNameForClass(cls)
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// Delegate calls the underlying Delegate.
-func (x *KeyedArchiver) Delegate() raw.NSKeyedArchiverDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *KeyedArchiver) SetDelegate(delegate raw.NSKeyedArchiverDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// OutputFormat calls the underlying OutputFormat.
-func (x *KeyedArchiver) OutputFormat() NSPropertyListFormat {
-	return NSPropertyListFormat(x.inner.OutputFormat())
-}
-
-// SetOutputFormat calls the underlying SetOutputFormat.
-func (x *KeyedArchiver) SetOutputFormat(outputFormat NSPropertyListFormat) {
-	x.inner.SetOutputFormat(raw.NSPropertyListFormat(outputFormat))
+func (x *KeyedArchiver) SetOutputFormat(outputFormat PropertyListFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFormat:"), outputFormat)
 }
 
 // If encoding has not yet finished, then invoking this property will call finishEncoding and return the data. If you initialized the keyed archiver with a specific mutable data instance, then it will be returned from this property after finishEncoding is called.
-//
-// EncodedData calls the underlying EncodedData.
 func (x *KeyedArchiver) EncodedData() *Data {
-	_r := x.inner.EncodedData()
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodedData"))
+	return DataFromID(_r)
 }
 
-// SetRequiresSecureCoding calls the underlying SetRequiresSecureCoding.
 func (x *KeyedArchiver) SetRequiresSecureCoding(requiresSecureCoding bool) {
-	x.inner.SetRequiresSecureCoding(requiresSecureCoding)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSecureCoding:"), requiresSecureCoding)
 }
-
-func (x *KeyedArchiver) asCoder() *raw.NSCoder { return &x.inner.NSCoder }
-
-func (x *KeyedArchiver) asObject() *raw.NSObject { return &x.inner.NSCoder.NSObject }
 
 // KeyedArchiverable is the interface implemented by [KeyedArchiver], for mocking and DI.
 type KeyedArchiverable interface {
-	Unwrap() *raw.NSKeyedArchiver
-	WithDelegate(delegate raw.NSKeyedArchiverDelegate) *KeyedArchiver
-	WithOutputFormat(outputFormat NSPropertyListFormat) *KeyedArchiver
+	obj.Object
+	WithOutputFormat(outputFormat PropertyListFormat) *KeyedArchiver
 	WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedArchiver
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *KeyedArchiver
+	WithScriptingProperties(scriptingProperties obj.Object) *KeyedArchiver
 	FinishEncoding()
-	SetClassNameForClass(codedName string, cls objc.Class)
-	ClassNameForClass(cls objc.Class) *String
-	Delegate() raw.NSKeyedArchiverDelegate
-	SetDelegate(delegate raw.NSKeyedArchiverDelegate)
-	OutputFormat() NSPropertyListFormat
-	SetOutputFormat(outputFormat NSPropertyListFormat)
+	OutputFormat() PropertyListFormat
+	SetOutputFormat(outputFormat PropertyListFormat)
 	EncodedData() *Data
 	SetRequiresSecureCoding(requiresSecureCoding bool)
 }

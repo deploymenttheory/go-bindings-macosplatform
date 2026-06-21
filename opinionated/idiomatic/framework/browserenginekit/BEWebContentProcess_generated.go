@@ -5,75 +5,87 @@
 package browserenginekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/browserenginekit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // A class that processes webpage content in an app extension.
 //
-// WebContentProcess wraps [raw.BEWebContentProcess] with a fluent Go API.
+// WebContentProcess is an idiomatic wrapper over the Objective-C class BEWebContentProcess.
 type WebContentProcess struct {
-	inner *raw.BEWebContentProcess
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.BEWebContentProcess].
-func (x *WebContentProcess) Unwrap() *raw.BEWebContentProcess { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WebContentProcess) ID() objc.ID { return x.inner.Ptr() }
-
-// WebContentProcessFromID adopts an existing object pointer as a WebContentProcess (nil for 0).
+// WebContentProcessFromID adopts an existing Objective-C object as a WebContentProcess
+// (nil for 0), retaining it and registering a release finalizer.
 func WebContentProcessFromID(id objc.ID) *WebContentProcess {
 	if id == 0 {
 		return nil
 	}
-	return &WebContentProcess{inner: raw.BEWebContentProcessFromID(id)}
+	x := &WebContentProcess{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWebContentProcess creates a new [WebContentProcess].
+// webContentProcessAdopt wraps an Objective-C object that this code just created as a
+// WebContentProcess (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func webContentProcessAdopt(id objc.ID) *WebContentProcess {
+	if id == 0 {
+		return nil
+	}
+	x := &WebContentProcess{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WebContentProcess) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WebContentProcess) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WebContentProcess) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWebContentProcess creates a new WebContentProcess.
 func NewWebContentProcess() *WebContentProcess {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("BEWebContentProcess")), objc.RegisterName("new"))
-	return &WebContentProcess{inner: raw.BEWebContentProcessFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("BEWebContentProcess")), objc.RegisterName("new"))
+	return webContentProcessAdopt(_id)
 }
 
 // Stops the web content process.
-//
-// Invalidate calls the underlying Invalidate.
 func (x *WebContentProcess) Invalidate() {
-	x.inner.Invalidate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
 // Creates a new XPC connection to the extension process.
-//
-// MakeLibXPCConnectionError calls the underlying MakeLibXPCConnectionError.
-func (x *WebContentProcess) MakeLibXPCConnectionError() (*foundation.NSObject, error) {
-	return x.inner.MakeLibXPCConnectionError()
-}
-
-// Grants the specified capability to the process.
-//
-// GrantCapabilityError calls the underlying GrantCapabilityError.
-func (x *WebContentProcess) GrantCapabilityError(capability *raw.BEProcessCapability) (raw.BEProcessCapabilityGrant, error) {
-	return x.inner.GrantCapabilityError(capability)
-}
-
-// Grants the specified capability to the process, invoking the handler when the capability becomes invalid.
-//
-// GrantCapabilityErrorInvalidationHandler calls the underlying GrantCapabilityErrorInvalidationHandler.
-func (x *WebContentProcess) GrantCapabilityErrorInvalidationHandler(capability *raw.BEProcessCapability, error_ unsafe.Pointer, invalidationHandler func()) raw.BEProcessCapabilityGrant {
-	return x.inner.GrantCapabilityErrorInvalidationHandler(capability, error_, invalidationHandler)
+func (x *WebContentProcess) MakeLibXPCConnectionError() (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeLibXPCConnectionError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // WebContentProcessable is the interface implemented by [WebContentProcess], for mocking and DI.
 type WebContentProcessable interface {
-	Unwrap() *raw.BEWebContentProcess
+	obj.Object
 	Invalidate()
-	MakeLibXPCConnectionError() (*foundation.NSObject, error)
-	GrantCapabilityError(capability *raw.BEProcessCapability) (raw.BEProcessCapabilityGrant, error)
-	GrantCapabilityErrorInvalidationHandler(capability *raw.BEProcessCapability, error_ unsafe.Pointer, invalidationHandler func()) raw.BEProcessCapabilityGrant
+	MakeLibXPCConnectionError() (obj.Object, error)
 }
 
 var _ WebContentProcessable = (*WebContentProcess)(nil)

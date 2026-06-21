@@ -5,62 +5,68 @@
 package gamekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The GKChallengeEventHandler class is used to respond to events related to challenges sent or received by the local player.
 //
-// ChallengeEventHandler wraps [raw.GKChallengeEventHandler] with a fluent Go API.
+// ChallengeEventHandler is an idiomatic wrapper over the Objective-C class GKChallengeEventHandler.
 type ChallengeEventHandler struct {
-	inner *raw.GKChallengeEventHandler
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKChallengeEventHandler].
-func (x *ChallengeEventHandler) Unwrap() *raw.GKChallengeEventHandler { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChallengeEventHandler) ID() objc.ID { return x.inner.Ptr() }
-
-// ChallengeEventHandlerFromID adopts an existing object pointer as a ChallengeEventHandler (nil for 0).
+// ChallengeEventHandlerFromID adopts an existing Objective-C object as a ChallengeEventHandler
+// (nil for 0), retaining it and registering a release finalizer.
 func ChallengeEventHandlerFromID(id objc.ID) *ChallengeEventHandler {
 	if id == 0 {
 		return nil
 	}
-	return &ChallengeEventHandler{inner: raw.GKChallengeEventHandlerFromID(id)}
-}
-
-// NewChallengeEventHandler creates a new [ChallengeEventHandler].
-func NewChallengeEventHandler() *ChallengeEventHandler {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKChallengeEventHandler")), objc.RegisterName("new"))
-	return &ChallengeEventHandler{inner: raw.GKChallengeEventHandlerFromID(_id)}
-}
-
-// The delegate for the event handler.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *ChallengeEventHandler) WithDelegate(delegate raw.GKChallengeEventHandlerDelegate) *ChallengeEventHandler {
-	x.inner.SetDelegate(delegate)
+	x := &ChallengeEventHandler{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Delegate calls the underlying Delegate.
-func (x *ChallengeEventHandler) Delegate() raw.GKChallengeEventHandlerDelegate {
-	return x.inner.Delegate()
+// challengeEventHandlerAdopt wraps an Objective-C object that this code just created as a
+// ChallengeEventHandler (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func challengeEventHandlerAdopt(id objc.ID) *ChallengeEventHandler {
+	if id == 0 {
+		return nil
+	}
+	x := &ChallengeEventHandler{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *ChallengeEventHandler) SetDelegate(delegate raw.GKChallengeEventHandlerDelegate) {
-	x.inner.SetDelegate(delegate)
+// Description returns the object's -description text.
+func (x *ChallengeEventHandler) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ChallengeEventHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ChallengeEventHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewChallengeEventHandler creates a new ChallengeEventHandler.
+func NewChallengeEventHandler() *ChallengeEventHandler {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKChallengeEventHandler")), objc.RegisterName("new"))
+	return challengeEventHandlerAdopt(_id)
 }
 
 // ChallengeEventHandlerable is the interface implemented by [ChallengeEventHandler], for mocking and DI.
 type ChallengeEventHandlerable interface {
-	Unwrap() *raw.GKChallengeEventHandler
-	WithDelegate(delegate raw.GKChallengeEventHandlerDelegate) *ChallengeEventHandler
-	Delegate() raw.GKChallengeEventHandlerDelegate
-	SetDelegate(delegate raw.GKChallengeEventHandlerDelegate)
+	obj.Object
 }
 
 var _ ChallengeEventHandlerable = (*ChallengeEventHandler)(nil)

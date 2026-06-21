@@ -5,103 +5,104 @@
 package replaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/replaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that processes buffer objects as received from ReplayKit.
 //
-// BroadcastSampleHandler wraps [raw.RPBroadcastSampleHandler] with a fluent Go API.
+// BroadcastSampleHandler is an idiomatic wrapper over the Objective-C class RPBroadcastSampleHandler.
 type BroadcastSampleHandler struct {
-	inner *raw.RPBroadcastSampleHandler
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.RPBroadcastSampleHandler].
-func (x *BroadcastSampleHandler) Unwrap() *raw.RPBroadcastSampleHandler { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BroadcastSampleHandler) ID() objc.ID { return x.inner.Ptr() }
-
-// BroadcastSampleHandlerFromID adopts an existing object pointer as a BroadcastSampleHandler (nil for 0).
+// BroadcastSampleHandlerFromID adopts an existing Objective-C object as a BroadcastSampleHandler
+// (nil for 0), retaining it and registering a release finalizer.
 func BroadcastSampleHandlerFromID(id objc.ID) *BroadcastSampleHandler {
 	if id == 0 {
 		return nil
 	}
-	return &BroadcastSampleHandler{inner: raw.RPBroadcastSampleHandlerFromID(id)}
+	x := &BroadcastSampleHandler{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBroadcastSampleHandler creates a new [BroadcastSampleHandler].
+// broadcastSampleHandlerAdopt wraps an Objective-C object that this code just created as a
+// BroadcastSampleHandler (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func broadcastSampleHandlerAdopt(id objc.ID) *BroadcastSampleHandler {
+	if id == 0 {
+		return nil
+	}
+	x := &BroadcastSampleHandler{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BroadcastSampleHandler) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BroadcastSampleHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BroadcastSampleHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBroadcastSampleHandler creates a new BroadcastSampleHandler.
 func NewBroadcastSampleHandler() *BroadcastSampleHandler {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("RPBroadcastSampleHandler")), objc.RegisterName("new"))
-	return &BroadcastSampleHandler{inner: raw.RPBroadcastSampleHandlerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("RPBroadcastSampleHandler")), objc.RegisterName("new"))
+	return broadcastSampleHandlerAdopt(_id)
 }
 
 // Perform any required actions after starting a live broadcast.
-//
-// BroadcastStartedWithSetupInfo calls the underlying BroadcastStartedWithSetupInfo.
-func (x *BroadcastSampleHandler) BroadcastStartedWithSetupInfo(setupInfo *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) {
-	x.inner.BroadcastStartedWithSetupInfo(setupInfo)
+func (x *BroadcastSampleHandler) BroadcastStartedWithSetupInfo(setupInfo obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastStartedWithSetupInfo:"), objref.IDOf(setupInfo))
 }
 
 // Perform any required actions after a live broadcast is paused.
-//
-// BroadcastPaused calls the underlying BroadcastPaused.
 func (x *BroadcastSampleHandler) BroadcastPaused() {
-	x.inner.BroadcastPaused()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastPaused"))
 }
 
 // Perform any required actions after a live broadcast is resumed.
-//
-// BroadcastResumed calls the underlying BroadcastResumed.
 func (x *BroadcastSampleHandler) BroadcastResumed() {
-	x.inner.BroadcastResumed()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastResumed"))
 }
 
 // Perform any required actions after a live broadcast is finished.
-//
-// BroadcastFinished calls the underlying BroadcastFinished.
 func (x *BroadcastSampleHandler) BroadcastFinished() {
-	x.inner.BroadcastFinished()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastFinished"))
 }
 
 // Perform any required actions after starting a live broadcast.
-//
-// BroadcastAnnotatedWithApplicationInfo calls the underlying BroadcastAnnotatedWithApplicationInfo.
-func (x *BroadcastSampleHandler) BroadcastAnnotatedWithApplicationInfo(applicationInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.BroadcastAnnotatedWithApplicationInfo(applicationInfo)
+func (x *BroadcastSampleHandler) BroadcastAnnotatedWithApplicationInfo(applicationInfo obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcastAnnotatedWithApplicationInfo:"), objref.IDOf(applicationInfo))
 }
 
 // Processes video and audio data as it becomes available during a live broadcast.
-//
-// ProcessSampleBufferWithType calls the underlying ProcessSampleBufferWithType.
-func (x *BroadcastSampleHandler) ProcessSampleBufferWithType(sampleBuffer unsafe.Pointer, sampleBufferType RPSampleBufferType) {
-	x.inner.ProcessSampleBufferWithType(sampleBuffer, raw.RPSampleBufferType(sampleBufferType))
-}
-
-// Stops the broadcast and passes an error back to the broadcasting app.
-//
-// FinishBroadcastWithError calls the underlying FinishBroadcastWithError.
-func (x *BroadcastSampleHandler) FinishBroadcastWithError(error_ unsafe.Pointer) {
-	x.inner.FinishBroadcastWithError(error_)
-}
-
-func (x *BroadcastSampleHandler) asBroadcastHandler() *raw.RPBroadcastHandler {
-	return &x.inner.RPBroadcastHandler
+func (x *BroadcastSampleHandler) ProcessSampleBufferWithType(sampleBuffer obj.Object, sampleBufferType SampleBufferType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processSampleBuffer:withType:"), objref.IDOf(sampleBuffer), sampleBufferType)
 }
 
 // BroadcastSampleHandlerable is the interface implemented by [BroadcastSampleHandler], for mocking and DI.
 type BroadcastSampleHandlerable interface {
-	Unwrap() *raw.RPBroadcastSampleHandler
-	BroadcastStartedWithSetupInfo(setupInfo *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject])
+	obj.Object
+	BroadcastStartedWithSetupInfo(setupInfo obj.Object)
 	BroadcastPaused()
 	BroadcastResumed()
 	BroadcastFinished()
-	BroadcastAnnotatedWithApplicationInfo(applicationInfo *foundation.NSDictionary[objc.ID, objc.ID])
-	ProcessSampleBufferWithType(sampleBuffer unsafe.Pointer, sampleBufferType RPSampleBufferType)
-	FinishBroadcastWithError(error_ unsafe.Pointer)
+	BroadcastAnnotatedWithApplicationInfo(applicationInfo obj.Object)
+	ProcessSampleBufferWithType(sampleBuffer obj.Object, sampleBufferType SampleBufferType)
 }
 
 var _ BroadcastSampleHandlerable = (*BroadcastSampleHandler)(nil)

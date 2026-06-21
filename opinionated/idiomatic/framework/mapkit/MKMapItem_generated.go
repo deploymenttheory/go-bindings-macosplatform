@@ -5,247 +5,226 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A point of interest on the map.
 //
-// MapItem wraps [raw.MKMapItem] with a fluent Go API.
+// MapItem is an idiomatic wrapper over the Objective-C class MKMapItem.
 type MapItem struct {
-	inner *raw.MKMapItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKMapItem].
-func (x *MapItem) Unwrap() *raw.MKMapItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MapItem) ID() objc.ID { return x.inner.Ptr() }
-
-// MapItemFromID adopts an existing object pointer as a MapItem (nil for 0).
+// MapItemFromID adopts an existing Objective-C object as a MapItem
+// (nil for 0), retaining it and registering a release finalizer.
 func MapItemFromID(id objc.ID) *MapItem {
 	if id == 0 {
 		return nil
 	}
-	return &MapItem{inner: raw.MKMapItemFromID(id)}
+	x := &MapItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mapItemAdopt wraps an Objective-C object that this code just created as a
+// MapItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mapItemAdopt(id objc.ID) *MapItem {
+	if id == 0 {
+		return nil
+	}
+	x := &MapItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MapItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MapItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MapItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates and returns a map item object using the specified placemark object.
 //
-// NewMapItemWithPlacemark creates a new [MapItem].
-func NewMapItemWithPlacemark(placemark *raw.MKPlacemark) *MapItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlacemark:"), placemark.Ptr())
-	return &MapItem{inner: raw.MKMapItemFromID(_id)}
-}
-
-// Creates and returns a map item object using the specified location and address objects.
-//
-// NewMapItemWithLocationAddress creates a new [MapItem].
-func NewMapItemWithLocationAddress(location unsafe.Pointer, address *raw.MKAddress) *MapItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocation:address:"), location, address.Ptr())
-	return &MapItem{inner: raw.MKMapItemFromID(_id)}
+// NewMapItemWithPlacemark creates a new MapItem.
+func NewMapItemWithPlacemark(placemark *Placemark) *MapItem {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItem")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlacemark:"), objref.IDOf(placemark))
+	return mapItemAdopt(_id)
 }
 
 // The descriptive name associated with the map item.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *MapItem) WithName(name string) *MapItem {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // The phone number associated with a business at the specified location.
 //
-// WithPhoneNumber sets the phoneNumber property and returns the receiver for chaining.
+// WithPhoneNumber sets phoneNumber and returns the receiver so calls can be chained.
 func (x *MapItem) WithPhoneNumber(phoneNumber string) *MapItem {
-	x.inner.SetPhoneNumber(foundation.NSStringStringWithUTF8String(phoneNumber))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneNumber:"), purego.NSString(phoneNumber))
 	return x
 }
 
 // The URL associated with the specified location.
 //
-// WithUrl sets the url property and returns the receiver for chaining.
+// WithUrl sets url and returns the receiver so calls can be chained.
 func (x *MapItem) WithUrl(url string) *MapItem {
-	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
 	return x
 }
 
 // The time zone of the specified location.
 //
-// WithTimeZone sets the timeZone property and returns the receiver for chaining.
-func (x *MapItem) WithTimeZone(timeZone *foundation.NSTimeZone) *MapItem {
-	x.inner.SetTimeZone(timeZone)
+// WithTimeZone sets timeZone and returns the receiver so calls can be chained.
+func (x *MapItem) WithTimeZone(timeZone obj.Object) *MapItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return x
 }
 
 // The point-of-interest category for the map item.
 //
-// WithPointOfInterestCategory sets the pointOfInterestCategory property and returns the receiver for chaining.
-func (x *MapItem) WithPointOfInterestCategory(pointOfInterestCategory *foundation.NSString) *MapItem {
-	x.inner.SetPointOfInterestCategory(pointOfInterestCategory)
+// WithPointOfInterestCategory sets pointOfInterestCategory and returns the receiver so calls can be chained.
+func (x *MapItem) WithPointOfInterestCategory(pointOfInterestCategory obj.Object) *MapItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestCategory:"), objref.IDOf(pointOfInterestCategory))
 	return x
 }
 
 // Opens the Maps app and displays the map item.
-//
-// OpenInMapsWithLaunchOptions calls the underlying OpenInMapsWithLaunchOptions.
-func (x *MapItem) OpenInMapsWithLaunchOptions(launchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool {
-	return x.inner.OpenInMapsWithLaunchOptions(launchOptions)
+func (x *MapItem) OpenInMapsWithLaunchOptions(launchOptions obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("openInMapsWithLaunchOptions:"), objref.IDOf(launchOptions))
+	return _r
 }
 
 // Opens the Maps app and displays the map item.
-//
-// OpenInMapsWithLaunchOptionsCompletionHandler calls the underlying OpenInMapsWithLaunchOptionsCompletionHandler.
-func (x *MapItem) OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool)) {
-	x.inner.OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions, completion)
+func (x *MapItem) OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions obj.Object, completion func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openInMapsWithLaunchOptions:completionHandler:"), objref.IDOf(launchOptions), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
-// Identifier calls the underlying Identifier.
 func (x *MapItem) Identifier() *MapItemIdentifier {
-	_r := x.inner.Identifier()
-	if _r == nil {
-		return nil
-	}
-	return &MapItemIdentifier{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	return MapItemIdentifierFromID(_r)
 }
 
-// AlternateIdentifiers calls the underlying AlternateIdentifiers.
-func (x *MapItem) AlternateIdentifiers() *foundation.NSSet[*raw.MKMapItemIdentifier] {
-	return x.inner.AlternateIdentifiers()
+func (x *MapItem) AlternateIdentifiers() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternateIdentifiers"))
+	return obj.Wrap(_r)
 }
 
-// Placemark calls the underlying Placemark.
 func (x *MapItem) Placemark() *Placemark {
-	_r := x.inner.Placemark()
-	if _r == nil {
-		return nil
-	}
-	return &Placemark{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placemark"))
+	return PlacemarkFromID(_r)
 }
 
-// IsCurrentLocation calls the underlying IsCurrentLocation.
 func (x *MapItem) IsCurrentLocation() bool {
-	return x.inner.IsCurrentLocation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCurrentLocation"))
+	return _r
 }
 
-// Location calls the underlying Location.
-func (x *MapItem) Location() unsafe.Pointer {
-	return x.inner.Location()
-}
-
-// Address calls the underlying Address.
 func (x *MapItem) Address() *Address {
-	_r := x.inner.Address()
-	if _r == nil {
-		return nil
-	}
-	return &Address{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("address"))
+	return AddressFromID(_r)
 }
 
-// AddressRepresentations calls the underlying AddressRepresentations.
 func (x *MapItem) AddressRepresentations() *AddressRepresentations {
-	_r := x.inner.AddressRepresentations()
-	if _r == nil {
-		return nil
-	}
-	return &AddressRepresentations{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressRepresentations"))
+	return AddressRepresentationsFromID(_r)
 }
 
-// Name calls the underlying Name.
 func (x *MapItem) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
 func (x *MapItem) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// PhoneNumber calls the underlying PhoneNumber.
 func (x *MapItem) PhoneNumber() string {
-	_r := x.inner.PhoneNumber()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneNumber"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPhoneNumber calls the underlying SetPhoneNumber.
 func (x *MapItem) SetPhoneNumber(phoneNumber string) {
-	x.inner.SetPhoneNumber(foundation.NSStringStringWithUTF8String(phoneNumber))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneNumber:"), purego.NSString(phoneNumber))
 }
 
-// Url calls the underlying Url.
-func (x *MapItem) Url() *foundation.NSURL {
-	return x.inner.Url()
+func (x *MapItem) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
 }
 
-// SetUrl calls the underlying SetUrl.
 func (x *MapItem) SetUrl(url string) {
-	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
 }
 
-// TimeZone calls the underlying TimeZone.
-func (x *MapItem) TimeZone() *foundation.NSTimeZone {
-	return x.inner.TimeZone()
+func (x *MapItem) TimeZone() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
+	return obj.Wrap(_r)
 }
 
-// SetTimeZone calls the underlying SetTimeZone.
-func (x *MapItem) SetTimeZone(timeZone *foundation.NSTimeZone) {
-	x.inner.SetTimeZone(timeZone)
+func (x *MapItem) SetTimeZone(timeZone obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 }
 
-// PointOfInterestCategory calls the underlying PointOfInterestCategory.
-func (x *MapItem) PointOfInterestCategory() string {
-	_r := x.inner.PointOfInterestCategory()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *MapItem) PointOfInterestCategory() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestCategory"))
+	return obj.Wrap(_r)
 }
 
-// SetPointOfInterestCategory calls the underlying SetPointOfInterestCategory.
-func (x *MapItem) SetPointOfInterestCategory(pointOfInterestCategory *foundation.NSString) {
-	x.inner.SetPointOfInterestCategory(pointOfInterestCategory)
+func (x *MapItem) SetPointOfInterestCategory(pointOfInterestCategory obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestCategory:"), objref.IDOf(pointOfInterestCategory))
 }
 
 // MapItemable is the interface implemented by [MapItem], for mocking and DI.
 type MapItemable interface {
-	Unwrap() *raw.MKMapItem
+	obj.Object
 	WithName(name string) *MapItem
 	WithPhoneNumber(phoneNumber string) *MapItem
 	WithUrl(url string) *MapItem
-	WithTimeZone(timeZone *foundation.NSTimeZone) *MapItem
-	WithPointOfInterestCategory(pointOfInterestCategory *foundation.NSString) *MapItem
-	OpenInMapsWithLaunchOptions(launchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID]) bool
-	OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool))
+	WithTimeZone(timeZone obj.Object) *MapItem
+	WithPointOfInterestCategory(pointOfInterestCategory obj.Object) *MapItem
+	OpenInMapsWithLaunchOptions(launchOptions obj.Object) bool
+	OpenInMapsWithLaunchOptionsCompletionHandler(launchOptions obj.Object, completion func(bool))
 	Identifier() *MapItemIdentifier
-	AlternateIdentifiers() *foundation.NSSet[*raw.MKMapItemIdentifier]
+	AlternateIdentifiers() obj.Object
 	Placemark() *Placemark
 	IsCurrentLocation() bool
-	Location() unsafe.Pointer
 	Address() *Address
 	AddressRepresentations() *AddressRepresentations
 	Name() string
 	SetName(name string)
 	PhoneNumber() string
 	SetPhoneNumber(phoneNumber string)
-	Url() *foundation.NSURL
+	Url() obj.Object
 	SetUrl(url string)
-	TimeZone() *foundation.NSTimeZone
-	SetTimeZone(timeZone *foundation.NSTimeZone)
-	PointOfInterestCategory() string
-	SetPointOfInterestCategory(pointOfInterestCategory *foundation.NSString)
+	TimeZone() obj.Object
+	SetTimeZone(timeZone obj.Object)
+	PointOfInterestCategory() obj.Object
+	SetPointOfInterestCategory(pointOfInterestCategory obj.Object)
 }
 
 var _ MapItemable = (*MapItem)(nil)

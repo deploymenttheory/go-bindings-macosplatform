@@ -5,117 +5,137 @@
 package fskit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A base type that identifies containers and volumes.
 //
-// EntityIdentifier wraps [raw.FSEntityIdentifier] with a fluent Go API.
+// EntityIdentifier is an idiomatic wrapper over the Objective-C class FSEntityIdentifier.
 type EntityIdentifier struct {
-	inner *raw.FSEntityIdentifier
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSEntityIdentifier].
-func (x *EntityIdentifier) Unwrap() *raw.FSEntityIdentifier { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EntityIdentifier) ID() objc.ID { return x.inner.Ptr() }
-
-// EntityIdentifierFromID adopts an existing object pointer as a EntityIdentifier (nil for 0).
+// EntityIdentifierFromID adopts an existing Objective-C object as a EntityIdentifier
+// (nil for 0), retaining it and registering a release finalizer.
 func EntityIdentifierFromID(id objc.ID) *EntityIdentifier {
 	if id == 0 {
 		return nil
 	}
-	return &EntityIdentifier{inner: raw.FSEntityIdentifierFromID(id)}
+	x := &EntityIdentifier{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEntityIdentifier creates a new [EntityIdentifier].
+// entityIdentifierAdopt wraps an Objective-C object that this code just created as a
+// EntityIdentifier (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func entityIdentifierAdopt(id objc.ID) *EntityIdentifier {
+	if id == 0 {
+		return nil
+	}
+	x := &EntityIdentifier{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EntityIdentifier) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EntityIdentifier) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EntityIdentifier) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEntityIdentifier creates a new EntityIdentifier.
 func NewEntityIdentifier() *EntityIdentifier {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSEntityIdentifier")), objc.RegisterName("new"))
-	return &EntityIdentifier{inner: raw.FSEntityIdentifierFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("FSEntityIdentifier")), objc.RegisterName("new"))
+	return entityIdentifierAdopt(_id)
 }
 
 // Creates an entity identifier with the given UUID.
 //
-// NewEntityIdentifierWithUUID creates a new [EntityIdentifier].
-func NewEntityIdentifierWithUUID(uuid *foundation.NSUUID) *EntityIdentifier {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSEntityIdentifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:"), uuid.Ptr())
-	return &EntityIdentifier{inner: raw.FSEntityIdentifierFromID(_id)}
+// NewEntityIdentifierWithUUID creates a new EntityIdentifier.
+func NewEntityIdentifierWithUUID(uuid obj.Object) *EntityIdentifier {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("FSEntityIdentifier")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:"), objref.IDOf(uuid))
+	return entityIdentifierAdopt(_id)
 }
 
 // Creates an entity identifier with the given UUID and qualifier data as a 64-bit unsigned integer.
 //
-// NewEntityIdentifierWithUUIDQualifier creates a new [EntityIdentifier].
-func NewEntityIdentifierWithUUIDQualifier(uuid *foundation.NSUUID, qualifier uint64) *EntityIdentifier {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSEntityIdentifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:qualifier:"), uuid.Ptr(), qualifier)
-	return &EntityIdentifier{inner: raw.FSEntityIdentifierFromID(_id)}
+// NewEntityIdentifierWithUUIDQualifier creates a new EntityIdentifier.
+func NewEntityIdentifierWithUUIDQualifier(uuid obj.Object, qualifier uint64) *EntityIdentifier {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("FSEntityIdentifier")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:qualifier:"), objref.IDOf(uuid), qualifier)
+	return entityIdentifierAdopt(_id)
 }
 
 // Creates an entity identifier with the given UUID and qualifier data.
 //
-// NewEntityIdentifierWithUUIDData creates a new [EntityIdentifier].
-func NewEntityIdentifierWithUUIDData(uuid *foundation.NSUUID, qualifierData *foundation.NSData) *EntityIdentifier {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSEntityIdentifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:data:"), uuid.Ptr(), qualifierData.Ptr())
-	return &EntityIdentifier{inner: raw.FSEntityIdentifierFromID(_id)}
+// NewEntityIdentifierWithUUIDData creates a new EntityIdentifier.
+func NewEntityIdentifierWithUUIDData(uuid obj.Object, qualifierData obj.Object) *EntityIdentifier {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("FSEntityIdentifier")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:data:"), objref.IDOf(uuid), objref.IDOf(qualifierData))
+	return entityIdentifierAdopt(_id)
 }
 
 // A UUID to uniquely identify this entity.
 //
-// WithUuid sets the uuid property and returns the receiver for chaining.
-func (x *EntityIdentifier) WithUuid(uuid *foundation.NSUUID) *EntityIdentifier {
-	x.inner.SetUuid(uuid)
+// WithUuid sets uuid and returns the receiver so calls can be chained.
+func (x *EntityIdentifier) WithUuid(uuid obj.Object) *EntityIdentifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUuid:"), objref.IDOf(uuid))
 	return x
 }
 
 // An optional piece of data to distinguish entities that otherwise share the same UUID.
 //
-// WithQualifier sets the qualifier property and returns the receiver for chaining.
-func (x *EntityIdentifier) WithQualifier(qualifier *foundation.NSData) *EntityIdentifier {
-	x.inner.SetQualifier(qualifier)
+// WithQualifier sets qualifier and returns the receiver so calls can be chained.
+func (x *EntityIdentifier) WithQualifier(qualifier obj.Object) *EntityIdentifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualifier:"), objref.IDOf(qualifier))
 	return x
 }
 
 // A UUID to uniquely identify this entity.
-//
-// Uuid calls the underlying Uuid.
-func (x *EntityIdentifier) Uuid() *foundation.NSUUID {
-	return x.inner.Uuid()
+func (x *EntityIdentifier) Uuid() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uuid"))
+	return obj.Wrap(_r)
 }
 
-// SetUuid calls the underlying SetUuid.
-func (x *EntityIdentifier) SetUuid(uuid *foundation.NSUUID) {
-	x.inner.SetUuid(uuid)
+func (x *EntityIdentifier) SetUuid(uuid obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUuid:"), objref.IDOf(uuid))
 }
 
 // An optional piece of data to distinguish entities that otherwise share the same UUID.
-//
-// Qualifier calls the underlying Qualifier.
-func (x *EntityIdentifier) Qualifier() *foundation.NSData {
-	return x.inner.Qualifier()
+func (x *EntityIdentifier) Qualifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("qualifier"))
+	return obj.Wrap(_r)
 }
 
-// SetQualifier calls the underlying SetQualifier.
-func (x *EntityIdentifier) SetQualifier(qualifier *foundation.NSData) {
-	x.inner.SetQualifier(qualifier)
+func (x *EntityIdentifier) SetQualifier(qualifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualifier:"), objref.IDOf(qualifier))
 }
-
-func (x *EntityIdentifier) asEntityIdentifier() *raw.FSEntityIdentifier { return x.inner }
 
 // EntityIdentifierable is the interface implemented by [EntityIdentifier], for mocking and DI.
 type EntityIdentifierable interface {
-	Unwrap() *raw.FSEntityIdentifier
-	WithUuid(uuid *foundation.NSUUID) *EntityIdentifier
-	WithQualifier(qualifier *foundation.NSData) *EntityIdentifier
-	Uuid() *foundation.NSUUID
-	SetUuid(uuid *foundation.NSUUID)
-	Qualifier() *foundation.NSData
-	SetQualifier(qualifier *foundation.NSData)
+	obj.Object
+	WithUuid(uuid obj.Object) *EntityIdentifier
+	WithQualifier(qualifier obj.Object) *EntityIdentifier
+	Uuid() obj.Object
+	SetUuid(uuid obj.Object)
+	Qualifier() obj.Object
+	SetQualifier(qualifier obj.Object)
 }
 
 var _ EntityIdentifierable = (*EntityIdentifier)(nil)

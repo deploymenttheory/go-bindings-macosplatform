@@ -5,386 +5,316 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A class that defines media formats and capture settings that capture devices support.
 //
-// CaptureDeviceFormat wraps [raw.AVCaptureDeviceFormat] with a fluent Go API.
+// CaptureDeviceFormat is an idiomatic wrapper over the Objective-C class AVCaptureDeviceFormat.
 type CaptureDeviceFormat struct {
-	inner *raw.AVCaptureDeviceFormat
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureDeviceFormat].
-func (x *CaptureDeviceFormat) Unwrap() *raw.AVCaptureDeviceFormat { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureDeviceFormat) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureDeviceFormatFromID adopts an existing object pointer as a CaptureDeviceFormat (nil for 0).
+// CaptureDeviceFormatFromID adopts an existing Objective-C object as a CaptureDeviceFormat
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureDeviceFormatFromID(id objc.ID) *CaptureDeviceFormat {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureDeviceFormat{inner: raw.AVCaptureDeviceFormatFromID(id)}
+	x := &CaptureDeviceFormat{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCaptureDeviceFormat creates a new [CaptureDeviceFormat].
-func NewCaptureDeviceFormat() *CaptureDeviceFormat {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureDeviceFormat")), objc.RegisterName("new"))
-	return &CaptureDeviceFormat{inner: raw.AVCaptureDeviceFormatFromID(_id)}
-}
-
-// @property mediaType @abstract An NSString describing the media type of an AVCaptureDevice active or supported format. @discussion Supported mediaTypes are listed in AVMediaFormat.h. This is a read-only property. The caller assumes no ownership of the returned value and should not CFRelease it.
-//
-// MediaType calls the underlying MediaType.
-func (x *CaptureDeviceFormat) MediaType() string {
-	_r := x.inner.MediaType()
-	if _r == nil {
-		return ""
+// captureDeviceFormatAdopt wraps an Objective-C object that this code just created as a
+// CaptureDeviceFormat (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureDeviceFormatAdopt(id objc.ID) *CaptureDeviceFormat {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &CaptureDeviceFormat{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property formatDescription @abstract A CMFormatDescription describing an AVCaptureDevice active or supported format. @discussion A CMFormatDescription describing an AVCaptureDevice active or supported format. This is a read-only property. The caller assumes no ownership of the returned value and should not CFRelease it.
-//
-// FormatDescription calls the underlying FormatDescription.
-func (x *CaptureDeviceFormat) FormatDescription() unsafe.Pointer {
-	return x.inner.FormatDescription()
+// Description returns the object's -description text.
+func (x *CaptureDeviceFormat) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property videoSupportedFrameRateRanges @abstract A property indicating the format's supported frame rate ranges. @discussion videoSupportedFrameRateRanges is an array of AVFrameRateRange objects, one for each of the format's supported video frame rate ranges.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureDeviceFormat) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureDeviceFormat) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptureDeviceFormat creates a new CaptureDeviceFormat.
+func NewCaptureDeviceFormat() *CaptureDeviceFormat {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureDeviceFormat")), objc.RegisterName("new"))
+	return captureDeviceFormatAdopt(_id)
+}
+
+// An NSString describing the media type of an AVCaptureDevice active or supported format. Supported mediaTypes are listed in AVMediaFormat.h. This is a read-only property. The caller assumes no ownership of the returned value and should not CFRelease it.
+func (x *CaptureDeviceFormat) MediaType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaType"))
+	return obj.Wrap(_r)
+}
+
+// A CMFormatDescription describing an AVCaptureDevice active or supported format. A CMFormatDescription describing an AVCaptureDevice active or supported format. This is a read-only property. The caller assumes no ownership of the returned value and should not CFRelease it.
+func (x *CaptureDeviceFormat) FormatDescription() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatDescription"))
+	return obj.Wrap(_r)
+}
+
+// A property indicating the format's supported frame rate ranges. videoSupportedFrameRateRanges is an array of AVFrameRateRange objects, one for each of the format's supported video frame rate ranges.
 //
 // VideoSupportedFrameRateRanges returns the collection as a Go slice.
 func (x *CaptureDeviceFormat) VideoSupportedFrameRateRanges() []*FrameRateRange {
-	arr := x.inner.VideoSupportedFrameRateRanges()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FrameRateRange {
-		return &FrameRateRange{inner: raw.AVFrameRateRangeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoSupportedFrameRateRanges"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FrameRateRange { return FrameRateRangeFromID(_id) })
 }
 
-// @property systemRecommendedVideoZoomRange @abstract Indicates the system's recommended zoom range for this device format. @discussion This property can be used to create a slider in your app's user interface to control the device's zoom with a system-recommended video zoom range. When a recommendation is not available, this property returns nil. Clients can key value observe AVCaptureDevice's minAvailableVideoZoomFactor and maxAvailableVideoZoomFactor properties to know when a device's supported zoom is restricted within the recommended zoom range. The value of this property is also used for the AVCaptureSystemZoomSlider's range.
-//
-// SystemRecommendedVideoZoomRange calls the underlying SystemRecommendedVideoZoomRange.
+// Indicates the system's recommended zoom range for this device format. This property can be used to create a slider in your app's user interface to control the device's zoom with a system-recommended video zoom range. When a recommendation is not available, this property returns nil. Clients can key value observe AVCaptureDevice's minAvailableVideoZoomFactor and maxAvailableVideoZoomFactor properties to know when a device's supported zoom is restricted within the recommended zoom range. The value of this property is also used for the AVCaptureSystemZoomSlider's range.
 func (x *CaptureDeviceFormat) SystemRecommendedVideoZoomRange() *ZoomRange {
-	_r := x.inner.SystemRecommendedVideoZoomRange()
-	if _r == nil {
-		return nil
-	}
-	return &ZoomRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("systemRecommendedVideoZoomRange"))
+	return ZoomRangeFromID(_r)
 }
 
-// @property systemRecommendedExposureBiasRange @abstract Indicates the system's recommended exposure bias range for this device format. @discussion This property can be used to create a slider in your app's user interface to control the device's exposure bias with a system-recommended exposure bias range. When a recommendation is not available, this property returns nil. The value of this property is also used for the AVCaptureSystemExposureBiasSlider's range.
-//
-// SystemRecommendedExposureBiasRange calls the underlying SystemRecommendedExposureBiasRange.
+// Indicates the system's recommended exposure bias range for this device format. This property can be used to create a slider in your app's user interface to control the device's exposure bias with a system-recommended exposure bias range. When a recommendation is not available, this property returns nil. The value of this property is also used for the AVCaptureSystemExposureBiasSlider's range.
 func (x *CaptureDeviceFormat) SystemRecommendedExposureBiasRange() *ExposureBiasRange {
-	_r := x.inner.SystemRecommendedExposureBiasRange()
-	if _r == nil {
-		return nil
-	}
-	return &ExposureBiasRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("systemRecommendedExposureBiasRange"))
+	return ExposureBiasRangeFromID(_r)
 }
 
-// @property highPhotoQualitySupported @abstract A boolean value specifying whether this format supports high photo quality when selecting an AVCapturePhotoQualityPrioritization of .balanced or .quality. @discussion If an AVCaptureDeviceFormat's highPhotoQualitySupported property is YES, the format produces higher image quality when selecting .balanced or .quality AVCapturePhotoQualityPrioritization compared to .speed. Such formats adhere to the following rules: - Photo requests with a prioritization of .speed produce the fastest image result (suitable for burst captures). - Photo requests with a prioritization of .balanced produce higher image quality without dropping frames if a video recording is underway. - Photo requests with a prioritization of .quality produce high image quality and may cause frame drops if a video recording is underway. For maximum backward compatibility, photo requests on high photo quality formats set to .quality only cause video frame drops if your app is linked on or after iOS 15. Formats that don't support high photo quality produce the same image quality whether you select .speed, .balanced, or .quality. Note that high photo quality is only attainable when using the AVCapturePhotoOutput with these supported formats.
-//
-// IsHighPhotoQualitySupported calls the underlying IsHighPhotoQualitySupported.
+// A boolean value specifying whether this format supports high photo quality when selecting an AVCapturePhotoQualityPrioritization of .balanced or .quality. If an AVCaptureDeviceFormat's highPhotoQualitySupported property is YES, the format produces higher image quality when selecting .balanced or .quality AVCapturePhotoQualityPrioritization compared to .speed. Such formats adhere to the following rules: - Photo requests with a prioritization of .speed produce the fastest image result (suitable for burst captures). - Photo requests with a prioritization of .balanced produce higher image quality without dropping frames if a video recording is underway. - Photo requests with a prioritization of .quality produce high image quality and may cause frame drops if a video recording is underway. For maximum backward compatibility, photo requests on high photo quality formats set to .quality only cause video frame drops if your app is linked on or after iOS 15. Formats that don't support high photo quality produce the same image quality whether you select .speed, .balanced, or .quality. Note that high photo quality is only attainable when using the AVCapturePhotoOutput with these supported formats.
 func (x *CaptureDeviceFormat) IsHighPhotoQualitySupported() bool {
-	return x.inner.IsHighPhotoQualitySupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHighPhotoQualitySupported"))
+	return _r
 }
 
-// @property autoFocusSystem @abstract A property indicating the autofocus system. @discussion This read-only property indicates the autofocus system.
-//
-// AutoFocusSystem calls the underlying AutoFocusSystem.
-func (x *CaptureDeviceFormat) AutoFocusSystem() AVCaptureAutoFocusSystem {
-	return AVCaptureAutoFocusSystem(x.inner.AutoFocusSystem())
+// A property indicating the autofocus system. This read-only property indicates the autofocus system.
+func (x *CaptureDeviceFormat) AutoFocusSystem() CaptureAutoFocusSystem {
+	_r := objc.Send[CaptureAutoFocusSystem](objref.IDOf(x), objc.RegisterName("autoFocusSystem"))
+	return _r
 }
 
-// @property supportedColorSpaces @abstract A property indicating the receiver's supported color spaces. @discussion This read-only property indicates the receiver's supported color spaces as an array of AVCaptureColorSpace constants sorted from narrow to wide color.
+// A property indicating the receiver's supported color spaces. This read-only property indicates the receiver's supported color spaces as an array of AVCaptureColorSpace constants sorted from narrow to wide color.
 //
 // SupportedColorSpaces returns the collection as a Go slice.
-func (x *CaptureDeviceFormat) SupportedColorSpaces() []*foundation.NSNumber {
-	arr := x.inner.SupportedColorSpaces()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *CaptureDeviceFormat) SupportedColorSpaces() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedColorSpaces"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @property supportedVideoZoomRangesForDepthDataDelivery @abstract This property returns the zoom ranges within which depth data can be delivered. @discussion Virtual devices support limited zoom ranges when delivering depth data to any output. If this device format has no -supportedDepthDataFormats, this property returns an empty array. The presence of one or more ranges where the min and max zoom factors are not equal means that "continuous zoom" with depth is supported. For example: a) ranges: @[ [2..2], [4..4] ] only zoom factors 2 and 4 are allowed to be set when depthDataDelivery is enabled. Any other zoom factor results in an exception. b) ranges: @[ [2..5] ] depthDataDelivery is supported with zoom factors [2..5]. Zoom factors outside of this range may be set, but will result in loss of depthDataDeliery. Whenever zoom is set back to a value within the range of [2..5], depthDataDelivery will resume. When depth data delivery is enabled, the effective videoZoomFactorUpscaleThreshold will be 1.0, meaning that all zoom factors that are not native zoom factors (see AVCaptureDevice.virtualDeviceSwitchOverVideoZoomFactors and AVCaptureDevice.secondaryNativeResolutionZoomFactors) result in digital upscaling.
+// This property returns the zoom ranges within which depth data can be delivered. Virtual devices support limited zoom ranges when delivering depth data to any output. If this device format has no -supportedDepthDataFormats, this property returns an empty array. The presence of one or more ranges where the min and max zoom factors are not equal means that "continuous zoom" with depth is supported. For example: a) ranges:
 //
 // SupportedVideoZoomRangesForDepthDataDelivery returns the collection as a Go slice.
 func (x *CaptureDeviceFormat) SupportedVideoZoomRangesForDepthDataDelivery() []*ZoomRange {
-	arr := x.inner.SupportedVideoZoomRangesForDepthDataDelivery()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ZoomRange {
-		return &ZoomRange{inner: raw.AVZoomRangeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedVideoZoomRangesForDepthDataDelivery"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ZoomRange { return ZoomRangeFromID(_id) })
 }
 
-// @property zoomFactorsOutsideOfVideoZoomRangesForDepthDeliverySupported @abstract This property returns whether the format supports zoom factors outside of the supportedVideoZoomFactorRangesForDepthDataDelivery. @discussion When a zoom factor outside of the supportedVideoZoomFactorRangesForDepthDataDelivery is set, depth data delivery will be suspended until a zoom factor within the supportedVideoZoomFactorRangesForDepthDataDelivery is set.
-//
-// ZoomFactorsOutsideOfVideoZoomRangesForDepthDeliverySupported calls the underlying ZoomFactorsOutsideOfVideoZoomRangesForDepthDeliverySupported.
+// This property returns whether the format supports zoom factors outside of the supportedVideoZoomFactorRangesForDepthDataDelivery. When a zoom factor outside of the supportedVideoZoomFactorRangesForDepthDataDelivery is set, depth data delivery will be suspended until a zoom factor within the supportedVideoZoomFactorRangesForDepthDataDelivery is set.
 func (x *CaptureDeviceFormat) ZoomFactorsOutsideOfVideoZoomRangesForDepthDeliverySupported() bool {
-	return x.inner.ZoomFactorsOutsideOfVideoZoomRangesForDepthDeliverySupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("zoomFactorsOutsideOfVideoZoomRangesForDepthDeliverySupported"))
+	return _r
 }
 
-// @property supportedMaxPhotoDimensions @abstract This property lists all of the supported maximum photo dimensions for this format. The array contains CMVideoDimensions structs encoded as NSValues. @discussion Enumerate all supported resolution settings for which this format may be configured to capture photos. Use these values to set AVCapturePhotoOutput.maxPhotoDimensions and AVCapturePhotoSettings.maxPhotoDimensions.
+// This property lists all of the supported maximum photo dimensions for this format. The array contains CMVideoDimensions structs encoded as NSValues. Enumerate all supported resolution settings for which this format may be configured to capture photos. Use these values to set AVCapturePhotoOutput.maxPhotoDimensions and AVCapturePhotoSettings.maxPhotoDimensions.
 //
 // SupportedMaxPhotoDimensions returns the collection as a Go slice.
-func (x *CaptureDeviceFormat) SupportedMaxPhotoDimensions() []*foundation.NSValue {
-	arr := x.inner.SupportedMaxPhotoDimensions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
-		return foundation.NSValueFromID(purego.Retain(_id))
-	})
+func (x *CaptureDeviceFormat) SupportedMaxPhotoDimensions() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedMaxPhotoDimensions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @property secondaryNativeResolutionZoomFactors @abstract Indicates zoom factors at which this device transitions to secondary native resolution modes. @discussion Devices with this property have the means to switch their pixel sampling mode on the fly to produce a high-fidelity, non-upsampled images at a fixed zoom factor beyond 1.0x.
+// Indicates zoom factors at which this device transitions to secondary native resolution modes. Devices with this property have the means to switch their pixel sampling mode on the fly to produce a high-fidelity, non-upsampled images at a fixed zoom factor beyond 1.0x.
 //
 // SecondaryNativeResolutionZoomFactors returns the collection as a Go slice.
-func (x *CaptureDeviceFormat) SecondaryNativeResolutionZoomFactors() []*foundation.NSNumber {
-	arr := x.inner.SecondaryNativeResolutionZoomFactors()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *CaptureDeviceFormat) SecondaryNativeResolutionZoomFactors() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("secondaryNativeResolutionZoomFactors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @property autoVideoFrameRateSupported @abstract Indicates whether the device format supports auto video frame rate. @discussion See -[AVCaptureDevice autoVideoFrameRateEnabled] (above) for a detailed description of the feature.
-//
-// IsAutoVideoFrameRateSupported calls the underlying IsAutoVideoFrameRateSupported.
+// Indicates whether the device format supports auto video frame rate. See -[AVCaptureDevice autoVideoFrameRateEnabled] (above) for a detailed description of the feature.
 func (x *CaptureDeviceFormat) IsAutoVideoFrameRateSupported() bool {
-	return x.inner.IsAutoVideoFrameRateSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAutoVideoFrameRateSupported"))
+	return _r
 }
 
-// IsSpatialVideoCaptureSupported calls the underlying IsSpatialVideoCaptureSupported.
 func (x *CaptureDeviceFormat) IsSpatialVideoCaptureSupported() bool {
-	return x.inner.IsSpatialVideoCaptureSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSpatialVideoCaptureSupported"))
+	return _r
 }
 
-// @property centerStageSupported @abstract Indicates whether the format supports the Center Stage feature. @discussion This property returns YES if the format supports "Center Stage", which automatically adjusts the camera to keep people optimally framed within the field of view. See +AVCaptureDevice.centerStageEnabled for a detailed discussion.
-//
-// IsCenterStageSupported calls the underlying IsCenterStageSupported.
+// Indicates whether the format supports the Center Stage feature. This property returns YES if the format supports "Center Stage", which automatically adjusts the camera to keep people optimally framed within the field of view. See +AVCaptureDevice.centerStageEnabled for a detailed discussion.
 func (x *CaptureDeviceFormat) IsCenterStageSupported() bool {
-	return x.inner.IsCenterStageSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCenterStageSupported"))
+	return _r
 }
 
-// @property videoMinZoomFactorForCenterStage @abstract Indicates the minimum zoom factor available for the AVCaptureDevice's videoZoomFactor property when centerStageActive is YES. @discussion Devices support a limited zoom range when Center Stage is active. If this device format does not support Center Stage, this property returns 1.0.
-//
-// VideoMinZoomFactorForCenterStage calls the underlying VideoMinZoomFactorForCenterStage.
+// Indicates the minimum zoom factor available for the AVCaptureDevice's videoZoomFactor property when centerStageActive is YES. Devices support a limited zoom range when Center Stage is active. If this device format does not support Center Stage, this property returns 1.0.
 func (x *CaptureDeviceFormat) VideoMinZoomFactorForCenterStage() float64 {
-	return x.inner.VideoMinZoomFactorForCenterStage()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("videoMinZoomFactorForCenterStage"))
+	return _r
 }
 
-// @property videoMaxZoomFactorForCenterStage @abstract Indicates the maximum zoom factor available for the AVCaptureDevice's videoZoomFactor property when centerStageActive is YES. @discussion Devices support a limited zoom range when Center Stage is active. If this device format does not support Center Stage, this property returns videoMaxZoomFactor.
-//
-// VideoMaxZoomFactorForCenterStage calls the underlying VideoMaxZoomFactorForCenterStage.
+// Indicates the maximum zoom factor available for the AVCaptureDevice's videoZoomFactor property when centerStageActive is YES. Devices support a limited zoom range when Center Stage is active. If this device format does not support Center Stage, this property returns videoMaxZoomFactor.
 func (x *CaptureDeviceFormat) VideoMaxZoomFactorForCenterStage() float64 {
-	return x.inner.VideoMaxZoomFactorForCenterStage()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("videoMaxZoomFactorForCenterStage"))
+	return _r
 }
 
-// @property videoFrameRateRangeForCenterStage @abstract Indicates the minimum / maximum frame rates available when centerStageActive is YES. @discussion Devices may support a limited frame rate range when Center Stage is active. If this device format does not support Center Stage, this property returns nil.
-//
-// VideoFrameRateRangeForCenterStage calls the underlying VideoFrameRateRangeForCenterStage.
+// Indicates the minimum / maximum frame rates available when centerStageActive is YES. Devices may support a limited frame rate range when Center Stage is active. If this device format does not support Center Stage, this property returns nil.
 func (x *CaptureDeviceFormat) VideoFrameRateRangeForCenterStage() *FrameRateRange {
-	_r := x.inner.VideoFrameRateRangeForCenterStage()
-	if _r == nil {
-		return nil
-	}
-	return &FrameRateRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoFrameRateRangeForCenterStage"))
+	return FrameRateRangeFromID(_r)
 }
 
-// @property portraitEffectSupported @abstract Indicates whether the format supports the Portrait Effect feature. @discussion This property returns YES if the format supports Portrait Effect, the application of a shallow depth of field effect to objects in the background. See +AVCaptureDevice.portraitEffectEnabled for a detailed discussion.
-//
-// IsPortraitEffectSupported calls the underlying IsPortraitEffectSupported.
+// Indicates whether the format supports the Portrait Effect feature. This property returns YES if the format supports Portrait Effect, the application of a shallow depth of field effect to objects in the background. See +AVCaptureDevice.portraitEffectEnabled for a detailed discussion.
 func (x *CaptureDeviceFormat) IsPortraitEffectSupported() bool {
-	return x.inner.IsPortraitEffectSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPortraitEffectSupported"))
+	return _r
 }
 
-// @property videoFrameRateRangeForPortraitEffect @abstract Indicates the minimum / maximum frame rates available when portraitEffectActive is YES. @discussion Devices may support a limited frame rate range when Portrait Effect is active. If this device format does not support Portrait Effect, this property returns nil.
-//
-// VideoFrameRateRangeForPortraitEffect calls the underlying VideoFrameRateRangeForPortraitEffect.
+// Indicates the minimum / maximum frame rates available when portraitEffectActive is YES. Devices may support a limited frame rate range when Portrait Effect is active. If this device format does not support Portrait Effect, this property returns nil.
 func (x *CaptureDeviceFormat) VideoFrameRateRangeForPortraitEffect() *FrameRateRange {
-	_r := x.inner.VideoFrameRateRangeForPortraitEffect()
-	if _r == nil {
-		return nil
-	}
-	return &FrameRateRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoFrameRateRangeForPortraitEffect"))
+	return FrameRateRangeFromID(_r)
 }
 
-// @property studioLightSupported @abstract Indicates whether the format supports the Studio Light feature. @discussion This property returns YES if the format supports Studio Light (artificial re-lighting of the subject's face). See +AVCaptureDevice.studioLightEnabled.
-//
-// IsStudioLightSupported calls the underlying IsStudioLightSupported.
+// Indicates whether the format supports the Studio Light feature. This property returns YES if the format supports Studio Light (artificial re-lighting of the subject's face). See +AVCaptureDevice.studioLightEnabled.
 func (x *CaptureDeviceFormat) IsStudioLightSupported() bool {
-	return x.inner.IsStudioLightSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStudioLightSupported"))
+	return _r
 }
 
-// @property videoFrameRateRangeForStudioLight @abstract Indicates the minimum / maximum frame rates available when studioLight is YES. @discussion Devices may support a limited frame rate range when Studio Light is active. If this device format does not support Studio Light, this property returns nil.
-//
-// VideoFrameRateRangeForStudioLight calls the underlying VideoFrameRateRangeForStudioLight.
+// Indicates the minimum / maximum frame rates available when studioLight is YES. Devices may support a limited frame rate range when Studio Light is active. If this device format does not support Studio Light, this property returns nil.
 func (x *CaptureDeviceFormat) VideoFrameRateRangeForStudioLight() *FrameRateRange {
-	_r := x.inner.VideoFrameRateRangeForStudioLight()
-	if _r == nil {
-		return nil
-	}
-	return &FrameRateRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoFrameRateRangeForStudioLight"))
+	return FrameRateRangeFromID(_r)
 }
 
-// @property reactionEffectsSupported @abstract Indicates whether the format supports the Reaction Effects feature. @discussion This property returns YES if the format supports Reaction Effects. See +AVCaptureDevice.reactionEffectsEnabled.
-//
-// ReactionEffectsSupported calls the underlying ReactionEffectsSupported.
+// Indicates whether the format supports the Reaction Effects feature. This property returns YES if the format supports Reaction Effects. See +AVCaptureDevice.reactionEffectsEnabled.
 func (x *CaptureDeviceFormat) ReactionEffectsSupported() bool {
-	return x.inner.ReactionEffectsSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reactionEffectsSupported"))
+	return _r
 }
 
-// @property videoFrameRateRangeForReactionEffectsInProgress @abstract Indicates the minimum / maximum frame rates available when a reaction effect is running. @discussion Unlike the other video effects, enabling reaction effects does not limit the stream's frame rate because most of the time no rendering is being performed. The frame rate will only ramp down when a reaction is actually being rendered on the stream (see AVCaptureDevice.reactionEffectsInProgress)
-//
-// VideoFrameRateRangeForReactionEffectsInProgress calls the underlying VideoFrameRateRangeForReactionEffectsInProgress.
+// Indicates the minimum / maximum frame rates available when a reaction effect is running. Unlike the other video effects, enabling reaction effects does not limit the stream's frame rate because most of the time no rendering is being performed. The frame rate will only ramp down when a reaction is actually being rendered on the stream (see AVCaptureDevice.reactionEffectsInProgress)
 func (x *CaptureDeviceFormat) VideoFrameRateRangeForReactionEffectsInProgress() *FrameRateRange {
-	_r := x.inner.VideoFrameRateRangeForReactionEffectsInProgress()
-	if _r == nil {
-		return nil
-	}
-	return &FrameRateRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoFrameRateRangeForReactionEffectsInProgress"))
+	return FrameRateRangeFromID(_r)
 }
 
-// @property backgroundReplacementSupported @abstract Indicates whether the format supports the Background Replacement feature. @discussion This property returns YES if the format supports Background Replacement background replacement. See +AVCaptureDevice.backgroundReplacementEnabled.
-//
-// IsBackgroundReplacementSupported calls the underlying IsBackgroundReplacementSupported.
+// Indicates whether the format supports the Background Replacement feature. This property returns YES if the format supports Background Replacement background replacement. See +AVCaptureDevice.backgroundReplacementEnabled.
 func (x *CaptureDeviceFormat) IsBackgroundReplacementSupported() bool {
-	return x.inner.IsBackgroundReplacementSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBackgroundReplacementSupported"))
+	return _r
 }
 
-// @property videoFrameRateRangeForBackgroundReplacement @abstract Indicates the minimum / maximum frame rates available when background replacement is active. @discussion Devices may support a limited frame rate range when Background Replacement is active. If this device format does not support Background Replacement, this property returns nil.
-//
-// VideoFrameRateRangeForBackgroundReplacement calls the underlying VideoFrameRateRangeForBackgroundReplacement.
+// Indicates the minimum / maximum frame rates available when background replacement is active. Devices may support a limited frame rate range when Background Replacement is active. If this device format does not support Background Replacement, this property returns nil.
 func (x *CaptureDeviceFormat) VideoFrameRateRangeForBackgroundReplacement() *FrameRateRange {
-	_r := x.inner.VideoFrameRateRangeForBackgroundReplacement()
-	if _r == nil {
-		return nil
-	}
-	return &FrameRateRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoFrameRateRangeForBackgroundReplacement"))
+	return FrameRateRangeFromID(_r)
 }
 
-// IsEdgeLightSupported calls the underlying IsEdgeLightSupported.
 func (x *CaptureDeviceFormat) IsEdgeLightSupported() bool {
-	return x.inner.IsEdgeLightSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEdgeLightSupported"))
+	return _r
 }
 
 // Indicates whether the format supports Cinematic Video capture. This property returns `true` if the format supports Cinematic Video that produces a controllable, simulated depth of field and adds beautiful focus transitions for a cinema-grade look.
-//
-// IsCinematicVideoCaptureSupported calls the underlying IsCinematicVideoCaptureSupported.
 func (x *CaptureDeviceFormat) IsCinematicVideoCaptureSupported() bool {
-	return x.inner.IsCinematicVideoCaptureSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCinematicVideoCaptureSupported"))
+	return _r
 }
 
 // Default shallow depth of field simulated aperture. This property return a non-zero value on devices that support the shallow depth of field effect.
-//
-// DefaultSimulatedAperture calls the underlying DefaultSimulatedAperture.
 func (x *CaptureDeviceFormat) DefaultSimulatedAperture() float32 {
-	return x.inner.DefaultSimulatedAperture()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("defaultSimulatedAperture"))
+	return _r
 }
 
 // Minimum supported shallow depth of field simulated aperture. On devices that do not support changing the simulated aperture value, this returns a value of `0`.
-//
-// MinSimulatedAperture calls the underlying MinSimulatedAperture.
 func (x *CaptureDeviceFormat) MinSimulatedAperture() float32 {
-	return x.inner.MinSimulatedAperture()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minSimulatedAperture"))
+	return _r
 }
 
 // Maximum supported shallow depth of field simulated aperture. On devices that do not support changing the simulated aperture value, this returns a value of `0`.
-//
-// MaxSimulatedAperture calls the underlying MaxSimulatedAperture.
 func (x *CaptureDeviceFormat) MaxSimulatedAperture() float32 {
-	return x.inner.MaxSimulatedAperture()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maxSimulatedAperture"))
+	return _r
 }
 
 // Indicates the minimum zoom factor available for the “AVCaptureDevice/videoZoomFactor“ property when Cinematic Video capture is enabled on the device input. Devices support a limited zoom range when Cinematic Video capture is active. If this device format does not support Cinematic Video capture, this property returns `1.0`.
-//
-// VideoMinZoomFactorForCinematicVideo calls the underlying VideoMinZoomFactorForCinematicVideo.
 func (x *CaptureDeviceFormat) VideoMinZoomFactorForCinematicVideo() float64 {
-	return x.inner.VideoMinZoomFactorForCinematicVideo()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("videoMinZoomFactorForCinematicVideo"))
+	return _r
 }
 
 // Indicates the maximum zoom factor available for the “AVCaptureDevice/videoZoomFactor“ property when Cinematic Video capture is enabled on the device input. Devices support a limited zoom range when Cinematic Video capture is active. If this device format does not support Cinematic Video capture, this property returns `1.0`.
-//
-// VideoMaxZoomFactorForCinematicVideo calls the underlying VideoMaxZoomFactorForCinematicVideo.
 func (x *CaptureDeviceFormat) VideoMaxZoomFactorForCinematicVideo() float64 {
-	return x.inner.VideoMaxZoomFactorForCinematicVideo()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("videoMaxZoomFactorForCinematicVideo"))
+	return _r
 }
 
 // Indicates the minimum / maximum frame rates available when Cinematic Video capture is enabled on the device input. Devices may support a limited frame rate range when Cinematic Video capture is active. If this device format does not support Cinematic Video capture, this property returns `nil`.
-//
-// VideoFrameRateRangeForCinematicVideo calls the underlying VideoFrameRateRangeForCinematicVideo.
 func (x *CaptureDeviceFormat) VideoFrameRateRangeForCinematicVideo() *FrameRateRange {
-	_r := x.inner.VideoFrameRateRangeForCinematicVideo()
-	if _r == nil {
-		return nil
-	}
-	return &FrameRateRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoFrameRateRangeForCinematicVideo"))
+	return FrameRateRangeFromID(_r)
 }
 
 // Indicates the horizontal field of view for an aspect ratio, either uncorrected or corrected for geometric distortion. A float indicating the field of view for the corresponding “AVCaptureAspectRatio“. Set “AVCaptureDevice/geometricDistortionCorrected“ to `true` to receive the field of view corrected for geometric distortion. If this device format does not support dynamic aspect ratio, this function returns `0`.
-//
-// VideoFieldOfViewForAspectRatioGeometricDistortionCorrected calls the underlying VideoFieldOfViewForAspectRatioGeometricDistortionCorrected.
-func (x *CaptureDeviceFormat) VideoFieldOfViewForAspectRatioGeometricDistortionCorrected(aspectRatio *foundation.NSString, geometricDistortionCorrected bool) float32 {
-	return x.inner.VideoFieldOfViewForAspectRatioGeometricDistortionCorrected(aspectRatio, geometricDistortionCorrected)
+func (x *CaptureDeviceFormat) VideoFieldOfViewForAspectRatioGeometricDistortionCorrected(aspectRatio obj.Object, geometricDistortionCorrected bool) float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("videoFieldOfViewForAspectRatio:geometricDistortionCorrected:"), objref.IDOf(aspectRatio), geometricDistortionCorrected)
+	return _r
 }
 
 // Indicates the supported aspect ratios for the device format. An array that describes the aspect ratios that are supported for this format. If this device format does not support dynamic aspect ratio, this property returns an empty array.
 //
 // SupportedDynamicAspectRatios returns the collection as a Go slice.
-func (x *CaptureDeviceFormat) SupportedDynamicAspectRatios() []*foundation.NSString {
-	arr := x.inner.SupportedDynamicAspectRatios()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *CaptureDeviceFormat) SupportedDynamicAspectRatios() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedDynamicAspectRatios"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// IsSmartFramingSupported calls the underlying IsSmartFramingSupported.
 func (x *CaptureDeviceFormat) IsSmartFramingSupported() bool {
-	return x.inner.IsSmartFramingSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSmartFramingSupported"))
+	return _r
 }
 
-// IsCameraLensSmudgeDetectionSupported calls the underlying IsCameraLensSmudgeDetectionSupported.
 func (x *CaptureDeviceFormat) IsCameraLensSmudgeDetectionSupported() bool {
-	return x.inner.IsCameraLensSmudgeDetectionSupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCameraLensSmudgeDetectionSupported"))
+	return _r
 }
 
 // CaptureDeviceFormatable is the interface implemented by [CaptureDeviceFormat], for mocking and DI.
 type CaptureDeviceFormatable interface {
-	Unwrap() *raw.AVCaptureDeviceFormat
-	MediaType() string
-	FormatDescription() unsafe.Pointer
+	obj.Object
+	MediaType() obj.Object
+	FormatDescription() obj.Object
 	VideoSupportedFrameRateRanges() []*FrameRateRange
 	SystemRecommendedVideoZoomRange() *ZoomRange
 	SystemRecommendedExposureBiasRange() *ExposureBiasRange
 	IsHighPhotoQualitySupported() bool
-	AutoFocusSystem() AVCaptureAutoFocusSystem
-	SupportedColorSpaces() []*foundation.NSNumber
+	AutoFocusSystem() CaptureAutoFocusSystem
+	SupportedColorSpaces() []obj.Object
 	SupportedVideoZoomRangesForDepthDataDelivery() []*ZoomRange
 	ZoomFactorsOutsideOfVideoZoomRangesForDepthDeliverySupported() bool
-	SupportedMaxPhotoDimensions() []*foundation.NSValue
-	SecondaryNativeResolutionZoomFactors() []*foundation.NSNumber
+	SupportedMaxPhotoDimensions() []obj.Object
+	SecondaryNativeResolutionZoomFactors() []obj.Object
 	IsAutoVideoFrameRateSupported() bool
 	IsSpatialVideoCaptureSupported() bool
 	IsCenterStageSupported() bool
@@ -407,8 +337,8 @@ type CaptureDeviceFormatable interface {
 	VideoMinZoomFactorForCinematicVideo() float64
 	VideoMaxZoomFactorForCinematicVideo() float64
 	VideoFrameRateRangeForCinematicVideo() *FrameRateRange
-	VideoFieldOfViewForAspectRatioGeometricDistortionCorrected(aspectRatio *foundation.NSString, geometricDistortionCorrected bool) float32
-	SupportedDynamicAspectRatios() []*foundation.NSString
+	VideoFieldOfViewForAspectRatioGeometricDistortionCorrected(aspectRatio obj.Object, geometricDistortionCorrected bool) float32
+	SupportedDynamicAspectRatios() []obj.Object
 	IsSmartFramingSupported() bool
 	IsCameraLensSmudgeDetectionSupported() bool
 }

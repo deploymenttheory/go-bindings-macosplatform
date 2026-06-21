@@ -5,95 +5,116 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that monitors average and peak power levels for an audio channel in a capture connection.
 //
-// CaptureAudioChannel wraps [raw.AVCaptureAudioChannel] with a fluent Go API.
+// CaptureAudioChannel is an idiomatic wrapper over the Objective-C class AVCaptureAudioChannel.
 type CaptureAudioChannel struct {
-	inner *raw.AVCaptureAudioChannel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureAudioChannel].
-func (x *CaptureAudioChannel) Unwrap() *raw.AVCaptureAudioChannel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureAudioChannel) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureAudioChannelFromID adopts an existing object pointer as a CaptureAudioChannel (nil for 0).
+// CaptureAudioChannelFromID adopts an existing Objective-C object as a CaptureAudioChannel
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureAudioChannelFromID(id objc.ID) *CaptureAudioChannel {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureAudioChannel{inner: raw.AVCaptureAudioChannelFromID(id)}
+	x := &CaptureAudioChannel{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCaptureAudioChannel creates a new [CaptureAudioChannel].
+// captureAudioChannelAdopt wraps an Objective-C object that this code just created as a
+// CaptureAudioChannel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureAudioChannelAdopt(id objc.ID) *CaptureAudioChannel {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureAudioChannel{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptureAudioChannel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureAudioChannel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureAudioChannel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptureAudioChannel creates a new CaptureAudioChannel.
 func NewCaptureAudioChannel() *CaptureAudioChannel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureAudioChannel")), objc.RegisterName("new"))
-	return &CaptureAudioChannel{inner: raw.AVCaptureAudioChannelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureAudioChannel")), objc.RegisterName("new"))
+	return captureAudioChannelAdopt(_id)
 }
 
 // The current volume (gain) of the channel.
 //
-// WithVolume sets the volume property and returns the receiver for chaining.
+// WithVolume sets volume and returns the receiver so calls can be chained.
 func (x *CaptureAudioChannel) WithVolume(volume float32) *CaptureAudioChannel {
-	x.inner.SetVolume(volume)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 	return x
 }
 
 // A Boolean value that indicates whether the channel is in an enabled state.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *CaptureAudioChannel) WithEnabled(enabled bool) *CaptureAudioChannel {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// @property averagePowerLevel @abstract A measurement of the instantaneous average power level of the audio flowing through the receiver. @discussion A client may poll an AVCaptureAudioChannel object for its current averagePowerLevel to get its instantaneous average power level in decibels. This property is not key-value observable.
-//
-// AveragePowerLevel calls the underlying AveragePowerLevel.
+// A measurement of the instantaneous average power level of the audio flowing through the receiver. A client may poll an AVCaptureAudioChannel object for its current averagePowerLevel to get its instantaneous average power level in decibels. This property is not key-value observable.
 func (x *CaptureAudioChannel) AveragePowerLevel() float32 {
-	return x.inner.AveragePowerLevel()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("averagePowerLevel"))
+	return _r
 }
 
-// @property peakHoldLevel @abstract A measurement of the peak/hold level of the audio flowing through the receiver. @discussion A client may poll an AVCaptureAudioChannel object for its current peakHoldLevel to get its most recent peak hold level in decibels. This property is not key-value observable.
-//
-// PeakHoldLevel calls the underlying PeakHoldLevel.
+// A measurement of the peak/hold level of the audio flowing through the receiver. A client may poll an AVCaptureAudioChannel object for its current peakHoldLevel to get its most recent peak hold level in decibels. This property is not key-value observable.
 func (x *CaptureAudioChannel) PeakHoldLevel() float32 {
-	return x.inner.PeakHoldLevel()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("peakHoldLevel"))
+	return _r
 }
 
-// @property volume @abstract A property indicating the current volume (gain) of the receiver. @discussion The volume property indicates the current volume or gain of the receiver as a floating point value between 0.0 -> 1.0. If you desire to boost the gain in software, you may specify a a value greater than 1.0.
-//
-// Volume calls the underlying Volume.
+// A property indicating the current volume (gain) of the receiver. The volume property indicates the current volume or gain of the receiver as a floating point value between 0.0 -> 1.0. If you desire to boost the gain in software, you may specify a a value greater than 1.0.
 func (x *CaptureAudioChannel) Volume() float32 {
-	return x.inner.Volume()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("volume"))
+	return _r
 }
 
-// SetVolume calls the underlying SetVolume.
 func (x *CaptureAudioChannel) SetVolume(volume float32) {
-	x.inner.SetVolume(volume)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 }
 
-// @property enabled @abstract A property indicating whether the receiver is currently enabled for data capture. @discussion By default, all AVCaptureAudioChannel objects exposed by a connection are enabled. You may set enabled to NO to stop the flow of data for a particular AVCaptureAudioChannel.
-//
-// IsEnabled calls the underlying IsEnabled.
+// A property indicating whether the receiver is currently enabled for data capture. By default, all AVCaptureAudioChannel objects exposed by a connection are enabled. You may set enabled to NO to stop the flow of data for a particular AVCaptureAudioChannel.
 func (x *CaptureAudioChannel) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// SetEnabled calls the underlying SetEnabled.
 func (x *CaptureAudioChannel) SetEnabled(enabled bool) {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
 // CaptureAudioChannelable is the interface implemented by [CaptureAudioChannel], for mocking and DI.
 type CaptureAudioChannelable interface {
-	Unwrap() *raw.AVCaptureAudioChannel
+	obj.Object
 	WithVolume(volume float32) *CaptureAudioChannel
 	WithEnabled(enabled bool) *CaptureAudioChannel
 	AveragePowerLevel() float32

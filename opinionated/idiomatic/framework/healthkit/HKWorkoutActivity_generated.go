@@ -5,132 +5,136 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that describes an activity within a longer workout.
 //
-// WorkoutActivity wraps [raw.HKWorkoutActivity] with a fluent Go API.
+// WorkoutActivity is an idiomatic wrapper over the Objective-C class HKWorkoutActivity.
 type WorkoutActivity struct {
-	inner *raw.HKWorkoutActivity
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKWorkoutActivity].
-func (x *WorkoutActivity) Unwrap() *raw.HKWorkoutActivity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WorkoutActivity) ID() objc.ID { return x.inner.Ptr() }
-
-// WorkoutActivityFromID adopts an existing object pointer as a WorkoutActivity (nil for 0).
+// WorkoutActivityFromID adopts an existing Objective-C object as a WorkoutActivity
+// (nil for 0), retaining it and registering a release finalizer.
 func WorkoutActivityFromID(id objc.ID) *WorkoutActivity {
 	if id == 0 {
 		return nil
 	}
-	return &WorkoutActivity{inner: raw.HKWorkoutActivityFromID(id)}
+	x := &WorkoutActivity{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// workoutActivityAdopt wraps an Objective-C object that this code just created as a
+// WorkoutActivity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func workoutActivityAdopt(id objc.ID) *WorkoutActivity {
+	if id == 0 {
+		return nil
+	}
+	x := &WorkoutActivity{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WorkoutActivity) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WorkoutActivity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WorkoutActivity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a workout activity using the provided configuration, start date, end date, and metadata.
 //
-// NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata creates a new [WorkoutActivity].
-func NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata(workoutConfiguration *raw.HKWorkoutConfiguration, startDate *foundation.NSDate, endDate *foundation.NSDate, metadata purego.IDer) *WorkoutActivity {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWorkoutActivity")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWorkoutConfiguration:startDate:endDate:metadata:"), workoutConfiguration.Ptr(), startDate.Ptr(), endDate.Ptr(), metadata.ID())
-	return &WorkoutActivity{inner: raw.HKWorkoutActivityFromID(_id)}
+// NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata creates a new WorkoutActivity.
+func NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata(workoutConfiguration *WorkoutConfiguration, startDate obj.Object, endDate obj.Object, metadata obj.Object) *WorkoutActivity {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKWorkoutActivity")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWorkoutConfiguration:startDate:endDate:metadata:"), objref.IDOf(workoutConfiguration), objref.IDOf(startDate), objref.IDOf(endDate), objref.IDOf(metadata))
+	return workoutActivityAdopt(_id)
 }
 
 // Returns the activity’s statistics for the provided quantity type.
-//
-// StatisticsForType calls the underlying StatisticsForType.
-func (x *WorkoutActivity) StatisticsForType(quantityType *raw.HKQuantityType) *Statistics {
-	_r := x.inner.StatisticsForType(quantityType)
-	if _r == nil {
-		return nil
-	}
-	return &Statistics{inner: _r}
+func (x *WorkoutActivity) StatisticsForType(quantityType *QuantityType) *Statistics {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statisticsForType:"), objref.IDOf(quantityType))
+	return StatisticsFromID(_r)
 }
 
-// @property      UUID @abstract      A unique identifier of the activity in the HealthKit database.
-//
-// UUID calls the underlying UUID.
-func (x *WorkoutActivity) UUID() *foundation.NSUUID {
-	return x.inner.UUID()
+// A unique identifier of the activity in the HealthKit database.
+func (x *WorkoutActivity) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
+	return obj.Wrap(_r)
 }
 
-// @property      workoutConfiguration @abstract      The configuration object describing the workout activity.
-//
-// WorkoutConfiguration calls the underlying WorkoutConfiguration.
+// The configuration object describing the workout activity.
 func (x *WorkoutActivity) WorkoutConfiguration() *WorkoutConfiguration {
-	_r := x.inner.WorkoutConfiguration()
-	if _r == nil {
-		return nil
-	}
-	return &WorkoutConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workoutConfiguration"))
+	return WorkoutConfigurationFromID(_r)
 }
 
-// @property      startDate @abstract      The point in time when the workout activity was started.
-//
-// StartDate calls the underlying StartDate.
-func (x *WorkoutActivity) StartDate() *foundation.NSDate {
-	return x.inner.StartDate()
+// The point in time when the workout activity was started.
+func (x *WorkoutActivity) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+	return obj.Wrap(_r)
 }
 
-// @property      endDate @abstract      The point in time when the workout activity was ended. @discussion    This value is nil when a workout activity is in progress.
-//
-// EndDate calls the underlying EndDate.
-func (x *WorkoutActivity) EndDate() *foundation.NSDate {
-	return x.inner.EndDate()
+// The point in time when the workout activity was ended. This value is nil when a workout activity is in progress.
+func (x *WorkoutActivity) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+	return obj.Wrap(_r)
 }
 
-// @property      metadata @abstract      Extra information describing properties of the workout activity. @discussion    Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
-//
-// Metadata calls the underlying Metadata.
-func (x *WorkoutActivity) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.Metadata()
+// Extra information describing properties of the workout activity. Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
+func (x *WorkoutActivity) Metadata() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+	return obj.Wrap(_r)
 }
 
-// @property      duration @abstract      The length of time that the workout activity was recording @discussion    The duration is derived from the start and end dates of the activity and takes into account periods that the activity was paused. Periods that the activity was paused are based off of the workoutEvents property of the parent workout object.
-//
-// Duration calls the underlying Duration.
+// The length of time that the workout activity was recording The duration is derived from the start and end dates of the activity and takes into account periods that the activity was paused. Periods that the activity was paused are based off of the workoutEvents property of the parent workout object.
 func (x *WorkoutActivity) Duration() float64 {
-	return x.inner.Duration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+	return _r
 }
 
-// @property      workoutEvents @abstract      An array of HKWorkoutEvents that occurred during the workout activity. @discussion    These events will be ordered by date in ascending order. These events are a subset of the workout events that take place between the start date and end date of the activity. This includes any event that overlaps the activity, even partially. Consequently, some events may be included in more than one activity.
+// An array of HKWorkoutEvents that occurred during the workout activity. These events will be ordered by date in ascending order. These events are a subset of the workout events that take place between the start date and end date of the activity. This includes any event that overlaps the activity, even partially. Consequently, some events may be included in more than one activity.
 //
 // WorkoutEvents returns the collection as a Go slice.
 func (x *WorkoutActivity) WorkoutEvents() []*WorkoutEvent {
-	arr := x.inner.WorkoutEvents()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *WorkoutEvent {
-		return &WorkoutEvent{inner: raw.HKWorkoutEventFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workoutEvents"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WorkoutEvent { return WorkoutEventFromID(_id) })
 }
 
-// @property      allStatistics @abstract      A dictionary of statistics per quantity type during the activity @discussion    This dictionary will contain HKStatistics objects containing the statistics by quantity sample type for all of the samples that have been added to the workout within the date interval of this activity.
-//
-// AllStatistics calls the underlying AllStatistics.
-func (x *WorkoutActivity) AllStatistics() *foundation.NSDictionary[*raw.HKQuantityType, *raw.HKStatistics] {
-	return x.inner.AllStatistics()
+// A dictionary of statistics per quantity type during the activity This dictionary will contain HKStatistics objects containing the statistics by quantity sample type for all of the samples that have been added to the workout within the date interval of this activity.
+func (x *WorkoutActivity) AllStatistics() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allStatistics"))
+	return obj.Wrap(_r)
 }
 
 // WorkoutActivityable is the interface implemented by [WorkoutActivity], for mocking and DI.
 type WorkoutActivityable interface {
-	Unwrap() *raw.HKWorkoutActivity
-	StatisticsForType(quantityType *raw.HKQuantityType) *Statistics
-	UUID() *foundation.NSUUID
+	obj.Object
+	StatisticsForType(quantityType *QuantityType) *Statistics
+	UUID() obj.Object
 	WorkoutConfiguration() *WorkoutConfiguration
-	StartDate() *foundation.NSDate
-	EndDate() *foundation.NSDate
-	Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	StartDate() obj.Object
+	EndDate() obj.Object
+	Metadata() obj.Object
 	Duration() float64
 	WorkoutEvents() []*WorkoutEvent
-	AllStatistics() *foundation.NSDictionary[*raw.HKQuantityType, *raw.HKStatistics]
+	AllStatistics() obj.Object
 }
 
 var _ WorkoutActivityable = (*WorkoutActivity)(nil)

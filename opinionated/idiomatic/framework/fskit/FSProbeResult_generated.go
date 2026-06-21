@@ -5,72 +5,90 @@
 package fskit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents the results of a specific probe.
 //
-// ProbeResult wraps [raw.FSProbeResult] with a fluent Go API.
+// ProbeResult is an idiomatic wrapper over the Objective-C class FSProbeResult.
 type ProbeResult struct {
-	inner *raw.FSProbeResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSProbeResult].
-func (x *ProbeResult) Unwrap() *raw.FSProbeResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProbeResult) ID() objc.ID { return x.inner.Ptr() }
-
-// ProbeResultFromID adopts an existing object pointer as a ProbeResult (nil for 0).
+// ProbeResultFromID adopts an existing Objective-C object as a ProbeResult
+// (nil for 0), retaining it and registering a release finalizer.
 func ProbeResultFromID(id objc.ID) *ProbeResult {
 	if id == 0 {
 		return nil
 	}
-	return &ProbeResult{inner: raw.FSProbeResultFromID(id)}
+	x := &ProbeResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewProbeResult creates a new [ProbeResult].
+// probeResultAdopt wraps an Objective-C object that this code just created as a
+// ProbeResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func probeResultAdopt(id objc.ID) *ProbeResult {
+	if id == 0 {
+		return nil
+	}
+	x := &ProbeResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ProbeResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ProbeResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ProbeResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewProbeResult creates a new ProbeResult.
 func NewProbeResult() *ProbeResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSProbeResult")), objc.RegisterName("new"))
-	return &ProbeResult{inner: raw.FSProbeResultFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("FSProbeResult")), objc.RegisterName("new"))
+	return probeResultAdopt(_id)
 }
 
 // The match result, representing the recognition and usability of a probed resource.
-//
-// Result calls the underlying Result.
-func (x *ProbeResult) Result() FSMatchResult {
-	return FSMatchResult(x.inner.Result())
+func (x *ProbeResult) Result() MatchResult {
+	_r := objc.Send[MatchResult](objref.IDOf(x), objc.RegisterName("result"))
+	return _r
 }
 
 // The resource name, as found during the probe operation. This value is non-`nil` unless the “FSProbeResult/result“ is “FSMatchResult/notRecognized`. For formats that lack a name, this value may be an empty string. This value can also be an empty string if the format supports a name, but the value isn't set yet.
-//
-// Name calls the underlying Name.
 func (x *ProbeResult) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The container identifier, as found during the probe operation. This value is non-`nil` unless the “FSProbeResult/result“ is “FSMatchResult/notRecognized“. For formats that lack a durable UUID on which to base a container identifier --- which is only legal for a “FSUnaryFileSystem“ --- this value may be a random UUID.
-//
-// ContainerID calls the underlying ContainerID.
 func (x *ProbeResult) ContainerID() *ContainerIdentifier {
-	_r := x.inner.ContainerID()
-	if _r == nil {
-		return nil
-	}
-	return &ContainerIdentifier{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerID"))
+	return ContainerIdentifierFromID(_r)
 }
 
 // ProbeResultable is the interface implemented by [ProbeResult], for mocking and DI.
 type ProbeResultable interface {
-	Unwrap() *raw.FSProbeResult
-	Result() FSMatchResult
+	obj.Object
+	Result() MatchResult
 	Name() string
 	ContainerID() *ContainerIdentifier
 }

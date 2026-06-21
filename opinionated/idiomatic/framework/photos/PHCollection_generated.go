@@ -5,73 +5,93 @@
 package photos
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The abstract superclass for Photos asset collections and collection lists.
 //
-// Collection wraps [raw.PHCollection] with a fluent Go API.
+// Collection is an idiomatic wrapper over the Objective-C class PHCollection.
 type Collection struct {
-	inner *raw.PHCollection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHCollection].
-func (x *Collection) Unwrap() *raw.PHCollection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Collection) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionFromID adopts an existing object pointer as a Collection (nil for 0).
+// CollectionFromID adopts an existing Objective-C object as a Collection
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionFromID(id objc.ID) *Collection {
 	if id == 0 {
 		return nil
 	}
-	return &Collection{inner: raw.PHCollectionFromID(id)}
+	x := &Collection{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCollection creates a new [Collection].
+// collectionAdopt wraps an Objective-C object that this code just created as a
+// Collection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionAdopt(id objc.ID) *Collection {
+	if id == 0 {
+		return nil
+	}
+	x := &Collection{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Collection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Collection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Collection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCollection creates a new Collection.
 func NewCollection() *Collection {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHCollection")), objc.RegisterName("new"))
-	return &Collection{inner: raw.PHCollectionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHCollection")), objc.RegisterName("new"))
+	return collectionAdopt(_id)
 }
 
 // Returns whether the collection supports the specified editing operation.
-//
-// CanPerformEditOperation calls the underlying CanPerformEditOperation.
-func (x *Collection) CanPerformEditOperation(anOperation PHCollectionEditOperation) bool {
-	return x.inner.CanPerformEditOperation(raw.PHCollectionEditOperation(anOperation))
+func (x *Collection) CanPerformEditOperation(anOperation CollectionEditOperation) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPerformEditOperation:"), anOperation)
+	return _r
 }
 
-// CanContainAssets calls the underlying CanContainAssets.
 func (x *Collection) CanContainAssets() bool {
-	return x.inner.CanContainAssets()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canContainAssets"))
+	return _r
 }
 
-// CanContainCollections calls the underlying CanContainCollections.
 func (x *Collection) CanContainCollections() bool {
-	return x.inner.CanContainCollections()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canContainCollections"))
+	return _r
 }
 
-// LocalizedTitle calls the underlying LocalizedTitle.
 func (x *Collection) LocalizedTitle() string {
-	_r := x.inner.LocalizedTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *Collection) asCollection() *raw.PHCollection { return x.inner }
-
-func (x *Collection) asObject() *raw.PHObject { return &x.inner.PHObject }
 
 // Collectionable is the interface implemented by [Collection], for mocking and DI.
 type Collectionable interface {
-	Unwrap() *raw.PHCollection
-	CanPerformEditOperation(anOperation PHCollectionEditOperation) bool
+	obj.Object
+	CanPerformEditOperation(anOperation CollectionEditOperation) bool
 	CanContainAssets() bool
 	CanContainCollections() bool
 	LocalizedTitle() string

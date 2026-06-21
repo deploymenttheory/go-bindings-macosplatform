@@ -5,146 +5,155 @@
 package coreimage
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The Core Image class that defines a color object.
 //
-// Color wraps [raw.CIColor] with a fluent Go API.
+// Color is an idiomatic wrapper over the Objective-C class CIColor.
 type Color struct {
-	inner *raw.CIColor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CIColor].
-func (x *Color) Unwrap() *raw.CIColor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Color) ID() objc.ID { return x.inner.Ptr() }
-
-// ColorFromID adopts an existing object pointer as a Color (nil for 0).
+// ColorFromID adopts an existing Objective-C object as a Color
+// (nil for 0), retaining it and registering a release finalizer.
 func ColorFromID(id objc.ID) *Color {
 	if id == 0 {
 		return nil
 	}
-	return &Color{inner: raw.CIColorFromID(id)}
+	x := &Color{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// colorAdopt wraps an Objective-C object that this code just created as a
+// Color (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func colorAdopt(id objc.ID) *Color {
+	if id == 0 {
+		return nil
+	}
+	x := &Color{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Color) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Color) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Color) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Create a Core Image color object with a Core Graphics color object.
 //
-// NewColorWithCGColor creates a new [Color].
-func NewColorWithCGColor(color unsafe.Pointer) *Color {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIColor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGColor:"), color)
-	return &Color{inner: raw.CIColorFromID(_id)}
+// NewColorWithCGColor creates a new Color.
+func NewColorWithCGColor(color obj.Object) *Color {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGColor:"), objref.IDOf(color))
+	return colorAdopt(_id)
 }
 
 // Initialize a Core Image color object in the sRGB color space with the specified red, green, blue, and alpha component values.
 //
-// NewColorWithRedGreenBlueAlpha creates a new [Color].
+// NewColorWithRedGreenBlueAlpha creates a new Color.
 func NewColorWithRedGreenBlueAlpha(red float64, green float64, blue float64, alpha float64) *Color {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIColor")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRed:green:blue:alpha:"), red, green, blue, alpha)
-	return &Color{inner: raw.CIColorFromID(_id)}
+	return colorAdopt(_id)
 }
 
 // Initialize a Core Image color object in the sRGB color space with the specified red, green, and blue component values.
 //
-// NewColorWithRedGreenBlue creates a new [Color].
+// NewColorWithRedGreenBlue creates a new Color.
 func NewColorWithRedGreenBlue(red float64, green float64, blue float64) *Color {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIColor")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRed:green:blue:"), red, green, blue)
-	return &Color{inner: raw.CIColorFromID(_id)}
+	return colorAdopt(_id)
 }
 
 // Initialize a Core Image color object with the specified red, green, and blue component values as measured in the specified color space.
 //
-// NewColorWithRedGreenBlueAlphaColorSpace creates a new [Color].
-func NewColorWithRedGreenBlueAlphaColorSpace(red float64, green float64, blue float64, alpha float64, colorSpace unsafe.Pointer) *Color {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIColor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRed:green:blue:alpha:colorSpace:"), red, green, blue, alpha, colorSpace)
-	return &Color{inner: raw.CIColorFromID(_id)}
+// NewColorWithRedGreenBlueAlphaColorSpace creates a new Color.
+func NewColorWithRedGreenBlueAlphaColorSpace(red float64, green float64, blue float64, alpha float64, colorSpace obj.Object) *Color {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRed:green:blue:alpha:colorSpace:"), red, green, blue, alpha, objref.IDOf(colorSpace))
+	return colorAdopt(_id)
 }
 
 // Initialize a Core Image color object with the specified red, green, and blue component values as measured in the specified color space.
 //
-// NewColorWithRedGreenBlueColorSpace creates a new [Color].
-func NewColorWithRedGreenBlueColorSpace(red float64, green float64, blue float64, colorSpace unsafe.Pointer) *Color {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIColor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRed:green:blue:colorSpace:"), red, green, blue, colorSpace)
-	return &Color{inner: raw.CIColorFromID(_id)}
+// NewColorWithRedGreenBlueColorSpace creates a new Color.
+func NewColorWithRedGreenBlueColorSpace(red float64, green float64, blue float64, colorSpace obj.Object) *Color {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIColor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRed:green:blue:colorSpace:"), red, green, blue, objref.IDOf(colorSpace))
+	return colorAdopt(_id)
 }
 
 // Returns the color components of the color including alpha. This number includes the alpha component if the color contains one. Typically this number will be `4` for red, green, blue, and alpha. If the “CIColor“ was initialized with a `CGColor` then the number will be the same as calling `CGColorGetNumberOfComponents()`
-//
-// NumberOfComponents calls the underlying NumberOfComponents.
-func (x *Color) NumberOfComponents() uint {
-	return x.inner.NumberOfComponents()
-}
-
-// Return a pointer to an array of `CGFloat` values including alpha. Typically this array will contain `4` `CGFloat` values for red, green, blue, and alpha. If the “CIColor“ was initialized with a `CGColor` then returned pointer will be the same as calling `CGColorGetComponents()`
-//
-// Components calls the underlying Components.
-func (x *Color) Components() unsafe.Pointer {
-	return x.inner.Components()
+func (x *Color) NumberOfComponents() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfComponents"))
+	return _r
 }
 
 // Returns the alpha value of the color.
-//
-// Alpha calls the underlying Alpha.
 func (x *Color) Alpha() float64 {
-	return x.inner.Alpha()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
+	return _r
 }
 
 // Returns the `CGColorSpace` associated with the color
-//
-// ColorSpace calls the underlying ColorSpace.
-func (x *Color) ColorSpace() unsafe.Pointer {
-	return x.inner.ColorSpace()
+func (x *Color) ColorSpace() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorSpace"))
+	return obj.Wrap(_r)
 }
 
 // Returns the unpremultiplied red component of the color. If the “CIColor“ was initialized with a `CGColor` in a non-RGB `CGColorSpace` then it will be converted to sRGB to get the red component.
-//
-// Red calls the underlying Red.
 func (x *Color) Red() float64 {
-	return x.inner.Red()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("red"))
+	return _r
 }
 
 // Returns the unpremultiplied green component of the color. If the “CIColor“ was initialized with a `CGColor` in a non-RGB `CGColorSpace` then it will be converted to sRGB to get the green component.
-//
-// Green calls the underlying Green.
 func (x *Color) Green() float64 {
-	return x.inner.Green()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("green"))
+	return _r
 }
 
 // Returns the unpremultiplied blue component of the color. If the “CIColor“ was initialized with a `CGColor` in a non-RGB `CGColorSpace` then it will be converted to sRGB to get the green component.
-//
-// Blue calls the underlying Blue.
 func (x *Color) Blue() float64 {
-	return x.inner.Blue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("blue"))
+	return _r
 }
 
 // Returns a formatted string with the unpremultiplied color and alpha components of the color. The string representation always has four components: red, green, blue, and alpha. Some example string representations of colors: `CIColor`                                       | `stringRepresentation` ----------------------------------------------- | -------------- `[CIColor colorWithRed:0.2 green:0.4 blue:0.6]` | `"0.2 0.4 0.6 1.0"` “/CIColor/yellowColor“                        | `"1.0 1.0 0.0 1.0"` To create a “CIColor“ instance from a string representation, use the “colorWithString:“ method. If the “CIColor“ was initialized with a `CGColor` in a non-RGB `CGColorSpace` then it will be converted to sRGB to get the red, green, and blue components. This property is not KVO-safe because it returns a new `NSString` instance each time. The value of the `NSString` will be the same each time it is called.
-//
-// StringRepresentation calls the underlying StringRepresentation.
 func (x *Color) StringRepresentation() string {
-	_r := x.inner.StringRepresentation()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringRepresentation"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Colorable is the interface implemented by [Color], for mocking and DI.
 type Colorable interface {
-	Unwrap() *raw.CIColor
-	NumberOfComponents() uint
-	Components() unsafe.Pointer
+	obj.Object
+	NumberOfComponents() int
 	Alpha() float64
-	ColorSpace() unsafe.Pointer
+	ColorSpace() obj.Object
 	Red() float64
 	Green() float64
 	Blue() float64

@@ -5,97 +5,73 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// AnimatedMatrix4x4 wraps [raw.MDLAnimatedMatrix4x4] with a fluent Go API.
+// AnimatedMatrix4x4 is an idiomatic wrapper over the Objective-C class MDLAnimatedMatrix4x4.
 type AnimatedMatrix4x4 struct {
-	inner *raw.MDLAnimatedMatrix4x4
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLAnimatedMatrix4x4].
-func (x *AnimatedMatrix4x4) Unwrap() *raw.MDLAnimatedMatrix4x4 { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AnimatedMatrix4x4) ID() objc.ID { return x.inner.Ptr() }
-
-// AnimatedMatrix4x4FromID adopts an existing object pointer as a AnimatedMatrix4x4 (nil for 0).
+// AnimatedMatrix4x4FromID adopts an existing Objective-C object as a AnimatedMatrix4x4
+// (nil for 0), retaining it and registering a release finalizer.
 func AnimatedMatrix4x4FromID(id objc.ID) *AnimatedMatrix4x4 {
 	if id == 0 {
 		return nil
 	}
-	return &AnimatedMatrix4x4{inner: raw.MDLAnimatedMatrix4x4FromID(id)}
-}
-
-// NewAnimatedMatrix4x4 creates a new [AnimatedMatrix4x4].
-func NewAnimatedMatrix4x4() *AnimatedMatrix4x4 {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLAnimatedMatrix4x4")), objc.RegisterName("new"))
-	return &AnimatedMatrix4x4{inner: raw.MDLAnimatedMatrix4x4FromID(_id)}
-}
-
-// WithInterpolation sets the interpolation property and returns the receiver for chaining.
-func (x *AnimatedMatrix4x4) WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedMatrix4x4 {
-	x.inner.MDLAnimatedValue.SetInterpolation(raw.MDLAnimatedValueInterpolation(interpolation))
+	x := &AnimatedMatrix4x4{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// SetFloat4x4AtTime calls the underlying SetFloat4x4AtTime.
-func (x *AnimatedMatrix4x4) SetFloat4x4AtTime(value unsafe.Pointer, time_ float64) {
-	x.inner.SetFloat4x4AtTime(value, time_)
+// animatedMatrix4x4Adopt wraps an Objective-C object that this code just created as a
+// AnimatedMatrix4x4 (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func animatedMatrix4x4Adopt(id objc.ID) *AnimatedMatrix4x4 {
+	if id == 0 {
+		return nil
+	}
+	x := &AnimatedMatrix4x4{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetDouble4x4AtTime calls the underlying SetDouble4x4AtTime.
-func (x *AnimatedMatrix4x4) SetDouble4x4AtTime(value unsafe.Pointer, time_ float64) {
-	x.inner.SetDouble4x4AtTime(value, time_)
+// Description returns the object's -description text.
+func (x *AnimatedMatrix4x4) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Float4x4AtTime calls the underlying Float4x4AtTime.
-func (x *AnimatedMatrix4x4) Float4x4AtTime(time_ float64) unsafe.Pointer {
-	return x.inner.Float4x4AtTime(time_)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AnimatedMatrix4x4) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Double4x4AtTime calls the underlying Double4x4AtTime.
-func (x *AnimatedMatrix4x4) Double4x4AtTime(time_ float64) unsafe.Pointer {
-	return x.inner.Double4x4AtTime(time_)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AnimatedMatrix4x4) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// ResetWithFloat4x4ArrayAtTimesCount calls the underlying ResetWithFloat4x4ArrayAtTimesCount.
-func (x *AnimatedMatrix4x4) ResetWithFloat4x4ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint) {
-	x.inner.ResetWithFloat4x4ArrayAtTimesCount(valuesArray, timesArray, count)
+// NewAnimatedMatrix4x4 creates a new AnimatedMatrix4x4.
+func NewAnimatedMatrix4x4() *AnimatedMatrix4x4 {
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLAnimatedMatrix4x4")), objc.RegisterName("new"))
+	return animatedMatrix4x4Adopt(_id)
 }
 
-// ResetWithDouble4x4ArrayAtTimesCount calls the underlying ResetWithDouble4x4ArrayAtTimesCount.
-func (x *AnimatedMatrix4x4) ResetWithDouble4x4ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint) {
-	x.inner.ResetWithDouble4x4ArrayAtTimesCount(valuesArray, timesArray, count)
+// WithInterpolation sets interpolation and returns the receiver so calls can be chained.
+func (x *AnimatedMatrix4x4) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedMatrix4x4 {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
+	return x
 }
-
-// GetFloat4x4ArrayMaxCount calls the underlying GetFloat4x4ArrayMaxCount.
-func (x *AnimatedMatrix4x4) GetFloat4x4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint {
-	return x.inner.GetFloat4x4ArrayMaxCount(valuesArray, maxCount)
-}
-
-// GetDouble4x4ArrayMaxCount calls the underlying GetDouble4x4ArrayMaxCount.
-func (x *AnimatedMatrix4x4) GetDouble4x4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint {
-	return x.inner.GetDouble4x4ArrayMaxCount(valuesArray, maxCount)
-}
-
-func (x *AnimatedMatrix4x4) asAnimatedValue() *raw.MDLAnimatedValue { return &x.inner.MDLAnimatedValue }
 
 // AnimatedMatrix4x4able is the interface implemented by [AnimatedMatrix4x4], for mocking and DI.
 type AnimatedMatrix4x4able interface {
-	Unwrap() *raw.MDLAnimatedMatrix4x4
-	WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedMatrix4x4
-	SetFloat4x4AtTime(value unsafe.Pointer, time_ float64)
-	SetDouble4x4AtTime(value unsafe.Pointer, time_ float64)
-	Float4x4AtTime(time_ float64) unsafe.Pointer
-	Double4x4AtTime(time_ float64) unsafe.Pointer
-	ResetWithFloat4x4ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint)
-	ResetWithDouble4x4ArrayAtTimesCount(valuesArray unsafe.Pointer, timesArray *float64, count uint)
-	GetFloat4x4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
-	GetDouble4x4ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
+	obj.Object
+	WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedMatrix4x4
 }
 
 var _ AnimatedMatrix4x4able = (*AnimatedMatrix4x4)(nil)

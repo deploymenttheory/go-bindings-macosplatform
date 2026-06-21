@@ -5,56 +5,80 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A type to represent outputs of the web authentication PRF extension, when requesting them during an assertion.
 //
-// AuthorizationPublicKeyCredentialPRFAssertionOutput wraps [raw.ASAuthorizationPublicKeyCredentialPRFAssertionOutput] with a fluent Go API.
+// AuthorizationPublicKeyCredentialPRFAssertionOutput is an idiomatic wrapper over the Objective-C class ASAuthorizationPublicKeyCredentialPRFAssertionOutput.
 type AuthorizationPublicKeyCredentialPRFAssertionOutput struct {
-	inner *raw.ASAuthorizationPublicKeyCredentialPRFAssertionOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationPublicKeyCredentialPRFAssertionOutput].
-func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) Unwrap() *raw.ASAuthorizationPublicKeyCredentialPRFAssertionOutput {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationPublicKeyCredentialPRFAssertionOutputFromID adopts an existing object pointer as a AuthorizationPublicKeyCredentialPRFAssertionOutput (nil for 0).
+// AuthorizationPublicKeyCredentialPRFAssertionOutputFromID adopts an existing Objective-C object as a AuthorizationPublicKeyCredentialPRFAssertionOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationPublicKeyCredentialPRFAssertionOutputFromID(id objc.ID) *AuthorizationPublicKeyCredentialPRFAssertionOutput {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationPublicKeyCredentialPRFAssertionOutput{inner: raw.ASAuthorizationPublicKeyCredentialPRFAssertionOutputFromID(id)}
+	x := &AuthorizationPublicKeyCredentialPRFAssertionOutput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorizationPublicKeyCredentialPRFAssertionOutput creates a new [AuthorizationPublicKeyCredentialPRFAssertionOutput].
+// authorizationPublicKeyCredentialPRFAssertionOutputAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationPublicKeyCredentialPRFAssertionOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationPublicKeyCredentialPRFAssertionOutputAdopt(id objc.ID) *AuthorizationPublicKeyCredentialPRFAssertionOutput {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationPublicKeyCredentialPRFAssertionOutput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAuthorizationPublicKeyCredentialPRFAssertionOutput creates a new AuthorizationPublicKeyCredentialPRFAssertionOutput.
 func NewAuthorizationPublicKeyCredentialPRFAssertionOutput() *AuthorizationPublicKeyCredentialPRFAssertionOutput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPublicKeyCredentialPRFAssertionOutput")), objc.RegisterName("new"))
-	return &AuthorizationPublicKeyCredentialPRFAssertionOutput{inner: raw.ASAuthorizationPublicKeyCredentialPRFAssertionOutputFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPublicKeyCredentialPRFAssertionOutput")), objc.RegisterName("new"))
+	return authorizationPublicKeyCredentialPRFAssertionOutputAdopt(_id)
 }
 
-// First calls the underlying First.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) First() *foundation.NSData {
-	return x.inner.First()
+func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) First() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("first"))
+	return obj.Wrap(_r)
 }
 
-// Second calls the underlying Second.
-func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) Second() *foundation.NSData {
-	return x.inner.Second()
+func (x *AuthorizationPublicKeyCredentialPRFAssertionOutput) Second() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("second"))
+	return obj.Wrap(_r)
 }
 
 // AuthorizationPublicKeyCredentialPRFAssertionOutputable is the interface implemented by [AuthorizationPublicKeyCredentialPRFAssertionOutput], for mocking and DI.
 type AuthorizationPublicKeyCredentialPRFAssertionOutputable interface {
-	Unwrap() *raw.ASAuthorizationPublicKeyCredentialPRFAssertionOutput
-	First() *foundation.NSData
-	Second() *foundation.NSData
+	obj.Object
+	First() obj.Object
+	Second() obj.Object
 }
 
 var _ AuthorizationPublicKeyCredentialPRFAssertionOutputable = (*AuthorizationPublicKeyCredentialPRFAssertionOutput)(nil)

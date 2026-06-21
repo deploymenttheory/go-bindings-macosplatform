@@ -5,135 +5,112 @@
 package corebluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that scans for, discovers, connects to, and manages peripherals.
 //
-// CentralManager wraps [raw.CBCentralManager] with a fluent Go API.
+// CentralManager is an idiomatic wrapper over the Objective-C class CBCentralManager.
 type CentralManager struct {
-	inner *raw.CBCentralManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CBCentralManager].
-func (x *CentralManager) Unwrap() *raw.CBCentralManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CentralManager) ID() objc.ID { return x.inner.Ptr() }
-
-// CentralManagerFromID adopts an existing object pointer as a CentralManager (nil for 0).
+// CentralManagerFromID adopts an existing Objective-C object as a CentralManager
+// (nil for 0), retaining it and registering a release finalizer.
 func CentralManagerFromID(id objc.ID) *CentralManager {
 	if id == 0 {
 		return nil
 	}
-	return &CentralManager{inner: raw.CBCentralManagerFromID(id)}
-}
-
-// Initializes the central manager with a specified delegate and dispatch queue.
-//
-// NewCentralManagerWithDelegateQueue creates a new [CentralManager].
-func NewCentralManagerWithDelegateQueue(delegate raw.CBCentralManagerDelegate, queue *foundation.NSObject) *CentralManager {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CBCentralManager")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDelegate:queue:"), delegate, queue.Ptr())
-	return &CentralManager{inner: raw.CBCentralManagerFromID(_id)}
-}
-
-// Initializes the central manager with specified delegate, dispatch queue, and initialization options.
-//
-// NewCentralManagerWithDelegateQueueOptions creates a new [CentralManager].
-func NewCentralManagerWithDelegateQueueOptions(delegate raw.CBCentralManagerDelegate, queue *foundation.NSObject, options purego.IDer) *CentralManager {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CBCentralManager")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDelegate:queue:options:"), delegate, queue.Ptr(), options.ID())
-	return &CentralManager{inner: raw.CBCentralManagerFromID(_id)}
-}
-
-// The delegate object that you want to receive central manager events.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *CentralManager) WithDelegate(delegate raw.CBCentralManagerDelegate) *CentralManager {
-	x.inner.SetDelegate(delegate)
+	x := &CentralManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
+// centralManagerAdopt wraps an Objective-C object that this code just created as a
+// CentralManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func centralManagerAdopt(id objc.ID) *CentralManager {
+	if id == 0 {
+		return nil
+	}
+	x := &CentralManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CentralManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CentralManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CentralManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCentralManager creates a new CentralManager.
+func NewCentralManager() *CentralManager {
+	_id := objc.Send[objc.ID](objc.ID(_class("CBCentralManager")), objc.RegisterName("new"))
+	return centralManagerAdopt(_id)
+}
+
 // Returns a list of known peripherals by their identifiers.
-//
-// RetrievePeripheralsWithIdentifiers calls the underlying RetrievePeripheralsWithIdentifiers.
-func (x *CentralManager) RetrievePeripheralsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSUUID]) *foundation.NSArray[*raw.CBPeripheral] {
-	return x.inner.RetrievePeripheralsWithIdentifiers(identifiers)
+func (x *CentralManager) RetrievePeripheralsWithIdentifiers(identifiers []obj.Object) []*Peripheral {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("retrievePeripheralsWithIdentifiers:"), purego.SliceToNSArray(identifiers, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Peripheral { return PeripheralFromID(_id) })
 }
 
 // Returns a list of the peripherals connected to the system whose services match a given set of criteria.
-//
-// RetrieveConnectedPeripheralsWithServices calls the underlying RetrieveConnectedPeripheralsWithServices.
-func (x *CentralManager) RetrieveConnectedPeripheralsWithServices(serviceUUIDs *foundation.NSArray[*raw.CBUUID]) *foundation.NSArray[*raw.CBPeripheral] {
-	return x.inner.RetrieveConnectedPeripheralsWithServices(serviceUUIDs)
+func (x *CentralManager) RetrieveConnectedPeripheralsWithServices(serviceUUIDs []*UUID) []*Peripheral {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("retrieveConnectedPeripheralsWithServices:"), purego.SliceToNSArray(serviceUUIDs, func(_v *UUID) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Peripheral { return PeripheralFromID(_id) })
 }
 
 // Scans for peripherals that are advertising services.
-//
-// ScanForPeripheralsWithServicesOptions calls the underlying ScanForPeripheralsWithServicesOptions.
-func (x *CentralManager) ScanForPeripheralsWithServicesOptions(serviceUUIDs *foundation.NSArray[*raw.CBUUID], options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.ScanForPeripheralsWithServicesOptions(serviceUUIDs, options)
+func (x *CentralManager) ScanForPeripheralsWithServicesOptions(serviceUUIDs []*UUID, options obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scanForPeripheralsWithServices:options:"), purego.SliceToNSArray(serviceUUIDs, func(_v *UUID) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options))
 }
 
 // Asks the central manager to stop scanning for peripherals.
-//
-// StopScan calls the underlying StopScan.
 func (x *CentralManager) StopScan() {
-	x.inner.StopScan()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopScan"))
 }
 
 // Establishes a local connection to a peripheral.
-//
-// ConnectPeripheralOptions calls the underlying ConnectPeripheralOptions.
-func (x *CentralManager) ConnectPeripheralOptions(peripheral *raw.CBPeripheral, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.ConnectPeripheralOptions(peripheral, options)
+func (x *CentralManager) ConnectPeripheralOptions(peripheral *Peripheral, options obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectPeripheral:options:"), objref.IDOf(peripheral), objref.IDOf(options))
 }
 
 // Cancels an active or pending local connection to a peripheral.
-//
-// CancelPeripheralConnection calls the underlying CancelPeripheralConnection.
-func (x *CentralManager) CancelPeripheralConnection(peripheral *raw.CBPeripheral) {
-	x.inner.CancelPeripheralConnection(peripheral)
+func (x *CentralManager) CancelPeripheralConnection(peripheral *Peripheral) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelPeripheralConnection:"), objref.IDOf(peripheral))
 }
 
-// @property delegate @discussion The delegate object that will receive central events.
-//
-// Delegate calls the underlying Delegate.
-func (x *CentralManager) Delegate() raw.CBCentralManagerDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *CentralManager) SetDelegate(delegate raw.CBCentralManagerDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// @property isScanning @discussion Whether or not the central is currently scanning.
-//
-// IsScanning calls the underlying IsScanning.
+// Whether or not the central is currently scanning.
 func (x *CentralManager) IsScanning() bool {
-	return x.inner.IsScanning()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isScanning"))
+	return _r
 }
-
-func (x *CentralManager) asManager() *raw.CBManager { return &x.inner.CBManager }
 
 // CentralManagerable is the interface implemented by [CentralManager], for mocking and DI.
 type CentralManagerable interface {
-	Unwrap() *raw.CBCentralManager
-	WithDelegate(delegate raw.CBCentralManagerDelegate) *CentralManager
-	RetrievePeripheralsWithIdentifiers(identifiers *foundation.NSArray[*foundation.NSUUID]) *foundation.NSArray[*raw.CBPeripheral]
-	RetrieveConnectedPeripheralsWithServices(serviceUUIDs *foundation.NSArray[*raw.CBUUID]) *foundation.NSArray[*raw.CBPeripheral]
-	ScanForPeripheralsWithServicesOptions(serviceUUIDs *foundation.NSArray[*raw.CBUUID], options *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	obj.Object
+	RetrievePeripheralsWithIdentifiers(identifiers []obj.Object) []*Peripheral
+	RetrieveConnectedPeripheralsWithServices(serviceUUIDs []*UUID) []*Peripheral
+	ScanForPeripheralsWithServicesOptions(serviceUUIDs []*UUID, options obj.Object)
 	StopScan()
-	ConnectPeripheralOptions(peripheral *raw.CBPeripheral, options *foundation.NSDictionary[*foundation.NSString, objc.ID])
-	CancelPeripheralConnection(peripheral *raw.CBPeripheral)
-	Delegate() raw.CBCentralManagerDelegate
-	SetDelegate(delegate raw.CBCentralManagerDelegate)
+	ConnectPeripheralOptions(peripheral *Peripheral, options obj.Object)
+	CancelPeripheralConnection(peripheral *Peripheral)
 	IsScanning() bool
 }
 

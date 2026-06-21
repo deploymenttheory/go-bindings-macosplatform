@@ -5,157 +5,152 @@
 package metalperformanceshaders
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description of a recursive neural network block or layer.
 //
-// RNNDescriptor wraps [raw.MPSRNNDescriptor] with a fluent Go API.
+// RNNDescriptor is an idiomatic wrapper over the Objective-C class MPSRNNDescriptor.
 type RNNDescriptor struct {
-	inner *raw.MPSRNNDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSRNNDescriptor].
-func (x *RNNDescriptor) Unwrap() *raw.MPSRNNDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RNNDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// RNNDescriptorFromID adopts an existing object pointer as a RNNDescriptor (nil for 0).
+// RNNDescriptorFromID adopts an existing Objective-C object as a RNNDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func RNNDescriptorFromID(id objc.ID) *RNNDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &RNNDescriptor{inner: raw.MPSRNNDescriptorFromID(id)}
+	x := &RNNDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRNNDescriptor creates a new [RNNDescriptor].
+// rNNDescriptorAdopt wraps an Objective-C object that this code just created as a
+// RNNDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rNNDescriptorAdopt(id objc.ID) *RNNDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &RNNDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RNNDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RNNDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RNNDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRNNDescriptor creates a new RNNDescriptor.
 func NewRNNDescriptor() *RNNDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSRNNDescriptor")), objc.RegisterName("new"))
-	return &RNNDescriptor{inner: raw.MPSRNNDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSRNNDescriptor")), objc.RegisterName("new"))
+	return rNNDescriptorAdopt(_id)
 }
 
-// @property   inputFeatureChannels @abstract   The number of feature channels per pixel in the input image or number of rows in the input matrix.
+// The number of feature channels per pixel in the input image or number of rows in the input matrix.
 //
-// WithInputFeatureChannels sets the inputFeatureChannels property and returns the receiver for chaining.
-func (x *RNNDescriptor) WithInputFeatureChannels(inputFeatureChannels uint) *RNNDescriptor {
-	x.inner.SetInputFeatureChannels(inputFeatureChannels)
+// WithInputFeatureChannels sets inputFeatureChannels and returns the receiver so calls can be chained.
+func (x *RNNDescriptor) WithInputFeatureChannels(inputFeatureChannels int) *RNNDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
 	return x
 }
 
-// @property   outputFeatureChannels @abstract   The number of feature channels per pixel in the destination image or number of rows in the destination matrix.
+// The number of feature channels per pixel in the destination image or number of rows in the destination matrix.
 //
-// WithOutputFeatureChannels sets the outputFeatureChannels property and returns the receiver for chaining.
-func (x *RNNDescriptor) WithOutputFeatureChannels(outputFeatureChannels uint) *RNNDescriptor {
-	x.inner.SetOutputFeatureChannels(outputFeatureChannels)
+// WithOutputFeatureChannels sets outputFeatureChannels and returns the receiver so calls can be chained.
+func (x *RNNDescriptor) WithOutputFeatureChannels(outputFeatureChannels int) *RNNDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
 	return x
 }
 
-// @property   useLayerInputUnitTransformMode @abstract   if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in @ref MPSRNNSingleGateDescriptor. Defaults to NO.
+// if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
 //
-// WithUseLayerInputUnitTransformMode sets the useLayerInputUnitTransformMode property and returns the receiver for chaining.
+// WithUseLayerInputUnitTransformMode sets useLayerInputUnitTransformMode and returns the receiver so calls can be chained.
 func (x *RNNDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *RNNDescriptor {
-	x.inner.SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseLayerInputUnitTransformMode:"), useLayerInputUnitTransformMode)
 	return x
 }
 
-// @property   useFloat32Weights @abstract   If YES, then @ref MPSRNNMatrixInferenceLayer uses 32-bit floating point numbers internally for weights when computing matrix transformations. If NO, then 16-bit, half precision floating point numbers are used. Currently @ref MPSRNNImageInferenceLayer ignores this property and the convolution operations always convert FP32 weights into FP16 for better performance. Defaults to NO.
+// If YES, then
 //
-// WithUseFloat32Weights sets the useFloat32Weights property and returns the receiver for chaining.
+// WithUseFloat32Weights sets useFloat32Weights and returns the receiver so calls can be chained.
 func (x *RNNDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *RNNDescriptor {
-	x.inner.SetUseFloat32Weights(useFloat32Weights)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseFloat32Weights:"), useFloat32Weights)
 	return x
 }
 
-// @property   layerSequenceDirection @abstract   When the layer specified with this descriptor is used to process a sequence of inputs by calling @see encodeBidirectionalSequenceToCommandBuffer then this parameter defines in which direction the sequence is processed. The operation of the layer is: (yt, ht, ct) = f(xt,ht-1,ct-1) for MPSRNNSequenceDirectionForward and (yt, ht, ct) = f(xt,ht+1,ct+1) for MPSRNNSequenceDirectionBackward, where xt is the output of the previous layer that encodes in the same direction as this layer, (or the input image or matrix if this is the first layer in stack with this direction). @see MPSRNNImageInferenceLayer and @see MPSRNNMatrixInferenceLayer.
-//
-// WithLayerSequenceDirection sets the layerSequenceDirection property and returns the receiver for chaining.
-func (x *RNNDescriptor) WithLayerSequenceDirection(layerSequenceDirection mpsneuralnetwork.MPSRNNSequenceDirection) *RNNDescriptor {
-	x.inner.SetLayerSequenceDirection(layerSequenceDirection)
-	return x
+// The number of feature channels per pixel in the input image or number of rows in the input matrix.
+func (x *RNNDescriptor) InputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputFeatureChannels"))
+	return _r
 }
 
-// @property   inputFeatureChannels @abstract   The number of feature channels per pixel in the input image or number of rows in the input matrix.
-//
-// InputFeatureChannels calls the underlying InputFeatureChannels.
-func (x *RNNDescriptor) InputFeatureChannels() uint {
-	return x.inner.InputFeatureChannels()
+func (x *RNNDescriptor) SetInputFeatureChannels(inputFeatureChannels int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
 }
 
-// SetInputFeatureChannels calls the underlying SetInputFeatureChannels.
-func (x *RNNDescriptor) SetInputFeatureChannels(inputFeatureChannels uint) {
-	x.inner.SetInputFeatureChannels(inputFeatureChannels)
+// The number of feature channels per pixel in the destination image or number of rows in the destination matrix.
+func (x *RNNDescriptor) OutputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputFeatureChannels"))
+	return _r
 }
 
-// @property   outputFeatureChannels @abstract   The number of feature channels per pixel in the destination image or number of rows in the destination matrix.
-//
-// OutputFeatureChannels calls the underlying OutputFeatureChannels.
-func (x *RNNDescriptor) OutputFeatureChannels() uint {
-	return x.inner.OutputFeatureChannels()
+func (x *RNNDescriptor) SetOutputFeatureChannels(outputFeatureChannels int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
 }
 
-// SetOutputFeatureChannels calls the underlying SetOutputFeatureChannels.
-func (x *RNNDescriptor) SetOutputFeatureChannels(outputFeatureChannels uint) {
-	x.inner.SetOutputFeatureChannels(outputFeatureChannels)
-}
-
-// @property   useLayerInputUnitTransformMode @abstract   if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in @ref MPSRNNSingleGateDescriptor. Defaults to NO.
-//
-// UseLayerInputUnitTransformMode calls the underlying UseLayerInputUnitTransformMode.
+// if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
 func (x *RNNDescriptor) UseLayerInputUnitTransformMode() bool {
-	return x.inner.UseLayerInputUnitTransformMode()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("useLayerInputUnitTransformMode"))
+	return _r
 }
 
-// SetUseLayerInputUnitTransformMode calls the underlying SetUseLayerInputUnitTransformMode.
 func (x *RNNDescriptor) SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) {
-	x.inner.SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseLayerInputUnitTransformMode:"), useLayerInputUnitTransformMode)
 }
 
-// @property   useFloat32Weights @abstract   If YES, then @ref MPSRNNMatrixInferenceLayer uses 32-bit floating point numbers internally for weights when computing matrix transformations. If NO, then 16-bit, half precision floating point numbers are used. Currently @ref MPSRNNImageInferenceLayer ignores this property and the convolution operations always convert FP32 weights into FP16 for better performance. Defaults to NO.
-//
-// UseFloat32Weights calls the underlying UseFloat32Weights.
+// If YES, then
 func (x *RNNDescriptor) UseFloat32Weights() bool {
-	return x.inner.UseFloat32Weights()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("useFloat32Weights"))
+	return _r
 }
 
-// SetUseFloat32Weights calls the underlying SetUseFloat32Weights.
 func (x *RNNDescriptor) SetUseFloat32Weights(useFloat32Weights bool) {
-	x.inner.SetUseFloat32Weights(useFloat32Weights)
-}
-
-// @property   layerSequenceDirection @abstract   When the layer specified with this descriptor is used to process a sequence of inputs by calling @see encodeBidirectionalSequenceToCommandBuffer then this parameter defines in which direction the sequence is processed. The operation of the layer is: (yt, ht, ct) = f(xt,ht-1,ct-1) for MPSRNNSequenceDirectionForward and (yt, ht, ct) = f(xt,ht+1,ct+1) for MPSRNNSequenceDirectionBackward, where xt is the output of the previous layer that encodes in the same direction as this layer, (or the input image or matrix if this is the first layer in stack with this direction). @see MPSRNNImageInferenceLayer and @see MPSRNNMatrixInferenceLayer.
-//
-// LayerSequenceDirection calls the underlying LayerSequenceDirection.
-func (x *RNNDescriptor) LayerSequenceDirection() mpsneuralnetwork.MPSRNNSequenceDirection {
-	return x.inner.LayerSequenceDirection()
-}
-
-// SetLayerSequenceDirection calls the underlying SetLayerSequenceDirection.
-func (x *RNNDescriptor) SetLayerSequenceDirection(layerSequenceDirection mpsneuralnetwork.MPSRNNSequenceDirection) {
-	x.inner.SetLayerSequenceDirection(layerSequenceDirection)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseFloat32Weights:"), useFloat32Weights)
 }
 
 // RNNDescriptorable is the interface implemented by [RNNDescriptor], for mocking and DI.
 type RNNDescriptorable interface {
-	Unwrap() *raw.MPSRNNDescriptor
-	WithInputFeatureChannels(inputFeatureChannels uint) *RNNDescriptor
-	WithOutputFeatureChannels(outputFeatureChannels uint) *RNNDescriptor
+	obj.Object
+	WithInputFeatureChannels(inputFeatureChannels int) *RNNDescriptor
+	WithOutputFeatureChannels(outputFeatureChannels int) *RNNDescriptor
 	WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *RNNDescriptor
 	WithUseFloat32Weights(useFloat32Weights bool) *RNNDescriptor
-	WithLayerSequenceDirection(layerSequenceDirection mpsneuralnetwork.MPSRNNSequenceDirection) *RNNDescriptor
-	InputFeatureChannels() uint
-	SetInputFeatureChannels(inputFeatureChannels uint)
-	OutputFeatureChannels() uint
-	SetOutputFeatureChannels(outputFeatureChannels uint)
+	InputFeatureChannels() int
+	SetInputFeatureChannels(inputFeatureChannels int)
+	OutputFeatureChannels() int
+	SetOutputFeatureChannels(outputFeatureChannels int)
 	UseLayerInputUnitTransformMode() bool
 	SetUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool)
 	UseFloat32Weights() bool
 	SetUseFloat32Weights(useFloat32Weights bool)
-	LayerSequenceDirection() mpsneuralnetwork.MPSRNNSequenceDirection
-	SetLayerSequenceDirection(layerSequenceDirection mpsneuralnetwork.MPSRNNSequenceDirection)
 }
 
 var _ RNNDescriptorable = (*RNNDescriptor)(nil)

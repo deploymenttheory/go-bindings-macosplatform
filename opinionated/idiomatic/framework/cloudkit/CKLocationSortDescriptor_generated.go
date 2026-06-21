@@ -5,61 +5,71 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object for sorting records that contain location data.
 //
-// LocationSortDescriptor wraps [raw.CKLocationSortDescriptor] with a fluent Go API.
+// LocationSortDescriptor is an idiomatic wrapper over the Objective-C class CKLocationSortDescriptor.
 type LocationSortDescriptor struct {
-	inner *raw.CKLocationSortDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKLocationSortDescriptor].
-func (x *LocationSortDescriptor) Unwrap() *raw.CKLocationSortDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LocationSortDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// LocationSortDescriptorFromID adopts an existing object pointer as a LocationSortDescriptor (nil for 0).
+// LocationSortDescriptorFromID adopts an existing Objective-C object as a LocationSortDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func LocationSortDescriptorFromID(id objc.ID) *LocationSortDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &LocationSortDescriptor{inner: raw.CKLocationSortDescriptorFromID(id)}
+	x := &LocationSortDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a location sort descriptor using the specified key and relative location.
-//
-// NewLocationSortDescriptorWithKeyRelativeLocation creates a new [LocationSortDescriptor].
-func NewLocationSortDescriptorWithKeyRelativeLocation(key string, relativeLocation unsafe.Pointer) *LocationSortDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKLocationSortDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithKey:relativeLocation:"), foundation.NSStringStringWithUTF8String(key).Ptr(), relativeLocation)
-	return &LocationSortDescriptor{inner: raw.CKLocationSortDescriptorFromID(_id)}
+// locationSortDescriptorAdopt wraps an Objective-C object that this code just created as a
+// LocationSortDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func locationSortDescriptorAdopt(id objc.ID) *LocationSortDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &LocationSortDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LocationSortDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LocationSortDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LocationSortDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a location sort descriptor from a serialized instance.
 //
-// NewLocationSortDescriptorWithCoder creates a new [LocationSortDescriptor].
-func NewLocationSortDescriptorWithCoder(aDecoder *foundation.NSCoder) *LocationSortDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKLocationSortDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), aDecoder.Ptr())
-	return &LocationSortDescriptor{inner: raw.CKLocationSortDescriptorFromID(_id)}
-}
-
-// RelativeLocation calls the underlying RelativeLocation.
-func (x *LocationSortDescriptor) RelativeLocation() unsafe.Pointer {
-	return x.inner.RelativeLocation()
+// NewLocationSortDescriptorWithCoder creates a new LocationSortDescriptor.
+func NewLocationSortDescriptorWithCoder(aDecoder obj.Object) *LocationSortDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKLocationSortDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
+	return locationSortDescriptorAdopt(_id)
 }
 
 // LocationSortDescriptorable is the interface implemented by [LocationSortDescriptor], for mocking and DI.
 type LocationSortDescriptorable interface {
-	Unwrap() *raw.CKLocationSortDescriptor
-	RelativeLocation() unsafe.Pointer
+	obj.Object
 }
 
 var _ LocationSortDescriptorable = (*LocationSortDescriptor)(nil)

@@ -5,80 +5,102 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRBasicInformationClusterProductAppearanceStruct wraps [raw.MTRBasicInformationClusterProductAppearanceStruct] with a fluent Go API.
+// MTRBasicInformationClusterProductAppearanceStruct is an idiomatic wrapper over the Objective-C class MTRBasicInformationClusterProductAppearanceStruct.
 type MTRBasicInformationClusterProductAppearanceStruct struct {
-	inner *raw.MTRBasicInformationClusterProductAppearanceStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRBasicInformationClusterProductAppearanceStruct].
-func (x *MTRBasicInformationClusterProductAppearanceStruct) Unwrap() *raw.MTRBasicInformationClusterProductAppearanceStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBasicInformationClusterProductAppearanceStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRBasicInformationClusterProductAppearanceStructFromID adopts an existing object pointer as a MTRBasicInformationClusterProductAppearanceStruct (nil for 0).
+// MTRBasicInformationClusterProductAppearanceStructFromID adopts an existing Objective-C object as a MTRBasicInformationClusterProductAppearanceStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRBasicInformationClusterProductAppearanceStructFromID(id objc.ID) *MTRBasicInformationClusterProductAppearanceStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRBasicInformationClusterProductAppearanceStruct{inner: raw.MTRBasicInformationClusterProductAppearanceStructFromID(id)}
+	x := &MTRBasicInformationClusterProductAppearanceStruct{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRBasicInformationClusterProductAppearanceStruct creates a new [MTRBasicInformationClusterProductAppearanceStruct].
+// mTRBasicInformationClusterProductAppearanceStructAdopt wraps an Objective-C object that this code just created as a
+// MTRBasicInformationClusterProductAppearanceStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRBasicInformationClusterProductAppearanceStructAdopt(id objc.ID) *MTRBasicInformationClusterProductAppearanceStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRBasicInformationClusterProductAppearanceStruct{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRBasicInformationClusterProductAppearanceStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRBasicInformationClusterProductAppearanceStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRBasicInformationClusterProductAppearanceStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRBasicInformationClusterProductAppearanceStruct creates a new MTRBasicInformationClusterProductAppearanceStruct.
 func NewMTRBasicInformationClusterProductAppearanceStruct() *MTRBasicInformationClusterProductAppearanceStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBasicInformationClusterProductAppearanceStruct")), objc.RegisterName("new"))
-	return &MTRBasicInformationClusterProductAppearanceStruct{inner: raw.MTRBasicInformationClusterProductAppearanceStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRBasicInformationClusterProductAppearanceStruct")), objc.RegisterName("new"))
+	return mTRBasicInformationClusterProductAppearanceStructAdopt(_id)
 }
 
-// WithFinish sets the finish property and returns the receiver for chaining.
-func (x *MTRBasicInformationClusterProductAppearanceStruct) WithFinish(finish *foundation.NSNumber) *MTRBasicInformationClusterProductAppearanceStruct {
-	x.inner.SetFinish(finish)
+// WithFinish sets finish and returns the receiver so calls can be chained.
+func (x *MTRBasicInformationClusterProductAppearanceStruct) WithFinish(finish obj.Object) *MTRBasicInformationClusterProductAppearanceStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFinish:"), objref.IDOf(finish))
 	return x
 }
 
-// WithPrimaryColor sets the primaryColor property and returns the receiver for chaining.
-func (x *MTRBasicInformationClusterProductAppearanceStruct) WithPrimaryColor(primaryColor *foundation.NSNumber) *MTRBasicInformationClusterProductAppearanceStruct {
-	x.inner.SetPrimaryColor(primaryColor)
+// WithPrimaryColor sets primaryColor and returns the receiver so calls can be chained.
+func (x *MTRBasicInformationClusterProductAppearanceStruct) WithPrimaryColor(primaryColor obj.Object) *MTRBasicInformationClusterProductAppearanceStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryColor:"), objref.IDOf(primaryColor))
 	return x
 }
 
-// Finish calls the underlying Finish.
-func (x *MTRBasicInformationClusterProductAppearanceStruct) Finish() *foundation.NSNumber {
-	return x.inner.Finish()
+func (x *MTRBasicInformationClusterProductAppearanceStruct) Finish() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finish"))
+	return obj.Wrap(_r)
 }
 
-// SetFinish calls the underlying SetFinish.
-func (x *MTRBasicInformationClusterProductAppearanceStruct) SetFinish(finish *foundation.NSNumber) {
-	x.inner.SetFinish(finish)
+func (x *MTRBasicInformationClusterProductAppearanceStruct) SetFinish(finish obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFinish:"), objref.IDOf(finish))
 }
 
-// PrimaryColor calls the underlying PrimaryColor.
-func (x *MTRBasicInformationClusterProductAppearanceStruct) PrimaryColor() *foundation.NSNumber {
-	return x.inner.PrimaryColor()
+func (x *MTRBasicInformationClusterProductAppearanceStruct) PrimaryColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryColor"))
+	return obj.Wrap(_r)
 }
 
-// SetPrimaryColor calls the underlying SetPrimaryColor.
-func (x *MTRBasicInformationClusterProductAppearanceStruct) SetPrimaryColor(primaryColor *foundation.NSNumber) {
-	x.inner.SetPrimaryColor(primaryColor)
+func (x *MTRBasicInformationClusterProductAppearanceStruct) SetPrimaryColor(primaryColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryColor:"), objref.IDOf(primaryColor))
 }
 
 // MTRBasicInformationClusterProductAppearanceStructable is the interface implemented by [MTRBasicInformationClusterProductAppearanceStruct], for mocking and DI.
 type MTRBasicInformationClusterProductAppearanceStructable interface {
-	Unwrap() *raw.MTRBasicInformationClusterProductAppearanceStruct
-	WithFinish(finish *foundation.NSNumber) *MTRBasicInformationClusterProductAppearanceStruct
-	WithPrimaryColor(primaryColor *foundation.NSNumber) *MTRBasicInformationClusterProductAppearanceStruct
-	Finish() *foundation.NSNumber
-	SetFinish(finish *foundation.NSNumber)
-	PrimaryColor() *foundation.NSNumber
-	SetPrimaryColor(primaryColor *foundation.NSNumber)
+	obj.Object
+	WithFinish(finish obj.Object) *MTRBasicInformationClusterProductAppearanceStruct
+	WithPrimaryColor(primaryColor obj.Object) *MTRBasicInformationClusterProductAppearanceStruct
+	Finish() obj.Object
+	SetFinish(finish obj.Object)
+	PrimaryColor() obj.Object
+	SetPrimaryColor(primaryColor obj.Object)
 }
 
 var _ MTRBasicInformationClusterProductAppearanceStructable = (*MTRBasicInformationClusterProductAppearanceStruct)(nil)

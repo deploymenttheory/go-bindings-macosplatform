@@ -5,93 +5,96 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A factory class for creating vertical layout constraint objects using a fluent API.
 //
-// LayoutYAxisAnchor wraps [raw.NSLayoutYAxisAnchor] with a fluent Go API.
+// LayoutYAxisAnchor is an idiomatic wrapper over the Objective-C class NSLayoutYAxisAnchor.
 type LayoutYAxisAnchor struct {
-	inner *raw.NSLayoutYAxisAnchor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSLayoutYAxisAnchor].
-func (x *LayoutYAxisAnchor) Unwrap() *raw.NSLayoutYAxisAnchor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LayoutYAxisAnchor) ID() objc.ID { return x.inner.Ptr() }
-
-// LayoutYAxisAnchorFromID adopts an existing object pointer as a LayoutYAxisAnchor (nil for 0).
+// LayoutYAxisAnchorFromID adopts an existing Objective-C object as a LayoutYAxisAnchor
+// (nil for 0), retaining it and registering a release finalizer.
 func LayoutYAxisAnchorFromID(id objc.ID) *LayoutYAxisAnchor {
 	if id == 0 {
 		return nil
 	}
-	return &LayoutYAxisAnchor{inner: raw.NSLayoutYAxisAnchorFromID(id)}
+	x := &LayoutYAxisAnchor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLayoutYAxisAnchor creates a new [LayoutYAxisAnchor].
+// layoutYAxisAnchorAdopt wraps an Objective-C object that this code just created as a
+// LayoutYAxisAnchor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func layoutYAxisAnchorAdopt(id objc.ID) *LayoutYAxisAnchor {
+	if id == 0 {
+		return nil
+	}
+	x := &LayoutYAxisAnchor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LayoutYAxisAnchor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LayoutYAxisAnchor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LayoutYAxisAnchor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLayoutYAxisAnchor creates a new LayoutYAxisAnchor.
 func NewLayoutYAxisAnchor() *LayoutYAxisAnchor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLayoutYAxisAnchor")), objc.RegisterName("new"))
-	return &LayoutYAxisAnchor{inner: raw.NSLayoutYAxisAnchorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSLayoutYAxisAnchor")), objc.RegisterName("new"))
+	return layoutYAxisAnchorAdopt(_id)
 }
 
 // Creates a layout dimension object from two anchors.
-//
-// AnchorWithOffsetToAnchor calls the underlying AnchorWithOffsetToAnchor.
-func (x *LayoutYAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *raw.NSLayoutYAxisAnchor) *LayoutDimension {
-	_r := x.inner.AnchorWithOffsetToAnchor(otherAnchor)
-	if _r == nil {
-		return nil
-	}
-	return &LayoutDimension{inner: _r}
+func (x *LayoutYAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *LayoutYAxisAnchor) *LayoutDimension {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anchorWithOffsetToAnchor:"), objref.IDOf(otherAnchor))
+	return LayoutDimensionFromID(_r)
 }
 
 // Returns a constraint that defines the specific distance at which the current anchor is positioned below the specified anchor.
-//
-// ConstraintEqualToSystemSpacingBelowAnchorMultiplier calls the underlying ConstraintEqualToSystemSpacingBelowAnchorMultiplier.
-func (x *LayoutYAxisAnchor) ConstraintEqualToSystemSpacingBelowAnchorMultiplier(anchor *raw.NSLayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
-	_r := x.inner.ConstraintEqualToSystemSpacingBelowAnchorMultiplier(anchor, multiplier)
-	if _r == nil {
-		return nil
-	}
-	return &LayoutConstraint{inner: _r}
+func (x *LayoutYAxisAnchor) ConstraintEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintEqualToSystemSpacingBelowAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
+	return LayoutConstraintFromID(_r)
 }
 
 // Returns a constraint that defines the minimum distance by which the current anchor is positioned below the specified anchor.
-//
-// ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier calls the underlying ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier.
-func (x *LayoutYAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *raw.NSLayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
-	_r := x.inner.ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor, multiplier)
-	if _r == nil {
-		return nil
-	}
-	return &LayoutConstraint{inner: _r}
+func (x *LayoutYAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintGreaterThanOrEqualToSystemSpacingBelowAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
+	return LayoutConstraintFromID(_r)
 }
 
 // Returns a constraint that defines the maximum distance by which the current anchor is positioned below the specified anchor.
-//
-// ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier calls the underlying ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier.
-func (x *LayoutYAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *raw.NSLayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
-	_r := x.inner.ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor, multiplier)
-	if _r == nil {
-		return nil
-	}
-	return &LayoutConstraint{inner: _r}
-}
-
-func (x *LayoutYAxisAnchor) asLayoutAnchor() *raw.NSLayoutAnchor[objc.ID] {
-	return &x.inner.NSLayoutAnchor
+func (x *LayoutYAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintLessThanOrEqualToSystemSpacingBelowAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
+	return LayoutConstraintFromID(_r)
 }
 
 // LayoutYAxisAnchorable is the interface implemented by [LayoutYAxisAnchor], for mocking and DI.
 type LayoutYAxisAnchorable interface {
-	Unwrap() *raw.NSLayoutYAxisAnchor
-	AnchorWithOffsetToAnchor(otherAnchor *raw.NSLayoutYAxisAnchor) *LayoutDimension
-	ConstraintEqualToSystemSpacingBelowAnchorMultiplier(anchor *raw.NSLayoutYAxisAnchor, multiplier float64) *LayoutConstraint
-	ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *raw.NSLayoutYAxisAnchor, multiplier float64) *LayoutConstraint
-	ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *raw.NSLayoutYAxisAnchor, multiplier float64) *LayoutConstraint
+	obj.Object
+	AnchorWithOffsetToAnchor(otherAnchor *LayoutYAxisAnchor) *LayoutDimension
+	ConstraintEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint
+	ConstraintGreaterThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint
+	ConstraintLessThanOrEqualToSystemSpacingBelowAnchorMultiplier(anchor *LayoutYAxisAnchor, multiplier float64) *LayoutConstraint
 }
 
 var _ LayoutYAxisAnchorable = (*LayoutYAxisAnchor)(nil)

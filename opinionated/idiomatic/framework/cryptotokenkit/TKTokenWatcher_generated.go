@@ -6,47 +6,72 @@ package cryptotokenkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that tracks the tokens available in the system.
 //
-// TokenWatcher wraps [raw.TKTokenWatcher] with a fluent Go API.
+// TokenWatcher is an idiomatic wrapper over the Objective-C class TKTokenWatcher.
 type TokenWatcher struct {
-	inner *raw.TKTokenWatcher
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKTokenWatcher].
-func (x *TokenWatcher) Unwrap() *raw.TKTokenWatcher { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TokenWatcher) ID() objc.ID { return x.inner.Ptr() }
-
-// TokenWatcherFromID adopts an existing object pointer as a TokenWatcher (nil for 0).
+// TokenWatcherFromID adopts an existing Objective-C object as a TokenWatcher
+// (nil for 0), retaining it and registering a release finalizer.
 func TokenWatcherFromID(id objc.ID) *TokenWatcher {
 	if id == 0 {
 		return nil
 	}
-	return &TokenWatcher{inner: raw.TKTokenWatcherFromID(id)}
+	x := &TokenWatcher{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTokenWatcher creates a new [TokenWatcher].
+// tokenWatcherAdopt wraps an Objective-C object that this code just created as a
+// TokenWatcher (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tokenWatcherAdopt(id objc.ID) *TokenWatcher {
+	if id == 0 {
+		return nil
+	}
+	x := &TokenWatcher{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TokenWatcher) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TokenWatcher) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TokenWatcher) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTokenWatcher creates a new TokenWatcher.
 func NewTokenWatcher() *TokenWatcher {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenWatcher")), objc.RegisterName("new"))
-	return &TokenWatcher{inner: raw.TKTokenWatcherFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("TKTokenWatcher")), objc.RegisterName("new"))
+	return tokenWatcherAdopt(_id)
 }
 
 // Initializes a token watcher with the specified insertion handler.
 //
-// NewTokenWatcherWithInsertionHandler creates a new [TokenWatcher].
-func NewTokenWatcherWithInsertionHandler(insertionHandler func(*foundation.NSString)) *TokenWatcher {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenWatcher")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInsertionHandler:"), insertionHandler)
-	return &TokenWatcher{inner: raw.TKTokenWatcherFromID(_id)}
+// NewTokenWatcherWithInsertionHandler creates a new TokenWatcher.
+func NewTokenWatcherWithInsertionHandler(insertionHandler func(obj.Object)) *TokenWatcher {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("TKTokenWatcher")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInsertionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { insertionHandler(obj.Wrap(_b0)) }))
+	return tokenWatcherAdopt(_id)
 }
 
 // Sets an insertion handler closure to be called when a new token is inserted into the system.
@@ -58,13 +83,12 @@ func (x *TokenWatcher) SetInsertionHandler(ctx context.Context) (string, error) 
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SetInsertionHandler(func(_p0 *foundation.NSString) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInsertionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -75,41 +99,29 @@ func (x *TokenWatcher) SetInsertionHandler(ctx context.Context) (string, error) 
 }
 
 // Adds a removal handler for the specified token ID.
-//
-// AddRemovalHandlerForTokenID calls the underlying AddRemovalHandlerForTokenID.
-func (x *TokenWatcher) AddRemovalHandlerForTokenID(removalHandler func(*foundation.NSString), tokenID string) {
-	x.inner.AddRemovalHandlerForTokenID(removalHandler, foundation.NSStringStringWithUTF8String(tokenID))
+func (x *TokenWatcher) AddRemovalHandlerForTokenID(removalHandler func(obj.Object), tokenID string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRemovalHandler:forTokenID:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { removalHandler(obj.Wrap(_b0)) }), purego.NSString(tokenID))
 }
 
-// Return TokenInfo for specific tokenID @param tokenID specified tokenID @return A TokenInfo object, or nil if tokenID does not exist
-//
-// TokenInfoForTokenID calls the underlying TokenInfoForTokenID.
+// Return TokenInfo for specific tokenID
 func (x *TokenWatcher) TokenInfoForTokenID(tokenID string) *TokenWatcherTokenInfo {
-	_r := x.inner.TokenInfoForTokenID(foundation.NSStringStringWithUTF8String(tokenID))
-	if _r == nil {
-		return nil
-	}
-	return &TokenWatcherTokenInfo{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenInfoForTokenID:"), purego.NSString(tokenID))
+	return TokenWatcherTokenInfoFromID(_r)
 }
 
 // Array of currently known TokenIDs in the system.  Tokens are identified by instance's names. It is possible to use KVO to be notified about token arrivals and removals.
 //
 // TokenIDs returns the collection as a Go slice.
 func (x *TokenWatcher) TokenIDs() []string {
-	arr := x.inner.TokenIDs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenIDs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // TokenWatcherable is the interface implemented by [TokenWatcher], for mocking and DI.
 type TokenWatcherable interface {
-	Unwrap() *raw.TKTokenWatcher
+	obj.Object
 	SetInsertionHandler(ctx context.Context) (string, error)
-	AddRemovalHandlerForTokenID(removalHandler func(*foundation.NSString), tokenID string)
+	AddRemovalHandlerForTokenID(removalHandler func(obj.Object), tokenID string)
 	TokenInfoForTokenID(tokenID string) *TokenWatcherTokenInfo
 	TokenIDs() []string
 }

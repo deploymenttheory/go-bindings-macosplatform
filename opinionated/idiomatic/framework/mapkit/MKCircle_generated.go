@@ -5,81 +5,86 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A circular overlay with a configurable radius that you center on a geographic coordinate.
 //
-// Circle wraps [raw.MKCircle] with a fluent Go API.
+// Circle is an idiomatic wrapper over the Objective-C class MKCircle.
 type Circle struct {
-	inner *raw.MKCircle
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKCircle].
-func (x *Circle) Unwrap() *raw.MKCircle { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Circle) ID() objc.ID { return x.inner.Ptr() }
-
-// CircleFromID adopts an existing object pointer as a Circle (nil for 0).
+// CircleFromID adopts an existing Objective-C object as a Circle
+// (nil for 0), retaining it and registering a release finalizer.
 func CircleFromID(id objc.ID) *Circle {
 	if id == 0 {
 		return nil
 	}
-	return &Circle{inner: raw.MKCircleFromID(id)}
+	x := &Circle{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCircle creates a new [Circle].
+// circleAdopt wraps an Objective-C object that this code just created as a
+// Circle (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func circleAdopt(id objc.ID) *Circle {
+	if id == 0 {
+		return nil
+	}
+	x := &Circle{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Circle) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Circle) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Circle) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCircle creates a new Circle.
 func NewCircle() *Circle {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKCircle")), objc.RegisterName("new"))
-	return &Circle{inner: raw.MKCircleFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKCircle")), objc.RegisterName("new"))
+	return circleAdopt(_id)
 }
 
 // The title of the shape annotation.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *Circle) WithTitle(title string) *Circle {
-	x.inner.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // The subtitle of the shape annotation.
 //
-// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
 func (x *Circle) WithSubtitle(subtitle string) *Circle {
-	x.inner.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
-// Coordinate calls the underlying Coordinate.
-func (x *Circle) Coordinate() unsafe.Pointer {
-	return x.inner.Coordinate()
-}
-
-// Radius calls the underlying Radius.
-func (x *Circle) Radius() unsafe.Pointer {
-	return x.inner.Radius()
-}
-
-// BoundingMapRect calls the underlying BoundingMapRect.
-func (x *Circle) BoundingMapRect() raw.MKMapRect {
-	return x.inner.BoundingMapRect()
-}
-
-func (x *Circle) asShape() *raw.MKShape { return &x.inner.MKShape }
-
 // Circleable is the interface implemented by [Circle], for mocking and DI.
 type Circleable interface {
-	Unwrap() *raw.MKCircle
+	obj.Object
 	WithTitle(title string) *Circle
 	WithSubtitle(subtitle string) *Circle
-	Coordinate() unsafe.Pointer
-	Radius() unsafe.Pointer
-	BoundingMapRect() raw.MKMapRect
 }
 
 var _ Circleable = (*Circle)(nil)

@@ -5,128 +5,130 @@
 package collaboration
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/collaboration"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A CBIdentityPicker object allows a user to select identities—for example, user or group objects—that it wants one or more services or shared resources to have access to. An identity picker can be displayed either as an application-modal dialog or as a sheet attached to a document window. An identity picker returns the selected records to be added to access control lists using Collaboration. If a selected record is not a user or group identity, then an identity picker prompts the user for additional information—such as a password—to promote that record to a sharing account.
 //
-// IdentityPicker wraps [raw.CBIdentityPicker] with a fluent Go API.
+// IdentityPicker is an idiomatic wrapper over the Objective-C class CBIdentityPicker.
 type IdentityPicker struct {
-	inner *raw.CBIdentityPicker
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CBIdentityPicker].
-func (x *IdentityPicker) Unwrap() *raw.CBIdentityPicker { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IdentityPicker) ID() objc.ID { return x.inner.Ptr() }
-
-// IdentityPickerFromID adopts an existing object pointer as a IdentityPicker (nil for 0).
+// IdentityPickerFromID adopts an existing Objective-C object as a IdentityPicker
+// (nil for 0), retaining it and registering a release finalizer.
 func IdentityPickerFromID(id objc.ID) *IdentityPicker {
 	if id == 0 {
 		return nil
 	}
-	return &IdentityPicker{inner: raw.CBIdentityPickerFromID(id)}
+	x := &IdentityPicker{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewIdentityPicker creates a new [IdentityPicker].
+// identityPickerAdopt wraps an Objective-C object that this code just created as a
+// IdentityPicker (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func identityPickerAdopt(id objc.ID) *IdentityPicker {
+	if id == 0 {
+		return nil
+	}
+	x := &IdentityPicker{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IdentityPicker) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IdentityPicker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IdentityPicker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewIdentityPicker creates a new IdentityPicker.
 func NewIdentityPicker() *IdentityPicker {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBIdentityPicker")), objc.RegisterName("new"))
-	return &IdentityPicker{inner: raw.CBIdentityPickerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CBIdentityPicker")), objc.RegisterName("new"))
+	return identityPickerAdopt(_id)
 }
 
 // The title of the identity picker.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *IdentityPicker) WithTitle(title string) *IdentityPicker {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // A Boolean value indicating whether the user is allowed to select multiple identities.
 //
-// WithAllowsMultipleSelection sets the allowsMultipleSelection property and returns the receiver for chaining.
+// WithAllowsMultipleSelection sets allowsMultipleSelection and returns the receiver so calls can be chained.
 func (x *IdentityPicker) WithAllowsMultipleSelection(allowsMultipleSelection bool) *IdentityPicker {
-	x.inner.SetAllowsMultipleSelection(allowsMultipleSelection)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMultipleSelection:"), allowsMultipleSelection)
 	return x
 }
 
 // Runs the receiver as an application-modal dialog.
-//
-// RunModal calls the underlying RunModal.
 func (x *IdentityPicker) RunModal() int {
-	return x.inner.RunModal()
-}
-
-// Runs the receiver modally as a sheet attached to a specified window.
-//
-// RunModalForWindowModalDelegateDidEndSelectorContextInfo calls the underlying RunModalForWindowModalDelegateDidEndSelectorContextInfo.
-func (x *IdentityPicker) RunModalForWindowModalDelegateDidEndSelectorContextInfo(window *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.RunModalForWindowModalDelegateDidEndSelectorContextInfo(window, delegate, didEndSelector, contextInfo)
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModal"))
+	return _r
 }
 
 // Runs the identity picker modally as a sheet attached to a specified window.
-//
-// RunModalForWindowCompletionHandler calls the underlying RunModalForWindowCompletionHandler.
-func (x *IdentityPicker) RunModalForWindowCompletionHandler(window *appkit.NSWindow, completionHandler func(int)) {
-	x.inner.RunModalForWindowCompletionHandler(window, completionHandler)
+func (x *IdentityPicker) RunModalForWindowCompletionHandler(window obj.Object, completionHandler func(int)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runModalForWindow:completionHandler:"), objref.IDOf(window), objc.NewBlock(func(_ objc.Block, _b0 int) { completionHandler(_b0) }))
 }
 
 // The title of the identity picker. The value of this property is the title text that appears at the top of the panel. By default, the title is "Select a person to share with:".
-//
-// Title calls the underlying Title.
 func (x *IdentityPicker) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
 func (x *IdentityPicker) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
 // A Boolean value indicating whether the user is allowed to select multiple identities. The value of this property is <doc://com.apple.documentation/documentation/objectivec/yes> if the user can select multiple records; otherwise, <doc://com.apple.documentation/documentation/objectivec/no>. The default value is <doc://com.apple.documentation/documentation/objectivec/no>.
-//
-// AllowsMultipleSelection calls the underlying AllowsMultipleSelection.
 func (x *IdentityPicker) AllowsMultipleSelection() bool {
-	return x.inner.AllowsMultipleSelection()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsMultipleSelection"))
+	return _r
 }
 
-// SetAllowsMultipleSelection calls the underlying SetAllowsMultipleSelection.
 func (x *IdentityPicker) SetAllowsMultipleSelection(allowsMultipleSelection bool) {
-	x.inner.SetAllowsMultipleSelection(allowsMultipleSelection)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMultipleSelection:"), allowsMultipleSelection)
 }
 
 // The array of identities (represented by `CBIdentity` objects) selected using the identity picker.
 //
 // Identities returns the collection as a Go slice.
 func (x *IdentityPicker) Identities() []*Identity {
-	arr := x.inner.Identities()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Identity {
-		return &Identity{inner: raw.CBIdentityFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identities"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Identity { return IdentityFromID(_id) })
 }
 
 // IdentityPickerable is the interface implemented by [IdentityPicker], for mocking and DI.
 type IdentityPickerable interface {
-	Unwrap() *raw.CBIdentityPicker
+	obj.Object
 	WithTitle(title string) *IdentityPicker
 	WithAllowsMultipleSelection(allowsMultipleSelection bool) *IdentityPicker
 	RunModal() int
-	RunModalForWindowModalDelegateDidEndSelectorContextInfo(window *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
-	RunModalForWindowCompletionHandler(window *appkit.NSWindow, completionHandler func(int))
+	RunModalForWindowCompletionHandler(window obj.Object, completionHandler func(int))
 	Title() string
 	SetTitle(title string)
 	AllowsMultipleSelection() bool

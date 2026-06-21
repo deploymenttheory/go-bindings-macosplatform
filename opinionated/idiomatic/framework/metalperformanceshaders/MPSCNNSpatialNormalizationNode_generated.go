@@ -5,142 +5,148 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A representation of a spatial normalization kernel.
 //
-// CNNSpatialNormalizationNode wraps [raw.MPSCNNSpatialNormalizationNode] with a fluent Go API.
+// CNNSpatialNormalizationNode is an idiomatic wrapper over the Objective-C class MPSCNNSpatialNormalizationNode.
 type CNNSpatialNormalizationNode struct {
-	inner *raw.MPSCNNSpatialNormalizationNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNSpatialNormalizationNode].
-func (x *CNNSpatialNormalizationNode) Unwrap() *raw.MPSCNNSpatialNormalizationNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNSpatialNormalizationNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNSpatialNormalizationNodeFromID adopts an existing object pointer as a CNNSpatialNormalizationNode (nil for 0).
+// CNNSpatialNormalizationNodeFromID adopts an existing Objective-C object as a CNNSpatialNormalizationNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNSpatialNormalizationNodeFromID(id objc.ID) *CNNSpatialNormalizationNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNSpatialNormalizationNode{inner: raw.MPSCNNSpatialNormalizationNodeFromID(id)}
-}
-
-// NewCNNSpatialNormalizationNodeWithSourceKernelSize creates a new [CNNSpatialNormalizationNode].
-func NewCNNSpatialNormalizationNodeWithSourceKernelSize(sourceNode *mpsneuralnetwork.MPSNNImageNode, kernelSize uint) *CNNSpatialNormalizationNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNSpatialNormalizationNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:kernelSize:"), sourceNode.Ptr(), kernelSize)
-	return &CNNSpatialNormalizationNode{inner: raw.MPSCNNSpatialNormalizationNodeFromID(_id)}
-}
-
-// NewCNNSpatialNormalizationNodeWithSource creates a new [CNNSpatialNormalizationNode].
-func NewCNNSpatialNormalizationNodeWithSource(sourceNode *mpsneuralnetwork.MPSNNImageNode) *CNNSpatialNormalizationNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNSpatialNormalizationNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), sourceNode.Ptr())
-	return &CNNSpatialNormalizationNode{inner: raw.MPSCNNSpatialNormalizationNodeFromID(_id)}
-}
-
-// WithKernelWidth sets the kernelWidth property and returns the receiver for chaining.
-func (x *CNNSpatialNormalizationNode) WithKernelWidth(kernelWidth uint) *CNNSpatialNormalizationNode {
-	x.inner.SetKernelWidth(kernelWidth)
+	x := &CNNSpatialNormalizationNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithKernelHeight sets the kernelHeight property and returns the receiver for chaining.
-func (x *CNNSpatialNormalizationNode) WithKernelHeight(kernelHeight uint) *CNNSpatialNormalizationNode {
-	x.inner.SetKernelHeight(kernelHeight)
+// cNNSpatialNormalizationNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNSpatialNormalizationNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNSpatialNormalizationNodeAdopt(id objc.ID) *CNNSpatialNormalizationNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNSpatialNormalizationNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @property   alpha @abstract   The value of alpha.  Default is 1.0. Must be non-negative.
+// Description returns the object's -description text.
+func (x *CNNSpatialNormalizationNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNSpatialNormalizationNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNSpatialNormalizationNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNSpatialNormalizationNodeWithSourceKernelSize creates a new CNNSpatialNormalizationNode.
+func NewCNNSpatialNormalizationNodeWithSourceKernelSize(sourceNode obj.Object, kernelSize int) *CNNSpatialNormalizationNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNSpatialNormalizationNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:kernelSize:"), objref.IDOf(sourceNode), kernelSize)
+	return cNNSpatialNormalizationNodeAdopt(_id)
+}
+
+// NewCNNSpatialNormalizationNodeWithSource creates a new CNNSpatialNormalizationNode.
+func NewCNNSpatialNormalizationNodeWithSource(sourceNode obj.Object) *CNNSpatialNormalizationNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSCNNSpatialNormalizationNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:"), objref.IDOf(sourceNode))
+	return cNNSpatialNormalizationNodeAdopt(_id)
+}
+
+// WithKernelWidth sets kernelWidth and returns the receiver so calls can be chained.
+func (x *CNNSpatialNormalizationNode) WithKernelWidth(kernelWidth int) *CNNSpatialNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
+	return x
+}
+
+// WithKernelHeight sets kernelHeight and returns the receiver so calls can be chained.
+func (x *CNNSpatialNormalizationNode) WithKernelHeight(kernelHeight int) *CNNSpatialNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
+	return x
+}
+
+// The value of alpha.  Default is 1.0. Must be non-negative.
 //
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha sets alpha and returns the receiver so calls can be chained.
 func (x *CNNSpatialNormalizationNode) WithAlpha(alpha float32) *CNNSpatialNormalizationNode {
-	x.inner.MPSCNNNormalizationNode.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// @property   beta @abstract   The value of beta.  Default is 5.0
+// The value of beta.  Default is 5.0
 //
-// WithBeta sets the beta property and returns the receiver for chaining.
+// WithBeta sets beta and returns the receiver so calls can be chained.
 func (x *CNNSpatialNormalizationNode) WithBeta(beta float32) *CNNSpatialNormalizationNode {
-	x.inner.MPSCNNNormalizationNode.SetBeta(beta)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 	return x
 }
 
-// @property   delta @abstract   The value of delta.  Default is 1.0
+// The value of delta.  Default is 1.0
 //
-// WithDelta sets the delta property and returns the receiver for chaining.
+// WithDelta sets delta and returns the receiver so calls can be chained.
 func (x *CNNSpatialNormalizationNode) WithDelta(delta float32) *CNNSpatialNormalizationNode {
-	x.inner.MPSCNNNormalizationNode.SetDelta(delta)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
 	return x
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
+// A string to help identify this object.
 //
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNSpatialNormalizationNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNSpatialNormalizationNode {
-	x.inner.MPSCNNNormalizationNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
-	return x
-}
-
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *CNNSpatialNormalizationNode) WithLabel(label string) *CNNSpatialNormalizationNode {
-	x.inner.MPSCNNNormalizationNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// KernelWidth calls the underlying KernelWidth.
-func (x *CNNSpatialNormalizationNode) KernelWidth() uint {
-	return x.inner.KernelWidth()
+func (x *CNNSpatialNormalizationNode) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+	return _r
 }
 
-// SetKernelWidth calls the underlying SetKernelWidth.
-func (x *CNNSpatialNormalizationNode) SetKernelWidth(kernelWidth uint) {
-	x.inner.SetKernelWidth(kernelWidth)
+func (x *CNNSpatialNormalizationNode) SetKernelWidth(kernelWidth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
 }
 
-// KernelHeight calls the underlying KernelHeight.
-func (x *CNNSpatialNormalizationNode) KernelHeight() uint {
-	return x.inner.KernelHeight()
+func (x *CNNSpatialNormalizationNode) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+	return _r
 }
 
-// SetKernelHeight calls the underlying SetKernelHeight.
-func (x *CNNSpatialNormalizationNode) SetKernelHeight(kernelHeight uint) {
-	x.inner.SetKernelHeight(kernelHeight)
-}
-
-func (x *CNNSpatialNormalizationNode) asCNNNormalizationNode() *mpsneuralnetwork.MPSCNNNormalizationNode {
-	return &x.inner.MPSCNNNormalizationNode
-}
-
-func (x *CNNSpatialNormalizationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSCNNNormalizationNode.MPSNNFilterNode
+func (x *CNNSpatialNormalizationNode) SetKernelHeight(kernelHeight int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
 }
 
 // CNNSpatialNormalizationNodeable is the interface implemented by [CNNSpatialNormalizationNode], for mocking and DI.
 type CNNSpatialNormalizationNodeable interface {
-	Unwrap() *raw.MPSCNNSpatialNormalizationNode
-	WithKernelWidth(kernelWidth uint) *CNNSpatialNormalizationNode
-	WithKernelHeight(kernelHeight uint) *CNNSpatialNormalizationNode
+	obj.Object
+	WithKernelWidth(kernelWidth int) *CNNSpatialNormalizationNode
+	WithKernelHeight(kernelHeight int) *CNNSpatialNormalizationNode
 	WithAlpha(alpha float32) *CNNSpatialNormalizationNode
 	WithBeta(beta float32) *CNNSpatialNormalizationNode
 	WithDelta(delta float32) *CNNSpatialNormalizationNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNSpatialNormalizationNode
 	WithLabel(label string) *CNNSpatialNormalizationNode
-	KernelWidth() uint
-	SetKernelWidth(kernelWidth uint)
-	KernelHeight() uint
-	SetKernelHeight(kernelHeight uint)
+	KernelWidth() int
+	SetKernelWidth(kernelWidth int)
+	KernelHeight() int
+	SetKernelHeight(kernelHeight int)
 }
 
 var _ CNNSpatialNormalizationNodeable = (*CNNSpatialNormalizationNode)(nil)

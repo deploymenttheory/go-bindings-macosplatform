@@ -9,21 +9,21 @@ import (
 )
 
 // Bitmask — values may be combined with |.
-type MPSNDArrayQuantizationScheme uint64
+type ArrayQuantizationScheme uint64
 
 const (
-	MPSNDArrayQuantizationTypeNone   MPSNDArrayQuantizationScheme = 0
-	MPSNDArrayQuantizationTypeAffine MPSNDArrayQuantizationScheme = 1
-	MPSNDArrayQuantizationTypeLUT    MPSNDArrayQuantizationScheme = 2
+	ArrayQuantizationTypeNone   ArrayQuantizationScheme = 0
+	ArrayQuantizationTypeAffine ArrayQuantizationScheme = 1
+	ArrayQuantizationTypeLUT    ArrayQuantizationScheme = 2
 )
 
-func (e MPSNDArrayQuantizationScheme) String() string {
+func (e ArrayQuantizationScheme) String() string {
 	var parts []string
-	if e&MPSNDArrayQuantizationTypeAffine != 0 {
-		parts = append(parts, "MPSNDArrayQuantizationTypeAffine")
+	if e&ArrayQuantizationTypeAffine != 0 {
+		parts = append(parts, "ArrayQuantizationTypeAffine")
 	}
-	if e&MPSNDArrayQuantizationTypeLUT != 0 {
-		parts = append(parts, "MPSNDArrayQuantizationTypeLUT")
+	if e&ArrayQuantizationTypeLUT != 0 {
+		parts = append(parts, "ArrayQuantizationTypeLUT")
 	}
 	if len(parts) == 0 {
 		return "0"

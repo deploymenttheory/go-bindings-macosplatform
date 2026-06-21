@@ -5,30 +5,30 @@
 package spritekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// EffectNodeProvider is implemented by EffectNode and any idiomatic type wrapping a SKEffectNode subclass.
+// EffectNodeProvider is accepted wherever a SKEffectNode (or one of its subclasses) is expected.
 type EffectNodeProvider interface {
-	asEffectNode() *raw.SKEffectNode
+	objref.Object
 }
 
-// NodeProvider is implemented by Node and any idiomatic type wrapping a SKNode subclass.
+// NodeProvider is accepted wherever a SKNode (or one of its subclasses) is expected.
 type NodeProvider interface {
-	asNode() *raw.SKNode
+	objref.Object
 }
 
-// PhysicsJointProvider is implemented by PhysicsJoint and any idiomatic type wrapping a SKPhysicsJoint subclass.
+// PhysicsJointProvider is accepted wherever a SKPhysicsJoint (or one of its subclasses) is expected.
 type PhysicsJointProvider interface {
-	asPhysicsJoint() *raw.SKPhysicsJoint
+	objref.Object
 }
 
-// TextureProvider is implemented by Texture and any idiomatic type wrapping a SKTexture subclass.
+// TextureProvider is accepted wherever a SKTexture (or one of its subclasses) is expected.
 type TextureProvider interface {
-	asTexture() *raw.SKTexture
+	objref.Object
 }
 
-// WarpGeometryProvider is implemented by WarpGeometry and any idiomatic type wrapping a SKWarpGeometry subclass.
+// WarpGeometryProvider is accepted wherever a SKWarpGeometry (or one of its subclasses) is expected.
 type WarpGeometryProvider interface {
-	asWarpGeometry() *raw.SKWarpGeometry
+	objref.Object
 }

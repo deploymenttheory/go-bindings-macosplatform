@@ -5,191 +5,178 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A WebBackForwardList object maintains a list of visited pages used to go back and forward to the most recent page. A WebBackForwardList object maintains only the list data—it does not perform actual page loads (in other words, it does not make any client requests). If you need to perform a page load, see the loadRequest: method in WebFrame to find out how to do this.
 //
-// WebBackForwardList wraps [raw.WebBackForwardList] with a fluent Go API.
+// WebBackForwardList is an idiomatic wrapper over the Objective-C class WebBackForwardList.
 type WebBackForwardList struct {
-	inner *raw.WebBackForwardList
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WebBackForwardList].
-func (x *WebBackForwardList) Unwrap() *raw.WebBackForwardList { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WebBackForwardList) ID() objc.ID { return x.inner.Ptr() }
-
-// WebBackForwardListFromID adopts an existing object pointer as a WebBackForwardList (nil for 0).
+// WebBackForwardListFromID adopts an existing Objective-C object as a WebBackForwardList
+// (nil for 0), retaining it and registering a release finalizer.
 func WebBackForwardListFromID(id objc.ID) *WebBackForwardList {
 	if id == 0 {
 		return nil
 	}
-	return &WebBackForwardList{inner: raw.WebBackForwardListFromID(id)}
+	x := &WebBackForwardList{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWebBackForwardList creates a new [WebBackForwardList].
+// webBackForwardListAdopt wraps an Objective-C object that this code just created as a
+// WebBackForwardList (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func webBackForwardListAdopt(id objc.ID) *WebBackForwardList {
+	if id == 0 {
+		return nil
+	}
+	x := &WebBackForwardList{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WebBackForwardList) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WebBackForwardList) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WebBackForwardList) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWebBackForwardList creates a new WebBackForwardList.
 func NewWebBackForwardList() *WebBackForwardList {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WebBackForwardList")), objc.RegisterName("new"))
-	return &WebBackForwardList{inner: raw.WebBackForwardListFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WebBackForwardList")), objc.RegisterName("new"))
+	return webBackForwardListAdopt(_id)
 }
 
 // The maximum number of items that the back-forward list can contain.
 //
-// WithCapacity sets the capacity property and returns the receiver for chaining.
+// WithCapacity sets capacity and returns the receiver so calls can be chained.
 func (x *WebBackForwardList) WithCapacity(capacity int) *WebBackForwardList {
-	x.inner.SetCapacity(capacity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapacity:"), capacity)
 	return x
 }
 
 // Inserts an item into the back-forward list, immediately after the current item.
-//
-// AddItem calls the underlying AddItem.
-func (x *WebBackForwardList) AddItem(item *raw.WebHistoryItem) {
-	x.inner.AddItem(item)
+func (x *WebBackForwardList) AddItem(item *WebHistoryItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addItem:"), objref.IDOf(item))
 }
 
 // Moves backward one item in the back-forward list.
-//
-// GoBack calls the underlying GoBack.
 func (x *WebBackForwardList) GoBack() {
-	x.inner.GoBack()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goBack"))
 }
 
 // Moves forward one item in the back-forward list.
-//
-// GoForward calls the underlying GoForward.
 func (x *WebBackForwardList) GoForward() {
-	x.inner.GoForward()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goForward"))
 }
 
 // Makes the specified item in the back-forward list the current item.
-//
-// GoToItem calls the underlying GoToItem.
-func (x *WebBackForwardList) GoToItem(item *raw.WebHistoryItem) {
-	x.inner.GoToItem(item)
+func (x *WebBackForwardList) GoToItem(item *WebHistoryItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goToItem:"), objref.IDOf(item))
 }
 
 // Returns the items that precede the current item in the back-forward list, up to the specified number of items.
-//
-// BackListWithLimit calls the underlying BackListWithLimit.
-func (x *WebBackForwardList) BackListWithLimit(limit int) *foundation.NSArray[objc.ID] {
-	return x.inner.BackListWithLimit(limit)
+func (x *WebBackForwardList) BackListWithLimit(limit int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backListWithLimit:"), limit)
+	return obj.Wrap(_r)
 }
 
 // Returns the items that follow the current item in the back-forward list, up to the specified number of items.
-//
-// ForwardListWithLimit calls the underlying ForwardListWithLimit.
-func (x *WebBackForwardList) ForwardListWithLimit(limit int) *foundation.NSArray[objc.ID] {
-	return x.inner.ForwardListWithLimit(limit)
+func (x *WebBackForwardList) ForwardListWithLimit(limit int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("forwardListWithLimit:"), limit)
+	return obj.Wrap(_r)
 }
 
 // Returns a Boolean value indicating whether the back-forward list contains the specified item.
-//
-// ContainsItem calls the underlying ContainsItem.
-func (x *WebBackForwardList) ContainsItem(item *raw.WebHistoryItem) bool {
-	return x.inner.ContainsItem(item)
+func (x *WebBackForwardList) ContainsItem(item *WebHistoryItem) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsItem:"), objref.IDOf(item))
+	return _r
 }
 
 // Returns the item at the specified index in the back-forward list.
-//
-// ItemAtIndex calls the underlying ItemAtIndex.
 func (x *WebBackForwardList) ItemAtIndex(index int) *WebHistoryItem {
-	_r := x.inner.ItemAtIndex(index)
-	if _r == nil {
-		return nil
-	}
-	return &WebHistoryItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemAtIndex:"), index)
+	return WebHistoryItemFromID(_r)
 }
 
-// @property backItem @abstract The entry right before the current entry, or nil if there isn't one.
-//
-// BackItem calls the underlying BackItem.
+// The entry right before the current entry, or nil if there isn't one.
 func (x *WebBackForwardList) BackItem() *WebHistoryItem {
-	_r := x.inner.BackItem()
-	if _r == nil {
-		return nil
-	}
-	return &WebHistoryItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backItem"))
+	return WebHistoryItemFromID(_r)
 }
 
-// @property currentItem @abstract Returns the current entry.
-//
-// CurrentItem calls the underlying CurrentItem.
+// Returns the current entry.
 func (x *WebBackForwardList) CurrentItem() *WebHistoryItem {
-	_r := x.inner.CurrentItem()
-	if _r == nil {
-		return nil
-	}
-	return &WebHistoryItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentItem"))
+	return WebHistoryItemFromID(_r)
 }
 
-// @property forwardItem @abstract The entry right after the current entry, or nil if there isn't one.
-//
-// ForwardItem calls the underlying ForwardItem.
+// The entry right after the current entry, or nil if there isn't one.
 func (x *WebBackForwardList) ForwardItem() *WebHistoryItem {
-	_r := x.inner.ForwardItem()
-	if _r == nil {
-		return nil
-	}
-	return &WebHistoryItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("forwardItem"))
+	return WebHistoryItemFromID(_r)
 }
 
-// @property capacity @abstract The list's maximum size.
-//
-// Capacity calls the underlying Capacity.
+// The list's maximum size.
 func (x *WebBackForwardList) Capacity() int {
-	return x.inner.Capacity()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("capacity"))
+	return _r
 }
 
-// SetCapacity calls the underlying SetCapacity.
 func (x *WebBackForwardList) SetCapacity(capacity int) {
-	x.inner.SetCapacity(capacity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapacity:"), capacity)
 }
 
-// @property backListCount @abstract The number of items in the list.
-//
-// BackListCount calls the underlying BackListCount.
+// The number of items in the list.
 func (x *WebBackForwardList) BackListCount() int {
-	return x.inner.BackListCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("backListCount"))
+	return _r
 }
 
-// @property forwardListCount @result The number of items in the list.
-//
-// ForwardListCount calls the underlying ForwardListCount.
 func (x *WebBackForwardList) ForwardListCount() int {
-	return x.inner.ForwardListCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("forwardListCount"))
+	return _r
 }
 
 // Sets the maximum number of pages the receiver can cache.
-//
-// SetPageCacheSize calls the underlying SetPageCacheSize.
-func (x *WebBackForwardList) SetPageCacheSize(size uint) {
-	x.inner.SetPageCacheSize(size)
+func (x *WebBackForwardList) SetPageCacheSize(size int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageCacheSize:"), size)
 }
 
 // Returns the maximum number of pages that the receiver can cache.
-//
-// PageCacheSize calls the underlying PageCacheSize.
-func (x *WebBackForwardList) PageCacheSize() uint {
-	return x.inner.PageCacheSize()
+func (x *WebBackForwardList) PageCacheSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pageCacheSize"))
+	return _r
 }
 
 // WebBackForwardListable is the interface implemented by [WebBackForwardList], for mocking and DI.
 type WebBackForwardListable interface {
-	Unwrap() *raw.WebBackForwardList
+	obj.Object
 	WithCapacity(capacity int) *WebBackForwardList
-	AddItem(item *raw.WebHistoryItem)
+	AddItem(item *WebHistoryItem)
 	GoBack()
 	GoForward()
-	GoToItem(item *raw.WebHistoryItem)
-	BackListWithLimit(limit int) *foundation.NSArray[objc.ID]
-	ForwardListWithLimit(limit int) *foundation.NSArray[objc.ID]
-	ContainsItem(item *raw.WebHistoryItem) bool
+	GoToItem(item *WebHistoryItem)
+	BackListWithLimit(limit int) obj.Object
+	ForwardListWithLimit(limit int) obj.Object
+	ContainsItem(item *WebHistoryItem) bool
 	ItemAtIndex(index int) *WebHistoryItem
 	BackItem() *WebHistoryItem
 	CurrentItem() *WebHistoryItem
@@ -198,8 +185,8 @@ type WebBackForwardListable interface {
 	SetCapacity(capacity int)
 	BackListCount() int
 	ForwardListCount() int
-	SetPageCacheSize(size uint)
-	PageCacheSize() uint
+	SetPageCacheSize(size int)
+	PageCacheSize() int
 }
 
 var _ WebBackForwardListable = (*WebBackForwardList)(nil)

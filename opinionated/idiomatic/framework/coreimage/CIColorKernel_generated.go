@@ -5,59 +5,68 @@
 package coreimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A GPU-based image-processing routine that processes only the color information in images, used to create custom Core Image filters.
 //
-// ColorKernel wraps [raw.CIColorKernel] with a fluent Go API.
+// ColorKernel is an idiomatic wrapper over the Objective-C class CIColorKernel.
 type ColorKernel struct {
-	inner *raw.CIColorKernel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CIColorKernel].
-func (x *ColorKernel) Unwrap() *raw.CIColorKernel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ColorKernel) ID() objc.ID { return x.inner.Ptr() }
-
-// ColorKernelFromID adopts an existing object pointer as a ColorKernel (nil for 0).
+// ColorKernelFromID adopts an existing Objective-C object as a ColorKernel
+// (nil for 0), retaining it and registering a release finalizer.
 func ColorKernelFromID(id objc.ID) *ColorKernel {
 	if id == 0 {
 		return nil
 	}
-	return &ColorKernel{inner: raw.CIColorKernelFromID(id)}
+	x := &ColorKernel{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewColorKernel creates a new [ColorKernel].
-func NewColorKernel() *ColorKernel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CIColorKernel")), objc.RegisterName("new"))
-	return &ColorKernel{inner: raw.CIColorKernelFromID(_id)}
-}
-
-// Creates a new image using the kernel and specified arguments.
-//
-// ApplyWithExtentArguments calls the underlying ApplyWithExtentArguments.
-func (x *ColorKernel) ApplyWithExtentArguments(extent corefoundation.CGRect, args *foundation.NSArray[objc.ID]) *Image {
-	_r := x.inner.ApplyWithExtentArguments(extent, args)
-	if _r == nil {
+// colorKernelAdopt wraps an Objective-C object that this code just created as a
+// ColorKernel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func colorKernelAdopt(id objc.ID) *ColorKernel {
+	if id == 0 {
 		return nil
 	}
-	return &Image{inner: _r}
+	x := &ColorKernel{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *ColorKernel) asColorKernel() *raw.CIColorKernel { return x.inner }
+// Description returns the object's -description text.
+func (x *ColorKernel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
 
-func (x *ColorKernel) asKernel() *raw.CIKernel { return &x.inner.CIKernel }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ColorKernel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ColorKernel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewColorKernel creates a new ColorKernel.
+func NewColorKernel() *ColorKernel {
+	_id := objc.Send[objc.ID](objc.ID(_class("CIColorKernel")), objc.RegisterName("new"))
+	return colorKernelAdopt(_id)
+}
 
 // ColorKernelable is the interface implemented by [ColorKernel], for mocking and DI.
 type ColorKernelable interface {
-	Unwrap() *raw.CIColorKernel
-	ApplyWithExtentArguments(extent corefoundation.CGRect, args *foundation.NSArray[objc.ID]) *Image
+	obj.Object
 }
 
 var _ ColorKernelable = (*ColorKernel)(nil)

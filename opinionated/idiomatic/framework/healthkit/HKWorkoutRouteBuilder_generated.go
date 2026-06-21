@@ -6,77 +6,85 @@ package healthkit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A builder object that incrementally constructs a workout route.
 //
-// WorkoutRouteBuilder wraps [raw.HKWorkoutRouteBuilder] with a fluent Go API.
+// WorkoutRouteBuilder is an idiomatic wrapper over the Objective-C class HKWorkoutRouteBuilder.
 type WorkoutRouteBuilder struct {
-	inner *raw.HKWorkoutRouteBuilder
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKWorkoutRouteBuilder].
-func (x *WorkoutRouteBuilder) Unwrap() *raw.HKWorkoutRouteBuilder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WorkoutRouteBuilder) ID() objc.ID { return x.inner.Ptr() }
-
-// WorkoutRouteBuilderFromID adopts an existing object pointer as a WorkoutRouteBuilder (nil for 0).
+// WorkoutRouteBuilderFromID adopts an existing Objective-C object as a WorkoutRouteBuilder
+// (nil for 0), retaining it and registering a release finalizer.
 func WorkoutRouteBuilderFromID(id objc.ID) *WorkoutRouteBuilder {
 	if id == 0 {
 		return nil
 	}
-	return &WorkoutRouteBuilder{inner: raw.HKWorkoutRouteBuilderFromID(id)}
+	x := &WorkoutRouteBuilder{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// workoutRouteBuilderAdopt wraps an Objective-C object that this code just created as a
+// WorkoutRouteBuilder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func workoutRouteBuilderAdopt(id objc.ID) *WorkoutRouteBuilder {
+	if id == 0 {
+		return nil
+	}
+	x := &WorkoutRouteBuilder{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WorkoutRouteBuilder) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WorkoutRouteBuilder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WorkoutRouteBuilder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates and returns a new workout route builder.
 //
-// NewWorkoutRouteBuilderWithHealthStoreDevice creates a new [WorkoutRouteBuilder].
-func NewWorkoutRouteBuilderWithHealthStoreDevice(healthStore *raw.HKHealthStore, device *raw.HKDevice) *WorkoutRouteBuilder {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWorkoutRouteBuilder")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:device:"), healthStore.Ptr(), device.Ptr())
-	return &WorkoutRouteBuilder{inner: raw.HKWorkoutRouteBuilderFromID(_id)}
-}
-
-// Adds route data to the builder.
-//
-// InsertRouteDataCompletion calls the underlying InsertRouteDataCompletion.
-func (x *WorkoutRouteBuilder) InsertRouteDataCompletion(routeData *foundation.NSArray[objc.ID], completion func(bool, unsafe.Pointer)) {
-	x.inner.InsertRouteDataCompletion(routeData, completion)
-}
-
-// Adds metadata to the builder.
-//
-// AddMetadataCompletion calls the underlying AddMetadataCompletion.
-func (x *WorkoutRouteBuilder) AddMetadataCompletion(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer)) {
-	x.inner.AddMetadataCompletion(metadata, completion)
+// NewWorkoutRouteBuilderWithHealthStoreDevice creates a new WorkoutRouteBuilder.
+func NewWorkoutRouteBuilderWithHealthStoreDevice(healthStore *HealthStore, device *Device) *WorkoutRouteBuilder {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKWorkoutRouteBuilder")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:device:"), objref.IDOf(healthStore), objref.IDOf(device))
+	return workoutRouteBuilderAdopt(_id)
 }
 
 // Creates, saves, and associates the route with the provided workout.
 //
 // FinishRouteWithWorkoutMetadataCompletion blocks until the operation completes or ctx is cancelled.
-func (x *WorkoutRouteBuilder) FinishRouteWithWorkoutMetadataCompletion(ctx context.Context, workout *raw.HKWorkout, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*WorkoutRoute, error) {
+func (x *WorkoutRouteBuilder) FinishRouteWithWorkoutMetadataCompletion(ctx context.Context, workout *Workout, metadata obj.Object) (*WorkoutRoute, error) {
 	type _result struct {
 		val *WorkoutRoute
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FinishRouteWithWorkoutMetadataCompletion(workout, metadata, func(_p0 *raw.HKWorkoutRoute, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &WorkoutRoute{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = WorkoutRouteFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishRouteWithWorkout:metadata:completion:"), objref.IDOf(workout), objref.IDOf(metadata), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -86,14 +94,10 @@ func (x *WorkoutRouteBuilder) FinishRouteWithWorkoutMetadataCompletion(ctx conte
 	}
 }
 
-func (x *WorkoutRouteBuilder) asSeriesBuilder() *raw.HKSeriesBuilder { return &x.inner.HKSeriesBuilder }
-
 // WorkoutRouteBuilderable is the interface implemented by [WorkoutRouteBuilder], for mocking and DI.
 type WorkoutRouteBuilderable interface {
-	Unwrap() *raw.HKWorkoutRouteBuilder
-	InsertRouteDataCompletion(routeData *foundation.NSArray[objc.ID], completion func(bool, unsafe.Pointer))
-	AddMetadataCompletion(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer))
-	FinishRouteWithWorkoutMetadataCompletion(ctx context.Context, workout *raw.HKWorkout, metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*WorkoutRoute, error)
+	obj.Object
+	FinishRouteWithWorkoutMetadataCompletion(ctx context.Context, workout *Workout, metadata obj.Object) (*WorkoutRoute, error)
 }
 
 var _ WorkoutRouteBuilderable = (*WorkoutRouteBuilder)(nil)

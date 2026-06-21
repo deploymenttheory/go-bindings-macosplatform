@@ -5,81 +5,102 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRUserLabelClusterLabelStruct wraps [raw.MTRUserLabelClusterLabelStruct] with a fluent Go API.
+// MTRUserLabelClusterLabelStruct is an idiomatic wrapper over the Objective-C class MTRUserLabelClusterLabelStruct.
 type MTRUserLabelClusterLabelStruct struct {
-	inner *raw.MTRUserLabelClusterLabelStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRUserLabelClusterLabelStruct].
-func (x *MTRUserLabelClusterLabelStruct) Unwrap() *raw.MTRUserLabelClusterLabelStruct { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRUserLabelClusterLabelStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRUserLabelClusterLabelStructFromID adopts an existing object pointer as a MTRUserLabelClusterLabelStruct (nil for 0).
+// MTRUserLabelClusterLabelStructFromID adopts an existing Objective-C object as a MTRUserLabelClusterLabelStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRUserLabelClusterLabelStructFromID(id objc.ID) *MTRUserLabelClusterLabelStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRUserLabelClusterLabelStruct{inner: raw.MTRUserLabelClusterLabelStructFromID(id)}
+	x := &MTRUserLabelClusterLabelStruct{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRUserLabelClusterLabelStruct creates a new [MTRUserLabelClusterLabelStruct].
+// mTRUserLabelClusterLabelStructAdopt wraps an Objective-C object that this code just created as a
+// MTRUserLabelClusterLabelStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRUserLabelClusterLabelStructAdopt(id objc.ID) *MTRUserLabelClusterLabelStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRUserLabelClusterLabelStruct{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRUserLabelClusterLabelStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRUserLabelClusterLabelStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRUserLabelClusterLabelStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRUserLabelClusterLabelStruct creates a new MTRUserLabelClusterLabelStruct.
 func NewMTRUserLabelClusterLabelStruct() *MTRUserLabelClusterLabelStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRUserLabelClusterLabelStruct")), objc.RegisterName("new"))
-	return &MTRUserLabelClusterLabelStruct{inner: raw.MTRUserLabelClusterLabelStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRUserLabelClusterLabelStruct")), objc.RegisterName("new"))
+	return mTRUserLabelClusterLabelStructAdopt(_id)
 }
 
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *MTRUserLabelClusterLabelStruct) WithLabel(label string) *MTRUserLabelClusterLabelStruct {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// WithValue sets the value property and returns the receiver for chaining.
+// WithValue sets value and returns the receiver so calls can be chained.
 func (x *MTRUserLabelClusterLabelStruct) WithValue(value string) *MTRUserLabelClusterLabelStruct {
-	x.inner.SetValue(foundation.NSStringStringWithUTF8String(value))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 	return x
 }
 
-// Label calls the underlying Label.
 func (x *MTRUserLabelClusterLabelStruct) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
 func (x *MTRUserLabelClusterLabelStruct) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// Value calls the underlying Value.
 func (x *MTRUserLabelClusterLabelStruct) Value() string {
-	_r := x.inner.Value()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetValue calls the underlying SetValue.
 func (x *MTRUserLabelClusterLabelStruct) SetValue(value string) {
-	x.inner.SetValue(foundation.NSStringStringWithUTF8String(value))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 }
 
 // MTRUserLabelClusterLabelStructable is the interface implemented by [MTRUserLabelClusterLabelStruct], for mocking and DI.
 type MTRUserLabelClusterLabelStructable interface {
-	Unwrap() *raw.MTRUserLabelClusterLabelStruct
+	obj.Object
 	WithLabel(label string) *MTRUserLabelClusterLabelStruct
 	WithValue(value string) *MTRUserLabelClusterLabelStruct
 	Label() string

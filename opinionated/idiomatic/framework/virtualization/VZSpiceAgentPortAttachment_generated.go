@@ -5,65 +5,86 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An attachment point that enables the Spice clipboard sharing capability.
 //
-// SpiceAgentPortAttachment wraps [raw.VZSpiceAgentPortAttachment] with a fluent Go API.
+// SpiceAgentPortAttachment is an idiomatic wrapper over the Objective-C class VZSpiceAgentPortAttachment.
 type SpiceAgentPortAttachment struct {
-	inner *raw.VZSpiceAgentPortAttachment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZSpiceAgentPortAttachment].
-func (x *SpiceAgentPortAttachment) Unwrap() *raw.VZSpiceAgentPortAttachment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpiceAgentPortAttachment) ID() objc.ID { return x.inner.Ptr() }
-
-// SpiceAgentPortAttachmentFromID adopts an existing object pointer as a SpiceAgentPortAttachment (nil for 0).
+// SpiceAgentPortAttachmentFromID adopts an existing Objective-C object as a SpiceAgentPortAttachment
+// (nil for 0), retaining it and registering a release finalizer.
 func SpiceAgentPortAttachmentFromID(id objc.ID) *SpiceAgentPortAttachment {
 	if id == 0 {
 		return nil
 	}
-	return &SpiceAgentPortAttachment{inner: raw.VZSpiceAgentPortAttachmentFromID(id)}
+	x := &SpiceAgentPortAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSpiceAgentPortAttachment creates a new [SpiceAgentPortAttachment].
+// spiceAgentPortAttachmentAdopt wraps an Objective-C object that this code just created as a
+// SpiceAgentPortAttachment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func spiceAgentPortAttachmentAdopt(id objc.ID) *SpiceAgentPortAttachment {
+	if id == 0 {
+		return nil
+	}
+	x := &SpiceAgentPortAttachment{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SpiceAgentPortAttachment) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SpiceAgentPortAttachment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SpiceAgentPortAttachment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSpiceAgentPortAttachment creates a new SpiceAgentPortAttachment.
 func NewSpiceAgentPortAttachment() *SpiceAgentPortAttachment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZSpiceAgentPortAttachment")), objc.RegisterName("new"))
-	return &SpiceAgentPortAttachment{inner: raw.VZSpiceAgentPortAttachmentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZSpiceAgentPortAttachment")), objc.RegisterName("new"))
+	return spiceAgentPortAttachmentAdopt(_id)
 }
 
 // A Boolean value that indicates whether the framework needs to share the clipboard between the host and the VM.
 //
-// WithSharesClipboard sets the sharesClipboard property and returns the receiver for chaining.
+// WithSharesClipboard sets sharesClipboard and returns the receiver so calls can be chained.
 func (x *SpiceAgentPortAttachment) WithSharesClipboard(sharesClipboard bool) *SpiceAgentPortAttachment {
-	x.inner.SetSharesClipboard(sharesClipboard)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharesClipboard:"), sharesClipboard)
 	return x
 }
 
-// @abstract Enable the Spice agent clipboard sharing capability. @discussion If enabled, the clipboard capability will be advertised to the Spice guest agent. Copy and paste events will be shared between the host and the virtual machine. This property is enabled by default.
-//
-// SharesClipboard calls the underlying SharesClipboard.
+// Enable the Spice agent clipboard sharing capability. If enabled, the clipboard capability will be advertised to the Spice guest agent. Copy and paste events will be shared between the host and the virtual machine. This property is enabled by default.
 func (x *SpiceAgentPortAttachment) SharesClipboard() bool {
-	return x.inner.SharesClipboard()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sharesClipboard"))
+	return _r
 }
 
-// SetSharesClipboard calls the underlying SetSharesClipboard.
 func (x *SpiceAgentPortAttachment) SetSharesClipboard(sharesClipboard bool) {
-	x.inner.SetSharesClipboard(sharesClipboard)
-}
-
-func (x *SpiceAgentPortAttachment) asSerialPortAttachment() *raw.VZSerialPortAttachment {
-	return &x.inner.VZSerialPortAttachment
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharesClipboard:"), sharesClipboard)
 }
 
 // SpiceAgentPortAttachmentable is the interface implemented by [SpiceAgentPortAttachment], for mocking and DI.
 type SpiceAgentPortAttachmentable interface {
-	Unwrap() *raw.VZSpiceAgentPortAttachment
+	obj.Object
 	WithSharesClipboard(sharesClipboard bool) *SpiceAgentPortAttachment
 	SharesClipboard() bool
 	SetSharesClipboard(sharesClipboard bool)

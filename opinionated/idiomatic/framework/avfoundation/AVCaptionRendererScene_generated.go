@@ -5,64 +5,80 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that holds a time range and an associated state which indicates when the renderer draws output.
 //
-// CaptionRendererScene wraps [raw.AVCaptionRendererScene] with a fluent Go API.
+// CaptionRendererScene is an idiomatic wrapper over the Objective-C class AVCaptionRendererScene.
 type CaptionRendererScene struct {
-	inner *raw.AVCaptionRendererScene
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptionRendererScene].
-func (x *CaptionRendererScene) Unwrap() *raw.AVCaptionRendererScene { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptionRendererScene) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptionRendererSceneFromID adopts an existing object pointer as a CaptionRendererScene (nil for 0).
+// CaptionRendererSceneFromID adopts an existing Objective-C object as a CaptionRendererScene
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptionRendererSceneFromID(id objc.ID) *CaptionRendererScene {
 	if id == 0 {
 		return nil
 	}
-	return &CaptionRendererScene{inner: raw.AVCaptionRendererSceneFromID(id)}
+	x := &CaptionRendererScene{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCaptionRendererScene creates a new [CaptionRendererScene].
+// captionRendererSceneAdopt wraps an Objective-C object that this code just created as a
+// CaptionRendererScene (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captionRendererSceneAdopt(id objc.ID) *CaptionRendererScene {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptionRendererScene{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptionRendererScene) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptionRendererScene) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptionRendererScene) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptionRendererScene creates a new CaptionRendererScene.
 func NewCaptionRendererScene() *CaptionRendererScene {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionRendererScene")), objc.RegisterName("new"))
-	return &CaptionRendererScene{inner: raw.AVCaptionRendererSceneFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptionRendererScene")), objc.RegisterName("new"))
+	return captionRendererSceneAdopt(_id)
 }
 
-// @property timeRange @abstract The time range during which new captions will not be introduced into or existing captions will be retired from the caption scene
-//
-// TimeRange calls the underlying TimeRange.
-func (x *CaptionRendererScene) TimeRange() coremedia.CMTimeRange {
-	return x.inner.TimeRange()
-}
-
-// @property hasActiveCaptions @abstract The scene contains one or more active captions. @discussion Clients should not use this to restrict their drawing and should call renderInContext:atTime: to draw "emptiness". However, this information may be useful for purposes such as scrubbing to times where captions are present, skipping scenes in which no captions are present.
-//
-// HasActiveCaptions calls the underlying HasActiveCaptions.
+// The scene contains one or more active captions. Clients should not use this to restrict their drawing and should call renderInContext:atTime: to draw "emptiness". However, this information may be useful for purposes such as scrubbing to times where captions are present, skipping scenes in which no captions are present.
 func (x *CaptionRendererScene) HasActiveCaptions() bool {
-	return x.inner.HasActiveCaptions()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasActiveCaptions"))
+	return _r
 }
 
-// @property needsPeriodicRefresh @abstract The scene may have embedded animations or other state where periodic redrawing while playing through this scene is needed. @discussion This property indicates if refreshing should occur if the client is progressing through the content. If the client is not progressing (i.e., it is treating playback as though the rate is 0.0), a single render at the current render time suffices. This property does not prescribe a refresh rate. A client is free to choose a refresh rate corresponding to rates of associated video frames or other timing appropriate for the client.
-//
-// NeedsPeriodicRefresh calls the underlying NeedsPeriodicRefresh.
+// The scene may have embedded animations or other state where periodic redrawing while playing through this scene is needed. This property indicates if refreshing should occur if the client is progressing through the content. If the client is not progressing (i.e., it is treating playback as though the rate is 0.0), a single render at the current render time suffices. This property does not prescribe a refresh rate. A client is free to choose a refresh rate corresponding to rates of associated video frames or other timing appropriate for the client.
 func (x *CaptionRendererScene) NeedsPeriodicRefresh() bool {
-	return x.inner.NeedsPeriodicRefresh()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsPeriodicRefresh"))
+	return _r
 }
 
 // CaptionRendererSceneable is the interface implemented by [CaptionRendererScene], for mocking and DI.
 type CaptionRendererSceneable interface {
-	Unwrap() *raw.AVCaptionRendererScene
-	TimeRange() coremedia.CMTimeRange
+	obj.Object
 	HasActiveCaptions() bool
 	NeedsPeriodicRefresh() bool
 }

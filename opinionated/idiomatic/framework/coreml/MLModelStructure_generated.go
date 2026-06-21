@@ -5,74 +5,86 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An enum representing the structure of a model.
 //
-// ModelStructure wraps [raw.MLModelStructure] with a fluent Go API.
+// ModelStructure is an idiomatic wrapper over the Objective-C class MLModelStructure.
 type ModelStructure struct {
-	inner *raw.MLModelStructure
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLModelStructure].
-func (x *ModelStructure) Unwrap() *raw.MLModelStructure { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ModelStructure) ID() objc.ID { return x.inner.Ptr() }
-
-// ModelStructureFromID adopts an existing object pointer as a ModelStructure (nil for 0).
+// ModelStructureFromID adopts an existing Objective-C object as a ModelStructure
+// (nil for 0), retaining it and registering a release finalizer.
 func ModelStructureFromID(id objc.ID) *ModelStructure {
 	if id == 0 {
 		return nil
 	}
-	return &ModelStructure{inner: raw.MLModelStructureFromID(id)}
+	x := &ModelStructure{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewModelStructure creates a new [ModelStructure].
+// modelStructureAdopt wraps an Objective-C object that this code just created as a
+// ModelStructure (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func modelStructureAdopt(id objc.ID) *ModelStructure {
+	if id == 0 {
+		return nil
+	}
+	x := &ModelStructure{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ModelStructure) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ModelStructure) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ModelStructure) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewModelStructure creates a new ModelStructure.
 func NewModelStructure() *ModelStructure {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLModelStructure")), objc.RegisterName("new"))
-	return &ModelStructure{inner: raw.MLModelStructureFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructure")), objc.RegisterName("new"))
+	return modelStructureAdopt(_id)
 }
 
 // If the model is of NeuralNetwork type then it is the structure of the NeuralNetwork otherwise `nil`.
-//
-// NeuralNetwork calls the underlying NeuralNetwork.
 func (x *ModelStructure) NeuralNetwork() *ModelStructureNeuralNetwork {
-	_r := x.inner.NeuralNetwork()
-	if _r == nil {
-		return nil
-	}
-	return &ModelStructureNeuralNetwork{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("neuralNetwork"))
+	return ModelStructureNeuralNetworkFromID(_r)
 }
 
 // If the model is of ML Program type then it is the structure of the ML Program otherwise `nil`.
-//
-// Program calls the underlying Program.
 func (x *ModelStructure) Program() *ModelStructureProgram {
-	_r := x.inner.Program()
-	if _r == nil {
-		return nil
-	}
-	return &ModelStructureProgram{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("program"))
+	return ModelStructureProgramFromID(_r)
 }
 
 // If the model is of Pipeline type then it is the structure of the Pipeline otherwise `nil`.
-//
-// Pipeline calls the underlying Pipeline.
 func (x *ModelStructure) Pipeline() *ModelStructurePipeline {
-	_r := x.inner.Pipeline()
-	if _r == nil {
-		return nil
-	}
-	return &ModelStructurePipeline{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pipeline"))
+	return ModelStructurePipelineFromID(_r)
 }
 
 // ModelStructureable is the interface implemented by [ModelStructure], for mocking and DI.
 type ModelStructureable interface {
-	Unwrap() *raw.MLModelStructure
+	obj.Object
 	NeuralNetwork() *ModelStructureNeuralNetwork
 	Program() *ModelStructureProgram
 	Pipeline() *ModelStructurePipeline

@@ -5,72 +5,91 @@
 package commonpanels
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/commonpanels"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KFontPanelATSUFontIDKey returns the value of the CoreFoundation reference constant kFontPanelATSUFontIDKey as an objc.ID.
-func KFontPanelATSUFontIDKey() objc.ID { return purego.CFConstant(raw.KFontPanelATSUFontIDKey()) }
-
-// KFontPanelVariationAxesKey returns the value of the CoreFoundation reference constant kFontPanelVariationAxesKey as an objc.ID.
-func KFontPanelVariationAxesKey() objc.ID { return purego.CFConstant(raw.KFontPanelVariationAxesKey()) }
-
-// KFontPanelVariationValuesKey returns the value of the CoreFoundation reference constant kFontPanelVariationValuesKey as an objc.ID.
-func KFontPanelVariationValuesKey() objc.ID {
-	return purego.CFConstant(raw.KFontPanelVariationValuesKey())
+// KFontPanelATSUFontIDKey returns the value of the constant kFontPanelATSUFontIDKey.
+func KFontPanelATSUFontIDKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFontPanelATSUFontIDKey")))
 }
 
-// KFontPanelFeatureTypesKey returns the value of the CoreFoundation reference constant kFontPanelFeatureTypesKey as an objc.ID.
-func KFontPanelFeatureTypesKey() objc.ID { return purego.CFConstant(raw.KFontPanelFeatureTypesKey()) }
-
-// KFontPanelFeatureSelectorsKey returns the value of the CoreFoundation reference constant kFontPanelFeatureSelectorsKey as an objc.ID.
-func KFontPanelFeatureSelectorsKey() objc.ID {
-	return purego.CFConstant(raw.KFontPanelFeatureSelectorsKey())
+// KFontPanelVariationAxesKey returns the value of the constant kFontPanelVariationAxesKey.
+func KFontPanelVariationAxesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFontPanelVariationAxesKey")))
 }
 
-// KFontPanelAttributesKey returns the value of the CoreFoundation reference constant kFontPanelAttributesKey as an objc.ID.
-func KFontPanelAttributesKey() objc.ID { return purego.CFConstant(raw.KFontPanelAttributesKey()) }
-
-// KFontPanelAttributeTagsKey returns the value of the CoreFoundation reference constant kFontPanelAttributeTagsKey as an objc.ID.
-func KFontPanelAttributeTagsKey() objc.ID { return purego.CFConstant(raw.KFontPanelAttributeTagsKey()) }
-
-// KFontPanelAttributeSizesKey returns the value of the CoreFoundation reference constant kFontPanelAttributeSizesKey as an objc.ID.
-func KFontPanelAttributeSizesKey() objc.ID {
-	return purego.CFConstant(raw.KFontPanelAttributeSizesKey())
+// KFontPanelVariationValuesKey returns the value of the constant kFontPanelVariationValuesKey.
+func KFontPanelVariationValuesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFontPanelVariationValuesKey")))
 }
 
-// KFontPanelAttributeValuesKey returns the value of the CoreFoundation reference constant kFontPanelAttributeValuesKey as an objc.ID.
-func KFontPanelAttributeValuesKey() objc.ID {
-	return purego.CFConstant(raw.KFontPanelAttributeValuesKey())
+// KFontPanelFeatureTypesKey returns the value of the constant kFontPanelFeatureTypesKey.
+func KFontPanelFeatureTypesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFontPanelFeatureTypesKey")))
 }
 
-// KFontPanelMouseTrackingState returns the value of the CoreFoundation reference constant kFontPanelMouseTrackingState as an objc.ID.
-func KFontPanelMouseTrackingState() objc.ID {
-	return purego.CFConstant(raw.KFontPanelMouseTrackingState())
+// KFontPanelFeatureSelectorsKey returns the value of the constant kFontPanelFeatureSelectorsKey.
+func KFontPanelFeatureSelectorsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFontPanelFeatureSelectorsKey")))
 }
 
-// KFontPanelBackgroundColorAttributeName returns the value of the CoreFoundation reference constant kFontPanelBackgroundColorAttributeName as an objc.ID.
-func KFontPanelBackgroundColorAttributeName() objc.ID {
-	return purego.CFConstant(raw.KFontPanelBackgroundColorAttributeName())
+// KFontPanelAttributesKey returns the value of the constant kFontPanelAttributesKey.
+func KFontPanelAttributesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFontPanelAttributesKey")))
 }
 
-// KFCFontFamilyAttribute returns the value of the CoreFoundation reference constant kFCFontFamilyAttribute as an objc.ID.
-func KFCFontFamilyAttribute() objc.ID { return purego.CFConstant(raw.KFCFontFamilyAttribute()) }
-
-// KFCFontNameAttribute returns the value of the CoreFoundation reference constant kFCFontNameAttribute as an objc.ID.
-func KFCFontNameAttribute() objc.ID { return purego.CFConstant(raw.KFCFontNameAttribute()) }
-
-// KFCFontFaceAttribute returns the value of the CoreFoundation reference constant kFCFontFaceAttribute as an objc.ID.
-func KFCFontFaceAttribute() objc.ID { return purego.CFConstant(raw.KFCFontFaceAttribute()) }
-
-// KFCFontSizeAttribute returns the value of the CoreFoundation reference constant kFCFontSizeAttribute as an objc.ID.
-func KFCFontSizeAttribute() objc.ID { return purego.CFConstant(raw.KFCFontSizeAttribute()) }
-
-// KFCFontVisibleNameAttribute returns the value of the CoreFoundation reference constant kFCFontVisibleNameAttribute as an objc.ID.
-func KFCFontVisibleNameAttribute() objc.ID {
-	return purego.CFConstant(raw.KFCFontVisibleNameAttribute())
+// KFontPanelAttributeTagsKey returns the value of the constant kFontPanelAttributeTagsKey.
+func KFontPanelAttributeTagsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFontPanelAttributeTagsKey")))
 }
 
-// KFCFontCGColorAttribute returns the value of the CoreFoundation reference constant kFCFontCGColorAttribute as an objc.ID.
-func KFCFontCGColorAttribute() objc.ID { return purego.CFConstant(raw.KFCFontCGColorAttribute()) }
+// KFontPanelAttributeSizesKey returns the value of the constant kFontPanelAttributeSizesKey.
+func KFontPanelAttributeSizesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFontPanelAttributeSizesKey")))
+}
+
+// KFontPanelAttributeValuesKey returns the value of the constant kFontPanelAttributeValuesKey.
+func KFontPanelAttributeValuesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFontPanelAttributeValuesKey")))
+}
+
+// KFontPanelMouseTrackingState returns the value of the constant kFontPanelMouseTrackingState.
+func KFontPanelMouseTrackingState() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFontPanelMouseTrackingState")))
+}
+
+// KFontPanelBackgroundColorAttributeName returns the value of the constant kFontPanelBackgroundColorAttributeName.
+func KFontPanelBackgroundColorAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFontPanelBackgroundColorAttributeName")))
+}
+
+// KFCFontFamilyAttribute returns the value of the constant kFCFontFamilyAttribute.
+func KFCFontFamilyAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFCFontFamilyAttribute")))
+}
+
+// KFCFontNameAttribute returns the value of the constant kFCFontNameAttribute.
+func KFCFontNameAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFCFontNameAttribute")))
+}
+
+// KFCFontFaceAttribute returns the value of the constant kFCFontFaceAttribute.
+func KFCFontFaceAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFCFontFaceAttribute")))
+}
+
+// KFCFontSizeAttribute returns the value of the constant kFCFontSizeAttribute.
+func KFCFontSizeAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFCFontSizeAttribute")))
+}
+
+// KFCFontVisibleNameAttribute returns the value of the constant kFCFontVisibleNameAttribute.
+func KFCFontVisibleNameAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFCFontVisibleNameAttribute")))
+}
+
+// KFCFontCGColorAttribute returns the value of the constant kFCFontCGColorAttribute.
+func KFCFontCGColorAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFCFontCGColorAttribute")))
+}

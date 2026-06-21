@@ -6,61 +6,83 @@ package matter
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Cluster Energy EVSE Mode Attributes and commands for selecting a mode from a list of supported options.
 //
-// MTRClusterEnergyEVSEMode wraps [raw.MTRClusterEnergyEVSEMode] with a fluent Go API.
+// MTRClusterEnergyEVSEMode is an idiomatic wrapper over the Objective-C class MTRClusterEnergyEVSEMode.
 type MTRClusterEnergyEVSEMode struct {
-	inner *raw.MTRClusterEnergyEVSEMode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterEnergyEVSEMode].
-func (x *MTRClusterEnergyEVSEMode) Unwrap() *raw.MTRClusterEnergyEVSEMode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterEnergyEVSEMode) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterEnergyEVSEModeFromID adopts an existing object pointer as a MTRClusterEnergyEVSEMode (nil for 0).
+// MTRClusterEnergyEVSEModeFromID adopts an existing Objective-C object as a MTRClusterEnergyEVSEMode
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterEnergyEVSEModeFromID(id objc.ID) *MTRClusterEnergyEVSEMode {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterEnergyEVSEMode{inner: raw.MTRClusterEnergyEVSEModeFromID(id)}
+	x := &MTRClusterEnergyEVSEMode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterEnergyEVSEModeAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterEnergyEVSEMode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterEnergyEVSEModeAdopt(id objc.ID) *MTRClusterEnergyEVSEMode {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterEnergyEVSEMode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterEnergyEVSEMode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterEnergyEVSEMode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterEnergyEVSEMode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterEnergyEVSEModeWithDeviceEndpointIDQueue creates a new [MTRClusterEnergyEVSEMode].
-func NewMTRClusterEnergyEVSEModeWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterEnergyEVSEMode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterEnergyEVSEMode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterEnergyEVSEMode{inner: raw.MTRClusterEnergyEVSEModeFromID(_id)}
+// NewMTRClusterEnergyEVSEModeWithDeviceEndpointIDQueue creates a new MTRClusterEnergyEVSEMode.
+func NewMTRClusterEnergyEVSEModeWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterEnergyEVSEMode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterEnergyEVSEMode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterEnergyEVSEModeAdopt(_id)
 }
 
 // ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterEnergyEVSEMode) ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTREnergyEVSEModeClusterChangeToModeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTREnergyEVSEModeClusterChangeToModeResponseParams, error) {
+func (x *MTRClusterEnergyEVSEMode) ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTREnergyEVSEModeClusterChangeToModeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTREnergyEVSEModeClusterChangeToModeResponseParams, error) {
 	type _result struct {
 		val *MTREnergyEVSEModeClusterChangeToModeResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTREnergyEVSEModeClusterChangeToModeResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTREnergyEVSEModeClusterChangeToModeResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTREnergyEVSEModeClusterChangeToModeResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeToModeWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -70,60 +92,52 @@ func (x *MTRClusterEnergyEVSEMode) ChangeToModeWithParamsExpectedValuesExpectedV
 	}
 }
 
-// ReadAttributeSupportedModesWithParams calls the underlying ReadAttributeSupportedModesWithParams.
-func (x *MTRClusterEnergyEVSEMode) ReadAttributeSupportedModesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSupportedModesWithParams(params)
+func (x *MTRClusterEnergyEVSEMode) ReadAttributeSupportedModesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedModesWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentModeWithParams calls the underlying ReadAttributeCurrentModeWithParams.
-func (x *MTRClusterEnergyEVSEMode) ReadAttributeCurrentModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentModeWithParams(params)
+func (x *MTRClusterEnergyEVSEMode) ReadAttributeCurrentModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentModeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterEnergyEVSEMode) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterEnergyEVSEMode) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterEnergyEVSEMode) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterEnergyEVSEMode) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterEnergyEVSEMode) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterEnergyEVSEMode) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterEnergyEVSEMode) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+func (x *MTRClusterEnergyEVSEMode) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterEnergyEVSEMode) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterEnergyEVSEMode) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterEnergyEVSEMode) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterEnergyEVSEMode) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterEnergyEVSEModeable is the interface implemented by [MTRClusterEnergyEVSEMode], for mocking and DI.
 type MTRClusterEnergyEVSEModeable interface {
-	Unwrap() *raw.MTRClusterEnergyEVSEMode
-	ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTREnergyEVSEModeClusterChangeToModeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTREnergyEVSEModeClusterChangeToModeResponseParams, error)
-	ReadAttributeSupportedModesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTREnergyEVSEModeClusterChangeToModeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTREnergyEVSEModeClusterChangeToModeResponseParams, error)
+	ReadAttributeSupportedModesWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentModeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterEnergyEVSEModeable = (*MTRClusterEnergyEVSEMode)(nil)

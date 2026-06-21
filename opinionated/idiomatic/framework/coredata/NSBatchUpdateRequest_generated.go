@@ -5,188 +5,185 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A request to Core Data to do a batch update of data in a persistent store without loading any data into memory.
 //
-// BatchUpdateRequest wraps [raw.NSBatchUpdateRequest] with a fluent Go API.
+// BatchUpdateRequest is an idiomatic wrapper over the Objective-C class NSBatchUpdateRequest.
 type BatchUpdateRequest struct {
-	inner *raw.NSBatchUpdateRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSBatchUpdateRequest].
-func (x *BatchUpdateRequest) Unwrap() *raw.NSBatchUpdateRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BatchUpdateRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// BatchUpdateRequestFromID adopts an existing object pointer as a BatchUpdateRequest (nil for 0).
+// BatchUpdateRequestFromID adopts an existing Objective-C object as a BatchUpdateRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func BatchUpdateRequestFromID(id objc.ID) *BatchUpdateRequest {
 	if id == 0 {
 		return nil
 	}
-	return &BatchUpdateRequest{inner: raw.NSBatchUpdateRequestFromID(id)}
+	x := &BatchUpdateRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// batchUpdateRequestAdopt wraps an Objective-C object that this code just created as a
+// BatchUpdateRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func batchUpdateRequestAdopt(id objc.ID) *BatchUpdateRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &BatchUpdateRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BatchUpdateRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BatchUpdateRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BatchUpdateRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a batch-update request for a named managed entity.
 //
-// NewBatchUpdateRequestWithEntityName creates a new [BatchUpdateRequest].
+// NewBatchUpdateRequestWithEntityName creates a new BatchUpdateRequest.
 func NewBatchUpdateRequestWithEntityName(entityName string) *BatchUpdateRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBatchUpdateRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntityName:"), foundation.NSStringStringWithUTF8String(entityName).Ptr())
-	return &BatchUpdateRequest{inner: raw.NSBatchUpdateRequestFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBatchUpdateRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntityName:"), purego.NSString(entityName))
+	return batchUpdateRequestAdopt(_id)
 }
 
 // Creates a batch-update request for a managed entity.
 //
-// NewBatchUpdateRequestWithEntity creates a new [BatchUpdateRequest].
-func NewBatchUpdateRequestWithEntity(entity *raw.NSEntityDescription) *BatchUpdateRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBatchUpdateRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntity:"), entity.Ptr())
-	return &BatchUpdateRequest{inner: raw.NSBatchUpdateRequestFromID(_id)}
+// NewBatchUpdateRequestWithEntity creates a new BatchUpdateRequest.
+func NewBatchUpdateRequestWithEntity(entity *EntityDescription) *BatchUpdateRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBatchUpdateRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntity:"), objref.IDOf(entity))
+	return batchUpdateRequestAdopt(_id)
 }
 
 // A predicate that identifies the objects to update.
 //
-// WithPredicate sets the predicate property and returns the receiver for chaining.
-func (x *BatchUpdateRequest) WithPredicate(predicate *foundation.NSPredicate) *BatchUpdateRequest {
-	x.inner.SetPredicate(predicate)
+// WithPredicate sets predicate and returns the receiver so calls can be chained.
+func (x *BatchUpdateRequest) WithPredicate(predicate obj.Object) *BatchUpdateRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 	return x
 }
 
 // A Boolean value that indicates whether to update subentities.
 //
-// WithIncludesSubentities sets the includesSubentities property and returns the receiver for chaining.
+// WithIncludesSubentities sets includesSubentities and returns the receiver so calls can be chained.
 func (x *BatchUpdateRequest) WithIncludesSubentities(includesSubentities bool) *BatchUpdateRequest {
-	x.inner.SetIncludesSubentities(includesSubentities)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesSubentities:"), includesSubentities)
 	return x
 }
 
 // The type of result that Core Data returns from the request.
 //
-// WithResultType sets the resultType property and returns the receiver for chaining.
-func (x *BatchUpdateRequest) WithResultType(resultType NSBatchUpdateRequestResultType) *BatchUpdateRequest {
-	x.inner.SetResultType(raw.NSBatchUpdateRequestResultType(resultType))
+// WithResultType sets resultType and returns the receiver so calls can be chained.
+func (x *BatchUpdateRequest) WithResultType(resultType BatchUpdateRequestResultType) *BatchUpdateRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
 	return x
 }
 
 // A dictionary of property description pairs that describe the updates.
 //
-// WithPropertiesToUpdate sets the propertiesToUpdate property and returns the receiver for chaining.
-func (x *BatchUpdateRequest) WithPropertiesToUpdate(propertiesToUpdate *foundation.NSDictionary[objc.ID, objc.ID]) *BatchUpdateRequest {
-	x.inner.SetPropertiesToUpdate(propertiesToUpdate)
+// WithPropertiesToUpdate sets propertiesToUpdate and returns the receiver so calls can be chained.
+func (x *BatchUpdateRequest) WithPropertiesToUpdate(propertiesToUpdate obj.Object) *BatchUpdateRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertiesToUpdate:"), objref.IDOf(propertiesToUpdate))
 	return x
 }
 
 // The stores the request should be sent to.
 //
-// WithAffectedStores sets the collection, converting the Go slice to an NSArray.
+// WithAffectedStores sets the collection and returns the receiver so calls can be chained.
 func (x *BatchUpdateRequest) WithAffectedStores(items ...PersistentStoreProvider) *BatchUpdateRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSPersistentStoreRequest.SetAffectedStores(foundation.NSArrayFromID[*raw.NSPersistentStore](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asPersistentStore().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSPersistentStoreRequest.SetAffectedStores(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
 	return x
 }
 
-// EntityName calls the underlying EntityName.
 func (x *BatchUpdateRequest) EntityName() string {
-	_r := x.inner.EntityName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entityName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Entity calls the underlying Entity.
 func (x *BatchUpdateRequest) Entity() *EntityDescription {
-	_r := x.inner.Entity()
-	if _r == nil {
-		return nil
-	}
-	return &EntityDescription{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entity"))
+	return EntityDescriptionFromID(_r)
 }
 
-// Predicate calls the underlying Predicate.
-func (x *BatchUpdateRequest) Predicate() *foundation.NSPredicate {
-	return x.inner.Predicate()
+func (x *BatchUpdateRequest) Predicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
+	return obj.Wrap(_r)
 }
 
-// SetPredicate calls the underlying SetPredicate.
-func (x *BatchUpdateRequest) SetPredicate(predicate *foundation.NSPredicate) {
-	x.inner.SetPredicate(predicate)
+func (x *BatchUpdateRequest) SetPredicate(predicate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 }
 
-// IncludesSubentities calls the underlying IncludesSubentities.
 func (x *BatchUpdateRequest) IncludesSubentities() bool {
-	return x.inner.IncludesSubentities()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesSubentities"))
+	return _r
 }
 
-// SetIncludesSubentities calls the underlying SetIncludesSubentities.
 func (x *BatchUpdateRequest) SetIncludesSubentities(includesSubentities bool) {
-	x.inner.SetIncludesSubentities(includesSubentities)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesSubentities:"), includesSubentities)
 }
 
-// ResultType calls the underlying ResultType.
-func (x *BatchUpdateRequest) ResultType() NSBatchUpdateRequestResultType {
-	return NSBatchUpdateRequestResultType(x.inner.ResultType())
+func (x *BatchUpdateRequest) ResultType() BatchUpdateRequestResultType {
+	_r := objc.Send[BatchUpdateRequestResultType](objref.IDOf(x), objc.RegisterName("resultType"))
+	return _r
 }
 
-// SetResultType calls the underlying SetResultType.
-func (x *BatchUpdateRequest) SetResultType(resultType NSBatchUpdateRequestResultType) {
-	x.inner.SetResultType(raw.NSBatchUpdateRequestResultType(resultType))
+func (x *BatchUpdateRequest) SetResultType(resultType BatchUpdateRequestResultType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
 }
 
-// PropertiesToUpdate calls the underlying PropertiesToUpdate.
-func (x *BatchUpdateRequest) PropertiesToUpdate() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.PropertiesToUpdate()
+func (x *BatchUpdateRequest) PropertiesToUpdate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertiesToUpdate"))
+	return obj.Wrap(_r)
 }
 
-// SetPropertiesToUpdate calls the underlying SetPropertiesToUpdate.
-func (x *BatchUpdateRequest) SetPropertiesToUpdate(propertiesToUpdate *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.SetPropertiesToUpdate(propertiesToUpdate)
-}
-
-func (x *BatchUpdateRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest {
-	return &x.inner.NSPersistentStoreRequest
+func (x *BatchUpdateRequest) SetPropertiesToUpdate(propertiesToUpdate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertiesToUpdate:"), objref.IDOf(propertiesToUpdate))
 }
 
 // BatchUpdateRequestable is the interface implemented by [BatchUpdateRequest], for mocking and DI.
 type BatchUpdateRequestable interface {
-	Unwrap() *raw.NSBatchUpdateRequest
-	WithPredicate(predicate *foundation.NSPredicate) *BatchUpdateRequest
+	obj.Object
+	WithPredicate(predicate obj.Object) *BatchUpdateRequest
 	WithIncludesSubentities(includesSubentities bool) *BatchUpdateRequest
-	WithResultType(resultType NSBatchUpdateRequestResultType) *BatchUpdateRequest
-	WithPropertiesToUpdate(propertiesToUpdate *foundation.NSDictionary[objc.ID, objc.ID]) *BatchUpdateRequest
+	WithResultType(resultType BatchUpdateRequestResultType) *BatchUpdateRequest
+	WithPropertiesToUpdate(propertiesToUpdate obj.Object) *BatchUpdateRequest
 	WithAffectedStores(items ...PersistentStoreProvider) *BatchUpdateRequest
 	EntityName() string
 	Entity() *EntityDescription
-	Predicate() *foundation.NSPredicate
-	SetPredicate(predicate *foundation.NSPredicate)
+	Predicate() obj.Object
+	SetPredicate(predicate obj.Object)
 	IncludesSubentities() bool
 	SetIncludesSubentities(includesSubentities bool)
-	ResultType() NSBatchUpdateRequestResultType
-	SetResultType(resultType NSBatchUpdateRequestResultType)
-	PropertiesToUpdate() *foundation.NSDictionary[objc.ID, objc.ID]
-	SetPropertiesToUpdate(propertiesToUpdate *foundation.NSDictionary[objc.ID, objc.ID])
+	ResultType() BatchUpdateRequestResultType
+	SetResultType(resultType BatchUpdateRequestResultType)
+	PropertiesToUpdate() obj.Object
+	SetPropertiesToUpdate(propertiesToUpdate obj.Object)
 }
 
 var _ BatchUpdateRequestable = (*BatchUpdateRequest)(nil)

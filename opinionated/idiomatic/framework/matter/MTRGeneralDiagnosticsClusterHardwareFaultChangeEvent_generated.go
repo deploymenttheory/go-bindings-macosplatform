@@ -5,66 +5,88 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent wraps [raw.MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent] with a fluent Go API.
+// MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent is an idiomatic wrapper over the Objective-C class MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent.
 type MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent struct {
-	inner *raw.MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent].
-func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Unwrap() *raw.MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRGeneralDiagnosticsClusterHardwareFaultChangeEventFromID adopts an existing object pointer as a MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent (nil for 0).
+// MTRGeneralDiagnosticsClusterHardwareFaultChangeEventFromID adopts an existing Objective-C object as a MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRGeneralDiagnosticsClusterHardwareFaultChangeEventFromID(id objc.ID) *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent{inner: raw.MTRGeneralDiagnosticsClusterHardwareFaultChangeEventFromID(id)}
+	x := &MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRGeneralDiagnosticsClusterHardwareFaultChangeEvent creates a new [MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent].
+// mTRGeneralDiagnosticsClusterHardwareFaultChangeEventAdopt wraps an Objective-C object that this code just created as a
+// MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRGeneralDiagnosticsClusterHardwareFaultChangeEventAdopt(id objc.ID) *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRGeneralDiagnosticsClusterHardwareFaultChangeEvent creates a new MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent.
 func NewMTRGeneralDiagnosticsClusterHardwareFaultChangeEvent() *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent")), objc.RegisterName("new"))
-	return &MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent{inner: raw.MTRGeneralDiagnosticsClusterHardwareFaultChangeEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent")), objc.RegisterName("new"))
+	return mTRGeneralDiagnosticsClusterHardwareFaultChangeEventAdopt(_id)
 }
 
-// Current calls the underlying Current.
-func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Current() *foundation.NSArray[objc.ID] {
-	return x.inner.Current()
+func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Current() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("current"))
+	return obj.Wrap(_r)
 }
 
-// SetCurrent calls the underlying SetCurrent.
-func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) SetCurrent(current *foundation.NSArray[objc.ID]) {
-	x.inner.SetCurrent(current)
+func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) SetCurrent(current obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
-// Previous calls the underlying Previous.
-func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Previous() *foundation.NSArray[objc.ID] {
-	return x.inner.Previous()
+func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Previous() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previous"))
+	return obj.Wrap(_r)
 }
 
-// SetPrevious calls the underlying SetPrevious.
-func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) SetPrevious(previous *foundation.NSArray[objc.ID]) {
-	x.inner.SetPrevious(previous)
+func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) SetPrevious(previous obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
 }
 
 // MTRGeneralDiagnosticsClusterHardwareFaultChangeEventable is the interface implemented by [MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent], for mocking and DI.
 type MTRGeneralDiagnosticsClusterHardwareFaultChangeEventable interface {
-	Unwrap() *raw.MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent
-	Current() *foundation.NSArray[objc.ID]
-	SetCurrent(current *foundation.NSArray[objc.ID])
-	Previous() *foundation.NSArray[objc.ID]
-	SetPrevious(previous *foundation.NSArray[objc.ID])
+	obj.Object
+	Current() obj.Object
+	SetCurrent(current obj.Object)
+	Previous() obj.Object
+	SetPrevious(previous obj.Object)
 }
 
 var _ MTRGeneralDiagnosticsClusterHardwareFaultChangeEventable = (*MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent)(nil)

@@ -5,100 +5,110 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A specification for a metaparameter defined by a number.
 //
-// NumberMetaParameterDefinition wraps [raw.PHASENumberMetaParameterDefinition] with a fluent Go API.
+// NumberMetaParameterDefinition is an idiomatic wrapper over the Objective-C class PHASENumberMetaParameterDefinition.
 type NumberMetaParameterDefinition struct {
-	inner *raw.PHASENumberMetaParameterDefinition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASENumberMetaParameterDefinition].
-func (x *NumberMetaParameterDefinition) Unwrap() *raw.PHASENumberMetaParameterDefinition {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NumberMetaParameterDefinition) ID() objc.ID { return x.inner.Ptr() }
-
-// NumberMetaParameterDefinitionFromID adopts an existing object pointer as a NumberMetaParameterDefinition (nil for 0).
+// NumberMetaParameterDefinitionFromID adopts an existing Objective-C object as a NumberMetaParameterDefinition
+// (nil for 0), retaining it and registering a release finalizer.
 func NumberMetaParameterDefinitionFromID(id objc.ID) *NumberMetaParameterDefinition {
 	if id == 0 {
 		return nil
 	}
-	return &NumberMetaParameterDefinition{inner: raw.PHASENumberMetaParameterDefinitionFromID(id)}
+	x := &NumberMetaParameterDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// numberMetaParameterDefinitionAdopt wraps an Objective-C object that this code just created as a
+// NumberMetaParameterDefinition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func numberMetaParameterDefinitionAdopt(id objc.ID) *NumberMetaParameterDefinition {
+	if id == 0 {
+		return nil
+	}
+	x := &NumberMetaParameterDefinition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NumberMetaParameterDefinition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NumberMetaParameterDefinition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NumberMetaParameterDefinition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a specification for a named metaparameter with the given numeric value.
 //
-// NewNumberMetaParameterDefinitionWithValueIdentifier creates a new [NumberMetaParameterDefinition].
+// NewNumberMetaParameterDefinitionWithValueIdentifier creates a new NumberMetaParameterDefinition.
 func NewNumberMetaParameterDefinitionWithValueIdentifier(value float64, identifier string) *NumberMetaParameterDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASENumberMetaParameterDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:identifier:"), value, foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &NumberMetaParameterDefinition{inner: raw.PHASENumberMetaParameterDefinitionFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASENumberMetaParameterDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:identifier:"), value, purego.NSString(identifier))
+	return numberMetaParameterDefinitionAdopt(_id)
 }
 
 // Creates a specification for a metaparameter with the given numeric value.
 //
-// NewNumberMetaParameterDefinitionWithValue creates a new [NumberMetaParameterDefinition].
+// NewNumberMetaParameterDefinitionWithValue creates a new NumberMetaParameterDefinition.
 func NewNumberMetaParameterDefinitionWithValue(value float64) *NumberMetaParameterDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASENumberMetaParameterDefinition")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASENumberMetaParameterDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:"), value)
-	return &NumberMetaParameterDefinition{inner: raw.PHASENumberMetaParameterDefinitionFromID(_id)}
+	return numberMetaParameterDefinitionAdopt(_id)
 }
 
 // Creates a specification for a named metaparameter with the given numeric value and range.
 //
-// NewNumberMetaParameterDefinitionWithValueMinimumMaximumIdentifier creates a new [NumberMetaParameterDefinition].
+// NewNumberMetaParameterDefinitionWithValueMinimumMaximumIdentifier creates a new NumberMetaParameterDefinition.
 func NewNumberMetaParameterDefinitionWithValueMinimumMaximumIdentifier(value float64, minimum float64, maximum float64, identifier string) *NumberMetaParameterDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASENumberMetaParameterDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:minimum:maximum:identifier:"), value, minimum, maximum, foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &NumberMetaParameterDefinition{inner: raw.PHASENumberMetaParameterDefinitionFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASENumberMetaParameterDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:minimum:maximum:identifier:"), value, minimum, maximum, purego.NSString(identifier))
+	return numberMetaParameterDefinitionAdopt(_id)
 }
 
 // Creates a specification for a metaparameter with the given numeric value and range.
 //
-// NewNumberMetaParameterDefinitionWithValueMinimumMaximum creates a new [NumberMetaParameterDefinition].
+// NewNumberMetaParameterDefinitionWithValueMinimumMaximum creates a new NumberMetaParameterDefinition.
 func NewNumberMetaParameterDefinitionWithValueMinimumMaximum(value float64, minimum float64, maximum float64) *NumberMetaParameterDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASENumberMetaParameterDefinition")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASENumberMetaParameterDefinition")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:minimum:maximum:"), value, minimum, maximum)
-	return &NumberMetaParameterDefinition{inner: raw.PHASENumberMetaParameterDefinitionFromID(_id)}
+	return numberMetaParameterDefinitionAdopt(_id)
 }
 
-// @property minimum @abstract The readonly minimum that this metaparameter definition was initialized with
-//
-// Minimum calls the underlying Minimum.
+// The readonly minimum that this metaparameter definition was initialized with
 func (x *NumberMetaParameterDefinition) Minimum() float64 {
-	return x.inner.Minimum()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimum"))
+	return _r
 }
 
-// @property maximum @abstract The readonly maximum that this metaparameter definition was initialized with
-//
-// Maximum calls the underlying Maximum.
+// The readonly maximum that this metaparameter definition was initialized with
 func (x *NumberMetaParameterDefinition) Maximum() float64 {
-	return x.inner.Maximum()
-}
-
-func (x *NumberMetaParameterDefinition) asNumberMetaParameterDefinition() *raw.PHASENumberMetaParameterDefinition {
-	return x.inner
-}
-
-func (x *NumberMetaParameterDefinition) asMetaParameterDefinition() *raw.PHASEMetaParameterDefinition {
-	return &x.inner.PHASEMetaParameterDefinition
-}
-
-func (x *NumberMetaParameterDefinition) asDefinition() *raw.PHASEDefinition {
-	return &x.inner.PHASEMetaParameterDefinition.PHASEDefinition
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximum"))
+	return _r
 }
 
 // NumberMetaParameterDefinitionable is the interface implemented by [NumberMetaParameterDefinition], for mocking and DI.
 type NumberMetaParameterDefinitionable interface {
-	Unwrap() *raw.PHASENumberMetaParameterDefinition
+	obj.Object
 	Minimum() float64
 	Maximum() float64
 }

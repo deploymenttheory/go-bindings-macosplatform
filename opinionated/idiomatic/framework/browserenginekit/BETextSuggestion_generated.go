@@ -5,57 +5,80 @@
 package browserenginekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/browserenginekit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A text suggestion to insert into a document.
 //
-// TextSuggestion wraps [raw.BETextSuggestion] with a fluent Go API.
+// TextSuggestion is an idiomatic wrapper over the Objective-C class BETextSuggestion.
 type TextSuggestion struct {
-	inner *raw.BETextSuggestion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.BETextSuggestion].
-func (x *TextSuggestion) Unwrap() *raw.BETextSuggestion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextSuggestion) ID() objc.ID { return x.inner.Ptr() }
-
-// TextSuggestionFromID adopts an existing object pointer as a TextSuggestion (nil for 0).
+// TextSuggestionFromID adopts an existing Objective-C object as a TextSuggestion
+// (nil for 0), retaining it and registering a release finalizer.
 func TextSuggestionFromID(id objc.ID) *TextSuggestion {
 	if id == 0 {
 		return nil
 	}
-	return &TextSuggestion{inner: raw.BETextSuggestionFromID(id)}
+	x := &TextSuggestion{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// textSuggestionAdopt wraps an Objective-C object that this code just created as a
+// TextSuggestion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textSuggestionAdopt(id objc.ID) *TextSuggestion {
+	if id == 0 {
+		return nil
+	}
+	x := &TextSuggestion{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TextSuggestion) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextSuggestion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextSuggestion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a new text suggestion with the given input text.
 //
-// NewTextSuggestionWithInputText creates a new [TextSuggestion].
+// NewTextSuggestionWithInputText creates a new TextSuggestion.
 func NewTextSuggestionWithInputText(inputText string) *TextSuggestion {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("BETextSuggestion")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputText:"), foundation.NSStringStringWithUTF8String(inputText).Ptr())
-	return &TextSuggestion{inner: raw.BETextSuggestionFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("BETextSuggestion")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputText:"), purego.NSString(inputText))
+	return textSuggestionAdopt(_id)
 }
 
 // Text that will be inserted into the document when the user chooses the suggestion.
-//
-// InputText calls the underlying InputText.
 func (x *TextSuggestion) InputText() string {
-	_r := x.inner.InputText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // TextSuggestionable is the interface implemented by [TextSuggestion], for mocking and DI.
 type TextSuggestionable interface {
-	Unwrap() *raw.BETextSuggestion
+	obj.Object
 	InputText() string
 }
 

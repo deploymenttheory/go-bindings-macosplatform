@@ -5,66 +5,86 @@
 package datadetection
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/datadetection"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains an email address that the data detection system matches.
 //
-// MatchEmailAddress wraps [raw.DDMatchEmailAddress] with a fluent Go API.
+// MatchEmailAddress is an idiomatic wrapper over the Objective-C class DDMatchEmailAddress.
 type MatchEmailAddress struct {
-	inner *raw.DDMatchEmailAddress
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DDMatchEmailAddress].
-func (x *MatchEmailAddress) Unwrap() *raw.DDMatchEmailAddress { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatchEmailAddress) ID() objc.ID { return x.inner.Ptr() }
-
-// MatchEmailAddressFromID adopts an existing object pointer as a MatchEmailAddress (nil for 0).
+// MatchEmailAddressFromID adopts an existing Objective-C object as a MatchEmailAddress
+// (nil for 0), retaining it and registering a release finalizer.
 func MatchEmailAddressFromID(id objc.ID) *MatchEmailAddress {
 	if id == 0 {
 		return nil
 	}
-	return &MatchEmailAddress{inner: raw.DDMatchEmailAddressFromID(id)}
+	x := &MatchEmailAddress{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMatchEmailAddress creates a new [MatchEmailAddress].
+// matchEmailAddressAdopt wraps an Objective-C object that this code just created as a
+// MatchEmailAddress (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matchEmailAddressAdopt(id objc.ID) *MatchEmailAddress {
+	if id == 0 {
+		return nil
+	}
+	x := &MatchEmailAddress{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MatchEmailAddress) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatchEmailAddress) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatchEmailAddress) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMatchEmailAddress creates a new MatchEmailAddress.
 func NewMatchEmailAddress() *MatchEmailAddress {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DDMatchEmailAddress")), objc.RegisterName("new"))
-	return &MatchEmailAddress{inner: raw.DDMatchEmailAddressFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DDMatchEmailAddress")), objc.RegisterName("new"))
+	return matchEmailAddressAdopt(_id)
 }
 
 // A string that represents an email address.
-//
-// EmailAddress calls the underlying EmailAddress.
 func (x *MatchEmailAddress) EmailAddress() string {
-	_r := x.inner.EmailAddress()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emailAddress"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // A string that categorizes an email address, such as Home or Work.
-//
-// Label calls the underlying Label.
 func (x *MatchEmailAddress) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *MatchEmailAddress) asMatch() *raw.DDMatch { return &x.inner.DDMatch }
 
 // MatchEmailAddressable is the interface implemented by [MatchEmailAddress], for mocking and DI.
 type MatchEmailAddressable interface {
-	Unwrap() *raw.DDMatchEmailAddress
+	obj.Object
 	EmailAddress() string
 	Label() string
 }

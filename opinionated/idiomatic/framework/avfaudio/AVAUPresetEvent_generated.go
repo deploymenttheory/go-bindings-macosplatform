@@ -5,102 +5,117 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a preset load and change on the music track’s destination audio unit.
 //
-// AUPresetEvent wraps [raw.AVAUPresetEvent] with a fluent Go API.
+// AUPresetEvent is an idiomatic wrapper over the Objective-C class AVAUPresetEvent.
 type AUPresetEvent struct {
-	inner *raw.AVAUPresetEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAUPresetEvent].
-func (x *AUPresetEvent) Unwrap() *raw.AVAUPresetEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AUPresetEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// AUPresetEventFromID adopts an existing object pointer as a AUPresetEvent (nil for 0).
+// AUPresetEventFromID adopts an existing Objective-C object as a AUPresetEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func AUPresetEventFromID(id objc.ID) *AUPresetEvent {
 	if id == 0 {
 		return nil
 	}
-	return &AUPresetEvent{inner: raw.AVAUPresetEventFromID(id)}
+	x := &AUPresetEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// aUPresetEventAdopt wraps an Objective-C object that this code just created as a
+// AUPresetEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func aUPresetEventAdopt(id objc.ID) *AUPresetEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &AUPresetEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AUPresetEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AUPresetEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AUPresetEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an event with the scope, element, and dictionary for the preset.
 //
-// NewAUPresetEventWithScopeElementDictionary creates a new [AUPresetEvent].
-func NewAUPresetEventWithScopeElementDictionary(scope uint, element uint, presetDictionary purego.IDer) *AUPresetEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAUPresetEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScope:element:dictionary:"), scope, element, presetDictionary.ID())
-	return &AUPresetEvent{inner: raw.AVAUPresetEventFromID(_id)}
+// NewAUPresetEventWithScopeElementDictionary creates a new AUPresetEvent.
+func NewAUPresetEventWithScopeElementDictionary(scope int, element int, presetDictionary obj.Object) *AUPresetEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAUPresetEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScope:element:dictionary:"), scope, element, objref.IDOf(presetDictionary))
+	return aUPresetEventAdopt(_id)
 }
 
 // The audio unit scope.
 //
-// WithScope sets the scope property and returns the receiver for chaining.
-func (x *AUPresetEvent) WithScope(scope uint) *AUPresetEvent {
-	x.inner.SetScope(scope)
+// WithScope sets scope and returns the receiver so calls can be chained.
+func (x *AUPresetEvent) WithScope(scope int) *AUPresetEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), scope)
 	return x
 }
 
 // The element index in the scope.
 //
-// WithElement sets the element property and returns the receiver for chaining.
-func (x *AUPresetEvent) WithElement(element uint) *AUPresetEvent {
-	x.inner.SetElement(element)
+// WithElement sets element and returns the receiver so calls can be chained.
+func (x *AUPresetEvent) WithElement(element int) *AUPresetEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElement:"), element)
 	return x
 }
 
-// @property scope The audio unit scope for the parameter (see AudioUnitScope).  This should always be set to Global.
-//
-// Scope calls the underlying Scope.
-func (x *AUPresetEvent) Scope() uint {
-	return x.inner.Scope()
+func (x *AUPresetEvent) Scope() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("scope"))
+	return _r
 }
 
-// SetScope calls the underlying SetScope.
-func (x *AUPresetEvent) SetScope(scope uint) {
-	x.inner.SetScope(scope)
+func (x *AUPresetEvent) SetScope(scope int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScope:"), scope)
 }
 
-// @property element The element index within the scope (see AudioUnitElement).  This should usually be set to 0.
-//
-// Element calls the underlying Element.
-func (x *AUPresetEvent) Element() uint {
-	return x.inner.Element()
+func (x *AUPresetEvent) Element() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("element"))
+	return _r
 }
 
-// SetElement calls the underlying SetElement.
-func (x *AUPresetEvent) SetElement(element uint) {
-	x.inner.SetElement(element)
+func (x *AUPresetEvent) SetElement(element int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElement:"), element)
 }
 
-// @property presetDictionary An NSDictionary containing the preset.
-//
-// PresetDictionary calls the underlying PresetDictionary.
-func (x *AUPresetEvent) PresetDictionary() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.PresetDictionary()
+func (x *AUPresetEvent) PresetDictionary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presetDictionary"))
+	return obj.Wrap(_r)
 }
-
-func (x *AUPresetEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMusicEvent }
 
 // AUPresetEventable is the interface implemented by [AUPresetEvent], for mocking and DI.
 type AUPresetEventable interface {
-	Unwrap() *raw.AVAUPresetEvent
-	WithScope(scope uint) *AUPresetEvent
-	WithElement(element uint) *AUPresetEvent
-	Scope() uint
-	SetScope(scope uint)
-	Element() uint
-	SetElement(element uint)
-	PresetDictionary() *foundation.NSDictionary[objc.ID, objc.ID]
+	obj.Object
+	WithScope(scope int) *AUPresetEvent
+	WithElement(element int) *AUPresetEvent
+	Scope() int
+	SetScope(scope int)
+	Element() int
+	SetElement(element int)
+	PresetDictionary() obj.Object
 }
 
 var _ AUPresetEventable = (*AUPresetEvent)(nil)

@@ -5,92 +5,95 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A stream that provides read-only stream functionality.
 //
-// InputStream wraps [raw.NSInputStream] with a fluent Go API.
+// InputStream is an idiomatic wrapper over the Objective-C class NSInputStream.
 type InputStream struct {
-	inner *raw.NSInputStream
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSInputStream].
-func (x *InputStream) Unwrap() *raw.NSInputStream { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *InputStream) ID() objc.ID { return x.inner.Ptr() }
-
-// InputStreamFromID adopts an existing object pointer as a InputStream (nil for 0).
+// InputStreamFromID adopts an existing Objective-C object as a InputStream
+// (nil for 0), retaining it and registering a release finalizer.
 func InputStreamFromID(id objc.ID) *InputStream {
 	if id == 0 {
 		return nil
 	}
-	return &InputStream{inner: raw.NSInputStreamFromID(id)}
+	x := &InputStream{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewInputStreamWithData creates a new [InputStream].
-func NewInputStreamWithData(data *raw.NSData) *InputStream {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSInputStream")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), data.Ptr())
-	return &InputStream{inner: raw.NSInputStreamFromID(_id)}
+// inputStreamAdopt wraps an Objective-C object that this code just created as a
+// InputStream (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func inputStreamAdopt(id objc.ID) *InputStream {
+	if id == 0 {
+		return nil
+	}
+	x := &InputStream{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// NewInputStreamWithURL creates a new [InputStream].
+// Description returns the object's -description text.
+func (x *InputStream) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *InputStream) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *InputStream) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewInputStreamWithData creates a new InputStream.
+func NewInputStreamWithData(data *Data) *InputStream {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSInputStream")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
+	return inputStreamAdopt(_id)
+}
+
+// NewInputStreamWithURL creates a new InputStream.
 func NewInputStreamWithURL(url string) *InputStream {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSInputStream")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr())
-	return &InputStream{inner: raw.NSInputStreamFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSInputStream")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
+	return inputStreamAdopt(_id)
 }
 
-// NewInputStreamWithFileAtPath creates a new [InputStream].
+// NewInputStreamWithFileAtPath creates a new InputStream.
 func NewInputStreamWithFileAtPath(path string) *InputStream {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSInputStream")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileAtPath:"), foundation.NSStringStringWithUTF8String(path).Ptr())
-	return &InputStream{inner: raw.NSInputStreamFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSInputStream")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileAtPath:"), purego.NSString(path))
+	return inputStreamAdopt(_id)
 }
 
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *InputStream) WithDelegate(delegate raw.NSStreamDelegate) *InputStream {
-	x.inner.NSStream.SetDelegate(delegate)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *InputStream) WithScriptingProperties(scriptingProperties obj.Object) *InputStream {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *InputStream) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *InputStream {
-	x.inner.NSStream.NSObject.SetScriptingProperties(scriptingProperties)
-	return x
-}
-
-// ReadMaxLength calls the underlying ReadMaxLength.
-func (x *InputStream) ReadMaxLength(buffer *uint8, len_ uint) int {
-	return x.inner.ReadMaxLength(buffer, len_)
-}
-
-// GetBufferLength calls the underlying GetBufferLength.
-func (x *InputStream) GetBufferLength(buffer *uint8, len_ *uint) bool {
-	return x.inner.GetBufferLength(buffer, len_)
-}
-
-// HasBytesAvailable calls the underlying HasBytesAvailable.
 func (x *InputStream) HasBytesAvailable() bool {
-	return x.inner.HasBytesAvailable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasBytesAvailable"))
+	return _r
 }
-
-func (x *InputStream) asStream() *raw.NSStream { return &x.inner.NSStream }
-
-func (x *InputStream) asObject() *raw.NSObject { return &x.inner.NSStream.NSObject }
 
 // InputStreamable is the interface implemented by [InputStream], for mocking and DI.
 type InputStreamable interface {
-	Unwrap() *raw.NSInputStream
-	WithDelegate(delegate raw.NSStreamDelegate) *InputStream
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *InputStream
-	ReadMaxLength(buffer *uint8, len_ uint) int
-	GetBufferLength(buffer *uint8, len_ *uint) bool
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *InputStream
 	HasBytesAvailable() bool
 }
 

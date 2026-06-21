@@ -5,101 +5,113 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Base type for descriptors you use for building pipeline state objects.
 //
-// MTL4PipelineDescriptor wraps [raw.MTL4PipelineDescriptor] with a fluent Go API.
+// MTL4PipelineDescriptor is an idiomatic wrapper over the Objective-C class MTL4PipelineDescriptor.
 type MTL4PipelineDescriptor struct {
-	inner *raw.MTL4PipelineDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTL4PipelineDescriptor].
-func (x *MTL4PipelineDescriptor) Unwrap() *raw.MTL4PipelineDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTL4PipelineDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MTL4PipelineDescriptorFromID adopts an existing object pointer as a MTL4PipelineDescriptor (nil for 0).
+// MTL4PipelineDescriptorFromID adopts an existing Objective-C object as a MTL4PipelineDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MTL4PipelineDescriptorFromID(id objc.ID) *MTL4PipelineDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MTL4PipelineDescriptor{inner: raw.MTL4PipelineDescriptorFromID(id)}
+	x := &MTL4PipelineDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTL4PipelineDescriptor creates a new [MTL4PipelineDescriptor].
+// mTL4PipelineDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MTL4PipelineDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTL4PipelineDescriptorAdopt(id objc.ID) *MTL4PipelineDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MTL4PipelineDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTL4PipelineDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTL4PipelineDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTL4PipelineDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTL4PipelineDescriptor creates a new MTL4PipelineDescriptor.
 func NewMTL4PipelineDescriptor() *MTL4PipelineDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4PipelineDescriptor")), objc.RegisterName("new"))
-	return &MTL4PipelineDescriptor{inner: raw.MTL4PipelineDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTL4PipelineDescriptor")), objc.RegisterName("new"))
+	return mTL4PipelineDescriptorAdopt(_id)
 }
 
 // Assigns an optional string that uniquely identifies a pipeline descriptor.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *MTL4PipelineDescriptor) WithLabel(label string) *MTL4PipelineDescriptor {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // Provides compile-time options when you build the pipeline.
 //
-// WithOptions sets the options property and returns the receiver for chaining.
+// WithOptions sets options and returns the receiver so calls can be chained.
 func (x *MTL4PipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4PipelineDescriptor {
-	x.inner.SetOptions(options.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), objref.IDOf(options))
 	return x
 }
 
 // Assigns an optional string that uniquely identifies a pipeline descriptor. After you provide this label, you can use it to look up a pipeline state object by name in a binary archive.
-//
-// Label calls the underlying Label.
 func (x *MTL4PipelineDescriptor) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
 func (x *MTL4PipelineDescriptor) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
 // Provides compile-time options when you build the pipeline.
-//
-// Options calls the underlying Options.
 func (x *MTL4PipelineDescriptor) Options() *MTL4PipelineOptions {
-	_r := x.inner.Options()
-	if _r == nil {
-		return nil
-	}
-	return &MTL4PipelineOptions{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
+	return MTL4PipelineOptionsFromID(_r)
 }
 
-// SetOptions calls the underlying SetOptions.
-func (x *MTL4PipelineDescriptor) SetOptions(options *raw.MTL4PipelineOptions) {
-	x.inner.SetOptions(options)
-}
-
-func (x *MTL4PipelineDescriptor) asMTL4PipelineDescriptor() *raw.MTL4PipelineDescriptor {
-	return x.inner
+func (x *MTL4PipelineDescriptor) SetOptions(options *MTL4PipelineOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), objref.IDOf(options))
 }
 
 // MTL4PipelineDescriptorable is the interface implemented by [MTL4PipelineDescriptor], for mocking and DI.
 type MTL4PipelineDescriptorable interface {
-	Unwrap() *raw.MTL4PipelineDescriptor
+	obj.Object
 	WithLabel(label string) *MTL4PipelineDescriptor
 	WithOptions(options *MTL4PipelineOptions) *MTL4PipelineDescriptor
 	Label() string
 	SetLabel(label string)
 	Options() *MTL4PipelineOptions
-	SetOptions(options *raw.MTL4PipelineOptions)
+	SetOptions(options *MTL4PipelineOptions)
 }
 
 var _ MTL4PipelineDescriptorable = (*MTL4PipelineDescriptor)(nil)

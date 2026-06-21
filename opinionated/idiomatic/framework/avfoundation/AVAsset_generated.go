@@ -6,184 +6,158 @@ package avfoundation
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that models timed audiovisual media.
 //
-// Asset wraps [raw.AVAsset] with a fluent Go API.
+// Asset is an idiomatic wrapper over the Objective-C class AVAsset.
 type Asset struct {
-	inner *raw.AVAsset
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAsset].
-func (x *Asset) Unwrap() *raw.AVAsset { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Asset) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetFromID adopts an existing object pointer as a Asset (nil for 0).
+// AssetFromID adopts an existing Objective-C object as a Asset
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetFromID(id objc.ID) *Asset {
 	if id == 0 {
 		return nil
 	}
-	return &Asset{inner: raw.AVAssetFromID(id)}
+	x := &Asset{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAsset creates a new [Asset].
+// assetAdopt wraps an Objective-C object that this code just created as a
+// Asset (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetAdopt(id objc.ID) *Asset {
+	if id == 0 {
+		return nil
+	}
+	x := &Asset{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Asset) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Asset) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Asset) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAsset creates a new Asset.
 func NewAsset() *Asset {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAsset")), objc.RegisterName("new"))
-	return &Asset{inner: raw.AVAssetFromID(_id)}
-}
-
-// Indicates the duration of the asset. If @"providesPreciseDurationAndTiming" is NO, a best-available estimate of the duration is returned. The degree of precision preferred for timing-related properties can be set at initialization time for assets initialized with URLs - Seealso: AVURLAssetPreferPreciseDurationAndTimingKey for AVURLAsset below.
-//
-// Duration calls the underlying Duration.
-func (x *Asset) Duration() coremedia.CMTime {
-	return x.inner.Duration()
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAsset")), objc.RegisterName("new"))
+	return assetAdopt(_id)
 }
 
 // Indicates the natural rate at which the asset is to be played; often but not always 1.0
-//
-// PreferredRate calls the underlying PreferredRate.
 func (x *Asset) PreferredRate() float32 {
-	return x.inner.PreferredRate()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("preferredRate"))
+	return _r
 }
 
 // Indicates the preferred volume at which the audible media of an asset is to be played; often but not always 1.0
-//
-// PreferredVolume calls the underlying PreferredVolume.
 func (x *Asset) PreferredVolume() float32 {
-	return x.inner.PreferredVolume()
-}
-
-// Indicates the preferred transform to apply to the visual content of the asset for presentation or processing; the value is often but not always the identity transform
-//
-// PreferredTransform calls the underlying PreferredTransform.
-func (x *Asset) PreferredTransform() corefoundation.CGAffineTransform {
-	return x.inner.PreferredTransform()
-}
-
-// The following property is deprecated. Instead, use the naturalSize and preferredTransform, as appropriate, of the receiver's video tracks. See -tracksWithMediaType: below.
-//
-// NaturalSize calls the underlying NaturalSize.
-func (x *Asset) NaturalSize() corefoundation.CGSize {
-	return x.inner.NaturalSize()
-}
-
-// Indicates how close to the latest content in a live stream playback can be sustained. For non-live assets this value is kCMTimeInvalid.
-//
-// MinimumTimeOffsetFromLive calls the underlying MinimumTimeOffsetFromLive.
-func (x *Asset) MinimumTimeOffsetFromLive() coremedia.CMTime {
-	return x.inner.MinimumTimeOffsetFromLive()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("preferredVolume"))
+	return _r
 }
 
 // Cancels all pending requests to asynchronously load property values.
-//
-// CancelLoading calls the underlying CancelLoading.
 func (x *Asset) CancelLoading() {
-	x.inner.CancelLoading()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelLoading"))
 }
 
-// Indicates that the asset provides precise timing. See @"duration" above and AVURLAssetPreferPreciseDurationAndTimingKey below.
-//
-// ProvidesPreciseDurationAndTiming calls the underlying ProvidesPreciseDurationAndTiming.
+// Indicates that the asset provides precise timing. See
 func (x *Asset) ProvidesPreciseDurationAndTiming() bool {
-	return x.inner.ProvidesPreciseDurationAndTiming()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("providesPreciseDurationAndTiming"))
+	return _r
 }
 
-// ReferenceRestrictions calls the underlying ReferenceRestrictions.
-func (x *Asset) ReferenceRestrictions() AVAssetReferenceRestrictions {
-	return AVAssetReferenceRestrictions(x.inner.ReferenceRestrictions())
+func (x *Asset) ReferenceRestrictions() AssetReferenceRestrictions {
+	_r := objc.Send[AssetReferenceRestrictions](objref.IDOf(x), objc.RegisterName("referenceRestrictions"))
+	return _r
 }
 
 // Returns a track that contains the specified identifier.
-//
-// TrackWithTrackID calls the underlying TrackWithTrackID.
 func (x *Asset) TrackWithTrackID(trackID int32) *AssetTrack {
-	_r := x.inner.TrackWithTrackID(trackID)
-	if _r == nil {
-		return nil
-	}
-	return &AssetTrack{inner: _r}
-}
-
-// Loads a track that contains the specified identifier.
-//
-// LoadTrackWithTrackIDCompletionHandler calls the underlying LoadTrackWithTrackIDCompletionHandler.
-func (x *Asset) LoadTrackWithTrackIDCompletionHandler(trackID int32, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	x.inner.LoadTrackWithTrackIDCompletionHandler(trackID, completionHandler)
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackWithTrackID:"), trackID)
+	return AssetTrackFromID(_r)
 }
 
 // Returns tracks that contain media of a specified type.
-//
-// TracksWithMediaType calls the underlying TracksWithMediaType.
-func (x *Asset) TracksWithMediaType(mediaType *foundation.NSString) *foundation.NSArray[*raw.AVAssetTrack] {
-	return x.inner.TracksWithMediaType(mediaType)
+func (x *Asset) TracksWithMediaType(mediaType obj.Object) []*AssetTrack {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tracksWithMediaType:"), objref.IDOf(mediaType))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *AssetTrack { return AssetTrackFromID(_id) })
 }
 
 // Loads tracks that contain media of a specified type.
 //
 // LoadTracksWithMediaType blocks until the operation completes or ctx is cancelled.
-func (x *Asset) LoadTracksWithMediaType(ctx context.Context, mediaType *foundation.NSString) (*foundation.NSArray[*raw.AVAssetTrack], error) {
+func (x *Asset) LoadTracksWithMediaType(ctx context.Context, mediaType obj.Object) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.AVAssetTrack]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LoadTracksWithMediaTypeCompletionHandler(mediaType, func(_p0 *foundation.NSArray[*raw.AVAssetTrack], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadTracksWithMediaType:completionHandler:"), objref.IDOf(mediaType), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.AVAssetTrack]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // Returns an array of asset tracks matching the specified media characteristic.
-//
-// TracksWithMediaCharacteristic calls the underlying TracksWithMediaCharacteristic.
-func (x *Asset) TracksWithMediaCharacteristic(mediaCharacteristic *foundation.NSString) *foundation.NSArray[*raw.AVAssetTrack] {
-	return x.inner.TracksWithMediaCharacteristic(mediaCharacteristic)
+func (x *Asset) TracksWithMediaCharacteristic(mediaCharacteristic obj.Object) []*AssetTrack {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tracksWithMediaCharacteristic:"), objref.IDOf(mediaCharacteristic))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *AssetTrack { return AssetTrackFromID(_id) })
 }
 
 // Loads tracks that contain media of a specified characteristic.
 //
 // LoadTracksWithMediaCharacteristic blocks until the operation completes or ctx is cancelled.
-func (x *Asset) LoadTracksWithMediaCharacteristic(ctx context.Context, mediaCharacteristic *foundation.NSString) (*foundation.NSArray[*raw.AVAssetTrack], error) {
+func (x *Asset) LoadTracksWithMediaCharacteristic(ctx context.Context, mediaCharacteristic obj.Object) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.AVAssetTrack]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LoadTracksWithMediaCharacteristicCompletionHandler(mediaCharacteristic, func(_p0 *foundation.NSArray[*raw.AVAssetTrack], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadTracksWithMediaCharacteristic:completionHandler:"), objref.IDOf(mediaCharacteristic), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.AVAssetTrack]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -192,184 +166,146 @@ func (x *Asset) LoadTracksWithMediaCharacteristic(ctx context.Context, mediaChar
 //
 // Tracks returns the collection as a Go slice.
 func (x *Asset) Tracks() []*AssetTrack {
-	arr := x.inner.Tracks()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetTrack {
-		return &AssetTrack{inner: raw.AVAssetTrackFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tracks"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetTrack { return AssetTrackFromID(_id) })
 }
 
 // All track groups in the receiver. The value of this property is an NSArray of AVAssetTrackGroups, each representing a different grouping of tracks in the receiver.
 //
 // TrackGroups returns the collection as a Go slice.
 func (x *Asset) TrackGroups() []*AssetTrackGroup {
-	arr := x.inner.TrackGroups()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetTrackGroup {
-		return &AssetTrackGroup{inner: raw.AVAssetTrackGroupFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackGroups"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetTrackGroup { return AssetTrackGroupFromID(_id) })
 }
 
 // Returns an array of metadata items from the container with the specified format.
-//
-// MetadataForFormat calls the underlying MetadataForFormat.
-func (x *Asset) MetadataForFormat(format *foundation.NSString) *foundation.NSArray[*raw.AVMetadataItem] {
-	return x.inner.MetadataForFormat(format)
+func (x *Asset) MetadataForFormat(format obj.Object) []*MetadataItem {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadataForFormat:"), objref.IDOf(format))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
 // Loads an array of metadata items that the asset contains for the specified format.
 //
 // LoadMetadataForFormat blocks until the operation completes or ctx is cancelled.
-func (x *Asset) LoadMetadataForFormat(ctx context.Context, format *foundation.NSString) (*foundation.NSArray[*raw.AVMetadataItem], error) {
+func (x *Asset) LoadMetadataForFormat(ctx context.Context, format obj.Object) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.AVMetadataItem]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LoadMetadataForFormatCompletionHandler(format, func(_p0 *foundation.NSArray[*raw.AVMetadataItem], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadMetadataForFormat:completionHandler:"), objref.IDOf(format), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.AVMetadataItem]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // Indicates the creation date of the asset as an AVMetadataItem. May be nil. If a creation date has been stored by the asset in a form that can be converted to an NSDate, the dateValue property of the AVMetadataItem will provide an instance of NSDate. Otherwise the creation date is available only as a string value, via -[AVMetadataItem stringValue].
-//
-// CreationDate calls the underlying CreationDate.
 func (x *Asset) CreationDate() *MetadataItem {
-	_r := x.inner.CreationDate()
-	if _r == nil {
-		return nil
-	}
-	return &MetadataItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
+	return MetadataItemFromID(_r)
 }
 
 // Provides access to the lyrics of the asset suitable for the current locale.
-//
-// Lyrics calls the underlying Lyrics.
 func (x *Asset) Lyrics() string {
-	_r := x.inner.Lyrics()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lyrics"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Provides access to an array of AVMetadataItems for each common metadata key for which a value is available; items can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:] and according to identifier via +[AVMetadataItem metadataItemsFromArray:filteredByIdentifier:].
 //
 // CommonMetadata returns the collection as a Go slice.
 func (x *Asset) CommonMetadata() []*MetadataItem {
-	arr := x.inner.CommonMetadata()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
-		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commonMetadata"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
 // Provides access to an array of AVMetadataItems for all metadata identifiers for which a value is available; items can be filtered according to language via +[AVMetadataItem metadataItemsFromArray:filteredAndSortedAccordingToPreferredLanguages:] and according to identifier via +[AVMetadataItem metadataItemsFromArray:filteredByIdentifier:].
 //
 // Metadata returns the collection as a Go slice.
 func (x *Asset) Metadata() []*MetadataItem {
-	arr := x.inner.Metadata()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataItem {
-		return &MetadataItem{inner: raw.AVMetadataItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataItem { return MetadataItemFromID(_id) })
 }
 
 // Provides an NSArray of NSStrings, each representing a metadata format that's available to the asset (e.g. ID3, iTunes metadata, etc.). Metadata formats are defined in AVMetadataFormat.h.
 //
 // AvailableMetadataFormats returns the collection as a Go slice.
-func (x *Asset) AvailableMetadataFormats() []*foundation.NSString {
-	arr := x.inner.AvailableMetadataFormats()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *Asset) AvailableMetadataFormats() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableMetadataFormats"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Returns an array of chapters that contain the specified title locale and common keys.
-//
-// ChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys calls the underlying ChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys.
-func (x *Asset) ChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys(locale *foundation.NSLocale, commonKeys *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*raw.AVTimedMetadataGroup] {
-	return x.inner.ChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys(locale, commonKeys)
+func (x *Asset) ChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys(locale obj.Object, commonKeys []obj.Object) []*TimedMetadataGroup {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chapterMetadataGroupsWithTitleLocale:containingItemsWithCommonKeys:"), objref.IDOf(locale), purego.SliceToNSArray(commonKeys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *TimedMetadataGroup { return TimedMetadataGroupFromID(_id) })
 }
 
 // Loads chapter metadata that contains the specified title locale and common keys.
 //
 // LoadChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys blocks until the operation completes or ctx is cancelled.
-func (x *Asset) LoadChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys(ctx context.Context, locale *foundation.NSLocale, commonKeys *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.AVTimedMetadataGroup], error) {
+func (x *Asset) LoadChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys(ctx context.Context, locale obj.Object, commonKeys []obj.Object) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.AVTimedMetadataGroup]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LoadChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeysCompletionHandler(locale, commonKeys, func(_p0 *foundation.NSArray[*raw.AVTimedMetadataGroup], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadChapterMetadataGroupsWithTitleLocale:containingItemsWithCommonKeys:completionHandler:"), objref.IDOf(locale), purego.SliceToNSArray(commonKeys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.AVTimedMetadataGroup]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // Returns an array of chapters with a locale that best matches the list of preferred languages.
-//
-// ChapterMetadataGroupsBestMatchingPreferredLanguages calls the underlying ChapterMetadataGroupsBestMatchingPreferredLanguages.
-func (x *Asset) ChapterMetadataGroupsBestMatchingPreferredLanguages(preferredLanguages *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*raw.AVTimedMetadataGroup] {
-	return x.inner.ChapterMetadataGroupsBestMatchingPreferredLanguages(preferredLanguages)
+func (x *Asset) ChapterMetadataGroupsBestMatchingPreferredLanguages(preferredLanguages []string) []*TimedMetadataGroup {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chapterMetadataGroupsBestMatchingPreferredLanguages:"), purego.SliceToNSArray(preferredLanguages, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *TimedMetadataGroup { return TimedMetadataGroupFromID(_id) })
 }
 
 // Loads chapter metadata with a locale that best matches the list of preferred languages.
 //
 // LoadChapterMetadataGroupsBestMatchingPreferredLanguages blocks until the operation completes or ctx is cancelled.
-func (x *Asset) LoadChapterMetadataGroupsBestMatchingPreferredLanguages(ctx context.Context, preferredLanguages *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.AVTimedMetadataGroup], error) {
+func (x *Asset) LoadChapterMetadataGroupsBestMatchingPreferredLanguages(ctx context.Context, preferredLanguages []string) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.AVTimedMetadataGroup]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LoadChapterMetadataGroupsBestMatchingPreferredLanguagesCompletionHandler(preferredLanguages, func(_p0 *foundation.NSArray[*raw.AVTimedMetadataGroup], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadChapterMetadataGroupsBestMatchingPreferredLanguages:completionHandler:"), purego.SliceToNSArray(preferredLanguages, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.AVTimedMetadataGroup]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -377,198 +313,133 @@ func (x *Asset) LoadChapterMetadataGroupsBestMatchingPreferredLanguages(ctx cont
 // array of NSLocale
 //
 // AvailableChapterLocales returns the collection as a Go slice.
-func (x *Asset) AvailableChapterLocales() []*foundation.NSLocale {
-	arr := x.inner.AvailableChapterLocales()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSLocale {
-		return foundation.NSLocaleFromID(purego.Retain(_id))
-	})
+func (x *Asset) AvailableChapterLocales() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableChapterLocales"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Returns a media selection group that contains one or more options with the specified media characteristic.
-//
-// MediaSelectionGroupForMediaCharacteristic calls the underlying MediaSelectionGroupForMediaCharacteristic.
-func (x *Asset) MediaSelectionGroupForMediaCharacteristic(mediaCharacteristic *foundation.NSString) *MediaSelectionGroup {
-	_r := x.inner.MediaSelectionGroupForMediaCharacteristic(mediaCharacteristic)
-	if _r == nil {
-		return nil
-	}
-	return &MediaSelectionGroup{inner: _r}
-}
-
-// Loads a media selection group that contains one or more options with the specified media characteristic.
-//
-// LoadMediaSelectionGroupForMediaCharacteristicCompletionHandler calls the underlying LoadMediaSelectionGroupForMediaCharacteristicCompletionHandler.
-func (x *Asset) LoadMediaSelectionGroupForMediaCharacteristicCompletionHandler(mediaCharacteristic *foundation.NSString, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	x.inner.LoadMediaSelectionGroupForMediaCharacteristicCompletionHandler(mediaCharacteristic, completionHandler)
+func (x *Asset) MediaSelectionGroupForMediaCharacteristic(mediaCharacteristic obj.Object) *MediaSelectionGroup {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSelectionGroupForMediaCharacteristic:"), objref.IDOf(mediaCharacteristic))
+	return MediaSelectionGroupFromID(_r)
 }
 
 // Provides an NSArray of NSStrings, each NSString indicating a media characteristic for which a media selection option is available.
 //
 // AvailableMediaCharacteristicsWithMediaSelectionOptions returns the collection as a Go slice.
-func (x *Asset) AvailableMediaCharacteristicsWithMediaSelectionOptions() []*foundation.NSString {
-	arr := x.inner.AvailableMediaCharacteristicsWithMediaSelectionOptions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *Asset) AvailableMediaCharacteristicsWithMediaSelectionOptions() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableMediaCharacteristicsWithMediaSelectionOptions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Provides an instance of AVMediaSelection with default selections for each of the receiver's media selection groups.
-//
-// PreferredMediaSelection calls the underlying PreferredMediaSelection.
 func (x *Asset) PreferredMediaSelection() *MediaSelection {
-	_r := x.inner.PreferredMediaSelection()
-	if _r == nil {
-		return nil
-	}
-	return &MediaSelection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredMediaSelection"))
+	return MediaSelectionFromID(_r)
 }
 
 // Provides an array of all permutations of AVMediaSelection for this asset.
 //
 // AllMediaSelections returns the collection as a Go slice.
 func (x *Asset) AllMediaSelections() []*MediaSelection {
-	arr := x.inner.AllMediaSelections()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MediaSelection {
-		return &MediaSelection{inner: raw.AVMediaSelectionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allMediaSelections"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaSelection { return MediaSelectionFromID(_id) })
 }
 
 // Indicates whether or not the asset has protected content. Assets containing protected content may not be playable without successful authorization, even if the value of the "playable" property is YES. See the properties in the AVAssetUsability category for details on how such an asset may be used. On macOS, clients can use the interfaces in AVPlayerItemProtectedContentAdditions.h to request authorization to play the asset.
-//
-// HasProtectedContent calls the underlying HasProtectedContent.
 func (x *Asset) HasProtectedContent() bool {
-	return x.inner.HasProtectedContent()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasProtectedContent"))
+	return _r
 }
 
 // Indicates whether the asset is capable of being extended by fragments. For QuickTime movie files and MPEG-4 files, the value of canContainFragments is YES if an 'mvex' box is present in the 'moov' box. For those types, the 'mvex' box signals the possible presence of later 'moof' boxes.
-//
-// CanContainFragments calls the underlying CanContainFragments.
 func (x *Asset) CanContainFragments() bool {
-	return x.inner.CanContainFragments()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canContainFragments"))
+	return _r
 }
 
 // Indicates whether the asset is extended by at least one fragment. For QuickTime movie files and MPEG-4 files, the value of this property is YES if canContainFragments is YES and at least one 'moof' box is present after the 'moov' box.
-//
-// ContainsFragments calls the underlying ContainsFragments.
 func (x *Asset) ContainsFragments() bool {
-	return x.inner.ContainsFragments()
-}
-
-// Indicates the total duration of fragments that either exist now or may be appended in the future in order to extend the duration of the asset. For QuickTime movie files and MPEG-4 files, the value of this property is obtained from the 'mehd' box of the 'mvex' box, if present. If no total fragment duration hint is available, the value of this property is kCMTimeInvalid.
-//
-// OverallDurationHint calls the underlying OverallDurationHint.
-func (x *Asset) OverallDurationHint() coremedia.CMTime {
-	return x.inner.OverallDurationHint()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsFragments"))
+	return _r
 }
 
 // Indicates whether an AVPlayer can play the contents of the asset in a manner that meets user expectations. A client can attempt playback when playable is NO, this however may lead to a substandard playback experience.
-//
-// IsPlayable calls the underlying IsPlayable.
 func (x *Asset) IsPlayable() bool {
-	return x.inner.IsPlayable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPlayable"))
+	return _r
 }
 
 // Indicates whether an AVAssetExportSession can be used with the receiver for export
-//
-// IsExportable calls the underlying IsExportable.
 func (x *Asset) IsExportable() bool {
-	return x.inner.IsExportable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExportable"))
+	return _r
 }
 
 // Indicates whether an AVAssetReader can be used with the receiver for extracting media data
-//
-// IsReadable calls the underlying IsReadable.
 func (x *Asset) IsReadable() bool {
-	return x.inner.IsReadable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadable"))
+	return _r
 }
 
 // Indicates whether the receiver can be used to build an AVMutableComposition
-//
-// IsComposable calls the underlying IsComposable.
 func (x *Asset) IsComposable() bool {
-	return x.inner.IsComposable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isComposable"))
+	return _r
 }
 
 // Indicates whether the asset is compatible with AirPlay Video. YES if an AVPlayerItem initialized with the receiver can be played by an external device via AirPlay Video.
-//
-// IsCompatibleWithAirPlayVideo calls the underlying IsCompatibleWithAirPlayVideo.
 func (x *Asset) IsCompatibleWithAirPlayVideo() bool {
-	return x.inner.IsCompatibleWithAirPlayVideo()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompatibleWithAirPlayVideo"))
+	return _r
 }
 
 // Returns an identifier that no other tracks in the asset use.
-//
-// UnusedTrackID calls the underlying UnusedTrackID.
 func (x *Asset) UnusedTrackID() int32 {
-	return x.inner.UnusedTrackID()
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("unusedTrackID"))
+	return _r
 }
-
-// Loads an identifier that no other track in the asset uses.
-//
-// FindUnusedTrackIDWithCompletionHandler calls the underlying FindUnusedTrackIDWithCompletionHandler.
-func (x *Asset) FindUnusedTrackIDWithCompletionHandler(completionHandler func(int32, unsafe.Pointer)) {
-	x.inner.FindUnusedTrackIDWithCompletionHandler(completionHandler)
-}
-
-func (x *Asset) asAsset() *raw.AVAsset { return x.inner }
 
 // Assetable is the interface implemented by [Asset], for mocking and DI.
 type Assetable interface {
-	Unwrap() *raw.AVAsset
-	Duration() coremedia.CMTime
+	obj.Object
 	PreferredRate() float32
 	PreferredVolume() float32
-	PreferredTransform() corefoundation.CGAffineTransform
-	NaturalSize() corefoundation.CGSize
-	MinimumTimeOffsetFromLive() coremedia.CMTime
 	CancelLoading()
 	ProvidesPreciseDurationAndTiming() bool
-	ReferenceRestrictions() AVAssetReferenceRestrictions
+	ReferenceRestrictions() AssetReferenceRestrictions
 	TrackWithTrackID(trackID int32) *AssetTrack
-	LoadTrackWithTrackIDCompletionHandler(trackID int32, completionHandler func(unsafe.Pointer, unsafe.Pointer))
-	TracksWithMediaType(mediaType *foundation.NSString) *foundation.NSArray[*raw.AVAssetTrack]
-	LoadTracksWithMediaType(ctx context.Context, mediaType *foundation.NSString) (*foundation.NSArray[*raw.AVAssetTrack], error)
-	TracksWithMediaCharacteristic(mediaCharacteristic *foundation.NSString) *foundation.NSArray[*raw.AVAssetTrack]
-	LoadTracksWithMediaCharacteristic(ctx context.Context, mediaCharacteristic *foundation.NSString) (*foundation.NSArray[*raw.AVAssetTrack], error)
+	TracksWithMediaType(mediaType obj.Object) []*AssetTrack
+	LoadTracksWithMediaType(ctx context.Context, mediaType obj.Object) (obj.Object, error)
+	TracksWithMediaCharacteristic(mediaCharacteristic obj.Object) []*AssetTrack
+	LoadTracksWithMediaCharacteristic(ctx context.Context, mediaCharacteristic obj.Object) (obj.Object, error)
 	Tracks() []*AssetTrack
 	TrackGroups() []*AssetTrackGroup
-	MetadataForFormat(format *foundation.NSString) *foundation.NSArray[*raw.AVMetadataItem]
-	LoadMetadataForFormat(ctx context.Context, format *foundation.NSString) (*foundation.NSArray[*raw.AVMetadataItem], error)
+	MetadataForFormat(format obj.Object) []*MetadataItem
+	LoadMetadataForFormat(ctx context.Context, format obj.Object) (obj.Object, error)
 	CreationDate() *MetadataItem
 	Lyrics() string
 	CommonMetadata() []*MetadataItem
 	Metadata() []*MetadataItem
-	AvailableMetadataFormats() []*foundation.NSString
-	ChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys(locale *foundation.NSLocale, commonKeys *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*raw.AVTimedMetadataGroup]
-	LoadChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys(ctx context.Context, locale *foundation.NSLocale, commonKeys *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.AVTimedMetadataGroup], error)
-	ChapterMetadataGroupsBestMatchingPreferredLanguages(preferredLanguages *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*raw.AVTimedMetadataGroup]
-	LoadChapterMetadataGroupsBestMatchingPreferredLanguages(ctx context.Context, preferredLanguages *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.AVTimedMetadataGroup], error)
-	AvailableChapterLocales() []*foundation.NSLocale
-	MediaSelectionGroupForMediaCharacteristic(mediaCharacteristic *foundation.NSString) *MediaSelectionGroup
-	LoadMediaSelectionGroupForMediaCharacteristicCompletionHandler(mediaCharacteristic *foundation.NSString, completionHandler func(unsafe.Pointer, unsafe.Pointer))
-	AvailableMediaCharacteristicsWithMediaSelectionOptions() []*foundation.NSString
+	AvailableMetadataFormats() []obj.Object
+	ChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys(locale obj.Object, commonKeys []obj.Object) []*TimedMetadataGroup
+	LoadChapterMetadataGroupsWithTitleLocaleContainingItemsWithCommonKeys(ctx context.Context, locale obj.Object, commonKeys []obj.Object) (obj.Object, error)
+	ChapterMetadataGroupsBestMatchingPreferredLanguages(preferredLanguages []string) []*TimedMetadataGroup
+	LoadChapterMetadataGroupsBestMatchingPreferredLanguages(ctx context.Context, preferredLanguages []string) (obj.Object, error)
+	AvailableChapterLocales() []obj.Object
+	MediaSelectionGroupForMediaCharacteristic(mediaCharacteristic obj.Object) *MediaSelectionGroup
+	AvailableMediaCharacteristicsWithMediaSelectionOptions() []obj.Object
 	PreferredMediaSelection() *MediaSelection
 	AllMediaSelections() []*MediaSelection
 	HasProtectedContent() bool
 	CanContainFragments() bool
 	ContainsFragments() bool
-	OverallDurationHint() coremedia.CMTime
 	IsPlayable() bool
 	IsExportable() bool
 	IsReadable() bool
 	IsComposable() bool
 	IsCompatibleWithAirPlayVideo() bool
 	UnusedTrackID() int32
-	FindUnusedTrackIDWithCompletionHandler(completionHandler func(int32, unsafe.Pointer))
 }
 
 var _ Assetable = (*Asset)(nil)

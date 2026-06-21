@@ -5,55 +5,55 @@
 package mpsndarray
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// ArrayBinaryKernelProvider is implemented by ArrayBinaryKernel and any idiomatic type wrapping a MPSNDArrayBinaryKernel subclass.
+// ArrayBinaryKernelProvider is accepted wherever a MPSNDArrayBinaryKernel (or one of its subclasses) is expected.
 type ArrayBinaryKernelProvider interface {
-	asArrayBinaryKernel() *raw.MPSNDArrayBinaryKernel
+	objref.Object
 }
 
-// ArrayBinaryPrimaryGradientKernelProvider is implemented by ArrayBinaryPrimaryGradientKernel and any idiomatic type wrapping a MPSNDArrayBinaryPrimaryGradientKernel subclass.
+// ArrayBinaryPrimaryGradientKernelProvider is accepted wherever a MPSNDArrayBinaryPrimaryGradientKernel (or one of its subclasses) is expected.
 type ArrayBinaryPrimaryGradientKernelProvider interface {
-	asArrayBinaryPrimaryGradientKernel() *raw.MPSNDArrayBinaryPrimaryGradientKernel
+	objref.Object
 }
 
-// ArrayGradientStateProvider is implemented by ArrayGradientState and any idiomatic type wrapping a MPSNDArrayGradientState subclass.
+// ArrayGradientStateProvider is accepted wherever a MPSNDArrayGradientState (or one of its subclasses) is expected.
 type ArrayGradientStateProvider interface {
-	asArrayGradientState() *raw.MPSNDArrayGradientState
+	objref.Object
 }
 
-// ArrayMatrixMultiplicationProvider is implemented by ArrayMatrixMultiplication and any idiomatic type wrapping a MPSNDArrayMatrixMultiplication subclass.
+// ArrayMatrixMultiplicationProvider is accepted wherever a MPSNDArrayMatrixMultiplication (or one of its subclasses) is expected.
 type ArrayMatrixMultiplicationProvider interface {
-	asArrayMatrixMultiplication() *raw.MPSNDArrayMatrixMultiplication
+	objref.Object
 }
 
-// ArrayMultiaryBaseProvider is implemented by ArrayMultiaryBase and any idiomatic type wrapping a MPSNDArrayMultiaryBase subclass.
+// ArrayMultiaryBaseProvider is accepted wherever a MPSNDArrayMultiaryBase (or one of its subclasses) is expected.
 type ArrayMultiaryBaseProvider interface {
-	asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase
+	objref.Object
 }
 
-// ArrayMultiaryGradientKernelProvider is implemented by ArrayMultiaryGradientKernel and any idiomatic type wrapping a MPSNDArrayMultiaryGradientKernel subclass.
+// ArrayMultiaryGradientKernelProvider is accepted wherever a MPSNDArrayMultiaryGradientKernel (or one of its subclasses) is expected.
 type ArrayMultiaryGradientKernelProvider interface {
-	asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel
+	objref.Object
 }
 
-// ArrayMultiaryKernelProvider is implemented by ArrayMultiaryKernel and any idiomatic type wrapping a MPSNDArrayMultiaryKernel subclass.
+// ArrayMultiaryKernelProvider is accepted wherever a MPSNDArrayMultiaryKernel (or one of its subclasses) is expected.
 type ArrayMultiaryKernelProvider interface {
-	asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel
+	objref.Object
 }
 
-// ArrayQuantizationDescriptorProvider is implemented by ArrayQuantizationDescriptor and any idiomatic type wrapping a MPSNDArrayQuantizationDescriptor subclass.
+// ArrayQuantizationDescriptorProvider is accepted wherever a MPSNDArrayQuantizationDescriptor (or one of its subclasses) is expected.
 type ArrayQuantizationDescriptorProvider interface {
-	asArrayQuantizationDescriptor() *raw.MPSNDArrayQuantizationDescriptor
+	objref.Object
 }
 
-// ArrayUnaryGradientKernelProvider is implemented by ArrayUnaryGradientKernel and any idiomatic type wrapping a MPSNDArrayUnaryGradientKernel subclass.
+// ArrayUnaryGradientKernelProvider is accepted wherever a MPSNDArrayUnaryGradientKernel (or one of its subclasses) is expected.
 type ArrayUnaryGradientKernelProvider interface {
-	asArrayUnaryGradientKernel() *raw.MPSNDArrayUnaryGradientKernel
+	objref.Object
 }
 
-// ArrayUnaryKernelProvider is implemented by ArrayUnaryKernel and any idiomatic type wrapping a MPSNDArrayUnaryKernel subclass.
+// ArrayUnaryKernelProvider is accepted wherever a MPSNDArrayUnaryKernel (or one of its subclasses) is expected.
 type ArrayUnaryKernelProvider interface {
-	asArrayUnaryKernel() *raw.MPSNDArrayUnaryKernel
+	objref.Object
 }

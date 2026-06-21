@@ -5,116 +5,84 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A filter that applies a median filter in a square region centered around each pixel in the source image.
 //
-// ImageMedian wraps [raw.MPSImageMedian] with a fluent Go API.
+// ImageMedian is an idiomatic wrapper over the Objective-C class MPSImageMedian.
 type ImageMedian struct {
-	inner *raw.MPSImageMedian
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageMedian].
-func (x *ImageMedian) Unwrap() *raw.MPSImageMedian { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageMedian) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageMedianFromID adopts an existing object pointer as a ImageMedian (nil for 0).
+// ImageMedianFromID adopts an existing Objective-C object as a ImageMedian
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageMedianFromID(id objc.ID) *ImageMedian {
 	if id == 0 {
 		return nil
 	}
-	return &ImageMedian{inner: raw.MPSImageMedianFromID(id)}
-}
-
-// Initializes a filter for a particular kernel size and device.
-//
-// NewImageMedianWithDeviceKernelDiameter creates a new [ImageMedian].
-func NewImageMedianWithDeviceKernelDiameter(device metal.MTLDevice, kernelDiameter uint) *ImageMedian {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageMedian")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:kernelDiameter:"), device, kernelDiameter)
-	return &ImageMedian{inner: raw.MPSImageMedianFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewImageMedianWithCoderDevice creates a new [ImageMedian].
-func NewImageMedianWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageMedian {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageMedian")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageMedian{inner: raw.MPSImageMedianFromID(_id)}
-}
-
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageMedian) WithOffset(offset mpscore.MPSOffset) *ImageMedian {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	x := &ImageMedian{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageMedian) WithClipRect(clipRect metal.MTLRegion) *ImageMedian {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+// imageMedianAdopt wraps an Objective-C object that this code just created as a
+// ImageMedian (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageMedianAdopt(id objc.ID) *ImageMedian {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageMedian{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageMedian) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageMedian {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
+// Description returns the object's -description text.
+func (x *ImageMedian) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageMedian) WithOptions(options mpscore.MPSKernelOptions) *ImageMedian {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageMedian) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageMedian) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageMedian creates a new ImageMedian.
+func NewImageMedian() *ImageMedian {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageMedian")), objc.RegisterName("new"))
+	return imageMedianAdopt(_id)
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ImageMedian) WithLabel(label string) *ImageMedian {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property   kernelDiameter @abstract   The diameter in pixels of the filter window. @discussion The median filter is applied to a kernelDiameter x kernelDiameter window of pixels centered on the corresponding source pixel for each destination pixel.  The kernel diameter must be an odd number.
-//
-// KernelDiameter calls the underlying KernelDiameter.
-func (x *ImageMedian) KernelDiameter() uint {
-	return x.inner.KernelDiameter()
+// The diameter in pixels of the filter window. The median filter is applied to a kernelDiameter x kernelDiameter window of pixels centered on the corresponding source pixel for each destination pixel.  The kernel diameter must be an odd number.
+func (x *ImageMedian) KernelDiameter() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelDiameter"))
+	return _r
 }
-
-func (x *ImageMedian) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
-}
-
-func (x *ImageMedian) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
 // ImageMedianable is the interface implemented by [ImageMedian], for mocking and DI.
 type ImageMedianable interface {
-	Unwrap() *raw.MPSImageMedian
-	WithOffset(offset mpscore.MPSOffset) *ImageMedian
-	WithClipRect(clipRect metal.MTLRegion) *ImageMedian
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageMedian
-	WithOptions(options mpscore.MPSKernelOptions) *ImageMedian
+	obj.Object
 	WithLabel(label string) *ImageMedian
-	KernelDiameter() uint
+	KernelDiameter() int
 }
 
 var _ ImageMedianable = (*ImageMedian)(nil)

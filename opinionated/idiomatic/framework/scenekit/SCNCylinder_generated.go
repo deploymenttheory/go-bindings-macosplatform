@@ -5,235 +5,222 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A right circular cylinder geometry.
 //
-// Cylinder wraps [raw.SCNCylinder] with a fluent Go API.
+// Cylinder is an idiomatic wrapper over the Objective-C class SCNCylinder.
 type Cylinder struct {
-	inner *raw.SCNCylinder
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNCylinder].
-func (x *Cylinder) Unwrap() *raw.SCNCylinder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Cylinder) ID() objc.ID { return x.inner.Ptr() }
-
-// CylinderFromID adopts an existing object pointer as a Cylinder (nil for 0).
+// CylinderFromID adopts an existing Objective-C object as a Cylinder
+// (nil for 0), retaining it and registering a release finalizer.
 func CylinderFromID(id objc.ID) *Cylinder {
 	if id == 0 {
 		return nil
 	}
-	return &Cylinder{inner: raw.SCNCylinderFromID(id)}
+	x := &Cylinder{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCylinder creates a new [Cylinder].
+// cylinderAdopt wraps an Objective-C object that this code just created as a
+// Cylinder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cylinderAdopt(id objc.ID) *Cylinder {
+	if id == 0 {
+		return nil
+	}
+	x := &Cylinder{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Cylinder) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Cylinder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Cylinder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCylinder creates a new Cylinder.
 func NewCylinder() *Cylinder {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNCylinder")), objc.RegisterName("new"))
-	return &Cylinder{inner: raw.SCNCylinderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNCylinder")), objc.RegisterName("new"))
+	return cylinderAdopt(_id)
 }
 
 // The radius of the cylinder’s circular cross section. Animatable.
 //
-// WithRadius sets the radius property and returns the receiver for chaining.
+// WithRadius sets radius and returns the receiver so calls can be chained.
 func (x *Cylinder) WithRadius(radius float64) *Cylinder {
-	x.inner.SetRadius(radius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 	return x
 }
 
 // The extent of the cylinder along its y-axis. Animatable.
 //
-// WithHeight sets the height property and returns the receiver for chaining.
+// WithHeight sets height and returns the receiver so calls can be chained.
 func (x *Cylinder) WithHeight(height float64) *Cylinder {
-	x.inner.SetHeight(height)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 	return x
 }
 
 // The number of subdivisions around the circumference of the cylinder. Animatable.
 //
-// WithRadialSegmentCount sets the radialSegmentCount property and returns the receiver for chaining.
+// WithRadialSegmentCount sets radialSegmentCount and returns the receiver so calls can be chained.
 func (x *Cylinder) WithRadialSegmentCount(radialSegmentCount int) *Cylinder {
-	x.inner.SetRadialSegmentCount(radialSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadialSegmentCount:"), radialSegmentCount)
 	return x
 }
 
 // The number of subdivisions in the sides of the cylinder along its y-axis. Animatable.
 //
-// WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
+// WithHeightSegmentCount sets heightSegmentCount and returns the receiver so calls can be chained.
 func (x *Cylinder) WithHeightSegmentCount(heightSegmentCount int) *Cylinder {
-	x.inner.SetHeightSegmentCount(heightSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
 	return x
 }
 
 // A name associated with the geometry object.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *Cylinder) WithName(name string) *Cylinder {
-	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
 //
-// WithMaterials sets the collection, converting the Go slice to an NSArray.
-func (x *Cylinder) WithMaterials(items ...*raw.SCNMaterial) *Cylinder {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SCNGeometry.SetMaterials(foundation.NSArrayFromID[*raw.SCNMaterial](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SCNGeometry.SetMaterials(_arr)
+// WithMaterials sets the collection and returns the receiver so calls can be chained.
+func (x *Cylinder) WithMaterials(items ...*Material) *Cylinder {
+	_arr := purego.SliceToNSArray(items, func(_v *Material) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterials:"), _arr)
 	return x
 }
 
 // The first material attached to the geometry.
 //
-// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+// WithFirstMaterial sets firstMaterial and returns the receiver so calls can be chained.
 func (x *Cylinder) WithFirstMaterial(firstMaterial *Material) *Cylinder {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return x
 }
 
 // An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
 //
-// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
-func (x *Cylinder) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Cylinder {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SCNGeometry.SetLevelsOfDetail(foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+// WithLevelsOfDetail sets the collection and returns the receiver so calls can be chained.
+func (x *Cylinder) WithLevelsOfDetail(items ...*LevelOfDetail) *Cylinder {
+	_arr := purego.SliceToNSArray(items, func(_v *LevelOfDetail) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetail:"), _arr)
 	return x
 }
 
-// WithTessellator sets the tessellator property and returns the receiver for chaining.
+// WithTessellator sets tessellator and returns the receiver so calls can be chained.
 func (x *Cylinder) WithTessellator(tessellator *GeometryTessellator) *Cylinder {
-	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return x
 }
 
 // The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
 //
-// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
-func (x *Cylinder) WithSubdivisionLevel(subdivisionLevel uint) *Cylinder {
-	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+// WithSubdivisionLevel sets subdivisionLevel and returns the receiver so calls can be chained.
+func (x *Cylinder) WithSubdivisionLevel(subdivisionLevel int) *Cylinder {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
 	return x
 }
 
-// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+// Specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
 //
-// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+// WithWantsAdaptiveSubdivision sets wantsAdaptiveSubdivision and returns the receiver so calls can be chained.
 func (x *Cylinder) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Cylinder {
-	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
 	return x
 }
 
 // The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 //
-// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+// WithEdgeCreasesElement sets edgeCreasesElement and returns the receiver so calls can be chained.
 func (x *Cylinder) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Cylinder {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return x
 }
 
 // The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 //
-// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+// WithEdgeCreasesSource sets edgeCreasesSource and returns the receiver so calls can be chained.
 func (x *Cylinder) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Cylinder {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return x
 }
 
-// @property radius @abstract The radius of the cylinder. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
-//
-// Radius calls the underlying Radius.
+// The radius of the cylinder. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 0.5.
 func (x *Cylinder) Radius() float64 {
-	return x.inner.Radius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("radius"))
+	return _r
 }
 
-// SetRadius calls the underlying SetRadius.
 func (x *Cylinder) SetRadius(radius float64) {
-	x.inner.SetRadius(radius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 }
 
-// @property height @abstract The height of the cylinder. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
-//
-// Height calls the underlying Height.
+// The height of the cylinder. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (x *Cylinder) Height() float64 {
-	return x.inner.Height()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("height"))
+	return _r
 }
 
-// SetHeight calls the underlying SetHeight.
 func (x *Cylinder) SetHeight(height float64) {
-	x.inner.SetHeight(height)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 }
 
-// @property radialSegmentCount @abstract The number of subdivisions along the radial coordinate. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
-//
-// RadialSegmentCount calls the underlying RadialSegmentCount.
+// The number of subdivisions along the radial coordinate. Animatable. If the value is less than 3, the behavior is undefined. The default value is 48.
 func (x *Cylinder) RadialSegmentCount() int {
-	return x.inner.RadialSegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("radialSegmentCount"))
+	return _r
 }
 
-// SetRadialSegmentCount calls the underlying SetRadialSegmentCount.
 func (x *Cylinder) SetRadialSegmentCount(radialSegmentCount int) {
-	x.inner.SetRadialSegmentCount(radialSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadialSegmentCount:"), radialSegmentCount)
 }
 
-// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
-//
-// HeightSegmentCount calls the underlying HeightSegmentCount.
+// The number of subdivisions along the Y axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (x *Cylinder) HeightSegmentCount() int {
-	return x.inner.HeightSegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("heightSegmentCount"))
+	return _r
 }
 
-// SetHeightSegmentCount calls the underlying SetHeightSegmentCount.
 func (x *Cylinder) SetHeightSegmentCount(heightSegmentCount int) {
-	x.inner.SetHeightSegmentCount(heightSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
 }
-
-func (x *Cylinder) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
 
 // Cylinderable is the interface implemented by [Cylinder], for mocking and DI.
 type Cylinderable interface {
-	Unwrap() *raw.SCNCylinder
+	obj.Object
 	WithRadius(radius float64) *Cylinder
 	WithHeight(height float64) *Cylinder
 	WithRadialSegmentCount(radialSegmentCount int) *Cylinder
 	WithHeightSegmentCount(heightSegmentCount int) *Cylinder
 	WithName(name string) *Cylinder
-	WithMaterials(items ...*raw.SCNMaterial) *Cylinder
+	WithMaterials(items ...*Material) *Cylinder
 	WithFirstMaterial(firstMaterial *Material) *Cylinder
-	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Cylinder
+	WithLevelsOfDetail(items ...*LevelOfDetail) *Cylinder
 	WithTessellator(tessellator *GeometryTessellator) *Cylinder
-	WithSubdivisionLevel(subdivisionLevel uint) *Cylinder
+	WithSubdivisionLevel(subdivisionLevel int) *Cylinder
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Cylinder
 	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Cylinder
 	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Cylinder

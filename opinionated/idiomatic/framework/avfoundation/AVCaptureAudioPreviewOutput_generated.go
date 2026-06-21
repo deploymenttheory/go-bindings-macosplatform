@@ -5,99 +5,115 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A capture output that provides a preview of the captured audio.
 //
-// CaptureAudioPreviewOutput wraps [raw.AVCaptureAudioPreviewOutput] with a fluent Go API.
+// CaptureAudioPreviewOutput is an idiomatic wrapper over the Objective-C class AVCaptureAudioPreviewOutput.
 type CaptureAudioPreviewOutput struct {
-	inner *raw.AVCaptureAudioPreviewOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureAudioPreviewOutput].
-func (x *CaptureAudioPreviewOutput) Unwrap() *raw.AVCaptureAudioPreviewOutput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureAudioPreviewOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureAudioPreviewOutputFromID adopts an existing object pointer as a CaptureAudioPreviewOutput (nil for 0).
+// CaptureAudioPreviewOutputFromID adopts an existing Objective-C object as a CaptureAudioPreviewOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureAudioPreviewOutputFromID(id objc.ID) *CaptureAudioPreviewOutput {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureAudioPreviewOutput{inner: raw.AVCaptureAudioPreviewOutputFromID(id)}
+	x := &CaptureAudioPreviewOutput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCaptureAudioPreviewOutput creates a new [CaptureAudioPreviewOutput].
+// captureAudioPreviewOutputAdopt wraps an Objective-C object that this code just created as a
+// CaptureAudioPreviewOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureAudioPreviewOutputAdopt(id objc.ID) *CaptureAudioPreviewOutput {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureAudioPreviewOutput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptureAudioPreviewOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureAudioPreviewOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureAudioPreviewOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptureAudioPreviewOutput creates a new CaptureAudioPreviewOutput.
 func NewCaptureAudioPreviewOutput() *CaptureAudioPreviewOutput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureAudioPreviewOutput")), objc.RegisterName("new"))
-	return &CaptureAudioPreviewOutput{inner: raw.AVCaptureAudioPreviewOutputFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureAudioPreviewOutput")), objc.RegisterName("new"))
+	return captureAudioPreviewOutputAdopt(_id)
 }
 
 // The unique identifier of the Core Audio output device to use for audio preview.
 //
-// WithOutputDeviceUniqueID sets the outputDeviceUniqueID property and returns the receiver for chaining.
+// WithOutputDeviceUniqueID sets outputDeviceUniqueID and returns the receiver so calls can be chained.
 func (x *CaptureAudioPreviewOutput) WithOutputDeviceUniqueID(outputDeviceUniqueID string) *CaptureAudioPreviewOutput {
-	x.inner.SetOutputDeviceUniqueID(foundation.NSStringStringWithUTF8String(outputDeviceUniqueID))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputDeviceUniqueID:"), purego.NSString(outputDeviceUniqueID))
 	return x
 }
 
 // The output volume of the audio preview.
 //
-// WithVolume sets the volume property and returns the receiver for chaining.
+// WithVolume sets volume and returns the receiver so calls can be chained.
 func (x *CaptureAudioPreviewOutput) WithVolume(volume float32) *CaptureAudioPreviewOutput {
-	x.inner.SetVolume(volume)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 	return x
 }
 
 // A Boolean value that indicates whether to defer starting this capture output.
 //
-// WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
+// WithDeferredStartEnabled sets deferredStartEnabled and returns the receiver so calls can be chained.
 func (x *CaptureAudioPreviewOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioPreviewOutput {
-	x.inner.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
 	return x
 }
 
-// @property outputDeviceUniqueID @abstract Specifies the unique ID of the Core Audio output device being used to play preview audio. @discussion The value of this property is an NSString containing the unique ID of the Core Audio device to be used for output, or nil if the default system output should be used.
-//
-// OutputDeviceUniqueID calls the underlying OutputDeviceUniqueID.
+// Specifies the unique ID of the Core Audio output device being used to play preview audio. The value of this property is an NSString containing the unique ID of the Core Audio device to be used for output, or nil if the default system output should be used.
 func (x *CaptureAudioPreviewOutput) OutputDeviceUniqueID() string {
-	_r := x.inner.OutputDeviceUniqueID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputDeviceUniqueID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetOutputDeviceUniqueID calls the underlying SetOutputDeviceUniqueID.
 func (x *CaptureAudioPreviewOutput) SetOutputDeviceUniqueID(outputDeviceUniqueID string) {
-	x.inner.SetOutputDeviceUniqueID(foundation.NSStringStringWithUTF8String(outputDeviceUniqueID))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputDeviceUniqueID:"), purego.NSString(outputDeviceUniqueID))
 }
 
-// @property volume @abstract Specifies the preview volume of the output. @discussion The value of this property is the preview volume of the receiver, where 1.0 is the maximum volume and 0.0 is muted.
-//
-// Volume calls the underlying Volume.
+// Specifies the preview volume of the output. The value of this property is the preview volume of the receiver, where 1.0 is the maximum volume and 0.0 is muted.
 func (x *CaptureAudioPreviewOutput) Volume() float32 {
-	return x.inner.Volume()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("volume"))
+	return _r
 }
 
-// SetVolume calls the underlying SetVolume.
 func (x *CaptureAudioPreviewOutput) SetVolume(volume float32) {
-	x.inner.SetVolume(volume)
-}
-
-func (x *CaptureAudioPreviewOutput) asCaptureOutput() *raw.AVCaptureOutput {
-	return &x.inner.AVCaptureOutput
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 }
 
 // CaptureAudioPreviewOutputable is the interface implemented by [CaptureAudioPreviewOutput], for mocking and DI.
 type CaptureAudioPreviewOutputable interface {
-	Unwrap() *raw.AVCaptureAudioPreviewOutput
+	obj.Object
 	WithOutputDeviceUniqueID(outputDeviceUniqueID string) *CaptureAudioPreviewOutput
 	WithVolume(volume float32) *CaptureAudioPreviewOutput
 	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioPreviewOutput

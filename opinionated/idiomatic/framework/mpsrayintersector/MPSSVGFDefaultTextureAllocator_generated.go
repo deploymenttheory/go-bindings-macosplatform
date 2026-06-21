@@ -5,79 +5,79 @@
 package mpsrayintersector
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsrayintersector"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// SVGFDefaultTextureAllocator wraps [raw.MPSSVGFDefaultTextureAllocator] with a fluent Go API.
+// SVGFDefaultTextureAllocator is an idiomatic wrapper over the Objective-C class MPSSVGFDefaultTextureAllocator.
 type SVGFDefaultTextureAllocator struct {
-	inner *raw.MPSSVGFDefaultTextureAllocator
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSSVGFDefaultTextureAllocator].
-func (x *SVGFDefaultTextureAllocator) Unwrap() *raw.MPSSVGFDefaultTextureAllocator { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SVGFDefaultTextureAllocator) ID() objc.ID { return x.inner.Ptr() }
-
-// SVGFDefaultTextureAllocatorFromID adopts an existing object pointer as a SVGFDefaultTextureAllocator (nil for 0).
+// SVGFDefaultTextureAllocatorFromID adopts an existing Objective-C object as a SVGFDefaultTextureAllocator
+// (nil for 0), retaining it and registering a release finalizer.
 func SVGFDefaultTextureAllocatorFromID(id objc.ID) *SVGFDefaultTextureAllocator {
 	if id == 0 {
 		return nil
 	}
-	return &SVGFDefaultTextureAllocator{inner: raw.MPSSVGFDefaultTextureAllocatorFromID(id)}
+	x := &SVGFDefaultTextureAllocator{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @brief Initialize the MPSSVGFDefaultTextureAllocator with a Metal device
-//
-// NewSVGFDefaultTextureAllocatorWithDevice creates a new [SVGFDefaultTextureAllocator].
-func NewSVGFDefaultTextureAllocatorWithDevice(device metal.MTLDevice) *SVGFDefaultTextureAllocator {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSSVGFDefaultTextureAllocator")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &SVGFDefaultTextureAllocator{inner: raw.MPSSVGFDefaultTextureAllocatorFromID(_id)}
+// sVGFDefaultTextureAllocatorAdopt wraps an Objective-C object that this code just created as a
+// SVGFDefaultTextureAllocator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sVGFDefaultTextureAllocatorAdopt(id objc.ID) *SVGFDefaultTextureAllocator {
+	if id == 0 {
+		return nil
+	}
+	x := &SVGFDefaultTextureAllocator{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// TextureWithPixelFormatWidthHeight calls the underlying TextureWithPixelFormatWidthHeight.
-func (x *SVGFDefaultTextureAllocator) TextureWithPixelFormatWidthHeight(pixelFormat metal.MTLPixelFormat, width uint, height uint) metal.MTLTexture {
-	return x.inner.TextureWithPixelFormatWidthHeight(pixelFormat, width, height)
+// Description returns the object's -description text.
+func (x *SVGFDefaultTextureAllocator) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// ReturnTexture calls the underlying ReturnTexture.
-func (x *SVGFDefaultTextureAllocator) ReturnTexture(texture metal.MTLTexture) {
-	x.inner.ReturnTexture(texture)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SVGFDefaultTextureAllocator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @brief Remove all textures from the cache
-//
-// Reset calls the underlying Reset.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SVGFDefaultTextureAllocator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSVGFDefaultTextureAllocator creates a new SVGFDefaultTextureAllocator.
+func NewSVGFDefaultTextureAllocator() *SVGFDefaultTextureAllocator {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSSVGFDefaultTextureAllocator")), objc.RegisterName("new"))
+	return sVGFDefaultTextureAllocatorAdopt(_id)
+}
+
+// Remove all textures from the cache
 func (x *SVGFDefaultTextureAllocator) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
-// @brief Metal device this object was allocated from
-//
-// Device calls the underlying Device.
-func (x *SVGFDefaultTextureAllocator) Device() metal.MTLDevice {
-	return x.inner.Device()
-}
-
-// @brief The number of textures which have been allocated from this allocator
-//
-// AllocatedTextureCount calls the underlying AllocatedTextureCount.
-func (x *SVGFDefaultTextureAllocator) AllocatedTextureCount() uint {
-	return x.inner.AllocatedTextureCount()
+// The number of textures which have been allocated from this allocator
+func (x *SVGFDefaultTextureAllocator) AllocatedTextureCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("allocatedTextureCount"))
+	return _r
 }
 
 // SVGFDefaultTextureAllocatorable is the interface implemented by [SVGFDefaultTextureAllocator], for mocking and DI.
 type SVGFDefaultTextureAllocatorable interface {
-	Unwrap() *raw.MPSSVGFDefaultTextureAllocator
-	TextureWithPixelFormatWidthHeight(pixelFormat metal.MTLPixelFormat, width uint, height uint) metal.MTLTexture
-	ReturnTexture(texture metal.MTLTexture)
+	obj.Object
 	Reset()
-	Device() metal.MTLDevice
-	AllocatedTextureCount() uint
+	AllocatedTextureCount() int
 }
 
 var _ SVGFDefaultTextureAllocatorable = (*SVGFDefaultTextureAllocator)(nil)

@@ -5,54 +5,73 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides information about a finished send operation.
 //
-// SyncEngineDidSendChangesEvent wraps [raw.CKSyncEngineDidSendChangesEvent] with a fluent Go API.
+// SyncEngineDidSendChangesEvent is an idiomatic wrapper over the Objective-C class CKSyncEngineDidSendChangesEvent.
 type SyncEngineDidSendChangesEvent struct {
-	inner *raw.CKSyncEngineDidSendChangesEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineDidSendChangesEvent].
-func (x *SyncEngineDidSendChangesEvent) Unwrap() *raw.CKSyncEngineDidSendChangesEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineDidSendChangesEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineDidSendChangesEventFromID adopts an existing object pointer as a SyncEngineDidSendChangesEvent (nil for 0).
+// SyncEngineDidSendChangesEventFromID adopts an existing Objective-C object as a SyncEngineDidSendChangesEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineDidSendChangesEventFromID(id objc.ID) *SyncEngineDidSendChangesEvent {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineDidSendChangesEvent{inner: raw.CKSyncEngineDidSendChangesEventFromID(id)}
+	x := &SyncEngineDidSendChangesEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSyncEngineDidSendChangesEvent creates a new [SyncEngineDidSendChangesEvent].
-func NewSyncEngineDidSendChangesEvent() *SyncEngineDidSendChangesEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineDidSendChangesEvent")), objc.RegisterName("new"))
-	return &SyncEngineDidSendChangesEvent{inner: raw.CKSyncEngineDidSendChangesEventFromID(_id)}
-}
-
-// Context calls the underlying Context.
-func (x *SyncEngineDidSendChangesEvent) Context() *SyncEngineSendChangesContext {
-	_r := x.inner.Context()
-	if _r == nil {
+// syncEngineDidSendChangesEventAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineDidSendChangesEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineDidSendChangesEventAdopt(id objc.ID) *SyncEngineDidSendChangesEvent {
+	if id == 0 {
 		return nil
 	}
-	return &SyncEngineSendChangesContext{inner: _r}
+	x := &SyncEngineDidSendChangesEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *SyncEngineDidSendChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent {
-	return &x.inner.CKSyncEngineEvent
+// Description returns the object's -description text.
+func (x *SyncEngineDidSendChangesEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEngineDidSendChangesEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEngineDidSendChangesEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSyncEngineDidSendChangesEvent creates a new SyncEngineDidSendChangesEvent.
+func NewSyncEngineDidSendChangesEvent() *SyncEngineDidSendChangesEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineDidSendChangesEvent")), objc.RegisterName("new"))
+	return syncEngineDidSendChangesEventAdopt(_id)
+}
+
+func (x *SyncEngineDidSendChangesEvent) Context() *SyncEngineSendChangesContext {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
+	return SyncEngineSendChangesContextFromID(_r)
 }
 
 // SyncEngineDidSendChangesEventable is the interface implemented by [SyncEngineDidSendChangesEvent], for mocking and DI.
 type SyncEngineDidSendChangesEventable interface {
-	Unwrap() *raw.CKSyncEngineDidSendChangesEvent
+	obj.Object
 	Context() *SyncEngineSendChangesContext
 }
 

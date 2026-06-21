@@ -5,59 +5,82 @@
 package gamecontroller
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corehaptics"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The locations of haptic actuators on a game controller.
 //
-// DeviceHaptics wraps [raw.GCDeviceHaptics] with a fluent Go API.
+// DeviceHaptics is an idiomatic wrapper over the Objective-C class GCDeviceHaptics.
 type DeviceHaptics struct {
-	inner *raw.GCDeviceHaptics
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCDeviceHaptics].
-func (x *DeviceHaptics) Unwrap() *raw.GCDeviceHaptics { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DeviceHaptics) ID() objc.ID { return x.inner.Ptr() }
-
-// DeviceHapticsFromID adopts an existing object pointer as a DeviceHaptics (nil for 0).
+// DeviceHapticsFromID adopts an existing Objective-C object as a DeviceHaptics
+// (nil for 0), retaining it and registering a release finalizer.
 func DeviceHapticsFromID(id objc.ID) *DeviceHaptics {
 	if id == 0 {
 		return nil
 	}
-	return &DeviceHaptics{inner: raw.GCDeviceHapticsFromID(id)}
+	x := &DeviceHaptics{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDeviceHaptics creates a new [DeviceHaptics].
+// deviceHapticsAdopt wraps an Objective-C object that this code just created as a
+// DeviceHaptics (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func deviceHapticsAdopt(id objc.ID) *DeviceHaptics {
+	if id == 0 {
+		return nil
+	}
+	x := &DeviceHaptics{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DeviceHaptics) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DeviceHaptics) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DeviceHaptics) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDeviceHaptics creates a new DeviceHaptics.
 func NewDeviceHaptics() *DeviceHaptics {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCDeviceHaptics")), objc.RegisterName("new"))
-	return &DeviceHaptics{inner: raw.GCDeviceHapticsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GCDeviceHaptics")), objc.RegisterName("new"))
+	return deviceHapticsAdopt(_id)
 }
 
 // Creates a haptics engine with the specified locality.
-//
-// CreateEngineWithLocality calls the underlying CreateEngineWithLocality.
-func (x *DeviceHaptics) CreateEngineWithLocality(locality *foundation.NSString) *corehaptics.CHHapticEngine {
-	return x.inner.CreateEngineWithLocality(locality)
+func (x *DeviceHaptics) CreateEngineWithLocality(locality obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createEngineWithLocality:"), objref.IDOf(locality))
+	return obj.Wrap(_r)
 }
 
-// The set of supported haptic localities for this device - representing the locations of its haptic actuators. @note GCHapticsLocalityDefault and GCHapticsLocalityAll are guaranteed to be supported - and they may be equivalent. @see GCHapticsLocality
-//
-// SupportedLocalities calls the underlying SupportedLocalities.
-func (x *DeviceHaptics) SupportedLocalities() *foundation.NSSet[*foundation.NSString] {
-	return x.inner.SupportedLocalities()
+// The set of supported haptic localities for this device - representing the locations of its haptic actuators.
+func (x *DeviceHaptics) SupportedLocalities() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedLocalities"))
+	return obj.Wrap(_r)
 }
 
 // DeviceHapticsable is the interface implemented by [DeviceHaptics], for mocking and DI.
 type DeviceHapticsable interface {
-	Unwrap() *raw.GCDeviceHaptics
-	CreateEngineWithLocality(locality *foundation.NSString) *corehaptics.CHHapticEngine
-	SupportedLocalities() *foundation.NSSet[*foundation.NSString]
+	obj.Object
+	CreateEngineWithLocality(locality obj.Object) obj.Object
+	SupportedLocalities() obj.Object
 }
 
 var _ DeviceHapticsable = (*DeviceHaptics)(nil)

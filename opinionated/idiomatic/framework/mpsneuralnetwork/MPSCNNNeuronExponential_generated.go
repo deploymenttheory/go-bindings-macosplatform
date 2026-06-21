@@ -5,122 +5,93 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNNeuronExponential wraps [raw.MPSCNNNeuronExponential] with a fluent Go API.
+// CNNNeuronExponential is an idiomatic wrapper over the Objective-C class MPSCNNNeuronExponential.
 type CNNNeuronExponential struct {
-	inner *raw.MPSCNNNeuronExponential
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNNeuronExponential].
-func (x *CNNNeuronExponential) Unwrap() *raw.MPSCNNNeuronExponential { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNNeuronExponential) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNNeuronExponentialFromID adopts an existing object pointer as a CNNNeuronExponential (nil for 0).
+// CNNNeuronExponentialFromID adopts an existing Objective-C object as a CNNNeuronExponential
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNNeuronExponentialFromID(id objc.ID) *CNNNeuronExponential {
 	if id == 0 {
 		return nil
 	}
-	return &CNNNeuronExponential{inner: raw.MPSCNNNeuronExponentialFromID(id)}
-}
-
-// @abstract   Initialize a Exponential neuron filter. @param      device          The device the filter will run on. @param      a               Filter property "a". See class discussion. @param      b               Filter property "b". See class discussion. @param      c               Filter property "c". See class discussion. @return     A valid MPSCNNNeuronExponential object or nil, if failure.
-//
-// NewCNNNeuronExponentialWithDeviceABC creates a new [CNNNeuronExponential].
-func NewCNNNeuronExponentialWithDeviceABC(device metal.MTLDevice, a float32, b float32, c float32) *CNNNeuronExponential {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNNeuronExponential")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:a:b:c:"), device, a, b, c)
-	return &CNNNeuronExponential{inner: raw.MPSCNNNeuronExponentialFromID(_id)}
-}
-
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *CNNNeuronExponential) WithOffset(offset mpscore.MPSOffset) *CNNNeuronExponential {
-	x.inner.MPSCNNNeuron.MPSCNNKernel.SetOffset(offset)
+	x := &CNNNeuronExponential{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *CNNNeuronExponential) WithClipRect(clipRect metal.MTLRegion) *CNNNeuronExponential {
-	x.inner.MPSCNNNeuron.MPSCNNKernel.SetClipRect(clipRect)
+// cNNNeuronExponentialAdopt wraps an Objective-C object that this code just created as a
+// CNNNeuronExponential (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNNeuronExponentialAdopt(id objc.ID) *CNNNeuronExponential {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNNeuronExponential{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @property   destinationFeatureChannelOffset @abstract   The number of channels in the destination MPSImage to skip before writing output. @discussion This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+// Description returns the object's -description text.
+func (x *CNNNeuronExponential) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNNeuronExponential) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNNeuronExponential) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNNeuronExponential creates a new CNNNeuronExponential.
+func NewCNNNeuronExponential() *CNNNeuronExponential {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNNeuronExponential")), objc.RegisterName("new"))
+	return cNNNeuronExponentialAdopt(_id)
+}
+
+// The number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
 //
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNNeuronExponential) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronExponential {
-	x.inner.MPSCNNNeuron.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *CNNNeuronExponential) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNNeuronExponential {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+// The number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
 //
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNNeuronExponential) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuronExponential {
-	x.inner.MPSCNNNeuron.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset sets sourceFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *CNNNeuronExponential) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNNeuronExponential {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+// The maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 //
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *CNNNeuronExponential) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuronExponential {
-	x.inner.MPSCNNNeuron.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
+// WithSourceFeatureChannelMaxCount sets sourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+func (x *CNNNeuronExponential) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNNeuronExponential {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
-}
-
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode Note: For @ref MPSCNNPoolingAverage specifying edge mode @ref MPSImageEdgeModeClamp is interpreted as a "shrink-to-edge" operation, which shrinks the effective filtering window to remain within the source image borders.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *CNNNeuronExponential) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronExponential {
-	x.inner.MPSCNNNeuron.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *CNNNeuronExponential) WithPadding(padding raw.MPSNNPadding) *CNNNeuronExponential {
-	x.inner.MPSCNNNeuron.MPSCNNKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *CNNNeuronExponential) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronExponential {
-	x.inner.MPSCNNNeuron.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-func (x *CNNNeuronExponential) asCNNNeuron() *raw.MPSCNNNeuron { return &x.inner.MPSCNNNeuron }
-
-func (x *CNNNeuronExponential) asCNNKernel() *raw.MPSCNNKernel {
-	return &x.inner.MPSCNNNeuron.MPSCNNKernel
 }
 
 // CNNNeuronExponentialable is the interface implemented by [CNNNeuronExponential], for mocking and DI.
 type CNNNeuronExponentialable interface {
-	Unwrap() *raw.MPSCNNNeuronExponential
-	WithOffset(offset mpscore.MPSOffset) *CNNNeuronExponential
-	WithClipRect(clipRect metal.MTLRegion) *CNNNeuronExponential
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNNeuronExponential
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNNeuronExponential
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNNeuronExponential
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNNeuronExponential
-	WithPadding(padding raw.MPSNNPadding) *CNNNeuronExponential
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNNeuronExponential
+	obj.Object
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNNeuronExponential
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNNeuronExponential
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNNeuronExponential
 }
 
 var _ CNNNeuronExponentialable = (*CNNNeuronExponential)(nil)

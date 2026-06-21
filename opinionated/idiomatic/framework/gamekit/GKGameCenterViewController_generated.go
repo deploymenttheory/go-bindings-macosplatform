@@ -5,196 +5,190 @@
 package gamekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The dashboard that allows players to access their Game Center data in your game.
 //
-// GameCenterViewController wraps [raw.GKGameCenterViewController] with a fluent Go API.
+// GameCenterViewController is an idiomatic wrapper over the Objective-C class GKGameCenterViewController.
 type GameCenterViewController struct {
-	inner *raw.GKGameCenterViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKGameCenterViewController].
-func (x *GameCenterViewController) Unwrap() *raw.GKGameCenterViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GameCenterViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// GameCenterViewControllerFromID adopts an existing object pointer as a GameCenterViewController (nil for 0).
+// GameCenterViewControllerFromID adopts an existing Objective-C object as a GameCenterViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func GameCenterViewControllerFromID(id objc.ID) *GameCenterViewController {
 	if id == 0 {
 		return nil
 	}
-	return &GameCenterViewController{inner: raw.GKGameCenterViewControllerFromID(id)}
+	x := &GameCenterViewController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// gameCenterViewControllerAdopt wraps an Objective-C object that this code just created as a
+// GameCenterViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func gameCenterViewControllerAdopt(id objc.ID) *GameCenterViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &GameCenterViewController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GameCenterViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GameCenterViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GameCenterViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a view controller that presents the specified Game Center content.
 //
-// NewGameCenterViewControllerWithState creates a new [GameCenterViewController].
-func NewGameCenterViewControllerWithState(state GKGameCenterViewControllerState) *GameCenterViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGameCenterViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithState:"), raw.GKGameCenterViewControllerState(state))
-	return &GameCenterViewController{inner: raw.GKGameCenterViewControllerFromID(_id)}
+// NewGameCenterViewControllerWithState creates a new GameCenterViewController.
+func NewGameCenterViewControllerWithState(state GameCenterViewControllerState) *GameCenterViewController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGameCenterViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithState:"), state)
+	return gameCenterViewControllerAdopt(_id)
 }
 
 // Creates a view controller that presents a leaderboard with data from the specified players and time period.
 //
-// NewGameCenterViewControllerWithLeaderboardIDPlayerScopeTimeScope creates a new [GameCenterViewController].
-func NewGameCenterViewControllerWithLeaderboardIDPlayerScopeTimeScope(leaderboardID string, playerScope GKLeaderboardPlayerScope, timeScope GKLeaderboardTimeScope) *GameCenterViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGameCenterViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeaderboardID:playerScope:timeScope:"), foundation.NSStringStringWithUTF8String(leaderboardID).Ptr(), raw.GKLeaderboardPlayerScope(playerScope), raw.GKLeaderboardTimeScope(timeScope))
-	return &GameCenterViewController{inner: raw.GKGameCenterViewControllerFromID(_id)}
+// NewGameCenterViewControllerWithLeaderboardIDPlayerScopeTimeScope creates a new GameCenterViewController.
+func NewGameCenterViewControllerWithLeaderboardIDPlayerScopeTimeScope(leaderboardID string, playerScope LeaderboardPlayerScope, timeScope LeaderboardTimeScope) *GameCenterViewController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGameCenterViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeaderboardID:playerScope:timeScope:"), purego.NSString(leaderboardID), playerScope, timeScope)
+	return gameCenterViewControllerAdopt(_id)
 }
 
 // Creates a view controller that presents a leaderboard with data for the specified players.
 //
-// NewGameCenterViewControllerWithLeaderboardPlayerScope creates a new [GameCenterViewController].
-func NewGameCenterViewControllerWithLeaderboardPlayerScope(leaderboard *raw.GKLeaderboard, playerScope GKLeaderboardPlayerScope) *GameCenterViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGameCenterViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeaderboard:playerScope:"), leaderboard.Ptr(), raw.GKLeaderboardPlayerScope(playerScope))
-	return &GameCenterViewController{inner: raw.GKGameCenterViewControllerFromID(_id)}
+// NewGameCenterViewControllerWithLeaderboardPlayerScope creates a new GameCenterViewController.
+func NewGameCenterViewControllerWithLeaderboardPlayerScope(leaderboard *Leaderboard, playerScope LeaderboardPlayerScope) *GameCenterViewController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGameCenterViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeaderboard:playerScope:"), objref.IDOf(leaderboard), playerScope)
+	return gameCenterViewControllerAdopt(_id)
 }
 
 // Creates a view controller that presents a leaderboard set.
 //
-// NewGameCenterViewControllerWithLeaderboardSetID creates a new [GameCenterViewController].
+// NewGameCenterViewControllerWithLeaderboardSetID creates a new GameCenterViewController.
 func NewGameCenterViewControllerWithLeaderboardSetID(leaderboardSetID string) *GameCenterViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGameCenterViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeaderboardSetID:"), foundation.NSStringStringWithUTF8String(leaderboardSetID).Ptr())
-	return &GameCenterViewController{inner: raw.GKGameCenterViewControllerFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGameCenterViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeaderboardSetID:"), purego.NSString(leaderboardSetID))
+	return gameCenterViewControllerAdopt(_id)
 }
 
 // Creates a view controller that presents an achievement.
 //
-// NewGameCenterViewControllerWithAchievementID creates a new [GameCenterViewController].
+// NewGameCenterViewControllerWithAchievementID creates a new GameCenterViewController.
 func NewGameCenterViewControllerWithAchievementID(achievementID string) *GameCenterViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGameCenterViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAchievementID:"), foundation.NSStringStringWithUTF8String(achievementID).Ptr())
-	return &GameCenterViewController{inner: raw.GKGameCenterViewControllerFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGameCenterViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAchievementID:"), purego.NSString(achievementID))
+	return gameCenterViewControllerAdopt(_id)
 }
 
 // Creates a view controller that presents a player’s Game Center profile.
 //
-// NewGameCenterViewControllerWithPlayer creates a new [GameCenterViewController].
-func NewGameCenterViewControllerWithPlayer(player *raw.GKPlayer) *GameCenterViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGameCenterViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayer:"), player.Ptr())
-	return &GameCenterViewController{inner: raw.GKGameCenterViewControllerFromID(_id)}
+// NewGameCenterViewControllerWithPlayer creates a new GameCenterViewController.
+func NewGameCenterViewControllerWithPlayer(player *Player) *GameCenterViewController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGameCenterViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayer:"), objref.IDOf(player))
+	return gameCenterViewControllerAdopt(_id)
 }
 
-// The view controller’s delegate.
-//
-// WithGameCenterDelegate sets the gameCenterDelegate property and returns the receiver for chaining.
-func (x *GameCenterViewController) WithGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate) *GameCenterViewController {
-	x.inner.SetGameCenterDelegate(gameCenterDelegate)
+// WithViewState sets viewState and returns the receiver so calls can be chained.
+func (x *GameCenterViewController) WithViewState(viewState GameCenterViewControllerState) *GameCenterViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewState:"), viewState)
 	return x
 }
 
-// WithViewState sets the viewState property and returns the receiver for chaining.
-func (x *GameCenterViewController) WithViewState(viewState GKGameCenterViewControllerState) *GameCenterViewController {
-	x.inner.SetViewState(raw.GKGameCenterViewControllerState(viewState))
+// WithLeaderboardTimeScope sets leaderboardTimeScope and returns the receiver so calls can be chained.
+func (x *GameCenterViewController) WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *GameCenterViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
 	return x
 }
 
-// WithLeaderboardTimeScope sets the leaderboardTimeScope property and returns the receiver for chaining.
-func (x *GameCenterViewController) WithLeaderboardTimeScope(leaderboardTimeScope GKLeaderboardTimeScope) *GameCenterViewController {
-	x.inner.SetLeaderboardTimeScope(raw.GKLeaderboardTimeScope(leaderboardTimeScope))
-	return x
-}
-
-// WithLeaderboardIdentifier sets the leaderboardIdentifier property and returns the receiver for chaining.
+// WithLeaderboardIdentifier sets leaderboardIdentifier and returns the receiver so calls can be chained.
 func (x *GameCenterViewController) WithLeaderboardIdentifier(leaderboardIdentifier string) *GameCenterViewController {
-	x.inner.SetLeaderboardIdentifier(foundation.NSStringStringWithUTF8String(leaderboardIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
 	return x
 }
 
-// WithLeaderboardCategory sets the leaderboardCategory property and returns the receiver for chaining.
+// WithLeaderboardCategory sets leaderboardCategory and returns the receiver so calls can be chained.
 func (x *GameCenterViewController) WithLeaderboardCategory(leaderboardCategory string) *GameCenterViewController {
-	x.inner.SetLeaderboardCategory(foundation.NSStringStringWithUTF8String(leaderboardCategory))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
 	return x
 }
 
-// GameCenterDelegate calls the underlying GameCenterDelegate.
-func (x *GameCenterViewController) GameCenterDelegate() raw.GKGameCenterControllerDelegate {
-	return x.inner.GameCenterDelegate()
+func (x *GameCenterViewController) ViewState() GameCenterViewControllerState {
+	_r := objc.Send[GameCenterViewControllerState](objref.IDOf(x), objc.RegisterName("viewState"))
+	return _r
 }
 
-// SetGameCenterDelegate calls the underlying SetGameCenterDelegate.
-func (x *GameCenterViewController) SetGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate) {
-	x.inner.SetGameCenterDelegate(gameCenterDelegate)
+func (x *GameCenterViewController) SetViewState(viewState GameCenterViewControllerState) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewState:"), viewState)
 }
 
-// ViewState calls the underlying ViewState.
-func (x *GameCenterViewController) ViewState() GKGameCenterViewControllerState {
-	return GKGameCenterViewControllerState(x.inner.ViewState())
+func (x *GameCenterViewController) LeaderboardTimeScope() LeaderboardTimeScope {
+	_r := objc.Send[LeaderboardTimeScope](objref.IDOf(x), objc.RegisterName("leaderboardTimeScope"))
+	return _r
 }
 
-// SetViewState calls the underlying SetViewState.
-func (x *GameCenterViewController) SetViewState(viewState GKGameCenterViewControllerState) {
-	x.inner.SetViewState(raw.GKGameCenterViewControllerState(viewState))
+func (x *GameCenterViewController) SetLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardTimeScope:"), leaderboardTimeScope)
 }
 
-// LeaderboardTimeScope calls the underlying LeaderboardTimeScope.
-func (x *GameCenterViewController) LeaderboardTimeScope() GKLeaderboardTimeScope {
-	return GKLeaderboardTimeScope(x.inner.LeaderboardTimeScope())
-}
-
-// SetLeaderboardTimeScope calls the underlying SetLeaderboardTimeScope.
-func (x *GameCenterViewController) SetLeaderboardTimeScope(leaderboardTimeScope GKLeaderboardTimeScope) {
-	x.inner.SetLeaderboardTimeScope(raw.GKLeaderboardTimeScope(leaderboardTimeScope))
-}
-
-// LeaderboardIdentifier calls the underlying LeaderboardIdentifier.
 func (x *GameCenterViewController) LeaderboardIdentifier() string {
-	_r := x.inner.LeaderboardIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leaderboardIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLeaderboardIdentifier calls the underlying SetLeaderboardIdentifier.
 func (x *GameCenterViewController) SetLeaderboardIdentifier(leaderboardIdentifier string) {
-	x.inner.SetLeaderboardIdentifier(foundation.NSStringStringWithUTF8String(leaderboardIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardIdentifier:"), purego.NSString(leaderboardIdentifier))
 }
 
-// LeaderboardCategory calls the underlying LeaderboardCategory.
 func (x *GameCenterViewController) LeaderboardCategory() string {
-	_r := x.inner.LeaderboardCategory()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leaderboardCategory"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLeaderboardCategory calls the underlying SetLeaderboardCategory.
 func (x *GameCenterViewController) SetLeaderboardCategory(leaderboardCategory string) {
-	x.inner.SetLeaderboardCategory(foundation.NSStringStringWithUTF8String(leaderboardCategory))
-}
-
-func (x *GameCenterViewController) asGameCenterViewController() *raw.GKGameCenterViewController {
-	return x.inner
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardCategory:"), purego.NSString(leaderboardCategory))
 }
 
 // GameCenterViewControllerable is the interface implemented by [GameCenterViewController], for mocking and DI.
 type GameCenterViewControllerable interface {
-	Unwrap() *raw.GKGameCenterViewController
-	WithGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate) *GameCenterViewController
-	WithViewState(viewState GKGameCenterViewControllerState) *GameCenterViewController
-	WithLeaderboardTimeScope(leaderboardTimeScope GKLeaderboardTimeScope) *GameCenterViewController
+	obj.Object
+	WithViewState(viewState GameCenterViewControllerState) *GameCenterViewController
+	WithLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope) *GameCenterViewController
 	WithLeaderboardIdentifier(leaderboardIdentifier string) *GameCenterViewController
 	WithLeaderboardCategory(leaderboardCategory string) *GameCenterViewController
-	GameCenterDelegate() raw.GKGameCenterControllerDelegate
-	SetGameCenterDelegate(gameCenterDelegate raw.GKGameCenterControllerDelegate)
-	ViewState() GKGameCenterViewControllerState
-	SetViewState(viewState GKGameCenterViewControllerState)
-	LeaderboardTimeScope() GKLeaderboardTimeScope
-	SetLeaderboardTimeScope(leaderboardTimeScope GKLeaderboardTimeScope)
+	ViewState() GameCenterViewControllerState
+	SetViewState(viewState GameCenterViewControllerState)
+	LeaderboardTimeScope() LeaderboardTimeScope
+	SetLeaderboardTimeScope(leaderboardTimeScope LeaderboardTimeScope)
 	LeaderboardIdentifier() string
 	SetLeaderboardIdentifier(leaderboardIdentifier string)
 	LeaderboardCategory() string

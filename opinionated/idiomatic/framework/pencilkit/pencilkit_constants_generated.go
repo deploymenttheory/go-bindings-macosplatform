@@ -5,77 +5,40 @@
 package pencilkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
 // The UTType for storing drawing data.
-// PKAppleDrawingTypeIdentifier returns the value of the CoreFoundation reference constant PKAppleDrawingTypeIdentifier as an objc.ID.
-func PKAppleDrawingTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.PKAppleDrawingTypeIdentifier())
+// PKAppleDrawingTypeIdentifier returns the value of the constant PKAppleDrawingTypeIdentifier.
+func PKAppleDrawingTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKAppleDrawingTypeIdentifier")))
 }
 
-// PKInkTypePen returns the string constant PKInkTypePen as an objc.ID, for use as a dictionary key or selector argument.
-func PKInkTypePen() objc.ID {
-	if _r := raw.PKInkTypePen(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKInkTypePen returns the string constant PKInkTypePen, for use as a dictionary key or argument.
+func PKInkTypePen() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("PKInkTypePen"))) }
+
+// PKInkTypePencil returns the string constant PKInkTypePencil, for use as a dictionary key or argument.
+func PKInkTypePencil() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("PKInkTypePencil"))) }
+
+// PKInkTypeMarker returns the string constant PKInkTypeMarker, for use as a dictionary key or argument.
+func PKInkTypeMarker() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("PKInkTypeMarker"))) }
+
+// PKInkTypeMonoline returns the string constant PKInkTypeMonoline, for use as a dictionary key or argument.
+func PKInkTypeMonoline() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("PKInkTypeMonoline"))) }
+
+// PKInkTypeFountainPen returns the string constant PKInkTypeFountainPen, for use as a dictionary key or argument.
+func PKInkTypeFountainPen() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKInkTypeFountainPen")))
 }
 
-// PKInkTypePencil returns the string constant PKInkTypePencil as an objc.ID, for use as a dictionary key or selector argument.
-func PKInkTypePencil() objc.ID {
-	if _r := raw.PKInkTypePencil(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PKInkTypeWatercolor returns the string constant PKInkTypeWatercolor, for use as a dictionary key or argument.
+func PKInkTypeWatercolor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PKInkTypeWatercolor")))
 }
 
-// PKInkTypeMarker returns the string constant PKInkTypeMarker as an objc.ID, for use as a dictionary key or selector argument.
-func PKInkTypeMarker() objc.ID {
-	if _r := raw.PKInkTypeMarker(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// PKInkTypeReed returns the string constant PKInkTypeReed, for use as a dictionary key or argument.
+func PKInkTypeReed() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("PKInkTypeReed"))) }
 
-// PKInkTypeMonoline returns the string constant PKInkTypeMonoline as an objc.ID, for use as a dictionary key or selector argument.
-func PKInkTypeMonoline() objc.ID {
-	if _r := raw.PKInkTypeMonoline(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// PKInkTypeFountainPen returns the string constant PKInkTypeFountainPen as an objc.ID, for use as a dictionary key or selector argument.
-func PKInkTypeFountainPen() objc.ID {
-	if _r := raw.PKInkTypeFountainPen(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// PKInkTypeWatercolor returns the string constant PKInkTypeWatercolor as an objc.ID, for use as a dictionary key or selector argument.
-func PKInkTypeWatercolor() objc.ID {
-	if _r := raw.PKInkTypeWatercolor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// PKInkTypeReed returns the string constant PKInkTypeReed as an objc.ID, for use as a dictionary key or selector argument.
-func PKInkTypeReed() objc.ID {
-	if _r := raw.PKInkTypeReed(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// PKInkTypeCrayon returns the string constant PKInkTypeCrayon as an objc.ID, for use as a dictionary key or selector argument.
-func PKInkTypeCrayon() objc.ID {
-	if _r := raw.PKInkTypeCrayon(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// PKInkTypeCrayon returns the string constant PKInkTypeCrayon, for use as a dictionary key or argument.
+func PKInkTypeCrayon() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("PKInkTypeCrayon"))) }

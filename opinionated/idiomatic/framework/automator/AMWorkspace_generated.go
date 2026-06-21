@@ -5,50 +5,81 @@
 package automator
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automator"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // A workspace for running an Automator workflow.
 //
-// Workspace wraps [raw.AMWorkspace] with a fluent Go API.
+// Workspace is an idiomatic wrapper over the Objective-C class AMWorkspace.
 type Workspace struct {
-	inner *raw.AMWorkspace
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AMWorkspace].
-func (x *Workspace) Unwrap() *raw.AMWorkspace { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Workspace) ID() objc.ID { return x.inner.Ptr() }
-
-// WorkspaceFromID adopts an existing object pointer as a Workspace (nil for 0).
+// WorkspaceFromID adopts an existing Objective-C object as a Workspace
+// (nil for 0), retaining it and registering a release finalizer.
 func WorkspaceFromID(id objc.ID) *Workspace {
 	if id == 0 {
 		return nil
 	}
-	return &Workspace{inner: raw.AMWorkspaceFromID(id)}
+	x := &Workspace{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWorkspace creates a new [Workspace].
+// workspaceAdopt wraps an Objective-C object that this code just created as a
+// Workspace (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func workspaceAdopt(id objc.ID) *Workspace {
+	if id == 0 {
+		return nil
+	}
+	x := &Workspace{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Workspace) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Workspace) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Workspace) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWorkspace creates a new Workspace.
 func NewWorkspace() *Workspace {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AMWorkspace")), objc.RegisterName("new"))
-	return &Workspace{inner: raw.AMWorkspaceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AMWorkspace")), objc.RegisterName("new"))
+	return workspaceAdopt(_id)
 }
 
 // Loads and runs the specified workflow file.
-//
-// RunWorkflowAtPathWithInputError calls the underlying RunWorkflowAtPathWithInputError.
-func (x *Workspace) RunWorkflowAtPathWithInputError(path string, input objc.ID) (objc.ID, error) {
-	return x.inner.RunWorkflowAtPathWithInputError(foundation.NSStringStringWithUTF8String(path), input)
+func (x *Workspace) RunWorkflowAtPathWithInputError(path string, input obj.Object) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runWorkflowAtPath:withInput:error:"), purego.NSString(path), objref.IDOf(input), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // Workspaceable is the interface implemented by [Workspace], for mocking and DI.
 type Workspaceable interface {
-	Unwrap() *raw.AMWorkspace
-	RunWorkflowAtPathWithInputError(path string, input objc.ID) (objc.ID, error)
+	obj.Object
+	RunWorkflowAtPathWithInputError(path string, input obj.Object) (obj.Object, error)
 }
 
 var _ Workspaceable = (*Workspace)(nil)

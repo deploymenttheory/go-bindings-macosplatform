@@ -5,270 +5,254 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A geometry based on a two-dimensional path, optionally extruded to create a three-dimensional object.
 //
-// Shape wraps [raw.SCNShape] with a fluent Go API.
+// Shape is an idiomatic wrapper over the Objective-C class SCNShape.
 type Shape struct {
-	inner *raw.SCNShape
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNShape].
-func (x *Shape) Unwrap() *raw.SCNShape { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Shape) ID() objc.ID { return x.inner.Ptr() }
-
-// ShapeFromID adopts an existing object pointer as a Shape (nil for 0).
+// ShapeFromID adopts an existing Objective-C object as a Shape
+// (nil for 0), retaining it and registering a release finalizer.
 func ShapeFromID(id objc.ID) *Shape {
 	if id == 0 {
 		return nil
 	}
-	return &Shape{inner: raw.SCNShapeFromID(id)}
+	x := &Shape{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewShape creates a new [Shape].
+// shapeAdopt wraps an Objective-C object that this code just created as a
+// Shape (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shapeAdopt(id objc.ID) *Shape {
+	if id == 0 {
+		return nil
+	}
+	x := &Shape{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Shape) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Shape) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Shape) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewShape creates a new Shape.
 func NewShape() *Shape {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNShape")), objc.RegisterName("new"))
-	return &Shape{inner: raw.SCNShapeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNShape")), objc.RegisterName("new"))
+	return shapeAdopt(_id)
 }
 
 // The two-dimensional path forming the basis of the shape.
 //
-// WithPath sets the path property and returns the receiver for chaining.
-func (x *Shape) WithPath(path *appkit.NSBezierPath) *Shape {
-	x.inner.SetPath(path)
+// WithPath sets path and returns the receiver so calls can be chained.
+func (x *Shape) WithPath(path obj.Object) *Shape {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return x
 }
 
 // The thickness of the extruded shape along the z-axis. Animatable.
 //
-// WithExtrusionDepth sets the extrusionDepth property and returns the receiver for chaining.
+// WithExtrusionDepth sets extrusionDepth and returns the receiver so calls can be chained.
 func (x *Shape) WithExtrusionDepth(extrusionDepth float64) *Shape {
-	x.inner.SetExtrusionDepth(extrusionDepth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtrusionDepth:"), extrusionDepth)
 	return x
 }
 
 // A constant specifying which ends of the extruded shape’s profile are chamfered.
 //
-// WithChamferMode sets the chamferMode property and returns the receiver for chaining.
-func (x *Shape) WithChamferMode(chamferMode SCNChamferMode) *Shape {
-	x.inner.SetChamferMode(raw.SCNChamferMode(chamferMode))
+// WithChamferMode sets chamferMode and returns the receiver so calls can be chained.
+func (x *Shape) WithChamferMode(chamferMode ChamferMode) *Shape {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChamferMode:"), chamferMode)
 	return x
 }
 
 // The width or depth of each chamfered edge. Animatable.
 //
-// WithChamferRadius sets the chamferRadius property and returns the receiver for chaining.
+// WithChamferRadius sets chamferRadius and returns the receiver so calls can be chained.
 func (x *Shape) WithChamferRadius(chamferRadius float64) *Shape {
-	x.inner.SetChamferRadius(chamferRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChamferRadius:"), chamferRadius)
 	return x
 }
 
 // A path that determines the cross-sectional contour of each chamfered edge.
 //
-// WithChamferProfile sets the chamferProfile property and returns the receiver for chaining.
-func (x *Shape) WithChamferProfile(chamferProfile *appkit.NSBezierPath) *Shape {
-	x.inner.SetChamferProfile(chamferProfile)
+// WithChamferProfile sets chamferProfile and returns the receiver so calls can be chained.
+func (x *Shape) WithChamferProfile(chamferProfile obj.Object) *Shape {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChamferProfile:"), objref.IDOf(chamferProfile))
 	return x
 }
 
 // A name associated with the geometry object.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *Shape) WithName(name string) *Shape {
-	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
 //
-// WithMaterials sets the collection, converting the Go slice to an NSArray.
-func (x *Shape) WithMaterials(items ...*raw.SCNMaterial) *Shape {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SCNGeometry.SetMaterials(foundation.NSArrayFromID[*raw.SCNMaterial](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SCNGeometry.SetMaterials(_arr)
+// WithMaterials sets the collection and returns the receiver so calls can be chained.
+func (x *Shape) WithMaterials(items ...*Material) *Shape {
+	_arr := purego.SliceToNSArray(items, func(_v *Material) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterials:"), _arr)
 	return x
 }
 
 // The first material attached to the geometry.
 //
-// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+// WithFirstMaterial sets firstMaterial and returns the receiver so calls can be chained.
 func (x *Shape) WithFirstMaterial(firstMaterial *Material) *Shape {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return x
 }
 
 // An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
 //
-// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
-func (x *Shape) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Shape {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SCNGeometry.SetLevelsOfDetail(foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+// WithLevelsOfDetail sets the collection and returns the receiver so calls can be chained.
+func (x *Shape) WithLevelsOfDetail(items ...*LevelOfDetail) *Shape {
+	_arr := purego.SliceToNSArray(items, func(_v *LevelOfDetail) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetail:"), _arr)
 	return x
 }
 
-// WithTessellator sets the tessellator property and returns the receiver for chaining.
+// WithTessellator sets tessellator and returns the receiver so calls can be chained.
 func (x *Shape) WithTessellator(tessellator *GeometryTessellator) *Shape {
-	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return x
 }
 
 // The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
 //
-// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
-func (x *Shape) WithSubdivisionLevel(subdivisionLevel uint) *Shape {
-	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+// WithSubdivisionLevel sets subdivisionLevel and returns the receiver so calls can be chained.
+func (x *Shape) WithSubdivisionLevel(subdivisionLevel int) *Shape {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
 	return x
 }
 
-// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+// Specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
 //
-// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+// WithWantsAdaptiveSubdivision sets wantsAdaptiveSubdivision and returns the receiver so calls can be chained.
 func (x *Shape) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Shape {
-	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
 	return x
 }
 
 // The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 //
-// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+// WithEdgeCreasesElement sets edgeCreasesElement and returns the receiver so calls can be chained.
 func (x *Shape) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Shape {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return x
 }
 
 // The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 //
-// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+// WithEdgeCreasesSource sets edgeCreasesSource and returns the receiver so calls can be chained.
 func (x *Shape) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Shape {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return x
 }
 
-// @property path @abstract The path defining the shape to be rendered. @discussion The path defines the outline of the shape. The path is filled using the even-odd rule. If the path is self-intersecting, the behavior is undefined.
-//
-// Path calls the underlying Path.
-func (x *Shape) Path() *appkit.NSBezierPath {
-	return x.inner.Path()
+// The path defining the shape to be rendered. The path defines the outline of the shape. The path is filled using the even-odd rule. If the path is self-intersecting, the behavior is undefined.
+func (x *Shape) Path() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+	return obj.Wrap(_r)
 }
 
-// SetPath calls the underlying SetPath.
-func (x *Shape) SetPath(path *appkit.NSBezierPath) {
-	x.inner.SetPath(path)
+func (x *Shape) SetPath(path obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
 }
 
-// @property extrusionDepth @abstract The extrusion depth. Animatable. @discussion If the value is 0, we get a mono-sided, 2D version of the shape.
-//
-// ExtrusionDepth calls the underlying ExtrusionDepth.
+// The extrusion depth. Animatable. If the value is 0, we get a mono-sided, 2D version of the shape.
 func (x *Shape) ExtrusionDepth() float64 {
-	return x.inner.ExtrusionDepth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("extrusionDepth"))
+	return _r
 }
 
-// SetExtrusionDepth calls the underlying SetExtrusionDepth.
 func (x *Shape) SetExtrusionDepth(extrusionDepth float64) {
-	x.inner.SetExtrusionDepth(extrusionDepth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtrusionDepth:"), extrusionDepth)
 }
 
-// @property chamferMode @abstract The sides of the text that are chamfered. @discussion The default value is SCNChamferModeBoth.
-//
-// ChamferMode calls the underlying ChamferMode.
-func (x *Shape) ChamferMode() SCNChamferMode {
-	return SCNChamferMode(x.inner.ChamferMode())
+// The sides of the text that are chamfered. The default value is SCNChamferModeBoth.
+func (x *Shape) ChamferMode() ChamferMode {
+	_r := objc.Send[ChamferMode](objref.IDOf(x), objc.RegisterName("chamferMode"))
+	return _r
 }
 
-// SetChamferMode calls the underlying SetChamferMode.
-func (x *Shape) SetChamferMode(chamferMode SCNChamferMode) {
-	x.inner.SetChamferMode(raw.SCNChamferMode(chamferMode))
+func (x *Shape) SetChamferMode(chamferMode ChamferMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChamferMode:"), chamferMode)
 }
 
-// @property chamferRadius @abstract The chamfer radius. Animatable. @discussion Values are clamped to the range [0, extrusionDepth / 2]. The default value is 0.
-//
-// ChamferRadius calls the underlying ChamferRadius.
+// The chamfer radius. Animatable. Values are clamped to the range [0, extrusionDepth / 2]. The default value is 0.
 func (x *Shape) ChamferRadius() float64 {
-	return x.inner.ChamferRadius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("chamferRadius"))
+	return _r
 }
 
-// SetChamferRadius calls the underlying SetChamferRadius.
 func (x *Shape) SetChamferRadius(chamferRadius float64) {
-	x.inner.SetChamferRadius(chamferRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChamferRadius:"), chamferRadius)
 }
 
-// @property chamferProfile @abstract Describes the profile used to when "chamferRadius" is not nil. When "chamferProfile" is nil we fallback on a path representing a quadrant. @discussion The profile should be a 2D curve beginning at (0,1) and ending at (1,0). The "flatness" property is also used to flatten this path. The default value is nil.
-//
-// ChamferProfile calls the underlying ChamferProfile.
-func (x *Shape) ChamferProfile() *appkit.NSBezierPath {
-	return x.inner.ChamferProfile()
+// Describes the profile used to when "chamferRadius" is not nil. When "chamferProfile" is nil we fallback on a path representing a quadrant. The profile should be a 2D curve beginning at (0,1) and ending at (1,0). The "flatness" property is also used to flatten this path. The default value is nil.
+func (x *Shape) ChamferProfile() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chamferProfile"))
+	return obj.Wrap(_r)
 }
 
-// SetChamferProfile calls the underlying SetChamferProfile.
-func (x *Shape) SetChamferProfile(chamferProfile *appkit.NSBezierPath) {
-	x.inner.SetChamferProfile(chamferProfile)
+func (x *Shape) SetChamferProfile(chamferProfile obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChamferProfile:"), objref.IDOf(chamferProfile))
 }
-
-func (x *Shape) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
 
 // Shapeable is the interface implemented by [Shape], for mocking and DI.
 type Shapeable interface {
-	Unwrap() *raw.SCNShape
-	WithPath(path *appkit.NSBezierPath) *Shape
+	obj.Object
+	WithPath(path obj.Object) *Shape
 	WithExtrusionDepth(extrusionDepth float64) *Shape
-	WithChamferMode(chamferMode SCNChamferMode) *Shape
+	WithChamferMode(chamferMode ChamferMode) *Shape
 	WithChamferRadius(chamferRadius float64) *Shape
-	WithChamferProfile(chamferProfile *appkit.NSBezierPath) *Shape
+	WithChamferProfile(chamferProfile obj.Object) *Shape
 	WithName(name string) *Shape
-	WithMaterials(items ...*raw.SCNMaterial) *Shape
+	WithMaterials(items ...*Material) *Shape
 	WithFirstMaterial(firstMaterial *Material) *Shape
-	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Shape
+	WithLevelsOfDetail(items ...*LevelOfDetail) *Shape
 	WithTessellator(tessellator *GeometryTessellator) *Shape
-	WithSubdivisionLevel(subdivisionLevel uint) *Shape
+	WithSubdivisionLevel(subdivisionLevel int) *Shape
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Shape
 	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Shape
 	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Shape
-	Path() *appkit.NSBezierPath
-	SetPath(path *appkit.NSBezierPath)
+	Path() obj.Object
+	SetPath(path obj.Object)
 	ExtrusionDepth() float64
 	SetExtrusionDepth(extrusionDepth float64)
-	ChamferMode() SCNChamferMode
-	SetChamferMode(chamferMode SCNChamferMode)
+	ChamferMode() ChamferMode
+	SetChamferMode(chamferMode ChamferMode)
 	ChamferRadius() float64
 	SetChamferRadius(chamferRadius float64)
-	ChamferProfile() *appkit.NSBezierPath
-	SetChamferProfile(chamferProfile *appkit.NSBezierPath)
+	ChamferProfile() obj.Object
+	SetChamferProfile(chamferProfile obj.Object)
 }
 
 var _ Shapeable = (*Shape)(nil)

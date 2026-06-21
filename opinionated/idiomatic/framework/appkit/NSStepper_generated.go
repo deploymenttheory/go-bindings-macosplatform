@@ -5,767 +5,681 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An interface with up and down arrow buttons for incrementing or decrementing a value.
 //
-// Stepper wraps [raw.NSStepper] with a fluent Go API.
+// Stepper is an idiomatic wrapper over the Objective-C class NSStepper.
 type Stepper struct {
-	inner *raw.NSStepper
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSStepper].
-func (x *Stepper) Unwrap() *raw.NSStepper { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Stepper) ID() objc.ID { return x.inner.Ptr() }
-
-// StepperFromID adopts an existing object pointer as a Stepper (nil for 0).
+// StepperFromID adopts an existing Objective-C object as a Stepper
+// (nil for 0), retaining it and registering a release finalizer.
 func StepperFromID(id objc.ID) *Stepper {
 	if id == 0 {
 		return nil
 	}
-	return &Stepper{inner: raw.NSStepperFromID(id)}
+	x := &Stepper{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewStepper creates a new [Stepper].
+// stepperAdopt wraps an Objective-C object that this code just created as a
+// Stepper (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func stepperAdopt(id objc.ID) *Stepper {
+	if id == 0 {
+		return nil
+	}
+	x := &Stepper{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Stepper) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Stepper) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Stepper) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewStepper creates a new Stepper.
 func NewStepper() *Stepper {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSStepper")), objc.RegisterName("new"))
-	return &Stepper{inner: raw.NSStepperFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSStepper")), objc.RegisterName("new"))
+	return stepperAdopt(_id)
 }
 
 // The stepper’s minimum value.
 //
-// WithMinValue sets the minValue property and returns the receiver for chaining.
+// WithMinValue sets minValue and returns the receiver so calls can be chained.
 func (x *Stepper) WithMinValue(minValue float64) *Stepper {
-	x.inner.SetMinValue(minValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinValue:"), minValue)
 	return x
 }
 
 // The stepper’s maximum value.
 //
-// WithMaxValue sets the maxValue property and returns the receiver for chaining.
+// WithMaxValue sets maxValue and returns the receiver so calls can be chained.
 func (x *Stepper) WithMaxValue(maxValue float64) *Stepper {
-	x.inner.SetMaxValue(maxValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxValue:"), maxValue)
 	return x
 }
 
 // The amount by which the receiver changes with each increment or decrement.
 //
-// WithIncrement sets the increment property and returns the receiver for chaining.
+// WithIncrement sets increment and returns the receiver so calls can be chained.
 func (x *Stepper) WithIncrement(increment float64) *Stepper {
-	x.inner.SetIncrement(increment)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncrement:"), increment)
 	return x
 }
 
 // A Boolean value that indicates whether the stepper wraps around the minimum and maximum values.
 //
-// WithValueWraps sets the valueWraps property and returns the receiver for chaining.
+// WithValueWraps sets valueWraps and returns the receiver so calls can be chained.
 func (x *Stepper) WithValueWraps(valueWraps bool) *Stepper {
-	x.inner.SetValueWraps(valueWraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueWraps:"), valueWraps)
 	return x
 }
 
 // A Boolean value that indicates how the stepper responds to mouse events.
 //
-// WithAutorepeat sets the autorepeat property and returns the receiver for chaining.
+// WithAutorepeat sets autorepeat and returns the receiver so calls can be chained.
 func (x *Stepper) WithAutorepeat(autorepeat bool) *Stepper {
-	x.inner.SetAutorepeat(autorepeat)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutorepeat:"), autorepeat)
 	return x
 }
 
 // The target object that receives action messages from the cell.
 //
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *Stepper) WithTarget(target objc.ID) *Stepper {
-	x.inner.NSControl.SetTarget(target)
-	return x
-}
-
-// The default action-message selector associated with the control.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *Stepper) WithAction(action objc.SEL) *Stepper {
-	x.inner.NSControl.SetAction(action)
+// WithTarget sets target and returns the receiver so calls can be chained.
+func (x *Stepper) WithTarget(target obj.Object) *Stepper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
 // The tag identifying the receiver (not the tag of the receiver’s cell).
 //
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag sets tag and returns the receiver so calls can be chained.
 func (x *Stepper) WithTag(tag int) *Stepper {
-	x.inner.NSControl.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
 // A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 //
-// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+// WithIgnoresMultiClick sets ignoresMultiClick and returns the receiver so calls can be chained.
 func (x *Stepper) WithIgnoresMultiClick(ignoresMultiClick bool) *Stepper {
-	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
 	return x
 }
 
 // A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 //
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous sets continuous and returns the receiver so calls can be chained.
 func (x *Stepper) WithContinuous(continuous bool) *Stepper {
-	x.inner.NSControl.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
 // A Boolean value that indicates whether the receiver reacts to mouse events.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *Stepper) WithEnabled(enabled bool) *Stepper {
-	x.inner.NSControl.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // A Boolean value indicating whether the receiver refuses the first responder role.
 //
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
 func (x *Stepper) WithRefusesFirstResponder(refusesFirstResponder bool) *Stepper {
-	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
 // A Boolean value that indicates whether the cell is highlighted.
 //
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
 func (x *Stepper) WithHighlighted(highlighted bool) *Stepper {
-	x.inner.NSControl.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
 // The size of the control.
 //
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *Stepper) WithControlSize(controlSize NSControlSize) *Stepper {
-	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+func (x *Stepper) WithControlSize(controlSize ControlSize) *Stepper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
 // The receiver’s formatter.
 //
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *Stepper) WithFormatter(formatter *foundation.NSFormatter) *Stepper {
-	x.inner.NSControl.SetFormatter(formatter)
+// WithFormatter sets formatter and returns the receiver so calls can be chained.
+func (x *Stepper) WithFormatter(formatter obj.Object) *Stepper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
 // The value of the receiver’s cell as an Objective-C object.
 //
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *Stepper) WithObjectValue(objectValue objc.ID) *Stepper {
-	x.inner.NSControl.SetObjectValue(objectValue)
+// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+func (x *Stepper) WithObjectValue(objectValue obj.Object) *Stepper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
 // The value of the receiver’s cell as an NSString object.
 //
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue sets stringValue and returns the receiver so calls can be chained.
 func (x *Stepper) WithStringValue(stringValue string) *Stepper {
-	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
 // The value of the receiver’s cell as an attributed string.
 //
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *Stepper) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Stepper {
-	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+func (x *Stepper) WithAttributedStringValue(attributedStringValue obj.Object) *Stepper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
 // The value of the receiver’s cell as an integer.
 //
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue sets intValue and returns the receiver so calls can be chained.
 func (x *Stepper) WithIntValue(intValue int) *Stepper {
-	x.inner.NSControl.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
 // The value of the receiver’s cell as an integer value.
 //
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
 func (x *Stepper) WithIntegerValue(integerValue int) *Stepper {
-	x.inner.NSControl.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
 // The value of the receiver’s cell as a single-precision floating-point number.
 //
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
 func (x *Stepper) WithFloatValue(floatValue float32) *Stepper {
-	x.inner.NSControl.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
 // The value of the receiver’s cell as a double-precision floating-point number.
 //
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
 func (x *Stepper) WithDoubleValue(doubleValue float64) *Stepper {
-	x.inner.NSControl.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
 // The font used to draw text in the receiver’s cell.
 //
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont sets font and returns the receiver so calls can be chained.
 func (x *Stepper) WithFont(font *Font) *Stepper {
-	x.inner.NSControl.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
 // A Boolean value that indicates whether the text in the control’s cell uses single line mode.
 //
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
 func (x *Stepper) WithUsesSingleLineMode(usesSingleLineMode bool) *Stepper {
-	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
 // The line break mode to use for text in the control’s cell.
 //
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *Stepper) WithLineBreakMode(lineBreakMode NSLineBreakMode) *Stepper {
-	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+func (x *Stepper) WithLineBreakMode(lineBreakMode LineBreakMode) *Stepper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
 // The alignment mode of the text in the receiver’s cell.
 //
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *Stepper) WithAlignment(alignment NSTextAlignment) *Stepper {
-	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment sets alignment and returns the receiver so calls can be chained.
+func (x *Stepper) WithAlignment(alignment TextAlignment) *Stepper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
 // The initial writing direction used to determine the actual writing direction for text.
 //
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *Stepper) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Stepper {
-	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+func (x *Stepper) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Stepper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
 // A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 //
-// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+// WithAllowsExpansionToolTips sets allowsExpansionToolTips and returns the receiver so calls can be chained.
 func (x *Stepper) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Stepper {
-	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
 	return x
 }
 
-// WithCell sets the cell property and returns the receiver for chaining.
+// WithCell sets cell and returns the receiver so calls can be chained.
 func (x *Stepper) WithCell(cell CellProvider) *Stepper {
-	x.inner.NSControl.SetCell(cell.asCell())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return x
 }
 
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
+// WithSubviews sets the collection and returns the receiver so calls can be chained.
 func (x *Stepper) WithSubviews(items ...ViewProvider) *Stepper {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetSubviews(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *Stepper) WithHidden(hidden bool) *Stepper {
-	x.inner.NSControl.NSView.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+// WithPostsFrameChangedNotifications sets postsFrameChangedNotifications and returns the receiver so calls can be chained.
 func (x *Stepper) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Stepper {
-	x.inner.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+// WithAutoresizesSubviews sets autoresizesSubviews and returns the receiver so calls can be chained.
 func (x *Stepper) WithAutoresizesSubviews(autoresizesSubviews bool) *Stepper {
-	x.inner.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *Stepper) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Stepper {
-	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
+// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+func (x *Stepper) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Stepper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
-func (x *Stepper) WithFrame(frame corefoundation.CGRect) *Stepper {
-	x.inner.NSControl.NSView.SetFrame(frame)
-	return x
-}
-
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+// WithFrameRotation sets frameRotation and returns the receiver so calls can be chained.
 func (x *Stepper) WithFrameRotation(frameRotation float64) *Stepper {
-	x.inner.NSControl.NSView.SetFrameRotation(frameRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+// WithFrameCenterRotation sets frameCenterRotation and returns the receiver so calls can be chained.
 func (x *Stepper) WithFrameCenterRotation(frameCenterRotation float64) *Stepper {
-	x.inner.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+// WithBoundsRotation sets boundsRotation and returns the receiver so calls can be chained.
 func (x *Stepper) WithBoundsRotation(boundsRotation float64) *Stepper {
-	x.inner.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *Stepper) WithBounds(bounds corefoundation.CGRect) *Stepper {
-	x.inner.NSControl.NSView.SetBounds(bounds)
-	return x
-}
-
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+// WithCanDrawConcurrently sets canDrawConcurrently and returns the receiver so calls can be chained.
 func (x *Stepper) WithCanDrawConcurrently(canDrawConcurrently bool) *Stepper {
-	x.inner.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
 // A Boolean value that determines whether the view needs to be redrawn before being displayed.
 //
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+// WithNeedsDisplay sets needsDisplay and returns the receiver so calls can be chained.
 func (x *Stepper) WithNeedsDisplay(needsDisplay bool) *Stepper {
-	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+// WithAcceptsTouchEvents sets acceptsTouchEvents and returns the receiver so calls can be chained.
 func (x *Stepper) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Stepper {
-	x.inner.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+// WithWantsRestingTouches sets wantsRestingTouches and returns the receiver so calls can be chained.
 func (x *Stepper) WithWantsRestingTouches(wantsRestingTouches bool) *Stepper {
-	x.inner.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *Stepper) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Stepper {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
+// WithLayerContentsRedrawPolicy sets layerContentsRedrawPolicy and returns the receiver so calls can be chained.
+func (x *Stepper) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Stepper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *Stepper) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Stepper {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
+// WithLayerContentsPlacement sets layerContentsPlacement and returns the receiver so calls can be chained.
+func (x *Stepper) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Stepper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+// WithWantsLayer sets wantsLayer and returns the receiver so calls can be chained.
 func (x *Stepper) WithWantsLayer(wantsLayer bool) *Stepper {
-	x.inner.NSControl.NSView.SetWantsLayer(wantsLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *Stepper) WithLayer(layer *quartzcore.CALayer) *Stepper {
-	x.inner.NSControl.NSView.SetLayer(layer)
+// WithLayer sets layer and returns the receiver so calls can be chained.
+func (x *Stepper) WithLayer(layer obj.Object) *Stepper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+// WithCanDrawSubviewsIntoLayer sets canDrawSubviewsIntoLayer and returns the receiver so calls can be chained.
 func (x *Stepper) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Stepper {
-	x.inner.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+// WithNeedsLayout sets needsLayout and returns the receiver so calls can be chained.
 func (x *Stepper) WithNeedsLayout(needsLayout bool) *Stepper {
-	x.inner.NSControl.NSView.SetNeedsLayout(needsLayout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
 func (x *Stepper) WithAlphaValue(alphaValue float64) *Stepper {
-	x.inner.NSControl.NSView.SetAlphaValue(alphaValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+// WithLayerUsesCoreImageFilters sets layerUsesCoreImageFilters and returns the receiver so calls can be chained.
 func (x *Stepper) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Stepper {
-	x.inner.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *Stepper) WithBackgroundFilters(items ...*coreimage.CIFilter) *Stepper {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetBackgroundFilters(_arr)
+// WithBackgroundFilters sets the collection and returns the receiver so calls can be chained.
+func (x *Stepper) WithBackgroundFilters(items ...obj.Object) *Stepper {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *Stepper) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Stepper {
-	x.inner.NSControl.NSView.SetCompositingFilter(compositingFilter)
+// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+func (x *Stepper) WithCompositingFilter(compositingFilter obj.Object) *Stepper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *Stepper) WithContentFilters(items ...*coreimage.CIFilter) *Stepper {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetContentFilters(_arr)
+// WithContentFilters sets the collection and returns the receiver so calls can be chained.
+func (x *Stepper) WithContentFilters(items ...obj.Object) *Stepper {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets the shadow property and returns the receiver for chaining.
+// WithShadow sets shadow and returns the receiver so calls can be chained.
 func (x *Stepper) WithShadow(shadow *Shadow) *Stepper {
-	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+// WithClipsToBounds sets clipsToBounds and returns the receiver so calls can be chained.
 func (x *Stepper) WithClipsToBounds(clipsToBounds bool) *Stepper {
-	x.inner.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+// WithPostsBoundsChangedNotifications sets postsBoundsChangedNotifications and returns the receiver so calls can be chained.
 func (x *Stepper) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Stepper {
-	x.inner.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip sets toolTip and returns the receiver so calls can be chained.
 func (x *Stepper) WithToolTip(toolTip string) *Stepper {
-	x.inner.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Stepper) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Stepper {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+func (x *Stepper) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Stepper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
-func (x *Stepper) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Stepper {
-	x.inner.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
-	return x
-}
-
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+// WithNextKeyView sets nextKeyView and returns the receiver so calls can be chained.
 func (x *Stepper) WithNextKeyView(nextKeyView ViewProvider) *Stepper {
-	x.inner.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *Stepper) WithFocusRingType(focusRingType NSFocusRingType) *Stepper {
-	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+func (x *Stepper) WithFocusRingType(focusRingType FocusRingType) *Stepper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+// WithGestureRecognizers sets the collection and returns the receiver so calls can be chained.
 func (x *Stepper) WithGestureRecognizers(items ...GestureRecognizerProvider) *Stepper {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetGestureRecognizers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *Stepper) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Stepper {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
-	return x
-}
-
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
-func (x *Stepper) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Stepper {
-	x.inner.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+// WithAllowedTouchTypes sets allowedTouchTypes and returns the receiver so calls can be chained.
+func (x *Stepper) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Stepper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
 // When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+// WithPrefersCompactControlSizeMetrics sets prefersCompactControlSizeMetrics and returns the receiver so calls can be chained.
 func (x *Stepper) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Stepper {
-	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+// WithWritingToolsCoordinator sets writingToolsCoordinator and returns the receiver so calls can be chained.
 func (x *Stepper) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Stepper {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+// WithNeedsUpdateConstraints sets needsUpdateConstraints and returns the receiver so calls can be chained.
 func (x *Stepper) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Stepper {
-	x.inner.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+// WithTranslatesAutoresizingMaskIntoConstraints sets translatesAutoresizingMaskIntoConstraints and returns the receiver so calls can be chained.
 func (x *Stepper) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Stepper {
-	x.inner.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithHorizontalContentSizeConstraintActive sets horizontalContentSizeConstraintActive and returns the receiver so calls can be chained.
 func (x *Stepper) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Stepper {
-	x.inner.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithVerticalContentSizeConstraintActive sets verticalContentSizeConstraintActive and returns the receiver so calls can be chained.
 func (x *Stepper) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Stepper {
-	x.inner.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+// WithWantsBestResolutionOpenGLSurface sets wantsBestResolutionOpenGLSurface and returns the receiver so calls can be chained.
 func (x *Stepper) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Stepper {
-	x.inner.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets wantsExtendedDynamicRangeOpenGLSurface and returns the receiver so calls can be chained.
 func (x *Stepper) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Stepper {
-	x.inner.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+// WithPressureConfiguration sets pressureConfiguration and returns the receiver so calls can be chained.
 func (x *Stepper) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Stepper {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
 // The next responder after this one, or nil if it has none.
 //
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
 func (x *Stepper) WithNextResponder(nextResponder ResponderProvider) *Stepper {
-	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
 // Returns the responder’s menu.
 //
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu sets menu and returns the receiver so calls can be chained.
 func (x *Stepper) WithMenu(menu *Menu) *Stepper {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
 // An object encapsulating a user activity supported by this responder.
 //
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *Stepper) WithUserActivity(userActivity *foundation.NSUserActivity) *Stepper {
-	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+func (x *Stepper) WithUserActivity(userActivity obj.Object) *Stepper {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
 // The NSTouchBar object associated with the responder.
 //
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
 func (x *Stepper) WithTouchBar(touchBar *TouchBar) *Stepper {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
-// MinValue calls the underlying MinValue.
 func (x *Stepper) MinValue() float64 {
-	return x.inner.MinValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minValue"))
+	return _r
 }
 
-// SetMinValue calls the underlying SetMinValue.
 func (x *Stepper) SetMinValue(minValue float64) {
-	x.inner.SetMinValue(minValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinValue:"), minValue)
 }
 
-// MaxValue calls the underlying MaxValue.
 func (x *Stepper) MaxValue() float64 {
-	return x.inner.MaxValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxValue"))
+	return _r
 }
 
-// SetMaxValue calls the underlying SetMaxValue.
 func (x *Stepper) SetMaxValue(maxValue float64) {
-	x.inner.SetMaxValue(maxValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxValue:"), maxValue)
 }
 
-// Increment calls the underlying Increment.
 func (x *Stepper) Increment() float64 {
-	return x.inner.Increment()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("increment"))
+	return _r
 }
 
-// SetIncrement calls the underlying SetIncrement.
 func (x *Stepper) SetIncrement(increment float64) {
-	x.inner.SetIncrement(increment)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncrement:"), increment)
 }
 
-// ValueWraps calls the underlying ValueWraps.
 func (x *Stepper) ValueWraps() bool {
-	return x.inner.ValueWraps()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("valueWraps"))
+	return _r
 }
 
-// SetValueWraps calls the underlying SetValueWraps.
 func (x *Stepper) SetValueWraps(valueWraps bool) {
-	x.inner.SetValueWraps(valueWraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueWraps:"), valueWraps)
 }
 
-// Autorepeat calls the underlying Autorepeat.
 func (x *Stepper) Autorepeat() bool {
-	return x.inner.Autorepeat()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autorepeat"))
+	return _r
 }
 
-// SetAutorepeat calls the underlying SetAutorepeat.
 func (x *Stepper) SetAutorepeat(autorepeat bool) {
-	x.inner.SetAutorepeat(autorepeat)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutorepeat:"), autorepeat)
 }
-
-func (x *Stepper) asControl() *raw.NSControl { return &x.inner.NSControl }
-
-func (x *Stepper) asView() *raw.NSView { return &x.inner.NSControl.NSView }
-
-func (x *Stepper) asResponder() *raw.NSResponder { return &x.inner.NSControl.NSView.NSResponder }
 
 // Stepperable is the interface implemented by [Stepper], for mocking and DI.
 type Stepperable interface {
-	Unwrap() *raw.NSStepper
+	obj.Object
 	WithMinValue(minValue float64) *Stepper
 	WithMaxValue(maxValue float64) *Stepper
 	WithIncrement(increment float64) *Stepper
 	WithValueWraps(valueWraps bool) *Stepper
 	WithAutorepeat(autorepeat bool) *Stepper
-	WithTarget(target objc.ID) *Stepper
-	WithAction(action objc.SEL) *Stepper
+	WithTarget(target obj.Object) *Stepper
 	WithTag(tag int) *Stepper
 	WithIgnoresMultiClick(ignoresMultiClick bool) *Stepper
 	WithContinuous(continuous bool) *Stepper
 	WithEnabled(enabled bool) *Stepper
 	WithRefusesFirstResponder(refusesFirstResponder bool) *Stepper
 	WithHighlighted(highlighted bool) *Stepper
-	WithControlSize(controlSize NSControlSize) *Stepper
-	WithFormatter(formatter *foundation.NSFormatter) *Stepper
-	WithObjectValue(objectValue objc.ID) *Stepper
+	WithControlSize(controlSize ControlSize) *Stepper
+	WithFormatter(formatter obj.Object) *Stepper
+	WithObjectValue(objectValue obj.Object) *Stepper
 	WithStringValue(stringValue string) *Stepper
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *Stepper
+	WithAttributedStringValue(attributedStringValue obj.Object) *Stepper
 	WithIntValue(intValue int) *Stepper
 	WithIntegerValue(integerValue int) *Stepper
 	WithFloatValue(floatValue float32) *Stepper
 	WithDoubleValue(doubleValue float64) *Stepper
 	WithFont(font *Font) *Stepper
 	WithUsesSingleLineMode(usesSingleLineMode bool) *Stepper
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *Stepper
-	WithAlignment(alignment NSTextAlignment) *Stepper
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *Stepper
+	WithLineBreakMode(lineBreakMode LineBreakMode) *Stepper
+	WithAlignment(alignment TextAlignment) *Stepper
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *Stepper
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Stepper
 	WithCell(cell CellProvider) *Stepper
 	WithSubviews(items ...ViewProvider) *Stepper
 	WithHidden(hidden bool) *Stepper
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Stepper
 	WithAutoresizesSubviews(autoresizesSubviews bool) *Stepper
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Stepper
-	WithFrame(frame corefoundation.CGRect) *Stepper
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Stepper
 	WithFrameRotation(frameRotation float64) *Stepper
 	WithFrameCenterRotation(frameCenterRotation float64) *Stepper
 	WithBoundsRotation(boundsRotation float64) *Stepper
-	WithBounds(bounds corefoundation.CGRect) *Stepper
 	WithCanDrawConcurrently(canDrawConcurrently bool) *Stepper
 	WithNeedsDisplay(needsDisplay bool) *Stepper
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Stepper
 	WithWantsRestingTouches(wantsRestingTouches bool) *Stepper
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Stepper
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Stepper
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Stepper
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Stepper
 	WithWantsLayer(wantsLayer bool) *Stepper
-	WithLayer(layer *quartzcore.CALayer) *Stepper
+	WithLayer(layer obj.Object) *Stepper
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Stepper
 	WithNeedsLayout(needsLayout bool) *Stepper
 	WithAlphaValue(alphaValue float64) *Stepper
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Stepper
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *Stepper
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Stepper
-	WithContentFilters(items ...*coreimage.CIFilter) *Stepper
+	WithBackgroundFilters(items ...obj.Object) *Stepper
+	WithCompositingFilter(compositingFilter obj.Object) *Stepper
+	WithContentFilters(items ...obj.Object) *Stepper
 	WithShadow(shadow *Shadow) *Stepper
 	WithClipsToBounds(clipsToBounds bool) *Stepper
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Stepper
 	WithToolTip(toolTip string) *Stepper
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Stepper
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Stepper
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Stepper
 	WithNextKeyView(nextKeyView ViewProvider) *Stepper
-	WithFocusRingType(focusRingType NSFocusRingType) *Stepper
+	WithFocusRingType(focusRingType FocusRingType) *Stepper
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *Stepper
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Stepper
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Stepper
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Stepper
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Stepper
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Stepper
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Stepper
@@ -777,7 +691,7 @@ type Stepperable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Stepper
 	WithNextResponder(nextResponder ResponderProvider) *Stepper
 	WithMenu(menu *Menu) *Stepper
-	WithUserActivity(userActivity *foundation.NSUserActivity) *Stepper
+	WithUserActivity(userActivity obj.Object) *Stepper
 	WithTouchBar(touchBar *TouchBar) *Stepper
 	MinValue() float64
 	SetMinValue(minValue float64)

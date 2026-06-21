@@ -5,87 +5,107 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An identifier representing a particular service for which the user needs a credential, like a web site.
 //
-// CredentialServiceIdentifier wraps [raw.ASCredentialServiceIdentifier] with a fluent Go API.
+// CredentialServiceIdentifier is an idiomatic wrapper over the Objective-C class ASCredentialServiceIdentifier.
 type CredentialServiceIdentifier struct {
-	inner *raw.ASCredentialServiceIdentifier
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASCredentialServiceIdentifier].
-func (x *CredentialServiceIdentifier) Unwrap() *raw.ASCredentialServiceIdentifier { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CredentialServiceIdentifier) ID() objc.ID { return x.inner.Ptr() }
-
-// CredentialServiceIdentifierFromID adopts an existing object pointer as a CredentialServiceIdentifier (nil for 0).
+// CredentialServiceIdentifierFromID adopts an existing Objective-C object as a CredentialServiceIdentifier
+// (nil for 0), retaining it and registering a release finalizer.
 func CredentialServiceIdentifierFromID(id objc.ID) *CredentialServiceIdentifier {
 	if id == 0 {
 		return nil
 	}
-	return &CredentialServiceIdentifier{inner: raw.ASCredentialServiceIdentifierFromID(id)}
+	x := &CredentialServiceIdentifier{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// credentialServiceIdentifierAdopt wraps an Objective-C object that this code just created as a
+// CredentialServiceIdentifier (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func credentialServiceIdentifierAdopt(id objc.ID) *CredentialServiceIdentifier {
+	if id == 0 {
+		return nil
+	}
+	x := &CredentialServiceIdentifier{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CredentialServiceIdentifier) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CredentialServiceIdentifier) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CredentialServiceIdentifier) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a credential service identifier instance.
 //
-// NewCredentialServiceIdentifierWithIdentifierType creates a new [CredentialServiceIdentifier].
-func NewCredentialServiceIdentifierWithIdentifierType(identifier string, type_ ASCredentialServiceIdentifierType) *CredentialServiceIdentifier {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASCredentialServiceIdentifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:type:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), raw.ASCredentialServiceIdentifierType(type_))
-	return &CredentialServiceIdentifier{inner: raw.ASCredentialServiceIdentifierFromID(_id)}
+// NewCredentialServiceIdentifierWithIdentifierType creates a new CredentialServiceIdentifier.
+func NewCredentialServiceIdentifierWithIdentifierType(identifier string, type_ CredentialServiceIdentifierType) *CredentialServiceIdentifier {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASCredentialServiceIdentifier")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:type:"), purego.NSString(identifier), type_)
+	return credentialServiceIdentifierAdopt(_id)
 }
 
 // Initializes an ASCredentialServiceIdentifier object.
 //
-// NewCredentialServiceIdentifierWithIdentifierTypeDisplayName creates a new [CredentialServiceIdentifier].
-func NewCredentialServiceIdentifierWithIdentifierTypeDisplayName(identifier string, type_ ASCredentialServiceIdentifierType, displayName string) *CredentialServiceIdentifier {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASCredentialServiceIdentifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:type:displayName:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), raw.ASCredentialServiceIdentifierType(type_), foundation.NSStringStringWithUTF8String(displayName).Ptr())
-	return &CredentialServiceIdentifier{inner: raw.ASCredentialServiceIdentifierFromID(_id)}
+// NewCredentialServiceIdentifierWithIdentifierTypeDisplayName creates a new CredentialServiceIdentifier.
+func NewCredentialServiceIdentifierWithIdentifierTypeDisplayName(identifier string, type_ CredentialServiceIdentifierType, displayName string) *CredentialServiceIdentifier {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASCredentialServiceIdentifier")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:type:displayName:"), purego.NSString(identifier), type_, purego.NSString(displayName))
+	return credentialServiceIdentifierAdopt(_id)
 }
 
 // A user visible name for the identifier. For `app` types it will contain the localized name of the app. For `URL` types it will contain the host name of the URL if it contains a valid host. For `URL` type identifiers that do not contain a valid host and for `domain` type identifiers, this will be equal to `identifier`. This property is meant only as a best effort suggestion for display purposes. It is not used by the system to identify the service or suggest a credential for AutoFill.
-//
-// DisplayName calls the underlying DisplayName.
 func (x *CredentialServiceIdentifier) DisplayName() string {
-	_r := x.inner.DisplayName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract Get the identifier. @result The service identifier.
-//
-// Identifier calls the underlying Identifier.
+// Get the identifier.
 func (x *CredentialServiceIdentifier) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract Get the service identifier type. @result The service identifier type.
-//
-// Type calls the underlying Type.
-func (x *CredentialServiceIdentifier) Type() ASCredentialServiceIdentifierType {
-	return ASCredentialServiceIdentifierType(x.inner.Type())
+// Get the service identifier type.
+func (x *CredentialServiceIdentifier) Type() CredentialServiceIdentifierType {
+	_r := objc.Send[CredentialServiceIdentifierType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
 // CredentialServiceIdentifierable is the interface implemented by [CredentialServiceIdentifier], for mocking and DI.
 type CredentialServiceIdentifierable interface {
-	Unwrap() *raw.ASCredentialServiceIdentifier
+	obj.Object
 	DisplayName() string
 	Identifier() string
-	Type() ASCredentialServiceIdentifierType
+	Type() CredentialServiceIdentifierType
 }
 
 var _ CredentialServiceIdentifierable = (*CredentialServiceIdentifier)(nil)

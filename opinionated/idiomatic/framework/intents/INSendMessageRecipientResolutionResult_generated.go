@@ -5,54 +5,71 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A resolution result for the recipient of a message.
 //
-// SendMessageRecipientResolutionResult wraps [raw.INSendMessageRecipientResolutionResult] with a fluent Go API.
+// SendMessageRecipientResolutionResult is an idiomatic wrapper over the Objective-C class INSendMessageRecipientResolutionResult.
 type SendMessageRecipientResolutionResult struct {
-	inner *raw.INSendMessageRecipientResolutionResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INSendMessageRecipientResolutionResult].
-func (x *SendMessageRecipientResolutionResult) Unwrap() *raw.INSendMessageRecipientResolutionResult {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SendMessageRecipientResolutionResult) ID() objc.ID { return x.inner.Ptr() }
-
-// SendMessageRecipientResolutionResultFromID adopts an existing object pointer as a SendMessageRecipientResolutionResult (nil for 0).
+// SendMessageRecipientResolutionResultFromID adopts an existing Objective-C object as a SendMessageRecipientResolutionResult
+// (nil for 0), retaining it and registering a release finalizer.
 func SendMessageRecipientResolutionResultFromID(id objc.ID) *SendMessageRecipientResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	return &SendMessageRecipientResolutionResult{inner: raw.INSendMessageRecipientResolutionResultFromID(id)}
+	x := &SendMessageRecipientResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// sendMessageRecipientResolutionResultAdopt wraps an Objective-C object that this code just created as a
+// SendMessageRecipientResolutionResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sendMessageRecipientResolutionResultAdopt(id objc.ID) *SendMessageRecipientResolutionResult {
+	if id == 0 {
+		return nil
+	}
+	x := &SendMessageRecipientResolutionResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SendMessageRecipientResolutionResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SendMessageRecipientResolutionResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SendMessageRecipientResolutionResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a resolution result object with the specified person resolution result object.
 //
-// NewSendMessageRecipientResolutionResultWithPersonResolutionResult creates a new [SendMessageRecipientResolutionResult].
-func NewSendMessageRecipientResolutionResultWithPersonResolutionResult(personResolutionResult *raw.INPersonResolutionResult) *SendMessageRecipientResolutionResult {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INSendMessageRecipientResolutionResult")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonResolutionResult:"), personResolutionResult.Ptr())
-	return &SendMessageRecipientResolutionResult{inner: raw.INSendMessageRecipientResolutionResultFromID(_id)}
-}
-
-func (x *SendMessageRecipientResolutionResult) asPersonResolutionResult() *raw.INPersonResolutionResult {
-	return &x.inner.INPersonResolutionResult
-}
-
-func (x *SendMessageRecipientResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
-	return &x.inner.INPersonResolutionResult.INIntentResolutionResult
+// NewSendMessageRecipientResolutionResultWithPersonResolutionResult creates a new SendMessageRecipientResolutionResult.
+func NewSendMessageRecipientResolutionResultWithPersonResolutionResult(personResolutionResult *PersonResolutionResult) *SendMessageRecipientResolutionResult {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INSendMessageRecipientResolutionResult")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPersonResolutionResult:"), objref.IDOf(personResolutionResult))
+	return sendMessageRecipientResolutionResultAdopt(_id)
 }
 
 // SendMessageRecipientResolutionResultable is the interface implemented by [SendMessageRecipientResolutionResult], for mocking and DI.
 type SendMessageRecipientResolutionResultable interface {
-	Unwrap() *raw.INSendMessageRecipientResolutionResult
+	obj.Object
 }
 
 var _ SendMessageRecipientResolutionResultable = (*SendMessageRecipientResolutionResult)(nil)

@@ -5,180 +5,184 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A specialized date object with embedded calendar information.
 //
-// CalendarDate wraps [raw.NSCalendarDate] with a fluent Go API.
+// CalendarDate is an idiomatic wrapper over the Objective-C class NSCalendarDate.
 type CalendarDate struct {
-	inner *raw.NSCalendarDate
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCalendarDate].
-func (x *CalendarDate) Unwrap() *raw.NSCalendarDate { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CalendarDate) ID() objc.ID { return x.inner.Ptr() }
-
-// CalendarDateFromID adopts an existing object pointer as a CalendarDate (nil for 0).
+// CalendarDateFromID adopts an existing Objective-C object as a CalendarDate
+// (nil for 0), retaining it and registering a release finalizer.
 func CalendarDateFromID(id objc.ID) *CalendarDate {
 	if id == 0 {
 		return nil
 	}
-	return &CalendarDate{inner: raw.NSCalendarDateFromID(id)}
-}
-
-// NewCalendarDateWithStringCalendarFormatLocale creates a new [CalendarDate].
-func NewCalendarDateWithStringCalendarFormatLocale(description string, format string, locale objc.ID) *CalendarDate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCalendarDate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:calendarFormat:locale:"), foundation.NSStringStringWithUTF8String(description).Ptr(), foundation.NSStringStringWithUTF8String(format).Ptr(), locale)
-	return &CalendarDate{inner: raw.NSCalendarDateFromID(_id)}
-}
-
-// NewCalendarDateWithStringCalendarFormat creates a new [CalendarDate].
-func NewCalendarDateWithStringCalendarFormat(description string, format string) *CalendarDate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCalendarDate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:calendarFormat:"), foundation.NSStringStringWithUTF8String(description).Ptr(), foundation.NSStringStringWithUTF8String(format).Ptr())
-	return &CalendarDate{inner: raw.NSCalendarDateFromID(_id)}
-}
-
-// NewCalendarDateWithString creates a new [CalendarDate].
-func NewCalendarDateWithString(description string) *CalendarDate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCalendarDate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), foundation.NSStringStringWithUTF8String(description).Ptr())
-	return &CalendarDate{inner: raw.NSCalendarDateFromID(_id)}
-}
-
-// NewCalendarDateWithYearMonthDayHourMinuteSecondTimeZone creates a new [CalendarDate].
-func NewCalendarDateWithYearMonthDayHourMinuteSecondTimeZone(year int, month uint, day uint, hour uint, minute uint, second uint, aTimeZone *raw.NSTimeZone) *CalendarDate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCalendarDate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithYear:month:day:hour:minute:second:timeZone:"), year, month, day, hour, minute, second, aTimeZone.Ptr())
-	return &CalendarDate{inner: raw.NSCalendarDateFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *CalendarDate) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CalendarDate {
-	x.inner.NSDate.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &CalendarDate{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// DateByAddingYearsMonthsDaysHoursMinutesSeconds calls the underlying DateByAddingYearsMonthsDaysHoursMinutesSeconds.
+// calendarDateAdopt wraps an Objective-C object that this code just created as a
+// CalendarDate (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func calendarDateAdopt(id objc.ID) *CalendarDate {
+	if id == 0 {
+		return nil
+	}
+	x := &CalendarDate{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CalendarDate) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CalendarDate) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CalendarDate) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCalendarDateWithStringCalendarFormatLocale creates a new CalendarDate.
+func NewCalendarDateWithStringCalendarFormatLocale(description string, format string, locale obj.Object) *CalendarDate {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCalendarDate")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:calendarFormat:locale:"), purego.NSString(description), purego.NSString(format), objref.IDOf(locale))
+	return calendarDateAdopt(_id)
+}
+
+// NewCalendarDateWithStringCalendarFormat creates a new CalendarDate.
+func NewCalendarDateWithStringCalendarFormat(description string, format string) *CalendarDate {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCalendarDate")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:calendarFormat:"), purego.NSString(description), purego.NSString(format))
+	return calendarDateAdopt(_id)
+}
+
+// NewCalendarDateWithString creates a new CalendarDate.
+func NewCalendarDateWithString(description string) *CalendarDate {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCalendarDate")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(description))
+	return calendarDateAdopt(_id)
+}
+
+// NewCalendarDateWithYearMonthDayHourMinuteSecondTimeZone creates a new CalendarDate.
+func NewCalendarDateWithYearMonthDayHourMinuteSecondTimeZone(year int, month int, day int, hour int, minute int, second int, aTimeZone *TimeZone) *CalendarDate {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCalendarDate")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithYear:month:day:hour:minute:second:timeZone:"), year, month, day, hour, minute, second, objref.IDOf(aTimeZone))
+	return calendarDateAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *CalendarDate) WithScriptingProperties(scriptingProperties obj.Object) *CalendarDate {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
 func (x *CalendarDate) DateByAddingYearsMonthsDaysHoursMinutesSeconds(year int, month int, day int, hour int, minute int, second int) *CalendarDate {
-	_r := x.inner.DateByAddingYearsMonthsDaysHoursMinutesSeconds(year, month, day, hour, minute, second)
-	if _r == nil {
-		return nil
-	}
-	return &CalendarDate{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateByAddingYears:months:days:hours:minutes:seconds:"), year, month, day, hour, minute, second)
+	return CalendarDateFromID(_r)
 }
 
-// DayOfCommonEra calls the underlying DayOfCommonEra.
 func (x *CalendarDate) DayOfCommonEra() int {
-	return x.inner.DayOfCommonEra()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dayOfCommonEra"))
+	return _r
 }
 
-// DayOfMonth calls the underlying DayOfMonth.
 func (x *CalendarDate) DayOfMonth() int {
-	return x.inner.DayOfMonth()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dayOfMonth"))
+	return _r
 }
 
-// DayOfWeek calls the underlying DayOfWeek.
 func (x *CalendarDate) DayOfWeek() int {
-	return x.inner.DayOfWeek()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dayOfWeek"))
+	return _r
 }
 
-// DayOfYear calls the underlying DayOfYear.
 func (x *CalendarDate) DayOfYear() int {
-	return x.inner.DayOfYear()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dayOfYear"))
+	return _r
 }
 
-// HourOfDay calls the underlying HourOfDay.
 func (x *CalendarDate) HourOfDay() int {
-	return x.inner.HourOfDay()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("hourOfDay"))
+	return _r
 }
 
-// MinuteOfHour calls the underlying MinuteOfHour.
 func (x *CalendarDate) MinuteOfHour() int {
-	return x.inner.MinuteOfHour()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minuteOfHour"))
+	return _r
 }
 
-// MonthOfYear calls the underlying MonthOfYear.
 func (x *CalendarDate) MonthOfYear() int {
-	return x.inner.MonthOfYear()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("monthOfYear"))
+	return _r
 }
 
-// SecondOfMinute calls the underlying SecondOfMinute.
 func (x *CalendarDate) SecondOfMinute() int {
-	return x.inner.SecondOfMinute()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("secondOfMinute"))
+	return _r
 }
 
-// YearOfCommonEra calls the underlying YearOfCommonEra.
 func (x *CalendarDate) YearOfCommonEra() int {
-	return x.inner.YearOfCommonEra()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("yearOfCommonEra"))
+	return _r
 }
 
-// CalendarFormat calls the underlying CalendarFormat.
-func (x *CalendarDate) CalendarFormat() *String {
-	_r := x.inner.CalendarFormat()
-	if _r == nil {
-		return nil
+func (x *CalendarDate) CalendarFormat() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendarFormat"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// DescriptionWithCalendarFormatLocale calls the underlying DescriptionWithCalendarFormatLocale.
-func (x *CalendarDate) DescriptionWithCalendarFormatLocale(format string, locale objc.ID) *String {
-	_r := x.inner.DescriptionWithCalendarFormatLocale(foundation.NSStringStringWithUTF8String(format), locale)
-	if _r == nil {
-		return nil
+func (x *CalendarDate) DescriptionWithCalendarFormatLocale(format string, locale obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithCalendarFormat:locale:"), purego.NSString(format), objref.IDOf(locale))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// DescriptionWithCalendarFormat calls the underlying DescriptionWithCalendarFormat.
-func (x *CalendarDate) DescriptionWithCalendarFormat(format string) *String {
-	_r := x.inner.DescriptionWithCalendarFormat(foundation.NSStringStringWithUTF8String(format))
-	if _r == nil {
-		return nil
+func (x *CalendarDate) DescriptionWithCalendarFormat(format string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithCalendarFormat:"), purego.NSString(format))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// TimeZone calls the underlying TimeZone.
 func (x *CalendarDate) TimeZone() *TimeZone {
-	_r := x.inner.TimeZone()
-	if _r == nil {
-		return nil
-	}
-	return &TimeZone{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
+	return TimeZoneFromID(_r)
 }
 
-// SetCalendarFormat calls the underlying SetCalendarFormat.
 func (x *CalendarDate) SetCalendarFormat(format string) {
-	x.inner.SetCalendarFormat(foundation.NSStringStringWithUTF8String(format))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendarFormat:"), purego.NSString(format))
 }
 
-// SetTimeZone calls the underlying SetTimeZone.
-func (x *CalendarDate) SetTimeZone(aTimeZone *raw.NSTimeZone) {
-	x.inner.SetTimeZone(aTimeZone)
+func (x *CalendarDate) SetTimeZone(aTimeZone *TimeZone) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(aTimeZone))
 }
-
-// YearsMonthsDaysHoursMinutesSecondsSinceDate calls the underlying YearsMonthsDaysHoursMinutesSecondsSinceDate.
-func (x *CalendarDate) YearsMonthsDaysHoursMinutesSecondsSinceDate(yp *int64, mop *int64, dp *int64, hp *int64, mip *int64, sp *int64, date *raw.NSCalendarDate) {
-	x.inner.YearsMonthsDaysHoursMinutesSecondsSinceDate(yp, mop, dp, hp, mip, sp, date)
-}
-
-func (x *CalendarDate) asDate() *raw.NSDate { return &x.inner.NSDate }
-
-func (x *CalendarDate) asObject() *raw.NSObject { return &x.inner.NSDate.NSObject }
 
 // CalendarDateable is the interface implemented by [CalendarDate], for mocking and DI.
 type CalendarDateable interface {
-	Unwrap() *raw.NSCalendarDate
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CalendarDate
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *CalendarDate
 	DateByAddingYearsMonthsDaysHoursMinutesSeconds(year int, month int, day int, hour int, minute int, second int) *CalendarDate
 	DayOfCommonEra() int
 	DayOfMonth() int
@@ -189,13 +193,12 @@ type CalendarDateable interface {
 	MonthOfYear() int
 	SecondOfMinute() int
 	YearOfCommonEra() int
-	CalendarFormat() *String
-	DescriptionWithCalendarFormatLocale(format string, locale objc.ID) *String
-	DescriptionWithCalendarFormat(format string) *String
+	CalendarFormat() string
+	DescriptionWithCalendarFormatLocale(format string, locale obj.Object) string
+	DescriptionWithCalendarFormat(format string) string
 	TimeZone() *TimeZone
 	SetCalendarFormat(format string)
-	SetTimeZone(aTimeZone *raw.NSTimeZone)
-	YearsMonthsDaysHoursMinutesSecondsSinceDate(yp *int64, mop *int64, dp *int64, hp *int64, mip *int64, sp *int64, date *raw.NSCalendarDate)
+	SetTimeZone(aTimeZone *TimeZone)
 }
 
 var _ CalendarDateable = (*CalendarDate)(nil)

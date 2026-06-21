@@ -5,52 +5,77 @@
 package medialibrary
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/medialibrary"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The MLMediaLibrary class provides an interface for accessing a collection of media objects from various sources. It serves as the initial access point of the Media Library framework.
 //
-// MediaLibrary wraps [raw.MLMediaLibrary] with a fluent Go API.
+// MediaLibrary is an idiomatic wrapper over the Objective-C class MLMediaLibrary.
 type MediaLibrary struct {
-	inner *raw.MLMediaLibrary
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLMediaLibrary].
-func (x *MediaLibrary) Unwrap() *raw.MLMediaLibrary { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MediaLibrary) ID() objc.ID { return x.inner.Ptr() }
-
-// MediaLibraryFromID adopts an existing object pointer as a MediaLibrary (nil for 0).
+// MediaLibraryFromID adopts an existing Objective-C object as a MediaLibrary
+// (nil for 0), retaining it and registering a release finalizer.
 func MediaLibraryFromID(id objc.ID) *MediaLibrary {
 	if id == 0 {
 		return nil
 	}
-	return &MediaLibrary{inner: raw.MLMediaLibraryFromID(id)}
+	x := &MediaLibrary{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mediaLibraryAdopt wraps an Objective-C object that this code just created as a
+// MediaLibrary (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mediaLibraryAdopt(id objc.ID) *MediaLibrary {
+	if id == 0 {
+		return nil
+	}
+	x := &MediaLibrary{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MediaLibrary) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MediaLibrary) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MediaLibrary) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes the media library based on the specified load options.
 //
-// NewMediaLibraryWithOptions creates a new [MediaLibrary].
-func NewMediaLibraryWithOptions(options purego.IDer) *MediaLibrary {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MLMediaLibrary")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), options.ID())
-	return &MediaLibrary{inner: raw.MLMediaLibraryFromID(_id)}
+// NewMediaLibraryWithOptions creates a new MediaLibrary.
+func NewMediaLibraryWithOptions(options obj.Object) *MediaLibrary {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MLMediaLibrary")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), objref.IDOf(options))
+	return mediaLibraryAdopt(_id)
 }
 
-// MediaSources calls the underlying MediaSources.
-func (x *MediaLibrary) MediaSources() *foundation.NSDictionary[*foundation.NSString, *raw.MLMediaSource] {
-	return x.inner.MediaSources()
+func (x *MediaLibrary) MediaSources() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSources"))
+	return obj.Wrap(_r)
 }
 
 // MediaLibraryable is the interface implemented by [MediaLibrary], for mocking and DI.
 type MediaLibraryable interface {
-	Unwrap() *raw.MLMediaLibrary
-	MediaSources() *foundation.NSDictionary[*foundation.NSString, *raw.MLMediaSource]
+	obj.Object
+	MediaSources() obj.Object
 }
 
 var _ MediaLibraryable = (*MediaLibrary)(nil)

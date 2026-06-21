@@ -5,106 +5,106 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // A representation of the state of the keychain for a particular token.
 //
-// TokenKeychainContents wraps [raw.TKTokenKeychainContents] with a fluent Go API.
+// TokenKeychainContents is an idiomatic wrapper over the Objective-C class TKTokenKeychainContents.
 type TokenKeychainContents struct {
-	inner *raw.TKTokenKeychainContents
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKTokenKeychainContents].
-func (x *TokenKeychainContents) Unwrap() *raw.TKTokenKeychainContents { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TokenKeychainContents) ID() objc.ID { return x.inner.Ptr() }
-
-// TokenKeychainContentsFromID adopts an existing object pointer as a TokenKeychainContents (nil for 0).
+// TokenKeychainContentsFromID adopts an existing Objective-C object as a TokenKeychainContents
+// (nil for 0), retaining it and registering a release finalizer.
 func TokenKeychainContentsFromID(id objc.ID) *TokenKeychainContents {
 	if id == 0 {
 		return nil
 	}
-	return &TokenKeychainContents{inner: raw.TKTokenKeychainContentsFromID(id)}
+	x := &TokenKeychainContents{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTokenKeychainContents creates a new [TokenKeychainContents].
+// tokenKeychainContentsAdopt wraps an Objective-C object that this code just created as a
+// TokenKeychainContents (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tokenKeychainContentsAdopt(id objc.ID) *TokenKeychainContents {
+	if id == 0 {
+		return nil
+	}
+	x := &TokenKeychainContents{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TokenKeychainContents) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TokenKeychainContents) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TokenKeychainContents) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTokenKeychainContents creates a new TokenKeychainContents.
 func NewTokenKeychainContents() *TokenKeychainContents {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenKeychainContents")), objc.RegisterName("new"))
-	return &TokenKeychainContents{inner: raw.TKTokenKeychainContentsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("TKTokenKeychainContents")), objc.RegisterName("new"))
+	return tokenKeychainContentsAdopt(_id)
 }
 
 // Fills the keychain with the specified items.
-//
-// FillWithItems calls the underlying FillWithItems.
-func (x *TokenKeychainContents) FillWithItems(items ...TokenKeychainItemProvider) {
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asTokenKeychainItem().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.TKTokenKeychainItem]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.TKTokenKeychainItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.TKTokenKeychainItem](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.FillWithItems(_arg0)
+func (x *TokenKeychainContents) FillWithItems(items []*TokenKeychainItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fillWithItems:"), purego.SliceToNSArray(items, func(_v *TokenKeychainItem) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Returns the key for a specified object identifier.
-//
-// KeyForObjectIDError calls the underlying KeyForObjectIDError.
-func (x *TokenKeychainContents) KeyForObjectIDError(objectID objc.ID) (*TokenKeychainKey, error) {
-	_r, _err := x.inner.KeyForObjectIDError(objectID)
-	if _err != nil {
-		return nil, _err
+func (x *TokenKeychainContents) KeyForObjectIDError(objectID obj.Object) (*TokenKeychainKey, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyForObjectID:error:"), objref.IDOf(objectID), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &TokenKeychainKey{inner: _r}, nil
+	return TokenKeychainKeyFromID(_r), nil
 }
 
 // Returns the key for a specified object identifier.
-//
-// CertificateForObjectIDError calls the underlying CertificateForObjectIDError.
-func (x *TokenKeychainContents) CertificateForObjectIDError(objectID objc.ID) (*TokenKeychainCertificate, error) {
-	_r, _err := x.inner.CertificateForObjectIDError(objectID)
-	if _err != nil {
-		return nil, _err
+func (x *TokenKeychainContents) CertificateForObjectIDError(objectID obj.Object) (*TokenKeychainCertificate, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificateForObjectID:error:"), objref.IDOf(objectID), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &TokenKeychainCertificate{inner: _r}, nil
+	return TokenKeychainCertificateFromID(_r), nil
 }
 
-// @brief All items related to this token in the keychain.
+// All items related to this token in the keychain.
 //
 // Items returns the collection as a Go slice.
 func (x *TokenKeychainContents) Items() []*TokenKeychainItem {
-	arr := x.inner.Items()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TokenKeychainItem {
-		return &TokenKeychainItem{inner: raw.TKTokenKeychainItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("items"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TokenKeychainItem { return TokenKeychainItemFromID(_id) })
 }
 
 // TokenKeychainContentsable is the interface implemented by [TokenKeychainContents], for mocking and DI.
 type TokenKeychainContentsable interface {
-	Unwrap() *raw.TKTokenKeychainContents
-	FillWithItems(items ...TokenKeychainItemProvider)
-	KeyForObjectIDError(objectID objc.ID) (*TokenKeychainKey, error)
-	CertificateForObjectIDError(objectID objc.ID) (*TokenKeychainCertificate, error)
+	obj.Object
+	FillWithItems(items []*TokenKeychainItem)
+	KeyForObjectIDError(objectID obj.Object) (*TokenKeychainKey, error)
+	CertificateForObjectIDError(objectID obj.Object) (*TokenKeychainCertificate, error)
 	Items() []*TokenKeychainItem
 }
 

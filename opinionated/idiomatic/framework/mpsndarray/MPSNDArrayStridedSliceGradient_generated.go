@@ -5,61 +5,66 @@
 package mpsndarray
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ArrayStridedSliceGradient wraps [raw.MPSNDArrayStridedSliceGradient] with a fluent Go API.
+// ArrayStridedSliceGradient is an idiomatic wrapper over the Objective-C class MPSNDArrayStridedSliceGradient.
 type ArrayStridedSliceGradient struct {
-	inner *raw.MPSNDArrayStridedSliceGradient
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayStridedSliceGradient].
-func (x *ArrayStridedSliceGradient) Unwrap() *raw.MPSNDArrayStridedSliceGradient { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArrayStridedSliceGradient) ID() objc.ID { return x.inner.Ptr() }
-
-// ArrayStridedSliceGradientFromID adopts an existing object pointer as a ArrayStridedSliceGradient (nil for 0).
+// ArrayStridedSliceGradientFromID adopts an existing Objective-C object as a ArrayStridedSliceGradient
+// (nil for 0), retaining it and registering a release finalizer.
 func ArrayStridedSliceGradientFromID(id objc.ID) *ArrayStridedSliceGradient {
 	if id == 0 {
 		return nil
 	}
-	return &ArrayStridedSliceGradient{inner: raw.MPSNDArrayStridedSliceGradientFromID(id)}
-}
-
-// NewArrayStridedSliceGradient creates a new [ArrayStridedSliceGradient].
-func NewArrayStridedSliceGradient() *ArrayStridedSliceGradient {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayStridedSliceGradient")), objc.RegisterName("new"))
-	return &ArrayStridedSliceGradient{inner: raw.MPSNDArrayStridedSliceGradientFromID(_id)}
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *ArrayStridedSliceGradient) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayStridedSliceGradient {
-	x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	x := &ArrayStridedSliceGradient{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-func (x *ArrayStridedSliceGradient) asArrayUnaryGradientKernel() *raw.MPSNDArrayUnaryGradientKernel {
-	return &x.inner.MPSNDArrayUnaryGradientKernel
+// arrayStridedSliceGradientAdopt wraps an Objective-C object that this code just created as a
+// ArrayStridedSliceGradient (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arrayStridedSliceGradientAdopt(id objc.ID) *ArrayStridedSliceGradient {
+	if id == 0 {
+		return nil
+	}
+	x := &ArrayStridedSliceGradient{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *ArrayStridedSliceGradient) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel {
-	return &x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel
+// Description returns the object's -description text.
+func (x *ArrayStridedSliceGradient) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *ArrayStridedSliceGradient) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayUnaryGradientKernel.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ArrayStridedSliceGradient) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ArrayStridedSliceGradient) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewArrayStridedSliceGradient creates a new ArrayStridedSliceGradient.
+func NewArrayStridedSliceGradient() *ArrayStridedSliceGradient {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayStridedSliceGradient")), objc.RegisterName("new"))
+	return arrayStridedSliceGradientAdopt(_id)
 }
 
 // ArrayStridedSliceGradientable is the interface implemented by [ArrayStridedSliceGradient], for mocking and DI.
 type ArrayStridedSliceGradientable interface {
-	Unwrap() *raw.MPSNDArrayStridedSliceGradient
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayStridedSliceGradient
+	obj.Object
 }
 
 var _ ArrayStridedSliceGradientable = (*ArrayStridedSliceGradient)(nil)

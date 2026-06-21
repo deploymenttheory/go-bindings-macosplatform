@@ -5,62 +5,84 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An abstract base class for machine learning key types.
 //
-// Key wraps [raw.MLKey] with a fluent Go API.
+// Key is an idiomatic wrapper over the Objective-C class MLKey.
 type Key struct {
-	inner *raw.MLKey
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLKey].
-func (x *Key) Unwrap() *raw.MLKey { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Key) ID() objc.ID { return x.inner.Ptr() }
-
-// KeyFromID adopts an existing object pointer as a Key (nil for 0).
+// KeyFromID adopts an existing Objective-C object as a Key
+// (nil for 0), retaining it and registering a release finalizer.
 func KeyFromID(id objc.ID) *Key {
 	if id == 0 {
 		return nil
 	}
-	return &Key{inner: raw.MLKeyFromID(id)}
+	x := &Key{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewKey creates a new [Key].
+// keyAdopt wraps an Objective-C object that this code just created as a
+// Key (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func keyAdopt(id objc.ID) *Key {
+	if id == 0 {
+		return nil
+	}
+	x := &Key{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Key) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Key) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Key) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewKey creates a new Key.
 func NewKey() *Key {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLKey")), objc.RegisterName("new"))
-	return &Key{inner: raw.MLKeyFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLKey")), objc.RegisterName("new"))
+	return keyAdopt(_id)
 }
 
-// Name calls the underlying Name.
 func (x *Key) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Scope calls the underlying Scope.
 func (x *Key) Scope() string {
-	_r := x.inner.Scope()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scope"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *Key) asKey() *raw.MLKey { return x.inner }
 
 // Keyable is the interface implemented by [Key], for mocking and DI.
 type Keyable interface {
-	Unwrap() *raw.MLKey
+	obj.Object
 	Name() string
 	Scope() string
 }

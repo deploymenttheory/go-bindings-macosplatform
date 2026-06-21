@@ -5,55 +5,74 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ExternalSyncDeviceDiscoverySession wraps [raw.AVExternalSyncDeviceDiscoverySession] with a fluent Go API.
+// ExternalSyncDeviceDiscoverySession is an idiomatic wrapper over the Objective-C class AVExternalSyncDeviceDiscoverySession.
 type ExternalSyncDeviceDiscoverySession struct {
-	inner *raw.AVExternalSyncDeviceDiscoverySession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVExternalSyncDeviceDiscoverySession].
-func (x *ExternalSyncDeviceDiscoverySession) Unwrap() *raw.AVExternalSyncDeviceDiscoverySession {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExternalSyncDeviceDiscoverySession) ID() objc.ID { return x.inner.Ptr() }
-
-// ExternalSyncDeviceDiscoverySessionFromID adopts an existing object pointer as a ExternalSyncDeviceDiscoverySession (nil for 0).
+// ExternalSyncDeviceDiscoverySessionFromID adopts an existing Objective-C object as a ExternalSyncDeviceDiscoverySession
+// (nil for 0), retaining it and registering a release finalizer.
 func ExternalSyncDeviceDiscoverySessionFromID(id objc.ID) *ExternalSyncDeviceDiscoverySession {
 	if id == 0 {
 		return nil
 	}
-	return &ExternalSyncDeviceDiscoverySession{inner: raw.AVExternalSyncDeviceDiscoverySessionFromID(id)}
+	x := &ExternalSyncDeviceDiscoverySession{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewExternalSyncDeviceDiscoverySession creates a new [ExternalSyncDeviceDiscoverySession].
+// externalSyncDeviceDiscoverySessionAdopt wraps an Objective-C object that this code just created as a
+// ExternalSyncDeviceDiscoverySession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func externalSyncDeviceDiscoverySessionAdopt(id objc.ID) *ExternalSyncDeviceDiscoverySession {
+	if id == 0 {
+		return nil
+	}
+	x := &ExternalSyncDeviceDiscoverySession{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ExternalSyncDeviceDiscoverySession) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExternalSyncDeviceDiscoverySession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExternalSyncDeviceDiscoverySession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewExternalSyncDeviceDiscoverySession creates a new ExternalSyncDeviceDiscoverySession.
 func NewExternalSyncDeviceDiscoverySession() *ExternalSyncDeviceDiscoverySession {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVExternalSyncDeviceDiscoverySession")), objc.RegisterName("new"))
-	return &ExternalSyncDeviceDiscoverySession{inner: raw.AVExternalSyncDeviceDiscoverySessionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVExternalSyncDeviceDiscoverySession")), objc.RegisterName("new"))
+	return externalSyncDeviceDiscoverySessionAdopt(_id)
 }
 
 // An array of external sync devices connected to this host. The list is updated when external sync devices are connected to the host and they remain in the list until they become unavailable. This property is key-value observable.
 //
 // Devices returns the collection as a Go slice.
 func (x *ExternalSyncDeviceDiscoverySession) Devices() []*ExternalSyncDevice {
-	arr := x.inner.Devices()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ExternalSyncDevice {
-		return &ExternalSyncDevice{inner: raw.AVExternalSyncDeviceFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("devices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExternalSyncDevice { return ExternalSyncDeviceFromID(_id) })
 }
 
 // ExternalSyncDeviceDiscoverySessionable is the interface implemented by [ExternalSyncDeviceDiscoverySession], for mocking and DI.
 type ExternalSyncDeviceDiscoverySessionable interface {
-	Unwrap() *raw.AVExternalSyncDeviceDiscoverySession
+	obj.Object
 	Devices() []*ExternalSyncDevice
 }
 

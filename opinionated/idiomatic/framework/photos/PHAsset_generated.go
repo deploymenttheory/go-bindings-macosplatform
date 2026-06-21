@@ -5,207 +5,212 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A representation of an image, video, or Live Photo in the Photos library.
 //
-// Asset wraps [raw.PHAsset] with a fluent Go API.
+// Asset is an idiomatic wrapper over the Objective-C class PHAsset.
 type Asset struct {
-	inner *raw.PHAsset
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHAsset].
-func (x *Asset) Unwrap() *raw.PHAsset { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Asset) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetFromID adopts an existing object pointer as a Asset (nil for 0).
+// AssetFromID adopts an existing Objective-C object as a Asset
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetFromID(id objc.ID) *Asset {
 	if id == 0 {
 		return nil
 	}
-	return &Asset{inner: raw.PHAssetFromID(id)}
+	x := &Asset{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAsset creates a new [Asset].
+// assetAdopt wraps an Objective-C object that this code just created as a
+// Asset (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetAdopt(id objc.ID) *Asset {
+	if id == 0 {
+		return nil
+	}
+	x := &Asset{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Asset) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Asset) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Asset) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAsset creates a new Asset.
 func NewAsset() *Asset {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHAsset")), objc.RegisterName("new"))
-	return &Asset{inner: raw.PHAssetFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHAsset")), objc.RegisterName("new"))
+	return assetAdopt(_id)
 }
 
 // Returns whether the asset supports the specified editing operation.
-//
-// CanPerformEditOperation calls the underlying CanPerformEditOperation.
-func (x *Asset) CanPerformEditOperation(editOperation PHAssetEditOperation) bool {
-	return x.inner.CanPerformEditOperation(raw.PHAssetEditOperation(editOperation))
+func (x *Asset) CanPerformEditOperation(editOperation AssetEditOperation) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPerformEditOperation:"), editOperation)
+	return _r
 }
 
-// PlaybackStyle calls the underlying PlaybackStyle.
-func (x *Asset) PlaybackStyle() PHAssetPlaybackStyle {
-	return PHAssetPlaybackStyle(x.inner.PlaybackStyle())
+func (x *Asset) PlaybackStyle() AssetPlaybackStyle {
+	_r := objc.Send[AssetPlaybackStyle](objref.IDOf(x), objc.RegisterName("playbackStyle"))
+	return _r
 }
 
-// MediaType calls the underlying MediaType.
-func (x *Asset) MediaType() PHAssetMediaType {
-	return PHAssetMediaType(x.inner.MediaType())
+func (x *Asset) MediaType() AssetMediaType {
+	_r := objc.Send[AssetMediaType](objref.IDOf(x), objc.RegisterName("mediaType"))
+	return _r
 }
 
-// MediaSubtypes calls the underlying MediaSubtypes.
-func (x *Asset) MediaSubtypes() PHAssetMediaSubtype {
-	return PHAssetMediaSubtype(x.inner.MediaSubtypes())
+func (x *Asset) MediaSubtypes() AssetMediaSubtype {
+	_r := objc.Send[AssetMediaSubtype](objref.IDOf(x), objc.RegisterName("mediaSubtypes"))
+	return _r
 }
 
 // The type of image or video data that is presented for the asset
-//
-// ContentType calls the underlying ContentType.
-func (x *Asset) ContentType() *uniformtypeidentifiers.UTType {
-	return x.inner.ContentType()
+func (x *Asset) ContentType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
+	return obj.Wrap(_r)
 }
 
-// PixelWidth calls the underlying PixelWidth.
-func (x *Asset) PixelWidth() uint {
-	return x.inner.PixelWidth()
+func (x *Asset) PixelWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelWidth"))
+	return _r
 }
 
-// PixelHeight calls the underlying PixelHeight.
-func (x *Asset) PixelHeight() uint {
-	return x.inner.PixelHeight()
+func (x *Asset) PixelHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelHeight"))
+	return _r
 }
 
 // The date and time of this asset's creation (can be updated by the user)
-//
-// CreationDate calls the underlying CreationDate.
-func (x *Asset) CreationDate() *foundation.NSDate {
-	return x.inner.CreationDate()
+func (x *Asset) CreationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
+	return obj.Wrap(_r)
 }
 
 // The date and time of the last modification to this asset or one of its properties
-//
-// ModificationDate calls the underlying ModificationDate.
-func (x *Asset) ModificationDate() *foundation.NSDate {
-	return x.inner.ModificationDate()
+func (x *Asset) ModificationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modificationDate"))
+	return obj.Wrap(_r)
 }
 
 // The date and time this asset was added to the photo library (from the device that was used to add this asset)
-//
-// AddedDate calls the underlying AddedDate.
-func (x *Asset) AddedDate() *foundation.NSDate {
-	return x.inner.AddedDate()
+func (x *Asset) AddedDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addedDate"))
+	return obj.Wrap(_r)
 }
 
-// Location calls the underlying Location.
-func (x *Asset) Location() unsafe.Pointer {
-	return x.inner.Location()
-}
-
-// Duration calls the underlying Duration.
 func (x *Asset) Duration() float64 {
-	return x.inner.Duration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+	return _r
 }
 
-// IsHidden calls the underlying IsHidden.
 func (x *Asset) IsHidden() bool {
-	return x.inner.IsHidden()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+	return _r
 }
 
-// IsFavorite calls the underlying IsFavorite.
 func (x *Asset) IsFavorite() bool {
-	return x.inner.IsFavorite()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFavorite"))
+	return _r
 }
 
-// IsSyncFailureHidden calls the underlying IsSyncFailureHidden.
 func (x *Asset) IsSyncFailureHidden() bool {
-	return x.inner.IsSyncFailureHidden()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSyncFailureHidden"))
+	return _r
 }
 
-// BurstIdentifier calls the underlying BurstIdentifier.
 func (x *Asset) BurstIdentifier() string {
-	_r := x.inner.BurstIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("burstIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// BurstSelectionTypes calls the underlying BurstSelectionTypes.
-func (x *Asset) BurstSelectionTypes() PHAssetBurstSelectionType {
-	return PHAssetBurstSelectionType(x.inner.BurstSelectionTypes())
+func (x *Asset) BurstSelectionTypes() AssetBurstSelectionType {
+	_r := objc.Send[AssetBurstSelectionType](objref.IDOf(x), objc.RegisterName("burstSelectionTypes"))
+	return _r
 }
 
-// RepresentsBurst calls the underlying RepresentsBurst.
 func (x *Asset) RepresentsBurst() bool {
-	return x.inner.RepresentsBurst()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("representsBurst"))
+	return _r
 }
 
-// SourceType calls the underlying SourceType.
-func (x *Asset) SourceType() PHAssetSourceType {
-	return PHAssetSourceType(x.inner.SourceType())
+func (x *Asset) SourceType() AssetSourceType {
+	_r := objc.Send[AssetSourceType](objref.IDOf(x), objc.RegisterName("sourceType"))
+	return _r
 }
 
-// HasAdjustments calls the underlying HasAdjustments.
 func (x *Asset) HasAdjustments() bool {
-	return x.inner.HasAdjustments()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAdjustments"))
+	return _r
 }
 
-// AdjustmentFormatIdentifier calls the underlying AdjustmentFormatIdentifier.
 func (x *Asset) AdjustmentFormatIdentifier() string {
-	_r := x.inner.AdjustmentFormatIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustmentFormatIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Requests asset information for beginning a content editing session.
-//
-// RequestContentEditingInputWithOptionsCompletionHandler calls the underlying RequestContentEditingInputWithOptionsCompletionHandler.
-func (x *Asset) RequestContentEditingInputWithOptionsCompletionHandler(options *raw.PHContentEditingInputRequestOptions, completionHandler func(*raw.PHContentEditingInput, *foundation.NSDictionary[objc.ID, objc.ID])) uint {
-	return x.inner.RequestContentEditingInputWithOptionsCompletionHandler(options, completionHandler)
+func (x *Asset) RequestContentEditingInputWithOptionsCompletionHandler(options *ContentEditingInputRequestOptions, completionHandler func(obj.Object, obj.Object)) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("requestContentEditingInputWithOptions:completionHandler:"), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { completionHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return _r
 }
 
 // Cancels a request for editing the asset’s content.
-//
-// CancelContentEditingInputRequest calls the underlying CancelContentEditingInputRequest.
-func (x *Asset) CancelContentEditingInputRequest(requestID uint) {
-	x.inner.CancelContentEditingInputRequest(requestID)
+func (x *Asset) CancelContentEditingInputRequest(requestID int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelContentEditingInputRequest:"), requestID)
 }
-
-func (x *Asset) asObject() *raw.PHObject { return &x.inner.PHObject }
 
 // Assetable is the interface implemented by [Asset], for mocking and DI.
 type Assetable interface {
-	Unwrap() *raw.PHAsset
-	CanPerformEditOperation(editOperation PHAssetEditOperation) bool
-	PlaybackStyle() PHAssetPlaybackStyle
-	MediaType() PHAssetMediaType
-	MediaSubtypes() PHAssetMediaSubtype
-	ContentType() *uniformtypeidentifiers.UTType
-	PixelWidth() uint
-	PixelHeight() uint
-	CreationDate() *foundation.NSDate
-	ModificationDate() *foundation.NSDate
-	AddedDate() *foundation.NSDate
-	Location() unsafe.Pointer
+	obj.Object
+	CanPerformEditOperation(editOperation AssetEditOperation) bool
+	PlaybackStyle() AssetPlaybackStyle
+	MediaType() AssetMediaType
+	MediaSubtypes() AssetMediaSubtype
+	ContentType() obj.Object
+	PixelWidth() int
+	PixelHeight() int
+	CreationDate() obj.Object
+	ModificationDate() obj.Object
+	AddedDate() obj.Object
 	Duration() float64
 	IsHidden() bool
 	IsFavorite() bool
 	IsSyncFailureHidden() bool
 	BurstIdentifier() string
-	BurstSelectionTypes() PHAssetBurstSelectionType
+	BurstSelectionTypes() AssetBurstSelectionType
 	RepresentsBurst() bool
-	SourceType() PHAssetSourceType
+	SourceType() AssetSourceType
 	HasAdjustments() bool
 	AdjustmentFormatIdentifier() string
-	RequestContentEditingInputWithOptionsCompletionHandler(options *raw.PHContentEditingInputRequestOptions, completionHandler func(*raw.PHContentEditingInput, *foundation.NSDictionary[objc.ID, objc.ID])) uint
-	CancelContentEditingInputRequest(requestID uint)
+	RequestContentEditingInputWithOptionsCompletionHandler(options *ContentEditingInputRequestOptions, completionHandler func(obj.Object, obj.Object)) int
+	CancelContentEditingInputRequest(requestID int)
 }
 
 var _ Assetable = (*Asset)(nil)

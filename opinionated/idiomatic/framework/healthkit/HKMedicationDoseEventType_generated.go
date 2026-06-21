@@ -5,45 +5,66 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MedicationDoseEventType wraps [raw.HKMedicationDoseEventType] with a fluent Go API.
+// MedicationDoseEventType is an idiomatic wrapper over the Objective-C class HKMedicationDoseEventType.
 type MedicationDoseEventType struct {
-	inner *raw.HKMedicationDoseEventType
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKMedicationDoseEventType].
-func (x *MedicationDoseEventType) Unwrap() *raw.HKMedicationDoseEventType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MedicationDoseEventType) ID() objc.ID { return x.inner.Ptr() }
-
-// MedicationDoseEventTypeFromID adopts an existing object pointer as a MedicationDoseEventType (nil for 0).
+// MedicationDoseEventTypeFromID adopts an existing Objective-C object as a MedicationDoseEventType
+// (nil for 0), retaining it and registering a release finalizer.
 func MedicationDoseEventTypeFromID(id objc.ID) *MedicationDoseEventType {
 	if id == 0 {
 		return nil
 	}
-	return &MedicationDoseEventType{inner: raw.HKMedicationDoseEventTypeFromID(id)}
+	x := &MedicationDoseEventType{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMedicationDoseEventType creates a new [MedicationDoseEventType].
+// medicationDoseEventTypeAdopt wraps an Objective-C object that this code just created as a
+// MedicationDoseEventType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func medicationDoseEventTypeAdopt(id objc.ID) *MedicationDoseEventType {
+	if id == 0 {
+		return nil
+	}
+	x := &MedicationDoseEventType{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MedicationDoseEventType) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MedicationDoseEventType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MedicationDoseEventType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMedicationDoseEventType creates a new MedicationDoseEventType.
 func NewMedicationDoseEventType() *MedicationDoseEventType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKMedicationDoseEventType")), objc.RegisterName("new"))
-	return &MedicationDoseEventType{inner: raw.HKMedicationDoseEventTypeFromID(_id)}
-}
-
-func (x *MedicationDoseEventType) asSampleType() *raw.HKSampleType { return &x.inner.HKSampleType }
-
-func (x *MedicationDoseEventType) asObjectType() *raw.HKObjectType {
-	return &x.inner.HKSampleType.HKObjectType
+	_id := objc.Send[objc.ID](objc.ID(_class("HKMedicationDoseEventType")), objc.RegisterName("new"))
+	return medicationDoseEventTypeAdopt(_id)
 }
 
 // MedicationDoseEventTypeable is the interface implemented by [MedicationDoseEventType], for mocking and DI.
 type MedicationDoseEventTypeable interface {
-	Unwrap() *raw.HKMedicationDoseEventType
+	obj.Object
 }
 
 var _ MedicationDoseEventTypeable = (*MedicationDoseEventType)(nil)

@@ -5,157 +5,176 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // An abstract superclass defining the API through which Core Data communicates with a store.
 //
-// IncrementalStore wraps [raw.NSIncrementalStore] with a fluent Go API.
+// IncrementalStore is an idiomatic wrapper over the Objective-C class NSIncrementalStore.
 type IncrementalStore struct {
-	inner *raw.NSIncrementalStore
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSIncrementalStore].
-func (x *IncrementalStore) Unwrap() *raw.NSIncrementalStore { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IncrementalStore) ID() objc.ID { return x.inner.Ptr() }
-
-// IncrementalStoreFromID adopts an existing object pointer as a IncrementalStore (nil for 0).
+// IncrementalStoreFromID adopts an existing Objective-C object as a IncrementalStore
+// (nil for 0), retaining it and registering a release finalizer.
 func IncrementalStoreFromID(id objc.ID) *IncrementalStore {
 	if id == 0 {
 		return nil
 	}
-	return &IncrementalStore{inner: raw.NSIncrementalStoreFromID(id)}
+	x := &IncrementalStore{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewIncrementalStore creates a new [IncrementalStore].
+// incrementalStoreAdopt wraps an Objective-C object that this code just created as a
+// IncrementalStore (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func incrementalStoreAdopt(id objc.ID) *IncrementalStore {
+	if id == 0 {
+		return nil
+	}
+	x := &IncrementalStore{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IncrementalStore) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IncrementalStore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IncrementalStore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewIncrementalStore creates a new IncrementalStore.
 func NewIncrementalStore() *IncrementalStore {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSIncrementalStore")), objc.RegisterName("new"))
-	return &IncrementalStore{inner: raw.NSIncrementalStoreFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSIncrementalStore")), objc.RegisterName("new"))
+	return incrementalStoreAdopt(_id)
 }
 
 // The URL for the persistent store.
 //
-// WithURL sets the uRL property and returns the receiver for chaining.
+// WithURL sets uRL and returns the receiver so calls can be chained.
 func (x *IncrementalStore) WithURL(uRL string) *IncrementalStore {
-	x.inner.NSPersistentStore.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 	return x
 }
 
 // The unique identifier for the persistent store.
 //
-// WithIdentifier sets the identifier property and returns the receiver for chaining.
+// WithIdentifier sets identifier and returns the receiver so calls can be chained.
 func (x *IncrementalStore) WithIdentifier(identifier string) *IncrementalStore {
-	x.inner.NSPersistentStore.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 	return x
 }
 
 // A Boolean value that indicates whether the persistent store is read-only.
 //
-// WithReadOnly sets the readOnly property and returns the receiver for chaining.
+// WithReadOnly sets readOnly and returns the receiver so calls can be chained.
 func (x *IncrementalStore) WithReadOnly(readOnly bool) *IncrementalStore {
-	x.inner.NSPersistentStore.SetReadOnly(readOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadOnly:"), readOnly)
 	return x
 }
 
 // The metadata for the persistent store.
 //
-// WithMetadata sets the metadata property and returns the receiver for chaining.
-func (x *IncrementalStore) WithMetadata(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *IncrementalStore {
-	x.inner.NSPersistentStore.SetMetadata(metadata)
+// WithMetadata sets metadata and returns the receiver so calls can be chained.
+func (x *IncrementalStore) WithMetadata(metadata obj.Object) *IncrementalStore {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadata:"), objref.IDOf(metadata))
 	return x
 }
 
 // Returns a value as appropriate for the given request, or nil if the request cannot be completed.
-//
-// ExecuteRequestWithContextError calls the underlying ExecuteRequestWithContextError.
-func (x *IncrementalStore) ExecuteRequestWithContextError(request *raw.NSPersistentStoreRequest, context_ *raw.NSManagedObjectContext) (objc.ID, error) {
-	return x.inner.ExecuteRequestWithContextError(request, context_)
+func (x *IncrementalStore) ExecuteRequestWithContextError(request *PersistentStoreRequest, context_ *ManagedObjectContext) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executeRequest:withContext:error:"), objref.IDOf(request), objref.IDOf(context_), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // Returns an incremental store node encapsulating the persistent external values of the object with a given object ID.
-//
-// NewValuesForObjectWithIDWithContextError calls the underlying NewValuesForObjectWithIDWithContextError.
-func (x *IncrementalStore) NewValuesForObjectWithIDWithContextError(objectID *raw.NSManagedObjectID, context_ *raw.NSManagedObjectContext) (*IncrementalStoreNode, error) {
-	_r, _err := x.inner.NewValuesForObjectWithIDWithContextError(objectID, context_)
-	if _err != nil {
-		return nil, _err
+func (x *IncrementalStore) NewValuesForObjectWithIDWithContextError(objectID *ManagedObjectID, context_ *ManagedObjectContext) (*IncrementalStoreNode, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("newValuesForObjectWithID:withContext:error:"), objref.IDOf(objectID), objref.IDOf(context_), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &IncrementalStoreNode{inner: _r}, nil
+	return IncrementalStoreNodeFromID(_r), nil
 }
 
 // Returns the relationship for the given relationship of the object with a given object ID.
-//
-// NewValueForRelationshipForObjectWithIDWithContextError calls the underlying NewValueForRelationshipForObjectWithIDWithContextError.
-func (x *IncrementalStore) NewValueForRelationshipForObjectWithIDWithContextError(relationship *raw.NSRelationshipDescription, objectID *raw.NSManagedObjectID, context_ *raw.NSManagedObjectContext) (objc.ID, error) {
-	return x.inner.NewValueForRelationshipForObjectWithIDWithContextError(relationship, objectID, context_)
+func (x *IncrementalStore) NewValueForRelationshipForObjectWithIDWithContextError(relationship *RelationshipDescription, objectID *ManagedObjectID, context_ *ManagedObjectContext) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("newValueForRelationship:forObjectWithID:withContext:error:"), objref.IDOf(relationship), objref.IDOf(objectID), objref.IDOf(context_), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // Returns an array containing the object IDs for a given array of newly-inserted objects.
-//
-// ObtainPermanentIDsForObjectsError calls the underlying ObtainPermanentIDsForObjectsError.
-func (x *IncrementalStore) ObtainPermanentIDsForObjectsError(array *foundation.NSArray[*raw.NSManagedObject]) (*foundation.NSArray[*raw.NSManagedObjectID], error) {
-	return x.inner.ObtainPermanentIDsForObjectsError(array)
+func (x *IncrementalStore) ObtainPermanentIDsForObjectsError(array []*ManagedObject) ([]*ManagedObjectID, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("obtainPermanentIDsForObjects:error:"), purego.SliceToNSArray(array, func(_v *ManagedObject) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *ManagedObjectID { return ManagedObjectIDFromID(_id) }), nil
 }
 
 // Indicates that objects identified by a given array of object IDs are in use in a managed object context.
-//
-// ManagedObjectContextDidRegisterObjectsWithIDs calls the underlying ManagedObjectContextDidRegisterObjectsWithIDs.
-func (x *IncrementalStore) ManagedObjectContextDidRegisterObjectsWithIDs(objectIDs *foundation.NSArray[*raw.NSManagedObjectID]) {
-	x.inner.ManagedObjectContextDidRegisterObjectsWithIDs(objectIDs)
+func (x *IncrementalStore) ManagedObjectContextDidRegisterObjectsWithIDs(objectIDs []*ManagedObjectID) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managedObjectContextDidRegisterObjectsWithIDs:"), purego.SliceToNSArray(objectIDs, func(_v *ManagedObjectID) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Indicates that objects identified by a given array of object IDs are no longer being used by a managed object context.
-//
-// ManagedObjectContextDidUnregisterObjectsWithIDs calls the underlying ManagedObjectContextDidUnregisterObjectsWithIDs.
-func (x *IncrementalStore) ManagedObjectContextDidUnregisterObjectsWithIDs(objectIDs *foundation.NSArray[*raw.NSManagedObjectID]) {
-	x.inner.ManagedObjectContextDidUnregisterObjectsWithIDs(objectIDs)
+func (x *IncrementalStore) ManagedObjectContextDidUnregisterObjectsWithIDs(objectIDs []*ManagedObjectID) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managedObjectContextDidUnregisterObjectsWithIDs:"), purego.SliceToNSArray(objectIDs, func(_v *ManagedObjectID) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Returns a new object ID that uses given data as the key.
-//
-// NewObjectIDForEntityReferenceObject calls the underlying NewObjectIDForEntityReferenceObject.
-func (x *IncrementalStore) NewObjectIDForEntityReferenceObject(entity *raw.NSEntityDescription, data objc.ID) *ManagedObjectID {
-	_r := x.inner.NewObjectIDForEntityReferenceObject(entity, data)
-	if _r == nil {
-		return nil
-	}
-	return &ManagedObjectID{inner: _r}
+func (x *IncrementalStore) NewObjectIDForEntityReferenceObject(entity *EntityDescription, data obj.Object) *ManagedObjectID {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("newObjectIDForEntity:referenceObject:"), objref.IDOf(entity), objref.IDOf(data))
+	return ManagedObjectIDFromID(_r)
 }
 
 // Returns the reference data used to construct a given object ID.
-//
-// ReferenceObjectForObjectID calls the underlying ReferenceObjectForObjectID.
-func (x *IncrementalStore) ReferenceObjectForObjectID(objectID *raw.NSManagedObjectID) objc.ID {
-	return x.inner.ReferenceObjectForObjectID(objectID)
-}
-
-func (x *IncrementalStore) asPersistentStore() *raw.NSPersistentStore {
-	return &x.inner.NSPersistentStore
+func (x *IncrementalStore) ReferenceObjectForObjectID(objectID *ManagedObjectID) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("referenceObjectForObjectID:"), objref.IDOf(objectID))
+	return obj.Wrap(_r)
 }
 
 // IncrementalStoreable is the interface implemented by [IncrementalStore], for mocking and DI.
 type IncrementalStoreable interface {
-	Unwrap() *raw.NSIncrementalStore
+	obj.Object
 	WithURL(uRL string) *IncrementalStore
 	WithIdentifier(identifier string) *IncrementalStore
 	WithReadOnly(readOnly bool) *IncrementalStore
-	WithMetadata(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID]) *IncrementalStore
-	ExecuteRequestWithContextError(request *raw.NSPersistentStoreRequest, context_ *raw.NSManagedObjectContext) (objc.ID, error)
-	NewValuesForObjectWithIDWithContextError(objectID *raw.NSManagedObjectID, context_ *raw.NSManagedObjectContext) (*IncrementalStoreNode, error)
-	NewValueForRelationshipForObjectWithIDWithContextError(relationship *raw.NSRelationshipDescription, objectID *raw.NSManagedObjectID, context_ *raw.NSManagedObjectContext) (objc.ID, error)
-	ObtainPermanentIDsForObjectsError(array *foundation.NSArray[*raw.NSManagedObject]) (*foundation.NSArray[*raw.NSManagedObjectID], error)
-	ManagedObjectContextDidRegisterObjectsWithIDs(objectIDs *foundation.NSArray[*raw.NSManagedObjectID])
-	ManagedObjectContextDidUnregisterObjectsWithIDs(objectIDs *foundation.NSArray[*raw.NSManagedObjectID])
-	NewObjectIDForEntityReferenceObject(entity *raw.NSEntityDescription, data objc.ID) *ManagedObjectID
-	ReferenceObjectForObjectID(objectID *raw.NSManagedObjectID) objc.ID
+	WithMetadata(metadata obj.Object) *IncrementalStore
+	ExecuteRequestWithContextError(request *PersistentStoreRequest, context_ *ManagedObjectContext) (obj.Object, error)
+	NewValuesForObjectWithIDWithContextError(objectID *ManagedObjectID, context_ *ManagedObjectContext) (*IncrementalStoreNode, error)
+	NewValueForRelationshipForObjectWithIDWithContextError(relationship *RelationshipDescription, objectID *ManagedObjectID, context_ *ManagedObjectContext) (obj.Object, error)
+	ObtainPermanentIDsForObjectsError(array []*ManagedObject) ([]*ManagedObjectID, error)
+	ManagedObjectContextDidRegisterObjectsWithIDs(objectIDs []*ManagedObjectID)
+	ManagedObjectContextDidUnregisterObjectsWithIDs(objectIDs []*ManagedObjectID)
+	NewObjectIDForEntityReferenceObject(entity *EntityDescription, data obj.Object) *ManagedObjectID
+	ReferenceObjectForObjectID(objectID *ManagedObjectID) obj.Object
 }
 
 var _ IncrementalStoreable = (*IncrementalStore)(nil)

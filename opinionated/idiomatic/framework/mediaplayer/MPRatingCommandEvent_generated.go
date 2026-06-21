@@ -5,50 +5,73 @@
 package mediaplayer
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An event requesting a change in the rating.
 //
-// RatingCommandEvent wraps [raw.MPRatingCommandEvent] with a fluent Go API.
+// RatingCommandEvent is an idiomatic wrapper over the Objective-C class MPRatingCommandEvent.
 type RatingCommandEvent struct {
-	inner *raw.MPRatingCommandEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPRatingCommandEvent].
-func (x *RatingCommandEvent) Unwrap() *raw.MPRatingCommandEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RatingCommandEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// RatingCommandEventFromID adopts an existing object pointer as a RatingCommandEvent (nil for 0).
+// RatingCommandEventFromID adopts an existing Objective-C object as a RatingCommandEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func RatingCommandEventFromID(id objc.ID) *RatingCommandEvent {
 	if id == 0 {
 		return nil
 	}
-	return &RatingCommandEvent{inner: raw.MPRatingCommandEventFromID(id)}
+	x := &RatingCommandEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRatingCommandEvent creates a new [RatingCommandEvent].
+// ratingCommandEventAdopt wraps an Objective-C object that this code just created as a
+// RatingCommandEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func ratingCommandEventAdopt(id objc.ID) *RatingCommandEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &RatingCommandEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RatingCommandEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RatingCommandEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RatingCommandEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRatingCommandEvent creates a new RatingCommandEvent.
 func NewRatingCommandEvent() *RatingCommandEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPRatingCommandEvent")), objc.RegisterName("new"))
-	return &RatingCommandEvent{inner: raw.MPRatingCommandEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPRatingCommandEvent")), objc.RegisterName("new"))
+	return ratingCommandEventAdopt(_id)
 }
 
-// Rating calls the underlying Rating.
 func (x *RatingCommandEvent) Rating() float32 {
-	return x.inner.Rating()
-}
-
-func (x *RatingCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent {
-	return &x.inner.MPRemoteCommandEvent
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rating"))
+	return _r
 }
 
 // RatingCommandEventable is the interface implemented by [RatingCommandEvent], for mocking and DI.
 type RatingCommandEventable interface {
-	Unwrap() *raw.MPRatingCommandEvent
+	obj.Object
 	Rating() float32
 }
 

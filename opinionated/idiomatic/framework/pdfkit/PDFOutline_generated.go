@@ -5,183 +5,168 @@
 package pdfkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A PDFOutline object is an element in a tree-structured hierarchy that can represent the structure of a PDF document.
 //
-// Outline wraps [raw.PDFOutline] with a fluent Go API.
+// Outline is an idiomatic wrapper over the Objective-C class PDFOutline.
 type Outline struct {
-	inner *raw.PDFOutline
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PDFOutline].
-func (x *Outline) Unwrap() *raw.PDFOutline { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Outline) ID() objc.ID { return x.inner.Ptr() }
-
-// OutlineFromID adopts an existing object pointer as a Outline (nil for 0).
+// OutlineFromID adopts an existing Objective-C object as a Outline
+// (nil for 0), retaining it and registering a release finalizer.
 func OutlineFromID(id objc.ID) *Outline {
 	if id == 0 {
 		return nil
 	}
-	return &Outline{inner: raw.PDFOutlineFromID(id)}
+	x := &Outline{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewOutline creates a new [Outline].
+// outlineAdopt wraps an Objective-C object that this code just created as a
+// Outline (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func outlineAdopt(id objc.ID) *Outline {
+	if id == 0 {
+		return nil
+	}
+	x := &Outline{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Outline) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Outline) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Outline) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewOutline creates a new Outline.
 func NewOutline() *Outline {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFOutline")), objc.RegisterName("new"))
-	return &Outline{inner: raw.PDFOutlineFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PDFOutline")), objc.RegisterName("new"))
+	return outlineAdopt(_id)
 }
 
 // Returns the label for the outline.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *Outline) WithLabel(label string) *Outline {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // Returns a Boolean value that indicates whether the outline object is initially disclosed.
 //
-// WithIsOpen sets the isOpen property and returns the receiver for chaining.
+// WithIsOpen sets isOpen and returns the receiver so calls can be chained.
 func (x *Outline) WithIsOpen(isOpen bool) *Outline {
-	x.inner.SetIsOpen(isOpen)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsOpen:"), isOpen)
 	return x
 }
 
 // Returns the destination associated with the outline.
 //
-// WithDestination sets the destination property and returns the receiver for chaining.
+// WithDestination sets destination and returns the receiver so calls can be chained.
 func (x *Outline) WithDestination(destination *Destination) *Outline {
-	x.inner.SetDestination(destination.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 	return x
 }
 
 // Returns the child outline object at the specified index.
-//
-// ChildAtIndex calls the underlying ChildAtIndex.
-func (x *Outline) ChildAtIndex(index uint) *Outline {
-	_r := x.inner.ChildAtIndex(index)
-	if _r == nil {
-		return nil
-	}
-	return &Outline{inner: _r}
+func (x *Outline) ChildAtIndex(index int) *Outline {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childAtIndex:"), index)
+	return OutlineFromID(_r)
 }
 
 // Inserts the specified outline object at the specified index.
-//
-// InsertChildAtIndex calls the underlying InsertChildAtIndex.
-func (x *Outline) InsertChildAtIndex(child *raw.PDFOutline, index uint) {
-	x.inner.InsertChildAtIndex(child, index)
+func (x *Outline) InsertChildAtIndex(child *Outline, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertChild:atIndex:"), objref.IDOf(child), index)
 }
 
 // Removes the outline object from its parent (does nothing if outline object is the root outline object).
-//
-// RemoveFromParent calls the underlying RemoveFromParent.
 func (x *Outline) RemoveFromParent() {
-	x.inner.RemoveFromParent()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromParent"))
 }
 
-// Document calls the underlying Document.
 func (x *Outline) Document() *Document {
-	_r := x.inner.Document()
-	if _r == nil {
-		return nil
-	}
-	return &Document{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("document"))
+	return DocumentFromID(_r)
 }
 
-// Parent calls the underlying Parent.
-func (x *Outline) Parent() unsafe.Pointer {
-	return x.inner.Parent()
+func (x *Outline) NumberOfChildren() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfChildren"))
+	return _r
 }
 
-// NumberOfChildren calls the underlying NumberOfChildren.
-func (x *Outline) NumberOfChildren() uint {
-	return x.inner.NumberOfChildren()
+func (x *Outline) Index() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("index"))
+	return _r
 }
 
-// Index calls the underlying Index.
-func (x *Outline) Index() uint {
-	return x.inner.Index()
-}
-
-// Label calls the underlying Label.
 func (x *Outline) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
 func (x *Outline) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// IsOpen calls the underlying IsOpen.
 func (x *Outline) IsOpen() bool {
-	return x.inner.IsOpen()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOpen"))
+	return _r
 }
 
-// SetIsOpen calls the underlying SetIsOpen.
 func (x *Outline) SetIsOpen(isOpen bool) {
-	x.inner.SetIsOpen(isOpen)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsOpen:"), isOpen)
 }
 
-// Destination calls the underlying Destination.
 func (x *Outline) Destination() *Destination {
-	_r := x.inner.Destination()
-	if _r == nil {
-		return nil
-	}
-	return &Destination{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destination"))
+	return DestinationFromID(_r)
 }
 
-// SetDestination calls the underlying SetDestination.
-func (x *Outline) SetDestination(destination *raw.PDFDestination) {
-	x.inner.SetDestination(destination)
-}
-
-// Action calls the underlying Action.
-func (x *Outline) Action() unsafe.Pointer {
-	return x.inner.Action()
-}
-
-// SetAction calls the underlying SetAction.
-func (x *Outline) SetAction(action unsafe.Pointer) {
-	x.inner.SetAction(action)
+func (x *Outline) SetDestination(destination *Destination) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), objref.IDOf(destination))
 }
 
 // Outlineable is the interface implemented by [Outline], for mocking and DI.
 type Outlineable interface {
-	Unwrap() *raw.PDFOutline
+	obj.Object
 	WithLabel(label string) *Outline
 	WithIsOpen(isOpen bool) *Outline
 	WithDestination(destination *Destination) *Outline
-	ChildAtIndex(index uint) *Outline
-	InsertChildAtIndex(child *raw.PDFOutline, index uint)
+	ChildAtIndex(index int) *Outline
+	InsertChildAtIndex(child *Outline, index int)
 	RemoveFromParent()
 	Document() *Document
-	Parent() unsafe.Pointer
-	NumberOfChildren() uint
-	Index() uint
+	NumberOfChildren() int
+	Index() int
 	Label() string
 	SetLabel(label string)
 	IsOpen() bool
 	SetIsOpen(isOpen bool)
 	Destination() *Destination
-	SetDestination(destination *raw.PDFDestination)
-	Action() unsafe.Pointer
-	SetAction(action unsafe.Pointer)
+	SetDestination(destination *Destination)
 }
 
 var _ Outlineable = (*Outline)(nil)

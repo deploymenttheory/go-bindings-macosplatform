@@ -5,164 +5,180 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRLevelControlClusterMoveWithOnOffParams wraps [raw.MTRLevelControlClusterMoveWithOnOffParams] with a fluent Go API.
+// MTRLevelControlClusterMoveWithOnOffParams is an idiomatic wrapper over the Objective-C class MTRLevelControlClusterMoveWithOnOffParams.
 type MTRLevelControlClusterMoveWithOnOffParams struct {
-	inner *raw.MTRLevelControlClusterMoveWithOnOffParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRLevelControlClusterMoveWithOnOffParams].
-func (x *MTRLevelControlClusterMoveWithOnOffParams) Unwrap() *raw.MTRLevelControlClusterMoveWithOnOffParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRLevelControlClusterMoveWithOnOffParamsFromID adopts an existing object pointer as a MTRLevelControlClusterMoveWithOnOffParams (nil for 0).
+// MTRLevelControlClusterMoveWithOnOffParamsFromID adopts an existing Objective-C object as a MTRLevelControlClusterMoveWithOnOffParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRLevelControlClusterMoveWithOnOffParamsFromID(id objc.ID) *MTRLevelControlClusterMoveWithOnOffParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRLevelControlClusterMoveWithOnOffParams{inner: raw.MTRLevelControlClusterMoveWithOnOffParamsFromID(id)}
+	x := &MTRLevelControlClusterMoveWithOnOffParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRLevelControlClusterMoveWithOnOffParams creates a new [MTRLevelControlClusterMoveWithOnOffParams].
+// mTRLevelControlClusterMoveWithOnOffParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRLevelControlClusterMoveWithOnOffParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRLevelControlClusterMoveWithOnOffParamsAdopt(id objc.ID) *MTRLevelControlClusterMoveWithOnOffParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRLevelControlClusterMoveWithOnOffParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRLevelControlClusterMoveWithOnOffParams creates a new MTRLevelControlClusterMoveWithOnOffParams.
 func NewMTRLevelControlClusterMoveWithOnOffParams() *MTRLevelControlClusterMoveWithOnOffParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRLevelControlClusterMoveWithOnOffParams")), objc.RegisterName("new"))
-	return &MTRLevelControlClusterMoveWithOnOffParams{inner: raw.MTRLevelControlClusterMoveWithOnOffParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRLevelControlClusterMoveWithOnOffParams")), objc.RegisterName("new"))
+	return mTRLevelControlClusterMoveWithOnOffParamsAdopt(_id)
 }
 
-// WithMoveMode sets the moveMode property and returns the receiver for chaining.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) WithMoveMode(moveMode *foundation.NSNumber) *MTRLevelControlClusterMoveWithOnOffParams {
-	x.inner.SetMoveMode(moveMode)
+// WithMoveMode sets moveMode and returns the receiver so calls can be chained.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) WithMoveMode(moveMode obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMoveMode:"), objref.IDOf(moveMode))
 	return x
 }
 
-// WithRate sets the rate property and returns the receiver for chaining.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) WithRate(rate *foundation.NSNumber) *MTRLevelControlClusterMoveWithOnOffParams {
-	x.inner.SetRate(rate)
+// WithRate sets rate and returns the receiver so calls can be chained.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) WithRate(rate obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), objref.IDOf(rate))
 	return x
 }
 
-// WithOptionsMask sets the optionsMask property and returns the receiver for chaining.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) WithOptionsMask(optionsMask *foundation.NSNumber) *MTRLevelControlClusterMoveWithOnOffParams {
-	x.inner.SetOptionsMask(optionsMask)
+// WithOptionsMask sets optionsMask and returns the receiver so calls can be chained.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) WithOptionsMask(optionsMask obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return x
 }
 
-// WithOptionsOverride sets the optionsOverride property and returns the receiver for chaining.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRLevelControlClusterMoveWithOnOffParams {
-	x.inner.SetOptionsOverride(optionsOverride)
+// WithOptionsOverride sets optionsOverride and returns the receiver so calls can be chained.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) WithOptionsOverride(optionsOverride obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRLevelControlClusterMoveWithOnOffParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRLevelControlClusterMoveWithOnOffParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRLevelControlClusterMoveWithOnOffParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLevelControlClusterMoveWithOnOffParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// MoveMode calls the underlying MoveMode.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) MoveMode() *foundation.NSNumber {
-	return x.inner.MoveMode()
+func (x *MTRLevelControlClusterMoveWithOnOffParams) MoveMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveMode"))
+	return obj.Wrap(_r)
 }
 
-// SetMoveMode calls the underlying SetMoveMode.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) SetMoveMode(moveMode *foundation.NSNumber) {
-	x.inner.SetMoveMode(moveMode)
+func (x *MTRLevelControlClusterMoveWithOnOffParams) SetMoveMode(moveMode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMoveMode:"), objref.IDOf(moveMode))
 }
 
-// Rate calls the underlying Rate.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) Rate() *foundation.NSNumber {
-	return x.inner.Rate()
+func (x *MTRLevelControlClusterMoveWithOnOffParams) Rate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rate"))
+	return obj.Wrap(_r)
 }
 
-// SetRate calls the underlying SetRate.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) SetRate(rate *foundation.NSNumber) {
-	x.inner.SetRate(rate)
+func (x *MTRLevelControlClusterMoveWithOnOffParams) SetRate(rate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), objref.IDOf(rate))
 }
 
-// OptionsMask calls the underlying OptionsMask.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) OptionsMask() *foundation.NSNumber {
-	return x.inner.OptionsMask()
+func (x *MTRLevelControlClusterMoveWithOnOffParams) OptionsMask() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsMask"))
+	return obj.Wrap(_r)
 }
 
-// SetOptionsMask calls the underlying SetOptionsMask.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) SetOptionsMask(optionsMask *foundation.NSNumber) {
-	x.inner.SetOptionsMask(optionsMask)
+func (x *MTRLevelControlClusterMoveWithOnOffParams) SetOptionsMask(optionsMask obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 }
 
-// OptionsOverride calls the underlying OptionsOverride.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) OptionsOverride() *foundation.NSNumber {
-	return x.inner.OptionsOverride()
+func (x *MTRLevelControlClusterMoveWithOnOffParams) OptionsOverride() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsOverride"))
+	return obj.Wrap(_r)
 }
 
-// SetOptionsOverride calls the underlying SetOptionsOverride.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) SetOptionsOverride(optionsOverride *foundation.NSNumber) {
-	x.inner.SetOptionsOverride(optionsOverride)
+func (x *MTRLevelControlClusterMoveWithOnOffParams) SetOptionsOverride(optionsOverride obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRLevelControlClusterMoveWithOnOffParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRLevelControlClusterMoveWithOnOffParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRLevelControlClusterMoveWithOnOffParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRLevelControlClusterMoveWithOnOffParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRLevelControlClusterMoveWithOnOffParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRLevelControlClusterMoveWithOnOffParamsable is the interface implemented by [MTRLevelControlClusterMoveWithOnOffParams], for mocking and DI.
 type MTRLevelControlClusterMoveWithOnOffParamsable interface {
-	Unwrap() *raw.MTRLevelControlClusterMoveWithOnOffParams
-	WithMoveMode(moveMode *foundation.NSNumber) *MTRLevelControlClusterMoveWithOnOffParams
-	WithRate(rate *foundation.NSNumber) *MTRLevelControlClusterMoveWithOnOffParams
-	WithOptionsMask(optionsMask *foundation.NSNumber) *MTRLevelControlClusterMoveWithOnOffParams
-	WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRLevelControlClusterMoveWithOnOffParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRLevelControlClusterMoveWithOnOffParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRLevelControlClusterMoveWithOnOffParams
-	MoveMode() *foundation.NSNumber
-	SetMoveMode(moveMode *foundation.NSNumber)
-	Rate() *foundation.NSNumber
-	SetRate(rate *foundation.NSNumber)
-	OptionsMask() *foundation.NSNumber
-	SetOptionsMask(optionsMask *foundation.NSNumber)
-	OptionsOverride() *foundation.NSNumber
-	SetOptionsOverride(optionsOverride *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithMoveMode(moveMode obj.Object) *MTRLevelControlClusterMoveWithOnOffParams
+	WithRate(rate obj.Object) *MTRLevelControlClusterMoveWithOnOffParams
+	WithOptionsMask(optionsMask obj.Object) *MTRLevelControlClusterMoveWithOnOffParams
+	WithOptionsOverride(optionsOverride obj.Object) *MTRLevelControlClusterMoveWithOnOffParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLevelControlClusterMoveWithOnOffParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLevelControlClusterMoveWithOnOffParams
+	MoveMode() obj.Object
+	SetMoveMode(moveMode obj.Object)
+	Rate() obj.Object
+	SetRate(rate obj.Object)
+	OptionsMask() obj.Object
+	SetOptionsMask(optionsMask obj.Object)
+	OptionsOverride() obj.Object
+	SetOptionsOverride(optionsOverride obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRLevelControlClusterMoveWithOnOffParamsable = (*MTRLevelControlClusterMoveWithOnOffParams)(nil)

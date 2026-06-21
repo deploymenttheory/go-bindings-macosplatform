@@ -5,97 +5,118 @@
 package corelocation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that represents a location update.
 //
-// Update wraps [raw.CLUpdate] with a fluent Go API.
+// Update is an idiomatic wrapper over the Objective-C class CLUpdate.
 type Update struct {
-	inner *raw.CLUpdate
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLUpdate].
-func (x *Update) Unwrap() *raw.CLUpdate { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Update) ID() objc.ID { return x.inner.Ptr() }
-
-// UpdateFromID adopts an existing object pointer as a Update (nil for 0).
+// UpdateFromID adopts an existing Objective-C object as a Update
+// (nil for 0), retaining it and registering a release finalizer.
 func UpdateFromID(id objc.ID) *Update {
 	if id == 0 {
 		return nil
 	}
-	return &Update{inner: raw.CLUpdateFromID(id)}
+	x := &Update{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewUpdate creates a new [Update].
+// updateAdopt wraps an Objective-C object that this code just created as a
+// Update (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func updateAdopt(id objc.ID) *Update {
+	if id == 0 {
+		return nil
+	}
+	x := &Update{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Update) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Update) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Update) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUpdate creates a new Update.
 func NewUpdate() *Update {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLUpdate")), objc.RegisterName("new"))
-	return &Update{inner: raw.CLUpdateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CLUpdate")), objc.RegisterName("new"))
+	return updateAdopt(_id)
 }
 
-// AuthorizationDenied calls the underlying AuthorizationDenied.
 func (x *Update) AuthorizationDenied() bool {
-	return x.inner.AuthorizationDenied()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationDenied"))
+	return _r
 }
 
-// AuthorizationDeniedGlobally calls the underlying AuthorizationDeniedGlobally.
 func (x *Update) AuthorizationDeniedGlobally() bool {
-	return x.inner.AuthorizationDeniedGlobally()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationDeniedGlobally"))
+	return _r
 }
 
-// AuthorizationRestricted calls the underlying AuthorizationRestricted.
 func (x *Update) AuthorizationRestricted() bool {
-	return x.inner.AuthorizationRestricted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationRestricted"))
+	return _r
 }
 
-// IsStationary calls the underlying IsStationary.
 func (x *Update) IsStationary() bool {
-	return x.inner.IsStationary()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStationary"))
+	return _r
 }
 
-// Stationary calls the underlying Stationary.
 func (x *Update) Stationary() bool {
-	return x.inner.Stationary()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stationary"))
+	return _r
 }
 
-// InsufficientlyInUse calls the underlying InsufficientlyInUse.
 func (x *Update) InsufficientlyInUse() bool {
-	return x.inner.InsufficientlyInUse()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("insufficientlyInUse"))
+	return _r
 }
 
-// LocationUnavailable calls the underlying LocationUnavailable.
 func (x *Update) LocationUnavailable() bool {
-	return x.inner.LocationUnavailable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("locationUnavailable"))
+	return _r
 }
 
-// AccuracyLimited calls the underlying AccuracyLimited.
 func (x *Update) AccuracyLimited() bool {
-	return x.inner.AccuracyLimited()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accuracyLimited"))
+	return _r
 }
 
-// ServiceSessionRequired calls the underlying ServiceSessionRequired.
 func (x *Update) ServiceSessionRequired() bool {
-	return x.inner.ServiceSessionRequired()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("serviceSessionRequired"))
+	return _r
 }
 
-// AuthorizationRequestInProgress calls the underlying AuthorizationRequestInProgress.
 func (x *Update) AuthorizationRequestInProgress() bool {
-	return x.inner.AuthorizationRequestInProgress()
-}
-
-// Location calls the underlying Location.
-func (x *Update) Location() unsafe.Pointer {
-	return x.inner.Location()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationRequestInProgress"))
+	return _r
 }
 
 // Updateable is the interface implemented by [Update], for mocking and DI.
 type Updateable interface {
-	Unwrap() *raw.CLUpdate
+	obj.Object
 	AuthorizationDenied() bool
 	AuthorizationDeniedGlobally() bool
 	AuthorizationRestricted() bool
@@ -106,7 +127,6 @@ type Updateable interface {
 	AccuracyLimited() bool
 	ServiceSessionRequired() bool
 	AuthorizationRequestInProgress() bool
-	Location() unsafe.Pointer
 }
 
 var _ Updateable = (*Update)(nil)

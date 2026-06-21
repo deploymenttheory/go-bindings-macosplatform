@@ -5,23 +5,17 @@
 package devicecheck
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/devicecheck"
+	"github.com/ebitengine/purego/objc"
 )
 
-// SharedService calls the underlying DCAppAttestServiceSharedService.
+// The shared App Attest service that you use to validate your app. Use the shared instance of the service to generate and to certify a cryptographic key, and then to assert your app’s validity using that key.
 func SharedService() *AppAttestService {
-	_r := raw.DCAppAttestServiceSharedService()
-	if _r == nil {
-		return nil
-	}
-	return &AppAttestService{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("DCAppAttestService")), objc.RegisterName("sharedService"))
+	return AppAttestServiceFromID(_r)
 }
 
-// CurrentDevice calls the underlying DCDeviceCurrentDevice.
+// A representation of the device for which you want to query the two bits of data.
 func CurrentDevice() *Device {
-	_r := raw.DCDeviceCurrentDevice()
-	if _r == nil {
-		return nil
-	}
-	return &Device{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("DCDevice")), objc.RegisterName("currentDevice"))
+	return DeviceFromID(_r)
 }

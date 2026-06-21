@@ -9,76 +9,76 @@ import (
 )
 
 // Constants that indicate the level of location accuracy the app has authorization to use.
-type CLAccuracyAuthorization int64
+type AccuracyAuthorization int64
 
 const (
 	// The user authorized the app to access location data with full accuracy.
-	CLAccuracyAuthorizationFullAccuracy CLAccuracyAuthorization = 0
+	AccuracyAuthorizationFullAccuracy AccuracyAuthorization = 0
 	// The user authorized the app to access location data with reduced accuracy.
-	CLAccuracyAuthorizationReducedAccuracy CLAccuracyAuthorization = 1
+	AccuracyAuthorizationReducedAccuracy AccuracyAuthorization = 1
 )
 
-func (e CLAccuracyAuthorization) String() string {
+func (e AccuracyAuthorization) String() string {
 	switch e {
-	case CLAccuracyAuthorizationFullAccuracy:
-		return "CLAccuracyAuthorizationFullAccuracy"
-	case CLAccuracyAuthorizationReducedAccuracy:
-		return "CLAccuracyAuthorizationReducedAccuracy"
+	case AccuracyAuthorizationFullAccuracy:
+		return "AccuracyAuthorizationFullAccuracy"
+	case AccuracyAuthorizationReducedAccuracy:
+		return "AccuracyAuthorizationReducedAccuracy"
 	default:
-		return fmt.Sprintf("CLAccuracyAuthorization(%d)", int64(e))
+		return fmt.Sprintf("AccuracyAuthorization(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the type of activity associated with location updates.
-type CLActivityType int64
+type ActivityType int64
 
 const (
 	// The value that indicates the app is using location manager for an unspecified activity.
-	CLActivityTypeOther CLActivityType = 1
+	ActivityTypeOther ActivityType = 1
 	// The value that indicates positioning in an automobile following a road network.
-	CLActivityTypeAutomotiveNavigation CLActivityType = 2
+	ActivityTypeAutomotiveNavigation ActivityType = 2
 	// The value that indicates positioning during dedicated fitness sessions, such as walking workouts, running workouts, cycling workouts, and so on.
-	CLActivityTypeFitness CLActivityType = 3
+	ActivityTypeFitness ActivityType = 3
 	// The value that indicates positioning for activities that don’t or may not adhere to roads such as cycling, scooters, trains, boats and off-road vehicles.
-	CLActivityTypeOtherNavigation CLActivityType = 4
+	ActivityTypeOtherNavigation ActivityType = 4
 	// The value that indicates activities in the air.
-	CLActivityTypeAirborne CLActivityType = 5
+	ActivityTypeAirborne ActivityType = 5
 )
 
-func (e CLActivityType) String() string {
+func (e ActivityType) String() string {
 	switch e {
-	case CLActivityTypeOther:
-		return "CLActivityTypeOther"
-	case CLActivityTypeAutomotiveNavigation:
-		return "CLActivityTypeAutomotiveNavigation"
-	case CLActivityTypeFitness:
-		return "CLActivityTypeFitness"
-	case CLActivityTypeOtherNavigation:
-		return "CLActivityTypeOtherNavigation"
-	case CLActivityTypeAirborne:
-		return "CLActivityTypeAirborne"
+	case ActivityTypeOther:
+		return "ActivityTypeOther"
+	case ActivityTypeAutomotiveNavigation:
+		return "ActivityTypeAutomotiveNavigation"
+	case ActivityTypeFitness:
+		return "ActivityTypeFitness"
+	case ActivityTypeOtherNavigation:
+		return "ActivityTypeOtherNavigation"
+	case ActivityTypeAirborne:
+		return "ActivityTypeAirborne"
 	default:
-		return fmt.Sprintf("CLActivityType(%d)", int64(e))
+		return fmt.Sprintf("ActivityType(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the app’s authorization to use location services.
-type CLAuthorizationStatus int32
+type AuthorizationStatus int32
 
 const (
 	// The user has not chosen whether the app can use location services.
-	KCLAuthorizationStatusNotDetermined CLAuthorizationStatus = 0
+	KCLAuthorizationStatusNotDetermined AuthorizationStatus = 0
 	// The app is not authorized to use location services.
-	KCLAuthorizationStatusRestricted CLAuthorizationStatus = 1
+	KCLAuthorizationStatusRestricted AuthorizationStatus = 1
 	// The user denied the use of location services for the app or they are disabled globally in Settings.
-	KCLAuthorizationStatusDenied CLAuthorizationStatus = 2
+	KCLAuthorizationStatusDenied AuthorizationStatus = 2
 	// The user authorized the app to start location services at any time.
-	KCLAuthorizationStatusAuthorizedAlways CLAuthorizationStatus = 3
+	KCLAuthorizationStatusAuthorizedAlways AuthorizationStatus = 3
 	// The user authorized the app to use location services.
-	KCLAuthorizationStatusAuthorized CLAuthorizationStatus = 3
+	KCLAuthorizationStatusAuthorized AuthorizationStatus = 3
 )
 
-func (e CLAuthorizationStatus) String() string {
+func (e AuthorizationStatus) String() string {
 	switch e {
 	case KCLAuthorizationStatusNotDetermined:
 		return "KCLAuthorizationStatusNotDetermined"
@@ -89,138 +89,138 @@ func (e CLAuthorizationStatus) String() string {
 	case KCLAuthorizationStatusAuthorizedAlways:
 		return "KCLAuthorizationStatusAuthorizedAlways"
 	default:
-		return fmt.Sprintf("CLAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationStatus(%d)", int64(e))
 	}
 }
 
 // Constants indicating the physical orientation of the device.
-type CLDeviceOrientation int32
+type DeviceOrientation int32
 
 const (
 	// The orientation is currently not known.
-	CLDeviceOrientationUnknown CLDeviceOrientation = 0
+	DeviceOrientationUnknown DeviceOrientation = 0
 	// The device is in portrait mode, with the device held upright and the home button at the bottom.
-	CLDeviceOrientationPortrait CLDeviceOrientation = 1
+	DeviceOrientationPortrait DeviceOrientation = 1
 	// The device is in portrait mode but upside down, with the device held upright and the home button at the top.
-	CLDeviceOrientationPortraitUpsideDown CLDeviceOrientation = 2
+	DeviceOrientationPortraitUpsideDown DeviceOrientation = 2
 	// The device is in landscape mode, with the device held upright and the home button on the right side.
-	CLDeviceOrientationLandscapeLeft CLDeviceOrientation = 3
+	DeviceOrientationLandscapeLeft DeviceOrientation = 3
 	// The device is in landscape mode, with the device held upright and the home button on the left side.
-	CLDeviceOrientationLandscapeRight CLDeviceOrientation = 4
+	DeviceOrientationLandscapeRight DeviceOrientation = 4
 	// The device is held parallel to the ground with the screen facing upwards.
-	CLDeviceOrientationFaceUp CLDeviceOrientation = 5
+	DeviceOrientationFaceUp DeviceOrientation = 5
 	// The device is held parallel to the ground with the screen facing downwards.
-	CLDeviceOrientationFaceDown CLDeviceOrientation = 6
+	DeviceOrientationFaceDown DeviceOrientation = 6
 )
 
-func (e CLDeviceOrientation) String() string {
+func (e DeviceOrientation) String() string {
 	switch e {
-	case CLDeviceOrientationUnknown:
-		return "CLDeviceOrientationUnknown"
-	case CLDeviceOrientationPortrait:
-		return "CLDeviceOrientationPortrait"
-	case CLDeviceOrientationPortraitUpsideDown:
-		return "CLDeviceOrientationPortraitUpsideDown"
-	case CLDeviceOrientationLandscapeLeft:
-		return "CLDeviceOrientationLandscapeLeft"
-	case CLDeviceOrientationLandscapeRight:
-		return "CLDeviceOrientationLandscapeRight"
-	case CLDeviceOrientationFaceUp:
-		return "CLDeviceOrientationFaceUp"
-	case CLDeviceOrientationFaceDown:
-		return "CLDeviceOrientationFaceDown"
+	case DeviceOrientationUnknown:
+		return "DeviceOrientationUnknown"
+	case DeviceOrientationPortrait:
+		return "DeviceOrientationPortrait"
+	case DeviceOrientationPortraitUpsideDown:
+		return "DeviceOrientationPortraitUpsideDown"
+	case DeviceOrientationLandscapeLeft:
+		return "DeviceOrientationLandscapeLeft"
+	case DeviceOrientationLandscapeRight:
+		return "DeviceOrientationLandscapeRight"
+	case DeviceOrientationFaceUp:
+		return "DeviceOrientationFaceUp"
+	case DeviceOrientationFaceDown:
+		return "DeviceOrientationFaceDown"
 	default:
-		return fmt.Sprintf("CLDeviceOrientation(%d)", int64(e))
+		return fmt.Sprintf("DeviceOrientation(%d)", int64(e))
 	}
 }
 
 // Specifies the types of locations that a location updater generates.
-type CLLiveUpdateConfiguration int64
+type LiveUpdateConfiguration int64
 
 const (
 	// The default configuration.
-	CLLiveUpdateConfigurationDefault CLLiveUpdateConfiguration = 0
+	LiveUpdateConfigurationDefault LiveUpdateConfiguration = 0
 	// A configuration for automotive navigation use cases.
-	CLLiveUpdateConfigurationAutomotiveNavigation CLLiveUpdateConfiguration = 1
+	LiveUpdateConfigurationAutomotiveNavigation LiveUpdateConfiguration = 1
 	// A configuration for other navigation use cases.
-	CLLiveUpdateConfigurationOtherNavigation CLLiveUpdateConfiguration = 2
+	LiveUpdateConfigurationOtherNavigation LiveUpdateConfiguration = 2
 	// A configuration for fitness use cases.
-	CLLiveUpdateConfigurationFitness CLLiveUpdateConfiguration = 3
+	LiveUpdateConfigurationFitness LiveUpdateConfiguration = 3
 	// A configuration for airborne use cases.
-	CLLiveUpdateConfigurationAirborne CLLiveUpdateConfiguration = 4
+	LiveUpdateConfigurationAirborne LiveUpdateConfiguration = 4
 )
 
-func (e CLLiveUpdateConfiguration) String() string {
+func (e LiveUpdateConfiguration) String() string {
 	switch e {
-	case CLLiveUpdateConfigurationDefault:
-		return "CLLiveUpdateConfigurationDefault"
-	case CLLiveUpdateConfigurationAutomotiveNavigation:
-		return "CLLiveUpdateConfigurationAutomotiveNavigation"
-	case CLLiveUpdateConfigurationOtherNavigation:
-		return "CLLiveUpdateConfigurationOtherNavigation"
-	case CLLiveUpdateConfigurationFitness:
-		return "CLLiveUpdateConfigurationFitness"
-	case CLLiveUpdateConfigurationAirborne:
-		return "CLLiveUpdateConfigurationAirborne"
+	case LiveUpdateConfigurationDefault:
+		return "LiveUpdateConfigurationDefault"
+	case LiveUpdateConfigurationAutomotiveNavigation:
+		return "LiveUpdateConfigurationAutomotiveNavigation"
+	case LiveUpdateConfigurationOtherNavigation:
+		return "LiveUpdateConfigurationOtherNavigation"
+	case LiveUpdateConfigurationFitness:
+		return "LiveUpdateConfigurationFitness"
+	case LiveUpdateConfigurationAirborne:
+		return "LiveUpdateConfigurationAirborne"
 	default:
-		return fmt.Sprintf("CLLiveUpdateConfiguration(%d)", int64(e))
+		return fmt.Sprintf("LiveUpdateConfiguration(%d)", int64(e))
 	}
 }
 
 // Values that represent the current state of a monitoring condition.
-type CLMonitoringState uint64
+type MonitoringState uint64
 
 const (
 	// The condition is in an unknown state.
-	CLMonitoringStateUnknown CLMonitoringState = 0
+	MonitoringStateUnknown MonitoringState = 0
 	// The condition is in a satisfied state.
-	CLMonitoringStateSatisfied CLMonitoringState = 1
+	MonitoringStateSatisfied MonitoringState = 1
 	// The condition is in an unsatisfied state.
-	CLMonitoringStateUnsatisfied CLMonitoringState = 2
+	MonitoringStateUnsatisfied MonitoringState = 2
 	// The condition is in an unmonitored state.
-	CLMonitoringStateUnmonitored CLMonitoringState = 3
+	MonitoringStateUnmonitored MonitoringState = 3
 )
 
-func (e CLMonitoringState) String() string {
+func (e MonitoringState) String() string {
 	switch e {
-	case CLMonitoringStateUnknown:
-		return "CLMonitoringStateUnknown"
-	case CLMonitoringStateSatisfied:
-		return "CLMonitoringStateSatisfied"
-	case CLMonitoringStateUnsatisfied:
-		return "CLMonitoringStateUnsatisfied"
-	case CLMonitoringStateUnmonitored:
-		return "CLMonitoringStateUnmonitored"
+	case MonitoringStateUnknown:
+		return "MonitoringStateUnknown"
+	case MonitoringStateSatisfied:
+		return "MonitoringStateSatisfied"
+	case MonitoringStateUnsatisfied:
+		return "MonitoringStateUnsatisfied"
+	case MonitoringStateUnmonitored:
+		return "MonitoringStateUnmonitored"
 	default:
-		return fmt.Sprintf("CLMonitoringState(%d)", int64(e))
+		return fmt.Sprintf("MonitoringState(%d)", int64(e))
 	}
 }
 
 // Constants that reflect the relative distance to a beacon.
-type CLProximity int64
+type Proximity int64
 
 const (
 	// The proximity of the beacon could not be determined.
-	CLProximityUnknown CLProximity = 0
+	ProximityUnknown Proximity = 0
 	// The beacon is in the user’s immediate vicinity.
-	CLProximityImmediate CLProximity = 1
+	ProximityImmediate Proximity = 1
 	// The beacon is relatively close to the user.
-	CLProximityNear CLProximity = 2
+	ProximityNear Proximity = 2
 	// The beacon is far away.
-	CLProximityFar CLProximity = 3
+	ProximityFar Proximity = 3
 )
 
-func (e CLProximity) String() string {
+func (e Proximity) String() string {
 	switch e {
-	case CLProximityUnknown:
-		return "CLProximityUnknown"
-	case CLProximityImmediate:
-		return "CLProximityImmediate"
-	case CLProximityNear:
-		return "CLProximityNear"
-	case CLProximityFar:
-		return "CLProximityFar"
+	case ProximityUnknown:
+		return "ProximityUnknown"
+	case ProximityImmediate:
+		return "ProximityImmediate"
+	case ProximityNear:
+		return "ProximityNear"
+	case ProximityFar:
+		return "ProximityFar"
 	default:
-		return fmt.Sprintf("CLProximity(%d)", int64(e))
+		return fmt.Sprintf("Proximity(%d)", int64(e))
 	}
 }

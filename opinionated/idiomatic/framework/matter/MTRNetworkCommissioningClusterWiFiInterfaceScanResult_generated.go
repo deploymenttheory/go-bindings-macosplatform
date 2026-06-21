@@ -5,88 +5,108 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRNetworkCommissioningClusterWiFiInterfaceScanResult wraps [raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResult] with a fluent Go API.
+// MTRNetworkCommissioningClusterWiFiInterfaceScanResult is an idiomatic wrapper over the Objective-C class MTRNetworkCommissioningClusterWiFiInterfaceScanResult.
 type MTRNetworkCommissioningClusterWiFiInterfaceScanResult struct {
-	inner *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResult].
-func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) Unwrap() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRNetworkCommissioningClusterWiFiInterfaceScanResultFromID adopts an existing object pointer as a MTRNetworkCommissioningClusterWiFiInterfaceScanResult (nil for 0).
+// MTRNetworkCommissioningClusterWiFiInterfaceScanResultFromID adopts an existing Objective-C object as a MTRNetworkCommissioningClusterWiFiInterfaceScanResult
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRNetworkCommissioningClusterWiFiInterfaceScanResultFromID(id objc.ID) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
 	if id == 0 {
 		return nil
 	}
-	return &MTRNetworkCommissioningClusterWiFiInterfaceScanResult{inner: raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResultFromID(id)}
+	x := &MTRNetworkCommissioningClusterWiFiInterfaceScanResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRNetworkCommissioningClusterWiFiInterfaceScanResult creates a new [MTRNetworkCommissioningClusterWiFiInterfaceScanResult].
+// mTRNetworkCommissioningClusterWiFiInterfaceScanResultAdopt wraps an Objective-C object that this code just created as a
+// MTRNetworkCommissioningClusterWiFiInterfaceScanResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRNetworkCommissioningClusterWiFiInterfaceScanResultAdopt(id objc.ID) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRNetworkCommissioningClusterWiFiInterfaceScanResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRNetworkCommissioningClusterWiFiInterfaceScanResult creates a new MTRNetworkCommissioningClusterWiFiInterfaceScanResult.
 func NewMTRNetworkCommissioningClusterWiFiInterfaceScanResult() *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRNetworkCommissioningClusterWiFiInterfaceScanResult")), objc.RegisterName("new"))
-	return &MTRNetworkCommissioningClusterWiFiInterfaceScanResult{inner: raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResultFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRNetworkCommissioningClusterWiFiInterfaceScanResult")), objc.RegisterName("new"))
+	return mTRNetworkCommissioningClusterWiFiInterfaceScanResultAdopt(_id)
 }
 
-// WithSecurity sets the security property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithSecurity(security *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
-	x.inner.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct.SetSecurity(security)
+// WithSecurity sets security and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithSecurity(security obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecurity:"), objref.IDOf(security))
 	return x
 }
 
-// WithSsid sets the ssid property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithSsid(ssid *foundation.NSData) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
-	x.inner.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct.SetSsid(ssid)
+// WithSsid sets ssid and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithSsid(ssid obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSsid:"), objref.IDOf(ssid))
 	return x
 }
 
-// WithBssid sets the bssid property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithBssid(bssid *foundation.NSData) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
-	x.inner.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct.SetBssid(bssid)
+// WithBssid sets bssid and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithBssid(bssid obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBssid:"), objref.IDOf(bssid))
 	return x
 }
 
-// WithChannel sets the channel property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithChannel(channel *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
-	x.inner.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct.SetChannel(channel)
+// WithChannel sets channel and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithChannel(channel obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 	return x
 }
 
-// WithWiFiBand sets the wiFiBand property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithWiFiBand(wiFiBand *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
-	x.inner.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct.SetWiFiBand(wiFiBand)
+// WithWiFiBand sets wiFiBand and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithWiFiBand(wiFiBand obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWiFiBand:"), objref.IDOf(wiFiBand))
 	return x
 }
 
-// WithRssi sets the rssi property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithRssi(rssi *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
-	x.inner.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct.SetRssi(rssi)
+// WithRssi sets rssi and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) WithRssi(rssi obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRssi:"), objref.IDOf(rssi))
 	return x
-}
-
-func (x *MTRNetworkCommissioningClusterWiFiInterfaceScanResult) asMTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct {
-	return &x.inner.MTRNetworkCommissioningClusterWiFiInterfaceScanResultStruct
 }
 
 // MTRNetworkCommissioningClusterWiFiInterfaceScanResultable is the interface implemented by [MTRNetworkCommissioningClusterWiFiInterfaceScanResult], for mocking and DI.
 type MTRNetworkCommissioningClusterWiFiInterfaceScanResultable interface {
-	Unwrap() *raw.MTRNetworkCommissioningClusterWiFiInterfaceScanResult
-	WithSecurity(security *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult
-	WithSsid(ssid *foundation.NSData) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult
-	WithBssid(bssid *foundation.NSData) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult
-	WithChannel(channel *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult
-	WithWiFiBand(wiFiBand *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult
-	WithRssi(rssi *foundation.NSNumber) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult
+	obj.Object
+	WithSecurity(security obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult
+	WithSsid(ssid obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult
+	WithBssid(bssid obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult
+	WithChannel(channel obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult
+	WithWiFiBand(wiFiBand obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult
+	WithRssi(rssi obj.Object) *MTRNetworkCommissioningClusterWiFiInterfaceScanResult
 }
 
 var _ MTRNetworkCommissioningClusterWiFiInterfaceScanResultable = (*MTRNetworkCommissioningClusterWiFiInterfaceScanResult)(nil)

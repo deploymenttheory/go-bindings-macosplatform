@@ -5,127 +5,139 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A single item in a player item’s error log.
 //
-// PlayerItemErrorLogEvent wraps [raw.AVPlayerItemErrorLogEvent] with a fluent Go API.
+// PlayerItemErrorLogEvent is an idiomatic wrapper over the Objective-C class AVPlayerItemErrorLogEvent.
 type PlayerItemErrorLogEvent struct {
-	inner *raw.AVPlayerItemErrorLogEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPlayerItemErrorLogEvent].
-func (x *PlayerItemErrorLogEvent) Unwrap() *raw.AVPlayerItemErrorLogEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerItemErrorLogEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerItemErrorLogEventFromID adopts an existing object pointer as a PlayerItemErrorLogEvent (nil for 0).
+// PlayerItemErrorLogEventFromID adopts an existing Objective-C object as a PlayerItemErrorLogEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerItemErrorLogEventFromID(id objc.ID) *PlayerItemErrorLogEvent {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerItemErrorLogEvent{inner: raw.AVPlayerItemErrorLogEventFromID(id)}
+	x := &PlayerItemErrorLogEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPlayerItemErrorLogEvent creates a new [PlayerItemErrorLogEvent].
+// playerItemErrorLogEventAdopt wraps an Objective-C object that this code just created as a
+// PlayerItemErrorLogEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerItemErrorLogEventAdopt(id objc.ID) *PlayerItemErrorLogEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &PlayerItemErrorLogEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PlayerItemErrorLogEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlayerItemErrorLogEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlayerItemErrorLogEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPlayerItemErrorLogEvent creates a new PlayerItemErrorLogEvent.
 func NewPlayerItemErrorLogEvent() *PlayerItemErrorLogEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerItemErrorLogEvent")), objc.RegisterName("new"))
-	return &PlayerItemErrorLogEvent{inner: raw.AVPlayerItemErrorLogEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerItemErrorLogEvent")), objc.RegisterName("new"))
+	return playerItemErrorLogEventAdopt(_id)
 }
 
 // The date and time when the error occured. Can be nil. If nil is returned the date is unknown. Corresponds to "date". This property is not observable.
-//
-// Date calls the underlying Date.
-func (x *PlayerItemErrorLogEvent) Date() *foundation.NSDate {
-	return x.inner.Date()
+func (x *PlayerItemErrorLogEvent) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+	return obj.Wrap(_r)
 }
 
 // The URI of the playback item. Can be nil. If nil is returned the URI is unknown. Corresponds to "uri". This property is not observable.
-//
-// URI calls the underlying URI.
 func (x *PlayerItemErrorLogEvent) URI() string {
-	_r := x.inner.URI()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URI"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The IP address of the server that was the source of the error. Can be nil. If nil is returned the address is unknown. Can be either an IPv4 or IPv6 address. Corresponds to "s-ip". This property is not observable.
-//
-// ServerAddress calls the underlying ServerAddress.
 func (x *PlayerItemErrorLogEvent) ServerAddress() string {
-	_r := x.inner.ServerAddress()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverAddress"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // A GUID that identifies the playback session. This value is used in HTTP requests. Can be nil. If nil is returned the GUID is unknown. Corresponds to "cs-guid". This property is not observable.
-//
-// PlaybackSessionID calls the underlying PlaybackSessionID.
 func (x *PlayerItemErrorLogEvent) PlaybackSessionID() string {
-	_r := x.inner.PlaybackSessionID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playbackSessionID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // A unique error code identifier. Corresponds to "status". This property is not observable.
-//
-// ErrorStatusCode calls the underlying ErrorStatusCode.
 func (x *PlayerItemErrorLogEvent) ErrorStatusCode() int {
-	return x.inner.ErrorStatusCode()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("errorStatusCode"))
+	return _r
 }
 
 // The domain of the error. Corresponds to "domain". This property is not observable.
-//
-// ErrorDomain calls the underlying ErrorDomain.
 func (x *PlayerItemErrorLogEvent) ErrorDomain() string {
-	_r := x.inner.ErrorDomain()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorDomain"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // A description of the error encountered. Can be nil. If nil is returned further information is not available. Corresponds to "comment". This property is not observable.
-//
-// ErrorComment calls the underlying ErrorComment.
 func (x *PlayerItemErrorLogEvent) ErrorComment() string {
-	_r := x.inner.ErrorComment()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorComment"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The HTTP header fields returned by the server, if an HTTP response was received as part of this error. See -[NSHTTPURLResponse allHeaderFields] for more information.
-//
-// AllHTTPResponseHeaderFields calls the underlying AllHTTPResponseHeaderFields.
-func (x *PlayerItemErrorLogEvent) AllHTTPResponseHeaderFields() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	return x.inner.AllHTTPResponseHeaderFields()
+func (x *PlayerItemErrorLogEvent) AllHTTPResponseHeaderFields() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allHTTPResponseHeaderFields"))
+	return obj.Wrap(_r)
 }
 
 // PlayerItemErrorLogEventable is the interface implemented by [PlayerItemErrorLogEvent], for mocking and DI.
 type PlayerItemErrorLogEventable interface {
-	Unwrap() *raw.AVPlayerItemErrorLogEvent
-	Date() *foundation.NSDate
+	obj.Object
+	Date() obj.Object
 	URI() string
 	ServerAddress() string
 	PlaybackSessionID() string
 	ErrorStatusCode() int
 	ErrorDomain() string
 	ErrorComment() string
-	AllHTTPResponseHeaderFields() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
+	AllHTTPResponseHeaderFields() obj.Object
 }
 
 var _ PlayerItemErrorLogEventable = (*PlayerItemErrorLogEvent)(nil)

@@ -5,157 +5,173 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that defines the context for a single payment token in a payment request for multimerchant payments.
 //
-// PaymentTokenContext wraps [raw.PKPaymentTokenContext] with a fluent Go API.
+// PaymentTokenContext is an idiomatic wrapper over the Objective-C class PKPaymentTokenContext.
 type PaymentTokenContext struct {
-	inner *raw.PKPaymentTokenContext
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKPaymentTokenContext].
-func (x *PaymentTokenContext) Unwrap() *raw.PKPaymentTokenContext { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PaymentTokenContext) ID() objc.ID { return x.inner.Ptr() }
-
-// PaymentTokenContextFromID adopts an existing object pointer as a PaymentTokenContext (nil for 0).
+// PaymentTokenContextFromID adopts an existing Objective-C object as a PaymentTokenContext
+// (nil for 0), retaining it and registering a release finalizer.
 func PaymentTokenContextFromID(id objc.ID) *PaymentTokenContext {
 	if id == 0 {
 		return nil
 	}
-	return &PaymentTokenContext{inner: raw.PKPaymentTokenContextFromID(id)}
+	x := &PaymentTokenContext{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// paymentTokenContextAdopt wraps an Objective-C object that this code just created as a
+// PaymentTokenContext (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paymentTokenContextAdopt(id objc.ID) *PaymentTokenContext {
+	if id == 0 {
+		return nil
+	}
+	x := &PaymentTokenContext{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PaymentTokenContext) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PaymentTokenContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PaymentTokenContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Create a payment token context for a single merchant.
 //
-// NewPaymentTokenContextWithMerchantIdentifierExternalIdentifierMerchantNameMerchantDomainAmount creates a new [PaymentTokenContext].
-func NewPaymentTokenContextWithMerchantIdentifierExternalIdentifierMerchantNameMerchantDomainAmount(merchantIdentifier string, externalIdentifier string, merchantName string, merchantDomain string, amount *foundation.NSDecimalNumber) *PaymentTokenContext {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentTokenContext")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMerchantIdentifier:externalIdentifier:merchantName:merchantDomain:amount:"), foundation.NSStringStringWithUTF8String(merchantIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(externalIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(merchantName).Ptr(), foundation.NSStringStringWithUTF8String(merchantDomain).Ptr(), amount.Ptr())
-	return &PaymentTokenContext{inner: raw.PKPaymentTokenContextFromID(_id)}
+// NewPaymentTokenContextWithMerchantIdentifierExternalIdentifierMerchantNameMerchantDomainAmount creates a new PaymentTokenContext.
+func NewPaymentTokenContextWithMerchantIdentifierExternalIdentifierMerchantNameMerchantDomainAmount(merchantIdentifier string, externalIdentifier string, merchantName string, merchantDomain string, amount obj.Object) *PaymentTokenContext {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentTokenContext")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMerchantIdentifier:externalIdentifier:merchantName:merchantDomain:amount:"), purego.NSString(merchantIdentifier), purego.NSString(externalIdentifier), purego.NSString(merchantName), purego.NSString(merchantDomain), objref.IDOf(amount))
+	return paymentTokenContextAdopt(_id)
 }
 
 // The Apply Pay merchant identifier.
 //
-// WithMerchantIdentifier sets the merchantIdentifier property and returns the receiver for chaining.
+// WithMerchantIdentifier sets merchantIdentifier and returns the receiver so calls can be chained.
 func (x *PaymentTokenContext) WithMerchantIdentifier(merchantIdentifier string) *PaymentTokenContext {
-	x.inner.SetMerchantIdentifier(foundation.NSStringStringWithUTF8String(merchantIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMerchantIdentifier:"), purego.NSString(merchantIdentifier))
 	return x
 }
 
 // An external identifier for the merchant.
 //
-// WithExternalIdentifier sets the externalIdentifier property and returns the receiver for chaining.
+// WithExternalIdentifier sets externalIdentifier and returns the receiver so calls can be chained.
 func (x *PaymentTokenContext) WithExternalIdentifier(externalIdentifier string) *PaymentTokenContext {
-	x.inner.SetExternalIdentifier(foundation.NSStringStringWithUTF8String(externalIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExternalIdentifier:"), purego.NSString(externalIdentifier))
 	return x
 }
 
 // The merchant’s display name that the Apple Pay server associates with the payment token.
 //
-// WithMerchantName sets the merchantName property and returns the receiver for chaining.
+// WithMerchantName sets merchantName and returns the receiver so calls can be chained.
 func (x *PaymentTokenContext) WithMerchantName(merchantName string) *PaymentTokenContext {
-	x.inner.SetMerchantName(foundation.NSStringStringWithUTF8String(merchantName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMerchantName:"), purego.NSString(merchantName))
 	return x
 }
 
 // The merchant’s top-level domain that the Apple Pay server associates with the payment token.
 //
-// WithMerchantDomain sets the merchantDomain property and returns the receiver for chaining.
+// WithMerchantDomain sets merchantDomain and returns the receiver so calls can be chained.
 func (x *PaymentTokenContext) WithMerchantDomain(merchantDomain string) *PaymentTokenContext {
-	x.inner.SetMerchantDomain(foundation.NSStringStringWithUTF8String(merchantDomain))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMerchantDomain:"), purego.NSString(merchantDomain))
 	return x
 }
 
 // The amount to authorize for the payment token.
 //
-// WithAmount sets the amount property and returns the receiver for chaining.
-func (x *PaymentTokenContext) WithAmount(amount *foundation.NSDecimalNumber) *PaymentTokenContext {
-	x.inner.SetAmount(amount)
+// WithAmount sets amount and returns the receiver so calls can be chained.
+func (x *PaymentTokenContext) WithAmount(amount obj.Object) *PaymentTokenContext {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return x
 }
 
-// MerchantIdentifier calls the underlying MerchantIdentifier.
 func (x *PaymentTokenContext) MerchantIdentifier() string {
-	_r := x.inner.MerchantIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("merchantIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMerchantIdentifier calls the underlying SetMerchantIdentifier.
 func (x *PaymentTokenContext) SetMerchantIdentifier(merchantIdentifier string) {
-	x.inner.SetMerchantIdentifier(foundation.NSStringStringWithUTF8String(merchantIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMerchantIdentifier:"), purego.NSString(merchantIdentifier))
 }
 
-// ExternalIdentifier calls the underlying ExternalIdentifier.
 func (x *PaymentTokenContext) ExternalIdentifier() string {
-	_r := x.inner.ExternalIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("externalIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetExternalIdentifier calls the underlying SetExternalIdentifier.
 func (x *PaymentTokenContext) SetExternalIdentifier(externalIdentifier string) {
-	x.inner.SetExternalIdentifier(foundation.NSStringStringWithUTF8String(externalIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExternalIdentifier:"), purego.NSString(externalIdentifier))
 }
 
-// MerchantName calls the underlying MerchantName.
 func (x *PaymentTokenContext) MerchantName() string {
-	_r := x.inner.MerchantName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("merchantName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMerchantName calls the underlying SetMerchantName.
 func (x *PaymentTokenContext) SetMerchantName(merchantName string) {
-	x.inner.SetMerchantName(foundation.NSStringStringWithUTF8String(merchantName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMerchantName:"), purego.NSString(merchantName))
 }
 
-// MerchantDomain calls the underlying MerchantDomain.
 func (x *PaymentTokenContext) MerchantDomain() string {
-	_r := x.inner.MerchantDomain()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("merchantDomain"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMerchantDomain calls the underlying SetMerchantDomain.
 func (x *PaymentTokenContext) SetMerchantDomain(merchantDomain string) {
-	x.inner.SetMerchantDomain(foundation.NSStringStringWithUTF8String(merchantDomain))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMerchantDomain:"), purego.NSString(merchantDomain))
 }
 
-// Amount calls the underlying Amount.
-func (x *PaymentTokenContext) Amount() *foundation.NSDecimalNumber {
-	return x.inner.Amount()
+func (x *PaymentTokenContext) Amount() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("amount"))
+	return obj.Wrap(_r)
 }
 
-// SetAmount calls the underlying SetAmount.
-func (x *PaymentTokenContext) SetAmount(amount *foundation.NSDecimalNumber) {
-	x.inner.SetAmount(amount)
+func (x *PaymentTokenContext) SetAmount(amount obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 }
 
 // PaymentTokenContextable is the interface implemented by [PaymentTokenContext], for mocking and DI.
 type PaymentTokenContextable interface {
-	Unwrap() *raw.PKPaymentTokenContext
+	obj.Object
 	WithMerchantIdentifier(merchantIdentifier string) *PaymentTokenContext
 	WithExternalIdentifier(externalIdentifier string) *PaymentTokenContext
 	WithMerchantName(merchantName string) *PaymentTokenContext
 	WithMerchantDomain(merchantDomain string) *PaymentTokenContext
-	WithAmount(amount *foundation.NSDecimalNumber) *PaymentTokenContext
+	WithAmount(amount obj.Object) *PaymentTokenContext
 	MerchantIdentifier() string
 	SetMerchantIdentifier(merchantIdentifier string)
 	ExternalIdentifier() string
@@ -164,8 +180,8 @@ type PaymentTokenContextable interface {
 	SetMerchantName(merchantName string)
 	MerchantDomain() string
 	SetMerchantDomain(merchantDomain string)
-	Amount() *foundation.NSDecimalNumber
-	SetAmount(amount *foundation.NSDecimalNumber)
+	Amount() obj.Object
+	SetAmount(amount obj.Object)
 }
 
 var _ PaymentTokenContextable = (*PaymentTokenContext)(nil)

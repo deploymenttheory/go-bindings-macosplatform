@@ -5,104 +5,128 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A descriptor of an argument’s format and where its data is in memory.
 //
-// AttributeDescriptor wraps [raw.MTLAttributeDescriptor] with a fluent Go API.
+// AttributeDescriptor is an idiomatic wrapper over the Objective-C class MTLAttributeDescriptor.
 type AttributeDescriptor struct {
-	inner *raw.MTLAttributeDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLAttributeDescriptor].
-func (x *AttributeDescriptor) Unwrap() *raw.MTLAttributeDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AttributeDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// AttributeDescriptorFromID adopts an existing object pointer as a AttributeDescriptor (nil for 0).
+// AttributeDescriptorFromID adopts an existing Objective-C object as a AttributeDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func AttributeDescriptorFromID(id objc.ID) *AttributeDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &AttributeDescriptor{inner: raw.MTLAttributeDescriptorFromID(id)}
+	x := &AttributeDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAttributeDescriptor creates a new [AttributeDescriptor].
+// attributeDescriptorAdopt wraps an Objective-C object that this code just created as a
+// AttributeDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func attributeDescriptorAdopt(id objc.ID) *AttributeDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &AttributeDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AttributeDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AttributeDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AttributeDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAttributeDescriptor creates a new AttributeDescriptor.
 func NewAttributeDescriptor() *AttributeDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLAttributeDescriptor")), objc.RegisterName("new"))
-	return &AttributeDescriptor{inner: raw.MTLAttributeDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLAttributeDescriptor")), objc.RegisterName("new"))
+	return attributeDescriptorAdopt(_id)
 }
 
 // The format of the attribute’s data.
 //
-// WithFormat sets the format property and returns the receiver for chaining.
-func (x *AttributeDescriptor) WithFormat(format MTLAttributeFormat) *AttributeDescriptor {
-	x.inner.SetFormat(raw.MTLAttributeFormat(format))
+// WithFormat sets format and returns the receiver so calls can be chained.
+func (x *AttributeDescriptor) WithFormat(format AttributeFormat) *AttributeDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), format)
 	return x
 }
 
 // The offset, in bytes, from the start of the buffer that contains the attribute data to the start of the data itself.
 //
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *AttributeDescriptor) WithOffset(offset uint) *AttributeDescriptor {
-	x.inner.SetOffset(offset)
+// WithOffset sets offset and returns the receiver so calls can be chained.
+func (x *AttributeDescriptor) WithOffset(offset int) *AttributeDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 	return x
 }
 
 // The index in the buffer argument table for the buffer that contains the data for this attribute.
 //
-// WithBufferIndex sets the bufferIndex property and returns the receiver for chaining.
-func (x *AttributeDescriptor) WithBufferIndex(bufferIndex uint) *AttributeDescriptor {
-	x.inner.SetBufferIndex(bufferIndex)
+// WithBufferIndex sets bufferIndex and returns the receiver so calls can be chained.
+func (x *AttributeDescriptor) WithBufferIndex(bufferIndex int) *AttributeDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferIndex:"), bufferIndex)
 	return x
 }
 
-// Format calls the underlying Format.
-func (x *AttributeDescriptor) Format() MTLAttributeFormat {
-	return MTLAttributeFormat(x.inner.Format())
+func (x *AttributeDescriptor) Format() AttributeFormat {
+	_r := objc.Send[AttributeFormat](objref.IDOf(x), objc.RegisterName("format"))
+	return _r
 }
 
-// SetFormat calls the underlying SetFormat.
-func (x *AttributeDescriptor) SetFormat(format MTLAttributeFormat) {
-	x.inner.SetFormat(raw.MTLAttributeFormat(format))
+func (x *AttributeDescriptor) SetFormat(format AttributeFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormat:"), format)
 }
 
-// Offset calls the underlying Offset.
-func (x *AttributeDescriptor) Offset() uint {
-	return x.inner.Offset()
+func (x *AttributeDescriptor) Offset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
+	return _r
 }
 
-// SetOffset calls the underlying SetOffset.
-func (x *AttributeDescriptor) SetOffset(offset uint) {
-	x.inner.SetOffset(offset)
+func (x *AttributeDescriptor) SetOffset(offset int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
 }
 
-// BufferIndex calls the underlying BufferIndex.
-func (x *AttributeDescriptor) BufferIndex() uint {
-	return x.inner.BufferIndex()
+func (x *AttributeDescriptor) BufferIndex() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bufferIndex"))
+	return _r
 }
 
-// SetBufferIndex calls the underlying SetBufferIndex.
-func (x *AttributeDescriptor) SetBufferIndex(bufferIndex uint) {
-	x.inner.SetBufferIndex(bufferIndex)
+func (x *AttributeDescriptor) SetBufferIndex(bufferIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferIndex:"), bufferIndex)
 }
 
 // AttributeDescriptorable is the interface implemented by [AttributeDescriptor], for mocking and DI.
 type AttributeDescriptorable interface {
-	Unwrap() *raw.MTLAttributeDescriptor
-	WithFormat(format MTLAttributeFormat) *AttributeDescriptor
-	WithOffset(offset uint) *AttributeDescriptor
-	WithBufferIndex(bufferIndex uint) *AttributeDescriptor
-	Format() MTLAttributeFormat
-	SetFormat(format MTLAttributeFormat)
-	Offset() uint
-	SetOffset(offset uint)
-	BufferIndex() uint
-	SetBufferIndex(bufferIndex uint)
+	obj.Object
+	WithFormat(format AttributeFormat) *AttributeDescriptor
+	WithOffset(offset int) *AttributeDescriptor
+	WithBufferIndex(bufferIndex int) *AttributeDescriptor
+	Format() AttributeFormat
+	SetFormat(format AttributeFormat)
+	Offset() int
+	SetOffset(offset int)
+	BufferIndex() int
+	SetBufferIndex(bufferIndex int)
 }
 
 var _ AttributeDescriptorable = (*AttributeDescriptor)(nil)

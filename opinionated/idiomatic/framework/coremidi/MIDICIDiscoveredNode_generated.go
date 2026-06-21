@@ -5,76 +5,98 @@
 package coremidi
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A discovered MIDI-CI node that represents a MIDI source and destination that respond to capability inquiries.
 //
-// CIDiscoveredNode wraps [raw.MIDICIDiscoveredNode] with a fluent Go API.
+// CIDiscoveredNode is an idiomatic wrapper over the Objective-C class MIDICIDiscoveredNode.
 type CIDiscoveredNode struct {
-	inner *raw.MIDICIDiscoveredNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MIDICIDiscoveredNode].
-func (x *CIDiscoveredNode) Unwrap() *raw.MIDICIDiscoveredNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CIDiscoveredNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CIDiscoveredNodeFromID adopts an existing object pointer as a CIDiscoveredNode (nil for 0).
+// CIDiscoveredNodeFromID adopts an existing Objective-C object as a CIDiscoveredNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CIDiscoveredNodeFromID(id objc.ID) *CIDiscoveredNode {
 	if id == 0 {
 		return nil
 	}
-	return &CIDiscoveredNode{inner: raw.MIDICIDiscoveredNodeFromID(id)}
+	x := &CIDiscoveredNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCIDiscoveredNode creates a new [CIDiscoveredNode].
-func NewCIDiscoveredNode() *CIDiscoveredNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICIDiscoveredNode")), objc.RegisterName("new"))
-	return &CIDiscoveredNode{inner: raw.MIDICIDiscoveredNodeFromID(_id)}
-}
-
-// Destination calls the underlying Destination.
-func (x *CIDiscoveredNode) Destination() uint {
-	return x.inner.Destination()
-}
-
-// DeviceInfo calls the underlying DeviceInfo.
-func (x *CIDiscoveredNode) DeviceInfo() *CIDeviceInfo {
-	_r := x.inner.DeviceInfo()
-	if _r == nil {
+// cIDiscoveredNodeAdopt wraps an Objective-C object that this code just created as a
+// CIDiscoveredNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cIDiscoveredNodeAdopt(id objc.ID) *CIDiscoveredNode {
+	if id == 0 {
 		return nil
 	}
-	return &CIDeviceInfo{inner: _r}
+	x := &CIDiscoveredNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SupportsProfiles calls the underlying SupportsProfiles.
+// Description returns the object's -description text.
+func (x *CIDiscoveredNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CIDiscoveredNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CIDiscoveredNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCIDiscoveredNode creates a new CIDiscoveredNode.
+func NewCIDiscoveredNode() *CIDiscoveredNode {
+	_id := objc.Send[objc.ID](objc.ID(_class("MIDICIDiscoveredNode")), objc.RegisterName("new"))
+	return cIDiscoveredNodeAdopt(_id)
+}
+
+func (x *CIDiscoveredNode) Destination() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("destination"))
+	return _r
+}
+
+func (x *CIDiscoveredNode) DeviceInfo() *CIDeviceInfo {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceInfo"))
+	return CIDeviceInfoFromID(_r)
+}
+
 func (x *CIDiscoveredNode) SupportsProfiles() bool {
-	return x.inner.SupportsProfiles()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsProfiles"))
+	return _r
 }
 
-// SupportsProperties calls the underlying SupportsProperties.
 func (x *CIDiscoveredNode) SupportsProperties() bool {
-	return x.inner.SupportsProperties()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsProperties"))
+	return _r
 }
 
-// MaximumSysExSize calls the underlying MaximumSysExSize.
-func (x *CIDiscoveredNode) MaximumSysExSize() *foundation.NSNumber {
-	return x.inner.MaximumSysExSize()
+func (x *CIDiscoveredNode) MaximumSysExSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumSysExSize"))
+	return obj.Wrap(_r)
 }
 
 // CIDiscoveredNodeable is the interface implemented by [CIDiscoveredNode], for mocking and DI.
 type CIDiscoveredNodeable interface {
-	Unwrap() *raw.MIDICIDiscoveredNode
-	Destination() uint
+	obj.Object
+	Destination() int
 	DeviceInfo() *CIDeviceInfo
 	SupportsProfiles() bool
 	SupportsProperties() bool
-	MaximumSysExSize() *foundation.NSNumber
+	MaximumSysExSize() obj.Object
 }
 
 var _ CIDiscoveredNodeable = (*CIDiscoveredNode)(nil)

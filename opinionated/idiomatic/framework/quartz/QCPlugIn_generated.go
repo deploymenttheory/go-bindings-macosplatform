@@ -5,104 +5,119 @@
 package quartz
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A base class to subclass for writing custom patches.
 //
-// QCPlugIn wraps [raw.QCPlugIn] with a fluent Go API.
+// QCPlugIn is an idiomatic wrapper over the Objective-C class QCPlugIn.
 type QCPlugIn struct {
-	inner *raw.QCPlugIn
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QCPlugIn].
-func (x *QCPlugIn) Unwrap() *raw.QCPlugIn { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QCPlugIn) ID() objc.ID { return x.inner.Ptr() }
-
-// QCPlugInFromID adopts an existing object pointer as a QCPlugIn (nil for 0).
+// QCPlugInFromID adopts an existing Objective-C object as a QCPlugIn
+// (nil for 0), retaining it and registering a release finalizer.
 func QCPlugInFromID(id objc.ID) *QCPlugIn {
 	if id == 0 {
 		return nil
 	}
-	return &QCPlugIn{inner: raw.QCPlugInFromID(id)}
+	x := &QCPlugIn{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewQCPlugIn creates a new [QCPlugIn].
+// qCPlugInAdopt wraps an Objective-C object that this code just created as a
+// QCPlugIn (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func qCPlugInAdopt(id objc.ID) *QCPlugIn {
+	if id == 0 {
+		return nil
+	}
+	x := &QCPlugIn{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *QCPlugIn) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QCPlugIn) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QCPlugIn) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewQCPlugIn creates a new QCPlugIn.
 func NewQCPlugIn() *QCPlugIn {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QCPlugIn")), objc.RegisterName("new"))
-	return &QCPlugIn{inner: raw.QCPlugInFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("new"))
+	return qCPlugInAdopt(_id)
 }
 
 // Allows you to perform custom setup tasks before the Quartz Composer engine starts rendering.
-//
-// StartExecution calls the underlying StartExecution.
-func (x *QCPlugIn) StartExecution(context_ objc.ID) bool {
-	return x.inner.StartExecution(context_)
+func (x *QCPlugIn) StartExecution(context_ obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startExecution:"), objref.IDOf(context_))
+	return _r
 }
 
 // Allows you to perform custom tasks when the execution of the QCPlugIn object is resumed.
-//
-// EnableExecution calls the underlying EnableExecution.
-func (x *QCPlugIn) EnableExecution(context_ objc.ID) {
-	x.inner.EnableExecution(context_)
+func (x *QCPlugIn) EnableExecution(context_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableExecution:"), objref.IDOf(context_))
 }
 
-// ExecutionTimeForContextAtTimeWithArguments calls the underlying ExecutionTimeForContextAtTimeWithArguments.
-func (x *QCPlugIn) ExecutionTimeForContextAtTimeWithArguments(context_ objc.ID, time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) float64 {
-	return x.inner.ExecutionTimeForContextAtTimeWithArguments(context_, time_, arguments)
+func (x *QCPlugIn) ExecutionTimeForContextAtTimeWithArguments(context_ obj.Object, time_ float64, arguments obj.Object) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("executionTimeForContext:atTime:withArguments:"), objref.IDOf(context_), time_, objref.IDOf(arguments))
+	return _r
 }
 
 // Performs the processing or rendering tasks appropriate for the custom patch.
-//
-// ExecuteAtTimeWithArguments calls the underlying ExecuteAtTimeWithArguments.
-func (x *QCPlugIn) ExecuteAtTimeWithArguments(context_ objc.ID, time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool {
-	return x.inner.ExecuteAtTimeWithArguments(context_, time_, arguments)
+func (x *QCPlugIn) ExecuteAtTimeWithArguments(context_ obj.Object, time_ float64, arguments obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("execute:atTime:withArguments:"), objref.IDOf(context_), time_, objref.IDOf(arguments))
+	return _r
 }
 
 // Allows you to perform custom tasks when the execution of the QCPlugIn object is paused.
-//
-// DisableExecution calls the underlying DisableExecution.
-func (x *QCPlugIn) DisableExecution(context_ objc.ID) {
-	x.inner.DisableExecution(context_)
+func (x *QCPlugIn) DisableExecution(context_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableExecution:"), objref.IDOf(context_))
 }
 
 // Allows you to perform custom tasks when the QCPlugIn object stops executing.
-//
-// StopExecution calls the underlying StopExecution.
-func (x *QCPlugIn) StopExecution(context_ objc.ID) {
-	x.inner.StopExecution(context_)
+func (x *QCPlugIn) StopExecution(context_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopExecution:"), objref.IDOf(context_))
 }
 
 // A method implemented to override serialization.
-//
-// SerializedValueForKey calls the underlying SerializedValueForKey.
-func (x *QCPlugIn) SerializedValueForKey(key string) objc.ID {
-	return x.inner.SerializedValueForKey(foundation.NSStringStringWithUTF8String(key))
+func (x *QCPlugIn) SerializedValueForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serializedValueForKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
 // Provides custom deserialization for patch internal settings that were previously serialized using the method serializedValueForKey:.
-//
-// SetSerializedValueForKey calls the underlying SetSerializedValueForKey.
-func (x *QCPlugIn) SetSerializedValueForKey(serializedValue objc.ID, key string) {
-	x.inner.SetSerializedValueForKey(serializedValue, foundation.NSStringStringWithUTF8String(key))
+func (x *QCPlugIn) SetSerializedValueForKey(serializedValue obj.Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSerializedValue:forKey:"), objref.IDOf(serializedValue), purego.NSString(key))
 }
 
 // QCPlugInable is the interface implemented by [QCPlugIn], for mocking and DI.
 type QCPlugInable interface {
-	Unwrap() *raw.QCPlugIn
-	StartExecution(context_ objc.ID) bool
-	EnableExecution(context_ objc.ID)
-	ExecutionTimeForContextAtTimeWithArguments(context_ objc.ID, time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) float64
-	ExecuteAtTimeWithArguments(context_ objc.ID, time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool
-	DisableExecution(context_ objc.ID)
-	StopExecution(context_ objc.ID)
-	SerializedValueForKey(key string) objc.ID
-	SetSerializedValueForKey(serializedValue objc.ID, key string)
+	obj.Object
+	StartExecution(context_ obj.Object) bool
+	EnableExecution(context_ obj.Object)
+	ExecutionTimeForContextAtTimeWithArguments(context_ obj.Object, time_ float64, arguments obj.Object) float64
+	ExecuteAtTimeWithArguments(context_ obj.Object, time_ float64, arguments obj.Object) bool
+	DisableExecution(context_ obj.Object)
+	StopExecution(context_ obj.Object)
+	SerializedValueForKey(key string) obj.Object
+	SetSerializedValueForKey(serializedValue obj.Object, key string)
 }
 
 var _ QCPlugInable = (*QCPlugIn)(nil)

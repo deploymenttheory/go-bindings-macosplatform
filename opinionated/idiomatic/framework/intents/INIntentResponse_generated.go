@@ -5,65 +5,88 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Your response to an intent object.
 //
-// IntentResponse wraps [raw.INIntentResponse] with a fluent Go API.
+// IntentResponse is an idiomatic wrapper over the Objective-C class INIntentResponse.
 type IntentResponse struct {
-	inner *raw.INIntentResponse
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INIntentResponse].
-func (x *IntentResponse) Unwrap() *raw.INIntentResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IntentResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// IntentResponseFromID adopts an existing object pointer as a IntentResponse (nil for 0).
+// IntentResponseFromID adopts an existing Objective-C object as a IntentResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func IntentResponseFromID(id objc.ID) *IntentResponse {
 	if id == 0 {
 		return nil
 	}
-	return &IntentResponse{inner: raw.INIntentResponseFromID(id)}
+	x := &IntentResponse{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewIntentResponse creates a new [IntentResponse].
+// intentResponseAdopt wraps an Objective-C object that this code just created as a
+// IntentResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func intentResponseAdopt(id objc.ID) *IntentResponse {
+	if id == 0 {
+		return nil
+	}
+	x := &IntentResponse{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IntentResponse) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IntentResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IntentResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewIntentResponse creates a new IntentResponse.
 func NewIntentResponse() *IntentResponse {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INIntentResponse")), objc.RegisterName("new"))
-	return &IntentResponse{inner: raw.INIntentResponseFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("INIntentResponse")), objc.RegisterName("new"))
+	return intentResponseAdopt(_id)
 }
 
 // The user activity object to use when launching the app.
 //
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *IntentResponse) WithUserActivity(userActivity *foundation.NSUserActivity) *IntentResponse {
-	x.inner.SetUserActivity(userActivity)
+// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+func (x *IntentResponse) WithUserActivity(userActivity obj.Object) *IntentResponse {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// UserActivity calls the underlying UserActivity.
-func (x *IntentResponse) UserActivity() *foundation.NSUserActivity {
-	return x.inner.UserActivity()
+func (x *IntentResponse) UserActivity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userActivity"))
+	return obj.Wrap(_r)
 }
 
-// SetUserActivity calls the underlying SetUserActivity.
-func (x *IntentResponse) SetUserActivity(userActivity *foundation.NSUserActivity) {
-	x.inner.SetUserActivity(userActivity)
+func (x *IntentResponse) SetUserActivity(userActivity obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 }
-
-func (x *IntentResponse) asIntentResponse() *raw.INIntentResponse { return x.inner }
 
 // IntentResponseable is the interface implemented by [IntentResponse], for mocking and DI.
 type IntentResponseable interface {
-	Unwrap() *raw.INIntentResponse
-	WithUserActivity(userActivity *foundation.NSUserActivity) *IntentResponse
-	UserActivity() *foundation.NSUserActivity
-	SetUserActivity(userActivity *foundation.NSUserActivity)
+	obj.Object
+	WithUserActivity(userActivity obj.Object) *IntentResponse
+	UserActivity() obj.Object
+	SetUserActivity(userActivity obj.Object)
 }
 
 var _ IntentResponseable = (*IntentResponse)(nil)

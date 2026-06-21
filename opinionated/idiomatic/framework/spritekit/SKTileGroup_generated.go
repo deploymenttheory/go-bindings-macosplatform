@@ -5,81 +5,91 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A set of tiles that collectively define one type of terrain.
 //
-// TileGroup wraps [raw.SKTileGroup] with a fluent Go API.
+// TileGroup is an idiomatic wrapper over the Objective-C class SKTileGroup.
 type TileGroup struct {
-	inner *raw.SKTileGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKTileGroup].
-func (x *TileGroup) Unwrap() *raw.SKTileGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TileGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// TileGroupFromID adopts an existing object pointer as a TileGroup (nil for 0).
+// TileGroupFromID adopts an existing Objective-C object as a TileGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func TileGroupFromID(id objc.ID) *TileGroup {
 	if id == 0 {
 		return nil
 	}
-	return &TileGroup{inner: raw.SKTileGroupFromID(id)}
+	x := &TileGroup{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// tileGroupAdopt wraps an Objective-C object that this code just created as a
+// TileGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tileGroupAdopt(id objc.ID) *TileGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &TileGroup{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TileGroup) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TileGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TileGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates and initializes a simple tile group with a single tile definition.
 //
-// NewTileGroupWithTileDefinition creates a new [TileGroup].
-func NewTileGroupWithTileDefinition(tileDefinition *raw.SKTileDefinition) *TileGroup {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKTileGroup")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTileDefinition:"), tileDefinition.Ptr())
-	return &TileGroup{inner: raw.SKTileGroupFromID(_id)}
+// NewTileGroupWithTileDefinition creates a new TileGroup.
+func NewTileGroupWithTileDefinition(tileDefinition *TileDefinition) *TileGroup {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKTileGroup")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTileDefinition:"), objref.IDOf(tileDefinition))
+	return tileGroupAdopt(_id)
 }
 
 // Creates and initializes a tile group with the specified tile group rules.
 //
-// NewTileGroupWithRules creates a new [TileGroup].
-func NewTileGroupWithRules(rules *foundation.NSArray[*raw.SKTileGroupRule]) *TileGroup {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKTileGroup")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRules:"), rules.Ptr())
-	return &TileGroup{inner: raw.SKTileGroupFromID(_id)}
+// NewTileGroupWithRules creates a new TileGroup.
+func NewTileGroupWithRules(rules []*TileGroupRule) *TileGroup {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKTileGroup")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRules:"), purego.SliceToNSArray(rules, func(_v *TileGroupRule) objc.ID { return objref.IDOf(_v) }))
+	return tileGroupAdopt(_id)
 }
 
 // An array of SKTileGroupRule objects that the tile group uses to determine tile placement.
 //
-// WithRules sets the collection, converting the Go slice to an NSArray.
-func (x *TileGroup) WithRules(items ...*raw.SKTileGroupRule) *TileGroup {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetRules(foundation.NSArrayFromID[*raw.SKTileGroupRule](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SKTileGroupRule](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetRules(_arr)
+// WithRules sets the collection and returns the receiver so calls can be chained.
+func (x *TileGroup) WithRules(items ...*TileGroupRule) *TileGroup {
+	_arr := purego.SliceToNSArray(items, func(_v *TileGroupRule) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRules:"), _arr)
 	return x
 }
 
 // The receiver’s name.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *TileGroup) WithName(name string) *TileGroup {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
@@ -87,43 +97,34 @@ func (x *TileGroup) WithName(name string) *TileGroup {
 //
 // Rules returns the collection as a Go slice.
 func (x *TileGroup) Rules() []*TileGroupRule {
-	arr := x.inner.Rules()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TileGroupRule {
-		return &TileGroupRule{inner: raw.SKTileGroupRuleFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rules"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TileGroupRule { return TileGroupRuleFromID(_id) })
 }
 
-// SetRules calls the underlying SetRules.
-func (x *TileGroup) SetRules(rules *foundation.NSArray[*raw.SKTileGroupRule]) {
-	x.inner.SetRules(rules)
+func (x *TileGroup) SetRules(rules []*TileGroupRule) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRules:"), purego.SliceToNSArray(rules, func(_v *TileGroupRule) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Client-assignable name for the tile group. Defaults to nil.
-//
-// Name calls the underlying Name.
 func (x *TileGroup) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
 func (x *TileGroup) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
 // TileGroupable is the interface implemented by [TileGroup], for mocking and DI.
 type TileGroupable interface {
-	Unwrap() *raw.SKTileGroup
-	WithRules(items ...*raw.SKTileGroupRule) *TileGroup
+	obj.Object
+	WithRules(items ...*TileGroupRule) *TileGroup
 	WithName(name string) *TileGroup
 	Rules() []*TileGroupRule
-	SetRules(rules *foundation.NSArray[*raw.SKTileGroupRule])
+	SetRules(rules []*TileGroupRule)
 	Name() string
 	SetName(name string)
 }

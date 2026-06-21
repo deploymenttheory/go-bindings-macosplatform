@@ -5,19 +5,17 @@
 package quicklookui
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookui"
+	"github.com/ebitengine/purego/objc"
 )
 
-// SharedPreviewPanel calls the underlying QLPreviewPanelSharedPreviewPanel.
+// Returns the shared Quick Look preview panel instance.
 func SharedPreviewPanel() *PreviewPanel {
-	_r := raw.QLPreviewPanelSharedPreviewPanel()
-	if _r == nil {
-		return nil
-	}
-	return &PreviewPanel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("QLPreviewPanel")), objc.RegisterName("sharedPreviewPanel"))
+	return PreviewPanelFromID(_r)
 }
 
-// SharedPreviewPanelExists calls the underlying QLPreviewPanelSharedPreviewPanelExists.
+// Returns a Boolean value that indicates whether the system has created a shared Quick Look preview panel.
 func SharedPreviewPanelExists() bool {
-	return raw.QLPreviewPanelSharedPreviewPanelExists()
+	_r := objc.Send[bool](objc.ID(_class("QLPreviewPanel")), objc.RegisterName("sharedPreviewPanelExists"))
+	return _r
 }

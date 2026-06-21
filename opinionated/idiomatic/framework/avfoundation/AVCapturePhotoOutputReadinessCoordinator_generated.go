@@ -5,93 +5,90 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that monitors changes to a photo output’s capture readiness.
 //
-// CapturePhotoOutputReadinessCoordinator wraps [raw.AVCapturePhotoOutputReadinessCoordinator] with a fluent Go API.
+// CapturePhotoOutputReadinessCoordinator is an idiomatic wrapper over the Objective-C class AVCapturePhotoOutputReadinessCoordinator.
 type CapturePhotoOutputReadinessCoordinator struct {
-	inner *raw.AVCapturePhotoOutputReadinessCoordinator
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCapturePhotoOutputReadinessCoordinator].
-func (x *CapturePhotoOutputReadinessCoordinator) Unwrap() *raw.AVCapturePhotoOutputReadinessCoordinator {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CapturePhotoOutputReadinessCoordinator) ID() objc.ID { return x.inner.Ptr() }
-
-// CapturePhotoOutputReadinessCoordinatorFromID adopts an existing object pointer as a CapturePhotoOutputReadinessCoordinator (nil for 0).
+// CapturePhotoOutputReadinessCoordinatorFromID adopts an existing Objective-C object as a CapturePhotoOutputReadinessCoordinator
+// (nil for 0), retaining it and registering a release finalizer.
 func CapturePhotoOutputReadinessCoordinatorFromID(id objc.ID) *CapturePhotoOutputReadinessCoordinator {
 	if id == 0 {
 		return nil
 	}
-	return &CapturePhotoOutputReadinessCoordinator{inner: raw.AVCapturePhotoOutputReadinessCoordinatorFromID(id)}
+	x := &CapturePhotoOutputReadinessCoordinator{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// capturePhotoOutputReadinessCoordinatorAdopt wraps an Objective-C object that this code just created as a
+// CapturePhotoOutputReadinessCoordinator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func capturePhotoOutputReadinessCoordinatorAdopt(id objc.ID) *CapturePhotoOutputReadinessCoordinator {
+	if id == 0 {
+		return nil
+	}
+	x := &CapturePhotoOutputReadinessCoordinator{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CapturePhotoOutputReadinessCoordinator) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CapturePhotoOutputReadinessCoordinator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CapturePhotoOutputReadinessCoordinator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an object that helps coordinate user interface changes with a photo output that runs on a background queue.
 //
-// NewCapturePhotoOutputReadinessCoordinatorWithPhotoOutput creates a new [CapturePhotoOutputReadinessCoordinator].
-func NewCapturePhotoOutputReadinessCoordinatorWithPhotoOutput(photoOutput *raw.AVCapturePhotoOutput) *CapturePhotoOutputReadinessCoordinator {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCapturePhotoOutputReadinessCoordinator")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPhotoOutput:"), photoOutput.Ptr())
-	return &CapturePhotoOutputReadinessCoordinator{inner: raw.AVCapturePhotoOutputReadinessCoordinatorFromID(_id)}
-}
-
-// The coordinator’s delegate object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *CapturePhotoOutputReadinessCoordinator) WithDelegate(delegate raw.AVCapturePhotoOutputReadinessCoordinatorDelegate) *CapturePhotoOutputReadinessCoordinator {
-	x.inner.SetDelegate(delegate)
-	return x
+// NewCapturePhotoOutputReadinessCoordinatorWithPhotoOutput creates a new CapturePhotoOutputReadinessCoordinator.
+func NewCapturePhotoOutputReadinessCoordinatorWithPhotoOutput(photoOutput *CapturePhotoOutput) *CapturePhotoOutputReadinessCoordinator {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCapturePhotoOutputReadinessCoordinator")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPhotoOutput:"), objref.IDOf(photoOutput))
+	return capturePhotoOutputReadinessCoordinatorAdopt(_id)
 }
 
 // Tracks a capture request that uses the specified photo settings.
-//
-// StartTrackingCaptureRequestUsingPhotoSettings calls the underlying StartTrackingCaptureRequestUsingPhotoSettings.
-func (x *CapturePhotoOutputReadinessCoordinator) StartTrackingCaptureRequestUsingPhotoSettings(settings *raw.AVCapturePhotoSettings) {
-	x.inner.StartTrackingCaptureRequestUsingPhotoSettings(settings)
+func (x *CapturePhotoOutputReadinessCoordinator) StartTrackingCaptureRequestUsingPhotoSettings(settings *CapturePhotoSettings) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTrackingCaptureRequestUsingPhotoSettings:"), objref.IDOf(settings))
 }
 
 // Stop tracking the capture request represented by the specified photo setting’s unique identifier.
-//
-// StopTrackingCaptureRequestUsingPhotoSettingsUniqueID calls the underlying StopTrackingCaptureRequestUsingPhotoSettingsUniqueID.
 func (x *CapturePhotoOutputReadinessCoordinator) StopTrackingCaptureRequestUsingPhotoSettingsUniqueID(settingsUniqueID int64) {
-	x.inner.StopTrackingCaptureRequestUsingPhotoSettingsUniqueID(settingsUniqueID)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopTrackingCaptureRequestUsingPhotoSettingsUniqueID:"), settingsUniqueID)
 }
 
-// @property delegate @abstract The receiver's delegate, called on the main queue. @discussion The value of this property is an object conforming to the AVCapturePhotoOutputReadinessCoordinatorDelegate protocol that will receive a callback when the captureReadiness property changes. Callbacks are delivered on the main queue, allowing UI updates to be done directly in the callback. A callback with the initial value of captureReadiness is delivered when delegate is set.
-//
-// Delegate calls the underlying Delegate.
-func (x *CapturePhotoOutputReadinessCoordinator) Delegate() raw.AVCapturePhotoOutputReadinessCoordinatorDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *CapturePhotoOutputReadinessCoordinator) SetDelegate(delegate raw.AVCapturePhotoOutputReadinessCoordinatorDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// @property captureReadiness @abstract A value specifying whether the coordinator's photo output is ready to respond to new capture requests in a timely manner. @discussion The value incorporates the photo output's captureReadiness and any requests registered using -startTrackingCaptureRequestUsingPhotoSettings:. The value is updated before calling the -readinessCoordinator:captureReadinessDidChange: callback. See AVCapturePhotoOutput's captureReadiness documentation for a discussion of how to update shutter availability and appearance based on the captureReadiness value. This property is key-value observable and all change notifications are delivered on the main queue, allowing UI updates to be done directly in the callback.
-//
-// CaptureReadiness calls the underlying CaptureReadiness.
-func (x *CapturePhotoOutputReadinessCoordinator) CaptureReadiness() AVCapturePhotoOutputCaptureReadiness {
-	return AVCapturePhotoOutputCaptureReadiness(x.inner.CaptureReadiness())
+// A value specifying whether the coordinator's photo output is ready to respond to new capture requests in a timely manner. The value incorporates the photo output's captureReadiness and any requests registered using -startTrackingCaptureRequestUsingPhotoSettings:. The value is updated before calling the -readinessCoordinator:captureReadinessDidChange: callback. See AVCapturePhotoOutput's captureReadiness documentation for a discussion of how to update shutter availability and appearance based on the captureReadiness value. This property is key-value observable and all change notifications are delivered on the main queue, allowing UI updates to be done directly in the callback.
+func (x *CapturePhotoOutputReadinessCoordinator) CaptureReadiness() CapturePhotoOutputCaptureReadiness {
+	_r := objc.Send[CapturePhotoOutputCaptureReadiness](objref.IDOf(x), objc.RegisterName("captureReadiness"))
+	return _r
 }
 
 // CapturePhotoOutputReadinessCoordinatorable is the interface implemented by [CapturePhotoOutputReadinessCoordinator], for mocking and DI.
 type CapturePhotoOutputReadinessCoordinatorable interface {
-	Unwrap() *raw.AVCapturePhotoOutputReadinessCoordinator
-	WithDelegate(delegate raw.AVCapturePhotoOutputReadinessCoordinatorDelegate) *CapturePhotoOutputReadinessCoordinator
-	StartTrackingCaptureRequestUsingPhotoSettings(settings *raw.AVCapturePhotoSettings)
+	obj.Object
+	StartTrackingCaptureRequestUsingPhotoSettings(settings *CapturePhotoSettings)
 	StopTrackingCaptureRequestUsingPhotoSettingsUniqueID(settingsUniqueID int64)
-	Delegate() raw.AVCapturePhotoOutputReadinessCoordinatorDelegate
-	SetDelegate(delegate raw.AVCapturePhotoOutputReadinessCoordinatorDelegate)
-	CaptureReadiness() AVCapturePhotoOutputCaptureReadiness
+	CaptureReadiness() CapturePhotoOutputCaptureReadiness
 }
 
 var _ CapturePhotoOutputReadinessCoordinatorable = (*CapturePhotoOutputReadinessCoordinator)(nil)

@@ -5,439 +5,426 @@
 package fskit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// VolumeSupportedCapabilities wraps [raw.FSVolumeSupportedCapabilities] with a fluent Go API.
+// VolumeSupportedCapabilities is an idiomatic wrapper over the Objective-C class FSVolumeSupportedCapabilities.
 type VolumeSupportedCapabilities struct {
-	inner *raw.FSVolumeSupportedCapabilities
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSVolumeSupportedCapabilities].
-func (x *VolumeSupportedCapabilities) Unwrap() *raw.FSVolumeSupportedCapabilities { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VolumeSupportedCapabilities) ID() objc.ID { return x.inner.Ptr() }
-
-// VolumeSupportedCapabilitiesFromID adopts an existing object pointer as a VolumeSupportedCapabilities (nil for 0).
+// VolumeSupportedCapabilitiesFromID adopts an existing Objective-C object as a VolumeSupportedCapabilities
+// (nil for 0), retaining it and registering a release finalizer.
 func VolumeSupportedCapabilitiesFromID(id objc.ID) *VolumeSupportedCapabilities {
 	if id == 0 {
 		return nil
 	}
-	return &VolumeSupportedCapabilities{inner: raw.FSVolumeSupportedCapabilitiesFromID(id)}
+	x := &VolumeSupportedCapabilities{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVolumeSupportedCapabilities creates a new [VolumeSupportedCapabilities].
+// volumeSupportedCapabilitiesAdopt wraps an Objective-C object that this code just created as a
+// VolumeSupportedCapabilities (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func volumeSupportedCapabilitiesAdopt(id objc.ID) *VolumeSupportedCapabilities {
+	if id == 0 {
+		return nil
+	}
+	x := &VolumeSupportedCapabilities{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VolumeSupportedCapabilities) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VolumeSupportedCapabilities) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VolumeSupportedCapabilities) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVolumeSupportedCapabilities creates a new VolumeSupportedCapabilities.
 func NewVolumeSupportedCapabilities() *VolumeSupportedCapabilities {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSVolumeSupportedCapabilities")), objc.RegisterName("new"))
-	return &VolumeSupportedCapabilities{inner: raw.FSVolumeSupportedCapabilitiesFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("FSVolumeSupportedCapabilities")), objc.RegisterName("new"))
+	return volumeSupportedCapabilitiesAdopt(_id)
 }
 
 // A Boolean property that indicates whether the volume supports persistent object identifiers and can look up file system objects by their IDs.
 //
-// WithSupportsPersistentObjectIDs sets the supportsPersistentObjectIDs property and returns the receiver for chaining.
+// WithSupportsPersistentObjectIDs sets supportsPersistentObjectIDs and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithSupportsPersistentObjectIDs(supportsPersistentObjectIDs bool) *VolumeSupportedCapabilities {
-	x.inner.SetSupportsPersistentObjectIDs(supportsPersistentObjectIDs)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsPersistentObjectIDs:"), supportsPersistentObjectIDs)
 	return x
 }
 
 // A Boolean property that indicates whether the volume supports symbolic links.
 //
-// WithSupportsSymbolicLinks sets the supportsSymbolicLinks property and returns the receiver for chaining.
+// WithSupportsSymbolicLinks sets supportsSymbolicLinks and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithSupportsSymbolicLinks(supportsSymbolicLinks bool) *VolumeSupportedCapabilities {
-	x.inner.SetSupportsSymbolicLinks(supportsSymbolicLinks)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsSymbolicLinks:"), supportsSymbolicLinks)
 	return x
 }
 
 // A Boolean property that indicates whether the volume supports hard links.
 //
-// WithSupportsHardLinks sets the supportsHardLinks property and returns the receiver for chaining.
+// WithSupportsHardLinks sets supportsHardLinks and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithSupportsHardLinks(supportsHardLinks bool) *VolumeSupportedCapabilities {
-	x.inner.SetSupportsHardLinks(supportsHardLinks)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsHardLinks:"), supportsHardLinks)
 	return x
 }
 
 // A Boolean property that indicates whether the volume supports a journal used to speed recovery in case of unplanned restart, such as a power outage or crash. This property doesn't necessarily mean the volume is actively using a journal.
 //
-// WithSupportsJournal sets the supportsJournal property and returns the receiver for chaining.
+// WithSupportsJournal sets supportsJournal and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithSupportsJournal(supportsJournal bool) *VolumeSupportedCapabilities {
-	x.inner.SetSupportsJournal(supportsJournal)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsJournal:"), supportsJournal)
 	return x
 }
 
 // A Boolean property that indicates whether the volume currently uses a journal for speeding recovery after an unplanned shutdown.
 //
-// WithSupportsActiveJournal sets the supportsActiveJournal property and returns the receiver for chaining.
+// WithSupportsActiveJournal sets supportsActiveJournal and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithSupportsActiveJournal(supportsActiveJournal bool) *VolumeSupportedCapabilities {
-	x.inner.SetSupportsActiveJournal(supportsActiveJournal)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsActiveJournal:"), supportsActiveJournal)
 	return x
 }
 
 // A Boolan property that indicates the volume doesn't store reliable times for the root directory. If this value is `true` (Swift) or `YES` (Objective-C), the volume doesn't store reliable times for the root directory.
 //
-// WithDoesNotSupportRootTimes sets the doesNotSupportRootTimes property and returns the receiver for chaining.
+// WithDoesNotSupportRootTimes sets doesNotSupportRootTimes and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithDoesNotSupportRootTimes(doesNotSupportRootTimes bool) *VolumeSupportedCapabilities {
-	x.inner.SetDoesNotSupportRootTimes(doesNotSupportRootTimes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoesNotSupportRootTimes:"), doesNotSupportRootTimes)
 	return x
 }
 
 // A Boolean property that indicates whether the volume supports sparse files. A sparse file is a file that can have "holes" that the file system has never written to, and as a result don't consume space on disk.
 //
-// WithSupportsSparseFiles sets the supportsSparseFiles property and returns the receiver for chaining.
+// WithSupportsSparseFiles sets supportsSparseFiles and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithSupportsSparseFiles(supportsSparseFiles bool) *VolumeSupportedCapabilities {
-	x.inner.SetSupportsSparseFiles(supportsSparseFiles)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsSparseFiles:"), supportsSparseFiles)
 	return x
 }
 
 // A Boolean property that indicates whether the volume supports zero runs If this value is true, the volume keeps track of allocated but unwritten runs of a file so that it can substitute zeroes without actually writing zeroes to the media.
 //
-// WithSupportsZeroRuns sets the supportsZeroRuns property and returns the receiver for chaining.
+// WithSupportsZeroRuns sets supportsZeroRuns and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithSupportsZeroRuns(supportsZeroRuns bool) *VolumeSupportedCapabilities {
-	x.inner.SetSupportsZeroRuns(supportsZeroRuns)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsZeroRuns:"), supportsZeroRuns)
 	return x
 }
 
 // A Boolean property that indicates whether the volume supports fast results when fetching file system statistics. A true value means this volume hints to upper layers to indicate that `statfs(2)` is fast enough that its results need not be cached by the caller.
 //
-// WithSupportsFastStatFS sets the supportsFastStatFS property and returns the receiver for chaining.
+// WithSupportsFastStatFS sets supportsFastStatFS and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithSupportsFastStatFS(supportsFastStatFS bool) *VolumeSupportedCapabilities {
-	x.inner.SetSupportsFastStatFS(supportsFastStatFS)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsFastStatFS:"), supportsFastStatFS)
 	return x
 }
 
 // A Boolean property that indicates whether the volume supports file sizes larger than 4GB, and potentially up to 2TB.
 //
-// WithSupports2TBFiles sets the supports2TBFiles property and returns the receiver for chaining.
+// WithSupports2TBFiles sets supports2TBFiles and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithSupports2TBFiles(supports2TBFiles bool) *VolumeSupportedCapabilities {
-	x.inner.SetSupports2TBFiles(supports2TBFiles)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupports2TBFiles:"), supports2TBFiles)
 	return x
 }
 
 // A Boolean property that indicates whether the volume supports open deny modes. These are modes such as "open for read write, deny write".
 //
-// WithSupportsOpenDenyModes sets the supportsOpenDenyModes property and returns the receiver for chaining.
+// WithSupportsOpenDenyModes sets supportsOpenDenyModes and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithSupportsOpenDenyModes(supportsOpenDenyModes bool) *VolumeSupportedCapabilities {
-	x.inner.SetSupportsOpenDenyModes(supportsOpenDenyModes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsOpenDenyModes:"), supportsOpenDenyModes)
 	return x
 }
 
 // A Boolean property that indicates whether the volume supports hidden files. A `true` value means the volume supports the `UF_HIDDEN` file flag.
 //
-// WithSupportsHiddenFiles sets the supportsHiddenFiles property and returns the receiver for chaining.
+// WithSupportsHiddenFiles sets supportsHiddenFiles and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithSupportsHiddenFiles(supportsHiddenFiles bool) *VolumeSupportedCapabilities {
-	x.inner.SetSupportsHiddenFiles(supportsHiddenFiles)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsHiddenFiles:"), supportsHiddenFiles)
 	return x
 }
 
 // A Boolean property that indicates the volume doesn't support certain volume size reports. A true value means the volume doesn't support determining values for total data blocks, available blocks, or free blocks, as in `f_blocks`, `f_bavail`, and `f_bfree` in the struct `statFS` returned by `statfs(2)`.
 //
-// WithDoesNotSupportVolumeSizes sets the doesNotSupportVolumeSizes property and returns the receiver for chaining.
+// WithDoesNotSupportVolumeSizes sets doesNotSupportVolumeSizes and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithDoesNotSupportVolumeSizes(doesNotSupportVolumeSizes bool) *VolumeSupportedCapabilities {
-	x.inner.SetDoesNotSupportVolumeSizes(doesNotSupportVolumeSizes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoesNotSupportVolumeSizes:"), doesNotSupportVolumeSizes)
 	return x
 }
 
 // A Boolean property that indicates whether the volume supports 64-bit object IDs.
 //
-// WithSupports64BitObjectIDs sets the supports64BitObjectIDs property and returns the receiver for chaining.
+// WithSupports64BitObjectIDs sets supports64BitObjectIDs and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithSupports64BitObjectIDs(supports64BitObjectIDs bool) *VolumeSupportedCapabilities {
-	x.inner.SetSupports64BitObjectIDs(supports64BitObjectIDs)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupports64BitObjectIDs:"), supports64BitObjectIDs)
 	return x
 }
 
 // A Boolean property that indicates whether the volume supports document IDs for document revisions. A document ID is an identifier that persists across object ID changes.
 //
-// WithSupportsDocumentID sets the supportsDocumentID property and returns the receiver for chaining.
+// WithSupportsDocumentID sets supportsDocumentID and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithSupportsDocumentID(supportsDocumentID bool) *VolumeSupportedCapabilities {
-	x.inner.SetSupportsDocumentID(supportsDocumentID)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsDocumentID:"), supportsDocumentID)
 	return x
 }
 
 // A Boolean property that indicates the volume doesn't support immutable files. A `true` value means this volume doesn't support setting the `UF_IMMUTABLE` flag.
 //
-// WithDoesNotSupportImmutableFiles sets the doesNotSupportImmutableFiles property and returns the receiver for chaining.
+// WithDoesNotSupportImmutableFiles sets doesNotSupportImmutableFiles and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithDoesNotSupportImmutableFiles(doesNotSupportImmutableFiles bool) *VolumeSupportedCapabilities {
-	x.inner.SetDoesNotSupportImmutableFiles(doesNotSupportImmutableFiles)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoesNotSupportImmutableFiles:"), doesNotSupportImmutableFiles)
 	return x
 }
 
 // A Boolean property that indicates the volume doesn't set file permissions. If this value is `true` (Swift) or `YES` (Objective-C), the volume doesn't support setting file permissions.
 //
-// WithDoesNotSupportSettingFilePermissions sets the doesNotSupportSettingFilePermissions property and returns the receiver for chaining.
+// WithDoesNotSupportSettingFilePermissions sets doesNotSupportSettingFilePermissions and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithDoesNotSupportSettingFilePermissions(doesNotSupportSettingFilePermissions bool) *VolumeSupportedCapabilities {
-	x.inner.SetDoesNotSupportSettingFilePermissions(doesNotSupportSettingFilePermissions)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoesNotSupportSettingFilePermissions:"), doesNotSupportSettingFilePermissions)
 	return x
 }
 
 // A Boolean property that indicates whether the volume supports multiple logical file systems that share space in a single "partition."
 //
-// WithSupportsSharedSpace sets the supportsSharedSpace property and returns the receiver for chaining.
+// WithSupportsSharedSpace sets supportsSharedSpace and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithSupportsSharedSpace(supportsSharedSpace bool) *VolumeSupportedCapabilities {
-	x.inner.SetSupportsSharedSpace(supportsSharedSpace)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsSharedSpace:"), supportsSharedSpace)
 	return x
 }
 
 // A Boolean property that indicates whether the volume supports volume groups. Volume groups involve multiple logical file systems that the system can mount and unmount together, and for which the system can present common file system identifier information.
 //
-// WithSupportsVolumeGroups sets the supportsVolumeGroups property and returns the receiver for chaining.
+// WithSupportsVolumeGroups sets supportsVolumeGroups and returns the receiver so calls can be chained.
 func (x *VolumeSupportedCapabilities) WithSupportsVolumeGroups(supportsVolumeGroups bool) *VolumeSupportedCapabilities {
-	x.inner.SetSupportsVolumeGroups(supportsVolumeGroups)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsVolumeGroups:"), supportsVolumeGroups)
 	return x
 }
 
 // A value that indicates the volume's support for case sensitivity.
 //
-// WithCaseFormat sets the caseFormat property and returns the receiver for chaining.
-func (x *VolumeSupportedCapabilities) WithCaseFormat(caseFormat FSVolumeCaseFormat) *VolumeSupportedCapabilities {
-	x.inner.SetCaseFormat(raw.FSVolumeCaseFormat(caseFormat))
+// WithCaseFormat sets caseFormat and returns the receiver so calls can be chained.
+func (x *VolumeSupportedCapabilities) WithCaseFormat(caseFormat VolumeCaseFormat) *VolumeSupportedCapabilities {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseFormat:"), caseFormat)
 	return x
 }
 
 // A Boolean property that indicates whether the volume supports persistent object identifiers and can look up file system objects by their IDs.
-//
-// SupportsPersistentObjectIDs calls the underlying SupportsPersistentObjectIDs.
 func (x *VolumeSupportedCapabilities) SupportsPersistentObjectIDs() bool {
-	return x.inner.SupportsPersistentObjectIDs()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsPersistentObjectIDs"))
+	return _r
 }
 
-// SetSupportsPersistentObjectIDs calls the underlying SetSupportsPersistentObjectIDs.
 func (x *VolumeSupportedCapabilities) SetSupportsPersistentObjectIDs(supportsPersistentObjectIDs bool) {
-	x.inner.SetSupportsPersistentObjectIDs(supportsPersistentObjectIDs)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsPersistentObjectIDs:"), supportsPersistentObjectIDs)
 }
 
 // A Boolean property that indicates whether the volume supports symbolic links.
-//
-// SupportsSymbolicLinks calls the underlying SupportsSymbolicLinks.
 func (x *VolumeSupportedCapabilities) SupportsSymbolicLinks() bool {
-	return x.inner.SupportsSymbolicLinks()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsSymbolicLinks"))
+	return _r
 }
 
-// SetSupportsSymbolicLinks calls the underlying SetSupportsSymbolicLinks.
 func (x *VolumeSupportedCapabilities) SetSupportsSymbolicLinks(supportsSymbolicLinks bool) {
-	x.inner.SetSupportsSymbolicLinks(supportsSymbolicLinks)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsSymbolicLinks:"), supportsSymbolicLinks)
 }
 
 // A Boolean property that indicates whether the volume supports hard links.
-//
-// SupportsHardLinks calls the underlying SupportsHardLinks.
 func (x *VolumeSupportedCapabilities) SupportsHardLinks() bool {
-	return x.inner.SupportsHardLinks()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsHardLinks"))
+	return _r
 }
 
-// SetSupportsHardLinks calls the underlying SetSupportsHardLinks.
 func (x *VolumeSupportedCapabilities) SetSupportsHardLinks(supportsHardLinks bool) {
-	x.inner.SetSupportsHardLinks(supportsHardLinks)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsHardLinks:"), supportsHardLinks)
 }
 
 // A Boolean property that indicates whether the volume supports a journal used to speed recovery in case of unplanned restart, such as a power outage or crash. This property doesn't necessarily mean the volume is actively using a journal.
-//
-// SupportsJournal calls the underlying SupportsJournal.
 func (x *VolumeSupportedCapabilities) SupportsJournal() bool {
-	return x.inner.SupportsJournal()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsJournal"))
+	return _r
 }
 
-// SetSupportsJournal calls the underlying SetSupportsJournal.
 func (x *VolumeSupportedCapabilities) SetSupportsJournal(supportsJournal bool) {
-	x.inner.SetSupportsJournal(supportsJournal)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsJournal:"), supportsJournal)
 }
 
 // A Boolean property that indicates whether the volume currently uses a journal for speeding recovery after an unplanned shutdown.
-//
-// SupportsActiveJournal calls the underlying SupportsActiveJournal.
 func (x *VolumeSupportedCapabilities) SupportsActiveJournal() bool {
-	return x.inner.SupportsActiveJournal()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsActiveJournal"))
+	return _r
 }
 
-// SetSupportsActiveJournal calls the underlying SetSupportsActiveJournal.
 func (x *VolumeSupportedCapabilities) SetSupportsActiveJournal(supportsActiveJournal bool) {
-	x.inner.SetSupportsActiveJournal(supportsActiveJournal)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsActiveJournal:"), supportsActiveJournal)
 }
 
 // A Boolan property that indicates the volume doesn't store reliable times for the root directory. If this value is `true` (Swift) or `YES` (Objective-C), the volume doesn't store reliable times for the root directory.
-//
-// DoesNotSupportRootTimes calls the underlying DoesNotSupportRootTimes.
 func (x *VolumeSupportedCapabilities) DoesNotSupportRootTimes() bool {
-	return x.inner.DoesNotSupportRootTimes()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("doesNotSupportRootTimes"))
+	return _r
 }
 
-// SetDoesNotSupportRootTimes calls the underlying SetDoesNotSupportRootTimes.
 func (x *VolumeSupportedCapabilities) SetDoesNotSupportRootTimes(doesNotSupportRootTimes bool) {
-	x.inner.SetDoesNotSupportRootTimes(doesNotSupportRootTimes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoesNotSupportRootTimes:"), doesNotSupportRootTimes)
 }
 
 // A Boolean property that indicates whether the volume supports sparse files. A sparse file is a file that can have "holes" that the file system has never written to, and as a result don't consume space on disk.
-//
-// SupportsSparseFiles calls the underlying SupportsSparseFiles.
 func (x *VolumeSupportedCapabilities) SupportsSparseFiles() bool {
-	return x.inner.SupportsSparseFiles()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsSparseFiles"))
+	return _r
 }
 
-// SetSupportsSparseFiles calls the underlying SetSupportsSparseFiles.
 func (x *VolumeSupportedCapabilities) SetSupportsSparseFiles(supportsSparseFiles bool) {
-	x.inner.SetSupportsSparseFiles(supportsSparseFiles)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsSparseFiles:"), supportsSparseFiles)
 }
 
 // A Boolean property that indicates whether the volume supports zero runs If this value is true, the volume keeps track of allocated but unwritten runs of a file so that it can substitute zeroes without actually writing zeroes to the media.
-//
-// SupportsZeroRuns calls the underlying SupportsZeroRuns.
 func (x *VolumeSupportedCapabilities) SupportsZeroRuns() bool {
-	return x.inner.SupportsZeroRuns()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsZeroRuns"))
+	return _r
 }
 
-// SetSupportsZeroRuns calls the underlying SetSupportsZeroRuns.
 func (x *VolumeSupportedCapabilities) SetSupportsZeroRuns(supportsZeroRuns bool) {
-	x.inner.SetSupportsZeroRuns(supportsZeroRuns)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsZeroRuns:"), supportsZeroRuns)
 }
 
 // A Boolean property that indicates whether the volume supports fast results when fetching file system statistics. A true value means this volume hints to upper layers to indicate that `statfs(2)` is fast enough that its results need not be cached by the caller.
-//
-// SupportsFastStatFS calls the underlying SupportsFastStatFS.
 func (x *VolumeSupportedCapabilities) SupportsFastStatFS() bool {
-	return x.inner.SupportsFastStatFS()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsFastStatFS"))
+	return _r
 }
 
-// SetSupportsFastStatFS calls the underlying SetSupportsFastStatFS.
 func (x *VolumeSupportedCapabilities) SetSupportsFastStatFS(supportsFastStatFS bool) {
-	x.inner.SetSupportsFastStatFS(supportsFastStatFS)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsFastStatFS:"), supportsFastStatFS)
 }
 
 // A Boolean property that indicates whether the volume supports file sizes larger than 4GB, and potentially up to 2TB.
-//
-// Supports2TBFiles calls the underlying Supports2TBFiles.
 func (x *VolumeSupportedCapabilities) Supports2TBFiles() bool {
-	return x.inner.Supports2TBFiles()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supports2TBFiles"))
+	return _r
 }
 
-// SetSupports2TBFiles calls the underlying SetSupports2TBFiles.
 func (x *VolumeSupportedCapabilities) SetSupports2TBFiles(supports2TBFiles bool) {
-	x.inner.SetSupports2TBFiles(supports2TBFiles)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupports2TBFiles:"), supports2TBFiles)
 }
 
 // A Boolean property that indicates whether the volume supports open deny modes. These are modes such as "open for read write, deny write".
-//
-// SupportsOpenDenyModes calls the underlying SupportsOpenDenyModes.
 func (x *VolumeSupportedCapabilities) SupportsOpenDenyModes() bool {
-	return x.inner.SupportsOpenDenyModes()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsOpenDenyModes"))
+	return _r
 }
 
-// SetSupportsOpenDenyModes calls the underlying SetSupportsOpenDenyModes.
 func (x *VolumeSupportedCapabilities) SetSupportsOpenDenyModes(supportsOpenDenyModes bool) {
-	x.inner.SetSupportsOpenDenyModes(supportsOpenDenyModes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsOpenDenyModes:"), supportsOpenDenyModes)
 }
 
 // A Boolean property that indicates whether the volume supports hidden files. A `true` value means the volume supports the `UF_HIDDEN` file flag.
-//
-// SupportsHiddenFiles calls the underlying SupportsHiddenFiles.
 func (x *VolumeSupportedCapabilities) SupportsHiddenFiles() bool {
-	return x.inner.SupportsHiddenFiles()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsHiddenFiles"))
+	return _r
 }
 
-// SetSupportsHiddenFiles calls the underlying SetSupportsHiddenFiles.
 func (x *VolumeSupportedCapabilities) SetSupportsHiddenFiles(supportsHiddenFiles bool) {
-	x.inner.SetSupportsHiddenFiles(supportsHiddenFiles)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsHiddenFiles:"), supportsHiddenFiles)
 }
 
 // A Boolean property that indicates the volume doesn't support certain volume size reports. A true value means the volume doesn't support determining values for total data blocks, available blocks, or free blocks, as in `f_blocks`, `f_bavail`, and `f_bfree` in the struct `statFS` returned by `statfs(2)`.
-//
-// DoesNotSupportVolumeSizes calls the underlying DoesNotSupportVolumeSizes.
 func (x *VolumeSupportedCapabilities) DoesNotSupportVolumeSizes() bool {
-	return x.inner.DoesNotSupportVolumeSizes()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("doesNotSupportVolumeSizes"))
+	return _r
 }
 
-// SetDoesNotSupportVolumeSizes calls the underlying SetDoesNotSupportVolumeSizes.
 func (x *VolumeSupportedCapabilities) SetDoesNotSupportVolumeSizes(doesNotSupportVolumeSizes bool) {
-	x.inner.SetDoesNotSupportVolumeSizes(doesNotSupportVolumeSizes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoesNotSupportVolumeSizes:"), doesNotSupportVolumeSizes)
 }
 
 // A Boolean property that indicates whether the volume supports 64-bit object IDs.
-//
-// Supports64BitObjectIDs calls the underlying Supports64BitObjectIDs.
 func (x *VolumeSupportedCapabilities) Supports64BitObjectIDs() bool {
-	return x.inner.Supports64BitObjectIDs()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supports64BitObjectIDs"))
+	return _r
 }
 
-// SetSupports64BitObjectIDs calls the underlying SetSupports64BitObjectIDs.
 func (x *VolumeSupportedCapabilities) SetSupports64BitObjectIDs(supports64BitObjectIDs bool) {
-	x.inner.SetSupports64BitObjectIDs(supports64BitObjectIDs)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupports64BitObjectIDs:"), supports64BitObjectIDs)
 }
 
 // A Boolean property that indicates whether the volume supports document IDs for document revisions. A document ID is an identifier that persists across object ID changes.
-//
-// SupportsDocumentID calls the underlying SupportsDocumentID.
 func (x *VolumeSupportedCapabilities) SupportsDocumentID() bool {
-	return x.inner.SupportsDocumentID()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsDocumentID"))
+	return _r
 }
 
-// SetSupportsDocumentID calls the underlying SetSupportsDocumentID.
 func (x *VolumeSupportedCapabilities) SetSupportsDocumentID(supportsDocumentID bool) {
-	x.inner.SetSupportsDocumentID(supportsDocumentID)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsDocumentID:"), supportsDocumentID)
 }
 
 // A Boolean property that indicates the volume doesn't support immutable files. A `true` value means this volume doesn't support setting the `UF_IMMUTABLE` flag.
-//
-// DoesNotSupportImmutableFiles calls the underlying DoesNotSupportImmutableFiles.
 func (x *VolumeSupportedCapabilities) DoesNotSupportImmutableFiles() bool {
-	return x.inner.DoesNotSupportImmutableFiles()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("doesNotSupportImmutableFiles"))
+	return _r
 }
 
-// SetDoesNotSupportImmutableFiles calls the underlying SetDoesNotSupportImmutableFiles.
 func (x *VolumeSupportedCapabilities) SetDoesNotSupportImmutableFiles(doesNotSupportImmutableFiles bool) {
-	x.inner.SetDoesNotSupportImmutableFiles(doesNotSupportImmutableFiles)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoesNotSupportImmutableFiles:"), doesNotSupportImmutableFiles)
 }
 
 // A Boolean property that indicates the volume doesn't set file permissions. If this value is `true` (Swift) or `YES` (Objective-C), the volume doesn't support setting file permissions.
-//
-// DoesNotSupportSettingFilePermissions calls the underlying DoesNotSupportSettingFilePermissions.
 func (x *VolumeSupportedCapabilities) DoesNotSupportSettingFilePermissions() bool {
-	return x.inner.DoesNotSupportSettingFilePermissions()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("doesNotSupportSettingFilePermissions"))
+	return _r
 }
 
-// SetDoesNotSupportSettingFilePermissions calls the underlying SetDoesNotSupportSettingFilePermissions.
 func (x *VolumeSupportedCapabilities) SetDoesNotSupportSettingFilePermissions(doesNotSupportSettingFilePermissions bool) {
-	x.inner.SetDoesNotSupportSettingFilePermissions(doesNotSupportSettingFilePermissions)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoesNotSupportSettingFilePermissions:"), doesNotSupportSettingFilePermissions)
 }
 
 // A Boolean property that indicates whether the volume supports multiple logical file systems that share space in a single "partition."
-//
-// SupportsSharedSpace calls the underlying SupportsSharedSpace.
 func (x *VolumeSupportedCapabilities) SupportsSharedSpace() bool {
-	return x.inner.SupportsSharedSpace()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsSharedSpace"))
+	return _r
 }
 
-// SetSupportsSharedSpace calls the underlying SetSupportsSharedSpace.
 func (x *VolumeSupportedCapabilities) SetSupportsSharedSpace(supportsSharedSpace bool) {
-	x.inner.SetSupportsSharedSpace(supportsSharedSpace)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsSharedSpace:"), supportsSharedSpace)
 }
 
 // A Boolean property that indicates whether the volume supports volume groups. Volume groups involve multiple logical file systems that the system can mount and unmount together, and for which the system can present common file system identifier information.
-//
-// SupportsVolumeGroups calls the underlying SupportsVolumeGroups.
 func (x *VolumeSupportedCapabilities) SupportsVolumeGroups() bool {
-	return x.inner.SupportsVolumeGroups()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsVolumeGroups"))
+	return _r
 }
 
-// SetSupportsVolumeGroups calls the underlying SetSupportsVolumeGroups.
 func (x *VolumeSupportedCapabilities) SetSupportsVolumeGroups(supportsVolumeGroups bool) {
-	x.inner.SetSupportsVolumeGroups(supportsVolumeGroups)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsVolumeGroups:"), supportsVolumeGroups)
 }
 
 // A value that indicates the volume's support for case sensitivity.
-//
-// CaseFormat calls the underlying CaseFormat.
-func (x *VolumeSupportedCapabilities) CaseFormat() FSVolumeCaseFormat {
-	return FSVolumeCaseFormat(x.inner.CaseFormat())
+func (x *VolumeSupportedCapabilities) CaseFormat() VolumeCaseFormat {
+	_r := objc.Send[VolumeCaseFormat](objref.IDOf(x), objc.RegisterName("caseFormat"))
+	return _r
 }
 
-// SetCaseFormat calls the underlying SetCaseFormat.
-func (x *VolumeSupportedCapabilities) SetCaseFormat(caseFormat FSVolumeCaseFormat) {
-	x.inner.SetCaseFormat(raw.FSVolumeCaseFormat(caseFormat))
+func (x *VolumeSupportedCapabilities) SetCaseFormat(caseFormat VolumeCaseFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseFormat:"), caseFormat)
 }
 
 // VolumeSupportedCapabilitiesable is the interface implemented by [VolumeSupportedCapabilities], for mocking and DI.
 type VolumeSupportedCapabilitiesable interface {
-	Unwrap() *raw.FSVolumeSupportedCapabilities
+	obj.Object
 	WithSupportsPersistentObjectIDs(supportsPersistentObjectIDs bool) *VolumeSupportedCapabilities
 	WithSupportsSymbolicLinks(supportsSymbolicLinks bool) *VolumeSupportedCapabilities
 	WithSupportsHardLinks(supportsHardLinks bool) *VolumeSupportedCapabilities
@@ -457,7 +444,7 @@ type VolumeSupportedCapabilitiesable interface {
 	WithDoesNotSupportSettingFilePermissions(doesNotSupportSettingFilePermissions bool) *VolumeSupportedCapabilities
 	WithSupportsSharedSpace(supportsSharedSpace bool) *VolumeSupportedCapabilities
 	WithSupportsVolumeGroups(supportsVolumeGroups bool) *VolumeSupportedCapabilities
-	WithCaseFormat(caseFormat FSVolumeCaseFormat) *VolumeSupportedCapabilities
+	WithCaseFormat(caseFormat VolumeCaseFormat) *VolumeSupportedCapabilities
 	SupportsPersistentObjectIDs() bool
 	SetSupportsPersistentObjectIDs(supportsPersistentObjectIDs bool)
 	SupportsSymbolicLinks() bool
@@ -496,8 +483,8 @@ type VolumeSupportedCapabilitiesable interface {
 	SetSupportsSharedSpace(supportsSharedSpace bool)
 	SupportsVolumeGroups() bool
 	SetSupportsVolumeGroups(supportsVolumeGroups bool)
-	CaseFormat() FSVolumeCaseFormat
-	SetCaseFormat(caseFormat FSVolumeCaseFormat)
+	CaseFormat() VolumeCaseFormat
+	SetCaseFormat(caseFormat VolumeCaseFormat)
 }
 
 var _ VolumeSupportedCapabilitiesable = (*VolumeSupportedCapabilities)(nil)

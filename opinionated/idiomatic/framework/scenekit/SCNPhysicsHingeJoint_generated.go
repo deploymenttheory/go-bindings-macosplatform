@@ -5,149 +5,80 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A physics behavior that connects two bodies and allows them to pivot around each other on a single axis.
 //
-// PhysicsHingeJoint wraps [raw.SCNPhysicsHingeJoint] with a fluent Go API.
+// PhysicsHingeJoint is an idiomatic wrapper over the Objective-C class SCNPhysicsHingeJoint.
 type PhysicsHingeJoint struct {
-	inner *raw.SCNPhysicsHingeJoint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNPhysicsHingeJoint].
-func (x *PhysicsHingeJoint) Unwrap() *raw.SCNPhysicsHingeJoint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhysicsHingeJoint) ID() objc.ID { return x.inner.Ptr() }
-
-// PhysicsHingeJointFromID adopts an existing object pointer as a PhysicsHingeJoint (nil for 0).
+// PhysicsHingeJointFromID adopts an existing Objective-C object as a PhysicsHingeJoint
+// (nil for 0), retaining it and registering a release finalizer.
 func PhysicsHingeJointFromID(id objc.ID) *PhysicsHingeJoint {
 	if id == 0 {
 		return nil
 	}
-	return &PhysicsHingeJoint{inner: raw.SCNPhysicsHingeJointFromID(id)}
+	x := &PhysicsHingeJoint{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPhysicsHingeJoint creates a new [PhysicsHingeJoint].
+// physicsHingeJointAdopt wraps an Objective-C object that this code just created as a
+// PhysicsHingeJoint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func physicsHingeJointAdopt(id objc.ID) *PhysicsHingeJoint {
+	if id == 0 {
+		return nil
+	}
+	x := &PhysicsHingeJoint{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PhysicsHingeJoint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PhysicsHingeJoint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PhysicsHingeJoint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPhysicsHingeJoint creates a new PhysicsHingeJoint.
 func NewPhysicsHingeJoint() *PhysicsHingeJoint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNPhysicsHingeJoint")), objc.RegisterName("new"))
-	return &PhysicsHingeJoint{inner: raw.SCNPhysicsHingeJointFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNPhysicsHingeJoint")), objc.RegisterName("new"))
+	return physicsHingeJointAdopt(_id)
 }
 
-// The axis that the hinge pivots around, relative to the node containing the first body.
-//
-// WithAxisA sets the axisA property and returns the receiver for chaining.
-func (x *PhysicsHingeJoint) WithAxisA(axisA raw.SCNVector3) *PhysicsHingeJoint {
-	x.inner.SetAxisA(axisA)
-	return x
-}
-
-// The point at which the hinge connects, relative to the node containing the first body.
-//
-// WithAnchorA sets the anchorA property and returns the receiver for chaining.
-func (x *PhysicsHingeJoint) WithAnchorA(anchorA raw.SCNVector3) *PhysicsHingeJoint {
-	x.inner.SetAnchorA(anchorA)
-	return x
-}
-
-// The axis that the hinge pivots around, relative to the node containing the second body.
-//
-// WithAxisB sets the axisB property and returns the receiver for chaining.
-func (x *PhysicsHingeJoint) WithAxisB(axisB raw.SCNVector3) *PhysicsHingeJoint {
-	x.inner.SetAxisB(axisB)
-	return x
-}
-
-// The point at which the hinge connects, relative to the node containing the second body.
-//
-// WithAnchorB sets the anchorB property and returns the receiver for chaining.
-func (x *PhysicsHingeJoint) WithAnchorB(anchorB raw.SCNVector3) *PhysicsHingeJoint {
-	x.inner.SetAnchorB(anchorB)
-	return x
-}
-
-// BodyA calls the underlying BodyA.
 func (x *PhysicsHingeJoint) BodyA() *PhysicsBody {
-	_r := x.inner.BodyA()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyA"))
+	return PhysicsBodyFromID(_r)
 }
 
-// AxisA calls the underlying AxisA.
-func (x *PhysicsHingeJoint) AxisA() raw.SCNVector3 {
-	return x.inner.AxisA()
-}
-
-// SetAxisA calls the underlying SetAxisA.
-func (x *PhysicsHingeJoint) SetAxisA(axisA raw.SCNVector3) {
-	x.inner.SetAxisA(axisA)
-}
-
-// AnchorA calls the underlying AnchorA.
-func (x *PhysicsHingeJoint) AnchorA() raw.SCNVector3 {
-	return x.inner.AnchorA()
-}
-
-// SetAnchorA calls the underlying SetAnchorA.
-func (x *PhysicsHingeJoint) SetAnchorA(anchorA raw.SCNVector3) {
-	x.inner.SetAnchorA(anchorA)
-}
-
-// BodyB calls the underlying BodyB.
 func (x *PhysicsHingeJoint) BodyB() *PhysicsBody {
-	_r := x.inner.BodyB()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
-}
-
-// AxisB calls the underlying AxisB.
-func (x *PhysicsHingeJoint) AxisB() raw.SCNVector3 {
-	return x.inner.AxisB()
-}
-
-// SetAxisB calls the underlying SetAxisB.
-func (x *PhysicsHingeJoint) SetAxisB(axisB raw.SCNVector3) {
-	x.inner.SetAxisB(axisB)
-}
-
-// AnchorB calls the underlying AnchorB.
-func (x *PhysicsHingeJoint) AnchorB() raw.SCNVector3 {
-	return x.inner.AnchorB()
-}
-
-// SetAnchorB calls the underlying SetAnchorB.
-func (x *PhysicsHingeJoint) SetAnchorB(anchorB raw.SCNVector3) {
-	x.inner.SetAnchorB(anchorB)
-}
-
-func (x *PhysicsHingeJoint) asPhysicsBehavior() *raw.SCNPhysicsBehavior {
-	return &x.inner.SCNPhysicsBehavior
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyB"))
+	return PhysicsBodyFromID(_r)
 }
 
 // PhysicsHingeJointable is the interface implemented by [PhysicsHingeJoint], for mocking and DI.
 type PhysicsHingeJointable interface {
-	Unwrap() *raw.SCNPhysicsHingeJoint
-	WithAxisA(axisA raw.SCNVector3) *PhysicsHingeJoint
-	WithAnchorA(anchorA raw.SCNVector3) *PhysicsHingeJoint
-	WithAxisB(axisB raw.SCNVector3) *PhysicsHingeJoint
-	WithAnchorB(anchorB raw.SCNVector3) *PhysicsHingeJoint
+	obj.Object
 	BodyA() *PhysicsBody
-	AxisA() raw.SCNVector3
-	SetAxisA(axisA raw.SCNVector3)
-	AnchorA() raw.SCNVector3
-	SetAnchorA(anchorA raw.SCNVector3)
 	BodyB() *PhysicsBody
-	AxisB() raw.SCNVector3
-	SetAxisB(axisB raw.SCNVector3)
-	AnchorB() raw.SCNVector3
-	SetAnchorB(anchorB raw.SCNVector3)
 }
 
 var _ PhysicsHingeJointable = (*PhysicsHingeJoint)(nil)

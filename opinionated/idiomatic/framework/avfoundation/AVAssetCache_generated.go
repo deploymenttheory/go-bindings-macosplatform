@@ -5,74 +5,96 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that you use to inspect locally cached media data.
 //
-// AssetCache wraps [raw.AVAssetCache] with a fluent Go API.
+// AssetCache is an idiomatic wrapper over the Objective-C class AVAssetCache.
 type AssetCache struct {
-	inner *raw.AVAssetCache
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetCache].
-func (x *AssetCache) Unwrap() *raw.AVAssetCache { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetCache) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetCacheFromID adopts an existing object pointer as a AssetCache (nil for 0).
+// AssetCacheFromID adopts an existing Objective-C object as a AssetCache
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetCacheFromID(id objc.ID) *AssetCache {
 	if id == 0 {
 		return nil
 	}
-	return &AssetCache{inner: raw.AVAssetCacheFromID(id)}
+	x := &AssetCache{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAssetCache creates a new [AssetCache].
+// assetCacheAdopt wraps an Objective-C object that this code just created as a
+// AssetCache (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetCacheAdopt(id objc.ID) *AssetCache {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetCache{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetCache) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetCache) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetCache) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAssetCache creates a new AssetCache.
 func NewAssetCache() *AssetCache {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetCache")), objc.RegisterName("new"))
-	return &AssetCache{inner: raw.AVAssetCacheFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetCache")), objc.RegisterName("new"))
+	return assetCacheAdopt(_id)
 }
 
 // Returns an array of locally cached media selection options that are available for offline use.
-//
-// MediaSelectionOptionsInMediaSelectionGroup calls the underlying MediaSelectionOptionsInMediaSelectionGroup.
-func (x *AssetCache) MediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSArray[*raw.AVMediaSelectionOption] {
-	return x.inner.MediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup)
+func (x *AssetCache) MediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) []*MediaSelectionOption {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSelectionOptionsInMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *MediaSelectionOption { return MediaSelectionOptionFromID(_id) })
 }
 
 // Returns YES if a complete rendition of an AVAsset is available to be played without a network connection. An answer of YES does not indicate that any given media selection is available for offline playback. To determine if a specific media selection is available offline, see mediaSelectionOptionsInMediaSelectionGroup:.
-//
-// IsPlayableOffline calls the underlying IsPlayableOffline.
 func (x *AssetCache) IsPlayableOffline() bool {
-	return x.inner.IsPlayableOffline()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPlayableOffline"))
+	return _r
 }
 
 // For each AVMediaPresentationSelector defined by the AVCustomMediaSelectionScheme of an AVMediaSelectionGroup, returns the AVMediaPresentationSettings that can be satisfied for offline operations, e.g. playback.
-//
-// MediaPresentationSettingsForMediaSelectionGroup calls the underlying MediaPresentationSettingsForMediaSelectionGroup.
-func (x *AssetCache) MediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSDictionary[*raw.AVMediaPresentationSelector, objc.ID] {
-	return x.inner.MediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup)
+func (x *AssetCache) MediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaPresentationSettingsForMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
+	return obj.Wrap(_r)
 }
 
 // Returns an array of extended language tags for languages that can be selected for offline operations via use of the AVMediaSelectionGroup’s AVCustomMediaSelectionScheme.
-//
-// MediaPresentationLanguagesForMediaSelectionGroup calls the underlying MediaPresentationLanguagesForMediaSelectionGroup.
-func (x *AssetCache) MediaPresentationLanguagesForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSArray[*foundation.NSString] {
-	return x.inner.MediaPresentationLanguagesForMediaSelectionGroup(mediaSelectionGroup)
+func (x *AssetCache) MediaPresentationLanguagesForMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) []string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaPresentationLanguagesForMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // AssetCacheable is the interface implemented by [AssetCache], for mocking and DI.
 type AssetCacheable interface {
-	Unwrap() *raw.AVAssetCache
-	MediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSArray[*raw.AVMediaSelectionOption]
+	obj.Object
+	MediaSelectionOptionsInMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) []*MediaSelectionOption
 	IsPlayableOffline() bool
-	MediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSDictionary[*raw.AVMediaPresentationSelector, objc.ID]
-	MediaPresentationLanguagesForMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *foundation.NSArray[*foundation.NSString]
+	MediaPresentationSettingsForMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) obj.Object
+	MediaPresentationLanguagesForMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) []string
 }
 
 var _ AssetCacheable = (*AssetCache)(nil)

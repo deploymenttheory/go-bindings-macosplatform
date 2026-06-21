@@ -5,173 +5,66 @@
 package mpsndarray
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ArrayBinaryKernel wraps [raw.MPSNDArrayBinaryKernel] with a fluent Go API.
+// ArrayBinaryKernel is an idiomatic wrapper over the Objective-C class MPSNDArrayBinaryKernel.
 type ArrayBinaryKernel struct {
-	inner *raw.MPSNDArrayBinaryKernel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayBinaryKernel].
-func (x *ArrayBinaryKernel) Unwrap() *raw.MPSNDArrayBinaryKernel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArrayBinaryKernel) ID() objc.ID { return x.inner.Ptr() }
-
-// ArrayBinaryKernelFromID adopts an existing object pointer as a ArrayBinaryKernel (nil for 0).
+// ArrayBinaryKernelFromID adopts an existing Objective-C object as a ArrayBinaryKernel
+// (nil for 0), retaining it and registering a release finalizer.
 func ArrayBinaryKernelFromID(id objc.ID) *ArrayBinaryKernel {
 	if id == 0 {
 		return nil
 	}
-	return &ArrayBinaryKernel{inner: raw.MPSNDArrayBinaryKernelFromID(id)}
-}
-
-// NewArrayBinaryKernelWithDevice creates a new [ArrayBinaryKernel].
-func NewArrayBinaryKernelWithDevice(device metal.MTLDevice) *ArrayBinaryKernel {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayBinaryKernel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ArrayBinaryKernel{inner: raw.MPSNDArrayBinaryKernelFromID(_id)}
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *ArrayBinaryKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayBinaryKernel {
-	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	x := &ArrayBinaryKernel{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf                 The command buffer into which to encode the kernel @param      primarySourceArray     The primary source for the filter in an NSArray. @param      secondarySourceArray   The secondary source for the filter in an NSArray. @result     A newly allocated MPSNDArray that will contain the result of the calculation when the command buffer completes successfully.
-//
-// EncodeToCommandBufferPrimarySourceArraySecondarySourceArray calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArray.
-func (x *ArrayBinaryKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray) *mpscore.MPSNDArray {
-	return x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArray(cmdBuf, primarySourceArray, secondarySourceArray)
+// arrayBinaryKernelAdopt wraps an Objective-C object that this code just created as a
+// ArrayBinaryKernel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arrayBinaryKernelAdopt(id objc.ID) *ArrayBinaryKernel {
+	if id == 0 {
+		return nil
+	}
+	x := &ArrayBinaryKernel{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      primarySourceArray     The primary source for the filter in an NSArray. @param      secondarySourceArray   The secondary source for the filter in an NSArray. @param      destination     The NDArray to receive the result
-//
-// EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayDestinationArray calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayDestinationArray.
-func (x *ArrayBinaryKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, destination *mpscore.MPSNDArray) {
-	x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayDestinationArray(cmdBuf, primarySourceArray, secondarySourceArray, destination)
+// Description returns the object's -description text.
+func (x *ArrayBinaryKernel) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      primarySourceArray     The primary source for the filter in an NSArray. @param      secondarySourceArray   The secondary source for the filter in an NSArray. @param      outGradientState If non-nil, the address output gradient state is written to this address @param      outputStateIsTemporary  If YES, the state if any will be allocated to contain temporary textures and buffers as needed @result     A newly allocated MPSNDArray that will contain the result of the calculation when the command buffer completes successfully.
-//
-// EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateOutputStateIsTemporary calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateOutputStateIsTemporary.
-func (x *ArrayBinaryKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray {
-	return x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateOutputStateIsTemporary(cmdBuf, primarySourceArray, secondarySourceArray, outGradientState, outputStateIsTemporary)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ArrayBinaryKernel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      primarySourceArray     The primary source for the filter in an NSArray. @param      secondarySourceArray   The secondary source for the filter in an NSArray. @param      outGradientState The output gradient state to record the operation for later use by gradient @param      destination     A destination array to contain the result of the calculation when the command buffer completes successfully.
-//
-// EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateDestinationArray calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateDestinationArray.
-func (x *ArrayBinaryKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray) {
-	x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateDestinationArray(cmdBuf, primarySourceArray, secondarySourceArray, outGradientState, destination)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ArrayBinaryKernel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @property  primaryOffsets @abstract  The coordinate of the position read from this source array which is used to calculate the result value at [0,0,0,....] If the position read is actually a contiguous region (e.g. the area covered by a convolution kernel) then this is the center of that region, rounded down, for each dimension. Default: 0,0,0...
-//
-// PrimaryOffsets calls the underlying PrimaryOffsets.
-func (x *ArrayBinaryKernel) PrimaryOffsets() raw.MPSNDArrayOffsets {
-	return x.inner.PrimaryOffsets()
-}
-
-// @property  primaryEdgeMode @abstract  The edge mode used for a source NDArray Default: MPSImageEdgeModeZero
-//
-// PrimaryEdgeMode calls the underlying PrimaryEdgeMode.
-func (x *ArrayBinaryKernel) PrimaryEdgeMode() mpscore.MPSImageEdgeMode {
-	return x.inner.PrimaryEdgeMode()
-}
-
-// @property  primaryKernelSizes @abstract  The diameters of the point spread function in each dimension for a source NDArray Default: 1
-//
-// PrimaryKernelSizes calls the underlying PrimaryKernelSizes.
-func (x *ArrayBinaryKernel) PrimaryKernelSizes() raw.MPSNDArraySizes {
-	return x.inner.PrimaryKernelSizes()
-}
-
-// @property  primaryStrides @abstract  If the filter is a "backwards" filter such as a gradient filter or convolution transpose, then this is the upsampling ratio and zeros are inserted in the result. Default: 1
-//
-// PrimaryStrides calls the underlying PrimaryStrides.
-func (x *ArrayBinaryKernel) PrimaryStrides() raw.MPSNDArrayOffsets {
-	return x.inner.PrimaryStrides()
-}
-
-// @property  primaryDilationRate @abstract  The stride in each dimension from one PSF tap to an adjacent PSF tap. Default: 1
-//
-// PrimaryDilationRates calls the underlying PrimaryDilationRates.
-func (x *ArrayBinaryKernel) PrimaryDilationRates() raw.MPSNDArraySizes {
-	return x.inner.PrimaryDilationRates()
-}
-
-// @property  secondaryOffsets @abstract  The coordinate of the position read from this source array which is used to calculate the result value at [0,0,0,....] If the position read is actually a contiguous region (e.g. the area covered by a convolution kernel) then this is the center of that region, rounded down, for each dimension. Default: 0,0,0...
-//
-// SecondaryOffsets calls the underlying SecondaryOffsets.
-func (x *ArrayBinaryKernel) SecondaryOffsets() raw.MPSNDArrayOffsets {
-	return x.inner.SecondaryOffsets()
-}
-
-// @property  secondaryEdgeMode @abstract  The edge mode used for a source NDArray Default: MPSImageEdgeModeZero
-//
-// SecondaryEdgeMode calls the underlying SecondaryEdgeMode.
-func (x *ArrayBinaryKernel) SecondaryEdgeMode() mpscore.MPSImageEdgeMode {
-	return x.inner.SecondaryEdgeMode()
-}
-
-// @property  secondaryKernelSizes @abstract  The diameters of the point spread function in each dimension for a source NDArray Default: 1
-//
-// SecondaryKernelSizes calls the underlying SecondaryKernelSizes.
-func (x *ArrayBinaryKernel) SecondaryKernelSizes() raw.MPSNDArraySizes {
-	return x.inner.SecondaryKernelSizes()
-}
-
-// @property  secondaryStrides @abstract  If the filter is a "backwards" filter such as a gradient filter or convolution transpose, then this is the upsampling ratio and zeros are inserted in the result. Default: 1
-//
-// SecondaryStrides calls the underlying SecondaryStrides.
-func (x *ArrayBinaryKernel) SecondaryStrides() raw.MPSNDArrayOffsets {
-	return x.inner.SecondaryStrides()
-}
-
-// @property  secondaryDilationRate @abstract  The stride in each dimension from one PSF tap to an adjacent PSF tap. Default: 1
-//
-// SecondaryDilationRates calls the underlying SecondaryDilationRates.
-func (x *ArrayBinaryKernel) SecondaryDilationRates() raw.MPSNDArraySizes {
-	return x.inner.SecondaryDilationRates()
-}
-
-func (x *ArrayBinaryKernel) asArrayBinaryKernel() *raw.MPSNDArrayBinaryKernel { return x.inner }
-
-func (x *ArrayBinaryKernel) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel {
-	return &x.inner.MPSNDArrayMultiaryKernel
-}
-
-func (x *ArrayBinaryKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+// NewArrayBinaryKernel creates a new ArrayBinaryKernel.
+func NewArrayBinaryKernel() *ArrayBinaryKernel {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayBinaryKernel")), objc.RegisterName("new"))
+	return arrayBinaryKernelAdopt(_id)
 }
 
 // ArrayBinaryKernelable is the interface implemented by [ArrayBinaryKernel], for mocking and DI.
 type ArrayBinaryKernelable interface {
-	Unwrap() *raw.MPSNDArrayBinaryKernel
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayBinaryKernel
-	EncodeToCommandBufferPrimarySourceArraySecondarySourceArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray) *mpscore.MPSNDArray
-	EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, destination *mpscore.MPSNDArray)
-	EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray
-	EncodeToCommandBufferPrimarySourceArraySecondarySourceArrayResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray)
-	PrimaryOffsets() raw.MPSNDArrayOffsets
-	PrimaryEdgeMode() mpscore.MPSImageEdgeMode
-	PrimaryKernelSizes() raw.MPSNDArraySizes
-	PrimaryStrides() raw.MPSNDArrayOffsets
-	PrimaryDilationRates() raw.MPSNDArraySizes
-	SecondaryOffsets() raw.MPSNDArrayOffsets
-	SecondaryEdgeMode() mpscore.MPSImageEdgeMode
-	SecondaryKernelSizes() raw.MPSNDArraySizes
-	SecondaryStrides() raw.MPSNDArrayOffsets
-	SecondaryDilationRates() raw.MPSNDArraySizes
+	obj.Object
 }
 
 var _ ArrayBinaryKernelable = (*ArrayBinaryKernel)(nil)

@@ -5,89 +5,107 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Contains the user’s payment credentials.
 //
-// PaymentToken wraps [raw.PKPaymentToken] with a fluent Go API.
+// PaymentToken is an idiomatic wrapper over the Objective-C class PKPaymentToken.
 type PaymentToken struct {
-	inner *raw.PKPaymentToken
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKPaymentToken].
-func (x *PaymentToken) Unwrap() *raw.PKPaymentToken { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PaymentToken) ID() objc.ID { return x.inner.Ptr() }
-
-// PaymentTokenFromID adopts an existing object pointer as a PaymentToken (nil for 0).
+// PaymentTokenFromID adopts an existing Objective-C object as a PaymentToken
+// (nil for 0), retaining it and registering a release finalizer.
 func PaymentTokenFromID(id objc.ID) *PaymentToken {
 	if id == 0 {
 		return nil
 	}
-	return &PaymentToken{inner: raw.PKPaymentTokenFromID(id)}
+	x := &PaymentToken{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPaymentToken creates a new [PaymentToken].
-func NewPaymentToken() *PaymentToken {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentToken")), objc.RegisterName("new"))
-	return &PaymentToken{inner: raw.PKPaymentTokenFromID(_id)}
-}
-
-// PaymentMethod calls the underlying PaymentMethod.
-func (x *PaymentToken) PaymentMethod() *PaymentMethod {
-	_r := x.inner.PaymentMethod()
-	if _r == nil {
+// paymentTokenAdopt wraps an Objective-C object that this code just created as a
+// PaymentToken (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paymentTokenAdopt(id objc.ID) *PaymentToken {
+	if id == 0 {
 		return nil
 	}
-	return &PaymentMethod{inner: _r}
+	x := &PaymentToken{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// PaymentInstrumentName calls the underlying PaymentInstrumentName.
+// Description returns the object's -description text.
+func (x *PaymentToken) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PaymentToken) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PaymentToken) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPaymentToken creates a new PaymentToken.
+func NewPaymentToken() *PaymentToken {
+	_id := objc.Send[objc.ID](objc.ID(_class("PKPaymentToken")), objc.RegisterName("new"))
+	return paymentTokenAdopt(_id)
+}
+
+func (x *PaymentToken) PaymentMethod() *PaymentMethod {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentMethod"))
+	return PaymentMethodFromID(_r)
+}
+
 func (x *PaymentToken) PaymentInstrumentName() string {
-	_r := x.inner.PaymentInstrumentName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentInstrumentName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PaymentNetwork calls the underlying PaymentNetwork.
 func (x *PaymentToken) PaymentNetwork() string {
-	_r := x.inner.PaymentNetwork()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentNetwork"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// TransactionIdentifier calls the underlying TransactionIdentifier.
 func (x *PaymentToken) TransactionIdentifier() string {
-	_r := x.inner.TransactionIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PaymentData calls the underlying PaymentData.
-func (x *PaymentToken) PaymentData() *foundation.NSData {
-	return x.inner.PaymentData()
+func (x *PaymentToken) PaymentData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentData"))
+	return obj.Wrap(_r)
 }
 
 // PaymentTokenable is the interface implemented by [PaymentToken], for mocking and DI.
 type PaymentTokenable interface {
-	Unwrap() *raw.PKPaymentToken
+	obj.Object
 	PaymentMethod() *PaymentMethod
 	PaymentInstrumentName() string
 	PaymentNetwork() string
 	TransactionIdentifier() string
-	PaymentData() *foundation.NSData
+	PaymentData() obj.Object
 }
 
 var _ PaymentTokenable = (*PaymentToken)(nil)

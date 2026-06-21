@@ -5,111 +5,125 @@
 package pdfkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An optional border for an annotation that lies completely within the annotation rectangle.
 //
-// Border wraps [raw.PDFBorder] with a fluent Go API.
+// Border is an idiomatic wrapper over the Objective-C class PDFBorder.
 type Border struct {
-	inner *raw.PDFBorder
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PDFBorder].
-func (x *Border) Unwrap() *raw.PDFBorder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Border) ID() objc.ID { return x.inner.Ptr() }
-
-// BorderFromID adopts an existing object pointer as a Border (nil for 0).
+// BorderFromID adopts an existing Objective-C object as a Border
+// (nil for 0), retaining it and registering a release finalizer.
 func BorderFromID(id objc.ID) *Border {
 	if id == 0 {
 		return nil
 	}
-	return &Border{inner: raw.PDFBorderFromID(id)}
+	x := &Border{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBorder creates a new [Border].
+// borderAdopt wraps an Objective-C object that this code just created as a
+// Border (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func borderAdopt(id objc.ID) *Border {
+	if id == 0 {
+		return nil
+	}
+	x := &Border{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Border) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Border) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Border) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBorder creates a new Border.
 func NewBorder() *Border {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFBorder")), objc.RegisterName("new"))
-	return &Border{inner: raw.PDFBorderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PDFBorder")), objc.RegisterName("new"))
+	return borderAdopt(_id)
 }
 
 // Sets the border style.
 //
-// WithStyle sets the style property and returns the receiver for chaining.
-func (x *Border) WithStyle(style PDFBorderStyle) *Border {
-	x.inner.SetStyle(raw.PDFBorderStyle(style))
+// WithStyle sets style and returns the receiver so calls can be chained.
+func (x *Border) WithStyle(style BorderStyle) *Border {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 	return x
 }
 
 // Sets the line width (in points) for the border.
 //
-// WithLineWidth sets the lineWidth property and returns the receiver for chaining.
+// WithLineWidth sets lineWidth and returns the receiver so calls can be chained.
 func (x *Border) WithLineWidth(lineWidth float64) *Border {
-	x.inner.SetLineWidth(lineWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
 	return x
 }
 
-// Draws the border.
-//
-// DrawInRect calls the underlying DrawInRect.
-func (x *Border) DrawInRect(rect corefoundation.CGRect) {
-	x.inner.DrawInRect(rect)
+func (x *Border) Style() BorderStyle {
+	_r := objc.Send[BorderStyle](objref.IDOf(x), objc.RegisterName("style"))
+	return _r
 }
 
-// Style calls the underlying Style.
-func (x *Border) Style() PDFBorderStyle {
-	return PDFBorderStyle(x.inner.Style())
+func (x *Border) SetStyle(style BorderStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 }
 
-// SetStyle calls the underlying SetStyle.
-func (x *Border) SetStyle(style PDFBorderStyle) {
-	x.inner.SetStyle(raw.PDFBorderStyle(style))
-}
-
-// LineWidth calls the underlying LineWidth.
 func (x *Border) LineWidth() float64 {
-	return x.inner.LineWidth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineWidth"))
+	return _r
 }
 
-// SetLineWidth calls the underlying SetLineWidth.
 func (x *Border) SetLineWidth(lineWidth float64) {
-	x.inner.SetLineWidth(lineWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
 }
 
-// DashPattern calls the underlying DashPattern.
-func (x *Border) DashPattern() *foundation.NSArray[objc.ID] {
-	return x.inner.DashPattern()
+func (x *Border) DashPattern() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dashPattern"))
+	return obj.Wrap(_r)
 }
 
-// SetDashPattern calls the underlying SetDashPattern.
-func (x *Border) SetDashPattern(dashPattern *foundation.NSArray[objc.ID]) {
-	x.inner.SetDashPattern(dashPattern)
+func (x *Border) SetDashPattern(dashPattern obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDashPattern:"), objref.IDOf(dashPattern))
 }
 
-// BorderKeyValues calls the underlying BorderKeyValues.
-func (x *Border) BorderKeyValues() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.BorderKeyValues()
+func (x *Border) BorderKeyValues() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderKeyValues"))
+	return obj.Wrap(_r)
 }
 
 // Borderable is the interface implemented by [Border], for mocking and DI.
 type Borderable interface {
-	Unwrap() *raw.PDFBorder
-	WithStyle(style PDFBorderStyle) *Border
+	obj.Object
+	WithStyle(style BorderStyle) *Border
 	WithLineWidth(lineWidth float64) *Border
-	DrawInRect(rect corefoundation.CGRect)
-	Style() PDFBorderStyle
-	SetStyle(style PDFBorderStyle)
+	Style() BorderStyle
+	SetStyle(style BorderStyle)
 	LineWidth() float64
 	SetLineWidth(lineWidth float64)
-	DashPattern() *foundation.NSArray[objc.ID]
-	SetDashPattern(dashPattern *foundation.NSArray[objc.ID])
-	BorderKeyValues() *foundation.NSDictionary[objc.ID, objc.ID]
+	DashPattern() obj.Object
+	SetDashPattern(dashPattern obj.Object)
+	BorderKeyValues() obj.Object
 }
 
 var _ Borderable = (*Border)(nil)

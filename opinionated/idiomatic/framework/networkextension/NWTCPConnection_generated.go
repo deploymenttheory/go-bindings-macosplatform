@@ -6,73 +6,95 @@ package networkextension
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object to manage a TCP connection, with or without TLS.
 //
-// NWTCPConnection wraps [raw.NWTCPConnection] with a fluent Go API.
+// NWTCPConnection is an idiomatic wrapper over the Objective-C class NWTCPConnection.
 type NWTCPConnection struct {
-	inner *raw.NWTCPConnection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NWTCPConnection].
-func (x *NWTCPConnection) Unwrap() *raw.NWTCPConnection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NWTCPConnection) ID() objc.ID { return x.inner.Ptr() }
-
-// NWTCPConnectionFromID adopts an existing object pointer as a NWTCPConnection (nil for 0).
+// NWTCPConnectionFromID adopts an existing Objective-C object as a NWTCPConnection
+// (nil for 0), retaining it and registering a release finalizer.
 func NWTCPConnectionFromID(id objc.ID) *NWTCPConnection {
 	if id == 0 {
 		return nil
 	}
-	return &NWTCPConnection{inner: raw.NWTCPConnectionFromID(id)}
+	x := &NWTCPConnection{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// nWTCPConnectionAdopt wraps an Objective-C object that this code just created as a
+// NWTCPConnection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nWTCPConnectionAdopt(id objc.ID) *NWTCPConnection {
+	if id == 0 {
+		return nil
+	}
+	x := &NWTCPConnection{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NWTCPConnection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NWTCPConnection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NWTCPConnection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // This convenience initializer can be used to create a new connection that will only be connected if there exists a better path (as determined by the system) to the remote endpoint of the original connection.
 //
-// NewNWTCPConnectionWithUpgradeForConnection creates a new [NWTCPConnection].
-func NewNWTCPConnectionWithUpgradeForConnection(connection *raw.NWTCPConnection) *NWTCPConnection {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NWTCPConnection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUpgradeForConnection:"), connection.Ptr())
-	return &NWTCPConnection{inner: raw.NWTCPConnectionFromID(_id)}
+// NewNWTCPConnectionWithUpgradeForConnection creates a new NWTCPConnection.
+func NewNWTCPConnectionWithUpgradeForConnection(connection *NWTCPConnection) *NWTCPConnection {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NWTCPConnection")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUpgradeForConnection:"), objref.IDOf(connection))
+	return nWTCPConnectionAdopt(_id)
 }
 
 // Cancel the connection.
-//
-// Cancel calls the underlying Cancel.
 func (x *NWTCPConnection) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
 // Read a certain number of bytes on a connection.
 //
 // ReadLength blocks until the operation completes or ctx is cancelled.
-func (x *NWTCPConnection) ReadLength(ctx context.Context, length uint) (*foundation.NSData, error) {
+func (x *NWTCPConnection) ReadLength(ctx context.Context, length int) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadLengthCompletionHandler(length, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readLength:completionHandler:"), length, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -80,25 +102,24 @@ func (x *NWTCPConnection) ReadLength(ctx context.Context, length uint) (*foundat
 // Read the requested range of bytes.
 //
 // ReadMinimumLengthMaximumLength blocks until the operation completes or ctx is cancelled.
-func (x *NWTCPConnection) ReadMinimumLengthMaximumLength(ctx context.Context, minimum uint, maximum uint) (*foundation.NSData, error) {
+func (x *NWTCPConnection) ReadMinimumLengthMaximumLength(ctx context.Context, minimum int, maximum int) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadMinimumLengthMaximumLengthCompletionHandler(minimum, maximum, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readMinimumLength:maximumLength:completionHandler:"), minimum, maximum, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -106,15 +127,14 @@ func (x *NWTCPConnection) ReadMinimumLengthMaximumLength(ctx context.Context, mi
 // Write the data to the connection.
 //
 // Write blocks until the operation completes or ctx is cancelled.
-func (x *NWTCPConnection) Write(ctx context.Context, data *foundation.NSData) error {
+func (x *NWTCPConnection) Write(ctx context.Context, data obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.WriteCompletionHandler(data, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("write:completionHandler:"), objref.IDOf(data), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -124,96 +144,53 @@ func (x *NWTCPConnection) Write(ctx context.Context, data *foundation.NSData) er
 }
 
 // Close the connection for writing.
-//
-// WriteClose calls the underlying WriteClose.
 func (x *NWTCPConnection) WriteClose() {
-	x.inner.WriteClose()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeClose"))
 }
 
-// @property state @discussion The status of the connection. Use KVO to watch this property to get updates.
-//
-// State calls the underlying State.
+// The status of the connection. Use KVO to watch this property to get updates.
 func (x *NWTCPConnection) State() NWTCPConnectionState {
-	return NWTCPConnectionState(x.inner.State())
+	_r := objc.Send[NWTCPConnectionState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
 }
 
-// @property viable @discussion YES if the connection can read and write data, NO otherwise. Use KVO to watch this property.
-//
-// IsViable calls the underlying IsViable.
+// YES if the connection can read and write data, NO otherwise. Use KVO to watch this property.
 func (x *NWTCPConnection) IsViable() bool {
-	return x.inner.IsViable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isViable"))
+	return _r
 }
 
-// @property hasBetterPath @discussion YES if the system determines there is a better path the destination can be reached if the caller creates a new connection using the same endpoint and parameters. This can be done using the convenience upgrade initializer method. Use KVO to watch this property to get updates.
-//
-// HasBetterPath calls the underlying HasBetterPath.
+// YES if the system determines there is a better path the destination can be reached if the caller creates a new connection using the same endpoint and parameters. This can be done using the convenience upgrade initializer method. Use KVO to watch this property to get updates.
 func (x *NWTCPConnection) HasBetterPath() bool {
-	return x.inner.HasBetterPath()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasBetterPath"))
+	return _r
 }
 
-// @property endpoint @discussion The destination endpoint with which this connection was created.
-//
-// Endpoint calls the underlying Endpoint.
-func (x *NWTCPConnection) Endpoint() unsafe.Pointer {
-	return x.inner.Endpoint()
-}
-
-// @property connectedPath @discussion The network path over which the connection was established. The caller can query additional properties from the NWPath object for more information. Note that this contains a snapshot of information at the time of connection establishment for this connection only. As a result, some underlying properties might change in time and might not reflect the path for other connections that might be established at different times.
-//
-// ConnectedPath calls the underlying ConnectedPath.
+// The network path over which the connection was established. The caller can query additional properties from the NWPath object for more information. Note that this contains a snapshot of information at the time of connection establishment for this connection only. As a result, some underlying properties might change in time and might not reflect the path for other connections that might be established at different times.
 func (x *NWTCPConnection) ConnectedPath() *NWPath {
-	_r := x.inner.ConnectedPath()
-	if _r == nil {
-		return nil
-	}
-	return &NWPath{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectedPath"))
+	return NWPathFromID(_r)
 }
 
-// @property localAddress @discussion The IP address endpoint from which the connection was connected.
-//
-// LocalAddress calls the underlying LocalAddress.
-func (x *NWTCPConnection) LocalAddress() unsafe.Pointer {
-	return x.inner.LocalAddress()
-}
-
-// @property remoteAddress @discussion The IP address endpoint to which the connection was connected.
-//
-// RemoteAddress calls the underlying RemoteAddress.
-func (x *NWTCPConnection) RemoteAddress() unsafe.Pointer {
-	return x.inner.RemoteAddress()
-}
-
-// @property txtRecord @discussion When the connection is connected to a Bonjour service endpoint, the TXT record associated with the Bonjour service is available via this property. Beware that the value comes from the network. Care must be taken when parsing this potentially malicious value.
-//
-// TxtRecord calls the underlying TxtRecord.
-func (x *NWTCPConnection) TxtRecord() *foundation.NSData {
-	return x.inner.TxtRecord()
-}
-
-// @property error @discussion The connection-wide error property indicates any fatal error that occurred while processing the connection or performing data reading or writing.
-//
-// Error calls the underlying Error.
-func (x *NWTCPConnection) Error() unsafe.Pointer {
-	return x.inner.Error()
+// When the connection is connected to a Bonjour service endpoint, the TXT record associated with the Bonjour service is available via this property. Beware that the value comes from the network. Care must be taken when parsing this potentially malicious value.
+func (x *NWTCPConnection) TxtRecord() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("txtRecord"))
+	return obj.Wrap(_r)
 }
 
 // NWTCPConnectionable is the interface implemented by [NWTCPConnection], for mocking and DI.
 type NWTCPConnectionable interface {
-	Unwrap() *raw.NWTCPConnection
+	obj.Object
 	Cancel()
-	ReadLength(ctx context.Context, length uint) (*foundation.NSData, error)
-	ReadMinimumLengthMaximumLength(ctx context.Context, minimum uint, maximum uint) (*foundation.NSData, error)
-	Write(ctx context.Context, data *foundation.NSData) error
+	ReadLength(ctx context.Context, length int) (obj.Object, error)
+	ReadMinimumLengthMaximumLength(ctx context.Context, minimum int, maximum int) (obj.Object, error)
+	Write(ctx context.Context, data obj.Object) error
 	WriteClose()
 	State() NWTCPConnectionState
 	IsViable() bool
 	HasBetterPath() bool
-	Endpoint() unsafe.Pointer
 	ConnectedPath() *NWPath
-	LocalAddress() unsafe.Pointer
-	RemoteAddress() unsafe.Pointer
-	TxtRecord() *foundation.NSData
-	Error() unsafe.Pointer
+	TxtRecord() obj.Object
 }
 
 var _ NWTCPConnectionable = (*NWTCPConnection)(nil)

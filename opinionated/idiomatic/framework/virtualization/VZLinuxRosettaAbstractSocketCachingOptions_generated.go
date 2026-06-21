@@ -5,68 +5,86 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // Caching options for an abstract socket.
 //
-// LinuxRosettaAbstractSocketCachingOptions wraps [raw.VZLinuxRosettaAbstractSocketCachingOptions] with a fluent Go API.
+// LinuxRosettaAbstractSocketCachingOptions is an idiomatic wrapper over the Objective-C class VZLinuxRosettaAbstractSocketCachingOptions.
 type LinuxRosettaAbstractSocketCachingOptions struct {
-	inner *raw.VZLinuxRosettaAbstractSocketCachingOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZLinuxRosettaAbstractSocketCachingOptions].
-func (x *LinuxRosettaAbstractSocketCachingOptions) Unwrap() *raw.VZLinuxRosettaAbstractSocketCachingOptions {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LinuxRosettaAbstractSocketCachingOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// LinuxRosettaAbstractSocketCachingOptionsFromID adopts an existing object pointer as a LinuxRosettaAbstractSocketCachingOptions (nil for 0).
+// LinuxRosettaAbstractSocketCachingOptionsFromID adopts an existing Objective-C object as a LinuxRosettaAbstractSocketCachingOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func LinuxRosettaAbstractSocketCachingOptionsFromID(id objc.ID) *LinuxRosettaAbstractSocketCachingOptions {
 	if id == 0 {
 		return nil
 	}
-	return &LinuxRosettaAbstractSocketCachingOptions{inner: raw.VZLinuxRosettaAbstractSocketCachingOptionsFromID(id)}
+	x := &LinuxRosettaAbstractSocketCachingOptions{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// linuxRosettaAbstractSocketCachingOptionsAdopt wraps an Objective-C object that this code just created as a
+// LinuxRosettaAbstractSocketCachingOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func linuxRosettaAbstractSocketCachingOptionsAdopt(id objc.ID) *LinuxRosettaAbstractSocketCachingOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &LinuxRosettaAbstractSocketCachingOptions{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LinuxRosettaAbstractSocketCachingOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LinuxRosettaAbstractSocketCachingOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LinuxRosettaAbstractSocketCachingOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize options to set on a Rosetta directory share.
 //
-// NewLinuxRosettaAbstractSocketCachingOptionsWithNameError creates a new [LinuxRosettaAbstractSocketCachingOptions].
+// NewLinuxRosettaAbstractSocketCachingOptionsWithNameError creates a new LinuxRosettaAbstractSocketCachingOptions.
 func NewLinuxRosettaAbstractSocketCachingOptionsWithNameError(name string) (*LinuxRosettaAbstractSocketCachingOptions, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZLinuxRosettaAbstractSocketCachingOptions")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZLinuxRosettaAbstractSocketCachingOptions")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:error:"), foundation.NSStringStringWithUTF8String(name).Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:error:"), purego.NSString(name), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &LinuxRosettaAbstractSocketCachingOptions{inner: raw.VZLinuxRosettaAbstractSocketCachingOptionsFromID(_id)}, nil
+	return linuxRosettaAbstractSocketCachingOptionsAdopt(_id), nil
 }
 
-// @abstract Name set by initWithName. @discussion This is the name of the Abstract Socket to be used by Rosetta.
-//
-// Name calls the underlying Name.
+// Name set by initWithName. This is the name of the Abstract Socket to be used by Rosetta.
 func (x *LinuxRosettaAbstractSocketCachingOptions) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *LinuxRosettaAbstractSocketCachingOptions) asLinuxRosettaCachingOptions() *raw.VZLinuxRosettaCachingOptions {
-	return &x.inner.VZLinuxRosettaCachingOptions
+	return purego.GoString(_r)
 }
 
 // LinuxRosettaAbstractSocketCachingOptionsable is the interface implemented by [LinuxRosettaAbstractSocketCachingOptions], for mocking and DI.
 type LinuxRosettaAbstractSocketCachingOptionsable interface {
-	Unwrap() *raw.VZLinuxRosettaAbstractSocketCachingOptions
+	obj.Object
 	Name() string
 }
 

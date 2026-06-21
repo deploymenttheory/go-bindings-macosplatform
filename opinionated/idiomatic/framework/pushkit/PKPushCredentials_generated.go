@@ -5,63 +5,82 @@
 package pushkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pushkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that encapsulates the device token you use to deliver push notifications to your app.
 //
-// PushCredentials wraps [raw.PKPushCredentials] with a fluent Go API.
+// PushCredentials is an idiomatic wrapper over the Objective-C class PKPushCredentials.
 type PushCredentials struct {
-	inner *raw.PKPushCredentials
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKPushCredentials].
-func (x *PushCredentials) Unwrap() *raw.PKPushCredentials { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PushCredentials) ID() objc.ID { return x.inner.Ptr() }
-
-// PushCredentialsFromID adopts an existing object pointer as a PushCredentials (nil for 0).
+// PushCredentialsFromID adopts an existing Objective-C object as a PushCredentials
+// (nil for 0), retaining it and registering a release finalizer.
 func PushCredentialsFromID(id objc.ID) *PushCredentials {
 	if id == 0 {
 		return nil
 	}
-	return &PushCredentials{inner: raw.PKPushCredentialsFromID(id)}
+	x := &PushCredentials{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPushCredentials creates a new [PushCredentials].
+// pushCredentialsAdopt wraps an Objective-C object that this code just created as a
+// PushCredentials (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pushCredentialsAdopt(id objc.ID) *PushCredentials {
+	if id == 0 {
+		return nil
+	}
+	x := &PushCredentials{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PushCredentials) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PushCredentials) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PushCredentials) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPushCredentials creates a new PushCredentials.
 func NewPushCredentials() *PushCredentials {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPushCredentials")), objc.RegisterName("new"))
-	return &PushCredentials{inner: raw.PKPushCredentialsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKPushCredentials")), objc.RegisterName("new"))
+	return pushCredentialsAdopt(_id)
 }
 
 // The push type constant associated with the token. For possible values, see “PushKit/PKPushType“.
-//
-// Type calls the underlying Type.
-func (x *PushCredentials) Type() string {
-	_r := x.inner.Type()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *PushCredentials) Type() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+	return obj.Wrap(_r)
 }
 
 // A unique device token to use when sending push notifications to the current device. Forward this token to the server you use to generate push notifications. When preparing to deliver a push notification to the current device, include the token in the HTTP request you send to Apple Push Notification service (APNs).
-//
-// Token calls the underlying Token.
-func (x *PushCredentials) Token() *foundation.NSData {
-	return x.inner.Token()
+func (x *PushCredentials) Token() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("token"))
+	return obj.Wrap(_r)
 }
 
 // PushCredentialsable is the interface implemented by [PushCredentials], for mocking and DI.
 type PushCredentialsable interface {
-	Unwrap() *raw.PKPushCredentials
-	Type() string
-	Token() *foundation.NSData
+	obj.Object
+	Type() obj.Object
+	Token() obj.Object
 }
 
 var _ PushCredentialsable = (*PushCredentials)(nil)

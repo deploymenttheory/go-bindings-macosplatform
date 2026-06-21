@@ -5,39 +5,66 @@
 package businesschat
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/businesschat"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ChatAction wraps [raw.BCChatAction] with a fluent Go API.
+// ChatAction is an idiomatic wrapper over the Objective-C class BCChatAction.
 type ChatAction struct {
-	inner *raw.BCChatAction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.BCChatAction].
-func (x *ChatAction) Unwrap() *raw.BCChatAction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChatAction) ID() objc.ID { return x.inner.Ptr() }
-
-// ChatActionFromID adopts an existing object pointer as a ChatAction (nil for 0).
+// ChatActionFromID adopts an existing Objective-C object as a ChatAction
+// (nil for 0), retaining it and registering a release finalizer.
 func ChatActionFromID(id objc.ID) *ChatAction {
 	if id == 0 {
 		return nil
 	}
-	return &ChatAction{inner: raw.BCChatActionFromID(id)}
+	x := &ChatAction{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewChatAction creates a new [ChatAction].
+// chatActionAdopt wraps an Objective-C object that this code just created as a
+// ChatAction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func chatActionAdopt(id objc.ID) *ChatAction {
+	if id == 0 {
+		return nil
+	}
+	x := &ChatAction{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ChatAction) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ChatAction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ChatAction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewChatAction creates a new ChatAction.
 func NewChatAction() *ChatAction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("BCChatAction")), objc.RegisterName("new"))
-	return &ChatAction{inner: raw.BCChatActionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("BCChatAction")), objc.RegisterName("new"))
+	return chatActionAdopt(_id)
 }
 
 // ChatActionable is the interface implemented by [ChatAction], for mocking and DI.
 type ChatActionable interface {
-	Unwrap() *raw.BCChatAction
+	obj.Object
 }
 
 var _ ChatActionable = (*ChatAction)(nil)

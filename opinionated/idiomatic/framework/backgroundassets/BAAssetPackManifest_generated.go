@@ -5,88 +5,111 @@
 package backgroundassets
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/backgroundassets"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // A manifest of asset packs that are available to download.
 //
-// AssetPackManifest wraps [raw.BAAssetPackManifest] with a fluent Go API.
+// AssetPackManifest is an idiomatic wrapper over the Objective-C class BAAssetPackManifest.
 type AssetPackManifest struct {
-	inner *raw.BAAssetPackManifest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.BAAssetPackManifest].
-func (x *AssetPackManifest) Unwrap() *raw.BAAssetPackManifest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetPackManifest) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetPackManifestFromID adopts an existing object pointer as a AssetPackManifest (nil for 0).
+// AssetPackManifestFromID adopts an existing Objective-C object as a AssetPackManifest
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetPackManifestFromID(id objc.ID) *AssetPackManifest {
 	if id == 0 {
 		return nil
 	}
-	return &AssetPackManifest{inner: raw.BAAssetPackManifestFromID(id)}
+	x := &AssetPackManifest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// assetPackManifestAdopt wraps an Objective-C object that this code just created as a
+// AssetPackManifest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetPackManifestAdopt(id objc.ID) *AssetPackManifest {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetPackManifest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetPackManifest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetPackManifest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetPackManifest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a representation of a manifest in memory given a URL to the manifest’s representation as a JSON file on disk.
 //
-// NewAssetPackManifestWithContentsOfURLApplicationGroupIdentifierError creates a new [AssetPackManifest].
+// NewAssetPackManifestWithContentsOfURLApplicationGroupIdentifierError creates a new AssetPackManifest.
 func NewAssetPackManifestWithContentsOfURLApplicationGroupIdentifierError(uRL string, applicationGroupIdentifier string) (*AssetPackManifest, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("BAAssetPackManifest")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("BAAssetPackManifest")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:applicationGroupIdentifier:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), foundation.NSStringStringWithUTF8String(applicationGroupIdentifier).Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:applicationGroupIdentifier:error:"), rt.FileURL(uRL), purego.NSString(applicationGroupIdentifier), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &AssetPackManifest{inner: raw.BAAssetPackManifestFromID(_id)}, nil
+	return assetPackManifestAdopt(_id), nil
 }
 
 // Initializes a representation of a manifest in memory from JSON-encoded data.
 //
-// NewAssetPackManifestFromDataApplicationGroupIdentifierError creates a new [AssetPackManifest].
-func NewAssetPackManifestFromDataApplicationGroupIdentifierError(data *foundation.NSData, applicationGroupIdentifier string) (*AssetPackManifest, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("BAAssetPackManifest")), objc.RegisterName("alloc"))
+// NewAssetPackManifestFromDataApplicationGroupIdentifierError creates a new AssetPackManifest.
+func NewAssetPackManifestFromDataApplicationGroupIdentifierError(data obj.Object, applicationGroupIdentifier string) (*AssetPackManifest, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("BAAssetPackManifest")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFromData:applicationGroupIdentifier:error:"), data.Ptr(), foundation.NSStringStringWithUTF8String(applicationGroupIdentifier).Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFromData:applicationGroupIdentifier:error:"), objref.IDOf(data), purego.NSString(applicationGroupIdentifier), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &AssetPackManifest{inner: raw.BAAssetPackManifestFromID(_id)}, nil
+	return assetPackManifestAdopt(_id), nil
 }
 
 // Creates download objects for every asset pack in this manifest.
-//
-// AllDownloads calls the underlying AllDownloads.
-func (x *AssetPackManifest) AllDownloads() *foundation.NSSet[*raw.BADownload] {
-	return x.inner.AllDownloads()
+func (x *AssetPackManifest) AllDownloads() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allDownloads"))
+	return obj.Wrap(_r)
 }
 
 // Creates download objects for every asset pack in this manifest.
-//
-// AllDownloadsForContentRequest calls the underlying AllDownloadsForContentRequest.
-func (x *AssetPackManifest) AllDownloadsForContentRequest(contentRequest BAContentRequest) *foundation.NSSet[*raw.BADownload] {
-	return x.inner.AllDownloadsForContentRequest(raw.BAContentRequest(contentRequest))
+func (x *AssetPackManifest) AllDownloadsForContentRequest(contentRequest ContentRequest) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allDownloadsForContentRequest:"), contentRequest)
+	return obj.Wrap(_r)
 }
 
 // The asset packs that are available to download.
-//
-// AssetPacks calls the underlying AssetPacks.
-func (x *AssetPackManifest) AssetPacks() *foundation.NSSet[*raw.BAAssetPack] {
-	return x.inner.AssetPacks()
+func (x *AssetPackManifest) AssetPacks() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetPacks"))
+	return obj.Wrap(_r)
 }
 
 // AssetPackManifestable is the interface implemented by [AssetPackManifest], for mocking and DI.
 type AssetPackManifestable interface {
-	Unwrap() *raw.BAAssetPackManifest
-	AllDownloads() *foundation.NSSet[*raw.BADownload]
-	AllDownloadsForContentRequest(contentRequest BAContentRequest) *foundation.NSSet[*raw.BADownload]
-	AssetPacks() *foundation.NSSet[*raw.BAAssetPack]
+	obj.Object
+	AllDownloads() obj.Object
+	AllDownloadsForContentRequest(contentRequest ContentRequest) obj.Object
+	AssetPacks() obj.Object
 }
 
 var _ AssetPackManifestable = (*AssetPackManifest)(nil)

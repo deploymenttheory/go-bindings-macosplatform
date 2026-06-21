@@ -5,15 +5,15 @@
 package pdfkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// ActionProvider is implemented by Action and any idiomatic type wrapping a PDFAction subclass.
+// ActionProvider is accepted wherever a PDFAction (or one of its subclasses) is expected.
 type ActionProvider interface {
-	asAction() *raw.PDFAction
+	objref.Object
 }
 
-// AnnotationProvider is implemented by Annotation and any idiomatic type wrapping a PDFAnnotation subclass.
+// AnnotationProvider is accepted wherever a PDFAnnotation (or one of its subclasses) is expected.
 type AnnotationProvider interface {
-	asAnnotation() *raw.PDFAnnotation
+	objref.Object
 }

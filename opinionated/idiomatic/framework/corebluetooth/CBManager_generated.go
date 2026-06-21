@@ -5,59 +5,82 @@
 package corebluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The abstract base class that manages central and peripheral objects.
 //
-// Manager wraps [raw.CBManager] with a fluent Go API.
+// Manager is an idiomatic wrapper over the Objective-C class CBManager.
 type Manager struct {
-	inner *raw.CBManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CBManager].
-func (x *Manager) Unwrap() *raw.CBManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Manager) ID() objc.ID { return x.inner.Ptr() }
-
-// ManagerFromID adopts an existing object pointer as a Manager (nil for 0).
+// ManagerFromID adopts an existing Objective-C object as a Manager
+// (nil for 0), retaining it and registering a release finalizer.
 func ManagerFromID(id objc.ID) *Manager {
 	if id == 0 {
 		return nil
 	}
-	return &Manager{inner: raw.CBManagerFromID(id)}
+	x := &Manager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewManager creates a new [Manager].
+// managerAdopt wraps an Objective-C object that this code just created as a
+// Manager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func managerAdopt(id objc.ID) *Manager {
+	if id == 0 {
+		return nil
+	}
+	x := &Manager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Manager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Manager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Manager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewManager creates a new Manager.
 func NewManager() *Manager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBManager")), objc.RegisterName("new"))
-	return &Manager{inner: raw.CBManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CBManager")), objc.RegisterName("new"))
+	return managerAdopt(_id)
 }
 
-// @property state @discussion The current state of the manager, initially set to <code>CBManagerStateUnknown</code>. Updates are provided by required delegate method {@link managerDidUpdateState:}.
-//
-// State calls the underlying State.
-func (x *Manager) State() CBManagerState {
-	return CBManagerState(x.inner.State())
+// The current state of the manager, initially set to <code>CBManagerStateUnknown</code>. Updates are provided by required delegate method {
+func (x *Manager) State() ManagerState {
+	_r := objc.Send[ManagerState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
 }
 
-// @property authorization @discussion The current authorization of the manager, initially set to <code>CBManagerAuthorizationNotDetermined</code>. Updates are provided by required delegate method {@link managerDidUpdateState:}. @seealso	state
-//
-// Authorization calls the underlying Authorization.
-func (x *Manager) Authorization() CBManagerAuthorization {
-	return CBManagerAuthorization(x.inner.Authorization())
+// The current authorization of the manager, initially set to <code>CBManagerAuthorizationNotDetermined</code>. Updates are provided by required delegate method {
+func (x *Manager) Authorization() ManagerAuthorization {
+	_r := objc.Send[ManagerAuthorization](objref.IDOf(x), objc.RegisterName("authorization"))
+	return _r
 }
-
-func (x *Manager) asManager() *raw.CBManager { return x.inner }
 
 // Managerable is the interface implemented by [Manager], for mocking and DI.
 type Managerable interface {
-	Unwrap() *raw.CBManager
-	State() CBManagerState
-	Authorization() CBManagerAuthorization
+	obj.Object
+	State() ManagerState
+	Authorization() ManagerAuthorization
 }
 
 var _ Managerable = (*Manager)(nil)

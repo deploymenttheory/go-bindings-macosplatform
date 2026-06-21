@@ -5,57 +5,76 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Informs your app when the external storage devices connect to and disconnect from the system.
 //
-// ExternalStorageDeviceDiscoverySession wraps [raw.AVExternalStorageDeviceDiscoverySession] with a fluent Go API.
+// ExternalStorageDeviceDiscoverySession is an idiomatic wrapper over the Objective-C class AVExternalStorageDeviceDiscoverySession.
 type ExternalStorageDeviceDiscoverySession struct {
-	inner *raw.AVExternalStorageDeviceDiscoverySession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVExternalStorageDeviceDiscoverySession].
-func (x *ExternalStorageDeviceDiscoverySession) Unwrap() *raw.AVExternalStorageDeviceDiscoverySession {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExternalStorageDeviceDiscoverySession) ID() objc.ID { return x.inner.Ptr() }
-
-// ExternalStorageDeviceDiscoverySessionFromID adopts an existing object pointer as a ExternalStorageDeviceDiscoverySession (nil for 0).
+// ExternalStorageDeviceDiscoverySessionFromID adopts an existing Objective-C object as a ExternalStorageDeviceDiscoverySession
+// (nil for 0), retaining it and registering a release finalizer.
 func ExternalStorageDeviceDiscoverySessionFromID(id objc.ID) *ExternalStorageDeviceDiscoverySession {
 	if id == 0 {
 		return nil
 	}
-	return &ExternalStorageDeviceDiscoverySession{inner: raw.AVExternalStorageDeviceDiscoverySessionFromID(id)}
+	x := &ExternalStorageDeviceDiscoverySession{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewExternalStorageDeviceDiscoverySession creates a new [ExternalStorageDeviceDiscoverySession].
+// externalStorageDeviceDiscoverySessionAdopt wraps an Objective-C object that this code just created as a
+// ExternalStorageDeviceDiscoverySession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func externalStorageDeviceDiscoverySessionAdopt(id objc.ID) *ExternalStorageDeviceDiscoverySession {
+	if id == 0 {
+		return nil
+	}
+	x := &ExternalStorageDeviceDiscoverySession{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ExternalStorageDeviceDiscoverySession) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExternalStorageDeviceDiscoverySession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExternalStorageDeviceDiscoverySession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewExternalStorageDeviceDiscoverySession creates a new ExternalStorageDeviceDiscoverySession.
 func NewExternalStorageDeviceDiscoverySession() *ExternalStorageDeviceDiscoverySession {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVExternalStorageDeviceDiscoverySession")), objc.RegisterName("new"))
-	return &ExternalStorageDeviceDiscoverySession{inner: raw.AVExternalStorageDeviceDiscoverySessionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVExternalStorageDeviceDiscoverySession")), objc.RegisterName("new"))
+	return externalStorageDeviceDiscoverySessionAdopt(_id)
 }
 
-// @property externalStorageDevices @abstract An array of external storage devices connected to this device. Read only. Key-value observable. @discussion An array of AVExternalStorageDevice objects connected to this device. The list is updated when the external storage device detected status changes.
+// An array of external storage devices connected to this device. Read only. Key-value observable. An array of AVExternalStorageDevice objects connected to this device. The list is updated when the external storage device detected status changes.
 //
 // ExternalStorageDevices returns the collection as a Go slice.
 func (x *ExternalStorageDeviceDiscoverySession) ExternalStorageDevices() []*ExternalStorageDevice {
-	arr := x.inner.ExternalStorageDevices()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ExternalStorageDevice {
-		return &ExternalStorageDevice{inner: raw.AVExternalStorageDeviceFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("externalStorageDevices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExternalStorageDevice { return ExternalStorageDeviceFromID(_id) })
 }
 
 // ExternalStorageDeviceDiscoverySessionable is the interface implemented by [ExternalStorageDeviceDiscoverySession], for mocking and DI.
 type ExternalStorageDeviceDiscoverySessionable interface {
-	Unwrap() *raw.AVExternalStorageDeviceDiscoverySession
+	obj.Object
 	ExternalStorageDevices() []*ExternalStorageDevice
 }
 

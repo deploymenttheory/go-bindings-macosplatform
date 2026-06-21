@@ -5,79 +5,84 @@
 package coremediaio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that describes the format of a media stream.
 //
-// ExtensionStreamFormat wraps [raw.CMIOExtensionStreamFormat] with a fluent Go API.
+// ExtensionStreamFormat is an idiomatic wrapper over the Objective-C class CMIOExtensionStreamFormat.
 type ExtensionStreamFormat struct {
-	inner *raw.CMIOExtensionStreamFormat
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CMIOExtensionStreamFormat].
-func (x *ExtensionStreamFormat) Unwrap() *raw.CMIOExtensionStreamFormat { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExtensionStreamFormat) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtensionStreamFormatFromID adopts an existing object pointer as a ExtensionStreamFormat (nil for 0).
+// ExtensionStreamFormatFromID adopts an existing Objective-C object as a ExtensionStreamFormat
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtensionStreamFormatFromID(id objc.ID) *ExtensionStreamFormat {
 	if id == 0 {
 		return nil
 	}
-	return &ExtensionStreamFormat{inner: raw.CMIOExtensionStreamFormatFromID(id)}
+	x := &ExtensionStreamFormat{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a stream format with a format description and frame durations.
-//
-// NewExtensionStreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations creates a new [ExtensionStreamFormat].
-func NewExtensionStreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations(formatDescription unsafe.Pointer, maxFrameDuration coremedia.CMTime, minFrameDuration coremedia.CMTime, validFrameDurations *foundation.NSArray[objc.ID]) *ExtensionStreamFormat {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionStreamFormat")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormatDescription:maxFrameDuration:minFrameDuration:validFrameDurations:"), formatDescription, maxFrameDuration, minFrameDuration, validFrameDurations.Ptr())
-	return &ExtensionStreamFormat{inner: raw.CMIOExtensionStreamFormatFromID(_id)}
+// extensionStreamFormatAdopt wraps an Objective-C object that this code just created as a
+// ExtensionStreamFormat (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extensionStreamFormatAdopt(id objc.ID) *ExtensionStreamFormat {
+	if id == 0 {
+		return nil
+	}
+	x := &ExtensionStreamFormat{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property formatDescription @abstract The format description of the samples delivered by the stream.
-//
-// FormatDescription calls the underlying FormatDescription.
-func (x *ExtensionStreamFormat) FormatDescription() unsafe.Pointer {
-	return x.inner.FormatDescription()
+// Description returns the object's -description text.
+func (x *ExtensionStreamFormat) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property minFrameDuration @abstract The minimum frame duration (AKA maximum frame rate).
-//
-// MinFrameDuration calls the underlying MinFrameDuration.
-func (x *ExtensionStreamFormat) MinFrameDuration() coremedia.CMTime {
-	return x.inner.MinFrameDuration()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExtensionStreamFormat) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property maxFrameDuration @abstract The maximum frame duration (AKA minimum frame rate).
-//
-// MaxFrameDuration calls the underlying MaxFrameDuration.
-func (x *ExtensionStreamFormat) MaxFrameDuration() coremedia.CMTime {
-	return x.inner.MaxFrameDuration()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExtensionStreamFormat) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @property validFrameDurations @abstract The valid frame durations as an array of CMTime as dictionaries. The CMTime in dictionary format are made with CMTimeCopyAsDictionary.
+// NewExtensionStreamFormat creates a new ExtensionStreamFormat.
+func NewExtensionStreamFormat() *ExtensionStreamFormat {
+	_id := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionStreamFormat")), objc.RegisterName("new"))
+	return extensionStreamFormatAdopt(_id)
+}
+
+// The format description of the samples delivered by the stream.
+func (x *ExtensionStreamFormat) FormatDescription() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatDescription"))
+	return obj.Wrap(_r)
+}
+
+// The valid frame durations as an array of CMTime as dictionaries. The CMTime in dictionary format are made with CMTimeCopyAsDictionary.
 //
-// ValidFrameDurations calls the underlying ValidFrameDurations.
-func (x *ExtensionStreamFormat) ValidFrameDurations() *foundation.NSArray[objc.ID] {
-	return x.inner.ValidFrameDurations()
+// ValidFrameDurations returns the collection as a Go slice.
+func (x *ExtensionStreamFormat) ValidFrameDurations() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validFrameDurations"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ExtensionStreamFormatable is the interface implemented by [ExtensionStreamFormat], for mocking and DI.
 type ExtensionStreamFormatable interface {
-	Unwrap() *raw.CMIOExtensionStreamFormat
-	FormatDescription() unsafe.Pointer
-	MinFrameDuration() coremedia.CMTime
-	MaxFrameDuration() coremedia.CMTime
-	ValidFrameDurations() *foundation.NSArray[objc.ID]
+	obj.Object
+	FormatDescription() obj.Object
+	ValidFrameDurations() []obj.Object
 }
 
 var _ ExtensionStreamFormatable = (*ExtensionStreamFormat)(nil)

@@ -6,37 +6,63 @@ package safariservices
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safariservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A proxy for a Safari window.
 //
-// SafariWindow wraps [raw.SFSafariWindow] with a fluent Go API.
+// SafariWindow is an idiomatic wrapper over the Objective-C class SFSafariWindow.
 type SafariWindow struct {
-	inner *raw.SFSafariWindow
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFSafariWindow].
-func (x *SafariWindow) Unwrap() *raw.SFSafariWindow { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SafariWindow) ID() objc.ID { return x.inner.Ptr() }
-
-// SafariWindowFromID adopts an existing object pointer as a SafariWindow (nil for 0).
+// SafariWindowFromID adopts an existing Objective-C object as a SafariWindow
+// (nil for 0), retaining it and registering a release finalizer.
 func SafariWindowFromID(id objc.ID) *SafariWindow {
 	if id == 0 {
 		return nil
 	}
-	return &SafariWindow{inner: raw.SFSafariWindowFromID(id)}
+	x := &SafariWindow{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSafariWindow creates a new [SafariWindow].
+// safariWindowAdopt wraps an Objective-C object that this code just created as a
+// SafariWindow (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func safariWindowAdopt(id objc.ID) *SafariWindow {
+	if id == 0 {
+		return nil
+	}
+	x := &SafariWindow{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SafariWindow) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SafariWindow) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SafariWindow) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSafariWindow creates a new SafariWindow.
 func NewSafariWindow() *SafariWindow {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSafariWindow")), objc.RegisterName("new"))
-	return &SafariWindow{inner: raw.SFSafariWindowFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFSafariWindow")), objc.RegisterName("new"))
+	return safariWindowAdopt(_id)
 }
 
 // Calls the completion handler with the active tab in the target window.
@@ -48,13 +74,12 @@ func (x *SafariWindow) GetActiveTab(ctx context.Context) (*SafariTab, error) {
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetActiveTabWithCompletionHandler(func(_p0 *raw.SFSafariTab) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &SafariTab{inner: _p0}
-		}
+		_o.val = SafariTabFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getActiveTabWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -67,22 +92,23 @@ func (x *SafariWindow) GetActiveTab(ctx context.Context) (*SafariTab, error) {
 // Calls the completion handler with all of the tabs in this window ordered left to right.
 //
 // GetAllTabs blocks until the operation completes or ctx is cancelled.
-func (x *SafariWindow) GetAllTabs(ctx context.Context) (*foundation.NSArray[*raw.SFSafariTab], error) {
+func (x *SafariWindow) GetAllTabs(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.SFSafariTab]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetAllTabsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.SFSafariTab]) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		_o.val = _p0
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getAllTabsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.SFSafariTab]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -96,13 +122,12 @@ func (x *SafariWindow) OpenTabWithURLMakeActiveIfPossible(ctx context.Context, u
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.OpenTabWithURLMakeActiveIfPossibleCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), activateTab, func(_p0 *raw.SFSafariTab) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &SafariTab{inner: _p0}
-		}
+		_o.val = SafariTabFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openTabWithURL:makeActiveIfPossible:completionHandler:"), rt.FileURL(url), activateTab, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -121,13 +146,12 @@ func (x *SafariWindow) GetToolbarItem(ctx context.Context) (*SafariToolbarItem, 
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetToolbarItemWithCompletionHandler(func(_p0 *raw.SFSafariToolbarItem) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &SafariToolbarItem{inner: _p0}
-		}
+		_o.val = SafariToolbarItemFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getToolbarItemWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -138,17 +162,15 @@ func (x *SafariWindow) GetToolbarItem(ctx context.Context) (*SafariToolbarItem, 
 }
 
 // Closes this window.
-//
-// Close calls the underlying Close.
 func (x *SafariWindow) Close() {
-	x.inner.Close()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }
 
 // SafariWindowable is the interface implemented by [SafariWindow], for mocking and DI.
 type SafariWindowable interface {
-	Unwrap() *raw.SFSafariWindow
+	obj.Object
 	GetActiveTab(ctx context.Context) (*SafariTab, error)
-	GetAllTabs(ctx context.Context) (*foundation.NSArray[*raw.SFSafariTab], error)
+	GetAllTabs(ctx context.Context) (obj.Object, error)
 	OpenTabWithURLMakeActiveIfPossible(ctx context.Context, url string, activateTab bool) (*SafariTab, error)
 	GetToolbarItem(ctx context.Context) (*SafariToolbarItem, error)
 	Close()

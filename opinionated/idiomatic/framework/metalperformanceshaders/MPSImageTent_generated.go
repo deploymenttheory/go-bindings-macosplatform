@@ -5,99 +5,76 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A filter that convolves an image with a tent filter.
 //
-// ImageTent wraps [raw.MPSImageTent] with a fluent Go API.
+// ImageTent is an idiomatic wrapper over the Objective-C class MPSImageTent.
 type ImageTent struct {
-	inner *raw.MPSImageTent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageTent].
-func (x *ImageTent) Unwrap() *raw.MPSImageTent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageTent) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageTentFromID adopts an existing object pointer as a ImageTent (nil for 0).
+// ImageTentFromID adopts an existing Objective-C object as a ImageTent
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageTentFromID(id objc.ID) *ImageTent {
 	if id == 0 {
 		return nil
 	}
-	return &ImageTent{inner: raw.MPSImageTentFromID(id)}
+	x := &ImageTent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewImageTent creates a new [ImageTent].
+// imageTentAdopt wraps an Objective-C object that this code just created as a
+// ImageTent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageTentAdopt(id objc.ID) *ImageTent {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageTent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ImageTent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageTent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageTent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageTent creates a new ImageTent.
 func NewImageTent() *ImageTent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageTent")), objc.RegisterName("new"))
-	return &ImageTent{inner: raw.MPSImageTentFromID(_id)}
-}
-
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageTent) WithOffset(offset mpscore.MPSOffset) *ImageTent {
-	x.inner.MPSImageBox.MPSUnaryImageKernel.SetOffset(offset)
-	return x
-}
-
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageTent) WithClipRect(clipRect metal.MTLRegion) *ImageTent {
-	x.inner.MPSImageBox.MPSUnaryImageKernel.SetClipRect(clipRect)
-	return x
-}
-
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageTent) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageTent {
-	x.inner.MPSImageBox.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageTent) WithOptions(options mpscore.MPSKernelOptions) *ImageTent {
-	x.inner.MPSImageBox.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageTent")), objc.RegisterName("new"))
+	return imageTentAdopt(_id)
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ImageTent) WithLabel(label string) *ImageTent {
-	x.inner.MPSImageBox.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *ImageTent) asImageBox() *mpsimage.MPSImageBox { return &x.inner.MPSImageBox }
-
-func (x *ImageTent) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSImageBox.MPSUnaryImageKernel
-}
-
-func (x *ImageTent) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSImageBox.MPSUnaryImageKernel.MPSKernel
 }
 
 // ImageTentable is the interface implemented by [ImageTent], for mocking and DI.
 type ImageTentable interface {
-	Unwrap() *raw.MPSImageTent
-	WithOffset(offset mpscore.MPSOffset) *ImageTent
-	WithClipRect(clipRect metal.MTLRegion) *ImageTent
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageTent
-	WithOptions(options mpscore.MPSKernelOptions) *ImageTent
+	obj.Object
 	WithLabel(label string) *ImageTent
 }
 

@@ -5,67 +5,90 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A layer that computes the uncentered cross-correlation values between the spacial planes of each feature channel of a tensor.
 //
-// GramMatrixLayer wraps [raw.MLCGramMatrixLayer] with a fluent Go API.
+// GramMatrixLayer is an idiomatic wrapper over the Objective-C class MLCGramMatrixLayer.
 type GramMatrixLayer struct {
-	inner *raw.MLCGramMatrixLayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCGramMatrixLayer].
-func (x *GramMatrixLayer) Unwrap() *raw.MLCGramMatrixLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GramMatrixLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// GramMatrixLayerFromID adopts an existing object pointer as a GramMatrixLayer (nil for 0).
+// GramMatrixLayerFromID adopts an existing Objective-C object as a GramMatrixLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func GramMatrixLayerFromID(id objc.ID) *GramMatrixLayer {
 	if id == 0 {
 		return nil
 	}
-	return &GramMatrixLayer{inner: raw.MLCGramMatrixLayerFromID(id)}
+	x := &GramMatrixLayer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGramMatrixLayer creates a new [GramMatrixLayer].
+// gramMatrixLayerAdopt wraps an Objective-C object that this code just created as a
+// GramMatrixLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func gramMatrixLayerAdopt(id objc.ID) *GramMatrixLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &GramMatrixLayer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GramMatrixLayer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GramMatrixLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GramMatrixLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGramMatrixLayer creates a new GramMatrixLayer.
 func NewGramMatrixLayer() *GramMatrixLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCGramMatrixLayer")), objc.RegisterName("new"))
-	return &GramMatrixLayer{inner: raw.MLCGramMatrixLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCGramMatrixLayer")), objc.RegisterName("new"))
+	return gramMatrixLayerAdopt(_id)
 }
 
 // A string that helps identify this layer.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *GramMatrixLayer) WithLabel(label string) *GramMatrixLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 //
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
 func (x *GramMatrixLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *GramMatrixLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// @property   scale @abstract   The scale factor
-//
-// Scale calls the underlying Scale.
+// The scale factor
 func (x *GramMatrixLayer) Scale() float32 {
-	return x.inner.Scale()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("scale"))
+	return _r
 }
-
-func (x *GramMatrixLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // GramMatrixLayerable is the interface implemented by [GramMatrixLayer], for mocking and DI.
 type GramMatrixLayerable interface {
-	Unwrap() *raw.MLCGramMatrixLayer
+	obj.Object
 	WithLabel(label string) *GramMatrixLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *GramMatrixLayer
 	Scale() float32

@@ -5,49 +5,75 @@
 package fskit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object used to provide items during a directory enumeration.
 //
-// DirectoryEntryPacker wraps [raw.FSDirectoryEntryPacker] with a fluent Go API.
+// DirectoryEntryPacker is an idiomatic wrapper over the Objective-C class FSDirectoryEntryPacker.
 type DirectoryEntryPacker struct {
-	inner *raw.FSDirectoryEntryPacker
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSDirectoryEntryPacker].
-func (x *DirectoryEntryPacker) Unwrap() *raw.FSDirectoryEntryPacker { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DirectoryEntryPacker) ID() objc.ID { return x.inner.Ptr() }
-
-// DirectoryEntryPackerFromID adopts an existing object pointer as a DirectoryEntryPacker (nil for 0).
+// DirectoryEntryPackerFromID adopts an existing Objective-C object as a DirectoryEntryPacker
+// (nil for 0), retaining it and registering a release finalizer.
 func DirectoryEntryPackerFromID(id objc.ID) *DirectoryEntryPacker {
 	if id == 0 {
 		return nil
 	}
-	return &DirectoryEntryPacker{inner: raw.FSDirectoryEntryPackerFromID(id)}
+	x := &DirectoryEntryPacker{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDirectoryEntryPacker creates a new [DirectoryEntryPacker].
+// directoryEntryPackerAdopt wraps an Objective-C object that this code just created as a
+// DirectoryEntryPacker (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func directoryEntryPackerAdopt(id objc.ID) *DirectoryEntryPacker {
+	if id == 0 {
+		return nil
+	}
+	x := &DirectoryEntryPacker{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DirectoryEntryPacker) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DirectoryEntryPacker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DirectoryEntryPacker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDirectoryEntryPacker creates a new DirectoryEntryPacker.
 func NewDirectoryEntryPacker() *DirectoryEntryPacker {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSDirectoryEntryPacker")), objc.RegisterName("new"))
-	return &DirectoryEntryPacker{inner: raw.FSDirectoryEntryPackerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("FSDirectoryEntryPacker")), objc.RegisterName("new"))
+	return directoryEntryPackerAdopt(_id)
 }
 
 // Provides a directory entry during enumeration.
-//
-// PackEntryWithNameItemTypeItemIDNextCookieAttributes calls the underlying PackEntryWithNameItemTypeItemIDNextCookieAttributes.
-func (x *DirectoryEntryPacker) PackEntryWithNameItemTypeItemIDNextCookieAttributes(name *raw.FSFileName, itemType FSItemType, itemID FSItemID, nextCookie uint64, attributes *raw.FSItemAttributes) bool {
-	return x.inner.PackEntryWithNameItemTypeItemIDNextCookieAttributes(name, raw.FSItemType(itemType), raw.FSItemID(itemID), nextCookie, attributes)
+func (x *DirectoryEntryPacker) PackEntryWithNameItemTypeItemIDNextCookieAttributes(name *FileName, itemType ItemType, itemID ItemID, nextCookie uint64, attributes *ItemAttributes) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("packEntryWithName:itemType:itemID:nextCookie:attributes:"), objref.IDOf(name), itemType, itemID, nextCookie, objref.IDOf(attributes))
+	return _r
 }
 
 // DirectoryEntryPackerable is the interface implemented by [DirectoryEntryPacker], for mocking and DI.
 type DirectoryEntryPackerable interface {
-	Unwrap() *raw.FSDirectoryEntryPacker
-	PackEntryWithNameItemTypeItemIDNextCookieAttributes(name *raw.FSFileName, itemType FSItemType, itemID FSItemID, nextCookie uint64, attributes *raw.FSItemAttributes) bool
+	obj.Object
+	PackEntryWithNameItemTypeItemIDNextCookieAttributes(name *FileName, itemType ItemType, itemID ItemID, nextCookie uint64, attributes *ItemAttributes) bool
 }
 
 var _ DirectoryEntryPackerable = (*DirectoryEntryPacker)(nil)

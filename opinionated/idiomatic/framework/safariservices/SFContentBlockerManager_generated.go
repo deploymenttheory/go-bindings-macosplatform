@@ -5,41 +5,68 @@
 package safariservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safariservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that your app uses to interact with a content blocker extension.
 //
-// ContentBlockerManager wraps [raw.SFContentBlockerManager] with a fluent Go API.
+// ContentBlockerManager is an idiomatic wrapper over the Objective-C class SFContentBlockerManager.
 type ContentBlockerManager struct {
-	inner *raw.SFContentBlockerManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFContentBlockerManager].
-func (x *ContentBlockerManager) Unwrap() *raw.SFContentBlockerManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContentBlockerManager) ID() objc.ID { return x.inner.Ptr() }
-
-// ContentBlockerManagerFromID adopts an existing object pointer as a ContentBlockerManager (nil for 0).
+// ContentBlockerManagerFromID adopts an existing Objective-C object as a ContentBlockerManager
+// (nil for 0), retaining it and registering a release finalizer.
 func ContentBlockerManagerFromID(id objc.ID) *ContentBlockerManager {
 	if id == 0 {
 		return nil
 	}
-	return &ContentBlockerManager{inner: raw.SFContentBlockerManagerFromID(id)}
+	x := &ContentBlockerManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewContentBlockerManager creates a new [ContentBlockerManager].
+// contentBlockerManagerAdopt wraps an Objective-C object that this code just created as a
+// ContentBlockerManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contentBlockerManagerAdopt(id objc.ID) *ContentBlockerManager {
+	if id == 0 {
+		return nil
+	}
+	x := &ContentBlockerManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ContentBlockerManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ContentBlockerManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ContentBlockerManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewContentBlockerManager creates a new ContentBlockerManager.
 func NewContentBlockerManager() *ContentBlockerManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFContentBlockerManager")), objc.RegisterName("new"))
-	return &ContentBlockerManager{inner: raw.SFContentBlockerManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFContentBlockerManager")), objc.RegisterName("new"))
+	return contentBlockerManagerAdopt(_id)
 }
 
 // ContentBlockerManagerable is the interface implemented by [ContentBlockerManager], for mocking and DI.
 type ContentBlockerManagerable interface {
-	Unwrap() *raw.SFContentBlockerManager
+	obj.Object
 }
 
 var _ ContentBlockerManagerable = (*ContentBlockerManager)(nil)

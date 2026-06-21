@@ -6,63 +6,83 @@ package matter
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Cluster Thread Border Router Management Manage the Thread network of Thread Border Router
 //
-// MTRClusterThreadBorderRouterManagement wraps [raw.MTRClusterThreadBorderRouterManagement] with a fluent Go API.
+// MTRClusterThreadBorderRouterManagement is an idiomatic wrapper over the Objective-C class MTRClusterThreadBorderRouterManagement.
 type MTRClusterThreadBorderRouterManagement struct {
-	inner *raw.MTRClusterThreadBorderRouterManagement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterThreadBorderRouterManagement].
-func (x *MTRClusterThreadBorderRouterManagement) Unwrap() *raw.MTRClusterThreadBorderRouterManagement {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterThreadBorderRouterManagement) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterThreadBorderRouterManagementFromID adopts an existing object pointer as a MTRClusterThreadBorderRouterManagement (nil for 0).
+// MTRClusterThreadBorderRouterManagementFromID adopts an existing Objective-C object as a MTRClusterThreadBorderRouterManagement
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterThreadBorderRouterManagementFromID(id objc.ID) *MTRClusterThreadBorderRouterManagement {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterThreadBorderRouterManagement{inner: raw.MTRClusterThreadBorderRouterManagementFromID(id)}
+	x := &MTRClusterThreadBorderRouterManagement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterThreadBorderRouterManagementAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterThreadBorderRouterManagement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterThreadBorderRouterManagementAdopt(id objc.ID) *MTRClusterThreadBorderRouterManagement {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterThreadBorderRouterManagement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterThreadBorderRouterManagement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterThreadBorderRouterManagement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterThreadBorderRouterManagement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterThreadBorderRouterManagementWithDeviceEndpointIDQueue creates a new [MTRClusterThreadBorderRouterManagement].
-func NewMTRClusterThreadBorderRouterManagementWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterThreadBorderRouterManagement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterThreadBorderRouterManagement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterThreadBorderRouterManagement{inner: raw.MTRClusterThreadBorderRouterManagementFromID(_id)}
+// NewMTRClusterThreadBorderRouterManagementWithDeviceEndpointIDQueue creates a new MTRClusterThreadBorderRouterManagement.
+func NewMTRClusterThreadBorderRouterManagementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterThreadBorderRouterManagement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterThreadBorderRouterManagement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterThreadBorderRouterManagementAdopt(_id)
 }
 
 // GetActiveDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterThreadBorderRouterManagement) GetActiveDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRThreadBorderRouterManagementClusterGetActiveDatasetRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
+func (x *MTRClusterThreadBorderRouterManagement) GetActiveDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRThreadBorderRouterManagementClusterGetActiveDatasetRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
 	type _result struct {
 		val *MTRThreadBorderRouterManagementClusterDatasetResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetActiveDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRThreadBorderRouterManagementClusterDatasetResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRThreadBorderRouterManagementClusterDatasetResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRThreadBorderRouterManagementClusterDatasetResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getActiveDatasetRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -73,22 +93,19 @@ func (x *MTRClusterThreadBorderRouterManagement) GetActiveDatasetRequestWithPara
 }
 
 // GetActiveDatasetRequestWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterThreadBorderRouterManagement) GetActiveDatasetRequestWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
+func (x *MTRClusterThreadBorderRouterManagement) GetActiveDatasetRequestWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
 	type _result struct {
 		val *MTRThreadBorderRouterManagementClusterDatasetResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetActiveDatasetRequestWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRThreadBorderRouterManagementClusterDatasetResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRThreadBorderRouterManagementClusterDatasetResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRThreadBorderRouterManagementClusterDatasetResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getActiveDatasetRequestWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -99,22 +116,19 @@ func (x *MTRClusterThreadBorderRouterManagement) GetActiveDatasetRequestWithExpe
 }
 
 // GetPendingDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterThreadBorderRouterManagement) GetPendingDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
+func (x *MTRClusterThreadBorderRouterManagement) GetPendingDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
 	type _result struct {
 		val *MTRThreadBorderRouterManagementClusterDatasetResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetPendingDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRThreadBorderRouterManagementClusterDatasetResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRThreadBorderRouterManagementClusterDatasetResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRThreadBorderRouterManagementClusterDatasetResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getPendingDatasetRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -125,22 +139,19 @@ func (x *MTRClusterThreadBorderRouterManagement) GetPendingDatasetRequestWithPar
 }
 
 // GetPendingDatasetRequestWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterThreadBorderRouterManagement) GetPendingDatasetRequestWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
+func (x *MTRClusterThreadBorderRouterManagement) GetPendingDatasetRequestWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error) {
 	type _result struct {
 		val *MTRThreadBorderRouterManagementClusterDatasetResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetPendingDatasetRequestWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRThreadBorderRouterManagementClusterDatasetResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRThreadBorderRouterManagementClusterDatasetResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRThreadBorderRouterManagementClusterDatasetResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getPendingDatasetRequestWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -150,99 +161,79 @@ func (x *MTRClusterThreadBorderRouterManagement) GetPendingDatasetRequestWithExp
 	}
 }
 
-// SetActiveDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying SetActiveDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterThreadBorderRouterManagement) SetActiveDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.SetActiveDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeBorderRouterNameWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBorderRouterNameWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// SetPendingDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying SetPendingDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterThreadBorderRouterManagement) SetPendingDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.SetPendingDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeBorderAgentIDWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBorderAgentIDWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBorderRouterNameWithParams calls the underlying ReadAttributeBorderRouterNameWithParams.
-func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeBorderRouterNameWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBorderRouterNameWithParams(params)
+func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeThreadVersionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeThreadVersionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBorderAgentIDWithParams calls the underlying ReadAttributeBorderAgentIDWithParams.
-func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeBorderAgentIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBorderAgentIDWithParams(params)
+func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeInterfaceEnabledWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInterfaceEnabledWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeThreadVersionWithParams calls the underlying ReadAttributeThreadVersionWithParams.
-func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeThreadVersionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeThreadVersionWithParams(params)
+func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeActiveDatasetTimestampWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveDatasetTimestampWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeInterfaceEnabledWithParams calls the underlying ReadAttributeInterfaceEnabledWithParams.
-func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeInterfaceEnabledWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeInterfaceEnabledWithParams(params)
+func (x *MTRClusterThreadBorderRouterManagement) ReadAttributePendingDatasetTimestampWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePendingDatasetTimestampWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveDatasetTimestampWithParams calls the underlying ReadAttributeActiveDatasetTimestampWithParams.
-func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeActiveDatasetTimestampWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeActiveDatasetTimestampWithParams(params)
+func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePendingDatasetTimestampWithParams calls the underlying ReadAttributePendingDatasetTimestampWithParams.
-func (x *MTRClusterThreadBorderRouterManagement) ReadAttributePendingDatasetTimestampWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePendingDatasetTimestampWithParams(params)
+func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
-}
-
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterThreadBorderRouterManagement) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterThreadBorderRouterManagement) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterThreadBorderRouterManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterThreadBorderRouterManagementable is the interface implemented by [MTRClusterThreadBorderRouterManagement], for mocking and DI.
 type MTRClusterThreadBorderRouterManagementable interface {
-	Unwrap() *raw.MTRClusterThreadBorderRouterManagement
-	GetActiveDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRThreadBorderRouterManagementClusterGetActiveDatasetRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error)
-	GetActiveDatasetRequestWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error)
-	GetPendingDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error)
-	GetPendingDatasetRequestWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error)
-	SetActiveDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRThreadBorderRouterManagementClusterSetActiveDatasetRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	SetPendingDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeBorderRouterNameWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBorderAgentIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeThreadVersionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeInterfaceEnabledWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeActiveDatasetTimestampWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePendingDatasetTimestampWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	GetActiveDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRThreadBorderRouterManagementClusterGetActiveDatasetRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error)
+	GetActiveDatasetRequestWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error)
+	GetPendingDatasetRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRThreadBorderRouterManagementClusterGetPendingDatasetRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error)
+	GetPendingDatasetRequestWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRThreadBorderRouterManagementClusterDatasetResponseParams, error)
+	ReadAttributeBorderRouterNameWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBorderAgentIDWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeThreadVersionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeInterfaceEnabledWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeActiveDatasetTimestampWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePendingDatasetTimestampWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterThreadBorderRouterManagementable = (*MTRClusterThreadBorderRouterManagement)(nil)

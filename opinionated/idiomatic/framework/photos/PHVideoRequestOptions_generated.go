@@ -5,106 +5,108 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A set of options affecting the delivery of video asset data that you request from an image manager.
 //
-// VideoRequestOptions wraps [raw.PHVideoRequestOptions] with a fluent Go API.
+// VideoRequestOptions is an idiomatic wrapper over the Objective-C class PHVideoRequestOptions.
 type VideoRequestOptions struct {
-	inner *raw.PHVideoRequestOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHVideoRequestOptions].
-func (x *VideoRequestOptions) Unwrap() *raw.PHVideoRequestOptions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VideoRequestOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// VideoRequestOptionsFromID adopts an existing object pointer as a VideoRequestOptions (nil for 0).
+// VideoRequestOptionsFromID adopts an existing Objective-C object as a VideoRequestOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func VideoRequestOptionsFromID(id objc.ID) *VideoRequestOptions {
 	if id == 0 {
 		return nil
 	}
-	return &VideoRequestOptions{inner: raw.PHVideoRequestOptionsFromID(id)}
+	x := &VideoRequestOptions{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVideoRequestOptions creates a new [VideoRequestOptions].
+// videoRequestOptionsAdopt wraps an Objective-C object that this code just created as a
+// VideoRequestOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func videoRequestOptionsAdopt(id objc.ID) *VideoRequestOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &VideoRequestOptions{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VideoRequestOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VideoRequestOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VideoRequestOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVideoRequestOptions creates a new VideoRequestOptions.
 func NewVideoRequestOptions() *VideoRequestOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHVideoRequestOptions")), objc.RegisterName("new"))
-	return &VideoRequestOptions{inner: raw.PHVideoRequestOptionsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHVideoRequestOptions")), objc.RegisterName("new"))
+	return videoRequestOptionsAdopt(_id)
 }
 
 // A Boolean value that specifies whether Photos can download the requested video from iCloud.
 //
-// WithNetworkAccessAllowed sets the networkAccessAllowed property and returns the receiver for chaining.
+// WithNetworkAccessAllowed sets networkAccessAllowed and returns the receiver so calls can be chained.
 func (x *VideoRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *VideoRequestOptions {
-	x.inner.SetNetworkAccessAllowed(networkAccessAllowed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
 	return x
 }
 
 // A mode specifying the requested video quality and delivery priority.
 //
-// WithDeliveryMode sets the deliveryMode property and returns the receiver for chaining.
-func (x *VideoRequestOptions) WithDeliveryMode(deliveryMode PHVideoRequestOptionsDeliveryMode) *VideoRequestOptions {
-	x.inner.SetDeliveryMode(raw.PHVideoRequestOptionsDeliveryMode(deliveryMode))
+// WithDeliveryMode sets deliveryMode and returns the receiver so calls can be chained.
+func (x *VideoRequestOptions) WithDeliveryMode(deliveryMode VideoRequestOptionsDeliveryMode) *VideoRequestOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryMode:"), deliveryMode)
 	return x
 }
 
-// A block Photos calls periodically while downloading the video.
-//
-// WithProgressHandler sets the progressHandler property and returns the receiver for chaining.
-func (x *VideoRequestOptions) WithProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID])) *VideoRequestOptions {
-	x.inner.SetProgressHandler(progressHandler)
-	return x
-}
-
-// IsNetworkAccessAllowed calls the underlying IsNetworkAccessAllowed.
 func (x *VideoRequestOptions) IsNetworkAccessAllowed() bool {
-	return x.inner.IsNetworkAccessAllowed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNetworkAccessAllowed"))
+	return _r
 }
 
-// SetNetworkAccessAllowed calls the underlying SetNetworkAccessAllowed.
 func (x *VideoRequestOptions) SetNetworkAccessAllowed(networkAccessAllowed bool) {
-	x.inner.SetNetworkAccessAllowed(networkAccessAllowed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
 }
 
-// DeliveryMode calls the underlying DeliveryMode.
-func (x *VideoRequestOptions) DeliveryMode() PHVideoRequestOptionsDeliveryMode {
-	return PHVideoRequestOptionsDeliveryMode(x.inner.DeliveryMode())
+func (x *VideoRequestOptions) DeliveryMode() VideoRequestOptionsDeliveryMode {
+	_r := objc.Send[VideoRequestOptionsDeliveryMode](objref.IDOf(x), objc.RegisterName("deliveryMode"))
+	return _r
 }
 
-// SetDeliveryMode calls the underlying SetDeliveryMode.
-func (x *VideoRequestOptions) SetDeliveryMode(deliveryMode PHVideoRequestOptionsDeliveryMode) {
-	x.inner.SetDeliveryMode(raw.PHVideoRequestOptionsDeliveryMode(deliveryMode))
-}
-
-// ProgressHandler calls the underlying ProgressHandler.
-func (x *VideoRequestOptions) ProgressHandler() objc.Block {
-	return x.inner.ProgressHandler()
-}
-
-// SetProgressHandler calls the underlying SetProgressHandler.
-func (x *VideoRequestOptions) SetProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID])) {
-	x.inner.SetProgressHandler(progressHandler)
+func (x *VideoRequestOptions) SetDeliveryMode(deliveryMode VideoRequestOptionsDeliveryMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryMode:"), deliveryMode)
 }
 
 // VideoRequestOptionsable is the interface implemented by [VideoRequestOptions], for mocking and DI.
 type VideoRequestOptionsable interface {
-	Unwrap() *raw.PHVideoRequestOptions
+	obj.Object
 	WithNetworkAccessAllowed(networkAccessAllowed bool) *VideoRequestOptions
-	WithDeliveryMode(deliveryMode PHVideoRequestOptionsDeliveryMode) *VideoRequestOptions
-	WithProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID])) *VideoRequestOptions
+	WithDeliveryMode(deliveryMode VideoRequestOptionsDeliveryMode) *VideoRequestOptions
 	IsNetworkAccessAllowed() bool
 	SetNetworkAccessAllowed(networkAccessAllowed bool)
-	DeliveryMode() PHVideoRequestOptionsDeliveryMode
-	SetDeliveryMode(deliveryMode PHVideoRequestOptionsDeliveryMode)
-	ProgressHandler() objc.Block
-	SetProgressHandler(progressHandler func(float64, unsafe.Pointer, *bool, *foundation.NSDictionary[objc.ID, objc.ID]))
+	DeliveryMode() VideoRequestOptionsDeliveryMode
+	SetDeliveryMode(deliveryMode VideoRequestOptionsDeliveryMode)
 }
 
 var _ VideoRequestOptionsable = (*VideoRequestOptions)(nil)

@@ -5,52 +5,71 @@
 package quartzcore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A function that defines the pacing of an animation as a timing curve.
 //
-// MediaTimingFunction wraps [raw.CAMediaTimingFunction] with a fluent Go API.
+// MediaTimingFunction is an idiomatic wrapper over the Objective-C class CAMediaTimingFunction.
 type MediaTimingFunction struct {
-	inner *raw.CAMediaTimingFunction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CAMediaTimingFunction].
-func (x *MediaTimingFunction) Unwrap() *raw.CAMediaTimingFunction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MediaTimingFunction) ID() objc.ID { return x.inner.Ptr() }
-
-// MediaTimingFunctionFromID adopts an existing object pointer as a MediaTimingFunction (nil for 0).
+// MediaTimingFunctionFromID adopts an existing Objective-C object as a MediaTimingFunction
+// (nil for 0), retaining it and registering a release finalizer.
 func MediaTimingFunctionFromID(id objc.ID) *MediaTimingFunction {
 	if id == 0 {
 		return nil
 	}
-	return &MediaTimingFunction{inner: raw.CAMediaTimingFunctionFromID(id)}
+	x := &MediaTimingFunction{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mediaTimingFunctionAdopt wraps an Objective-C object that this code just created as a
+// MediaTimingFunction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mediaTimingFunctionAdopt(id objc.ID) *MediaTimingFunction {
+	if id == 0 {
+		return nil
+	}
+	x := &MediaTimingFunction{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MediaTimingFunction) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MediaTimingFunction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MediaTimingFunction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns an initialized timing function modeled as a cubic Bézier curve using the specified control points.
 //
-// NewMediaTimingFunctionWithControlPoints creates a new [MediaTimingFunction].
+// NewMediaTimingFunctionWithControlPoints creates a new MediaTimingFunction.
 func NewMediaTimingFunctionWithControlPoints(c1x float32, c1y float32, c2x float32, c2y float32) *MediaTimingFunction {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CAMediaTimingFunction")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CAMediaTimingFunction")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithControlPoints::::"), c1x, c1y, c2x, c2y)
-	return &MediaTimingFunction{inner: raw.CAMediaTimingFunctionFromID(_id)}
-}
-
-// Returns the control point for the specified index.
-//
-// GetControlPointAtIndexValues calls the underlying GetControlPointAtIndexValues.
-func (x *MediaTimingFunction) GetControlPointAtIndexValues(idx uint, ptr *float32) {
-	x.inner.GetControlPointAtIndexValues(idx, ptr)
+	return mediaTimingFunctionAdopt(_id)
 }
 
 // MediaTimingFunctionable is the interface implemented by [MediaTimingFunction], for mocking and DI.
 type MediaTimingFunctionable interface {
-	Unwrap() *raw.CAMediaTimingFunction
-	GetControlPointAtIndexValues(idx uint, ptr *float32)
+	obj.Object
 }
 
 var _ MediaTimingFunctionable = (*MediaTimingFunction)(nil)

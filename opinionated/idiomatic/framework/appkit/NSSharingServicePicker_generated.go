@@ -5,94 +5,83 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A list of sharing services that the user can choose from.
 //
-// SharingServicePicker wraps [raw.NSSharingServicePicker] with a fluent Go API.
+// SharingServicePicker is an idiomatic wrapper over the Objective-C class NSSharingServicePicker.
 type SharingServicePicker struct {
-	inner *raw.NSSharingServicePicker
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSharingServicePicker].
-func (x *SharingServicePicker) Unwrap() *raw.NSSharingServicePicker { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SharingServicePicker) ID() objc.ID { return x.inner.Ptr() }
-
-// SharingServicePickerFromID adopts an existing object pointer as a SharingServicePicker (nil for 0).
+// SharingServicePickerFromID adopts an existing Objective-C object as a SharingServicePicker
+// (nil for 0), retaining it and registering a release finalizer.
 func SharingServicePickerFromID(id objc.ID) *SharingServicePicker {
 	if id == 0 {
 		return nil
 	}
-	return &SharingServicePicker{inner: raw.NSSharingServicePickerFromID(id)}
+	x := &SharingServicePicker{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// sharingServicePickerAdopt wraps an Objective-C object that this code just created as a
+// SharingServicePicker (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sharingServicePickerAdopt(id objc.ID) *SharingServicePicker {
+	if id == 0 {
+		return nil
+	}
+	x := &SharingServicePicker{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SharingServicePicker) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SharingServicePicker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SharingServicePicker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new sharing service picker for the selected items.
 //
-// NewSharingServicePickerWithItems creates a new [SharingServicePicker].
-func NewSharingServicePickerWithItems(items *foundation.NSArray[objc.ID]) *SharingServicePicker {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSharingServicePicker")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItems:"), items.Ptr())
-	return &SharingServicePicker{inner: raw.NSSharingServicePickerFromID(_id)}
-}
-
-// The object for managing the sharing service picker.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *SharingServicePicker) WithDelegate(delegate raw.NSSharingServicePickerDelegate) *SharingServicePicker {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// Shows the picker interface and populates it with the relevant sharing services.
-//
-// ShowRelativeToRectOfViewPreferredEdge calls the underlying ShowRelativeToRectOfViewPreferredEdge.
-func (x *SharingServicePicker) ShowRelativeToRectOfViewPreferredEdge(rect corefoundation.CGRect, view *raw.NSView, preferredEdge foundation.NSRectEdge) {
-	x.inner.ShowRelativeToRectOfViewPreferredEdge(rect, view, preferredEdge)
+// NewSharingServicePickerWithItems creates a new SharingServicePicker.
+func NewSharingServicePickerWithItems(items obj.Object) *SharingServicePicker {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSharingServicePicker")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItems:"), objref.IDOf(items))
+	return sharingServicePickerAdopt(_id)
 }
 
 // Closes the picker interface.
-//
-// Close calls the underlying Close.
 func (x *SharingServicePicker) Close() {
-	x.inner.Close()
-}
-
-// Delegate calls the underlying Delegate.
-func (x *SharingServicePicker) Delegate() raw.NSSharingServicePickerDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *SharingServicePicker) SetDelegate(delegate raw.NSSharingServicePickerDelegate) {
-	x.inner.SetDelegate(delegate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }
 
 // Returns a menu item suitable to display the picker for the given items.
-//
-// StandardShareMenuItem calls the underlying StandardShareMenuItem.
 func (x *SharingServicePicker) StandardShareMenuItem() *MenuItem {
-	_r := x.inner.StandardShareMenuItem()
-	if _r == nil {
-		return nil
-	}
-	return &MenuItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardShareMenuItem"))
+	return MenuItemFromID(_r)
 }
 
 // SharingServicePickerable is the interface implemented by [SharingServicePicker], for mocking and DI.
 type SharingServicePickerable interface {
-	Unwrap() *raw.NSSharingServicePicker
-	WithDelegate(delegate raw.NSSharingServicePickerDelegate) *SharingServicePicker
-	ShowRelativeToRectOfViewPreferredEdge(rect corefoundation.CGRect, view *raw.NSView, preferredEdge foundation.NSRectEdge)
+	obj.Object
 	Close()
-	Delegate() raw.NSSharingServicePickerDelegate
-	SetDelegate(delegate raw.NSSharingServicePickerDelegate)
 	StandardShareMenuItem() *MenuItem
 }
 

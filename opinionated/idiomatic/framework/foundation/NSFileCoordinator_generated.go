@@ -6,70 +6,91 @@ package foundation
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that coordinates the reading and writing of files and directories among file presenters.
 //
-// FileCoordinator wraps [raw.NSFileCoordinator] with a fluent Go API.
+// FileCoordinator is an idiomatic wrapper over the Objective-C class NSFileCoordinator.
 type FileCoordinator struct {
-	inner *raw.NSFileCoordinator
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFileCoordinator].
-func (x *FileCoordinator) Unwrap() *raw.NSFileCoordinator { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileCoordinator) ID() objc.ID { return x.inner.Ptr() }
-
-// FileCoordinatorFromID adopts an existing object pointer as a FileCoordinator (nil for 0).
+// FileCoordinatorFromID adopts an existing Objective-C object as a FileCoordinator
+// (nil for 0), retaining it and registering a release finalizer.
 func FileCoordinatorFromID(id objc.ID) *FileCoordinator {
 	if id == 0 {
 		return nil
 	}
-	return &FileCoordinator{inner: raw.NSFileCoordinatorFromID(id)}
+	x := &FileCoordinator{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes and returns a file coordinator object using the specified file presenter.
-//
-// NewFileCoordinatorWithFilePresenter creates a new [FileCoordinator].
-func NewFileCoordinatorWithFilePresenter(filePresenterOrNil raw.NSFilePresenter) *FileCoordinator {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileCoordinator")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFilePresenter:"), filePresenterOrNil)
-	return &FileCoordinator{inner: raw.NSFileCoordinatorFromID(_id)}
+// fileCoordinatorAdopt wraps an Objective-C object that this code just created as a
+// FileCoordinator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileCoordinatorAdopt(id objc.ID) *FileCoordinator {
+	if id == 0 {
+		return nil
+	}
+	x := &FileCoordinator{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FileCoordinator) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileCoordinator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileCoordinator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFileCoordinator creates a new FileCoordinator.
+func NewFileCoordinator() *FileCoordinator {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSFileCoordinator")), objc.RegisterName("new"))
+	return fileCoordinatorAdopt(_id)
 }
 
 // A string that uniquely identifies the file access that was performed by this file coordinator.
 //
-// WithPurposeIdentifier sets the purposeIdentifier property and returns the receiver for chaining.
-func (x *FileCoordinator) WithPurposeIdentifier(purposeIdentifier string) *FileCoordinator {
-	x.inner.SetPurposeIdentifier(foundation.NSStringStringWithUTF8String(purposeIdentifier))
+// WithPurposeIdentifier sets purposeIdentifier and returns the receiver so calls can be chained.
+func (x *FileCoordinator) WithPurposeIdentifier(purposeIdentifier StringProvider) *FileCoordinator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPurposeIdentifier:"), objref.IDOf(purposeIdentifier))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *FileCoordinator) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileCoordinator {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *FileCoordinator) WithScriptingProperties(scriptingProperties obj.Object) *FileCoordinator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Performs a number of coordinated-read or -write operations asynchronously.
 //
 // CoordinateAccessWithIntentsQueueByAccessor blocks until the operation completes or ctx is cancelled.
-func (x *FileCoordinator) CoordinateAccessWithIntentsQueueByAccessor(ctx context.Context, intents *raw.NSArray[*raw.NSFileAccessIntent], queue *raw.NSOperationQueue) error {
+func (x *FileCoordinator) CoordinateAccessWithIntentsQueueByAccessor(ctx context.Context, intents []*FileAccessIntent, queue *OperationQueue) error {
 	_ch := make(chan error, 1)
-	x.inner.CoordinateAccessWithIntentsQueueByAccessor(intents, queue, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coordinateAccessWithIntents:queue:byAccessor:"), purego.SliceToNSArray(intents, func(_v *FileAccessIntent) objc.ID { return objref.IDOf(_v) }), objref.IDOf(queue), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -78,137 +99,49 @@ func (x *FileCoordinator) CoordinateAccessWithIntentsQueueByAccessor(ctx context
 	}
 }
 
-// Initiates a read operation on a single file or directory using the specified options.
-//
-// CoordinateReadingItemAtURLOptionsErrorByAccessor blocks until the operation completes or ctx is cancelled.
-func (x *FileCoordinator) CoordinateReadingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options NSFileCoordinatorReadingOptions, outError unsafe.Pointer) (*URL, error) {
-	type _result struct {
-		val *URL
-		err error
-	}
-	_ch := make(chan _result, 1)
-	x.inner.CoordinateReadingItemAtURLOptionsErrorByAccessor(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileCoordinatorReadingOptions(options), outError, func(_p0 *raw.NSURL) {
-		var _o _result
-		if _p0 != nil {
-			_o.val = &URL{inner: _p0}
-		}
-		_ch <- _o
-	})
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *URL
-		return _zero, ctx.Err()
-	}
-}
-
-// Initiates a write operation on a single file or directory using the specified options.
-//
-// CoordinateWritingItemAtURLOptionsErrorByAccessor blocks until the operation completes or ctx is cancelled.
-func (x *FileCoordinator) CoordinateWritingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options NSFileCoordinatorWritingOptions, outError unsafe.Pointer) (*URL, error) {
-	type _result struct {
-		val *URL
-		err error
-	}
-	_ch := make(chan _result, 1)
-	x.inner.CoordinateWritingItemAtURLOptionsErrorByAccessor(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileCoordinatorWritingOptions(options), outError, func(_p0 *raw.NSURL) {
-		var _o _result
-		if _p0 != nil {
-			_o.val = &URL{inner: _p0}
-		}
-		_ch <- _o
-	})
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *URL
-		return _zero, ctx.Err()
-	}
-}
-
-// Initiates a read operation that contains a follow-up write operation.
-//
-// CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor calls the underlying CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor.
-func (x *FileCoordinator) CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(readingURL string, readingOptions NSFileCoordinatorReadingOptions, writingURL string, writingOptions NSFileCoordinatorWritingOptions, outError unsafe.Pointer, readerWriter func(*raw.NSURL, *raw.NSURL)) {
-	x.inner.CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(readingURL)), raw.NSFileCoordinatorReadingOptions(readingOptions), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(writingURL)), raw.NSFileCoordinatorWritingOptions(writingOptions), outError, readerWriter)
-}
-
-// Initiates a write operation that involves a secondary write operation.
-//
-// CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor calls the underlying CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor.
-func (x *FileCoordinator) CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(url1 string, options1 NSFileCoordinatorWritingOptions, url2 string, options2 NSFileCoordinatorWritingOptions, outError unsafe.Pointer, writer func(*raw.NSURL, *raw.NSURL)) {
-	x.inner.CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url1)), raw.NSFileCoordinatorWritingOptions(options1), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url2)), raw.NSFileCoordinatorWritingOptions(options2), outError, writer)
-}
-
-// Prepare to read or write from multiple files in a single batch operation.
-//
-// PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor calls the underlying PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor.
-func (x *FileCoordinator) PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor(readingURLs *raw.NSArray[*raw.NSURL], readingOptions NSFileCoordinatorReadingOptions, writingURLs *raw.NSArray[*raw.NSURL], writingOptions NSFileCoordinatorWritingOptions, outError unsafe.Pointer, batchAccessor func(objc.Block)) {
-	x.inner.PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor(readingURLs, raw.NSFileCoordinatorReadingOptions(readingOptions), writingURLs, raw.NSFileCoordinatorWritingOptions(writingOptions), outError, batchAccessor)
-}
-
 // Announces that your app is moving a file to a new URL.
-//
-// ItemAtURLWillMoveToURL calls the underlying ItemAtURLWillMoveToURL.
 func (x *FileCoordinator) ItemAtURLWillMoveToURL(oldURL string, newURL string) {
-	x.inner.ItemAtURLWillMoveToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(oldURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(newURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemAtURL:willMoveToURL:"), rt.FileURL(oldURL), rt.FileURL(newURL))
 }
 
 // Notifies relevant file presenters that the location of a file or directory changed.
-//
-// ItemAtURLDidMoveToURL calls the underlying ItemAtURLDidMoveToURL.
 func (x *FileCoordinator) ItemAtURLDidMoveToURL(oldURL string, newURL string) {
-	x.inner.ItemAtURLDidMoveToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(oldURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(newURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemAtURL:didMoveToURL:"), rt.FileURL(oldURL), rt.FileURL(newURL))
 }
 
 // Tells observing file providers that the item’s ubiquity attributes have changed.
-//
-// ItemAtURLDidChangeUbiquityAttributes calls the underlying ItemAtURLDidChangeUbiquityAttributes.
-func (x *FileCoordinator) ItemAtURLDidChangeUbiquityAttributes(url string, attributes *raw.NSSet[*raw.NSString]) {
-	x.inner.ItemAtURLDidChangeUbiquityAttributes(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), attributes)
+func (x *FileCoordinator) ItemAtURLDidChangeUbiquityAttributes(url string, attributes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemAtURL:didChangeUbiquityAttributes:"), rt.FileURL(url), objref.IDOf(attributes))
 }
 
 // Cancels any active file coordination calls.
-//
-// Cancel calls the underlying Cancel.
 func (x *FileCoordinator) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// PurposeIdentifier calls the underlying PurposeIdentifier.
-func (x *FileCoordinator) PurposeIdentifier() *String {
-	_r := x.inner.PurposeIdentifier()
-	if _r == nil {
-		return nil
+func (x *FileCoordinator) PurposeIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("purposeIdentifier"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetPurposeIdentifier calls the underlying SetPurposeIdentifier.
 func (x *FileCoordinator) SetPurposeIdentifier(purposeIdentifier string) {
-	x.inner.SetPurposeIdentifier(foundation.NSStringStringWithUTF8String(purposeIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPurposeIdentifier:"), purego.NSString(purposeIdentifier))
 }
-
-func (x *FileCoordinator) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // FileCoordinatorable is the interface implemented by [FileCoordinator], for mocking and DI.
 type FileCoordinatorable interface {
-	Unwrap() *raw.NSFileCoordinator
-	WithPurposeIdentifier(purposeIdentifier string) *FileCoordinator
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileCoordinator
-	CoordinateAccessWithIntentsQueueByAccessor(ctx context.Context, intents *raw.NSArray[*raw.NSFileAccessIntent], queue *raw.NSOperationQueue) error
-	CoordinateReadingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options NSFileCoordinatorReadingOptions, outError unsafe.Pointer) (*URL, error)
-	CoordinateWritingItemAtURLOptionsErrorByAccessor(ctx context.Context, url string, options NSFileCoordinatorWritingOptions, outError unsafe.Pointer) (*URL, error)
-	CoordinateReadingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(readingURL string, readingOptions NSFileCoordinatorReadingOptions, writingURL string, writingOptions NSFileCoordinatorWritingOptions, outError unsafe.Pointer, readerWriter func(*raw.NSURL, *raw.NSURL))
-	CoordinateWritingItemAtURLOptionsWritingItemAtURLOptionsErrorByAccessor(url1 string, options1 NSFileCoordinatorWritingOptions, url2 string, options2 NSFileCoordinatorWritingOptions, outError unsafe.Pointer, writer func(*raw.NSURL, *raw.NSURL))
-	PrepareForReadingItemsAtURLsOptionsWritingItemsAtURLsOptionsErrorByAccessor(readingURLs *raw.NSArray[*raw.NSURL], readingOptions NSFileCoordinatorReadingOptions, writingURLs *raw.NSArray[*raw.NSURL], writingOptions NSFileCoordinatorWritingOptions, outError unsafe.Pointer, batchAccessor func(objc.Block))
+	obj.Object
+	WithPurposeIdentifier(purposeIdentifier StringProvider) *FileCoordinator
+	WithScriptingProperties(scriptingProperties obj.Object) *FileCoordinator
+	CoordinateAccessWithIntentsQueueByAccessor(ctx context.Context, intents []*FileAccessIntent, queue *OperationQueue) error
 	ItemAtURLWillMoveToURL(oldURL string, newURL string)
 	ItemAtURLDidMoveToURL(oldURL string, newURL string)
-	ItemAtURLDidChangeUbiquityAttributes(url string, attributes *raw.NSSet[*raw.NSString])
+	ItemAtURLDidChangeUbiquityAttributes(url string, attributes obj.Object)
 	Cancel()
-	PurposeIdentifier() *String
+	PurposeIdentifier() string
 	SetPurposeIdentifier(purposeIdentifier string)
 }
 

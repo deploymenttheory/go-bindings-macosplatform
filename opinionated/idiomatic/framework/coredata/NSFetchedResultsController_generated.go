@@ -5,172 +5,166 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // A controller that you use to manage the results of a Core Data fetch request and to display data to the user.
 //
-// FetchedResultsController wraps [raw.NSFetchedResultsController] with a fluent Go API.
+// FetchedResultsController is an idiomatic wrapper over the Objective-C class NSFetchedResultsController.
 type FetchedResultsController struct {
-	inner *raw.NSFetchedResultsController[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFetchedResultsController].
-func (x *FetchedResultsController) Unwrap() *raw.NSFetchedResultsController[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FetchedResultsController) ID() objc.ID { return x.inner.Ptr() }
-
-// FetchedResultsControllerFromID adopts an existing object pointer as a FetchedResultsController (nil for 0).
+// FetchedResultsControllerFromID adopts an existing Objective-C object as a FetchedResultsController
+// (nil for 0), retaining it and registering a release finalizer.
 func FetchedResultsControllerFromID(id objc.ID) *FetchedResultsController {
 	if id == 0 {
 		return nil
 	}
-	return &FetchedResultsController{inner: raw.NSFetchedResultsControllerFromID[objc.ID](id)}
+	x := &FetchedResultsController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// fetchedResultsControllerAdopt wraps an Objective-C object that this code just created as a
+// FetchedResultsController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fetchedResultsControllerAdopt(id objc.ID) *FetchedResultsController {
+	if id == 0 {
+		return nil
+	}
+	x := &FetchedResultsController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FetchedResultsController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FetchedResultsController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FetchedResultsController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns a fetch request controller initialized using the given arguments.
 //
-// NewFetchedResultsControllerWithFetchRequestManagedObjectContextSectionNameKeyPathCacheName creates a new [FetchedResultsController].
-func NewFetchedResultsControllerWithFetchRequestManagedObjectContextSectionNameKeyPathCacheName(fetchRequest *raw.NSFetchRequest[objc.ID], context_ *raw.NSManagedObjectContext, sectionNameKeyPath string, name string) *FetchedResultsController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFetchedResultsController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFetchRequest:managedObjectContext:sectionNameKeyPath:cacheName:"), fetchRequest.Ptr(), context_.Ptr(), foundation.NSStringStringWithUTF8String(sectionNameKeyPath).Ptr(), foundation.NSStringStringWithUTF8String(name).Ptr())
-	return &FetchedResultsController{inner: raw.NSFetchedResultsControllerFromID[objc.ID](_id)}
-}
-
-// The object that is notified when the fetched results changed.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *FetchedResultsController) WithDelegate(delegate raw.NSFetchedResultsControllerDelegate) *FetchedResultsController {
-	x.inner.SetDelegate(delegate)
-	return x
+// NewFetchedResultsControllerWithFetchRequestManagedObjectContextSectionNameKeyPathCacheName creates a new FetchedResultsController.
+func NewFetchedResultsControllerWithFetchRequestManagedObjectContextSectionNameKeyPathCacheName(fetchRequest obj.Object, context_ *ManagedObjectContext, sectionNameKeyPath string, name string) *FetchedResultsController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFetchedResultsController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFetchRequest:managedObjectContext:sectionNameKeyPath:cacheName:"), objref.IDOf(fetchRequest), objref.IDOf(context_), purego.NSString(sectionNameKeyPath), purego.NSString(name))
+	return fetchedResultsControllerAdopt(_id)
 }
 
 // Executes the controller’s fetch request.
 //
-// PerformFetch returns any validation error.
+// PerformFetch returns an error if the operation did not succeed.
 func (x *FetchedResultsController) PerformFetch() error {
-	_, err := x.inner.PerformFetch()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("performFetch:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Returns the object at the given index path in the fetch results.
-//
-// ObjectAtIndexPath calls the underlying ObjectAtIndexPath.
-func (x *FetchedResultsController) ObjectAtIndexPath(indexPath *foundation.NSIndexPath) objc.ID {
-	return x.inner.ObjectAtIndexPath(indexPath)
+func (x *FetchedResultsController) ObjectAtIndexPath(indexPath obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexPath:"), objref.IDOf(indexPath))
+	return obj.Wrap(_r)
 }
 
 // Returns the index path of a given object.
-//
-// IndexPathForObject calls the underlying IndexPathForObject.
-func (x *FetchedResultsController) IndexPathForObject(object objc.ID) *foundation.NSIndexPath {
-	return x.inner.IndexPathForObject(object)
+func (x *FetchedResultsController) IndexPathForObject(object obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPathForObject:"), objref.IDOf(object))
+	return obj.Wrap(_r)
 }
 
 // Returns the corresponding section index entry for a given section name.
-//
-// SectionIndexTitleForSectionName calls the underlying SectionIndexTitleForSectionName.
 func (x *FetchedResultsController) SectionIndexTitleForSectionName(sectionName string) string {
-	_r := x.inner.SectionIndexTitleForSectionName(foundation.NSStringStringWithUTF8String(sectionName))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sectionIndexTitleForSectionName:"), purego.NSString(sectionName))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Returns the section number for a given section title and index in the section index.
-//
-// SectionForSectionIndexTitleAtIndex calls the underlying SectionForSectionIndexTitleAtIndex.
 func (x *FetchedResultsController) SectionForSectionIndexTitleAtIndex(title string, sectionIndex int) int {
-	return x.inner.SectionForSectionIndexTitleAtIndex(foundation.NSStringStringWithUTF8String(title), sectionIndex)
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sectionForSectionIndexTitle:atIndex:"), purego.NSString(title), sectionIndex)
+	return _r
 }
 
-// FetchRequest calls the underlying FetchRequest.
-func (x *FetchedResultsController) FetchRequest() *raw.NSFetchRequest[objc.ID] {
-	return x.inner.FetchRequest()
+func (x *FetchedResultsController) FetchRequest() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRequest"))
+	return obj.Wrap(_r)
 }
 
-// ManagedObjectContext calls the underlying ManagedObjectContext.
 func (x *FetchedResultsController) ManagedObjectContext() *ManagedObjectContext {
-	_r := x.inner.ManagedObjectContext()
-	if _r == nil {
-		return nil
-	}
-	return &ManagedObjectContext{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managedObjectContext"))
+	return ManagedObjectContextFromID(_r)
 }
 
-// SectionNameKeyPath calls the underlying SectionNameKeyPath.
 func (x *FetchedResultsController) SectionNameKeyPath() string {
-	_r := x.inner.SectionNameKeyPath()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sectionNameKeyPath"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// CacheName calls the underlying CacheName.
 func (x *FetchedResultsController) CacheName() string {
-	_r := x.inner.CacheName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cacheName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Delegate calls the underlying Delegate.
-func (x *FetchedResultsController) Delegate() raw.NSFetchedResultsControllerDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *FetchedResultsController) SetDelegate(delegate raw.NSFetchedResultsControllerDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// FetchedObjects calls the underlying FetchedObjects.
-func (x *FetchedResultsController) FetchedObjects() *foundation.NSArray[objc.ID] {
-	return x.inner.FetchedObjects()
+func (x *FetchedResultsController) FetchedObjects() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchedObjects"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SectionIndexTitles returns the collection as a Go slice.
 func (x *FetchedResultsController) SectionIndexTitles() []string {
-	arr := x.inner.SectionIndexTitles()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sectionIndexTitles"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Sections calls the underlying Sections.
-func (x *FetchedResultsController) Sections() *foundation.NSArray[raw.NSFetchedResultsSectionInfo] {
-	return x.inner.Sections()
+func (x *FetchedResultsController) Sections() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sections"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // FetchedResultsControllerable is the interface implemented by [FetchedResultsController], for mocking and DI.
 type FetchedResultsControllerable interface {
-	Unwrap() *raw.NSFetchedResultsController[objc.ID]
-	WithDelegate(delegate raw.NSFetchedResultsControllerDelegate) *FetchedResultsController
+	obj.Object
 	PerformFetch() error
-	ObjectAtIndexPath(indexPath *foundation.NSIndexPath) objc.ID
-	IndexPathForObject(object objc.ID) *foundation.NSIndexPath
+	ObjectAtIndexPath(indexPath obj.Object) obj.Object
+	IndexPathForObject(object obj.Object) obj.Object
 	SectionIndexTitleForSectionName(sectionName string) string
 	SectionForSectionIndexTitleAtIndex(title string, sectionIndex int) int
-	FetchRequest() *raw.NSFetchRequest[objc.ID]
+	FetchRequest() obj.Object
 	ManagedObjectContext() *ManagedObjectContext
 	SectionNameKeyPath() string
 	CacheName() string
-	Delegate() raw.NSFetchedResultsControllerDelegate
-	SetDelegate(delegate raw.NSFetchedResultsControllerDelegate)
-	FetchedObjects() *foundation.NSArray[objc.ID]
+	FetchedObjects() []obj.Object
 	SectionIndexTitles() []string
-	Sections() *foundation.NSArray[raw.NSFetchedResultsSectionInfo]
+	Sections() []obj.Object
 }
 
 var _ FetchedResultsControllerable = (*FetchedResultsController)(nil)

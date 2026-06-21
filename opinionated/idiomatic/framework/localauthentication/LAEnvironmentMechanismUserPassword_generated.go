@@ -5,50 +5,71 @@
 package localauthentication
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// EnvironmentMechanismUserPassword wraps [raw.LAEnvironmentMechanismUserPassword] with a fluent Go API.
+// EnvironmentMechanismUserPassword is an idiomatic wrapper over the Objective-C class LAEnvironmentMechanismUserPassword.
 type EnvironmentMechanismUserPassword struct {
-	inner *raw.LAEnvironmentMechanismUserPassword
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.LAEnvironmentMechanismUserPassword].
-func (x *EnvironmentMechanismUserPassword) Unwrap() *raw.LAEnvironmentMechanismUserPassword {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EnvironmentMechanismUserPassword) ID() objc.ID { return x.inner.Ptr() }
-
-// EnvironmentMechanismUserPasswordFromID adopts an existing object pointer as a EnvironmentMechanismUserPassword (nil for 0).
+// EnvironmentMechanismUserPasswordFromID adopts an existing Objective-C object as a EnvironmentMechanismUserPassword
+// (nil for 0), retaining it and registering a release finalizer.
 func EnvironmentMechanismUserPasswordFromID(id objc.ID) *EnvironmentMechanismUserPassword {
 	if id == 0 {
 		return nil
 	}
-	return &EnvironmentMechanismUserPassword{inner: raw.LAEnvironmentMechanismUserPasswordFromID(id)}
+	x := &EnvironmentMechanismUserPassword{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEnvironmentMechanismUserPassword creates a new [EnvironmentMechanismUserPassword].
+// environmentMechanismUserPasswordAdopt wraps an Objective-C object that this code just created as a
+// EnvironmentMechanismUserPassword (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func environmentMechanismUserPasswordAdopt(id objc.ID) *EnvironmentMechanismUserPassword {
+	if id == 0 {
+		return nil
+	}
+	x := &EnvironmentMechanismUserPassword{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EnvironmentMechanismUserPassword) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EnvironmentMechanismUserPassword) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EnvironmentMechanismUserPassword) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEnvironmentMechanismUserPassword creates a new EnvironmentMechanismUserPassword.
 func NewEnvironmentMechanismUserPassword() *EnvironmentMechanismUserPassword {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LAEnvironmentMechanismUserPassword")), objc.RegisterName("new"))
-	return &EnvironmentMechanismUserPassword{inner: raw.LAEnvironmentMechanismUserPasswordFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("LAEnvironmentMechanismUserPassword")), objc.RegisterName("new"))
+	return environmentMechanismUserPasswordAdopt(_id)
 }
 
-// IsSet calls the underlying IsSet.
 func (x *EnvironmentMechanismUserPassword) IsSet() bool {
-	return x.inner.IsSet()
-}
-
-func (x *EnvironmentMechanismUserPassword) asEnvironmentMechanism() *raw.LAEnvironmentMechanism {
-	return &x.inner.LAEnvironmentMechanism
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSet"))
+	return _r
 }
 
 // EnvironmentMechanismUserPasswordable is the interface implemented by [EnvironmentMechanismUserPassword], for mocking and DI.
 type EnvironmentMechanismUserPasswordable interface {
-	Unwrap() *raw.LAEnvironmentMechanismUserPassword
+	obj.Object
 	IsSet() bool
 }
 

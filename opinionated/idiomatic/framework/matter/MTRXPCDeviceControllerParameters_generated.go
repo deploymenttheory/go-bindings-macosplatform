@@ -5,77 +5,81 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRXPCDeviceControllerParameters wraps [raw.MTRXPCDeviceControllerParameters] with a fluent Go API.
+// MTRXPCDeviceControllerParameters is an idiomatic wrapper over the Objective-C class MTRXPCDeviceControllerParameters.
 type MTRXPCDeviceControllerParameters struct {
-	inner *raw.MTRXPCDeviceControllerParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRXPCDeviceControllerParameters].
-func (x *MTRXPCDeviceControllerParameters) Unwrap() *raw.MTRXPCDeviceControllerParameters {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRXPCDeviceControllerParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRXPCDeviceControllerParametersFromID adopts an existing object pointer as a MTRXPCDeviceControllerParameters (nil for 0).
+// MTRXPCDeviceControllerParametersFromID adopts an existing Objective-C object as a MTRXPCDeviceControllerParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRXPCDeviceControllerParametersFromID(id objc.ID) *MTRXPCDeviceControllerParameters {
 	if id == 0 {
 		return nil
 	}
-	return &MTRXPCDeviceControllerParameters{inner: raw.MTRXPCDeviceControllerParametersFromID(id)}
+	x := &MTRXPCDeviceControllerParameters{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// A controller created from this way will connect to a remote instance of an MTRDeviceController loaded in an XPC Service
-//
-// NewMTRXPCDeviceControllerParametersWithXPCConnectionBlockUniqueIdentifier creates a new [MTRXPCDeviceControllerParameters].
-func NewMTRXPCDeviceControllerParametersWithXPCConnectionBlockUniqueIdentifier(xpcConnectionBlock objc.Block, uniqueIdentifier *foundation.NSUUID) *MTRXPCDeviceControllerParameters {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRXPCDeviceControllerParameters")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithXPCConnectionBlock:uniqueIdentifier:"), xpcConnectionBlock, uniqueIdentifier.Ptr())
-	return &MTRXPCDeviceControllerParameters{inner: raw.MTRXPCDeviceControllerParametersFromID(_id)}
+// mTRXPCDeviceControllerParametersAdopt wraps an Objective-C object that this code just created as a
+// MTRXPCDeviceControllerParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRXPCDeviceControllerParametersAdopt(id objc.ID) *MTRXPCDeviceControllerParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRXPCDeviceControllerParameters{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRXPCDeviceControllerParametersWithXPConnectionBlockUniqueIdentifier creates a new [MTRXPCDeviceControllerParameters].
-func NewMTRXPCDeviceControllerParametersWithXPConnectionBlockUniqueIdentifier(xpcConnectionBlock objc.Block, uniqueIdentifier *foundation.NSUUID) *MTRXPCDeviceControllerParameters {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRXPCDeviceControllerParameters")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithXPConnectionBlock:uniqueIdentifier:"), xpcConnectionBlock, uniqueIdentifier.Ptr())
-	return &MTRXPCDeviceControllerParameters{inner: raw.MTRXPCDeviceControllerParametersFromID(_id)}
+// Description returns the object's -description text.
+func (x *MTRXPCDeviceControllerParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRXPCDeviceControllerParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRXPCDeviceControllerParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRXPCDeviceControllerParameters creates a new MTRXPCDeviceControllerParameters.
+func NewMTRXPCDeviceControllerParameters() *MTRXPCDeviceControllerParameters {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRXPCDeviceControllerParameters")), objc.RegisterName("new"))
+	return mTRXPCDeviceControllerParametersAdopt(_id)
 }
 
 // Whether the controller should start out suspended.
 //
-// WithStartSuspended sets the startSuspended property and returns the receiver for chaining.
+// WithStartSuspended sets startSuspended and returns the receiver so calls can be chained.
 func (x *MTRXPCDeviceControllerParameters) WithStartSuspended(startSuspended bool) *MTRXPCDeviceControllerParameters {
-	x.inner.MTRDeviceControllerAbstractParameters.SetStartSuspended(startSuspended)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSuspended:"), startSuspended)
 	return x
 }
 
-// UniqueIdentifier calls the underlying UniqueIdentifier.
-func (x *MTRXPCDeviceControllerParameters) UniqueIdentifier() *foundation.NSUUID {
-	return x.inner.UniqueIdentifier()
-}
-
-// XpcConnectionBlock calls the underlying XpcConnectionBlock.
-func (x *MTRXPCDeviceControllerParameters) XpcConnectionBlock() objc.Block {
-	return x.inner.XpcConnectionBlock()
-}
-
-func (x *MTRXPCDeviceControllerParameters) asMTRDeviceControllerAbstractParameters() *raw.MTRDeviceControllerAbstractParameters {
-	return &x.inner.MTRDeviceControllerAbstractParameters
+func (x *MTRXPCDeviceControllerParameters) UniqueIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueIdentifier"))
+	return obj.Wrap(_r)
 }
 
 // MTRXPCDeviceControllerParametersable is the interface implemented by [MTRXPCDeviceControllerParameters], for mocking and DI.
 type MTRXPCDeviceControllerParametersable interface {
-	Unwrap() *raw.MTRXPCDeviceControllerParameters
+	obj.Object
 	WithStartSuspended(startSuspended bool) *MTRXPCDeviceControllerParameters
-	UniqueIdentifier() *foundation.NSUUID
-	XpcConnectionBlock() objc.Block
+	UniqueIdentifier() obj.Object
 }
 
 var _ MTRXPCDeviceControllerParametersable = (*MTRXPCDeviceControllerParameters)(nil)

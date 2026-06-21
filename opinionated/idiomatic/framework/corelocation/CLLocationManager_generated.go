@@ -6,99 +6,112 @@ package corelocation
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The object you use to start and stop the delivery of location-related events to your app.
 //
-// LocationManager wraps [raw.CLLocationManager] with a fluent Go API.
+// LocationManager is an idiomatic wrapper over the Objective-C class CLLocationManager.
 type LocationManager struct {
-	inner *raw.CLLocationManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLLocationManager].
-func (x *LocationManager) Unwrap() *raw.CLLocationManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LocationManager) ID() objc.ID { return x.inner.Ptr() }
-
-// LocationManagerFromID adopts an existing object pointer as a LocationManager (nil for 0).
+// LocationManagerFromID adopts an existing Objective-C object as a LocationManager
+// (nil for 0), retaining it and registering a release finalizer.
 func LocationManagerFromID(id objc.ID) *LocationManager {
 	if id == 0 {
 		return nil
 	}
-	return &LocationManager{inner: raw.CLLocationManagerFromID(id)}
-}
-
-// NewLocationManager creates a new [LocationManager].
-func NewLocationManager() *LocationManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLLocationManager")), objc.RegisterName("new"))
-	return &LocationManager{inner: raw.CLLocationManagerFromID(_id)}
-}
-
-// The delegate object to receive update events.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *LocationManager) WithDelegate(delegate raw.CLLocationManagerDelegate) *LocationManager {
-	x.inner.SetDelegate(delegate)
+	x := &LocationManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithPurpose sets the purpose property and returns the receiver for chaining.
+// locationManagerAdopt wraps an Objective-C object that this code just created as a
+// LocationManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func locationManagerAdopt(id objc.ID) *LocationManager {
+	if id == 0 {
+		return nil
+	}
+	x := &LocationManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LocationManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LocationManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LocationManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLocationManager creates a new LocationManager.
+func NewLocationManager() *LocationManager {
+	_id := objc.Send[objc.ID](objc.ID(_class("CLLocationManager")), objc.RegisterName("new"))
+	return locationManagerAdopt(_id)
+}
+
+// WithPurpose sets purpose and returns the receiver so calls can be chained.
 func (x *LocationManager) WithPurpose(purpose string) *LocationManager {
-	x.inner.SetPurpose(foundation.NSStringStringWithUTF8String(purpose))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPurpose:"), purego.NSString(purpose))
 	return x
 }
 
 // The type of activity the app expects the user to typically perform while in the app’s location session.
 //
-// WithActivityType sets the activityType property and returns the receiver for chaining.
-func (x *LocationManager) WithActivityType(activityType CLActivityType) *LocationManager {
-	x.inner.SetActivityType(raw.CLActivityType(activityType))
+// WithActivityType sets activityType and returns the receiver so calls can be chained.
+func (x *LocationManager) WithActivityType(activityType ActivityType) *LocationManager {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivityType:"), activityType)
 	return x
 }
 
 // A Boolean value that indicates whether the location-manager object may pause location updates.
 //
-// WithPausesLocationUpdatesAutomatically sets the pausesLocationUpdatesAutomatically property and returns the receiver for chaining.
+// WithPausesLocationUpdatesAutomatically sets pausesLocationUpdatesAutomatically and returns the receiver so calls can be chained.
 func (x *LocationManager) WithPausesLocationUpdatesAutomatically(pausesLocationUpdatesAutomatically bool) *LocationManager {
-	x.inner.SetPausesLocationUpdatesAutomatically(pausesLocationUpdatesAutomatically)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausesLocationUpdatesAutomatically:"), pausesLocationUpdatesAutomatically)
 	return x
 }
 
 // A Boolean value that indicates whether the app receives location updates when running in the background.
 //
-// WithAllowsBackgroundLocationUpdates sets the allowsBackgroundLocationUpdates property and returns the receiver for chaining.
+// WithAllowsBackgroundLocationUpdates sets allowsBackgroundLocationUpdates and returns the receiver so calls can be chained.
 func (x *LocationManager) WithAllowsBackgroundLocationUpdates(allowsBackgroundLocationUpdates bool) *LocationManager {
-	x.inner.SetAllowsBackgroundLocationUpdates(allowsBackgroundLocationUpdates)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsBackgroundLocationUpdates:"), allowsBackgroundLocationUpdates)
 	return x
 }
 
 // The device orientation to use when computing heading values.
 //
-// WithHeadingOrientation sets the headingOrientation property and returns the receiver for chaining.
-func (x *LocationManager) WithHeadingOrientation(headingOrientation CLDeviceOrientation) *LocationManager {
-	x.inner.SetHeadingOrientation(raw.CLDeviceOrientation(headingOrientation))
+// WithHeadingOrientation sets headingOrientation and returns the receiver so calls can be chained.
+func (x *LocationManager) WithHeadingOrientation(headingOrientation DeviceOrientation) *LocationManager {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeadingOrientation:"), headingOrientation)
 	return x
 }
 
 // Requests the user’s permission to use location services while the app is in use.
-//
-// RequestWhenInUseAuthorization calls the underlying RequestWhenInUseAuthorization.
 func (x *LocationManager) RequestWhenInUseAuthorization() {
-	x.inner.RequestWhenInUseAuthorization()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestWhenInUseAuthorization"))
 }
 
 // Requests the user’s permission to use location services regardless of whether the app is in use.
-//
-// RequestAlwaysAuthorization calls the underlying RequestAlwaysAuthorization.
 func (x *LocationManager) RequestAlwaysAuthorization() {
-	x.inner.RequestAlwaysAuthorization()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestAlwaysAuthorization"))
 }
 
 // Requests permission to temporarily use location services with full accuracy and reports the results to the provided completion handler.
@@ -106,13 +119,12 @@ func (x *LocationManager) RequestAlwaysAuthorization() {
 // RequestTemporaryFullAccuracyAuthorizationWithPurposeKeyCompletion blocks until the operation completes or ctx is cancelled.
 func (x *LocationManager) RequestTemporaryFullAccuracyAuthorizationWithPurposeKeyCompletion(ctx context.Context, purposeKey string) error {
 	_ch := make(chan error, 1)
-	x.inner.RequestTemporaryFullAccuracyAuthorizationWithPurposeKeyCompletion(foundation.NSStringStringWithUTF8String(purposeKey), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestTemporaryFullAccuracyAuthorizationWithPurposeKey:completion:"), purego.NSString(purposeKey), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -122,291 +134,190 @@ func (x *LocationManager) RequestTemporaryFullAccuracyAuthorizationWithPurposeKe
 }
 
 // Requests permission to temporarily use location services with full accuracy.
-//
-// RequestTemporaryFullAccuracyAuthorizationWithPurposeKey calls the underlying RequestTemporaryFullAccuracyAuthorizationWithPurposeKey.
 func (x *LocationManager) RequestTemporaryFullAccuracyAuthorizationWithPurposeKey(purposeKey string) {
-	x.inner.RequestTemporaryFullAccuracyAuthorizationWithPurposeKey(foundation.NSStringStringWithUTF8String(purposeKey))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestTemporaryFullAccuracyAuthorizationWithPurposeKey:"), purego.NSString(purposeKey))
 }
 
 // Starts the generation of updates that report the user’s current location.
-//
-// StartUpdatingLocation calls the underlying StartUpdatingLocation.
 func (x *LocationManager) StartUpdatingLocation() {
-	x.inner.StartUpdatingLocation()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startUpdatingLocation"))
 }
 
 // Stops the generation of location updates.
-//
-// StopUpdatingLocation calls the underlying StopUpdatingLocation.
 func (x *LocationManager) StopUpdatingLocation() {
-	x.inner.StopUpdatingLocation()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopUpdatingLocation"))
 }
 
 // Requests the one-time delivery of the user’s current location.
-//
-// RequestLocation calls the underlying RequestLocation.
 func (x *LocationManager) RequestLocation() {
-	x.inner.RequestLocation()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestLocation"))
 }
 
 // Starts the generation of updates that report the user’s current heading.
-//
-// StartUpdatingHeading calls the underlying StartUpdatingHeading.
 func (x *LocationManager) StartUpdatingHeading() {
-	x.inner.StartUpdatingHeading()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startUpdatingHeading"))
 }
 
 // Dismisses the heading calibration view from the screen immediately.
-//
-// DismissHeadingCalibrationDisplay calls the underlying DismissHeadingCalibrationDisplay.
 func (x *LocationManager) DismissHeadingCalibrationDisplay() {
-	x.inner.DismissHeadingCalibrationDisplay()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dismissHeadingCalibrationDisplay"))
 }
 
 // Starts the generation of updates based on significant location changes.
-//
-// StartMonitoringSignificantLocationChanges calls the underlying StartMonitoringSignificantLocationChanges.
 func (x *LocationManager) StartMonitoringSignificantLocationChanges() {
-	x.inner.StartMonitoringSignificantLocationChanges()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startMonitoringSignificantLocationChanges"))
 }
 
 // Stops the delivery of location events based on significant location changes.
-//
-// StopMonitoringSignificantLocationChanges calls the underlying StopMonitoringSignificantLocationChanges.
 func (x *LocationManager) StopMonitoringSignificantLocationChanges() {
-	x.inner.StopMonitoringSignificantLocationChanges()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopMonitoringSignificantLocationChanges"))
 }
 
-// StartMonitoringForRegionDesiredAccuracy calls the underlying StartMonitoringForRegionDesiredAccuracy.
-func (x *LocationManager) StartMonitoringForRegionDesiredAccuracy(region *raw.CLRegion, accuracy unsafe.Pointer) {
-	x.inner.StartMonitoringForRegionDesiredAccuracy(region, accuracy)
+func (x *LocationManager) StopMonitoringForRegion(region *Region) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopMonitoringForRegion:"), objref.IDOf(region))
 }
 
-// StopMonitoringForRegion calls the underlying StopMonitoringForRegion.
-func (x *LocationManager) StopMonitoringForRegion(region *raw.CLRegion) {
-	x.inner.StopMonitoringForRegion(region)
+func (x *LocationManager) StartMonitoringForRegion(region *Region) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startMonitoringForRegion:"), objref.IDOf(region))
 }
 
-// StartMonitoringForRegion calls the underlying StartMonitoringForRegion.
-func (x *LocationManager) StartMonitoringForRegion(region *raw.CLRegion) {
-	x.inner.StartMonitoringForRegion(region)
+func (x *LocationManager) RequestStateForRegion(region *Region) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestStateForRegion:"), objref.IDOf(region))
 }
 
-// RequestStateForRegion calls the underlying RequestStateForRegion.
-func (x *LocationManager) RequestStateForRegion(region *raw.CLRegion) {
-	x.inner.RequestStateForRegion(region)
+func (x *LocationManager) StartRangingBeaconsInRegion(region *BeaconRegion) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startRangingBeaconsInRegion:"), objref.IDOf(region))
 }
 
-// StartRangingBeaconsInRegion calls the underlying StartRangingBeaconsInRegion.
-func (x *LocationManager) StartRangingBeaconsInRegion(region *raw.CLBeaconRegion) {
-	x.inner.StartRangingBeaconsInRegion(region)
-}
-
-// StopRangingBeaconsInRegion calls the underlying StopRangingBeaconsInRegion.
-func (x *LocationManager) StopRangingBeaconsInRegion(region *raw.CLBeaconRegion) {
-	x.inner.StopRangingBeaconsInRegion(region)
+func (x *LocationManager) StopRangingBeaconsInRegion(region *BeaconRegion) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopRangingBeaconsInRegion:"), objref.IDOf(region))
 }
 
 // Starts the delivery of notifications for the specified beacon constraints.
-//
-// StartRangingBeaconsSatisfyingConstraint calls the underlying StartRangingBeaconsSatisfyingConstraint.
-func (x *LocationManager) StartRangingBeaconsSatisfyingConstraint(constraint *raw.CLBeaconIdentityConstraint) {
-	x.inner.StartRangingBeaconsSatisfyingConstraint(constraint)
+func (x *LocationManager) StartRangingBeaconsSatisfyingConstraint(constraint *BeaconIdentityConstraint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startRangingBeaconsSatisfyingConstraint:"), objref.IDOf(constraint))
 }
 
 // Stops the delivery of notifications for the specified beacon constraints.
-//
-// StopRangingBeaconsSatisfyingConstraint calls the underlying StopRangingBeaconsSatisfyingConstraint.
-func (x *LocationManager) StopRangingBeaconsSatisfyingConstraint(constraint *raw.CLBeaconIdentityConstraint) {
-	x.inner.StopRangingBeaconsSatisfyingConstraint(constraint)
+func (x *LocationManager) StopRangingBeaconsSatisfyingConstraint(constraint *BeaconIdentityConstraint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopRangingBeaconsSatisfyingConstraint:"), objref.IDOf(constraint))
 }
 
-// AllowDeferredLocationUpdatesUntilTraveledTimeout calls the underlying AllowDeferredLocationUpdatesUntilTraveledTimeout.
-func (x *LocationManager) AllowDeferredLocationUpdatesUntilTraveledTimeout(distance unsafe.Pointer, timeout float64) {
-	x.inner.AllowDeferredLocationUpdatesUntilTraveledTimeout(distance, timeout)
-}
-
-// DisallowDeferredLocationUpdates calls the underlying DisallowDeferredLocationUpdates.
 func (x *LocationManager) DisallowDeferredLocationUpdates() {
-	x.inner.DisallowDeferredLocationUpdates()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disallowDeferredLocationUpdates"))
 }
 
-// AuthorizationStatus calls the underlying AuthorizationStatus.
-func (x *LocationManager) AuthorizationStatus() CLAuthorizationStatus {
-	return CLAuthorizationStatus(x.inner.AuthorizationStatus())
+func (x *LocationManager) AuthorizationStatus() AuthorizationStatus {
+	_r := objc.Send[AuthorizationStatus](objref.IDOf(x), objc.RegisterName("authorizationStatus"))
+	return _r
 }
 
-// AccuracyAuthorization calls the underlying AccuracyAuthorization.
-func (x *LocationManager) AccuracyAuthorization() CLAccuracyAuthorization {
-	return CLAccuracyAuthorization(x.inner.AccuracyAuthorization())
+func (x *LocationManager) AccuracyAuthorization() AccuracyAuthorization {
+	_r := objc.Send[AccuracyAuthorization](objref.IDOf(x), objc.RegisterName("accuracyAuthorization"))
+	return _r
 }
 
-// IsAuthorizedForWidgetUpdates calls the underlying IsAuthorizedForWidgetUpdates.
 func (x *LocationManager) IsAuthorizedForWidgetUpdates() bool {
-	return x.inner.IsAuthorizedForWidgetUpdates()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAuthorizedForWidgetUpdates"))
+	return _r
 }
 
-// Delegate calls the underlying Delegate.
-func (x *LocationManager) Delegate() raw.CLLocationManagerDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *LocationManager) SetDelegate(delegate raw.CLLocationManagerDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// LocationServicesEnabled calls the underlying LocationServicesEnabled.
 func (x *LocationManager) LocationServicesEnabled() bool {
-	return x.inner.LocationServicesEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("locationServicesEnabled"))
+	return _r
 }
 
-// Purpose calls the underlying Purpose.
 func (x *LocationManager) Purpose() string {
-	_r := x.inner.Purpose()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("purpose"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPurpose calls the underlying SetPurpose.
 func (x *LocationManager) SetPurpose(purpose string) {
-	x.inner.SetPurpose(foundation.NSStringStringWithUTF8String(purpose))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPurpose:"), purego.NSString(purpose))
 }
 
-// ActivityType calls the underlying ActivityType.
-func (x *LocationManager) ActivityType() CLActivityType {
-	return CLActivityType(x.inner.ActivityType())
+func (x *LocationManager) ActivityType() ActivityType {
+	_r := objc.Send[ActivityType](objref.IDOf(x), objc.RegisterName("activityType"))
+	return _r
 }
 
-// SetActivityType calls the underlying SetActivityType.
-func (x *LocationManager) SetActivityType(activityType CLActivityType) {
-	x.inner.SetActivityType(raw.CLActivityType(activityType))
+func (x *LocationManager) SetActivityType(activityType ActivityType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivityType:"), activityType)
 }
 
-// DistanceFilter calls the underlying DistanceFilter.
-func (x *LocationManager) DistanceFilter() unsafe.Pointer {
-	return x.inner.DistanceFilter()
-}
-
-// SetDistanceFilter calls the underlying SetDistanceFilter.
-func (x *LocationManager) SetDistanceFilter(distanceFilter unsafe.Pointer) {
-	x.inner.SetDistanceFilter(distanceFilter)
-}
-
-// DesiredAccuracy calls the underlying DesiredAccuracy.
-func (x *LocationManager) DesiredAccuracy() unsafe.Pointer {
-	return x.inner.DesiredAccuracy()
-}
-
-// SetDesiredAccuracy calls the underlying SetDesiredAccuracy.
-func (x *LocationManager) SetDesiredAccuracy(desiredAccuracy unsafe.Pointer) {
-	x.inner.SetDesiredAccuracy(desiredAccuracy)
-}
-
-// PausesLocationUpdatesAutomatically calls the underlying PausesLocationUpdatesAutomatically.
 func (x *LocationManager) PausesLocationUpdatesAutomatically() bool {
-	return x.inner.PausesLocationUpdatesAutomatically()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pausesLocationUpdatesAutomatically"))
+	return _r
 }
 
-// SetPausesLocationUpdatesAutomatically calls the underlying SetPausesLocationUpdatesAutomatically.
 func (x *LocationManager) SetPausesLocationUpdatesAutomatically(pausesLocationUpdatesAutomatically bool) {
-	x.inner.SetPausesLocationUpdatesAutomatically(pausesLocationUpdatesAutomatically)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausesLocationUpdatesAutomatically:"), pausesLocationUpdatesAutomatically)
 }
 
-// AllowsBackgroundLocationUpdates calls the underlying AllowsBackgroundLocationUpdates.
 func (x *LocationManager) AllowsBackgroundLocationUpdates() bool {
-	return x.inner.AllowsBackgroundLocationUpdates()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsBackgroundLocationUpdates"))
+	return _r
 }
 
-// SetAllowsBackgroundLocationUpdates calls the underlying SetAllowsBackgroundLocationUpdates.
 func (x *LocationManager) SetAllowsBackgroundLocationUpdates(allowsBackgroundLocationUpdates bool) {
-	x.inner.SetAllowsBackgroundLocationUpdates(allowsBackgroundLocationUpdates)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsBackgroundLocationUpdates:"), allowsBackgroundLocationUpdates)
 }
 
-// Location calls the underlying Location.
-func (x *LocationManager) Location() unsafe.Pointer {
-	return x.inner.Location()
-}
-
-// HeadingAvailable calls the underlying HeadingAvailable.
 func (x *LocationManager) HeadingAvailable() bool {
-	return x.inner.HeadingAvailable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("headingAvailable"))
+	return _r
 }
 
-// HeadingFilter calls the underlying HeadingFilter.
-func (x *LocationManager) HeadingFilter() unsafe.Pointer {
-	return x.inner.HeadingFilter()
+func (x *LocationManager) HeadingOrientation() DeviceOrientation {
+	_r := objc.Send[DeviceOrientation](objref.IDOf(x), objc.RegisterName("headingOrientation"))
+	return _r
 }
 
-// SetHeadingFilter calls the underlying SetHeadingFilter.
-func (x *LocationManager) SetHeadingFilter(headingFilter unsafe.Pointer) {
-	x.inner.SetHeadingFilter(headingFilter)
+func (x *LocationManager) SetHeadingOrientation(headingOrientation DeviceOrientation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeadingOrientation:"), headingOrientation)
 }
 
-// HeadingOrientation calls the underlying HeadingOrientation.
-func (x *LocationManager) HeadingOrientation() CLDeviceOrientation {
-	return CLDeviceOrientation(x.inner.HeadingOrientation())
-}
-
-// SetHeadingOrientation calls the underlying SetHeadingOrientation.
-func (x *LocationManager) SetHeadingOrientation(headingOrientation CLDeviceOrientation) {
-	x.inner.SetHeadingOrientation(raw.CLDeviceOrientation(headingOrientation))
-}
-
-// Heading calls the underlying Heading.
 func (x *LocationManager) Heading() *Heading {
-	_r := x.inner.Heading()
-	if _r == nil {
-		return nil
-	}
-	return &Heading{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("heading"))
+	return HeadingFromID(_r)
 }
 
-// MaximumRegionMonitoringDistance calls the underlying MaximumRegionMonitoringDistance.
-func (x *LocationManager) MaximumRegionMonitoringDistance() unsafe.Pointer {
-	return x.inner.MaximumRegionMonitoringDistance()
+func (x *LocationManager) MonitoredRegions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("monitoredRegions"))
+	return obj.Wrap(_r)
 }
 
-// MonitoredRegions calls the underlying MonitoredRegions.
-func (x *LocationManager) MonitoredRegions() *foundation.NSSet[*raw.CLRegion] {
-	return x.inner.MonitoredRegions()
+func (x *LocationManager) RangedRegions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rangedRegions"))
+	return obj.Wrap(_r)
 }
 
-// RangedRegions calls the underlying RangedRegions.
-func (x *LocationManager) RangedRegions() *foundation.NSSet[*raw.CLRegion] {
-	return x.inner.RangedRegions()
-}
-
-// RangedBeaconConstraints calls the underlying RangedBeaconConstraints.
-func (x *LocationManager) RangedBeaconConstraints() *foundation.NSSet[*raw.CLBeaconIdentityConstraint] {
-	return x.inner.RangedBeaconConstraints()
+func (x *LocationManager) RangedBeaconConstraints() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rangedBeaconConstraints"))
+	return obj.Wrap(_r)
 }
 
 // Starts the delivery of visit-related events.
-//
-// StartMonitoringVisits calls the underlying StartMonitoringVisits.
 func (x *LocationManager) StartMonitoringVisits() {
-	x.inner.StartMonitoringVisits()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startMonitoringVisits"))
 }
 
 // Stops the delivery of visit-related events.
-//
-// StopMonitoringVisits calls the underlying StopMonitoringVisits.
 func (x *LocationManager) StopMonitoringVisits() {
-	x.inner.StopMonitoringVisits()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopMonitoringVisits"))
 }
 
 // LocationManagerable is the interface implemented by [LocationManager], for mocking and DI.
 type LocationManagerable interface {
-	Unwrap() *raw.CLLocationManager
-	WithDelegate(delegate raw.CLLocationManagerDelegate) *LocationManager
+	obj.Object
 	WithPurpose(purpose string) *LocationManager
-	WithActivityType(activityType CLActivityType) *LocationManager
+	WithActivityType(activityType ActivityType) *LocationManager
 	WithPausesLocationUpdatesAutomatically(pausesLocationUpdatesAutomatically bool) *LocationManager
 	WithAllowsBackgroundLocationUpdates(allowsBackgroundLocationUpdates bool) *LocationManager
-	WithHeadingOrientation(headingOrientation CLDeviceOrientation) *LocationManager
+	WithHeadingOrientation(headingOrientation DeviceOrientation) *LocationManager
 	RequestWhenInUseAuthorization()
 	RequestAlwaysAuthorization()
 	RequestTemporaryFullAccuracyAuthorizationWithPurposeKeyCompletion(ctx context.Context, purposeKey string) error
@@ -418,45 +329,33 @@ type LocationManagerable interface {
 	DismissHeadingCalibrationDisplay()
 	StartMonitoringSignificantLocationChanges()
 	StopMonitoringSignificantLocationChanges()
-	StartMonitoringForRegionDesiredAccuracy(region *raw.CLRegion, accuracy unsafe.Pointer)
-	StopMonitoringForRegion(region *raw.CLRegion)
-	StartMonitoringForRegion(region *raw.CLRegion)
-	RequestStateForRegion(region *raw.CLRegion)
-	StartRangingBeaconsInRegion(region *raw.CLBeaconRegion)
-	StopRangingBeaconsInRegion(region *raw.CLBeaconRegion)
-	StartRangingBeaconsSatisfyingConstraint(constraint *raw.CLBeaconIdentityConstraint)
-	StopRangingBeaconsSatisfyingConstraint(constraint *raw.CLBeaconIdentityConstraint)
-	AllowDeferredLocationUpdatesUntilTraveledTimeout(distance unsafe.Pointer, timeout float64)
+	StopMonitoringForRegion(region *Region)
+	StartMonitoringForRegion(region *Region)
+	RequestStateForRegion(region *Region)
+	StartRangingBeaconsInRegion(region *BeaconRegion)
+	StopRangingBeaconsInRegion(region *BeaconRegion)
+	StartRangingBeaconsSatisfyingConstraint(constraint *BeaconIdentityConstraint)
+	StopRangingBeaconsSatisfyingConstraint(constraint *BeaconIdentityConstraint)
 	DisallowDeferredLocationUpdates()
-	AuthorizationStatus() CLAuthorizationStatus
-	AccuracyAuthorization() CLAccuracyAuthorization
+	AuthorizationStatus() AuthorizationStatus
+	AccuracyAuthorization() AccuracyAuthorization
 	IsAuthorizedForWidgetUpdates() bool
-	Delegate() raw.CLLocationManagerDelegate
-	SetDelegate(delegate raw.CLLocationManagerDelegate)
 	LocationServicesEnabled() bool
 	Purpose() string
 	SetPurpose(purpose string)
-	ActivityType() CLActivityType
-	SetActivityType(activityType CLActivityType)
-	DistanceFilter() unsafe.Pointer
-	SetDistanceFilter(distanceFilter unsafe.Pointer)
-	DesiredAccuracy() unsafe.Pointer
-	SetDesiredAccuracy(desiredAccuracy unsafe.Pointer)
+	ActivityType() ActivityType
+	SetActivityType(activityType ActivityType)
 	PausesLocationUpdatesAutomatically() bool
 	SetPausesLocationUpdatesAutomatically(pausesLocationUpdatesAutomatically bool)
 	AllowsBackgroundLocationUpdates() bool
 	SetAllowsBackgroundLocationUpdates(allowsBackgroundLocationUpdates bool)
-	Location() unsafe.Pointer
 	HeadingAvailable() bool
-	HeadingFilter() unsafe.Pointer
-	SetHeadingFilter(headingFilter unsafe.Pointer)
-	HeadingOrientation() CLDeviceOrientation
-	SetHeadingOrientation(headingOrientation CLDeviceOrientation)
+	HeadingOrientation() DeviceOrientation
+	SetHeadingOrientation(headingOrientation DeviceOrientation)
 	Heading() *Heading
-	MaximumRegionMonitoringDistance() unsafe.Pointer
-	MonitoredRegions() *foundation.NSSet[*raw.CLRegion]
-	RangedRegions() *foundation.NSSet[*raw.CLRegion]
-	RangedBeaconConstraints() *foundation.NSSet[*raw.CLBeaconIdentityConstraint]
+	MonitoredRegions() obj.Object
+	RangedRegions() obj.Object
+	RangedBeaconConstraints() obj.Object
 	StartMonitoringVisits()
 	StopMonitoringVisits()
 }

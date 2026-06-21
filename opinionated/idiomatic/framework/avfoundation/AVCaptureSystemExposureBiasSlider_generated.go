@@ -5,67 +5,88 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A control that adjusts the exposure bias of a capture device within the system-recommended range.
 //
-// CaptureSystemExposureBiasSlider wraps [raw.AVCaptureSystemExposureBiasSlider] with a fluent Go API.
+// CaptureSystemExposureBiasSlider is an idiomatic wrapper over the Objective-C class AVCaptureSystemExposureBiasSlider.
 type CaptureSystemExposureBiasSlider struct {
-	inner *raw.AVCaptureSystemExposureBiasSlider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureSystemExposureBiasSlider].
-func (x *CaptureSystemExposureBiasSlider) Unwrap() *raw.AVCaptureSystemExposureBiasSlider {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureSystemExposureBiasSlider) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureSystemExposureBiasSliderFromID adopts an existing object pointer as a CaptureSystemExposureBiasSlider (nil for 0).
+// CaptureSystemExposureBiasSliderFromID adopts an existing Objective-C object as a CaptureSystemExposureBiasSlider
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureSystemExposureBiasSliderFromID(id objc.ID) *CaptureSystemExposureBiasSlider {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureSystemExposureBiasSlider{inner: raw.AVCaptureSystemExposureBiasSliderFromID(id)}
+	x := &CaptureSystemExposureBiasSlider{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// captureSystemExposureBiasSliderAdopt wraps an Objective-C object that this code just created as a
+// CaptureSystemExposureBiasSlider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureSystemExposureBiasSliderAdopt(id objc.ID) *CaptureSystemExposureBiasSlider {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureSystemExposureBiasSlider{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptureSystemExposureBiasSlider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureSystemExposureBiasSlider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureSystemExposureBiasSlider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a slider to control the exposure bias of the specified capture device.
 //
-// NewCaptureSystemExposureBiasSliderWithDevice creates a new [CaptureSystemExposureBiasSlider].
-func NewCaptureSystemExposureBiasSliderWithDevice(device *raw.AVCaptureDevice) *CaptureSystemExposureBiasSlider {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureSystemExposureBiasSlider")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device.Ptr())
-	return &CaptureSystemExposureBiasSlider{inner: raw.AVCaptureSystemExposureBiasSliderFromID(_id)}
+// NewCaptureSystemExposureBiasSliderWithDevice creates a new CaptureSystemExposureBiasSlider.
+func NewCaptureSystemExposureBiasSliderWithDevice(device *CaptureDevice) *CaptureSystemExposureBiasSlider {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureSystemExposureBiasSlider")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), objref.IDOf(device))
+	return captureSystemExposureBiasSliderAdopt(_id)
 }
 
 // Creates a slider to control the exposure bias of the specified capture device with an action to respond to exposure bias changes.
 //
-// NewCaptureSystemExposureBiasSliderWithDeviceAction creates a new [CaptureSystemExposureBiasSlider].
-func NewCaptureSystemExposureBiasSliderWithDeviceAction(device *raw.AVCaptureDevice, action func(float32)) *CaptureSystemExposureBiasSlider {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureSystemExposureBiasSlider")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:action:"), device.Ptr(), action)
-	return &CaptureSystemExposureBiasSlider{inner: raw.AVCaptureSystemExposureBiasSliderFromID(_id)}
+// NewCaptureSystemExposureBiasSliderWithDeviceAction creates a new CaptureSystemExposureBiasSlider.
+func NewCaptureSystemExposureBiasSliderWithDeviceAction(device *CaptureDevice, action func(float32)) *CaptureSystemExposureBiasSlider {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureSystemExposureBiasSlider")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:action:"), objref.IDOf(device), objc.NewBlock(func(_ objc.Block, _b0 float32) { action(_b0) }))
+	return captureSystemExposureBiasSliderAdopt(_id)
 }
 
 // A Boolean value that indicates whether this control supports user interaction.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *CaptureSystemExposureBiasSlider) WithEnabled(enabled bool) *CaptureSystemExposureBiasSlider {
-	x.inner.AVCaptureControl.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
-}
-
-func (x *CaptureSystemExposureBiasSlider) asCaptureControl() *raw.AVCaptureControl {
-	return &x.inner.AVCaptureControl
 }
 
 // CaptureSystemExposureBiasSliderable is the interface implemented by [CaptureSystemExposureBiasSlider], for mocking and DI.
 type CaptureSystemExposureBiasSliderable interface {
-	Unwrap() *raw.AVCaptureSystemExposureBiasSlider
+	obj.Object
 	WithEnabled(enabled bool) *CaptureSystemExposureBiasSlider
 }
 

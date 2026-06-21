@@ -5,76 +5,96 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object representing metrics about the amount of time the app is active.
 //
-// AppRunTimeMetric wraps [raw.MXAppRunTimeMetric] with a fluent Go API.
+// AppRunTimeMetric is an idiomatic wrapper over the Objective-C class MXAppRunTimeMetric.
 type AppRunTimeMetric struct {
-	inner *raw.MXAppRunTimeMetric
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MXAppRunTimeMetric].
-func (x *AppRunTimeMetric) Unwrap() *raw.MXAppRunTimeMetric { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AppRunTimeMetric) ID() objc.ID { return x.inner.Ptr() }
-
-// AppRunTimeMetricFromID adopts an existing object pointer as a AppRunTimeMetric (nil for 0).
+// AppRunTimeMetricFromID adopts an existing Objective-C object as a AppRunTimeMetric
+// (nil for 0), retaining it and registering a release finalizer.
 func AppRunTimeMetricFromID(id objc.ID) *AppRunTimeMetric {
 	if id == 0 {
 		return nil
 	}
-	return &AppRunTimeMetric{inner: raw.MXAppRunTimeMetricFromID(id)}
+	x := &AppRunTimeMetric{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAppRunTimeMetric creates a new [AppRunTimeMetric].
+// appRunTimeMetricAdopt wraps an Objective-C object that this code just created as a
+// AppRunTimeMetric (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func appRunTimeMetricAdopt(id objc.ID) *AppRunTimeMetric {
+	if id == 0 {
+		return nil
+	}
+	x := &AppRunTimeMetric{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AppRunTimeMetric) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AppRunTimeMetric) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AppRunTimeMetric) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAppRunTimeMetric creates a new AppRunTimeMetric.
 func NewAppRunTimeMetric() *AppRunTimeMetric {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXAppRunTimeMetric")), objc.RegisterName("new"))
-	return &AppRunTimeMetric{inner: raw.MXAppRunTimeMetricFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXAppRunTimeMetric")), objc.RegisterName("new"))
+	return appRunTimeMetricAdopt(_id)
 }
 
-// @property      cumulativeForegroundTime @abstract      Cumulative application foreground time. @discussion    Time spent on screen and visible to the user. @discussion    Dimensioned as NSUnitDuration.
-//
-// CumulativeForegroundTime calls the underlying CumulativeForegroundTime.
-func (x *AppRunTimeMetric) CumulativeForegroundTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	return x.inner.CumulativeForegroundTime()
+// Cumulative application foreground time. Time spent on screen and visible to the user. Dimensioned as NSUnitDuration.
+func (x *AppRunTimeMetric) CumulativeForegroundTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeForegroundTime"))
+	return obj.Wrap(_r)
 }
 
-// @property      cumulativeBackgroundTime @abstract      Cumulative application background time. @discussion    Time spent off screen and in the background, invisible to the user. @discussion    Dimensioned as NSUnitDuration.
-//
-// CumulativeBackgroundTime calls the underlying CumulativeBackgroundTime.
-func (x *AppRunTimeMetric) CumulativeBackgroundTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	return x.inner.CumulativeBackgroundTime()
+// Cumulative application background time. Time spent off screen and in the background, invisible to the user. Dimensioned as NSUnitDuration.
+func (x *AppRunTimeMetric) CumulativeBackgroundTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeBackgroundTime"))
+	return obj.Wrap(_r)
 }
 
-// @property      cumulativeBackgroundAudioTime @abstract      Cumulative time the application spent running in the background to play audio @discussion    Dimensioned as NSUnitDuration.
-//
-// CumulativeBackgroundAudioTime calls the underlying CumulativeBackgroundAudioTime.
-func (x *AppRunTimeMetric) CumulativeBackgroundAudioTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	return x.inner.CumulativeBackgroundAudioTime()
+// Cumulative time the application spent running in the background to play audio Dimensioned as NSUnitDuration.
+func (x *AppRunTimeMetric) CumulativeBackgroundAudioTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeBackgroundAudioTime"))
+	return obj.Wrap(_r)
 }
 
-// @property      cumulativeBackgroundLocationTime @abstract      Cumulative time the application spent running in the background to acquire or process location. @discussion    Dimensioned as NSUnitDuration.
-//
-// CumulativeBackgroundLocationTime calls the underlying CumulativeBackgroundLocationTime.
-func (x *AppRunTimeMetric) CumulativeBackgroundLocationTime() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	return x.inner.CumulativeBackgroundLocationTime()
+// Cumulative time the application spent running in the background to acquire or process location. Dimensioned as NSUnitDuration.
+func (x *AppRunTimeMetric) CumulativeBackgroundLocationTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeBackgroundLocationTime"))
+	return obj.Wrap(_r)
 }
-
-func (x *AppRunTimeMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
 
 // AppRunTimeMetricable is the interface implemented by [AppRunTimeMetric], for mocking and DI.
 type AppRunTimeMetricable interface {
-	Unwrap() *raw.MXAppRunTimeMetric
-	CumulativeForegroundTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
-	CumulativeBackgroundTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
-	CumulativeBackgroundAudioTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
-	CumulativeBackgroundLocationTime() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+	obj.Object
+	CumulativeForegroundTime() obj.Object
+	CumulativeBackgroundTime() obj.Object
+	CumulativeBackgroundAudioTime() obj.Object
+	CumulativeBackgroundLocationTime() obj.Object
 }
 
 var _ AppRunTimeMetricable = (*AppRunTimeMetric)(nil)

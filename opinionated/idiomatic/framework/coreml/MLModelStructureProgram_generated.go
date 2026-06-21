@@ -5,48 +5,74 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class representing the structure of an ML Program model.
 //
-// ModelStructureProgram wraps [raw.MLModelStructureProgram] with a fluent Go API.
+// ModelStructureProgram is an idiomatic wrapper over the Objective-C class MLModelStructureProgram.
 type ModelStructureProgram struct {
-	inner *raw.MLModelStructureProgram
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLModelStructureProgram].
-func (x *ModelStructureProgram) Unwrap() *raw.MLModelStructureProgram { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ModelStructureProgram) ID() objc.ID { return x.inner.Ptr() }
-
-// ModelStructureProgramFromID adopts an existing object pointer as a ModelStructureProgram (nil for 0).
+// ModelStructureProgramFromID adopts an existing Objective-C object as a ModelStructureProgram
+// (nil for 0), retaining it and registering a release finalizer.
 func ModelStructureProgramFromID(id objc.ID) *ModelStructureProgram {
 	if id == 0 {
 		return nil
 	}
-	return &ModelStructureProgram{inner: raw.MLModelStructureProgramFromID(id)}
+	x := &ModelStructureProgram{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewModelStructureProgram creates a new [ModelStructureProgram].
+// modelStructureProgramAdopt wraps an Objective-C object that this code just created as a
+// ModelStructureProgram (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func modelStructureProgramAdopt(id objc.ID) *ModelStructureProgram {
+	if id == 0 {
+		return nil
+	}
+	x := &ModelStructureProgram{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ModelStructureProgram) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ModelStructureProgram) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ModelStructureProgram) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewModelStructureProgram creates a new ModelStructureProgram.
 func NewModelStructureProgram() *ModelStructureProgram {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLModelStructureProgram")), objc.RegisterName("new"))
-	return &ModelStructureProgram{inner: raw.MLModelStructureProgramFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructureProgram")), objc.RegisterName("new"))
+	return modelStructureProgramAdopt(_id)
 }
 
-// Functions calls the underlying Functions.
-func (x *ModelStructureProgram) Functions() *foundation.NSDictionary[*foundation.NSString, *raw.MLModelStructureProgramFunction] {
-	return x.inner.Functions()
+func (x *ModelStructureProgram) Functions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("functions"))
+	return obj.Wrap(_r)
 }
 
 // ModelStructureProgramable is the interface implemented by [ModelStructureProgram], for mocking and DI.
 type ModelStructureProgramable interface {
-	Unwrap() *raw.MLModelStructureProgram
-	Functions() *foundation.NSDictionary[*foundation.NSString, *raw.MLModelStructureProgramFunction]
+	obj.Object
+	Functions() obj.Object
 }
 
 var _ ModelStructureProgramable = (*ModelStructureProgram)(nil)

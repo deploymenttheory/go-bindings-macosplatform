@@ -5,41 +5,66 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// UserAnnotatedMedicationType wraps [raw.HKUserAnnotatedMedicationType] with a fluent Go API.
+// UserAnnotatedMedicationType is an idiomatic wrapper over the Objective-C class HKUserAnnotatedMedicationType.
 type UserAnnotatedMedicationType struct {
-	inner *raw.HKUserAnnotatedMedicationType
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKUserAnnotatedMedicationType].
-func (x *UserAnnotatedMedicationType) Unwrap() *raw.HKUserAnnotatedMedicationType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UserAnnotatedMedicationType) ID() objc.ID { return x.inner.Ptr() }
-
-// UserAnnotatedMedicationTypeFromID adopts an existing object pointer as a UserAnnotatedMedicationType (nil for 0).
+// UserAnnotatedMedicationTypeFromID adopts an existing Objective-C object as a UserAnnotatedMedicationType
+// (nil for 0), retaining it and registering a release finalizer.
 func UserAnnotatedMedicationTypeFromID(id objc.ID) *UserAnnotatedMedicationType {
 	if id == 0 {
 		return nil
 	}
-	return &UserAnnotatedMedicationType{inner: raw.HKUserAnnotatedMedicationTypeFromID(id)}
+	x := &UserAnnotatedMedicationType{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewUserAnnotatedMedicationType creates a new [UserAnnotatedMedicationType].
+// userAnnotatedMedicationTypeAdopt wraps an Objective-C object that this code just created as a
+// UserAnnotatedMedicationType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func userAnnotatedMedicationTypeAdopt(id objc.ID) *UserAnnotatedMedicationType {
+	if id == 0 {
+		return nil
+	}
+	x := &UserAnnotatedMedicationType{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UserAnnotatedMedicationType) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UserAnnotatedMedicationType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UserAnnotatedMedicationType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUserAnnotatedMedicationType creates a new UserAnnotatedMedicationType.
 func NewUserAnnotatedMedicationType() *UserAnnotatedMedicationType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKUserAnnotatedMedicationType")), objc.RegisterName("new"))
-	return &UserAnnotatedMedicationType{inner: raw.HKUserAnnotatedMedicationTypeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKUserAnnotatedMedicationType")), objc.RegisterName("new"))
+	return userAnnotatedMedicationTypeAdopt(_id)
 }
-
-func (x *UserAnnotatedMedicationType) asObjectType() *raw.HKObjectType { return &x.inner.HKObjectType }
 
 // UserAnnotatedMedicationTypeable is the interface implemented by [UserAnnotatedMedicationType], for mocking and DI.
 type UserAnnotatedMedicationTypeable interface {
-	Unwrap() *raw.HKUserAnnotatedMedicationType
+	obj.Object
 }
 
 var _ UserAnnotatedMedicationTypeable = (*UserAnnotatedMedicationType)(nil)

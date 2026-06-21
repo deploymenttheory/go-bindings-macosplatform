@@ -5,145 +5,162 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRGeneralDiagnosticsClusterPayloadTestRequestParams wraps [raw.MTRGeneralDiagnosticsClusterPayloadTestRequestParams] with a fluent Go API.
+// MTRGeneralDiagnosticsClusterPayloadTestRequestParams is an idiomatic wrapper over the Objective-C class MTRGeneralDiagnosticsClusterPayloadTestRequestParams.
 type MTRGeneralDiagnosticsClusterPayloadTestRequestParams struct {
-	inner *raw.MTRGeneralDiagnosticsClusterPayloadTestRequestParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRGeneralDiagnosticsClusterPayloadTestRequestParams].
-func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) Unwrap() *raw.MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRGeneralDiagnosticsClusterPayloadTestRequestParamsFromID adopts an existing object pointer as a MTRGeneralDiagnosticsClusterPayloadTestRequestParams (nil for 0).
+// MTRGeneralDiagnosticsClusterPayloadTestRequestParamsFromID adopts an existing Objective-C object as a MTRGeneralDiagnosticsClusterPayloadTestRequestParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRGeneralDiagnosticsClusterPayloadTestRequestParamsFromID(id objc.ID) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRGeneralDiagnosticsClusterPayloadTestRequestParams{inner: raw.MTRGeneralDiagnosticsClusterPayloadTestRequestParamsFromID(id)}
+	x := &MTRGeneralDiagnosticsClusterPayloadTestRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRGeneralDiagnosticsClusterPayloadTestRequestParams creates a new [MTRGeneralDiagnosticsClusterPayloadTestRequestParams].
+// mTRGeneralDiagnosticsClusterPayloadTestRequestParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRGeneralDiagnosticsClusterPayloadTestRequestParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRGeneralDiagnosticsClusterPayloadTestRequestParamsAdopt(id objc.ID) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRGeneralDiagnosticsClusterPayloadTestRequestParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRGeneralDiagnosticsClusterPayloadTestRequestParams creates a new MTRGeneralDiagnosticsClusterPayloadTestRequestParams.
 func NewMTRGeneralDiagnosticsClusterPayloadTestRequestParams() *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGeneralDiagnosticsClusterPayloadTestRequestParams")), objc.RegisterName("new"))
-	return &MTRGeneralDiagnosticsClusterPayloadTestRequestParams{inner: raw.MTRGeneralDiagnosticsClusterPayloadTestRequestParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRGeneralDiagnosticsClusterPayloadTestRequestParams")), objc.RegisterName("new"))
+	return mTRGeneralDiagnosticsClusterPayloadTestRequestParamsAdopt(_id)
 }
 
-// WithEnableKey sets the enableKey property and returns the receiver for chaining.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithEnableKey(enableKey *foundation.NSData) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
-	x.inner.SetEnableKey(enableKey)
+// WithEnableKey sets enableKey and returns the receiver so calls can be chained.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithEnableKey(enableKey obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableKey:"), objref.IDOf(enableKey))
 	return x
 }
 
-// WithValue sets the value property and returns the receiver for chaining.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithValue(value *foundation.NSNumber) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
-	x.inner.SetValue(value)
+// WithValue sets value and returns the receiver so calls can be chained.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithValue(value obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
-// WithCount sets the count property and returns the receiver for chaining.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithCount(count *foundation.NSNumber) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
-	x.inner.SetCount(count)
+// WithCount sets count and returns the receiver so calls can be chained.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithCount(count obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCount:"), objref.IDOf(count))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke).
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// EnableKey calls the underlying EnableKey.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) EnableKey() *foundation.NSData {
-	return x.inner.EnableKey()
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) EnableKey() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableKey"))
+	return obj.Wrap(_r)
 }
 
-// SetEnableKey calls the underlying SetEnableKey.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetEnableKey(enableKey *foundation.NSData) {
-	x.inner.SetEnableKey(enableKey)
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetEnableKey(enableKey obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableKey:"), objref.IDOf(enableKey))
 }
 
-// Value calls the underlying Value.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) Value() *foundation.NSNumber {
-	return x.inner.Value()
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
 }
 
-// SetValue calls the underlying SetValue.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetValue(value *foundation.NSNumber) {
-	x.inner.SetValue(value)
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetValue(value obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 }
 
-// GetCount calls the underlying GetCount.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) GetCount() *foundation.NSNumber {
-	return x.inner.GetCount()
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) GetCount() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getCount"))
+	return obj.Wrap(_r)
 }
 
-// SetCount calls the underlying SetCount.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetCount(count *foundation.NSNumber) {
-	x.inner.SetCount(count)
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetCount(count obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCount:"), objref.IDOf(count))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRGeneralDiagnosticsClusterPayloadTestRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRGeneralDiagnosticsClusterPayloadTestRequestParamsable is the interface implemented by [MTRGeneralDiagnosticsClusterPayloadTestRequestParams], for mocking and DI.
 type MTRGeneralDiagnosticsClusterPayloadTestRequestParamsable interface {
-	Unwrap() *raw.MTRGeneralDiagnosticsClusterPayloadTestRequestParams
-	WithEnableKey(enableKey *foundation.NSData) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams
-	WithValue(value *foundation.NSNumber) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams
-	WithCount(count *foundation.NSNumber) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams
-	EnableKey() *foundation.NSData
-	SetEnableKey(enableKey *foundation.NSData)
-	Value() *foundation.NSNumber
-	SetValue(value *foundation.NSNumber)
-	GetCount() *foundation.NSNumber
-	SetCount(count *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithEnableKey(enableKey obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams
+	WithValue(value obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams
+	WithCount(count obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGeneralDiagnosticsClusterPayloadTestRequestParams
+	EnableKey() obj.Object
+	SetEnableKey(enableKey obj.Object)
+	Value() obj.Object
+	SetValue(value obj.Object)
+	GetCount() obj.Object
+	SetCount(count obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRGeneralDiagnosticsClusterPayloadTestRequestParamsable = (*MTRGeneralDiagnosticsClusterPayloadTestRequestParams)(nil)

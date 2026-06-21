@@ -5,41 +5,66 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MathExpression wraps [raw.AXMathExpression] with a fluent Go API.
+// MathExpression is an idiomatic wrapper over the Objective-C class AXMathExpression.
 type MathExpression struct {
-	inner *raw.AXMathExpression
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AXMathExpression].
-func (x *MathExpression) Unwrap() *raw.AXMathExpression { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MathExpression) ID() objc.ID { return x.inner.Ptr() }
-
-// MathExpressionFromID adopts an existing object pointer as a MathExpression (nil for 0).
+// MathExpressionFromID adopts an existing Objective-C object as a MathExpression
+// (nil for 0), retaining it and registering a release finalizer.
 func MathExpressionFromID(id objc.ID) *MathExpression {
 	if id == 0 {
 		return nil
 	}
-	return &MathExpression{inner: raw.AXMathExpressionFromID(id)}
+	x := &MathExpression{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMathExpression creates a new [MathExpression].
+// mathExpressionAdopt wraps an Objective-C object that this code just created as a
+// MathExpression (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mathExpressionAdopt(id objc.ID) *MathExpression {
+	if id == 0 {
+		return nil
+	}
+	x := &MathExpression{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MathExpression) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MathExpression) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MathExpression) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMathExpression creates a new MathExpression.
 func NewMathExpression() *MathExpression {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AXMathExpression")), objc.RegisterName("new"))
-	return &MathExpression{inner: raw.AXMathExpressionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AXMathExpression")), objc.RegisterName("new"))
+	return mathExpressionAdopt(_id)
 }
-
-func (x *MathExpression) asMathExpression() *raw.AXMathExpression { return x.inner }
 
 // MathExpressionable is the interface implemented by [MathExpression], for mocking and DI.
 type MathExpressionable interface {
-	Unwrap() *raw.AXMathExpression
+	obj.Object
 }
 
 var _ MathExpressionable = (*MathExpression)(nil)

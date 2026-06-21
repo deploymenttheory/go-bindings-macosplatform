@@ -10,443 +10,426 @@ import (
 )
 
 // The options available to a graph.
-type MPSGraphDeploymentPlatform int64
+type GraphDeploymentPlatform int64
 
 const (
 	// Deployment platofmr for macOS.
-	MPSGraphDeploymentPlatformMacOS MPSGraphDeploymentPlatform = 0
+	GraphDeploymentPlatformMacOS GraphDeploymentPlatform = 0
 	// Deployment target for iOS.
-	MPSGraphDeploymentPlatformIOS MPSGraphDeploymentPlatform = 1
+	GraphDeploymentPlatformIOS GraphDeploymentPlatform = 1
 	// Deployment target for tvOS.
-	MPSGraphDeploymentPlatformTvOS MPSGraphDeploymentPlatform = 2
+	GraphDeploymentPlatformTvOS GraphDeploymentPlatform = 2
 	// Deployment target for visionOS.
-	MPSGraphDeploymentPlatformVisionOS MPSGraphDeploymentPlatform = 3
+	GraphDeploymentPlatformVisionOS GraphDeploymentPlatform = 3
 )
 
-func (e MPSGraphDeploymentPlatform) String() string {
+func (e GraphDeploymentPlatform) String() string {
 	switch e {
-	case MPSGraphDeploymentPlatformMacOS:
-		return "MPSGraphDeploymentPlatformMacOS"
-	case MPSGraphDeploymentPlatformIOS:
-		return "MPSGraphDeploymentPlatformIOS"
-	case MPSGraphDeploymentPlatformTvOS:
-		return "MPSGraphDeploymentPlatformTvOS"
-	case MPSGraphDeploymentPlatformVisionOS:
-		return "MPSGraphDeploymentPlatformVisionOS"
+	case GraphDeploymentPlatformMacOS:
+		return "GraphDeploymentPlatformMacOS"
+	case GraphDeploymentPlatformIOS:
+		return "GraphDeploymentPlatformIOS"
+	case GraphDeploymentPlatformTvOS:
+		return "GraphDeploymentPlatformTvOS"
+	case GraphDeploymentPlatformVisionOS:
+		return "GraphDeploymentPlatformVisionOS"
 	default:
-		return fmt.Sprintf("MPSGraphDeploymentPlatform(%d)", int64(e))
+		return fmt.Sprintf("GraphDeploymentPlatform(%d)", int64(e))
 	}
 }
 
 // The device type.
-type MPSGraphDeviceType int64
+type GraphDeviceType int64
 
 const (
 	// Device of type Metal
-	MPSGraphDeviceTypeMetal MPSGraphDeviceType = 0
+	GraphDeviceTypeMetal GraphDeviceType = 0
 )
 
-func (e MPSGraphDeviceType) String() string {
+func (e GraphDeviceType) String() string {
 	switch e {
-	case MPSGraphDeviceTypeMetal:
-		return "MPSGraphDeviceTypeMetal"
+	case GraphDeviceTypeMetal:
+		return "GraphDeviceTypeMetal"
 	default:
-		return fmt.Sprintf("MPSGraphDeviceType(%d)", int64(e))
-	}
-}
-
-// Execution events that can be used with shared events.
-type MPSGraphExecutionStage int64
-
-const (
-	// stage when execution of the graph completes.
-	MPSGraphExecutionStageCompleted MPSGraphExecutionStage = 0
-)
-
-func (e MPSGraphExecutionStage) String() string {
-	switch e {
-	case MPSGraphExecutionStageCompleted:
-		return "MPSGraphExecutionStageCompleted"
-	default:
-		return fmt.Sprintf("MPSGraphExecutionStage(%d)", int64(e))
+		return fmt.Sprintf("GraphDeviceType(%d)", int64(e))
 	}
 }
 
 // The scaling modes for Fourier transform operations.
-type MPSGraphFFTScalingMode uint64
+type GraphFFTScalingMode uint64
 
 const (
 	// Computes the FFT result with no scaling.
-	MPSGraphFFTScalingModeNone MPSGraphFFTScalingMode = 0
+	GraphFFTScalingModeNone GraphFFTScalingMode = 0
 	// Scales the FFT result with reciprocal of the total FFT size over all transformed dimensions.
-	MPSGraphFFTScalingModeSize MPSGraphFFTScalingMode = 1
+	GraphFFTScalingModeSize GraphFFTScalingMode = 1
 	// Scales the FFT result with reciprocal square root of the total FFT size over all transformed dimensions, resulting in signal strength conserving transformation.
-	MPSGraphFFTScalingModeUnitary MPSGraphFFTScalingMode = 2
+	GraphFFTScalingModeUnitary GraphFFTScalingMode = 2
 )
 
-func (e MPSGraphFFTScalingMode) String() string {
+func (e GraphFFTScalingMode) String() string {
 	switch e {
-	case MPSGraphFFTScalingModeNone:
-		return "MPSGraphFFTScalingModeNone"
-	case MPSGraphFFTScalingModeSize:
-		return "MPSGraphFFTScalingModeSize"
-	case MPSGraphFFTScalingModeUnitary:
-		return "MPSGraphFFTScalingModeUnitary"
+	case GraphFFTScalingModeNone:
+		return "GraphFFTScalingModeNone"
+	case GraphFFTScalingModeSize:
+		return "GraphFFTScalingModeSize"
+	case GraphFFTScalingModeUnitary:
+		return "GraphFFTScalingModeUnitary"
 	default:
-		return fmt.Sprintf("MPSGraphFFTScalingMode(%d)", int64(e))
+		return fmt.Sprintf("GraphFFTScalingMode(%d)", int64(e))
 	}
 }
 
 // The type of the reduction the graph applies in the loss operations.
-type MPSGraphLossReductionType int64
+type GraphLossReductionType int64
 
 const (
 	// Computes the loss without reduction.
-	MPSGraphLossReductionTypeNone MPSGraphLossReductionType = 0
+	GraphLossReductionTypeNone GraphLossReductionType = 0
 	// Computes the loss without reduction.
-	MPSGraphLossReductionTypeAxis MPSGraphLossReductionType = 0
+	GraphLossReductionTypeAxis GraphLossReductionType = 0
 	// Reduces the loss down to a scalar with a sum operation.
-	MPSGraphLossReductionTypeSum MPSGraphLossReductionType = 1
+	GraphLossReductionTypeSum GraphLossReductionType = 1
 	// Reduces the loss down to a scalar with a mean operation.
-	MPSGraphLossReductionTypeMean MPSGraphLossReductionType = 2
+	GraphLossReductionTypeMean GraphLossReductionType = 2
 )
 
-func (e MPSGraphLossReductionType) String() string {
+func (e GraphLossReductionType) String() string {
 	switch e {
-	case MPSGraphLossReductionTypeNone:
-		return "MPSGraphLossReductionTypeNone"
-	case MPSGraphLossReductionTypeSum:
-		return "MPSGraphLossReductionTypeSum"
-	case MPSGraphLossReductionTypeMean:
-		return "MPSGraphLossReductionTypeMean"
+	case GraphLossReductionTypeNone:
+		return "GraphLossReductionTypeNone"
+	case GraphLossReductionTypeSum:
+		return "GraphLossReductionTypeSum"
+	case GraphLossReductionTypeMean:
+		return "GraphLossReductionTypeMean"
 	default:
-		return fmt.Sprintf("MPSGraphLossReductionType(%d)", int64(e))
+		return fmt.Sprintf("GraphLossReductionType(%d)", int64(e))
 	}
 }
 
 // The non-maximum suppression coordinate mode.
-type MPSGraphNonMaximumSuppressionCoordinateMode uint64
+type GraphNonMaximumSuppressionCoordinateMode uint64
 
 const (
-	MPSGraphNonMaximumSuppressionCoordinateModeCornersHeightFirst MPSGraphNonMaximumSuppressionCoordinateMode = 0
-	MPSGraphNonMaximumSuppressionCoordinateModeCornersWidthFirst  MPSGraphNonMaximumSuppressionCoordinateMode = 1
-	MPSGraphNonMaximumSuppressionCoordinateModeCentersHeightFirst MPSGraphNonMaximumSuppressionCoordinateMode = 2
-	MPSGraphNonMaximumSuppressionCoordinateModeCentersWidthFirst  MPSGraphNonMaximumSuppressionCoordinateMode = 3
+	GraphNonMaximumSuppressionCoordinateModeCornersHeightFirst GraphNonMaximumSuppressionCoordinateMode = 0
+	GraphNonMaximumSuppressionCoordinateModeCornersWidthFirst  GraphNonMaximumSuppressionCoordinateMode = 1
+	GraphNonMaximumSuppressionCoordinateModeCentersHeightFirst GraphNonMaximumSuppressionCoordinateMode = 2
+	GraphNonMaximumSuppressionCoordinateModeCentersWidthFirst  GraphNonMaximumSuppressionCoordinateMode = 3
 )
 
-func (e MPSGraphNonMaximumSuppressionCoordinateMode) String() string {
+func (e GraphNonMaximumSuppressionCoordinateMode) String() string {
 	switch e {
-	case MPSGraphNonMaximumSuppressionCoordinateModeCornersHeightFirst:
-		return "MPSGraphNonMaximumSuppressionCoordinateModeCornersHeightFirst"
-	case MPSGraphNonMaximumSuppressionCoordinateModeCornersWidthFirst:
-		return "MPSGraphNonMaximumSuppressionCoordinateModeCornersWidthFirst"
-	case MPSGraphNonMaximumSuppressionCoordinateModeCentersHeightFirst:
-		return "MPSGraphNonMaximumSuppressionCoordinateModeCentersHeightFirst"
-	case MPSGraphNonMaximumSuppressionCoordinateModeCentersWidthFirst:
-		return "MPSGraphNonMaximumSuppressionCoordinateModeCentersWidthFirst"
+	case GraphNonMaximumSuppressionCoordinateModeCornersHeightFirst:
+		return "GraphNonMaximumSuppressionCoordinateModeCornersHeightFirst"
+	case GraphNonMaximumSuppressionCoordinateModeCornersWidthFirst:
+		return "GraphNonMaximumSuppressionCoordinateModeCornersWidthFirst"
+	case GraphNonMaximumSuppressionCoordinateModeCentersHeightFirst:
+		return "GraphNonMaximumSuppressionCoordinateModeCentersHeightFirst"
+	case GraphNonMaximumSuppressionCoordinateModeCentersWidthFirst:
+		return "GraphNonMaximumSuppressionCoordinateModeCentersWidthFirst"
 	default:
-		return fmt.Sprintf("MPSGraphNonMaximumSuppressionCoordinateMode(%d)", int64(e))
+		return fmt.Sprintf("GraphNonMaximumSuppressionCoordinateMode(%d)", int64(e))
 	}
 }
 
 // The optimization levels to trade compilation time for even more runtime performance by running more passes.
-type MPSGraphOptimization int64
+type GraphOptimization int64
 
 const (
 	// Graph performs core optimizations only.
-	MPSGraphOptimizationLevel0 MPSGraphOptimization = 0
+	GraphOptimizationLevel0 GraphOptimization = 0
 	// Graph performs additional Optimizations, like using the placement pass to dispatch across different HW blocks like the NeuralEngine and CPU along with the GPU.
-	MPSGraphOptimizationLevel1 MPSGraphOptimization = 1
+	GraphOptimizationLevel1 GraphOptimization = 1
 )
 
-func (e MPSGraphOptimization) String() string {
+func (e GraphOptimization) String() string {
 	switch e {
-	case MPSGraphOptimizationLevel0:
-		return "MPSGraphOptimizationLevel0"
-	case MPSGraphOptimizationLevel1:
-		return "MPSGraphOptimizationLevel1"
+	case GraphOptimizationLevel0:
+		return "GraphOptimizationLevel0"
+	case GraphOptimizationLevel1:
+		return "GraphOptimizationLevel1"
 	default:
-		return fmt.Sprintf("MPSGraphOptimization(%d)", int64(e))
+		return fmt.Sprintf("GraphOptimization(%d)", int64(e))
 	}
 }
 
 // The optimization profile used as a heuristic as the graph compiler optimizes the network.
-type MPSGraphOptimizationProfile int64
+type GraphOptimizationProfile int64
 
 const (
 	// Default, graph optimized for performance.
-	MPSGraphOptimizationProfilePerformance MPSGraphOptimizationProfile = 0
+	GraphOptimizationProfilePerformance GraphOptimizationProfile = 0
 	// Graph optimized for power efficiency.
-	MPSGraphOptimizationProfilePowerEfficiency MPSGraphOptimizationProfile = 1
+	GraphOptimizationProfilePowerEfficiency GraphOptimizationProfile = 1
 )
 
-func (e MPSGraphOptimizationProfile) String() string {
+func (e GraphOptimizationProfile) String() string {
 	switch e {
-	case MPSGraphOptimizationProfilePerformance:
-		return "MPSGraphOptimizationProfilePerformance"
-	case MPSGraphOptimizationProfilePowerEfficiency:
-		return "MPSGraphOptimizationProfilePowerEfficiency"
+	case GraphOptimizationProfilePerformance:
+		return "GraphOptimizationProfilePerformance"
+	case GraphOptimizationProfilePowerEfficiency:
+		return "GraphOptimizationProfilePowerEfficiency"
 	default:
-		return fmt.Sprintf("MPSGraphOptimizationProfile(%d)", int64(e))
+		return fmt.Sprintf("GraphOptimizationProfile(%d)", int64(e))
 	}
 }
 
 // The options available to a graph.
-type MPSGraphOptions int64
+type GraphOptions int64
 
 const (
 	// No Options.
-	MPSGraphOptionsNone MPSGraphOptions = 0
+	GraphOptionsNone GraphOptions = 0
 	// The graph synchronizes results to the CPU using a blit encoder if on a discrete GPU at the end of execution.
-	MPSGraphOptionsSynchronizeResults MPSGraphOptions = 1
+	GraphOptionsSynchronizeResults GraphOptions = 1
 	// The framework prints more logging info.
-	MPSGraphOptionsVerbose MPSGraphOptions = 2
+	GraphOptionsVerbose GraphOptions = 2
 	// The framework uses these options as default if not overriden.
-	MPSGraphOptionsDefault MPSGraphOptions = 1
+	GraphOptionsDefault GraphOptions = 1
 )
 
-func (e MPSGraphOptions) String() string {
+func (e GraphOptions) String() string {
 	switch e {
-	case MPSGraphOptionsNone:
-		return "MPSGraphOptionsNone"
-	case MPSGraphOptionsSynchronizeResults:
-		return "MPSGraphOptionsSynchronizeResults"
-	case MPSGraphOptionsVerbose:
-		return "MPSGraphOptionsVerbose"
+	case GraphOptionsNone:
+		return "GraphOptionsNone"
+	case GraphOptionsSynchronizeResults:
+		return "GraphOptionsSynchronizeResults"
+	case GraphOptionsVerbose:
+		return "GraphOptionsVerbose"
 	default:
-		return fmt.Sprintf("MPSGraphOptions(%d)", int64(e))
+		return fmt.Sprintf("GraphOptions(%d)", int64(e))
 	}
 }
 
 // The tensor padding mode.
-type MPSGraphPaddingMode int64
+type GraphPaddingMode int64
 
 const (
 	// Constant
-	MPSGraphPaddingModeConstant MPSGraphPaddingMode = 0
+	GraphPaddingModeConstant GraphPaddingMode = 0
 	// Reflect
-	MPSGraphPaddingModeReflect MPSGraphPaddingMode = 1
+	GraphPaddingModeReflect GraphPaddingMode = 1
 	// Symmetric
-	MPSGraphPaddingModeSymmetric MPSGraphPaddingMode = 2
+	GraphPaddingModeSymmetric GraphPaddingMode = 2
 	// ClampToEdge (PyTorch ReplicationPad)
-	MPSGraphPaddingModeClampToEdge MPSGraphPaddingMode = 3
+	GraphPaddingModeClampToEdge GraphPaddingMode = 3
 	// Zero
-	MPSGraphPaddingModeZero MPSGraphPaddingMode = 4
+	GraphPaddingModeZero GraphPaddingMode = 4
 	// Periodic x[-2] -> x[L-3], where L is size of x.
-	MPSGraphPaddingModePeriodic MPSGraphPaddingMode = 5
+	GraphPaddingModePeriodic GraphPaddingMode = 5
 	// Anti Periodic x[-2] -> -x[L-3]
-	MPSGraphPaddingModeAntiPeriodic MPSGraphPaddingMode = 6
+	GraphPaddingModeAntiPeriodic GraphPaddingMode = 6
 )
 
-func (e MPSGraphPaddingMode) String() string {
+func (e GraphPaddingMode) String() string {
 	switch e {
-	case MPSGraphPaddingModeConstant:
-		return "MPSGraphPaddingModeConstant"
-	case MPSGraphPaddingModeReflect:
-		return "MPSGraphPaddingModeReflect"
-	case MPSGraphPaddingModeSymmetric:
-		return "MPSGraphPaddingModeSymmetric"
-	case MPSGraphPaddingModeClampToEdge:
-		return "MPSGraphPaddingModeClampToEdge"
-	case MPSGraphPaddingModeZero:
-		return "MPSGraphPaddingModeZero"
-	case MPSGraphPaddingModePeriodic:
-		return "MPSGraphPaddingModePeriodic"
-	case MPSGraphPaddingModeAntiPeriodic:
-		return "MPSGraphPaddingModeAntiPeriodic"
+	case GraphPaddingModeConstant:
+		return "GraphPaddingModeConstant"
+	case GraphPaddingModeReflect:
+		return "GraphPaddingModeReflect"
+	case GraphPaddingModeSymmetric:
+		return "GraphPaddingModeSymmetric"
+	case GraphPaddingModeClampToEdge:
+		return "GraphPaddingModeClampToEdge"
+	case GraphPaddingModeZero:
+		return "GraphPaddingModeZero"
+	case GraphPaddingModePeriodic:
+		return "GraphPaddingModePeriodic"
+	case GraphPaddingModeAntiPeriodic:
+		return "GraphPaddingModeAntiPeriodic"
 	default:
-		return fmt.Sprintf("MPSGraphPaddingMode(%d)", int64(e))
+		return fmt.Sprintf("GraphPaddingMode(%d)", int64(e))
 	}
 }
 
 // The tensor padding style.
-type MPSGraphPaddingStyle uint64
+type GraphPaddingStyle uint64
 
 const (
 	// Explicit
-	MPSGraphPaddingStyleExplicit MPSGraphPaddingStyle = 0
+	GraphPaddingStyleExplicit GraphPaddingStyle = 0
 	// ONNX_SAME_LOWER
-	MPSGraphPaddingStyleTF_VALID MPSGraphPaddingStyle = 1
+	GraphPaddingStyleTF_VALID GraphPaddingStyle = 1
 	// TF_SAME
-	MPSGraphPaddingStyleTF_SAME MPSGraphPaddingStyle = 2
+	GraphPaddingStyleTF_SAME GraphPaddingStyle = 2
 	// TF_VALID
-	MPSGraphPaddingStyleExplicitOffset MPSGraphPaddingStyle = 3
+	GraphPaddingStyleExplicitOffset GraphPaddingStyle = 3
 	// Explicit offsets
-	MPSGraphPaddingStyleONNX_SAME_LOWER MPSGraphPaddingStyle = 4
+	GraphPaddingStyleONNX_SAME_LOWER GraphPaddingStyle = 4
 )
 
-func (e MPSGraphPaddingStyle) String() string {
+func (e GraphPaddingStyle) String() string {
 	switch e {
-	case MPSGraphPaddingStyleExplicit:
-		return "MPSGraphPaddingStyleExplicit"
-	case MPSGraphPaddingStyleTF_VALID:
-		return "MPSGraphPaddingStyleTF_VALID"
-	case MPSGraphPaddingStyleTF_SAME:
-		return "MPSGraphPaddingStyleTF_SAME"
-	case MPSGraphPaddingStyleExplicitOffset:
-		return "MPSGraphPaddingStyleExplicitOffset"
-	case MPSGraphPaddingStyleONNX_SAME_LOWER:
-		return "MPSGraphPaddingStyleONNX_SAME_LOWER"
+	case GraphPaddingStyleExplicit:
+		return "GraphPaddingStyleExplicit"
+	case GraphPaddingStyleTF_VALID:
+		return "GraphPaddingStyleTF_VALID"
+	case GraphPaddingStyleTF_SAME:
+		return "GraphPaddingStyleTF_SAME"
+	case GraphPaddingStyleExplicitOffset:
+		return "GraphPaddingStyleExplicitOffset"
+	case GraphPaddingStyleONNX_SAME_LOWER:
+		return "GraphPaddingStyleONNX_SAME_LOWER"
 	default:
-		return fmt.Sprintf("MPSGraphPaddingStyle(%d)", int64(e))
+		return fmt.Sprintf("GraphPaddingStyle(%d)", int64(e))
 	}
 }
 
 // The flattening mode for returned indices with max-pooling.
-type MPSGraphPoolingReturnIndicesMode uint64
+type GraphPoolingReturnIndicesMode uint64
 
 const (
 	// No indices returned.
-	MPSGraphPoolingReturnIndicesNone MPSGraphPoolingReturnIndicesMode = 0
+	GraphPoolingReturnIndicesNone GraphPoolingReturnIndicesMode = 0
 	// Returns indices flattened in inner most (last) dimension.
-	MPSGraphPoolingReturnIndicesGlobalFlatten1D MPSGraphPoolingReturnIndicesMode = 1
+	GraphPoolingReturnIndicesGlobalFlatten1D GraphPoolingReturnIndicesMode = 1
 	// Returns indices flattened in 2 innermost dimensions. eg: HW in NCHW.
-	MPSGraphPoolingReturnIndicesGlobalFlatten2D MPSGraphPoolingReturnIndicesMode = 2
+	GraphPoolingReturnIndicesGlobalFlatten2D GraphPoolingReturnIndicesMode = 2
 	// Returns indices flattened in 3 innernost dimensions. eg: HWC in NHWC.
-	MPSGraphPoolingReturnIndicesGlobalFlatten3D MPSGraphPoolingReturnIndicesMode = 3
+	GraphPoolingReturnIndicesGlobalFlatten3D GraphPoolingReturnIndicesMode = 3
 	// Returns indices flattened in 4 innermost dimensions.
-	MPSGraphPoolingReturnIndicesGlobalFlatten4D MPSGraphPoolingReturnIndicesMode = 4
+	GraphPoolingReturnIndicesGlobalFlatten4D GraphPoolingReturnIndicesMode = 4
 	// Returns indices within pooling window, flattened in inner most dimension.
-	MPSGraphPoolingReturnIndicesLocalFlatten1D MPSGraphPoolingReturnIndicesMode = 5
+	GraphPoolingReturnIndicesLocalFlatten1D GraphPoolingReturnIndicesMode = 5
 	// Returns indices within pooling window, flattened in 2 innermost dimensions. eg: HW in NCHW.
-	MPSGraphPoolingReturnIndicesLocalFlatten2D MPSGraphPoolingReturnIndicesMode = 6
+	GraphPoolingReturnIndicesLocalFlatten2D GraphPoolingReturnIndicesMode = 6
 	// Returns indices within pooling window, flattened in 3 innernost dimensions. eg: HWC in NHWC.
-	MPSGraphPoolingReturnIndicesLocalFlatten3D MPSGraphPoolingReturnIndicesMode = 7
+	GraphPoolingReturnIndicesLocalFlatten3D GraphPoolingReturnIndicesMode = 7
 	// Returns indices within pooling window, flattened in 4 innermost dimensions.
-	MPSGraphPoolingReturnIndicesLocalFlatten4D MPSGraphPoolingReturnIndicesMode = 8
+	GraphPoolingReturnIndicesLocalFlatten4D GraphPoolingReturnIndicesMode = 8
 )
 
-func (e MPSGraphPoolingReturnIndicesMode) String() string {
+func (e GraphPoolingReturnIndicesMode) String() string {
 	switch e {
-	case MPSGraphPoolingReturnIndicesNone:
-		return "MPSGraphPoolingReturnIndicesNone"
-	case MPSGraphPoolingReturnIndicesGlobalFlatten1D:
-		return "MPSGraphPoolingReturnIndicesGlobalFlatten1D"
-	case MPSGraphPoolingReturnIndicesGlobalFlatten2D:
-		return "MPSGraphPoolingReturnIndicesGlobalFlatten2D"
-	case MPSGraphPoolingReturnIndicesGlobalFlatten3D:
-		return "MPSGraphPoolingReturnIndicesGlobalFlatten3D"
-	case MPSGraphPoolingReturnIndicesGlobalFlatten4D:
-		return "MPSGraphPoolingReturnIndicesGlobalFlatten4D"
-	case MPSGraphPoolingReturnIndicesLocalFlatten1D:
-		return "MPSGraphPoolingReturnIndicesLocalFlatten1D"
-	case MPSGraphPoolingReturnIndicesLocalFlatten2D:
-		return "MPSGraphPoolingReturnIndicesLocalFlatten2D"
-	case MPSGraphPoolingReturnIndicesLocalFlatten3D:
-		return "MPSGraphPoolingReturnIndicesLocalFlatten3D"
-	case MPSGraphPoolingReturnIndicesLocalFlatten4D:
-		return "MPSGraphPoolingReturnIndicesLocalFlatten4D"
+	case GraphPoolingReturnIndicesNone:
+		return "GraphPoolingReturnIndicesNone"
+	case GraphPoolingReturnIndicesGlobalFlatten1D:
+		return "GraphPoolingReturnIndicesGlobalFlatten1D"
+	case GraphPoolingReturnIndicesGlobalFlatten2D:
+		return "GraphPoolingReturnIndicesGlobalFlatten2D"
+	case GraphPoolingReturnIndicesGlobalFlatten3D:
+		return "GraphPoolingReturnIndicesGlobalFlatten3D"
+	case GraphPoolingReturnIndicesGlobalFlatten4D:
+		return "GraphPoolingReturnIndicesGlobalFlatten4D"
+	case GraphPoolingReturnIndicesLocalFlatten1D:
+		return "GraphPoolingReturnIndicesLocalFlatten1D"
+	case GraphPoolingReturnIndicesLocalFlatten2D:
+		return "GraphPoolingReturnIndicesLocalFlatten2D"
+	case GraphPoolingReturnIndicesLocalFlatten3D:
+		return "GraphPoolingReturnIndicesLocalFlatten3D"
+	case GraphPoolingReturnIndicesLocalFlatten4D:
+		return "GraphPoolingReturnIndicesLocalFlatten4D"
 	default:
-		return fmt.Sprintf("MPSGraphPoolingReturnIndicesMode(%d)", int64(e))
+		return fmt.Sprintf("GraphPoolingReturnIndicesMode(%d)", int64(e))
 	}
 }
 
 // The activation modes for RNN operations.
-type MPSGraphRNNActivation uint64
+type GraphRNNActivation uint64
 
 const (
 	// Defines a pass through activation.
-	MPSGraphRNNActivationNone MPSGraphRNNActivation = 0
+	GraphRNNActivationNone GraphRNNActivation = 0
 	// Defines a ReLU activation.
-	MPSGraphRNNActivationRelu MPSGraphRNNActivation = 1
+	GraphRNNActivationRelu GraphRNNActivation = 1
 	// Defines a Tanh activation.
-	MPSGraphRNNActivationTanh MPSGraphRNNActivation = 2
+	GraphRNNActivationTanh GraphRNNActivation = 2
 	// Defines a Sigmoid activation.
-	MPSGraphRNNActivationSigmoid MPSGraphRNNActivation = 3
+	GraphRNNActivationSigmoid GraphRNNActivation = 3
 	// Defines a Hard sigmoid activation.
-	MPSGraphRNNActivationHardSigmoid MPSGraphRNNActivation = 4
+	GraphRNNActivationHardSigmoid GraphRNNActivation = 4
 )
 
-func (e MPSGraphRNNActivation) String() string {
+func (e GraphRNNActivation) String() string {
 	switch e {
-	case MPSGraphRNNActivationNone:
-		return "MPSGraphRNNActivationNone"
-	case MPSGraphRNNActivationRelu:
-		return "MPSGraphRNNActivationRelu"
-	case MPSGraphRNNActivationTanh:
-		return "MPSGraphRNNActivationTanh"
-	case MPSGraphRNNActivationSigmoid:
-		return "MPSGraphRNNActivationSigmoid"
-	case MPSGraphRNNActivationHardSigmoid:
-		return "MPSGraphRNNActivationHardSigmoid"
+	case GraphRNNActivationNone:
+		return "GraphRNNActivationNone"
+	case GraphRNNActivationRelu:
+		return "GraphRNNActivationRelu"
+	case GraphRNNActivationTanh:
+		return "GraphRNNActivationTanh"
+	case GraphRNNActivationSigmoid:
+		return "GraphRNNActivationSigmoid"
+	case GraphRNNActivationHardSigmoid:
+		return "GraphRNNActivationHardSigmoid"
 	default:
-		return fmt.Sprintf("MPSGraphRNNActivation(%d)", int64(e))
+		return fmt.Sprintf("GraphRNNActivation(%d)", int64(e))
 	}
 }
 
 // The distributions supported by random operations.
-type MPSGraphRandomDistribution int64
+type GraphRandomDistribution int64
 
 const (
 	// The uniform distribution, with samples drawn uniformly from [min, max) for float types, and [min, max] for integer types.
-	MPSGraphRandomDistributionUniform MPSGraphRandomDistribution = 0
+	GraphRandomDistributionUniform GraphRandomDistribution = 0
 	// The normal distribution defined by mean and standard deviation.
-	MPSGraphRandomDistributionNormal MPSGraphRandomDistribution = 1
+	GraphRandomDistributionNormal GraphRandomDistribution = 1
 	// The normal distribution defined by mean and standard deviation, truncated to the range [min, max)
-	MPSGraphRandomDistributionTruncatedNormal MPSGraphRandomDistribution = 2
+	GraphRandomDistributionTruncatedNormal GraphRandomDistribution = 2
 )
 
-func (e MPSGraphRandomDistribution) String() string {
+func (e GraphRandomDistribution) String() string {
 	switch e {
-	case MPSGraphRandomDistributionUniform:
-		return "MPSGraphRandomDistributionUniform"
-	case MPSGraphRandomDistributionNormal:
-		return "MPSGraphRandomDistributionNormal"
-	case MPSGraphRandomDistributionTruncatedNormal:
-		return "MPSGraphRandomDistributionTruncatedNormal"
+	case GraphRandomDistributionUniform:
+		return "GraphRandomDistributionUniform"
+	case GraphRandomDistributionNormal:
+		return "GraphRandomDistributionNormal"
+	case GraphRandomDistributionTruncatedNormal:
+		return "GraphRandomDistributionTruncatedNormal"
 	default:
-		return fmt.Sprintf("MPSGraphRandomDistribution(%d)", int64(e))
+		return fmt.Sprintf("GraphRandomDistribution(%d)", int64(e))
 	}
 }
 
 // The sampling method to use when generating values in the normal distribution.
-type MPSGraphRandomNormalSamplingMethod int64
+type GraphRandomNormalSamplingMethod int64
 
 const (
 	// Use inverse erf to convert uniform values to values in the normal distribution
-	MPSGraphRandomNormalSamplingInvCDF MPSGraphRandomNormalSamplingMethod = 0
+	GraphRandomNormalSamplingInvCDF GraphRandomNormalSamplingMethod = 0
 	// Use Box Muller transform to convert uniform values to values in the normal distribution. For bounded distributions this is a rejection sampling method.
-	MPSGraphRandomNormalSamplingBoxMuller MPSGraphRandomNormalSamplingMethod = 1
+	GraphRandomNormalSamplingBoxMuller GraphRandomNormalSamplingMethod = 1
 )
 
-func (e MPSGraphRandomNormalSamplingMethod) String() string {
+func (e GraphRandomNormalSamplingMethod) String() string {
 	switch e {
-	case MPSGraphRandomNormalSamplingInvCDF:
-		return "MPSGraphRandomNormalSamplingInvCDF"
-	case MPSGraphRandomNormalSamplingBoxMuller:
-		return "MPSGraphRandomNormalSamplingBoxMuller"
+	case GraphRandomNormalSamplingInvCDF:
+		return "GraphRandomNormalSamplingInvCDF"
+	case GraphRandomNormalSamplingBoxMuller:
+		return "GraphRandomNormalSamplingBoxMuller"
 	default:
-		return fmt.Sprintf("MPSGraphRandomNormalSamplingMethod(%d)", int64(e))
+		return fmt.Sprintf("GraphRandomNormalSamplingMethod(%d)", int64(e))
 	}
 }
 
 // MPSGraph could use these reduced precision paths to deliver faster math, but it is not guaranteed.
 // Bitmask — values may be combined with |.
-type MPSGraphReducedPrecisionFastMath uint64
+type GraphReducedPrecisionFastMath uint64
 
 const (
 	// Full precision math with maximum accuracy.
-	MPSGraphReducedPrecisionFastMathNone MPSGraphReducedPrecisionFastMath = 0
+	GraphReducedPrecisionFastMathNone GraphReducedPrecisionFastMath = 0
 	// Execute winograd transform intermediate as FP16.
-	MPSGraphReducedPrecisionFastMathAllowFP16Conv2DWinogradTransformIntermediate MPSGraphReducedPrecisionFastMath = 2
+	GraphReducedPrecisionFastMathAllowFP16Conv2DWinogradTransformIntermediate GraphReducedPrecisionFastMath = 2
 	// Allow conversion of operands to FP19 or TF32 from FP32 when needed by dropping 13 mantissa bits.
-	MPSGraphReducedPrecisionFastMathAllowConvertingOperandsFromFP32ToFP19 MPSGraphReducedPrecisionFastMath = 4
+	GraphReducedPrecisionFastMathAllowConvertingOperandsFromFP32ToFP19 GraphReducedPrecisionFastMath = 4
 	// Curated list allowing intermediates for multi-pass GPU kernels to be FP16.
-	MPSGraphReducedPrecisionFastMathAllowFP16Intermediates MPSGraphReducedPrecisionFastMath = 2
+	GraphReducedPrecisionFastMathAllowFP16Intermediates GraphReducedPrecisionFastMath = 2
 	// Default selection.
-	MPSGraphReducedPrecisionFastMathDefault MPSGraphReducedPrecisionFastMath = 0
+	GraphReducedPrecisionFastMathDefault GraphReducedPrecisionFastMath = 0
 )
 
-func (e MPSGraphReducedPrecisionFastMath) String() string {
+func (e GraphReducedPrecisionFastMath) String() string {
 	var parts []string
-	if e&MPSGraphReducedPrecisionFastMathAllowFP16Conv2DWinogradTransformIntermediate != 0 {
-		parts = append(parts, "MPSGraphReducedPrecisionFastMathAllowFP16Conv2DWinogradTransformIntermediate")
+	if e&GraphReducedPrecisionFastMathAllowFP16Conv2DWinogradTransformIntermediate != 0 {
+		parts = append(parts, "GraphReducedPrecisionFastMathAllowFP16Conv2DWinogradTransformIntermediate")
 	}
-	if e&MPSGraphReducedPrecisionFastMathAllowConvertingOperandsFromFP32ToFP19 != 0 {
-		parts = append(parts, "MPSGraphReducedPrecisionFastMathAllowConvertingOperandsFromFP32ToFP19")
+	if e&GraphReducedPrecisionFastMathAllowConvertingOperandsFromFP32ToFP19 != 0 {
+		parts = append(parts, "GraphReducedPrecisionFastMathAllowConvertingOperandsFromFP32ToFP19")
 	}
-	if e&MPSGraphReducedPrecisionFastMathAllowFP16Intermediates != 0 {
-		parts = append(parts, "MPSGraphReducedPrecisionFastMathAllowFP16Intermediates")
+	if e&GraphReducedPrecisionFastMathAllowFP16Intermediates != 0 {
+		parts = append(parts, "GraphReducedPrecisionFastMathAllowFP16Intermediates")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -455,219 +438,219 @@ func (e MPSGraphReducedPrecisionFastMath) String() string {
 }
 
 // The reduction mode.
-type MPSGraphReductionMode uint64
+type GraphReductionMode uint64
 
 const (
 	// Min
-	MPSGraphReductionModeMin MPSGraphReductionMode = 0
+	GraphReductionModeMin GraphReductionMode = 0
 	// Max
-	MPSGraphReductionModeMax MPSGraphReductionMode = 1
+	GraphReductionModeMax GraphReductionMode = 1
 	// Sum
-	MPSGraphReductionModeSum MPSGraphReductionMode = 2
+	GraphReductionModeSum GraphReductionMode = 2
 	// Product
-	MPSGraphReductionModeProduct MPSGraphReductionMode = 3
+	GraphReductionModeProduct GraphReductionMode = 3
 	// Argument Min
-	MPSGraphReductionModeArgumentMin MPSGraphReductionMode = 4
+	GraphReductionModeArgumentMin GraphReductionMode = 4
 	// Argument Max
-	MPSGraphReductionModeArgumentMax MPSGraphReductionMode = 5
+	GraphReductionModeArgumentMax GraphReductionMode = 5
 )
 
-func (e MPSGraphReductionMode) String() string {
+func (e GraphReductionMode) String() string {
 	switch e {
-	case MPSGraphReductionModeMin:
-		return "MPSGraphReductionModeMin"
-	case MPSGraphReductionModeMax:
-		return "MPSGraphReductionModeMax"
-	case MPSGraphReductionModeSum:
-		return "MPSGraphReductionModeSum"
-	case MPSGraphReductionModeProduct:
-		return "MPSGraphReductionModeProduct"
-	case MPSGraphReductionModeArgumentMin:
-		return "MPSGraphReductionModeArgumentMin"
-	case MPSGraphReductionModeArgumentMax:
-		return "MPSGraphReductionModeArgumentMax"
+	case GraphReductionModeMin:
+		return "GraphReductionModeMin"
+	case GraphReductionModeMax:
+		return "GraphReductionModeMax"
+	case GraphReductionModeSum:
+		return "GraphReductionModeSum"
+	case GraphReductionModeProduct:
+		return "GraphReductionModeProduct"
+	case GraphReductionModeArgumentMin:
+		return "GraphReductionModeArgumentMin"
+	case GraphReductionModeArgumentMax:
+		return "GraphReductionModeArgumentMax"
 	default:
-		return fmt.Sprintf("MPSGraphReductionMode(%d)", int64(e))
+		return fmt.Sprintf("GraphReductionMode(%d)", int64(e))
 	}
 }
 
 // The resize mode to use for resizing.
-type MPSGraphResizeMode uint64
+type GraphResizeMode uint64
 
 const (
 	// Samples the nearest neighbor to the pixel coordinate.
-	MPSGraphResizeNearest MPSGraphResizeMode = 0
+	GraphResizeNearest GraphResizeMode = 0
 	// Samples the 4 neighbors to the pixel coordinate and uses bilinear interpolation.
-	MPSGraphResizeBilinear MPSGraphResizeMode = 1
+	GraphResizeBilinear GraphResizeMode = 1
 )
 
-func (e MPSGraphResizeMode) String() string {
+func (e GraphResizeMode) String() string {
 	switch e {
-	case MPSGraphResizeNearest:
-		return "MPSGraphResizeNearest"
-	case MPSGraphResizeBilinear:
-		return "MPSGraphResizeBilinear"
+	case GraphResizeNearest:
+		return "GraphResizeNearest"
+	case GraphResizeBilinear:
+		return "GraphResizeBilinear"
 	default:
-		return fmt.Sprintf("MPSGraphResizeMode(%d)", int64(e))
+		return fmt.Sprintf("GraphResizeMode(%d)", int64(e))
 	}
 }
 
 // The rounding mode to use when using nearest resize mode.
-type MPSGraphResizeNearestRoundingMode uint64
+type GraphResizeNearestRoundingMode uint64
 
 const (
 	// Rounds values to the nearest integer value, with 0.5f offset rounding toward +inf.
-	MPSGraphResizeNearestRoundingModeRoundPreferCeil MPSGraphResizeNearestRoundingMode = 0
+	GraphResizeNearestRoundingModeRoundPreferCeil GraphResizeNearestRoundingMode = 0
 	// Rounds values to the nearest integer value, with 0.5f rounding toward -inf.
-	MPSGraphResizeNearestRoundingModeRoundPreferFloor MPSGraphResizeNearestRoundingMode = 1
+	GraphResizeNearestRoundingModeRoundPreferFloor GraphResizeNearestRoundingMode = 1
 	// Rounds values toward +inf.
-	MPSGraphResizeNearestRoundingModeCeil MPSGraphResizeNearestRoundingMode = 2
+	GraphResizeNearestRoundingModeCeil GraphResizeNearestRoundingMode = 2
 	// Rounds values toward -inf.
-	MPSGraphResizeNearestRoundingModeFloor MPSGraphResizeNearestRoundingMode = 3
+	GraphResizeNearestRoundingModeFloor GraphResizeNearestRoundingMode = 3
 	// Rounds values to the nearest integer value, with 0.5f rounding toward the closest even value.
-	MPSGraphResizeNearestRoundingModeRoundToEven MPSGraphResizeNearestRoundingMode = 4
+	GraphResizeNearestRoundingModeRoundToEven GraphResizeNearestRoundingMode = 4
 	// Rounds values to the nearest integer value, with 0.5f rounding toward the closest odd value.
-	MPSGraphResizeNearestRoundingModeRoundToOdd MPSGraphResizeNearestRoundingMode = 5
+	GraphResizeNearestRoundingModeRoundToOdd GraphResizeNearestRoundingMode = 5
 )
 
-func (e MPSGraphResizeNearestRoundingMode) String() string {
+func (e GraphResizeNearestRoundingMode) String() string {
 	switch e {
-	case MPSGraphResizeNearestRoundingModeRoundPreferCeil:
-		return "MPSGraphResizeNearestRoundingModeRoundPreferCeil"
-	case MPSGraphResizeNearestRoundingModeRoundPreferFloor:
-		return "MPSGraphResizeNearestRoundingModeRoundPreferFloor"
-	case MPSGraphResizeNearestRoundingModeCeil:
-		return "MPSGraphResizeNearestRoundingModeCeil"
-	case MPSGraphResizeNearestRoundingModeFloor:
-		return "MPSGraphResizeNearestRoundingModeFloor"
-	case MPSGraphResizeNearestRoundingModeRoundToEven:
-		return "MPSGraphResizeNearestRoundingModeRoundToEven"
-	case MPSGraphResizeNearestRoundingModeRoundToOdd:
-		return "MPSGraphResizeNearestRoundingModeRoundToOdd"
+	case GraphResizeNearestRoundingModeRoundPreferCeil:
+		return "GraphResizeNearestRoundingModeRoundPreferCeil"
+	case GraphResizeNearestRoundingModeRoundPreferFloor:
+		return "GraphResizeNearestRoundingModeRoundPreferFloor"
+	case GraphResizeNearestRoundingModeCeil:
+		return "GraphResizeNearestRoundingModeCeil"
+	case GraphResizeNearestRoundingModeFloor:
+		return "GraphResizeNearestRoundingModeFloor"
+	case GraphResizeNearestRoundingModeRoundToEven:
+		return "GraphResizeNearestRoundingModeRoundToEven"
+	case GraphResizeNearestRoundingModeRoundToOdd:
+		return "GraphResizeNearestRoundingModeRoundToOdd"
 	default:
-		return fmt.Sprintf("MPSGraphResizeNearestRoundingMode(%d)", int64(e))
+		return fmt.Sprintf("GraphResizeNearestRoundingMode(%d)", int64(e))
 	}
 }
 
 // The scatter mode.
-type MPSGraphScatterMode int64
+type GraphScatterMode int64
 
 const (
 	// Add
-	MPSGraphScatterModeAdd MPSGraphScatterMode = 0
+	GraphScatterModeAdd GraphScatterMode = 0
 	// Sub
-	MPSGraphScatterModeSub MPSGraphScatterMode = 1
+	GraphScatterModeSub GraphScatterMode = 1
 	// Multiply
-	MPSGraphScatterModeMul MPSGraphScatterMode = 2
+	GraphScatterModeMul GraphScatterMode = 2
 	// Divide
-	MPSGraphScatterModeDiv MPSGraphScatterMode = 3
+	GraphScatterModeDiv GraphScatterMode = 3
 	// Minimum
-	MPSGraphScatterModeMin MPSGraphScatterMode = 4
+	GraphScatterModeMin GraphScatterMode = 4
 	// Maximum
-	MPSGraphScatterModeMax MPSGraphScatterMode = 5
+	GraphScatterModeMax GraphScatterMode = 5
 	// Set
-	MPSGraphScatterModeSet MPSGraphScatterMode = 6
+	GraphScatterModeSet GraphScatterMode = 6
 )
 
-func (e MPSGraphScatterMode) String() string {
+func (e GraphScatterMode) String() string {
 	switch e {
-	case MPSGraphScatterModeAdd:
-		return "MPSGraphScatterModeAdd"
-	case MPSGraphScatterModeSub:
-		return "MPSGraphScatterModeSub"
-	case MPSGraphScatterModeMul:
-		return "MPSGraphScatterModeMul"
-	case MPSGraphScatterModeDiv:
-		return "MPSGraphScatterModeDiv"
-	case MPSGraphScatterModeMin:
-		return "MPSGraphScatterModeMin"
-	case MPSGraphScatterModeMax:
-		return "MPSGraphScatterModeMax"
-	case MPSGraphScatterModeSet:
-		return "MPSGraphScatterModeSet"
+	case GraphScatterModeAdd:
+		return "GraphScatterModeAdd"
+	case GraphScatterModeSub:
+		return "GraphScatterModeSub"
+	case GraphScatterModeMul:
+		return "GraphScatterModeMul"
+	case GraphScatterModeDiv:
+		return "GraphScatterModeDiv"
+	case GraphScatterModeMin:
+		return "GraphScatterModeMin"
+	case GraphScatterModeMax:
+		return "GraphScatterModeMax"
+	case GraphScatterModeSet:
+		return "GraphScatterModeSet"
 	default:
-		return fmt.Sprintf("MPSGraphScatterMode(%d)", int64(e))
+		return fmt.Sprintf("GraphScatterMode(%d)", int64(e))
 	}
 }
 
 // The sparse storage options in the Metal Performance Shaders Graph framework.
-type MPSGraphSparseStorageType int64
+type GraphSparseStorageType int64
 
 const (
 	// COO Storage
-	MPSGraphSparseStorageCOO MPSGraphSparseStorageType = 0
+	GraphSparseStorageCOO GraphSparseStorageType = 0
 	// CSC Storage
-	MPSGraphSparseStorageCSC MPSGraphSparseStorageType = 1
+	GraphSparseStorageCSC GraphSparseStorageType = 1
 	// CSR Storage
-	MPSGraphSparseStorageCSR MPSGraphSparseStorageType = 2
+	GraphSparseStorageCSR GraphSparseStorageType = 2
 )
 
-func (e MPSGraphSparseStorageType) String() string {
+func (e GraphSparseStorageType) String() string {
 	switch e {
-	case MPSGraphSparseStorageCOO:
-		return "MPSGraphSparseStorageCOO"
-	case MPSGraphSparseStorageCSC:
-		return "MPSGraphSparseStorageCSC"
-	case MPSGraphSparseStorageCSR:
-		return "MPSGraphSparseStorageCSR"
+	case GraphSparseStorageCOO:
+		return "GraphSparseStorageCOO"
+	case GraphSparseStorageCSC:
+		return "GraphSparseStorageCSC"
+	case GraphSparseStorageCSR:
+		return "GraphSparseStorageCSR"
 	default:
-		return fmt.Sprintf("MPSGraphSparseStorageType(%d)", int64(e))
+		return fmt.Sprintf("GraphSparseStorageType(%d)", int64(e))
 	}
 }
 
 // The tensor layout.
-type MPSGraphTensorNamedDataLayout uint64
+type GraphTensorNamedDataLayout uint64
 
 const (
 	// LayoutNCHW
-	MPSGraphTensorNamedDataLayoutNCHW MPSGraphTensorNamedDataLayout = 0
+	GraphTensorNamedDataLayoutNCHW GraphTensorNamedDataLayout = 0
 	// LayoutNHWC
-	MPSGraphTensorNamedDataLayoutNHWC MPSGraphTensorNamedDataLayout = 1
+	GraphTensorNamedDataLayoutNHWC GraphTensorNamedDataLayout = 1
 	// LayoutOIHW
-	MPSGraphTensorNamedDataLayoutOIHW MPSGraphTensorNamedDataLayout = 2
+	GraphTensorNamedDataLayoutOIHW GraphTensorNamedDataLayout = 2
 	// LayoutHWIO
-	MPSGraphTensorNamedDataLayoutHWIO MPSGraphTensorNamedDataLayout = 3
+	GraphTensorNamedDataLayoutHWIO GraphTensorNamedDataLayout = 3
 	// LayoutCHW
-	MPSGraphTensorNamedDataLayoutCHW MPSGraphTensorNamedDataLayout = 4
+	GraphTensorNamedDataLayoutCHW GraphTensorNamedDataLayout = 4
 	// LayoutHWC
-	MPSGraphTensorNamedDataLayoutHWC MPSGraphTensorNamedDataLayout = 5
+	GraphTensorNamedDataLayoutHWC GraphTensorNamedDataLayout = 5
 	// LayoutHW
-	MPSGraphTensorNamedDataLayoutHW MPSGraphTensorNamedDataLayout = 6
+	GraphTensorNamedDataLayoutHW GraphTensorNamedDataLayout = 6
 	// LayoutNCDHW
-	MPSGraphTensorNamedDataLayoutNCDHW MPSGraphTensorNamedDataLayout = 7
+	GraphTensorNamedDataLayoutNCDHW GraphTensorNamedDataLayout = 7
 	// LayoutNDHWC
-	MPSGraphTensorNamedDataLayoutNDHWC MPSGraphTensorNamedDataLayout = 8
+	GraphTensorNamedDataLayoutNDHWC GraphTensorNamedDataLayout = 8
 	// LayoutOIDHW
-	MPSGraphTensorNamedDataLayoutOIDHW MPSGraphTensorNamedDataLayout = 9
+	GraphTensorNamedDataLayoutOIDHW GraphTensorNamedDataLayout = 9
 	// LayoutDHWIO
-	MPSGraphTensorNamedDataLayoutDHWIO MPSGraphTensorNamedDataLayout = 10
+	GraphTensorNamedDataLayoutDHWIO GraphTensorNamedDataLayout = 10
 )
 
-func (e MPSGraphTensorNamedDataLayout) String() string {
+func (e GraphTensorNamedDataLayout) String() string {
 	switch e {
-	case MPSGraphTensorNamedDataLayoutNCHW:
-		return "MPSGraphTensorNamedDataLayoutNCHW"
-	case MPSGraphTensorNamedDataLayoutNHWC:
-		return "MPSGraphTensorNamedDataLayoutNHWC"
-	case MPSGraphTensorNamedDataLayoutOIHW:
-		return "MPSGraphTensorNamedDataLayoutOIHW"
-	case MPSGraphTensorNamedDataLayoutHWIO:
-		return "MPSGraphTensorNamedDataLayoutHWIO"
-	case MPSGraphTensorNamedDataLayoutCHW:
-		return "MPSGraphTensorNamedDataLayoutCHW"
-	case MPSGraphTensorNamedDataLayoutHWC:
-		return "MPSGraphTensorNamedDataLayoutHWC"
-	case MPSGraphTensorNamedDataLayoutHW:
-		return "MPSGraphTensorNamedDataLayoutHW"
-	case MPSGraphTensorNamedDataLayoutNCDHW:
-		return "MPSGraphTensorNamedDataLayoutNCDHW"
-	case MPSGraphTensorNamedDataLayoutNDHWC:
-		return "MPSGraphTensorNamedDataLayoutNDHWC"
-	case MPSGraphTensorNamedDataLayoutOIDHW:
-		return "MPSGraphTensorNamedDataLayoutOIDHW"
-	case MPSGraphTensorNamedDataLayoutDHWIO:
-		return "MPSGraphTensorNamedDataLayoutDHWIO"
+	case GraphTensorNamedDataLayoutNCHW:
+		return "GraphTensorNamedDataLayoutNCHW"
+	case GraphTensorNamedDataLayoutNHWC:
+		return "GraphTensorNamedDataLayoutNHWC"
+	case GraphTensorNamedDataLayoutOIHW:
+		return "GraphTensorNamedDataLayoutOIHW"
+	case GraphTensorNamedDataLayoutHWIO:
+		return "GraphTensorNamedDataLayoutHWIO"
+	case GraphTensorNamedDataLayoutCHW:
+		return "GraphTensorNamedDataLayoutCHW"
+	case GraphTensorNamedDataLayoutHWC:
+		return "GraphTensorNamedDataLayoutHWC"
+	case GraphTensorNamedDataLayoutHW:
+		return "GraphTensorNamedDataLayoutHW"
+	case GraphTensorNamedDataLayoutNCDHW:
+		return "GraphTensorNamedDataLayoutNCDHW"
+	case GraphTensorNamedDataLayoutNDHWC:
+		return "GraphTensorNamedDataLayoutNDHWC"
+	case GraphTensorNamedDataLayoutOIDHW:
+		return "GraphTensorNamedDataLayoutOIDHW"
+	case GraphTensorNamedDataLayoutDHWIO:
+		return "GraphTensorNamedDataLayoutDHWIO"
 	default:
-		return fmt.Sprintf("MPSGraphTensorNamedDataLayout(%d)", int64(e))
+		return fmt.Sprintf("GraphTensorNamedDataLayout(%d)", int64(e))
 	}
 }

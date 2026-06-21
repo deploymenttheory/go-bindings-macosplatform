@@ -5,114 +5,116 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains information about an action that causes navigation to occur.
 //
-// WKNavigationAction wraps [raw.WKNavigationAction] with a fluent Go API.
+// WKNavigationAction is an idiomatic wrapper over the Objective-C class WKNavigationAction.
 type WKNavigationAction struct {
-	inner *raw.WKNavigationAction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKNavigationAction].
-func (x *WKNavigationAction) Unwrap() *raw.WKNavigationAction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKNavigationAction) ID() objc.ID { return x.inner.Ptr() }
-
-// WKNavigationActionFromID adopts an existing object pointer as a WKNavigationAction (nil for 0).
+// WKNavigationActionFromID adopts an existing Objective-C object as a WKNavigationAction
+// (nil for 0), retaining it and registering a release finalizer.
 func WKNavigationActionFromID(id objc.ID) *WKNavigationAction {
 	if id == 0 {
 		return nil
 	}
-	return &WKNavigationAction{inner: raw.WKNavigationActionFromID(id)}
+	x := &WKNavigationAction{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWKNavigationAction creates a new [WKNavigationAction].
+// wKNavigationActionAdopt wraps an Objective-C object that this code just created as a
+// WKNavigationAction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKNavigationActionAdopt(id objc.ID) *WKNavigationAction {
+	if id == 0 {
+		return nil
+	}
+	x := &WKNavigationAction{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WKNavigationAction) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKNavigationAction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKNavigationAction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWKNavigationAction creates a new WKNavigationAction.
 func NewWKNavigationAction() *WKNavigationAction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKNavigationAction")), objc.RegisterName("new"))
-	return &WKNavigationAction{inner: raw.WKNavigationActionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WKNavigationAction")), objc.RegisterName("new"))
+	return wKNavigationActionAdopt(_id)
 }
 
-// @abstract The frame requesting the navigation.
-//
-// SourceFrame calls the underlying SourceFrame.
+// The frame requesting the navigation.
 func (x *WKNavigationAction) SourceFrame() *WKFrameInfo {
-	_r := x.inner.SourceFrame()
-	if _r == nil {
-		return nil
-	}
-	return &WKFrameInfo{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
+	return WKFrameInfoFromID(_r)
 }
 
-// @abstract The target frame, or nil if this is a new window navigation.
-//
-// TargetFrame calls the underlying TargetFrame.
+// The target frame, or nil if this is a new window navigation.
 func (x *WKNavigationAction) TargetFrame() *WKFrameInfo {
-	_r := x.inner.TargetFrame()
-	if _r == nil {
-		return nil
-	}
-	return &WKFrameInfo{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetFrame"))
+	return WKFrameInfoFromID(_r)
 }
 
-// @abstract The type of action that triggered the navigation. @discussion The value is one of the constants of the enumerated type WKNavigationType.
-//
-// NavigationType calls the underlying NavigationType.
+// The type of action that triggered the navigation. The value is one of the constants of the enumerated type WKNavigationType.
 func (x *WKNavigationAction) NavigationType() WKNavigationType {
-	return WKNavigationType(x.inner.NavigationType())
+	_r := objc.Send[WKNavigationType](objref.IDOf(x), objc.RegisterName("navigationType"))
+	return _r
 }
 
-// @abstract The navigation's request.
-//
-// Request calls the underlying Request.
-func (x *WKNavigationAction) Request() *foundation.NSURLRequest {
-	return x.inner.Request()
+// The navigation's request.
+func (x *WKNavigationAction) Request() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("request"))
+	return obj.Wrap(_r)
 }
 
-// @abstract A value indicating whether the web content used a download attribute to indicate that this should be downloaded.
-//
-// ShouldPerformDownload calls the underlying ShouldPerformDownload.
+// A value indicating whether the web content used a download attribute to indicate that this should be downloaded.
 func (x *WKNavigationAction) ShouldPerformDownload() bool {
-	return x.inner.ShouldPerformDownload()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldPerformDownload"))
+	return _r
 }
 
-// @abstract Whether or not the navigation is a redirect from a content rule list.
-//
-// IsContentRuleListRedirect calls the underlying IsContentRuleListRedirect.
+// Whether or not the navigation is a redirect from a content rule list.
 func (x *WKNavigationAction) IsContentRuleListRedirect() bool {
-	return x.inner.IsContentRuleListRedirect()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isContentRuleListRedirect"))
+	return _r
 }
 
-// @abstract The modifier keys that were in effect when the navigation was requested.
-//
-// ModifierFlags calls the underlying ModifierFlags.
-func (x *WKNavigationAction) ModifierFlags() appkit.NSEventModifierFlags {
-	return x.inner.ModifierFlags()
-}
-
-// @abstract The number of the mouse button causing the navigation to be requested.
-//
-// ButtonNumber calls the underlying ButtonNumber.
+// The number of the mouse button causing the navigation to be requested.
 func (x *WKNavigationAction) ButtonNumber() int {
-	return x.inner.ButtonNumber()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("buttonNumber"))
+	return _r
 }
 
 // WKNavigationActionable is the interface implemented by [WKNavigationAction], for mocking and DI.
 type WKNavigationActionable interface {
-	Unwrap() *raw.WKNavigationAction
+	obj.Object
 	SourceFrame() *WKFrameInfo
 	TargetFrame() *WKFrameInfo
 	NavigationType() WKNavigationType
-	Request() *foundation.NSURLRequest
+	Request() obj.Object
 	ShouldPerformDownload() bool
 	IsContentRuleListRedirect() bool
-	ModifierFlags() appkit.NSEventModifierFlags
 	ButtonNumber() int
 }
 

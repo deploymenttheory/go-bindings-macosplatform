@@ -5,157 +5,142 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corevideo"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A subclass of CAOpenGLLayer that is suitable for rendering OpenGL into layers.
 //
-// OpenGLLayer wraps [raw.NSOpenGLLayer] with a fluent Go API.
+// OpenGLLayer is an idiomatic wrapper over the Objective-C class NSOpenGLLayer.
 type OpenGLLayer struct {
-	inner *raw.NSOpenGLLayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSOpenGLLayer].
-func (x *OpenGLLayer) Unwrap() *raw.NSOpenGLLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OpenGLLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// OpenGLLayerFromID adopts an existing object pointer as a OpenGLLayer (nil for 0).
+// OpenGLLayerFromID adopts an existing Objective-C object as a OpenGLLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func OpenGLLayerFromID(id objc.ID) *OpenGLLayer {
 	if id == 0 {
 		return nil
 	}
-	return &OpenGLLayer{inner: raw.NSOpenGLLayerFromID(id)}
+	x := &OpenGLLayer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewOpenGLLayer creates a new [OpenGLLayer].
+// openGLLayerAdopt wraps an Objective-C object that this code just created as a
+// OpenGLLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func openGLLayerAdopt(id objc.ID) *OpenGLLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &OpenGLLayer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *OpenGLLayer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *OpenGLLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *OpenGLLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewOpenGLLayer creates a new OpenGLLayer.
 func NewOpenGLLayer() *OpenGLLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOpenGLLayer")), objc.RegisterName("new"))
-	return &OpenGLLayer{inner: raw.NSOpenGLLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSOpenGLLayer")), objc.RegisterName("new"))
+	return openGLLayerAdopt(_id)
 }
 
 // Returns the view associated with the layer.
 //
-// WithView sets the view property and returns the receiver for chaining.
+// WithView sets view and returns the receiver so calls can be chained.
 func (x *OpenGLLayer) WithView(view ViewProvider) *OpenGLLayer {
-	x.inner.SetView(view.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 	return x
 }
 
 // Provides access to the layer’s associated OpenGL pixel format.
 //
-// WithOpenGLPixelFormat sets the openGLPixelFormat property and returns the receiver for chaining.
+// WithOpenGLPixelFormat sets openGLPixelFormat and returns the receiver so calls can be chained.
 func (x *OpenGLLayer) WithOpenGLPixelFormat(openGLPixelFormat *OpenGLPixelFormat) *OpenGLLayer {
-	x.inner.SetOpenGLPixelFormat(openGLPixelFormat.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpenGLPixelFormat:"), objref.IDOf(openGLPixelFormat))
 	return x
 }
 
 // The layer’s OpenGL context.
 //
-// WithOpenGLContext sets the openGLContext property and returns the receiver for chaining.
+// WithOpenGLContext sets openGLContext and returns the receiver so calls can be chained.
 func (x *OpenGLLayer) WithOpenGLContext(openGLContext *OpenGLContext) *OpenGLLayer {
-	x.inner.SetOpenGLContext(openGLContext.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpenGLContext:"), objref.IDOf(openGLContext))
 	return x
 }
 
 // Returns the OpenGL pixel format suitable for the specified displays.
-//
-// OpenGLPixelFormatForDisplayMask calls the underlying OpenGLPixelFormatForDisplayMask.
 func (x *OpenGLLayer) OpenGLPixelFormatForDisplayMask(mask uint32) *OpenGLPixelFormat {
-	_r := x.inner.OpenGLPixelFormatForDisplayMask(mask)
-	if _r == nil {
-		return nil
-	}
-	return &OpenGLPixelFormat{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLPixelFormatForDisplayMask:"), mask)
+	return OpenGLPixelFormatFromID(_r)
 }
 
 // Returns the OpenGL context to use for the requested pixel format.
-//
-// OpenGLContextForPixelFormat calls the underlying OpenGLContextForPixelFormat.
-func (x *OpenGLLayer) OpenGLContextForPixelFormat(pixelFormat *raw.NSOpenGLPixelFormat) *OpenGLContext {
-	_r := x.inner.OpenGLContextForPixelFormat(pixelFormat)
-	if _r == nil {
-		return nil
-	}
-	return &OpenGLContext{inner: _r}
+func (x *OpenGLLayer) OpenGLContextForPixelFormat(pixelFormat *OpenGLPixelFormat) *OpenGLContext {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLContextForPixelFormat:"), objref.IDOf(pixelFormat))
+	return OpenGLContextFromID(_r)
 }
 
-// Invoked to ask the layer whether it can (or should) draw.
-//
-// CanDrawInOpenGLContextPixelFormatForLayerTimeDisplayTime calls the underlying CanDrawInOpenGLContextPixelFormatForLayerTimeDisplayTime.
-func (x *OpenGLLayer) CanDrawInOpenGLContextPixelFormatForLayerTimeDisplayTime(context_ *raw.NSOpenGLContext, pixelFormat *raw.NSOpenGLPixelFormat, t float64, ts *corevideo.CVTimeStamp) bool {
-	return x.inner.CanDrawInOpenGLContextPixelFormatForLayerTimeDisplayTime(context_, pixelFormat, t, ts)
-}
-
-// Draws the OpenGL content for the specified time.
-//
-// DrawInOpenGLContextPixelFormatForLayerTimeDisplayTime calls the underlying DrawInOpenGLContextPixelFormatForLayerTimeDisplayTime.
-func (x *OpenGLLayer) DrawInOpenGLContextPixelFormatForLayerTimeDisplayTime(context_ *raw.NSOpenGLContext, pixelFormat *raw.NSOpenGLPixelFormat, t float64, ts *corevideo.CVTimeStamp) {
-	x.inner.DrawInOpenGLContextPixelFormatForLayerTimeDisplayTime(context_, pixelFormat, t, ts)
-}
-
-// View calls the underlying View.
 func (x *OpenGLLayer) View() *View {
-	_r := x.inner.View()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+	return ViewFromID(_r)
 }
 
-// SetView calls the underlying SetView.
-func (x *OpenGLLayer) SetView(view *raw.NSView) {
-	x.inner.SetView(view)
+func (x *OpenGLLayer) SetView(view *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 }
 
-// OpenGLPixelFormat calls the underlying OpenGLPixelFormat.
 func (x *OpenGLLayer) OpenGLPixelFormat() *OpenGLPixelFormat {
-	_r := x.inner.OpenGLPixelFormat()
-	if _r == nil {
-		return nil
-	}
-	return &OpenGLPixelFormat{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLPixelFormat"))
+	return OpenGLPixelFormatFromID(_r)
 }
 
-// SetOpenGLPixelFormat calls the underlying SetOpenGLPixelFormat.
-func (x *OpenGLLayer) SetOpenGLPixelFormat(openGLPixelFormat *raw.NSOpenGLPixelFormat) {
-	x.inner.SetOpenGLPixelFormat(openGLPixelFormat)
+func (x *OpenGLLayer) SetOpenGLPixelFormat(openGLPixelFormat *OpenGLPixelFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpenGLPixelFormat:"), objref.IDOf(openGLPixelFormat))
 }
 
-// OpenGLContext calls the underlying OpenGLContext.
 func (x *OpenGLLayer) OpenGLContext() *OpenGLContext {
-	_r := x.inner.OpenGLContext()
-	if _r == nil {
-		return nil
-	}
-	return &OpenGLContext{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLContext"))
+	return OpenGLContextFromID(_r)
 }
 
-// SetOpenGLContext calls the underlying SetOpenGLContext.
-func (x *OpenGLLayer) SetOpenGLContext(openGLContext *raw.NSOpenGLContext) {
-	x.inner.SetOpenGLContext(openGLContext)
+func (x *OpenGLLayer) SetOpenGLContext(openGLContext *OpenGLContext) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpenGLContext:"), objref.IDOf(openGLContext))
 }
 
 // OpenGLLayerable is the interface implemented by [OpenGLLayer], for mocking and DI.
 type OpenGLLayerable interface {
-	Unwrap() *raw.NSOpenGLLayer
+	obj.Object
 	WithView(view ViewProvider) *OpenGLLayer
 	WithOpenGLPixelFormat(openGLPixelFormat *OpenGLPixelFormat) *OpenGLLayer
 	WithOpenGLContext(openGLContext *OpenGLContext) *OpenGLLayer
 	OpenGLPixelFormatForDisplayMask(mask uint32) *OpenGLPixelFormat
-	OpenGLContextForPixelFormat(pixelFormat *raw.NSOpenGLPixelFormat) *OpenGLContext
-	CanDrawInOpenGLContextPixelFormatForLayerTimeDisplayTime(context_ *raw.NSOpenGLContext, pixelFormat *raw.NSOpenGLPixelFormat, t float64, ts *corevideo.CVTimeStamp) bool
-	DrawInOpenGLContextPixelFormatForLayerTimeDisplayTime(context_ *raw.NSOpenGLContext, pixelFormat *raw.NSOpenGLPixelFormat, t float64, ts *corevideo.CVTimeStamp)
+	OpenGLContextForPixelFormat(pixelFormat *OpenGLPixelFormat) *OpenGLContext
 	View() *View
-	SetView(view *raw.NSView)
+	SetView(view *View)
 	OpenGLPixelFormat() *OpenGLPixelFormat
-	SetOpenGLPixelFormat(openGLPixelFormat *raw.NSOpenGLPixelFormat)
+	SetOpenGLPixelFormat(openGLPixelFormat *OpenGLPixelFormat)
 	OpenGLContext() *OpenGLContext
-	SetOpenGLContext(openGLContext *raw.NSOpenGLContext)
+	SetOpenGLContext(openGLContext *OpenGLContext)
 }
 
 var _ OpenGLLayerable = (*OpenGLLayer)(nil)

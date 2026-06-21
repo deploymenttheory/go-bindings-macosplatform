@@ -5,209 +5,195 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The settings for creating or updating a machine learning model.
 //
-// ModelConfiguration wraps [raw.MLModelConfiguration] with a fluent Go API.
+// ModelConfiguration is an idiomatic wrapper over the Objective-C class MLModelConfiguration.
 type ModelConfiguration struct {
-	inner *raw.MLModelConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLModelConfiguration].
-func (x *ModelConfiguration) Unwrap() *raw.MLModelConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ModelConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// ModelConfigurationFromID adopts an existing object pointer as a ModelConfiguration (nil for 0).
+// ModelConfigurationFromID adopts an existing Objective-C object as a ModelConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func ModelConfigurationFromID(id objc.ID) *ModelConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &ModelConfiguration{inner: raw.MLModelConfigurationFromID(id)}
+	x := &ModelConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewModelConfiguration creates a new [ModelConfiguration].
+// modelConfigurationAdopt wraps an Objective-C object that this code just created as a
+// ModelConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func modelConfigurationAdopt(id objc.ID) *ModelConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &ModelConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ModelConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ModelConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ModelConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewModelConfiguration creates a new ModelConfiguration.
 func NewModelConfiguration() *ModelConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLModelConfiguration")), objc.RegisterName("new"))
-	return &ModelConfiguration{inner: raw.MLModelConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLModelConfiguration")), objc.RegisterName("new"))
+	return modelConfigurationAdopt(_id)
 }
 
 // A human readable name of a model for display purposes.
 //
-// WithModelDisplayName sets the modelDisplayName property and returns the receiver for chaining.
+// WithModelDisplayName sets modelDisplayName and returns the receiver so calls can be chained.
 func (x *ModelConfiguration) WithModelDisplayName(modelDisplayName string) *ModelConfiguration {
-	x.inner.SetModelDisplayName(foundation.NSStringStringWithUTF8String(modelDisplayName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModelDisplayName:"), purego.NSString(modelDisplayName))
 	return x
 }
 
 // The processing unit or units the model uses to make predictions.
 //
-// WithComputeUnits sets the computeUnits property and returns the receiver for chaining.
-func (x *ModelConfiguration) WithComputeUnits(computeUnits MLComputeUnits) *ModelConfiguration {
-	x.inner.SetComputeUnits(raw.MLComputeUnits(computeUnits))
+// WithComputeUnits sets computeUnits and returns the receiver so calls can be chained.
+func (x *ModelConfiguration) WithComputeUnits(computeUnits ComputeUnits) *ModelConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComputeUnits:"), computeUnits)
 	return x
 }
 
 // A group of hints for CoreML to optimize
 //
-// WithOptimizationHints sets the optimizationHints property and returns the receiver for chaining.
+// WithOptimizationHints sets optimizationHints and returns the receiver so calls can be chained.
 func (x *ModelConfiguration) WithOptimizationHints(optimizationHints *OptimizationHints) *ModelConfiguration {
-	x.inner.SetOptimizationHints(optimizationHints.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptimizationHints:"), objref.IDOf(optimizationHints))
 	return x
 }
 
 // A Boolean value that determines whether to allow low-precision accumulation on a GPU.
 //
-// WithAllowLowPrecisionAccumulationOnGPU sets the allowLowPrecisionAccumulationOnGPU property and returns the receiver for chaining.
+// WithAllowLowPrecisionAccumulationOnGPU sets allowLowPrecisionAccumulationOnGPU and returns the receiver so calls can be chained.
 func (x *ModelConfiguration) WithAllowLowPrecisionAccumulationOnGPU(allowLowPrecisionAccumulationOnGPU bool) *ModelConfiguration {
-	x.inner.SetAllowLowPrecisionAccumulationOnGPU(allowLowPrecisionAccumulationOnGPU)
-	return x
-}
-
-// The metal device you prefer this model use to make predictions (inference) and update the model.
-//
-// WithPreferredMetalDevice sets the preferredMetalDevice property and returns the receiver for chaining.
-func (x *ModelConfiguration) WithPreferredMetalDevice(preferredMetalDevice metal.MTLDevice) *ModelConfiguration {
-	x.inner.SetPreferredMetalDevice(preferredMetalDevice)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowLowPrecisionAccumulationOnGPU:"), allowLowPrecisionAccumulationOnGPU)
 	return x
 }
 
 // A dictionary of configuration settings your app can override when loading a model.
 //
-// WithParameters sets the parameters property and returns the receiver for chaining.
-func (x *ModelConfiguration) WithParameters(parameters *foundation.NSDictionary[*raw.MLParameterKey, objc.ID]) *ModelConfiguration {
-	x.inner.SetParameters(parameters)
+// WithParameters sets parameters and returns the receiver so calls can be chained.
+func (x *ModelConfiguration) WithParameters(parameters obj.Object) *ModelConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
 	return x
 }
 
 // Function name that MLModel will use.
 //
-// WithFunctionName sets the functionName property and returns the receiver for chaining.
+// WithFunctionName sets functionName and returns the receiver so calls can be chained.
 func (x *ModelConfiguration) WithFunctionName(functionName string) *ModelConfiguration {
-	x.inner.SetFunctionName(foundation.NSStringStringWithUTF8String(functionName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionName:"), purego.NSString(functionName))
 	return x
 }
 
 // A human readable name of a MLModel instance for display purposes. Use this property to set a name of a model instance so that runtime analysis tools (e.g. Instruments and os_log) can display that name in the user interface. CoreML framework doesn't parse nor filter the text. It is the client's responsibility to use appropriate text, which may involve localization and privacy considerations. When the property is nil, CoreML framework provides a default.
-//
-// ModelDisplayName calls the underlying ModelDisplayName.
 func (x *ModelConfiguration) ModelDisplayName() string {
-	_r := x.inner.ModelDisplayName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modelDisplayName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetModelDisplayName calls the underlying SetModelDisplayName.
 func (x *ModelConfiguration) SetModelDisplayName(modelDisplayName string) {
-	x.inner.SetModelDisplayName(foundation.NSStringStringWithUTF8String(modelDisplayName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModelDisplayName:"), purego.NSString(modelDisplayName))
 }
 
-// ComputeUnits calls the underlying ComputeUnits.
-func (x *ModelConfiguration) ComputeUnits() MLComputeUnits {
-	return MLComputeUnits(x.inner.ComputeUnits())
+func (x *ModelConfiguration) ComputeUnits() ComputeUnits {
+	_r := objc.Send[ComputeUnits](objref.IDOf(x), objc.RegisterName("computeUnits"))
+	return _r
 }
 
-// SetComputeUnits calls the underlying SetComputeUnits.
-func (x *ModelConfiguration) SetComputeUnits(computeUnits MLComputeUnits) {
-	x.inner.SetComputeUnits(raw.MLComputeUnits(computeUnits))
+func (x *ModelConfiguration) SetComputeUnits(computeUnits ComputeUnits) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComputeUnits:"), computeUnits)
 }
 
 // A group of hints for CoreML to optimize
-//
-// OptimizationHints calls the underlying OptimizationHints.
 func (x *ModelConfiguration) OptimizationHints() *OptimizationHints {
-	_r := x.inner.OptimizationHints()
-	if _r == nil {
-		return nil
-	}
-	return &OptimizationHints{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optimizationHints"))
+	return OptimizationHintsFromID(_r)
 }
 
-// SetOptimizationHints calls the underlying SetOptimizationHints.
-func (x *ModelConfiguration) SetOptimizationHints(optimizationHints *raw.MLOptimizationHints) {
-	x.inner.SetOptimizationHints(optimizationHints)
+func (x *ModelConfiguration) SetOptimizationHints(optimizationHints *OptimizationHints) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptimizationHints:"), objref.IDOf(optimizationHints))
 }
 
 // Set to YES to allow low precision accumulation on GPU when available. Defaults to NO
-//
-// AllowLowPrecisionAccumulationOnGPU calls the underlying AllowLowPrecisionAccumulationOnGPU.
 func (x *ModelConfiguration) AllowLowPrecisionAccumulationOnGPU() bool {
-	return x.inner.AllowLowPrecisionAccumulationOnGPU()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowLowPrecisionAccumulationOnGPU"))
+	return _r
 }
 
-// SetAllowLowPrecisionAccumulationOnGPU calls the underlying SetAllowLowPrecisionAccumulationOnGPU.
 func (x *ModelConfiguration) SetAllowLowPrecisionAccumulationOnGPU(allowLowPrecisionAccumulationOnGPU bool) {
-	x.inner.SetAllowLowPrecisionAccumulationOnGPU(allowLowPrecisionAccumulationOnGPU)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowLowPrecisionAccumulationOnGPU:"), allowLowPrecisionAccumulationOnGPU)
 }
 
-// Set to specify a preferred Metal device. Defaults to nil which indicates automatic selection
-//
-// PreferredMetalDevice calls the underlying PreferredMetalDevice.
-func (x *ModelConfiguration) PreferredMetalDevice() metal.MTLDevice {
-	return x.inner.PreferredMetalDevice()
+func (x *ModelConfiguration) Parameters() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameters"))
+	return obj.Wrap(_r)
 }
 
-// SetPreferredMetalDevice calls the underlying SetPreferredMetalDevice.
-func (x *ModelConfiguration) SetPreferredMetalDevice(preferredMetalDevice metal.MTLDevice) {
-	x.inner.SetPreferredMetalDevice(preferredMetalDevice)
+func (x *ModelConfiguration) SetParameters(parameters obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
 }
 
-// Parameters calls the underlying Parameters.
-func (x *ModelConfiguration) Parameters() *foundation.NSDictionary[*raw.MLParameterKey, objc.ID] {
-	return x.inner.Parameters()
-}
-
-// SetParameters calls the underlying SetParameters.
-func (x *ModelConfiguration) SetParameters(parameters *foundation.NSDictionary[*raw.MLParameterKey, objc.ID]) {
-	x.inner.SetParameters(parameters)
-}
-
-// FunctionName calls the underlying FunctionName.
 func (x *ModelConfiguration) FunctionName() string {
-	_r := x.inner.FunctionName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("functionName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetFunctionName calls the underlying SetFunctionName.
 func (x *ModelConfiguration) SetFunctionName(functionName string) {
-	x.inner.SetFunctionName(foundation.NSStringStringWithUTF8String(functionName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionName:"), purego.NSString(functionName))
 }
 
 // ModelConfigurationable is the interface implemented by [ModelConfiguration], for mocking and DI.
 type ModelConfigurationable interface {
-	Unwrap() *raw.MLModelConfiguration
+	obj.Object
 	WithModelDisplayName(modelDisplayName string) *ModelConfiguration
-	WithComputeUnits(computeUnits MLComputeUnits) *ModelConfiguration
+	WithComputeUnits(computeUnits ComputeUnits) *ModelConfiguration
 	WithOptimizationHints(optimizationHints *OptimizationHints) *ModelConfiguration
 	WithAllowLowPrecisionAccumulationOnGPU(allowLowPrecisionAccumulationOnGPU bool) *ModelConfiguration
-	WithPreferredMetalDevice(preferredMetalDevice metal.MTLDevice) *ModelConfiguration
-	WithParameters(parameters *foundation.NSDictionary[*raw.MLParameterKey, objc.ID]) *ModelConfiguration
+	WithParameters(parameters obj.Object) *ModelConfiguration
 	WithFunctionName(functionName string) *ModelConfiguration
 	ModelDisplayName() string
 	SetModelDisplayName(modelDisplayName string)
-	ComputeUnits() MLComputeUnits
-	SetComputeUnits(computeUnits MLComputeUnits)
+	ComputeUnits() ComputeUnits
+	SetComputeUnits(computeUnits ComputeUnits)
 	OptimizationHints() *OptimizationHints
-	SetOptimizationHints(optimizationHints *raw.MLOptimizationHints)
+	SetOptimizationHints(optimizationHints *OptimizationHints)
 	AllowLowPrecisionAccumulationOnGPU() bool
 	SetAllowLowPrecisionAccumulationOnGPU(allowLowPrecisionAccumulationOnGPU bool)
-	PreferredMetalDevice() metal.MTLDevice
-	SetPreferredMetalDevice(preferredMetalDevice metal.MTLDevice)
-	Parameters() *foundation.NSDictionary[*raw.MLParameterKey, objc.ID]
-	SetParameters(parameters *foundation.NSDictionary[*raw.MLParameterKey, objc.ID])
+	Parameters() obj.Object
+	SetParameters(parameters obj.Object)
 	FunctionName() string
 	SetFunctionName(functionName string)
 }

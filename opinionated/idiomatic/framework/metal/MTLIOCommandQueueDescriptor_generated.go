@@ -5,156 +5,152 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A configuration template you use to create a new input/output command queue.
 //
-// IOCommandQueueDescriptor wraps [raw.MTLIOCommandQueueDescriptor] with a fluent Go API.
+// IOCommandQueueDescriptor is an idiomatic wrapper over the Objective-C class MTLIOCommandQueueDescriptor.
 type IOCommandQueueDescriptor struct {
-	inner *raw.MTLIOCommandQueueDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLIOCommandQueueDescriptor].
-func (x *IOCommandQueueDescriptor) Unwrap() *raw.MTLIOCommandQueueDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IOCommandQueueDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// IOCommandQueueDescriptorFromID adopts an existing object pointer as a IOCommandQueueDescriptor (nil for 0).
+// IOCommandQueueDescriptorFromID adopts an existing Objective-C object as a IOCommandQueueDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func IOCommandQueueDescriptorFromID(id objc.ID) *IOCommandQueueDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &IOCommandQueueDescriptor{inner: raw.MTLIOCommandQueueDescriptorFromID(id)}
+	x := &IOCommandQueueDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewIOCommandQueueDescriptor creates a new [IOCommandQueueDescriptor].
+// iOCommandQueueDescriptorAdopt wraps an Objective-C object that this code just created as a
+// IOCommandQueueDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iOCommandQueueDescriptorAdopt(id objc.ID) *IOCommandQueueDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &IOCommandQueueDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IOCommandQueueDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IOCommandQueueDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IOCommandQueueDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewIOCommandQueueDescriptor creates a new IOCommandQueueDescriptor.
 func NewIOCommandQueueDescriptor() *IOCommandQueueDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLIOCommandQueueDescriptor")), objc.RegisterName("new"))
-	return &IOCommandQueueDescriptor{inner: raw.MTLIOCommandQueueDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLIOCommandQueueDescriptor")), objc.RegisterName("new"))
+	return iOCommandQueueDescriptorAdopt(_id)
 }
 
 // Sets the largest number of outstanding input/output command buffers a queue can have at any point in time.
 //
-// WithMaxCommandBufferCount sets the maxCommandBufferCount property and returns the receiver for chaining.
-func (x *IOCommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCount uint) *IOCommandQueueDescriptor {
-	x.inner.SetMaxCommandBufferCount(maxCommandBufferCount)
+// WithMaxCommandBufferCount sets maxCommandBufferCount and returns the receiver so calls can be chained.
+func (x *IOCommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCount int) *IOCommandQueueDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCommandBufferCount:"), maxCommandBufferCount)
 	return x
 }
 
 // Configures the priority for a new input/output command queue.
 //
-// WithPriority sets the priority property and returns the receiver for chaining.
-func (x *IOCommandQueueDescriptor) WithPriority(priority MTLIOPriority) *IOCommandQueueDescriptor {
-	x.inner.SetPriority(raw.MTLIOPriority(priority))
+// WithPriority sets priority and returns the receiver so calls can be chained.
+func (x *IOCommandQueueDescriptor) WithPriority(priority IOPriority) *IOCommandQueueDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
 	return x
 }
 
 // Configures the queue type for a new input/output command queue.
 //
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *IOCommandQueueDescriptor) WithType(type_ MTLIOCommandQueueType) *IOCommandQueueDescriptor {
-	x.inner.SetType(raw.MTLIOCommandQueueType(type_))
+// WithType sets type_ and returns the receiver so calls can be chained.
+func (x *IOCommandQueueDescriptor) WithType(type_ IOCommandQueueType) *IOCommandQueueDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
 // Sets the largest number of individual commands that an input/output command queue can run at a time.
 //
-// WithMaxCommandsInFlight sets the maxCommandsInFlight property and returns the receiver for chaining.
-func (x *IOCommandQueueDescriptor) WithMaxCommandsInFlight(maxCommandsInFlight uint) *IOCommandQueueDescriptor {
-	x.inner.SetMaxCommandsInFlight(maxCommandsInFlight)
+// WithMaxCommandsInFlight sets maxCommandsInFlight and returns the receiver so calls can be chained.
+func (x *IOCommandQueueDescriptor) WithMaxCommandsInFlight(maxCommandsInFlight int) *IOCommandQueueDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCommandsInFlight:"), maxCommandsInFlight)
 	return x
 }
 
-// An optional memory allocator that you implement to manage the scratch memory that an input/output command queue requests.
-//
-// WithScratchBufferAllocator sets the scratchBufferAllocator property and returns the receiver for chaining.
-func (x *IOCommandQueueDescriptor) WithScratchBufferAllocator(scratchBufferAllocator raw.MTLIOScratchBufferAllocator) *IOCommandQueueDescriptor {
-	x.inner.SetScratchBufferAllocator(scratchBufferAllocator)
-	return x
+// The maximum number of commandBuffers that can be in flight at a given time for the queue.
+func (x *IOCommandQueueDescriptor) MaxCommandBufferCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxCommandBufferCount"))
+	return _r
 }
 
-// @property maxCommandBufferCount @abstract The maximum number of commandBuffers that can be in flight at a given time for the queue.
-//
-// MaxCommandBufferCount calls the underlying MaxCommandBufferCount.
-func (x *IOCommandQueueDescriptor) MaxCommandBufferCount() uint {
-	return x.inner.MaxCommandBufferCount()
+func (x *IOCommandQueueDescriptor) SetMaxCommandBufferCount(maxCommandBufferCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCommandBufferCount:"), maxCommandBufferCount)
 }
 
-// SetMaxCommandBufferCount calls the underlying SetMaxCommandBufferCount.
-func (x *IOCommandQueueDescriptor) SetMaxCommandBufferCount(maxCommandBufferCount uint) {
-	x.inner.SetMaxCommandBufferCount(maxCommandBufferCount)
+// The priority of the commands executed by this queue.
+func (x *IOCommandQueueDescriptor) Priority() IOPriority {
+	_r := objc.Send[IOPriority](objref.IDOf(x), objc.RegisterName("priority"))
+	return _r
 }
 
-// @property priority @abstract The priority of the commands executed by this queue.
-//
-// Priority calls the underlying Priority.
-func (x *IOCommandQueueDescriptor) Priority() MTLIOPriority {
-	return MTLIOPriority(x.inner.Priority())
+func (x *IOCommandQueueDescriptor) SetPriority(priority IOPriority) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
 }
 
-// SetPriority calls the underlying SetPriority.
-func (x *IOCommandQueueDescriptor) SetPriority(priority MTLIOPriority) {
-	x.inner.SetPriority(raw.MTLIOPriority(priority))
+// The type (serial or concurrent) of the queue.
+func (x *IOCommandQueueDescriptor) Type() IOCommandQueueType {
+	_r := objc.Send[IOCommandQueueType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// @property type @abstract The type (serial or concurrent) of the queue.
-//
-// Type calls the underlying Type.
-func (x *IOCommandQueueDescriptor) Type() MTLIOCommandQueueType {
-	return MTLIOCommandQueueType(x.inner.Type())
+func (x *IOCommandQueueDescriptor) SetType(type_ IOCommandQueueType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 }
 
-// SetType calls the underlying SetType.
-func (x *IOCommandQueueDescriptor) SetType(type_ MTLIOCommandQueueType) {
-	x.inner.SetType(raw.MTLIOCommandQueueType(type_))
+// The maximum number of IO commands that can be in flight at a given time for the queue. A zero value defaults to the system dependent maximum value, a smaller number can be provided to bound the utilization of the storage device.
+func (x *IOCommandQueueDescriptor) MaxCommandsInFlight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxCommandsInFlight"))
+	return _r
 }
 
-// @property maxCommandsInFlight @abstract The maximum number of IO commands that can be in flight at a given time for the queue. @discussion A zero value defaults to the system dependent maximum value, a smaller number can be provided to bound the utilization of the storage device.
-//
-// MaxCommandsInFlight calls the underlying MaxCommandsInFlight.
-func (x *IOCommandQueueDescriptor) MaxCommandsInFlight() uint {
-	return x.inner.MaxCommandsInFlight()
-}
-
-// SetMaxCommandsInFlight calls the underlying SetMaxCommandsInFlight.
-func (x *IOCommandQueueDescriptor) SetMaxCommandsInFlight(maxCommandsInFlight uint) {
-	x.inner.SetMaxCommandsInFlight(maxCommandsInFlight)
-}
-
-// @property scratchBufferAllocator @abstract An optional property that allows setting a custom allocator for scratch buffers by the queue. @discussion An application can manage scratch buffers manually by implemeting a class  conforming to the MTLIOScratchBufferAllocator protocol and creating an instance that is passed in here.
-//
-// ScratchBufferAllocator calls the underlying ScratchBufferAllocator.
-func (x *IOCommandQueueDescriptor) ScratchBufferAllocator() raw.MTLIOScratchBufferAllocator {
-	return x.inner.ScratchBufferAllocator()
-}
-
-// SetScratchBufferAllocator calls the underlying SetScratchBufferAllocator.
-func (x *IOCommandQueueDescriptor) SetScratchBufferAllocator(scratchBufferAllocator raw.MTLIOScratchBufferAllocator) {
-	x.inner.SetScratchBufferAllocator(scratchBufferAllocator)
+func (x *IOCommandQueueDescriptor) SetMaxCommandsInFlight(maxCommandsInFlight int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCommandsInFlight:"), maxCommandsInFlight)
 }
 
 // IOCommandQueueDescriptorable is the interface implemented by [IOCommandQueueDescriptor], for mocking and DI.
 type IOCommandQueueDescriptorable interface {
-	Unwrap() *raw.MTLIOCommandQueueDescriptor
-	WithMaxCommandBufferCount(maxCommandBufferCount uint) *IOCommandQueueDescriptor
-	WithPriority(priority MTLIOPriority) *IOCommandQueueDescriptor
-	WithType(type_ MTLIOCommandQueueType) *IOCommandQueueDescriptor
-	WithMaxCommandsInFlight(maxCommandsInFlight uint) *IOCommandQueueDescriptor
-	WithScratchBufferAllocator(scratchBufferAllocator raw.MTLIOScratchBufferAllocator) *IOCommandQueueDescriptor
-	MaxCommandBufferCount() uint
-	SetMaxCommandBufferCount(maxCommandBufferCount uint)
-	Priority() MTLIOPriority
-	SetPriority(priority MTLIOPriority)
-	Type() MTLIOCommandQueueType
-	SetType(type_ MTLIOCommandQueueType)
-	MaxCommandsInFlight() uint
-	SetMaxCommandsInFlight(maxCommandsInFlight uint)
-	ScratchBufferAllocator() raw.MTLIOScratchBufferAllocator
-	SetScratchBufferAllocator(scratchBufferAllocator raw.MTLIOScratchBufferAllocator)
+	obj.Object
+	WithMaxCommandBufferCount(maxCommandBufferCount int) *IOCommandQueueDescriptor
+	WithPriority(priority IOPriority) *IOCommandQueueDescriptor
+	WithType(type_ IOCommandQueueType) *IOCommandQueueDescriptor
+	WithMaxCommandsInFlight(maxCommandsInFlight int) *IOCommandQueueDescriptor
+	MaxCommandBufferCount() int
+	SetMaxCommandBufferCount(maxCommandBufferCount int)
+	Priority() IOPriority
+	SetPriority(priority IOPriority)
+	Type() IOCommandQueueType
+	SetType(type_ IOCommandQueueType)
+	MaxCommandsInFlight() int
+	SetMaxCommandsInFlight(maxCommandsInFlight int)
 }
 
 var _ IOCommandQueueDescriptorable = (*IOCommandQueueDescriptor)(nil)

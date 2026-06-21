@@ -5,126 +5,82 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The minimum rasterization rates to apply to sections of a layer in the render target.
 //
-// RasterizationRateLayerDescriptor wraps [raw.MTLRasterizationRateLayerDescriptor] with a fluent Go API.
+// RasterizationRateLayerDescriptor is an idiomatic wrapper over the Objective-C class MTLRasterizationRateLayerDescriptor.
 type RasterizationRateLayerDescriptor struct {
-	inner *raw.MTLRasterizationRateLayerDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLRasterizationRateLayerDescriptor].
-func (x *RasterizationRateLayerDescriptor) Unwrap() *raw.MTLRasterizationRateLayerDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RasterizationRateLayerDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// RasterizationRateLayerDescriptorFromID adopts an existing object pointer as a RasterizationRateLayerDescriptor (nil for 0).
+// RasterizationRateLayerDescriptorFromID adopts an existing Objective-C object as a RasterizationRateLayerDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func RasterizationRateLayerDescriptorFromID(id objc.ID) *RasterizationRateLayerDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &RasterizationRateLayerDescriptor{inner: raw.MTLRasterizationRateLayerDescriptorFromID(id)}
-}
-
-// Initializes the layer map with an empty grid.
-//
-// NewRasterizationRateLayerDescriptorWithSampleCount creates a new [RasterizationRateLayerDescriptor].
-func NewRasterizationRateLayerDescriptorWithSampleCount(sampleCount raw.MTLSize) *RasterizationRateLayerDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLRasterizationRateLayerDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleCount:"), sampleCount)
-	return &RasterizationRateLayerDescriptor{inner: raw.MTLRasterizationRateLayerDescriptorFromID(_id)}
-}
-
-// Initializes the layer map with the provided grid size and rasterization rates.
-//
-// NewRasterizationRateLayerDescriptorWithSampleCountHorizontalVertical creates a new [RasterizationRateLayerDescriptor].
-func NewRasterizationRateLayerDescriptorWithSampleCountHorizontalVertical(sampleCount raw.MTLSize, horizontal *float32, vertical *float32) *RasterizationRateLayerDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLRasterizationRateLayerDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleCount:horizontal:vertical:"), sampleCount, horizontal, vertical)
-	return &RasterizationRateLayerDescriptor{inner: raw.MTLRasterizationRateLayerDescriptorFromID(_id)}
-}
-
-// The number of rows and columns in the layer map.
-//
-// WithSampleCount sets the sampleCount property and returns the receiver for chaining.
-func (x *RasterizationRateLayerDescriptor) WithSampleCount(sampleCount raw.MTLSize) *RasterizationRateLayerDescriptor {
-	x.inner.SetSampleCount(sampleCount)
+	x := &RasterizationRateLayerDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property sampleCount @return The number of quality samples that this descriptor uses to describe its current function, for the horizontal and vertical axis. The depth component of the returned MTLSize is always 0.
-//
-// SampleCount calls the underlying SampleCount.
-func (x *RasterizationRateLayerDescriptor) SampleCount() raw.MTLSize {
-	return x.inner.SampleCount()
+// rasterizationRateLayerDescriptorAdopt wraps an Objective-C object that this code just created as a
+// RasterizationRateLayerDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rasterizationRateLayerDescriptorAdopt(id objc.ID) *RasterizationRateLayerDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &RasterizationRateLayerDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property maxSampleCount @return The maximum number of quality samples that this descriptor can use to describe its function, for the horizontal and vertical axis, this is the sampleCount that the descriptor was initialized with. The depth component of the returned MTLSize is always 0.
-//
-// MaxSampleCount calls the underlying MaxSampleCount.
-func (x *RasterizationRateLayerDescriptor) MaxSampleCount() raw.MTLSize {
-	return x.inner.MaxSampleCount()
+// Description returns the object's -description text.
+func (x *RasterizationRateLayerDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property horizontalSampleStorage @abstract Provide direct access to the quality samples stored in the descriptor. @return Pointer to the (mutable) storage array for samples on the horizontal axis. @discussion The returned pointer points to the first element of an array of sampleCount.width elements.
-//
-// HorizontalSampleStorage calls the underlying HorizontalSampleStorage.
-func (x *RasterizationRateLayerDescriptor) HorizontalSampleStorage() *float32 {
-	return x.inner.HorizontalSampleStorage()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RasterizationRateLayerDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property verticalSampleStorage @abstract Provide direct access to the quality samples stored in the descriptor. @return Pointer to the (mutable) storage array for samples on the vertical axis. @discussion The returned pointer points to the first element of an array of sampleCount.height elements.
-//
-// VerticalSampleStorage calls the underlying VerticalSampleStorage.
-func (x *RasterizationRateLayerDescriptor) VerticalSampleStorage() *float32 {
-	return x.inner.VerticalSampleStorage()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RasterizationRateLayerDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @property horizontal @abstract Provide convenient bounds-checked access to the quality samples stored in the descriptor. @return Returns a syntactic sugar helper to get or set sample values on the horizontal axis.
-//
-// Horizontal calls the underlying Horizontal.
+// NewRasterizationRateLayerDescriptor creates a new RasterizationRateLayerDescriptor.
+func NewRasterizationRateLayerDescriptor() *RasterizationRateLayerDescriptor {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLRasterizationRateLayerDescriptor")), objc.RegisterName("new"))
+	return rasterizationRateLayerDescriptorAdopt(_id)
+}
+
+// Provide convenient bounds-checked access to the quality samples stored in the descriptor.
 func (x *RasterizationRateLayerDescriptor) Horizontal() *RasterizationRateSampleArray {
-	_r := x.inner.Horizontal()
-	if _r == nil {
-		return nil
-	}
-	return &RasterizationRateSampleArray{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("horizontal"))
+	return RasterizationRateSampleArrayFromID(_r)
 }
 
-// @property vertical @abstract Provide convenient bounds-checked access to the quality samples stored in the descriptor. @return Returns a syntactic sugar helper to get or set sample values on the vertical axis.
-//
-// Vertical calls the underlying Vertical.
+// Provide convenient bounds-checked access to the quality samples stored in the descriptor.
 func (x *RasterizationRateLayerDescriptor) Vertical() *RasterizationRateSampleArray {
-	_r := x.inner.Vertical()
-	if _r == nil {
-		return nil
-	}
-	return &RasterizationRateSampleArray{inner: _r}
-}
-
-// SetSampleCount calls the underlying SetSampleCount.
-func (x *RasterizationRateLayerDescriptor) SetSampleCount(sampleCount raw.MTLSize) {
-	x.inner.SetSampleCount(sampleCount)
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertical"))
+	return RasterizationRateSampleArrayFromID(_r)
 }
 
 // RasterizationRateLayerDescriptorable is the interface implemented by [RasterizationRateLayerDescriptor], for mocking and DI.
 type RasterizationRateLayerDescriptorable interface {
-	Unwrap() *raw.MTLRasterizationRateLayerDescriptor
-	WithSampleCount(sampleCount raw.MTLSize) *RasterizationRateLayerDescriptor
-	SampleCount() raw.MTLSize
-	MaxSampleCount() raw.MTLSize
-	HorizontalSampleStorage() *float32
-	VerticalSampleStorage() *float32
+	obj.Object
 	Horizontal() *RasterizationRateSampleArray
 	Vertical() *RasterizationRateSampleArray
-	SetSampleCount(sampleCount raw.MTLSize)
 }
 
 var _ RasterizationRateLayerDescriptorable = (*RasterizationRateLayerDescriptor)(nil)

@@ -5,197 +5,201 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMHTMLUListElement wraps [raw.DOMHTMLUListElement] with a fluent Go API.
+// DOMHTMLUListElement is an idiomatic wrapper over the Objective-C class DOMHTMLUListElement.
 type DOMHTMLUListElement struct {
-	inner *raw.DOMHTMLUListElement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMHTMLUListElement].
-func (x *DOMHTMLUListElement) Unwrap() *raw.DOMHTMLUListElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMHTMLUListElement) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMHTMLUListElementFromID adopts an existing object pointer as a DOMHTMLUListElement (nil for 0).
+// DOMHTMLUListElementFromID adopts an existing Objective-C object as a DOMHTMLUListElement
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMHTMLUListElementFromID(id objc.ID) *DOMHTMLUListElement {
 	if id == 0 {
 		return nil
 	}
-	return &DOMHTMLUListElement{inner: raw.DOMHTMLUListElementFromID(id)}
+	x := &DOMHTMLUListElement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDOMHTMLUListElement creates a new [DOMHTMLUListElement].
+// dOMHTMLUListElementAdopt wraps an Objective-C object that this code just created as a
+// DOMHTMLUListElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMHTMLUListElementAdopt(id objc.ID) *DOMHTMLUListElement {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMHTMLUListElement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DOMHTMLUListElement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMHTMLUListElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMHTMLUListElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMHTMLUListElement creates a new DOMHTMLUListElement.
 func NewDOMHTMLUListElement() *DOMHTMLUListElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMHTMLUListElement")), objc.RegisterName("new"))
-	return &DOMHTMLUListElement{inner: raw.DOMHTMLUListElementFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMHTMLUListElement")), objc.RegisterName("new"))
+	return dOMHTMLUListElementAdopt(_id)
 }
 
-// WithCompact sets the compact property and returns the receiver for chaining.
+// WithCompact sets compact and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithCompact(compact bool) *DOMHTMLUListElement {
-	x.inner.SetCompact(compact)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompact:"), compact)
 	return x
 }
 
-// WithType sets the type_ property and returns the receiver for chaining.
+// WithType sets type_ and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithType(type_ string) *DOMHTMLUListElement {
-	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 	return x
 }
 
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithTitle(title string) *DOMHTMLUListElement {
-	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithLang sets the lang property and returns the receiver for chaining.
+// WithLang sets lang and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithLang(lang string) *DOMHTMLUListElement {
-	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return x
 }
 
-// WithDir sets the dir property and returns the receiver for chaining.
+// WithDir sets dir and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithDir(dir string) *DOMHTMLUListElement {
-	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return x
 }
 
-// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+// WithTabIndex sets tabIndex and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithTabIndex(tabIndex int) *DOMHTMLUListElement {
-	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
 	return x
 }
 
-// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+// WithAccessKey sets accessKey and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithAccessKey(accessKey string) *DOMHTMLUListElement {
-	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return x
 }
 
-// WithInnerText sets the innerText property and returns the receiver for chaining.
+// WithInnerText sets innerText and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithInnerText(innerText string) *DOMHTMLUListElement {
-	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return x
 }
 
-// WithOuterText sets the outerText property and returns the receiver for chaining.
+// WithOuterText sets outerText and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithOuterText(outerText string) *DOMHTMLUListElement {
-	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return x
 }
 
-// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+// WithContentEditable sets contentEditable and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithContentEditable(contentEditable string) *DOMHTMLUListElement {
-	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return x
 }
 
-// WithIdName sets the idName property and returns the receiver for chaining.
+// WithIdName sets idName and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithIdName(idName string) *DOMHTMLUListElement {
-	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return x
 }
 
-// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+// WithScrollLeft sets scrollLeft and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithScrollLeft(scrollLeft int) *DOMHTMLUListElement {
-	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return x
 }
 
-// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+// WithScrollTop sets scrollTop and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithScrollTop(scrollTop int) *DOMHTMLUListElement {
-	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
 	return x
 }
 
-// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+// WithInnerHTML sets innerHTML and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithInnerHTML(innerHTML string) *DOMHTMLUListElement {
-	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return x
 }
 
-// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+// WithOuterHTML sets outerHTML and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithOuterHTML(outerHTML string) *DOMHTMLUListElement {
-	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return x
 }
 
-// WithClassName sets the className property and returns the receiver for chaining.
+// WithClassName sets className and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithClassName(className string) *DOMHTMLUListElement {
-	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return x
 }
 
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithNodeValue(nodeValue string) *DOMHTMLUListElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets the prefix property and returns the receiver for chaining.
+// WithPrefix sets prefix and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithPrefix(prefix string) *DOMHTMLUListElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets the textContent property and returns the receiver for chaining.
+// WithTextContent sets textContent and returns the receiver so calls can be chained.
 func (x *DOMHTMLUListElement) WithTextContent(textContent string) *DOMHTMLUListElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
-// Compact calls the underlying Compact.
 func (x *DOMHTMLUListElement) Compact() bool {
-	return x.inner.Compact()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("compact"))
+	return _r
 }
 
-// SetCompact calls the underlying SetCompact.
 func (x *DOMHTMLUListElement) SetCompact(compact bool) {
-	x.inner.SetCompact(compact)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompact:"), compact)
 }
 
-// Type calls the underlying Type.
 func (x *DOMHTMLUListElement) Type() string {
-	_r := x.inner.Type()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetType calls the underlying SetType.
 func (x *DOMHTMLUListElement) SetType(type_ string) {
-	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
-}
-
-func (x *DOMHTMLUListElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
-
-func (x *DOMHTMLUListElement) asDOMElement() *raw.DOMElement {
-	return &x.inner.DOMHTMLElement.DOMElement
-}
-
-func (x *DOMHTMLUListElement) asDOMNode() *raw.DOMNode {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
-}
-
-func (x *DOMHTMLUListElement) asDOMObject() *raw.DOMObject {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
-}
-
-func (x *DOMHTMLUListElement) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 }
 
 // DOMHTMLUListElementable is the interface implemented by [DOMHTMLUListElement], for mocking and DI.
 type DOMHTMLUListElementable interface {
-	Unwrap() *raw.DOMHTMLUListElement
+	obj.Object
 	WithCompact(compact bool) *DOMHTMLUListElement
 	WithType(type_ string) *DOMHTMLUListElement
 	WithTitle(title string) *DOMHTMLUListElement

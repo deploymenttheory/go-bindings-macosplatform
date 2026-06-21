@@ -5,45 +5,68 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a fragmented movie file.
 //
-// FragmentedMovie wraps [raw.AVFragmentedMovie] with a fluent Go API.
+// FragmentedMovie is an idiomatic wrapper over the Objective-C class AVFragmentedMovie.
 type FragmentedMovie struct {
-	inner *raw.AVFragmentedMovie
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVFragmentedMovie].
-func (x *FragmentedMovie) Unwrap() *raw.AVFragmentedMovie { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FragmentedMovie) ID() objc.ID { return x.inner.Ptr() }
-
-// FragmentedMovieFromID adopts an existing object pointer as a FragmentedMovie (nil for 0).
+// FragmentedMovieFromID adopts an existing Objective-C object as a FragmentedMovie
+// (nil for 0), retaining it and registering a release finalizer.
 func FragmentedMovieFromID(id objc.ID) *FragmentedMovie {
 	if id == 0 {
 		return nil
 	}
-	return &FragmentedMovie{inner: raw.AVFragmentedMovieFromID(id)}
+	x := &FragmentedMovie{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFragmentedMovie creates a new [FragmentedMovie].
+// fragmentedMovieAdopt wraps an Objective-C object that this code just created as a
+// FragmentedMovie (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fragmentedMovieAdopt(id objc.ID) *FragmentedMovie {
+	if id == 0 {
+		return nil
+	}
+	x := &FragmentedMovie{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FragmentedMovie) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FragmentedMovie) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FragmentedMovie) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFragmentedMovie creates a new FragmentedMovie.
 func NewFragmentedMovie() *FragmentedMovie {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVFragmentedMovie")), objc.RegisterName("new"))
-	return &FragmentedMovie{inner: raw.AVFragmentedMovieFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVFragmentedMovie")), objc.RegisterName("new"))
+	return fragmentedMovieAdopt(_id)
 }
-
-func (x *FragmentedMovie) asMovie() *raw.AVMovie { return &x.inner.AVMovie }
-
-func (x *FragmentedMovie) asAsset() *raw.AVAsset { return &x.inner.AVMovie.AVAsset }
 
 // FragmentedMovieable is the interface implemented by [FragmentedMovie], for mocking and DI.
 type FragmentedMovieable interface {
-	Unwrap() *raw.AVFragmentedMovie
+	obj.Object
 }
 
 var _ FragmentedMovieable = (*FragmentedMovie)(nil)

@@ -5,61 +5,78 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMNodeList wraps [raw.DOMNodeList] with a fluent Go API.
+// DOMNodeList is an idiomatic wrapper over the Objective-C class DOMNodeList.
 type DOMNodeList struct {
-	inner *raw.DOMNodeList
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMNodeList].
-func (x *DOMNodeList) Unwrap() *raw.DOMNodeList { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMNodeList) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMNodeListFromID adopts an existing object pointer as a DOMNodeList (nil for 0).
+// DOMNodeListFromID adopts an existing Objective-C object as a DOMNodeList
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMNodeListFromID(id objc.ID) *DOMNodeList {
 	if id == 0 {
 		return nil
 	}
-	return &DOMNodeList{inner: raw.DOMNodeListFromID(id)}
+	x := &DOMNodeList{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDOMNodeList creates a new [DOMNodeList].
-func NewDOMNodeList() *DOMNodeList {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMNodeList")), objc.RegisterName("new"))
-	return &DOMNodeList{inner: raw.DOMNodeListFromID(_id)}
-}
-
-// Item calls the underlying Item.
-func (x *DOMNodeList) Item(index uint) *DOMNode {
-	_r := x.inner.Item(index)
-	if _r == nil {
+// dOMNodeListAdopt wraps an Objective-C object that this code just created as a
+// DOMNodeList (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMNodeListAdopt(id objc.ID) *DOMNodeList {
+	if id == 0 {
 		return nil
 	}
-	return &DOMNode{inner: _r}
+	x := &DOMNodeList{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Length calls the underlying Length.
-func (x *DOMNodeList) Length() uint {
-	return x.inner.Length()
+// Description returns the object's -description text.
+func (x *DOMNodeList) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *DOMNodeList) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMNodeList) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
 
-func (x *DOMNodeList) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMObject.WebScriptObject
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMNodeList) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMNodeList creates a new DOMNodeList.
+func NewDOMNodeList() *DOMNodeList {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMNodeList")), objc.RegisterName("new"))
+	return dOMNodeListAdopt(_id)
+}
+
+func (x *DOMNodeList) Item(index int) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
+	return DOMNodeFromID(_r)
+}
+
+func (x *DOMNodeList) Length() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
 // DOMNodeListable is the interface implemented by [DOMNodeList], for mocking and DI.
 type DOMNodeListable interface {
-	Unwrap() *raw.DOMNodeList
-	Item(index uint) *DOMNode
-	Length() uint
+	obj.Object
+	Item(index int) *DOMNode
+	Length() int
 }
 
 var _ DOMNodeListable = (*DOMNodeList)(nil)

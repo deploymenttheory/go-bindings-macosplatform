@@ -5,178 +5,177 @@
 package imagecapturecore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents the transparency unit for scanning positives on the scanner.
 //
-// ScannerFunctionalUnitPositiveTransparency wraps [raw.ICScannerFunctionalUnitPositiveTransparency] with a fluent Go API.
+// ScannerFunctionalUnitPositiveTransparency is an idiomatic wrapper over the Objective-C class ICScannerFunctionalUnitPositiveTransparency.
 type ScannerFunctionalUnitPositiveTransparency struct {
-	inner *raw.ICScannerFunctionalUnitPositiveTransparency
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ICScannerFunctionalUnitPositiveTransparency].
-func (x *ScannerFunctionalUnitPositiveTransparency) Unwrap() *raw.ICScannerFunctionalUnitPositiveTransparency {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScannerFunctionalUnitPositiveTransparency) ID() objc.ID { return x.inner.Ptr() }
-
-// ScannerFunctionalUnitPositiveTransparencyFromID adopts an existing object pointer as a ScannerFunctionalUnitPositiveTransparency (nil for 0).
+// ScannerFunctionalUnitPositiveTransparencyFromID adopts an existing Objective-C object as a ScannerFunctionalUnitPositiveTransparency
+// (nil for 0), retaining it and registering a release finalizer.
 func ScannerFunctionalUnitPositiveTransparencyFromID(id objc.ID) *ScannerFunctionalUnitPositiveTransparency {
 	if id == 0 {
 		return nil
 	}
-	return &ScannerFunctionalUnitPositiveTransparency{inner: raw.ICScannerFunctionalUnitPositiveTransparencyFromID(id)}
+	x := &ScannerFunctionalUnitPositiveTransparency{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewScannerFunctionalUnitPositiveTransparency creates a new [ScannerFunctionalUnitPositiveTransparency].
+// scannerFunctionalUnitPositiveTransparencyAdopt wraps an Objective-C object that this code just created as a
+// ScannerFunctionalUnitPositiveTransparency (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scannerFunctionalUnitPositiveTransparencyAdopt(id objc.ID) *ScannerFunctionalUnitPositiveTransparency {
+	if id == 0 {
+		return nil
+	}
+	x := &ScannerFunctionalUnitPositiveTransparency{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScannerFunctionalUnitPositiveTransparency) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScannerFunctionalUnitPositiveTransparency) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScannerFunctionalUnitPositiveTransparency) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScannerFunctionalUnitPositiveTransparency creates a new ScannerFunctionalUnitPositiveTransparency.
 func NewScannerFunctionalUnitPositiveTransparency() *ScannerFunctionalUnitPositiveTransparency {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ICScannerFunctionalUnitPositiveTransparency")), objc.RegisterName("new"))
-	return &ScannerFunctionalUnitPositiveTransparency{inner: raw.ICScannerFunctionalUnitPositiveTransparencyFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ICScannerFunctionalUnitPositiveTransparency")), objc.RegisterName("new"))
+	return scannerFunctionalUnitPositiveTransparencyAdopt(_id)
 }
 
-// @property documentType @abstract ￼Current document type. This will always be one of the supported document types.
+// ￼Current document type. This will always be one of the supported document types.
 //
-// WithDocumentType sets the documentType property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitPositiveTransparency) WithDocumentType(documentType ICScannerDocumentType) *ScannerFunctionalUnitPositiveTransparency {
-	x.inner.SetDocumentType(raw.ICScannerDocumentType(documentType))
+// WithDocumentType sets documentType and returns the receiver so calls can be chained.
+func (x *ScannerFunctionalUnitPositiveTransparency) WithDocumentType(documentType ScannerDocumentType) *ScannerFunctionalUnitPositiveTransparency {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentType:"), documentType)
 	return x
 }
 
-// @property pixelDataType @abstract ￼The pixel data type.
+// ￼The pixel data type.
 //
-// WithPixelDataType sets the pixelDataType property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitPositiveTransparency) WithPixelDataType(pixelDataType ICScannerPixelDataType) *ScannerFunctionalUnitPositiveTransparency {
-	x.inner.ICScannerFunctionalUnit.SetPixelDataType(raw.ICScannerPixelDataType(pixelDataType))
+// WithPixelDataType sets pixelDataType and returns the receiver so calls can be chained.
+func (x *ScannerFunctionalUnitPositiveTransparency) WithPixelDataType(pixelDataType ScannerPixelDataType) *ScannerFunctionalUnitPositiveTransparency {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelDataType:"), pixelDataType)
 	return x
 }
 
-// @property bitDepth @abstract ￼The bit depth to use when performing the final scan. This will always be one of the supported bit depths.
+// ￼The bit depth to use when performing the final scan. This will always be one of the supported bit depths.
 //
-// WithBitDepth sets the bitDepth property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitPositiveTransparency) WithBitDepth(bitDepth ICScannerBitDepth) *ScannerFunctionalUnitPositiveTransparency {
-	x.inner.ICScannerFunctionalUnit.SetBitDepth(raw.ICScannerBitDepth(bitDepth))
+// WithBitDepth sets bitDepth and returns the receiver so calls can be chained.
+func (x *ScannerFunctionalUnitPositiveTransparency) WithBitDepth(bitDepth ScannerBitDepth) *ScannerFunctionalUnitPositiveTransparency {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitDepth:"), bitDepth)
 	return x
 }
 
-// @property measurementUnit @abstract ￼Current measurement unit. This will always be one of the supported measurement units.
+// ￼Current measurement unit. This will always be one of the supported measurement units.
 //
-// WithMeasurementUnit sets the measurementUnit property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitPositiveTransparency) WithMeasurementUnit(measurementUnit ICScannerMeasurementUnit) *ScannerFunctionalUnitPositiveTransparency {
-	x.inner.ICScannerFunctionalUnit.SetMeasurementUnit(raw.ICScannerMeasurementUnit(measurementUnit))
+// WithMeasurementUnit sets measurementUnit and returns the receiver so calls can be chained.
+func (x *ScannerFunctionalUnitPositiveTransparency) WithMeasurementUnit(measurementUnit ScannerMeasurementUnit) *ScannerFunctionalUnitPositiveTransparency {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeasurementUnit:"), measurementUnit)
 	return x
 }
 
-// @property resolution @abstract ￼Current scan resolution. This will always be one of the supported resolution values.
+// ￼Current scan resolution. This will always be one of the supported resolution values.
 //
-// WithResolution sets the resolution property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitPositiveTransparency) WithResolution(resolution uint) *ScannerFunctionalUnitPositiveTransparency {
-	x.inner.ICScannerFunctionalUnit.SetResolution(resolution)
+// WithResolution sets resolution and returns the receiver so calls can be chained.
+func (x *ScannerFunctionalUnitPositiveTransparency) WithResolution(resolution int) *ScannerFunctionalUnitPositiveTransparency {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolution:"), resolution)
 	return x
 }
 
-// @property scaleFactor @abstract ￼Current scale factor. This will always be one of the supported scale factor values.
+// ￼Current scale factor. This will always be one of the supported scale factor values.
 //
-// WithScaleFactor sets the scaleFactor property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitPositiveTransparency) WithScaleFactor(scaleFactor uint) *ScannerFunctionalUnitPositiveTransparency {
-	x.inner.ICScannerFunctionalUnit.SetScaleFactor(scaleFactor)
+// WithScaleFactor sets scaleFactor and returns the receiver so calls can be chained.
+func (x *ScannerFunctionalUnitPositiveTransparency) WithScaleFactor(scaleFactor int) *ScannerFunctionalUnitPositiveTransparency {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleFactor:"), scaleFactor)
 	return x
 }
 
-// @property scanArea @abstract ￼This property along with scanAreaOrientation describes the area to be scanned.
+// ￼Desired orientation of the scan area. This property along with scanArea describes the area to be scanned. This property is set to ICEXIFOrientation1 initially. This property is not used by the ICScannerFunctionalUnitDocumentFeeder subclass.
 //
-// WithScanArea sets the scanArea property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitPositiveTransparency) WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnitPositiveTransparency {
-	x.inner.ICScannerFunctionalUnit.SetScanArea(scanArea)
+// WithScanAreaOrientation sets scanAreaOrientation and returns the receiver so calls can be chained.
+func (x *ScannerFunctionalUnitPositiveTransparency) WithScanAreaOrientation(scanAreaOrientation EXIFOrientationType) *ScannerFunctionalUnitPositiveTransparency {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanAreaOrientation:"), scanAreaOrientation)
 	return x
 }
 
-// @property scanAreaOrientation @abstract ￼Desired orientation of the scan area. This property along with scanArea describes the area to be scanned. @discussion This property is set to ICEXIFOrientation1 initially. This property is not used by the ICScannerFunctionalUnitDocumentFeeder subclass.
+// ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
 //
-// WithScanAreaOrientation sets the scanAreaOrientation property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitPositiveTransparency) WithScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) *ScannerFunctionalUnitPositiveTransparency {
-	x.inner.ICScannerFunctionalUnit.SetScanAreaOrientation(raw.ICEXIFOrientationType(scanAreaOrientation))
-	return x
-}
-
-// @property usesThresholdForBlackAndWhiteScanning @abstract ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
-//
-// WithUsesThresholdForBlackAndWhiteScanning sets the usesThresholdForBlackAndWhiteScanning property and returns the receiver for chaining.
+// WithUsesThresholdForBlackAndWhiteScanning sets usesThresholdForBlackAndWhiteScanning and returns the receiver so calls can be chained.
 func (x *ScannerFunctionalUnitPositiveTransparency) WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnitPositiveTransparency {
-	x.inner.ICScannerFunctionalUnit.SetUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesThresholdForBlackAndWhiteScanning:"), usesThresholdForBlackAndWhiteScanning)
 	return x
 }
 
-// @property thresholdForBlackAndWhiteScanning @abstract ￼Threshold value to be used when performing a scan in black & white. This value should be from 0 to 255.
+// ￼Threshold value to be used when performing a scan in black & white. This value should be from 0 to 255.
 //
-// WithThresholdForBlackAndWhiteScanning sets the thresholdForBlackAndWhiteScanning property and returns the receiver for chaining.
+// WithThresholdForBlackAndWhiteScanning sets thresholdForBlackAndWhiteScanning and returns the receiver so calls can be chained.
 func (x *ScannerFunctionalUnitPositiveTransparency) WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnitPositiveTransparency {
-	x.inner.ICScannerFunctionalUnit.SetThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThresholdForBlackAndWhiteScanning:"), thresholdForBlackAndWhiteScanning)
 	return x
 }
 
-// @property overviewResolution @abstract ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.
+// ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.
 //
-// WithOverviewResolution sets the overviewResolution property and returns the receiver for chaining.
-func (x *ScannerFunctionalUnitPositiveTransparency) WithOverviewResolution(overviewResolution uint) *ScannerFunctionalUnitPositiveTransparency {
-	x.inner.ICScannerFunctionalUnit.SetOverviewResolution(overviewResolution)
+// WithOverviewResolution sets overviewResolution and returns the receiver so calls can be chained.
+func (x *ScannerFunctionalUnitPositiveTransparency) WithOverviewResolution(overviewResolution int) *ScannerFunctionalUnitPositiveTransparency {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverviewResolution:"), overviewResolution)
 	return x
 }
 
-// @property supportedDocumentTypes @abstract ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
-//
-// SupportedDocumentTypes calls the underlying SupportedDocumentTypes.
-func (x *ScannerFunctionalUnitPositiveTransparency) SupportedDocumentTypes() *foundation.NSIndexSet {
-	return x.inner.SupportedDocumentTypes()
+// ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
+func (x *ScannerFunctionalUnitPositiveTransparency) SupportedDocumentTypes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedDocumentTypes"))
+	return obj.Wrap(_r)
 }
 
-// @property documentType @abstract ￼Current document type. This will always be one of the supported document types.
-//
-// DocumentType calls the underlying DocumentType.
-func (x *ScannerFunctionalUnitPositiveTransparency) DocumentType() ICScannerDocumentType {
-	return ICScannerDocumentType(x.inner.DocumentType())
+// ￼Current document type. This will always be one of the supported document types.
+func (x *ScannerFunctionalUnitPositiveTransparency) DocumentType() ScannerDocumentType {
+	_r := objc.Send[ScannerDocumentType](objref.IDOf(x), objc.RegisterName("documentType"))
+	return _r
 }
 
-// SetDocumentType calls the underlying SetDocumentType.
-func (x *ScannerFunctionalUnitPositiveTransparency) SetDocumentType(documentType ICScannerDocumentType) {
-	x.inner.SetDocumentType(raw.ICScannerDocumentType(documentType))
-}
-
-// @property documentSize @abstract ￼Document size of the current document type expressed in current measurement unit.
-//
-// DocumentSize calls the underlying DocumentSize.
-func (x *ScannerFunctionalUnitPositiveTransparency) DocumentSize() corefoundation.CGSize {
-	return x.inner.DocumentSize()
-}
-
-func (x *ScannerFunctionalUnitPositiveTransparency) asScannerFunctionalUnit() *raw.ICScannerFunctionalUnit {
-	return &x.inner.ICScannerFunctionalUnit
+func (x *ScannerFunctionalUnitPositiveTransparency) SetDocumentType(documentType ScannerDocumentType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentType:"), documentType)
 }
 
 // ScannerFunctionalUnitPositiveTransparencyable is the interface implemented by [ScannerFunctionalUnitPositiveTransparency], for mocking and DI.
 type ScannerFunctionalUnitPositiveTransparencyable interface {
-	Unwrap() *raw.ICScannerFunctionalUnitPositiveTransparency
-	WithDocumentType(documentType ICScannerDocumentType) *ScannerFunctionalUnitPositiveTransparency
-	WithPixelDataType(pixelDataType ICScannerPixelDataType) *ScannerFunctionalUnitPositiveTransparency
-	WithBitDepth(bitDepth ICScannerBitDepth) *ScannerFunctionalUnitPositiveTransparency
-	WithMeasurementUnit(measurementUnit ICScannerMeasurementUnit) *ScannerFunctionalUnitPositiveTransparency
-	WithResolution(resolution uint) *ScannerFunctionalUnitPositiveTransparency
-	WithScaleFactor(scaleFactor uint) *ScannerFunctionalUnitPositiveTransparency
-	WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnitPositiveTransparency
-	WithScanAreaOrientation(scanAreaOrientation ICEXIFOrientationType) *ScannerFunctionalUnitPositiveTransparency
+	obj.Object
+	WithDocumentType(documentType ScannerDocumentType) *ScannerFunctionalUnitPositiveTransparency
+	WithPixelDataType(pixelDataType ScannerPixelDataType) *ScannerFunctionalUnitPositiveTransparency
+	WithBitDepth(bitDepth ScannerBitDepth) *ScannerFunctionalUnitPositiveTransparency
+	WithMeasurementUnit(measurementUnit ScannerMeasurementUnit) *ScannerFunctionalUnitPositiveTransparency
+	WithResolution(resolution int) *ScannerFunctionalUnitPositiveTransparency
+	WithScaleFactor(scaleFactor int) *ScannerFunctionalUnitPositiveTransparency
+	WithScanAreaOrientation(scanAreaOrientation EXIFOrientationType) *ScannerFunctionalUnitPositiveTransparency
 	WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnitPositiveTransparency
 	WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnitPositiveTransparency
-	WithOverviewResolution(overviewResolution uint) *ScannerFunctionalUnitPositiveTransparency
-	SupportedDocumentTypes() *foundation.NSIndexSet
-	DocumentType() ICScannerDocumentType
-	SetDocumentType(documentType ICScannerDocumentType)
-	DocumentSize() corefoundation.CGSize
+	WithOverviewResolution(overviewResolution int) *ScannerFunctionalUnitPositiveTransparency
+	SupportedDocumentTypes() obj.Object
+	DocumentType() ScannerDocumentType
+	SetDocumentType(documentType ScannerDocumentType)
 }
 
 var _ ScannerFunctionalUnitPositiveTransparencyable = (*ScannerFunctionalUnitPositiveTransparency)(nil)

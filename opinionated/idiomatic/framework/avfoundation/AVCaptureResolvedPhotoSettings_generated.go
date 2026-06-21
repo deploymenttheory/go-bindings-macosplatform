@@ -5,73 +5,88 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description of the features and settings in use for an in-progress or complete photo capture request.
 //
-// CaptureResolvedPhotoSettings wraps [raw.AVCaptureResolvedPhotoSettings] with a fluent Go API.
+// CaptureResolvedPhotoSettings is an idiomatic wrapper over the Objective-C class AVCaptureResolvedPhotoSettings.
 type CaptureResolvedPhotoSettings struct {
-	inner *raw.AVCaptureResolvedPhotoSettings
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureResolvedPhotoSettings].
-func (x *CaptureResolvedPhotoSettings) Unwrap() *raw.AVCaptureResolvedPhotoSettings { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureResolvedPhotoSettings) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureResolvedPhotoSettingsFromID adopts an existing object pointer as a CaptureResolvedPhotoSettings (nil for 0).
+// CaptureResolvedPhotoSettingsFromID adopts an existing Objective-C object as a CaptureResolvedPhotoSettings
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureResolvedPhotoSettingsFromID(id objc.ID) *CaptureResolvedPhotoSettings {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureResolvedPhotoSettings{inner: raw.AVCaptureResolvedPhotoSettingsFromID(id)}
+	x := &CaptureResolvedPhotoSettings{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCaptureResolvedPhotoSettings creates a new [CaptureResolvedPhotoSettings].
+// captureResolvedPhotoSettingsAdopt wraps an Objective-C object that this code just created as a
+// CaptureResolvedPhotoSettings (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureResolvedPhotoSettingsAdopt(id objc.ID) *CaptureResolvedPhotoSettings {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureResolvedPhotoSettings{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptureResolvedPhotoSettings) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureResolvedPhotoSettings) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureResolvedPhotoSettings) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptureResolvedPhotoSettings creates a new CaptureResolvedPhotoSettings.
 func NewCaptureResolvedPhotoSettings() *CaptureResolvedPhotoSettings {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureResolvedPhotoSettings")), objc.RegisterName("new"))
-	return &CaptureResolvedPhotoSettings{inner: raw.AVCaptureResolvedPhotoSettingsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureResolvedPhotoSettings")), objc.RegisterName("new"))
+	return captureResolvedPhotoSettingsAdopt(_id)
 }
 
-// @property uniqueID @abstract uniqueID matches that of the AVCapturePhotoSettings instance you passed to -capturePhotoWithSettings:delegate:.
-//
-// UniqueID calls the underlying UniqueID.
+// uniqueID matches that of the AVCapturePhotoSettings instance you passed to -capturePhotoWithSettings:delegate:.
 func (x *CaptureResolvedPhotoSettings) UniqueID() int64 {
-	return x.inner.UniqueID()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("uniqueID"))
+	return _r
 }
 
-// @property photoDimensions @abstract The resolved dimensions of the photo buffer that will be delivered to the -captureOutput:didFinishProcessingPhotoSampleBuffer:previewPhotoSampleBuffer:resolvedSettings:bracketSettings:error: callback. @discussion If you request a RAW capture with no processed companion image, photoDimensions resolve to { 0, 0 }.
-//
-// PhotoDimensions calls the underlying PhotoDimensions.
-func (x *CaptureResolvedPhotoSettings) PhotoDimensions() coremedia.CMVideoDimensions {
-	return x.inner.PhotoDimensions()
+// Indicates the number of times your -captureOutput:didFinishProcessingPhoto:error: callback will be called. For instance, if you've requested an auto exposure bracket of 3 with JPEG and RAW, the expectedPhotoCount is 6.
+func (x *CaptureResolvedPhotoSettings) ExpectedPhotoCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("expectedPhotoCount"))
+	return _r
 }
 
-// @property expectedPhotoCount @abstract Indicates the number of times your -captureOutput:didFinishProcessingPhoto:error: callback will be called. For instance, if you've requested an auto exposure bracket of 3 with JPEG and RAW, the expectedPhotoCount is 6.
-//
-// ExpectedPhotoCount calls the underlying ExpectedPhotoCount.
-func (x *CaptureResolvedPhotoSettings) ExpectedPhotoCount() uint {
-	return x.inner.ExpectedPhotoCount()
-}
-
-// @property fastCapturePrioritizationEnabled @abstract Indicates whether fast capture prioritization will be employed when capturing the photo.
-//
-// IsFastCapturePrioritizationEnabled calls the underlying IsFastCapturePrioritizationEnabled.
+// Indicates whether fast capture prioritization will be employed when capturing the photo.
 func (x *CaptureResolvedPhotoSettings) IsFastCapturePrioritizationEnabled() bool {
-	return x.inner.IsFastCapturePrioritizationEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFastCapturePrioritizationEnabled"))
+	return _r
 }
 
 // CaptureResolvedPhotoSettingsable is the interface implemented by [CaptureResolvedPhotoSettings], for mocking and DI.
 type CaptureResolvedPhotoSettingsable interface {
-	Unwrap() *raw.AVCaptureResolvedPhotoSettings
+	obj.Object
 	UniqueID() int64
-	PhotoDimensions() coremedia.CMVideoDimensions
-	ExpectedPhotoCount() uint
+	ExpectedPhotoCount() int
 	IsFastCapturePrioritizationEnabled() bool
 }
 

@@ -5,177 +5,139 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNFilterNode wraps [raw.MPSNNFilterNode] with a fluent Go API.
+// NNFilterNode is an idiomatic wrapper over the Objective-C class MPSNNFilterNode.
 type NNFilterNode struct {
-	inner *raw.MPSNNFilterNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNFilterNode].
-func (x *NNFilterNode) Unwrap() *raw.MPSNNFilterNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNFilterNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNFilterNodeFromID adopts an existing object pointer as a NNFilterNode (nil for 0).
+// NNFilterNodeFromID adopts an existing Objective-C object as a NNFilterNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNFilterNodeFromID(id objc.ID) *NNFilterNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNFilterNode{inner: raw.MPSNNFilterNodeFromID(id)}
+	x := &NNFilterNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNNFilterNode creates a new [NNFilterNode].
+// nNFilterNodeAdopt wraps an Objective-C object that this code just created as a
+// NNFilterNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNFilterNodeAdopt(id objc.ID) *NNFilterNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNFilterNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NNFilterNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNFilterNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNFilterNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNNFilterNode creates a new NNFilterNode.
 func NewNNFilterNode() *NNFilterNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNFilterNode")), objc.RegisterName("new"))
-	return &NNFilterNode{inner: raw.MPSNNFilterNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNFilterNode")), objc.RegisterName("new"))
+	return nNFilterNodeAdopt(_id)
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
+// A string to help identify this object.
 //
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *NNFilterNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNFilterNode {
-	x.inner.SetPaddingPolicy(paddingPolicy)
-	return x
-}
-
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *NNFilterNode) WithLabel(label string) *NNFilterNode {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract Return the gradient (backwards) version of this filter. @discussion The backwards training version of the filter will be returned. The non-gradient image and state arguments for the filter are automatically obtained from the target. @param  gradientImage The gradient images corresponding with the resultImage of the target
-//
-// GradientFilterWithSource calls the underlying GradientFilterWithSource.
-func (x *NNFilterNode) GradientFilterWithSource(gradientImage *raw.MPSNNImageNode) *NNGradientFilterNode {
-	_r := x.inner.GradientFilterWithSource(gradientImage)
-	if _r == nil {
-		return nil
-	}
-	return &NNGradientFilterNode{inner: _r}
+// Return the gradient (backwards) version of this filter. The backwards training version of the filter will be returned. The non-gradient image and state arguments for the filter are automatically obtained from the target.
+func (x *NNFilterNode) GradientFilterWithSource(gradientImage *NNImageNode) *NNGradientFilterNode {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientFilterWithSource:"), objref.IDOf(gradientImage))
+	return NNGradientFilterNodeFromID(_r)
 }
 
-// @abstract Return the gradient (backwards) version of this filter. @discussion The backwards training version of the filter will be returned. The non-gradient image and state arguments for the filter are automatically obtained from the target. @param  gradientImages The gradient images corresponding with the resultImage of the target
-//
-// GradientFilterWithSources calls the underlying GradientFilterWithSources.
-func (x *NNFilterNode) GradientFilterWithSources(gradientImages *foundation.NSArray[*raw.MPSNNImageNode]) *NNGradientFilterNode {
-	_r := x.inner.GradientFilterWithSources(gradientImages)
-	if _r == nil {
-		return nil
-	}
-	return &NNGradientFilterNode{inner: _r}
+// Return the gradient (backwards) version of this filter. The backwards training version of the filter will be returned. The non-gradient image and state arguments for the filter are automatically obtained from the target.
+func (x *NNFilterNode) GradientFilterWithSources(gradientImages []*NNImageNode) *NNGradientFilterNode {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientFilterWithSources:"), purego.SliceToNSArray(gradientImages, func(_v *NNImageNode) objc.ID { return objref.IDOf(_v) }))
+	return NNGradientFilterNodeFromID(_r)
 }
 
-// @abstract Return multiple gradient versions of the filter @discussion     MPSNNFilters that consume multiple inputs generally result in multiple conjugate filters for the gradient computation at the end of training. For example, a single concatenation operation that concatenates multple images will result in an array of slice operators that carve out subsections of the input gradient image.
-//
-// GradientFiltersWithSources calls the underlying GradientFiltersWithSources.
-func (x *NNFilterNode) GradientFiltersWithSources(gradientImages *foundation.NSArray[*raw.MPSNNImageNode]) *foundation.NSArray[*raw.MPSNNGradientFilterNode] {
-	return x.inner.GradientFiltersWithSources(gradientImages)
+// Return multiple gradient versions of the filter MPSNNFilters that consume multiple inputs generally result in multiple conjugate filters for the gradient computation at the end of training. For example, a single concatenation operation that concatenates multple images will result in an array of slice operators that carve out subsections of the input gradient image.
+func (x *NNFilterNode) GradientFiltersWithSources(gradientImages []*NNImageNode) []*NNGradientFilterNode {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientFiltersWithSources:"), purego.SliceToNSArray(gradientImages, func(_v *NNImageNode) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *NNGradientFilterNode { return NNGradientFilterNodeFromID(_id) })
 }
 
-// @abstract Return multiple gradient versions of the filter @discussion     MPSNNFilters that consume multiple inputs generally result in multiple conjugate filters for the gradient computation at the end of training. For example, a single concatenation operation that concatenates multple images will result in an array of slice operators that carve out subsections of the input gradient image.
-//
-// GradientFiltersWithSource calls the underlying GradientFiltersWithSource.
-func (x *NNFilterNode) GradientFiltersWithSource(gradientImage *raw.MPSNNImageNode) *foundation.NSArray[*raw.MPSNNGradientFilterNode] {
-	return x.inner.GradientFiltersWithSource(gradientImage)
+// Return multiple gradient versions of the filter MPSNNFilters that consume multiple inputs generally result in multiple conjugate filters for the gradient computation at the end of training. For example, a single concatenation operation that concatenates multple images will result in an array of slice operators that carve out subsections of the input gradient image.
+func (x *NNFilterNode) GradientFiltersWithSource(gradientImage *NNImageNode) []*NNGradientFilterNode {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gradientFiltersWithSource:"), objref.IDOf(gradientImage))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *NNGradientFilterNode { return NNGradientFilterNodeFromID(_id) })
 }
 
-// @abstract       Build training graph from inference graph @discussion     This method will iteratively build the training portion of a graph based on an inference graph. Self should be the last node in the inference graph. It is typically a loss layer, but can be anything. Typically, the "inference graph" used here is the desired inference graph with a dropout node and a loss layer node appended. The nodes that are created will have default properties. In certain cases, these may not be appropriate (e.g. if you want to do CPU based updates of convolution weights instead of default GPU updates.) In such cases, your application should use the nodeHandler to configure the new nodes as they are created. BUG: This method can not follow links to regions of the graph that are connected to the rest of the graph solely via MPSNNStateNodes. A gradient image input is required to construct a MPSNNGradientFilterNode from a inference filter node. @param          gradientImage   The input gradient image for the first gradient node in the training section of the graph. If nil, self.resultImage is used. This results in a standard monolithic training graph. If the graph is instead divided into multiple subgraphs (potentially to allow for your custom code to appear inbetween MPSNNGraph segments) a new MPSImageNode* may be substituted. @param          nodeHandler     An optional block to allow for customization of gradient nodes and intermediate images as the graph is constructed. It may also be used to prune braches of the developing training graph. If nil, the default handler is used. It builds the full graph, and assigns any inferenceNodeSources[i].handle to their gradient counterparts. @return         The list of new MPSNNFilterNode training graph termini. These MPSNNFilterNodes are not necessarily all MPSNNGradientFilterNodes. To build a full list of nodes created, use a custom nodeHandler. If no nodes are created nil is returned.
-//
-// TrainingGraphWithSourceGradientNodeHandler calls the underlying TrainingGraphWithSourceGradientNodeHandler.
-func (x *NNFilterNode) TrainingGraphWithSourceGradientNodeHandler(gradientImage *raw.MPSNNImageNode, nodeHandler func(*raw.MPSNNFilterNode, *raw.MPSNNFilterNode, *raw.MPSNNImageNode, *raw.MPSNNImageNode)) *foundation.NSArray[*raw.MPSNNFilterNode] {
-	return x.inner.TrainingGraphWithSourceGradientNodeHandler(gradientImage, nodeHandler)
-}
-
-// @abstract   Get the node representing the image result of the filter @discussion Except where otherwise noted, the precision used for the result image (see format property) is copied from the precision from the first input image node.
-//
-// ResultImage calls the underlying ResultImage.
+// Get the node representing the image result of the filter Except where otherwise noted, the precision used for the result image (see format property) is copied from the precision from the first input image node.
 func (x *NNFilterNode) ResultImage() *NNImageNode {
-	_r := x.inner.ResultImage()
-	if _r == nil {
-		return nil
-	}
-	return &NNImageNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultImage"))
+	return NNImageNodeFromID(_r)
 }
 
-// @abstract   convenience method for resultStates[0] @discussion  If resultStates is nil, returns nil
-//
-// ResultState calls the underlying ResultState.
+// convenience method for resultStates[0] If resultStates is nil, returns nil
 func (x *NNFilterNode) ResultState() *NNStateNode {
-	_r := x.inner.ResultState()
-	if _r == nil {
-		return nil
-	}
-	return &NNStateNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultState"))
+	return NNStateNodeFromID(_r)
 }
 
-// @abstract   Get the node representing the state result of the filter @discussion If more than one, see description of subclass for ordering.
+// Get the node representing the state result of the filter If more than one, see description of subclass for ordering.
 //
 // ResultStates returns the collection as a Go slice.
 func (x *NNFilterNode) ResultStates() []*NNStateNode {
-	arr := x.inner.ResultStates()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *NNStateNode {
-		return &NNStateNode{inner: raw.MPSNNStateNodeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultStates"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NNStateNode { return NNStateNodeFromID(_id) })
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// PaddingPolicy calls the underlying PaddingPolicy.
-func (x *NNFilterNode) PaddingPolicy() raw.MPSNNPadding {
-	return x.inner.PaddingPolicy()
-}
-
-// SetPaddingPolicy calls the underlying SetPaddingPolicy.
-func (x *NNFilterNode) SetPaddingPolicy(paddingPolicy raw.MPSNNPadding) {
-	x.inner.SetPaddingPolicy(paddingPolicy)
-}
-
-// @property label @abstract A string to help identify this object.
-//
-// Label calls the underlying Label.
+// A string to help identify this object.
 func (x *NNFilterNode) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
 func (x *NNFilterNode) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
-
-func (x *NNFilterNode) asNNFilterNode() *raw.MPSNNFilterNode { return x.inner }
 
 // NNFilterNodeable is the interface implemented by [NNFilterNode], for mocking and DI.
 type NNFilterNodeable interface {
-	Unwrap() *raw.MPSNNFilterNode
-	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNFilterNode
+	obj.Object
 	WithLabel(label string) *NNFilterNode
-	GradientFilterWithSource(gradientImage *raw.MPSNNImageNode) *NNGradientFilterNode
-	GradientFilterWithSources(gradientImages *foundation.NSArray[*raw.MPSNNImageNode]) *NNGradientFilterNode
-	GradientFiltersWithSources(gradientImages *foundation.NSArray[*raw.MPSNNImageNode]) *foundation.NSArray[*raw.MPSNNGradientFilterNode]
-	GradientFiltersWithSource(gradientImage *raw.MPSNNImageNode) *foundation.NSArray[*raw.MPSNNGradientFilterNode]
-	TrainingGraphWithSourceGradientNodeHandler(gradientImage *raw.MPSNNImageNode, nodeHandler func(*raw.MPSNNFilterNode, *raw.MPSNNFilterNode, *raw.MPSNNImageNode, *raw.MPSNNImageNode)) *foundation.NSArray[*raw.MPSNNFilterNode]
+	GradientFilterWithSource(gradientImage *NNImageNode) *NNGradientFilterNode
+	GradientFilterWithSources(gradientImages []*NNImageNode) *NNGradientFilterNode
+	GradientFiltersWithSources(gradientImages []*NNImageNode) []*NNGradientFilterNode
+	GradientFiltersWithSource(gradientImage *NNImageNode) []*NNGradientFilterNode
 	ResultImage() *NNImageNode
 	ResultState() *NNStateNode
 	ResultStates() []*NNStateNode
-	PaddingPolicy() raw.MPSNNPadding
-	SetPaddingPolicy(paddingPolicy raw.MPSNNPadding)
 	Label() string
 	SetLabel(label string)
 }

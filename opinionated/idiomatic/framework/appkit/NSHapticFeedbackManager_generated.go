@@ -5,41 +5,68 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides access to the haptic feedback management attributes on a system with a Force Touch trackpad.
 //
-// HapticFeedbackManager wraps [raw.NSHapticFeedbackManager] with a fluent Go API.
+// HapticFeedbackManager is an idiomatic wrapper over the Objective-C class NSHapticFeedbackManager.
 type HapticFeedbackManager struct {
-	inner *raw.NSHapticFeedbackManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSHapticFeedbackManager].
-func (x *HapticFeedbackManager) Unwrap() *raw.NSHapticFeedbackManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HapticFeedbackManager) ID() objc.ID { return x.inner.Ptr() }
-
-// HapticFeedbackManagerFromID adopts an existing object pointer as a HapticFeedbackManager (nil for 0).
+// HapticFeedbackManagerFromID adopts an existing Objective-C object as a HapticFeedbackManager
+// (nil for 0), retaining it and registering a release finalizer.
 func HapticFeedbackManagerFromID(id objc.ID) *HapticFeedbackManager {
 	if id == 0 {
 		return nil
 	}
-	return &HapticFeedbackManager{inner: raw.NSHapticFeedbackManagerFromID(id)}
+	x := &HapticFeedbackManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewHapticFeedbackManager creates a new [HapticFeedbackManager].
+// hapticFeedbackManagerAdopt wraps an Objective-C object that this code just created as a
+// HapticFeedbackManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hapticFeedbackManagerAdopt(id objc.ID) *HapticFeedbackManager {
+	if id == 0 {
+		return nil
+	}
+	x := &HapticFeedbackManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HapticFeedbackManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HapticFeedbackManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HapticFeedbackManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHapticFeedbackManager creates a new HapticFeedbackManager.
 func NewHapticFeedbackManager() *HapticFeedbackManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSHapticFeedbackManager")), objc.RegisterName("new"))
-	return &HapticFeedbackManager{inner: raw.NSHapticFeedbackManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSHapticFeedbackManager")), objc.RegisterName("new"))
+	return hapticFeedbackManagerAdopt(_id)
 }
 
 // HapticFeedbackManagerable is the interface implemented by [HapticFeedbackManager], for mocking and DI.
 type HapticFeedbackManagerable interface {
-	Unwrap() *raw.NSHapticFeedbackManager
+	obj.Object
 }
 
 var _ HapticFeedbackManagerable = (*HapticFeedbackManager)(nil)

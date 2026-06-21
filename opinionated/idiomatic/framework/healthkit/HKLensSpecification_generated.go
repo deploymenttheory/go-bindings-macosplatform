@@ -5,87 +5,92 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An abstract superclass for lens specifications.
 //
-// LensSpecification wraps [raw.HKLensSpecification] with a fluent Go API.
+// LensSpecification is an idiomatic wrapper over the Objective-C class HKLensSpecification.
 type LensSpecification struct {
-	inner *raw.HKLensSpecification
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKLensSpecification].
-func (x *LensSpecification) Unwrap() *raw.HKLensSpecification { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LensSpecification) ID() objc.ID { return x.inner.Ptr() }
-
-// LensSpecificationFromID adopts an existing object pointer as a LensSpecification (nil for 0).
+// LensSpecificationFromID adopts an existing Objective-C object as a LensSpecification
+// (nil for 0), retaining it and registering a release finalizer.
 func LensSpecificationFromID(id objc.ID) *LensSpecification {
 	if id == 0 {
 		return nil
 	}
-	return &LensSpecification{inner: raw.HKLensSpecificationFromID(id)}
+	x := &LensSpecification{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLensSpecification creates a new [LensSpecification].
+// lensSpecificationAdopt wraps an Objective-C object that this code just created as a
+// LensSpecification (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func lensSpecificationAdopt(id objc.ID) *LensSpecification {
+	if id == 0 {
+		return nil
+	}
+	x := &LensSpecification{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LensSpecification) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LensSpecification) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LensSpecification) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLensSpecification creates a new LensSpecification.
 func NewLensSpecification() *LensSpecification {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKLensSpecification")), objc.RegisterName("new"))
-	return &LensSpecification{inner: raw.HKLensSpecificationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKLensSpecification")), objc.RegisterName("new"))
+	return lensSpecificationAdopt(_id)
 }
 
-// @property      sphere @abstract      The lens power to correct nearsightedness or farsightedness. (-) means nearsighted while (+) farsighted.
-//
-// Sphere calls the underlying Sphere.
+// The lens power to correct nearsightedness or farsightedness. (-) means nearsighted while (+) farsighted.
 func (x *LensSpecification) Sphere() *Quantity {
-	_r := x.inner.Sphere()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sphere"))
+	return QuantityFromID(_r)
 }
 
-// @property      cylinder @abstract      The lens power required to correct astigmatism. Can be positive or negative.
-//
-// Cylinder calls the underlying Cylinder.
+// The lens power required to correct astigmatism. Can be positive or negative.
 func (x *LensSpecification) Cylinder() *Quantity {
-	_r := x.inner.Cylinder()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cylinder"))
+	return QuantityFromID(_r)
 }
 
-// @property      axis @abstract      The angle along which cylindrical power should be positioned to correct astigmatism
-//
-// Axis calls the underlying Axis.
+// The angle along which cylindrical power should be positioned to correct astigmatism
 func (x *LensSpecification) Axis() *Quantity {
-	_r := x.inner.Axis()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("axis"))
+	return QuantityFromID(_r)
 }
 
-// @property      addPower @abstract      The power adjustment applied to a multifocal lens to correct presbyopia
-//
-// AddPower calls the underlying AddPower.
+// The power adjustment applied to a multifocal lens to correct presbyopia
 func (x *LensSpecification) AddPower() *Quantity {
-	_r := x.inner.AddPower()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addPower"))
+	return QuantityFromID(_r)
 }
-
-func (x *LensSpecification) asLensSpecification() *raw.HKLensSpecification { return x.inner }
 
 // LensSpecificationable is the interface implemented by [LensSpecification], for mocking and DI.
 type LensSpecificationable interface {
-	Unwrap() *raw.HKLensSpecification
+	obj.Object
 	Sphere() *Quantity
 	Cylinder() *Quantity
 	Axis() *Quantity

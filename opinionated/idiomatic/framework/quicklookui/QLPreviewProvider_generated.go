@@ -5,41 +5,68 @@
 package quicklookui
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that you subclass to provide a data-based Quick Look preview extension.
 //
-// PreviewProvider wraps [raw.QLPreviewProvider] with a fluent Go API.
+// PreviewProvider is an idiomatic wrapper over the Objective-C class QLPreviewProvider.
 type PreviewProvider struct {
-	inner *raw.QLPreviewProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QLPreviewProvider].
-func (x *PreviewProvider) Unwrap() *raw.QLPreviewProvider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PreviewProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// PreviewProviderFromID adopts an existing object pointer as a PreviewProvider (nil for 0).
+// PreviewProviderFromID adopts an existing Objective-C object as a PreviewProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func PreviewProviderFromID(id objc.ID) *PreviewProvider {
 	if id == 0 {
 		return nil
 	}
-	return &PreviewProvider{inner: raw.QLPreviewProviderFromID(id)}
+	x := &PreviewProvider{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPreviewProvider creates a new [PreviewProvider].
+// previewProviderAdopt wraps an Objective-C object that this code just created as a
+// PreviewProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func previewProviderAdopt(id objc.ID) *PreviewProvider {
+	if id == 0 {
+		return nil
+	}
+	x := &PreviewProvider{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PreviewProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PreviewProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PreviewProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPreviewProvider creates a new PreviewProvider.
 func NewPreviewProvider() *PreviewProvider {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QLPreviewProvider")), objc.RegisterName("new"))
-	return &PreviewProvider{inner: raw.QLPreviewProviderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QLPreviewProvider")), objc.RegisterName("new"))
+	return previewProviderAdopt(_id)
 }
 
 // PreviewProviderable is the interface implemented by [PreviewProvider], for mocking and DI.
 type PreviewProviderable interface {
-	Unwrap() *raw.QLPreviewProvider
+	obj.Object
 }
 
 var _ PreviewProviderable = (*PreviewProvider)(nil)

@@ -5,93 +5,103 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A sample for electrocardiogram data.
 //
-// Electrocardiogram wraps [raw.HKElectrocardiogram] with a fluent Go API.
+// Electrocardiogram is an idiomatic wrapper over the Objective-C class HKElectrocardiogram.
 type Electrocardiogram struct {
-	inner *raw.HKElectrocardiogram
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKElectrocardiogram].
-func (x *Electrocardiogram) Unwrap() *raw.HKElectrocardiogram { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Electrocardiogram) ID() objc.ID { return x.inner.Ptr() }
-
-// ElectrocardiogramFromID adopts an existing object pointer as a Electrocardiogram (nil for 0).
+// ElectrocardiogramFromID adopts an existing Objective-C object as a Electrocardiogram
+// (nil for 0), retaining it and registering a release finalizer.
 func ElectrocardiogramFromID(id objc.ID) *Electrocardiogram {
 	if id == 0 {
 		return nil
 	}
-	return &Electrocardiogram{inner: raw.HKElectrocardiogramFromID(id)}
+	x := &Electrocardiogram{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewElectrocardiogram creates a new [Electrocardiogram].
+// electrocardiogramAdopt wraps an Objective-C object that this code just created as a
+// Electrocardiogram (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func electrocardiogramAdopt(id objc.ID) *Electrocardiogram {
+	if id == 0 {
+		return nil
+	}
+	x := &Electrocardiogram{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Electrocardiogram) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Electrocardiogram) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Electrocardiogram) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewElectrocardiogram creates a new Electrocardiogram.
 func NewElectrocardiogram() *Electrocardiogram {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKElectrocardiogram")), objc.RegisterName("new"))
-	return &Electrocardiogram{inner: raw.HKElectrocardiogramFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKElectrocardiogram")), objc.RegisterName("new"))
+	return electrocardiogramAdopt(_id)
 }
 
 // The number of voltage measurements in the electrocardiogram.
-//
-// NumberOfVoltageMeasurements calls the underlying NumberOfVoltageMeasurements.
 func (x *Electrocardiogram) NumberOfVoltageMeasurements() int {
-	return x.inner.NumberOfVoltageMeasurements()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfVoltageMeasurements"))
+	return _r
 }
 
 // The frequency at which the data was sampled. This is reported in [HKUnit hertzUnit].
-//
-// SamplingFrequency calls the underlying SamplingFrequency.
 func (x *Electrocardiogram) SamplingFrequency() *Quantity {
-	_r := x.inner.SamplingFrequency()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("samplingFrequency"))
+	return QuantityFromID(_r)
 }
 
 // The classification of this electrocardiogram sample.
-//
-// Classification calls the underlying Classification.
-func (x *Electrocardiogram) Classification() HKElectrocardiogramClassification {
-	return HKElectrocardiogramClassification(x.inner.Classification())
+func (x *Electrocardiogram) Classification() ElectrocardiogramClassification {
+	_r := objc.Send[ElectrocardiogramClassification](objref.IDOf(x), objc.RegisterName("classification"))
+	return _r
 }
 
 // The average heart rate of the user while the electrocardiogram was recorded.
-//
-// AverageHeartRate calls the underlying AverageHeartRate.
 func (x *Electrocardiogram) AverageHeartRate() *Quantity {
-	_r := x.inner.AverageHeartRate()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("averageHeartRate"))
+	return QuantityFromID(_r)
 }
 
 // Whether the user experienced symptoms during this electrocardiogram.
-//
-// SymptomsStatus calls the underlying SymptomsStatus.
-func (x *Electrocardiogram) SymptomsStatus() HKElectrocardiogramSymptomsStatus {
-	return HKElectrocardiogramSymptomsStatus(x.inner.SymptomsStatus())
+func (x *Electrocardiogram) SymptomsStatus() ElectrocardiogramSymptomsStatus {
+	_r := objc.Send[ElectrocardiogramSymptomsStatus](objref.IDOf(x), objc.RegisterName("symptomsStatus"))
+	return _r
 }
-
-func (x *Electrocardiogram) asSample() *raw.HKSample { return &x.inner.HKSample }
-
-func (x *Electrocardiogram) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
 
 // Electrocardiogramable is the interface implemented by [Electrocardiogram], for mocking and DI.
 type Electrocardiogramable interface {
-	Unwrap() *raw.HKElectrocardiogram
+	obj.Object
 	NumberOfVoltageMeasurements() int
 	SamplingFrequency() *Quantity
-	Classification() HKElectrocardiogramClassification
+	Classification() ElectrocardiogramClassification
 	AverageHeartRate() *Quantity
-	SymptomsStatus() HKElectrocardiogramSymptomsStatus
+	SymptomsStatus() ElectrocardiogramSymptomsStatus
 }
 
 var _ Electrocardiogramable = (*Electrocardiogram)(nil)

@@ -5,136 +5,95 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A matrix-vector multiplication kernel
 //
-// MatrixVectorMultiplication wraps [raw.MPSMatrixVectorMultiplication] with a fluent Go API.
+// MatrixVectorMultiplication is an idiomatic wrapper over the Objective-C class MPSMatrixVectorMultiplication.
 type MatrixVectorMultiplication struct {
-	inner *raw.MPSMatrixVectorMultiplication
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSMatrixVectorMultiplication].
-func (x *MatrixVectorMultiplication) Unwrap() *raw.MPSMatrixVectorMultiplication { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatrixVectorMultiplication) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixVectorMultiplicationFromID adopts an existing object pointer as a MatrixVectorMultiplication (nil for 0).
+// MatrixVectorMultiplicationFromID adopts an existing Objective-C object as a MatrixVectorMultiplication
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixVectorMultiplicationFromID(id objc.ID) *MatrixVectorMultiplication {
 	if id == 0 {
 		return nil
 	}
-	return &MatrixVectorMultiplication{inner: raw.MPSMatrixVectorMultiplicationFromID(id)}
-}
-
-// @abstract   Initialize an MPSMatrixVectorMultiplication object on a device for a given size and desired transpose and scale values. @param      device          The device on which the kernel will execute. @param      transpose       A boolean value which indicates if the input matrix should be used in transposed form.  if 'YES' then op(A) == A**T, otherwise op(A) == A. @param      rows            The number of rows in the input matrix op(A), and the number of elements in the vector y. @param      columns         The number of columns in the input matrix op(A), and the number of elements in the input vector x. @param      alpha           The scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. @param      beta            The scale factor to apply to the initial values of y.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. @return     A valid MPSMatrixVectorMultiplication object or nil, if failure.
-//
-// NewMatrixVectorMultiplicationWithDeviceTransposeRowsColumnsAlphaBeta creates a new [MatrixVectorMultiplication].
-func NewMatrixVectorMultiplicationWithDeviceTransposeRowsColumnsAlphaBeta(device metal.MTLDevice, transpose bool, rows uint, columns uint, alpha float64, beta float64) *MatrixVectorMultiplication {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixVectorMultiplication")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:transpose:rows:columns:alpha:beta:"), device, transpose, rows, columns, alpha, beta)
-	return &MatrixVectorMultiplication{inner: raw.MPSMatrixVectorMultiplicationFromID(_id)}
-}
-
-// @abstract   Convenience initialization for a matrix-vector multiplication with no transposition, unit scaling of the product, and no accumulation of the result.  The scaling factors alpha and beta are taken to be 1.0 and 0.0 respectively. @param      device          The device on which the kernel will execute. @param      rows            The number of rows in the input matrix A, and the number of elements in the vector y. @param      columns         The number of columns in the input matrix A, and the number of elements in the input vector x. @return     A valid MPSMatrixVectorMultiplication object or nil, if failure.
-//
-// NewMatrixVectorMultiplicationWithDeviceRowsColumns creates a new [MatrixVectorMultiplication].
-func NewMatrixVectorMultiplicationWithDeviceRowsColumns(device metal.MTLDevice, rows uint, columns uint) *MatrixVectorMultiplication {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixVectorMultiplication")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:rows:columns:"), device, rows, columns)
-	return &MatrixVectorMultiplication{inner: raw.MPSMatrixVectorMultiplicationFromID(_id)}
-}
-
-// @property   primarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-//
-// WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
-func (x *MatrixVectorMultiplication) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication {
-	x.inner.MPSMatrixBinaryKernel.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
+	x := &MatrixVectorMultiplication{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   secondarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-//
-// WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
-func (x *MatrixVectorMultiplication) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication {
-	x.inner.MPSMatrixBinaryKernel.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
+// matrixVectorMultiplicationAdopt wraps an Objective-C object that this code just created as a
+// MatrixVectorMultiplication (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixVectorMultiplicationAdopt(id objc.ID) *MatrixVectorMultiplication {
+	if id == 0 {
+		return nil
+	}
+	x := &MatrixVectorMultiplication{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+// Description returns the object's -description text.
+func (x *MatrixVectorMultiplication) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatrixVectorMultiplication) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatrixVectorMultiplication) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMatrixVectorMultiplication creates a new MatrixVectorMultiplication.
+func NewMatrixVectorMultiplication() *MatrixVectorMultiplication {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixVectorMultiplication")), objc.RegisterName("new"))
+	return matrixVectorMultiplicationAdopt(_id)
+}
+
+// The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
 //
-// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
-func (x *MatrixVectorMultiplication) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication {
-	x.inner.MPSMatrixBinaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+func (x *MatrixVectorMultiplication) WithBatchStart(batchStart int) *MatrixVectorMultiplication {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+// The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
 //
-// WithBatchStart sets the batchStart property and returns the receiver for chaining.
-func (x *MatrixVectorMultiplication) WithBatchStart(batchStart uint) *MatrixVectorMultiplication {
-	x.inner.MPSMatrixBinaryKernel.SetBatchStart(batchStart)
-	return x
-}
-
-// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-//
-// WithBatchSize sets the batchSize property and returns the receiver for chaining.
-func (x *MatrixVectorMultiplication) WithBatchSize(batchSize uint) *MatrixVectorMultiplication {
-	x.inner.MPSMatrixBinaryKernel.SetBatchSize(batchSize)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *MatrixVectorMultiplication) WithOptions(options mpscore.MPSKernelOptions) *MatrixVectorMultiplication {
-	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetOptions(options)
+// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+func (x *MatrixVectorMultiplication) WithBatchSize(batchSize int) *MatrixVectorMultiplication {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *MatrixVectorMultiplication) WithLabel(label string) *MatrixVectorMultiplication {
-	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-// @abstract   Encode a MPSMatrixVectorMultiplication object to a command buffer. @param      commandBuffer   A valid MTLCommandBuffer to receive the encoded kernel. @param      inputMatrix     A valid MPSMatrix object which specifies the input matrix A. @param      inputVector     A valid MPSVector object which specifies the input vector x. @param      resultVector    A valid MPSVector object which specifies the addend vector which will also be overwritten by the result. @discussion The left input matrix must be large enough to hold an array of size (rows x columns) elements beginning at primarySourceMatrixOrigin. The input vector must be large enough to hold an array of size (columns) elements beginning at secondarySourceMatrixOrigin.x  secondarySourceMatrixOrigin.y and secondarySourceMatrixOrigin.z must be zero. The result vector must be large enough to hold an array of size (rows) elements beginning at resultMatrixOrigin.x.  resultMatrixOrigin.y and resultMatrixOrigin.z must be zero.
-//
-// EncodeToCommandBufferInputMatrixInputVectorResultVector calls the underlying EncodeToCommandBufferInputMatrixInputVectorResultVector.
-func (x *MatrixVectorMultiplication) EncodeToCommandBufferInputMatrixInputVectorResultVector(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, inputVector *mpscore.MPSVector, resultVector *mpscore.MPSVector) {
-	x.inner.EncodeToCommandBufferInputMatrixInputVectorResultVector(commandBuffer, inputMatrix, inputVector, resultVector)
-}
-
-func (x *MatrixVectorMultiplication) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel {
-	return &x.inner.MPSMatrixBinaryKernel
-}
-
-func (x *MatrixVectorMultiplication) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSMatrixBinaryKernel.MPSKernel
 }
 
 // MatrixVectorMultiplicationable is the interface implemented by [MatrixVectorMultiplication], for mocking and DI.
 type MatrixVectorMultiplicationable interface {
-	Unwrap() *raw.MPSMatrixVectorMultiplication
-	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication
-	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication
-	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixVectorMultiplication
-	WithBatchStart(batchStart uint) *MatrixVectorMultiplication
-	WithBatchSize(batchSize uint) *MatrixVectorMultiplication
-	WithOptions(options mpscore.MPSKernelOptions) *MatrixVectorMultiplication
+	obj.Object
+	WithBatchStart(batchStart int) *MatrixVectorMultiplication
+	WithBatchSize(batchSize int) *MatrixVectorMultiplication
 	WithLabel(label string) *MatrixVectorMultiplication
-	EncodeToCommandBufferInputMatrixInputVectorResultVector(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, inputVector *mpscore.MPSVector, resultVector *mpscore.MPSVector)
 }
 
 var _ MatrixVectorMultiplicationable = (*MatrixVectorMultiplication)(nil)

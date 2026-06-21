@@ -5,57 +5,80 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The result returned when executing a batch update request.
 //
-// BatchUpdateResult wraps [raw.NSBatchUpdateResult] with a fluent Go API.
+// BatchUpdateResult is an idiomatic wrapper over the Objective-C class NSBatchUpdateResult.
 type BatchUpdateResult struct {
-	inner *raw.NSBatchUpdateResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSBatchUpdateResult].
-func (x *BatchUpdateResult) Unwrap() *raw.NSBatchUpdateResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BatchUpdateResult) ID() objc.ID { return x.inner.Ptr() }
-
-// BatchUpdateResultFromID adopts an existing object pointer as a BatchUpdateResult (nil for 0).
+// BatchUpdateResultFromID adopts an existing Objective-C object as a BatchUpdateResult
+// (nil for 0), retaining it and registering a release finalizer.
 func BatchUpdateResultFromID(id objc.ID) *BatchUpdateResult {
 	if id == 0 {
 		return nil
 	}
-	return &BatchUpdateResult{inner: raw.NSBatchUpdateResultFromID(id)}
+	x := &BatchUpdateResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBatchUpdateResult creates a new [BatchUpdateResult].
+// batchUpdateResultAdopt wraps an Objective-C object that this code just created as a
+// BatchUpdateResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func batchUpdateResultAdopt(id objc.ID) *BatchUpdateResult {
+	if id == 0 {
+		return nil
+	}
+	x := &BatchUpdateResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BatchUpdateResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BatchUpdateResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BatchUpdateResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBatchUpdateResult creates a new BatchUpdateResult.
 func NewBatchUpdateResult() *BatchUpdateResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBatchUpdateResult")), objc.RegisterName("new"))
-	return &BatchUpdateResult{inner: raw.NSBatchUpdateResultFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSBatchUpdateResult")), objc.RegisterName("new"))
+	return batchUpdateResultAdopt(_id)
 }
 
-// Result calls the underlying Result.
-func (x *BatchUpdateResult) Result() objc.ID {
-	return x.inner.Result()
+func (x *BatchUpdateResult) Result() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("result"))
+	return obj.Wrap(_r)
 }
 
-// ResultType calls the underlying ResultType.
-func (x *BatchUpdateResult) ResultType() NSBatchUpdateRequestResultType {
-	return NSBatchUpdateRequestResultType(x.inner.ResultType())
-}
-
-func (x *BatchUpdateResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
-	return &x.inner.NSPersistentStoreResult
+func (x *BatchUpdateResult) ResultType() BatchUpdateRequestResultType {
+	_r := objc.Send[BatchUpdateRequestResultType](objref.IDOf(x), objc.RegisterName("resultType"))
+	return _r
 }
 
 // BatchUpdateResultable is the interface implemented by [BatchUpdateResult], for mocking and DI.
 type BatchUpdateResultable interface {
-	Unwrap() *raw.NSBatchUpdateResult
-	Result() objc.ID
-	ResultType() NSBatchUpdateRequestResultType
+	obj.Object
+	Result() obj.Object
+	ResultType() BatchUpdateRequestResultType
 }
 
 var _ BatchUpdateResultable = (*BatchUpdateResult)(nil)

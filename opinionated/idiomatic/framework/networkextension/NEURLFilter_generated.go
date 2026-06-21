@@ -5,41 +5,68 @@
 package networkextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class used to voluntarily validate URLs for apps that don’t use WebKit or the URL session API.
 //
-// NEURLFilter wraps [raw.NEURLFilter] with a fluent Go API.
+// NEURLFilter is an idiomatic wrapper over the Objective-C class NEURLFilter.
 type NEURLFilter struct {
-	inner *raw.NEURLFilter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEURLFilter].
-func (x *NEURLFilter) Unwrap() *raw.NEURLFilter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEURLFilter) ID() objc.ID { return x.inner.Ptr() }
-
-// NEURLFilterFromID adopts an existing object pointer as a NEURLFilter (nil for 0).
+// NEURLFilterFromID adopts an existing Objective-C object as a NEURLFilter
+// (nil for 0), retaining it and registering a release finalizer.
 func NEURLFilterFromID(id objc.ID) *NEURLFilter {
 	if id == 0 {
 		return nil
 	}
-	return &NEURLFilter{inner: raw.NEURLFilterFromID(id)}
+	x := &NEURLFilter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNEURLFilter creates a new [NEURLFilter].
+// nEURLFilterAdopt wraps an Objective-C object that this code just created as a
+// NEURLFilter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEURLFilterAdopt(id objc.ID) *NEURLFilter {
+	if id == 0 {
+		return nil
+	}
+	x := &NEURLFilter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NEURLFilter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEURLFilter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEURLFilter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNEURLFilter creates a new NEURLFilter.
 func NewNEURLFilter() *NEURLFilter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEURLFilter")), objc.RegisterName("new"))
-	return &NEURLFilter{inner: raw.NEURLFilterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NEURLFilter")), objc.RegisterName("new"))
+	return nEURLFilterAdopt(_id)
 }
 
 // NEURLFilterable is the interface implemented by [NEURLFilter], for mocking and DI.
 type NEURLFilterable interface {
-	Unwrap() *raw.NEURLFilter
+	obj.Object
 }
 
 var _ NEURLFilterable = (*NEURLFilter)(nil)

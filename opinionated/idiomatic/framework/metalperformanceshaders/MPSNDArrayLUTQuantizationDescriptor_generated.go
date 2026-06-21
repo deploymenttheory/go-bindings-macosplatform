@@ -5,59 +5,66 @@
 package metalperformanceshaders
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NDArrayLUTQuantizationDescriptor wraps [raw.MPSNDArrayLUTQuantizationDescriptor] with a fluent Go API.
+// NDArrayLUTQuantizationDescriptor is an idiomatic wrapper over the Objective-C class MPSNDArrayLUTQuantizationDescriptor.
 type NDArrayLUTQuantizationDescriptor struct {
-	inner *raw.MPSNDArrayLUTQuantizationDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayLUTQuantizationDescriptor].
-func (x *NDArrayLUTQuantizationDescriptor) Unwrap() *raw.MPSNDArrayLUTQuantizationDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NDArrayLUTQuantizationDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// NDArrayLUTQuantizationDescriptorFromID adopts an existing object pointer as a NDArrayLUTQuantizationDescriptor (nil for 0).
+// NDArrayLUTQuantizationDescriptorFromID adopts an existing Objective-C object as a NDArrayLUTQuantizationDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func NDArrayLUTQuantizationDescriptorFromID(id objc.ID) *NDArrayLUTQuantizationDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &NDArrayLUTQuantizationDescriptor{inner: raw.MPSNDArrayLUTQuantizationDescriptorFromID(id)}
+	x := &NDArrayLUTQuantizationDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initializes a scalar lookup-table quantization descriptor. @param      quantizationDataType    Which quantized datatype is used. @result     A new quantization descriptor.
-//
-// NewNDArrayLUTQuantizationDescriptorWithDataType creates a new [NDArrayLUTQuantizationDescriptor].
-func NewNDArrayLUTQuantizationDescriptorWithDataType(quantizationDataType mpscore.MPSDataType) *NDArrayLUTQuantizationDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayLUTQuantizationDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataType:"), quantizationDataType)
-	return &NDArrayLUTQuantizationDescriptor{inner: raw.MPSNDArrayLUTQuantizationDescriptorFromID(_id)}
+// nDArrayLUTQuantizationDescriptorAdopt wraps an Objective-C object that this code just created as a
+// NDArrayLUTQuantizationDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nDArrayLUTQuantizationDescriptorAdopt(id objc.ID) *NDArrayLUTQuantizationDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &NDArrayLUTQuantizationDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initializes a vector lookup-table quantization descriptor. @param      quantizationDataType    Which quantized datatype is used. @param      vectorAxis        The quantization vector axis - this axis will receive the vector component in the destination. @result     A new quantization descriptor.
-//
-// NewNDArrayLUTQuantizationDescriptorWithDataTypeVectorAxis creates a new [NDArrayLUTQuantizationDescriptor].
-func NewNDArrayLUTQuantizationDescriptorWithDataTypeVectorAxis(quantizationDataType mpscore.MPSDataType, vectorAxis uint) *NDArrayLUTQuantizationDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayLUTQuantizationDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataType:vectorAxis:"), quantizationDataType, vectorAxis)
-	return &NDArrayLUTQuantizationDescriptor{inner: raw.MPSNDArrayLUTQuantizationDescriptorFromID(_id)}
+// Description returns the object's -description text.
+func (x *NDArrayLUTQuantizationDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *NDArrayLUTQuantizationDescriptor) asNDArrayQuantizationDescriptor() *mpsndarray.MPSNDArrayQuantizationDescriptor {
-	return &x.inner.MPSNDArrayQuantizationDescriptor
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NDArrayLUTQuantizationDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NDArrayLUTQuantizationDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNDArrayLUTQuantizationDescriptor creates a new NDArrayLUTQuantizationDescriptor.
+func NewNDArrayLUTQuantizationDescriptor() *NDArrayLUTQuantizationDescriptor {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayLUTQuantizationDescriptor")), objc.RegisterName("new"))
+	return nDArrayLUTQuantizationDescriptorAdopt(_id)
 }
 
 // NDArrayLUTQuantizationDescriptorable is the interface implemented by [NDArrayLUTQuantizationDescriptor], for mocking and DI.
 type NDArrayLUTQuantizationDescriptorable interface {
-	Unwrap() *raw.MPSNDArrayLUTQuantizationDescriptor
+	obj.Object
 }
 
 var _ NDArrayLUTQuantizationDescriptorable = (*NDArrayLUTQuantizationDescriptor)(nil)

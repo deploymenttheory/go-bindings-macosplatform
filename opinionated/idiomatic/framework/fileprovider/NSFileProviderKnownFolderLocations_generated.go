@@ -5,120 +5,131 @@
 package fileprovider
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fileprovider"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class for working with known-folder locations.
 //
-// FileProviderKnownFolderLocations wraps [raw.NSFileProviderKnownFolderLocations] with a fluent Go API.
+// FileProviderKnownFolderLocations is an idiomatic wrapper over the Objective-C class NSFileProviderKnownFolderLocations.
 type FileProviderKnownFolderLocations struct {
-	inner *raw.NSFileProviderKnownFolderLocations
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFileProviderKnownFolderLocations].
-func (x *FileProviderKnownFolderLocations) Unwrap() *raw.NSFileProviderKnownFolderLocations {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileProviderKnownFolderLocations) ID() objc.ID { return x.inner.Ptr() }
-
-// FileProviderKnownFolderLocationsFromID adopts an existing object pointer as a FileProviderKnownFolderLocations (nil for 0).
+// FileProviderKnownFolderLocationsFromID adopts an existing Objective-C object as a FileProviderKnownFolderLocations
+// (nil for 0), retaining it and registering a release finalizer.
 func FileProviderKnownFolderLocationsFromID(id objc.ID) *FileProviderKnownFolderLocations {
 	if id == 0 {
 		return nil
 	}
-	return &FileProviderKnownFolderLocations{inner: raw.NSFileProviderKnownFolderLocationsFromID(id)}
+	x := &FileProviderKnownFolderLocations{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFileProviderKnownFolderLocations creates a new [FileProviderKnownFolderLocations].
+// fileProviderKnownFolderLocationsAdopt wraps an Objective-C object that this code just created as a
+// FileProviderKnownFolderLocations (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileProviderKnownFolderLocationsAdopt(id objc.ID) *FileProviderKnownFolderLocations {
+	if id == 0 {
+		return nil
+	}
+	x := &FileProviderKnownFolderLocations{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FileProviderKnownFolderLocations) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileProviderKnownFolderLocations) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileProviderKnownFolderLocations) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFileProviderKnownFolderLocations creates a new FileProviderKnownFolderLocations.
 func NewFileProviderKnownFolderLocations() *FileProviderKnownFolderLocations {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileProviderKnownFolderLocations")), objc.RegisterName("new"))
-	return &FileProviderKnownFolderLocations{inner: raw.NSFileProviderKnownFolderLocationsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSFileProviderKnownFolderLocations")), objc.RegisterName("new"))
+	return fileProviderKnownFolderLocationsAdopt(_id)
 }
 
 // Specify whether the system should create a binary compatibility symlink folders. If YES, the system creates a symlink from the logical location of the folder in the domain sync root to the known folder location. This symlink allows any app that would have hardcoded the previous location of the folder to still work after enabling the feature. Default value is YES.
 //
-// WithShouldCreateBinaryCompatibilitySymlink sets the shouldCreateBinaryCompatibilitySymlink property and returns the receiver for chaining.
+// WithShouldCreateBinaryCompatibilitySymlink sets shouldCreateBinaryCompatibilitySymlink and returns the receiver so calls can be chained.
 func (x *FileProviderKnownFolderLocations) WithShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink bool) *FileProviderKnownFolderLocations {
-	x.inner.SetShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCreateBinaryCompatibilitySymlink:"), shouldCreateBinaryCompatibilitySymlink)
 	return x
 }
 
 // Candidate item for ~/Desktop For user experience reasons, it is strongly recommended to name the target folder "Desktop".
 //
-// WithDesktopLocation sets the desktopLocation property and returns the receiver for chaining.
+// WithDesktopLocation sets desktopLocation and returns the receiver so calls can be chained.
 func (x *FileProviderKnownFolderLocations) WithDesktopLocation(desktopLocation *FileProviderKnownFolderLocation) *FileProviderKnownFolderLocations {
-	x.inner.SetDesktopLocation(desktopLocation.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesktopLocation:"), objref.IDOf(desktopLocation))
 	return x
 }
 
 // Candidate item for ~/Documents For user experience reasons, it is strongly recommended to name the target folder "Documents".
 //
-// WithDocumentsLocation sets the documentsLocation property and returns the receiver for chaining.
+// WithDocumentsLocation sets documentsLocation and returns the receiver so calls can be chained.
 func (x *FileProviderKnownFolderLocations) WithDocumentsLocation(documentsLocation *FileProviderKnownFolderLocation) *FileProviderKnownFolderLocations {
-	x.inner.SetDocumentsLocation(documentsLocation.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentsLocation:"), objref.IDOf(documentsLocation))
 	return x
 }
 
 // Specify whether the system should create a binary compatibility symlink folders. If YES, the system creates a symlink from the logical location of the folder in the domain sync root to the known folder location. This symlink allows any app that would have hardcoded the previous location of the folder to still work after enabling the feature. Default value is YES.
-//
-// ShouldCreateBinaryCompatibilitySymlink calls the underlying ShouldCreateBinaryCompatibilitySymlink.
 func (x *FileProviderKnownFolderLocations) ShouldCreateBinaryCompatibilitySymlink() bool {
-	return x.inner.ShouldCreateBinaryCompatibilitySymlink()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldCreateBinaryCompatibilitySymlink"))
+	return _r
 }
 
-// SetShouldCreateBinaryCompatibilitySymlink calls the underlying SetShouldCreateBinaryCompatibilitySymlink.
 func (x *FileProviderKnownFolderLocations) SetShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink bool) {
-	x.inner.SetShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCreateBinaryCompatibilitySymlink:"), shouldCreateBinaryCompatibilitySymlink)
 }
 
 // Candidate item for ~/Desktop For user experience reasons, it is strongly recommended to name the target folder "Desktop".
-//
-// DesktopLocation calls the underlying DesktopLocation.
 func (x *FileProviderKnownFolderLocations) DesktopLocation() *FileProviderKnownFolderLocation {
-	_r := x.inner.DesktopLocation()
-	if _r == nil {
-		return nil
-	}
-	return &FileProviderKnownFolderLocation{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("desktopLocation"))
+	return FileProviderKnownFolderLocationFromID(_r)
 }
 
-// SetDesktopLocation calls the underlying SetDesktopLocation.
-func (x *FileProviderKnownFolderLocations) SetDesktopLocation(desktopLocation *raw.NSFileProviderKnownFolderLocation) {
-	x.inner.SetDesktopLocation(desktopLocation)
+func (x *FileProviderKnownFolderLocations) SetDesktopLocation(desktopLocation *FileProviderKnownFolderLocation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesktopLocation:"), objref.IDOf(desktopLocation))
 }
 
 // Candidate item for ~/Documents For user experience reasons, it is strongly recommended to name the target folder "Documents".
-//
-// DocumentsLocation calls the underlying DocumentsLocation.
 func (x *FileProviderKnownFolderLocations) DocumentsLocation() *FileProviderKnownFolderLocation {
-	_r := x.inner.DocumentsLocation()
-	if _r == nil {
-		return nil
-	}
-	return &FileProviderKnownFolderLocation{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentsLocation"))
+	return FileProviderKnownFolderLocationFromID(_r)
 }
 
-// SetDocumentsLocation calls the underlying SetDocumentsLocation.
-func (x *FileProviderKnownFolderLocations) SetDocumentsLocation(documentsLocation *raw.NSFileProviderKnownFolderLocation) {
-	x.inner.SetDocumentsLocation(documentsLocation)
+func (x *FileProviderKnownFolderLocations) SetDocumentsLocation(documentsLocation *FileProviderKnownFolderLocation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentsLocation:"), objref.IDOf(documentsLocation))
 }
 
 // FileProviderKnownFolderLocationsable is the interface implemented by [FileProviderKnownFolderLocations], for mocking and DI.
 type FileProviderKnownFolderLocationsable interface {
-	Unwrap() *raw.NSFileProviderKnownFolderLocations
+	obj.Object
 	WithShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink bool) *FileProviderKnownFolderLocations
 	WithDesktopLocation(desktopLocation *FileProviderKnownFolderLocation) *FileProviderKnownFolderLocations
 	WithDocumentsLocation(documentsLocation *FileProviderKnownFolderLocation) *FileProviderKnownFolderLocations
 	ShouldCreateBinaryCompatibilitySymlink() bool
 	SetShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink bool)
 	DesktopLocation() *FileProviderKnownFolderLocation
-	SetDesktopLocation(desktopLocation *raw.NSFileProviderKnownFolderLocation)
+	SetDesktopLocation(desktopLocation *FileProviderKnownFolderLocation)
 	DocumentsLocation() *FileProviderKnownFolderLocation
-	SetDocumentsLocation(documentsLocation *raw.NSFileProviderKnownFolderLocation)
+	SetDocumentsLocation(documentsLocation *FileProviderKnownFolderLocation)
 }
 
 var _ FileProviderKnownFolderLocationsable = (*FileProviderKnownFolderLocations)(nil)

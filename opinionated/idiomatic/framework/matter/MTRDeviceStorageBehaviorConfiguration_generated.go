@@ -5,183 +5,198 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Class that configures how MTRDevice objects persist their attributes to storage, so as to not overwhelm the underlying storage system.
 //
-// MTRDeviceStorageBehaviorConfiguration wraps [raw.MTRDeviceStorageBehaviorConfiguration] with a fluent Go API.
+// MTRDeviceStorageBehaviorConfiguration is an idiomatic wrapper over the Objective-C class MTRDeviceStorageBehaviorConfiguration.
 type MTRDeviceStorageBehaviorConfiguration struct {
-	inner *raw.MTRDeviceStorageBehaviorConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDeviceStorageBehaviorConfiguration].
-func (x *MTRDeviceStorageBehaviorConfiguration) Unwrap() *raw.MTRDeviceStorageBehaviorConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceStorageBehaviorConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDeviceStorageBehaviorConfigurationFromID adopts an existing object pointer as a MTRDeviceStorageBehaviorConfiguration (nil for 0).
+// MTRDeviceStorageBehaviorConfigurationFromID adopts an existing Objective-C object as a MTRDeviceStorageBehaviorConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDeviceStorageBehaviorConfigurationFromID(id objc.ID) *MTRDeviceStorageBehaviorConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDeviceStorageBehaviorConfiguration{inner: raw.MTRDeviceStorageBehaviorConfigurationFromID(id)}
+	x := &MTRDeviceStorageBehaviorConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRDeviceStorageBehaviorConfiguration creates a new [MTRDeviceStorageBehaviorConfiguration].
+// mTRDeviceStorageBehaviorConfigurationAdopt wraps an Objective-C object that this code just created as a
+// MTRDeviceStorageBehaviorConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDeviceStorageBehaviorConfigurationAdopt(id objc.ID) *MTRDeviceStorageBehaviorConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDeviceStorageBehaviorConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDeviceStorageBehaviorConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDeviceStorageBehaviorConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDeviceStorageBehaviorConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRDeviceStorageBehaviorConfiguration creates a new MTRDeviceStorageBehaviorConfiguration.
 func NewMTRDeviceStorageBehaviorConfiguration() *MTRDeviceStorageBehaviorConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceStorageBehaviorConfiguration")), objc.RegisterName("new"))
-	return &MTRDeviceStorageBehaviorConfiguration{inner: raw.MTRDeviceStorageBehaviorConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceStorageBehaviorConfiguration")), objc.RegisterName("new"))
+	return mTRDeviceStorageBehaviorConfigurationAdopt(_id)
 }
 
 // If disableStorageBehaviorOptimization is set to YES, then all the waiting mechanism as described above is disabled.
 //
-// WithDisableStorageBehaviorOptimization sets the disableStorageBehaviorOptimization property and returns the receiver for chaining.
+// WithDisableStorageBehaviorOptimization sets disableStorageBehaviorOptimization and returns the receiver so calls can be chained.
 func (x *MTRDeviceStorageBehaviorConfiguration) WithDisableStorageBehaviorOptimization(disableStorageBehaviorOptimization bool) *MTRDeviceStorageBehaviorConfiguration {
-	x.inner.SetDisableStorageBehaviorOptimization(disableStorageBehaviorOptimization)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisableStorageBehaviorOptimization:"), disableStorageBehaviorOptimization)
 	return x
 }
 
 // If any of these properties are set to be out of the documented limits, these default values will be used to replace all of them:
 //
-// WithReportToPersistenceDelayTime sets the reportToPersistenceDelayTime property and returns the receiver for chaining.
+// WithReportToPersistenceDelayTime sets reportToPersistenceDelayTime and returns the receiver so calls can be chained.
 func (x *MTRDeviceStorageBehaviorConfiguration) WithReportToPersistenceDelayTime(reportToPersistenceDelayTime float64) *MTRDeviceStorageBehaviorConfiguration {
-	x.inner.SetReportToPersistenceDelayTime(reportToPersistenceDelayTime)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportToPersistenceDelayTime:"), reportToPersistenceDelayTime)
 	return x
 }
 
-// WithReportToPersistenceDelayTimeMax sets the reportToPersistenceDelayTimeMax property and returns the receiver for chaining.
+// WithReportToPersistenceDelayTimeMax sets reportToPersistenceDelayTimeMax and returns the receiver so calls can be chained.
 func (x *MTRDeviceStorageBehaviorConfiguration) WithReportToPersistenceDelayTimeMax(reportToPersistenceDelayTimeMax float64) *MTRDeviceStorageBehaviorConfiguration {
-	x.inner.SetReportToPersistenceDelayTimeMax(reportToPersistenceDelayTimeMax)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportToPersistenceDelayTimeMax:"), reportToPersistenceDelayTimeMax)
 	return x
 }
 
-// WithRecentReportTimesMaxCount sets the recentReportTimesMaxCount property and returns the receiver for chaining.
-func (x *MTRDeviceStorageBehaviorConfiguration) WithRecentReportTimesMaxCount(recentReportTimesMaxCount uint) *MTRDeviceStorageBehaviorConfiguration {
-	x.inner.SetRecentReportTimesMaxCount(recentReportTimesMaxCount)
+// WithRecentReportTimesMaxCount sets recentReportTimesMaxCount and returns the receiver so calls can be chained.
+func (x *MTRDeviceStorageBehaviorConfiguration) WithRecentReportTimesMaxCount(recentReportTimesMaxCount int) *MTRDeviceStorageBehaviorConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecentReportTimesMaxCount:"), recentReportTimesMaxCount)
 	return x
 }
 
-// WithTimeBetweenReportsTooShortThreshold sets the timeBetweenReportsTooShortThreshold property and returns the receiver for chaining.
+// WithTimeBetweenReportsTooShortThreshold sets timeBetweenReportsTooShortThreshold and returns the receiver so calls can be chained.
 func (x *MTRDeviceStorageBehaviorConfiguration) WithTimeBetweenReportsTooShortThreshold(timeBetweenReportsTooShortThreshold float64) *MTRDeviceStorageBehaviorConfiguration {
-	x.inner.SetTimeBetweenReportsTooShortThreshold(timeBetweenReportsTooShortThreshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeBetweenReportsTooShortThreshold:"), timeBetweenReportsTooShortThreshold)
 	return x
 }
 
-// WithTimeBetweenReportsTooShortMinThreshold sets the timeBetweenReportsTooShortMinThreshold property and returns the receiver for chaining.
+// WithTimeBetweenReportsTooShortMinThreshold sets timeBetweenReportsTooShortMinThreshold and returns the receiver so calls can be chained.
 func (x *MTRDeviceStorageBehaviorConfiguration) WithTimeBetweenReportsTooShortMinThreshold(timeBetweenReportsTooShortMinThreshold float64) *MTRDeviceStorageBehaviorConfiguration {
-	x.inner.SetTimeBetweenReportsTooShortMinThreshold(timeBetweenReportsTooShortMinThreshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeBetweenReportsTooShortMinThreshold:"), timeBetweenReportsTooShortMinThreshold)
 	return x
 }
 
-// WithReportToPersistenceDelayMaxMultiplier sets the reportToPersistenceDelayMaxMultiplier property and returns the receiver for chaining.
+// WithReportToPersistenceDelayMaxMultiplier sets reportToPersistenceDelayMaxMultiplier and returns the receiver so calls can be chained.
 func (x *MTRDeviceStorageBehaviorConfiguration) WithReportToPersistenceDelayMaxMultiplier(reportToPersistenceDelayMaxMultiplier float64) *MTRDeviceStorageBehaviorConfiguration {
-	x.inner.SetReportToPersistenceDelayMaxMultiplier(reportToPersistenceDelayMaxMultiplier)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportToPersistenceDelayMaxMultiplier:"), reportToPersistenceDelayMaxMultiplier)
 	return x
 }
 
-// WithDeviceReportingExcessivelyIntervalThreshold sets the deviceReportingExcessivelyIntervalThreshold property and returns the receiver for chaining.
+// WithDeviceReportingExcessivelyIntervalThreshold sets deviceReportingExcessivelyIntervalThreshold and returns the receiver so calls can be chained.
 func (x *MTRDeviceStorageBehaviorConfiguration) WithDeviceReportingExcessivelyIntervalThreshold(deviceReportingExcessivelyIntervalThreshold float64) *MTRDeviceStorageBehaviorConfiguration {
-	x.inner.SetDeviceReportingExcessivelyIntervalThreshold(deviceReportingExcessivelyIntervalThreshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeviceReportingExcessivelyIntervalThreshold:"), deviceReportingExcessivelyIntervalThreshold)
 	return x
 }
 
 // If disableStorageBehaviorOptimization is set to YES, then all the waiting mechanism as described above is disabled.
-//
-// DisableStorageBehaviorOptimization calls the underlying DisableStorageBehaviorOptimization.
 func (x *MTRDeviceStorageBehaviorConfiguration) DisableStorageBehaviorOptimization() bool {
-	return x.inner.DisableStorageBehaviorOptimization()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("disableStorageBehaviorOptimization"))
+	return _r
 }
 
-// SetDisableStorageBehaviorOptimization calls the underlying SetDisableStorageBehaviorOptimization.
 func (x *MTRDeviceStorageBehaviorConfiguration) SetDisableStorageBehaviorOptimization(disableStorageBehaviorOptimization bool) {
-	x.inner.SetDisableStorageBehaviorOptimization(disableStorageBehaviorOptimization)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisableStorageBehaviorOptimization:"), disableStorageBehaviorOptimization)
 }
 
 // If any of these properties are set to be out of the documented limits, these default values will be used to replace all of them: reportToPersistenceDelayTimeDefault (15) reportToPersistenceDelayTimeMaxDefault (20 * 15) recentReportTimesMaxCountDefault (12) timeBetweenReportsTooShortThresholdDefault (15) timeBetweenReportsTooShortMinThresholdDefault (5) reportToPersistenceDelayMaxMultiplierDefault (10) deviceReportingExcessivelyIntervalThresholdDefault (5 * 60)
-//
-// ReportToPersistenceDelayTime calls the underlying ReportToPersistenceDelayTime.
 func (x *MTRDeviceStorageBehaviorConfiguration) ReportToPersistenceDelayTime() float64 {
-	return x.inner.ReportToPersistenceDelayTime()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("reportToPersistenceDelayTime"))
+	return _r
 }
 
-// SetReportToPersistenceDelayTime calls the underlying SetReportToPersistenceDelayTime.
 func (x *MTRDeviceStorageBehaviorConfiguration) SetReportToPersistenceDelayTime(reportToPersistenceDelayTime float64) {
-	x.inner.SetReportToPersistenceDelayTime(reportToPersistenceDelayTime)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportToPersistenceDelayTime:"), reportToPersistenceDelayTime)
 }
 
-// ReportToPersistenceDelayTimeMax calls the underlying ReportToPersistenceDelayTimeMax.
 func (x *MTRDeviceStorageBehaviorConfiguration) ReportToPersistenceDelayTimeMax() float64 {
-	return x.inner.ReportToPersistenceDelayTimeMax()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("reportToPersistenceDelayTimeMax"))
+	return _r
 }
 
-// SetReportToPersistenceDelayTimeMax calls the underlying SetReportToPersistenceDelayTimeMax.
 func (x *MTRDeviceStorageBehaviorConfiguration) SetReportToPersistenceDelayTimeMax(reportToPersistenceDelayTimeMax float64) {
-	x.inner.SetReportToPersistenceDelayTimeMax(reportToPersistenceDelayTimeMax)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportToPersistenceDelayTimeMax:"), reportToPersistenceDelayTimeMax)
 }
 
-// RecentReportTimesMaxCount calls the underlying RecentReportTimesMaxCount.
-func (x *MTRDeviceStorageBehaviorConfiguration) RecentReportTimesMaxCount() uint {
-	return x.inner.RecentReportTimesMaxCount()
+func (x *MTRDeviceStorageBehaviorConfiguration) RecentReportTimesMaxCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("recentReportTimesMaxCount"))
+	return _r
 }
 
-// SetRecentReportTimesMaxCount calls the underlying SetRecentReportTimesMaxCount.
-func (x *MTRDeviceStorageBehaviorConfiguration) SetRecentReportTimesMaxCount(recentReportTimesMaxCount uint) {
-	x.inner.SetRecentReportTimesMaxCount(recentReportTimesMaxCount)
+func (x *MTRDeviceStorageBehaviorConfiguration) SetRecentReportTimesMaxCount(recentReportTimesMaxCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecentReportTimesMaxCount:"), recentReportTimesMaxCount)
 }
 
-// TimeBetweenReportsTooShortThreshold calls the underlying TimeBetweenReportsTooShortThreshold.
 func (x *MTRDeviceStorageBehaviorConfiguration) TimeBetweenReportsTooShortThreshold() float64 {
-	return x.inner.TimeBetweenReportsTooShortThreshold()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeBetweenReportsTooShortThreshold"))
+	return _r
 }
 
-// SetTimeBetweenReportsTooShortThreshold calls the underlying SetTimeBetweenReportsTooShortThreshold.
 func (x *MTRDeviceStorageBehaviorConfiguration) SetTimeBetweenReportsTooShortThreshold(timeBetweenReportsTooShortThreshold float64) {
-	x.inner.SetTimeBetweenReportsTooShortThreshold(timeBetweenReportsTooShortThreshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeBetweenReportsTooShortThreshold:"), timeBetweenReportsTooShortThreshold)
 }
 
-// TimeBetweenReportsTooShortMinThreshold calls the underlying TimeBetweenReportsTooShortMinThreshold.
 func (x *MTRDeviceStorageBehaviorConfiguration) TimeBetweenReportsTooShortMinThreshold() float64 {
-	return x.inner.TimeBetweenReportsTooShortMinThreshold()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeBetweenReportsTooShortMinThreshold"))
+	return _r
 }
 
-// SetTimeBetweenReportsTooShortMinThreshold calls the underlying SetTimeBetweenReportsTooShortMinThreshold.
 func (x *MTRDeviceStorageBehaviorConfiguration) SetTimeBetweenReportsTooShortMinThreshold(timeBetweenReportsTooShortMinThreshold float64) {
-	x.inner.SetTimeBetweenReportsTooShortMinThreshold(timeBetweenReportsTooShortMinThreshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeBetweenReportsTooShortMinThreshold:"), timeBetweenReportsTooShortMinThreshold)
 }
 
-// ReportToPersistenceDelayMaxMultiplier calls the underlying ReportToPersistenceDelayMaxMultiplier.
 func (x *MTRDeviceStorageBehaviorConfiguration) ReportToPersistenceDelayMaxMultiplier() float64 {
-	return x.inner.ReportToPersistenceDelayMaxMultiplier()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("reportToPersistenceDelayMaxMultiplier"))
+	return _r
 }
 
-// SetReportToPersistenceDelayMaxMultiplier calls the underlying SetReportToPersistenceDelayMaxMultiplier.
 func (x *MTRDeviceStorageBehaviorConfiguration) SetReportToPersistenceDelayMaxMultiplier(reportToPersistenceDelayMaxMultiplier float64) {
-	x.inner.SetReportToPersistenceDelayMaxMultiplier(reportToPersistenceDelayMaxMultiplier)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportToPersistenceDelayMaxMultiplier:"), reportToPersistenceDelayMaxMultiplier)
 }
 
-// DeviceReportingExcessivelyIntervalThreshold calls the underlying DeviceReportingExcessivelyIntervalThreshold.
 func (x *MTRDeviceStorageBehaviorConfiguration) DeviceReportingExcessivelyIntervalThreshold() float64 {
-	return x.inner.DeviceReportingExcessivelyIntervalThreshold()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("deviceReportingExcessivelyIntervalThreshold"))
+	return _r
 }
 
-// SetDeviceReportingExcessivelyIntervalThreshold calls the underlying SetDeviceReportingExcessivelyIntervalThreshold.
 func (x *MTRDeviceStorageBehaviorConfiguration) SetDeviceReportingExcessivelyIntervalThreshold(deviceReportingExcessivelyIntervalThreshold float64) {
-	x.inner.SetDeviceReportingExcessivelyIntervalThreshold(deviceReportingExcessivelyIntervalThreshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeviceReportingExcessivelyIntervalThreshold:"), deviceReportingExcessivelyIntervalThreshold)
 }
 
 // MTRDeviceStorageBehaviorConfigurationable is the interface implemented by [MTRDeviceStorageBehaviorConfiguration], for mocking and DI.
 type MTRDeviceStorageBehaviorConfigurationable interface {
-	Unwrap() *raw.MTRDeviceStorageBehaviorConfiguration
+	obj.Object
 	WithDisableStorageBehaviorOptimization(disableStorageBehaviorOptimization bool) *MTRDeviceStorageBehaviorConfiguration
 	WithReportToPersistenceDelayTime(reportToPersistenceDelayTime float64) *MTRDeviceStorageBehaviorConfiguration
 	WithReportToPersistenceDelayTimeMax(reportToPersistenceDelayTimeMax float64) *MTRDeviceStorageBehaviorConfiguration
-	WithRecentReportTimesMaxCount(recentReportTimesMaxCount uint) *MTRDeviceStorageBehaviorConfiguration
+	WithRecentReportTimesMaxCount(recentReportTimesMaxCount int) *MTRDeviceStorageBehaviorConfiguration
 	WithTimeBetweenReportsTooShortThreshold(timeBetweenReportsTooShortThreshold float64) *MTRDeviceStorageBehaviorConfiguration
 	WithTimeBetweenReportsTooShortMinThreshold(timeBetweenReportsTooShortMinThreshold float64) *MTRDeviceStorageBehaviorConfiguration
 	WithReportToPersistenceDelayMaxMultiplier(reportToPersistenceDelayMaxMultiplier float64) *MTRDeviceStorageBehaviorConfiguration
@@ -192,8 +207,8 @@ type MTRDeviceStorageBehaviorConfigurationable interface {
 	SetReportToPersistenceDelayTime(reportToPersistenceDelayTime float64)
 	ReportToPersistenceDelayTimeMax() float64
 	SetReportToPersistenceDelayTimeMax(reportToPersistenceDelayTimeMax float64)
-	RecentReportTimesMaxCount() uint
-	SetRecentReportTimesMaxCount(recentReportTimesMaxCount uint)
+	RecentReportTimesMaxCount() int
+	SetRecentReportTimesMaxCount(recentReportTimesMaxCount int)
 	TimeBetweenReportsTooShortThreshold() float64
 	SetTimeBetweenReportsTooShortThreshold(timeBetweenReportsTooShortThreshold float64)
 	TimeBetweenReportsTooShortMinThreshold() float64

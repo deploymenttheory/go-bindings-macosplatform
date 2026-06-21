@@ -5,59 +5,68 @@
 package corelocation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A circular geographic condition that a center point and radius define.
 //
-// CircularGeographicCondition wraps [raw.CLCircularGeographicCondition] with a fluent Go API.
+// CircularGeographicCondition is an idiomatic wrapper over the Objective-C class CLCircularGeographicCondition.
 type CircularGeographicCondition struct {
-	inner *raw.CLCircularGeographicCondition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLCircularGeographicCondition].
-func (x *CircularGeographicCondition) Unwrap() *raw.CLCircularGeographicCondition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CircularGeographicCondition) ID() objc.ID { return x.inner.Ptr() }
-
-// CircularGeographicConditionFromID adopts an existing object pointer as a CircularGeographicCondition (nil for 0).
+// CircularGeographicConditionFromID adopts an existing Objective-C object as a CircularGeographicCondition
+// (nil for 0), retaining it and registering a release finalizer.
 func CircularGeographicConditionFromID(id objc.ID) *CircularGeographicCondition {
 	if id == 0 {
 		return nil
 	}
-	return &CircularGeographicCondition{inner: raw.CLCircularGeographicConditionFromID(id)}
+	x := &CircularGeographicCondition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a new circular geographic condition with the center point and radius you provide.
-//
-// NewCircularGeographicConditionWithCenterRadius creates a new [CircularGeographicCondition].
-func NewCircularGeographicConditionWithCenterRadius(center unsafe.Pointer, radius unsafe.Pointer) *CircularGeographicCondition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLCircularGeographicCondition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCenter:radius:"), center, radius)
-	return &CircularGeographicCondition{inner: raw.CLCircularGeographicConditionFromID(_id)}
+// circularGeographicConditionAdopt wraps an Objective-C object that this code just created as a
+// CircularGeographicCondition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func circularGeographicConditionAdopt(id objc.ID) *CircularGeographicCondition {
+	if id == 0 {
+		return nil
+	}
+	x := &CircularGeographicCondition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Center calls the underlying Center.
-func (x *CircularGeographicCondition) Center() unsafe.Pointer {
-	return x.inner.Center()
+// Description returns the object's -description text.
+func (x *CircularGeographicCondition) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Radius calls the underlying Radius.
-func (x *CircularGeographicCondition) Radius() unsafe.Pointer {
-	return x.inner.Radius()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CircularGeographicCondition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-func (x *CircularGeographicCondition) asCondition() *raw.CLCondition { return &x.inner.CLCondition }
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CircularGeographicCondition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCircularGeographicCondition creates a new CircularGeographicCondition.
+func NewCircularGeographicCondition() *CircularGeographicCondition {
+	_id := objc.Send[objc.ID](objc.ID(_class("CLCircularGeographicCondition")), objc.RegisterName("new"))
+	return circularGeographicConditionAdopt(_id)
+}
 
 // CircularGeographicConditionable is the interface implemented by [CircularGeographicCondition], for mocking and DI.
 type CircularGeographicConditionable interface {
-	Unwrap() *raw.CLCircularGeographicCondition
-	Center() unsafe.Pointer
-	Radius() unsafe.Pointer
+	obj.Object
 }
 
 var _ CircularGeographicConditionable = (*CircularGeographicCondition)(nil)

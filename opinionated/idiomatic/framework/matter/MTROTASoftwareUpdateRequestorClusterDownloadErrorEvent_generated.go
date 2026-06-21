@@ -5,74 +5,94 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent wraps [raw.MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent] with a fluent Go API.
+// MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent is an idiomatic wrapper over the Objective-C class MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent.
 type MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent struct {
-	inner *raw.MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent].
-func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventFromID adopts an existing object pointer as a MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent (nil for 0).
+// MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventFromID adopts an existing Objective-C object as a MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventFromID(id objc.ID) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent{inner: raw.MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventFromID(id)}
+	x := &MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent creates a new [MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent].
+// mTROtaSoftwareUpdateRequestorClusterDownloadErrorEventAdopt wraps an Objective-C object that this code just created as a
+// MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROtaSoftwareUpdateRequestorClusterDownloadErrorEventAdopt(id objc.ID) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent creates a new MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent.
 func NewMTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent() *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent")), objc.RegisterName("new"))
-	return &MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent{inner: raw.MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent")), objc.RegisterName("new"))
+	return mTROtaSoftwareUpdateRequestorClusterDownloadErrorEventAdopt(_id)
 }
 
-// WithSoftwareVersion sets the softwareVersion property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
-	x.inner.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent.SetSoftwareVersion(softwareVersion)
+// WithSoftwareVersion sets softwareVersion and returns the receiver so calls can be chained.
+func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return x
 }
 
-// WithBytesDownloaded sets the bytesDownloaded property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithBytesDownloaded(bytesDownloaded *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
-	x.inner.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent.SetBytesDownloaded(bytesDownloaded)
+// WithBytesDownloaded sets bytesDownloaded and returns the receiver so calls can be chained.
+func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithBytesDownloaded(bytesDownloaded obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBytesDownloaded:"), objref.IDOf(bytesDownloaded))
 	return x
 }
 
-// WithProgressPercent sets the progressPercent property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithProgressPercent(progressPercent *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
-	x.inner.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent.SetProgressPercent(progressPercent)
+// WithProgressPercent sets progressPercent and returns the receiver so calls can be chained.
+func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithProgressPercent(progressPercent obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressPercent:"), objref.IDOf(progressPercent))
 	return x
 }
 
-// WithPlatformCode sets the platformCode property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithPlatformCode(platformCode *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
-	x.inner.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent.SetPlatformCode(platformCode)
+// WithPlatformCode sets platformCode and returns the receiver so calls can be chained.
+func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithPlatformCode(platformCode obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlatformCode:"), objref.IDOf(platformCode))
 	return x
-}
-
-func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) asMTROTASoftwareUpdateRequestorClusterDownloadErrorEvent() *raw.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent {
-	return &x.inner.MTROTASoftwareUpdateRequestorClusterDownloadErrorEvent
 }
 
 // MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent], for mocking and DI.
 type MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventable interface {
-	Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
-	WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
-	WithBytesDownloaded(bytesDownloaded *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
-	WithProgressPercent(progressPercent *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
-	WithPlatformCode(platformCode *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
+	obj.Object
+	WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
+	WithBytesDownloaded(bytesDownloaded obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
+	WithProgressPercent(progressPercent obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
+	WithPlatformCode(platformCode obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
 }
 
 var _ MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventable = (*MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent)(nil)

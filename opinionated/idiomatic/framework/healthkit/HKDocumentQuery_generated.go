@@ -5,78 +5,90 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A query that returns a snapshot of all matching documents currently saved in the HealthKit store.
 //
-// DocumentQuery wraps [raw.HKDocumentQuery] with a fluent Go API.
+// DocumentQuery is an idiomatic wrapper over the Objective-C class HKDocumentQuery.
 type DocumentQuery struct {
-	inner *raw.HKDocumentQuery
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKDocumentQuery].
-func (x *DocumentQuery) Unwrap() *raw.HKDocumentQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DocumentQuery) ID() objc.ID { return x.inner.Ptr() }
-
-// DocumentQueryFromID adopts an existing object pointer as a DocumentQuery (nil for 0).
+// DocumentQueryFromID adopts an existing Objective-C object as a DocumentQuery
+// (nil for 0), retaining it and registering a release finalizer.
 func DocumentQueryFromID(id objc.ID) *DocumentQuery {
 	if id == 0 {
 		return nil
 	}
-	return &DocumentQuery{inner: raw.HKDocumentQueryFromID(id)}
+	x := &DocumentQuery{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Instantiates and returns a document query.
-//
-// NewDocumentQueryWithDocumentTypePredicateLimitSortDescriptorsIncludeDocumentDataResultsHandler creates a new [DocumentQuery].
-func NewDocumentQueryWithDocumentTypePredicateLimitSortDescriptorsIncludeDocumentDataResultsHandler(documentType *raw.HKDocumentType, predicate *foundation.NSPredicate, limit uint, sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor], includeDocumentData bool, resultsHandler func(*raw.HKDocumentQuery, *foundation.NSArray[*raw.HKDocumentSample], bool, unsafe.Pointer)) *DocumentQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKDocumentQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDocumentType:predicate:limit:sortDescriptors:includeDocumentData:resultsHandler:"), documentType.Ptr(), predicate.Ptr(), limit, sortDescriptors.Ptr(), includeDocumentData, resultsHandler)
-	return &DocumentQuery{inner: raw.HKDocumentQueryFromID(_id)}
-}
-
-// @property      limit @abstract      The maximum number of documents the receiver will return upon completion.
-//
-// Limit calls the underlying Limit.
-func (x *DocumentQuery) Limit() uint {
-	return x.inner.Limit()
-}
-
-// @property      sortDescriptors @abstract      An array of NSSortDescriptors.
-//
-// SortDescriptors returns the collection as a Go slice.
-func (x *DocumentQuery) SortDescriptors() []*foundation.NSSortDescriptor {
-	arr := x.inner.SortDescriptors()
-	if arr == nil {
+// documentQueryAdopt wraps an Objective-C object that this code just created as a
+// DocumentQuery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func documentQueryAdopt(id objc.ID) *DocumentQuery {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSSortDescriptor {
-		return foundation.NSSortDescriptorFromID(purego.Retain(_id))
-	})
+	x := &DocumentQuery{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property      includeDocumentData @abstract      The XML content for documents may be large.  This property can be used to control whether the query returns the XML content for each record.
+// Description returns the object's -description text.
+func (x *DocumentQuery) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DocumentQuery) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DocumentQuery) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDocumentQuery creates a new DocumentQuery.
+func NewDocumentQuery() *DocumentQuery {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKDocumentQuery")), objc.RegisterName("new"))
+	return documentQueryAdopt(_id)
+}
+
+// The maximum number of documents the receiver will return upon completion.
+func (x *DocumentQuery) Limit() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("limit"))
+	return _r
+}
+
+// An array of NSSortDescriptors.
 //
-// IncludeDocumentData calls the underlying IncludeDocumentData.
-func (x *DocumentQuery) IncludeDocumentData() bool {
-	return x.inner.IncludeDocumentData()
+// SortDescriptors returns the collection as a Go slice.
+func (x *DocumentQuery) SortDescriptors() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortDescriptors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-func (x *DocumentQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+// The XML content for documents may be large.  This property can be used to control whether the query returns the XML content for each record.
+func (x *DocumentQuery) IncludeDocumentData() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeDocumentData"))
+	return _r
+}
 
 // DocumentQueryable is the interface implemented by [DocumentQuery], for mocking and DI.
 type DocumentQueryable interface {
-	Unwrap() *raw.HKDocumentQuery
-	Limit() uint
-	SortDescriptors() []*foundation.NSSortDescriptor
+	obj.Object
+	Limit() int
+	SortDescriptors() []obj.Object
 	IncludeDocumentData() bool
 }
 

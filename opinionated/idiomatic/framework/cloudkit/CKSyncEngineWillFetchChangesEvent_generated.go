@@ -5,56 +5,73 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The sync engine is about to fetch changes from the server.
 //
-// SyncEngineWillFetchChangesEvent wraps [raw.CKSyncEngineWillFetchChangesEvent] with a fluent Go API.
+// SyncEngineWillFetchChangesEvent is an idiomatic wrapper over the Objective-C class CKSyncEngineWillFetchChangesEvent.
 type SyncEngineWillFetchChangesEvent struct {
-	inner *raw.CKSyncEngineWillFetchChangesEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineWillFetchChangesEvent].
-func (x *SyncEngineWillFetchChangesEvent) Unwrap() *raw.CKSyncEngineWillFetchChangesEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineWillFetchChangesEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineWillFetchChangesEventFromID adopts an existing object pointer as a SyncEngineWillFetchChangesEvent (nil for 0).
+// SyncEngineWillFetchChangesEventFromID adopts an existing Objective-C object as a SyncEngineWillFetchChangesEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineWillFetchChangesEventFromID(id objc.ID) *SyncEngineWillFetchChangesEvent {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineWillFetchChangesEvent{inner: raw.CKSyncEngineWillFetchChangesEventFromID(id)}
+	x := &SyncEngineWillFetchChangesEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSyncEngineWillFetchChangesEvent creates a new [SyncEngineWillFetchChangesEvent].
-func NewSyncEngineWillFetchChangesEvent() *SyncEngineWillFetchChangesEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineWillFetchChangesEvent")), objc.RegisterName("new"))
-	return &SyncEngineWillFetchChangesEvent{inner: raw.CKSyncEngineWillFetchChangesEventFromID(_id)}
-}
-
-// Context calls the underlying Context.
-func (x *SyncEngineWillFetchChangesEvent) Context() *SyncEngineFetchChangesContext {
-	_r := x.inner.Context()
-	if _r == nil {
+// syncEngineWillFetchChangesEventAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineWillFetchChangesEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineWillFetchChangesEventAdopt(id objc.ID) *SyncEngineWillFetchChangesEvent {
+	if id == 0 {
 		return nil
 	}
-	return &SyncEngineFetchChangesContext{inner: _r}
+	x := &SyncEngineWillFetchChangesEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *SyncEngineWillFetchChangesEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent {
-	return &x.inner.CKSyncEngineEvent
+// Description returns the object's -description text.
+func (x *SyncEngineWillFetchChangesEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEngineWillFetchChangesEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEngineWillFetchChangesEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSyncEngineWillFetchChangesEvent creates a new SyncEngineWillFetchChangesEvent.
+func NewSyncEngineWillFetchChangesEvent() *SyncEngineWillFetchChangesEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineWillFetchChangesEvent")), objc.RegisterName("new"))
+	return syncEngineWillFetchChangesEventAdopt(_id)
+}
+
+func (x *SyncEngineWillFetchChangesEvent) Context() *SyncEngineFetchChangesContext {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
+	return SyncEngineFetchChangesContextFromID(_r)
 }
 
 // SyncEngineWillFetchChangesEventable is the interface implemented by [SyncEngineWillFetchChangesEvent], for mocking and DI.
 type SyncEngineWillFetchChangesEventable interface {
-	Unwrap() *raw.CKSyncEngineWillFetchChangesEvent
+	obj.Object
 	Context() *SyncEngineFetchChangesContext
 }
 

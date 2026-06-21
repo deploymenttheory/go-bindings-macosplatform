@@ -5,13 +5,12 @@
 package sharedwithyoucore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @abstract String identifier used to initialize a UTType to represent the type of the array of SWCollaborationOptionsGroups when registering to and reading from the NSItemProvider
-// UTCollaborationOptionsTypeIdentifier returns the string constant UTCollaborationOptionsTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func UTCollaborationOptionsTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.UTCollaborationOptionsTypeIdentifier())
+// String identifier used to initialize a UTType to represent the type of the array of SWCollaborationOptionsGroups when registering to and reading from the NSItemProvider
+// UTCollaborationOptionsTypeIdentifier returns the string constant UTCollaborationOptionsTypeIdentifier, for use as a dictionary key or argument.
+func UTCollaborationOptionsTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("UTCollaborationOptionsTypeIdentifier")))
 }

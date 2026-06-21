@@ -5,34 +5,35 @@
 package searchkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/searchkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KSKMinTermLength returns the value of the CoreFoundation reference constant kSKMinTermLength as an objc.ID.
-func KSKMinTermLength() objc.ID { return purego.CFConstant(raw.KSKMinTermLength()) }
+// KSKMinTermLength returns the value of the constant kSKMinTermLength.
+func KSKMinTermLength() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSKMinTermLength"))) }
 
-// KSKSubstitutions returns the value of the CoreFoundation reference constant kSKSubstitutions as an objc.ID.
-func KSKSubstitutions() objc.ID { return purego.CFConstant(raw.KSKSubstitutions()) }
+// KSKSubstitutions returns the value of the constant kSKSubstitutions.
+func KSKSubstitutions() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSKSubstitutions"))) }
 
-// KSKStopWords returns the value of the CoreFoundation reference constant kSKStopWords as an objc.ID.
-func KSKStopWords() objc.ID { return purego.CFConstant(raw.KSKStopWords()) }
+// KSKStopWords returns the value of the constant kSKStopWords.
+func KSKStopWords() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSKStopWords"))) }
 
-// KSKProximityIndexing returns the value of the CoreFoundation reference constant kSKProximityIndexing as an objc.ID.
-func KSKProximityIndexing() objc.ID { return purego.CFConstant(raw.KSKProximityIndexing()) }
+// KSKProximityIndexing returns the value of the constant kSKProximityIndexing.
+func KSKProximityIndexing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSKProximityIndexing")))
+}
 
-// KSKMaximumTerms returns the value of the CoreFoundation reference constant kSKMaximumTerms as an objc.ID.
-func KSKMaximumTerms() objc.ID { return purego.CFConstant(raw.KSKMaximumTerms()) }
+// KSKMaximumTerms returns the value of the constant kSKMaximumTerms.
+func KSKMaximumTerms() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSKMaximumTerms"))) }
 
-// KSKTermChars returns the value of the CoreFoundation reference constant kSKTermChars as an objc.ID.
-func KSKTermChars() objc.ID { return purego.CFConstant(raw.KSKTermChars()) }
+// KSKTermChars returns the value of the constant kSKTermChars.
+func KSKTermChars() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSKTermChars"))) }
 
-// KSKStartTermChars returns the value of the CoreFoundation reference constant kSKStartTermChars as an objc.ID.
-func KSKStartTermChars() objc.ID { return purego.CFConstant(raw.KSKStartTermChars()) }
+// KSKStartTermChars returns the value of the constant kSKStartTermChars.
+func KSKStartTermChars() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSKStartTermChars"))) }
 
-// KSKEndTermChars returns the value of the CoreFoundation reference constant kSKEndTermChars as an objc.ID.
-func KSKEndTermChars() objc.ID { return purego.CFConstant(raw.KSKEndTermChars()) }
+// KSKEndTermChars returns the value of the constant kSKEndTermChars.
+func KSKEndTermChars() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSKEndTermChars"))) }
 
-// KSKLanguageTypes returns the value of the CoreFoundation reference constant kSKLanguageTypes as an objc.ID.
-func KSKLanguageTypes() objc.ID { return purego.CFConstant(raw.KSKLanguageTypes()) }
+// KSKLanguageTypes returns the value of the constant kSKLanguageTypes.
+func KSKLanguageTypes() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSKLanguageTypes"))) }

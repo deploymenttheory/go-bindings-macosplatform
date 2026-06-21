@@ -5,1951 +5,2432 @@
 package security
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/security"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KSecPropertyKeyType returns the value of the CoreFoundation reference constant kSecPropertyKeyType as an objc.ID.
-func KSecPropertyKeyType() objc.ID { return purego.CFConstant(raw.KSecPropertyKeyType()) }
+// KSecPropertyKeyType returns the value of the constant kSecPropertyKeyType.
+func KSecPropertyKeyType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyKeyType")))
+}
 
-// KSecPropertyKeyLabel returns the value of the CoreFoundation reference constant kSecPropertyKeyLabel as an objc.ID.
-func KSecPropertyKeyLabel() objc.ID { return purego.CFConstant(raw.KSecPropertyKeyLabel()) }
+// KSecPropertyKeyLabel returns the value of the constant kSecPropertyKeyLabel.
+func KSecPropertyKeyLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyKeyLabel")))
+}
 
-// KSecPropertyKeyLocalizedLabel returns the value of the CoreFoundation reference constant kSecPropertyKeyLocalizedLabel as an objc.ID.
-func KSecPropertyKeyLocalizedLabel() objc.ID {
-	return purego.CFConstant(raw.KSecPropertyKeyLocalizedLabel())
+// KSecPropertyKeyLocalizedLabel returns the value of the constant kSecPropertyKeyLocalizedLabel.
+func KSecPropertyKeyLocalizedLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyKeyLocalizedLabel")))
 }
 
-// KSecPropertyKeyValue returns the value of the CoreFoundation reference constant kSecPropertyKeyValue as an objc.ID.
-func KSecPropertyKeyValue() objc.ID { return purego.CFConstant(raw.KSecPropertyKeyValue()) }
+// KSecPropertyKeyValue returns the value of the constant kSecPropertyKeyValue.
+func KSecPropertyKeyValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyKeyValue")))
+}
 
-// @enum kSecPropertyType @abstract Public Constants for property list values returned by SecCertificateCopyValues @discussion Note that kSecPropertyTypeTitle and kSecPropertyTypeError are defined in SecTrust.h
-// KSecPropertyTypeWarning returns the value of the CoreFoundation reference constant kSecPropertyTypeWarning as an objc.ID.
-func KSecPropertyTypeWarning() objc.ID { return purego.CFConstant(raw.KSecPropertyTypeWarning()) }
+// Public Constants for property list values returned by SecCertificateCopyValues Note that kSecPropertyTypeTitle and kSecPropertyTypeError are defined in SecTrust.h
+// KSecPropertyTypeWarning returns the value of the constant kSecPropertyTypeWarning.
+func KSecPropertyTypeWarning() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyTypeWarning")))
+}
 
-// KSecPropertyTypeSuccess returns the value of the CoreFoundation reference constant kSecPropertyTypeSuccess as an objc.ID.
-func KSecPropertyTypeSuccess() objc.ID { return purego.CFConstant(raw.KSecPropertyTypeSuccess()) }
+// KSecPropertyTypeSuccess returns the value of the constant kSecPropertyTypeSuccess.
+func KSecPropertyTypeSuccess() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyTypeSuccess")))
+}
 
-// KSecPropertyTypeSection returns the value of the CoreFoundation reference constant kSecPropertyTypeSection as an objc.ID.
-func KSecPropertyTypeSection() objc.ID { return purego.CFConstant(raw.KSecPropertyTypeSection()) }
+// KSecPropertyTypeSection returns the value of the constant kSecPropertyTypeSection.
+func KSecPropertyTypeSection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyTypeSection")))
+}
 
-// KSecPropertyTypeData returns the value of the CoreFoundation reference constant kSecPropertyTypeData as an objc.ID.
-func KSecPropertyTypeData() objc.ID { return purego.CFConstant(raw.KSecPropertyTypeData()) }
+// KSecPropertyTypeData returns the value of the constant kSecPropertyTypeData.
+func KSecPropertyTypeData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyTypeData")))
+}
 
-// KSecPropertyTypeString returns the value of the CoreFoundation reference constant kSecPropertyTypeString as an objc.ID.
-func KSecPropertyTypeString() objc.ID { return purego.CFConstant(raw.KSecPropertyTypeString()) }
+// KSecPropertyTypeString returns the value of the constant kSecPropertyTypeString.
+func KSecPropertyTypeString() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyTypeString")))
+}
 
-// KSecPropertyTypeURL returns the value of the CoreFoundation reference constant kSecPropertyTypeURL as an objc.ID.
-func KSecPropertyTypeURL() objc.ID { return purego.CFConstant(raw.KSecPropertyTypeURL()) }
+// KSecPropertyTypeURL returns the value of the constant kSecPropertyTypeURL.
+func KSecPropertyTypeURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyTypeURL")))
+}
 
-// KSecPropertyTypeDate returns the value of the CoreFoundation reference constant kSecPropertyTypeDate as an objc.ID.
-func KSecPropertyTypeDate() objc.ID { return purego.CFConstant(raw.KSecPropertyTypeDate()) }
+// KSecPropertyTypeDate returns the value of the constant kSecPropertyTypeDate.
+func KSecPropertyTypeDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyTypeDate")))
+}
 
-// KSecPropertyTypeArray returns the value of the CoreFoundation reference constant kSecPropertyTypeArray as an objc.ID.
-func KSecPropertyTypeArray() objc.ID { return purego.CFConstant(raw.KSecPropertyTypeArray()) }
+// KSecPropertyTypeArray returns the value of the constant kSecPropertyTypeArray.
+func KSecPropertyTypeArray() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyTypeArray")))
+}
 
-// KSecPropertyTypeNumber returns the value of the CoreFoundation reference constant kSecPropertyTypeNumber as an objc.ID.
-func KSecPropertyTypeNumber() objc.ID { return purego.CFConstant(raw.KSecPropertyTypeNumber()) }
+// KSecPropertyTypeNumber returns the value of the constant kSecPropertyTypeNumber.
+func KSecPropertyTypeNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyTypeNumber")))
+}
 
-// @const kSecIdentityDomainDefault The system-wide default identity.
-// KSecIdentityDomainDefault returns the value of the CoreFoundation reference constant kSecIdentityDomainDefault as an objc.ID.
-func KSecIdentityDomainDefault() objc.ID { return purego.CFConstant(raw.KSecIdentityDomainDefault()) }
+// KSecIdentityDomainDefault returns the value of the constant kSecIdentityDomainDefault.
+func KSecIdentityDomainDefault() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecIdentityDomainDefault")))
+}
 
-// @const kSecIdentityDomainKerberosKDC Kerberos KDC identity.
-// KSecIdentityDomainKerberosKDC returns the value of the CoreFoundation reference constant kSecIdentityDomainKerberosKDC as an objc.ID.
-func KSecIdentityDomainKerberosKDC() objc.ID {
-	return purego.CFConstant(raw.KSecIdentityDomainKerberosKDC())
+// KSecIdentityDomainKerberosKDC returns the value of the constant kSecIdentityDomainKerberosKDC.
+func KSecIdentityDomainKerberosKDC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecIdentityDomainKerberosKDC")))
 }
 
-// @enum Class Key Constant @discussion Predefined key constant used to get or set item class values in a dictionary. Its value is one of the constants defined in the Value Constants for kSecClass. @constant kSecClass Specifies a dictionary key whose value is the item's class code.  You use this key to get or set a value of type CFTypeRef that contains the item class code.
-// KSecClass returns the value of the CoreFoundation reference constant kSecClass as an objc.ID.
-func KSecClass() objc.ID { return purego.CFConstant(raw.KSecClass()) }
+// Predefined key constant used to get or set item class values in a dictionary. Its value is one of the constants defined in the Value Constants for kSecClass.
+// KSecClass returns the value of the constant kSecClass.
+func KSecClass() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecClass"))) }
 
-// @enum Class Value Constants @discussion Predefined item class constants used to get or set values in a dictionary. The kSecClass constant is the key and its value is one of the constants defined here. Note: on Mac OS X 10.6, only items of class kSecClassInternetPassword are supported. @constant kSecClassInternetPassword Specifies Internet password items. @constant kSecClassGenericPassword Specifies generic password items. @constant kSecClassCertificate Specifies certificate items. @constant kSecClassKey Specifies key items. @constant kSecClassIdentity Specifies identity items.
-// KSecClassInternetPassword returns the value of the CoreFoundation reference constant kSecClassInternetPassword as an objc.ID.
-func KSecClassInternetPassword() objc.ID { return purego.CFConstant(raw.KSecClassInternetPassword()) }
+// Predefined item class constants used to get or set values in a dictionary. The kSecClass constant is the key and its value is one of the constants defined here. Note: on Mac OS X 10.6, only items of class kSecClassInternetPassword are supported.
+// KSecClassInternetPassword returns the value of the constant kSecClassInternetPassword.
+func KSecClassInternetPassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecClassInternetPassword")))
+}
 
-// KSecClassGenericPassword returns the value of the CoreFoundation reference constant kSecClassGenericPassword as an objc.ID.
-func KSecClassGenericPassword() objc.ID { return purego.CFConstant(raw.KSecClassGenericPassword()) }
+// KSecClassGenericPassword returns the value of the constant kSecClassGenericPassword.
+func KSecClassGenericPassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecClassGenericPassword")))
+}
 
-// KSecClassCertificate returns the value of the CoreFoundation reference constant kSecClassCertificate as an objc.ID.
-func KSecClassCertificate() objc.ID { return purego.CFConstant(raw.KSecClassCertificate()) }
+// KSecClassCertificate returns the value of the constant kSecClassCertificate.
+func KSecClassCertificate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecClassCertificate")))
+}
 
-// KSecClassKey returns the value of the CoreFoundation reference constant kSecClassKey as an objc.ID.
-func KSecClassKey() objc.ID { return purego.CFConstant(raw.KSecClassKey()) }
+// KSecClassKey returns the value of the constant kSecClassKey.
+func KSecClassKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecClassKey"))) }
 
-// KSecClassIdentity returns the value of the CoreFoundation reference constant kSecClassIdentity as an objc.ID.
-func KSecClassIdentity() objc.ID { return purego.CFConstant(raw.KSecClassIdentity()) }
+// KSecClassIdentity returns the value of the constant kSecClassIdentity.
+func KSecClassIdentity() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecClassIdentity"))) }
 
-// @enum Attribute Key Constants @discussion Predefined item attribute keys used to get or set values in a dictionary. Not all attributes apply to each item class. The table below lists the currently defined attributes for each item class: kSecClassGenericPassword item attributes: kSecAttrAccess (macOS only) kSecAttrAccessControl kSecAttrAccessGroup (iOS; also macOS if kSecAttrSynchronizable and/or kSecUseDataProtectionKeychain set) kSecAttrAccessible (iOS; also macOS if kSecAttrSynchronizable and/or kSecUseDataProtectionKeychain set) kSecAttrCreationDate kSecAttrModificationDate kSecAttrDescription kSecAttrComment kSecAttrCreator kSecAttrType kSecAttrLabel kSecAttrIsInvisible kSecAttrIsNegative kSecAttrAccount kSecAttrService kSecAttrGeneric kSecAttrSynchronizable kSecClassInternetPassword item attributes: kSecAttrAccess (macOS only) kSecAttrAccessControl kSecAttrAccessGroup (iOS; also macOS if kSecAttrSynchronizable and/or kSecUseDataProtectionKeychain set) kSecAttrAccessible (iOS; also macOS if kSecAttrSynchronizable and/or kSecUseDataProtectionKeychain set) kSecAttrCreationDate kSecAttrModificationDate kSecAttrDescription kSecAttrComment kSecAttrCreator kSecAttrType kSecAttrLabel kSecAttrIsInvisible kSecAttrIsNegative kSecAttrAccount kSecAttrSecurityDomain kSecAttrServer kSecAttrProtocol kSecAttrAuthenticationType kSecAttrPort kSecAttrPath kSecAttrSynchronizable kSecClassCertificate item attributes: kSecAttrAccessible    (iOS only) kSecAttrAccessControl (iOS only) kSecAttrAccessGroup   (iOS only) kSecAttrCertificateType kSecAttrCertificateEncoding kSecAttrLabel kSecAttrSubject kSecAttrIssuer kSecAttrSerialNumber kSecAttrSubjectKeyID kSecAttrPublicKeyHash kSecAttrSynchronizable kSecClassKey item attributes: kSecAttrAccess (macOS only) kSecAttrAccessControl kSecAttrAccessGroup (iOS; also macOS if kSecAttrSynchronizable and/or kSecUseDataProtectionKeychain set) kSecAttrAccessible (iOS; also macOS if kSecAttrSynchronizable and/or kSecUseDataProtectionKeychain set) kSecAttrKeyClass kSecAttrLabel kSecAttrApplicationLabel kSecAttrIsPermanent kSecAttrApplicationTag kSecAttrKeyType kSecAttrPRF    (macOS only) kSecAttrSalt   (macOS only) kSecAttrRounds (macOS only) kSecAttrKeySizeInBits kSecAttrEffectiveKeySize kSecAttrCanEncrypt kSecAttrCanDecrypt kSecAttrCanDerive kSecAttrCanSign kSecAttrCanVerify kSecAttrCanWrap kSecAttrCanUnwrap kSecAttrSynchronizable Note that the attributes kSecAttrCan* describe attributes of the key itself at relatively high level. Some of these attributes are mathematical -- for example, a DSA key cannot encrypt. Others are key-level policy issues -- for example, it is good cryptographic hygiene to use an RSA key either for encryption or signing but not both. Compare these to the certificate-level policy values in SecPolicy.h. kSecClassIdentity item attributes: Since an identity is the combination of a private key and a certificate, this class shares attributes of both kSecClassKey and kSecClassCertificate. @constant kSecAttrAccessible Specifies a dictionary key whose value indicates when your application needs access to an item's data.  You should choose the most restrictive option that meets your application's needs to allow the system to protect that item in the best way possible. See the "kSecAttrAccessible Value Constants" section for a list of values which can be specified. IMPORTANT: This attribute is currently not supported for macOS keychain items, unless the kSecAttrSynchronizable attribute is also present. If both attributes are specified on either macOS or iOS, the value for the kSecAttrAccessible key may only be one whose name does not end with "ThisDeviceOnly", as those cannot sync to another device. @constant kSecAttrAccessControl Specifies a dictionary key whose value is SecAccessControl instance which contains access control conditions for item. IMPORTANT: This attribute is mutually exclusive with kSecAttrAccess attribute. @constant kSecAttrAccess Specifies a dictionary key whose value is a SecAccessRef describing the access control settings for this item. This key is available on macOS only. @constant kSecAttrAccessGroup Specifies a dictionary key whose value is a CFStringRef indicating which access group a item is in.  The access groups that a particular application has membership in are determined by two entitlements for that application.  The application-identifier entitlement contains the application's single access group, unless there is a keychain-access-groups entitlement present.  The latter has as its value a list of access groups; the first item in this list is the default access group. Unless a specific access group is provided as the value of kSecAttrAccessGroup when SecItemAdd is called, new items are created in the application's default access group.  Specifying this attribute in SecItemCopyMatching, SecItemUpdate, or SecItemDelete calls limits the search to the specified access group (of which the calling application must be a member to obtain matching results.)  To share keychain items between multiple applications, each application must have a common group listed in its keychain-access-groups entitlement, and each must specify this shared access group name as the value for the kSecAttrAccessGroup key in the dictionary passed to SecItem functions. @constant kSecAttrSynchronizable Specifies a dictionary key whose value is a CFBooleanRef indicating whether the item in question can be synchronized. To add a new item which can be synced to other devices, or to obtain synchronizable results from a query, supply this key with a value of kCFBooleanTrue. If the key is not supplied, or has a value of kCFBooleanFalse, then no synchronizable items will be added or returned. A predefined value, kSecAttrSynchronizableAny, may be provided instead of kCFBooleanTrue if both synchronizable and non-synchronizable results are desired. IMPORTANT: Specifying the kSecAttrSynchronizable key has several caveats: - Updating or deleting items using the kSecAttrSynchronizable key will affect all copies of the item, not just the one on your local device. Be sure that it makes sense to use the same password on all devices before deciding to make a password synchronizable. - Starting in iOS 14, macOS 11, and watchOS 7, the keychain synchronizes passwords, certificates, and cryptographic keys. Earlier OS versions synchronize only passwords. - Items stored or obtained using the kSecAttrSynchronizable key cannot specify SecAccessRef-based access control with kSecAttrAccess. If a password is intended to be shared between multiple applications, the kSecAttrAccessGroup key must be specified, and each application using this password must have a 'keychain-access-groups' entitlement with the specified access group value. - Items stored or obtained using the kSecAttrSynchronizable key may not also specify a kSecAttrAccessible value which is incompatible with syncing (namely, those whose names end with "ThisDeviceOnly".) - On macOS, when kSecAttrSynchronizable is set to true, returning references is supported only for Certificate, Key or Identity items. - Persistent references to synchronizable items should be avoided; while they may work locally, they cannot be moved between devices, and may not resolve if the item is modified on some other device. - When specifying a query that uses the kSecAttrSynchronizable key, search keys are limited to the item's class and attributes. The only search constant which may be used is kSecMatchLimit; other constants using the kSecMatch prefix are not supported at this time. @constant kSecAttrSynchronizableAny Specifies that both synchronizable and non-synchronizable results should be returned from this query. This may be used as a value for the kSecAttrSynchronizable dictionary key in a call to SecItemCopyMatching, SecItemUpdate, or SecItemDelete. @constant kSecAttrCreationDate (read-only) Specifies a dictionary key whose value is the item's creation date. You use this key to get a value of type CFDateRef that represents the date the item was created. @constant kSecAttrModificationDate (read-only) Specifies a dictionary key whose value is the item's modification date. You use this key to get a value of type CFDateRef that represents the last time the item was updated. @constant kSecAttrDescription Specifies a dictionary key whose value is the item's description attribute. You use this key to set or get a value of type CFStringRef that represents a user-visible string describing this particular kind of item (e.g., "disk image password"). @constant kSecAttrComment Specifies a dictionary key whose value is the item's comment attribute. You use this key to set or get a value of type CFStringRef containing the user-editable comment for this item. @constant kSecAttrCreator Specifies a dictionary key whose value is the item's creator attribute. You use this key to set or get a value of type CFNumberRef that represents the item's creator. This number is the unsigned integer representation of a four-character code (e.g., 'aCrt'). @constant kSecAttrType Specifies a dictionary key whose value is the item's type attribute. You use this key to set or get a value of type CFNumberRef that represents the item's type. This number is the unsigned integer representation of a four-character code (e.g., 'aTyp'). @constant kSecAttrLabel Specifies a dictionary key whose value is the item's label attribute. You use this key to set or get a value of type CFStringRef containing the user-visible label for this item. @constant kSecAttrIsInvisible Specifies a dictionary key whose value is the item's invisible attribute. You use this key to set or get a value of type CFBooleanRef that indicates whether the item is invisible (i.e., should not be displayed.) @constant kSecAttrIsNegative Specifies a dictionary key whose value is the item's negative attribute. You use this key to set or get a value of type CFBooleanRef that indicates whether there is a valid password associated with this keychain item. This is useful if your application doesn't want a password for some particular service to be stored in the keychain, but prefers that it always be entered by the user. @constant kSecAttrAccount Specifies a dictionary key whose value is the item's account attribute. You use this key to set or get a CFStringRef that contains an account name. (Items of class kSecClassGenericPassword, kSecClassInternetPassword have this attribute.) @constant kSecAttrService Specifies a dictionary key whose value is the item's service attribute. You use this key to set or get a CFStringRef that represents the service associated with this item. (Items of class kSecClassGenericPassword have this attribute.) @constant kSecAttrGeneric Specifies a dictionary key whose value is the item's generic attribute. You use this key to set or get a value of CFDataRef that contains a user-defined attribute. (Items of class kSecClassGenericPassword have this attribute.) @constant kSecAttrSecurityDomain Specifies a dictionary key whose value is the item's security domain attribute. You use this key to set or get a CFStringRef value that represents the Internet security domain. (Items of class kSecClassInternetPassword have this attribute.) @constant kSecAttrServer Specifies a dictionary key whose value is the item's server attribute. You use this key to set or get a value of type CFStringRef that contains the server's domain name or IP address. (Items of class kSecClassInternetPassword have this attribute.) @constant kSecAttrProtocol Specifies a dictionary key whose value is the item's protocol attribute. You use this key to set or get a value of type CFNumberRef that denotes the protocol for this item (see the SecProtocolType enum in SecKeychainItem.h). (Items of class kSecClassInternetPassword have this attribute.) @constant kSecAttrAuthenticationType Specifies a dictionary key whose value is the item's authentication type attribute. You use this key to set or get a value of type CFNumberRef that denotes the authentication scheme for this item (see the kSecAttrAuthenticationType value constants below). @constant kSecAttrPort Specifies a dictionary key whose value is the item's port attribute. You use this key to set or get a CFNumberRef value that represents an Internet port number. (Items of class kSecClassInternetPassword have this attribute.) @constant kSecAttrPath Specifies a dictionary key whose value is the item's path attribute, typically this is the path component of the URL.  You use this key to set or get a CFStringRef value that represents a path. (Items of class kSecClassInternetPassword have this attribute.) @constant kSecAttrSubject (read-only) Specifies a dictionary key whose value is the item's subject. You use this key to get a value of type CFDataRef that contains the X.500 subject name of a certificate. (Items of class kSecClassCertificate have this attribute.) @constant kSecAttrIssuer (read-only) Specifies a dictionary key whose value is the item's issuer. You use this key to get a value of type CFDataRef that contains the X.500 issuer name of a certificate. (Items of class kSecClassCertificate have this attribute.) @constant kSecAttrSerialNumber (read-only) Specifies a dictionary key whose value is the item's serial number.  You use this key to get a value of type CFDataRef that contains the serial number data of a certificate. (Items of class kSecClassCertificate have this attribute.) @constant kSecAttrSubjectKeyID (read-only) Specifies a dictionary key whose value is the item's subject key ID. You use this key to get a value of type CFDataRef that contains the subject key ID of a certificate. (Items of class kSecClassCertificate have this attribute.) @constant kSecAttrPublicKeyHash (read-only) Specifies a dictionary key whose value is the item's public key hash. You use this key to get a value of type CFDataRef that contains the hash of a certificate's public key. (Items of class kSecClassCertificate have this attribute.) @constant kSecAttrCertificateType (read-only) Specifies a dictionary key whose value is the item's certificate type. You use this key to get a value of type CFNumberRef that denotes the certificate type (On iOS, currently the value of this attribute must be equal to the version of the X509 certificate.  So, 1 for v1, 2 for v2, and 3 for v3 certificates). (On macOS, see the CSSM_CERT_TYPE enum in cssmtype.h). Only items of class kSecClassCertificate have this attribute. @constant kSecAttrCertificateEncoding (read-only) Specifies a dictionary key whose value is the item's certificate encoding. You use this key to get a value of type CFNumberRef that denotes the certificate encoding (On iOS, currently only the value 3 meaning kSecAttrCertificateEncodingDER is supported). On macOS, see the CSSM_CERT_ENCODING enum in cssmtype.h. Only items of class kSecClassCertificate have this attribute. @constant kSecAttrKeyClass (read only) Specifies a dictionary key whose value is one of kSecAttrKeyClassPublic, kSecAttrKeyClassPrivate or kSecAttrKeyClassSymmetric. @constant kSecAttrApplicationLabel Specifies a dictionary key whose value is the key's application label attribute. This is different from the kSecAttrLabel (which is intended to be human-readable). This attribute is used to look up a key programmatically; in particular, for keys of class kSecAttrKeyClassPublic and kSecAttrKeyClassPrivate, the value of this attribute is the hash of the public key. This item is a type of CFDataRef. Legacy keys may contain a UUID in this field as a CFStringRef. @constant kSecAttrIsPermanent Specifies a dictionary key whose value is a CFBooleanRef indicating whether the key in question will be stored permanently. @constant kSecAttrIsSensitive Specifies a dictionary key whose value is a CFBooleanRef indicating that the key in question can only be exported in a wrapped (encrypted) format. macOS only. @constant kSecAttrIsExtractable Specifies a dictionary key whose value is a CFBooleanRef indicating whether the key in question can be exported from its keychain container. macOS only. @constant kSecAttrApplicationTag Specifies a dictionary key whose value is a CFDataRef containing private tag data. @constant kSecAttrKeyType Specifies a dictionary key whose value is a CFNumberRef indicating the algorithm associated with this key (On iOS, currently only the value 42 is supported, alternatively you can use kSecAttrKeyTypeRSA). (On macOS, see the CSSM_ALGORITHMS enum in cssmtype.h). @constant kSecAttrPRF Specifies a dictionary key whose value is the PRF (pseudo-random function) for this key (see "kSecAttrPRF Value Constants".) macOS only. @constant kSecAttrSalt Specifies a dictionary key whose value is a CFData containing the salt to use for this key. macOS only. @constant kSecAttrRounds Specifies a dictionary key whose value is the number of rounds for the pseudo-random function specified by kSecAttrPRF. macOS only. @constant kSecAttrKeySizeInBits Specifies a dictionary key whose value is a CFNumberRef indicating the number of bits in this key. @constant kSecAttrEffectiveKeySize Specifies a dictionary key whose value is a CFNumberRef indicating the effective number of bits in this key. For example, a DES key has a kSecAttrKeySizeInBits of 64, but a kSecAttrEffectiveKeySize of 56 bits. @constant kSecAttrCanEncrypt Specifies a dictionary key whole value is a CFBooleanRef indicating whether the key in question can be used to encrypt data. @constant kSecAttrCanDecrypt Specifies a dictionary key whose value is a CFBooleanRef indicating whether the key in question can be used to decrypt data. @constant kSecAttrCanDerive Specifies a dictionary key whole value is a CFBooleanRef indicating whether the key in question can be used to derive another key. @constant kSecAttrCanSign Specifies a dictionary key whole value is a CFBooleanRef indicating whether the key in question can be used to create a digital signature. @constant kSecAttrCanVerify Specifies a dictionary key whole value is a CFBooleanRef indicating whether the key in question can be used to verify a digital signature. @constant kSecAttrCanWrap Specifies a dictionary key whole value is a CFBooleanRef indicating whether the key in question can be used to wrap another key. @constant kSecAttrCanUnwrap Specifies a dictionary key whole value is a CFBooleanRef indicating whether the key in question can be used to unwrap another key. @constant kSecAttrSyncViewHint Specifies a dictionary key whose value is a CFStringRef. This value is part of the primary key of each item, and can be used to help distiguish Sync Views when defining their queries. iOS and sychronizable items only. @constant kSecAttrTokenID Specifies a dictionary key whose presence indicates that item is backed by external token. Value of this attribute is CFStringRef uniquely identifying containing token. When this attribute is not present, item is stored in internal keychain database. Note that once item is created, this attribute cannot be changed - in other words it is not possible to migrate existing items to, from or between tokens. Currently the only available value for this attribute is kSecAttrTokenIDSecureEnclave, which indicates that item (private key) is backed by device's Secure Enclave.
-// KSecAttrAccessible returns the value of the CoreFoundation reference constant kSecAttrAccessible as an objc.ID.
-func KSecAttrAccessible() objc.ID { return purego.CFConstant(raw.KSecAttrAccessible()) }
+// Predefined item attribute keys used to get or set values in a dictionary. Not all attributes apply to each item class. The table below lists the currently defined attributes for each item class: kSecClassGenericPassword item attributes: kSecAttrAccess (macOS only) kSecAttrAccessControl kSecAttrAccessGroup (iOS; also macOS if kSecAttrSynchronizable and/or kSecUseDataProtectionKeychain set) kSecAttrAccessible (iOS; also macOS if kSecAttrSynchronizable and/or kSecUseDataProtectionKeychain set) kSecAttrCreationDate kSecAttrModificationDate kSecAttrDescription kSecAttrComment kSecAttrCreator kSecAttrType kSecAttrLabel kSecAttrIsInvisible kSecAttrIsNegative kSecAttrAccount kSecAttrService kSecAttrGeneric kSecAttrSynchronizable kSecClassInternetPassword item attributes: kSecAttrAccess (macOS only) kSecAttrAccessControl kSecAttrAccessGroup (iOS; also macOS if kSecAttrSynchronizable and/or kSecUseDataProtectionKeychain set) kSecAttrAccessible (iOS; also macOS if kSecAttrSynchronizable and/or kSecUseDataProtectionKeychain set) kSecAttrCreationDate kSecAttrModificationDate kSecAttrDescription kSecAttrComment kSecAttrCreator kSecAttrType kSecAttrLabel kSecAttrIsInvisible kSecAttrIsNegative kSecAttrAccount kSecAttrSecurityDomain kSecAttrServer kSecAttrProtocol kSecAttrAuthenticationType kSecAttrPort kSecAttrPath kSecAttrSynchronizable kSecClassCertificate item attributes: kSecAttrAccessible    (iOS only) kSecAttrAccessControl (iOS only) kSecAttrAccessGroup   (iOS only) kSecAttrCertificateType kSecAttrCertificateEncoding kSecAttrLabel kSecAttrSubject kSecAttrIssuer kSecAttrSerialNumber kSecAttrSubjectKeyID kSecAttrPublicKeyHash kSecAttrSynchronizable kSecClassKey item attributes: kSecAttrAccess (macOS only) kSecAttrAccessControl kSecAttrAccessGroup (iOS; also macOS if kSecAttrSynchronizable and/or kSecUseDataProtectionKeychain set) kSecAttrAccessible (iOS; also macOS if kSecAttrSynchronizable and/or kSecUseDataProtectionKeychain set) kSecAttrKeyClass kSecAttrLabel kSecAttrApplicationLabel kSecAttrIsPermanent kSecAttrApplicationTag kSecAttrKeyType kSecAttrPRF    (macOS only) kSecAttrSalt   (macOS only) kSecAttrRounds (macOS only) kSecAttrKeySizeInBits kSecAttrEffectiveKeySize kSecAttrCanEncrypt kSecAttrCanDecrypt kSecAttrCanDerive kSecAttrCanSign kSecAttrCanVerify kSecAttrCanWrap kSecAttrCanUnwrap kSecAttrSynchronizable Note that the attributes kSecAttrCan* describe attributes of the key itself at relatively high level. Some of these attributes are mathematical -- for example, a DSA key cannot encrypt. Others are key-level policy issues -- for example, it is good cryptographic hygiene to use an RSA key either for encryption or signing but not both. Compare these to the certificate-level policy values in SecPolicy.h. kSecClassIdentity item attributes: Since an identity is the combination of a private key and a certificate, this class shares attributes of both kSecClassKey and kSecClassCertificate.
+// KSecAttrAccessible returns the value of the constant kSecAttrAccessible.
+func KSecAttrAccessible() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAccessible")))
+}
 
-// KSecAttrAccess returns the value of the CoreFoundation reference constant kSecAttrAccess as an objc.ID.
-func KSecAttrAccess() objc.ID { return purego.CFConstant(raw.KSecAttrAccess()) }
+// KSecAttrAccess returns the value of the constant kSecAttrAccess.
+func KSecAttrAccess() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAccess"))) }
 
-// KSecAttrAccessControl returns the value of the CoreFoundation reference constant kSecAttrAccessControl as an objc.ID.
-func KSecAttrAccessControl() objc.ID { return purego.CFConstant(raw.KSecAttrAccessControl()) }
+// KSecAttrAccessControl returns the value of the constant kSecAttrAccessControl.
+func KSecAttrAccessControl() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAccessControl")))
+}
 
-// KSecAttrAccessGroup returns the value of the CoreFoundation reference constant kSecAttrAccessGroup as an objc.ID.
-func KSecAttrAccessGroup() objc.ID { return purego.CFConstant(raw.KSecAttrAccessGroup()) }
+// KSecAttrAccessGroup returns the value of the constant kSecAttrAccessGroup.
+func KSecAttrAccessGroup() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAccessGroup")))
+}
 
-// KSecAttrSynchronizable returns the value of the CoreFoundation reference constant kSecAttrSynchronizable as an objc.ID.
-func KSecAttrSynchronizable() objc.ID { return purego.CFConstant(raw.KSecAttrSynchronizable()) }
+// KSecAttrSynchronizable returns the value of the constant kSecAttrSynchronizable.
+func KSecAttrSynchronizable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrSynchronizable")))
+}
 
-// KSecAttrSynchronizableAny returns the value of the CoreFoundation reference constant kSecAttrSynchronizableAny as an objc.ID.
-func KSecAttrSynchronizableAny() objc.ID { return purego.CFConstant(raw.KSecAttrSynchronizableAny()) }
+// KSecAttrSynchronizableAny returns the value of the constant kSecAttrSynchronizableAny.
+func KSecAttrSynchronizableAny() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrSynchronizableAny")))
+}
 
-// KSecAttrCreationDate returns the value of the CoreFoundation reference constant kSecAttrCreationDate as an objc.ID.
-func KSecAttrCreationDate() objc.ID { return purego.CFConstant(raw.KSecAttrCreationDate()) }
+// KSecAttrCreationDate returns the value of the constant kSecAttrCreationDate.
+func KSecAttrCreationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrCreationDate")))
+}
 
-// KSecAttrModificationDate returns the value of the CoreFoundation reference constant kSecAttrModificationDate as an objc.ID.
-func KSecAttrModificationDate() objc.ID { return purego.CFConstant(raw.KSecAttrModificationDate()) }
+// KSecAttrModificationDate returns the value of the constant kSecAttrModificationDate.
+func KSecAttrModificationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrModificationDate")))
+}
 
-// KSecAttrDescription returns the value of the CoreFoundation reference constant kSecAttrDescription as an objc.ID.
-func KSecAttrDescription() objc.ID { return purego.CFConstant(raw.KSecAttrDescription()) }
+// KSecAttrDescription returns the value of the constant kSecAttrDescription.
+func KSecAttrDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrDescription")))
+}
 
-// KSecAttrComment returns the value of the CoreFoundation reference constant kSecAttrComment as an objc.ID.
-func KSecAttrComment() objc.ID { return purego.CFConstant(raw.KSecAttrComment()) }
+// KSecAttrComment returns the value of the constant kSecAttrComment.
+func KSecAttrComment() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrComment"))) }
 
-// KSecAttrCreator returns the value of the CoreFoundation reference constant kSecAttrCreator as an objc.ID.
-func KSecAttrCreator() objc.ID { return purego.CFConstant(raw.KSecAttrCreator()) }
+// KSecAttrCreator returns the value of the constant kSecAttrCreator.
+func KSecAttrCreator() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrCreator"))) }
 
-// KSecAttrType returns the value of the CoreFoundation reference constant kSecAttrType as an objc.ID.
-func KSecAttrType() objc.ID { return purego.CFConstant(raw.KSecAttrType()) }
+// KSecAttrType returns the value of the constant kSecAttrType.
+func KSecAttrType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrType"))) }
 
-// KSecAttrLabel returns the value of the CoreFoundation reference constant kSecAttrLabel as an objc.ID.
-func KSecAttrLabel() objc.ID { return purego.CFConstant(raw.KSecAttrLabel()) }
+// KSecAttrLabel returns the value of the constant kSecAttrLabel.
+func KSecAttrLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrLabel"))) }
 
-// KSecAttrIsInvisible returns the value of the CoreFoundation reference constant kSecAttrIsInvisible as an objc.ID.
-func KSecAttrIsInvisible() objc.ID { return purego.CFConstant(raw.KSecAttrIsInvisible()) }
+// KSecAttrIsInvisible returns the value of the constant kSecAttrIsInvisible.
+func KSecAttrIsInvisible() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrIsInvisible")))
+}
 
-// KSecAttrIsNegative returns the value of the CoreFoundation reference constant kSecAttrIsNegative as an objc.ID.
-func KSecAttrIsNegative() objc.ID { return purego.CFConstant(raw.KSecAttrIsNegative()) }
+// KSecAttrIsNegative returns the value of the constant kSecAttrIsNegative.
+func KSecAttrIsNegative() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrIsNegative")))
+}
 
-// KSecAttrAccount returns the value of the CoreFoundation reference constant kSecAttrAccount as an objc.ID.
-func KSecAttrAccount() objc.ID { return purego.CFConstant(raw.KSecAttrAccount()) }
+// KSecAttrAccount returns the value of the constant kSecAttrAccount.
+func KSecAttrAccount() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAccount"))) }
 
-// KSecAttrService returns the value of the CoreFoundation reference constant kSecAttrService as an objc.ID.
-func KSecAttrService() objc.ID { return purego.CFConstant(raw.KSecAttrService()) }
+// KSecAttrService returns the value of the constant kSecAttrService.
+func KSecAttrService() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrService"))) }
 
-// KSecAttrGeneric returns the value of the CoreFoundation reference constant kSecAttrGeneric as an objc.ID.
-func KSecAttrGeneric() objc.ID { return purego.CFConstant(raw.KSecAttrGeneric()) }
+// KSecAttrGeneric returns the value of the constant kSecAttrGeneric.
+func KSecAttrGeneric() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrGeneric"))) }
 
-// KSecAttrSecurityDomain returns the value of the CoreFoundation reference constant kSecAttrSecurityDomain as an objc.ID.
-func KSecAttrSecurityDomain() objc.ID { return purego.CFConstant(raw.KSecAttrSecurityDomain()) }
+// KSecAttrSecurityDomain returns the value of the constant kSecAttrSecurityDomain.
+func KSecAttrSecurityDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrSecurityDomain")))
+}
 
-// KSecAttrServer returns the value of the CoreFoundation reference constant kSecAttrServer as an objc.ID.
-func KSecAttrServer() objc.ID { return purego.CFConstant(raw.KSecAttrServer()) }
+// KSecAttrServer returns the value of the constant kSecAttrServer.
+func KSecAttrServer() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrServer"))) }
 
-// KSecAttrProtocol returns the value of the CoreFoundation reference constant kSecAttrProtocol as an objc.ID.
-func KSecAttrProtocol() objc.ID { return purego.CFConstant(raw.KSecAttrProtocol()) }
+// KSecAttrProtocol returns the value of the constant kSecAttrProtocol.
+func KSecAttrProtocol() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocol"))) }
 
-// KSecAttrAuthenticationType returns the value of the CoreFoundation reference constant kSecAttrAuthenticationType as an objc.ID.
-func KSecAttrAuthenticationType() objc.ID { return purego.CFConstant(raw.KSecAttrAuthenticationType()) }
+// KSecAttrAuthenticationType returns the value of the constant kSecAttrAuthenticationType.
+func KSecAttrAuthenticationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAuthenticationType")))
+}
 
-// KSecAttrPort returns the value of the CoreFoundation reference constant kSecAttrPort as an objc.ID.
-func KSecAttrPort() objc.ID { return purego.CFConstant(raw.KSecAttrPort()) }
+// KSecAttrPort returns the value of the constant kSecAttrPort.
+func KSecAttrPort() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrPort"))) }
 
-// KSecAttrPath returns the value of the CoreFoundation reference constant kSecAttrPath as an objc.ID.
-func KSecAttrPath() objc.ID { return purego.CFConstant(raw.KSecAttrPath()) }
+// KSecAttrPath returns the value of the constant kSecAttrPath.
+func KSecAttrPath() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrPath"))) }
 
-// KSecAttrSubject returns the value of the CoreFoundation reference constant kSecAttrSubject as an objc.ID.
-func KSecAttrSubject() objc.ID { return purego.CFConstant(raw.KSecAttrSubject()) }
+// KSecAttrSubject returns the value of the constant kSecAttrSubject.
+func KSecAttrSubject() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrSubject"))) }
 
-// KSecAttrIssuer returns the value of the CoreFoundation reference constant kSecAttrIssuer as an objc.ID.
-func KSecAttrIssuer() objc.ID { return purego.CFConstant(raw.KSecAttrIssuer()) }
+// KSecAttrIssuer returns the value of the constant kSecAttrIssuer.
+func KSecAttrIssuer() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrIssuer"))) }
 
-// KSecAttrSerialNumber returns the value of the CoreFoundation reference constant kSecAttrSerialNumber as an objc.ID.
-func KSecAttrSerialNumber() objc.ID { return purego.CFConstant(raw.KSecAttrSerialNumber()) }
+// KSecAttrSerialNumber returns the value of the constant kSecAttrSerialNumber.
+func KSecAttrSerialNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrSerialNumber")))
+}
 
-// KSecAttrSubjectKeyID returns the value of the CoreFoundation reference constant kSecAttrSubjectKeyID as an objc.ID.
-func KSecAttrSubjectKeyID() objc.ID { return purego.CFConstant(raw.KSecAttrSubjectKeyID()) }
+// KSecAttrSubjectKeyID returns the value of the constant kSecAttrSubjectKeyID.
+func KSecAttrSubjectKeyID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrSubjectKeyID")))
+}
 
-// KSecAttrPublicKeyHash returns the value of the CoreFoundation reference constant kSecAttrPublicKeyHash as an objc.ID.
-func KSecAttrPublicKeyHash() objc.ID { return purego.CFConstant(raw.KSecAttrPublicKeyHash()) }
+// KSecAttrPublicKeyHash returns the value of the constant kSecAttrPublicKeyHash.
+func KSecAttrPublicKeyHash() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrPublicKeyHash")))
+}
 
-// KSecAttrCertificateType returns the value of the CoreFoundation reference constant kSecAttrCertificateType as an objc.ID.
-func KSecAttrCertificateType() objc.ID { return purego.CFConstant(raw.KSecAttrCertificateType()) }
+// KSecAttrCertificateType returns the value of the constant kSecAttrCertificateType.
+func KSecAttrCertificateType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrCertificateType")))
+}
 
-// KSecAttrCertificateEncoding returns the value of the CoreFoundation reference constant kSecAttrCertificateEncoding as an objc.ID.
-func KSecAttrCertificateEncoding() objc.ID {
-	return purego.CFConstant(raw.KSecAttrCertificateEncoding())
+// KSecAttrCertificateEncoding returns the value of the constant kSecAttrCertificateEncoding.
+func KSecAttrCertificateEncoding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrCertificateEncoding")))
 }
 
-// KSecAttrKeyClass returns the value of the CoreFoundation reference constant kSecAttrKeyClass as an objc.ID.
-func KSecAttrKeyClass() objc.ID { return purego.CFConstant(raw.KSecAttrKeyClass()) }
+// KSecAttrKeyClass returns the value of the constant kSecAttrKeyClass.
+func KSecAttrKeyClass() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyClass"))) }
 
-// KSecAttrApplicationLabel returns the value of the CoreFoundation reference constant kSecAttrApplicationLabel as an objc.ID.
-func KSecAttrApplicationLabel() objc.ID { return purego.CFConstant(raw.KSecAttrApplicationLabel()) }
+// KSecAttrApplicationLabel returns the value of the constant kSecAttrApplicationLabel.
+func KSecAttrApplicationLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrApplicationLabel")))
+}
 
-// KSecAttrIsPermanent returns the value of the CoreFoundation reference constant kSecAttrIsPermanent as an objc.ID.
-func KSecAttrIsPermanent() objc.ID { return purego.CFConstant(raw.KSecAttrIsPermanent()) }
+// KSecAttrIsPermanent returns the value of the constant kSecAttrIsPermanent.
+func KSecAttrIsPermanent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrIsPermanent")))
+}
 
-// KSecAttrIsSensitive returns the value of the CoreFoundation reference constant kSecAttrIsSensitive as an objc.ID.
-func KSecAttrIsSensitive() objc.ID { return purego.CFConstant(raw.KSecAttrIsSensitive()) }
+// KSecAttrIsSensitive returns the value of the constant kSecAttrIsSensitive.
+func KSecAttrIsSensitive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrIsSensitive")))
+}
 
-// KSecAttrIsExtractable returns the value of the CoreFoundation reference constant kSecAttrIsExtractable as an objc.ID.
-func KSecAttrIsExtractable() objc.ID { return purego.CFConstant(raw.KSecAttrIsExtractable()) }
+// KSecAttrIsExtractable returns the value of the constant kSecAttrIsExtractable.
+func KSecAttrIsExtractable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrIsExtractable")))
+}
 
-// KSecAttrApplicationTag returns the value of the CoreFoundation reference constant kSecAttrApplicationTag as an objc.ID.
-func KSecAttrApplicationTag() objc.ID { return purego.CFConstant(raw.KSecAttrApplicationTag()) }
+// KSecAttrApplicationTag returns the value of the constant kSecAttrApplicationTag.
+func KSecAttrApplicationTag() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrApplicationTag")))
+}
 
-// KSecAttrKeyType returns the value of the CoreFoundation reference constant kSecAttrKeyType as an objc.ID.
-func KSecAttrKeyType() objc.ID { return purego.CFConstant(raw.KSecAttrKeyType()) }
+// KSecAttrKeyType returns the value of the constant kSecAttrKeyType.
+func KSecAttrKeyType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyType"))) }
 
-// KSecAttrPRF returns the value of the CoreFoundation reference constant kSecAttrPRF as an objc.ID.
-func KSecAttrPRF() objc.ID { return purego.CFConstant(raw.KSecAttrPRF()) }
+// KSecAttrPRF returns the value of the constant kSecAttrPRF.
+func KSecAttrPRF() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrPRF"))) }
 
-// KSecAttrSalt returns the value of the CoreFoundation reference constant kSecAttrSalt as an objc.ID.
-func KSecAttrSalt() objc.ID { return purego.CFConstant(raw.KSecAttrSalt()) }
+// KSecAttrSalt returns the value of the constant kSecAttrSalt.
+func KSecAttrSalt() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrSalt"))) }
 
-// KSecAttrRounds returns the value of the CoreFoundation reference constant kSecAttrRounds as an objc.ID.
-func KSecAttrRounds() objc.ID { return purego.CFConstant(raw.KSecAttrRounds()) }
+// KSecAttrRounds returns the value of the constant kSecAttrRounds.
+func KSecAttrRounds() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrRounds"))) }
 
-// KSecAttrKeySizeInBits returns the value of the CoreFoundation reference constant kSecAttrKeySizeInBits as an objc.ID.
-func KSecAttrKeySizeInBits() objc.ID { return purego.CFConstant(raw.KSecAttrKeySizeInBits()) }
+// KSecAttrKeySizeInBits returns the value of the constant kSecAttrKeySizeInBits.
+func KSecAttrKeySizeInBits() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeySizeInBits")))
+}
 
-// KSecAttrEffectiveKeySize returns the value of the CoreFoundation reference constant kSecAttrEffectiveKeySize as an objc.ID.
-func KSecAttrEffectiveKeySize() objc.ID { return purego.CFConstant(raw.KSecAttrEffectiveKeySize()) }
+// KSecAttrEffectiveKeySize returns the value of the constant kSecAttrEffectiveKeySize.
+func KSecAttrEffectiveKeySize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrEffectiveKeySize")))
+}
 
-// KSecAttrCanEncrypt returns the value of the CoreFoundation reference constant kSecAttrCanEncrypt as an objc.ID.
-func KSecAttrCanEncrypt() objc.ID { return purego.CFConstant(raw.KSecAttrCanEncrypt()) }
+// KSecAttrCanEncrypt returns the value of the constant kSecAttrCanEncrypt.
+func KSecAttrCanEncrypt() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrCanEncrypt")))
+}
 
-// KSecAttrCanDecrypt returns the value of the CoreFoundation reference constant kSecAttrCanDecrypt as an objc.ID.
-func KSecAttrCanDecrypt() objc.ID { return purego.CFConstant(raw.KSecAttrCanDecrypt()) }
+// KSecAttrCanDecrypt returns the value of the constant kSecAttrCanDecrypt.
+func KSecAttrCanDecrypt() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrCanDecrypt")))
+}
 
-// KSecAttrCanDerive returns the value of the CoreFoundation reference constant kSecAttrCanDerive as an objc.ID.
-func KSecAttrCanDerive() objc.ID { return purego.CFConstant(raw.KSecAttrCanDerive()) }
+// KSecAttrCanDerive returns the value of the constant kSecAttrCanDerive.
+func KSecAttrCanDerive() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrCanDerive"))) }
 
-// KSecAttrCanSign returns the value of the CoreFoundation reference constant kSecAttrCanSign as an objc.ID.
-func KSecAttrCanSign() objc.ID { return purego.CFConstant(raw.KSecAttrCanSign()) }
+// KSecAttrCanSign returns the value of the constant kSecAttrCanSign.
+func KSecAttrCanSign() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrCanSign"))) }
 
-// KSecAttrCanVerify returns the value of the CoreFoundation reference constant kSecAttrCanVerify as an objc.ID.
-func KSecAttrCanVerify() objc.ID { return purego.CFConstant(raw.KSecAttrCanVerify()) }
+// KSecAttrCanVerify returns the value of the constant kSecAttrCanVerify.
+func KSecAttrCanVerify() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrCanVerify"))) }
 
-// KSecAttrCanWrap returns the value of the CoreFoundation reference constant kSecAttrCanWrap as an objc.ID.
-func KSecAttrCanWrap() objc.ID { return purego.CFConstant(raw.KSecAttrCanWrap()) }
+// KSecAttrCanWrap returns the value of the constant kSecAttrCanWrap.
+func KSecAttrCanWrap() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrCanWrap"))) }
 
-// KSecAttrCanUnwrap returns the value of the CoreFoundation reference constant kSecAttrCanUnwrap as an objc.ID.
-func KSecAttrCanUnwrap() objc.ID { return purego.CFConstant(raw.KSecAttrCanUnwrap()) }
+// KSecAttrCanUnwrap returns the value of the constant kSecAttrCanUnwrap.
+func KSecAttrCanUnwrap() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrCanUnwrap"))) }
 
-// KSecAttrSyncViewHint returns the value of the CoreFoundation reference constant kSecAttrSyncViewHint as an objc.ID.
-func KSecAttrSyncViewHint() objc.ID { return purego.CFConstant(raw.KSecAttrSyncViewHint()) }
+// KSecAttrSyncViewHint returns the value of the constant kSecAttrSyncViewHint.
+func KSecAttrSyncViewHint() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrSyncViewHint")))
+}
 
-// KSecAttrTokenID returns the value of the CoreFoundation reference constant kSecAttrTokenID as an objc.ID.
-func KSecAttrTokenID() objc.ID { return purego.CFConstant(raw.KSecAttrTokenID()) }
+// KSecAttrTokenID returns the value of the constant kSecAttrTokenID.
+func KSecAttrTokenID() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrTokenID"))) }
 
-// KSecAttrPersistantReference returns the value of the CoreFoundation reference constant kSecAttrPersistantReference as an objc.ID.
-func KSecAttrPersistantReference() objc.ID {
-	return purego.CFConstant(raw.KSecAttrPersistantReference())
+// KSecAttrPersistantReference returns the value of the constant kSecAttrPersistantReference.
+func KSecAttrPersistantReference() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrPersistantReference")))
 }
 
-// KSecAttrPersistentReference returns the value of the CoreFoundation reference constant kSecAttrPersistentReference as an objc.ID.
-func KSecAttrPersistentReference() objc.ID {
-	return purego.CFConstant(raw.KSecAttrPersistentReference())
+// KSecAttrPersistentReference returns the value of the constant kSecAttrPersistentReference.
+func KSecAttrPersistentReference() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrPersistentReference")))
 }
 
-// @enum kSecAttrAccessible Value Constants @discussion Predefined item attribute constants used to get or set values in a dictionary. The kSecAttrAccessible constant is the key and its value is one of the constants defined here. When asking SecItemCopyMatching to return the item's data, the error errSecInteractionNotAllowed will be returned if the item's data is not available until a device unlock occurs. @constant kSecAttrAccessibleWhenUnlocked Item data can only be accessed while the device is unlocked. This is recommended for items that only need be accesible while the application is in the foreground.  Items with this attribute will migrate to a new device when using encrypted backups. @constant kSecAttrAccessibleAfterFirstUnlock Item data can only be accessed once the device has been unlocked after a restart.  This is recommended for items that need to be accesible by background applications. Items with this attribute will migrate to a new device when using encrypted backups. @constant kSecAttrAccessibleAlways Item data can always be accessed regardless of the lock state of the device.  This is not recommended for anything except system use. Items with this attribute will migrate to a new device when using encrypted backups. @constant kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly Item data can only be accessed while the device is unlocked. This is recommended for items that only need to be accessible while the application is in the foreground and requires a passcode to be set on the device. Items with this attribute will never migrate to a new device, so after a backup is restored to a new device, these items will be missing. This attribute will not be available on devices without a passcode. Disabling the device passcode will cause all previously protected items to be deleted. @constant kSecAttrAccessibleWhenUnlockedThisDeviceOnly Item data can only be accessed while the device is unlocked. This is recommended for items that only need be accesible while the application is in the foreground. Items with this attribute will never migrate to a new device, so after a backup is restored to a new device, these items will be missing. @constant kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly Item data can only be accessed once the device has been unlocked after a restart. This is recommended for items that need to be accessible by background applications. Items with this attribute will never migrate to a new device, so after a backup is restored to a new device these items will be missing. @constant kSecAttrAccessibleAlwaysThisDeviceOnly Item data can always be accessed regardless of the lock state of the device.  This option is not recommended for anything except system use. Items with this attribute will never migrate to a new device, so after a backup is restored to a new device, these items will be missing.
-// KSecAttrAccessibleWhenUnlocked returns the value of the CoreFoundation reference constant kSecAttrAccessibleWhenUnlocked as an objc.ID.
-func KSecAttrAccessibleWhenUnlocked() objc.ID {
-	return purego.CFConstant(raw.KSecAttrAccessibleWhenUnlocked())
+// Predefined item attribute constants used to get or set values in a dictionary. The kSecAttrAccessible constant is the key and its value is one of the constants defined here. When asking SecItemCopyMatching to return the item's data, the error errSecInteractionNotAllowed will be returned if the item's data is not available until a device unlock occurs.
+// KSecAttrAccessibleWhenUnlocked returns the value of the constant kSecAttrAccessibleWhenUnlocked.
+func KSecAttrAccessibleWhenUnlocked() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAccessibleWhenUnlocked")))
 }
 
-// KSecAttrAccessibleAfterFirstUnlock returns the value of the CoreFoundation reference constant kSecAttrAccessibleAfterFirstUnlock as an objc.ID.
-func KSecAttrAccessibleAfterFirstUnlock() objc.ID {
-	return purego.CFConstant(raw.KSecAttrAccessibleAfterFirstUnlock())
+// KSecAttrAccessibleAfterFirstUnlock returns the value of the constant kSecAttrAccessibleAfterFirstUnlock.
+func KSecAttrAccessibleAfterFirstUnlock() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAccessibleAfterFirstUnlock")))
 }
 
-// KSecAttrAccessibleAlways returns the value of the CoreFoundation reference constant kSecAttrAccessibleAlways as an objc.ID.
-func KSecAttrAccessibleAlways() objc.ID { return purego.CFConstant(raw.KSecAttrAccessibleAlways()) }
+// KSecAttrAccessibleAlways returns the value of the constant kSecAttrAccessibleAlways.
+func KSecAttrAccessibleAlways() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAccessibleAlways")))
+}
 
-// KSecAttrAccessibleWhenPasscodeSetThisDeviceOnly returns the value of the CoreFoundation reference constant kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly as an objc.ID.
-func KSecAttrAccessibleWhenPasscodeSetThisDeviceOnly() objc.ID {
-	return purego.CFConstant(raw.KSecAttrAccessibleWhenPasscodeSetThisDeviceOnly())
+// KSecAttrAccessibleWhenPasscodeSetThisDeviceOnly returns the value of the constant kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly.
+func KSecAttrAccessibleWhenPasscodeSetThisDeviceOnly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly")))
 }
 
-// KSecAttrAccessibleWhenUnlockedThisDeviceOnly returns the value of the CoreFoundation reference constant kSecAttrAccessibleWhenUnlockedThisDeviceOnly as an objc.ID.
-func KSecAttrAccessibleWhenUnlockedThisDeviceOnly() objc.ID {
-	return purego.CFConstant(raw.KSecAttrAccessibleWhenUnlockedThisDeviceOnly())
+// KSecAttrAccessibleWhenUnlockedThisDeviceOnly returns the value of the constant kSecAttrAccessibleWhenUnlockedThisDeviceOnly.
+func KSecAttrAccessibleWhenUnlockedThisDeviceOnly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAccessibleWhenUnlockedThisDeviceOnly")))
 }
 
-// KSecAttrAccessibleAfterFirstUnlockThisDeviceOnly returns the value of the CoreFoundation reference constant kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly as an objc.ID.
-func KSecAttrAccessibleAfterFirstUnlockThisDeviceOnly() objc.ID {
-	return purego.CFConstant(raw.KSecAttrAccessibleAfterFirstUnlockThisDeviceOnly())
+// KSecAttrAccessibleAfterFirstUnlockThisDeviceOnly returns the value of the constant kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly.
+func KSecAttrAccessibleAfterFirstUnlockThisDeviceOnly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly")))
 }
 
-// KSecAttrAccessibleAlwaysThisDeviceOnly returns the value of the CoreFoundation reference constant kSecAttrAccessibleAlwaysThisDeviceOnly as an objc.ID.
-func KSecAttrAccessibleAlwaysThisDeviceOnly() objc.ID {
-	return purego.CFConstant(raw.KSecAttrAccessibleAlwaysThisDeviceOnly())
+// KSecAttrAccessibleAlwaysThisDeviceOnly returns the value of the constant kSecAttrAccessibleAlwaysThisDeviceOnly.
+func KSecAttrAccessibleAlwaysThisDeviceOnly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAccessibleAlwaysThisDeviceOnly")))
 }
 
-// @enum kSecAttrProtocol Value Constants @discussion Predefined item attribute constants used to get or set values in a dictionary. The kSecAttrProtocol constant is the key and its value is one of the constants defined here. @constant kSecAttrProtocolFTP. @constant kSecAttrProtocolFTPAccount. @constant kSecAttrProtocolHTTP. @constant kSecAttrProtocolIRC. @constant kSecAttrProtocolNNTP. @constant kSecAttrProtocolPOP3. @constant kSecAttrProtocolSMTP. @constant kSecAttrProtocolSOCKS. @constant kSecAttrProtocolIMAP. @constant kSecAttrProtocolLDAP. @constant kSecAttrProtocolAppleTalk. @constant kSecAttrProtocolAFP. @constant kSecAttrProtocolTelnet. @constant kSecAttrProtocolSSH. @constant kSecAttrProtocolFTPS. @constant kSecAttrProtocolHTTPS. @constant kSecAttrProtocolHTTPProxy. @constant kSecAttrProtocolHTTPSProxy. @constant kSecAttrProtocolFTPProxy. @constant kSecAttrProtocolSMB. @constant kSecAttrProtocolRTSP. @constant kSecAttrProtocolRTSPProxy. @constant kSecAttrProtocolDAAP. @constant kSecAttrProtocolEPPC. @constant kSecAttrProtocolIPP. @constant kSecAttrProtocolNNTPS. @constant kSecAttrProtocolLDAPS. @constant kSecAttrProtocolTelnetS. @constant kSecAttrProtocolIMAPS. @constant kSecAttrProtocolIRCS. @constant kSecAttrProtocolPOP3S.
-// KSecAttrProtocolFTP returns the value of the CoreFoundation reference constant kSecAttrProtocolFTP as an objc.ID.
-func KSecAttrProtocolFTP() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolFTP()) }
+// Predefined item attribute constants used to get or set values in a dictionary. The kSecAttrProtocol constant is the key and its value is one of the constants defined here.
+// KSecAttrProtocolFTP returns the value of the constant kSecAttrProtocolFTP.
+func KSecAttrProtocolFTP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolFTP")))
+}
 
-// KSecAttrProtocolFTPAccount returns the value of the CoreFoundation reference constant kSecAttrProtocolFTPAccount as an objc.ID.
-func KSecAttrProtocolFTPAccount() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolFTPAccount()) }
+// KSecAttrProtocolFTPAccount returns the value of the constant kSecAttrProtocolFTPAccount.
+func KSecAttrProtocolFTPAccount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolFTPAccount")))
+}
 
-// KSecAttrProtocolHTTP returns the value of the CoreFoundation reference constant kSecAttrProtocolHTTP as an objc.ID.
-func KSecAttrProtocolHTTP() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolHTTP()) }
+// KSecAttrProtocolHTTP returns the value of the constant kSecAttrProtocolHTTP.
+func KSecAttrProtocolHTTP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolHTTP")))
+}
 
-// KSecAttrProtocolIRC returns the value of the CoreFoundation reference constant kSecAttrProtocolIRC as an objc.ID.
-func KSecAttrProtocolIRC() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolIRC()) }
+// KSecAttrProtocolIRC returns the value of the constant kSecAttrProtocolIRC.
+func KSecAttrProtocolIRC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolIRC")))
+}
 
-// KSecAttrProtocolNNTP returns the value of the CoreFoundation reference constant kSecAttrProtocolNNTP as an objc.ID.
-func KSecAttrProtocolNNTP() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolNNTP()) }
+// KSecAttrProtocolNNTP returns the value of the constant kSecAttrProtocolNNTP.
+func KSecAttrProtocolNNTP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolNNTP")))
+}
 
-// KSecAttrProtocolPOP3 returns the value of the CoreFoundation reference constant kSecAttrProtocolPOP3 as an objc.ID.
-func KSecAttrProtocolPOP3() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolPOP3()) }
+// KSecAttrProtocolPOP3 returns the value of the constant kSecAttrProtocolPOP3.
+func KSecAttrProtocolPOP3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolPOP3")))
+}
 
-// KSecAttrProtocolSMTP returns the value of the CoreFoundation reference constant kSecAttrProtocolSMTP as an objc.ID.
-func KSecAttrProtocolSMTP() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolSMTP()) }
+// KSecAttrProtocolSMTP returns the value of the constant kSecAttrProtocolSMTP.
+func KSecAttrProtocolSMTP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolSMTP")))
+}
 
-// KSecAttrProtocolSOCKS returns the value of the CoreFoundation reference constant kSecAttrProtocolSOCKS as an objc.ID.
-func KSecAttrProtocolSOCKS() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolSOCKS()) }
+// KSecAttrProtocolSOCKS returns the value of the constant kSecAttrProtocolSOCKS.
+func KSecAttrProtocolSOCKS() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolSOCKS")))
+}
 
-// KSecAttrProtocolIMAP returns the value of the CoreFoundation reference constant kSecAttrProtocolIMAP as an objc.ID.
-func KSecAttrProtocolIMAP() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolIMAP()) }
+// KSecAttrProtocolIMAP returns the value of the constant kSecAttrProtocolIMAP.
+func KSecAttrProtocolIMAP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolIMAP")))
+}
 
-// KSecAttrProtocolLDAP returns the value of the CoreFoundation reference constant kSecAttrProtocolLDAP as an objc.ID.
-func KSecAttrProtocolLDAP() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolLDAP()) }
+// KSecAttrProtocolLDAP returns the value of the constant kSecAttrProtocolLDAP.
+func KSecAttrProtocolLDAP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolLDAP")))
+}
 
-// KSecAttrProtocolAppleTalk returns the value of the CoreFoundation reference constant kSecAttrProtocolAppleTalk as an objc.ID.
-func KSecAttrProtocolAppleTalk() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolAppleTalk()) }
+// KSecAttrProtocolAppleTalk returns the value of the constant kSecAttrProtocolAppleTalk.
+func KSecAttrProtocolAppleTalk() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolAppleTalk")))
+}
 
-// KSecAttrProtocolAFP returns the value of the CoreFoundation reference constant kSecAttrProtocolAFP as an objc.ID.
-func KSecAttrProtocolAFP() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolAFP()) }
+// KSecAttrProtocolAFP returns the value of the constant kSecAttrProtocolAFP.
+func KSecAttrProtocolAFP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolAFP")))
+}
 
-// KSecAttrProtocolTelnet returns the value of the CoreFoundation reference constant kSecAttrProtocolTelnet as an objc.ID.
-func KSecAttrProtocolTelnet() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolTelnet()) }
+// KSecAttrProtocolTelnet returns the value of the constant kSecAttrProtocolTelnet.
+func KSecAttrProtocolTelnet() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolTelnet")))
+}
 
-// KSecAttrProtocolSSH returns the value of the CoreFoundation reference constant kSecAttrProtocolSSH as an objc.ID.
-func KSecAttrProtocolSSH() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolSSH()) }
+// KSecAttrProtocolSSH returns the value of the constant kSecAttrProtocolSSH.
+func KSecAttrProtocolSSH() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolSSH")))
+}
 
-// KSecAttrProtocolFTPS returns the value of the CoreFoundation reference constant kSecAttrProtocolFTPS as an objc.ID.
-func KSecAttrProtocolFTPS() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolFTPS()) }
+// KSecAttrProtocolFTPS returns the value of the constant kSecAttrProtocolFTPS.
+func KSecAttrProtocolFTPS() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolFTPS")))
+}
 
-// KSecAttrProtocolHTTPS returns the value of the CoreFoundation reference constant kSecAttrProtocolHTTPS as an objc.ID.
-func KSecAttrProtocolHTTPS() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolHTTPS()) }
+// KSecAttrProtocolHTTPS returns the value of the constant kSecAttrProtocolHTTPS.
+func KSecAttrProtocolHTTPS() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolHTTPS")))
+}
 
-// KSecAttrProtocolHTTPProxy returns the value of the CoreFoundation reference constant kSecAttrProtocolHTTPProxy as an objc.ID.
-func KSecAttrProtocolHTTPProxy() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolHTTPProxy()) }
+// KSecAttrProtocolHTTPProxy returns the value of the constant kSecAttrProtocolHTTPProxy.
+func KSecAttrProtocolHTTPProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolHTTPProxy")))
+}
 
-// KSecAttrProtocolHTTPSProxy returns the value of the CoreFoundation reference constant kSecAttrProtocolHTTPSProxy as an objc.ID.
-func KSecAttrProtocolHTTPSProxy() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolHTTPSProxy()) }
+// KSecAttrProtocolHTTPSProxy returns the value of the constant kSecAttrProtocolHTTPSProxy.
+func KSecAttrProtocolHTTPSProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolHTTPSProxy")))
+}
 
-// KSecAttrProtocolFTPProxy returns the value of the CoreFoundation reference constant kSecAttrProtocolFTPProxy as an objc.ID.
-func KSecAttrProtocolFTPProxy() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolFTPProxy()) }
+// KSecAttrProtocolFTPProxy returns the value of the constant kSecAttrProtocolFTPProxy.
+func KSecAttrProtocolFTPProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolFTPProxy")))
+}
 
-// KSecAttrProtocolSMB returns the value of the CoreFoundation reference constant kSecAttrProtocolSMB as an objc.ID.
-func KSecAttrProtocolSMB() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolSMB()) }
+// KSecAttrProtocolSMB returns the value of the constant kSecAttrProtocolSMB.
+func KSecAttrProtocolSMB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolSMB")))
+}
 
-// KSecAttrProtocolRTSP returns the value of the CoreFoundation reference constant kSecAttrProtocolRTSP as an objc.ID.
-func KSecAttrProtocolRTSP() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolRTSP()) }
+// KSecAttrProtocolRTSP returns the value of the constant kSecAttrProtocolRTSP.
+func KSecAttrProtocolRTSP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolRTSP")))
+}
 
-// KSecAttrProtocolRTSPProxy returns the value of the CoreFoundation reference constant kSecAttrProtocolRTSPProxy as an objc.ID.
-func KSecAttrProtocolRTSPProxy() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolRTSPProxy()) }
+// KSecAttrProtocolRTSPProxy returns the value of the constant kSecAttrProtocolRTSPProxy.
+func KSecAttrProtocolRTSPProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolRTSPProxy")))
+}
 
-// KSecAttrProtocolDAAP returns the value of the CoreFoundation reference constant kSecAttrProtocolDAAP as an objc.ID.
-func KSecAttrProtocolDAAP() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolDAAP()) }
+// KSecAttrProtocolDAAP returns the value of the constant kSecAttrProtocolDAAP.
+func KSecAttrProtocolDAAP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolDAAP")))
+}
 
-// KSecAttrProtocolEPPC returns the value of the CoreFoundation reference constant kSecAttrProtocolEPPC as an objc.ID.
-func KSecAttrProtocolEPPC() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolEPPC()) }
+// KSecAttrProtocolEPPC returns the value of the constant kSecAttrProtocolEPPC.
+func KSecAttrProtocolEPPC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolEPPC")))
+}
 
-// KSecAttrProtocolIPP returns the value of the CoreFoundation reference constant kSecAttrProtocolIPP as an objc.ID.
-func KSecAttrProtocolIPP() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolIPP()) }
+// KSecAttrProtocolIPP returns the value of the constant kSecAttrProtocolIPP.
+func KSecAttrProtocolIPP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolIPP")))
+}
 
-// KSecAttrProtocolNNTPS returns the value of the CoreFoundation reference constant kSecAttrProtocolNNTPS as an objc.ID.
-func KSecAttrProtocolNNTPS() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolNNTPS()) }
+// KSecAttrProtocolNNTPS returns the value of the constant kSecAttrProtocolNNTPS.
+func KSecAttrProtocolNNTPS() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolNNTPS")))
+}
 
-// KSecAttrProtocolLDAPS returns the value of the CoreFoundation reference constant kSecAttrProtocolLDAPS as an objc.ID.
-func KSecAttrProtocolLDAPS() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolLDAPS()) }
+// KSecAttrProtocolLDAPS returns the value of the constant kSecAttrProtocolLDAPS.
+func KSecAttrProtocolLDAPS() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolLDAPS")))
+}
 
-// KSecAttrProtocolTelnetS returns the value of the CoreFoundation reference constant kSecAttrProtocolTelnetS as an objc.ID.
-func KSecAttrProtocolTelnetS() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolTelnetS()) }
+// KSecAttrProtocolTelnetS returns the value of the constant kSecAttrProtocolTelnetS.
+func KSecAttrProtocolTelnetS() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolTelnetS")))
+}
 
-// KSecAttrProtocolIMAPS returns the value of the CoreFoundation reference constant kSecAttrProtocolIMAPS as an objc.ID.
-func KSecAttrProtocolIMAPS() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolIMAPS()) }
+// KSecAttrProtocolIMAPS returns the value of the constant kSecAttrProtocolIMAPS.
+func KSecAttrProtocolIMAPS() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolIMAPS")))
+}
 
-// KSecAttrProtocolIRCS returns the value of the CoreFoundation reference constant kSecAttrProtocolIRCS as an objc.ID.
-func KSecAttrProtocolIRCS() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolIRCS()) }
+// KSecAttrProtocolIRCS returns the value of the constant kSecAttrProtocolIRCS.
+func KSecAttrProtocolIRCS() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolIRCS")))
+}
 
-// KSecAttrProtocolPOP3S returns the value of the CoreFoundation reference constant kSecAttrProtocolPOP3S as an objc.ID.
-func KSecAttrProtocolPOP3S() objc.ID { return purego.CFConstant(raw.KSecAttrProtocolPOP3S()) }
+// KSecAttrProtocolPOP3S returns the value of the constant kSecAttrProtocolPOP3S.
+func KSecAttrProtocolPOP3S() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrProtocolPOP3S")))
+}
 
-// @enum kSecAttrAuthenticationType Value Constants @discussion Predefined item attribute constants used to get or set values in a dictionary. The kSecAttrAuthenticationType constant is the key and its value is one of the constants defined here. @constant kSecAttrAuthenticationTypeNTLM. @constant kSecAttrAuthenticationTypeMSN. @constant kSecAttrAuthenticationTypeDPA. @constant kSecAttrAuthenticationTypeRPA. @constant kSecAttrAuthenticationTypeHTTPBasic. @constant kSecAttrAuthenticationTypeHTTPDigest. @constant kSecAttrAuthenticationTypeHTMLForm. @constant kSecAttrAuthenticationTypeDefault.
-// KSecAttrAuthenticationTypeNTLM returns the value of the CoreFoundation reference constant kSecAttrAuthenticationTypeNTLM as an objc.ID.
-func KSecAttrAuthenticationTypeNTLM() objc.ID {
-	return purego.CFConstant(raw.KSecAttrAuthenticationTypeNTLM())
+// Predefined item attribute constants used to get or set values in a dictionary. The kSecAttrAuthenticationType constant is the key and its value is one of the constants defined here.
+// KSecAttrAuthenticationTypeNTLM returns the value of the constant kSecAttrAuthenticationTypeNTLM.
+func KSecAttrAuthenticationTypeNTLM() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAuthenticationTypeNTLM")))
 }
 
-// KSecAttrAuthenticationTypeMSN returns the value of the CoreFoundation reference constant kSecAttrAuthenticationTypeMSN as an objc.ID.
-func KSecAttrAuthenticationTypeMSN() objc.ID {
-	return purego.CFConstant(raw.KSecAttrAuthenticationTypeMSN())
+// KSecAttrAuthenticationTypeMSN returns the value of the constant kSecAttrAuthenticationTypeMSN.
+func KSecAttrAuthenticationTypeMSN() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAuthenticationTypeMSN")))
 }
 
-// KSecAttrAuthenticationTypeDPA returns the value of the CoreFoundation reference constant kSecAttrAuthenticationTypeDPA as an objc.ID.
-func KSecAttrAuthenticationTypeDPA() objc.ID {
-	return purego.CFConstant(raw.KSecAttrAuthenticationTypeDPA())
+// KSecAttrAuthenticationTypeDPA returns the value of the constant kSecAttrAuthenticationTypeDPA.
+func KSecAttrAuthenticationTypeDPA() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAuthenticationTypeDPA")))
 }
 
-// KSecAttrAuthenticationTypeRPA returns the value of the CoreFoundation reference constant kSecAttrAuthenticationTypeRPA as an objc.ID.
-func KSecAttrAuthenticationTypeRPA() objc.ID {
-	return purego.CFConstant(raw.KSecAttrAuthenticationTypeRPA())
+// KSecAttrAuthenticationTypeRPA returns the value of the constant kSecAttrAuthenticationTypeRPA.
+func KSecAttrAuthenticationTypeRPA() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAuthenticationTypeRPA")))
 }
 
-// KSecAttrAuthenticationTypeHTTPBasic returns the value of the CoreFoundation reference constant kSecAttrAuthenticationTypeHTTPBasic as an objc.ID.
-func KSecAttrAuthenticationTypeHTTPBasic() objc.ID {
-	return purego.CFConstant(raw.KSecAttrAuthenticationTypeHTTPBasic())
+// KSecAttrAuthenticationTypeHTTPBasic returns the value of the constant kSecAttrAuthenticationTypeHTTPBasic.
+func KSecAttrAuthenticationTypeHTTPBasic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAuthenticationTypeHTTPBasic")))
 }
 
-// KSecAttrAuthenticationTypeHTTPDigest returns the value of the CoreFoundation reference constant kSecAttrAuthenticationTypeHTTPDigest as an objc.ID.
-func KSecAttrAuthenticationTypeHTTPDigest() objc.ID {
-	return purego.CFConstant(raw.KSecAttrAuthenticationTypeHTTPDigest())
+// KSecAttrAuthenticationTypeHTTPDigest returns the value of the constant kSecAttrAuthenticationTypeHTTPDigest.
+func KSecAttrAuthenticationTypeHTTPDigest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAuthenticationTypeHTTPDigest")))
 }
 
-// KSecAttrAuthenticationTypeHTMLForm returns the value of the CoreFoundation reference constant kSecAttrAuthenticationTypeHTMLForm as an objc.ID.
-func KSecAttrAuthenticationTypeHTMLForm() objc.ID {
-	return purego.CFConstant(raw.KSecAttrAuthenticationTypeHTMLForm())
+// KSecAttrAuthenticationTypeHTMLForm returns the value of the constant kSecAttrAuthenticationTypeHTMLForm.
+func KSecAttrAuthenticationTypeHTMLForm() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAuthenticationTypeHTMLForm")))
 }
 
-// KSecAttrAuthenticationTypeDefault returns the value of the CoreFoundation reference constant kSecAttrAuthenticationTypeDefault as an objc.ID.
-func KSecAttrAuthenticationTypeDefault() objc.ID {
-	return purego.CFConstant(raw.KSecAttrAuthenticationTypeDefault())
+// KSecAttrAuthenticationTypeDefault returns the value of the constant kSecAttrAuthenticationTypeDefault.
+func KSecAttrAuthenticationTypeDefault() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAuthenticationTypeDefault")))
 }
 
-// @enum kSecAttrKeyClass Value Constants @discussion Predefined item attribute constants used to get or set values in a dictionary. The kSecAttrKeyClass constant is the key and its value is one of the constants defined here. @constant kSecAttrKeyClassPublic. @constant kSecAttrKeyClassPrivate. @constant kSecAttrKeyClassSymmetric.
-// KSecAttrKeyClassPublic returns the value of the CoreFoundation reference constant kSecAttrKeyClassPublic as an objc.ID.
-func KSecAttrKeyClassPublic() objc.ID { return purego.CFConstant(raw.KSecAttrKeyClassPublic()) }
+// Predefined item attribute constants used to get or set values in a dictionary. The kSecAttrKeyClass constant is the key and its value is one of the constants defined here.
+// KSecAttrKeyClassPublic returns the value of the constant kSecAttrKeyClassPublic.
+func KSecAttrKeyClassPublic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyClassPublic")))
+}
 
-// KSecAttrKeyClassPrivate returns the value of the CoreFoundation reference constant kSecAttrKeyClassPrivate as an objc.ID.
-func KSecAttrKeyClassPrivate() objc.ID { return purego.CFConstant(raw.KSecAttrKeyClassPrivate()) }
+// KSecAttrKeyClassPrivate returns the value of the constant kSecAttrKeyClassPrivate.
+func KSecAttrKeyClassPrivate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyClassPrivate")))
+}
 
-// KSecAttrKeyClassSymmetric returns the value of the CoreFoundation reference constant kSecAttrKeyClassSymmetric as an objc.ID.
-func KSecAttrKeyClassSymmetric() objc.ID { return purego.CFConstant(raw.KSecAttrKeyClassSymmetric()) }
+// KSecAttrKeyClassSymmetric returns the value of the constant kSecAttrKeyClassSymmetric.
+func KSecAttrKeyClassSymmetric() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyClassSymmetric")))
+}
 
-// @enum kSecAttrKeyType Value Constants @discussion Predefined item attribute constants used to get or set values in a dictionary. The kSecAttrKeyType constant is the key and its value is one of the constants defined here. @constant kSecAttrKeyTypeECSECPrimeRandom. The used curve is P-192, P-256, P-384 or P-521. The size is specified by kSecAttrKeySizeInBits attribute. Curves are defined in FIPS PUB 186-4 standard. @constant kSecAttrKeyTypeEC This is the legacy name for kSecAttrKeyTypeECSECPrimeRandom, new applications should not use it. @constant kSecAttrKeyTypeDSA (macOS only) @constant kSecAttrKeyTypeAES (macOS only) @constant kSecAttrKeyType3DES (macOS only) @constant kSecAttrKeyTypeRC4 (macOS only) @constant kSecAttrKeyTypeRC2 (macOS only) @constant kSecAttrKeyTypeCAST (macOS only) @constant kSecAttrKeyTypeECDSA (deprecated; use kSecAttrKeyTypeECSECPrimeRandom instead.) (macOS only)
-// KSecAttrKeyTypeRSA returns the value of the CoreFoundation reference constant kSecAttrKeyTypeRSA as an objc.ID.
-func KSecAttrKeyTypeRSA() objc.ID { return purego.CFConstant(raw.KSecAttrKeyTypeRSA()) }
+// Predefined item attribute constants used to get or set values in a dictionary. The kSecAttrKeyType constant is the key and its value is one of the constants defined here.
+// KSecAttrKeyTypeRSA returns the value of the constant kSecAttrKeyTypeRSA.
+func KSecAttrKeyTypeRSA() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyTypeRSA")))
+}
 
-// KSecAttrKeyTypeDSA returns the value of the CoreFoundation reference constant kSecAttrKeyTypeDSA as an objc.ID.
-func KSecAttrKeyTypeDSA() objc.ID { return purego.CFConstant(raw.KSecAttrKeyTypeDSA()) }
+// KSecAttrKeyTypeDSA returns the value of the constant kSecAttrKeyTypeDSA.
+func KSecAttrKeyTypeDSA() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyTypeDSA")))
+}
 
-// KSecAttrKeyTypeAES returns the value of the CoreFoundation reference constant kSecAttrKeyTypeAES as an objc.ID.
-func KSecAttrKeyTypeAES() objc.ID { return purego.CFConstant(raw.KSecAttrKeyTypeAES()) }
+// KSecAttrKeyTypeAES returns the value of the constant kSecAttrKeyTypeAES.
+func KSecAttrKeyTypeAES() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyTypeAES")))
+}
 
-// KSecAttrKeyTypeDES returns the value of the CoreFoundation reference constant kSecAttrKeyTypeDES as an objc.ID.
-func KSecAttrKeyTypeDES() objc.ID { return purego.CFConstant(raw.KSecAttrKeyTypeDES()) }
+// KSecAttrKeyTypeDES returns the value of the constant kSecAttrKeyTypeDES.
+func KSecAttrKeyTypeDES() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyTypeDES")))
+}
 
-// KSecAttrKeyType3DES returns the value of the CoreFoundation reference constant kSecAttrKeyType3DES as an objc.ID.
-func KSecAttrKeyType3DES() objc.ID { return purego.CFConstant(raw.KSecAttrKeyType3DES()) }
+// KSecAttrKeyType3DES returns the value of the constant kSecAttrKeyType3DES.
+func KSecAttrKeyType3DES() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyType3DES")))
+}
 
-// KSecAttrKeyTypeRC4 returns the value of the CoreFoundation reference constant kSecAttrKeyTypeRC4 as an objc.ID.
-func KSecAttrKeyTypeRC4() objc.ID { return purego.CFConstant(raw.KSecAttrKeyTypeRC4()) }
+// KSecAttrKeyTypeRC4 returns the value of the constant kSecAttrKeyTypeRC4.
+func KSecAttrKeyTypeRC4() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyTypeRC4")))
+}
 
-// KSecAttrKeyTypeRC2 returns the value of the CoreFoundation reference constant kSecAttrKeyTypeRC2 as an objc.ID.
-func KSecAttrKeyTypeRC2() objc.ID { return purego.CFConstant(raw.KSecAttrKeyTypeRC2()) }
+// KSecAttrKeyTypeRC2 returns the value of the constant kSecAttrKeyTypeRC2.
+func KSecAttrKeyTypeRC2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyTypeRC2")))
+}
 
-// KSecAttrKeyTypeCAST returns the value of the CoreFoundation reference constant kSecAttrKeyTypeCAST as an objc.ID.
-func KSecAttrKeyTypeCAST() objc.ID { return purego.CFConstant(raw.KSecAttrKeyTypeCAST()) }
+// KSecAttrKeyTypeCAST returns the value of the constant kSecAttrKeyTypeCAST.
+func KSecAttrKeyTypeCAST() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyTypeCAST")))
+}
 
-// KSecAttrKeyTypeECDSA returns the value of the CoreFoundation reference constant kSecAttrKeyTypeECDSA as an objc.ID.
-func KSecAttrKeyTypeECDSA() objc.ID { return purego.CFConstant(raw.KSecAttrKeyTypeECDSA()) }
+// KSecAttrKeyTypeECDSA returns the value of the constant kSecAttrKeyTypeECDSA.
+func KSecAttrKeyTypeECDSA() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyTypeECDSA")))
+}
 
-// KSecAttrKeyTypeEC returns the value of the CoreFoundation reference constant kSecAttrKeyTypeEC as an objc.ID.
-func KSecAttrKeyTypeEC() objc.ID { return purego.CFConstant(raw.KSecAttrKeyTypeEC()) }
+// KSecAttrKeyTypeEC returns the value of the constant kSecAttrKeyTypeEC.
+func KSecAttrKeyTypeEC() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyTypeEC"))) }
 
-// KSecAttrKeyTypeECSECPrimeRandom returns the value of the CoreFoundation reference constant kSecAttrKeyTypeECSECPrimeRandom as an objc.ID.
-func KSecAttrKeyTypeECSECPrimeRandom() objc.ID {
-	return purego.CFConstant(raw.KSecAttrKeyTypeECSECPrimeRandom())
+// KSecAttrKeyTypeECSECPrimeRandom returns the value of the constant kSecAttrKeyTypeECSECPrimeRandom.
+func KSecAttrKeyTypeECSECPrimeRandom() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrKeyTypeECSECPrimeRandom")))
 }
 
-// KSecAttrPRFHmacAlgSHA1 returns the value of the CoreFoundation reference constant kSecAttrPRFHmacAlgSHA1 as an objc.ID.
-func KSecAttrPRFHmacAlgSHA1() objc.ID { return purego.CFConstant(raw.KSecAttrPRFHmacAlgSHA1()) }
+// KSecAttrPRFHmacAlgSHA1 returns the value of the constant kSecAttrPRFHmacAlgSHA1.
+func KSecAttrPRFHmacAlgSHA1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrPRFHmacAlgSHA1")))
+}
 
-// KSecAttrPRFHmacAlgSHA224 returns the value of the CoreFoundation reference constant kSecAttrPRFHmacAlgSHA224 as an objc.ID.
-func KSecAttrPRFHmacAlgSHA224() objc.ID { return purego.CFConstant(raw.KSecAttrPRFHmacAlgSHA224()) }
+// KSecAttrPRFHmacAlgSHA224 returns the value of the constant kSecAttrPRFHmacAlgSHA224.
+func KSecAttrPRFHmacAlgSHA224() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrPRFHmacAlgSHA224")))
+}
 
-// KSecAttrPRFHmacAlgSHA256 returns the value of the CoreFoundation reference constant kSecAttrPRFHmacAlgSHA256 as an objc.ID.
-func KSecAttrPRFHmacAlgSHA256() objc.ID { return purego.CFConstant(raw.KSecAttrPRFHmacAlgSHA256()) }
+// KSecAttrPRFHmacAlgSHA256 returns the value of the constant kSecAttrPRFHmacAlgSHA256.
+func KSecAttrPRFHmacAlgSHA256() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrPRFHmacAlgSHA256")))
+}
 
-// KSecAttrPRFHmacAlgSHA384 returns the value of the CoreFoundation reference constant kSecAttrPRFHmacAlgSHA384 as an objc.ID.
-func KSecAttrPRFHmacAlgSHA384() objc.ID { return purego.CFConstant(raw.KSecAttrPRFHmacAlgSHA384()) }
+// KSecAttrPRFHmacAlgSHA384 returns the value of the constant kSecAttrPRFHmacAlgSHA384.
+func KSecAttrPRFHmacAlgSHA384() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrPRFHmacAlgSHA384")))
+}
 
-// KSecAttrPRFHmacAlgSHA512 returns the value of the CoreFoundation reference constant kSecAttrPRFHmacAlgSHA512 as an objc.ID.
-func KSecAttrPRFHmacAlgSHA512() objc.ID { return purego.CFConstant(raw.KSecAttrPRFHmacAlgSHA512()) }
+// KSecAttrPRFHmacAlgSHA512 returns the value of the constant kSecAttrPRFHmacAlgSHA512.
+func KSecAttrPRFHmacAlgSHA512() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrPRFHmacAlgSHA512")))
+}
 
-// @enum Search Constants @discussion Predefined search constants used to set values in a query dictionary. You can specify a combination of search attributes and item attributes when looking for matching items with the SecItemCopyMatching function. @constant kSecMatchPolicy Specifies a dictionary key whose value is a SecPolicyRef. If provided, returned certificates or identities must verify with this policy. @constant kSecMatchItemList macOS only. Specifies a dictionary key whose value is a CFArray of SecKeychainItemRef items. If provided, returned items will be limited to the subset which are contained in this list. @constant kSecMatchSearchList Specifies a dictionary key whose value is a CFArray of SecKeychainRef items. If provided, the search will be limited to the keychains contained in this list. @constant kSecMatchIssuers Specifies a dictionary key whose value is a CFArray of X.500 names (of type CFDataRef). If provided, returned certificates or identities will be limited to those whose certificate chain contains one of the issuers provided in this list. @constant kSecMatchEmailAddressIfPresent Specifies a dictionary key whose value is a CFStringRef containing an RFC822 email address. If provided, returned certificates or identities will be limited to those that contain the address in their subject or subject alternative name. @constant kSecMatchSubjectContains Specifies a dictionary key whose value is a CFStringRef. If provided, returned certificates or identities will be limited to those containing this string in the subject. @constant kSecMatchHostOrSubdomainOfHost Specifies a dictionary key whose value is a CFStringRef. If provided, returned internet passwords will be limited to those which have a server host that is equal to or a subdomain of this string. This filter only works on the Data Protection Keychain on macOS. @constant kSecMatchSubjectStartsWith macOS only. Specifies a dictionary key whose value is a CFStringRef. If provided, returned certificates or identities will be limited to those with subject names that start with this string. @constant kSecMatchSubjectEndsWith macOS only. Specifies a dictionary key whose value is a CFStringRef. If provided, returned certificates or identities will be limited to those with subject names that end with this string. @constant kSecMatchSubjectWholeString macOS only. Specifies a dictionary key whose value is a CFStringRef. If provided, returned certificates or identities will be limited to those matching this string exactly in the subject. @constant kSecMatchCaseInsensitive Specifies a dictionary key whose value is a CFBooleanRef. If this value is kCFBooleanFalse, or is not provided, then case-sensitive string matching is performed. @constant kSecMatchDiacriticInsensitive macOS only. Specifies a dictionary key whose value is a CFBooleanRef. If this value is kCFBooleanFalse, or is not provided, then diacritic-sensitive string matching is performed. @constant kSecMatchWidthInsensitive macOS only. Specifies a dictionary key whose value is a CFBooleanRef. If this value is kCFBooleanFalse, or is not provided, then string matching is width-sensitive (e.g. 'a' != 0xFF41). @constant kSecMatchTrustedOnly Specifies a dictionary key whose value is a CFBooleanRef. If provided with a value of kCFBooleanTrue, only certificates which can be verified back to a trusted anchor will be returned. If this value is kCFBooleanFalse, or is not provided, then both trusted and untrusted certificates may be returned. @constant kSecMatchValidOnDate Specifies a dictionary key whose value is of type CFDateRef. If provided, returned keys, certificates or identities will be limited to those which are valid for the given date. Pass a value of kCFNull to indicate the current date. @constant kSecMatchLimit Specifies a dictionary key whose value is a CFNumberRef. If provided, this value specifies the maximum number of results to return. If not provided, results are limited to the first item found. Predefined values are provided for a single item (kSecMatchLimitOne) and all matching items (kSecMatchLimitAll). @constant kSecMatchLimitOne Specifies that results are limited to the first item found; used as a value for the kSecMatchLimit dictionary key. @constant kSecMatchLimitAll Specifies that an unlimited number of results may be returned; used as a value for the kSecMatchLimit dictionary key.
-// KSecMatchPolicy returns the value of the CoreFoundation reference constant kSecMatchPolicy as an objc.ID.
-func KSecMatchPolicy() objc.ID { return purego.CFConstant(raw.KSecMatchPolicy()) }
+// Predefined search constants used to set values in a query dictionary. You can specify a combination of search attributes and item attributes when looking for matching items with the SecItemCopyMatching function.
+// KSecMatchPolicy returns the value of the constant kSecMatchPolicy.
+func KSecMatchPolicy() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecMatchPolicy"))) }
 
-// KSecMatchItemList returns the value of the CoreFoundation reference constant kSecMatchItemList as an objc.ID.
-func KSecMatchItemList() objc.ID { return purego.CFConstant(raw.KSecMatchItemList()) }
+// KSecMatchItemList returns the value of the constant kSecMatchItemList.
+func KSecMatchItemList() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecMatchItemList"))) }
 
-// KSecMatchSearchList returns the value of the CoreFoundation reference constant kSecMatchSearchList as an objc.ID.
-func KSecMatchSearchList() objc.ID { return purego.CFConstant(raw.KSecMatchSearchList()) }
+// KSecMatchSearchList returns the value of the constant kSecMatchSearchList.
+func KSecMatchSearchList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecMatchSearchList")))
+}
 
-// KSecMatchIssuers returns the value of the CoreFoundation reference constant kSecMatchIssuers as an objc.ID.
-func KSecMatchIssuers() objc.ID { return purego.CFConstant(raw.KSecMatchIssuers()) }
+// KSecMatchIssuers returns the value of the constant kSecMatchIssuers.
+func KSecMatchIssuers() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecMatchIssuers"))) }
 
-// KSecMatchEmailAddressIfPresent returns the value of the CoreFoundation reference constant kSecMatchEmailAddressIfPresent as an objc.ID.
-func KSecMatchEmailAddressIfPresent() objc.ID {
-	return purego.CFConstant(raw.KSecMatchEmailAddressIfPresent())
+// KSecMatchEmailAddressIfPresent returns the value of the constant kSecMatchEmailAddressIfPresent.
+func KSecMatchEmailAddressIfPresent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecMatchEmailAddressIfPresent")))
 }
 
-// KSecMatchSubjectContains returns the value of the CoreFoundation reference constant kSecMatchSubjectContains as an objc.ID.
-func KSecMatchSubjectContains() objc.ID { return purego.CFConstant(raw.KSecMatchSubjectContains()) }
+// KSecMatchSubjectContains returns the value of the constant kSecMatchSubjectContains.
+func KSecMatchSubjectContains() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecMatchSubjectContains")))
+}
 
-// KSecMatchHostOrSubdomainOfHost returns the value of the CoreFoundation reference constant kSecMatchHostOrSubdomainOfHost as an objc.ID.
-func KSecMatchHostOrSubdomainOfHost() objc.ID {
-	return purego.CFConstant(raw.KSecMatchHostOrSubdomainOfHost())
+// KSecMatchHostOrSubdomainOfHost returns the value of the constant kSecMatchHostOrSubdomainOfHost.
+func KSecMatchHostOrSubdomainOfHost() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecMatchHostOrSubdomainOfHost")))
 }
 
-// KSecMatchSubjectStartsWith returns the value of the CoreFoundation reference constant kSecMatchSubjectStartsWith as an objc.ID.
-func KSecMatchSubjectStartsWith() objc.ID { return purego.CFConstant(raw.KSecMatchSubjectStartsWith()) }
+// KSecMatchSubjectStartsWith returns the value of the constant kSecMatchSubjectStartsWith.
+func KSecMatchSubjectStartsWith() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecMatchSubjectStartsWith")))
+}
 
-// KSecMatchSubjectEndsWith returns the value of the CoreFoundation reference constant kSecMatchSubjectEndsWith as an objc.ID.
-func KSecMatchSubjectEndsWith() objc.ID { return purego.CFConstant(raw.KSecMatchSubjectEndsWith()) }
+// KSecMatchSubjectEndsWith returns the value of the constant kSecMatchSubjectEndsWith.
+func KSecMatchSubjectEndsWith() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecMatchSubjectEndsWith")))
+}
 
-// KSecMatchSubjectWholeString returns the value of the CoreFoundation reference constant kSecMatchSubjectWholeString as an objc.ID.
-func KSecMatchSubjectWholeString() objc.ID {
-	return purego.CFConstant(raw.KSecMatchSubjectWholeString())
+// KSecMatchSubjectWholeString returns the value of the constant kSecMatchSubjectWholeString.
+func KSecMatchSubjectWholeString() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecMatchSubjectWholeString")))
 }
 
-// KSecMatchCaseInsensitive returns the value of the CoreFoundation reference constant kSecMatchCaseInsensitive as an objc.ID.
-func KSecMatchCaseInsensitive() objc.ID { return purego.CFConstant(raw.KSecMatchCaseInsensitive()) }
+// KSecMatchCaseInsensitive returns the value of the constant kSecMatchCaseInsensitive.
+func KSecMatchCaseInsensitive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecMatchCaseInsensitive")))
+}
 
-// KSecMatchDiacriticInsensitive returns the value of the CoreFoundation reference constant kSecMatchDiacriticInsensitive as an objc.ID.
-func KSecMatchDiacriticInsensitive() objc.ID {
-	return purego.CFConstant(raw.KSecMatchDiacriticInsensitive())
+// KSecMatchDiacriticInsensitive returns the value of the constant kSecMatchDiacriticInsensitive.
+func KSecMatchDiacriticInsensitive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecMatchDiacriticInsensitive")))
 }
 
-// KSecMatchWidthInsensitive returns the value of the CoreFoundation reference constant kSecMatchWidthInsensitive as an objc.ID.
-func KSecMatchWidthInsensitive() objc.ID { return purego.CFConstant(raw.KSecMatchWidthInsensitive()) }
+// KSecMatchWidthInsensitive returns the value of the constant kSecMatchWidthInsensitive.
+func KSecMatchWidthInsensitive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecMatchWidthInsensitive")))
+}
 
-// KSecMatchTrustedOnly returns the value of the CoreFoundation reference constant kSecMatchTrustedOnly as an objc.ID.
-func KSecMatchTrustedOnly() objc.ID { return purego.CFConstant(raw.KSecMatchTrustedOnly()) }
+// KSecMatchTrustedOnly returns the value of the constant kSecMatchTrustedOnly.
+func KSecMatchTrustedOnly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecMatchTrustedOnly")))
+}
 
-// KSecMatchValidOnDate returns the value of the CoreFoundation reference constant kSecMatchValidOnDate as an objc.ID.
-func KSecMatchValidOnDate() objc.ID { return purego.CFConstant(raw.KSecMatchValidOnDate()) }
+// KSecMatchValidOnDate returns the value of the constant kSecMatchValidOnDate.
+func KSecMatchValidOnDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecMatchValidOnDate")))
+}
 
-// KSecMatchLimit returns the value of the CoreFoundation reference constant kSecMatchLimit as an objc.ID.
-func KSecMatchLimit() objc.ID { return purego.CFConstant(raw.KSecMatchLimit()) }
+// KSecMatchLimit returns the value of the constant kSecMatchLimit.
+func KSecMatchLimit() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecMatchLimit"))) }
 
-// KSecMatchLimitOne returns the value of the CoreFoundation reference constant kSecMatchLimitOne as an objc.ID.
-func KSecMatchLimitOne() objc.ID { return purego.CFConstant(raw.KSecMatchLimitOne()) }
+// KSecMatchLimitOne returns the value of the constant kSecMatchLimitOne.
+func KSecMatchLimitOne() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecMatchLimitOne"))) }
 
-// KSecMatchLimitAll returns the value of the CoreFoundation reference constant kSecMatchLimitAll as an objc.ID.
-func KSecMatchLimitAll() objc.ID { return purego.CFConstant(raw.KSecMatchLimitAll()) }
+// KSecMatchLimitAll returns the value of the constant kSecMatchLimitAll.
+func KSecMatchLimitAll() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecMatchLimitAll"))) }
 
-// @enum Return Type Key Constants @discussion Predefined return type keys used to set values in a dictionary. You use these keys to specify the type of results which should be returned by the SecItemCopyMatching or SecItemAdd function. You can specify zero or more of these return types. If more than one of these result types is specified, the result is returned as a CFDictionaryRef whose keys are the result types and values are the requested data. @constant kSecReturnData Specifies a dictionary key whose value is of type CFBooleanRef. A value of kCFBooleanTrue indicates that the data of an item (CFDataRef) should be returned. For keys and password items, data is secret (encrypted) and may require the user to enter a password for access. @constant kSecReturnAttributes Specifies a dictionary key whose value is of type CFBooleanRef. A value of kCFBooleanTrue indicates that the (non-encrypted) attributes of an item (CFDictionaryRef) should be returned. @constant kSecReturnRef Specifies a dictionary key whose value is a CFBooleanRef. A value of kCFBooleanTrue indicates that a reference should be returned. Depending on the item class requested, the returned reference(s) may be of type SecKeychainItemRef, SecKeyRef, SecCertificateRef, or SecIdentityRef. Note that returning references is supported only for Certificate, Key or Identity items on iOS, watchOS and tvOS. Similarly, returning references is supported only for Certificate, Key or Identity items on macOS when either kSecUseDataProtectionKeychain is set to true or kSecAttrSynchronizable is set to true. @constant kSecReturnPersistentRef Specifies a dictionary key whose value is of type CFBooleanRef. A value of kCFBooleanTrue indicates that a persistent reference to an item (CFDataRef) should be returned.
-// KSecReturnData returns the value of the CoreFoundation reference constant kSecReturnData as an objc.ID.
-func KSecReturnData() objc.ID { return purego.CFConstant(raw.KSecReturnData()) }
+// Predefined return type keys used to set values in a dictionary. You use these keys to specify the type of results which should be returned by the SecItemCopyMatching or SecItemAdd function. You can specify zero or more of these return types. If more than one of these result types is specified, the result is returned as a CFDictionaryRef whose keys are the result types and values are the requested data.
+// KSecReturnData returns the value of the constant kSecReturnData.
+func KSecReturnData() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecReturnData"))) }
 
-// KSecReturnAttributes returns the value of the CoreFoundation reference constant kSecReturnAttributes as an objc.ID.
-func KSecReturnAttributes() objc.ID { return purego.CFConstant(raw.KSecReturnAttributes()) }
+// KSecReturnAttributes returns the value of the constant kSecReturnAttributes.
+func KSecReturnAttributes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecReturnAttributes")))
+}
 
-// KSecReturnRef returns the value of the CoreFoundation reference constant kSecReturnRef as an objc.ID.
-func KSecReturnRef() objc.ID { return purego.CFConstant(raw.KSecReturnRef()) }
+// KSecReturnRef returns the value of the constant kSecReturnRef.
+func KSecReturnRef() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecReturnRef"))) }
 
-// KSecReturnPersistentRef returns the value of the CoreFoundation reference constant kSecReturnPersistentRef as an objc.ID.
-func KSecReturnPersistentRef() objc.ID { return purego.CFConstant(raw.KSecReturnPersistentRef()) }
+// KSecReturnPersistentRef returns the value of the constant kSecReturnPersistentRef.
+func KSecReturnPersistentRef() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecReturnPersistentRef")))
+}
 
-// @enum Value Type Key Constants @discussion Predefined value type keys used to pass values in a dictionary. You can specify zero or more of these types depending on the function you are calling.  For SecItemCopyMatching or SecItemAdd these are used as keys in the results dictionary. @constant kSecValueData Specifies a dictionary key whose value is of type CFDataRef.  For keys and password items, data is secret (encrypted) and may require the user to enter a password for access. @constant kSecValueRef Specifies a dictionary key whose value, depending on the item class requested, is of type SecKeychainItemRef, SecKeyRef, SecCertificateRef, or SecIdentityRef. @constant kSecValuePersistentRef Specifies a dictionary key whose value is of type CFDataRef.  The bytes in this CFDataRef can be stored by the caller and used on a subsequent invocation of the application (or even a different application) to retrieve the item referenced by it.
-// KSecValueData returns the value of the CoreFoundation reference constant kSecValueData as an objc.ID.
-func KSecValueData() objc.ID { return purego.CFConstant(raw.KSecValueData()) }
+// Predefined value type keys used to pass values in a dictionary. You can specify zero or more of these types depending on the function you are calling.  For SecItemCopyMatching or SecItemAdd these are used as keys in the results dictionary.
+// KSecValueData returns the value of the constant kSecValueData.
+func KSecValueData() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecValueData"))) }
 
-// KSecValueRef returns the value of the CoreFoundation reference constant kSecValueRef as an objc.ID.
-func KSecValueRef() objc.ID { return purego.CFConstant(raw.KSecValueRef()) }
+// KSecValueRef returns the value of the constant kSecValueRef.
+func KSecValueRef() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecValueRef"))) }
 
-// KSecValuePersistentRef returns the value of the CoreFoundation reference constant kSecValuePersistentRef as an objc.ID.
-func KSecValuePersistentRef() objc.ID { return purego.CFConstant(raw.KSecValuePersistentRef()) }
+// KSecValuePersistentRef returns the value of the constant kSecValuePersistentRef.
+func KSecValuePersistentRef() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecValuePersistentRef")))
+}
 
-// @enum Other Constants @discussion Predefined constants used to set values in a dictionary. @constant kSecUseItemList Specifies a dictionary key whose value is a CFArray of items. If provided, this array is treated as the set of all possible items to search, or add if the API being called is SecItemAdd. The items in this array may be of type SecKeyRef, SecCertificateRef, SecIdentityRef, or CFDataRef (for a persistent item reference.) The items in the array must all be of the same type. When this attribute is provided, no keychains are searched. @constant kSecUseKeychain macOS only. Specifies a dictionary key whose value is a keychain reference. You use this key to specify a value of type SecKeychainRef to which SecItemAdd will add the provided item(s). @constant kSecUseOperationPrompt Specifies a dictionary key whose value is a CFStringRef that represents a user-visible string describing the operation for which the application is attempting to authenticate. The application is responsible for the text localization. @constant kSecUseNoAuthenticationUI Specifies a dictionary key whose value is a CFBooleanRef. If provided with a value of kCFBooleanTrue, the error errSecInteractionNotAllowed will be returned if the item is attempting to authenticate with UI. Note: on macOS, this attribute only applies to items stored in the Data Protection keychain. Legacy keychain items will still activate UI if needed. @constant kSecUseAuthenticationUI Specifies a dictionary key whose value is one of kSecUseAuthenticationUIAllow, kSecUseAuthenticationUIFail, kSecUseAuthenticationUISkip. @constant kSecUseAuthenticationContext Specifies a dictionary key whose value is LAContext to be used for keychain item authentication. If the item requires authentication and this key is omitted, a new context will be created just for the purpose of the single call. If the specified context has been previously authenticated, the operation will succeed without asking user for authentication. If the specified context has not been previously authenticated, the new authentication will be started on this context, allowing caller to eventually reuse the successfully authenticated context in subsequent keychain operations. @constant kSecUseDataProtectionKeychain Specifies a dictionary key whose value is a CFBooleanRef. Set to kCFBooleanTrue to use kSecAttrAccessGroup and/or kSecAttrAccessible on macOS without requiring the item to be marked synchronizable. Note that when kSecUseDataProtectionKeychain is set to true, returning references is supported only for Certificate, Key or Identity items. @constant kSecUseUserIndependentKeychain Specifies a dctionary key whose value is a CFBooleanRef indicating whether the item is shared with other personas on the system.
-// KSecUseItemList returns the value of the CoreFoundation reference constant kSecUseItemList as an objc.ID.
-func KSecUseItemList() objc.ID { return purego.CFConstant(raw.KSecUseItemList()) }
+// Predefined constants used to set values in a dictionary.
+// KSecUseItemList returns the value of the constant kSecUseItemList.
+func KSecUseItemList() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecUseItemList"))) }
 
-// KSecUseKeychain returns the value of the CoreFoundation reference constant kSecUseKeychain as an objc.ID.
-func KSecUseKeychain() objc.ID { return purego.CFConstant(raw.KSecUseKeychain()) }
+// KSecUseKeychain returns the value of the constant kSecUseKeychain.
+func KSecUseKeychain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecUseKeychain"))) }
 
-// KSecUseOperationPrompt returns the value of the CoreFoundation reference constant kSecUseOperationPrompt as an objc.ID.
-func KSecUseOperationPrompt() objc.ID { return purego.CFConstant(raw.KSecUseOperationPrompt()) }
+// KSecUseOperationPrompt returns the value of the constant kSecUseOperationPrompt.
+func KSecUseOperationPrompt() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecUseOperationPrompt")))
+}
 
-// KSecUseNoAuthenticationUI returns the value of the CoreFoundation reference constant kSecUseNoAuthenticationUI as an objc.ID.
-func KSecUseNoAuthenticationUI() objc.ID { return purego.CFConstant(raw.KSecUseNoAuthenticationUI()) }
+// KSecUseNoAuthenticationUI returns the value of the constant kSecUseNoAuthenticationUI.
+func KSecUseNoAuthenticationUI() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecUseNoAuthenticationUI")))
+}
 
-// KSecUseAuthenticationUI returns the value of the CoreFoundation reference constant kSecUseAuthenticationUI as an objc.ID.
-func KSecUseAuthenticationUI() objc.ID { return purego.CFConstant(raw.KSecUseAuthenticationUI()) }
+// KSecUseAuthenticationUI returns the value of the constant kSecUseAuthenticationUI.
+func KSecUseAuthenticationUI() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecUseAuthenticationUI")))
+}
 
-// KSecUseAuthenticationContext returns the value of the CoreFoundation reference constant kSecUseAuthenticationContext as an objc.ID.
-func KSecUseAuthenticationContext() objc.ID {
-	return purego.CFConstant(raw.KSecUseAuthenticationContext())
+// KSecUseAuthenticationContext returns the value of the constant kSecUseAuthenticationContext.
+func KSecUseAuthenticationContext() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecUseAuthenticationContext")))
 }
 
-// KSecUseDataProtectionKeychain returns the value of the CoreFoundation reference constant kSecUseDataProtectionKeychain as an objc.ID.
-func KSecUseDataProtectionKeychain() objc.ID {
-	return purego.CFConstant(raw.KSecUseDataProtectionKeychain())
+// KSecUseDataProtectionKeychain returns the value of the constant kSecUseDataProtectionKeychain.
+func KSecUseDataProtectionKeychain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecUseDataProtectionKeychain")))
 }
 
-// @enum kSecUseAuthenticationUI Value Constants @discussion Predefined item attribute constants used to get or set values in a dictionary. The kSecUseAuthenticationUI constant is the key and its value is one of the constants defined here. If the key kSecUseAuthenticationUI not provided then kSecUseAuthenticationUIAllow is used as default. @constant kSecUseAuthenticationUIAllow Specifies that authenticate UI can appear. @constant kSecUseAuthenticationUIFail Specifies that the error errSecInteractionNotAllowed will be returned if an item needs to authenticate with UI @constant kSecUseAuthenticationUISkip Specifies that all items which need to authenticate with UI will be silently skipped. This value can be used only with SecItemCopyMatching.
-// KSecUseAuthenticationUIAllow returns the value of the CoreFoundation reference constant kSecUseAuthenticationUIAllow as an objc.ID.
-func KSecUseAuthenticationUIAllow() objc.ID {
-	return purego.CFConstant(raw.KSecUseAuthenticationUIAllow())
+// Predefined item attribute constants used to get or set values in a dictionary. The kSecUseAuthenticationUI constant is the key and its value is one of the constants defined here. If the key kSecUseAuthenticationUI not provided then kSecUseAuthenticationUIAllow is used as default.
+// KSecUseAuthenticationUIAllow returns the value of the constant kSecUseAuthenticationUIAllow.
+func KSecUseAuthenticationUIAllow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecUseAuthenticationUIAllow")))
 }
 
-// KSecUseAuthenticationUIFail returns the value of the CoreFoundation reference constant kSecUseAuthenticationUIFail as an objc.ID.
-func KSecUseAuthenticationUIFail() objc.ID {
-	return purego.CFConstant(raw.KSecUseAuthenticationUIFail())
+// KSecUseAuthenticationUIFail returns the value of the constant kSecUseAuthenticationUIFail.
+func KSecUseAuthenticationUIFail() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecUseAuthenticationUIFail")))
 }
 
-// KSecUseAuthenticationUISkip returns the value of the CoreFoundation reference constant kSecUseAuthenticationUISkip as an objc.ID.
-func KSecUseAuthenticationUISkip() objc.ID {
-	return purego.CFConstant(raw.KSecUseAuthenticationUISkip())
+// KSecUseAuthenticationUISkip returns the value of the constant kSecUseAuthenticationUISkip.
+func KSecUseAuthenticationUISkip() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecUseAuthenticationUISkip")))
 }
 
-// @enum kSecAttrTokenID Value Constants @discussion Predefined item attribute constant used to get or set values in a dictionary. The kSecAttrTokenID constant is the key and its value can be kSecAttrTokenIDSecureEnclave. @constant kSecAttrTokenIDSecureEnclave Specifies well-known identifier of the token implemented using device's Secure Enclave. The only keychain items supported by the Secure Enclave token are 256-bit elliptic curve keys (kSecAttrKeyTypeECSecPrimeRandom). Keys must be generated on the secure enclave using SecKeyGenerateKeyPair call with kSecAttrTokenID set to kSecAttrTokenIDSecureEnclave in the parameters dictionary, it is not possible to import pregenerated keys to kSecAttrTokenIDSecureEnclave token.
-// KSecAttrTokenIDSecureEnclave returns the value of the CoreFoundation reference constant kSecAttrTokenIDSecureEnclave as an objc.ID.
-func KSecAttrTokenIDSecureEnclave() objc.ID {
-	return purego.CFConstant(raw.KSecAttrTokenIDSecureEnclave())
+// Predefined item attribute constant used to get or set values in a dictionary. The kSecAttrTokenID constant is the key and its value can be kSecAttrTokenIDSecureEnclave.
+// KSecAttrTokenIDSecureEnclave returns the value of the constant kSecAttrTokenIDSecureEnclave.
+func KSecAttrTokenIDSecureEnclave() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrTokenIDSecureEnclave")))
 }
 
-// @enum kSecAttrAccessGroup Value Constants @constant kSecAttrAccessGroupToken Represents well-known access group which contains items provided by external token (typically smart card). This may be used as a value for kSecAttrAccessGroup attribute. Every application has access to this access group so it is not needed to explicitly list it in keychain-access-groups entitlement, but application must explicitly state this access group in keychain queries in order to be able to access items from external tokens.
-// KSecAttrAccessGroupToken returns the value of the CoreFoundation reference constant kSecAttrAccessGroupToken as an objc.ID.
-func KSecAttrAccessGroupToken() objc.ID { return purego.CFConstant(raw.KSecAttrAccessGroupToken()) }
+// KSecAttrAccessGroupToken returns the value of the constant kSecAttrAccessGroupToken.
+func KSecAttrAccessGroupToken() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecAttrAccessGroupToken")))
+}
 
-// KSecACLAuthorizationAny returns the value of the CoreFoundation reference constant kSecACLAuthorizationAny as an objc.ID.
-func KSecACLAuthorizationAny() objc.ID { return purego.CFConstant(raw.KSecACLAuthorizationAny()) }
+// KSecACLAuthorizationAny returns the value of the constant kSecACLAuthorizationAny.
+func KSecACLAuthorizationAny() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationAny")))
+}
 
-// KSecACLAuthorizationLogin returns the value of the CoreFoundation reference constant kSecACLAuthorizationLogin as an objc.ID.
-func KSecACLAuthorizationLogin() objc.ID { return purego.CFConstant(raw.KSecACLAuthorizationLogin()) }
+// KSecACLAuthorizationLogin returns the value of the constant kSecACLAuthorizationLogin.
+func KSecACLAuthorizationLogin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationLogin")))
+}
 
-// KSecACLAuthorizationGenKey returns the value of the CoreFoundation reference constant kSecACLAuthorizationGenKey as an objc.ID.
-func KSecACLAuthorizationGenKey() objc.ID { return purego.CFConstant(raw.KSecACLAuthorizationGenKey()) }
+// KSecACLAuthorizationGenKey returns the value of the constant kSecACLAuthorizationGenKey.
+func KSecACLAuthorizationGenKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationGenKey")))
+}
 
-// KSecACLAuthorizationDelete returns the value of the CoreFoundation reference constant kSecACLAuthorizationDelete as an objc.ID.
-func KSecACLAuthorizationDelete() objc.ID { return purego.CFConstant(raw.KSecACLAuthorizationDelete()) }
+// KSecACLAuthorizationDelete returns the value of the constant kSecACLAuthorizationDelete.
+func KSecACLAuthorizationDelete() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationDelete")))
+}
 
-// KSecACLAuthorizationExportWrapped returns the value of the CoreFoundation reference constant kSecACLAuthorizationExportWrapped as an objc.ID.
-func KSecACLAuthorizationExportWrapped() objc.ID {
-	return purego.CFConstant(raw.KSecACLAuthorizationExportWrapped())
+// KSecACLAuthorizationExportWrapped returns the value of the constant kSecACLAuthorizationExportWrapped.
+func KSecACLAuthorizationExportWrapped() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationExportWrapped")))
 }
 
-// KSecACLAuthorizationExportClear returns the value of the CoreFoundation reference constant kSecACLAuthorizationExportClear as an objc.ID.
-func KSecACLAuthorizationExportClear() objc.ID {
-	return purego.CFConstant(raw.KSecACLAuthorizationExportClear())
+// KSecACLAuthorizationExportClear returns the value of the constant kSecACLAuthorizationExportClear.
+func KSecACLAuthorizationExportClear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationExportClear")))
 }
 
-// KSecACLAuthorizationImportWrapped returns the value of the CoreFoundation reference constant kSecACLAuthorizationImportWrapped as an objc.ID.
-func KSecACLAuthorizationImportWrapped() objc.ID {
-	return purego.CFConstant(raw.KSecACLAuthorizationImportWrapped())
+// KSecACLAuthorizationImportWrapped returns the value of the constant kSecACLAuthorizationImportWrapped.
+func KSecACLAuthorizationImportWrapped() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationImportWrapped")))
 }
 
-// KSecACLAuthorizationImportClear returns the value of the CoreFoundation reference constant kSecACLAuthorizationImportClear as an objc.ID.
-func KSecACLAuthorizationImportClear() objc.ID {
-	return purego.CFConstant(raw.KSecACLAuthorizationImportClear())
+// KSecACLAuthorizationImportClear returns the value of the constant kSecACLAuthorizationImportClear.
+func KSecACLAuthorizationImportClear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationImportClear")))
 }
 
-// KSecACLAuthorizationSign returns the value of the CoreFoundation reference constant kSecACLAuthorizationSign as an objc.ID.
-func KSecACLAuthorizationSign() objc.ID { return purego.CFConstant(raw.KSecACLAuthorizationSign()) }
+// KSecACLAuthorizationSign returns the value of the constant kSecACLAuthorizationSign.
+func KSecACLAuthorizationSign() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationSign")))
+}
 
-// KSecACLAuthorizationEncrypt returns the value of the CoreFoundation reference constant kSecACLAuthorizationEncrypt as an objc.ID.
-func KSecACLAuthorizationEncrypt() objc.ID {
-	return purego.CFConstant(raw.KSecACLAuthorizationEncrypt())
+// KSecACLAuthorizationEncrypt returns the value of the constant kSecACLAuthorizationEncrypt.
+func KSecACLAuthorizationEncrypt() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationEncrypt")))
 }
 
-// KSecACLAuthorizationDecrypt returns the value of the CoreFoundation reference constant kSecACLAuthorizationDecrypt as an objc.ID.
-func KSecACLAuthorizationDecrypt() objc.ID {
-	return purego.CFConstant(raw.KSecACLAuthorizationDecrypt())
+// KSecACLAuthorizationDecrypt returns the value of the constant kSecACLAuthorizationDecrypt.
+func KSecACLAuthorizationDecrypt() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationDecrypt")))
 }
 
-// KSecACLAuthorizationMAC returns the value of the CoreFoundation reference constant kSecACLAuthorizationMAC as an objc.ID.
-func KSecACLAuthorizationMAC() objc.ID { return purego.CFConstant(raw.KSecACLAuthorizationMAC()) }
+// KSecACLAuthorizationMAC returns the value of the constant kSecACLAuthorizationMAC.
+func KSecACLAuthorizationMAC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationMAC")))
+}
 
-// KSecACLAuthorizationDerive returns the value of the CoreFoundation reference constant kSecACLAuthorizationDerive as an objc.ID.
-func KSecACLAuthorizationDerive() objc.ID { return purego.CFConstant(raw.KSecACLAuthorizationDerive()) }
+// KSecACLAuthorizationDerive returns the value of the constant kSecACLAuthorizationDerive.
+func KSecACLAuthorizationDerive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationDerive")))
+}
 
-// KSecACLAuthorizationKeychainCreate returns the value of the CoreFoundation reference constant kSecACLAuthorizationKeychainCreate as an objc.ID.
-func KSecACLAuthorizationKeychainCreate() objc.ID {
-	return purego.CFConstant(raw.KSecACLAuthorizationKeychainCreate())
+// KSecACLAuthorizationKeychainCreate returns the value of the constant kSecACLAuthorizationKeychainCreate.
+func KSecACLAuthorizationKeychainCreate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationKeychainCreate")))
 }
 
-// KSecACLAuthorizationKeychainDelete returns the value of the CoreFoundation reference constant kSecACLAuthorizationKeychainDelete as an objc.ID.
-func KSecACLAuthorizationKeychainDelete() objc.ID {
-	return purego.CFConstant(raw.KSecACLAuthorizationKeychainDelete())
+// KSecACLAuthorizationKeychainDelete returns the value of the constant kSecACLAuthorizationKeychainDelete.
+func KSecACLAuthorizationKeychainDelete() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationKeychainDelete")))
 }
 
-// KSecACLAuthorizationKeychainItemRead returns the value of the CoreFoundation reference constant kSecACLAuthorizationKeychainItemRead as an objc.ID.
-func KSecACLAuthorizationKeychainItemRead() objc.ID {
-	return purego.CFConstant(raw.KSecACLAuthorizationKeychainItemRead())
+// KSecACLAuthorizationKeychainItemRead returns the value of the constant kSecACLAuthorizationKeychainItemRead.
+func KSecACLAuthorizationKeychainItemRead() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationKeychainItemRead")))
 }
 
-// KSecACLAuthorizationKeychainItemInsert returns the value of the CoreFoundation reference constant kSecACLAuthorizationKeychainItemInsert as an objc.ID.
-func KSecACLAuthorizationKeychainItemInsert() objc.ID {
-	return purego.CFConstant(raw.KSecACLAuthorizationKeychainItemInsert())
+// KSecACLAuthorizationKeychainItemInsert returns the value of the constant kSecACLAuthorizationKeychainItemInsert.
+func KSecACLAuthorizationKeychainItemInsert() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationKeychainItemInsert")))
 }
 
-// KSecACLAuthorizationKeychainItemModify returns the value of the CoreFoundation reference constant kSecACLAuthorizationKeychainItemModify as an objc.ID.
-func KSecACLAuthorizationKeychainItemModify() objc.ID {
-	return purego.CFConstant(raw.KSecACLAuthorizationKeychainItemModify())
+// KSecACLAuthorizationKeychainItemModify returns the value of the constant kSecACLAuthorizationKeychainItemModify.
+func KSecACLAuthorizationKeychainItemModify() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationKeychainItemModify")))
 }
 
-// KSecACLAuthorizationKeychainItemDelete returns the value of the CoreFoundation reference constant kSecACLAuthorizationKeychainItemDelete as an objc.ID.
-func KSecACLAuthorizationKeychainItemDelete() objc.ID {
-	return purego.CFConstant(raw.KSecACLAuthorizationKeychainItemDelete())
+// KSecACLAuthorizationKeychainItemDelete returns the value of the constant kSecACLAuthorizationKeychainItemDelete.
+func KSecACLAuthorizationKeychainItemDelete() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationKeychainItemDelete")))
 }
 
-// KSecACLAuthorizationChangeACL returns the value of the CoreFoundation reference constant kSecACLAuthorizationChangeACL as an objc.ID.
-func KSecACLAuthorizationChangeACL() objc.ID {
-	return purego.CFConstant(raw.KSecACLAuthorizationChangeACL())
+// KSecACLAuthorizationChangeACL returns the value of the constant kSecACLAuthorizationChangeACL.
+func KSecACLAuthorizationChangeACL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationChangeACL")))
 }
 
-// KSecACLAuthorizationChangeOwner returns the value of the CoreFoundation reference constant kSecACLAuthorizationChangeOwner as an objc.ID.
-func KSecACLAuthorizationChangeOwner() objc.ID {
-	return purego.CFConstant(raw.KSecACLAuthorizationChangeOwner())
+// KSecACLAuthorizationChangeOwner returns the value of the constant kSecACLAuthorizationChangeOwner.
+func KSecACLAuthorizationChangeOwner() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationChangeOwner")))
 }
 
-// KSecACLAuthorizationPartitionID returns the value of the CoreFoundation reference constant kSecACLAuthorizationPartitionID as an objc.ID.
-func KSecACLAuthorizationPartitionID() objc.ID {
-	return purego.CFConstant(raw.KSecACLAuthorizationPartitionID())
+// KSecACLAuthorizationPartitionID returns the value of the constant kSecACLAuthorizationPartitionID.
+func KSecACLAuthorizationPartitionID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationPartitionID")))
 }
 
-// KSecACLAuthorizationIntegrity returns the value of the CoreFoundation reference constant kSecACLAuthorizationIntegrity as an objc.ID.
-func KSecACLAuthorizationIntegrity() objc.ID {
-	return purego.CFConstant(raw.KSecACLAuthorizationIntegrity())
+// KSecACLAuthorizationIntegrity returns the value of the constant kSecACLAuthorizationIntegrity.
+func KSecACLAuthorizationIntegrity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecACLAuthorizationIntegrity")))
 }
 
-// @enum Key Parameter Constants @discussion Predefined key constants used to get or set values in a dictionary. These are used to provide explicit parameters to key generation functions when non-default values are desired. See the description of the SecKeyGeneratePair API for usage information. @constant kSecPrivateKeyAttrs The value for this key is a CFDictionaryRef containing attributes specific for the private key to be generated. @constant kSecPublicKeyAttrs The value for this key is a CFDictionaryRef containing attributes specific for the public key to be generated.
-// KSecPrivateKeyAttrs returns the value of the CoreFoundation reference constant kSecPrivateKeyAttrs as an objc.ID.
-func KSecPrivateKeyAttrs() objc.ID { return purego.CFConstant(raw.KSecPrivateKeyAttrs()) }
+// Predefined key constants used to get or set values in a dictionary. These are used to provide explicit parameters to key generation functions when non-default values are desired. See the description of the SecKeyGeneratePair API for usage information.
+// KSecPrivateKeyAttrs returns the value of the constant kSecPrivateKeyAttrs.
+func KSecPrivateKeyAttrs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPrivateKeyAttrs")))
+}
 
-// KSecPublicKeyAttrs returns the value of the CoreFoundation reference constant kSecPublicKeyAttrs as an objc.ID.
-func KSecPublicKeyAttrs() objc.ID { return purego.CFConstant(raw.KSecPublicKeyAttrs()) }
+// KSecPublicKeyAttrs returns the value of the constant kSecPublicKeyAttrs.
+func KSecPublicKeyAttrs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPublicKeyAttrs")))
+}
 
-// @enum Policy Constants @discussion Predefined constants used to specify a policy. @constant kSecPolicyAppleX509Basic @constant kSecPolicyAppleSSL @constant kSecPolicyAppleSMIME @constant kSecPolicyAppleEAP @constant kSecPolicyAppleiChat @constant kSecPolicyAppleIPsec @constant kSecPolicyApplePKINITClient @constant kSecPolicyApplePKINITServer @constant kSecPolicyAppleCodeSigning @constant kSecPolicyMacAppStoreReceipt @constant kSecPolicyAppleIDValidation @constant kSecPolicyAppleTimeStamping @constant kSecPolicyAppleRevocation @constant kSecPolicyApplePassbookSigning @constant kSecPolicyApplePayIssuerEncryption
-// KSecPolicyAppleX509Basic returns the value of the CoreFoundation reference constant kSecPolicyAppleX509Basic as an objc.ID.
-func KSecPolicyAppleX509Basic() objc.ID { return purego.CFConstant(raw.KSecPolicyAppleX509Basic()) }
+// Predefined constants used to specify a policy.
+// KSecPolicyAppleX509Basic returns the value of the constant kSecPolicyAppleX509Basic.
+func KSecPolicyAppleX509Basic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyAppleX509Basic")))
+}
 
-// KSecPolicyAppleSSL returns the value of the CoreFoundation reference constant kSecPolicyAppleSSL as an objc.ID.
-func KSecPolicyAppleSSL() objc.ID { return purego.CFConstant(raw.KSecPolicyAppleSSL()) }
+// KSecPolicyAppleSSL returns the value of the constant kSecPolicyAppleSSL.
+func KSecPolicyAppleSSL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyAppleSSL")))
+}
 
-// KSecPolicyAppleSMIME returns the value of the CoreFoundation reference constant kSecPolicyAppleSMIME as an objc.ID.
-func KSecPolicyAppleSMIME() objc.ID { return purego.CFConstant(raw.KSecPolicyAppleSMIME()) }
+// KSecPolicyAppleSMIME returns the value of the constant kSecPolicyAppleSMIME.
+func KSecPolicyAppleSMIME() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyAppleSMIME")))
+}
 
-// KSecPolicyAppleEAP returns the value of the CoreFoundation reference constant kSecPolicyAppleEAP as an objc.ID.
-func KSecPolicyAppleEAP() objc.ID { return purego.CFConstant(raw.KSecPolicyAppleEAP()) }
+// KSecPolicyAppleEAP returns the value of the constant kSecPolicyAppleEAP.
+func KSecPolicyAppleEAP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyAppleEAP")))
+}
 
-// KSecPolicyAppleIPsec returns the value of the CoreFoundation reference constant kSecPolicyAppleIPsec as an objc.ID.
-func KSecPolicyAppleIPsec() objc.ID { return purego.CFConstant(raw.KSecPolicyAppleIPsec()) }
+// KSecPolicyAppleIPsec returns the value of the constant kSecPolicyAppleIPsec.
+func KSecPolicyAppleIPsec() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyAppleIPsec")))
+}
 
-// KSecPolicyAppleiChat returns the value of the CoreFoundation reference constant kSecPolicyAppleiChat as an objc.ID.
-func KSecPolicyAppleiChat() objc.ID { return purego.CFConstant(raw.KSecPolicyAppleiChat()) }
+// KSecPolicyAppleiChat returns the value of the constant kSecPolicyAppleiChat.
+func KSecPolicyAppleiChat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyAppleiChat")))
+}
 
-// KSecPolicyApplePKINITClient returns the value of the CoreFoundation reference constant kSecPolicyApplePKINITClient as an objc.ID.
-func KSecPolicyApplePKINITClient() objc.ID {
-	return purego.CFConstant(raw.KSecPolicyApplePKINITClient())
+// KSecPolicyApplePKINITClient returns the value of the constant kSecPolicyApplePKINITClient.
+func KSecPolicyApplePKINITClient() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyApplePKINITClient")))
 }
 
-// KSecPolicyApplePKINITServer returns the value of the CoreFoundation reference constant kSecPolicyApplePKINITServer as an objc.ID.
-func KSecPolicyApplePKINITServer() objc.ID {
-	return purego.CFConstant(raw.KSecPolicyApplePKINITServer())
+// KSecPolicyApplePKINITServer returns the value of the constant kSecPolicyApplePKINITServer.
+func KSecPolicyApplePKINITServer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyApplePKINITServer")))
 }
 
-// KSecPolicyAppleCodeSigning returns the value of the CoreFoundation reference constant kSecPolicyAppleCodeSigning as an objc.ID.
-func KSecPolicyAppleCodeSigning() objc.ID { return purego.CFConstant(raw.KSecPolicyAppleCodeSigning()) }
+// KSecPolicyAppleCodeSigning returns the value of the constant kSecPolicyAppleCodeSigning.
+func KSecPolicyAppleCodeSigning() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyAppleCodeSigning")))
+}
 
-// KSecPolicyMacAppStoreReceipt returns the value of the CoreFoundation reference constant kSecPolicyMacAppStoreReceipt as an objc.ID.
-func KSecPolicyMacAppStoreReceipt() objc.ID {
-	return purego.CFConstant(raw.KSecPolicyMacAppStoreReceipt())
+// KSecPolicyMacAppStoreReceipt returns the value of the constant kSecPolicyMacAppStoreReceipt.
+func KSecPolicyMacAppStoreReceipt() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyMacAppStoreReceipt")))
 }
 
-// KSecPolicyAppleIDValidation returns the value of the CoreFoundation reference constant kSecPolicyAppleIDValidation as an objc.ID.
-func KSecPolicyAppleIDValidation() objc.ID {
-	return purego.CFConstant(raw.KSecPolicyAppleIDValidation())
+// KSecPolicyAppleIDValidation returns the value of the constant kSecPolicyAppleIDValidation.
+func KSecPolicyAppleIDValidation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyAppleIDValidation")))
 }
 
-// KSecPolicyAppleTimeStamping returns the value of the CoreFoundation reference constant kSecPolicyAppleTimeStamping as an objc.ID.
-func KSecPolicyAppleTimeStamping() objc.ID {
-	return purego.CFConstant(raw.KSecPolicyAppleTimeStamping())
+// KSecPolicyAppleTimeStamping returns the value of the constant kSecPolicyAppleTimeStamping.
+func KSecPolicyAppleTimeStamping() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyAppleTimeStamping")))
 }
 
-// KSecPolicyAppleRevocation returns the value of the CoreFoundation reference constant kSecPolicyAppleRevocation as an objc.ID.
-func KSecPolicyAppleRevocation() objc.ID { return purego.CFConstant(raw.KSecPolicyAppleRevocation()) }
+// KSecPolicyAppleRevocation returns the value of the constant kSecPolicyAppleRevocation.
+func KSecPolicyAppleRevocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyAppleRevocation")))
+}
 
-// KSecPolicyApplePassbookSigning returns the value of the CoreFoundation reference constant kSecPolicyApplePassbookSigning as an objc.ID.
-func KSecPolicyApplePassbookSigning() objc.ID {
-	return purego.CFConstant(raw.KSecPolicyApplePassbookSigning())
+// KSecPolicyApplePassbookSigning returns the value of the constant kSecPolicyApplePassbookSigning.
+func KSecPolicyApplePassbookSigning() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyApplePassbookSigning")))
 }
 
-// KSecPolicyApplePayIssuerEncryption returns the value of the CoreFoundation reference constant kSecPolicyApplePayIssuerEncryption as an objc.ID.
-func KSecPolicyApplePayIssuerEncryption() objc.ID {
-	return purego.CFConstant(raw.KSecPolicyApplePayIssuerEncryption())
+// KSecPolicyApplePayIssuerEncryption returns the value of the constant kSecPolicyApplePayIssuerEncryption.
+func KSecPolicyApplePayIssuerEncryption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyApplePayIssuerEncryption")))
 }
 
-// KSecPolicyAppleSSLServer returns the value of the CoreFoundation reference constant kSecPolicyAppleSSLServer as an objc.ID.
-func KSecPolicyAppleSSLServer() objc.ID { return purego.CFConstant(raw.KSecPolicyAppleSSLServer()) }
+// KSecPolicyAppleSSLServer returns the value of the constant kSecPolicyAppleSSLServer.
+func KSecPolicyAppleSSLServer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyAppleSSLServer")))
+}
 
-// KSecPolicyAppleSSLClient returns the value of the CoreFoundation reference constant kSecPolicyAppleSSLClient as an objc.ID.
-func KSecPolicyAppleSSLClient() objc.ID { return purego.CFConstant(raw.KSecPolicyAppleSSLClient()) }
+// KSecPolicyAppleSSLClient returns the value of the constant kSecPolicyAppleSSLClient.
+func KSecPolicyAppleSSLClient() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyAppleSSLClient")))
+}
 
-// KSecPolicyAppleEAPServer returns the value of the CoreFoundation reference constant kSecPolicyAppleEAPServer as an objc.ID.
-func KSecPolicyAppleEAPServer() objc.ID { return purego.CFConstant(raw.KSecPolicyAppleEAPServer()) }
+// KSecPolicyAppleEAPServer returns the value of the constant kSecPolicyAppleEAPServer.
+func KSecPolicyAppleEAPServer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyAppleEAPServer")))
+}
 
-// KSecPolicyAppleEAPClient returns the value of the CoreFoundation reference constant kSecPolicyAppleEAPClient as an objc.ID.
-func KSecPolicyAppleEAPClient() objc.ID { return purego.CFConstant(raw.KSecPolicyAppleEAPClient()) }
+// KSecPolicyAppleEAPClient returns the value of the constant kSecPolicyAppleEAPClient.
+func KSecPolicyAppleEAPClient() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyAppleEAPClient")))
+}
 
-// KSecPolicyAppleIPSecServer returns the value of the CoreFoundation reference constant kSecPolicyAppleIPSecServer as an objc.ID.
-func KSecPolicyAppleIPSecServer() objc.ID { return purego.CFConstant(raw.KSecPolicyAppleIPSecServer()) }
+// KSecPolicyAppleIPSecServer returns the value of the constant kSecPolicyAppleIPSecServer.
+func KSecPolicyAppleIPSecServer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyAppleIPSecServer")))
+}
 
-// KSecPolicyAppleIPSecClient returns the value of the CoreFoundation reference constant kSecPolicyAppleIPSecClient as an objc.ID.
-func KSecPolicyAppleIPSecClient() objc.ID { return purego.CFConstant(raw.KSecPolicyAppleIPSecClient()) }
+// KSecPolicyAppleIPSecClient returns the value of the constant kSecPolicyAppleIPSecClient.
+func KSecPolicyAppleIPSecClient() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyAppleIPSecClient")))
+}
 
-// @enum Policy Value Constants @abstract Predefined property key constants used to get or set values in a dictionary for a policy instance. @discussion All policies will have the following read-only value: kSecPolicyOid       (the policy object identifier) Additional policy values which your code can optionally set: kSecPolicyName      (name which must be matched) kSecPolicyClient    (evaluate for client, rather than server) kSecPolicyRevocationFlags   (only valid for a revocation policy) kSecPolicyTeamIdentifier    (only valid for a Passbook signing policy) @constant kSecPolicyOid Specifies the policy OID (value is a CFStringRef) @constant kSecPolicyName Specifies a CFStringRef (or CFArrayRef of same) containing a name which must be matched in the certificate to satisfy this policy. For SSL/TLS, EAP, and IPSec policies, this specifies the server name which must match the common name of the certificate. For S/MIME, this specifies the RFC822 email address. For Passbook signing, this specifies the pass signer. @constant kSecPolicyClient Specifies a CFBooleanRef value that indicates this evaluation should be for a client certificate. If not set (or false), the policy evaluates the certificate as a server certificate. @constant kSecPolicyRevocationFlags Specifies a CFNumberRef that holds a kCFNumberCFIndexType bitmask value. See "Revocation Policy Constants" for a description of individual bits in this value. @constant kSecPolicyTeamIdentifier Specifies a CFStringRef containing a team identifier which must be matched in the certificate to satisfy this policy. For the Passbook signing policy, this string must match the Organizational Unit field of the certificate subject.
-// KSecPolicyOid returns the value of the CoreFoundation reference constant kSecPolicyOid as an objc.ID.
-func KSecPolicyOid() objc.ID { return purego.CFConstant(raw.KSecPolicyOid()) }
+// Predefined property key constants used to get or set values in a dictionary for a policy instance. All policies will have the following read-only value: kSecPolicyOid       (the policy object identifier) Additional policy values which your code can optionally set: kSecPolicyName      (name which must be matched) kSecPolicyClient    (evaluate for client, rather than server) kSecPolicyRevocationFlags   (only valid for a revocation policy) kSecPolicyTeamIdentifier    (only valid for a Passbook signing policy)
+// KSecPolicyOid returns the value of the constant kSecPolicyOid.
+func KSecPolicyOid() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyOid"))) }
 
-// KSecPolicyName returns the value of the CoreFoundation reference constant kSecPolicyName as an objc.ID.
-func KSecPolicyName() objc.ID { return purego.CFConstant(raw.KSecPolicyName()) }
+// KSecPolicyName returns the value of the constant kSecPolicyName.
+func KSecPolicyName() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyName"))) }
 
-// KSecPolicyClient returns the value of the CoreFoundation reference constant kSecPolicyClient as an objc.ID.
-func KSecPolicyClient() objc.ID { return purego.CFConstant(raw.KSecPolicyClient()) }
+// KSecPolicyClient returns the value of the constant kSecPolicyClient.
+func KSecPolicyClient() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyClient"))) }
 
-// KSecPolicyRevocationFlags returns the value of the CoreFoundation reference constant kSecPolicyRevocationFlags as an objc.ID.
-func KSecPolicyRevocationFlags() objc.ID { return purego.CFConstant(raw.KSecPolicyRevocationFlags()) }
+// KSecPolicyRevocationFlags returns the value of the constant kSecPolicyRevocationFlags.
+func KSecPolicyRevocationFlags() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyRevocationFlags")))
+}
 
-// KSecPolicyTeamIdentifier returns the value of the CoreFoundation reference constant kSecPolicyTeamIdentifier as an objc.ID.
-func KSecPolicyTeamIdentifier() objc.ID { return purego.CFConstant(raw.KSecPolicyTeamIdentifier()) }
+// KSecPolicyTeamIdentifier returns the value of the constant kSecPolicyTeamIdentifier.
+func KSecPolicyTeamIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyTeamIdentifier")))
+}
 
-// @enum Policy Value Constants (macOS) @discussion Predefined property key constants used to get or set values in a dictionary for a policy instance. Some policy values may specify CFBooleanRef key usage constraints: kSecPolicyKU_DigitalSignature kSecPolicyKU_NonRepudiation kSecPolicyKU_KeyEncipherment kSecPolicyKU_DataEncipherment kSecPolicyKU_KeyAgreement kSecPolicyKU_KeyCertSign kSecPolicyKU_CRLSign kSecPolicyKU_EncipherOnly kSecPolicyKU_DecipherOnly kSecPolicyKU policy values define certificate-level key purposes, in contrast to the key-level definitions in SecItem.h For example, a key in a certificate might be acceptable to use for signing a CRL, but not for signing another certificate. In either case, this key would have the ability to sign (i.e. kSecAttrCanSign is true), but may only sign for specific purposes allowed by these policy constants. Similarly, a public key might have the capability to perform encryption or decryption, but the certificate in which it resides might have a decipher-only certificate policy. These constants correspond to values defined in RFC 5280, section 4.2.1.3 (Key Usage) which define the purpose of a key contained in a certificate, in contrast to section 4.1.2.7 which define the uses that a key is capable of. Note: these constants are not available on iOS. Your code should avoid direct reliance on these values for making policy decisions and use higher level policies where possible. @constant kSecPolicyKU_DigitalSignature Specifies that the certificate must have a key usage that allows it to be used for signing. @constant kSecPolicyKU_NonRepudiation Specifies that the certificate must have a key usage that allows it to be used for non-repudiation. @constant kSecPolicyKU_KeyEncipherment Specifies that the certificate must have a key usage that allows it to be used for key encipherment. @constant kSecPolicyKU_DataEncipherment Specifies that the certificate must have a key usage that allows it to be used for data encipherment. @constant kSecPolicyKU_KeyAgreement Specifies that the certificate must have a key usage that allows it to be used for key agreement. @constant kSecPolicyKU_KeyCertSign Specifies that the certificate must have a key usage that allows it to be used for signing certificates. @constant kSecPolicyKU_CRLSign Specifies that the certificate must have a key usage that allows it to be used for signing CRLs. @constant kSecPolicyKU_EncipherOnly Specifies that the certificate must have a key usage that permits it to be used for encryption only. @constant kSecPolicyKU_DecipherOnly Specifies that the certificate must have a key usage that permits it to be used for decryption only.
-// KSecPolicyKU_DigitalSignature returns the value of the CoreFoundation reference constant kSecPolicyKU_DigitalSignature as an objc.ID.
-func KSecPolicyKU_DigitalSignature() objc.ID {
-	return purego.CFConstant(raw.KSecPolicyKU_DigitalSignature())
+// Predefined property key constants used to get or set values in a dictionary for a policy instance. Some policy values may specify CFBooleanRef key usage constraints: kSecPolicyKU_DigitalSignature kSecPolicyKU_NonRepudiation kSecPolicyKU_KeyEncipherment kSecPolicyKU_DataEncipherment kSecPolicyKU_KeyAgreement kSecPolicyKU_KeyCertSign kSecPolicyKU_CRLSign kSecPolicyKU_EncipherOnly kSecPolicyKU_DecipherOnly kSecPolicyKU policy values define certificate-level key purposes, in contrast to the key-level definitions in SecItem.h For example, a key in a certificate might be acceptable to use for signing a CRL, but not for signing another certificate. In either case, this key would have the ability to sign (i.e. kSecAttrCanSign is true), but may only sign for specific purposes allowed by these policy constants. Similarly, a public key might have the capability to perform encryption or decryption, but the certificate in which it resides might have a decipher-only certificate policy. These constants correspond to values defined in RFC 5280, section 4.2.1.3 (Key Usage) which define the purpose of a key contained in a certificate, in contrast to section 4.1.2.7 which define the uses that a key is capable of. Note: these constants are not available on iOS. Your code should avoid direct reliance on these values for making policy decisions and use higher level policies where possible.
+// KSecPolicyKU_DigitalSignature returns the value of the constant kSecPolicyKU_DigitalSignature.
+func KSecPolicyKU_DigitalSignature() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyKU_DigitalSignature")))
 }
 
-// KSecPolicyKU_NonRepudiation returns the value of the CoreFoundation reference constant kSecPolicyKU_NonRepudiation as an objc.ID.
-func KSecPolicyKU_NonRepudiation() objc.ID {
-	return purego.CFConstant(raw.KSecPolicyKU_NonRepudiation())
+// KSecPolicyKU_NonRepudiation returns the value of the constant kSecPolicyKU_NonRepudiation.
+func KSecPolicyKU_NonRepudiation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyKU_NonRepudiation")))
 }
 
-// KSecPolicyKU_KeyEncipherment returns the value of the CoreFoundation reference constant kSecPolicyKU_KeyEncipherment as an objc.ID.
-func KSecPolicyKU_KeyEncipherment() objc.ID {
-	return purego.CFConstant(raw.KSecPolicyKU_KeyEncipherment())
+// KSecPolicyKU_KeyEncipherment returns the value of the constant kSecPolicyKU_KeyEncipherment.
+func KSecPolicyKU_KeyEncipherment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyKU_KeyEncipherment")))
 }
 
-// KSecPolicyKU_DataEncipherment returns the value of the CoreFoundation reference constant kSecPolicyKU_DataEncipherment as an objc.ID.
-func KSecPolicyKU_DataEncipherment() objc.ID {
-	return purego.CFConstant(raw.KSecPolicyKU_DataEncipherment())
+// KSecPolicyKU_DataEncipherment returns the value of the constant kSecPolicyKU_DataEncipherment.
+func KSecPolicyKU_DataEncipherment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyKU_DataEncipherment")))
 }
 
-// KSecPolicyKU_KeyAgreement returns the value of the CoreFoundation reference constant kSecPolicyKU_KeyAgreement as an objc.ID.
-func KSecPolicyKU_KeyAgreement() objc.ID { return purego.CFConstant(raw.KSecPolicyKU_KeyAgreement()) }
+// KSecPolicyKU_KeyAgreement returns the value of the constant kSecPolicyKU_KeyAgreement.
+func KSecPolicyKU_KeyAgreement() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyKU_KeyAgreement")))
+}
 
-// KSecPolicyKU_KeyCertSign returns the value of the CoreFoundation reference constant kSecPolicyKU_KeyCertSign as an objc.ID.
-func KSecPolicyKU_KeyCertSign() objc.ID { return purego.CFConstant(raw.KSecPolicyKU_KeyCertSign()) }
+// KSecPolicyKU_KeyCertSign returns the value of the constant kSecPolicyKU_KeyCertSign.
+func KSecPolicyKU_KeyCertSign() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyKU_KeyCertSign")))
+}
 
-// KSecPolicyKU_CRLSign returns the value of the CoreFoundation reference constant kSecPolicyKU_CRLSign as an objc.ID.
-func KSecPolicyKU_CRLSign() objc.ID { return purego.CFConstant(raw.KSecPolicyKU_CRLSign()) }
+// KSecPolicyKU_CRLSign returns the value of the constant kSecPolicyKU_CRLSign.
+func KSecPolicyKU_CRLSign() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyKU_CRLSign")))
+}
 
-// KSecPolicyKU_EncipherOnly returns the value of the CoreFoundation reference constant kSecPolicyKU_EncipherOnly as an objc.ID.
-func KSecPolicyKU_EncipherOnly() objc.ID { return purego.CFConstant(raw.KSecPolicyKU_EncipherOnly()) }
+// KSecPolicyKU_EncipherOnly returns the value of the constant kSecPolicyKU_EncipherOnly.
+func KSecPolicyKU_EncipherOnly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyKU_EncipherOnly")))
+}
 
-// KSecPolicyKU_DecipherOnly returns the value of the CoreFoundation reference constant kSecPolicyKU_DecipherOnly as an objc.ID.
-func KSecPolicyKU_DecipherOnly() objc.ID { return purego.CFConstant(raw.KSecPolicyKU_DecipherOnly()) }
+// KSecPolicyKU_DecipherOnly returns the value of the constant kSecPolicyKU_DecipherOnly.
+func KSecPolicyKU_DecipherOnly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPolicyKU_DecipherOnly")))
+}
 
-// @enum Import/Export options @discussion Predefined key constants used when passing dictionary-based arguments to import/export functions. @constant kSecImportExportPassphrase Specifies a passphrase represented by a CFStringRef to be used when exporting to (or importing from) PKCS#12 format. @constant kSecImportExportKeychain On macOS, specifies a keychain represented by a SecKeychainRef to be used as the target when importing from PKCS#12 format. @constant kSecImportExportAccess On macOS, specifies an access represented by a SecAccessRef for the initial access (ACL) of a key imported from PKCS#12 format. @constant kSecImportToMemoryOnly Specifies (with a value of kCFBooleanTrue) that items imported from PKCS#12 format should be kept in process memory only and not permanently stored in the keychain. This can be specified on either macOS or iOS, though it is already default behavior on iOS. If this key is provided, keychain-related import options are ignored since the keychain will not be used.
-// KSecImportExportPassphrase returns the value of the CoreFoundation reference constant kSecImportExportPassphrase as an objc.ID.
-func KSecImportExportPassphrase() objc.ID { return purego.CFConstant(raw.KSecImportExportPassphrase()) }
+// Predefined key constants used when passing dictionary-based arguments to import/export functions.
+// KSecImportExportPassphrase returns the value of the constant kSecImportExportPassphrase.
+func KSecImportExportPassphrase() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecImportExportPassphrase")))
+}
 
-// KSecImportExportKeychain returns the value of the CoreFoundation reference constant kSecImportExportKeychain as an objc.ID.
-func KSecImportExportKeychain() objc.ID { return purego.CFConstant(raw.KSecImportExportKeychain()) }
+// KSecImportExportKeychain returns the value of the constant kSecImportExportKeychain.
+func KSecImportExportKeychain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecImportExportKeychain")))
+}
 
-// KSecImportExportAccess returns the value of the CoreFoundation reference constant kSecImportExportAccess as an objc.ID.
-func KSecImportExportAccess() objc.ID { return purego.CFConstant(raw.KSecImportExportAccess()) }
+// KSecImportExportAccess returns the value of the constant kSecImportExportAccess.
+func KSecImportExportAccess() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecImportExportAccess")))
+}
 
-// KSecImportToMemoryOnly returns the value of the CoreFoundation reference constant kSecImportToMemoryOnly as an objc.ID.
-func KSecImportToMemoryOnly() objc.ID { return purego.CFConstant(raw.KSecImportToMemoryOnly()) }
+// KSecImportToMemoryOnly returns the value of the constant kSecImportToMemoryOnly.
+func KSecImportToMemoryOnly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecImportToMemoryOnly")))
+}
 
-// @enum Import/Export item description @discussion Predefined key constants used to pass back a CFArray with a CFDictionary per item. @constant kSecImportItemLabel a CFStringRef representing the item label. This implementation specific identifier cannot be expected to have any format. @constant kSecImportItemKeyID a CFDataRef representing the key id.  Often the SHA-1 digest of the public key. @constant kSecImportItemIdentity a SecIdentityRef representing the identity. @constant kSecImportItemTrust a SecTrustRef set up with all relevant certificates.  Not guaranteed to successfully evaluate. @constant kSecImportItemCertChain a CFArrayRef holding all relevant certificates for this item's identity
-// KSecImportItemLabel returns the value of the CoreFoundation reference constant kSecImportItemLabel as an objc.ID.
-func KSecImportItemLabel() objc.ID { return purego.CFConstant(raw.KSecImportItemLabel()) }
+// Predefined key constants used to pass back a CFArray with a CFDictionary per item.
+// KSecImportItemLabel returns the value of the constant kSecImportItemLabel.
+func KSecImportItemLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecImportItemLabel")))
+}
 
-// KSecImportItemKeyID returns the value of the CoreFoundation reference constant kSecImportItemKeyID as an objc.ID.
-func KSecImportItemKeyID() objc.ID { return purego.CFConstant(raw.KSecImportItemKeyID()) }
+// KSecImportItemKeyID returns the value of the constant kSecImportItemKeyID.
+func KSecImportItemKeyID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecImportItemKeyID")))
+}
 
-// KSecImportItemTrust returns the value of the CoreFoundation reference constant kSecImportItemTrust as an objc.ID.
-func KSecImportItemTrust() objc.ID { return purego.CFConstant(raw.KSecImportItemTrust()) }
+// KSecImportItemTrust returns the value of the constant kSecImportItemTrust.
+func KSecImportItemTrust() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecImportItemTrust")))
+}
 
-// KSecImportItemCertChain returns the value of the CoreFoundation reference constant kSecImportItemCertChain as an objc.ID.
-func KSecImportItemCertChain() objc.ID { return purego.CFConstant(raw.KSecImportItemCertChain()) }
+// KSecImportItemCertChain returns the value of the constant kSecImportItemCertChain.
+func KSecImportItemCertChain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecImportItemCertChain")))
+}
 
-// KSecImportItemIdentity returns the value of the CoreFoundation reference constant kSecImportItemIdentity as an objc.ID.
-func KSecImportItemIdentity() objc.ID { return purego.CFConstant(raw.KSecImportItemIdentity()) }
+// KSecImportItemIdentity returns the value of the constant kSecImportItemIdentity.
+func KSecImportItemIdentity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecImportItemIdentity")))
+}
 
-// @enum Trust Property Constants @discussion Predefined key constants used to obtain values in a per-certificate dictionary of trust evaluation results, as retrieved from a call to SecTrustCopyProperties. @constant kSecPropertyTypeTitle Specifies a key whose value is a CFStringRef containing the title (display name) of this certificate. @constant kSecPropertyTypeError Specifies a key whose value is a CFStringRef containing the reason for a trust evaluation failure.
-// KSecPropertyTypeTitle returns the value of the CoreFoundation reference constant kSecPropertyTypeTitle as an objc.ID.
-func KSecPropertyTypeTitle() objc.ID { return purego.CFConstant(raw.KSecPropertyTypeTitle()) }
+// Predefined key constants used to obtain values in a per-certificate dictionary of trust evaluation results, as retrieved from a call to SecTrustCopyProperties.
+// KSecPropertyTypeTitle returns the value of the constant kSecPropertyTypeTitle.
+func KSecPropertyTypeTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyTypeTitle")))
+}
 
-// KSecPropertyTypeError returns the value of the CoreFoundation reference constant kSecPropertyTypeError as an objc.ID.
-func KSecPropertyTypeError() objc.ID { return purego.CFConstant(raw.KSecPropertyTypeError()) }
+// KSecPropertyTypeError returns the value of the constant kSecPropertyTypeError.
+func KSecPropertyTypeError() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPropertyTypeError")))
+}
 
-// @enum Trust Result Constants @discussion Predefined key constants used to obtain values in a dictionary of trust evaluation results for a certificate chain, as retrieved from a call to SecTrustCopyResult. @constant kSecTrustEvaluationDate This key will be present if a trust evaluation has been performed and results are available. Its value is a CFDateRef representing when the evaluation for this trust object took place. @constant kSecTrustExtendedValidation This key will be present and have a value of kCFBooleanTrue if this chain was validated for EV. @constant kSecTrustOrganizationName Organization name field of subject of leaf certificate. This field is meant to be displayed to the user as the validated name of the company or entity that owns the certificate if the kSecTrustExtendedValidation key is present. @constant kSecTrustQCStatements This key will be present and have a value of CFStringRef if the leaf certificate contains qualified certificate statements. The string can be displayed to the user as a representation of a qualified certificate's purpose. @constant kSecTrustQWACValidation This key will be present and have a value of kCFBooleanTrue if this chain was successfully validated as a Qualified Website Authentication Certificate. @constant kSecTrustResultValue This key will be present if a trust evaluation has been performed. Its value is a CFNumberRef representing the SecTrustResultType result for the evaluation. @constant kSecTrustRevocationChecked This key will be present iff this chain had its revocation checked. The value will be a kCFBooleanTrue if revocation checking was successful and none of the certificates in the chain were revoked. The value will be kCFBooleanFalse if no current revocation status could be obtained for one or more certificates in the chain due to connection problems or timeouts.  This is a hint to a client to retry revocation checking at a later time. @constant kSecTrustRevocationValidUntilDate This key will be present iff kSecTrustRevocationChecked has a value of kCFBooleanTrue. The value will be a CFDateRef representing the earliest date at which the revocation info for one of the certificates in this chain might change. @constant kSecTrustCertificateTransparency This key will be present and have a value of kCFBooleanTrue if this chain is CT qualified. @constant kSecTrustCertificateTransparencyWhiteList This key will be present and have a value of kCFBooleanTrue if this chain is EV, but not CT qualified, and is permitted as an exception to CT policy requirements. Note: in macOS 10.12 and iOS 10, previously-issued EV certificates were considered exempt from the CT requirement. As those certificates expired, exempting them was no longer needed. This key is deprecated in macOS 10.13 and iOS 11, and is no longer returned in the trust results dictionary as of those releases.
-// KSecTrustEvaluationDate returns the value of the CoreFoundation reference constant kSecTrustEvaluationDate as an objc.ID.
-func KSecTrustEvaluationDate() objc.ID { return purego.CFConstant(raw.KSecTrustEvaluationDate()) }
+// Predefined key constants used to obtain values in a dictionary of trust evaluation results for a certificate chain, as retrieved from a call to SecTrustCopyResult.
+// KSecTrustEvaluationDate returns the value of the constant kSecTrustEvaluationDate.
+func KSecTrustEvaluationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTrustEvaluationDate")))
+}
 
-// KSecTrustExtendedValidation returns the value of the CoreFoundation reference constant kSecTrustExtendedValidation as an objc.ID.
-func KSecTrustExtendedValidation() objc.ID {
-	return purego.CFConstant(raw.KSecTrustExtendedValidation())
+// KSecTrustExtendedValidation returns the value of the constant kSecTrustExtendedValidation.
+func KSecTrustExtendedValidation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTrustExtendedValidation")))
 }
 
-// KSecTrustOrganizationName returns the value of the CoreFoundation reference constant kSecTrustOrganizationName as an objc.ID.
-func KSecTrustOrganizationName() objc.ID { return purego.CFConstant(raw.KSecTrustOrganizationName()) }
+// KSecTrustOrganizationName returns the value of the constant kSecTrustOrganizationName.
+func KSecTrustOrganizationName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTrustOrganizationName")))
+}
 
-// KSecTrustResultValue returns the value of the CoreFoundation reference constant kSecTrustResultValue as an objc.ID.
-func KSecTrustResultValue() objc.ID { return purego.CFConstant(raw.KSecTrustResultValue()) }
+// KSecTrustResultValue returns the value of the constant kSecTrustResultValue.
+func KSecTrustResultValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTrustResultValue")))
+}
 
-// KSecTrustRevocationChecked returns the value of the CoreFoundation reference constant kSecTrustRevocationChecked as an objc.ID.
-func KSecTrustRevocationChecked() objc.ID { return purego.CFConstant(raw.KSecTrustRevocationChecked()) }
+// KSecTrustRevocationChecked returns the value of the constant kSecTrustRevocationChecked.
+func KSecTrustRevocationChecked() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTrustRevocationChecked")))
+}
 
-// KSecTrustRevocationValidUntilDate returns the value of the CoreFoundation reference constant kSecTrustRevocationValidUntilDate as an objc.ID.
-func KSecTrustRevocationValidUntilDate() objc.ID {
-	return purego.CFConstant(raw.KSecTrustRevocationValidUntilDate())
+// KSecTrustRevocationValidUntilDate returns the value of the constant kSecTrustRevocationValidUntilDate.
+func KSecTrustRevocationValidUntilDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTrustRevocationValidUntilDate")))
 }
 
-// KSecTrustCertificateTransparency returns the value of the CoreFoundation reference constant kSecTrustCertificateTransparency as an objc.ID.
-func KSecTrustCertificateTransparency() objc.ID {
-	return purego.CFConstant(raw.KSecTrustCertificateTransparency())
+// KSecTrustCertificateTransparency returns the value of the constant kSecTrustCertificateTransparency.
+func KSecTrustCertificateTransparency() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTrustCertificateTransparency")))
 }
 
-// KSecTrustCertificateTransparencyWhiteList returns the value of the CoreFoundation reference constant kSecTrustCertificateTransparencyWhiteList as an objc.ID.
-func KSecTrustCertificateTransparencyWhiteList() objc.ID {
-	return purego.CFConstant(raw.KSecTrustCertificateTransparencyWhiteList())
+// KSecTrustCertificateTransparencyWhiteList returns the value of the constant kSecTrustCertificateTransparencyWhiteList.
+func KSecTrustCertificateTransparencyWhiteList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTrustCertificateTransparencyWhiteList")))
 }
 
-// KSecTrustQCStatements returns the value of the CoreFoundation reference constant kSecTrustQCStatements as an objc.ID.
-func KSecTrustQCStatements() objc.ID { return purego.CFConstant(raw.KSecTrustQCStatements()) }
+// KSecTrustQCStatements returns the value of the constant kSecTrustQCStatements.
+func KSecTrustQCStatements() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTrustQCStatements")))
+}
 
-// KSecTrustQWACValidation returns the value of the CoreFoundation reference constant kSecTrustQWACValidation as an objc.ID.
-func KSecTrustQWACValidation() objc.ID { return purego.CFConstant(raw.KSecTrustQWACValidation()) }
+// KSecTrustQWACValidation returns the value of the constant kSecTrustQWACValidation.
+func KSecTrustQWACValidation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTrustQWACValidation")))
+}
 
-// @enum Credential Key Constants @discussion Predefined key constants used to get values in a dictionary of credentials returned by SecRequestWebCredential. @constant kSecSharedPassword Specifies a dictionary key whose value is a shared password. You use this key to get a value of type CFStringRef that contains a password.
-// KSecSharedPassword returns the value of the CoreFoundation reference constant kSecSharedPassword as an objc.ID.
-func KSecSharedPassword() objc.ID { return purego.CFConstant(raw.KSecSharedPassword()) }
+// Predefined key constants used to get values in a dictionary of credentials returned by SecRequestWebCredential.
+// KSecSharedPassword returns the value of the constant kSecSharedPassword.
+func KSecSharedPassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecSharedPassword")))
+}
 
-// KSecOIDADC_CERT_POLICY returns the value of the CoreFoundation reference constant kSecOIDADC_CERT_POLICY as an objc.ID.
-func KSecOIDADC_CERT_POLICY() objc.ID { return purego.CFConstant(raw.KSecOIDADC_CERT_POLICY()) }
+// KSecOIDADC_CERT_POLICY returns the value of the constant kSecOIDADC_CERT_POLICY.
+func KSecOIDADC_CERT_POLICY() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDADC_CERT_POLICY")))
+}
 
-// KSecOIDAPPLE_CERT_POLICY returns the value of the CoreFoundation reference constant kSecOIDAPPLE_CERT_POLICY as an objc.ID.
-func KSecOIDAPPLE_CERT_POLICY() objc.ID { return purego.CFConstant(raw.KSecOIDAPPLE_CERT_POLICY()) }
+// KSecOIDAPPLE_CERT_POLICY returns the value of the constant kSecOIDAPPLE_CERT_POLICY.
+func KSecOIDAPPLE_CERT_POLICY() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAPPLE_CERT_POLICY")))
+}
 
-// KSecOIDAPPLE_EKU_CODE_SIGNING returns the value of the CoreFoundation reference constant kSecOIDAPPLE_EKU_CODE_SIGNING as an objc.ID.
-func KSecOIDAPPLE_EKU_CODE_SIGNING() objc.ID {
-	return purego.CFConstant(raw.KSecOIDAPPLE_EKU_CODE_SIGNING())
+// KSecOIDAPPLE_EKU_CODE_SIGNING returns the value of the constant kSecOIDAPPLE_EKU_CODE_SIGNING.
+func KSecOIDAPPLE_EKU_CODE_SIGNING() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAPPLE_EKU_CODE_SIGNING")))
 }
 
-// KSecOIDAPPLE_EKU_CODE_SIGNING_DEV returns the value of the CoreFoundation reference constant kSecOIDAPPLE_EKU_CODE_SIGNING_DEV as an objc.ID.
-func KSecOIDAPPLE_EKU_CODE_SIGNING_DEV() objc.ID {
-	return purego.CFConstant(raw.KSecOIDAPPLE_EKU_CODE_SIGNING_DEV())
+// KSecOIDAPPLE_EKU_CODE_SIGNING_DEV returns the value of the constant kSecOIDAPPLE_EKU_CODE_SIGNING_DEV.
+func KSecOIDAPPLE_EKU_CODE_SIGNING_DEV() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAPPLE_EKU_CODE_SIGNING_DEV")))
 }
 
-// KSecOIDAPPLE_EKU_ICHAT_ENCRYPTION returns the value of the CoreFoundation reference constant kSecOIDAPPLE_EKU_ICHAT_ENCRYPTION as an objc.ID.
-func KSecOIDAPPLE_EKU_ICHAT_ENCRYPTION() objc.ID {
-	return purego.CFConstant(raw.KSecOIDAPPLE_EKU_ICHAT_ENCRYPTION())
+// KSecOIDAPPLE_EKU_ICHAT_ENCRYPTION returns the value of the constant kSecOIDAPPLE_EKU_ICHAT_ENCRYPTION.
+func KSecOIDAPPLE_EKU_ICHAT_ENCRYPTION() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAPPLE_EKU_ICHAT_ENCRYPTION")))
 }
 
-// KSecOIDAPPLE_EKU_ICHAT_SIGNING returns the value of the CoreFoundation reference constant kSecOIDAPPLE_EKU_ICHAT_SIGNING as an objc.ID.
-func KSecOIDAPPLE_EKU_ICHAT_SIGNING() objc.ID {
-	return purego.CFConstant(raw.KSecOIDAPPLE_EKU_ICHAT_SIGNING())
+// KSecOIDAPPLE_EKU_ICHAT_SIGNING returns the value of the constant kSecOIDAPPLE_EKU_ICHAT_SIGNING.
+func KSecOIDAPPLE_EKU_ICHAT_SIGNING() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAPPLE_EKU_ICHAT_SIGNING")))
 }
 
-// KSecOIDAPPLE_EKU_RESOURCE_SIGNING returns the value of the CoreFoundation reference constant kSecOIDAPPLE_EKU_RESOURCE_SIGNING as an objc.ID.
-func KSecOIDAPPLE_EKU_RESOURCE_SIGNING() objc.ID {
-	return purego.CFConstant(raw.KSecOIDAPPLE_EKU_RESOURCE_SIGNING())
+// KSecOIDAPPLE_EKU_RESOURCE_SIGNING returns the value of the constant kSecOIDAPPLE_EKU_RESOURCE_SIGNING.
+func KSecOIDAPPLE_EKU_RESOURCE_SIGNING() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAPPLE_EKU_RESOURCE_SIGNING")))
 }
 
-// KSecOIDAPPLE_EKU_SYSTEM_IDENTITY returns the value of the CoreFoundation reference constant kSecOIDAPPLE_EKU_SYSTEM_IDENTITY as an objc.ID.
-func KSecOIDAPPLE_EKU_SYSTEM_IDENTITY() objc.ID {
-	return purego.CFConstant(raw.KSecOIDAPPLE_EKU_SYSTEM_IDENTITY())
+// KSecOIDAPPLE_EKU_SYSTEM_IDENTITY returns the value of the constant kSecOIDAPPLE_EKU_SYSTEM_IDENTITY.
+func KSecOIDAPPLE_EKU_SYSTEM_IDENTITY() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAPPLE_EKU_SYSTEM_IDENTITY")))
 }
 
-// KSecOIDAPPLE_EXTENSION returns the value of the CoreFoundation reference constant kSecOIDAPPLE_EXTENSION as an objc.ID.
-func KSecOIDAPPLE_EXTENSION() objc.ID { return purego.CFConstant(raw.KSecOIDAPPLE_EXTENSION()) }
+// KSecOIDAPPLE_EXTENSION returns the value of the constant kSecOIDAPPLE_EXTENSION.
+func KSecOIDAPPLE_EXTENSION() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAPPLE_EXTENSION")))
+}
 
-// KSecOIDAPPLE_EXTENSION_ADC_APPLE_SIGNING returns the value of the CoreFoundation reference constant kSecOIDAPPLE_EXTENSION_ADC_APPLE_SIGNING as an objc.ID.
-func KSecOIDAPPLE_EXTENSION_ADC_APPLE_SIGNING() objc.ID {
-	return purego.CFConstant(raw.KSecOIDAPPLE_EXTENSION_ADC_APPLE_SIGNING())
+// KSecOIDAPPLE_EXTENSION_ADC_APPLE_SIGNING returns the value of the constant kSecOIDAPPLE_EXTENSION_ADC_APPLE_SIGNING.
+func KSecOIDAPPLE_EXTENSION_ADC_APPLE_SIGNING() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAPPLE_EXTENSION_ADC_APPLE_SIGNING")))
 }
 
-// KSecOIDAPPLE_EXTENSION_ADC_DEV_SIGNING returns the value of the CoreFoundation reference constant kSecOIDAPPLE_EXTENSION_ADC_DEV_SIGNING as an objc.ID.
-func KSecOIDAPPLE_EXTENSION_ADC_DEV_SIGNING() objc.ID {
-	return purego.CFConstant(raw.KSecOIDAPPLE_EXTENSION_ADC_DEV_SIGNING())
+// KSecOIDAPPLE_EXTENSION_ADC_DEV_SIGNING returns the value of the constant kSecOIDAPPLE_EXTENSION_ADC_DEV_SIGNING.
+func KSecOIDAPPLE_EXTENSION_ADC_DEV_SIGNING() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAPPLE_EXTENSION_ADC_DEV_SIGNING")))
 }
 
-// KSecOIDAPPLE_EXTENSION_APPLE_SIGNING returns the value of the CoreFoundation reference constant kSecOIDAPPLE_EXTENSION_APPLE_SIGNING as an objc.ID.
-func KSecOIDAPPLE_EXTENSION_APPLE_SIGNING() objc.ID {
-	return purego.CFConstant(raw.KSecOIDAPPLE_EXTENSION_APPLE_SIGNING())
+// KSecOIDAPPLE_EXTENSION_APPLE_SIGNING returns the value of the constant kSecOIDAPPLE_EXTENSION_APPLE_SIGNING.
+func KSecOIDAPPLE_EXTENSION_APPLE_SIGNING() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAPPLE_EXTENSION_APPLE_SIGNING")))
 }
 
-// KSecOIDAPPLE_EXTENSION_CODE_SIGNING returns the value of the CoreFoundation reference constant kSecOIDAPPLE_EXTENSION_CODE_SIGNING as an objc.ID.
-func KSecOIDAPPLE_EXTENSION_CODE_SIGNING() objc.ID {
-	return purego.CFConstant(raw.KSecOIDAPPLE_EXTENSION_CODE_SIGNING())
+// KSecOIDAPPLE_EXTENSION_CODE_SIGNING returns the value of the constant kSecOIDAPPLE_EXTENSION_CODE_SIGNING.
+func KSecOIDAPPLE_EXTENSION_CODE_SIGNING() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAPPLE_EXTENSION_CODE_SIGNING")))
 }
 
-// KSecOIDAPPLE_EXTENSION_INTERMEDIATE_MARKER returns the value of the CoreFoundation reference constant kSecOIDAPPLE_EXTENSION_INTERMEDIATE_MARKER as an objc.ID.
-func KSecOIDAPPLE_EXTENSION_INTERMEDIATE_MARKER() objc.ID {
-	return purego.CFConstant(raw.KSecOIDAPPLE_EXTENSION_INTERMEDIATE_MARKER())
+// KSecOIDAPPLE_EXTENSION_INTERMEDIATE_MARKER returns the value of the constant kSecOIDAPPLE_EXTENSION_INTERMEDIATE_MARKER.
+func KSecOIDAPPLE_EXTENSION_INTERMEDIATE_MARKER() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAPPLE_EXTENSION_INTERMEDIATE_MARKER")))
 }
 
-// KSecOIDAPPLE_EXTENSION_WWDR_INTERMEDIATE returns the value of the CoreFoundation reference constant kSecOIDAPPLE_EXTENSION_WWDR_INTERMEDIATE as an objc.ID.
-func KSecOIDAPPLE_EXTENSION_WWDR_INTERMEDIATE() objc.ID {
-	return purego.CFConstant(raw.KSecOIDAPPLE_EXTENSION_WWDR_INTERMEDIATE())
+// KSecOIDAPPLE_EXTENSION_WWDR_INTERMEDIATE returns the value of the constant kSecOIDAPPLE_EXTENSION_WWDR_INTERMEDIATE.
+func KSecOIDAPPLE_EXTENSION_WWDR_INTERMEDIATE() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAPPLE_EXTENSION_WWDR_INTERMEDIATE")))
 }
 
-// KSecOIDAPPLE_EXTENSION_ITMS_INTERMEDIATE returns the value of the CoreFoundation reference constant kSecOIDAPPLE_EXTENSION_ITMS_INTERMEDIATE as an objc.ID.
-func KSecOIDAPPLE_EXTENSION_ITMS_INTERMEDIATE() objc.ID {
-	return purego.CFConstant(raw.KSecOIDAPPLE_EXTENSION_ITMS_INTERMEDIATE())
+// KSecOIDAPPLE_EXTENSION_ITMS_INTERMEDIATE returns the value of the constant kSecOIDAPPLE_EXTENSION_ITMS_INTERMEDIATE.
+func KSecOIDAPPLE_EXTENSION_ITMS_INTERMEDIATE() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAPPLE_EXTENSION_ITMS_INTERMEDIATE")))
 }
 
-// KSecOIDAPPLE_EXTENSION_AAI_INTERMEDIATE returns the value of the CoreFoundation reference constant kSecOIDAPPLE_EXTENSION_AAI_INTERMEDIATE as an objc.ID.
-func KSecOIDAPPLE_EXTENSION_AAI_INTERMEDIATE() objc.ID {
-	return purego.CFConstant(raw.KSecOIDAPPLE_EXTENSION_AAI_INTERMEDIATE())
+// KSecOIDAPPLE_EXTENSION_AAI_INTERMEDIATE returns the value of the constant kSecOIDAPPLE_EXTENSION_AAI_INTERMEDIATE.
+func KSecOIDAPPLE_EXTENSION_AAI_INTERMEDIATE() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAPPLE_EXTENSION_AAI_INTERMEDIATE")))
 }
 
-// KSecOIDAPPLE_EXTENSION_APPLEID_INTERMEDIATE returns the value of the CoreFoundation reference constant kSecOIDAPPLE_EXTENSION_APPLEID_INTERMEDIATE as an objc.ID.
-func KSecOIDAPPLE_EXTENSION_APPLEID_INTERMEDIATE() objc.ID {
-	return purego.CFConstant(raw.KSecOIDAPPLE_EXTENSION_APPLEID_INTERMEDIATE())
+// KSecOIDAPPLE_EXTENSION_APPLEID_INTERMEDIATE returns the value of the constant kSecOIDAPPLE_EXTENSION_APPLEID_INTERMEDIATE.
+func KSecOIDAPPLE_EXTENSION_APPLEID_INTERMEDIATE() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAPPLE_EXTENSION_APPLEID_INTERMEDIATE")))
 }
 
-// KSecOIDAuthorityInfoAccess returns the value of the CoreFoundation reference constant kSecOIDAuthorityInfoAccess as an objc.ID.
-func KSecOIDAuthorityInfoAccess() objc.ID { return purego.CFConstant(raw.KSecOIDAuthorityInfoAccess()) }
+// KSecOIDAuthorityInfoAccess returns the value of the constant kSecOIDAuthorityInfoAccess.
+func KSecOIDAuthorityInfoAccess() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAuthorityInfoAccess")))
+}
 
-// KSecOIDAuthorityKeyIdentifier returns the value of the CoreFoundation reference constant kSecOIDAuthorityKeyIdentifier as an objc.ID.
-func KSecOIDAuthorityKeyIdentifier() objc.ID {
-	return purego.CFConstant(raw.KSecOIDAuthorityKeyIdentifier())
+// KSecOIDAuthorityKeyIdentifier returns the value of the constant kSecOIDAuthorityKeyIdentifier.
+func KSecOIDAuthorityKeyIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDAuthorityKeyIdentifier")))
 }
 
-// KSecOIDBasicConstraints returns the value of the CoreFoundation reference constant kSecOIDBasicConstraints as an objc.ID.
-func KSecOIDBasicConstraints() objc.ID { return purego.CFConstant(raw.KSecOIDBasicConstraints()) }
+// KSecOIDBasicConstraints returns the value of the constant kSecOIDBasicConstraints.
+func KSecOIDBasicConstraints() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDBasicConstraints")))
+}
 
-// KSecOIDBiometricInfo returns the value of the CoreFoundation reference constant kSecOIDBiometricInfo as an objc.ID.
-func KSecOIDBiometricInfo() objc.ID { return purego.CFConstant(raw.KSecOIDBiometricInfo()) }
+// KSecOIDBiometricInfo returns the value of the constant kSecOIDBiometricInfo.
+func KSecOIDBiometricInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDBiometricInfo")))
+}
 
-// KSecOIDCSSMKeyStruct returns the value of the CoreFoundation reference constant kSecOIDCSSMKeyStruct as an objc.ID.
-func KSecOIDCSSMKeyStruct() objc.ID { return purego.CFConstant(raw.KSecOIDCSSMKeyStruct()) }
+// KSecOIDCSSMKeyStruct returns the value of the constant kSecOIDCSSMKeyStruct.
+func KSecOIDCSSMKeyStruct() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDCSSMKeyStruct")))
+}
 
-// KSecOIDCertIssuer returns the value of the CoreFoundation reference constant kSecOIDCertIssuer as an objc.ID.
-func KSecOIDCertIssuer() objc.ID { return purego.CFConstant(raw.KSecOIDCertIssuer()) }
+// KSecOIDCertIssuer returns the value of the constant kSecOIDCertIssuer.
+func KSecOIDCertIssuer() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecOIDCertIssuer"))) }
 
-// KSecOIDCertificatePolicies returns the value of the CoreFoundation reference constant kSecOIDCertificatePolicies as an objc.ID.
-func KSecOIDCertificatePolicies() objc.ID { return purego.CFConstant(raw.KSecOIDCertificatePolicies()) }
+// KSecOIDCertificatePolicies returns the value of the constant kSecOIDCertificatePolicies.
+func KSecOIDCertificatePolicies() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDCertificatePolicies")))
+}
 
-// KSecOIDClientAuth returns the value of the CoreFoundation reference constant kSecOIDClientAuth as an objc.ID.
-func KSecOIDClientAuth() objc.ID { return purego.CFConstant(raw.KSecOIDClientAuth()) }
+// KSecOIDClientAuth returns the value of the constant kSecOIDClientAuth.
+func KSecOIDClientAuth() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecOIDClientAuth"))) }
 
-// KSecOIDCollectiveStateProvinceName returns the value of the CoreFoundation reference constant kSecOIDCollectiveStateProvinceName as an objc.ID.
-func KSecOIDCollectiveStateProvinceName() objc.ID {
-	return purego.CFConstant(raw.KSecOIDCollectiveStateProvinceName())
+// KSecOIDCollectiveStateProvinceName returns the value of the constant kSecOIDCollectiveStateProvinceName.
+func KSecOIDCollectiveStateProvinceName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDCollectiveStateProvinceName")))
 }
 
-// KSecOIDCollectiveStreetAddress returns the value of the CoreFoundation reference constant kSecOIDCollectiveStreetAddress as an objc.ID.
-func KSecOIDCollectiveStreetAddress() objc.ID {
-	return purego.CFConstant(raw.KSecOIDCollectiveStreetAddress())
+// KSecOIDCollectiveStreetAddress returns the value of the constant kSecOIDCollectiveStreetAddress.
+func KSecOIDCollectiveStreetAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDCollectiveStreetAddress")))
 }
 
-// KSecOIDCommonName returns the value of the CoreFoundation reference constant kSecOIDCommonName as an objc.ID.
-func KSecOIDCommonName() objc.ID { return purego.CFConstant(raw.KSecOIDCommonName()) }
+// KSecOIDCommonName returns the value of the constant kSecOIDCommonName.
+func KSecOIDCommonName() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecOIDCommonName"))) }
 
-// KSecOIDCountryName returns the value of the CoreFoundation reference constant kSecOIDCountryName as an objc.ID.
-func KSecOIDCountryName() objc.ID { return purego.CFConstant(raw.KSecOIDCountryName()) }
+// KSecOIDCountryName returns the value of the constant kSecOIDCountryName.
+func KSecOIDCountryName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDCountryName")))
+}
 
-// KSecOIDCrlDistributionPoints returns the value of the CoreFoundation reference constant kSecOIDCrlDistributionPoints as an objc.ID.
-func KSecOIDCrlDistributionPoints() objc.ID {
-	return purego.CFConstant(raw.KSecOIDCrlDistributionPoints())
+// KSecOIDCrlDistributionPoints returns the value of the constant kSecOIDCrlDistributionPoints.
+func KSecOIDCrlDistributionPoints() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDCrlDistributionPoints")))
 }
 
-// KSecOIDCrlNumber returns the value of the CoreFoundation reference constant kSecOIDCrlNumber as an objc.ID.
-func KSecOIDCrlNumber() objc.ID { return purego.CFConstant(raw.KSecOIDCrlNumber()) }
+// KSecOIDCrlNumber returns the value of the constant kSecOIDCrlNumber.
+func KSecOIDCrlNumber() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecOIDCrlNumber"))) }
 
-// KSecOIDCrlReason returns the value of the CoreFoundation reference constant kSecOIDCrlReason as an objc.ID.
-func KSecOIDCrlReason() objc.ID { return purego.CFConstant(raw.KSecOIDCrlReason()) }
+// KSecOIDCrlReason returns the value of the constant kSecOIDCrlReason.
+func KSecOIDCrlReason() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecOIDCrlReason"))) }
 
-// KSecOIDDOTMAC_CERT_EMAIL_ENCRYPT returns the value of the CoreFoundation reference constant kSecOIDDOTMAC_CERT_EMAIL_ENCRYPT as an objc.ID.
-func KSecOIDDOTMAC_CERT_EMAIL_ENCRYPT() objc.ID {
-	return purego.CFConstant(raw.KSecOIDDOTMAC_CERT_EMAIL_ENCRYPT())
+// KSecOIDDOTMAC_CERT_EMAIL_ENCRYPT returns the value of the constant kSecOIDDOTMAC_CERT_EMAIL_ENCRYPT.
+func KSecOIDDOTMAC_CERT_EMAIL_ENCRYPT() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDDOTMAC_CERT_EMAIL_ENCRYPT")))
 }
 
-// KSecOIDDOTMAC_CERT_EMAIL_SIGN returns the value of the CoreFoundation reference constant kSecOIDDOTMAC_CERT_EMAIL_SIGN as an objc.ID.
-func KSecOIDDOTMAC_CERT_EMAIL_SIGN() objc.ID {
-	return purego.CFConstant(raw.KSecOIDDOTMAC_CERT_EMAIL_SIGN())
+// KSecOIDDOTMAC_CERT_EMAIL_SIGN returns the value of the constant kSecOIDDOTMAC_CERT_EMAIL_SIGN.
+func KSecOIDDOTMAC_CERT_EMAIL_SIGN() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDDOTMAC_CERT_EMAIL_SIGN")))
 }
 
-// KSecOIDDOTMAC_CERT_EXTENSION returns the value of the CoreFoundation reference constant kSecOIDDOTMAC_CERT_EXTENSION as an objc.ID.
-func KSecOIDDOTMAC_CERT_EXTENSION() objc.ID {
-	return purego.CFConstant(raw.KSecOIDDOTMAC_CERT_EXTENSION())
+// KSecOIDDOTMAC_CERT_EXTENSION returns the value of the constant kSecOIDDOTMAC_CERT_EXTENSION.
+func KSecOIDDOTMAC_CERT_EXTENSION() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDDOTMAC_CERT_EXTENSION")))
 }
 
-// KSecOIDDOTMAC_CERT_IDENTITY returns the value of the CoreFoundation reference constant kSecOIDDOTMAC_CERT_IDENTITY as an objc.ID.
-func KSecOIDDOTMAC_CERT_IDENTITY() objc.ID {
-	return purego.CFConstant(raw.KSecOIDDOTMAC_CERT_IDENTITY())
+// KSecOIDDOTMAC_CERT_IDENTITY returns the value of the constant kSecOIDDOTMAC_CERT_IDENTITY.
+func KSecOIDDOTMAC_CERT_IDENTITY() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDDOTMAC_CERT_IDENTITY")))
 }
 
-// KSecOIDDOTMAC_CERT_POLICY returns the value of the CoreFoundation reference constant kSecOIDDOTMAC_CERT_POLICY as an objc.ID.
-func KSecOIDDOTMAC_CERT_POLICY() objc.ID { return purego.CFConstant(raw.KSecOIDDOTMAC_CERT_POLICY()) }
+// KSecOIDDOTMAC_CERT_POLICY returns the value of the constant kSecOIDDOTMAC_CERT_POLICY.
+func KSecOIDDOTMAC_CERT_POLICY() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDDOTMAC_CERT_POLICY")))
+}
 
-// KSecOIDDeltaCrlIndicator returns the value of the CoreFoundation reference constant kSecOIDDeltaCrlIndicator as an objc.ID.
-func KSecOIDDeltaCrlIndicator() objc.ID { return purego.CFConstant(raw.KSecOIDDeltaCrlIndicator()) }
+// KSecOIDDeltaCrlIndicator returns the value of the constant kSecOIDDeltaCrlIndicator.
+func KSecOIDDeltaCrlIndicator() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDDeltaCrlIndicator")))
+}
 
-// KSecOIDDescription returns the value of the CoreFoundation reference constant kSecOIDDescription as an objc.ID.
-func KSecOIDDescription() objc.ID { return purego.CFConstant(raw.KSecOIDDescription()) }
+// KSecOIDDescription returns the value of the constant kSecOIDDescription.
+func KSecOIDDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDDescription")))
+}
 
-// KSecOIDEKU_IPSec returns the value of the CoreFoundation reference constant kSecOIDEKU_IPSec as an objc.ID.
-func KSecOIDEKU_IPSec() objc.ID { return purego.CFConstant(raw.KSecOIDEKU_IPSec()) }
+// KSecOIDEKU_IPSec returns the value of the constant kSecOIDEKU_IPSec.
+func KSecOIDEKU_IPSec() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecOIDEKU_IPSec"))) }
 
-// KSecOIDEmailAddress returns the value of the CoreFoundation reference constant kSecOIDEmailAddress as an objc.ID.
-func KSecOIDEmailAddress() objc.ID { return purego.CFConstant(raw.KSecOIDEmailAddress()) }
+// KSecOIDEmailAddress returns the value of the constant kSecOIDEmailAddress.
+func KSecOIDEmailAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDEmailAddress")))
+}
 
-// KSecOIDEmailProtection returns the value of the CoreFoundation reference constant kSecOIDEmailProtection as an objc.ID.
-func KSecOIDEmailProtection() objc.ID { return purego.CFConstant(raw.KSecOIDEmailProtection()) }
+// KSecOIDEmailProtection returns the value of the constant kSecOIDEmailProtection.
+func KSecOIDEmailProtection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDEmailProtection")))
+}
 
-// KSecOIDExtendedKeyUsage returns the value of the CoreFoundation reference constant kSecOIDExtendedKeyUsage as an objc.ID.
-func KSecOIDExtendedKeyUsage() objc.ID { return purego.CFConstant(raw.KSecOIDExtendedKeyUsage()) }
+// KSecOIDExtendedKeyUsage returns the value of the constant kSecOIDExtendedKeyUsage.
+func KSecOIDExtendedKeyUsage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDExtendedKeyUsage")))
+}
 
-// KSecOIDExtendedKeyUsageAny returns the value of the CoreFoundation reference constant kSecOIDExtendedKeyUsageAny as an objc.ID.
-func KSecOIDExtendedKeyUsageAny() objc.ID { return purego.CFConstant(raw.KSecOIDExtendedKeyUsageAny()) }
+// KSecOIDExtendedKeyUsageAny returns the value of the constant kSecOIDExtendedKeyUsageAny.
+func KSecOIDExtendedKeyUsageAny() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDExtendedKeyUsageAny")))
+}
 
-// KSecOIDExtendedUseCodeSigning returns the value of the CoreFoundation reference constant kSecOIDExtendedUseCodeSigning as an objc.ID.
-func KSecOIDExtendedUseCodeSigning() objc.ID {
-	return purego.CFConstant(raw.KSecOIDExtendedUseCodeSigning())
+// KSecOIDExtendedUseCodeSigning returns the value of the constant kSecOIDExtendedUseCodeSigning.
+func KSecOIDExtendedUseCodeSigning() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDExtendedUseCodeSigning")))
 }
 
-// KSecOIDGivenName returns the value of the CoreFoundation reference constant kSecOIDGivenName as an objc.ID.
-func KSecOIDGivenName() objc.ID { return purego.CFConstant(raw.KSecOIDGivenName()) }
+// KSecOIDGivenName returns the value of the constant kSecOIDGivenName.
+func KSecOIDGivenName() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecOIDGivenName"))) }
 
-// KSecOIDHoldInstructionCode returns the value of the CoreFoundation reference constant kSecOIDHoldInstructionCode as an objc.ID.
-func KSecOIDHoldInstructionCode() objc.ID { return purego.CFConstant(raw.KSecOIDHoldInstructionCode()) }
+// KSecOIDHoldInstructionCode returns the value of the constant kSecOIDHoldInstructionCode.
+func KSecOIDHoldInstructionCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDHoldInstructionCode")))
+}
 
-// KSecOIDInvalidityDate returns the value of the CoreFoundation reference constant kSecOIDInvalidityDate as an objc.ID.
-func KSecOIDInvalidityDate() objc.ID { return purego.CFConstant(raw.KSecOIDInvalidityDate()) }
+// KSecOIDInvalidityDate returns the value of the constant kSecOIDInvalidityDate.
+func KSecOIDInvalidityDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDInvalidityDate")))
+}
 
-// KSecOIDIssuerAltName returns the value of the CoreFoundation reference constant kSecOIDIssuerAltName as an objc.ID.
-func KSecOIDIssuerAltName() objc.ID { return purego.CFConstant(raw.KSecOIDIssuerAltName()) }
+// KSecOIDIssuerAltName returns the value of the constant kSecOIDIssuerAltName.
+func KSecOIDIssuerAltName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDIssuerAltName")))
+}
 
-// KSecOIDIssuingDistributionPoint returns the value of the CoreFoundation reference constant kSecOIDIssuingDistributionPoint as an objc.ID.
-func KSecOIDIssuingDistributionPoint() objc.ID {
-	return purego.CFConstant(raw.KSecOIDIssuingDistributionPoint())
+// KSecOIDIssuingDistributionPoint returns the value of the constant kSecOIDIssuingDistributionPoint.
+func KSecOIDIssuingDistributionPoint() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDIssuingDistributionPoint")))
 }
 
-// KSecOIDIssuingDistributionPoints returns the value of the CoreFoundation reference constant kSecOIDIssuingDistributionPoints as an objc.ID.
-func KSecOIDIssuingDistributionPoints() objc.ID {
-	return purego.CFConstant(raw.KSecOIDIssuingDistributionPoints())
+// KSecOIDIssuingDistributionPoints returns the value of the constant kSecOIDIssuingDistributionPoints.
+func KSecOIDIssuingDistributionPoints() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDIssuingDistributionPoints")))
 }
 
-// KSecOIDKERBv5_PKINIT_KP_CLIENT_AUTH returns the value of the CoreFoundation reference constant kSecOIDKERBv5_PKINIT_KP_CLIENT_AUTH as an objc.ID.
-func KSecOIDKERBv5_PKINIT_KP_CLIENT_AUTH() objc.ID {
-	return purego.CFConstant(raw.KSecOIDKERBv5_PKINIT_KP_CLIENT_AUTH())
+// KSecOIDKERBv5_PKINIT_KP_CLIENT_AUTH returns the value of the constant kSecOIDKERBv5_PKINIT_KP_CLIENT_AUTH.
+func KSecOIDKERBv5_PKINIT_KP_CLIENT_AUTH() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDKERBv5_PKINIT_KP_CLIENT_AUTH")))
 }
 
-// KSecOIDKERBv5_PKINIT_KP_KDC returns the value of the CoreFoundation reference constant kSecOIDKERBv5_PKINIT_KP_KDC as an objc.ID.
-func KSecOIDKERBv5_PKINIT_KP_KDC() objc.ID {
-	return purego.CFConstant(raw.KSecOIDKERBv5_PKINIT_KP_KDC())
+// KSecOIDKERBv5_PKINIT_KP_KDC returns the value of the constant kSecOIDKERBv5_PKINIT_KP_KDC.
+func KSecOIDKERBv5_PKINIT_KP_KDC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDKERBv5_PKINIT_KP_KDC")))
 }
 
-// KSecOIDKeyUsage returns the value of the CoreFoundation reference constant kSecOIDKeyUsage as an objc.ID.
-func KSecOIDKeyUsage() objc.ID { return purego.CFConstant(raw.KSecOIDKeyUsage()) }
+// KSecOIDKeyUsage returns the value of the constant kSecOIDKeyUsage.
+func KSecOIDKeyUsage() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecOIDKeyUsage"))) }
 
-// KSecOIDLocalityName returns the value of the CoreFoundation reference constant kSecOIDLocalityName as an objc.ID.
-func KSecOIDLocalityName() objc.ID { return purego.CFConstant(raw.KSecOIDLocalityName()) }
+// KSecOIDLocalityName returns the value of the constant kSecOIDLocalityName.
+func KSecOIDLocalityName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDLocalityName")))
+}
 
-// KSecOIDMS_NTPrincipalName returns the value of the CoreFoundation reference constant kSecOIDMS_NTPrincipalName as an objc.ID.
-func KSecOIDMS_NTPrincipalName() objc.ID { return purego.CFConstant(raw.KSecOIDMS_NTPrincipalName()) }
+// KSecOIDMS_NTPrincipalName returns the value of the constant kSecOIDMS_NTPrincipalName.
+func KSecOIDMS_NTPrincipalName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDMS_NTPrincipalName")))
+}
 
-// KSecOIDMicrosoftSGC returns the value of the CoreFoundation reference constant kSecOIDMicrosoftSGC as an objc.ID.
-func KSecOIDMicrosoftSGC() objc.ID { return purego.CFConstant(raw.KSecOIDMicrosoftSGC()) }
+// KSecOIDMicrosoftSGC returns the value of the constant kSecOIDMicrosoftSGC.
+func KSecOIDMicrosoftSGC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDMicrosoftSGC")))
+}
 
-// KSecOIDNameConstraints returns the value of the CoreFoundation reference constant kSecOIDNameConstraints as an objc.ID.
-func KSecOIDNameConstraints() objc.ID { return purego.CFConstant(raw.KSecOIDNameConstraints()) }
+// KSecOIDNameConstraints returns the value of the constant kSecOIDNameConstraints.
+func KSecOIDNameConstraints() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDNameConstraints")))
+}
 
-// KSecOIDNetscapeCertSequence returns the value of the CoreFoundation reference constant kSecOIDNetscapeCertSequence as an objc.ID.
-func KSecOIDNetscapeCertSequence() objc.ID {
-	return purego.CFConstant(raw.KSecOIDNetscapeCertSequence())
+// KSecOIDNetscapeCertSequence returns the value of the constant kSecOIDNetscapeCertSequence.
+func KSecOIDNetscapeCertSequence() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDNetscapeCertSequence")))
 }
 
-// KSecOIDNetscapeCertType returns the value of the CoreFoundation reference constant kSecOIDNetscapeCertType as an objc.ID.
-func KSecOIDNetscapeCertType() objc.ID { return purego.CFConstant(raw.KSecOIDNetscapeCertType()) }
+// KSecOIDNetscapeCertType returns the value of the constant kSecOIDNetscapeCertType.
+func KSecOIDNetscapeCertType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDNetscapeCertType")))
+}
 
-// KSecOIDNetscapeSGC returns the value of the CoreFoundation reference constant kSecOIDNetscapeSGC as an objc.ID.
-func KSecOIDNetscapeSGC() objc.ID { return purego.CFConstant(raw.KSecOIDNetscapeSGC()) }
+// KSecOIDNetscapeSGC returns the value of the constant kSecOIDNetscapeSGC.
+func KSecOIDNetscapeSGC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDNetscapeSGC")))
+}
 
-// KSecOIDOCSPSigning returns the value of the CoreFoundation reference constant kSecOIDOCSPSigning as an objc.ID.
-func KSecOIDOCSPSigning() objc.ID { return purego.CFConstant(raw.KSecOIDOCSPSigning()) }
+// KSecOIDOCSPSigning returns the value of the constant kSecOIDOCSPSigning.
+func KSecOIDOCSPSigning() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDOCSPSigning")))
+}
 
-// KSecOIDOrganizationName returns the value of the CoreFoundation reference constant kSecOIDOrganizationName as an objc.ID.
-func KSecOIDOrganizationName() objc.ID { return purego.CFConstant(raw.KSecOIDOrganizationName()) }
+// KSecOIDOrganizationName returns the value of the constant kSecOIDOrganizationName.
+func KSecOIDOrganizationName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDOrganizationName")))
+}
 
-// KSecOIDOrganizationalUnitName returns the value of the CoreFoundation reference constant kSecOIDOrganizationalUnitName as an objc.ID.
-func KSecOIDOrganizationalUnitName() objc.ID {
-	return purego.CFConstant(raw.KSecOIDOrganizationalUnitName())
+// KSecOIDOrganizationalUnitName returns the value of the constant kSecOIDOrganizationalUnitName.
+func KSecOIDOrganizationalUnitName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDOrganizationalUnitName")))
 }
 
-// KSecOIDPolicyConstraints returns the value of the CoreFoundation reference constant kSecOIDPolicyConstraints as an objc.ID.
-func KSecOIDPolicyConstraints() objc.ID { return purego.CFConstant(raw.KSecOIDPolicyConstraints()) }
+// KSecOIDPolicyConstraints returns the value of the constant kSecOIDPolicyConstraints.
+func KSecOIDPolicyConstraints() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDPolicyConstraints")))
+}
 
-// KSecOIDPolicyMappings returns the value of the CoreFoundation reference constant kSecOIDPolicyMappings as an objc.ID.
-func KSecOIDPolicyMappings() objc.ID { return purego.CFConstant(raw.KSecOIDPolicyMappings()) }
+// KSecOIDPolicyMappings returns the value of the constant kSecOIDPolicyMappings.
+func KSecOIDPolicyMappings() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDPolicyMappings")))
+}
 
-// KSecOIDPrivateKeyUsagePeriod returns the value of the CoreFoundation reference constant kSecOIDPrivateKeyUsagePeriod as an objc.ID.
-func KSecOIDPrivateKeyUsagePeriod() objc.ID {
-	return purego.CFConstant(raw.KSecOIDPrivateKeyUsagePeriod())
+// KSecOIDPrivateKeyUsagePeriod returns the value of the constant kSecOIDPrivateKeyUsagePeriod.
+func KSecOIDPrivateKeyUsagePeriod() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDPrivateKeyUsagePeriod")))
 }
 
-// KSecOIDQC_Statements returns the value of the CoreFoundation reference constant kSecOIDQC_Statements as an objc.ID.
-func KSecOIDQC_Statements() objc.ID { return purego.CFConstant(raw.KSecOIDQC_Statements()) }
+// KSecOIDQC_Statements returns the value of the constant kSecOIDQC_Statements.
+func KSecOIDQC_Statements() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDQC_Statements")))
+}
 
-// KSecOIDSerialNumber returns the value of the CoreFoundation reference constant kSecOIDSerialNumber as an objc.ID.
-func KSecOIDSerialNumber() objc.ID { return purego.CFConstant(raw.KSecOIDSerialNumber()) }
+// KSecOIDSerialNumber returns the value of the constant kSecOIDSerialNumber.
+func KSecOIDSerialNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDSerialNumber")))
+}
 
-// KSecOIDServerAuth returns the value of the CoreFoundation reference constant kSecOIDServerAuth as an objc.ID.
-func KSecOIDServerAuth() objc.ID { return purego.CFConstant(raw.KSecOIDServerAuth()) }
+// KSecOIDServerAuth returns the value of the constant kSecOIDServerAuth.
+func KSecOIDServerAuth() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecOIDServerAuth"))) }
 
-// KSecOIDStateProvinceName returns the value of the CoreFoundation reference constant kSecOIDStateProvinceName as an objc.ID.
-func KSecOIDStateProvinceName() objc.ID { return purego.CFConstant(raw.KSecOIDStateProvinceName()) }
+// KSecOIDStateProvinceName returns the value of the constant kSecOIDStateProvinceName.
+func KSecOIDStateProvinceName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDStateProvinceName")))
+}
 
-// KSecOIDStreetAddress returns the value of the CoreFoundation reference constant kSecOIDStreetAddress as an objc.ID.
-func KSecOIDStreetAddress() objc.ID { return purego.CFConstant(raw.KSecOIDStreetAddress()) }
+// KSecOIDStreetAddress returns the value of the constant kSecOIDStreetAddress.
+func KSecOIDStreetAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDStreetAddress")))
+}
 
-// KSecOIDSubjectAltName returns the value of the CoreFoundation reference constant kSecOIDSubjectAltName as an objc.ID.
-func KSecOIDSubjectAltName() objc.ID { return purego.CFConstant(raw.KSecOIDSubjectAltName()) }
+// KSecOIDSubjectAltName returns the value of the constant kSecOIDSubjectAltName.
+func KSecOIDSubjectAltName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDSubjectAltName")))
+}
 
-// KSecOIDSubjectDirectoryAttributes returns the value of the CoreFoundation reference constant kSecOIDSubjectDirectoryAttributes as an objc.ID.
-func KSecOIDSubjectDirectoryAttributes() objc.ID {
-	return purego.CFConstant(raw.KSecOIDSubjectDirectoryAttributes())
+// KSecOIDSubjectDirectoryAttributes returns the value of the constant kSecOIDSubjectDirectoryAttributes.
+func KSecOIDSubjectDirectoryAttributes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDSubjectDirectoryAttributes")))
 }
 
-// KSecOIDSubjectEmailAddress returns the value of the CoreFoundation reference constant kSecOIDSubjectEmailAddress as an objc.ID.
-func KSecOIDSubjectEmailAddress() objc.ID { return purego.CFConstant(raw.KSecOIDSubjectEmailAddress()) }
+// KSecOIDSubjectEmailAddress returns the value of the constant kSecOIDSubjectEmailAddress.
+func KSecOIDSubjectEmailAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDSubjectEmailAddress")))
+}
 
-// KSecOIDSubjectInfoAccess returns the value of the CoreFoundation reference constant kSecOIDSubjectInfoAccess as an objc.ID.
-func KSecOIDSubjectInfoAccess() objc.ID { return purego.CFConstant(raw.KSecOIDSubjectInfoAccess()) }
+// KSecOIDSubjectInfoAccess returns the value of the constant kSecOIDSubjectInfoAccess.
+func KSecOIDSubjectInfoAccess() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDSubjectInfoAccess")))
+}
 
-// KSecOIDSubjectKeyIdentifier returns the value of the CoreFoundation reference constant kSecOIDSubjectKeyIdentifier as an objc.ID.
-func KSecOIDSubjectKeyIdentifier() objc.ID {
-	return purego.CFConstant(raw.KSecOIDSubjectKeyIdentifier())
+// KSecOIDSubjectKeyIdentifier returns the value of the constant kSecOIDSubjectKeyIdentifier.
+func KSecOIDSubjectKeyIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDSubjectKeyIdentifier")))
 }
 
-// KSecOIDSubjectPicture returns the value of the CoreFoundation reference constant kSecOIDSubjectPicture as an objc.ID.
-func KSecOIDSubjectPicture() objc.ID { return purego.CFConstant(raw.KSecOIDSubjectPicture()) }
+// KSecOIDSubjectPicture returns the value of the constant kSecOIDSubjectPicture.
+func KSecOIDSubjectPicture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDSubjectPicture")))
+}
 
-// KSecOIDSubjectSignatureBitmap returns the value of the CoreFoundation reference constant kSecOIDSubjectSignatureBitmap as an objc.ID.
-func KSecOIDSubjectSignatureBitmap() objc.ID {
-	return purego.CFConstant(raw.KSecOIDSubjectSignatureBitmap())
+// KSecOIDSubjectSignatureBitmap returns the value of the constant kSecOIDSubjectSignatureBitmap.
+func KSecOIDSubjectSignatureBitmap() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDSubjectSignatureBitmap")))
 }
 
-// KSecOIDSurname returns the value of the CoreFoundation reference constant kSecOIDSurname as an objc.ID.
-func KSecOIDSurname() objc.ID { return purego.CFConstant(raw.KSecOIDSurname()) }
+// KSecOIDSurname returns the value of the constant kSecOIDSurname.
+func KSecOIDSurname() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecOIDSurname"))) }
 
-// KSecOIDTimeStamping returns the value of the CoreFoundation reference constant kSecOIDTimeStamping as an objc.ID.
-func KSecOIDTimeStamping() objc.ID { return purego.CFConstant(raw.KSecOIDTimeStamping()) }
+// KSecOIDTimeStamping returns the value of the constant kSecOIDTimeStamping.
+func KSecOIDTimeStamping() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDTimeStamping")))
+}
 
-// KSecOIDTitle returns the value of the CoreFoundation reference constant kSecOIDTitle as an objc.ID.
-func KSecOIDTitle() objc.ID { return purego.CFConstant(raw.KSecOIDTitle()) }
+// KSecOIDTitle returns the value of the constant kSecOIDTitle.
+func KSecOIDTitle() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecOIDTitle"))) }
 
-// KSecOIDUseExemptions returns the value of the CoreFoundation reference constant kSecOIDUseExemptions as an objc.ID.
-func KSecOIDUseExemptions() objc.ID { return purego.CFConstant(raw.KSecOIDUseExemptions()) }
+// KSecOIDUseExemptions returns the value of the constant kSecOIDUseExemptions.
+func KSecOIDUseExemptions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDUseExemptions")))
+}
 
-// KSecOIDX509V1CertificateIssuerUniqueId returns the value of the CoreFoundation reference constant kSecOIDX509V1CertificateIssuerUniqueId as an objc.ID.
-func KSecOIDX509V1CertificateIssuerUniqueId() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V1CertificateIssuerUniqueId())
+// KSecOIDX509V1CertificateIssuerUniqueId returns the value of the constant kSecOIDX509V1CertificateIssuerUniqueId.
+func KSecOIDX509V1CertificateIssuerUniqueId() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1CertificateIssuerUniqueId")))
 }
 
-// KSecOIDX509V1CertificateSubjectUniqueId returns the value of the CoreFoundation reference constant kSecOIDX509V1CertificateSubjectUniqueId as an objc.ID.
-func KSecOIDX509V1CertificateSubjectUniqueId() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V1CertificateSubjectUniqueId())
+// KSecOIDX509V1CertificateSubjectUniqueId returns the value of the constant kSecOIDX509V1CertificateSubjectUniqueId.
+func KSecOIDX509V1CertificateSubjectUniqueId() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1CertificateSubjectUniqueId")))
 }
 
-// KSecOIDX509V1IssuerName returns the value of the CoreFoundation reference constant kSecOIDX509V1IssuerName as an objc.ID.
-func KSecOIDX509V1IssuerName() objc.ID { return purego.CFConstant(raw.KSecOIDX509V1IssuerName()) }
+// KSecOIDX509V1IssuerName returns the value of the constant kSecOIDX509V1IssuerName.
+func KSecOIDX509V1IssuerName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1IssuerName")))
+}
 
-// KSecOIDX509V1IssuerNameCStruct returns the value of the CoreFoundation reference constant kSecOIDX509V1IssuerNameCStruct as an objc.ID.
-func KSecOIDX509V1IssuerNameCStruct() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V1IssuerNameCStruct())
+// KSecOIDX509V1IssuerNameCStruct returns the value of the constant kSecOIDX509V1IssuerNameCStruct.
+func KSecOIDX509V1IssuerNameCStruct() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1IssuerNameCStruct")))
 }
 
-// KSecOIDX509V1IssuerNameLDAP returns the value of the CoreFoundation reference constant kSecOIDX509V1IssuerNameLDAP as an objc.ID.
-func KSecOIDX509V1IssuerNameLDAP() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V1IssuerNameLDAP())
+// KSecOIDX509V1IssuerNameLDAP returns the value of the constant kSecOIDX509V1IssuerNameLDAP.
+func KSecOIDX509V1IssuerNameLDAP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1IssuerNameLDAP")))
 }
 
-// KSecOIDX509V1IssuerNameStd returns the value of the CoreFoundation reference constant kSecOIDX509V1IssuerNameStd as an objc.ID.
-func KSecOIDX509V1IssuerNameStd() objc.ID { return purego.CFConstant(raw.KSecOIDX509V1IssuerNameStd()) }
+// KSecOIDX509V1IssuerNameStd returns the value of the constant kSecOIDX509V1IssuerNameStd.
+func KSecOIDX509V1IssuerNameStd() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1IssuerNameStd")))
+}
 
-// KSecOIDX509V1SerialNumber returns the value of the CoreFoundation reference constant kSecOIDX509V1SerialNumber as an objc.ID.
-func KSecOIDX509V1SerialNumber() objc.ID { return purego.CFConstant(raw.KSecOIDX509V1SerialNumber()) }
+// KSecOIDX509V1SerialNumber returns the value of the constant kSecOIDX509V1SerialNumber.
+func KSecOIDX509V1SerialNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1SerialNumber")))
+}
 
-// KSecOIDX509V1Signature returns the value of the CoreFoundation reference constant kSecOIDX509V1Signature as an objc.ID.
-func KSecOIDX509V1Signature() objc.ID { return purego.CFConstant(raw.KSecOIDX509V1Signature()) }
+// KSecOIDX509V1Signature returns the value of the constant kSecOIDX509V1Signature.
+func KSecOIDX509V1Signature() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1Signature")))
+}
 
-// KSecOIDX509V1SignatureAlgorithm returns the value of the CoreFoundation reference constant kSecOIDX509V1SignatureAlgorithm as an objc.ID.
-func KSecOIDX509V1SignatureAlgorithm() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V1SignatureAlgorithm())
+// KSecOIDX509V1SignatureAlgorithm returns the value of the constant kSecOIDX509V1SignatureAlgorithm.
+func KSecOIDX509V1SignatureAlgorithm() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1SignatureAlgorithm")))
 }
 
-// KSecOIDX509V1SignatureAlgorithmParameters returns the value of the CoreFoundation reference constant kSecOIDX509V1SignatureAlgorithmParameters as an objc.ID.
-func KSecOIDX509V1SignatureAlgorithmParameters() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V1SignatureAlgorithmParameters())
+// KSecOIDX509V1SignatureAlgorithmParameters returns the value of the constant kSecOIDX509V1SignatureAlgorithmParameters.
+func KSecOIDX509V1SignatureAlgorithmParameters() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1SignatureAlgorithmParameters")))
 }
 
-// KSecOIDX509V1SignatureAlgorithmTBS returns the value of the CoreFoundation reference constant kSecOIDX509V1SignatureAlgorithmTBS as an objc.ID.
-func KSecOIDX509V1SignatureAlgorithmTBS() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V1SignatureAlgorithmTBS())
+// KSecOIDX509V1SignatureAlgorithmTBS returns the value of the constant kSecOIDX509V1SignatureAlgorithmTBS.
+func KSecOIDX509V1SignatureAlgorithmTBS() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1SignatureAlgorithmTBS")))
 }
 
-// KSecOIDX509V1SignatureCStruct returns the value of the CoreFoundation reference constant kSecOIDX509V1SignatureCStruct as an objc.ID.
-func KSecOIDX509V1SignatureCStruct() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V1SignatureCStruct())
+// KSecOIDX509V1SignatureCStruct returns the value of the constant kSecOIDX509V1SignatureCStruct.
+func KSecOIDX509V1SignatureCStruct() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1SignatureCStruct")))
 }
 
-// KSecOIDX509V1SignatureStruct returns the value of the CoreFoundation reference constant kSecOIDX509V1SignatureStruct as an objc.ID.
-func KSecOIDX509V1SignatureStruct() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V1SignatureStruct())
+// KSecOIDX509V1SignatureStruct returns the value of the constant kSecOIDX509V1SignatureStruct.
+func KSecOIDX509V1SignatureStruct() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1SignatureStruct")))
 }
 
-// KSecOIDX509V1SubjectName returns the value of the CoreFoundation reference constant kSecOIDX509V1SubjectName as an objc.ID.
-func KSecOIDX509V1SubjectName() objc.ID { return purego.CFConstant(raw.KSecOIDX509V1SubjectName()) }
+// KSecOIDX509V1SubjectName returns the value of the constant kSecOIDX509V1SubjectName.
+func KSecOIDX509V1SubjectName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1SubjectName")))
+}
 
-// KSecOIDX509V1SubjectNameCStruct returns the value of the CoreFoundation reference constant kSecOIDX509V1SubjectNameCStruct as an objc.ID.
-func KSecOIDX509V1SubjectNameCStruct() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V1SubjectNameCStruct())
+// KSecOIDX509V1SubjectNameCStruct returns the value of the constant kSecOIDX509V1SubjectNameCStruct.
+func KSecOIDX509V1SubjectNameCStruct() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1SubjectNameCStruct")))
 }
 
-// KSecOIDX509V1SubjectNameLDAP returns the value of the CoreFoundation reference constant kSecOIDX509V1SubjectNameLDAP as an objc.ID.
-func KSecOIDX509V1SubjectNameLDAP() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V1SubjectNameLDAP())
+// KSecOIDX509V1SubjectNameLDAP returns the value of the constant kSecOIDX509V1SubjectNameLDAP.
+func KSecOIDX509V1SubjectNameLDAP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1SubjectNameLDAP")))
 }
 
-// KSecOIDX509V1SubjectNameStd returns the value of the CoreFoundation reference constant kSecOIDX509V1SubjectNameStd as an objc.ID.
-func KSecOIDX509V1SubjectNameStd() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V1SubjectNameStd())
+// KSecOIDX509V1SubjectNameStd returns the value of the constant kSecOIDX509V1SubjectNameStd.
+func KSecOIDX509V1SubjectNameStd() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1SubjectNameStd")))
 }
 
-// KSecOIDX509V1SubjectPublicKey returns the value of the CoreFoundation reference constant kSecOIDX509V1SubjectPublicKey as an objc.ID.
-func KSecOIDX509V1SubjectPublicKey() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V1SubjectPublicKey())
+// KSecOIDX509V1SubjectPublicKey returns the value of the constant kSecOIDX509V1SubjectPublicKey.
+func KSecOIDX509V1SubjectPublicKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1SubjectPublicKey")))
 }
 
-// KSecOIDX509V1SubjectPublicKeyAlgorithm returns the value of the CoreFoundation reference constant kSecOIDX509V1SubjectPublicKeyAlgorithm as an objc.ID.
-func KSecOIDX509V1SubjectPublicKeyAlgorithm() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V1SubjectPublicKeyAlgorithm())
+// KSecOIDX509V1SubjectPublicKeyAlgorithm returns the value of the constant kSecOIDX509V1SubjectPublicKeyAlgorithm.
+func KSecOIDX509V1SubjectPublicKeyAlgorithm() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1SubjectPublicKeyAlgorithm")))
 }
 
-// KSecOIDX509V1SubjectPublicKeyAlgorithmParameters returns the value of the CoreFoundation reference constant kSecOIDX509V1SubjectPublicKeyAlgorithmParameters as an objc.ID.
-func KSecOIDX509V1SubjectPublicKeyAlgorithmParameters() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V1SubjectPublicKeyAlgorithmParameters())
+// KSecOIDX509V1SubjectPublicKeyAlgorithmParameters returns the value of the constant kSecOIDX509V1SubjectPublicKeyAlgorithmParameters.
+func KSecOIDX509V1SubjectPublicKeyAlgorithmParameters() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1SubjectPublicKeyAlgorithmParameters")))
 }
 
-// KSecOIDX509V1SubjectPublicKeyCStruct returns the value of the CoreFoundation reference constant kSecOIDX509V1SubjectPublicKeyCStruct as an objc.ID.
-func KSecOIDX509V1SubjectPublicKeyCStruct() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V1SubjectPublicKeyCStruct())
+// KSecOIDX509V1SubjectPublicKeyCStruct returns the value of the constant kSecOIDX509V1SubjectPublicKeyCStruct.
+func KSecOIDX509V1SubjectPublicKeyCStruct() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1SubjectPublicKeyCStruct")))
 }
 
-// KSecOIDX509V1ValidityNotAfter returns the value of the CoreFoundation reference constant kSecOIDX509V1ValidityNotAfter as an objc.ID.
-func KSecOIDX509V1ValidityNotAfter() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V1ValidityNotAfter())
+// KSecOIDX509V1ValidityNotAfter returns the value of the constant kSecOIDX509V1ValidityNotAfter.
+func KSecOIDX509V1ValidityNotAfter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1ValidityNotAfter")))
 }
 
-// KSecOIDX509V1ValidityNotBefore returns the value of the CoreFoundation reference constant kSecOIDX509V1ValidityNotBefore as an objc.ID.
-func KSecOIDX509V1ValidityNotBefore() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V1ValidityNotBefore())
+// KSecOIDX509V1ValidityNotBefore returns the value of the constant kSecOIDX509V1ValidityNotBefore.
+func KSecOIDX509V1ValidityNotBefore() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1ValidityNotBefore")))
 }
 
-// KSecOIDX509V1Version returns the value of the CoreFoundation reference constant kSecOIDX509V1Version as an objc.ID.
-func KSecOIDX509V1Version() objc.ID { return purego.CFConstant(raw.KSecOIDX509V1Version()) }
+// KSecOIDX509V1Version returns the value of the constant kSecOIDX509V1Version.
+func KSecOIDX509V1Version() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V1Version")))
+}
 
-// KSecOIDX509V3Certificate returns the value of the CoreFoundation reference constant kSecOIDX509V3Certificate as an objc.ID.
-func KSecOIDX509V3Certificate() objc.ID { return purego.CFConstant(raw.KSecOIDX509V3Certificate()) }
+// KSecOIDX509V3Certificate returns the value of the constant kSecOIDX509V3Certificate.
+func KSecOIDX509V3Certificate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V3Certificate")))
+}
 
-// KSecOIDX509V3CertificateCStruct returns the value of the CoreFoundation reference constant kSecOIDX509V3CertificateCStruct as an objc.ID.
-func KSecOIDX509V3CertificateCStruct() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V3CertificateCStruct())
+// KSecOIDX509V3CertificateCStruct returns the value of the constant kSecOIDX509V3CertificateCStruct.
+func KSecOIDX509V3CertificateCStruct() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V3CertificateCStruct")))
 }
 
-// KSecOIDX509V3CertificateExtensionCStruct returns the value of the CoreFoundation reference constant kSecOIDX509V3CertificateExtensionCStruct as an objc.ID.
-func KSecOIDX509V3CertificateExtensionCStruct() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V3CertificateExtensionCStruct())
+// KSecOIDX509V3CertificateExtensionCStruct returns the value of the constant kSecOIDX509V3CertificateExtensionCStruct.
+func KSecOIDX509V3CertificateExtensionCStruct() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V3CertificateExtensionCStruct")))
 }
 
-// KSecOIDX509V3CertificateExtensionCritical returns the value of the CoreFoundation reference constant kSecOIDX509V3CertificateExtensionCritical as an objc.ID.
-func KSecOIDX509V3CertificateExtensionCritical() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V3CertificateExtensionCritical())
+// KSecOIDX509V3CertificateExtensionCritical returns the value of the constant kSecOIDX509V3CertificateExtensionCritical.
+func KSecOIDX509V3CertificateExtensionCritical() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V3CertificateExtensionCritical")))
 }
 
-// KSecOIDX509V3CertificateExtensionId returns the value of the CoreFoundation reference constant kSecOIDX509V3CertificateExtensionId as an objc.ID.
-func KSecOIDX509V3CertificateExtensionId() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V3CertificateExtensionId())
+// KSecOIDX509V3CertificateExtensionId returns the value of the constant kSecOIDX509V3CertificateExtensionId.
+func KSecOIDX509V3CertificateExtensionId() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V3CertificateExtensionId")))
 }
 
-// KSecOIDX509V3CertificateExtensionStruct returns the value of the CoreFoundation reference constant kSecOIDX509V3CertificateExtensionStruct as an objc.ID.
-func KSecOIDX509V3CertificateExtensionStruct() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V3CertificateExtensionStruct())
+// KSecOIDX509V3CertificateExtensionStruct returns the value of the constant kSecOIDX509V3CertificateExtensionStruct.
+func KSecOIDX509V3CertificateExtensionStruct() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V3CertificateExtensionStruct")))
 }
 
-// KSecOIDX509V3CertificateExtensionType returns the value of the CoreFoundation reference constant kSecOIDX509V3CertificateExtensionType as an objc.ID.
-func KSecOIDX509V3CertificateExtensionType() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V3CertificateExtensionType())
+// KSecOIDX509V3CertificateExtensionType returns the value of the constant kSecOIDX509V3CertificateExtensionType.
+func KSecOIDX509V3CertificateExtensionType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V3CertificateExtensionType")))
 }
 
-// KSecOIDX509V3CertificateExtensionValue returns the value of the CoreFoundation reference constant kSecOIDX509V3CertificateExtensionValue as an objc.ID.
-func KSecOIDX509V3CertificateExtensionValue() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V3CertificateExtensionValue())
+// KSecOIDX509V3CertificateExtensionValue returns the value of the constant kSecOIDX509V3CertificateExtensionValue.
+func KSecOIDX509V3CertificateExtensionValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V3CertificateExtensionValue")))
 }
 
-// KSecOIDX509V3CertificateExtensionsCStruct returns the value of the CoreFoundation reference constant kSecOIDX509V3CertificateExtensionsCStruct as an objc.ID.
-func KSecOIDX509V3CertificateExtensionsCStruct() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V3CertificateExtensionsCStruct())
+// KSecOIDX509V3CertificateExtensionsCStruct returns the value of the constant kSecOIDX509V3CertificateExtensionsCStruct.
+func KSecOIDX509V3CertificateExtensionsCStruct() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V3CertificateExtensionsCStruct")))
 }
 
-// KSecOIDX509V3CertificateExtensionsStruct returns the value of the CoreFoundation reference constant kSecOIDX509V3CertificateExtensionsStruct as an objc.ID.
-func KSecOIDX509V3CertificateExtensionsStruct() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V3CertificateExtensionsStruct())
+// KSecOIDX509V3CertificateExtensionsStruct returns the value of the constant kSecOIDX509V3CertificateExtensionsStruct.
+func KSecOIDX509V3CertificateExtensionsStruct() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V3CertificateExtensionsStruct")))
 }
 
-// KSecOIDX509V3CertificateNumberOfExtensions returns the value of the CoreFoundation reference constant kSecOIDX509V3CertificateNumberOfExtensions as an objc.ID.
-func KSecOIDX509V3CertificateNumberOfExtensions() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V3CertificateNumberOfExtensions())
+// KSecOIDX509V3CertificateNumberOfExtensions returns the value of the constant kSecOIDX509V3CertificateNumberOfExtensions.
+func KSecOIDX509V3CertificateNumberOfExtensions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V3CertificateNumberOfExtensions")))
 }
 
-// KSecOIDX509V3SignedCertificate returns the value of the CoreFoundation reference constant kSecOIDX509V3SignedCertificate as an objc.ID.
-func KSecOIDX509V3SignedCertificate() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V3SignedCertificate())
+// KSecOIDX509V3SignedCertificate returns the value of the constant kSecOIDX509V3SignedCertificate.
+func KSecOIDX509V3SignedCertificate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V3SignedCertificate")))
 }
 
-// KSecOIDX509V3SignedCertificateCStruct returns the value of the CoreFoundation reference constant kSecOIDX509V3SignedCertificateCStruct as an objc.ID.
-func KSecOIDX509V3SignedCertificateCStruct() objc.ID {
-	return purego.CFConstant(raw.KSecOIDX509V3SignedCertificateCStruct())
+// KSecOIDX509V3SignedCertificateCStruct returns the value of the constant kSecOIDX509V3SignedCertificateCStruct.
+func KSecOIDX509V3SignedCertificateCStruct() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOIDX509V3SignedCertificateCStruct")))
 }
 
-// KSecOIDSRVName returns the value of the CoreFoundation reference constant kSecOIDSRVName as an objc.ID.
-func KSecOIDSRVName() objc.ID { return purego.CFConstant(raw.KSecOIDSRVName()) }
+// KSecOIDSRVName returns the value of the constant kSecOIDSRVName.
+func KSecOIDSRVName() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecOIDSRVName"))) }
 
-// KSecCFErrorArchitecture returns the value of the CoreFoundation reference constant kSecCFErrorArchitecture as an objc.ID.
-func KSecCFErrorArchitecture() objc.ID { return purego.CFConstant(raw.KSecCFErrorArchitecture()) }
+// KSecCFErrorArchitecture returns the value of the constant kSecCFErrorArchitecture.
+func KSecCFErrorArchitecture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCFErrorArchitecture")))
+}
 
-// KSecCFErrorPattern returns the value of the CoreFoundation reference constant kSecCFErrorPattern as an objc.ID.
-func KSecCFErrorPattern() objc.ID { return purego.CFConstant(raw.KSecCFErrorPattern()) }
+// KSecCFErrorPattern returns the value of the constant kSecCFErrorPattern.
+func KSecCFErrorPattern() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCFErrorPattern")))
+}
 
-// KSecCFErrorResourceSeal returns the value of the CoreFoundation reference constant kSecCFErrorResourceSeal as an objc.ID.
-func KSecCFErrorResourceSeal() objc.ID { return purego.CFConstant(raw.KSecCFErrorResourceSeal()) }
+// KSecCFErrorResourceSeal returns the value of the constant kSecCFErrorResourceSeal.
+func KSecCFErrorResourceSeal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCFErrorResourceSeal")))
+}
 
-// KSecCFErrorResourceAdded returns the value of the CoreFoundation reference constant kSecCFErrorResourceAdded as an objc.ID.
-func KSecCFErrorResourceAdded() objc.ID { return purego.CFConstant(raw.KSecCFErrorResourceAdded()) }
+// KSecCFErrorResourceAdded returns the value of the constant kSecCFErrorResourceAdded.
+func KSecCFErrorResourceAdded() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCFErrorResourceAdded")))
+}
 
-// KSecCFErrorResourceAltered returns the value of the CoreFoundation reference constant kSecCFErrorResourceAltered as an objc.ID.
-func KSecCFErrorResourceAltered() objc.ID { return purego.CFConstant(raw.KSecCFErrorResourceAltered()) }
+// KSecCFErrorResourceAltered returns the value of the constant kSecCFErrorResourceAltered.
+func KSecCFErrorResourceAltered() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCFErrorResourceAltered")))
+}
 
-// KSecCFErrorResourceMissing returns the value of the CoreFoundation reference constant kSecCFErrorResourceMissing as an objc.ID.
-func KSecCFErrorResourceMissing() objc.ID { return purego.CFConstant(raw.KSecCFErrorResourceMissing()) }
+// KSecCFErrorResourceMissing returns the value of the constant kSecCFErrorResourceMissing.
+func KSecCFErrorResourceMissing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCFErrorResourceMissing")))
+}
 
-// KSecCFErrorResourceSideband returns the value of the CoreFoundation reference constant kSecCFErrorResourceSideband as an objc.ID.
-func KSecCFErrorResourceSideband() objc.ID {
-	return purego.CFConstant(raw.KSecCFErrorResourceSideband())
+// KSecCFErrorResourceSideband returns the value of the constant kSecCFErrorResourceSideband.
+func KSecCFErrorResourceSideband() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCFErrorResourceSideband")))
 }
 
-// KSecCFErrorResourceRecursive returns the value of the CoreFoundation reference constant kSecCFErrorResourceRecursive as an objc.ID.
-func KSecCFErrorResourceRecursive() objc.ID {
-	return purego.CFConstant(raw.KSecCFErrorResourceRecursive())
+// KSecCFErrorResourceRecursive returns the value of the constant kSecCFErrorResourceRecursive.
+func KSecCFErrorResourceRecursive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCFErrorResourceRecursive")))
 }
 
-// KSecCFErrorInfoPlist returns the value of the CoreFoundation reference constant kSecCFErrorInfoPlist as an objc.ID.
-func KSecCFErrorInfoPlist() objc.ID { return purego.CFConstant(raw.KSecCFErrorInfoPlist()) }
+// KSecCFErrorInfoPlist returns the value of the constant kSecCFErrorInfoPlist.
+func KSecCFErrorInfoPlist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCFErrorInfoPlist")))
+}
 
-// KSecCFErrorGuestAttributes returns the value of the CoreFoundation reference constant kSecCFErrorGuestAttributes as an objc.ID.
-func KSecCFErrorGuestAttributes() objc.ID { return purego.CFConstant(raw.KSecCFErrorGuestAttributes()) }
+// KSecCFErrorGuestAttributes returns the value of the constant kSecCFErrorGuestAttributes.
+func KSecCFErrorGuestAttributes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCFErrorGuestAttributes")))
+}
 
-// KSecCFErrorRequirementSyntax returns the value of the CoreFoundation reference constant kSecCFErrorRequirementSyntax as an objc.ID.
-func KSecCFErrorRequirementSyntax() objc.ID {
-	return purego.CFConstant(raw.KSecCFErrorRequirementSyntax())
+// KSecCFErrorRequirementSyntax returns the value of the constant kSecCFErrorRequirementSyntax.
+func KSecCFErrorRequirementSyntax() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCFErrorRequirementSyntax")))
 }
 
-// KSecCFErrorPath returns the value of the CoreFoundation reference constant kSecCFErrorPath as an objc.ID.
-func KSecCFErrorPath() objc.ID { return purego.CFConstant(raw.KSecCFErrorPath()) }
+// KSecCFErrorPath returns the value of the constant kSecCFErrorPath.
+func KSecCFErrorPath() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecCFErrorPath"))) }
 
-// KSecCodeAttributeArchitecture returns the value of the CoreFoundation reference constant kSecCodeAttributeArchitecture as an objc.ID.
-func KSecCodeAttributeArchitecture() objc.ID {
-	return purego.CFConstant(raw.KSecCodeAttributeArchitecture())
+// KSecCodeAttributeArchitecture returns the value of the constant kSecCodeAttributeArchitecture.
+func KSecCodeAttributeArchitecture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeAttributeArchitecture")))
 }
 
-// KSecCodeAttributeSubarchitecture returns the value of the CoreFoundation reference constant kSecCodeAttributeSubarchitecture as an objc.ID.
-func KSecCodeAttributeSubarchitecture() objc.ID {
-	return purego.CFConstant(raw.KSecCodeAttributeSubarchitecture())
+// KSecCodeAttributeSubarchitecture returns the value of the constant kSecCodeAttributeSubarchitecture.
+func KSecCodeAttributeSubarchitecture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeAttributeSubarchitecture")))
 }
 
-// KSecCodeAttributeUniversalFileOffset returns the value of the CoreFoundation reference constant kSecCodeAttributeUniversalFileOffset as an objc.ID.
-func KSecCodeAttributeUniversalFileOffset() objc.ID {
-	return purego.CFConstant(raw.KSecCodeAttributeUniversalFileOffset())
+// KSecCodeAttributeUniversalFileOffset returns the value of the constant kSecCodeAttributeUniversalFileOffset.
+func KSecCodeAttributeUniversalFileOffset() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeAttributeUniversalFileOffset")))
 }
 
-// KSecCodeAttributeBundleVersion returns the value of the CoreFoundation reference constant kSecCodeAttributeBundleVersion as an objc.ID.
-func KSecCodeAttributeBundleVersion() objc.ID {
-	return purego.CFConstant(raw.KSecCodeAttributeBundleVersion())
+// KSecCodeAttributeBundleVersion returns the value of the constant kSecCodeAttributeBundleVersion.
+func KSecCodeAttributeBundleVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeAttributeBundleVersion")))
 }
 
-// KSecGuestAttributeCanonical returns the value of the CoreFoundation reference constant kSecGuestAttributeCanonical as an objc.ID.
-func KSecGuestAttributeCanonical() objc.ID {
-	return purego.CFConstant(raw.KSecGuestAttributeCanonical())
+// KSecGuestAttributeCanonical returns the value of the constant kSecGuestAttributeCanonical.
+func KSecGuestAttributeCanonical() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecGuestAttributeCanonical")))
 }
 
-// KSecGuestAttributeHash returns the value of the CoreFoundation reference constant kSecGuestAttributeHash as an objc.ID.
-func KSecGuestAttributeHash() objc.ID { return purego.CFConstant(raw.KSecGuestAttributeHash()) }
+// KSecGuestAttributeHash returns the value of the constant kSecGuestAttributeHash.
+func KSecGuestAttributeHash() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecGuestAttributeHash")))
+}
 
-// KSecGuestAttributeMachPort returns the value of the CoreFoundation reference constant kSecGuestAttributeMachPort as an objc.ID.
-func KSecGuestAttributeMachPort() objc.ID { return purego.CFConstant(raw.KSecGuestAttributeMachPort()) }
+// KSecGuestAttributeMachPort returns the value of the constant kSecGuestAttributeMachPort.
+func KSecGuestAttributeMachPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecGuestAttributeMachPort")))
+}
 
-// KSecGuestAttributePid returns the value of the CoreFoundation reference constant kSecGuestAttributePid as an objc.ID.
-func KSecGuestAttributePid() objc.ID { return purego.CFConstant(raw.KSecGuestAttributePid()) }
+// KSecGuestAttributePid returns the value of the constant kSecGuestAttributePid.
+func KSecGuestAttributePid() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecGuestAttributePid")))
+}
 
-// KSecGuestAttributeAudit returns the value of the CoreFoundation reference constant kSecGuestAttributeAudit as an objc.ID.
-func KSecGuestAttributeAudit() objc.ID { return purego.CFConstant(raw.KSecGuestAttributeAudit()) }
+// KSecGuestAttributeAudit returns the value of the constant kSecGuestAttributeAudit.
+func KSecGuestAttributeAudit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecGuestAttributeAudit")))
+}
 
-// KSecGuestAttributeDynamicCode returns the value of the CoreFoundation reference constant kSecGuestAttributeDynamicCode as an objc.ID.
-func KSecGuestAttributeDynamicCode() objc.ID {
-	return purego.CFConstant(raw.KSecGuestAttributeDynamicCode())
+// KSecGuestAttributeDynamicCode returns the value of the constant kSecGuestAttributeDynamicCode.
+func KSecGuestAttributeDynamicCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecGuestAttributeDynamicCode")))
 }
 
-// KSecGuestAttributeDynamicCodeInfoPlist returns the value of the CoreFoundation reference constant kSecGuestAttributeDynamicCodeInfoPlist as an objc.ID.
-func KSecGuestAttributeDynamicCodeInfoPlist() objc.ID {
-	return purego.CFConstant(raw.KSecGuestAttributeDynamicCodeInfoPlist())
+// KSecGuestAttributeDynamicCodeInfoPlist returns the value of the constant kSecGuestAttributeDynamicCodeInfoPlist.
+func KSecGuestAttributeDynamicCodeInfoPlist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecGuestAttributeDynamicCodeInfoPlist")))
 }
 
-// KSecGuestAttributeArchitecture returns the value of the CoreFoundation reference constant kSecGuestAttributeArchitecture as an objc.ID.
-func KSecGuestAttributeArchitecture() objc.ID {
-	return purego.CFConstant(raw.KSecGuestAttributeArchitecture())
+// KSecGuestAttributeArchitecture returns the value of the constant kSecGuestAttributeArchitecture.
+func KSecGuestAttributeArchitecture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecGuestAttributeArchitecture")))
 }
 
-// KSecGuestAttributeSubarchitecture returns the value of the CoreFoundation reference constant kSecGuestAttributeSubarchitecture as an objc.ID.
-func KSecGuestAttributeSubarchitecture() objc.ID {
-	return purego.CFConstant(raw.KSecGuestAttributeSubarchitecture())
+// KSecGuestAttributeSubarchitecture returns the value of the constant kSecGuestAttributeSubarchitecture.
+func KSecGuestAttributeSubarchitecture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecGuestAttributeSubarchitecture")))
 }
 
-// KSecCodeInfoCertificates returns the value of the CoreFoundation reference constant kSecCodeInfoCertificates as an objc.ID.
-func KSecCodeInfoCertificates() objc.ID { return purego.CFConstant(raw.KSecCodeInfoCertificates()) }
+// KSecCodeInfoCertificates returns the value of the constant kSecCodeInfoCertificates.
+func KSecCodeInfoCertificates() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoCertificates")))
+}
 
-// KSecCodeInfoChangedFiles returns the value of the CoreFoundation reference constant kSecCodeInfoChangedFiles as an objc.ID.
-func KSecCodeInfoChangedFiles() objc.ID { return purego.CFConstant(raw.KSecCodeInfoChangedFiles()) }
+// KSecCodeInfoChangedFiles returns the value of the constant kSecCodeInfoChangedFiles.
+func KSecCodeInfoChangedFiles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoChangedFiles")))
+}
 
-// KSecCodeInfoCMS returns the value of the CoreFoundation reference constant kSecCodeInfoCMS as an objc.ID.
-func KSecCodeInfoCMS() objc.ID { return purego.CFConstant(raw.KSecCodeInfoCMS()) }
+// KSecCodeInfoCMS returns the value of the constant kSecCodeInfoCMS.
+func KSecCodeInfoCMS() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoCMS"))) }
 
-// KSecCodeInfoDesignatedRequirement returns the value of the CoreFoundation reference constant kSecCodeInfoDesignatedRequirement as an objc.ID.
-func KSecCodeInfoDesignatedRequirement() objc.ID {
-	return purego.CFConstant(raw.KSecCodeInfoDesignatedRequirement())
+// KSecCodeInfoDesignatedRequirement returns the value of the constant kSecCodeInfoDesignatedRequirement.
+func KSecCodeInfoDesignatedRequirement() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoDesignatedRequirement")))
 }
 
-// KSecCodeInfoEntitlements returns the value of the CoreFoundation reference constant kSecCodeInfoEntitlements as an objc.ID.
-func KSecCodeInfoEntitlements() objc.ID { return purego.CFConstant(raw.KSecCodeInfoEntitlements()) }
+// KSecCodeInfoEntitlements returns the value of the constant kSecCodeInfoEntitlements.
+func KSecCodeInfoEntitlements() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoEntitlements")))
+}
 
-// KSecCodeInfoEntitlementsDict returns the value of the CoreFoundation reference constant kSecCodeInfoEntitlementsDict as an objc.ID.
-func KSecCodeInfoEntitlementsDict() objc.ID {
-	return purego.CFConstant(raw.KSecCodeInfoEntitlementsDict())
+// KSecCodeInfoEntitlementsDict returns the value of the constant kSecCodeInfoEntitlementsDict.
+func KSecCodeInfoEntitlementsDict() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoEntitlementsDict")))
 }
 
-// KSecCodeInfoFlags returns the value of the CoreFoundation reference constant kSecCodeInfoFlags as an objc.ID.
-func KSecCodeInfoFlags() objc.ID { return purego.CFConstant(raw.KSecCodeInfoFlags()) }
+// KSecCodeInfoFlags returns the value of the constant kSecCodeInfoFlags.
+func KSecCodeInfoFlags() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoFlags"))) }
 
-// KSecCodeInfoFormat returns the value of the CoreFoundation reference constant kSecCodeInfoFormat as an objc.ID.
-func KSecCodeInfoFormat() objc.ID { return purego.CFConstant(raw.KSecCodeInfoFormat()) }
+// KSecCodeInfoFormat returns the value of the constant kSecCodeInfoFormat.
+func KSecCodeInfoFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoFormat")))
+}
 
-// KSecCodeInfoDigestAlgorithm returns the value of the CoreFoundation reference constant kSecCodeInfoDigestAlgorithm as an objc.ID.
-func KSecCodeInfoDigestAlgorithm() objc.ID {
-	return purego.CFConstant(raw.KSecCodeInfoDigestAlgorithm())
+// KSecCodeInfoDigestAlgorithm returns the value of the constant kSecCodeInfoDigestAlgorithm.
+func KSecCodeInfoDigestAlgorithm() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoDigestAlgorithm")))
 }
 
-// KSecCodeInfoDigestAlgorithms returns the value of the CoreFoundation reference constant kSecCodeInfoDigestAlgorithms as an objc.ID.
-func KSecCodeInfoDigestAlgorithms() objc.ID {
-	return purego.CFConstant(raw.KSecCodeInfoDigestAlgorithms())
+// KSecCodeInfoDigestAlgorithms returns the value of the constant kSecCodeInfoDigestAlgorithms.
+func KSecCodeInfoDigestAlgorithms() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoDigestAlgorithms")))
 }
 
-// KSecCodeInfoPlatformIdentifier returns the value of the CoreFoundation reference constant kSecCodeInfoPlatformIdentifier as an objc.ID.
-func KSecCodeInfoPlatformIdentifier() objc.ID {
-	return purego.CFConstant(raw.KSecCodeInfoPlatformIdentifier())
+// KSecCodeInfoPlatformIdentifier returns the value of the constant kSecCodeInfoPlatformIdentifier.
+func KSecCodeInfoPlatformIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoPlatformIdentifier")))
 }
 
-// KSecCodeInfoIdentifier returns the value of the CoreFoundation reference constant kSecCodeInfoIdentifier as an objc.ID.
-func KSecCodeInfoIdentifier() objc.ID { return purego.CFConstant(raw.KSecCodeInfoIdentifier()) }
+// KSecCodeInfoIdentifier returns the value of the constant kSecCodeInfoIdentifier.
+func KSecCodeInfoIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoIdentifier")))
+}
 
-// KSecCodeInfoImplicitDesignatedRequirement returns the value of the CoreFoundation reference constant kSecCodeInfoImplicitDesignatedRequirement as an objc.ID.
-func KSecCodeInfoImplicitDesignatedRequirement() objc.ID {
-	return purego.CFConstant(raw.KSecCodeInfoImplicitDesignatedRequirement())
+// KSecCodeInfoImplicitDesignatedRequirement returns the value of the constant kSecCodeInfoImplicitDesignatedRequirement.
+func KSecCodeInfoImplicitDesignatedRequirement() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoImplicitDesignatedRequirement")))
 }
 
-// KSecCodeInfoDefaultDesignatedLightweightCodeRequirement returns the value of the CoreFoundation reference constant kSecCodeInfoDefaultDesignatedLightweightCodeRequirement as an objc.ID.
-func KSecCodeInfoDefaultDesignatedLightweightCodeRequirement() objc.ID {
-	return purego.CFConstant(raw.KSecCodeInfoDefaultDesignatedLightweightCodeRequirement())
+// KSecCodeInfoDefaultDesignatedLightweightCodeRequirement returns the value of the constant kSecCodeInfoDefaultDesignatedLightweightCodeRequirement.
+func KSecCodeInfoDefaultDesignatedLightweightCodeRequirement() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoDefaultDesignatedLightweightCodeRequirement")))
 }
 
-// KSecCodeInfoMainExecutable returns the value of the CoreFoundation reference constant kSecCodeInfoMainExecutable as an objc.ID.
-func KSecCodeInfoMainExecutable() objc.ID { return purego.CFConstant(raw.KSecCodeInfoMainExecutable()) }
+// KSecCodeInfoMainExecutable returns the value of the constant kSecCodeInfoMainExecutable.
+func KSecCodeInfoMainExecutable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoMainExecutable")))
+}
 
-// KSecCodeInfoPList returns the value of the CoreFoundation reference constant kSecCodeInfoPList as an objc.ID.
-func KSecCodeInfoPList() objc.ID { return purego.CFConstant(raw.KSecCodeInfoPList()) }
+// KSecCodeInfoPList returns the value of the constant kSecCodeInfoPList.
+func KSecCodeInfoPList() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoPList"))) }
 
-// KSecCodeInfoRequirements returns the value of the CoreFoundation reference constant kSecCodeInfoRequirements as an objc.ID.
-func KSecCodeInfoRequirements() objc.ID { return purego.CFConstant(raw.KSecCodeInfoRequirements()) }
+// KSecCodeInfoRequirements returns the value of the constant kSecCodeInfoRequirements.
+func KSecCodeInfoRequirements() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoRequirements")))
+}
 
-// KSecCodeInfoRequirementData returns the value of the CoreFoundation reference constant kSecCodeInfoRequirementData as an objc.ID.
-func KSecCodeInfoRequirementData() objc.ID {
-	return purego.CFConstant(raw.KSecCodeInfoRequirementData())
+// KSecCodeInfoRequirementData returns the value of the constant kSecCodeInfoRequirementData.
+func KSecCodeInfoRequirementData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoRequirementData")))
 }
 
-// KSecCodeInfoSource returns the value of the CoreFoundation reference constant kSecCodeInfoSource as an objc.ID.
-func KSecCodeInfoSource() objc.ID { return purego.CFConstant(raw.KSecCodeInfoSource()) }
+// KSecCodeInfoSource returns the value of the constant kSecCodeInfoSource.
+func KSecCodeInfoSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoSource")))
+}
 
-// KSecCodeInfoStatus returns the value of the CoreFoundation reference constant kSecCodeInfoStatus as an objc.ID.
-func KSecCodeInfoStatus() objc.ID { return purego.CFConstant(raw.KSecCodeInfoStatus()) }
+// KSecCodeInfoStatus returns the value of the constant kSecCodeInfoStatus.
+func KSecCodeInfoStatus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoStatus")))
+}
 
-// KSecCodeInfoTeamIdentifier returns the value of the CoreFoundation reference constant kSecCodeInfoTeamIdentifier as an objc.ID.
-func KSecCodeInfoTeamIdentifier() objc.ID { return purego.CFConstant(raw.KSecCodeInfoTeamIdentifier()) }
+// KSecCodeInfoTeamIdentifier returns the value of the constant kSecCodeInfoTeamIdentifier.
+func KSecCodeInfoTeamIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoTeamIdentifier")))
+}
 
-// KSecCodeInfoTime returns the value of the CoreFoundation reference constant kSecCodeInfoTime as an objc.ID.
-func KSecCodeInfoTime() objc.ID { return purego.CFConstant(raw.KSecCodeInfoTime()) }
+// KSecCodeInfoTime returns the value of the constant kSecCodeInfoTime.
+func KSecCodeInfoTime() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoTime"))) }
 
-// KSecCodeInfoTimestamp returns the value of the CoreFoundation reference constant kSecCodeInfoTimestamp as an objc.ID.
-func KSecCodeInfoTimestamp() objc.ID { return purego.CFConstant(raw.KSecCodeInfoTimestamp()) }
+// KSecCodeInfoTimestamp returns the value of the constant kSecCodeInfoTimestamp.
+func KSecCodeInfoTimestamp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoTimestamp")))
+}
 
-// KSecCodeInfoTrust returns the value of the CoreFoundation reference constant kSecCodeInfoTrust as an objc.ID.
-func KSecCodeInfoTrust() objc.ID { return purego.CFConstant(raw.KSecCodeInfoTrust()) }
+// KSecCodeInfoTrust returns the value of the constant kSecCodeInfoTrust.
+func KSecCodeInfoTrust() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoTrust"))) }
 
-// KSecCodeInfoUnique returns the value of the CoreFoundation reference constant kSecCodeInfoUnique as an objc.ID.
-func KSecCodeInfoUnique() objc.ID { return purego.CFConstant(raw.KSecCodeInfoUnique()) }
+// KSecCodeInfoUnique returns the value of the constant kSecCodeInfoUnique.
+func KSecCodeInfoUnique() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoUnique")))
+}
 
-// KSecCodeInfoCdHashes returns the value of the CoreFoundation reference constant kSecCodeInfoCdHashes as an objc.ID.
-func KSecCodeInfoCdHashes() objc.ID { return purego.CFConstant(raw.KSecCodeInfoCdHashes()) }
+// KSecCodeInfoCdHashes returns the value of the constant kSecCodeInfoCdHashes.
+func KSecCodeInfoCdHashes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoCdHashes")))
+}
 
-// KSecCodeInfoRuntimeVersion returns the value of the CoreFoundation reference constant kSecCodeInfoRuntimeVersion as an objc.ID.
-func KSecCodeInfoRuntimeVersion() objc.ID { return purego.CFConstant(raw.KSecCodeInfoRuntimeVersion()) }
+// KSecCodeInfoRuntimeVersion returns the value of the constant kSecCodeInfoRuntimeVersion.
+func KSecCodeInfoRuntimeVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoRuntimeVersion")))
+}
 
-// KSecCodeInfoStapledNotarizationTicket returns the value of the CoreFoundation reference constant kSecCodeInfoStapledNotarizationTicket as an objc.ID.
-func KSecCodeInfoStapledNotarizationTicket() objc.ID {
-	return purego.CFConstant(raw.KSecCodeInfoStapledNotarizationTicket())
+// KSecCodeInfoStapledNotarizationTicket returns the value of the constant kSecCodeInfoStapledNotarizationTicket.
+func KSecCodeInfoStapledNotarizationTicket() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCodeInfoStapledNotarizationTicket")))
 }
 
-// KCMSEncoderDigestAlgorithmSHA1 returns the value of the CoreFoundation reference constant kCMSEncoderDigestAlgorithmSHA1 as an objc.ID.
-func KCMSEncoderDigestAlgorithmSHA1() objc.ID {
-	return purego.CFConstant(raw.KCMSEncoderDigestAlgorithmSHA1())
+// KCMSEncoderDigestAlgorithmSHA1 returns the value of the constant kCMSEncoderDigestAlgorithmSHA1.
+func KCMSEncoderDigestAlgorithmSHA1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSEncoderDigestAlgorithmSHA1")))
 }
 
-// KCMSEncoderDigestAlgorithmSHA256 returns the value of the CoreFoundation reference constant kCMSEncoderDigestAlgorithmSHA256 as an objc.ID.
-func KCMSEncoderDigestAlgorithmSHA256() objc.ID {
-	return purego.CFConstant(raw.KCMSEncoderDigestAlgorithmSHA256())
+// KCMSEncoderDigestAlgorithmSHA256 returns the value of the constant kCMSEncoderDigestAlgorithmSHA256.
+func KCMSEncoderDigestAlgorithmSHA256() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCMSEncoderDigestAlgorithmSHA256")))
 }
 
-// KSSLSessionConfig_default returns the value of the CoreFoundation reference constant kSSLSessionConfig_default as an objc.ID.
-func KSSLSessionConfig_default() objc.ID { return purego.CFConstant(raw.KSSLSessionConfig_default()) }
+// KSSLSessionConfig_default returns the value of the constant kSSLSessionConfig_default.
+func KSSLSessionConfig_default() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSSLSessionConfig_default")))
+}
 
-// KSSLSessionConfig_ATSv1 returns the value of the CoreFoundation reference constant kSSLSessionConfig_ATSv1 as an objc.ID.
-func KSSLSessionConfig_ATSv1() objc.ID { return purego.CFConstant(raw.KSSLSessionConfig_ATSv1()) }
+// KSSLSessionConfig_ATSv1 returns the value of the constant kSSLSessionConfig_ATSv1.
+func KSSLSessionConfig_ATSv1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSSLSessionConfig_ATSv1")))
+}
 
-// KSSLSessionConfig_ATSv1_noPFS returns the value of the CoreFoundation reference constant kSSLSessionConfig_ATSv1_noPFS as an objc.ID.
-func KSSLSessionConfig_ATSv1_noPFS() objc.ID {
-	return purego.CFConstant(raw.KSSLSessionConfig_ATSv1_noPFS())
+// KSSLSessionConfig_ATSv1_noPFS returns the value of the constant kSSLSessionConfig_ATSv1_noPFS.
+func KSSLSessionConfig_ATSv1_noPFS() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSSLSessionConfig_ATSv1_noPFS")))
 }
 
-// KSSLSessionConfig_standard returns the value of the CoreFoundation reference constant kSSLSessionConfig_standard as an objc.ID.
-func KSSLSessionConfig_standard() objc.ID { return purego.CFConstant(raw.KSSLSessionConfig_standard()) }
+// KSSLSessionConfig_standard returns the value of the constant kSSLSessionConfig_standard.
+func KSSLSessionConfig_standard() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSSLSessionConfig_standard")))
+}
 
-// KSSLSessionConfig_RC4_fallback returns the value of the CoreFoundation reference constant kSSLSessionConfig_RC4_fallback as an objc.ID.
-func KSSLSessionConfig_RC4_fallback() objc.ID {
-	return purego.CFConstant(raw.KSSLSessionConfig_RC4_fallback())
+// KSSLSessionConfig_RC4_fallback returns the value of the constant kSSLSessionConfig_RC4_fallback.
+func KSSLSessionConfig_RC4_fallback() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSSLSessionConfig_RC4_fallback")))
 }
 
-// KSSLSessionConfig_TLSv1_fallback returns the value of the CoreFoundation reference constant kSSLSessionConfig_TLSv1_fallback as an objc.ID.
-func KSSLSessionConfig_TLSv1_fallback() objc.ID {
-	return purego.CFConstant(raw.KSSLSessionConfig_TLSv1_fallback())
+// KSSLSessionConfig_TLSv1_fallback returns the value of the constant kSSLSessionConfig_TLSv1_fallback.
+func KSSLSessionConfig_TLSv1_fallback() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSSLSessionConfig_TLSv1_fallback")))
 }
 
-// KSSLSessionConfig_TLSv1_RC4_fallback returns the value of the CoreFoundation reference constant kSSLSessionConfig_TLSv1_RC4_fallback as an objc.ID.
-func KSSLSessionConfig_TLSv1_RC4_fallback() objc.ID {
-	return purego.CFConstant(raw.KSSLSessionConfig_TLSv1_RC4_fallback())
+// KSSLSessionConfig_TLSv1_RC4_fallback returns the value of the constant kSSLSessionConfig_TLSv1_RC4_fallback.
+func KSSLSessionConfig_TLSv1_RC4_fallback() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSSLSessionConfig_TLSv1_RC4_fallback")))
 }
 
-// KSSLSessionConfig_legacy returns the value of the CoreFoundation reference constant kSSLSessionConfig_legacy as an objc.ID.
-func KSSLSessionConfig_legacy() objc.ID { return purego.CFConstant(raw.KSSLSessionConfig_legacy()) }
+// KSSLSessionConfig_legacy returns the value of the constant kSSLSessionConfig_legacy.
+func KSSLSessionConfig_legacy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSSLSessionConfig_legacy")))
+}
 
-// KSSLSessionConfig_legacy_DHE returns the value of the CoreFoundation reference constant kSSLSessionConfig_legacy_DHE as an objc.ID.
-func KSSLSessionConfig_legacy_DHE() objc.ID {
-	return purego.CFConstant(raw.KSSLSessionConfig_legacy_DHE())
+// KSSLSessionConfig_legacy_DHE returns the value of the constant kSSLSessionConfig_legacy_DHE.
+func KSSLSessionConfig_legacy_DHE() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSSLSessionConfig_legacy_DHE")))
 }
 
-// KSSLSessionConfig_anonymous returns the value of the CoreFoundation reference constant kSSLSessionConfig_anonymous as an objc.ID.
-func KSSLSessionConfig_anonymous() objc.ID {
-	return purego.CFConstant(raw.KSSLSessionConfig_anonymous())
+// KSSLSessionConfig_anonymous returns the value of the constant kSSLSessionConfig_anonymous.
+func KSSLSessionConfig_anonymous() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSSLSessionConfig_anonymous")))
 }
 
-// KSSLSessionConfig_3DES_fallback returns the value of the CoreFoundation reference constant kSSLSessionConfig_3DES_fallback as an objc.ID.
-func KSSLSessionConfig_3DES_fallback() objc.ID {
-	return purego.CFConstant(raw.KSSLSessionConfig_3DES_fallback())
+// KSSLSessionConfig_3DES_fallback returns the value of the constant kSSLSessionConfig_3DES_fallback.
+func KSSLSessionConfig_3DES_fallback() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSSLSessionConfig_3DES_fallback")))
 }
 
-// KSSLSessionConfig_TLSv1_3DES_fallback returns the value of the CoreFoundation reference constant kSSLSessionConfig_TLSv1_3DES_fallback as an objc.ID.
-func KSSLSessionConfig_TLSv1_3DES_fallback() objc.ID {
-	return purego.CFConstant(raw.KSSLSessionConfig_TLSv1_3DES_fallback())
+// KSSLSessionConfig_TLSv1_3DES_fallback returns the value of the constant kSSLSessionConfig_TLSv1_3DES_fallback.
+func KSSLSessionConfig_TLSv1_3DES_fallback() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSSLSessionConfig_TLSv1_3DES_fallback")))
 }
 
-// @constant kSecTransformErrorDomain The domain for CFErrorRefs created by Transforms
-// KSecTransformErrorDomain returns the value of the CoreFoundation reference constant kSecTransformErrorDomain as an objc.ID.
-func KSecTransformErrorDomain() objc.ID { return purego.CFConstant(raw.KSecTransformErrorDomain()) }
+// KSecTransformErrorDomain returns the value of the constant kSecTransformErrorDomain.
+func KSecTransformErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformErrorDomain")))
+}
 
-// @constant kSecTransformPreviousErrorKey If multiple errors occurred, the CFErrorRef that is returned from a Transfo]rm API will have a userInfo dictionary and that dictionary will have the previous error keyed by the kSecTransformPreviousErrorKey.
-// KSecTransformPreviousErrorKey returns the value of the CoreFoundation reference constant kSecTransformPreviousErrorKey as an objc.ID.
-func KSecTransformPreviousErrorKey() objc.ID {
-	return purego.CFConstant(raw.KSecTransformPreviousErrorKey())
+// KSecTransformPreviousErrorKey returns the value of the constant kSecTransformPreviousErrorKey.
+func KSecTransformPreviousErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformPreviousErrorKey")))
 }
 
-// @constant kSecTransformAbortOriginatorKey The value of this key will be the transform that caused the transform chain to abort.
-// KSecTransformAbortOriginatorKey returns the value of the CoreFoundation reference constant kSecTransformAbortOriginatorKey as an objc.ID.
-func KSecTransformAbortOriginatorKey() objc.ID {
-	return purego.CFConstant(raw.KSecTransformAbortOriginatorKey())
+// KSecTransformAbortOriginatorKey returns the value of the constant kSecTransformAbortOriginatorKey.
+func KSecTransformAbortOriginatorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformAbortOriginatorKey")))
 }
 
-// **************	Transform Attribute Names  *************** @constant kSecTransformInputAttributeName The name of the input attribute.
-// KSecTransformInputAttributeName returns the value of the CoreFoundation reference constant kSecTransformInputAttributeName as an objc.ID.
-func KSecTransformInputAttributeName() objc.ID {
-	return purego.CFConstant(raw.KSecTransformInputAttributeName())
+// **************	Transform Attribute Names  ***************
+// KSecTransformInputAttributeName returns the value of the constant kSecTransformInputAttributeName.
+func KSecTransformInputAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformInputAttributeName")))
 }
 
-// @constant kSecTransformOutputAttributeName The name of the output attribute.
-// KSecTransformOutputAttributeName returns the value of the CoreFoundation reference constant kSecTransformOutputAttributeName as an objc.ID.
-func KSecTransformOutputAttributeName() objc.ID {
-	return purego.CFConstant(raw.KSecTransformOutputAttributeName())
+// KSecTransformOutputAttributeName returns the value of the constant kSecTransformOutputAttributeName.
+func KSecTransformOutputAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformOutputAttributeName")))
 }
 
-// @constant kSecTransformDebugAttributeName Set this attribute to a CFWriteStream. This will signal the transform to write debugging information to the stream. If this attribute is set to kCFBooleanTrue then the debugging data will be written out to stderr.
-// KSecTransformDebugAttributeName returns the value of the CoreFoundation reference constant kSecTransformDebugAttributeName as an objc.ID.
-func KSecTransformDebugAttributeName() objc.ID {
-	return purego.CFConstant(raw.KSecTransformDebugAttributeName())
+// KSecTransformDebugAttributeName returns the value of the constant kSecTransformDebugAttributeName.
+func KSecTransformDebugAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformDebugAttributeName")))
 }
 
-// @constant kSecTransformTransformName The name of the transform.
-// KSecTransformTransformName returns the value of the CoreFoundation reference constant kSecTransformTransformName as an objc.ID.
-func KSecTransformTransformName() objc.ID { return purego.CFConstant(raw.KSecTransformTransformName()) }
+// KSecTransformTransformName returns the value of the constant kSecTransformTransformName.
+func KSecTransformTransformName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformTransformName")))
+}
 
-// @constant kSecTransformAbortAttributeName The name of the abort attribute.
-// KSecTransformAbortAttributeName returns the value of the CoreFoundation reference constant kSecTransformAbortAttributeName as an objc.ID.
-func KSecTransformAbortAttributeName() objc.ID {
-	return purego.CFConstant(raw.KSecTransformAbortAttributeName())
+// KSecTransformAbortAttributeName returns the value of the constant kSecTransformAbortAttributeName.
+func KSecTransformAbortAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformAbortAttributeName")))
 }
 
-// @constant  kSecTransformActionCanExecute Overrides the standard behavior that checks to see if all of the required attributes either have been set or are connected to another transform.  When overriding the default behavior the developer can decided what the necessary data is to have for a transform to be considered 'ready to run'.  Returning NULL means that the transform is ready to be run. If the transform is NOT ready to run then the override should return a CFErrorRef stipulating the error.
-// KSecTransformActionCanExecute returns the value of the CoreFoundation reference constant kSecTransformActionCanExecute as an objc.ID.
-func KSecTransformActionCanExecute() objc.ID {
-	return purego.CFConstant(raw.KSecTransformActionCanExecute())
+// KSecTransformActionCanExecute returns the value of the constant kSecTransformActionCanExecute.
+func KSecTransformActionCanExecute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformActionCanExecute")))
 }
 
-// @constant  kSecTransformActionStartingExecution Overrides the standard behavior that occurs just before starting execution of a custom transform. This is typically overridden to allow for initialization. This is used with the SecTransformOverrideTransformAction block.
-// KSecTransformActionStartingExecution returns the value of the CoreFoundation reference constant kSecTransformActionStartingExecution as an objc.ID.
-func KSecTransformActionStartingExecution() objc.ID {
-	return purego.CFConstant(raw.KSecTransformActionStartingExecution())
+// KSecTransformActionStartingExecution returns the value of the constant kSecTransformActionStartingExecution.
+func KSecTransformActionStartingExecution() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformActionStartingExecution")))
 }
 
-// @constant kSecTransformActionFinalize Overrides the standard behavior that occurs just before deleting a custom transform. This is typically overridden to allow for memory clean up of a custom transform.  This is used with the SecTransformOverrideTransformAction block.
-// KSecTransformActionFinalize returns the value of the CoreFoundation reference constant kSecTransformActionFinalize as an objc.ID.
-func KSecTransformActionFinalize() objc.ID {
-	return purego.CFConstant(raw.KSecTransformActionFinalize())
+// KSecTransformActionFinalize returns the value of the constant kSecTransformActionFinalize.
+func KSecTransformActionFinalize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformActionFinalize")))
 }
 
-// @constant kSecTransformActionExternalizeExtraData Allows for adding to the data that is stored using an override to the kSecTransformActionExternalizeExtraData block. The output of this override is a dictionary that contains the custom externalized data. A common use of this override is to write out a version number of a custom transform.
-// KSecTransformActionExternalizeExtraData returns the value of the CoreFoundation reference constant kSecTransformActionExternalizeExtraData as an objc.ID.
-func KSecTransformActionExternalizeExtraData() objc.ID {
-	return purego.CFConstant(raw.KSecTransformActionExternalizeExtraData())
+// KSecTransformActionExternalizeExtraData returns the value of the constant kSecTransformActionExternalizeExtraData.
+func KSecTransformActionExternalizeExtraData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformActionExternalizeExtraData")))
 }
 
-// @constant  kSecTransformActionProcessData Overrides the standard data processing for an attribute. This is almost exclusively used for processing the input attribute as the return value of their block sets the output attribute. This is used with the SecTransformOverrideAttributeAction block.
-// KSecTransformActionProcessData returns the value of the CoreFoundation reference constant kSecTransformActionProcessData as an objc.ID.
-func KSecTransformActionProcessData() objc.ID {
-	return purego.CFConstant(raw.KSecTransformActionProcessData())
+// KSecTransformActionProcessData returns the value of the constant kSecTransformActionProcessData.
+func KSecTransformActionProcessData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformActionProcessData")))
 }
 
-// @constant kSecTransformActionInternalizeExtraData Overrides the standard processing that occurs when externalized data is used to create a transform.  This is closely tied to the kSecTransformActionExternalizeExtraData override. The 'normal' attributes are read into the new transform and then this is called to read in the items that were written out using kSecTransformActionExternalizeExtraData override. A common use of this override would be to read in the version number of the externalized custom transform.
-// KSecTransformActionInternalizeExtraData returns the value of the CoreFoundation reference constant kSecTransformActionInternalizeExtraData as an objc.ID.
-func KSecTransformActionInternalizeExtraData() objc.ID {
-	return purego.CFConstant(raw.KSecTransformActionInternalizeExtraData())
+// KSecTransformActionInternalizeExtraData returns the value of the constant kSecTransformActionInternalizeExtraData.
+func KSecTransformActionInternalizeExtraData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformActionInternalizeExtraData")))
 }
 
-// @constant SecTransformActionAttributeNotification Allows a block to be called when an attribute is set.  This allows for caching the value as a block variable in the instance block or transmogrifying the data to be set. This action is where a custom transform would be able to do processing outside of processing input to output as process data does.  One the data has been processed the action block can call SecTransformCustomSetAttribute to update and other attribute.
-// KSecTransformActionAttributeNotification returns the value of the CoreFoundation reference constant kSecTransformActionAttributeNotification as an objc.ID.
-func KSecTransformActionAttributeNotification() objc.ID {
-	return purego.CFConstant(raw.KSecTransformActionAttributeNotification())
+// KSecTransformActionAttributeNotification returns the value of the constant kSecTransformActionAttributeNotification.
+func KSecTransformActionAttributeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformActionAttributeNotification")))
 }
 
-// @constant kSecTransformActionAttributeValidation Allows a block to be called to validate the new value for an attribute.  The default is no validation and any CFTypeRef can be used as the new value.  The block should return NULL if the value is ok to set on the attribute or a CFErrorRef otherwise.
-// KSecTransformActionAttributeValidation returns the value of the CoreFoundation reference constant kSecTransformActionAttributeValidation as an objc.ID.
-func KSecTransformActionAttributeValidation() objc.ID {
-	return purego.CFConstant(raw.KSecTransformActionAttributeValidation())
+// KSecTransformActionAttributeValidation returns the value of the constant kSecTransformActionAttributeValidation.
+func KSecTransformActionAttributeValidation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecTransformActionAttributeValidation")))
 }
 
-// @abstract Specifies a base 64 encoding
-// KSecBase64Encoding returns the value of the CoreFoundation reference constant kSecBase64Encoding as an objc.ID.
-func KSecBase64Encoding() objc.ID { return purego.CFConstant(raw.KSecBase64Encoding()) }
+// Specifies a base 64 encoding
+// KSecBase64Encoding returns the value of the constant kSecBase64Encoding.
+func KSecBase64Encoding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecBase64Encoding")))
+}
 
-// @abstract Specifies a base 32 encoding
-// KSecBase32Encoding returns the value of the CoreFoundation reference constant kSecBase32Encoding as an objc.ID.
-func KSecBase32Encoding() objc.ID { return purego.CFConstant(raw.KSecBase32Encoding()) }
+// Specifies a base 32 encoding
+// KSecBase32Encoding returns the value of the constant kSecBase32Encoding.
+func KSecBase32Encoding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecBase32Encoding")))
+}
 
-// @abstract Specifies a compressed encoding.
-// KSecZLibEncoding returns the value of the CoreFoundation reference constant kSecZLibEncoding as an objc.ID.
-func KSecZLibEncoding() objc.ID { return purego.CFConstant(raw.KSecZLibEncoding()) }
+// Specifies a compressed encoding.
+// KSecZLibEncoding returns the value of the constant kSecZLibEncoding.
+func KSecZLibEncoding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecZLibEncoding"))) }
 
-// KSecEncodeTypeAttribute returns the value of the CoreFoundation reference constant kSecEncodeTypeAttribute as an objc.ID.
-func KSecEncodeTypeAttribute() objc.ID { return purego.CFConstant(raw.KSecEncodeTypeAttribute()) }
+// KSecEncodeTypeAttribute returns the value of the constant kSecEncodeTypeAttribute.
+func KSecEncodeTypeAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecEncodeTypeAttribute")))
+}
 
-// KSecLineLength64 returns the value of the CoreFoundation reference constant kSecLineLength64 as an objc.ID.
-func KSecLineLength64() objc.ID { return purego.CFConstant(raw.KSecLineLength64()) }
+// KSecLineLength64 returns the value of the constant kSecLineLength64.
+func KSecLineLength64() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecLineLength64"))) }
 
-// KSecLineLength76 returns the value of the CoreFoundation reference constant kSecLineLength76 as an objc.ID.
-func KSecLineLength76() objc.ID { return purego.CFConstant(raw.KSecLineLength76()) }
+// KSecLineLength76 returns the value of the constant kSecLineLength76.
+func KSecLineLength76() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecLineLength76"))) }
 
-// @constant kSecEncodeLineLengthAttribute Used with SecTransformSetAttribute to set the length of encoded Base32 or Base64 lines.   Some systems will not decode or otherwise deal with excessively long lines, or may be defined to limit lines to specific lengths (for example RFC1421 - 64, and RFC2045 - 76). The LineLengthAttribute may be set to any positive value (via a CFNumberRef) to limit to a specific length (values smaller then X for Base32 or Y for Base64 are assume to be X or Y), or to zero for no specific limit.   Either of the string constants kSecLineLength64 (RFC1421), or kSecLineLength76 (RFC2045) may be used to set line lengths of 64 or 76 bytes.
-// KSecEncodeLineLengthAttribute returns the value of the CoreFoundation reference constant kSecEncodeLineLengthAttribute as an objc.ID.
-func KSecEncodeLineLengthAttribute() objc.ID {
-	return purego.CFConstant(raw.KSecEncodeLineLengthAttribute())
+// KSecEncodeLineLengthAttribute returns the value of the constant kSecEncodeLineLengthAttribute.
+func KSecEncodeLineLengthAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecEncodeLineLengthAttribute")))
 }
 
-// KSecCompressionRatio returns the value of the CoreFoundation reference constant kSecCompressionRatio as an objc.ID.
-func KSecCompressionRatio() objc.ID { return purego.CFConstant(raw.KSecCompressionRatio()) }
+// KSecCompressionRatio returns the value of the constant kSecCompressionRatio.
+func KSecCompressionRatio() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecCompressionRatio")))
+}
 
-// KSecDecodeTypeAttribute returns the value of the CoreFoundation reference constant kSecDecodeTypeAttribute as an objc.ID.
-func KSecDecodeTypeAttribute() objc.ID { return purego.CFConstant(raw.KSecDecodeTypeAttribute()) }
+// KSecDecodeTypeAttribute returns the value of the constant kSecDecodeTypeAttribute.
+func KSecDecodeTypeAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecDecodeTypeAttribute")))
+}
 
-// @abstract Specifies an MD2 digest
-// KSecDigestMD2 returns the value of the CoreFoundation reference constant kSecDigestMD2 as an objc.ID.
-func KSecDigestMD2() objc.ID { return purego.CFConstant(raw.KSecDigestMD2()) }
+// Specifies an MD2 digest
+// KSecDigestMD2 returns the value of the constant kSecDigestMD2.
+func KSecDigestMD2() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecDigestMD2"))) }
 
-// @abstract Specifies an MD4 digest
-// KSecDigestMD4 returns the value of the CoreFoundation reference constant kSecDigestMD4 as an objc.ID.
-func KSecDigestMD4() objc.ID { return purego.CFConstant(raw.KSecDigestMD4()) }
+// Specifies an MD4 digest
+// KSecDigestMD4 returns the value of the constant kSecDigestMD4.
+func KSecDigestMD4() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecDigestMD4"))) }
 
-// @abstract Specifies an MD5 digest
-// KSecDigestMD5 returns the value of the CoreFoundation reference constant kSecDigestMD5 as an objc.ID.
-func KSecDigestMD5() objc.ID { return purego.CFConstant(raw.KSecDigestMD5()) }
+// Specifies an MD5 digest
+// KSecDigestMD5 returns the value of the constant kSecDigestMD5.
+func KSecDigestMD5() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecDigestMD5"))) }
 
-// @abstract Specifies a SHA1 digest
-// KSecDigestSHA1 returns the value of the CoreFoundation reference constant kSecDigestSHA1 as an objc.ID.
-func KSecDigestSHA1() objc.ID { return purego.CFConstant(raw.KSecDigestSHA1()) }
+// Specifies a SHA1 digest
+// KSecDigestSHA1 returns the value of the constant kSecDigestSHA1.
+func KSecDigestSHA1() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecDigestSHA1"))) }
 
-// @abstract Specifies a SHA2 digest.
-// KSecDigestSHA2 returns the value of the CoreFoundation reference constant kSecDigestSHA2 as an objc.ID.
-func KSecDigestSHA2() objc.ID { return purego.CFConstant(raw.KSecDigestSHA2()) }
+// Specifies a SHA2 digest.
+// KSecDigestSHA2 returns the value of the constant kSecDigestSHA2.
+func KSecDigestSHA2() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecDigestSHA2"))) }
 
-// @abstract Specifies an HMAC using the MD5 digest algorithm.
-// KSecDigestHMACMD5 returns the value of the CoreFoundation reference constant kSecDigestHMACMD5 as an objc.ID.
-func KSecDigestHMACMD5() objc.ID { return purego.CFConstant(raw.KSecDigestHMACMD5()) }
+// Specifies an HMAC using the MD5 digest algorithm.
+// KSecDigestHMACMD5 returns the value of the constant kSecDigestHMACMD5.
+func KSecDigestHMACMD5() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecDigestHMACMD5"))) }
 
-// @abstract Specifies an HMAC using the SHA1 digest algorithm.
-// KSecDigestHMACSHA1 returns the value of the CoreFoundation reference constant kSecDigestHMACSHA1 as an objc.ID.
-func KSecDigestHMACSHA1() objc.ID { return purego.CFConstant(raw.KSecDigestHMACSHA1()) }
+// Specifies an HMAC using the SHA1 digest algorithm.
+// KSecDigestHMACSHA1 returns the value of the constant kSecDigestHMACSHA1.
+func KSecDigestHMACSHA1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecDigestHMACSHA1")))
+}
 
-// @abstract Specifies an HMAC using one of the SHA2 digest algorithms.
-// KSecDigestHMACSHA2 returns the value of the CoreFoundation reference constant kSecDigestHMACSHA2 as an objc.ID.
-func KSecDigestHMACSHA2() objc.ID { return purego.CFConstant(raw.KSecDigestHMACSHA2()) }
+// Specifies an HMAC using one of the SHA2 digest algorithms.
+// KSecDigestHMACSHA2 returns the value of the constant kSecDigestHMACSHA2.
+func KSecDigestHMACSHA2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecDigestHMACSHA2")))
+}
 
-// @constant kSecDigestTypeAttribute Used with SecTransformGetAttribute to query the attribute type. Returns one of the strings defined in the previous section.
-// KSecDigestTypeAttribute returns the value of the CoreFoundation reference constant kSecDigestTypeAttribute as an objc.ID.
-func KSecDigestTypeAttribute() objc.ID { return purego.CFConstant(raw.KSecDigestTypeAttribute()) }
+// KSecDigestTypeAttribute returns the value of the constant kSecDigestTypeAttribute.
+func KSecDigestTypeAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecDigestTypeAttribute")))
+}
 
-// @constant kSecDigestLengthAttribute Used with SecTransformGetAttribute to query the length attribute. Returns a CFNumberRef that contains the length in bytes.
-// KSecDigestLengthAttribute returns the value of the CoreFoundation reference constant kSecDigestLengthAttribute as an objc.ID.
-func KSecDigestLengthAttribute() objc.ID { return purego.CFConstant(raw.KSecDigestLengthAttribute()) }
+// KSecDigestLengthAttribute returns the value of the constant kSecDigestLengthAttribute.
+func KSecDigestLengthAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecDigestLengthAttribute")))
+}
 
-// @constant kSecDigestHMACKeyAttribute When set and used with one of the HMAC digest types, sets the key for the HMAC operation.  The data type for this attribute must be a CFDataRef.  If this value is not set, the transform will assume a zero length key.
-// KSecDigestHMACKeyAttribute returns the value of the CoreFoundation reference constant kSecDigestHMACKeyAttribute as an objc.ID.
-func KSecDigestHMACKeyAttribute() objc.ID { return purego.CFConstant(raw.KSecDigestHMACKeyAttribute()) }
+// KSecDigestHMACKeyAttribute returns the value of the constant kSecDigestHMACKeyAttribute.
+func KSecDigestHMACKeyAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecDigestHMACKeyAttribute")))
+}
 
-// @abstract Indicates that no padding will be used when encrypting or decrypting.
-// KSecPaddingNoneKey returns the value of the CoreFoundation reference constant kSecPaddingNoneKey as an objc.ID.
-func KSecPaddingNoneKey() objc.ID { return purego.CFConstant(raw.KSecPaddingNoneKey()) }
+// Indicates that no padding will be used when encrypting or decrypting.
+// KSecPaddingNoneKey returns the value of the constant kSecPaddingNoneKey.
+func KSecPaddingNoneKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPaddingNoneKey")))
+}
 
 // Indicates that PKCS1 padding will be used when encrypting or decrypting.
-// KSecPaddingPKCS1Key returns the value of the CoreFoundation reference constant kSecPaddingPKCS1Key as an objc.ID.
-func KSecPaddingPKCS1Key() objc.ID { return purego.CFConstant(raw.KSecPaddingPKCS1Key()) }
+// KSecPaddingPKCS1Key returns the value of the constant kSecPaddingPKCS1Key.
+func KSecPaddingPKCS1Key() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPaddingPKCS1Key")))
+}
 
 // Indicates that PKCS5 padding will be used when encrypting or decrypting.
-// KSecPaddingPKCS5Key returns the value of the CoreFoundation reference constant kSecPaddingPKCS5Key as an objc.ID.
-func KSecPaddingPKCS5Key() objc.ID { return purego.CFConstant(raw.KSecPaddingPKCS5Key()) }
+// KSecPaddingPKCS5Key returns the value of the constant kSecPaddingPKCS5Key.
+func KSecPaddingPKCS5Key() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPaddingPKCS5Key")))
+}
 
 // Indicates that PKCS7 padding will be used when encrypting or decrypting.
-// KSecPaddingPKCS7Key returns the value of the CoreFoundation reference constant kSecPaddingPKCS7Key as an objc.ID.
-func KSecPaddingPKCS7Key() objc.ID { return purego.CFConstant(raw.KSecPaddingPKCS7Key()) }
+// KSecPaddingPKCS7Key returns the value of the constant kSecPaddingPKCS7Key.
+func KSecPaddingPKCS7Key() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPaddingPKCS7Key")))
+}
 
 // Indicates that PKCS7 padding will be used when encrypting or decrypting.
-// KSecPaddingOAEPKey returns the value of the CoreFoundation reference constant kSecPaddingOAEPKey as an objc.ID.
-func KSecPaddingOAEPKey() objc.ID { return purego.CFConstant(raw.KSecPaddingOAEPKey()) }
+// KSecPaddingOAEPKey returns the value of the constant kSecPaddingOAEPKey.
+func KSecPaddingOAEPKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecPaddingOAEPKey")))
+}
 
 // Indicates that no mode will be used when encrypting or decrypting.
-// KSecModeNoneKey returns the value of the CoreFoundation reference constant kSecModeNoneKey as an objc.ID.
-func KSecModeNoneKey() objc.ID { return purego.CFConstant(raw.KSecModeNoneKey()) }
+// KSecModeNoneKey returns the value of the constant kSecModeNoneKey.
+func KSecModeNoneKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecModeNoneKey"))) }
 
 // Indicates that ECB mode will be used when encrypting or decrypting.
-// KSecModeECBKey returns the value of the CoreFoundation reference constant kSecModeECBKey as an objc.ID.
-func KSecModeECBKey() objc.ID { return purego.CFConstant(raw.KSecModeECBKey()) }
+// KSecModeECBKey returns the value of the constant kSecModeECBKey.
+func KSecModeECBKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecModeECBKey"))) }
 
 // Indicates that CBC mode will be used when encrypting or decrypting.
-// KSecModeCBCKey returns the value of the CoreFoundation reference constant kSecModeCBCKey as an objc.ID.
-func KSecModeCBCKey() objc.ID { return purego.CFConstant(raw.KSecModeCBCKey()) }
+// KSecModeCBCKey returns the value of the constant kSecModeCBCKey.
+func KSecModeCBCKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecModeCBCKey"))) }
 
 // Indicates that CFB mode will be used when encrypting or decrypting.
-// KSecModeCFBKey returns the value of the CoreFoundation reference constant kSecModeCFBKey as an objc.ID.
-func KSecModeCFBKey() objc.ID { return purego.CFConstant(raw.KSecModeCFBKey()) }
+// KSecModeCFBKey returns the value of the constant kSecModeCFBKey.
+func KSecModeCFBKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecModeCFBKey"))) }
 
 // Indicates that OFB mode will be used when encrypting or decrypting.
-// KSecModeOFBKey returns the value of the CoreFoundation reference constant kSecModeOFBKey as an objc.ID.
-func KSecModeOFBKey() objc.ID { return purego.CFConstant(raw.KSecModeOFBKey()) }
+// KSecModeOFBKey returns the value of the constant kSecModeOFBKey.
+func KSecModeOFBKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecModeOFBKey"))) }
 
-// @abstract This attribute holds the encryption key for the transform. (ReadOnly)
-// KSecEncryptKey returns the value of the CoreFoundation reference constant kSecEncryptKey as an objc.ID.
-func KSecEncryptKey() objc.ID { return purego.CFConstant(raw.KSecEncryptKey()) }
+// This attribute holds the encryption key for the transform. (ReadOnly)
+// KSecEncryptKey returns the value of the constant kSecEncryptKey.
+func KSecEncryptKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecEncryptKey"))) }
 
-// @abstract Key for setting padding. @discussion This key is optional.  If you do not supply a value for this key, an appropriate value will be supplied for you.
-// KSecPaddingKey returns the value of the CoreFoundation reference constant kSecPaddingKey as an objc.ID.
-func KSecPaddingKey() objc.ID { return purego.CFConstant(raw.KSecPaddingKey()) }
+// Key for setting padding. This key is optional.  If you do not supply a value for this key, an appropriate value will be supplied for you.
+// KSecPaddingKey returns the value of the constant kSecPaddingKey.
+func KSecPaddingKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecPaddingKey"))) }
 
-// @abstract Key for setting an initialization vector. @discussion This key is optional.  If you do not supply a value for this key, an appropriate value will be supplied for you.
-// KSecIVKey returns the value of the CoreFoundation reference constant kSecIVKey as an objc.ID.
-func KSecIVKey() objc.ID { return purego.CFConstant(raw.KSecIVKey()) }
+// Key for setting an initialization vector. This key is optional.  If you do not supply a value for this key, an appropriate value will be supplied for you.
+// KSecIVKey returns the value of the constant kSecIVKey.
+func KSecIVKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecIVKey"))) }
 
-// @abstract Specifies the encryption mode. @discussion This key is optional.  If you do not supply this key, an appropriate value will be supplied for you.
-// KSecEncryptionMode returns the value of the CoreFoundation reference constant kSecEncryptionMode as an objc.ID.
-func KSecEncryptionMode() objc.ID { return purego.CFConstant(raw.KSecEncryptionMode()) }
-
-// @abstract Specifies the OAEP message length. @discussion This should be set to a CFNumberRef when the padding is set to OAEP, and a specific messages size is desired.   If unset the minimum padding will be added.   It is ignored when the padding mode is not OAEP.
-// KSecOAEPMessageLengthAttributeName returns the value of the CoreFoundation reference constant kSecOAEPMessageLengthAttributeName as an objc.ID.
-func KSecOAEPMessageLengthAttributeName() objc.ID {
-	return purego.CFConstant(raw.KSecOAEPMessageLengthAttributeName())
+// Specifies the encryption mode. This key is optional.  If you do not supply this key, an appropriate value will be supplied for you.
+// KSecEncryptionMode returns the value of the constant kSecEncryptionMode.
+func KSecEncryptionMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecEncryptionMode")))
 }
 
-// @abstract Specifies the OAEP encoding paramaters @discussion This should be set to a CFDataRef when the padding is set to OAEP. If unset a zero length CFDataRef is used.   It is ignored by non OAEP padding modes.
-// KSecOAEPEncodingParametersAttributeName returns the value of the CoreFoundation reference constant kSecOAEPEncodingParametersAttributeName as an objc.ID.
-func KSecOAEPEncodingParametersAttributeName() objc.ID {
-	return purego.CFConstant(raw.KSecOAEPEncodingParametersAttributeName())
+// Specifies the OAEP message length. This should be set to a CFNumberRef when the padding is set to OAEP, and a specific messages size is desired.   If unset the minimum padding will be added.   It is ignored when the padding mode is not OAEP.
+// KSecOAEPMessageLengthAttributeName returns the value of the constant kSecOAEPMessageLengthAttributeName.
+func KSecOAEPMessageLengthAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOAEPMessageLengthAttributeName")))
 }
 
-// @abstract Specifies the OAEP MGF1 digest algorithm. @discussion This should be set to a digest algorithm when the padding is set to OAEP. If unset SHA1 is used.   It is ifnored by non OAEP padding modes.
-// KSecOAEPMGF1DigestAlgorithmAttributeName returns the value of the CoreFoundation reference constant kSecOAEPMGF1DigestAlgorithmAttributeName as an objc.ID.
-func KSecOAEPMGF1DigestAlgorithmAttributeName() objc.ID {
-	return purego.CFConstant(raw.KSecOAEPMGF1DigestAlgorithmAttributeName())
+// Specifies the OAEP encoding paramaters This should be set to a CFDataRef when the padding is set to OAEP. If unset a zero length CFDataRef is used.   It is ignored by non OAEP padding modes.
+// KSecOAEPEncodingParametersAttributeName returns the value of the constant kSecOAEPEncodingParametersAttributeName.
+func KSecOAEPEncodingParametersAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOAEPEncodingParametersAttributeName")))
 }
 
-// KSecKeyAttributeName returns the value of the CoreFoundation reference constant kSecKeyAttributeName as an objc.ID.
-func KSecKeyAttributeName() objc.ID { return purego.CFConstant(raw.KSecKeyAttributeName()) }
+// Specifies the OAEP MGF1 digest algorithm. This should be set to a digest algorithm when the padding is set to OAEP. If unset SHA1 is used.   It is ifnored by non OAEP padding modes.
+// KSecOAEPMGF1DigestAlgorithmAttributeName returns the value of the constant kSecOAEPMGF1DigestAlgorithmAttributeName.
+func KSecOAEPMGF1DigestAlgorithmAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecOAEPMGF1DigestAlgorithmAttributeName")))
+}
 
-// KSecSignatureAttributeName returns the value of the CoreFoundation reference constant kSecSignatureAttributeName as an objc.ID.
-func KSecSignatureAttributeName() objc.ID { return purego.CFConstant(raw.KSecSignatureAttributeName()) }
+// KSecKeyAttributeName returns the value of the constant kSecKeyAttributeName.
+func KSecKeyAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecKeyAttributeName")))
+}
 
-// KSecInputIsAttributeName returns the value of the CoreFoundation reference constant kSecInputIsAttributeName as an objc.ID.
-func KSecInputIsAttributeName() objc.ID { return purego.CFConstant(raw.KSecInputIsAttributeName()) }
+// KSecSignatureAttributeName returns the value of the constant kSecSignatureAttributeName.
+func KSecSignatureAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecSignatureAttributeName")))
+}
 
-// KSecInputIsPlainText returns the value of the CoreFoundation reference constant kSecInputIsPlainText as an objc.ID.
-func KSecInputIsPlainText() objc.ID { return purego.CFConstant(raw.KSecInputIsPlainText()) }
+// KSecInputIsAttributeName returns the value of the constant kSecInputIsAttributeName.
+func KSecInputIsAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecInputIsAttributeName")))
+}
 
-// KSecInputIsDigest returns the value of the CoreFoundation reference constant kSecInputIsDigest as an objc.ID.
-func KSecInputIsDigest() objc.ID { return purego.CFConstant(raw.KSecInputIsDigest()) }
+// KSecInputIsPlainText returns the value of the constant kSecInputIsPlainText.
+func KSecInputIsPlainText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSecInputIsPlainText")))
+}
 
-// KSecInputIsRaw returns the value of the CoreFoundation reference constant kSecInputIsRaw as an objc.ID.
-func KSecInputIsRaw() objc.ID { return purego.CFConstant(raw.KSecInputIsRaw()) }
+// KSecInputIsDigest returns the value of the constant kSecInputIsDigest.
+func KSecInputIsDigest() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecInputIsDigest"))) }
+
+// KSecInputIsRaw returns the value of the constant kSecInputIsRaw.
+func KSecInputIsRaw() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSecInputIsRaw"))) }

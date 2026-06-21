@@ -5,280 +5,290 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRDoorLockClusterGetUserResponseParams wraps [raw.MTRDoorLockClusterGetUserResponseParams] with a fluent Go API.
+// MTRDoorLockClusterGetUserResponseParams is an idiomatic wrapper over the Objective-C class MTRDoorLockClusterGetUserResponseParams.
 type MTRDoorLockClusterGetUserResponseParams struct {
-	inner *raw.MTRDoorLockClusterGetUserResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDoorLockClusterGetUserResponseParams].
-func (x *MTRDoorLockClusterGetUserResponseParams) Unwrap() *raw.MTRDoorLockClusterGetUserResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDoorLockClusterGetUserResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDoorLockClusterGetUserResponseParamsFromID adopts an existing object pointer as a MTRDoorLockClusterGetUserResponseParams (nil for 0).
+// MTRDoorLockClusterGetUserResponseParamsFromID adopts an existing Objective-C object as a MTRDoorLockClusterGetUserResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDoorLockClusterGetUserResponseParamsFromID(id objc.ID) *MTRDoorLockClusterGetUserResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDoorLockClusterGetUserResponseParams{inner: raw.MTRDoorLockClusterGetUserResponseParamsFromID(id)}
+	x := &MTRDoorLockClusterGetUserResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRDoorLockClusterGetUserResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRDoorLockClusterGetUserResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDoorLockClusterGetUserResponseParamsAdopt(id objc.ID) *MTRDoorLockClusterGetUserResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDoorLockClusterGetUserResponseParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDoorLockClusterGetUserResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDoorLockClusterGetUserResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDoorLockClusterGetUserResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize an MTRDoorLockClusterGetUserResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 //
-// NewMTRDoorLockClusterGetUserResponseParamsWithResponseValueError creates a new [MTRDoorLockClusterGetUserResponseParams].
-func NewMTRDoorLockClusterGetUserResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRDoorLockClusterGetUserResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDoorLockClusterGetUserResponseParams")), objc.RegisterName("alloc"))
+// NewMTRDoorLockClusterGetUserResponseParamsWithResponseValueError creates a new MTRDoorLockClusterGetUserResponseParams.
+func NewMTRDoorLockClusterGetUserResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRDoorLockClusterGetUserResponseParams, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterGetUserResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &MTRDoorLockClusterGetUserResponseParams{inner: raw.MTRDoorLockClusterGetUserResponseParamsFromID(_id)}, nil
+	return mTRDoorLockClusterGetUserResponseParamsAdopt(_id), nil
 }
 
-// WithUserIndex sets the userIndex property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetUserResponseParams) WithUserIndex(userIndex *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams {
-	x.inner.SetUserIndex(userIndex)
+// WithUserIndex sets userIndex and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetUserResponseParams) WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 	return x
 }
 
-// WithUserName sets the userName property and returns the receiver for chaining.
+// WithUserName sets userName and returns the receiver so calls can be chained.
 func (x *MTRDoorLockClusterGetUserResponseParams) WithUserName(userName string) *MTRDoorLockClusterGetUserResponseParams {
-	x.inner.SetUserName(foundation.NSStringStringWithUTF8String(userName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserName:"), purego.NSString(userName))
 	return x
 }
 
-// WithUserUniqueID sets the userUniqueID property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetUserResponseParams) WithUserUniqueID(userUniqueID *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams {
-	x.inner.SetUserUniqueID(userUniqueID)
+// WithUserUniqueID sets userUniqueID and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetUserResponseParams) WithUserUniqueID(userUniqueID obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserUniqueID:"), objref.IDOf(userUniqueID))
 	return x
 }
 
-// WithUserStatus sets the userStatus property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetUserResponseParams) WithUserStatus(userStatus *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams {
-	x.inner.SetUserStatus(userStatus)
+// WithUserStatus sets userStatus and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetUserResponseParams) WithUserStatus(userStatus obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserStatus:"), objref.IDOf(userStatus))
 	return x
 }
 
-// WithUserType sets the userType property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetUserResponseParams) WithUserType(userType *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams {
-	x.inner.SetUserType(userType)
+// WithUserType sets userType and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetUserResponseParams) WithUserType(userType obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserType:"), objref.IDOf(userType))
 	return x
 }
 
-// WithCredentialRule sets the credentialRule property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetUserResponseParams) WithCredentialRule(credentialRule *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams {
-	x.inner.SetCredentialRule(credentialRule)
+// WithCredentialRule sets credentialRule and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetUserResponseParams) WithCredentialRule(credentialRule obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentialRule:"), objref.IDOf(credentialRule))
 	return x
 }
 
-// WithCreatorFabricIndex sets the creatorFabricIndex property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetUserResponseParams) WithCreatorFabricIndex(creatorFabricIndex *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams {
-	x.inner.SetCreatorFabricIndex(creatorFabricIndex)
+// WithCreatorFabricIndex sets creatorFabricIndex and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetUserResponseParams) WithCreatorFabricIndex(creatorFabricIndex obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCreatorFabricIndex:"), objref.IDOf(creatorFabricIndex))
 	return x
 }
 
-// WithLastModifiedFabricIndex sets the lastModifiedFabricIndex property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetUserResponseParams) WithLastModifiedFabricIndex(lastModifiedFabricIndex *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams {
-	x.inner.SetLastModifiedFabricIndex(lastModifiedFabricIndex)
+// WithLastModifiedFabricIndex sets lastModifiedFabricIndex and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetUserResponseParams) WithLastModifiedFabricIndex(lastModifiedFabricIndex obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastModifiedFabricIndex:"), objref.IDOf(lastModifiedFabricIndex))
 	return x
 }
 
-// WithNextUserIndex sets the nextUserIndex property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetUserResponseParams) WithNextUserIndex(nextUserIndex *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams {
-	x.inner.SetNextUserIndex(nextUserIndex)
+// WithNextUserIndex sets nextUserIndex and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetUserResponseParams) WithNextUserIndex(nextUserIndex obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextUserIndex:"), objref.IDOf(nextUserIndex))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetUserResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetUserResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// WithUserUniqueId sets the userUniqueId property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetUserResponseParams) WithUserUniqueId(userUniqueId *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams {
-	x.inner.SetUserUniqueId(userUniqueId)
+// WithUserUniqueId sets userUniqueId and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetUserResponseParams) WithUserUniqueId(userUniqueId obj.Object) *MTRDoorLockClusterGetUserResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserUniqueId:"), objref.IDOf(userUniqueId))
 	return x
 }
 
-// UserIndex calls the underlying UserIndex.
-func (x *MTRDoorLockClusterGetUserResponseParams) UserIndex() *foundation.NSNumber {
-	return x.inner.UserIndex()
+func (x *MTRDoorLockClusterGetUserResponseParams) UserIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIndex"))
+	return obj.Wrap(_r)
 }
 
-// SetUserIndex calls the underlying SetUserIndex.
-func (x *MTRDoorLockClusterGetUserResponseParams) SetUserIndex(userIndex *foundation.NSNumber) {
-	x.inner.SetUserIndex(userIndex)
+func (x *MTRDoorLockClusterGetUserResponseParams) SetUserIndex(userIndex obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIndex:"), objref.IDOf(userIndex))
 }
 
-// UserName calls the underlying UserName.
 func (x *MTRDoorLockClusterGetUserResponseParams) UserName() string {
-	_r := x.inner.UserName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetUserName calls the underlying SetUserName.
 func (x *MTRDoorLockClusterGetUserResponseParams) SetUserName(userName string) {
-	x.inner.SetUserName(foundation.NSStringStringWithUTF8String(userName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserName:"), purego.NSString(userName))
 }
 
-// UserUniqueID calls the underlying UserUniqueID.
-func (x *MTRDoorLockClusterGetUserResponseParams) UserUniqueID() *foundation.NSNumber {
-	return x.inner.UserUniqueID()
+func (x *MTRDoorLockClusterGetUserResponseParams) UserUniqueID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userUniqueID"))
+	return obj.Wrap(_r)
 }
 
-// SetUserUniqueID calls the underlying SetUserUniqueID.
-func (x *MTRDoorLockClusterGetUserResponseParams) SetUserUniqueID(userUniqueID *foundation.NSNumber) {
-	x.inner.SetUserUniqueID(userUniqueID)
+func (x *MTRDoorLockClusterGetUserResponseParams) SetUserUniqueID(userUniqueID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserUniqueID:"), objref.IDOf(userUniqueID))
 }
 
-// UserStatus calls the underlying UserStatus.
-func (x *MTRDoorLockClusterGetUserResponseParams) UserStatus() *foundation.NSNumber {
-	return x.inner.UserStatus()
+func (x *MTRDoorLockClusterGetUserResponseParams) UserStatus() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userStatus"))
+	return obj.Wrap(_r)
 }
 
-// SetUserStatus calls the underlying SetUserStatus.
-func (x *MTRDoorLockClusterGetUserResponseParams) SetUserStatus(userStatus *foundation.NSNumber) {
-	x.inner.SetUserStatus(userStatus)
+func (x *MTRDoorLockClusterGetUserResponseParams) SetUserStatus(userStatus obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserStatus:"), objref.IDOf(userStatus))
 }
 
-// UserType calls the underlying UserType.
-func (x *MTRDoorLockClusterGetUserResponseParams) UserType() *foundation.NSNumber {
-	return x.inner.UserType()
+func (x *MTRDoorLockClusterGetUserResponseParams) UserType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userType"))
+	return obj.Wrap(_r)
 }
 
-// SetUserType calls the underlying SetUserType.
-func (x *MTRDoorLockClusterGetUserResponseParams) SetUserType(userType *foundation.NSNumber) {
-	x.inner.SetUserType(userType)
+func (x *MTRDoorLockClusterGetUserResponseParams) SetUserType(userType obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserType:"), objref.IDOf(userType))
 }
 
-// CredentialRule calls the underlying CredentialRule.
-func (x *MTRDoorLockClusterGetUserResponseParams) CredentialRule() *foundation.NSNumber {
-	return x.inner.CredentialRule()
+func (x *MTRDoorLockClusterGetUserResponseParams) CredentialRule() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialRule"))
+	return obj.Wrap(_r)
 }
 
-// SetCredentialRule calls the underlying SetCredentialRule.
-func (x *MTRDoorLockClusterGetUserResponseParams) SetCredentialRule(credentialRule *foundation.NSNumber) {
-	x.inner.SetCredentialRule(credentialRule)
+func (x *MTRDoorLockClusterGetUserResponseParams) SetCredentialRule(credentialRule obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentialRule:"), objref.IDOf(credentialRule))
 }
 
-// Credentials calls the underlying Credentials.
-func (x *MTRDoorLockClusterGetUserResponseParams) Credentials() *foundation.NSArray[objc.ID] {
-	return x.inner.Credentials()
+func (x *MTRDoorLockClusterGetUserResponseParams) Credentials() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentials"))
+	return obj.Wrap(_r)
 }
 
-// SetCredentials calls the underlying SetCredentials.
-func (x *MTRDoorLockClusterGetUserResponseParams) SetCredentials(credentials *foundation.NSArray[objc.ID]) {
-	x.inner.SetCredentials(credentials)
+func (x *MTRDoorLockClusterGetUserResponseParams) SetCredentials(credentials obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentials:"), objref.IDOf(credentials))
 }
 
-// CreatorFabricIndex calls the underlying CreatorFabricIndex.
-func (x *MTRDoorLockClusterGetUserResponseParams) CreatorFabricIndex() *foundation.NSNumber {
-	return x.inner.CreatorFabricIndex()
+func (x *MTRDoorLockClusterGetUserResponseParams) CreatorFabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creatorFabricIndex"))
+	return obj.Wrap(_r)
 }
 
-// SetCreatorFabricIndex calls the underlying SetCreatorFabricIndex.
-func (x *MTRDoorLockClusterGetUserResponseParams) SetCreatorFabricIndex(creatorFabricIndex *foundation.NSNumber) {
-	x.inner.SetCreatorFabricIndex(creatorFabricIndex)
+func (x *MTRDoorLockClusterGetUserResponseParams) SetCreatorFabricIndex(creatorFabricIndex obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCreatorFabricIndex:"), objref.IDOf(creatorFabricIndex))
 }
 
-// LastModifiedFabricIndex calls the underlying LastModifiedFabricIndex.
-func (x *MTRDoorLockClusterGetUserResponseParams) LastModifiedFabricIndex() *foundation.NSNumber {
-	return x.inner.LastModifiedFabricIndex()
+func (x *MTRDoorLockClusterGetUserResponseParams) LastModifiedFabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastModifiedFabricIndex"))
+	return obj.Wrap(_r)
 }
 
-// SetLastModifiedFabricIndex calls the underlying SetLastModifiedFabricIndex.
-func (x *MTRDoorLockClusterGetUserResponseParams) SetLastModifiedFabricIndex(lastModifiedFabricIndex *foundation.NSNumber) {
-	x.inner.SetLastModifiedFabricIndex(lastModifiedFabricIndex)
+func (x *MTRDoorLockClusterGetUserResponseParams) SetLastModifiedFabricIndex(lastModifiedFabricIndex obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastModifiedFabricIndex:"), objref.IDOf(lastModifiedFabricIndex))
 }
 
-// NextUserIndex calls the underlying NextUserIndex.
-func (x *MTRDoorLockClusterGetUserResponseParams) NextUserIndex() *foundation.NSNumber {
-	return x.inner.NextUserIndex()
+func (x *MTRDoorLockClusterGetUserResponseParams) NextUserIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextUserIndex"))
+	return obj.Wrap(_r)
 }
 
-// SetNextUserIndex calls the underlying SetNextUserIndex.
-func (x *MTRDoorLockClusterGetUserResponseParams) SetNextUserIndex(nextUserIndex *foundation.NSNumber) {
-	x.inner.SetNextUserIndex(nextUserIndex)
+func (x *MTRDoorLockClusterGetUserResponseParams) SetNextUserIndex(nextUserIndex obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextUserIndex:"), objref.IDOf(nextUserIndex))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRDoorLockClusterGetUserResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRDoorLockClusterGetUserResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRDoorLockClusterGetUserResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRDoorLockClusterGetUserResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// UserUniqueId calls the underlying UserUniqueId.
-func (x *MTRDoorLockClusterGetUserResponseParams) UserUniqueId() *foundation.NSNumber {
-	return x.inner.UserUniqueId()
+func (x *MTRDoorLockClusterGetUserResponseParams) UserUniqueId() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userUniqueId"))
+	return obj.Wrap(_r)
 }
 
-// SetUserUniqueId calls the underlying SetUserUniqueId.
-func (x *MTRDoorLockClusterGetUserResponseParams) SetUserUniqueId(userUniqueId *foundation.NSNumber) {
-	x.inner.SetUserUniqueId(userUniqueId)
+func (x *MTRDoorLockClusterGetUserResponseParams) SetUserUniqueId(userUniqueId obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserUniqueId:"), objref.IDOf(userUniqueId))
 }
 
 // MTRDoorLockClusterGetUserResponseParamsable is the interface implemented by [MTRDoorLockClusterGetUserResponseParams], for mocking and DI.
 type MTRDoorLockClusterGetUserResponseParamsable interface {
-	Unwrap() *raw.MTRDoorLockClusterGetUserResponseParams
-	WithUserIndex(userIndex *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
+	obj.Object
+	WithUserIndex(userIndex obj.Object) *MTRDoorLockClusterGetUserResponseParams
 	WithUserName(userName string) *MTRDoorLockClusterGetUserResponseParams
-	WithUserUniqueID(userUniqueID *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
-	WithUserStatus(userStatus *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
-	WithUserType(userType *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
-	WithCredentialRule(credentialRule *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
-	WithCreatorFabricIndex(creatorFabricIndex *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
-	WithLastModifiedFabricIndex(lastModifiedFabricIndex *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
-	WithNextUserIndex(nextUserIndex *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
-	WithUserUniqueId(userUniqueId *foundation.NSNumber) *MTRDoorLockClusterGetUserResponseParams
-	UserIndex() *foundation.NSNumber
-	SetUserIndex(userIndex *foundation.NSNumber)
+	WithUserUniqueID(userUniqueID obj.Object) *MTRDoorLockClusterGetUserResponseParams
+	WithUserStatus(userStatus obj.Object) *MTRDoorLockClusterGetUserResponseParams
+	WithUserType(userType obj.Object) *MTRDoorLockClusterGetUserResponseParams
+	WithCredentialRule(credentialRule obj.Object) *MTRDoorLockClusterGetUserResponseParams
+	WithCreatorFabricIndex(creatorFabricIndex obj.Object) *MTRDoorLockClusterGetUserResponseParams
+	WithLastModifiedFabricIndex(lastModifiedFabricIndex obj.Object) *MTRDoorLockClusterGetUserResponseParams
+	WithNextUserIndex(nextUserIndex obj.Object) *MTRDoorLockClusterGetUserResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterGetUserResponseParams
+	WithUserUniqueId(userUniqueId obj.Object) *MTRDoorLockClusterGetUserResponseParams
+	UserIndex() obj.Object
+	SetUserIndex(userIndex obj.Object)
 	UserName() string
 	SetUserName(userName string)
-	UserUniqueID() *foundation.NSNumber
-	SetUserUniqueID(userUniqueID *foundation.NSNumber)
-	UserStatus() *foundation.NSNumber
-	SetUserStatus(userStatus *foundation.NSNumber)
-	UserType() *foundation.NSNumber
-	SetUserType(userType *foundation.NSNumber)
-	CredentialRule() *foundation.NSNumber
-	SetCredentialRule(credentialRule *foundation.NSNumber)
-	Credentials() *foundation.NSArray[objc.ID]
-	SetCredentials(credentials *foundation.NSArray[objc.ID])
-	CreatorFabricIndex() *foundation.NSNumber
-	SetCreatorFabricIndex(creatorFabricIndex *foundation.NSNumber)
-	LastModifiedFabricIndex() *foundation.NSNumber
-	SetLastModifiedFabricIndex(lastModifiedFabricIndex *foundation.NSNumber)
-	NextUserIndex() *foundation.NSNumber
-	SetNextUserIndex(nextUserIndex *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	UserUniqueId() *foundation.NSNumber
-	SetUserUniqueId(userUniqueId *foundation.NSNumber)
+	UserUniqueID() obj.Object
+	SetUserUniqueID(userUniqueID obj.Object)
+	UserStatus() obj.Object
+	SetUserStatus(userStatus obj.Object)
+	UserType() obj.Object
+	SetUserType(userType obj.Object)
+	CredentialRule() obj.Object
+	SetCredentialRule(credentialRule obj.Object)
+	Credentials() obj.Object
+	SetCredentials(credentials obj.Object)
+	CreatorFabricIndex() obj.Object
+	SetCreatorFabricIndex(creatorFabricIndex obj.Object)
+	LastModifiedFabricIndex() obj.Object
+	SetLastModifiedFabricIndex(lastModifiedFabricIndex obj.Object)
+	NextUserIndex() obj.Object
+	SetNextUserIndex(nextUserIndex obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	UserUniqueId() obj.Object
+	SetUserUniqueId(userUniqueId obj.Object)
 }
 
 var _ MTRDoorLockClusterGetUserResponseParamsable = (*MTRDoorLockClusterGetUserResponseParams)(nil)

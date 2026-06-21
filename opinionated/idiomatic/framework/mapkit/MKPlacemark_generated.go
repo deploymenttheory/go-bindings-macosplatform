@@ -5,74 +5,76 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A user-friendly description of a location on the map.
 //
-// Placemark wraps [raw.MKPlacemark] with a fluent Go API.
+// Placemark is an idiomatic wrapper over the Objective-C class MKPlacemark.
 type Placemark struct {
-	inner *raw.MKPlacemark
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKPlacemark].
-func (x *Placemark) Unwrap() *raw.MKPlacemark { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Placemark) ID() objc.ID { return x.inner.Ptr() }
-
-// PlacemarkFromID adopts an existing object pointer as a Placemark (nil for 0).
+// PlacemarkFromID adopts an existing Objective-C object as a Placemark
+// (nil for 0), retaining it and registering a release finalizer.
 func PlacemarkFromID(id objc.ID) *Placemark {
 	if id == 0 {
 		return nil
 	}
-	return &Placemark{inner: raw.MKPlacemarkFromID(id)}
+	x := &Placemark{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates and returns a placemark object using the specified coordinate.
-//
-// NewPlacemarkWithCoordinate creates a new [Placemark].
-func NewPlacemarkWithCoordinate(coordinate unsafe.Pointer) *Placemark {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPlacemark")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinate:"), coordinate)
-	return &Placemark{inner: raw.MKPlacemarkFromID(_id)}
+// placemarkAdopt wraps an Objective-C object that this code just created as a
+// Placemark (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func placemarkAdopt(id objc.ID) *Placemark {
+	if id == 0 {
+		return nil
+	}
+	x := &Placemark{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Creates and returns a placemark object using the specified coordinate and Address Book dictionary.
-//
-// NewPlacemarkWithCoordinateAddressDictionary creates a new [Placemark].
-func NewPlacemarkWithCoordinateAddressDictionary(coordinate unsafe.Pointer, addressDictionary purego.IDer) *Placemark {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPlacemark")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinate:addressDictionary:"), coordinate, addressDictionary.ID())
-	return &Placemark{inner: raw.MKPlacemarkFromID(_id)}
+// Description returns the object's -description text.
+func (x *Placemark) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Creates and returns a placemark object with the specified coordinate and postal address from the user’s Contacts database.
-//
-// NewPlacemarkWithCoordinatePostalAddress creates a new [Placemark].
-func NewPlacemarkWithCoordinatePostalAddress(coordinate unsafe.Pointer, postalAddress *contacts.CNPostalAddress) *Placemark {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPlacemark")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinate:postalAddress:"), coordinate, postalAddress.Ptr())
-	return &Placemark{inner: raw.MKPlacemarkFromID(_id)}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Placemark) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// CountryCode calls the underlying CountryCode.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Placemark) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPlacemark creates a new Placemark.
+func NewPlacemark() *Placemark {
+	_id := objc.Send[objc.ID](objc.ID(_class("MKPlacemark")), objc.RegisterName("new"))
+	return placemarkAdopt(_id)
+}
+
 func (x *Placemark) CountryCode() string {
-	_r := x.inner.CountryCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("countryCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Placemarkable is the interface implemented by [Placemark], for mocking and DI.
 type Placemarkable interface {
-	Unwrap() *raw.MKPlacemark
+	obj.Object
 	CountryCode() string
 }
 

@@ -5,52 +5,42 @@
 package servicemanagement
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/servicemanagement"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
+	"github.com/ebitengine/purego/objc"
 )
 
-// LoginItemServiceWithIdentifier calls the underlying SMAppServiceLoginItemServiceWithIdentifier.
+// Initializes an app service object for a login item corresponding to the bundle with the identifier you provide.
 func LoginItemServiceWithIdentifier(identifier string) *AppService {
-	_r := raw.SMAppServiceLoginItemServiceWithIdentifier(foundation.NSStringStringWithUTF8String(identifier))
-	if _r == nil {
-		return nil
-	}
-	return &AppService{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SMAppService")), objc.RegisterName("loginItemServiceWithIdentifier:"), purego.NSString(identifier))
+	return AppServiceFromID(_r)
 }
 
-// AgentServiceWithPlistName calls the underlying SMAppServiceAgentServiceWithPlistName.
+// Initializes an app service object with a launch agent with the property list name you provide.
 func AgentServiceWithPlistName(plistName string) *AppService {
-	_r := raw.SMAppServiceAgentServiceWithPlistName(foundation.NSStringStringWithUTF8String(plistName))
-	if _r == nil {
-		return nil
-	}
-	return &AppService{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SMAppService")), objc.RegisterName("agentServiceWithPlistName:"), purego.NSString(plistName))
+	return AppServiceFromID(_r)
 }
 
-// DaemonServiceWithPlistName calls the underlying SMAppServiceDaemonServiceWithPlistName.
+// Initializes an app service object with a launch daemon with the property list name you provide.
 func DaemonServiceWithPlistName(plistName string) *AppService {
-	_r := raw.SMAppServiceDaemonServiceWithPlistName(foundation.NSStringStringWithUTF8String(plistName))
-	if _r == nil {
-		return nil
-	}
-	return &AppService{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SMAppService")), objc.RegisterName("daemonServiceWithPlistName:"), purego.NSString(plistName))
+	return AppServiceFromID(_r)
 }
 
-// StatusForLegacyURL calls the underlying SMAppServiceStatusForLegacyURL.
-func StatusForLegacyURL(url string) SMAppServiceStatus {
-	return SMAppServiceStatus(raw.SMAppServiceStatusForLegacyURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url))))
+// Check the authorization status of an earlier OS version login item.
+func StatusForLegacyURL(url string) AppServiceStatus {
+	_r := objc.Send[AppServiceStatus](objc.ID(_class("SMAppService")), objc.RegisterName("statusForLegacyURL:"), rt.FileURL(url))
+	return _r
 }
 
-// OpenSystemSettingsLoginItems calls the underlying SMAppServiceOpenSystemSettingsLoginItems.
+// Opens System Settings to the Login Items control panel.
 func OpenSystemSettingsLoginItems() {
-	raw.SMAppServiceOpenSystemSettingsLoginItems()
+	objc.Send[objc.ID](objc.ID(_class("SMAppService")), objc.RegisterName("openSystemSettingsLoginItems"))
 }
 
-// MainAppService calls the underlying SMAppServiceMainAppService.
+// A SMAppService corresponding to the main application as a LoginItem This SMAppService can be used to configure the main app to be launched at login
 func MainAppService() *AppService {
-	_r := raw.SMAppServiceMainAppService()
-	if _r == nil {
-		return nil
-	}
-	return &AppService{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SMAppService")), objc.RegisterName("mainAppService"))
+	return AppServiceFromID(_r)
 }

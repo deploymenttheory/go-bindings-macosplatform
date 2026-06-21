@@ -5,67 +5,91 @@
 package shazamkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/shazamkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An object that contains the opaque data and other information for a signature.
 //
-// Signature wraps [raw.SHSignature] with a fluent Go API.
+// Signature is an idiomatic wrapper over the Objective-C class SHSignature.
 type Signature struct {
-	inner *raw.SHSignature
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SHSignature].
-func (x *Signature) Unwrap() *raw.SHSignature { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Signature) ID() objc.ID { return x.inner.Ptr() }
-
-// SignatureFromID adopts an existing object pointer as a Signature (nil for 0).
+// SignatureFromID adopts an existing Objective-C object as a Signature
+// (nil for 0), retaining it and registering a release finalizer.
 func SignatureFromID(id objc.ID) *Signature {
 	if id == 0 {
 		return nil
 	}
-	return &Signature{inner: raw.SHSignatureFromID(id)}
+	x := &Signature{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// signatureAdopt wraps an Objective-C object that this code just created as a
+// Signature (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func signatureAdopt(id objc.ID) *Signature {
+	if id == 0 {
+		return nil
+	}
+	x := &Signature{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Signature) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Signature) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Signature) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a signature object from raw data.
 //
-// NewSignatureWithDataRepresentationError creates a new [Signature].
-func NewSignatureWithDataRepresentationError(dataRepresentation *foundation.NSData) (*Signature, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SHSignature")), objc.RegisterName("alloc"))
+// NewSignatureWithDataRepresentationError creates a new Signature.
+func NewSignatureWithDataRepresentationError(dataRepresentation obj.Object) (*Signature, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SHSignature")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:error:"), dataRepresentation.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:error:"), objref.IDOf(dataRepresentation), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Signature{inner: raw.SHSignatureFromID(_id)}, nil
+	return signatureAdopt(_id), nil
 }
 
 // The duration of the audio you use to generate the signature. Audio that contains periods of silence may result in a duration value that's shorter than the full duration of the original audio track.
-//
-// Duration calls the underlying Duration.
 func (x *Signature) Duration() float64 {
-	return x.inner.Duration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+	return _r
 }
 
 // The raw data for the signature.
-//
-// DataRepresentation calls the underlying DataRepresentation.
-func (x *Signature) DataRepresentation() *foundation.NSData {
-	return x.inner.DataRepresentation()
+func (x *Signature) DataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
+	return obj.Wrap(_r)
 }
 
 // Signatureable is the interface implemented by [Signature], for mocking and DI.
 type Signatureable interface {
-	Unwrap() *raw.SHSignature
+	obj.Object
 	Duration() float64
-	DataRepresentation() *foundation.NSData
+	DataRepresentation() obj.Object
 }
 
 var _ Signatureable = (*Signature)(nil)

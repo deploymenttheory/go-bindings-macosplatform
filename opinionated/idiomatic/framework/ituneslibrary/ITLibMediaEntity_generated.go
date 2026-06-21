@@ -5,76 +5,99 @@
 package ituneslibrary
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ituneslibrary"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // This class describes a media entity, which can be a media item, such as an audio track.
 //
-// LibMediaEntity wraps [raw.ITLibMediaEntity] with a fluent Go API.
+// LibMediaEntity is an idiomatic wrapper over the Objective-C class ITLibMediaEntity.
 type LibMediaEntity struct {
-	inner *raw.ITLibMediaEntity
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ITLibMediaEntity].
-func (x *LibMediaEntity) Unwrap() *raw.ITLibMediaEntity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LibMediaEntity) ID() objc.ID { return x.inner.Ptr() }
-
-// LibMediaEntityFromID adopts an existing object pointer as a LibMediaEntity (nil for 0).
+// LibMediaEntityFromID adopts an existing Objective-C object as a LibMediaEntity
+// (nil for 0), retaining it and registering a release finalizer.
 func LibMediaEntityFromID(id objc.ID) *LibMediaEntity {
 	if id == 0 {
 		return nil
 	}
-	return &LibMediaEntity{inner: raw.ITLibMediaEntityFromID(id)}
+	x := &LibMediaEntity{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLibMediaEntity creates a new [LibMediaEntity].
+// libMediaEntityAdopt wraps an Objective-C object that this code just created as a
+// LibMediaEntity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func libMediaEntityAdopt(id objc.ID) *LibMediaEntity {
+	if id == 0 {
+		return nil
+	}
+	x := &LibMediaEntity{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LibMediaEntity) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LibMediaEntity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LibMediaEntity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLibMediaEntity creates a new LibMediaEntity.
 func NewLibMediaEntity() *LibMediaEntity {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ITLibMediaEntity")), objc.RegisterName("new"))
-	return &LibMediaEntity{inner: raw.ITLibMediaEntityFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ITLibMediaEntity")), objc.RegisterName("new"))
+	return libMediaEntityAdopt(_id)
 }
 
 // Gets the value for a specified media property key.
-//
-// ValueForProperty calls the underlying ValueForProperty.
-func (x *LibMediaEntity) ValueForProperty(property string) objc.ID {
-	return x.inner.ValueForProperty(foundation.NSStringStringWithUTF8String(property))
+func (x *LibMediaEntity) ValueForProperty(property string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForProperty:"), purego.NSString(property))
+	return obj.Wrap(_r)
 }
 
 // Executes a provided block with the fetched values for the item properties.
-//
-// EnumerateValuesForPropertiesUsing calls the underlying EnumerateValuesForPropertiesUsing.
-func (x *LibMediaEntity) EnumerateValuesForPropertiesUsing(properties *foundation.NSSet[*foundation.NSString], block func(*foundation.NSString, objc.ID, *bool)) {
-	x.inner.EnumerateValuesForPropertiesUsing(properties, block)
+func (x *LibMediaEntity) EnumerateValuesForPropertiesUsing(properties obj.Object, block func(obj.Object, obj.Object, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateValuesForProperties:usingBlock:"), objref.IDOf(properties), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		block(obj.Wrap(_b0), obj.Wrap(_b1), (*bool)(_b2))
+	}))
 }
 
 // Executes a provided block with the fetched values for all properties in the entity except for the provided set.
-//
-// EnumerateValuesExceptForPropertiesUsing calls the underlying EnumerateValuesExceptForPropertiesUsing.
-func (x *LibMediaEntity) EnumerateValuesExceptForPropertiesUsing(properties *foundation.NSSet[*foundation.NSString], block func(*foundation.NSString, objc.ID, *bool)) {
-	x.inner.EnumerateValuesExceptForPropertiesUsing(properties, block)
+func (x *LibMediaEntity) EnumerateValuesExceptForPropertiesUsing(properties obj.Object, block func(obj.Object, obj.Object, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateValuesExceptForProperties:usingBlock:"), objref.IDOf(properties), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+		block(obj.Wrap(_b0), obj.Wrap(_b1), (*bool)(_b2))
+	}))
 }
 
-// @abstract The unique identifier of this media entity.
-//
-// PersistentID calls the underlying PersistentID.
-func (x *LibMediaEntity) PersistentID() *foundation.NSNumber {
-	return x.inner.PersistentID()
+// The unique identifier of this media entity.
+func (x *LibMediaEntity) PersistentID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentID"))
+	return obj.Wrap(_r)
 }
-
-func (x *LibMediaEntity) asLibMediaEntity() *raw.ITLibMediaEntity { return x.inner }
 
 // LibMediaEntityable is the interface implemented by [LibMediaEntity], for mocking and DI.
 type LibMediaEntityable interface {
-	Unwrap() *raw.ITLibMediaEntity
-	ValueForProperty(property string) objc.ID
-	EnumerateValuesForPropertiesUsing(properties *foundation.NSSet[*foundation.NSString], block func(*foundation.NSString, objc.ID, *bool))
-	EnumerateValuesExceptForPropertiesUsing(properties *foundation.NSSet[*foundation.NSString], block func(*foundation.NSString, objc.ID, *bool))
-	PersistentID() *foundation.NSNumber
+	obj.Object
+	ValueForProperty(property string) obj.Object
+	EnumerateValuesForPropertiesUsing(properties obj.Object, block func(obj.Object, obj.Object, *bool))
+	EnumerateValuesExceptForPropertiesUsing(properties obj.Object, block func(obj.Object, obj.Object, *bool))
+	PersistentID() obj.Object
 }
 
 var _ LibMediaEntityable = (*LibMediaEntity)(nil)

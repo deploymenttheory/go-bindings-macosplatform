@@ -5,136 +5,129 @@
 package glkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/glkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A lighting and shading system that supports reflection mapping for use in shader-based OpenGL rendering.
 //
-// ReflectionMapEffect wraps [raw.GLKReflectionMapEffect] with a fluent Go API.
+// ReflectionMapEffect is an idiomatic wrapper over the Objective-C class GLKReflectionMapEffect.
 type ReflectionMapEffect struct {
-	inner *raw.GLKReflectionMapEffect
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GLKReflectionMapEffect].
-func (x *ReflectionMapEffect) Unwrap() *raw.GLKReflectionMapEffect { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ReflectionMapEffect) ID() objc.ID { return x.inner.Ptr() }
-
-// ReflectionMapEffectFromID adopts an existing object pointer as a ReflectionMapEffect (nil for 0).
+// ReflectionMapEffectFromID adopts an existing Objective-C object as a ReflectionMapEffect
+// (nil for 0), retaining it and registering a release finalizer.
 func ReflectionMapEffectFromID(id objc.ID) *ReflectionMapEffect {
 	if id == 0 {
 		return nil
 	}
-	return &ReflectionMapEffect{inner: raw.GLKReflectionMapEffectFromID(id)}
+	x := &ReflectionMapEffect{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewReflectionMapEffect creates a new [ReflectionMapEffect].
+// reflectionMapEffectAdopt wraps an Objective-C object that this code just created as a
+// ReflectionMapEffect (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func reflectionMapEffectAdopt(id objc.ID) *ReflectionMapEffect {
+	if id == 0 {
+		return nil
+	}
+	x := &ReflectionMapEffect{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ReflectionMapEffect) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ReflectionMapEffect) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ReflectionMapEffect) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewReflectionMapEffect creates a new ReflectionMapEffect.
 func NewReflectionMapEffect() *ReflectionMapEffect {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GLKReflectionMapEffect")), objc.RegisterName("new"))
-	return &ReflectionMapEffect{inner: raw.GLKReflectionMapEffectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GLKReflectionMapEffect")), objc.RegisterName("new"))
+	return reflectionMapEffectAdopt(_id)
 }
 
 // A Boolean value that indicates whether or not to use the color vertex attribute when calculating the light’s interaction with the material.
 //
-// WithColorMaterialEnabled sets the colorMaterialEnabled property and returns the receiver for chaining.
+// WithColorMaterialEnabled sets colorMaterialEnabled and returns the receiver so calls can be chained.
 func (x *ReflectionMapEffect) WithColorMaterialEnabled(colorMaterialEnabled uint8) *ReflectionMapEffect {
-	x.inner.GLKBaseEffect.SetColorMaterialEnabled(colorMaterialEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorMaterialEnabled:"), colorMaterialEnabled)
 	return x
 }
 
 // A Boolean value that indicates whether lighting is calculated for both sides of a primitive.
 //
-// WithLightModelTwoSided sets the lightModelTwoSided property and returns the receiver for chaining.
+// WithLightModelTwoSided sets lightModelTwoSided and returns the receiver so calls can be chained.
 func (x *ReflectionMapEffect) WithLightModelTwoSided(lightModelTwoSided uint8) *ReflectionMapEffect {
-	x.inner.GLKBaseEffect.SetLightModelTwoSided(lightModelTwoSided)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightModelTwoSided:"), lightModelTwoSided)
 	return x
 }
 
 // A Boolean value that indicates whether or not to use the constant color.
 //
-// WithUseConstantColor sets the useConstantColor property and returns the receiver for chaining.
+// WithUseConstantColor sets useConstantColor and returns the receiver so calls can be chained.
 func (x *ReflectionMapEffect) WithUseConstantColor(useConstantColor uint8) *ReflectionMapEffect {
-	x.inner.GLKBaseEffect.SetUseConstantColor(useConstantColor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseConstantColor:"), useConstantColor)
 	return x
 }
 
 // The strategy the effect uses to calculate light values at each fragment. See GLKLightingType.
 //
-// WithLightingType sets the lightingType property and returns the receiver for chaining.
-func (x *ReflectionMapEffect) WithLightingType(lightingType GLKLightingType) *ReflectionMapEffect {
-	x.inner.GLKBaseEffect.SetLightingType(raw.GLKLightingType(lightingType))
+// WithLightingType sets lightingType and returns the receiver so calls can be chained.
+func (x *ReflectionMapEffect) WithLightingType(lightingType LightingType) *ReflectionMapEffect {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightingType:"), lightingType)
 	return x
 }
 
 // The order in which textures are applied to rendered primitives.
 //
-// WithTextureOrder sets the collection, converting the Go slice to an NSArray.
-func (x *ReflectionMapEffect) WithTextureOrder(items ...*raw.GLKEffectPropertyTexture) *ReflectionMapEffect {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.GLKBaseEffect.SetTextureOrder(foundation.NSArrayFromID[*raw.GLKEffectPropertyTexture](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.GLKEffectPropertyTexture](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.GLKBaseEffect.SetTextureOrder(_arr)
+// WithTextureOrder sets the collection and returns the receiver so calls can be chained.
+func (x *ReflectionMapEffect) WithTextureOrder(items ...*EffectPropertyTexture) *ReflectionMapEffect {
+	_arr := purego.SliceToNSArray(items, func(_v *EffectPropertyTexture) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureOrder:"), _arr)
 	return x
 }
 
 // A string used to name your effect.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ReflectionMapEffect) WithLabel(label string) *ReflectionMapEffect {
-	x.inner.GLKBaseEffect.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// TextureCubeMap calls the underlying TextureCubeMap.
 func (x *ReflectionMapEffect) TextureCubeMap() *EffectPropertyTexture {
-	_r := x.inner.TextureCubeMap()
-	if _r == nil {
-		return nil
-	}
-	return &EffectPropertyTexture{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureCubeMap"))
+	return EffectPropertyTextureFromID(_r)
 }
-
-// Matrix calls the underlying Matrix.
-func (x *ReflectionMapEffect) Matrix() unsafe.Pointer {
-	return x.inner.Matrix()
-}
-
-// SetMatrix calls the underlying SetMatrix.
-func (x *ReflectionMapEffect) SetMatrix(matrix unsafe.Pointer) {
-	x.inner.SetMatrix(matrix)
-}
-
-func (x *ReflectionMapEffect) asBaseEffect() *raw.GLKBaseEffect { return &x.inner.GLKBaseEffect }
 
 // ReflectionMapEffectable is the interface implemented by [ReflectionMapEffect], for mocking and DI.
 type ReflectionMapEffectable interface {
-	Unwrap() *raw.GLKReflectionMapEffect
+	obj.Object
 	WithColorMaterialEnabled(colorMaterialEnabled uint8) *ReflectionMapEffect
 	WithLightModelTwoSided(lightModelTwoSided uint8) *ReflectionMapEffect
 	WithUseConstantColor(useConstantColor uint8) *ReflectionMapEffect
-	WithLightingType(lightingType GLKLightingType) *ReflectionMapEffect
-	WithTextureOrder(items ...*raw.GLKEffectPropertyTexture) *ReflectionMapEffect
+	WithLightingType(lightingType LightingType) *ReflectionMapEffect
+	WithTextureOrder(items ...*EffectPropertyTexture) *ReflectionMapEffect
 	WithLabel(label string) *ReflectionMapEffect
 	TextureCubeMap() *EffectPropertyTexture
-	Matrix() unsafe.Pointer
-	SetMatrix(matrix unsafe.Pointer)
 }
 
 var _ ReflectionMapEffectable = (*ReflectionMapEffect)(nil)

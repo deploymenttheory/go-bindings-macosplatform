@@ -5,43 +5,68 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The type of map item detail accessory presentation to use.
 //
-// MapItemDetailSelectionAccessoryPresentationStyle wraps [raw.MKMapItemDetailSelectionAccessoryPresentationStyle] with a fluent Go API.
+// MapItemDetailSelectionAccessoryPresentationStyle is an idiomatic wrapper over the Objective-C class MKMapItemDetailSelectionAccessoryPresentationStyle.
 type MapItemDetailSelectionAccessoryPresentationStyle struct {
-	inner *raw.MKMapItemDetailSelectionAccessoryPresentationStyle
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKMapItemDetailSelectionAccessoryPresentationStyle].
-func (x *MapItemDetailSelectionAccessoryPresentationStyle) Unwrap() *raw.MKMapItemDetailSelectionAccessoryPresentationStyle {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MapItemDetailSelectionAccessoryPresentationStyle) ID() objc.ID { return x.inner.Ptr() }
-
-// MapItemDetailSelectionAccessoryPresentationStyleFromID adopts an existing object pointer as a MapItemDetailSelectionAccessoryPresentationStyle (nil for 0).
+// MapItemDetailSelectionAccessoryPresentationStyleFromID adopts an existing Objective-C object as a MapItemDetailSelectionAccessoryPresentationStyle
+// (nil for 0), retaining it and registering a release finalizer.
 func MapItemDetailSelectionAccessoryPresentationStyleFromID(id objc.ID) *MapItemDetailSelectionAccessoryPresentationStyle {
 	if id == 0 {
 		return nil
 	}
-	return &MapItemDetailSelectionAccessoryPresentationStyle{inner: raw.MKMapItemDetailSelectionAccessoryPresentationStyleFromID(id)}
+	x := &MapItemDetailSelectionAccessoryPresentationStyle{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMapItemDetailSelectionAccessoryPresentationStyle creates a new [MapItemDetailSelectionAccessoryPresentationStyle].
+// mapItemDetailSelectionAccessoryPresentationStyleAdopt wraps an Objective-C object that this code just created as a
+// MapItemDetailSelectionAccessoryPresentationStyle (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mapItemDetailSelectionAccessoryPresentationStyleAdopt(id objc.ID) *MapItemDetailSelectionAccessoryPresentationStyle {
+	if id == 0 {
+		return nil
+	}
+	x := &MapItemDetailSelectionAccessoryPresentationStyle{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MapItemDetailSelectionAccessoryPresentationStyle) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MapItemDetailSelectionAccessoryPresentationStyle) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MapItemDetailSelectionAccessoryPresentationStyle) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMapItemDetailSelectionAccessoryPresentationStyle creates a new MapItemDetailSelectionAccessoryPresentationStyle.
 func NewMapItemDetailSelectionAccessoryPresentationStyle() *MapItemDetailSelectionAccessoryPresentationStyle {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("new"))
-	return &MapItemDetailSelectionAccessoryPresentationStyle{inner: raw.MKMapItemDetailSelectionAccessoryPresentationStyleFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKMapItemDetailSelectionAccessoryPresentationStyle")), objc.RegisterName("new"))
+	return mapItemDetailSelectionAccessoryPresentationStyleAdopt(_id)
 }
 
 // MapItemDetailSelectionAccessoryPresentationStyleable is the interface implemented by [MapItemDetailSelectionAccessoryPresentationStyle], for mocking and DI.
 type MapItemDetailSelectionAccessoryPresentationStyleable interface {
-	Unwrap() *raw.MKMapItemDetailSelectionAccessoryPresentationStyle
+	obj.Object
 }
 
 var _ MapItemDetailSelectionAccessoryPresentationStyleable = (*MapItemDetailSelectionAccessoryPresentationStyle)(nil)

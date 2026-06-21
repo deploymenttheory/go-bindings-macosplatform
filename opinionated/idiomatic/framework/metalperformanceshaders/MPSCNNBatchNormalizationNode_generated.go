@@ -5,114 +5,77 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A representation of a batch normalization kernel.
 //
-// CNNBatchNormalizationNode wraps [raw.MPSCNNBatchNormalizationNode] with a fluent Go API.
+// CNNBatchNormalizationNode is an idiomatic wrapper over the Objective-C class MPSCNNBatchNormalizationNode.
 type CNNBatchNormalizationNode struct {
-	inner *raw.MPSCNNBatchNormalizationNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNBatchNormalizationNode].
-func (x *CNNBatchNormalizationNode) Unwrap() *raw.MPSCNNBatchNormalizationNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNBatchNormalizationNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNBatchNormalizationNodeFromID adopts an existing object pointer as a CNNBatchNormalizationNode (nil for 0).
+// CNNBatchNormalizationNodeFromID adopts an existing Objective-C object as a CNNBatchNormalizationNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNBatchNormalizationNodeFromID(id objc.ID) *CNNBatchNormalizationNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNBatchNormalizationNode{inner: raw.MPSCNNBatchNormalizationNodeFromID(id)}
-}
-
-// NewCNNBatchNormalizationNodeWithSourceDataSource creates a new [CNNBatchNormalizationNode].
-func NewCNNBatchNormalizationNodeWithSourceDataSource(source *mpsneuralnetwork.MPSNNImageNode, dataSource mpsneuralnetwork.MPSCNNBatchNormalizationDataSource) *CNNBatchNormalizationNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNBatchNormalizationNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:dataSource:"), source.Ptr(), dataSource)
-	return &CNNBatchNormalizationNode{inner: raw.MPSCNNBatchNormalizationNodeFromID(_id)}
-}
-
-// @abstract Options controlling how batch normalization is calculated @discussion     Default: MPSCNNBatchNormalizationFlagsDefault
-//
-// WithFlags sets the flags property and returns the receiver for chaining.
-func (x *CNNBatchNormalizationNode) WithFlags(flags mpsneuralnetwork.MPSCNNBatchNormalizationFlags) *CNNBatchNormalizationNode {
-	x.inner.SetFlags(flags)
+	x := &CNNBatchNormalizationNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @abstract   The training style of the forward node will be propagated to gradient nodes made from it
-//
-// WithTrainingStyle sets the trainingStyle property and returns the receiver for chaining.
-func (x *CNNBatchNormalizationNode) WithTrainingStyle(trainingStyle mpsneuralnetwork.MPSNNTrainingStyle) *CNNBatchNormalizationNode {
-	x.inner.SetTrainingStyle(trainingStyle)
+// cNNBatchNormalizationNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNBatchNormalizationNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNBatchNormalizationNodeAdopt(id objc.ID) *CNNBatchNormalizationNode {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNBatchNormalizationNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNBatchNormalizationNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNBatchNormalizationNode {
-	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
-	return x
+// Description returns the object's -description text.
+func (x *CNNBatchNormalizationNode) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property label @abstract A string to help identify this object.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNBatchNormalizationNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNBatchNormalizationNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNBatchNormalizationNode creates a new CNNBatchNormalizationNode.
+func NewCNNBatchNormalizationNode() *CNNBatchNormalizationNode {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNBatchNormalizationNode")), objc.RegisterName("new"))
+	return cNNBatchNormalizationNodeAdopt(_id)
+}
+
+// A string to help identify this object.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *CNNBatchNormalizationNode) WithLabel(label string) *CNNBatchNormalizationNode {
-	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-// @abstract Options controlling how batch normalization is calculated @discussion     Default: MPSCNNBatchNormalizationFlagsDefault
-//
-// Flags calls the underlying Flags.
-func (x *CNNBatchNormalizationNode) Flags() mpsneuralnetwork.MPSCNNBatchNormalizationFlags {
-	return x.inner.Flags()
-}
-
-// SetFlags calls the underlying SetFlags.
-func (x *CNNBatchNormalizationNode) SetFlags(flags mpsneuralnetwork.MPSCNNBatchNormalizationFlags) {
-	x.inner.SetFlags(flags)
-}
-
-// @abstract   The training style of the forward node will be propagated to gradient nodes made from it
-//
-// TrainingStyle calls the underlying TrainingStyle.
-func (x *CNNBatchNormalizationNode) TrainingStyle() mpsneuralnetwork.MPSNNTrainingStyle {
-	return x.inner.TrainingStyle()
-}
-
-// @abstract   The training style of the forward node will be propagated to gradient nodes made from it
-//
-// SetTrainingStyle calls the underlying SetTrainingStyle.
-func (x *CNNBatchNormalizationNode) SetTrainingStyle(trainingStyle mpsneuralnetwork.MPSNNTrainingStyle) {
-	x.inner.SetTrainingStyle(trainingStyle)
-}
-
-func (x *CNNBatchNormalizationNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSNNFilterNode
 }
 
 // CNNBatchNormalizationNodeable is the interface implemented by [CNNBatchNormalizationNode], for mocking and DI.
 type CNNBatchNormalizationNodeable interface {
-	Unwrap() *raw.MPSCNNBatchNormalizationNode
-	WithFlags(flags mpsneuralnetwork.MPSCNNBatchNormalizationFlags) *CNNBatchNormalizationNode
-	WithTrainingStyle(trainingStyle mpsneuralnetwork.MPSNNTrainingStyle) *CNNBatchNormalizationNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *CNNBatchNormalizationNode
+	obj.Object
 	WithLabel(label string) *CNNBatchNormalizationNode
-	Flags() mpsneuralnetwork.MPSCNNBatchNormalizationFlags
-	SetFlags(flags mpsneuralnetwork.MPSCNNBatchNormalizationFlags)
-	TrainingStyle() mpsneuralnetwork.MPSNNTrainingStyle
-	SetTrainingStyle(trainingStyle mpsneuralnetwork.MPSNNTrainingStyle)
 }
 
 var _ CNNBatchNormalizationNodeable = (*CNNBatchNormalizationNode)(nil)

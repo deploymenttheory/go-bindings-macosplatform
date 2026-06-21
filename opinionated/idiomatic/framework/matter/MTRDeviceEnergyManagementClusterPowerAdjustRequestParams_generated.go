@@ -5,145 +5,162 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDeviceEnergyManagementClusterPowerAdjustRequestParams wraps [raw.MTRDeviceEnergyManagementClusterPowerAdjustRequestParams] with a fluent Go API.
+// MTRDeviceEnergyManagementClusterPowerAdjustRequestParams is an idiomatic wrapper over the Objective-C class MTRDeviceEnergyManagementClusterPowerAdjustRequestParams.
 type MTRDeviceEnergyManagementClusterPowerAdjustRequestParams struct {
-	inner *raw.MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterPowerAdjustRequestParams].
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Unwrap() *raw.MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDeviceEnergyManagementClusterPowerAdjustRequestParamsFromID adopts an existing object pointer as a MTRDeviceEnergyManagementClusterPowerAdjustRequestParams (nil for 0).
+// MTRDeviceEnergyManagementClusterPowerAdjustRequestParamsFromID adopts an existing Objective-C object as a MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDeviceEnergyManagementClusterPowerAdjustRequestParamsFromID(id objc.ID) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDeviceEnergyManagementClusterPowerAdjustRequestParams{inner: raw.MTRDeviceEnergyManagementClusterPowerAdjustRequestParamsFromID(id)}
+	x := &MTRDeviceEnergyManagementClusterPowerAdjustRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRDeviceEnergyManagementClusterPowerAdjustRequestParams creates a new [MTRDeviceEnergyManagementClusterPowerAdjustRequestParams].
+// mTRDeviceEnergyManagementClusterPowerAdjustRequestParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRDeviceEnergyManagementClusterPowerAdjustRequestParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDeviceEnergyManagementClusterPowerAdjustRequestParamsAdopt(id objc.ID) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDeviceEnergyManagementClusterPowerAdjustRequestParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRDeviceEnergyManagementClusterPowerAdjustRequestParams creates a new MTRDeviceEnergyManagementClusterPowerAdjustRequestParams.
 func NewMTRDeviceEnergyManagementClusterPowerAdjustRequestParams() *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceEnergyManagementClusterPowerAdjustRequestParams")), objc.RegisterName("new"))
-	return &MTRDeviceEnergyManagementClusterPowerAdjustRequestParams{inner: raw.MTRDeviceEnergyManagementClusterPowerAdjustRequestParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementClusterPowerAdjustRequestParams")), objc.RegisterName("new"))
+	return mTRDeviceEnergyManagementClusterPowerAdjustRequestParamsAdopt(_id)
 }
 
-// WithPower sets the power property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithPower(power *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
-	x.inner.SetPower(power)
+// WithPower sets power and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithPower(power obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPower:"), objref.IDOf(power))
 	return x
 }
 
-// WithDuration sets the duration property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithDuration(duration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
-	x.inner.SetDuration(duration)
+// WithDuration sets duration and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 	return x
 }
 
-// WithCause sets the cause property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithCause(cause *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
-	x.inner.SetCause(cause)
+// WithCause sets cause and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke).
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// Power calls the underlying Power.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Power() *foundation.NSNumber {
-	return x.inner.Power()
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Power() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("power"))
+	return obj.Wrap(_r)
 }
 
-// SetPower calls the underlying SetPower.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) SetPower(power *foundation.NSNumber) {
-	x.inner.SetPower(power)
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) SetPower(power obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPower:"), objref.IDOf(power))
 }
 
-// Duration calls the underlying Duration.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Duration() *foundation.NSNumber {
-	return x.inner.Duration()
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Duration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
+	return obj.Wrap(_r)
 }
 
-// SetDuration calls the underlying SetDuration.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) SetDuration(duration *foundation.NSNumber) {
-	x.inner.SetDuration(duration)
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) SetDuration(duration obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
 }
 
-// Cause calls the underlying Cause.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Cause() *foundation.NSNumber {
-	return x.inner.Cause()
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) Cause() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cause"))
+	return obj.Wrap(_r)
 }
 
-// SetCause calls the underlying SetCause.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) SetCause(cause *foundation.NSNumber) {
-	x.inner.SetCause(cause)
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) SetCause(cause obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRDeviceEnergyManagementClusterPowerAdjustRequestParamsable is the interface implemented by [MTRDeviceEnergyManagementClusterPowerAdjustRequestParams], for mocking and DI.
 type MTRDeviceEnergyManagementClusterPowerAdjustRequestParamsable interface {
-	Unwrap() *raw.MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
-	WithPower(power *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
-	WithDuration(duration *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
-	WithCause(cause *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
-	Power() *foundation.NSNumber
-	SetPower(power *foundation.NSNumber)
-	Duration() *foundation.NSNumber
-	SetDuration(duration *foundation.NSNumber)
-	Cause() *foundation.NSNumber
-	SetCause(cause *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithPower(power obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
+	WithDuration(duration obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
+	WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDeviceEnergyManagementClusterPowerAdjustRequestParams
+	Power() obj.Object
+	SetPower(power obj.Object)
+	Duration() obj.Object
+	SetDuration(duration obj.Object)
+	Cause() obj.Object
+	SetCause(cause obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRDeviceEnergyManagementClusterPowerAdjustRequestParamsable = (*MTRDeviceEnergyManagementClusterPowerAdjustRequestParams)(nil)

@@ -5,105 +5,113 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A layer that extracts a slice from a tensor.
 //
-// SliceLayer wraps [raw.MLCSliceLayer] with a fluent Go API.
+// SliceLayer is an idiomatic wrapper over the Objective-C class MLCSliceLayer.
 type SliceLayer struct {
-	inner *raw.MLCSliceLayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCSliceLayer].
-func (x *SliceLayer) Unwrap() *raw.MLCSliceLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SliceLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// SliceLayerFromID adopts an existing object pointer as a SliceLayer (nil for 0).
+// SliceLayerFromID adopts an existing Objective-C object as a SliceLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func SliceLayerFromID(id objc.ID) *SliceLayer {
 	if id == 0 {
 		return nil
 	}
-	return &SliceLayer{inner: raw.MLCSliceLayerFromID(id)}
+	x := &SliceLayer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSliceLayer creates a new [SliceLayer].
+// sliceLayerAdopt wraps an Objective-C object that this code just created as a
+// SliceLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sliceLayerAdopt(id objc.ID) *SliceLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &SliceLayer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SliceLayer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SliceLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SliceLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSliceLayer creates a new SliceLayer.
 func NewSliceLayer() *SliceLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCSliceLayer")), objc.RegisterName("new"))
-	return &SliceLayer{inner: raw.MLCSliceLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCSliceLayer")), objc.RegisterName("new"))
+	return sliceLayerAdopt(_id)
 }
 
 // A string that helps identify this layer.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *SliceLayer) WithLabel(label string) *SliceLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 //
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
 func (x *SliceLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SliceLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// @property   start @abstract   A vector of length equal to that of source. The element at index i specifies the beginning of slice in dimension i.
+// A vector of length equal to that of source. The element at index i specifies the beginning of slice in dimension i.
 //
 // Start returns the collection as a Go slice.
-func (x *SliceLayer) Start() []*foundation.NSNumber {
-	arr := x.inner.Start()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *SliceLayer) Start() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @property   end @abstract   A vector of length equal to that of source. The element at index i specifies the end of slice in dimension i.
+// A vector of length equal to that of source. The element at index i specifies the end of slice in dimension i.
 //
 // End returns the collection as a Go slice.
-func (x *SliceLayer) End() []*foundation.NSNumber {
-	arr := x.inner.End()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *SliceLayer) End() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("end"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @property   stride @abstract   A vector of length equal to that of source. The element at index i specifies the stride of slice in dimension i.
+// A vector of length equal to that of source. The element at index i specifies the stride of slice in dimension i.
 //
 // Stride returns the collection as a Go slice.
-func (x *SliceLayer) Stride() []*foundation.NSNumber {
-	arr := x.inner.Stride()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *SliceLayer) Stride() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stride"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-func (x *SliceLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // SliceLayerable is the interface implemented by [SliceLayer], for mocking and DI.
 type SliceLayerable interface {
-	Unwrap() *raw.MLCSliceLayer
+	obj.Object
 	WithLabel(label string) *SliceLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *SliceLayer
-	Start() []*foundation.NSNumber
-	End() []*foundation.NSNumber
-	Stride() []*foundation.NSNumber
+	Start() []obj.Object
+	End() []obj.Object
+	Stride() []obj.Object
 }
 
 var _ SliceLayerable = (*SliceLayer)(nil)

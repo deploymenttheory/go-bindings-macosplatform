@@ -5,87 +5,108 @@
 package mlcompute
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An optimizer that represents the root mean square propagation algorithm.
 //
-// RMSPropOptimizer wraps [raw.MLCRMSPropOptimizer] with a fluent Go API.
+// RMSPropOptimizer is an idiomatic wrapper over the Objective-C class MLCRMSPropOptimizer.
 type RMSPropOptimizer struct {
-	inner *raw.MLCRMSPropOptimizer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCRMSPropOptimizer].
-func (x *RMSPropOptimizer) Unwrap() *raw.MLCRMSPropOptimizer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RMSPropOptimizer) ID() objc.ID { return x.inner.Ptr() }
-
-// RMSPropOptimizerFromID adopts an existing object pointer as a RMSPropOptimizer (nil for 0).
+// RMSPropOptimizerFromID adopts an existing Objective-C object as a RMSPropOptimizer
+// (nil for 0), retaining it and registering a release finalizer.
 func RMSPropOptimizerFromID(id objc.ID) *RMSPropOptimizer {
 	if id == 0 {
 		return nil
 	}
-	return &RMSPropOptimizer{inner: raw.MLCRMSPropOptimizerFromID(id)}
+	x := &RMSPropOptimizer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRMSPropOptimizer creates a new [RMSPropOptimizer].
+// rMSPropOptimizerAdopt wraps an Objective-C object that this code just created as a
+// RMSPropOptimizer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rMSPropOptimizerAdopt(id objc.ID) *RMSPropOptimizer {
+	if id == 0 {
+		return nil
+	}
+	x := &RMSPropOptimizer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RMSPropOptimizer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RMSPropOptimizer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RMSPropOptimizer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRMSPropOptimizer creates a new RMSPropOptimizer.
 func NewRMSPropOptimizer() *RMSPropOptimizer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCRMSPropOptimizer")), objc.RegisterName("new"))
-	return &RMSPropOptimizer{inner: raw.MLCRMSPropOptimizerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCRMSPropOptimizer")), objc.RegisterName("new"))
+	return rMSPropOptimizerAdopt(_id)
 }
 
 // The learning rate.
 //
-// WithLearningRate sets the learningRate property and returns the receiver for chaining.
+// WithLearningRate sets learningRate and returns the receiver so calls can be chained.
 func (x *RMSPropOptimizer) WithLearningRate(learningRate float32) *RMSPropOptimizer {
-	x.inner.MLCOptimizer.SetLearningRate(learningRate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
 	return x
 }
 
 // A Boolean value that indicates whether you apply gradient clipping.
 //
-// WithAppliesGradientClipping sets the appliesGradientClipping property and returns the receiver for chaining.
+// WithAppliesGradientClipping sets appliesGradientClipping and returns the receiver so calls can be chained.
 func (x *RMSPropOptimizer) WithAppliesGradientClipping(appliesGradientClipping bool) *RMSPropOptimizer {
-	x.inner.MLCOptimizer.SetAppliesGradientClipping(appliesGradientClipping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesGradientClipping:"), appliesGradientClipping)
 	return x
 }
 
-// @property   momentumScale @abstract   The momentum factor.  A hyper-parameter. @discussion The default is 0.0.
-//
-// MomentumScale calls the underlying MomentumScale.
+// The momentum factor.  A hyper-parameter. The default is 0.0.
 func (x *RMSPropOptimizer) MomentumScale() float32 {
-	return x.inner.MomentumScale()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("momentumScale"))
+	return _r
 }
 
-// @property   alpha @abstract   The smoothing constant. @discussion The default is 0.99.
-//
-// Alpha calls the underlying Alpha.
+// The smoothing constant. The default is 0.99.
 func (x *RMSPropOptimizer) Alpha() float32 {
-	return x.inner.Alpha()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
+	return _r
 }
 
-// @property   epsilon @abstract   A term added to improve numerical stability. @discussion The default is 1e-8.
-//
-// Epsilon calls the underlying Epsilon.
+// A term added to improve numerical stability. The default is 1e-8.
 func (x *RMSPropOptimizer) Epsilon() float32 {
-	return x.inner.Epsilon()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+	return _r
 }
 
-// @property   isCentered @abstract   If True, compute the centered RMSProp, the gradient is normalized by an estimation of its variance. @discussion The default is false.
-//
-// IsCentered calls the underlying IsCentered.
+// If True, compute the centered RMSProp, the gradient is normalized by an estimation of its variance. The default is false.
 func (x *RMSPropOptimizer) IsCentered() bool {
-	return x.inner.IsCentered()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCentered"))
+	return _r
 }
-
-func (x *RMSPropOptimizer) asOptimizer() *raw.MLCOptimizer { return &x.inner.MLCOptimizer }
 
 // RMSPropOptimizerable is the interface implemented by [RMSPropOptimizer], for mocking and DI.
 type RMSPropOptimizerable interface {
-	Unwrap() *raw.MLCRMSPropOptimizer
+	obj.Object
 	WithLearningRate(learningRate float32) *RMSPropOptimizer
 	WithAppliesGradientClipping(appliesGradientClipping bool) *RMSPropOptimizer
 	MomentumScale() float32

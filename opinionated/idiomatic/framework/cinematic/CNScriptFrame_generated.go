@@ -5,104 +5,100 @@
 package cinematic
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents what to focus on, and where to focus, in a given movie frame.
 //
-// ScriptFrame wraps [raw.CNScriptFrame] with a fluent Go API.
+// ScriptFrame is an idiomatic wrapper over the Objective-C class CNScriptFrame.
 type ScriptFrame struct {
-	inner *raw.CNScriptFrame
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNScriptFrame].
-func (x *ScriptFrame) Unwrap() *raw.CNScriptFrame { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScriptFrame) ID() objc.ID { return x.inner.Ptr() }
-
-// ScriptFrameFromID adopts an existing object pointer as a ScriptFrame (nil for 0).
+// ScriptFrameFromID adopts an existing Objective-C object as a ScriptFrame
+// (nil for 0), retaining it and registering a release finalizer.
 func ScriptFrameFromID(id objc.ID) *ScriptFrame {
 	if id == 0 {
 		return nil
 	}
-	return &ScriptFrame{inner: raw.CNScriptFrameFromID(id)}
+	x := &ScriptFrame{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewScriptFrame creates a new [ScriptFrame].
+// scriptFrameAdopt wraps an Objective-C object that this code just created as a
+// ScriptFrame (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scriptFrameAdopt(id objc.ID) *ScriptFrame {
+	if id == 0 {
+		return nil
+	}
+	x := &ScriptFrame{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScriptFrame) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScriptFrame) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScriptFrame) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScriptFrame creates a new ScriptFrame.
 func NewScriptFrame() *ScriptFrame {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNScriptFrame")), objc.RegisterName("new"))
-	return &ScriptFrame{inner: raw.CNScriptFrameFromID(_id)}
-}
-
-// The presentation time associated with the remaining properties.
-//
-// Time calls the underlying Time.
-func (x *ScriptFrame) Time() coremedia.CMTime {
-	return x.inner.Time()
+	_id := objc.Send[objc.ID](objc.ID(_class("CNScriptFrame")), objc.RegisterName("new"))
+	return scriptFrameAdopt(_id)
 }
 
 // The disparity value representing the focus plane at which the script is focused in this frame. A larger disparity results in the focus plane being closer to the camera. The scale and offset of disparity is not defined. Pass this to the rendering session when rendering the corresponding frame of the movie to focus at the recommended depth.
-//
-// FocusDisparity calls the underlying FocusDisparity.
 func (x *ScriptFrame) FocusDisparity() float32 {
-	return x.inner.FocusDisparity()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("focusDisparity"))
+	return _r
 }
 
 // The detection on which the script is focused in this frame. The focusDisparity of the focusDetection can be different from that of the frame such as when a rack focus is in progress.
-//
-// FocusDetection calls the underlying FocusDetection.
 func (x *ScriptFrame) FocusDetection() *Detection {
-	_r := x.inner.FocusDetection()
-	if _r == nil {
-		return nil
-	}
-	return &Detection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("focusDetection"))
+	return DetectionFromID(_r)
 }
 
 // All detected objects in this frame.
 //
 // AllDetections returns the collection as a Go slice.
 func (x *ScriptFrame) AllDetections() []*Detection {
-	arr := x.inner.AllDetections()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Detection {
-		return &Detection{inner: raw.CNDetectionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allDetections"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Detection { return DetectionFromID(_id) })
 }
 
 // The detection in the frame with the given detection ID, if any.
-//
-// DetectionForID calls the underlying DetectionForID.
 func (x *ScriptFrame) DetectionForID(detectionID int64) *Detection {
-	_r := x.inner.DetectionForID(detectionID)
-	if _r == nil {
-		return nil
-	}
-	return &Detection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detectionForID:"), detectionID)
+	return DetectionFromID(_r)
 }
 
 // The best detection to focus on in a frame among those within the given detection group.
-//
-// BestDetectionForGroupID calls the underlying BestDetectionForGroupID.
 func (x *ScriptFrame) BestDetectionForGroupID(detectionGroupID int64) *Detection {
-	_r := x.inner.BestDetectionForGroupID(detectionGroupID)
-	if _r == nil {
-		return nil
-	}
-	return &Detection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bestDetectionForGroupID:"), detectionGroupID)
+	return DetectionFromID(_r)
 }
 
 // ScriptFrameable is the interface implemented by [ScriptFrame], for mocking and DI.
 type ScriptFrameable interface {
-	Unwrap() *raw.CNScriptFrame
-	Time() coremedia.CMTime
+	obj.Object
 	FocusDisparity() float32
 	FocusDetection() *Detection
 	AllDetections() []*Detection

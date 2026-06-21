@@ -5,102 +5,109 @@
 package corebluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A characteristic of a remote peripheral’s service.
 //
-// Characteristic wraps [raw.CBCharacteristic] with a fluent Go API.
+// Characteristic is an idiomatic wrapper over the Objective-C class CBCharacteristic.
 type Characteristic struct {
-	inner *raw.CBCharacteristic
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CBCharacteristic].
-func (x *Characteristic) Unwrap() *raw.CBCharacteristic { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Characteristic) ID() objc.ID { return x.inner.Ptr() }
-
-// CharacteristicFromID adopts an existing object pointer as a Characteristic (nil for 0).
+// CharacteristicFromID adopts an existing Objective-C object as a Characteristic
+// (nil for 0), retaining it and registering a release finalizer.
 func CharacteristicFromID(id objc.ID) *Characteristic {
 	if id == 0 {
 		return nil
 	}
-	return &Characteristic{inner: raw.CBCharacteristicFromID(id)}
+	x := &Characteristic{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCharacteristic creates a new [Characteristic].
-func NewCharacteristic() *Characteristic {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBCharacteristic")), objc.RegisterName("new"))
-	return &Characteristic{inner: raw.CBCharacteristicFromID(_id)}
-}
-
-// @property service @discussion A back-pointer to the service this characteristic belongs to.
-//
-// Service calls the underlying Service.
-func (x *Characteristic) Service() *Service {
-	_r := x.inner.Service()
-	if _r == nil {
+// characteristicAdopt wraps an Objective-C object that this code just created as a
+// Characteristic (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func characteristicAdopt(id objc.ID) *Characteristic {
+	if id == 0 {
 		return nil
 	}
-	return &Service{inner: _r}
+	x := &Characteristic{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property properties @discussion The properties of the characteristic.
-//
-// Properties calls the underlying Properties.
-func (x *Characteristic) Properties() CBCharacteristicProperties {
-	return CBCharacteristicProperties(x.inner.Properties())
+// Description returns the object's -description text.
+func (x *Characteristic) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property value @discussion The value of the characteristic.
-//
-// Value calls the underlying Value.
-func (x *Characteristic) Value() *foundation.NSData {
-	return x.inner.Value()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Characteristic) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property descriptors @discussion A list of the CBDescriptors that have so far been discovered in this characteristic.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Characteristic) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCharacteristic creates a new Characteristic.
+func NewCharacteristic() *Characteristic {
+	_id := objc.Send[objc.ID](objc.ID(_class("CBCharacteristic")), objc.RegisterName("new"))
+	return characteristicAdopt(_id)
+}
+
+// A back-pointer to the service this characteristic belongs to.
+func (x *Characteristic) Service() *Service {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("service"))
+	return ServiceFromID(_r)
+}
+
+// The properties of the characteristic.
+func (x *Characteristic) Properties() CharacteristicProperties {
+	_r := objc.Send[CharacteristicProperties](objref.IDOf(x), objc.RegisterName("properties"))
+	return _r
+}
+
+// The value of the characteristic.
+func (x *Characteristic) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
+}
+
+// A list of the CBDescriptors that have so far been discovered in this characteristic.
 //
 // Descriptors returns the collection as a Go slice.
 func (x *Characteristic) Descriptors() []*Descriptor {
-	arr := x.inner.Descriptors()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Descriptor {
-		return &Descriptor{inner: raw.CBDescriptorFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Descriptor { return DescriptorFromID(_id) })
 }
 
-// @property isBroadcasted @discussion Whether the characteristic is currently broadcasted or not.
-//
-// IsBroadcasted calls the underlying IsBroadcasted.
+// Whether the characteristic is currently broadcasted or not.
 func (x *Characteristic) IsBroadcasted() bool {
-	return x.inner.IsBroadcasted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBroadcasted"))
+	return _r
 }
 
-// @property isNotifying @discussion Whether the characteristic is currently notifying or not.
-//
-// IsNotifying calls the underlying IsNotifying.
+// Whether the characteristic is currently notifying or not.
 func (x *Characteristic) IsNotifying() bool {
-	return x.inner.IsNotifying()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNotifying"))
+	return _r
 }
-
-func (x *Characteristic) asCharacteristic() *raw.CBCharacteristic { return x.inner }
-
-func (x *Characteristic) asAttribute() *raw.CBAttribute { return &x.inner.CBAttribute }
 
 // Characteristicable is the interface implemented by [Characteristic], for mocking and DI.
 type Characteristicable interface {
-	Unwrap() *raw.CBCharacteristic
+	obj.Object
 	Service() *Service
-	Properties() CBCharacteristicProperties
-	Value() *foundation.NSData
+	Properties() CharacteristicProperties
+	Value() obj.Object
 	Descriptors() []*Descriptor
 	IsBroadcasted() bool
 	IsNotifying() bool

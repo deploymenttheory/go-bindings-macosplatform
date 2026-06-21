@@ -5,95 +5,100 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A universally unique value that can be used to identify types, interfaces, and other items.
 //
-// UUID wraps [raw.NSUUID] with a fluent Go API.
+// UUID is an idiomatic wrapper over the Objective-C class NSUUID.
 type UUID struct {
-	inner *raw.NSUUID
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSUUID].
-func (x *UUID) Unwrap() *raw.NSUUID { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UUID) ID() objc.ID { return x.inner.Ptr() }
-
-// UUIDFromID adopts an existing object pointer as a UUID (nil for 0).
+// UUIDFromID adopts an existing Objective-C object as a UUID
+// (nil for 0), retaining it and registering a release finalizer.
 func UUIDFromID(id objc.ID) *UUID {
 	if id == 0 {
 		return nil
 	}
-	return &UUID{inner: raw.NSUUIDFromID(id)}
+	x := &UUID{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewUUID creates a new [UUID].
+// uUIDAdopt wraps an Objective-C object that this code just created as a
+// UUID (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uUIDAdopt(id objc.ID) *UUID {
+	if id == 0 {
+		return nil
+	}
+	x := &UUID{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UUID) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UUID) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UUID) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUUID creates a new UUID.
 func NewUUID() *UUID {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUUID")), objc.RegisterName("new"))
-	return &UUID{inner: raw.NSUUIDFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUUID")), objc.RegisterName("new"))
+	return uUIDAdopt(_id)
 }
 
 // Initializes a new UUID with the formatted string.
 //
-// NewUUIDWithUUIDString creates a new [UUID].
+// NewUUIDWithUUIDString creates a new UUID.
 func NewUUIDWithUUIDString(string_ string) *UUID {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUUID")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUIDString:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
-	return &UUID{inner: raw.NSUUIDFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUUID")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUIDString:"), purego.NSString(string_))
+	return uUIDAdopt(_id)
 }
 
-// Initializes a new UUID with the given bytes.
-//
-// NewUUIDWithUUIDBytes creates a new [UUID].
-func NewUUIDWithUUIDBytes(bytes_ *uint8) *UUID {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUUID")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUIDBytes:"), bytes_)
-	return &UUID{inner: raw.NSUUIDFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UUID) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UUID {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *UUID) WithScriptingProperties(scriptingProperties obj.Object) *UUID {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Returns the UUID as bytes.
-//
-// GetUUIDBytes calls the underlying GetUUIDBytes.
-func (x *UUID) GetUUIDBytes(uuid *uint8) {
-	x.inner.GetUUIDBytes(uuid)
-}
-
 // Compares the receiver to another NSUUID in constant time.
-//
-// Compare calls the underlying Compare.
-func (x *UUID) Compare(otherUUID *raw.NSUUID) NSComparisonResult {
-	return NSComparisonResult(x.inner.Compare(otherUUID))
+func (x *UUID) Compare(otherUUID *UUID) ComparisonResult {
+	_r := objc.Send[ComparisonResult](objref.IDOf(x), objc.RegisterName("compare:"), objref.IDOf(otherUUID))
+	return _r
 }
 
-// UUIDString calls the underlying UUIDString.
-func (x *UUID) UUIDString() *String {
-	_r := x.inner.UUIDString()
-	if _r == nil {
-		return nil
+func (x *UUID) UUIDString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUIDString"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
-
-func (x *UUID) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // UUIDable is the interface implemented by [UUID], for mocking and DI.
 type UUIDable interface {
-	Unwrap() *raw.NSUUID
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UUID
-	GetUUIDBytes(uuid *uint8)
-	Compare(otherUUID *raw.NSUUID) NSComparisonResult
-	UUIDString() *String
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UUID
+	Compare(otherUUID *UUID) ComparisonResult
+	UUIDString() string
 }
 
 var _ UUIDable = (*UUID)(nil)

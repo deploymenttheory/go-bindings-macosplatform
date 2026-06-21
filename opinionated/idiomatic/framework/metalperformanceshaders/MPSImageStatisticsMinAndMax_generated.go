@@ -5,131 +5,77 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A kernel that computes the minimum and maximum pixel values for a given region of an image.
 //
-// ImageStatisticsMinAndMax wraps [raw.MPSImageStatisticsMinAndMax] with a fluent Go API.
+// ImageStatisticsMinAndMax is an idiomatic wrapper over the Objective-C class MPSImageStatisticsMinAndMax.
 type ImageStatisticsMinAndMax struct {
-	inner *raw.MPSImageStatisticsMinAndMax
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageStatisticsMinAndMax].
-func (x *ImageStatisticsMinAndMax) Unwrap() *raw.MPSImageStatisticsMinAndMax { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageStatisticsMinAndMax) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageStatisticsMinAndMaxFromID adopts an existing object pointer as a ImageStatisticsMinAndMax (nil for 0).
+// ImageStatisticsMinAndMaxFromID adopts an existing Objective-C object as a ImageStatisticsMinAndMax
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageStatisticsMinAndMaxFromID(id objc.ID) *ImageStatisticsMinAndMax {
 	if id == 0 {
 		return nil
 	}
-	return &ImageStatisticsMinAndMax{inner: raw.MPSImageStatisticsMinAndMaxFromID(id)}
-}
-
-// NewImageStatisticsMinAndMaxWithDevice creates a new [ImageStatisticsMinAndMax].
-func NewImageStatisticsMinAndMaxWithDevice(device metal.MTLDevice) *ImageStatisticsMinAndMax {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageStatisticsMinAndMax")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ImageStatisticsMinAndMax{inner: raw.MPSImageStatisticsMinAndMaxFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewImageStatisticsMinAndMaxWithCoderDevice creates a new [ImageStatisticsMinAndMax].
-func NewImageStatisticsMinAndMaxWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageStatisticsMinAndMax {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageStatisticsMinAndMax")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageStatisticsMinAndMax{inner: raw.MPSImageStatisticsMinAndMaxFromID(_id)}
-}
-
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
-//
-// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
-func (x *ImageStatisticsMinAndMax) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMinAndMax {
-	x.inner.SetClipRectSource(clipRectSource)
+	x := &ImageStatisticsMinAndMax{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageStatisticsMinAndMax) WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMinAndMax {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+// imageStatisticsMinAndMaxAdopt wraps an Objective-C object that this code just created as a
+// ImageStatisticsMinAndMax (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageStatisticsMinAndMaxAdopt(id objc.ID) *ImageStatisticsMinAndMax {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageStatisticsMinAndMax{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageStatisticsMinAndMax) WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMinAndMax {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
-	return x
+// Description returns the object's -description text.
+func (x *ImageStatisticsMinAndMax) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageStatisticsMinAndMax) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageStatisticsMinAndMax {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageStatisticsMinAndMax) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageStatisticsMinAndMax) WithOptions(options mpscore.MPSKernelOptions) *ImageStatisticsMinAndMax {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageStatisticsMinAndMax) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageStatisticsMinAndMax creates a new ImageStatisticsMinAndMax.
+func NewImageStatisticsMinAndMax() *ImageStatisticsMinAndMax {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageStatisticsMinAndMax")), objc.RegisterName("new"))
+	return imageStatisticsMinAndMaxAdopt(_id)
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ImageStatisticsMinAndMax) WithLabel(label string) *ImageStatisticsMinAndMax {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
-//
-// ClipRectSource calls the underlying ClipRectSource.
-func (x *ImageStatisticsMinAndMax) ClipRectSource() metal.MTLRegion {
-	return x.inner.ClipRectSource()
-}
-
-// SetClipRectSource calls the underlying SetClipRectSource.
-func (x *ImageStatisticsMinAndMax) SetClipRectSource(clipRectSource metal.MTLRegion) {
-	x.inner.SetClipRectSource(clipRectSource)
-}
-
-func (x *ImageStatisticsMinAndMax) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
-}
-
-func (x *ImageStatisticsMinAndMax) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSUnaryImageKernel.MPSKernel
 }
 
 // ImageStatisticsMinAndMaxable is the interface implemented by [ImageStatisticsMinAndMax], for mocking and DI.
 type ImageStatisticsMinAndMaxable interface {
-	Unwrap() *raw.MPSImageStatisticsMinAndMax
-	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMinAndMax
-	WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMinAndMax
-	WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMinAndMax
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageStatisticsMinAndMax
-	WithOptions(options mpscore.MPSKernelOptions) *ImageStatisticsMinAndMax
+	obj.Object
 	WithLabel(label string) *ImageStatisticsMinAndMax
-	ClipRectSource() metal.MTLRegion
-	SetClipRectSource(clipRectSource metal.MTLRegion)
 }
 
 var _ ImageStatisticsMinAndMaxable = (*ImageStatisticsMinAndMax)(nil)

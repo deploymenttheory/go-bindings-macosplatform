@@ -5,208 +5,196 @@
 package corespotlight
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The configuration details to apply to a user query.
 //
-// UserQueryContext wraps [raw.CSUserQueryContext] with a fluent Go API.
+// UserQueryContext is an idiomatic wrapper over the Objective-C class CSUserQueryContext.
 type UserQueryContext struct {
-	inner *raw.CSUserQueryContext
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CSUserQueryContext].
-func (x *UserQueryContext) Unwrap() *raw.CSUserQueryContext { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UserQueryContext) ID() objc.ID { return x.inner.Ptr() }
-
-// UserQueryContextFromID adopts an existing object pointer as a UserQueryContext (nil for 0).
+// UserQueryContextFromID adopts an existing Objective-C object as a UserQueryContext
+// (nil for 0), retaining it and registering a release finalizer.
 func UserQueryContextFromID(id objc.ID) *UserQueryContext {
 	if id == 0 {
 		return nil
 	}
-	return &UserQueryContext{inner: raw.CSUserQueryContextFromID(id)}
+	x := &UserQueryContext{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewUserQueryContext creates a new [UserQueryContext].
+// userQueryContextAdopt wraps an Objective-C object that this code just created as a
+// UserQueryContext (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func userQueryContextAdopt(id objc.ID) *UserQueryContext {
+	if id == 0 {
+		return nil
+	}
+	x := &UserQueryContext{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UserQueryContext) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UserQueryContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UserQueryContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUserQueryContext creates a new UserQueryContext.
 func NewUserQueryContext() *UserQueryContext {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CSUserQueryContext")), objc.RegisterName("new"))
-	return &UserQueryContext{inner: raw.CSUserQueryContextFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CSUserQueryContext")), objc.RegisterName("new"))
+	return userQueryContextAdopt(_id)
 }
 
 // A Boolean value that indicates whether the query sorts results by their relevance.
 //
-// WithEnableRankedResults sets the enableRankedResults property and returns the receiver for chaining.
+// WithEnableRankedResults sets enableRankedResults and returns the receiver so calls can be chained.
 func (x *UserQueryContext) WithEnableRankedResults(enableRankedResults bool) *UserQueryContext {
-	x.inner.SetEnableRankedResults(enableRankedResults)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableRankedResults:"), enableRankedResults)
 	return x
 }
 
 // A Boolean value that indicates whether to exclude semantic-based search results from the output.
 //
-// WithDisableSemanticSearch sets the disableSemanticSearch property and returns the receiver for chaining.
+// WithDisableSemanticSearch sets disableSemanticSearch and returns the receiver so calls can be chained.
 func (x *UserQueryContext) WithDisableSemanticSearch(disableSemanticSearch bool) *UserQueryContext {
-	x.inner.SetDisableSemanticSearch(disableSemanticSearch)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisableSemanticSearch:"), disableSemanticSearch)
 	return x
 }
 
 // The maximum number of search results for the query to return.
 //
-// WithMaxResultCount sets the maxResultCount property and returns the receiver for chaining.
+// WithMaxResultCount sets maxResultCount and returns the receiver so calls can be chained.
 func (x *UserQueryContext) WithMaxResultCount(maxResultCount int) *UserQueryContext {
-	x.inner.SetMaxResultCount(maxResultCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxResultCount:"), maxResultCount)
 	return x
 }
 
 // The maximum number of suggested text completions for the query to return.
 //
-// WithMaxSuggestionCount sets the maxSuggestionCount property and returns the receiver for chaining.
+// WithMaxSuggestionCount sets maxSuggestionCount and returns the receiver so calls can be chained.
 func (x *UserQueryContext) WithMaxSuggestionCount(maxSuggestionCount int) *UserQueryContext {
-	x.inner.SetMaxSuggestionCount(maxSuggestionCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSuggestionCount:"), maxSuggestionCount)
 	return x
 }
 
 // The maximum number of ranked results to return during the query.
 //
-// WithMaxRankedResultCount sets the maxRankedResultCount property and returns the receiver for chaining.
+// WithMaxRankedResultCount sets maxRankedResultCount and returns the receiver so calls can be chained.
 func (x *UserQueryContext) WithMaxRankedResultCount(maxRankedResultCount int) *UserQueryContext {
-	x.inner.SetMaxRankedResultCount(maxRankedResultCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxRankedResultCount:"), maxRankedResultCount)
 	return x
 }
 
 // The attributes the system fetches for the searchable items.
 //
-// WithFetchAttributes sets the collection, converting the Go slice to an NSArray.
-func (x *UserQueryContext) WithFetchAttributes(items ...*foundation.NSString) *UserQueryContext {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.CSSearchQueryContext.SetFetchAttributes(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.CSSearchQueryContext.SetFetchAttributes(_arr)
+// WithFetchAttributes sets the collection and returns the receiver so calls can be chained.
+func (x *UserQueryContext) WithFetchAttributes(items ...obj.Object) *UserQueryContext {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchAttributes:"), _arr)
 	return x
 }
 
 // The query string used to filter the results.
 //
-// WithFilterQueries sets the collection, converting the Go slice to an NSArray.
-func (x *UserQueryContext) WithFilterQueries(items ...*foundation.NSString) *UserQueryContext {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.CSSearchQueryContext.SetFilterQueries(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.CSSearchQueryContext.SetFilterQueries(_arr)
+// WithFilterQueries sets the collection and returns the receiver so calls can be chained.
+func (x *UserQueryContext) WithFilterQueries(items ...obj.Object) *UserQueryContext {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterQueries:"), _arr)
 	return x
 }
 
 // The language used for the query.
 //
-// WithKeyboardLanguage sets the keyboardLanguage property and returns the receiver for chaining.
+// WithKeyboardLanguage sets keyboardLanguage and returns the receiver so calls can be chained.
 func (x *UserQueryContext) WithKeyboardLanguage(keyboardLanguage string) *UserQueryContext {
-	x.inner.CSSearchQueryContext.SetKeyboardLanguage(foundation.NSStringStringWithUTF8String(keyboardLanguage))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyboardLanguage:"), purego.NSString(keyboardLanguage))
 	return x
 }
 
 // The query source options to allow or deny Mail messages in the search.
 //
-// WithSourceOptions sets the sourceOptions property and returns the receiver for chaining.
-func (x *UserQueryContext) WithSourceOptions(sourceOptions CSSearchQuerySourceOptions) *UserQueryContext {
-	x.inner.CSSearchQueryContext.SetSourceOptions(raw.CSSearchQuerySourceOptions(sourceOptions))
+// WithSourceOptions sets sourceOptions and returns the receiver so calls can be chained.
+func (x *UserQueryContext) WithSourceOptions(sourceOptions SearchQuerySourceOptions) *UserQueryContext {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceOptions:"), sourceOptions)
 	return x
 }
 
-// EnableRankedResults calls the underlying EnableRankedResults.
 func (x *UserQueryContext) EnableRankedResults() bool {
-	return x.inner.EnableRankedResults()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enableRankedResults"))
+	return _r
 }
 
-// SetEnableRankedResults calls the underlying SetEnableRankedResults.
 func (x *UserQueryContext) SetEnableRankedResults(enableRankedResults bool) {
-	x.inner.SetEnableRankedResults(enableRankedResults)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableRankedResults:"), enableRankedResults)
 }
 
-// DisableSemanticSearch calls the underlying DisableSemanticSearch.
 func (x *UserQueryContext) DisableSemanticSearch() bool {
-	return x.inner.DisableSemanticSearch()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("disableSemanticSearch"))
+	return _r
 }
 
-// SetDisableSemanticSearch calls the underlying SetDisableSemanticSearch.
 func (x *UserQueryContext) SetDisableSemanticSearch(disableSemanticSearch bool) {
-	x.inner.SetDisableSemanticSearch(disableSemanticSearch)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisableSemanticSearch:"), disableSemanticSearch)
 }
 
-// MaxResultCount calls the underlying MaxResultCount.
 func (x *UserQueryContext) MaxResultCount() int {
-	return x.inner.MaxResultCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxResultCount"))
+	return _r
 }
 
-// SetMaxResultCount calls the underlying SetMaxResultCount.
 func (x *UserQueryContext) SetMaxResultCount(maxResultCount int) {
-	x.inner.SetMaxResultCount(maxResultCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxResultCount:"), maxResultCount)
 }
 
-// MaxSuggestionCount calls the underlying MaxSuggestionCount.
 func (x *UserQueryContext) MaxSuggestionCount() int {
-	return x.inner.MaxSuggestionCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxSuggestionCount"))
+	return _r
 }
 
-// SetMaxSuggestionCount calls the underlying SetMaxSuggestionCount.
 func (x *UserQueryContext) SetMaxSuggestionCount(maxSuggestionCount int) {
-	x.inner.SetMaxSuggestionCount(maxSuggestionCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSuggestionCount:"), maxSuggestionCount)
 }
 
-// MaxRankedResultCount calls the underlying MaxRankedResultCount.
 func (x *UserQueryContext) MaxRankedResultCount() int {
-	return x.inner.MaxRankedResultCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxRankedResultCount"))
+	return _r
 }
 
-// SetMaxRankedResultCount calls the underlying SetMaxRankedResultCount.
 func (x *UserQueryContext) SetMaxRankedResultCount(maxRankedResultCount int) {
-	x.inner.SetMaxRankedResultCount(maxRankedResultCount)
-}
-
-func (x *UserQueryContext) asSearchQueryContext() *raw.CSSearchQueryContext {
-	return &x.inner.CSSearchQueryContext
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxRankedResultCount:"), maxRankedResultCount)
 }
 
 // UserQueryContextable is the interface implemented by [UserQueryContext], for mocking and DI.
 type UserQueryContextable interface {
-	Unwrap() *raw.CSUserQueryContext
+	obj.Object
 	WithEnableRankedResults(enableRankedResults bool) *UserQueryContext
 	WithDisableSemanticSearch(disableSemanticSearch bool) *UserQueryContext
 	WithMaxResultCount(maxResultCount int) *UserQueryContext
 	WithMaxSuggestionCount(maxSuggestionCount int) *UserQueryContext
 	WithMaxRankedResultCount(maxRankedResultCount int) *UserQueryContext
-	WithFetchAttributes(items ...*foundation.NSString) *UserQueryContext
-	WithFilterQueries(items ...*foundation.NSString) *UserQueryContext
+	WithFetchAttributes(items ...obj.Object) *UserQueryContext
+	WithFilterQueries(items ...obj.Object) *UserQueryContext
 	WithKeyboardLanguage(keyboardLanguage string) *UserQueryContext
-	WithSourceOptions(sourceOptions CSSearchQuerySourceOptions) *UserQueryContext
+	WithSourceOptions(sourceOptions SearchQuerySourceOptions) *UserQueryContext
 	EnableRankedResults() bool
 	SetEnableRankedResults(enableRankedResults bool)
 	DisableSemanticSearch() bool

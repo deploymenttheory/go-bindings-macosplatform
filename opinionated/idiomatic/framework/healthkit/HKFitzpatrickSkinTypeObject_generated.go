@@ -5,47 +5,74 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // This class acts as a wrapper for the HKFitzpatrickSkinType enumeration.
 //
-// FitzpatrickSkinTypeObject wraps [raw.HKFitzpatrickSkinTypeObject] with a fluent Go API.
+// FitzpatrickSkinTypeObject is an idiomatic wrapper over the Objective-C class HKFitzpatrickSkinTypeObject.
 type FitzpatrickSkinTypeObject struct {
-	inner *raw.HKFitzpatrickSkinTypeObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKFitzpatrickSkinTypeObject].
-func (x *FitzpatrickSkinTypeObject) Unwrap() *raw.HKFitzpatrickSkinTypeObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FitzpatrickSkinTypeObject) ID() objc.ID { return x.inner.Ptr() }
-
-// FitzpatrickSkinTypeObjectFromID adopts an existing object pointer as a FitzpatrickSkinTypeObject (nil for 0).
+// FitzpatrickSkinTypeObjectFromID adopts an existing Objective-C object as a FitzpatrickSkinTypeObject
+// (nil for 0), retaining it and registering a release finalizer.
 func FitzpatrickSkinTypeObjectFromID(id objc.ID) *FitzpatrickSkinTypeObject {
 	if id == 0 {
 		return nil
 	}
-	return &FitzpatrickSkinTypeObject{inner: raw.HKFitzpatrickSkinTypeObjectFromID(id)}
+	x := &FitzpatrickSkinTypeObject{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFitzpatrickSkinTypeObject creates a new [FitzpatrickSkinTypeObject].
+// fitzpatrickSkinTypeObjectAdopt wraps an Objective-C object that this code just created as a
+// FitzpatrickSkinTypeObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fitzpatrickSkinTypeObjectAdopt(id objc.ID) *FitzpatrickSkinTypeObject {
+	if id == 0 {
+		return nil
+	}
+	x := &FitzpatrickSkinTypeObject{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FitzpatrickSkinTypeObject) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FitzpatrickSkinTypeObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FitzpatrickSkinTypeObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFitzpatrickSkinTypeObject creates a new FitzpatrickSkinTypeObject.
 func NewFitzpatrickSkinTypeObject() *FitzpatrickSkinTypeObject {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKFitzpatrickSkinTypeObject")), objc.RegisterName("new"))
-	return &FitzpatrickSkinTypeObject{inner: raw.HKFitzpatrickSkinTypeObjectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKFitzpatrickSkinTypeObject")), objc.RegisterName("new"))
+	return fitzpatrickSkinTypeObjectAdopt(_id)
 }
 
-// SkinType calls the underlying SkinType.
-func (x *FitzpatrickSkinTypeObject) SkinType() HKFitzpatrickSkinType {
-	return HKFitzpatrickSkinType(x.inner.SkinType())
+func (x *FitzpatrickSkinTypeObject) SkinType() FitzpatrickSkinType {
+	_r := objc.Send[FitzpatrickSkinType](objref.IDOf(x), objc.RegisterName("skinType"))
+	return _r
 }
 
 // FitzpatrickSkinTypeObjectable is the interface implemented by [FitzpatrickSkinTypeObject], for mocking and DI.
 type FitzpatrickSkinTypeObjectable interface {
-	Unwrap() *raw.HKFitzpatrickSkinTypeObject
-	SkinType() HKFitzpatrickSkinType
+	obj.Object
+	SkinType() FitzpatrickSkinType
 }
 
 var _ FitzpatrickSkinTypeObjectable = (*FitzpatrickSkinTypeObject)(nil)

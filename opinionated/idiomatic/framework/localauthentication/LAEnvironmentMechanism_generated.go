@@ -5,71 +5,90 @@
 package localauthentication
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// EnvironmentMechanism wraps [raw.LAEnvironmentMechanism] with a fluent Go API.
+// EnvironmentMechanism is an idiomatic wrapper over the Objective-C class LAEnvironmentMechanism.
 type EnvironmentMechanism struct {
-	inner *raw.LAEnvironmentMechanism
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.LAEnvironmentMechanism].
-func (x *EnvironmentMechanism) Unwrap() *raw.LAEnvironmentMechanism { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EnvironmentMechanism) ID() objc.ID { return x.inner.Ptr() }
-
-// EnvironmentMechanismFromID adopts an existing object pointer as a EnvironmentMechanism (nil for 0).
+// EnvironmentMechanismFromID adopts an existing Objective-C object as a EnvironmentMechanism
+// (nil for 0), retaining it and registering a release finalizer.
 func EnvironmentMechanismFromID(id objc.ID) *EnvironmentMechanism {
 	if id == 0 {
 		return nil
 	}
-	return &EnvironmentMechanism{inner: raw.LAEnvironmentMechanismFromID(id)}
+	x := &EnvironmentMechanism{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEnvironmentMechanism creates a new [EnvironmentMechanism].
+// environmentMechanismAdopt wraps an Objective-C object that this code just created as a
+// EnvironmentMechanism (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func environmentMechanismAdopt(id objc.ID) *EnvironmentMechanism {
+	if id == 0 {
+		return nil
+	}
+	x := &EnvironmentMechanism{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EnvironmentMechanism) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EnvironmentMechanism) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EnvironmentMechanism) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEnvironmentMechanism creates a new EnvironmentMechanism.
 func NewEnvironmentMechanism() *EnvironmentMechanism {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LAEnvironmentMechanism")), objc.RegisterName("new"))
-	return &EnvironmentMechanism{inner: raw.LAEnvironmentMechanismFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("LAEnvironmentMechanism")), objc.RegisterName("new"))
+	return environmentMechanismAdopt(_id)
 }
 
-// @brief Whether the mechanism is available for use, i.e. whether the relevant preflight call of @c canEvaluatePolicy would succeed. @warning If @c isUsable reads @c NO, do not assume that it's because of some particular reason. You should check properties of the subclass to determine why mechanism can't be used.
-//
-// IsUsable calls the underlying IsUsable.
+// Whether the mechanism is available for use, i.e. whether the relevant preflight call of
 func (x *EnvironmentMechanism) IsUsable() bool {
-	return x.inner.IsUsable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUsable"))
+	return _r
 }
 
 // The localized name of the authentication mechanism, e.g. "Touch ID", "Face ID" etc.
-//
-// LocalizedName calls the underlying LocalizedName.
 func (x *EnvironmentMechanism) LocalizedName() string {
-	_r := x.inner.LocalizedName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Name of the SF Symbol representing this authentication mechanism.
-//
-// IconSystemName calls the underlying IconSystemName.
 func (x *EnvironmentMechanism) IconSystemName() string {
-	_r := x.inner.IconSystemName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconSystemName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *EnvironmentMechanism) asEnvironmentMechanism() *raw.LAEnvironmentMechanism { return x.inner }
 
 // EnvironmentMechanismable is the interface implemented by [EnvironmentMechanism], for mocking and DI.
 type EnvironmentMechanismable interface {
-	Unwrap() *raw.LAEnvironmentMechanism
+	obj.Object
 	IsUsable() bool
 	LocalizedName() string
 	IconSystemName() string

@@ -5,326 +5,234 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The representation of a font in an app.
 //
-// Font wraps [raw.NSFont] with a fluent Go API.
+// Font is an idiomatic wrapper over the Objective-C class NSFont.
 type Font struct {
-	inner *raw.NSFont
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFont].
-func (x *Font) Unwrap() *raw.NSFont { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Font) ID() objc.ID { return x.inner.Ptr() }
-
-// FontFromID adopts an existing object pointer as a Font (nil for 0).
+// FontFromID adopts an existing Objective-C object as a Font
+// (nil for 0), retaining it and registering a release finalizer.
 func FontFromID(id objc.ID) *Font {
 	if id == 0 {
 		return nil
 	}
-	return &Font{inner: raw.NSFontFromID(id)}
+	x := &Font{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFont creates a new [Font].
-func NewFont() *Font {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFont")), objc.RegisterName("new"))
-	return &Font{inner: raw.NSFontFromID(_id)}
-}
-
-// FontWithSize calls the underlying FontWithSize.
-func (x *Font) FontWithSize(fontSize float64) *Font {
-	_r := x.inner.FontWithSize(fontSize)
-	if _r == nil {
+// fontAdopt wraps an Objective-C object that this code just created as a
+// Font (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fontAdopt(id objc.ID) *Font {
+	if id == 0 {
 		return nil
 	}
-	return &Font{inner: _r}
+	x := &Font{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// ******* Glyph metrics ******** ******* Glyph metrics ********
-//
-// BoundingRectForCGGlyph calls the underlying BoundingRectForCGGlyph.
-func (x *Font) BoundingRectForCGGlyph(glyph uint16) corefoundation.CGRect {
-	return x.inner.BoundingRectForCGGlyph(glyph)
+// Description returns the object's -description text.
+func (x *Font) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// AdvancementForCGGlyph calls the underlying AdvancementForCGGlyph.
-func (x *Font) AdvancementForCGGlyph(glyph uint16) corefoundation.CGSize {
-	return x.inner.AdvancementForCGGlyph(glyph)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Font) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// GetBoundingRectsForCGGlyphsCount calls the underlying GetBoundingRectsForCGGlyphsCount.
-func (x *Font) GetBoundingRectsForCGGlyphsCount(bounds *corefoundation.CGRect, glyphs *uint16, glyphCount uint) {
-	x.inner.GetBoundingRectsForCGGlyphsCount(bounds, glyphs, glyphCount)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Font) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// GetAdvancementsForCGGlyphsCount calls the underlying GetAdvancementsForCGGlyphsCount.
-func (x *Font) GetAdvancementsForCGGlyphsCount(advancements *corefoundation.CGSize, glyphs *uint16, glyphCount uint) {
-	x.inner.GetAdvancementsForCGGlyphsCount(advancements, glyphs, glyphCount)
+// NewFont creates a new Font.
+func NewFont() *Font {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSFont")), objc.RegisterName("new"))
+	return fontAdopt(_id)
+}
+
+func (x *Font) FontWithSize(fontSize float64) *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontWithSize:"), fontSize)
+	return FontFromID(_r)
 }
 
 // Sets this font as the font for the current graphics context.
-//
-// Set calls the underlying Set.
 func (x *Font) Set() {
-	x.inner.Set()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("set"))
 }
 
 // Sets this font as the font for the specified graphics context.
-//
-// SetInContext calls the underlying SetInContext.
-func (x *Font) SetInContext(graphicsContext *raw.NSGraphicsContext) {
-	x.inner.SetInContext(graphicsContext)
+func (x *Font) SetInContext(graphicsContext *GraphicsContext) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInContext:"), objref.IDOf(graphicsContext))
 }
 
 // ******* Core font attribute ********
-//
-// FontName calls the underlying FontName.
 func (x *Font) FontName() string {
-	_r := x.inner.FontName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PointSize calls the underlying PointSize.
 func (x *Font) PointSize() float64 {
-	return x.inner.PointSize()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("pointSize"))
+	return _r
 }
 
-// Matrix calls the underlying Matrix.
-func (x *Font) Matrix() unsafe.Pointer {
-	return x.inner.Matrix()
-}
-
-// FamilyName calls the underlying FamilyName.
 func (x *Font) FamilyName() string {
-	_r := x.inner.FamilyName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("familyName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// DisplayName calls the underlying DisplayName.
 func (x *Font) DisplayName() string {
-	_r := x.inner.DisplayName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// FontDescriptor calls the underlying FontDescriptor.
 func (x *Font) FontDescriptor() *FontDescriptor {
-	_r := x.inner.FontDescriptor()
-	if _r == nil {
-		return nil
-	}
-	return &FontDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontDescriptor"))
+	return FontDescriptorFromID(_r)
 }
 
-// TextTransform calls the underlying TextTransform.
-func (x *Font) TextTransform() *foundation.NSAffineTransform {
-	return x.inner.TextTransform()
+func (x *Font) TextTransform() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textTransform"))
+	return obj.Wrap(_r)
 }
 
 // ******* Glyph coverage ********
-//
-// NumberOfGlyphs calls the underlying NumberOfGlyphs.
-func (x *Font) NumberOfGlyphs() uint {
-	return x.inner.NumberOfGlyphs()
+func (x *Font) NumberOfGlyphs() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfGlyphs"))
+	return _r
 }
 
-// MostCompatibleStringEncoding calls the underlying MostCompatibleStringEncoding.
-func (x *Font) MostCompatibleStringEncoding() uint {
-	return x.inner.MostCompatibleStringEncoding()
+func (x *Font) MostCompatibleStringEncoding() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mostCompatibleStringEncoding"))
+	return _r
 }
 
-// CoveredCharacterSet calls the underlying CoveredCharacterSet.
-func (x *Font) CoveredCharacterSet() *foundation.NSCharacterSet {
-	return x.inner.CoveredCharacterSet()
+func (x *Font) CoveredCharacterSet() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coveredCharacterSet"))
+	return obj.Wrap(_r)
 }
 
-// BoundingRectForFont calls the underlying BoundingRectForFont.
-func (x *Font) BoundingRectForFont() corefoundation.CGRect {
-	return x.inner.BoundingRectForFont()
-}
-
-// MaximumAdvancement calls the underlying MaximumAdvancement.
-func (x *Font) MaximumAdvancement() corefoundation.CGSize {
-	return x.inner.MaximumAdvancement()
-}
-
-// Ascender calls the underlying Ascender.
 func (x *Font) Ascender() float64 {
-	return x.inner.Ascender()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("ascender"))
+	return _r
 }
 
-// Descender calls the underlying Descender.
 func (x *Font) Descender() float64 {
-	return x.inner.Descender()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("descender"))
+	return _r
 }
 
-// Leading calls the underlying Leading.
 func (x *Font) Leading() float64 {
-	return x.inner.Leading()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("leading"))
+	return _r
 }
 
-// UnderlinePosition calls the underlying UnderlinePosition.
 func (x *Font) UnderlinePosition() float64 {
-	return x.inner.UnderlinePosition()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("underlinePosition"))
+	return _r
 }
 
-// UnderlineThickness calls the underlying UnderlineThickness.
 func (x *Font) UnderlineThickness() float64 {
-	return x.inner.UnderlineThickness()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("underlineThickness"))
+	return _r
 }
 
-// ItalicAngle calls the underlying ItalicAngle.
 func (x *Font) ItalicAngle() float64 {
-	return x.inner.ItalicAngle()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("italicAngle"))
+	return _r
 }
 
-// CapHeight calls the underlying CapHeight.
 func (x *Font) CapHeight() float64 {
-	return x.inner.CapHeight()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("capHeight"))
+	return _r
 }
 
-// XHeight calls the underlying XHeight.
 func (x *Font) XHeight() float64 {
-	return x.inner.XHeight()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("xHeight"))
+	return _r
 }
 
-// IsFixedPitch calls the underlying IsFixedPitch.
 func (x *Font) IsFixedPitch() bool {
-	return x.inner.IsFixedPitch()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFixedPitch"))
+	return _r
 }
 
-// VerticalFont calls the underlying VerticalFont.
 func (x *Font) VerticalFont() *Font {
-	_r := x.inner.VerticalFont()
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("verticalFont"))
+	return FontFromID(_r)
 }
 
-// IsVertical calls the underlying IsVertical.
 func (x *Font) IsVertical() bool {
-	return x.inner.IsVertical()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVertical"))
+	return _r
 }
 
 // Returns the named encoded glyph, or –1 if the receiver contains no such glyph.
-//
-// GlyphWithName calls the underlying GlyphWithName.
-func (x *Font) GlyphWithName(name string) uint {
-	return x.inner.GlyphWithName(foundation.NSStringStringWithUTF8String(name))
-}
-
-// Returns the bounding rectangle for the specified glyph, scaled to the receiver’s size.
-//
-// BoundingRectForGlyph calls the underlying BoundingRectForGlyph.
-func (x *Font) BoundingRectForGlyph(glyph uint) corefoundation.CGRect {
-	return x.inner.BoundingRectForGlyph(glyph)
-}
-
-// Returns the nominal spacing for the given glyph—the distance the current point moves after showing the glyph—accounting for the receiver’s size.
-//
-// AdvancementForGlyph calls the underlying AdvancementForGlyph.
-func (x *Font) AdvancementForGlyph(glyph uint) corefoundation.CGSize {
-	return x.inner.AdvancementForGlyph(glyph)
-}
-
-// Returns an array of the bounding rectangles for the specified glyphs rendered by the receiver.
-//
-// GetBoundingRectsForGlyphsCount calls the underlying GetBoundingRectsForGlyphsCount.
-func (x *Font) GetBoundingRectsForGlyphsCount(bounds *corefoundation.CGRect, glyphs *uint, glyphCount uint) {
-	x.inner.GetBoundingRectsForGlyphsCount(bounds, glyphs, glyphCount)
-}
-
-// Returns an array of the advancements for the specified glyphs rendered by the receiver.
-//
-// GetAdvancementsForGlyphsCount calls the underlying GetAdvancementsForGlyphsCount.
-func (x *Font) GetAdvancementsForGlyphsCount(advancements *corefoundation.CGSize, glyphs *uint, glyphCount uint) {
-	x.inner.GetAdvancementsForGlyphsCount(advancements, glyphs, glyphCount)
-}
-
-// Returns an array of the advancements for the specified packed glyphs and rendered by the receiver.
-//
-// GetAdvancementsForPackedGlyphsLength calls the underlying GetAdvancementsForPackedGlyphsLength.
-func (x *Font) GetAdvancementsForPackedGlyphsLength(advancements *corefoundation.CGSize, packedGlyphs unsafe.Pointer, length uint) {
-	x.inner.GetAdvancementsForPackedGlyphsLength(advancements, packedGlyphs, length)
+func (x *Font) GlyphWithName(name string) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("glyphWithName:"), purego.NSString(name))
+	return _r
 }
 
 // Returns a bitmapped screen font, when sent to a font object representing a scalable PostScript font, with the specified rendering mode, matching the receiver in typeface and matrix (or size), or nil if such a font can’t be found.
-//
-// ScreenFontWithRenderingMode calls the underlying ScreenFontWithRenderingMode.
-func (x *Font) ScreenFontWithRenderingMode(renderingMode NSFontRenderingMode) *Font {
-	_r := x.inner.ScreenFontWithRenderingMode(raw.NSFontRenderingMode(renderingMode))
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+func (x *Font) ScreenFontWithRenderingMode(renderingMode FontRenderingMode) *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("screenFontWithRenderingMode:"), renderingMode)
+	return FontFromID(_r)
 }
 
 // ******* Rendering mode ********
-//
-// PrinterFont calls the underlying PrinterFont.
 func (x *Font) PrinterFont() *Font {
-	_r := x.inner.PrinterFont()
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printerFont"))
+	return FontFromID(_r)
 }
 
-// ScreenFont calls the underlying ScreenFont.
 func (x *Font) ScreenFont() *Font {
-	_r := x.inner.ScreenFont()
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("screenFont"))
+	return FontFromID(_r)
 }
 
-// RenderingMode calls the underlying RenderingMode.
-func (x *Font) RenderingMode() NSFontRenderingMode {
-	return NSFontRenderingMode(x.inner.RenderingMode())
+func (x *Font) RenderingMode() FontRenderingMode {
+	_r := objc.Send[FontRenderingMode](objref.IDOf(x), objc.RegisterName("renderingMode"))
+	return _r
 }
 
 // Fontable is the interface implemented by [Font], for mocking and DI.
 type Fontable interface {
-	Unwrap() *raw.NSFont
+	obj.Object
 	FontWithSize(fontSize float64) *Font
-	BoundingRectForCGGlyph(glyph uint16) corefoundation.CGRect
-	AdvancementForCGGlyph(glyph uint16) corefoundation.CGSize
-	GetBoundingRectsForCGGlyphsCount(bounds *corefoundation.CGRect, glyphs *uint16, glyphCount uint)
-	GetAdvancementsForCGGlyphsCount(advancements *corefoundation.CGSize, glyphs *uint16, glyphCount uint)
 	Set()
-	SetInContext(graphicsContext *raw.NSGraphicsContext)
+	SetInContext(graphicsContext *GraphicsContext)
 	FontName() string
 	PointSize() float64
-	Matrix() unsafe.Pointer
 	FamilyName() string
 	DisplayName() string
 	FontDescriptor() *FontDescriptor
-	TextTransform() *foundation.NSAffineTransform
-	NumberOfGlyphs() uint
-	MostCompatibleStringEncoding() uint
-	CoveredCharacterSet() *foundation.NSCharacterSet
-	BoundingRectForFont() corefoundation.CGRect
-	MaximumAdvancement() corefoundation.CGSize
+	TextTransform() obj.Object
+	NumberOfGlyphs() int
+	MostCompatibleStringEncoding() int
+	CoveredCharacterSet() obj.Object
 	Ascender() float64
 	Descender() float64
 	Leading() float64
@@ -336,16 +244,11 @@ type Fontable interface {
 	IsFixedPitch() bool
 	VerticalFont() *Font
 	IsVertical() bool
-	GlyphWithName(name string) uint
-	BoundingRectForGlyph(glyph uint) corefoundation.CGRect
-	AdvancementForGlyph(glyph uint) corefoundation.CGSize
-	GetBoundingRectsForGlyphsCount(bounds *corefoundation.CGRect, glyphs *uint, glyphCount uint)
-	GetAdvancementsForGlyphsCount(advancements *corefoundation.CGSize, glyphs *uint, glyphCount uint)
-	GetAdvancementsForPackedGlyphsLength(advancements *corefoundation.CGSize, packedGlyphs unsafe.Pointer, length uint)
-	ScreenFontWithRenderingMode(renderingMode NSFontRenderingMode) *Font
+	GlyphWithName(name string) int
+	ScreenFontWithRenderingMode(renderingMode FontRenderingMode) *Font
 	PrinterFont() *Font
 	ScreenFont() *Font
-	RenderingMode() NSFontRenderingMode
+	RenderingMode() FontRenderingMode
 }
 
 var _ Fontable = (*Font)(nil)

@@ -5,45 +5,68 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The abstract base class for results returned from a persistent store coordinator.
 //
-// PersistentStoreResult wraps [raw.NSPersistentStoreResult] with a fluent Go API.
+// PersistentStoreResult is an idiomatic wrapper over the Objective-C class NSPersistentStoreResult.
 type PersistentStoreResult struct {
-	inner *raw.NSPersistentStoreResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPersistentStoreResult].
-func (x *PersistentStoreResult) Unwrap() *raw.NSPersistentStoreResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersistentStoreResult) ID() objc.ID { return x.inner.Ptr() }
-
-// PersistentStoreResultFromID adopts an existing object pointer as a PersistentStoreResult (nil for 0).
+// PersistentStoreResultFromID adopts an existing Objective-C object as a PersistentStoreResult
+// (nil for 0), retaining it and registering a release finalizer.
 func PersistentStoreResultFromID(id objc.ID) *PersistentStoreResult {
 	if id == 0 {
 		return nil
 	}
-	return &PersistentStoreResult{inner: raw.NSPersistentStoreResultFromID(id)}
+	x := &PersistentStoreResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPersistentStoreResult creates a new [PersistentStoreResult].
+// persistentStoreResultAdopt wraps an Objective-C object that this code just created as a
+// PersistentStoreResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func persistentStoreResultAdopt(id objc.ID) *PersistentStoreResult {
+	if id == 0 {
+		return nil
+	}
+	x := &PersistentStoreResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PersistentStoreResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PersistentStoreResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PersistentStoreResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPersistentStoreResult creates a new PersistentStoreResult.
 func NewPersistentStoreResult() *PersistentStoreResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentStoreResult")), objc.RegisterName("new"))
-	return &PersistentStoreResult{inner: raw.NSPersistentStoreResultFromID(_id)}
-}
-
-func (x *PersistentStoreResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
-	return x.inner
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreResult")), objc.RegisterName("new"))
+	return persistentStoreResultAdopt(_id)
 }
 
 // PersistentStoreResultable is the interface implemented by [PersistentStoreResult], for mocking and DI.
 type PersistentStoreResultable interface {
-	Unwrap() *raw.NSPersistentStoreResult
+	obj.Object
 }
 
 var _ PersistentStoreResultable = (*PersistentStoreResult)(nil)

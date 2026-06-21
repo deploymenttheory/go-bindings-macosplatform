@@ -5,65 +5,85 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that describes start options for macOS VMs.
 //
-// MacOSVirtualMachineStartOptions wraps [raw.VZMacOSVirtualMachineStartOptions] with a fluent Go API.
+// MacOSVirtualMachineStartOptions is an idiomatic wrapper over the Objective-C class VZMacOSVirtualMachineStartOptions.
 type MacOSVirtualMachineStartOptions struct {
-	inner *raw.VZMacOSVirtualMachineStartOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZMacOSVirtualMachineStartOptions].
-func (x *MacOSVirtualMachineStartOptions) Unwrap() *raw.VZMacOSVirtualMachineStartOptions {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MacOSVirtualMachineStartOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// MacOSVirtualMachineStartOptionsFromID adopts an existing object pointer as a MacOSVirtualMachineStartOptions (nil for 0).
+// MacOSVirtualMachineStartOptionsFromID adopts an existing Objective-C object as a MacOSVirtualMachineStartOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func MacOSVirtualMachineStartOptionsFromID(id objc.ID) *MacOSVirtualMachineStartOptions {
 	if id == 0 {
 		return nil
 	}
-	return &MacOSVirtualMachineStartOptions{inner: raw.VZMacOSVirtualMachineStartOptionsFromID(id)}
+	x := &MacOSVirtualMachineStartOptions{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMacOSVirtualMachineStartOptions creates a new [MacOSVirtualMachineStartOptions].
+// macOSVirtualMachineStartOptionsAdopt wraps an Objective-C object that this code just created as a
+// MacOSVirtualMachineStartOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func macOSVirtualMachineStartOptionsAdopt(id objc.ID) *MacOSVirtualMachineStartOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &MacOSVirtualMachineStartOptions{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MacOSVirtualMachineStartOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MacOSVirtualMachineStartOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MacOSVirtualMachineStartOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMacOSVirtualMachineStartOptions creates a new MacOSVirtualMachineStartOptions.
 func NewMacOSVirtualMachineStartOptions() *MacOSVirtualMachineStartOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacOSVirtualMachineStartOptions")), objc.RegisterName("new"))
-	return &MacOSVirtualMachineStartOptions{inner: raw.VZMacOSVirtualMachineStartOptionsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZMacOSVirtualMachineStartOptions")), objc.RegisterName("new"))
+	return macOSVirtualMachineStartOptionsAdopt(_id)
 }
 
 // A Boolean value that indicates whether the macOS guest should start in recovery mode.
 //
-// WithStartUpFromMacOSRecovery sets the startUpFromMacOSRecovery property and returns the receiver for chaining.
+// WithStartUpFromMacOSRecovery sets startUpFromMacOSRecovery and returns the receiver so calls can be chained.
 func (x *MacOSVirtualMachineStartOptions) WithStartUpFromMacOSRecovery(startUpFromMacOSRecovery bool) *MacOSVirtualMachineStartOptions {
-	x.inner.SetStartUpFromMacOSRecovery(startUpFromMacOSRecovery)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartUpFromMacOSRecovery:"), startUpFromMacOSRecovery)
 	return x
 }
 
-// StartUpFromMacOSRecovery calls the underlying StartUpFromMacOSRecovery.
 func (x *MacOSVirtualMachineStartOptions) StartUpFromMacOSRecovery() bool {
-	return x.inner.StartUpFromMacOSRecovery()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startUpFromMacOSRecovery"))
+	return _r
 }
 
-// SetStartUpFromMacOSRecovery calls the underlying SetStartUpFromMacOSRecovery.
 func (x *MacOSVirtualMachineStartOptions) SetStartUpFromMacOSRecovery(startUpFromMacOSRecovery bool) {
-	x.inner.SetStartUpFromMacOSRecovery(startUpFromMacOSRecovery)
-}
-
-func (x *MacOSVirtualMachineStartOptions) asVirtualMachineStartOptions() *raw.VZVirtualMachineStartOptions {
-	return &x.inner.VZVirtualMachineStartOptions
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartUpFromMacOSRecovery:"), startUpFromMacOSRecovery)
 }
 
 // MacOSVirtualMachineStartOptionsable is the interface implemented by [MacOSVirtualMachineStartOptions], for mocking and DI.
 type MacOSVirtualMachineStartOptionsable interface {
-	Unwrap() *raw.VZMacOSVirtualMachineStartOptions
+	obj.Object
 	WithStartUpFromMacOSRecovery(startUpFromMacOSRecovery bool) *MacOSVirtualMachineStartOptions
 	StartUpFromMacOSRecovery() bool
 	SetStartUpFromMacOSRecovery(startUpFromMacOSRecovery bool)

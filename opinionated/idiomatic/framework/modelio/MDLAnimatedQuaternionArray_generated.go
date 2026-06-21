@@ -5,106 +5,80 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// AnimatedQuaternionArray wraps [raw.MDLAnimatedQuaternionArray] with a fluent Go API.
+// AnimatedQuaternionArray is an idiomatic wrapper over the Objective-C class MDLAnimatedQuaternionArray.
 type AnimatedQuaternionArray struct {
-	inner *raw.MDLAnimatedQuaternionArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLAnimatedQuaternionArray].
-func (x *AnimatedQuaternionArray) Unwrap() *raw.MDLAnimatedQuaternionArray { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AnimatedQuaternionArray) ID() objc.ID { return x.inner.Ptr() }
-
-// AnimatedQuaternionArrayFromID adopts an existing object pointer as a AnimatedQuaternionArray (nil for 0).
+// AnimatedQuaternionArrayFromID adopts an existing Objective-C object as a AnimatedQuaternionArray
+// (nil for 0), retaining it and registering a release finalizer.
 func AnimatedQuaternionArrayFromID(id objc.ID) *AnimatedQuaternionArray {
 	if id == 0 {
 		return nil
 	}
-	return &AnimatedQuaternionArray{inner: raw.MDLAnimatedQuaternionArrayFromID(id)}
-}
-
-// NewAnimatedQuaternionArrayWithElementCount creates a new [AnimatedQuaternionArray].
-func NewAnimatedQuaternionArrayWithElementCount(arrayElementCount uint) *AnimatedQuaternionArray {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLAnimatedQuaternionArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElementCount:"), arrayElementCount)
-	return &AnimatedQuaternionArray{inner: raw.MDLAnimatedQuaternionArrayFromID(_id)}
-}
-
-// WithInterpolation sets the interpolation property and returns the receiver for chaining.
-func (x *AnimatedQuaternionArray) WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedQuaternionArray {
-	x.inner.MDLAnimatedValue.SetInterpolation(raw.MDLAnimatedValueInterpolation(interpolation))
+	x := &AnimatedQuaternionArray{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// SetFloatQuaternionArrayCountAtTime calls the underlying SetFloatQuaternionArrayCountAtTime.
-func (x *AnimatedQuaternionArray) SetFloatQuaternionArrayCountAtTime(array unsafe.Pointer, count uint, time_ float64) {
-	x.inner.SetFloatQuaternionArrayCountAtTime(array, count, time_)
+// animatedQuaternionArrayAdopt wraps an Objective-C object that this code just created as a
+// AnimatedQuaternionArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func animatedQuaternionArrayAdopt(id objc.ID) *AnimatedQuaternionArray {
+	if id == 0 {
+		return nil
+	}
+	x := &AnimatedQuaternionArray{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetDoubleQuaternionArrayCountAtTime calls the underlying SetDoubleQuaternionArrayCountAtTime.
-func (x *AnimatedQuaternionArray) SetDoubleQuaternionArrayCountAtTime(array unsafe.Pointer, count uint, time_ float64) {
-	x.inner.SetDoubleQuaternionArrayCountAtTime(array, count, time_)
+// Description returns the object's -description text.
+func (x *AnimatedQuaternionArray) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// GetFloatQuaternionArrayMaxCountAtTime calls the underlying GetFloatQuaternionArrayMaxCountAtTime.
-func (x *AnimatedQuaternionArray) GetFloatQuaternionArrayMaxCountAtTime(array unsafe.Pointer, maxCount uint, time_ float64) uint {
-	return x.inner.GetFloatQuaternionArrayMaxCountAtTime(array, maxCount, time_)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AnimatedQuaternionArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// GetDoubleQuaternionArrayMaxCountAtTime calls the underlying GetDoubleQuaternionArrayMaxCountAtTime.
-func (x *AnimatedQuaternionArray) GetDoubleQuaternionArrayMaxCountAtTime(array unsafe.Pointer, maxCount uint, time_ float64) uint {
-	return x.inner.GetDoubleQuaternionArrayMaxCountAtTime(array, maxCount, time_)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AnimatedQuaternionArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// ResetWithFloatQuaternionArrayCountAtTimesCount calls the underlying ResetWithFloatQuaternionArrayCountAtTimesCount.
-func (x *AnimatedQuaternionArray) ResetWithFloatQuaternionArrayCountAtTimesCount(valuesArray unsafe.Pointer, valuesCount uint, timesArray *float64, timesCount uint) {
-	x.inner.ResetWithFloatQuaternionArrayCountAtTimesCount(valuesArray, valuesCount, timesArray, timesCount)
+// NewAnimatedQuaternionArrayWithElementCount creates a new AnimatedQuaternionArray.
+func NewAnimatedQuaternionArrayWithElementCount(arrayElementCount int) *AnimatedQuaternionArray {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLAnimatedQuaternionArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElementCount:"), arrayElementCount)
+	return animatedQuaternionArrayAdopt(_id)
 }
 
-// ResetWithDoubleQuaternionArrayCountAtTimesCount calls the underlying ResetWithDoubleQuaternionArrayCountAtTimesCount.
-func (x *AnimatedQuaternionArray) ResetWithDoubleQuaternionArrayCountAtTimesCount(valuesArray unsafe.Pointer, valuesCount uint, timesArray *float64, timesCount uint) {
-	x.inner.ResetWithDoubleQuaternionArrayCountAtTimesCount(valuesArray, valuesCount, timesArray, timesCount)
+// WithInterpolation sets interpolation and returns the receiver so calls can be chained.
+func (x *AnimatedQuaternionArray) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedQuaternionArray {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
+	return x
 }
 
-// GetFloatQuaternionArrayMaxCount calls the underlying GetFloatQuaternionArrayMaxCount.
-func (x *AnimatedQuaternionArray) GetFloatQuaternionArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint {
-	return x.inner.GetFloatQuaternionArrayMaxCount(valuesArray, maxCount)
-}
-
-// GetDoubleQuaternionArrayMaxCount calls the underlying GetDoubleQuaternionArrayMaxCount.
-func (x *AnimatedQuaternionArray) GetDoubleQuaternionArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint {
-	return x.inner.GetDoubleQuaternionArrayMaxCount(valuesArray, maxCount)
-}
-
-// ElementCount calls the underlying ElementCount.
-func (x *AnimatedQuaternionArray) ElementCount() uint {
-	return x.inner.ElementCount()
-}
-
-func (x *AnimatedQuaternionArray) asAnimatedValue() *raw.MDLAnimatedValue {
-	return &x.inner.MDLAnimatedValue
+func (x *AnimatedQuaternionArray) ElementCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("elementCount"))
+	return _r
 }
 
 // AnimatedQuaternionArrayable is the interface implemented by [AnimatedQuaternionArray], for mocking and DI.
 type AnimatedQuaternionArrayable interface {
-	Unwrap() *raw.MDLAnimatedQuaternionArray
-	WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedQuaternionArray
-	SetFloatQuaternionArrayCountAtTime(array unsafe.Pointer, count uint, time_ float64)
-	SetDoubleQuaternionArrayCountAtTime(array unsafe.Pointer, count uint, time_ float64)
-	GetFloatQuaternionArrayMaxCountAtTime(array unsafe.Pointer, maxCount uint, time_ float64) uint
-	GetDoubleQuaternionArrayMaxCountAtTime(array unsafe.Pointer, maxCount uint, time_ float64) uint
-	ResetWithFloatQuaternionArrayCountAtTimesCount(valuesArray unsafe.Pointer, valuesCount uint, timesArray *float64, timesCount uint)
-	ResetWithDoubleQuaternionArrayCountAtTimesCount(valuesArray unsafe.Pointer, valuesCount uint, timesArray *float64, timesCount uint)
-	GetFloatQuaternionArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
-	GetDoubleQuaternionArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
-	ElementCount() uint
+	obj.Object
+	WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedQuaternionArray
+	ElementCount() int
 }
 
 var _ AnimatedQuaternionArrayable = (*AnimatedQuaternionArray)(nil)

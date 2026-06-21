@@ -5,1557 +5,1538 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// CNLabelHome returns the string constant CNLabelHome as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelHome() objc.ID {
-	return purego.CFConstant(raw.CNLabelHome())
-}
+// CNLabelHome returns the string constant CNLabelHome, for use as a dictionary key or argument.
+func CNLabelHome() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CNLabelHome"))) }
 
-// CNLabelWork returns the string constant CNLabelWork as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelWork() objc.ID {
-	return purego.CFConstant(raw.CNLabelWork())
-}
+// CNLabelWork returns the string constant CNLabelWork, for use as a dictionary key or argument.
+func CNLabelWork() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CNLabelWork"))) }
 
-// CNLabelSchool returns the string constant CNLabelSchool as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelSchool() objc.ID {
-	return purego.CFConstant(raw.CNLabelSchool())
-}
+// CNLabelSchool returns the string constant CNLabelSchool, for use as a dictionary key or argument.
+func CNLabelSchool() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CNLabelSchool"))) }
 
-// CNLabelOther returns the string constant CNLabelOther as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelOther() objc.ID {
-	return purego.CFConstant(raw.CNLabelOther())
-}
+// CNLabelOther returns the string constant CNLabelOther, for use as a dictionary key or argument.
+func CNLabelOther() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CNLabelOther"))) }
 
-// CNLabelEmailiCloud returns the string constant CNLabelEmailiCloud as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelEmailiCloud() objc.ID {
-	return purego.CFConstant(raw.CNLabelEmailiCloud())
+// CNLabelEmailiCloud returns the string constant CNLabelEmailiCloud, for use as a dictionary key or argument.
+func CNLabelEmailiCloud() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelEmailiCloud")))
 }
 
-// CNLabelURLAddressHomePage returns the string constant CNLabelURLAddressHomePage as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelURLAddressHomePage() objc.ID {
-	return purego.CFConstant(raw.CNLabelURLAddressHomePage())
+// CNLabelURLAddressHomePage returns the string constant CNLabelURLAddressHomePage, for use as a dictionary key or argument.
+func CNLabelURLAddressHomePage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelURLAddressHomePage")))
 }
 
-// CNLabelDateAnniversary returns the string constant CNLabelDateAnniversary as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelDateAnniversary() objc.ID {
-	return purego.CFConstant(raw.CNLabelDateAnniversary())
+// CNLabelDateAnniversary returns the string constant CNLabelDateAnniversary, for use as a dictionary key or argument.
+func CNLabelDateAnniversary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelDateAnniversary")))
 }
 
-// CNLabelPhoneNumberiPhone returns the string constant CNLabelPhoneNumberiPhone as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelPhoneNumberiPhone() objc.ID {
-	return purego.CFConstant(raw.CNLabelPhoneNumberiPhone())
+// CNLabelPhoneNumberiPhone returns the string constant CNLabelPhoneNumberiPhone, for use as a dictionary key or argument.
+func CNLabelPhoneNumberiPhone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelPhoneNumberiPhone")))
 }
 
-// CNLabelPhoneNumberAppleWatch returns the string constant CNLabelPhoneNumberAppleWatch as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelPhoneNumberAppleWatch() objc.ID {
-	return purego.CFConstant(raw.CNLabelPhoneNumberAppleWatch())
+// CNLabelPhoneNumberAppleWatch returns the string constant CNLabelPhoneNumberAppleWatch, for use as a dictionary key or argument.
+func CNLabelPhoneNumberAppleWatch() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelPhoneNumberAppleWatch")))
 }
 
-// CNLabelPhoneNumberMobile returns the string constant CNLabelPhoneNumberMobile as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelPhoneNumberMobile() objc.ID {
-	return purego.CFConstant(raw.CNLabelPhoneNumberMobile())
+// CNLabelPhoneNumberMobile returns the string constant CNLabelPhoneNumberMobile, for use as a dictionary key or argument.
+func CNLabelPhoneNumberMobile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelPhoneNumberMobile")))
 }
 
-// CNLabelPhoneNumberMain returns the string constant CNLabelPhoneNumberMain as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelPhoneNumberMain() objc.ID {
-	return purego.CFConstant(raw.CNLabelPhoneNumberMain())
+// CNLabelPhoneNumberMain returns the string constant CNLabelPhoneNumberMain, for use as a dictionary key or argument.
+func CNLabelPhoneNumberMain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelPhoneNumberMain")))
 }
 
-// CNLabelPhoneNumberHomeFax returns the string constant CNLabelPhoneNumberHomeFax as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelPhoneNumberHomeFax() objc.ID {
-	return purego.CFConstant(raw.CNLabelPhoneNumberHomeFax())
+// CNLabelPhoneNumberHomeFax returns the string constant CNLabelPhoneNumberHomeFax, for use as a dictionary key or argument.
+func CNLabelPhoneNumberHomeFax() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelPhoneNumberHomeFax")))
 }
 
-// CNLabelPhoneNumberWorkFax returns the string constant CNLabelPhoneNumberWorkFax as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelPhoneNumberWorkFax() objc.ID {
-	return purego.CFConstant(raw.CNLabelPhoneNumberWorkFax())
+// CNLabelPhoneNumberWorkFax returns the string constant CNLabelPhoneNumberWorkFax, for use as a dictionary key or argument.
+func CNLabelPhoneNumberWorkFax() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelPhoneNumberWorkFax")))
 }
 
-// CNLabelPhoneNumberOtherFax returns the string constant CNLabelPhoneNumberOtherFax as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelPhoneNumberOtherFax() objc.ID {
-	return purego.CFConstant(raw.CNLabelPhoneNumberOtherFax())
+// CNLabelPhoneNumberOtherFax returns the string constant CNLabelPhoneNumberOtherFax, for use as a dictionary key or argument.
+func CNLabelPhoneNumberOtherFax() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelPhoneNumberOtherFax")))
 }
 
-// CNLabelPhoneNumberPager returns the string constant CNLabelPhoneNumberPager as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelPhoneNumberPager() objc.ID {
-	return purego.CFConstant(raw.CNLabelPhoneNumberPager())
+// CNLabelPhoneNumberPager returns the string constant CNLabelPhoneNumberPager, for use as a dictionary key or argument.
+func CNLabelPhoneNumberPager() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelPhoneNumberPager")))
 }
 
-// CNPostalAddressStreetKey returns the string constant CNPostalAddressStreetKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNPostalAddressStreetKey() objc.ID {
-	return purego.CFConstant(raw.CNPostalAddressStreetKey())
+// CNPostalAddressStreetKey returns the string constant CNPostalAddressStreetKey, for use as a dictionary key or argument.
+func CNPostalAddressStreetKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNPostalAddressStreetKey")))
 }
 
-// CNPostalAddressSubLocalityKey returns the string constant CNPostalAddressSubLocalityKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNPostalAddressSubLocalityKey() objc.ID {
-	return purego.CFConstant(raw.CNPostalAddressSubLocalityKey())
+// CNPostalAddressSubLocalityKey returns the string constant CNPostalAddressSubLocalityKey, for use as a dictionary key or argument.
+func CNPostalAddressSubLocalityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNPostalAddressSubLocalityKey")))
 }
 
-// CNPostalAddressCityKey returns the string constant CNPostalAddressCityKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNPostalAddressCityKey() objc.ID {
-	return purego.CFConstant(raw.CNPostalAddressCityKey())
+// CNPostalAddressCityKey returns the string constant CNPostalAddressCityKey, for use as a dictionary key or argument.
+func CNPostalAddressCityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNPostalAddressCityKey")))
 }
 
-// CNPostalAddressSubAdministrativeAreaKey returns the string constant CNPostalAddressSubAdministrativeAreaKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNPostalAddressSubAdministrativeAreaKey() objc.ID {
-	return purego.CFConstant(raw.CNPostalAddressSubAdministrativeAreaKey())
+// CNPostalAddressSubAdministrativeAreaKey returns the string constant CNPostalAddressSubAdministrativeAreaKey, for use as a dictionary key or argument.
+func CNPostalAddressSubAdministrativeAreaKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNPostalAddressSubAdministrativeAreaKey")))
 }
 
-// CNPostalAddressStateKey returns the string constant CNPostalAddressStateKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNPostalAddressStateKey() objc.ID {
-	return purego.CFConstant(raw.CNPostalAddressStateKey())
+// CNPostalAddressStateKey returns the string constant CNPostalAddressStateKey, for use as a dictionary key or argument.
+func CNPostalAddressStateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNPostalAddressStateKey")))
 }
 
-// CNPostalAddressPostalCodeKey returns the string constant CNPostalAddressPostalCodeKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNPostalAddressPostalCodeKey() objc.ID {
-	return purego.CFConstant(raw.CNPostalAddressPostalCodeKey())
+// CNPostalAddressPostalCodeKey returns the string constant CNPostalAddressPostalCodeKey, for use as a dictionary key or argument.
+func CNPostalAddressPostalCodeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNPostalAddressPostalCodeKey")))
 }
 
-// CNPostalAddressCountryKey returns the string constant CNPostalAddressCountryKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNPostalAddressCountryKey() objc.ID {
-	return purego.CFConstant(raw.CNPostalAddressCountryKey())
+// CNPostalAddressCountryKey returns the string constant CNPostalAddressCountryKey, for use as a dictionary key or argument.
+func CNPostalAddressCountryKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNPostalAddressCountryKey")))
 }
 
-// CNPostalAddressISOCountryCodeKey returns the string constant CNPostalAddressISOCountryCodeKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNPostalAddressISOCountryCodeKey() objc.ID {
-	return purego.CFConstant(raw.CNPostalAddressISOCountryCodeKey())
+// CNPostalAddressISOCountryCodeKey returns the string constant CNPostalAddressISOCountryCodeKey, for use as a dictionary key or argument.
+func CNPostalAddressISOCountryCodeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNPostalAddressISOCountryCodeKey")))
 }
 
-// CNLabelContactRelationAssistant returns the string constant CNLabelContactRelationAssistant as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationAssistant() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationAssistant())
+// CNLabelContactRelationAssistant returns the string constant CNLabelContactRelationAssistant, for use as a dictionary key or argument.
+func CNLabelContactRelationAssistant() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationAssistant")))
 }
 
-// CNLabelContactRelationManager returns the string constant CNLabelContactRelationManager as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationManager() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationManager())
+// CNLabelContactRelationManager returns the string constant CNLabelContactRelationManager, for use as a dictionary key or argument.
+func CNLabelContactRelationManager() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationManager")))
 }
 
-// CNLabelContactRelationColleague returns the string constant CNLabelContactRelationColleague as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationColleague() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationColleague())
+// CNLabelContactRelationColleague returns the string constant CNLabelContactRelationColleague, for use as a dictionary key or argument.
+func CNLabelContactRelationColleague() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationColleague")))
 }
 
-// CNLabelContactRelationTeacher returns the string constant CNLabelContactRelationTeacher as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationTeacher() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationTeacher())
+// CNLabelContactRelationTeacher returns the string constant CNLabelContactRelationTeacher, for use as a dictionary key or argument.
+func CNLabelContactRelationTeacher() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationTeacher")))
 }
 
-// CNLabelContactRelationSibling returns the string constant CNLabelContactRelationSibling as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationSibling() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationSibling())
+// CNLabelContactRelationSibling returns the string constant CNLabelContactRelationSibling, for use as a dictionary key or argument.
+func CNLabelContactRelationSibling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationSibling")))
 }
 
-// CNLabelContactRelationYoungerSibling returns the string constant CNLabelContactRelationYoungerSibling as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerSibling() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerSibling())
+// CNLabelContactRelationYoungerSibling returns the string constant CNLabelContactRelationYoungerSibling, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerSibling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerSibling")))
 }
 
-// CNLabelContactRelationElderSibling returns the string constant CNLabelContactRelationElderSibling as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderSibling() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderSibling())
+// CNLabelContactRelationElderSibling returns the string constant CNLabelContactRelationElderSibling, for use as a dictionary key or argument.
+func CNLabelContactRelationElderSibling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderSibling")))
 }
 
-// CNLabelContactRelationSister returns the string constant CNLabelContactRelationSister as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationSister() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationSister())
+// CNLabelContactRelationSister returns the string constant CNLabelContactRelationSister, for use as a dictionary key or argument.
+func CNLabelContactRelationSister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationSister")))
 }
 
-// CNLabelContactRelationYoungerSister returns the string constant CNLabelContactRelationYoungerSister as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerSister() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerSister())
+// CNLabelContactRelationYoungerSister returns the string constant CNLabelContactRelationYoungerSister, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerSister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerSister")))
 }
 
-// CNLabelContactRelationYoungestSister returns the string constant CNLabelContactRelationYoungestSister as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungestSister() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungestSister())
+// CNLabelContactRelationYoungestSister returns the string constant CNLabelContactRelationYoungestSister, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungestSister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungestSister")))
 }
 
-// CNLabelContactRelationElderSister returns the string constant CNLabelContactRelationElderSister as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderSister() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderSister())
+// CNLabelContactRelationElderSister returns the string constant CNLabelContactRelationElderSister, for use as a dictionary key or argument.
+func CNLabelContactRelationElderSister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderSister")))
 }
 
-// CNLabelContactRelationEldestSister returns the string constant CNLabelContactRelationEldestSister as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationEldestSister() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationEldestSister())
+// CNLabelContactRelationEldestSister returns the string constant CNLabelContactRelationEldestSister, for use as a dictionary key or argument.
+func CNLabelContactRelationEldestSister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationEldestSister")))
 }
 
-// CNLabelContactRelationBrother returns the string constant CNLabelContactRelationBrother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationBrother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationBrother())
+// CNLabelContactRelationBrother returns the string constant CNLabelContactRelationBrother, for use as a dictionary key or argument.
+func CNLabelContactRelationBrother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationBrother")))
 }
 
-// CNLabelContactRelationYoungerBrother returns the string constant CNLabelContactRelationYoungerBrother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerBrother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerBrother())
+// CNLabelContactRelationYoungerBrother returns the string constant CNLabelContactRelationYoungerBrother, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerBrother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerBrother")))
 }
 
-// CNLabelContactRelationYoungestBrother returns the string constant CNLabelContactRelationYoungestBrother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungestBrother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungestBrother())
+// CNLabelContactRelationYoungestBrother returns the string constant CNLabelContactRelationYoungestBrother, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungestBrother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungestBrother")))
 }
 
-// CNLabelContactRelationElderBrother returns the string constant CNLabelContactRelationElderBrother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderBrother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderBrother())
+// CNLabelContactRelationElderBrother returns the string constant CNLabelContactRelationElderBrother, for use as a dictionary key or argument.
+func CNLabelContactRelationElderBrother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderBrother")))
 }
 
-// CNLabelContactRelationEldestBrother returns the string constant CNLabelContactRelationEldestBrother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationEldestBrother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationEldestBrother())
+// CNLabelContactRelationEldestBrother returns the string constant CNLabelContactRelationEldestBrother, for use as a dictionary key or argument.
+func CNLabelContactRelationEldestBrother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationEldestBrother")))
 }
 
-// CNLabelContactRelationFriend returns the string constant CNLabelContactRelationFriend as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationFriend() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationFriend())
+// CNLabelContactRelationFriend returns the string constant CNLabelContactRelationFriend, for use as a dictionary key or argument.
+func CNLabelContactRelationFriend() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationFriend")))
 }
 
-// CNLabelContactRelationMaleFriend returns the string constant CNLabelContactRelationMaleFriend as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationMaleFriend() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationMaleFriend())
+// CNLabelContactRelationMaleFriend returns the string constant CNLabelContactRelationMaleFriend, for use as a dictionary key or argument.
+func CNLabelContactRelationMaleFriend() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationMaleFriend")))
 }
 
-// CNLabelContactRelationFemaleFriend returns the string constant CNLabelContactRelationFemaleFriend as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationFemaleFriend() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationFemaleFriend())
+// CNLabelContactRelationFemaleFriend returns the string constant CNLabelContactRelationFemaleFriend, for use as a dictionary key or argument.
+func CNLabelContactRelationFemaleFriend() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationFemaleFriend")))
 }
 
-// CNLabelContactRelationSpouse returns the string constant CNLabelContactRelationSpouse as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationSpouse() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationSpouse())
+// CNLabelContactRelationSpouse returns the string constant CNLabelContactRelationSpouse, for use as a dictionary key or argument.
+func CNLabelContactRelationSpouse() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationSpouse")))
 }
 
-// CNLabelContactRelationWife returns the string constant CNLabelContactRelationWife as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationWife() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationWife())
+// CNLabelContactRelationWife returns the string constant CNLabelContactRelationWife, for use as a dictionary key or argument.
+func CNLabelContactRelationWife() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationWife")))
 }
 
-// CNLabelContactRelationHusband returns the string constant CNLabelContactRelationHusband as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationHusband() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationHusband())
+// CNLabelContactRelationHusband returns the string constant CNLabelContactRelationHusband, for use as a dictionary key or argument.
+func CNLabelContactRelationHusband() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationHusband")))
 }
 
-// CNLabelContactRelationPartner returns the string constant CNLabelContactRelationPartner as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationPartner() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationPartner())
+// CNLabelContactRelationPartner returns the string constant CNLabelContactRelationPartner, for use as a dictionary key or argument.
+func CNLabelContactRelationPartner() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationPartner")))
 }
 
-// CNLabelContactRelationMalePartner returns the string constant CNLabelContactRelationMalePartner as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationMalePartner() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationMalePartner())
+// CNLabelContactRelationMalePartner returns the string constant CNLabelContactRelationMalePartner, for use as a dictionary key or argument.
+func CNLabelContactRelationMalePartner() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationMalePartner")))
 }
 
-// CNLabelContactRelationFemalePartner returns the string constant CNLabelContactRelationFemalePartner as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationFemalePartner() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationFemalePartner())
+// CNLabelContactRelationFemalePartner returns the string constant CNLabelContactRelationFemalePartner, for use as a dictionary key or argument.
+func CNLabelContactRelationFemalePartner() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationFemalePartner")))
 }
 
-// CNLabelContactRelationGirlfriendOrBoyfriend returns the string constant CNLabelContactRelationGirlfriendOrBoyfriend as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGirlfriendOrBoyfriend() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGirlfriendOrBoyfriend())
+// CNLabelContactRelationGirlfriendOrBoyfriend returns the string constant CNLabelContactRelationGirlfriendOrBoyfriend, for use as a dictionary key or argument.
+func CNLabelContactRelationGirlfriendOrBoyfriend() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGirlfriendOrBoyfriend")))
 }
 
-// CNLabelContactRelationGirlfriend returns the string constant CNLabelContactRelationGirlfriend as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGirlfriend() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGirlfriend())
+// CNLabelContactRelationGirlfriend returns the string constant CNLabelContactRelationGirlfriend, for use as a dictionary key or argument.
+func CNLabelContactRelationGirlfriend() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGirlfriend")))
 }
 
-// CNLabelContactRelationBoyfriend returns the string constant CNLabelContactRelationBoyfriend as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationBoyfriend() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationBoyfriend())
+// CNLabelContactRelationBoyfriend returns the string constant CNLabelContactRelationBoyfriend, for use as a dictionary key or argument.
+func CNLabelContactRelationBoyfriend() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationBoyfriend")))
 }
 
-// CNLabelContactRelationParent returns the string constant CNLabelContactRelationParent as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationParent() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationParent())
+// CNLabelContactRelationParent returns the string constant CNLabelContactRelationParent, for use as a dictionary key or argument.
+func CNLabelContactRelationParent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationParent")))
 }
 
-// CNLabelContactRelationMother returns the string constant CNLabelContactRelationMother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationMother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationMother())
+// CNLabelContactRelationMother returns the string constant CNLabelContactRelationMother, for use as a dictionary key or argument.
+func CNLabelContactRelationMother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationMother")))
 }
 
-// CNLabelContactRelationFather returns the string constant CNLabelContactRelationFather as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationFather() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationFather())
+// CNLabelContactRelationFather returns the string constant CNLabelContactRelationFather, for use as a dictionary key or argument.
+func CNLabelContactRelationFather() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationFather")))
 }
 
-// CNLabelContactRelationChild returns the string constant CNLabelContactRelationChild as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationChild() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationChild())
+// CNLabelContactRelationChild returns the string constant CNLabelContactRelationChild, for use as a dictionary key or argument.
+func CNLabelContactRelationChild() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationChild")))
 }
 
-// CNLabelContactRelationDaughter returns the string constant CNLabelContactRelationDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationDaughter())
+// CNLabelContactRelationDaughter returns the string constant CNLabelContactRelationDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationDaughter")))
 }
 
-// CNLabelContactRelationSon returns the string constant CNLabelContactRelationSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationSon())
+// CNLabelContactRelationSon returns the string constant CNLabelContactRelationSon, for use as a dictionary key or argument.
+func CNLabelContactRelationSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationSon")))
 }
 
-// CNLabelContactRelationGrandparent returns the string constant CNLabelContactRelationGrandparent as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandparent() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandparent())
+// CNLabelContactRelationGrandparent returns the string constant CNLabelContactRelationGrandparent, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandparent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandparent")))
 }
 
-// CNLabelContactRelationGrandmother returns the string constant CNLabelContactRelationGrandmother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandmother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandmother())
+// CNLabelContactRelationGrandmother returns the string constant CNLabelContactRelationGrandmother, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandmother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandmother")))
 }
 
-// CNLabelContactRelationGrandmotherMothersMother returns the string constant CNLabelContactRelationGrandmotherMothersMother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandmotherMothersMother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandmotherMothersMother())
+// CNLabelContactRelationGrandmotherMothersMother returns the string constant CNLabelContactRelationGrandmotherMothersMother, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandmotherMothersMother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandmotherMothersMother")))
 }
 
-// CNLabelContactRelationGrandmotherFathersMother returns the string constant CNLabelContactRelationGrandmotherFathersMother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandmotherFathersMother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandmotherFathersMother())
+// CNLabelContactRelationGrandmotherFathersMother returns the string constant CNLabelContactRelationGrandmotherFathersMother, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandmotherFathersMother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandmotherFathersMother")))
 }
 
-// CNLabelContactRelationGrandfather returns the string constant CNLabelContactRelationGrandfather as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandfather() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandfather())
+// CNLabelContactRelationGrandfather returns the string constant CNLabelContactRelationGrandfather, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandfather() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandfather")))
 }
 
-// CNLabelContactRelationGrandfatherMothersFather returns the string constant CNLabelContactRelationGrandfatherMothersFather as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandfatherMothersFather() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandfatherMothersFather())
+// CNLabelContactRelationGrandfatherMothersFather returns the string constant CNLabelContactRelationGrandfatherMothersFather, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandfatherMothersFather() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandfatherMothersFather")))
 }
 
-// CNLabelContactRelationGrandfatherFathersFather returns the string constant CNLabelContactRelationGrandfatherFathersFather as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandfatherFathersFather() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandfatherFathersFather())
+// CNLabelContactRelationGrandfatherFathersFather returns the string constant CNLabelContactRelationGrandfatherFathersFather, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandfatherFathersFather() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandfatherFathersFather")))
 }
 
-// CNLabelContactRelationGreatGrandparent returns the string constant CNLabelContactRelationGreatGrandparent as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGreatGrandparent() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGreatGrandparent())
+// CNLabelContactRelationGreatGrandparent returns the string constant CNLabelContactRelationGreatGrandparent, for use as a dictionary key or argument.
+func CNLabelContactRelationGreatGrandparent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGreatGrandparent")))
 }
 
-// CNLabelContactRelationGreatGrandmother returns the string constant CNLabelContactRelationGreatGrandmother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGreatGrandmother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGreatGrandmother())
+// CNLabelContactRelationGreatGrandmother returns the string constant CNLabelContactRelationGreatGrandmother, for use as a dictionary key or argument.
+func CNLabelContactRelationGreatGrandmother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGreatGrandmother")))
 }
 
-// CNLabelContactRelationGreatGrandfather returns the string constant CNLabelContactRelationGreatGrandfather as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGreatGrandfather() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGreatGrandfather())
+// CNLabelContactRelationGreatGrandfather returns the string constant CNLabelContactRelationGreatGrandfather, for use as a dictionary key or argument.
+func CNLabelContactRelationGreatGrandfather() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGreatGrandfather")))
 }
 
-// CNLabelContactRelationGrandchild returns the string constant CNLabelContactRelationGrandchild as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandchild() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandchild())
+// CNLabelContactRelationGrandchild returns the string constant CNLabelContactRelationGrandchild, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandchild() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandchild")))
 }
 
-// CNLabelContactRelationGranddaughter returns the string constant CNLabelContactRelationGranddaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGranddaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGranddaughter())
+// CNLabelContactRelationGranddaughter returns the string constant CNLabelContactRelationGranddaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationGranddaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGranddaughter")))
 }
 
-// CNLabelContactRelationGranddaughterDaughtersDaughter returns the string constant CNLabelContactRelationGranddaughterDaughtersDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGranddaughterDaughtersDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGranddaughterDaughtersDaughter())
+// CNLabelContactRelationGranddaughterDaughtersDaughter returns the string constant CNLabelContactRelationGranddaughterDaughtersDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationGranddaughterDaughtersDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGranddaughterDaughtersDaughter")))
 }
 
-// CNLabelContactRelationGranddaughterSonsDaughter returns the string constant CNLabelContactRelationGranddaughterSonsDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGranddaughterSonsDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGranddaughterSonsDaughter())
+// CNLabelContactRelationGranddaughterSonsDaughter returns the string constant CNLabelContactRelationGranddaughterSonsDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationGranddaughterSonsDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGranddaughterSonsDaughter")))
 }
 
-// CNLabelContactRelationGrandson returns the string constant CNLabelContactRelationGrandson as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandson() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandson())
+// CNLabelContactRelationGrandson returns the string constant CNLabelContactRelationGrandson, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandson() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandson")))
 }
 
-// CNLabelContactRelationGrandsonDaughtersSon returns the string constant CNLabelContactRelationGrandsonDaughtersSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandsonDaughtersSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandsonDaughtersSon())
+// CNLabelContactRelationGrandsonDaughtersSon returns the string constant CNLabelContactRelationGrandsonDaughtersSon, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandsonDaughtersSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandsonDaughtersSon")))
 }
 
-// CNLabelContactRelationGrandsonSonsSon returns the string constant CNLabelContactRelationGrandsonSonsSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandsonSonsSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandsonSonsSon())
+// CNLabelContactRelationGrandsonSonsSon returns the string constant CNLabelContactRelationGrandsonSonsSon, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandsonSonsSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandsonSonsSon")))
 }
 
-// CNLabelContactRelationGreatGrandchild returns the string constant CNLabelContactRelationGreatGrandchild as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGreatGrandchild() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGreatGrandchild())
+// CNLabelContactRelationGreatGrandchild returns the string constant CNLabelContactRelationGreatGrandchild, for use as a dictionary key or argument.
+func CNLabelContactRelationGreatGrandchild() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGreatGrandchild")))
 }
 
-// CNLabelContactRelationGreatGranddaughter returns the string constant CNLabelContactRelationGreatGranddaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGreatGranddaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGreatGranddaughter())
+// CNLabelContactRelationGreatGranddaughter returns the string constant CNLabelContactRelationGreatGranddaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationGreatGranddaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGreatGranddaughter")))
 }
 
-// CNLabelContactRelationGreatGrandson returns the string constant CNLabelContactRelationGreatGrandson as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGreatGrandson() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGreatGrandson())
+// CNLabelContactRelationGreatGrandson returns the string constant CNLabelContactRelationGreatGrandson, for use as a dictionary key or argument.
+func CNLabelContactRelationGreatGrandson() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGreatGrandson")))
 }
 
-// CNLabelContactRelationParentInLaw returns the string constant CNLabelContactRelationParentInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationParentInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationParentInLaw())
+// CNLabelContactRelationParentInLaw returns the string constant CNLabelContactRelationParentInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationParentInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationParentInLaw")))
 }
 
-// CNLabelContactRelationMotherInLaw returns the string constant CNLabelContactRelationMotherInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationMotherInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationMotherInLaw())
+// CNLabelContactRelationMotherInLaw returns the string constant CNLabelContactRelationMotherInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationMotherInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationMotherInLaw")))
 }
 
-// CNLabelContactRelationMotherInLawWifesMother returns the string constant CNLabelContactRelationMotherInLawWifesMother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationMotherInLawWifesMother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationMotherInLawWifesMother())
+// CNLabelContactRelationMotherInLawWifesMother returns the string constant CNLabelContactRelationMotherInLawWifesMother, for use as a dictionary key or argument.
+func CNLabelContactRelationMotherInLawWifesMother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationMotherInLawWifesMother")))
 }
 
-// CNLabelContactRelationMotherInLawHusbandsMother returns the string constant CNLabelContactRelationMotherInLawHusbandsMother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationMotherInLawHusbandsMother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationMotherInLawHusbandsMother())
+// CNLabelContactRelationMotherInLawHusbandsMother returns the string constant CNLabelContactRelationMotherInLawHusbandsMother, for use as a dictionary key or argument.
+func CNLabelContactRelationMotherInLawHusbandsMother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationMotherInLawHusbandsMother")))
 }
 
-// CNLabelContactRelationFatherInLaw returns the string constant CNLabelContactRelationFatherInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationFatherInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationFatherInLaw())
+// CNLabelContactRelationFatherInLaw returns the string constant CNLabelContactRelationFatherInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationFatherInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationFatherInLaw")))
 }
 
-// CNLabelContactRelationFatherInLawWifesFather returns the string constant CNLabelContactRelationFatherInLawWifesFather as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationFatherInLawWifesFather() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationFatherInLawWifesFather())
+// CNLabelContactRelationFatherInLawWifesFather returns the string constant CNLabelContactRelationFatherInLawWifesFather, for use as a dictionary key or argument.
+func CNLabelContactRelationFatherInLawWifesFather() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationFatherInLawWifesFather")))
 }
 
-// CNLabelContactRelationFatherInLawHusbandsFather returns the string constant CNLabelContactRelationFatherInLawHusbandsFather as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationFatherInLawHusbandsFather() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationFatherInLawHusbandsFather())
+// CNLabelContactRelationFatherInLawHusbandsFather returns the string constant CNLabelContactRelationFatherInLawHusbandsFather, for use as a dictionary key or argument.
+func CNLabelContactRelationFatherInLawHusbandsFather() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationFatherInLawHusbandsFather")))
 }
 
-// CNLabelContactRelationCoParentInLaw returns the string constant CNLabelContactRelationCoParentInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCoParentInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCoParentInLaw())
+// CNLabelContactRelationCoParentInLaw returns the string constant CNLabelContactRelationCoParentInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationCoParentInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCoParentInLaw")))
 }
 
-// CNLabelContactRelationCoMotherInLaw returns the string constant CNLabelContactRelationCoMotherInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCoMotherInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCoMotherInLaw())
+// CNLabelContactRelationCoMotherInLaw returns the string constant CNLabelContactRelationCoMotherInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationCoMotherInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCoMotherInLaw")))
 }
 
-// CNLabelContactRelationCoFatherInLaw returns the string constant CNLabelContactRelationCoFatherInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCoFatherInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCoFatherInLaw())
+// CNLabelContactRelationCoFatherInLaw returns the string constant CNLabelContactRelationCoFatherInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationCoFatherInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCoFatherInLaw")))
 }
 
-// CNLabelContactRelationSiblingInLaw returns the string constant CNLabelContactRelationSiblingInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationSiblingInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationSiblingInLaw())
+// CNLabelContactRelationSiblingInLaw returns the string constant CNLabelContactRelationSiblingInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationSiblingInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationSiblingInLaw")))
 }
 
-// CNLabelContactRelationYoungerSiblingInLaw returns the string constant CNLabelContactRelationYoungerSiblingInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerSiblingInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerSiblingInLaw())
+// CNLabelContactRelationYoungerSiblingInLaw returns the string constant CNLabelContactRelationYoungerSiblingInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerSiblingInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerSiblingInLaw")))
 }
 
-// CNLabelContactRelationElderSiblingInLaw returns the string constant CNLabelContactRelationElderSiblingInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderSiblingInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderSiblingInLaw())
+// CNLabelContactRelationElderSiblingInLaw returns the string constant CNLabelContactRelationElderSiblingInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationElderSiblingInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderSiblingInLaw")))
 }
 
-// CNLabelContactRelationSisterInLaw returns the string constant CNLabelContactRelationSisterInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationSisterInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationSisterInLaw())
+// CNLabelContactRelationSisterInLaw returns the string constant CNLabelContactRelationSisterInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationSisterInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationSisterInLaw")))
 }
 
-// CNLabelContactRelationYoungerSisterInLaw returns the string constant CNLabelContactRelationYoungerSisterInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerSisterInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerSisterInLaw())
+// CNLabelContactRelationYoungerSisterInLaw returns the string constant CNLabelContactRelationYoungerSisterInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerSisterInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerSisterInLaw")))
 }
 
-// CNLabelContactRelationElderSisterInLaw returns the string constant CNLabelContactRelationElderSisterInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderSisterInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderSisterInLaw())
+// CNLabelContactRelationElderSisterInLaw returns the string constant CNLabelContactRelationElderSisterInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationElderSisterInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderSisterInLaw")))
 }
 
-// CNLabelContactRelationSisterInLawSpousesSister returns the string constant CNLabelContactRelationSisterInLawSpousesSister as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationSisterInLawSpousesSister() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationSisterInLawSpousesSister())
+// CNLabelContactRelationSisterInLawSpousesSister returns the string constant CNLabelContactRelationSisterInLawSpousesSister, for use as a dictionary key or argument.
+func CNLabelContactRelationSisterInLawSpousesSister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationSisterInLawSpousesSister")))
 }
 
-// CNLabelContactRelationSisterInLawWifesSister returns the string constant CNLabelContactRelationSisterInLawWifesSister as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationSisterInLawWifesSister() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationSisterInLawWifesSister())
+// CNLabelContactRelationSisterInLawWifesSister returns the string constant CNLabelContactRelationSisterInLawWifesSister, for use as a dictionary key or argument.
+func CNLabelContactRelationSisterInLawWifesSister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationSisterInLawWifesSister")))
 }
 
-// CNLabelContactRelationSisterInLawHusbandsSister returns the string constant CNLabelContactRelationSisterInLawHusbandsSister as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationSisterInLawHusbandsSister() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationSisterInLawHusbandsSister())
+// CNLabelContactRelationSisterInLawHusbandsSister returns the string constant CNLabelContactRelationSisterInLawHusbandsSister, for use as a dictionary key or argument.
+func CNLabelContactRelationSisterInLawHusbandsSister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationSisterInLawHusbandsSister")))
 }
 
-// CNLabelContactRelationSisterInLawBrothersWife returns the string constant CNLabelContactRelationSisterInLawBrothersWife as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationSisterInLawBrothersWife() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationSisterInLawBrothersWife())
+// CNLabelContactRelationSisterInLawBrothersWife returns the string constant CNLabelContactRelationSisterInLawBrothersWife, for use as a dictionary key or argument.
+func CNLabelContactRelationSisterInLawBrothersWife() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationSisterInLawBrothersWife")))
 }
 
-// CNLabelContactRelationSisterInLawYoungerBrothersWife returns the string constant CNLabelContactRelationSisterInLawYoungerBrothersWife as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationSisterInLawYoungerBrothersWife() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationSisterInLawYoungerBrothersWife())
+// CNLabelContactRelationSisterInLawYoungerBrothersWife returns the string constant CNLabelContactRelationSisterInLawYoungerBrothersWife, for use as a dictionary key or argument.
+func CNLabelContactRelationSisterInLawYoungerBrothersWife() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationSisterInLawYoungerBrothersWife")))
 }
 
-// CNLabelContactRelationSisterInLawElderBrothersWife returns the string constant CNLabelContactRelationSisterInLawElderBrothersWife as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationSisterInLawElderBrothersWife() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationSisterInLawElderBrothersWife())
+// CNLabelContactRelationSisterInLawElderBrothersWife returns the string constant CNLabelContactRelationSisterInLawElderBrothersWife, for use as a dictionary key or argument.
+func CNLabelContactRelationSisterInLawElderBrothersWife() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationSisterInLawElderBrothersWife")))
 }
 
-// CNLabelContactRelationBrotherInLaw returns the string constant CNLabelContactRelationBrotherInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationBrotherInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationBrotherInLaw())
+// CNLabelContactRelationBrotherInLaw returns the string constant CNLabelContactRelationBrotherInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationBrotherInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationBrotherInLaw")))
 }
 
-// CNLabelContactRelationYoungerBrotherInLaw returns the string constant CNLabelContactRelationYoungerBrotherInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerBrotherInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerBrotherInLaw())
+// CNLabelContactRelationYoungerBrotherInLaw returns the string constant CNLabelContactRelationYoungerBrotherInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerBrotherInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerBrotherInLaw")))
 }
 
-// CNLabelContactRelationElderBrotherInLaw returns the string constant CNLabelContactRelationElderBrotherInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderBrotherInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderBrotherInLaw())
+// CNLabelContactRelationElderBrotherInLaw returns the string constant CNLabelContactRelationElderBrotherInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationElderBrotherInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderBrotherInLaw")))
 }
 
-// CNLabelContactRelationBrotherInLawSpousesBrother returns the string constant CNLabelContactRelationBrotherInLawSpousesBrother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationBrotherInLawSpousesBrother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationBrotherInLawSpousesBrother())
+// CNLabelContactRelationBrotherInLawSpousesBrother returns the string constant CNLabelContactRelationBrotherInLawSpousesBrother, for use as a dictionary key or argument.
+func CNLabelContactRelationBrotherInLawSpousesBrother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationBrotherInLawSpousesBrother")))
 }
 
-// CNLabelContactRelationBrotherInLawHusbandsBrother returns the string constant CNLabelContactRelationBrotherInLawHusbandsBrother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationBrotherInLawHusbandsBrother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationBrotherInLawHusbandsBrother())
+// CNLabelContactRelationBrotherInLawHusbandsBrother returns the string constant CNLabelContactRelationBrotherInLawHusbandsBrother, for use as a dictionary key or argument.
+func CNLabelContactRelationBrotherInLawHusbandsBrother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationBrotherInLawHusbandsBrother")))
 }
 
-// CNLabelContactRelationBrotherInLawWifesBrother returns the string constant CNLabelContactRelationBrotherInLawWifesBrother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationBrotherInLawWifesBrother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationBrotherInLawWifesBrother())
+// CNLabelContactRelationBrotherInLawWifesBrother returns the string constant CNLabelContactRelationBrotherInLawWifesBrother, for use as a dictionary key or argument.
+func CNLabelContactRelationBrotherInLawWifesBrother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationBrotherInLawWifesBrother")))
 }
 
-// CNLabelContactRelationBrotherInLawSistersHusband returns the string constant CNLabelContactRelationBrotherInLawSistersHusband as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationBrotherInLawSistersHusband() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationBrotherInLawSistersHusband())
+// CNLabelContactRelationBrotherInLawSistersHusband returns the string constant CNLabelContactRelationBrotherInLawSistersHusband, for use as a dictionary key or argument.
+func CNLabelContactRelationBrotherInLawSistersHusband() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationBrotherInLawSistersHusband")))
 }
 
-// CNLabelContactRelationBrotherInLawYoungerSistersHusband returns the string constant CNLabelContactRelationBrotherInLawYoungerSistersHusband as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationBrotherInLawYoungerSistersHusband() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationBrotherInLawYoungerSistersHusband())
+// CNLabelContactRelationBrotherInLawYoungerSistersHusband returns the string constant CNLabelContactRelationBrotherInLawYoungerSistersHusband, for use as a dictionary key or argument.
+func CNLabelContactRelationBrotherInLawYoungerSistersHusband() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationBrotherInLawYoungerSistersHusband")))
 }
 
-// CNLabelContactRelationBrotherInLawElderSistersHusband returns the string constant CNLabelContactRelationBrotherInLawElderSistersHusband as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationBrotherInLawElderSistersHusband() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationBrotherInLawElderSistersHusband())
+// CNLabelContactRelationBrotherInLawElderSistersHusband returns the string constant CNLabelContactRelationBrotherInLawElderSistersHusband, for use as a dictionary key or argument.
+func CNLabelContactRelationBrotherInLawElderSistersHusband() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationBrotherInLawElderSistersHusband")))
 }
 
-// CNLabelContactRelationSisterInLawWifesBrothersWife returns the string constant CNLabelContactRelationSisterInLawWifesBrothersWife as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationSisterInLawWifesBrothersWife() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationSisterInLawWifesBrothersWife())
+// CNLabelContactRelationSisterInLawWifesBrothersWife returns the string constant CNLabelContactRelationSisterInLawWifesBrothersWife, for use as a dictionary key or argument.
+func CNLabelContactRelationSisterInLawWifesBrothersWife() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationSisterInLawWifesBrothersWife")))
 }
 
-// CNLabelContactRelationSisterInLawHusbandsBrothersWife returns the string constant CNLabelContactRelationSisterInLawHusbandsBrothersWife as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationSisterInLawHusbandsBrothersWife() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationSisterInLawHusbandsBrothersWife())
+// CNLabelContactRelationSisterInLawHusbandsBrothersWife returns the string constant CNLabelContactRelationSisterInLawHusbandsBrothersWife, for use as a dictionary key or argument.
+func CNLabelContactRelationSisterInLawHusbandsBrothersWife() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationSisterInLawHusbandsBrothersWife")))
 }
 
-// CNLabelContactRelationBrotherInLawWifesSistersHusband returns the string constant CNLabelContactRelationBrotherInLawWifesSistersHusband as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationBrotherInLawWifesSistersHusband() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationBrotherInLawWifesSistersHusband())
+// CNLabelContactRelationBrotherInLawWifesSistersHusband returns the string constant CNLabelContactRelationBrotherInLawWifesSistersHusband, for use as a dictionary key or argument.
+func CNLabelContactRelationBrotherInLawWifesSistersHusband() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationBrotherInLawWifesSistersHusband")))
 }
 
-// CNLabelContactRelationBrotherInLawHusbandsSistersHusband returns the string constant CNLabelContactRelationBrotherInLawHusbandsSistersHusband as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationBrotherInLawHusbandsSistersHusband() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationBrotherInLawHusbandsSistersHusband())
+// CNLabelContactRelationBrotherInLawHusbandsSistersHusband returns the string constant CNLabelContactRelationBrotherInLawHusbandsSistersHusband, for use as a dictionary key or argument.
+func CNLabelContactRelationBrotherInLawHusbandsSistersHusband() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationBrotherInLawHusbandsSistersHusband")))
 }
 
-// CNLabelContactRelationCoSiblingInLaw returns the string constant CNLabelContactRelationCoSiblingInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCoSiblingInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCoSiblingInLaw())
+// CNLabelContactRelationCoSiblingInLaw returns the string constant CNLabelContactRelationCoSiblingInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationCoSiblingInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCoSiblingInLaw")))
 }
 
-// CNLabelContactRelationCoSisterInLaw returns the string constant CNLabelContactRelationCoSisterInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCoSisterInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCoSisterInLaw())
+// CNLabelContactRelationCoSisterInLaw returns the string constant CNLabelContactRelationCoSisterInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationCoSisterInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCoSisterInLaw")))
 }
 
-// CNLabelContactRelationCoBrotherInLaw returns the string constant CNLabelContactRelationCoBrotherInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCoBrotherInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCoBrotherInLaw())
+// CNLabelContactRelationCoBrotherInLaw returns the string constant CNLabelContactRelationCoBrotherInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationCoBrotherInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCoBrotherInLaw")))
 }
 
-// CNLabelContactRelationChildInLaw returns the string constant CNLabelContactRelationChildInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationChildInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationChildInLaw())
+// CNLabelContactRelationChildInLaw returns the string constant CNLabelContactRelationChildInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationChildInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationChildInLaw")))
 }
 
-// CNLabelContactRelationDaughterInLaw returns the string constant CNLabelContactRelationDaughterInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationDaughterInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationDaughterInLaw())
+// CNLabelContactRelationDaughterInLaw returns the string constant CNLabelContactRelationDaughterInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationDaughterInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationDaughterInLaw")))
 }
 
-// CNLabelContactRelationSonInLaw returns the string constant CNLabelContactRelationSonInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationSonInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationSonInLaw())
+// CNLabelContactRelationSonInLaw returns the string constant CNLabelContactRelationSonInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationSonInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationSonInLaw")))
 }
 
-// CNLabelContactRelationCousin returns the string constant CNLabelContactRelationCousin as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCousin() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCousin())
+// CNLabelContactRelationCousin returns the string constant CNLabelContactRelationCousin, for use as a dictionary key or argument.
+func CNLabelContactRelationCousin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCousin")))
 }
 
-// CNLabelContactRelationYoungerCousin returns the string constant CNLabelContactRelationYoungerCousin as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerCousin() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerCousin())
+// CNLabelContactRelationYoungerCousin returns the string constant CNLabelContactRelationYoungerCousin, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerCousin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerCousin")))
 }
 
-// CNLabelContactRelationElderCousin returns the string constant CNLabelContactRelationElderCousin as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderCousin() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderCousin())
+// CNLabelContactRelationElderCousin returns the string constant CNLabelContactRelationElderCousin, for use as a dictionary key or argument.
+func CNLabelContactRelationElderCousin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderCousin")))
 }
 
-// CNLabelContactRelationMaleCousin returns the string constant CNLabelContactRelationMaleCousin as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationMaleCousin() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationMaleCousin())
+// CNLabelContactRelationMaleCousin returns the string constant CNLabelContactRelationMaleCousin, for use as a dictionary key or argument.
+func CNLabelContactRelationMaleCousin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationMaleCousin")))
 }
 
-// CNLabelContactRelationFemaleCousin returns the string constant CNLabelContactRelationFemaleCousin as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationFemaleCousin() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationFemaleCousin())
+// CNLabelContactRelationFemaleCousin returns the string constant CNLabelContactRelationFemaleCousin, for use as a dictionary key or argument.
+func CNLabelContactRelationFemaleCousin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationFemaleCousin")))
 }
 
-// CNLabelContactRelationCousinParentsSiblingsChild returns the string constant CNLabelContactRelationCousinParentsSiblingsChild as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCousinParentsSiblingsChild() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCousinParentsSiblingsChild())
+// CNLabelContactRelationCousinParentsSiblingsChild returns the string constant CNLabelContactRelationCousinParentsSiblingsChild, for use as a dictionary key or argument.
+func CNLabelContactRelationCousinParentsSiblingsChild() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCousinParentsSiblingsChild")))
 }
 
-// CNLabelContactRelationCousinParentsSiblingsSon returns the string constant CNLabelContactRelationCousinParentsSiblingsSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCousinParentsSiblingsSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCousinParentsSiblingsSon())
+// CNLabelContactRelationCousinParentsSiblingsSon returns the string constant CNLabelContactRelationCousinParentsSiblingsSon, for use as a dictionary key or argument.
+func CNLabelContactRelationCousinParentsSiblingsSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCousinParentsSiblingsSon")))
 }
 
-// CNLabelContactRelationYoungerCousinParentsSiblingsSon returns the string constant CNLabelContactRelationYoungerCousinParentsSiblingsSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerCousinParentsSiblingsSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerCousinParentsSiblingsSon())
+// CNLabelContactRelationYoungerCousinParentsSiblingsSon returns the string constant CNLabelContactRelationYoungerCousinParentsSiblingsSon, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerCousinParentsSiblingsSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerCousinParentsSiblingsSon")))
 }
 
-// CNLabelContactRelationElderCousinParentsSiblingsSon returns the string constant CNLabelContactRelationElderCousinParentsSiblingsSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderCousinParentsSiblingsSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderCousinParentsSiblingsSon())
+// CNLabelContactRelationElderCousinParentsSiblingsSon returns the string constant CNLabelContactRelationElderCousinParentsSiblingsSon, for use as a dictionary key or argument.
+func CNLabelContactRelationElderCousinParentsSiblingsSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderCousinParentsSiblingsSon")))
 }
 
-// CNLabelContactRelationCousinParentsSiblingsDaughter returns the string constant CNLabelContactRelationCousinParentsSiblingsDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCousinParentsSiblingsDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCousinParentsSiblingsDaughter())
+// CNLabelContactRelationCousinParentsSiblingsDaughter returns the string constant CNLabelContactRelationCousinParentsSiblingsDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationCousinParentsSiblingsDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCousinParentsSiblingsDaughter")))
 }
 
-// CNLabelContactRelationYoungerCousinParentsSiblingsDaughter returns the string constant CNLabelContactRelationYoungerCousinParentsSiblingsDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerCousinParentsSiblingsDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerCousinParentsSiblingsDaughter())
+// CNLabelContactRelationYoungerCousinParentsSiblingsDaughter returns the string constant CNLabelContactRelationYoungerCousinParentsSiblingsDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerCousinParentsSiblingsDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerCousinParentsSiblingsDaughter")))
 }
 
-// CNLabelContactRelationElderCousinParentsSiblingsDaughter returns the string constant CNLabelContactRelationElderCousinParentsSiblingsDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderCousinParentsSiblingsDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderCousinParentsSiblingsDaughter())
+// CNLabelContactRelationElderCousinParentsSiblingsDaughter returns the string constant CNLabelContactRelationElderCousinParentsSiblingsDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationElderCousinParentsSiblingsDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderCousinParentsSiblingsDaughter")))
 }
 
-// CNLabelContactRelationCousinMothersSistersDaughter returns the string constant CNLabelContactRelationCousinMothersSistersDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCousinMothersSistersDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCousinMothersSistersDaughter())
+// CNLabelContactRelationCousinMothersSistersDaughter returns the string constant CNLabelContactRelationCousinMothersSistersDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationCousinMothersSistersDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCousinMothersSistersDaughter")))
 }
 
-// CNLabelContactRelationYoungerCousinMothersSistersDaughter returns the string constant CNLabelContactRelationYoungerCousinMothersSistersDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerCousinMothersSistersDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerCousinMothersSistersDaughter())
+// CNLabelContactRelationYoungerCousinMothersSistersDaughter returns the string constant CNLabelContactRelationYoungerCousinMothersSistersDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerCousinMothersSistersDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerCousinMothersSistersDaughter")))
 }
 
-// CNLabelContactRelationElderCousinMothersSistersDaughter returns the string constant CNLabelContactRelationElderCousinMothersSistersDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderCousinMothersSistersDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderCousinMothersSistersDaughter())
+// CNLabelContactRelationElderCousinMothersSistersDaughter returns the string constant CNLabelContactRelationElderCousinMothersSistersDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationElderCousinMothersSistersDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderCousinMothersSistersDaughter")))
 }
 
-// CNLabelContactRelationCousinMothersSistersSon returns the string constant CNLabelContactRelationCousinMothersSistersSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCousinMothersSistersSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCousinMothersSistersSon())
+// CNLabelContactRelationCousinMothersSistersSon returns the string constant CNLabelContactRelationCousinMothersSistersSon, for use as a dictionary key or argument.
+func CNLabelContactRelationCousinMothersSistersSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCousinMothersSistersSon")))
 }
 
-// CNLabelContactRelationYoungerCousinMothersSistersSon returns the string constant CNLabelContactRelationYoungerCousinMothersSistersSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerCousinMothersSistersSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerCousinMothersSistersSon())
+// CNLabelContactRelationYoungerCousinMothersSistersSon returns the string constant CNLabelContactRelationYoungerCousinMothersSistersSon, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerCousinMothersSistersSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerCousinMothersSistersSon")))
 }
 
-// CNLabelContactRelationElderCousinMothersSistersSon returns the string constant CNLabelContactRelationElderCousinMothersSistersSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderCousinMothersSistersSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderCousinMothersSistersSon())
+// CNLabelContactRelationElderCousinMothersSistersSon returns the string constant CNLabelContactRelationElderCousinMothersSistersSon, for use as a dictionary key or argument.
+func CNLabelContactRelationElderCousinMothersSistersSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderCousinMothersSistersSon")))
 }
 
-// CNLabelContactRelationCousinMothersBrothersDaughter returns the string constant CNLabelContactRelationCousinMothersBrothersDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCousinMothersBrothersDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCousinMothersBrothersDaughter())
+// CNLabelContactRelationCousinMothersBrothersDaughter returns the string constant CNLabelContactRelationCousinMothersBrothersDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationCousinMothersBrothersDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCousinMothersBrothersDaughter")))
 }
 
-// CNLabelContactRelationYoungerCousinMothersBrothersDaughter returns the string constant CNLabelContactRelationYoungerCousinMothersBrothersDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerCousinMothersBrothersDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerCousinMothersBrothersDaughter())
+// CNLabelContactRelationYoungerCousinMothersBrothersDaughter returns the string constant CNLabelContactRelationYoungerCousinMothersBrothersDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerCousinMothersBrothersDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerCousinMothersBrothersDaughter")))
 }
 
-// CNLabelContactRelationElderCousinMothersBrothersDaughter returns the string constant CNLabelContactRelationElderCousinMothersBrothersDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderCousinMothersBrothersDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderCousinMothersBrothersDaughter())
+// CNLabelContactRelationElderCousinMothersBrothersDaughter returns the string constant CNLabelContactRelationElderCousinMothersBrothersDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationElderCousinMothersBrothersDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderCousinMothersBrothersDaughter")))
 }
 
-// CNLabelContactRelationCousinMothersBrothersSon returns the string constant CNLabelContactRelationCousinMothersBrothersSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCousinMothersBrothersSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCousinMothersBrothersSon())
+// CNLabelContactRelationCousinMothersBrothersSon returns the string constant CNLabelContactRelationCousinMothersBrothersSon, for use as a dictionary key or argument.
+func CNLabelContactRelationCousinMothersBrothersSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCousinMothersBrothersSon")))
 }
 
-// CNLabelContactRelationYoungerCousinMothersBrothersSon returns the string constant CNLabelContactRelationYoungerCousinMothersBrothersSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerCousinMothersBrothersSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerCousinMothersBrothersSon())
+// CNLabelContactRelationYoungerCousinMothersBrothersSon returns the string constant CNLabelContactRelationYoungerCousinMothersBrothersSon, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerCousinMothersBrothersSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerCousinMothersBrothersSon")))
 }
 
-// CNLabelContactRelationElderCousinMothersBrothersSon returns the string constant CNLabelContactRelationElderCousinMothersBrothersSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderCousinMothersBrothersSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderCousinMothersBrothersSon())
+// CNLabelContactRelationElderCousinMothersBrothersSon returns the string constant CNLabelContactRelationElderCousinMothersBrothersSon, for use as a dictionary key or argument.
+func CNLabelContactRelationElderCousinMothersBrothersSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderCousinMothersBrothersSon")))
 }
 
-// CNLabelContactRelationCousinFathersSistersDaughter returns the string constant CNLabelContactRelationCousinFathersSistersDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCousinFathersSistersDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCousinFathersSistersDaughter())
+// CNLabelContactRelationCousinFathersSistersDaughter returns the string constant CNLabelContactRelationCousinFathersSistersDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationCousinFathersSistersDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCousinFathersSistersDaughter")))
 }
 
-// CNLabelContactRelationYoungerCousinFathersSistersDaughter returns the string constant CNLabelContactRelationYoungerCousinFathersSistersDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerCousinFathersSistersDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerCousinFathersSistersDaughter())
+// CNLabelContactRelationYoungerCousinFathersSistersDaughter returns the string constant CNLabelContactRelationYoungerCousinFathersSistersDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerCousinFathersSistersDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerCousinFathersSistersDaughter")))
 }
 
-// CNLabelContactRelationElderCousinFathersSistersDaughter returns the string constant CNLabelContactRelationElderCousinFathersSistersDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderCousinFathersSistersDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderCousinFathersSistersDaughter())
+// CNLabelContactRelationElderCousinFathersSistersDaughter returns the string constant CNLabelContactRelationElderCousinFathersSistersDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationElderCousinFathersSistersDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderCousinFathersSistersDaughter")))
 }
 
-// CNLabelContactRelationCousinFathersSistersSon returns the string constant CNLabelContactRelationCousinFathersSistersSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCousinFathersSistersSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCousinFathersSistersSon())
+// CNLabelContactRelationCousinFathersSistersSon returns the string constant CNLabelContactRelationCousinFathersSistersSon, for use as a dictionary key or argument.
+func CNLabelContactRelationCousinFathersSistersSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCousinFathersSistersSon")))
 }
 
-// CNLabelContactRelationYoungerCousinFathersSistersSon returns the string constant CNLabelContactRelationYoungerCousinFathersSistersSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerCousinFathersSistersSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerCousinFathersSistersSon())
+// CNLabelContactRelationYoungerCousinFathersSistersSon returns the string constant CNLabelContactRelationYoungerCousinFathersSistersSon, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerCousinFathersSistersSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerCousinFathersSistersSon")))
 }
 
-// CNLabelContactRelationElderCousinFathersSistersSon returns the string constant CNLabelContactRelationElderCousinFathersSistersSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderCousinFathersSistersSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderCousinFathersSistersSon())
+// CNLabelContactRelationElderCousinFathersSistersSon returns the string constant CNLabelContactRelationElderCousinFathersSistersSon, for use as a dictionary key or argument.
+func CNLabelContactRelationElderCousinFathersSistersSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderCousinFathersSistersSon")))
 }
 
-// CNLabelContactRelationCousinFathersBrothersDaughter returns the string constant CNLabelContactRelationCousinFathersBrothersDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCousinFathersBrothersDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCousinFathersBrothersDaughter())
+// CNLabelContactRelationCousinFathersBrothersDaughter returns the string constant CNLabelContactRelationCousinFathersBrothersDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationCousinFathersBrothersDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCousinFathersBrothersDaughter")))
 }
 
-// CNLabelContactRelationYoungerCousinFathersBrothersDaughter returns the string constant CNLabelContactRelationYoungerCousinFathersBrothersDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerCousinFathersBrothersDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerCousinFathersBrothersDaughter())
+// CNLabelContactRelationYoungerCousinFathersBrothersDaughter returns the string constant CNLabelContactRelationYoungerCousinFathersBrothersDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerCousinFathersBrothersDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerCousinFathersBrothersDaughter")))
 }
 
-// CNLabelContactRelationElderCousinFathersBrothersDaughter returns the string constant CNLabelContactRelationElderCousinFathersBrothersDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderCousinFathersBrothersDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderCousinFathersBrothersDaughter())
+// CNLabelContactRelationElderCousinFathersBrothersDaughter returns the string constant CNLabelContactRelationElderCousinFathersBrothersDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationElderCousinFathersBrothersDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderCousinFathersBrothersDaughter")))
 }
 
-// CNLabelContactRelationCousinFathersBrothersSon returns the string constant CNLabelContactRelationCousinFathersBrothersSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCousinFathersBrothersSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCousinFathersBrothersSon())
+// CNLabelContactRelationCousinFathersBrothersSon returns the string constant CNLabelContactRelationCousinFathersBrothersSon, for use as a dictionary key or argument.
+func CNLabelContactRelationCousinFathersBrothersSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCousinFathersBrothersSon")))
 }
 
-// CNLabelContactRelationYoungerCousinFathersBrothersSon returns the string constant CNLabelContactRelationYoungerCousinFathersBrothersSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerCousinFathersBrothersSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerCousinFathersBrothersSon())
+// CNLabelContactRelationYoungerCousinFathersBrothersSon returns the string constant CNLabelContactRelationYoungerCousinFathersBrothersSon, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerCousinFathersBrothersSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerCousinFathersBrothersSon")))
 }
 
-// CNLabelContactRelationElderCousinFathersBrothersSon returns the string constant CNLabelContactRelationElderCousinFathersBrothersSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderCousinFathersBrothersSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderCousinFathersBrothersSon())
+// CNLabelContactRelationElderCousinFathersBrothersSon returns the string constant CNLabelContactRelationElderCousinFathersBrothersSon, for use as a dictionary key or argument.
+func CNLabelContactRelationElderCousinFathersBrothersSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderCousinFathersBrothersSon")))
 }
 
-// CNLabelContactRelationCousinGrandparentsSiblingsChild returns the string constant CNLabelContactRelationCousinGrandparentsSiblingsChild as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCousinGrandparentsSiblingsChild() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCousinGrandparentsSiblingsChild())
+// CNLabelContactRelationCousinGrandparentsSiblingsChild returns the string constant CNLabelContactRelationCousinGrandparentsSiblingsChild, for use as a dictionary key or argument.
+func CNLabelContactRelationCousinGrandparentsSiblingsChild() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCousinGrandparentsSiblingsChild")))
 }
 
-// CNLabelContactRelationCousinGrandparentsSiblingsDaughter returns the string constant CNLabelContactRelationCousinGrandparentsSiblingsDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCousinGrandparentsSiblingsDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCousinGrandparentsSiblingsDaughter())
+// CNLabelContactRelationCousinGrandparentsSiblingsDaughter returns the string constant CNLabelContactRelationCousinGrandparentsSiblingsDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationCousinGrandparentsSiblingsDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCousinGrandparentsSiblingsDaughter")))
 }
 
-// CNLabelContactRelationCousinGrandparentsSiblingsSon returns the string constant CNLabelContactRelationCousinGrandparentsSiblingsSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCousinGrandparentsSiblingsSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCousinGrandparentsSiblingsSon())
+// CNLabelContactRelationCousinGrandparentsSiblingsSon returns the string constant CNLabelContactRelationCousinGrandparentsSiblingsSon, for use as a dictionary key or argument.
+func CNLabelContactRelationCousinGrandparentsSiblingsSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCousinGrandparentsSiblingsSon")))
 }
 
-// CNLabelContactRelationYoungerCousinMothersSiblingsSonOrFathersSistersSon returns the string constant CNLabelContactRelationYoungerCousinMothersSiblingsSonOrFathersSistersSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerCousinMothersSiblingsSonOrFathersSistersSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerCousinMothersSiblingsSonOrFathersSistersSon())
+// CNLabelContactRelationYoungerCousinMothersSiblingsSonOrFathersSistersSon returns the string constant CNLabelContactRelationYoungerCousinMothersSiblingsSonOrFathersSistersSon, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerCousinMothersSiblingsSonOrFathersSistersSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerCousinMothersSiblingsSonOrFathersSistersSon")))
 }
 
-// CNLabelContactRelationElderCousinMothersSiblingsSonOrFathersSistersSon returns the string constant CNLabelContactRelationElderCousinMothersSiblingsSonOrFathersSistersSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderCousinMothersSiblingsSonOrFathersSistersSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderCousinMothersSiblingsSonOrFathersSistersSon())
+// CNLabelContactRelationElderCousinMothersSiblingsSonOrFathersSistersSon returns the string constant CNLabelContactRelationElderCousinMothersSiblingsSonOrFathersSistersSon, for use as a dictionary key or argument.
+func CNLabelContactRelationElderCousinMothersSiblingsSonOrFathersSistersSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderCousinMothersSiblingsSonOrFathersSistersSon")))
 }
 
-// CNLabelContactRelationYoungerCousinMothersSiblingsDaughterOrFathersSistersDaughter returns the string constant CNLabelContactRelationYoungerCousinMothersSiblingsDaughterOrFathersSistersDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationYoungerCousinMothersSiblingsDaughterOrFathersSistersDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationYoungerCousinMothersSiblingsDaughterOrFathersSistersDaughter())
+// CNLabelContactRelationYoungerCousinMothersSiblingsDaughterOrFathersSistersDaughter returns the string constant CNLabelContactRelationYoungerCousinMothersSiblingsDaughterOrFathersSistersDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationYoungerCousinMothersSiblingsDaughterOrFathersSistersDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationYoungerCousinMothersSiblingsDaughterOrFathersSistersDaughter")))
 }
 
-// CNLabelContactRelationElderCousinMothersSiblingsDaughterOrFathersSistersDaughter returns the string constant CNLabelContactRelationElderCousinMothersSiblingsDaughterOrFathersSistersDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationElderCousinMothersSiblingsDaughterOrFathersSistersDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationElderCousinMothersSiblingsDaughterOrFathersSistersDaughter())
+// CNLabelContactRelationElderCousinMothersSiblingsDaughterOrFathersSistersDaughter returns the string constant CNLabelContactRelationElderCousinMothersSiblingsDaughterOrFathersSistersDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationElderCousinMothersSiblingsDaughterOrFathersSistersDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationElderCousinMothersSiblingsDaughterOrFathersSistersDaughter")))
 }
 
-// CNLabelContactRelationParentsSibling returns the string constant CNLabelContactRelationParentsSibling as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationParentsSibling() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationParentsSibling())
+// CNLabelContactRelationParentsSibling returns the string constant CNLabelContactRelationParentsSibling, for use as a dictionary key or argument.
+func CNLabelContactRelationParentsSibling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationParentsSibling")))
 }
 
-// CNLabelContactRelationParentsYoungerSibling returns the string constant CNLabelContactRelationParentsYoungerSibling as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationParentsYoungerSibling() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationParentsYoungerSibling())
+// CNLabelContactRelationParentsYoungerSibling returns the string constant CNLabelContactRelationParentsYoungerSibling, for use as a dictionary key or argument.
+func CNLabelContactRelationParentsYoungerSibling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationParentsYoungerSibling")))
 }
 
-// CNLabelContactRelationParentsElderSibling returns the string constant CNLabelContactRelationParentsElderSibling as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationParentsElderSibling() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationParentsElderSibling())
+// CNLabelContactRelationParentsElderSibling returns the string constant CNLabelContactRelationParentsElderSibling, for use as a dictionary key or argument.
+func CNLabelContactRelationParentsElderSibling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationParentsElderSibling")))
 }
 
-// CNLabelContactRelationParentsSiblingMothersSibling returns the string constant CNLabelContactRelationParentsSiblingMothersSibling as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationParentsSiblingMothersSibling() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationParentsSiblingMothersSibling())
+// CNLabelContactRelationParentsSiblingMothersSibling returns the string constant CNLabelContactRelationParentsSiblingMothersSibling, for use as a dictionary key or argument.
+func CNLabelContactRelationParentsSiblingMothersSibling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationParentsSiblingMothersSibling")))
 }
 
-// CNLabelContactRelationParentsSiblingMothersYoungerSibling returns the string constant CNLabelContactRelationParentsSiblingMothersYoungerSibling as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationParentsSiblingMothersYoungerSibling() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationParentsSiblingMothersYoungerSibling())
+// CNLabelContactRelationParentsSiblingMothersYoungerSibling returns the string constant CNLabelContactRelationParentsSiblingMothersYoungerSibling, for use as a dictionary key or argument.
+func CNLabelContactRelationParentsSiblingMothersYoungerSibling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationParentsSiblingMothersYoungerSibling")))
 }
 
-// CNLabelContactRelationParentsSiblingMothersElderSibling returns the string constant CNLabelContactRelationParentsSiblingMothersElderSibling as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationParentsSiblingMothersElderSibling() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationParentsSiblingMothersElderSibling())
+// CNLabelContactRelationParentsSiblingMothersElderSibling returns the string constant CNLabelContactRelationParentsSiblingMothersElderSibling, for use as a dictionary key or argument.
+func CNLabelContactRelationParentsSiblingMothersElderSibling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationParentsSiblingMothersElderSibling")))
 }
 
-// CNLabelContactRelationParentsSiblingFathersSibling returns the string constant CNLabelContactRelationParentsSiblingFathersSibling as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationParentsSiblingFathersSibling() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationParentsSiblingFathersSibling())
+// CNLabelContactRelationParentsSiblingFathersSibling returns the string constant CNLabelContactRelationParentsSiblingFathersSibling, for use as a dictionary key or argument.
+func CNLabelContactRelationParentsSiblingFathersSibling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationParentsSiblingFathersSibling")))
 }
 
-// CNLabelContactRelationParentsSiblingFathersYoungerSibling returns the string constant CNLabelContactRelationParentsSiblingFathersYoungerSibling as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationParentsSiblingFathersYoungerSibling() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationParentsSiblingFathersYoungerSibling())
+// CNLabelContactRelationParentsSiblingFathersYoungerSibling returns the string constant CNLabelContactRelationParentsSiblingFathersYoungerSibling, for use as a dictionary key or argument.
+func CNLabelContactRelationParentsSiblingFathersYoungerSibling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationParentsSiblingFathersYoungerSibling")))
 }
 
-// CNLabelContactRelationParentsSiblingFathersElderSibling returns the string constant CNLabelContactRelationParentsSiblingFathersElderSibling as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationParentsSiblingFathersElderSibling() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationParentsSiblingFathersElderSibling())
+// CNLabelContactRelationParentsSiblingFathersElderSibling returns the string constant CNLabelContactRelationParentsSiblingFathersElderSibling, for use as a dictionary key or argument.
+func CNLabelContactRelationParentsSiblingFathersElderSibling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationParentsSiblingFathersElderSibling")))
 }
 
-// CNLabelContactRelationAunt returns the string constant CNLabelContactRelationAunt as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationAunt() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationAunt())
+// CNLabelContactRelationAunt returns the string constant CNLabelContactRelationAunt, for use as a dictionary key or argument.
+func CNLabelContactRelationAunt() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationAunt")))
 }
 
-// CNLabelContactRelationAuntParentsSister returns the string constant CNLabelContactRelationAuntParentsSister as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationAuntParentsSister() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationAuntParentsSister())
+// CNLabelContactRelationAuntParentsSister returns the string constant CNLabelContactRelationAuntParentsSister, for use as a dictionary key or argument.
+func CNLabelContactRelationAuntParentsSister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationAuntParentsSister")))
 }
 
-// CNLabelContactRelationAuntParentsYoungerSister returns the string constant CNLabelContactRelationAuntParentsYoungerSister as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationAuntParentsYoungerSister() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationAuntParentsYoungerSister())
+// CNLabelContactRelationAuntParentsYoungerSister returns the string constant CNLabelContactRelationAuntParentsYoungerSister, for use as a dictionary key or argument.
+func CNLabelContactRelationAuntParentsYoungerSister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationAuntParentsYoungerSister")))
 }
 
-// CNLabelContactRelationAuntParentsElderSister returns the string constant CNLabelContactRelationAuntParentsElderSister as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationAuntParentsElderSister() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationAuntParentsElderSister())
+// CNLabelContactRelationAuntParentsElderSister returns the string constant CNLabelContactRelationAuntParentsElderSister, for use as a dictionary key or argument.
+func CNLabelContactRelationAuntParentsElderSister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationAuntParentsElderSister")))
 }
 
-// CNLabelContactRelationAuntFathersSister returns the string constant CNLabelContactRelationAuntFathersSister as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationAuntFathersSister() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationAuntFathersSister())
+// CNLabelContactRelationAuntFathersSister returns the string constant CNLabelContactRelationAuntFathersSister, for use as a dictionary key or argument.
+func CNLabelContactRelationAuntFathersSister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationAuntFathersSister")))
 }
 
-// CNLabelContactRelationAuntFathersYoungerSister returns the string constant CNLabelContactRelationAuntFathersYoungerSister as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationAuntFathersYoungerSister() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationAuntFathersYoungerSister())
+// CNLabelContactRelationAuntFathersYoungerSister returns the string constant CNLabelContactRelationAuntFathersYoungerSister, for use as a dictionary key or argument.
+func CNLabelContactRelationAuntFathersYoungerSister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationAuntFathersYoungerSister")))
 }
 
-// CNLabelContactRelationAuntFathersElderSister returns the string constant CNLabelContactRelationAuntFathersElderSister as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationAuntFathersElderSister() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationAuntFathersElderSister())
+// CNLabelContactRelationAuntFathersElderSister returns the string constant CNLabelContactRelationAuntFathersElderSister, for use as a dictionary key or argument.
+func CNLabelContactRelationAuntFathersElderSister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationAuntFathersElderSister")))
 }
 
-// CNLabelContactRelationAuntFathersBrothersWife returns the string constant CNLabelContactRelationAuntFathersBrothersWife as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationAuntFathersBrothersWife() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationAuntFathersBrothersWife())
+// CNLabelContactRelationAuntFathersBrothersWife returns the string constant CNLabelContactRelationAuntFathersBrothersWife, for use as a dictionary key or argument.
+func CNLabelContactRelationAuntFathersBrothersWife() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationAuntFathersBrothersWife")))
 }
 
-// CNLabelContactRelationAuntFathersYoungerBrothersWife returns the string constant CNLabelContactRelationAuntFathersYoungerBrothersWife as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationAuntFathersYoungerBrothersWife() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationAuntFathersYoungerBrothersWife())
+// CNLabelContactRelationAuntFathersYoungerBrothersWife returns the string constant CNLabelContactRelationAuntFathersYoungerBrothersWife, for use as a dictionary key or argument.
+func CNLabelContactRelationAuntFathersYoungerBrothersWife() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationAuntFathersYoungerBrothersWife")))
 }
 
-// CNLabelContactRelationAuntFathersElderBrothersWife returns the string constant CNLabelContactRelationAuntFathersElderBrothersWife as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationAuntFathersElderBrothersWife() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationAuntFathersElderBrothersWife())
+// CNLabelContactRelationAuntFathersElderBrothersWife returns the string constant CNLabelContactRelationAuntFathersElderBrothersWife, for use as a dictionary key or argument.
+func CNLabelContactRelationAuntFathersElderBrothersWife() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationAuntFathersElderBrothersWife")))
 }
 
-// CNLabelContactRelationAuntMothersSister returns the string constant CNLabelContactRelationAuntMothersSister as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationAuntMothersSister() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationAuntMothersSister())
+// CNLabelContactRelationAuntMothersSister returns the string constant CNLabelContactRelationAuntMothersSister, for use as a dictionary key or argument.
+func CNLabelContactRelationAuntMothersSister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationAuntMothersSister")))
 }
 
-// CNLabelContactRelationAuntMothersYoungerSister returns the string constant CNLabelContactRelationAuntMothersYoungerSister as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationAuntMothersYoungerSister() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationAuntMothersYoungerSister())
+// CNLabelContactRelationAuntMothersYoungerSister returns the string constant CNLabelContactRelationAuntMothersYoungerSister, for use as a dictionary key or argument.
+func CNLabelContactRelationAuntMothersYoungerSister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationAuntMothersYoungerSister")))
 }
 
-// CNLabelContactRelationAuntMothersElderSister returns the string constant CNLabelContactRelationAuntMothersElderSister as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationAuntMothersElderSister() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationAuntMothersElderSister())
+// CNLabelContactRelationAuntMothersElderSister returns the string constant CNLabelContactRelationAuntMothersElderSister, for use as a dictionary key or argument.
+func CNLabelContactRelationAuntMothersElderSister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationAuntMothersElderSister")))
 }
 
-// CNLabelContactRelationAuntMothersBrothersWife returns the string constant CNLabelContactRelationAuntMothersBrothersWife as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationAuntMothersBrothersWife() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationAuntMothersBrothersWife())
+// CNLabelContactRelationAuntMothersBrothersWife returns the string constant CNLabelContactRelationAuntMothersBrothersWife, for use as a dictionary key or argument.
+func CNLabelContactRelationAuntMothersBrothersWife() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationAuntMothersBrothersWife")))
 }
 
-// CNLabelContactRelationGrandaunt returns the string constant CNLabelContactRelationGrandaunt as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandaunt() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandaunt())
+// CNLabelContactRelationGrandaunt returns the string constant CNLabelContactRelationGrandaunt, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandaunt() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandaunt")))
 }
 
-// CNLabelContactRelationUncle returns the string constant CNLabelContactRelationUncle as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationUncle() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationUncle())
+// CNLabelContactRelationUncle returns the string constant CNLabelContactRelationUncle, for use as a dictionary key or argument.
+func CNLabelContactRelationUncle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationUncle")))
 }
 
-// CNLabelContactRelationUncleParentsBrother returns the string constant CNLabelContactRelationUncleParentsBrother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationUncleParentsBrother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationUncleParentsBrother())
+// CNLabelContactRelationUncleParentsBrother returns the string constant CNLabelContactRelationUncleParentsBrother, for use as a dictionary key or argument.
+func CNLabelContactRelationUncleParentsBrother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationUncleParentsBrother")))
 }
 
-// CNLabelContactRelationUncleParentsYoungerBrother returns the string constant CNLabelContactRelationUncleParentsYoungerBrother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationUncleParentsYoungerBrother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationUncleParentsYoungerBrother())
+// CNLabelContactRelationUncleParentsYoungerBrother returns the string constant CNLabelContactRelationUncleParentsYoungerBrother, for use as a dictionary key or argument.
+func CNLabelContactRelationUncleParentsYoungerBrother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationUncleParentsYoungerBrother")))
 }
 
-// CNLabelContactRelationUncleParentsElderBrother returns the string constant CNLabelContactRelationUncleParentsElderBrother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationUncleParentsElderBrother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationUncleParentsElderBrother())
+// CNLabelContactRelationUncleParentsElderBrother returns the string constant CNLabelContactRelationUncleParentsElderBrother, for use as a dictionary key or argument.
+func CNLabelContactRelationUncleParentsElderBrother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationUncleParentsElderBrother")))
 }
 
-// CNLabelContactRelationUncleMothersBrother returns the string constant CNLabelContactRelationUncleMothersBrother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationUncleMothersBrother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationUncleMothersBrother())
+// CNLabelContactRelationUncleMothersBrother returns the string constant CNLabelContactRelationUncleMothersBrother, for use as a dictionary key or argument.
+func CNLabelContactRelationUncleMothersBrother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationUncleMothersBrother")))
 }
 
-// CNLabelContactRelationUncleMothersYoungerBrother returns the string constant CNLabelContactRelationUncleMothersYoungerBrother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationUncleMothersYoungerBrother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationUncleMothersYoungerBrother())
+// CNLabelContactRelationUncleMothersYoungerBrother returns the string constant CNLabelContactRelationUncleMothersYoungerBrother, for use as a dictionary key or argument.
+func CNLabelContactRelationUncleMothersYoungerBrother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationUncleMothersYoungerBrother")))
 }
 
-// CNLabelContactRelationUncleMothersElderBrother returns the string constant CNLabelContactRelationUncleMothersElderBrother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationUncleMothersElderBrother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationUncleMothersElderBrother())
+// CNLabelContactRelationUncleMothersElderBrother returns the string constant CNLabelContactRelationUncleMothersElderBrother, for use as a dictionary key or argument.
+func CNLabelContactRelationUncleMothersElderBrother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationUncleMothersElderBrother")))
 }
 
-// CNLabelContactRelationUncleMothersSistersHusband returns the string constant CNLabelContactRelationUncleMothersSistersHusband as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationUncleMothersSistersHusband() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationUncleMothersSistersHusband())
+// CNLabelContactRelationUncleMothersSistersHusband returns the string constant CNLabelContactRelationUncleMothersSistersHusband, for use as a dictionary key or argument.
+func CNLabelContactRelationUncleMothersSistersHusband() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationUncleMothersSistersHusband")))
 }
 
-// CNLabelContactRelationUncleFathersBrother returns the string constant CNLabelContactRelationUncleFathersBrother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationUncleFathersBrother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationUncleFathersBrother())
+// CNLabelContactRelationUncleFathersBrother returns the string constant CNLabelContactRelationUncleFathersBrother, for use as a dictionary key or argument.
+func CNLabelContactRelationUncleFathersBrother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationUncleFathersBrother")))
 }
 
-// CNLabelContactRelationUncleFathersYoungerBrother returns the string constant CNLabelContactRelationUncleFathersYoungerBrother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationUncleFathersYoungerBrother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationUncleFathersYoungerBrother())
+// CNLabelContactRelationUncleFathersYoungerBrother returns the string constant CNLabelContactRelationUncleFathersYoungerBrother, for use as a dictionary key or argument.
+func CNLabelContactRelationUncleFathersYoungerBrother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationUncleFathersYoungerBrother")))
 }
 
-// CNLabelContactRelationUncleFathersElderBrother returns the string constant CNLabelContactRelationUncleFathersElderBrother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationUncleFathersElderBrother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationUncleFathersElderBrother())
+// CNLabelContactRelationUncleFathersElderBrother returns the string constant CNLabelContactRelationUncleFathersElderBrother, for use as a dictionary key or argument.
+func CNLabelContactRelationUncleFathersElderBrother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationUncleFathersElderBrother")))
 }
 
-// CNLabelContactRelationUncleFathersSistersHusband returns the string constant CNLabelContactRelationUncleFathersSistersHusband as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationUncleFathersSistersHusband() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationUncleFathersSistersHusband())
+// CNLabelContactRelationUncleFathersSistersHusband returns the string constant CNLabelContactRelationUncleFathersSistersHusband, for use as a dictionary key or argument.
+func CNLabelContactRelationUncleFathersSistersHusband() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationUncleFathersSistersHusband")))
 }
 
-// CNLabelContactRelationUncleFathersYoungerSistersHusband returns the string constant CNLabelContactRelationUncleFathersYoungerSistersHusband as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationUncleFathersYoungerSistersHusband() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationUncleFathersYoungerSistersHusband())
+// CNLabelContactRelationUncleFathersYoungerSistersHusband returns the string constant CNLabelContactRelationUncleFathersYoungerSistersHusband, for use as a dictionary key or argument.
+func CNLabelContactRelationUncleFathersYoungerSistersHusband() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationUncleFathersYoungerSistersHusband")))
 }
 
-// CNLabelContactRelationUncleFathersElderSistersHusband returns the string constant CNLabelContactRelationUncleFathersElderSistersHusband as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationUncleFathersElderSistersHusband() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationUncleFathersElderSistersHusband())
+// CNLabelContactRelationUncleFathersElderSistersHusband returns the string constant CNLabelContactRelationUncleFathersElderSistersHusband, for use as a dictionary key or argument.
+func CNLabelContactRelationUncleFathersElderSistersHusband() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationUncleFathersElderSistersHusband")))
 }
 
-// CNLabelContactRelationGranduncle returns the string constant CNLabelContactRelationGranduncle as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGranduncle() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGranduncle())
+// CNLabelContactRelationGranduncle returns the string constant CNLabelContactRelationGranduncle, for use as a dictionary key or argument.
+func CNLabelContactRelationGranduncle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGranduncle")))
 }
 
-// CNLabelContactRelationSiblingsChild returns the string constant CNLabelContactRelationSiblingsChild as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationSiblingsChild() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationSiblingsChild())
+// CNLabelContactRelationSiblingsChild returns the string constant CNLabelContactRelationSiblingsChild, for use as a dictionary key or argument.
+func CNLabelContactRelationSiblingsChild() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationSiblingsChild")))
 }
 
-// CNLabelContactRelationNiece returns the string constant CNLabelContactRelationNiece as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationNiece() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationNiece())
+// CNLabelContactRelationNiece returns the string constant CNLabelContactRelationNiece, for use as a dictionary key or argument.
+func CNLabelContactRelationNiece() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationNiece")))
 }
 
-// CNLabelContactRelationNieceSistersDaughter returns the string constant CNLabelContactRelationNieceSistersDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationNieceSistersDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationNieceSistersDaughter())
+// CNLabelContactRelationNieceSistersDaughter returns the string constant CNLabelContactRelationNieceSistersDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationNieceSistersDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationNieceSistersDaughter")))
 }
 
-// CNLabelContactRelationNieceBrothersDaughter returns the string constant CNLabelContactRelationNieceBrothersDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationNieceBrothersDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationNieceBrothersDaughter())
+// CNLabelContactRelationNieceBrothersDaughter returns the string constant CNLabelContactRelationNieceBrothersDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationNieceBrothersDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationNieceBrothersDaughter")))
 }
 
-// CNLabelContactRelationNieceSistersDaughterOrWifesSiblingsDaughter returns the string constant CNLabelContactRelationNieceSistersDaughterOrWifesSiblingsDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationNieceSistersDaughterOrWifesSiblingsDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationNieceSistersDaughterOrWifesSiblingsDaughter())
+// CNLabelContactRelationNieceSistersDaughterOrWifesSiblingsDaughter returns the string constant CNLabelContactRelationNieceSistersDaughterOrWifesSiblingsDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationNieceSistersDaughterOrWifesSiblingsDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationNieceSistersDaughterOrWifesSiblingsDaughter")))
 }
 
-// CNLabelContactRelationNieceBrothersDaughterOrHusbandsSiblingsDaughter returns the string constant CNLabelContactRelationNieceBrothersDaughterOrHusbandsSiblingsDaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationNieceBrothersDaughterOrHusbandsSiblingsDaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationNieceBrothersDaughterOrHusbandsSiblingsDaughter())
+// CNLabelContactRelationNieceBrothersDaughterOrHusbandsSiblingsDaughter returns the string constant CNLabelContactRelationNieceBrothersDaughterOrHusbandsSiblingsDaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationNieceBrothersDaughterOrHusbandsSiblingsDaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationNieceBrothersDaughterOrHusbandsSiblingsDaughter")))
 }
 
-// CNLabelContactRelationNephew returns the string constant CNLabelContactRelationNephew as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationNephew() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationNephew())
+// CNLabelContactRelationNephew returns the string constant CNLabelContactRelationNephew, for use as a dictionary key or argument.
+func CNLabelContactRelationNephew() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationNephew")))
 }
 
-// CNLabelContactRelationNephewSistersSon returns the string constant CNLabelContactRelationNephewSistersSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationNephewSistersSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationNephewSistersSon())
+// CNLabelContactRelationNephewSistersSon returns the string constant CNLabelContactRelationNephewSistersSon, for use as a dictionary key or argument.
+func CNLabelContactRelationNephewSistersSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationNephewSistersSon")))
 }
 
-// CNLabelContactRelationNephewBrothersSon returns the string constant CNLabelContactRelationNephewBrothersSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationNephewBrothersSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationNephewBrothersSon())
+// CNLabelContactRelationNephewBrothersSon returns the string constant CNLabelContactRelationNephewBrothersSon, for use as a dictionary key or argument.
+func CNLabelContactRelationNephewBrothersSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationNephewBrothersSon")))
 }
 
-// CNLabelContactRelationNephewBrothersSonOrHusbandsSiblingsSon returns the string constant CNLabelContactRelationNephewBrothersSonOrHusbandsSiblingsSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationNephewBrothersSonOrHusbandsSiblingsSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationNephewBrothersSonOrHusbandsSiblingsSon())
+// CNLabelContactRelationNephewBrothersSonOrHusbandsSiblingsSon returns the string constant CNLabelContactRelationNephewBrothersSonOrHusbandsSiblingsSon, for use as a dictionary key or argument.
+func CNLabelContactRelationNephewBrothersSonOrHusbandsSiblingsSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationNephewBrothersSonOrHusbandsSiblingsSon")))
 }
 
-// CNLabelContactRelationNephewSistersSonOrWifesSiblingsSon returns the string constant CNLabelContactRelationNephewSistersSonOrWifesSiblingsSon as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationNephewSistersSonOrWifesSiblingsSon() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationNephewSistersSonOrWifesSiblingsSon())
+// CNLabelContactRelationNephewSistersSonOrWifesSiblingsSon returns the string constant CNLabelContactRelationNephewSistersSonOrWifesSiblingsSon, for use as a dictionary key or argument.
+func CNLabelContactRelationNephewSistersSonOrWifesSiblingsSon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationNephewSistersSonOrWifesSiblingsSon")))
 }
 
-// CNLabelContactRelationGrandniece returns the string constant CNLabelContactRelationGrandniece as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandniece() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandniece())
+// CNLabelContactRelationGrandniece returns the string constant CNLabelContactRelationGrandniece, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandniece() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandniece")))
 }
 
-// CNLabelContactRelationGrandnieceSistersGranddaughter returns the string constant CNLabelContactRelationGrandnieceSistersGranddaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandnieceSistersGranddaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandnieceSistersGranddaughter())
+// CNLabelContactRelationGrandnieceSistersGranddaughter returns the string constant CNLabelContactRelationGrandnieceSistersGranddaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandnieceSistersGranddaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandnieceSistersGranddaughter")))
 }
 
-// CNLabelContactRelationGrandnieceBrothersGranddaughter returns the string constant CNLabelContactRelationGrandnieceBrothersGranddaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandnieceBrothersGranddaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandnieceBrothersGranddaughter())
+// CNLabelContactRelationGrandnieceBrothersGranddaughter returns the string constant CNLabelContactRelationGrandnieceBrothersGranddaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandnieceBrothersGranddaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandnieceBrothersGranddaughter")))
 }
 
-// CNLabelContactRelationGrandnephew returns the string constant CNLabelContactRelationGrandnephew as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandnephew() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandnephew())
+// CNLabelContactRelationGrandnephew returns the string constant CNLabelContactRelationGrandnephew, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandnephew() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandnephew")))
 }
 
-// CNLabelContactRelationGrandnephewSistersGrandson returns the string constant CNLabelContactRelationGrandnephewSistersGrandson as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandnephewSistersGrandson() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandnephewSistersGrandson())
+// CNLabelContactRelationGrandnephewSistersGrandson returns the string constant CNLabelContactRelationGrandnephewSistersGrandson, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandnephewSistersGrandson() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandnephewSistersGrandson")))
 }
 
-// CNLabelContactRelationGrandnephewBrothersGrandson returns the string constant CNLabelContactRelationGrandnephewBrothersGrandson as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandnephewBrothersGrandson() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandnephewBrothersGrandson())
+// CNLabelContactRelationGrandnephewBrothersGrandson returns the string constant CNLabelContactRelationGrandnephewBrothersGrandson, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandnephewBrothersGrandson() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandnephewBrothersGrandson")))
 }
 
-// CNLabelContactRelationStepparent returns the string constant CNLabelContactRelationStepparent as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationStepparent() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationStepparent())
+// CNLabelContactRelationStepparent returns the string constant CNLabelContactRelationStepparent, for use as a dictionary key or argument.
+func CNLabelContactRelationStepparent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationStepparent")))
 }
 
-// CNLabelContactRelationStepmother returns the string constant CNLabelContactRelationStepmother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationStepmother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationStepmother())
+// CNLabelContactRelationStepmother returns the string constant CNLabelContactRelationStepmother, for use as a dictionary key or argument.
+func CNLabelContactRelationStepmother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationStepmother")))
 }
 
-// CNLabelContactRelationStepfather returns the string constant CNLabelContactRelationStepfather as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationStepfather() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationStepfather())
+// CNLabelContactRelationStepfather returns the string constant CNLabelContactRelationStepfather, for use as a dictionary key or argument.
+func CNLabelContactRelationStepfather() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationStepfather")))
 }
 
-// CNLabelContactRelationStepchild returns the string constant CNLabelContactRelationStepchild as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationStepchild() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationStepchild())
+// CNLabelContactRelationStepchild returns the string constant CNLabelContactRelationStepchild, for use as a dictionary key or argument.
+func CNLabelContactRelationStepchild() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationStepchild")))
 }
 
-// CNLabelContactRelationStepdaughter returns the string constant CNLabelContactRelationStepdaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationStepdaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationStepdaughter())
+// CNLabelContactRelationStepdaughter returns the string constant CNLabelContactRelationStepdaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationStepdaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationStepdaughter")))
 }
 
-// CNLabelContactRelationStepson returns the string constant CNLabelContactRelationStepson as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationStepson() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationStepson())
+// CNLabelContactRelationStepson returns the string constant CNLabelContactRelationStepson, for use as a dictionary key or argument.
+func CNLabelContactRelationStepson() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationStepson")))
 }
 
-// CNLabelContactRelationStepsister returns the string constant CNLabelContactRelationStepsister as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationStepsister() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationStepsister())
+// CNLabelContactRelationStepsister returns the string constant CNLabelContactRelationStepsister, for use as a dictionary key or argument.
+func CNLabelContactRelationStepsister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationStepsister")))
 }
 
-// CNLabelContactRelationStepbrother returns the string constant CNLabelContactRelationStepbrother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationStepbrother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationStepbrother())
+// CNLabelContactRelationStepbrother returns the string constant CNLabelContactRelationStepbrother, for use as a dictionary key or argument.
+func CNLabelContactRelationStepbrother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationStepbrother")))
 }
 
-// CNLabelContactRelationMotherInLawOrStepmother returns the string constant CNLabelContactRelationMotherInLawOrStepmother as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationMotherInLawOrStepmother() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationMotherInLawOrStepmother())
+// CNLabelContactRelationMotherInLawOrStepmother returns the string constant CNLabelContactRelationMotherInLawOrStepmother, for use as a dictionary key or argument.
+func CNLabelContactRelationMotherInLawOrStepmother() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationMotherInLawOrStepmother")))
 }
 
-// CNLabelContactRelationFatherInLawOrStepfather returns the string constant CNLabelContactRelationFatherInLawOrStepfather as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationFatherInLawOrStepfather() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationFatherInLawOrStepfather())
+// CNLabelContactRelationFatherInLawOrStepfather returns the string constant CNLabelContactRelationFatherInLawOrStepfather, for use as a dictionary key or argument.
+func CNLabelContactRelationFatherInLawOrStepfather() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationFatherInLawOrStepfather")))
 }
 
-// CNLabelContactRelationDaughterInLawOrStepdaughter returns the string constant CNLabelContactRelationDaughterInLawOrStepdaughter as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationDaughterInLawOrStepdaughter() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationDaughterInLawOrStepdaughter())
+// CNLabelContactRelationDaughterInLawOrStepdaughter returns the string constant CNLabelContactRelationDaughterInLawOrStepdaughter, for use as a dictionary key or argument.
+func CNLabelContactRelationDaughterInLawOrStepdaughter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationDaughterInLawOrStepdaughter")))
 }
 
-// CNLabelContactRelationSonInLawOrStepson returns the string constant CNLabelContactRelationSonInLawOrStepson as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationSonInLawOrStepson() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationSonInLawOrStepson())
+// CNLabelContactRelationSonInLawOrStepson returns the string constant CNLabelContactRelationSonInLawOrStepson, for use as a dictionary key or argument.
+func CNLabelContactRelationSonInLawOrStepson() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationSonInLawOrStepson")))
 }
 
-// CNLabelContactRelationCousinOrSiblingsChild returns the string constant CNLabelContactRelationCousinOrSiblingsChild as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationCousinOrSiblingsChild() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationCousinOrSiblingsChild())
+// CNLabelContactRelationCousinOrSiblingsChild returns the string constant CNLabelContactRelationCousinOrSiblingsChild, for use as a dictionary key or argument.
+func CNLabelContactRelationCousinOrSiblingsChild() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationCousinOrSiblingsChild")))
 }
 
-// CNLabelContactRelationNieceOrCousin returns the string constant CNLabelContactRelationNieceOrCousin as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationNieceOrCousin() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationNieceOrCousin())
+// CNLabelContactRelationNieceOrCousin returns the string constant CNLabelContactRelationNieceOrCousin, for use as a dictionary key or argument.
+func CNLabelContactRelationNieceOrCousin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationNieceOrCousin")))
 }
 
-// CNLabelContactRelationNephewOrCousin returns the string constant CNLabelContactRelationNephewOrCousin as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationNephewOrCousin() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationNephewOrCousin())
+// CNLabelContactRelationNephewOrCousin returns the string constant CNLabelContactRelationNephewOrCousin, for use as a dictionary key or argument.
+func CNLabelContactRelationNephewOrCousin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationNephewOrCousin")))
 }
 
-// CNLabelContactRelationGrandchildOrSiblingsChild returns the string constant CNLabelContactRelationGrandchildOrSiblingsChild as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandchildOrSiblingsChild() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandchildOrSiblingsChild())
+// CNLabelContactRelationGrandchildOrSiblingsChild returns the string constant CNLabelContactRelationGrandchildOrSiblingsChild, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandchildOrSiblingsChild() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandchildOrSiblingsChild")))
 }
 
-// CNLabelContactRelationGranddaughterOrNiece returns the string constant CNLabelContactRelationGranddaughterOrNiece as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGranddaughterOrNiece() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGranddaughterOrNiece())
+// CNLabelContactRelationGranddaughterOrNiece returns the string constant CNLabelContactRelationGranddaughterOrNiece, for use as a dictionary key or argument.
+func CNLabelContactRelationGranddaughterOrNiece() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGranddaughterOrNiece")))
 }
 
-// CNLabelContactRelationGrandsonOrNephew returns the string constant CNLabelContactRelationGrandsonOrNephew as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGrandsonOrNephew() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGrandsonOrNephew())
+// CNLabelContactRelationGrandsonOrNephew returns the string constant CNLabelContactRelationGrandsonOrNephew, for use as a dictionary key or argument.
+func CNLabelContactRelationGrandsonOrNephew() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGrandsonOrNephew")))
 }
 
-// CNLabelContactRelationGreatGrandchildOrSiblingsGrandchild returns the string constant CNLabelContactRelationGreatGrandchildOrSiblingsGrandchild as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationGreatGrandchildOrSiblingsGrandchild() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationGreatGrandchildOrSiblingsGrandchild())
+// CNLabelContactRelationGreatGrandchildOrSiblingsGrandchild returns the string constant CNLabelContactRelationGreatGrandchildOrSiblingsGrandchild, for use as a dictionary key or argument.
+func CNLabelContactRelationGreatGrandchildOrSiblingsGrandchild() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationGreatGrandchildOrSiblingsGrandchild")))
 }
 
-// CNLabelContactRelationDaughterInLawOrSisterInLaw returns the string constant CNLabelContactRelationDaughterInLawOrSisterInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationDaughterInLawOrSisterInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationDaughterInLawOrSisterInLaw())
+// CNLabelContactRelationDaughterInLawOrSisterInLaw returns the string constant CNLabelContactRelationDaughterInLawOrSisterInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationDaughterInLawOrSisterInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationDaughterInLawOrSisterInLaw")))
 }
 
-// CNLabelContactRelationSonInLawOrBrotherInLaw returns the string constant CNLabelContactRelationSonInLawOrBrotherInLaw as an objc.ID, for use as a dictionary key or selector argument.
-func CNLabelContactRelationSonInLawOrBrotherInLaw() objc.ID {
-	return purego.CFConstant(raw.CNLabelContactRelationSonInLawOrBrotherInLaw())
+// CNLabelContactRelationSonInLawOrBrotherInLaw returns the string constant CNLabelContactRelationSonInLawOrBrotherInLaw, for use as a dictionary key or argument.
+func CNLabelContactRelationSonInLawOrBrotherInLaw() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNLabelContactRelationSonInLawOrBrotherInLaw")))
 }
 
-// CNSocialProfileURLStringKey returns the string constant CNSocialProfileURLStringKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNSocialProfileURLStringKey() objc.ID {
-	return purego.CFConstant(raw.CNSocialProfileURLStringKey())
+// CNSocialProfileURLStringKey returns the string constant CNSocialProfileURLStringKey, for use as a dictionary key or argument.
+func CNSocialProfileURLStringKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNSocialProfileURLStringKey")))
 }
 
-// CNSocialProfileUsernameKey returns the string constant CNSocialProfileUsernameKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNSocialProfileUsernameKey() objc.ID {
-	return purego.CFConstant(raw.CNSocialProfileUsernameKey())
+// CNSocialProfileUsernameKey returns the string constant CNSocialProfileUsernameKey, for use as a dictionary key or argument.
+func CNSocialProfileUsernameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNSocialProfileUsernameKey")))
 }
 
-// CNSocialProfileUserIdentifierKey returns the string constant CNSocialProfileUserIdentifierKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNSocialProfileUserIdentifierKey() objc.ID {
-	return purego.CFConstant(raw.CNSocialProfileUserIdentifierKey())
+// CNSocialProfileUserIdentifierKey returns the string constant CNSocialProfileUserIdentifierKey, for use as a dictionary key or argument.
+func CNSocialProfileUserIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNSocialProfileUserIdentifierKey")))
 }
 
-// CNSocialProfileServiceKey returns the string constant CNSocialProfileServiceKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNSocialProfileServiceKey() objc.ID {
-	return purego.CFConstant(raw.CNSocialProfileServiceKey())
+// CNSocialProfileServiceKey returns the string constant CNSocialProfileServiceKey, for use as a dictionary key or argument.
+func CNSocialProfileServiceKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNSocialProfileServiceKey")))
 }
 
-// CNSocialProfileServiceFacebook returns the string constant CNSocialProfileServiceFacebook as an objc.ID, for use as a dictionary key or selector argument.
-func CNSocialProfileServiceFacebook() objc.ID {
-	return purego.CFConstant(raw.CNSocialProfileServiceFacebook())
+// CNSocialProfileServiceFacebook returns the string constant CNSocialProfileServiceFacebook, for use as a dictionary key or argument.
+func CNSocialProfileServiceFacebook() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNSocialProfileServiceFacebook")))
 }
 
-// CNSocialProfileServiceFlickr returns the string constant CNSocialProfileServiceFlickr as an objc.ID, for use as a dictionary key or selector argument.
-func CNSocialProfileServiceFlickr() objc.ID {
-	return purego.CFConstant(raw.CNSocialProfileServiceFlickr())
+// CNSocialProfileServiceFlickr returns the string constant CNSocialProfileServiceFlickr, for use as a dictionary key or argument.
+func CNSocialProfileServiceFlickr() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNSocialProfileServiceFlickr")))
 }
 
-// CNSocialProfileServiceLinkedIn returns the string constant CNSocialProfileServiceLinkedIn as an objc.ID, for use as a dictionary key or selector argument.
-func CNSocialProfileServiceLinkedIn() objc.ID {
-	return purego.CFConstant(raw.CNSocialProfileServiceLinkedIn())
+// CNSocialProfileServiceLinkedIn returns the string constant CNSocialProfileServiceLinkedIn, for use as a dictionary key or argument.
+func CNSocialProfileServiceLinkedIn() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNSocialProfileServiceLinkedIn")))
 }
 
-// CNSocialProfileServiceMySpace returns the string constant CNSocialProfileServiceMySpace as an objc.ID, for use as a dictionary key or selector argument.
-func CNSocialProfileServiceMySpace() objc.ID {
-	return purego.CFConstant(raw.CNSocialProfileServiceMySpace())
+// CNSocialProfileServiceMySpace returns the string constant CNSocialProfileServiceMySpace, for use as a dictionary key or argument.
+func CNSocialProfileServiceMySpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNSocialProfileServiceMySpace")))
 }
 
-// CNSocialProfileServiceSinaWeibo returns the string constant CNSocialProfileServiceSinaWeibo as an objc.ID, for use as a dictionary key or selector argument.
-func CNSocialProfileServiceSinaWeibo() objc.ID {
-	return purego.CFConstant(raw.CNSocialProfileServiceSinaWeibo())
+// CNSocialProfileServiceSinaWeibo returns the string constant CNSocialProfileServiceSinaWeibo, for use as a dictionary key or argument.
+func CNSocialProfileServiceSinaWeibo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNSocialProfileServiceSinaWeibo")))
 }
 
-// CNSocialProfileServiceTencentWeibo returns the string constant CNSocialProfileServiceTencentWeibo as an objc.ID, for use as a dictionary key or selector argument.
-func CNSocialProfileServiceTencentWeibo() objc.ID {
-	return purego.CFConstant(raw.CNSocialProfileServiceTencentWeibo())
+// CNSocialProfileServiceTencentWeibo returns the string constant CNSocialProfileServiceTencentWeibo, for use as a dictionary key or argument.
+func CNSocialProfileServiceTencentWeibo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNSocialProfileServiceTencentWeibo")))
 }
 
-// CNSocialProfileServiceTwitter returns the string constant CNSocialProfileServiceTwitter as an objc.ID, for use as a dictionary key or selector argument.
-func CNSocialProfileServiceTwitter() objc.ID {
-	return purego.CFConstant(raw.CNSocialProfileServiceTwitter())
+// CNSocialProfileServiceTwitter returns the string constant CNSocialProfileServiceTwitter, for use as a dictionary key or argument.
+func CNSocialProfileServiceTwitter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNSocialProfileServiceTwitter")))
 }
 
-// CNSocialProfileServiceYelp returns the string constant CNSocialProfileServiceYelp as an objc.ID, for use as a dictionary key or selector argument.
-func CNSocialProfileServiceYelp() objc.ID {
-	return purego.CFConstant(raw.CNSocialProfileServiceYelp())
+// CNSocialProfileServiceYelp returns the string constant CNSocialProfileServiceYelp, for use as a dictionary key or argument.
+func CNSocialProfileServiceYelp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNSocialProfileServiceYelp")))
 }
 
-// CNSocialProfileServiceGameCenter returns the string constant CNSocialProfileServiceGameCenter as an objc.ID, for use as a dictionary key or selector argument.
-func CNSocialProfileServiceGameCenter() objc.ID {
-	return purego.CFConstant(raw.CNSocialProfileServiceGameCenter())
+// CNSocialProfileServiceGameCenter returns the string constant CNSocialProfileServiceGameCenter, for use as a dictionary key or argument.
+func CNSocialProfileServiceGameCenter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNSocialProfileServiceGameCenter")))
 }
 
-// CNInstantMessageAddressUsernameKey returns the string constant CNInstantMessageAddressUsernameKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNInstantMessageAddressUsernameKey() objc.ID {
-	return purego.CFConstant(raw.CNInstantMessageAddressUsernameKey())
+// CNInstantMessageAddressUsernameKey returns the string constant CNInstantMessageAddressUsernameKey, for use as a dictionary key or argument.
+func CNInstantMessageAddressUsernameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNInstantMessageAddressUsernameKey")))
 }
 
-// CNInstantMessageAddressServiceKey returns the string constant CNInstantMessageAddressServiceKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNInstantMessageAddressServiceKey() objc.ID {
-	return purego.CFConstant(raw.CNInstantMessageAddressServiceKey())
+// CNInstantMessageAddressServiceKey returns the string constant CNInstantMessageAddressServiceKey, for use as a dictionary key or argument.
+func CNInstantMessageAddressServiceKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNInstantMessageAddressServiceKey")))
 }
 
-// CNInstantMessageServiceAIM returns the string constant CNInstantMessageServiceAIM as an objc.ID, for use as a dictionary key or selector argument.
-func CNInstantMessageServiceAIM() objc.ID {
-	return purego.CFConstant(raw.CNInstantMessageServiceAIM())
+// CNInstantMessageServiceAIM returns the string constant CNInstantMessageServiceAIM, for use as a dictionary key or argument.
+func CNInstantMessageServiceAIM() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNInstantMessageServiceAIM")))
 }
 
-// CNInstantMessageServiceFacebook returns the string constant CNInstantMessageServiceFacebook as an objc.ID, for use as a dictionary key or selector argument.
-func CNInstantMessageServiceFacebook() objc.ID {
-	return purego.CFConstant(raw.CNInstantMessageServiceFacebook())
+// CNInstantMessageServiceFacebook returns the string constant CNInstantMessageServiceFacebook, for use as a dictionary key or argument.
+func CNInstantMessageServiceFacebook() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNInstantMessageServiceFacebook")))
 }
 
-// CNInstantMessageServiceGaduGadu returns the string constant CNInstantMessageServiceGaduGadu as an objc.ID, for use as a dictionary key or selector argument.
-func CNInstantMessageServiceGaduGadu() objc.ID {
-	return purego.CFConstant(raw.CNInstantMessageServiceGaduGadu())
+// CNInstantMessageServiceGaduGadu returns the string constant CNInstantMessageServiceGaduGadu, for use as a dictionary key or argument.
+func CNInstantMessageServiceGaduGadu() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNInstantMessageServiceGaduGadu")))
 }
 
-// CNInstantMessageServiceGoogleTalk returns the string constant CNInstantMessageServiceGoogleTalk as an objc.ID, for use as a dictionary key or selector argument.
-func CNInstantMessageServiceGoogleTalk() objc.ID {
-	return purego.CFConstant(raw.CNInstantMessageServiceGoogleTalk())
+// CNInstantMessageServiceGoogleTalk returns the string constant CNInstantMessageServiceGoogleTalk, for use as a dictionary key or argument.
+func CNInstantMessageServiceGoogleTalk() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNInstantMessageServiceGoogleTalk")))
 }
 
-// CNInstantMessageServiceICQ returns the string constant CNInstantMessageServiceICQ as an objc.ID, for use as a dictionary key or selector argument.
-func CNInstantMessageServiceICQ() objc.ID {
-	return purego.CFConstant(raw.CNInstantMessageServiceICQ())
+// CNInstantMessageServiceICQ returns the string constant CNInstantMessageServiceICQ, for use as a dictionary key or argument.
+func CNInstantMessageServiceICQ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNInstantMessageServiceICQ")))
 }
 
-// CNInstantMessageServiceJabber returns the string constant CNInstantMessageServiceJabber as an objc.ID, for use as a dictionary key or selector argument.
-func CNInstantMessageServiceJabber() objc.ID {
-	return purego.CFConstant(raw.CNInstantMessageServiceJabber())
+// CNInstantMessageServiceJabber returns the string constant CNInstantMessageServiceJabber, for use as a dictionary key or argument.
+func CNInstantMessageServiceJabber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNInstantMessageServiceJabber")))
 }
 
-// CNInstantMessageServiceMSN returns the string constant CNInstantMessageServiceMSN as an objc.ID, for use as a dictionary key or selector argument.
-func CNInstantMessageServiceMSN() objc.ID {
-	return purego.CFConstant(raw.CNInstantMessageServiceMSN())
+// CNInstantMessageServiceMSN returns the string constant CNInstantMessageServiceMSN, for use as a dictionary key or argument.
+func CNInstantMessageServiceMSN() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNInstantMessageServiceMSN")))
 }
 
-// CNInstantMessageServiceQQ returns the string constant CNInstantMessageServiceQQ as an objc.ID, for use as a dictionary key or selector argument.
-func CNInstantMessageServiceQQ() objc.ID {
-	return purego.CFConstant(raw.CNInstantMessageServiceQQ())
+// CNInstantMessageServiceQQ returns the string constant CNInstantMessageServiceQQ, for use as a dictionary key or argument.
+func CNInstantMessageServiceQQ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNInstantMessageServiceQQ")))
 }
 
-// CNInstantMessageServiceSkype returns the string constant CNInstantMessageServiceSkype as an objc.ID, for use as a dictionary key or selector argument.
-func CNInstantMessageServiceSkype() objc.ID {
-	return purego.CFConstant(raw.CNInstantMessageServiceSkype())
+// CNInstantMessageServiceSkype returns the string constant CNInstantMessageServiceSkype, for use as a dictionary key or argument.
+func CNInstantMessageServiceSkype() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNInstantMessageServiceSkype")))
 }
 
-// CNInstantMessageServiceYahoo returns the string constant CNInstantMessageServiceYahoo as an objc.ID, for use as a dictionary key or selector argument.
-func CNInstantMessageServiceYahoo() objc.ID {
-	return purego.CFConstant(raw.CNInstantMessageServiceYahoo())
+// CNInstantMessageServiceYahoo returns the string constant CNInstantMessageServiceYahoo, for use as a dictionary key or argument.
+func CNInstantMessageServiceYahoo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNInstantMessageServiceYahoo")))
 }
 
-// CNContactPropertyNotFetchedExceptionName returns the string constant CNContactPropertyNotFetchedExceptionName as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactPropertyNotFetchedExceptionName() objc.ID {
-	return purego.CFConstant(raw.CNContactPropertyNotFetchedExceptionName())
+// CNContactPropertyNotFetchedExceptionName returns the string constant CNContactPropertyNotFetchedExceptionName, for use as a dictionary key or argument.
+func CNContactPropertyNotFetchedExceptionName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactPropertyNotFetchedExceptionName")))
 }
 
-// CNContactIdentifierKey returns the string constant CNContactIdentifierKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactIdentifierKey() objc.ID {
-	return purego.CFConstant(raw.CNContactIdentifierKey())
+// CNContactIdentifierKey returns the string constant CNContactIdentifierKey, for use as a dictionary key or argument.
+func CNContactIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactIdentifierKey")))
 }
 
-// CNContactNamePrefixKey returns the string constant CNContactNamePrefixKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactNamePrefixKey() objc.ID {
-	return purego.CFConstant(raw.CNContactNamePrefixKey())
+// CNContactNamePrefixKey returns the string constant CNContactNamePrefixKey, for use as a dictionary key or argument.
+func CNContactNamePrefixKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactNamePrefixKey")))
 }
 
-// CNContactGivenNameKey returns the string constant CNContactGivenNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactGivenNameKey() objc.ID {
-	return purego.CFConstant(raw.CNContactGivenNameKey())
+// CNContactGivenNameKey returns the string constant CNContactGivenNameKey, for use as a dictionary key or argument.
+func CNContactGivenNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactGivenNameKey")))
 }
 
-// CNContactMiddleNameKey returns the string constant CNContactMiddleNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactMiddleNameKey() objc.ID {
-	return purego.CFConstant(raw.CNContactMiddleNameKey())
+// CNContactMiddleNameKey returns the string constant CNContactMiddleNameKey, for use as a dictionary key or argument.
+func CNContactMiddleNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactMiddleNameKey")))
 }
 
-// CNContactFamilyNameKey returns the string constant CNContactFamilyNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactFamilyNameKey() objc.ID {
-	return purego.CFConstant(raw.CNContactFamilyNameKey())
+// CNContactFamilyNameKey returns the string constant CNContactFamilyNameKey, for use as a dictionary key or argument.
+func CNContactFamilyNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactFamilyNameKey")))
 }
 
-// CNContactPreviousFamilyNameKey returns the string constant CNContactPreviousFamilyNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactPreviousFamilyNameKey() objc.ID {
-	return purego.CFConstant(raw.CNContactPreviousFamilyNameKey())
+// CNContactPreviousFamilyNameKey returns the string constant CNContactPreviousFamilyNameKey, for use as a dictionary key or argument.
+func CNContactPreviousFamilyNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactPreviousFamilyNameKey")))
 }
 
-// CNContactNameSuffixKey returns the string constant CNContactNameSuffixKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactNameSuffixKey() objc.ID {
-	return purego.CFConstant(raw.CNContactNameSuffixKey())
+// CNContactNameSuffixKey returns the string constant CNContactNameSuffixKey, for use as a dictionary key or argument.
+func CNContactNameSuffixKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactNameSuffixKey")))
 }
 
-// CNContactNicknameKey returns the string constant CNContactNicknameKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactNicknameKey() objc.ID {
-	return purego.CFConstant(raw.CNContactNicknameKey())
+// CNContactNicknameKey returns the string constant CNContactNicknameKey, for use as a dictionary key or argument.
+func CNContactNicknameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactNicknameKey")))
 }
 
-// CNContactOrganizationNameKey returns the string constant CNContactOrganizationNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactOrganizationNameKey() objc.ID {
-	return purego.CFConstant(raw.CNContactOrganizationNameKey())
+// CNContactOrganizationNameKey returns the string constant CNContactOrganizationNameKey, for use as a dictionary key or argument.
+func CNContactOrganizationNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactOrganizationNameKey")))
 }
 
-// CNContactDepartmentNameKey returns the string constant CNContactDepartmentNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactDepartmentNameKey() objc.ID {
-	return purego.CFConstant(raw.CNContactDepartmentNameKey())
+// CNContactDepartmentNameKey returns the string constant CNContactDepartmentNameKey, for use as a dictionary key or argument.
+func CNContactDepartmentNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactDepartmentNameKey")))
 }
 
-// CNContactJobTitleKey returns the string constant CNContactJobTitleKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactJobTitleKey() objc.ID {
-	return purego.CFConstant(raw.CNContactJobTitleKey())
+// CNContactJobTitleKey returns the string constant CNContactJobTitleKey, for use as a dictionary key or argument.
+func CNContactJobTitleKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactJobTitleKey")))
 }
 
-// CNContactPhoneticGivenNameKey returns the string constant CNContactPhoneticGivenNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactPhoneticGivenNameKey() objc.ID {
-	return purego.CFConstant(raw.CNContactPhoneticGivenNameKey())
+// CNContactPhoneticGivenNameKey returns the string constant CNContactPhoneticGivenNameKey, for use as a dictionary key or argument.
+func CNContactPhoneticGivenNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactPhoneticGivenNameKey")))
 }
 
-// CNContactPhoneticMiddleNameKey returns the string constant CNContactPhoneticMiddleNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactPhoneticMiddleNameKey() objc.ID {
-	return purego.CFConstant(raw.CNContactPhoneticMiddleNameKey())
+// CNContactPhoneticMiddleNameKey returns the string constant CNContactPhoneticMiddleNameKey, for use as a dictionary key or argument.
+func CNContactPhoneticMiddleNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactPhoneticMiddleNameKey")))
 }
 
-// CNContactPhoneticFamilyNameKey returns the string constant CNContactPhoneticFamilyNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactPhoneticFamilyNameKey() objc.ID {
-	return purego.CFConstant(raw.CNContactPhoneticFamilyNameKey())
+// CNContactPhoneticFamilyNameKey returns the string constant CNContactPhoneticFamilyNameKey, for use as a dictionary key or argument.
+func CNContactPhoneticFamilyNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactPhoneticFamilyNameKey")))
 }
 
-// CNContactPhoneticOrganizationNameKey returns the string constant CNContactPhoneticOrganizationNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactPhoneticOrganizationNameKey() objc.ID {
-	return purego.CFConstant(raw.CNContactPhoneticOrganizationNameKey())
+// CNContactPhoneticOrganizationNameKey returns the string constant CNContactPhoneticOrganizationNameKey, for use as a dictionary key or argument.
+func CNContactPhoneticOrganizationNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactPhoneticOrganizationNameKey")))
 }
 
-// CNContactBirthdayKey returns the string constant CNContactBirthdayKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactBirthdayKey() objc.ID {
-	return purego.CFConstant(raw.CNContactBirthdayKey())
+// CNContactBirthdayKey returns the string constant CNContactBirthdayKey, for use as a dictionary key or argument.
+func CNContactBirthdayKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactBirthdayKey")))
 }
 
-// CNContactNonGregorianBirthdayKey returns the string constant CNContactNonGregorianBirthdayKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactNonGregorianBirthdayKey() objc.ID {
-	return purego.CFConstant(raw.CNContactNonGregorianBirthdayKey())
+// CNContactNonGregorianBirthdayKey returns the string constant CNContactNonGregorianBirthdayKey, for use as a dictionary key or argument.
+func CNContactNonGregorianBirthdayKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactNonGregorianBirthdayKey")))
 }
 
-// CNContactNoteKey returns the string constant CNContactNoteKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactNoteKey() objc.ID {
-	return purego.CFConstant(raw.CNContactNoteKey())
-}
+// CNContactNoteKey returns the string constant CNContactNoteKey, for use as a dictionary key or argument.
+func CNContactNoteKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CNContactNoteKey"))) }
 
-// CNContactImageDataKey returns the string constant CNContactImageDataKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactImageDataKey() objc.ID {
-	return purego.CFConstant(raw.CNContactImageDataKey())
+// CNContactImageDataKey returns the string constant CNContactImageDataKey, for use as a dictionary key or argument.
+func CNContactImageDataKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactImageDataKey")))
 }
 
-// CNContactThumbnailImageDataKey returns the string constant CNContactThumbnailImageDataKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactThumbnailImageDataKey() objc.ID {
-	return purego.CFConstant(raw.CNContactThumbnailImageDataKey())
+// CNContactThumbnailImageDataKey returns the string constant CNContactThumbnailImageDataKey, for use as a dictionary key or argument.
+func CNContactThumbnailImageDataKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactThumbnailImageDataKey")))
 }
 
-// CNContactImageDataAvailableKey returns the string constant CNContactImageDataAvailableKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactImageDataAvailableKey() objc.ID {
-	return purego.CFConstant(raw.CNContactImageDataAvailableKey())
+// CNContactImageDataAvailableKey returns the string constant CNContactImageDataAvailableKey, for use as a dictionary key or argument.
+func CNContactImageDataAvailableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactImageDataAvailableKey")))
 }
 
-// CNContactTypeKey returns the string constant CNContactTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactTypeKey() objc.ID {
-	return purego.CFConstant(raw.CNContactTypeKey())
-}
+// CNContactTypeKey returns the string constant CNContactTypeKey, for use as a dictionary key or argument.
+func CNContactTypeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CNContactTypeKey"))) }
 
-// CNContactPhoneNumbersKey returns the string constant CNContactPhoneNumbersKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactPhoneNumbersKey() objc.ID {
-	return purego.CFConstant(raw.CNContactPhoneNumbersKey())
+// CNContactPhoneNumbersKey returns the string constant CNContactPhoneNumbersKey, for use as a dictionary key or argument.
+func CNContactPhoneNumbersKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactPhoneNumbersKey")))
 }
 
-// CNContactEmailAddressesKey returns the string constant CNContactEmailAddressesKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactEmailAddressesKey() objc.ID {
-	return purego.CFConstant(raw.CNContactEmailAddressesKey())
+// CNContactEmailAddressesKey returns the string constant CNContactEmailAddressesKey, for use as a dictionary key or argument.
+func CNContactEmailAddressesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactEmailAddressesKey")))
 }
 
-// CNContactPostalAddressesKey returns the string constant CNContactPostalAddressesKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactPostalAddressesKey() objc.ID {
-	return purego.CFConstant(raw.CNContactPostalAddressesKey())
+// CNContactPostalAddressesKey returns the string constant CNContactPostalAddressesKey, for use as a dictionary key or argument.
+func CNContactPostalAddressesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactPostalAddressesKey")))
 }
 
-// CNContactDatesKey returns the string constant CNContactDatesKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactDatesKey() objc.ID {
-	return purego.CFConstant(raw.CNContactDatesKey())
-}
+// CNContactDatesKey returns the string constant CNContactDatesKey, for use as a dictionary key or argument.
+func CNContactDatesKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CNContactDatesKey"))) }
 
-// CNContactUrlAddressesKey returns the string constant CNContactUrlAddressesKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactUrlAddressesKey() objc.ID {
-	return purego.CFConstant(raw.CNContactUrlAddressesKey())
+// CNContactUrlAddressesKey returns the string constant CNContactUrlAddressesKey, for use as a dictionary key or argument.
+func CNContactUrlAddressesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactUrlAddressesKey")))
 }
 
-// CNContactRelationsKey returns the string constant CNContactRelationsKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactRelationsKey() objc.ID {
-	return purego.CFConstant(raw.CNContactRelationsKey())
+// CNContactRelationsKey returns the string constant CNContactRelationsKey, for use as a dictionary key or argument.
+func CNContactRelationsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactRelationsKey")))
 }
 
-// CNContactSocialProfilesKey returns the string constant CNContactSocialProfilesKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactSocialProfilesKey() objc.ID {
-	return purego.CFConstant(raw.CNContactSocialProfilesKey())
+// CNContactSocialProfilesKey returns the string constant CNContactSocialProfilesKey, for use as a dictionary key or argument.
+func CNContactSocialProfilesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactSocialProfilesKey")))
 }
 
-// CNContactInstantMessageAddressesKey returns the string constant CNContactInstantMessageAddressesKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactInstantMessageAddressesKey() objc.ID {
-	return purego.CFConstant(raw.CNContactInstantMessageAddressesKey())
+// CNContactInstantMessageAddressesKey returns the string constant CNContactInstantMessageAddressesKey, for use as a dictionary key or argument.
+func CNContactInstantMessageAddressesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactInstantMessageAddressesKey")))
 }
 
-// @abstract Notification posted when changes occur in another CNContactStore.
-// CNContactStoreDidChangeNotification returns the string constant CNContactStoreDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactStoreDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.CNContactStoreDidChangeNotification())
+// Notification posted when changes occur in another CNContactStore.
+// CNContactStoreDidChangeNotification returns the string constant CNContactStoreDidChangeNotification, for use as a dictionary key or argument.
+func CNContactStoreDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactStoreDidChangeNotification")))
 }
 
-// CNGroupIdentifierKey returns the string constant CNGroupIdentifierKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNGroupIdentifierKey() objc.ID {
-	return purego.CFConstant(raw.CNGroupIdentifierKey())
+// CNGroupIdentifierKey returns the string constant CNGroupIdentifierKey, for use as a dictionary key or argument.
+func CNGroupIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNGroupIdentifierKey")))
 }
 
-// CNGroupNameKey returns the string constant CNGroupNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNGroupNameKey() objc.ID {
-	return purego.CFConstant(raw.CNGroupNameKey())
-}
+// CNGroupNameKey returns the string constant CNGroupNameKey, for use as a dictionary key or argument.
+func CNGroupNameKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CNGroupNameKey"))) }
 
-// CNContainerIdentifierKey returns the string constant CNContainerIdentifierKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContainerIdentifierKey() objc.ID {
-	return purego.CFConstant(raw.CNContainerIdentifierKey())
+// CNContainerIdentifierKey returns the string constant CNContainerIdentifierKey, for use as a dictionary key or argument.
+func CNContainerIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContainerIdentifierKey")))
 }
 
-// CNContainerNameKey returns the string constant CNContainerNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContainerNameKey() objc.ID {
-	return purego.CFConstant(raw.CNContainerNameKey())
+// CNContainerNameKey returns the string constant CNContainerNameKey, for use as a dictionary key or argument.
+func CNContainerNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContainerNameKey")))
 }
 
-// CNContainerTypeKey returns the string constant CNContainerTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNContainerTypeKey() objc.ID {
-	return purego.CFConstant(raw.CNContainerTypeKey())
+// CNContainerTypeKey returns the string constant CNContainerTypeKey, for use as a dictionary key or argument.
+func CNContainerTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContainerTypeKey")))
 }
 
-// CNContactPropertyAttribute returns the string constant CNContactPropertyAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func CNContactPropertyAttribute() objc.ID {
-	return purego.CFConstant(raw.CNContactPropertyAttribute())
+// CNContactPropertyAttribute returns the string constant CNContactPropertyAttribute, for use as a dictionary key or argument.
+func CNContactPropertyAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNContactPropertyAttribute")))
 }
 
-// CNPostalAddressPropertyAttribute returns the string constant CNPostalAddressPropertyAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func CNPostalAddressPropertyAttribute() objc.ID {
-	return purego.CFConstant(raw.CNPostalAddressPropertyAttribute())
+// CNPostalAddressPropertyAttribute returns the string constant CNPostalAddressPropertyAttribute, for use as a dictionary key or argument.
+func CNPostalAddressPropertyAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNPostalAddressPropertyAttribute")))
 }
 
-// CNPostalAddressLocalizedPropertyNameAttribute returns the string constant CNPostalAddressLocalizedPropertyNameAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func CNPostalAddressLocalizedPropertyNameAttribute() objc.ID {
-	return purego.CFConstant(raw.CNPostalAddressLocalizedPropertyNameAttribute())
+// CNPostalAddressLocalizedPropertyNameAttribute returns the string constant CNPostalAddressLocalizedPropertyNameAttribute, for use as a dictionary key or argument.
+func CNPostalAddressLocalizedPropertyNameAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNPostalAddressLocalizedPropertyNameAttribute")))
 }
 
-// CNErrorDomain returns the string constant CNErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func CNErrorDomain() objc.ID {
-	return purego.CFConstant(raw.CNErrorDomain())
-}
+// CNErrorDomain returns the string constant CNErrorDomain, for use as a dictionary key or argument.
+func CNErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CNErrorDomain"))) }
 
 // When available an array of one or more CNContact, CNGroup, CNContainer, CNSaveRequest, or CNFetchRequest objects for which the error code applies.
-// CNErrorUserInfoAffectedRecordsKey returns the string constant CNErrorUserInfoAffectedRecordsKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNErrorUserInfoAffectedRecordsKey() objc.ID {
-	return purego.CFConstant(raw.CNErrorUserInfoAffectedRecordsKey())
+// CNErrorUserInfoAffectedRecordsKey returns the string constant CNErrorUserInfoAffectedRecordsKey, for use as a dictionary key or argument.
+func CNErrorUserInfoAffectedRecordsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNErrorUserInfoAffectedRecordsKey")))
 }
 
 // When available an array of one or more NSString objects for which the error code applies.
-// CNErrorUserInfoAffectedRecordIdentifiersKey returns the string constant CNErrorUserInfoAffectedRecordIdentifiersKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNErrorUserInfoAffectedRecordIdentifiersKey() objc.ID {
-	return purego.CFConstant(raw.CNErrorUserInfoAffectedRecordIdentifiersKey())
+// CNErrorUserInfoAffectedRecordIdentifiersKey returns the string constant CNErrorUserInfoAffectedRecordIdentifiersKey, for use as a dictionary key or argument.
+func CNErrorUserInfoAffectedRecordIdentifiersKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNErrorUserInfoAffectedRecordIdentifiersKey")))
 }
 
 // An array of NSErrors for CNErrorCodeValidationMultipleErrors.
-// CNErrorUserInfoValidationErrorsKey returns the string constant CNErrorUserInfoValidationErrorsKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNErrorUserInfoValidationErrorsKey() objc.ID {
-	return purego.CFConstant(raw.CNErrorUserInfoValidationErrorsKey())
+// CNErrorUserInfoValidationErrorsKey returns the string constant CNErrorUserInfoValidationErrorsKey, for use as a dictionary key or argument.
+func CNErrorUserInfoValidationErrorsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNErrorUserInfoValidationErrorsKey")))
 }
 
 // An array of key paths associated with a given error. For validation errors this will contain key paths to specific object properties.
-// CNErrorUserInfoKeyPathsKey returns the string constant CNErrorUserInfoKeyPathsKey as an objc.ID, for use as a dictionary key or selector argument.
-func CNErrorUserInfoKeyPathsKey() objc.ID {
-	return purego.CFConstant(raw.CNErrorUserInfoKeyPathsKey())
+// CNErrorUserInfoKeyPathsKey returns the string constant CNErrorUserInfoKeyPathsKey, for use as a dictionary key or argument.
+func CNErrorUserInfoKeyPathsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CNErrorUserInfoKeyPathsKey")))
 }

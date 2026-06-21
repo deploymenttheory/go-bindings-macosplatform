@@ -5,109 +5,126 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams wraps [raw.MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams] with a fluent Go API.
+// MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams is an idiomatic wrapper over the Objective-C class MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams.
 type MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams struct {
-	inner *raw.MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams].
-func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) Unwrap() *raw.MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParamsFromID adopts an existing object pointer as a MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams (nil for 0).
+// MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParamsFromID adopts an existing Objective-C object as a MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParamsFromID(id objc.ID) *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams{inner: raw.MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParamsFromID(id)}
+	x := &MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams creates a new [MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams].
+// mTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParamsAdopt(id objc.ID) *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams creates a new MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams.
 func NewMTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams() *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams")), objc.RegisterName("new"))
-	return &MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams{inner: raw.MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams")), objc.RegisterName("new"))
+	return mTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParamsAdopt(_id)
 }
 
-// WithPendingDataset sets the pendingDataset property and returns the receiver for chaining.
-func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) WithPendingDataset(pendingDataset *foundation.NSData) *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams {
-	x.inner.SetPendingDataset(pendingDataset)
+// WithPendingDataset sets pendingDataset and returns the receiver so calls can be chained.
+func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) WithPendingDataset(pendingDataset obj.Object) *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPendingDataset:"), objref.IDOf(pendingDataset))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke).
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// PendingDataset calls the underlying PendingDataset.
-func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) PendingDataset() *foundation.NSData {
-	return x.inner.PendingDataset()
+func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) PendingDataset() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pendingDataset"))
+	return obj.Wrap(_r)
 }
 
-// SetPendingDataset calls the underlying SetPendingDataset.
-func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) SetPendingDataset(pendingDataset *foundation.NSData) {
-	x.inner.SetPendingDataset(pendingDataset)
+func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) SetPendingDataset(pendingDataset obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPendingDataset:"), objref.IDOf(pendingDataset))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParamsable is the interface implemented by [MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams], for mocking and DI.
 type MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParamsable interface {
-	Unwrap() *raw.MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams
-	WithPendingDataset(pendingDataset *foundation.NSData) *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams
-	PendingDataset() *foundation.NSData
-	SetPendingDataset(pendingDataset *foundation.NSData)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithPendingDataset(pendingDataset obj.Object) *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams
+	PendingDataset() obj.Object
+	SetPendingDataset(pendingDataset obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParamsable = (*MTRThreadBorderRouterManagementClusterSetPendingDatasetRequestParams)(nil)

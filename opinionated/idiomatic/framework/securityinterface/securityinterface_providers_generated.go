@@ -5,10 +5,10 @@
 package securityinterface
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityinterface"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// CertificatePanelProvider is implemented by CertificatePanel and any idiomatic type wrapping a SFCertificatePanel subclass.
+// CertificatePanelProvider is accepted wherever a SFCertificatePanel (or one of its subclasses) is expected.
 type CertificatePanelProvider interface {
-	asCertificatePanel() *raw.SFCertificatePanel
+	objref.Object
 }

@@ -5,173 +5,94 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// NDArrayMultiaryBase wraps [raw.MPSNDArrayMultiaryBase] with a fluent Go API.
+// NDArrayMultiaryBase is an idiomatic wrapper over the Objective-C class MPSNDArrayMultiaryBase.
 type NDArrayMultiaryBase struct {
-	inner *raw.MPSNDArrayMultiaryBase
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayMultiaryBase].
-func (x *NDArrayMultiaryBase) Unwrap() *raw.MPSNDArrayMultiaryBase { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NDArrayMultiaryBase) ID() objc.ID { return x.inner.Ptr() }
-
-// NDArrayMultiaryBaseFromID adopts an existing object pointer as a NDArrayMultiaryBase (nil for 0).
+// NDArrayMultiaryBaseFromID adopts an existing Objective-C object as a NDArrayMultiaryBase
+// (nil for 0), retaining it and registering a release finalizer.
 func NDArrayMultiaryBaseFromID(id objc.ID) *NDArrayMultiaryBase {
 	if id == 0 {
 		return nil
 	}
-	return &NDArrayMultiaryBase{inner: raw.MPSNDArrayMultiaryBaseFromID(id)}
-}
-
-// @abstract   Initialize a MPSNDArrayMultiaryKernel @param      device  The device on which the kernel will run @param      count   The maximum number of NDArrays read by the kernel @return     A valid MPSNDArrayMultiaryKernel, or nil if allocation failure.
-//
-// NewNDArrayMultiaryBaseWithDeviceSourceCount creates a new [NDArrayMultiaryBase].
-func NewNDArrayMultiaryBaseWithDeviceSourceCount(device metal.MTLDevice, count uint) *NDArrayMultiaryBase {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayMultiaryBase")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:sourceCount:"), device, count)
-	return &NDArrayMultiaryBase{inner: raw.MPSNDArrayMultiaryBaseFromID(_id)}
-}
-
-// @abstract   Initialize a MPSNDArrayMultiaryKernel from a NSCoder @param      coder   The NSCoder that contains the serialized object @param      device  The device on which the kernel will run @return     A valid MPSNDArrayMultiaryKernel, or nil if allocation failure.
-//
-// NewNDArrayMultiaryBaseWithCoderDevice creates a new [NDArrayMultiaryBase].
-func NewNDArrayMultiaryBaseWithCoderDevice(coder *foundation.NSCoder, device metal.MTLDevice) *NDArrayMultiaryBase {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayMultiaryBase")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), coder.Ptr(), device)
-	return &NDArrayMultiaryBase{inner: raw.MPSNDArrayMultiaryBaseFromID(_id)}
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *NDArrayMultiaryBase) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayMultiaryBase {
-	x.inner.SetDestinationArrayAllocator(destinationArrayAllocator)
+	x := &NDArrayMultiaryBase{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NDArrayMultiaryBase) WithOptions(options mpscore.MPSKernelOptions) *NDArrayMultiaryBase {
-	x.inner.MPSKernel.SetOptions(options)
+// nDArrayMultiaryBaseAdopt wraps an Objective-C object that this code just created as a
+// NDArrayMultiaryBase (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nDArrayMultiaryBaseAdopt(id objc.ID) *NDArrayMultiaryBase {
+	if id == 0 {
+		return nil
+	}
+	x := &NDArrayMultiaryBase{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
+}
+
+// Description returns the object's -description text.
+func (x *NDArrayMultiaryBase) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NDArrayMultiaryBase) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NDArrayMultiaryBase) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNDArrayMultiaryBase creates a new NDArrayMultiaryBase.
+func NewNDArrayMultiaryBase() *NDArrayMultiaryBase {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayMultiaryBase")), objc.RegisterName("new"))
+	return nDArrayMultiaryBaseAdopt(_id)
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *NDArrayMultiaryBase) WithLabel(label string) *NDArrayMultiaryBase {
-	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract   Read offsets to use when addressing a source NDArray @discussion The coordinate of the position read from this source array which is used to calculate the result value at [0,0,0,....] If the position read is actually a contiguous region (e.g. the area covered by a convolution kernel) then this is the center of that region, rounded down, for each dimension. @param      sourceIndex   The index of the source MPSNDArray to which the list of offsets is applied
-//
-// OffsetsAtSourceIndex calls the underlying OffsetsAtSourceIndex.
-func (x *NDArrayMultiaryBase) OffsetsAtSourceIndex(sourceIndex uint) mpsndarray.MPSNDArrayOffsets {
-	return x.inner.OffsetsAtSourceIndex(sourceIndex)
+// Initialize a MPSNDArrayMultiaryKernel from a NSCoder
+func (x *NDArrayMultiaryBase) EncodeWithCoder(coder obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }
 
-// @abstract   The edge mode used for each source NDArray @param      sourceIndex   The index of the source image @return     The MPSImageEdgeMode for that image
-//
-// EdgeModeAtSourceIndex calls the underlying EdgeModeAtSourceIndex.
-func (x *NDArrayMultiaryBase) EdgeModeAtSourceIndex(sourceIndex uint) mpscore.MPSImageEdgeMode {
-	return x.inner.EdgeModeAtSourceIndex(sourceIndex)
+func (x *NDArrayMultiaryBase) ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays []obj.Object, sourceStates []obj.Object, destinationArray obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultStateForSourceArrays:sourceStates:destinationArray:"), purego.SliceToNSArray(sourceArrays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationArray))
+	return obj.Wrap(_r)
 }
 
-// @abstract   Get the diameters of the point spread function (PSF) in each dimension @param      sourceIndex     The MPSNDArrayMultiaryKernel source NDArray to which the kernel will be applied @return     A list of kernel diameters in each dimension
-//
-// KernelSizesForSourceIndex calls the underlying KernelSizesForSourceIndex.
-func (x *NDArrayMultiaryBase) KernelSizesForSourceIndex(sourceIndex uint) mpsndarray.MPSNDArraySizes {
-	return x.inner.KernelSizesForSourceIndex(sourceIndex)
+// Return a descriptor suitable for allocating a NSArray to receive the result The object properties (kernelSize, offsets, edgeMode, etc.) should be properly configured as if the -encode call was about to be made, before this method is called. Those properties may affect the results.
+func (x *NDArrayMultiaryBase) DestinationArrayDescriptorForSourceArraysSourceState(sources []obj.Object, state obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationArrayDescriptorForSourceArrays:sourceState:"), purego.SliceToNSArray(sources, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(state))
+	return obj.Wrap(_r)
 }
-
-// @abstract   Return the downsampling ratio for the kernel in each dimension @discussion If the filter is a "backwards" filter such as a gradient filter or convolution transpose, then this is the upsampling ratio and zeros are inserted in the result. @param      sourceIndex The index of the source for which the strides apply @return     The strides from one destination sample to the next in each dimension of the corresponding source NDArray
-//
-// StridesForSourceIndex calls the underlying StridesForSourceIndex.
-func (x *NDArrayMultiaryBase) StridesForSourceIndex(sourceIndex uint) mpsndarray.MPSNDArrayOffsets {
-	return x.inner.StridesForSourceIndex(sourceIndex)
-}
-
-// @abstract   Get the kernel dilation rate for each dimension @param      sourceIndex The index of the source image for which this applies @return     The kernel dilation rate for each dimension.
-//
-// DilationRatesForSourceIndex calls the underlying DilationRatesForSourceIndex.
-func (x *NDArrayMultiaryBase) DilationRatesForSourceIndex(sourceIndex uint) mpsndarray.MPSNDArraySizes {
-	return x.inner.DilationRatesForSourceIndex(sourceIndex)
-}
-
-// @abstract   Initialize a MPSNDArrayMultiaryKernel from a NSCoder @param      coder   The NSCoder that contains the serialized object
-//
-// EncodeWithCoder calls the underlying EncodeWithCoder.
-func (x *NDArrayMultiaryBase) EncodeWithCoder(coder *foundation.NSCoder) {
-	x.inner.EncodeWithCoder(coder)
-}
-
-// @abstract   Create a copy with @param      zone    The NSZone in which to allocate the MPSNDArrayMultiaryKernel object @param      device  The device on which the new kernel will run. Pass nil for same device. @return     A valid MPSNDArrayMultiaryKernel, or nil if allocation failure.
-//
-// CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
-func (x *NDArrayMultiaryBase) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *NDArrayMultiaryBase {
-	_r := x.inner.CopyWithZoneDevice(zone, device)
-	if _r == nil {
-		return nil
-	}
-	return &NDArrayMultiaryBase{inner: _r}
-}
-
-// ResultStateForSourceArraysSourceStatesDestinationArray calls the underlying ResultStateForSourceArraysSourceStatesDestinationArray.
-func (x *NDArrayMultiaryBase) ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], sourceStates *foundation.NSArray[*mpscore.MPSState], destinationArray *mpscore.MPSNDArray) *mpscore.MPSState {
-	return x.inner.ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays, sourceStates, destinationArray)
-}
-
-// @abstract   Return a descriptor suitable for allocating a NSArray to receive the result @discussion The object properties (kernelSize, offsets, edgeMode, etc.) should be properly configured as if the -encode call was about to be made, before this method is called. Those properties may affect the results. @param      sources     The list of sources passed into the -encode call @param      state       The source state object, if any passed to the -encode call @return     a valid MPSNDArrayDescriptor that may be used to create a MPSNDArray to used to hold the results of this kernel.
-//
-// DestinationArrayDescriptorForSourceArraysSourceState calls the underlying DestinationArrayDescriptorForSourceArraysSourceState.
-func (x *NDArrayMultiaryBase) DestinationArrayDescriptorForSourceArraysSourceState(sources *foundation.NSArray[*mpscore.MPSNDArray], state *mpscore.MPSState) *mpscore.MPSNDArrayDescriptor {
-	return x.inner.DestinationArrayDescriptorForSourceArraysSourceState(sources, state)
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// DestinationArrayAllocator calls the underlying DestinationArrayAllocator.
-func (x *NDArrayMultiaryBase) DestinationArrayAllocator() mpscore.MPSNDArrayAllocator {
-	return x.inner.DestinationArrayAllocator()
-}
-
-// SetDestinationArrayAllocator calls the underlying SetDestinationArrayAllocator.
-func (x *NDArrayMultiaryBase) SetDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) {
-	x.inner.SetDestinationArrayAllocator(destinationArrayAllocator)
-}
-
-func (x *NDArrayMultiaryBase) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
 
 // NDArrayMultiaryBaseable is the interface implemented by [NDArrayMultiaryBase], for mocking and DI.
 type NDArrayMultiaryBaseable interface {
-	Unwrap() *raw.MPSNDArrayMultiaryBase
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayMultiaryBase
-	WithOptions(options mpscore.MPSKernelOptions) *NDArrayMultiaryBase
+	obj.Object
 	WithLabel(label string) *NDArrayMultiaryBase
-	OffsetsAtSourceIndex(sourceIndex uint) mpsndarray.MPSNDArrayOffsets
-	EdgeModeAtSourceIndex(sourceIndex uint) mpscore.MPSImageEdgeMode
-	KernelSizesForSourceIndex(sourceIndex uint) mpsndarray.MPSNDArraySizes
-	StridesForSourceIndex(sourceIndex uint) mpsndarray.MPSNDArrayOffsets
-	DilationRatesForSourceIndex(sourceIndex uint) mpsndarray.MPSNDArraySizes
-	EncodeWithCoder(coder *foundation.NSCoder)
-	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *NDArrayMultiaryBase
-	ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], sourceStates *foundation.NSArray[*mpscore.MPSState], destinationArray *mpscore.MPSNDArray) *mpscore.MPSState
-	DestinationArrayDescriptorForSourceArraysSourceState(sources *foundation.NSArray[*mpscore.MPSNDArray], state *mpscore.MPSState) *mpscore.MPSNDArrayDescriptor
-	DestinationArrayAllocator() mpscore.MPSNDArrayAllocator
-	SetDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator)
+	EncodeWithCoder(coder obj.Object)
+	ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays []obj.Object, sourceStates []obj.Object, destinationArray obj.Object) obj.Object
+	DestinationArrayDescriptorForSourceArraysSourceState(sources []obj.Object, state obj.Object) obj.Object
 }
 
 var _ NDArrayMultiaryBaseable = (*NDArrayMultiaryBase)(nil)

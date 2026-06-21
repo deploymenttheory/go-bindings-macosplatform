@@ -5,72 +5,92 @@
 package oslog
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/oslog"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An entry containing a signpost.
 //
-// LogEntrySignpost wraps [raw.OSLogEntrySignpost] with a fluent Go API.
+// LogEntrySignpost is an idiomatic wrapper over the Objective-C class OSLogEntrySignpost.
 type LogEntrySignpost struct {
-	inner *raw.OSLogEntrySignpost
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.OSLogEntrySignpost].
-func (x *LogEntrySignpost) Unwrap() *raw.OSLogEntrySignpost { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LogEntrySignpost) ID() objc.ID { return x.inner.Ptr() }
-
-// LogEntrySignpostFromID adopts an existing object pointer as a LogEntrySignpost (nil for 0).
+// LogEntrySignpostFromID adopts an existing Objective-C object as a LogEntrySignpost
+// (nil for 0), retaining it and registering a release finalizer.
 func LogEntrySignpostFromID(id objc.ID) *LogEntrySignpost {
 	if id == 0 {
 		return nil
 	}
-	return &LogEntrySignpost{inner: raw.OSLogEntrySignpostFromID(id)}
+	x := &LogEntrySignpost{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLogEntrySignpost creates a new [LogEntrySignpost].
+// logEntrySignpostAdopt wraps an Objective-C object that this code just created as a
+// LogEntrySignpost (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func logEntrySignpostAdopt(id objc.ID) *LogEntrySignpost {
+	if id == 0 {
+		return nil
+	}
+	x := &LogEntrySignpost{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LogEntrySignpost) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LogEntrySignpost) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LogEntrySignpost) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLogEntrySignpost creates a new LogEntrySignpost.
 func NewLogEntrySignpost() *LogEntrySignpost {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSLogEntrySignpost")), objc.RegisterName("new"))
-	return &LogEntrySignpost{inner: raw.OSLogEntrySignpostFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("OSLogEntrySignpost")), objc.RegisterName("new"))
+	return logEntrySignpostAdopt(_id)
 }
 
-// @property signpostIdentifier @abstract The signpost ID associated with this entry.
-//
-// SignpostIdentifier calls the underlying SignpostIdentifier.
+// The signpost ID associated with this entry.
 func (x *LogEntrySignpost) SignpostIdentifier() uint64 {
-	return x.inner.SignpostIdentifier()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("signpostIdentifier"))
+	return _r
 }
 
-// @property signpostName @abstract The signpost name associated with this entry.
-//
-// SignpostName calls the underlying SignpostName.
+// The signpost name associated with this entry.
 func (x *LogEntrySignpost) SignpostName() string {
-	_r := x.inner.SignpostName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signpostName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property signpostType @abstract The signpost type associated with this entry.
-//
-// SignpostType calls the underlying SignpostType.
-func (x *LogEntrySignpost) SignpostType() OSLogEntrySignpostType {
-	return OSLogEntrySignpostType(x.inner.SignpostType())
+// The signpost type associated with this entry.
+func (x *LogEntrySignpost) SignpostType() LogEntrySignpostType {
+	_r := objc.Send[LogEntrySignpostType](objref.IDOf(x), objc.RegisterName("signpostType"))
+	return _r
 }
-
-func (x *LogEntrySignpost) asLogEntry() *raw.OSLogEntry { return &x.inner.OSLogEntry }
 
 // LogEntrySignpostable is the interface implemented by [LogEntrySignpost], for mocking and DI.
 type LogEntrySignpostable interface {
-	Unwrap() *raw.OSLogEntrySignpost
+	obj.Object
 	SignpostIdentifier() uint64
 	SignpostName() string
-	SignpostType() OSLogEntrySignpostType
+	SignpostType() LogEntrySignpostType
 }
 
 var _ LogEntrySignpostable = (*LogEntrySignpost)(nil)

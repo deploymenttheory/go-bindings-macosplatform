@@ -5,47 +5,68 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A configuration object that requests the creation of a socket device to communicate with the guest system.
 //
-// VirtioSocketDeviceConfiguration wraps [raw.VZVirtioSocketDeviceConfiguration] with a fluent Go API.
+// VirtioSocketDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioSocketDeviceConfiguration.
 type VirtioSocketDeviceConfiguration struct {
-	inner *raw.VZVirtioSocketDeviceConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZVirtioSocketDeviceConfiguration].
-func (x *VirtioSocketDeviceConfiguration) Unwrap() *raw.VZVirtioSocketDeviceConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioSocketDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioSocketDeviceConfigurationFromID adopts an existing object pointer as a VirtioSocketDeviceConfiguration (nil for 0).
+// VirtioSocketDeviceConfigurationFromID adopts an existing Objective-C object as a VirtioSocketDeviceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioSocketDeviceConfigurationFromID(id objc.ID) *VirtioSocketDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioSocketDeviceConfiguration{inner: raw.VZVirtioSocketDeviceConfigurationFromID(id)}
+	x := &VirtioSocketDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVirtioSocketDeviceConfiguration creates a new [VirtioSocketDeviceConfiguration].
+// virtioSocketDeviceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// VirtioSocketDeviceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioSocketDeviceConfigurationAdopt(id objc.ID) *VirtioSocketDeviceConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtioSocketDeviceConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VirtioSocketDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VirtioSocketDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VirtioSocketDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVirtioSocketDeviceConfiguration creates a new VirtioSocketDeviceConfiguration.
 func NewVirtioSocketDeviceConfiguration() *VirtioSocketDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioSocketDeviceConfiguration")), objc.RegisterName("new"))
-	return &VirtioSocketDeviceConfiguration{inner: raw.VZVirtioSocketDeviceConfigurationFromID(_id)}
-}
-
-func (x *VirtioSocketDeviceConfiguration) asSocketDeviceConfiguration() *raw.VZSocketDeviceConfiguration {
-	return &x.inner.VZSocketDeviceConfiguration
+	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioSocketDeviceConfiguration")), objc.RegisterName("new"))
+	return virtioSocketDeviceConfigurationAdopt(_id)
 }
 
 // VirtioSocketDeviceConfigurationable is the interface implemented by [VirtioSocketDeviceConfiguration], for mocking and DI.
 type VirtioSocketDeviceConfigurationable interface {
-	Unwrap() *raw.VZVirtioSocketDeviceConfiguration
+	obj.Object
 }
 
 var _ VirtioSocketDeviceConfigurationable = (*VirtioSocketDeviceConfiguration)(nil)

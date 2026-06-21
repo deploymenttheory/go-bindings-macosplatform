@@ -5,69 +5,94 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that filters which address options to include or exclude in search results.
 //
-// AddressFilter wraps [raw.MKAddressFilter] with a fluent Go API.
+// AddressFilter is an idiomatic wrapper over the Objective-C class MKAddressFilter.
 type AddressFilter struct {
-	inner *raw.MKAddressFilter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKAddressFilter].
-func (x *AddressFilter) Unwrap() *raw.MKAddressFilter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AddressFilter) ID() objc.ID { return x.inner.Ptr() }
-
-// AddressFilterFromID adopts an existing object pointer as a AddressFilter (nil for 0).
+// AddressFilterFromID adopts an existing Objective-C object as a AddressFilter
+// (nil for 0), retaining it and registering a release finalizer.
 func AddressFilterFromID(id objc.ID) *AddressFilter {
 	if id == 0 {
 		return nil
 	}
-	return &AddressFilter{inner: raw.MKAddressFilterFromID(id)}
+	x := &AddressFilter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// addressFilterAdopt wraps an Objective-C object that this code just created as a
+// AddressFilter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func addressFilterAdopt(id objc.ID) *AddressFilter {
+	if id == 0 {
+		return nil
+	}
+	x := &AddressFilter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AddressFilter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AddressFilter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AddressFilter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an address filter with options for including results in a search.
 //
-// NewAddressFilterIncludingOptions creates a new [AddressFilter].
-func NewAddressFilterIncludingOptions(options MKAddressFilterOption) *AddressFilter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKAddressFilter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initIncludingOptions:"), raw.MKAddressFilterOption(options))
-	return &AddressFilter{inner: raw.MKAddressFilterFromID(_id)}
+// NewAddressFilterIncludingOptions creates a new AddressFilter.
+func NewAddressFilterIncludingOptions(options AddressFilterOption) *AddressFilter {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKAddressFilter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initIncludingOptions:"), options)
+	return addressFilterAdopt(_id)
 }
 
 // Creates an address filter with options for excluding results in a search.
 //
-// NewAddressFilterExcludingOptions creates a new [AddressFilter].
-func NewAddressFilterExcludingOptions(options MKAddressFilterOption) *AddressFilter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKAddressFilter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initExcludingOptions:"), raw.MKAddressFilterOption(options))
-	return &AddressFilter{inner: raw.MKAddressFilterFromID(_id)}
+// NewAddressFilterExcludingOptions creates a new AddressFilter.
+func NewAddressFilterExcludingOptions(options AddressFilterOption) *AddressFilter {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKAddressFilter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initExcludingOptions:"), options)
+	return addressFilterAdopt(_id)
 }
 
 // Indicates whether options are included for filtering.
-//
-// IncludesOptions calls the underlying IncludesOptions.
-func (x *AddressFilter) IncludesOptions(options MKAddressFilterOption) bool {
-	return x.inner.IncludesOptions(raw.MKAddressFilterOption(options))
+func (x *AddressFilter) IncludesOptions(options AddressFilterOption) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesOptions:"), options)
+	return _r
 }
 
 // Indicates whether options are excluded from filtering.
-//
-// ExcludesOptions calls the underlying ExcludesOptions.
-func (x *AddressFilter) ExcludesOptions(options MKAddressFilterOption) bool {
-	return x.inner.ExcludesOptions(raw.MKAddressFilterOption(options))
+func (x *AddressFilter) ExcludesOptions(options AddressFilterOption) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("excludesOptions:"), options)
+	return _r
 }
 
 // AddressFilterable is the interface implemented by [AddressFilter], for mocking and DI.
 type AddressFilterable interface {
-	Unwrap() *raw.MKAddressFilter
-	IncludesOptions(options MKAddressFilterOption) bool
-	ExcludesOptions(options MKAddressFilterOption) bool
+	obj.Object
+	IncludesOptions(options AddressFilterOption) bool
+	ExcludesOptions(options AddressFilterOption) bool
 }
 
 var _ AddressFilterable = (*AddressFilter)(nil)

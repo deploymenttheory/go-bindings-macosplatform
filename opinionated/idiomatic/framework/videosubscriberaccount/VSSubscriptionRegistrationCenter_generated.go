@@ -5,51 +5,74 @@
 package videosubscriberaccount
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videosubscriberaccount"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that stores subscription information that the system provides to the Apple TV app.
 //
-// VSSubscriptionRegistrationCenter wraps [raw.VSSubscriptionRegistrationCenter] with a fluent Go API.
+// VSSubscriptionRegistrationCenter is an idiomatic wrapper over the Objective-C class VSSubscriptionRegistrationCenter.
 type VSSubscriptionRegistrationCenter struct {
-	inner *raw.VSSubscriptionRegistrationCenter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VSSubscriptionRegistrationCenter].
-func (x *VSSubscriptionRegistrationCenter) Unwrap() *raw.VSSubscriptionRegistrationCenter {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VSSubscriptionRegistrationCenter) ID() objc.ID { return x.inner.Ptr() }
-
-// VSSubscriptionRegistrationCenterFromID adopts an existing object pointer as a VSSubscriptionRegistrationCenter (nil for 0).
+// VSSubscriptionRegistrationCenterFromID adopts an existing Objective-C object as a VSSubscriptionRegistrationCenter
+// (nil for 0), retaining it and registering a release finalizer.
 func VSSubscriptionRegistrationCenterFromID(id objc.ID) *VSSubscriptionRegistrationCenter {
 	if id == 0 {
 		return nil
 	}
-	return &VSSubscriptionRegistrationCenter{inner: raw.VSSubscriptionRegistrationCenterFromID(id)}
+	x := &VSSubscriptionRegistrationCenter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVSSubscriptionRegistrationCenter creates a new [VSSubscriptionRegistrationCenter].
+// vSSubscriptionRegistrationCenterAdopt wraps an Objective-C object that this code just created as a
+// VSSubscriptionRegistrationCenter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vSSubscriptionRegistrationCenterAdopt(id objc.ID) *VSSubscriptionRegistrationCenter {
+	if id == 0 {
+		return nil
+	}
+	x := &VSSubscriptionRegistrationCenter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VSSubscriptionRegistrationCenter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VSSubscriptionRegistrationCenter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VSSubscriptionRegistrationCenter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVSSubscriptionRegistrationCenter creates a new VSSubscriptionRegistrationCenter.
 func NewVSSubscriptionRegistrationCenter() *VSSubscriptionRegistrationCenter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VSSubscriptionRegistrationCenter")), objc.RegisterName("new"))
-	return &VSSubscriptionRegistrationCenter{inner: raw.VSSubscriptionRegistrationCenterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VSSubscriptionRegistrationCenter")), objc.RegisterName("new"))
+	return vSSubscriptionRegistrationCenterAdopt(_id)
 }
 
 // Sets the subscription information for the current user.
-//
-// SetCurrentSubscription calls the underlying SetCurrentSubscription.
-func (x *VSSubscriptionRegistrationCenter) SetCurrentSubscription(currentSubscription *raw.VSSubscription) {
-	x.inner.SetCurrentSubscription(currentSubscription)
+func (x *VSSubscriptionRegistrationCenter) SetCurrentSubscription(currentSubscription *VSSubscription) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentSubscription:"), objref.IDOf(currentSubscription))
 }
 
 // VSSubscriptionRegistrationCenterable is the interface implemented by [VSSubscriptionRegistrationCenter], for mocking and DI.
 type VSSubscriptionRegistrationCenterable interface {
-	Unwrap() *raw.VSSubscriptionRegistrationCenter
-	SetCurrentSubscription(currentSubscription *raw.VSSubscription)
+	obj.Object
+	SetCurrentSubscription(currentSubscription *VSSubscription)
 }
 
 var _ VSSubscriptionRegistrationCenterable = (*VSSubscriptionRegistrationCenter)(nil)

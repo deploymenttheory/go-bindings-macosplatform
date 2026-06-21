@@ -5,75 +5,93 @@
 package photosui
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A collection of content representing curated asset and text elements.
 //
-// ProjectSection wraps [raw.PHProjectSection] with a fluent Go API.
+// ProjectSection is an idiomatic wrapper over the Objective-C class PHProjectSection.
 type ProjectSection struct {
-	inner *raw.PHProjectSection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHProjectSection].
-func (x *ProjectSection) Unwrap() *raw.PHProjectSection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProjectSection) ID() objc.ID { return x.inner.Ptr() }
-
-// ProjectSectionFromID adopts an existing object pointer as a ProjectSection (nil for 0).
+// ProjectSectionFromID adopts an existing Objective-C object as a ProjectSection
+// (nil for 0), retaining it and registering a release finalizer.
 func ProjectSectionFromID(id objc.ID) *ProjectSection {
 	if id == 0 {
 		return nil
 	}
-	return &ProjectSection{inner: raw.PHProjectSectionFromID(id)}
+	x := &ProjectSection{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewProjectSection creates a new [ProjectSection].
+// projectSectionAdopt wraps an Objective-C object that this code just created as a
+// ProjectSection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func projectSectionAdopt(id objc.ID) *ProjectSection {
+	if id == 0 {
+		return nil
+	}
+	x := &ProjectSection{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ProjectSection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ProjectSection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ProjectSection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewProjectSection creates a new ProjectSection.
 func NewProjectSection() *ProjectSection {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHProjectSection")), objc.RegisterName("new"))
-	return &ProjectSection{inner: raw.PHProjectSectionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHProjectSection")), objc.RegisterName("new"))
+	return projectSectionAdopt(_id)
 }
 
 // Array containing one or more PHProjectSectionContent objects. Ordered by number of elements from least to most. Projects should only present one level of content to the user at a time as assets will be reused within individual content objects.
 //
 // SectionContents returns the collection as a Go slice.
 func (x *ProjectSection) SectionContents() []*ProjectSectionContent {
-	arr := x.inner.SectionContents()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ProjectSectionContent {
-		return &ProjectSectionContent{inner: raw.PHProjectSectionContentFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sectionContents"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ProjectSectionContent { return ProjectSectionContentFromID(_id) })
 }
 
 // The intended usage of the section (e.g., cover, content, auxiliary)
-//
-// SectionType calls the underlying SectionType.
-func (x *ProjectSection) SectionType() PHProjectSectionType {
-	return PHProjectSectionType(x.inner.SectionType())
+func (x *ProjectSection) SectionType() ProjectSectionType {
+	_r := objc.Send[ProjectSectionType](objref.IDOf(x), objc.RegisterName("sectionType"))
+	return _r
 }
 
 // Title for the section (e.g., a Moment name or a general geographical location), might be an empty string.
-//
-// Title calls the underlying Title.
 func (x *ProjectSection) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // ProjectSectionable is the interface implemented by [ProjectSection], for mocking and DI.
 type ProjectSectionable interface {
-	Unwrap() *raw.PHProjectSection
+	obj.Object
 	SectionContents() []*ProjectSectionContent
-	SectionType() PHProjectSectionType
+	SectionType() ProjectSectionType
 	Title() string
 }
 

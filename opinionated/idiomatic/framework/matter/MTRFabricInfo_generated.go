@@ -5,141 +5,153 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRFabricInfo wraps [raw.MTRFabricInfo] with a fluent Go API.
+// MTRFabricInfo is an idiomatic wrapper over the Objective-C class MTRFabricInfo.
 type MTRFabricInfo struct {
-	inner *raw.MTRFabricInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRFabricInfo].
-func (x *MTRFabricInfo) Unwrap() *raw.MTRFabricInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRFabricInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRFabricInfoFromID adopts an existing object pointer as a MTRFabricInfo (nil for 0).
+// MTRFabricInfoFromID adopts an existing Objective-C object as a MTRFabricInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRFabricInfoFromID(id objc.ID) *MTRFabricInfo {
 	if id == 0 {
 		return nil
 	}
-	return &MTRFabricInfo{inner: raw.MTRFabricInfoFromID(id)}
+	x := &MTRFabricInfo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRFabricInfo creates a new [MTRFabricInfo].
+// mTRFabricInfoAdopt wraps an Objective-C object that this code just created as a
+// MTRFabricInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRFabricInfoAdopt(id objc.ID) *MTRFabricInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRFabricInfo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRFabricInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRFabricInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRFabricInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRFabricInfo creates a new MTRFabricInfo.
 func NewMTRFabricInfo() *MTRFabricInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRFabricInfo")), objc.RegisterName("new"))
-	return &MTRFabricInfo{inner: raw.MTRFabricInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRFabricInfo")), objc.RegisterName("new"))
+	return mTRFabricInfoAdopt(_id)
 }
 
 // Root public key for the fabric.
-//
-// RootPublicKey calls the underlying RootPublicKey.
-func (x *MTRFabricInfo) RootPublicKey() *foundation.NSData {
-	return x.inner.RootPublicKey()
+func (x *MTRFabricInfo) RootPublicKey() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootPublicKey"))
+	return obj.Wrap(_r)
 }
 
 // Vendor identifier for the fabric.
-//
-// VendorID calls the underlying VendorID.
-func (x *MTRFabricInfo) VendorID() *foundation.NSNumber {
-	return x.inner.VendorID()
+func (x *MTRFabricInfo) VendorID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorID"))
+	return obj.Wrap(_r)
 }
 
 // Fabric identifier (scoped to the root public key) for the fabric.
-//
-// FabricID calls the underlying FabricID.
-func (x *MTRFabricInfo) FabricID() *foundation.NSNumber {
-	return x.inner.FabricID()
+func (x *MTRFabricInfo) FabricID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricID"))
+	return obj.Wrap(_r)
 }
 
 // Node identifier for the given node on the fabric.
-//
-// NodeID calls the underlying NodeID.
-func (x *MTRFabricInfo) NodeID() *foundation.NSNumber {
-	return x.inner.NodeID()
+func (x *MTRFabricInfo) NodeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeID"))
+	return obj.Wrap(_r)
 }
 
 // The string label for the fabric.  May be empty.
-//
-// Label calls the underlying Label.
 func (x *MTRFabricInfo) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The root certificate for the fabric.  This might be nil if a root certificate is not available (e.g. if this is information about some remote node that we don't have root certificate information for).
-//
-// RootCertificate calls the underlying RootCertificate.
-func (x *MTRFabricInfo) RootCertificate() *foundation.NSData {
-	return x.inner.RootCertificate()
+func (x *MTRFabricInfo) RootCertificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootCertificate"))
+	return obj.Wrap(_r)
 }
 
 // The same root certificate as rootCertificate, in Matter TLV format.
-//
-// RootCertificateTLV calls the underlying RootCertificateTLV.
-func (x *MTRFabricInfo) RootCertificateTLV() *foundation.NSData {
-	return x.inner.RootCertificateTLV()
+func (x *MTRFabricInfo) RootCertificateTLV() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootCertificateTLV"))
+	return obj.Wrap(_r)
 }
 
 // The intermediate certificate for the node.  This might be nil if there is no intermediate certificate, or if the node is not on a fabric we have access to.
-//
-// IntermediateCertificate calls the underlying IntermediateCertificate.
-func (x *MTRFabricInfo) IntermediateCertificate() *foundation.NSData {
-	return x.inner.IntermediateCertificate()
+func (x *MTRFabricInfo) IntermediateCertificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intermediateCertificate"))
+	return obj.Wrap(_r)
 }
 
 // The same intermediate certificate as intermediateCertificate, in Matter TLV format.
-//
-// IntermediateCertificateTLV calls the underlying IntermediateCertificateTLV.
-func (x *MTRFabricInfo) IntermediateCertificateTLV() *foundation.NSData {
-	return x.inner.IntermediateCertificateTLV()
+func (x *MTRFabricInfo) IntermediateCertificateTLV() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intermediateCertificateTLV"))
+	return obj.Wrap(_r)
 }
 
 // The operational certificate for the node.  This might be nil if the node is not on a fabric we have access to.
-//
-// OperationalCertificate calls the underlying OperationalCertificate.
-func (x *MTRFabricInfo) OperationalCertificate() *foundation.NSData {
-	return x.inner.OperationalCertificate()
+func (x *MTRFabricInfo) OperationalCertificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationalCertificate"))
+	return obj.Wrap(_r)
 }
 
 // The same operational certificate as operationalCertificate, in Matter TLV format.
-//
-// OperationalCertificateTLV calls the underlying OperationalCertificateTLV.
-func (x *MTRFabricInfo) OperationalCertificateTLV() *foundation.NSData {
-	return x.inner.OperationalCertificateTLV()
+func (x *MTRFabricInfo) OperationalCertificateTLV() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationalCertificateTLV"))
+	return obj.Wrap(_r)
 }
 
 // The fabric index which identifies the fabric on the node.
-//
-// FabricIndex calls the underlying FabricIndex.
-func (x *MTRFabricInfo) FabricIndex() *foundation.NSNumber {
-	return x.inner.FabricIndex()
+func (x *MTRFabricInfo) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+	return obj.Wrap(_r)
 }
 
 // MTRFabricInfoable is the interface implemented by [MTRFabricInfo], for mocking and DI.
 type MTRFabricInfoable interface {
-	Unwrap() *raw.MTRFabricInfo
-	RootPublicKey() *foundation.NSData
-	VendorID() *foundation.NSNumber
-	FabricID() *foundation.NSNumber
-	NodeID() *foundation.NSNumber
+	obj.Object
+	RootPublicKey() obj.Object
+	VendorID() obj.Object
+	FabricID() obj.Object
+	NodeID() obj.Object
 	Label() string
-	RootCertificate() *foundation.NSData
-	RootCertificateTLV() *foundation.NSData
-	IntermediateCertificate() *foundation.NSData
-	IntermediateCertificateTLV() *foundation.NSData
-	OperationalCertificate() *foundation.NSData
-	OperationalCertificateTLV() *foundation.NSData
-	FabricIndex() *foundation.NSNumber
+	RootCertificate() obj.Object
+	RootCertificateTLV() obj.Object
+	IntermediateCertificate() obj.Object
+	IntermediateCertificateTLV() obj.Object
+	OperationalCertificate() obj.Object
+	OperationalCertificateTLV() obj.Object
+	FabricIndex() obj.Object
 }
 
 var _ MTRFabricInfoable = (*MTRFabricInfo)(nil)

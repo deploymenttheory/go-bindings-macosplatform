@@ -5,41 +5,66 @@
 package compositorservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/compositorservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// _cp_layer_renderer_capabilities wraps [raw.CP_OBJECT_cp_layer_renderer_capabilities] with a fluent Go API.
+// _cp_layer_renderer_capabilities is an idiomatic wrapper over the Objective-C class CP_OBJECT_cp_layer_renderer_capabilities.
 type _cp_layer_renderer_capabilities struct {
-	inner *raw.CP_OBJECT_cp_layer_renderer_capabilities
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CP_OBJECT_cp_layer_renderer_capabilities].
-func (x *_cp_layer_renderer_capabilities) Unwrap() *raw.CP_OBJECT_cp_layer_renderer_capabilities {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *_cp_layer_renderer_capabilities) ID() objc.ID { return x.inner.Ptr() }
-
-// _cp_layer_renderer_capabilitiesFromID adopts an existing object pointer as a _cp_layer_renderer_capabilities (nil for 0).
+// _cp_layer_renderer_capabilitiesFromID adopts an existing Objective-C object as a _cp_layer_renderer_capabilities
+// (nil for 0), retaining it and registering a release finalizer.
 func _cp_layer_renderer_capabilitiesFromID(id objc.ID) *_cp_layer_renderer_capabilities {
 	if id == 0 {
 		return nil
 	}
-	return &_cp_layer_renderer_capabilities{inner: raw.CP_OBJECT_cp_layer_renderer_capabilitiesFromID(id)}
+	x := &_cp_layer_renderer_capabilities{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// New_cp_layer_renderer_capabilities creates a new [_cp_layer_renderer_capabilities].
+// _cp_layer_renderer_capabilitiesAdopt wraps an Objective-C object that this code just created as a
+// _cp_layer_renderer_capabilities (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func _cp_layer_renderer_capabilitiesAdopt(id objc.ID) *_cp_layer_renderer_capabilities {
+	if id == 0 {
+		return nil
+	}
+	x := &_cp_layer_renderer_capabilities{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *_cp_layer_renderer_capabilities) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *_cp_layer_renderer_capabilities) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *_cp_layer_renderer_capabilities) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// New_cp_layer_renderer_capabilities creates a new _cp_layer_renderer_capabilities.
 func New_cp_layer_renderer_capabilities() *_cp_layer_renderer_capabilities {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CP_OBJECT_cp_layer_renderer_capabilities")), objc.RegisterName("new"))
-	return &_cp_layer_renderer_capabilities{inner: raw.CP_OBJECT_cp_layer_renderer_capabilitiesFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CP_OBJECT_cp_layer_renderer_capabilities")), objc.RegisterName("new"))
+	return _cp_layer_renderer_capabilitiesAdopt(_id)
 }
 
 // _cp_layer_renderer_capabilitiesable is the interface implemented by [_cp_layer_renderer_capabilities], for mocking and DI.
 type _cp_layer_renderer_capabilitiesable interface {
-	Unwrap() *raw.CP_OBJECT_cp_layer_renderer_capabilities
+	obj.Object
 }
 
 var _ _cp_layer_renderer_capabilitiesable = (*_cp_layer_renderer_capabilities)(nil)

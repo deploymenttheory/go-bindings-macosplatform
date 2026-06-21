@@ -5,59 +5,84 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRSwitchClusterLongPressEvent wraps [raw.MTRSwitchClusterLongPressEvent] with a fluent Go API.
+// MTRSwitchClusterLongPressEvent is an idiomatic wrapper over the Objective-C class MTRSwitchClusterLongPressEvent.
 type MTRSwitchClusterLongPressEvent struct {
-	inner *raw.MTRSwitchClusterLongPressEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRSwitchClusterLongPressEvent].
-func (x *MTRSwitchClusterLongPressEvent) Unwrap() *raw.MTRSwitchClusterLongPressEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRSwitchClusterLongPressEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRSwitchClusterLongPressEventFromID adopts an existing object pointer as a MTRSwitchClusterLongPressEvent (nil for 0).
+// MTRSwitchClusterLongPressEventFromID adopts an existing Objective-C object as a MTRSwitchClusterLongPressEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRSwitchClusterLongPressEventFromID(id objc.ID) *MTRSwitchClusterLongPressEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRSwitchClusterLongPressEvent{inner: raw.MTRSwitchClusterLongPressEventFromID(id)}
-}
-
-// NewMTRSwitchClusterLongPressEvent creates a new [MTRSwitchClusterLongPressEvent].
-func NewMTRSwitchClusterLongPressEvent() *MTRSwitchClusterLongPressEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRSwitchClusterLongPressEvent")), objc.RegisterName("new"))
-	return &MTRSwitchClusterLongPressEvent{inner: raw.MTRSwitchClusterLongPressEventFromID(_id)}
-}
-
-// WithNewPosition sets the newPosition property and returns the receiver for chaining.
-func (x *MTRSwitchClusterLongPressEvent) WithNewPosition(newPosition *foundation.NSNumber) *MTRSwitchClusterLongPressEvent {
-	x.inner.SetNewPosition(newPosition)
+	x := &MTRSwitchClusterLongPressEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// GetNewPosition calls the underlying GetNewPosition.
-func (x *MTRSwitchClusterLongPressEvent) GetNewPosition() *foundation.NSNumber {
-	return x.inner.GetNewPosition()
+// mTRSwitchClusterLongPressEventAdopt wraps an Objective-C object that this code just created as a
+// MTRSwitchClusterLongPressEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRSwitchClusterLongPressEventAdopt(id objc.ID) *MTRSwitchClusterLongPressEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRSwitchClusterLongPressEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetNewPosition calls the underlying SetNewPosition.
-func (x *MTRSwitchClusterLongPressEvent) SetNewPosition(newPosition *foundation.NSNumber) {
-	x.inner.SetNewPosition(newPosition)
+// Description returns the object's -description text.
+func (x *MTRSwitchClusterLongPressEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRSwitchClusterLongPressEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRSwitchClusterLongPressEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRSwitchClusterLongPressEvent creates a new MTRSwitchClusterLongPressEvent.
+func NewMTRSwitchClusterLongPressEvent() *MTRSwitchClusterLongPressEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRSwitchClusterLongPressEvent")), objc.RegisterName("new"))
+	return mTRSwitchClusterLongPressEventAdopt(_id)
+}
+
+// WithNewPosition sets newPosition and returns the receiver so calls can be chained.
+func (x *MTRSwitchClusterLongPressEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterLongPressEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
+	return x
+}
+
+func (x *MTRSwitchClusterLongPressEvent) GetNewPosition() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewPosition"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRSwitchClusterLongPressEvent) SetNewPosition(newPosition obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
 }
 
 // MTRSwitchClusterLongPressEventable is the interface implemented by [MTRSwitchClusterLongPressEvent], for mocking and DI.
 type MTRSwitchClusterLongPressEventable interface {
-	Unwrap() *raw.MTRSwitchClusterLongPressEvent
-	WithNewPosition(newPosition *foundation.NSNumber) *MTRSwitchClusterLongPressEvent
-	GetNewPosition() *foundation.NSNumber
-	SetNewPosition(newPosition *foundation.NSNumber)
+	obj.Object
+	WithNewPosition(newPosition obj.Object) *MTRSwitchClusterLongPressEvent
+	GetNewPosition() obj.Object
+	SetNewPosition(newPosition obj.Object)
 }
 
 var _ MTRSwitchClusterLongPressEventable = (*MTRSwitchClusterLongPressEvent)(nil)

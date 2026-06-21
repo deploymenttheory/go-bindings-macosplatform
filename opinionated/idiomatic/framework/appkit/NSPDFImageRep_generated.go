@@ -5,156 +5,163 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that can render an image from a PDF format data stream.
 //
-// PDFImageRep wraps [raw.NSPDFImageRep] with a fluent Go API.
+// PDFImageRep is an idiomatic wrapper over the Objective-C class NSPDFImageRep.
 type PDFImageRep struct {
-	inner *raw.NSPDFImageRep
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPDFImageRep].
-func (x *PDFImageRep) Unwrap() *raw.NSPDFImageRep { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PDFImageRep) ID() objc.ID { return x.inner.Ptr() }
-
-// PDFImageRepFromID adopts an existing object pointer as a PDFImageRep (nil for 0).
+// PDFImageRepFromID adopts an existing Objective-C object as a PDFImageRep
+// (nil for 0), retaining it and registering a release finalizer.
 func PDFImageRepFromID(id objc.ID) *PDFImageRep {
 	if id == 0 {
 		return nil
 	}
-	return &PDFImageRep{inner: raw.NSPDFImageRepFromID(id)}
+	x := &PDFImageRep{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// pDFImageRepAdopt wraps an Objective-C object that this code just created as a
+// PDFImageRep (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pDFImageRepAdopt(id objc.ID) *PDFImageRep {
+	if id == 0 {
+		return nil
+	}
+	x := &PDFImageRep{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PDFImageRep) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PDFImageRep) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PDFImageRep) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns a representation of an image initialized with the specified PDF data.
 //
-// NewPDFImageRepWithData creates a new [PDFImageRep].
-func NewPDFImageRepWithData(pdfData *foundation.NSData) *PDFImageRep {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPDFImageRep")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), pdfData.Ptr())
-	return &PDFImageRep{inner: raw.NSPDFImageRepFromID(_id)}
+// NewPDFImageRepWithData creates a new PDFImageRep.
+func NewPDFImageRepWithData(pdfData obj.Object) *PDFImageRep {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPDFImageRep")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(pdfData))
+	return pDFImageRepAdopt(_id)
 }
 
 // The page currently displayed by the image representation.
 //
-// WithCurrentPage sets the currentPage property and returns the receiver for chaining.
+// WithCurrentPage sets currentPage and returns the receiver so calls can be chained.
 func (x *PDFImageRep) WithCurrentPage(currentPage int) *PDFImageRep {
-	x.inner.SetCurrentPage(currentPage)
-	return x
-}
-
-// The size of the image representation, measured in points in the user coordinate space.
-//
-// WithSize sets the size property and returns the receiver for chaining.
-func (x *PDFImageRep) WithSize(size corefoundation.CGSize) *PDFImageRep {
-	x.inner.NSImageRep.SetSize(size)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentPage:"), currentPage)
 	return x
 }
 
 // A Boolean value that indicates whether the image data has an alpha channel.
 //
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha sets alpha and returns the receiver so calls can be chained.
 func (x *PDFImageRep) WithAlpha(alpha bool) *PDFImageRep {
-	x.inner.NSImageRep.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
 // A Boolean value that indicates whether the image is opaque.
 //
-// WithOpaque sets the opaque property and returns the receiver for chaining.
+// WithOpaque sets opaque and returns the receiver so calls can be chained.
 func (x *PDFImageRep) WithOpaque(opaque bool) *PDFImageRep {
-	x.inner.NSImageRep.SetOpaque(opaque)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 	return x
 }
 
 // The name of the color space used by the image data.
 //
-// WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
-func (x *PDFImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *PDFImageRep {
-	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
+// WithColorSpaceName sets colorSpaceName and returns the receiver so calls can be chained.
+func (x *PDFImageRep) WithColorSpaceName(colorSpaceName obj.Object) *PDFImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
 	return x
 }
 
 // The number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
 //
-// WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
+// WithBitsPerSample sets bitsPerSample and returns the receiver so calls can be chained.
 func (x *PDFImageRep) WithBitsPerSample(bitsPerSample int) *PDFImageRep {
-	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
 	return x
 }
 
 // The width of the image, measured in pixels.
 //
-// WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
+// WithPixelsWide sets pixelsWide and returns the receiver so calls can be chained.
 func (x *PDFImageRep) WithPixelsWide(pixelsWide int) *PDFImageRep {
-	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsWide:"), pixelsWide)
 	return x
 }
 
 // The height of the image, measured in pixels.
 //
-// WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
+// WithPixelsHigh sets pixelsHigh and returns the receiver so calls can be chained.
 func (x *PDFImageRep) WithPixelsHigh(pixelsHigh int) *PDFImageRep {
-	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
 	return x
 }
 
 // The layout direction for the image.
 //
-// WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
-func (x *PDFImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *PDFImageRep {
-	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
+// WithLayoutDirection sets layoutDirection and returns the receiver so calls can be chained.
+func (x *PDFImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *PDFImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutDirection:"), layoutDirection)
 	return x
 }
 
-// PDFRepresentation calls the underlying PDFRepresentation.
-func (x *PDFImageRep) PDFRepresentation() *foundation.NSData {
-	return x.inner.PDFRepresentation()
+func (x *PDFImageRep) PDFRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("PDFRepresentation"))
+	return obj.Wrap(_r)
 }
 
-// Bounds calls the underlying Bounds.
-func (x *PDFImageRep) Bounds() corefoundation.CGRect {
-	return x.inner.Bounds()
-}
-
-// CurrentPage calls the underlying CurrentPage.
 func (x *PDFImageRep) CurrentPage() int {
-	return x.inner.CurrentPage()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("currentPage"))
+	return _r
 }
 
-// SetCurrentPage calls the underlying SetCurrentPage.
 func (x *PDFImageRep) SetCurrentPage(currentPage int) {
-	x.inner.SetCurrentPage(currentPage)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentPage:"), currentPage)
 }
 
-// PageCount calls the underlying PageCount.
 func (x *PDFImageRep) PageCount() int {
-	return x.inner.PageCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pageCount"))
+	return _r
 }
-
-func (x *PDFImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageRep }
 
 // PDFImageRepable is the interface implemented by [PDFImageRep], for mocking and DI.
 type PDFImageRepable interface {
-	Unwrap() *raw.NSPDFImageRep
+	obj.Object
 	WithCurrentPage(currentPage int) *PDFImageRep
-	WithSize(size corefoundation.CGSize) *PDFImageRep
 	WithAlpha(alpha bool) *PDFImageRep
 	WithOpaque(opaque bool) *PDFImageRep
-	WithColorSpaceName(colorSpaceName *foundation.NSString) *PDFImageRep
+	WithColorSpaceName(colorSpaceName obj.Object) *PDFImageRep
 	WithBitsPerSample(bitsPerSample int) *PDFImageRep
 	WithPixelsWide(pixelsWide int) *PDFImageRep
 	WithPixelsHigh(pixelsHigh int) *PDFImageRep
-	WithLayoutDirection(layoutDirection NSImageLayoutDirection) *PDFImageRep
-	PDFRepresentation() *foundation.NSData
-	Bounds() corefoundation.CGRect
+	WithLayoutDirection(layoutDirection ImageLayoutDirection) *PDFImageRep
+	PDFRepresentation() obj.Object
 	CurrentPage() int
 	SetCurrentPage(currentPage int)
 	PageCount() int

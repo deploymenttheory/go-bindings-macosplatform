@@ -5,116 +5,128 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that pairs a source of texture data with sampling parameters to be used in rendering the texture.
 //
-// TextureSampler wraps [raw.MDLTextureSampler] with a fluent Go API.
+// TextureSampler is an idiomatic wrapper over the Objective-C class MDLTextureSampler.
 type TextureSampler struct {
-	inner *raw.MDLTextureSampler
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLTextureSampler].
-func (x *TextureSampler) Unwrap() *raw.MDLTextureSampler { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextureSampler) ID() objc.ID { return x.inner.Ptr() }
-
-// TextureSamplerFromID adopts an existing object pointer as a TextureSampler (nil for 0).
+// TextureSamplerFromID adopts an existing Objective-C object as a TextureSampler
+// (nil for 0), retaining it and registering a release finalizer.
 func TextureSamplerFromID(id objc.ID) *TextureSampler {
 	if id == 0 {
 		return nil
 	}
-	return &TextureSampler{inner: raw.MDLTextureSamplerFromID(id)}
+	x := &TextureSampler{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTextureSampler creates a new [TextureSampler].
+// textureSamplerAdopt wraps an Objective-C object that this code just created as a
+// TextureSampler (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textureSamplerAdopt(id objc.ID) *TextureSampler {
+	if id == 0 {
+		return nil
+	}
+	x := &TextureSampler{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TextureSampler) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextureSampler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextureSampler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTextureSampler creates a new TextureSampler.
 func NewTextureSampler() *TextureSampler {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTextureSampler")), objc.RegisterName("new"))
-	return &TextureSampler{inner: raw.MDLTextureSamplerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLTextureSampler")), objc.RegisterName("new"))
+	return textureSamplerAdopt(_id)
 }
 
 // The texture object that provides image data for sampling.
 //
-// WithTexture sets the texture property and returns the receiver for chaining.
+// WithTexture sets texture and returns the receiver so calls can be chained.
 func (x *TextureSampler) WithTexture(texture TextureProvider) *TextureSampler {
-	x.inner.SetTexture(texture.asTexture())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTexture:"), objref.IDOf(texture))
 	return x
 }
 
 // An object that describes filtering modes for sampling from the texture.
 //
-// WithHardwareFilter sets the hardwareFilter property and returns the receiver for chaining.
+// WithHardwareFilter sets hardwareFilter and returns the receiver so calls can be chained.
 func (x *TextureSampler) WithHardwareFilter(hardwareFilter *TextureFilter) *TextureSampler {
-	x.inner.SetHardwareFilter(hardwareFilter.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHardwareFilter:"), objref.IDOf(hardwareFilter))
 	return x
 }
 
 // The transformation to be applied to texture coordinate data before sampling from the texture.
 //
-// WithTransform sets the transform property and returns the receiver for chaining.
+// WithTransform sets transform and returns the receiver so calls can be chained.
 func (x *TextureSampler) WithTransform(transform *Transform) *TextureSampler {
-	x.inner.SetTransform(transform.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransform:"), objref.IDOf(transform))
 	return x
 }
 
-// Texture calls the underlying Texture.
 func (x *TextureSampler) Texture() *Texture {
-	_r := x.inner.Texture()
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("texture"))
+	return TextureFromID(_r)
 }
 
-// SetTexture calls the underlying SetTexture.
-func (x *TextureSampler) SetTexture(texture *raw.MDLTexture) {
-	x.inner.SetTexture(texture)
+func (x *TextureSampler) SetTexture(texture *Texture) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTexture:"), objref.IDOf(texture))
 }
 
-// HardwareFilter calls the underlying HardwareFilter.
 func (x *TextureSampler) HardwareFilter() *TextureFilter {
-	_r := x.inner.HardwareFilter()
-	if _r == nil {
-		return nil
-	}
-	return &TextureFilter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hardwareFilter"))
+	return TextureFilterFromID(_r)
 }
 
-// SetHardwareFilter calls the underlying SetHardwareFilter.
-func (x *TextureSampler) SetHardwareFilter(hardwareFilter *raw.MDLTextureFilter) {
-	x.inner.SetHardwareFilter(hardwareFilter)
+func (x *TextureSampler) SetHardwareFilter(hardwareFilter *TextureFilter) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHardwareFilter:"), objref.IDOf(hardwareFilter))
 }
 
-// Transform calls the underlying Transform.
 func (x *TextureSampler) Transform() *Transform {
-	_r := x.inner.Transform()
-	if _r == nil {
-		return nil
-	}
-	return &Transform{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transform"))
+	return TransformFromID(_r)
 }
 
-// SetTransform calls the underlying SetTransform.
-func (x *TextureSampler) SetTransform(transform *raw.MDLTransform) {
-	x.inner.SetTransform(transform)
+func (x *TextureSampler) SetTransform(transform *Transform) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransform:"), objref.IDOf(transform))
 }
 
 // TextureSamplerable is the interface implemented by [TextureSampler], for mocking and DI.
 type TextureSamplerable interface {
-	Unwrap() *raw.MDLTextureSampler
+	obj.Object
 	WithTexture(texture TextureProvider) *TextureSampler
 	WithHardwareFilter(hardwareFilter *TextureFilter) *TextureSampler
 	WithTransform(transform *Transform) *TextureSampler
 	Texture() *Texture
-	SetTexture(texture *raw.MDLTexture)
+	SetTexture(texture *Texture)
 	HardwareFilter() *TextureFilter
-	SetHardwareFilter(hardwareFilter *raw.MDLTextureFilter)
+	SetHardwareFilter(hardwareFilter *TextureFilter)
 	Transform() *Transform
-	SetTransform(transform *raw.MDLTransform)
+	SetTransform(transform *Transform)
 }
 
 var _ TextureSamplerable = (*TextureSampler)(nil)

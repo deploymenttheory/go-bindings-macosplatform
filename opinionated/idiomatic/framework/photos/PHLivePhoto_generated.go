@@ -5,50 +5,68 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A displayable representation of a Live Photo—a picture that includes motion and sound from the moments just before and after its capture.
 //
-// LivePhoto wraps [raw.PHLivePhoto] with a fluent Go API.
+// LivePhoto is an idiomatic wrapper over the Objective-C class PHLivePhoto.
 type LivePhoto struct {
-	inner *raw.PHLivePhoto
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHLivePhoto].
-func (x *LivePhoto) Unwrap() *raw.PHLivePhoto { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LivePhoto) ID() objc.ID { return x.inner.Ptr() }
-
-// LivePhotoFromID adopts an existing object pointer as a LivePhoto (nil for 0).
+// LivePhotoFromID adopts an existing Objective-C object as a LivePhoto
+// (nil for 0), retaining it and registering a release finalizer.
 func LivePhotoFromID(id objc.ID) *LivePhoto {
 	if id == 0 {
 		return nil
 	}
-	return &LivePhoto{inner: raw.PHLivePhotoFromID(id)}
+	x := &LivePhoto{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLivePhoto creates a new [LivePhoto].
+// livePhotoAdopt wraps an Objective-C object that this code just created as a
+// LivePhoto (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func livePhotoAdopt(id objc.ID) *LivePhoto {
+	if id == 0 {
+		return nil
+	}
+	x := &LivePhoto{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LivePhoto) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LivePhoto) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LivePhoto) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLivePhoto creates a new LivePhoto.
 func NewLivePhoto() *LivePhoto {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHLivePhoto")), objc.RegisterName("new"))
-	return &LivePhoto{inner: raw.PHLivePhotoFromID(_id)}
-}
-
-// The dimensions of the live photo measured in pixels.
-//
-// Size calls the underlying Size.
-func (x *LivePhoto) Size() corefoundation.CGSize {
-	return x.inner.Size()
+	_id := objc.Send[objc.ID](objc.ID(_class("PHLivePhoto")), objc.RegisterName("new"))
+	return livePhotoAdopt(_id)
 }
 
 // LivePhotoable is the interface implemented by [LivePhoto], for mocking and DI.
 type LivePhotoable interface {
-	Unwrap() *raw.PHLivePhoto
-	Size() corefoundation.CGSize
+	obj.Object
 }
 
 var _ LivePhotoable = (*LivePhoto)(nil)

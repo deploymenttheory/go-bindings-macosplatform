@@ -5,98 +5,114 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A low-level, operating system-independent type for inter-application (and inter-thread) messages.
 //
-// PortMessage wraps [raw.NSPortMessage] with a fluent Go API.
+// PortMessage is an idiomatic wrapper over the Objective-C class NSPortMessage.
 type PortMessage struct {
-	inner *raw.NSPortMessage
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPortMessage].
-func (x *PortMessage) Unwrap() *raw.NSPortMessage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PortMessage) ID() objc.ID { return x.inner.Ptr() }
-
-// PortMessageFromID adopts an existing object pointer as a PortMessage (nil for 0).
+// PortMessageFromID adopts an existing Objective-C object as a PortMessage
+// (nil for 0), retaining it and registering a release finalizer.
 func PortMessageFromID(id objc.ID) *PortMessage {
 	if id == 0 {
 		return nil
 	}
-	return &PortMessage{inner: raw.NSPortMessageFromID(id)}
+	x := &PortMessage{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPortMessageWithSendPortReceivePortComponents creates a new [PortMessage].
-func NewPortMessageWithSendPortReceivePortComponents(sendPort *raw.NSPort, replyPort *raw.NSPort, components *raw.NSArray[objc.ID]) *PortMessage {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPortMessage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSendPort:receivePort:components:"), sendPort.Ptr(), replyPort.Ptr(), components.Ptr())
-	return &PortMessage{inner: raw.NSPortMessageFromID(_id)}
+// portMessageAdopt wraps an Objective-C object that this code just created as a
+// PortMessage (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func portMessageAdopt(id objc.ID) *PortMessage {
+	if id == 0 {
+		return nil
+	}
+	x := &PortMessage{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// WithMsgid sets the msgid property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *PortMessage) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PortMessage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PortMessage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPortMessageWithSendPortReceivePortComponents creates a new PortMessage.
+func NewPortMessageWithSendPortReceivePortComponents(sendPort *Port, replyPort *Port, components obj.Object) *PortMessage {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPortMessage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSendPort:receivePort:components:"), objref.IDOf(sendPort), objref.IDOf(replyPort), objref.IDOf(components))
+	return portMessageAdopt(_id)
+}
+
+// WithMsgid sets msgid and returns the receiver so calls can be chained.
 func (x *PortMessage) WithMsgid(msgid uint32) *PortMessage {
-	x.inner.SetMsgid(msgid)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMsgid:"), msgid)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *PortMessage) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PortMessage {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *PortMessage) WithScriptingProperties(scriptingProperties obj.Object) *PortMessage {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// SendBeforeDate calls the underlying SendBeforeDate.
-func (x *PortMessage) SendBeforeDate(date *raw.NSDate) bool {
-	return x.inner.SendBeforeDate(date)
+func (x *PortMessage) SendBeforeDate(date *Date) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendBeforeDate:"), objref.IDOf(date))
+	return _r
 }
 
-// Components calls the underlying Components.
-func (x *PortMessage) Components() *raw.NSArray[objc.ID] {
-	return x.inner.Components()
+func (x *PortMessage) Components() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("components"))
+	return obj.Wrap(_r)
 }
 
-// ReceivePort calls the underlying ReceivePort.
 func (x *PortMessage) ReceivePort() *Port {
-	_r := x.inner.ReceivePort()
-	if _r == nil {
-		return nil
-	}
-	return &Port{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("receivePort"))
+	return PortFromID(_r)
 }
 
-// SendPort calls the underlying SendPort.
 func (x *PortMessage) SendPort() *Port {
-	_r := x.inner.SendPort()
-	if _r == nil {
-		return nil
-	}
-	return &Port{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendPort"))
+	return PortFromID(_r)
 }
 
-// Msgid calls the underlying Msgid.
 func (x *PortMessage) Msgid() uint32 {
-	return x.inner.Msgid()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("msgid"))
+	return _r
 }
 
-// SetMsgid calls the underlying SetMsgid.
 func (x *PortMessage) SetMsgid(msgid uint32) {
-	x.inner.SetMsgid(msgid)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMsgid:"), msgid)
 }
-
-func (x *PortMessage) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // PortMessageable is the interface implemented by [PortMessage], for mocking and DI.
 type PortMessageable interface {
-	Unwrap() *raw.NSPortMessage
+	obj.Object
 	WithMsgid(msgid uint32) *PortMessage
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PortMessage
-	SendBeforeDate(date *raw.NSDate) bool
-	Components() *raw.NSArray[objc.ID]
+	WithScriptingProperties(scriptingProperties obj.Object) *PortMessage
+	SendBeforeDate(date *Date) bool
+	Components() obj.Object
 	ReceivePort() *Port
 	SendPort() *Port
 	Msgid() uint32

@@ -5,75 +5,93 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A collection of multiple closed polygon overlays.
 //
-// MultiPolygon wraps [raw.MKMultiPolygon] with a fluent Go API.
+// MultiPolygon is an idiomatic wrapper over the Objective-C class MKMultiPolygon.
 type MultiPolygon struct {
-	inner *raw.MKMultiPolygon
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKMultiPolygon].
-func (x *MultiPolygon) Unwrap() *raw.MKMultiPolygon { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MultiPolygon) ID() objc.ID { return x.inner.Ptr() }
-
-// MultiPolygonFromID adopts an existing object pointer as a MultiPolygon (nil for 0).
+// MultiPolygonFromID adopts an existing Objective-C object as a MultiPolygon
+// (nil for 0), retaining it and registering a release finalizer.
 func MultiPolygonFromID(id objc.ID) *MultiPolygon {
 	if id == 0 {
 		return nil
 	}
-	return &MultiPolygon{inner: raw.MKMultiPolygonFromID(id)}
+	x := &MultiPolygon{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// multiPolygonAdopt wraps an Objective-C object that this code just created as a
+// MultiPolygon (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func multiPolygonAdopt(id objc.ID) *MultiPolygon {
+	if id == 0 {
+		return nil
+	}
+	x := &MultiPolygon{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MultiPolygon) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MultiPolygon) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MultiPolygon) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a multipolygon object using the provided polygons.
 //
-// NewMultiPolygonWithPolygons creates a new [MultiPolygon].
-func NewMultiPolygonWithPolygons(polygons *foundation.NSArray[*raw.MKPolygon]) *MultiPolygon {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMultiPolygon")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPolygons:"), polygons.Ptr())
-	return &MultiPolygon{inner: raw.MKMultiPolygonFromID(_id)}
+// NewMultiPolygonWithPolygons creates a new MultiPolygon.
+func NewMultiPolygonWithPolygons(polygons []*Polygon) *MultiPolygon {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMultiPolygon")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPolygons:"), purego.SliceToNSArray(polygons, func(_v *Polygon) objc.ID { return objref.IDOf(_v) }))
+	return multiPolygonAdopt(_id)
 }
 
 // The title of the shape annotation.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *MultiPolygon) WithTitle(title string) *MultiPolygon {
-	x.inner.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // The subtitle of the shape annotation.
 //
-// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
 func (x *MultiPolygon) WithSubtitle(subtitle string) *MultiPolygon {
-	x.inner.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
 // Polygons returns the collection as a Go slice.
 func (x *MultiPolygon) Polygons() []*Polygon {
-	arr := x.inner.Polygons()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Polygon {
-		return &Polygon{inner: raw.MKPolygonFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("polygons"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Polygon { return PolygonFromID(_id) })
 }
-
-func (x *MultiPolygon) asShape() *raw.MKShape { return &x.inner.MKShape }
 
 // MultiPolygonable is the interface implemented by [MultiPolygon], for mocking and DI.
 type MultiPolygonable interface {
-	Unwrap() *raw.MKMultiPolygon
+	obj.Object
 	WithTitle(title string) *MultiPolygon
 	WithSubtitle(subtitle string) *MultiPolygon
 	Polygons() []*Polygon

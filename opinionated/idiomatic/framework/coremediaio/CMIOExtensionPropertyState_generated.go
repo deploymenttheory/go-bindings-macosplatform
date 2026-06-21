@@ -5,69 +5,94 @@
 package coremediaio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that describes the state of a property.
 //
-// ExtensionPropertyState wraps [raw.CMIOExtensionPropertyState] with a fluent Go API.
+// ExtensionPropertyState is an idiomatic wrapper over the Objective-C class CMIOExtensionPropertyState.
 type ExtensionPropertyState struct {
-	inner *raw.CMIOExtensionPropertyState[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CMIOExtensionPropertyState].
-func (x *ExtensionPropertyState) Unwrap() *raw.CMIOExtensionPropertyState[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExtensionPropertyState) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtensionPropertyStateFromID adopts an existing object pointer as a ExtensionPropertyState (nil for 0).
+// ExtensionPropertyStateFromID adopts an existing Objective-C object as a ExtensionPropertyState
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtensionPropertyStateFromID(id objc.ID) *ExtensionPropertyState {
 	if id == 0 {
 		return nil
 	}
-	return &ExtensionPropertyState{inner: raw.CMIOExtensionPropertyStateFromID[objc.ID](id)}
+	x := &ExtensionPropertyState{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// extensionPropertyStateAdopt wraps an Objective-C object that this code just created as a
+// ExtensionPropertyState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extensionPropertyStateAdopt(id objc.ID) *ExtensionPropertyState {
+	if id == 0 {
+		return nil
+	}
+	x := &ExtensionPropertyState{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ExtensionPropertyState) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExtensionPropertyState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExtensionPropertyState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a property state with a value.
 //
-// NewExtensionPropertyStateWithValue creates a new [ExtensionPropertyState].
-func NewExtensionPropertyStateWithValue(value objc.ID) *ExtensionPropertyState {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionPropertyState")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:"), value)
-	return &ExtensionPropertyState{inner: raw.CMIOExtensionPropertyStateFromID[objc.ID](_id)}
+// NewExtensionPropertyStateWithValue creates a new ExtensionPropertyState.
+func NewExtensionPropertyStateWithValue(value obj.Object) *ExtensionPropertyState {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionPropertyState")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:"), objref.IDOf(value))
+	return extensionPropertyStateAdopt(_id)
 }
 
 // Creates a property state with a value and attributes.
 //
-// NewExtensionPropertyStateWithValueAttributes creates a new [ExtensionPropertyState].
-func NewExtensionPropertyStateWithValueAttributes(value objc.ID, attributes *raw.CMIOExtensionPropertyAttributes[objc.ID]) *ExtensionPropertyState {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionPropertyState")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:attributes:"), value, attributes.Ptr())
-	return &ExtensionPropertyState{inner: raw.CMIOExtensionPropertyStateFromID[objc.ID](_id)}
+// NewExtensionPropertyStateWithValueAttributes creates a new ExtensionPropertyState.
+func NewExtensionPropertyStateWithValueAttributes(value obj.Object, attributes obj.Object) *ExtensionPropertyState {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionPropertyState")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValue:attributes:"), objref.IDOf(value), objref.IDOf(attributes))
+	return extensionPropertyStateAdopt(_id)
 }
 
-// @property value @abstract The value of the property.
-//
-// Value calls the underlying Value.
-func (x *ExtensionPropertyState) Value() objc.ID {
-	return x.inner.Value()
+// The value of the property.
+func (x *ExtensionPropertyState) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
 }
 
-// @property attributes @abstract The property attributes of the property.
-//
-// Attributes calls the underlying Attributes.
-func (x *ExtensionPropertyState) Attributes() *raw.CMIOExtensionPropertyAttributes[objc.ID] {
-	return x.inner.Attributes()
+// The property attributes of the property.
+func (x *ExtensionPropertyState) Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+	return obj.Wrap(_r)
 }
 
 // ExtensionPropertyStateable is the interface implemented by [ExtensionPropertyState], for mocking and DI.
 type ExtensionPropertyStateable interface {
-	Unwrap() *raw.CMIOExtensionPropertyState[objc.ID]
-	Value() objc.ID
-	Attributes() *raw.CMIOExtensionPropertyAttributes[objc.ID]
+	obj.Object
+	Value() obj.Object
+	Attributes() obj.Object
 }
 
 var _ ExtensionPropertyStateable = (*ExtensionPropertyState)(nil)

@@ -5,96 +5,95 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AnimatedScalar wraps [raw.MDLAnimatedScalar] with a fluent Go API.
+// AnimatedScalar is an idiomatic wrapper over the Objective-C class MDLAnimatedScalar.
 type AnimatedScalar struct {
-	inner *raw.MDLAnimatedScalar
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLAnimatedScalar].
-func (x *AnimatedScalar) Unwrap() *raw.MDLAnimatedScalar { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AnimatedScalar) ID() objc.ID { return x.inner.Ptr() }
-
-// AnimatedScalarFromID adopts an existing object pointer as a AnimatedScalar (nil for 0).
+// AnimatedScalarFromID adopts an existing Objective-C object as a AnimatedScalar
+// (nil for 0), retaining it and registering a release finalizer.
 func AnimatedScalarFromID(id objc.ID) *AnimatedScalar {
 	if id == 0 {
 		return nil
 	}
-	return &AnimatedScalar{inner: raw.MDLAnimatedScalarFromID(id)}
-}
-
-// NewAnimatedScalar creates a new [AnimatedScalar].
-func NewAnimatedScalar() *AnimatedScalar {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLAnimatedScalar")), objc.RegisterName("new"))
-	return &AnimatedScalar{inner: raw.MDLAnimatedScalarFromID(_id)}
-}
-
-// WithInterpolation sets the interpolation property and returns the receiver for chaining.
-func (x *AnimatedScalar) WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedScalar {
-	x.inner.MDLAnimatedValue.SetInterpolation(raw.MDLAnimatedValueInterpolation(interpolation))
+	x := &AnimatedScalar{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// SetFloatAtTime calls the underlying SetFloatAtTime.
+// animatedScalarAdopt wraps an Objective-C object that this code just created as a
+// AnimatedScalar (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func animatedScalarAdopt(id objc.ID) *AnimatedScalar {
+	if id == 0 {
+		return nil
+	}
+	x := &AnimatedScalar{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AnimatedScalar) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AnimatedScalar) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AnimatedScalar) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAnimatedScalar creates a new AnimatedScalar.
+func NewAnimatedScalar() *AnimatedScalar {
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLAnimatedScalar")), objc.RegisterName("new"))
+	return animatedScalarAdopt(_id)
+}
+
+// WithInterpolation sets interpolation and returns the receiver so calls can be chained.
+func (x *AnimatedScalar) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedScalar {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
+	return x
+}
+
 func (x *AnimatedScalar) SetFloatAtTime(value float32, time_ float64) {
-	x.inner.SetFloatAtTime(value, time_)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloat:atTime:"), value, time_)
 }
 
-// SetDoubleAtTime calls the underlying SetDoubleAtTime.
 func (x *AnimatedScalar) SetDoubleAtTime(value float64, time_ float64) {
-	x.inner.SetDoubleAtTime(value, time_)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDouble:atTime:"), value, time_)
 }
 
-// FloatAtTime calls the underlying FloatAtTime.
 func (x *AnimatedScalar) FloatAtTime(time_ float64) float32 {
-	return x.inner.FloatAtTime(time_)
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("floatAtTime:"), time_)
+	return _r
 }
 
-// DoubleAtTime calls the underlying DoubleAtTime.
 func (x *AnimatedScalar) DoubleAtTime(time_ float64) float64 {
-	return x.inner.DoubleAtTime(time_)
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleAtTime:"), time_)
+	return _r
 }
-
-// ResetWithFloatArrayAtTimesCount calls the underlying ResetWithFloatArrayAtTimesCount.
-func (x *AnimatedScalar) ResetWithFloatArrayAtTimesCount(valuesArray *float32, timesArray *float64, count uint) {
-	x.inner.ResetWithFloatArrayAtTimesCount(valuesArray, timesArray, count)
-}
-
-// ResetWithDoubleArrayAtTimesCount calls the underlying ResetWithDoubleArrayAtTimesCount.
-func (x *AnimatedScalar) ResetWithDoubleArrayAtTimesCount(valuesArray *float64, timesArray *float64, count uint) {
-	x.inner.ResetWithDoubleArrayAtTimesCount(valuesArray, timesArray, count)
-}
-
-// GetFloatArrayMaxCount calls the underlying GetFloatArrayMaxCount.
-func (x *AnimatedScalar) GetFloatArrayMaxCount(valuesArray *float32, maxCount uint) uint {
-	return x.inner.GetFloatArrayMaxCount(valuesArray, maxCount)
-}
-
-// GetDoubleArrayMaxCount calls the underlying GetDoubleArrayMaxCount.
-func (x *AnimatedScalar) GetDoubleArrayMaxCount(valuesArray *float64, maxCount uint) uint {
-	return x.inner.GetDoubleArrayMaxCount(valuesArray, maxCount)
-}
-
-func (x *AnimatedScalar) asAnimatedValue() *raw.MDLAnimatedValue { return &x.inner.MDLAnimatedValue }
 
 // AnimatedScalarable is the interface implemented by [AnimatedScalar], for mocking and DI.
 type AnimatedScalarable interface {
-	Unwrap() *raw.MDLAnimatedScalar
-	WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedScalar
+	obj.Object
+	WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedScalar
 	SetFloatAtTime(value float32, time_ float64)
 	SetDoubleAtTime(value float64, time_ float64)
 	FloatAtTime(time_ float64) float32
 	DoubleAtTime(time_ float64) float64
-	ResetWithFloatArrayAtTimesCount(valuesArray *float32, timesArray *float64, count uint)
-	ResetWithDoubleArrayAtTimesCount(valuesArray *float64, timesArray *float64, count uint)
-	GetFloatArrayMaxCount(valuesArray *float32, maxCount uint) uint
-	GetDoubleArrayMaxCount(valuesArray *float64, maxCount uint) uint
 }
 
 var _ AnimatedScalarable = (*AnimatedScalar)(nil)

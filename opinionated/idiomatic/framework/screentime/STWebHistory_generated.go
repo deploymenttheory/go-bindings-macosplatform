@@ -6,92 +6,117 @@ package screentime
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screentime"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // The object you use to delete web-usage data.
 //
-// WebHistory wraps [raw.STWebHistory] with a fluent Go API.
+// WebHistory is an idiomatic wrapper over the Objective-C class STWebHistory.
 type WebHistory struct {
-	inner *raw.STWebHistory
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.STWebHistory].
-func (x *WebHistory) Unwrap() *raw.STWebHistory { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WebHistory) ID() objc.ID { return x.inner.Ptr() }
-
-// WebHistoryFromID adopts an existing object pointer as a WebHistory (nil for 0).
+// WebHistoryFromID adopts an existing Objective-C object as a WebHistory
+// (nil for 0), retaining it and registering a release finalizer.
 func WebHistoryFromID(id objc.ID) *WebHistory {
 	if id == 0 {
 		return nil
 	}
-	return &WebHistory{inner: raw.STWebHistoryFromID(id)}
+	x := &WebHistory{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// webHistoryAdopt wraps an Objective-C object that this code just created as a
+// WebHistory (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func webHistoryAdopt(id objc.ID) *WebHistory {
+	if id == 0 {
+		return nil
+	}
+	x := &WebHistory{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WebHistory) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WebHistory) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WebHistory) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a web history instance to delete web-usage data associated to the bundle identifier and profile identifier you specify.
 //
-// NewWebHistoryWithBundleIdentifierProfileIdentifierError creates a new [WebHistory].
-func NewWebHistoryWithBundleIdentifierProfileIdentifierError(bundleIdentifier string, profileIdentifier *foundation.NSString) (*WebHistory, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("STWebHistory")), objc.RegisterName("alloc"))
+// NewWebHistoryWithBundleIdentifierProfileIdentifierError creates a new WebHistory.
+func NewWebHistoryWithBundleIdentifierProfileIdentifierError(bundleIdentifier string, profileIdentifier obj.Object) (*WebHistory, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("STWebHistory")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:profileIdentifier:error:"), foundation.NSStringStringWithUTF8String(bundleIdentifier).Ptr(), profileIdentifier.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:profileIdentifier:error:"), purego.NSString(bundleIdentifier), objref.IDOf(profileIdentifier), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &WebHistory{inner: raw.STWebHistoryFromID(_id)}, nil
+	return webHistoryAdopt(_id), nil
 }
 
 // Creates a web history instance to delete web-usage data associated to the profile identifier you specify.
 //
-// NewWebHistoryWithProfileIdentifier creates a new [WebHistory].
-func NewWebHistoryWithProfileIdentifier(profileIdentifier *foundation.NSString) *WebHistory {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("STWebHistory")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProfileIdentifier:"), profileIdentifier.Ptr())
-	return &WebHistory{inner: raw.STWebHistoryFromID(_id)}
+// NewWebHistoryWithProfileIdentifier creates a new WebHistory.
+func NewWebHistoryWithProfileIdentifier(profileIdentifier obj.Object) *WebHistory {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("STWebHistory")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProfileIdentifier:"), objref.IDOf(profileIdentifier))
+	return webHistoryAdopt(_id)
 }
 
 // Creates a web history instance to delete web-usage data associated to the bundle identifier you specify.
 //
-// NewWebHistoryWithBundleIdentifierError creates a new [WebHistory].
+// NewWebHistoryWithBundleIdentifierError creates a new WebHistory.
 func NewWebHistoryWithBundleIdentifierError(bundleIdentifier string) (*WebHistory, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("STWebHistory")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("STWebHistory")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:error:"), foundation.NSStringStringWithUTF8String(bundleIdentifier).Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:error:"), purego.NSString(bundleIdentifier), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &WebHistory{inner: raw.STWebHistoryFromID(_id)}, nil
+	return webHistoryAdopt(_id), nil
 }
 
 // Fetches web history that occurred during the date interval you specify.
 //
 // FetchHistoryDuringInterval blocks until the operation completes or ctx is cancelled.
-func (x *WebHistory) FetchHistoryDuringInterval(ctx context.Context, interval *foundation.NSDateInterval) (*foundation.NSSet[*foundation.NSURL], error) {
+func (x *WebHistory) FetchHistoryDuringInterval(ctx context.Context, interval obj.Object) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSSet[*foundation.NSURL]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchHistoryDuringIntervalCompletionHandler(interval, func(_p0 *foundation.NSSet[*foundation.NSURL], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchHistoryDuringInterval:completionHandler:"), objref.IDOf(interval), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSSet[*foundation.NSURL]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -99,57 +124,50 @@ func (x *WebHistory) FetchHistoryDuringInterval(ctx context.Context, interval *f
 // Fetches all web history associated with the bundle identifier and profile identifier you specified during initialization.
 //
 // FetchAllHistory blocks until the operation completes or ctx is cancelled.
-func (x *WebHistory) FetchAllHistory(ctx context.Context) (*foundation.NSSet[*foundation.NSURL], error) {
+func (x *WebHistory) FetchAllHistory(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSSet[*foundation.NSURL]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchAllHistoryWithCompletionHandler(func(_p0 *foundation.NSSet[*foundation.NSURL], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchAllHistoryWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSSet[*foundation.NSURL]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // Deletes all the web history for the URL you specify.
-//
-// DeleteHistoryForURL calls the underlying DeleteHistoryForURL.
 func (x *WebHistory) DeleteHistoryForURL(url string) {
-	x.inner.DeleteHistoryForURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteHistoryForURL:"), rt.FileURL(url))
 }
 
 // Deletes web history that occurred during the date interval you specify.
-//
-// DeleteHistoryDuringInterval calls the underlying DeleteHistoryDuringInterval.
-func (x *WebHistory) DeleteHistoryDuringInterval(interval *foundation.NSDateInterval) {
-	x.inner.DeleteHistoryDuringInterval(interval)
+func (x *WebHistory) DeleteHistoryDuringInterval(interval obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteHistoryDuringInterval:"), objref.IDOf(interval))
 }
 
 // Deletes all web history associated with the bundle identifier you specified during initialization.
-//
-// DeleteAllHistory calls the underlying DeleteAllHistory.
 func (x *WebHistory) DeleteAllHistory() {
-	x.inner.DeleteAllHistory()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteAllHistory"))
 }
 
 // WebHistoryable is the interface implemented by [WebHistory], for mocking and DI.
 type WebHistoryable interface {
-	Unwrap() *raw.STWebHistory
-	FetchHistoryDuringInterval(ctx context.Context, interval *foundation.NSDateInterval) (*foundation.NSSet[*foundation.NSURL], error)
-	FetchAllHistory(ctx context.Context) (*foundation.NSSet[*foundation.NSURL], error)
+	obj.Object
+	FetchHistoryDuringInterval(ctx context.Context, interval obj.Object) (obj.Object, error)
+	FetchAllHistory(ctx context.Context) (obj.Object, error)
 	DeleteHistoryForURL(url string)
-	DeleteHistoryDuringInterval(interval *foundation.NSDateInterval)
+	DeleteHistoryDuringInterval(interval obj.Object)
 	DeleteAllHistory()
 }
 

@@ -5,48 +5,73 @@
 package quartzcomposer
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcomposer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// PlugInViewController wraps [raw.QCPlugInViewController] with a fluent Go API.
+// PlugInViewController is an idiomatic wrapper over the Objective-C class QCPlugInViewController.
 type PlugInViewController struct {
-	inner *raw.QCPlugInViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QCPlugInViewController].
-func (x *PlugInViewController) Unwrap() *raw.QCPlugInViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlugInViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// PlugInViewControllerFromID adopts an existing object pointer as a PlugInViewController (nil for 0).
+// PlugInViewControllerFromID adopts an existing Objective-C object as a PlugInViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func PlugInViewControllerFromID(id objc.ID) *PlugInViewController {
 	if id == 0 {
 		return nil
 	}
-	return &PlugInViewController{inner: raw.QCPlugInViewControllerFromID(id)}
+	x := &PlugInViewController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPlugInViewControllerWithPlugInViewNibName creates a new [PlugInViewController].
-func NewPlugInViewControllerWithPlugInViewNibName(plugIn *quartz.QCPlugIn, name string) *PlugInViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QCPlugInViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlugIn:viewNibName:"), plugIn.Ptr(), foundation.NSStringStringWithUTF8String(name).Ptr())
-	return &PlugInViewController{inner: raw.QCPlugInViewControllerFromID(_id)}
+// plugInViewControllerAdopt wraps an Objective-C object that this code just created as a
+// PlugInViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func plugInViewControllerAdopt(id objc.ID) *PlugInViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &PlugInViewController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// PlugIn calls the underlying PlugIn.
-func (x *PlugInViewController) PlugIn() *quartz.QCPlugIn {
-	return x.inner.PlugIn()
+// Description returns the object's -description text.
+func (x *PlugInViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlugInViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlugInViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPlugInViewControllerWithPlugInViewNibName creates a new PlugInViewController.
+func NewPlugInViewControllerWithPlugInViewNibName(plugIn obj.Object, name string) *PlugInViewController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("QCPlugInViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlugIn:viewNibName:"), objref.IDOf(plugIn), purego.NSString(name))
+	return plugInViewControllerAdopt(_id)
+}
+
+func (x *PlugInViewController) PlugIn() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("plugIn"))
+	return obj.Wrap(_r)
 }
 
 // PlugInViewControllerable is the interface implemented by [PlugInViewController], for mocking and DI.
 type PlugInViewControllerable interface {
-	Unwrap() *raw.QCPlugInViewController
-	PlugIn() *quartz.QCPlugIn
+	obj.Object
+	PlugIn() obj.Object
 }
 
 var _ PlugInViewControllerable = (*PlugInViewController)(nil)

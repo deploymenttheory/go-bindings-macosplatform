@@ -5,129 +5,127 @@
 package opendirectory
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/opendirectory"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An ODQuery object serves as a Cocoa wrapper for an Open Directory query.
 //
-// Query wraps [raw.ODQuery] with a fluent Go API.
+// Query is an idiomatic wrapper over the Objective-C class ODQuery.
 type Query struct {
-	inner *raw.ODQuery
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ODQuery].
-func (x *Query) Unwrap() *raw.ODQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Query) ID() objc.ID { return x.inner.Ptr() }
-
-// QueryFromID adopts an existing object pointer as a Query (nil for 0).
+// QueryFromID adopts an existing Objective-C object as a Query
+// (nil for 0), retaining it and registering a release finalizer.
 func QueryFromID(id objc.ID) *Query {
 	if id == 0 {
 		return nil
 	}
-	return &Query{inner: raw.ODQueryFromID(id)}
+	x := &Query{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// queryAdopt wraps an Objective-C object that this code just created as a
+// Query (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func queryAdopt(id objc.ID) *Query {
+	if id == 0 {
+		return nil
+	}
+	x := &Query{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Query) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Query) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Query) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a query object with provided parameters.
 //
-// NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError creates a new [Query].
-func NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError(inNode *raw.ODNode, inRecordTypeOrList objc.ID, inAttribute *foundation.NSString, inMatchType uint32, inQueryValueOrList objc.ID, inReturnAttributeOrList objc.ID, inMaximumResults int) (*Query, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ODQuery")), objc.RegisterName("alloc"))
+// NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError creates a new Query.
+func NewQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError(inNode *Node, inRecordTypeOrList obj.Object, inAttribute obj.Object, inMatchType uint32, inQueryValueOrList obj.Object, inReturnAttributeOrList obj.Object, inMaximumResults int) (*Query, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ODQuery")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNode:forRecordTypes:attribute:matchType:queryValues:returnAttributes:maximumResults:error:"), inNode.Ptr(), inRecordTypeOrList, inAttribute.Ptr(), inMatchType, inQueryValueOrList, inReturnAttributeOrList, inMaximumResults, unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNode:forRecordTypes:attribute:matchType:queryValues:returnAttributes:maximumResults:error:"), objref.IDOf(inNode), objref.IDOf(inRecordTypeOrList), objref.IDOf(inAttribute), inMatchType, objref.IDOf(inQueryValueOrList), objref.IDOf(inReturnAttributeOrList), inMaximumResults, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Query{inner: raw.ODQueryFromID(_id)}, nil
-}
-
-// The query’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Query) WithDelegate(delegate raw.ODQueryDelegate) *Query {
-	x.inner.SetDelegate(delegate)
-	return x
+	return queryAdopt(_id), nil
 }
 
 // The queue on which asynchronous results are delivered to the delegate.
 //
-// WithOperationQueue sets the operationQueue property and returns the receiver for chaining.
-func (x *Query) WithOperationQueue(operationQueue *foundation.NSOperationQueue) *Query {
-	x.inner.SetOperationQueue(operationQueue)
+// WithOperationQueue sets operationQueue and returns the receiver so calls can be chained.
+func (x *Query) WithOperationQueue(operationQueue obj.Object) *Query {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationQueue:"), objref.IDOf(operationQueue))
 	return x
 }
 
 // Returns results from a query synchronously.
-//
-// ResultsAllowingPartialError calls the underlying ResultsAllowingPartialError.
-func (x *Query) ResultsAllowingPartialError(inAllowPartialResults bool) (*foundation.NSArray[objc.ID], error) {
-	return x.inner.ResultsAllowingPartialError(inAllowPartialResults)
+func (x *Query) ResultsAllowingPartialError(inAllowPartialResults bool) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultsAllowingPartial:error:"), inAllowPartialResults, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // Retrieves results from a query asynchronously by scheduling the query in a run loop.
-//
-// ScheduleInRunLoopForMode calls the underlying ScheduleInRunLoopForMode.
-func (x *Query) ScheduleInRunLoopForMode(inRunLoop *foundation.NSRunLoop, inMode string) {
-	x.inner.ScheduleInRunLoopForMode(inRunLoop, foundation.NSStringStringWithUTF8String(inMode))
+func (x *Query) ScheduleInRunLoopForMode(inRunLoop obj.Object, inMode string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(inRunLoop), purego.NSString(inMode))
 }
 
 // Removes the query from a specified run loop.
-//
-// RemoveFromRunLoopForMode calls the underlying RemoveFromRunLoopForMode.
-func (x *Query) RemoveFromRunLoopForMode(inRunLoop *foundation.NSRunLoop, inMode string) {
-	x.inner.RemoveFromRunLoopForMode(inRunLoop, foundation.NSStringStringWithUTF8String(inMode))
+func (x *Query) RemoveFromRunLoopForMode(inRunLoop obj.Object, inMode string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(inRunLoop), purego.NSString(inMode))
 }
 
 // Restarts a query, disposing of any results it has obtained.
-//
-// Synchronize calls the underlying Synchronize.
 func (x *Query) Synchronize() {
-	x.inner.Synchronize()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("synchronize"))
 }
 
-// @property   delegate @abstract   The currently set delegate @discussion The query delegate which will receive asynchronous query results.
-//
-// Delegate calls the underlying Delegate.
-func (x *Query) Delegate() raw.ODQueryDelegate {
-	return x.inner.Delegate()
+// The NSOperationQueue on which asynchronous results are delivered to the delegate. The NSOperationQueue on which asynchronous results are delivered to the delegate.
+func (x *Query) OperationQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationQueue"))
+	return obj.Wrap(_r)
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *Query) SetDelegate(delegate raw.ODQueryDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// @property   operationQueue @abstract   The NSOperationQueue on which asynchronous results are delivered to the delegate. @discussion The NSOperationQueue on which asynchronous results are delivered to the delegate.
-//
-// OperationQueue calls the underlying OperationQueue.
-func (x *Query) OperationQueue() *foundation.NSOperationQueue {
-	return x.inner.OperationQueue()
-}
-
-// SetOperationQueue calls the underlying SetOperationQueue.
-func (x *Query) SetOperationQueue(operationQueue *foundation.NSOperationQueue) {
-	x.inner.SetOperationQueue(operationQueue)
+func (x *Query) SetOperationQueue(operationQueue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationQueue:"), objref.IDOf(operationQueue))
 }
 
 // Queryable is the interface implemented by [Query], for mocking and DI.
 type Queryable interface {
-	Unwrap() *raw.ODQuery
-	WithDelegate(delegate raw.ODQueryDelegate) *Query
-	WithOperationQueue(operationQueue *foundation.NSOperationQueue) *Query
-	ResultsAllowingPartialError(inAllowPartialResults bool) (*foundation.NSArray[objc.ID], error)
-	ScheduleInRunLoopForMode(inRunLoop *foundation.NSRunLoop, inMode string)
-	RemoveFromRunLoopForMode(inRunLoop *foundation.NSRunLoop, inMode string)
+	obj.Object
+	WithOperationQueue(operationQueue obj.Object) *Query
+	ResultsAllowingPartialError(inAllowPartialResults bool) (obj.Object, error)
+	ScheduleInRunLoopForMode(inRunLoop obj.Object, inMode string)
+	RemoveFromRunLoopForMode(inRunLoop obj.Object, inMode string)
 	Synchronize()
-	Delegate() raw.ODQueryDelegate
-	SetDelegate(delegate raw.ODQueryDelegate)
-	OperationQueue() *foundation.NSOperationQueue
-	SetOperationQueue(operationQueue *foundation.NSOperationQueue)
+	OperationQueue() obj.Object
+	SetOperationQueue(operationQueue obj.Object)
 }
 
 var _ Queryable = (*Query)(nil)

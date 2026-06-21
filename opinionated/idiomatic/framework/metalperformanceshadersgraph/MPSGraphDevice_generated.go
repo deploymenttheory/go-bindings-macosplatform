@@ -5,60 +5,75 @@
 package metalperformanceshadersgraph
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that describes the compute device.
 //
-// GraphDevice wraps [raw.MPSGraphDevice] with a fluent Go API.
+// GraphDevice is an idiomatic wrapper over the Objective-C class MPSGraphDevice.
 type GraphDevice struct {
-	inner *raw.MPSGraphDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSGraphDevice].
-func (x *GraphDevice) Unwrap() *raw.MPSGraphDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphDeviceFromID adopts an existing object pointer as a GraphDevice (nil for 0).
+// GraphDeviceFromID adopts an existing Objective-C object as a GraphDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphDeviceFromID(id objc.ID) *GraphDevice {
 	if id == 0 {
 		return nil
 	}
-	return &GraphDevice{inner: raw.MPSGraphDeviceFromID(id)}
+	x := &GraphDevice{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGraphDevice creates a new [GraphDevice].
+// graphDeviceAdopt wraps an Objective-C object that this code just created as a
+// GraphDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphDeviceAdopt(id objc.ID) *GraphDevice {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphDevice{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GraphDevice) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GraphDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GraphDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGraphDevice creates a new GraphDevice.
 func NewGraphDevice() *GraphDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphDevice")), objc.RegisterName("new"))
-	return &GraphDevice{inner: raw.MPSGraphDeviceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphDevice")), objc.RegisterName("new"))
+	return graphDeviceAdopt(_id)
 }
 
 // Device of the MPSGraphDevice.
-//
-// Type calls the underlying Type.
-func (x *GraphDevice) Type() MPSGraphDeviceType {
-	return MPSGraphDeviceType(x.inner.Type())
+func (x *GraphDevice) Type() GraphDeviceType {
+	_r := objc.Send[GraphDeviceType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
-
-// If device type is Metal then returns the corresponding MTLDevice else nil.
-//
-// MetalDevice calls the underlying MetalDevice.
-func (x *GraphDevice) MetalDevice() metal.MTLDevice {
-	return x.inner.MetalDevice()
-}
-
-func (x *GraphDevice) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
 
 // GraphDeviceable is the interface implemented by [GraphDevice], for mocking and DI.
 type GraphDeviceable interface {
-	Unwrap() *raw.MPSGraphDevice
-	Type() MPSGraphDeviceType
-	MetalDevice() metal.MTLDevice
+	obj.Object
+	Type() GraphDeviceType
 }
 
 var _ GraphDeviceable = (*GraphDevice)(nil)

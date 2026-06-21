@@ -5,97 +5,116 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDeviceEnergyManagementModeClusterModeOptionStruct wraps [raw.MTRDeviceEnergyManagementModeClusterModeOptionStruct] with a fluent Go API.
+// MTRDeviceEnergyManagementModeClusterModeOptionStruct is an idiomatic wrapper over the Objective-C class MTRDeviceEnergyManagementModeClusterModeOptionStruct.
 type MTRDeviceEnergyManagementModeClusterModeOptionStruct struct {
-	inner *raw.MTRDeviceEnergyManagementModeClusterModeOptionStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDeviceEnergyManagementModeClusterModeOptionStruct].
-func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) Unwrap() *raw.MTRDeviceEnergyManagementModeClusterModeOptionStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDeviceEnergyManagementModeClusterModeOptionStructFromID adopts an existing object pointer as a MTRDeviceEnergyManagementModeClusterModeOptionStruct (nil for 0).
+// MTRDeviceEnergyManagementModeClusterModeOptionStructFromID adopts an existing Objective-C object as a MTRDeviceEnergyManagementModeClusterModeOptionStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDeviceEnergyManagementModeClusterModeOptionStructFromID(id objc.ID) *MTRDeviceEnergyManagementModeClusterModeOptionStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDeviceEnergyManagementModeClusterModeOptionStruct{inner: raw.MTRDeviceEnergyManagementModeClusterModeOptionStructFromID(id)}
+	x := &MTRDeviceEnergyManagementModeClusterModeOptionStruct{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRDeviceEnergyManagementModeClusterModeOptionStruct creates a new [MTRDeviceEnergyManagementModeClusterModeOptionStruct].
+// mTRDeviceEnergyManagementModeClusterModeOptionStructAdopt wraps an Objective-C object that this code just created as a
+// MTRDeviceEnergyManagementModeClusterModeOptionStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDeviceEnergyManagementModeClusterModeOptionStructAdopt(id objc.ID) *MTRDeviceEnergyManagementModeClusterModeOptionStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDeviceEnergyManagementModeClusterModeOptionStruct{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRDeviceEnergyManagementModeClusterModeOptionStruct creates a new MTRDeviceEnergyManagementModeClusterModeOptionStruct.
 func NewMTRDeviceEnergyManagementModeClusterModeOptionStruct() *MTRDeviceEnergyManagementModeClusterModeOptionStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceEnergyManagementModeClusterModeOptionStruct")), objc.RegisterName("new"))
-	return &MTRDeviceEnergyManagementModeClusterModeOptionStruct{inner: raw.MTRDeviceEnergyManagementModeClusterModeOptionStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementModeClusterModeOptionStruct")), objc.RegisterName("new"))
+	return mTRDeviceEnergyManagementModeClusterModeOptionStructAdopt(_id)
 }
 
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) WithLabel(label string) *MTRDeviceEnergyManagementModeClusterModeOptionStruct {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// WithMode sets the mode property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) WithMode(mode *foundation.NSNumber) *MTRDeviceEnergyManagementModeClusterModeOptionStruct {
-	x.inner.SetMode(mode)
+// WithMode sets mode and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTRDeviceEnergyManagementModeClusterModeOptionStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return x
 }
 
-// Label calls the underlying Label.
 func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
 func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// Mode calls the underlying Mode.
-func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) Mode() *foundation.NSNumber {
-	return x.inner.Mode()
+func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) Mode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mode"))
+	return obj.Wrap(_r)
 }
 
-// SetMode calls the underlying SetMode.
-func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) SetMode(mode *foundation.NSNumber) {
-	x.inner.SetMode(mode)
+func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) SetMode(mode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 }
 
-// ModeTags calls the underlying ModeTags.
-func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) ModeTags() *foundation.NSArray[objc.ID] {
-	return x.inner.ModeTags()
+func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) ModeTags() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modeTags"))
+	return obj.Wrap(_r)
 }
 
-// SetModeTags calls the underlying SetModeTags.
-func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) SetModeTags(modeTags *foundation.NSArray[objc.ID]) {
-	x.inner.SetModeTags(modeTags)
+func (x *MTRDeviceEnergyManagementModeClusterModeOptionStruct) SetModeTags(modeTags obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeTags:"), objref.IDOf(modeTags))
 }
 
 // MTRDeviceEnergyManagementModeClusterModeOptionStructable is the interface implemented by [MTRDeviceEnergyManagementModeClusterModeOptionStruct], for mocking and DI.
 type MTRDeviceEnergyManagementModeClusterModeOptionStructable interface {
-	Unwrap() *raw.MTRDeviceEnergyManagementModeClusterModeOptionStruct
+	obj.Object
 	WithLabel(label string) *MTRDeviceEnergyManagementModeClusterModeOptionStruct
-	WithMode(mode *foundation.NSNumber) *MTRDeviceEnergyManagementModeClusterModeOptionStruct
+	WithMode(mode obj.Object) *MTRDeviceEnergyManagementModeClusterModeOptionStruct
 	Label() string
 	SetLabel(label string)
-	Mode() *foundation.NSNumber
-	SetMode(mode *foundation.NSNumber)
-	ModeTags() *foundation.NSArray[objc.ID]
-	SetModeTags(modeTags *foundation.NSArray[objc.ID])
+	Mode() obj.Object
+	SetMode(mode obj.Object)
+	ModeTags() obj.Object
+	SetModeTags(modeTags obj.Object)
 }
 
 var _ MTRDeviceEnergyManagementModeClusterModeOptionStructable = (*MTRDeviceEnergyManagementModeClusterModeOptionStruct)(nil)

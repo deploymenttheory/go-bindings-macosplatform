@@ -5,113 +5,80 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A single dragged item within a dragging session.
 //
-// DraggingItem wraps [raw.NSDraggingItem] with a fluent Go API.
+// DraggingItem is an idiomatic wrapper over the Objective-C class NSDraggingItem.
 type DraggingItem struct {
-	inner *raw.NSDraggingItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSDraggingItem].
-func (x *DraggingItem) Unwrap() *raw.NSDraggingItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DraggingItem) ID() objc.ID { return x.inner.Ptr() }
-
-// DraggingItemFromID adopts an existing object pointer as a DraggingItem (nil for 0).
+// DraggingItemFromID adopts an existing Objective-C object as a DraggingItem
+// (nil for 0), retaining it and registering a release finalizer.
 func DraggingItemFromID(id objc.ID) *DraggingItem {
 	if id == 0 {
 		return nil
 	}
-	return &DraggingItem{inner: raw.NSDraggingItemFromID(id)}
-}
-
-// Creates and returns a dragging item using the specified content.
-//
-// NewDraggingItemWithPasteboardWriter creates a new [DraggingItem].
-func NewDraggingItemWithPasteboardWriter(pasteboardWriter raw.NSPasteboardWriting) *DraggingItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDraggingItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPasteboardWriter:"), pasteboardWriter)
-	return &DraggingItem{inner: raw.NSDraggingItemFromID(_id)}
-}
-
-// The frame of the dragging item.
-//
-// WithDraggingFrame sets the draggingFrame property and returns the receiver for chaining.
-func (x *DraggingItem) WithDraggingFrame(draggingFrame corefoundation.CGRect) *DraggingItem {
-	x.inner.SetDraggingFrame(draggingFrame)
+	x := &DraggingItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// An array of blocks that provide the dragging image components.
-//
-// WithImageComponentsProvider sets the imageComponentsProvider property and returns the receiver for chaining.
-func (x *DraggingItem) WithImageComponentsProvider(imageComponentsProvider objc.Block) *DraggingItem {
-	x.inner.SetImageComponentsProvider(imageComponentsProvider)
+// draggingItemAdopt wraps an Objective-C object that this code just created as a
+// DraggingItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func draggingItemAdopt(id objc.ID) *DraggingItem {
+	if id == 0 {
+		return nil
+	}
+	x := &DraggingItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// Sets the item’s dragging frame and contents.
-//
-// SetDraggingFrameContents calls the underlying SetDraggingFrameContents.
-func (x *DraggingItem) SetDraggingFrameContents(frame corefoundation.CGRect, contents objc.ID) {
-	x.inner.SetDraggingFrameContents(frame, contents)
+// Description returns the object's -description text.
+func (x *DraggingItem) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Item calls the underlying Item.
-func (x *DraggingItem) Item() objc.ID {
-	return x.inner.Item()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DraggingItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// DraggingFrame calls the underlying DraggingFrame.
-func (x *DraggingItem) DraggingFrame() corefoundation.CGRect {
-	return x.inner.DraggingFrame()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DraggingItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// SetDraggingFrame calls the underlying SetDraggingFrame.
-func (x *DraggingItem) SetDraggingFrame(draggingFrame corefoundation.CGRect) {
-	x.inner.SetDraggingFrame(draggingFrame)
+// NewDraggingItem creates a new DraggingItem.
+func NewDraggingItem() *DraggingItem {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSDraggingItem")), objc.RegisterName("new"))
+	return draggingItemAdopt(_id)
 }
 
-// ImageComponentsProvider calls the underlying ImageComponentsProvider.
-func (x *DraggingItem) ImageComponentsProvider() objc.Block {
-	return x.inner.ImageComponentsProvider()
-}
-
-// SetImageComponentsProvider calls the underlying SetImageComponentsProvider.
-func (x *DraggingItem) SetImageComponentsProvider(imageComponentsProvider objc.Block) {
-	x.inner.SetImageComponentsProvider(imageComponentsProvider)
+func (x *DraggingItem) Item() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item"))
+	return obj.Wrap(_r)
 }
 
 // ImageComponents returns the collection as a Go slice.
 func (x *DraggingItem) ImageComponents() []*DraggingImageComponent {
-	arr := x.inner.ImageComponents()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *DraggingImageComponent {
-		return &DraggingImageComponent{inner: raw.NSDraggingImageComponentFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageComponents"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *DraggingImageComponent { return DraggingImageComponentFromID(_id) })
 }
 
 // DraggingItemable is the interface implemented by [DraggingItem], for mocking and DI.
 type DraggingItemable interface {
-	Unwrap() *raw.NSDraggingItem
-	WithDraggingFrame(draggingFrame corefoundation.CGRect) *DraggingItem
-	WithImageComponentsProvider(imageComponentsProvider objc.Block) *DraggingItem
-	SetDraggingFrameContents(frame corefoundation.CGRect, contents objc.ID)
-	Item() objc.ID
-	DraggingFrame() corefoundation.CGRect
-	SetDraggingFrame(draggingFrame corefoundation.CGRect)
-	ImageComponentsProvider() objc.Block
-	SetImageComponentsProvider(imageComponentsProvider objc.Block)
+	obj.Object
+	Item() obj.Object
 	ImageComponents() []*DraggingImageComponent
 }
 

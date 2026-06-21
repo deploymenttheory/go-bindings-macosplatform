@@ -5,158 +5,165 @@
 package automator
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automator"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An object that lets you use an Automator workflow in your app.
 //
-// Workflow wraps [raw.AMWorkflow] with a fluent Go API.
+// Workflow is an idiomatic wrapper over the Objective-C class AMWorkflow.
 type Workflow struct {
-	inner *raw.AMWorkflow
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AMWorkflow].
-func (x *Workflow) Unwrap() *raw.AMWorkflow { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Workflow) ID() objc.ID { return x.inner.Ptr() }
-
-// WorkflowFromID adopts an existing object pointer as a Workflow (nil for 0).
+// WorkflowFromID adopts an existing Objective-C object as a Workflow
+// (nil for 0), retaining it and registering a release finalizer.
 func WorkflowFromID(id objc.ID) *Workflow {
 	if id == 0 {
 		return nil
 	}
-	return &Workflow{inner: raw.AMWorkflowFromID(id)}
+	x := &Workflow{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWorkflow creates a new [Workflow].
+// workflowAdopt wraps an Objective-C object that this code just created as a
+// Workflow (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func workflowAdopt(id objc.ID) *Workflow {
+	if id == 0 {
+		return nil
+	}
+	x := &Workflow{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Workflow) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Workflow) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Workflow) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWorkflow creates a new Workflow.
 func NewWorkflow() *Workflow {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AMWorkflow")), objc.RegisterName("new"))
-	return &Workflow{inner: raw.AMWorkflowFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AMWorkflow")), objc.RegisterName("new"))
+	return workflowAdopt(_id)
 }
 
 // Creates and initializes a workflow based on the contents of the specified file.
 //
-// NewWorkflowWithContentsOfURLError creates a new [Workflow].
+// NewWorkflowWithContentsOfURLError creates a new Workflow.
 func NewWorkflowWithContentsOfURLError(fileURL string) (*Workflow, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AMWorkflow")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AMWorkflow")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)).Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), rt.FileURL(fileURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Workflow{inner: raw.AMWorkflowFromID(_id)}, nil
+	return workflowAdopt(_id), nil
 }
 
 // The input data that is passed to the first action in the workflow.
 //
-// WithInput sets the input property and returns the receiver for chaining.
-func (x *Workflow) WithInput(input objc.ID) *Workflow {
-	x.inner.SetInput(input)
+// WithInput sets input and returns the receiver so calls can be chained.
+func (x *Workflow) WithInput(input obj.Object) *Workflow {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInput:"), objref.IDOf(input))
 	return x
 }
 
 // Writes the workflow to the specified file.
-//
-// WriteToURLError calls the underlying WriteToURLError.
-func (x *Workflow) WriteToURLError(fileURL string) (bool, error) {
-	return x.inner.WriteToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
+func (x *Workflow) WriteToURL(fileURL string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:error:"), rt.FileURL(fileURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Sets the value of the workflow variable with the specified name.
-//
-// SetValueForVariableWithName calls the underlying SetValueForVariableWithName.
-func (x *Workflow) SetValueForVariableWithName(value objc.ID, variableName string) bool {
-	return x.inner.SetValueForVariableWithName(value, foundation.NSStringStringWithUTF8String(variableName))
+func (x *Workflow) SetValueForVariableWithName(value obj.Object, variableName string) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setValue:forVariableWithName:"), objref.IDOf(value), purego.NSString(variableName))
+	return _r
 }
 
 // Returns the value of the workflow variable with the specified name.
-//
-// ValueForVariableWithName calls the underlying ValueForVariableWithName.
-func (x *Workflow) ValueForVariableWithName(variableName string) objc.ID {
-	return x.inner.ValueForVariableWithName(foundation.NSStringStringWithUTF8String(variableName))
+func (x *Workflow) ValueForVariableWithName(variableName string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForVariableWithName:"), purego.NSString(variableName))
+	return obj.Wrap(_r)
 }
 
 // Adds the specified action at the end of the receiving workflow.
-//
-// AddAction calls the underlying AddAction.
-func (x *Workflow) AddAction(action *raw.AMAction) {
-	x.inner.AddAction(action)
+func (x *Workflow) AddAction(action *Action) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAction:"), objref.IDOf(action))
 }
 
 // Removes the specified action from the workflow.
-//
-// RemoveAction calls the underlying RemoveAction.
-func (x *Workflow) RemoveAction(action *raw.AMAction) {
-	x.inner.RemoveAction(action)
+func (x *Workflow) RemoveAction(action *Action) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAction:"), objref.IDOf(action))
 }
 
 // Inserts the specified action at the specified position of the receiving workflow.
-//
-// InsertActionAtIndex calls the underlying InsertActionAtIndex.
-func (x *Workflow) InsertActionAtIndex(action *raw.AMAction, index uint) {
-	x.inner.InsertActionAtIndex(action, index)
+func (x *Workflow) InsertActionAtIndex(action *Action, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertAction:atIndex:"), objref.IDOf(action), index)
 }
 
 // Moves the action from the specified start position to the specified end position in the receiving workflow.
-//
-// MoveActionAtIndexToIndex calls the underlying MoveActionAtIndexToIndex.
-func (x *Workflow) MoveActionAtIndexToIndex(startIndex uint, endIndex uint) {
-	x.inner.MoveActionAtIndexToIndex(startIndex, endIndex)
+func (x *Workflow) MoveActionAtIndexToIndex(startIndex int, endIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveActionAtIndex:toIndex:"), startIndex, endIndex)
 }
 
-// FileURL calls the underlying FileURL.
-func (x *Workflow) FileURL() *foundation.NSURL {
-	return x.inner.FileURL()
+func (x *Workflow) FileURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileURL"))
+	return obj.Wrap(_r)
 }
 
 // Actions returns the collection as a Go slice.
 func (x *Workflow) Actions() []*Action {
-	arr := x.inner.Actions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Action {
-		return &Action{inner: raw.AMActionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Action { return ActionFromID(_id) })
 }
 
-// Input calls the underlying Input.
-func (x *Workflow) Input() objc.ID {
-	return x.inner.Input()
+func (x *Workflow) Input() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("input"))
+	return obj.Wrap(_r)
 }
 
-// SetInput calls the underlying SetInput.
-func (x *Workflow) SetInput(input objc.ID) {
-	x.inner.SetInput(input)
-}
-
-// Output calls the underlying Output.
-func (x *Workflow) Output() unsafe.Pointer {
-	return x.inner.Output()
+func (x *Workflow) SetInput(input obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInput:"), objref.IDOf(input))
 }
 
 // Workflowable is the interface implemented by [Workflow], for mocking and DI.
 type Workflowable interface {
-	Unwrap() *raw.AMWorkflow
-	WithInput(input objc.ID) *Workflow
-	WriteToURLError(fileURL string) (bool, error)
-	SetValueForVariableWithName(value objc.ID, variableName string) bool
-	ValueForVariableWithName(variableName string) objc.ID
-	AddAction(action *raw.AMAction)
-	RemoveAction(action *raw.AMAction)
-	InsertActionAtIndex(action *raw.AMAction, index uint)
-	MoveActionAtIndexToIndex(startIndex uint, endIndex uint)
-	FileURL() *foundation.NSURL
+	obj.Object
+	WithInput(input obj.Object) *Workflow
+	WriteToURL(fileURL string) error
+	SetValueForVariableWithName(value obj.Object, variableName string) bool
+	ValueForVariableWithName(variableName string) obj.Object
+	AddAction(action *Action)
+	RemoveAction(action *Action)
+	InsertActionAtIndex(action *Action, index int)
+	MoveActionAtIndexToIndex(startIndex int, endIndex int)
+	FileURL() obj.Object
 	Actions() []*Action
-	Input() objc.ID
-	SetInput(input objc.ID)
-	Output() unsafe.Pointer
+	Input() obj.Object
+	SetInput(input obj.Object)
 }
 
 var _ Workflowable = (*Workflow)(nil)

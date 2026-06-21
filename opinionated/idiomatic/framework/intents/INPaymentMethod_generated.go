@@ -5,79 +5,98 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Information about a form of payment supported by your app.
 //
-// PaymentMethod wraps [raw.INPaymentMethod] with a fluent Go API.
+// PaymentMethod is an idiomatic wrapper over the Objective-C class INPaymentMethod.
 type PaymentMethod struct {
-	inner *raw.INPaymentMethod
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INPaymentMethod].
-func (x *PaymentMethod) Unwrap() *raw.INPaymentMethod { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PaymentMethod) ID() objc.ID { return x.inner.Ptr() }
-
-// PaymentMethodFromID adopts an existing object pointer as a PaymentMethod (nil for 0).
+// PaymentMethodFromID adopts an existing Objective-C object as a PaymentMethod
+// (nil for 0), retaining it and registering a release finalizer.
 func PaymentMethodFromID(id objc.ID) *PaymentMethod {
 	if id == 0 {
 		return nil
 	}
-	return &PaymentMethod{inner: raw.INPaymentMethodFromID(id)}
+	x := &PaymentMethod{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// paymentMethodAdopt wraps an Objective-C object that this code just created as a
+// PaymentMethod (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paymentMethodAdopt(id objc.ID) *PaymentMethod {
+	if id == 0 {
+		return nil
+	}
+	x := &PaymentMethod{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PaymentMethod) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PaymentMethod) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PaymentMethod) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes the payment method object with the specified type and descriptive information.
 //
-// NewPaymentMethodWithTypeNameIdentificationHintIcon creates a new [PaymentMethod].
-func NewPaymentMethodWithTypeNameIdentificationHintIcon(type_ INPaymentMethodType, name string, identificationHint string, icon *raw.INImage) *PaymentMethod {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INPaymentMethod")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:name:identificationHint:icon:"), raw.INPaymentMethodType(type_), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(identificationHint).Ptr(), icon.Ptr())
-	return &PaymentMethod{inner: raw.INPaymentMethodFromID(_id)}
+// NewPaymentMethodWithTypeNameIdentificationHintIcon creates a new PaymentMethod.
+func NewPaymentMethodWithTypeNameIdentificationHintIcon(type_ PaymentMethodType, name string, identificationHint string, icon *Image) *PaymentMethod {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INPaymentMethod")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:name:identificationHint:icon:"), type_, purego.NSString(name), purego.NSString(identificationHint), objref.IDOf(icon))
+	return paymentMethodAdopt(_id)
 }
 
-// Type calls the underlying Type.
-func (x *PaymentMethod) Type() INPaymentMethodType {
-	return INPaymentMethodType(x.inner.Type())
+func (x *PaymentMethod) Type() PaymentMethodType {
+	_r := objc.Send[PaymentMethodType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// Name calls the underlying Name.
 func (x *PaymentMethod) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Icon calls the underlying Icon.
 func (x *PaymentMethod) Icon() *Image {
-	_r := x.inner.Icon()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icon"))
+	return ImageFromID(_r)
 }
 
-// IdentificationHint calls the underlying IdentificationHint.
 func (x *PaymentMethod) IdentificationHint() string {
-	_r := x.inner.IdentificationHint()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identificationHint"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // PaymentMethodable is the interface implemented by [PaymentMethod], for mocking and DI.
 type PaymentMethodable interface {
-	Unwrap() *raw.INPaymentMethod
-	Type() INPaymentMethodType
+	obj.Object
+	Type() PaymentMethodType
 	Name() string
 	Icon() *Image
 	IdentificationHint() string

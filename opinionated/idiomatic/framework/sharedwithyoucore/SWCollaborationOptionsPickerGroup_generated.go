@@ -5,115 +5,117 @@
 package sharedwithyoucore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that represents a group of collaboration options that the system displays together with mutually exclusive options.
 //
-// CollaborationOptionsPickerGroup wraps [raw.SWCollaborationOptionsPickerGroup] with a fluent Go API.
+// CollaborationOptionsPickerGroup is an idiomatic wrapper over the Objective-C class SWCollaborationOptionsPickerGroup.
 type CollaborationOptionsPickerGroup struct {
-	inner *raw.SWCollaborationOptionsPickerGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SWCollaborationOptionsPickerGroup].
-func (x *CollaborationOptionsPickerGroup) Unwrap() *raw.SWCollaborationOptionsPickerGroup {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollaborationOptionsPickerGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// CollaborationOptionsPickerGroupFromID adopts an existing object pointer as a CollaborationOptionsPickerGroup (nil for 0).
+// CollaborationOptionsPickerGroupFromID adopts an existing Objective-C object as a CollaborationOptionsPickerGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func CollaborationOptionsPickerGroupFromID(id objc.ID) *CollaborationOptionsPickerGroup {
 	if id == 0 {
 		return nil
 	}
-	return &CollaborationOptionsPickerGroup{inner: raw.SWCollaborationOptionsPickerGroupFromID(id)}
+	x := &CollaborationOptionsPickerGroup{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCollaborationOptionsPickerGroup creates a new [CollaborationOptionsPickerGroup].
+// collaborationOptionsPickerGroupAdopt wraps an Objective-C object that this code just created as a
+// CollaborationOptionsPickerGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collaborationOptionsPickerGroupAdopt(id objc.ID) *CollaborationOptionsPickerGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &CollaborationOptionsPickerGroup{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollaborationOptionsPickerGroup) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollaborationOptionsPickerGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollaborationOptionsPickerGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCollaborationOptionsPickerGroup creates a new CollaborationOptionsPickerGroup.
 func NewCollaborationOptionsPickerGroup() *CollaborationOptionsPickerGroup {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SWCollaborationOptionsPickerGroup")), objc.RegisterName("new"))
-	return &CollaborationOptionsPickerGroup{inner: raw.SWCollaborationOptionsPickerGroupFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SWCollaborationOptionsPickerGroup")), objc.RegisterName("new"))
+	return collaborationOptionsPickerGroupAdopt(_id)
 }
 
 // The identifier of the selected option in the group.
 //
-// WithSelectedOptionIdentifier sets the selectedOptionIdentifier property and returns the receiver for chaining.
+// WithSelectedOptionIdentifier sets selectedOptionIdentifier and returns the receiver so calls can be chained.
 func (x *CollaborationOptionsPickerGroup) WithSelectedOptionIdentifier(selectedOptionIdentifier string) *CollaborationOptionsPickerGroup {
-	x.inner.SetSelectedOptionIdentifier(foundation.NSStringStringWithUTF8String(selectedOptionIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedOptionIdentifier:"), purego.NSString(selectedOptionIdentifier))
 	return x
 }
 
 // A localized string the system displays as the title of the group section.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *CollaborationOptionsPickerGroup) WithTitle(title string) *CollaborationOptionsPickerGroup {
-	x.inner.SWCollaborationOptionsGroup.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // A localized string that provides additional information for the group of options.
 //
-// WithFooter sets the footer property and returns the receiver for chaining.
+// WithFooter sets footer and returns the receiver so calls can be chained.
 func (x *CollaborationOptionsPickerGroup) WithFooter(footer string) *CollaborationOptionsPickerGroup {
-	x.inner.SWCollaborationOptionsGroup.SetFooter(foundation.NSStringStringWithUTF8String(footer))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFooter:"), purego.NSString(footer))
 	return x
 }
 
 // An array of collaboration options the system displays as a group.
 //
-// WithOptions sets the collection, converting the Go slice to an NSArray.
-func (x *CollaborationOptionsPickerGroup) WithOptions(items ...*raw.SWCollaborationOption) *CollaborationOptionsPickerGroup {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SWCollaborationOptionsGroup.SetOptions(foundation.NSArrayFromID[*raw.SWCollaborationOption](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SWCollaborationOption](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SWCollaborationOptionsGroup.SetOptions(_arr)
+// WithOptions sets the collection and returns the receiver so calls can be chained.
+func (x *CollaborationOptionsPickerGroup) WithOptions(items ...*CollaborationOption) *CollaborationOptionsPickerGroup {
+	_arr := purego.SliceToNSArray(items, func(_v *CollaborationOption) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), _arr)
 	return x
 }
 
-// SelectedOptionIdentifier calls the underlying SelectedOptionIdentifier.
 func (x *CollaborationOptionsPickerGroup) SelectedOptionIdentifier() string {
-	_r := x.inner.SelectedOptionIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedOptionIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSelectedOptionIdentifier calls the underlying SetSelectedOptionIdentifier.
 func (x *CollaborationOptionsPickerGroup) SetSelectedOptionIdentifier(selectedOptionIdentifier string) {
-	x.inner.SetSelectedOptionIdentifier(foundation.NSStringStringWithUTF8String(selectedOptionIdentifier))
-}
-
-func (x *CollaborationOptionsPickerGroup) asCollaborationOptionsGroup() *raw.SWCollaborationOptionsGroup {
-	return &x.inner.SWCollaborationOptionsGroup
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedOptionIdentifier:"), purego.NSString(selectedOptionIdentifier))
 }
 
 // CollaborationOptionsPickerGroupable is the interface implemented by [CollaborationOptionsPickerGroup], for mocking and DI.
 type CollaborationOptionsPickerGroupable interface {
-	Unwrap() *raw.SWCollaborationOptionsPickerGroup
+	obj.Object
 	WithSelectedOptionIdentifier(selectedOptionIdentifier string) *CollaborationOptionsPickerGroup
 	WithTitle(title string) *CollaborationOptionsPickerGroup
 	WithFooter(footer string) *CollaborationOptionsPickerGroup
-	WithOptions(items ...*raw.SWCollaborationOption) *CollaborationOptionsPickerGroup
+	WithOptions(items ...*CollaborationOption) *CollaborationOptionsPickerGroup
 	SelectedOptionIdentifier() string
 	SetSelectedOptionIdentifier(selectedOptionIdentifier string)
 }

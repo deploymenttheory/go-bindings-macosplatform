@@ -5,168 +5,175 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// @abstract returns elementwise comparison of left and right
+// returns elementwise comparison of left and right
 //
-// NNComparisonNode wraps [raw.MPSNNComparisonNode] with a fluent Go API.
+// NNComparisonNode is an idiomatic wrapper over the Objective-C class MPSNNComparisonNode.
 type NNComparisonNode struct {
-	inner *raw.MPSNNComparisonNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNComparisonNode].
-func (x *NNComparisonNode) Unwrap() *raw.MPSNNComparisonNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNComparisonNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNComparisonNodeFromID adopts an existing object pointer as a NNComparisonNode (nil for 0).
+// NNComparisonNodeFromID adopts an existing Objective-C object as a NNComparisonNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNComparisonNodeFromID(id objc.ID) *NNComparisonNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNComparisonNode{inner: raw.MPSNNComparisonNodeFromID(id)}
+	x := &NNComparisonNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNNComparisonNode creates a new [NNComparisonNode].
+// nNComparisonNodeAdopt wraps an Objective-C object that this code just created as a
+// NNComparisonNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNComparisonNodeAdopt(id objc.ID) *NNComparisonNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNComparisonNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NNComparisonNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNComparisonNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNComparisonNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNNComparisonNode creates a new NNComparisonNode.
 func NewNNComparisonNode() *NNComparisonNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNComparisonNode")), objc.RegisterName("new"))
-	return &NNComparisonNode{inner: raw.MPSNNComparisonNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNComparisonNode")), objc.RegisterName("new"))
+	return nNComparisonNodeAdopt(_id)
 }
 
-// @property   comparisonType @abstract   The comparison type to set on the underlying kernel.  Defaults to MPSNNComparisonTypeEqual.
+// The comparison type to set on the underlying kernel.  Defaults to MPSNNComparisonTypeEqual.
 //
-// WithComparisonType sets the comparisonType property and returns the receiver for chaining.
-func (x *NNComparisonNode) WithComparisonType(comparisonType MPSNNComparisonType) *NNComparisonNode {
-	x.inner.SetComparisonType(raw.MPSNNComparisonType(comparisonType))
+// WithComparisonType sets comparisonType and returns the receiver so calls can be chained.
+func (x *NNComparisonNode) WithComparisonType(comparisonType NNComparisonType) *NNComparisonNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComparisonType:"), comparisonType)
 	return x
 }
 
-// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+// WithPrimaryScale sets primaryScale and returns the receiver so calls can be chained.
 func (x *NNComparisonNode) WithPrimaryScale(primaryScale float32) *NNComparisonNode {
-	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryScale(primaryScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return x
 }
 
-// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+// WithSecondaryScale sets secondaryScale and returns the receiver so calls can be chained.
 func (x *NNComparisonNode) WithSecondaryScale(secondaryScale float32) *NNComparisonNode {
-	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryScale(secondaryScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return x
 }
 
-// WithBias sets the bias property and returns the receiver for chaining.
+// WithBias sets bias and returns the receiver so calls can be chained.
 func (x *NNComparisonNode) WithBias(bias float32) *NNComparisonNode {
-	x.inner.MPSNNBinaryArithmeticNode.SetBias(bias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
-func (x *NNComparisonNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNComparisonNode {
-	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
+// WithPrimaryStrideInPixelsX sets primaryStrideInPixelsX and returns the receiver so calls can be chained.
+func (x *NNComparisonNode) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNComparisonNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
 	return x
 }
 
-// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
-func (x *NNComparisonNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNComparisonNode {
-	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
+// WithPrimaryStrideInPixelsY sets primaryStrideInPixelsY and returns the receiver so calls can be chained.
+func (x *NNComparisonNode) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNComparisonNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
 	return x
 }
 
-// WithPrimaryStrideInFeatureChannels sets the primaryStrideInFeatureChannels property and returns the receiver for chaining.
-func (x *NNComparisonNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *NNComparisonNode {
-	x.inner.MPSNNBinaryArithmeticNode.SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels)
+// WithPrimaryStrideInFeatureChannels sets primaryStrideInFeatureChannels and returns the receiver so calls can be chained.
+func (x *NNComparisonNode) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNComparisonNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
 	return x
 }
 
-// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
-func (x *NNComparisonNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNComparisonNode {
-	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
+// WithSecondaryStrideInPixelsX sets secondaryStrideInPixelsX and returns the receiver so calls can be chained.
+func (x *NNComparisonNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNComparisonNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return x
 }
 
-// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
-func (x *NNComparisonNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNComparisonNode {
-	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
+// WithSecondaryStrideInPixelsY sets secondaryStrideInPixelsY and returns the receiver so calls can be chained.
+func (x *NNComparisonNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNComparisonNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return x
 }
 
-// WithSecondaryStrideInFeatureChannels sets the secondaryStrideInFeatureChannels property and returns the receiver for chaining.
-func (x *NNComparisonNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNComparisonNode {
-	x.inner.MPSNNBinaryArithmeticNode.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+// WithSecondaryStrideInFeatureChannels sets secondaryStrideInFeatureChannels and returns the receiver so calls can be chained.
+func (x *NNComparisonNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNComparisonNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 	return x
 }
 
-// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+// WithMinimumValue sets minimumValue and returns the receiver so calls can be chained.
 func (x *NNComparisonNode) WithMinimumValue(minimumValue float32) *NNComparisonNode {
-	x.inner.MPSNNBinaryArithmeticNode.SetMinimumValue(minimumValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return x
 }
 
-// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+// WithMaximumValue sets maximumValue and returns the receiver so calls can be chained.
 func (x *NNComparisonNode) WithMaximumValue(maximumValue float32) *NNComparisonNode {
-	x.inner.MPSNNBinaryArithmeticNode.SetMaximumValue(maximumValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return x
 }
 
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
+// A string to help identify this object.
 //
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *NNComparisonNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNComparisonNode {
-	x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
-	return x
-}
-
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *NNComparisonNode) WithLabel(label string) *NNComparisonNode {
-	x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property   comparisonType @abstract   The comparison type to set on the underlying kernel.  Defaults to MPSNNComparisonTypeEqual.
-//
-// ComparisonType calls the underlying ComparisonType.
-func (x *NNComparisonNode) ComparisonType() MPSNNComparisonType {
-	return MPSNNComparisonType(x.inner.ComparisonType())
+// The comparison type to set on the underlying kernel.  Defaults to MPSNNComparisonTypeEqual.
+func (x *NNComparisonNode) ComparisonType() NNComparisonType {
+	_r := objc.Send[NNComparisonType](objref.IDOf(x), objc.RegisterName("comparisonType"))
+	return _r
 }
 
-// SetComparisonType calls the underlying SetComparisonType.
-func (x *NNComparisonNode) SetComparisonType(comparisonType MPSNNComparisonType) {
-	x.inner.SetComparisonType(raw.MPSNNComparisonType(comparisonType))
-}
-
-func (x *NNComparisonNode) asNNBinaryArithmeticNode() *raw.MPSNNBinaryArithmeticNode {
-	return &x.inner.MPSNNBinaryArithmeticNode
-}
-
-func (x *NNComparisonNode) asNNFilterNode() *raw.MPSNNFilterNode {
-	return &x.inner.MPSNNBinaryArithmeticNode.MPSNNFilterNode
+func (x *NNComparisonNode) SetComparisonType(comparisonType NNComparisonType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComparisonType:"), comparisonType)
 }
 
 // NNComparisonNodeable is the interface implemented by [NNComparisonNode], for mocking and DI.
 type NNComparisonNodeable interface {
-	Unwrap() *raw.MPSNNComparisonNode
-	WithComparisonType(comparisonType MPSNNComparisonType) *NNComparisonNode
+	obj.Object
+	WithComparisonType(comparisonType NNComparisonType) *NNComparisonNode
 	WithPrimaryScale(primaryScale float32) *NNComparisonNode
 	WithSecondaryScale(secondaryScale float32) *NNComparisonNode
 	WithBias(bias float32) *NNComparisonNode
-	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNComparisonNode
-	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNComparisonNode
-	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *NNComparisonNode
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNComparisonNode
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNComparisonNode
-	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNComparisonNode
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNComparisonNode
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNComparisonNode
+	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNComparisonNode
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNComparisonNode
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNComparisonNode
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNComparisonNode
 	WithMinimumValue(minimumValue float32) *NNComparisonNode
 	WithMaximumValue(maximumValue float32) *NNComparisonNode
-	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *NNComparisonNode
 	WithLabel(label string) *NNComparisonNode
-	ComparisonType() MPSNNComparisonType
-	SetComparisonType(comparisonType MPSNNComparisonType)
+	ComparisonType() NNComparisonType
+	SetComparisonType(comparisonType NNComparisonType)
 }
 
 var _ NNComparisonNodeable = (*NNComparisonNode)(nil)

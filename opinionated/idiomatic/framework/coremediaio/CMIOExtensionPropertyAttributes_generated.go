@@ -5,78 +5,98 @@
 package coremediaio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that describes the attributes of a property.
 //
-// ExtensionPropertyAttributes wraps [raw.CMIOExtensionPropertyAttributes] with a fluent Go API.
+// ExtensionPropertyAttributes is an idiomatic wrapper over the Objective-C class CMIOExtensionPropertyAttributes.
 type ExtensionPropertyAttributes struct {
-	inner *raw.CMIOExtensionPropertyAttributes[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CMIOExtensionPropertyAttributes].
-func (x *ExtensionPropertyAttributes) Unwrap() *raw.CMIOExtensionPropertyAttributes[objc.ID] {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExtensionPropertyAttributes) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtensionPropertyAttributesFromID adopts an existing object pointer as a ExtensionPropertyAttributes (nil for 0).
+// ExtensionPropertyAttributesFromID adopts an existing Objective-C object as a ExtensionPropertyAttributes
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtensionPropertyAttributesFromID(id objc.ID) *ExtensionPropertyAttributes {
 	if id == 0 {
 		return nil
 	}
-	return &ExtensionPropertyAttributes{inner: raw.CMIOExtensionPropertyAttributesFromID[objc.ID](id)}
+	x := &ExtensionPropertyAttributes{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// extensionPropertyAttributesAdopt wraps an Objective-C object that this code just created as a
+// ExtensionPropertyAttributes (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extensionPropertyAttributesAdopt(id objc.ID) *ExtensionPropertyAttributes {
+	if id == 0 {
+		return nil
+	}
+	x := &ExtensionPropertyAttributes{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ExtensionPropertyAttributes) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExtensionPropertyAttributes) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExtensionPropertyAttributes) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a property attributes object with the specified configuration.
 //
-// NewExtensionPropertyAttributesWithMinValueMaxValueValidValuesReadOnly creates a new [ExtensionPropertyAttributes].
-func NewExtensionPropertyAttributesWithMinValueMaxValueValidValuesReadOnly(minValue objc.ID, maxValue objc.ID, validValues *foundation.NSArray[objc.ID], readOnly bool) *ExtensionPropertyAttributes {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionPropertyAttributes")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMinValue:maxValue:validValues:readOnly:"), minValue, maxValue, validValues.Ptr(), readOnly)
-	return &ExtensionPropertyAttributes{inner: raw.CMIOExtensionPropertyAttributesFromID[objc.ID](_id)}
+// NewExtensionPropertyAttributesWithMinValueMaxValueValidValuesReadOnly creates a new ExtensionPropertyAttributes.
+func NewExtensionPropertyAttributesWithMinValueMaxValueValidValuesReadOnly(minValue obj.Object, maxValue obj.Object, validValues []obj.Object, readOnly bool) *ExtensionPropertyAttributes {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionPropertyAttributes")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMinValue:maxValue:validValues:readOnly:"), objref.IDOf(minValue), objref.IDOf(maxValue), purego.SliceToNSArray(validValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), readOnly)
+	return extensionPropertyAttributesAdopt(_id)
 }
 
-// @property minValue @abstract The minimum value of a property.
-//
-// MinValue calls the underlying MinValue.
-func (x *ExtensionPropertyAttributes) MinValue() objc.ID {
-	return x.inner.MinValue()
+// The minimum value of a property.
+func (x *ExtensionPropertyAttributes) MinValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minValue"))
+	return obj.Wrap(_r)
 }
 
-// @property maxValue @abstract The maximum value of a property.
-//
-// MaxValue calls the underlying MaxValue.
-func (x *ExtensionPropertyAttributes) MaxValue() objc.ID {
-	return x.inner.MaxValue()
+// The maximum value of a property.
+func (x *ExtensionPropertyAttributes) MaxValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxValue"))
+	return obj.Wrap(_r)
 }
 
-// @property validValues @abstract An array of valid values.
-//
-// ValidValues calls the underlying ValidValues.
-func (x *ExtensionPropertyAttributes) ValidValues() *foundation.NSArray[objc.ID] {
-	return x.inner.ValidValues()
+// An array of valid values.
+func (x *ExtensionPropertyAttributes) ValidValues() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validValues"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @property readOnly @abstract The readOnly flag attribute.
-//
-// IsReadOnly calls the underlying IsReadOnly.
+// The readOnly flag attribute.
 func (x *ExtensionPropertyAttributes) IsReadOnly() bool {
-	return x.inner.IsReadOnly()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadOnly"))
+	return _r
 }
 
 // ExtensionPropertyAttributesable is the interface implemented by [ExtensionPropertyAttributes], for mocking and DI.
 type ExtensionPropertyAttributesable interface {
-	Unwrap() *raw.CMIOExtensionPropertyAttributes[objc.ID]
-	MinValue() objc.ID
-	MaxValue() objc.ID
-	ValidValues() *foundation.NSArray[objc.ID]
+	obj.Object
+	MinValue() obj.Object
+	MaxValue() obj.Object
+	ValidValues() []obj.Object
 	IsReadOnly() bool
 }
 

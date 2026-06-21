@@ -5,294 +5,122 @@
 package paravirtualizedgraphics
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/paravirtualizedgraphics"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A description of the paravirtualized graphics device to create.
 //
-// PGDeviceDescriptor wraps [raw.PGDeviceDescriptor] with a fluent Go API.
+// PGDeviceDescriptor is an idiomatic wrapper over the Objective-C class PGDeviceDescriptor.
 type PGDeviceDescriptor struct {
-	inner *raw.PGDeviceDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PGDeviceDescriptor].
-func (x *PGDeviceDescriptor) Unwrap() *raw.PGDeviceDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PGDeviceDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// PGDeviceDescriptorFromID adopts an existing object pointer as a PGDeviceDescriptor (nil for 0).
+// PGDeviceDescriptorFromID adopts an existing Objective-C object as a PGDeviceDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func PGDeviceDescriptorFromID(id objc.ID) *PGDeviceDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &PGDeviceDescriptor{inner: raw.PGDeviceDescriptorFromID(id)}
-}
-
-// NewPGDeviceDescriptor creates a new [PGDeviceDescriptor].
-func NewPGDeviceDescriptor() *PGDeviceDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PGDeviceDescriptor")), objc.RegisterName("new"))
-	return &PGDeviceDescriptor{inner: raw.PGDeviceDescriptorFromID(_id)}
-}
-
-// The Metal device object to use to back the virtual graphics device.
-//
-// WithDevice sets the device property and returns the receiver for chaining.
-func (x *PGDeviceDescriptor) WithDevice(device metal.MTLDevice) *PGDeviceDescriptor {
-	x.inner.SetDevice(device)
+	x := &PGDeviceDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// pGDeviceDescriptorAdopt wraps an Objective-C object that this code just created as a
+// PGDeviceDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pGDeviceDescriptorAdopt(id objc.ID) *PGDeviceDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &PGDeviceDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PGDeviceDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PGDeviceDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PGDeviceDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPGDeviceDescriptor creates a new PGDeviceDescriptor.
+func NewPGDeviceDescriptor() *PGDeviceDescriptor {
+	_id := objc.Send[objc.ID](objc.ID(_class("PGDeviceDescriptor")), objc.RegisterName("new"))
+	return pGDeviceDescriptorAdopt(_id)
 }
 
 // The length in bytes of the memory-mapped IO section.
 //
-// WithMmioLength sets the mmioLength property and returns the receiver for chaining.
-func (x *PGDeviceDescriptor) WithMmioLength(mmioLength uint) *PGDeviceDescriptor {
-	x.inner.SetMmioLength(mmioLength)
-	return x
-}
-
-// A handler that the framework calls to create a task object.
-//
-// WithCreateTask sets the createTask property and returns the receiver for chaining.
-func (x *PGDeviceDescriptor) WithCreateTask(createTask func(uint64, unsafe.Pointer) unsafe.Pointer) *PGDeviceDescriptor {
-	x.inner.SetCreateTask(createTask)
-	return x
-}
-
-// A handler that the framework calls to destroy a task object.
-//
-// WithDestroyTask sets the destroyTask property and returns the receiver for chaining.
-func (x *PGDeviceDescriptor) WithDestroyTask(destroyTask func(unsafe.Pointer)) *PGDeviceDescriptor {
-	x.inner.SetDestroyTask(destroyTask)
-	return x
-}
-
-// A handler that the framework calls to map memory into the virtual machine.
-//
-// WithMapMemory sets the mapMemory property and returns the receiver for chaining.
-func (x *PGDeviceDescriptor) WithMapMemory(mapMemory func(unsafe.Pointer, uint32, uint64, bool, *raw.PGPhysicalMemoryRange_s) bool) *PGDeviceDescriptor {
-	x.inner.SetMapMemory(mapMemory)
-	return x
-}
-
-// A handler that the framework calls to unmap memory from the virtual machine.
-//
-// WithUnmapMemory sets the unmapMemory property and returns the receiver for chaining.
-func (x *PGDeviceDescriptor) WithUnmapMemory(unmapMemory func(unsafe.Pointer, uint64, uint64) bool) *PGDeviceDescriptor {
-	x.inner.SetUnmapMemory(unmapMemory)
-	return x
-}
-
-// A handler that the framework calls to read data from the guest’s memory.
-//
-// WithReadMemory sets the readMemory property and returns the receiver for chaining.
-func (x *PGDeviceDescriptor) WithReadMemory(readMemory func(uint64, uint64, unsafe.Pointer) bool) *PGDeviceDescriptor {
-	x.inner.SetReadMemory(readMemory)
+// WithMmioLength sets mmioLength and returns the receiver so calls can be chained.
+func (x *PGDeviceDescriptor) WithMmioLength(mmioLength int) *PGDeviceDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMmioLength:"), mmioLength)
 	return x
 }
 
 // A handler that the system calls to raise an interrupt in the guest environment.
 //
-// WithRaiseInterrupt sets the raiseInterrupt property and returns the receiver for chaining.
+// WithRaiseInterrupt sets raiseInterrupt and returns the receiver so calls can be chained.
 func (x *PGDeviceDescriptor) WithRaiseInterrupt(raiseInterrupt func(uint32)) *PGDeviceDescriptor {
-	x.inner.SetRaiseInterrupt(raiseInterrupt)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRaiseInterrupt:"), raiseInterrupt)
 	return x
 }
 
-// A handler that the framework calls to add a trace range.
+// The number of PGDisplay ports configured into the VM. By default, the value of displayPortCount will be 1.  Valid values range from 1 to the value returned by PGMaxDisplayPortCount().
 //
-// WithAddTraceRange sets the addTraceRange property and returns the receiver for chaining.
-func (x *PGDeviceDescriptor) WithAddTraceRange(addTraceRange func(*raw.PGPhysicalMemoryRange_s, objc.Block) unsafe.Pointer) *PGDeviceDescriptor {
-	x.inner.SetAddTraceRange(addTraceRange)
-	return x
-}
-
-// A handler that the framework calls to remove a trace range.
-//
-// WithRemoveTraceRange sets the removeTraceRange property and returns the receiver for chaining.
-func (x *PGDeviceDescriptor) WithRemoveTraceRange(removeTraceRange func(unsafe.Pointer)) *PGDeviceDescriptor {
-	x.inner.SetRemoveTraceRange(removeTraceRange)
-	return x
-}
-
-// @property displayPortCount @abstract The number of PGDisplay ports configured into the VM. @discussion By default, the value of displayPortCount will be 1.  Valid values range from 1 to the value returned by PGMaxDisplayPortCount().
-//
-// WithDisplayPortCount sets the displayPortCount property and returns the receiver for chaining.
+// WithDisplayPortCount sets displayPortCount and returns the receiver so calls can be chained.
 func (x *PGDeviceDescriptor) WithDisplayPortCount(displayPortCount uint32) *PGDeviceDescriptor {
-	x.inner.SetDisplayPortCount(displayPortCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayPortCount:"), displayPortCount)
 	return x
 }
 
-// @property device @abstract The metal device to use to back the PGDevice
-//
-// Device calls the underlying Device.
-func (x *PGDeviceDescriptor) Device() metal.MTLDevice {
-	return x.inner.Device()
+// The length, of the memory that backs the APPLEGPU_BAR_MMIO By default, the value of mmioLength will be the recommended default size for the MMIO memory.
+func (x *PGDeviceDescriptor) MmioLength() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mmioLength"))
+	return _r
 }
 
-// SetDevice calls the underlying SetDevice.
-func (x *PGDeviceDescriptor) SetDevice(device metal.MTLDevice) {
-	x.inner.SetDevice(device)
+func (x *PGDeviceDescriptor) SetMmioLength(mmioLength int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMmioLength:"), mmioLength)
 }
 
-// @property mmioLength @abstract The length, of the memory that backs the APPLEGPU_BAR_MMIO @discussion By default, the value of mmioLength will be the recommended default size for the MMIO memory.
-//
-// MmioLength calls the underlying MmioLength.
-func (x *PGDeviceDescriptor) MmioLength() uint {
-	return x.inner.MmioLength()
-}
-
-// SetMmioLength calls the underlying SetMmioLength.
-func (x *PGDeviceDescriptor) SetMmioLength(mmioLength uint) {
-	x.inner.SetMmioLength(mmioLength)
-}
-
-// @property createTask @abstract The block to invoke to create a task.
-//
-// CreateTask calls the underlying CreateTask.
-func (x *PGDeviceDescriptor) CreateTask() objc.Block {
-	return x.inner.CreateTask()
-}
-
-// SetCreateTask calls the underlying SetCreateTask.
-func (x *PGDeviceDescriptor) SetCreateTask(createTask func(uint64, unsafe.Pointer) unsafe.Pointer) {
-	x.inner.SetCreateTask(createTask)
-}
-
-// @property destroyTask @abstract The block to invoke to destroy a task.
-//
-// DestroyTask calls the underlying DestroyTask.
-func (x *PGDeviceDescriptor) DestroyTask() objc.Block {
-	return x.inner.DestroyTask()
-}
-
-// SetDestroyTask calls the underlying SetDestroyTask.
-func (x *PGDeviceDescriptor) SetDestroyTask(destroyTask func(unsafe.Pointer)) {
-	x.inner.SetDestroyTask(destroyTask)
-}
-
-// @property mapMemory @abstract The block to invoke to map guest memory into a task.
-//
-// MapMemory calls the underlying MapMemory.
-func (x *PGDeviceDescriptor) MapMemory() objc.Block {
-	return x.inner.MapMemory()
-}
-
-// SetMapMemory calls the underlying SetMapMemory.
-func (x *PGDeviceDescriptor) SetMapMemory(mapMemory func(unsafe.Pointer, uint32, uint64, bool, *raw.PGPhysicalMemoryRange_s) bool) {
-	x.inner.SetMapMemory(mapMemory)
-}
-
-// @property unmapMemory @abstract The block to invoke to unmap guest memory from a task.
-//
-// UnmapMemory calls the underlying UnmapMemory.
-func (x *PGDeviceDescriptor) UnmapMemory() objc.Block {
-	return x.inner.UnmapMemory()
-}
-
-// SetUnmapMemory calls the underlying SetUnmapMemory.
-func (x *PGDeviceDescriptor) SetUnmapMemory(unmapMemory func(unsafe.Pointer, uint64, uint64) bool) {
-	x.inner.SetUnmapMemory(unmapMemory)
-}
-
-// @property readMemory @abstract The block to invoke to perform a read of guest memory
-//
-// ReadMemory calls the underlying ReadMemory.
-func (x *PGDeviceDescriptor) ReadMemory() objc.Block {
-	return x.inner.ReadMemory()
-}
-
-// SetReadMemory calls the underlying SetReadMemory.
-func (x *PGDeviceDescriptor) SetReadMemory(readMemory func(uint64, uint64, unsafe.Pointer) bool) {
-	x.inner.SetReadMemory(readMemory)
-}
-
-// @property raiseInterrupt @abstract The block to invoke to raise an interrupt to the guest.  May be raised from a dispatch queue must be thread safe.
-//
-// RaiseInterrupt calls the underlying RaiseInterrupt.
-func (x *PGDeviceDescriptor) RaiseInterrupt() objc.Block {
-	return x.inner.RaiseInterrupt()
-}
-
-// SetRaiseInterrupt calls the underlying SetRaiseInterrupt.
 func (x *PGDeviceDescriptor) SetRaiseInterrupt(raiseInterrupt func(uint32)) {
-	x.inner.SetRaiseInterrupt(raiseInterrupt)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRaiseInterrupt:"), raiseInterrupt)
 }
 
-// @property addTraceRange @abstract The block to invoke to add a trace range. @discussion If the client is unable to provide range tracing, it should not populate this property or removeTraceRange.
-//
-// AddTraceRange calls the underlying AddTraceRange.
-func (x *PGDeviceDescriptor) AddTraceRange() objc.Block {
-	return x.inner.AddTraceRange()
-}
-
-// SetAddTraceRange calls the underlying SetAddTraceRange.
-func (x *PGDeviceDescriptor) SetAddTraceRange(addTraceRange func(*raw.PGPhysicalMemoryRange_s, objc.Block) unsafe.Pointer) {
-	x.inner.SetAddTraceRange(addTraceRange)
-}
-
-// @property removeTraceRange @abstract The block to invoke to remove a trace range. @discussion This property must be populated if addTraceRange is populated.
-//
-// RemoveTraceRange calls the underlying RemoveTraceRange.
-func (x *PGDeviceDescriptor) RemoveTraceRange() objc.Block {
-	return x.inner.RemoveTraceRange()
-}
-
-// SetRemoveTraceRange calls the underlying SetRemoveTraceRange.
-func (x *PGDeviceDescriptor) SetRemoveTraceRange(removeTraceRange func(unsafe.Pointer)) {
-	x.inner.SetRemoveTraceRange(removeTraceRange)
-}
-
-// @property displayPortCount @abstract The number of PGDisplay ports configured into the VM. @discussion By default, the value of displayPortCount will be 1.  Valid values range from 1 to the value returned by PGMaxDisplayPortCount().
-//
-// DisplayPortCount calls the underlying DisplayPortCount.
+// The number of PGDisplay ports configured into the VM. By default, the value of displayPortCount will be 1.  Valid values range from 1 to the value returned by PGMaxDisplayPortCount().
 func (x *PGDeviceDescriptor) DisplayPortCount() uint32 {
-	return x.inner.DisplayPortCount()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("displayPortCount"))
+	return _r
 }
 
-// SetDisplayPortCount calls the underlying SetDisplayPortCount.
 func (x *PGDeviceDescriptor) SetDisplayPortCount(displayPortCount uint32) {
-	x.inner.SetDisplayPortCount(displayPortCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayPortCount:"), displayPortCount)
 }
 
 // PGDeviceDescriptorable is the interface implemented by [PGDeviceDescriptor], for mocking and DI.
 type PGDeviceDescriptorable interface {
-	Unwrap() *raw.PGDeviceDescriptor
-	WithDevice(device metal.MTLDevice) *PGDeviceDescriptor
-	WithMmioLength(mmioLength uint) *PGDeviceDescriptor
-	WithCreateTask(createTask func(uint64, unsafe.Pointer) unsafe.Pointer) *PGDeviceDescriptor
-	WithDestroyTask(destroyTask func(unsafe.Pointer)) *PGDeviceDescriptor
-	WithMapMemory(mapMemory func(unsafe.Pointer, uint32, uint64, bool, *raw.PGPhysicalMemoryRange_s) bool) *PGDeviceDescriptor
-	WithUnmapMemory(unmapMemory func(unsafe.Pointer, uint64, uint64) bool) *PGDeviceDescriptor
-	WithReadMemory(readMemory func(uint64, uint64, unsafe.Pointer) bool) *PGDeviceDescriptor
+	obj.Object
+	WithMmioLength(mmioLength int) *PGDeviceDescriptor
 	WithRaiseInterrupt(raiseInterrupt func(uint32)) *PGDeviceDescriptor
-	WithAddTraceRange(addTraceRange func(*raw.PGPhysicalMemoryRange_s, objc.Block) unsafe.Pointer) *PGDeviceDescriptor
-	WithRemoveTraceRange(removeTraceRange func(unsafe.Pointer)) *PGDeviceDescriptor
 	WithDisplayPortCount(displayPortCount uint32) *PGDeviceDescriptor
-	Device() metal.MTLDevice
-	SetDevice(device metal.MTLDevice)
-	MmioLength() uint
-	SetMmioLength(mmioLength uint)
-	CreateTask() objc.Block
-	SetCreateTask(createTask func(uint64, unsafe.Pointer) unsafe.Pointer)
-	DestroyTask() objc.Block
-	SetDestroyTask(destroyTask func(unsafe.Pointer))
-	MapMemory() objc.Block
-	SetMapMemory(mapMemory func(unsafe.Pointer, uint32, uint64, bool, *raw.PGPhysicalMemoryRange_s) bool)
-	UnmapMemory() objc.Block
-	SetUnmapMemory(unmapMemory func(unsafe.Pointer, uint64, uint64) bool)
-	ReadMemory() objc.Block
-	SetReadMemory(readMemory func(uint64, uint64, unsafe.Pointer) bool)
-	RaiseInterrupt() objc.Block
+	MmioLength() int
+	SetMmioLength(mmioLength int)
 	SetRaiseInterrupt(raiseInterrupt func(uint32))
-	AddTraceRange() objc.Block
-	SetAddTraceRange(addTraceRange func(*raw.PGPhysicalMemoryRange_s, objc.Block) unsafe.Pointer)
-	RemoveTraceRange() objc.Block
-	SetRemoveTraceRange(removeTraceRange func(unsafe.Pointer))
 	DisplayPortCount() uint32
 	SetDisplayPortCount(displayPortCount uint32)
 }

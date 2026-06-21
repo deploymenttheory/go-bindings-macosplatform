@@ -5,60 +5,82 @@
 package sharedwithyou
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyou"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a universal link to share by any number of contacts in one or more conversations.
 //
-// Highlight wraps [raw.SWHighlight] with a fluent Go API.
+// Highlight is an idiomatic wrapper over the Objective-C class SWHighlight.
 type Highlight struct {
-	inner *raw.SWHighlight
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SWHighlight].
-func (x *Highlight) Unwrap() *raw.SWHighlight { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Highlight) ID() objc.ID { return x.inner.Ptr() }
-
-// HighlightFromID adopts an existing object pointer as a Highlight (nil for 0).
+// HighlightFromID adopts an existing Objective-C object as a Highlight
+// (nil for 0), retaining it and registering a release finalizer.
 func HighlightFromID(id objc.ID) *Highlight {
 	if id == 0 {
 		return nil
 	}
-	return &Highlight{inner: raw.SWHighlightFromID(id)}
+	x := &Highlight{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewHighlight creates a new [Highlight].
+// highlightAdopt wraps an Objective-C object that this code just created as a
+// Highlight (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func highlightAdopt(id objc.ID) *Highlight {
+	if id == 0 {
+		return nil
+	}
+	x := &Highlight{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Highlight) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Highlight) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Highlight) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHighlight creates a new Highlight.
 func NewHighlight() *Highlight {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SWHighlight")), objc.RegisterName("new"))
-	return &Highlight{inner: raw.SWHighlightFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SWHighlight")), objc.RegisterName("new"))
+	return highlightAdopt(_id)
 }
 
-// @abstract The unique identifier for this highlight
-//
-// Identifier calls the underlying Identifier.
-func (x *Highlight) Identifier() objc.ID {
-	return x.inner.Identifier()
+// The unique identifier for this highlight
+func (x *Highlight) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	return obj.Wrap(_r)
 }
 
-// @abstract The surfaced content URL
-//
-// URL calls the underlying URL.
-func (x *Highlight) URL() *foundation.NSURL {
-	return x.inner.URL()
+// The surfaced content URL
+func (x *Highlight) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
-
-func (x *Highlight) asHighlight() *raw.SWHighlight { return x.inner }
 
 // Highlightable is the interface implemented by [Highlight], for mocking and DI.
 type Highlightable interface {
-	Unwrap() *raw.SWHighlight
-	Identifier() objc.ID
-	URL() *foundation.NSURL
+	obj.Object
+	Identifier() obj.Object
+	URL() obj.Object
 }
 
 var _ Highlightable = (*Highlight)(nil)

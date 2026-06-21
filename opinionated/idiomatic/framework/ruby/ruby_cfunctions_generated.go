@@ -5,4576 +5,7562 @@
 package ruby
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ruby"
-	"unsafe"
+	ebipurego "github.com/ebitengine/purego"
 )
 
-// BuiltinExpect calls [raw.BuiltinExpect] (C function __builtin_expect).
+var _fnBuiltinExpect func(int, int) int
+
+// BuiltinExpect calls the Ruby framework function __builtin_expect.
 func BuiltinExpect(arg int, arg2 int) int {
-	return raw.BuiltinExpect(arg, arg2)
+	_loadOnce.Do(_loadLibrary)
+	if _fnBuiltinExpect == nil {
+		ebipurego.RegisterLibFunc(&_fnBuiltinExpect, _lib, "__builtin_expect")
+	}
+	return _fnBuiltinExpect(arg, arg2)
 }
 
-// Eaccess calls [raw.Eaccess] (C function eaccess).
+var _fnEaccess func(string, int) int
+
+// Eaccess calls the Ruby framework function eaccess.
 func Eaccess(arg string, arg2 int) int {
-	return raw.Eaccess(arg, arg2)
+	_loadOnce.Do(_loadLibrary)
+	if _fnEaccess == nil {
+		ebipurego.RegisterLibFunc(&_fnEaccess, _lib, "eaccess")
+	}
+	return _fnEaccess(arg, arg2)
 }
 
-// ExplicitBzero calls [raw.ExplicitBzero] (C function explicit_bzero).
-func ExplicitBzero(b unsafe.Pointer, len_ uint) {
-	raw.ExplicitBzero(b, len_)
-}
+var _fnFinite func(float64) int
 
-// Finite calls [raw.Finite] (C function finite).
+// Finite calls the Ruby framework function finite.
 func Finite(arg float64) int {
-	return raw.Finite(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFinite == nil {
+		ebipurego.RegisterLibFunc(&_fnFinite, _lib, "finite")
+	}
+	return _fnFinite(arg)
 }
 
-// RbArray calls [raw.RbArray] (C function rb_Array).
-func RbArray(arg uint) uint {
-	return raw.RbArray(arg)
-}
+var _fnRbArray func(int) int
 
-// RbComplex calls [raw.RbComplex] (C function rb_Complex).
-func RbComplex(arg uint, arg2 uint) uint {
-	return raw.RbComplex(arg, arg2)
+// RbArray calls the Ruby framework function rb_Array.
+func RbArray(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbArray == nil {
+		ebipurego.RegisterLibFunc(&_fnRbArray, _lib, "rb_Array")
+	}
+	return _fnRbArray(arg)
 }
 
-// RbFloat calls [raw.RbFloat] (C function rb_Float).
-func RbFloat(arg uint) uint {
-	return raw.RbFloat(arg)
-}
+var _fnRbComplex func(int, int) int
 
-// RbInteger calls [raw.RbInteger] (C function rb_Integer).
-func RbInteger(arg uint) uint {
-	return raw.RbInteger(arg)
+// RbComplex calls the Ruby framework function rb_Complex.
+func RbComplex(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbComplex == nil {
+		ebipurego.RegisterLibFunc(&_fnRbComplex, _lib, "rb_Complex")
+	}
+	return _fnRbComplex(arg, arg2)
 }
 
-// RbRational calls [raw.RbRational] (C function rb_Rational).
-func RbRational(arg uint, arg2 uint) uint {
-	return raw.RbRational(arg, arg2)
-}
+var _fnRbFloat func(int) int
 
-// RbString calls [raw.RbString] (C function rb_String).
-func RbString(arg uint) uint {
-	return raw.RbString(arg)
+// RbFloat calls the Ruby framework function rb_Float.
+func RbFloat(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFloat, _lib, "rb_Float")
+	}
+	return _fnRbFloat(arg)
 }
 
-// RbAbsintNumwords calls [raw.RbAbsintNumwords] (C function rb_absint_numwords).
-func RbAbsintNumwords(val uint, word_numbits uint, nlz_bits_ret *uint) uint {
-	return raw.RbAbsintNumwords(val, word_numbits, nlz_bits_ret)
-}
+var _fnRbInteger func(int) int
 
-// RbAbsintSinglebitP calls [raw.RbAbsintSinglebitP] (C function rb_absint_singlebit_p).
-func RbAbsintSinglebitP(val uint) int {
-	return raw.RbAbsintSinglebitP(val)
+// RbInteger calls the Ruby framework function rb_Integer.
+func RbInteger(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbInteger == nil {
+		ebipurego.RegisterLibFunc(&_fnRbInteger, _lib, "rb_Integer")
+	}
+	return _fnRbInteger(arg)
 }
 
-// RbAbsintSize calls [raw.RbAbsintSize] (C function rb_absint_size).
-func RbAbsintSize(val uint, nlz_bits_ret *int32) uint {
-	return raw.RbAbsintSize(val, nlz_bits_ret)
-}
+var _fnRbRational func(int, int) int
 
-// RbAddEventHook calls [raw.RbAddEventHook] (C function rb_add_event_hook).
-func RbAddEventHook(func_ unsafe.Pointer, events uint32, data uint) {
-	raw.RbAddEventHook(func_, events, data)
+// RbRational calls the Ruby framework function rb_Rational.
+func RbRational(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRational == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRational, _lib, "rb_Rational")
+	}
+	return _fnRbRational(arg, arg2)
 }
 
-// RbAlias calls [raw.RbAlias] (C function rb_alias).
-func RbAlias(arg uint, arg2 uint, arg3 uint) {
-	raw.RbAlias(arg, arg2, arg3)
-}
+var _fnRbString func(int) int
 
-// RbAliasVariable calls [raw.RbAliasVariable] (C function rb_alias_variable).
-func RbAliasVariable(arg uint, arg2 uint) {
-	raw.RbAliasVariable(arg, arg2)
+// RbString calls the Ruby framework function rb_String.
+func RbString(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbString == nil {
+		ebipurego.RegisterLibFunc(&_fnRbString, _lib, "rb_String")
+	}
+	return _fnRbString(arg)
 }
 
-// RbAllocTmpBuffer calls [raw.RbAllocTmpBuffer] (C function rb_alloc_tmp_buffer).
-func RbAllocTmpBuffer(store unsafe.Pointer, len_ int) unsafe.Pointer {
-	return raw.RbAllocTmpBuffer(store, len_)
-}
+var _fnRbAbsintSinglebitP func(int) int
 
-// RbAllocTmpBuffer2 calls [raw.RbAllocTmpBuffer2] (C function rb_alloc_tmp_buffer2).
-func RbAllocTmpBuffer2(store unsafe.Pointer, count int, elsize uint) unsafe.Pointer {
-	return raw.RbAllocTmpBuffer2(store, count, elsize)
+// RbAbsintSinglebitP calls the Ruby framework function rb_absint_singlebit_p.
+func RbAbsintSinglebitP(val int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAbsintSinglebitP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAbsintSinglebitP, _lib, "rb_absint_singlebit_p")
+	}
+	return _fnRbAbsintSinglebitP(val)
 }
 
-// RbAllocTmpBufferWithCount calls [raw.RbAllocTmpBufferWithCount] (C function rb_alloc_tmp_buffer_with_count).
-func RbAllocTmpBufferWithCount(store unsafe.Pointer, len_ uint, count uint) unsafe.Pointer {
-	return raw.RbAllocTmpBufferWithCount(store, len_, count)
-}
+var _fnRbAlias func(int, int, int)
 
-// RbAnyToS calls [raw.RbAnyToS] (C function rb_any_to_s).
-func RbAnyToS(arg uint) uint {
-	return raw.RbAnyToS(arg)
+// RbAlias calls the Ruby framework function rb_alias.
+func RbAlias(arg int, arg2 int, arg3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAlias == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAlias, _lib, "rb_alias")
+	}
+	_fnRbAlias(arg, arg2, arg3)
 }
 
-// RbApply calls [raw.RbApply] (C function rb_apply).
-func RbApply(arg uint, arg2 uint, arg3 uint) uint {
-	return raw.RbApply(arg, arg2, arg3)
-}
+var _fnRbAliasVariable func(int, int)
 
-// RbArithmeticSequenceExtract calls [raw.RbArithmeticSequenceExtract] (C function rb_arithmetic_sequence_extract).
-func RbArithmeticSequenceExtract(arg uint, arg2 *raw.RbArithmeticSequenceComponentsT) int {
-	return raw.RbArithmeticSequenceExtract(arg, arg2)
+// RbAliasVariable calls the Ruby framework function rb_alias_variable.
+func RbAliasVariable(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAliasVariable == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAliasVariable, _lib, "rb_alias_variable")
+	}
+	_fnRbAliasVariable(arg, arg2)
 }
 
-// RbArrayConstPtr calls [raw.RbArrayConstPtr] (C function rb_array_const_ptr).
-func RbArrayConstPtr(a uint) *uint {
-	return raw.RbArrayConstPtr(a)
-}
+var _fnRbAnyToS func(int) int
 
-// RbArrayConstPtrTransient calls [raw.RbArrayConstPtrTransient] (C function rb_array_const_ptr_transient).
-func RbArrayConstPtrTransient(a uint) *uint {
-	return raw.RbArrayConstPtrTransient(a)
+// RbAnyToS calls the Ruby framework function rb_any_to_s.
+func RbAnyToS(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAnyToS == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAnyToS, _lib, "rb_any_to_s")
+	}
+	return _fnRbAnyToS(arg)
 }
 
-// RbArrayLen calls [raw.RbArrayLen] (C function rb_array_len).
-func RbArrayLen(a uint) int {
-	return raw.RbArrayLen(a)
-}
+var _fnRbApply func(int, int, int) int
 
-// RbArrayPtrUseEnd calls [raw.RbArrayPtrUseEnd] (C function rb_array_ptr_use_end).
-func RbArrayPtrUseEnd(a uint, allow_transient int) {
-	raw.RbArrayPtrUseEnd(a, allow_transient)
+// RbApply calls the Ruby framework function rb_apply.
+func RbApply(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbApply == nil {
+		ebipurego.RegisterLibFunc(&_fnRbApply, _lib, "rb_apply")
+	}
+	return _fnRbApply(arg, arg2, arg3)
 }
 
-// RbArrayPtrUseStart calls [raw.RbArrayPtrUseStart] (C function rb_array_ptr_use_start).
-func RbArrayPtrUseStart(a uint, allow_transient int) *uint {
-	return raw.RbArrayPtrUseStart(a, allow_transient)
-}
+var _fnRbArrayLen func(int) int
 
-// RbAryAref calls [raw.RbAryAref] (C function rb_ary_aref).
-func RbAryAref(arg int, arg2 *uint, arg3 uint) uint {
-	return raw.RbAryAref(arg, arg2, arg3)
+// RbArrayLen calls the Ruby framework function rb_array_len.
+func RbArrayLen(a int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbArrayLen == nil {
+		ebipurego.RegisterLibFunc(&_fnRbArrayLen, _lib, "rb_array_len")
+	}
+	return _fnRbArrayLen(a)
 }
 
-// RbAryAssoc calls [raw.RbAryAssoc] (C function rb_ary_assoc).
-func RbAryAssoc(arg uint, arg2 uint) uint {
-	return raw.RbAryAssoc(arg, arg2)
-}
+var _fnRbArrayPtrUseEnd func(int, int)
 
-// RbAryCat calls [raw.RbAryCat] (C function rb_ary_cat).
-func RbAryCat(arg uint, arg2 *uint, arg3 int) uint {
-	return raw.RbAryCat(arg, arg2, arg3)
+// RbArrayPtrUseEnd calls the Ruby framework function rb_array_ptr_use_end.
+func RbArrayPtrUseEnd(a int, allow_transient int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbArrayPtrUseEnd == nil {
+		ebipurego.RegisterLibFunc(&_fnRbArrayPtrUseEnd, _lib, "rb_array_ptr_use_end")
+	}
+	_fnRbArrayPtrUseEnd(a, allow_transient)
 }
+
+var _fnRbAryAssoc func(int, int) int
 
-// RbAryClear calls [raw.RbAryClear] (C function rb_ary_clear).
-func RbAryClear(arg uint) uint {
-	return raw.RbAryClear(arg)
+// RbAryAssoc calls the Ruby framework function rb_ary_assoc.
+func RbAryAssoc(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryAssoc == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryAssoc, _lib, "rb_ary_assoc")
+	}
+	return _fnRbAryAssoc(arg, arg2)
 }
 
-// RbAryCmp calls [raw.RbAryCmp] (C function rb_ary_cmp).
-func RbAryCmp(arg uint, arg2 uint) uint {
-	return raw.RbAryCmp(arg, arg2)
+var _fnRbAryClear func(int) int
+
+// RbAryClear calls the Ruby framework function rb_ary_clear.
+func RbAryClear(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryClear == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryClear, _lib, "rb_ary_clear")
+	}
+	return _fnRbAryClear(arg)
 }
 
-// RbAryConcat calls [raw.RbAryConcat] (C function rb_ary_concat).
-func RbAryConcat(arg uint, arg2 uint) uint {
-	return raw.RbAryConcat(arg, arg2)
+var _fnRbAryCmp func(int, int) int
+
+// RbAryCmp calls the Ruby framework function rb_ary_cmp.
+func RbAryCmp(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryCmp == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryCmp, _lib, "rb_ary_cmp")
+	}
+	return _fnRbAryCmp(arg, arg2)
 }
+
+var _fnRbAryConcat func(int, int) int
 
-// RbAryDelete calls [raw.RbAryDelete] (C function rb_ary_delete).
-func RbAryDelete(arg uint, arg2 uint) uint {
-	return raw.RbAryDelete(arg, arg2)
+// RbAryConcat calls the Ruby framework function rb_ary_concat.
+func RbAryConcat(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryConcat == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryConcat, _lib, "rb_ary_concat")
+	}
+	return _fnRbAryConcat(arg, arg2)
 }
 
-// RbAryDeleteAt calls [raw.RbAryDeleteAt] (C function rb_ary_delete_at).
-func RbAryDeleteAt(arg uint, arg2 int) uint {
-	return raw.RbAryDeleteAt(arg, arg2)
+var _fnRbAryDelete func(int, int) int
+
+// RbAryDelete calls the Ruby framework function rb_ary_delete.
+func RbAryDelete(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryDelete == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryDelete, _lib, "rb_ary_delete")
+	}
+	return _fnRbAryDelete(arg, arg2)
 }
+
+var _fnRbAryDeleteAt func(int, int) int
 
-// RbAryDup calls [raw.RbAryDup] (C function rb_ary_dup).
-func RbAryDup(arg uint) uint {
-	return raw.RbAryDup(arg)
+// RbAryDeleteAt calls the Ruby framework function rb_ary_delete_at.
+func RbAryDeleteAt(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryDeleteAt == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryDeleteAt, _lib, "rb_ary_delete_at")
+	}
+	return _fnRbAryDeleteAt(arg, arg2)
 }
 
-// RbAryEach calls [raw.RbAryEach] (C function rb_ary_each).
-func RbAryEach(arg uint) uint {
-	return raw.RbAryEach(arg)
+var _fnRbAryDup func(int) int
+
+// RbAryDup calls the Ruby framework function rb_ary_dup.
+func RbAryDup(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryDup == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryDup, _lib, "rb_ary_dup")
+	}
+	return _fnRbAryDup(arg)
 }
+
+var _fnRbAryEach func(int) int
 
-// RbAryEntry calls [raw.RbAryEntry] (C function rb_ary_entry).
-func RbAryEntry(arg uint, arg2 int) uint {
-	return raw.RbAryEntry(arg, arg2)
+// RbAryEach calls the Ruby framework function rb_ary_each.
+func RbAryEach(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryEach == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryEach, _lib, "rb_ary_each")
+	}
+	return _fnRbAryEach(arg)
 }
 
-// RbAryFree calls [raw.RbAryFree] (C function rb_ary_free).
-func RbAryFree(arg uint) {
-	raw.RbAryFree(arg)
+var _fnRbAryEntry func(int, int) int
+
+// RbAryEntry calls the Ruby framework function rb_ary_entry.
+func RbAryEntry(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryEntry == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryEntry, _lib, "rb_ary_entry")
+	}
+	return _fnRbAryEntry(arg, arg2)
 }
 
-// RbAryFreeze calls [raw.RbAryFreeze] (C function rb_ary_freeze).
-func RbAryFreeze(arg uint) uint {
-	return raw.RbAryFreeze(arg)
+var _fnRbAryFree func(int)
+
+// RbAryFree calls the Ruby framework function rb_ary_free.
+func RbAryFree(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryFree == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryFree, _lib, "rb_ary_free")
+	}
+	_fnRbAryFree(arg)
 }
+
+var _fnRbAryFreeze func(int) int
 
-// RbAryIncludes calls [raw.RbAryIncludes] (C function rb_ary_includes).
-func RbAryIncludes(arg uint, arg2 uint) uint {
-	return raw.RbAryIncludes(arg, arg2)
+// RbAryFreeze calls the Ruby framework function rb_ary_freeze.
+func RbAryFreeze(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryFreeze == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryFreeze, _lib, "rb_ary_freeze")
+	}
+	return _fnRbAryFreeze(arg)
 }
 
-// RbAryJoin calls [raw.RbAryJoin] (C function rb_ary_join).
-func RbAryJoin(arg uint, arg2 uint) uint {
-	return raw.RbAryJoin(arg, arg2)
+var _fnRbAryIncludes func(int, int) int
+
+// RbAryIncludes calls the Ruby framework function rb_ary_includes.
+func RbAryIncludes(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryIncludes == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryIncludes, _lib, "rb_ary_includes")
+	}
+	return _fnRbAryIncludes(arg, arg2)
 }
+
+var _fnRbAryJoin func(int, int) int
 
-// RbAryModify calls [raw.RbAryModify] (C function rb_ary_modify).
-func RbAryModify(arg uint) {
-	raw.RbAryModify(arg)
+// RbAryJoin calls the Ruby framework function rb_ary_join.
+func RbAryJoin(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryJoin == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryJoin, _lib, "rb_ary_join")
+	}
+	return _fnRbAryJoin(arg, arg2)
 }
 
-// RbAryNew calls [raw.RbAryNew] (C function rb_ary_new).
-func RbAryNew() uint {
-	return raw.RbAryNew()
+var _fnRbAryModify func(int)
+
+// RbAryModify calls the Ruby framework function rb_ary_modify.
+func RbAryModify(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryModify == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryModify, _lib, "rb_ary_modify")
+	}
+	_fnRbAryModify(arg)
 }
+
+var _fnRbAryNew func() int
 
-// RbAryNewCapa calls [raw.RbAryNewCapa] (C function rb_ary_new_capa).
-func RbAryNewCapa(capa int) uint {
-	return raw.RbAryNewCapa(capa)
+// RbAryNew calls the Ruby framework function rb_ary_new.
+func RbAryNew() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryNew, _lib, "rb_ary_new")
+	}
+	return _fnRbAryNew()
 }
 
-// RbAryNewFromValues calls [raw.RbAryNewFromValues] (C function rb_ary_new_from_values).
-func RbAryNewFromValues(n int, elts *uint) uint {
-	return raw.RbAryNewFromValues(n, elts)
+var _fnRbAryNewCapa func(int) int
+
+// RbAryNewCapa calls the Ruby framework function rb_ary_new_capa.
+func RbAryNewCapa(capa int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryNewCapa == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryNewCapa, _lib, "rb_ary_new_capa")
+	}
+	return _fnRbAryNewCapa(capa)
 }
 
-// RbAryPlus calls [raw.RbAryPlus] (C function rb_ary_plus).
-func RbAryPlus(arg uint, arg2 uint) uint {
-	return raw.RbAryPlus(arg, arg2)
+var _fnRbAryPlus func(int, int) int
+
+// RbAryPlus calls the Ruby framework function rb_ary_plus.
+func RbAryPlus(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryPlus == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryPlus, _lib, "rb_ary_plus")
+	}
+	return _fnRbAryPlus(arg, arg2)
 }
+
+var _fnRbAryPop func(int) int
 
-// RbAryPop calls [raw.RbAryPop] (C function rb_ary_pop).
-func RbAryPop(arg uint) uint {
-	return raw.RbAryPop(arg)
+// RbAryPop calls the Ruby framework function rb_ary_pop.
+func RbAryPop(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryPop == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryPop, _lib, "rb_ary_pop")
+	}
+	return _fnRbAryPop(arg)
 }
 
-// RbAryPush calls [raw.RbAryPush] (C function rb_ary_push).
-func RbAryPush(arg uint, arg2 uint) uint {
-	return raw.RbAryPush(arg, arg2)
+var _fnRbAryPush func(int, int) int
+
+// RbAryPush calls the Ruby framework function rb_ary_push.
+func RbAryPush(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryPush == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryPush, _lib, "rb_ary_push")
+	}
+	return _fnRbAryPush(arg, arg2)
 }
+
+var _fnRbAryRassoc func(int, int) int
 
-// RbAryRassoc calls [raw.RbAryRassoc] (C function rb_ary_rassoc).
-func RbAryRassoc(arg uint, arg2 uint) uint {
-	return raw.RbAryRassoc(arg, arg2)
+// RbAryRassoc calls the Ruby framework function rb_ary_rassoc.
+func RbAryRassoc(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryRassoc == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryRassoc, _lib, "rb_ary_rassoc")
+	}
+	return _fnRbAryRassoc(arg, arg2)
 }
 
-// RbAryReplace calls [raw.RbAryReplace] (C function rb_ary_replace).
-func RbAryReplace(copy_ uint, orig uint) uint {
-	return raw.RbAryReplace(copy_, orig)
+var _fnRbAryReplace func(int, int) int
+
+// RbAryReplace calls the Ruby framework function rb_ary_replace.
+func RbAryReplace(copy_ int, orig int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryReplace == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryReplace, _lib, "rb_ary_replace")
+	}
+	return _fnRbAryReplace(copy_, orig)
 }
+
+var _fnRbAryResize func(int, int) int
 
-// RbAryResize calls [raw.RbAryResize] (C function rb_ary_resize).
-func RbAryResize(ary uint, len_ int) uint {
-	return raw.RbAryResize(ary, len_)
+// RbAryResize calls the Ruby framework function rb_ary_resize.
+func RbAryResize(ary int, len_ int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryResize == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryResize, _lib, "rb_ary_resize")
+	}
+	return _fnRbAryResize(ary, len_)
 }
 
-// RbAryResurrect calls [raw.RbAryResurrect] (C function rb_ary_resurrect).
-func RbAryResurrect(ary uint) uint {
-	return raw.RbAryResurrect(ary)
+var _fnRbAryResurrect func(int) int
+
+// RbAryResurrect calls the Ruby framework function rb_ary_resurrect.
+func RbAryResurrect(ary int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryResurrect == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryResurrect, _lib, "rb_ary_resurrect")
+	}
+	return _fnRbAryResurrect(ary)
 }
 
-// RbAryReverse calls [raw.RbAryReverse] (C function rb_ary_reverse).
-func RbAryReverse(arg uint) uint {
-	return raw.RbAryReverse(arg)
+var _fnRbAryReverse func(int) int
+
+// RbAryReverse calls the Ruby framework function rb_ary_reverse.
+func RbAryReverse(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryReverse == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryReverse, _lib, "rb_ary_reverse")
+	}
+	return _fnRbAryReverse(arg)
 }
+
+var _fnRbAryRotate func(int, int) int
 
-// RbAryRotate calls [raw.RbAryRotate] (C function rb_ary_rotate).
-func RbAryRotate(arg uint, arg2 int) uint {
-	return raw.RbAryRotate(arg, arg2)
+// RbAryRotate calls the Ruby framework function rb_ary_rotate.
+func RbAryRotate(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryRotate == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryRotate, _lib, "rb_ary_rotate")
+	}
+	return _fnRbAryRotate(arg, arg2)
 }
 
-// RbArySharedWithP calls [raw.RbArySharedWithP] (C function rb_ary_shared_with_p).
-func RbArySharedWithP(arg uint, arg2 uint) uint {
-	return raw.RbArySharedWithP(arg, arg2)
+var _fnRbArySharedWithP func(int, int) int
+
+// RbArySharedWithP calls the Ruby framework function rb_ary_shared_with_p.
+func RbArySharedWithP(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbArySharedWithP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbArySharedWithP, _lib, "rb_ary_shared_with_p")
+	}
+	return _fnRbArySharedWithP(arg, arg2)
 }
+
+var _fnRbAryShift func(int) int
 
-// RbAryShift calls [raw.RbAryShift] (C function rb_ary_shift).
-func RbAryShift(arg uint) uint {
-	return raw.RbAryShift(arg)
+// RbAryShift calls the Ruby framework function rb_ary_shift.
+func RbAryShift(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryShift == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryShift, _lib, "rb_ary_shift")
+	}
+	return _fnRbAryShift(arg)
 }
 
-// RbArySort calls [raw.RbArySort] (C function rb_ary_sort).
-func RbArySort(arg uint) uint {
-	return raw.RbArySort(arg)
+var _fnRbArySort func(int) int
+
+// RbArySort calls the Ruby framework function rb_ary_sort.
+func RbArySort(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbArySort == nil {
+		ebipurego.RegisterLibFunc(&_fnRbArySort, _lib, "rb_ary_sort")
+	}
+	return _fnRbArySort(arg)
 }
+
+var _fnRbArySortBang func(int) int
 
-// RbArySortBang calls [raw.RbArySortBang] (C function rb_ary_sort_bang).
-func RbArySortBang(arg uint) uint {
-	return raw.RbArySortBang(arg)
+// RbArySortBang calls the Ruby framework function rb_ary_sort_bang.
+func RbArySortBang(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbArySortBang == nil {
+		ebipurego.RegisterLibFunc(&_fnRbArySortBang, _lib, "rb_ary_sort_bang")
+	}
+	return _fnRbArySortBang(arg)
 }
 
-// RbAryStore calls [raw.RbAryStore] (C function rb_ary_store).
-func RbAryStore(arg uint, arg2 int, arg3 uint) {
-	raw.RbAryStore(arg, arg2, arg3)
+var _fnRbAryStore func(int, int, int)
+
+// RbAryStore calls the Ruby framework function rb_ary_store.
+func RbAryStore(arg int, arg2 int, arg3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryStore == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryStore, _lib, "rb_ary_store")
+	}
+	_fnRbAryStore(arg, arg2, arg3)
 }
 
-// RbArySubseq calls [raw.RbArySubseq] (C function rb_ary_subseq).
-func RbArySubseq(arg uint, arg2 int, arg3 int) uint {
-	return raw.RbArySubseq(arg, arg2, arg3)
+var _fnRbArySubseq func(int, int, int) int
+
+// RbArySubseq calls the Ruby framework function rb_ary_subseq.
+func RbArySubseq(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbArySubseq == nil {
+		ebipurego.RegisterLibFunc(&_fnRbArySubseq, _lib, "rb_ary_subseq")
+	}
+	return _fnRbArySubseq(arg, arg2, arg3)
 }
+
+var _fnRbAryTmpNew func(int) int
 
-// RbAryTmpNew calls [raw.RbAryTmpNew] (C function rb_ary_tmp_new).
-func RbAryTmpNew(arg int) uint {
-	return raw.RbAryTmpNew(arg)
+// RbAryTmpNew calls the Ruby framework function rb_ary_tmp_new.
+func RbAryTmpNew(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryTmpNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryTmpNew, _lib, "rb_ary_tmp_new")
+	}
+	return _fnRbAryTmpNew(arg)
 }
 
-// RbAryToAry calls [raw.RbAryToAry] (C function rb_ary_to_ary).
-func RbAryToAry(arg uint) uint {
-	return raw.RbAryToAry(arg)
+var _fnRbAryToAry func(int) int
+
+// RbAryToAry calls the Ruby framework function rb_ary_to_ary.
+func RbAryToAry(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryToAry == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryToAry, _lib, "rb_ary_to_ary")
+	}
+	return _fnRbAryToAry(arg)
 }
+
+var _fnRbAryToS func(int) int
 
-// RbAryToS calls [raw.RbAryToS] (C function rb_ary_to_s).
-func RbAryToS(arg uint) uint {
-	return raw.RbAryToS(arg)
+// RbAryToS calls the Ruby framework function rb_ary_to_s.
+func RbAryToS(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryToS == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryToS, _lib, "rb_ary_to_s")
+	}
+	return _fnRbAryToS(arg)
 }
 
-// RbAryUnshift calls [raw.RbAryUnshift] (C function rb_ary_unshift).
-func RbAryUnshift(arg uint, arg2 uint) uint {
-	return raw.RbAryUnshift(arg, arg2)
+var _fnRbAryUnshift func(int, int) int
+
+// RbAryUnshift calls the Ruby framework function rb_ary_unshift.
+func RbAryUnshift(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAryUnshift == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAryUnshift, _lib, "rb_ary_unshift")
+	}
+	return _fnRbAryUnshift(arg, arg2)
 }
+
+var _fnRbAssocNew func(int, int) int
 
-// RbAssocNew calls [raw.RbAssocNew] (C function rb_assoc_new).
-func RbAssocNew(arg uint, arg2 uint) uint {
-	return raw.RbAssocNew(arg, arg2)
+// RbAssocNew calls the Ruby framework function rb_assoc_new.
+func RbAssocNew(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAssocNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAssocNew, _lib, "rb_assoc_new")
+	}
+	return _fnRbAssocNew(arg, arg2)
 }
 
-// RbAttr calls [raw.RbAttr] (C function rb_attr).
-func RbAttr(arg uint, arg2 uint, arg3 int, arg4 int, arg5 int) {
-	raw.RbAttr(arg, arg2, arg3, arg4, arg5)
+var _fnRbAttr func(int, int, int, int, int)
+
+// RbAttr calls the Ruby framework function rb_attr.
+func RbAttr(arg int, arg2 int, arg3 int, arg4 int, arg5 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAttr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAttr, _lib, "rb_attr")
+	}
+	_fnRbAttr(arg, arg2, arg3, arg4, arg5)
 }
+
+var _fnRbAttrGet func(int, int) int
 
-// RbAttrGet calls [raw.RbAttrGet] (C function rb_attr_get).
-func RbAttrGet(arg uint, arg2 uint) uint {
-	return raw.RbAttrGet(arg, arg2)
+// RbAttrGet calls the Ruby framework function rb_attr_get.
+func RbAttrGet(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAttrGet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAttrGet, _lib, "rb_attr_get")
+	}
+	return _fnRbAttrGet(arg, arg2)
 }
 
-// RbAutoload calls [raw.RbAutoload] (C function rb_autoload).
-func RbAutoload(arg uint, arg2 uint, arg3 string) {
-	raw.RbAutoload(arg, arg2, arg3)
+var _fnRbAutoload func(int, int, string)
+
+// RbAutoload calls the Ruby framework function rb_autoload.
+func RbAutoload(arg int, arg2 int, arg3 string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAutoload == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAutoload, _lib, "rb_autoload")
+	}
+	_fnRbAutoload(arg, arg2, arg3)
 }
+
+var _fnRbAutoloadLoad func(int, int) int
 
-// RbAutoloadLoad calls [raw.RbAutoloadLoad] (C function rb_autoload_load).
-func RbAutoloadLoad(arg uint, arg2 uint) uint {
-	return raw.RbAutoloadLoad(arg, arg2)
+// RbAutoloadLoad calls the Ruby framework function rb_autoload_load.
+func RbAutoloadLoad(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAutoloadLoad == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAutoloadLoad, _lib, "rb_autoload_load")
+	}
+	return _fnRbAutoloadLoad(arg, arg2)
 }
 
-// RbAutoloadP calls [raw.RbAutoloadP] (C function rb_autoload_p).
-func RbAutoloadP(arg uint, arg2 uint) uint {
-	return raw.RbAutoloadP(arg, arg2)
+var _fnRbAutoloadP func(int, int) int
+
+// RbAutoloadP calls the Ruby framework function rb_autoload_p.
+func RbAutoloadP(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbAutoloadP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbAutoloadP, _lib, "rb_autoload_p")
+	}
+	return _fnRbAutoloadP(arg, arg2)
 }
+
+var _fnRbBackrefGet func() int
 
-// RbBackrefGet calls [raw.RbBackrefGet] (C function rb_backref_get).
-func RbBackrefGet() uint {
-	return raw.RbBackrefGet()
+// RbBackrefGet calls the Ruby framework function rb_backref_get.
+func RbBackrefGet() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBackrefGet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBackrefGet, _lib, "rb_backref_get")
+	}
+	return _fnRbBackrefGet()
 }
 
-// RbBackrefSet calls [raw.RbBackrefSet] (C function rb_backref_set).
-func RbBackrefSet(arg uint) {
-	raw.RbBackrefSet(arg)
+var _fnRbBackrefSet func(int)
+
+// RbBackrefSet calls the Ruby framework function rb_backref_set.
+func RbBackrefSet(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBackrefSet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBackrefSet, _lib, "rb_backref_set")
+	}
+	_fnRbBackrefSet(arg)
 }
+
+var _fnRbBacktrace func()
 
-// RbBacktrace calls [raw.RbBacktrace] (C function rb_backtrace).
+// RbBacktrace calls the Ruby framework function rb_backtrace.
 func RbBacktrace() {
-	raw.RbBacktrace()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBacktrace == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBacktrace, _lib, "rb_backtrace")
+	}
+	_fnRbBacktrace()
 }
 
-// RbBig2dbl calls [raw.RbBig2dbl] (C function rb_big2dbl).
-func RbBig2dbl(arg uint) float64 {
-	return raw.RbBig2dbl(arg)
+var _fnRbBig2dbl func(int) float64
+
+// RbBig2dbl calls the Ruby framework function rb_big2dbl.
+func RbBig2dbl(arg int) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBig2dbl == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBig2dbl, _lib, "rb_big2dbl")
+	}
+	return _fnRbBig2dbl(arg)
 }
 
-// RbBig2ll calls [raw.RbBig2ll] (C function rb_big2ll).
-func RbBig2ll(arg uint) int64 {
-	return raw.RbBig2ll(arg)
+var _fnRbBig2ll func(int) int64
+
+// RbBig2ll calls the Ruby framework function rb_big2ll.
+func RbBig2ll(arg int) int64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBig2ll == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBig2ll, _lib, "rb_big2ll")
+	}
+	return _fnRbBig2ll(arg)
 }
 
-// RbBig2long calls [raw.RbBig2long] (C function rb_big2long).
-func RbBig2long(arg uint) int {
-	return raw.RbBig2long(arg)
+var _fnRbBig2long func(int) int
+
+// RbBig2long calls the Ruby framework function rb_big2long.
+func RbBig2long(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBig2long == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBig2long, _lib, "rb_big2long")
+	}
+	return _fnRbBig2long(arg)
 }
 
-// RbBig2str calls [raw.RbBig2str] (C function rb_big2str).
-func RbBig2str(arg uint, arg2 int) uint {
-	return raw.RbBig2str(arg, arg2)
+var _fnRbBig2str func(int, int) int
+
+// RbBig2str calls the Ruby framework function rb_big2str.
+func RbBig2str(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBig2str == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBig2str, _lib, "rb_big2str")
+	}
+	return _fnRbBig2str(arg, arg2)
 }
 
-// RbBig2ull calls [raw.RbBig2ull] (C function rb_big2ull).
-func RbBig2ull(arg uint) uint64 {
-	return raw.RbBig2ull(arg)
+var _fnRbBig2ull func(int) uint64
+
+// RbBig2ull calls the Ruby framework function rb_big2ull.
+func RbBig2ull(arg int) uint64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBig2ull == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBig2ull, _lib, "rb_big2ull")
+	}
+	return _fnRbBig2ull(arg)
 }
 
-// RbBig2ulong calls [raw.RbBig2ulong] (C function rb_big2ulong).
-func RbBig2ulong(arg uint) uint {
-	return raw.RbBig2ulong(arg)
+var _fnRbBig2ulong func(int) int
+
+// RbBig2ulong calls the Ruby framework function rb_big2ulong.
+func RbBig2ulong(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBig2ulong == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBig2ulong, _lib, "rb_big2ulong")
+	}
+	return _fnRbBig2ulong(arg)
 }
 
-// RbBig2comp calls [raw.RbBig2comp] (C function rb_big_2comp).
-func RbBig2comp(arg uint) {
-	raw.RbBig2comp(arg)
+var _fnRbBig2comp func(int)
+
+// RbBig2comp calls the Ruby framework function rb_big_2comp.
+func RbBig2comp(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBig2comp == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBig2comp, _lib, "rb_big_2comp")
+	}
+	_fnRbBig2comp(arg)
 }
 
-// RbBigAnd calls [raw.RbBigAnd] (C function rb_big_and).
-func RbBigAnd(arg uint, arg2 uint) uint {
-	return raw.RbBigAnd(arg, arg2)
+var _fnRbBigAnd func(int, int) int
+
+// RbBigAnd calls the Ruby framework function rb_big_and.
+func RbBigAnd(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigAnd == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigAnd, _lib, "rb_big_and")
+	}
+	return _fnRbBigAnd(arg, arg2)
 }
 
-// RbBigClone calls [raw.RbBigClone] (C function rb_big_clone).
-func RbBigClone(arg uint) uint {
-	return raw.RbBigClone(arg)
+var _fnRbBigClone func(int) int
+
+// RbBigClone calls the Ruby framework function rb_big_clone.
+func RbBigClone(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigClone == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigClone, _lib, "rb_big_clone")
+	}
+	return _fnRbBigClone(arg)
 }
 
-// RbBigCmp calls [raw.RbBigCmp] (C function rb_big_cmp).
-func RbBigCmp(arg uint, arg2 uint) uint {
-	return raw.RbBigCmp(arg, arg2)
+var _fnRbBigCmp func(int, int) int
+
+// RbBigCmp calls the Ruby framework function rb_big_cmp.
+func RbBigCmp(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigCmp == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigCmp, _lib, "rb_big_cmp")
+	}
+	return _fnRbBigCmp(arg, arg2)
 }
 
-// RbBigDiv calls [raw.RbBigDiv] (C function rb_big_div).
-func RbBigDiv(arg uint, arg2 uint) uint {
-	return raw.RbBigDiv(arg, arg2)
+var _fnRbBigDiv func(int, int) int
+
+// RbBigDiv calls the Ruby framework function rb_big_div.
+func RbBigDiv(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigDiv == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigDiv, _lib, "rb_big_div")
+	}
+	return _fnRbBigDiv(arg, arg2)
 }
 
-// RbBigDivmod calls [raw.RbBigDivmod] (C function rb_big_divmod).
-func RbBigDivmod(arg uint, arg2 uint) uint {
-	return raw.RbBigDivmod(arg, arg2)
+var _fnRbBigDivmod func(int, int) int
+
+// RbBigDivmod calls the Ruby framework function rb_big_divmod.
+func RbBigDivmod(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigDivmod == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigDivmod, _lib, "rb_big_divmod")
+	}
+	return _fnRbBigDivmod(arg, arg2)
 }
 
-// RbBigEq calls [raw.RbBigEq] (C function rb_big_eq).
-func RbBigEq(arg uint, arg2 uint) uint {
-	return raw.RbBigEq(arg, arg2)
+var _fnRbBigEq func(int, int) int
+
+// RbBigEq calls the Ruby framework function rb_big_eq.
+func RbBigEq(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigEq == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigEq, _lib, "rb_big_eq")
+	}
+	return _fnRbBigEq(arg, arg2)
 }
 
-// RbBigEql calls [raw.RbBigEql] (C function rb_big_eql).
-func RbBigEql(arg uint, arg2 uint) uint {
-	return raw.RbBigEql(arg, arg2)
+var _fnRbBigEql func(int, int) int
+
+// RbBigEql calls the Ruby framework function rb_big_eql.
+func RbBigEql(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigEql == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigEql, _lib, "rb_big_eql")
+	}
+	return _fnRbBigEql(arg, arg2)
 }
 
-// RbBigIdiv calls [raw.RbBigIdiv] (C function rb_big_idiv).
-func RbBigIdiv(arg uint, arg2 uint) uint {
-	return raw.RbBigIdiv(arg, arg2)
+var _fnRbBigIdiv func(int, int) int
+
+// RbBigIdiv calls the Ruby framework function rb_big_idiv.
+func RbBigIdiv(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigIdiv == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigIdiv, _lib, "rb_big_idiv")
+	}
+	return _fnRbBigIdiv(arg, arg2)
 }
 
-// RbBigLshift calls [raw.RbBigLshift] (C function rb_big_lshift).
-func RbBigLshift(arg uint, arg2 uint) uint {
-	return raw.RbBigLshift(arg, arg2)
+var _fnRbBigLshift func(int, int) int
+
+// RbBigLshift calls the Ruby framework function rb_big_lshift.
+func RbBigLshift(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigLshift == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigLshift, _lib, "rb_big_lshift")
+	}
+	return _fnRbBigLshift(arg, arg2)
 }
 
-// RbBigMinus calls [raw.RbBigMinus] (C function rb_big_minus).
-func RbBigMinus(arg uint, arg2 uint) uint {
-	return raw.RbBigMinus(arg, arg2)
+var _fnRbBigMinus func(int, int) int
+
+// RbBigMinus calls the Ruby framework function rb_big_minus.
+func RbBigMinus(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigMinus == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigMinus, _lib, "rb_big_minus")
+	}
+	return _fnRbBigMinus(arg, arg2)
 }
 
-// RbBigModulo calls [raw.RbBigModulo] (C function rb_big_modulo).
-func RbBigModulo(arg uint, arg2 uint) uint {
-	return raw.RbBigModulo(arg, arg2)
+var _fnRbBigModulo func(int, int) int
+
+// RbBigModulo calls the Ruby framework function rb_big_modulo.
+func RbBigModulo(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigModulo == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigModulo, _lib, "rb_big_modulo")
+	}
+	return _fnRbBigModulo(arg, arg2)
 }
 
-// RbBigMul calls [raw.RbBigMul] (C function rb_big_mul).
-func RbBigMul(arg uint, arg2 uint) uint {
-	return raw.RbBigMul(arg, arg2)
+var _fnRbBigMul func(int, int) int
+
+// RbBigMul calls the Ruby framework function rb_big_mul.
+func RbBigMul(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigMul == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigMul, _lib, "rb_big_mul")
+	}
+	return _fnRbBigMul(arg, arg2)
 }
 
-// RbBigNew calls [raw.RbBigNew] (C function rb_big_new).
-func RbBigNew(arg uint, arg2 int) uint {
-	return raw.RbBigNew(arg, arg2)
+var _fnRbBigNew func(int, int) int
+
+// RbBigNew calls the Ruby framework function rb_big_new.
+func RbBigNew(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigNew, _lib, "rb_big_new")
+	}
+	return _fnRbBigNew(arg, arg2)
 }
 
-// RbBigNorm calls [raw.RbBigNorm] (C function rb_big_norm).
-func RbBigNorm(arg uint) uint {
-	return raw.RbBigNorm(arg)
+var _fnRbBigNorm func(int) int
+
+// RbBigNorm calls the Ruby framework function rb_big_norm.
+func RbBigNorm(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigNorm == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigNorm, _lib, "rb_big_norm")
+	}
+	return _fnRbBigNorm(arg)
 }
 
-// RbBigOr calls [raw.RbBigOr] (C function rb_big_or).
-func RbBigOr(arg uint, arg2 uint) uint {
-	return raw.RbBigOr(arg, arg2)
+var _fnRbBigOr func(int, int) int
+
+// RbBigOr calls the Ruby framework function rb_big_or.
+func RbBigOr(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigOr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigOr, _lib, "rb_big_or")
+	}
+	return _fnRbBigOr(arg, arg2)
 }
 
-// RbBigPack calls [raw.RbBigPack] (C function rb_big_pack).
-func RbBigPack(val uint, buf unsafe.Pointer, num_longs int) {
-	raw.RbBigPack(val, buf, num_longs)
+var _fnRbBigPlus func(int, int) int
+
+// RbBigPlus calls the Ruby framework function rb_big_plus.
+func RbBigPlus(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigPlus == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigPlus, _lib, "rb_big_plus")
+	}
+	return _fnRbBigPlus(arg, arg2)
 }
 
-// RbBigPlus calls [raw.RbBigPlus] (C function rb_big_plus).
-func RbBigPlus(arg uint, arg2 uint) uint {
-	return raw.RbBigPlus(arg, arg2)
+var _fnRbBigPow func(int, int) int
+
+// RbBigPow calls the Ruby framework function rb_big_pow.
+func RbBigPow(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigPow == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigPow, _lib, "rb_big_pow")
+	}
+	return _fnRbBigPow(arg, arg2)
 }
 
-// RbBigPow calls [raw.RbBigPow] (C function rb_big_pow).
-func RbBigPow(arg uint, arg2 uint) uint {
-	return raw.RbBigPow(arg, arg2)
+var _fnRbBigResize func(int, int)
+
+// RbBigResize calls the Ruby framework function rb_big_resize.
+func RbBigResize(big int, len_ int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigResize == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigResize, _lib, "rb_big_resize")
+	}
+	_fnRbBigResize(big, len_)
 }
 
-// RbBigResize calls [raw.RbBigResize] (C function rb_big_resize).
-func RbBigResize(big uint, len_ uint) {
-	raw.RbBigResize(big, len_)
+var _fnRbBigRshift func(int, int) int
+
+// RbBigRshift calls the Ruby framework function rb_big_rshift.
+func RbBigRshift(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigRshift == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigRshift, _lib, "rb_big_rshift")
+	}
+	return _fnRbBigRshift(arg, arg2)
 }
 
-// RbBigRshift calls [raw.RbBigRshift] (C function rb_big_rshift).
-func RbBigRshift(arg uint, arg2 uint) uint {
-	return raw.RbBigRshift(arg, arg2)
+var _fnRbBigSign func(int) int
+
+// RbBigSign calls the Ruby framework function rb_big_sign.
+func RbBigSign(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigSign == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigSign, _lib, "rb_big_sign")
+	}
+	return _fnRbBigSign(arg)
 }
 
-// RbBigSign calls [raw.RbBigSign] (C function rb_big_sign).
-func RbBigSign(arg uint) int {
-	return raw.RbBigSign(arg)
+var _fnRbBigXor func(int, int) int
+
+// RbBigXor calls the Ruby framework function rb_big_xor.
+func RbBigXor(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigXor == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigXor, _lib, "rb_big_xor")
+	}
+	return _fnRbBigXor(arg, arg2)
 }
 
-// RbBigUnpack calls [raw.RbBigUnpack] (C function rb_big_unpack).
-func RbBigUnpack(buf unsafe.Pointer, num_longs int) uint {
-	return raw.RbBigUnpack(buf, num_longs)
+var _fnRbBigzeroP func(int) int
+
+// RbBigzeroP calls the Ruby framework function rb_bigzero_p.
+func RbBigzeroP(x int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBigzeroP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBigzeroP, _lib, "rb_bigzero_p")
+	}
+	return _fnRbBigzeroP(x)
 }
 
-// RbBigXor calls [raw.RbBigXor] (C function rb_big_xor).
-func RbBigXor(arg uint, arg2 uint) uint {
-	return raw.RbBigXor(arg, arg2)
+var _fnRbBindingNew func() int
+
+// RbBindingNew calls the Ruby framework function rb_binding_new.
+func RbBindingNew() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBindingNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBindingNew, _lib, "rb_binding_new")
+	}
+	return _fnRbBindingNew()
 }
 
-// RbBigzeroP calls [raw.RbBigzeroP] (C function rb_bigzero_p).
-func RbBigzeroP(x uint) int {
-	return raw.RbBigzeroP(x)
-}
+var _fnRbBlockGivenP func() int
 
-// RbBindingNew calls [raw.RbBindingNew] (C function rb_binding_new).
-func RbBindingNew() uint {
-	return raw.RbBindingNew()
-}
-
-// RbBlockCall calls [raw.RbBlockCall] (C function rb_block_call).
-func RbBlockCall(arg uint, arg2 uint, arg3 int, arg4 *uint, arg5 unsafe.Pointer, arg6 uint) uint {
-	return raw.RbBlockCall(arg, arg2, arg3, arg4, arg5, arg6)
-}
-
-// RbBlockGivenP calls [raw.RbBlockGivenP] (C function rb_block_given_p).
+// RbBlockGivenP calls the Ruby framework function rb_block_given_p.
 func RbBlockGivenP() int {
-	return raw.RbBlockGivenP()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBlockGivenP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBlockGivenP, _lib, "rb_block_given_p")
+	}
+	return _fnRbBlockGivenP()
 }
 
-// RbBlockLambda calls [raw.RbBlockLambda] (C function rb_block_lambda).
-func RbBlockLambda() uint {
-	return raw.RbBlockLambda()
+var _fnRbBlockLambda func() int
+
+// RbBlockLambda calls the Ruby framework function rb_block_lambda.
+func RbBlockLambda() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBlockLambda == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBlockLambda, _lib, "rb_block_lambda")
+	}
+	return _fnRbBlockLambda()
 }
 
-// RbBlockProc calls [raw.RbBlockProc] (C function rb_block_proc).
-func RbBlockProc() uint {
-	return raw.RbBlockProc()
+var _fnRbBlockProc func() int
+
+// RbBlockProc calls the Ruby framework function rb_block_proc.
+func RbBlockProc() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBlockProc == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBlockProc, _lib, "rb_block_proc")
+	}
+	return _fnRbBlockProc()
 }
 
-// RbBugErrno calls [raw.RbBugErrno] (C function rb_bug_errno).
+var _fnRbBugErrno func(string, int)
+
+// RbBugErrno calls the Ruby framework function rb_bug_errno.
 func RbBugErrno(arg string, arg2 int) {
-	raw.RbBugErrno(arg, arg2)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbBugErrno == nil {
+		ebipurego.RegisterLibFunc(&_fnRbBugErrno, _lib, "rb_bug_errno")
+	}
+	_fnRbBugErrno(arg, arg2)
 }
 
-// RbCallSuper calls [raw.RbCallSuper] (C function rb_call_super).
-func RbCallSuper(arg int, arg2 *uint) uint {
-	return raw.RbCallSuper(arg, arg2)
-}
+var _fnRbCheckArity func(int, int, int) int
 
-// RbCatch calls [raw.RbCatch] (C function rb_catch).
-func RbCatch(arg string, arg2 unsafe.Pointer, arg3 uint) uint {
-	return raw.RbCatch(arg, arg2, arg3)
-}
-
-// RbCatchObj calls [raw.RbCatchObj] (C function rb_catch_obj).
-func RbCatchObj(arg uint, arg2 unsafe.Pointer, arg3 uint) uint {
-	return raw.RbCatchObj(arg, arg2, arg3)
-}
-
-// RbCheckArity calls [raw.RbCheckArity] (C function rb_check_arity).
+// RbCheckArity calls the Ruby framework function rb_check_arity.
 func RbCheckArity(argc int, min int, max int) int {
-	return raw.RbCheckArity(argc, min, max)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCheckArity == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCheckArity, _lib, "rb_check_arity")
+	}
+	return _fnRbCheckArity(argc, min, max)
 }
 
-// RbCheckArrayType calls [raw.RbCheckArrayType] (C function rb_check_array_type).
-func RbCheckArrayType(arg uint) uint {
-	return raw.RbCheckArrayType(arg)
+var _fnRbCheckArrayType func(int) int
+
+// RbCheckArrayType calls the Ruby framework function rb_check_array_type.
+func RbCheckArrayType(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCheckArrayType == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCheckArrayType, _lib, "rb_check_array_type")
+	}
+	return _fnRbCheckArrayType(arg)
 }
 
-// RbCheckConvertType calls [raw.RbCheckConvertType] (C function rb_check_convert_type).
-func RbCheckConvertType(arg uint, arg2 int, arg3 string, arg4 string) uint {
-	return raw.RbCheckConvertType(arg, arg2, arg3, arg4)
+var _fnRbCheckConvertType func(int, int, string, string) int
+
+// RbCheckConvertType calls the Ruby framework function rb_check_convert_type.
+func RbCheckConvertType(arg int, arg2 int, arg3 string, arg4 string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCheckConvertType == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCheckConvertType, _lib, "rb_check_convert_type")
+	}
+	return _fnRbCheckConvertType(arg, arg2, arg3, arg4)
 }
 
-// RbCheckCopyable calls [raw.RbCheckCopyable] (C function rb_check_copyable).
-func RbCheckCopyable(obj uint, orig uint) {
-	raw.RbCheckCopyable(obj, orig)
+var _fnRbCheckCopyable func(int, int)
+
+// RbCheckCopyable calls the Ruby framework function rb_check_copyable.
+func RbCheckCopyable(obj_ int, orig int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCheckCopyable == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCheckCopyable, _lib, "rb_check_copyable")
+	}
+	_fnRbCheckCopyable(obj_, orig)
 }
 
-// RbCheckFrozen calls [raw.RbCheckFrozen] (C function rb_check_frozen).
-func RbCheckFrozen(arg uint) {
-	raw.RbCheckFrozen(arg)
+var _fnRbCheckFrozen func(int)
+
+// RbCheckFrozen calls the Ruby framework function rb_check_frozen.
+func RbCheckFrozen(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCheckFrozen == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCheckFrozen, _lib, "rb_check_frozen")
+	}
+	_fnRbCheckFrozen(arg)
 }
 
-// RbCheckFuncall calls [raw.RbCheckFuncall] (C function rb_check_funcall).
-func RbCheckFuncall(arg uint, arg2 uint, arg3 int, arg4 *uint) uint {
-	return raw.RbCheckFuncall(arg, arg2, arg3, arg4)
+var _fnRbCheckHashType func(int) int
+
+// RbCheckHashType calls the Ruby framework function rb_check_hash_type.
+func RbCheckHashType(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCheckHashType == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCheckHashType, _lib, "rb_check_hash_type")
+	}
+	return _fnRbCheckHashType(arg)
 }
 
-// RbCheckHashType calls [raw.RbCheckHashType] (C function rb_check_hash_type).
-func RbCheckHashType(arg uint) uint {
-	return raw.RbCheckHashType(arg)
+var _fnRbCheckInheritable func(int)
+
+// RbCheckInheritable calls the Ruby framework function rb_check_inheritable.
+func RbCheckInheritable(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCheckInheritable == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCheckInheritable, _lib, "rb_check_inheritable")
+	}
+	_fnRbCheckInheritable(arg)
 }
 
-// RbCheckId calls [raw.RbCheckId] (C function rb_check_id).
-func RbCheckId(arg unsafe.Pointer) uint {
-	return raw.RbCheckId(arg)
+var _fnRbCheckSafeObj func(int)
+
+// RbCheckSafeObj calls the Ruby framework function rb_check_safe_obj.
+func RbCheckSafeObj(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCheckSafeObj == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCheckSafeObj, _lib, "rb_check_safe_obj")
+	}
+	_fnRbCheckSafeObj(arg)
 }
 
-// RbCheckInheritable calls [raw.RbCheckInheritable] (C function rb_check_inheritable).
-func RbCheckInheritable(arg uint) {
-	raw.RbCheckInheritable(arg)
+var _fnRbCheckStringType func(int) int
+
+// RbCheckStringType calls the Ruby framework function rb_check_string_type.
+func RbCheckStringType(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCheckStringType == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCheckStringType, _lib, "rb_check_string_type")
+	}
+	return _fnRbCheckStringType(arg)
 }
 
-// RbCheckSafeObj calls [raw.RbCheckSafeObj] (C function rb_check_safe_obj).
-func RbCheckSafeObj(arg uint) {
-	raw.RbCheckSafeObj(arg)
+var _fnRbCheckToFloat func(int) int
+
+// RbCheckToFloat calls the Ruby framework function rb_check_to_float.
+func RbCheckToFloat(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCheckToFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCheckToFloat, _lib, "rb_check_to_float")
+	}
+	return _fnRbCheckToFloat(arg)
 }
 
-// RbCheckStringType calls [raw.RbCheckStringType] (C function rb_check_string_type).
-func RbCheckStringType(arg uint) uint {
-	return raw.RbCheckStringType(arg)
+var _fnRbCheckToInt func(int) int
+
+// RbCheckToInt calls the Ruby framework function rb_check_to_int.
+func RbCheckToInt(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCheckToInt == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCheckToInt, _lib, "rb_check_to_int")
+	}
+	return _fnRbCheckToInt(arg)
 }
 
-// RbCheckSymbol calls [raw.RbCheckSymbol] (C function rb_check_symbol).
-func RbCheckSymbol(namep unsafe.Pointer) uint {
-	return raw.RbCheckSymbol(namep)
+var _fnRbCheckToInteger func(int, string) int
+
+// RbCheckToInteger calls the Ruby framework function rb_check_to_integer.
+func RbCheckToInteger(arg int, arg2 string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCheckToInteger == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCheckToInteger, _lib, "rb_check_to_integer")
+	}
+	return _fnRbCheckToInteger(arg, arg2)
 }
 
-// RbCheckToFloat calls [raw.RbCheckToFloat] (C function rb_check_to_float).
-func RbCheckToFloat(arg uint) uint {
-	return raw.RbCheckToFloat(arg)
+var _fnRbCheckTrusted func(int)
+
+// RbCheckTrusted calls the Ruby framework function rb_check_trusted.
+func RbCheckTrusted(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCheckTrusted == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCheckTrusted, _lib, "rb_check_trusted")
+	}
+	_fnRbCheckTrusted(arg)
 }
 
-// RbCheckToInt calls [raw.RbCheckToInt] (C function rb_check_to_int).
-func RbCheckToInt(arg uint) uint {
-	return raw.RbCheckToInt(arg)
+var _fnRbCheckType func(int, int)
+
+// RbCheckType calls the Ruby framework function rb_check_type.
+func RbCheckType(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCheckType == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCheckType, _lib, "rb_check_type")
+	}
+	_fnRbCheckType(arg, arg2)
 }
 
-// RbCheckToInteger calls [raw.RbCheckToInteger] (C function rb_check_to_integer).
-func RbCheckToInteger(arg uint, arg2 string) uint {
-	return raw.RbCheckToInteger(arg, arg2)
+var _fnRbClass2name func(int) string
+
+// RbClass2name calls the Ruby framework function rb_class2name.
+func RbClass2name(arg int) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbClass2name == nil {
+		ebipurego.RegisterLibFunc(&_fnRbClass2name, _lib, "rb_class2name")
+	}
+	return _fnRbClass2name(arg)
 }
 
-// RbCheckTrusted calls [raw.RbCheckTrusted] (C function rb_check_trusted).
-func RbCheckTrusted(arg uint) {
-	raw.RbCheckTrusted(arg)
+var _fnRbClassGetSuperclass func(int) int
+
+// RbClassGetSuperclass calls the Ruby framework function rb_class_get_superclass.
+func RbClassGetSuperclass(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbClassGetSuperclass == nil {
+		ebipurego.RegisterLibFunc(&_fnRbClassGetSuperclass, _lib, "rb_class_get_superclass")
+	}
+	return _fnRbClassGetSuperclass(arg)
 }
 
-// RbCheckType calls [raw.RbCheckType] (C function rb_check_type).
-func RbCheckType(arg uint, arg2 int) {
-	raw.RbCheckType(arg, arg2)
+var _fnRbClassInheritedP func(int, int) int
+
+// RbClassInheritedP calls the Ruby framework function rb_class_inherited_p.
+func RbClassInheritedP(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbClassInheritedP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbClassInheritedP, _lib, "rb_class_inherited_p")
+	}
+	return _fnRbClassInheritedP(arg, arg2)
 }
 
-// RbCheckTypeddata calls [raw.RbCheckTypeddata] (C function rb_check_typeddata).
-func RbCheckTypeddata(arg uint, arg2 *raw.RbDataTypeStruct) unsafe.Pointer {
-	return raw.RbCheckTypeddata(arg, arg2)
+var _fnRbClassName func(int) int
+
+// RbClassName calls the Ruby framework function rb_class_name.
+func RbClassName(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbClassName == nil {
+		ebipurego.RegisterLibFunc(&_fnRbClassName, _lib, "rb_class_name")
+	}
+	return _fnRbClassName(arg)
 }
 
-// RbClass2name calls [raw.RbClass2name] (C function rb_class2name).
-func RbClass2name(arg uint) string {
-	return raw.RbClass2name(arg)
+var _fnRbClassNew func(int) int
+
+// RbClassNew calls the Ruby framework function rb_class_new.
+func RbClassNew(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbClassNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbClassNew, _lib, "rb_class_new")
+	}
+	return _fnRbClassNew(arg)
 }
 
-// RbClassGetSuperclass calls [raw.RbClassGetSuperclass] (C function rb_class_get_superclass).
-func RbClassGetSuperclass(arg uint) uint {
-	return raw.RbClassGetSuperclass(arg)
+var _fnRbClassOf func(int) int
+
+// RbClassOf calls the Ruby framework function rb_class_of.
+func RbClassOf(obj_ int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbClassOf == nil {
+		ebipurego.RegisterLibFunc(&_fnRbClassOf, _lib, "rb_class_of")
+	}
+	return _fnRbClassOf(obj_)
 }
 
-// RbClassInheritedP calls [raw.RbClassInheritedP] (C function rb_class_inherited_p).
-func RbClassInheritedP(arg uint, arg2 uint) uint {
-	return raw.RbClassInheritedP(arg, arg2)
+var _fnRbClassPath func(int) int
+
+// RbClassPath calls the Ruby framework function rb_class_path.
+func RbClassPath(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbClassPath == nil {
+		ebipurego.RegisterLibFunc(&_fnRbClassPath, _lib, "rb_class_path")
+	}
+	return _fnRbClassPath(arg)
 }
 
-// RbClassInstanceMethods calls [raw.RbClassInstanceMethods] (C function rb_class_instance_methods).
-func RbClassInstanceMethods(arg int, arg2 *uint, arg3 uint) uint {
-	return raw.RbClassInstanceMethods(arg, arg2, arg3)
+var _fnRbClassPathCached func(int) int
+
+// RbClassPathCached calls the Ruby framework function rb_class_path_cached.
+func RbClassPathCached(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbClassPathCached == nil {
+		ebipurego.RegisterLibFunc(&_fnRbClassPathCached, _lib, "rb_class_path_cached")
+	}
+	return _fnRbClassPathCached(arg)
 }
 
-// RbClassName calls [raw.RbClassName] (C function rb_class_name).
-func RbClassName(arg uint) uint {
-	return raw.RbClassName(arg)
+var _fnRbClassReal func(int) int
+
+// RbClassReal calls the Ruby framework function rb_class_real.
+func RbClassReal(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbClassReal == nil {
+		ebipurego.RegisterLibFunc(&_fnRbClassReal, _lib, "rb_class_real")
+	}
+	return _fnRbClassReal(arg)
 }
 
-// RbClassNew calls [raw.RbClassNew] (C function rb_class_new).
-func RbClassNew(arg uint) uint {
-	return raw.RbClassNew(arg)
+var _fnRbClassSuperclass func(int) int
+
+// RbClassSuperclass calls the Ruby framework function rb_class_superclass.
+func RbClassSuperclass(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbClassSuperclass == nil {
+		ebipurego.RegisterLibFunc(&_fnRbClassSuperclass, _lib, "rb_class_superclass")
+	}
+	return _fnRbClassSuperclass(arg)
 }
 
-// RbClassNewInstance calls [raw.RbClassNewInstance] (C function rb_class_new_instance).
-func RbClassNewInstance(arg int, arg2 *uint, arg3 uint) uint {
-	return raw.RbClassNewInstance(arg, arg2, arg3)
-}
+var _fnRbClearCache func()
 
-// RbClassOf calls [raw.RbClassOf] (C function rb_class_of).
-func RbClassOf(obj uint) uint {
-	return raw.RbClassOf(obj)
-}
-
-// RbClassPath calls [raw.RbClassPath] (C function rb_class_path).
-func RbClassPath(arg uint) uint {
-	return raw.RbClassPath(arg)
-}
-
-// RbClassPathCached calls [raw.RbClassPathCached] (C function rb_class_path_cached).
-func RbClassPathCached(arg uint) uint {
-	return raw.RbClassPathCached(arg)
-}
-
-// RbClassPrivateInstanceMethods calls [raw.RbClassPrivateInstanceMethods] (C function rb_class_private_instance_methods).
-func RbClassPrivateInstanceMethods(arg int, arg2 *uint, arg3 uint) uint {
-	return raw.RbClassPrivateInstanceMethods(arg, arg2, arg3)
-}
-
-// RbClassProtectedInstanceMethods calls [raw.RbClassProtectedInstanceMethods] (C function rb_class_protected_instance_methods).
-func RbClassProtectedInstanceMethods(arg int, arg2 *uint, arg3 uint) uint {
-	return raw.RbClassProtectedInstanceMethods(arg, arg2, arg3)
-}
-
-// RbClassPublicInstanceMethods calls [raw.RbClassPublicInstanceMethods] (C function rb_class_public_instance_methods).
-func RbClassPublicInstanceMethods(arg int, arg2 *uint, arg3 uint) uint {
-	return raw.RbClassPublicInstanceMethods(arg, arg2, arg3)
-}
-
-// RbClassReal calls [raw.RbClassReal] (C function rb_class_real).
-func RbClassReal(arg uint) uint {
-	return raw.RbClassReal(arg)
-}
-
-// RbClassSuperclass calls [raw.RbClassSuperclass] (C function rb_class_superclass).
-func RbClassSuperclass(arg uint) uint {
-	return raw.RbClassSuperclass(arg)
-}
-
-// RbClearCache calls [raw.RbClearCache] (C function rb_clear_cache).
+// RbClearCache calls the Ruby framework function rb_clear_cache.
 func RbClearCache() {
-	raw.RbClearCache()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbClearCache == nil {
+		ebipurego.RegisterLibFunc(&_fnRbClearCache, _lib, "rb_clear_cache")
+	}
+	_fnRbClearCache()
 }
 
-// RbClearConstantCache calls [raw.RbClearConstantCache] (C function rb_clear_constant_cache).
+var _fnRbClearConstantCache func()
+
+// RbClearConstantCache calls the Ruby framework function rb_clear_constant_cache.
 func RbClearConstantCache() {
-	raw.RbClearConstantCache()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbClearConstantCache == nil {
+		ebipurego.RegisterLibFunc(&_fnRbClearConstantCache, _lib, "rb_clear_constant_cache")
+	}
+	_fnRbClearConstantCache()
 }
 
-// RbClearMethodCacheByClass calls [raw.RbClearMethodCacheByClass] (C function rb_clear_method_cache_by_class).
-func RbClearMethodCacheByClass(arg uint) {
-	raw.RbClearMethodCacheByClass(arg)
+var _fnRbClearMethodCacheByClass func(int)
+
+// RbClearMethodCacheByClass calls the Ruby framework function rb_clear_method_cache_by_class.
+func RbClearMethodCacheByClass(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbClearMethodCacheByClass == nil {
+		ebipurego.RegisterLibFunc(&_fnRbClearMethodCacheByClass, _lib, "rb_clear_method_cache_by_class")
+	}
+	_fnRbClearMethodCacheByClass(arg)
 }
 
-// RbCloexecDup calls [raw.RbCloexecDup] (C function rb_cloexec_dup).
+var _fnRbCloexecDup func(int) int
+
+// RbCloexecDup calls the Ruby framework function rb_cloexec_dup.
 func RbCloexecDup(oldfd int) int {
-	return raw.RbCloexecDup(oldfd)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCloexecDup == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCloexecDup, _lib, "rb_cloexec_dup")
+	}
+	return _fnRbCloexecDup(oldfd)
 }
 
-// RbCloexecDup2 calls [raw.RbCloexecDup2] (C function rb_cloexec_dup2).
+var _fnRbCloexecDup2 func(int, int) int
+
+// RbCloexecDup2 calls the Ruby framework function rb_cloexec_dup2.
 func RbCloexecDup2(oldfd int, newfd int) int {
-	return raw.RbCloexecDup2(oldfd, newfd)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCloexecDup2 == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCloexecDup2, _lib, "rb_cloexec_dup2")
+	}
+	return _fnRbCloexecDup2(oldfd, newfd)
 }
 
-// RbCloexecFcntlDupfd calls [raw.RbCloexecFcntlDupfd] (C function rb_cloexec_fcntl_dupfd).
+var _fnRbCloexecFcntlDupfd func(int, int) int
+
+// RbCloexecFcntlDupfd calls the Ruby framework function rb_cloexec_fcntl_dupfd.
 func RbCloexecFcntlDupfd(fd int, minfd int) int {
-	return raw.RbCloexecFcntlDupfd(fd, minfd)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCloexecFcntlDupfd == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCloexecFcntlDupfd, _lib, "rb_cloexec_fcntl_dupfd")
+	}
+	return _fnRbCloexecFcntlDupfd(fd, minfd)
 }
 
-// RbCloexecOpen calls [raw.RbCloexecOpen] (C function rb_cloexec_open).
+var _fnRbCloexecOpen func(string, int, uint16) int
+
+// RbCloexecOpen calls the Ruby framework function rb_cloexec_open.
 func RbCloexecOpen(pathname string, flags int, mode uint16) int {
-	return raw.RbCloexecOpen(pathname, flags, mode)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCloexecOpen == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCloexecOpen, _lib, "rb_cloexec_open")
+	}
+	return _fnRbCloexecOpen(pathname, flags, mode)
 }
 
-// RbCloexecPipe calls [raw.RbCloexecPipe] (C function rb_cloexec_pipe).
-func RbCloexecPipe(fildes *int32) int {
-	return raw.RbCloexecPipe(fildes)
+var _fnRbCloneSetup func(int, int)
+
+// RbCloneSetup calls the Ruby framework function rb_clone_setup.
+func RbCloneSetup(clone int, obj_ int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCloneSetup == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCloneSetup, _lib, "rb_clone_setup")
+	}
+	_fnRbCloneSetup(clone, obj_)
 }
 
-// RbCloneSetup calls [raw.RbCloneSetup] (C function rb_clone_setup).
-func RbCloneSetup(clone uint, obj uint) {
-	raw.RbCloneSetup(clone, obj)
+var _fnRbCloseBeforeExec func(int, int, int)
+
+// RbCloseBeforeExec calls the Ruby framework function rb_close_before_exec.
+func RbCloseBeforeExec(lowfd int, maxhint int, noclose_fds int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCloseBeforeExec == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCloseBeforeExec, _lib, "rb_close_before_exec")
+	}
+	_fnRbCloseBeforeExec(lowfd, maxhint, noclose_fds)
 }
 
-// RbCloseBeforeExec calls [raw.RbCloseBeforeExec] (C function rb_close_before_exec).
-func RbCloseBeforeExec(lowfd int, maxhint int, noclose_fds uint) {
-	raw.RbCloseBeforeExec(lowfd, maxhint, noclose_fds)
+var _fnRbCmperr func(int, int)
+
+// RbCmperr calls the Ruby framework function rb_cmperr.
+func RbCmperr(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCmperr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCmperr, _lib, "rb_cmperr")
+	}
+	_fnRbCmperr(arg, arg2)
 }
 
-// RbCmperr calls [raw.RbCmperr] (C function rb_cmperr).
-func RbCmperr(arg uint, arg2 uint) {
-	raw.RbCmperr(arg, arg2)
+var _fnRbCmpint func(int, int, int) int
+
+// RbCmpint calls the Ruby framework function rb_cmpint.
+func RbCmpint(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCmpint == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCmpint, _lib, "rb_cmpint")
+	}
+	return _fnRbCmpint(arg, arg2, arg3)
 }
 
-// RbCmpint calls [raw.RbCmpint] (C function rb_cmpint).
-func RbCmpint(arg uint, arg2 uint, arg3 uint) int {
-	return raw.RbCmpint(arg, arg2, arg3)
-}
+var _fnRbCompileError func()
 
-// RbCompileError calls [raw.RbCompileError] (C function rb_compile_error).
+// RbCompileError calls the Ruby framework function rb_compile_error.
 func RbCompileError() {
-	raw.RbCompileError()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCompileError == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCompileError, _lib, "rb_compile_error")
+	}
+	_fnRbCompileError()
 }
 
-// RbCompileErrorAppend calls [raw.RbCompileErrorAppend] (C function rb_compile_error_append).
+var _fnRbCompileErrorAppend func()
+
+// RbCompileErrorAppend calls the Ruby framework function rb_compile_error_append.
 func RbCompileErrorAppend() {
-	raw.RbCompileErrorAppend()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCompileErrorAppend == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCompileErrorAppend, _lib, "rb_compile_error_append")
+	}
+	_fnRbCompileErrorAppend()
 }
 
-// RbCompileErrorWithEnc calls [raw.RbCompileErrorWithEnc] (C function rb_compile_error_with_enc).
+var _fnRbCompileErrorWithEnc func()
+
+// RbCompileErrorWithEnc calls the Ruby framework function rb_compile_error_with_enc.
 func RbCompileErrorWithEnc() {
-	raw.RbCompileErrorWithEnc()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCompileErrorWithEnc == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCompileErrorWithEnc, _lib, "rb_compile_error_with_enc")
+	}
+	_fnRbCompileErrorWithEnc()
 }
 
-// RbComplexAbs calls [raw.RbComplexAbs] (C function rb_complex_abs).
-func RbComplexAbs(z uint) uint {
-	return raw.RbComplexAbs(z)
+var _fnRbComplexAbs func(int) int
+
+// RbComplexAbs calls the Ruby framework function rb_complex_abs.
+func RbComplexAbs(z int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbComplexAbs == nil {
+		ebipurego.RegisterLibFunc(&_fnRbComplexAbs, _lib, "rb_complex_abs")
+	}
+	return _fnRbComplexAbs(z)
 }
 
-// RbComplexArg calls [raw.RbComplexArg] (C function rb_complex_arg).
-func RbComplexArg(z uint) uint {
-	return raw.RbComplexArg(z)
+var _fnRbComplexArg func(int) int
+
+// RbComplexArg calls the Ruby framework function rb_complex_arg.
+func RbComplexArg(z int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbComplexArg == nil {
+		ebipurego.RegisterLibFunc(&_fnRbComplexArg, _lib, "rb_complex_arg")
+	}
+	return _fnRbComplexArg(z)
 }
 
-// RbComplexConjugate calls [raw.RbComplexConjugate] (C function rb_complex_conjugate).
-func RbComplexConjugate(z uint) uint {
-	return raw.RbComplexConjugate(z)
+var _fnRbComplexConjugate func(int) int
+
+// RbComplexConjugate calls the Ruby framework function rb_complex_conjugate.
+func RbComplexConjugate(z int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbComplexConjugate == nil {
+		ebipurego.RegisterLibFunc(&_fnRbComplexConjugate, _lib, "rb_complex_conjugate")
+	}
+	return _fnRbComplexConjugate(z)
 }
 
-// RbComplexDiv calls [raw.RbComplexDiv] (C function rb_complex_div).
-func RbComplexDiv(x uint, y uint) uint {
-	return raw.RbComplexDiv(x, y)
+var _fnRbComplexDiv func(int, int) int
+
+// RbComplexDiv calls the Ruby framework function rb_complex_div.
+func RbComplexDiv(x int, y int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbComplexDiv == nil {
+		ebipurego.RegisterLibFunc(&_fnRbComplexDiv, _lib, "rb_complex_div")
+	}
+	return _fnRbComplexDiv(x, y)
 }
 
-// RbComplexImag calls [raw.RbComplexImag] (C function rb_complex_imag).
-func RbComplexImag(z uint) uint {
-	return raw.RbComplexImag(z)
+var _fnRbComplexImag func(int) int
+
+// RbComplexImag calls the Ruby framework function rb_complex_imag.
+func RbComplexImag(z int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbComplexImag == nil {
+		ebipurego.RegisterLibFunc(&_fnRbComplexImag, _lib, "rb_complex_imag")
+	}
+	return _fnRbComplexImag(z)
 }
 
-// RbComplexMinus calls [raw.RbComplexMinus] (C function rb_complex_minus).
-func RbComplexMinus(x uint, y uint) uint {
-	return raw.RbComplexMinus(x, y)
+var _fnRbComplexMinus func(int, int) int
+
+// RbComplexMinus calls the Ruby framework function rb_complex_minus.
+func RbComplexMinus(x int, y int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbComplexMinus == nil {
+		ebipurego.RegisterLibFunc(&_fnRbComplexMinus, _lib, "rb_complex_minus")
+	}
+	return _fnRbComplexMinus(x, y)
 }
 
-// RbComplexMul calls [raw.RbComplexMul] (C function rb_complex_mul).
-func RbComplexMul(x uint, y uint) uint {
-	return raw.RbComplexMul(x, y)
+var _fnRbComplexMul func(int, int) int
+
+// RbComplexMul calls the Ruby framework function rb_complex_mul.
+func RbComplexMul(x int, y int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbComplexMul == nil {
+		ebipurego.RegisterLibFunc(&_fnRbComplexMul, _lib, "rb_complex_mul")
+	}
+	return _fnRbComplexMul(x, y)
 }
 
-// RbComplexNew calls [raw.RbComplexNew] (C function rb_complex_new).
-func RbComplexNew(arg uint, arg2 uint) uint {
-	return raw.RbComplexNew(arg, arg2)
+var _fnRbComplexNew func(int, int) int
+
+// RbComplexNew calls the Ruby framework function rb_complex_new.
+func RbComplexNew(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbComplexNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbComplexNew, _lib, "rb_complex_new")
+	}
+	return _fnRbComplexNew(arg, arg2)
 }
 
-// RbComplexNewPolar calls [raw.RbComplexNewPolar] (C function rb_complex_new_polar).
-func RbComplexNewPolar(abs uint, arg uint) uint {
-	return raw.RbComplexNewPolar(abs, arg)
+var _fnRbComplexNewPolar func(int, int) int
+
+// RbComplexNewPolar calls the Ruby framework function rb_complex_new_polar.
+func RbComplexNewPolar(abs int, arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbComplexNewPolar == nil {
+		ebipurego.RegisterLibFunc(&_fnRbComplexNewPolar, _lib, "rb_complex_new_polar")
+	}
+	return _fnRbComplexNewPolar(abs, arg)
 }
 
-// RbComplexPlus calls [raw.RbComplexPlus] (C function rb_complex_plus).
-func RbComplexPlus(x uint, y uint) uint {
-	return raw.RbComplexPlus(x, y)
+var _fnRbComplexPlus func(int, int) int
+
+// RbComplexPlus calls the Ruby framework function rb_complex_plus.
+func RbComplexPlus(x int, y int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbComplexPlus == nil {
+		ebipurego.RegisterLibFunc(&_fnRbComplexPlus, _lib, "rb_complex_plus")
+	}
+	return _fnRbComplexPlus(x, y)
 }
 
-// RbComplexPolar calls [raw.RbComplexPolar] (C function rb_complex_polar).
-func RbComplexPolar(abs uint, arg uint) uint {
-	return raw.RbComplexPolar(abs, arg)
+var _fnRbComplexPolar func(int, int) int
+
+// RbComplexPolar calls the Ruby framework function rb_complex_polar.
+func RbComplexPolar(abs int, arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbComplexPolar == nil {
+		ebipurego.RegisterLibFunc(&_fnRbComplexPolar, _lib, "rb_complex_polar")
+	}
+	return _fnRbComplexPolar(abs, arg)
 }
 
-// RbComplexPow calls [raw.RbComplexPow] (C function rb_complex_pow).
-func RbComplexPow(base uint, exp uint) uint {
-	return raw.RbComplexPow(base, exp)
+var _fnRbComplexPow func(int, int) int
+
+// RbComplexPow calls the Ruby framework function rb_complex_pow.
+func RbComplexPow(base int, exp int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbComplexPow == nil {
+		ebipurego.RegisterLibFunc(&_fnRbComplexPow, _lib, "rb_complex_pow")
+	}
+	return _fnRbComplexPow(base, exp)
 }
 
-// RbComplexRaw calls [raw.RbComplexRaw] (C function rb_complex_raw).
-func RbComplexRaw(arg uint, arg2 uint) uint {
-	return raw.RbComplexRaw(arg, arg2)
+var _fnRbComplexRaw func(int, int) int
+
+// RbComplexRaw calls the Ruby framework function rb_complex_raw.
+func RbComplexRaw(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbComplexRaw == nil {
+		ebipurego.RegisterLibFunc(&_fnRbComplexRaw, _lib, "rb_complex_raw")
+	}
+	return _fnRbComplexRaw(arg, arg2)
 }
 
-// RbComplexReal calls [raw.RbComplexReal] (C function rb_complex_real).
-func RbComplexReal(z uint) uint {
-	return raw.RbComplexReal(z)
+var _fnRbComplexReal func(int) int
+
+// RbComplexReal calls the Ruby framework function rb_complex_real.
+func RbComplexReal(z int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbComplexReal == nil {
+		ebipurego.RegisterLibFunc(&_fnRbComplexReal, _lib, "rb_complex_real")
+	}
+	return _fnRbComplexReal(z)
 }
 
-// RbComplexUminus calls [raw.RbComplexUminus] (C function rb_complex_uminus).
-func RbComplexUminus(z uint) uint {
-	return raw.RbComplexUminus(z)
+var _fnRbComplexUminus func(int) int
+
+// RbComplexUminus calls the Ruby framework function rb_complex_uminus.
+func RbComplexUminus(z int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbComplexUminus == nil {
+		ebipurego.RegisterLibFunc(&_fnRbComplexUminus, _lib, "rb_complex_uminus")
+	}
+	return _fnRbComplexUminus(z)
 }
 
-// RbConstDefined calls [raw.RbConstDefined] (C function rb_const_defined).
-func RbConstDefined(arg uint, arg2 uint) int {
-	return raw.RbConstDefined(arg, arg2)
+var _fnRbConstDefined func(int, int) int
+
+// RbConstDefined calls the Ruby framework function rb_const_defined.
+func RbConstDefined(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbConstDefined == nil {
+		ebipurego.RegisterLibFunc(&_fnRbConstDefined, _lib, "rb_const_defined")
+	}
+	return _fnRbConstDefined(arg, arg2)
 }
 
-// RbConstDefinedAt calls [raw.RbConstDefinedAt] (C function rb_const_defined_at).
-func RbConstDefinedAt(arg uint, arg2 uint) int {
-	return raw.RbConstDefinedAt(arg, arg2)
+var _fnRbConstDefinedAt func(int, int) int
+
+// RbConstDefinedAt calls the Ruby framework function rb_const_defined_at.
+func RbConstDefinedAt(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbConstDefinedAt == nil {
+		ebipurego.RegisterLibFunc(&_fnRbConstDefinedAt, _lib, "rb_const_defined_at")
+	}
+	return _fnRbConstDefinedAt(arg, arg2)
 }
 
-// RbConstDefinedFrom calls [raw.RbConstDefinedFrom] (C function rb_const_defined_from).
-func RbConstDefinedFrom(arg uint, arg2 uint) int {
-	return raw.RbConstDefinedFrom(arg, arg2)
+var _fnRbConstDefinedFrom func(int, int) int
+
+// RbConstDefinedFrom calls the Ruby framework function rb_const_defined_from.
+func RbConstDefinedFrom(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbConstDefinedFrom == nil {
+		ebipurego.RegisterLibFunc(&_fnRbConstDefinedFrom, _lib, "rb_const_defined_from")
+	}
+	return _fnRbConstDefinedFrom(arg, arg2)
 }
 
-// RbConstGet calls [raw.RbConstGet] (C function rb_const_get).
-func RbConstGet(arg uint, arg2 uint) uint {
-	return raw.RbConstGet(arg, arg2)
+var _fnRbConstGet func(int, int) int
+
+// RbConstGet calls the Ruby framework function rb_const_get.
+func RbConstGet(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbConstGet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbConstGet, _lib, "rb_const_get")
+	}
+	return _fnRbConstGet(arg, arg2)
 }
 
-// RbConstGetAt calls [raw.RbConstGetAt] (C function rb_const_get_at).
-func RbConstGetAt(arg uint, arg2 uint) uint {
-	return raw.RbConstGetAt(arg, arg2)
+var _fnRbConstGetAt func(int, int) int
+
+// RbConstGetAt calls the Ruby framework function rb_const_get_at.
+func RbConstGetAt(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbConstGetAt == nil {
+		ebipurego.RegisterLibFunc(&_fnRbConstGetAt, _lib, "rb_const_get_at")
+	}
+	return _fnRbConstGetAt(arg, arg2)
 }
 
-// RbConstGetFrom calls [raw.RbConstGetFrom] (C function rb_const_get_from).
-func RbConstGetFrom(arg uint, arg2 uint) uint {
-	return raw.RbConstGetFrom(arg, arg2)
+var _fnRbConstGetFrom func(int, int) int
+
+// RbConstGetFrom calls the Ruby framework function rb_const_get_from.
+func RbConstGetFrom(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbConstGetFrom == nil {
+		ebipurego.RegisterLibFunc(&_fnRbConstGetFrom, _lib, "rb_const_get_from")
+	}
+	return _fnRbConstGetFrom(arg, arg2)
 }
 
-// RbConstList calls [raw.RbConstList] (C function rb_const_list).
-func RbConstList(arg unsafe.Pointer) uint {
-	return raw.RbConstList(arg)
+var _fnRbConstRemove func(int, int) int
+
+// RbConstRemove calls the Ruby framework function rb_const_remove.
+func RbConstRemove(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbConstRemove == nil {
+		ebipurego.RegisterLibFunc(&_fnRbConstRemove, _lib, "rb_const_remove")
+	}
+	return _fnRbConstRemove(arg, arg2)
 }
 
-// RbConstRemove calls [raw.RbConstRemove] (C function rb_const_remove).
-func RbConstRemove(arg uint, arg2 uint) uint {
-	return raw.RbConstRemove(arg, arg2)
+var _fnRbConstSet func(int, int, int)
+
+// RbConstSet calls the Ruby framework function rb_const_set.
+func RbConstSet(arg int, arg2 int, arg3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbConstSet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbConstSet, _lib, "rb_const_set")
+	}
+	_fnRbConstSet(arg, arg2, arg3)
 }
 
-// RbConstSet calls [raw.RbConstSet] (C function rb_const_set).
-func RbConstSet(arg uint, arg2 uint, arg3 uint) {
-	raw.RbConstSet(arg, arg2, arg3)
+var _fnRbConvertType func(int, int, string, string) int
+
+// RbConvertType calls the Ruby framework function rb_convert_type.
+func RbConvertType(arg int, arg2 int, arg3 string, arg4 string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbConvertType == nil {
+		ebipurego.RegisterLibFunc(&_fnRbConvertType, _lib, "rb_convert_type")
+	}
+	return _fnRbConvertType(arg, arg2, arg3, arg4)
 }
 
-// RbConvertType calls [raw.RbConvertType] (C function rb_convert_type).
-func RbConvertType(arg uint, arg2 int, arg3 string, arg4 string) uint {
-	return raw.RbConvertType(arg, arg2, arg3, arg4)
+var _fnRbCopyGenericIvar func(int, int)
+
+// RbCopyGenericIvar calls the Ruby framework function rb_copy_generic_ivar.
+func RbCopyGenericIvar(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCopyGenericIvar == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCopyGenericIvar, _lib, "rb_copy_generic_ivar")
+	}
+	_fnRbCopyGenericIvar(arg, arg2)
 }
 
-// RbCopyGenericIvar calls [raw.RbCopyGenericIvar] (C function rb_copy_generic_ivar).
-func RbCopyGenericIvar(arg uint, arg2 uint) {
-	raw.RbCopyGenericIvar(arg, arg2)
+var _fnRbCstr2inum func(string, int) int
+
+// RbCstr2inum calls the Ruby framework function rb_cstr2inum.
+func RbCstr2inum(arg string, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCstr2inum == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCstr2inum, _lib, "rb_cstr2inum")
+	}
+	return _fnRbCstr2inum(arg, arg2)
 }
 
-// RbCstr2inum calls [raw.RbCstr2inum] (C function rb_cstr2inum).
-func RbCstr2inum(arg string, arg2 int) uint {
-	return raw.RbCstr2inum(arg, arg2)
-}
+var _fnRbCstrToDbl func(string, int) float64
 
-// RbCstrToDbl calls [raw.RbCstrToDbl] (C function rb_cstr_to_dbl).
+// RbCstrToDbl calls the Ruby framework function rb_cstr_to_dbl.
 func RbCstrToDbl(arg string, arg2 int) float64 {
-	return raw.RbCstrToDbl(arg, arg2)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCstrToDbl == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCstrToDbl, _lib, "rb_cstr_to_dbl")
+	}
+	return _fnRbCstrToDbl(arg, arg2)
 }
 
-// RbCstrToInum calls [raw.RbCstrToInum] (C function rb_cstr_to_inum).
-func RbCstrToInum(arg string, arg2 int, arg3 int) uint {
-	return raw.RbCstrToInum(arg, arg2, arg3)
+var _fnRbCstrToInum func(string, int, int) int
+
+// RbCstrToInum calls the Ruby framework function rb_cstr_to_inum.
+func RbCstrToInum(arg string, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCstrToInum == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCstrToInum, _lib, "rb_cstr_to_inum")
+	}
+	return _fnRbCstrToInum(arg, arg2, arg3)
 }
 
-// RbCurrentReceiver calls [raw.RbCurrentReceiver] (C function rb_current_receiver).
-func RbCurrentReceiver() uint {
-	return raw.RbCurrentReceiver()
+var _fnRbCurrentReceiver func() int
+
+// RbCurrentReceiver calls the Ruby framework function rb_current_receiver.
+func RbCurrentReceiver() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCurrentReceiver == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCurrentReceiver, _lib, "rb_current_receiver")
+	}
+	return _fnRbCurrentReceiver()
 }
 
-// RbCvGet calls [raw.RbCvGet] (C function rb_cv_get).
-func RbCvGet(arg uint, arg2 string) uint {
-	return raw.RbCvGet(arg, arg2)
+var _fnRbCvGet func(int, string) int
+
+// RbCvGet calls the Ruby framework function rb_cv_get.
+func RbCvGet(arg int, arg2 string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCvGet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCvGet, _lib, "rb_cv_get")
+	}
+	return _fnRbCvGet(arg, arg2)
 }
 
-// RbCvSet calls [raw.RbCvSet] (C function rb_cv_set).
-func RbCvSet(arg uint, arg2 string, arg3 uint) {
-	raw.RbCvSet(arg, arg2, arg3)
+var _fnRbCvSet func(int, string, int)
+
+// RbCvSet calls the Ruby framework function rb_cv_set.
+func RbCvSet(arg int, arg2 string, arg3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCvSet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCvSet, _lib, "rb_cv_set")
+	}
+	_fnRbCvSet(arg, arg2, arg3)
 }
 
-// RbCvarDefined calls [raw.RbCvarDefined] (C function rb_cvar_defined).
-func RbCvarDefined(arg uint, arg2 uint) uint {
-	return raw.RbCvarDefined(arg, arg2)
+var _fnRbCvarDefined func(int, int) int
+
+// RbCvarDefined calls the Ruby framework function rb_cvar_defined.
+func RbCvarDefined(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCvarDefined == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCvarDefined, _lib, "rb_cvar_defined")
+	}
+	return _fnRbCvarDefined(arg, arg2)
 }
 
-// RbCvarGet calls [raw.RbCvarGet] (C function rb_cvar_get).
-func RbCvarGet(arg uint, arg2 uint) uint {
-	return raw.RbCvarGet(arg, arg2)
+var _fnRbCvarGet func(int, int) int
+
+// RbCvarGet calls the Ruby framework function rb_cvar_get.
+func RbCvarGet(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCvarGet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCvarGet, _lib, "rb_cvar_get")
+	}
+	return _fnRbCvarGet(arg, arg2)
 }
 
-// RbCvarSet calls [raw.RbCvarSet] (C function rb_cvar_set).
-func RbCvarSet(arg uint, arg2 uint, arg3 uint) {
-	raw.RbCvarSet(arg, arg2, arg3)
+var _fnRbCvarSet func(int, int, int)
+
+// RbCvarSet calls the Ruby framework function rb_cvar_set.
+func RbCvarSet(arg int, arg2 int, arg3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbCvarSet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbCvarSet, _lib, "rb_cvar_set")
+	}
+	_fnRbCvarSet(arg, arg2, arg3)
 }
 
-// RbDataObjectAlloc calls [raw.RbDataObjectAlloc] (C function rb_data_object_alloc).
-func RbDataObjectAlloc(arg uint, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) uint {
-	return raw.RbDataObjectAlloc(arg, arg2, arg3, arg4)
+var _fnRbDbl2big func(float64) int
+
+// RbDbl2big calls the Ruby framework function rb_dbl2big.
+func RbDbl2big(arg float64) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDbl2big == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDbl2big, _lib, "rb_dbl2big")
+	}
+	return _fnRbDbl2big(arg)
 }
 
-// RbDataObjectGet calls [raw.RbDataObjectGet] (C function rb_data_object_get).
-func RbDataObjectGet(obj uint) unsafe.Pointer {
-	return raw.RbDataObjectGet(obj)
+var _fnRbDblCmp func(float64, float64) int
+
+// RbDblCmp calls the Ruby framework function rb_dbl_cmp.
+func RbDblCmp(arg float64, arg2 float64) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDblCmp == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDblCmp, _lib, "rb_dbl_cmp")
+	}
+	return _fnRbDblCmp(arg, arg2)
 }
 
-// RbDataObjectMake calls [raw.RbDataObjectMake] (C function rb_data_object_make).
-func RbDataObjectMake(klass uint, mark_func unsafe.Pointer, free_func unsafe.Pointer, datap unsafe.Pointer, size uint) uint {
-	return raw.RbDataObjectMake(klass, mark_func, free_func, datap, size)
+var _fnRbDblComplexNew func(float64, float64) int
+
+// RbDblComplexNew calls the Ruby framework function rb_dbl_complex_new.
+func RbDblComplexNew(real float64, imag float64) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDblComplexNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDblComplexNew, _lib, "rb_dbl_complex_new")
+	}
+	return _fnRbDblComplexNew(real, imag)
 }
 
-// RbDataObjectWrap calls [raw.RbDataObjectWrap] (C function rb_data_object_wrap).
-func RbDataObjectWrap(arg uint, arg2 unsafe.Pointer, arg3 unsafe.Pointer, arg4 unsafe.Pointer) uint {
-	return raw.RbDataObjectWrap(arg, arg2, arg3, arg4)
+var _fnRbDefineAlias func(int, string, string)
+
+// RbDefineAlias calls the Ruby framework function rb_define_alias.
+func RbDefineAlias(arg int, arg2 string, arg3 string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDefineAlias == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDefineAlias, _lib, "rb_define_alias")
+	}
+	_fnRbDefineAlias(arg, arg2, arg3)
 }
 
-// RbDataObjectZalloc calls [raw.RbDataObjectZalloc] (C function rb_data_object_zalloc).
-func RbDataObjectZalloc(arg uint, arg2 uint, arg3 unsafe.Pointer, arg4 unsafe.Pointer) uint {
-	return raw.RbDataObjectZalloc(arg, arg2, arg3, arg4)
+var _fnRbDefineAttr func(int, string, int, int)
+
+// RbDefineAttr calls the Ruby framework function rb_define_attr.
+func RbDefineAttr(arg int, arg2 string, arg3 int, arg4 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDefineAttr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDefineAttr, _lib, "rb_define_attr")
+	}
+	_fnRbDefineAttr(arg, arg2, arg3, arg4)
 }
 
-// RbDataTypedObjectAlloc calls [raw.RbDataTypedObjectAlloc] (C function rb_data_typed_object_alloc).
-func RbDataTypedObjectAlloc(arg uint, arg2 unsafe.Pointer, arg3 *raw.RbDataTypeStruct) uint {
-	return raw.RbDataTypedObjectAlloc(arg, arg2, arg3)
+var _fnRbDefineClass func(string, int) int
+
+// RbDefineClass calls the Ruby framework function rb_define_class.
+func RbDefineClass(arg string, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDefineClass == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDefineClass, _lib, "rb_define_class")
+	}
+	return _fnRbDefineClass(arg, arg2)
 }
 
-// RbDataTypedObjectMake calls [raw.RbDataTypedObjectMake] (C function rb_data_typed_object_make).
-func RbDataTypedObjectMake(klass uint, type_ *raw.RbDataTypeStruct, datap unsafe.Pointer, size uint) uint {
-	return raw.RbDataTypedObjectMake(klass, type_, datap, size)
+var _fnRbDefineClassId func(int, int) int
+
+// RbDefineClassId calls the Ruby framework function rb_define_class_id.
+func RbDefineClassId(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDefineClassId == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDefineClassId, _lib, "rb_define_class_id")
+	}
+	return _fnRbDefineClassId(arg, arg2)
 }
 
-// RbDataTypedObjectWrap calls [raw.RbDataTypedObjectWrap] (C function rb_data_typed_object_wrap).
-func RbDataTypedObjectWrap(klass uint, datap unsafe.Pointer, arg *raw.RbDataTypeStruct) uint {
-	return raw.RbDataTypedObjectWrap(klass, datap, arg)
+var _fnRbDefineClassIdUnder func(int, int, int) int
+
+// RbDefineClassIdUnder calls the Ruby framework function rb_define_class_id_under.
+func RbDefineClassIdUnder(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDefineClassIdUnder == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDefineClassIdUnder, _lib, "rb_define_class_id_under")
+	}
+	return _fnRbDefineClassIdUnder(arg, arg2, arg3)
 }
 
-// RbDataTypedObjectZalloc calls [raw.RbDataTypedObjectZalloc] (C function rb_data_typed_object_zalloc).
-func RbDataTypedObjectZalloc(klass uint, size uint, type_ *raw.RbDataTypeStruct) uint {
-	return raw.RbDataTypedObjectZalloc(klass, size, type_)
+var _fnRbDefineClassUnder func(int, string, int) int
+
+// RbDefineClassUnder calls the Ruby framework function rb_define_class_under.
+func RbDefineClassUnder(arg int, arg2 string, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDefineClassUnder == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDefineClassUnder, _lib, "rb_define_class_under")
+	}
+	return _fnRbDefineClassUnder(arg, arg2, arg3)
 }
 
-// RbDbl2big calls [raw.RbDbl2big] (C function rb_dbl2big).
-func RbDbl2big(arg float64) uint {
-	return raw.RbDbl2big(arg)
+var _fnRbDefineClassVariable func(int, string, int)
+
+// RbDefineClassVariable calls the Ruby framework function rb_define_class_variable.
+func RbDefineClassVariable(arg int, arg2 string, arg3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDefineClassVariable == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDefineClassVariable, _lib, "rb_define_class_variable")
+	}
+	_fnRbDefineClassVariable(arg, arg2, arg3)
 }
 
-// RbDblCmp calls [raw.RbDblCmp] (C function rb_dbl_cmp).
-func RbDblCmp(arg float64, arg2 float64) uint {
-	return raw.RbDblCmp(arg, arg2)
+var _fnRbDefineConst func(int, string, int)
+
+// RbDefineConst calls the Ruby framework function rb_define_const.
+func RbDefineConst(arg int, arg2 string, arg3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDefineConst == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDefineConst, _lib, "rb_define_const")
+	}
+	_fnRbDefineConst(arg, arg2, arg3)
 }
 
-// RbDblComplexNew calls [raw.RbDblComplexNew] (C function rb_dbl_complex_new).
-func RbDblComplexNew(real float64, imag float64) uint {
-	return raw.RbDblComplexNew(real, imag)
+var _fnRbDefineFinalizer func(int, int) int
+
+// RbDefineFinalizer calls the Ruby framework function rb_define_finalizer.
+func RbDefineFinalizer(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDefineFinalizer == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDefineFinalizer, _lib, "rb_define_finalizer")
+	}
+	return _fnRbDefineFinalizer(arg, arg2)
 }
 
-// RbDefineAlias calls [raw.RbDefineAlias] (C function rb_define_alias).
-func RbDefineAlias(arg uint, arg2 string, arg3 string) {
-	raw.RbDefineAlias(arg, arg2, arg3)
+var _fnRbDefineGlobalConst func(string, int)
+
+// RbDefineGlobalConst calls the Ruby framework function rb_define_global_const.
+func RbDefineGlobalConst(arg string, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDefineGlobalConst == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDefineGlobalConst, _lib, "rb_define_global_const")
+	}
+	_fnRbDefineGlobalConst(arg, arg2)
 }
 
-// RbDefineAllocFunc calls [raw.RbDefineAllocFunc] (C function rb_define_alloc_func).
-func RbDefineAllocFunc(arg uint, arg2 unsafe.Pointer) {
-	raw.RbDefineAllocFunc(arg, arg2)
+var _fnRbDefineModule func(string) int
+
+// RbDefineModule calls the Ruby framework function rb_define_module.
+func RbDefineModule(arg string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDefineModule == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDefineModule, _lib, "rb_define_module")
+	}
+	return _fnRbDefineModule(arg)
 }
 
-// RbDefineAttr calls [raw.RbDefineAttr] (C function rb_define_attr).
-func RbDefineAttr(arg uint, arg2 string, arg3 int, arg4 int) {
-	raw.RbDefineAttr(arg, arg2, arg3, arg4)
+var _fnRbDefineModuleId func(int) int
+
+// RbDefineModuleId calls the Ruby framework function rb_define_module_id.
+func RbDefineModuleId(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDefineModuleId == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDefineModuleId, _lib, "rb_define_module_id")
+	}
+	return _fnRbDefineModuleId(arg)
 }
 
-// RbDefineClass calls [raw.RbDefineClass] (C function rb_define_class).
-func RbDefineClass(arg string, arg2 uint) uint {
-	return raw.RbDefineClass(arg, arg2)
+var _fnRbDefineModuleIdUnder func(int, int) int
+
+// RbDefineModuleIdUnder calls the Ruby framework function rb_define_module_id_under.
+func RbDefineModuleIdUnder(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDefineModuleIdUnder == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDefineModuleIdUnder, _lib, "rb_define_module_id_under")
+	}
+	return _fnRbDefineModuleIdUnder(arg, arg2)
 }
 
-// RbDefineClassId calls [raw.RbDefineClassId] (C function rb_define_class_id).
-func RbDefineClassId(arg uint, arg2 uint) uint {
-	return raw.RbDefineClassId(arg, arg2)
+var _fnRbDefineModuleUnder func(int, string) int
+
+// RbDefineModuleUnder calls the Ruby framework function rb_define_module_under.
+func RbDefineModuleUnder(arg int, arg2 string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDefineModuleUnder == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDefineModuleUnder, _lib, "rb_define_module_under")
+	}
+	return _fnRbDefineModuleUnder(arg, arg2)
 }
 
-// RbDefineClassIdUnder calls [raw.RbDefineClassIdUnder] (C function rb_define_class_id_under).
-func RbDefineClassIdUnder(arg uint, arg2 uint, arg3 uint) uint {
-	return raw.RbDefineClassIdUnder(arg, arg2, arg3)
+var _fnRbDetachProcess func(int) int
+
+// RbDetachProcess calls the Ruby framework function rb_detach_process.
+func RbDetachProcess(pid int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDetachProcess == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDetachProcess, _lib, "rb_detach_process")
+	}
+	return _fnRbDetachProcess(pid)
 }
 
-// RbDefineClassUnder calls [raw.RbDefineClassUnder] (C function rb_define_class_under).
-func RbDefineClassUnder(arg uint, arg2 string, arg3 uint) uint {
-	return raw.RbDefineClassUnder(arg, arg2, arg3)
+var _fnRbDirGetwd func() int
+
+// RbDirGetwd calls the Ruby framework function rb_dir_getwd.
+func RbDirGetwd() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDirGetwd == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDirGetwd, _lib, "rb_dir_getwd")
+	}
+	return _fnRbDirGetwd()
 }
 
-// RbDefineClassVariable calls [raw.RbDefineClassVariable] (C function rb_define_class_variable).
-func RbDefineClassVariable(arg uint, arg2 string, arg3 uint) {
-	raw.RbDefineClassVariable(arg, arg2, arg3)
-}
+var _fnRbDisableSuper func()
 
-// RbDefineConst calls [raw.RbDefineConst] (C function rb_define_const).
-func RbDefineConst(arg uint, arg2 string, arg3 uint) {
-	raw.RbDefineConst(arg, arg2, arg3)
-}
-
-// RbDefineFinalizer calls [raw.RbDefineFinalizer] (C function rb_define_finalizer).
-func RbDefineFinalizer(arg uint, arg2 uint) uint {
-	return raw.RbDefineFinalizer(arg, arg2)
-}
-
-// RbDefineGlobalConst calls [raw.RbDefineGlobalConst] (C function rb_define_global_const).
-func RbDefineGlobalConst(arg string, arg2 uint) {
-	raw.RbDefineGlobalConst(arg, arg2)
-}
-
-// RbDefineGlobalFunction calls [raw.RbDefineGlobalFunction] (C function rb_define_global_function).
-func RbDefineGlobalFunction(arg string, arg2 unsafe.Pointer, arg3 int) {
-	raw.RbDefineGlobalFunction(arg, arg2, arg3)
-}
-
-// RbDefineHookedVariable calls [raw.RbDefineHookedVariable] (C function rb_define_hooked_variable).
-func RbDefineHookedVariable(arg string, arg2 *uint, arg3 unsafe.Pointer, arg4 unsafe.Pointer) {
-	raw.RbDefineHookedVariable(arg, arg2, arg3, arg4)
-}
-
-// RbDefineMethod calls [raw.RbDefineMethod] (C function rb_define_method).
-func RbDefineMethod(arg uint, arg2 string, arg3 unsafe.Pointer, arg4 int) {
-	raw.RbDefineMethod(arg, arg2, arg3, arg4)
-}
-
-// RbDefineMethodId calls [raw.RbDefineMethodId] (C function rb_define_method_id).
-func RbDefineMethodId(arg uint, arg2 uint, arg3 unsafe.Pointer, arg4 int) {
-	raw.RbDefineMethodId(arg, arg2, arg3, arg4)
-}
-
-// RbDefineModule calls [raw.RbDefineModule] (C function rb_define_module).
-func RbDefineModule(arg string) uint {
-	return raw.RbDefineModule(arg)
-}
-
-// RbDefineModuleFunction calls [raw.RbDefineModuleFunction] (C function rb_define_module_function).
-func RbDefineModuleFunction(arg uint, arg2 string, arg3 unsafe.Pointer, arg4 int) {
-	raw.RbDefineModuleFunction(arg, arg2, arg3, arg4)
-}
-
-// RbDefineModuleId calls [raw.RbDefineModuleId] (C function rb_define_module_id).
-func RbDefineModuleId(arg uint) uint {
-	return raw.RbDefineModuleId(arg)
-}
-
-// RbDefineModuleIdUnder calls [raw.RbDefineModuleIdUnder] (C function rb_define_module_id_under).
-func RbDefineModuleIdUnder(arg uint, arg2 uint) uint {
-	return raw.RbDefineModuleIdUnder(arg, arg2)
-}
-
-// RbDefineModuleUnder calls [raw.RbDefineModuleUnder] (C function rb_define_module_under).
-func RbDefineModuleUnder(arg uint, arg2 string) uint {
-	return raw.RbDefineModuleUnder(arg, arg2)
-}
-
-// RbDefinePrivateMethod calls [raw.RbDefinePrivateMethod] (C function rb_define_private_method).
-func RbDefinePrivateMethod(arg uint, arg2 string, arg3 unsafe.Pointer, arg4 int) {
-	raw.RbDefinePrivateMethod(arg, arg2, arg3, arg4)
-}
-
-// RbDefineProtectedMethod calls [raw.RbDefineProtectedMethod] (C function rb_define_protected_method).
-func RbDefineProtectedMethod(arg uint, arg2 string, arg3 unsafe.Pointer, arg4 int) {
-	raw.RbDefineProtectedMethod(arg, arg2, arg3, arg4)
-}
-
-// RbDefineReadonlyVariable calls [raw.RbDefineReadonlyVariable] (C function rb_define_readonly_variable).
-func RbDefineReadonlyVariable(arg string, arg2 *uint) {
-	raw.RbDefineReadonlyVariable(arg, arg2)
-}
-
-// RbDefineSingletonMethod calls [raw.RbDefineSingletonMethod] (C function rb_define_singleton_method).
-func RbDefineSingletonMethod(arg uint, arg2 string, arg3 unsafe.Pointer, arg4 int) {
-	raw.RbDefineSingletonMethod(arg, arg2, arg3, arg4)
-}
-
-// RbDefineVariable calls [raw.RbDefineVariable] (C function rb_define_variable).
-func RbDefineVariable(arg string, arg2 *uint) {
-	raw.RbDefineVariable(arg, arg2)
-}
-
-// RbDefineVirtualVariable calls [raw.RbDefineVirtualVariable] (C function rb_define_virtual_variable).
-func RbDefineVirtualVariable(arg string, arg2 unsafe.Pointer, arg3 unsafe.Pointer) {
-	raw.RbDefineVirtualVariable(arg, arg2, arg3)
-}
-
-// RbDetachProcess calls [raw.RbDetachProcess] (C function rb_detach_process).
-func RbDetachProcess(pid int) uint {
-	return raw.RbDetachProcess(pid)
-}
-
-// RbDirGetwd calls [raw.RbDirGetwd] (C function rb_dir_getwd).
-func RbDirGetwd() uint {
-	return raw.RbDirGetwd()
-}
-
-// RbDisableSuper calls [raw.RbDisableSuper] (C function rb_disable_super).
+// RbDisableSuper calls the Ruby framework function rb_disable_super.
 func RbDisableSuper() {
-	raw.RbDisableSuper()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDisableSuper == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDisableSuper, _lib, "rb_disable_super")
+	}
+	_fnRbDisableSuper()
 }
 
-// RbDupSetup calls [raw.RbDupSetup] (C function rb_dup_setup).
-func RbDupSetup(dup uint, obj uint) {
-	raw.RbDupSetup(dup, obj)
+var _fnRbDupSetup func(int, int)
+
+// RbDupSetup calls the Ruby framework function rb_dup_setup.
+func RbDupSetup(dup int, obj_ int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDupSetup == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDupSetup, _lib, "rb_dup_setup")
+	}
+	_fnRbDupSetup(dup, obj_)
 }
 
-// RbDuringGc calls [raw.RbDuringGc] (C function rb_during_gc).
+var _fnRbDuringGc func() int
+
+// RbDuringGc calls the Ruby framework function rb_during_gc.
 func RbDuringGc() int {
-	return raw.RbDuringGc()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbDuringGc == nil {
+		ebipurego.RegisterLibFunc(&_fnRbDuringGc, _lib, "rb_during_gc")
+	}
+	return _fnRbDuringGc()
 }
 
-// RbEach calls [raw.RbEach] (C function rb_each).
-func RbEach(arg uint) uint {
-	return raw.RbEach(arg)
+var _fnRbEach func(int) int
+
+// RbEach calls the Ruby framework function rb_each.
+func RbEach(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbEach == nil {
+		ebipurego.RegisterLibFunc(&_fnRbEach, _lib, "rb_each")
+	}
+	return _fnRbEach(arg)
 }
 
-// RbEnableSuper calls [raw.RbEnableSuper] (C function rb_enable_super).
+var _fnRbEnableSuper func()
+
+// RbEnableSuper calls the Ruby framework function rb_enable_super.
 func RbEnableSuper() {
-	raw.RbEnableSuper()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbEnableSuper == nil {
+		ebipurego.RegisterLibFunc(&_fnRbEnableSuper, _lib, "rb_enable_super")
+	}
+	_fnRbEnableSuper()
 }
 
-// RbEnsure calls [raw.RbEnsure] (C function rb_ensure).
-func RbEnsure(arg unsafe.Pointer, arg2 uint, arg3 unsafe.Pointer, arg4 uint) uint {
-	return raw.RbEnsure(arg, arg2, arg3, arg4)
+var _fnRbEnvClear func() int
+
+// RbEnvClear calls the Ruby framework function rb_env_clear.
+func RbEnvClear() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbEnvClear == nil {
+		ebipurego.RegisterLibFunc(&_fnRbEnvClear, _lib, "rb_env_clear")
+	}
+	return _fnRbEnvClear()
 }
 
-// RbEnumValuesPack calls [raw.RbEnumValuesPack] (C function rb_enum_values_pack).
-func RbEnumValuesPack(arg int, arg2 *uint) uint {
-	return raw.RbEnumValuesPack(arg, arg2)
-}
+var _fnRbEnvPathTainted func() int
 
-// RbEnumeratorize calls [raw.RbEnumeratorize] (C function rb_enumeratorize).
-func RbEnumeratorize(arg uint, arg2 uint, arg3 int, arg4 *uint) uint {
-	return raw.RbEnumeratorize(arg, arg2, arg3, arg4)
-}
-
-// RbEnumeratorizeWithSize calls [raw.RbEnumeratorizeWithSize] (C function rb_enumeratorize_with_size).
-func RbEnumeratorizeWithSize(arg uint, arg2 uint, arg3 int, arg4 *uint, arg5 unsafe.Pointer) uint {
-	return raw.RbEnumeratorizeWithSize(arg, arg2, arg3, arg4, arg5)
-}
-
-// RbEnvClear calls [raw.RbEnvClear] (C function rb_env_clear).
-func RbEnvClear() uint {
-	return raw.RbEnvClear()
-}
-
-// RbEnvPathTainted calls [raw.RbEnvPathTainted] (C function rb_env_path_tainted).
+// RbEnvPathTainted calls the Ruby framework function rb_env_path_tainted.
 func RbEnvPathTainted() int {
-	return raw.RbEnvPathTainted()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbEnvPathTainted == nil {
+		ebipurego.RegisterLibFunc(&_fnRbEnvPathTainted, _lib, "rb_env_path_tainted")
+	}
+	return _fnRbEnvPathTainted()
 }
 
-// RbEql calls [raw.RbEql] (C function rb_eql).
-func RbEql(arg uint, arg2 uint) int {
-	return raw.RbEql(arg, arg2)
+var _fnRbEql func(int, int) int
+
+// RbEql calls the Ruby framework function rb_eql.
+func RbEql(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbEql == nil {
+		ebipurego.RegisterLibFunc(&_fnRbEql, _lib, "rb_eql")
+	}
+	return _fnRbEql(arg, arg2)
 }
 
-// RbEqual calls [raw.RbEqual] (C function rb_equal).
-func RbEqual(arg uint, arg2 uint) uint {
-	return raw.RbEqual(arg, arg2)
+var _fnRbEqual func(int, int) int
+
+// RbEqual calls the Ruby framework function rb_equal.
+func RbEqual(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbEqual == nil {
+		ebipurego.RegisterLibFunc(&_fnRbEqual, _lib, "rb_equal")
+	}
+	return _fnRbEqual(arg, arg2)
 }
 
-// RbErrinfo calls [raw.RbErrinfo] (C function rb_errinfo).
-func RbErrinfo() uint {
-	return raw.RbErrinfo()
+var _fnRbErrinfo func() int
+
+// RbErrinfo calls the Ruby framework function rb_errinfo.
+func RbErrinfo() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbErrinfo == nil {
+		ebipurego.RegisterLibFunc(&_fnRbErrinfo, _lib, "rb_errinfo")
+	}
+	return _fnRbErrinfo()
 }
 
-// RbErrorArity calls [raw.RbErrorArity] (C function rb_error_arity).
+var _fnRbErrorArity func(int, int, int)
+
+// RbErrorArity calls the Ruby framework function rb_error_arity.
 func RbErrorArity(arg int, arg2 int, arg3 int) {
-	raw.RbErrorArity(arg, arg2, arg3)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbErrorArity == nil {
+		ebipurego.RegisterLibFunc(&_fnRbErrorArity, _lib, "rb_error_arity")
+	}
+	_fnRbErrorArity(arg, arg2, arg3)
 }
 
-// RbErrorFrozen calls [raw.RbErrorFrozen] (C function rb_error_frozen).
+var _fnRbErrorFrozen func(string)
+
+// RbErrorFrozen calls the Ruby framework function rb_error_frozen.
 func RbErrorFrozen(arg string) {
-	raw.RbErrorFrozen(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbErrorFrozen == nil {
+		ebipurego.RegisterLibFunc(&_fnRbErrorFrozen, _lib, "rb_error_frozen")
+	}
+	_fnRbErrorFrozen(arg)
 }
 
-// RbErrorFrozenObject calls [raw.RbErrorFrozenObject] (C function rb_error_frozen_object).
-func RbErrorFrozenObject(arg uint) {
-	raw.RbErrorFrozenObject(arg)
+var _fnRbErrorFrozenObject func(int)
+
+// RbErrorFrozenObject calls the Ruby framework function rb_error_frozen_object.
+func RbErrorFrozenObject(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbErrorFrozenObject == nil {
+		ebipurego.RegisterLibFunc(&_fnRbErrorFrozenObject, _lib, "rb_error_frozen_object")
+	}
+	_fnRbErrorFrozenObject(arg)
 }
 
-// RbErrorUntrusted calls [raw.RbErrorUntrusted] (C function rb_error_untrusted).
-func RbErrorUntrusted(arg uint) {
-	raw.RbErrorUntrusted(arg)
+var _fnRbErrorUntrusted func(int)
+
+// RbErrorUntrusted calls the Ruby framework function rb_error_untrusted.
+func RbErrorUntrusted(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbErrorUntrusted == nil {
+		ebipurego.RegisterLibFunc(&_fnRbErrorUntrusted, _lib, "rb_error_untrusted")
+	}
+	_fnRbErrorUntrusted(arg)
 }
 
-// RbEvalCmd calls [raw.RbEvalCmd] (C function rb_eval_cmd).
-func RbEvalCmd(arg uint, arg2 uint, arg3 int) uint {
-	return raw.RbEvalCmd(arg, arg2, arg3)
+var _fnRbEvalCmd func(int, int, int) int
+
+// RbEvalCmd calls the Ruby framework function rb_eval_cmd.
+func RbEvalCmd(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbEvalCmd == nil {
+		ebipurego.RegisterLibFunc(&_fnRbEvalCmd, _lib, "rb_eval_cmd")
+	}
+	return _fnRbEvalCmd(arg, arg2, arg3)
 }
 
-// RbEvalString calls [raw.RbEvalString] (C function rb_eval_string).
-func RbEvalString(arg string) uint {
-	return raw.RbEvalString(arg)
+var _fnRbEvalString func(string) int
+
+// RbEvalString calls the Ruby framework function rb_eval_string.
+func RbEvalString(arg string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbEvalString == nil {
+		ebipurego.RegisterLibFunc(&_fnRbEvalString, _lib, "rb_eval_string")
+	}
+	return _fnRbEvalString(arg)
 }
 
-// RbEvalStringProtect calls [raw.RbEvalStringProtect] (C function rb_eval_string_protect).
-func RbEvalStringProtect(arg string, arg2 *int32) uint {
-	return raw.RbEvalStringProtect(arg, arg2)
+var _fnRbExcFatal func(int)
+
+// RbExcFatal calls the Ruby framework function rb_exc_fatal.
+func RbExcFatal(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbExcFatal == nil {
+		ebipurego.RegisterLibFunc(&_fnRbExcFatal, _lib, "rb_exc_fatal")
+	}
+	_fnRbExcFatal(arg)
 }
 
-// RbEvalStringWrap calls [raw.RbEvalStringWrap] (C function rb_eval_string_wrap).
-func RbEvalStringWrap(arg string, arg2 *int32) uint {
-	return raw.RbEvalStringWrap(arg, arg2)
+var _fnRbExcNew func(int, string, int) int
+
+// RbExcNew calls the Ruby framework function rb_exc_new.
+func RbExcNew(arg int, arg2 string, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbExcNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbExcNew, _lib, "rb_exc_new")
+	}
+	return _fnRbExcNew(arg, arg2, arg3)
 }
 
-// RbExcFatal calls [raw.RbExcFatal] (C function rb_exc_fatal).
-func RbExcFatal(arg uint) {
-	raw.RbExcFatal(arg)
+var _fnRbExcNewCstr func(int, string) int
+
+// RbExcNewCstr calls the Ruby framework function rb_exc_new_cstr.
+func RbExcNewCstr(arg int, arg2 string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbExcNewCstr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbExcNewCstr, _lib, "rb_exc_new_cstr")
+	}
+	return _fnRbExcNewCstr(arg, arg2)
 }
 
-// RbExcNew calls [raw.RbExcNew] (C function rb_exc_new).
-func RbExcNew(arg uint, arg2 string, arg3 int) uint {
-	return raw.RbExcNew(arg, arg2, arg3)
+var _fnRbExcNewStr func(int, int) int
+
+// RbExcNewStr calls the Ruby framework function rb_exc_new_str.
+func RbExcNewStr(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbExcNewStr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbExcNewStr, _lib, "rb_exc_new_str")
+	}
+	return _fnRbExcNewStr(arg, arg2)
 }
 
-// RbExcNewCstr calls [raw.RbExcNewCstr] (C function rb_exc_new_cstr).
-func RbExcNewCstr(arg uint, arg2 string) uint {
-	return raw.RbExcNewCstr(arg, arg2)
+var _fnRbExcRaise func(int)
+
+// RbExcRaise calls the Ruby framework function rb_exc_raise.
+func RbExcRaise(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbExcRaise == nil {
+		ebipurego.RegisterLibFunc(&_fnRbExcRaise, _lib, "rb_exc_raise")
+	}
+	_fnRbExcRaise(arg)
 }
 
-// RbExcNewStr calls [raw.RbExcNewStr] (C function rb_exc_new_str).
-func RbExcNewStr(arg uint, arg2 uint) uint {
-	return raw.RbExcNewStr(arg, arg2)
-}
+var _fnRbExecEndProc func()
 
-// RbExcRaise calls [raw.RbExcRaise] (C function rb_exc_raise).
-func RbExcRaise(arg uint) {
-	raw.RbExcRaise(arg)
-}
-
-// RbExecEndProc calls [raw.RbExecEndProc] (C function rb_exec_end_proc).
+// RbExecEndProc calls the Ruby framework function rb_exec_end_proc.
 func RbExecEndProc() {
-	raw.RbExecEndProc()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbExecEndProc == nil {
+		ebipurego.RegisterLibFunc(&_fnRbExecEndProc, _lib, "rb_exec_end_proc")
+	}
+	_fnRbExecEndProc()
 }
 
-// RbExecRecursive calls [raw.RbExecRecursive] (C function rb_exec_recursive).
-func RbExecRecursive(arg unsafe.Pointer, arg2 uint, arg3 uint) uint {
-	return raw.RbExecRecursive(arg, arg2, arg3)
-}
+var _fnRbExit func(int)
 
-// RbExecRecursiveOuter calls [raw.RbExecRecursiveOuter] (C function rb_exec_recursive_outer).
-func RbExecRecursiveOuter(arg unsafe.Pointer, arg2 uint, arg3 uint) uint {
-	return raw.RbExecRecursiveOuter(arg, arg2, arg3)
-}
-
-// RbExecRecursivePaired calls [raw.RbExecRecursivePaired] (C function rb_exec_recursive_paired).
-func RbExecRecursivePaired(arg unsafe.Pointer, arg2 uint, arg3 uint, arg4 uint) uint {
-	return raw.RbExecRecursivePaired(arg, arg2, arg3, arg4)
-}
-
-// RbExecRecursivePairedOuter calls [raw.RbExecRecursivePairedOuter] (C function rb_exec_recursive_paired_outer).
-func RbExecRecursivePairedOuter(arg unsafe.Pointer, arg2 uint, arg3 uint, arg4 uint) uint {
-	return raw.RbExecRecursivePairedOuter(arg, arg2, arg3, arg4)
-}
-
-// RbExit calls [raw.RbExit] (C function rb_exit).
+// RbExit calls the Ruby framework function rb_exit.
 func RbExit(arg int) {
-	raw.RbExit(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbExit == nil {
+		ebipurego.RegisterLibFunc(&_fnRbExit, _lib, "rb_exit")
+	}
+	_fnRbExit(arg)
 }
 
-// RbExtendObject calls [raw.RbExtendObject] (C function rb_extend_object).
-func RbExtendObject(arg uint, arg2 uint) {
-	raw.RbExtendObject(arg, arg2)
+var _fnRbExtendObject func(int, int)
+
+// RbExtendObject calls the Ruby framework function rb_extend_object.
+func RbExtendObject(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbExtendObject == nil {
+		ebipurego.RegisterLibFunc(&_fnRbExtendObject, _lib, "rb_extend_object")
+	}
+	_fnRbExtendObject(arg, arg2)
 }
 
-// RbExternalStrNew calls [raw.RbExternalStrNew] (C function rb_external_str_new).
-func RbExternalStrNew(arg string, arg2 int) uint {
-	return raw.RbExternalStrNew(arg, arg2)
+var _fnRbExternalStrNew func(string, int) int
+
+// RbExternalStrNew calls the Ruby framework function rb_external_str_new.
+func RbExternalStrNew(arg string, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbExternalStrNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbExternalStrNew, _lib, "rb_external_str_new")
+	}
+	return _fnRbExternalStrNew(arg, arg2)
 }
 
-// RbExternalStrNewCstr calls [raw.RbExternalStrNewCstr] (C function rb_external_str_new_cstr).
-func RbExternalStrNewCstr(arg string) uint {
-	return raw.RbExternalStrNewCstr(arg)
+var _fnRbExternalStrNewCstr func(string) int
+
+// RbExternalStrNewCstr calls the Ruby framework function rb_external_str_new_cstr.
+func RbExternalStrNewCstr(arg string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbExternalStrNewCstr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbExternalStrNewCstr, _lib, "rb_external_str_new_cstr")
+	}
+	return _fnRbExternalStrNewCstr(arg)
 }
 
-// RbExtractKeywords calls [raw.RbExtractKeywords] (C function rb_extract_keywords).
-func RbExtractKeywords(orighash *uint) uint {
-	return raw.RbExtractKeywords(orighash)
+var _fnRbFGlobalVariables func() int
+
+// RbFGlobalVariables calls the Ruby framework function rb_f_global_variables.
+func RbFGlobalVariables() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFGlobalVariables == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFGlobalVariables, _lib, "rb_f_global_variables")
+	}
+	return _fnRbFGlobalVariables()
 }
 
-// RbFAbort calls [raw.RbFAbort] (C function rb_f_abort).
-func RbFAbort(arg int, arg2 *uint) uint {
-	return raw.RbFAbort(arg, arg2)
+var _fnRbFRequire func(int, int) int
+
+// RbFRequire calls the Ruby framework function rb_f_require.
+func RbFRequire(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFRequire == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFRequire, _lib, "rb_f_require")
+	}
+	return _fnRbFRequire(arg, arg2)
 }
 
-// RbFExec calls [raw.RbFExec] (C function rb_f_exec).
-func RbFExec(arg int, arg2 *uint) uint {
-	return raw.RbFExec(arg, arg2)
-}
+var _fnRbFdFixCloexec func(int)
 
-// RbFExit calls [raw.RbFExit] (C function rb_f_exit).
-func RbFExit(arg int, arg2 *uint) uint {
-	return raw.RbFExit(arg, arg2)
-}
-
-// RbFGlobalVariables calls [raw.RbFGlobalVariables] (C function rb_f_global_variables).
-func RbFGlobalVariables() uint {
-	return raw.RbFGlobalVariables()
-}
-
-// RbFKill calls [raw.RbFKill] (C function rb_f_kill).
-func RbFKill(arg int, arg2 *uint) uint {
-	return raw.RbFKill(arg, arg2)
-}
-
-// RbFNotimplement calls [raw.RbFNotimplement] (C function rb_f_notimplement).
-func RbFNotimplement(argc int, argv *uint, obj uint) uint {
-	return raw.RbFNotimplement(argc, argv, obj)
-}
-
-// RbFRequire calls [raw.RbFRequire] (C function rb_f_require).
-func RbFRequire(arg uint, arg2 uint) uint {
-	return raw.RbFRequire(arg, arg2)
-}
-
-// RbFSprintf calls [raw.RbFSprintf] (C function rb_f_sprintf).
-func RbFSprintf(arg int, arg2 *uint) uint {
-	return raw.RbFSprintf(arg, arg2)
-}
-
-// RbFTraceVar calls [raw.RbFTraceVar] (C function rb_f_trace_var).
-func RbFTraceVar(arg int, arg2 *uint) uint {
-	return raw.RbFTraceVar(arg, arg2)
-}
-
-// RbFUntraceVar calls [raw.RbFUntraceVar] (C function rb_f_untrace_var).
-func RbFUntraceVar(arg int, arg2 *uint) uint {
-	return raw.RbFUntraceVar(arg, arg2)
-}
-
-// RbFdClr calls [raw.RbFdClr] (C function rb_fd_clr).
-func RbFdClr(arg int, arg2 *raw.RbFdsetT) {
-	raw.RbFdClr(arg, arg2)
-}
-
-// RbFdCopy calls [raw.RbFdCopy] (C function rb_fd_copy).
-func RbFdCopy(arg *raw.RbFdsetT, arg2 unsafe.Pointer, arg3 int) {
-	raw.RbFdCopy(arg, arg2, arg3)
-}
-
-// RbFdDup calls [raw.RbFdDup] (C function rb_fd_dup).
-func RbFdDup(dst *raw.RbFdsetT, src *raw.RbFdsetT) {
-	raw.RbFdDup(dst, src)
-}
-
-// RbFdFixCloexec calls [raw.RbFdFixCloexec] (C function rb_fd_fix_cloexec).
+// RbFdFixCloexec calls the Ruby framework function rb_fd_fix_cloexec.
 func RbFdFixCloexec(fd int) {
-	raw.RbFdFixCloexec(fd)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFdFixCloexec == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFdFixCloexec, _lib, "rb_fd_fix_cloexec")
+	}
+	_fnRbFdFixCloexec(fd)
 }
 
-// RbFdInit calls [raw.RbFdInit] (C function rb_fd_init).
-func RbFdInit(arg *raw.RbFdsetT) {
-	raw.RbFdInit(arg)
-}
+var _fnRbFeatureProvided func(string, string) int
 
-// RbFdIsset calls [raw.RbFdIsset] (C function rb_fd_isset).
-func RbFdIsset(arg int, arg2 *raw.RbFdsetT) int {
-	return raw.RbFdIsset(arg, arg2)
-}
-
-// RbFdSelect calls [raw.RbFdSelect] (C function rb_fd_select).
-func RbFdSelect(arg int, arg2 *raw.RbFdsetT, arg3 *raw.RbFdsetT, arg4 *raw.RbFdsetT, arg5 unsafe.Pointer) int {
-	return raw.RbFdSelect(arg, arg2, arg3, arg4, arg5)
-}
-
-// RbFdSet calls [raw.RbFdSet] (C function rb_fd_set).
-func RbFdSet(arg int, arg2 *raw.RbFdsetT) {
-	raw.RbFdSet(arg, arg2)
-}
-
-// RbFdTerm calls [raw.RbFdTerm] (C function rb_fd_term).
-func RbFdTerm(arg *raw.RbFdsetT) {
-	raw.RbFdTerm(arg)
-}
-
-// RbFdZero calls [raw.RbFdZero] (C function rb_fd_zero).
-func RbFdZero(arg *raw.RbFdsetT) {
-	raw.RbFdZero(arg)
-}
-
-// RbFeatureProvided calls [raw.RbFeatureProvided] (C function rb_feature_provided).
+// RbFeatureProvided calls the Ruby framework function rb_feature_provided.
 func RbFeatureProvided(arg string, arg2 string) int {
-	return raw.RbFeatureProvided(arg, arg2)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFeatureProvided == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFeatureProvided, _lib, "rb_feature_provided")
+	}
+	return _fnRbFeatureProvided(arg, arg2)
 }
 
-// RbFiberAliveP calls [raw.RbFiberAliveP] (C function rb_fiber_alive_p).
-func RbFiberAliveP(arg uint) uint {
-	return raw.RbFiberAliveP(arg)
+var _fnRbFiberAliveP func(int) int
+
+// RbFiberAliveP calls the Ruby framework function rb_fiber_alive_p.
+func RbFiberAliveP(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFiberAliveP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFiberAliveP, _lib, "rb_fiber_alive_p")
+	}
+	return _fnRbFiberAliveP(arg)
 }
 
-// RbFiberCurrent calls [raw.RbFiberCurrent] (C function rb_fiber_current).
-func RbFiberCurrent() uint {
-	return raw.RbFiberCurrent()
+var _fnRbFiberCurrent func() int
+
+// RbFiberCurrent calls the Ruby framework function rb_fiber_current.
+func RbFiberCurrent() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFiberCurrent == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFiberCurrent, _lib, "rb_fiber_current")
+	}
+	return _fnRbFiberCurrent()
 }
 
-// RbFiberNew calls [raw.RbFiberNew] (C function rb_fiber_new).
-func RbFiberNew(arg unsafe.Pointer, arg2 uint) uint {
-	return raw.RbFiberNew(arg, arg2)
+var _fnRbFileAbsolutePath func(int, int) int
+
+// RbFileAbsolutePath calls the Ruby framework function rb_file_absolute_path.
+func RbFileAbsolutePath(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFileAbsolutePath == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFileAbsolutePath, _lib, "rb_file_absolute_path")
+	}
+	return _fnRbFileAbsolutePath(arg, arg2)
 }
 
-// RbFiberResume calls [raw.RbFiberResume] (C function rb_fiber_resume).
-func RbFiberResume(fib uint, argc int, argv *uint) uint {
-	return raw.RbFiberResume(fib, argc, argv)
+var _fnRbFileDirectoryP func(int, int) int
+
+// RbFileDirectoryP calls the Ruby framework function rb_file_directory_p.
+func RbFileDirectoryP(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFileDirectoryP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFileDirectoryP, _lib, "rb_file_directory_p")
+	}
+	return _fnRbFileDirectoryP(arg, arg2)
 }
 
-// RbFiberYield calls [raw.RbFiberYield] (C function rb_fiber_yield).
-func RbFiberYield(argc int, argv *uint) uint {
-	return raw.RbFiberYield(argc, argv)
+var _fnRbFileDirname func(int) int
+
+// RbFileDirname calls the Ruby framework function rb_file_dirname.
+func RbFileDirname(fname int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFileDirname == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFileDirname, _lib, "rb_file_dirname")
+	}
+	return _fnRbFileDirname(fname)
 }
 
-// RbFileAbsolutePath calls [raw.RbFileAbsolutePath] (C function rb_file_absolute_path).
-func RbFileAbsolutePath(arg uint, arg2 uint) uint {
-	return raw.RbFileAbsolutePath(arg, arg2)
+var _fnRbFileExpandPath func(int, int) int
+
+// RbFileExpandPath calls the Ruby framework function rb_file_expand_path.
+func RbFileExpandPath(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFileExpandPath == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFileExpandPath, _lib, "rb_file_expand_path")
+	}
+	return _fnRbFileExpandPath(arg, arg2)
 }
 
-// RbFileDirectoryP calls [raw.RbFileDirectoryP] (C function rb_file_directory_p).
-func RbFileDirectoryP(arg uint, arg2 uint) uint {
-	return raw.RbFileDirectoryP(arg, arg2)
+var _fnRbFileOpen func(string, string) int
+
+// RbFileOpen calls the Ruby framework function rb_file_open.
+func RbFileOpen(arg string, arg2 string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFileOpen == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFileOpen, _lib, "rb_file_open")
+	}
+	return _fnRbFileOpen(arg, arg2)
 }
 
-// RbFileDirname calls [raw.RbFileDirname] (C function rb_file_dirname).
-func RbFileDirname(fname uint) uint {
-	return raw.RbFileDirname(fname)
+var _fnRbFileOpenStr func(int, string) int
+
+// RbFileOpenStr calls the Ruby framework function rb_file_open_str.
+func RbFileOpenStr(arg int, arg2 string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFileOpenStr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFileOpenStr, _lib, "rb_file_open_str")
+	}
+	return _fnRbFileOpenStr(arg, arg2)
 }
 
-// RbFileExpandPath calls [raw.RbFileExpandPath] (C function rb_file_expand_path).
-func RbFileExpandPath(arg uint, arg2 uint) uint {
-	return raw.RbFileExpandPath(arg, arg2)
+var _fnRbFilesystemStrNew func(string, int) int
+
+// RbFilesystemStrNew calls the Ruby framework function rb_filesystem_str_new.
+func RbFilesystemStrNew(arg string, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFilesystemStrNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFilesystemStrNew, _lib, "rb_filesystem_str_new")
+	}
+	return _fnRbFilesystemStrNew(arg, arg2)
 }
 
-// RbFileOpen calls [raw.RbFileOpen] (C function rb_file_open).
-func RbFileOpen(arg string, arg2 string) uint {
-	return raw.RbFileOpen(arg, arg2)
+var _fnRbFilesystemStrNewCstr func(string) int
+
+// RbFilesystemStrNewCstr calls the Ruby framework function rb_filesystem_str_new_cstr.
+func RbFilesystemStrNewCstr(arg string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFilesystemStrNewCstr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFilesystemStrNewCstr, _lib, "rb_filesystem_str_new_cstr")
+	}
+	return _fnRbFilesystemStrNewCstr(arg)
 }
 
-// RbFileOpenStr calls [raw.RbFileOpenStr] (C function rb_file_open_str).
-func RbFileOpenStr(arg uint, arg2 string) uint {
-	return raw.RbFileOpenStr(arg, arg2)
+var _fnRbFindFile func(int) int
+
+// RbFindFile calls the Ruby framework function rb_find_file.
+func RbFindFile(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFindFile == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFindFile, _lib, "rb_find_file")
+	}
+	return _fnRbFindFile(arg)
 }
 
-// RbFileSAbsolutePath calls [raw.RbFileSAbsolutePath] (C function rb_file_s_absolute_path).
-func RbFileSAbsolutePath(arg int, arg2 *uint) uint {
-	return raw.RbFileSAbsolutePath(arg, arg2)
+var _fnRbFindFileSafe func(int, int) int
+
+// RbFindFileSafe calls the Ruby framework function rb_find_file_safe.
+func RbFindFileSafe(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFindFileSafe == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFindFileSafe, _lib, "rb_find_file_safe")
+	}
+	return _fnRbFindFileSafe(arg, arg2)
 }
 
-// RbFileSExpandPath calls [raw.RbFileSExpandPath] (C function rb_file_s_expand_path).
-func RbFileSExpandPath(arg int, arg2 *uint) uint {
-	return raw.RbFileSExpandPath(arg, arg2)
+var _fnRbFix2int func(int) int
+
+// RbFix2int calls the Ruby framework function rb_fix2int.
+func RbFix2int(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFix2int == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFix2int, _lib, "rb_fix2int")
+	}
+	return _fnRbFix2int(arg)
 }
 
-// RbFilesystemStrNew calls [raw.RbFilesystemStrNew] (C function rb_filesystem_str_new).
-func RbFilesystemStrNew(arg string, arg2 int) uint {
-	return raw.RbFilesystemStrNew(arg, arg2)
+var _fnRbFix2long func(int) int
+
+// RbFix2long calls the Ruby framework function rb_fix2long.
+func RbFix2long(x int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFix2long == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFix2long, _lib, "rb_fix2long")
+	}
+	return _fnRbFix2long(x)
 }
 
-// RbFilesystemStrNewCstr calls [raw.RbFilesystemStrNewCstr] (C function rb_filesystem_str_new_cstr).
-func RbFilesystemStrNewCstr(arg string) uint {
-	return raw.RbFilesystemStrNewCstr(arg)
+var _fnRbFix2short func(int) int16
+
+// RbFix2short calls the Ruby framework function rb_fix2short.
+func RbFix2short(arg int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFix2short == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFix2short, _lib, "rb_fix2short")
+	}
+	return _fnRbFix2short(arg)
 }
 
-// RbFindFile calls [raw.RbFindFile] (C function rb_find_file).
-func RbFindFile(arg uint) uint {
-	return raw.RbFindFile(arg)
+var _fnRbFix2str func(int, int) int
+
+// RbFix2str calls the Ruby framework function rb_fix2str.
+func RbFix2str(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFix2str == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFix2str, _lib, "rb_fix2str")
+	}
+	return _fnRbFix2str(arg, arg2)
 }
 
-// RbFindFileExt calls [raw.RbFindFileExt] (C function rb_find_file_ext).
-func RbFindFileExt(arg *uint, arg2 unsafe.Pointer) int {
-	return raw.RbFindFileExt(arg, arg2)
+var _fnRbFix2uint func(int) int
+
+// RbFix2uint calls the Ruby framework function rb_fix2uint.
+func RbFix2uint(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFix2uint == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFix2uint, _lib, "rb_fix2uint")
+	}
+	return _fnRbFix2uint(arg)
 }
 
-// RbFindFileExtSafe calls [raw.RbFindFileExtSafe] (C function rb_find_file_ext_safe).
-func RbFindFileExtSafe(arg *uint, arg2 unsafe.Pointer, arg3 int) int {
-	return raw.RbFindFileExtSafe(arg, arg2, arg3)
+var _fnRbFix2ulong func(int) int
+
+// RbFix2ulong calls the Ruby framework function rb_fix2ulong.
+func RbFix2ulong(x int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFix2ulong == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFix2ulong, _lib, "rb_fix2ulong")
+	}
+	return _fnRbFix2ulong(x)
 }
 
-// RbFindFileSafe calls [raw.RbFindFileSafe] (C function rb_find_file_safe).
-func RbFindFileSafe(arg uint, arg2 int) uint {
-	return raw.RbFindFileSafe(arg, arg2)
+var _fnRbFix2ushort func(int) uint16
+
+// RbFix2ushort calls the Ruby framework function rb_fix2ushort.
+func RbFix2ushort(arg int) uint16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFix2ushort == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFix2ushort, _lib, "rb_fix2ushort")
+	}
+	return _fnRbFix2ushort(arg)
 }
 
-// RbFix2int calls [raw.RbFix2int] (C function rb_fix2int).
-func RbFix2int(arg uint) int {
-	return raw.RbFix2int(arg)
+var _fnRbFloatNew func(float64) int
+
+// RbFloatNew calls the Ruby framework function rb_float_new.
+func RbFloatNew(arg float64) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFloatNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFloatNew, _lib, "rb_float_new")
+	}
+	return _fnRbFloatNew(arg)
 }
 
-// RbFix2long calls [raw.RbFix2long] (C function rb_fix2long).
-func RbFix2long(x uint) int {
-	return raw.RbFix2long(x)
+var _fnRbFloatNewInHeap func(float64) int
+
+// RbFloatNewInHeap calls the Ruby framework function rb_float_new_in_heap.
+func RbFloatNewInHeap(arg float64) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFloatNewInHeap == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFloatNewInHeap, _lib, "rb_float_new_in_heap")
+	}
+	return _fnRbFloatNewInHeap(arg)
 }
 
-// RbFix2short calls [raw.RbFix2short] (C function rb_fix2short).
-func RbFix2short(arg uint) int16 {
-	return raw.RbFix2short(arg)
+var _fnRbFloatValue func(int) float64
+
+// RbFloatValue calls the Ruby framework function rb_float_value.
+func RbFloatValue(arg int) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFloatValue == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFloatValue, _lib, "rb_float_value")
+	}
+	return _fnRbFloatValue(arg)
 }
 
-// RbFix2str calls [raw.RbFix2str] (C function rb_fix2str).
-func RbFix2str(arg uint, arg2 int) uint {
-	return raw.RbFix2str(arg, arg2)
+var _fnRbFltRationalize func(int) int
+
+// RbFltRationalize calls the Ruby framework function rb_flt_rationalize.
+func RbFltRationalize(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFltRationalize == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFltRationalize, _lib, "rb_flt_rationalize")
+	}
+	return _fnRbFltRationalize(arg)
 }
 
-// RbFix2uint calls [raw.RbFix2uint] (C function rb_fix2uint).
-func RbFix2uint(arg uint) uint {
-	return raw.RbFix2uint(arg)
+var _fnRbFltRationalizeWithPrec func(int, int) int
+
+// RbFltRationalizeWithPrec calls the Ruby framework function rb_flt_rationalize_with_prec.
+func RbFltRationalizeWithPrec(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFltRationalizeWithPrec == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFltRationalizeWithPrec, _lib, "rb_flt_rationalize_with_prec")
+	}
+	return _fnRbFltRationalizeWithPrec(arg, arg2)
 }
 
-// RbFix2ulong calls [raw.RbFix2ulong] (C function rb_fix2ulong).
-func RbFix2ulong(x uint) uint {
-	return raw.RbFix2ulong(x)
+var _fnRbFrameCallee func() int
+
+// RbFrameCallee calls the Ruby framework function rb_frame_callee.
+func RbFrameCallee() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFrameCallee == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFrameCallee, _lib, "rb_frame_callee")
+	}
+	return _fnRbFrameCallee()
 }
 
-// RbFix2ushort calls [raw.RbFix2ushort] (C function rb_fix2ushort).
-func RbFix2ushort(arg uint) uint16 {
-	return raw.RbFix2ushort(arg)
-}
+var _fnRbFramePop func()
 
-// RbFloatNew calls [raw.RbFloatNew] (C function rb_float_new).
-func RbFloatNew(arg float64) uint {
-	return raw.RbFloatNew(arg)
-}
-
-// RbFloatNewInHeap calls [raw.RbFloatNewInHeap] (C function rb_float_new_in_heap).
-func RbFloatNewInHeap(arg float64) uint {
-	return raw.RbFloatNewInHeap(arg)
-}
-
-// RbFloatValue calls [raw.RbFloatValue] (C function rb_float_value).
-func RbFloatValue(arg uint) float64 {
-	return raw.RbFloatValue(arg)
-}
-
-// RbFltRationalize calls [raw.RbFltRationalize] (C function rb_flt_rationalize).
-func RbFltRationalize(arg uint) uint {
-	return raw.RbFltRationalize(arg)
-}
-
-// RbFltRationalizeWithPrec calls [raw.RbFltRationalizeWithPrec] (C function rb_flt_rationalize_with_prec).
-func RbFltRationalizeWithPrec(arg uint, arg2 uint) uint {
-	return raw.RbFltRationalizeWithPrec(arg, arg2)
-}
-
-// RbFrameCallee calls [raw.RbFrameCallee] (C function rb_frame_callee).
-func RbFrameCallee() uint {
-	return raw.RbFrameCallee()
-}
-
-// RbFrameMethodIdAndClass calls [raw.RbFrameMethodIdAndClass] (C function rb_frame_method_id_and_class).
-func RbFrameMethodIdAndClass(idp *uint, klassp *uint) int {
-	return raw.RbFrameMethodIdAndClass(idp, klassp)
-}
-
-// RbFramePop calls [raw.RbFramePop] (C function rb_frame_pop).
+// RbFramePop calls the Ruby framework function rb_frame_pop.
 func RbFramePop() {
-	raw.RbFramePop()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFramePop == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFramePop, _lib, "rb_frame_pop")
+	}
+	_fnRbFramePop()
 }
 
-// RbFrameThisFunc calls [raw.RbFrameThisFunc] (C function rb_frame_this_func).
-func RbFrameThisFunc() uint {
-	return raw.RbFrameThisFunc()
+var _fnRbFrameThisFunc func() int
+
+// RbFrameThisFunc calls the Ruby framework function rb_frame_this_func.
+func RbFrameThisFunc() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFrameThisFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFrameThisFunc, _lib, "rb_frame_this_func")
+	}
+	return _fnRbFrameThisFunc()
 }
 
-// RbFreeGenericIvar calls [raw.RbFreeGenericIvar] (C function rb_free_generic_ivar).
-func RbFreeGenericIvar(arg uint) {
-	raw.RbFreeGenericIvar(arg)
+var _fnRbFreeGenericIvar func(int)
+
+// RbFreeGenericIvar calls the Ruby framework function rb_free_generic_ivar.
+func RbFreeGenericIvar(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFreeGenericIvar == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFreeGenericIvar, _lib, "rb_free_generic_ivar")
+	}
+	_fnRbFreeGenericIvar(arg)
 }
 
-// RbFreeTmpBuffer calls [raw.RbFreeTmpBuffer] (C function rb_free_tmp_buffer).
-func RbFreeTmpBuffer(store unsafe.Pointer) {
-	raw.RbFreeTmpBuffer(store)
+var _fnRbFreezeSingletonClass func(int)
+
+// RbFreezeSingletonClass calls the Ruby framework function rb_freeze_singleton_class.
+func RbFreezeSingletonClass(klass int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFreezeSingletonClass == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFreezeSingletonClass, _lib, "rb_freeze_singleton_class")
+	}
+	_fnRbFreezeSingletonClass(klass)
 }
 
-// RbFreezeSingletonClass calls [raw.RbFreezeSingletonClass] (C function rb_freeze_singleton_class).
-func RbFreezeSingletonClass(klass uint) {
-	raw.RbFreezeSingletonClass(klass)
+var _fnRbFrozenClassP func(int)
+
+// RbFrozenClassP calls the Ruby framework function rb_frozen_class_p.
+func RbFrozenClassP(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbFrozenClassP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbFrozenClassP, _lib, "rb_frozen_class_p")
+	}
+	_fnRbFrozenClassP(arg)
 }
 
-// RbFrozenClassP calls [raw.RbFrozenClassP] (C function rb_frozen_class_p).
-func RbFrozenClassP(arg uint) {
-	raw.RbFrozenClassP(arg)
-}
+var _fnRbGc func()
 
-// RbFuncallPassingBlock calls [raw.RbFuncallPassingBlock] (C function rb_funcall_passing_block).
-func RbFuncallPassingBlock(arg uint, arg2 uint, arg3 int, arg4 *uint) uint {
-	return raw.RbFuncallPassingBlock(arg, arg2, arg3, arg4)
-}
-
-// RbFuncallWithBlock calls [raw.RbFuncallWithBlock] (C function rb_funcall_with_block).
-func RbFuncallWithBlock(arg uint, arg2 uint, arg3 int, arg4 *uint, arg5 uint) uint {
-	return raw.RbFuncallWithBlock(arg, arg2, arg3, arg4, arg5)
-}
-
-// RbFuncallv calls [raw.RbFuncallv] (C function rb_funcallv).
-func RbFuncallv(arg uint, arg2 uint, arg3 int, arg4 *uint) uint {
-	return raw.RbFuncallv(arg, arg2, arg3, arg4)
-}
-
-// RbFuncallvPublic calls [raw.RbFuncallvPublic] (C function rb_funcallv_public).
-func RbFuncallvPublic(arg uint, arg2 uint, arg3 int, arg4 *uint) uint {
-	return raw.RbFuncallvPublic(arg, arg2, arg3, arg4)
-}
-
-// RbGc calls [raw.RbGc] (C function rb_gc).
+// RbGc calls the Ruby framework function rb_gc.
 func RbGc() {
-	raw.RbGc()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGc == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGc, _lib, "rb_gc")
+	}
+	_fnRbGc()
 }
 
-// RbGcAdjustMemoryUsage calls [raw.RbGcAdjustMemoryUsage] (C function rb_gc_adjust_memory_usage).
+var _fnRbGcAdjustMemoryUsage func(int)
+
+// RbGcAdjustMemoryUsage calls the Ruby framework function rb_gc_adjust_memory_usage.
 func RbGcAdjustMemoryUsage(arg int) {
-	raw.RbGcAdjustMemoryUsage(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGcAdjustMemoryUsage == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGcAdjustMemoryUsage, _lib, "rb_gc_adjust_memory_usage")
+	}
+	_fnRbGcAdjustMemoryUsage(arg)
 }
 
-// RbGcCallFinalizerAtExit calls [raw.RbGcCallFinalizerAtExit] (C function rb_gc_call_finalizer_at_exit).
+var _fnRbGcCallFinalizerAtExit func()
+
+// RbGcCallFinalizerAtExit calls the Ruby framework function rb_gc_call_finalizer_at_exit.
 func RbGcCallFinalizerAtExit() {
-	raw.RbGcCallFinalizerAtExit()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGcCallFinalizerAtExit == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGcCallFinalizerAtExit, _lib, "rb_gc_call_finalizer_at_exit")
+	}
+	_fnRbGcCallFinalizerAtExit()
 }
 
-// RbGcCopyFinalizer calls [raw.RbGcCopyFinalizer] (C function rb_gc_copy_finalizer).
-func RbGcCopyFinalizer(arg uint, arg2 uint) {
-	raw.RbGcCopyFinalizer(arg, arg2)
+var _fnRbGcCopyFinalizer func(int, int)
+
+// RbGcCopyFinalizer calls the Ruby framework function rb_gc_copy_finalizer.
+func RbGcCopyFinalizer(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGcCopyFinalizer == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGcCopyFinalizer, _lib, "rb_gc_copy_finalizer")
+	}
+	_fnRbGcCopyFinalizer(arg, arg2)
 }
 
-// RbGcCount calls [raw.RbGcCount] (C function rb_gc_count).
-func RbGcCount() uint {
-	return raw.RbGcCount()
+var _fnRbGcCount func() int
+
+// RbGcCount calls the Ruby framework function rb_gc_count.
+func RbGcCount() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGcCount == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGcCount, _lib, "rb_gc_count")
+	}
+	return _fnRbGcCount()
 }
 
-// RbGcDisable calls [raw.RbGcDisable] (C function rb_gc_disable).
-func RbGcDisable() uint {
-	return raw.RbGcDisable()
+var _fnRbGcDisable func() int
+
+// RbGcDisable calls the Ruby framework function rb_gc_disable.
+func RbGcDisable() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGcDisable == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGcDisable, _lib, "rb_gc_disable")
+	}
+	return _fnRbGcDisable()
 }
 
-// RbGcEnable calls [raw.RbGcEnable] (C function rb_gc_enable).
-func RbGcEnable() uint {
-	return raw.RbGcEnable()
+var _fnRbGcEnable func() int
+
+// RbGcEnable calls the Ruby framework function rb_gc_enable.
+func RbGcEnable() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGcEnable == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGcEnable, _lib, "rb_gc_enable")
+	}
+	return _fnRbGcEnable()
 }
 
-// RbGcFinalizeDeferred calls [raw.RbGcFinalizeDeferred] (C function rb_gc_finalize_deferred).
+var _fnRbGcFinalizeDeferred func()
+
+// RbGcFinalizeDeferred calls the Ruby framework function rb_gc_finalize_deferred.
 func RbGcFinalizeDeferred() {
-	raw.RbGcFinalizeDeferred()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGcFinalizeDeferred == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGcFinalizeDeferred, _lib, "rb_gc_finalize_deferred")
+	}
+	_fnRbGcFinalizeDeferred()
 }
 
-// RbGcForceRecycle calls [raw.RbGcForceRecycle] (C function rb_gc_force_recycle).
-func RbGcForceRecycle(arg uint) {
-	raw.RbGcForceRecycle(arg)
+var _fnRbGcForceRecycle func(int)
+
+// RbGcForceRecycle calls the Ruby framework function rb_gc_force_recycle.
+func RbGcForceRecycle(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGcForceRecycle == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGcForceRecycle, _lib, "rb_gc_force_recycle")
+	}
+	_fnRbGcForceRecycle(arg)
 }
 
-// RbGcLatestGcInfo calls [raw.RbGcLatestGcInfo] (C function rb_gc_latest_gc_info).
-func RbGcLatestGcInfo(arg uint) uint {
-	return raw.RbGcLatestGcInfo(arg)
+var _fnRbGcLatestGcInfo func(int) int
+
+// RbGcLatestGcInfo calls the Ruby framework function rb_gc_latest_gc_info.
+func RbGcLatestGcInfo(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGcLatestGcInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGcLatestGcInfo, _lib, "rb_gc_latest_gc_info")
+	}
+	return _fnRbGcLatestGcInfo(arg)
 }
 
-// RbGcMark calls [raw.RbGcMark] (C function rb_gc_mark).
-func RbGcMark(arg uint) {
-	raw.RbGcMark(arg)
+var _fnRbGcMark func(int)
+
+// RbGcMark calls the Ruby framework function rb_gc_mark.
+func RbGcMark(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGcMark == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGcMark, _lib, "rb_gc_mark")
+	}
+	_fnRbGcMark(arg)
 }
 
-// RbGcMarkLocations calls [raw.RbGcMarkLocations] (C function rb_gc_mark_locations).
-func RbGcMarkLocations(arg *uint, arg2 *uint) {
-	raw.RbGcMarkLocations(arg, arg2)
+var _fnRbGcMarkMaybe func(int)
+
+// RbGcMarkMaybe calls the Ruby framework function rb_gc_mark_maybe.
+func RbGcMarkMaybe(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGcMarkMaybe == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGcMarkMaybe, _lib, "rb_gc_mark_maybe")
+	}
+	_fnRbGcMarkMaybe(arg)
 }
 
-// RbGcMarkMaybe calls [raw.RbGcMarkMaybe] (C function rb_gc_mark_maybe).
-func RbGcMarkMaybe(arg uint) {
-	raw.RbGcMarkMaybe(arg)
+var _fnRbGcRegisterMarkObject func(int)
+
+// RbGcRegisterMarkObject calls the Ruby framework function rb_gc_register_mark_object.
+func RbGcRegisterMarkObject(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGcRegisterMarkObject == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGcRegisterMarkObject, _lib, "rb_gc_register_mark_object")
+	}
+	_fnRbGcRegisterMarkObject(arg)
 }
 
-// RbGcRegisterAddress calls [raw.RbGcRegisterAddress] (C function rb_gc_register_address).
-func RbGcRegisterAddress(arg *uint) {
-	raw.RbGcRegisterAddress(arg)
+var _fnRbGcStart func() int
+
+// RbGcStart calls the Ruby framework function rb_gc_start.
+func RbGcStart() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGcStart == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGcStart, _lib, "rb_gc_start")
+	}
+	return _fnRbGcStart()
 }
 
-// RbGcRegisterMarkObject calls [raw.RbGcRegisterMarkObject] (C function rb_gc_register_mark_object).
-func RbGcRegisterMarkObject(arg uint) {
-	raw.RbGcRegisterMarkObject(arg)
+var _fnRbGcStat func(int) int
+
+// RbGcStat calls the Ruby framework function rb_gc_stat.
+func RbGcStat(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGcStat == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGcStat, _lib, "rb_gc_stat")
+	}
+	return _fnRbGcStat(arg)
 }
 
-// RbGcStart calls [raw.RbGcStart] (C function rb_gc_start).
-func RbGcStart() uint {
-	return raw.RbGcStart()
+var _fnRbGcWritebarrier func(int, int)
+
+// RbGcWritebarrier calls the Ruby framework function rb_gc_writebarrier.
+func RbGcWritebarrier(a int, b int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGcWritebarrier == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGcWritebarrier, _lib, "rb_gc_writebarrier")
+	}
+	_fnRbGcWritebarrier(a, b)
 }
 
-// RbGcStat calls [raw.RbGcStat] (C function rb_gc_stat).
-func RbGcStat(arg uint) uint {
-	return raw.RbGcStat(arg)
+var _fnRbGcWritebarrierUnprotect func(int)
+
+// RbGcWritebarrierUnprotect calls the Ruby framework function rb_gc_writebarrier_unprotect.
+func RbGcWritebarrierUnprotect(obj_ int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGcWritebarrierUnprotect == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGcWritebarrierUnprotect, _lib, "rb_gc_writebarrier_unprotect")
+	}
+	_fnRbGcWritebarrierUnprotect(obj_)
 }
 
-// RbGcUnregisterAddress calls [raw.RbGcUnregisterAddress] (C function rb_gc_unregister_address).
-func RbGcUnregisterAddress(arg *uint) {
-	raw.RbGcUnregisterAddress(arg)
-}
+var _fnRbGenericIvarTable func()
 
-// RbGcWritebarrier calls [raw.RbGcWritebarrier] (C function rb_gc_writebarrier).
-func RbGcWritebarrier(a uint, b uint) {
-	raw.RbGcWritebarrier(a, b)
-}
-
-// RbGcWritebarrierUnprotect calls [raw.RbGcWritebarrierUnprotect] (C function rb_gc_writebarrier_unprotect).
-func RbGcWritebarrierUnprotect(obj uint) {
-	raw.RbGcWritebarrierUnprotect(obj)
-}
-
-// RbGenericIvarTable calls [raw.RbGenericIvarTable] (C function rb_generic_ivar_table).
+// RbGenericIvarTable calls the Ruby framework function rb_generic_ivar_table.
 func RbGenericIvarTable() {
-	raw.RbGenericIvarTable()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGenericIvarTable == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGenericIvarTable, _lib, "rb_generic_ivar_table")
+	}
+	_fnRbGenericIvarTable()
 }
 
-// RbGenrandInt32 calls [raw.RbGenrandInt32] (C function rb_genrand_int32).
-func RbGenrandInt32() uint {
-	return raw.RbGenrandInt32()
+var _fnRbGenrandInt32 func() int
+
+// RbGenrandInt32 calls the Ruby framework function rb_genrand_int32.
+func RbGenrandInt32() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGenrandInt32 == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGenrandInt32, _lib, "rb_genrand_int32")
+	}
+	return _fnRbGenrandInt32()
 }
 
-// RbGenrandReal calls [raw.RbGenrandReal] (C function rb_genrand_real).
+var _fnRbGenrandReal func() float64
+
+// RbGenrandReal calls the Ruby framework function rb_genrand_real.
 func RbGenrandReal() float64 {
-	return raw.RbGenrandReal()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGenrandReal == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGenrandReal, _lib, "rb_genrand_real")
+	}
+	return _fnRbGenrandReal()
 }
 
-// RbGenrandUlongLimited calls [raw.RbGenrandUlongLimited] (C function rb_genrand_ulong_limited).
-func RbGenrandUlongLimited(i uint) uint {
-	return raw.RbGenrandUlongLimited(i)
+var _fnRbGenrandUlongLimited func(int) int
+
+// RbGenrandUlongLimited calls the Ruby framework function rb_genrand_ulong_limited.
+func RbGenrandUlongLimited(i int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGenrandUlongLimited == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGenrandUlongLimited, _lib, "rb_genrand_ulong_limited")
+	}
+	return _fnRbGenrandUlongLimited(i)
 }
 
-// RbGetAllocFunc calls [raw.RbGetAllocFunc] (C function rb_get_alloc_func).
-func RbGetAllocFunc(arg uint) unsafe.Pointer {
-	return raw.RbGetAllocFunc(arg)
+var _fnRbGetArgv func() int
+
+// RbGetArgv calls the Ruby framework function rb_get_argv.
+func RbGetArgv() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGetArgv == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGetArgv, _lib, "rb_get_argv")
+	}
+	return _fnRbGetArgv()
 }
 
-// RbGetArgv calls [raw.RbGetArgv] (C function rb_get_argv).
-func RbGetArgv() uint {
-	return raw.RbGetArgv()
+var _fnRbGetPath func(int) int
+
+// RbGetPath calls the Ruby framework function rb_get_path.
+func RbGetPath(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGetPath == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGetPath, _lib, "rb_get_path")
+	}
+	return _fnRbGetPath(arg)
 }
 
-// RbGetKwargs calls [raw.RbGetKwargs] (C function rb_get_kwargs).
-func RbGetKwargs(keyword_hash uint, table *uint, required int, optional int, arg *uint) int {
-	return raw.RbGetKwargs(keyword_hash, table, required, optional, arg)
+var _fnRbGetPathNoChecksafe func(int) int
+
+// RbGetPathNoChecksafe calls the Ruby framework function rb_get_path_no_checksafe.
+func RbGetPathNoChecksafe(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGetPathNoChecksafe == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGetPathNoChecksafe, _lib, "rb_get_path_no_checksafe")
+	}
+	return _fnRbGetPathNoChecksafe(arg)
 }
 
-// RbGetPath calls [raw.RbGetPath] (C function rb_get_path).
-func RbGetPath(arg uint) uint {
-	return raw.RbGetPath(arg)
+var _fnRbGets func() int
+
+// RbGets calls the Ruby framework function rb_gets.
+func RbGets() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGets == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGets, _lib, "rb_gets")
+	}
+	return _fnRbGets()
 }
 
-// RbGetPathNoChecksafe calls [raw.RbGetPathNoChecksafe] (C function rb_get_path_no_checksafe).
-func RbGetPathNoChecksafe(arg uint) uint {
-	return raw.RbGetPathNoChecksafe(arg)
+var _fnRbGvGet func(string) int
+
+// RbGvGet calls the Ruby framework function rb_gv_get.
+func RbGvGet(arg string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGvGet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGvGet, _lib, "rb_gv_get")
+	}
+	return _fnRbGvGet(arg)
 }
 
-// RbGetValuesAt calls [raw.RbGetValuesAt] (C function rb_get_values_at).
-func RbGetValuesAt(arg uint, arg2 int, arg3 int, arg4 *uint, arg5 unsafe.Pointer) uint {
-	return raw.RbGetValuesAt(arg, arg2, arg3, arg4, arg5)
+var _fnRbGvSet func(string, int) int
+
+// RbGvSet calls the Ruby framework function rb_gv_set.
+func RbGvSet(arg string, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbGvSet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbGvSet, _lib, "rb_gv_set")
+	}
+	return _fnRbGvSet(arg, arg2)
 }
 
-// RbGets calls [raw.RbGets] (C function rb_gets).
-func RbGets() uint {
-	return raw.RbGets()
+var _fnRbHash func(int) int
+
+// RbHash calls the Ruby framework function rb_hash.
+func RbHash(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHash == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHash, _lib, "rb_hash")
+	}
+	return _fnRbHash(arg)
 }
 
-// RbGlob calls [raw.RbGlob] (C function rb_glob).
-func RbGlob(arg string, arg2 unsafe.Pointer, arg3 uint) {
-	raw.RbGlob(arg, arg2, arg3)
+var _fnRbHashAref func(int, int) int
+
+// RbHashAref calls the Ruby framework function rb_hash_aref.
+func RbHashAref(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashAref == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashAref, _lib, "rb_hash_aref")
+	}
+	return _fnRbHashAref(arg, arg2)
 }
 
-// RbGvGet calls [raw.RbGvGet] (C function rb_gv_get).
-func RbGvGet(arg string) uint {
-	return raw.RbGvGet(arg)
+var _fnRbHashAset func(int, int, int) int
+
+// RbHashAset calls the Ruby framework function rb_hash_aset.
+func RbHashAset(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashAset == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashAset, _lib, "rb_hash_aset")
+	}
+	return _fnRbHashAset(arg, arg2, arg3)
 }
 
-// RbGvSet calls [raw.RbGvSet] (C function rb_gv_set).
-func RbGvSet(arg string, arg2 uint) uint {
-	return raw.RbGvSet(arg, arg2)
+var _fnRbHashClear func(int) int
+
+// RbHashClear calls the Ruby framework function rb_hash_clear.
+func RbHashClear(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashClear == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashClear, _lib, "rb_hash_clear")
+	}
+	return _fnRbHashClear(arg)
 }
 
-// RbGvarReadonlySetter calls [raw.RbGvarReadonlySetter] (C function rb_gvar_readonly_setter).
-func RbGvarReadonlySetter(val uint, id_ uint, data unsafe.Pointer, gvar unsafe.Pointer) {
-	raw.RbGvarReadonlySetter(val, id_, data, gvar)
+var _fnRbHashDelete func(int, int) int
+
+// RbHashDelete calls the Ruby framework function rb_hash_delete.
+func RbHashDelete(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashDelete == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashDelete, _lib, "rb_hash_delete")
+	}
+	return _fnRbHashDelete(arg, arg2)
 }
 
-// RbGvarUndefGetter calls [raw.RbGvarUndefGetter] (C function rb_gvar_undef_getter).
-func RbGvarUndefGetter(id_ uint, data unsafe.Pointer, gvar unsafe.Pointer) uint {
-	return raw.RbGvarUndefGetter(id_, data, gvar)
+var _fnRbHashDeleteIf func(int) int
+
+// RbHashDeleteIf calls the Ruby framework function rb_hash_delete_if.
+func RbHashDeleteIf(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashDeleteIf == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashDeleteIf, _lib, "rb_hash_delete_if")
+	}
+	return _fnRbHashDeleteIf(arg)
 }
 
-// RbGvarUndefMarker calls [raw.RbGvarUndefMarker] (C function rb_gvar_undef_marker).
-func RbGvarUndefMarker(var_ *uint) {
-	raw.RbGvarUndefMarker(var_)
+var _fnRbHashDup func(int) int
+
+// RbHashDup calls the Ruby framework function rb_hash_dup.
+func RbHashDup(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashDup == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashDup, _lib, "rb_hash_dup")
+	}
+	return _fnRbHashDup(arg)
 }
 
-// RbGvarUndefSetter calls [raw.RbGvarUndefSetter] (C function rb_gvar_undef_setter).
-func RbGvarUndefSetter(val uint, id_ uint, data unsafe.Pointer, gvar unsafe.Pointer) {
-	raw.RbGvarUndefSetter(val, id_, data, gvar)
+var _fnRbHashEnd func(int) int
+
+// RbHashEnd calls the Ruby framework function rb_hash_end.
+func RbHashEnd(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashEnd == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashEnd, _lib, "rb_hash_end")
+	}
+	return _fnRbHashEnd(arg)
 }
 
-// RbGvarValGetter calls [raw.RbGvarValGetter] (C function rb_gvar_val_getter).
-func RbGvarValGetter(id_ uint, data unsafe.Pointer, gvar unsafe.Pointer) uint {
-	return raw.RbGvarValGetter(id_, data, gvar)
+var _fnRbHashFetch func(int, int) int
+
+// RbHashFetch calls the Ruby framework function rb_hash_fetch.
+func RbHashFetch(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashFetch == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashFetch, _lib, "rb_hash_fetch")
+	}
+	return _fnRbHashFetch(arg, arg2)
 }
 
-// RbGvarValMarker calls [raw.RbGvarValMarker] (C function rb_gvar_val_marker).
-func RbGvarValMarker(var_ *uint) {
-	raw.RbGvarValMarker(var_)
+var _fnRbHashFree func(int)
+
+// RbHashFree calls the Ruby framework function rb_hash_free.
+func RbHashFree(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashFree == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashFree, _lib, "rb_hash_free")
+	}
+	_fnRbHashFree(arg)
 }
 
-// RbGvarValSetter calls [raw.RbGvarValSetter] (C function rb_gvar_val_setter).
-func RbGvarValSetter(val uint, id_ uint, data unsafe.Pointer, gvar unsafe.Pointer) {
-	raw.RbGvarValSetter(val, id_, data, gvar)
+var _fnRbHashFreeze func(int) int
+
+// RbHashFreeze calls the Ruby framework function rb_hash_freeze.
+func RbHashFreeze(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashFreeze == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashFreeze, _lib, "rb_hash_freeze")
+	}
+	return _fnRbHashFreeze(arg)
 }
 
-// RbGvarVarGetter calls [raw.RbGvarVarGetter] (C function rb_gvar_var_getter).
-func RbGvarVarGetter(id_ uint, data unsafe.Pointer, gvar unsafe.Pointer) uint {
-	return raw.RbGvarVarGetter(id_, data, gvar)
-}
+var _fnRbHashIfnone func()
 
-// RbGvarVarMarker calls [raw.RbGvarVarMarker] (C function rb_gvar_var_marker).
-func RbGvarVarMarker(var_ *uint) {
-	raw.RbGvarVarMarker(var_)
-}
-
-// RbGvarVarSetter calls [raw.RbGvarVarSetter] (C function rb_gvar_var_setter).
-func RbGvarVarSetter(val uint, id_ uint, data unsafe.Pointer, gvar unsafe.Pointer) {
-	raw.RbGvarVarSetter(val, id_, data, gvar)
-}
-
-// RbHash calls [raw.RbHash] (C function rb_hash).
-func RbHash(arg uint) uint {
-	return raw.RbHash(arg)
-}
-
-// RbHashAref calls [raw.RbHashAref] (C function rb_hash_aref).
-func RbHashAref(arg uint, arg2 uint) uint {
-	return raw.RbHashAref(arg, arg2)
-}
-
-// RbHashAset calls [raw.RbHashAset] (C function rb_hash_aset).
-func RbHashAset(arg uint, arg2 uint, arg3 uint) uint {
-	return raw.RbHashAset(arg, arg2, arg3)
-}
-
-// RbHashBulkInsertIntoStTable calls [raw.RbHashBulkInsertIntoStTable] (C function rb_hash_bulk_insert_into_st_table).
-func RbHashBulkInsertIntoStTable(arg int, arg2 *uint, arg3 uint) {
-	raw.RbHashBulkInsertIntoStTable(arg, arg2, arg3)
-}
-
-// RbHashClear calls [raw.RbHashClear] (C function rb_hash_clear).
-func RbHashClear(arg uint) uint {
-	return raw.RbHashClear(arg)
-}
-
-// RbHashDelete calls [raw.RbHashDelete] (C function rb_hash_delete).
-func RbHashDelete(arg uint, arg2 uint) uint {
-	return raw.RbHashDelete(arg, arg2)
-}
-
-// RbHashDeleteIf calls [raw.RbHashDeleteIf] (C function rb_hash_delete_if).
-func RbHashDeleteIf(arg uint) uint {
-	return raw.RbHashDeleteIf(arg)
-}
-
-// RbHashDup calls [raw.RbHashDup] (C function rb_hash_dup).
-func RbHashDup(arg uint) uint {
-	return raw.RbHashDup(arg)
-}
-
-// RbHashEnd calls [raw.RbHashEnd] (C function rb_hash_end).
-func RbHashEnd(arg uint) uint {
-	return raw.RbHashEnd(arg)
-}
-
-// RbHashFetch calls [raw.RbHashFetch] (C function rb_hash_fetch).
-func RbHashFetch(arg uint, arg2 uint) uint {
-	return raw.RbHashFetch(arg, arg2)
-}
-
-// RbHashForeach calls [raw.RbHashForeach] (C function rb_hash_foreach).
-func RbHashForeach(arg uint, arg2 unsafe.Pointer, arg3 uint) {
-	raw.RbHashForeach(arg, arg2, arg3)
-}
-
-// RbHashFree calls [raw.RbHashFree] (C function rb_hash_free).
-func RbHashFree(arg uint) {
-	raw.RbHashFree(arg)
-}
-
-// RbHashFreeze calls [raw.RbHashFreeze] (C function rb_hash_freeze).
-func RbHashFreeze(arg uint) uint {
-	return raw.RbHashFreeze(arg)
-}
-
-// RbHashIfnone calls [raw.RbHashIfnone] (C function rb_hash_ifnone).
+// RbHashIfnone calls the Ruby framework function rb_hash_ifnone.
 func RbHashIfnone() {
-	raw.RbHashIfnone()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashIfnone == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashIfnone, _lib, "rb_hash_ifnone")
+	}
+	_fnRbHashIfnone()
 }
 
-// RbHashIterLev calls [raw.RbHashIterLev] (C function rb_hash_iter_lev).
+var _fnRbHashIterLev func()
+
+// RbHashIterLev calls the Ruby framework function rb_hash_iter_lev.
 func RbHashIterLev() {
-	raw.RbHashIterLev()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashIterLev == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashIterLev, _lib, "rb_hash_iter_lev")
+	}
+	_fnRbHashIterLev()
 }
 
-// RbHashLookup calls [raw.RbHashLookup] (C function rb_hash_lookup).
-func RbHashLookup(arg uint, arg2 uint) uint {
-	return raw.RbHashLookup(arg, arg2)
+var _fnRbHashLookup func(int, int) int
+
+// RbHashLookup calls the Ruby framework function rb_hash_lookup.
+func RbHashLookup(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashLookup == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashLookup, _lib, "rb_hash_lookup")
+	}
+	return _fnRbHashLookup(arg, arg2)
 }
 
-// RbHashLookup2 calls [raw.RbHashLookup2] (C function rb_hash_lookup2).
-func RbHashLookup2(arg uint, arg2 uint, arg3 uint) uint {
-	return raw.RbHashLookup2(arg, arg2, arg3)
+var _fnRbHashLookup2 func(int, int, int) int
+
+// RbHashLookup2 calls the Ruby framework function rb_hash_lookup2.
+func RbHashLookup2(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashLookup2 == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashLookup2, _lib, "rb_hash_lookup2")
+	}
+	return _fnRbHashLookup2(arg, arg2, arg3)
 }
 
-// RbHashNew calls [raw.RbHashNew] (C function rb_hash_new).
-func RbHashNew() uint {
-	return raw.RbHashNew()
+var _fnRbHashNew func() int
+
+// RbHashNew calls the Ruby framework function rb_hash_new.
+func RbHashNew() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashNew, _lib, "rb_hash_new")
+	}
+	return _fnRbHashNew()
 }
 
-// RbHashSetIfnone calls [raw.RbHashSetIfnone] (C function rb_hash_set_ifnone).
-func RbHashSetIfnone(hash uint, ifnone uint) uint {
-	return raw.RbHashSetIfnone(hash, ifnone)
+var _fnRbHashSetIfnone func(int, int) int
+
+// RbHashSetIfnone calls the Ruby framework function rb_hash_set_ifnone.
+func RbHashSetIfnone(hash int, ifnone int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashSetIfnone == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashSetIfnone, _lib, "rb_hash_set_ifnone")
+	}
+	return _fnRbHashSetIfnone(hash, ifnone)
 }
 
-// RbHashSize calls [raw.RbHashSize] (C function rb_hash_size).
-func RbHashSize(arg uint) uint {
-	return raw.RbHashSize(arg)
+var _fnRbHashSize func(int) int
+
+// RbHashSize calls the Ruby framework function rb_hash_size.
+func RbHashSize(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashSize == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashSize, _lib, "rb_hash_size")
+	}
+	return _fnRbHashSize(arg)
 }
 
-// RbHashSizeNum calls [raw.RbHashSizeNum] (C function rb_hash_size_num).
-func RbHashSizeNum(hash uint) uint {
-	return raw.RbHashSizeNum(hash)
+var _fnRbHashSizeNum func(int) int
+
+// RbHashSizeNum calls the Ruby framework function rb_hash_size_num.
+func RbHashSizeNum(hash int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashSizeNum == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashSizeNum, _lib, "rb_hash_size_num")
+	}
+	return _fnRbHashSizeNum(hash)
 }
 
-// RbHashStart calls [raw.RbHashStart] (C function rb_hash_start).
-func RbHashStart(arg uint) uint {
-	return raw.RbHashStart(arg)
+var _fnRbHashStart func(int) int
+
+// RbHashStart calls the Ruby framework function rb_hash_start.
+func RbHashStart(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashStart == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashStart, _lib, "rb_hash_start")
+	}
+	return _fnRbHashStart(arg)
 }
 
-// RbHashTbl calls [raw.RbHashTbl] (C function rb_hash_tbl).
-func RbHashTbl(arg uint, file string, line int) *raw.StTable {
-	return raw.RbHashTbl(arg, file, line)
+var _fnRbHashUint func(int, int) int
+
+// RbHashUint calls the Ruby framework function rb_hash_uint.
+func RbHashUint(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashUint == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashUint, _lib, "rb_hash_uint")
+	}
+	return _fnRbHashUint(arg, arg2)
 }
 
-// RbHashUint calls [raw.RbHashUint] (C function rb_hash_uint).
-func RbHashUint(arg uint, arg2 uint) uint {
-	return raw.RbHashUint(arg, arg2)
+var _fnRbHashUint32 func(int, uint32) int
+
+// RbHashUint32 calls the Ruby framework function rb_hash_uint32.
+func RbHashUint32(arg int, arg2 uint32) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbHashUint32 == nil {
+		ebipurego.RegisterLibFunc(&_fnRbHashUint32, _lib, "rb_hash_uint32")
+	}
+	return _fnRbHashUint32(arg, arg2)
 }
 
-// RbHashUint32 calls [raw.RbHashUint32] (C function rb_hash_uint32).
-func RbHashUint32(arg uint, arg2 uint32) uint {
-	return raw.RbHashUint32(arg, arg2)
+var _fnRbId2name func(int) string
+
+// RbId2name calls the Ruby framework function rb_id2name.
+func RbId2name(arg int) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbId2name == nil {
+		ebipurego.RegisterLibFunc(&_fnRbId2name, _lib, "rb_id2name")
+	}
+	return _fnRbId2name(arg)
 }
 
-// RbHashUpdateBy calls [raw.RbHashUpdateBy] (C function rb_hash_update_by).
-func RbHashUpdateBy(hash1 uint, hash2 uint, func_ unsafe.Pointer) uint {
-	return raw.RbHashUpdateBy(hash1, hash2, func_)
+var _fnRbId2str func(int) int
+
+// RbId2str calls the Ruby framework function rb_id2str.
+func RbId2str(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbId2str == nil {
+		ebipurego.RegisterLibFunc(&_fnRbId2str, _lib, "rb_id2str")
+	}
+	return _fnRbId2str(arg)
 }
 
-// RbId2name calls [raw.RbId2name] (C function rb_id2name).
-func RbId2name(arg uint) string {
-	return raw.RbId2name(arg)
+var _fnRbId2sym func(int) int
+
+// RbId2sym calls the Ruby framework function rb_id2sym.
+func RbId2sym(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbId2sym == nil {
+		ebipurego.RegisterLibFunc(&_fnRbId2sym, _lib, "rb_id2sym")
+	}
+	return _fnRbId2sym(arg)
 }
 
-// RbId2str calls [raw.RbId2str] (C function rb_id2str).
-func RbId2str(arg uint) uint {
-	return raw.RbId2str(arg)
+var _fnRbIdAttrset func(int) int
+
+// RbIdAttrset calls the Ruby framework function rb_id_attrset.
+func RbIdAttrset(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIdAttrset == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIdAttrset, _lib, "rb_id_attrset")
+	}
+	return _fnRbIdAttrset(arg)
 }
 
-// RbId2sym calls [raw.RbId2sym] (C function rb_id2sym).
-func RbId2sym(arg uint) uint {
-	return raw.RbId2sym(arg)
+var _fnRbIncludeModule func(int, int)
+
+// RbIncludeModule calls the Ruby framework function rb_include_module.
+func RbIncludeModule(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIncludeModule == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIncludeModule, _lib, "rb_include_module")
+	}
+	_fnRbIncludeModule(arg, arg2)
 }
 
-// RbIdAttrset calls [raw.RbIdAttrset] (C function rb_id_attrset).
-func RbIdAttrset(arg uint) uint {
-	return raw.RbIdAttrset(arg)
-}
+var _fnRbInsecureOperation func()
 
-// RbIncludeModule calls [raw.RbIncludeModule] (C function rb_include_module).
-func RbIncludeModule(arg uint, arg2 uint) {
-	raw.RbIncludeModule(arg, arg2)
-}
-
-// RbInsecureOperation calls [raw.RbInsecureOperation] (C function rb_insecure_operation).
+// RbInsecureOperation calls the Ruby framework function rb_insecure_operation.
 func RbInsecureOperation() {
-	raw.RbInsecureOperation()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbInsecureOperation == nil {
+		ebipurego.RegisterLibFunc(&_fnRbInsecureOperation, _lib, "rb_insecure_operation")
+	}
+	_fnRbInsecureOperation()
 }
 
-// RbInspect calls [raw.RbInspect] (C function rb_inspect).
-func RbInspect(arg uint) uint {
-	return raw.RbInspect(arg)
+var _fnRbInspect func(int) int
+
+// RbInspect calls the Ruby framework function rb_inspect.
+func RbInspect(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbInspect == nil {
+		ebipurego.RegisterLibFunc(&_fnRbInspect, _lib, "rb_inspect")
+	}
+	return _fnRbInspect(arg)
 }
 
-// RbInt2big calls [raw.RbInt2big] (C function rb_int2big).
-func RbInt2big(arg int) uint {
-	return raw.RbInt2big(arg)
+var _fnRbInt2big func(int) int
+
+// RbInt2big calls the Ruby framework function rb_int2big.
+func RbInt2big(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbInt2big == nil {
+		ebipurego.RegisterLibFunc(&_fnRbInt2big, _lib, "rb_int2big")
+	}
+	return _fnRbInt2big(arg)
 }
 
-// RbInt2inum calls [raw.RbInt2inum] (C function rb_int2inum).
-func RbInt2inum(arg int) uint {
-	return raw.RbInt2inum(arg)
+var _fnRbInt2inum func(int) int
+
+// RbInt2inum calls the Ruby framework function rb_int2inum.
+func RbInt2inum(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbInt2inum == nil {
+		ebipurego.RegisterLibFunc(&_fnRbInt2inum, _lib, "rb_int2inum")
+	}
+	return _fnRbInt2inum(arg)
 }
 
-// RbIntegerPack calls [raw.RbIntegerPack] (C function rb_integer_pack).
-func RbIntegerPack(val uint, words unsafe.Pointer, numwords uint, wordsize uint, nails uint, flags int) int {
-	return raw.RbIntegerPack(val, words, numwords, wordsize, nails, flags)
+var _fnRbIntern func(string) int
+
+// RbIntern calls the Ruby framework function rb_intern.
+func RbIntern(arg string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIntern == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIntern, _lib, "rb_intern")
+	}
+	return _fnRbIntern(arg)
 }
 
-// RbIntegerUnpack calls [raw.RbIntegerUnpack] (C function rb_integer_unpack).
-func RbIntegerUnpack(words unsafe.Pointer, numwords uint, wordsize uint, nails uint, flags int) uint {
-	return raw.RbIntegerUnpack(words, numwords, wordsize, nails, flags)
+var _fnRbIntern2 func(string, int) int
+
+// RbIntern2 calls the Ruby framework function rb_intern2.
+func RbIntern2(arg string, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIntern2 == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIntern2, _lib, "rb_intern2")
+	}
+	return _fnRbIntern2(arg, arg2)
 }
 
-// RbIntern calls [raw.RbIntern] (C function rb_intern).
-func RbIntern(arg string) uint {
-	return raw.RbIntern(arg)
+var _fnRbInternStr func(int) int
+
+// RbInternStr calls the Ruby framework function rb_intern_str.
+func RbInternStr(str int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbInternStr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbInternStr, _lib, "rb_intern_str")
+	}
+	return _fnRbInternStr(str)
 }
 
-// RbIntern2 calls [raw.RbIntern2] (C function rb_intern2).
-func RbIntern2(arg string, arg2 int) uint {
-	return raw.RbIntern2(arg, arg2)
-}
+var _fnRbInterrupt func()
 
-// RbInternStr calls [raw.RbInternStr] (C function rb_intern_str).
-func RbInternStr(str uint) uint {
-	return raw.RbInternStr(str)
-}
-
-// RbInterrupt calls [raw.RbInterrupt] (C function rb_interrupt).
+// RbInterrupt calls the Ruby framework function rb_interrupt.
 func RbInterrupt() {
-	raw.RbInterrupt()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbInterrupt == nil {
+		ebipurego.RegisterLibFunc(&_fnRbInterrupt, _lib, "rb_interrupt")
+	}
+	_fnRbInterrupt()
 }
 
-// RbInvalidStr calls [raw.RbInvalidStr] (C function rb_invalid_str).
+var _fnRbInvalidStr func(string, string)
+
+// RbInvalidStr calls the Ruby framework function rb_invalid_str.
 func RbInvalidStr(arg string, arg2 string) {
-	raw.RbInvalidStr(arg, arg2)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbInvalidStr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbInvalidStr, _lib, "rb_invalid_str")
+	}
+	_fnRbInvalidStr(arg, arg2)
 }
 
-// RbIoAddstr calls [raw.RbIoAddstr] (C function rb_io_addstr).
-func RbIoAddstr(arg uint, arg2 uint) uint {
-	return raw.RbIoAddstr(arg, arg2)
+var _fnRbIoAddstr func(int, int) int
+
+// RbIoAddstr calls the Ruby framework function rb_io_addstr.
+func RbIoAddstr(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIoAddstr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIoAddstr, _lib, "rb_io_addstr")
+	}
+	return _fnRbIoAddstr(arg, arg2)
 }
 
-// RbIoAscii8bitBinmode calls [raw.RbIoAscii8bitBinmode] (C function rb_io_ascii8bit_binmode).
-func RbIoAscii8bitBinmode(arg uint) uint {
-	return raw.RbIoAscii8bitBinmode(arg)
+var _fnRbIoAscii8bitBinmode func(int) int
+
+// RbIoAscii8bitBinmode calls the Ruby framework function rb_io_ascii8bit_binmode.
+func RbIoAscii8bitBinmode(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIoAscii8bitBinmode == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIoAscii8bitBinmode, _lib, "rb_io_ascii8bit_binmode")
+	}
+	return _fnRbIoAscii8bitBinmode(arg)
 }
 
-// RbIoBinmode calls [raw.RbIoBinmode] (C function rb_io_binmode).
-func RbIoBinmode(arg uint) uint {
-	return raw.RbIoBinmode(arg)
+var _fnRbIoBinmode func(int) int
+
+// RbIoBinmode calls the Ruby framework function rb_io_binmode.
+func RbIoBinmode(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIoBinmode == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIoBinmode, _lib, "rb_io_binmode")
+	}
+	return _fnRbIoBinmode(arg)
 }
 
-// RbIoClose calls [raw.RbIoClose] (C function rb_io_close).
-func RbIoClose(arg uint) uint {
-	return raw.RbIoClose(arg)
+var _fnRbIoClose func(int) int
+
+// RbIoClose calls the Ruby framework function rb_io_close.
+func RbIoClose(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIoClose == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIoClose, _lib, "rb_io_close")
+	}
+	return _fnRbIoClose(arg)
 }
 
-// RbIoEof calls [raw.RbIoEof] (C function rb_io_eof).
-func RbIoEof(arg uint) uint {
-	return raw.RbIoEof(arg)
+var _fnRbIoEof func(int) int
+
+// RbIoEof calls the Ruby framework function rb_io_eof.
+func RbIoEof(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIoEof == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIoEof, _lib, "rb_io_eof")
+	}
+	return _fnRbIoEof(arg)
 }
 
-// RbIoFdopen calls [raw.RbIoFdopen] (C function rb_io_fdopen).
-func RbIoFdopen(arg int, arg2 int, arg3 string) uint {
-	return raw.RbIoFdopen(arg, arg2, arg3)
+var _fnRbIoFdopen func(int, int, string) int
+
+// RbIoFdopen calls the Ruby framework function rb_io_fdopen.
+func RbIoFdopen(arg int, arg2 int, arg3 string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIoFdopen == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIoFdopen, _lib, "rb_io_fdopen")
+	}
+	return _fnRbIoFdopen(arg, arg2, arg3)
 }
 
-// RbIoFlush calls [raw.RbIoFlush] (C function rb_io_flush).
-func RbIoFlush(arg uint) uint {
-	return raw.RbIoFlush(arg)
+var _fnRbIoFlush func(int) int
+
+// RbIoFlush calls the Ruby framework function rb_io_flush.
+func RbIoFlush(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIoFlush == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIoFlush, _lib, "rb_io_flush")
+	}
+	return _fnRbIoFlush(arg)
 }
 
-// RbIoGetIo calls [raw.RbIoGetIo] (C function rb_io_get_io).
-func RbIoGetIo(arg uint) uint {
-	return raw.RbIoGetIo(arg)
+var _fnRbIoGetIo func(int) int
+
+// RbIoGetIo calls the Ruby framework function rb_io_get_io.
+func RbIoGetIo(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIoGetIo == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIoGetIo, _lib, "rb_io_get_io")
+	}
+	return _fnRbIoGetIo(arg)
 }
 
-// RbIoGetbyte calls [raw.RbIoGetbyte] (C function rb_io_getbyte).
-func RbIoGetbyte(arg uint) uint {
-	return raw.RbIoGetbyte(arg)
+var _fnRbIoGetbyte func(int) int
+
+// RbIoGetbyte calls the Ruby framework function rb_io_getbyte.
+func RbIoGetbyte(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIoGetbyte == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIoGetbyte, _lib, "rb_io_getbyte")
+	}
+	return _fnRbIoGetbyte(arg)
 }
 
-// RbIoGets calls [raw.RbIoGets] (C function rb_io_gets).
-func RbIoGets(arg uint) uint {
-	return raw.RbIoGets(arg)
+var _fnRbIoGets func(int) int
+
+// RbIoGets calls the Ruby framework function rb_io_gets.
+func RbIoGets(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIoGets == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIoGets, _lib, "rb_io_gets")
+	}
+	return _fnRbIoGets(arg)
 }
 
-// RbIoPrint calls [raw.RbIoPrint] (C function rb_io_print).
-func RbIoPrint(arg int, arg2 *uint, arg3 uint) uint {
-	return raw.RbIoPrint(arg, arg2, arg3)
+var _fnRbIoUngetbyte func(int, int) int
+
+// RbIoUngetbyte calls the Ruby framework function rb_io_ungetbyte.
+func RbIoUngetbyte(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIoUngetbyte == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIoUngetbyte, _lib, "rb_io_ungetbyte")
+	}
+	return _fnRbIoUngetbyte(arg, arg2)
 }
 
-// RbIoPrintf calls [raw.RbIoPrintf] (C function rb_io_printf).
-func RbIoPrintf(arg int, arg2 *uint, arg3 uint) uint {
-	return raw.RbIoPrintf(arg, arg2, arg3)
+var _fnRbIoUngetc func(int, int) int
+
+// RbIoUngetc calls the Ruby framework function rb_io_ungetc.
+func RbIoUngetc(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIoUngetc == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIoUngetc, _lib, "rb_io_ungetc")
+	}
+	return _fnRbIoUngetc(arg, arg2)
 }
 
-// RbIoPuts calls [raw.RbIoPuts] (C function rb_io_puts).
-func RbIoPuts(arg int, arg2 *uint, arg3 uint) uint {
-	return raw.RbIoPuts(arg, arg2, arg3)
+var _fnRbIoWrite func(int, int) int
+
+// RbIoWrite calls the Ruby framework function rb_io_write.
+func RbIoWrite(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIoWrite == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIoWrite, _lib, "rb_io_write")
+	}
+	return _fnRbIoWrite(arg, arg2)
 }
 
-// RbIoUngetbyte calls [raw.RbIoUngetbyte] (C function rb_io_ungetbyte).
-func RbIoUngetbyte(arg uint, arg2 uint) uint {
-	return raw.RbIoUngetbyte(arg, arg2)
-}
+var _fnRbIsAbsolutePath func(string) int
 
-// RbIoUngetc calls [raw.RbIoUngetc] (C function rb_io_ungetc).
-func RbIoUngetc(arg uint, arg2 uint) uint {
-	return raw.RbIoUngetc(arg, arg2)
-}
-
-// RbIoWrite calls [raw.RbIoWrite] (C function rb_io_write).
-func RbIoWrite(arg uint, arg2 uint) uint {
-	return raw.RbIoWrite(arg, arg2)
-}
-
-// RbIsAbsolutePath calls [raw.RbIsAbsolutePath] (C function rb_is_absolute_path).
+// RbIsAbsolutePath calls the Ruby framework function rb_is_absolute_path.
 func RbIsAbsolutePath(arg string) int {
-	return raw.RbIsAbsolutePath(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIsAbsolutePath == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIsAbsolutePath, _lib, "rb_is_absolute_path")
+	}
+	return _fnRbIsAbsolutePath(arg)
 }
 
-// RbIsAttrsetId calls [raw.RbIsAttrsetId] (C function rb_is_attrset_id).
-func RbIsAttrsetId(arg uint) int {
-	return raw.RbIsAttrsetId(arg)
+var _fnRbIsAttrsetId func(int) int
+
+// RbIsAttrsetId calls the Ruby framework function rb_is_attrset_id.
+func RbIsAttrsetId(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIsAttrsetId == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIsAttrsetId, _lib, "rb_is_attrset_id")
+	}
+	return _fnRbIsAttrsetId(arg)
 }
 
-// RbIsClassId calls [raw.RbIsClassId] (C function rb_is_class_id).
-func RbIsClassId(arg uint) int {
-	return raw.RbIsClassId(arg)
+var _fnRbIsClassId func(int) int
+
+// RbIsClassId calls the Ruby framework function rb_is_class_id.
+func RbIsClassId(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIsClassId == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIsClassId, _lib, "rb_is_class_id")
+	}
+	return _fnRbIsClassId(arg)
 }
 
-// RbIsConstId calls [raw.RbIsConstId] (C function rb_is_const_id).
-func RbIsConstId(arg uint) int {
-	return raw.RbIsConstId(arg)
+var _fnRbIsConstId func(int) int
+
+// RbIsConstId calls the Ruby framework function rb_is_const_id.
+func RbIsConstId(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIsConstId == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIsConstId, _lib, "rb_is_const_id")
+	}
+	return _fnRbIsConstId(arg)
 }
 
-// RbIsGlobalId calls [raw.RbIsGlobalId] (C function rb_is_global_id).
-func RbIsGlobalId(arg uint) int {
-	return raw.RbIsGlobalId(arg)
+var _fnRbIsGlobalId func(int) int
+
+// RbIsGlobalId calls the Ruby framework function rb_is_global_id.
+func RbIsGlobalId(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIsGlobalId == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIsGlobalId, _lib, "rb_is_global_id")
+	}
+	return _fnRbIsGlobalId(arg)
 }
 
-// RbIsInstanceId calls [raw.RbIsInstanceId] (C function rb_is_instance_id).
-func RbIsInstanceId(arg uint) int {
-	return raw.RbIsInstanceId(arg)
+var _fnRbIsInstanceId func(int) int
+
+// RbIsInstanceId calls the Ruby framework function rb_is_instance_id.
+func RbIsInstanceId(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIsInstanceId == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIsInstanceId, _lib, "rb_is_instance_id")
+	}
+	return _fnRbIsInstanceId(arg)
 }
 
-// RbIsJunkId calls [raw.RbIsJunkId] (C function rb_is_junk_id).
-func RbIsJunkId(arg uint) int {
-	return raw.RbIsJunkId(arg)
+var _fnRbIsJunkId func(int) int
+
+// RbIsJunkId calls the Ruby framework function rb_is_junk_id.
+func RbIsJunkId(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIsJunkId == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIsJunkId, _lib, "rb_is_junk_id")
+	}
+	return _fnRbIsJunkId(arg)
 }
 
-// RbIsLocalId calls [raw.RbIsLocalId] (C function rb_is_local_id).
-func RbIsLocalId(arg uint) int {
-	return raw.RbIsLocalId(arg)
+var _fnRbIsLocalId func(int) int
+
+// RbIsLocalId calls the Ruby framework function rb_is_local_id.
+func RbIsLocalId(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIsLocalId == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIsLocalId, _lib, "rb_is_local_id")
+	}
+	return _fnRbIsLocalId(arg)
 }
 
-// RbIsalnum calls [raw.RbIsalnum] (C function rb_isalnum).
+var _fnRbIsalnum func(int) int
+
+// RbIsalnum calls the Ruby framework function rb_isalnum.
 func RbIsalnum(c int) int {
-	return raw.RbIsalnum(c)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIsalnum == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIsalnum, _lib, "rb_isalnum")
+	}
+	return _fnRbIsalnum(c)
 }
 
-// RbIsalpha calls [raw.RbIsalpha] (C function rb_isalpha).
+var _fnRbIsalpha func(int) int
+
+// RbIsalpha calls the Ruby framework function rb_isalpha.
 func RbIsalpha(c int) int {
-	return raw.RbIsalpha(c)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIsalpha == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIsalpha, _lib, "rb_isalpha")
+	}
+	return _fnRbIsalpha(c)
 }
 
-// RbIsascii calls [raw.RbIsascii] (C function rb_isascii).
+var _fnRbIsascii func(int) int
+
+// RbIsascii calls the Ruby framework function rb_isascii.
 func RbIsascii(c int) int {
-	return raw.RbIsascii(c)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIsascii == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIsascii, _lib, "rb_isascii")
+	}
+	return _fnRbIsascii(c)
 }
 
-// RbIsblank calls [raw.RbIsblank] (C function rb_isblank).
+var _fnRbIsblank func(int) int
+
+// RbIsblank calls the Ruby framework function rb_isblank.
 func RbIsblank(c int) int {
-	return raw.RbIsblank(c)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIsblank == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIsblank, _lib, "rb_isblank")
+	}
+	return _fnRbIsblank(c)
 }
 
-// RbIscntrl calls [raw.RbIscntrl] (C function rb_iscntrl).
+var _fnRbIscntrl func(int) int
+
+// RbIscntrl calls the Ruby framework function rb_iscntrl.
 func RbIscntrl(c int) int {
-	return raw.RbIscntrl(c)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIscntrl == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIscntrl, _lib, "rb_iscntrl")
+	}
+	return _fnRbIscntrl(c)
 }
 
-// RbIsdigit calls [raw.RbIsdigit] (C function rb_isdigit).
+var _fnRbIsdigit func(int) int
+
+// RbIsdigit calls the Ruby framework function rb_isdigit.
 func RbIsdigit(c int) int {
-	return raw.RbIsdigit(c)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIsdigit == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIsdigit, _lib, "rb_isdigit")
+	}
+	return _fnRbIsdigit(c)
 }
 
-// RbIsgraph calls [raw.RbIsgraph] (C function rb_isgraph).
+var _fnRbIsgraph func(int) int
+
+// RbIsgraph calls the Ruby framework function rb_isgraph.
 func RbIsgraph(c int) int {
-	return raw.RbIsgraph(c)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIsgraph == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIsgraph, _lib, "rb_isgraph")
+	}
+	return _fnRbIsgraph(c)
 }
 
-// RbIslower calls [raw.RbIslower] (C function rb_islower).
+var _fnRbIslower func(int) int
+
+// RbIslower calls the Ruby framework function rb_islower.
 func RbIslower(c int) int {
-	return raw.RbIslower(c)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIslower == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIslower, _lib, "rb_islower")
+	}
+	return _fnRbIslower(c)
 }
 
-// RbIsprint calls [raw.RbIsprint] (C function rb_isprint).
+var _fnRbIsprint func(int) int
+
+// RbIsprint calls the Ruby framework function rb_isprint.
 func RbIsprint(c int) int {
-	return raw.RbIsprint(c)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIsprint == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIsprint, _lib, "rb_isprint")
+	}
+	return _fnRbIsprint(c)
 }
 
-// RbIspunct calls [raw.RbIspunct] (C function rb_ispunct).
+var _fnRbIspunct func(int) int
+
+// RbIspunct calls the Ruby framework function rb_ispunct.
 func RbIspunct(c int) int {
-	return raw.RbIspunct(c)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIspunct == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIspunct, _lib, "rb_ispunct")
+	}
+	return _fnRbIspunct(c)
 }
 
-// RbIsspace calls [raw.RbIsspace] (C function rb_isspace).
+var _fnRbIsspace func(int) int
+
+// RbIsspace calls the Ruby framework function rb_isspace.
 func RbIsspace(c int) int {
-	return raw.RbIsspace(c)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIsspace == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIsspace, _lib, "rb_isspace")
+	}
+	return _fnRbIsspace(c)
 }
 
-// RbIsupper calls [raw.RbIsupper] (C function rb_isupper).
+var _fnRbIsupper func(int) int
+
+// RbIsupper calls the Ruby framework function rb_isupper.
 func RbIsupper(c int) int {
-	return raw.RbIsupper(c)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIsupper == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIsupper, _lib, "rb_isupper")
+	}
+	return _fnRbIsupper(c)
 }
 
-// RbIsxdigit calls [raw.RbIsxdigit] (C function rb_isxdigit).
+var _fnRbIsxdigit func(int) int
+
+// RbIsxdigit calls the Ruby framework function rb_isxdigit.
 func RbIsxdigit(c int) int {
-	return raw.RbIsxdigit(c)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIsxdigit == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIsxdigit, _lib, "rb_isxdigit")
+	}
+	return _fnRbIsxdigit(c)
 }
 
-// RbIterBreak calls [raw.RbIterBreak] (C function rb_iter_break).
+var _fnRbIterBreak func()
+
+// RbIterBreak calls the Ruby framework function rb_iter_break.
 func RbIterBreak() {
-	raw.RbIterBreak()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIterBreak == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIterBreak, _lib, "rb_iter_break")
+	}
+	_fnRbIterBreak()
 }
 
-// RbIterBreakValue calls [raw.RbIterBreakValue] (C function rb_iter_break_value).
-func RbIterBreakValue(arg uint) {
-	raw.RbIterBreakValue(arg)
+var _fnRbIterBreakValue func(int)
+
+// RbIterBreakValue calls the Ruby framework function rb_iter_break_value.
+func RbIterBreakValue(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIterBreakValue == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIterBreakValue, _lib, "rb_iter_break_value")
+	}
+	_fnRbIterBreakValue(arg)
 }
 
-// RbIterate calls [raw.RbIterate] (C function rb_iterate).
-func RbIterate(arg unsafe.Pointer, arg2 uint, arg3 unsafe.Pointer, arg4 uint) uint {
-	return raw.RbIterate(arg, arg2, arg3, arg4)
+var _fnRbIvGet func(int, string) int
+
+// RbIvGet calls the Ruby framework function rb_iv_get.
+func RbIvGet(arg int, arg2 string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIvGet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIvGet, _lib, "rb_iv_get")
+	}
+	return _fnRbIvGet(arg, arg2)
 }
 
-// RbIvGet calls [raw.RbIvGet] (C function rb_iv_get).
-func RbIvGet(arg uint, arg2 string) uint {
-	return raw.RbIvGet(arg, arg2)
+var _fnRbIvSet func(int, string, int) int
+
+// RbIvSet calls the Ruby framework function rb_iv_set.
+func RbIvSet(arg int, arg2 string, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIvSet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIvSet, _lib, "rb_iv_set")
+	}
+	return _fnRbIvSet(arg, arg2, arg3)
 }
 
-// RbIvSet calls [raw.RbIvSet] (C function rb_iv_set).
-func RbIvSet(arg uint, arg2 string, arg3 uint) uint {
-	return raw.RbIvSet(arg, arg2, arg3)
+var _fnRbIvarCount func(int) int
+
+// RbIvarCount calls the Ruby framework function rb_ivar_count.
+func RbIvarCount(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIvarCount == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIvarCount, _lib, "rb_ivar_count")
+	}
+	return _fnRbIvarCount(arg)
 }
 
-// RbIvarCount calls [raw.RbIvarCount] (C function rb_ivar_count).
-func RbIvarCount(arg uint) uint {
-	return raw.RbIvarCount(arg)
+var _fnRbIvarDefined func(int, int) int
+
+// RbIvarDefined calls the Ruby framework function rb_ivar_defined.
+func RbIvarDefined(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIvarDefined == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIvarDefined, _lib, "rb_ivar_defined")
+	}
+	return _fnRbIvarDefined(arg, arg2)
 }
 
-// RbIvarDefined calls [raw.RbIvarDefined] (C function rb_ivar_defined).
-func RbIvarDefined(arg uint, arg2 uint) uint {
-	return raw.RbIvarDefined(arg, arg2)
+var _fnRbIvarGet func(int, int) int
+
+// RbIvarGet calls the Ruby framework function rb_ivar_get.
+func RbIvarGet(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIvarGet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIvarGet, _lib, "rb_ivar_get")
+	}
+	return _fnRbIvarGet(arg, arg2)
 }
 
-// RbIvarForeach calls [raw.RbIvarForeach] (C function rb_ivar_foreach).
-func RbIvarForeach(arg uint, arg2 unsafe.Pointer, arg3 uint) {
-	raw.RbIvarForeach(arg, arg2, arg3)
+var _fnRbIvarSet func(int, int, int) int
+
+// RbIvarSet calls the Ruby framework function rb_ivar_set.
+func RbIvarSet(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbIvarSet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbIvarSet, _lib, "rb_ivar_set")
+	}
+	return _fnRbIvarSet(arg, arg2, arg3)
 }
 
-// RbIvarGet calls [raw.RbIvarGet] (C function rb_ivar_get).
-func RbIvarGet(arg uint, arg2 uint) uint {
-	return raw.RbIvarGet(arg, arg2)
-}
+var _fnRbJumpTag func(int)
 
-// RbIvarSet calls [raw.RbIvarSet] (C function rb_ivar_set).
-func RbIvarSet(arg uint, arg2 uint, arg3 uint) uint {
-	return raw.RbIvarSet(arg, arg2, arg3)
-}
-
-// RbJumpTag calls [raw.RbJumpTag] (C function rb_jump_tag).
+// RbJumpTag calls the Ruby framework function rb_jump_tag.
 func RbJumpTag(arg int) {
-	raw.RbJumpTag(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbJumpTag == nil {
+		ebipurego.RegisterLibFunc(&_fnRbJumpTag, _lib, "rb_jump_tag")
+	}
+	_fnRbJumpTag(arg)
 }
 
-// RbLastStatusGet calls [raw.RbLastStatusGet] (C function rb_last_status_get).
-func RbLastStatusGet() uint {
-	return raw.RbLastStatusGet()
+var _fnRbLastStatusGet func() int
+
+// RbLastStatusGet calls the Ruby framework function rb_last_status_get.
+func RbLastStatusGet() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbLastStatusGet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbLastStatusGet, _lib, "rb_last_status_get")
+	}
+	return _fnRbLastStatusGet()
 }
 
-// RbLastStatusSet calls [raw.RbLastStatusSet] (C function rb_last_status_set).
+var _fnRbLastStatusSet func(int, int)
+
+// RbLastStatusSet calls the Ruby framework function rb_last_status_set.
 func RbLastStatusSet(status int, pid int) {
-	raw.RbLastStatusSet(status, pid)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbLastStatusSet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbLastStatusSet, _lib, "rb_last_status_set")
+	}
+	_fnRbLastStatusSet(status, pid)
 }
 
-// RbLastlineGet calls [raw.RbLastlineGet] (C function rb_lastline_get).
-func RbLastlineGet() uint {
-	return raw.RbLastlineGet()
+var _fnRbLastlineGet func() int
+
+// RbLastlineGet calls the Ruby framework function rb_lastline_get.
+func RbLastlineGet() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbLastlineGet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbLastlineGet, _lib, "rb_lastline_get")
+	}
+	return _fnRbLastlineGet()
 }
 
-// RbLastlineSet calls [raw.RbLastlineSet] (C function rb_lastline_set).
-func RbLastlineSet(arg uint) {
-	raw.RbLastlineSet(arg)
+var _fnRbLastlineSet func(int)
+
+// RbLastlineSet calls the Ruby framework function rb_lastline_set.
+func RbLastlineSet(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbLastlineSet == nil {
+		ebipurego.RegisterLibFunc(&_fnRbLastlineSet, _lib, "rb_lastline_set")
+	}
+	_fnRbLastlineSet(arg)
 }
 
-// RbLl2inum calls [raw.RbLl2inum] (C function rb_ll2inum).
-func RbLl2inum(arg int64) uint {
-	return raw.RbLl2inum(arg)
+var _fnRbLl2inum func(int64) int
+
+// RbLl2inum calls the Ruby framework function rb_ll2inum.
+func RbLl2inum(arg int64) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbLl2inum == nil {
+		ebipurego.RegisterLibFunc(&_fnRbLl2inum, _lib, "rb_ll2inum")
+	}
+	return _fnRbLl2inum(arg)
 }
 
-// RbLoad calls [raw.RbLoad] (C function rb_load).
-func RbLoad(arg uint, arg2 int) {
-	raw.RbLoad(arg, arg2)
+var _fnRbLoad func(int, int)
+
+// RbLoad calls the Ruby framework function rb_load.
+func RbLoad(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbLoad == nil {
+		ebipurego.RegisterLibFunc(&_fnRbLoad, _lib, "rb_load")
+	}
+	_fnRbLoad(arg, arg2)
 }
 
-// RbLoadFile calls [raw.RbLoadFile] (C function rb_load_file).
-func RbLoadFile(arg string) unsafe.Pointer {
-	return raw.RbLoadFile(arg)
+var _fnRbLocaleStrNew func(string, int) int
+
+// RbLocaleStrNew calls the Ruby framework function rb_locale_str_new.
+func RbLocaleStrNew(arg string, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbLocaleStrNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbLocaleStrNew, _lib, "rb_locale_str_new")
+	}
+	return _fnRbLocaleStrNew(arg, arg2)
 }
 
-// RbLoadFileStr calls [raw.RbLoadFileStr] (C function rb_load_file_str).
-func RbLoadFileStr(arg uint) unsafe.Pointer {
-	return raw.RbLoadFileStr(arg)
+var _fnRbLocaleStrNewCstr func(string) int
+
+// RbLocaleStrNewCstr calls the Ruby framework function rb_locale_str_new_cstr.
+func RbLocaleStrNewCstr(arg string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbLocaleStrNewCstr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbLocaleStrNewCstr, _lib, "rb_locale_str_new_cstr")
+	}
+	return _fnRbLocaleStrNewCstr(arg)
 }
 
-// RbLoadProtect calls [raw.RbLoadProtect] (C function rb_load_protect).
-func RbLoadProtect(arg uint, arg2 int, arg3 *int32) {
-	raw.RbLoadProtect(arg, arg2, arg3)
-}
+var _fnRbLong2intInline func(int) int
 
-// RbLocaleStrNew calls [raw.RbLocaleStrNew] (C function rb_locale_str_new).
-func RbLocaleStrNew(arg string, arg2 int) uint {
-	return raw.RbLocaleStrNew(arg, arg2)
-}
-
-// RbLocaleStrNewCstr calls [raw.RbLocaleStrNewCstr] (C function rb_locale_str_new_cstr).
-func RbLocaleStrNewCstr(arg string) uint {
-	return raw.RbLocaleStrNewCstr(arg)
-}
-
-// RbLong2intInline calls [raw.RbLong2intInline] (C function rb_long2int_inline).
+// RbLong2intInline calls the Ruby framework function rb_long2int_inline.
 func RbLong2intInline(n int) int {
-	return raw.RbLong2intInline(n)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbLong2intInline == nil {
+		ebipurego.RegisterLibFunc(&_fnRbLong2intInline, _lib, "rb_long2int_inline")
+	}
+	return _fnRbLong2intInline(n)
 }
 
-// RbLong2numInline calls [raw.RbLong2numInline] (C function rb_long2num_inline).
-func RbLong2numInline(v int) uint {
-	return raw.RbLong2numInline(v)
+var _fnRbLong2numInline func(int) int
+
+// RbLong2numInline calls the Ruby framework function rb_long2num_inline.
+func RbLong2numInline(v int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbLong2numInline == nil {
+		ebipurego.RegisterLibFunc(&_fnRbLong2numInline, _lib, "rb_long2num_inline")
+	}
+	return _fnRbLong2numInline(v)
 }
 
-// RbMakeBacktrace calls [raw.RbMakeBacktrace] (C function rb_make_backtrace).
-func RbMakeBacktrace() uint {
-	return raw.RbMakeBacktrace()
+var _fnRbMakeBacktrace func() int
+
+// RbMakeBacktrace calls the Ruby framework function rb_make_backtrace.
+func RbMakeBacktrace() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbMakeBacktrace == nil {
+		ebipurego.RegisterLibFunc(&_fnRbMakeBacktrace, _lib, "rb_make_backtrace")
+	}
+	return _fnRbMakeBacktrace()
 }
 
-// RbMakeException calls [raw.RbMakeException] (C function rb_make_exception).
-func RbMakeException(arg int, arg2 *uint) uint {
-	return raw.RbMakeException(arg, arg2)
+var _fnRbMarshalDump func(int, int) int
+
+// RbMarshalDump calls the Ruby framework function rb_marshal_dump.
+func RbMarshalDump(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbMarshalDump == nil {
+		ebipurego.RegisterLibFunc(&_fnRbMarshalDump, _lib, "rb_marshal_dump")
+	}
+	return _fnRbMarshalDump(arg, arg2)
 }
 
-// RbMarkHash calls [raw.RbMarkHash] (C function rb_mark_hash).
-func RbMarkHash(arg *raw.StTable) {
-	raw.RbMarkHash(arg)
+var _fnRbMarshalLoad func(int) int
+
+// RbMarshalLoad calls the Ruby framework function rb_marshal_load.
+func RbMarshalLoad(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbMarshalLoad == nil {
+		ebipurego.RegisterLibFunc(&_fnRbMarshalLoad, _lib, "rb_marshal_load")
+	}
+	return _fnRbMarshalLoad(arg)
 }
 
-// RbMarkSet calls [raw.RbMarkSet] (C function rb_mark_set).
-func RbMarkSet(arg *raw.StTable) {
-	raw.RbMarkSet(arg)
+var _fnRbMatchBusy func(int)
+
+// RbMatchBusy calls the Ruby framework function rb_match_busy.
+func RbMatchBusy(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbMatchBusy == nil {
+		ebipurego.RegisterLibFunc(&_fnRbMatchBusy, _lib, "rb_match_busy")
+	}
+	_fnRbMatchBusy(arg)
 }
 
-// RbMarkTbl calls [raw.RbMarkTbl] (C function rb_mark_tbl).
-func RbMarkTbl(arg *raw.StTable) {
-	raw.RbMarkTbl(arg)
-}
+var _fnRbMemerror func()
 
-// RbMarshalDefineCompat calls [raw.RbMarshalDefineCompat] (C function rb_marshal_define_compat).
-func RbMarshalDefineCompat(newclass uint, oldclass uint, dumper unsafe.Pointer, loader unsafe.Pointer) {
-	raw.RbMarshalDefineCompat(newclass, oldclass, dumper, loader)
-}
-
-// RbMarshalDump calls [raw.RbMarshalDump] (C function rb_marshal_dump).
-func RbMarshalDump(arg uint, arg2 uint) uint {
-	return raw.RbMarshalDump(arg, arg2)
-}
-
-// RbMarshalLoad calls [raw.RbMarshalLoad] (C function rb_marshal_load).
-func RbMarshalLoad(arg uint) uint {
-	return raw.RbMarshalLoad(arg)
-}
-
-// RbMatchBusy calls [raw.RbMatchBusy] (C function rb_match_busy).
-func RbMatchBusy(arg uint) {
-	raw.RbMatchBusy(arg)
-}
-
-// RbMemClear calls [raw.RbMemClear] (C function rb_mem_clear).
-func RbMemClear(arg *uint, arg2 int) {
-	raw.RbMemClear(arg, arg2)
-}
-
-// RbMemcicmp calls [raw.RbMemcicmp] (C function rb_memcicmp).
-func RbMemcicmp(arg unsafe.Pointer, arg2 unsafe.Pointer, arg3 int) int {
-	return raw.RbMemcicmp(arg, arg2, arg3)
-}
-
-// RbMemerror calls [raw.RbMemerror] (C function rb_memerror).
+// RbMemerror calls the Ruby framework function rb_memerror.
 func RbMemerror() {
-	raw.RbMemerror()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbMemerror == nil {
+		ebipurego.RegisterLibFunc(&_fnRbMemerror, _lib, "rb_memerror")
+	}
+	_fnRbMemerror()
 }
 
-// RbMemhash calls [raw.RbMemhash] (C function rb_memhash).
-func RbMemhash(ptr unsafe.Pointer, len_ int) uint {
-	return raw.RbMemhash(ptr, len_)
+var _fnRbMethodBasicDefinitionP func(int, int) int
+
+// RbMethodBasicDefinitionP calls the Ruby framework function rb_method_basic_definition_p.
+func RbMethodBasicDefinitionP(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbMethodBasicDefinitionP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbMethodBasicDefinitionP, _lib, "rb_method_basic_definition_p")
+	}
+	return _fnRbMethodBasicDefinitionP(arg, arg2)
 }
 
-// RbMethodBasicDefinitionP calls [raw.RbMethodBasicDefinitionP] (C function rb_method_basic_definition_p).
-func RbMethodBasicDefinitionP(arg uint, arg2 uint) int {
-	return raw.RbMethodBasicDefinitionP(arg, arg2)
+var _fnRbMethodBoundp func(int, int, int) int
+
+// RbMethodBoundp calls the Ruby framework function rb_method_boundp.
+func RbMethodBoundp(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbMethodBoundp == nil {
+		ebipurego.RegisterLibFunc(&_fnRbMethodBoundp, _lib, "rb_method_boundp")
+	}
+	return _fnRbMethodBoundp(arg, arg2, arg3)
 }
 
-// RbMethodBoundp calls [raw.RbMethodBoundp] (C function rb_method_boundp).
-func RbMethodBoundp(arg uint, arg2 uint, arg3 int) int {
-	return raw.RbMethodBoundp(arg, arg2, arg3)
+var _fnRbModAncestors func(int) int
+
+// RbModAncestors calls the Ruby framework function rb_mod_ancestors.
+func RbModAncestors(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbModAncestors == nil {
+		ebipurego.RegisterLibFunc(&_fnRbModAncestors, _lib, "rb_mod_ancestors")
+	}
+	return _fnRbModAncestors(arg)
 }
 
-// RbMethodCall calls [raw.RbMethodCall] (C function rb_method_call).
-func RbMethodCall(arg int, arg2 *uint, arg3 uint) uint {
-	return raw.RbMethodCall(arg, arg2, arg3)
+var _fnRbModConstMissing func(int, int) int
+
+// RbModConstMissing calls the Ruby framework function rb_mod_const_missing.
+func RbModConstMissing(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbModConstMissing == nil {
+		ebipurego.RegisterLibFunc(&_fnRbModConstMissing, _lib, "rb_mod_const_missing")
+	}
+	return _fnRbModConstMissing(arg, arg2)
 }
 
-// RbMethodCallWithBlock calls [raw.RbMethodCallWithBlock] (C function rb_method_call_with_block).
-func RbMethodCallWithBlock(arg int, arg2 *uint, arg3 uint, arg4 uint) uint {
-	return raw.RbMethodCallWithBlock(arg, arg2, arg3, arg4)
+var _fnRbModIncludeP func(int, int) int
+
+// RbModIncludeP calls the Ruby framework function rb_mod_include_p.
+func RbModIncludeP(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbModIncludeP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbModIncludeP, _lib, "rb_mod_include_p")
+	}
+	return _fnRbModIncludeP(arg, arg2)
 }
 
-// RbModAncestors calls [raw.RbModAncestors] (C function rb_mod_ancestors).
-func RbModAncestors(arg uint) uint {
-	return raw.RbModAncestors(arg)
+var _fnRbModIncludedModules func(int) int
+
+// RbModIncludedModules calls the Ruby framework function rb_mod_included_modules.
+func RbModIncludedModules(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbModIncludedModules == nil {
+		ebipurego.RegisterLibFunc(&_fnRbModIncludedModules, _lib, "rb_mod_included_modules")
+	}
+	return _fnRbModIncludedModules(arg)
 }
 
-// RbModClassVariables calls [raw.RbModClassVariables] (C function rb_mod_class_variables).
-func RbModClassVariables(arg int, arg2 *uint, arg3 uint) uint {
-	return raw.RbModClassVariables(arg, arg2, arg3)
+var _fnRbModInitCopy func(int, int) int
+
+// RbModInitCopy calls the Ruby framework function rb_mod_init_copy.
+func RbModInitCopy(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbModInitCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnRbModInitCopy, _lib, "rb_mod_init_copy")
+	}
+	return _fnRbModInitCopy(arg, arg2)
 }
 
-// RbModConstAt calls [raw.RbModConstAt] (C function rb_mod_const_at).
-func RbModConstAt(arg uint, arg2 unsafe.Pointer) unsafe.Pointer {
-	return raw.RbModConstAt(arg, arg2)
+var _fnRbModMethodArity func(int, int) int
+
+// RbModMethodArity calls the Ruby framework function rb_mod_method_arity.
+func RbModMethodArity(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbModMethodArity == nil {
+		ebipurego.RegisterLibFunc(&_fnRbModMethodArity, _lib, "rb_mod_method_arity")
+	}
+	return _fnRbModMethodArity(arg, arg2)
 }
 
-// RbModConstMissing calls [raw.RbModConstMissing] (C function rb_mod_const_missing).
-func RbModConstMissing(arg uint, arg2 uint) uint {
-	return raw.RbModConstMissing(arg, arg2)
+var _fnRbModName func(int) int
+
+// RbModName calls the Ruby framework function rb_mod_name.
+func RbModName(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbModName == nil {
+		ebipurego.RegisterLibFunc(&_fnRbModName, _lib, "rb_mod_name")
+	}
+	return _fnRbModName(arg)
 }
 
-// RbModConstOf calls [raw.RbModConstOf] (C function rb_mod_const_of).
-func RbModConstOf(arg uint, arg2 unsafe.Pointer) unsafe.Pointer {
-	return raw.RbModConstOf(arg, arg2)
+var _fnRbModRemoveConst func(int, int) int
+
+// RbModRemoveConst calls the Ruby framework function rb_mod_remove_const.
+func RbModRemoveConst(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbModRemoveConst == nil {
+		ebipurego.RegisterLibFunc(&_fnRbModRemoveConst, _lib, "rb_mod_remove_const")
+	}
+	return _fnRbModRemoveConst(arg, arg2)
 }
 
-// RbModConstants calls [raw.RbModConstants] (C function rb_mod_constants).
-func RbModConstants(arg int, arg2 *uint, arg3 uint) uint {
-	return raw.RbModConstants(arg, arg2, arg3)
+var _fnRbModRemoveCvar func(int, int) int
+
+// RbModRemoveCvar calls the Ruby framework function rb_mod_remove_cvar.
+func RbModRemoveCvar(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbModRemoveCvar == nil {
+		ebipurego.RegisterLibFunc(&_fnRbModRemoveCvar, _lib, "rb_mod_remove_cvar")
+	}
+	return _fnRbModRemoveCvar(arg, arg2)
 }
 
-// RbModIncludeP calls [raw.RbModIncludeP] (C function rb_mod_include_p).
-func RbModIncludeP(arg uint, arg2 uint) uint {
-	return raw.RbModIncludeP(arg, arg2)
+var _fnRbModSysFail func(int, string)
+
+// RbModSysFail calls the Ruby framework function rb_mod_sys_fail.
+func RbModSysFail(arg int, arg2 string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbModSysFail == nil {
+		ebipurego.RegisterLibFunc(&_fnRbModSysFail, _lib, "rb_mod_sys_fail")
+	}
+	_fnRbModSysFail(arg, arg2)
 }
 
-// RbModIncludedModules calls [raw.RbModIncludedModules] (C function rb_mod_included_modules).
-func RbModIncludedModules(arg uint) uint {
-	return raw.RbModIncludedModules(arg)
+var _fnRbModSysFailStr func(int, int)
+
+// RbModSysFailStr calls the Ruby framework function rb_mod_sys_fail_str.
+func RbModSysFailStr(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbModSysFailStr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbModSysFailStr, _lib, "rb_mod_sys_fail_str")
+	}
+	_fnRbModSysFailStr(arg, arg2)
 }
 
-// RbModInitCopy calls [raw.RbModInitCopy] (C function rb_mod_init_copy).
-func RbModInitCopy(arg uint, arg2 uint) uint {
-	return raw.RbModInitCopy(arg, arg2)
+var _fnRbModSyserrFail func(int, int, string)
+
+// RbModSyserrFail calls the Ruby framework function rb_mod_syserr_fail.
+func RbModSyserrFail(arg int, arg2 int, arg3 string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbModSyserrFail == nil {
+		ebipurego.RegisterLibFunc(&_fnRbModSyserrFail, _lib, "rb_mod_syserr_fail")
+	}
+	_fnRbModSyserrFail(arg, arg2, arg3)
 }
 
-// RbModMethodArity calls [raw.RbModMethodArity] (C function rb_mod_method_arity).
-func RbModMethodArity(arg uint, arg2 uint) int {
-	return raw.RbModMethodArity(arg, arg2)
+var _fnRbModSyserrFailStr func(int, int, int)
+
+// RbModSyserrFailStr calls the Ruby framework function rb_mod_syserr_fail_str.
+func RbModSyserrFailStr(arg int, arg2 int, arg3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbModSyserrFailStr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbModSyserrFailStr, _lib, "rb_mod_syserr_fail_str")
+	}
+	_fnRbModSyserrFailStr(arg, arg2, arg3)
 }
 
-// RbModModuleEval calls [raw.RbModModuleEval] (C function rb_mod_module_eval).
-func RbModModuleEval(arg int, arg2 *uint, arg3 uint) uint {
-	return raw.RbModModuleEval(arg, arg2, arg3)
+var _fnRbModuleNew func() int
+
+// RbModuleNew calls the Ruby framework function rb_module_new.
+func RbModuleNew() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbModuleNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbModuleNew, _lib, "rb_module_new")
+	}
+	return _fnRbModuleNew()
 }
 
-// RbModModuleExec calls [raw.RbModModuleExec] (C function rb_mod_module_exec).
-func RbModModuleExec(arg int, arg2 *uint, arg3 uint) uint {
-	return raw.RbModModuleExec(arg, arg2, arg3)
+var _fnRbMustAsciicompat func(int)
+
+// RbMustAsciicompat calls the Ruby framework function rb_must_asciicompat.
+func RbMustAsciicompat(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbMustAsciicompat == nil {
+		ebipurego.RegisterLibFunc(&_fnRbMustAsciicompat, _lib, "rb_must_asciicompat")
+	}
+	_fnRbMustAsciicompat(arg)
 }
 
-// RbModName calls [raw.RbModName] (C function rb_mod_name).
-func RbModName(arg uint) uint {
-	return raw.RbModName(arg)
+var _fnRbMutexLock func(int) int
+
+// RbMutexLock calls the Ruby framework function rb_mutex_lock.
+func RbMutexLock(mutex int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbMutexLock == nil {
+		ebipurego.RegisterLibFunc(&_fnRbMutexLock, _lib, "rb_mutex_lock")
+	}
+	return _fnRbMutexLock(mutex)
 }
 
-// RbModRemoveConst calls [raw.RbModRemoveConst] (C function rb_mod_remove_const).
-func RbModRemoveConst(arg uint, arg2 uint) uint {
-	return raw.RbModRemoveConst(arg, arg2)
+var _fnRbMutexLockedP func(int) int
+
+// RbMutexLockedP calls the Ruby framework function rb_mutex_locked_p.
+func RbMutexLockedP(mutex int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbMutexLockedP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbMutexLockedP, _lib, "rb_mutex_locked_p")
+	}
+	return _fnRbMutexLockedP(mutex)
 }
 
-// RbModRemoveCvar calls [raw.RbModRemoveCvar] (C function rb_mod_remove_cvar).
-func RbModRemoveCvar(arg uint, arg2 uint) uint {
-	return raw.RbModRemoveCvar(arg, arg2)
+var _fnRbMutexNew func() int
+
+// RbMutexNew calls the Ruby framework function rb_mutex_new.
+func RbMutexNew() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbMutexNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbMutexNew, _lib, "rb_mutex_new")
+	}
+	return _fnRbMutexNew()
 }
 
-// RbModSysFail calls [raw.RbModSysFail] (C function rb_mod_sys_fail).
-func RbModSysFail(arg uint, arg2 string) {
-	raw.RbModSysFail(arg, arg2)
+var _fnRbMutexSleep func(int, int) int
+
+// RbMutexSleep calls the Ruby framework function rb_mutex_sleep.
+func RbMutexSleep(self int, timeout int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbMutexSleep == nil {
+		ebipurego.RegisterLibFunc(&_fnRbMutexSleep, _lib, "rb_mutex_sleep")
+	}
+	return _fnRbMutexSleep(self, timeout)
 }
 
-// RbModSysFailStr calls [raw.RbModSysFailStr] (C function rb_mod_sys_fail_str).
-func RbModSysFailStr(arg uint, arg2 uint) {
-	raw.RbModSysFailStr(arg, arg2)
+var _fnRbMutexTrylock func(int) int
+
+// RbMutexTrylock calls the Ruby framework function rb_mutex_trylock.
+func RbMutexTrylock(mutex int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbMutexTrylock == nil {
+		ebipurego.RegisterLibFunc(&_fnRbMutexTrylock, _lib, "rb_mutex_trylock")
+	}
+	return _fnRbMutexTrylock(mutex)
 }
 
-// RbModSyserrFail calls [raw.RbModSyserrFail] (C function rb_mod_syserr_fail).
-func RbModSyserrFail(arg uint, arg2 int, arg3 string) {
-	raw.RbModSyserrFail(arg, arg2, arg3)
+var _fnRbMutexUnlock func(int) int
+
+// RbMutexUnlock calls the Ruby framework function rb_mutex_unlock.
+func RbMutexUnlock(mutex int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbMutexUnlock == nil {
+		ebipurego.RegisterLibFunc(&_fnRbMutexUnlock, _lib, "rb_mutex_unlock")
+	}
+	return _fnRbMutexUnlock(mutex)
 }
 
-// RbModSyserrFailStr calls [raw.RbModSyserrFailStr] (C function rb_mod_syserr_fail_str).
-func RbModSyserrFailStr(arg uint, arg2 int, arg3 uint) {
-	raw.RbModSyserrFailStr(arg, arg2, arg3)
+var _fnRbNameClass func(int, int)
+
+// RbNameClass calls the Ruby framework function rb_name_class.
+func RbNameClass(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNameClass == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNameClass, _lib, "rb_name_class")
+	}
+	_fnRbNameClass(arg, arg2)
 }
 
-// RbModuleNew calls [raw.RbModuleNew] (C function rb_module_new).
-func RbModuleNew() uint {
-	return raw.RbModuleNew()
-}
+var _fnRbNeedBlock func()
 
-// RbMulSizeOverflow calls [raw.RbMulSizeOverflow] (C function rb_mul_size_overflow).
-func RbMulSizeOverflow(a uint, b uint, max uint, c *uint) int {
-	return raw.RbMulSizeOverflow(a, b, max, c)
-}
-
-// RbMustAsciicompat calls [raw.RbMustAsciicompat] (C function rb_must_asciicompat).
-func RbMustAsciicompat(arg uint) {
-	raw.RbMustAsciicompat(arg)
-}
-
-// RbMutexLock calls [raw.RbMutexLock] (C function rb_mutex_lock).
-func RbMutexLock(mutex uint) uint {
-	return raw.RbMutexLock(mutex)
-}
-
-// RbMutexLockedP calls [raw.RbMutexLockedP] (C function rb_mutex_locked_p).
-func RbMutexLockedP(mutex uint) uint {
-	return raw.RbMutexLockedP(mutex)
-}
-
-// RbMutexNew calls [raw.RbMutexNew] (C function rb_mutex_new).
-func RbMutexNew() uint {
-	return raw.RbMutexNew()
-}
-
-// RbMutexSleep calls [raw.RbMutexSleep] (C function rb_mutex_sleep).
-func RbMutexSleep(self uint, timeout uint) uint {
-	return raw.RbMutexSleep(self, timeout)
-}
-
-// RbMutexSynchronize calls [raw.RbMutexSynchronize] (C function rb_mutex_synchronize).
-func RbMutexSynchronize(mutex uint, func_ unsafe.Pointer, arg uint) uint {
-	return raw.RbMutexSynchronize(mutex, func_, arg)
-}
-
-// RbMutexTrylock calls [raw.RbMutexTrylock] (C function rb_mutex_trylock).
-func RbMutexTrylock(mutex uint) uint {
-	return raw.RbMutexTrylock(mutex)
-}
-
-// RbMutexUnlock calls [raw.RbMutexUnlock] (C function rb_mutex_unlock).
-func RbMutexUnlock(mutex uint) uint {
-	return raw.RbMutexUnlock(mutex)
-}
-
-// RbNameClass calls [raw.RbNameClass] (C function rb_name_class).
-func RbNameClass(arg uint, arg2 uint) {
-	raw.RbNameClass(arg, arg2)
-}
-
-// RbNeedBlock calls [raw.RbNeedBlock] (C function rb_need_block).
+// RbNeedBlock calls the Ruby framework function rb_need_block.
 func RbNeedBlock() {
-	raw.RbNeedBlock()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNeedBlock == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNeedBlock, _lib, "rb_need_block")
+	}
+	_fnRbNeedBlock()
 }
 
-// RbNewobj calls [raw.RbNewobj] (C function rb_newobj).
-func RbNewobj() uint {
-	return raw.RbNewobj()
+var _fnRbNewobj func() int
+
+// RbNewobj calls the Ruby framework function rb_newobj.
+func RbNewobj() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNewobj == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNewobj, _lib, "rb_newobj")
+	}
+	return _fnRbNewobj()
 }
 
-// RbNewobjOf calls [raw.RbNewobjOf] (C function rb_newobj_of).
-func RbNewobjOf(arg uint, arg2 uint) uint {
-	return raw.RbNewobjOf(arg, arg2)
+var _fnRbNewobjOf func(int, int) int
+
+// RbNewobjOf calls the Ruby framework function rb_newobj_of.
+func RbNewobjOf(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNewobjOf == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNewobjOf, _lib, "rb_newobj_of")
+	}
+	return _fnRbNewobjOf(arg, arg2)
 }
 
-// RbNotimplement calls [raw.RbNotimplement] (C function rb_notimplement).
+var _fnRbNotimplement func()
+
+// RbNotimplement calls the Ruby framework function rb_notimplement.
 func RbNotimplement() {
-	raw.RbNotimplement()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNotimplement == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNotimplement, _lib, "rb_notimplement")
+	}
+	_fnRbNotimplement()
 }
 
-// RbNum2charInline calls [raw.RbNum2charInline] (C function rb_num2char_inline).
-func RbNum2charInline(x uint) int8 {
-	return raw.RbNum2charInline(x)
+var _fnRbNum2charInline func(int) int8
+
+// RbNum2charInline calls the Ruby framework function rb_num2char_inline.
+func RbNum2charInline(x int) int8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNum2charInline == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNum2charInline, _lib, "rb_num2char_inline")
+	}
+	return _fnRbNum2charInline(x)
 }
 
-// RbNum2dbl calls [raw.RbNum2dbl] (C function rb_num2dbl).
-func RbNum2dbl(arg uint) float64 {
-	return raw.RbNum2dbl(arg)
+var _fnRbNum2dbl func(int) float64
+
+// RbNum2dbl calls the Ruby framework function rb_num2dbl.
+func RbNum2dbl(arg int) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNum2dbl == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNum2dbl, _lib, "rb_num2dbl")
+	}
+	return _fnRbNum2dbl(arg)
 }
 
-// RbNum2fix calls [raw.RbNum2fix] (C function rb_num2fix).
-func RbNum2fix(arg uint) uint {
-	return raw.RbNum2fix(arg)
+var _fnRbNum2fix func(int) int
+
+// RbNum2fix calls the Ruby framework function rb_num2fix.
+func RbNum2fix(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNum2fix == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNum2fix, _lib, "rb_num2fix")
+	}
+	return _fnRbNum2fix(arg)
 }
 
-// RbNum2int calls [raw.RbNum2int] (C function rb_num2int).
-func RbNum2int(arg uint) int {
-	return raw.RbNum2int(arg)
+var _fnRbNum2int func(int) int
+
+// RbNum2int calls the Ruby framework function rb_num2int.
+func RbNum2int(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNum2int == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNum2int, _lib, "rb_num2int")
+	}
+	return _fnRbNum2int(arg)
 }
 
-// RbNum2intInline calls [raw.RbNum2intInline] (C function rb_num2int_inline).
-func RbNum2intInline(x uint) int {
-	return raw.RbNum2intInline(x)
+var _fnRbNum2intInline func(int) int
+
+// RbNum2intInline calls the Ruby framework function rb_num2int_inline.
+func RbNum2intInline(x int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNum2intInline == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNum2intInline, _lib, "rb_num2int_inline")
+	}
+	return _fnRbNum2intInline(x)
 }
 
-// RbNum2ll calls [raw.RbNum2ll] (C function rb_num2ll).
-func RbNum2ll(arg uint) int64 {
-	return raw.RbNum2ll(arg)
+var _fnRbNum2ll func(int) int64
+
+// RbNum2ll calls the Ruby framework function rb_num2ll.
+func RbNum2ll(arg int) int64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNum2ll == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNum2ll, _lib, "rb_num2ll")
+	}
+	return _fnRbNum2ll(arg)
 }
 
-// RbNum2llInline calls [raw.RbNum2llInline] (C function rb_num2ll_inline).
-func RbNum2llInline(x uint) int64 {
-	return raw.RbNum2llInline(x)
+var _fnRbNum2llInline func(int) int64
+
+// RbNum2llInline calls the Ruby framework function rb_num2ll_inline.
+func RbNum2llInline(x int) int64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNum2llInline == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNum2llInline, _lib, "rb_num2ll_inline")
+	}
+	return _fnRbNum2llInline(x)
 }
 
-// RbNum2long calls [raw.RbNum2long] (C function rb_num2long).
-func RbNum2long(arg uint) int {
-	return raw.RbNum2long(arg)
+var _fnRbNum2long func(int) int
+
+// RbNum2long calls the Ruby framework function rb_num2long.
+func RbNum2long(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNum2long == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNum2long, _lib, "rb_num2long")
+	}
+	return _fnRbNum2long(arg)
 }
 
-// RbNum2longInline calls [raw.RbNum2longInline] (C function rb_num2long_inline).
-func RbNum2longInline(x uint) int {
-	return raw.RbNum2longInline(x)
+var _fnRbNum2longInline func(int) int
+
+// RbNum2longInline calls the Ruby framework function rb_num2long_inline.
+func RbNum2longInline(x int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNum2longInline == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNum2longInline, _lib, "rb_num2long_inline")
+	}
+	return _fnRbNum2longInline(x)
 }
 
-// RbNum2short calls [raw.RbNum2short] (C function rb_num2short).
-func RbNum2short(arg uint) int16 {
-	return raw.RbNum2short(arg)
+var _fnRbNum2short func(int) int16
+
+// RbNum2short calls the Ruby framework function rb_num2short.
+func RbNum2short(arg int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNum2short == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNum2short, _lib, "rb_num2short")
+	}
+	return _fnRbNum2short(arg)
 }
 
-// RbNum2shortInline calls [raw.RbNum2shortInline] (C function rb_num2short_inline).
-func RbNum2shortInline(x uint) int16 {
-	return raw.RbNum2shortInline(x)
+var _fnRbNum2shortInline func(int) int16
+
+// RbNum2shortInline calls the Ruby framework function rb_num2short_inline.
+func RbNum2shortInline(x int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNum2shortInline == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNum2shortInline, _lib, "rb_num2short_inline")
+	}
+	return _fnRbNum2shortInline(x)
 }
 
-// RbNum2uint calls [raw.RbNum2uint] (C function rb_num2uint).
-func RbNum2uint(arg uint) uint {
-	return raw.RbNum2uint(arg)
+var _fnRbNum2uint func(int) int
+
+// RbNum2uint calls the Ruby framework function rb_num2uint.
+func RbNum2uint(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNum2uint == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNum2uint, _lib, "rb_num2uint")
+	}
+	return _fnRbNum2uint(arg)
 }
 
-// RbNum2ull calls [raw.RbNum2ull] (C function rb_num2ull).
-func RbNum2ull(arg uint) uint64 {
-	return raw.RbNum2ull(arg)
+var _fnRbNum2ull func(int) uint64
+
+// RbNum2ull calls the Ruby framework function rb_num2ull.
+func RbNum2ull(arg int) uint64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNum2ull == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNum2ull, _lib, "rb_num2ull")
+	}
+	return _fnRbNum2ull(arg)
 }
 
-// RbNum2ulong calls [raw.RbNum2ulong] (C function rb_num2ulong).
-func RbNum2ulong(arg uint) uint {
-	return raw.RbNum2ulong(arg)
+var _fnRbNum2ulong func(int) int
+
+// RbNum2ulong calls the Ruby framework function rb_num2ulong.
+func RbNum2ulong(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNum2ulong == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNum2ulong, _lib, "rb_num2ulong")
+	}
+	return _fnRbNum2ulong(arg)
 }
 
-// RbNum2ulongInline calls [raw.RbNum2ulongInline] (C function rb_num2ulong_inline).
-func RbNum2ulongInline(x uint) uint {
-	return raw.RbNum2ulongInline(x)
+var _fnRbNum2ulongInline func(int) int
+
+// RbNum2ulongInline calls the Ruby framework function rb_num2ulong_inline.
+func RbNum2ulongInline(x int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNum2ulongInline == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNum2ulongInline, _lib, "rb_num2ulong_inline")
+	}
+	return _fnRbNum2ulongInline(x)
 }
 
-// RbNum2ushort calls [raw.RbNum2ushort] (C function rb_num2ushort).
-func RbNum2ushort(arg uint) uint16 {
-	return raw.RbNum2ushort(arg)
+var _fnRbNum2ushort func(int) uint16
+
+// RbNum2ushort calls the Ruby framework function rb_num2ushort.
+func RbNum2ushort(arg int) uint16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNum2ushort == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNum2ushort, _lib, "rb_num2ushort")
+	}
+	return _fnRbNum2ushort(arg)
 }
 
-// RbNumCoerceBin calls [raw.RbNumCoerceBin] (C function rb_num_coerce_bin).
-func RbNumCoerceBin(arg uint, arg2 uint, arg3 uint) uint {
-	return raw.RbNumCoerceBin(arg, arg2, arg3)
+var _fnRbNumCoerceBin func(int, int, int) int
+
+// RbNumCoerceBin calls the Ruby framework function rb_num_coerce_bin.
+func RbNumCoerceBin(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNumCoerceBin == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNumCoerceBin, _lib, "rb_num_coerce_bin")
+	}
+	return _fnRbNumCoerceBin(arg, arg2, arg3)
 }
 
-// RbNumCoerceBit calls [raw.RbNumCoerceBit] (C function rb_num_coerce_bit).
-func RbNumCoerceBit(arg uint, arg2 uint, arg3 uint) uint {
-	return raw.RbNumCoerceBit(arg, arg2, arg3)
+var _fnRbNumCoerceBit func(int, int, int) int
+
+// RbNumCoerceBit calls the Ruby framework function rb_num_coerce_bit.
+func RbNumCoerceBit(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNumCoerceBit == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNumCoerceBit, _lib, "rb_num_coerce_bit")
+	}
+	return _fnRbNumCoerceBit(arg, arg2, arg3)
 }
 
-// RbNumCoerceCmp calls [raw.RbNumCoerceCmp] (C function rb_num_coerce_cmp).
-func RbNumCoerceCmp(arg uint, arg2 uint, arg3 uint) uint {
-	return raw.RbNumCoerceCmp(arg, arg2, arg3)
+var _fnRbNumCoerceCmp func(int, int, int) int
+
+// RbNumCoerceCmp calls the Ruby framework function rb_num_coerce_cmp.
+func RbNumCoerceCmp(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNumCoerceCmp == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNumCoerceCmp, _lib, "rb_num_coerce_cmp")
+	}
+	return _fnRbNumCoerceCmp(arg, arg2, arg3)
 }
 
-// RbNumCoerceRelop calls [raw.RbNumCoerceRelop] (C function rb_num_coerce_relop).
-func RbNumCoerceRelop(arg uint, arg2 uint, arg3 uint) uint {
-	return raw.RbNumCoerceRelop(arg, arg2, arg3)
+var _fnRbNumCoerceRelop func(int, int, int) int
+
+// RbNumCoerceRelop calls the Ruby framework function rb_num_coerce_relop.
+func RbNumCoerceRelop(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNumCoerceRelop == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNumCoerceRelop, _lib, "rb_num_coerce_relop")
+	}
+	return _fnRbNumCoerceRelop(arg, arg2, arg3)
 }
 
-// RbNumZerodiv calls [raw.RbNumZerodiv] (C function rb_num_zerodiv).
+var _fnRbNumZerodiv func()
+
+// RbNumZerodiv calls the Ruby framework function rb_num_zerodiv.
 func RbNumZerodiv() {
-	raw.RbNumZerodiv()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbNumZerodiv == nil {
+		ebipurego.RegisterLibFunc(&_fnRbNumZerodiv, _lib, "rb_num_zerodiv")
+	}
+	_fnRbNumZerodiv()
 }
 
-// RbObjAlloc calls [raw.RbObjAlloc] (C function rb_obj_alloc).
-func RbObjAlloc(arg uint) uint {
-	return raw.RbObjAlloc(arg)
+var _fnRbObjAlloc func(int) int
+
+// RbObjAlloc calls the Ruby framework function rb_obj_alloc.
+func RbObjAlloc(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjAlloc == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjAlloc, _lib, "rb_obj_alloc")
+	}
+	return _fnRbObjAlloc(arg)
 }
 
-// RbObjAsString calls [raw.RbObjAsString] (C function rb_obj_as_string).
-func RbObjAsString(arg uint) uint {
-	return raw.RbObjAsString(arg)
+var _fnRbObjAsString func(int) int
+
+// RbObjAsString calls the Ruby framework function rb_obj_as_string.
+func RbObjAsString(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjAsString == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjAsString, _lib, "rb_obj_as_string")
+	}
+	return _fnRbObjAsString(arg)
 }
 
-// RbObjCallInit calls [raw.RbObjCallInit] (C function rb_obj_call_init).
-func RbObjCallInit(arg uint, arg2 int, arg3 *uint) {
-	raw.RbObjCallInit(arg, arg2, arg3)
+var _fnRbObjClass func(int) int
+
+// RbObjClass calls the Ruby framework function rb_obj_class.
+func RbObjClass(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjClass == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjClass, _lib, "rb_obj_class")
+	}
+	return _fnRbObjClass(arg)
 }
 
-// RbObjClass calls [raw.RbObjClass] (C function rb_obj_class).
-func RbObjClass(arg uint) uint {
-	return raw.RbObjClass(arg)
+var _fnRbObjClassname func(int) string
+
+// RbObjClassname calls the Ruby framework function rb_obj_classname.
+func RbObjClassname(arg int) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjClassname == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjClassname, _lib, "rb_obj_classname")
+	}
+	return _fnRbObjClassname(arg)
 }
 
-// RbObjClassname calls [raw.RbObjClassname] (C function rb_obj_classname).
-func RbObjClassname(arg uint) string {
-	return raw.RbObjClassname(arg)
+var _fnRbObjClone func(int) int
+
+// RbObjClone calls the Ruby framework function rb_obj_clone.
+func RbObjClone(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjClone == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjClone, _lib, "rb_obj_clone")
+	}
+	return _fnRbObjClone(arg)
 }
 
-// RbObjClone calls [raw.RbObjClone] (C function rb_obj_clone).
-func RbObjClone(arg uint) uint {
-	return raw.RbObjClone(arg)
+var _fnRbObjDup func(int) int
+
+// RbObjDup calls the Ruby framework function rb_obj_dup.
+func RbObjDup(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjDup == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjDup, _lib, "rb_obj_dup")
+	}
+	return _fnRbObjDup(arg)
 }
 
-// RbObjDup calls [raw.RbObjDup] (C function rb_obj_dup).
-func RbObjDup(arg uint) uint {
-	return raw.RbObjDup(arg)
+var _fnRbObjFreeze func(int) int
+
+// RbObjFreeze calls the Ruby framework function rb_obj_freeze.
+func RbObjFreeze(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjFreeze == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjFreeze, _lib, "rb_obj_freeze")
+	}
+	return _fnRbObjFreeze(arg)
 }
 
-// RbObjFreeze calls [raw.RbObjFreeze] (C function rb_obj_freeze).
-func RbObjFreeze(arg uint) uint {
-	return raw.RbObjFreeze(arg)
+var _fnRbObjFreezeInline func(int)
+
+// RbObjFreezeInline calls the Ruby framework function rb_obj_freeze_inline.
+func RbObjFreezeInline(x int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjFreezeInline == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjFreezeInline, _lib, "rb_obj_freeze_inline")
+	}
+	_fnRbObjFreezeInline(x)
 }
 
-// RbObjFreezeInline calls [raw.RbObjFreezeInline] (C function rb_obj_freeze_inline).
-func RbObjFreezeInline(x uint) {
-	raw.RbObjFreezeInline(x)
+var _fnRbObjFrozenP func(int) int
+
+// RbObjFrozenP calls the Ruby framework function rb_obj_frozen_p.
+func RbObjFrozenP(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjFrozenP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjFrozenP, _lib, "rb_obj_frozen_p")
+	}
+	return _fnRbObjFrozenP(arg)
 }
 
-// RbObjFrozenP calls [raw.RbObjFrozenP] (C function rb_obj_frozen_p).
-func RbObjFrozenP(arg uint) uint {
-	return raw.RbObjFrozenP(arg)
+var _fnRbObjHide func(int) int
+
+// RbObjHide calls the Ruby framework function rb_obj_hide.
+func RbObjHide(obj_ int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjHide == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjHide, _lib, "rb_obj_hide")
+	}
+	return _fnRbObjHide(obj_)
 }
 
-// RbObjHide calls [raw.RbObjHide] (C function rb_obj_hide).
-func RbObjHide(obj uint) uint {
-	return raw.RbObjHide(obj)
+var _fnRbObjId func(int) int
+
+// RbObjId calls the Ruby framework function rb_obj_id.
+func RbObjId(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjId == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjId, _lib, "rb_obj_id")
+	}
+	return _fnRbObjId(arg)
 }
 
-// RbObjId calls [raw.RbObjId] (C function rb_obj_id).
-func RbObjId(arg uint) uint {
-	return raw.RbObjId(arg)
+var _fnRbObjInfect func(int, int)
+
+// RbObjInfect calls the Ruby framework function rb_obj_infect.
+func RbObjInfect(victim int, carrier int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjInfect == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjInfect, _lib, "rb_obj_infect")
+	}
+	_fnRbObjInfect(victim, carrier)
 }
 
-// RbObjInfect calls [raw.RbObjInfect] (C function rb_obj_infect).
-func RbObjInfect(victim uint, carrier uint) {
-	raw.RbObjInfect(victim, carrier)
+var _fnRbObjInitCopy func(int, int) int
+
+// RbObjInitCopy calls the Ruby framework function rb_obj_init_copy.
+func RbObjInitCopy(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjInitCopy == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjInitCopy, _lib, "rb_obj_init_copy")
+	}
+	return _fnRbObjInitCopy(arg, arg2)
 }
 
-// RbObjInitCopy calls [raw.RbObjInitCopy] (C function rb_obj_init_copy).
-func RbObjInitCopy(arg uint, arg2 uint) uint {
-	return raw.RbObjInitCopy(arg, arg2)
+var _fnRbObjInstanceVariables func(int) int
+
+// RbObjInstanceVariables calls the Ruby framework function rb_obj_instance_variables.
+func RbObjInstanceVariables(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjInstanceVariables == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjInstanceVariables, _lib, "rb_obj_instance_variables")
+	}
+	return _fnRbObjInstanceVariables(arg)
 }
 
-// RbObjInstanceEval calls [raw.RbObjInstanceEval] (C function rb_obj_instance_eval).
-func RbObjInstanceEval(arg int, arg2 *uint, arg3 uint) uint {
-	return raw.RbObjInstanceEval(arg, arg2, arg3)
+var _fnRbObjIsInstanceOf func(int, int) int
+
+// RbObjIsInstanceOf calls the Ruby framework function rb_obj_is_instance_of.
+func RbObjIsInstanceOf(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjIsInstanceOf == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjIsInstanceOf, _lib, "rb_obj_is_instance_of")
+	}
+	return _fnRbObjIsInstanceOf(arg, arg2)
 }
 
-// RbObjInstanceExec calls [raw.RbObjInstanceExec] (C function rb_obj_instance_exec).
-func RbObjInstanceExec(arg int, arg2 *uint, arg3 uint) uint {
-	return raw.RbObjInstanceExec(arg, arg2, arg3)
+var _fnRbObjIsKindOf func(int, int) int
+
+// RbObjIsKindOf calls the Ruby framework function rb_obj_is_kind_of.
+func RbObjIsKindOf(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjIsKindOf == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjIsKindOf, _lib, "rb_obj_is_kind_of")
+	}
+	return _fnRbObjIsKindOf(arg, arg2)
 }
 
-// RbObjInstanceVariables calls [raw.RbObjInstanceVariables] (C function rb_obj_instance_variables).
-func RbObjInstanceVariables(arg uint) uint {
-	return raw.RbObjInstanceVariables(arg)
+var _fnRbObjIsMethod func(int) int
+
+// RbObjIsMethod calls the Ruby framework function rb_obj_is_method.
+func RbObjIsMethod(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjIsMethod == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjIsMethod, _lib, "rb_obj_is_method")
+	}
+	return _fnRbObjIsMethod(arg)
 }
 
-// RbObjIsInstanceOf calls [raw.RbObjIsInstanceOf] (C function rb_obj_is_instance_of).
-func RbObjIsInstanceOf(arg uint, arg2 uint) uint {
-	return raw.RbObjIsInstanceOf(arg, arg2)
+var _fnRbObjIsProc func(int) int
+
+// RbObjIsProc calls the Ruby framework function rb_obj_is_proc.
+func RbObjIsProc(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjIsProc == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjIsProc, _lib, "rb_obj_is_proc")
+	}
+	return _fnRbObjIsProc(arg)
 }
 
-// RbObjIsKindOf calls [raw.RbObjIsKindOf] (C function rb_obj_is_kind_of).
-func RbObjIsKindOf(arg uint, arg2 uint) uint {
-	return raw.RbObjIsKindOf(arg, arg2)
+var _fnRbObjMethod func(int, int) int
+
+// RbObjMethod calls the Ruby framework function rb_obj_method.
+func RbObjMethod(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjMethod == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjMethod, _lib, "rb_obj_method")
+	}
+	return _fnRbObjMethod(arg, arg2)
 }
 
-// RbObjIsMethod calls [raw.RbObjIsMethod] (C function rb_obj_is_method).
-func RbObjIsMethod(arg uint) uint {
-	return raw.RbObjIsMethod(arg)
+var _fnRbObjMethodArity func(int, int) int
+
+// RbObjMethodArity calls the Ruby framework function rb_obj_method_arity.
+func RbObjMethodArity(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjMethodArity == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjMethodArity, _lib, "rb_obj_method_arity")
+	}
+	return _fnRbObjMethodArity(arg, arg2)
 }
 
-// RbObjIsProc calls [raw.RbObjIsProc] (C function rb_obj_is_proc).
-func RbObjIsProc(arg uint) uint {
-	return raw.RbObjIsProc(arg)
+var _fnRbObjRemoveInstanceVariable func(int, int) int
+
+// RbObjRemoveInstanceVariable calls the Ruby framework function rb_obj_remove_instance_variable.
+func RbObjRemoveInstanceVariable(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjRemoveInstanceVariable == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjRemoveInstanceVariable, _lib, "rb_obj_remove_instance_variable")
+	}
+	return _fnRbObjRemoveInstanceVariable(arg, arg2)
 }
 
-// RbObjMethod calls [raw.RbObjMethod] (C function rb_obj_method).
-func RbObjMethod(arg uint, arg2 uint) uint {
-	return raw.RbObjMethod(arg, arg2)
+var _fnRbObjRespondTo func(int, int, int) int
+
+// RbObjRespondTo calls the Ruby framework function rb_obj_respond_to.
+func RbObjRespondTo(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjRespondTo == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjRespondTo, _lib, "rb_obj_respond_to")
+	}
+	return _fnRbObjRespondTo(arg, arg2, arg3)
 }
 
-// RbObjMethodArity calls [raw.RbObjMethodArity] (C function rb_obj_method_arity).
-func RbObjMethodArity(arg uint, arg2 uint) int {
-	return raw.RbObjMethodArity(arg, arg2)
+var _fnRbObjReveal func(int, int) int
+
+// RbObjReveal calls the Ruby framework function rb_obj_reveal.
+func RbObjReveal(obj_ int, klass int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjReveal == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjReveal, _lib, "rb_obj_reveal")
+	}
+	return _fnRbObjReveal(obj_, klass)
 }
 
-// RbObjRemoveInstanceVariable calls [raw.RbObjRemoveInstanceVariable] (C function rb_obj_remove_instance_variable).
-func RbObjRemoveInstanceVariable(arg uint, arg2 uint) uint {
-	return raw.RbObjRemoveInstanceVariable(arg, arg2)
+var _fnRbObjSetup func(int, int, int) int
+
+// RbObjSetup calls the Ruby framework function rb_obj_setup.
+func RbObjSetup(obj_ int, klass int, type_ int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjSetup == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjSetup, _lib, "rb_obj_setup")
+	}
+	return _fnRbObjSetup(obj_, klass, type_)
 }
 
-// RbObjRespondTo calls [raw.RbObjRespondTo] (C function rb_obj_respond_to).
-func RbObjRespondTo(arg uint, arg2 uint, arg3 int) int {
-	return raw.RbObjRespondTo(arg, arg2, arg3)
+var _fnRbObjTaint func(int) int
+
+// RbObjTaint calls the Ruby framework function rb_obj_taint.
+func RbObjTaint(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjTaint == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjTaint, _lib, "rb_obj_taint")
+	}
+	return _fnRbObjTaint(arg)
 }
 
-// RbObjReveal calls [raw.RbObjReveal] (C function rb_obj_reveal).
-func RbObjReveal(obj uint, klass uint) uint {
-	return raw.RbObjReveal(obj, klass)
+var _fnRbObjTainted func(int) int
+
+// RbObjTainted calls the Ruby framework function rb_obj_tainted.
+func RbObjTainted(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjTainted == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjTainted, _lib, "rb_obj_tainted")
+	}
+	return _fnRbObjTainted(arg)
 }
 
-// RbObjSetup calls [raw.RbObjSetup] (C function rb_obj_setup).
-func RbObjSetup(obj uint, klass uint, type_ uint) uint {
-	return raw.RbObjSetup(obj, klass, type_)
+var _fnRbObjTrust func(int) int
+
+// RbObjTrust calls the Ruby framework function rb_obj_trust.
+func RbObjTrust(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjTrust == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjTrust, _lib, "rb_obj_trust")
+	}
+	return _fnRbObjTrust(arg)
 }
 
-// RbObjSingletonMethods calls [raw.RbObjSingletonMethods] (C function rb_obj_singleton_methods).
-func RbObjSingletonMethods(arg int, arg2 *uint, arg3 uint) uint {
-	return raw.RbObjSingletonMethods(arg, arg2, arg3)
+var _fnRbObjUntaint func(int) int
+
+// RbObjUntaint calls the Ruby framework function rb_obj_untaint.
+func RbObjUntaint(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjUntaint == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjUntaint, _lib, "rb_obj_untaint")
+	}
+	return _fnRbObjUntaint(arg)
 }
 
-// RbObjTaint calls [raw.RbObjTaint] (C function rb_obj_taint).
-func RbObjTaint(arg uint) uint {
-	return raw.RbObjTaint(arg)
+var _fnRbObjUntrust func(int) int
+
+// RbObjUntrust calls the Ruby framework function rb_obj_untrust.
+func RbObjUntrust(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjUntrust == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjUntrust, _lib, "rb_obj_untrust")
+	}
+	return _fnRbObjUntrust(arg)
 }
 
-// RbObjTainted calls [raw.RbObjTainted] (C function rb_obj_tainted).
-func RbObjTainted(arg uint) uint {
-	return raw.RbObjTainted(arg)
+var _fnRbObjUntrusted func(int) int
+
+// RbObjUntrusted calls the Ruby framework function rb_obj_untrusted.
+func RbObjUntrusted(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjUntrusted == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjUntrusted, _lib, "rb_obj_untrusted")
+	}
+	return _fnRbObjUntrusted(arg)
 }
 
-// RbObjTrust calls [raw.RbObjTrust] (C function rb_obj_trust).
-func RbObjTrust(arg uint) uint {
-	return raw.RbObjTrust(arg)
+var _fnRbObjWbUnprotect func(int, string, int) int
+
+// RbObjWbUnprotect calls the Ruby framework function rb_obj_wb_unprotect.
+func RbObjWbUnprotect(x int, filename string, line int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjWbUnprotect == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjWbUnprotect, _lib, "rb_obj_wb_unprotect")
+	}
+	return _fnRbObjWbUnprotect(x, filename, line)
 }
 
-// RbObjUntaint calls [raw.RbObjUntaint] (C function rb_obj_untaint).
-func RbObjUntaint(arg uint) uint {
-	return raw.RbObjUntaint(arg)
+var _fnRbObjWritten func(int, int, int, string, int) int
+
+// RbObjWritten calls the Ruby framework function rb_obj_written.
+func RbObjWritten(a int, oldv int, b int, filename string, line int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbObjWritten == nil {
+		ebipurego.RegisterLibFunc(&_fnRbObjWritten, _lib, "rb_obj_written")
+	}
+	return _fnRbObjWritten(a, oldv, b, filename, line)
 }
 
-// RbObjUntrust calls [raw.RbObjUntrust] (C function rb_obj_untrust).
-func RbObjUntrust(arg uint) uint {
-	return raw.RbObjUntrust(arg)
-}
+var _fnRbOutOfInt func(int)
 
-// RbObjUntrusted calls [raw.RbObjUntrusted] (C function rb_obj_untrusted).
-func RbObjUntrusted(arg uint) uint {
-	return raw.RbObjUntrusted(arg)
-}
-
-// RbObjWbUnprotect calls [raw.RbObjWbUnprotect] (C function rb_obj_wb_unprotect).
-func RbObjWbUnprotect(x uint, filename string, line int) uint {
-	return raw.RbObjWbUnprotect(x, filename, line)
-}
-
-// RbObjWrite calls [raw.RbObjWrite] (C function rb_obj_write).
-func RbObjWrite(a uint, slot *uint, b uint, filename string, line int) uint {
-	return raw.RbObjWrite(a, slot, b, filename, line)
-}
-
-// RbObjWritten calls [raw.RbObjWritten] (C function rb_obj_written).
-func RbObjWritten(a uint, oldv uint, b uint, filename string, line int) uint {
-	return raw.RbObjWritten(a, oldv, b, filename, line)
-}
-
-// RbOutOfInt calls [raw.RbOutOfInt] (C function rb_out_of_int).
+// RbOutOfInt calls the Ruby framework function rb_out_of_int.
 func RbOutOfInt(num int) {
-	raw.RbOutOfInt(num)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbOutOfInt == nil {
+		ebipurego.RegisterLibFunc(&_fnRbOutOfInt, _lib, "rb_out_of_int")
+	}
+	_fnRbOutOfInt(num)
 }
 
-// RbP calls [raw.RbP] (C function rb_p).
-func RbP(arg uint) {
-	raw.RbP(arg)
+var _fnRbP func(int)
+
+// RbP calls the Ruby framework function rb_p.
+func RbP(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbP, _lib, "rb_p")
+	}
+	_fnRbP(arg)
 }
 
-// RbPath2class calls [raw.RbPath2class] (C function rb_path2class).
-func RbPath2class(arg string) uint {
-	return raw.RbPath2class(arg)
+var _fnRbPath2class func(string) int
+
+// RbPath2class calls the Ruby framework function rb_path2class.
+func RbPath2class(arg string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbPath2class == nil {
+		ebipurego.RegisterLibFunc(&_fnRbPath2class, _lib, "rb_path2class")
+	}
+	return _fnRbPath2class(arg)
 }
 
-// RbPathCheck calls [raw.RbPathCheck] (C function rb_path_check).
+var _fnRbPathCheck func(string) int
+
+// RbPathCheck calls the Ruby framework function rb_path_check.
 func RbPathCheck(arg string) int {
-	return raw.RbPathCheck(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbPathCheck == nil {
+		ebipurego.RegisterLibFunc(&_fnRbPathCheck, _lib, "rb_path_check")
+	}
+	return _fnRbPathCheck(arg)
 }
 
-// RbPathToClass calls [raw.RbPathToClass] (C function rb_path_to_class).
-func RbPathToClass(arg uint) uint {
-	return raw.RbPathToClass(arg)
+var _fnRbPathToClass func(int) int
+
+// RbPathToClass calls the Ruby framework function rb_path_to_class.
+func RbPathToClass(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbPathToClass == nil {
+		ebipurego.RegisterLibFunc(&_fnRbPathToClass, _lib, "rb_path_to_class")
+	}
+	return _fnRbPathToClass(arg)
 }
 
-// RbPipe calls [raw.RbPipe] (C function rb_pipe).
-func RbPipe(pipes *int32) int {
-	return raw.RbPipe(pipes)
+var _fnRbPrependModule func(int, int)
+
+// RbPrependModule calls the Ruby framework function rb_prepend_module.
+func RbPrependModule(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbPrependModule == nil {
+		ebipurego.RegisterLibFunc(&_fnRbPrependModule, _lib, "rb_prepend_module")
+	}
+	_fnRbPrependModule(arg, arg2)
 }
 
-// RbPrependModule calls [raw.RbPrependModule] (C function rb_prepend_module).
-func RbPrependModule(arg uint, arg2 uint) {
-	raw.RbPrependModule(arg, arg2)
+var _fnRbProcArity func(int) int
+
+// RbProcArity calls the Ruby framework function rb_proc_arity.
+func RbProcArity(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbProcArity == nil {
+		ebipurego.RegisterLibFunc(&_fnRbProcArity, _lib, "rb_proc_arity")
+	}
+	return _fnRbProcArity(arg)
 }
 
-// RbProcArity calls [raw.RbProcArity] (C function rb_proc_arity).
-func RbProcArity(arg uint) int {
-	return raw.RbProcArity(arg)
+var _fnRbProcCall func(int, int) int
+
+// RbProcCall calls the Ruby framework function rb_proc_call.
+func RbProcCall(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbProcCall == nil {
+		ebipurego.RegisterLibFunc(&_fnRbProcCall, _lib, "rb_proc_call")
+	}
+	return _fnRbProcCall(arg, arg2)
 }
 
-// RbProcCall calls [raw.RbProcCall] (C function rb_proc_call).
-func RbProcCall(arg uint, arg2 uint) uint {
-	return raw.RbProcCall(arg, arg2)
-}
+var _fnRbProcExec func(string) int
 
-// RbProcCallWithBlock calls [raw.RbProcCallWithBlock] (C function rb_proc_call_with_block).
-func RbProcCallWithBlock(arg uint, argc int, argv *uint, arg2 uint) uint {
-	return raw.RbProcCallWithBlock(arg, argc, argv, arg2)
-}
-
-// RbProcExec calls [raw.RbProcExec] (C function rb_proc_exec).
+// RbProcExec calls the Ruby framework function rb_proc_exec.
 func RbProcExec(arg string) int {
-	return raw.RbProcExec(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbProcExec == nil {
+		ebipurego.RegisterLibFunc(&_fnRbProcExec, _lib, "rb_proc_exec")
+	}
+	return _fnRbProcExec(arg)
 }
 
-// RbProcLambdaP calls [raw.RbProcLambdaP] (C function rb_proc_lambda_p).
-func RbProcLambdaP(arg uint) uint {
-	return raw.RbProcLambdaP(arg)
+var _fnRbProcLambdaP func(int) int
+
+// RbProcLambdaP calls the Ruby framework function rb_proc_lambda_p.
+func RbProcLambdaP(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbProcLambdaP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbProcLambdaP, _lib, "rb_proc_lambda_p")
+	}
+	return _fnRbProcLambdaP(arg)
 }
 
-// RbProcNew calls [raw.RbProcNew] (C function rb_proc_new).
-func RbProcNew(arg unsafe.Pointer, arg2 uint) uint {
-	return raw.RbProcNew(arg, arg2)
+var _fnRbProcTimes func(int) int
+
+// RbProcTimes calls the Ruby framework function rb_proc_times.
+func RbProcTimes(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbProcTimes == nil {
+		ebipurego.RegisterLibFunc(&_fnRbProcTimes, _lib, "rb_proc_times")
+	}
+	return _fnRbProcTimes(arg)
 }
 
-// RbProcTimes calls [raw.RbProcTimes] (C function rb_proc_times).
-func RbProcTimes(arg uint) uint {
-	return raw.RbProcTimes(arg)
-}
+var _fnRbProvide func(string)
 
-// RbProtect calls [raw.RbProtect] (C function rb_protect).
-func RbProtect(arg unsafe.Pointer, arg2 uint, arg3 *int32) uint {
-	return raw.RbProtect(arg, arg2, arg3)
-}
-
-// RbProvide calls [raw.RbProvide] (C function rb_provide).
+// RbProvide calls the Ruby framework function rb_provide.
 func RbProvide(arg string) {
-	raw.RbProvide(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbProvide == nil {
+		ebipurego.RegisterLibFunc(&_fnRbProvide, _lib, "rb_provide")
+	}
+	_fnRbProvide(arg)
 }
 
-// RbProvided calls [raw.RbProvided] (C function rb_provided).
+var _fnRbProvided func(string) int
+
+// RbProvided calls the Ruby framework function rb_provided.
 func RbProvided(arg string) int {
-	return raw.RbProvided(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbProvided == nil {
+		ebipurego.RegisterLibFunc(&_fnRbProvided, _lib, "rb_provided")
+	}
+	return _fnRbProvided(arg)
 }
 
-// RbRandomBytes calls [raw.RbRandomBytes] (C function rb_random_bytes).
-func RbRandomBytes(rnd uint, n int) uint {
-	return raw.RbRandomBytes(rnd, n)
+var _fnRbRandomBytes func(int, int) int
+
+// RbRandomBytes calls the Ruby framework function rb_random_bytes.
+func RbRandomBytes(rnd int, n int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRandomBytes == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRandomBytes, _lib, "rb_random_bytes")
+	}
+	return _fnRbRandomBytes(rnd, n)
 }
 
-// RbRandomInt calls [raw.RbRandomInt] (C function rb_random_int).
-func RbRandomInt(rnd uint, max uint) uint {
-	return raw.RbRandomInt(rnd, max)
+var _fnRbRandomInt func(int, int) int
+
+// RbRandomInt calls the Ruby framework function rb_random_int.
+func RbRandomInt(rnd int, max int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRandomInt == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRandomInt, _lib, "rb_random_int")
+	}
+	return _fnRbRandomInt(rnd, max)
 }
 
-// RbRandomInt32 calls [raw.RbRandomInt32] (C function rb_random_int32).
-func RbRandomInt32(rnd uint) uint {
-	return raw.RbRandomInt32(rnd)
+var _fnRbRandomInt32 func(int) int
+
+// RbRandomInt32 calls the Ruby framework function rb_random_int32.
+func RbRandomInt32(rnd int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRandomInt32 == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRandomInt32, _lib, "rb_random_int32")
+	}
+	return _fnRbRandomInt32(rnd)
 }
 
-// RbRandomReal calls [raw.RbRandomReal] (C function rb_random_real).
-func RbRandomReal(rnd uint) float64 {
-	return raw.RbRandomReal(rnd)
+var _fnRbRandomReal func(int) float64
+
+// RbRandomReal calls the Ruby framework function rb_random_real.
+func RbRandomReal(rnd int) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRandomReal == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRandomReal, _lib, "rb_random_real")
+	}
+	return _fnRbRandomReal(rnd)
 }
 
-// RbRandomUlongLimited calls [raw.RbRandomUlongLimited] (C function rb_random_ulong_limited).
-func RbRandomUlongLimited(rnd uint, limit uint) uint {
-	return raw.RbRandomUlongLimited(rnd, limit)
+var _fnRbRandomUlongLimited func(int, int) int
+
+// RbRandomUlongLimited calls the Ruby framework function rb_random_ulong_limited.
+func RbRandomUlongLimited(rnd int, limit int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRandomUlongLimited == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRandomUlongLimited, _lib, "rb_random_ulong_limited")
+	}
+	return _fnRbRandomUlongLimited(rnd, limit)
 }
 
-// RbRangeBegLen calls [raw.RbRangeBegLen] (C function rb_range_beg_len).
-func RbRangeBegLen(arg uint, arg2 *int64, arg3 *int64, arg4 int, arg5 int) uint {
-	return raw.RbRangeBegLen(arg, arg2, arg3, arg4, arg5)
+var _fnRbRangeNew func(int, int, int) int
+
+// RbRangeNew calls the Ruby framework function rb_range_new.
+func RbRangeNew(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRangeNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRangeNew, _lib, "rb_range_new")
+	}
+	return _fnRbRangeNew(arg, arg2, arg3)
 }
 
-// RbRangeNew calls [raw.RbRangeNew] (C function rb_range_new).
-func RbRangeNew(arg uint, arg2 uint, arg3 int) uint {
-	return raw.RbRangeNew(arg, arg2, arg3)
+var _fnRbRationalDen func(int) int
+
+// RbRationalDen calls the Ruby framework function rb_rational_den.
+func RbRationalDen(rat int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRationalDen == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRationalDen, _lib, "rb_rational_den")
+	}
+	return _fnRbRationalDen(rat)
 }
 
-// RbRangeValues calls [raw.RbRangeValues] (C function rb_range_values).
-func RbRangeValues(range_ uint, begp *uint, endp *uint, exclp *int32) int {
-	return raw.RbRangeValues(range_, begp, endp, exclp)
+var _fnRbRationalNew func(int, int) int
+
+// RbRationalNew calls the Ruby framework function rb_rational_new.
+func RbRationalNew(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRationalNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRationalNew, _lib, "rb_rational_new")
+	}
+	return _fnRbRationalNew(arg, arg2)
 }
 
-// RbRationalDen calls [raw.RbRationalDen] (C function rb_rational_den).
-func RbRationalDen(rat uint) uint {
-	return raw.RbRationalDen(rat)
+var _fnRbRationalNum func(int) int
+
+// RbRationalNum calls the Ruby framework function rb_rational_num.
+func RbRationalNum(rat int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRationalNum == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRationalNum, _lib, "rb_rational_num")
+	}
+	return _fnRbRationalNum(rat)
 }
 
-// RbRationalNew calls [raw.RbRationalNew] (C function rb_rational_new).
-func RbRationalNew(arg uint, arg2 uint) uint {
-	return raw.RbRationalNew(arg, arg2)
+var _fnRbRationalRaw func(int, int) int
+
+// RbRationalRaw calls the Ruby framework function rb_rational_raw.
+func RbRationalRaw(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRationalRaw == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRationalRaw, _lib, "rb_rational_raw")
+	}
+	return _fnRbRationalRaw(arg, arg2)
 }
 
-// RbRationalNum calls [raw.RbRationalNum] (C function rb_rational_num).
-func RbRationalNum(rat uint) uint {
-	return raw.RbRationalNum(rat)
-}
+var _fnRbReadwriteSysFail func(Rb_io_wait_readwrite, string)
 
-// RbRationalRaw calls [raw.RbRationalRaw] (C function rb_rational_raw).
-func RbRationalRaw(arg uint, arg2 uint) uint {
-	return raw.RbRationalRaw(arg, arg2)
-}
-
-// RbReadwriteSysFail calls [raw.RbReadwriteSysFail] (C function rb_readwrite_sys_fail).
+// RbReadwriteSysFail calls the Ruby framework function rb_readwrite_sys_fail.
 func RbReadwriteSysFail(arg Rb_io_wait_readwrite, arg2 string) {
-	raw.RbReadwriteSysFail(raw.Rb_io_wait_readwrite(arg), arg2)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbReadwriteSysFail == nil {
+		ebipurego.RegisterLibFunc(&_fnRbReadwriteSysFail, _lib, "rb_readwrite_sys_fail")
+	}
+	_fnRbReadwriteSysFail(arg, arg2)
 }
 
-// RbReadwriteSyserrFail calls [raw.RbReadwriteSyserrFail] (C function rb_readwrite_syserr_fail).
+var _fnRbReadwriteSyserrFail func(Rb_io_wait_readwrite, int, string)
+
+// RbReadwriteSyserrFail calls the Ruby framework function rb_readwrite_syserr_fail.
 func RbReadwriteSyserrFail(arg Rb_io_wait_readwrite, arg2 int, arg3 string) {
-	raw.RbReadwriteSyserrFail(raw.Rb_io_wait_readwrite(arg), arg2, arg3)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbReadwriteSyserrFail == nil {
+		ebipurego.RegisterLibFunc(&_fnRbReadwriteSyserrFail, _lib, "rb_readwrite_syserr_fail")
+	}
+	_fnRbReadwriteSyserrFail(arg, arg2, arg3)
 }
 
-// RbRegAlloc calls [raw.RbRegAlloc] (C function rb_reg_alloc).
-func RbRegAlloc() uint {
-	return raw.RbRegAlloc()
+var _fnRbRegAlloc func() int
+
+// RbRegAlloc calls the Ruby framework function rb_reg_alloc.
+func RbRegAlloc() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRegAlloc == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRegAlloc, _lib, "rb_reg_alloc")
+	}
+	return _fnRbRegAlloc()
 }
 
-// RbRegBackrefNumber calls [raw.RbRegBackrefNumber] (C function rb_reg_backref_number).
-func RbRegBackrefNumber(match uint, backref uint) int {
-	return raw.RbRegBackrefNumber(match, backref)
+var _fnRbRegBackrefNumber func(int, int) int
+
+// RbRegBackrefNumber calls the Ruby framework function rb_reg_backref_number.
+func RbRegBackrefNumber(match int, backref int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRegBackrefNumber == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRegBackrefNumber, _lib, "rb_reg_backref_number")
+	}
+	return _fnRbRegBackrefNumber(match, backref)
 }
 
-// RbRegInitStr calls [raw.RbRegInitStr] (C function rb_reg_init_str).
-func RbRegInitStr(re uint, s uint, options int) uint {
-	return raw.RbRegInitStr(re, s, options)
+var _fnRbRegInitStr func(int, int, int) int
+
+// RbRegInitStr calls the Ruby framework function rb_reg_init_str.
+func RbRegInitStr(re int, s int, options int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRegInitStr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRegInitStr, _lib, "rb_reg_init_str")
+	}
+	return _fnRbRegInitStr(re, s, options)
 }
 
-// RbRegLastMatch calls [raw.RbRegLastMatch] (C function rb_reg_last_match).
-func RbRegLastMatch(arg uint) uint {
-	return raw.RbRegLastMatch(arg)
+var _fnRbRegLastMatch func(int) int
+
+// RbRegLastMatch calls the Ruby framework function rb_reg_last_match.
+func RbRegLastMatch(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRegLastMatch == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRegLastMatch, _lib, "rb_reg_last_match")
+	}
+	return _fnRbRegLastMatch(arg)
 }
 
-// RbRegMatch calls [raw.RbRegMatch] (C function rb_reg_match).
-func RbRegMatch(arg uint, arg2 uint) uint {
-	return raw.RbRegMatch(arg, arg2)
+var _fnRbRegMatch func(int, int) int
+
+// RbRegMatch calls the Ruby framework function rb_reg_match.
+func RbRegMatch(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRegMatch == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRegMatch, _lib, "rb_reg_match")
+	}
+	return _fnRbRegMatch(arg, arg2)
 }
 
-// RbRegMatch2 calls [raw.RbRegMatch2] (C function rb_reg_match2).
-func RbRegMatch2(arg uint) uint {
-	return raw.RbRegMatch2(arg)
+var _fnRbRegMatch2 func(int) int
+
+// RbRegMatch2 calls the Ruby framework function rb_reg_match2.
+func RbRegMatch2(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRegMatch2 == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRegMatch2, _lib, "rb_reg_match2")
+	}
+	return _fnRbRegMatch2(arg)
 }
 
-// RbRegMatchLast calls [raw.RbRegMatchLast] (C function rb_reg_match_last).
-func RbRegMatchLast(arg uint) uint {
-	return raw.RbRegMatchLast(arg)
+var _fnRbRegMatchLast func(int) int
+
+// RbRegMatchLast calls the Ruby framework function rb_reg_match_last.
+func RbRegMatchLast(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRegMatchLast == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRegMatchLast, _lib, "rb_reg_match_last")
+	}
+	return _fnRbRegMatchLast(arg)
 }
 
-// RbRegMatchPost calls [raw.RbRegMatchPost] (C function rb_reg_match_post).
-func RbRegMatchPost(arg uint) uint {
-	return raw.RbRegMatchPost(arg)
+var _fnRbRegMatchPost func(int) int
+
+// RbRegMatchPost calls the Ruby framework function rb_reg_match_post.
+func RbRegMatchPost(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRegMatchPost == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRegMatchPost, _lib, "rb_reg_match_post")
+	}
+	return _fnRbRegMatchPost(arg)
 }
 
-// RbRegMatchPre calls [raw.RbRegMatchPre] (C function rb_reg_match_pre).
-func RbRegMatchPre(arg uint) uint {
-	return raw.RbRegMatchPre(arg)
+var _fnRbRegMatchPre func(int) int
+
+// RbRegMatchPre calls the Ruby framework function rb_reg_match_pre.
+func RbRegMatchPre(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRegMatchPre == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRegMatchPre, _lib, "rb_reg_match_pre")
+	}
+	return _fnRbRegMatchPre(arg)
 }
 
-// RbRegNew calls [raw.RbRegNew] (C function rb_reg_new).
-func RbRegNew(arg string, arg2 int, arg3 int) uint {
-	return raw.RbRegNew(arg, arg2, arg3)
+var _fnRbRegNew func(string, int, int) int
+
+// RbRegNew calls the Ruby framework function rb_reg_new.
+func RbRegNew(arg string, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRegNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRegNew, _lib, "rb_reg_new")
+	}
+	return _fnRbRegNew(arg, arg2, arg3)
 }
 
-// RbRegNewStr calls [raw.RbRegNewStr] (C function rb_reg_new_str).
-func RbRegNewStr(arg uint, arg2 int) uint {
-	return raw.RbRegNewStr(arg, arg2)
+var _fnRbRegNewStr func(int, int) int
+
+// RbRegNewStr calls the Ruby framework function rb_reg_new_str.
+func RbRegNewStr(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRegNewStr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRegNewStr, _lib, "rb_reg_new_str")
+	}
+	return _fnRbRegNewStr(arg, arg2)
 }
 
-// RbRegNthDefined calls [raw.RbRegNthDefined] (C function rb_reg_nth_defined).
-func RbRegNthDefined(arg int, arg2 uint) uint {
-	return raw.RbRegNthDefined(arg, arg2)
+var _fnRbRegNthDefined func(int, int) int
+
+// RbRegNthDefined calls the Ruby framework function rb_reg_nth_defined.
+func RbRegNthDefined(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRegNthDefined == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRegNthDefined, _lib, "rb_reg_nth_defined")
+	}
+	return _fnRbRegNthDefined(arg, arg2)
 }
 
-// RbRegNthMatch calls [raw.RbRegNthMatch] (C function rb_reg_nth_match).
-func RbRegNthMatch(arg int, arg2 uint) uint {
-	return raw.RbRegNthMatch(arg, arg2)
+var _fnRbRegNthMatch func(int, int) int
+
+// RbRegNthMatch calls the Ruby framework function rb_reg_nth_match.
+func RbRegNthMatch(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRegNthMatch == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRegNthMatch, _lib, "rb_reg_nth_match")
+	}
+	return _fnRbRegNthMatch(arg, arg2)
 }
 
-// RbRegOptions calls [raw.RbRegOptions] (C function rb_reg_options).
-func RbRegOptions(arg uint) int {
-	return raw.RbRegOptions(arg)
+var _fnRbRegOptions func(int) int
+
+// RbRegOptions calls the Ruby framework function rb_reg_options.
+func RbRegOptions(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRegOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRegOptions, _lib, "rb_reg_options")
+	}
+	return _fnRbRegOptions(arg)
 }
 
-// RbRemoveEventHook calls [raw.RbRemoveEventHook] (C function rb_remove_event_hook).
-func RbRemoveEventHook(func_ unsafe.Pointer) int {
-	return raw.RbRemoveEventHook(func_)
+var _fnRbRemoveMethod func(int, string)
+
+// RbRemoveMethod calls the Ruby framework function rb_remove_method.
+func RbRemoveMethod(arg int, arg2 string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRemoveMethod == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRemoveMethod, _lib, "rb_remove_method")
+	}
+	_fnRbRemoveMethod(arg, arg2)
 }
 
-// RbRemoveMethod calls [raw.RbRemoveMethod] (C function rb_remove_method).
-func RbRemoveMethod(arg uint, arg2 string) {
-	raw.RbRemoveMethod(arg, arg2)
+var _fnRbRemoveMethodId func(int, int)
+
+// RbRemoveMethodId calls the Ruby framework function rb_remove_method_id.
+func RbRemoveMethodId(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRemoveMethodId == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRemoveMethodId, _lib, "rb_remove_method_id")
+	}
+	_fnRbRemoveMethodId(arg, arg2)
 }
 
-// RbRemoveMethodId calls [raw.RbRemoveMethodId] (C function rb_remove_method_id).
-func RbRemoveMethodId(arg uint, arg2 uint) {
-	raw.RbRemoveMethodId(arg, arg2)
+var _fnRbRequire func(string) int
+
+// RbRequire calls the Ruby framework function rb_require.
+func RbRequire(arg string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRequire == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRequire, _lib, "rb_require")
+	}
+	return _fnRbRequire(arg)
 }
 
-// RbRequire calls [raw.RbRequire] (C function rb_require).
-func RbRequire(arg string) uint {
-	return raw.RbRequire(arg)
+var _fnRbRequireSafe func(int, int) int
+
+// RbRequireSafe calls the Ruby framework function rb_require_safe.
+func RbRequireSafe(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRequireSafe == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRequireSafe, _lib, "rb_require_safe")
+	}
+	return _fnRbRequireSafe(arg, arg2)
 }
 
-// RbRequireSafe calls [raw.RbRequireSafe] (C function rb_require_safe).
-func RbRequireSafe(arg uint, arg2 int) uint {
-	return raw.RbRequireSafe(arg, arg2)
-}
+var _fnRbReservedFdP func(int) int
 
-// RbRescue calls [raw.RbRescue] (C function rb_rescue).
-func RbRescue(arg unsafe.Pointer, arg2 uint, arg3 unsafe.Pointer, arg4 uint) uint {
-	return raw.RbRescue(arg, arg2, arg3, arg4)
-}
-
-// RbReservedFdP calls [raw.RbReservedFdP] (C function rb_reserved_fd_p).
+// RbReservedFdP calls the Ruby framework function rb_reserved_fd_p.
 func RbReservedFdP(fd int) int {
-	return raw.RbReservedFdP(fd)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbReservedFdP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbReservedFdP, _lib, "rb_reserved_fd_p")
+	}
+	return _fnRbReservedFdP(fd)
 }
 
-// RbResetRandomSeed calls [raw.RbResetRandomSeed] (C function rb_reset_random_seed).
+var _fnRbResetRandomSeed func()
+
+// RbResetRandomSeed calls the Ruby framework function rb_reset_random_seed.
 func RbResetRandomSeed() {
-	raw.RbResetRandomSeed()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbResetRandomSeed == nil {
+		ebipurego.RegisterLibFunc(&_fnRbResetRandomSeed, _lib, "rb_reset_random_seed")
+	}
+	_fnRbResetRandomSeed()
 }
 
-// RbRespondTo calls [raw.RbRespondTo] (C function rb_respond_to).
-func RbRespondTo(arg uint, arg2 uint) int {
-	return raw.RbRespondTo(arg, arg2)
+var _fnRbRespondTo func(int, int) int
+
+// RbRespondTo calls the Ruby framework function rb_respond_to.
+func RbRespondTo(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbRespondTo == nil {
+		ebipurego.RegisterLibFunc(&_fnRbRespondTo, _lib, "rb_respond_to")
+	}
+	return _fnRbRespondTo(arg, arg2)
 }
 
-// RbRubyDebugPtr calls [raw.RbRubyDebugPtr] (C function rb_ruby_debug_ptr).
-func RbRubyDebugPtr() *uint {
-	return raw.RbRubyDebugPtr()
-}
+var _fnRbSafeLevel func() int
 
-// RbRubyVerbosePtr calls [raw.RbRubyVerbosePtr] (C function rb_ruby_verbose_ptr).
-func RbRubyVerbosePtr() *uint {
-	return raw.RbRubyVerbosePtr()
-}
-
-// RbSafeLevel calls [raw.RbSafeLevel] (C function rb_safe_level).
+// RbSafeLevel calls the Ruby framework function rb_safe_level.
 func RbSafeLevel() int {
-	return raw.RbSafeLevel()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSafeLevel == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSafeLevel, _lib, "rb_safe_level")
+	}
+	return _fnRbSafeLevel()
 }
 
-// RbSecure calls [raw.RbSecure] (C function rb_secure).
+var _fnRbSecure func(int)
+
+// RbSecure calls the Ruby framework function rb_secure.
 func RbSecure(arg int) {
-	raw.RbSecure(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSecure == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSecure, _lib, "rb_secure")
+	}
+	_fnRbSecure(arg)
 }
 
-// RbSecureUpdate calls [raw.RbSecureUpdate] (C function rb_secure_update).
-func RbSecureUpdate(arg uint) {
-	raw.RbSecureUpdate(arg)
+var _fnRbSecureUpdate func(int)
+
+// RbSecureUpdate calls the Ruby framework function rb_secure_update.
+func RbSecureUpdate(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSecureUpdate == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSecureUpdate, _lib, "rb_secure_update")
+	}
+	_fnRbSecureUpdate(arg)
 }
 
-// RbSetClassPath calls [raw.RbSetClassPath] (C function rb_set_class_path).
-func RbSetClassPath(arg uint, arg2 uint, arg3 string) {
-	raw.RbSetClassPath(arg, arg2, arg3)
+var _fnRbSetClassPath func(int, int, string)
+
+// RbSetClassPath calls the Ruby framework function rb_set_class_path.
+func RbSetClassPath(arg int, arg2 int, arg3 string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSetClassPath == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSetClassPath, _lib, "rb_set_class_path")
+	}
+	_fnRbSetClassPath(arg, arg2, arg3)
 }
 
-// RbSetClassPathString calls [raw.RbSetClassPathString] (C function rb_set_class_path_string).
-func RbSetClassPathString(arg uint, arg2 uint, arg3 uint) {
-	raw.RbSetClassPathString(arg, arg2, arg3)
+var _fnRbSetClassPathString func(int, int, int)
+
+// RbSetClassPathString calls the Ruby framework function rb_set_class_path_string.
+func RbSetClassPathString(arg int, arg2 int, arg3 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSetClassPathString == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSetClassPathString, _lib, "rb_set_class_path_string")
+	}
+	_fnRbSetClassPathString(arg, arg2, arg3)
 }
 
-// RbSetEndProc calls [raw.RbSetEndProc] (C function rb_set_end_proc).
-func RbSetEndProc(arg unsafe.Pointer, arg2 uint) {
-	raw.RbSetEndProc(arg, arg2)
+var _fnRbSetErrinfo func(int)
+
+// RbSetErrinfo calls the Ruby framework function rb_set_errinfo.
+func RbSetErrinfo(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSetErrinfo == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSetErrinfo, _lib, "rb_set_errinfo")
+	}
+	_fnRbSetErrinfo(arg)
 }
 
-// RbSetErrinfo calls [raw.RbSetErrinfo] (C function rb_set_errinfo).
-func RbSetErrinfo(arg uint) {
-	raw.RbSetErrinfo(arg)
-}
+var _fnRbSetSafeLevel func(int)
 
-// RbSetSafeLevel calls [raw.RbSetSafeLevel] (C function rb_set_safe_level).
+// RbSetSafeLevel calls the Ruby framework function rb_set_safe_level.
 func RbSetSafeLevel(arg int) {
-	raw.RbSetSafeLevel(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSetSafeLevel == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSetSafeLevel, _lib, "rb_set_safe_level")
+	}
+	_fnRbSetSafeLevel(arg)
 }
 
-// RbSetSafeLevelForce calls [raw.RbSetSafeLevelForce] (C function rb_set_safe_level_force).
+var _fnRbSetSafeLevelForce func(int)
+
+// RbSetSafeLevelForce calls the Ruby framework function rb_set_safe_level_force.
 func RbSetSafeLevelForce(arg int) {
-	raw.RbSetSafeLevelForce(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSetSafeLevelForce == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSetSafeLevelForce, _lib, "rb_set_safe_level_force")
+	}
+	_fnRbSetSafeLevelForce(arg)
 }
 
-// RbSingletonClass calls [raw.RbSingletonClass] (C function rb_singleton_class).
-func RbSingletonClass(arg uint) uint {
-	return raw.RbSingletonClass(arg)
+var _fnRbSingletonClass func(int) int
+
+// RbSingletonClass calls the Ruby framework function rb_singleton_class.
+func RbSingletonClass(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSingletonClass == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSingletonClass, _lib, "rb_singleton_class")
+	}
+	return _fnRbSingletonClass(arg)
 }
 
-// RbSingletonClassAttached calls [raw.RbSingletonClassAttached] (C function rb_singleton_class_attached).
-func RbSingletonClassAttached(arg uint, arg2 uint) {
-	raw.RbSingletonClassAttached(arg, arg2)
+var _fnRbSingletonClassAttached func(int, int)
+
+// RbSingletonClassAttached calls the Ruby framework function rb_singleton_class_attached.
+func RbSingletonClassAttached(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSingletonClassAttached == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSingletonClassAttached, _lib, "rb_singleton_class_attached")
+	}
+	_fnRbSingletonClassAttached(arg, arg2)
 }
 
-// RbSingletonClassClone calls [raw.RbSingletonClassClone] (C function rb_singleton_class_clone).
-func RbSingletonClassClone(arg uint) uint {
-	return raw.RbSingletonClassClone(arg)
+var _fnRbSingletonClassClone func(int) int
+
+// RbSingletonClassClone calls the Ruby framework function rb_singleton_class_clone.
+func RbSingletonClassClone(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSingletonClassClone == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSingletonClassClone, _lib, "rb_singleton_class_clone")
+	}
+	return _fnRbSingletonClassClone(arg)
 }
 
-// RbSourcefile calls [raw.RbSourcefile] (C function rb_sourcefile).
+var _fnRbSourcefile func() string
+
+// RbSourcefile calls the Ruby framework function rb_sourcefile.
 func RbSourcefile() string {
-	return raw.RbSourcefile()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSourcefile == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSourcefile, _lib, "rb_sourcefile")
+	}
+	return _fnRbSourcefile()
 }
 
-// RbSourceline calls [raw.RbSourceline] (C function rb_sourceline).
+var _fnRbSourceline func() int
+
+// RbSourceline calls the Ruby framework function rb_sourceline.
 func RbSourceline() int {
-	return raw.RbSourceline()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSourceline == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSourceline, _lib, "rb_sourceline")
+	}
+	return _fnRbSourceline()
 }
 
-// RbSpawn calls [raw.RbSpawn] (C function rb_spawn).
-func RbSpawn(arg int, arg2 *uint) int {
-	return raw.RbSpawn(arg, arg2)
+var _fnRbSprintf func(string) int
+
+// RbSprintf calls the Ruby framework function rb_sprintf.
+func RbSprintf(arg string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSprintf == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSprintf, _lib, "rb_sprintf")
+	}
+	return _fnRbSprintf(arg)
 }
 
-// RbSpawnErr calls [raw.RbSpawnErr] (C function rb_spawn_err).
-func RbSpawnErr(arg int, arg2 *uint, arg3 string, arg4 uint) int {
-	return raw.RbSpawnErr(arg, arg2, arg3, arg4)
+var _fnRbStr2inum func(int, int) int
+
+// RbStr2inum calls the Ruby framework function rb_str2inum.
+func RbStr2inum(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStr2inum == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStr2inum, _lib, "rb_str2inum")
+	}
+	return _fnRbStr2inum(arg, arg2)
 }
 
-// RbSprintf calls [raw.RbSprintf] (C function rb_sprintf).
-func RbSprintf(arg string) uint {
-	return raw.RbSprintf(arg)
+var _fnRbStrAppend func(int, int) int
+
+// RbStrAppend calls the Ruby framework function rb_str_append.
+func RbStrAppend(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrAppend == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrAppend, _lib, "rb_str_append")
+	}
+	return _fnRbStrAppend(arg, arg2)
 }
 
-// RbStr2inum calls [raw.RbStr2inum] (C function rb_str2inum).
-func RbStr2inum(arg uint, arg2 int) uint {
-	return raw.RbStr2inum(arg, arg2)
-}
+var _fnRbStrAssociate func()
 
-// RbStrAppend calls [raw.RbStrAppend] (C function rb_str_append).
-func RbStrAppend(arg uint, arg2 uint) uint {
-	return raw.RbStrAppend(arg, arg2)
-}
-
-// RbStrAssociate calls [raw.RbStrAssociate] (C function rb_str_associate).
+// RbStrAssociate calls the Ruby framework function rb_str_associate.
 func RbStrAssociate() {
-	raw.RbStrAssociate()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrAssociate == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrAssociate, _lib, "rb_str_associate")
+	}
+	_fnRbStrAssociate()
 }
 
-// RbStrAssociated calls [raw.RbStrAssociated] (C function rb_str_associated).
+var _fnRbStrAssociated func()
+
+// RbStrAssociated calls the Ruby framework function rb_str_associated.
 func RbStrAssociated() {
-	raw.RbStrAssociated()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrAssociated == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrAssociated, _lib, "rb_str_associated")
+	}
+	_fnRbStrAssociated()
 }
 
-// RbStrBufAppend calls [raw.RbStrBufAppend] (C function rb_str_buf_append).
-func RbStrBufAppend(arg uint, arg2 uint) uint {
-	return raw.RbStrBufAppend(arg, arg2)
-}
+var _fnRbStrBufAppend func(int, int) int
 
-// RbStrBufCat calls [raw.RbStrBufCat] (C function rb_str_buf_cat).
-func RbStrBufCat(arg uint, arg2 string, arg3 int) uint {
-	return raw.RbStrBufCat(arg, arg2, arg3)
+// RbStrBufAppend calls the Ruby framework function rb_str_buf_append.
+func RbStrBufAppend(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrBufAppend == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrBufAppend, _lib, "rb_str_buf_append")
+	}
+	return _fnRbStrBufAppend(arg, arg2)
 }
 
-// RbStrBufCat2 calls [raw.RbStrBufCat2] (C function rb_str_buf_cat2).
-func RbStrBufCat2(arg uint, arg2 string) uint {
-	return raw.RbStrBufCat2(arg, arg2)
-}
+var _fnRbStrBufCat func(int, string, int) int
 
-// RbStrBufCatAscii calls [raw.RbStrBufCatAscii] (C function rb_str_buf_cat_ascii).
-func RbStrBufCatAscii(arg uint, arg2 string) uint {
-	return raw.RbStrBufCatAscii(arg, arg2)
+// RbStrBufCat calls the Ruby framework function rb_str_buf_cat.
+func RbStrBufCat(arg int, arg2 string, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrBufCat == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrBufCat, _lib, "rb_str_buf_cat")
+	}
+	return _fnRbStrBufCat(arg, arg2, arg3)
 }
 
-// RbStrBufNew calls [raw.RbStrBufNew] (C function rb_str_buf_new).
-func RbStrBufNew(arg int) uint {
-	return raw.RbStrBufNew(arg)
-}
+var _fnRbStrBufCat2 func(int, string) int
 
-// RbStrBufNew2 calls [raw.RbStrBufNew2] (C function rb_str_buf_new2).
-func RbStrBufNew2(arg string) uint {
-	return raw.RbStrBufNew2(arg)
+// RbStrBufCat2 calls the Ruby framework function rb_str_buf_cat2.
+func RbStrBufCat2(arg int, arg2 string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrBufCat2 == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrBufCat2, _lib, "rb_str_buf_cat2")
+	}
+	return _fnRbStrBufCat2(arg, arg2)
 }
 
-// RbStrBufNewCstr calls [raw.RbStrBufNewCstr] (C function rb_str_buf_new_cstr).
-func RbStrBufNewCstr(arg string) uint {
-	return raw.RbStrBufNewCstr(arg)
-}
+var _fnRbStrBufCatAscii func(int, string) int
 
-// RbStrCapacity calls [raw.RbStrCapacity] (C function rb_str_capacity).
-func RbStrCapacity(arg uint) uint {
-	return raw.RbStrCapacity(arg)
+// RbStrBufCatAscii calls the Ruby framework function rb_str_buf_cat_ascii.
+func RbStrBufCatAscii(arg int, arg2 string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrBufCatAscii == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrBufCatAscii, _lib, "rb_str_buf_cat_ascii")
+	}
+	return _fnRbStrBufCatAscii(arg, arg2)
 }
 
-// RbStrCat calls [raw.RbStrCat] (C function rb_str_cat).
-func RbStrCat(arg uint, arg2 string, arg3 int) uint {
-	return raw.RbStrCat(arg, arg2, arg3)
-}
+var _fnRbStrBufNew func(int) int
 
-// RbStrCat2 calls [raw.RbStrCat2] (C function rb_str_cat2).
-func RbStrCat2(arg uint, arg2 string) uint {
-	return raw.RbStrCat2(arg, arg2)
+// RbStrBufNew calls the Ruby framework function rb_str_buf_new.
+func RbStrBufNew(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrBufNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrBufNew, _lib, "rb_str_buf_new")
+	}
+	return _fnRbStrBufNew(arg)
 }
 
-// RbStrCatCstr calls [raw.RbStrCatCstr] (C function rb_str_cat_cstr).
-func RbStrCatCstr(arg uint, arg2 string) uint {
-	return raw.RbStrCatCstr(arg, arg2)
-}
+var _fnRbStrBufNew2 func(string) int
 
-// RbStrCmp calls [raw.RbStrCmp] (C function rb_str_cmp).
-func RbStrCmp(arg uint, arg2 uint) int {
-	return raw.RbStrCmp(arg, arg2)
+// RbStrBufNew2 calls the Ruby framework function rb_str_buf_new2.
+func RbStrBufNew2(arg string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrBufNew2 == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrBufNew2, _lib, "rb_str_buf_new2")
+	}
+	return _fnRbStrBufNew2(arg)
 }
 
-// RbStrComparable calls [raw.RbStrComparable] (C function rb_str_comparable).
-func RbStrComparable(arg uint, arg2 uint) int {
-	return raw.RbStrComparable(arg, arg2)
+var _fnRbStrBufNewCstr func(string) int
+
+// RbStrBufNewCstr calls the Ruby framework function rb_str_buf_new_cstr.
+func RbStrBufNewCstr(arg string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrBufNewCstr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrBufNewCstr, _lib, "rb_str_buf_new_cstr")
+	}
+	return _fnRbStrBufNewCstr(arg)
 }
+
+var _fnRbStrCapacity func(int) int
 
-// RbStrConcat calls [raw.RbStrConcat] (C function rb_str_concat).
-func RbStrConcat(arg uint, arg2 uint) uint {
-	return raw.RbStrConcat(arg, arg2)
+// RbStrCapacity calls the Ruby framework function rb_str_capacity.
+func RbStrCapacity(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrCapacity == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrCapacity, _lib, "rb_str_capacity")
+	}
+	return _fnRbStrCapacity(arg)
 }
 
-// RbStrDropBytes calls [raw.RbStrDropBytes] (C function rb_str_drop_bytes).
-func RbStrDropBytes(arg uint, arg2 int) uint {
-	return raw.RbStrDropBytes(arg, arg2)
+var _fnRbStrCat func(int, string, int) int
+
+// RbStrCat calls the Ruby framework function rb_str_cat.
+func RbStrCat(arg int, arg2 string, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrCat == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrCat, _lib, "rb_str_cat")
+	}
+	return _fnRbStrCat(arg, arg2, arg3)
 }
+
+var _fnRbStrCat2 func(int, string) int
 
-// RbStrDump calls [raw.RbStrDump] (C function rb_str_dump).
-func RbStrDump(arg uint) uint {
-	return raw.RbStrDump(arg)
+// RbStrCat2 calls the Ruby framework function rb_str_cat2.
+func RbStrCat2(arg int, arg2 string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrCat2 == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrCat2, _lib, "rb_str_cat2")
+	}
+	return _fnRbStrCat2(arg, arg2)
 }
 
-// RbStrDup calls [raw.RbStrDup] (C function rb_str_dup).
-func RbStrDup(arg uint) uint {
-	return raw.RbStrDup(arg)
+var _fnRbStrCatCstr func(int, string) int
+
+// RbStrCatCstr calls the Ruby framework function rb_str_cat_cstr.
+func RbStrCatCstr(arg int, arg2 string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrCatCstr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrCatCstr, _lib, "rb_str_cat_cstr")
+	}
+	return _fnRbStrCatCstr(arg, arg2)
 }
+
+var _fnRbStrCmp func(int, int) int
 
-// RbStrDupFrozen calls [raw.RbStrDupFrozen] (C function rb_str_dup_frozen).
-func RbStrDupFrozen(arg uint) uint {
-	return raw.RbStrDupFrozen(arg)
+// RbStrCmp calls the Ruby framework function rb_str_cmp.
+func RbStrCmp(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrCmp == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrCmp, _lib, "rb_str_cmp")
+	}
+	return _fnRbStrCmp(arg, arg2)
 }
 
-// RbStrEllipsize calls [raw.RbStrEllipsize] (C function rb_str_ellipsize).
-func RbStrEllipsize(arg uint, arg2 int) uint {
-	return raw.RbStrEllipsize(arg, arg2)
+var _fnRbStrComparable func(int, int) int
+
+// RbStrComparable calls the Ruby framework function rb_str_comparable.
+func RbStrComparable(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrComparable == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrComparable, _lib, "rb_str_comparable")
+	}
+	return _fnRbStrComparable(arg, arg2)
 }
+
+var _fnRbStrConcat func(int, int) int
 
-// RbStrEncodeOspath calls [raw.RbStrEncodeOspath] (C function rb_str_encode_ospath).
-func RbStrEncodeOspath(arg uint) uint {
-	return raw.RbStrEncodeOspath(arg)
+// RbStrConcat calls the Ruby framework function rb_str_concat.
+func RbStrConcat(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrConcat == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrConcat, _lib, "rb_str_concat")
+	}
+	return _fnRbStrConcat(arg, arg2)
 }
 
-// RbStrEqual calls [raw.RbStrEqual] (C function rb_str_equal).
-func RbStrEqual(str1 uint, str2 uint) uint {
-	return raw.RbStrEqual(str1, str2)
+var _fnRbStrDropBytes func(int, int) int
+
+// RbStrDropBytes calls the Ruby framework function rb_str_drop_bytes.
+func RbStrDropBytes(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrDropBytes == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrDropBytes, _lib, "rb_str_drop_bytes")
+	}
+	return _fnRbStrDropBytes(arg, arg2)
 }
 
-// RbStrExport calls [raw.RbStrExport] (C function rb_str_export).
-func RbStrExport(arg uint) uint {
-	return raw.RbStrExport(arg)
+var _fnRbStrDump func(int) int
+
+// RbStrDump calls the Ruby framework function rb_str_dump.
+func RbStrDump(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrDump == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrDump, _lib, "rb_str_dump")
+	}
+	return _fnRbStrDump(arg)
 }
+
+var _fnRbStrDup func(int) int
 
-// RbStrExportLocale calls [raw.RbStrExportLocale] (C function rb_str_export_locale).
-func RbStrExportLocale(arg uint) uint {
-	return raw.RbStrExportLocale(arg)
+// RbStrDup calls the Ruby framework function rb_str_dup.
+func RbStrDup(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrDup == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrDup, _lib, "rb_str_dup")
+	}
+	return _fnRbStrDup(arg)
 }
 
-// RbStrFormat calls [raw.RbStrFormat] (C function rb_str_format).
-func RbStrFormat(arg int, arg2 *uint, arg3 uint) uint {
-	return raw.RbStrFormat(arg, arg2, arg3)
+var _fnRbStrDupFrozen func(int) int
+
+// RbStrDupFrozen calls the Ruby framework function rb_str_dup_frozen.
+func RbStrDupFrozen(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrDupFrozen == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrDupFrozen, _lib, "rb_str_dup_frozen")
+	}
+	return _fnRbStrDupFrozen(arg)
 }
+
+var _fnRbStrEllipsize func(int, int) int
 
-// RbStrFree calls [raw.RbStrFree] (C function rb_str_free).
-func RbStrFree(arg uint) {
-	raw.RbStrFree(arg)
+// RbStrEllipsize calls the Ruby framework function rb_str_ellipsize.
+func RbStrEllipsize(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrEllipsize == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrEllipsize, _lib, "rb_str_ellipsize")
+	}
+	return _fnRbStrEllipsize(arg, arg2)
 }
 
-// RbStrFreeze calls [raw.RbStrFreeze] (C function rb_str_freeze).
-func RbStrFreeze(arg uint) uint {
-	return raw.RbStrFreeze(arg)
+var _fnRbStrEncodeOspath func(int) int
+
+// RbStrEncodeOspath calls the Ruby framework function rb_str_encode_ospath.
+func RbStrEncodeOspath(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrEncodeOspath == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrEncodeOspath, _lib, "rb_str_encode_ospath")
+	}
+	return _fnRbStrEncodeOspath(arg)
 }
+
+var _fnRbStrEqual func(int, int) int
 
-// RbStrHash calls [raw.RbStrHash] (C function rb_str_hash).
-func RbStrHash(arg uint) uint {
-	return raw.RbStrHash(arg)
+// RbStrEqual calls the Ruby framework function rb_str_equal.
+func RbStrEqual(str1 int, str2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrEqual == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrEqual, _lib, "rb_str_equal")
+	}
+	return _fnRbStrEqual(str1, str2)
 }
 
-// RbStrHashCmp calls [raw.RbStrHashCmp] (C function rb_str_hash_cmp).
-func RbStrHashCmp(arg uint, arg2 uint) int {
-	return raw.RbStrHashCmp(arg, arg2)
+var _fnRbStrExport func(int) int
+
+// RbStrExport calls the Ruby framework function rb_str_export.
+func RbStrExport(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrExport == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrExport, _lib, "rb_str_export")
+	}
+	return _fnRbStrExport(arg)
 }
+
+var _fnRbStrExportLocale func(int) int
 
-// RbStrInspect calls [raw.RbStrInspect] (C function rb_str_inspect).
-func RbStrInspect(arg uint) uint {
-	return raw.RbStrInspect(arg)
+// RbStrExportLocale calls the Ruby framework function rb_str_export_locale.
+func RbStrExportLocale(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrExportLocale == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrExportLocale, _lib, "rb_str_export_locale")
+	}
+	return _fnRbStrExportLocale(arg)
 }
 
-// RbStrIntern calls [raw.RbStrIntern] (C function rb_str_intern).
-func RbStrIntern(arg uint) uint {
-	return raw.RbStrIntern(arg)
+var _fnRbStrFree func(int)
+
+// RbStrFree calls the Ruby framework function rb_str_free.
+func RbStrFree(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrFree == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrFree, _lib, "rb_str_free")
+	}
+	_fnRbStrFree(arg)
 }
+
+var _fnRbStrFreeze func(int) int
 
-// RbStrLength calls [raw.RbStrLength] (C function rb_str_length).
-func RbStrLength(arg uint) uint {
-	return raw.RbStrLength(arg)
+// RbStrFreeze calls the Ruby framework function rb_str_freeze.
+func RbStrFreeze(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrFreeze == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrFreeze, _lib, "rb_str_freeze")
+	}
+	return _fnRbStrFreeze(arg)
 }
 
-// RbStrLocktmp calls [raw.RbStrLocktmp] (C function rb_str_locktmp).
-func RbStrLocktmp(arg uint) uint {
-	return raw.RbStrLocktmp(arg)
+var _fnRbStrHash func(int) int
+
+// RbStrHash calls the Ruby framework function rb_str_hash.
+func RbStrHash(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrHash == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrHash, _lib, "rb_str_hash")
+	}
+	return _fnRbStrHash(arg)
 }
+
+var _fnRbStrHashCmp func(int, int) int
 
-// RbStrModify calls [raw.RbStrModify] (C function rb_str_modify).
-func RbStrModify(arg uint) {
-	raw.RbStrModify(arg)
+// RbStrHashCmp calls the Ruby framework function rb_str_hash_cmp.
+func RbStrHashCmp(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrHashCmp == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrHashCmp, _lib, "rb_str_hash_cmp")
+	}
+	return _fnRbStrHashCmp(arg, arg2)
 }
 
-// RbStrModifyExpand calls [raw.RbStrModifyExpand] (C function rb_str_modify_expand).
-func RbStrModifyExpand(arg uint, arg2 int) {
-	raw.RbStrModifyExpand(arg, arg2)
+var _fnRbStrInspect func(int) int
+
+// RbStrInspect calls the Ruby framework function rb_str_inspect.
+func RbStrInspect(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrInspect == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrInspect, _lib, "rb_str_inspect")
+	}
+	return _fnRbStrInspect(arg)
 }
+
+var _fnRbStrIntern func(int) int
 
-// RbStrNew calls [raw.RbStrNew] (C function rb_str_new).
-func RbStrNew(arg string, arg2 int) uint {
-	return raw.RbStrNew(arg, arg2)
+// RbStrIntern calls the Ruby framework function rb_str_intern.
+func RbStrIntern(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrIntern == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrIntern, _lib, "rb_str_intern")
+	}
+	return _fnRbStrIntern(arg)
 }
 
-// RbStrNewCstr calls [raw.RbStrNewCstr] (C function rb_str_new_cstr).
-func RbStrNewCstr(arg string) uint {
-	return raw.RbStrNewCstr(arg)
+var _fnRbStrLength func(int) int
+
+// RbStrLength calls the Ruby framework function rb_str_length.
+func RbStrLength(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrLength == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrLength, _lib, "rb_str_length")
+	}
+	return _fnRbStrLength(arg)
 }
+
+var _fnRbStrLocktmp func(int) int
 
-// RbStrNewFrozen calls [raw.RbStrNewFrozen] (C function rb_str_new_frozen).
-func RbStrNewFrozen(arg uint) uint {
-	return raw.RbStrNewFrozen(arg)
+// RbStrLocktmp calls the Ruby framework function rb_str_locktmp.
+func RbStrLocktmp(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrLocktmp == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrLocktmp, _lib, "rb_str_locktmp")
+	}
+	return _fnRbStrLocktmp(arg)
 }
 
-// RbStrNewShared calls [raw.RbStrNewShared] (C function rb_str_new_shared).
-func RbStrNewShared(arg uint) uint {
-	return raw.RbStrNewShared(arg)
+var _fnRbStrModify func(int)
+
+// RbStrModify calls the Ruby framework function rb_str_modify.
+func RbStrModify(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrModify == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrModify, _lib, "rb_str_modify")
+	}
+	_fnRbStrModify(arg)
 }
 
-// RbStrNewStatic calls [raw.RbStrNewStatic] (C function rb_str_new_static).
-func RbStrNewStatic(arg string, arg2 int) uint {
-	return raw.RbStrNewStatic(arg, arg2)
+var _fnRbStrModifyExpand func(int, int)
+
+// RbStrModifyExpand calls the Ruby framework function rb_str_modify_expand.
+func RbStrModifyExpand(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrModifyExpand == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrModifyExpand, _lib, "rb_str_modify_expand")
+	}
+	_fnRbStrModifyExpand(arg, arg2)
 }
+
+var _fnRbStrNew func(string, int) int
 
-// RbStrNewWithClass calls [raw.RbStrNewWithClass] (C function rb_str_new_with_class).
-func RbStrNewWithClass(arg uint, arg2 string, arg3 int) uint {
-	return raw.RbStrNewWithClass(arg, arg2, arg3)
+// RbStrNew calls the Ruby framework function rb_str_new.
+func RbStrNew(arg string, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrNew, _lib, "rb_str_new")
+	}
+	return _fnRbStrNew(arg, arg2)
 }
 
-// RbStrOffset calls [raw.RbStrOffset] (C function rb_str_offset).
-func RbStrOffset(arg uint, arg2 int) int {
-	return raw.RbStrOffset(arg, arg2)
+var _fnRbStrNewCstr func(string) int
+
+// RbStrNewCstr calls the Ruby framework function rb_str_new_cstr.
+func RbStrNewCstr(arg string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrNewCstr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrNewCstr, _lib, "rb_str_new_cstr")
+	}
+	return _fnRbStrNewCstr(arg)
 }
+
+var _fnRbStrNewFrozen func(int) int
 
-// RbStrPlus calls [raw.RbStrPlus] (C function rb_str_plus).
-func RbStrPlus(arg uint, arg2 uint) uint {
-	return raw.RbStrPlus(arg, arg2)
+// RbStrNewFrozen calls the Ruby framework function rb_str_new_frozen.
+func RbStrNewFrozen(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrNewFrozen == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrNewFrozen, _lib, "rb_str_new_frozen")
+	}
+	return _fnRbStrNewFrozen(arg)
 }
 
-// RbStrReplace calls [raw.RbStrReplace] (C function rb_str_replace).
-func RbStrReplace(arg uint, arg2 uint) uint {
-	return raw.RbStrReplace(arg, arg2)
+var _fnRbStrNewShared func(int) int
+
+// RbStrNewShared calls the Ruby framework function rb_str_new_shared.
+func RbStrNewShared(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrNewShared == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrNewShared, _lib, "rb_str_new_shared")
+	}
+	return _fnRbStrNewShared(arg)
 }
+
+var _fnRbStrNewStatic func(string, int) int
 
-// RbStrResize calls [raw.RbStrResize] (C function rb_str_resize).
-func RbStrResize(arg uint, arg2 int) uint {
-	return raw.RbStrResize(arg, arg2)
+// RbStrNewStatic calls the Ruby framework function rb_str_new_static.
+func RbStrNewStatic(arg string, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrNewStatic == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrNewStatic, _lib, "rb_str_new_static")
+	}
+	return _fnRbStrNewStatic(arg, arg2)
 }
 
-// RbStrResurrect calls [raw.RbStrResurrect] (C function rb_str_resurrect).
-func RbStrResurrect(str uint) uint {
-	return raw.RbStrResurrect(str)
+var _fnRbStrNewWithClass func(int, string, int) int
+
+// RbStrNewWithClass calls the Ruby framework function rb_str_new_with_class.
+func RbStrNewWithClass(arg int, arg2 string, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrNewWithClass == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrNewWithClass, _lib, "rb_str_new_with_class")
+	}
+	return _fnRbStrNewWithClass(arg, arg2, arg3)
 }
+
+var _fnRbStrOffset func(int, int) int
 
-// RbStrScrub calls [raw.RbStrScrub] (C function rb_str_scrub).
-func RbStrScrub(arg uint, arg2 uint) uint {
-	return raw.RbStrScrub(arg, arg2)
+// RbStrOffset calls the Ruby framework function rb_str_offset.
+func RbStrOffset(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrOffset == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrOffset, _lib, "rb_str_offset")
+	}
+	return _fnRbStrOffset(arg, arg2)
 }
 
-// RbStrSetLen calls [raw.RbStrSetLen] (C function rb_str_set_len).
-func RbStrSetLen(arg uint, arg2 int) {
-	raw.RbStrSetLen(arg, arg2)
+var _fnRbStrPlus func(int, int) int
+
+// RbStrPlus calls the Ruby framework function rb_str_plus.
+func RbStrPlus(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrPlus == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrPlus, _lib, "rb_str_plus")
+	}
+	return _fnRbStrPlus(arg, arg2)
 }
+
+var _fnRbStrReplace func(int, int) int
 
-// RbStrSetter calls [raw.RbStrSetter] (C function rb_str_setter).
-func RbStrSetter(arg uint, arg2 uint, arg3 *uint) {
-	raw.RbStrSetter(arg, arg2, arg3)
+// RbStrReplace calls the Ruby framework function rb_str_replace.
+func RbStrReplace(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrReplace == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrReplace, _lib, "rb_str_replace")
+	}
+	return _fnRbStrReplace(arg, arg2)
 }
 
-// RbStrSharedReplace calls [raw.RbStrSharedReplace] (C function rb_str_shared_replace).
-func RbStrSharedReplace(arg uint, arg2 uint) {
-	raw.RbStrSharedReplace(arg, arg2)
+var _fnRbStrResize func(int, int) int
+
+// RbStrResize calls the Ruby framework function rb_str_resize.
+func RbStrResize(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrResize == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrResize, _lib, "rb_str_resize")
+	}
+	return _fnRbStrResize(arg, arg2)
 }
+
+var _fnRbStrResurrect func(int) int
 
-// RbStrSplit calls [raw.RbStrSplit] (C function rb_str_split).
-func RbStrSplit(arg uint, arg2 string) uint {
-	return raw.RbStrSplit(arg, arg2)
+// RbStrResurrect calls the Ruby framework function rb_str_resurrect.
+func RbStrResurrect(str int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrResurrect == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrResurrect, _lib, "rb_str_resurrect")
+	}
+	return _fnRbStrResurrect(str)
 }
 
-// RbStrStrlen calls [raw.RbStrStrlen] (C function rb_str_strlen).
-func RbStrStrlen(arg uint) int {
-	return raw.RbStrStrlen(arg)
+var _fnRbStrScrub func(int, int) int
+
+// RbStrScrub calls the Ruby framework function rb_str_scrub.
+func RbStrScrub(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrScrub == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrScrub, _lib, "rb_str_scrub")
+	}
+	return _fnRbStrScrub(arg, arg2)
 }
+
+var _fnRbStrSetLen func(int, int)
 
-// RbStrSublen calls [raw.RbStrSublen] (C function rb_str_sublen).
-func RbStrSublen(arg uint, arg2 int) int {
-	return raw.RbStrSublen(arg, arg2)
+// RbStrSetLen calls the Ruby framework function rb_str_set_len.
+func RbStrSetLen(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrSetLen == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrSetLen, _lib, "rb_str_set_len")
+	}
+	_fnRbStrSetLen(arg, arg2)
 }
 
-// RbStrSubpos calls [raw.RbStrSubpos] (C function rb_str_subpos).
-func RbStrSubpos(arg uint, arg2 int, arg3 *int64) string {
-	return raw.RbStrSubpos(arg, arg2, arg3)
+var _fnRbStrSharedReplace func(int, int)
+
+// RbStrSharedReplace calls the Ruby framework function rb_str_shared_replace.
+func RbStrSharedReplace(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrSharedReplace == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrSharedReplace, _lib, "rb_str_shared_replace")
+	}
+	_fnRbStrSharedReplace(arg, arg2)
 }
+
+var _fnRbStrSplit func(int, string) int
 
-// RbStrSubseq calls [raw.RbStrSubseq] (C function rb_str_subseq).
-func RbStrSubseq(arg uint, arg2 int, arg3 int) uint {
-	return raw.RbStrSubseq(arg, arg2, arg3)
+// RbStrSplit calls the Ruby framework function rb_str_split.
+func RbStrSplit(arg int, arg2 string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrSplit == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrSplit, _lib, "rb_str_split")
+	}
+	return _fnRbStrSplit(arg, arg2)
 }
 
-// RbStrSubstr calls [raw.RbStrSubstr] (C function rb_str_substr).
-func RbStrSubstr(arg uint, arg2 int, arg3 int) uint {
-	return raw.RbStrSubstr(arg, arg2, arg3)
+var _fnRbStrStrlen func(int) int
+
+// RbStrStrlen calls the Ruby framework function rb_str_strlen.
+func RbStrStrlen(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrStrlen == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrStrlen, _lib, "rb_str_strlen")
+	}
+	return _fnRbStrStrlen(arg)
 }
 
-// RbStrSucc calls [raw.RbStrSucc] (C function rb_str_succ).
-func RbStrSucc(arg uint) uint {
-	return raw.RbStrSucc(arg)
+var _fnRbStrSublen func(int, int) int
+
+// RbStrSublen calls the Ruby framework function rb_str_sublen.
+func RbStrSublen(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrSublen == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrSublen, _lib, "rb_str_sublen")
+	}
+	return _fnRbStrSublen(arg, arg2)
 }
+
+var _fnRbStrSubseq func(int, int, int) int
 
-// RbStrTimes calls [raw.RbStrTimes] (C function rb_str_times).
-func RbStrTimes(arg uint, arg2 uint) uint {
-	return raw.RbStrTimes(arg, arg2)
+// RbStrSubseq calls the Ruby framework function rb_str_subseq.
+func RbStrSubseq(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrSubseq == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrSubseq, _lib, "rb_str_subseq")
+	}
+	return _fnRbStrSubseq(arg, arg2, arg3)
 }
 
-// RbStrTmpNew calls [raw.RbStrTmpNew] (C function rb_str_tmp_new).
-func RbStrTmpNew(arg int) uint {
-	return raw.RbStrTmpNew(arg)
+var _fnRbStrSubstr func(int, int, int) int
+
+// RbStrSubstr calls the Ruby framework function rb_str_substr.
+func RbStrSubstr(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrSubstr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrSubstr, _lib, "rb_str_substr")
+	}
+	return _fnRbStrSubstr(arg, arg2, arg3)
 }
+
+var _fnRbStrSucc func(int) int
 
-// RbStrToDbl calls [raw.RbStrToDbl] (C function rb_str_to_dbl).
-func RbStrToDbl(arg uint, arg2 int) float64 {
-	return raw.RbStrToDbl(arg, arg2)
+// RbStrSucc calls the Ruby framework function rb_str_succ.
+func RbStrSucc(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrSucc == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrSucc, _lib, "rb_str_succ")
+	}
+	return _fnRbStrSucc(arg)
 }
 
-// RbStrToInum calls [raw.RbStrToInum] (C function rb_str_to_inum).
-func RbStrToInum(arg uint, arg2 int, arg3 int) uint {
-	return raw.RbStrToInum(arg, arg2, arg3)
+var _fnRbStrTimes func(int, int) int
+
+// RbStrTimes calls the Ruby framework function rb_str_times.
+func RbStrTimes(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrTimes == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrTimes, _lib, "rb_str_times")
+	}
+	return _fnRbStrTimes(arg, arg2)
 }
+
+var _fnRbStrTmpNew func(int) int
 
-// RbStrToStr calls [raw.RbStrToStr] (C function rb_str_to_str).
-func RbStrToStr(arg uint) uint {
-	return raw.RbStrToStr(arg)
+// RbStrTmpNew calls the Ruby framework function rb_str_tmp_new.
+func RbStrTmpNew(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrTmpNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrTmpNew, _lib, "rb_str_tmp_new")
+	}
+	return _fnRbStrTmpNew(arg)
 }
 
-// RbStrUnlocktmp calls [raw.RbStrUnlocktmp] (C function rb_str_unlocktmp).
-func RbStrUnlocktmp(arg uint) uint {
-	return raw.RbStrUnlocktmp(arg)
+var _fnRbStrToDbl func(int, int) float64
+
+// RbStrToDbl calls the Ruby framework function rb_str_to_dbl.
+func RbStrToDbl(arg int, arg2 int) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrToDbl == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrToDbl, _lib, "rb_str_to_dbl")
+	}
+	return _fnRbStrToDbl(arg, arg2)
 }
+
+var _fnRbStrToInum func(int, int, int) int
 
-// RbStrUpdate calls [raw.RbStrUpdate] (C function rb_str_update).
-func RbStrUpdate(arg uint, arg2 int, arg3 int, arg4 uint) {
-	raw.RbStrUpdate(arg, arg2, arg3, arg4)
+// RbStrToInum calls the Ruby framework function rb_str_to_inum.
+func RbStrToInum(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrToInum == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrToInum, _lib, "rb_str_to_inum")
+	}
+	return _fnRbStrToInum(arg, arg2, arg3)
 }
 
-// RbStrVcatf calls [raw.RbStrVcatf] (C function rb_str_vcatf).
-func RbStrVcatf(arg uint, arg2 string, arg3 string) uint {
-	return raw.RbStrVcatf(arg, arg2, arg3)
+var _fnRbStrToStr func(int) int
+
+// RbStrToStr calls the Ruby framework function rb_str_to_str.
+func RbStrToStr(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrToStr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrToStr, _lib, "rb_str_to_str")
+	}
+	return _fnRbStrToStr(arg)
 }
 
-// RbStringValue calls [raw.RbStringValue] (C function rb_string_value).
-func RbStringValue(arg unsafe.Pointer) uint {
-	return raw.RbStringValue(arg)
+var _fnRbStrUnlocktmp func(int) int
+
+// RbStrUnlocktmp calls the Ruby framework function rb_str_unlocktmp.
+func RbStrUnlocktmp(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrUnlocktmp == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrUnlocktmp, _lib, "rb_str_unlocktmp")
+	}
+	return _fnRbStrUnlocktmp(arg)
 }
+
+var _fnRbStrUpdate func(int, int, int, int)
 
-// RbStringValueCstr calls [raw.RbStringValueCstr] (C function rb_string_value_cstr).
-func RbStringValueCstr(arg unsafe.Pointer) string {
-	return raw.RbStringValueCstr(arg)
+// RbStrUpdate calls the Ruby framework function rb_str_update.
+func RbStrUpdate(arg int, arg2 int, arg3 int, arg4 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrUpdate == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrUpdate, _lib, "rb_str_update")
+	}
+	_fnRbStrUpdate(arg, arg2, arg3, arg4)
 }
 
-// RbStringValuePtr calls [raw.RbStringValuePtr] (C function rb_string_value_ptr).
-func RbStringValuePtr(arg unsafe.Pointer) string {
-	return raw.RbStringValuePtr(arg)
+var _fnRbStrVcatf func(int, string, string) int
+
+// RbStrVcatf calls the Ruby framework function rb_str_vcatf.
+func RbStrVcatf(arg int, arg2 string, arg3 string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStrVcatf == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStrVcatf, _lib, "rb_str_vcatf")
+	}
+	return _fnRbStrVcatf(arg, arg2, arg3)
 }
+
+var _fnRbStructAlloc func(int, int) int
 
-// RbStructAlloc calls [raw.RbStructAlloc] (C function rb_struct_alloc).
-func RbStructAlloc(arg uint, arg2 uint) uint {
-	return raw.RbStructAlloc(arg, arg2)
+// RbStructAlloc calls the Ruby framework function rb_struct_alloc.
+func RbStructAlloc(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStructAlloc == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStructAlloc, _lib, "rb_struct_alloc")
+	}
+	return _fnRbStructAlloc(arg, arg2)
 }
 
-// RbStructAllocNoinit calls [raw.RbStructAllocNoinit] (C function rb_struct_alloc_noinit).
-func RbStructAllocNoinit(arg uint) uint {
-	return raw.RbStructAllocNoinit(arg)
+var _fnRbStructAllocNoinit func(int) int
+
+// RbStructAllocNoinit calls the Ruby framework function rb_struct_alloc_noinit.
+func RbStructAllocNoinit(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStructAllocNoinit == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStructAllocNoinit, _lib, "rb_struct_alloc_noinit")
+	}
+	return _fnRbStructAllocNoinit(arg)
 }
+
+var _fnRbStructAref func(int, int) int
 
-// RbStructAref calls [raw.RbStructAref] (C function rb_struct_aref).
-func RbStructAref(arg uint, arg2 uint) uint {
-	return raw.RbStructAref(arg, arg2)
+// RbStructAref calls the Ruby framework function rb_struct_aref.
+func RbStructAref(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStructAref == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStructAref, _lib, "rb_struct_aref")
+	}
+	return _fnRbStructAref(arg, arg2)
 }
 
-// RbStructAset calls [raw.RbStructAset] (C function rb_struct_aset).
-func RbStructAset(arg uint, arg2 uint, arg3 uint) uint {
-	return raw.RbStructAset(arg, arg2, arg3)
+var _fnRbStructAset func(int, int, int) int
+
+// RbStructAset calls the Ruby framework function rb_struct_aset.
+func RbStructAset(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStructAset == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStructAset, _lib, "rb_struct_aset")
+	}
+	return _fnRbStructAset(arg, arg2, arg3)
 }
+
+var _fnRbStructGetmember func(int, int) int
 
-// RbStructGetmember calls [raw.RbStructGetmember] (C function rb_struct_getmember).
-func RbStructGetmember(arg uint, arg2 uint) uint {
-	return raw.RbStructGetmember(arg, arg2)
+// RbStructGetmember calls the Ruby framework function rb_struct_getmember.
+func RbStructGetmember(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStructGetmember == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStructGetmember, _lib, "rb_struct_getmember")
+	}
+	return _fnRbStructGetmember(arg, arg2)
 }
 
-// RbStructInitialize calls [raw.RbStructInitialize] (C function rb_struct_initialize).
-func RbStructInitialize(arg uint, arg2 uint) uint {
-	return raw.RbStructInitialize(arg, arg2)
+var _fnRbStructInitialize func(int, int) int
+
+// RbStructInitialize calls the Ruby framework function rb_struct_initialize.
+func RbStructInitialize(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStructInitialize == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStructInitialize, _lib, "rb_struct_initialize")
+	}
+	return _fnRbStructInitialize(arg, arg2)
 }
 
-// RbStructMembers calls [raw.RbStructMembers] (C function rb_struct_members).
-func RbStructMembers(arg uint) uint {
-	return raw.RbStructMembers(arg)
+var _fnRbStructMembers func(int) int
+
+// RbStructMembers calls the Ruby framework function rb_struct_members.
+func RbStructMembers(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStructMembers == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStructMembers, _lib, "rb_struct_members")
+	}
+	return _fnRbStructMembers(arg)
 }
+
+var _fnRbStructPtr func()
 
-// RbStructPtr calls [raw.RbStructPtr] (C function rb_struct_ptr).
+// RbStructPtr calls the Ruby framework function rb_struct_ptr.
 func RbStructPtr() {
-	raw.RbStructPtr()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStructPtr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStructPtr, _lib, "rb_struct_ptr")
+	}
+	_fnRbStructPtr()
 }
 
-// RbStructSMembers calls [raw.RbStructSMembers] (C function rb_struct_s_members).
-func RbStructSMembers(arg uint) uint {
-	return raw.RbStructSMembers(arg)
+var _fnRbStructSMembers func(int) int
+
+// RbStructSMembers calls the Ruby framework function rb_struct_s_members.
+func RbStructSMembers(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStructSMembers == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStructSMembers, _lib, "rb_struct_s_members")
+	}
+	return _fnRbStructSMembers(arg)
 }
 
-// RbStructSize calls [raw.RbStructSize] (C function rb_struct_size).
-func RbStructSize(s uint) uint {
-	return raw.RbStructSize(s)
+var _fnRbStructSize func(int) int
+
+// RbStructSize calls the Ruby framework function rb_struct_size.
+func RbStructSize(s int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbStructSize == nil {
+		ebipurego.RegisterLibFunc(&_fnRbStructSize, _lib, "rb_struct_size")
+	}
+	return _fnRbStructSize(s)
 }
 
-// RbSym2id calls [raw.RbSym2id] (C function rb_sym2id).
-func RbSym2id(arg uint) uint {
-	return raw.RbSym2id(arg)
+var _fnRbSym2id func(int) int
+
+// RbSym2id calls the Ruby framework function rb_sym2id.
+func RbSym2id(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSym2id == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSym2id, _lib, "rb_sym2id")
+	}
+	return _fnRbSym2id(arg)
 }
 
-// RbSym2str calls [raw.RbSym2str] (C function rb_sym2str).
-func RbSym2str(arg uint) uint {
-	return raw.RbSym2str(arg)
+var _fnRbSym2str func(int) int
+
+// RbSym2str calls the Ruby framework function rb_sym2str.
+func RbSym2str(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSym2str == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSym2str, _lib, "rb_sym2str")
+	}
+	return _fnRbSym2str(arg)
 }
 
-// RbSymAllSymbols calls [raw.RbSymAllSymbols] (C function rb_sym_all_symbols).
-func RbSymAllSymbols() uint {
-	return raw.RbSymAllSymbols()
+var _fnRbSymAllSymbols func() int
+
+// RbSymAllSymbols calls the Ruby framework function rb_sym_all_symbols.
+func RbSymAllSymbols() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSymAllSymbols == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSymAllSymbols, _lib, "rb_sym_all_symbols")
+	}
+	return _fnRbSymAllSymbols()
 }
 
-// RbSymInternedP calls [raw.RbSymInternedP] (C function rb_sym_interned_p).
-func RbSymInternedP(arg uint) int {
-	return raw.RbSymInternedP(arg)
+var _fnRbSymInternedP func(int) int
+
+// RbSymInternedP calls the Ruby framework function rb_sym_interned_p.
+func RbSymInternedP(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSymInternedP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSymInternedP, _lib, "rb_sym_interned_p")
+	}
+	return _fnRbSymInternedP(arg)
 }
 
-// RbSymToS calls [raw.RbSymToS] (C function rb_sym_to_s).
-func RbSymToS(arg uint) uint {
-	return raw.RbSymToS(arg)
+var _fnRbSymToS func(int) int
+
+// RbSymToS calls the Ruby framework function rb_sym_to_s.
+func RbSymToS(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSymToS == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSymToS, _lib, "rb_sym_to_s")
+	}
+	return _fnRbSymToS(arg)
 }
 
-// RbSymnameP calls [raw.RbSymnameP] (C function rb_symname_p).
+var _fnRbSymnameP func(string) int
+
+// RbSymnameP calls the Ruby framework function rb_symname_p.
 func RbSymnameP(arg string) int {
-	return raw.RbSymnameP(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSymnameP == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSymnameP, _lib, "rb_symname_p")
+	}
+	return _fnRbSymnameP(arg)
 }
 
-// RbSysFail calls [raw.RbSysFail] (C function rb_sys_fail).
+var _fnRbSysFail func(string)
+
+// RbSysFail calls the Ruby framework function rb_sys_fail.
 func RbSysFail(arg string) {
-	raw.RbSysFail(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSysFail == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSysFail, _lib, "rb_sys_fail")
+	}
+	_fnRbSysFail(arg)
 }
 
-// RbSysFailStr calls [raw.RbSysFailStr] (C function rb_sys_fail_str).
-func RbSysFailStr(arg uint) {
-	raw.RbSysFailStr(arg)
+var _fnRbSysFailStr func(int)
+
+// RbSysFailStr calls the Ruby framework function rb_sys_fail_str.
+func RbSysFailStr(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSysFailStr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSysFailStr, _lib, "rb_sys_fail_str")
+	}
+	_fnRbSysFailStr(arg)
 }
 
-// RbSyserrFail calls [raw.RbSyserrFail] (C function rb_syserr_fail).
+var _fnRbSyserrFail func(int, string)
+
+// RbSyserrFail calls the Ruby framework function rb_syserr_fail.
 func RbSyserrFail(arg int, arg2 string) {
-	raw.RbSyserrFail(arg, arg2)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSyserrFail == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSyserrFail, _lib, "rb_syserr_fail")
+	}
+	_fnRbSyserrFail(arg, arg2)
 }
 
-// RbSyserrFailStr calls [raw.RbSyserrFailStr] (C function rb_syserr_fail_str).
-func RbSyserrFailStr(arg int, arg2 uint) {
-	raw.RbSyserrFailStr(arg, arg2)
+var _fnRbSyserrFailStr func(int, int)
+
+// RbSyserrFailStr calls the Ruby framework function rb_syserr_fail_str.
+func RbSyserrFailStr(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSyserrFailStr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSyserrFailStr, _lib, "rb_syserr_fail_str")
+	}
+	_fnRbSyserrFailStr(arg, arg2)
 }
 
-// RbSyserrNew calls [raw.RbSyserrNew] (C function rb_syserr_new).
-func RbSyserrNew(arg int, arg2 string) uint {
-	return raw.RbSyserrNew(arg, arg2)
+var _fnRbSyserrNew func(int, string) int
+
+// RbSyserrNew calls the Ruby framework function rb_syserr_new.
+func RbSyserrNew(arg int, arg2 string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSyserrNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSyserrNew, _lib, "rb_syserr_new")
+	}
+	return _fnRbSyserrNew(arg, arg2)
 }
 
-// RbSyserrNewStr calls [raw.RbSyserrNewStr] (C function rb_syserr_new_str).
-func RbSyserrNewStr(n int, arg uint) uint {
-	return raw.RbSyserrNewStr(n, arg)
+var _fnRbSyserrNewStr func(int, int) int
+
+// RbSyserrNewStr calls the Ruby framework function rb_syserr_new_str.
+func RbSyserrNewStr(n int, arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSyserrNewStr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSyserrNewStr, _lib, "rb_syserr_new_str")
+	}
+	return _fnRbSyserrNewStr(n, arg)
 }
 
-// RbSyswait calls [raw.RbSyswait] (C function rb_syswait).
+var _fnRbSyswait func(int)
+
+// RbSyswait calls the Ruby framework function rb_syswait.
 func RbSyswait(pid int) {
-	raw.RbSyswait(pid)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbSyswait == nil {
+		ebipurego.RegisterLibFunc(&_fnRbSyswait, _lib, "rb_syswait")
+	}
+	_fnRbSyswait(pid)
 }
 
-// RbTaintedStrNew calls [raw.RbTaintedStrNew] (C function rb_tainted_str_new).
-func RbTaintedStrNew(arg string, arg2 int) uint {
-	return raw.RbTaintedStrNew(arg, arg2)
+var _fnRbTaintedStrNew func(string, int) int
+
+// RbTaintedStrNew calls the Ruby framework function rb_tainted_str_new.
+func RbTaintedStrNew(arg string, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbTaintedStrNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbTaintedStrNew, _lib, "rb_tainted_str_new")
+	}
+	return _fnRbTaintedStrNew(arg, arg2)
 }
 
-// RbTaintedStrNewCstr calls [raw.RbTaintedStrNewCstr] (C function rb_tainted_str_new_cstr).
-func RbTaintedStrNewCstr(arg string) uint {
-	return raw.RbTaintedStrNewCstr(arg)
+var _fnRbTaintedStrNewCstr func(string) int
+
+// RbTaintedStrNewCstr calls the Ruby framework function rb_tainted_str_new_cstr.
+func RbTaintedStrNewCstr(arg string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbTaintedStrNewCstr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbTaintedStrNewCstr, _lib, "rb_tainted_str_new_cstr")
+	}
+	return _fnRbTaintedStrNewCstr(arg)
 }
 
-// RbThreadAlone calls [raw.RbThreadAlone] (C function rb_thread_alone).
+var _fnRbThreadAlone func() int
+
+// RbThreadAlone calls the Ruby framework function rb_thread_alone.
 func RbThreadAlone() int {
-	return raw.RbThreadAlone()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadAlone == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadAlone, _lib, "rb_thread_alone")
+	}
+	return _fnRbThreadAlone()
 }
 
-// RbThreadAtfork calls [raw.RbThreadAtfork] (C function rb_thread_atfork).
+var _fnRbThreadAtfork func()
+
+// RbThreadAtfork calls the Ruby framework function rb_thread_atfork.
 func RbThreadAtfork() {
-	raw.RbThreadAtfork()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadAtfork == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadAtfork, _lib, "rb_thread_atfork")
+	}
+	_fnRbThreadAtfork()
 }
 
-// RbThreadAtforkBeforeExec calls [raw.RbThreadAtforkBeforeExec] (C function rb_thread_atfork_before_exec).
+var _fnRbThreadAtforkBeforeExec func()
+
+// RbThreadAtforkBeforeExec calls the Ruby framework function rb_thread_atfork_before_exec.
 func RbThreadAtforkBeforeExec() {
-	raw.RbThreadAtforkBeforeExec()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadAtforkBeforeExec == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadAtforkBeforeExec, _lib, "rb_thread_atfork_before_exec")
+	}
+	_fnRbThreadAtforkBeforeExec()
 }
 
-// RbThreadCheckInts calls [raw.RbThreadCheckInts] (C function rb_thread_check_ints).
+var _fnRbThreadCheckInts func()
+
+// RbThreadCheckInts calls the Ruby framework function rb_thread_check_ints.
 func RbThreadCheckInts() {
-	raw.RbThreadCheckInts()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadCheckInts == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadCheckInts, _lib, "rb_thread_check_ints")
+	}
+	_fnRbThreadCheckInts()
 }
 
-// RbThreadCreate calls [raw.RbThreadCreate] (C function rb_thread_create).
-func RbThreadCreate(arg unsafe.Pointer, arg2 unsafe.Pointer) uint {
-	return raw.RbThreadCreate(arg, arg2)
+var _fnRbThreadCurrent func() int
+
+// RbThreadCurrent calls the Ruby framework function rb_thread_current.
+func RbThreadCurrent() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadCurrent == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadCurrent, _lib, "rb_thread_current")
+	}
+	return _fnRbThreadCurrent()
 }
 
-// RbThreadCurrent calls [raw.RbThreadCurrent] (C function rb_thread_current).
-func RbThreadCurrent() uint {
-	return raw.RbThreadCurrent()
-}
+var _fnRbThreadFdClose func(int)
 
-// RbThreadFdClose calls [raw.RbThreadFdClose] (C function rb_thread_fd_close).
+// RbThreadFdClose calls the Ruby framework function rb_thread_fd_close.
 func RbThreadFdClose(arg int) {
-	raw.RbThreadFdClose(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadFdClose == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadFdClose, _lib, "rb_thread_fd_close")
+	}
+	_fnRbThreadFdClose(arg)
 }
 
-// RbThreadFdSelect calls [raw.RbThreadFdSelect] (C function rb_thread_fd_select).
-func RbThreadFdSelect(arg int, arg2 *raw.RbFdsetT, arg3 *raw.RbFdsetT, arg4 *raw.RbFdsetT, arg5 unsafe.Pointer) int {
-	return raw.RbThreadFdSelect(arg, arg2, arg3, arg4, arg5)
-}
+var _fnRbThreadFdWritable func(int) int
 
-// RbThreadFdWritable calls [raw.RbThreadFdWritable] (C function rb_thread_fd_writable).
+// RbThreadFdWritable calls the Ruby framework function rb_thread_fd_writable.
 func RbThreadFdWritable(arg int) int {
-	return raw.RbThreadFdWritable(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadFdWritable == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadFdWritable, _lib, "rb_thread_fd_writable")
+	}
+	return _fnRbThreadFdWritable(arg)
 }
 
-// RbThreadInterrupted calls [raw.RbThreadInterrupted] (C function rb_thread_interrupted).
-func RbThreadInterrupted(thval uint) int {
-	return raw.RbThreadInterrupted(thval)
+var _fnRbThreadInterrupted func(int) int
+
+// RbThreadInterrupted calls the Ruby framework function rb_thread_interrupted.
+func RbThreadInterrupted(thval int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadInterrupted == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadInterrupted, _lib, "rb_thread_interrupted")
+	}
+	return _fnRbThreadInterrupted(thval)
 }
 
-// RbThreadKill calls [raw.RbThreadKill] (C function rb_thread_kill).
-func RbThreadKill(arg uint) uint {
-	return raw.RbThreadKill(arg)
+var _fnRbThreadKill func(int) int
+
+// RbThreadKill calls the Ruby framework function rb_thread_kill.
+func RbThreadKill(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadKill == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadKill, _lib, "rb_thread_kill")
+	}
+	return _fnRbThreadKill(arg)
 }
 
-// RbThreadLocalAref calls [raw.RbThreadLocalAref] (C function rb_thread_local_aref).
-func RbThreadLocalAref(arg uint, arg2 uint) uint {
-	return raw.RbThreadLocalAref(arg, arg2)
+var _fnRbThreadLocalAref func(int, int) int
+
+// RbThreadLocalAref calls the Ruby framework function rb_thread_local_aref.
+func RbThreadLocalAref(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadLocalAref == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadLocalAref, _lib, "rb_thread_local_aref")
+	}
+	return _fnRbThreadLocalAref(arg, arg2)
 }
 
-// RbThreadLocalAset calls [raw.RbThreadLocalAset] (C function rb_thread_local_aset).
-func RbThreadLocalAset(arg uint, arg2 uint, arg3 uint) uint {
-	return raw.RbThreadLocalAset(arg, arg2, arg3)
+var _fnRbThreadLocalAset func(int, int, int) int
+
+// RbThreadLocalAset calls the Ruby framework function rb_thread_local_aset.
+func RbThreadLocalAset(arg int, arg2 int, arg3 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadLocalAset == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadLocalAset, _lib, "rb_thread_local_aset")
+	}
+	return _fnRbThreadLocalAset(arg, arg2, arg3)
 }
 
-// RbThreadMain calls [raw.RbThreadMain] (C function rb_thread_main).
-func RbThreadMain() uint {
-	return raw.RbThreadMain()
+var _fnRbThreadMain func() int
+
+// RbThreadMain calls the Ruby framework function rb_thread_main.
+func RbThreadMain() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadMain == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadMain, _lib, "rb_thread_main")
+	}
+	return _fnRbThreadMain()
 }
 
-// RbThreadRun calls [raw.RbThreadRun] (C function rb_thread_run).
-func RbThreadRun(arg uint) uint {
-	return raw.RbThreadRun(arg)
+var _fnRbThreadRun func(int) int
+
+// RbThreadRun calls the Ruby framework function rb_thread_run.
+func RbThreadRun(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadRun == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadRun, _lib, "rb_thread_run")
+	}
+	return _fnRbThreadRun(arg)
 }
 
-// RbThreadSchedule calls [raw.RbThreadSchedule] (C function rb_thread_schedule).
+var _fnRbThreadSchedule func()
+
+// RbThreadSchedule calls the Ruby framework function rb_thread_schedule.
 func RbThreadSchedule() {
-	raw.RbThreadSchedule()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadSchedule == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadSchedule, _lib, "rb_thread_schedule")
+	}
+	_fnRbThreadSchedule()
 }
 
-// RbThreadSleep calls [raw.RbThreadSleep] (C function rb_thread_sleep).
+var _fnRbThreadSleep func(int)
+
+// RbThreadSleep calls the Ruby framework function rb_thread_sleep.
 func RbThreadSleep(arg int) {
-	raw.RbThreadSleep(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadSleep == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadSleep, _lib, "rb_thread_sleep")
+	}
+	_fnRbThreadSleep(arg)
 }
 
-// RbThreadSleepDeadly calls [raw.RbThreadSleepDeadly] (C function rb_thread_sleep_deadly).
+var _fnRbThreadSleepDeadly func()
+
+// RbThreadSleepDeadly calls the Ruby framework function rb_thread_sleep_deadly.
 func RbThreadSleepDeadly() {
-	raw.RbThreadSleepDeadly()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadSleepDeadly == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadSleepDeadly, _lib, "rb_thread_sleep_deadly")
+	}
+	_fnRbThreadSleepDeadly()
 }
 
-// RbThreadSleepForever calls [raw.RbThreadSleepForever] (C function rb_thread_sleep_forever).
+var _fnRbThreadSleepForever func()
+
+// RbThreadSleepForever calls the Ruby framework function rb_thread_sleep_forever.
 func RbThreadSleepForever() {
-	raw.RbThreadSleepForever()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadSleepForever == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadSleepForever, _lib, "rb_thread_sleep_forever")
+	}
+	_fnRbThreadSleepForever()
 }
 
-// RbThreadStop calls [raw.RbThreadStop] (C function rb_thread_stop).
-func RbThreadStop() uint {
-	return raw.RbThreadStop()
+var _fnRbThreadStop func() int
+
+// RbThreadStop calls the Ruby framework function rb_thread_stop.
+func RbThreadStop() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadStop == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadStop, _lib, "rb_thread_stop")
+	}
+	return _fnRbThreadStop()
 }
 
-// RbThreadWaitFd calls [raw.RbThreadWaitFd] (C function rb_thread_wait_fd).
+var _fnRbThreadWaitFd func(int)
+
+// RbThreadWaitFd calls the Ruby framework function rb_thread_wait_fd.
 func RbThreadWaitFd(arg int) {
-	raw.RbThreadWaitFd(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadWaitFd == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadWaitFd, _lib, "rb_thread_wait_fd")
+	}
+	_fnRbThreadWaitFd(arg)
 }
 
-// RbThreadWaitFor calls [raw.RbThreadWaitFor] (C function rb_thread_wait_for).
-func RbThreadWaitFor(arg unsafe.Pointer) {
-	raw.RbThreadWaitFor(arg)
+var _fnRbThreadWakeup func(int) int
+
+// RbThreadWakeup calls the Ruby framework function rb_thread_wakeup.
+func RbThreadWakeup(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadWakeup == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadWakeup, _lib, "rb_thread_wakeup")
+	}
+	return _fnRbThreadWakeup(arg)
 }
 
-// RbThreadWakeup calls [raw.RbThreadWakeup] (C function rb_thread_wakeup).
-func RbThreadWakeup(arg uint) uint {
-	return raw.RbThreadWakeup(arg)
+var _fnRbThreadWakeupAlive func(int) int
+
+// RbThreadWakeupAlive calls the Ruby framework function rb_thread_wakeup_alive.
+func RbThreadWakeupAlive(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThreadWakeupAlive == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThreadWakeupAlive, _lib, "rb_thread_wakeup_alive")
+	}
+	return _fnRbThreadWakeupAlive(arg)
 }
 
-// RbThreadWakeupAlive calls [raw.RbThreadWakeupAlive] (C function rb_thread_wakeup_alive).
-func RbThreadWakeupAlive(arg uint) uint {
-	return raw.RbThreadWakeupAlive(arg)
+var _fnRbThrow func(string, int)
+
+// RbThrow calls the Ruby framework function rb_throw.
+func RbThrow(arg string, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThrow == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThrow, _lib, "rb_throw")
+	}
+	_fnRbThrow(arg, arg2)
 }
 
-// RbThrow calls [raw.RbThrow] (C function rb_throw).
-func RbThrow(arg string, arg2 uint) {
-	raw.RbThrow(arg, arg2)
+var _fnRbThrowObj func(int, int)
+
+// RbThrowObj calls the Ruby framework function rb_throw_obj.
+func RbThrowObj(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbThrowObj == nil {
+		ebipurego.RegisterLibFunc(&_fnRbThrowObj, _lib, "rb_throw_obj")
+	}
+	_fnRbThrowObj(arg, arg2)
 }
 
-// RbThrowObj calls [raw.RbThrowObj] (C function rb_throw_obj).
-func RbThrowObj(arg uint, arg2 uint) {
-	raw.RbThrowObj(arg, arg2)
+var _fnRbTimeNanoNew func(int, int) int
+
+// RbTimeNanoNew calls the Ruby framework function rb_time_nano_new.
+func RbTimeNanoNew(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbTimeNanoNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbTimeNanoNew, _lib, "rb_time_nano_new")
+	}
+	return _fnRbTimeNanoNew(arg, arg2)
 }
 
-// RbTimeInterval calls [raw.RbTimeInterval] (C function rb_time_interval).
-func RbTimeInterval(num uint) unsafe.Pointer {
-	return raw.RbTimeInterval(num)
+var _fnRbTimeNew func(int, int) int
+
+// RbTimeNew calls the Ruby framework function rb_time_new.
+func RbTimeNew(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbTimeNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbTimeNew, _lib, "rb_time_new")
+	}
+	return _fnRbTimeNew(arg, arg2)
 }
 
-// RbTimeNanoNew calls [raw.RbTimeNanoNew] (C function rb_time_nano_new).
-func RbTimeNanoNew(arg int, arg2 int) uint {
-	return raw.RbTimeNanoNew(arg, arg2)
+var _fnRbTimeNumNew func(int, int) int
+
+// RbTimeNumNew calls the Ruby framework function rb_time_num_new.
+func RbTimeNumNew(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbTimeNumNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbTimeNumNew, _lib, "rb_time_num_new")
+	}
+	return _fnRbTimeNumNew(arg, arg2)
 }
 
-// RbTimeNew calls [raw.RbTimeNew] (C function rb_time_new).
-func RbTimeNew(arg int, arg2 int) uint {
-	return raw.RbTimeNew(arg, arg2)
+var _fnRbTimeSucc func(int) int
+
+// RbTimeSucc calls the Ruby framework function rb_time_succ.
+func RbTimeSucc(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbTimeSucc == nil {
+		ebipurego.RegisterLibFunc(&_fnRbTimeSucc, _lib, "rb_time_succ")
+	}
+	return _fnRbTimeSucc(arg)
 }
 
-// RbTimeNumNew calls [raw.RbTimeNumNew] (C function rb_time_num_new).
-func RbTimeNumNew(arg uint, arg2 uint) uint {
-	return raw.RbTimeNumNew(arg, arg2)
+var _fnRbTimeUtcOffset func(int) int
+
+// RbTimeUtcOffset calls the Ruby framework function rb_time_utc_offset.
+func RbTimeUtcOffset(time_ int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbTimeUtcOffset == nil {
+		ebipurego.RegisterLibFunc(&_fnRbTimeUtcOffset, _lib, "rb_time_utc_offset")
+	}
+	return _fnRbTimeUtcOffset(time_)
 }
 
-// RbTimeSucc calls [raw.RbTimeSucc] (C function rb_time_succ).
-func RbTimeSucc(arg uint) uint {
-	return raw.RbTimeSucc(arg)
+var _fnRbToFloat func(int) int
+
+// RbToFloat calls the Ruby framework function rb_to_float.
+func RbToFloat(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbToFloat == nil {
+		ebipurego.RegisterLibFunc(&_fnRbToFloat, _lib, "rb_to_float")
+	}
+	return _fnRbToFloat(arg)
 }
 
-// RbTimeTimespec calls [raw.RbTimeTimespec] (C function rb_time_timespec).
-func RbTimeTimespec(time_ uint) unsafe.Pointer {
-	return raw.RbTimeTimespec(time_)
+var _fnRbToId func(int) int
+
+// RbToId calls the Ruby framework function rb_to_id.
+func RbToId(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbToId == nil {
+		ebipurego.RegisterLibFunc(&_fnRbToId, _lib, "rb_to_id")
+	}
+	return _fnRbToId(arg)
 }
 
-// RbTimeTimespecNew calls [raw.RbTimeTimespecNew] (C function rb_time_timespec_new).
-func RbTimeTimespecNew(arg unsafe.Pointer, arg2 int) uint {
-	return raw.RbTimeTimespecNew(arg, arg2)
+var _fnRbToInt func(int) int
+
+// RbToInt calls the Ruby framework function rb_to_int.
+func RbToInt(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbToInt == nil {
+		ebipurego.RegisterLibFunc(&_fnRbToInt, _lib, "rb_to_int")
+	}
+	return _fnRbToInt(arg)
 }
 
-// RbTimeTimeval calls [raw.RbTimeTimeval] (C function rb_time_timeval).
-func RbTimeTimeval(time_ uint) unsafe.Pointer {
-	return raw.RbTimeTimeval(time_)
+var _fnRbToSymbol func(int) int
+
+// RbToSymbol calls the Ruby framework function rb_to_symbol.
+func RbToSymbol(name int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbToSymbol == nil {
+		ebipurego.RegisterLibFunc(&_fnRbToSymbol, _lib, "rb_to_symbol")
+	}
+	return _fnRbToSymbol(name)
 }
 
-// RbTimeUtcOffset calls [raw.RbTimeUtcOffset] (C function rb_time_utc_offset).
-func RbTimeUtcOffset(time_ uint) uint {
-	return raw.RbTimeUtcOffset(time_)
-}
+var _fnRbTolower func(int) int
 
-// RbTimespecNow calls [raw.RbTimespecNow] (C function rb_timespec_now).
-func RbTimespecNow(arg unsafe.Pointer) {
-	raw.RbTimespecNow(arg)
-}
-
-// RbToFloat calls [raw.RbToFloat] (C function rb_to_float).
-func RbToFloat(arg uint) uint {
-	return raw.RbToFloat(arg)
-}
-
-// RbToId calls [raw.RbToId] (C function rb_to_id).
-func RbToId(arg uint) uint {
-	return raw.RbToId(arg)
-}
-
-// RbToInt calls [raw.RbToInt] (C function rb_to_int).
-func RbToInt(arg uint) uint {
-	return raw.RbToInt(arg)
-}
-
-// RbToSymbol calls [raw.RbToSymbol] (C function rb_to_symbol).
-func RbToSymbol(name uint) uint {
-	return raw.RbToSymbol(name)
-}
-
-// RbTolower calls [raw.RbTolower] (C function rb_tolower).
+// RbTolower calls the Ruby framework function rb_tolower.
 func RbTolower(c int) int {
-	return raw.RbTolower(c)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbTolower == nil {
+		ebipurego.RegisterLibFunc(&_fnRbTolower, _lib, "rb_tolower")
+	}
+	return _fnRbTolower(c)
 }
 
-// RbToupper calls [raw.RbToupper] (C function rb_toupper).
+var _fnRbToupper func(int) int
+
+// RbToupper calls the Ruby framework function rb_toupper.
 func RbToupper(c int) int {
-	return raw.RbToupper(c)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbToupper == nil {
+		ebipurego.RegisterLibFunc(&_fnRbToupper, _lib, "rb_toupper")
+	}
+	return _fnRbToupper(c)
 }
 
-// RbTrapExec calls [raw.RbTrapExec] (C function rb_trap_exec).
+var _fnRbTrapExec func()
+
+// RbTrapExec calls the Ruby framework function rb_trap_exec.
 func RbTrapExec() {
-	raw.RbTrapExec()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbTrapExec == nil {
+		ebipurego.RegisterLibFunc(&_fnRbTrapExec, _lib, "rb_trap_exec")
+	}
+	_fnRbTrapExec()
 }
 
-// RbTrapExit calls [raw.RbTrapExit] (C function rb_trap_exit).
+var _fnRbTrapExit func()
+
+// RbTrapExit calls the Ruby framework function rb_trap_exit.
 func RbTrapExit() {
-	raw.RbTrapExit()
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbTrapExit == nil {
+		ebipurego.RegisterLibFunc(&_fnRbTrapExit, _lib, "rb_trap_exit")
+	}
+	_fnRbTrapExit()
 }
 
-// RbType calls [raw.RbType] (C function rb_type).
-func RbType(obj uint) int {
-	return raw.RbType(obj)
+var _fnRbType func(int) int
+
+// RbType calls the Ruby framework function rb_type.
+func RbType(obj_ int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbType == nil {
+		ebipurego.RegisterLibFunc(&_fnRbType, _lib, "rb_type")
+	}
+	return _fnRbType(obj_)
 }
 
-// RbTypeddataInheritedP calls [raw.RbTypeddataInheritedP] (C function rb_typeddata_inherited_p).
-func RbTypeddataInheritedP(child *raw.RbDataTypeStruct, parent *raw.RbDataTypeStruct) int {
-	return raw.RbTypeddataInheritedP(child, parent)
+var _fnRbUint2big func(int) int
+
+// RbUint2big calls the Ruby framework function rb_uint2big.
+func RbUint2big(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbUint2big == nil {
+		ebipurego.RegisterLibFunc(&_fnRbUint2big, _lib, "rb_uint2big")
+	}
+	return _fnRbUint2big(arg)
 }
 
-// RbTypeddataIsKindOf calls [raw.RbTypeddataIsKindOf] (C function rb_typeddata_is_kind_of).
-func RbTypeddataIsKindOf(arg uint, arg2 *raw.RbDataTypeStruct) int {
-	return raw.RbTypeddataIsKindOf(arg, arg2)
+var _fnRbUint2inum func(int) int
+
+// RbUint2inum calls the Ruby framework function rb_uint2inum.
+func RbUint2inum(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbUint2inum == nil {
+		ebipurego.RegisterLibFunc(&_fnRbUint2inum, _lib, "rb_uint2inum")
+	}
+	return _fnRbUint2inum(arg)
 }
 
-// RbUint2big calls [raw.RbUint2big] (C function rb_uint2big).
-func RbUint2big(arg uint) uint {
-	return raw.RbUint2big(arg)
+var _fnRbUll2inum func(uint64) int
+
+// RbUll2inum calls the Ruby framework function rb_ull2inum.
+func RbUll2inum(arg uint64) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbUll2inum == nil {
+		ebipurego.RegisterLibFunc(&_fnRbUll2inum, _lib, "rb_ull2inum")
+	}
+	return _fnRbUll2inum(arg)
 }
 
-// RbUint2inum calls [raw.RbUint2inum] (C function rb_uint2inum).
-func RbUint2inum(arg uint) uint {
-	return raw.RbUint2inum(arg)
+var _fnRbUlong2numInline func(int) int
+
+// RbUlong2numInline calls the Ruby framework function rb_ulong2num_inline.
+func RbUlong2numInline(v int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbUlong2numInline == nil {
+		ebipurego.RegisterLibFunc(&_fnRbUlong2numInline, _lib, "rb_ulong2num_inline")
+	}
+	return _fnRbUlong2numInline(v)
 }
 
-// RbUll2inum calls [raw.RbUll2inum] (C function rb_ull2inum).
-func RbUll2inum(arg uint64) uint {
-	return raw.RbUll2inum(arg)
+var _fnRbUndef func(int, int)
+
+// RbUndef calls the Ruby framework function rb_undef.
+func RbUndef(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbUndef == nil {
+		ebipurego.RegisterLibFunc(&_fnRbUndef, _lib, "rb_undef")
+	}
+	_fnRbUndef(arg, arg2)
 }
 
-// RbUlong2numInline calls [raw.RbUlong2numInline] (C function rb_ulong2num_inline).
-func RbUlong2numInline(v uint) uint {
-	return raw.RbUlong2numInline(v)
+var _fnRbUndefAllocFunc func(int)
+
+// RbUndefAllocFunc calls the Ruby framework function rb_undef_alloc_func.
+func RbUndefAllocFunc(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbUndefAllocFunc == nil {
+		ebipurego.RegisterLibFunc(&_fnRbUndefAllocFunc, _lib, "rb_undef_alloc_func")
+	}
+	_fnRbUndefAllocFunc(arg)
 }
 
-// RbUndef calls [raw.RbUndef] (C function rb_undef).
-func RbUndef(arg uint, arg2 uint) {
-	raw.RbUndef(arg, arg2)
+var _fnRbUndefMethod func(int, string)
+
+// RbUndefMethod calls the Ruby framework function rb_undef_method.
+func RbUndefMethod(arg int, arg2 string) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbUndefMethod == nil {
+		ebipurego.RegisterLibFunc(&_fnRbUndefMethod, _lib, "rb_undef_method")
+	}
+	_fnRbUndefMethod(arg, arg2)
 }
 
-// RbUndefAllocFunc calls [raw.RbUndefAllocFunc] (C function rb_undef_alloc_func).
-func RbUndefAllocFunc(arg uint) {
-	raw.RbUndefAllocFunc(arg)
+var _fnRbUndefineFinalizer func(int) int
+
+// RbUndefineFinalizer calls the Ruby framework function rb_undefine_finalizer.
+func RbUndefineFinalizer(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbUndefineFinalizer == nil {
+		ebipurego.RegisterLibFunc(&_fnRbUndefineFinalizer, _lib, "rb_undefine_finalizer")
+	}
+	return _fnRbUndefineFinalizer(arg)
 }
 
-// RbUndefMethod calls [raw.RbUndefMethod] (C function rb_undef_method).
-func RbUndefMethod(arg uint, arg2 string) {
-	raw.RbUndefMethod(arg, arg2)
-}
+var _fnRbUpdateMaxFd func(int)
 
-// RbUndefineFinalizer calls [raw.RbUndefineFinalizer] (C function rb_undefine_finalizer).
-func RbUndefineFinalizer(arg uint) uint {
-	return raw.RbUndefineFinalizer(arg)
-}
-
-// RbUpdateMaxFd calls [raw.RbUpdateMaxFd] (C function rb_update_max_fd).
+// RbUpdateMaxFd calls the Ruby framework function rb_update_max_fd.
 func RbUpdateMaxFd(fd int) {
-	raw.RbUpdateMaxFd(fd)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbUpdateMaxFd == nil {
+		ebipurego.RegisterLibFunc(&_fnRbUpdateMaxFd, _lib, "rb_update_max_fd")
+	}
+	_fnRbUpdateMaxFd(fd)
 }
 
-// RbUsasciiStrNew calls [raw.RbUsasciiStrNew] (C function rb_usascii_str_new).
-func RbUsasciiStrNew(arg string, arg2 int) uint {
-	return raw.RbUsasciiStrNew(arg, arg2)
+var _fnRbUsasciiStrNew func(string, int) int
+
+// RbUsasciiStrNew calls the Ruby framework function rb_usascii_str_new.
+func RbUsasciiStrNew(arg string, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbUsasciiStrNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbUsasciiStrNew, _lib, "rb_usascii_str_new")
+	}
+	return _fnRbUsasciiStrNew(arg, arg2)
 }
 
-// RbUsasciiStrNewCstr calls [raw.RbUsasciiStrNewCstr] (C function rb_usascii_str_new_cstr).
-func RbUsasciiStrNewCstr(arg string) uint {
-	return raw.RbUsasciiStrNewCstr(arg)
+var _fnRbUsasciiStrNewCstr func(string) int
+
+// RbUsasciiStrNewCstr calls the Ruby framework function rb_usascii_str_new_cstr.
+func RbUsasciiStrNewCstr(arg string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbUsasciiStrNewCstr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbUsasciiStrNewCstr, _lib, "rb_usascii_str_new_cstr")
+	}
+	return _fnRbUsasciiStrNewCstr(arg)
 }
 
-// RbUsasciiStrNewStatic calls [raw.RbUsasciiStrNewStatic] (C function rb_usascii_str_new_static).
-func RbUsasciiStrNewStatic(arg string, arg2 int) uint {
-	return raw.RbUsasciiStrNewStatic(arg, arg2)
+var _fnRbUsasciiStrNewStatic func(string, int) int
+
+// RbUsasciiStrNewStatic calls the Ruby framework function rb_usascii_str_new_static.
+func RbUsasciiStrNewStatic(arg string, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbUsasciiStrNewStatic == nil {
+		ebipurego.RegisterLibFunc(&_fnRbUsasciiStrNewStatic, _lib, "rb_usascii_str_new_static")
+	}
+	return _fnRbUsasciiStrNewStatic(arg, arg2)
 }
 
-// RbUtf8StrNew calls [raw.RbUtf8StrNew] (C function rb_utf8_str_new).
-func RbUtf8StrNew(arg string, arg2 int) uint {
-	return raw.RbUtf8StrNew(arg, arg2)
+var _fnRbUtf8StrNew func(string, int) int
+
+// RbUtf8StrNew calls the Ruby framework function rb_utf8_str_new.
+func RbUtf8StrNew(arg string, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbUtf8StrNew == nil {
+		ebipurego.RegisterLibFunc(&_fnRbUtf8StrNew, _lib, "rb_utf8_str_new")
+	}
+	return _fnRbUtf8StrNew(arg, arg2)
 }
 
-// RbUtf8StrNewCstr calls [raw.RbUtf8StrNewCstr] (C function rb_utf8_str_new_cstr).
-func RbUtf8StrNewCstr(arg string) uint {
-	return raw.RbUtf8StrNewCstr(arg)
+var _fnRbUtf8StrNewCstr func(string) int
+
+// RbUtf8StrNewCstr calls the Ruby framework function rb_utf8_str_new_cstr.
+func RbUtf8StrNewCstr(arg string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbUtf8StrNewCstr == nil {
+		ebipurego.RegisterLibFunc(&_fnRbUtf8StrNewCstr, _lib, "rb_utf8_str_new_cstr")
+	}
+	return _fnRbUtf8StrNewCstr(arg)
 }
 
-// RbUtf8StrNewStatic calls [raw.RbUtf8StrNewStatic] (C function rb_utf8_str_new_static).
-func RbUtf8StrNewStatic(arg string, arg2 int) uint {
-	return raw.RbUtf8StrNewStatic(arg, arg2)
+var _fnRbUtf8StrNewStatic func(string, int) int
+
+// RbUtf8StrNewStatic calls the Ruby framework function rb_utf8_str_new_static.
+func RbUtf8StrNewStatic(arg string, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbUtf8StrNewStatic == nil {
+		ebipurego.RegisterLibFunc(&_fnRbUtf8StrNewStatic, _lib, "rb_utf8_str_new_static")
+	}
+	return _fnRbUtf8StrNewStatic(arg, arg2)
 }
 
-// RbUvToUtf8 calls [raw.RbUvToUtf8] (C function rb_uv_to_utf8).
-func RbUvToUtf8(arg string, arg2 uint) int {
-	return raw.RbUvToUtf8(arg, arg2)
+var _fnRbUvToUtf8 func(string, int) int
+
+// RbUvToUtf8 calls the Ruby framework function rb_uv_to_utf8.
+func RbUvToUtf8(arg string, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbUvToUtf8 == nil {
+		ebipurego.RegisterLibFunc(&_fnRbUvToUtf8, _lib, "rb_uv_to_utf8")
+	}
+	return _fnRbUvToUtf8(arg, arg2)
 }
 
-// RbVarargsBadLength calls [raw.RbVarargsBadLength] (C function rb_varargs_bad_length).
+var _fnRbVarargsBadLength func(int, int) int
+
+// RbVarargsBadLength calls the Ruby framework function rb_varargs_bad_length.
 func RbVarargsBadLength(arg int, arg2 int) int {
-	return raw.RbVarargsBadLength(arg, arg2)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbVarargsBadLength == nil {
+		ebipurego.RegisterLibFunc(&_fnRbVarargsBadLength, _lib, "rb_varargs_bad_length")
+	}
+	return _fnRbVarargsBadLength(arg, arg2)
 }
 
-// RbVsprintf calls [raw.RbVsprintf] (C function rb_vsprintf).
-func RbVsprintf(arg string, arg2 string) uint {
-	return raw.RbVsprintf(arg, arg2)
+var _fnRbVsprintf func(string, string) int
+
+// RbVsprintf calls the Ruby framework function rb_vsprintf.
+func RbVsprintf(arg string, arg2 string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbVsprintf == nil {
+		ebipurego.RegisterLibFunc(&_fnRbVsprintf, _lib, "rb_vsprintf")
+	}
+	return _fnRbVsprintf(arg, arg2)
 }
 
-// RbWaitpid calls [raw.RbWaitpid] (C function rb_waitpid).
-func RbWaitpid(pid int, status *int32, flags int) int {
-	return raw.RbWaitpid(pid, status, flags)
-}
+var _fnRbWriteError func(string)
 
-// RbWriteError calls [raw.RbWriteError] (C function rb_write_error).
+// RbWriteError calls the Ruby framework function rb_write_error.
 func RbWriteError(arg string) {
-	raw.RbWriteError(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbWriteError == nil {
+		ebipurego.RegisterLibFunc(&_fnRbWriteError, _lib, "rb_write_error")
+	}
+	_fnRbWriteError(arg)
 }
 
-// RbWriteError2 calls [raw.RbWriteError2] (C function rb_write_error2).
+var _fnRbWriteError2 func(string, int)
+
+// RbWriteError2 calls the Ruby framework function rb_write_error2.
 func RbWriteError2(arg string, arg2 int) {
-	raw.RbWriteError2(arg, arg2)
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbWriteError2 == nil {
+		ebipurego.RegisterLibFunc(&_fnRbWriteError2, _lib, "rb_write_error2")
+	}
+	_fnRbWriteError2(arg, arg2)
 }
 
-// RbYield calls [raw.RbYield] (C function rb_yield).
-func RbYield(arg uint) uint {
-	return raw.RbYield(arg)
+var _fnRbYield func(int) int
+
+// RbYield calls the Ruby framework function rb_yield.
+func RbYield(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbYield == nil {
+		ebipurego.RegisterLibFunc(&_fnRbYield, _lib, "rb_yield")
+	}
+	return _fnRbYield(arg)
 }
 
-// RbYieldBlock calls [raw.RbYieldBlock] (C function rb_yield_block).
-func RbYieldBlock(arg uint, arg2 uint, arg3 int, arg4 *uint, arg5 uint) uint {
-	return raw.RbYieldBlock(arg, arg2, arg3, arg4, arg5)
+var _fnRbYieldSplat func(int) int
+
+// RbYieldSplat calls the Ruby framework function rb_yield_splat.
+func RbYieldSplat(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRbYieldSplat == nil {
+		ebipurego.RegisterLibFunc(&_fnRbYieldSplat, _lib, "rb_yield_splat")
+	}
+	return _fnRbYieldSplat(arg)
 }
 
-// RbYieldSplat calls [raw.RbYieldSplat] (C function rb_yield_splat).
-func RbYieldSplat(arg uint) uint {
-	return raw.RbYieldSplat(arg)
-}
+var _fnDefaultSignal func(int)
 
-// RbYieldValues2 calls [raw.RbYieldValues2] (C function rb_yield_values2).
-func RbYieldValues2(n int, argv *uint) uint {
-	return raw.RbYieldValues2(n, argv)
-}
-
-// BraceGlob calls [raw.RubyBraceGlob] (C function ruby_brace_glob).
-func BraceGlob(arg string, arg2 int, arg3 unsafe.Pointer, arg4 uint) int {
-	return raw.RubyBraceGlob(arg, arg2, arg3, arg4)
-}
-
-// Cleanup calls [raw.RubyCleanup] (C function ruby_cleanup).
-func Cleanup(arg unsafe.Pointer) int {
-	return raw.RubyCleanup(arg)
-}
-
-// DefaultSignal calls [raw.RubyDefaultSignal] (C function ruby_default_signal).
+// DefaultSignal calls the Ruby framework function ruby_default_signal.
 func DefaultSignal(arg int) {
-	raw.RubyDefaultSignal(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnDefaultSignal == nil {
+		ebipurego.RegisterLibFunc(&_fnDefaultSignal, _lib, "ruby_default_signal")
+	}
+	_fnDefaultSignal(arg)
 }
 
-// ExecNode calls [raw.RubyExecNode] (C function ruby_exec_node).
-func ExecNode(n unsafe.Pointer) int {
-	return raw.RubyExecNode(n)
-}
+var _fnFinalize func()
 
-// ExecutableNode calls [raw.RubyExecutableNode] (C function ruby_executable_node).
-func ExecutableNode(n unsafe.Pointer, status *int32) int {
-	return raw.RubyExecutableNode(n, status)
-}
-
-// Finalize calls [raw.RubyFinalize] (C function ruby_finalize).
+// Finalize calls the Ruby framework function ruby_finalize.
 func Finalize() {
-	raw.RubyFinalize()
+	_loadOnce.Do(_loadLibrary)
+	if _fnFinalize == nil {
+		ebipurego.RegisterLibFunc(&_fnFinalize, _lib, "ruby_finalize")
+	}
+	_fnFinalize()
 }
 
-// Glob calls [raw.RubyGlob] (C function ruby_glob).
-func Glob(arg string, arg2 int, arg3 unsafe.Pointer, arg4 uint) int {
-	return raw.RubyGlob(arg, arg2, arg3, arg4)
-}
+var _fnIncpush func(string)
 
-// Incpush calls [raw.RubyIncpush] (C function ruby_incpush).
+// Incpush calls the Ruby framework function ruby_incpush.
 func Incpush(arg string) {
-	raw.RubyIncpush(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnIncpush == nil {
+		ebipurego.RegisterLibFunc(&_fnIncpush, _lib, "ruby_incpush")
+	}
+	_fnIncpush(arg)
 }
 
-// Init calls [raw.RubyInit] (C function ruby_init).
+var _fnInit func()
+
+// Init calls the Ruby framework function ruby_init.
 func Init() {
-	raw.RubyInit()
+	_loadOnce.Do(_loadLibrary)
+	if _fnInit == nil {
+		ebipurego.RegisterLibFunc(&_fnInit, _lib, "ruby_init")
+	}
+	_fnInit()
 }
 
-// InitLoadpath calls [raw.RubyInitLoadpath] (C function ruby_init_loadpath).
+var _fnInitLoadpath func()
+
+// InitLoadpath calls the Ruby framework function ruby_init_loadpath.
 func InitLoadpath() {
-	raw.RubyInitLoadpath()
+	_loadOnce.Do(_loadLibrary)
+	if _fnInitLoadpath == nil {
+		ebipurego.RegisterLibFunc(&_fnInitLoadpath, _lib, "ruby_init_loadpath")
+	}
+	_fnInitLoadpath()
 }
 
-// InitStack calls [raw.RubyInitStack] (C function ruby_init_stack).
-func InitStack(arg unsafe.Pointer) {
-	raw.RubyInitStack(arg)
+var _fnMallocSizeOverflow func(int, int)
+
+// MallocSizeOverflow calls the Ruby framework function ruby_malloc_size_overflow.
+func MallocSizeOverflow(arg int, arg2 int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMallocSizeOverflow == nil {
+		ebipurego.RegisterLibFunc(&_fnMallocSizeOverflow, _lib, "ruby_malloc_size_overflow")
+	}
+	_fnMallocSizeOverflow(arg, arg2)
 }
 
-// MallocSizeOverflow calls [raw.RubyMallocSizeOverflow] (C function ruby_malloc_size_overflow).
-func MallocSizeOverflow(arg uint, arg2 uint) {
-	raw.RubyMallocSizeOverflow(arg, arg2)
-}
+var _fnNativeThreadP func() int
 
-// NativeThreadP calls [raw.RubyNativeThreadP] (C function ruby_native_thread_p).
+// NativeThreadP calls the Ruby framework function ruby_native_thread_p.
 func NativeThreadP() int {
-	return raw.RubyNativeThreadP()
+	_loadOnce.Do(_loadLibrary)
+	if _fnNativeThreadP == nil {
+		ebipurego.RegisterLibFunc(&_fnNativeThreadP, _lib, "ruby_native_thread_p")
+	}
+	return _fnNativeThreadP()
 }
 
-// Options calls [raw.RubyOptions] (C function ruby_options).
-func Options(argc int, argv string) unsafe.Pointer {
-	return raw.RubyOptions(argc, argv)
-}
+var _fnProgInit func()
 
-// PosixSignal calls [raw.RubyPosixSignal] (C function ruby_posix_signal).
-func PosixSignal(arg int, arg2 unsafe.Pointer) {
-	raw.RubyPosixSignal(arg, arg2)
-}
-
-// ProcessOptions calls [raw.RubyProcessOptions] (C function ruby_process_options).
-func ProcessOptions(arg int, arg2 string) unsafe.Pointer {
-	return raw.RubyProcessOptions(arg, arg2)
-}
-
-// ProgInit calls [raw.RubyProgInit] (C function ruby_prog_init).
+// ProgInit calls the Ruby framework function ruby_prog_init.
 func ProgInit() {
-	raw.RubyProgInit()
+	_loadOnce.Do(_loadLibrary)
+	if _fnProgInit == nil {
+		ebipurego.RegisterLibFunc(&_fnProgInit, _lib, "ruby_prog_init")
+	}
+	_fnProgInit()
 }
 
-// RunNode calls [raw.RubyRunNode] (C function ruby_run_node).
-func RunNode(n unsafe.Pointer) int {
-	return raw.RubyRunNode(n)
-}
+var _fnScript func(string)
 
-// Script calls [raw.RubyScript] (C function ruby_script).
+// Script calls the Ruby framework function ruby_script.
 func Script(name string) {
-	raw.RubyScript(name)
+	_loadOnce.Do(_loadLibrary)
+	if _fnScript == nil {
+		ebipurego.RegisterLibFunc(&_fnScript, _lib, "ruby_script")
+	}
+	_fnScript(name)
 }
 
-// SetArgv calls [raw.RubySetArgv] (C function ruby_set_argv).
+var _fnSetArgv func(int, string)
+
+// SetArgv calls the Ruby framework function ruby_set_argv.
 func SetArgv(arg int, arg2 string) {
-	raw.RubySetArgv(arg, arg2)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetArgv == nil {
+		ebipurego.RegisterLibFunc(&_fnSetArgv, _lib, "ruby_set_argv")
+	}
+	_fnSetArgv(arg, arg2)
 }
 
-// SetScriptName calls [raw.RubySetScriptName] (C function ruby_set_script_name).
-func SetScriptName(name uint) {
-	raw.RubySetScriptName(name)
+var _fnSetScriptName func(int)
+
+// SetScriptName calls the Ruby framework function ruby_set_script_name.
+func SetScriptName(name int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetScriptName == nil {
+		ebipurego.RegisterLibFunc(&_fnSetScriptName, _lib, "ruby_set_script_name")
+	}
+	_fnSetScriptName(name)
 }
 
-// SetStackSize calls [raw.RubySetStackSize] (C function ruby_set_stack_size).
-func SetStackSize(arg uint) {
-	raw.RubySetStackSize(arg)
+var _fnSetStackSize func(int)
+
+// SetStackSize calls the Ruby framework function ruby_set_stack_size.
+func SetStackSize(arg int) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetStackSize == nil {
+		ebipurego.RegisterLibFunc(&_fnSetStackSize, _lib, "ruby_set_stack_size")
+	}
+	_fnSetStackSize(arg)
 }
 
-// Setup calls [raw.RubySetup] (C function ruby_setup).
+var _fnSetup func() int
+
+// Setup calls the Ruby framework function ruby_setup.
 func Setup() int {
-	return raw.RubySetup()
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetup == nil {
+		ebipurego.RegisterLibFunc(&_fnSetup, _lib, "ruby_setup")
+	}
+	return _fnSetup()
 }
 
-// ShowCopyright calls [raw.RubyShowCopyright] (C function ruby_show_copyright).
+var _fnShowCopyright func()
+
+// ShowCopyright calls the Ruby framework function ruby_show_copyright.
 func ShowCopyright() {
-	raw.RubyShowCopyright()
+	_loadOnce.Do(_loadLibrary)
+	if _fnShowCopyright == nil {
+		ebipurego.RegisterLibFunc(&_fnShowCopyright, _lib, "ruby_show_copyright")
+	}
+	_fnShowCopyright()
 }
 
-// ShowCopyrightToDie calls [raw.RubyShowCopyrightToDie] (C function ruby_show_copyright_to_die).
+var _fnShowCopyrightToDie func(int) int
+
+// ShowCopyrightToDie calls the Ruby framework function ruby_show_copyright_to_die.
 func ShowCopyrightToDie(arg int) int {
-	return raw.RubyShowCopyrightToDie(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnShowCopyrightToDie == nil {
+		ebipurego.RegisterLibFunc(&_fnShowCopyrightToDie, _lib, "ruby_show_copyright_to_die")
+	}
+	return _fnShowCopyrightToDie(arg)
 }
 
-// ShowVersion calls [raw.RubyShowVersion] (C function ruby_show_version).
+var _fnShowVersion func()
+
+// ShowVersion calls the Ruby framework function ruby_show_version.
 func ShowVersion() {
-	raw.RubyShowVersion()
+	_loadOnce.Do(_loadLibrary)
+	if _fnShowVersion == nil {
+		ebipurego.RegisterLibFunc(&_fnShowVersion, _lib, "ruby_show_version")
+	}
+	_fnShowVersion()
 }
 
-// SigFinalize calls [raw.RubySigFinalize] (C function ruby_sig_finalize).
+var _fnSigFinalize func()
+
+// SigFinalize calls the Ruby framework function ruby_sig_finalize.
 func SigFinalize() {
-	raw.RubySigFinalize()
+	_loadOnce.Do(_loadLibrary)
+	if _fnSigFinalize == nil {
+		ebipurego.RegisterLibFunc(&_fnSigFinalize, _lib, "ruby_sig_finalize")
+	}
+	_fnSigFinalize()
 }
 
-// SignalName calls [raw.RubySignalName] (C function ruby_signal_name).
+var _fnSignalName func(int) string
+
+// SignalName calls the Ruby framework function ruby_signal_name.
 func SignalName(arg int) string {
-	return raw.RubySignalName(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSignalName == nil {
+		ebipurego.RegisterLibFunc(&_fnSignalName, _lib, "ruby_signal_name")
+	}
+	return _fnSignalName(arg)
 }
 
-// Snprintf calls [raw.RubySnprintf] (C function ruby_snprintf).
-func Snprintf(str string, n uint, fmt_ string) int {
-	return raw.RubySnprintf(str, n, fmt_)
+var _fnSnprintf func(string, int, string) int
+
+// Snprintf calls the Ruby framework function ruby_snprintf.
+func Snprintf(str string, n int, fmt_ string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSnprintf == nil {
+		ebipurego.RegisterLibFunc(&_fnSnprintf, _lib, "ruby_snprintf")
+	}
+	return _fnSnprintf(str, n, fmt_)
 }
 
-// StackCheck calls [raw.RubyStackCheck] (C function ruby_stack_check).
+var _fnStackCheck func() int
+
+// StackCheck calls the Ruby framework function ruby_stack_check.
 func StackCheck() int {
-	return raw.RubyStackCheck()
+	_loadOnce.Do(_loadLibrary)
+	if _fnStackCheck == nil {
+		ebipurego.RegisterLibFunc(&_fnStackCheck, _lib, "ruby_stack_check")
+	}
+	return _fnStackCheck()
 }
 
-// StackLength calls [raw.RubyStackLength] (C function ruby_stack_length).
-func StackLength(arg *uint) uint {
-	return raw.RubyStackLength(arg)
-}
+var _fnStop func(int)
 
-// Stop calls [raw.RubyStop] (C function ruby_stop).
+// Stop calls the Ruby framework function ruby_stop.
 func Stop(arg int) {
-	raw.RubyStop(arg)
+	_loadOnce.Do(_loadLibrary)
+	if _fnStop == nil {
+		ebipurego.RegisterLibFunc(&_fnStop, _lib, "ruby_stop")
+	}
+	_fnStop(arg)
 }
 
-// Strtoul calls [raw.RubyStrtoul] (C function ruby_strtoul).
-func Strtoul(str string, endptr string, base int) uint {
-	return raw.RubyStrtoul(str, endptr, base)
+var _fnStrtoul func(string, string, int) int
+
+// Strtoul calls the Ruby framework function ruby_strtoul.
+func Strtoul(str string, endptr string, base int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStrtoul == nil {
+		ebipurego.RegisterLibFunc(&_fnStrtoul, _lib, "ruby_strtoul")
+	}
+	return _fnStrtoul(str, endptr, base)
 }
 
-// Sysinit calls [raw.RubySysinit] (C function ruby_sysinit).
-func Sysinit(argc *int32, argv string) {
-	raw.RubySysinit(argc, argv)
+var _fnVsnprintf func(string, int, string, string) int
+
+// Vsnprintf calls the Ruby framework function ruby_vsnprintf.
+func Vsnprintf(str string, n int, fmt_ string, ap string) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVsnprintf == nil {
+		ebipurego.RegisterLibFunc(&_fnVsnprintf, _lib, "ruby_vsnprintf")
+	}
+	return _fnVsnprintf(str, n, fmt_, ap)
 }
 
-// Vsnprintf calls [raw.RubyVsnprintf] (C function ruby_vsnprintf).
-func Vsnprintf(str string, n uint, fmt_ string, ap string) int {
-	return raw.RubyVsnprintf(str, n, fmt_, ap)
+var _fnStHashEnd func(int) int
+
+// StHashEnd calls the Ruby framework function st_hash_end.
+func StHashEnd(h int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStHashEnd == nil {
+		ebipurego.RegisterLibFunc(&_fnStHashEnd, _lib, "st_hash_end")
+	}
+	return _fnStHashEnd(h)
 }
 
-// Xcalloc calls [raw.RubyXcalloc] (C function ruby_xcalloc).
-func Xcalloc(arg uint, arg2 uint) unsafe.Pointer {
-	return raw.RubyXcalloc(arg, arg2)
+var _fnStHashStart func(int) int
+
+// StHashStart calls the Ruby framework function st_hash_start.
+func StHashStart(h int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStHashStart == nil {
+		ebipurego.RegisterLibFunc(&_fnStHashStart, _lib, "st_hash_start")
+	}
+	return _fnStHashStart(h)
 }
 
-// Xfree calls [raw.RubyXfree] (C function ruby_xfree).
-func Xfree(arg unsafe.Pointer) {
-	raw.RubyXfree(arg)
+var _fnStHashUint func(int, int) int
+
+// StHashUint calls the Ruby framework function st_hash_uint.
+func StHashUint(h int, i int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStHashUint == nil {
+		ebipurego.RegisterLibFunc(&_fnStHashUint, _lib, "st_hash_uint")
+	}
+	return _fnStHashUint(h, i)
 }
 
-// Xmalloc calls [raw.RubyXmalloc] (C function ruby_xmalloc).
-func Xmalloc(arg uint) unsafe.Pointer {
-	return raw.RubyXmalloc(arg)
+var _fnStHashUint32 func(int, uint32) int
+
+// StHashUint32 calls the Ruby framework function st_hash_uint32.
+func StHashUint32(h int, i uint32) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStHashUint32 == nil {
+		ebipurego.RegisterLibFunc(&_fnStHashUint32, _lib, "st_hash_uint32")
+	}
+	return _fnStHashUint32(h, i)
 }
 
-// Xmalloc2 calls [raw.RubyXmalloc2] (C function ruby_xmalloc2).
-func Xmalloc2(arg uint, arg2 uint) unsafe.Pointer {
-	return raw.RubyXmalloc2(arg, arg2)
-}
+var _fnStLocaleInsensitiveStrcasecmp func(string, string) int
 
-// Xrealloc calls [raw.RubyXrealloc] (C function ruby_xrealloc).
-func Xrealloc(arg unsafe.Pointer, arg2 uint) unsafe.Pointer {
-	return raw.RubyXrealloc(arg, arg2)
-}
-
-// Xrealloc2 calls [raw.RubyXrealloc2] (C function ruby_xrealloc2).
-func Xrealloc2(arg unsafe.Pointer, arg2 uint, arg3 uint) unsafe.Pointer {
-	return raw.RubyXrealloc2(arg, arg2, arg3)
-}
-
-// StAddDirect calls [raw.StAddDirect] (C function st_add_direct).
-func StAddDirect(arg *raw.StTable, arg2 uint, arg3 uint) {
-	raw.StAddDirect(arg, arg2, arg3)
-}
-
-// StCleanupSafe calls [raw.StCleanupSafe] (C function st_cleanup_safe).
-func StCleanupSafe(arg *raw.StTable, arg2 uint) {
-	raw.StCleanupSafe(arg, arg2)
-}
-
-// StClear calls [raw.StClear] (C function st_clear).
-func StClear(arg *raw.StTable) {
-	raw.StClear(arg)
-}
-
-// StCopy calls [raw.StCopy] (C function st_copy).
-func StCopy(arg *raw.StTable) *raw.StTable {
-	return raw.StCopy(arg)
-}
-
-// StDelete calls [raw.StDelete] (C function st_delete).
-func StDelete(arg *raw.StTable, arg2 *uint, arg3 *uint) int {
-	return raw.StDelete(arg, arg2, arg3)
-}
-
-// StDeleteSafe calls [raw.StDeleteSafe] (C function st_delete_safe).
-func StDeleteSafe(arg *raw.StTable, arg2 *uint, arg3 *uint, arg4 uint) int {
-	return raw.StDeleteSafe(arg, arg2, arg3, arg4)
-}
-
-// StForeach calls [raw.StForeach] (C function st_foreach).
-func StForeach(arg *raw.StTable, arg2 unsafe.Pointer, arg3 uint) int {
-	return raw.StForeach(arg, arg2, arg3)
-}
-
-// StForeachCheck calls [raw.StForeachCheck] (C function st_foreach_check).
-func StForeachCheck(arg *raw.StTable, arg2 unsafe.Pointer, arg3 uint, arg4 uint) int {
-	return raw.StForeachCheck(arg, arg2, arg3, arg4)
-}
-
-// StForeachSafe calls [raw.StForeachSafe] (C function st_foreach_safe).
-func StForeachSafe(arg *raw.StTable, arg2 unsafe.Pointer, arg3 uint) {
-	raw.StForeachSafe(arg, arg2, arg3)
-}
-
-// StFreeTable calls [raw.StFreeTable] (C function st_free_table).
-func StFreeTable(arg *raw.StTable) {
-	raw.StFreeTable(arg)
-}
-
-// StGetKey calls [raw.StGetKey] (C function st_get_key).
-func StGetKey(arg *raw.StTable, arg2 uint, arg3 *uint) int {
-	return raw.StGetKey(arg, arg2, arg3)
-}
-
-// StHash calls [raw.StHash] (C function st_hash).
-func StHash(ptr unsafe.Pointer, len_ uint, h uint) uint {
-	return raw.StHash(ptr, len_, h)
-}
-
-// StHashEnd calls [raw.StHashEnd] (C function st_hash_end).
-func StHashEnd(h uint) uint {
-	return raw.StHashEnd(h)
-}
-
-// StHashStart calls [raw.StHashStart] (C function st_hash_start).
-func StHashStart(h uint) uint {
-	return raw.StHashStart(h)
-}
-
-// StHashUint calls [raw.StHashUint] (C function st_hash_uint).
-func StHashUint(h uint, i uint) uint {
-	return raw.StHashUint(h, i)
-}
-
-// StHashUint32 calls [raw.StHashUint32] (C function st_hash_uint32).
-func StHashUint32(h uint, i uint32) uint {
-	return raw.StHashUint32(h, i)
-}
-
-// StInitNumtable calls [raw.StInitNumtable] (C function st_init_numtable).
-func StInitNumtable() *raw.StTable {
-	return raw.StInitNumtable()
-}
-
-// StInitNumtableWithSize calls [raw.StInitNumtableWithSize] (C function st_init_numtable_with_size).
-func StInitNumtableWithSize(arg uint) *raw.StTable {
-	return raw.StInitNumtableWithSize(arg)
-}
-
-// StInitStrcasetable calls [raw.StInitStrcasetable] (C function st_init_strcasetable).
-func StInitStrcasetable() *raw.StTable {
-	return raw.StInitStrcasetable()
-}
-
-// StInitStrcasetableWithSize calls [raw.StInitStrcasetableWithSize] (C function st_init_strcasetable_with_size).
-func StInitStrcasetableWithSize(arg uint) *raw.StTable {
-	return raw.StInitStrcasetableWithSize(arg)
-}
-
-// StInitStrtable calls [raw.StInitStrtable] (C function st_init_strtable).
-func StInitStrtable() *raw.StTable {
-	return raw.StInitStrtable()
-}
-
-// StInitStrtableWithSize calls [raw.StInitStrtableWithSize] (C function st_init_strtable_with_size).
-func StInitStrtableWithSize(arg uint) *raw.StTable {
-	return raw.StInitStrtableWithSize(arg)
-}
-
-// StInitTable calls [raw.StInitTable] (C function st_init_table).
-func StInitTable(arg *raw.StHashType) *raw.StTable {
-	return raw.StInitTable(arg)
-}
-
-// StInitTableWithSize calls [raw.StInitTableWithSize] (C function st_init_table_with_size).
-func StInitTableWithSize(arg *raw.StHashType, arg2 uint) *raw.StTable {
-	return raw.StInitTableWithSize(arg, arg2)
-}
-
-// StInsert calls [raw.StInsert] (C function st_insert).
-func StInsert(arg *raw.StTable, arg2 uint, arg3 uint) int {
-	return raw.StInsert(arg, arg2, arg3)
-}
-
-// StInsert2 calls [raw.StInsert2] (C function st_insert2).
-func StInsert2(arg *raw.StTable, arg2 uint, arg3 uint, arg4 unsafe.Pointer) int {
-	return raw.StInsert2(arg, arg2, arg3, arg4)
-}
-
-// StKeys calls [raw.StKeys] (C function st_keys).
-func StKeys(table *raw.StTable, keys *uint, size uint) uint {
-	return raw.StKeys(table, keys, size)
-}
-
-// StKeysCheck calls [raw.StKeysCheck] (C function st_keys_check).
-func StKeysCheck(table *raw.StTable, keys *uint, size uint, never uint) uint {
-	return raw.StKeysCheck(table, keys, size, never)
-}
-
-// StLocaleInsensitiveStrcasecmp calls [raw.StLocaleInsensitiveStrcasecmp] (C function st_locale_insensitive_strcasecmp).
+// StLocaleInsensitiveStrcasecmp calls the Ruby framework function st_locale_insensitive_strcasecmp.
 func StLocaleInsensitiveStrcasecmp(s1 string, s2 string) int {
-	return raw.StLocaleInsensitiveStrcasecmp(s1, s2)
+	_loadOnce.Do(_loadLibrary)
+	if _fnStLocaleInsensitiveStrcasecmp == nil {
+		ebipurego.RegisterLibFunc(&_fnStLocaleInsensitiveStrcasecmp, _lib, "st_locale_insensitive_strcasecmp")
+	}
+	return _fnStLocaleInsensitiveStrcasecmp(s1, s2)
 }
 
-// StLocaleInsensitiveStrncasecmp calls [raw.StLocaleInsensitiveStrncasecmp] (C function st_locale_insensitive_strncasecmp).
-func StLocaleInsensitiveStrncasecmp(s1 string, s2 string, n uint) int {
-	return raw.StLocaleInsensitiveStrncasecmp(s1, s2, n)
+var _fnStLocaleInsensitiveStrncasecmp func(string, string, int) int
+
+// StLocaleInsensitiveStrncasecmp calls the Ruby framework function st_locale_insensitive_strncasecmp.
+func StLocaleInsensitiveStrncasecmp(s1 string, s2 string, n int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStLocaleInsensitiveStrncasecmp == nil {
+		ebipurego.RegisterLibFunc(&_fnStLocaleInsensitiveStrncasecmp, _lib, "st_locale_insensitive_strncasecmp")
+	}
+	return _fnStLocaleInsensitiveStrncasecmp(s1, s2, n)
 }
 
-// StLookup calls [raw.StLookup] (C function st_lookup).
-func StLookup(arg *raw.StTable, arg2 uint, arg3 *uint) int {
-	return raw.StLookup(arg, arg2, arg3)
+var _fnStNumcmp func(int, int) int
+
+// StNumcmp calls the Ruby framework function st_numcmp.
+func StNumcmp(arg int, arg2 int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStNumcmp == nil {
+		ebipurego.RegisterLibFunc(&_fnStNumcmp, _lib, "st_numcmp")
+	}
+	return _fnStNumcmp(arg, arg2)
 }
 
-// StMemsize calls [raw.StMemsize] (C function st_memsize).
-func StMemsize(arg *raw.StTable) uint {
-	return raw.StMemsize(arg)
-}
+var _fnStNumhash func(int) int
 
-// StNumcmp calls [raw.StNumcmp] (C function st_numcmp).
-func StNumcmp(arg uint, arg2 uint) int {
-	return raw.StNumcmp(arg, arg2)
-}
-
-// StNumhash calls [raw.StNumhash] (C function st_numhash).
-func StNumhash(arg uint) uint {
-	return raw.StNumhash(arg)
-}
-
-// StShift calls [raw.StShift] (C function st_shift).
-func StShift(arg *raw.StTable, arg2 *uint, arg3 *uint) int {
-	return raw.StShift(arg, arg2, arg3)
-}
-
-// StUpdate calls [raw.StUpdate] (C function st_update).
-func StUpdate(table *raw.StTable, key uint, func_ unsafe.Pointer, arg uint) int {
-	return raw.StUpdate(table, key, func_, arg)
-}
-
-// StValues calls [raw.StValues] (C function st_values).
-func StValues(table *raw.StTable, values *uint, size uint) uint {
-	return raw.StValues(table, values, size)
-}
-
-// StValuesCheck calls [raw.StValuesCheck] (C function st_values_check).
-func StValuesCheck(table *raw.StTable, values *uint, size uint, never uint) uint {
-	return raw.StValuesCheck(table, values, size, never)
+// StNumhash calls the Ruby framework function st_numhash.
+func StNumhash(arg int) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnStNumhash == nil {
+		ebipurego.RegisterLibFunc(&_fnStNumhash, _lib, "st_numhash")
+	}
+	return _fnStNumhash(arg)
 }

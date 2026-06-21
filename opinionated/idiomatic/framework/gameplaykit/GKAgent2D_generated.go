@@ -5,152 +5,141 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An agent that operates in a two-dimensional space.
 //
-// Agent2D wraps [raw.GKAgent2D] with a fluent Go API.
+// Agent2D is an idiomatic wrapper over the Objective-C class GKAgent2D.
 type Agent2D struct {
-	inner *raw.GKAgent2D
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKAgent2D].
-func (x *Agent2D) Unwrap() *raw.GKAgent2D { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Agent2D) ID() objc.ID { return x.inner.Ptr() }
-
-// Agent2DFromID adopts an existing object pointer as a Agent2D (nil for 0).
+// Agent2DFromID adopts an existing Objective-C object as a Agent2D
+// (nil for 0), retaining it and registering a release finalizer.
 func Agent2DFromID(id objc.ID) *Agent2D {
 	if id == 0 {
 		return nil
 	}
-	return &Agent2D{inner: raw.GKAgent2DFromID(id)}
+	x := &Agent2D{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAgent2D creates a new [Agent2D].
+// agent2DAdopt wraps an Objective-C object that this code just created as a
+// Agent2D (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func agent2DAdopt(id objc.ID) *Agent2D {
+	if id == 0 {
+		return nil
+	}
+	x := &Agent2D{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Agent2D) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Agent2D) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Agent2D) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAgent2D creates a new Agent2D.
 func NewAgent2D() *Agent2D {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKAgent2D")), objc.RegisterName("new"))
-	return &Agent2D{inner: raw.GKAgent2DFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKAgent2D")), objc.RegisterName("new"))
+	return agent2DAdopt(_id)
 }
 
 // The rotation of the agent around the z-axis.
 //
-// WithRotation sets the rotation property and returns the receiver for chaining.
+// WithRotation sets rotation and returns the receiver so calls can be chained.
 func (x *Agent2D) WithRotation(rotation float32) *Agent2D {
-	x.inner.SetRotation(rotation)
-	return x
-}
-
-// An object that prepares for or responds to updates in the agent simulation.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Agent2D) WithDelegate(delegate raw.GKAgentDelegate) *Agent2D {
-	x.inner.GKAgent.SetDelegate(delegate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotation:"), rotation)
 	return x
 }
 
 // A weighted collection of goals that influence the agent’s movement.
 //
-// WithBehavior sets the behavior property and returns the receiver for chaining.
+// WithBehavior sets behavior and returns the receiver so calls can be chained.
 func (x *Agent2D) WithBehavior(behavior BehaviorProvider) *Agent2D {
-	x.inner.GKAgent.SetBehavior(behavior.asBehavior())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
 	return x
 }
 
 // The resistance of the agent to changes in speed or direction.
 //
-// WithMass sets the mass property and returns the receiver for chaining.
+// WithMass sets mass and returns the receiver so calls can be chained.
 func (x *Agent2D) WithMass(mass float32) *Agent2D {
-	x.inner.GKAgent.SetMass(mass)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMass:"), mass)
 	return x
 }
 
 // The agent’s radius.
 //
-// WithRadius sets the radius property and returns the receiver for chaining.
+// WithRadius sets radius and returns the receiver so calls can be chained.
 func (x *Agent2D) WithRadius(radius float32) *Agent2D {
-	x.inner.GKAgent.SetRadius(radius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 	return x
 }
 
 // The agent’s current forward speed, in units per second.
 //
-// WithSpeed sets the speed property and returns the receiver for chaining.
+// WithSpeed sets speed and returns the receiver so calls can be chained.
 func (x *Agent2D) WithSpeed(speed float32) *Agent2D {
-	x.inner.GKAgent.SetSpeed(speed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
 // The upper limit to changes in the agent’s speed or direction.
 //
-// WithMaxAcceleration sets the maxAcceleration property and returns the receiver for chaining.
+// WithMaxAcceleration sets maxAcceleration and returns the receiver so calls can be chained.
 func (x *Agent2D) WithMaxAcceleration(maxAcceleration float32) *Agent2D {
-	x.inner.GKAgent.SetMaxAcceleration(maxAcceleration)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAcceleration:"), maxAcceleration)
 	return x
 }
 
 // The agent’s maximum forward speed, in units per second.
 //
-// WithMaxSpeed sets the maxSpeed property and returns the receiver for chaining.
+// WithMaxSpeed sets maxSpeed and returns the receiver so calls can be chained.
 func (x *Agent2D) WithMaxSpeed(maxSpeed float32) *Agent2D {
-	x.inner.GKAgent.SetMaxSpeed(maxSpeed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSpeed:"), maxSpeed)
 	return x
 }
 
-// Position of the agent on the logical XY plane
-//
-// Position calls the underlying Position.
-func (x *Agent2D) Position() unsafe.Pointer {
-	return x.inner.Position()
-}
-
-// SetPosition calls the underlying SetPosition.
-func (x *Agent2D) SetPosition(position unsafe.Pointer) {
-	x.inner.SetPosition(position)
-}
-
-// Current logical velocity of the agent. The forward vector can be derived by normalizing this.
-//
-// Velocity calls the underlying Velocity.
-func (x *Agent2D) Velocity() unsafe.Pointer {
-	return x.inner.Velocity()
-}
-
 // Z rotation of the agent on the logical XY plane
-//
-// Rotation calls the underlying Rotation.
 func (x *Agent2D) Rotation() float32 {
-	return x.inner.Rotation()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rotation"))
+	return _r
 }
 
-// SetRotation calls the underlying SetRotation.
 func (x *Agent2D) SetRotation(rotation float32) {
-	x.inner.SetRotation(rotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotation:"), rotation)
 }
-
-func (x *Agent2D) asAgent() *raw.GKAgent { return &x.inner.GKAgent }
-
-func (x *Agent2D) asComponent() *raw.GKComponent { return &x.inner.GKAgent.GKComponent }
 
 // Agent2Dable is the interface implemented by [Agent2D], for mocking and DI.
 type Agent2Dable interface {
-	Unwrap() *raw.GKAgent2D
+	obj.Object
 	WithRotation(rotation float32) *Agent2D
-	WithDelegate(delegate raw.GKAgentDelegate) *Agent2D
 	WithBehavior(behavior BehaviorProvider) *Agent2D
 	WithMass(mass float32) *Agent2D
 	WithRadius(radius float32) *Agent2D
 	WithSpeed(speed float32) *Agent2D
 	WithMaxAcceleration(maxAcceleration float32) *Agent2D
 	WithMaxSpeed(maxSpeed float32) *Agent2D
-	Position() unsafe.Pointer
-	SetPosition(position unsafe.Pointer)
-	Velocity() unsafe.Pointer
 	Rotation() float32
 	SetRotation(rotation float32)
 }

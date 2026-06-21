@@ -5,49 +5,74 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ItemBadge wraps [raw.NSItemBadge] with a fluent Go API.
+// ItemBadge is an idiomatic wrapper over the Objective-C class NSItemBadge.
 type ItemBadge struct {
-	inner *raw.NSItemBadge
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSItemBadge].
-func (x *ItemBadge) Unwrap() *raw.NSItemBadge { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ItemBadge) ID() objc.ID { return x.inner.Ptr() }
-
-// ItemBadgeFromID adopts an existing object pointer as a ItemBadge (nil for 0).
+// ItemBadgeFromID adopts an existing Objective-C object as a ItemBadge
+// (nil for 0), retaining it and registering a release finalizer.
 func ItemBadgeFromID(id objc.ID) *ItemBadge {
 	if id == 0 {
 		return nil
 	}
-	return &ItemBadge{inner: raw.NSItemBadgeFromID(id)}
+	x := &ItemBadge{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewItemBadge creates a new [ItemBadge].
+// itemBadgeAdopt wraps an Objective-C object that this code just created as a
+// ItemBadge (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func itemBadgeAdopt(id objc.ID) *ItemBadge {
+	if id == 0 {
+		return nil
+	}
+	x := &ItemBadge{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ItemBadge) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ItemBadge) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ItemBadge) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewItemBadge creates a new ItemBadge.
 func NewItemBadge() *ItemBadge {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSItemBadge")), objc.RegisterName("new"))
-	return &ItemBadge{inner: raw.NSItemBadgeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSItemBadge")), objc.RegisterName("new"))
+	return itemBadgeAdopt(_id)
 }
 
-// Text calls the underlying Text.
 func (x *ItemBadge) Text() string {
-	_r := x.inner.Text()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("text"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // ItemBadgeable is the interface implemented by [ItemBadge], for mocking and DI.
 type ItemBadgeable interface {
-	Unwrap() *raw.NSItemBadge
+	obj.Object
 	Text() string
 }
 

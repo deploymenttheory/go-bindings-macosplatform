@@ -6,66 +6,88 @@ package matter
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterMediaPlayback wraps [raw.MTRClusterMediaPlayback] with a fluent Go API.
+// MTRClusterMediaPlayback is an idiomatic wrapper over the Objective-C class MTRClusterMediaPlayback.
 type MTRClusterMediaPlayback struct {
-	inner *raw.MTRClusterMediaPlayback
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterMediaPlayback].
-func (x *MTRClusterMediaPlayback) Unwrap() *raw.MTRClusterMediaPlayback { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterMediaPlayback) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterMediaPlaybackFromID adopts an existing object pointer as a MTRClusterMediaPlayback (nil for 0).
+// MTRClusterMediaPlaybackFromID adopts an existing Objective-C object as a MTRClusterMediaPlayback
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterMediaPlaybackFromID(id objc.ID) *MTRClusterMediaPlayback {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterMediaPlayback{inner: raw.MTRClusterMediaPlaybackFromID(id)}
+	x := &MTRClusterMediaPlayback{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterMediaPlaybackAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterMediaPlayback (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterMediaPlaybackAdopt(id objc.ID) *MTRClusterMediaPlayback {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterMediaPlayback{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterMediaPlayback) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterMediaPlayback) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterMediaPlayback) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterMediaPlaybackWithDeviceEndpointIDQueue creates a new [MTRClusterMediaPlayback].
-func NewMTRClusterMediaPlaybackWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterMediaPlayback {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterMediaPlayback")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterMediaPlayback{inner: raw.MTRClusterMediaPlaybackFromID(_id)}
+// NewMTRClusterMediaPlaybackWithDeviceEndpointIDQueue creates a new MTRClusterMediaPlayback.
+func NewMTRClusterMediaPlaybackWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterMediaPlayback {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterMediaPlayback")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterMediaPlaybackAdopt(_id)
 }
 
-// NewMTRClusterMediaPlaybackWithDeviceEndpointQueue creates a new [MTRClusterMediaPlayback].
-func NewMTRClusterMediaPlaybackWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterMediaPlayback {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterMediaPlayback")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterMediaPlayback{inner: raw.MTRClusterMediaPlaybackFromID(_id)}
+// NewMTRClusterMediaPlaybackWithDeviceEndpointQueue creates a new MTRClusterMediaPlayback.
+func NewMTRClusterMediaPlaybackWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterMediaPlayback {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterMediaPlayback")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterMediaPlaybackAdopt(_id)
 }
 
 // PlayWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PlayWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterPlayParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PlayWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPlayParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.PlayWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -76,22 +98,19 @@ func (x *MTRClusterMediaPlayback) PlayWithParamsExpectedValuesExpectedValueInter
 }
 
 // PlayWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PlayWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PlayWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.PlayWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -102,22 +121,19 @@ func (x *MTRClusterMediaPlayback) PlayWithExpectedValuesExpectedValueIntervalCom
 }
 
 // PauseWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterPauseParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPauseParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.PauseWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -128,22 +144,19 @@ func (x *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueInte
 }
 
 // PauseWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.PauseWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -154,22 +167,19 @@ func (x *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueIntervalCo
 }
 
 // StopWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) StopWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterStopParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) StopWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterStopParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.StopWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -180,22 +190,19 @@ func (x *MTRClusterMediaPlayback) StopWithParamsExpectedValuesExpectedValueInter
 }
 
 // StopWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) StopWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) StopWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.StopWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -206,22 +213,19 @@ func (x *MTRClusterMediaPlayback) StopWithExpectedValuesExpectedValueIntervalCom
 }
 
 // StartOverWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterStartOverParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterStartOverParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.StartOverWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startOverWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -232,22 +236,19 @@ func (x *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedValue
 }
 
 // StartOverWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) StartOverWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) StartOverWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.StartOverWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startOverWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -258,22 +259,19 @@ func (x *MTRClusterMediaPlayback) StartOverWithExpectedValuesExpectedValueInterv
 }
 
 // PreviousWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PreviousWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterPreviousParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PreviousWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPreviousParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.PreviousWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -284,22 +282,19 @@ func (x *MTRClusterMediaPlayback) PreviousWithParamsExpectedValuesExpectedValueI
 }
 
 // PreviousWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PreviousWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PreviousWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.PreviousWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -310,22 +305,19 @@ func (x *MTRClusterMediaPlayback) PreviousWithExpectedValuesExpectedValueInterva
 }
 
 // NextWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) NextWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterNextParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) NextWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterNextParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.NextWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -336,22 +328,19 @@ func (x *MTRClusterMediaPlayback) NextWithParamsExpectedValuesExpectedValueInter
 }
 
 // NextWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) NextWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) NextWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.NextWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -362,22 +351,19 @@ func (x *MTRClusterMediaPlayback) NextWithExpectedValuesExpectedValueIntervalCom
 }
 
 // RewindWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) RewindWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterRewindParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) RewindWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterRewindParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RewindWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rewindWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -388,22 +374,19 @@ func (x *MTRClusterMediaPlayback) RewindWithParamsExpectedValuesExpectedValueInt
 }
 
 // RewindWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) RewindWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) RewindWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RewindWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rewindWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -414,22 +397,19 @@ func (x *MTRClusterMediaPlayback) RewindWithExpectedValuesExpectedValueIntervalC
 }
 
 // FastForwardWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) FastForwardWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterFastForwardParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) FastForwardWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterFastForwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FastForwardWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fastForwardWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -440,22 +420,19 @@ func (x *MTRClusterMediaPlayback) FastForwardWithParamsExpectedValuesExpectedVal
 }
 
 // FastForwardWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) FastForwardWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) FastForwardWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FastForwardWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fastForwardWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -466,22 +443,19 @@ func (x *MTRClusterMediaPlayback) FastForwardWithExpectedValuesExpectedValueInte
 }
 
 // SkipForwardWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) SkipForwardWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterSkipForwardParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) SkipForwardWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSkipForwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SkipForwardWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipForwardWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -492,22 +466,19 @@ func (x *MTRClusterMediaPlayback) SkipForwardWithParamsExpectedValuesExpectedVal
 }
 
 // SkipBackwardWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) SkipBackwardWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterSkipBackwardParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) SkipBackwardWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSkipBackwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SkipBackwardWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipBackwardWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -518,22 +489,19 @@ func (x *MTRClusterMediaPlayback) SkipBackwardWithParamsExpectedValuesExpectedVa
 }
 
 // SeekWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) SeekWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterSeekParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) SeekWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSeekParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SeekWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seekWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -543,103 +511,80 @@ func (x *MTRClusterMediaPlayback) SeekWithParamsExpectedValuesExpectedValueInter
 	}
 }
 
-// ActivateAudioTrackWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying ActivateAudioTrackWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterMediaPlayback) ActivateAudioTrackWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMediaPlaybackClusterActivateAudioTrackParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ActivateAudioTrackWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterMediaPlayback) ReadAttributeCurrentStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentStateWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ActivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying ActivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterMediaPlayback) ActivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMediaPlaybackClusterActivateTextTrackParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ActivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterMediaPlayback) ReadAttributeStartTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStartTimeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// DeactivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying DeactivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterMediaPlayback) DeactivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMediaPlaybackClusterDeactivateTextTrackParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.DeactivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterMediaPlayback) ReadAttributeDurationWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDurationWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// DeactivateTextTrackWithExpectedValuesExpectedValueIntervalCompletion calls the underlying DeactivateTextTrackWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterMediaPlayback) DeactivateTextTrackWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.DeactivateTextTrackWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+func (x *MTRClusterMediaPlayback) ReadAttributeSampledPositionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSampledPositionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentStateWithParams calls the underlying ReadAttributeCurrentStateWithParams.
-func (x *MTRClusterMediaPlayback) ReadAttributeCurrentStateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentStateWithParams(params)
+func (x *MTRClusterMediaPlayback) ReadAttributePlaybackSpeedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePlaybackSpeedWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeStartTimeWithParams calls the underlying ReadAttributeStartTimeWithParams.
-func (x *MTRClusterMediaPlayback) ReadAttributeStartTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeStartTimeWithParams(params)
+func (x *MTRClusterMediaPlayback) ReadAttributeSeekRangeEndWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSeekRangeEndWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeDurationWithParams calls the underlying ReadAttributeDurationWithParams.
-func (x *MTRClusterMediaPlayback) ReadAttributeDurationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeDurationWithParams(params)
+func (x *MTRClusterMediaPlayback) ReadAttributeSeekRangeStartWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSeekRangeStartWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeSampledPositionWithParams calls the underlying ReadAttributeSampledPositionWithParams.
-func (x *MTRClusterMediaPlayback) ReadAttributeSampledPositionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSampledPositionWithParams(params)
+func (x *MTRClusterMediaPlayback) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePlaybackSpeedWithParams calls the underlying ReadAttributePlaybackSpeedWithParams.
-func (x *MTRClusterMediaPlayback) ReadAttributePlaybackSpeedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePlaybackSpeedWithParams(params)
+func (x *MTRClusterMediaPlayback) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeSeekRangeEndWithParams calls the underlying ReadAttributeSeekRangeEndWithParams.
-func (x *MTRClusterMediaPlayback) ReadAttributeSeekRangeEndWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSeekRangeEndWithParams(params)
+func (x *MTRClusterMediaPlayback) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeSeekRangeStartWithParams calls the underlying ReadAttributeSeekRangeStartWithParams.
-func (x *MTRClusterMediaPlayback) ReadAttributeSeekRangeStartWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSeekRangeStartWithParams(params)
+func (x *MTRClusterMediaPlayback) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterMediaPlayback) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
-}
-
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterMediaPlayback) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
-}
-
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterMediaPlayback) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
-}
-
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterMediaPlayback) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterMediaPlayback) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+func (x *MTRClusterMediaPlayback) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // PlayWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PlayWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterPlayParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PlayWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterPlayParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.PlayWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -650,22 +595,19 @@ func (x *MTRClusterMediaPlayback) PlayWithParamsExpectedValuesExpectedValueInter
 }
 
 // PlayWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PlayWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PlayWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.PlayWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -676,22 +618,19 @@ func (x *MTRClusterMediaPlayback) PlayWithExpectedValuesExpectedValueInterval(ct
 }
 
 // PauseWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterPauseParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterPauseParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.PauseWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -702,22 +641,19 @@ func (x *MTRClusterMediaPlayback) PauseWithParamsExpectedValuesExpectedValueInte
 }
 
 // PauseWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.PauseWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -728,22 +664,19 @@ func (x *MTRClusterMediaPlayback) PauseWithExpectedValuesExpectedValueInterval(c
 }
 
 // StopPlaybackWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) StopPlaybackWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterStopPlaybackParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) StopPlaybackWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterStopPlaybackParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.StopPlaybackWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopPlaybackWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -754,22 +687,19 @@ func (x *MTRClusterMediaPlayback) StopPlaybackWithParamsExpectedValuesExpectedVa
 }
 
 // StopPlaybackWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) StopPlaybackWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) StopPlaybackWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.StopPlaybackWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopPlaybackWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -780,22 +710,19 @@ func (x *MTRClusterMediaPlayback) StopPlaybackWithExpectedValuesExpectedValueInt
 }
 
 // StartOverWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterStartOverParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterStartOverParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.StartOverWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startOverWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -806,22 +733,19 @@ func (x *MTRClusterMediaPlayback) StartOverWithParamsExpectedValuesExpectedValue
 }
 
 // StartOverWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) StartOverWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) StartOverWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.StartOverWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startOverWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -832,22 +756,19 @@ func (x *MTRClusterMediaPlayback) StartOverWithExpectedValuesExpectedValueInterv
 }
 
 // PreviousWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PreviousWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterPreviousParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PreviousWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterPreviousParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.PreviousWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -858,22 +779,19 @@ func (x *MTRClusterMediaPlayback) PreviousWithParamsExpectedValuesExpectedValueI
 }
 
 // PreviousWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) PreviousWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) PreviousWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.PreviousWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -884,22 +802,19 @@ func (x *MTRClusterMediaPlayback) PreviousWithExpectedValuesExpectedValueInterva
 }
 
 // NextWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) NextWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterNextParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) NextWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterNextParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.NextWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -910,22 +825,19 @@ func (x *MTRClusterMediaPlayback) NextWithParamsExpectedValuesExpectedValueInter
 }
 
 // NextWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) NextWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) NextWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.NextWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -936,22 +848,19 @@ func (x *MTRClusterMediaPlayback) NextWithExpectedValuesExpectedValueInterval(ct
 }
 
 // RewindWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) RewindWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterRewindParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) RewindWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterRewindParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RewindWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rewindWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -962,22 +871,19 @@ func (x *MTRClusterMediaPlayback) RewindWithParamsExpectedValuesExpectedValueInt
 }
 
 // RewindWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) RewindWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) RewindWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RewindWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rewindWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -988,22 +894,19 @@ func (x *MTRClusterMediaPlayback) RewindWithExpectedValuesExpectedValueInterval(
 }
 
 // FastForwardWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) FastForwardWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterFastForwardParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) FastForwardWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterFastForwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FastForwardWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fastForwardWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1014,22 +917,19 @@ func (x *MTRClusterMediaPlayback) FastForwardWithParamsExpectedValuesExpectedVal
 }
 
 // FastForwardWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) FastForwardWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) FastForwardWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FastForwardWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fastForwardWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1040,22 +940,19 @@ func (x *MTRClusterMediaPlayback) FastForwardWithExpectedValuesExpectedValueInte
 }
 
 // SkipForwardWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) SkipForwardWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterSkipForwardParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) SkipForwardWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterSkipForwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SkipForwardWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipForwardWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1066,22 +963,19 @@ func (x *MTRClusterMediaPlayback) SkipForwardWithParamsExpectedValuesExpectedVal
 }
 
 // SkipBackwardWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) SkipBackwardWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterSkipBackwardParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) SkipBackwardWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterSkipBackwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SkipBackwardWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipBackwardWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1092,22 +986,19 @@ func (x *MTRClusterMediaPlayback) SkipBackwardWithParamsExpectedValuesExpectedVa
 }
 
 // SeekWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterMediaPlayback) SeekWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterSeekParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
+func (x *MTRClusterMediaPlayback) SeekWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterSeekParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error) {
 	type _result struct {
 		val *MTRMediaPlaybackClusterPlaybackResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SeekWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRMediaPlaybackClusterPlaybackResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRMediaPlaybackClusterPlaybackResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRMediaPlaybackClusterPlaybackResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seekWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1117,71 +1008,59 @@ func (x *MTRClusterMediaPlayback) SeekWithParamsExpectedValuesExpectedValueInter
 	}
 }
 
-func (x *MTRClusterMediaPlayback) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterMediaPlayback) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
-}
-
 // MTRClusterMediaPlaybackable is the interface implemented by [MTRClusterMediaPlayback], for mocking and DI.
 type MTRClusterMediaPlaybackable interface {
-	Unwrap() *raw.MTRClusterMediaPlayback
-	PlayWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterPlayParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	PlayWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	PauseWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterPauseParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	PauseWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	StopWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterStopParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	StopWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	StartOverWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterStartOverParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	StartOverWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	PreviousWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterPreviousParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	PreviousWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	NextWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterNextParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	NextWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	RewindWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterRewindParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	RewindWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	FastForwardWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterFastForwardParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	FastForwardWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	SkipForwardWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterSkipForwardParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	SkipBackwardWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterSkipBackwardParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	SeekWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRMediaPlaybackClusterSeekParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	ActivateAudioTrackWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMediaPlaybackClusterActivateAudioTrackParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ActivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMediaPlaybackClusterActivateTextTrackParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	DeactivateTextTrackWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMediaPlaybackClusterDeactivateTextTrackParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	DeactivateTextTrackWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeCurrentStateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeStartTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeDurationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeSampledPositionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePlaybackSpeedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeSeekRangeEndWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeSeekRangeStartWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	PlayWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterPlayParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	PlayWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	PauseWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterPauseParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	PauseWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	StopPlaybackWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterStopPlaybackParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	StopPlaybackWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	StartOverWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterStartOverParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	StartOverWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	PreviousWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterPreviousParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	PreviousWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	NextWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterNextParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	NextWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	RewindWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterRewindParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	RewindWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	FastForwardWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterFastForwardParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	FastForwardWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	SkipForwardWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterSkipForwardParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	SkipBackwardWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterSkipBackwardParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
-	SeekWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *raw.MTRMediaPlaybackClusterSeekParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	obj.Object
+	PlayWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPlayParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	PlayWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	PauseWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPauseParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	PauseWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	StopWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterStopParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	StopWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	StartOverWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterStartOverParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	StartOverWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	PreviousWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterPreviousParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	PreviousWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	NextWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterNextParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	NextWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	RewindWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterRewindParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	RewindWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	FastForwardWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterFastForwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	FastForwardWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	SkipForwardWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSkipForwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	SkipBackwardWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSkipBackwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	SeekWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRMediaPlaybackClusterSeekParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	ReadAttributeCurrentStateWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeStartTimeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeDurationWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeSampledPositionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePlaybackSpeedWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeSeekRangeEndWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeSeekRangeStartWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
+	PlayWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterPlayParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	PlayWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	PauseWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterPauseParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	PauseWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	StopPlaybackWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterStopPlaybackParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	StopPlaybackWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	StartOverWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterStartOverParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	StartOverWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	PreviousWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterPreviousParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	PreviousWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	NextWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterNextParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	NextWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	RewindWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterRewindParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	RewindWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	FastForwardWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterFastForwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	FastForwardWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	SkipForwardWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterSkipForwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	SkipBackwardWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterSkipBackwardParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
+	SeekWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRMediaPlaybackClusterSeekParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRMediaPlaybackClusterPlaybackResponseParams, error)
 }
 
 var _ MTRClusterMediaPlaybackable = (*MTRClusterMediaPlayback)(nil)

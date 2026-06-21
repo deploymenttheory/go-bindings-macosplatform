@@ -5,95 +5,112 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that describes a Media Extension.
 //
-// MediaExtensionProperties wraps [raw.AVMediaExtensionProperties] with a fluent Go API.
+// MediaExtensionProperties is an idiomatic wrapper over the Objective-C class AVMediaExtensionProperties.
 type MediaExtensionProperties struct {
-	inner *raw.AVMediaExtensionProperties
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMediaExtensionProperties].
-func (x *MediaExtensionProperties) Unwrap() *raw.AVMediaExtensionProperties { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MediaExtensionProperties) ID() objc.ID { return x.inner.Ptr() }
-
-// MediaExtensionPropertiesFromID adopts an existing object pointer as a MediaExtensionProperties (nil for 0).
+// MediaExtensionPropertiesFromID adopts an existing Objective-C object as a MediaExtensionProperties
+// (nil for 0), retaining it and registering a release finalizer.
 func MediaExtensionPropertiesFromID(id objc.ID) *MediaExtensionProperties {
 	if id == 0 {
 		return nil
 	}
-	return &MediaExtensionProperties{inner: raw.AVMediaExtensionPropertiesFromID(id)}
+	x := &MediaExtensionProperties{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMediaExtensionProperties creates a new [MediaExtensionProperties].
+// mediaExtensionPropertiesAdopt wraps an Objective-C object that this code just created as a
+// MediaExtensionProperties (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mediaExtensionPropertiesAdopt(id objc.ID) *MediaExtensionProperties {
+	if id == 0 {
+		return nil
+	}
+	x := &MediaExtensionProperties{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MediaExtensionProperties) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MediaExtensionProperties) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MediaExtensionProperties) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMediaExtensionProperties creates a new MediaExtensionProperties.
 func NewMediaExtensionProperties() *MediaExtensionProperties {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMediaExtensionProperties")), objc.RegisterName("new"))
-	return &MediaExtensionProperties{inner: raw.AVMediaExtensionPropertiesFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMediaExtensionProperties")), objc.RegisterName("new"))
+	return mediaExtensionPropertiesAdopt(_id)
 }
 
 // The identifier of the Media Extension. The extension identifier string, corresponding to the ClassImplementationID value from the EXAppExtensionAttributes dictionary in the Info.plist file.
-//
-// ExtensionIdentifier calls the underlying ExtensionIdentifier.
 func (x *MediaExtensionProperties) ExtensionIdentifier() string {
-	_r := x.inner.ExtensionIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The name of the MediaExtension. The localized name of the MediaExtension format reader or video decoder, corresponding to the CFBundleDisplayName.
-//
-// ExtensionName calls the underlying ExtensionName.
 func (x *MediaExtensionProperties) ExtensionName() string {
-	_r := x.inner.ExtensionName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The name of the containing application bundle. The localized name of the application that hosts the MediaExtension.
-//
-// ContainingBundleName calls the underlying ContainingBundleName.
 func (x *MediaExtensionProperties) ContainingBundleName() string {
-	_r := x.inner.ContainingBundleName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containingBundleName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The file URL of the MediaExtension bundle.
-//
-// ExtensionURL calls the underlying ExtensionURL.
-func (x *MediaExtensionProperties) ExtensionURL() *foundation.NSURL {
-	return x.inner.ExtensionURL()
+func (x *MediaExtensionProperties) ExtensionURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionURL"))
+	return obj.Wrap(_r)
 }
 
 // The file URL of the host application for the MediaExtension.
-//
-// ContainingBundleURL calls the underlying ContainingBundleURL.
-func (x *MediaExtensionProperties) ContainingBundleURL() *foundation.NSURL {
-	return x.inner.ContainingBundleURL()
+func (x *MediaExtensionProperties) ContainingBundleURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containingBundleURL"))
+	return obj.Wrap(_r)
 }
 
 // MediaExtensionPropertiesable is the interface implemented by [MediaExtensionProperties], for mocking and DI.
 type MediaExtensionPropertiesable interface {
-	Unwrap() *raw.AVMediaExtensionProperties
+	obj.Object
 	ExtensionIdentifier() string
 	ExtensionName() string
 	ContainingBundleName() string
-	ExtensionURL() *foundation.NSURL
-	ContainingBundleURL() *foundation.NSURL
+	ExtensionURL() obj.Object
+	ContainingBundleURL() obj.Object
 }
 
 var _ MediaExtensionPropertiesable = (*MediaExtensionProperties)(nil)

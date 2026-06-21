@@ -5,82 +5,82 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides configuration information for the related player item.
 //
-// PlayerVideoOutputConfiguration wraps [raw.AVPlayerVideoOutputConfiguration] with a fluent Go API.
+// PlayerVideoOutputConfiguration is an idiomatic wrapper over the Objective-C class AVPlayerVideoOutputConfiguration.
 type PlayerVideoOutputConfiguration struct {
-	inner *raw.AVPlayerVideoOutputConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPlayerVideoOutputConfiguration].
-func (x *PlayerVideoOutputConfiguration) Unwrap() *raw.AVPlayerVideoOutputConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerVideoOutputConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerVideoOutputConfigurationFromID adopts an existing object pointer as a PlayerVideoOutputConfiguration (nil for 0).
+// PlayerVideoOutputConfigurationFromID adopts an existing Objective-C object as a PlayerVideoOutputConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerVideoOutputConfigurationFromID(id objc.ID) *PlayerVideoOutputConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerVideoOutputConfiguration{inner: raw.AVPlayerVideoOutputConfigurationFromID(id)}
+	x := &PlayerVideoOutputConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPlayerVideoOutputConfiguration creates a new [PlayerVideoOutputConfiguration].
-func NewPlayerVideoOutputConfiguration() *PlayerVideoOutputConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerVideoOutputConfiguration")), objc.RegisterName("new"))
-	return &PlayerVideoOutputConfiguration{inner: raw.AVPlayerVideoOutputConfigurationFromID(_id)}
-}
-
-// @property 	sourcePlayerItem @abstract	The AVPlayerItem which is the source of this configuration. @discussion	This AVPlayerItem can be seen as the source of all samples this configuration vended alongside.
-//
-// SourcePlayerItem calls the underlying SourcePlayerItem.
-func (x *PlayerVideoOutputConfiguration) SourcePlayerItem() *PlayerItem {
-	_r := x.inner.SourcePlayerItem()
-	if _r == nil {
+// playerVideoOutputConfigurationAdopt wraps an Objective-C object that this code just created as a
+// PlayerVideoOutputConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerVideoOutputConfigurationAdopt(id objc.ID) *PlayerVideoOutputConfiguration {
+	if id == 0 {
 		return nil
 	}
-	return &PlayerItem{inner: _r}
+	x := &PlayerVideoOutputConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property	dataChannelDescriptions @abstract	List of data channels, represented as CMTagCollections, selected for this configuration. @discussion Returns an Array of CMTagCollections
-//
-// DataChannelDescriptions calls the underlying DataChannelDescriptions.
-func (x *PlayerVideoOutputConfiguration) DataChannelDescriptions() *foundation.NSArray[objc.ID] {
-	return x.inner.DataChannelDescriptions()
+// Description returns the object's -description text.
+func (x *PlayerVideoOutputConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property	preferredTransform @abstract	The preferred transformation of the visual media data vended with this configuration. This transformation is acquired from the AVAssetTrack that was used to source the media data accompanying this configuration. @discussion If no transform was specified by the source track a default value of CGAffineTransformIdentity is returned.
-//
-// PreferredTransform calls the underlying PreferredTransform.
-func (x *PlayerVideoOutputConfiguration) PreferredTransform() corefoundation.CGAffineTransform {
-	return x.inner.PreferredTransform()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlayerVideoOutputConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property 	activationTime @abstract 	Host time when this configuration became active on the player the vending output is attached to.
-//
-// ActivationTime calls the underlying ActivationTime.
-func (x *PlayerVideoOutputConfiguration) ActivationTime() coremedia.CMTime {
-	return x.inner.ActivationTime()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlayerVideoOutputConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPlayerVideoOutputConfiguration creates a new PlayerVideoOutputConfiguration.
+func NewPlayerVideoOutputConfiguration() *PlayerVideoOutputConfiguration {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerVideoOutputConfiguration")), objc.RegisterName("new"))
+	return playerVideoOutputConfigurationAdopt(_id)
+}
+
+// The AVPlayerItem which is the source of this configuration. This AVPlayerItem can be seen as the source of all samples this configuration vended alongside.
+func (x *PlayerVideoOutputConfiguration) SourcePlayerItem() *PlayerItem {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourcePlayerItem"))
+	return PlayerItemFromID(_r)
+}
+
+// List of data channels, represented as CMTagCollections, selected for this configuration. Returns an Array of CMTagCollections
+func (x *PlayerVideoOutputConfiguration) DataChannelDescriptions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataChannelDescriptions"))
+	return obj.Wrap(_r)
 }
 
 // PlayerVideoOutputConfigurationable is the interface implemented by [PlayerVideoOutputConfiguration], for mocking and DI.
 type PlayerVideoOutputConfigurationable interface {
-	Unwrap() *raw.AVPlayerVideoOutputConfiguration
+	obj.Object
 	SourcePlayerItem() *PlayerItem
-	DataChannelDescriptions() *foundation.NSArray[objc.ID]
-	PreferredTransform() corefoundation.CGAffineTransform
-	ActivationTime() coremedia.CMTime
+	DataChannelDescriptions() obj.Object
 }
 
 var _ PlayerVideoOutputConfigurationable = (*PlayerVideoOutputConfiguration)(nil)

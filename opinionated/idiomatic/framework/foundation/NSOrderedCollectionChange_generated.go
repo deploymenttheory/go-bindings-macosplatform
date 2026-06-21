@@ -5,86 +5,111 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents an indexed change within an ordered collection.
 //
-// OrderedCollectionChange wraps [raw.NSOrderedCollectionChange] with a fluent Go API.
+// OrderedCollectionChange is an idiomatic wrapper over the Objective-C class NSOrderedCollectionChange.
 type OrderedCollectionChange struct {
-	inner *raw.NSOrderedCollectionChange[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSOrderedCollectionChange].
-func (x *OrderedCollectionChange) Unwrap() *raw.NSOrderedCollectionChange[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OrderedCollectionChange) ID() objc.ID { return x.inner.Ptr() }
-
-// OrderedCollectionChangeFromID adopts an existing object pointer as a OrderedCollectionChange (nil for 0).
+// OrderedCollectionChangeFromID adopts an existing Objective-C object as a OrderedCollectionChange
+// (nil for 0), retaining it and registering a release finalizer.
 func OrderedCollectionChangeFromID(id objc.ID) *OrderedCollectionChange {
 	if id == 0 {
 		return nil
 	}
-	return &OrderedCollectionChange{inner: raw.NSOrderedCollectionChangeFromID[objc.ID](id)}
+	x := &OrderedCollectionChange{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// orderedCollectionChangeAdopt wraps an Objective-C object that this code just created as a
+// OrderedCollectionChange (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func orderedCollectionChangeAdopt(id objc.ID) *OrderedCollectionChange {
+	if id == 0 {
+		return nil
+	}
+	x := &OrderedCollectionChange{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *OrderedCollectionChange) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *OrderedCollectionChange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *OrderedCollectionChange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a change object that represents inserting or removing an object from an ordered collection at a specific index.
 //
-// NewOrderedCollectionChangeWithObjectTypeIndex creates a new [OrderedCollectionChange].
-func NewOrderedCollectionChangeWithObjectTypeIndex(anObject objc.ID, type_ NSCollectionChangeType, index uint) *OrderedCollectionChange {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedCollectionChange")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObject:type:index:"), anObject, raw.NSCollectionChangeType(type_), index)
-	return &OrderedCollectionChange{inner: raw.NSOrderedCollectionChangeFromID[objc.ID](_id)}
+// NewOrderedCollectionChangeWithObjectTypeIndex creates a new OrderedCollectionChange.
+func NewOrderedCollectionChangeWithObjectTypeIndex(anObject obj.Object, type_ CollectionChangeType, index int) *OrderedCollectionChange {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionChange")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObject:type:index:"), objref.IDOf(anObject), type_, index)
+	return orderedCollectionChangeAdopt(_id)
 }
 
 // Creates a change object that represents inserting, removing, or moving an object from an ordered collection at a specific index.
 //
-// NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex creates a new [OrderedCollectionChange].
-func NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex(anObject objc.ID, type_ NSCollectionChangeType, index uint, associatedIndex uint) *OrderedCollectionChange {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedCollectionChange")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObject:type:index:associatedIndex:"), anObject, raw.NSCollectionChangeType(type_), index, associatedIndex)
-	return &OrderedCollectionChange{inner: raw.NSOrderedCollectionChangeFromID[objc.ID](_id)}
+// NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex creates a new OrderedCollectionChange.
+func NewOrderedCollectionChangeWithObjectTypeIndexAssociatedIndex(anObject obj.Object, type_ CollectionChangeType, index int, associatedIndex int) *OrderedCollectionChange {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionChange")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithObject:type:index:associatedIndex:"), objref.IDOf(anObject), type_, index, associatedIndex)
+	return orderedCollectionChangeAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *OrderedCollectionChange) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OrderedCollectionChange {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *OrderedCollectionChange) WithScriptingProperties(scriptingProperties obj.Object) *OrderedCollectionChange {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Object calls the underlying Object.
-func (x *OrderedCollectionChange) Object() objc.ID {
-	return x.inner.Object()
+func (x *OrderedCollectionChange) Object() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("object"))
+	return obj.Wrap(_r)
 }
 
-// ChangeType calls the underlying ChangeType.
-func (x *OrderedCollectionChange) ChangeType() NSCollectionChangeType {
-	return NSCollectionChangeType(x.inner.ChangeType())
+func (x *OrderedCollectionChange) ChangeType() CollectionChangeType {
+	_r := objc.Send[CollectionChangeType](objref.IDOf(x), objc.RegisterName("changeType"))
+	return _r
 }
 
-// Index calls the underlying Index.
-func (x *OrderedCollectionChange) Index() uint {
-	return x.inner.Index()
+func (x *OrderedCollectionChange) Index() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("index"))
+	return _r
 }
 
-// AssociatedIndex calls the underlying AssociatedIndex.
-func (x *OrderedCollectionChange) AssociatedIndex() uint {
-	return x.inner.AssociatedIndex()
+func (x *OrderedCollectionChange) AssociatedIndex() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("associatedIndex"))
+	return _r
 }
-
-func (x *OrderedCollectionChange) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // OrderedCollectionChangeable is the interface implemented by [OrderedCollectionChange], for mocking and DI.
 type OrderedCollectionChangeable interface {
-	Unwrap() *raw.NSOrderedCollectionChange[objc.ID]
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OrderedCollectionChange
-	Object() objc.ID
-	ChangeType() NSCollectionChangeType
-	Index() uint
-	AssociatedIndex() uint
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *OrderedCollectionChange
+	Object() obj.Object
+	ChangeType() CollectionChangeType
+	Index() int
+	AssociatedIndex() int
 }
 
 var _ OrderedCollectionChangeable = (*OrderedCollectionChange)(nil)

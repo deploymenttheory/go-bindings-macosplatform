@@ -5,47 +5,68 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A resolution result for the types of calls that your app handled.
 //
-// CallRecordTypeResolutionResult wraps [raw.INCallRecordTypeResolutionResult] with a fluent Go API.
+// CallRecordTypeResolutionResult is an idiomatic wrapper over the Objective-C class INCallRecordTypeResolutionResult.
 type CallRecordTypeResolutionResult struct {
-	inner *raw.INCallRecordTypeResolutionResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INCallRecordTypeResolutionResult].
-func (x *CallRecordTypeResolutionResult) Unwrap() *raw.INCallRecordTypeResolutionResult {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CallRecordTypeResolutionResult) ID() objc.ID { return x.inner.Ptr() }
-
-// CallRecordTypeResolutionResultFromID adopts an existing object pointer as a CallRecordTypeResolutionResult (nil for 0).
+// CallRecordTypeResolutionResultFromID adopts an existing Objective-C object as a CallRecordTypeResolutionResult
+// (nil for 0), retaining it and registering a release finalizer.
 func CallRecordTypeResolutionResultFromID(id objc.ID) *CallRecordTypeResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	return &CallRecordTypeResolutionResult{inner: raw.INCallRecordTypeResolutionResultFromID(id)}
+	x := &CallRecordTypeResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCallRecordTypeResolutionResult creates a new [CallRecordTypeResolutionResult].
+// callRecordTypeResolutionResultAdopt wraps an Objective-C object that this code just created as a
+// CallRecordTypeResolutionResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func callRecordTypeResolutionResultAdopt(id objc.ID) *CallRecordTypeResolutionResult {
+	if id == 0 {
+		return nil
+	}
+	x := &CallRecordTypeResolutionResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CallRecordTypeResolutionResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CallRecordTypeResolutionResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CallRecordTypeResolutionResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCallRecordTypeResolutionResult creates a new CallRecordTypeResolutionResult.
 func NewCallRecordTypeResolutionResult() *CallRecordTypeResolutionResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INCallRecordTypeResolutionResult")), objc.RegisterName("new"))
-	return &CallRecordTypeResolutionResult{inner: raw.INCallRecordTypeResolutionResultFromID(_id)}
-}
-
-func (x *CallRecordTypeResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
-	return &x.inner.INIntentResolutionResult
+	_id := objc.Send[objc.ID](objc.ID(_class("INCallRecordTypeResolutionResult")), objc.RegisterName("new"))
+	return callRecordTypeResolutionResultAdopt(_id)
 }
 
 // CallRecordTypeResolutionResultable is the interface implemented by [CallRecordTypeResolutionResult], for mocking and DI.
 type CallRecordTypeResolutionResultable interface {
-	Unwrap() *raw.INCallRecordTypeResolutionResult
+	obj.Object
 }
 
 var _ CallRecordTypeResolutionResultable = (*CallRecordTypeResolutionResult)(nil)

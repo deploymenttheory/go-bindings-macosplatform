@@ -5,155 +5,154 @@
 package discrecording
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Burn wraps [raw.DRBurn] with a fluent Go API.
+// Burn is an idiomatic wrapper over the Objective-C class DRBurn.
 type Burn struct {
-	inner *raw.DRBurn
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DRBurn].
-func (x *Burn) Unwrap() *raw.DRBurn { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Burn) ID() objc.ID { return x.inner.Ptr() }
-
-// BurnFromID adopts an existing object pointer as a Burn (nil for 0).
+// BurnFromID adopts an existing Objective-C object as a Burn
+// (nil for 0), retaining it and registering a release finalizer.
 func BurnFromID(id objc.ID) *Burn {
 	if id == 0 {
 		return nil
 	}
-	return &Burn{inner: raw.DRBurnFromID(id)}
+	x := &Burn{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @method 		initWithDevice: @abstract		Initializes the burn object. @discussion		Once a burn is initialized with this method, the object is ready to write data to the disc. @param 			device	Device to use for the burn @result  		A DRBurn object.
-//
-// NewBurnWithDevice creates a new [Burn].
-func NewBurnWithDevice(device *raw.DRDevice) *Burn {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRBurn")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device.Ptr())
-	return &Burn{inner: raw.DRBurnFromID(_id)}
-}
-
-// @method 		writeLayout: @abstract		Begin the process of burning a disc layout. @discussion		This method only begins the burning process. Once the burn has been started, control returns to the caller and it is up to the caller to monitor the progress of the burn (by listening for @link //apple_ref/occ/data/DRBurnStatusChangedNotification DRBurnStatusChangedNotification @/link or polling @link //apple_ref/occ/instm/DRBurn/status status @/link) to know when the burn completes (either successfully or with an error). @param 			layout	The data to be burned to disc. There are three configurations of the object passed in: <ol> <li>For a multi-session burn, layout must be a valid NSArray containing one or more NSArrays, each of which contains one or more valid @link //apple_ref/occ/cl/DRTrack DRTrack @/link objects.</li> <li>For a single-session multi-track burn, layout must be a valid NSArray containing one or more valid @link //apple_ref/occ/cl/DRTrack DRTrack @/link objects.</li> <li>For a single-session single-track burn, layout must be a valid @link //apple_ref/occ/cl/DRTrack DRTrack @/link object.</li> </ol> If none of these configurations are met or the leaf values contained in layout are not valid @link //apple_ref/occ/cl/DRTrack DRTrack @/link objects, an exception is thrown.
-//
-// WriteLayout calls the underlying WriteLayout.
-func (x *Burn) WriteLayout(layout objc.ID) {
-	x.inner.WriteLayout(layout)
-}
-
-// @method 		status @abstract		Returns a dictionary describing the status of the burn. @discussion		The same dictionary is returned through the @link //apple_ref/occ/data/DRBurnStatusChangedNotification DRBurnStatusChangedNotification @/link notification @result  		An NSDictionary	reporting the status of the burn.
-//
-// Status calls the underlying Status.
-func (x *Burn) Status() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.Status()
-}
-
-// @method 		abort @abstract		Stops the burn. @discussion		When this method returns the burn might not actually be fully stopped but it has been cancelled and only cleanup is going on. If a burn has not completed writing data to disc, you just made a coaster. Typically this method is only used as a result of the user hitting a cancel/stop button somewhere in the user interface.
-//
-// Abort calls the underlying Abort.
-func (x *Burn) Abort() {
-	x.inner.Abort()
-}
-
-// @method 		properties @abstract		Returns the properties dictionary of the burn. @result  		An NSDictionary containing the properties of the burn.
-//
-// Properties calls the underlying Properties.
-func (x *Burn) Properties() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.Properties()
-}
-
-// @method 		setProperties: @abstract		Sets the properties dictionary of the burn. @param 			properties	NSDictionary of the properties to set.
-//
-// SetProperties calls the underlying SetProperties.
-func (x *Burn) SetProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.SetProperties(properties)
-}
-
-// @method 		device @abstract		Returns the device being used for the burn. @result  		The DRDevice the burn will use.
-//
-// Device calls the underlying Device.
-func (x *Burn) Device() *Device {
-	_r := x.inner.Device()
-	if _r == nil {
+// burnAdopt wraps an Objective-C object that this code just created as a
+// Burn (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func burnAdopt(id objc.ID) *Burn {
+	if id == 0 {
 		return nil
 	}
-	return &Device{inner: _r}
+	x := &Burn{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @method 		requestedBurnSpeed @abstract		Returns the speed at which this burn will attempt to write data. @discussion		The actual speed also depends on the capabilities of the bus the device is on, the maximum speed of the device itself, and the media used. @result  		A float indicating the speed the burn should run at in kilobytes per second.
+// Description returns the object's -description text.
+func (x *Burn) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Burn) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Burn) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// Initializes the burn object. Once a burn is initialized with this method, the object is ready to write data to the disc.
 //
-// RequestedBurnSpeed calls the underlying RequestedBurnSpeed.
+// NewBurnWithDevice creates a new Burn.
+func NewBurnWithDevice(device *Device) *Burn {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DRBurn")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), objref.IDOf(device))
+	return burnAdopt(_id)
+}
+
+// Begin the process of burning a disc layout. This method only begins the burning process. Once the burn has been started, control returns to the caller and it is up to the caller to monitor the progress of the burn (by listening for
+func (x *Burn) WriteLayout(layout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeLayout:"), objref.IDOf(layout))
+}
+
+// Returns a dictionary describing the status of the burn. The same dictionary is returned through the
+func (x *Burn) Status() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+	return obj.Wrap(_r)
+}
+
+// Stops the burn. When this method returns the burn might not actually be fully stopped but it has been cancelled and only cleanup is going on. If a burn has not completed writing data to disc, you just made a coaster. Typically this method is only used as a result of the user hitting a cancel/stop button somewhere in the user interface.
+func (x *Burn) Abort() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("abort"))
+}
+
+// Returns the properties dictionary of the burn.
+func (x *Burn) Properties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("properties"))
+	return obj.Wrap(_r)
+}
+
+// Sets the properties dictionary of the burn.
+func (x *Burn) SetProperties(properties obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperties:"), objref.IDOf(properties))
+}
+
+// Returns the device being used for the burn.
+func (x *Burn) Device() *Device {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+	return DeviceFromID(_r)
+}
+
+// Returns the speed at which this burn will attempt to write data. The actual speed also depends on the capabilities of the bus the device is on, the maximum speed of the device itself, and the media used.
 func (x *Burn) RequestedBurnSpeed() float32 {
-	return x.inner.RequestedBurnSpeed()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("requestedBurnSpeed"))
+	return _r
 }
 
-// @method 		setRequestedBurnSpeed: @abstract		Sets the speed at which the burn will be attempted to be performed at @discussion		The actual speed also depends on the capabilities of the bus the device is on, the maximum speed of the device itself, and the media used. @param 			speed	The speed that the burn should run at in kilobytes per second.
-//
-// SetRequestedBurnSpeed calls the underlying SetRequestedBurnSpeed.
+// Sets the speed at which the burn will be attempted to be performed at The actual speed also depends on the capabilities of the bus the device is on, the maximum speed of the device itself, and the media used.
 func (x *Burn) SetRequestedBurnSpeed(speed float32) {
-	x.inner.SetRequestedBurnSpeed(speed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestedBurnSpeed:"), speed)
 }
 
-// @method 		appendable @abstract		Indicates if the burn is appendable. @discussion		When a burn completes, it can mark the disc so that no more data can be written to it. This creates a closed or non-appendable disc (which is the most compatible with audio CD players). If this method returns <i>NO</i>, then the disc will be marked as closed and no data can be appended to it. A return value of <i>YES</i> indicates further burns can be appended to the disc. @result  		A BOOL indicating if the burn is appendable.
-//
-// Appendable calls the underlying Appendable.
+// Indicates if the burn is appendable. When a burn completes, it can mark the disc so that no more data can be written to it. This creates a closed or non-appendable disc (which is the most compatible with audio CD players). If this method returns <i>NO</i>, then the disc will be marked as closed and no data can be appended to it. A return value of <i>YES</i> indicates further burns can be appended to the disc.
 func (x *Burn) Appendable() bool {
-	return x.inner.Appendable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appendable"))
+	return _r
 }
 
-// @method 		setAppendable: @abstract		Sets the burn to be appendable or non-appendable. @discussion		When a burn completes, it can mark the disc so that no more data can be written to it. This creates a closed or non-appendable disc (which is the most compatible with audio CD players). @param 			appendable	A BOOL indicating if the burn is appendable. Passing in <i>YES</i> indicates further burns can be appended to the disc, while passing in <i>NO</i>, marks the disc as closed and no data can be appended to it.
-//
-// SetAppendable calls the underlying SetAppendable.
+// Sets the burn to be appendable or non-appendable. When a burn completes, it can mark the disc so that no more data can be written to it. This creates a closed or non-appendable disc (which is the most compatible with audio CD players).
 func (x *Burn) SetAppendable(appendable bool) {
-	x.inner.SetAppendable(appendable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppendable:"), appendable)
 }
 
-// @method 		verifyDisc @abstract		Indicates if the resulting disc will be verified. @discussion		After data is written to disc, the data can be verified. The verification process will read the data on the disc back into memory and compare it to the data originally used to write to disc. The type of verification is determined by a track property on a track-by-track basis. See the @link //apple_ref/occ/cl/DRTrack DRTrack @/link documentation for more information on verification types. @result  		A BOOL indicating if the disc will be verified.
-//
-// VerifyDisc calls the underlying VerifyDisc.
+// Indicates if the resulting disc will be verified. After data is written to disc, the data can be verified. The verification process will read the data on the disc back into memory and compare it to the data originally used to write to disc. The type of verification is determined by a track property on a track-by-track basis. See the
 func (x *Burn) VerifyDisc() bool {
-	return x.inner.VerifyDisc()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("verifyDisc"))
+	return _r
 }
 
-// @method 		setVerifyDisc: @abstract		Sets the burn to verify or not verify the disc. @param 			verify	A BOOL indicating if the disc is to be verified. Passing in <i>YES</i> (the default) indicates that the data written to disc will be verified against the source data once the burn complete. Passing in <i>NO</i> indicates that no verification will take place.
-//
-// SetVerifyDisc calls the underlying SetVerifyDisc.
+// Sets the burn to verify or not verify the disc.
 func (x *Burn) SetVerifyDisc(verify bool) {
-	x.inner.SetVerifyDisc(verify)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerifyDisc:"), verify)
 }
 
-// @method 		completionAction @abstract		Returns the action to be performed at the end of the burn. @result  		An NSString
-//
-// CompletionAction calls the underlying CompletionAction.
+// Returns the action to be performed at the end of the burn.
 func (x *Burn) CompletionAction() string {
-	_r := x.inner.CompletionAction()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completionAction"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @method 		setCompletionAction: @abstract		Sets the action to be performed at the end of the burn. @param 			action	An NSString for the action to perform.
-//
-// SetCompletionAction calls the underlying SetCompletionAction.
+// Sets the action to be performed at the end of the burn.
 func (x *Burn) SetCompletionAction(action string) {
-	x.inner.SetCompletionAction(foundation.NSStringStringWithUTF8String(action))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionAction:"), purego.NSString(action))
 }
 
 // Burnable is the interface implemented by [Burn], for mocking and DI.
 type Burnable interface {
-	Unwrap() *raw.DRBurn
-	WriteLayout(layout objc.ID)
-	Status() *foundation.NSDictionary[objc.ID, objc.ID]
+	obj.Object
+	WriteLayout(layout obj.Object)
+	Status() obj.Object
 	Abort()
-	Properties() *foundation.NSDictionary[objc.ID, objc.ID]
-	SetProperties(properties *foundation.NSDictionary[objc.ID, objc.ID])
+	Properties() obj.Object
+	SetProperties(properties obj.Object)
 	Device() *Device
 	RequestedBurnSpeed() float32
 	SetRequestedBurnSpeed(speed float32)

@@ -5,20 +5,20 @@
 package iobluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// IOBluetoothHandsFreeProvider is implemented by IOBluetoothHandsFree and any idiomatic type wrapping a IOBluetoothHandsFree subclass.
+// IOBluetoothHandsFreeProvider is accepted wherever a IOBluetoothHandsFree (or one of its subclasses) is expected.
 type IOBluetoothHandsFreeProvider interface {
-	asIOBluetoothHandsFree() *raw.IOBluetoothHandsFree
+	objref.Object
 }
 
-// IOBluetoothObjectProvider is implemented by IOBluetoothObject and any idiomatic type wrapping a IOBluetoothObject subclass.
+// IOBluetoothObjectProvider is accepted wherever a IOBluetoothObject (or one of its subclasses) is expected.
 type IOBluetoothObjectProvider interface {
-	asIOBluetoothObject() *raw.IOBluetoothObject
+	objref.Object
 }
 
-// OBEXSessionProvider is implemented by OBEXSession and any idiomatic type wrapping a OBEXSession subclass.
+// OBEXSessionProvider is accepted wherever a OBEXSession (or one of its subclasses) is expected.
 type OBEXSessionProvider interface {
-	asOBEXSession() *raw.OBEXSession
+	objref.Object
 }

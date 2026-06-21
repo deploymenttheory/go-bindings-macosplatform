@@ -5,65 +5,86 @@
 package photos
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // An object that represents a change in the Photos library, and allows for requesting local identifiers that identify the changes for a library object.
 //
-// PersistentChange wraps [raw.PHPersistentChange] with a fluent Go API.
+// PersistentChange is an idiomatic wrapper over the Objective-C class PHPersistentChange.
 type PersistentChange struct {
-	inner *raw.PHPersistentChange
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHPersistentChange].
-func (x *PersistentChange) Unwrap() *raw.PHPersistentChange { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersistentChange) ID() objc.ID { return x.inner.Ptr() }
-
-// PersistentChangeFromID adopts an existing object pointer as a PersistentChange (nil for 0).
+// PersistentChangeFromID adopts an existing Objective-C object as a PersistentChange
+// (nil for 0), retaining it and registering a release finalizer.
 func PersistentChangeFromID(id objc.ID) *PersistentChange {
 	if id == 0 {
 		return nil
 	}
-	return &PersistentChange{inner: raw.PHPersistentChangeFromID(id)}
+	x := &PersistentChange{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPersistentChange creates a new [PersistentChange].
+// persistentChangeAdopt wraps an Objective-C object that this code just created as a
+// PersistentChange (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func persistentChangeAdopt(id objc.ID) *PersistentChange {
+	if id == 0 {
+		return nil
+	}
+	x := &PersistentChange{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PersistentChange) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PersistentChange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PersistentChange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPersistentChange creates a new PersistentChange.
 func NewPersistentChange() *PersistentChange {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHPersistentChange")), objc.RegisterName("new"))
-	return &PersistentChange{inner: raw.PHPersistentChangeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHPersistentChange")), objc.RegisterName("new"))
+	return persistentChangeAdopt(_id)
 }
 
 // Returns the change history that contains the local identifiers for object inserts, updates, and deletes.
-//
-// ChangeDetailsForObjectTypeError calls the underlying ChangeDetailsForObjectTypeError.
-func (x *PersistentChange) ChangeDetailsForObjectTypeError(objectType PHObjectType) (*PersistentObjectChangeDetails, error) {
-	_r, _err := x.inner.ChangeDetailsForObjectTypeError(raw.PHObjectType(objectType))
-	if _err != nil {
-		return nil, _err
+func (x *PersistentChange) ChangeDetailsForObjectTypeError(objectType ObjectType) (*PersistentObjectChangeDetails, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeDetailsForObjectType:error:"), objectType, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &PersistentObjectChangeDetails{inner: _r}, nil
+	return PersistentObjectChangeDetailsFromID(_r), nil
 }
 
-// ChangeToken calls the underlying ChangeToken.
 func (x *PersistentChange) ChangeToken() *PersistentChangeToken {
-	_r := x.inner.ChangeToken()
-	if _r == nil {
-		return nil
-	}
-	return &PersistentChangeToken{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeToken"))
+	return PersistentChangeTokenFromID(_r)
 }
 
 // PersistentChangeable is the interface implemented by [PersistentChange], for mocking and DI.
 type PersistentChangeable interface {
-	Unwrap() *raw.PHPersistentChange
-	ChangeDetailsForObjectTypeError(objectType PHObjectType) (*PersistentObjectChangeDetails, error)
+	obj.Object
+	ChangeDetailsForObjectTypeError(objectType ObjectType) (*PersistentObjectChangeDetails, error)
 	ChangeToken() *PersistentChangeToken
 }
 

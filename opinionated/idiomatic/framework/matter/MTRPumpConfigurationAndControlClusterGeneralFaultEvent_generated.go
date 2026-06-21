@@ -5,41 +5,66 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRPumpConfigurationAndControlClusterGeneralFaultEvent wraps [raw.MTRPumpConfigurationAndControlClusterGeneralFaultEvent] with a fluent Go API.
+// MTRPumpConfigurationAndControlClusterGeneralFaultEvent is an idiomatic wrapper over the Objective-C class MTRPumpConfigurationAndControlClusterGeneralFaultEvent.
 type MTRPumpConfigurationAndControlClusterGeneralFaultEvent struct {
-	inner *raw.MTRPumpConfigurationAndControlClusterGeneralFaultEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterGeneralFaultEvent].
-func (x *MTRPumpConfigurationAndControlClusterGeneralFaultEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterGeneralFaultEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRPumpConfigurationAndControlClusterGeneralFaultEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRPumpConfigurationAndControlClusterGeneralFaultEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterGeneralFaultEvent (nil for 0).
+// MTRPumpConfigurationAndControlClusterGeneralFaultEventFromID adopts an existing Objective-C object as a MTRPumpConfigurationAndControlClusterGeneralFaultEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRPumpConfigurationAndControlClusterGeneralFaultEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterGeneralFaultEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRPumpConfigurationAndControlClusterGeneralFaultEvent{inner: raw.MTRPumpConfigurationAndControlClusterGeneralFaultEventFromID(id)}
+	x := &MTRPumpConfigurationAndControlClusterGeneralFaultEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRPumpConfigurationAndControlClusterGeneralFaultEvent creates a new [MTRPumpConfigurationAndControlClusterGeneralFaultEvent].
+// mTRPumpConfigurationAndControlClusterGeneralFaultEventAdopt wraps an Objective-C object that this code just created as a
+// MTRPumpConfigurationAndControlClusterGeneralFaultEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRPumpConfigurationAndControlClusterGeneralFaultEventAdopt(id objc.ID) *MTRPumpConfigurationAndControlClusterGeneralFaultEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRPumpConfigurationAndControlClusterGeneralFaultEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRPumpConfigurationAndControlClusterGeneralFaultEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRPumpConfigurationAndControlClusterGeneralFaultEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRPumpConfigurationAndControlClusterGeneralFaultEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRPumpConfigurationAndControlClusterGeneralFaultEvent creates a new MTRPumpConfigurationAndControlClusterGeneralFaultEvent.
 func NewMTRPumpConfigurationAndControlClusterGeneralFaultEvent() *MTRPumpConfigurationAndControlClusterGeneralFaultEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRPumpConfigurationAndControlClusterGeneralFaultEvent")), objc.RegisterName("new"))
-	return &MTRPumpConfigurationAndControlClusterGeneralFaultEvent{inner: raw.MTRPumpConfigurationAndControlClusterGeneralFaultEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterGeneralFaultEvent")), objc.RegisterName("new"))
+	return mTRPumpConfigurationAndControlClusterGeneralFaultEventAdopt(_id)
 }
 
 // MTRPumpConfigurationAndControlClusterGeneralFaultEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterGeneralFaultEvent], for mocking and DI.
 type MTRPumpConfigurationAndControlClusterGeneralFaultEventable interface {
-	Unwrap() *raw.MTRPumpConfigurationAndControlClusterGeneralFaultEvent
+	obj.Object
 }
 
 var _ MTRPumpConfigurationAndControlClusterGeneralFaultEventable = (*MTRPumpConfigurationAndControlClusterGeneralFaultEvent)(nil)

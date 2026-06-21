@@ -5,76 +5,98 @@
 package quartz
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// QuartzFilter wraps [raw.QuartzFilter] with a fluent Go API.
+// QuartzFilter is an idiomatic wrapper over the Objective-C class QuartzFilter.
 type QuartzFilter struct {
-	inner *raw.QuartzFilter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QuartzFilter].
-func (x *QuartzFilter) Unwrap() *raw.QuartzFilter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QuartzFilter) ID() objc.ID { return x.inner.Ptr() }
-
-// QuartzFilterFromID adopts an existing object pointer as a QuartzFilter (nil for 0).
+// QuartzFilterFromID adopts an existing Objective-C object as a QuartzFilter
+// (nil for 0), retaining it and registering a release finalizer.
 func QuartzFilterFromID(id objc.ID) *QuartzFilter {
 	if id == 0 {
 		return nil
 	}
-	return &QuartzFilter{inner: raw.QuartzFilterFromID(id)}
+	x := &QuartzFilter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewQuartzFilter creates a new [QuartzFilter].
+// quartzFilterAdopt wraps an Objective-C object that this code just created as a
+// QuartzFilter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func quartzFilterAdopt(id objc.ID) *QuartzFilter {
+	if id == 0 {
+		return nil
+	}
+	x := &QuartzFilter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *QuartzFilter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QuartzFilter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QuartzFilter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewQuartzFilter creates a new QuartzFilter.
 func NewQuartzFilter() *QuartzFilter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QuartzFilter")), objc.RegisterName("new"))
-	return &QuartzFilter{inner: raw.QuartzFilterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QuartzFilter")), objc.RegisterName("new"))
+	return quartzFilterAdopt(_id)
 }
 
-// Properties calls the underlying Properties.
-func (x *QuartzFilter) Properties() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.Properties()
+func (x *QuartzFilter) Properties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("properties"))
+	return obj.Wrap(_r)
 }
 
-// Url calls the underlying Url.
-func (x *QuartzFilter) Url() *foundation.NSURL {
-	return x.inner.Url()
+func (x *QuartzFilter) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
 }
 
-// LocalizedName calls the underlying LocalizedName.
 func (x *QuartzFilter) LocalizedName() string {
-	_r := x.inner.LocalizedName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ApplyToContext calls the underlying ApplyToContext.
-func (x *QuartzFilter) ApplyToContext(aContext unsafe.Pointer) bool {
-	return x.inner.ApplyToContext(aContext)
+func (x *QuartzFilter) ApplyToContext(aContext obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("applyToContext:"), objref.IDOf(aContext))
+	return _r
 }
 
-// RemoveFromContext calls the underlying RemoveFromContext.
-func (x *QuartzFilter) RemoveFromContext(aContext unsafe.Pointer) {
-	x.inner.RemoveFromContext(aContext)
+func (x *QuartzFilter) RemoveFromContext(aContext obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromContext:"), objref.IDOf(aContext))
 }
 
 // QuartzFilterable is the interface implemented by [QuartzFilter], for mocking and DI.
 type QuartzFilterable interface {
-	Unwrap() *raw.QuartzFilter
-	Properties() *foundation.NSDictionary[objc.ID, objc.ID]
-	Url() *foundation.NSURL
+	obj.Object
+	Properties() obj.Object
+	Url() obj.Object
 	LocalizedName() string
-	ApplyToContext(aContext unsafe.Pointer) bool
-	RemoveFromContext(aContext unsafe.Pointer)
+	ApplyToContext(aContext obj.Object) bool
+	RemoveFromContext(aContext obj.Object)
 }
 
 var _ QuartzFilterable = (*QuartzFilter)(nil)

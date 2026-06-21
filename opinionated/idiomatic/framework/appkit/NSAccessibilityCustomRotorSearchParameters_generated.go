@@ -5,126 +5,135 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Search parameters for a custom rotor.
 //
-// AccessibilityCustomRotorSearchParameters wraps [raw.NSAccessibilityCustomRotorSearchParameters] with a fluent Go API.
+// AccessibilityCustomRotorSearchParameters is an idiomatic wrapper over the Objective-C class NSAccessibilityCustomRotorSearchParameters.
 type AccessibilityCustomRotorSearchParameters struct {
-	inner *raw.NSAccessibilityCustomRotorSearchParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSAccessibilityCustomRotorSearchParameters].
-func (x *AccessibilityCustomRotorSearchParameters) Unwrap() *raw.NSAccessibilityCustomRotorSearchParameters {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AccessibilityCustomRotorSearchParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// AccessibilityCustomRotorSearchParametersFromID adopts an existing object pointer as a AccessibilityCustomRotorSearchParameters (nil for 0).
+// AccessibilityCustomRotorSearchParametersFromID adopts an existing Objective-C object as a AccessibilityCustomRotorSearchParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func AccessibilityCustomRotorSearchParametersFromID(id objc.ID) *AccessibilityCustomRotorSearchParameters {
 	if id == 0 {
 		return nil
 	}
-	return &AccessibilityCustomRotorSearchParameters{inner: raw.NSAccessibilityCustomRotorSearchParametersFromID(id)}
-}
-
-// NewAccessibilityCustomRotorSearchParameters creates a new [AccessibilityCustomRotorSearchParameters].
-func NewAccessibilityCustomRotorSearchParameters() *AccessibilityCustomRotorSearchParameters {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAccessibilityCustomRotorSearchParameters")), objc.RegisterName("new"))
-	return &AccessibilityCustomRotorSearchParameters{inner: raw.NSAccessibilityCustomRotorSearchParametersFromID(_id)}
-}
-
-// @brief The currentItem determines where the search will start from. If it is nil, the search should begin from, and include, the first or last item, depending on which search direction is used (e.g. search direction next will return the first item and previous will return the last item).
-//
-// WithCurrentItem sets the currentItem property and returns the receiver for chaining.
-func (x *AccessibilityCustomRotorSearchParameters) WithCurrentItem(currentItem *AccessibilityCustomRotorItemResult) *AccessibilityCustomRotorSearchParameters {
-	x.inner.SetCurrentItem(currentItem.Unwrap())
+	x := &AccessibilityCustomRotorSearchParameters{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @brief Either NSAccessibilityCustomRotorSearchDirectionPrevious or NSAccessibilityCustomRotorSearchDirectionNext.
-//
-// WithSearchDirection sets the searchDirection property and returns the receiver for chaining.
-func (x *AccessibilityCustomRotorSearchParameters) WithSearchDirection(searchDirection NSAccessibilityCustomRotorSearchDirection) *AccessibilityCustomRotorSearchParameters {
-	x.inner.SetSearchDirection(raw.NSAccessibilityCustomRotorSearchDirection(searchDirection))
-	return x
-}
-
-// @brief A string of text to filter the results against. This is used to get type-ahead results. For example, given a list of primary colors and filter text "Re", color item "Red" would be returned as a result.
-//
-// WithFilterString sets the filterString property and returns the receiver for chaining.
-func (x *AccessibilityCustomRotorSearchParameters) WithFilterString(filterString string) *AccessibilityCustomRotorSearchParameters {
-	x.inner.SetFilterString(foundation.NSStringStringWithUTF8String(filterString))
-	return x
-}
-
-// @brief The currentItem determines where the search will start from. If it is nil, the search should begin from, and include, the first or last item, depending on which search direction is used (e.g. search direction next will return the first item and previous will return the last item).
-//
-// CurrentItem calls the underlying CurrentItem.
-func (x *AccessibilityCustomRotorSearchParameters) CurrentItem() *AccessibilityCustomRotorItemResult {
-	_r := x.inner.CurrentItem()
-	if _r == nil {
+// accessibilityCustomRotorSearchParametersAdopt wraps an Objective-C object that this code just created as a
+// AccessibilityCustomRotorSearchParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func accessibilityCustomRotorSearchParametersAdopt(id objc.ID) *AccessibilityCustomRotorSearchParameters {
+	if id == 0 {
 		return nil
 	}
-	return &AccessibilityCustomRotorItemResult{inner: _r}
+	x := &AccessibilityCustomRotorSearchParameters{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @brief The currentItem determines where the search will start from. If it is nil, the search should begin from, and include, the first or last item, depending on which search direction is used (e.g. search direction next will return the first item and previous will return the last item).
-//
-// SetCurrentItem calls the underlying SetCurrentItem.
-func (x *AccessibilityCustomRotorSearchParameters) SetCurrentItem(currentItem *raw.NSAccessibilityCustomRotorItemResult) {
-	x.inner.SetCurrentItem(currentItem)
+// Description returns the object's -description text.
+func (x *AccessibilityCustomRotorSearchParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @brief Either NSAccessibilityCustomRotorSearchDirectionPrevious or NSAccessibilityCustomRotorSearchDirectionNext.
-//
-// SearchDirection calls the underlying SearchDirection.
-func (x *AccessibilityCustomRotorSearchParameters) SearchDirection() NSAccessibilityCustomRotorSearchDirection {
-	return NSAccessibilityCustomRotorSearchDirection(x.inner.SearchDirection())
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AccessibilityCustomRotorSearchParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @brief Either NSAccessibilityCustomRotorSearchDirectionPrevious or NSAccessibilityCustomRotorSearchDirectionNext.
-//
-// SetSearchDirection calls the underlying SetSearchDirection.
-func (x *AccessibilityCustomRotorSearchParameters) SetSearchDirection(searchDirection NSAccessibilityCustomRotorSearchDirection) {
-	x.inner.SetSearchDirection(raw.NSAccessibilityCustomRotorSearchDirection(searchDirection))
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AccessibilityCustomRotorSearchParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @brief A string of text to filter the results against. This is used to get type-ahead results. For example, given a list of primary colors and filter text "Re", color item "Red" would be returned as a result.
+// NewAccessibilityCustomRotorSearchParameters creates a new AccessibilityCustomRotorSearchParameters.
+func NewAccessibilityCustomRotorSearchParameters() *AccessibilityCustomRotorSearchParameters {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSAccessibilityCustomRotorSearchParameters")), objc.RegisterName("new"))
+	return accessibilityCustomRotorSearchParametersAdopt(_id)
+}
+
+// The currentItem determines where the search will start from. If it is nil, the search should begin from, and include, the first or last item, depending on which search direction is used (e.g. search direction next will return the first item and previous will return the last item).
 //
-// FilterString calls the underlying FilterString.
+// WithCurrentItem sets currentItem and returns the receiver so calls can be chained.
+func (x *AccessibilityCustomRotorSearchParameters) WithCurrentItem(currentItem *AccessibilityCustomRotorItemResult) *AccessibilityCustomRotorSearchParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentItem:"), objref.IDOf(currentItem))
+	return x
+}
+
+// Either NSAccessibilityCustomRotorSearchDirectionPrevious or NSAccessibilityCustomRotorSearchDirectionNext.
+//
+// WithSearchDirection sets searchDirection and returns the receiver so calls can be chained.
+func (x *AccessibilityCustomRotorSearchParameters) WithSearchDirection(searchDirection AccessibilityCustomRotorSearchDirection) *AccessibilityCustomRotorSearchParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchDirection:"), searchDirection)
+	return x
+}
+
+// A string of text to filter the results against. This is used to get type-ahead results. For example, given a list of primary colors and filter text "Re", color item "Red" would be returned as a result.
+//
+// WithFilterString sets filterString and returns the receiver so calls can be chained.
+func (x *AccessibilityCustomRotorSearchParameters) WithFilterString(filterString string) *AccessibilityCustomRotorSearchParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterString:"), purego.NSString(filterString))
+	return x
+}
+
+// The currentItem determines where the search will start from. If it is nil, the search should begin from, and include, the first or last item, depending on which search direction is used (e.g. search direction next will return the first item and previous will return the last item).
+func (x *AccessibilityCustomRotorSearchParameters) CurrentItem() *AccessibilityCustomRotorItemResult {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentItem"))
+	return AccessibilityCustomRotorItemResultFromID(_r)
+}
+
+// The currentItem determines where the search will start from. If it is nil, the search should begin from, and include, the first or last item, depending on which search direction is used (e.g. search direction next will return the first item and previous will return the last item).
+func (x *AccessibilityCustomRotorSearchParameters) SetCurrentItem(currentItem *AccessibilityCustomRotorItemResult) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentItem:"), objref.IDOf(currentItem))
+}
+
+// Either NSAccessibilityCustomRotorSearchDirectionPrevious or NSAccessibilityCustomRotorSearchDirectionNext.
+func (x *AccessibilityCustomRotorSearchParameters) SearchDirection() AccessibilityCustomRotorSearchDirection {
+	_r := objc.Send[AccessibilityCustomRotorSearchDirection](objref.IDOf(x), objc.RegisterName("searchDirection"))
+	return _r
+}
+
+// Either NSAccessibilityCustomRotorSearchDirectionPrevious or NSAccessibilityCustomRotorSearchDirectionNext.
+func (x *AccessibilityCustomRotorSearchParameters) SetSearchDirection(searchDirection AccessibilityCustomRotorSearchDirection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchDirection:"), searchDirection)
+}
+
+// A string of text to filter the results against. This is used to get type-ahead results. For example, given a list of primary colors and filter text "Re", color item "Red" would be returned as a result.
 func (x *AccessibilityCustomRotorSearchParameters) FilterString() string {
-	_r := x.inner.FilterString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @brief A string of text to filter the results against. This is used to get type-ahead results. For example, given a list of primary colors and filter text "Re", color item "Red" would be returned as a result.
-//
-// SetFilterString calls the underlying SetFilterString.
+// A string of text to filter the results against. This is used to get type-ahead results. For example, given a list of primary colors and filter text "Re", color item "Red" would be returned as a result.
 func (x *AccessibilityCustomRotorSearchParameters) SetFilterString(filterString string) {
-	x.inner.SetFilterString(foundation.NSStringStringWithUTF8String(filterString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterString:"), purego.NSString(filterString))
 }
 
 // AccessibilityCustomRotorSearchParametersable is the interface implemented by [AccessibilityCustomRotorSearchParameters], for mocking and DI.
 type AccessibilityCustomRotorSearchParametersable interface {
-	Unwrap() *raw.NSAccessibilityCustomRotorSearchParameters
+	obj.Object
 	WithCurrentItem(currentItem *AccessibilityCustomRotorItemResult) *AccessibilityCustomRotorSearchParameters
-	WithSearchDirection(searchDirection NSAccessibilityCustomRotorSearchDirection) *AccessibilityCustomRotorSearchParameters
+	WithSearchDirection(searchDirection AccessibilityCustomRotorSearchDirection) *AccessibilityCustomRotorSearchParameters
 	WithFilterString(filterString string) *AccessibilityCustomRotorSearchParameters
 	CurrentItem() *AccessibilityCustomRotorItemResult
-	SetCurrentItem(currentItem *raw.NSAccessibilityCustomRotorItemResult)
-	SearchDirection() NSAccessibilityCustomRotorSearchDirection
-	SetSearchDirection(searchDirection NSAccessibilityCustomRotorSearchDirection)
+	SetCurrentItem(currentItem *AccessibilityCustomRotorItemResult)
+	SearchDirection() AccessibilityCustomRotorSearchDirection
+	SetSearchDirection(searchDirection AccessibilityCustomRotorSearchDirection)
 	FilterString() string
 	SetFilterString(filterString string)
 }

@@ -5,61 +5,85 @@
 package fileprovider
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fileprovider"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The version of the item’s content and its metadata.
 //
-// FileProviderItemVersion wraps [raw.NSFileProviderItemVersion] with a fluent Go API.
+// FileProviderItemVersion is an idiomatic wrapper over the Objective-C class NSFileProviderItemVersion.
 type FileProviderItemVersion struct {
-	inner *raw.NSFileProviderItemVersion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFileProviderItemVersion].
-func (x *FileProviderItemVersion) Unwrap() *raw.NSFileProviderItemVersion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileProviderItemVersion) ID() objc.ID { return x.inner.Ptr() }
-
-// FileProviderItemVersionFromID adopts an existing object pointer as a FileProviderItemVersion (nil for 0).
+// FileProviderItemVersionFromID adopts an existing Objective-C object as a FileProviderItemVersion
+// (nil for 0), retaining it and registering a release finalizer.
 func FileProviderItemVersionFromID(id objc.ID) *FileProviderItemVersion {
 	if id == 0 {
 		return nil
 	}
-	return &FileProviderItemVersion{inner: raw.NSFileProviderItemVersionFromID(id)}
+	x := &FileProviderItemVersion{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// fileProviderItemVersionAdopt wraps an Objective-C object that this code just created as a
+// FileProviderItemVersion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileProviderItemVersionAdopt(id objc.ID) *FileProviderItemVersion {
+	if id == 0 {
+		return nil
+	}
+	x := &FileProviderItemVersion{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FileProviderItemVersion) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileProviderItemVersion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileProviderItemVersion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new version object.
 //
-// NewFileProviderItemVersionWithContentVersionMetadataVersion creates a new [FileProviderItemVersion].
-func NewFileProviderItemVersionWithContentVersionMetadataVersion(contentVersion *foundation.NSData, metadataVersion *foundation.NSData) *FileProviderItemVersion {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileProviderItemVersion")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentVersion:metadataVersion:"), contentVersion.Ptr(), metadataVersion.Ptr())
-	return &FileProviderItemVersion{inner: raw.NSFileProviderItemVersionFromID(_id)}
+// NewFileProviderItemVersionWithContentVersionMetadataVersion creates a new FileProviderItemVersion.
+func NewFileProviderItemVersionWithContentVersionMetadataVersion(contentVersion obj.Object, metadataVersion obj.Object) *FileProviderItemVersion {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileProviderItemVersion")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentVersion:metadataVersion:"), objref.IDOf(contentVersion), objref.IDOf(metadataVersion))
+	return fileProviderItemVersionAdopt(_id)
 }
 
 // Version data for the content of the file. This property is used by the system for two purposes: if the contentVersion changes, - the system assumes that the contents have changed and will trigger a redownload if necessary. The exception to this is the case where the extension accepts a content sent by the system when replying to a createItemBasedOnTemplate or modifyItem call with shouldFetchContent set to NO. - the thumbnail cache is invalidated Note that the resource fork of the file is considered content, so this version data should change when either the data fork or the resource fork changes.
-//
-// ContentVersion calls the underlying ContentVersion.
-func (x *FileProviderItemVersion) ContentVersion() *foundation.NSData {
-	return x.inner.ContentVersion()
+func (x *FileProviderItemVersion) ContentVersion() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentVersion"))
+	return obj.Wrap(_r)
 }
 
 // Version data for the metadata of the item, i.e everything but the data fork and the resource fork. The system will store this version, but otherwise ignore it: - metadata changes on an item will be applied even if the metadataVersion remains unchanged - if the metadata version changes without any corresponding observable changes in the metadata returned to the system, the system will simply store the updated metadata version (to return it as the base version of a possible future change request).
-//
-// MetadataVersion calls the underlying MetadataVersion.
-func (x *FileProviderItemVersion) MetadataVersion() *foundation.NSData {
-	return x.inner.MetadataVersion()
+func (x *FileProviderItemVersion) MetadataVersion() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadataVersion"))
+	return obj.Wrap(_r)
 }
 
 // FileProviderItemVersionable is the interface implemented by [FileProviderItemVersion], for mocking and DI.
 type FileProviderItemVersionable interface {
-	Unwrap() *raw.NSFileProviderItemVersion
-	ContentVersion() *foundation.NSData
-	MetadataVersion() *foundation.NSData
+	obj.Object
+	ContentVersion() obj.Object
+	MetadataVersion() obj.Object
 }
 
 var _ FileProviderItemVersionable = (*FileProviderItemVersion)(nil)

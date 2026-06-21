@@ -5,49 +5,75 @@
 package fskit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A type that directs the kernel to map space on disk to a specific file managed by this file system.
 //
-// ExtentPacker wraps [raw.FSExtentPacker] with a fluent Go API.
+// ExtentPacker is an idiomatic wrapper over the Objective-C class FSExtentPacker.
 type ExtentPacker struct {
-	inner *raw.FSExtentPacker
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSExtentPacker].
-func (x *ExtentPacker) Unwrap() *raw.FSExtentPacker { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExtentPacker) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtentPackerFromID adopts an existing object pointer as a ExtentPacker (nil for 0).
+// ExtentPackerFromID adopts an existing Objective-C object as a ExtentPacker
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtentPackerFromID(id objc.ID) *ExtentPacker {
 	if id == 0 {
 		return nil
 	}
-	return &ExtentPacker{inner: raw.FSExtentPackerFromID(id)}
+	x := &ExtentPacker{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewExtentPacker creates a new [ExtentPacker].
+// extentPackerAdopt wraps an Objective-C object that this code just created as a
+// ExtentPacker (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extentPackerAdopt(id objc.ID) *ExtentPacker {
+	if id == 0 {
+		return nil
+	}
+	x := &ExtentPacker{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ExtentPacker) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExtentPacker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExtentPacker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewExtentPacker creates a new ExtentPacker.
 func NewExtentPacker() *ExtentPacker {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSExtentPacker")), objc.RegisterName("new"))
-	return &ExtentPacker{inner: raw.FSExtentPackerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("FSExtentPacker")), objc.RegisterName("new"))
+	return extentPackerAdopt(_id)
 }
 
 // Packs a single extent to send to the kernel.
-//
-// PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength calls the underlying PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength.
-func (x *ExtentPacker) PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource *raw.FSBlockDeviceResource, type_ FSExtentType, logicalOffset int64, physicalOffset int64, length uint) bool {
-	return x.inner.PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource, raw.FSExtentType(type_), logicalOffset, physicalOffset, length)
+func (x *ExtentPacker) PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource *BlockDeviceResource, type_ ExtentType, logicalOffset int64, physicalOffset int64, length int) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("packExtentWithResource:type:logicalOffset:physicalOffset:length:"), objref.IDOf(resource), type_, logicalOffset, physicalOffset, length)
+	return _r
 }
 
 // ExtentPackerable is the interface implemented by [ExtentPacker], for mocking and DI.
 type ExtentPackerable interface {
-	Unwrap() *raw.FSExtentPacker
-	PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource *raw.FSBlockDeviceResource, type_ FSExtentType, logicalOffset int64, physicalOffset int64, length uint) bool
+	obj.Object
+	PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource *BlockDeviceResource, type_ ExtentType, logicalOffset int64, physicalOffset int64, length int) bool
 }
 
 var _ ExtentPackerable = (*ExtentPacker)(nil)

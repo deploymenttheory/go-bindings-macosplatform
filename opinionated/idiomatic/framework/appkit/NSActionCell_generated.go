@@ -5,411 +5,424 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An active area inside a control.
 //
-// ActionCell wraps [raw.NSActionCell] with a fluent Go API.
+// ActionCell is an idiomatic wrapper over the Objective-C class NSActionCell.
 type ActionCell struct {
-	inner *raw.NSActionCell
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSActionCell].
-func (x *ActionCell) Unwrap() *raw.NSActionCell { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ActionCell) ID() objc.ID { return x.inner.Ptr() }
-
-// ActionCellFromID adopts an existing object pointer as a ActionCell (nil for 0).
+// ActionCellFromID adopts an existing Objective-C object as a ActionCell
+// (nil for 0), retaining it and registering a release finalizer.
 func ActionCellFromID(id objc.ID) *ActionCell {
 	if id == 0 {
 		return nil
 	}
-	return &ActionCell{inner: raw.NSActionCellFromID(id)}
+	x := &ActionCell{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewActionCell creates a new [ActionCell].
+// actionCellAdopt wraps an Objective-C object that this code just created as a
+// ActionCell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func actionCellAdopt(id objc.ID) *ActionCell {
+	if id == 0 {
+		return nil
+	}
+	x := &ActionCell{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ActionCell) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ActionCell) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ActionCell) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewActionCell creates a new ActionCell.
 func NewActionCell() *ActionCell {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSActionCell")), objc.RegisterName("new"))
-	return &ActionCell{inner: raw.NSActionCellFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSActionCell")), objc.RegisterName("new"))
+	return actionCellAdopt(_id)
 }
 
 // The view associated with the cell.
 //
-// WithControlView sets the controlView property and returns the receiver for chaining.
+// WithControlView sets controlView and returns the receiver so calls can be chained.
 func (x *ActionCell) WithControlView(controlView ViewProvider) *ActionCell {
-	x.inner.NSCell.SetControlView(controlView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	return x
 }
 
 // The type of the cell.
 //
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *ActionCell) WithType(type_ NSCellType) *ActionCell {
-	x.inner.NSCell.SetType(raw.NSCellType(type_))
+// WithType sets type_ and returns the receiver so calls can be chained.
+func (x *ActionCell) WithType(type_ CellType) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
 // The cell’s current state.
 //
-// WithState sets the state property and returns the receiver for chaining.
+// WithState sets state and returns the receiver so calls can be chained.
 func (x *ActionCell) WithState(state int) *ActionCell {
-	x.inner.NSCell.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
 // The object that receives the cell’s action messages.
 //
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *ActionCell) WithTarget(target objc.ID) *ActionCell {
-	x.inner.NSCell.SetTarget(target)
-	return x
-}
-
-// The action performed by the cell.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *ActionCell) WithAction(action objc.SEL) *ActionCell {
-	x.inner.NSCell.SetAction(action)
+// WithTarget sets target and returns the receiver so calls can be chained.
+func (x *ActionCell) WithTarget(target obj.Object) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
 // A tag for identifying the cell.
 //
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag sets tag and returns the receiver so calls can be chained.
 func (x *ActionCell) WithTag(tag int) *ActionCell {
-	x.inner.NSCell.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
 // The cell’s title text.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *ActionCell) WithTitle(title string) *ActionCell {
-	x.inner.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // A Boolean value indicating whether the cell is currently enabled.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *ActionCell) WithEnabled(enabled bool) *ActionCell {
-	x.inner.NSCell.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 //
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous sets continuous and returns the receiver so calls can be chained.
 func (x *ActionCell) WithContinuous(continuous bool) *ActionCell {
-	x.inner.NSCell.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
 // A Boolean value indicating whether the cell is editable.
 //
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable sets editable and returns the receiver so calls can be chained.
 func (x *ActionCell) WithEditable(editable bool) *ActionCell {
-	x.inner.NSCell.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
 // A Boolean value indicating whether the cell’s text can be selected.
 //
-// WithSelectable sets the selectable property and returns the receiver for chaining.
+// WithSelectable sets selectable and returns the receiver so calls can be chained.
 func (x *ActionCell) WithSelectable(selectable bool) *ActionCell {
-	x.inner.NSCell.SetSelectable(selectable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
 // A Boolean value indicating whether the cell draws itself outlined with a plain border.
 //
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered sets bordered and returns the receiver so calls can be chained.
 func (x *ActionCell) WithBordered(bordered bool) *ActionCell {
-	x.inner.NSCell.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
 // A Boolean value indicating whether the cell has a bezeled border.
 //
-// WithBezeled sets the bezeled property and returns the receiver for chaining.
+// WithBezeled sets bezeled and returns the receiver so calls can be chained.
 func (x *ActionCell) WithBezeled(bezeled bool) *ActionCell {
-	x.inner.NSCell.SetBezeled(bezeled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
 // A Boolean value indicating whether excess text scrolls past the cell’s bounds.
 //
-// WithScrollable sets the scrollable property and returns the receiver for chaining.
+// WithScrollable sets scrollable and returns the receiver so calls can be chained.
 func (x *ActionCell) WithScrollable(scrollable bool) *ActionCell {
-	x.inner.NSCell.SetScrollable(scrollable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
 	return x
 }
 
 // A Boolean value indicating whether the cell has a highlighted appearance.
 //
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
 func (x *ActionCell) WithHighlighted(highlighted bool) *ActionCell {
-	x.inner.NSCell.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
 // The alignment of the cell’s text.
 //
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *ActionCell) WithAlignment(alignment NSTextAlignment) *ActionCell {
-	x.inner.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment sets alignment and returns the receiver so calls can be chained.
+func (x *ActionCell) WithAlignment(alignment TextAlignment) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
 // A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 //
-// WithWraps sets the wraps property and returns the receiver for chaining.
+// WithWraps sets wraps and returns the receiver so calls can be chained.
 func (x *ActionCell) WithWraps(wraps bool) *ActionCell {
-	x.inner.NSCell.SetWraps(wraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
 // The font that the cell uses to display text.
 //
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont sets font and returns the receiver so calls can be chained.
 func (x *ActionCell) WithFont(font *Font) *ActionCell {
-	x.inner.NSCell.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
 // The cell’s formatter object.
 //
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *ActionCell) WithFormatter(formatter *foundation.NSFormatter) *ActionCell {
-	x.inner.NSCell.SetFormatter(formatter)
+// WithFormatter sets formatter and returns the receiver so calls can be chained.
+func (x *ActionCell) WithFormatter(formatter obj.Object) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
 // The cell’s value as an Objective-C object.
 //
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *ActionCell) WithObjectValue(objectValue objc.ID) *ActionCell {
-	x.inner.NSCell.SetObjectValue(objectValue)
+// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+func (x *ActionCell) WithObjectValue(objectValue obj.Object) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
 // The cell’s value as a string.
 //
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue sets stringValue and returns the receiver so calls can be chained.
 func (x *ActionCell) WithStringValue(stringValue string) *ActionCell {
-	x.inner.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
 // The cell’s value as an integer.
 //
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue sets intValue and returns the receiver so calls can be chained.
 func (x *ActionCell) WithIntValue(intValue int) *ActionCell {
-	x.inner.NSCell.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
 // The cell’s value as a single-precision floating-point number.
 //
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
 func (x *ActionCell) WithFloatValue(floatValue float32) *ActionCell {
-	x.inner.NSCell.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
 // The cell’s value as a double-precision floating-point number.
 //
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
 func (x *ActionCell) WithDoubleValue(doubleValue float64) *ActionCell {
-	x.inner.NSCell.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
 // The cell’s value as an integer value.
 //
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
 func (x *ActionCell) WithIntegerValue(integerValue int) *ActionCell {
-	x.inner.NSCell.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
 // The image displayed by the cell, if any.
 //
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage sets image and returns the receiver so calls can be chained.
 func (x *ActionCell) WithImage(image *Image) *ActionCell {
-	x.inner.NSCell.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
 // The size of the cell.
 //
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *ActionCell) WithControlSize(controlSize NSControlSize) *ActionCell {
-	x.inner.NSCell.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+func (x *ActionCell) WithControlSize(controlSize ControlSize) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
 // The object represented by the cell.
 //
-// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
-func (x *ActionCell) WithRepresentedObject(representedObject objc.ID) *ActionCell {
-	x.inner.NSCell.SetRepresentedObject(representedObject)
+// WithRepresentedObject sets representedObject and returns the receiver so calls can be chained.
+func (x *ActionCell) WithRepresentedObject(representedObject obj.Object) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
 // The cell’s contextual menu.
 //
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu sets menu and returns the receiver so calls can be chained.
 func (x *ActionCell) WithMenu(menu *Menu) *ActionCell {
-	x.inner.NSCell.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
 // A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 //
-// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+// WithSendsActionOnEndEditing sets sendsActionOnEndEditing and returns the receiver so calls can be chained.
 func (x *ActionCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ActionCell {
-	x.inner.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
 	return x
 }
 
 // The initial writing direction used to determine the actual writing direction for text.
 //
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *ActionCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ActionCell {
-	x.inner.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+func (x *ActionCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
 // The line break mode to use when drawing text in the cell.
 //
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *ActionCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ActionCell {
-	x.inner.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+func (x *ActionCell) WithLineBreakMode(lineBreakMode LineBreakMode) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
 // A Boolean value indicating whether the cell assumes responsibility for undo operations.
 //
-// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+// WithAllowsUndo sets allowsUndo and returns the receiver so calls can be chained.
 func (x *ActionCell) WithAllowsUndo(allowsUndo bool) *ActionCell {
-	x.inner.NSCell.SetAllowsUndo(allowsUndo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
 	return x
 }
 
 // A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 //
-// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+// WithTruncatesLastVisibleLine sets truncatesLastVisibleLine and returns the receiver so calls can be chained.
 func (x *ActionCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ActionCell {
-	x.inner.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
 	return x
 }
 
 // The layout direction of the user interface.
 //
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ActionCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ActionCell {
-	x.inner.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+func (x *ActionCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
 // A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 //
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
 func (x *ActionCell) WithUsesSingleLineMode(usesSingleLineMode bool) *ActionCell {
-	x.inner.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
 // A Boolean value indicating whether the cell refuses the first responder status.
 //
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
 func (x *ActionCell) WithRefusesFirstResponder(refusesFirstResponder bool) *ActionCell {
-	x.inner.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
 // A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 //
-// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+// WithShowsFirstResponder sets showsFirstResponder and returns the receiver so calls can be chained.
 func (x *ActionCell) WithShowsFirstResponder(showsFirstResponder bool) *ActionCell {
-	x.inner.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
 	return x
 }
 
 // The type of focus ring to use with the associated view.
 //
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ActionCell) WithFocusRingType(focusRingType NSFocusRingType) *ActionCell {
-	x.inner.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+func (x *ActionCell) WithFocusRingType(focusRingType FocusRingType) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
 // The cell’s value as an attributed string.
 //
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *ActionCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ActionCell {
-	x.inner.NSCell.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+func (x *ActionCell) WithAttributedStringValue(attributedStringValue obj.Object) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
 // A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 //
-// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+// WithAllowsEditingTextAttributes sets allowsEditingTextAttributes and returns the receiver so calls can be chained.
 func (x *ActionCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ActionCell {
-	x.inner.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
 // A Boolean value indicating whether the cell supports the importation of images into its text.
 //
-// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+// WithImportsGraphics sets importsGraphics and returns the receiver so calls can be chained.
 func (x *ActionCell) WithImportsGraphics(importsGraphics bool) *ActionCell {
-	x.inner.NSCell.SetImportsGraphics(importsGraphics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
 // A Boolean value indicating whether the cell supports three states instead of two.
 //
-// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+// WithAllowsMixedState sets allowsMixedState and returns the receiver so calls can be chained.
 func (x *ActionCell) WithAllowsMixedState(allowsMixedState bool) *ActionCell {
-	x.inner.NSCell.SetAllowsMixedState(allowsMixedState)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
 // The cell’s background style.
 //
-// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *ActionCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *ActionCell {
-	x.inner.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
+// WithBackgroundStyle sets backgroundStyle and returns the receiver so calls can be chained.
+func (x *ActionCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 	return x
 }
 
 // The cell’s control tint.
 //
-// WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *ActionCell) WithControlTint(controlTint NSControlTint) *ActionCell {
-	x.inner.NSCell.SetControlTint(raw.NSControlTint(controlTint))
+// WithControlTint sets controlTint and returns the receiver so calls can be chained.
+func (x *ActionCell) WithControlTint(controlTint ControlTint) *ActionCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
 
-func (x *ActionCell) asActionCell() *raw.NSActionCell { return x.inner }
-
-func (x *ActionCell) asCell() *raw.NSCell { return &x.inner.NSCell }
-
 // ActionCellable is the interface implemented by [ActionCell], for mocking and DI.
 type ActionCellable interface {
-	Unwrap() *raw.NSActionCell
+	obj.Object
 	WithControlView(controlView ViewProvider) *ActionCell
-	WithType(type_ NSCellType) *ActionCell
+	WithType(type_ CellType) *ActionCell
 	WithState(state int) *ActionCell
-	WithTarget(target objc.ID) *ActionCell
-	WithAction(action objc.SEL) *ActionCell
+	WithTarget(target obj.Object) *ActionCell
 	WithTag(tag int) *ActionCell
 	WithTitle(title string) *ActionCell
 	WithEnabled(enabled bool) *ActionCell
@@ -420,36 +433,36 @@ type ActionCellable interface {
 	WithBezeled(bezeled bool) *ActionCell
 	WithScrollable(scrollable bool) *ActionCell
 	WithHighlighted(highlighted bool) *ActionCell
-	WithAlignment(alignment NSTextAlignment) *ActionCell
+	WithAlignment(alignment TextAlignment) *ActionCell
 	WithWraps(wraps bool) *ActionCell
 	WithFont(font *Font) *ActionCell
-	WithFormatter(formatter *foundation.NSFormatter) *ActionCell
-	WithObjectValue(objectValue objc.ID) *ActionCell
+	WithFormatter(formatter obj.Object) *ActionCell
+	WithObjectValue(objectValue obj.Object) *ActionCell
 	WithStringValue(stringValue string) *ActionCell
 	WithIntValue(intValue int) *ActionCell
 	WithFloatValue(floatValue float32) *ActionCell
 	WithDoubleValue(doubleValue float64) *ActionCell
 	WithIntegerValue(integerValue int) *ActionCell
 	WithImage(image *Image) *ActionCell
-	WithControlSize(controlSize NSControlSize) *ActionCell
-	WithRepresentedObject(representedObject objc.ID) *ActionCell
+	WithControlSize(controlSize ControlSize) *ActionCell
+	WithRepresentedObject(representedObject obj.Object) *ActionCell
 	WithMenu(menu *Menu) *ActionCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ActionCell
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ActionCell
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *ActionCell
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *ActionCell
+	WithLineBreakMode(lineBreakMode LineBreakMode) *ActionCell
 	WithAllowsUndo(allowsUndo bool) *ActionCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ActionCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ActionCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ActionCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *ActionCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *ActionCell
 	WithShowsFirstResponder(showsFirstResponder bool) *ActionCell
-	WithFocusRingType(focusRingType NSFocusRingType) *ActionCell
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ActionCell
+	WithFocusRingType(focusRingType FocusRingType) *ActionCell
+	WithAttributedStringValue(attributedStringValue obj.Object) *ActionCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ActionCell
 	WithImportsGraphics(importsGraphics bool) *ActionCell
 	WithAllowsMixedState(allowsMixedState bool) *ActionCell
-	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *ActionCell
-	WithControlTint(controlTint NSControlTint) *ActionCell
+	WithBackgroundStyle(backgroundStyle BackgroundStyle) *ActionCell
+	WithControlTint(controlTint ControlTint) *ActionCell
 }
 
 var _ ActionCellable = (*ActionCell)(nil)

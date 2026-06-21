@@ -5,116 +5,125 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An operation that manages the execution of a single encapsulated task specified as an invocation.
 //
-// InvocationOperation wraps [raw.NSInvocationOperation] with a fluent Go API.
+// InvocationOperation is an idiomatic wrapper over the Objective-C class NSInvocationOperation.
 type InvocationOperation struct {
-	inner *raw.NSInvocationOperation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSInvocationOperation].
-func (x *InvocationOperation) Unwrap() *raw.NSInvocationOperation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *InvocationOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// InvocationOperationFromID adopts an existing object pointer as a InvocationOperation (nil for 0).
+// InvocationOperationFromID adopts an existing Objective-C object as a InvocationOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func InvocationOperationFromID(id objc.ID) *InvocationOperation {
 	if id == 0 {
 		return nil
 	}
-	return &InvocationOperation{inner: raw.NSInvocationOperationFromID(id)}
+	x := &InvocationOperation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Returns an NSInvocationOperation object initialized with the specified target and selector.
-//
-// NewInvocationOperationWithTargetSelectorObject creates a new [InvocationOperation].
-func NewInvocationOperationWithTargetSelectorObject(target objc.ID, sel objc.SEL, arg objc.ID) *InvocationOperation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSInvocationOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTarget:selector:object:"), target, sel, arg)
-	return &InvocationOperation{inner: raw.NSInvocationOperationFromID(_id)}
+// invocationOperationAdopt wraps an Objective-C object that this code just created as a
+// InvocationOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func invocationOperationAdopt(id objc.ID) *InvocationOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &InvocationOperation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *InvocationOperation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *InvocationOperation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *InvocationOperation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns an NSInvocationOperation object initialized with the specified invocation object.
 //
-// NewInvocationOperationWithInvocation creates a new [InvocationOperation].
-func NewInvocationOperationWithInvocation(inv *raw.NSInvocation) *InvocationOperation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSInvocationOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInvocation:"), inv.Ptr())
-	return &InvocationOperation{inner: raw.NSInvocationOperationFromID(_id)}
+// NewInvocationOperationWithInvocation creates a new InvocationOperation.
+func NewInvocationOperationWithInvocation(inv *Invocation) *InvocationOperation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSInvocationOperation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInvocation:"), objref.IDOf(inv))
+	return invocationOperationAdopt(_id)
 }
 
-// WithQueuePriority sets the queuePriority property and returns the receiver for chaining.
-func (x *InvocationOperation) WithQueuePriority(queuePriority NSOperationQueuePriority) *InvocationOperation {
-	x.inner.NSOperation.SetQueuePriority(raw.NSOperationQueuePriority(queuePriority))
+// WithQueuePriority sets queuePriority and returns the receiver so calls can be chained.
+func (x *InvocationOperation) WithQueuePriority(queuePriority OperationQueuePriority) *InvocationOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueuePriority:"), queuePriority)
 	return x
 }
 
-// WithCompletionBlock sets the completionBlock property and returns the receiver for chaining.
+// WithCompletionBlock sets completionBlock and returns the receiver so calls can be chained.
 func (x *InvocationOperation) WithCompletionBlock(completionBlock func()) *InvocationOperation {
-	x.inner.NSOperation.SetCompletionBlock(completionBlock)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionBlock:"), objc.NewBlock(func(_ objc.Block) { completionBlock() }))
 	return x
 }
 
-// WithThreadPriority sets the threadPriority property and returns the receiver for chaining.
+// WithThreadPriority sets threadPriority and returns the receiver so calls can be chained.
 func (x *InvocationOperation) WithThreadPriority(threadPriority float64) *InvocationOperation {
-	x.inner.NSOperation.SetThreadPriority(threadPriority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadPriority:"), threadPriority)
 	return x
 }
 
-// WithQualityOfService sets the qualityOfService property and returns the receiver for chaining.
-func (x *InvocationOperation) WithQualityOfService(qualityOfService NSQualityOfService) *InvocationOperation {
-	x.inner.NSOperation.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
+// WithQualityOfService sets qualityOfService and returns the receiver so calls can be chained.
+func (x *InvocationOperation) WithQualityOfService(qualityOfService QualityOfService) *InvocationOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
 	return x
 }
 
-// WithName sets the name property and returns the receiver for chaining.
-func (x *InvocationOperation) WithName(name string) *InvocationOperation {
-	x.inner.NSOperation.SetName(foundation.NSStringStringWithUTF8String(name))
+// WithName sets name and returns the receiver so calls can be chained.
+func (x *InvocationOperation) WithName(name StringProvider) *InvocationOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *InvocationOperation) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *InvocationOperation {
-	x.inner.NSOperation.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *InvocationOperation) WithScriptingProperties(scriptingProperties obj.Object) *InvocationOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Invocation calls the underlying Invocation.
 func (x *InvocationOperation) Invocation() *Invocation {
-	_r := x.inner.Invocation()
-	if _r == nil {
-		return nil
-	}
-	return &Invocation{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invocation"))
+	return InvocationFromID(_r)
 }
 
-// Result calls the underlying Result.
-func (x *InvocationOperation) Result() objc.ID {
-	return x.inner.Result()
+func (x *InvocationOperation) Result() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("result"))
+	return obj.Wrap(_r)
 }
-
-func (x *InvocationOperation) asOperation() *raw.NSOperation { return &x.inner.NSOperation }
-
-func (x *InvocationOperation) asObject() *raw.NSObject { return &x.inner.NSOperation.NSObject }
 
 // InvocationOperationable is the interface implemented by [InvocationOperation], for mocking and DI.
 type InvocationOperationable interface {
-	Unwrap() *raw.NSInvocationOperation
-	WithQueuePriority(queuePriority NSOperationQueuePriority) *InvocationOperation
+	obj.Object
+	WithQueuePriority(queuePriority OperationQueuePriority) *InvocationOperation
 	WithCompletionBlock(completionBlock func()) *InvocationOperation
 	WithThreadPriority(threadPriority float64) *InvocationOperation
-	WithQualityOfService(qualityOfService NSQualityOfService) *InvocationOperation
-	WithName(name string) *InvocationOperation
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *InvocationOperation
+	WithQualityOfService(qualityOfService QualityOfService) *InvocationOperation
+	WithName(name StringProvider) *InvocationOperation
+	WithScriptingProperties(scriptingProperties obj.Object) *InvocationOperation
 	Invocation() *Invocation
-	Result() objc.ID
+	Result() obj.Object
 }
 
 var _ InvocationOperationable = (*InvocationOperation)(nil)

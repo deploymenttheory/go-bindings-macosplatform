@@ -5,232 +5,171 @@
 package mpscore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ImageDescriptor wraps [raw.MPSImageDescriptor] with a fluent Go API.
+// ImageDescriptor is an idiomatic wrapper over the Objective-C class MPSImageDescriptor.
 type ImageDescriptor struct {
-	inner *raw.MPSImageDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageDescriptor].
-func (x *ImageDescriptor) Unwrap() *raw.MPSImageDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageDescriptorFromID adopts an existing object pointer as a ImageDescriptor (nil for 0).
+// ImageDescriptorFromID adopts an existing Objective-C object as a ImageDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageDescriptorFromID(id objc.ID) *ImageDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &ImageDescriptor{inner: raw.MPSImageDescriptorFromID(id)}
+	x := &ImageDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewImageDescriptor creates a new [ImageDescriptor].
+// imageDescriptorAdopt wraps an Objective-C object that this code just created as a
+// ImageDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageDescriptorAdopt(id objc.ID) *ImageDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ImageDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageDescriptor creates a new ImageDescriptor.
 func NewImageDescriptor() *ImageDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageDescriptor")), objc.RegisterName("new"))
-	return &ImageDescriptor{inner: raw.MPSImageDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageDescriptor")), objc.RegisterName("new"))
+	return imageDescriptorAdopt(_id)
 }
 
-// @property   width @abstract   The width of the CNN image. @discussion The formal width of the CNN image in pixels.  Default = 1.
+// The width of the CNN image. The formal width of the CNN image in pixels.  Default = 1.
 //
-// WithWidth sets the width property and returns the receiver for chaining.
-func (x *ImageDescriptor) WithWidth(width uint) *ImageDescriptor {
-	x.inner.SetWidth(width)
+// WithWidth sets width and returns the receiver so calls can be chained.
+func (x *ImageDescriptor) WithWidth(width int) *ImageDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 	return x
 }
 
-// @property   height @abstract   The height of the CNN image. @discussion The formal height of the CNN image in pixels. Default = 1.
+// The height of the CNN image. The formal height of the CNN image in pixels. Default = 1.
 //
-// WithHeight sets the height property and returns the receiver for chaining.
-func (x *ImageDescriptor) WithHeight(height uint) *ImageDescriptor {
-	x.inner.SetHeight(height)
+// WithHeight sets height and returns the receiver so calls can be chained.
+func (x *ImageDescriptor) WithHeight(height int) *ImageDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 	return x
 }
 
-// @property   featureChannels @abstract   The number of feature channels per pixel.  Default = 1.
+// The number of feature channels per pixel.  Default = 1.
 //
-// WithFeatureChannels sets the featureChannels property and returns the receiver for chaining.
-func (x *ImageDescriptor) WithFeatureChannels(featureChannels uint) *ImageDescriptor {
-	x.inner.SetFeatureChannels(featureChannels)
+// WithFeatureChannels sets featureChannels and returns the receiver so calls can be chained.
+func (x *ImageDescriptor) WithFeatureChannels(featureChannels int) *ImageDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFeatureChannels:"), featureChannels)
 	return x
 }
 
-// @property   numberOfImages @abstract   The number of images for batch processing.   Default = 1.
+// The number of images for batch processing.   Default = 1.
 //
-// WithNumberOfImages sets the numberOfImages property and returns the receiver for chaining.
-func (x *ImageDescriptor) WithNumberOfImages(numberOfImages uint) *ImageDescriptor {
-	x.inner.SetNumberOfImages(numberOfImages)
+// WithNumberOfImages sets numberOfImages and returns the receiver so calls can be chained.
+func (x *ImageDescriptor) WithNumberOfImages(numberOfImages int) *ImageDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfImages:"), numberOfImages)
 	return x
 }
 
-// @property   channelFormat @abstract   The storage format to use for each channel in the image.
+// The storage format to use for each channel in the image.
 //
-// WithChannelFormat sets the channelFormat property and returns the receiver for chaining.
-func (x *ImageDescriptor) WithChannelFormat(channelFormat MPSImageFeatureChannelFormat) *ImageDescriptor {
-	x.inner.SetChannelFormat(raw.MPSImageFeatureChannelFormat(channelFormat))
+// WithChannelFormat sets channelFormat and returns the receiver so calls can be chained.
+func (x *ImageDescriptor) WithChannelFormat(channelFormat ImageFeatureChannelFormat) *ImageDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelFormat:"), channelFormat)
 	return x
 }
 
-// @property cpuCacheMode @abstract Options to specify CPU cache mode of texture resource. Default = MTLCPUCacheModeDefaultCache
-//
-// WithCpuCacheMode sets the cpuCacheMode property and returns the receiver for chaining.
-func (x *ImageDescriptor) WithCpuCacheMode(cpuCacheMode metal.MTLCPUCacheMode) *ImageDescriptor {
-	x.inner.SetCpuCacheMode(cpuCacheMode)
-	return x
+// The width of the CNN image. The formal width of the CNN image in pixels.  Default = 1.
+func (x *ImageDescriptor) Width() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("width"))
+	return _r
 }
 
-// @property storageMode @abstract To specify storage mode of texture resource. @discussion Storage mode options: @code Default =   MTLStorageModeShared on iOS MTLStorageModeManaged on Mac OSX MTLStorageModeShared not supported on Mac OSX. See Metal headers for synchronization requirements when using StorageModeManaged @endcode
-//
-// WithStorageMode sets the storageMode property and returns the receiver for chaining.
-func (x *ImageDescriptor) WithStorageMode(storageMode metal.MTLStorageMode) *ImageDescriptor {
-	x.inner.SetStorageMode(storageMode)
-	return x
+func (x *ImageDescriptor) SetWidth(width int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 }
 
-// @property   usage @abstract   Description of texture usage.  Default = MTLTextureUsageShaderRead/Write
-//
-// WithUsage sets the usage property and returns the receiver for chaining.
-func (x *ImageDescriptor) WithUsage(usage metal.MTLTextureUsage) *ImageDescriptor {
-	x.inner.SetUsage(usage)
-	return x
+// The height of the CNN image. The formal height of the CNN image in pixels. Default = 1.
+func (x *ImageDescriptor) Height() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("height"))
+	return _r
 }
 
-// @property   width @abstract   The width of the CNN image. @discussion The formal width of the CNN image in pixels.  Default = 1.
-//
-// Width calls the underlying Width.
-func (x *ImageDescriptor) Width() uint {
-	return x.inner.Width()
+func (x *ImageDescriptor) SetHeight(height int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 }
 
-// SetWidth calls the underlying SetWidth.
-func (x *ImageDescriptor) SetWidth(width uint) {
-	x.inner.SetWidth(width)
+// The number of feature channels per pixel.  Default = 1.
+func (x *ImageDescriptor) FeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("featureChannels"))
+	return _r
 }
 
-// @property   height @abstract   The height of the CNN image. @discussion The formal height of the CNN image in pixels. Default = 1.
-//
-// Height calls the underlying Height.
-func (x *ImageDescriptor) Height() uint {
-	return x.inner.Height()
+func (x *ImageDescriptor) SetFeatureChannels(featureChannels int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFeatureChannels:"), featureChannels)
 }
 
-// SetHeight calls the underlying SetHeight.
-func (x *ImageDescriptor) SetHeight(height uint) {
-	x.inner.SetHeight(height)
+// The number of images for batch processing.   Default = 1.
+func (x *ImageDescriptor) NumberOfImages() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfImages"))
+	return _r
 }
 
-// @property   featureChannels @abstract   The number of feature channels per pixel.  Default = 1.
-//
-// FeatureChannels calls the underlying FeatureChannels.
-func (x *ImageDescriptor) FeatureChannels() uint {
-	return x.inner.FeatureChannels()
+func (x *ImageDescriptor) SetNumberOfImages(numberOfImages int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfImages:"), numberOfImages)
 }
 
-// SetFeatureChannels calls the underlying SetFeatureChannels.
-func (x *ImageDescriptor) SetFeatureChannels(featureChannels uint) {
-	x.inner.SetFeatureChannels(featureChannels)
+// The storage format to use for each channel in the image.
+func (x *ImageDescriptor) ChannelFormat() ImageFeatureChannelFormat {
+	_r := objc.Send[ImageFeatureChannelFormat](objref.IDOf(x), objc.RegisterName("channelFormat"))
+	return _r
 }
 
-// @property   numberOfImages @abstract   The number of images for batch processing.   Default = 1.
-//
-// NumberOfImages calls the underlying NumberOfImages.
-func (x *ImageDescriptor) NumberOfImages() uint {
-	return x.inner.NumberOfImages()
-}
-
-// SetNumberOfImages calls the underlying SetNumberOfImages.
-func (x *ImageDescriptor) SetNumberOfImages(numberOfImages uint) {
-	x.inner.SetNumberOfImages(numberOfImages)
-}
-
-// @property   pixelFormat @abstract   The MTLPixelFormat expected for the underlying texture.
-//
-// PixelFormat calls the underlying PixelFormat.
-func (x *ImageDescriptor) PixelFormat() metal.MTLPixelFormat {
-	return x.inner.PixelFormat()
-}
-
-// @property   channelFormat @abstract   The storage format to use for each channel in the image.
-//
-// ChannelFormat calls the underlying ChannelFormat.
-func (x *ImageDescriptor) ChannelFormat() MPSImageFeatureChannelFormat {
-	return MPSImageFeatureChannelFormat(x.inner.ChannelFormat())
-}
-
-// SetChannelFormat calls the underlying SetChannelFormat.
-func (x *ImageDescriptor) SetChannelFormat(channelFormat MPSImageFeatureChannelFormat) {
-	x.inner.SetChannelFormat(raw.MPSImageFeatureChannelFormat(channelFormat))
-}
-
-// @property cpuCacheMode @abstract Options to specify CPU cache mode of texture resource. Default = MTLCPUCacheModeDefaultCache
-//
-// CpuCacheMode calls the underlying CpuCacheMode.
-func (x *ImageDescriptor) CpuCacheMode() metal.MTLCPUCacheMode {
-	return x.inner.CpuCacheMode()
-}
-
-// SetCpuCacheMode calls the underlying SetCpuCacheMode.
-func (x *ImageDescriptor) SetCpuCacheMode(cpuCacheMode metal.MTLCPUCacheMode) {
-	x.inner.SetCpuCacheMode(cpuCacheMode)
-}
-
-// @property storageMode @abstract To specify storage mode of texture resource. @discussion Storage mode options: @code Default =   MTLStorageModeShared on iOS MTLStorageModeManaged on Mac OSX MTLStorageModeShared not supported on Mac OSX. See Metal headers for synchronization requirements when using StorageModeManaged @endcode
-//
-// StorageMode calls the underlying StorageMode.
-func (x *ImageDescriptor) StorageMode() metal.MTLStorageMode {
-	return x.inner.StorageMode()
-}
-
-// SetStorageMode calls the underlying SetStorageMode.
-func (x *ImageDescriptor) SetStorageMode(storageMode metal.MTLStorageMode) {
-	x.inner.SetStorageMode(storageMode)
-}
-
-// @property   usage @abstract   Description of texture usage.  Default = MTLTextureUsageShaderRead/Write
-//
-// Usage calls the underlying Usage.
-func (x *ImageDescriptor) Usage() metal.MTLTextureUsage {
-	return x.inner.Usage()
-}
-
-// SetUsage calls the underlying SetUsage.
-func (x *ImageDescriptor) SetUsage(usage metal.MTLTextureUsage) {
-	x.inner.SetUsage(usage)
+func (x *ImageDescriptor) SetChannelFormat(channelFormat ImageFeatureChannelFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelFormat:"), channelFormat)
 }
 
 // ImageDescriptorable is the interface implemented by [ImageDescriptor], for mocking and DI.
 type ImageDescriptorable interface {
-	Unwrap() *raw.MPSImageDescriptor
-	WithWidth(width uint) *ImageDescriptor
-	WithHeight(height uint) *ImageDescriptor
-	WithFeatureChannels(featureChannels uint) *ImageDescriptor
-	WithNumberOfImages(numberOfImages uint) *ImageDescriptor
-	WithChannelFormat(channelFormat MPSImageFeatureChannelFormat) *ImageDescriptor
-	WithCpuCacheMode(cpuCacheMode metal.MTLCPUCacheMode) *ImageDescriptor
-	WithStorageMode(storageMode metal.MTLStorageMode) *ImageDescriptor
-	WithUsage(usage metal.MTLTextureUsage) *ImageDescriptor
-	Width() uint
-	SetWidth(width uint)
-	Height() uint
-	SetHeight(height uint)
-	FeatureChannels() uint
-	SetFeatureChannels(featureChannels uint)
-	NumberOfImages() uint
-	SetNumberOfImages(numberOfImages uint)
-	PixelFormat() metal.MTLPixelFormat
-	ChannelFormat() MPSImageFeatureChannelFormat
-	SetChannelFormat(channelFormat MPSImageFeatureChannelFormat)
-	CpuCacheMode() metal.MTLCPUCacheMode
-	SetCpuCacheMode(cpuCacheMode metal.MTLCPUCacheMode)
-	StorageMode() metal.MTLStorageMode
-	SetStorageMode(storageMode metal.MTLStorageMode)
-	Usage() metal.MTLTextureUsage
-	SetUsage(usage metal.MTLTextureUsage)
+	obj.Object
+	WithWidth(width int) *ImageDescriptor
+	WithHeight(height int) *ImageDescriptor
+	WithFeatureChannels(featureChannels int) *ImageDescriptor
+	WithNumberOfImages(numberOfImages int) *ImageDescriptor
+	WithChannelFormat(channelFormat ImageFeatureChannelFormat) *ImageDescriptor
+	Width() int
+	SetWidth(width int)
+	Height() int
+	SetHeight(height int)
+	FeatureChannels() int
+	SetFeatureChannels(featureChannels int)
+	NumberOfImages() int
+	SetNumberOfImages(numberOfImages int)
+	ChannelFormat() ImageFeatureChannelFormat
+	SetChannelFormat(channelFormat ImageFeatureChannelFormat)
 }
 
 var _ ImageDescriptorable = (*ImageDescriptor)(nil)

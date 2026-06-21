@@ -6,151 +6,145 @@ package mediaextension
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // Provides read access to the data in a media asset file.
 //
-// ByteSource wraps [raw.MEByteSource] with a fluent Go API.
+// ByteSource is an idiomatic wrapper over the Objective-C class MEByteSource.
 type ByteSource struct {
-	inner *raw.MEByteSource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEByteSource].
-func (x *ByteSource) Unwrap() *raw.MEByteSource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ByteSource) ID() objc.ID { return x.inner.Ptr() }
-
-// ByteSourceFromID adopts an existing object pointer as a ByteSource (nil for 0).
+// ByteSourceFromID adopts an existing Objective-C object as a ByteSource
+// (nil for 0), retaining it and registering a release finalizer.
 func ByteSourceFromID(id objc.ID) *ByteSource {
 	if id == 0 {
 		return nil
 	}
-	return &ByteSource{inner: raw.MEByteSourceFromID(id)}
+	x := &ByteSource{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewByteSource creates a new [ByteSource].
+// byteSourceAdopt wraps an Objective-C object that this code just created as a
+// ByteSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func byteSourceAdopt(id objc.ID) *ByteSource {
+	if id == 0 {
+		return nil
+	}
+	x := &ByteSource{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ByteSource) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ByteSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ByteSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewByteSource creates a new ByteSource.
 func NewByteSource() *ByteSource {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MEByteSource")), objc.RegisterName("new"))
-	return &ByteSource{inner: raw.MEByteSourceFromID(_id)}
-}
-
-// Reads bytes from a byte source into a buffer.
-//
-// ReadDataOfLengthFromOffsetToDestinationCompletionHandler calls the underlying ReadDataOfLengthFromOffsetToDestinationCompletionHandler.
-func (x *ByteSource) ReadDataOfLengthFromOffsetToDestinationCompletionHandler(length uint, offset int64, dest unsafe.Pointer, completionHandler func(uint, unsafe.Pointer)) {
-	x.inner.ReadDataOfLengthFromOffsetToDestinationCompletionHandler(length, offset, dest, completionHandler)
+	_id := objc.Send[objc.ID](objc.ID(_class("MEByteSource")), objc.RegisterName("new"))
+	return byteSourceAdopt(_id)
 }
 
 // Reads bytes from a byte source into a data object.
 //
 // ReadDataOfLengthFromOffset blocks until the operation completes or ctx is cancelled.
-func (x *ByteSource) ReadDataOfLengthFromOffset(ctx context.Context, length uint, offset int64) (*foundation.NSData, error) {
+func (x *ByteSource) ReadDataOfLengthFromOffset(ctx context.Context, length int, offset int64) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ReadDataOfLengthFromOffsetCompletionHandler(length, offset, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readDataOfLength:fromOffset:completionHandler:"), length, offset, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Reads bytes from a byte source into a buffer.
-//
-// ReadDataOfLengthFromOffsetToDestinationBytesReadError calls the underlying ReadDataOfLengthFromOffsetToDestinationBytesReadError.
-func (x *ByteSource) ReadDataOfLengthFromOffsetToDestinationBytesReadError(length uint, offset int64, dest unsafe.Pointer, bytesReadOut *uint) (bool, error) {
-	return x.inner.ReadDataOfLengthFromOffsetToDestinationBytesReadError(length, offset, dest, bytesReadOut)
-}
-
 // Gets the number of available bytes from the offset within the byte source.
-//
-// AvailableLengthAtOffset calls the underlying AvailableLengthAtOffset.
 func (x *ByteSource) AvailableLengthAtOffset(offset int64) int64 {
-	return x.inner.AvailableLengthAtOffset(offset)
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("availableLengthAtOffset:"), offset)
+	return _r
 }
 
 // Creates a new byte source for a related file.
-//
-// ByteSourceForRelatedFileNameError calls the underlying ByteSourceForRelatedFileNameError.
 func (x *ByteSource) ByteSourceForRelatedFileNameError(fileName string) (*ByteSource, error) {
-	_r, _err := x.inner.ByteSourceForRelatedFileNameError(foundation.NSStringStringWithUTF8String(fileName))
-	if _err != nil {
-		return nil, _err
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("byteSourceForRelatedFileName:error:"), purego.NSString(fileName), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &ByteSource{inner: _r}, nil
+	return ByteSourceFromID(_r), nil
 }
 
-// @property   	fileName @abstract		The name of a MEByteSource's file. @discussion		The name of the source file for the MEByteSource.
-//
-// FileName calls the underlying FileName.
+// The name of a MEByteSource's file. The name of the source file for the MEByteSource.
 func (x *ByteSource) FileName() string {
-	_r := x.inner.FileName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property   	contentType @abstract		A UTType indicating the format of the MEByteSource's file. @discussion		A UTType indicating the format of the source file for the MEByteSource.
-//
-// ContentType calls the underlying ContentType.
-func (x *ByteSource) ContentType() *uniformtypeidentifiers.UTType {
-	return x.inner.ContentType()
+// A UTType indicating the format of the MEByteSource's file. A UTType indicating the format of the source file for the MEByteSource.
+func (x *ByteSource) ContentType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
+	return obj.Wrap(_r)
 }
 
-// @property		fileLength @abstract		The length of the MEByteSource's file. @discussion		The length in bytes of the source file for the MEByteSource, or 0 if that information is not available.
-//
-// FileLength calls the underlying FileLength.
+// The length of the MEByteSource's file. The length in bytes of the source file for the MEByteSource, or 0 if that information is not available.
 func (x *ByteSource) FileLength() int64 {
-	return x.inner.FileLength()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("fileLength"))
+	return _r
 }
 
-// @property		relatedFileNamesInSameDirectory @abstract		The array of related file names in the MEByteSource's parent directory. @discussion		The array of related files within the MEByteSource's parent directory that are accessible to the MEByteSource. Only the relative file names are returned, not the paths. If no related files are available, returns an empty array.
+// The array of related file names in the MEByteSource's parent directory. The array of related files within the MEByteSource's parent directory that are accessible to the MEByteSource. Only the relative file names are returned, not the paths. If no related files are available, returns an empty array.
 //
 // RelatedFileNamesInSameDirectory returns the collection as a Go slice.
 func (x *ByteSource) RelatedFileNamesInSameDirectory() []string {
-	arr := x.inner.RelatedFileNamesInSameDirectory()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relatedFileNamesInSameDirectory"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ByteSourceable is the interface implemented by [ByteSource], for mocking and DI.
 type ByteSourceable interface {
-	Unwrap() *raw.MEByteSource
-	ReadDataOfLengthFromOffsetToDestinationCompletionHandler(length uint, offset int64, dest unsafe.Pointer, completionHandler func(uint, unsafe.Pointer))
-	ReadDataOfLengthFromOffset(ctx context.Context, length uint, offset int64) (*foundation.NSData, error)
-	ReadDataOfLengthFromOffsetToDestinationBytesReadError(length uint, offset int64, dest unsafe.Pointer, bytesReadOut *uint) (bool, error)
+	obj.Object
+	ReadDataOfLengthFromOffset(ctx context.Context, length int, offset int64) (obj.Object, error)
 	AvailableLengthAtOffset(offset int64) int64
 	ByteSourceForRelatedFileNameError(fileName string) (*ByteSource, error)
 	FileName() string
-	ContentType() *uniformtypeidentifiers.UTType
+	ContentType() obj.Object
 	FileLength() int64
 	RelatedFileNamesInSameDirectory() []string
 }

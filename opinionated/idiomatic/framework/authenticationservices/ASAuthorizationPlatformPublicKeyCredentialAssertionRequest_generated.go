@@ -5,142 +5,132 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The concrete assertion request type for platform credentials.
 //
-// AuthorizationPlatformPublicKeyCredentialAssertionRequest wraps [raw.ASAuthorizationPlatformPublicKeyCredentialAssertionRequest] with a fluent Go API.
+// AuthorizationPlatformPublicKeyCredentialAssertionRequest is an idiomatic wrapper over the Objective-C class ASAuthorizationPlatformPublicKeyCredentialAssertionRequest.
 type AuthorizationPlatformPublicKeyCredentialAssertionRequest struct {
-	inner *raw.ASAuthorizationPlatformPublicKeyCredentialAssertionRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationPlatformPublicKeyCredentialAssertionRequest].
-func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialAssertionRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationPlatformPublicKeyCredentialAssertionRequestFromID adopts an existing object pointer as a AuthorizationPlatformPublicKeyCredentialAssertionRequest (nil for 0).
+// AuthorizationPlatformPublicKeyCredentialAssertionRequestFromID adopts an existing Objective-C object as a AuthorizationPlatformPublicKeyCredentialAssertionRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationPlatformPublicKeyCredentialAssertionRequestFromID(id objc.ID) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationPlatformPublicKeyCredentialAssertionRequest{inner: raw.ASAuthorizationPlatformPublicKeyCredentialAssertionRequestFromID(id)}
+	x := &AuthorizationPlatformPublicKeyCredentialAssertionRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorizationPlatformPublicKeyCredentialAssertionRequest creates a new [AuthorizationPlatformPublicKeyCredentialAssertionRequest].
+// authorizationPlatformPublicKeyCredentialAssertionRequestAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationPlatformPublicKeyCredentialAssertionRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationPlatformPublicKeyCredentialAssertionRequestAdopt(id objc.ID) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationPlatformPublicKeyCredentialAssertionRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAuthorizationPlatformPublicKeyCredentialAssertionRequest creates a new AuthorizationPlatformPublicKeyCredentialAssertionRequest.
 func NewAuthorizationPlatformPublicKeyCredentialAssertionRequest() *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPlatformPublicKeyCredentialAssertionRequest")), objc.RegisterName("new"))
-	return &AuthorizationPlatformPublicKeyCredentialAssertionRequest{inner: raw.ASAuthorizationPlatformPublicKeyCredentialAssertionRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPlatformPublicKeyCredentialAssertionRequest")), objc.RegisterName("new"))
+	return authorizationPlatformPublicKeyCredentialAssertionRequestAdopt(_id)
 }
 
 // The array of allowed credentials.
 //
-// WithAllowedCredentials sets the collection, converting the Go slice to an NSArray.
-func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithAllowedCredentials(items ...*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetAllowedCredentials(foundation.NSArrayFromID[*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetAllowedCredentials(_arr)
+// WithAllowedCredentials sets the collection and returns the receiver so calls can be chained.
+func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithAllowedCredentials(items ...*AuthorizationPlatformPublicKeyCredentialDescriptor) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
+	_arr := purego.SliceToNSArray(items, func(_v *AuthorizationPlatformPublicKeyCredentialDescriptor) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedCredentials:"), _arr)
 	return x
 }
 
 // The request’s binary large object value.
 //
-// WithLargeBlob sets the largeBlob property and returns the receiver for chaining.
+// WithLargeBlob sets largeBlob and returns the receiver so calls can be chained.
 func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithLargeBlob(largeBlob *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
-	x.inner.SetLargeBlob(largeBlob.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLargeBlob:"), objref.IDOf(largeBlob))
 	return x
 }
 
-// WithPrf sets the prf property and returns the receiver for chaining.
+// WithPrf sets prf and returns the receiver so calls can be chained.
 func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) WithPrf(prf *AuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
-	x.inner.SetPrf(prf.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrf:"), objref.IDOf(prf))
 	return x
 }
 
-// @abstract A list of credentials to allow for this request. If this ilist is nonempty, only credentials matching the provided descriptors can be used to sign in.
+// A list of credentials to allow for this request. If this ilist is nonempty, only credentials matching the provided descriptors can be used to sign in.
 //
 // AllowedCredentials returns the collection as a Go slice.
 func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) AllowedCredentials() []*AuthorizationPlatformPublicKeyCredentialDescriptor {
-	arr := x.inner.AllowedCredentials()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AuthorizationPlatformPublicKeyCredentialDescriptor {
-		return &AuthorizationPlatformPublicKeyCredentialDescriptor{inner: raw.ASAuthorizationPlatformPublicKeyCredentialDescriptorFromID(purego.Retain(_id))}
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowedCredentials"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AuthorizationPlatformPublicKeyCredentialDescriptor {
+		return AuthorizationPlatformPublicKeyCredentialDescriptorFromID(_id)
 	})
 }
 
-// SetAllowedCredentials calls the underlying SetAllowedCredentials.
-func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) SetAllowedCredentials(allowedCredentials *foundation.NSArray[*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor]) {
-	x.inner.SetAllowedCredentials(allowedCredentials)
+func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) SetAllowedCredentials(allowedCredentials []*AuthorizationPlatformPublicKeyCredentialDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedCredentials:"), purego.SliceToNSArray(allowedCredentials, func(_v *AuthorizationPlatformPublicKeyCredentialDescriptor) objc.ID { return objref.IDOf(_v) }))
 }
 
-// LargeBlob calls the underlying LargeBlob.
 func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
-	_r := x.inner.LargeBlob()
-	if _r == nil {
-		return nil
-	}
-	return &AuthorizationPublicKeyCredentialLargeBlobAssertionInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("largeBlob"))
+	return AuthorizationPublicKeyCredentialLargeBlobAssertionInputFromID(_r)
 }
 
-// SetLargeBlob calls the underlying SetLargeBlob.
-func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) SetLargeBlob(largeBlob *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput) {
-	x.inner.SetLargeBlob(largeBlob)
+func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) SetLargeBlob(largeBlob *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLargeBlob:"), objref.IDOf(largeBlob))
 }
 
-// Prf calls the underlying Prf.
 func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) Prf() *AuthorizationPublicKeyCredentialPRFAssertionInput {
-	_r := x.inner.Prf()
-	if _r == nil {
-		return nil
-	}
-	return &AuthorizationPublicKeyCredentialPRFAssertionInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prf"))
+	return AuthorizationPublicKeyCredentialPRFAssertionInputFromID(_r)
 }
 
-// SetPrf calls the underlying SetPrf.
-func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) SetPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInput) {
-	x.inner.SetPrf(prf)
-}
-
-func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) asAuthorizationRequest() *raw.ASAuthorizationRequest {
-	return &x.inner.ASAuthorizationRequest
+func (x *AuthorizationPlatformPublicKeyCredentialAssertionRequest) SetPrf(prf *AuthorizationPublicKeyCredentialPRFAssertionInput) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrf:"), objref.IDOf(prf))
 }
 
 // AuthorizationPlatformPublicKeyCredentialAssertionRequestable is the interface implemented by [AuthorizationPlatformPublicKeyCredentialAssertionRequest], for mocking and DI.
 type AuthorizationPlatformPublicKeyCredentialAssertionRequestable interface {
-	Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialAssertionRequest
-	WithAllowedCredentials(items ...*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor) *AuthorizationPlatformPublicKeyCredentialAssertionRequest
+	obj.Object
+	WithAllowedCredentials(items ...*AuthorizationPlatformPublicKeyCredentialDescriptor) *AuthorizationPlatformPublicKeyCredentialAssertionRequest
 	WithLargeBlob(largeBlob *AuthorizationPublicKeyCredentialLargeBlobAssertionInput) *AuthorizationPlatformPublicKeyCredentialAssertionRequest
 	WithPrf(prf *AuthorizationPublicKeyCredentialPRFAssertionInput) *AuthorizationPlatformPublicKeyCredentialAssertionRequest
 	AllowedCredentials() []*AuthorizationPlatformPublicKeyCredentialDescriptor
-	SetAllowedCredentials(allowedCredentials *foundation.NSArray[*raw.ASAuthorizationPlatformPublicKeyCredentialDescriptor])
+	SetAllowedCredentials(allowedCredentials []*AuthorizationPlatformPublicKeyCredentialDescriptor)
 	LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionInput
-	SetLargeBlob(largeBlob *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput)
+	SetLargeBlob(largeBlob *AuthorizationPublicKeyCredentialLargeBlobAssertionInput)
 	Prf() *AuthorizationPublicKeyCredentialPRFAssertionInput
-	SetPrf(prf *raw.ASAuthorizationPublicKeyCredentialPRFAssertionInput)
+	SetPrf(prf *AuthorizationPublicKeyCredentialPRFAssertionInput)
 }
 
 var _ AuthorizationPlatformPublicKeyCredentialAssertionRequestable = (*AuthorizationPlatformPublicKeyCredentialAssertionRequest)(nil)

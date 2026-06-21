@@ -5,150 +5,165 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDiagnosticLogsClusterRetrieveLogsRequestParams wraps [raw.MTRDiagnosticLogsClusterRetrieveLogsRequestParams] with a fluent Go API.
+// MTRDiagnosticLogsClusterRetrieveLogsRequestParams is an idiomatic wrapper over the Objective-C class MTRDiagnosticLogsClusterRetrieveLogsRequestParams.
 type MTRDiagnosticLogsClusterRetrieveLogsRequestParams struct {
-	inner *raw.MTRDiagnosticLogsClusterRetrieveLogsRequestParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDiagnosticLogsClusterRetrieveLogsRequestParams].
-func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) Unwrap() *raw.MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDiagnosticLogsClusterRetrieveLogsRequestParamsFromID adopts an existing object pointer as a MTRDiagnosticLogsClusterRetrieveLogsRequestParams (nil for 0).
+// MTRDiagnosticLogsClusterRetrieveLogsRequestParamsFromID adopts an existing Objective-C object as a MTRDiagnosticLogsClusterRetrieveLogsRequestParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDiagnosticLogsClusterRetrieveLogsRequestParamsFromID(id objc.ID) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDiagnosticLogsClusterRetrieveLogsRequestParams{inner: raw.MTRDiagnosticLogsClusterRetrieveLogsRequestParamsFromID(id)}
+	x := &MTRDiagnosticLogsClusterRetrieveLogsRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRDiagnosticLogsClusterRetrieveLogsRequestParams creates a new [MTRDiagnosticLogsClusterRetrieveLogsRequestParams].
+// mTRDiagnosticLogsClusterRetrieveLogsRequestParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRDiagnosticLogsClusterRetrieveLogsRequestParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDiagnosticLogsClusterRetrieveLogsRequestParamsAdopt(id objc.ID) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDiagnosticLogsClusterRetrieveLogsRequestParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRDiagnosticLogsClusterRetrieveLogsRequestParams creates a new MTRDiagnosticLogsClusterRetrieveLogsRequestParams.
 func NewMTRDiagnosticLogsClusterRetrieveLogsRequestParams() *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDiagnosticLogsClusterRetrieveLogsRequestParams")), objc.RegisterName("new"))
-	return &MTRDiagnosticLogsClusterRetrieveLogsRequestParams{inner: raw.MTRDiagnosticLogsClusterRetrieveLogsRequestParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDiagnosticLogsClusterRetrieveLogsRequestParams")), objc.RegisterName("new"))
+	return mTRDiagnosticLogsClusterRetrieveLogsRequestParamsAdopt(_id)
 }
 
-// WithIntent sets the intent property and returns the receiver for chaining.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithIntent(intent *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
-	x.inner.SetIntent(intent)
+// WithIntent sets intent and returns the receiver so calls can be chained.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithIntent(intent obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntent:"), objref.IDOf(intent))
 	return x
 }
 
-// WithRequestedProtocol sets the requestedProtocol property and returns the receiver for chaining.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithRequestedProtocol(requestedProtocol *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
-	x.inner.SetRequestedProtocol(requestedProtocol)
+// WithRequestedProtocol sets requestedProtocol and returns the receiver so calls can be chained.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithRequestedProtocol(requestedProtocol obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestedProtocol:"), objref.IDOf(requestedProtocol))
 	return x
 }
 
-// WithTransferFileDesignator sets the transferFileDesignator property and returns the receiver for chaining.
+// WithTransferFileDesignator sets transferFileDesignator and returns the receiver so calls can be chained.
 func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithTransferFileDesignator(transferFileDesignator string) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
-	x.inner.SetTransferFileDesignator(foundation.NSStringStringWithUTF8String(transferFileDesignator))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransferFileDesignator:"), purego.NSString(transferFileDesignator))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// Intent calls the underlying Intent.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) Intent() *foundation.NSNumber {
-	return x.inner.Intent()
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) Intent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intent"))
+	return obj.Wrap(_r)
 }
 
-// SetIntent calls the underlying SetIntent.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetIntent(intent *foundation.NSNumber) {
-	x.inner.SetIntent(intent)
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetIntent(intent obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntent:"), objref.IDOf(intent))
 }
 
-// RequestedProtocol calls the underlying RequestedProtocol.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) RequestedProtocol() *foundation.NSNumber {
-	return x.inner.RequestedProtocol()
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) RequestedProtocol() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestedProtocol"))
+	return obj.Wrap(_r)
 }
 
-// SetRequestedProtocol calls the underlying SetRequestedProtocol.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetRequestedProtocol(requestedProtocol *foundation.NSNumber) {
-	x.inner.SetRequestedProtocol(requestedProtocol)
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetRequestedProtocol(requestedProtocol obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestedProtocol:"), objref.IDOf(requestedProtocol))
 }
 
-// TransferFileDesignator calls the underlying TransferFileDesignator.
 func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) TransferFileDesignator() string {
-	_r := x.inner.TransferFileDesignator()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transferFileDesignator"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTransferFileDesignator calls the underlying SetTransferFileDesignator.
 func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetTransferFileDesignator(transferFileDesignator string) {
-	x.inner.SetTransferFileDesignator(foundation.NSStringStringWithUTF8String(transferFileDesignator))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransferFileDesignator:"), purego.NSString(transferFileDesignator))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRDiagnosticLogsClusterRetrieveLogsRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRDiagnosticLogsClusterRetrieveLogsRequestParamsable is the interface implemented by [MTRDiagnosticLogsClusterRetrieveLogsRequestParams], for mocking and DI.
 type MTRDiagnosticLogsClusterRetrieveLogsRequestParamsable interface {
-	Unwrap() *raw.MTRDiagnosticLogsClusterRetrieveLogsRequestParams
-	WithIntent(intent *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams
-	WithRequestedProtocol(requestedProtocol *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams
+	obj.Object
+	WithIntent(intent obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams
+	WithRequestedProtocol(requestedProtocol obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams
 	WithTransferFileDesignator(transferFileDesignator string) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams
-	Intent() *foundation.NSNumber
-	SetIntent(intent *foundation.NSNumber)
-	RequestedProtocol() *foundation.NSNumber
-	SetRequestedProtocol(requestedProtocol *foundation.NSNumber)
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDiagnosticLogsClusterRetrieveLogsRequestParams
+	Intent() obj.Object
+	SetIntent(intent obj.Object)
+	RequestedProtocol() obj.Object
+	SetRequestedProtocol(requestedProtocol obj.Object)
 	TransferFileDesignator() string
 	SetTransferFileDesignator(transferFileDesignator string)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRDiagnosticLogsClusterRetrieveLogsRequestParamsable = (*MTRDiagnosticLogsClusterRetrieveLogsRequestParams)(nil)

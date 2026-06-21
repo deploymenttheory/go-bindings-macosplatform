@@ -5,57 +5,68 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A query to access the location data stored in a workout route.
 //
-// WorkoutRouteQuery wraps [raw.HKWorkoutRouteQuery] with a fluent Go API.
+// WorkoutRouteQuery is an idiomatic wrapper over the Objective-C class HKWorkoutRouteQuery.
 type WorkoutRouteQuery struct {
-	inner *raw.HKWorkoutRouteQuery
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKWorkoutRouteQuery].
-func (x *WorkoutRouteQuery) Unwrap() *raw.HKWorkoutRouteQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WorkoutRouteQuery) ID() objc.ID { return x.inner.Ptr() }
-
-// WorkoutRouteQueryFromID adopts an existing object pointer as a WorkoutRouteQuery (nil for 0).
+// WorkoutRouteQueryFromID adopts an existing Objective-C object as a WorkoutRouteQuery
+// (nil for 0), retaining it and registering a release finalizer.
 func WorkoutRouteQueryFromID(id objc.ID) *WorkoutRouteQuery {
 	if id == 0 {
 		return nil
 	}
-	return &WorkoutRouteQuery{inner: raw.HKWorkoutRouteQueryFromID(id)}
+	x := &WorkoutRouteQuery{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a new query to access the location data associated with a workout route.
-//
-// NewWorkoutRouteQueryWithRouteDataHandler creates a new [WorkoutRouteQuery].
-func NewWorkoutRouteQueryWithRouteDataHandler(workoutRoute *raw.HKWorkoutRoute, dataHandler func(*raw.HKWorkoutRouteQuery, *foundation.NSArray[objc.ID], bool, unsafe.Pointer)) *WorkoutRouteQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWorkoutRouteQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRoute:dataHandler:"), workoutRoute.Ptr(), dataHandler)
-	return &WorkoutRouteQuery{inner: raw.HKWorkoutRouteQueryFromID(_id)}
+// workoutRouteQueryAdopt wraps an Objective-C object that this code just created as a
+// WorkoutRouteQuery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func workoutRouteQueryAdopt(id objc.ID) *WorkoutRouteQuery {
+	if id == 0 {
+		return nil
+	}
+	x := &WorkoutRouteQuery{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Creates a new query to access the location data associated with a workout route during the specified date interval.
-//
-// NewWorkoutRouteQueryWithRouteDateIntervalDataHandler creates a new [WorkoutRouteQuery].
-func NewWorkoutRouteQueryWithRouteDateIntervalDataHandler(workoutRoute *raw.HKWorkoutRoute, dateInterval *foundation.NSDateInterval, dataHandler func(*raw.HKWorkoutRouteQuery, *foundation.NSArray[objc.ID], bool, unsafe.Pointer)) *WorkoutRouteQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWorkoutRouteQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRoute:dateInterval:dataHandler:"), workoutRoute.Ptr(), dateInterval.Ptr(), dataHandler)
-	return &WorkoutRouteQuery{inner: raw.HKWorkoutRouteQueryFromID(_id)}
+// Description returns the object's -description text.
+func (x *WorkoutRouteQuery) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *WorkoutRouteQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WorkoutRouteQuery) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WorkoutRouteQuery) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWorkoutRouteQuery creates a new WorkoutRouteQuery.
+func NewWorkoutRouteQuery() *WorkoutRouteQuery {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKWorkoutRouteQuery")), objc.RegisterName("new"))
+	return workoutRouteQueryAdopt(_id)
+}
 
 // WorkoutRouteQueryable is the interface implemented by [WorkoutRouteQuery], for mocking and DI.
 type WorkoutRouteQueryable interface {
-	Unwrap() *raw.HKWorkoutRouteQuery
+	obj.Object
 }
 
 var _ WorkoutRouteQueryable = (*WorkoutRouteQuery)(nil)

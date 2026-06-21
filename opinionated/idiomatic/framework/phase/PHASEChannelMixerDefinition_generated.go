@@ -5,87 +5,104 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An audio-layering object that routes sound directly to the device’s output.
 //
-// ChannelMixerDefinition wraps [raw.PHASEChannelMixerDefinition] with a fluent Go API.
+// ChannelMixerDefinition is an idiomatic wrapper over the Objective-C class PHASEChannelMixerDefinition.
 type ChannelMixerDefinition struct {
-	inner *raw.PHASEChannelMixerDefinition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEChannelMixerDefinition].
-func (x *ChannelMixerDefinition) Unwrap() *raw.PHASEChannelMixerDefinition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChannelMixerDefinition) ID() objc.ID { return x.inner.Ptr() }
-
-// ChannelMixerDefinitionFromID adopts an existing object pointer as a ChannelMixerDefinition (nil for 0).
+// ChannelMixerDefinitionFromID adopts an existing Objective-C object as a ChannelMixerDefinition
+// (nil for 0), retaining it and registering a release finalizer.
 func ChannelMixerDefinitionFromID(id objc.ID) *ChannelMixerDefinition {
 	if id == 0 {
 		return nil
 	}
-	return &ChannelMixerDefinition{inner: raw.PHASEChannelMixerDefinitionFromID(id)}
+	x := &ChannelMixerDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// channelMixerDefinitionAdopt wraps an Objective-C object that this code just created as a
+// ChannelMixerDefinition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func channelMixerDefinitionAdopt(id objc.ID) *ChannelMixerDefinition {
+	if id == 0 {
+		return nil
+	}
+	x := &ChannelMixerDefinition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ChannelMixerDefinition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ChannelMixerDefinition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ChannelMixerDefinition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a named channel mixer with the given channel layout.
 //
-// NewChannelMixerDefinitionWithChannelLayoutIdentifier creates a new [ChannelMixerDefinition].
-func NewChannelMixerDefinitionWithChannelLayoutIdentifier(layout *avfaudio.AVAudioChannelLayout, identifier string) *ChannelMixerDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEChannelMixerDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannelLayout:identifier:"), layout.Ptr(), foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &ChannelMixerDefinition{inner: raw.PHASEChannelMixerDefinitionFromID(_id)}
+// NewChannelMixerDefinitionWithChannelLayoutIdentifier creates a new ChannelMixerDefinition.
+func NewChannelMixerDefinitionWithChannelLayoutIdentifier(layout obj.Object, identifier string) *ChannelMixerDefinition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEChannelMixerDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannelLayout:identifier:"), objref.IDOf(layout), purego.NSString(identifier))
+	return channelMixerDefinitionAdopt(_id)
 }
 
 // Creates a channel mixer with the given channel layout.
 //
-// NewChannelMixerDefinitionWithChannelLayout creates a new [ChannelMixerDefinition].
-func NewChannelMixerDefinitionWithChannelLayout(layout *avfaudio.AVAudioChannelLayout) *ChannelMixerDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEChannelMixerDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannelLayout:"), layout.Ptr())
-	return &ChannelMixerDefinition{inner: raw.PHASEChannelMixerDefinitionFromID(_id)}
+// NewChannelMixerDefinitionWithChannelLayout creates a new ChannelMixerDefinition.
+func NewChannelMixerDefinitionWithChannelLayout(layout obj.Object) *ChannelMixerDefinition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEChannelMixerDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChannelLayout:"), objref.IDOf(layout))
+	return channelMixerDefinitionAdopt(_id)
 }
 
 // The mixer’s volume.
 //
-// WithGain sets the gain property and returns the receiver for chaining.
+// WithGain sets gain and returns the receiver so calls can be chained.
 func (x *ChannelMixerDefinition) WithGain(gain float64) *ChannelMixerDefinition {
-	x.inner.PHASEMixerDefinition.SetGain(gain)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
 	return x
 }
 
 // A template for a parameter that changes the mixer’s volume gradually over a period of time.
 //
-// WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
+// WithGainMetaParameterDefinition sets gainMetaParameterDefinition and returns the receiver so calls can be chained.
 func (x *ChannelMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *ChannelMixerDefinition {
-	x.inner.PHASEMixerDefinition.SetGainMetaParameterDefinition(gainMetaParameterDefinition.asNumberMetaParameterDefinition())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
 	return x
 }
 
-// InputChannelLayout calls the underlying InputChannelLayout.
-func (x *ChannelMixerDefinition) InputChannelLayout() *avfaudio.AVAudioChannelLayout {
-	return x.inner.InputChannelLayout()
-}
-
-func (x *ChannelMixerDefinition) asMixerDefinition() *raw.PHASEMixerDefinition {
-	return &x.inner.PHASEMixerDefinition
-}
-
-func (x *ChannelMixerDefinition) asDefinition() *raw.PHASEDefinition {
-	return &x.inner.PHASEMixerDefinition.PHASEDefinition
+func (x *ChannelMixerDefinition) InputChannelLayout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputChannelLayout"))
+	return obj.Wrap(_r)
 }
 
 // ChannelMixerDefinitionable is the interface implemented by [ChannelMixerDefinition], for mocking and DI.
 type ChannelMixerDefinitionable interface {
-	Unwrap() *raw.PHASEChannelMixerDefinition
+	obj.Object
 	WithGain(gain float64) *ChannelMixerDefinition
 	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *ChannelMixerDefinition
-	InputChannelLayout() *avfaudio.AVAudioChannelLayout
+	InputChannelLayout() obj.Object
 }
 
 var _ ChannelMixerDefinitionable = (*ChannelMixerDefinition)(nil)

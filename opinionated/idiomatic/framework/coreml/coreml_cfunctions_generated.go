@@ -5,11 +5,20 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// MLAllComputeDevices calls [raw.MLAllComputeDevices] (C function MLAllComputeDevices).
-func MLAllComputeDevices() *foundation.NSArray[raw.MLComputeDeviceProtocol] {
-	return raw.MLAllComputeDevices()
+var _fnMLAllComputeDevices func() objc.ID
+
+// MLAllComputeDevices calls the CoreML framework function MLAllComputeDevices.
+func MLAllComputeDevices() []obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMLAllComputeDevices == nil {
+		ebipurego.RegisterLibFunc(&_fnMLAllComputeDevices, _lib, "MLAllComputeDevices")
+	}
+	_ret := _fnMLAllComputeDevices()
+	return purego.NSArrayToSlice(_ret, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

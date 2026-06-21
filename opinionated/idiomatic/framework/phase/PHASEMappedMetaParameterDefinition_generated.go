@@ -5,90 +5,92 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A metaparameter that graphs an input value on a set of mathematical curves.
 //
-// MappedMetaParameterDefinition wraps [raw.PHASEMappedMetaParameterDefinition] with a fluent Go API.
+// MappedMetaParameterDefinition is an idiomatic wrapper over the Objective-C class PHASEMappedMetaParameterDefinition.
 type MappedMetaParameterDefinition struct {
-	inner *raw.PHASEMappedMetaParameterDefinition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEMappedMetaParameterDefinition].
-func (x *MappedMetaParameterDefinition) Unwrap() *raw.PHASEMappedMetaParameterDefinition {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MappedMetaParameterDefinition) ID() objc.ID { return x.inner.Ptr() }
-
-// MappedMetaParameterDefinitionFromID adopts an existing object pointer as a MappedMetaParameterDefinition (nil for 0).
+// MappedMetaParameterDefinitionFromID adopts an existing Objective-C object as a MappedMetaParameterDefinition
+// (nil for 0), retaining it and registering a release finalizer.
 func MappedMetaParameterDefinitionFromID(id objc.ID) *MappedMetaParameterDefinition {
 	if id == 0 {
 		return nil
 	}
-	return &MappedMetaParameterDefinition{inner: raw.PHASEMappedMetaParameterDefinitionFromID(id)}
+	x := &MappedMetaParameterDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mappedMetaParameterDefinitionAdopt wraps an Objective-C object that this code just created as a
+// MappedMetaParameterDefinition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mappedMetaParameterDefinitionAdopt(id objc.ID) *MappedMetaParameterDefinition {
+	if id == 0 {
+		return nil
+	}
+	x := &MappedMetaParameterDefinition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MappedMetaParameterDefinition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MappedMetaParameterDefinition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MappedMetaParameterDefinition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a specification for a named metaparameter that the app plots on a graph defined by the given set of curves.
 //
-// NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelopeIdentifier creates a new [MappedMetaParameterDefinition].
-func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelopeIdentifier(inputMetaParameterDefinition *raw.PHASENumberMetaParameterDefinition, envelope *raw.PHASEEnvelope, identifier string) *MappedMetaParameterDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEMappedMetaParameterDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputMetaParameterDefinition:envelope:identifier:"), inputMetaParameterDefinition.Ptr(), envelope.Ptr(), foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &MappedMetaParameterDefinition{inner: raw.PHASEMappedMetaParameterDefinitionFromID(_id)}
+// NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelopeIdentifier creates a new MappedMetaParameterDefinition.
+func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelopeIdentifier(inputMetaParameterDefinition *NumberMetaParameterDefinition, envelope *Envelope, identifier string) *MappedMetaParameterDefinition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEMappedMetaParameterDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputMetaParameterDefinition:envelope:identifier:"), objref.IDOf(inputMetaParameterDefinition), objref.IDOf(envelope), purego.NSString(identifier))
+	return mappedMetaParameterDefinitionAdopt(_id)
 }
 
 // Creates a specification for a metaparameter that the app plots on a graph defined by the given set of curves.
 //
-// NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelope creates a new [MappedMetaParameterDefinition].
-func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelope(inputMetaParameterDefinition *raw.PHASENumberMetaParameterDefinition, envelope *raw.PHASEEnvelope) *MappedMetaParameterDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEMappedMetaParameterDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputMetaParameterDefinition:envelope:"), inputMetaParameterDefinition.Ptr(), envelope.Ptr())
-	return &MappedMetaParameterDefinition{inner: raw.PHASEMappedMetaParameterDefinitionFromID(_id)}
+// NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelope creates a new MappedMetaParameterDefinition.
+func NewMappedMetaParameterDefinitionWithInputMetaParameterDefinitionEnvelope(inputMetaParameterDefinition *NumberMetaParameterDefinition, envelope *Envelope) *MappedMetaParameterDefinition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEMappedMetaParameterDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputMetaParameterDefinition:envelope:"), objref.IDOf(inputMetaParameterDefinition), objref.IDOf(envelope))
+	return mappedMetaParameterDefinitionAdopt(_id)
 }
 
-// @property envelope @abstract An Envelope to define segments of curves
-//
-// Envelope calls the underlying Envelope.
+// An Envelope to define segments of curves
 func (x *MappedMetaParameterDefinition) Envelope() *Envelope {
-	_r := x.inner.Envelope()
-	if _r == nil {
-		return nil
-	}
-	return &Envelope{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("envelope"))
+	return EnvelopeFromID(_r)
 }
 
-// @property inputMetaParameterDefinition @abstract The readonly PHASENumberMetaParameterDefinition that this metaparameter definition was initialized with
-//
-// InputMetaParameterDefinition calls the underlying InputMetaParameterDefinition.
+// The readonly PHASENumberMetaParameterDefinition that this metaparameter definition was initialized with
 func (x *MappedMetaParameterDefinition) InputMetaParameterDefinition() *NumberMetaParameterDefinition {
-	_r := x.inner.InputMetaParameterDefinition()
-	if _r == nil {
-		return nil
-	}
-	return &NumberMetaParameterDefinition{inner: _r}
-}
-
-func (x *MappedMetaParameterDefinition) asNumberMetaParameterDefinition() *raw.PHASENumberMetaParameterDefinition {
-	return &x.inner.PHASENumberMetaParameterDefinition
-}
-
-func (x *MappedMetaParameterDefinition) asMetaParameterDefinition() *raw.PHASEMetaParameterDefinition {
-	return &x.inner.PHASENumberMetaParameterDefinition.PHASEMetaParameterDefinition
-}
-
-func (x *MappedMetaParameterDefinition) asDefinition() *raw.PHASEDefinition {
-	return &x.inner.PHASENumberMetaParameterDefinition.PHASEMetaParameterDefinition.PHASEDefinition
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputMetaParameterDefinition"))
+	return NumberMetaParameterDefinitionFromID(_r)
 }
 
 // MappedMetaParameterDefinitionable is the interface implemented by [MappedMetaParameterDefinition], for mocking and DI.
 type MappedMetaParameterDefinitionable interface {
-	Unwrap() *raw.PHASEMappedMetaParameterDefinition
+	obj.Object
 	Envelope() *Envelope
 	InputMetaParameterDefinition() *NumberMetaParameterDefinition
 }

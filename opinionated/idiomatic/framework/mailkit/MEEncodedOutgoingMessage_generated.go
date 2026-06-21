@@ -5,67 +5,90 @@
 package mailkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains the signed or encrypted representation of a message’s RFC 2822 data.
 //
-// EncodedOutgoingMessage wraps [raw.MEEncodedOutgoingMessage] with a fluent Go API.
+// EncodedOutgoingMessage is an idiomatic wrapper over the Objective-C class MEEncodedOutgoingMessage.
 type EncodedOutgoingMessage struct {
-	inner *raw.MEEncodedOutgoingMessage
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEEncodedOutgoingMessage].
-func (x *EncodedOutgoingMessage) Unwrap() *raw.MEEncodedOutgoingMessage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EncodedOutgoingMessage) ID() objc.ID { return x.inner.Ptr() }
-
-// EncodedOutgoingMessageFromID adopts an existing object pointer as a EncodedOutgoingMessage (nil for 0).
+// EncodedOutgoingMessageFromID adopts an existing Objective-C object as a EncodedOutgoingMessage
+// (nil for 0), retaining it and registering a release finalizer.
 func EncodedOutgoingMessageFromID(id objc.ID) *EncodedOutgoingMessage {
 	if id == 0 {
 		return nil
 	}
-	return &EncodedOutgoingMessage{inner: raw.MEEncodedOutgoingMessageFromID(id)}
+	x := &EncodedOutgoingMessage{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// encodedOutgoingMessageAdopt wraps an Objective-C object that this code just created as a
+// EncodedOutgoingMessage (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func encodedOutgoingMessageAdopt(id objc.ID) *EncodedOutgoingMessage {
+	if id == 0 {
+		return nil
+	}
+	x := &EncodedOutgoingMessage{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EncodedOutgoingMessage) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EncodedOutgoingMessage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EncodedOutgoingMessage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an object that contains the outgoing message’s encoded data, and indicates if the encoder encrypted or signed the message.
 //
-// NewEncodedOutgoingMessageWithRawDataIsSignedIsEncrypted creates a new [EncodedOutgoingMessage].
-func NewEncodedOutgoingMessageWithRawDataIsSignedIsEncrypted(rawData *foundation.NSData, isSigned bool, isEncrypted bool) *EncodedOutgoingMessage {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MEEncodedOutgoingMessage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRawData:isSigned:isEncrypted:"), rawData.Ptr(), isSigned, isEncrypted)
-	return &EncodedOutgoingMessage{inner: raw.MEEncodedOutgoingMessageFromID(_id)}
+// NewEncodedOutgoingMessageWithRawDataIsSignedIsEncrypted creates a new EncodedOutgoingMessage.
+func NewEncodedOutgoingMessageWithRawDataIsSignedIsEncrypted(rawData obj.Object, isSigned bool, isEncrypted bool) *EncodedOutgoingMessage {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MEEncodedOutgoingMessage")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRawData:isSigned:isEncrypted:"), objref.IDOf(rawData), isSigned, isEncrypted)
+	return encodedOutgoingMessageAdopt(_id)
 }
 
-// @brief The full encoded RFC822 message including headers and body.
-//
-// RawData calls the underlying RawData.
-func (x *EncodedOutgoingMessage) RawData() *foundation.NSData {
-	return x.inner.RawData()
+// The full encoded RFC822 message including headers and body.
+func (x *EncodedOutgoingMessage) RawData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rawData"))
+	return obj.Wrap(_r)
 }
 
-// @brief Whether or not the encoded message is signed
-//
-// IsSigned calls the underlying IsSigned.
+// Whether or not the encoded message is signed
 func (x *EncodedOutgoingMessage) IsSigned() bool {
-	return x.inner.IsSigned()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSigned"))
+	return _r
 }
 
-// @brief Whether or not the encoded message is encrypted
-//
-// IsEncrypted calls the underlying IsEncrypted.
+// Whether or not the encoded message is encrypted
 func (x *EncodedOutgoingMessage) IsEncrypted() bool {
-	return x.inner.IsEncrypted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEncrypted"))
+	return _r
 }
 
 // EncodedOutgoingMessageable is the interface implemented by [EncodedOutgoingMessage], for mocking and DI.
 type EncodedOutgoingMessageable interface {
-	Unwrap() *raw.MEEncodedOutgoingMessage
-	RawData() *foundation.NSData
+	obj.Object
+	RawData() obj.Object
 	IsSigned() bool
 	IsEncrypted() bool
 }

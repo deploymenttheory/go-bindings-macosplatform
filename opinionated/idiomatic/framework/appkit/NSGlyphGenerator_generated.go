@@ -5,49 +5,68 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that performs the initial, nominal glyph generation phase in the layout process.
 //
-// GlyphGenerator wraps [raw.NSGlyphGenerator] with a fluent Go API.
+// GlyphGenerator is an idiomatic wrapper over the Objective-C class NSGlyphGenerator.
 type GlyphGenerator struct {
-	inner *raw.NSGlyphGenerator
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSGlyphGenerator].
-func (x *GlyphGenerator) Unwrap() *raw.NSGlyphGenerator { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GlyphGenerator) ID() objc.ID { return x.inner.Ptr() }
-
-// GlyphGeneratorFromID adopts an existing object pointer as a GlyphGenerator (nil for 0).
+// GlyphGeneratorFromID adopts an existing Objective-C object as a GlyphGenerator
+// (nil for 0), retaining it and registering a release finalizer.
 func GlyphGeneratorFromID(id objc.ID) *GlyphGenerator {
 	if id == 0 {
 		return nil
 	}
-	return &GlyphGenerator{inner: raw.NSGlyphGeneratorFromID(id)}
+	x := &GlyphGenerator{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGlyphGenerator creates a new [GlyphGenerator].
+// glyphGeneratorAdopt wraps an Objective-C object that this code just created as a
+// GlyphGenerator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func glyphGeneratorAdopt(id objc.ID) *GlyphGenerator {
+	if id == 0 {
+		return nil
+	}
+	x := &GlyphGenerator{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GlyphGenerator) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GlyphGenerator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GlyphGenerator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGlyphGenerator creates a new GlyphGenerator.
 func NewGlyphGenerator() *GlyphGenerator {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSGlyphGenerator")), objc.RegisterName("new"))
-	return &GlyphGenerator{inner: raw.NSGlyphGeneratorFromID(_id)}
-}
-
-// Generates glyphs for the specified glyph storage object (NSLayoutManager by default).
-//
-// GenerateGlyphsForGlyphStorageDesiredNumberOfCharactersGlyphIndexCharacterIndex calls the underlying GenerateGlyphsForGlyphStorageDesiredNumberOfCharactersGlyphIndexCharacterIndex.
-func (x *GlyphGenerator) GenerateGlyphsForGlyphStorageDesiredNumberOfCharactersGlyphIndexCharacterIndex(glyphStorage raw.NSGlyphStorage, nChars uint, glyphIndex *uint, charIndex *uint) {
-	x.inner.GenerateGlyphsForGlyphStorageDesiredNumberOfCharactersGlyphIndexCharacterIndex(glyphStorage, nChars, glyphIndex, charIndex)
+	_id := objc.Send[objc.ID](objc.ID(_class("NSGlyphGenerator")), objc.RegisterName("new"))
+	return glyphGeneratorAdopt(_id)
 }
 
 // GlyphGeneratorable is the interface implemented by [GlyphGenerator], for mocking and DI.
 type GlyphGeneratorable interface {
-	Unwrap() *raw.NSGlyphGenerator
-	GenerateGlyphsForGlyphStorageDesiredNumberOfCharactersGlyphIndexCharacterIndex(glyphStorage raw.NSGlyphStorage, nChars uint, glyphIndex *uint, charIndex *uint)
+	obj.Object
 }
 
 var _ GlyphGeneratorable = (*GlyphGenerator)(nil)

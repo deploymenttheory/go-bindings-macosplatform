@@ -5,140 +5,155 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDeviceEnergyManagementClusterModifyForecastRequestParams wraps [raw.MTRDeviceEnergyManagementClusterModifyForecastRequestParams] with a fluent Go API.
+// MTRDeviceEnergyManagementClusterModifyForecastRequestParams is an idiomatic wrapper over the Objective-C class MTRDeviceEnergyManagementClusterModifyForecastRequestParams.
 type MTRDeviceEnergyManagementClusterModifyForecastRequestParams struct {
-	inner *raw.MTRDeviceEnergyManagementClusterModifyForecastRequestParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDeviceEnergyManagementClusterModifyForecastRequestParams].
-func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) Unwrap() *raw.MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRDeviceEnergyManagementClusterModifyForecastRequestParamsFromID adopts an existing object pointer as a MTRDeviceEnergyManagementClusterModifyForecastRequestParams (nil for 0).
+// MTRDeviceEnergyManagementClusterModifyForecastRequestParamsFromID adopts an existing Objective-C object as a MTRDeviceEnergyManagementClusterModifyForecastRequestParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDeviceEnergyManagementClusterModifyForecastRequestParamsFromID(id objc.ID) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDeviceEnergyManagementClusterModifyForecastRequestParams{inner: raw.MTRDeviceEnergyManagementClusterModifyForecastRequestParamsFromID(id)}
-}
-
-// NewMTRDeviceEnergyManagementClusterModifyForecastRequestParams creates a new [MTRDeviceEnergyManagementClusterModifyForecastRequestParams].
-func NewMTRDeviceEnergyManagementClusterModifyForecastRequestParams() *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceEnergyManagementClusterModifyForecastRequestParams")), objc.RegisterName("new"))
-	return &MTRDeviceEnergyManagementClusterModifyForecastRequestParams{inner: raw.MTRDeviceEnergyManagementClusterModifyForecastRequestParamsFromID(_id)}
-}
-
-// WithForecastID sets the forecastID property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) WithForecastID(forecastID *foundation.NSNumber) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
-	x.inner.SetForecastID(forecastID)
+	x := &MTRDeviceEnergyManagementClusterModifyForecastRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithCause sets the cause property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) WithCause(cause *foundation.NSNumber) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
-	x.inner.SetCause(cause)
+// mTRDeviceEnergyManagementClusterModifyForecastRequestParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRDeviceEnergyManagementClusterModifyForecastRequestParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDeviceEnergyManagementClusterModifyForecastRequestParamsAdopt(id objc.ID) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDeviceEnergyManagementClusterModifyForecastRequestParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRDeviceEnergyManagementClusterModifyForecastRequestParams creates a new MTRDeviceEnergyManagementClusterModifyForecastRequestParams.
+func NewMTRDeviceEnergyManagementClusterModifyForecastRequestParams() *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementClusterModifyForecastRequestParams")), objc.RegisterName("new"))
+	return mTRDeviceEnergyManagementClusterModifyForecastRequestParamsAdopt(_id)
+}
+
+// WithForecastID sets forecastID and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) WithForecastID(forecastID obj.Object) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForecastID:"), objref.IDOf(forecastID))
+	return x
+}
+
+// WithCause sets cause and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke).
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// ForecastID calls the underlying ForecastID.
-func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) ForecastID() *foundation.NSNumber {
-	return x.inner.ForecastID()
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) ForecastID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("forecastID"))
+	return obj.Wrap(_r)
 }
 
-// SetForecastID calls the underlying SetForecastID.
-func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetForecastID(forecastID *foundation.NSNumber) {
-	x.inner.SetForecastID(forecastID)
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetForecastID(forecastID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForecastID:"), objref.IDOf(forecastID))
 }
 
-// SlotAdjustments calls the underlying SlotAdjustments.
-func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SlotAdjustments() *foundation.NSArray[objc.ID] {
-	return x.inner.SlotAdjustments()
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SlotAdjustments() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slotAdjustments"))
+	return obj.Wrap(_r)
 }
 
-// SetSlotAdjustments calls the underlying SetSlotAdjustments.
-func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetSlotAdjustments(slotAdjustments *foundation.NSArray[objc.ID]) {
-	x.inner.SetSlotAdjustments(slotAdjustments)
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetSlotAdjustments(slotAdjustments obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlotAdjustments:"), objref.IDOf(slotAdjustments))
 }
 
-// Cause calls the underlying Cause.
-func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) Cause() *foundation.NSNumber {
-	return x.inner.Cause()
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) Cause() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cause"))
+	return obj.Wrap(_r)
 }
 
-// SetCause calls the underlying SetCause.
-func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetCause(cause *foundation.NSNumber) {
-	x.inner.SetCause(cause)
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetCause(cause obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCause:"), objref.IDOf(cause))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRDeviceEnergyManagementClusterModifyForecastRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRDeviceEnergyManagementClusterModifyForecastRequestParamsable is the interface implemented by [MTRDeviceEnergyManagementClusterModifyForecastRequestParams], for mocking and DI.
 type MTRDeviceEnergyManagementClusterModifyForecastRequestParamsable interface {
-	Unwrap() *raw.MTRDeviceEnergyManagementClusterModifyForecastRequestParams
-	WithForecastID(forecastID *foundation.NSNumber) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams
-	WithCause(cause *foundation.NSNumber) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams
-	ForecastID() *foundation.NSNumber
-	SetForecastID(forecastID *foundation.NSNumber)
-	SlotAdjustments() *foundation.NSArray[objc.ID]
-	SetSlotAdjustments(slotAdjustments *foundation.NSArray[objc.ID])
-	Cause() *foundation.NSNumber
-	SetCause(cause *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithForecastID(forecastID obj.Object) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams
+	WithCause(cause obj.Object) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDeviceEnergyManagementClusterModifyForecastRequestParams
+	ForecastID() obj.Object
+	SetForecastID(forecastID obj.Object)
+	SlotAdjustments() obj.Object
+	SetSlotAdjustments(slotAdjustments obj.Object)
+	Cause() obj.Object
+	SetCause(cause obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRDeviceEnergyManagementClusterModifyForecastRequestParamsable = (*MTRDeviceEnergyManagementClusterModifyForecastRequestParams)(nil)

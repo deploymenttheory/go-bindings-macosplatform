@@ -5,10 +5,16 @@
 package storekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
+	ebipurego "github.com/ebitengine/purego"
 )
 
-// SKTerminateForInvalidReceipt calls [raw.SKTerminateForInvalidReceipt] (C function SKTerminateForInvalidReceipt).
+var _fnSKTerminateForInvalidReceipt func()
+
+// SKTerminateForInvalidReceipt calls the StoreKit framework function SKTerminateForInvalidReceipt.
 func SKTerminateForInvalidReceipt() {
-	raw.SKTerminateForInvalidReceipt()
+	_loadOnce.Do(_loadLibrary)
+	if _fnSKTerminateForInvalidReceipt == nil {
+		ebipurego.RegisterLibFunc(&_fnSKTerminateForInvalidReceipt, _lib, "SKTerminateForInvalidReceipt")
+	}
+	_fnSKTerminateForInvalidReceipt()
 }

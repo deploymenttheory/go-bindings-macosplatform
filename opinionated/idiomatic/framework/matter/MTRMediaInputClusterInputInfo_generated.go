@@ -5,70 +5,92 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRMediaInputClusterInputInfo wraps [raw.MTRMediaInputClusterInputInfo] with a fluent Go API.
+// MTRMediaInputClusterInputInfo is an idiomatic wrapper over the Objective-C class MTRMediaInputClusterInputInfo.
 type MTRMediaInputClusterInputInfo struct {
-	inner *raw.MTRMediaInputClusterInputInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRMediaInputClusterInputInfo].
-func (x *MTRMediaInputClusterInputInfo) Unwrap() *raw.MTRMediaInputClusterInputInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRMediaInputClusterInputInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRMediaInputClusterInputInfoFromID adopts an existing object pointer as a MTRMediaInputClusterInputInfo (nil for 0).
+// MTRMediaInputClusterInputInfoFromID adopts an existing Objective-C object as a MTRMediaInputClusterInputInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRMediaInputClusterInputInfoFromID(id objc.ID) *MTRMediaInputClusterInputInfo {
 	if id == 0 {
 		return nil
 	}
-	return &MTRMediaInputClusterInputInfo{inner: raw.MTRMediaInputClusterInputInfoFromID(id)}
+	x := &MTRMediaInputClusterInputInfo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRMediaInputClusterInputInfo creates a new [MTRMediaInputClusterInputInfo].
+// mTRMediaInputClusterInputInfoAdopt wraps an Objective-C object that this code just created as a
+// MTRMediaInputClusterInputInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRMediaInputClusterInputInfoAdopt(id objc.ID) *MTRMediaInputClusterInputInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRMediaInputClusterInputInfo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRMediaInputClusterInputInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRMediaInputClusterInputInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRMediaInputClusterInputInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRMediaInputClusterInputInfo creates a new MTRMediaInputClusterInputInfo.
 func NewMTRMediaInputClusterInputInfo() *MTRMediaInputClusterInputInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRMediaInputClusterInputInfo")), objc.RegisterName("new"))
-	return &MTRMediaInputClusterInputInfo{inner: raw.MTRMediaInputClusterInputInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRMediaInputClusterInputInfo")), objc.RegisterName("new"))
+	return mTRMediaInputClusterInputInfoAdopt(_id)
 }
 
-// WithIndex sets the index property and returns the receiver for chaining.
-func (x *MTRMediaInputClusterInputInfo) WithIndex(index *foundation.NSNumber) *MTRMediaInputClusterInputInfo {
-	x.inner.MTRMediaInputClusterInputInfoStruct.SetIndex(index)
+// WithIndex sets index and returns the receiver so calls can be chained.
+func (x *MTRMediaInputClusterInputInfo) WithIndex(index obj.Object) *MTRMediaInputClusterInputInfo {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), objref.IDOf(index))
 	return x
 }
 
-// WithInputType sets the inputType property and returns the receiver for chaining.
-func (x *MTRMediaInputClusterInputInfo) WithInputType(inputType *foundation.NSNumber) *MTRMediaInputClusterInputInfo {
-	x.inner.MTRMediaInputClusterInputInfoStruct.SetInputType(inputType)
+// WithInputType sets inputType and returns the receiver so calls can be chained.
+func (x *MTRMediaInputClusterInputInfo) WithInputType(inputType obj.Object) *MTRMediaInputClusterInputInfo {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputType:"), objref.IDOf(inputType))
 	return x
 }
 
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *MTRMediaInputClusterInputInfo) WithName(name string) *MTRMediaInputClusterInputInfo {
-	x.inner.MTRMediaInputClusterInputInfoStruct.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithDescriptionString sets the descriptionString property and returns the receiver for chaining.
+// WithDescriptionString sets descriptionString and returns the receiver so calls can be chained.
 func (x *MTRMediaInputClusterInputInfo) WithDescriptionString(descriptionString string) *MTRMediaInputClusterInputInfo {
-	x.inner.MTRMediaInputClusterInputInfoStruct.SetDescriptionString(foundation.NSStringStringWithUTF8String(descriptionString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDescriptionString:"), purego.NSString(descriptionString))
 	return x
-}
-
-func (x *MTRMediaInputClusterInputInfo) asMTRMediaInputClusterInputInfoStruct() *raw.MTRMediaInputClusterInputInfoStruct {
-	return &x.inner.MTRMediaInputClusterInputInfoStruct
 }
 
 // MTRMediaInputClusterInputInfoable is the interface implemented by [MTRMediaInputClusterInputInfo], for mocking and DI.
 type MTRMediaInputClusterInputInfoable interface {
-	Unwrap() *raw.MTRMediaInputClusterInputInfo
-	WithIndex(index *foundation.NSNumber) *MTRMediaInputClusterInputInfo
-	WithInputType(inputType *foundation.NSNumber) *MTRMediaInputClusterInputInfo
+	obj.Object
+	WithIndex(index obj.Object) *MTRMediaInputClusterInputInfo
+	WithInputType(inputType obj.Object) *MTRMediaInputClusterInputInfo
 	WithName(name string) *MTRMediaInputClusterInputInfo
 	WithDescriptionString(descriptionString string) *MTRMediaInputClusterInputInfo
 }

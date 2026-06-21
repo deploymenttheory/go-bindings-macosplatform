@@ -6,42 +6,37 @@ package fileprovider
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fileprovider"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// BeforeFirstSyncComponent calls the underlying NSFileProviderItemVersionBeforeFirstSyncComponent.
-func BeforeFirstSyncComponent() *foundation.NSData {
-	return raw.NSFileProviderItemVersionBeforeFirstSyncComponent()
+// Version component exposed by the system to denote a state that predates a version returned by the provider. In case an item was created by calling `createItemBasedOnTemplate` and the item returned by the provider in the completion handler of that call didn't match the item template passed by the system, the system will try to apply the changes asked by the provider to the disk. However, the system may detect conflicts when applying those content back to the disk, which will cause the system to send the new disk version to the extension, by calling `modifyItem` or `deleteItemWithIdentifier` with a `baseVersion` that represents the item as passed in the template of the `createItemBasedOnTemplate` call. This constant is used by the system to represent that specific version that was communicated by the system to the extension but does not have a corresponding version assigned by the extension.
+func BeforeFirstSyncComponent() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileProviderItemVersion")), objc.RegisterName("beforeFirstSyncComponent"))
+	return obj.Wrap(_r)
 }
 
-// ManagerForDomain calls the underlying NSFileProviderManagerManagerForDomain.
-func ManagerForDomain(domain *raw.NSFileProviderDomain) *FileProviderManager {
-	_r := raw.NSFileProviderManagerManagerForDomain(domain)
-	if _r == nil {
-		return nil
-	}
-	return &FileProviderManager{inner: _r}
+// Returns a newly created file provider manager for the specified domain.
+func ManagerForDomain(domain *FileProviderDomain) *FileProviderManager {
+	_r := objc.Send[objc.ID](objc.ID(_class("NSFileProviderManager")), objc.RegisterName("managerForDomain:"), objref.IDOf(domain))
+	return FileProviderManagerFromID(_r)
 }
 
-// GetIdentifierForUserVisibleFileAtURLCompletionHandler calls the underlying NSFileProviderManagerGetIdentifierForUserVisibleFileAtURLCompletionHandler.
-func GetIdentifierForUserVisibleFileAtURLCompletionHandler(url string, completionHandler func(*foundation.NSString, *foundation.NSString, unsafe.Pointer)) {
-	raw.NSFileProviderManagerGetIdentifierForUserVisibleFileAtURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), completionHandler)
-}
-
+// Adds a domain to the File Provider extension.
+//
 // AddDomain blocks until the operation completes or ctx is cancelled.
-func AddDomain(ctx context.Context, domain *raw.NSFileProviderDomain) error {
+func AddDomain(ctx context.Context, domain *FileProviderDomain) error {
 	_ch := make(chan error, 1)
-	raw.NSFileProviderManagerAddDomainCompletionHandler(domain, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("NSFileProviderManager")), objc.RegisterName("addDomain:completionHandler:"), objref.IDOf(domain), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -50,16 +45,17 @@ func AddDomain(ctx context.Context, domain *raw.NSFileProviderDomain) error {
 	}
 }
 
+// Removes a domain from the File Provider extension.
+//
 // RemoveDomain blocks until the operation completes or ctx is cancelled.
-func RemoveDomain(ctx context.Context, domain *raw.NSFileProviderDomain) error {
+func RemoveDomain(ctx context.Context, domain *FileProviderDomain) error {
 	_ch := make(chan error, 1)
-	raw.NSFileProviderManagerRemoveDomainCompletionHandler(domain, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("NSFileProviderManager")), objc.RegisterName("removeDomain:completionHandler:"), objref.IDOf(domain), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -68,45 +64,42 @@ func RemoveDomain(ctx context.Context, domain *raw.NSFileProviderDomain) error {
 	}
 }
 
-// RemoveDomainModeCompletionHandler calls the underlying NSFileProviderManagerRemoveDomainModeCompletionHandler.
-func RemoveDomainModeCompletionHandler(domain *raw.NSFileProviderDomain, mode NSFileProviderDomainRemovalMode, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	raw.NSFileProviderManagerRemoveDomainModeCompletionHandler(domain, raw.NSFileProviderDomainRemovalMode(mode), completionHandler)
-}
-
+// Returns all of the File Provider extension’s domains.
+//
 // GetDomains blocks until the operation completes or ctx is cancelled.
-func GetDomains(ctx context.Context) (*foundation.NSArray[*raw.NSFileProviderDomain], error) {
+func GetDomains(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.NSFileProviderDomain]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.NSFileProviderManagerGetDomainsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.NSFileProviderDomain], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("NSFileProviderManager")), objc.RegisterName("getDomainsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.NSFileProviderDomain]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
+// Removes all domains from the File Provider extension.
+//
 // RemoveAllDomains blocks until the operation completes or ctx is cancelled.
 func RemoveAllDomains(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	raw.NSFileProviderManagerRemoveAllDomainsWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("NSFileProviderManager")), objc.RegisterName("removeAllDomainsWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -115,25 +108,21 @@ func RemoveAllDomains(ctx context.Context) error {
 	}
 }
 
+// Creates a new domain that takes ownership of on-disk data that your app previously managed without a file provider.
+//
 // ImportDomainFromDirectoryAtURL blocks until the operation completes or ctx is cancelled.
-func ImportDomainFromDirectoryAtURL(ctx context.Context, domain *raw.NSFileProviderDomain, url string) error {
+func ImportDomainFromDirectoryAtURL(ctx context.Context, domain *FileProviderDomain, url string) error {
 	_ch := make(chan error, 1)
-	raw.NSFileProviderManagerImportDomainFromDirectoryAtURLCompletionHandler(domain, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("NSFileProviderManager")), objc.RegisterName("importDomain:fromDirectoryAtURL:completionHandler:"), objref.IDOf(domain), rt.FileURL(url), _block)
 	select {
 	case err := <-_ch:
 		return err
 	case <-ctx.Done():
 		return ctx.Err()
 	}
-}
-
-// CheckDomainsCanBeStoredOnVolumeAtURLUnsupportedReasonError calls the underlying NSFileProviderManagerCheckDomainsCanBeStoredOnVolumeAtURLUnsupportedReasonError.
-func CheckDomainsCanBeStoredOnVolumeAtURLUnsupportedReasonError(eligible *bool, url string, unsupportedReason *raw.NSFileProviderVolumeUnsupportedReason) (bool, error) {
-	return raw.NSFileProviderManagerCheckDomainsCanBeStoredOnVolumeAtURLUnsupportedReasonError(eligible, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), unsupportedReason)
 }

@@ -5,124 +5,133 @@
 package pencilkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A structure that defines the drawing characteristics (width, color, pen style) to use when drawing lines on a canvas view.
 //
-// InkingTool wraps [raw.PKInkingTool] with a fluent Go API.
+// InkingTool is an idiomatic wrapper over the Objective-C class PKInkingTool.
 type InkingTool struct {
-	inner *raw.PKInkingTool
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKInkingTool].
-func (x *InkingTool) Unwrap() *raw.PKInkingTool { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *InkingTool) ID() objc.ID { return x.inner.Ptr() }
-
-// InkingToolFromID adopts an existing object pointer as a InkingTool (nil for 0).
+// InkingToolFromID adopts an existing Objective-C object as a InkingTool
+// (nil for 0), retaining it and registering a release finalizer.
 func InkingToolFromID(id objc.ID) *InkingTool {
 	if id == 0 {
 		return nil
 	}
-	return &InkingTool{inner: raw.PKInkingToolFromID(id)}
+	x := &InkingTool{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewInkingToolWithInkTypeColorWidth creates a new [InkingTool].
-func NewInkingToolWithInkTypeColorWidth(type_ *foundation.NSString, color *appkit.NSColor, width float64) *InkingTool {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKInkingTool")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:width:"), type_.Ptr(), color.Ptr(), width)
-	return &InkingTool{inner: raw.PKInkingToolFromID(_id)}
+// inkingToolAdopt wraps an Objective-C object that this code just created as a
+// InkingTool (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func inkingToolAdopt(id objc.ID) *InkingTool {
+	if id == 0 {
+		return nil
+	}
+	x := &InkingTool{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// NewInkingToolWithInkTypeColorWidthAzimuth creates a new [InkingTool].
-func NewInkingToolWithInkTypeColorWidthAzimuth(type_ *foundation.NSString, color *appkit.NSColor, width float64, angle float64) *InkingTool {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKInkingTool")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:width:azimuth:"), type_.Ptr(), color.Ptr(), width, angle)
-	return &InkingTool{inner: raw.PKInkingToolFromID(_id)}
+// Description returns the object's -description text.
+func (x *InkingTool) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// NewInkingToolWithInkTypeColor creates a new [InkingTool].
-func NewInkingToolWithInkTypeColor(type_ *foundation.NSString, color *appkit.NSColor) *InkingTool {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKInkingTool")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:"), type_.Ptr(), color.Ptr())
-	return &InkingTool{inner: raw.PKInkingToolFromID(_id)}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *InkingTool) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Create a new inking tool for the provided ink. @param ink The ink to use. @param width The width of stroke to create.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *InkingTool) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewInkingToolWithInkTypeColorWidth creates a new InkingTool.
+func NewInkingToolWithInkTypeColorWidth(type_ obj.Object, color obj.Object, width float64) *InkingTool {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKInkingTool")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:width:"), objref.IDOf(type_), objref.IDOf(color), width)
+	return inkingToolAdopt(_id)
+}
+
+// NewInkingToolWithInkTypeColorWidthAzimuth creates a new InkingTool.
+func NewInkingToolWithInkTypeColorWidthAzimuth(type_ obj.Object, color obj.Object, width float64, angle float64) *InkingTool {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKInkingTool")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:width:azimuth:"), objref.IDOf(type_), objref.IDOf(color), width, angle)
+	return inkingToolAdopt(_id)
+}
+
+// NewInkingToolWithInkTypeColor creates a new InkingTool.
+func NewInkingToolWithInkTypeColor(type_ obj.Object, color obj.Object) *InkingTool {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKInkingTool")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInkType:color:"), objref.IDOf(type_), objref.IDOf(color))
+	return inkingToolAdopt(_id)
+}
+
+// Create a new inking tool for the provided ink.
 //
-// NewInkingToolWithInkWidth creates a new [InkingTool].
-func NewInkingToolWithInkWidth(ink *raw.PKInk, width float64) *InkingTool {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKInkingTool")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInk:width:"), ink.Ptr(), width)
-	return &InkingTool{inner: raw.PKInkingToolFromID(_id)}
+// NewInkingToolWithInkWidth creates a new InkingTool.
+func NewInkingToolWithInkWidth(ink *Ink, width float64) *InkingTool {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKInkingTool")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInk:width:"), objref.IDOf(ink), width)
+	return inkingToolAdopt(_id)
 }
 
 // The type of ink, eg. pen, pencil...
-//
-// InkType calls the underlying InkType.
-func (x *InkingTool) InkType() string {
-	_r := x.inner.InkType()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *InkingTool) InkType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inkType"))
+	return obj.Wrap(_r)
 }
 
-// Color calls the underlying Color.
-func (x *InkingTool) Color() *appkit.NSColor {
-	return x.inner.Color()
+func (x *InkingTool) Color() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+	return obj.Wrap(_r)
 }
 
 // The base width of the ink.
-//
-// Width calls the underlying Width.
 func (x *InkingTool) Width() float64 {
-	return x.inner.Width()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("width"))
+	return _r
 }
 
 // The base angle of the ink.
-//
-// Azimuth calls the underlying Azimuth.
 func (x *InkingTool) Azimuth() float64 {
-	return x.inner.Azimuth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("azimuth"))
+	return _r
 }
 
 // The ink that this tool will create strokes with.
-//
-// Ink calls the underlying Ink.
 func (x *InkingTool) Ink() *Ink {
-	_r := x.inner.Ink()
-	if _r == nil {
-		return nil
-	}
-	return &Ink{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ink"))
+	return InkFromID(_r)
 }
 
 // The PencilKit version required to use this inking tool.
-//
-// RequiredContentVersion calls the underlying RequiredContentVersion.
-func (x *InkingTool) RequiredContentVersion() PKContentVersion {
-	return PKContentVersion(x.inner.RequiredContentVersion())
+func (x *InkingTool) RequiredContentVersion() ContentVersion {
+	_r := objc.Send[ContentVersion](objref.IDOf(x), objc.RegisterName("requiredContentVersion"))
+	return _r
 }
-
-func (x *InkingTool) asTool() *raw.PKTool { return &x.inner.PKTool }
 
 // InkingToolable is the interface implemented by [InkingTool], for mocking and DI.
 type InkingToolable interface {
-	Unwrap() *raw.PKInkingTool
-	InkType() string
-	Color() *appkit.NSColor
+	obj.Object
+	InkType() obj.Object
+	Color() obj.Object
 	Width() float64
 	Azimuth() float64
 	Ink() *Ink
-	RequiredContentVersion() PKContentVersion
+	RequiredContentVersion() ContentVersion
 }
 
 var _ InkingToolable = (*InkingTool)(nil)

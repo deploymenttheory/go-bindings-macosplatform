@@ -5,54 +5,78 @@
 package fileprovider
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fileprovider"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// FileProviderKnownFolderLocation wraps [raw.NSFileProviderKnownFolderLocation] with a fluent Go API.
+// FileProviderKnownFolderLocation is an idiomatic wrapper over the Objective-C class NSFileProviderKnownFolderLocation.
 type FileProviderKnownFolderLocation struct {
-	inner *raw.NSFileProviderKnownFolderLocation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFileProviderKnownFolderLocation].
-func (x *FileProviderKnownFolderLocation) Unwrap() *raw.NSFileProviderKnownFolderLocation {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileProviderKnownFolderLocation) ID() objc.ID { return x.inner.Ptr() }
-
-// FileProviderKnownFolderLocationFromID adopts an existing object pointer as a FileProviderKnownFolderLocation (nil for 0).
+// FileProviderKnownFolderLocationFromID adopts an existing Objective-C object as a FileProviderKnownFolderLocation
+// (nil for 0), retaining it and registering a release finalizer.
 func FileProviderKnownFolderLocationFromID(id objc.ID) *FileProviderKnownFolderLocation {
 	if id == 0 {
 		return nil
 	}
-	return &FileProviderKnownFolderLocation{inner: raw.NSFileProviderKnownFolderLocationFromID(id)}
+	x := &FileProviderKnownFolderLocation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// fileProviderKnownFolderLocationAdopt wraps an Objective-C object that this code just created as a
+// FileProviderKnownFolderLocation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileProviderKnownFolderLocationAdopt(id objc.ID) *FileProviderKnownFolderLocation {
+	if id == 0 {
+		return nil
+	}
+	x := &FileProviderKnownFolderLocation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FileProviderKnownFolderLocation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileProviderKnownFolderLocation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileProviderKnownFolderLocation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize a location with the filename of the folder in a specified parent. When replicating a known folder the system will reuse a folder located at the specified filename within the parent if one exists, or create a new item at this location if none exists yet.
 //
-// NewFileProviderKnownFolderLocationWithParentItemIdentifierFilename creates a new [FileProviderKnownFolderLocation].
-func NewFileProviderKnownFolderLocationWithParentItemIdentifierFilename(parentItemIdentifier *foundation.NSString, filename string) *FileProviderKnownFolderLocation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileProviderKnownFolderLocation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParentItemIdentifier:filename:"), parentItemIdentifier.Ptr(), foundation.NSStringStringWithUTF8String(filename).Ptr())
-	return &FileProviderKnownFolderLocation{inner: raw.NSFileProviderKnownFolderLocationFromID(_id)}
+// NewFileProviderKnownFolderLocationWithParentItemIdentifierFilename creates a new FileProviderKnownFolderLocation.
+func NewFileProviderKnownFolderLocationWithParentItemIdentifierFilename(parentItemIdentifier obj.Object, filename string) *FileProviderKnownFolderLocation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileProviderKnownFolderLocation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParentItemIdentifier:filename:"), objref.IDOf(parentItemIdentifier), purego.NSString(filename))
+	return fileProviderKnownFolderLocationAdopt(_id)
 }
 
 // Initialize a location with the item identifier of a folder that already exists on the server. If the known folder already exists on the server, the provider can specify the exact identifier of the item that needs to be used to back the known folder.
 //
-// NewFileProviderKnownFolderLocationWithExistingItemIdentifier creates a new [FileProviderKnownFolderLocation].
-func NewFileProviderKnownFolderLocationWithExistingItemIdentifier(existingItemIdentifier *foundation.NSString) *FileProviderKnownFolderLocation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileProviderKnownFolderLocation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExistingItemIdentifier:"), existingItemIdentifier.Ptr())
-	return &FileProviderKnownFolderLocation{inner: raw.NSFileProviderKnownFolderLocationFromID(_id)}
+// NewFileProviderKnownFolderLocationWithExistingItemIdentifier creates a new FileProviderKnownFolderLocation.
+func NewFileProviderKnownFolderLocationWithExistingItemIdentifier(existingItemIdentifier obj.Object) *FileProviderKnownFolderLocation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileProviderKnownFolderLocation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExistingItemIdentifier:"), objref.IDOf(existingItemIdentifier))
+	return fileProviderKnownFolderLocationAdopt(_id)
 }
 
 // FileProviderKnownFolderLocationable is the interface implemented by [FileProviderKnownFolderLocation], for mocking and DI.
 type FileProviderKnownFolderLocationable interface {
-	Unwrap() *raw.NSFileProviderKnownFolderLocation
+	obj.Object
 }
 
 var _ FileProviderKnownFolderLocationable = (*FileProviderKnownFolderLocation)(nil)

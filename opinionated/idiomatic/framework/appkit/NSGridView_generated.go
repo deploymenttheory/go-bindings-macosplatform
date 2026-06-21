@@ -5,754 +5,569 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A container that aligns views in a flexible grid of rows and columns.
 //
-// GridView wraps [raw.NSGridView] with a fluent Go API.
+// GridView is an idiomatic wrapper over the Objective-C class NSGridView.
 type GridView struct {
-	inner *raw.NSGridView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSGridView].
-func (x *GridView) Unwrap() *raw.NSGridView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GridView) ID() objc.ID { return x.inner.Ptr() }
-
-// GridViewFromID adopts an existing object pointer as a GridView (nil for 0).
+// GridViewFromID adopts an existing Objective-C object as a GridView
+// (nil for 0), retaining it and registering a release finalizer.
 func GridViewFromID(id objc.ID) *GridView {
 	if id == 0 {
 		return nil
 	}
-	return &GridView{inner: raw.NSGridViewFromID(id)}
+	x := &GridView{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a newly allocated grid view object with the specified frame rectangle.
-//
-// NewGridViewWithFrame creates a new [GridView].
-func NewGridViewWithFrame(frameRect corefoundation.CGRect) *GridView {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSGridView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frameRect)
-	return &GridView{inner: raw.NSGridViewFromID(_id)}
+// gridViewAdopt wraps an Objective-C object that this code just created as a
+// GridView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func gridViewAdopt(id objc.ID) *GridView {
+	if id == 0 {
+		return nil
+	}
+	x := &GridView{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GridView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GridView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GridView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a newly allocated grid view object from the coder.
 //
-// NewGridViewWithCoder creates a new [GridView].
-func NewGridViewWithCoder(coder *foundation.NSCoder) *GridView {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSGridView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &GridView{inner: raw.NSGridViewFromID(_id)}
+// NewGridViewWithCoder creates a new GridView.
+func NewGridViewWithCoder(coder obj.Object) *GridView {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSGridView")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return gridViewAdopt(_id)
 }
 
 // The placement of the cell within the grid column.
 //
-// WithXPlacement sets the xPlacement property and returns the receiver for chaining.
-func (x *GridView) WithXPlacement(xPlacement NSGridCellPlacement) *GridView {
-	x.inner.SetXPlacement(raw.NSGridCellPlacement(xPlacement))
+// WithXPlacement sets xPlacement and returns the receiver so calls can be chained.
+func (x *GridView) WithXPlacement(xPlacement GridCellPlacement) *GridView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXPlacement:"), xPlacement)
 	return x
 }
 
 // The placement of the cell within the grid row.
 //
-// WithYPlacement sets the yPlacement property and returns the receiver for chaining.
-func (x *GridView) WithYPlacement(yPlacement NSGridCellPlacement) *GridView {
-	x.inner.SetYPlacement(raw.NSGridCellPlacement(yPlacement))
+// WithYPlacement sets yPlacement and returns the receiver so calls can be chained.
+func (x *GridView) WithYPlacement(yPlacement GridCellPlacement) *GridView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYPlacement:"), yPlacement)
 	return x
 }
 
 // The row alignment for the grid view.
 //
-// WithRowAlignment sets the rowAlignment property and returns the receiver for chaining.
-func (x *GridView) WithRowAlignment(rowAlignment NSGridRowAlignment) *GridView {
-	x.inner.SetRowAlignment(raw.NSGridRowAlignment(rowAlignment))
+// WithRowAlignment sets rowAlignment and returns the receiver so calls can be chained.
+func (x *GridView) WithRowAlignment(rowAlignment GridRowAlignment) *GridView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowAlignment:"), rowAlignment)
 	return x
 }
 
 // The row spacing for the grid view.
 //
-// WithRowSpacing sets the rowSpacing property and returns the receiver for chaining.
+// WithRowSpacing sets rowSpacing and returns the receiver so calls can be chained.
 func (x *GridView) WithRowSpacing(rowSpacing float64) *GridView {
-	x.inner.SetRowSpacing(rowSpacing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowSpacing:"), rowSpacing)
 	return x
 }
 
 // The column spacing for the grid view.
 //
-// WithColumnSpacing sets the columnSpacing property and returns the receiver for chaining.
+// WithColumnSpacing sets columnSpacing and returns the receiver so calls can be chained.
 func (x *GridView) WithColumnSpacing(columnSpacing float64) *GridView {
-	x.inner.SetColumnSpacing(columnSpacing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColumnSpacing:"), columnSpacing)
 	return x
 }
 
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
+// WithSubviews sets the collection and returns the receiver so calls can be chained.
 func (x *GridView) WithSubviews(items ...ViewProvider) *GridView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetSubviews(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *GridView) WithHidden(hidden bool) *GridView {
-	x.inner.NSView.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+// WithPostsFrameChangedNotifications sets postsFrameChangedNotifications and returns the receiver so calls can be chained.
 func (x *GridView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *GridView {
-	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+// WithAutoresizesSubviews sets autoresizesSubviews and returns the receiver so calls can be chained.
 func (x *GridView) WithAutoresizesSubviews(autoresizesSubviews bool) *GridView {
-	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *GridView) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *GridView {
-	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
+// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+func (x *GridView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *GridView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
-func (x *GridView) WithFrame(frame corefoundation.CGRect) *GridView {
-	x.inner.NSView.SetFrame(frame)
-	return x
-}
-
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+// WithFrameRotation sets frameRotation and returns the receiver so calls can be chained.
 func (x *GridView) WithFrameRotation(frameRotation float64) *GridView {
-	x.inner.NSView.SetFrameRotation(frameRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+// WithFrameCenterRotation sets frameCenterRotation and returns the receiver so calls can be chained.
 func (x *GridView) WithFrameCenterRotation(frameCenterRotation float64) *GridView {
-	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+// WithBoundsRotation sets boundsRotation and returns the receiver so calls can be chained.
 func (x *GridView) WithBoundsRotation(boundsRotation float64) *GridView {
-	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *GridView) WithBounds(bounds corefoundation.CGRect) *GridView {
-	x.inner.NSView.SetBounds(bounds)
-	return x
-}
-
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+// WithCanDrawConcurrently sets canDrawConcurrently and returns the receiver so calls can be chained.
 func (x *GridView) WithCanDrawConcurrently(canDrawConcurrently bool) *GridView {
-	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
 // A Boolean value that determines whether the view needs to be redrawn before being displayed.
 //
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+// WithNeedsDisplay sets needsDisplay and returns the receiver so calls can be chained.
 func (x *GridView) WithNeedsDisplay(needsDisplay bool) *GridView {
-	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+// WithAcceptsTouchEvents sets acceptsTouchEvents and returns the receiver so calls can be chained.
 func (x *GridView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *GridView {
-	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+// WithWantsRestingTouches sets wantsRestingTouches and returns the receiver so calls can be chained.
 func (x *GridView) WithWantsRestingTouches(wantsRestingTouches bool) *GridView {
-	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *GridView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *GridView {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
+// WithLayerContentsRedrawPolicy sets layerContentsRedrawPolicy and returns the receiver so calls can be chained.
+func (x *GridView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *GridView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *GridView) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *GridView {
-	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
+// WithLayerContentsPlacement sets layerContentsPlacement and returns the receiver so calls can be chained.
+func (x *GridView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *GridView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+// WithWantsLayer sets wantsLayer and returns the receiver so calls can be chained.
 func (x *GridView) WithWantsLayer(wantsLayer bool) *GridView {
-	x.inner.NSView.SetWantsLayer(wantsLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *GridView) WithLayer(layer *quartzcore.CALayer) *GridView {
-	x.inner.NSView.SetLayer(layer)
+// WithLayer sets layer and returns the receiver so calls can be chained.
+func (x *GridView) WithLayer(layer obj.Object) *GridView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+// WithCanDrawSubviewsIntoLayer sets canDrawSubviewsIntoLayer and returns the receiver so calls can be chained.
 func (x *GridView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *GridView {
-	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+// WithNeedsLayout sets needsLayout and returns the receiver so calls can be chained.
 func (x *GridView) WithNeedsLayout(needsLayout bool) *GridView {
-	x.inner.NSView.SetNeedsLayout(needsLayout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
 func (x *GridView) WithAlphaValue(alphaValue float64) *GridView {
-	x.inner.NSView.SetAlphaValue(alphaValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+// WithLayerUsesCoreImageFilters sets layerUsesCoreImageFilters and returns the receiver so calls can be chained.
 func (x *GridView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *GridView {
-	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *GridView) WithBackgroundFilters(items ...*coreimage.CIFilter) *GridView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetBackgroundFilters(_arr)
+// WithBackgroundFilters sets the collection and returns the receiver so calls can be chained.
+func (x *GridView) WithBackgroundFilters(items ...obj.Object) *GridView {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *GridView) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *GridView {
-	x.inner.NSView.SetCompositingFilter(compositingFilter)
+// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+func (x *GridView) WithCompositingFilter(compositingFilter obj.Object) *GridView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *GridView) WithContentFilters(items ...*coreimage.CIFilter) *GridView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetContentFilters(_arr)
+// WithContentFilters sets the collection and returns the receiver so calls can be chained.
+func (x *GridView) WithContentFilters(items ...obj.Object) *GridView {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets the shadow property and returns the receiver for chaining.
+// WithShadow sets shadow and returns the receiver so calls can be chained.
 func (x *GridView) WithShadow(shadow *Shadow) *GridView {
-	x.inner.NSView.SetShadow(shadow.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+// WithClipsToBounds sets clipsToBounds and returns the receiver so calls can be chained.
 func (x *GridView) WithClipsToBounds(clipsToBounds bool) *GridView {
-	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+// WithPostsBoundsChangedNotifications sets postsBoundsChangedNotifications and returns the receiver so calls can be chained.
 func (x *GridView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *GridView {
-	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip sets toolTip and returns the receiver so calls can be chained.
 func (x *GridView) WithToolTip(toolTip string) *GridView {
-	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *GridView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *GridView {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+func (x *GridView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *GridView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
-func (x *GridView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *GridView {
-	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
-	return x
-}
-
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+// WithNextKeyView sets nextKeyView and returns the receiver so calls can be chained.
 func (x *GridView) WithNextKeyView(nextKeyView ViewProvider) *GridView {
-	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *GridView) WithFocusRingType(focusRingType NSFocusRingType) *GridView {
-	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+func (x *GridView) WithFocusRingType(focusRingType FocusRingType) *GridView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+// WithGestureRecognizers sets the collection and returns the receiver so calls can be chained.
 func (x *GridView) WithGestureRecognizers(items ...GestureRecognizerProvider) *GridView {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetGestureRecognizers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *GridView) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *GridView {
-	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
-	return x
-}
-
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
-func (x *GridView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *GridView {
-	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+// WithAllowedTouchTypes sets allowedTouchTypes and returns the receiver so calls can be chained.
+func (x *GridView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *GridView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
 // When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+// WithPrefersCompactControlSizeMetrics sets prefersCompactControlSizeMetrics and returns the receiver so calls can be chained.
 func (x *GridView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GridView {
-	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+// WithWritingToolsCoordinator sets writingToolsCoordinator and returns the receiver so calls can be chained.
 func (x *GridView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GridView {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+// WithNeedsUpdateConstraints sets needsUpdateConstraints and returns the receiver so calls can be chained.
 func (x *GridView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *GridView {
-	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+// WithTranslatesAutoresizingMaskIntoConstraints sets translatesAutoresizingMaskIntoConstraints and returns the receiver so calls can be chained.
 func (x *GridView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *GridView {
-	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithHorizontalContentSizeConstraintActive sets horizontalContentSizeConstraintActive and returns the receiver so calls can be chained.
 func (x *GridView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *GridView {
-	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithVerticalContentSizeConstraintActive sets verticalContentSizeConstraintActive and returns the receiver so calls can be chained.
 func (x *GridView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *GridView {
-	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+// WithWantsBestResolutionOpenGLSurface sets wantsBestResolutionOpenGLSurface and returns the receiver so calls can be chained.
 func (x *GridView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *GridView {
-	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets wantsExtendedDynamicRangeOpenGLSurface and returns the receiver so calls can be chained.
 func (x *GridView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *GridView {
-	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+// WithPressureConfiguration sets pressureConfiguration and returns the receiver so calls can be chained.
 func (x *GridView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GridView {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
 // The next responder after this one, or nil if it has none.
 //
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
 func (x *GridView) WithNextResponder(nextResponder ResponderProvider) *GridView {
-	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
 // Returns the responder’s menu.
 //
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu sets menu and returns the receiver so calls can be chained.
 func (x *GridView) WithMenu(menu *Menu) *GridView {
-	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
 // An object encapsulating a user activity supported by this responder.
 //
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *GridView) WithUserActivity(userActivity *foundation.NSUserActivity) *GridView {
-	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+func (x *GridView) WithUserActivity(userActivity obj.Object) *GridView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
 // The NSTouchBar object associated with the responder.
 //
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
 func (x *GridView) WithTouchBar(touchBar *TouchBar) *GridView {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
 // Returns the grid row object at the specified index.
-//
-// RowAtIndex calls the underlying RowAtIndex.
 func (x *GridView) RowAtIndex(index int) *GridRow {
-	_r := x.inner.RowAtIndex(index)
-	if _r == nil {
-		return nil
-	}
-	return &GridRow{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rowAtIndex:"), index)
+	return GridRowFromID(_r)
 }
 
 // Returns the index of the specified grid row.
-//
-// IndexOfRow calls the underlying IndexOfRow.
-func (x *GridView) IndexOfRow(row *raw.NSGridRow) int {
-	return x.inner.IndexOfRow(row)
+func (x *GridView) IndexOfRow(row *GridRow) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfRow:"), objref.IDOf(row))
+	return _r
 }
 
 // Returns the grid column object at the specified index.
-//
-// ColumnAtIndex calls the underlying ColumnAtIndex.
 func (x *GridView) ColumnAtIndex(index int) *GridColumn {
-	_r := x.inner.ColumnAtIndex(index)
-	if _r == nil {
-		return nil
-	}
-	return &GridColumn{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("columnAtIndex:"), index)
+	return GridColumnFromID(_r)
 }
 
 // Returns the index of the specified grid column.
-//
-// IndexOfColumn calls the underlying IndexOfColumn.
-func (x *GridView) IndexOfColumn(column *raw.NSGridColumn) int {
-	return x.inner.IndexOfColumn(column)
+func (x *GridView) IndexOfColumn(column *GridColumn) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfColumn:"), objref.IDOf(column))
+	return _r
 }
 
 // Returns the grid cell object at the specified column and row index.
-//
-// CellAtColumnIndexRowIndex calls the underlying CellAtColumnIndexRowIndex.
 func (x *GridView) CellAtColumnIndexRowIndex(columnIndex int, rowIndex int) *GridCell {
-	_r := x.inner.CellAtColumnIndexRowIndex(columnIndex, rowIndex)
-	if _r == nil {
-		return nil
-	}
-	return &GridCell{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cellAtColumnIndex:rowIndex:"), columnIndex, rowIndex)
+	return GridCellFromID(_r)
 }
 
 // Returns the grid cell object that contains the given view or one of its ancestors.
-//
-// CellForView calls the underlying CellForView.
-func (x *GridView) CellForView(view *raw.NSView) *GridCell {
-	_r := x.inner.CellForView(view)
-	if _r == nil {
-		return nil
-	}
-	return &GridCell{inner: _r}
+func (x *GridView) CellForView(view *View) *GridCell {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cellForView:"), objref.IDOf(view))
+	return GridCellFromID(_r)
 }
 
 // Adds an array of views to a new row.
-//
-// AddRowWithViews calls the underlying AddRowWithViews.
-func (x *GridView) AddRowWithViews(views ...ViewProvider) *GridRow {
-	_ptrs := make([]objc.ID, len(views))
-	for _i, _v := range views {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.NSView]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r := x.inner.AddRowWithViews(_arg0)
-	if _r == nil {
-		return nil
-	}
-	return &GridRow{inner: _r}
+func (x *GridView) AddRowWithViews(views []*View) *GridRow {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRowWithViews:"), purego.SliceToNSArray(views, func(_v *View) objc.ID { return objref.IDOf(_v) }))
+	return GridRowFromID(_r)
 }
 
 // Inserts the array of view objects into the grid view at the index.
-//
-// InsertRowAtIndexWithViews calls the underlying InsertRowAtIndexWithViews.
-func (x *GridView) InsertRowAtIndexWithViews(index int, views ...ViewProvider) *GridRow {
-	_ptrs := make([]objc.ID, len(views))
-	for _i, _v := range views {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	var _arg1 *foundation.NSArray[*raw.NSView]
-	if len(_ptrs) > 0 {
-		_arg1 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg1 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r := x.inner.InsertRowAtIndexWithViews(index, _arg1)
-	if _r == nil {
-		return nil
-	}
-	return &GridRow{inner: _r}
+func (x *GridView) InsertRowAtIndexWithViews(index int, views []*View) *GridRow {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertRowAtIndex:withViews:"), index, purego.SliceToNSArray(views, func(_v *View) objc.ID { return objref.IDOf(_v) }))
+	return GridRowFromID(_r)
 }
 
 // Moves the specified row to the new row location.
-//
-// MoveRowAtIndexToIndex calls the underlying MoveRowAtIndexToIndex.
 func (x *GridView) MoveRowAtIndexToIndex(fromIndex int, toIndex int) {
-	x.inner.MoveRowAtIndexToIndex(fromIndex, toIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveRowAtIndex:toIndex:"), fromIndex, toIndex)
 }
 
 // Removes the row from the grid view at the index.
-//
-// RemoveRowAtIndex calls the underlying RemoveRowAtIndex.
 func (x *GridView) RemoveRowAtIndex(index int) {
-	x.inner.RemoveRowAtIndex(index)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRowAtIndex:"), index)
 }
 
 // Adds a new column containing the array of views.
-//
-// AddColumnWithViews calls the underlying AddColumnWithViews.
-func (x *GridView) AddColumnWithViews(views ...ViewProvider) *GridColumn {
-	_ptrs := make([]objc.ID, len(views))
-	for _i, _v := range views {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.NSView]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r := x.inner.AddColumnWithViews(_arg0)
-	if _r == nil {
-		return nil
-	}
-	return &GridColumn{inner: _r}
+func (x *GridView) AddColumnWithViews(views []*View) *GridColumn {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addColumnWithViews:"), purego.SliceToNSArray(views, func(_v *View) objc.ID { return objref.IDOf(_v) }))
+	return GridColumnFromID(_r)
 }
 
 // Inserts the array of view objects at the specified index.
-//
-// InsertColumnAtIndexWithViews calls the underlying InsertColumnAtIndexWithViews.
-func (x *GridView) InsertColumnAtIndexWithViews(index int, views ...ViewProvider) *GridColumn {
-	_ptrs := make([]objc.ID, len(views))
-	for _i, _v := range views {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	var _arg1 *foundation.NSArray[*raw.NSView]
-	if len(_ptrs) > 0 {
-		_arg1 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg1 = foundation.NSArrayFromID[*raw.NSView](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r := x.inner.InsertColumnAtIndexWithViews(index, _arg1)
-	if _r == nil {
-		return nil
-	}
-	return &GridColumn{inner: _r}
+func (x *GridView) InsertColumnAtIndexWithViews(index int, views []*View) *GridColumn {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertColumnAtIndex:withViews:"), index, purego.SliceToNSArray(views, func(_v *View) objc.ID { return objref.IDOf(_v) }))
+	return GridColumnFromID(_r)
 }
 
 // Moves the specified column to a new column location.
-//
-// MoveColumnAtIndexToIndex calls the underlying MoveColumnAtIndexToIndex.
 func (x *GridView) MoveColumnAtIndexToIndex(fromIndex int, toIndex int) {
-	x.inner.MoveColumnAtIndexToIndex(fromIndex, toIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveColumnAtIndex:toIndex:"), fromIndex, toIndex)
 }
 
 // Removes the column from the grid view at the specified index.
-//
-// RemoveColumnAtIndex calls the underlying RemoveColumnAtIndex.
 func (x *GridView) RemoveColumnAtIndex(index int) {
-	x.inner.RemoveColumnAtIndex(index)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeColumnAtIndex:"), index)
 }
 
-// Expands the cell at the top-leading corner of the horizontal and vertical range to cover the entire area.
-//
-// MergeCellsInHorizontalRangeVerticalRange calls the underlying MergeCellsInHorizontalRangeVerticalRange.
-func (x *GridView) MergeCellsInHorizontalRangeVerticalRange(hRange foundation.NSRange, vRange foundation.NSRange) {
-	x.inner.MergeCellsInHorizontalRangeVerticalRange(hRange, vRange)
-}
-
-// NumberOfRows calls the underlying NumberOfRows.
 func (x *GridView) NumberOfRows() int {
-	return x.inner.NumberOfRows()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfRows"))
+	return _r
 }
 
-// NumberOfColumns calls the underlying NumberOfColumns.
 func (x *GridView) NumberOfColumns() int {
-	return x.inner.NumberOfColumns()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfColumns"))
+	return _r
 }
 
-// XPlacement calls the underlying XPlacement.
-func (x *GridView) XPlacement() NSGridCellPlacement {
-	return NSGridCellPlacement(x.inner.XPlacement())
+func (x *GridView) XPlacement() GridCellPlacement {
+	_r := objc.Send[GridCellPlacement](objref.IDOf(x), objc.RegisterName("xPlacement"))
+	return _r
 }
 
-// SetXPlacement calls the underlying SetXPlacement.
-func (x *GridView) SetXPlacement(xPlacement NSGridCellPlacement) {
-	x.inner.SetXPlacement(raw.NSGridCellPlacement(xPlacement))
+func (x *GridView) SetXPlacement(xPlacement GridCellPlacement) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXPlacement:"), xPlacement)
 }
 
-// YPlacement calls the underlying YPlacement.
-func (x *GridView) YPlacement() NSGridCellPlacement {
-	return NSGridCellPlacement(x.inner.YPlacement())
+func (x *GridView) YPlacement() GridCellPlacement {
+	_r := objc.Send[GridCellPlacement](objref.IDOf(x), objc.RegisterName("yPlacement"))
+	return _r
 }
 
-// SetYPlacement calls the underlying SetYPlacement.
-func (x *GridView) SetYPlacement(yPlacement NSGridCellPlacement) {
-	x.inner.SetYPlacement(raw.NSGridCellPlacement(yPlacement))
+func (x *GridView) SetYPlacement(yPlacement GridCellPlacement) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYPlacement:"), yPlacement)
 }
 
-// RowAlignment calls the underlying RowAlignment.
-func (x *GridView) RowAlignment() NSGridRowAlignment {
-	return NSGridRowAlignment(x.inner.RowAlignment())
+func (x *GridView) RowAlignment() GridRowAlignment {
+	_r := objc.Send[GridRowAlignment](objref.IDOf(x), objc.RegisterName("rowAlignment"))
+	return _r
 }
 
-// SetRowAlignment calls the underlying SetRowAlignment.
-func (x *GridView) SetRowAlignment(rowAlignment NSGridRowAlignment) {
-	x.inner.SetRowAlignment(raw.NSGridRowAlignment(rowAlignment))
+func (x *GridView) SetRowAlignment(rowAlignment GridRowAlignment) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowAlignment:"), rowAlignment)
 }
 
-// RowSpacing calls the underlying RowSpacing.
 func (x *GridView) RowSpacing() float64 {
-	return x.inner.RowSpacing()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rowSpacing"))
+	return _r
 }
 
-// SetRowSpacing calls the underlying SetRowSpacing.
 func (x *GridView) SetRowSpacing(rowSpacing float64) {
-	x.inner.SetRowSpacing(rowSpacing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowSpacing:"), rowSpacing)
 }
 
-// ColumnSpacing calls the underlying ColumnSpacing.
 func (x *GridView) ColumnSpacing() float64 {
-	return x.inner.ColumnSpacing()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("columnSpacing"))
+	return _r
 }
 
-// SetColumnSpacing calls the underlying SetColumnSpacing.
 func (x *GridView) SetColumnSpacing(columnSpacing float64) {
-	x.inner.SetColumnSpacing(columnSpacing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColumnSpacing:"), columnSpacing)
 }
-
-func (x *GridView) asView() *raw.NSView { return &x.inner.NSView }
-
-func (x *GridView) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
 
 // GridViewable is the interface implemented by [GridView], for mocking and DI.
 type GridViewable interface {
-	Unwrap() *raw.NSGridView
-	WithXPlacement(xPlacement NSGridCellPlacement) *GridView
-	WithYPlacement(yPlacement NSGridCellPlacement) *GridView
-	WithRowAlignment(rowAlignment NSGridRowAlignment) *GridView
+	obj.Object
+	WithXPlacement(xPlacement GridCellPlacement) *GridView
+	WithYPlacement(yPlacement GridCellPlacement) *GridView
+	WithRowAlignment(rowAlignment GridRowAlignment) *GridView
 	WithRowSpacing(rowSpacing float64) *GridView
 	WithColumnSpacing(columnSpacing float64) *GridView
 	WithSubviews(items ...ViewProvider) *GridView
 	WithHidden(hidden bool) *GridView
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *GridView
 	WithAutoresizesSubviews(autoresizesSubviews bool) *GridView
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *GridView
-	WithFrame(frame corefoundation.CGRect) *GridView
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *GridView
 	WithFrameRotation(frameRotation float64) *GridView
 	WithFrameCenterRotation(frameCenterRotation float64) *GridView
 	WithBoundsRotation(boundsRotation float64) *GridView
-	WithBounds(bounds corefoundation.CGRect) *GridView
 	WithCanDrawConcurrently(canDrawConcurrently bool) *GridView
 	WithNeedsDisplay(needsDisplay bool) *GridView
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *GridView
 	WithWantsRestingTouches(wantsRestingTouches bool) *GridView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *GridView
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *GridView
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *GridView
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *GridView
 	WithWantsLayer(wantsLayer bool) *GridView
-	WithLayer(layer *quartzcore.CALayer) *GridView
+	WithLayer(layer obj.Object) *GridView
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *GridView
 	WithNeedsLayout(needsLayout bool) *GridView
 	WithAlphaValue(alphaValue float64) *GridView
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *GridView
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *GridView
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *GridView
-	WithContentFilters(items ...*coreimage.CIFilter) *GridView
+	WithBackgroundFilters(items ...obj.Object) *GridView
+	WithCompositingFilter(compositingFilter obj.Object) *GridView
+	WithContentFilters(items ...obj.Object) *GridView
 	WithShadow(shadow *Shadow) *GridView
 	WithClipsToBounds(clipsToBounds bool) *GridView
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *GridView
 	WithToolTip(toolTip string) *GridView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *GridView
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *GridView
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *GridView
 	WithNextKeyView(nextKeyView ViewProvider) *GridView
-	WithFocusRingType(focusRingType NSFocusRingType) *GridView
+	WithFocusRingType(focusRingType FocusRingType) *GridView
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *GridView
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *GridView
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *GridView
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *GridView
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *GridView
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *GridView
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *GridView
@@ -764,31 +579,30 @@ type GridViewable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *GridView
 	WithNextResponder(nextResponder ResponderProvider) *GridView
 	WithMenu(menu *Menu) *GridView
-	WithUserActivity(userActivity *foundation.NSUserActivity) *GridView
+	WithUserActivity(userActivity obj.Object) *GridView
 	WithTouchBar(touchBar *TouchBar) *GridView
 	RowAtIndex(index int) *GridRow
-	IndexOfRow(row *raw.NSGridRow) int
+	IndexOfRow(row *GridRow) int
 	ColumnAtIndex(index int) *GridColumn
-	IndexOfColumn(column *raw.NSGridColumn) int
+	IndexOfColumn(column *GridColumn) int
 	CellAtColumnIndexRowIndex(columnIndex int, rowIndex int) *GridCell
-	CellForView(view *raw.NSView) *GridCell
-	AddRowWithViews(views ...ViewProvider) *GridRow
-	InsertRowAtIndexWithViews(index int, views ...ViewProvider) *GridRow
+	CellForView(view *View) *GridCell
+	AddRowWithViews(views []*View) *GridRow
+	InsertRowAtIndexWithViews(index int, views []*View) *GridRow
 	MoveRowAtIndexToIndex(fromIndex int, toIndex int)
 	RemoveRowAtIndex(index int)
-	AddColumnWithViews(views ...ViewProvider) *GridColumn
-	InsertColumnAtIndexWithViews(index int, views ...ViewProvider) *GridColumn
+	AddColumnWithViews(views []*View) *GridColumn
+	InsertColumnAtIndexWithViews(index int, views []*View) *GridColumn
 	MoveColumnAtIndexToIndex(fromIndex int, toIndex int)
 	RemoveColumnAtIndex(index int)
-	MergeCellsInHorizontalRangeVerticalRange(hRange foundation.NSRange, vRange foundation.NSRange)
 	NumberOfRows() int
 	NumberOfColumns() int
-	XPlacement() NSGridCellPlacement
-	SetXPlacement(xPlacement NSGridCellPlacement)
-	YPlacement() NSGridCellPlacement
-	SetYPlacement(yPlacement NSGridCellPlacement)
-	RowAlignment() NSGridRowAlignment
-	SetRowAlignment(rowAlignment NSGridRowAlignment)
+	XPlacement() GridCellPlacement
+	SetXPlacement(xPlacement GridCellPlacement)
+	YPlacement() GridCellPlacement
+	SetYPlacement(yPlacement GridCellPlacement)
+	RowAlignment() GridRowAlignment
+	SetRowAlignment(rowAlignment GridRowAlignment)
 	RowSpacing() float64
 	SetRowSpacing(rowSpacing float64)
 	ColumnSpacing() float64

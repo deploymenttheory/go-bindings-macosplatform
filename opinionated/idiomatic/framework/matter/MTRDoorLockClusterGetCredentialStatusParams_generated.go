@@ -5,111 +5,126 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDoorLockClusterGetCredentialStatusParams wraps [raw.MTRDoorLockClusterGetCredentialStatusParams] with a fluent Go API.
+// MTRDoorLockClusterGetCredentialStatusParams is an idiomatic wrapper over the Objective-C class MTRDoorLockClusterGetCredentialStatusParams.
 type MTRDoorLockClusterGetCredentialStatusParams struct {
-	inner *raw.MTRDoorLockClusterGetCredentialStatusParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDoorLockClusterGetCredentialStatusParams].
-func (x *MTRDoorLockClusterGetCredentialStatusParams) Unwrap() *raw.MTRDoorLockClusterGetCredentialStatusParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDoorLockClusterGetCredentialStatusParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDoorLockClusterGetCredentialStatusParamsFromID adopts an existing object pointer as a MTRDoorLockClusterGetCredentialStatusParams (nil for 0).
+// MTRDoorLockClusterGetCredentialStatusParamsFromID adopts an existing Objective-C object as a MTRDoorLockClusterGetCredentialStatusParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDoorLockClusterGetCredentialStatusParamsFromID(id objc.ID) *MTRDoorLockClusterGetCredentialStatusParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDoorLockClusterGetCredentialStatusParams{inner: raw.MTRDoorLockClusterGetCredentialStatusParamsFromID(id)}
-}
-
-// NewMTRDoorLockClusterGetCredentialStatusParams creates a new [MTRDoorLockClusterGetCredentialStatusParams].
-func NewMTRDoorLockClusterGetCredentialStatusParams() *MTRDoorLockClusterGetCredentialStatusParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDoorLockClusterGetCredentialStatusParams")), objc.RegisterName("new"))
-	return &MTRDoorLockClusterGetCredentialStatusParams{inner: raw.MTRDoorLockClusterGetCredentialStatusParamsFromID(_id)}
-}
-
-// WithCredential sets the credential property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetCredentialStatusParams) WithCredential(credential MTRDoorLockClusterCredentialStructProvider) *MTRDoorLockClusterGetCredentialStatusParams {
-	x.inner.SetCredential(credential.asMTRDoorLockClusterCredentialStruct())
+	x := &MTRDoorLockClusterGetCredentialStatusParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetCredentialStatusParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterGetCredentialStatusParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
-	return x
-}
-
-// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterGetCredentialStatusParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDoorLockClusterGetCredentialStatusParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
-	return x
-}
-
-// Credential calls the underlying Credential.
-func (x *MTRDoorLockClusterGetCredentialStatusParams) Credential() *MTRDoorLockClusterCredentialStruct {
-	_r := x.inner.Credential()
-	if _r == nil {
+// mTRDoorLockClusterGetCredentialStatusParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRDoorLockClusterGetCredentialStatusParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDoorLockClusterGetCredentialStatusParamsAdopt(id objc.ID) *MTRDoorLockClusterGetCredentialStatusParams {
+	if id == 0 {
 		return nil
 	}
-	return &MTRDoorLockClusterCredentialStruct{inner: _r}
+	x := &MTRDoorLockClusterGetCredentialStatusParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetCredential calls the underlying SetCredential.
-func (x *MTRDoorLockClusterGetCredentialStatusParams) SetCredential(credential *raw.MTRDoorLockClusterCredentialStruct) {
-	x.inner.SetCredential(credential)
+// Description returns the object's -description text.
+func (x *MTRDoorLockClusterGetCredentialStatusParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDoorLockClusterGetCredentialStatusParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDoorLockClusterGetCredentialStatusParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRDoorLockClusterGetCredentialStatusParams creates a new MTRDoorLockClusterGetCredentialStatusParams.
+func NewMTRDoorLockClusterGetCredentialStatusParams() *MTRDoorLockClusterGetCredentialStatusParams {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterGetCredentialStatusParams")), objc.RegisterName("new"))
+	return mTRDoorLockClusterGetCredentialStatusParamsAdopt(_id)
+}
+
+// WithCredential sets credential and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetCredentialStatusParams) WithCredential(credential MTRDoorLockClusterCredentialStructProvider) *MTRDoorLockClusterGetCredentialStatusParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredential:"), objref.IDOf(credential))
+	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRDoorLockClusterGetCredentialStatusParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
-}
-
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRDoorLockClusterGetCredentialStatusParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetCredentialStatusParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterGetCredentialStatusParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRDoorLockClusterGetCredentialStatusParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterGetCredentialStatusParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterGetCredentialStatusParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return x
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRDoorLockClusterGetCredentialStatusParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRDoorLockClusterGetCredentialStatusParams) Credential() *MTRDoorLockClusterCredentialStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credential"))
+	return MTRDoorLockClusterCredentialStructFromID(_r)
+}
+
+func (x *MTRDoorLockClusterGetCredentialStatusParams) SetCredential(credential *MTRDoorLockClusterCredentialStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredential:"), objref.IDOf(credential))
+}
+
+// Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (x *MTRDoorLockClusterGetCredentialStatusParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRDoorLockClusterGetCredentialStatusParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+}
+
+// Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (x *MTRDoorLockClusterGetCredentialStatusParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRDoorLockClusterGetCredentialStatusParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRDoorLockClusterGetCredentialStatusParamsable is the interface implemented by [MTRDoorLockClusterGetCredentialStatusParams], for mocking and DI.
 type MTRDoorLockClusterGetCredentialStatusParamsable interface {
-	Unwrap() *raw.MTRDoorLockClusterGetCredentialStatusParams
+	obj.Object
 	WithCredential(credential MTRDoorLockClusterCredentialStructProvider) *MTRDoorLockClusterGetCredentialStatusParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRDoorLockClusterGetCredentialStatusParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRDoorLockClusterGetCredentialStatusParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDoorLockClusterGetCredentialStatusParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDoorLockClusterGetCredentialStatusParams
 	Credential() *MTRDoorLockClusterCredentialStruct
-	SetCredential(credential *raw.MTRDoorLockClusterCredentialStruct)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	SetCredential(credential *MTRDoorLockClusterCredentialStruct)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRDoorLockClusterGetCredentialStatusParamsable = (*MTRDoorLockClusterGetCredentialStatusParams)(nil)

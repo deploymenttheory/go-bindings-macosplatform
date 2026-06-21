@@ -5,70 +5,83 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains the contacts prescription data for one eye.
 //
-// ContactsLensSpecification wraps [raw.HKContactsLensSpecification] with a fluent Go API.
+// ContactsLensSpecification is an idiomatic wrapper over the Objective-C class HKContactsLensSpecification.
 type ContactsLensSpecification struct {
-	inner *raw.HKContactsLensSpecification
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKContactsLensSpecification].
-func (x *ContactsLensSpecification) Unwrap() *raw.HKContactsLensSpecification { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContactsLensSpecification) ID() objc.ID { return x.inner.Ptr() }
-
-// ContactsLensSpecificationFromID adopts an existing object pointer as a ContactsLensSpecification (nil for 0).
+// ContactsLensSpecificationFromID adopts an existing Objective-C object as a ContactsLensSpecification
+// (nil for 0), retaining it and registering a release finalizer.
 func ContactsLensSpecificationFromID(id objc.ID) *ContactsLensSpecification {
 	if id == 0 {
 		return nil
 	}
-	return &ContactsLensSpecification{inner: raw.HKContactsLensSpecificationFromID(id)}
+	x := &ContactsLensSpecification{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// contactsLensSpecificationAdopt wraps an Objective-C object that this code just created as a
+// ContactsLensSpecification (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contactsLensSpecificationAdopt(id objc.ID) *ContactsLensSpecification {
+	if id == 0 {
+		return nil
+	}
+	x := &ContactsLensSpecification{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ContactsLensSpecification) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ContactsLensSpecification) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ContactsLensSpecification) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new contact lens specification, containing the prescription data for one eye.
 //
-// NewContactsLensSpecificationWithSphereCylinderAxisAddPowerBaseCurveDiameter creates a new [ContactsLensSpecification].
-func NewContactsLensSpecificationWithSphereCylinderAxisAddPowerBaseCurveDiameter(sphere *raw.HKQuantity, cylinder *raw.HKQuantity, axis *raw.HKQuantity, addPower *raw.HKQuantity, baseCurve *raw.HKQuantity, diameter *raw.HKQuantity) *ContactsLensSpecification {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKContactsLensSpecification")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSphere:cylinder:axis:addPower:baseCurve:diameter:"), sphere.Ptr(), cylinder.Ptr(), axis.Ptr(), addPower.Ptr(), baseCurve.Ptr(), diameter.Ptr())
-	return &ContactsLensSpecification{inner: raw.HKContactsLensSpecificationFromID(_id)}
+// NewContactsLensSpecificationWithSphereCylinderAxisAddPowerBaseCurveDiameter creates a new ContactsLensSpecification.
+func NewContactsLensSpecificationWithSphereCylinderAxisAddPowerBaseCurveDiameter(sphere *Quantity, cylinder *Quantity, axis *Quantity, addPower *Quantity, baseCurve *Quantity, diameter *Quantity) *ContactsLensSpecification {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKContactsLensSpecification")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSphere:cylinder:axis:addPower:baseCurve:diameter:"), objref.IDOf(sphere), objref.IDOf(cylinder), objref.IDOf(axis), objref.IDOf(addPower), objref.IDOf(baseCurve), objref.IDOf(diameter))
+	return contactsLensSpecificationAdopt(_id)
 }
 
-// @property      baseCurve @abstract      The curvature of the back surface of the lens (measured in mm)
-//
-// BaseCurve calls the underlying BaseCurve.
+// The curvature of the back surface of the lens (measured in mm)
 func (x *ContactsLensSpecification) BaseCurve() *Quantity {
-	_r := x.inner.BaseCurve()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseCurve"))
+	return QuantityFromID(_r)
 }
 
-// @property      diameter @abstract      The width of the lens from edge to edge (measured in mm)
-//
-// Diameter calls the underlying Diameter.
+// The width of the lens from edge to edge (measured in mm)
 func (x *ContactsLensSpecification) Diameter() *Quantity {
-	_r := x.inner.Diameter()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
-}
-
-func (x *ContactsLensSpecification) asLensSpecification() *raw.HKLensSpecification {
-	return &x.inner.HKLensSpecification
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("diameter"))
+	return QuantityFromID(_r)
 }
 
 // ContactsLensSpecificationable is the interface implemented by [ContactsLensSpecification], for mocking and DI.
 type ContactsLensSpecificationable interface {
-	Unwrap() *raw.HKContactsLensSpecification
+	obj.Object
 	BaseCurve() *Quantity
 	Diameter() *Quantity
 }

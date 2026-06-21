@@ -5,74 +5,85 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A group of inputs with tracks that are mutually exclusive to each other for playback or processing.
 //
-// AssetWriterInputGroup wraps [raw.AVAssetWriterInputGroup] with a fluent Go API.
+// AssetWriterInputGroup is an idiomatic wrapper over the Objective-C class AVAssetWriterInputGroup.
 type AssetWriterInputGroup struct {
-	inner *raw.AVAssetWriterInputGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetWriterInputGroup].
-func (x *AssetWriterInputGroup) Unwrap() *raw.AVAssetWriterInputGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetWriterInputGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetWriterInputGroupFromID adopts an existing object pointer as a AssetWriterInputGroup (nil for 0).
+// AssetWriterInputGroupFromID adopts an existing Objective-C object as a AssetWriterInputGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetWriterInputGroupFromID(id objc.ID) *AssetWriterInputGroup {
 	if id == 0 {
 		return nil
 	}
-	return &AssetWriterInputGroup{inner: raw.AVAssetWriterInputGroupFromID(id)}
+	x := &AssetWriterInputGroup{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// assetWriterInputGroupAdopt wraps an Objective-C object that this code just created as a
+// AssetWriterInputGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetWriterInputGroupAdopt(id objc.ID) *AssetWriterInputGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetWriterInputGroup{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetWriterInputGroup) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetWriterInputGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetWriterInputGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a group for the asset writer inputs.
 //
-// NewAssetWriterInputGroupWithInputsDefaultInput creates a new [AssetWriterInputGroup].
-func NewAssetWriterInputGroupWithInputsDefaultInput(inputs *foundation.NSArray[*raw.AVAssetWriterInput], defaultInput *raw.AVAssetWriterInput) *AssetWriterInputGroup {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetWriterInputGroup")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputs:defaultInput:"), inputs.Ptr(), defaultInput.Ptr())
-	return &AssetWriterInputGroup{inner: raw.AVAssetWriterInputGroupFromID(_id)}
+// NewAssetWriterInputGroupWithInputsDefaultInput creates a new AssetWriterInputGroup.
+func NewAssetWriterInputGroupWithInputsDefaultInput(inputs []*AssetWriterInput, defaultInput *AssetWriterInput) *AssetWriterInputGroup {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAssetWriterInputGroup")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInputs:defaultInput:"), purego.SliceToNSArray(inputs, func(_v *AssetWriterInput) objc.ID { return objref.IDOf(_v) }), objref.IDOf(defaultInput))
+	return assetWriterInputGroupAdopt(_id)
 }
 
-// @property inputs @abstract The inputs grouped together by the receiver. @discussion The value of this property is an NSArray containing concrete instances of AVAssetWriterInput.
+// The inputs grouped together by the receiver. The value of this property is an NSArray containing concrete instances of AVAssetWriterInput.
 //
 // Inputs returns the collection as a Go slice.
 func (x *AssetWriterInputGroup) Inputs() []*AssetWriterInput {
-	arr := x.inner.Inputs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetWriterInput {
-		return &AssetWriterInput{inner: raw.AVAssetWriterInputFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetWriterInput { return AssetWriterInputFromID(_id) })
 }
 
-// @property defaultInput @abstract The input designated at the defaultInput of the receiver. @discussion The value of this property is a concrete instance of AVAssetWriterInput.
-//
-// DefaultInput calls the underlying DefaultInput.
+// The input designated at the defaultInput of the receiver. The value of this property is a concrete instance of AVAssetWriterInput.
 func (x *AssetWriterInputGroup) DefaultInput() *AssetWriterInput {
-	_r := x.inner.DefaultInput()
-	if _r == nil {
-		return nil
-	}
-	return &AssetWriterInput{inner: _r}
-}
-
-func (x *AssetWriterInputGroup) asMediaSelectionGroup() *raw.AVMediaSelectionGroup {
-	return &x.inner.AVMediaSelectionGroup
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultInput"))
+	return AssetWriterInputFromID(_r)
 }
 
 // AssetWriterInputGroupable is the interface implemented by [AssetWriterInputGroup], for mocking and DI.
 type AssetWriterInputGroupable interface {
-	Unwrap() *raw.AVAssetWriterInputGroup
+	obj.Object
 	Inputs() []*AssetWriterInput
 	DefaultInput() *AssetWriterInput
 }

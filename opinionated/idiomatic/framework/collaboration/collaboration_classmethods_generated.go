@@ -5,106 +5,73 @@
 package collaboration
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/collaboration"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/ebitengine/purego/objc"
 )
 
-// GroupIdentityWithPosixGIDAuthority calls the underlying CBGroupIdentityGroupIdentityWithPosixGIDAuthority.
-func GroupIdentityWithPosixGIDAuthority(gid uint, authority *raw.CBIdentityAuthority) *GroupIdentity {
-	_r := raw.CBGroupIdentityGroupIdentityWithPosixGIDAuthority(gid, authority)
-	if _r == nil {
-		return nil
-	}
-	return &GroupIdentity{inner: _r}
+// Returns the group identity with the given POSIX GID in the specified identity authority.
+func GroupIdentityWithPosixGIDAuthority(gid int, authority *IdentityAuthority) *GroupIdentity {
+	_r := objc.Send[objc.ID](objc.ID(_class("CBGroupIdentity")), objc.RegisterName("groupIdentityWithPosixGID:authority:"), gid, objref.IDOf(authority))
+	return GroupIdentityFromID(_r)
 }
 
-// IdentityWithNameAuthority calls the underlying CBIdentityIdentityWithNameAuthority.
-func IdentityWithNameAuthority(name string, authority *raw.CBIdentityAuthority) *Identity {
-	_r := raw.CBIdentityIdentityWithNameAuthority(foundation.NSStringStringWithUTF8String(name), authority)
-	if _r == nil {
-		return nil
-	}
-	return &Identity{inner: _r}
+// Returns the identity object with the given name from the specified identity authority.
+func IdentityWithNameAuthority(name string, authority *IdentityAuthority) *Identity {
+	_r := objc.Send[objc.ID](objc.ID(_class("CBIdentity")), objc.RegisterName("identityWithName:authority:"), purego.NSString(name), objref.IDOf(authority))
+	return IdentityFromID(_r)
 }
 
-// IdentityWithUniqueIdentifierAuthority calls the underlying CBIdentityIdentityWithUniqueIdentifierAuthority.
-func IdentityWithUniqueIdentifierAuthority(uuid *foundation.NSUUID, authority *raw.CBIdentityAuthority) *Identity {
-	_r := raw.CBIdentityIdentityWithUniqueIdentifierAuthority(uuid, authority)
-	if _r == nil {
-		return nil
-	}
-	return &Identity{inner: _r}
+func IdentityWithUniqueIdentifierAuthority(uuid obj.Object, authority *IdentityAuthority) *Identity {
+	_r := objc.Send[objc.ID](objc.ID(_class("CBIdentity")), objc.RegisterName("identityWithUniqueIdentifier:authority:"), objref.IDOf(uuid), objref.IDOf(authority))
+	return IdentityFromID(_r)
 }
 
-// IdentityWithUUIDStringAuthority calls the underlying CBIdentityIdentityWithUUIDStringAuthority.
-func IdentityWithUUIDStringAuthority(uuid string, authority *raw.CBIdentityAuthority) *Identity {
-	_r := raw.CBIdentityIdentityWithUUIDStringAuthority(foundation.NSStringStringWithUTF8String(uuid), authority)
-	if _r == nil {
-		return nil
-	}
-	return &Identity{inner: _r}
+// Returns the identity object with the given UUID from the specified identity authority.
+func IdentityWithUUIDStringAuthority(uuid string, authority *IdentityAuthority) *Identity {
+	_r := objc.Send[objc.ID](objc.ID(_class("CBIdentity")), objc.RegisterName("identityWithUUIDString:authority:"), purego.NSString(uuid), objref.IDOf(authority))
+	return IdentityFromID(_r)
 }
 
-// IdentityWithPersistentReference calls the underlying CBIdentityIdentityWithPersistentReference.
-func IdentityWithPersistentReference(data *foundation.NSData) *Identity {
-	_r := raw.CBIdentityIdentityWithPersistentReference(data)
-	if _r == nil {
-		return nil
-	}
-	return &Identity{inner: _r}
+// Returns the identity object matching the persistent reference data.
+func IdentityWithPersistentReference(data obj.Object) *Identity {
+	_r := objc.Send[objc.ID](objc.ID(_class("CBIdentity")), objc.RegisterName("identityWithPersistentReference:"), objref.IDOf(data))
+	return IdentityFromID(_r)
 }
 
-// IdentityWithCSIdentity calls the underlying CBIdentityIdentityWithCSIdentity.
-func IdentityWithCSIdentity(csIdentity unsafe.Pointer) *Identity {
-	_r := raw.CBIdentityIdentityWithCSIdentity(csIdentity)
-	if _r == nil {
-		return nil
-	}
-	return &Identity{inner: _r}
+// Returns an identity object created from the specified Core Services Identity opaque object.
+func IdentityWithCSIdentity(csIdentity obj.Object) *Identity {
+	_r := objc.Send[objc.ID](objc.ID(_class("CBIdentity")), objc.RegisterName("identityWithCSIdentity:"), objref.IDOf(csIdentity))
+	return IdentityFromID(_r)
 }
 
-// LocalIdentityAuthority calls the underlying CBIdentityAuthorityLocalIdentityAuthority.
+// Returns the identity authority on the local system.
 func LocalIdentityAuthority() *IdentityAuthority {
-	_r := raw.CBIdentityAuthorityLocalIdentityAuthority()
-	if _r == nil {
-		return nil
-	}
-	return &IdentityAuthority{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CBIdentityAuthority")), objc.RegisterName("localIdentityAuthority"))
+	return IdentityAuthorityFromID(_r)
 }
 
-// ManagedIdentityAuthority calls the underlying CBIdentityAuthorityManagedIdentityAuthority.
+// Returns the identity authority that contains all the identities in bound network directory servers.
 func ManagedIdentityAuthority() *IdentityAuthority {
-	_r := raw.CBIdentityAuthorityManagedIdentityAuthority()
-	if _r == nil {
-		return nil
-	}
-	return &IdentityAuthority{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CBIdentityAuthority")), objc.RegisterName("managedIdentityAuthority"))
+	return IdentityAuthorityFromID(_r)
 }
 
-// DefaultIdentityAuthority calls the underlying CBIdentityAuthorityDefaultIdentityAuthority.
+// Returns an identity authority that contains the identities in both the local and the network-bound authorities.
 func DefaultIdentityAuthority() *IdentityAuthority {
-	_r := raw.CBIdentityAuthorityDefaultIdentityAuthority()
-	if _r == nil {
-		return nil
-	}
-	return &IdentityAuthority{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CBIdentityAuthority")), objc.RegisterName("defaultIdentityAuthority"))
+	return IdentityAuthorityFromID(_r)
 }
 
-// IdentityAuthorityWithCSIdentityAuthority calls the underlying CBIdentityAuthorityIdentityAuthorityWithCSIdentityAuthority.
-func IdentityAuthorityWithCSIdentityAuthority(cSIdentityAuthority unsafe.Pointer) *IdentityAuthority {
-	_r := raw.CBIdentityAuthorityIdentityAuthorityWithCSIdentityAuthority(cSIdentityAuthority)
-	if _r == nil {
-		return nil
-	}
-	return &IdentityAuthority{inner: _r}
+// Returns an identity authority specified by a given Core Services Identity authority object.
+func IdentityAuthorityWithCSIdentityAuthority(cSIdentityAuthority obj.Object) *IdentityAuthority {
+	_r := objc.Send[objc.ID](objc.ID(_class("CBIdentityAuthority")), objc.RegisterName("identityAuthorityWithCSIdentityAuthority:"), objref.IDOf(cSIdentityAuthority))
+	return IdentityAuthorityFromID(_r)
 }
 
-// UserIdentityWithPosixUIDAuthority calls the underlying CBUserIdentityUserIdentityWithPosixUIDAuthority.
-func UserIdentityWithPosixUIDAuthority(uid uint, authority *raw.CBIdentityAuthority) *UserIdentity {
-	_r := raw.CBUserIdentityUserIdentityWithPosixUIDAuthority(uid, authority)
-	if _r == nil {
-		return nil
-	}
-	return &UserIdentity{inner: _r}
+// Returns the user identity with the given POSIX UID in the specified identity authority.
+func UserIdentityWithPosixUIDAuthority(uid int, authority *IdentityAuthority) *UserIdentity {
+	_r := objc.Send[objc.ID](objc.ID(_class("CBUserIdentity")), objc.RegisterName("userIdentityWithPosixUID:authority:"), uid, objref.IDOf(authority))
+	return UserIdentityFromID(_r)
 }

@@ -5,473 +5,391 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An object that converts streams of audio between formats.
 //
-// AudioConverter wraps [raw.AVAudioConverter] with a fluent Go API.
+// AudioConverter is an idiomatic wrapper over the Objective-C class AVAudioConverter.
 type AudioConverter struct {
-	inner *raw.AVAudioConverter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioConverter].
-func (x *AudioConverter) Unwrap() *raw.AVAudioConverter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioConverter) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioConverterFromID adopts an existing object pointer as a AudioConverter (nil for 0).
+// AudioConverterFromID adopts an existing Objective-C object as a AudioConverter
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioConverterFromID(id objc.ID) *AudioConverter {
 	if id == 0 {
 		return nil
 	}
-	return &AudioConverter{inner: raw.AVAudioConverterFromID(id)}
+	x := &AudioConverter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// audioConverterAdopt wraps an Objective-C object that this code just created as a
+// AudioConverter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioConverterAdopt(id objc.ID) *AudioConverter {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioConverter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudioConverter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioConverter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioConverter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an audio converter object from the specified input and output formats.
 //
-// NewAudioConverterFromFormatToFormat creates a new [AudioConverter].
-func NewAudioConverterFromFormatToFormat(fromFormat *raw.AVAudioFormat, toFormat *raw.AVAudioFormat) *AudioConverter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioConverter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFromFormat:toFormat:"), fromFormat.Ptr(), toFormat.Ptr())
-	return &AudioConverter{inner: raw.AVAudioConverterFromID(_id)}
+// NewAudioConverterFromFormatToFormat creates a new AudioConverter.
+func NewAudioConverterFromFormatToFormat(fromFormat *AudioFormat, toFormat *AudioFormat) *AudioConverter {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVAudioConverter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFromFormat:toFormat:"), objref.IDOf(fromFormat), objref.IDOf(toFormat))
+	return audioConverterAdopt(_id)
 }
 
 // An array of integers that indicates which input to derive each output from.
 //
-// WithChannelMap sets the collection, converting the Go slice to an NSArray.
-func (x *AudioConverter) WithChannelMap(items ...*foundation.NSNumber) *AudioConverter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetChannelMap(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetChannelMap(_arr)
+// WithChannelMap sets the collection and returns the receiver so calls can be chained.
+func (x *AudioConverter) WithChannelMap(items ...obj.Object) *AudioConverter {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelMap:"), _arr)
 	return x
 }
 
 // An object that contains metadata for encoders and decoders.
 //
-// WithMagicCookie sets the magicCookie property and returns the receiver for chaining.
-func (x *AudioConverter) WithMagicCookie(magicCookie *foundation.NSData) *AudioConverter {
-	x.inner.SetMagicCookie(magicCookie)
+// WithMagicCookie sets magicCookie and returns the receiver so calls can be chained.
+func (x *AudioConverter) WithMagicCookie(magicCookie obj.Object) *AudioConverter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagicCookie:"), objref.IDOf(magicCookie))
 	return x
 }
 
 // A Boolean value that indicates whether the framework mixes the channels instead of remapping.
 //
-// WithDownmix sets the downmix property and returns the receiver for chaining.
+// WithDownmix sets downmix and returns the receiver so calls can be chained.
 func (x *AudioConverter) WithDownmix(downmix bool) *AudioConverter {
-	x.inner.SetDownmix(downmix)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownmix:"), downmix)
 	return x
 }
 
 // A Boolean value that indicates whether dither is on.
 //
-// WithDither sets the dither property and returns the receiver for chaining.
+// WithDither sets dither and returns the receiver so calls can be chained.
 func (x *AudioConverter) WithDither(dither bool) *AudioConverter {
-	x.inner.SetDither(dither)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDither:"), dither)
 	return x
 }
 
 // A sample rate converter algorithm key value.
 //
-// WithSampleRateConverterQuality sets the sampleRateConverterQuality property and returns the receiver for chaining.
+// WithSampleRateConverterQuality sets sampleRateConverterQuality and returns the receiver so calls can be chained.
 func (x *AudioConverter) WithSampleRateConverterQuality(sampleRateConverterQuality int) *AudioConverter {
-	x.inner.SetSampleRateConverterQuality(sampleRateConverterQuality)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleRateConverterQuality:"), sampleRateConverterQuality)
 	return x
 }
 
 // The priming method the sample rate converter or decoder uses.
 //
-// WithSampleRateConverterAlgorithm sets the sampleRateConverterAlgorithm property and returns the receiver for chaining.
+// WithSampleRateConverterAlgorithm sets sampleRateConverterAlgorithm and returns the receiver so calls can be chained.
 func (x *AudioConverter) WithSampleRateConverterAlgorithm(sampleRateConverterAlgorithm string) *AudioConverter {
-	x.inner.SetSampleRateConverterAlgorithm(foundation.NSStringStringWithUTF8String(sampleRateConverterAlgorithm))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleRateConverterAlgorithm:"), purego.NSString(sampleRateConverterAlgorithm))
 	return x
 }
 
 // The priming method the sample rate converter or decoder uses.
 //
-// WithPrimeMethod sets the primeMethod property and returns the receiver for chaining.
-func (x *AudioConverter) WithPrimeMethod(primeMethod AVAudioConverterPrimeMethod) *AudioConverter {
-	x.inner.SetPrimeMethod(raw.AVAudioConverterPrimeMethod(primeMethod))
+// WithPrimeMethod sets primeMethod and returns the receiver so calls can be chained.
+func (x *AudioConverter) WithPrimeMethod(primeMethod AudioConverterPrimeMethod) *AudioConverter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimeMethod:"), primeMethod)
 	return x
 }
 
-// The number of priming frames the converter uses.
+// Number of packets between consecutive sync packets. A sync packet is an independently-decodable packet that completely refreshes the decoder without needing to decode other packets.  When compressing to a format which supports it (such as APAC), the audio sync packet frequency indicates the distance in packets between two sync packets, with non-sync packets between.  This is useful to set when saving compressed packets to a file and efficient random access is desired.  Note: Separating sync packets by at least one second of encoded audio (e.g. 75 packets) is recommended.
 //
-// WithPrimeInfo sets the primeInfo property and returns the receiver for chaining.
-func (x *AudioConverter) WithPrimeInfo(primeInfo raw.AVAudioConverterPrimeInfo) *AudioConverter {
-	x.inner.SetPrimeInfo(primeInfo)
-	return x
-}
-
-// @property	audioSyncPacketFrequency @abstract	Number of packets between consecutive sync packets. @discussion A sync packet is an independently-decodable packet that completely refreshes the decoder without needing to decode other packets.  When compressing to a format which supports it (such as APAC), the audio sync packet frequency indicates the distance in packets between two sync packets, with non-sync packets between.  This is useful to set when saving compressed packets to a file and efficient random access is desired.  Note: Separating sync packets by at least one second of encoded audio (e.g. 75 packets) is recommended.
-//
-// WithAudioSyncPacketFrequency sets the audioSyncPacketFrequency property and returns the receiver for chaining.
+// WithAudioSyncPacketFrequency sets audioSyncPacketFrequency and returns the receiver so calls can be chained.
 func (x *AudioConverter) WithAudioSyncPacketFrequency(audioSyncPacketFrequency int) *AudioConverter {
-	x.inner.SetAudioSyncPacketFrequency(audioSyncPacketFrequency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioSyncPacketFrequency:"), audioSyncPacketFrequency)
 	return x
 }
 
-// @property	contentSource @abstract	Index to select a pre-defined content source type that describes the content type and how it was generated.  Note: This is only supported when compressing audio to formats which support it.
+// Index to select a pre-defined content source type that describes the content type and how it was generated.  Note: This is only supported when compressing audio to formats which support it.
 //
-// WithContentSource sets the contentSource property and returns the receiver for chaining.
-func (x *AudioConverter) WithContentSource(contentSource AVAudioContentSource) *AudioConverter {
-	x.inner.SetContentSource(raw.AVAudioContentSource(contentSource))
+// WithContentSource sets contentSource and returns the receiver so calls can be chained.
+func (x *AudioConverter) WithContentSource(contentSource AudioContentSource) *AudioConverter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentSource:"), contentSource)
 	return x
 }
 
-// @property	dynamicRangeControlConfiguration @abstract	Encoder Dynamic Range Control (DRC) configuration. @discussion When supported by the encoder, this property controls which configuration is applied when a bitstream is generated.  Note: This is only supported when compressing audio to formats which support it.
+// Encoder Dynamic Range Control (DRC) configuration. When supported by the encoder, this property controls which configuration is applied when a bitstream is generated.  Note: This is only supported when compressing audio to formats which support it.
 //
-// WithDynamicRangeControlConfiguration sets the dynamicRangeControlConfiguration property and returns the receiver for chaining.
-func (x *AudioConverter) WithDynamicRangeControlConfiguration(dynamicRangeControlConfiguration AVAudioDynamicRangeControlConfiguration) *AudioConverter {
-	x.inner.SetDynamicRangeControlConfiguration(raw.AVAudioDynamicRangeControlConfiguration(dynamicRangeControlConfiguration))
+// WithDynamicRangeControlConfiguration sets dynamicRangeControlConfiguration and returns the receiver so calls can be chained.
+func (x *AudioConverter) WithDynamicRangeControlConfiguration(dynamicRangeControlConfiguration AudioDynamicRangeControlConfiguration) *AudioConverter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDynamicRangeControlConfiguration:"), dynamicRangeControlConfiguration)
 	return x
 }
 
 // The bit rate, in bits per second.
 //
-// WithBitRate sets the bitRate property and returns the receiver for chaining.
+// WithBitRate sets bitRate and returns the receiver so calls can be chained.
 func (x *AudioConverter) WithBitRate(bitRate int) *AudioConverter {
-	x.inner.SetBitRate(bitRate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitRate:"), bitRate)
 	return x
 }
 
 // A key value constant the framework uses during encoding.
 //
-// WithBitRateStrategy sets the bitRateStrategy property and returns the receiver for chaining.
+// WithBitRateStrategy sets bitRateStrategy and returns the receiver so calls can be chained.
 func (x *AudioConverter) WithBitRateStrategy(bitRateStrategy string) *AudioConverter {
-	x.inner.SetBitRateStrategy(foundation.NSStringStringWithUTF8String(bitRateStrategy))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitRateStrategy:"), purego.NSString(bitRateStrategy))
 	return x
 }
 
 // Resets the converter so you can convert a new audio stream.
-//
-// Reset calls the underlying Reset.
 func (x *AudioConverter) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
 // Performs a basic conversion between audio formats that doesn’t involve converting codecs or sample rates.
-//
-// ConvertToBufferFromBufferError calls the underlying ConvertToBufferFromBufferError.
-func (x *AudioConverter) ConvertToBufferFromBufferError(outputBuffer *raw.AVAudioPCMBuffer, inputBuffer *raw.AVAudioPCMBuffer) (bool, error) {
-	return x.inner.ConvertToBufferFromBufferError(outputBuffer, inputBuffer)
+func (x *AudioConverter) ConvertToBufferFromBuffer(outputBuffer *AudioPCMBuffer, inputBuffer *AudioPCMBuffer) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("convertToBuffer:fromBuffer:error:"), objref.IDOf(outputBuffer), objref.IDOf(inputBuffer), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Performs a conversion between audio formats, if the system supports it.
-//
-// ConvertToBufferErrorWithInputFromBlock calls the underlying ConvertToBufferErrorWithInputFromBlock.
-func (x *AudioConverter) ConvertToBufferErrorWithInputFromBlock(outputBuffer *raw.AVAudioBuffer, outError unsafe.Pointer, inputBlock objc.Block) AVAudioConverterOutputStatus {
-	return AVAudioConverterOutputStatus(x.inner.ConvertToBufferErrorWithInputFromBlock(outputBuffer, outError, inputBlock))
-}
-
-// @property inputFormat @abstract The format of the input audio stream. (NB. AVAudioFormat includes the channel layout)
-//
-// InputFormat calls the underlying InputFormat.
+// The format of the input audio stream. (NB. AVAudioFormat includes the channel layout)
 func (x *AudioConverter) InputFormat() *AudioFormat {
-	_r := x.inner.InputFormat()
-	if _r == nil {
-		return nil
-	}
-	return &AudioFormat{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputFormat"))
+	return AudioFormatFromID(_r)
 }
 
-// @property outputFormat @abstract The format of the output audio stream. (NB. AVAudioFormat includes the channel layout)
-//
-// OutputFormat calls the underlying OutputFormat.
+// The format of the output audio stream. (NB. AVAudioFormat includes the channel layout)
 func (x *AudioConverter) OutputFormat() *AudioFormat {
-	_r := x.inner.OutputFormat()
-	if _r == nil {
-		return nil
-	}
-	return &AudioFormat{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputFormat"))
+	return AudioFormatFromID(_r)
 }
 
-// @property channelMap @abstract An array of integers indicating from which input to derive each output. @discussion The array has size equal to the number of output channels. Each element's value is the input channel number, starting with zero, that is to be copied to that output. A negative value means that the output channel will have no source and will be silent. Setting a channel map overrides channel mapping due to any channel layouts in the input and output formats that may have been supplied.
+// An array of integers indicating from which input to derive each output. The array has size equal to the number of output channels. Each element's value is the input channel number, starting with zero, that is to be copied to that output. A negative value means that the output channel will have no source and will be silent. Setting a channel map overrides channel mapping due to any channel layouts in the input and output formats that may have been supplied.
 //
 // ChannelMap returns the collection as a Go slice.
-func (x *AudioConverter) ChannelMap() []*foundation.NSNumber {
-	arr := x.inner.ChannelMap()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *AudioConverter) ChannelMap() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("channelMap"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetChannelMap calls the underlying SetChannelMap.
-func (x *AudioConverter) SetChannelMap(channelMap *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetChannelMap(channelMap)
+func (x *AudioConverter) SetChannelMap(channelMap []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelMap:"), purego.SliceToNSArray(channelMap, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property	magicCookie @abstract	Decoders require some data in the form of a magicCookie in order to decode properly. Encoders will produce a magicCookie.
-//
-// MagicCookie calls the underlying MagicCookie.
-func (x *AudioConverter) MagicCookie() *foundation.NSData {
-	return x.inner.MagicCookie()
+// Decoders require some data in the form of a magicCookie in order to decode properly. Encoders will produce a magicCookie.
+func (x *AudioConverter) MagicCookie() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("magicCookie"))
+	return obj.Wrap(_r)
 }
 
-// SetMagicCookie calls the underlying SetMagicCookie.
-func (x *AudioConverter) SetMagicCookie(magicCookie *foundation.NSData) {
-	x.inner.SetMagicCookie(magicCookie)
+func (x *AudioConverter) SetMagicCookie(magicCookie obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagicCookie:"), objref.IDOf(magicCookie))
 }
 
-// @property	downmix @abstract	If YES and channel remapping is necessary, then channels will be mixed as appropriate instead of remapped. Default value is NO.
-//
-// Downmix calls the underlying Downmix.
+// If YES and channel remapping is necessary, then channels will be mixed as appropriate instead of remapped. Default value is NO.
 func (x *AudioConverter) Downmix() bool {
-	return x.inner.Downmix()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("downmix"))
+	return _r
 }
 
-// SetDownmix calls the underlying SetDownmix.
 func (x *AudioConverter) SetDownmix(downmix bool) {
-	x.inner.SetDownmix(downmix)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownmix:"), downmix)
 }
 
-// @property	dither @abstract	Setting YES will turn on dither, if dither makes sense in given the current formats and settings. Default value is NO.
-//
-// Dither calls the underlying Dither.
+// Setting YES will turn on dither, if dither makes sense in given the current formats and settings. Default value is NO.
 func (x *AudioConverter) Dither() bool {
-	return x.inner.Dither()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("dither"))
+	return _r
 }
 
-// SetDither calls the underlying SetDither.
 func (x *AudioConverter) SetDither(dither bool) {
-	x.inner.SetDither(dither)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDither:"), dither)
 }
 
-// @property	sampleRateConverterQuality @abstract	An AVAudioQuality value as defined in AVAudioSettings.h.
-//
-// SampleRateConverterQuality calls the underlying SampleRateConverterQuality.
+// An AVAudioQuality value as defined in AVAudioSettings.h.
 func (x *AudioConverter) SampleRateConverterQuality() int {
-	return x.inner.SampleRateConverterQuality()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sampleRateConverterQuality"))
+	return _r
 }
 
-// SetSampleRateConverterQuality calls the underlying SetSampleRateConverterQuality.
 func (x *AudioConverter) SetSampleRateConverterQuality(sampleRateConverterQuality int) {
-	x.inner.SetSampleRateConverterQuality(sampleRateConverterQuality)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleRateConverterQuality:"), sampleRateConverterQuality)
 }
 
-// @property	sampleRateConverterAlgorithm @abstract	An AVSampleRateConverterAlgorithmKey value as defined in AVAudioSettings.h.
-//
-// SampleRateConverterAlgorithm calls the underlying SampleRateConverterAlgorithm.
+// An AVSampleRateConverterAlgorithmKey value as defined in AVAudioSettings.h.
 func (x *AudioConverter) SampleRateConverterAlgorithm() string {
-	_r := x.inner.SampleRateConverterAlgorithm()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleRateConverterAlgorithm"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSampleRateConverterAlgorithm calls the underlying SetSampleRateConverterAlgorithm.
 func (x *AudioConverter) SetSampleRateConverterAlgorithm(sampleRateConverterAlgorithm string) {
-	x.inner.SetSampleRateConverterAlgorithm(foundation.NSStringStringWithUTF8String(sampleRateConverterAlgorithm))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleRateConverterAlgorithm:"), purego.NSString(sampleRateConverterAlgorithm))
 }
 
-// @property	primeMethod @abstract	Indicates the priming method to be used by the sample rate converter or decoder.
-//
-// PrimeMethod calls the underlying PrimeMethod.
-func (x *AudioConverter) PrimeMethod() AVAudioConverterPrimeMethod {
-	return AVAudioConverterPrimeMethod(x.inner.PrimeMethod())
+// Indicates the priming method to be used by the sample rate converter or decoder.
+func (x *AudioConverter) PrimeMethod() AudioConverterPrimeMethod {
+	_r := objc.Send[AudioConverterPrimeMethod](objref.IDOf(x), objc.RegisterName("primeMethod"))
+	return _r
 }
 
-// SetPrimeMethod calls the underlying SetPrimeMethod.
-func (x *AudioConverter) SetPrimeMethod(primeMethod AVAudioConverterPrimeMethod) {
-	x.inner.SetPrimeMethod(raw.AVAudioConverterPrimeMethod(primeMethod))
+func (x *AudioConverter) SetPrimeMethod(primeMethod AudioConverterPrimeMethod) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimeMethod:"), primeMethod)
 }
 
-// @property	primeInfo @abstract	Indicates the the number of priming frames.
-//
-// PrimeInfo calls the underlying PrimeInfo.
-func (x *AudioConverter) PrimeInfo() raw.AVAudioConverterPrimeInfo {
-	return x.inner.PrimeInfo()
-}
-
-// SetPrimeInfo calls the underlying SetPrimeInfo.
-func (x *AudioConverter) SetPrimeInfo(primeInfo raw.AVAudioConverterPrimeInfo) {
-	x.inner.SetPrimeInfo(primeInfo)
-}
-
-// @property	audioSyncPacketFrequency @abstract	Number of packets between consecutive sync packets. @discussion A sync packet is an independently-decodable packet that completely refreshes the decoder without needing to decode other packets.  When compressing to a format which supports it (such as APAC), the audio sync packet frequency indicates the distance in packets between two sync packets, with non-sync packets between.  This is useful to set when saving compressed packets to a file and efficient random access is desired.  Note: Separating sync packets by at least one second of encoded audio (e.g. 75 packets) is recommended.
-//
-// AudioSyncPacketFrequency calls the underlying AudioSyncPacketFrequency.
+// Number of packets between consecutive sync packets. A sync packet is an independently-decodable packet that completely refreshes the decoder without needing to decode other packets.  When compressing to a format which supports it (such as APAC), the audio sync packet frequency indicates the distance in packets between two sync packets, with non-sync packets between.  This is useful to set when saving compressed packets to a file and efficient random access is desired.  Note: Separating sync packets by at least one second of encoded audio (e.g. 75 packets) is recommended.
 func (x *AudioConverter) AudioSyncPacketFrequency() int {
-	return x.inner.AudioSyncPacketFrequency()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("audioSyncPacketFrequency"))
+	return _r
 }
 
-// SetAudioSyncPacketFrequency calls the underlying SetAudioSyncPacketFrequency.
 func (x *AudioConverter) SetAudioSyncPacketFrequency(audioSyncPacketFrequency int) {
-	x.inner.SetAudioSyncPacketFrequency(audioSyncPacketFrequency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioSyncPacketFrequency:"), audioSyncPacketFrequency)
 }
 
-// @property	contentSource @abstract	Index to select a pre-defined content source type that describes the content type and how it was generated.  Note: This is only supported when compressing audio to formats which support it.
-//
-// ContentSource calls the underlying ContentSource.
-func (x *AudioConverter) ContentSource() AVAudioContentSource {
-	return AVAudioContentSource(x.inner.ContentSource())
+// Index to select a pre-defined content source type that describes the content type and how it was generated.  Note: This is only supported when compressing audio to formats which support it.
+func (x *AudioConverter) ContentSource() AudioContentSource {
+	_r := objc.Send[AudioContentSource](objref.IDOf(x), objc.RegisterName("contentSource"))
+	return _r
 }
 
-// SetContentSource calls the underlying SetContentSource.
-func (x *AudioConverter) SetContentSource(contentSource AVAudioContentSource) {
-	x.inner.SetContentSource(raw.AVAudioContentSource(contentSource))
+func (x *AudioConverter) SetContentSource(contentSource AudioContentSource) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentSource:"), contentSource)
 }
 
-// @property	dynamicRangeControlConfiguration @abstract	Encoder Dynamic Range Control (DRC) configuration. @discussion When supported by the encoder, this property controls which configuration is applied when a bitstream is generated.  Note: This is only supported when compressing audio to formats which support it.
-//
-// DynamicRangeControlConfiguration calls the underlying DynamicRangeControlConfiguration.
-func (x *AudioConverter) DynamicRangeControlConfiguration() AVAudioDynamicRangeControlConfiguration {
-	return AVAudioDynamicRangeControlConfiguration(x.inner.DynamicRangeControlConfiguration())
+// Encoder Dynamic Range Control (DRC) configuration. When supported by the encoder, this property controls which configuration is applied when a bitstream is generated.  Note: This is only supported when compressing audio to formats which support it.
+func (x *AudioConverter) DynamicRangeControlConfiguration() AudioDynamicRangeControlConfiguration {
+	_r := objc.Send[AudioDynamicRangeControlConfiguration](objref.IDOf(x), objc.RegisterName("dynamicRangeControlConfiguration"))
+	return _r
 }
 
-// SetDynamicRangeControlConfiguration calls the underlying SetDynamicRangeControlConfiguration.
-func (x *AudioConverter) SetDynamicRangeControlConfiguration(dynamicRangeControlConfiguration AVAudioDynamicRangeControlConfiguration) {
-	x.inner.SetDynamicRangeControlConfiguration(raw.AVAudioDynamicRangeControlConfiguration(dynamicRangeControlConfiguration))
+func (x *AudioConverter) SetDynamicRangeControlConfiguration(dynamicRangeControlConfiguration AudioDynamicRangeControlConfiguration) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDynamicRangeControlConfiguration:"), dynamicRangeControlConfiguration)
 }
 
-// @property bitRate @abstract bitRate in bits per second. Only applies when encoding.
-//
-// BitRate calls the underlying BitRate.
+// bitRate in bits per second. Only applies when encoding.
 func (x *AudioConverter) BitRate() int {
-	return x.inner.BitRate()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bitRate"))
+	return _r
 }
 
-// SetBitRate calls the underlying SetBitRate.
 func (x *AudioConverter) SetBitRate(bitRate int) {
-	x.inner.SetBitRate(bitRate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitRate:"), bitRate)
 }
 
-// @property bitRateStrategy @abstract When encoding, an AVEncoderBitRateStrategyKey value constant as defined in AVAudioSettings.h. Returns nil if not encoding.
-//
-// BitRateStrategy calls the underlying BitRateStrategy.
+// When encoding, an AVEncoderBitRateStrategyKey value constant as defined in AVAudioSettings.h. Returns nil if not encoding.
 func (x *AudioConverter) BitRateStrategy() string {
-	_r := x.inner.BitRateStrategy()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitRateStrategy"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBitRateStrategy calls the underlying SetBitRateStrategy.
 func (x *AudioConverter) SetBitRateStrategy(bitRateStrategy string) {
-	x.inner.SetBitRateStrategy(foundation.NSStringStringWithUTF8String(bitRateStrategy))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitRateStrategy:"), purego.NSString(bitRateStrategy))
 }
 
-// @property maximumOutputPacketSize @abstract The maximum size of an output packet, in bytes. @discussion When encoding it is useful to know how large a packet can be in order to allocate a buffer to receive the output.
-//
-// MaximumOutputPacketSize calls the underlying MaximumOutputPacketSize.
+// The maximum size of an output packet, in bytes. When encoding it is useful to know how large a packet can be in order to allocate a buffer to receive the output.
 func (x *AudioConverter) MaximumOutputPacketSize() int {
-	return x.inner.MaximumOutputPacketSize()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumOutputPacketSize"))
+	return _r
 }
 
-// @property availableEncodeBitRates @abstract When encoding, an NSArray of NSNumber of all bit rates provided by the codec. Returns nil if not encoding.
+// When encoding, an NSArray of NSNumber of all bit rates provided by the codec. Returns nil if not encoding.
 //
 // AvailableEncodeBitRates returns the collection as a Go slice.
-func (x *AudioConverter) AvailableEncodeBitRates() []*foundation.NSNumber {
-	arr := x.inner.AvailableEncodeBitRates()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *AudioConverter) AvailableEncodeBitRates() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableEncodeBitRates"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @property applicableEncodeBitRates @abstract When encoding, an NSArray of NSNumber of bit rates that can be applied based on the current formats and settings. Returns nil if not encoding.
+// When encoding, an NSArray of NSNumber of bit rates that can be applied based on the current formats and settings. Returns nil if not encoding.
 //
 // ApplicableEncodeBitRates returns the collection as a Go slice.
-func (x *AudioConverter) ApplicableEncodeBitRates() []*foundation.NSNumber {
-	arr := x.inner.ApplicableEncodeBitRates()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *AudioConverter) ApplicableEncodeBitRates() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicableEncodeBitRates"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @property availableEncodeSampleRates @abstract When encoding, an NSArray of NSNumber of all output sample rates provided by the codec. Returns nil if not encoding.
+// When encoding, an NSArray of NSNumber of all output sample rates provided by the codec. Returns nil if not encoding.
 //
 // AvailableEncodeSampleRates returns the collection as a Go slice.
-func (x *AudioConverter) AvailableEncodeSampleRates() []*foundation.NSNumber {
-	arr := x.inner.AvailableEncodeSampleRates()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *AudioConverter) AvailableEncodeSampleRates() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableEncodeSampleRates"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @property applicableEncodeSampleRates @abstract When encoding, an NSArray of NSNumber of output sample rates that can be applied based on the current formats and settings. Returns nil if not encoding.
+// When encoding, an NSArray of NSNumber of output sample rates that can be applied based on the current formats and settings. Returns nil if not encoding.
 //
 // ApplicableEncodeSampleRates returns the collection as a Go slice.
-func (x *AudioConverter) ApplicableEncodeSampleRates() []*foundation.NSNumber {
-	arr := x.inner.ApplicableEncodeSampleRates()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *AudioConverter) ApplicableEncodeSampleRates() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicableEncodeSampleRates"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @property availableEncodeChannelLayoutTags @abstract When encoding, an NSArray of NSNumber of all output channel layout tags provided by the codec. Returns nil if not encoding.
+// When encoding, an NSArray of NSNumber of all output channel layout tags provided by the codec. Returns nil if not encoding.
 //
 // AvailableEncodeChannelLayoutTags returns the collection as a Go slice.
-func (x *AudioConverter) AvailableEncodeChannelLayoutTags() []*foundation.NSNumber {
-	arr := x.inner.AvailableEncodeChannelLayoutTags()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *AudioConverter) AvailableEncodeChannelLayoutTags() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableEncodeChannelLayoutTags"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AudioConverterable is the interface implemented by [AudioConverter], for mocking and DI.
 type AudioConverterable interface {
-	Unwrap() *raw.AVAudioConverter
-	WithChannelMap(items ...*foundation.NSNumber) *AudioConverter
-	WithMagicCookie(magicCookie *foundation.NSData) *AudioConverter
+	obj.Object
+	WithChannelMap(items ...obj.Object) *AudioConverter
+	WithMagicCookie(magicCookie obj.Object) *AudioConverter
 	WithDownmix(downmix bool) *AudioConverter
 	WithDither(dither bool) *AudioConverter
 	WithSampleRateConverterQuality(sampleRateConverterQuality int) *AudioConverter
 	WithSampleRateConverterAlgorithm(sampleRateConverterAlgorithm string) *AudioConverter
-	WithPrimeMethod(primeMethod AVAudioConverterPrimeMethod) *AudioConverter
-	WithPrimeInfo(primeInfo raw.AVAudioConverterPrimeInfo) *AudioConverter
+	WithPrimeMethod(primeMethod AudioConverterPrimeMethod) *AudioConverter
 	WithAudioSyncPacketFrequency(audioSyncPacketFrequency int) *AudioConverter
-	WithContentSource(contentSource AVAudioContentSource) *AudioConverter
-	WithDynamicRangeControlConfiguration(dynamicRangeControlConfiguration AVAudioDynamicRangeControlConfiguration) *AudioConverter
+	WithContentSource(contentSource AudioContentSource) *AudioConverter
+	WithDynamicRangeControlConfiguration(dynamicRangeControlConfiguration AudioDynamicRangeControlConfiguration) *AudioConverter
 	WithBitRate(bitRate int) *AudioConverter
 	WithBitRateStrategy(bitRateStrategy string) *AudioConverter
 	Reset()
-	ConvertToBufferFromBufferError(outputBuffer *raw.AVAudioPCMBuffer, inputBuffer *raw.AVAudioPCMBuffer) (bool, error)
-	ConvertToBufferErrorWithInputFromBlock(outputBuffer *raw.AVAudioBuffer, outError unsafe.Pointer, inputBlock objc.Block) AVAudioConverterOutputStatus
+	ConvertToBufferFromBuffer(outputBuffer *AudioPCMBuffer, inputBuffer *AudioPCMBuffer) error
 	InputFormat() *AudioFormat
 	OutputFormat() *AudioFormat
-	ChannelMap() []*foundation.NSNumber
-	SetChannelMap(channelMap *foundation.NSArray[*foundation.NSNumber])
-	MagicCookie() *foundation.NSData
-	SetMagicCookie(magicCookie *foundation.NSData)
+	ChannelMap() []obj.Object
+	SetChannelMap(channelMap []obj.Object)
+	MagicCookie() obj.Object
+	SetMagicCookie(magicCookie obj.Object)
 	Downmix() bool
 	SetDownmix(downmix bool)
 	Dither() bool
@@ -480,26 +398,24 @@ type AudioConverterable interface {
 	SetSampleRateConverterQuality(sampleRateConverterQuality int)
 	SampleRateConverterAlgorithm() string
 	SetSampleRateConverterAlgorithm(sampleRateConverterAlgorithm string)
-	PrimeMethod() AVAudioConverterPrimeMethod
-	SetPrimeMethod(primeMethod AVAudioConverterPrimeMethod)
-	PrimeInfo() raw.AVAudioConverterPrimeInfo
-	SetPrimeInfo(primeInfo raw.AVAudioConverterPrimeInfo)
+	PrimeMethod() AudioConverterPrimeMethod
+	SetPrimeMethod(primeMethod AudioConverterPrimeMethod)
 	AudioSyncPacketFrequency() int
 	SetAudioSyncPacketFrequency(audioSyncPacketFrequency int)
-	ContentSource() AVAudioContentSource
-	SetContentSource(contentSource AVAudioContentSource)
-	DynamicRangeControlConfiguration() AVAudioDynamicRangeControlConfiguration
-	SetDynamicRangeControlConfiguration(dynamicRangeControlConfiguration AVAudioDynamicRangeControlConfiguration)
+	ContentSource() AudioContentSource
+	SetContentSource(contentSource AudioContentSource)
+	DynamicRangeControlConfiguration() AudioDynamicRangeControlConfiguration
+	SetDynamicRangeControlConfiguration(dynamicRangeControlConfiguration AudioDynamicRangeControlConfiguration)
 	BitRate() int
 	SetBitRate(bitRate int)
 	BitRateStrategy() string
 	SetBitRateStrategy(bitRateStrategy string)
 	MaximumOutputPacketSize() int
-	AvailableEncodeBitRates() []*foundation.NSNumber
-	ApplicableEncodeBitRates() []*foundation.NSNumber
-	AvailableEncodeSampleRates() []*foundation.NSNumber
-	ApplicableEncodeSampleRates() []*foundation.NSNumber
-	AvailableEncodeChannelLayoutTags() []*foundation.NSNumber
+	AvailableEncodeBitRates() []obj.Object
+	ApplicableEncodeBitRates() []obj.Object
+	AvailableEncodeSampleRates() []obj.Object
+	ApplicableEncodeSampleRates() []obj.Object
+	AvailableEncodeChannelLayoutTags() []obj.Object
 }
 
 var _ AudioConverterable = (*AudioConverter)(nil)

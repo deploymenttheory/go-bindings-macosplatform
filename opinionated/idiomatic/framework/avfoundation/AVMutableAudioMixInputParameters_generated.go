@@ -5,102 +5,110 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The parameters you use when adding an audio track to a mix.
 //
-// MutableAudioMixInputParameters wraps [raw.AVMutableAudioMixInputParameters] with a fluent Go API.
+// MutableAudioMixInputParameters is an idiomatic wrapper over the Objective-C class AVMutableAudioMixInputParameters.
 type MutableAudioMixInputParameters struct {
-	inner *raw.AVMutableAudioMixInputParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMutableAudioMixInputParameters].
-func (x *MutableAudioMixInputParameters) Unwrap() *raw.AVMutableAudioMixInputParameters {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableAudioMixInputParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableAudioMixInputParametersFromID adopts an existing object pointer as a MutableAudioMixInputParameters (nil for 0).
+// MutableAudioMixInputParametersFromID adopts an existing Objective-C object as a MutableAudioMixInputParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableAudioMixInputParametersFromID(id objc.ID) *MutableAudioMixInputParameters {
 	if id == 0 {
 		return nil
 	}
-	return &MutableAudioMixInputParameters{inner: raw.AVMutableAudioMixInputParametersFromID(id)}
+	x := &MutableAudioMixInputParameters{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMutableAudioMixInputParameters creates a new [MutableAudioMixInputParameters].
+// mutableAudioMixInputParametersAdopt wraps an Objective-C object that this code just created as a
+// MutableAudioMixInputParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableAudioMixInputParametersAdopt(id objc.ID) *MutableAudioMixInputParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableAudioMixInputParameters{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MutableAudioMixInputParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MutableAudioMixInputParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MutableAudioMixInputParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMutableAudioMixInputParameters creates a new MutableAudioMixInputParameters.
 func NewMutableAudioMixInputParameters() *MutableAudioMixInputParameters {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableAudioMixInputParameters")), objc.RegisterName("new"))
-	return &MutableAudioMixInputParameters{inner: raw.AVMutableAudioMixInputParametersFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMutableAudioMixInputParameters")), objc.RegisterName("new"))
+	return mutableAudioMixInputParametersAdopt(_id)
 }
 
 // The identifier of the audio track to which the parameters should be applied.
 //
-// WithTrackID sets the trackID property and returns the receiver for chaining.
+// WithTrackID sets trackID and returns the receiver so calls can be chained.
 func (x *MutableAudioMixInputParameters) WithTrackID(trackID int32) *MutableAudioMixInputParameters {
-	x.inner.SetTrackID(trackID)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackID:"), trackID)
 	return x
 }
 
 // The processing algorithm used to manage audio pitch for scaled audio edits.
 //
-// WithAudioTimePitchAlgorithm sets the audioTimePitchAlgorithm property and returns the receiver for chaining.
-func (x *MutableAudioMixInputParameters) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *MutableAudioMixInputParameters {
-	x.inner.SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm)
+// WithAudioTimePitchAlgorithm sets audioTimePitchAlgorithm and returns the receiver so calls can be chained.
+func (x *MutableAudioMixInputParameters) WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *MutableAudioMixInputParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
 	return x
 }
 
-// Sets a volume ramp to apply during a specified time range.
+// The audio processing tap associated with the track.
 //
-// SetVolumeRampFromStartVolumeToEndVolumeTimeRange calls the underlying SetVolumeRampFromStartVolumeToEndVolumeTimeRange.
-func (x *MutableAudioMixInputParameters) SetVolumeRampFromStartVolumeToEndVolumeTimeRange(startVolume float32, endVolume float32, timeRange coremedia.CMTimeRange) {
-	x.inner.SetVolumeRampFromStartVolumeToEndVolumeTimeRange(startVolume, endVolume, timeRange)
+// WithAudioTapProcessor sets audioTapProcessor and returns the receiver so calls can be chained.
+func (x *MutableAudioMixInputParameters) WithAudioTapProcessor(audioTapProcessor obj.Object) *MutableAudioMixInputParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTapProcessor:"), objref.IDOf(audioTapProcessor))
+	return x
 }
 
-// Sets the value of the audio volume starting at the specified time.
-//
-// SetVolumeAtTime calls the underlying SetVolumeAtTime.
-func (x *MutableAudioMixInputParameters) SetVolumeAtTime(volume float32, time_ coremedia.CMTime) {
-	x.inner.SetVolumeAtTime(volume, time_)
-}
-
-// SetTrackID calls the underlying SetTrackID.
 func (x *MutableAudioMixInputParameters) SetTrackID(trackID int32) {
-	x.inner.SetTrackID(trackID)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackID:"), trackID)
 }
 
-// SetAudioTimePitchAlgorithm calls the underlying SetAudioTimePitchAlgorithm.
-func (x *MutableAudioMixInputParameters) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) {
-	x.inner.SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm)
+func (x *MutableAudioMixInputParameters) SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTimePitchAlgorithm:"), objref.IDOf(audioTimePitchAlgorithm))
 }
 
-// SetAudioTapProcessor calls the underlying SetAudioTapProcessor.
-func (x *MutableAudioMixInputParameters) SetAudioTapProcessor(audioTapProcessor unsafe.Pointer) {
-	x.inner.SetAudioTapProcessor(audioTapProcessor)
-}
-
-func (x *MutableAudioMixInputParameters) asAudioMixInputParameters() *raw.AVAudioMixInputParameters {
-	return &x.inner.AVAudioMixInputParameters
+func (x *MutableAudioMixInputParameters) SetAudioTapProcessor(audioTapProcessor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioTapProcessor:"), objref.IDOf(audioTapProcessor))
 }
 
 // MutableAudioMixInputParametersable is the interface implemented by [MutableAudioMixInputParameters], for mocking and DI.
 type MutableAudioMixInputParametersable interface {
-	Unwrap() *raw.AVMutableAudioMixInputParameters
+	obj.Object
 	WithTrackID(trackID int32) *MutableAudioMixInputParameters
-	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString) *MutableAudioMixInputParameters
-	SetVolumeRampFromStartVolumeToEndVolumeTimeRange(startVolume float32, endVolume float32, timeRange coremedia.CMTimeRange)
-	SetVolumeAtTime(volume float32, time_ coremedia.CMTime)
+	WithAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object) *MutableAudioMixInputParameters
+	WithAudioTapProcessor(audioTapProcessor obj.Object) *MutableAudioMixInputParameters
 	SetTrackID(trackID int32)
-	SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm *foundation.NSString)
-	SetAudioTapProcessor(audioTapProcessor unsafe.Pointer)
+	SetAudioTimePitchAlgorithm(audioTimePitchAlgorithm obj.Object)
+	SetAudioTapProcessor(audioTapProcessor obj.Object)
 }
 
 var _ MutableAudioMixInputParametersable = (*MutableAudioMixInputParameters)(nil)

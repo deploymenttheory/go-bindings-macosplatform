@@ -5,184 +5,188 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // A snapshot of a file at a specific point in time.
 //
-// FileVersion wraps [raw.NSFileVersion] with a fluent Go API.
+// FileVersion is an idiomatic wrapper over the Objective-C class NSFileVersion.
 type FileVersion struct {
-	inner *raw.NSFileVersion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFileVersion].
-func (x *FileVersion) Unwrap() *raw.NSFileVersion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileVersion) ID() objc.ID { return x.inner.Ptr() }
-
-// FileVersionFromID adopts an existing object pointer as a FileVersion (nil for 0).
+// FileVersionFromID adopts an existing Objective-C object as a FileVersion
+// (nil for 0), retaining it and registering a release finalizer.
 func FileVersionFromID(id objc.ID) *FileVersion {
 	if id == 0 {
 		return nil
 	}
-	return &FileVersion{inner: raw.NSFileVersionFromID(id)}
+	x := &FileVersion{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFileVersion creates a new [FileVersion].
+// fileVersionAdopt wraps an Objective-C object that this code just created as a
+// FileVersion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileVersionAdopt(id objc.ID) *FileVersion {
+	if id == 0 {
+		return nil
+	}
+	x := &FileVersion{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FileVersion) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileVersion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileVersion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFileVersion creates a new FileVersion.
 func NewFileVersion() *FileVersion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileVersion")), objc.RegisterName("new"))
-	return &FileVersion{inner: raw.NSFileVersionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSFileVersion")), objc.RegisterName("new"))
+	return fileVersionAdopt(_id)
 }
 
 // A Boolean value that indicates if the version object is in conflict or not.
 //
-// WithResolved sets the resolved property and returns the receiver for chaining.
+// WithResolved sets resolved and returns the receiver so calls can be chained.
 func (x *FileVersion) WithResolved(resolved bool) *FileVersion {
-	x.inner.SetResolved(resolved)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolved:"), resolved)
 	return x
 }
 
 // A Boolean value that specifies whether the system can delete the associated file at some future time.
 //
-// WithDiscardable sets the discardable property and returns the receiver for chaining.
+// WithDiscardable sets discardable and returns the receiver so calls can be chained.
 func (x *FileVersion) WithDiscardable(discardable bool) *FileVersion {
-	x.inner.SetDiscardable(discardable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscardable:"), discardable)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *FileVersion) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileVersion {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *FileVersion) WithScriptingProperties(scriptingProperties obj.Object) *FileVersion {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Replace the contents of the specified file with the contents of the current version’s file.
-//
-// ReplaceItemAtURLOptionsError calls the underlying ReplaceItemAtURLOptionsError.
-func (x *FileVersion) ReplaceItemAtURLOptionsError(url string, options NSFileVersionReplacingOptions) (*URL, error) {
-	_r, _err := x.inner.ReplaceItemAtURLOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileVersionReplacingOptions(options))
-	if _err != nil {
-		return nil, _err
+func (x *FileVersion) ReplaceItemAtURLOptionsError(url string, options FileVersionReplacingOptions) (*URL, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceItemAtURL:options:error:"), rt.FileURL(url), options, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &URL{inner: _r}, nil
+	return URLFromID(_r), nil
 }
 
 // Remove this version object and its associated file from the version store.
 //
-// RemoveAndReturnError returns any validation error.
+// RemoveAndReturnError returns an error if the operation did not succeed.
 func (x *FileVersion) RemoveAndReturnError() error {
-	_, err := x.inner.RemoveAndReturnError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// URL calls the underlying URL.
 func (x *FileVersion) URL() *URL {
-	_r := x.inner.URL()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return URLFromID(_r)
 }
 
-// LocalizedName calls the underlying LocalizedName.
-func (x *FileVersion) LocalizedName() *String {
-	_r := x.inner.LocalizedName()
-	if _r == nil {
-		return nil
+func (x *FileVersion) LocalizedName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// LocalizedNameOfSavingComputer calls the underlying LocalizedNameOfSavingComputer.
-func (x *FileVersion) LocalizedNameOfSavingComputer() *String {
-	_r := x.inner.LocalizedNameOfSavingComputer()
-	if _r == nil {
-		return nil
+func (x *FileVersion) LocalizedNameOfSavingComputer() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedNameOfSavingComputer"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// OriginatorNameComponents calls the underlying OriginatorNameComponents.
 func (x *FileVersion) OriginatorNameComponents() *PersonNameComponents {
-	_r := x.inner.OriginatorNameComponents()
-	if _r == nil {
-		return nil
-	}
-	return &PersonNameComponents{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originatorNameComponents"))
+	return PersonNameComponentsFromID(_r)
 }
 
-// ModificationDate calls the underlying ModificationDate.
 func (x *FileVersion) ModificationDate() *Date {
-	_r := x.inner.ModificationDate()
-	if _r == nil {
-		return nil
-	}
-	return &Date{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modificationDate"))
+	return DateFromID(_r)
 }
 
-// PersistentIdentifier calls the underlying PersistentIdentifier.
-func (x *FileVersion) PersistentIdentifier() raw.NSCoding {
-	return x.inner.PersistentIdentifier()
-}
-
-// IsConflict calls the underlying IsConflict.
 func (x *FileVersion) IsConflict() bool {
-	return x.inner.IsConflict()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConflict"))
+	return _r
 }
 
-// IsResolved calls the underlying IsResolved.
 func (x *FileVersion) IsResolved() bool {
-	return x.inner.IsResolved()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isResolved"))
+	return _r
 }
 
-// SetResolved calls the underlying SetResolved.
 func (x *FileVersion) SetResolved(resolved bool) {
-	x.inner.SetResolved(resolved)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolved:"), resolved)
 }
 
-// IsDiscardable calls the underlying IsDiscardable.
 func (x *FileVersion) IsDiscardable() bool {
-	return x.inner.IsDiscardable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDiscardable"))
+	return _r
 }
 
-// SetDiscardable calls the underlying SetDiscardable.
 func (x *FileVersion) SetDiscardable(discardable bool) {
-	x.inner.SetDiscardable(discardable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscardable:"), discardable)
 }
 
-// HasLocalContents calls the underlying HasLocalContents.
 func (x *FileVersion) HasLocalContents() bool {
-	return x.inner.HasLocalContents()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasLocalContents"))
+	return _r
 }
 
-// HasThumbnail calls the underlying HasThumbnail.
 func (x *FileVersion) HasThumbnail() bool {
-	return x.inner.HasThumbnail()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasThumbnail"))
+	return _r
 }
-
-func (x *FileVersion) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // FileVersionable is the interface implemented by [FileVersion], for mocking and DI.
 type FileVersionable interface {
-	Unwrap() *raw.NSFileVersion
+	obj.Object
 	WithResolved(resolved bool) *FileVersion
 	WithDiscardable(discardable bool) *FileVersion
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileVersion
-	ReplaceItemAtURLOptionsError(url string, options NSFileVersionReplacingOptions) (*URL, error)
+	WithScriptingProperties(scriptingProperties obj.Object) *FileVersion
+	ReplaceItemAtURLOptionsError(url string, options FileVersionReplacingOptions) (*URL, error)
 	RemoveAndReturnError() error
 	URL() *URL
-	LocalizedName() *String
-	LocalizedNameOfSavingComputer() *String
+	LocalizedName() string
+	LocalizedNameOfSavingComputer() string
 	OriginatorNameComponents() *PersonNameComponents
 	ModificationDate() *Date
-	PersistentIdentifier() raw.NSCoding
 	IsConflict() bool
 	IsResolved() bool
 	SetResolved(resolved bool)

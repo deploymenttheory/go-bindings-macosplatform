@@ -5,278 +5,192 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNGramMatrixCalculationGradient wraps [raw.MPSNNGramMatrixCalculationGradient] with a fluent Go API.
+// NNGramMatrixCalculationGradient is an idiomatic wrapper over the Objective-C class MPSNNGramMatrixCalculationGradient.
 type NNGramMatrixCalculationGradient struct {
-	inner *raw.MPSNNGramMatrixCalculationGradient
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNGramMatrixCalculationGradient].
-func (x *NNGramMatrixCalculationGradient) Unwrap() *raw.MPSNNGramMatrixCalculationGradient {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNGramMatrixCalculationGradient) ID() objc.ID { return x.inner.Ptr() }
-
-// NNGramMatrixCalculationGradientFromID adopts an existing object pointer as a NNGramMatrixCalculationGradient (nil for 0).
+// NNGramMatrixCalculationGradientFromID adopts an existing Objective-C object as a NNGramMatrixCalculationGradient
+// (nil for 0), retaining it and registering a release finalizer.
 func NNGramMatrixCalculationGradientFromID(id objc.ID) *NNGramMatrixCalculationGradient {
 	if id == 0 {
 		return nil
 	}
-	return &NNGramMatrixCalculationGradient{inner: raw.MPSNNGramMatrixCalculationGradientFromID(id)}
+	x := &NNGramMatrixCalculationGradient{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewNNGramMatrixCalculationGradientWithCoderDevice creates a new [NNGramMatrixCalculationGradient].
-func NewNNGramMatrixCalculationGradientWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *NNGramMatrixCalculationGradient {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNGramMatrixCalculationGradient")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &NNGramMatrixCalculationGradient{inner: raw.MPSNNGramMatrixCalculationGradientFromID(_id)}
+// nNGramMatrixCalculationGradientAdopt wraps an Objective-C object that this code just created as a
+// NNGramMatrixCalculationGradient (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNGramMatrixCalculationGradientAdopt(id objc.ID) *NNGramMatrixCalculationGradient {
+	if id == 0 {
+		return nil
+	}
+	x := &NNGramMatrixCalculationGradient{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initializes a MPSNNGramMatrixCalculationGradient kernel. @param      device      The MTLDevice on which this MPSNNGramMatrixCalculationGradient filter will be used. @param      alpha       Scaling factor for the output. NOTE: the value for alpha is automatically adjusted by the @ref MPSNNGradientState when it is provided in the encode call. @return     A valid MPSNNGramMatrixCalculationGradient object or nil, if failure.
-//
-// NewNNGramMatrixCalculationGradientWithDeviceAlpha creates a new [NNGramMatrixCalculationGradient].
-func NewNNGramMatrixCalculationGradientWithDeviceAlpha(device metal.MTLDevice, alpha float32) *NNGramMatrixCalculationGradient {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNGramMatrixCalculationGradient")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:alpha:"), device, alpha)
-	return &NNGramMatrixCalculationGradient{inner: raw.MPSNNGramMatrixCalculationGradientFromID(_id)}
+// Description returns the object's -description text.
+func (x *NNGramMatrixCalculationGradient) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract   Initializes a MPSNNGramMatrixCalculationGradient kernel with scaling factor alpha = 1.0f. @param      device      The MTLDevice on which this MPSNNGramMatrixCalculationGradient filter will be used. @return     A valid MPSNNGramMatrixCalculationGradient object or nil, if failure.
-//
-// NewNNGramMatrixCalculationGradientWithDevice creates a new [NNGramMatrixCalculationGradient].
-func NewNNGramMatrixCalculationGradientWithDevice(device metal.MTLDevice) *NNGramMatrixCalculationGradient {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNGramMatrixCalculationGradient")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &NNGramMatrixCalculationGradient{inner: raw.MPSNNGramMatrixCalculationGradientFromID(_id)}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNGramMatrixCalculationGradient) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property   alpha @abstract   Scaling factor for the output. Default: 1.0f. NOTE: the value for alpha is automatically adjusted by the @ref MPSNNGradientState when it is provided in the encode call.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNGramMatrixCalculationGradient) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNNGramMatrixCalculationGradient creates a new NNGramMatrixCalculationGradient.
+func NewNNGramMatrixCalculationGradient() *NNGramMatrixCalculationGradient {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationGradient")), objc.RegisterName("new"))
+	return nNGramMatrixCalculationGradientAdopt(_id)
+}
+
+// Scaling factor for the output. Default: 1.0f. NOTE: the value for alpha is automatically adjusted by the
 //
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha sets alpha and returns the receiver so calls can be chained.
 func (x *NNGramMatrixCalculationGradient) WithAlpha(alpha float32) *NNGramMatrixCalculationGradient {
-	x.inner.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// @property   kernelOffsetX @abstract   Offset in the kernel reference frame to position the kernel in the X dimension @discussion In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
+// Offset in the kernel reference frame to position the kernel in the X dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
 //
-// WithKernelOffsetX sets the kernelOffsetX property and returns the receiver for chaining.
+// WithKernelOffsetX sets kernelOffsetX and returns the receiver so calls can be chained.
 func (x *NNGramMatrixCalculationGradient) WithKernelOffsetX(kernelOffsetX int) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.SetKernelOffsetX(kernelOffsetX)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelOffsetX:"), kernelOffsetX)
 	return x
 }
 
-// @property   kernelOffsetY @abstract   Offset in the kernel reference frame to position the kernel in the Y dimension @discussion In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
+// Offset in the kernel reference frame to position the kernel in the Y dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
 //
-// WithKernelOffsetY sets the kernelOffsetY property and returns the receiver for chaining.
+// WithKernelOffsetY sets kernelOffsetY and returns the receiver so calls can be chained.
 func (x *NNGramMatrixCalculationGradient) WithKernelOffsetY(kernelOffsetY int) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.SetKernelOffsetY(kernelOffsetY)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelOffsetY:"), kernelOffsetY)
 	return x
 }
 
-// @property   primaryOffset @abstract   The position of the destination clip rectangle origin relative to the primary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref subsubsection_mpsoffset
+// The number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
 //
-// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *NNGramMatrixCalculationGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNGramMatrixCalculationGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   secondaryOffset @abstract   The position of the destination clip rectangle origin relative to the secondary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref subsubsection_mpsoffset
+// The number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
 //
-// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+// WithPrimarySourceFeatureChannelOffset sets primarySourceFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *NNGramMatrixCalculationGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *NNGramMatrixCalculationGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also: @ref subsubsection_clipRect
+// The number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
 //
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationGradient) WithClipRect(clipRect metal.MTLRegion) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetClipRect(clipRect)
+// WithSecondarySourceFeatureChannelOffset sets secondarySourceFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *NNGramMatrixCalculationGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *NNGramMatrixCalculationGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
 	return x
 }
 
-// @property   destinationFeatureChannelOffset @abstract   The number of channels in the destination MPSImage to skip before writing output. @discussion This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+// The maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 //
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithPrimarySourceFeatureChannelMaxCount sets primarySourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+func (x *NNGramMatrixCalculationGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *NNGramMatrixCalculationGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
 	return x
 }
 
-// @property   primarySourceFeatureChannelOffset @abstract   The number of channels in the primary source MPSImage to skip before reading the input. @discussion This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+// The maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 //
-// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+// WithSecondarySourceFeatureChannelMaxCount sets secondarySourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+func (x *NNGramMatrixCalculationGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *NNGramMatrixCalculationGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
 	return x
 }
 
-// @property   secondarySourceFeatureChannelOffset @abstract   The number of channels in the secondary source MPSImage to skip before reading the input. @discussion This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+// The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
 //
-// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+// WithPrimaryStrideInPixelsX sets primaryStrideInPixelsX and returns the receiver so calls can be chained.
+func (x *NNGramMatrixCalculationGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNGramMatrixCalculationGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
 	return x
 }
 
-// @property   primarySourceFeatureChannelMaxCount @abstract   The maximum number of channels in the primary source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+// The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
 //
-// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+// WithPrimaryStrideInPixelsY sets primaryStrideInPixelsY and returns the receiver so calls can be chained.
+func (x *NNGramMatrixCalculationGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNGramMatrixCalculationGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
 	return x
 }
 
-// @property   secondarySourceFeatureChannelMaxCount @abstract   The maximum number of channels in the secondary source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+// The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
 //
-// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+// WithSecondaryStrideInPixelsX sets secondaryStrideInPixelsX and returns the receiver so calls can be chained.
+func (x *NNGramMatrixCalculationGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNGramMatrixCalculationGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return x
 }
 
-// @property   primaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref subsubsection_edgemode
+// The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
 //
-// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationGradient) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
-	return x
-}
-
-// @property   secondaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref subsubsection_edgemode
-//
-// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationGradient) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
-	return x
-}
-
-// @property   primaryStrideInPixelsX @abstract   The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
-	return x
-}
-
-// @property   primaryStrideInPixelsY @abstract   The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
-	return x
-}
-
-// @property   secondaryStrideInPixelsX @abstract   The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
-	return x
-}
-
-// @property   secondaryStrideInPixelsY @abstract   The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how strideInPixelsX/Y should be interpreted. Default:  MPSNNPaddingMethodAlignCentered | MPSNNPaddingMethodAddRemainderToTopLeft | MPSNNPaddingMethodSizeSame Some object types (e.g. MPSCNNFullyConnected) may override this default with something appropriate to its operation.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationGradient) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationGradient) WithOptions(options mpscore.MPSKernelOptions) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
+// WithSecondaryStrideInPixelsY sets secondaryStrideInPixelsY and returns the receiver so calls can be chained.
+func (x *NNGramMatrixCalculationGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNGramMatrixCalculationGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *NNGramMatrixCalculationGradient) WithLabel(label string) *NNGramMatrixCalculationGradient {
-	x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property   alpha @abstract   Scaling factor for the output. Default: 1.0f. NOTE: the value for alpha is automatically adjusted by the @ref MPSNNGradientState when it is provided in the encode call.
-//
-// Alpha calls the underlying Alpha.
+// Scaling factor for the output. Default: 1.0f. NOTE: the value for alpha is automatically adjusted by the
 func (x *NNGramMatrixCalculationGradient) Alpha() float32 {
-	return x.inner.Alpha()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
+	return _r
 }
 
-// SetAlpha calls the underlying SetAlpha.
 func (x *NNGramMatrixCalculationGradient) SetAlpha(alpha float32) {
-	x.inner.SetAlpha(alpha)
-}
-
-func (x *NNGramMatrixCalculationGradient) asCNNGradientKernel() *mpsneuralnetwork.MPSCNNGradientKernel {
-	return &x.inner.MPSCNNGradientKernel
-}
-
-func (x *NNGramMatrixCalculationGradient) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
-	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel
-}
-
-func (x *NNGramMatrixCalculationGradient) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSCNNGradientKernel.MPSCNNBinaryKernel.MPSKernel
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
 // NNGramMatrixCalculationGradientable is the interface implemented by [NNGramMatrixCalculationGradient], for mocking and DI.
 type NNGramMatrixCalculationGradientable interface {
-	Unwrap() *raw.MPSNNGramMatrixCalculationGradient
+	obj.Object
 	WithAlpha(alpha float32) *NNGramMatrixCalculationGradient
 	WithKernelOffsetX(kernelOffsetX int) *NNGramMatrixCalculationGradient
 	WithKernelOffsetY(kernelOffsetY int) *NNGramMatrixCalculationGradient
-	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNGramMatrixCalculationGradient
-	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNGramMatrixCalculationGradient
-	WithClipRect(clipRect metal.MTLRegion) *NNGramMatrixCalculationGradient
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNGramMatrixCalculationGradient
-	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNGramMatrixCalculationGradient
-	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNGramMatrixCalculationGradient
-	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNGramMatrixCalculationGradient
-	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNGramMatrixCalculationGradient
-	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNGramMatrixCalculationGradient
-	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNGramMatrixCalculationGradient
-	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNGramMatrixCalculationGradient
-	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNGramMatrixCalculationGradient
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNGramMatrixCalculationGradient
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNGramMatrixCalculationGradient
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNGramMatrixCalculationGradient
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNGramMatrixCalculationGradient
-	WithOptions(options mpscore.MPSKernelOptions) *NNGramMatrixCalculationGradient
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNGramMatrixCalculationGradient
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *NNGramMatrixCalculationGradient
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *NNGramMatrixCalculationGradient
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *NNGramMatrixCalculationGradient
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *NNGramMatrixCalculationGradient
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNGramMatrixCalculationGradient
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNGramMatrixCalculationGradient
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNGramMatrixCalculationGradient
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNGramMatrixCalculationGradient
 	WithLabel(label string) *NNGramMatrixCalculationGradient
 	Alpha() float32
 	SetAlpha(alpha float32)

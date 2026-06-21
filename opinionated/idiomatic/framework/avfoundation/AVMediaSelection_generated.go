@@ -5,72 +5,87 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a complete rendition of media selection options on an asset.
 //
-// MediaSelection wraps [raw.AVMediaSelection] with a fluent Go API.
+// MediaSelection is an idiomatic wrapper over the Objective-C class AVMediaSelection.
 type MediaSelection struct {
-	inner *raw.AVMediaSelection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMediaSelection].
-func (x *MediaSelection) Unwrap() *raw.AVMediaSelection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MediaSelection) ID() objc.ID { return x.inner.Ptr() }
-
-// MediaSelectionFromID adopts an existing object pointer as a MediaSelection (nil for 0).
+// MediaSelectionFromID adopts an existing Objective-C object as a MediaSelection
+// (nil for 0), retaining it and registering a release finalizer.
 func MediaSelectionFromID(id objc.ID) *MediaSelection {
 	if id == 0 {
 		return nil
 	}
-	return &MediaSelection{inner: raw.AVMediaSelectionFromID(id)}
+	x := &MediaSelection{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMediaSelection creates a new [MediaSelection].
+// mediaSelectionAdopt wraps an Objective-C object that this code just created as a
+// MediaSelection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mediaSelectionAdopt(id objc.ID) *MediaSelection {
+	if id == 0 {
+		return nil
+	}
+	x := &MediaSelection{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MediaSelection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MediaSelection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MediaSelection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMediaSelection creates a new MediaSelection.
 func NewMediaSelection() *MediaSelection {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMediaSelection")), objc.RegisterName("new"))
-	return &MediaSelection{inner: raw.AVMediaSelectionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMediaSelection")), objc.RegisterName("new"))
+	return mediaSelectionAdopt(_id)
 }
 
 // Returns the media selection option that’s currently selected in the specified group.
-//
-// SelectedMediaOptionInMediaSelectionGroup calls the underlying SelectedMediaOptionInMediaSelectionGroup.
-func (x *MediaSelection) SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *MediaSelectionOption {
-	_r := x.inner.SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup)
-	if _r == nil {
-		return nil
-	}
-	return &MediaSelectionOption{inner: _r}
+func (x *MediaSelection) SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) *MediaSelectionOption {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedMediaOptionInMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
+	return MediaSelectionOptionFromID(_r)
 }
 
 // Indicates whether the specified media selection group is subject to automatic media selection.
-//
-// MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup calls the underlying MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup.
-func (x *MediaSelection) MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) bool {
-	return x.inner.MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup(mediaSelectionGroup)
+func (x *MediaSelection) MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup:"), objref.IDOf(mediaSelectionGroup))
+	return _r
 }
 
-// Asset calls the underlying Asset.
 func (x *MediaSelection) Asset() *Asset {
-	_r := x.inner.Asset()
-	if _r == nil {
-		return nil
-	}
-	return &Asset{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asset"))
+	return AssetFromID(_r)
 }
-
-func (x *MediaSelection) asMediaSelection() *raw.AVMediaSelection { return x.inner }
 
 // MediaSelectionable is the interface implemented by [MediaSelection], for mocking and DI.
 type MediaSelectionable interface {
-	Unwrap() *raw.AVMediaSelection
-	SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) *MediaSelectionOption
-	MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup(mediaSelectionGroup *raw.AVMediaSelectionGroup) bool
+	obj.Object
+	SelectedMediaOptionInMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) *MediaSelectionOption
+	MediaSelectionCriteriaCanBeAppliedAutomaticallyToMediaSelectionGroup(mediaSelectionGroup *MediaSelectionGroup) bool
 	Asset() *Asset
 }
 

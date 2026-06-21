@@ -5,41 +5,68 @@
 package safariservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safariservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that your app uses to find out the current state of a Safari extension.
 //
-// SafariExtensionManager wraps [raw.SFSafariExtensionManager] with a fluent Go API.
+// SafariExtensionManager is an idiomatic wrapper over the Objective-C class SFSafariExtensionManager.
 type SafariExtensionManager struct {
-	inner *raw.SFSafariExtensionManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFSafariExtensionManager].
-func (x *SafariExtensionManager) Unwrap() *raw.SFSafariExtensionManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SafariExtensionManager) ID() objc.ID { return x.inner.Ptr() }
-
-// SafariExtensionManagerFromID adopts an existing object pointer as a SafariExtensionManager (nil for 0).
+// SafariExtensionManagerFromID adopts an existing Objective-C object as a SafariExtensionManager
+// (nil for 0), retaining it and registering a release finalizer.
 func SafariExtensionManagerFromID(id objc.ID) *SafariExtensionManager {
 	if id == 0 {
 		return nil
 	}
-	return &SafariExtensionManager{inner: raw.SFSafariExtensionManagerFromID(id)}
+	x := &SafariExtensionManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSafariExtensionManager creates a new [SafariExtensionManager].
+// safariExtensionManagerAdopt wraps an Objective-C object that this code just created as a
+// SafariExtensionManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func safariExtensionManagerAdopt(id objc.ID) *SafariExtensionManager {
+	if id == 0 {
+		return nil
+	}
+	x := &SafariExtensionManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SafariExtensionManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SafariExtensionManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SafariExtensionManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSafariExtensionManager creates a new SafariExtensionManager.
 func NewSafariExtensionManager() *SafariExtensionManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSafariExtensionManager")), objc.RegisterName("new"))
-	return &SafariExtensionManager{inner: raw.SFSafariExtensionManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFSafariExtensionManager")), objc.RegisterName("new"))
+	return safariExtensionManagerAdopt(_id)
 }
 
 // SafariExtensionManagerable is the interface implemented by [SafariExtensionManager], for mocking and DI.
 type SafariExtensionManagerable interface {
-	Unwrap() *raw.SFSafariExtensionManager
+	obj.Object
 }
 
 var _ SafariExtensionManagerable = (*SafariExtensionManager)(nil)

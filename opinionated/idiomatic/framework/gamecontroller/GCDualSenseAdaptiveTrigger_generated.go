@@ -5,210 +5,172 @@
 package gamecontroller
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that encapsulates the features of a DualSense adaptive trigger.
 //
-// DualSenseAdaptiveTrigger wraps [raw.GCDualSenseAdaptiveTrigger] with a fluent Go API.
+// DualSenseAdaptiveTrigger is an idiomatic wrapper over the Objective-C class GCDualSenseAdaptiveTrigger.
 type DualSenseAdaptiveTrigger struct {
-	inner *raw.GCDualSenseAdaptiveTrigger
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCDualSenseAdaptiveTrigger].
-func (x *DualSenseAdaptiveTrigger) Unwrap() *raw.GCDualSenseAdaptiveTrigger { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DualSenseAdaptiveTrigger) ID() objc.ID { return x.inner.Ptr() }
-
-// DualSenseAdaptiveTriggerFromID adopts an existing object pointer as a DualSenseAdaptiveTrigger (nil for 0).
+// DualSenseAdaptiveTriggerFromID adopts an existing Objective-C object as a DualSenseAdaptiveTrigger
+// (nil for 0), retaining it and registering a release finalizer.
 func DualSenseAdaptiveTriggerFromID(id objc.ID) *DualSenseAdaptiveTrigger {
 	if id == 0 {
 		return nil
 	}
-	return &DualSenseAdaptiveTrigger{inner: raw.GCDualSenseAdaptiveTriggerFromID(id)}
+	x := &DualSenseAdaptiveTrigger{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDualSenseAdaptiveTrigger creates a new [DualSenseAdaptiveTrigger].
+// dualSenseAdaptiveTriggerAdopt wraps an Objective-C object that this code just created as a
+// DualSenseAdaptiveTrigger (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dualSenseAdaptiveTriggerAdopt(id objc.ID) *DualSenseAdaptiveTrigger {
+	if id == 0 {
+		return nil
+	}
+	x := &DualSenseAdaptiveTrigger{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DualSenseAdaptiveTrigger) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DualSenseAdaptiveTrigger) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DualSenseAdaptiveTrigger) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDualSenseAdaptiveTrigger creates a new DualSenseAdaptiveTrigger.
 func NewDualSenseAdaptiveTrigger() *DualSenseAdaptiveTrigger {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCDualSenseAdaptiveTrigger")), objc.RegisterName("new"))
-	return &DualSenseAdaptiveTrigger{inner: raw.GCDualSenseAdaptiveTriggerFromID(_id)}
-}
-
-// The block that the element calls when the user changes the level of pressure on the button.
-//
-// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
-func (x *DualSenseAdaptiveTrigger) WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *DualSenseAdaptiveTrigger {
-	x.inner.GCControllerButtonInput.SetValueChangedHandler(valueChangedHandler)
-	return x
-}
-
-// The block that the element calls when the user presses or releases the button.
-//
-// WithPressedChangedHandler sets the pressedChangedHandler property and returns the receiver for chaining.
-func (x *DualSenseAdaptiveTrigger) WithPressedChangedHandler(pressedChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *DualSenseAdaptiveTrigger {
-	x.inner.GCControllerButtonInput.SetPressedChangedHandler(pressedChangedHandler)
-	return x
-}
-
-// The block that the element calls when the user touches the button.
-//
-// WithTouchedChangedHandler sets the touchedChangedHandler property and returns the receiver for chaining.
-func (x *DualSenseAdaptiveTrigger) WithTouchedChangedHandler(touchedChangedHandler func(*raw.GCControllerButtonInput, float32, bool, bool)) *DualSenseAdaptiveTrigger {
-	x.inner.GCControllerButtonInput.SetTouchedChangedHandler(touchedChangedHandler)
-	return x
+	_id := objc.Send[objc.ID](objc.ID(_class("GCDualSenseAdaptiveTrigger")), objc.RegisterName("new"))
+	return dualSenseAdaptiveTriggerAdopt(_id)
 }
 
 // The level of pressure the user is applying to the button.
 //
-// WithValue sets the value property and returns the receiver for chaining.
+// WithValue sets value and returns the receiver so calls can be chained.
 func (x *DualSenseAdaptiveTrigger) WithValue(value float32) *DualSenseAdaptiveTrigger {
-	x.inner.GCControllerButtonInput.SetValue(value)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 	return x
 }
 
 // The preferred state for handling input when the user binds the element to a system gesture.
 //
-// WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
-func (x *DualSenseAdaptiveTrigger) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *DualSenseAdaptiveTrigger {
-	x.inner.GCControllerButtonInput.GCControllerElement.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
+// WithPreferredSystemGestureState sets preferredSystemGestureState and returns the receiver so calls can be chained.
+func (x *DualSenseAdaptiveTrigger) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *DualSenseAdaptiveTrigger {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
 	return x
 }
 
 // A system symbol for the element or the remapped element.
 //
-// WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
+// WithSfSymbolsName sets sfSymbolsName and returns the receiver so calls can be chained.
 func (x *DualSenseAdaptiveTrigger) WithSfSymbolsName(sfSymbolsName string) *DualSenseAdaptiveTrigger {
-	x.inner.GCControllerButtonInput.GCControllerElement.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
 	return x
 }
 
 // The localized name for the element or the remapped element.
 //
-// WithLocalizedName sets the localizedName property and returns the receiver for chaining.
+// WithLocalizedName sets localizedName and returns the receiver so calls can be chained.
 func (x *DualSenseAdaptiveTrigger) WithLocalizedName(localizedName string) *DualSenseAdaptiveTrigger {
-	x.inner.GCControllerButtonInput.GCControllerElement.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
 	return x
 }
 
 // The element’s system symbol, not the remapped symbol.
 //
-// WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
+// WithUnmappedSfSymbolsName sets unmappedSfSymbolsName and returns the receiver so calls can be chained.
 func (x *DualSenseAdaptiveTrigger) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DualSenseAdaptiveTrigger {
-	x.inner.GCControllerButtonInput.GCControllerElement.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
 	return x
 }
 
 // The element’s localized name, not the remapped name.
 //
-// WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
+// WithUnmappedLocalizedName sets unmappedLocalizedName and returns the receiver so calls can be chained.
 func (x *DualSenseAdaptiveTrigger) WithUnmappedLocalizedName(unmappedLocalizedName string) *DualSenseAdaptiveTrigger {
-	x.inner.GCControllerButtonInput.GCControllerElement.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
 	return x
 }
 
 // Sets the mode to provide feedback when the user tilts the trigger between the start and the end positions.
-//
-// SetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength calls the underlying SetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength.
 func (x *DualSenseAdaptiveTrigger) SetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength(startPosition float32, endPosition float32, startStrength float32, endStrength float32) {
-	x.inner.SetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength(startPosition, endPosition, startStrength, endStrength)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeSlopeFeedbackWithStartPosition:endPosition:startStrength:endStrength:"), startPosition, endPosition, startStrength, endStrength)
 }
 
 // Sets the mode to provide feedback when the user depresses the trigger at the start position or at a greater value.
-//
-// SetModeFeedbackWithStartPositionResistiveStrength calls the underlying SetModeFeedbackWithStartPositionResistiveStrength.
 func (x *DualSenseAdaptiveTrigger) SetModeFeedbackWithStartPositionResistiveStrength(startPosition float32, resistiveStrength float32) {
-	x.inner.SetModeFeedbackWithStartPositionResistiveStrength(startPosition, resistiveStrength)
-}
-
-// Sets the mode to provide feedback with the specified strengths for each possible trigger position.
-//
-// SetModeFeedbackWithResistiveStrengths calls the underlying SetModeFeedbackWithResistiveStrengths.
-func (x *DualSenseAdaptiveTrigger) SetModeFeedbackWithResistiveStrengths(positionalResistiveStrengths raw.GCDualSenseAdaptiveTriggerPositionalResistiveStrengths) {
-	x.inner.SetModeFeedbackWithResistiveStrengths(positionalResistiveStrengths)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeFeedbackWithStartPosition:resistiveStrength:"), startPosition, resistiveStrength)
 }
 
 // Sets the mode to provide feedback when the user depresses the trigger between the start and the end positions.
-//
-// SetModeWeaponWithStartPositionEndPositionResistiveStrength calls the underlying SetModeWeaponWithStartPositionEndPositionResistiveStrength.
 func (x *DualSenseAdaptiveTrigger) SetModeWeaponWithStartPositionEndPositionResistiveStrength(startPosition float32, endPosition float32, resistiveStrength float32) {
-	x.inner.SetModeWeaponWithStartPositionEndPositionResistiveStrength(startPosition, endPosition, resistiveStrength)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeWeaponWithStartPosition:endPosition:resistiveStrength:"), startPosition, endPosition, resistiveStrength)
 }
 
 // Sets the mode to vibrate when the user depresses the trigger at the start position or at a greater value.
-//
-// SetModeVibrationWithStartPositionAmplitudeFrequency calls the underlying SetModeVibrationWithStartPositionAmplitudeFrequency.
 func (x *DualSenseAdaptiveTrigger) SetModeVibrationWithStartPositionAmplitudeFrequency(startPosition float32, amplitude float32, frequency float32) {
-	x.inner.SetModeVibrationWithStartPositionAmplitudeFrequency(startPosition, amplitude, frequency)
-}
-
-// Sets the mode to vibrate with the specified amplitudes for each possible trigger position.
-//
-// SetModeVibrationWithAmplitudesFrequency calls the underlying SetModeVibrationWithAmplitudesFrequency.
-func (x *DualSenseAdaptiveTrigger) SetModeVibrationWithAmplitudesFrequency(positionalAmplitudes raw.GCDualSenseAdaptiveTriggerPositionalAmplitudes, frequency float32) {
-	x.inner.SetModeVibrationWithAmplitudesFrequency(positionalAmplitudes, frequency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeVibrationWithStartPosition:amplitude:frequency:"), startPosition, amplitude, frequency)
 }
 
 // Sets the mode to off and stops any trigger effect.
-//
-// SetModeOff calls the underlying SetModeOff.
 func (x *DualSenseAdaptiveTrigger) SetModeOff() {
-	x.inner.SetModeOff()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeOff"))
 }
 
-// The mode that the adaptive trigger is currently in. This property reflects the physical state of the triggers - and requires a response from the controller. It does not update immediately after calling -[GCDualSenseAdaptiveTrigger setMode...]. @see GCDualSenseAdaptiveTriggerMode
-//
-// Mode calls the underlying Mode.
-func (x *DualSenseAdaptiveTrigger) Mode() GCDualSenseAdaptiveTriggerMode {
-	return GCDualSenseAdaptiveTriggerMode(x.inner.Mode())
+// The mode that the adaptive trigger is currently in. This property reflects the physical state of the triggers - and requires a response from the controller. It does not update immediately after calling -[GCDualSenseAdaptiveTrigger setMode...].
+func (x *DualSenseAdaptiveTrigger) Mode() DualSenseAdaptiveTriggerMode {
+	_r := objc.Send[DualSenseAdaptiveTriggerMode](objref.IDOf(x), objc.RegisterName("mode"))
+	return _r
 }
 
-// The current status of the adaptive trigger - whether it is ready to apply a load, is currently applying a load, or has finished applying a load. @see GCDualSenseAdaptiveTriggerStatus
-//
-// Status calls the underlying Status.
-func (x *DualSenseAdaptiveTrigger) Status() GCDualSenseAdaptiveTriggerStatus {
-	return GCDualSenseAdaptiveTriggerStatus(x.inner.Status())
+// The current status of the adaptive trigger - whether it is ready to apply a load, is currently applying a load, or has finished applying a load.
+func (x *DualSenseAdaptiveTrigger) Status() DualSenseAdaptiveTriggerStatus {
+	_r := objc.Send[DualSenseAdaptiveTriggerStatus](objref.IDOf(x), objc.RegisterName("status"))
+	return _r
 }
 
-// A normalized float from [0-1], with 0 representing the lowest possible trigger arm position and 1 representing the maximum trigger arm position. @see GCDualSenseAdaptiveTriggerStatus
-//
-// ArmPosition calls the underlying ArmPosition.
+// A normalized float from [0-1], with 0 representing the lowest possible trigger arm position and 1 representing the maximum trigger arm position.
 func (x *DualSenseAdaptiveTrigger) ArmPosition() float32 {
-	return x.inner.ArmPosition()
-}
-
-func (x *DualSenseAdaptiveTrigger) asControllerButtonInput() *raw.GCControllerButtonInput {
-	return &x.inner.GCControllerButtonInput
-}
-
-func (x *DualSenseAdaptiveTrigger) asControllerElement() *raw.GCControllerElement {
-	return &x.inner.GCControllerButtonInput.GCControllerElement
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("armPosition"))
+	return _r
 }
 
 // DualSenseAdaptiveTriggerable is the interface implemented by [DualSenseAdaptiveTrigger], for mocking and DI.
 type DualSenseAdaptiveTriggerable interface {
-	Unwrap() *raw.GCDualSenseAdaptiveTrigger
-	WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *DualSenseAdaptiveTrigger
-	WithPressedChangedHandler(pressedChangedHandler func(*raw.GCControllerButtonInput, float32, bool)) *DualSenseAdaptiveTrigger
-	WithTouchedChangedHandler(touchedChangedHandler func(*raw.GCControllerButtonInput, float32, bool, bool)) *DualSenseAdaptiveTrigger
+	obj.Object
 	WithValue(value float32) *DualSenseAdaptiveTrigger
-	WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *DualSenseAdaptiveTrigger
+	WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *DualSenseAdaptiveTrigger
 	WithSfSymbolsName(sfSymbolsName string) *DualSenseAdaptiveTrigger
 	WithLocalizedName(localizedName string) *DualSenseAdaptiveTrigger
 	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *DualSenseAdaptiveTrigger
 	WithUnmappedLocalizedName(unmappedLocalizedName string) *DualSenseAdaptiveTrigger
 	SetModeSlopeFeedbackWithStartPositionEndPositionStartStrengthEndStrength(startPosition float32, endPosition float32, startStrength float32, endStrength float32)
 	SetModeFeedbackWithStartPositionResistiveStrength(startPosition float32, resistiveStrength float32)
-	SetModeFeedbackWithResistiveStrengths(positionalResistiveStrengths raw.GCDualSenseAdaptiveTriggerPositionalResistiveStrengths)
 	SetModeWeaponWithStartPositionEndPositionResistiveStrength(startPosition float32, endPosition float32, resistiveStrength float32)
 	SetModeVibrationWithStartPositionAmplitudeFrequency(startPosition float32, amplitude float32, frequency float32)
-	SetModeVibrationWithAmplitudesFrequency(positionalAmplitudes raw.GCDualSenseAdaptiveTriggerPositionalAmplitudes, frequency float32)
 	SetModeOff()
-	Mode() GCDualSenseAdaptiveTriggerMode
-	Status() GCDualSenseAdaptiveTriggerStatus
+	Mode() DualSenseAdaptiveTriggerMode
+	Status() DualSenseAdaptiveTriggerStatus
 	ArmPosition() float32
 }
 

@@ -5,70 +5,93 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A layer that combines tensors into a single tensor.
 //
-// ConcatenationLayer wraps [raw.MLCConcatenationLayer] with a fluent Go API.
+// ConcatenationLayer is an idiomatic wrapper over the Objective-C class MLCConcatenationLayer.
 type ConcatenationLayer struct {
-	inner *raw.MLCConcatenationLayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCConcatenationLayer].
-func (x *ConcatenationLayer) Unwrap() *raw.MLCConcatenationLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ConcatenationLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// ConcatenationLayerFromID adopts an existing object pointer as a ConcatenationLayer (nil for 0).
+// ConcatenationLayerFromID adopts an existing Objective-C object as a ConcatenationLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func ConcatenationLayerFromID(id objc.ID) *ConcatenationLayer {
 	if id == 0 {
 		return nil
 	}
-	return &ConcatenationLayer{inner: raw.MLCConcatenationLayerFromID(id)}
+	x := &ConcatenationLayer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewConcatenationLayer creates a new [ConcatenationLayer].
+// concatenationLayerAdopt wraps an Objective-C object that this code just created as a
+// ConcatenationLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func concatenationLayerAdopt(id objc.ID) *ConcatenationLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &ConcatenationLayer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ConcatenationLayer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ConcatenationLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ConcatenationLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewConcatenationLayer creates a new ConcatenationLayer.
 func NewConcatenationLayer() *ConcatenationLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCConcatenationLayer")), objc.RegisterName("new"))
-	return &ConcatenationLayer{inner: raw.MLCConcatenationLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCConcatenationLayer")), objc.RegisterName("new"))
+	return concatenationLayerAdopt(_id)
 }
 
 // A string that helps identify this layer.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ConcatenationLayer) WithLabel(label string) *ConcatenationLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 //
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
 func (x *ConcatenationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ConcatenationLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// @property   dimension @abstract   The dimension (or axis) along which to concatenate tensors @discussion The default value is 1 (which typically represents features channels)
-//
-// Dimension calls the underlying Dimension.
-func (x *ConcatenationLayer) Dimension() uint {
-	return x.inner.Dimension()
+// The dimension (or axis) along which to concatenate tensors The default value is 1 (which typically represents features channels)
+func (x *ConcatenationLayer) Dimension() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimension"))
+	return _r
 }
-
-func (x *ConcatenationLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // ConcatenationLayerable is the interface implemented by [ConcatenationLayer], for mocking and DI.
 type ConcatenationLayerable interface {
-	Unwrap() *raw.MLCConcatenationLayer
+	obj.Object
 	WithLabel(label string) *ConcatenationLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ConcatenationLayer
-	Dimension() uint
+	Dimension() int
 }
 
 var _ ConcatenationLayerable = (*ConcatenationLayer)(nil)

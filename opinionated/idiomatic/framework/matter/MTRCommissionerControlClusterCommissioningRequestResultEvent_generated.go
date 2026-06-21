@@ -5,120 +5,138 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRCommissionerControlClusterCommissioningRequestResultEvent wraps [raw.MTRCommissionerControlClusterCommissioningRequestResultEvent] with a fluent Go API.
+// MTRCommissionerControlClusterCommissioningRequestResultEvent is an idiomatic wrapper over the Objective-C class MTRCommissionerControlClusterCommissioningRequestResultEvent.
 type MTRCommissionerControlClusterCommissioningRequestResultEvent struct {
-	inner *raw.MTRCommissionerControlClusterCommissioningRequestResultEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRCommissionerControlClusterCommissioningRequestResultEvent].
-func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) Unwrap() *raw.MTRCommissionerControlClusterCommissioningRequestResultEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRCommissionerControlClusterCommissioningRequestResultEventFromID adopts an existing object pointer as a MTRCommissionerControlClusterCommissioningRequestResultEvent (nil for 0).
+// MTRCommissionerControlClusterCommissioningRequestResultEventFromID adopts an existing Objective-C object as a MTRCommissionerControlClusterCommissioningRequestResultEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRCommissionerControlClusterCommissioningRequestResultEventFromID(id objc.ID) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRCommissionerControlClusterCommissioningRequestResultEvent{inner: raw.MTRCommissionerControlClusterCommissioningRequestResultEventFromID(id)}
+	x := &MTRCommissionerControlClusterCommissioningRequestResultEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRCommissionerControlClusterCommissioningRequestResultEvent creates a new [MTRCommissionerControlClusterCommissioningRequestResultEvent].
+// mTRCommissionerControlClusterCommissioningRequestResultEventAdopt wraps an Objective-C object that this code just created as a
+// MTRCommissionerControlClusterCommissioningRequestResultEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRCommissionerControlClusterCommissioningRequestResultEventAdopt(id objc.ID) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRCommissionerControlClusterCommissioningRequestResultEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRCommissionerControlClusterCommissioningRequestResultEvent creates a new MTRCommissionerControlClusterCommissioningRequestResultEvent.
 func NewMTRCommissionerControlClusterCommissioningRequestResultEvent() *MTRCommissionerControlClusterCommissioningRequestResultEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRCommissionerControlClusterCommissioningRequestResultEvent")), objc.RegisterName("new"))
-	return &MTRCommissionerControlClusterCommissioningRequestResultEvent{inner: raw.MTRCommissionerControlClusterCommissioningRequestResultEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRCommissionerControlClusterCommissioningRequestResultEvent")), objc.RegisterName("new"))
+	return mTRCommissionerControlClusterCommissioningRequestResultEventAdopt(_id)
 }
 
-// WithRequestID sets the requestID property and returns the receiver for chaining.
-func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) WithRequestID(requestID *foundation.NSNumber) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
-	x.inner.SetRequestID(requestID)
+// WithRequestID sets requestID and returns the receiver so calls can be chained.
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) WithRequestID(requestID obj.Object) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestID:"), objref.IDOf(requestID))
 	return x
 }
 
-// WithClientNodeID sets the clientNodeID property and returns the receiver for chaining.
-func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) WithClientNodeID(clientNodeID *foundation.NSNumber) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
-	x.inner.SetClientNodeID(clientNodeID)
+// WithClientNodeID sets clientNodeID and returns the receiver so calls can be chained.
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) WithClientNodeID(clientNodeID obj.Object) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClientNodeID:"), objref.IDOf(clientNodeID))
 	return x
 }
 
-// WithStatusCode sets the statusCode property and returns the receiver for chaining.
-func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) WithStatusCode(statusCode *foundation.NSNumber) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
-	x.inner.SetStatusCode(statusCode)
+// WithStatusCode sets statusCode and returns the receiver so calls can be chained.
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) WithStatusCode(statusCode obj.Object) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
 	return x
 }
 
-// WithFabricIndex sets the fabricIndex property and returns the receiver for chaining.
-func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
-	x.inner.SetFabricIndex(fabricIndex)
+// WithFabricIndex sets fabricIndex and returns the receiver so calls can be chained.
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) WithFabricIndex(fabricIndex obj.Object) *MTRCommissionerControlClusterCommissioningRequestResultEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return x
 }
 
-// RequestID calls the underlying RequestID.
-func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) RequestID() *foundation.NSNumber {
-	return x.inner.RequestID()
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) RequestID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestID"))
+	return obj.Wrap(_r)
 }
 
-// SetRequestID calls the underlying SetRequestID.
-func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) SetRequestID(requestID *foundation.NSNumber) {
-	x.inner.SetRequestID(requestID)
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) SetRequestID(requestID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestID:"), objref.IDOf(requestID))
 }
 
-// ClientNodeID calls the underlying ClientNodeID.
-func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) ClientNodeID() *foundation.NSNumber {
-	return x.inner.ClientNodeID()
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) ClientNodeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientNodeID"))
+	return obj.Wrap(_r)
 }
 
-// SetClientNodeID calls the underlying SetClientNodeID.
-func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) SetClientNodeID(clientNodeID *foundation.NSNumber) {
-	x.inner.SetClientNodeID(clientNodeID)
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) SetClientNodeID(clientNodeID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClientNodeID:"), objref.IDOf(clientNodeID))
 }
 
-// StatusCode calls the underlying StatusCode.
-func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) StatusCode() *foundation.NSNumber {
-	return x.inner.StatusCode()
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) StatusCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusCode"))
+	return obj.Wrap(_r)
 }
 
-// SetStatusCode calls the underlying SetStatusCode.
-func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) SetStatusCode(statusCode *foundation.NSNumber) {
-	x.inner.SetStatusCode(statusCode)
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) SetStatusCode(statusCode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusCode:"), objref.IDOf(statusCode))
 }
 
-// FabricIndex calls the underlying FabricIndex.
-func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) FabricIndex() *foundation.NSNumber {
-	return x.inner.FabricIndex()
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+	return obj.Wrap(_r)
 }
 
-// SetFabricIndex calls the underlying SetFabricIndex.
-func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) SetFabricIndex(fabricIndex *foundation.NSNumber) {
-	x.inner.SetFabricIndex(fabricIndex)
+func (x *MTRCommissionerControlClusterCommissioningRequestResultEvent) SetFabricIndex(fabricIndex obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 }
 
 // MTRCommissionerControlClusterCommissioningRequestResultEventable is the interface implemented by [MTRCommissionerControlClusterCommissioningRequestResultEvent], for mocking and DI.
 type MTRCommissionerControlClusterCommissioningRequestResultEventable interface {
-	Unwrap() *raw.MTRCommissionerControlClusterCommissioningRequestResultEvent
-	WithRequestID(requestID *foundation.NSNumber) *MTRCommissionerControlClusterCommissioningRequestResultEvent
-	WithClientNodeID(clientNodeID *foundation.NSNumber) *MTRCommissionerControlClusterCommissioningRequestResultEvent
-	WithStatusCode(statusCode *foundation.NSNumber) *MTRCommissionerControlClusterCommissioningRequestResultEvent
-	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRCommissionerControlClusterCommissioningRequestResultEvent
-	RequestID() *foundation.NSNumber
-	SetRequestID(requestID *foundation.NSNumber)
-	ClientNodeID() *foundation.NSNumber
-	SetClientNodeID(clientNodeID *foundation.NSNumber)
-	StatusCode() *foundation.NSNumber
-	SetStatusCode(statusCode *foundation.NSNumber)
-	FabricIndex() *foundation.NSNumber
-	SetFabricIndex(fabricIndex *foundation.NSNumber)
+	obj.Object
+	WithRequestID(requestID obj.Object) *MTRCommissionerControlClusterCommissioningRequestResultEvent
+	WithClientNodeID(clientNodeID obj.Object) *MTRCommissionerControlClusterCommissioningRequestResultEvent
+	WithStatusCode(statusCode obj.Object) *MTRCommissionerControlClusterCommissioningRequestResultEvent
+	WithFabricIndex(fabricIndex obj.Object) *MTRCommissionerControlClusterCommissioningRequestResultEvent
+	RequestID() obj.Object
+	SetRequestID(requestID obj.Object)
+	ClientNodeID() obj.Object
+	SetClientNodeID(clientNodeID obj.Object)
+	StatusCode() obj.Object
+	SetStatusCode(statusCode obj.Object)
+	FabricIndex() obj.Object
+	SetFabricIndex(fabricIndex obj.Object)
 }
 
 var _ MTRCommissionerControlClusterCommissioningRequestResultEventable = (*MTRCommissionerControlClusterCommissioningRequestResultEvent)(nil)

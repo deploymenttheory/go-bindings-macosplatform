@@ -5,147 +5,89 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that builds audio and video output settings dictionaries.
 //
-// OutputSettingsAssistant wraps [raw.AVOutputSettingsAssistant] with a fluent Go API.
+// OutputSettingsAssistant is an idiomatic wrapper over the Objective-C class AVOutputSettingsAssistant.
 type OutputSettingsAssistant struct {
-	inner *raw.AVOutputSettingsAssistant
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVOutputSettingsAssistant].
-func (x *OutputSettingsAssistant) Unwrap() *raw.AVOutputSettingsAssistant { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OutputSettingsAssistant) ID() objc.ID { return x.inner.Ptr() }
-
-// OutputSettingsAssistantFromID adopts an existing object pointer as a OutputSettingsAssistant (nil for 0).
+// OutputSettingsAssistantFromID adopts an existing Objective-C object as a OutputSettingsAssistant
+// (nil for 0), retaining it and registering a release finalizer.
 func OutputSettingsAssistantFromID(id objc.ID) *OutputSettingsAssistant {
 	if id == 0 {
 		return nil
 	}
-	return &OutputSettingsAssistant{inner: raw.AVOutputSettingsAssistantFromID(id)}
-}
-
-// NewOutputSettingsAssistant creates a new [OutputSettingsAssistant].
-func NewOutputSettingsAssistant() *OutputSettingsAssistant {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVOutputSettingsAssistant")), objc.RegisterName("new"))
-	return &OutputSettingsAssistant{inner: raw.AVOutputSettingsAssistantFromID(_id)}
-}
-
-// A time value that describes the average frame duration of the video data.
-//
-// WithSourceVideoAverageFrameDuration sets the sourceVideoAverageFrameDuration property and returns the receiver for chaining.
-func (x *OutputSettingsAssistant) WithSourceVideoAverageFrameDuration(sourceVideoAverageFrameDuration coremedia.CMTime) *OutputSettingsAssistant {
-	x.inner.SetSourceVideoAverageFrameDuration(sourceVideoAverageFrameDuration)
+	x := &OutputSettingsAssistant{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// A time value that describes the minimum frame duration of the video data.
-//
-// WithSourceVideoMinFrameDuration sets the sourceVideoMinFrameDuration property and returns the receiver for chaining.
-func (x *OutputSettingsAssistant) WithSourceVideoMinFrameDuration(sourceVideoMinFrameDuration coremedia.CMTime) *OutputSettingsAssistant {
-	x.inner.SetSourceVideoMinFrameDuration(sourceVideoMinFrameDuration)
-	return x
-}
-
-// @property audioSettings @abstract A dictionary of key/value pairs, as specified in AVAudioSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput @discussion The value of this property may change as a result of setting a new value for the sourceAudioFormat property.
-//
-// AudioSettings calls the underlying AudioSettings.
-func (x *OutputSettingsAssistant) AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.AudioSettings()
-}
-
-// @property videoSettings @abstract A dictionary of key/value pairs, as specified in AVVideoSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput @discussion The value of this property may change as a result of setting a new value for the sourceVideoFormat property.
-//
-// VideoSettings calls the underlying VideoSettings.
-func (x *OutputSettingsAssistant) VideoSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.VideoSettings()
-}
-
-// @property outputFileType @abstract A UTI indicating the type of file to be written, to be used when e.g. creating an instance of AVAssetWriter @discussion Use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to get a suitable file extension for a given file type.
-//
-// OutputFileType calls the underlying OutputFileType.
-func (x *OutputSettingsAssistant) OutputFileType() string {
-	_r := x.inner.OutputFileType()
-	if _r == nil {
-		return ""
+// outputSettingsAssistantAdopt wraps an Objective-C object that this code just created as a
+// OutputSettingsAssistant (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func outputSettingsAssistantAdopt(id objc.ID) *OutputSettingsAssistant {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &OutputSettingsAssistant{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property sourceAudioFormat @abstract A CMAudioFormatDescription object describing the format of you audio data @discussion Setting this property will allow the receiver to make a more informed recommendation for the audio settings that should be used.  After setting this property, you should re-query the audioSettings property to get the new recommendation.  The default value is NULL, which means that the receiver does not know anything about the format of your audio data. If you set a non-NULL value for this property, and are using the receiver to initialize an AVAssetWriterInput, the same format description should be used to initialize the AVAssetWriterInput, along with the dictionary from the audioSettings property.
-//
-// SourceAudioFormat calls the underlying SourceAudioFormat.
-func (x *OutputSettingsAssistant) SourceAudioFormat() unsafe.Pointer {
-	return x.inner.SourceAudioFormat()
+// Description returns the object's -description text.
+func (x *OutputSettingsAssistant) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetSourceAudioFormat calls the underlying SetSourceAudioFormat.
-func (x *OutputSettingsAssistant) SetSourceAudioFormat(sourceAudioFormat unsafe.Pointer) {
-	x.inner.SetSourceAudioFormat(sourceAudioFormat)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *OutputSettingsAssistant) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property sourceVideoFormat @abstract A CMVideoFormatDescription object describing the format of your video data @discussion Setting this property will allow the receiver to make a more informed recommendation for the video settings that should be used.  After setting this property, you should re-query the videoSettings property to get the new recommendation.  The default value is NULL, which means that the receiver does not know anything about the format of your video data. If you set a non-NULL value for this property, and are using the receiver to initialize an AVAssetWriterInput, the same format description should be used to initialize the AVAssetWriterInput, along with the dictionary from the videoSettings property.
-//
-// SourceVideoFormat calls the underlying SourceVideoFormat.
-func (x *OutputSettingsAssistant) SourceVideoFormat() unsafe.Pointer {
-	return x.inner.SourceVideoFormat()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *OutputSettingsAssistant) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// SetSourceVideoFormat calls the underlying SetSourceVideoFormat.
-func (x *OutputSettingsAssistant) SetSourceVideoFormat(sourceVideoFormat unsafe.Pointer) {
-	x.inner.SetSourceVideoFormat(sourceVideoFormat)
+// NewOutputSettingsAssistant creates a new OutputSettingsAssistant.
+func NewOutputSettingsAssistant() *OutputSettingsAssistant {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVOutputSettingsAssistant")), objc.RegisterName("new"))
+	return outputSettingsAssistantAdopt(_id)
 }
 
-// @property sourceVideoAverageFrameDuration @abstract A CMTime describing the average frame duration (reciprocal of average frame rate) of your video data @discussion Setting this property will allow the receiver to make a more informed recommendation for the video settings that should be used.  After setting this property, you should re-query the videoSettings property to get the new recommendation. The default value is 1/30, which means that the receiver is assuming that your source video has an average frame rate of 30fps. It is an error to set this property to a value that is not positive or not numeric.  See CMTIME_IS_NUMERIC.
-//
-// SourceVideoAverageFrameDuration calls the underlying SourceVideoAverageFrameDuration.
-func (x *OutputSettingsAssistant) SourceVideoAverageFrameDuration() coremedia.CMTime {
-	return x.inner.SourceVideoAverageFrameDuration()
+// A dictionary of key/value pairs, as specified in AVAudioSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput The value of this property may change as a result of setting a new value for the sourceAudioFormat property.
+func (x *OutputSettingsAssistant) AudioSettings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioSettings"))
+	return obj.Wrap(_r)
 }
 
-// SetSourceVideoAverageFrameDuration calls the underlying SetSourceVideoAverageFrameDuration.
-func (x *OutputSettingsAssistant) SetSourceVideoAverageFrameDuration(sourceVideoAverageFrameDuration coremedia.CMTime) {
-	x.inner.SetSourceVideoAverageFrameDuration(sourceVideoAverageFrameDuration)
+// A dictionary of key/value pairs, as specified in AVVideoSettings.h, to be used when e.g. creating an instance of AVAssetWriterInput The value of this property may change as a result of setting a new value for the sourceVideoFormat property.
+func (x *OutputSettingsAssistant) VideoSettings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoSettings"))
+	return obj.Wrap(_r)
 }
 
-// @property sourceVideoMinFrameDuration @abstract A CMTime describing the minimum frame duration (reciprocal of the maximum frame rate) of your video data @discussion Setting this property will allow the receiver to make a more informed recommendation for the video settings that should be used.  After setting this property, you should re-query the videoSettings property to get the new recommendation. If your source of video data is an instance of AVAssetReaderOutput, you can discover the minimum frame duration of your source asset using the AVAssetTrack.minFrameDuration property. The default value is 1/30, which means that the receiver is assuming that your source video has a maximum frame rate of 30fps. It is an error to set this property to a value that is not positive or not numeric.  See CMTIME_IS_NUMERIC.
-//
-// SourceVideoMinFrameDuration calls the underlying SourceVideoMinFrameDuration.
-func (x *OutputSettingsAssistant) SourceVideoMinFrameDuration() coremedia.CMTime {
-	return x.inner.SourceVideoMinFrameDuration()
-}
-
-// SetSourceVideoMinFrameDuration calls the underlying SetSourceVideoMinFrameDuration.
-func (x *OutputSettingsAssistant) SetSourceVideoMinFrameDuration(sourceVideoMinFrameDuration coremedia.CMTime) {
-	x.inner.SetSourceVideoMinFrameDuration(sourceVideoMinFrameDuration)
+// A UTI indicating the type of file to be written, to be used when e.g. creating an instance of AVAssetWriter Use [[UTType typeWithIdentifier:outputFileType] preferredFilenameExtension] to get a suitable file extension for a given file type.
+func (x *OutputSettingsAssistant) OutputFileType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputFileType"))
+	return obj.Wrap(_r)
 }
 
 // OutputSettingsAssistantable is the interface implemented by [OutputSettingsAssistant], for mocking and DI.
 type OutputSettingsAssistantable interface {
-	Unwrap() *raw.AVOutputSettingsAssistant
-	WithSourceVideoAverageFrameDuration(sourceVideoAverageFrameDuration coremedia.CMTime) *OutputSettingsAssistant
-	WithSourceVideoMinFrameDuration(sourceVideoMinFrameDuration coremedia.CMTime) *OutputSettingsAssistant
-	AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	VideoSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	OutputFileType() string
-	SourceAudioFormat() unsafe.Pointer
-	SetSourceAudioFormat(sourceAudioFormat unsafe.Pointer)
-	SourceVideoFormat() unsafe.Pointer
-	SetSourceVideoFormat(sourceVideoFormat unsafe.Pointer)
-	SourceVideoAverageFrameDuration() coremedia.CMTime
-	SetSourceVideoAverageFrameDuration(sourceVideoAverageFrameDuration coremedia.CMTime)
-	SourceVideoMinFrameDuration() coremedia.CMTime
-	SetSourceVideoMinFrameDuration(sourceVideoMinFrameDuration coremedia.CMTime)
+	obj.Object
+	AudioSettings() obj.Object
+	VideoSettings() obj.Object
+	OutputFileType() obj.Object
 }
 
 var _ OutputSettingsAssistantable = (*OutputSettingsAssistant)(nil)

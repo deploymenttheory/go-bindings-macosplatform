@@ -5,74 +5,88 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRMetrics wraps [raw.MTRMetrics] with a fluent Go API.
+// MTRMetrics is an idiomatic wrapper over the Objective-C class MTRMetrics.
 type MTRMetrics struct {
-	inner *raw.MTRMetrics
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRMetrics].
-func (x *MTRMetrics) Unwrap() *raw.MTRMetrics { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRMetrics) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRMetricsFromID adopts an existing object pointer as a MTRMetrics (nil for 0).
+// MTRMetricsFromID adopts an existing Objective-C object as a MTRMetrics
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRMetricsFromID(id objc.ID) *MTRMetrics {
 	if id == 0 {
 		return nil
 	}
-	return &MTRMetrics{inner: raw.MTRMetricsFromID(id)}
+	x := &MTRMetrics{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRMetrics creates a new [MTRMetrics].
-func NewMTRMetrics() *MTRMetrics {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRMetrics")), objc.RegisterName("new"))
-	return &MTRMetrics{inner: raw.MTRMetricsFromID(_id)}
-}
-
-// @brief Returns metric data corresponding to the metric identified by its key. @param [in] key Name of the metric @return An object containing the metric data, nil if key is invalid.
-//
-// MetricDataForKey calls the underlying MetricDataForKey.
-func (x *MTRMetrics) MetricDataForKey(key string) *MTRMetricData {
-	_r := x.inner.MetricDataForKey(foundation.NSStringStringWithUTF8String(key))
-	if _r == nil {
+// mTRMetricsAdopt wraps an Objective-C object that this code just created as a
+// MTRMetrics (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRMetricsAdopt(id objc.ID) *MTRMetrics {
+	if id == 0 {
 		return nil
 	}
-	return &MTRMetricData{inner: _r}
+	x := &MTRMetrics{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @brief Returns a unique identifier for the object
-//
-// UniqueIdentifier calls the underlying UniqueIdentifier.
-func (x *MTRMetrics) UniqueIdentifier() *foundation.NSUUID {
-	return x.inner.UniqueIdentifier()
+// Description returns the object's -description text.
+func (x *MTRMetrics) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @brief Returns the names of all the metrics data items collected.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRMetrics) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRMetrics) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRMetrics creates a new MTRMetrics.
+func NewMTRMetrics() *MTRMetrics {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRMetrics")), objc.RegisterName("new"))
+	return mTRMetricsAdopt(_id)
+}
+
+// Returns metric data corresponding to the metric identified by its key.
+func (x *MTRMetrics) MetricDataForKey(key string) *MTRMetricData {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metricDataForKey:"), purego.NSString(key))
+	return MTRMetricDataFromID(_r)
+}
+
+// Returns a unique identifier for the object
+func (x *MTRMetrics) UniqueIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueIdentifier"))
+	return obj.Wrap(_r)
+}
+
+// Returns the names of all the metrics data items collected.
 //
 // AllKeys returns the collection as a Go slice.
 func (x *MTRMetrics) AllKeys() []string {
-	arr := x.inner.AllKeys()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allKeys"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // MTRMetricsable is the interface implemented by [MTRMetrics], for mocking and DI.
 type MTRMetricsable interface {
-	Unwrap() *raw.MTRMetrics
+	obj.Object
 	MetricDataForKey(key string) *MTRMetricData
-	UniqueIdentifier() *foundation.NSUUID
+	UniqueIdentifier() obj.Object
 	AllKeys() []string
 }
 

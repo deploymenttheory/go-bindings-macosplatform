@@ -5,58 +5,80 @@
 package imagekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// FilterBrowserView wraps [raw.IKFilterBrowserView] with a fluent Go API.
+// FilterBrowserView is an idiomatic wrapper over the Objective-C class IKFilterBrowserView.
 type FilterBrowserView struct {
-	inner *raw.IKFilterBrowserView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IKFilterBrowserView].
-func (x *FilterBrowserView) Unwrap() *raw.IKFilterBrowserView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FilterBrowserView) ID() objc.ID { return x.inner.Ptr() }
-
-// FilterBrowserViewFromID adopts an existing object pointer as a FilterBrowserView (nil for 0).
+// FilterBrowserViewFromID adopts an existing Objective-C object as a FilterBrowserView
+// (nil for 0), retaining it and registering a release finalizer.
 func FilterBrowserViewFromID(id objc.ID) *FilterBrowserView {
 	if id == 0 {
 		return nil
 	}
-	return &FilterBrowserView{inner: raw.IKFilterBrowserViewFromID(id)}
+	x := &FilterBrowserView{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFilterBrowserView creates a new [FilterBrowserView].
+// filterBrowserViewAdopt wraps an Objective-C object that this code just created as a
+// FilterBrowserView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func filterBrowserViewAdopt(id objc.ID) *FilterBrowserView {
+	if id == 0 {
+		return nil
+	}
+	x := &FilterBrowserView{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FilterBrowserView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FilterBrowserView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FilterBrowserView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFilterBrowserView creates a new FilterBrowserView.
 func NewFilterBrowserView() *FilterBrowserView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IKFilterBrowserView")), objc.RegisterName("new"))
-	return &FilterBrowserView{inner: raw.IKFilterBrowserViewFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("IKFilterBrowserView")), objc.RegisterName("new"))
+	return filterBrowserViewAdopt(_id)
 }
 
-// @method     setPreviewState: @abstract   Use this method to show and hide the Preview @discussion Use this method to show and hide the Preview from the program. @param      inState Boolean for visibility of the preview.
-//
-// SetPreviewState calls the underlying SetPreviewState.
+// Use this method to show and hide the Preview Use this method to show and hide the Preview from the program.
 func (x *FilterBrowserView) SetPreviewState(inState bool) {
-	x.inner.SetPreviewState(inState)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviewState:"), inState)
 }
 
-// @method     filterName @abstract   Returns the name of the currently selected filter. @discussion Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
-//
-// FilterName calls the underlying FilterName.
+// Returns the name of the currently selected filter. Use this method in response to a IKFilterBrowserFilterSelectedNotification or IKFilterBrowserFilterDoubleClickNotification or afer returning from a modal session.
 func (x *FilterBrowserView) FilterName() string {
-	_r := x.inner.FilterName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // FilterBrowserViewable is the interface implemented by [FilterBrowserView], for mocking and DI.
 type FilterBrowserViewable interface {
-	Unwrap() *raw.IKFilterBrowserView
+	obj.Object
 	SetPreviewState(inState bool)
 	FilterName() string
 }

@@ -5,14 +5,10 @@
 package mpsrayintersector
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsrayintersector"
+	"github.com/ebitengine/purego/objc"
 )
 
-// MPSPolygonBufferPolygonBuffer calls the underlying MPSPolygonBufferPolygonBuffer.
 func MPSPolygonBufferPolygonBuffer() *PolygonBuffer {
-	_r := raw.MPSPolygonBufferPolygonBuffer()
-	if _r == nil {
-		return nil
-	}
-	return &PolygonBuffer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSPolygonBuffer")), objc.RegisterName("polygonBuffer"))
+	return PolygonBufferFromID(_r)
 }

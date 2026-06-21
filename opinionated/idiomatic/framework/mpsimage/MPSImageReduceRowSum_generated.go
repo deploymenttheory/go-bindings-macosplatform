@@ -5,86 +5,66 @@
 package mpsimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ImageReduceRowSum wraps [raw.MPSImageReduceRowSum] with a fluent Go API.
+// ImageReduceRowSum is an idiomatic wrapper over the Objective-C class MPSImageReduceRowSum.
 type ImageReduceRowSum struct {
-	inner *raw.MPSImageReduceRowSum
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageReduceRowSum].
-func (x *ImageReduceRowSum) Unwrap() *raw.MPSImageReduceRowSum { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageReduceRowSum) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageReduceRowSumFromID adopts an existing object pointer as a ImageReduceRowSum (nil for 0).
+// ImageReduceRowSumFromID adopts an existing Objective-C object as a ImageReduceRowSum
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageReduceRowSumFromID(id objc.ID) *ImageReduceRowSum {
 	if id == 0 {
 		return nil
 	}
-	return &ImageReduceRowSum{inner: raw.MPSImageReduceRowSumFromID(id)}
-}
-
-// NewImageReduceRowSumWithDevice creates a new [ImageReduceRowSum].
-func NewImageReduceRowSumWithDevice(device metal.MTLDevice) *ImageReduceRowSum {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageReduceRowSum")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ImageReduceRowSum{inner: raw.MPSImageReduceRowSumFromID(_id)}
-}
-
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
-//
-// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
-func (x *ImageReduceRowSum) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowSum {
-	x.inner.MPSImageReduceUnary.SetClipRectSource(clipRectSource)
+	x := &ImageReduceRowSum{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageReduceRowSum) WithOffset(offset mpscore.MPSOffset) *ImageReduceRowSum {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetOffset(offset)
+// imageReduceRowSumAdopt wraps an Objective-C object that this code just created as a
+// ImageReduceRowSum (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageReduceRowSumAdopt(id objc.ID) *ImageReduceRowSum {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageReduceRowSum{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageReduceRowSum) WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowSum {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetClipRect(clipRect)
-	return x
+// Description returns the object's -description text.
+func (x *ImageReduceRowSum) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageReduceRowSum) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowSum {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageReduceRowSum) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-func (x *ImageReduceRowSum) asImageReduceUnary() *raw.MPSImageReduceUnary {
-	return &x.inner.MPSImageReduceUnary
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageReduceRowSum) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-func (x *ImageReduceRowSum) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
-	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel
+// NewImageReduceRowSum creates a new ImageReduceRowSum.
+func NewImageReduceRowSum() *ImageReduceRowSum {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageReduceRowSum")), objc.RegisterName("new"))
+	return imageReduceRowSumAdopt(_id)
 }
 
 // ImageReduceRowSumable is the interface implemented by [ImageReduceRowSum], for mocking and DI.
 type ImageReduceRowSumable interface {
-	Unwrap() *raw.MPSImageReduceRowSum
-	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowSum
-	WithOffset(offset mpscore.MPSOffset) *ImageReduceRowSum
-	WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowSum
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowSum
+	obj.Object
 }
 
 var _ ImageReduceRowSumable = (*ImageReduceRowSum)(nil)

@@ -5,63 +5,83 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDeviceControllerAbstractParameters wraps [raw.MTRDeviceControllerAbstractParameters] with a fluent Go API.
+// MTRDeviceControllerAbstractParameters is an idiomatic wrapper over the Objective-C class MTRDeviceControllerAbstractParameters.
 type MTRDeviceControllerAbstractParameters struct {
-	inner *raw.MTRDeviceControllerAbstractParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDeviceControllerAbstractParameters].
-func (x *MTRDeviceControllerAbstractParameters) Unwrap() *raw.MTRDeviceControllerAbstractParameters {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceControllerAbstractParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDeviceControllerAbstractParametersFromID adopts an existing object pointer as a MTRDeviceControllerAbstractParameters (nil for 0).
+// MTRDeviceControllerAbstractParametersFromID adopts an existing Objective-C object as a MTRDeviceControllerAbstractParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDeviceControllerAbstractParametersFromID(id objc.ID) *MTRDeviceControllerAbstractParameters {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDeviceControllerAbstractParameters{inner: raw.MTRDeviceControllerAbstractParametersFromID(id)}
+	x := &MTRDeviceControllerAbstractParameters{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRDeviceControllerAbstractParameters creates a new [MTRDeviceControllerAbstractParameters].
+// mTRDeviceControllerAbstractParametersAdopt wraps an Objective-C object that this code just created as a
+// MTRDeviceControllerAbstractParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDeviceControllerAbstractParametersAdopt(id objc.ID) *MTRDeviceControllerAbstractParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDeviceControllerAbstractParameters{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDeviceControllerAbstractParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDeviceControllerAbstractParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDeviceControllerAbstractParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRDeviceControllerAbstractParameters creates a new MTRDeviceControllerAbstractParameters.
 func NewMTRDeviceControllerAbstractParameters() *MTRDeviceControllerAbstractParameters {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceControllerAbstractParameters")), objc.RegisterName("new"))
-	return &MTRDeviceControllerAbstractParameters{inner: raw.MTRDeviceControllerAbstractParametersFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceControllerAbstractParameters")), objc.RegisterName("new"))
+	return mTRDeviceControllerAbstractParametersAdopt(_id)
 }
 
 // Whether the controller should start out suspended.
 //
-// WithStartSuspended sets the startSuspended property and returns the receiver for chaining.
+// WithStartSuspended sets startSuspended and returns the receiver so calls can be chained.
 func (x *MTRDeviceControllerAbstractParameters) WithStartSuspended(startSuspended bool) *MTRDeviceControllerAbstractParameters {
-	x.inner.SetStartSuspended(startSuspended)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSuspended:"), startSuspended)
 	return x
 }
 
-// StartSuspended calls the underlying StartSuspended.
 func (x *MTRDeviceControllerAbstractParameters) StartSuspended() bool {
-	return x.inner.StartSuspended()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startSuspended"))
+	return _r
 }
 
-// SetStartSuspended calls the underlying SetStartSuspended.
 func (x *MTRDeviceControllerAbstractParameters) SetStartSuspended(startSuspended bool) {
-	x.inner.SetStartSuspended(startSuspended)
-}
-
-func (x *MTRDeviceControllerAbstractParameters) asMTRDeviceControllerAbstractParameters() *raw.MTRDeviceControllerAbstractParameters {
-	return x.inner
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSuspended:"), startSuspended)
 }
 
 // MTRDeviceControllerAbstractParametersable is the interface implemented by [MTRDeviceControllerAbstractParameters], for mocking and DI.
 type MTRDeviceControllerAbstractParametersable interface {
-	Unwrap() *raw.MTRDeviceControllerAbstractParameters
+	obj.Object
 	WithStartSuspended(startSuspended bool) *MTRDeviceControllerAbstractParameters
 	StartSuspended() bool
 	SetStartSuspended(startSuspended bool)

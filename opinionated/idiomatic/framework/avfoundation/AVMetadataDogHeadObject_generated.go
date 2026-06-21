@@ -5,45 +5,68 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A concrete metadata object subclass representing a dog head.
 //
-// MetadataDogHeadObject wraps [raw.AVMetadataDogHeadObject] with a fluent Go API.
+// MetadataDogHeadObject is an idiomatic wrapper over the Objective-C class AVMetadataDogHeadObject.
 type MetadataDogHeadObject struct {
-	inner *raw.AVMetadataDogHeadObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMetadataDogHeadObject].
-func (x *MetadataDogHeadObject) Unwrap() *raw.AVMetadataDogHeadObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetadataDogHeadObject) ID() objc.ID { return x.inner.Ptr() }
-
-// MetadataDogHeadObjectFromID adopts an existing object pointer as a MetadataDogHeadObject (nil for 0).
+// MetadataDogHeadObjectFromID adopts an existing Objective-C object as a MetadataDogHeadObject
+// (nil for 0), retaining it and registering a release finalizer.
 func MetadataDogHeadObjectFromID(id objc.ID) *MetadataDogHeadObject {
 	if id == 0 {
 		return nil
 	}
-	return &MetadataDogHeadObject{inner: raw.AVMetadataDogHeadObjectFromID(id)}
+	x := &MetadataDogHeadObject{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMetadataDogHeadObject creates a new [MetadataDogHeadObject].
+// metadataDogHeadObjectAdopt wraps an Objective-C object that this code just created as a
+// MetadataDogHeadObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metadataDogHeadObjectAdopt(id objc.ID) *MetadataDogHeadObject {
+	if id == 0 {
+		return nil
+	}
+	x := &MetadataDogHeadObject{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetadataDogHeadObject) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetadataDogHeadObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetadataDogHeadObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMetadataDogHeadObject creates a new MetadataDogHeadObject.
 func NewMetadataDogHeadObject() *MetadataDogHeadObject {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetadataDogHeadObject")), objc.RegisterName("new"))
-	return &MetadataDogHeadObject{inner: raw.AVMetadataDogHeadObjectFromID(_id)}
-}
-
-func (x *MetadataDogHeadObject) asMetadataObject() *raw.AVMetadataObject {
-	return &x.inner.AVMetadataObject
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetadataDogHeadObject")), objc.RegisterName("new"))
+	return metadataDogHeadObjectAdopt(_id)
 }
 
 // MetadataDogHeadObjectable is the interface implemented by [MetadataDogHeadObject], for mocking and DI.
 type MetadataDogHeadObjectable interface {
-	Unwrap() *raw.AVMetadataDogHeadObject
+	obj.Object
 }
 
 var _ MetadataDogHeadObjectable = (*MetadataDogHeadObject)(nil)

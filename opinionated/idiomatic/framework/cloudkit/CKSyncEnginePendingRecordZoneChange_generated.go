@@ -5,66 +5,85 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that describes an unsent record modification.
 //
-// SyncEnginePendingRecordZoneChange wraps [raw.CKSyncEnginePendingRecordZoneChange] with a fluent Go API.
+// SyncEnginePendingRecordZoneChange is an idiomatic wrapper over the Objective-C class CKSyncEnginePendingRecordZoneChange.
 type SyncEnginePendingRecordZoneChange struct {
-	inner *raw.CKSyncEnginePendingRecordZoneChange
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEnginePendingRecordZoneChange].
-func (x *SyncEnginePendingRecordZoneChange) Unwrap() *raw.CKSyncEnginePendingRecordZoneChange {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEnginePendingRecordZoneChange) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEnginePendingRecordZoneChangeFromID adopts an existing object pointer as a SyncEnginePendingRecordZoneChange (nil for 0).
+// SyncEnginePendingRecordZoneChangeFromID adopts an existing Objective-C object as a SyncEnginePendingRecordZoneChange
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEnginePendingRecordZoneChangeFromID(id objc.ID) *SyncEnginePendingRecordZoneChange {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEnginePendingRecordZoneChange{inner: raw.CKSyncEnginePendingRecordZoneChangeFromID(id)}
+	x := &SyncEnginePendingRecordZoneChange{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// syncEnginePendingRecordZoneChangeAdopt wraps an Objective-C object that this code just created as a
+// SyncEnginePendingRecordZoneChange (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEnginePendingRecordZoneChangeAdopt(id objc.ID) *SyncEnginePendingRecordZoneChange {
+	if id == 0 {
+		return nil
+	}
+	x := &SyncEnginePendingRecordZoneChange{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SyncEnginePendingRecordZoneChange) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEnginePendingRecordZoneChange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEnginePendingRecordZoneChange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a record zone change of the specified type for the given record.
 //
-// NewSyncEnginePendingRecordZoneChangeWithRecordIDType creates a new [SyncEnginePendingRecordZoneChange].
-func NewSyncEnginePendingRecordZoneChangeWithRecordIDType(recordID *raw.CKRecordID, type_ CKSyncEnginePendingRecordZoneChangeType) *SyncEnginePendingRecordZoneChange {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEnginePendingRecordZoneChange")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordID:type:"), recordID.Ptr(), raw.CKSyncEnginePendingRecordZoneChangeType(type_))
-	return &SyncEnginePendingRecordZoneChange{inner: raw.CKSyncEnginePendingRecordZoneChangeFromID(_id)}
+// NewSyncEnginePendingRecordZoneChangeWithRecordIDType creates a new SyncEnginePendingRecordZoneChange.
+func NewSyncEnginePendingRecordZoneChangeWithRecordIDType(recordID *RecordID, type_ SyncEnginePendingRecordZoneChangeType) *SyncEnginePendingRecordZoneChange {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEnginePendingRecordZoneChange")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordID:type:"), objref.IDOf(recordID), type_)
+	return syncEnginePendingRecordZoneChangeAdopt(_id)
 }
 
 // The identifier of the modified record.
-//
-// RecordID calls the underlying RecordID.
 func (x *SyncEnginePendingRecordZoneChange) RecordID() *RecordID {
-	_r := x.inner.RecordID()
-	if _r == nil {
-		return nil
-	}
-	return &RecordID{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordID"))
+	return RecordIDFromID(_r)
 }
 
 // The type of change to make.
-//
-// Type calls the underlying Type.
-func (x *SyncEnginePendingRecordZoneChange) Type() CKSyncEnginePendingRecordZoneChangeType {
-	return CKSyncEnginePendingRecordZoneChangeType(x.inner.Type())
+func (x *SyncEnginePendingRecordZoneChange) Type() SyncEnginePendingRecordZoneChangeType {
+	_r := objc.Send[SyncEnginePendingRecordZoneChangeType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
 // SyncEnginePendingRecordZoneChangeable is the interface implemented by [SyncEnginePendingRecordZoneChange], for mocking and DI.
 type SyncEnginePendingRecordZoneChangeable interface {
-	Unwrap() *raw.CKSyncEnginePendingRecordZoneChange
+	obj.Object
 	RecordID() *RecordID
-	Type() CKSyncEnginePendingRecordZoneChangeType
+	Type() SyncEnginePendingRecordZoneChangeType
 }
 
 var _ SyncEnginePendingRecordZoneChangeable = (*SyncEnginePendingRecordZoneChange)(nil)

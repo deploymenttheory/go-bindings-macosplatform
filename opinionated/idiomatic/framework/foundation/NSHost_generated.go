@@ -5,111 +5,122 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A representation of an individual host on the network.
 //
-// Host wraps [raw.NSHost] with a fluent Go API.
+// Host is an idiomatic wrapper over the Objective-C class NSHost.
 type Host struct {
-	inner *raw.NSHost
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSHost].
-func (x *Host) Unwrap() *raw.NSHost { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Host) ID() objc.ID { return x.inner.Ptr() }
-
-// HostFromID adopts an existing object pointer as a Host (nil for 0).
+// HostFromID adopts an existing Objective-C object as a Host
+// (nil for 0), retaining it and registering a release finalizer.
 func HostFromID(id objc.ID) *Host {
 	if id == 0 {
 		return nil
 	}
-	return &Host{inner: raw.NSHostFromID(id)}
-}
-
-// NewHost creates a new [Host].
-func NewHost() *Host {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSHost")), objc.RegisterName("new"))
-	return &Host{inner: raw.NSHostFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Host) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Host {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &Host{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// IsEqualToHost calls the underlying IsEqualToHost.
-func (x *Host) IsEqualToHost(aHost *raw.NSHost) bool {
-	return x.inner.IsEqualToHost(aHost)
-}
-
-// Name calls the underlying Name.
-func (x *Host) Name() *String {
-	_r := x.inner.Name()
-	if _r == nil {
+// hostAdopt wraps an Objective-C object that this code just created as a
+// Host (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hostAdopt(id objc.ID) *Host {
+	if id == 0 {
 		return nil
 	}
-	return &String{inner: _r}
+	x := &Host{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Host) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Host) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Host) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHost creates a new Host.
+func NewHost() *Host {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSHost")), objc.RegisterName("new"))
+	return hostAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *Host) WithScriptingProperties(scriptingProperties obj.Object) *Host {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+func (x *Host) IsEqualToHost(aHost *Host) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToHost:"), objref.IDOf(aHost))
+	return _r
+}
+
+func (x *Host) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // Names returns the collection as a Go slice.
 func (x *Host) Names() []string {
-	arr := x.inner.Names()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("names"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Address calls the underlying Address.
-func (x *Host) Address() *String {
-	_r := x.inner.Address()
-	if _r == nil {
-		return nil
+func (x *Host) Address() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("address"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
 // Addresses returns the collection as a Go slice.
 func (x *Host) Addresses() []string {
-	arr := x.inner.Addresses()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addresses"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// LocalizedName calls the underlying LocalizedName.
-func (x *Host) LocalizedName() *String {
-	_r := x.inner.LocalizedName()
-	if _r == nil {
-		return nil
+func (x *Host) LocalizedName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
-
-func (x *Host) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Hostable is the interface implemented by [Host], for mocking and DI.
 type Hostable interface {
-	Unwrap() *raw.NSHost
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Host
-	IsEqualToHost(aHost *raw.NSHost) bool
-	Name() *String
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Host
+	IsEqualToHost(aHost *Host) bool
+	Name() string
 	Names() []string
-	Address() *String
+	Address() string
 	Addresses() []string
-	LocalizedName() *String
+	LocalizedName() string
 }
 
 var _ Hostable = (*Host)(nil)

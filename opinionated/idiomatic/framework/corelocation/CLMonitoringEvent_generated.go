@@ -5,125 +5,145 @@
 package corelocation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The object that the framework passes to the monitor’s callback handler upon receiving an event.
 //
-// MonitoringEvent wraps [raw.CLMonitoringEvent] with a fluent Go API.
+// MonitoringEvent is an idiomatic wrapper over the Objective-C class CLMonitoringEvent.
 type MonitoringEvent struct {
-	inner *raw.CLMonitoringEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLMonitoringEvent].
-func (x *MonitoringEvent) Unwrap() *raw.CLMonitoringEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MonitoringEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MonitoringEventFromID adopts an existing object pointer as a MonitoringEvent (nil for 0).
+// MonitoringEventFromID adopts an existing Objective-C object as a MonitoringEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MonitoringEventFromID(id objc.ID) *MonitoringEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MonitoringEvent{inner: raw.CLMonitoringEventFromID(id)}
+	x := &MonitoringEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMonitoringEvent creates a new [MonitoringEvent].
-func NewMonitoringEvent() *MonitoringEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLMonitoringEvent")), objc.RegisterName("new"))
-	return &MonitoringEvent{inner: raw.CLMonitoringEventFromID(_id)}
-}
-
-// Identifier calls the underlying Identifier.
-func (x *MonitoringEvent) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// Refinement calls the underlying Refinement.
-func (x *MonitoringEvent) Refinement() *Condition {
-	_r := x.inner.Refinement()
-	if _r == nil {
+// monitoringEventAdopt wraps an Objective-C object that this code just created as a
+// MonitoringEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func monitoringEventAdopt(id objc.ID) *MonitoringEvent {
+	if id == 0 {
 		return nil
 	}
-	return &Condition{inner: _r}
+	x := &MonitoringEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// State calls the underlying State.
-func (x *MonitoringEvent) State() CLMonitoringState {
-	return CLMonitoringState(x.inner.State())
+// Description returns the object's -description text.
+func (x *MonitoringEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Date calls the underlying Date.
-func (x *MonitoringEvent) Date() *foundation.NSDate {
-	return x.inner.Date()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MonitoringEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// AuthorizationDenied calls the underlying AuthorizationDenied.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MonitoringEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMonitoringEvent creates a new MonitoringEvent.
+func NewMonitoringEvent() *MonitoringEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("CLMonitoringEvent")), objc.RegisterName("new"))
+	return monitoringEventAdopt(_id)
+}
+
+func (x *MonitoringEvent) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *MonitoringEvent) Refinement() *Condition {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("refinement"))
+	return ConditionFromID(_r)
+}
+
+func (x *MonitoringEvent) State() MonitoringState {
+	_r := objc.Send[MonitoringState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
+}
+
+func (x *MonitoringEvent) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+	return obj.Wrap(_r)
+}
+
 func (x *MonitoringEvent) AuthorizationDenied() bool {
-	return x.inner.AuthorizationDenied()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationDenied"))
+	return _r
 }
 
-// AuthorizationDeniedGlobally calls the underlying AuthorizationDeniedGlobally.
 func (x *MonitoringEvent) AuthorizationDeniedGlobally() bool {
-	return x.inner.AuthorizationDeniedGlobally()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationDeniedGlobally"))
+	return _r
 }
 
-// AuthorizationRestricted calls the underlying AuthorizationRestricted.
 func (x *MonitoringEvent) AuthorizationRestricted() bool {
-	return x.inner.AuthorizationRestricted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationRestricted"))
+	return _r
 }
 
-// InsufficientlyInUse calls the underlying InsufficientlyInUse.
 func (x *MonitoringEvent) InsufficientlyInUse() bool {
-	return x.inner.InsufficientlyInUse()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("insufficientlyInUse"))
+	return _r
 }
 
-// AccuracyLimited calls the underlying AccuracyLimited.
 func (x *MonitoringEvent) AccuracyLimited() bool {
-	return x.inner.AccuracyLimited()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accuracyLimited"))
+	return _r
 }
 
-// ConditionUnsupported calls the underlying ConditionUnsupported.
 func (x *MonitoringEvent) ConditionUnsupported() bool {
-	return x.inner.ConditionUnsupported()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("conditionUnsupported"))
+	return _r
 }
 
-// ConditionLimitExceeded calls the underlying ConditionLimitExceeded.
 func (x *MonitoringEvent) ConditionLimitExceeded() bool {
-	return x.inner.ConditionLimitExceeded()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("conditionLimitExceeded"))
+	return _r
 }
 
-// PersistenceUnavailable calls the underlying PersistenceUnavailable.
 func (x *MonitoringEvent) PersistenceUnavailable() bool {
-	return x.inner.PersistenceUnavailable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("persistenceUnavailable"))
+	return _r
 }
 
-// ServiceSessionRequired calls the underlying ServiceSessionRequired.
 func (x *MonitoringEvent) ServiceSessionRequired() bool {
-	return x.inner.ServiceSessionRequired()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("serviceSessionRequired"))
+	return _r
 }
 
-// AuthorizationRequestInProgress calls the underlying AuthorizationRequestInProgress.
 func (x *MonitoringEvent) AuthorizationRequestInProgress() bool {
-	return x.inner.AuthorizationRequestInProgress()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authorizationRequestInProgress"))
+	return _r
 }
 
 // MonitoringEventable is the interface implemented by [MonitoringEvent], for mocking and DI.
 type MonitoringEventable interface {
-	Unwrap() *raw.CLMonitoringEvent
+	obj.Object
 	Identifier() string
 	Refinement() *Condition
-	State() CLMonitoringState
-	Date() *foundation.NSDate
+	State() MonitoringState
+	Date() obj.Object
 	AuthorizationDenied() bool
 	AuthorizationDeniedGlobally() bool
 	AuthorizationRestricted() bool

@@ -6,37 +6,63 @@ package coreml
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Handle to the state buffers.
 //
-// State wraps [raw.MLState] with a fluent Go API.
+// State is an idiomatic wrapper over the Objective-C class MLState.
 type State struct {
-	inner *raw.MLState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLState].
-func (x *State) Unwrap() *raw.MLState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *State) ID() objc.ID { return x.inner.Ptr() }
-
-// StateFromID adopts an existing object pointer as a State (nil for 0).
+// StateFromID adopts an existing Objective-C object as a State
+// (nil for 0), retaining it and registering a release finalizer.
 func StateFromID(id objc.ID) *State {
 	if id == 0 {
 		return nil
 	}
-	return &State{inner: raw.MLStateFromID(id)}
+	x := &State{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewState creates a new [State].
+// stateAdopt wraps an Objective-C object that this code just created as a
+// State (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func stateAdopt(id objc.ID) *State {
+	if id == 0 {
+		return nil
+	}
+	x := &State{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *State) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *State) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *State) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewState creates a new State.
 func NewState() *State {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLState")), objc.RegisterName("new"))
-	return &State{inner: raw.MLStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLState")), objc.RegisterName("new"))
+	return stateAdopt(_id)
 }
 
 // Gets a mutable view into a state buffer.
@@ -48,13 +74,12 @@ func (x *State) GetMultiArrayForStateNamedHandler(ctx context.Context, stateName
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetMultiArrayForStateNamedHandler(foundation.NSStringStringWithUTF8String(stateName), func(_p0 *raw.MLMultiArray) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &MultiArray{inner: _p0}
-		}
+		_o.val = MultiArrayFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getMultiArrayForStateNamed:handler:"), purego.NSString(stateName), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -66,7 +91,7 @@ func (x *State) GetMultiArrayForStateNamedHandler(ctx context.Context, stateName
 
 // Stateable is the interface implemented by [State], for mocking and DI.
 type Stateable interface {
-	Unwrap() *raw.MLState
+	obj.Object
 	GetMultiArrayForStateNamedHandler(ctx context.Context, stateName string) (*MultiArray, error)
 }
 

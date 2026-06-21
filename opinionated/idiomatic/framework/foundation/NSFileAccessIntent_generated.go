@@ -5,59 +5,80 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The details of a coordinated-read or coordinated-write operation.
 //
-// FileAccessIntent wraps [raw.NSFileAccessIntent] with a fluent Go API.
+// FileAccessIntent is an idiomatic wrapper over the Objective-C class NSFileAccessIntent.
 type FileAccessIntent struct {
-	inner *raw.NSFileAccessIntent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFileAccessIntent].
-func (x *FileAccessIntent) Unwrap() *raw.NSFileAccessIntent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileAccessIntent) ID() objc.ID { return x.inner.Ptr() }
-
-// FileAccessIntentFromID adopts an existing object pointer as a FileAccessIntent (nil for 0).
+// FileAccessIntentFromID adopts an existing Objective-C object as a FileAccessIntent
+// (nil for 0), retaining it and registering a release finalizer.
 func FileAccessIntentFromID(id objc.ID) *FileAccessIntent {
 	if id == 0 {
 		return nil
 	}
-	return &FileAccessIntent{inner: raw.NSFileAccessIntentFromID(id)}
-}
-
-// NewFileAccessIntent creates a new [FileAccessIntent].
-func NewFileAccessIntent() *FileAccessIntent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileAccessIntent")), objc.RegisterName("new"))
-	return &FileAccessIntent{inner: raw.NSFileAccessIntentFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *FileAccessIntent) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileAccessIntent {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &FileAccessIntent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// URL calls the underlying URL.
-func (x *FileAccessIntent) URL() *URL {
-	_r := x.inner.URL()
-	if _r == nil {
+// fileAccessIntentAdopt wraps an Objective-C object that this code just created as a
+// FileAccessIntent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileAccessIntentAdopt(id objc.ID) *FileAccessIntent {
+	if id == 0 {
 		return nil
 	}
-	return &URL{inner: _r}
+	x := &FileAccessIntent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *FileAccessIntent) asObject() *raw.NSObject { return &x.inner.NSObject }
+// Description returns the object's -description text.
+func (x *FileAccessIntent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileAccessIntent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileAccessIntent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFileAccessIntent creates a new FileAccessIntent.
+func NewFileAccessIntent() *FileAccessIntent {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSFileAccessIntent")), objc.RegisterName("new"))
+	return fileAccessIntentAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *FileAccessIntent) WithScriptingProperties(scriptingProperties obj.Object) *FileAccessIntent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+func (x *FileAccessIntent) URL() *URL {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return URLFromID(_r)
+}
 
 // FileAccessIntentable is the interface implemented by [FileAccessIntent], for mocking and DI.
 type FileAccessIntentable interface {
-	Unwrap() *raw.NSFileAccessIntent
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileAccessIntent
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *FileAccessIntent
 	URL() *URL
 }
 

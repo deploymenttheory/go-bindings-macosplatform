@@ -5,234 +5,223 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // The Cocoa interface to speech synthesis in macOS.
 //
-// SpeechSynthesizer wraps [raw.NSSpeechSynthesizer] with a fluent Go API.
+// SpeechSynthesizer is an idiomatic wrapper over the Objective-C class NSSpeechSynthesizer.
 type SpeechSynthesizer struct {
-	inner *raw.NSSpeechSynthesizer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSpeechSynthesizer].
-func (x *SpeechSynthesizer) Unwrap() *raw.NSSpeechSynthesizer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpeechSynthesizer) ID() objc.ID { return x.inner.Ptr() }
-
-// SpeechSynthesizerFromID adopts an existing object pointer as a SpeechSynthesizer (nil for 0).
+// SpeechSynthesizerFromID adopts an existing Objective-C object as a SpeechSynthesizer
+// (nil for 0), retaining it and registering a release finalizer.
 func SpeechSynthesizerFromID(id objc.ID) *SpeechSynthesizer {
 	if id == 0 {
 		return nil
 	}
-	return &SpeechSynthesizer{inner: raw.NSSpeechSynthesizerFromID(id)}
+	x := &SpeechSynthesizer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// speechSynthesizerAdopt wraps an Objective-C object that this code just created as a
+// SpeechSynthesizer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func speechSynthesizerAdopt(id objc.ID) *SpeechSynthesizer {
+	if id == 0 {
+		return nil
+	}
+	x := &SpeechSynthesizer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SpeechSynthesizer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SpeechSynthesizer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SpeechSynthesizer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes the receiver with a voice.
 //
-// NewSpeechSynthesizerWithVoice creates a new [SpeechSynthesizer].
-func NewSpeechSynthesizerWithVoice(voice *foundation.NSString) *SpeechSynthesizer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSpeechSynthesizer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVoice:"), voice.Ptr())
-	return &SpeechSynthesizer{inner: raw.NSSpeechSynthesizerFromID(_id)}
-}
-
-// The synthesizer’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *SpeechSynthesizer) WithDelegate(delegate raw.NSSpeechSynthesizerDelegate) *SpeechSynthesizer {
-	x.inner.SetDelegate(delegate)
-	return x
+// NewSpeechSynthesizerWithVoice creates a new SpeechSynthesizer.
+func NewSpeechSynthesizerWithVoice(voice obj.Object) *SpeechSynthesizer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSpeechSynthesizer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVoice:"), objref.IDOf(voice))
+	return speechSynthesizerAdopt(_id)
 }
 
 // The synthesizer’s speaking rate (words per minute).
 //
-// WithRate sets the rate property and returns the receiver for chaining.
+// WithRate sets rate and returns the receiver so calls can be chained.
 func (x *SpeechSynthesizer) WithRate(rate float32) *SpeechSynthesizer {
-	x.inner.SetRate(rate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 	return x
 }
 
 // The synthesizer’s speaking volume.
 //
-// WithVolume sets the volume property and returns the receiver for chaining.
+// WithVolume sets volume and returns the receiver so calls can be chained.
 func (x *SpeechSynthesizer) WithVolume(volume float32) *SpeechSynthesizer {
-	x.inner.SetVolume(volume)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 	return x
 }
 
 // Indicates whether the receiver uses the speech feedback window.
 //
-// WithUsesFeedbackWindow sets the usesFeedbackWindow property and returns the receiver for chaining.
+// WithUsesFeedbackWindow sets usesFeedbackWindow and returns the receiver so calls can be chained.
 func (x *SpeechSynthesizer) WithUsesFeedbackWindow(usesFeedbackWindow bool) *SpeechSynthesizer {
-	x.inner.SetUsesFeedbackWindow(usesFeedbackWindow)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesFeedbackWindow:"), usesFeedbackWindow)
 	return x
 }
 
 // Begins speaking synthesized text through the system’s default sound output device.
-//
-// StartSpeakingString calls the underlying StartSpeakingString.
 func (x *SpeechSynthesizer) StartSpeakingString(string_ string) bool {
-	return x.inner.StartSpeakingString(foundation.NSStringStringWithUTF8String(string_))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startSpeakingString:"), purego.NSString(string_))
+	return _r
 }
 
 // Begins synthesizing text into a sound (AIFF) file.
-//
-// StartSpeakingStringToURL calls the underlying StartSpeakingStringToURL.
 func (x *SpeechSynthesizer) StartSpeakingStringToURL(string_ string, url string) bool {
-	return x.inner.StartSpeakingStringToURL(foundation.NSStringStringWithUTF8String(string_), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startSpeakingString:toURL:"), purego.NSString(string_), rt.FileURL(url))
+	return _r
 }
 
 // Stops synthesis in progress.
-//
-// StopSpeaking calls the underlying StopSpeaking.
 func (x *SpeechSynthesizer) StopSpeaking() {
-	x.inner.StopSpeaking()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopSpeaking"))
 }
 
 // Stops synthesis in progress at a given boundary.
-//
-// StopSpeakingAtBoundary calls the underlying StopSpeakingAtBoundary.
-func (x *SpeechSynthesizer) StopSpeakingAtBoundary(boundary NSSpeechBoundary) {
-	x.inner.StopSpeakingAtBoundary(raw.NSSpeechBoundary(boundary))
+func (x *SpeechSynthesizer) StopSpeakingAtBoundary(boundary SpeechBoundary) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopSpeakingAtBoundary:"), boundary)
 }
 
 // Pauses synthesis in progress at a given boundary.
-//
-// PauseSpeakingAtBoundary calls the underlying PauseSpeakingAtBoundary.
-func (x *SpeechSynthesizer) PauseSpeakingAtBoundary(boundary NSSpeechBoundary) {
-	x.inner.PauseSpeakingAtBoundary(raw.NSSpeechBoundary(boundary))
+func (x *SpeechSynthesizer) PauseSpeakingAtBoundary(boundary SpeechBoundary) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseSpeakingAtBoundary:"), boundary)
 }
 
 // Resumes synthesis.
-//
-// ContinueSpeaking calls the underlying ContinueSpeaking.
 func (x *SpeechSynthesizer) ContinueSpeaking() {
-	x.inner.ContinueSpeaking()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("continueSpeaking"))
 }
 
 // Returns the identifier of the receiver’s current voice.
-//
-// Voice calls the underlying Voice.
-func (x *SpeechSynthesizer) Voice() string {
-	_r := x.inner.Voice()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *SpeechSynthesizer) Voice() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voice"))
+	return obj.Wrap(_r)
 }
 
 // Sets the receiver’s current voice.
-//
-// SetVoice calls the underlying SetVoice.
-func (x *SpeechSynthesizer) SetVoice(voice *foundation.NSString) bool {
-	return x.inner.SetVoice(voice)
+func (x *SpeechSynthesizer) SetVoice(voice obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setVoice:"), objref.IDOf(voice))
+	return _r
 }
 
 // Registers the given speech dictionary with the receiver.
-//
-// AddSpeechDictionary calls the underlying AddSpeechDictionary.
-func (x *SpeechSynthesizer) AddSpeechDictionary(speechDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.AddSpeechDictionary(speechDictionary)
+func (x *SpeechSynthesizer) AddSpeechDictionary(speechDictionary obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSpeechDictionary:"), objref.IDOf(speechDictionary))
 }
 
 // Provides the phoneme symbols generated by the given text.
-//
-// PhonemesFromText calls the underlying PhonemesFromText.
 func (x *SpeechSynthesizer) PhonemesFromText(text string) string {
-	_r := x.inner.PhonemesFromText(foundation.NSStringStringWithUTF8String(text))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phonemesFromText:"), purego.NSString(text))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Provides the value of a receiver’s property.
-//
-// ObjectForPropertyError calls the underlying ObjectForPropertyError.
-func (x *SpeechSynthesizer) ObjectForPropertyError(property *foundation.NSString) (objc.ID, error) {
-	return x.inner.ObjectForPropertyError(property)
+func (x *SpeechSynthesizer) ObjectForPropertyError(property obj.Object) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForProperty:error:"), objref.IDOf(property), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // Specifies the value of a receiver’s property.
-//
-// SetObjectForPropertyError calls the underlying SetObjectForPropertyError.
-func (x *SpeechSynthesizer) SetObjectForPropertyError(object objc.ID, property *foundation.NSString) (bool, error) {
-	return x.inner.SetObjectForPropertyError(object, property)
+func (x *SpeechSynthesizer) SetObjectForProperty(object obj.Object, property obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setObject:forProperty:error:"), objref.IDOf(object), objref.IDOf(property), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// IsSpeaking calls the underlying IsSpeaking.
 func (x *SpeechSynthesizer) IsSpeaking() bool {
-	return x.inner.IsSpeaking()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSpeaking"))
+	return _r
 }
 
-// Delegate calls the underlying Delegate.
-func (x *SpeechSynthesizer) Delegate() raw.NSSpeechSynthesizerDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *SpeechSynthesizer) SetDelegate(delegate raw.NSSpeechSynthesizerDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// Rate calls the underlying Rate.
 func (x *SpeechSynthesizer) Rate() float32 {
-	return x.inner.Rate()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
+	return _r
 }
 
-// SetRate calls the underlying SetRate.
 func (x *SpeechSynthesizer) SetRate(rate float32) {
-	x.inner.SetRate(rate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 }
 
-// Volume calls the underlying Volume.
 func (x *SpeechSynthesizer) Volume() float32 {
-	return x.inner.Volume()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("volume"))
+	return _r
 }
 
-// SetVolume calls the underlying SetVolume.
 func (x *SpeechSynthesizer) SetVolume(volume float32) {
-	x.inner.SetVolume(volume)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
 }
 
-// UsesFeedbackWindow calls the underlying UsesFeedbackWindow.
 func (x *SpeechSynthesizer) UsesFeedbackWindow() bool {
-	return x.inner.UsesFeedbackWindow()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesFeedbackWindow"))
+	return _r
 }
 
-// SetUsesFeedbackWindow calls the underlying SetUsesFeedbackWindow.
 func (x *SpeechSynthesizer) SetUsesFeedbackWindow(usesFeedbackWindow bool) {
-	x.inner.SetUsesFeedbackWindow(usesFeedbackWindow)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesFeedbackWindow:"), usesFeedbackWindow)
 }
 
 // SpeechSynthesizerable is the interface implemented by [SpeechSynthesizer], for mocking and DI.
 type SpeechSynthesizerable interface {
-	Unwrap() *raw.NSSpeechSynthesizer
-	WithDelegate(delegate raw.NSSpeechSynthesizerDelegate) *SpeechSynthesizer
+	obj.Object
 	WithRate(rate float32) *SpeechSynthesizer
 	WithVolume(volume float32) *SpeechSynthesizer
 	WithUsesFeedbackWindow(usesFeedbackWindow bool) *SpeechSynthesizer
 	StartSpeakingString(string_ string) bool
 	StartSpeakingStringToURL(string_ string, url string) bool
 	StopSpeaking()
-	StopSpeakingAtBoundary(boundary NSSpeechBoundary)
-	PauseSpeakingAtBoundary(boundary NSSpeechBoundary)
+	StopSpeakingAtBoundary(boundary SpeechBoundary)
+	PauseSpeakingAtBoundary(boundary SpeechBoundary)
 	ContinueSpeaking()
-	Voice() string
-	SetVoice(voice *foundation.NSString) bool
-	AddSpeechDictionary(speechDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	Voice() obj.Object
+	SetVoice(voice obj.Object) bool
+	AddSpeechDictionary(speechDictionary obj.Object)
 	PhonemesFromText(text string) string
-	ObjectForPropertyError(property *foundation.NSString) (objc.ID, error)
-	SetObjectForPropertyError(object objc.ID, property *foundation.NSString) (bool, error)
+	ObjectForPropertyError(property obj.Object) (obj.Object, error)
+	SetObjectForProperty(object obj.Object, property obj.Object) error
 	IsSpeaking() bool
-	Delegate() raw.NSSpeechSynthesizerDelegate
-	SetDelegate(delegate raw.NSSpeechSynthesizerDelegate)
 	Rate() float32
 	SetRate(rate float32)
 	Volume() float32

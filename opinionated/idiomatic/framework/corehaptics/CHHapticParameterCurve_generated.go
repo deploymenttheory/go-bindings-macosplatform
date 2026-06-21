@@ -5,86 +5,103 @@
 package corehaptics
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corehaptics"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A curve that you send to a haptic pattern player to alter a property value gradually during playback.
 //
-// HapticParameterCurve wraps [raw.CHHapticParameterCurve] with a fluent Go API.
+// HapticParameterCurve is an idiomatic wrapper over the Objective-C class CHHapticParameterCurve.
 type HapticParameterCurve struct {
-	inner *raw.CHHapticParameterCurve
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CHHapticParameterCurve].
-func (x *HapticParameterCurve) Unwrap() *raw.CHHapticParameterCurve { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HapticParameterCurve) ID() objc.ID { return x.inner.Ptr() }
-
-// HapticParameterCurveFromID adopts an existing object pointer as a HapticParameterCurve (nil for 0).
+// HapticParameterCurveFromID adopts an existing Objective-C object as a HapticParameterCurve
+// (nil for 0), retaining it and registering a release finalizer.
 func HapticParameterCurveFromID(id objc.ID) *HapticParameterCurve {
 	if id == 0 {
 		return nil
 	}
-	return &HapticParameterCurve{inner: raw.CHHapticParameterCurveFromID(id)}
+	x := &HapticParameterCurve{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// hapticParameterCurveAdopt wraps an Objective-C object that this code just created as a
+// HapticParameterCurve (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hapticParameterCurveAdopt(id objc.ID) *HapticParameterCurve {
+	if id == 0 {
+		return nil
+	}
+	x := &HapticParameterCurve{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HapticParameterCurve) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HapticParameterCurve) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HapticParameterCurve) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a parameter curve from its parameter ID, control points, and start time.
 //
-// NewHapticParameterCurveWithParameterIDControlPointsRelativeTime creates a new [HapticParameterCurve].
-func NewHapticParameterCurveWithParameterIDControlPointsRelativeTime(parameterID *foundation.NSString, controlPoints *foundation.NSArray[*raw.CHHapticParameterCurveControlPoint], relativeTime float64) *HapticParameterCurve {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CHHapticParameterCurve")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParameterID:controlPoints:relativeTime:"), parameterID.Ptr(), controlPoints.Ptr(), relativeTime)
-	return &HapticParameterCurve{inner: raw.CHHapticParameterCurveFromID(_id)}
+// NewHapticParameterCurveWithParameterIDControlPointsRelativeTime creates a new HapticParameterCurve.
+func NewHapticParameterCurveWithParameterIDControlPointsRelativeTime(parameterID obj.Object, controlPoints []*HapticParameterCurveControlPoint, relativeTime float64) *HapticParameterCurve {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticParameterCurve")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParameterID:controlPoints:relativeTime:"), objref.IDOf(parameterID), purego.SliceToNSArray(controlPoints, func(_v *HapticParameterCurveControlPoint) objc.ID { return objref.IDOf(_v) }), relativeTime)
+	return hapticParameterCurveAdopt(_id)
 }
 
 // The time at which this parameter curve is applied, relative to the start time of the pattern.
 //
-// WithRelativeTime sets the relativeTime property and returns the receiver for chaining.
+// WithRelativeTime sets relativeTime and returns the receiver so calls can be chained.
 func (x *HapticParameterCurve) WithRelativeTime(relativeTime float64) *HapticParameterCurve {
-	x.inner.SetRelativeTime(relativeTime)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativeTime:"), relativeTime)
 	return x
 }
 
-// ParameterID calls the underlying ParameterID.
-func (x *HapticParameterCurve) ParameterID() string {
-	_r := x.inner.ParameterID()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *HapticParameterCurve) ParameterID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameterID"))
+	return obj.Wrap(_r)
 }
 
-// RelativeTime calls the underlying RelativeTime.
 func (x *HapticParameterCurve) RelativeTime() float64 {
-	return x.inner.RelativeTime()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("relativeTime"))
+	return _r
 }
 
-// SetRelativeTime calls the underlying SetRelativeTime.
 func (x *HapticParameterCurve) SetRelativeTime(relativeTime float64) {
-	x.inner.SetRelativeTime(relativeTime)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativeTime:"), relativeTime)
 }
 
 // ControlPoints returns the collection as a Go slice.
 func (x *HapticParameterCurve) ControlPoints() []*HapticParameterCurveControlPoint {
-	arr := x.inner.ControlPoints()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *HapticParameterCurveControlPoint {
-		return &HapticParameterCurveControlPoint{inner: raw.CHHapticParameterCurveControlPointFromID(purego.Retain(_id))}
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controlPoints"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *HapticParameterCurveControlPoint {
+		return HapticParameterCurveControlPointFromID(_id)
 	})
 }
 
 // HapticParameterCurveable is the interface implemented by [HapticParameterCurve], for mocking and DI.
 type HapticParameterCurveable interface {
-	Unwrap() *raw.CHHapticParameterCurve
+	obj.Object
 	WithRelativeTime(relativeTime float64) *HapticParameterCurve
-	ParameterID() string
+	ParameterID() obj.Object
 	RelativeTime() float64
 	SetRelativeTime(relativeTime float64)
 	ControlPoints() []*HapticParameterCurveControlPoint

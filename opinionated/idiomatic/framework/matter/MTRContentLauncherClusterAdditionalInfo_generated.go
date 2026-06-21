@@ -5,58 +5,78 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRContentLauncherClusterAdditionalInfo wraps [raw.MTRContentLauncherClusterAdditionalInfo] with a fluent Go API.
+// MTRContentLauncherClusterAdditionalInfo is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterAdditionalInfo.
 type MTRContentLauncherClusterAdditionalInfo struct {
-	inner *raw.MTRContentLauncherClusterAdditionalInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRContentLauncherClusterAdditionalInfo].
-func (x *MTRContentLauncherClusterAdditionalInfo) Unwrap() *raw.MTRContentLauncherClusterAdditionalInfo {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRContentLauncherClusterAdditionalInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRContentLauncherClusterAdditionalInfoFromID adopts an existing object pointer as a MTRContentLauncherClusterAdditionalInfo (nil for 0).
+// MTRContentLauncherClusterAdditionalInfoFromID adopts an existing Objective-C object as a MTRContentLauncherClusterAdditionalInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRContentLauncherClusterAdditionalInfoFromID(id objc.ID) *MTRContentLauncherClusterAdditionalInfo {
 	if id == 0 {
 		return nil
 	}
-	return &MTRContentLauncherClusterAdditionalInfo{inner: raw.MTRContentLauncherClusterAdditionalInfoFromID(id)}
+	x := &MTRContentLauncherClusterAdditionalInfo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRContentLauncherClusterAdditionalInfo creates a new [MTRContentLauncherClusterAdditionalInfo].
+// mTRContentLauncherClusterAdditionalInfoAdopt wraps an Objective-C object that this code just created as a
+// MTRContentLauncherClusterAdditionalInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRContentLauncherClusterAdditionalInfoAdopt(id objc.ID) *MTRContentLauncherClusterAdditionalInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRContentLauncherClusterAdditionalInfo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRContentLauncherClusterAdditionalInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRContentLauncherClusterAdditionalInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRContentLauncherClusterAdditionalInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRContentLauncherClusterAdditionalInfo creates a new MTRContentLauncherClusterAdditionalInfo.
 func NewMTRContentLauncherClusterAdditionalInfo() *MTRContentLauncherClusterAdditionalInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRContentLauncherClusterAdditionalInfo")), objc.RegisterName("new"))
-	return &MTRContentLauncherClusterAdditionalInfo{inner: raw.MTRContentLauncherClusterAdditionalInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRContentLauncherClusterAdditionalInfo")), objc.RegisterName("new"))
+	return mTRContentLauncherClusterAdditionalInfoAdopt(_id)
 }
 
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterAdditionalInfo) WithName(name string) *MTRContentLauncherClusterAdditionalInfo {
-	x.inner.MTRContentLauncherClusterAdditionalInfoStruct.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithValue sets the value property and returns the receiver for chaining.
+// WithValue sets value and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterAdditionalInfo) WithValue(value string) *MTRContentLauncherClusterAdditionalInfo {
-	x.inner.MTRContentLauncherClusterAdditionalInfoStruct.SetValue(foundation.NSStringStringWithUTF8String(value))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 	return x
-}
-
-func (x *MTRContentLauncherClusterAdditionalInfo) asMTRContentLauncherClusterAdditionalInfoStruct() *raw.MTRContentLauncherClusterAdditionalInfoStruct {
-	return &x.inner.MTRContentLauncherClusterAdditionalInfoStruct
 }
 
 // MTRContentLauncherClusterAdditionalInfoable is the interface implemented by [MTRContentLauncherClusterAdditionalInfo], for mocking and DI.
 type MTRContentLauncherClusterAdditionalInfoable interface {
-	Unwrap() *raw.MTRContentLauncherClusterAdditionalInfo
+	obj.Object
 	WithName(name string) *MTRContentLauncherClusterAdditionalInfo
 	WithValue(value string) *MTRContentLauncherClusterAdditionalInfo
 }

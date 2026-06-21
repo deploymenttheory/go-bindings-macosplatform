@@ -5,115 +5,95 @@
 package accounts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accounts"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The object you use to request, manage, and store the user’s account information.
 //
-// AccountStore wraps [raw.ACAccountStore] with a fluent Go API.
+// AccountStore is an idiomatic wrapper over the Objective-C class ACAccountStore.
 type AccountStore struct {
-	inner *raw.ACAccountStore
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ACAccountStore].
-func (x *AccountStore) Unwrap() *raw.ACAccountStore { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AccountStore) ID() objc.ID { return x.inner.Ptr() }
-
-// AccountStoreFromID adopts an existing object pointer as a AccountStore (nil for 0).
+// AccountStoreFromID adopts an existing Objective-C object as a AccountStore
+// (nil for 0), retaining it and registering a release finalizer.
 func AccountStoreFromID(id objc.ID) *AccountStore {
 	if id == 0 {
 		return nil
 	}
-	return &AccountStore{inner: raw.ACAccountStoreFromID(id)}
+	x := &AccountStore{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAccountStore creates a new [AccountStore].
+// accountStoreAdopt wraps an Objective-C object that this code just created as a
+// AccountStore (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func accountStoreAdopt(id objc.ID) *AccountStore {
+	if id == 0 {
+		return nil
+	}
+	x := &AccountStore{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AccountStore) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AccountStore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AccountStore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAccountStore creates a new AccountStore.
 func NewAccountStore() *AccountStore {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ACAccountStore")), objc.RegisterName("new"))
-	return &AccountStore{inner: raw.ACAccountStoreFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ACAccountStore")), objc.RegisterName("new"))
+	return accountStoreAdopt(_id)
 }
 
 // Returns the account with the specified identifier.
-//
-// AccountWithIdentifier calls the underlying AccountWithIdentifier.
 func (x *AccountStore) AccountWithIdentifier(identifier string) *Account {
-	_r := x.inner.AccountWithIdentifier(foundation.NSStringStringWithUTF8String(identifier))
-	if _r == nil {
-		return nil
-	}
-	return &Account{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountWithIdentifier:"), purego.NSString(identifier))
+	return AccountFromID(_r)
 }
 
 // Returns an account type that matches the specified identifier.
-//
-// AccountTypeWithAccountTypeIdentifier calls the underlying AccountTypeWithAccountTypeIdentifier.
 func (x *AccountStore) AccountTypeWithAccountTypeIdentifier(typeIdentifier string) *AccountType {
-	_r := x.inner.AccountTypeWithAccountTypeIdentifier(foundation.NSStringStringWithUTF8String(typeIdentifier))
-	if _r == nil {
-		return nil
-	}
-	return &AccountType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountTypeWithAccountTypeIdentifier:"), purego.NSString(typeIdentifier))
+	return AccountTypeFromID(_r)
 }
 
 // Returns all accounts of the specified type.
-//
-// AccountsWithAccountType calls the underlying AccountsWithAccountType.
-func (x *AccountStore) AccountsWithAccountType(accountType *raw.ACAccountType) *foundation.NSArray[objc.ID] {
-	return x.inner.AccountsWithAccountType(accountType)
+func (x *AccountStore) AccountsWithAccountType(accountType *AccountType) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountsWithAccountType:"), objref.IDOf(accountType))
+	return obj.Wrap(_r)
 }
 
-// Saves an account to the Accounts database.
-//
-// SaveAccountWithCompletionHandler calls the underlying SaveAccountWithCompletionHandler.
-func (x *AccountStore) SaveAccountWithCompletionHandler(account *raw.ACAccount, completionHandler func(bool, unsafe.Pointer)) {
-	x.inner.SaveAccountWithCompletionHandler(account, completionHandler)
-}
-
-// Obtains permission to access protected user properties.
-//
-// RequestAccessToAccountsWithTypeOptionsCompletion calls the underlying RequestAccessToAccountsWithTypeOptionsCompletion.
-func (x *AccountStore) RequestAccessToAccountsWithTypeOptionsCompletion(accountType *raw.ACAccountType, options *foundation.NSDictionary[objc.ID, objc.ID], completion func(bool, unsafe.Pointer)) {
-	x.inner.RequestAccessToAccountsWithTypeOptionsCompletion(accountType, options, completion)
-}
-
-// Renews account credentials when the credentials are no longer valid.
-//
-// RenewCredentialsForAccountCompletion calls the underlying RenewCredentialsForAccountCompletion.
-func (x *AccountStore) RenewCredentialsForAccountCompletion(account *raw.ACAccount, completionHandler func(ACAccountCredentialRenewResult, unsafe.Pointer)) {
-	x.inner.RenewCredentialsForAccountCompletion(account, func(_a0 raw.ACAccountCredentialRenewResult, _a1 unsafe.Pointer) {
-		completionHandler(ACAccountCredentialRenewResult(_a0), _a1)
-	})
-}
-
-// Removes an account from the account store.
-//
-// RemoveAccountWithCompletionHandler calls the underlying RemoveAccountWithCompletionHandler.
-func (x *AccountStore) RemoveAccountWithCompletionHandler(account *raw.ACAccount, completionHandler func(bool, unsafe.Pointer)) {
-	x.inner.RemoveAccountWithCompletionHandler(account, completionHandler)
-}
-
-// Accounts calls the underlying Accounts.
-func (x *AccountStore) Accounts() *foundation.NSArray[objc.ID] {
-	return x.inner.Accounts()
+func (x *AccountStore) Accounts() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accounts"))
+	return obj.Wrap(_r)
 }
 
 // AccountStoreable is the interface implemented by [AccountStore], for mocking and DI.
 type AccountStoreable interface {
-	Unwrap() *raw.ACAccountStore
+	obj.Object
 	AccountWithIdentifier(identifier string) *Account
 	AccountTypeWithAccountTypeIdentifier(typeIdentifier string) *AccountType
-	AccountsWithAccountType(accountType *raw.ACAccountType) *foundation.NSArray[objc.ID]
-	SaveAccountWithCompletionHandler(account *raw.ACAccount, completionHandler func(bool, unsafe.Pointer))
-	RequestAccessToAccountsWithTypeOptionsCompletion(accountType *raw.ACAccountType, options *foundation.NSDictionary[objc.ID, objc.ID], completion func(bool, unsafe.Pointer))
-	RenewCredentialsForAccountCompletion(account *raw.ACAccount, completionHandler func(ACAccountCredentialRenewResult, unsafe.Pointer))
-	RemoveAccountWithCompletionHandler(account *raw.ACAccount, completionHandler func(bool, unsafe.Pointer))
-	Accounts() *foundation.NSArray[objc.ID]
+	AccountsWithAccountType(accountType *AccountType) obj.Object
+	Accounts() obj.Object
 }
 
 var _ AccountStoreable = (*AccountStore)(nil)

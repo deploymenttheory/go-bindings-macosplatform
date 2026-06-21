@@ -5,964 +5,1119 @@
 package corefoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KCFNull returns the value of the CoreFoundation reference constant kCFNull as an objc.ID.
-func KCFNull() objc.ID { return purego.CFConstant(raw.KCFNull()) }
+// KCFNull returns the value of the constant kCFNull.
+func KCFNull() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFNull"))) }
 
-// KCFAllocatorDefault returns the value of the CoreFoundation reference constant kCFAllocatorDefault as an objc.ID.
-func KCFAllocatorDefault() objc.ID { return purego.CFConstant(raw.KCFAllocatorDefault()) }
+// KCFAllocatorDefault returns the value of the constant kCFAllocatorDefault.
+func KCFAllocatorDefault() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFAllocatorDefault")))
+}
 
-// KCFAllocatorSystemDefault returns the value of the CoreFoundation reference constant kCFAllocatorSystemDefault as an objc.ID.
-func KCFAllocatorSystemDefault() objc.ID { return purego.CFConstant(raw.KCFAllocatorSystemDefault()) }
+// KCFAllocatorSystemDefault returns the value of the constant kCFAllocatorSystemDefault.
+func KCFAllocatorSystemDefault() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFAllocatorSystemDefault")))
+}
 
-// KCFAllocatorMalloc returns the value of the CoreFoundation reference constant kCFAllocatorMalloc as an objc.ID.
-func KCFAllocatorMalloc() objc.ID { return purego.CFConstant(raw.KCFAllocatorMalloc()) }
+// KCFAllocatorMalloc returns the value of the constant kCFAllocatorMalloc.
+func KCFAllocatorMalloc() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFAllocatorMalloc")))
+}
 
-// KCFAllocatorMallocZone returns the value of the CoreFoundation reference constant kCFAllocatorMallocZone as an objc.ID.
-func KCFAllocatorMallocZone() objc.ID { return purego.CFConstant(raw.KCFAllocatorMallocZone()) }
+// KCFAllocatorMallocZone returns the value of the constant kCFAllocatorMallocZone.
+func KCFAllocatorMallocZone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFAllocatorMallocZone")))
+}
 
-// KCFAllocatorNull returns the value of the CoreFoundation reference constant kCFAllocatorNull as an objc.ID.
-func KCFAllocatorNull() objc.ID { return purego.CFConstant(raw.KCFAllocatorNull()) }
+// KCFAllocatorNull returns the value of the constant kCFAllocatorNull.
+func KCFAllocatorNull() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFAllocatorNull"))) }
 
-// KCFAllocatorUseContext returns the value of the CoreFoundation reference constant kCFAllocatorUseContext as an objc.ID.
-func KCFAllocatorUseContext() objc.ID { return purego.CFConstant(raw.KCFAllocatorUseContext()) }
+// KCFAllocatorUseContext returns the value of the constant kCFAllocatorUseContext.
+func KCFAllocatorUseContext() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFAllocatorUseContext")))
+}
 
-// KCFErrorLocalizedDescriptionKey returns the value of the CoreFoundation reference constant kCFErrorLocalizedDescriptionKey as an objc.ID.
-func KCFErrorLocalizedDescriptionKey() objc.ID {
-	return purego.CFConstant(raw.KCFErrorLocalizedDescriptionKey())
+// KCFErrorLocalizedDescriptionKey returns the value of the constant kCFErrorLocalizedDescriptionKey.
+func KCFErrorLocalizedDescriptionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFErrorLocalizedDescriptionKey")))
 }
 
-// KCFErrorLocalizedFailureKey returns the value of the CoreFoundation reference constant kCFErrorLocalizedFailureKey as an objc.ID.
-func KCFErrorLocalizedFailureKey() objc.ID {
-	return purego.CFConstant(raw.KCFErrorLocalizedFailureKey())
+// KCFErrorLocalizedFailureKey returns the value of the constant kCFErrorLocalizedFailureKey.
+func KCFErrorLocalizedFailureKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFErrorLocalizedFailureKey")))
 }
 
-// KCFErrorLocalizedFailureReasonKey returns the value of the CoreFoundation reference constant kCFErrorLocalizedFailureReasonKey as an objc.ID.
-func KCFErrorLocalizedFailureReasonKey() objc.ID {
-	return purego.CFConstant(raw.KCFErrorLocalizedFailureReasonKey())
+// KCFErrorLocalizedFailureReasonKey returns the value of the constant kCFErrorLocalizedFailureReasonKey.
+func KCFErrorLocalizedFailureReasonKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFErrorLocalizedFailureReasonKey")))
 }
 
-// KCFErrorLocalizedRecoverySuggestionKey returns the value of the CoreFoundation reference constant kCFErrorLocalizedRecoverySuggestionKey as an objc.ID.
-func KCFErrorLocalizedRecoverySuggestionKey() objc.ID {
-	return purego.CFConstant(raw.KCFErrorLocalizedRecoverySuggestionKey())
+// KCFErrorLocalizedRecoverySuggestionKey returns the value of the constant kCFErrorLocalizedRecoverySuggestionKey.
+func KCFErrorLocalizedRecoverySuggestionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFErrorLocalizedRecoverySuggestionKey")))
 }
 
-// KCFErrorDescriptionKey returns the value of the CoreFoundation reference constant kCFErrorDescriptionKey as an objc.ID.
-func KCFErrorDescriptionKey() objc.ID { return purego.CFConstant(raw.KCFErrorDescriptionKey()) }
+// KCFErrorDescriptionKey returns the value of the constant kCFErrorDescriptionKey.
+func KCFErrorDescriptionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFErrorDescriptionKey")))
+}
 
-// KCFErrorUnderlyingErrorKey returns the value of the CoreFoundation reference constant kCFErrorUnderlyingErrorKey as an objc.ID.
-func KCFErrorUnderlyingErrorKey() objc.ID { return purego.CFConstant(raw.KCFErrorUnderlyingErrorKey()) }
+// KCFErrorUnderlyingErrorKey returns the value of the constant kCFErrorUnderlyingErrorKey.
+func KCFErrorUnderlyingErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFErrorUnderlyingErrorKey")))
+}
 
-// KCFErrorURLKey returns the value of the CoreFoundation reference constant kCFErrorURLKey as an objc.ID.
-func KCFErrorURLKey() objc.ID { return purego.CFConstant(raw.KCFErrorURLKey()) }
+// KCFErrorURLKey returns the value of the constant kCFErrorURLKey.
+func KCFErrorURLKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFErrorURLKey"))) }
 
-// KCFErrorFilePathKey returns the value of the CoreFoundation reference constant kCFErrorFilePathKey as an objc.ID.
-func KCFErrorFilePathKey() objc.ID { return purego.CFConstant(raw.KCFErrorFilePathKey()) }
+// KCFErrorFilePathKey returns the value of the constant kCFErrorFilePathKey.
+func KCFErrorFilePathKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFErrorFilePathKey")))
+}
 
-// KCFStringTransformStripCombiningMarks returns the value of the CoreFoundation reference constant kCFStringTransformStripCombiningMarks as an objc.ID.
-func KCFStringTransformStripCombiningMarks() objc.ID {
-	return purego.CFConstant(raw.KCFStringTransformStripCombiningMarks())
+// KCFStringTransformStripCombiningMarks returns the value of the constant kCFStringTransformStripCombiningMarks.
+func KCFStringTransformStripCombiningMarks() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStringTransformStripCombiningMarks")))
 }
 
-// KCFStringTransformToLatin returns the value of the CoreFoundation reference constant kCFStringTransformToLatin as an objc.ID.
-func KCFStringTransformToLatin() objc.ID { return purego.CFConstant(raw.KCFStringTransformToLatin()) }
+// KCFStringTransformToLatin returns the value of the constant kCFStringTransformToLatin.
+func KCFStringTransformToLatin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStringTransformToLatin")))
+}
 
-// KCFStringTransformFullwidthHalfwidth returns the value of the CoreFoundation reference constant kCFStringTransformFullwidthHalfwidth as an objc.ID.
-func KCFStringTransformFullwidthHalfwidth() objc.ID {
-	return purego.CFConstant(raw.KCFStringTransformFullwidthHalfwidth())
+// KCFStringTransformFullwidthHalfwidth returns the value of the constant kCFStringTransformFullwidthHalfwidth.
+func KCFStringTransformFullwidthHalfwidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStringTransformFullwidthHalfwidth")))
 }
 
-// KCFStringTransformLatinKatakana returns the value of the CoreFoundation reference constant kCFStringTransformLatinKatakana as an objc.ID.
-func KCFStringTransformLatinKatakana() objc.ID {
-	return purego.CFConstant(raw.KCFStringTransformLatinKatakana())
+// KCFStringTransformLatinKatakana returns the value of the constant kCFStringTransformLatinKatakana.
+func KCFStringTransformLatinKatakana() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStringTransformLatinKatakana")))
 }
 
-// KCFStringTransformLatinHiragana returns the value of the CoreFoundation reference constant kCFStringTransformLatinHiragana as an objc.ID.
-func KCFStringTransformLatinHiragana() objc.ID {
-	return purego.CFConstant(raw.KCFStringTransformLatinHiragana())
+// KCFStringTransformLatinHiragana returns the value of the constant kCFStringTransformLatinHiragana.
+func KCFStringTransformLatinHiragana() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStringTransformLatinHiragana")))
 }
 
-// KCFStringTransformHiraganaKatakana returns the value of the CoreFoundation reference constant kCFStringTransformHiraganaKatakana as an objc.ID.
-func KCFStringTransformHiraganaKatakana() objc.ID {
-	return purego.CFConstant(raw.KCFStringTransformHiraganaKatakana())
+// KCFStringTransformHiraganaKatakana returns the value of the constant kCFStringTransformHiraganaKatakana.
+func KCFStringTransformHiraganaKatakana() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStringTransformHiraganaKatakana")))
 }
 
-// KCFStringTransformMandarinLatin returns the value of the CoreFoundation reference constant kCFStringTransformMandarinLatin as an objc.ID.
-func KCFStringTransformMandarinLatin() objc.ID {
-	return purego.CFConstant(raw.KCFStringTransformMandarinLatin())
+// KCFStringTransformMandarinLatin returns the value of the constant kCFStringTransformMandarinLatin.
+func KCFStringTransformMandarinLatin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStringTransformMandarinLatin")))
 }
 
-// KCFStringTransformLatinHangul returns the value of the CoreFoundation reference constant kCFStringTransformLatinHangul as an objc.ID.
-func KCFStringTransformLatinHangul() objc.ID {
-	return purego.CFConstant(raw.KCFStringTransformLatinHangul())
+// KCFStringTransformLatinHangul returns the value of the constant kCFStringTransformLatinHangul.
+func KCFStringTransformLatinHangul() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStringTransformLatinHangul")))
 }
 
-// KCFStringTransformLatinArabic returns the value of the CoreFoundation reference constant kCFStringTransformLatinArabic as an objc.ID.
-func KCFStringTransformLatinArabic() objc.ID {
-	return purego.CFConstant(raw.KCFStringTransformLatinArabic())
+// KCFStringTransformLatinArabic returns the value of the constant kCFStringTransformLatinArabic.
+func KCFStringTransformLatinArabic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStringTransformLatinArabic")))
 }
 
-// KCFStringTransformLatinHebrew returns the value of the CoreFoundation reference constant kCFStringTransformLatinHebrew as an objc.ID.
-func KCFStringTransformLatinHebrew() objc.ID {
-	return purego.CFConstant(raw.KCFStringTransformLatinHebrew())
+// KCFStringTransformLatinHebrew returns the value of the constant kCFStringTransformLatinHebrew.
+func KCFStringTransformLatinHebrew() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStringTransformLatinHebrew")))
 }
 
-// KCFStringTransformLatinThai returns the value of the CoreFoundation reference constant kCFStringTransformLatinThai as an objc.ID.
-func KCFStringTransformLatinThai() objc.ID {
-	return purego.CFConstant(raw.KCFStringTransformLatinThai())
+// KCFStringTransformLatinThai returns the value of the constant kCFStringTransformLatinThai.
+func KCFStringTransformLatinThai() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStringTransformLatinThai")))
 }
 
-// KCFStringTransformLatinCyrillic returns the value of the CoreFoundation reference constant kCFStringTransformLatinCyrillic as an objc.ID.
-func KCFStringTransformLatinCyrillic() objc.ID {
-	return purego.CFConstant(raw.KCFStringTransformLatinCyrillic())
+// KCFStringTransformLatinCyrillic returns the value of the constant kCFStringTransformLatinCyrillic.
+func KCFStringTransformLatinCyrillic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStringTransformLatinCyrillic")))
 }
 
-// KCFStringTransformLatinGreek returns the value of the CoreFoundation reference constant kCFStringTransformLatinGreek as an objc.ID.
-func KCFStringTransformLatinGreek() objc.ID {
-	return purego.CFConstant(raw.KCFStringTransformLatinGreek())
+// KCFStringTransformLatinGreek returns the value of the constant kCFStringTransformLatinGreek.
+func KCFStringTransformLatinGreek() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStringTransformLatinGreek")))
 }
 
-// KCFStringTransformToXMLHex returns the value of the CoreFoundation reference constant kCFStringTransformToXMLHex as an objc.ID.
-func KCFStringTransformToXMLHex() objc.ID { return purego.CFConstant(raw.KCFStringTransformToXMLHex()) }
+// KCFStringTransformToXMLHex returns the value of the constant kCFStringTransformToXMLHex.
+func KCFStringTransformToXMLHex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStringTransformToXMLHex")))
+}
 
-// KCFStringTransformToUnicodeName returns the value of the CoreFoundation reference constant kCFStringTransformToUnicodeName as an objc.ID.
-func KCFStringTransformToUnicodeName() objc.ID {
-	return purego.CFConstant(raw.KCFStringTransformToUnicodeName())
+// KCFStringTransformToUnicodeName returns the value of the constant kCFStringTransformToUnicodeName.
+func KCFStringTransformToUnicodeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStringTransformToUnicodeName")))
 }
 
-// KCFStringTransformStripDiacritics returns the value of the CoreFoundation reference constant kCFStringTransformStripDiacritics as an objc.ID.
-func KCFStringTransformStripDiacritics() objc.ID {
-	return purego.CFConstant(raw.KCFStringTransformStripDiacritics())
+// KCFStringTransformStripDiacritics returns the value of the constant kCFStringTransformStripDiacritics.
+func KCFStringTransformStripDiacritics() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStringTransformStripDiacritics")))
 }
 
-// KCFBooleanTrue returns the value of the CoreFoundation reference constant kCFBooleanTrue as an objc.ID.
-func KCFBooleanTrue() objc.ID { return purego.CFConstant(raw.KCFBooleanTrue()) }
+// KCFBooleanTrue returns the value of the constant kCFBooleanTrue.
+func KCFBooleanTrue() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFBooleanTrue"))) }
 
-// KCFBooleanFalse returns the value of the CoreFoundation reference constant kCFBooleanFalse as an objc.ID.
-func KCFBooleanFalse() objc.ID { return purego.CFConstant(raw.KCFBooleanFalse()) }
+// KCFBooleanFalse returns the value of the constant kCFBooleanFalse.
+func KCFBooleanFalse() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFBooleanFalse"))) }
 
-// KCFNumberPositiveInfinity returns the value of the CoreFoundation reference constant kCFNumberPositiveInfinity as an objc.ID.
-func KCFNumberPositiveInfinity() objc.ID { return purego.CFConstant(raw.KCFNumberPositiveInfinity()) }
+// KCFNumberPositiveInfinity returns the value of the constant kCFNumberPositiveInfinity.
+func KCFNumberPositiveInfinity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNumberPositiveInfinity")))
+}
 
-// KCFNumberNegativeInfinity returns the value of the CoreFoundation reference constant kCFNumberNegativeInfinity as an objc.ID.
-func KCFNumberNegativeInfinity() objc.ID { return purego.CFConstant(raw.KCFNumberNegativeInfinity()) }
+// KCFNumberNegativeInfinity returns the value of the constant kCFNumberNegativeInfinity.
+func KCFNumberNegativeInfinity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNumberNegativeInfinity")))
+}
 
-// KCFNumberNaN returns the value of the CoreFoundation reference constant kCFNumberNaN as an objc.ID.
-func KCFNumberNaN() objc.ID { return purego.CFConstant(raw.KCFNumberNaN()) }
+// KCFNumberNaN returns the value of the constant kCFNumberNaN.
+func KCFNumberNaN() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFNumberNaN"))) }
 
-// KCFPreferencesAnyApplication returns the value of the CoreFoundation reference constant kCFPreferencesAnyApplication as an objc.ID.
-func KCFPreferencesAnyApplication() objc.ID {
-	return purego.CFConstant(raw.KCFPreferencesAnyApplication())
+// KCFPreferencesAnyApplication returns the value of the constant kCFPreferencesAnyApplication.
+func KCFPreferencesAnyApplication() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFPreferencesAnyApplication")))
 }
 
-// KCFPreferencesCurrentApplication returns the value of the CoreFoundation reference constant kCFPreferencesCurrentApplication as an objc.ID.
-func KCFPreferencesCurrentApplication() objc.ID {
-	return purego.CFConstant(raw.KCFPreferencesCurrentApplication())
+// KCFPreferencesCurrentApplication returns the value of the constant kCFPreferencesCurrentApplication.
+func KCFPreferencesCurrentApplication() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFPreferencesCurrentApplication")))
 }
 
-// KCFPreferencesAnyHost returns the value of the CoreFoundation reference constant kCFPreferencesAnyHost as an objc.ID.
-func KCFPreferencesAnyHost() objc.ID { return purego.CFConstant(raw.KCFPreferencesAnyHost()) }
+// KCFPreferencesAnyHost returns the value of the constant kCFPreferencesAnyHost.
+func KCFPreferencesAnyHost() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFPreferencesAnyHost")))
+}
 
-// KCFPreferencesCurrentHost returns the value of the CoreFoundation reference constant kCFPreferencesCurrentHost as an objc.ID.
-func KCFPreferencesCurrentHost() objc.ID { return purego.CFConstant(raw.KCFPreferencesCurrentHost()) }
+// KCFPreferencesCurrentHost returns the value of the constant kCFPreferencesCurrentHost.
+func KCFPreferencesCurrentHost() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFPreferencesCurrentHost")))
+}
 
-// KCFPreferencesAnyUser returns the value of the CoreFoundation reference constant kCFPreferencesAnyUser as an objc.ID.
-func KCFPreferencesAnyUser() objc.ID { return purego.CFConstant(raw.KCFPreferencesAnyUser()) }
+// KCFPreferencesAnyUser returns the value of the constant kCFPreferencesAnyUser.
+func KCFPreferencesAnyUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFPreferencesAnyUser")))
+}
 
-// KCFPreferencesCurrentUser returns the value of the CoreFoundation reference constant kCFPreferencesCurrentUser as an objc.ID.
-func KCFPreferencesCurrentUser() objc.ID { return purego.CFConstant(raw.KCFPreferencesCurrentUser()) }
+// KCFPreferencesCurrentUser returns the value of the constant kCFPreferencesCurrentUser.
+func KCFPreferencesCurrentUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFPreferencesCurrentUser")))
+}
 
-// KCFURLKeysOfUnsetValuesKey returns the value of the CoreFoundation reference constant kCFURLKeysOfUnsetValuesKey as an objc.ID.
-func KCFURLKeysOfUnsetValuesKey() objc.ID { return purego.CFConstant(raw.KCFURLKeysOfUnsetValuesKey()) }
+// KCFURLKeysOfUnsetValuesKey returns the value of the constant kCFURLKeysOfUnsetValuesKey.
+func KCFURLKeysOfUnsetValuesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLKeysOfUnsetValuesKey")))
+}
 
-// KCFURLNameKey returns the value of the CoreFoundation reference constant kCFURLNameKey as an objc.ID.
-func KCFURLNameKey() objc.ID { return purego.CFConstant(raw.KCFURLNameKey()) }
+// KCFURLNameKey returns the value of the constant kCFURLNameKey.
+func KCFURLNameKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFURLNameKey"))) }
 
-// KCFURLLocalizedNameKey returns the value of the CoreFoundation reference constant kCFURLLocalizedNameKey as an objc.ID.
-func KCFURLLocalizedNameKey() objc.ID { return purego.CFConstant(raw.KCFURLLocalizedNameKey()) }
+// KCFURLLocalizedNameKey returns the value of the constant kCFURLLocalizedNameKey.
+func KCFURLLocalizedNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLLocalizedNameKey")))
+}
 
-// KCFURLIsRegularFileKey returns the value of the CoreFoundation reference constant kCFURLIsRegularFileKey as an objc.ID.
-func KCFURLIsRegularFileKey() objc.ID { return purego.CFConstant(raw.KCFURLIsRegularFileKey()) }
+// KCFURLIsRegularFileKey returns the value of the constant kCFURLIsRegularFileKey.
+func KCFURLIsRegularFileKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLIsRegularFileKey")))
+}
 
-// KCFURLIsDirectoryKey returns the value of the CoreFoundation reference constant kCFURLIsDirectoryKey as an objc.ID.
-func KCFURLIsDirectoryKey() objc.ID { return purego.CFConstant(raw.KCFURLIsDirectoryKey()) }
+// KCFURLIsDirectoryKey returns the value of the constant kCFURLIsDirectoryKey.
+func KCFURLIsDirectoryKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLIsDirectoryKey")))
+}
 
-// KCFURLIsSymbolicLinkKey returns the value of the CoreFoundation reference constant kCFURLIsSymbolicLinkKey as an objc.ID.
-func KCFURLIsSymbolicLinkKey() objc.ID { return purego.CFConstant(raw.KCFURLIsSymbolicLinkKey()) }
+// KCFURLIsSymbolicLinkKey returns the value of the constant kCFURLIsSymbolicLinkKey.
+func KCFURLIsSymbolicLinkKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLIsSymbolicLinkKey")))
+}
 
-// KCFURLIsVolumeKey returns the value of the CoreFoundation reference constant kCFURLIsVolumeKey as an objc.ID.
-func KCFURLIsVolumeKey() objc.ID { return purego.CFConstant(raw.KCFURLIsVolumeKey()) }
+// KCFURLIsVolumeKey returns the value of the constant kCFURLIsVolumeKey.
+func KCFURLIsVolumeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFURLIsVolumeKey"))) }
 
-// KCFURLIsPackageKey returns the value of the CoreFoundation reference constant kCFURLIsPackageKey as an objc.ID.
-func KCFURLIsPackageKey() objc.ID { return purego.CFConstant(raw.KCFURLIsPackageKey()) }
+// KCFURLIsPackageKey returns the value of the constant kCFURLIsPackageKey.
+func KCFURLIsPackageKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLIsPackageKey")))
+}
 
-// KCFURLIsApplicationKey returns the value of the CoreFoundation reference constant kCFURLIsApplicationKey as an objc.ID.
-func KCFURLIsApplicationKey() objc.ID { return purego.CFConstant(raw.KCFURLIsApplicationKey()) }
+// KCFURLIsApplicationKey returns the value of the constant kCFURLIsApplicationKey.
+func KCFURLIsApplicationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLIsApplicationKey")))
+}
 
-// KCFURLApplicationIsScriptableKey returns the value of the CoreFoundation reference constant kCFURLApplicationIsScriptableKey as an objc.ID.
-func KCFURLApplicationIsScriptableKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLApplicationIsScriptableKey())
+// KCFURLApplicationIsScriptableKey returns the value of the constant kCFURLApplicationIsScriptableKey.
+func KCFURLApplicationIsScriptableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLApplicationIsScriptableKey")))
 }
 
-// KCFURLIsSystemImmutableKey returns the value of the CoreFoundation reference constant kCFURLIsSystemImmutableKey as an objc.ID.
-func KCFURLIsSystemImmutableKey() objc.ID { return purego.CFConstant(raw.KCFURLIsSystemImmutableKey()) }
+// KCFURLIsSystemImmutableKey returns the value of the constant kCFURLIsSystemImmutableKey.
+func KCFURLIsSystemImmutableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLIsSystemImmutableKey")))
+}
 
-// KCFURLIsUserImmutableKey returns the value of the CoreFoundation reference constant kCFURLIsUserImmutableKey as an objc.ID.
-func KCFURLIsUserImmutableKey() objc.ID { return purego.CFConstant(raw.KCFURLIsUserImmutableKey()) }
+// KCFURLIsUserImmutableKey returns the value of the constant kCFURLIsUserImmutableKey.
+func KCFURLIsUserImmutableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLIsUserImmutableKey")))
+}
 
-// KCFURLIsHiddenKey returns the value of the CoreFoundation reference constant kCFURLIsHiddenKey as an objc.ID.
-func KCFURLIsHiddenKey() objc.ID { return purego.CFConstant(raw.KCFURLIsHiddenKey()) }
+// KCFURLIsHiddenKey returns the value of the constant kCFURLIsHiddenKey.
+func KCFURLIsHiddenKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFURLIsHiddenKey"))) }
 
-// KCFURLHasHiddenExtensionKey returns the value of the CoreFoundation reference constant kCFURLHasHiddenExtensionKey as an objc.ID.
-func KCFURLHasHiddenExtensionKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLHasHiddenExtensionKey())
+// KCFURLHasHiddenExtensionKey returns the value of the constant kCFURLHasHiddenExtensionKey.
+func KCFURLHasHiddenExtensionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLHasHiddenExtensionKey")))
 }
 
-// KCFURLCreationDateKey returns the value of the CoreFoundation reference constant kCFURLCreationDateKey as an objc.ID.
-func KCFURLCreationDateKey() objc.ID { return purego.CFConstant(raw.KCFURLCreationDateKey()) }
+// KCFURLCreationDateKey returns the value of the constant kCFURLCreationDateKey.
+func KCFURLCreationDateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLCreationDateKey")))
+}
 
-// KCFURLContentAccessDateKey returns the value of the CoreFoundation reference constant kCFURLContentAccessDateKey as an objc.ID.
-func KCFURLContentAccessDateKey() objc.ID { return purego.CFConstant(raw.KCFURLContentAccessDateKey()) }
+// KCFURLContentAccessDateKey returns the value of the constant kCFURLContentAccessDateKey.
+func KCFURLContentAccessDateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLContentAccessDateKey")))
+}
 
-// KCFURLContentModificationDateKey returns the value of the CoreFoundation reference constant kCFURLContentModificationDateKey as an objc.ID.
-func KCFURLContentModificationDateKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLContentModificationDateKey())
+// KCFURLContentModificationDateKey returns the value of the constant kCFURLContentModificationDateKey.
+func KCFURLContentModificationDateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLContentModificationDateKey")))
 }
 
-// KCFURLAttributeModificationDateKey returns the value of the CoreFoundation reference constant kCFURLAttributeModificationDateKey as an objc.ID.
-func KCFURLAttributeModificationDateKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLAttributeModificationDateKey())
+// KCFURLAttributeModificationDateKey returns the value of the constant kCFURLAttributeModificationDateKey.
+func KCFURLAttributeModificationDateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLAttributeModificationDateKey")))
 }
 
-// KCFURLFileIdentifierKey returns the value of the CoreFoundation reference constant kCFURLFileIdentifierKey as an objc.ID.
-func KCFURLFileIdentifierKey() objc.ID { return purego.CFConstant(raw.KCFURLFileIdentifierKey()) }
+// KCFURLFileIdentifierKey returns the value of the constant kCFURLFileIdentifierKey.
+func KCFURLFileIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileIdentifierKey")))
+}
 
-// KCFURLFileContentIdentifierKey returns the value of the CoreFoundation reference constant kCFURLFileContentIdentifierKey as an objc.ID.
-func KCFURLFileContentIdentifierKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLFileContentIdentifierKey())
+// KCFURLFileContentIdentifierKey returns the value of the constant kCFURLFileContentIdentifierKey.
+func KCFURLFileContentIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileContentIdentifierKey")))
 }
 
-// KCFURLMayShareFileContentKey returns the value of the CoreFoundation reference constant kCFURLMayShareFileContentKey as an objc.ID.
-func KCFURLMayShareFileContentKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLMayShareFileContentKey())
+// KCFURLMayShareFileContentKey returns the value of the constant kCFURLMayShareFileContentKey.
+func KCFURLMayShareFileContentKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLMayShareFileContentKey")))
 }
 
-// KCFURLMayHaveExtendedAttributesKey returns the value of the CoreFoundation reference constant kCFURLMayHaveExtendedAttributesKey as an objc.ID.
-func KCFURLMayHaveExtendedAttributesKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLMayHaveExtendedAttributesKey())
+// KCFURLMayHaveExtendedAttributesKey returns the value of the constant kCFURLMayHaveExtendedAttributesKey.
+func KCFURLMayHaveExtendedAttributesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLMayHaveExtendedAttributesKey")))
 }
 
-// KCFURLIsPurgeableKey returns the value of the CoreFoundation reference constant kCFURLIsPurgeableKey as an objc.ID.
-func KCFURLIsPurgeableKey() objc.ID { return purego.CFConstant(raw.KCFURLIsPurgeableKey()) }
+// KCFURLIsPurgeableKey returns the value of the constant kCFURLIsPurgeableKey.
+func KCFURLIsPurgeableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLIsPurgeableKey")))
+}
 
-// KCFURLIsSparseKey returns the value of the CoreFoundation reference constant kCFURLIsSparseKey as an objc.ID.
-func KCFURLIsSparseKey() objc.ID { return purego.CFConstant(raw.KCFURLIsSparseKey()) }
+// KCFURLIsSparseKey returns the value of the constant kCFURLIsSparseKey.
+func KCFURLIsSparseKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFURLIsSparseKey"))) }
 
-// KCFURLLinkCountKey returns the value of the CoreFoundation reference constant kCFURLLinkCountKey as an objc.ID.
-func KCFURLLinkCountKey() objc.ID { return purego.CFConstant(raw.KCFURLLinkCountKey()) }
+// KCFURLLinkCountKey returns the value of the constant kCFURLLinkCountKey.
+func KCFURLLinkCountKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLLinkCountKey")))
+}
 
-// KCFURLParentDirectoryURLKey returns the value of the CoreFoundation reference constant kCFURLParentDirectoryURLKey as an objc.ID.
-func KCFURLParentDirectoryURLKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLParentDirectoryURLKey())
+// KCFURLParentDirectoryURLKey returns the value of the constant kCFURLParentDirectoryURLKey.
+func KCFURLParentDirectoryURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLParentDirectoryURLKey")))
 }
 
-// KCFURLVolumeURLKey returns the value of the CoreFoundation reference constant kCFURLVolumeURLKey as an objc.ID.
-func KCFURLVolumeURLKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeURLKey()) }
+// KCFURLVolumeURLKey returns the value of the constant kCFURLVolumeURLKey.
+func KCFURLVolumeURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeURLKey")))
+}
 
-// KCFURLTypeIdentifierKey returns the value of the CoreFoundation reference constant kCFURLTypeIdentifierKey as an objc.ID.
-func KCFURLTypeIdentifierKey() objc.ID { return purego.CFConstant(raw.KCFURLTypeIdentifierKey()) }
+// KCFURLTypeIdentifierKey returns the value of the constant kCFURLTypeIdentifierKey.
+func KCFURLTypeIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLTypeIdentifierKey")))
+}
 
-// KCFURLLocalizedTypeDescriptionKey returns the value of the CoreFoundation reference constant kCFURLLocalizedTypeDescriptionKey as an objc.ID.
-func KCFURLLocalizedTypeDescriptionKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLLocalizedTypeDescriptionKey())
+// KCFURLLocalizedTypeDescriptionKey returns the value of the constant kCFURLLocalizedTypeDescriptionKey.
+func KCFURLLocalizedTypeDescriptionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLLocalizedTypeDescriptionKey")))
 }
 
-// KCFURLLabelNumberKey returns the value of the CoreFoundation reference constant kCFURLLabelNumberKey as an objc.ID.
-func KCFURLLabelNumberKey() objc.ID { return purego.CFConstant(raw.KCFURLLabelNumberKey()) }
+// KCFURLLabelNumberKey returns the value of the constant kCFURLLabelNumberKey.
+func KCFURLLabelNumberKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLLabelNumberKey")))
+}
 
-// KCFURLLabelColorKey returns the value of the CoreFoundation reference constant kCFURLLabelColorKey as an objc.ID.
-func KCFURLLabelColorKey() objc.ID { return purego.CFConstant(raw.KCFURLLabelColorKey()) }
+// KCFURLLabelColorKey returns the value of the constant kCFURLLabelColorKey.
+func KCFURLLabelColorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLLabelColorKey")))
+}
 
-// KCFURLLocalizedLabelKey returns the value of the CoreFoundation reference constant kCFURLLocalizedLabelKey as an objc.ID.
-func KCFURLLocalizedLabelKey() objc.ID { return purego.CFConstant(raw.KCFURLLocalizedLabelKey()) }
+// KCFURLLocalizedLabelKey returns the value of the constant kCFURLLocalizedLabelKey.
+func KCFURLLocalizedLabelKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLLocalizedLabelKey")))
+}
 
-// KCFURLEffectiveIconKey returns the value of the CoreFoundation reference constant kCFURLEffectiveIconKey as an objc.ID.
-func KCFURLEffectiveIconKey() objc.ID { return purego.CFConstant(raw.KCFURLEffectiveIconKey()) }
+// KCFURLEffectiveIconKey returns the value of the constant kCFURLEffectiveIconKey.
+func KCFURLEffectiveIconKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLEffectiveIconKey")))
+}
 
-// KCFURLCustomIconKey returns the value of the CoreFoundation reference constant kCFURLCustomIconKey as an objc.ID.
-func KCFURLCustomIconKey() objc.ID { return purego.CFConstant(raw.KCFURLCustomIconKey()) }
+// KCFURLCustomIconKey returns the value of the constant kCFURLCustomIconKey.
+func KCFURLCustomIconKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLCustomIconKey")))
+}
 
-// KCFURLFileResourceIdentifierKey returns the value of the CoreFoundation reference constant kCFURLFileResourceIdentifierKey as an objc.ID.
-func KCFURLFileResourceIdentifierKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLFileResourceIdentifierKey())
+// KCFURLFileResourceIdentifierKey returns the value of the constant kCFURLFileResourceIdentifierKey.
+func KCFURLFileResourceIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileResourceIdentifierKey")))
 }
 
-// KCFURLVolumeIdentifierKey returns the value of the CoreFoundation reference constant kCFURLVolumeIdentifierKey as an objc.ID.
-func KCFURLVolumeIdentifierKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIdentifierKey()) }
+// KCFURLVolumeIdentifierKey returns the value of the constant kCFURLVolumeIdentifierKey.
+func KCFURLVolumeIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeIdentifierKey")))
+}
 
-// KCFURLPreferredIOBlockSizeKey returns the value of the CoreFoundation reference constant kCFURLPreferredIOBlockSizeKey as an objc.ID.
-func KCFURLPreferredIOBlockSizeKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLPreferredIOBlockSizeKey())
+// KCFURLPreferredIOBlockSizeKey returns the value of the constant kCFURLPreferredIOBlockSizeKey.
+func KCFURLPreferredIOBlockSizeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLPreferredIOBlockSizeKey")))
 }
 
-// KCFURLIsReadableKey returns the value of the CoreFoundation reference constant kCFURLIsReadableKey as an objc.ID.
-func KCFURLIsReadableKey() objc.ID { return purego.CFConstant(raw.KCFURLIsReadableKey()) }
+// KCFURLIsReadableKey returns the value of the constant kCFURLIsReadableKey.
+func KCFURLIsReadableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLIsReadableKey")))
+}
 
-// KCFURLIsWritableKey returns the value of the CoreFoundation reference constant kCFURLIsWritableKey as an objc.ID.
-func KCFURLIsWritableKey() objc.ID { return purego.CFConstant(raw.KCFURLIsWritableKey()) }
+// KCFURLIsWritableKey returns the value of the constant kCFURLIsWritableKey.
+func KCFURLIsWritableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLIsWritableKey")))
+}
 
-// KCFURLIsExecutableKey returns the value of the CoreFoundation reference constant kCFURLIsExecutableKey as an objc.ID.
-func KCFURLIsExecutableKey() objc.ID { return purego.CFConstant(raw.KCFURLIsExecutableKey()) }
+// KCFURLIsExecutableKey returns the value of the constant kCFURLIsExecutableKey.
+func KCFURLIsExecutableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLIsExecutableKey")))
+}
 
-// KCFURLFileSecurityKey returns the value of the CoreFoundation reference constant kCFURLFileSecurityKey as an objc.ID.
-func KCFURLFileSecurityKey() objc.ID { return purego.CFConstant(raw.KCFURLFileSecurityKey()) }
+// KCFURLFileSecurityKey returns the value of the constant kCFURLFileSecurityKey.
+func KCFURLFileSecurityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileSecurityKey")))
+}
 
-// KCFURLIsExcludedFromBackupKey returns the value of the CoreFoundation reference constant kCFURLIsExcludedFromBackupKey as an objc.ID.
-func KCFURLIsExcludedFromBackupKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLIsExcludedFromBackupKey())
+// KCFURLIsExcludedFromBackupKey returns the value of the constant kCFURLIsExcludedFromBackupKey.
+func KCFURLIsExcludedFromBackupKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLIsExcludedFromBackupKey")))
 }
 
-// KCFURLTagNamesKey returns the value of the CoreFoundation reference constant kCFURLTagNamesKey as an objc.ID.
-func KCFURLTagNamesKey() objc.ID { return purego.CFConstant(raw.KCFURLTagNamesKey()) }
+// KCFURLTagNamesKey returns the value of the constant kCFURLTagNamesKey.
+func KCFURLTagNamesKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFURLTagNamesKey"))) }
 
-// KCFURLPathKey returns the value of the CoreFoundation reference constant kCFURLPathKey as an objc.ID.
-func KCFURLPathKey() objc.ID { return purego.CFConstant(raw.KCFURLPathKey()) }
+// KCFURLPathKey returns the value of the constant kCFURLPathKey.
+func KCFURLPathKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFURLPathKey"))) }
 
-// KCFURLCanonicalPathKey returns the value of the CoreFoundation reference constant kCFURLCanonicalPathKey as an objc.ID.
-func KCFURLCanonicalPathKey() objc.ID { return purego.CFConstant(raw.KCFURLCanonicalPathKey()) }
+// KCFURLCanonicalPathKey returns the value of the constant kCFURLCanonicalPathKey.
+func KCFURLCanonicalPathKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLCanonicalPathKey")))
+}
 
-// KCFURLIsMountTriggerKey returns the value of the CoreFoundation reference constant kCFURLIsMountTriggerKey as an objc.ID.
-func KCFURLIsMountTriggerKey() objc.ID { return purego.CFConstant(raw.KCFURLIsMountTriggerKey()) }
+// KCFURLIsMountTriggerKey returns the value of the constant kCFURLIsMountTriggerKey.
+func KCFURLIsMountTriggerKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLIsMountTriggerKey")))
+}
 
-// KCFURLGenerationIdentifierKey returns the value of the CoreFoundation reference constant kCFURLGenerationIdentifierKey as an objc.ID.
-func KCFURLGenerationIdentifierKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLGenerationIdentifierKey())
+// KCFURLGenerationIdentifierKey returns the value of the constant kCFURLGenerationIdentifierKey.
+func KCFURLGenerationIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLGenerationIdentifierKey")))
 }
 
-// KCFURLDocumentIdentifierKey returns the value of the CoreFoundation reference constant kCFURLDocumentIdentifierKey as an objc.ID.
-func KCFURLDocumentIdentifierKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLDocumentIdentifierKey())
+// KCFURLDocumentIdentifierKey returns the value of the constant kCFURLDocumentIdentifierKey.
+func KCFURLDocumentIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLDocumentIdentifierKey")))
 }
 
-// KCFURLAddedToDirectoryDateKey returns the value of the CoreFoundation reference constant kCFURLAddedToDirectoryDateKey as an objc.ID.
-func KCFURLAddedToDirectoryDateKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLAddedToDirectoryDateKey())
+// KCFURLAddedToDirectoryDateKey returns the value of the constant kCFURLAddedToDirectoryDateKey.
+func KCFURLAddedToDirectoryDateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLAddedToDirectoryDateKey")))
 }
 
-// KCFURLQuarantinePropertiesKey returns the value of the CoreFoundation reference constant kCFURLQuarantinePropertiesKey as an objc.ID.
-func KCFURLQuarantinePropertiesKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLQuarantinePropertiesKey())
+// KCFURLQuarantinePropertiesKey returns the value of the constant kCFURLQuarantinePropertiesKey.
+func KCFURLQuarantinePropertiesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLQuarantinePropertiesKey")))
 }
 
-// KCFURLFileResourceTypeKey returns the value of the CoreFoundation reference constant kCFURLFileResourceTypeKey as an objc.ID.
-func KCFURLFileResourceTypeKey() objc.ID { return purego.CFConstant(raw.KCFURLFileResourceTypeKey()) }
+// KCFURLFileResourceTypeKey returns the value of the constant kCFURLFileResourceTypeKey.
+func KCFURLFileResourceTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileResourceTypeKey")))
+}
 
-// KCFURLFileResourceTypeNamedPipe returns the value of the CoreFoundation reference constant kCFURLFileResourceTypeNamedPipe as an objc.ID.
-func KCFURLFileResourceTypeNamedPipe() objc.ID {
-	return purego.CFConstant(raw.KCFURLFileResourceTypeNamedPipe())
+// KCFURLFileResourceTypeNamedPipe returns the value of the constant kCFURLFileResourceTypeNamedPipe.
+func KCFURLFileResourceTypeNamedPipe() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileResourceTypeNamedPipe")))
 }
 
-// KCFURLFileResourceTypeCharacterSpecial returns the value of the CoreFoundation reference constant kCFURLFileResourceTypeCharacterSpecial as an objc.ID.
-func KCFURLFileResourceTypeCharacterSpecial() objc.ID {
-	return purego.CFConstant(raw.KCFURLFileResourceTypeCharacterSpecial())
+// KCFURLFileResourceTypeCharacterSpecial returns the value of the constant kCFURLFileResourceTypeCharacterSpecial.
+func KCFURLFileResourceTypeCharacterSpecial() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileResourceTypeCharacterSpecial")))
 }
 
-// KCFURLFileResourceTypeDirectory returns the value of the CoreFoundation reference constant kCFURLFileResourceTypeDirectory as an objc.ID.
-func KCFURLFileResourceTypeDirectory() objc.ID {
-	return purego.CFConstant(raw.KCFURLFileResourceTypeDirectory())
+// KCFURLFileResourceTypeDirectory returns the value of the constant kCFURLFileResourceTypeDirectory.
+func KCFURLFileResourceTypeDirectory() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileResourceTypeDirectory")))
 }
 
-// KCFURLFileResourceTypeBlockSpecial returns the value of the CoreFoundation reference constant kCFURLFileResourceTypeBlockSpecial as an objc.ID.
-func KCFURLFileResourceTypeBlockSpecial() objc.ID {
-	return purego.CFConstant(raw.KCFURLFileResourceTypeBlockSpecial())
+// KCFURLFileResourceTypeBlockSpecial returns the value of the constant kCFURLFileResourceTypeBlockSpecial.
+func KCFURLFileResourceTypeBlockSpecial() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileResourceTypeBlockSpecial")))
 }
 
-// KCFURLFileResourceTypeRegular returns the value of the CoreFoundation reference constant kCFURLFileResourceTypeRegular as an objc.ID.
-func KCFURLFileResourceTypeRegular() objc.ID {
-	return purego.CFConstant(raw.KCFURLFileResourceTypeRegular())
+// KCFURLFileResourceTypeRegular returns the value of the constant kCFURLFileResourceTypeRegular.
+func KCFURLFileResourceTypeRegular() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileResourceTypeRegular")))
 }
 
-// KCFURLFileResourceTypeSymbolicLink returns the value of the CoreFoundation reference constant kCFURLFileResourceTypeSymbolicLink as an objc.ID.
-func KCFURLFileResourceTypeSymbolicLink() objc.ID {
-	return purego.CFConstant(raw.KCFURLFileResourceTypeSymbolicLink())
+// KCFURLFileResourceTypeSymbolicLink returns the value of the constant kCFURLFileResourceTypeSymbolicLink.
+func KCFURLFileResourceTypeSymbolicLink() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileResourceTypeSymbolicLink")))
 }
 
-// KCFURLFileResourceTypeSocket returns the value of the CoreFoundation reference constant kCFURLFileResourceTypeSocket as an objc.ID.
-func KCFURLFileResourceTypeSocket() objc.ID {
-	return purego.CFConstant(raw.KCFURLFileResourceTypeSocket())
+// KCFURLFileResourceTypeSocket returns the value of the constant kCFURLFileResourceTypeSocket.
+func KCFURLFileResourceTypeSocket() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileResourceTypeSocket")))
 }
 
-// KCFURLFileResourceTypeUnknown returns the value of the CoreFoundation reference constant kCFURLFileResourceTypeUnknown as an objc.ID.
-func KCFURLFileResourceTypeUnknown() objc.ID {
-	return purego.CFConstant(raw.KCFURLFileResourceTypeUnknown())
+// KCFURLFileResourceTypeUnknown returns the value of the constant kCFURLFileResourceTypeUnknown.
+func KCFURLFileResourceTypeUnknown() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileResourceTypeUnknown")))
 }
 
-// KCFURLFileSizeKey returns the value of the CoreFoundation reference constant kCFURLFileSizeKey as an objc.ID.
-func KCFURLFileSizeKey() objc.ID { return purego.CFConstant(raw.KCFURLFileSizeKey()) }
+// KCFURLFileSizeKey returns the value of the constant kCFURLFileSizeKey.
+func KCFURLFileSizeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileSizeKey"))) }
 
-// KCFURLFileAllocatedSizeKey returns the value of the CoreFoundation reference constant kCFURLFileAllocatedSizeKey as an objc.ID.
-func KCFURLFileAllocatedSizeKey() objc.ID { return purego.CFConstant(raw.KCFURLFileAllocatedSizeKey()) }
+// KCFURLFileAllocatedSizeKey returns the value of the constant kCFURLFileAllocatedSizeKey.
+func KCFURLFileAllocatedSizeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileAllocatedSizeKey")))
+}
 
-// KCFURLTotalFileSizeKey returns the value of the CoreFoundation reference constant kCFURLTotalFileSizeKey as an objc.ID.
-func KCFURLTotalFileSizeKey() objc.ID { return purego.CFConstant(raw.KCFURLTotalFileSizeKey()) }
+// KCFURLTotalFileSizeKey returns the value of the constant kCFURLTotalFileSizeKey.
+func KCFURLTotalFileSizeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLTotalFileSizeKey")))
+}
 
-// KCFURLTotalFileAllocatedSizeKey returns the value of the CoreFoundation reference constant kCFURLTotalFileAllocatedSizeKey as an objc.ID.
-func KCFURLTotalFileAllocatedSizeKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLTotalFileAllocatedSizeKey())
+// KCFURLTotalFileAllocatedSizeKey returns the value of the constant kCFURLTotalFileAllocatedSizeKey.
+func KCFURLTotalFileAllocatedSizeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLTotalFileAllocatedSizeKey")))
 }
 
-// KCFURLIsAliasFileKey returns the value of the CoreFoundation reference constant kCFURLIsAliasFileKey as an objc.ID.
-func KCFURLIsAliasFileKey() objc.ID { return purego.CFConstant(raw.KCFURLIsAliasFileKey()) }
+// KCFURLIsAliasFileKey returns the value of the constant kCFURLIsAliasFileKey.
+func KCFURLIsAliasFileKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLIsAliasFileKey")))
+}
 
-// KCFURLDirectoryEntryCountKey returns the value of the CoreFoundation reference constant kCFURLDirectoryEntryCountKey as an objc.ID.
-func KCFURLDirectoryEntryCountKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLDirectoryEntryCountKey())
+// KCFURLDirectoryEntryCountKey returns the value of the constant kCFURLDirectoryEntryCountKey.
+func KCFURLDirectoryEntryCountKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLDirectoryEntryCountKey")))
 }
 
-// KCFURLVolumeLocalizedFormatDescriptionKey returns the value of the CoreFoundation reference constant kCFURLVolumeLocalizedFormatDescriptionKey as an objc.ID.
-func KCFURLVolumeLocalizedFormatDescriptionKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeLocalizedFormatDescriptionKey())
+// KCFURLVolumeLocalizedFormatDescriptionKey returns the value of the constant kCFURLVolumeLocalizedFormatDescriptionKey.
+func KCFURLVolumeLocalizedFormatDescriptionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeLocalizedFormatDescriptionKey")))
 }
 
-// KCFURLVolumeTotalCapacityKey returns the value of the CoreFoundation reference constant kCFURLVolumeTotalCapacityKey as an objc.ID.
-func KCFURLVolumeTotalCapacityKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeTotalCapacityKey())
+// KCFURLVolumeTotalCapacityKey returns the value of the constant kCFURLVolumeTotalCapacityKey.
+func KCFURLVolumeTotalCapacityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeTotalCapacityKey")))
 }
 
-// KCFURLVolumeAvailableCapacityKey returns the value of the CoreFoundation reference constant kCFURLVolumeAvailableCapacityKey as an objc.ID.
-func KCFURLVolumeAvailableCapacityKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeAvailableCapacityKey())
+// KCFURLVolumeAvailableCapacityKey returns the value of the constant kCFURLVolumeAvailableCapacityKey.
+func KCFURLVolumeAvailableCapacityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeAvailableCapacityKey")))
 }
 
-// KCFURLVolumeAvailableCapacityForImportantUsageKey returns the value of the CoreFoundation reference constant kCFURLVolumeAvailableCapacityForImportantUsageKey as an objc.ID.
-func KCFURLVolumeAvailableCapacityForImportantUsageKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeAvailableCapacityForImportantUsageKey())
+// KCFURLVolumeAvailableCapacityForImportantUsageKey returns the value of the constant kCFURLVolumeAvailableCapacityForImportantUsageKey.
+func KCFURLVolumeAvailableCapacityForImportantUsageKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeAvailableCapacityForImportantUsageKey")))
 }
 
-// KCFURLVolumeAvailableCapacityForOpportunisticUsageKey returns the value of the CoreFoundation reference constant kCFURLVolumeAvailableCapacityForOpportunisticUsageKey as an objc.ID.
-func KCFURLVolumeAvailableCapacityForOpportunisticUsageKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeAvailableCapacityForOpportunisticUsageKey())
+// KCFURLVolumeAvailableCapacityForOpportunisticUsageKey returns the value of the constant kCFURLVolumeAvailableCapacityForOpportunisticUsageKey.
+func KCFURLVolumeAvailableCapacityForOpportunisticUsageKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeAvailableCapacityForOpportunisticUsageKey")))
 }
 
-// KCFURLVolumeResourceCountKey returns the value of the CoreFoundation reference constant kCFURLVolumeResourceCountKey as an objc.ID.
-func KCFURLVolumeResourceCountKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeResourceCountKey())
+// KCFURLVolumeResourceCountKey returns the value of the constant kCFURLVolumeResourceCountKey.
+func KCFURLVolumeResourceCountKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeResourceCountKey")))
 }
 
-// KCFURLVolumeSupportsPersistentIDsKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsPersistentIDsKey as an objc.ID.
-func KCFURLVolumeSupportsPersistentIDsKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsPersistentIDsKey())
+// KCFURLVolumeSupportsPersistentIDsKey returns the value of the constant kCFURLVolumeSupportsPersistentIDsKey.
+func KCFURLVolumeSupportsPersistentIDsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsPersistentIDsKey")))
 }
 
-// KCFURLVolumeSupportsSymbolicLinksKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsSymbolicLinksKey as an objc.ID.
-func KCFURLVolumeSupportsSymbolicLinksKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsSymbolicLinksKey())
+// KCFURLVolumeSupportsSymbolicLinksKey returns the value of the constant kCFURLVolumeSupportsSymbolicLinksKey.
+func KCFURLVolumeSupportsSymbolicLinksKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsSymbolicLinksKey")))
 }
 
-// KCFURLVolumeSupportsHardLinksKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsHardLinksKey as an objc.ID.
-func KCFURLVolumeSupportsHardLinksKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsHardLinksKey())
+// KCFURLVolumeSupportsHardLinksKey returns the value of the constant kCFURLVolumeSupportsHardLinksKey.
+func KCFURLVolumeSupportsHardLinksKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsHardLinksKey")))
 }
 
-// KCFURLVolumeSupportsJournalingKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsJournalingKey as an objc.ID.
-func KCFURLVolumeSupportsJournalingKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsJournalingKey())
+// KCFURLVolumeSupportsJournalingKey returns the value of the constant kCFURLVolumeSupportsJournalingKey.
+func KCFURLVolumeSupportsJournalingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsJournalingKey")))
 }
 
-// KCFURLVolumeIsJournalingKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsJournalingKey as an objc.ID.
-func KCFURLVolumeIsJournalingKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeIsJournalingKey())
+// KCFURLVolumeIsJournalingKey returns the value of the constant kCFURLVolumeIsJournalingKey.
+func KCFURLVolumeIsJournalingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeIsJournalingKey")))
 }
 
-// KCFURLVolumeSupportsSparseFilesKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsSparseFilesKey as an objc.ID.
-func KCFURLVolumeSupportsSparseFilesKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsSparseFilesKey())
+// KCFURLVolumeSupportsSparseFilesKey returns the value of the constant kCFURLVolumeSupportsSparseFilesKey.
+func KCFURLVolumeSupportsSparseFilesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsSparseFilesKey")))
 }
 
-// KCFURLVolumeSupportsZeroRunsKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsZeroRunsKey as an objc.ID.
-func KCFURLVolumeSupportsZeroRunsKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsZeroRunsKey())
+// KCFURLVolumeSupportsZeroRunsKey returns the value of the constant kCFURLVolumeSupportsZeroRunsKey.
+func KCFURLVolumeSupportsZeroRunsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsZeroRunsKey")))
 }
 
-// KCFURLVolumeSupportsCaseSensitiveNamesKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsCaseSensitiveNamesKey as an objc.ID.
-func KCFURLVolumeSupportsCaseSensitiveNamesKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsCaseSensitiveNamesKey())
+// KCFURLVolumeSupportsCaseSensitiveNamesKey returns the value of the constant kCFURLVolumeSupportsCaseSensitiveNamesKey.
+func KCFURLVolumeSupportsCaseSensitiveNamesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsCaseSensitiveNamesKey")))
 }
 
-// KCFURLVolumeSupportsCasePreservedNamesKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsCasePreservedNamesKey as an objc.ID.
-func KCFURLVolumeSupportsCasePreservedNamesKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsCasePreservedNamesKey())
+// KCFURLVolumeSupportsCasePreservedNamesKey returns the value of the constant kCFURLVolumeSupportsCasePreservedNamesKey.
+func KCFURLVolumeSupportsCasePreservedNamesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsCasePreservedNamesKey")))
 }
 
-// KCFURLVolumeSupportsRootDirectoryDatesKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsRootDirectoryDatesKey as an objc.ID.
-func KCFURLVolumeSupportsRootDirectoryDatesKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsRootDirectoryDatesKey())
+// KCFURLVolumeSupportsRootDirectoryDatesKey returns the value of the constant kCFURLVolumeSupportsRootDirectoryDatesKey.
+func KCFURLVolumeSupportsRootDirectoryDatesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsRootDirectoryDatesKey")))
 }
 
-// KCFURLVolumeSupportsVolumeSizesKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsVolumeSizesKey as an objc.ID.
-func KCFURLVolumeSupportsVolumeSizesKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsVolumeSizesKey())
+// KCFURLVolumeSupportsVolumeSizesKey returns the value of the constant kCFURLVolumeSupportsVolumeSizesKey.
+func KCFURLVolumeSupportsVolumeSizesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsVolumeSizesKey")))
 }
 
-// KCFURLVolumeSupportsRenamingKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsRenamingKey as an objc.ID.
-func KCFURLVolumeSupportsRenamingKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsRenamingKey())
+// KCFURLVolumeSupportsRenamingKey returns the value of the constant kCFURLVolumeSupportsRenamingKey.
+func KCFURLVolumeSupportsRenamingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsRenamingKey")))
 }
 
-// KCFURLVolumeSupportsAdvisoryFileLockingKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsAdvisoryFileLockingKey as an objc.ID.
-func KCFURLVolumeSupportsAdvisoryFileLockingKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsAdvisoryFileLockingKey())
+// KCFURLVolumeSupportsAdvisoryFileLockingKey returns the value of the constant kCFURLVolumeSupportsAdvisoryFileLockingKey.
+func KCFURLVolumeSupportsAdvisoryFileLockingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsAdvisoryFileLockingKey")))
 }
 
-// KCFURLVolumeSupportsExtendedSecurityKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsExtendedSecurityKey as an objc.ID.
-func KCFURLVolumeSupportsExtendedSecurityKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsExtendedSecurityKey())
+// KCFURLVolumeSupportsExtendedSecurityKey returns the value of the constant kCFURLVolumeSupportsExtendedSecurityKey.
+func KCFURLVolumeSupportsExtendedSecurityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsExtendedSecurityKey")))
 }
 
-// KCFURLVolumeIsBrowsableKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsBrowsableKey as an objc.ID.
-func KCFURLVolumeIsBrowsableKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIsBrowsableKey()) }
+// KCFURLVolumeIsBrowsableKey returns the value of the constant kCFURLVolumeIsBrowsableKey.
+func KCFURLVolumeIsBrowsableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeIsBrowsableKey")))
+}
 
-// KCFURLVolumeMaximumFileSizeKey returns the value of the CoreFoundation reference constant kCFURLVolumeMaximumFileSizeKey as an objc.ID.
-func KCFURLVolumeMaximumFileSizeKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeMaximumFileSizeKey())
+// KCFURLVolumeMaximumFileSizeKey returns the value of the constant kCFURLVolumeMaximumFileSizeKey.
+func KCFURLVolumeMaximumFileSizeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeMaximumFileSizeKey")))
 }
 
-// KCFURLVolumeIsEjectableKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsEjectableKey as an objc.ID.
-func KCFURLVolumeIsEjectableKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIsEjectableKey()) }
+// KCFURLVolumeIsEjectableKey returns the value of the constant kCFURLVolumeIsEjectableKey.
+func KCFURLVolumeIsEjectableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeIsEjectableKey")))
+}
 
-// KCFURLVolumeIsRemovableKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsRemovableKey as an objc.ID.
-func KCFURLVolumeIsRemovableKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIsRemovableKey()) }
+// KCFURLVolumeIsRemovableKey returns the value of the constant kCFURLVolumeIsRemovableKey.
+func KCFURLVolumeIsRemovableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeIsRemovableKey")))
+}
 
-// KCFURLVolumeIsInternalKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsInternalKey as an objc.ID.
-func KCFURLVolumeIsInternalKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIsInternalKey()) }
+// KCFURLVolumeIsInternalKey returns the value of the constant kCFURLVolumeIsInternalKey.
+func KCFURLVolumeIsInternalKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeIsInternalKey")))
+}
 
-// KCFURLVolumeIsAutomountedKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsAutomountedKey as an objc.ID.
-func KCFURLVolumeIsAutomountedKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeIsAutomountedKey())
+// KCFURLVolumeIsAutomountedKey returns the value of the constant kCFURLVolumeIsAutomountedKey.
+func KCFURLVolumeIsAutomountedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeIsAutomountedKey")))
 }
 
-// KCFURLVolumeIsLocalKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsLocalKey as an objc.ID.
-func KCFURLVolumeIsLocalKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIsLocalKey()) }
+// KCFURLVolumeIsLocalKey returns the value of the constant kCFURLVolumeIsLocalKey.
+func KCFURLVolumeIsLocalKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeIsLocalKey")))
+}
 
-// KCFURLVolumeIsReadOnlyKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsReadOnlyKey as an objc.ID.
-func KCFURLVolumeIsReadOnlyKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIsReadOnlyKey()) }
+// KCFURLVolumeIsReadOnlyKey returns the value of the constant kCFURLVolumeIsReadOnlyKey.
+func KCFURLVolumeIsReadOnlyKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeIsReadOnlyKey")))
+}
 
-// KCFURLVolumeCreationDateKey returns the value of the CoreFoundation reference constant kCFURLVolumeCreationDateKey as an objc.ID.
-func KCFURLVolumeCreationDateKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeCreationDateKey())
+// KCFURLVolumeCreationDateKey returns the value of the constant kCFURLVolumeCreationDateKey.
+func KCFURLVolumeCreationDateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeCreationDateKey")))
 }
 
-// KCFURLVolumeURLForRemountingKey returns the value of the CoreFoundation reference constant kCFURLVolumeURLForRemountingKey as an objc.ID.
-func KCFURLVolumeURLForRemountingKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeURLForRemountingKey())
+// KCFURLVolumeURLForRemountingKey returns the value of the constant kCFURLVolumeURLForRemountingKey.
+func KCFURLVolumeURLForRemountingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeURLForRemountingKey")))
 }
 
-// KCFURLVolumeUUIDStringKey returns the value of the CoreFoundation reference constant kCFURLVolumeUUIDStringKey as an objc.ID.
-func KCFURLVolumeUUIDStringKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeUUIDStringKey()) }
+// KCFURLVolumeUUIDStringKey returns the value of the constant kCFURLVolumeUUIDStringKey.
+func KCFURLVolumeUUIDStringKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeUUIDStringKey")))
+}
 
-// KCFURLVolumeNameKey returns the value of the CoreFoundation reference constant kCFURLVolumeNameKey as an objc.ID.
-func KCFURLVolumeNameKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeNameKey()) }
+// KCFURLVolumeNameKey returns the value of the constant kCFURLVolumeNameKey.
+func KCFURLVolumeNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeNameKey")))
+}
 
-// KCFURLVolumeLocalizedNameKey returns the value of the CoreFoundation reference constant kCFURLVolumeLocalizedNameKey as an objc.ID.
-func KCFURLVolumeLocalizedNameKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeLocalizedNameKey())
+// KCFURLVolumeLocalizedNameKey returns the value of the constant kCFURLVolumeLocalizedNameKey.
+func KCFURLVolumeLocalizedNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeLocalizedNameKey")))
 }
 
-// KCFURLVolumeIsEncryptedKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsEncryptedKey as an objc.ID.
-func KCFURLVolumeIsEncryptedKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeIsEncryptedKey()) }
+// KCFURLVolumeIsEncryptedKey returns the value of the constant kCFURLVolumeIsEncryptedKey.
+func KCFURLVolumeIsEncryptedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeIsEncryptedKey")))
+}
 
-// KCFURLVolumeIsRootFileSystemKey returns the value of the CoreFoundation reference constant kCFURLVolumeIsRootFileSystemKey as an objc.ID.
-func KCFURLVolumeIsRootFileSystemKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeIsRootFileSystemKey())
+// KCFURLVolumeIsRootFileSystemKey returns the value of the constant kCFURLVolumeIsRootFileSystemKey.
+func KCFURLVolumeIsRootFileSystemKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeIsRootFileSystemKey")))
 }
 
-// KCFURLVolumeSupportsCompressionKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsCompressionKey as an objc.ID.
-func KCFURLVolumeSupportsCompressionKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsCompressionKey())
+// KCFURLVolumeSupportsCompressionKey returns the value of the constant kCFURLVolumeSupportsCompressionKey.
+func KCFURLVolumeSupportsCompressionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsCompressionKey")))
 }
 
-// KCFURLVolumeSupportsFileCloningKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsFileCloningKey as an objc.ID.
-func KCFURLVolumeSupportsFileCloningKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsFileCloningKey())
+// KCFURLVolumeSupportsFileCloningKey returns the value of the constant kCFURLVolumeSupportsFileCloningKey.
+func KCFURLVolumeSupportsFileCloningKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsFileCloningKey")))
 }
 
-// KCFURLVolumeSupportsSwapRenamingKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsSwapRenamingKey as an objc.ID.
-func KCFURLVolumeSupportsSwapRenamingKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsSwapRenamingKey())
+// KCFURLVolumeSupportsSwapRenamingKey returns the value of the constant kCFURLVolumeSupportsSwapRenamingKey.
+func KCFURLVolumeSupportsSwapRenamingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsSwapRenamingKey")))
 }
 
-// KCFURLVolumeSupportsExclusiveRenamingKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsExclusiveRenamingKey as an objc.ID.
-func KCFURLVolumeSupportsExclusiveRenamingKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsExclusiveRenamingKey())
+// KCFURLVolumeSupportsExclusiveRenamingKey returns the value of the constant kCFURLVolumeSupportsExclusiveRenamingKey.
+func KCFURLVolumeSupportsExclusiveRenamingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsExclusiveRenamingKey")))
 }
 
-// KCFURLVolumeSupportsImmutableFilesKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsImmutableFilesKey as an objc.ID.
-func KCFURLVolumeSupportsImmutableFilesKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsImmutableFilesKey())
+// KCFURLVolumeSupportsImmutableFilesKey returns the value of the constant kCFURLVolumeSupportsImmutableFilesKey.
+func KCFURLVolumeSupportsImmutableFilesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsImmutableFilesKey")))
 }
 
-// KCFURLVolumeSupportsAccessPermissionsKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsAccessPermissionsKey as an objc.ID.
-func KCFURLVolumeSupportsAccessPermissionsKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsAccessPermissionsKey())
+// KCFURLVolumeSupportsAccessPermissionsKey returns the value of the constant kCFURLVolumeSupportsAccessPermissionsKey.
+func KCFURLVolumeSupportsAccessPermissionsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsAccessPermissionsKey")))
 }
 
-// KCFURLVolumeSupportsFileProtectionKey returns the value of the CoreFoundation reference constant kCFURLVolumeSupportsFileProtectionKey as an objc.ID.
-func KCFURLVolumeSupportsFileProtectionKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeSupportsFileProtectionKey())
+// KCFURLVolumeSupportsFileProtectionKey returns the value of the constant kCFURLVolumeSupportsFileProtectionKey.
+func KCFURLVolumeSupportsFileProtectionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSupportsFileProtectionKey")))
 }
 
-// KCFURLVolumeTypeNameKey returns the value of the CoreFoundation reference constant kCFURLVolumeTypeNameKey as an objc.ID.
-func KCFURLVolumeTypeNameKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeTypeNameKey()) }
+// KCFURLVolumeTypeNameKey returns the value of the constant kCFURLVolumeTypeNameKey.
+func KCFURLVolumeTypeNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeTypeNameKey")))
+}
 
-// KCFURLVolumeSubtypeKey returns the value of the CoreFoundation reference constant kCFURLVolumeSubtypeKey as an objc.ID.
-func KCFURLVolumeSubtypeKey() objc.ID { return purego.CFConstant(raw.KCFURLVolumeSubtypeKey()) }
+// KCFURLVolumeSubtypeKey returns the value of the constant kCFURLVolumeSubtypeKey.
+func KCFURLVolumeSubtypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeSubtypeKey")))
+}
 
-// KCFURLVolumeMountFromLocationKey returns the value of the CoreFoundation reference constant kCFURLVolumeMountFromLocationKey as an objc.ID.
-func KCFURLVolumeMountFromLocationKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLVolumeMountFromLocationKey())
+// KCFURLVolumeMountFromLocationKey returns the value of the constant kCFURLVolumeMountFromLocationKey.
+func KCFURLVolumeMountFromLocationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLVolumeMountFromLocationKey")))
 }
 
-// KCFURLIsUbiquitousItemKey returns the value of the CoreFoundation reference constant kCFURLIsUbiquitousItemKey as an objc.ID.
-func KCFURLIsUbiquitousItemKey() objc.ID { return purego.CFConstant(raw.KCFURLIsUbiquitousItemKey()) }
+// KCFURLIsUbiquitousItemKey returns the value of the constant kCFURLIsUbiquitousItemKey.
+func KCFURLIsUbiquitousItemKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLIsUbiquitousItemKey")))
+}
 
-// KCFURLUbiquitousItemHasUnresolvedConflictsKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemHasUnresolvedConflictsKey as an objc.ID.
-func KCFURLUbiquitousItemHasUnresolvedConflictsKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLUbiquitousItemHasUnresolvedConflictsKey())
+// KCFURLUbiquitousItemHasUnresolvedConflictsKey returns the value of the constant kCFURLUbiquitousItemHasUnresolvedConflictsKey.
+func KCFURLUbiquitousItemHasUnresolvedConflictsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLUbiquitousItemHasUnresolvedConflictsKey")))
 }
 
-// KCFURLUbiquitousItemIsDownloadedKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemIsDownloadedKey as an objc.ID.
-func KCFURLUbiquitousItemIsDownloadedKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLUbiquitousItemIsDownloadedKey())
+// KCFURLUbiquitousItemIsDownloadedKey returns the value of the constant kCFURLUbiquitousItemIsDownloadedKey.
+func KCFURLUbiquitousItemIsDownloadedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLUbiquitousItemIsDownloadedKey")))
 }
 
-// KCFURLUbiquitousItemIsDownloadingKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemIsDownloadingKey as an objc.ID.
-func KCFURLUbiquitousItemIsDownloadingKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLUbiquitousItemIsDownloadingKey())
+// KCFURLUbiquitousItemIsDownloadingKey returns the value of the constant kCFURLUbiquitousItemIsDownloadingKey.
+func KCFURLUbiquitousItemIsDownloadingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLUbiquitousItemIsDownloadingKey")))
 }
 
-// KCFURLUbiquitousItemIsUploadedKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemIsUploadedKey as an objc.ID.
-func KCFURLUbiquitousItemIsUploadedKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLUbiquitousItemIsUploadedKey())
+// KCFURLUbiquitousItemIsUploadedKey returns the value of the constant kCFURLUbiquitousItemIsUploadedKey.
+func KCFURLUbiquitousItemIsUploadedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLUbiquitousItemIsUploadedKey")))
 }
 
-// KCFURLUbiquitousItemIsUploadingKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemIsUploadingKey as an objc.ID.
-func KCFURLUbiquitousItemIsUploadingKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLUbiquitousItemIsUploadingKey())
+// KCFURLUbiquitousItemIsUploadingKey returns the value of the constant kCFURLUbiquitousItemIsUploadingKey.
+func KCFURLUbiquitousItemIsUploadingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLUbiquitousItemIsUploadingKey")))
 }
 
-// KCFURLUbiquitousItemPercentDownloadedKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemPercentDownloadedKey as an objc.ID.
-func KCFURLUbiquitousItemPercentDownloadedKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLUbiquitousItemPercentDownloadedKey())
+// KCFURLUbiquitousItemPercentDownloadedKey returns the value of the constant kCFURLUbiquitousItemPercentDownloadedKey.
+func KCFURLUbiquitousItemPercentDownloadedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLUbiquitousItemPercentDownloadedKey")))
 }
 
-// KCFURLUbiquitousItemPercentUploadedKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemPercentUploadedKey as an objc.ID.
-func KCFURLUbiquitousItemPercentUploadedKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLUbiquitousItemPercentUploadedKey())
+// KCFURLUbiquitousItemPercentUploadedKey returns the value of the constant kCFURLUbiquitousItemPercentUploadedKey.
+func KCFURLUbiquitousItemPercentUploadedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLUbiquitousItemPercentUploadedKey")))
 }
 
-// KCFURLUbiquitousItemDownloadingStatusKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemDownloadingStatusKey as an objc.ID.
-func KCFURLUbiquitousItemDownloadingStatusKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLUbiquitousItemDownloadingStatusKey())
+// KCFURLUbiquitousItemDownloadingStatusKey returns the value of the constant kCFURLUbiquitousItemDownloadingStatusKey.
+func KCFURLUbiquitousItemDownloadingStatusKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLUbiquitousItemDownloadingStatusKey")))
 }
 
-// KCFURLUbiquitousItemDownloadingErrorKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemDownloadingErrorKey as an objc.ID.
-func KCFURLUbiquitousItemDownloadingErrorKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLUbiquitousItemDownloadingErrorKey())
+// KCFURLUbiquitousItemDownloadingErrorKey returns the value of the constant kCFURLUbiquitousItemDownloadingErrorKey.
+func KCFURLUbiquitousItemDownloadingErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLUbiquitousItemDownloadingErrorKey")))
 }
 
-// KCFURLUbiquitousItemUploadingErrorKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemUploadingErrorKey as an objc.ID.
-func KCFURLUbiquitousItemUploadingErrorKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLUbiquitousItemUploadingErrorKey())
+// KCFURLUbiquitousItemUploadingErrorKey returns the value of the constant kCFURLUbiquitousItemUploadingErrorKey.
+func KCFURLUbiquitousItemUploadingErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLUbiquitousItemUploadingErrorKey")))
 }
 
-// KCFURLUbiquitousItemIsExcludedFromSyncKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemIsExcludedFromSyncKey as an objc.ID.
-func KCFURLUbiquitousItemIsExcludedFromSyncKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLUbiquitousItemIsExcludedFromSyncKey())
+// KCFURLUbiquitousItemIsExcludedFromSyncKey returns the value of the constant kCFURLUbiquitousItemIsExcludedFromSyncKey.
+func KCFURLUbiquitousItemIsExcludedFromSyncKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLUbiquitousItemIsExcludedFromSyncKey")))
 }
 
-// KCFURLUbiquitousItemDownloadingStatusNotDownloaded returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemDownloadingStatusNotDownloaded as an objc.ID.
-func KCFURLUbiquitousItemDownloadingStatusNotDownloaded() objc.ID {
-	return purego.CFConstant(raw.KCFURLUbiquitousItemDownloadingStatusNotDownloaded())
+// KCFURLUbiquitousItemDownloadingStatusNotDownloaded returns the value of the constant kCFURLUbiquitousItemDownloadingStatusNotDownloaded.
+func KCFURLUbiquitousItemDownloadingStatusNotDownloaded() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLUbiquitousItemDownloadingStatusNotDownloaded")))
 }
 
-// KCFURLUbiquitousItemDownloadingStatusDownloaded returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemDownloadingStatusDownloaded as an objc.ID.
-func KCFURLUbiquitousItemDownloadingStatusDownloaded() objc.ID {
-	return purego.CFConstant(raw.KCFURLUbiquitousItemDownloadingStatusDownloaded())
+// KCFURLUbiquitousItemDownloadingStatusDownloaded returns the value of the constant kCFURLUbiquitousItemDownloadingStatusDownloaded.
+func KCFURLUbiquitousItemDownloadingStatusDownloaded() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLUbiquitousItemDownloadingStatusDownloaded")))
 }
 
-// KCFURLUbiquitousItemDownloadingStatusCurrent returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemDownloadingStatusCurrent as an objc.ID.
-func KCFURLUbiquitousItemDownloadingStatusCurrent() objc.ID {
-	return purego.CFConstant(raw.KCFURLUbiquitousItemDownloadingStatusCurrent())
+// KCFURLUbiquitousItemDownloadingStatusCurrent returns the value of the constant kCFURLUbiquitousItemDownloadingStatusCurrent.
+func KCFURLUbiquitousItemDownloadingStatusCurrent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLUbiquitousItemDownloadingStatusCurrent")))
 }
 
-// KCFURLUbiquitousItemSupportedSyncControlsKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemSupportedSyncControlsKey as an objc.ID.
-func KCFURLUbiquitousItemSupportedSyncControlsKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLUbiquitousItemSupportedSyncControlsKey())
+// KCFURLUbiquitousItemSupportedSyncControlsKey returns the value of the constant kCFURLUbiquitousItemSupportedSyncControlsKey.
+func KCFURLUbiquitousItemSupportedSyncControlsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLUbiquitousItemSupportedSyncControlsKey")))
 }
 
-// KCFURLUbiquitousItemIsSyncPausedKey returns the value of the CoreFoundation reference constant kCFURLUbiquitousItemIsSyncPausedKey as an objc.ID.
-func KCFURLUbiquitousItemIsSyncPausedKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLUbiquitousItemIsSyncPausedKey())
+// KCFURLUbiquitousItemIsSyncPausedKey returns the value of the constant kCFURLUbiquitousItemIsSyncPausedKey.
+func KCFURLUbiquitousItemIsSyncPausedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLUbiquitousItemIsSyncPausedKey")))
 }
 
-// KCFSocketCommandKey returns the value of the CoreFoundation reference constant kCFSocketCommandKey as an objc.ID.
-func KCFSocketCommandKey() objc.ID { return purego.CFConstant(raw.KCFSocketCommandKey()) }
+// KCFSocketCommandKey returns the value of the constant kCFSocketCommandKey.
+func KCFSocketCommandKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFSocketCommandKey")))
+}
 
-// KCFSocketNameKey returns the value of the CoreFoundation reference constant kCFSocketNameKey as an objc.ID.
-func KCFSocketNameKey() objc.ID { return purego.CFConstant(raw.KCFSocketNameKey()) }
+// KCFSocketNameKey returns the value of the constant kCFSocketNameKey.
+func KCFSocketNameKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFSocketNameKey"))) }
 
-// KCFSocketValueKey returns the value of the CoreFoundation reference constant kCFSocketValueKey as an objc.ID.
-func KCFSocketValueKey() objc.ID { return purego.CFConstant(raw.KCFSocketValueKey()) }
+// KCFSocketValueKey returns the value of the constant kCFSocketValueKey.
+func KCFSocketValueKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFSocketValueKey"))) }
 
-// KCFSocketResultKey returns the value of the CoreFoundation reference constant kCFSocketResultKey as an objc.ID.
-func KCFSocketResultKey() objc.ID { return purego.CFConstant(raw.KCFSocketResultKey()) }
+// KCFSocketResultKey returns the value of the constant kCFSocketResultKey.
+func KCFSocketResultKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFSocketResultKey")))
+}
 
-// KCFSocketErrorKey returns the value of the CoreFoundation reference constant kCFSocketErrorKey as an objc.ID.
-func KCFSocketErrorKey() objc.ID { return purego.CFConstant(raw.KCFSocketErrorKey()) }
+// KCFSocketErrorKey returns the value of the constant kCFSocketErrorKey.
+func KCFSocketErrorKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFSocketErrorKey"))) }
 
-// KCFSocketRegisterCommand returns the value of the CoreFoundation reference constant kCFSocketRegisterCommand as an objc.ID.
-func KCFSocketRegisterCommand() objc.ID { return purego.CFConstant(raw.KCFSocketRegisterCommand()) }
+// KCFSocketRegisterCommand returns the value of the constant kCFSocketRegisterCommand.
+func KCFSocketRegisterCommand() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFSocketRegisterCommand")))
+}
 
-// KCFSocketRetrieveCommand returns the value of the CoreFoundation reference constant kCFSocketRetrieveCommand as an objc.ID.
-func KCFSocketRetrieveCommand() objc.ID { return purego.CFConstant(raw.KCFSocketRetrieveCommand()) }
+// KCFSocketRetrieveCommand returns the value of the constant kCFSocketRetrieveCommand.
+func KCFSocketRetrieveCommand() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFSocketRetrieveCommand")))
+}
 
-// KCFStreamPropertySOCKSProxy returns the value of the CoreFoundation reference constant kCFStreamPropertySOCKSProxy as an objc.ID.
-func KCFStreamPropertySOCKSProxy() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertySOCKSProxy())
+// KCFStreamPropertySOCKSProxy returns the value of the constant kCFStreamPropertySOCKSProxy.
+func KCFStreamPropertySOCKSProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertySOCKSProxy")))
 }
 
-// KCFStreamPropertySOCKSProxyHost returns the value of the CoreFoundation reference constant kCFStreamPropertySOCKSProxyHost as an objc.ID.
-func KCFStreamPropertySOCKSProxyHost() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertySOCKSProxyHost())
+// KCFStreamPropertySOCKSProxyHost returns the value of the constant kCFStreamPropertySOCKSProxyHost.
+func KCFStreamPropertySOCKSProxyHost() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertySOCKSProxyHost")))
 }
 
-// KCFStreamPropertySOCKSProxyPort returns the value of the CoreFoundation reference constant kCFStreamPropertySOCKSProxyPort as an objc.ID.
-func KCFStreamPropertySOCKSProxyPort() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertySOCKSProxyPort())
+// KCFStreamPropertySOCKSProxyPort returns the value of the constant kCFStreamPropertySOCKSProxyPort.
+func KCFStreamPropertySOCKSProxyPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertySOCKSProxyPort")))
 }
 
-// KCFStreamPropertySOCKSVersion returns the value of the CoreFoundation reference constant kCFStreamPropertySOCKSVersion as an objc.ID.
-func KCFStreamPropertySOCKSVersion() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertySOCKSVersion())
+// KCFStreamPropertySOCKSVersion returns the value of the constant kCFStreamPropertySOCKSVersion.
+func KCFStreamPropertySOCKSVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertySOCKSVersion")))
 }
 
-// KCFStreamSocketSOCKSVersion4 returns the value of the CoreFoundation reference constant kCFStreamSocketSOCKSVersion4 as an objc.ID.
-func KCFStreamSocketSOCKSVersion4() objc.ID {
-	return purego.CFConstant(raw.KCFStreamSocketSOCKSVersion4())
+// KCFStreamSocketSOCKSVersion4 returns the value of the constant kCFStreamSocketSOCKSVersion4.
+func KCFStreamSocketSOCKSVersion4() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamSocketSOCKSVersion4")))
 }
 
-// KCFStreamSocketSOCKSVersion5 returns the value of the CoreFoundation reference constant kCFStreamSocketSOCKSVersion5 as an objc.ID.
-func KCFStreamSocketSOCKSVersion5() objc.ID {
-	return purego.CFConstant(raw.KCFStreamSocketSOCKSVersion5())
+// KCFStreamSocketSOCKSVersion5 returns the value of the constant kCFStreamSocketSOCKSVersion5.
+func KCFStreamSocketSOCKSVersion5() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamSocketSOCKSVersion5")))
 }
 
-// KCFStreamPropertySOCKSUser returns the value of the CoreFoundation reference constant kCFStreamPropertySOCKSUser as an objc.ID.
-func KCFStreamPropertySOCKSUser() objc.ID { return purego.CFConstant(raw.KCFStreamPropertySOCKSUser()) }
+// KCFStreamPropertySOCKSUser returns the value of the constant kCFStreamPropertySOCKSUser.
+func KCFStreamPropertySOCKSUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertySOCKSUser")))
+}
 
-// KCFStreamPropertySOCKSPassword returns the value of the CoreFoundation reference constant kCFStreamPropertySOCKSPassword as an objc.ID.
-func KCFStreamPropertySOCKSPassword() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertySOCKSPassword())
+// KCFStreamPropertySOCKSPassword returns the value of the constant kCFStreamPropertySOCKSPassword.
+func KCFStreamPropertySOCKSPassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertySOCKSPassword")))
 }
 
-// KCFStreamPropertySocketSecurityLevel returns the value of the CoreFoundation reference constant kCFStreamPropertySocketSecurityLevel as an objc.ID.
-func KCFStreamPropertySocketSecurityLevel() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertySocketSecurityLevel())
+// KCFStreamPropertySocketSecurityLevel returns the value of the constant kCFStreamPropertySocketSecurityLevel.
+func KCFStreamPropertySocketSecurityLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertySocketSecurityLevel")))
 }
 
-// KCFStreamSocketSecurityLevelNone returns the value of the CoreFoundation reference constant kCFStreamSocketSecurityLevelNone as an objc.ID.
-func KCFStreamSocketSecurityLevelNone() objc.ID {
-	return purego.CFConstant(raw.KCFStreamSocketSecurityLevelNone())
+// KCFStreamSocketSecurityLevelNone returns the value of the constant kCFStreamSocketSecurityLevelNone.
+func KCFStreamSocketSecurityLevelNone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamSocketSecurityLevelNone")))
 }
 
-// KCFStreamSocketSecurityLevelSSLv2 returns the value of the CoreFoundation reference constant kCFStreamSocketSecurityLevelSSLv2 as an objc.ID.
-func KCFStreamSocketSecurityLevelSSLv2() objc.ID {
-	return purego.CFConstant(raw.KCFStreamSocketSecurityLevelSSLv2())
+// KCFStreamSocketSecurityLevelSSLv2 returns the value of the constant kCFStreamSocketSecurityLevelSSLv2.
+func KCFStreamSocketSecurityLevelSSLv2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamSocketSecurityLevelSSLv2")))
 }
 
-// KCFStreamSocketSecurityLevelSSLv3 returns the value of the CoreFoundation reference constant kCFStreamSocketSecurityLevelSSLv3 as an objc.ID.
-func KCFStreamSocketSecurityLevelSSLv3() objc.ID {
-	return purego.CFConstant(raw.KCFStreamSocketSecurityLevelSSLv3())
+// KCFStreamSocketSecurityLevelSSLv3 returns the value of the constant kCFStreamSocketSecurityLevelSSLv3.
+func KCFStreamSocketSecurityLevelSSLv3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamSocketSecurityLevelSSLv3")))
 }
 
-// KCFStreamSocketSecurityLevelTLSv1 returns the value of the CoreFoundation reference constant kCFStreamSocketSecurityLevelTLSv1 as an objc.ID.
-func KCFStreamSocketSecurityLevelTLSv1() objc.ID {
-	return purego.CFConstant(raw.KCFStreamSocketSecurityLevelTLSv1())
+// KCFStreamSocketSecurityLevelTLSv1 returns the value of the constant kCFStreamSocketSecurityLevelTLSv1.
+func KCFStreamSocketSecurityLevelTLSv1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamSocketSecurityLevelTLSv1")))
 }
 
-// KCFStreamSocketSecurityLevelNegotiatedSSL returns the value of the CoreFoundation reference constant kCFStreamSocketSecurityLevelNegotiatedSSL as an objc.ID.
-func KCFStreamSocketSecurityLevelNegotiatedSSL() objc.ID {
-	return purego.CFConstant(raw.KCFStreamSocketSecurityLevelNegotiatedSSL())
+// KCFStreamSocketSecurityLevelNegotiatedSSL returns the value of the constant kCFStreamSocketSecurityLevelNegotiatedSSL.
+func KCFStreamSocketSecurityLevelNegotiatedSSL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamSocketSecurityLevelNegotiatedSSL")))
 }
 
-// KCFStreamPropertyShouldCloseNativeSocket returns the value of the CoreFoundation reference constant kCFStreamPropertyShouldCloseNativeSocket as an objc.ID.
-func KCFStreamPropertyShouldCloseNativeSocket() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyShouldCloseNativeSocket())
+// KCFStreamPropertyShouldCloseNativeSocket returns the value of the constant kCFStreamPropertyShouldCloseNativeSocket.
+func KCFStreamPropertyShouldCloseNativeSocket() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyShouldCloseNativeSocket")))
 }
 
-// KCFURLFileExists returns the value of the CoreFoundation reference constant kCFURLFileExists as an objc.ID.
-func KCFURLFileExists() objc.ID { return purego.CFConstant(raw.KCFURLFileExists()) }
+// KCFURLFileExists returns the value of the constant kCFURLFileExists.
+func KCFURLFileExists() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileExists"))) }
 
-// KCFURLFileDirectoryContents returns the value of the CoreFoundation reference constant kCFURLFileDirectoryContents as an objc.ID.
-func KCFURLFileDirectoryContents() objc.ID {
-	return purego.CFConstant(raw.KCFURLFileDirectoryContents())
+// KCFURLFileDirectoryContents returns the value of the constant kCFURLFileDirectoryContents.
+func KCFURLFileDirectoryContents() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileDirectoryContents")))
 }
 
-// KCFURLFileLength returns the value of the CoreFoundation reference constant kCFURLFileLength as an objc.ID.
-func KCFURLFileLength() objc.ID { return purego.CFConstant(raw.KCFURLFileLength()) }
+// KCFURLFileLength returns the value of the constant kCFURLFileLength.
+func KCFURLFileLength() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileLength"))) }
 
-// KCFURLFileLastModificationTime returns the value of the CoreFoundation reference constant kCFURLFileLastModificationTime as an objc.ID.
-func KCFURLFileLastModificationTime() objc.ID {
-	return purego.CFConstant(raw.KCFURLFileLastModificationTime())
+// KCFURLFileLastModificationTime returns the value of the constant kCFURLFileLastModificationTime.
+func KCFURLFileLastModificationTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileLastModificationTime")))
 }
 
-// KCFURLFilePOSIXMode returns the value of the CoreFoundation reference constant kCFURLFilePOSIXMode as an objc.ID.
-func KCFURLFilePOSIXMode() objc.ID { return purego.CFConstant(raw.KCFURLFilePOSIXMode()) }
+// KCFURLFilePOSIXMode returns the value of the constant kCFURLFilePOSIXMode.
+func KCFURLFilePOSIXMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLFilePOSIXMode")))
+}
 
-// KCFURLFileOwnerID returns the value of the CoreFoundation reference constant kCFURLFileOwnerID as an objc.ID.
-func KCFURLFileOwnerID() objc.ID { return purego.CFConstant(raw.KCFURLFileOwnerID()) }
+// KCFURLFileOwnerID returns the value of the constant kCFURLFileOwnerID.
+func KCFURLFileOwnerID() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFURLFileOwnerID"))) }
 
-// KCFURLHTTPStatusCode returns the value of the CoreFoundation reference constant kCFURLHTTPStatusCode as an objc.ID.
-func KCFURLHTTPStatusCode() objc.ID { return purego.CFConstant(raw.KCFURLHTTPStatusCode()) }
+// KCFURLHTTPStatusCode returns the value of the constant kCFURLHTTPStatusCode.
+func KCFURLHTTPStatusCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLHTTPStatusCode")))
+}
 
-// KCFURLHTTPStatusLine returns the value of the CoreFoundation reference constant kCFURLHTTPStatusLine as an objc.ID.
-func KCFURLHTTPStatusLine() objc.ID { return purego.CFConstant(raw.KCFURLHTTPStatusLine()) }
+// KCFURLHTTPStatusLine returns the value of the constant kCFURLHTTPStatusLine.
+func KCFURLHTTPStatusLine() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLHTTPStatusLine")))
+}
 
-// KCFBundleInfoDictionaryVersionKey returns the value of the CoreFoundation reference constant kCFBundleInfoDictionaryVersionKey as an objc.ID.
-func KCFBundleInfoDictionaryVersionKey() objc.ID {
-	return purego.CFConstant(raw.KCFBundleInfoDictionaryVersionKey())
+// KCFBundleInfoDictionaryVersionKey returns the value of the constant kCFBundleInfoDictionaryVersionKey.
+func KCFBundleInfoDictionaryVersionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFBundleInfoDictionaryVersionKey")))
 }
 
-// KCFBundleExecutableKey returns the value of the CoreFoundation reference constant kCFBundleExecutableKey as an objc.ID.
-func KCFBundleExecutableKey() objc.ID { return purego.CFConstant(raw.KCFBundleExecutableKey()) }
+// KCFBundleExecutableKey returns the value of the constant kCFBundleExecutableKey.
+func KCFBundleExecutableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFBundleExecutableKey")))
+}
 
-// KCFBundleIdentifierKey returns the value of the CoreFoundation reference constant kCFBundleIdentifierKey as an objc.ID.
-func KCFBundleIdentifierKey() objc.ID { return purego.CFConstant(raw.KCFBundleIdentifierKey()) }
+// KCFBundleIdentifierKey returns the value of the constant kCFBundleIdentifierKey.
+func KCFBundleIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFBundleIdentifierKey")))
+}
 
-// KCFBundleVersionKey returns the value of the CoreFoundation reference constant kCFBundleVersionKey as an objc.ID.
-func KCFBundleVersionKey() objc.ID { return purego.CFConstant(raw.KCFBundleVersionKey()) }
+// KCFBundleVersionKey returns the value of the constant kCFBundleVersionKey.
+func KCFBundleVersionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFBundleVersionKey")))
+}
 
-// KCFBundleDevelopmentRegionKey returns the value of the CoreFoundation reference constant kCFBundleDevelopmentRegionKey as an objc.ID.
-func KCFBundleDevelopmentRegionKey() objc.ID {
-	return purego.CFConstant(raw.KCFBundleDevelopmentRegionKey())
+// KCFBundleDevelopmentRegionKey returns the value of the constant kCFBundleDevelopmentRegionKey.
+func KCFBundleDevelopmentRegionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFBundleDevelopmentRegionKey")))
 }
 
-// KCFBundleNameKey returns the value of the CoreFoundation reference constant kCFBundleNameKey as an objc.ID.
-func KCFBundleNameKey() objc.ID { return purego.CFConstant(raw.KCFBundleNameKey()) }
+// KCFBundleNameKey returns the value of the constant kCFBundleNameKey.
+func KCFBundleNameKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFBundleNameKey"))) }
 
-// KCFBundleLocalizationsKey returns the value of the CoreFoundation reference constant kCFBundleLocalizationsKey as an objc.ID.
-func KCFBundleLocalizationsKey() objc.ID { return purego.CFConstant(raw.KCFBundleLocalizationsKey()) }
+// KCFBundleLocalizationsKey returns the value of the constant kCFBundleLocalizationsKey.
+func KCFBundleLocalizationsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFBundleLocalizationsKey")))
+}
 
-// KCFPlugInDynamicRegistrationKey returns the value of the CoreFoundation reference constant kCFPlugInDynamicRegistrationKey as an objc.ID.
-func KCFPlugInDynamicRegistrationKey() objc.ID {
-	return purego.CFConstant(raw.KCFPlugInDynamicRegistrationKey())
+// KCFPlugInDynamicRegistrationKey returns the value of the constant kCFPlugInDynamicRegistrationKey.
+func KCFPlugInDynamicRegistrationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFPlugInDynamicRegistrationKey")))
 }
 
-// KCFPlugInDynamicRegisterFunctionKey returns the value of the CoreFoundation reference constant kCFPlugInDynamicRegisterFunctionKey as an objc.ID.
-func KCFPlugInDynamicRegisterFunctionKey() objc.ID {
-	return purego.CFConstant(raw.KCFPlugInDynamicRegisterFunctionKey())
+// KCFPlugInDynamicRegisterFunctionKey returns the value of the constant kCFPlugInDynamicRegisterFunctionKey.
+func KCFPlugInDynamicRegisterFunctionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFPlugInDynamicRegisterFunctionKey")))
 }
 
-// KCFPlugInUnloadFunctionKey returns the value of the CoreFoundation reference constant kCFPlugInUnloadFunctionKey as an objc.ID.
-func KCFPlugInUnloadFunctionKey() objc.ID { return purego.CFConstant(raw.KCFPlugInUnloadFunctionKey()) }
+// KCFPlugInUnloadFunctionKey returns the value of the constant kCFPlugInUnloadFunctionKey.
+func KCFPlugInUnloadFunctionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFPlugInUnloadFunctionKey")))
+}
 
-// KCFPlugInFactoriesKey returns the value of the CoreFoundation reference constant kCFPlugInFactoriesKey as an objc.ID.
-func KCFPlugInFactoriesKey() objc.ID { return purego.CFConstant(raw.KCFPlugInFactoriesKey()) }
+// KCFPlugInFactoriesKey returns the value of the constant kCFPlugInFactoriesKey.
+func KCFPlugInFactoriesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFPlugInFactoriesKey")))
+}
 
-// KCFPlugInTypesKey returns the value of the CoreFoundation reference constant kCFPlugInTypesKey as an objc.ID.
-func KCFPlugInTypesKey() objc.ID { return purego.CFConstant(raw.KCFPlugInTypesKey()) }
+// KCFPlugInTypesKey returns the value of the constant kCFPlugInTypesKey.
+func KCFPlugInTypesKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFPlugInTypesKey"))) }
 
-// KCFUserNotificationIconURLKey returns the value of the CoreFoundation reference constant kCFUserNotificationIconURLKey as an objc.ID.
-func KCFUserNotificationIconURLKey() objc.ID {
-	return purego.CFConstant(raw.KCFUserNotificationIconURLKey())
+// KCFUserNotificationIconURLKey returns the value of the constant kCFUserNotificationIconURLKey.
+func KCFUserNotificationIconURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFUserNotificationIconURLKey")))
 }
 
-// KCFUserNotificationSoundURLKey returns the value of the CoreFoundation reference constant kCFUserNotificationSoundURLKey as an objc.ID.
-func KCFUserNotificationSoundURLKey() objc.ID {
-	return purego.CFConstant(raw.KCFUserNotificationSoundURLKey())
+// KCFUserNotificationSoundURLKey returns the value of the constant kCFUserNotificationSoundURLKey.
+func KCFUserNotificationSoundURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFUserNotificationSoundURLKey")))
 }
 
-// KCFUserNotificationLocalizationURLKey returns the value of the CoreFoundation reference constant kCFUserNotificationLocalizationURLKey as an objc.ID.
-func KCFUserNotificationLocalizationURLKey() objc.ID {
-	return purego.CFConstant(raw.KCFUserNotificationLocalizationURLKey())
+// KCFUserNotificationLocalizationURLKey returns the value of the constant kCFUserNotificationLocalizationURLKey.
+func KCFUserNotificationLocalizationURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFUserNotificationLocalizationURLKey")))
 }
 
-// KCFUserNotificationAlertHeaderKey returns the value of the CoreFoundation reference constant kCFUserNotificationAlertHeaderKey as an objc.ID.
-func KCFUserNotificationAlertHeaderKey() objc.ID {
-	return purego.CFConstant(raw.KCFUserNotificationAlertHeaderKey())
+// KCFUserNotificationAlertHeaderKey returns the value of the constant kCFUserNotificationAlertHeaderKey.
+func KCFUserNotificationAlertHeaderKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFUserNotificationAlertHeaderKey")))
 }
 
-// KCFUserNotificationAlertMessageKey returns the value of the CoreFoundation reference constant kCFUserNotificationAlertMessageKey as an objc.ID.
-func KCFUserNotificationAlertMessageKey() objc.ID {
-	return purego.CFConstant(raw.KCFUserNotificationAlertMessageKey())
+// KCFUserNotificationAlertMessageKey returns the value of the constant kCFUserNotificationAlertMessageKey.
+func KCFUserNotificationAlertMessageKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFUserNotificationAlertMessageKey")))
 }
 
-// KCFUserNotificationDefaultButtonTitleKey returns the value of the CoreFoundation reference constant kCFUserNotificationDefaultButtonTitleKey as an objc.ID.
-func KCFUserNotificationDefaultButtonTitleKey() objc.ID {
-	return purego.CFConstant(raw.KCFUserNotificationDefaultButtonTitleKey())
+// KCFUserNotificationDefaultButtonTitleKey returns the value of the constant kCFUserNotificationDefaultButtonTitleKey.
+func KCFUserNotificationDefaultButtonTitleKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFUserNotificationDefaultButtonTitleKey")))
 }
 
-// KCFUserNotificationAlternateButtonTitleKey returns the value of the CoreFoundation reference constant kCFUserNotificationAlternateButtonTitleKey as an objc.ID.
-func KCFUserNotificationAlternateButtonTitleKey() objc.ID {
-	return purego.CFConstant(raw.KCFUserNotificationAlternateButtonTitleKey())
+// KCFUserNotificationAlternateButtonTitleKey returns the value of the constant kCFUserNotificationAlternateButtonTitleKey.
+func KCFUserNotificationAlternateButtonTitleKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFUserNotificationAlternateButtonTitleKey")))
 }
 
-// KCFUserNotificationOtherButtonTitleKey returns the value of the CoreFoundation reference constant kCFUserNotificationOtherButtonTitleKey as an objc.ID.
-func KCFUserNotificationOtherButtonTitleKey() objc.ID {
-	return purego.CFConstant(raw.KCFUserNotificationOtherButtonTitleKey())
+// KCFUserNotificationOtherButtonTitleKey returns the value of the constant kCFUserNotificationOtherButtonTitleKey.
+func KCFUserNotificationOtherButtonTitleKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFUserNotificationOtherButtonTitleKey")))
 }
 
-// KCFUserNotificationProgressIndicatorValueKey returns the value of the CoreFoundation reference constant kCFUserNotificationProgressIndicatorValueKey as an objc.ID.
-func KCFUserNotificationProgressIndicatorValueKey() objc.ID {
-	return purego.CFConstant(raw.KCFUserNotificationProgressIndicatorValueKey())
+// KCFUserNotificationProgressIndicatorValueKey returns the value of the constant kCFUserNotificationProgressIndicatorValueKey.
+func KCFUserNotificationProgressIndicatorValueKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFUserNotificationProgressIndicatorValueKey")))
 }
 
-// KCFUserNotificationPopUpTitlesKey returns the value of the CoreFoundation reference constant kCFUserNotificationPopUpTitlesKey as an objc.ID.
-func KCFUserNotificationPopUpTitlesKey() objc.ID {
-	return purego.CFConstant(raw.KCFUserNotificationPopUpTitlesKey())
+// KCFUserNotificationPopUpTitlesKey returns the value of the constant kCFUserNotificationPopUpTitlesKey.
+func KCFUserNotificationPopUpTitlesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFUserNotificationPopUpTitlesKey")))
 }
 
-// KCFUserNotificationTextFieldTitlesKey returns the value of the CoreFoundation reference constant kCFUserNotificationTextFieldTitlesKey as an objc.ID.
-func KCFUserNotificationTextFieldTitlesKey() objc.ID {
-	return purego.CFConstant(raw.KCFUserNotificationTextFieldTitlesKey())
+// KCFUserNotificationTextFieldTitlesKey returns the value of the constant kCFUserNotificationTextFieldTitlesKey.
+func KCFUserNotificationTextFieldTitlesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFUserNotificationTextFieldTitlesKey")))
 }
 
-// KCFUserNotificationCheckBoxTitlesKey returns the value of the CoreFoundation reference constant kCFUserNotificationCheckBoxTitlesKey as an objc.ID.
-func KCFUserNotificationCheckBoxTitlesKey() objc.ID {
-	return purego.CFConstant(raw.KCFUserNotificationCheckBoxTitlesKey())
+// KCFUserNotificationCheckBoxTitlesKey returns the value of the constant kCFUserNotificationCheckBoxTitlesKey.
+func KCFUserNotificationCheckBoxTitlesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFUserNotificationCheckBoxTitlesKey")))
 }
 
-// KCFUserNotificationTextFieldValuesKey returns the value of the CoreFoundation reference constant kCFUserNotificationTextFieldValuesKey as an objc.ID.
-func KCFUserNotificationTextFieldValuesKey() objc.ID {
-	return purego.CFConstant(raw.KCFUserNotificationTextFieldValuesKey())
+// KCFUserNotificationTextFieldValuesKey returns the value of the constant kCFUserNotificationTextFieldValuesKey.
+func KCFUserNotificationTextFieldValuesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFUserNotificationTextFieldValuesKey")))
 }
 
-// KCFUserNotificationPopUpSelectionKey returns the value of the CoreFoundation reference constant kCFUserNotificationPopUpSelectionKey as an objc.ID.
-func KCFUserNotificationPopUpSelectionKey() objc.ID {
-	return purego.CFConstant(raw.KCFUserNotificationPopUpSelectionKey())
+// KCFUserNotificationPopUpSelectionKey returns the value of the constant kCFUserNotificationPopUpSelectionKey.
+func KCFUserNotificationPopUpSelectionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFUserNotificationPopUpSelectionKey")))
 }
 
-// KCFUserNotificationAlertTopMostKey returns the value of the CoreFoundation reference constant kCFUserNotificationAlertTopMostKey as an objc.ID.
-func KCFUserNotificationAlertTopMostKey() objc.ID {
-	return purego.CFConstant(raw.KCFUserNotificationAlertTopMostKey())
+// KCFUserNotificationAlertTopMostKey returns the value of the constant kCFUserNotificationAlertTopMostKey.
+func KCFUserNotificationAlertTopMostKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFUserNotificationAlertTopMostKey")))
 }
 
-// KCFUserNotificationKeyboardTypesKey returns the value of the CoreFoundation reference constant kCFUserNotificationKeyboardTypesKey as an objc.ID.
-func KCFUserNotificationKeyboardTypesKey() objc.ID {
-	return purego.CFConstant(raw.KCFUserNotificationKeyboardTypesKey())
+// KCFUserNotificationKeyboardTypesKey returns the value of the constant kCFUserNotificationKeyboardTypesKey.
+func KCFUserNotificationKeyboardTypesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFUserNotificationKeyboardTypesKey")))
 }
 
-// KCFXMLTreeErrorDescription returns the value of the CoreFoundation reference constant kCFXMLTreeErrorDescription as an objc.ID.
-func KCFXMLTreeErrorDescription() objc.ID { return purego.CFConstant(raw.KCFXMLTreeErrorDescription()) }
+// KCFXMLTreeErrorDescription returns the value of the constant kCFXMLTreeErrorDescription.
+func KCFXMLTreeErrorDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFXMLTreeErrorDescription")))
+}
 
-// KCFXMLTreeErrorLineNumber returns the value of the CoreFoundation reference constant kCFXMLTreeErrorLineNumber as an objc.ID.
-func KCFXMLTreeErrorLineNumber() objc.ID { return purego.CFConstant(raw.KCFXMLTreeErrorLineNumber()) }
+// KCFXMLTreeErrorLineNumber returns the value of the constant kCFXMLTreeErrorLineNumber.
+func KCFXMLTreeErrorLineNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFXMLTreeErrorLineNumber")))
+}
 
-// KCFXMLTreeErrorLocation returns the value of the CoreFoundation reference constant kCFXMLTreeErrorLocation as an objc.ID.
-func KCFXMLTreeErrorLocation() objc.ID { return purego.CFConstant(raw.KCFXMLTreeErrorLocation()) }
+// KCFXMLTreeErrorLocation returns the value of the constant kCFXMLTreeErrorLocation.
+func KCFXMLTreeErrorLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFXMLTreeErrorLocation")))
+}
 
-// KCFXMLTreeErrorStatusCode returns the value of the CoreFoundation reference constant kCFXMLTreeErrorStatusCode as an objc.ID.
-func KCFXMLTreeErrorStatusCode() objc.ID { return purego.CFConstant(raw.KCFXMLTreeErrorStatusCode()) }
+// KCFXMLTreeErrorStatusCode returns the value of the constant kCFXMLTreeErrorStatusCode.
+func KCFXMLTreeErrorStatusCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFXMLTreeErrorStatusCode")))
+}

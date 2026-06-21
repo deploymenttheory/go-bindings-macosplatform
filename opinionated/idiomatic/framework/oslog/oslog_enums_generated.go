@@ -10,113 +10,113 @@ import (
 )
 
 // The log level at which the entry was generated.
-type OSLogEntryLogLevel int64
+type LogEntryLogLevel int64
 
 const (
-	OSLogEntryLogLevelUndefined OSLogEntryLogLevel = 0
-	OSLogEntryLogLevelDebug     OSLogEntryLogLevel = 1
-	OSLogEntryLogLevelInfo      OSLogEntryLogLevel = 2
-	OSLogEntryLogLevelNotice    OSLogEntryLogLevel = 3
-	OSLogEntryLogLevelError     OSLogEntryLogLevel = 4
-	OSLogEntryLogLevelFault     OSLogEntryLogLevel = 5
+	LogEntryLogLevelUndefined LogEntryLogLevel = 0
+	LogEntryLogLevelDebug     LogEntryLogLevel = 1
+	LogEntryLogLevelInfo      LogEntryLogLevel = 2
+	LogEntryLogLevelNotice    LogEntryLogLevel = 3
+	LogEntryLogLevelError     LogEntryLogLevel = 4
+	LogEntryLogLevelFault     LogEntryLogLevel = 5
 )
 
-func (e OSLogEntryLogLevel) String() string {
+func (e LogEntryLogLevel) String() string {
 	switch e {
-	case OSLogEntryLogLevelUndefined:
-		return "OSLogEntryLogLevelUndefined"
-	case OSLogEntryLogLevelDebug:
-		return "OSLogEntryLogLevelDebug"
-	case OSLogEntryLogLevelInfo:
-		return "OSLogEntryLogLevelInfo"
-	case OSLogEntryLogLevelNotice:
-		return "OSLogEntryLogLevelNotice"
-	case OSLogEntryLogLevelError:
-		return "OSLogEntryLogLevelError"
-	case OSLogEntryLogLevelFault:
-		return "OSLogEntryLogLevelFault"
+	case LogEntryLogLevelUndefined:
+		return "LogEntryLogLevelUndefined"
+	case LogEntryLogLevelDebug:
+		return "LogEntryLogLevelDebug"
+	case LogEntryLogLevelInfo:
+		return "LogEntryLogLevelInfo"
+	case LogEntryLogLevelNotice:
+		return "LogEntryLogLevelNotice"
+	case LogEntryLogLevelError:
+		return "LogEntryLogLevelError"
+	case LogEntryLogLevelFault:
+		return "LogEntryLogLevelFault"
 	default:
-		return fmt.Sprintf("OSLogEntryLogLevel(%d)", int64(e))
+		return fmt.Sprintf("LogEntryLogLevel(%d)", int64(e))
 	}
 }
 
 // The available signpost types.
-type OSLogEntrySignpostType int64
+type LogEntrySignpostType int64
 
 const (
-	OSLogEntrySignpostTypeUndefined     OSLogEntrySignpostType = 0
-	OSLogEntrySignpostTypeIntervalBegin OSLogEntrySignpostType = 1
-	OSLogEntrySignpostTypeIntervalEnd   OSLogEntrySignpostType = 2
-	OSLogEntrySignpostTypeEvent         OSLogEntrySignpostType = 3
+	LogEntrySignpostTypeUndefined     LogEntrySignpostType = 0
+	LogEntrySignpostTypeIntervalBegin LogEntrySignpostType = 1
+	LogEntrySignpostTypeIntervalEnd   LogEntrySignpostType = 2
+	LogEntrySignpostTypeEvent         LogEntrySignpostType = 3
 )
 
-func (e OSLogEntrySignpostType) String() string {
+func (e LogEntrySignpostType) String() string {
 	switch e {
-	case OSLogEntrySignpostTypeUndefined:
-		return "OSLogEntrySignpostTypeUndefined"
-	case OSLogEntrySignpostTypeIntervalBegin:
-		return "OSLogEntrySignpostTypeIntervalBegin"
-	case OSLogEntrySignpostTypeIntervalEnd:
-		return "OSLogEntrySignpostTypeIntervalEnd"
-	case OSLogEntrySignpostTypeEvent:
-		return "OSLogEntrySignpostTypeEvent"
+	case LogEntrySignpostTypeUndefined:
+		return "LogEntrySignpostTypeUndefined"
+	case LogEntrySignpostTypeIntervalBegin:
+		return "LogEntrySignpostTypeIntervalBegin"
+	case LogEntrySignpostTypeIntervalEnd:
+		return "LogEntrySignpostTypeIntervalEnd"
+	case LogEntrySignpostTypeEvent:
+		return "LogEntrySignpostTypeEvent"
 	default:
-		return fmt.Sprintf("OSLogEntrySignpostType(%d)", int64(e))
+		return fmt.Sprintf("LogEntrySignpostType(%d)", int64(e))
 	}
 }
 
 // A classification of how the entry was to be stored and rotated at the point when it was created.
-type OSLogEntryStoreCategory int64
+type LogEntryStoreCategory int64
 
 const (
-	OSLogEntryStoreCategoryUndefined    OSLogEntryStoreCategory = 0
-	OSLogEntryStoreCategoryMetadata     OSLogEntryStoreCategory = 1
-	OSLogEntryStoreCategoryShortTerm    OSLogEntryStoreCategory = 2
-	OSLogEntryStoreCategoryLongTermAuto OSLogEntryStoreCategory = 3
-	OSLogEntryStoreCategoryLongTerm1    OSLogEntryStoreCategory = 4
-	OSLogEntryStoreCategoryLongTerm3    OSLogEntryStoreCategory = 5
-	OSLogEntryStoreCategoryLongTerm7    OSLogEntryStoreCategory = 6
-	OSLogEntryStoreCategoryLongTerm14   OSLogEntryStoreCategory = 7
-	OSLogEntryStoreCategoryLongTerm30   OSLogEntryStoreCategory = 8
+	LogEntryStoreCategoryUndefined    LogEntryStoreCategory = 0
+	LogEntryStoreCategoryMetadata     LogEntryStoreCategory = 1
+	LogEntryStoreCategoryShortTerm    LogEntryStoreCategory = 2
+	LogEntryStoreCategoryLongTermAuto LogEntryStoreCategory = 3
+	LogEntryStoreCategoryLongTerm1    LogEntryStoreCategory = 4
+	LogEntryStoreCategoryLongTerm3    LogEntryStoreCategory = 5
+	LogEntryStoreCategoryLongTerm7    LogEntryStoreCategory = 6
+	LogEntryStoreCategoryLongTerm14   LogEntryStoreCategory = 7
+	LogEntryStoreCategoryLongTerm30   LogEntryStoreCategory = 8
 )
 
-func (e OSLogEntryStoreCategory) String() string {
+func (e LogEntryStoreCategory) String() string {
 	switch e {
-	case OSLogEntryStoreCategoryUndefined:
-		return "OSLogEntryStoreCategoryUndefined"
-	case OSLogEntryStoreCategoryMetadata:
-		return "OSLogEntryStoreCategoryMetadata"
-	case OSLogEntryStoreCategoryShortTerm:
-		return "OSLogEntryStoreCategoryShortTerm"
-	case OSLogEntryStoreCategoryLongTermAuto:
-		return "OSLogEntryStoreCategoryLongTermAuto"
-	case OSLogEntryStoreCategoryLongTerm1:
-		return "OSLogEntryStoreCategoryLongTerm1"
-	case OSLogEntryStoreCategoryLongTerm3:
-		return "OSLogEntryStoreCategoryLongTerm3"
-	case OSLogEntryStoreCategoryLongTerm7:
-		return "OSLogEntryStoreCategoryLongTerm7"
-	case OSLogEntryStoreCategoryLongTerm14:
-		return "OSLogEntryStoreCategoryLongTerm14"
-	case OSLogEntryStoreCategoryLongTerm30:
-		return "OSLogEntryStoreCategoryLongTerm30"
+	case LogEntryStoreCategoryUndefined:
+		return "LogEntryStoreCategoryUndefined"
+	case LogEntryStoreCategoryMetadata:
+		return "LogEntryStoreCategoryMetadata"
+	case LogEntryStoreCategoryShortTerm:
+		return "LogEntryStoreCategoryShortTerm"
+	case LogEntryStoreCategoryLongTermAuto:
+		return "LogEntryStoreCategoryLongTermAuto"
+	case LogEntryStoreCategoryLongTerm1:
+		return "LogEntryStoreCategoryLongTerm1"
+	case LogEntryStoreCategoryLongTerm3:
+		return "LogEntryStoreCategoryLongTerm3"
+	case LogEntryStoreCategoryLongTerm7:
+		return "LogEntryStoreCategoryLongTerm7"
+	case LogEntryStoreCategoryLongTerm14:
+		return "LogEntryStoreCategoryLongTerm14"
+	case LogEntryStoreCategoryLongTerm30:
+		return "LogEntryStoreCategoryLongTerm30"
 	default:
-		return fmt.Sprintf("OSLogEntryStoreCategory(%d)", int64(e))
+		return fmt.Sprintf("LogEntryStoreCategory(%d)", int64(e))
 	}
 }
 
 // Option to control the direction of the iteration.
 // Bitmask — values may be combined with |.
-type OSLogEnumeratorOptions uint64
+type LogEnumeratorOptions uint64
 
 const (
-	OSLogEnumeratorReverse OSLogEnumeratorOptions = 1
+	LogEnumeratorReverse LogEnumeratorOptions = 1
 )
 
-func (e OSLogEnumeratorOptions) String() string {
+func (e LogEnumeratorOptions) String() string {
 	var parts []string
-	if e&OSLogEnumeratorReverse != 0 {
-		parts = append(parts, "OSLogEnumeratorReverse")
+	if e&LogEnumeratorReverse != 0 {
+		parts = append(parts, "LogEnumeratorReverse")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -125,50 +125,50 @@ func (e OSLogEnumeratorOptions) String() string {
 }
 
 // The data type corresponding to the argument provided in a message payload.
-type OSLogMessageComponentArgumentCategory int64
+type LogMessageComponentArgumentCategory int64
 
 const (
-	OSLogMessageComponentArgumentCategoryUndefined OSLogMessageComponentArgumentCategory = 0
-	OSLogMessageComponentArgumentCategoryData      OSLogMessageComponentArgumentCategory = 1
-	OSLogMessageComponentArgumentCategoryDouble    OSLogMessageComponentArgumentCategory = 2
-	OSLogMessageComponentArgumentCategoryInt64     OSLogMessageComponentArgumentCategory = 3
-	OSLogMessageComponentArgumentCategoryString    OSLogMessageComponentArgumentCategory = 4
-	OSLogMessageComponentArgumentCategoryUInt64    OSLogMessageComponentArgumentCategory = 5
+	LogMessageComponentArgumentCategoryUndefined LogMessageComponentArgumentCategory = 0
+	LogMessageComponentArgumentCategoryData      LogMessageComponentArgumentCategory = 1
+	LogMessageComponentArgumentCategoryDouble    LogMessageComponentArgumentCategory = 2
+	LogMessageComponentArgumentCategoryInt64     LogMessageComponentArgumentCategory = 3
+	LogMessageComponentArgumentCategoryString    LogMessageComponentArgumentCategory = 4
+	LogMessageComponentArgumentCategoryUInt64    LogMessageComponentArgumentCategory = 5
 )
 
-func (e OSLogMessageComponentArgumentCategory) String() string {
+func (e LogMessageComponentArgumentCategory) String() string {
 	switch e {
-	case OSLogMessageComponentArgumentCategoryUndefined:
-		return "OSLogMessageComponentArgumentCategoryUndefined"
-	case OSLogMessageComponentArgumentCategoryData:
-		return "OSLogMessageComponentArgumentCategoryData"
-	case OSLogMessageComponentArgumentCategoryDouble:
-		return "OSLogMessageComponentArgumentCategoryDouble"
-	case OSLogMessageComponentArgumentCategoryInt64:
-		return "OSLogMessageComponentArgumentCategoryInt64"
-	case OSLogMessageComponentArgumentCategoryString:
-		return "OSLogMessageComponentArgumentCategoryString"
-	case OSLogMessageComponentArgumentCategoryUInt64:
-		return "OSLogMessageComponentArgumentCategoryUInt64"
+	case LogMessageComponentArgumentCategoryUndefined:
+		return "LogMessageComponentArgumentCategoryUndefined"
+	case LogMessageComponentArgumentCategoryData:
+		return "LogMessageComponentArgumentCategoryData"
+	case LogMessageComponentArgumentCategoryDouble:
+		return "LogMessageComponentArgumentCategoryDouble"
+	case LogMessageComponentArgumentCategoryInt64:
+		return "LogMessageComponentArgumentCategoryInt64"
+	case LogMessageComponentArgumentCategoryString:
+		return "LogMessageComponentArgumentCategoryString"
+	case LogMessageComponentArgumentCategoryUInt64:
+		return "LogMessageComponentArgumentCategoryUInt64"
 	default:
-		return fmt.Sprintf("OSLogMessageComponentArgumentCategory(%d)", int64(e))
+		return fmt.Sprintf("LogMessageComponentArgumentCategory(%d)", int64(e))
 	}
 }
 
-type OSLogStoreScope int64
+type LogStoreScope int64
 
 const (
-	OSLogStoreSystem                   OSLogStoreScope = 0
-	OSLogStoreCurrentProcessIdentifier OSLogStoreScope = 1
+	LogStoreSystem                   LogStoreScope = 0
+	LogStoreCurrentProcessIdentifier LogStoreScope = 1
 )
 
-func (e OSLogStoreScope) String() string {
+func (e LogStoreScope) String() string {
 	switch e {
-	case OSLogStoreSystem:
-		return "OSLogStoreSystem"
-	case OSLogStoreCurrentProcessIdentifier:
-		return "OSLogStoreCurrentProcessIdentifier"
+	case LogStoreSystem:
+		return "LogStoreSystem"
+	case LogStoreCurrentProcessIdentifier:
+		return "LogStoreCurrentProcessIdentifier"
 	default:
-		return fmt.Sprintf("OSLogStoreScope(%d)", int64(e))
+		return fmt.Sprintf("LogStoreScope(%d)", int64(e))
 	}
 }

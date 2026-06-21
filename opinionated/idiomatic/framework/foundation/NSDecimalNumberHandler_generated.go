@@ -5,53 +5,78 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that adopts the decimal number behaviors protocol.
 //
-// DecimalNumberHandler wraps [raw.NSDecimalNumberHandler] with a fluent Go API.
+// DecimalNumberHandler is an idiomatic wrapper over the Objective-C class NSDecimalNumberHandler.
 type DecimalNumberHandler struct {
-	inner *raw.NSDecimalNumberHandler
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSDecimalNumberHandler].
-func (x *DecimalNumberHandler) Unwrap() *raw.NSDecimalNumberHandler { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DecimalNumberHandler) ID() objc.ID { return x.inner.Ptr() }
-
-// DecimalNumberHandlerFromID adopts an existing object pointer as a DecimalNumberHandler (nil for 0).
+// DecimalNumberHandlerFromID adopts an existing Objective-C object as a DecimalNumberHandler
+// (nil for 0), retaining it and registering a release finalizer.
 func DecimalNumberHandlerFromID(id objc.ID) *DecimalNumberHandler {
 	if id == 0 {
 		return nil
 	}
-	return &DecimalNumberHandler{inner: raw.NSDecimalNumberHandlerFromID(id)}
+	x := &DecimalNumberHandler{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// decimalNumberHandlerAdopt wraps an Objective-C object that this code just created as a
+// DecimalNumberHandler (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func decimalNumberHandlerAdopt(id objc.ID) *DecimalNumberHandler {
+	if id == 0 {
+		return nil
+	}
+	x := &DecimalNumberHandler{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DecimalNumberHandler) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DecimalNumberHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DecimalNumberHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns an NSDecimalNumberHandler object initialized so it behaves as specified by the method’s arguments.
 //
-// NewDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero creates a new [DecimalNumberHandler].
-func NewDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero(roundingMode NSRoundingMode, scale int16, exact bool, overflow bool, underflow bool, divideByZero bool) *DecimalNumberHandler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDecimalNumberHandler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRoundingMode:scale:raiseOnExactness:raiseOnOverflow:raiseOnUnderflow:raiseOnDivideByZero:"), raw.NSRoundingMode(roundingMode), scale, exact, overflow, underflow, divideByZero)
-	return &DecimalNumberHandler{inner: raw.NSDecimalNumberHandlerFromID(_id)}
+// NewDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero creates a new DecimalNumberHandler.
+func NewDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero(roundingMode RoundingMode, scale int16, exact bool, overflow bool, underflow bool, divideByZero bool) *DecimalNumberHandler {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDecimalNumberHandler")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRoundingMode:scale:raiseOnExactness:raiseOnOverflow:raiseOnUnderflow:raiseOnDivideByZero:"), roundingMode, scale, exact, overflow, underflow, divideByZero)
+	return decimalNumberHandlerAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *DecimalNumberHandler) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DecimalNumberHandler {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *DecimalNumberHandler) WithScriptingProperties(scriptingProperties obj.Object) *DecimalNumberHandler {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-func (x *DecimalNumberHandler) asObject() *raw.NSObject { return &x.inner.NSObject }
-
 // DecimalNumberHandlerable is the interface implemented by [DecimalNumberHandler], for mocking and DI.
 type DecimalNumberHandlerable interface {
-	Unwrap() *raw.NSDecimalNumberHandler
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DecimalNumberHandler
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *DecimalNumberHandler
 }
 
 var _ DecimalNumberHandlerable = (*DecimalNumberHandler)(nil)

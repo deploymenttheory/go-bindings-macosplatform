@@ -6,55 +6,80 @@ package localauthentication
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A grouped set of requirements that gate access to a resource or operation.
 //
-// Right wraps [raw.LARight] with a fluent Go API.
+// Right is an idiomatic wrapper over the Objective-C class LARight.
 type Right struct {
-	inner *raw.LARight
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.LARight].
-func (x *Right) Unwrap() *raw.LARight { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Right) ID() objc.ID { return x.inner.Ptr() }
-
-// RightFromID adopts an existing object pointer as a Right (nil for 0).
+// RightFromID adopts an existing Objective-C object as a Right
+// (nil for 0), retaining it and registering a release finalizer.
 func RightFromID(id objc.ID) *Right {
 	if id == 0 {
 		return nil
 	}
-	return &Right{inner: raw.LARightFromID(id)}
+	x := &Right{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRight creates a new [Right].
+// rightAdopt wraps an Objective-C object that this code just created as a
+// Right (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rightAdopt(id objc.ID) *Right {
+	if id == 0 {
+		return nil
+	}
+	x := &Right{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Right) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Right) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Right) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRight creates a new Right.
 func NewRight() *Right {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LARight")), objc.RegisterName("new"))
-	return &Right{inner: raw.LARightFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("LARight")), objc.RegisterName("new"))
+	return rightAdopt(_id)
 }
 
 // Creates a right with the authentication requirements you supply.
 //
-// NewRightWithRequirement creates a new [Right].
-func NewRightWithRequirement(requirement *raw.LAAuthenticationRequirement) *Right {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("LARight")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequirement:"), requirement.Ptr())
-	return &Right{inner: raw.LARightFromID(_id)}
+// NewRightWithRequirement creates a new Right.
+func NewRightWithRequirement(requirement *AuthenticationRequirement) *Right {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("LARight")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRequirement:"), objref.IDOf(requirement))
+	return rightAdopt(_id)
 }
 
 // An integer you use to identify a right.
 //
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag sets tag and returns the receiver so calls can be chained.
 func (x *Right) WithTag(tag int) *Right {
-	x.inner.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
@@ -63,13 +88,12 @@ func (x *Right) WithTag(tag int) *Right {
 // AuthorizeWithLocalizedReasonCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Right) AuthorizeWithLocalizedReasonCompletion(ctx context.Context, localizedReason string) error {
 	_ch := make(chan error, 1)
-	x.inner.AuthorizeWithLocalizedReasonCompletion(foundation.NSStringStringWithUTF8String(localizedReason), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorizeWithLocalizedReason:completion:"), purego.NSString(localizedReason), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -83,13 +107,12 @@ func (x *Right) AuthorizeWithLocalizedReasonCompletion(ctx context.Context, loca
 // CheckCanAuthorizeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Right) CheckCanAuthorizeWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.CheckCanAuthorizeWithCompletion(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("checkCanAuthorizeWithCompletion:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -103,9 +126,10 @@ func (x *Right) CheckCanAuthorizeWithCompletion(ctx context.Context) error {
 // DeauthorizeWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Right) DeauthorizeWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.DeauthorizeWithCompletion(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deauthorizeWithCompletion:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -114,35 +138,30 @@ func (x *Right) DeauthorizeWithCompletion(ctx context.Context) error {
 	}
 }
 
-// @brief Provides the current authorization state of the @c LARight instance
-//
-// State calls the underlying State.
-func (x *Right) State() LARightState {
-	return LARightState(x.inner.State())
+// Provides the current authorization state of the
+func (x *Right) State() RightState {
+	_r := objc.Send[RightState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
 }
 
-// @brief An application-supplied integer that can be used to identify right instances. The default value is @c 0.
-//
-// Tag calls the underlying Tag.
+// An application-supplied integer that can be used to identify right instances. The default value is
 func (x *Right) Tag() int {
-	return x.inner.Tag()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tag"))
+	return _r
 }
 
-// SetTag calls the underlying SetTag.
 func (x *Right) SetTag(tag int) {
-	x.inner.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 }
-
-func (x *Right) asRight() *raw.LARight { return x.inner }
 
 // Rightable is the interface implemented by [Right], for mocking and DI.
 type Rightable interface {
-	Unwrap() *raw.LARight
+	obj.Object
 	WithTag(tag int) *Right
 	AuthorizeWithLocalizedReasonCompletion(ctx context.Context, localizedReason string) error
 	CheckCanAuthorizeWithCompletion(ctx context.Context) error
 	DeauthorizeWithCompletion(ctx context.Context) error
-	State() LARightState
+	State() RightState
 	Tag() int
 	SetTag(tag int)
 }

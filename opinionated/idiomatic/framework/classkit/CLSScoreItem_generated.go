@@ -5,97 +5,115 @@
 package classkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/classkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Activity information that signifies a score out of a possible maximum.
 //
-// ScoreItem wraps [raw.CLSScoreItem] with a fluent Go API.
+// ScoreItem is an idiomatic wrapper over the Objective-C class CLSScoreItem.
 type ScoreItem struct {
-	inner *raw.CLSScoreItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLSScoreItem].
-func (x *ScoreItem) Unwrap() *raw.CLSScoreItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScoreItem) ID() objc.ID { return x.inner.Ptr() }
-
-// ScoreItemFromID adopts an existing object pointer as a ScoreItem (nil for 0).
+// ScoreItemFromID adopts an existing Objective-C object as a ScoreItem
+// (nil for 0), retaining it and registering a release finalizer.
 func ScoreItemFromID(id objc.ID) *ScoreItem {
 	if id == 0 {
 		return nil
 	}
-	return &ScoreItem{inner: raw.CLSScoreItemFromID(id)}
+	x := &ScoreItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// scoreItemAdopt wraps an Objective-C object that this code just created as a
+// ScoreItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scoreItemAdopt(id objc.ID) *ScoreItem {
+	if id == 0 {
+		return nil
+	}
+	x := &ScoreItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScoreItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScoreItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScoreItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes an activity item that holds a score value.
 //
-// NewScoreItemWithIdentifierTitleScoreMaxScore creates a new [ScoreItem].
+// NewScoreItemWithIdentifierTitleScoreMaxScore creates a new ScoreItem.
 func NewScoreItemWithIdentifierTitleScoreMaxScore(identifier string, title string, score float64, maxScore float64) *ScoreItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLSScoreItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:title:score:maxScore:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), foundation.NSStringStringWithUTF8String(title).Ptr(), score, maxScore)
-	return &ScoreItem{inner: raw.CLSScoreItemFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CLSScoreItem")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:title:score:maxScore:"), purego.NSString(identifier), purego.NSString(title), score, maxScore)
+	return scoreItemAdopt(_id)
 }
 
 // The score earned by a user in completing the task.
 //
-// WithScore sets the score property and returns the receiver for chaining.
+// WithScore sets score and returns the receiver so calls can be chained.
 func (x *ScoreItem) WithScore(score float64) *ScoreItem {
-	x.inner.SetScore(score)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScore:"), score)
 	return x
 }
 
 // The maximum possible score that the user can earn on a given task.
 //
-// WithMaxScore sets the maxScore property and returns the receiver for chaining.
+// WithMaxScore sets maxScore and returns the receiver so calls can be chained.
 func (x *ScoreItem) WithMaxScore(maxScore float64) *ScoreItem {
-	x.inner.SetMaxScore(maxScore)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxScore:"), maxScore)
 	return x
 }
 
 // A human readable name for the activity item.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *ScoreItem) WithTitle(title string) *ScoreItem {
-	x.inner.CLSActivityItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// @abstract      Score out of @c maxScore. @discussion    Should be between zero and @c maxScore [0.0,maxScore].
-//
-// Score calls the underlying Score.
+// Score out of Should be between zero and
 func (x *ScoreItem) Score() float64 {
-	return x.inner.Score()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("score"))
+	return _r
 }
 
-// SetScore calls the underlying SetScore.
 func (x *ScoreItem) SetScore(score float64) {
-	x.inner.SetScore(score)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScore:"), score)
 }
 
-// @abstract      Total score possible. @discussion    Must be greater than zero.
-//
-// MaxScore calls the underlying MaxScore.
+// Total score possible. Must be greater than zero.
 func (x *ScoreItem) MaxScore() float64 {
-	return x.inner.MaxScore()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxScore"))
+	return _r
 }
 
-// SetMaxScore calls the underlying SetMaxScore.
 func (x *ScoreItem) SetMaxScore(maxScore float64) {
-	x.inner.SetMaxScore(maxScore)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxScore:"), maxScore)
 }
-
-func (x *ScoreItem) asActivityItem() *raw.CLSActivityItem { return &x.inner.CLSActivityItem }
-
-func (x *ScoreItem) asObject() *raw.CLSObject { return &x.inner.CLSActivityItem.CLSObject }
 
 // ScoreItemable is the interface implemented by [ScoreItem], for mocking and DI.
 type ScoreItemable interface {
-	Unwrap() *raw.CLSScoreItem
+	obj.Object
 	WithScore(score float64) *ScoreItem
 	WithMaxScore(maxScore float64) *ScoreItem
 	WithTitle(title string) *ScoreItem

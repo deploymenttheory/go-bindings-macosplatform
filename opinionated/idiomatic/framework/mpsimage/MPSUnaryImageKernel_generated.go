@@ -5,158 +5,66 @@
 package mpsimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// UnaryImageKernel wraps [raw.MPSUnaryImageKernel] with a fluent Go API.
+// UnaryImageKernel is an idiomatic wrapper over the Objective-C class MPSUnaryImageKernel.
 type UnaryImageKernel struct {
-	inner *raw.MPSUnaryImageKernel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSUnaryImageKernel].
-func (x *UnaryImageKernel) Unwrap() *raw.MPSUnaryImageKernel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnaryImageKernel) ID() objc.ID { return x.inner.Ptr() }
-
-// UnaryImageKernelFromID adopts an existing object pointer as a UnaryImageKernel (nil for 0).
+// UnaryImageKernelFromID adopts an existing Objective-C object as a UnaryImageKernel
+// (nil for 0), retaining it and registering a release finalizer.
 func UnaryImageKernelFromID(id objc.ID) *UnaryImageKernel {
 	if id == 0 {
 		return nil
 	}
-	return &UnaryImageKernel{inner: raw.MPSUnaryImageKernelFromID(id)}
-}
-
-// @abstract   Standard init with default properties per filter type @param      device      The device that the filter will be used on. May not be NULL. @result     a pointer to the newly initialized object. This will fail, returning nil if the device is not supported. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later.
-//
-// NewUnaryImageKernelWithDevice creates a new [UnaryImageKernel].
-func NewUnaryImageKernelWithDevice(device metal.MTLDevice) *UnaryImageKernel {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSUnaryImageKernel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &UnaryImageKernel{inner: raw.MPSUnaryImageKernelFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewUnaryImageKernelWithCoderDevice creates a new [UnaryImageKernel].
-func NewUnaryImageKernelWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *UnaryImageKernel {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSUnaryImageKernel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &UnaryImageKernel{inner: raw.MPSUnaryImageKernelFromID(_id)}
-}
-
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *UnaryImageKernel) WithOffset(offset mpscore.MPSOffset) *UnaryImageKernel {
-	x.inner.SetOffset(offset)
+	x := &UnaryImageKernel{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *UnaryImageKernel) WithClipRect(clipRect metal.MTLRegion) *UnaryImageKernel {
-	x.inner.SetClipRect(clipRect)
+// unaryImageKernelAdopt wraps an Objective-C object that this code just created as a
+// UnaryImageKernel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unaryImageKernelAdopt(id objc.ID) *UnaryImageKernel {
+	if id == 0 {
+		return nil
+	}
+	x := &UnaryImageKernel{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *UnaryImageKernel) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *UnaryImageKernel {
-	x.inner.SetEdgeMode(edgeMode)
-	return x
+// Description returns the object's -description text.
+func (x *UnaryImageKernel) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// This method attempts to apply the MPSKernel in place on a texture. In-place operation means that the same texture is used both to hold the input image and the results. Operating in-place can be an excellent way to reduce resource utilization, and save time and energy. While simple Metal kernels can not operate in place because textures can not be readable and writable at the same time, some MPSKernels can operate in place because they use multi-pass algorithms. Whether a MPSKernel can operate in-place can depend on current hardware, operating system revision and the parameters and properties passed to it. You should never assume that a MPSKernel will continue to work in place, even if you have observed it doing so before. If the operation succeeds in-place, YES is returned.  If the in-place operation fails and no copyAllocator is provided, then NO is returned. Without a fallback MPSCopyAllocator, in neither case is the pointer held at *texture modified. Failure during in-place operation is very common and will occur inconsistently across different hardware platforms and OS releases. Without a fallback MPSCopyAllocator, operating in place may require significant error handling code to accompany each call to -encodeToCommandBuffer:..., complicating your code. You may find it simplifies your code to provide a fallback MPSCopyAllocator so that the operation can proceed reliably even when it can not proceed in-place. When an in-place filter fails, the MPSCopyAllocator (if any) will be invoked to create a new texture in which to write the results, allowing the filter to proceed reliably out-of-place. The original texture will be released, replaced with a pointer to the new texture and YES will be returned. If the allocator returns an invalid texture, it is released, *texture remains unmodified and NO is returned.  Please see the MPSCopyAllocator definition for a sample allocator implementation. Sample usage with a copy allocator: @code id <MTLTexture> inPlaceTex = ...; MPSImageSobel *sobelFiler = [[MPSImageSobel alloc] initWithDevice: myDevice]; // With a fallback MPSCopyAllocator, failure should only occur in exceptional // conditions such as MTLTexture allocation failure or programmer error. // That is, the operation is roughly as robust as the MPSCopyAllocator. // Depending on the quality of that, we might decide we are justified here // in not checking the return value. [sobelFilter encodeToCommandBuffer: myCommandBuffer inPlaceTexture: &inPlaceTex  // may be replaced! fallbackCopyAllocator: myAllocator]; // If myAllocator was not called: // //      inPlaceTex holds the original texture with the result pixels in it // // else, // //      1) myAllocator creates a new texture. //      2) The new texture pixel data is overwritten by MPSUnaryImageKernel. //      3) The old texture passed in *inPlaceTex is released once. //      4) *inPlaceTex = the new texture // // In either case, the caller should now hold one reference to the texture now held in // inPlaceTex, whether it was replaced or not. Most of the time that means that nothing // further needs to be done here, and you can proceed to the next image encoding operation. // However, if other agents held references to the original texture, they still hold them // and may need to be alerted that the texture has been replaced so that they can retain // the new texture and release the old one. [sobelFilter release];  // if not ARC, clean up the MPSImageSobel object @endcode Note: Image filters that look at neighboring pixel values may actually consume more memory when operating in place than out of place. Many such operations are tiled internally to save intermediate texture storage, but can not tile when operating in place. The memory savings for tiling is however very short term, typically the lifetime of the MTLCommandBuffer. @abstract   Attempt to apply a MPSKernel to a texture in place. @param      commandBuffer       A valid MTLCommandBuffer to receive the encoded filter @param      texture             A pointer to a valid MTLTexture containing source image. On success, the image contents and possibly texture itself will be replaced with the result image. @param      copyAllocator       An optional block to allocate a new texture to hold the results, in case in-place operation is not possible. The allocator may use a different MTLPixelFormat or size than the original texture. You may enqueue operations on the provided MTLCommandBuffer using the provided MTLComputeCommandEncoder to initialize the texture contents. @return     On success, YES is returned. The texture may have been replaced with a new texture if a copyAllocator was provided.  On failure, NO is returned. The texture is unmodified.
-//
-// EncodeToCommandBufferInPlaceTextureFallbackCopyAllocator calls the underlying EncodeToCommandBufferInPlaceTextureFallbackCopyAllocator.
-func (x *UnaryImageKernel) EncodeToCommandBufferInPlaceTextureFallbackCopyAllocator(commandBuffer metal.MTLCommandBuffer, texture metal.MTLTexture, copyAllocator func() unsafe.Pointer) bool {
-	return x.inner.EncodeToCommandBufferInPlaceTextureFallbackCopyAllocator(commandBuffer, texture, copyAllocator)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UnaryImageKernel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @abstract   Encode a MPSKernel into a command Buffer.  The operation shall proceed out-of-place. @param      commandBuffer       A valid MTLCommandBuffer to receive the encoded filter @param      sourceTexture       A valid MTLTexture containing the source image. @param      destinationTexture  A valid MTLTexture to be overwritten by result image. DestinationTexture may not alias sourceTexture.
-//
-// EncodeToCommandBufferSourceTextureDestinationTexture calls the underlying EncodeToCommandBufferSourceTextureDestinationTexture.
-func (x *UnaryImageKernel) EncodeToCommandBufferSourceTextureDestinationTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, destinationTexture metal.MTLTexture) {
-	x.inner.EncodeToCommandBufferSourceTextureDestinationTexture(commandBuffer, sourceTexture, destinationTexture)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UnaryImageKernel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @abstract   Encode a MPSKernel into a command Buffer.  The operation shall proceed out-of-place. @param      commandBuffer       A valid MTLCommandBuffer to receive the encoded filter @param      sourceImage         A valid MPSImage containing the source image. @param      destinationImage    A valid MPSImage to be overwritten by result image. DestinationImage may not alias sourceImage.
-//
-// EncodeToCommandBufferSourceImageDestinationImage calls the underlying EncodeToCommandBufferSourceImageDestinationImage.
-func (x *UnaryImageKernel) EncodeToCommandBufferSourceImageDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, destinationImage *mpscore.MPSImage) {
-	x.inner.EncodeToCommandBufferSourceImageDestinationImage(commandBuffer, sourceImage, destinationImage)
+// NewUnaryImageKernel creates a new UnaryImageKernel.
+func NewUnaryImageKernel() *UnaryImageKernel {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSUnaryImageKernel")), objc.RegisterName("new"))
+	return unaryImageKernelAdopt(_id)
 }
-
-// sourceRegionForDestinationSize: is used to determine which region of the sourceTexture will be read by encodeToCommandBuffer:sourceTexture:destinationTexture (and similar) when the filter runs. This information may be needed if the source image is broken into multiple textures.  The size of the full (untiled) destination image is provided. The region of the full (untiled) source image that will be read is returned. You can then piece together an appropriate texture containing that information for use in your tiled context. The function will consult the MPSUnaryImageKernel offset and clipRect parameters, to determine the full region read by the function. Other parameters such as sourceClipRect, kernelHeight and kernelWidth will be consulted as necessary. All properties should be set to intended values prior to calling sourceRegionForDestinationSize:. Caution: This function operates using global image coordinates, but -encodeToCommandBuffer:... uses coordinates local to the source and destination image textures. Consequently, the offset and clipRect attached to this object will need to be updated using a global to local coordinate transform before -encodeToCommandBuffer:... is called. @abstract   Determine the region of the source texture that will be read for a encode operation @param      destinationSize The size of the full virtual destination image. @return     The area in the virtual source image that will be read.
-//
-// SourceRegionForDestinationSize calls the underlying SourceRegionForDestinationSize.
-func (x *UnaryImageKernel) SourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion {
-	return x.inner.SourceRegionForDestinationSize(destinationSize)
-}
-
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// Offset calls the underlying Offset.
-func (x *UnaryImageKernel) Offset() mpscore.MPSOffset {
-	return x.inner.Offset()
-}
-
-// SetOffset calls the underlying SetOffset.
-func (x *UnaryImageKernel) SetOffset(offset mpscore.MPSOffset) {
-	x.inner.SetOffset(offset)
-}
-
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// ClipRect calls the underlying ClipRect.
-func (x *UnaryImageKernel) ClipRect() metal.MTLRegion {
-	return x.inner.ClipRect()
-}
-
-// SetClipRect calls the underlying SetClipRect.
-func (x *UnaryImageKernel) SetClipRect(clipRect metal.MTLRegion) {
-	x.inner.SetClipRect(clipRect)
-}
-
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
-//
-// EdgeMode calls the underlying EdgeMode.
-func (x *UnaryImageKernel) EdgeMode() mpscore.MPSImageEdgeMode {
-	return x.inner.EdgeMode()
-}
-
-// SetEdgeMode calls the underlying SetEdgeMode.
-func (x *UnaryImageKernel) SetEdgeMode(edgeMode mpscore.MPSImageEdgeMode) {
-	x.inner.SetEdgeMode(edgeMode)
-}
-
-func (x *UnaryImageKernel) asUnaryImageKernel() *raw.MPSUnaryImageKernel { return x.inner }
 
 // UnaryImageKernelable is the interface implemented by [UnaryImageKernel], for mocking and DI.
 type UnaryImageKernelable interface {
-	Unwrap() *raw.MPSUnaryImageKernel
-	WithOffset(offset mpscore.MPSOffset) *UnaryImageKernel
-	WithClipRect(clipRect metal.MTLRegion) *UnaryImageKernel
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *UnaryImageKernel
-	EncodeToCommandBufferInPlaceTextureFallbackCopyAllocator(commandBuffer metal.MTLCommandBuffer, texture metal.MTLTexture, copyAllocator func() unsafe.Pointer) bool
-	EncodeToCommandBufferSourceTextureDestinationTexture(commandBuffer metal.MTLCommandBuffer, sourceTexture metal.MTLTexture, destinationTexture metal.MTLTexture)
-	EncodeToCommandBufferSourceImageDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, destinationImage *mpscore.MPSImage)
-	SourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion
-	Offset() mpscore.MPSOffset
-	SetOffset(offset mpscore.MPSOffset)
-	ClipRect() metal.MTLRegion
-	SetClipRect(clipRect metal.MTLRegion)
-	EdgeMode() mpscore.MPSImageEdgeMode
-	SetEdgeMode(edgeMode mpscore.MPSImageEdgeMode)
+	obj.Object
 }
 
 var _ UnaryImageKernelable = (*UnaryImageKernel)(nil)

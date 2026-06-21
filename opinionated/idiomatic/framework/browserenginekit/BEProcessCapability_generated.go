@@ -5,47 +5,66 @@
 package browserenginekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/browserenginekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ProcessCapability wraps [raw.BEProcessCapability] with a fluent Go API.
+// ProcessCapability is an idiomatic wrapper over the Objective-C class BEProcessCapability.
 type ProcessCapability struct {
-	inner *raw.BEProcessCapability
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.BEProcessCapability].
-func (x *ProcessCapability) Unwrap() *raw.BEProcessCapability { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProcessCapability) ID() objc.ID { return x.inner.Ptr() }
-
-// ProcessCapabilityFromID adopts an existing object pointer as a ProcessCapability (nil for 0).
+// ProcessCapabilityFromID adopts an existing Objective-C object as a ProcessCapability
+// (nil for 0), retaining it and registering a release finalizer.
 func ProcessCapabilityFromID(id objc.ID) *ProcessCapability {
 	if id == 0 {
 		return nil
 	}
-	return &ProcessCapability{inner: raw.BEProcessCapabilityFromID(id)}
+	x := &ProcessCapability{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewProcessCapability creates a new [ProcessCapability].
+// processCapabilityAdopt wraps an Objective-C object that this code just created as a
+// ProcessCapability (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func processCapabilityAdopt(id objc.ID) *ProcessCapability {
+	if id == 0 {
+		return nil
+	}
+	x := &ProcessCapability{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ProcessCapability) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ProcessCapability) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ProcessCapability) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewProcessCapability creates a new ProcessCapability.
 func NewProcessCapability() *ProcessCapability {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("BEProcessCapability")), objc.RegisterName("new"))
-	return &ProcessCapability{inner: raw.BEProcessCapabilityFromID(_id)}
-}
-
-// Requests the capability to be granted to the current process. Returns the granted capability or nil and an error if it can not be granted
-//
-// RequestWithError calls the underlying RequestWithError.
-func (x *ProcessCapability) RequestWithError() (raw.BEProcessCapabilityGrant, error) {
-	return x.inner.RequestWithError()
+	_id := objc.Send[objc.ID](objc.ID(_class("BEProcessCapability")), objc.RegisterName("new"))
+	return processCapabilityAdopt(_id)
 }
 
 // ProcessCapabilityable is the interface implemented by [ProcessCapability], for mocking and DI.
 type ProcessCapabilityable interface {
-	Unwrap() *raw.BEProcessCapability
-	RequestWithError() (raw.BEProcessCapabilityGrant, error)
+	obj.Object
 }
 
 var _ ProcessCapabilityable = (*ProcessCapability)(nil)

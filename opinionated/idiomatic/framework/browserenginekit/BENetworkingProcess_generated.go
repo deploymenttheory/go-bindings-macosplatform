@@ -5,75 +5,87 @@
 package browserenginekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/browserenginekit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An object that represents a networking extension process.
 //
-// NetworkingProcess wraps [raw.BENetworkingProcess] with a fluent Go API.
+// NetworkingProcess is an idiomatic wrapper over the Objective-C class BENetworkingProcess.
 type NetworkingProcess struct {
-	inner *raw.BENetworkingProcess
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.BENetworkingProcess].
-func (x *NetworkingProcess) Unwrap() *raw.BENetworkingProcess { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NetworkingProcess) ID() objc.ID { return x.inner.Ptr() }
-
-// NetworkingProcessFromID adopts an existing object pointer as a NetworkingProcess (nil for 0).
+// NetworkingProcessFromID adopts an existing Objective-C object as a NetworkingProcess
+// (nil for 0), retaining it and registering a release finalizer.
 func NetworkingProcessFromID(id objc.ID) *NetworkingProcess {
 	if id == 0 {
 		return nil
 	}
-	return &NetworkingProcess{inner: raw.BENetworkingProcessFromID(id)}
+	x := &NetworkingProcess{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNetworkingProcess creates a new [NetworkingProcess].
+// networkingProcessAdopt wraps an Objective-C object that this code just created as a
+// NetworkingProcess (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func networkingProcessAdopt(id objc.ID) *NetworkingProcess {
+	if id == 0 {
+		return nil
+	}
+	x := &NetworkingProcess{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NetworkingProcess) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NetworkingProcess) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NetworkingProcess) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNetworkingProcess creates a new NetworkingProcess.
 func NewNetworkingProcess() *NetworkingProcess {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("BENetworkingProcess")), objc.RegisterName("new"))
-	return &NetworkingProcess{inner: raw.BENetworkingProcessFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("BENetworkingProcess")), objc.RegisterName("new"))
+	return networkingProcessAdopt(_id)
 }
 
 // Stops the networking process.
-//
-// Invalidate calls the underlying Invalidate.
 func (x *NetworkingProcess) Invalidate() {
-	x.inner.Invalidate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
 // Creates a new XPC connection to the extension process.
-//
-// MakeLibXPCConnectionError calls the underlying MakeLibXPCConnectionError.
-func (x *NetworkingProcess) MakeLibXPCConnectionError() (*foundation.NSObject, error) {
-	return x.inner.MakeLibXPCConnectionError()
-}
-
-// Grants the specified capability to the process.
-//
-// GrantCapabilityError calls the underlying GrantCapabilityError.
-func (x *NetworkingProcess) GrantCapabilityError(capability *raw.BEProcessCapability) (raw.BEProcessCapabilityGrant, error) {
-	return x.inner.GrantCapabilityError(capability)
-}
-
-// Grants the specified capability to the process and observes an invalidation closure.
-//
-// GrantCapabilityErrorInvalidationHandler calls the underlying GrantCapabilityErrorInvalidationHandler.
-func (x *NetworkingProcess) GrantCapabilityErrorInvalidationHandler(capability *raw.BEProcessCapability, error_ unsafe.Pointer, invalidationHandler func()) raw.BEProcessCapabilityGrant {
-	return x.inner.GrantCapabilityErrorInvalidationHandler(capability, error_, invalidationHandler)
+func (x *NetworkingProcess) MakeLibXPCConnectionError() (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeLibXPCConnectionError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // NetworkingProcessable is the interface implemented by [NetworkingProcess], for mocking and DI.
 type NetworkingProcessable interface {
-	Unwrap() *raw.BENetworkingProcess
+	obj.Object
 	Invalidate()
-	MakeLibXPCConnectionError() (*foundation.NSObject, error)
-	GrantCapabilityError(capability *raw.BEProcessCapability) (raw.BEProcessCapabilityGrant, error)
-	GrantCapabilityErrorInvalidationHandler(capability *raw.BEProcessCapability, error_ unsafe.Pointer, invalidationHandler func()) raw.BEProcessCapabilityGrant
+	MakeLibXPCConnectionError() (obj.Object, error)
 }
 
 var _ NetworkingProcessable = (*NetworkingProcess)(nil)

@@ -5,80 +5,101 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDistinguishedNameInfo wraps [raw.MTRDistinguishedNameInfo] with a fluent Go API.
+// MTRDistinguishedNameInfo is an idiomatic wrapper over the Objective-C class MTRDistinguishedNameInfo.
 type MTRDistinguishedNameInfo struct {
-	inner *raw.MTRDistinguishedNameInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDistinguishedNameInfo].
-func (x *MTRDistinguishedNameInfo) Unwrap() *raw.MTRDistinguishedNameInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDistinguishedNameInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDistinguishedNameInfoFromID adopts an existing object pointer as a MTRDistinguishedNameInfo (nil for 0).
+// MTRDistinguishedNameInfoFromID adopts an existing Objective-C object as a MTRDistinguishedNameInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDistinguishedNameInfoFromID(id objc.ID) *MTRDistinguishedNameInfo {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDistinguishedNameInfo{inner: raw.MTRDistinguishedNameInfoFromID(id)}
+	x := &MTRDistinguishedNameInfo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRDistinguishedNameInfo creates a new [MTRDistinguishedNameInfo].
+// mTRDistinguishedNameInfoAdopt wraps an Objective-C object that this code just created as a
+// MTRDistinguishedNameInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDistinguishedNameInfoAdopt(id objc.ID) *MTRDistinguishedNameInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDistinguishedNameInfo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDistinguishedNameInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDistinguishedNameInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDistinguishedNameInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRDistinguishedNameInfo creates a new MTRDistinguishedNameInfo.
 func NewMTRDistinguishedNameInfo() *MTRDistinguishedNameInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDistinguishedNameInfo")), objc.RegisterName("new"))
-	return &MTRDistinguishedNameInfo{inner: raw.MTRDistinguishedNameInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDistinguishedNameInfo")), objc.RegisterName("new"))
+	return mTRDistinguishedNameInfoAdopt(_id)
 }
 
 // The Node ID contained in the DN, if any.  Will be non-nil for the subject of a valid node operational certificate.
-//
-// NodeID calls the underlying NodeID.
-func (x *MTRDistinguishedNameInfo) NodeID() *foundation.NSNumber {
-	return x.inner.NodeID()
+func (x *MTRDistinguishedNameInfo) NodeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeID"))
+	return obj.Wrap(_r)
 }
 
 // The Fabric ID contained in the DN, if any.  Will be non-nil for the subject of a valid node operational certificate, and may be non-nil for the subject of a valid intermediate or root certificate.
-//
-// FabricID calls the underlying FabricID.
-func (x *MTRDistinguishedNameInfo) FabricID() *foundation.NSNumber {
-	return x.inner.FabricID()
+func (x *MTRDistinguishedNameInfo) FabricID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricID"))
+	return obj.Wrap(_r)
 }
 
 // The `RCAC` ID contained in the DN, if any.  Will be non-nil for the subject of a valid root certificate.
-//
-// RootCACertificateID calls the underlying RootCACertificateID.
-func (x *MTRDistinguishedNameInfo) RootCACertificateID() *foundation.NSNumber {
-	return x.inner.RootCACertificateID()
+func (x *MTRDistinguishedNameInfo) RootCACertificateID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootCACertificateID"))
+	return obj.Wrap(_r)
 }
 
 // The `ICAC` ID contained in the DN, if any.  Will be non-nil for the subject of a valid intermediate certificate.
-//
-// IntermediateCACertificateID calls the underlying IntermediateCACertificateID.
-func (x *MTRDistinguishedNameInfo) IntermediateCACertificateID() *foundation.NSNumber {
-	return x.inner.IntermediateCACertificateID()
+func (x *MTRDistinguishedNameInfo) IntermediateCACertificateID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intermediateCACertificateID"))
+	return obj.Wrap(_r)
 }
 
 // The set of CASE Authenticated Tags contained in the DN.  Maybe be non-empty for the subject of a valid node operational certificate.
-//
-// CaseAuthenticatedTags calls the underlying CaseAuthenticatedTags.
-func (x *MTRDistinguishedNameInfo) CaseAuthenticatedTags() *foundation.NSSet[*foundation.NSNumber] {
-	return x.inner.CaseAuthenticatedTags()
+func (x *MTRDistinguishedNameInfo) CaseAuthenticatedTags() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("caseAuthenticatedTags"))
+	return obj.Wrap(_r)
 }
 
 // MTRDistinguishedNameInfoable is the interface implemented by [MTRDistinguishedNameInfo], for mocking and DI.
 type MTRDistinguishedNameInfoable interface {
-	Unwrap() *raw.MTRDistinguishedNameInfo
-	NodeID() *foundation.NSNumber
-	FabricID() *foundation.NSNumber
-	RootCACertificateID() *foundation.NSNumber
-	IntermediateCACertificateID() *foundation.NSNumber
-	CaseAuthenticatedTags() *foundation.NSSet[*foundation.NSNumber]
+	obj.Object
+	NodeID() obj.Object
+	FabricID() obj.Object
+	RootCACertificateID() obj.Object
+	IntermediateCACertificateID() obj.Object
+	CaseAuthenticatedTags() obj.Object
 }
 
 var _ MTRDistinguishedNameInfoable = (*MTRDistinguishedNameInfo)(nil)

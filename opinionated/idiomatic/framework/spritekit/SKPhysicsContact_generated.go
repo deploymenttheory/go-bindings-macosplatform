@@ -5,79 +5,85 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description of the contact between two physics bodies.
 //
-// PhysicsContact wraps [raw.SKPhysicsContact] with a fluent Go API.
+// PhysicsContact is an idiomatic wrapper over the Objective-C class SKPhysicsContact.
 type PhysicsContact struct {
-	inner *raw.SKPhysicsContact
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKPhysicsContact].
-func (x *PhysicsContact) Unwrap() *raw.SKPhysicsContact { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhysicsContact) ID() objc.ID { return x.inner.Ptr() }
-
-// PhysicsContactFromID adopts an existing object pointer as a PhysicsContact (nil for 0).
+// PhysicsContactFromID adopts an existing Objective-C object as a PhysicsContact
+// (nil for 0), retaining it and registering a release finalizer.
 func PhysicsContactFromID(id objc.ID) *PhysicsContact {
 	if id == 0 {
 		return nil
 	}
-	return &PhysicsContact{inner: raw.SKPhysicsContactFromID(id)}
+	x := &PhysicsContact{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPhysicsContact creates a new [PhysicsContact].
+// physicsContactAdopt wraps an Objective-C object that this code just created as a
+// PhysicsContact (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func physicsContactAdopt(id objc.ID) *PhysicsContact {
+	if id == 0 {
+		return nil
+	}
+	x := &PhysicsContact{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PhysicsContact) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PhysicsContact) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PhysicsContact) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPhysicsContact creates a new PhysicsContact.
 func NewPhysicsContact() *PhysicsContact {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKPhysicsContact")), objc.RegisterName("new"))
-	return &PhysicsContact{inner: raw.SKPhysicsContactFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKPhysicsContact")), objc.RegisterName("new"))
+	return physicsContactAdopt(_id)
 }
 
-// BodyA calls the underlying BodyA.
 func (x *PhysicsContact) BodyA() *PhysicsBody {
-	_r := x.inner.BodyA()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyA"))
+	return PhysicsBodyFromID(_r)
 }
 
-// BodyB calls the underlying BodyB.
 func (x *PhysicsContact) BodyB() *PhysicsBody {
-	_r := x.inner.BodyB()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyB"))
+	return PhysicsBodyFromID(_r)
 }
 
-// ContactPoint calls the underlying ContactPoint.
-func (x *PhysicsContact) ContactPoint() corefoundation.CGPoint {
-	return x.inner.ContactPoint()
-}
-
-// ContactNormal calls the underlying ContactNormal.
-func (x *PhysicsContact) ContactNormal() corefoundation.CGVector {
-	return x.inner.ContactNormal()
-}
-
-// CollisionImpulse calls the underlying CollisionImpulse.
 func (x *PhysicsContact) CollisionImpulse() float64 {
-	return x.inner.CollisionImpulse()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("collisionImpulse"))
+	return _r
 }
 
 // PhysicsContactable is the interface implemented by [PhysicsContact], for mocking and DI.
 type PhysicsContactable interface {
-	Unwrap() *raw.SKPhysicsContact
+	obj.Object
 	BodyA() *PhysicsBody
 	BodyB() *PhysicsBody
-	ContactPoint() corefoundation.CGPoint
-	ContactNormal() corefoundation.CGVector
 	CollisionImpulse() float64
 }
 

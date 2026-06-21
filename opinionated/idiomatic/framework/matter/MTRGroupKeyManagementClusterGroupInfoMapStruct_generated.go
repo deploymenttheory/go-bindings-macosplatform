@@ -5,116 +5,134 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRGroupKeyManagementClusterGroupInfoMapStruct wraps [raw.MTRGroupKeyManagementClusterGroupInfoMapStruct] with a fluent Go API.
+// MTRGroupKeyManagementClusterGroupInfoMapStruct is an idiomatic wrapper over the Objective-C class MTRGroupKeyManagementClusterGroupInfoMapStruct.
 type MTRGroupKeyManagementClusterGroupInfoMapStruct struct {
-	inner *raw.MTRGroupKeyManagementClusterGroupInfoMapStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRGroupKeyManagementClusterGroupInfoMapStruct].
-func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) Unwrap() *raw.MTRGroupKeyManagementClusterGroupInfoMapStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRGroupKeyManagementClusterGroupInfoMapStructFromID adopts an existing object pointer as a MTRGroupKeyManagementClusterGroupInfoMapStruct (nil for 0).
+// MTRGroupKeyManagementClusterGroupInfoMapStructFromID adopts an existing Objective-C object as a MTRGroupKeyManagementClusterGroupInfoMapStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRGroupKeyManagementClusterGroupInfoMapStructFromID(id objc.ID) *MTRGroupKeyManagementClusterGroupInfoMapStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRGroupKeyManagementClusterGroupInfoMapStruct{inner: raw.MTRGroupKeyManagementClusterGroupInfoMapStructFromID(id)}
+	x := &MTRGroupKeyManagementClusterGroupInfoMapStruct{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRGroupKeyManagementClusterGroupInfoMapStruct creates a new [MTRGroupKeyManagementClusterGroupInfoMapStruct].
+// mTRGroupKeyManagementClusterGroupInfoMapStructAdopt wraps an Objective-C object that this code just created as a
+// MTRGroupKeyManagementClusterGroupInfoMapStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRGroupKeyManagementClusterGroupInfoMapStructAdopt(id objc.ID) *MTRGroupKeyManagementClusterGroupInfoMapStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRGroupKeyManagementClusterGroupInfoMapStruct{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRGroupKeyManagementClusterGroupInfoMapStruct creates a new MTRGroupKeyManagementClusterGroupInfoMapStruct.
 func NewMTRGroupKeyManagementClusterGroupInfoMapStruct() *MTRGroupKeyManagementClusterGroupInfoMapStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGroupKeyManagementClusterGroupInfoMapStruct")), objc.RegisterName("new"))
-	return &MTRGroupKeyManagementClusterGroupInfoMapStruct{inner: raw.MTRGroupKeyManagementClusterGroupInfoMapStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRGroupKeyManagementClusterGroupInfoMapStruct")), objc.RegisterName("new"))
+	return mTRGroupKeyManagementClusterGroupInfoMapStructAdopt(_id)
 }
 
-// WithGroupId sets the groupId property and returns the receiver for chaining.
-func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) WithGroupId(groupId *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupInfoMapStruct {
-	x.inner.SetGroupId(groupId)
+// WithGroupId sets groupId and returns the receiver so calls can be chained.
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) WithGroupId(groupId obj.Object) *MTRGroupKeyManagementClusterGroupInfoMapStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupId:"), objref.IDOf(groupId))
 	return x
 }
 
-// WithGroupName sets the groupName property and returns the receiver for chaining.
+// WithGroupName sets groupName and returns the receiver so calls can be chained.
 func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) WithGroupName(groupName string) *MTRGroupKeyManagementClusterGroupInfoMapStruct {
-	x.inner.SetGroupName(foundation.NSStringStringWithUTF8String(groupName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupName:"), purego.NSString(groupName))
 	return x
 }
 
-// WithFabricIndex sets the fabricIndex property and returns the receiver for chaining.
-func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupInfoMapStruct {
-	x.inner.SetFabricIndex(fabricIndex)
+// WithFabricIndex sets fabricIndex and returns the receiver so calls can be chained.
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) WithFabricIndex(fabricIndex obj.Object) *MTRGroupKeyManagementClusterGroupInfoMapStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return x
 }
 
-// GroupId calls the underlying GroupId.
-func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) GroupId() *foundation.NSNumber {
-	return x.inner.GroupId()
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) GroupId() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupId"))
+	return obj.Wrap(_r)
 }
 
-// SetGroupId calls the underlying SetGroupId.
-func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetGroupId(groupId *foundation.NSNumber) {
-	x.inner.SetGroupId(groupId)
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetGroupId(groupId obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupId:"), objref.IDOf(groupId))
 }
 
-// Endpoints calls the underlying Endpoints.
-func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) Endpoints() *foundation.NSArray[objc.ID] {
-	return x.inner.Endpoints()
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) Endpoints() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoints"))
+	return obj.Wrap(_r)
 }
 
-// SetEndpoints calls the underlying SetEndpoints.
-func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetEndpoints(endpoints *foundation.NSArray[objc.ID]) {
-	x.inner.SetEndpoints(endpoints)
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetEndpoints(endpoints obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoints:"), objref.IDOf(endpoints))
 }
 
-// GroupName calls the underlying GroupName.
 func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) GroupName() string {
-	_r := x.inner.GroupName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetGroupName calls the underlying SetGroupName.
 func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetGroupName(groupName string) {
-	x.inner.SetGroupName(foundation.NSStringStringWithUTF8String(groupName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupName:"), purego.NSString(groupName))
 }
 
-// FabricIndex calls the underlying FabricIndex.
-func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) FabricIndex() *foundation.NSNumber {
-	return x.inner.FabricIndex()
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+	return obj.Wrap(_r)
 }
 
-// SetFabricIndex calls the underlying SetFabricIndex.
-func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
-	x.inner.SetFabricIndex(fabricIndex)
+func (x *MTRGroupKeyManagementClusterGroupInfoMapStruct) SetFabricIndex(fabricIndex obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 }
 
 // MTRGroupKeyManagementClusterGroupInfoMapStructable is the interface implemented by [MTRGroupKeyManagementClusterGroupInfoMapStruct], for mocking and DI.
 type MTRGroupKeyManagementClusterGroupInfoMapStructable interface {
-	Unwrap() *raw.MTRGroupKeyManagementClusterGroupInfoMapStruct
-	WithGroupId(groupId *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupInfoMapStruct
+	obj.Object
+	WithGroupId(groupId obj.Object) *MTRGroupKeyManagementClusterGroupInfoMapStruct
 	WithGroupName(groupName string) *MTRGroupKeyManagementClusterGroupInfoMapStruct
-	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTRGroupKeyManagementClusterGroupInfoMapStruct
-	GroupId() *foundation.NSNumber
-	SetGroupId(groupId *foundation.NSNumber)
-	Endpoints() *foundation.NSArray[objc.ID]
-	SetEndpoints(endpoints *foundation.NSArray[objc.ID])
+	WithFabricIndex(fabricIndex obj.Object) *MTRGroupKeyManagementClusterGroupInfoMapStruct
+	GroupId() obj.Object
+	SetGroupId(groupId obj.Object)
+	Endpoints() obj.Object
+	SetEndpoints(endpoints obj.Object)
 	GroupName() string
 	SetGroupName(groupName string)
-	FabricIndex() *foundation.NSNumber
-	SetFabricIndex(fabricIndex *foundation.NSNumber)
+	FabricIndex() obj.Object
+	SetFabricIndex(fabricIndex obj.Object)
 }
 
 var _ MTRGroupKeyManagementClusterGroupInfoMapStructable = (*MTRGroupKeyManagementClusterGroupInfoMapStruct)(nil)

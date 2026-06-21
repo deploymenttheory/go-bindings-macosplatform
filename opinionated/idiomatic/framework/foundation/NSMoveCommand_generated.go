@@ -5,125 +5,143 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A command that moves one or more scriptable objects.
 //
-// MoveCommand wraps [raw.NSMoveCommand] with a fluent Go API.
+// MoveCommand is an idiomatic wrapper over the Objective-C class NSMoveCommand.
 type MoveCommand struct {
-	inner *raw.NSMoveCommand
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSMoveCommand].
-func (x *MoveCommand) Unwrap() *raw.NSMoveCommand { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MoveCommand) ID() objc.ID { return x.inner.Ptr() }
-
-// MoveCommandFromID adopts an existing object pointer as a MoveCommand (nil for 0).
+// MoveCommandFromID adopts an existing Objective-C object as a MoveCommand
+// (nil for 0), retaining it and registering a release finalizer.
 func MoveCommandFromID(id objc.ID) *MoveCommand {
 	if id == 0 {
 		return nil
 	}
-	return &MoveCommand{inner: raw.NSMoveCommandFromID(id)}
+	x := &MoveCommand{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMoveCommand creates a new [MoveCommand].
+// moveCommandAdopt wraps an Objective-C object that this code just created as a
+// MoveCommand (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func moveCommandAdopt(id objc.ID) *MoveCommand {
+	if id == 0 {
+		return nil
+	}
+	x := &MoveCommand{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MoveCommand) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MoveCommand) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MoveCommand) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMoveCommand creates a new MoveCommand.
 func NewMoveCommand() *MoveCommand {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMoveCommand")), objc.RegisterName("new"))
-	return &MoveCommand{inner: raw.NSMoveCommandFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSMoveCommand")), objc.RegisterName("new"))
+	return moveCommandAdopt(_id)
 }
 
 // Sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
 //
-// WithDirectParameter sets the directParameter property and returns the receiver for chaining.
-func (x *MoveCommand) WithDirectParameter(directParameter objc.ID) *MoveCommand {
-	x.inner.NSScriptCommand.SetDirectParameter(directParameter)
+// WithDirectParameter sets directParameter and returns the receiver so calls can be chained.
+func (x *MoveCommand) WithDirectParameter(directParameter obj.Object) *MoveCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
 	return x
 }
 
 // Sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
 //
-// WithReceiversSpecifier sets the receiversSpecifier property and returns the receiver for chaining.
+// WithReceiversSpecifier sets receiversSpecifier and returns the receiver so calls can be chained.
 func (x *MoveCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *MoveCommand {
-	x.inner.NSScriptCommand.SetReceiversSpecifier(receiversSpecifier.asScriptObjectSpecifier())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
 	return x
 }
 
 // Sets the arguments of the command to args.
 //
-// WithArguments sets the arguments property and returns the receiver for chaining.
-func (x *MoveCommand) WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *MoveCommand {
-	x.inner.NSScriptCommand.SetArguments(arguments)
+// WithArguments sets arguments and returns the receiver so calls can be chained.
+func (x *MoveCommand) WithArguments(arguments obj.Object) *MoveCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
 	return x
 }
 
 // Sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
 //
-// WithScriptErrorNumber sets the scriptErrorNumber property and returns the receiver for chaining.
+// WithScriptErrorNumber sets scriptErrorNumber and returns the receiver so calls can be chained.
 func (x *MoveCommand) WithScriptErrorNumber(scriptErrorNumber int) *MoveCommand {
-	x.inner.NSScriptCommand.SetScriptErrorNumber(scriptErrorNumber)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorNumber:"), scriptErrorNumber)
 	return x
 }
 
 // Sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 //
-// WithScriptErrorOffendingObjectDescriptor sets the scriptErrorOffendingObjectDescriptor property and returns the receiver for chaining.
+// WithScriptErrorOffendingObjectDescriptor sets scriptErrorOffendingObjectDescriptor and returns the receiver so calls can be chained.
 func (x *MoveCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *MoveCommand {
-	x.inner.NSScriptCommand.SetScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
 	return x
 }
 
 // Sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 //
-// WithScriptErrorExpectedTypeDescriptor sets the scriptErrorExpectedTypeDescriptor property and returns the receiver for chaining.
+// WithScriptErrorExpectedTypeDescriptor sets scriptErrorExpectedTypeDescriptor and returns the receiver so calls can be chained.
 func (x *MoveCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *MoveCommand {
-	x.inner.NSScriptCommand.SetScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
 	return x
 }
 
 // Sets a script error string that is associated with execution of the command.
 //
-// WithScriptErrorString sets the scriptErrorString property and returns the receiver for chaining.
-func (x *MoveCommand) WithScriptErrorString(scriptErrorString string) *MoveCommand {
-	x.inner.NSScriptCommand.SetScriptErrorString(foundation.NSStringStringWithUTF8String(scriptErrorString))
+// WithScriptErrorString sets scriptErrorString and returns the receiver so calls can be chained.
+func (x *MoveCommand) WithScriptErrorString(scriptErrorString StringProvider) *MoveCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MoveCommand) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MoveCommand {
-	x.inner.NSScriptCommand.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *MoveCommand) WithScriptingProperties(scriptingProperties obj.Object) *MoveCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// KeySpecifier calls the underlying KeySpecifier.
 func (x *MoveCommand) KeySpecifier() *ScriptObjectSpecifier {
-	_r := x.inner.KeySpecifier()
-	if _r == nil {
-		return nil
-	}
-	return &ScriptObjectSpecifier{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keySpecifier"))
+	return ScriptObjectSpecifierFromID(_r)
 }
-
-func (x *MoveCommand) asScriptCommand() *raw.NSScriptCommand { return &x.inner.NSScriptCommand }
-
-func (x *MoveCommand) asObject() *raw.NSObject { return &x.inner.NSScriptCommand.NSObject }
 
 // MoveCommandable is the interface implemented by [MoveCommand], for mocking and DI.
 type MoveCommandable interface {
-	Unwrap() *raw.NSMoveCommand
-	WithDirectParameter(directParameter objc.ID) *MoveCommand
+	obj.Object
+	WithDirectParameter(directParameter obj.Object) *MoveCommand
 	WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *MoveCommand
-	WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *MoveCommand
+	WithArguments(arguments obj.Object) *MoveCommand
 	WithScriptErrorNumber(scriptErrorNumber int) *MoveCommand
 	WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *MoveCommand
 	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *MoveCommand
-	WithScriptErrorString(scriptErrorString string) *MoveCommand
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MoveCommand
+	WithScriptErrorString(scriptErrorString StringProvider) *MoveCommand
+	WithScriptingProperties(scriptingProperties obj.Object) *MoveCommand
 	KeySpecifier() *ScriptObjectSpecifier
 }
 

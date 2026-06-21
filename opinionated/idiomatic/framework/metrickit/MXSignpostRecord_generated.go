@@ -5,114 +5,133 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object representing the record for a signpost interval or event.
 //
-// SignpostRecord wraps [raw.MXSignpostRecord] with a fluent Go API.
+// SignpostRecord is an idiomatic wrapper over the Objective-C class MXSignpostRecord.
 type SignpostRecord struct {
-	inner *raw.MXSignpostRecord
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MXSignpostRecord].
-func (x *SignpostRecord) Unwrap() *raw.MXSignpostRecord { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SignpostRecord) ID() objc.ID { return x.inner.Ptr() }
-
-// SignpostRecordFromID adopts an existing object pointer as a SignpostRecord (nil for 0).
+// SignpostRecordFromID adopts an existing Objective-C object as a SignpostRecord
+// (nil for 0), retaining it and registering a release finalizer.
 func SignpostRecordFromID(id objc.ID) *SignpostRecord {
 	if id == 0 {
 		return nil
 	}
-	return &SignpostRecord{inner: raw.MXSignpostRecordFromID(id)}
+	x := &SignpostRecord{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSignpostRecord creates a new [SignpostRecord].
+// signpostRecordAdopt wraps an Objective-C object that this code just created as a
+// SignpostRecord (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func signpostRecordAdopt(id objc.ID) *SignpostRecord {
+	if id == 0 {
+		return nil
+	}
+	x := &SignpostRecord{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SignpostRecord) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SignpostRecord) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SignpostRecord) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSignpostRecord creates a new SignpostRecord.
 func NewSignpostRecord() *SignpostRecord {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXSignpostRecord")), objc.RegisterName("new"))
-	return &SignpostRecord{inner: raw.MXSignpostRecordFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXSignpostRecord")), objc.RegisterName("new"))
+	return signpostRecordAdopt(_id)
 }
 
-// @method        JSONRepresentation @abstract      Convenience method to return a JSON representation of this SignpostRecord. @result        An NSData object containing the JSON representation
-//
-// JSONRepresentation calls the underlying JSONRepresentation.
-func (x *SignpostRecord) JSONRepresentation() *foundation.NSData {
-	return x.inner.JSONRepresentation()
+// Convenience method to return a JSON representation of this SignpostRecord.
+func (x *SignpostRecord) JSONRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
+	return obj.Wrap(_r)
 }
 
-// @method        dictionaryRepresentation @abstract      Convenience method to return a NSDictionary representation of this SignpostRecord. @result        An NSDictionary object containing the dictionary representation
-//
-// DictionaryRepresentation calls the underlying DictionaryRepresentation.
-func (x *SignpostRecord) DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.DictionaryRepresentation()
+// Convenience method to return a NSDictionary representation of this SignpostRecord.
+func (x *SignpostRecord) DictionaryRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
+	return obj.Wrap(_r)
 }
 
-// @property      subsystem @abstract      An NSString representation of the subsystem of the signpost instance.
-//
-// Subsystem calls the underlying Subsystem.
+// An NSString representation of the subsystem of the signpost instance.
 func (x *SignpostRecord) Subsystem() string {
-	_r := x.inner.Subsystem()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subsystem"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Category calls the underlying Category.
 func (x *SignpostRecord) Category() string {
-	_r := x.inner.Category()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("category"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Name calls the underlying Name.
 func (x *SignpostRecord) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// BeginTimeStamp calls the underlying BeginTimeStamp.
-func (x *SignpostRecord) BeginTimeStamp() *foundation.NSDate {
-	return x.inner.BeginTimeStamp()
+func (x *SignpostRecord) BeginTimeStamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginTimeStamp"))
+	return obj.Wrap(_r)
 }
 
-// EndTimeStamp calls the underlying EndTimeStamp.
-func (x *SignpostRecord) EndTimeStamp() *foundation.NSDate {
-	return x.inner.EndTimeStamp()
+func (x *SignpostRecord) EndTimeStamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endTimeStamp"))
+	return obj.Wrap(_r)
 }
 
-// Duration calls the underlying Duration.
-func (x *SignpostRecord) Duration() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	return x.inner.Duration()
+func (x *SignpostRecord) Duration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
+	return obj.Wrap(_r)
 }
 
-// IsInterval calls the underlying IsInterval.
 func (x *SignpostRecord) IsInterval() bool {
-	return x.inner.IsInterval()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInterval"))
+	return _r
 }
 
 // SignpostRecordable is the interface implemented by [SignpostRecord], for mocking and DI.
 type SignpostRecordable interface {
-	Unwrap() *raw.MXSignpostRecord
-	JSONRepresentation() *foundation.NSData
-	DictionaryRepresentation() *foundation.NSDictionary[objc.ID, objc.ID]
+	obj.Object
+	JSONRepresentation() obj.Object
+	DictionaryRepresentation() obj.Object
 	Subsystem() string
 	Category() string
 	Name() string
-	BeginTimeStamp() *foundation.NSDate
-	EndTimeStamp() *foundation.NSDate
-	Duration() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+	BeginTimeStamp() obj.Object
+	EndTimeStamp() obj.Object
+	Duration() obj.Object
 	IsInterval() bool
 }
 

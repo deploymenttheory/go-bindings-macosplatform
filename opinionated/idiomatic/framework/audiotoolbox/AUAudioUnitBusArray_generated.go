@@ -5,135 +5,134 @@
 package audiotoolbox
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // A class that defines a container for an audio unit’s input or output busses.
 //
-// AudioUnitBusArray wraps [raw.AUAudioUnitBusArray] with a fluent Go API.
+// AudioUnitBusArray is an idiomatic wrapper over the Objective-C class AUAudioUnitBusArray.
 type AudioUnitBusArray struct {
-	inner *raw.AUAudioUnitBusArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AUAudioUnitBusArray].
-func (x *AudioUnitBusArray) Unwrap() *raw.AUAudioUnitBusArray { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioUnitBusArray) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioUnitBusArrayFromID adopts an existing object pointer as a AudioUnitBusArray (nil for 0).
+// AudioUnitBusArrayFromID adopts an existing Objective-C object as a AudioUnitBusArray
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioUnitBusArrayFromID(id objc.ID) *AudioUnitBusArray {
 	if id == 0 {
 		return nil
 	}
-	return &AudioUnitBusArray{inner: raw.AUAudioUnitBusArrayFromID(id)}
+	x := &AudioUnitBusArray{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// audioUnitBusArrayAdopt wraps an Objective-C object that this code just created as a
+// AudioUnitBusArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioUnitBusArrayAdopt(id objc.ID) *AudioUnitBusArray {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioUnitBusArray{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudioUnitBusArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioUnitBusArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioUnitBusArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a bus array by making a copy of the supplied busses.
 //
-// NewAudioUnitBusArrayWithAudioUnitBusTypeBusses creates a new [AudioUnitBusArray].
-func NewAudioUnitBusArrayWithAudioUnitBusTypeBusses(owner *raw.AUAudioUnit, busType AUAudioUnitBusType, busArray *foundation.NSArray[*raw.AUAudioUnitBus]) *AudioUnitBusArray {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AUAudioUnitBusArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioUnit:busType:busses:"), owner.Ptr(), raw.AUAudioUnitBusType(busType), busArray.Ptr())
-	return &AudioUnitBusArray{inner: raw.AUAudioUnitBusArrayFromID(_id)}
+// NewAudioUnitBusArrayWithAudioUnitBusTypeBusses creates a new AudioUnitBusArray.
+func NewAudioUnitBusArrayWithAudioUnitBusTypeBusses(owner *AudioUnit, busType AudioUnitBusType, busArray []*AudioUnitBus) *AudioUnitBusArray {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AUAudioUnitBusArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioUnit:busType:busses:"), objref.IDOf(owner), busType, purego.SliceToNSArray(busArray, func(_v *AudioUnitBus) objc.ID { return objref.IDOf(_v) }))
+	return audioUnitBusArrayAdopt(_id)
 }
 
 // Initializes an empty bus array.
 //
-// NewAudioUnitBusArrayWithAudioUnitBusType creates a new [AudioUnitBusArray].
-func NewAudioUnitBusArrayWithAudioUnitBusType(owner *raw.AUAudioUnit, busType AUAudioUnitBusType) *AudioUnitBusArray {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AUAudioUnitBusArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioUnit:busType:"), owner.Ptr(), raw.AUAudioUnitBusType(busType))
-	return &AudioUnitBusArray{inner: raw.AUAudioUnitBusArrayFromID(_id)}
+// NewAudioUnitBusArrayWithAudioUnitBusType creates a new AudioUnitBusArray.
+func NewAudioUnitBusArrayWithAudioUnitBusType(owner *AudioUnit, busType AudioUnitBusType) *AudioUnitBusArray {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AUAudioUnitBusArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAudioUnit:busType:"), objref.IDOf(owner), busType)
+	return audioUnitBusArrayAdopt(_id)
 }
 
 // Returns the bus at the specified index.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *AudioUnitBusArray) ObjectAtIndexedSubscript(index uint) *AudioUnitBus {
-	_r := x.inner.ObjectAtIndexedSubscript(index)
-	if _r == nil {
-		return nil
-	}
-	return &AudioUnitBus{inner: _r}
+func (x *AudioUnitBusArray) ObjectAtIndexedSubscript(index int) *AudioUnitBus {
+	errkit.CheckIndex(index, x.Count())
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
+	return AudioUnitBusFromID(_r)
 }
 
 // Changes the number of busses in the array.
-//
-// SetBusCountError calls the underlying SetBusCountError.
-func (x *AudioUnitBusArray) SetBusCountError(count uint) (bool, error) {
-	return x.inner.SetBusCountError(count)
+func (x *AudioUnitBusArray) SetBusCount(count int) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setBusCount:error:"), count, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// Adds a KVO observer for a given property on all busses in the array.
-//
-// AddObserverToAllBussesForKeyPathOptionsContext calls the underlying AddObserverToAllBussesForKeyPathOptionsContext.
-func (x *AudioUnitBusArray) AddObserverToAllBussesForKeyPathOptionsContext(observer *foundation.NSObject, keyPath string, options foundation.NSKeyValueObservingOptions, context_ unsafe.Pointer) {
-	x.inner.AddObserverToAllBussesForKeyPathOptionsContext(observer, foundation.NSStringStringWithUTF8String(keyPath), options, context_)
+func (x *AudioUnitBusArray) Count() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+	return _r
 }
 
-// Removes a KVO observer for a given property on all busses in the array.
-//
-// RemoveObserverFromAllBussesForKeyPathContext calls the underlying RemoveObserverFromAllBussesForKeyPathContext.
-func (x *AudioUnitBusArray) RemoveObserverFromAllBussesForKeyPathContext(observer *foundation.NSObject, keyPath string, context_ unsafe.Pointer) {
-	x.inner.RemoveObserverFromAllBussesForKeyPathContext(observer, foundation.NSStringStringWithUTF8String(keyPath), context_)
-}
-
-// @property	count
-//
-// Count calls the underlying Count.
-func (x *AudioUnitBusArray) Count() uint {
-	return x.inner.Count()
-}
-
-// @property	countChangeable @brief		Whether the array can have a variable number of busses. @discussion The base implementation returns false.
-//
-// IsCountChangeable calls the underlying IsCountChangeable.
+// Whether the array can have a variable number of busses. The base implementation returns false.
 func (x *AudioUnitBusArray) IsCountChangeable() bool {
-	return x.inner.IsCountChangeable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCountChangeable"))
+	return _r
 }
 
 // The audio unit that owns the bus.
-//
-// OwnerAudioUnit calls the underlying OwnerAudioUnit.
 func (x *AudioUnitBusArray) OwnerAudioUnit() *AudioUnit {
-	_r := x.inner.OwnerAudioUnit()
-	if _r == nil {
-		return nil
-	}
-	return &AudioUnit{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerAudioUnit"))
+	return AudioUnitFromID(_r)
 }
 
 // Which bus array this is (input or output).
-//
-// BusType calls the underlying BusType.
-func (x *AudioUnitBusArray) BusType() AUAudioUnitBusType {
-	return AUAudioUnitBusType(x.inner.BusType())
+func (x *AudioUnitBusArray) BusType() AudioUnitBusType {
+	_r := objc.Send[AudioUnitBusType](objref.IDOf(x), objc.RegisterName("busType"))
+	return _r
 }
 
 // Replaces the current bus array with a copy of the supplied bus array.
-//
-// ReplaceBusses calls the underlying ReplaceBusses.
-func (x *AudioUnitBusArray) ReplaceBusses(busArray *foundation.NSArray[*raw.AUAudioUnitBus]) {
-	x.inner.ReplaceBusses(busArray)
+func (x *AudioUnitBusArray) ReplaceBusses(busArray []*AudioUnitBus) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceBusses:"), purego.SliceToNSArray(busArray, func(_v *AudioUnitBus) objc.ID { return objref.IDOf(_v) }))
 }
 
 // AudioUnitBusArrayable is the interface implemented by [AudioUnitBusArray], for mocking and DI.
 type AudioUnitBusArrayable interface {
-	Unwrap() *raw.AUAudioUnitBusArray
-	ObjectAtIndexedSubscript(index uint) *AudioUnitBus
-	SetBusCountError(count uint) (bool, error)
-	AddObserverToAllBussesForKeyPathOptionsContext(observer *foundation.NSObject, keyPath string, options foundation.NSKeyValueObservingOptions, context_ unsafe.Pointer)
-	RemoveObserverFromAllBussesForKeyPathContext(observer *foundation.NSObject, keyPath string, context_ unsafe.Pointer)
-	Count() uint
+	obj.Object
+	ObjectAtIndexedSubscript(index int) *AudioUnitBus
+	SetBusCount(count int) error
+	Count() int
 	IsCountChangeable() bool
 	OwnerAudioUnit() *AudioUnit
-	BusType() AUAudioUnitBusType
-	ReplaceBusses(busArray *foundation.NSArray[*raw.AUAudioUnitBus])
+	BusType() AudioUnitBusType
+	ReplaceBusses(busArray []*AudioUnitBus)
 }
 
 var _ AudioUnitBusArrayable = (*AudioUnitBusArray)(nil)

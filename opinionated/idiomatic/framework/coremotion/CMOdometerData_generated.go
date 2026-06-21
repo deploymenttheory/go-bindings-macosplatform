@@ -5,115 +5,104 @@
 package coremotion
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A class that represents odometer data for workouts.
 //
-// OdometerData wraps [raw.CMOdometerData] with a fluent Go API.
+// OdometerData is an idiomatic wrapper over the Objective-C class CMOdometerData.
 type OdometerData struct {
-	inner *raw.CMOdometerData
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CMOdometerData].
-func (x *OdometerData) Unwrap() *raw.CMOdometerData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OdometerData) ID() objc.ID { return x.inner.Ptr() }
-
-// OdometerDataFromID adopts an existing object pointer as a OdometerData (nil for 0).
+// OdometerDataFromID adopts an existing Objective-C object as a OdometerData
+// (nil for 0), retaining it and registering a release finalizer.
 func OdometerDataFromID(id objc.ID) *OdometerData {
 	if id == 0 {
 		return nil
 	}
-	return &OdometerData{inner: raw.CMOdometerDataFromID(id)}
+	x := &OdometerData{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewOdometerData creates a new [OdometerData].
+// odometerDataAdopt wraps an Objective-C object that this code just created as a
+// OdometerData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func odometerDataAdopt(id objc.ID) *OdometerData {
+	if id == 0 {
+		return nil
+	}
+	x := &OdometerData{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *OdometerData) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *OdometerData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *OdometerData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewOdometerData creates a new OdometerData.
 func NewOdometerData() *OdometerData {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CMOdometerData")), objc.RegisterName("new"))
-	return &OdometerData{inner: raw.CMOdometerDataFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CMOdometerData")), objc.RegisterName("new"))
+	return odometerDataAdopt(_id)
 }
 
-// StartDate calls the underlying StartDate.
-func (x *OdometerData) StartDate() *foundation.NSDate {
-	return x.inner.StartDate()
+func (x *OdometerData) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+	return obj.Wrap(_r)
 }
 
-// EndDate calls the underlying EndDate.
-func (x *OdometerData) EndDate() *foundation.NSDate {
-	return x.inner.EndDate()
+func (x *OdometerData) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+	return obj.Wrap(_r)
 }
 
-// DeltaDistance calls the underlying DeltaDistance.
-func (x *OdometerData) DeltaDistance() unsafe.Pointer {
-	return x.inner.DeltaDistance()
+func (x *OdometerData) GpsDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gpsDate"))
+	return obj.Wrap(_r)
 }
 
-// DeltaDistanceAccuracy calls the underlying DeltaDistanceAccuracy.
-func (x *OdometerData) DeltaDistanceAccuracy() unsafe.Pointer {
-	return x.inner.DeltaDistanceAccuracy()
+func (x *OdometerData) OriginDevice() OdometerOriginDevice {
+	_r := objc.Send[OdometerOriginDevice](objref.IDOf(x), objc.RegisterName("originDevice"))
+	return _r
 }
 
-// Speed calls the underlying Speed.
-func (x *OdometerData) Speed() unsafe.Pointer {
-	return x.inner.Speed()
+func (x *OdometerData) Slope() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slope"))
+	return obj.Wrap(_r)
 }
 
-// SpeedAccuracy calls the underlying SpeedAccuracy.
-func (x *OdometerData) SpeedAccuracy() unsafe.Pointer {
-	return x.inner.SpeedAccuracy()
-}
-
-// GpsDate calls the underlying GpsDate.
-func (x *OdometerData) GpsDate() *foundation.NSDate {
-	return x.inner.GpsDate()
-}
-
-// DeltaAltitude calls the underlying DeltaAltitude.
-func (x *OdometerData) DeltaAltitude() unsafe.Pointer {
-	return x.inner.DeltaAltitude()
-}
-
-// VerticalAccuracy calls the underlying VerticalAccuracy.
-func (x *OdometerData) VerticalAccuracy() unsafe.Pointer {
-	return x.inner.VerticalAccuracy()
-}
-
-// OriginDevice calls the underlying OriginDevice.
-func (x *OdometerData) OriginDevice() CMOdometerOriginDevice {
-	return CMOdometerOriginDevice(x.inner.OriginDevice())
-}
-
-// Slope calls the underlying Slope.
-func (x *OdometerData) Slope() *foundation.NSNumber {
-	return x.inner.Slope()
-}
-
-// MaxAbsSlope calls the underlying MaxAbsSlope.
-func (x *OdometerData) MaxAbsSlope() *foundation.NSNumber {
-	return x.inner.MaxAbsSlope()
+func (x *OdometerData) MaxAbsSlope() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxAbsSlope"))
+	return obj.Wrap(_r)
 }
 
 // OdometerDataable is the interface implemented by [OdometerData], for mocking and DI.
 type OdometerDataable interface {
-	Unwrap() *raw.CMOdometerData
-	StartDate() *foundation.NSDate
-	EndDate() *foundation.NSDate
-	DeltaDistance() unsafe.Pointer
-	DeltaDistanceAccuracy() unsafe.Pointer
-	Speed() unsafe.Pointer
-	SpeedAccuracy() unsafe.Pointer
-	GpsDate() *foundation.NSDate
-	DeltaAltitude() unsafe.Pointer
-	VerticalAccuracy() unsafe.Pointer
-	OriginDevice() CMOdometerOriginDevice
-	Slope() *foundation.NSNumber
-	MaxAbsSlope() *foundation.NSNumber
+	obj.Object
+	StartDate() obj.Object
+	EndDate() obj.Object
+	GpsDate() obj.Object
+	OriginDevice() OdometerOriginDevice
+	Slope() obj.Object
+	MaxAbsSlope() obj.Object
 }
 
 var _ OdometerDataable = (*OdometerData)(nil)

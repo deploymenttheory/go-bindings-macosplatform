@@ -5,132 +5,124 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A container object that associates a text attachment at a particular document location with a view object.
 //
-// TextAttachmentViewProvider wraps [raw.NSTextAttachmentViewProvider] with a fluent Go API.
+// TextAttachmentViewProvider is an idiomatic wrapper over the Objective-C class NSTextAttachmentViewProvider.
 type TextAttachmentViewProvider struct {
-	inner *raw.NSTextAttachmentViewProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTextAttachmentViewProvider].
-func (x *TextAttachmentViewProvider) Unwrap() *raw.NSTextAttachmentViewProvider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextAttachmentViewProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// TextAttachmentViewProviderFromID adopts an existing object pointer as a TextAttachmentViewProvider (nil for 0).
+// TextAttachmentViewProviderFromID adopts an existing Objective-C object as a TextAttachmentViewProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func TextAttachmentViewProviderFromID(id objc.ID) *TextAttachmentViewProvider {
 	if id == 0 {
 		return nil
 	}
-	return &TextAttachmentViewProvider{inner: raw.NSTextAttachmentViewProviderFromID(id)}
+	x := &TextAttachmentViewProvider{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a new text attachment view whose content starts at the location you provide.
-//
-// NewTextAttachmentViewProviderWithTextAttachmentParentViewTextLayoutManagerLocation creates a new [TextAttachmentViewProvider].
-func NewTextAttachmentViewProviderWithTextAttachmentParentViewTextLayoutManagerLocation(textAttachment *raw.NSTextAttachment, parentView *raw.NSView, textLayoutManager *raw.NSTextLayoutManager, location raw.NSTextLocation) *TextAttachmentViewProvider {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextAttachmentViewProvider")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextAttachment:parentView:textLayoutManager:location:"), textAttachment.Ptr(), parentView.Ptr(), textLayoutManager.Ptr(), location)
-	return &TextAttachmentViewProvider{inner: raw.NSTextAttachmentViewProviderFromID(_id)}
+// textAttachmentViewProviderAdopt wraps an Objective-C object that this code just created as a
+// TextAttachmentViewProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textAttachmentViewProviderAdopt(id objc.ID) *TextAttachmentViewProvider {
+	if id == 0 {
+		return nil
+	}
+	x := &TextAttachmentViewProvider{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TextAttachmentViewProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextAttachmentViewProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextAttachmentViewProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTextAttachmentViewProvider creates a new TextAttachmentViewProvider.
+func NewTextAttachmentViewProvider() *TextAttachmentViewProvider {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSTextAttachmentViewProvider")), objc.RegisterName("new"))
+	return textAttachmentViewProviderAdopt(_id)
 }
 
 // The text attachment’s view.
 //
-// WithView sets the view property and returns the receiver for chaining.
+// WithView sets view and returns the receiver so calls can be chained.
 func (x *TextAttachmentViewProvider) WithView(view ViewProvider) *TextAttachmentViewProvider {
-	x.inner.SetView(view.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 	return x
 }
 
 // A Boolean value that determines the text attachment’s bounds policy.
 //
-// WithTracksTextAttachmentViewBounds sets the tracksTextAttachmentViewBounds property and returns the receiver for chaining.
+// WithTracksTextAttachmentViewBounds sets tracksTextAttachmentViewBounds and returns the receiver so calls can be chained.
 func (x *TextAttachmentViewProvider) WithTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds bool) *TextAttachmentViewProvider {
-	x.inner.SetTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTracksTextAttachmentViewBounds:"), tracksTextAttachmentViewBounds)
 	return x
 }
 
 // Draws the custom view hierarchy that text attachment view subclasses implement.
-//
-// LoadView calls the underlying LoadView.
 func (x *TextAttachmentViewProvider) LoadView() {
-	x.inner.LoadView()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadView"))
 }
 
-// Returns the layout bounds for an attachment at a specific text location that contains the text attributes you specify.
-//
-// AttachmentBoundsForAttributesLocationTextContainerProposedLineFragmentPosition calls the underlying AttachmentBoundsForAttributesLocationTextContainerProposedLineFragmentPosition.
-func (x *TextAttachmentViewProvider) AttachmentBoundsForAttributesLocationTextContainerProposedLineFragmentPosition(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], location raw.NSTextLocation, textContainer *raw.NSTextContainer, proposedLineFragment corefoundation.CGRect, position corefoundation.CGPoint) corefoundation.CGRect {
-	return x.inner.AttachmentBoundsForAttributesLocationTextContainerProposedLineFragmentPosition(attributes, location, textContainer, proposedLineFragment, position)
-}
-
-// TextAttachment calls the underlying TextAttachment.
 func (x *TextAttachmentViewProvider) TextAttachment() *TextAttachment {
-	_r := x.inner.TextAttachment()
-	if _r == nil {
-		return nil
-	}
-	return &TextAttachment{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textAttachment"))
+	return TextAttachmentFromID(_r)
 }
 
-// TextLayoutManager calls the underlying TextLayoutManager.
 func (x *TextAttachmentViewProvider) TextLayoutManager() *TextLayoutManager {
-	_r := x.inner.TextLayoutManager()
-	if _r == nil {
-		return nil
-	}
-	return &TextLayoutManager{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textLayoutManager"))
+	return TextLayoutManagerFromID(_r)
 }
 
-// Location calls the underlying Location.
-func (x *TextAttachmentViewProvider) Location() raw.NSTextLocation {
-	return x.inner.Location()
-}
-
-// View calls the underlying View.
 func (x *TextAttachmentViewProvider) View() *View {
-	_r := x.inner.View()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+	return ViewFromID(_r)
 }
 
-// SetView calls the underlying SetView.
-func (x *TextAttachmentViewProvider) SetView(view *raw.NSView) {
-	x.inner.SetView(view)
+func (x *TextAttachmentViewProvider) SetView(view *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 }
 
-// TracksTextAttachmentViewBounds calls the underlying TracksTextAttachmentViewBounds.
 func (x *TextAttachmentViewProvider) TracksTextAttachmentViewBounds() bool {
-	return x.inner.TracksTextAttachmentViewBounds()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tracksTextAttachmentViewBounds"))
+	return _r
 }
 
-// SetTracksTextAttachmentViewBounds calls the underlying SetTracksTextAttachmentViewBounds.
 func (x *TextAttachmentViewProvider) SetTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds bool) {
-	x.inner.SetTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTracksTextAttachmentViewBounds:"), tracksTextAttachmentViewBounds)
 }
 
 // TextAttachmentViewProviderable is the interface implemented by [TextAttachmentViewProvider], for mocking and DI.
 type TextAttachmentViewProviderable interface {
-	Unwrap() *raw.NSTextAttachmentViewProvider
+	obj.Object
 	WithView(view ViewProvider) *TextAttachmentViewProvider
 	WithTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds bool) *TextAttachmentViewProvider
 	LoadView()
-	AttachmentBoundsForAttributesLocationTextContainerProposedLineFragmentPosition(attributes *foundation.NSDictionary[*foundation.NSString, objc.ID], location raw.NSTextLocation, textContainer *raw.NSTextContainer, proposedLineFragment corefoundation.CGRect, position corefoundation.CGPoint) corefoundation.CGRect
 	TextAttachment() *TextAttachment
 	TextLayoutManager() *TextLayoutManager
-	Location() raw.NSTextLocation
 	View() *View
-	SetView(view *raw.NSView)
+	SetView(view *View)
 	TracksTextAttachmentViewBounds() bool
 	SetTracksTextAttachmentViewBounds(tracksTextAttachmentViewBounds bool)
 }

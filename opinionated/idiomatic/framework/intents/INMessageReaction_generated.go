@@ -5,66 +5,89 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MessageReaction wraps [raw.INMessageReaction] with a fluent Go API.
+// MessageReaction is an idiomatic wrapper over the Objective-C class INMessageReaction.
 type MessageReaction struct {
-	inner *raw.INMessageReaction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INMessageReaction].
-func (x *MessageReaction) Unwrap() *raw.INMessageReaction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MessageReaction) ID() objc.ID { return x.inner.Ptr() }
-
-// MessageReactionFromID adopts an existing object pointer as a MessageReaction (nil for 0).
+// MessageReactionFromID adopts an existing Objective-C object as a MessageReaction
+// (nil for 0), retaining it and registering a release finalizer.
 func MessageReactionFromID(id objc.ID) *MessageReaction {
 	if id == 0 {
 		return nil
 	}
-	return &MessageReaction{inner: raw.INMessageReactionFromID(id)}
+	x := &MessageReaction{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMessageReactionWithReactionTypeReactionDescriptionEmoji creates a new [MessageReaction].
-func NewMessageReactionWithReactionTypeReactionDescriptionEmoji(reactionType INMessageReactionType, reactionDescription string, emoji string) *MessageReaction {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INMessageReaction")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReactionType:reactionDescription:emoji:"), raw.INMessageReactionType(reactionType), foundation.NSStringStringWithUTF8String(reactionDescription).Ptr(), foundation.NSStringStringWithUTF8String(emoji).Ptr())
-	return &MessageReaction{inner: raw.INMessageReactionFromID(_id)}
+// messageReactionAdopt wraps an Objective-C object that this code just created as a
+// MessageReaction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func messageReactionAdopt(id objc.ID) *MessageReaction {
+	if id == 0 {
+		return nil
+	}
+	x := &MessageReaction{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// ReactionType calls the underlying ReactionType.
-func (x *MessageReaction) ReactionType() INMessageReactionType {
-	return INMessageReactionType(x.inner.ReactionType())
+// Description returns the object's -description text.
+func (x *MessageReaction) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// ReactionDescription calls the underlying ReactionDescription.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MessageReaction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MessageReaction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMessageReactionWithReactionTypeReactionDescriptionEmoji creates a new MessageReaction.
+func NewMessageReactionWithReactionTypeReactionDescriptionEmoji(reactionType MessageReactionType, reactionDescription string, emoji string) *MessageReaction {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INMessageReaction")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithReactionType:reactionDescription:emoji:"), reactionType, purego.NSString(reactionDescription), purego.NSString(emoji))
+	return messageReactionAdopt(_id)
+}
+
+func (x *MessageReaction) ReactionType() MessageReactionType {
+	_r := objc.Send[MessageReactionType](objref.IDOf(x), objc.RegisterName("reactionType"))
+	return _r
+}
+
 func (x *MessageReaction) ReactionDescription() string {
-	_r := x.inner.ReactionDescription()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reactionDescription"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Emoji calls the underlying Emoji.
 func (x *MessageReaction) Emoji() string {
-	_r := x.inner.Emoji()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emoji"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // MessageReactionable is the interface implemented by [MessageReaction], for mocking and DI.
 type MessageReactionable interface {
-	Unwrap() *raw.INMessageReaction
-	ReactionType() INMessageReactionType
+	obj.Object
+	ReactionType() MessageReactionType
 	ReactionDescription() string
 	Emoji() string
 }

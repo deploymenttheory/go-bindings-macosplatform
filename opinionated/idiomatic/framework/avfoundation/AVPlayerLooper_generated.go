@@ -5,100 +5,95 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that loops media content using a queue player.
 //
-// PlayerLooper wraps [raw.AVPlayerLooper] with a fluent Go API.
+// PlayerLooper is an idiomatic wrapper over the Objective-C class AVPlayerLooper.
 type PlayerLooper struct {
-	inner *raw.AVPlayerLooper
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPlayerLooper].
-func (x *PlayerLooper) Unwrap() *raw.AVPlayerLooper { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerLooper) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerLooperFromID adopts an existing object pointer as a PlayerLooper (nil for 0).
+// PlayerLooperFromID adopts an existing Objective-C object as a PlayerLooper
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerLooperFromID(id objc.ID) *PlayerLooper {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerLooper{inner: raw.AVPlayerLooperFromID(id)}
+	x := &PlayerLooper{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a player looper that continuously plays the specified time range of a player item.
-//
-// NewPlayerLooperWithPlayerTemplateItemTimeRange creates a new [PlayerLooper].
-func NewPlayerLooperWithPlayerTemplateItemTimeRange(player *raw.AVQueuePlayer, itemToLoop *raw.AVPlayerItem, loopRange coremedia.CMTimeRange) *PlayerLooper {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerLooper")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayer:templateItem:timeRange:"), player.Ptr(), itemToLoop.Ptr(), loopRange)
-	return &PlayerLooper{inner: raw.AVPlayerLooperFromID(_id)}
+// playerLooperAdopt wraps an Objective-C object that this code just created as a
+// PlayerLooper (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerLooperAdopt(id objc.ID) *PlayerLooper {
+	if id == 0 {
+		return nil
+	}
+	x := &PlayerLooper{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Creates a player looper that continuously plays the full duration of a player item while adhering to the specified ordering of existing items in the queue.
-//
-// NewPlayerLooperWithPlayerTemplateItemTimeRangeExistingItemsOrdering creates a new [PlayerLooper].
-func NewPlayerLooperWithPlayerTemplateItemTimeRangeExistingItemsOrdering(player *raw.AVQueuePlayer, itemToLoop *raw.AVPlayerItem, loopRange coremedia.CMTimeRange, itemOrdering AVPlayerLooperItemOrdering) *PlayerLooper {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerLooper")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPlayer:templateItem:timeRange:existingItemsOrdering:"), player.Ptr(), itemToLoop.Ptr(), loopRange, raw.AVPlayerLooperItemOrdering(itemOrdering))
-	return &PlayerLooper{inner: raw.AVPlayerLooperFromID(_id)}
+// Description returns the object's -description text.
+func (x *PlayerLooper) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlayerLooper) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlayerLooper) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPlayerLooper creates a new PlayerLooper.
+func NewPlayerLooper() *PlayerLooper {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVPlayerLooper")), objc.RegisterName("new"))
+	return playerLooperAdopt(_id)
 }
 
 // Disables looping for the player queue.
-//
-// DisableLooping calls the underlying DisableLooping.
 func (x *PlayerLooper) DisableLooping() {
-	x.inner.DisableLooping()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableLooping"))
 }
 
-// @property status @abstract The ability of the receiver to be used for looping playback. @discussion The value of this property is an AVPlayerLooperStatus that indicates whether the receiver is ready for looping playback. When the value of this property is AVPlayerStatusFailed, the receiver can no longer be used for playback and a new instance needs to be created in its place. When this happens, clients can check the value of the error property to determine the nature of the failure. This property is key value observable.
-//
-// Status calls the underlying Status.
-func (x *PlayerLooper) Status() AVPlayerLooperStatus {
-	return AVPlayerLooperStatus(x.inner.Status())
+// The ability of the receiver to be used for looping playback. The value of this property is an AVPlayerLooperStatus that indicates whether the receiver is ready for looping playback. When the value of this property is AVPlayerStatusFailed, the receiver can no longer be used for playback and a new instance needs to be created in its place. When this happens, clients can check the value of the error property to determine the nature of the failure. This property is key value observable.
+func (x *PlayerLooper) Status() PlayerLooperStatus {
+	_r := objc.Send[PlayerLooperStatus](objref.IDOf(x), objc.RegisterName("status"))
+	return _r
 }
 
-// @property error @abstract If the receiver's status is AVPlayerLooperStatusFailed, this describes the error that caused the failure. @discussion The value of this property is a NSError that describes what caused the receiver to not be able to perform looping playback. If the receiver's status is not AVPlayerLooperStatusFailed, the value of this property is nil.
-//
-// Error calls the underlying Error.
-func (x *PlayerLooper) Error() unsafe.Pointer {
-	return x.inner.Error()
-}
-
-// @property loopCount @abstract Number of times the specified AVPlayerItem has been played @discussion Starts at 0 and increments when the player starts playback of the AVPlayerItem again. This property is key value observable.
-//
-// LoopCount calls the underlying LoopCount.
+// Number of times the specified AVPlayerItem has been played Starts at 0 and increments when the player starts playback of the AVPlayerItem again. This property is key value observable.
 func (x *PlayerLooper) LoopCount() int {
-	return x.inner.LoopCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("loopCount"))
+	return _r
 }
 
-// @property loopingPlayerItems @abstract Returns an array containing replicas of specified AVPlayerItem used to accomplish the looping @discussion AVPlayerLooper creates replicas of the template AVPlayerItem using -copyWithZone: and inserts the replicas in the specified AVQueuePlayer to accomplish the looping. The AVPlayerItem replicas are for informational purposes and to allow the client to apply properties that are not transferred from the template AVPlayerItem to the replicas. The client can determine the number of replicas created and can listen for notifications and property changes from the replicas if desired. AVPlayerItemOutputs and AVPlayerItemMediaDataCollectors are not transferred to the replicas so the client should add them to each replica if desired. The client shall not modify the properties on the replicas that would disrupt looping playback. Examples of such properties are playhead time/date, selected media option, and forward playback end time. This property is key value observable. @result Array containing replicas of specified AVPlayerItem
+// Returns an array containing replicas of specified AVPlayerItem used to accomplish the looping AVPlayerLooper creates replicas of the template AVPlayerItem using -copyWithZone: and inserts the replicas in the specified AVQueuePlayer to accomplish the looping. The AVPlayerItem replicas are for informational purposes and to allow the client to apply properties that are not transferred from the template AVPlayerItem to the replicas. The client can determine the number of replicas created and can listen for notifications and property changes from the replicas if desired. AVPlayerItemOutputs and AVPlayerItemMediaDataCollectors are not transferred to the replicas so the client should add them to each replica if desired. The client shall not modify the properties on the replicas that would disrupt looping playback. Examples of such properties are playhead time/date, selected media option, and forward playback end time. This property is key value observable.
 //
 // LoopingPlayerItems returns the collection as a Go slice.
 func (x *PlayerLooper) LoopingPlayerItems() []*PlayerItem {
-	arr := x.inner.LoopingPlayerItems()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PlayerItem {
-		return &PlayerItem{inner: raw.AVPlayerItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loopingPlayerItems"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItem { return PlayerItemFromID(_id) })
 }
 
 // PlayerLooperable is the interface implemented by [PlayerLooper], for mocking and DI.
 type PlayerLooperable interface {
-	Unwrap() *raw.AVPlayerLooper
+	obj.Object
 	DisableLooping()
-	Status() AVPlayerLooperStatus
-	Error() unsafe.Pointer
+	Status() PlayerLooperStatus
 	LoopCount() int
 	LoopingPlayerItems() []*PlayerItem
 }

@@ -5,53 +5,74 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A standard implementation of the MDLMeshBufferZone protocol.
 //
-// MeshBufferZoneDefault wraps [raw.MDLMeshBufferZoneDefault] with a fluent Go API.
+// MeshBufferZoneDefault is an idiomatic wrapper over the Objective-C class MDLMeshBufferZoneDefault.
 type MeshBufferZoneDefault struct {
-	inner *raw.MDLMeshBufferZoneDefault
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLMeshBufferZoneDefault].
-func (x *MeshBufferZoneDefault) Unwrap() *raw.MDLMeshBufferZoneDefault { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MeshBufferZoneDefault) ID() objc.ID { return x.inner.Ptr() }
-
-// MeshBufferZoneDefaultFromID adopts an existing object pointer as a MeshBufferZoneDefault (nil for 0).
+// MeshBufferZoneDefaultFromID adopts an existing Objective-C object as a MeshBufferZoneDefault
+// (nil for 0), retaining it and registering a release finalizer.
 func MeshBufferZoneDefaultFromID(id objc.ID) *MeshBufferZoneDefault {
 	if id == 0 {
 		return nil
 	}
-	return &MeshBufferZoneDefault{inner: raw.MDLMeshBufferZoneDefaultFromID(id)}
+	x := &MeshBufferZoneDefault{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMeshBufferZoneDefault creates a new [MeshBufferZoneDefault].
+// meshBufferZoneDefaultAdopt wraps an Objective-C object that this code just created as a
+// MeshBufferZoneDefault (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func meshBufferZoneDefaultAdopt(id objc.ID) *MeshBufferZoneDefault {
+	if id == 0 {
+		return nil
+	}
+	x := &MeshBufferZoneDefault{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MeshBufferZoneDefault) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MeshBufferZoneDefault) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MeshBufferZoneDefault) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMeshBufferZoneDefault creates a new MeshBufferZoneDefault.
 func NewMeshBufferZoneDefault() *MeshBufferZoneDefault {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMeshBufferZoneDefault")), objc.RegisterName("new"))
-	return &MeshBufferZoneDefault{inner: raw.MDLMeshBufferZoneDefaultFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLMeshBufferZoneDefault")), objc.RegisterName("new"))
+	return meshBufferZoneDefaultAdopt(_id)
 }
 
-// Capacity calls the underlying Capacity.
-func (x *MeshBufferZoneDefault) Capacity() uint {
-	return x.inner.Capacity()
-}
-
-// Allocator calls the underlying Allocator.
-func (x *MeshBufferZoneDefault) Allocator() raw.MDLMeshBufferAllocator {
-	return x.inner.Allocator()
+func (x *MeshBufferZoneDefault) Capacity() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("capacity"))
+	return _r
 }
 
 // MeshBufferZoneDefaultable is the interface implemented by [MeshBufferZoneDefault], for mocking and DI.
 type MeshBufferZoneDefaultable interface {
-	Unwrap() *raw.MDLMeshBufferZoneDefault
-	Capacity() uint
-	Allocator() raw.MDLMeshBufferAllocator
+	obj.Object
+	Capacity() int
 }
 
 var _ MeshBufferZoneDefaultable = (*MeshBufferZoneDefault)(nil)

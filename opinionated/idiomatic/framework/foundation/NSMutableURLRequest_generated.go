@@ -5,365 +5,363 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A mutable URL load request that is independent of protocol or URL scheme.
 //
-// MutableURLRequest wraps [raw.NSMutableURLRequest] with a fluent Go API.
+// MutableURLRequest is an idiomatic wrapper over the Objective-C class NSMutableURLRequest.
 type MutableURLRequest struct {
-	inner *raw.NSMutableURLRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSMutableURLRequest].
-func (x *MutableURLRequest) Unwrap() *raw.NSMutableURLRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableURLRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableURLRequestFromID adopts an existing object pointer as a MutableURLRequest (nil for 0).
+// MutableURLRequestFromID adopts an existing Objective-C object as a MutableURLRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableURLRequestFromID(id objc.ID) *MutableURLRequest {
 	if id == 0 {
 		return nil
 	}
-	return &MutableURLRequest{inner: raw.NSMutableURLRequestFromID(id)}
+	x := &MutableURLRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMutableURLRequest creates a new [MutableURLRequest].
+// mutableURLRequestAdopt wraps an Objective-C object that this code just created as a
+// MutableURLRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableURLRequestAdopt(id objc.ID) *MutableURLRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableURLRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MutableURLRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MutableURLRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MutableURLRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMutableURLRequest creates a new MutableURLRequest.
 func NewMutableURLRequest() *MutableURLRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableURLRequest")), objc.RegisterName("new"))
-	return &MutableURLRequest{inner: raw.NSMutableURLRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSMutableURLRequest")), objc.RegisterName("new"))
+	return mutableURLRequestAdopt(_id)
 }
 
 // The URL being requested.
 //
-// WithURL sets the uRL property and returns the receiver for chaining.
+// WithURL sets uRL and returns the receiver so calls can be chained.
 func (x *MutableURLRequest) WithURL(uRL string) *MutableURLRequest {
-	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 	return x
 }
 
 // The request’s cache policy.
 //
-// WithCachePolicy sets the cachePolicy property and returns the receiver for chaining.
-func (x *MutableURLRequest) WithCachePolicy(cachePolicy NSURLRequestCachePolicy) *MutableURLRequest {
-	x.inner.SetCachePolicy(raw.NSURLRequestCachePolicy(cachePolicy))
+// WithCachePolicy sets cachePolicy and returns the receiver so calls can be chained.
+func (x *MutableURLRequest) WithCachePolicy(cachePolicy URLRequestCachePolicy) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCachePolicy:"), cachePolicy)
 	return x
 }
 
 // The request’s timeout interval, in seconds.
 //
-// WithTimeoutInterval sets the timeoutInterval property and returns the receiver for chaining.
+// WithTimeoutInterval sets timeoutInterval and returns the receiver so calls can be chained.
 func (x *MutableURLRequest) WithTimeoutInterval(timeoutInterval float64) *MutableURLRequest {
-	x.inner.SetTimeoutInterval(timeoutInterval)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutInterval:"), timeoutInterval)
 	return x
 }
 
 // The main document URL.
 //
-// WithMainDocumentURL sets the mainDocumentURL property and returns the receiver for chaining.
+// WithMainDocumentURL sets mainDocumentURL and returns the receiver so calls can be chained.
 func (x *MutableURLRequest) WithMainDocumentURL(mainDocumentURL string) *MutableURLRequest {
-	x.inner.SetMainDocumentURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(mainDocumentURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMainDocumentURL:"), rt.FileURL(mainDocumentURL))
 	return x
 }
 
 // The network service type of the connection.
 //
-// WithNetworkServiceType sets the networkServiceType property and returns the receiver for chaining.
-func (x *MutableURLRequest) WithNetworkServiceType(networkServiceType NSURLRequestNetworkServiceType) *MutableURLRequest {
-	x.inner.SetNetworkServiceType(raw.NSURLRequestNetworkServiceType(networkServiceType))
+// WithNetworkServiceType sets networkServiceType and returns the receiver so calls can be chained.
+func (x *MutableURLRequest) WithNetworkServiceType(networkServiceType URLRequestNetworkServiceType) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkServiceType:"), networkServiceType)
 	return x
 }
 
 // A Boolean value that indicates whether a connection can use the device’s cellular network (if present).
 //
-// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
 func (x *MutableURLRequest) WithAllowsCellularAccess(allowsCellularAccess bool) *MutableURLRequest {
-	x.inner.SetAllowsCellularAccess(allowsCellularAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
 // A Boolean value that indicates whether connections may use a network interface that the system considers expensive.
 //
-// WithAllowsExpensiveNetworkAccess sets the allowsExpensiveNetworkAccess property and returns the receiver for chaining.
+// WithAllowsExpensiveNetworkAccess sets allowsExpensiveNetworkAccess and returns the receiver so calls can be chained.
 func (x *MutableURLRequest) WithAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool) *MutableURLRequest {
-	x.inner.SetAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpensiveNetworkAccess:"), allowsExpensiveNetworkAccess)
 	return x
 }
 
 // A Boolean value that indicates whether connections may use the network when the user has specified Low Data Mode.
 //
-// WithAllowsConstrainedNetworkAccess sets the allowsConstrainedNetworkAccess property and returns the receiver for chaining.
+// WithAllowsConstrainedNetworkAccess sets allowsConstrainedNetworkAccess and returns the receiver so calls can be chained.
 func (x *MutableURLRequest) WithAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool) *MutableURLRequest {
-	x.inner.SetAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsConstrainedNetworkAccess:"), allowsConstrainedNetworkAccess)
 	return x
 }
 
 // A Boolean value that indicates whether a connection created with this request is allowed to use network interfaces which have been marked as ultra constrained.
 //
-// WithAllowsUltraConstrainedNetworkAccess sets the allowsUltraConstrainedNetworkAccess property and returns the receiver for chaining.
+// WithAllowsUltraConstrainedNetworkAccess sets allowsUltraConstrainedNetworkAccess and returns the receiver so calls can be chained.
 func (x *MutableURLRequest) WithAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool) *MutableURLRequest {
-	x.inner.SetAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUltraConstrainedNetworkAccess:"), allowsUltraConstrainedNetworkAccess)
 	return x
 }
 
 // A Boolean value that indicates whether the server is assumed to support HTTP/3.
 //
-// WithAssumesHTTP3Capable sets the assumesHTTP3Capable property and returns the receiver for chaining.
+// WithAssumesHTTP3Capable sets assumesHTTP3Capable and returns the receiver so calls can be chained.
 func (x *MutableURLRequest) WithAssumesHTTP3Capable(assumesHTTP3Capable bool) *MutableURLRequest {
-	x.inner.SetAssumesHTTP3Capable(assumesHTTP3Capable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssumesHTTP3Capable:"), assumesHTTP3Capable)
 	return x
 }
 
 // The entity that initiates the network request.
 //
-// WithAttribution sets the attribution property and returns the receiver for chaining.
-func (x *MutableURLRequest) WithAttribution(attribution NSURLRequestAttribution) *MutableURLRequest {
-	x.inner.SetAttribution(raw.NSURLRequestAttribution(attribution))
+// WithAttribution sets attribution and returns the receiver so calls can be chained.
+func (x *MutableURLRequest) WithAttribution(attribution URLRequestAttribution) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttribution:"), attribution)
 	return x
 }
 
 // A Boolean value that indicates whether a request requires DNSSEC validation during DNS lookup.
 //
-// WithRequiresDNSSECValidation sets the requiresDNSSECValidation property and returns the receiver for chaining.
+// WithRequiresDNSSECValidation sets requiresDNSSECValidation and returns the receiver so calls can be chained.
 func (x *MutableURLRequest) WithRequiresDNSSECValidation(requiresDNSSECValidation bool) *MutableURLRequest {
-	x.inner.SetRequiresDNSSECValidation(requiresDNSSECValidation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresDNSSECValidation:"), requiresDNSSECValidation)
 	return x
 }
 
 // A Boolean value that indicates whether storing and usage of DNS answers in a persistent per-process cache is allowed.
 //
-// WithAllowsPersistentDNS sets the allowsPersistentDNS property and returns the receiver for chaining.
+// WithAllowsPersistentDNS sets allowsPersistentDNS and returns the receiver so calls can be chained.
 func (x *MutableURLRequest) WithAllowsPersistentDNS(allowsPersistentDNS bool) *MutableURLRequest {
-	x.inner.SetAllowsPersistentDNS(allowsPersistentDNS)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsPersistentDNS:"), allowsPersistentDNS)
 	return x
 }
 
-// WithCookiePartitionIdentifier sets the cookiePartitionIdentifier property and returns the receiver for chaining.
-func (x *MutableURLRequest) WithCookiePartitionIdentifier(cookiePartitionIdentifier string) *MutableURLRequest {
-	x.inner.SetCookiePartitionIdentifier(foundation.NSStringStringWithUTF8String(cookiePartitionIdentifier))
+// WithCookiePartitionIdentifier sets cookiePartitionIdentifier and returns the receiver so calls can be chained.
+func (x *MutableURLRequest) WithCookiePartitionIdentifier(cookiePartitionIdentifier StringProvider) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookiePartitionIdentifier:"), objref.IDOf(cookiePartitionIdentifier))
 	return x
 }
 
 // The HTTP request method.
 //
-// WithHTTPMethod sets the hTTPMethod property and returns the receiver for chaining.
-func (x *MutableURLRequest) WithHTTPMethod(hTTPMethod string) *MutableURLRequest {
-	x.inner.SetHTTPMethod(foundation.NSStringStringWithUTF8String(hTTPMethod))
+// WithHTTPMethod sets hTTPMethod and returns the receiver so calls can be chained.
+func (x *MutableURLRequest) WithHTTPMethod(hTTPMethod StringProvider) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPMethod:"), objref.IDOf(hTTPMethod))
 	return x
 }
 
 // A dictionary containing all of the HTTP header fields for a request.
 //
-// WithAllHTTPHeaderFields sets the allHTTPHeaderFields property and returns the receiver for chaining.
-func (x *MutableURLRequest) WithAllHTTPHeaderFields(allHTTPHeaderFields *raw.NSDictionary[*raw.NSString, *raw.NSString]) *MutableURLRequest {
-	x.inner.SetAllHTTPHeaderFields(allHTTPHeaderFields)
+// WithAllHTTPHeaderFields sets allHTTPHeaderFields and returns the receiver so calls can be chained.
+func (x *MutableURLRequest) WithAllHTTPHeaderFields(allHTTPHeaderFields obj.Object) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllHTTPHeaderFields:"), objref.IDOf(allHTTPHeaderFields))
 	return x
 }
 
 // The request body.
 //
-// WithHTTPBody sets the hTTPBody property and returns the receiver for chaining.
+// WithHTTPBody sets hTTPBody and returns the receiver so calls can be chained.
 func (x *MutableURLRequest) WithHTTPBody(hTTPBody DataProvider) *MutableURLRequest {
-	x.inner.SetHTTPBody(hTTPBody.asData())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPBody:"), objref.IDOf(hTTPBody))
 	return x
 }
 
 // The request body as an input stream.
 //
-// WithHTTPBodyStream sets the hTTPBodyStream property and returns the receiver for chaining.
+// WithHTTPBodyStream sets hTTPBodyStream and returns the receiver so calls can be chained.
 func (x *MutableURLRequest) WithHTTPBodyStream(hTTPBodyStream *InputStream) *MutableURLRequest {
-	x.inner.SetHTTPBodyStream(hTTPBodyStream.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPBodyStream:"), objref.IDOf(hTTPBodyStream))
 	return x
 }
 
 // A Boolean value that indicates whether the request should use the default cookie handling for the request.
 //
-// WithHTTPShouldHandleCookies sets the hTTPShouldHandleCookies property and returns the receiver for chaining.
+// WithHTTPShouldHandleCookies sets hTTPShouldHandleCookies and returns the receiver so calls can be chained.
 func (x *MutableURLRequest) WithHTTPShouldHandleCookies(hTTPShouldHandleCookies bool) *MutableURLRequest {
-	x.inner.SetHTTPShouldHandleCookies(hTTPShouldHandleCookies)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPShouldHandleCookies:"), hTTPShouldHandleCookies)
 	return x
 }
 
 // A Boolean value that indicates whether the request can continue transmitting data before receiving a response from an earlier transmission.
 //
-// WithHTTPShouldUsePipelining sets the hTTPShouldUsePipelining property and returns the receiver for chaining.
+// WithHTTPShouldUsePipelining sets hTTPShouldUsePipelining and returns the receiver so calls can be chained.
 func (x *MutableURLRequest) WithHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) *MutableURLRequest {
-	x.inner.SetHTTPShouldUsePipelining(hTTPShouldUsePipelining)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPShouldUsePipelining:"), hTTPShouldUsePipelining)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MutableURLRequest) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableURLRequest {
-	x.inner.NSURLRequest.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *MutableURLRequest) WithScriptingProperties(scriptingProperties obj.Object) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// SetURL calls the underlying SetURL.
 func (x *MutableURLRequest) SetURL(uRL string) {
-	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 }
 
-// SetCachePolicy calls the underlying SetCachePolicy.
-func (x *MutableURLRequest) SetCachePolicy(cachePolicy NSURLRequestCachePolicy) {
-	x.inner.SetCachePolicy(raw.NSURLRequestCachePolicy(cachePolicy))
+func (x *MutableURLRequest) SetCachePolicy(cachePolicy URLRequestCachePolicy) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCachePolicy:"), cachePolicy)
 }
 
-// SetTimeoutInterval calls the underlying SetTimeoutInterval.
 func (x *MutableURLRequest) SetTimeoutInterval(timeoutInterval float64) {
-	x.inner.SetTimeoutInterval(timeoutInterval)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutInterval:"), timeoutInterval)
 }
 
-// SetMainDocumentURL calls the underlying SetMainDocumentURL.
 func (x *MutableURLRequest) SetMainDocumentURL(mainDocumentURL string) {
-	x.inner.SetMainDocumentURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(mainDocumentURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMainDocumentURL:"), rt.FileURL(mainDocumentURL))
 }
 
-// SetNetworkServiceType calls the underlying SetNetworkServiceType.
-func (x *MutableURLRequest) SetNetworkServiceType(networkServiceType NSURLRequestNetworkServiceType) {
-	x.inner.SetNetworkServiceType(raw.NSURLRequestNetworkServiceType(networkServiceType))
+func (x *MutableURLRequest) SetNetworkServiceType(networkServiceType URLRequestNetworkServiceType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkServiceType:"), networkServiceType)
 }
 
-// SetAllowsCellularAccess calls the underlying SetAllowsCellularAccess.
 func (x *MutableURLRequest) SetAllowsCellularAccess(allowsCellularAccess bool) {
-	x.inner.SetAllowsCellularAccess(allowsCellularAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 }
 
-// SetAllowsExpensiveNetworkAccess calls the underlying SetAllowsExpensiveNetworkAccess.
 func (x *MutableURLRequest) SetAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool) {
-	x.inner.SetAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpensiveNetworkAccess:"), allowsExpensiveNetworkAccess)
 }
 
-// SetAllowsConstrainedNetworkAccess calls the underlying SetAllowsConstrainedNetworkAccess.
 func (x *MutableURLRequest) SetAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool) {
-	x.inner.SetAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsConstrainedNetworkAccess:"), allowsConstrainedNetworkAccess)
 }
 
-// SetAllowsUltraConstrainedNetworkAccess calls the underlying SetAllowsUltraConstrainedNetworkAccess.
 func (x *MutableURLRequest) SetAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool) {
-	x.inner.SetAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUltraConstrainedNetworkAccess:"), allowsUltraConstrainedNetworkAccess)
 }
 
-// SetAssumesHTTP3Capable calls the underlying SetAssumesHTTP3Capable.
 func (x *MutableURLRequest) SetAssumesHTTP3Capable(assumesHTTP3Capable bool) {
-	x.inner.SetAssumesHTTP3Capable(assumesHTTP3Capable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssumesHTTP3Capable:"), assumesHTTP3Capable)
 }
 
-// SetAttribution calls the underlying SetAttribution.
-func (x *MutableURLRequest) SetAttribution(attribution NSURLRequestAttribution) {
-	x.inner.SetAttribution(raw.NSURLRequestAttribution(attribution))
+func (x *MutableURLRequest) SetAttribution(attribution URLRequestAttribution) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttribution:"), attribution)
 }
 
-// SetRequiresDNSSECValidation calls the underlying SetRequiresDNSSECValidation.
 func (x *MutableURLRequest) SetRequiresDNSSECValidation(requiresDNSSECValidation bool) {
-	x.inner.SetRequiresDNSSECValidation(requiresDNSSECValidation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresDNSSECValidation:"), requiresDNSSECValidation)
 }
 
-// SetAllowsPersistentDNS calls the underlying SetAllowsPersistentDNS.
 func (x *MutableURLRequest) SetAllowsPersistentDNS(allowsPersistentDNS bool) {
-	x.inner.SetAllowsPersistentDNS(allowsPersistentDNS)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsPersistentDNS:"), allowsPersistentDNS)
 }
 
-// SetCookiePartitionIdentifier calls the underlying SetCookiePartitionIdentifier.
 func (x *MutableURLRequest) SetCookiePartitionIdentifier(cookiePartitionIdentifier string) {
-	x.inner.SetCookiePartitionIdentifier(foundation.NSStringStringWithUTF8String(cookiePartitionIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookiePartitionIdentifier:"), purego.NSString(cookiePartitionIdentifier))
 }
 
 // Sets a value for the header field.
-//
-// SetValueForHTTPHeaderField calls the underlying SetValueForHTTPHeaderField.
 func (x *MutableURLRequest) SetValueForHTTPHeaderField(value string, field string) {
-	x.inner.SetValueForHTTPHeaderField(foundation.NSStringStringWithUTF8String(value), foundation.NSStringStringWithUTF8String(field))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:forHTTPHeaderField:"), purego.NSString(value), purego.NSString(field))
 }
 
 // Adds a value to the header field.
-//
-// AddValueForHTTPHeaderField calls the underlying AddValueForHTTPHeaderField.
 func (x *MutableURLRequest) AddValueForHTTPHeaderField(value string, field string) {
-	x.inner.AddValueForHTTPHeaderField(foundation.NSStringStringWithUTF8String(value), foundation.NSStringStringWithUTF8String(field))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addValue:forHTTPHeaderField:"), purego.NSString(value), purego.NSString(field))
 }
 
-// SetHTTPMethod calls the underlying SetHTTPMethod.
 func (x *MutableURLRequest) SetHTTPMethod(hTTPMethod string) {
-	x.inner.SetHTTPMethod(foundation.NSStringStringWithUTF8String(hTTPMethod))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPMethod:"), purego.NSString(hTTPMethod))
 }
 
-// SetAllHTTPHeaderFields calls the underlying SetAllHTTPHeaderFields.
-func (x *MutableURLRequest) SetAllHTTPHeaderFields(allHTTPHeaderFields *raw.NSDictionary[*raw.NSString, *raw.NSString]) {
-	x.inner.SetAllHTTPHeaderFields(allHTTPHeaderFields)
+func (x *MutableURLRequest) SetAllHTTPHeaderFields(allHTTPHeaderFields obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllHTTPHeaderFields:"), objref.IDOf(allHTTPHeaderFields))
 }
 
-// SetHTTPBody calls the underlying SetHTTPBody.
-func (x *MutableURLRequest) SetHTTPBody(hTTPBody *raw.NSData) {
-	x.inner.SetHTTPBody(hTTPBody)
+func (x *MutableURLRequest) SetHTTPBody(hTTPBody *Data) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPBody:"), objref.IDOf(hTTPBody))
 }
 
-// SetHTTPBodyStream calls the underlying SetHTTPBodyStream.
-func (x *MutableURLRequest) SetHTTPBodyStream(hTTPBodyStream *raw.NSInputStream) {
-	x.inner.SetHTTPBodyStream(hTTPBodyStream)
+func (x *MutableURLRequest) SetHTTPBodyStream(hTTPBodyStream *InputStream) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPBodyStream:"), objref.IDOf(hTTPBodyStream))
 }
 
-// SetHTTPShouldHandleCookies calls the underlying SetHTTPShouldHandleCookies.
 func (x *MutableURLRequest) SetHTTPShouldHandleCookies(hTTPShouldHandleCookies bool) {
-	x.inner.SetHTTPShouldHandleCookies(hTTPShouldHandleCookies)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPShouldHandleCookies:"), hTTPShouldHandleCookies)
 }
 
-// SetHTTPShouldUsePipelining calls the underlying SetHTTPShouldUsePipelining.
 func (x *MutableURLRequest) SetHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) {
-	x.inner.SetHTTPShouldUsePipelining(hTTPShouldUsePipelining)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPShouldUsePipelining:"), hTTPShouldUsePipelining)
 }
-
-func (x *MutableURLRequest) asURLRequest() *raw.NSURLRequest { return &x.inner.NSURLRequest }
-
-func (x *MutableURLRequest) asObject() *raw.NSObject { return &x.inner.NSURLRequest.NSObject }
 
 // MutableURLRequestable is the interface implemented by [MutableURLRequest], for mocking and DI.
 type MutableURLRequestable interface {
-	Unwrap() *raw.NSMutableURLRequest
+	obj.Object
 	WithURL(uRL string) *MutableURLRequest
-	WithCachePolicy(cachePolicy NSURLRequestCachePolicy) *MutableURLRequest
+	WithCachePolicy(cachePolicy URLRequestCachePolicy) *MutableURLRequest
 	WithTimeoutInterval(timeoutInterval float64) *MutableURLRequest
 	WithMainDocumentURL(mainDocumentURL string) *MutableURLRequest
-	WithNetworkServiceType(networkServiceType NSURLRequestNetworkServiceType) *MutableURLRequest
+	WithNetworkServiceType(networkServiceType URLRequestNetworkServiceType) *MutableURLRequest
 	WithAllowsCellularAccess(allowsCellularAccess bool) *MutableURLRequest
 	WithAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool) *MutableURLRequest
 	WithAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool) *MutableURLRequest
 	WithAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool) *MutableURLRequest
 	WithAssumesHTTP3Capable(assumesHTTP3Capable bool) *MutableURLRequest
-	WithAttribution(attribution NSURLRequestAttribution) *MutableURLRequest
+	WithAttribution(attribution URLRequestAttribution) *MutableURLRequest
 	WithRequiresDNSSECValidation(requiresDNSSECValidation bool) *MutableURLRequest
 	WithAllowsPersistentDNS(allowsPersistentDNS bool) *MutableURLRequest
-	WithCookiePartitionIdentifier(cookiePartitionIdentifier string) *MutableURLRequest
-	WithHTTPMethod(hTTPMethod string) *MutableURLRequest
-	WithAllHTTPHeaderFields(allHTTPHeaderFields *raw.NSDictionary[*raw.NSString, *raw.NSString]) *MutableURLRequest
+	WithCookiePartitionIdentifier(cookiePartitionIdentifier StringProvider) *MutableURLRequest
+	WithHTTPMethod(hTTPMethod StringProvider) *MutableURLRequest
+	WithAllHTTPHeaderFields(allHTTPHeaderFields obj.Object) *MutableURLRequest
 	WithHTTPBody(hTTPBody DataProvider) *MutableURLRequest
 	WithHTTPBodyStream(hTTPBodyStream *InputStream) *MutableURLRequest
 	WithHTTPShouldHandleCookies(hTTPShouldHandleCookies bool) *MutableURLRequest
 	WithHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) *MutableURLRequest
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableURLRequest
+	WithScriptingProperties(scriptingProperties obj.Object) *MutableURLRequest
 	SetURL(uRL string)
-	SetCachePolicy(cachePolicy NSURLRequestCachePolicy)
+	SetCachePolicy(cachePolicy URLRequestCachePolicy)
 	SetTimeoutInterval(timeoutInterval float64)
 	SetMainDocumentURL(mainDocumentURL string)
-	SetNetworkServiceType(networkServiceType NSURLRequestNetworkServiceType)
+	SetNetworkServiceType(networkServiceType URLRequestNetworkServiceType)
 	SetAllowsCellularAccess(allowsCellularAccess bool)
 	SetAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool)
 	SetAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool)
 	SetAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool)
 	SetAssumesHTTP3Capable(assumesHTTP3Capable bool)
-	SetAttribution(attribution NSURLRequestAttribution)
+	SetAttribution(attribution URLRequestAttribution)
 	SetRequiresDNSSECValidation(requiresDNSSECValidation bool)
 	SetAllowsPersistentDNS(allowsPersistentDNS bool)
 	SetCookiePartitionIdentifier(cookiePartitionIdentifier string)
 	SetValueForHTTPHeaderField(value string, field string)
 	AddValueForHTTPHeaderField(value string, field string)
 	SetHTTPMethod(hTTPMethod string)
-	SetAllHTTPHeaderFields(allHTTPHeaderFields *raw.NSDictionary[*raw.NSString, *raw.NSString])
-	SetHTTPBody(hTTPBody *raw.NSData)
-	SetHTTPBodyStream(hTTPBodyStream *raw.NSInputStream)
+	SetAllHTTPHeaderFields(allHTTPHeaderFields obj.Object)
+	SetHTTPBody(hTTPBody *Data)
+	SetHTTPBodyStream(hTTPBodyStream *InputStream)
 	SetHTTPShouldHandleCookies(hTTPShouldHandleCookies bool)
 	SetHTTPShouldUsePipelining(hTTPShouldUsePipelining bool)
 }

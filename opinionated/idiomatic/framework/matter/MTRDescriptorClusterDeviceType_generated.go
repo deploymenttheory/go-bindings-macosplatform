@@ -5,65 +5,87 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDescriptorClusterDeviceType wraps [raw.MTRDescriptorClusterDeviceType] with a fluent Go API.
+// MTRDescriptorClusterDeviceType is an idiomatic wrapper over the Objective-C class MTRDescriptorClusterDeviceType.
 type MTRDescriptorClusterDeviceType struct {
-	inner *raw.MTRDescriptorClusterDeviceType
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDescriptorClusterDeviceType].
-func (x *MTRDescriptorClusterDeviceType) Unwrap() *raw.MTRDescriptorClusterDeviceType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDescriptorClusterDeviceType) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDescriptorClusterDeviceTypeFromID adopts an existing object pointer as a MTRDescriptorClusterDeviceType (nil for 0).
+// MTRDescriptorClusterDeviceTypeFromID adopts an existing Objective-C object as a MTRDescriptorClusterDeviceType
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDescriptorClusterDeviceTypeFromID(id objc.ID) *MTRDescriptorClusterDeviceType {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDescriptorClusterDeviceType{inner: raw.MTRDescriptorClusterDeviceTypeFromID(id)}
+	x := &MTRDescriptorClusterDeviceType{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRDescriptorClusterDeviceType creates a new [MTRDescriptorClusterDeviceType].
+// mTRDescriptorClusterDeviceTypeAdopt wraps an Objective-C object that this code just created as a
+// MTRDescriptorClusterDeviceType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDescriptorClusterDeviceTypeAdopt(id objc.ID) *MTRDescriptorClusterDeviceType {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDescriptorClusterDeviceType{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDescriptorClusterDeviceType) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDescriptorClusterDeviceType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDescriptorClusterDeviceType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRDescriptorClusterDeviceType creates a new MTRDescriptorClusterDeviceType.
 func NewMTRDescriptorClusterDeviceType() *MTRDescriptorClusterDeviceType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDescriptorClusterDeviceType")), objc.RegisterName("new"))
-	return &MTRDescriptorClusterDeviceType{inner: raw.MTRDescriptorClusterDeviceTypeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDescriptorClusterDeviceType")), objc.RegisterName("new"))
+	return mTRDescriptorClusterDeviceTypeAdopt(_id)
 }
 
-// WithDeviceType sets the deviceType property and returns the receiver for chaining.
-func (x *MTRDescriptorClusterDeviceType) WithDeviceType(deviceType *foundation.NSNumber) *MTRDescriptorClusterDeviceType {
-	x.inner.MTRDescriptorClusterDeviceTypeStruct.SetDeviceType(deviceType)
+// WithDeviceType sets deviceType and returns the receiver so calls can be chained.
+func (x *MTRDescriptorClusterDeviceType) WithDeviceType(deviceType obj.Object) *MTRDescriptorClusterDeviceType {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeviceType:"), objref.IDOf(deviceType))
 	return x
 }
 
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *MTRDescriptorClusterDeviceType) WithType(type_ *foundation.NSNumber) *MTRDescriptorClusterDeviceType {
-	x.inner.MTRDescriptorClusterDeviceTypeStruct.SetType(type_)
+// WithType sets type_ and returns the receiver so calls can be chained.
+func (x *MTRDescriptorClusterDeviceType) WithType(type_ obj.Object) *MTRDescriptorClusterDeviceType {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 	return x
 }
 
-// WithRevision sets the revision property and returns the receiver for chaining.
-func (x *MTRDescriptorClusterDeviceType) WithRevision(revision *foundation.NSNumber) *MTRDescriptorClusterDeviceType {
-	x.inner.MTRDescriptorClusterDeviceTypeStruct.SetRevision(revision)
+// WithRevision sets revision and returns the receiver so calls can be chained.
+func (x *MTRDescriptorClusterDeviceType) WithRevision(revision obj.Object) *MTRDescriptorClusterDeviceType {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), objref.IDOf(revision))
 	return x
-}
-
-func (x *MTRDescriptorClusterDeviceType) asMTRDescriptorClusterDeviceTypeStruct() *raw.MTRDescriptorClusterDeviceTypeStruct {
-	return &x.inner.MTRDescriptorClusterDeviceTypeStruct
 }
 
 // MTRDescriptorClusterDeviceTypeable is the interface implemented by [MTRDescriptorClusterDeviceType], for mocking and DI.
 type MTRDescriptorClusterDeviceTypeable interface {
-	Unwrap() *raw.MTRDescriptorClusterDeviceType
-	WithDeviceType(deviceType *foundation.NSNumber) *MTRDescriptorClusterDeviceType
-	WithType(type_ *foundation.NSNumber) *MTRDescriptorClusterDeviceType
-	WithRevision(revision *foundation.NSNumber) *MTRDescriptorClusterDeviceType
+	obj.Object
+	WithDeviceType(deviceType obj.Object) *MTRDescriptorClusterDeviceType
+	WithType(type_ obj.Object) *MTRDescriptorClusterDeviceType
+	WithRevision(revision obj.Object) *MTRDescriptorClusterDeviceType
 }
 
 var _ MTRDescriptorClusterDeviceTypeable = (*MTRDescriptorClusterDeviceType)(nil)

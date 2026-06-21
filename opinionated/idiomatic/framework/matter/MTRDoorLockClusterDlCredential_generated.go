@@ -5,58 +5,80 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRDoorLockClusterDlCredential wraps [raw.MTRDoorLockClusterDlCredential] with a fluent Go API.
+// MTRDoorLockClusterDlCredential is an idiomatic wrapper over the Objective-C class MTRDoorLockClusterDlCredential.
 type MTRDoorLockClusterDlCredential struct {
-	inner *raw.MTRDoorLockClusterDlCredential
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDoorLockClusterDlCredential].
-func (x *MTRDoorLockClusterDlCredential) Unwrap() *raw.MTRDoorLockClusterDlCredential { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDoorLockClusterDlCredential) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDoorLockClusterDlCredentialFromID adopts an existing object pointer as a MTRDoorLockClusterDlCredential (nil for 0).
+// MTRDoorLockClusterDlCredentialFromID adopts an existing Objective-C object as a MTRDoorLockClusterDlCredential
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDoorLockClusterDlCredentialFromID(id objc.ID) *MTRDoorLockClusterDlCredential {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDoorLockClusterDlCredential{inner: raw.MTRDoorLockClusterDlCredentialFromID(id)}
+	x := &MTRDoorLockClusterDlCredential{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRDoorLockClusterDlCredential creates a new [MTRDoorLockClusterDlCredential].
+// mTRDoorLockClusterDlCredentialAdopt wraps an Objective-C object that this code just created as a
+// MTRDoorLockClusterDlCredential (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDoorLockClusterDlCredentialAdopt(id objc.ID) *MTRDoorLockClusterDlCredential {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDoorLockClusterDlCredential{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDoorLockClusterDlCredential) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDoorLockClusterDlCredential) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDoorLockClusterDlCredential) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRDoorLockClusterDlCredential creates a new MTRDoorLockClusterDlCredential.
 func NewMTRDoorLockClusterDlCredential() *MTRDoorLockClusterDlCredential {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDoorLockClusterDlCredential")), objc.RegisterName("new"))
-	return &MTRDoorLockClusterDlCredential{inner: raw.MTRDoorLockClusterDlCredentialFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDoorLockClusterDlCredential")), objc.RegisterName("new"))
+	return mTRDoorLockClusterDlCredentialAdopt(_id)
 }
 
-// WithCredentialType sets the credentialType property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterDlCredential) WithCredentialType(credentialType *foundation.NSNumber) *MTRDoorLockClusterDlCredential {
-	x.inner.MTRDoorLockClusterCredentialStruct.SetCredentialType(credentialType)
+// WithCredentialType sets credentialType and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterDlCredential) WithCredentialType(credentialType obj.Object) *MTRDoorLockClusterDlCredential {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentialType:"), objref.IDOf(credentialType))
 	return x
 }
 
-// WithCredentialIndex sets the credentialIndex property and returns the receiver for chaining.
-func (x *MTRDoorLockClusterDlCredential) WithCredentialIndex(credentialIndex *foundation.NSNumber) *MTRDoorLockClusterDlCredential {
-	x.inner.MTRDoorLockClusterCredentialStruct.SetCredentialIndex(credentialIndex)
+// WithCredentialIndex sets credentialIndex and returns the receiver so calls can be chained.
+func (x *MTRDoorLockClusterDlCredential) WithCredentialIndex(credentialIndex obj.Object) *MTRDoorLockClusterDlCredential {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentialIndex:"), objref.IDOf(credentialIndex))
 	return x
-}
-
-func (x *MTRDoorLockClusterDlCredential) asMTRDoorLockClusterCredentialStruct() *raw.MTRDoorLockClusterCredentialStruct {
-	return &x.inner.MTRDoorLockClusterCredentialStruct
 }
 
 // MTRDoorLockClusterDlCredentialable is the interface implemented by [MTRDoorLockClusterDlCredential], for mocking and DI.
 type MTRDoorLockClusterDlCredentialable interface {
-	Unwrap() *raw.MTRDoorLockClusterDlCredential
-	WithCredentialType(credentialType *foundation.NSNumber) *MTRDoorLockClusterDlCredential
-	WithCredentialIndex(credentialIndex *foundation.NSNumber) *MTRDoorLockClusterDlCredential
+	obj.Object
+	WithCredentialType(credentialType obj.Object) *MTRDoorLockClusterDlCredential
+	WithCredentialIndex(credentialIndex obj.Object) *MTRDoorLockClusterDlCredential
 }
 
 var _ MTRDoorLockClusterDlCredentialable = (*MTRDoorLockClusterDlCredential)(nil)

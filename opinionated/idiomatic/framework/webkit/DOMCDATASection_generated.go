@@ -5,80 +5,90 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMCDATASection wraps [raw.DOMCDATASection] with a fluent Go API.
+// DOMCDATASection is an idiomatic wrapper over the Objective-C class DOMCDATASection.
 type DOMCDATASection struct {
-	inner *raw.DOMCDATASection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMCDATASection].
-func (x *DOMCDATASection) Unwrap() *raw.DOMCDATASection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMCDATASection) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMCDATASectionFromID adopts an existing object pointer as a DOMCDATASection (nil for 0).
+// DOMCDATASectionFromID adopts an existing Objective-C object as a DOMCDATASection
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMCDATASectionFromID(id objc.ID) *DOMCDATASection {
 	if id == 0 {
 		return nil
 	}
-	return &DOMCDATASection{inner: raw.DOMCDATASectionFromID(id)}
+	x := &DOMCDATASection{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDOMCDATASection creates a new [DOMCDATASection].
+// dOMCDATASectionAdopt wraps an Objective-C object that this code just created as a
+// DOMCDATASection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMCDATASectionAdopt(id objc.ID) *DOMCDATASection {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMCDATASection{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DOMCDATASection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMCDATASection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMCDATASection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMCDATASection creates a new DOMCDATASection.
 func NewDOMCDATASection() *DOMCDATASection {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMCDATASection")), objc.RegisterName("new"))
-	return &DOMCDATASection{inner: raw.DOMCDATASectionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMCDATASection")), objc.RegisterName("new"))
+	return dOMCDATASectionAdopt(_id)
 }
 
-// WithData sets the data property and returns the receiver for chaining.
+// WithData sets data and returns the receiver so calls can be chained.
 func (x *DOMCDATASection) WithData(data string) *DOMCDATASection {
-	x.inner.DOMText.DOMCharacterData.SetData(foundation.NSStringStringWithUTF8String(data))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 	return x
 }
 
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
 func (x *DOMCDATASection) WithNodeValue(nodeValue string) *DOMCDATASection {
-	x.inner.DOMText.DOMCharacterData.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets the prefix property and returns the receiver for chaining.
+// WithPrefix sets prefix and returns the receiver so calls can be chained.
 func (x *DOMCDATASection) WithPrefix(prefix string) *DOMCDATASection {
-	x.inner.DOMText.DOMCharacterData.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets the textContent property and returns the receiver for chaining.
+// WithTextContent sets textContent and returns the receiver so calls can be chained.
 func (x *DOMCDATASection) WithTextContent(textContent string) *DOMCDATASection {
-	x.inner.DOMText.DOMCharacterData.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
-}
-
-func (x *DOMCDATASection) asDOMText() *raw.DOMText { return &x.inner.DOMText }
-
-func (x *DOMCDATASection) asDOMCharacterData() *raw.DOMCharacterData {
-	return &x.inner.DOMText.DOMCharacterData
-}
-
-func (x *DOMCDATASection) asDOMNode() *raw.DOMNode { return &x.inner.DOMText.DOMCharacterData.DOMNode }
-
-func (x *DOMCDATASection) asDOMObject() *raw.DOMObject {
-	return &x.inner.DOMText.DOMCharacterData.DOMNode.DOMObject
-}
-
-func (x *DOMCDATASection) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMText.DOMCharacterData.DOMNode.DOMObject.WebScriptObject
 }
 
 // DOMCDATASectionable is the interface implemented by [DOMCDATASection], for mocking and DI.
 type DOMCDATASectionable interface {
-	Unwrap() *raw.DOMCDATASection
+	obj.Object
 	WithData(data string) *DOMCDATASection
 	WithNodeValue(nodeValue string) *DOMCDATASection
 	WithPrefix(prefix string) *DOMCDATASection

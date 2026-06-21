@@ -5,232 +5,239 @@
 package metalperformanceshadersgraph
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The class that defines the parameters for a gated recurrent unit (GRU) operation.
 //
-// GraphGRUDescriptor wraps [raw.MPSGraphGRUDescriptor] with a fluent Go API.
+// GraphGRUDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphGRUDescriptor.
 type GraphGRUDescriptor struct {
-	inner *raw.MPSGraphGRUDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSGraphGRUDescriptor].
-func (x *GraphGRUDescriptor) Unwrap() *raw.MPSGraphGRUDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphGRUDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphGRUDescriptorFromID adopts an existing object pointer as a GraphGRUDescriptor (nil for 0).
+// GraphGRUDescriptorFromID adopts an existing Objective-C object as a GraphGRUDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphGRUDescriptorFromID(id objc.ID) *GraphGRUDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &GraphGRUDescriptor{inner: raw.MPSGraphGRUDescriptorFromID(id)}
+	x := &GraphGRUDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGraphGRUDescriptor creates a new [GraphGRUDescriptor].
+// graphGRUDescriptorAdopt wraps an Objective-C object that this code just created as a
+// GraphGRUDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphGRUDescriptorAdopt(id objc.ID) *GraphGRUDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphGRUDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GraphGRUDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GraphGRUDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GraphGRUDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGraphGRUDescriptor creates a new GraphGRUDescriptor.
 func NewGraphGRUDescriptor() *GraphGRUDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphGRUDescriptor")), objc.RegisterName("new"))
-	return &GraphGRUDescriptor{inner: raw.MPSGraphGRUDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphGRUDescriptor")), objc.RegisterName("new"))
+	return graphGRUDescriptorAdopt(_id)
 }
 
 // A parameter that defines the time direction of the input sequence.
 //
-// WithReverse sets the reverse property and returns the receiver for chaining.
+// WithReverse sets reverse and returns the receiver so calls can be chained.
 func (x *GraphGRUDescriptor) WithReverse(reverse bool) *GraphGRUDescriptor {
-	x.inner.SetReverse(reverse)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReverse:"), reverse)
 	return x
 }
 
 // A parameter that defines a bidirectional GRU layer.
 //
-// WithBidirectional sets the bidirectional property and returns the receiver for chaining.
+// WithBidirectional sets bidirectional and returns the receiver so calls can be chained.
 func (x *GraphGRUDescriptor) WithBidirectional(bidirectional bool) *GraphGRUDescriptor {
-	x.inner.SetBidirectional(bidirectional)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBidirectional:"), bidirectional)
 	return x
 }
 
 // A parameter that enables the GRU layer to support training.
 //
-// WithTraining sets the training property and returns the receiver for chaining.
+// WithTraining sets training and returns the receiver so calls can be chained.
 func (x *GraphGRUDescriptor) WithTraining(training bool) *GraphGRUDescriptor {
-	x.inner.SetTraining(training)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTraining:"), training)
 	return x
 }
 
 // A parameter that controls the internal order of the GRU gates.
 //
-// WithResetGateFirst sets the resetGateFirst property and returns the receiver for chaining.
+// WithResetGateFirst sets resetGateFirst and returns the receiver so calls can be chained.
 func (x *GraphGRUDescriptor) WithResetGateFirst(resetGateFirst bool) *GraphGRUDescriptor {
-	x.inner.SetResetGateFirst(resetGateFirst)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResetGateFirst:"), resetGateFirst)
 	return x
 }
 
 // A parameter that chooses between two variants for the reset gate computation.
 //
-// WithResetAfter sets the resetAfter property and returns the receiver for chaining.
+// WithResetAfter sets resetAfter and returns the receiver so calls can be chained.
 func (x *GraphGRUDescriptor) WithResetAfter(resetAfter bool) *GraphGRUDescriptor {
-	x.inner.SetResetAfter(resetAfter)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResetAfter:"), resetAfter)
 	return x
 }
 
 // A parameter that chooses between two variants for the final output computation.
 //
-// WithFlipZ sets the flipZ property and returns the receiver for chaining.
+// WithFlipZ sets flipZ and returns the receiver so calls can be chained.
 func (x *GraphGRUDescriptor) WithFlipZ(flipZ bool) *GraphGRUDescriptor {
-	x.inner.SetFlipZ(flipZ)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlipZ:"), flipZ)
 	return x
 }
 
 // A parameter that defines the activation function to use with the update-gate of the GRU operation.
 //
-// WithUpdateGateActivation sets the updateGateActivation property and returns the receiver for chaining.
-func (x *GraphGRUDescriptor) WithUpdateGateActivation(updateGateActivation MPSGraphRNNActivation) *GraphGRUDescriptor {
-	x.inner.SetUpdateGateActivation(raw.MPSGraphRNNActivation(updateGateActivation))
+// WithUpdateGateActivation sets updateGateActivation and returns the receiver so calls can be chained.
+func (x *GraphGRUDescriptor) WithUpdateGateActivation(updateGateActivation GraphRNNActivation) *GraphGRUDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdateGateActivation:"), updateGateActivation)
 	return x
 }
 
 // A parameter that defines the activation function to use with the reset-gate of the GRU operation.
 //
-// WithResetGateActivation sets the resetGateActivation property and returns the receiver for chaining.
-func (x *GraphGRUDescriptor) WithResetGateActivation(resetGateActivation MPSGraphRNNActivation) *GraphGRUDescriptor {
-	x.inner.SetResetGateActivation(raw.MPSGraphRNNActivation(resetGateActivation))
+// WithResetGateActivation sets resetGateActivation and returns the receiver so calls can be chained.
+func (x *GraphGRUDescriptor) WithResetGateActivation(resetGateActivation GraphRNNActivation) *GraphGRUDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResetGateActivation:"), resetGateActivation)
 	return x
 }
 
 // A parameter that defines the activation function to use with the output-gate of the GRU operation.
 //
-// WithOutputGateActivation sets the outputGateActivation property and returns the receiver for chaining.
-func (x *GraphGRUDescriptor) WithOutputGateActivation(outputGateActivation MPSGraphRNNActivation) *GraphGRUDescriptor {
-	x.inner.SetOutputGateActivation(raw.MPSGraphRNNActivation(outputGateActivation))
+// WithOutputGateActivation sets outputGateActivation and returns the receiver so calls can be chained.
+func (x *GraphGRUDescriptor) WithOutputGateActivation(outputGateActivation GraphRNNActivation) *GraphGRUDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputGateActivation:"), outputGateActivation)
 	return x
 }
 
 // A parameter that defines the time direction of the input sequence. If set to `YES` then the input sequence is passed in reverse time order to the layer. Note: Ignored when `bidirectional = YES`. Default value: `NO`.
-//
-// Reverse calls the underlying Reverse.
 func (x *GraphGRUDescriptor) Reverse() bool {
-	return x.inner.Reverse()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reverse"))
+	return _r
 }
 
-// SetReverse calls the underlying SetReverse.
 func (x *GraphGRUDescriptor) SetReverse(reverse bool) {
-	x.inner.SetReverse(reverse)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReverse:"), reverse)
 }
 
 // A parameter that defines a bidirectional GRU layer. If set to `YES` then the input sequence is traversed in both directions and the two results are concatenated together on the channel-axis. Default value: `NO`.
-//
-// Bidirectional calls the underlying Bidirectional.
 func (x *GraphGRUDescriptor) Bidirectional() bool {
-	return x.inner.Bidirectional()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("bidirectional"))
+	return _r
 }
 
-// SetBidirectional calls the underlying SetBidirectional.
 func (x *GraphGRUDescriptor) SetBidirectional(bidirectional bool) {
-	x.inner.SetBidirectional(bidirectional)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBidirectional:"), bidirectional)
 }
 
 // A parameter that enables the GRU layer to support training. If set to `YES` then the layer will produce training state tensor as a secondary output. Default value: `NO`.
-//
-// Training calls the underlying Training.
 func (x *GraphGRUDescriptor) Training() bool {
-	return x.inner.Training()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("training"))
+	return _r
 }
 
-// SetTraining calls the underlying SetTraining.
 func (x *GraphGRUDescriptor) SetTraining(training bool) {
-	x.inner.SetTraining(training)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTraining:"), training)
 }
 
 // A parameter that controls the internal order of the GRU gates. If set to `YES` then the layer will use the gate-ordering `[ r, z, o ]` instead of default `[ z, r, o ]`. Default value: `NO`.
-//
-// ResetGateFirst calls the underlying ResetGateFirst.
 func (x *GraphGRUDescriptor) ResetGateFirst() bool {
-	return x.inner.ResetGateFirst()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("resetGateFirst"))
+	return _r
 }
 
-// SetResetGateFirst calls the underlying SetResetGateFirst.
 func (x *GraphGRUDescriptor) SetResetGateFirst(resetGateFirst bool) {
-	x.inner.SetResetGateFirst(resetGateFirst)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResetGateFirst:"), resetGateFirst)
 }
 
 // A parameter that chooses between two variants for the reset gate computation. If set to `YES` then the layer will compute the intermediate value as `c[t] = ( b + (h[t-1] m ) R^T) r[t]`. Otherwise it's computed as `c[t] = (h[t-1] r[t] m) R^T`. Default value: `NO`.
-//
-// ResetAfter calls the underlying ResetAfter.
 func (x *GraphGRUDescriptor) ResetAfter() bool {
-	return x.inner.ResetAfter()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("resetAfter"))
+	return _r
 }
 
-// SetResetAfter calls the underlying SetResetAfter.
 func (x *GraphGRUDescriptor) SetResetAfter(resetAfter bool) {
-	x.inner.SetResetAfter(resetAfter)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResetAfter:"), resetAfter)
 }
 
 // A parameter that chooses between two variants for the final output computation. If set to `YES` then the layer will compute the final value as `h[t] = z[t] h[t-1] + (1-z[t]) o[t]`. Otherwise it's computed as `h[t] = (1-z[t]) h[t-1] + z[t] o[t]`. Default value: `NO`.
-//
-// FlipZ calls the underlying FlipZ.
 func (x *GraphGRUDescriptor) FlipZ() bool {
-	return x.inner.FlipZ()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("flipZ"))
+	return _r
 }
 
-// SetFlipZ calls the underlying SetFlipZ.
 func (x *GraphGRUDescriptor) SetFlipZ(flipZ bool) {
-	x.inner.SetFlipZ(flipZ)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlipZ:"), flipZ)
 }
 
 // A parameter that defines the activation function to use with the update-gate of the GRU operation. Default value: `MPSGraphRNNActivationSigmoid`.
-//
-// UpdateGateActivation calls the underlying UpdateGateActivation.
-func (x *GraphGRUDescriptor) UpdateGateActivation() MPSGraphRNNActivation {
-	return MPSGraphRNNActivation(x.inner.UpdateGateActivation())
+func (x *GraphGRUDescriptor) UpdateGateActivation() GraphRNNActivation {
+	_r := objc.Send[GraphRNNActivation](objref.IDOf(x), objc.RegisterName("updateGateActivation"))
+	return _r
 }
 
-// SetUpdateGateActivation calls the underlying SetUpdateGateActivation.
-func (x *GraphGRUDescriptor) SetUpdateGateActivation(updateGateActivation MPSGraphRNNActivation) {
-	x.inner.SetUpdateGateActivation(raw.MPSGraphRNNActivation(updateGateActivation))
+func (x *GraphGRUDescriptor) SetUpdateGateActivation(updateGateActivation GraphRNNActivation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdateGateActivation:"), updateGateActivation)
 }
 
 // A parameter that defines the activation function to use with the reset-gate of the GRU operation. Default value: `MPSGraphRNNActivationSigmoid`.
-//
-// ResetGateActivation calls the underlying ResetGateActivation.
-func (x *GraphGRUDescriptor) ResetGateActivation() MPSGraphRNNActivation {
-	return MPSGraphRNNActivation(x.inner.ResetGateActivation())
+func (x *GraphGRUDescriptor) ResetGateActivation() GraphRNNActivation {
+	_r := objc.Send[GraphRNNActivation](objref.IDOf(x), objc.RegisterName("resetGateActivation"))
+	return _r
 }
 
-// SetResetGateActivation calls the underlying SetResetGateActivation.
-func (x *GraphGRUDescriptor) SetResetGateActivation(resetGateActivation MPSGraphRNNActivation) {
-	x.inner.SetResetGateActivation(raw.MPSGraphRNNActivation(resetGateActivation))
+func (x *GraphGRUDescriptor) SetResetGateActivation(resetGateActivation GraphRNNActivation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResetGateActivation:"), resetGateActivation)
 }
 
 // A parameter that defines the activation function to use with the output-gate of the GRU operation. Default value: `MPSGraphRNNActivationTanh`.
-//
-// OutputGateActivation calls the underlying OutputGateActivation.
-func (x *GraphGRUDescriptor) OutputGateActivation() MPSGraphRNNActivation {
-	return MPSGraphRNNActivation(x.inner.OutputGateActivation())
+func (x *GraphGRUDescriptor) OutputGateActivation() GraphRNNActivation {
+	_r := objc.Send[GraphRNNActivation](objref.IDOf(x), objc.RegisterName("outputGateActivation"))
+	return _r
 }
 
-// SetOutputGateActivation calls the underlying SetOutputGateActivation.
-func (x *GraphGRUDescriptor) SetOutputGateActivation(outputGateActivation MPSGraphRNNActivation) {
-	x.inner.SetOutputGateActivation(raw.MPSGraphRNNActivation(outputGateActivation))
+func (x *GraphGRUDescriptor) SetOutputGateActivation(outputGateActivation GraphRNNActivation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputGateActivation:"), outputGateActivation)
 }
-
-func (x *GraphGRUDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
 
 // GraphGRUDescriptorable is the interface implemented by [GraphGRUDescriptor], for mocking and DI.
 type GraphGRUDescriptorable interface {
-	Unwrap() *raw.MPSGraphGRUDescriptor
+	obj.Object
 	WithReverse(reverse bool) *GraphGRUDescriptor
 	WithBidirectional(bidirectional bool) *GraphGRUDescriptor
 	WithTraining(training bool) *GraphGRUDescriptor
 	WithResetGateFirst(resetGateFirst bool) *GraphGRUDescriptor
 	WithResetAfter(resetAfter bool) *GraphGRUDescriptor
 	WithFlipZ(flipZ bool) *GraphGRUDescriptor
-	WithUpdateGateActivation(updateGateActivation MPSGraphRNNActivation) *GraphGRUDescriptor
-	WithResetGateActivation(resetGateActivation MPSGraphRNNActivation) *GraphGRUDescriptor
-	WithOutputGateActivation(outputGateActivation MPSGraphRNNActivation) *GraphGRUDescriptor
+	WithUpdateGateActivation(updateGateActivation GraphRNNActivation) *GraphGRUDescriptor
+	WithResetGateActivation(resetGateActivation GraphRNNActivation) *GraphGRUDescriptor
+	WithOutputGateActivation(outputGateActivation GraphRNNActivation) *GraphGRUDescriptor
 	Reverse() bool
 	SetReverse(reverse bool)
 	Bidirectional() bool
@@ -243,12 +250,12 @@ type GraphGRUDescriptorable interface {
 	SetResetAfter(resetAfter bool)
 	FlipZ() bool
 	SetFlipZ(flipZ bool)
-	UpdateGateActivation() MPSGraphRNNActivation
-	SetUpdateGateActivation(updateGateActivation MPSGraphRNNActivation)
-	ResetGateActivation() MPSGraphRNNActivation
-	SetResetGateActivation(resetGateActivation MPSGraphRNNActivation)
-	OutputGateActivation() MPSGraphRNNActivation
-	SetOutputGateActivation(outputGateActivation MPSGraphRNNActivation)
+	UpdateGateActivation() GraphRNNActivation
+	SetUpdateGateActivation(updateGateActivation GraphRNNActivation)
+	ResetGateActivation() GraphRNNActivation
+	SetResetGateActivation(resetGateActivation GraphRNNActivation)
+	OutputGateActivation() GraphRNNActivation
+	SetOutputGateActivation(outputGateActivation GraphRNNActivation)
 }
 
 var _ GraphGRUDescriptorable = (*GraphGRUDescriptor)(nil)

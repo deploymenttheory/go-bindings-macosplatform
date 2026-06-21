@@ -5,80 +5,74 @@
 package fskit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A class that enables a file system module to pass log messages and completion notifications to clients.
 //
-// Task wraps [raw.FSTask] with a fluent Go API.
+// Task is an idiomatic wrapper over the Objective-C class FSTask.
 type Task struct {
-	inner *raw.FSTask
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSTask].
-func (x *Task) Unwrap() *raw.FSTask { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Task) ID() objc.ID { return x.inner.Ptr() }
-
-// TaskFromID adopts an existing object pointer as a Task (nil for 0).
+// TaskFromID adopts an existing Objective-C object as a Task
+// (nil for 0), retaining it and registering a release finalizer.
 func TaskFromID(id objc.ID) *Task {
 	if id == 0 {
 		return nil
 	}
-	return &Task{inner: raw.FSTaskFromID(id)}
-}
-
-// NewTask creates a new [Task].
-func NewTask() *Task {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSTask")), objc.RegisterName("new"))
-	return &Task{inner: raw.FSTaskFromID(_id)}
-}
-
-// A handler called by FSKit upon canceling the task.
-//
-// WithCancellationHandler sets the cancellationHandler property and returns the receiver for chaining.
-func (x *Task) WithCancellationHandler(cancellationHandler func() unsafe.Pointer) *Task {
-	x.inner.SetCancellationHandler(cancellationHandler)
+	x := &Task{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
+// taskAdopt wraps an Objective-C object that this code just created as a
+// Task (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func taskAdopt(id objc.ID) *Task {
+	if id == 0 {
+		return nil
+	}
+	x := &Task{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Task) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Task) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Task) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTask creates a new Task.
+func NewTask() *Task {
+	_id := objc.Send[objc.ID](objc.ID(_class("FSTask")), objc.RegisterName("new"))
+	return taskAdopt(_id)
+}
+
 // Logs the given string to the initiating client.
-//
-// LogMessage calls the underlying LogMessage.
 func (x *Task) LogMessage(str string) {
-	x.inner.LogMessage(foundation.NSStringStringWithUTF8String(str))
-}
-
-// Informs the client that the task completed.
-//
-// DidCompleteWithError calls the underlying DidCompleteWithError.
-func (x *Task) DidCompleteWithError(error_ unsafe.Pointer) {
-	x.inner.DidCompleteWithError(error_)
-}
-
-// CancellationHandler calls the underlying CancellationHandler.
-func (x *Task) CancellationHandler() objc.Block {
-	return x.inner.CancellationHandler()
-}
-
-// SetCancellationHandler calls the underlying SetCancellationHandler.
-func (x *Task) SetCancellationHandler(cancellationHandler func() unsafe.Pointer) {
-	x.inner.SetCancellationHandler(cancellationHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logMessage:"), purego.NSString(str))
 }
 
 // Taskable is the interface implemented by [Task], for mocking and DI.
 type Taskable interface {
-	Unwrap() *raw.FSTask
-	WithCancellationHandler(cancellationHandler func() unsafe.Pointer) *Task
+	obj.Object
 	LogMessage(str string)
-	DidCompleteWithError(error_ unsafe.Pointer)
-	CancellationHandler() objc.Block
-	SetCancellationHandler(cancellationHandler func() unsafe.Pointer)
 }
 
 var _ Taskable = (*Task)(nil)

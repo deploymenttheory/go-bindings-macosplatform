@@ -5,40 +5,40 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// DatabaseOperationProvider is implemented by DatabaseOperation and any idiomatic type wrapping a CKDatabaseOperation subclass.
+// DatabaseOperationProvider is accepted wherever a CKDatabaseOperation (or one of its subclasses) is expected.
 type DatabaseOperationProvider interface {
-	asDatabaseOperation() *raw.CKDatabaseOperation
+	objref.Object
 }
 
-// NotificationProvider is implemented by Notification and any idiomatic type wrapping a CKNotification subclass.
+// NotificationProvider is accepted wherever a CKNotification (or one of its subclasses) is expected.
 type NotificationProvider interface {
-	asNotification() *raw.CKNotification
+	objref.Object
 }
 
-// OperationProvider is implemented by Operation and any idiomatic type wrapping a CKOperation subclass.
+// OperationProvider is accepted wherever a CKOperation (or one of its subclasses) is expected.
 type OperationProvider interface {
-	asOperation() *raw.CKOperation
+	objref.Object
 }
 
-// RecordProvider is implemented by Record and any idiomatic type wrapping a CKRecord subclass.
+// RecordProvider is accepted wherever a CKRecord (or one of its subclasses) is expected.
 type RecordProvider interface {
-	asRecord() *raw.CKRecord
+	objref.Object
 }
 
-// SubscriptionProvider is implemented by Subscription and any idiomatic type wrapping a CKSubscription subclass.
+// SubscriptionProvider is accepted wherever a CKSubscription (or one of its subclasses) is expected.
 type SubscriptionProvider interface {
-	asSubscription() *raw.CKSubscription
+	objref.Object
 }
 
-// SyncEngineEventProvider is implemented by SyncEngineEvent and any idiomatic type wrapping a CKSyncEngineEvent subclass.
+// SyncEngineEventProvider is accepted wherever a CKSyncEngineEvent (or one of its subclasses) is expected.
 type SyncEngineEventProvider interface {
-	asSyncEngineEvent() *raw.CKSyncEngineEvent
+	objref.Object
 }
 
-// SyncEnginePendingDatabaseChangeProvider is implemented by SyncEnginePendingDatabaseChange and any idiomatic type wrapping a CKSyncEnginePendingDatabaseChange subclass.
+// SyncEnginePendingDatabaseChangeProvider is accepted wherever a CKSyncEnginePendingDatabaseChange (or one of its subclasses) is expected.
 type SyncEnginePendingDatabaseChangeProvider interface {
-	asSyncEnginePendingDatabaseChange() *raw.CKSyncEnginePendingDatabaseChange
+	objref.Object
 }

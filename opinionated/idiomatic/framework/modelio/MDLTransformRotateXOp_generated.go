@@ -5,58 +5,79 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// TransformRotateXOp wraps [raw.MDLTransformRotateXOp] with a fluent Go API.
+// TransformRotateXOp is an idiomatic wrapper over the Objective-C class MDLTransformRotateXOp.
 type TransformRotateXOp struct {
-	inner *raw.MDLTransformRotateXOp
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLTransformRotateXOp].
-func (x *TransformRotateXOp) Unwrap() *raw.MDLTransformRotateXOp { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TransformRotateXOp) ID() objc.ID { return x.inner.Ptr() }
-
-// TransformRotateXOpFromID adopts an existing object pointer as a TransformRotateXOp (nil for 0).
+// TransformRotateXOpFromID adopts an existing Objective-C object as a TransformRotateXOp
+// (nil for 0), retaining it and registering a release finalizer.
 func TransformRotateXOpFromID(id objc.ID) *TransformRotateXOp {
 	if id == 0 {
 		return nil
 	}
-	return &TransformRotateXOp{inner: raw.MDLTransformRotateXOpFromID(id)}
+	x := &TransformRotateXOp{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTransformRotateXOp creates a new [TransformRotateXOp].
-func NewTransformRotateXOp() *TransformRotateXOp {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTransformRotateXOp")), objc.RegisterName("new"))
-	return &TransformRotateXOp{inner: raw.MDLTransformRotateXOpFromID(_id)}
-}
-
-// Name calls the underlying Name.
-func (x *TransformRotateXOp) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// AnimatedValue calls the underlying AnimatedValue.
-func (x *TransformRotateXOp) AnimatedValue() *AnimatedScalar {
-	_r := x.inner.AnimatedValue()
-	if _r == nil {
+// transformRotateXOpAdopt wraps an Objective-C object that this code just created as a
+// TransformRotateXOp (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func transformRotateXOpAdopt(id objc.ID) *TransformRotateXOp {
+	if id == 0 {
 		return nil
 	}
-	return &AnimatedScalar{inner: _r}
+	x := &TransformRotateXOp{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TransformRotateXOp) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TransformRotateXOp) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TransformRotateXOp) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTransformRotateXOp creates a new TransformRotateXOp.
+func NewTransformRotateXOp() *TransformRotateXOp {
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLTransformRotateXOp")), objc.RegisterName("new"))
+	return transformRotateXOpAdopt(_id)
+}
+
+func (x *TransformRotateXOp) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *TransformRotateXOp) AnimatedValue() *AnimatedScalar {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animatedValue"))
+	return AnimatedScalarFromID(_r)
 }
 
 // TransformRotateXOpable is the interface implemented by [TransformRotateXOp], for mocking and DI.
 type TransformRotateXOpable interface {
-	Unwrap() *raw.MDLTransformRotateXOp
+	obj.Object
 	Name() string
 	AnimatedValue() *AnimatedScalar
 }

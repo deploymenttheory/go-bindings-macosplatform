@@ -5,45 +5,68 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A generator for random numbers that are uniformly distributed across many samplings, but where short sequences of similar values are unlikely.
 //
-// ShuffledDistribution wraps [raw.GKShuffledDistribution] with a fluent Go API.
+// ShuffledDistribution is an idiomatic wrapper over the Objective-C class GKShuffledDistribution.
 type ShuffledDistribution struct {
-	inner *raw.GKShuffledDistribution
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKShuffledDistribution].
-func (x *ShuffledDistribution) Unwrap() *raw.GKShuffledDistribution { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ShuffledDistribution) ID() objc.ID { return x.inner.Ptr() }
-
-// ShuffledDistributionFromID adopts an existing object pointer as a ShuffledDistribution (nil for 0).
+// ShuffledDistributionFromID adopts an existing Objective-C object as a ShuffledDistribution
+// (nil for 0), retaining it and registering a release finalizer.
 func ShuffledDistributionFromID(id objc.ID) *ShuffledDistribution {
 	if id == 0 {
 		return nil
 	}
-	return &ShuffledDistribution{inner: raw.GKShuffledDistributionFromID(id)}
+	x := &ShuffledDistribution{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewShuffledDistribution creates a new [ShuffledDistribution].
+// shuffledDistributionAdopt wraps an Objective-C object that this code just created as a
+// ShuffledDistribution (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shuffledDistributionAdopt(id objc.ID) *ShuffledDistribution {
+	if id == 0 {
+		return nil
+	}
+	x := &ShuffledDistribution{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ShuffledDistribution) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ShuffledDistribution) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ShuffledDistribution) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewShuffledDistribution creates a new ShuffledDistribution.
 func NewShuffledDistribution() *ShuffledDistribution {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKShuffledDistribution")), objc.RegisterName("new"))
-	return &ShuffledDistribution{inner: raw.GKShuffledDistributionFromID(_id)}
-}
-
-func (x *ShuffledDistribution) asRandomDistribution() *raw.GKRandomDistribution {
-	return &x.inner.GKRandomDistribution
+	_id := objc.Send[objc.ID](objc.ID(_class("GKShuffledDistribution")), objc.RegisterName("new"))
+	return shuffledDistributionAdopt(_id)
 }
 
 // ShuffledDistributionable is the interface implemented by [ShuffledDistribution], for mocking and DI.
 type ShuffledDistributionable interface {
-	Unwrap() *raw.GKShuffledDistribution
+	obj.Object
 }
 
 var _ ShuffledDistributionable = (*ShuffledDistribution)(nil)

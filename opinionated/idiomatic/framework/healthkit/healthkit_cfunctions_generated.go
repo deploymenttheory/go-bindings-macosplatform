@@ -5,47 +5,80 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// HKAppleSleepingBreathingDisturbancesClassificationForQuantity calls [raw.HKAppleSleepingBreathingDisturbancesClassificationForQuantity] (C function HKAppleSleepingBreathingDisturbancesClassificationForQuantity).
-func HKAppleSleepingBreathingDisturbancesClassificationForQuantity(value *raw.HKQuantity) *foundation.NSNumber {
-	return raw.HKAppleSleepingBreathingDisturbancesClassificationForQuantity(value)
-}
+var _fnHKAppleSleepingBreathingDisturbancesClassificationForQuantity func(objc.ID) objc.ID
 
-// HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification calls [raw.HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification] (C function HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification).
-func HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification(classification HKAppleSleepingBreathingDisturbancesClassification) *raw.HKQuantity {
-	return raw.HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification(raw.HKAppleSleepingBreathingDisturbancesClassification(classification))
-}
-
-// HKAppleWalkingSteadinessClassificationForQuantity calls [raw.HKAppleWalkingSteadinessClassificationForQuantity] (C function HKAppleWalkingSteadinessClassificationForQuantity).
-func HKAppleWalkingSteadinessClassificationForQuantity(value *raw.HKQuantity, classificationOut *HKAppleWalkingSteadinessClassification, errorOut unsafe.Pointer) bool {
-	var _classificationOut raw.HKAppleWalkingSteadinessClassification
-	_ret := raw.HKAppleWalkingSteadinessClassificationForQuantity(value, &_classificationOut, errorOut)
-	if classificationOut != nil {
-		*classificationOut = HKAppleWalkingSteadinessClassification(_classificationOut)
+// HKAppleSleepingBreathingDisturbancesClassificationForQuantity calls the HealthKit framework function HKAppleSleepingBreathingDisturbancesClassificationForQuantity.
+func HKAppleSleepingBreathingDisturbancesClassificationForQuantity(value *Quantity) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHKAppleSleepingBreathingDisturbancesClassificationForQuantity == nil {
+		ebipurego.RegisterLibFunc(&_fnHKAppleSleepingBreathingDisturbancesClassificationForQuantity, _lib, "HKAppleSleepingBreathingDisturbancesClassificationForQuantity")
 	}
-	return _ret
+	_ret := _fnHKAppleSleepingBreathingDisturbancesClassificationForQuantity(objref.IDOf(value))
+	return obj.Wrap(_ret)
 }
 
-// HKAppleWalkingSteadinessMaximumQuantityForClassification calls [raw.HKAppleWalkingSteadinessMaximumQuantityForClassification] (C function HKAppleWalkingSteadinessMaximumQuantityForClassification).
-func HKAppleWalkingSteadinessMaximumQuantityForClassification(classification HKAppleWalkingSteadinessClassification) *raw.HKQuantity {
-	return raw.HKAppleWalkingSteadinessMaximumQuantityForClassification(raw.HKAppleWalkingSteadinessClassification(classification))
+var _fnHKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification func(AppleSleepingBreathingDisturbancesClassification) objc.ID
+
+// HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification calls the HealthKit framework function HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification.
+func HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification(classification AppleSleepingBreathingDisturbancesClassification) *Quantity {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification == nil {
+		ebipurego.RegisterLibFunc(&_fnHKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification, _lib, "HKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification")
+	}
+	_ret := _fnHKAppleSleepingBreathingDisturbancesMinimumQuantityForClassification(classification)
+	return QuantityFromID(_ret)
 }
 
-// HKAppleWalkingSteadinessMinimumQuantityForClassification calls [raw.HKAppleWalkingSteadinessMinimumQuantityForClassification] (C function HKAppleWalkingSteadinessMinimumQuantityForClassification).
-func HKAppleWalkingSteadinessMinimumQuantityForClassification(classification HKAppleWalkingSteadinessClassification) *raw.HKQuantity {
-	return raw.HKAppleWalkingSteadinessMinimumQuantityForClassification(raw.HKAppleWalkingSteadinessClassification(classification))
+var _fnHKAppleWalkingSteadinessMaximumQuantityForClassification func(AppleWalkingSteadinessClassification) objc.ID
+
+// HKAppleWalkingSteadinessMaximumQuantityForClassification calls the HealthKit framework function HKAppleWalkingSteadinessMaximumQuantityForClassification.
+func HKAppleWalkingSteadinessMaximumQuantityForClassification(classification AppleWalkingSteadinessClassification) *Quantity {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHKAppleWalkingSteadinessMaximumQuantityForClassification == nil {
+		ebipurego.RegisterLibFunc(&_fnHKAppleWalkingSteadinessMaximumQuantityForClassification, _lib, "HKAppleWalkingSteadinessMaximumQuantityForClassification")
+	}
+	_ret := _fnHKAppleWalkingSteadinessMaximumQuantityForClassification(classification)
+	return QuantityFromID(_ret)
 }
 
-// HKCategoryValueSleepAnalysisAsleepValues calls [raw.HKCategoryValueSleepAnalysisAsleepValues] (C function HKCategoryValueSleepAnalysisAsleepValues).
-func HKCategoryValueSleepAnalysisAsleepValues() *foundation.NSSet[*foundation.NSNumber] {
-	return raw.HKCategoryValueSleepAnalysisAsleepValues()
+var _fnHKAppleWalkingSteadinessMinimumQuantityForClassification func(AppleWalkingSteadinessClassification) objc.ID
+
+// HKAppleWalkingSteadinessMinimumQuantityForClassification calls the HealthKit framework function HKAppleWalkingSteadinessMinimumQuantityForClassification.
+func HKAppleWalkingSteadinessMinimumQuantityForClassification(classification AppleWalkingSteadinessClassification) *Quantity {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHKAppleWalkingSteadinessMinimumQuantityForClassification == nil {
+		ebipurego.RegisterLibFunc(&_fnHKAppleWalkingSteadinessMinimumQuantityForClassification, _lib, "HKAppleWalkingSteadinessMinimumQuantityForClassification")
+	}
+	_ret := _fnHKAppleWalkingSteadinessMinimumQuantityForClassification(classification)
+	return QuantityFromID(_ret)
 }
 
-// HKStateOfMindValenceClassificationForValence calls [raw.HKStateOfMindValenceClassificationForValence] (C function HKStateOfMindValenceClassificationForValence).
-func HKStateOfMindValenceClassificationForValence(valence float64) *foundation.NSNumber {
-	return raw.HKStateOfMindValenceClassificationForValence(valence)
+var _fnHKCategoryValueSleepAnalysisAsleepValues func() objc.ID
+
+// HKCategoryValueSleepAnalysisAsleepValues calls the HealthKit framework function HKCategoryValueSleepAnalysisAsleepValues.
+func HKCategoryValueSleepAnalysisAsleepValues() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHKCategoryValueSleepAnalysisAsleepValues == nil {
+		ebipurego.RegisterLibFunc(&_fnHKCategoryValueSleepAnalysisAsleepValues, _lib, "HKCategoryValueSleepAnalysisAsleepValues")
+	}
+	_ret := _fnHKCategoryValueSleepAnalysisAsleepValues()
+	return obj.Wrap(_ret)
+}
+
+var _fnHKStateOfMindValenceClassificationForValence func(float64) objc.ID
+
+// HKStateOfMindValenceClassificationForValence calls the HealthKit framework function HKStateOfMindValenceClassificationForValence.
+func HKStateOfMindValenceClassificationForValence(valence float64) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnHKStateOfMindValenceClassificationForValence == nil {
+		ebipurego.RegisterLibFunc(&_fnHKStateOfMindValenceClassificationForValence, _lib, "HKStateOfMindValenceClassificationForValence")
+	}
+	_ret := _fnHKStateOfMindValenceClassificationForValence(valence)
+	return obj.Wrap(_ret)
 }

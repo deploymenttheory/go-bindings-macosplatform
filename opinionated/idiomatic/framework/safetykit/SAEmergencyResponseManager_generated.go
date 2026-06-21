@@ -5,74 +5,68 @@
 package safetykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safetykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Provides actions in response to a Crash Detection event.
 //
-// EmergencyResponseManager wraps [raw.SAEmergencyResponseManager] with a fluent Go API.
+// EmergencyResponseManager is an idiomatic wrapper over the Objective-C class SAEmergencyResponseManager.
 type EmergencyResponseManager struct {
-	inner *raw.SAEmergencyResponseManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SAEmergencyResponseManager].
-func (x *EmergencyResponseManager) Unwrap() *raw.SAEmergencyResponseManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EmergencyResponseManager) ID() objc.ID { return x.inner.Ptr() }
-
-// EmergencyResponseManagerFromID adopts an existing object pointer as a EmergencyResponseManager (nil for 0).
+// EmergencyResponseManagerFromID adopts an existing Objective-C object as a EmergencyResponseManager
+// (nil for 0), retaining it and registering a release finalizer.
 func EmergencyResponseManagerFromID(id objc.ID) *EmergencyResponseManager {
 	if id == 0 {
 		return nil
 	}
-	return &EmergencyResponseManager{inner: raw.SAEmergencyResponseManagerFromID(id)}
-}
-
-// NewEmergencyResponseManager creates a new [EmergencyResponseManager].
-func NewEmergencyResponseManager() *EmergencyResponseManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SAEmergencyResponseManager")), objc.RegisterName("new"))
-	return &EmergencyResponseManager{inner: raw.SAEmergencyResponseManagerFromID(_id)}
-}
-
-// The object that receives voice call status updates and requested emergency response actions.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *EmergencyResponseManager) WithDelegate(delegate raw.SAEmergencyResponseDelegate) *EmergencyResponseManager {
-	x.inner.SetDelegate(delegate)
+	x := &EmergencyResponseManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Request the system to dial a voice call on behalf of someone involved in a crash.
-//
-// DialVoiceCallToPhoneNumberCompletionHandler calls the underlying DialVoiceCallToPhoneNumberCompletionHandler.
-func (x *EmergencyResponseManager) DialVoiceCallToPhoneNumberCompletionHandler(phoneNumber string, handler func(bool, unsafe.Pointer)) {
-	x.inner.DialVoiceCallToPhoneNumberCompletionHandler(foundation.NSStringStringWithUTF8String(phoneNumber), handler)
+// emergencyResponseManagerAdopt wraps an Objective-C object that this code just created as a
+// EmergencyResponseManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func emergencyResponseManagerAdopt(id objc.ID) *EmergencyResponseManager {
+	if id == 0 {
+		return nil
+	}
+	x := &EmergencyResponseManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// delegate @discussion The delegate object to receive updates about requested emergency response action.
-//
-// Delegate calls the underlying Delegate.
-func (x *EmergencyResponseManager) Delegate() raw.SAEmergencyResponseDelegate {
-	return x.inner.Delegate()
+// Description returns the object's -description text.
+func (x *EmergencyResponseManager) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *EmergencyResponseManager) SetDelegate(delegate raw.SAEmergencyResponseDelegate) {
-	x.inner.SetDelegate(delegate)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EmergencyResponseManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EmergencyResponseManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEmergencyResponseManager creates a new EmergencyResponseManager.
+func NewEmergencyResponseManager() *EmergencyResponseManager {
+	_id := objc.Send[objc.ID](objc.ID(_class("SAEmergencyResponseManager")), objc.RegisterName("new"))
+	return emergencyResponseManagerAdopt(_id)
 }
 
 // EmergencyResponseManagerable is the interface implemented by [EmergencyResponseManager], for mocking and DI.
 type EmergencyResponseManagerable interface {
-	Unwrap() *raw.SAEmergencyResponseManager
-	WithDelegate(delegate raw.SAEmergencyResponseDelegate) *EmergencyResponseManager
-	DialVoiceCallToPhoneNumberCompletionHandler(phoneNumber string, handler func(bool, unsafe.Pointer))
-	Delegate() raw.SAEmergencyResponseDelegate
-	SetDelegate(delegate raw.SAEmergencyResponseDelegate)
+	obj.Object
 }
 
 var _ EmergencyResponseManagerable = (*EmergencyResponseManager)(nil)

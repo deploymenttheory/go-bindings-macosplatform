@@ -5,80 +5,102 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRServiceAreaClusterLandmarkInfoStruct wraps [raw.MTRServiceAreaClusterLandmarkInfoStruct] with a fluent Go API.
+// MTRServiceAreaClusterLandmarkInfoStruct is an idiomatic wrapper over the Objective-C class MTRServiceAreaClusterLandmarkInfoStruct.
 type MTRServiceAreaClusterLandmarkInfoStruct struct {
-	inner *raw.MTRServiceAreaClusterLandmarkInfoStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRServiceAreaClusterLandmarkInfoStruct].
-func (x *MTRServiceAreaClusterLandmarkInfoStruct) Unwrap() *raw.MTRServiceAreaClusterLandmarkInfoStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRServiceAreaClusterLandmarkInfoStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRServiceAreaClusterLandmarkInfoStructFromID adopts an existing object pointer as a MTRServiceAreaClusterLandmarkInfoStruct (nil for 0).
+// MTRServiceAreaClusterLandmarkInfoStructFromID adopts an existing Objective-C object as a MTRServiceAreaClusterLandmarkInfoStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRServiceAreaClusterLandmarkInfoStructFromID(id objc.ID) *MTRServiceAreaClusterLandmarkInfoStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRServiceAreaClusterLandmarkInfoStruct{inner: raw.MTRServiceAreaClusterLandmarkInfoStructFromID(id)}
+	x := &MTRServiceAreaClusterLandmarkInfoStruct{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRServiceAreaClusterLandmarkInfoStruct creates a new [MTRServiceAreaClusterLandmarkInfoStruct].
+// mTRServiceAreaClusterLandmarkInfoStructAdopt wraps an Objective-C object that this code just created as a
+// MTRServiceAreaClusterLandmarkInfoStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRServiceAreaClusterLandmarkInfoStructAdopt(id objc.ID) *MTRServiceAreaClusterLandmarkInfoStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRServiceAreaClusterLandmarkInfoStruct{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRServiceAreaClusterLandmarkInfoStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRServiceAreaClusterLandmarkInfoStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRServiceAreaClusterLandmarkInfoStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRServiceAreaClusterLandmarkInfoStruct creates a new MTRServiceAreaClusterLandmarkInfoStruct.
 func NewMTRServiceAreaClusterLandmarkInfoStruct() *MTRServiceAreaClusterLandmarkInfoStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRServiceAreaClusterLandmarkInfoStruct")), objc.RegisterName("new"))
-	return &MTRServiceAreaClusterLandmarkInfoStruct{inner: raw.MTRServiceAreaClusterLandmarkInfoStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRServiceAreaClusterLandmarkInfoStruct")), objc.RegisterName("new"))
+	return mTRServiceAreaClusterLandmarkInfoStructAdopt(_id)
 }
 
-// WithLandmarkTag sets the landmarkTag property and returns the receiver for chaining.
-func (x *MTRServiceAreaClusterLandmarkInfoStruct) WithLandmarkTag(landmarkTag *foundation.NSNumber) *MTRServiceAreaClusterLandmarkInfoStruct {
-	x.inner.SetLandmarkTag(landmarkTag)
+// WithLandmarkTag sets landmarkTag and returns the receiver so calls can be chained.
+func (x *MTRServiceAreaClusterLandmarkInfoStruct) WithLandmarkTag(landmarkTag obj.Object) *MTRServiceAreaClusterLandmarkInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLandmarkTag:"), objref.IDOf(landmarkTag))
 	return x
 }
 
-// WithRelativePositionTag sets the relativePositionTag property and returns the receiver for chaining.
-func (x *MTRServiceAreaClusterLandmarkInfoStruct) WithRelativePositionTag(relativePositionTag *foundation.NSNumber) *MTRServiceAreaClusterLandmarkInfoStruct {
-	x.inner.SetRelativePositionTag(relativePositionTag)
+// WithRelativePositionTag sets relativePositionTag and returns the receiver so calls can be chained.
+func (x *MTRServiceAreaClusterLandmarkInfoStruct) WithRelativePositionTag(relativePositionTag obj.Object) *MTRServiceAreaClusterLandmarkInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativePositionTag:"), objref.IDOf(relativePositionTag))
 	return x
 }
 
-// LandmarkTag calls the underlying LandmarkTag.
-func (x *MTRServiceAreaClusterLandmarkInfoStruct) LandmarkTag() *foundation.NSNumber {
-	return x.inner.LandmarkTag()
+func (x *MTRServiceAreaClusterLandmarkInfoStruct) LandmarkTag() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("landmarkTag"))
+	return obj.Wrap(_r)
 }
 
-// SetLandmarkTag calls the underlying SetLandmarkTag.
-func (x *MTRServiceAreaClusterLandmarkInfoStruct) SetLandmarkTag(landmarkTag *foundation.NSNumber) {
-	x.inner.SetLandmarkTag(landmarkTag)
+func (x *MTRServiceAreaClusterLandmarkInfoStruct) SetLandmarkTag(landmarkTag obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLandmarkTag:"), objref.IDOf(landmarkTag))
 }
 
-// RelativePositionTag calls the underlying RelativePositionTag.
-func (x *MTRServiceAreaClusterLandmarkInfoStruct) RelativePositionTag() *foundation.NSNumber {
-	return x.inner.RelativePositionTag()
+func (x *MTRServiceAreaClusterLandmarkInfoStruct) RelativePositionTag() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relativePositionTag"))
+	return obj.Wrap(_r)
 }
 
-// SetRelativePositionTag calls the underlying SetRelativePositionTag.
-func (x *MTRServiceAreaClusterLandmarkInfoStruct) SetRelativePositionTag(relativePositionTag *foundation.NSNumber) {
-	x.inner.SetRelativePositionTag(relativePositionTag)
+func (x *MTRServiceAreaClusterLandmarkInfoStruct) SetRelativePositionTag(relativePositionTag obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativePositionTag:"), objref.IDOf(relativePositionTag))
 }
 
 // MTRServiceAreaClusterLandmarkInfoStructable is the interface implemented by [MTRServiceAreaClusterLandmarkInfoStruct], for mocking and DI.
 type MTRServiceAreaClusterLandmarkInfoStructable interface {
-	Unwrap() *raw.MTRServiceAreaClusterLandmarkInfoStruct
-	WithLandmarkTag(landmarkTag *foundation.NSNumber) *MTRServiceAreaClusterLandmarkInfoStruct
-	WithRelativePositionTag(relativePositionTag *foundation.NSNumber) *MTRServiceAreaClusterLandmarkInfoStruct
-	LandmarkTag() *foundation.NSNumber
-	SetLandmarkTag(landmarkTag *foundation.NSNumber)
-	RelativePositionTag() *foundation.NSNumber
-	SetRelativePositionTag(relativePositionTag *foundation.NSNumber)
+	obj.Object
+	WithLandmarkTag(landmarkTag obj.Object) *MTRServiceAreaClusterLandmarkInfoStruct
+	WithRelativePositionTag(relativePositionTag obj.Object) *MTRServiceAreaClusterLandmarkInfoStruct
+	LandmarkTag() obj.Object
+	SetLandmarkTag(landmarkTag obj.Object)
+	RelativePositionTag() obj.Object
+	SetRelativePositionTag(relativePositionTag obj.Object)
 }
 
 var _ MTRServiceAreaClusterLandmarkInfoStructable = (*MTRServiceAreaClusterLandmarkInfoStruct)(nil)

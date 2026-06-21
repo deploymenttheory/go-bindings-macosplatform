@@ -5,65 +5,85 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A descriptor that specifies a set of samples based on the data type and a predicate.
 //
-// QueryDescriptor wraps [raw.HKQueryDescriptor] with a fluent Go API.
+// QueryDescriptor is an idiomatic wrapper over the Objective-C class HKQueryDescriptor.
 type QueryDescriptor struct {
-	inner *raw.HKQueryDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKQueryDescriptor].
-func (x *QueryDescriptor) Unwrap() *raw.HKQueryDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QueryDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// QueryDescriptorFromID adopts an existing object pointer as a QueryDescriptor (nil for 0).
+// QueryDescriptorFromID adopts an existing Objective-C object as a QueryDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func QueryDescriptorFromID(id objc.ID) *QueryDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &QueryDescriptor{inner: raw.HKQueryDescriptorFromID(id)}
+	x := &QueryDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// queryDescriptorAdopt wraps an Objective-C object that this code just created as a
+// QueryDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func queryDescriptorAdopt(id objc.ID) *QueryDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &QueryDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *QueryDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QueryDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QueryDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new descriptor for the data type and predicate you provided.
 //
-// NewQueryDescriptorWithSampleTypePredicate creates a new [QueryDescriptor].
-func NewQueryDescriptorWithSampleTypePredicate(sampleType *raw.HKSampleType, predicate *foundation.NSPredicate) *QueryDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKQueryDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleType:predicate:"), sampleType.Ptr(), predicate.Ptr())
-	return &QueryDescriptor{inner: raw.HKQueryDescriptorFromID(_id)}
+// NewQueryDescriptorWithSampleTypePredicate creates a new QueryDescriptor.
+func NewQueryDescriptorWithSampleTypePredicate(sampleType *SampleType, predicate obj.Object) *QueryDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKQueryDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleType:predicate:"), objref.IDOf(sampleType), objref.IDOf(predicate))
+	return queryDescriptorAdopt(_id)
 }
 
-// @property      sampleType @abstract      The type of sample to retrieve in an HKQuery.
-//
-// SampleType calls the underlying SampleType.
+// The type of sample to retrieve in an HKQuery.
 func (x *QueryDescriptor) SampleType() *SampleType {
-	_r := x.inner.SampleType()
-	if _r == nil {
-		return nil
-	}
-	return &SampleType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleType"))
+	return SampleTypeFromID(_r)
 }
 
-// @property      predicate @abstract      The predicate which samples should match.
-//
-// Predicate calls the underlying Predicate.
-func (x *QueryDescriptor) Predicate() *foundation.NSPredicate {
-	return x.inner.Predicate()
+// The predicate which samples should match.
+func (x *QueryDescriptor) Predicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
+	return obj.Wrap(_r)
 }
 
 // QueryDescriptorable is the interface implemented by [QueryDescriptor], for mocking and DI.
 type QueryDescriptorable interface {
-	Unwrap() *raw.HKQueryDescriptor
+	obj.Object
 	SampleType() *SampleType
-	Predicate() *foundation.NSPredicate
+	Predicate() obj.Object
 }
 
 var _ QueryDescriptorable = (*QueryDescriptor)(nil)

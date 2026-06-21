@@ -5,227 +5,148 @@
 package audiotoolbox
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that represents a single audio unit parameter.
 //
-// Parameter wraps [raw.AUParameter] with a fluent Go API.
+// Parameter is an idiomatic wrapper over the Objective-C class AUParameter.
 type Parameter struct {
-	inner *raw.AUParameter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AUParameter].
-func (x *Parameter) Unwrap() *raw.AUParameter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Parameter) ID() objc.ID { return x.inner.Ptr() }
-
-// ParameterFromID adopts an existing object pointer as a Parameter (nil for 0).
+// ParameterFromID adopts an existing Objective-C object as a Parameter
+// (nil for 0), retaining it and registering a release finalizer.
 func ParameterFromID(id objc.ID) *Parameter {
 	if id == 0 {
 		return nil
 	}
-	return &Parameter{inner: raw.AUParameterFromID(id)}
+	x := &Parameter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewParameter creates a new [Parameter].
+// parameterAdopt wraps an Objective-C object that this code just created as a
+// Parameter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func parameterAdopt(id objc.ID) *Parameter {
+	if id == 0 {
+		return nil
+	}
+	x := &Parameter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Parameter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Parameter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Parameter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewParameter creates a new Parameter.
 func NewParameter() *Parameter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AUParameter")), objc.RegisterName("new"))
-	return &Parameter{inner: raw.AUParameterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AUParameter")), objc.RegisterName("new"))
+	return parameterAdopt(_id)
 }
 
 // The parameter’s current value.
 //
-// WithValue sets the value property and returns the receiver for chaining.
+// WithValue sets value and returns the receiver so calls can be chained.
 func (x *Parameter) WithValue(value float32) *Parameter {
-	x.inner.SetValue(value)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 	return x
-}
-
-// The callback for parameter value changes.
-//
-// WithImplementorValueObserver sets the implementorValueObserver property and returns the receiver for chaining.
-func (x *Parameter) WithImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) *Parameter {
-	x.inner.AUParameterNode.SetImplementorValueObserver(implementorValueObserver)
-	return x
-}
-
-// The callback for refreshing known stale values in a parameter tree.
-//
-// WithImplementorValueProvider sets the implementorValueProvider property and returns the receiver for chaining.
-func (x *Parameter) WithImplementorValueProvider(implementorValueProvider objc.Block) *Parameter {
-	x.inner.AUParameterNode.SetImplementorValueProvider(implementorValueProvider)
-	return x
-}
-
-// The callback for providing a string representation of a parameter value.
-//
-// WithImplementorStringFromValueCallback sets the implementorStringFromValueCallback property and returns the receiver for chaining.
-func (x *Parameter) WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *Parameter {
-	x.inner.AUParameterNode.SetImplementorStringFromValueCallback(implementorStringFromValueCallback)
-	return x
-}
-
-// The callback for converting a string to a parameter value.
-//
-// WithImplementorValueFromStringCallback sets the implementorValueFromStringCallback property and returns the receiver for chaining.
-func (x *Parameter) WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *Parameter {
-	x.inner.AUParameterNode.SetImplementorValueFromStringCallback(implementorValueFromStringCallback)
-	return x
-}
-
-// The callback for obtaining an abbreviated version of a parameter node display name.
-//
-// WithImplementorDisplayNameWithLengthCallback sets the implementorDisplayNameWithLengthCallback property and returns the receiver for chaining.
-func (x *Parameter) WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *Parameter {
-	x.inner.AUParameterNode.SetImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback)
-	return x
-}
-
-// Sets the parameter’s value, avoiding redundant notifications to the originator.
-//
-// SetValueOriginator calls the underlying SetValueOriginator.
-func (x *Parameter) SetValueOriginator(value float32, originator unsafe.Pointer) {
-	x.inner.SetValueOriginator(value, originator)
-}
-
-// Sets the parameter’s value, preserving the host time of the gesture that initiated the change.
-//
-// SetValueOriginatorAtHostTime calls the underlying SetValueOriginatorAtHostTime.
-func (x *Parameter) SetValueOriginatorAtHostTime(value float32, originator unsafe.Pointer, hostTime uint64) {
-	x.inner.SetValueOriginatorAtHostTime(value, originator, hostTime)
-}
-
-// @brief	Set the parameter's value, preserving the host time of the gesture that initiated the change, and associating an event type such as touch/release. @discussion In general, this method should only be called from a user interface. It initiates a change to a parameter in a way that captures the gesture such that it can be recorded later -- any AUParameterAutomationObservers will receive the host time and event type associated with the parameter change. From an audio playback engine, a host should schedule automated parameter changes through AUAudioUnit's scheduleParameterBlock. Bridged to the v2 function AudioUnitSetParameter.
-//
-// SetValueOriginatorAtHostTimeEventType calls the underlying SetValueOriginatorAtHostTimeEventType.
-func (x *Parameter) SetValueOriginatorAtHostTimeEventType(value float32, originator unsafe.Pointer, hostTime uint64, eventType AUParameterAutomationEventType) {
-	x.inner.SetValueOriginatorAtHostTimeEventType(value, originator, hostTime, raw.AUParameterAutomationEventType(eventType))
-}
-
-// Gets the string representation of a parameter value.
-//
-// StringFromValue calls the underlying StringFromValue.
-func (x *Parameter) StringFromValue(value *float32) string {
-	_r := x.inner.StringFromValue(value)
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
 }
 
 // Converts a string into a parameter value.
-//
-// ValueFromString calls the underlying ValueFromString.
 func (x *Parameter) ValueFromString(string_ string) float32 {
-	return x.inner.ValueFromString(foundation.NSStringStringWithUTF8String(string_))
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("valueFromString:"), purego.NSString(string_))
+	return _r
 }
 
 // The parameter's minimum value.
-//
-// MinValue calls the underlying MinValue.
 func (x *Parameter) MinValue() float32 {
-	return x.inner.MinValue()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minValue"))
+	return _r
 }
 
 // The parameter's maximum value.
-//
-// MaxValue calls the underlying MaxValue.
 func (x *Parameter) MaxValue() float32 {
-	return x.inner.MaxValue()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maxValue"))
+	return _r
 }
 
 // The parameter's unit of measurement.
-//
-// Unit calls the underlying Unit.
 func (x *Parameter) Unit() AudioUnitParameterUnit {
-	return AudioUnitParameterUnit(x.inner.Unit())
+	_r := objc.Send[AudioUnitParameterUnit](objref.IDOf(x), objc.RegisterName("unit"))
+	return _r
 }
 
 // A localized name for the parameter's unit. Supplied by the AU if kAudioUnitParameterUnit_CustomUnit; else by the framework.
-//
-// UnitName calls the underlying UnitName.
 func (x *Parameter) UnitName() string {
-	_r := x.inner.UnitName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Various details of the parameter.
-//
-// Flags calls the underlying Flags.
 func (x *Parameter) Flags() AudioUnitParameterOptions {
-	return AudioUnitParameterOptions(x.inner.Flags())
+	_r := objc.Send[AudioUnitParameterOptions](objref.IDOf(x), objc.RegisterName("flags"))
+	return _r
 }
 
 // The parameter's address.
-//
-// Address calls the underlying Address.
 func (x *Parameter) Address() uint64 {
-	return x.inner.Address()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("address"))
+	return _r
 }
 
 // For parameters with kAudioUnitParameterUnit_Indexed, localized strings corresponding to the values.
 //
 // ValueStrings returns the collection as a Go slice.
 func (x *Parameter) ValueStrings() []string {
-	arr := x.inner.ValueStrings()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueStrings"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// @brief		Parameters whose values may change as a side effect of this parameter's value changing. @discussion Each array value is an NSNumber representing AUParameterAddress.
+// Parameters whose values may change as a side effect of this parameter's value changing. Each array value is an NSNumber representing AUParameterAddress.
 //
 // DependentParameters returns the collection as a Go slice.
-func (x *Parameter) DependentParameters() []*foundation.NSNumber {
-	arr := x.inner.DependentParameters()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *Parameter) DependentParameters() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dependentParameters"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // The parameter's current value.
-//
-// Value calls the underlying Value.
 func (x *Parameter) Value() float32 {
-	return x.inner.Value()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("value"))
+	return _r
 }
 
-// SetValue calls the underlying SetValue.
 func (x *Parameter) SetValue(value float32) {
-	x.inner.SetValue(value)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 }
-
-func (x *Parameter) asParameterNode() *raw.AUParameterNode { return &x.inner.AUParameterNode }
 
 // Parameterable is the interface implemented by [Parameter], for mocking and DI.
 type Parameterable interface {
-	Unwrap() *raw.AUParameter
+	obj.Object
 	WithValue(value float32) *Parameter
-	WithImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) *Parameter
-	WithImplementorValueProvider(implementorValueProvider objc.Block) *Parameter
-	WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *Parameter
-	WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *Parameter
-	WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *Parameter
-	SetValueOriginator(value float32, originator unsafe.Pointer)
-	SetValueOriginatorAtHostTime(value float32, originator unsafe.Pointer, hostTime uint64)
-	SetValueOriginatorAtHostTimeEventType(value float32, originator unsafe.Pointer, hostTime uint64, eventType AUParameterAutomationEventType)
-	StringFromValue(value *float32) string
 	ValueFromString(string_ string) float32
 	MinValue() float32
 	MaxValue() float32
@@ -234,7 +155,7 @@ type Parameterable interface {
 	Flags() AudioUnitParameterOptions
 	Address() uint64
 	ValueStrings() []string
-	DependentParameters() []*foundation.NSNumber
+	DependentParameters() []obj.Object
 	Value() float32
 	SetValue(value float32)
 }

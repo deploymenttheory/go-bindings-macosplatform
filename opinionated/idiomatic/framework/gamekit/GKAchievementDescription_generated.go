@@ -6,182 +6,183 @@ package gamekit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object containing the text and artwork used to present an achievement to a player.
 //
-// AchievementDescription wraps [raw.GKAchievementDescription] with a fluent Go API.
+// AchievementDescription is an idiomatic wrapper over the Objective-C class GKAchievementDescription.
 type AchievementDescription struct {
-	inner *raw.GKAchievementDescription
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKAchievementDescription].
-func (x *AchievementDescription) Unwrap() *raw.GKAchievementDescription { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AchievementDescription) ID() objc.ID { return x.inner.Ptr() }
-
-// AchievementDescriptionFromID adopts an existing object pointer as a AchievementDescription (nil for 0).
+// AchievementDescriptionFromID adopts an existing Objective-C object as a AchievementDescription
+// (nil for 0), retaining it and registering a release finalizer.
 func AchievementDescriptionFromID(id objc.ID) *AchievementDescription {
 	if id == 0 {
 		return nil
 	}
-	return &AchievementDescription{inner: raw.GKAchievementDescriptionFromID(id)}
+	x := &AchievementDescription{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAchievementDescription creates a new [AchievementDescription].
+// achievementDescriptionAdopt wraps an Objective-C object that this code just created as a
+// AchievementDescription (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func achievementDescriptionAdopt(id objc.ID) *AchievementDescription {
+	if id == 0 {
+		return nil
+	}
+	x := &AchievementDescription{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AchievementDescription) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AchievementDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AchievementDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAchievementDescription creates a new AchievementDescription.
 func NewAchievementDescription() *AchievementDescription {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKAchievementDescription")), objc.RegisterName("new"))
-	return &AchievementDescription{inner: raw.GKAchievementDescriptionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKAchievementDescription")), objc.RegisterName("new"))
+	return achievementDescriptionAdopt(_id)
 }
 
-// Identifier calls the underlying Identifier.
 func (x *AchievementDescription) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The group identifier for the achievement, if one exists.
-//
-// GroupIdentifier calls the underlying GroupIdentifier.
 func (x *AchievementDescription) GroupIdentifier() string {
-	_r := x.inner.GroupIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The title of the achievement.
-//
-// Title calls the underlying Title.
 func (x *AchievementDescription) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The description for an unachieved achievement.
-//
-// AchievedDescription calls the underlying AchievedDescription.
 func (x *AchievementDescription) AchievedDescription() string {
-	_r := x.inner.AchievedDescription()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("achievedDescription"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The description for an achieved achievement.
-//
-// UnachievedDescription calls the underlying UnachievedDescription.
 func (x *AchievementDescription) UnachievedDescription() string {
-	_r := x.inner.UnachievedDescription()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unachievedDescription"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Maximum points available for completing this achievement.
-//
-// MaximumPoints calls the underlying MaximumPoints.
 func (x *AchievementDescription) MaximumPoints() int {
-	return x.inner.MaximumPoints()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumPoints"))
+	return _r
 }
 
 // Whether or not the achievement should be listed or displayed if not yet unhidden by the game.
-//
-// IsHidden calls the underlying IsHidden.
 func (x *AchievementDescription) IsHidden() bool {
-	return x.inner.IsHidden()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+	return _r
 }
 
 // Whether or not the achievement will be reported by the game when the user earns it again. This allows the achievement to be used for challenges when the recipient has previously earned it.
-//
-// IsReplayable calls the underlying IsReplayable.
 func (x *AchievementDescription) IsReplayable() bool {
-	return x.inner.IsReplayable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReplayable"))
+	return _r
 }
 
 // If present, the rarity of the achievement expressed as a percentage of players that earned it. Null if not enough data is available to compute it.
-//
-// RarityPercent calls the underlying RarityPercent.
-func (x *AchievementDescription) RarityPercent() *foundation.NSNumber {
-	return x.inner.RarityPercent()
+func (x *AchievementDescription) RarityPercent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rarityPercent"))
+	return obj.Wrap(_r)
 }
 
 // The release state of the achievement in App Store Connect.
-//
-// ReleaseState calls the underlying ReleaseState.
-func (x *AchievementDescription) ReleaseState() GKReleaseState {
-	return GKReleaseState(x.inner.ReleaseState())
+func (x *AchievementDescription) ReleaseState() ReleaseState {
+	_r := objc.Send[ReleaseState](objref.IDOf(x), objc.RegisterName("releaseState"))
+	return _r
 }
 
 // The identifier of the game activity associated with this achievement, as configured by the developer in App Store Connect.
-//
-// ActivityIdentifier calls the underlying ActivityIdentifier.
 func (x *AchievementDescription) ActivityIdentifier() string {
-	_r := x.inner.ActivityIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activityIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The properties when associating this achievement with a game activity, as configured by the developer in App Store Connect.
-//
-// ActivityProperties calls the underlying ActivityProperties.
-func (x *AchievementDescription) ActivityProperties() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	return x.inner.ActivityProperties()
+func (x *AchievementDescription) ActivityProperties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activityProperties"))
+	return obj.Wrap(_r)
 }
 
 // Loads the image to display when the player completes the achievement.
 //
 // LoadImage blocks until the operation completes or ctx is cancelled.
-func (x *AchievementDescription) LoadImage(ctx context.Context) (*appkit.NSImage, error) {
+func (x *AchievementDescription) LoadImage(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *appkit.NSImage
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LoadImageWithCompletionHandler(func(_p0 *appkit.NSImage, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadImageWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *appkit.NSImage
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Image calls the underlying Image.
-func (x *AchievementDescription) Image() unsafe.Pointer {
-	return x.inner.Image()
-}
-
 // AchievementDescriptionable is the interface implemented by [AchievementDescription], for mocking and DI.
 type AchievementDescriptionable interface {
-	Unwrap() *raw.GKAchievementDescription
+	obj.Object
 	Identifier() string
 	GroupIdentifier() string
 	Title() string
@@ -190,12 +191,11 @@ type AchievementDescriptionable interface {
 	MaximumPoints() int
 	IsHidden() bool
 	IsReplayable() bool
-	RarityPercent() *foundation.NSNumber
-	ReleaseState() GKReleaseState
+	RarityPercent() obj.Object
+	ReleaseState() ReleaseState
 	ActivityIdentifier() string
-	ActivityProperties() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
-	LoadImage(ctx context.Context) (*appkit.NSImage, error)
-	Image() unsafe.Pointer
+	ActivityProperties() obj.Object
+	LoadImage(ctx context.Context) (obj.Object, error)
 }
 
 var _ AchievementDescriptionable = (*AchievementDescription)(nil)

@@ -5,212 +5,131 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that provides information about the media sample at the cursor’s current position.
 //
-// SampleCursor wraps [raw.AVSampleCursor] with a fluent Go API.
+// SampleCursor is an idiomatic wrapper over the Objective-C class AVSampleCursor.
 type SampleCursor struct {
-	inner *raw.AVSampleCursor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVSampleCursor].
-func (x *SampleCursor) Unwrap() *raw.AVSampleCursor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SampleCursor) ID() objc.ID { return x.inner.Ptr() }
-
-// SampleCursorFromID adopts an existing object pointer as a SampleCursor (nil for 0).
+// SampleCursorFromID adopts an existing Objective-C object as a SampleCursor
+// (nil for 0), retaining it and registering a release finalizer.
 func SampleCursorFromID(id objc.ID) *SampleCursor {
 	if id == 0 {
 		return nil
 	}
-	return &SampleCursor{inner: raw.AVSampleCursorFromID(id)}
+	x := &SampleCursor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSampleCursor creates a new [SampleCursor].
+// sampleCursorAdopt wraps an Objective-C object that this code just created as a
+// SampleCursor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sampleCursorAdopt(id objc.ID) *SampleCursor {
+	if id == 0 {
+		return nil
+	}
+	x := &SampleCursor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SampleCursor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SampleCursor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SampleCursor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSampleCursor creates a new SampleCursor.
 func NewSampleCursor() *SampleCursor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSampleCursor")), objc.RegisterName("new"))
-	return &SampleCursor{inner: raw.AVSampleCursorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVSampleCursor")), objc.RegisterName("new"))
+	return sampleCursorAdopt(_id)
 }
 
 // Moves the cursor a given number of samples in decode order.
-//
-// StepInDecodeOrderByCount calls the underlying StepInDecodeOrderByCount.
 func (x *SampleCursor) StepInDecodeOrderByCount(stepCount int64) int64 {
-	return x.inner.StepInDecodeOrderByCount(stepCount)
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("stepInDecodeOrderByCount:"), stepCount)
+	return _r
 }
 
 // Moves the cursor a given number of samples in presentation order.
-//
-// StepInPresentationOrderByCount calls the underlying StepInPresentationOrderByCount.
 func (x *SampleCursor) StepInPresentationOrderByCount(stepCount int64) int64 {
-	return x.inner.StepInPresentationOrderByCount(stepCount)
-}
-
-// Moves the cursor by a given delta time on the decode timeline.
-//
-// StepByDecodeTimeWasPinned calls the underlying StepByDecodeTimeWasPinned.
-func (x *SampleCursor) StepByDecodeTimeWasPinned(deltaDecodeTime coremedia.CMTime, outWasPinned *bool) coremedia.CMTime {
-	return x.inner.StepByDecodeTimeWasPinned(deltaDecodeTime, outWasPinned)
-}
-
-// Moves the cursor by a given delta time on the presentation timeline.
-//
-// StepByPresentationTimeWasPinned calls the underlying StepByPresentationTimeWasPinned.
-func (x *SampleCursor) StepByPresentationTimeWasPinned(deltaPresentationTime coremedia.CMTime, outWasPinned *bool) coremedia.CMTime {
-	return x.inner.StepByPresentationTimeWasPinned(deltaPresentationTime, outWasPinned)
-}
-
-// Compares the relative positions of two sample cursors and returns their relative positions.
-//
-// ComparePositionInDecodeOrderWithPositionOfCursor calls the underlying ComparePositionInDecodeOrderWithPositionOfCursor.
-func (x *SampleCursor) ComparePositionInDecodeOrderWithPositionOfCursor(cursor *raw.AVSampleCursor) foundation.NSComparisonResult {
-	return x.inner.ComparePositionInDecodeOrderWithPositionOfCursor(cursor)
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("stepInPresentationOrderByCount:"), stepCount)
+	return _r
 }
 
 // Determines whether a sample earlier in decode order can have a presentation timestamp later than that of the specified sample cursor.
-//
-// SamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor calls the underlying SamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor.
-func (x *SampleCursor) SamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor(cursor *raw.AVSampleCursor) bool {
-	return x.inner.SamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor(cursor)
+func (x *SampleCursor) SamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor(cursor *SampleCursor) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("samplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor:"), objref.IDOf(cursor))
+	return _r
 }
 
 // Determines whether a sample later in decode order can have a presentation timestamp earlier than that of the specified sample cursor.
-//
-// SamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor calls the underlying SamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor.
-func (x *SampleCursor) SamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor(cursor *raw.AVSampleCursor) bool {
-	return x.inner.SamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor(cursor)
-}
-
-// @property		presentationTimeStamp @abstract		The presentation timestamp (PTS) of the sample at the current position of the cursor.
-//
-// PresentationTimeStamp calls the underlying PresentationTimeStamp.
-func (x *SampleCursor) PresentationTimeStamp() coremedia.CMTime {
-	return x.inner.PresentationTimeStamp()
-}
-
-// @property		decodeTimeStamp @abstract		The decode timestamp (DTS) of the sample at the current position of the cursor.
-//
-// DecodeTimeStamp calls the underlying DecodeTimeStamp.
-func (x *SampleCursor) DecodeTimeStamp() coremedia.CMTime {
-	return x.inner.DecodeTimeStamp()
+func (x *SampleCursor) SamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor(cursor *SampleCursor) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("samplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor:"), objref.IDOf(cursor))
+	return _r
 }
 
 // Returns the format description of the sample at the cursor’s current position.
-//
-// CopyCurrentSampleFormatDescription calls the underlying CopyCurrentSampleFormatDescription.
-func (x *SampleCursor) CopyCurrentSampleFormatDescription() unsafe.Pointer {
-	return x.inner.CopyCurrentSampleFormatDescription()
+func (x *SampleCursor) CopyCurrentSampleFormatDescription() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyCurrentSampleFormatDescription"))
+	return obj.Wrap(_r)
 }
 
-// @property		currentSampleDuration @abstract		Indicates the decode duration of the sample at the receiver's current position. @discussion		If the receiver must be advanced past its current position in order to determine the decode duration of the current sample, the value of currentSampleDuration is equal to kCMTimeIndefinite. This can occur with streaming formats such as MPEG-2 transport streams.
-//
-// CurrentSampleDuration calls the underlying CurrentSampleDuration.
-func (x *SampleCursor) CurrentSampleDuration() coremedia.CMTime {
-	return x.inner.CurrentSampleDuration()
+// Provides a dictionary containing dependency related sample buffer attachments, if known.  See kCMSampleAttachmentKey_... in CoreMedia/CMSampleBuffer.h.
+func (x *SampleCursor) CurrentSampleDependencyAttachments() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentSampleDependencyAttachments"))
+	return obj.Wrap(_r)
 }
 
-// @property		currentSampleSyncInfo @abstract		Provides information about the current sample for consideration when resynchronizing a decoder, as when scrubbing.
-//
-// CurrentSampleSyncInfo calls the underlying CurrentSampleSyncInfo.
-func (x *SampleCursor) CurrentSampleSyncInfo() raw.AVSampleCursorSyncInfo {
-	return x.inner.CurrentSampleSyncInfo()
-}
-
-// @property		currentSampleDependencyInfo @abstract		Provides information about dependencies between a media sample and other media samples in the same sample sequence, if known.
-//
-// CurrentSampleDependencyInfo calls the underlying CurrentSampleDependencyInfo.
-func (x *SampleCursor) CurrentSampleDependencyInfo() raw.AVSampleCursorDependencyInfo {
-	return x.inner.CurrentSampleDependencyInfo()
-}
-
-// @property               currentSampleDependencyAttachments @abstract               Provides a dictionary containing dependency related sample buffer attachments, if known.  See kCMSampleAttachmentKey_... in CoreMedia/CMSampleBuffer.h.
-//
-// CurrentSampleDependencyAttachments calls the underlying CurrentSampleDependencyAttachments.
-func (x *SampleCursor) CurrentSampleDependencyAttachments() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.CurrentSampleDependencyAttachments()
-}
-
-// @property	currentSampleAudioDependencyInfo @abstract	Provides information about the independent decodability of an audio sample. @discussion	In order to position a sample cursor at the first sample that the audio decoder requires for a full refresh, you will need to walk it back from the current sample until you find a sample that is independently decodable, and whose audioSamplePacketRefreshCount is greater than or equal to the number of steps back you have taken.  This implies that if the current sample (before this walk) is independently decodable, with an audioSampleRefreshCount of zero, no walk is required.
-//
-// CurrentSampleAudioDependencyInfo calls the underlying CurrentSampleAudioDependencyInfo.
-func (x *SampleCursor) CurrentSampleAudioDependencyInfo() raw.AVSampleCursorAudioDependencyInfo {
-	return x.inner.CurrentSampleAudioDependencyInfo()
-}
-
-// @property		samplesRequiredForDecoderRefresh @abstract		Count of samples prior to the current sample, in decode order, that the decoder requires in order to achieve fully coherent output at the current decode time, as after a seek. Zero will be returned if no samples are required for decoder refresh or if the track does not contain this information. @discussion		Some sample sequences that do not indicate sample dependencies may instead indicate that in order for a specific sample to be decoded with all available accuracy, samples prior to that sample in decode order must be decoded before the specific sample is decoded. In order to position a sample cursor at the first sample that the decoder requires for a full refresh, you can use code like the following: NSInteger samplesPriorToCurrentSampleToFeedToDecoder = [mySampleCursor samplesRequiredForDecoderRefresh]; AVSampleCursor *cursorForObtainingRefreshSamples = [mySampleCursor copy]; [cursorForObtainingRefreshSamples stepInDecodeOrderByCount: -samplesPriorToCurrentSampleToFeedToDecoder ]; // cursorForObtainingRefreshSamples is now positioned at the first sample that must be provided to the decoder // in order to decode the sample at the position of mySampleCursor in full
-//
-// SamplesRequiredForDecoderRefresh calls the underlying SamplesRequiredForDecoderRefresh.
+// Count of samples prior to the current sample, in decode order, that the decoder requires in order to achieve fully coherent output at the current decode time, as after a seek. Zero will be returned if no samples are required for decoder refresh or if the track does not contain this information. Some sample sequences that do not indicate sample dependencies may instead indicate that in order for a specific sample to be decoded with all available accuracy, samples prior to that sample in decode order must be decoded before the specific sample is decoded. In order to position a sample cursor at the first sample that the decoder requires for a full refresh, you can use code like the following: NSInteger samplesPriorToCurrentSampleToFeedToDecoder = [mySampleCursor samplesRequiredForDecoderRefresh]; AVSampleCursor *cursorForObtainingRefreshSamples = [mySampleCursor copy]; [cursorForObtainingRefreshSamples stepInDecodeOrderByCount: -samplesPriorToCurrentSampleToFeedToDecoder ]; // cursorForObtainingRefreshSamples is now positioned at the first sample that must be provided to the decoder // in order to decode the sample at the position of mySampleCursor in full
 func (x *SampleCursor) SamplesRequiredForDecoderRefresh() int {
-	return x.inner.SamplesRequiredForDecoderRefresh()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("samplesRequiredForDecoderRefresh"))
+	return _r
 }
 
-// @property		currentChunkStorageURL @abstract		The URL of the storage container of the current sample, as well as other samples that are intended to be loaded in the same operation as a "chunk". @discussion		May be nil; if nil, the storage location of the chunk is the URL of the sample cursor's track's asset, if it has one.
-//
-// CurrentChunkStorageURL calls the underlying CurrentChunkStorageURL.
-func (x *SampleCursor) CurrentChunkStorageURL() *foundation.NSURL {
-	return x.inner.CurrentChunkStorageURL()
+// The URL of the storage container of the current sample, as well as other samples that are intended to be loaded in the same operation as a "chunk". May be nil; if nil, the storage location of the chunk is the URL of the sample cursor's track's asset, if it has one.
+func (x *SampleCursor) CurrentChunkStorageURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentChunkStorageURL"))
+	return obj.Wrap(_r)
 }
 
-// @property		currentChunkStorageRange @abstract		The offset and length of samples in currentChunkStorageURL that are intended to be loaded together with the current sample as a "chunk". @discussion		If the current chunk isn't stored contiguously in its storage container, currentChunkStorageRange.offset will be -1. In such cases you can use AVSampleBufferGenerator to obtain the sample data.
-//
-// CurrentChunkStorageRange calls the underlying CurrentChunkStorageRange.
-func (x *SampleCursor) CurrentChunkStorageRange() raw.AVSampleCursorStorageRange {
-	return x.inner.CurrentChunkStorageRange()
-}
-
-// @property		currentChunkInfo @abstract		Provides information about the "chunk" of samples to which the current sample belongs. If the media format that defines the sequence of samples does not signal "chunking" of samples in any way, each sample will be considered by the receiver as belonging to a chunk of one sample only.
-//
-// CurrentChunkInfo calls the underlying CurrentChunkInfo.
-func (x *SampleCursor) CurrentChunkInfo() raw.AVSampleCursorChunkInfo {
-	return x.inner.CurrentChunkInfo()
-}
-
-// @property		currentSampleIndexInChunk @abstract		The index of the current sample within the chunk to which it belongs.
-//
-// CurrentSampleIndexInChunk calls the underlying CurrentSampleIndexInChunk.
+// The index of the current sample within the chunk to which it belongs.
 func (x *SampleCursor) CurrentSampleIndexInChunk() int64 {
-	return x.inner.CurrentSampleIndexInChunk()
-}
-
-// @property		currentSampleStorageRange @abstract		The offset and length of the current sample in currentChunkStorageURL. @discussion		If the current sample isn't stored contiguously in its storage container, currentSampleStorageRange.offset will be -1. In such cases you can use AVSampleBufferGenerator to obtain the sample data.
-//
-// CurrentSampleStorageRange calls the underlying CurrentSampleStorageRange.
-func (x *SampleCursor) CurrentSampleStorageRange() raw.AVSampleCursorStorageRange {
-	return x.inner.CurrentSampleStorageRange()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("currentSampleIndexInChunk"))
+	return _r
 }
 
 // SampleCursorable is the interface implemented by [SampleCursor], for mocking and DI.
 type SampleCursorable interface {
-	Unwrap() *raw.AVSampleCursor
+	obj.Object
 	StepInDecodeOrderByCount(stepCount int64) int64
 	StepInPresentationOrderByCount(stepCount int64) int64
-	StepByDecodeTimeWasPinned(deltaDecodeTime coremedia.CMTime, outWasPinned *bool) coremedia.CMTime
-	StepByPresentationTimeWasPinned(deltaPresentationTime coremedia.CMTime, outWasPinned *bool) coremedia.CMTime
-	ComparePositionInDecodeOrderWithPositionOfCursor(cursor *raw.AVSampleCursor) foundation.NSComparisonResult
-	SamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor(cursor *raw.AVSampleCursor) bool
-	SamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor(cursor *raw.AVSampleCursor) bool
-	PresentationTimeStamp() coremedia.CMTime
-	DecodeTimeStamp() coremedia.CMTime
-	CopyCurrentSampleFormatDescription() unsafe.Pointer
-	CurrentSampleDuration() coremedia.CMTime
-	CurrentSampleSyncInfo() raw.AVSampleCursorSyncInfo
-	CurrentSampleDependencyInfo() raw.AVSampleCursorDependencyInfo
-	CurrentSampleDependencyAttachments() *foundation.NSDictionary[objc.ID, objc.ID]
-	CurrentSampleAudioDependencyInfo() raw.AVSampleCursorAudioDependencyInfo
+	SamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor(cursor *SampleCursor) bool
+	SamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor(cursor *SampleCursor) bool
+	CopyCurrentSampleFormatDescription() obj.Object
+	CurrentSampleDependencyAttachments() obj.Object
 	SamplesRequiredForDecoderRefresh() int
-	CurrentChunkStorageURL() *foundation.NSURL
-	CurrentChunkStorageRange() raw.AVSampleCursorStorageRange
-	CurrentChunkInfo() raw.AVSampleCursorChunkInfo
+	CurrentChunkStorageURL() obj.Object
 	CurrentSampleIndexInChunk() int64
-	CurrentSampleStorageRange() raw.AVSampleCursorStorageRange
 }
 
 var _ SampleCursorable = (*SampleCursor)(nil)

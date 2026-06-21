@@ -5,55 +5,73 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An item used in a group with a custom layout arrangement.
 //
-// CollectionLayoutGroupCustomItem wraps [raw.NSCollectionLayoutGroupCustomItem] with a fluent Go API.
+// CollectionLayoutGroupCustomItem is an idiomatic wrapper over the Objective-C class NSCollectionLayoutGroupCustomItem.
 type CollectionLayoutGroupCustomItem struct {
-	inner *raw.NSCollectionLayoutGroupCustomItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCollectionLayoutGroupCustomItem].
-func (x *CollectionLayoutGroupCustomItem) Unwrap() *raw.NSCollectionLayoutGroupCustomItem {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionLayoutGroupCustomItem) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionLayoutGroupCustomItemFromID adopts an existing object pointer as a CollectionLayoutGroupCustomItem (nil for 0).
+// CollectionLayoutGroupCustomItemFromID adopts an existing Objective-C object as a CollectionLayoutGroupCustomItem
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionLayoutGroupCustomItemFromID(id objc.ID) *CollectionLayoutGroupCustomItem {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionLayoutGroupCustomItem{inner: raw.NSCollectionLayoutGroupCustomItemFromID(id)}
+	x := &CollectionLayoutGroupCustomItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCollectionLayoutGroupCustomItem creates a new [CollectionLayoutGroupCustomItem].
+// collectionLayoutGroupCustomItemAdopt wraps an Objective-C object that this code just created as a
+// CollectionLayoutGroupCustomItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionLayoutGroupCustomItemAdopt(id objc.ID) *CollectionLayoutGroupCustomItem {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionLayoutGroupCustomItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollectionLayoutGroupCustomItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollectionLayoutGroupCustomItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollectionLayoutGroupCustomItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCollectionLayoutGroupCustomItem creates a new CollectionLayoutGroupCustomItem.
 func NewCollectionLayoutGroupCustomItem() *CollectionLayoutGroupCustomItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionLayoutGroupCustomItem")), objc.RegisterName("new"))
-	return &CollectionLayoutGroupCustomItem{inner: raw.NSCollectionLayoutGroupCustomItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutGroupCustomItem")), objc.RegisterName("new"))
+	return collectionLayoutGroupCustomItemAdopt(_id)
 }
 
-// Frame calls the underlying Frame.
-func (x *CollectionLayoutGroupCustomItem) Frame() corefoundation.CGRect {
-	return x.inner.Frame()
-}
-
-// ZIndex calls the underlying ZIndex.
 func (x *CollectionLayoutGroupCustomItem) ZIndex() int {
-	return x.inner.ZIndex()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("zIndex"))
+	return _r
 }
 
 // CollectionLayoutGroupCustomItemable is the interface implemented by [CollectionLayoutGroupCustomItem], for mocking and DI.
 type CollectionLayoutGroupCustomItemable interface {
-	Unwrap() *raw.NSCollectionLayoutGroupCustomItem
-	Frame() corefoundation.CGRect
+	obj.Object
 	ZIndex() int
 }
 

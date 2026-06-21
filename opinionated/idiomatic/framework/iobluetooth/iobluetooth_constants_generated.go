@@ -5,285 +5,320 @@
 package iobluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KOBEXHeaderIDKeyName returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyName as an objc.ID.
-func KOBEXHeaderIDKeyName() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyName()) }
-
-// KOBEXHeaderIDKeyType returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyType as an objc.ID.
-func KOBEXHeaderIDKeyType() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyType()) }
-
-// KOBEXHeaderIDKeyDescription returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyDescription as an objc.ID.
-func KOBEXHeaderIDKeyDescription() objc.ID {
-	return purego.CFConstant(raw.KOBEXHeaderIDKeyDescription())
+// KOBEXHeaderIDKeyName returns the value of the constant kOBEXHeaderIDKeyName.
+func KOBEXHeaderIDKeyName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyName")))
 }
 
-// KOBEXHeaderIDKeyTimeISO returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyTimeISO as an objc.ID.
-func KOBEXHeaderIDKeyTimeISO() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyTimeISO()) }
-
-// KOBEXHeaderIDKeyTime4Byte returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyTime4Byte as an objc.ID.
-func KOBEXHeaderIDKeyTime4Byte() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyTime4Byte()) }
-
-// KOBEXHeaderIDKeyTarget returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyTarget as an objc.ID.
-func KOBEXHeaderIDKeyTarget() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyTarget()) }
-
-// KOBEXHeaderIDKeyHTTP returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyHTTP as an objc.ID.
-func KOBEXHeaderIDKeyHTTP() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyHTTP()) }
-
-// KOBEXHeaderIDKeyBody returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyBody as an objc.ID.
-func KOBEXHeaderIDKeyBody() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyBody()) }
-
-// KOBEXHeaderIDKeyEndOfBody returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyEndOfBody as an objc.ID.
-func KOBEXHeaderIDKeyEndOfBody() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyEndOfBody()) }
-
-// KOBEXHeaderIDKeyWho returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyWho as an objc.ID.
-func KOBEXHeaderIDKeyWho() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyWho()) }
-
-// KOBEXHeaderIDKeyAppParameters returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyAppParameters as an objc.ID.
-func KOBEXHeaderIDKeyAppParameters() objc.ID {
-	return purego.CFConstant(raw.KOBEXHeaderIDKeyAppParameters())
+// KOBEXHeaderIDKeyType returns the value of the constant kOBEXHeaderIDKeyType.
+func KOBEXHeaderIDKeyType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyType")))
 }
 
-// KOBEXHeaderIDKeyAuthorizationChallenge returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyAuthorizationChallenge as an objc.ID.
-func KOBEXHeaderIDKeyAuthorizationChallenge() objc.ID {
-	return purego.CFConstant(raw.KOBEXHeaderIDKeyAuthorizationChallenge())
+// KOBEXHeaderIDKeyDescription returns the value of the constant kOBEXHeaderIDKeyDescription.
+func KOBEXHeaderIDKeyDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyDescription")))
 }
 
-// KOBEXHeaderIDKeyAuthorizationResponse returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyAuthorizationResponse as an objc.ID.
-func KOBEXHeaderIDKeyAuthorizationResponse() objc.ID {
-	return purego.CFConstant(raw.KOBEXHeaderIDKeyAuthorizationResponse())
+// KOBEXHeaderIDKeyTimeISO returns the value of the constant kOBEXHeaderIDKeyTimeISO.
+func KOBEXHeaderIDKeyTimeISO() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyTimeISO")))
 }
 
-// KOBEXHeaderIDKeyObjectClass returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyObjectClass as an objc.ID.
-func KOBEXHeaderIDKeyObjectClass() objc.ID {
-	return purego.CFConstant(raw.KOBEXHeaderIDKeyObjectClass())
+// KOBEXHeaderIDKeyTime4Byte returns the value of the constant kOBEXHeaderIDKeyTime4Byte.
+func KOBEXHeaderIDKeyTime4Byte() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyTime4Byte")))
 }
 
-// KOBEXHeaderIDKeyCount returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyCount as an objc.ID.
-func KOBEXHeaderIDKeyCount() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyCount()) }
-
-// KOBEXHeaderIDKeyLength returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyLength as an objc.ID.
-func KOBEXHeaderIDKeyLength() objc.ID { return purego.CFConstant(raw.KOBEXHeaderIDKeyLength()) }
-
-// KOBEXHeaderIDKeyConnectionID returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyConnectionID as an objc.ID.
-func KOBEXHeaderIDKeyConnectionID() objc.ID {
-	return purego.CFConstant(raw.KOBEXHeaderIDKeyConnectionID())
+// KOBEXHeaderIDKeyTarget returns the value of the constant kOBEXHeaderIDKeyTarget.
+func KOBEXHeaderIDKeyTarget() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyTarget")))
 }
 
-// KOBEXHeaderIDKeyByteSequence returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyByteSequence as an objc.ID.
-func KOBEXHeaderIDKeyByteSequence() objc.ID {
-	return purego.CFConstant(raw.KOBEXHeaderIDKeyByteSequence())
+// KOBEXHeaderIDKeyHTTP returns the value of the constant kOBEXHeaderIDKeyHTTP.
+func KOBEXHeaderIDKeyHTTP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyHTTP")))
 }
 
-// KOBEXHeaderIDKeyUnknownUnicodeText returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyUnknownUnicodeText as an objc.ID.
-func KOBEXHeaderIDKeyUnknownUnicodeText() objc.ID {
-	return purego.CFConstant(raw.KOBEXHeaderIDKeyUnknownUnicodeText())
+// KOBEXHeaderIDKeyBody returns the value of the constant kOBEXHeaderIDKeyBody.
+func KOBEXHeaderIDKeyBody() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyBody")))
 }
 
-// KOBEXHeaderIDKeyUnknownByteSequence returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyUnknownByteSequence as an objc.ID.
-func KOBEXHeaderIDKeyUnknownByteSequence() objc.ID {
-	return purego.CFConstant(raw.KOBEXHeaderIDKeyUnknownByteSequence())
+// KOBEXHeaderIDKeyEndOfBody returns the value of the constant kOBEXHeaderIDKeyEndOfBody.
+func KOBEXHeaderIDKeyEndOfBody() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyEndOfBody")))
 }
 
-// KOBEXHeaderIDKeyUnknown1ByteQuantity returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyUnknown1ByteQuantity as an objc.ID.
-func KOBEXHeaderIDKeyUnknown1ByteQuantity() objc.ID {
-	return purego.CFConstant(raw.KOBEXHeaderIDKeyUnknown1ByteQuantity())
+// KOBEXHeaderIDKeyWho returns the value of the constant kOBEXHeaderIDKeyWho.
+func KOBEXHeaderIDKeyWho() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyWho")))
 }
 
-// KOBEXHeaderIDKeyUnknown4ByteQuantity returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyUnknown4ByteQuantity as an objc.ID.
-func KOBEXHeaderIDKeyUnknown4ByteQuantity() objc.ID {
-	return purego.CFConstant(raw.KOBEXHeaderIDKeyUnknown4ByteQuantity())
+// KOBEXHeaderIDKeyAppParameters returns the value of the constant kOBEXHeaderIDKeyAppParameters.
+func KOBEXHeaderIDKeyAppParameters() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyAppParameters")))
 }
 
-// KOBEXHeaderIDKeyUserDefined returns the value of the CoreFoundation reference constant kOBEXHeaderIDKeyUserDefined as an objc.ID.
-func KOBEXHeaderIDKeyUserDefined() objc.ID {
-	return purego.CFConstant(raw.KOBEXHeaderIDKeyUserDefined())
+// KOBEXHeaderIDKeyAuthorizationChallenge returns the value of the constant kOBEXHeaderIDKeyAuthorizationChallenge.
+func KOBEXHeaderIDKeyAuthorizationChallenge() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyAuthorizationChallenge")))
 }
 
-// @const			kFTSProgressBytesTransferredKey @abstract		NSNumber integer value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
-// KFTSProgressBytesTransferredKey returns the value of the CoreFoundation reference constant kFTSProgressBytesTransferredKey as an objc.ID.
-func KFTSProgressBytesTransferredKey() objc.ID {
-	return purego.CFConstant(raw.KFTSProgressBytesTransferredKey())
+// KOBEXHeaderIDKeyAuthorizationResponse returns the value of the constant kOBEXHeaderIDKeyAuthorizationResponse.
+func KOBEXHeaderIDKeyAuthorizationResponse() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyAuthorizationResponse")))
 }
 
-// @const			kFTSProgressBytesTotalKey @abstract		NSNumber integer value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
-// KFTSProgressBytesTotalKey returns the value of the CoreFoundation reference constant kFTSProgressBytesTotalKey as an objc.ID.
-func KFTSProgressBytesTotalKey() objc.ID { return purego.CFConstant(raw.KFTSProgressBytesTotalKey()) }
-
-// @const			kFTSProgressPercentageKey @abstract		NSNumber float value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
-// KFTSProgressPercentageKey returns the value of the CoreFoundation reference constant kFTSProgressPercentageKey as an objc.ID.
-func KFTSProgressPercentageKey() objc.ID { return purego.CFConstant(raw.KFTSProgressPercentageKey()) }
-
-// KFTSProgressPrecentageKey returns the value of the CoreFoundation reference constant kFTSProgressPrecentageKey as an objc.ID.
-func KFTSProgressPrecentageKey() objc.ID { return purego.CFConstant(raw.KFTSProgressPrecentageKey()) }
-
-// @const			kFTSProgressEstimatedTimeKey @abstract		NSNumber double value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
-// KFTSProgressEstimatedTimeKey returns the value of the CoreFoundation reference constant kFTSProgressEstimatedTimeKey as an objc.ID.
-func KFTSProgressEstimatedTimeKey() objc.ID {
-	return purego.CFConstant(raw.KFTSProgressEstimatedTimeKey())
+// KOBEXHeaderIDKeyObjectClass returns the value of the constant kOBEXHeaderIDKeyObjectClass.
+func KOBEXHeaderIDKeyObjectClass() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyObjectClass")))
 }
 
-// @const			kFTSProgressTimeElapsedKey @abstract		NSNumber int value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
-// KFTSProgressTimeElapsedKey returns the value of the CoreFoundation reference constant kFTSProgressTimeElapsedKey as an objc.ID.
-func KFTSProgressTimeElapsedKey() objc.ID { return purego.CFConstant(raw.KFTSProgressTimeElapsedKey()) }
-
-// @const			kFTSProgressTransferRateKey @abstract		NSNumber float value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
-// KFTSProgressTransferRateKey returns the value of the CoreFoundation reference constant kFTSProgressTransferRateKey as an objc.ID.
-func KFTSProgressTransferRateKey() objc.ID {
-	return purego.CFConstant(raw.KFTSProgressTransferRateKey())
+// KOBEXHeaderIDKeyCount returns the value of the constant kOBEXHeaderIDKeyCount.
+func KOBEXHeaderIDKeyCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyCount")))
 }
 
-// @const			kFTSListingNameKey @abstract		NSString value.  This key is used with the array of NSDictionary's returned through the delegate method fileTransferServicesGetListingComplete: after calling getFolderListing.
-// KFTSListingNameKey returns the value of the CoreFoundation reference constant kFTSListingNameKey as an objc.ID.
-func KFTSListingNameKey() objc.ID { return purego.CFConstant(raw.KFTSListingNameKey()) }
-
-// @const			kFTSListingTypeKey @abstract		FTSFileType value.  This key is used with the array of NSDictionary's returned through the delegate method fileTransferServicesGetListingComplete: after calling getFolderListing.
-// KFTSListingTypeKey returns the value of the CoreFoundation reference constant kFTSListingTypeKey as an objc.ID.
-func KFTSListingTypeKey() objc.ID { return purego.CFConstant(raw.KFTSListingTypeKey()) }
-
-// @const			kFTSListingSizeKey @abstract		Int value.  This key is used with the array of NSDictionary's returned through the delegate method fileTransferServicesGetListingComplete: after calling getFolderListing.
-// KFTSListingSizeKey returns the value of the CoreFoundation reference constant kFTSListingSizeKey as an objc.ID.
-func KFTSListingSizeKey() objc.ID { return purego.CFConstant(raw.KFTSListingSizeKey()) }
-
-// IOBluetoothHostControllerPoweredOnNotification returns the string constant IOBluetoothHostControllerPoweredOnNotification as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothHostControllerPoweredOnNotification() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothHostControllerPoweredOnNotification())
+// KOBEXHeaderIDKeyLength returns the value of the constant kOBEXHeaderIDKeyLength.
+func KOBEXHeaderIDKeyLength() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyLength")))
 }
 
-// IOBluetoothHostControllerPoweredOffNotification returns the string constant IOBluetoothHostControllerPoweredOffNotification as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothHostControllerPoweredOffNotification() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothHostControllerPoweredOffNotification())
+// KOBEXHeaderIDKeyConnectionID returns the value of the constant kOBEXHeaderIDKeyConnectionID.
+func KOBEXHeaderIDKeyConnectionID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyConnectionID")))
 }
 
-// IOBluetoothL2CAPChannelPublishedNotification returns the string constant IOBluetoothL2CAPChannelPublishedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothL2CAPChannelPublishedNotification() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothL2CAPChannelPublishedNotification())
+// KOBEXHeaderIDKeyByteSequence returns the value of the constant kOBEXHeaderIDKeyByteSequence.
+func KOBEXHeaderIDKeyByteSequence() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyByteSequence")))
 }
 
-// IOBluetoothL2CAPChannelTerminatedNotification returns the string constant IOBluetoothL2CAPChannelTerminatedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothL2CAPChannelTerminatedNotification() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothL2CAPChannelTerminatedNotification())
+// KOBEXHeaderIDKeyUnknownUnicodeText returns the value of the constant kOBEXHeaderIDKeyUnknownUnicodeText.
+func KOBEXHeaderIDKeyUnknownUnicodeText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyUnknownUnicodeText")))
 }
 
-// IOBluetoothHandsFreeIndicatorService returns the string constant IOBluetoothHandsFreeIndicatorService as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothHandsFreeIndicatorService() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothHandsFreeIndicatorService())
+// KOBEXHeaderIDKeyUnknownByteSequence returns the value of the constant kOBEXHeaderIDKeyUnknownByteSequence.
+func KOBEXHeaderIDKeyUnknownByteSequence() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyUnknownByteSequence")))
 }
 
-// IOBluetoothHandsFreeIndicatorCall returns the string constant IOBluetoothHandsFreeIndicatorCall as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothHandsFreeIndicatorCall() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothHandsFreeIndicatorCall())
+// KOBEXHeaderIDKeyUnknown1ByteQuantity returns the value of the constant kOBEXHeaderIDKeyUnknown1ByteQuantity.
+func KOBEXHeaderIDKeyUnknown1ByteQuantity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyUnknown1ByteQuantity")))
 }
 
-// IOBluetoothHandsFreeIndicatorCallSetup returns the string constant IOBluetoothHandsFreeIndicatorCallSetup as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothHandsFreeIndicatorCallSetup() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothHandsFreeIndicatorCallSetup())
+// KOBEXHeaderIDKeyUnknown4ByteQuantity returns the value of the constant kOBEXHeaderIDKeyUnknown4ByteQuantity.
+func KOBEXHeaderIDKeyUnknown4ByteQuantity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyUnknown4ByteQuantity")))
 }
 
-// IOBluetoothHandsFreeIndicatorCallHeld returns the string constant IOBluetoothHandsFreeIndicatorCallHeld as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothHandsFreeIndicatorCallHeld() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothHandsFreeIndicatorCallHeld())
+// KOBEXHeaderIDKeyUserDefined returns the value of the constant kOBEXHeaderIDKeyUserDefined.
+func KOBEXHeaderIDKeyUserDefined() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kOBEXHeaderIDKeyUserDefined")))
 }
 
-// IOBluetoothHandsFreeIndicatorSignal returns the string constant IOBluetoothHandsFreeIndicatorSignal as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothHandsFreeIndicatorSignal() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothHandsFreeIndicatorSignal())
+// NSNumber integer value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
+// KFTSProgressBytesTransferredKey returns the value of the constant kFTSProgressBytesTransferredKey.
+func KFTSProgressBytesTransferredKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFTSProgressBytesTransferredKey")))
 }
 
-// IOBluetoothHandsFreeIndicatorRoam returns the string constant IOBluetoothHandsFreeIndicatorRoam as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothHandsFreeIndicatorRoam() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothHandsFreeIndicatorRoam())
+// NSNumber integer value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
+// KFTSProgressBytesTotalKey returns the value of the constant kFTSProgressBytesTotalKey.
+func KFTSProgressBytesTotalKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFTSProgressBytesTotalKey")))
 }
 
-// IOBluetoothHandsFreeIndicatorBattChg returns the string constant IOBluetoothHandsFreeIndicatorBattChg as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothHandsFreeIndicatorBattChg() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothHandsFreeIndicatorBattChg())
+// NSNumber float value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
+// KFTSProgressPercentageKey returns the value of the constant kFTSProgressPercentageKey.
+func KFTSProgressPercentageKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFTSProgressPercentageKey")))
 }
 
-// IOBluetoothHandsFreeCallIndex returns the string constant IOBluetoothHandsFreeCallIndex as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothHandsFreeCallIndex() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothHandsFreeCallIndex())
+// KFTSProgressPrecentageKey returns the value of the constant kFTSProgressPrecentageKey.
+func KFTSProgressPrecentageKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFTSProgressPrecentageKey")))
 }
 
-// IOBluetoothHandsFreeCallDirection returns the string constant IOBluetoothHandsFreeCallDirection as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothHandsFreeCallDirection() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothHandsFreeCallDirection())
+// NSNumber double value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
+// KFTSProgressEstimatedTimeKey returns the value of the constant kFTSProgressEstimatedTimeKey.
+func KFTSProgressEstimatedTimeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFTSProgressEstimatedTimeKey")))
 }
 
-// IOBluetoothHandsFreeCallStatus returns the string constant IOBluetoothHandsFreeCallStatus as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothHandsFreeCallStatus() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothHandsFreeCallStatus())
+// NSNumber int value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
+// KFTSProgressTimeElapsedKey returns the value of the constant kFTSProgressTimeElapsedKey.
+func KFTSProgressTimeElapsedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFTSProgressTimeElapsedKey")))
 }
 
-// IOBluetoothHandsFreeCallMode returns the string constant IOBluetoothHandsFreeCallMode as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothHandsFreeCallMode() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothHandsFreeCallMode())
+// NSNumber float value. This key is used with the NSDictionary returned from the fileTransferServicesPutProgress: and fileTransferServicesGetProgress: delegate methods
+// KFTSProgressTransferRateKey returns the value of the constant kFTSProgressTransferRateKey.
+func KFTSProgressTransferRateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFTSProgressTransferRateKey")))
 }
 
-// IOBluetoothHandsFreeCallMultiparty returns the string constant IOBluetoothHandsFreeCallMultiparty as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothHandsFreeCallMultiparty() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothHandsFreeCallMultiparty())
+// NSString value.  This key is used with the array of NSDictionary's returned through the delegate method fileTransferServicesGetListingComplete: after calling getFolderListing.
+// KFTSListingNameKey returns the value of the constant kFTSListingNameKey.
+func KFTSListingNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFTSListingNameKey")))
 }
 
-// IOBluetoothHandsFreeCallNumber returns the string constant IOBluetoothHandsFreeCallNumber as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothHandsFreeCallNumber() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothHandsFreeCallNumber())
+// FTSFileType value.  This key is used with the array of NSDictionary's returned through the delegate method fileTransferServicesGetListingComplete: after calling getFolderListing.
+// KFTSListingTypeKey returns the value of the constant kFTSListingTypeKey.
+func KFTSListingTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFTSListingTypeKey")))
 }
 
-// IOBluetoothHandsFreeCallType returns the string constant IOBluetoothHandsFreeCallType as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothHandsFreeCallType() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothHandsFreeCallType())
+// Int value.  This key is used with the array of NSDictionary's returned through the delegate method fileTransferServicesGetListingComplete: after calling getFolderListing.
+// KFTSListingSizeKey returns the value of the constant kFTSListingSizeKey.
+func KFTSListingSizeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kFTSListingSizeKey")))
 }
 
-// IOBluetoothHandsFreeCallName returns the string constant IOBluetoothHandsFreeCallName as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothHandsFreeCallName() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothHandsFreeCallName())
+// IOBluetoothHostControllerPoweredOnNotification returns the string constant IOBluetoothHostControllerPoweredOnNotification, for use as a dictionary key or argument.
+func IOBluetoothHostControllerPoweredOnNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothHostControllerPoweredOnNotification")))
 }
 
-// IOBluetoothPDUServicCenterAddress returns the string constant IOBluetoothPDUServicCenterAddress as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothPDUServicCenterAddress() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothPDUServicCenterAddress())
+// IOBluetoothHostControllerPoweredOffNotification returns the string constant IOBluetoothHostControllerPoweredOffNotification, for use as a dictionary key or argument.
+func IOBluetoothHostControllerPoweredOffNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothHostControllerPoweredOffNotification")))
 }
 
-// IOBluetoothPDUServiceCenterAddressType returns the string constant IOBluetoothPDUServiceCenterAddressType as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothPDUServiceCenterAddressType() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothPDUServiceCenterAddressType())
+// IOBluetoothL2CAPChannelPublishedNotification returns the string constant IOBluetoothL2CAPChannelPublishedNotification, for use as a dictionary key or argument.
+func IOBluetoothL2CAPChannelPublishedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothL2CAPChannelPublishedNotification")))
 }
 
-// IOBluetoothPDUType returns the string constant IOBluetoothPDUType as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothPDUType() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothPDUType())
+// IOBluetoothL2CAPChannelTerminatedNotification returns the string constant IOBluetoothL2CAPChannelTerminatedNotification, for use as a dictionary key or argument.
+func IOBluetoothL2CAPChannelTerminatedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothL2CAPChannelTerminatedNotification")))
 }
 
-// IOBluetoothPDUOriginatingAddress returns the string constant IOBluetoothPDUOriginatingAddress as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothPDUOriginatingAddress() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothPDUOriginatingAddress())
+// IOBluetoothHandsFreeIndicatorService returns the string constant IOBluetoothHandsFreeIndicatorService, for use as a dictionary key or argument.
+func IOBluetoothHandsFreeIndicatorService() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothHandsFreeIndicatorService")))
 }
 
-// IOBluetoothPDUOriginatingAddressType returns the string constant IOBluetoothPDUOriginatingAddressType as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothPDUOriginatingAddressType() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothPDUOriginatingAddressType())
+// IOBluetoothHandsFreeIndicatorCall returns the string constant IOBluetoothHandsFreeIndicatorCall, for use as a dictionary key or argument.
+func IOBluetoothHandsFreeIndicatorCall() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothHandsFreeIndicatorCall")))
 }
 
-// IOBluetoothPDUProtocolID returns the string constant IOBluetoothPDUProtocolID as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothPDUProtocolID() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothPDUProtocolID())
+// IOBluetoothHandsFreeIndicatorCallSetup returns the string constant IOBluetoothHandsFreeIndicatorCallSetup, for use as a dictionary key or argument.
+func IOBluetoothHandsFreeIndicatorCallSetup() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothHandsFreeIndicatorCallSetup")))
 }
 
-// IOBluetoothPDUTimestamp returns the string constant IOBluetoothPDUTimestamp as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothPDUTimestamp() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothPDUTimestamp())
+// IOBluetoothHandsFreeIndicatorCallHeld returns the string constant IOBluetoothHandsFreeIndicatorCallHeld, for use as a dictionary key or argument.
+func IOBluetoothHandsFreeIndicatorCallHeld() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothHandsFreeIndicatorCallHeld")))
 }
 
-// IOBluetoothPDUEncoding returns the string constant IOBluetoothPDUEncoding as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothPDUEncoding() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothPDUEncoding())
+// IOBluetoothHandsFreeIndicatorSignal returns the string constant IOBluetoothHandsFreeIndicatorSignal, for use as a dictionary key or argument.
+func IOBluetoothHandsFreeIndicatorSignal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothHandsFreeIndicatorSignal")))
 }
 
-// IOBluetoothPDUUserData returns the string constant IOBluetoothPDUUserData as an objc.ID, for use as a dictionary key or selector argument.
-func IOBluetoothPDUUserData() objc.ID {
-	return purego.CFConstant(raw.IOBluetoothPDUUserData())
+// IOBluetoothHandsFreeIndicatorRoam returns the string constant IOBluetoothHandsFreeIndicatorRoam, for use as a dictionary key or argument.
+func IOBluetoothHandsFreeIndicatorRoam() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothHandsFreeIndicatorRoam")))
+}
+
+// IOBluetoothHandsFreeIndicatorBattChg returns the string constant IOBluetoothHandsFreeIndicatorBattChg, for use as a dictionary key or argument.
+func IOBluetoothHandsFreeIndicatorBattChg() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothHandsFreeIndicatorBattChg")))
+}
+
+// IOBluetoothHandsFreeCallIndex returns the string constant IOBluetoothHandsFreeCallIndex, for use as a dictionary key or argument.
+func IOBluetoothHandsFreeCallIndex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothHandsFreeCallIndex")))
+}
+
+// IOBluetoothHandsFreeCallDirection returns the string constant IOBluetoothHandsFreeCallDirection, for use as a dictionary key or argument.
+func IOBluetoothHandsFreeCallDirection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothHandsFreeCallDirection")))
+}
+
+// IOBluetoothHandsFreeCallStatus returns the string constant IOBluetoothHandsFreeCallStatus, for use as a dictionary key or argument.
+func IOBluetoothHandsFreeCallStatus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothHandsFreeCallStatus")))
+}
+
+// IOBluetoothHandsFreeCallMode returns the string constant IOBluetoothHandsFreeCallMode, for use as a dictionary key or argument.
+func IOBluetoothHandsFreeCallMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothHandsFreeCallMode")))
+}
+
+// IOBluetoothHandsFreeCallMultiparty returns the string constant IOBluetoothHandsFreeCallMultiparty, for use as a dictionary key or argument.
+func IOBluetoothHandsFreeCallMultiparty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothHandsFreeCallMultiparty")))
+}
+
+// IOBluetoothHandsFreeCallNumber returns the string constant IOBluetoothHandsFreeCallNumber, for use as a dictionary key or argument.
+func IOBluetoothHandsFreeCallNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothHandsFreeCallNumber")))
+}
+
+// IOBluetoothHandsFreeCallType returns the string constant IOBluetoothHandsFreeCallType, for use as a dictionary key or argument.
+func IOBluetoothHandsFreeCallType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothHandsFreeCallType")))
+}
+
+// IOBluetoothHandsFreeCallName returns the string constant IOBluetoothHandsFreeCallName, for use as a dictionary key or argument.
+func IOBluetoothHandsFreeCallName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothHandsFreeCallName")))
+}
+
+// IOBluetoothPDUServicCenterAddress returns the string constant IOBluetoothPDUServicCenterAddress, for use as a dictionary key or argument.
+func IOBluetoothPDUServicCenterAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothPDUServicCenterAddress")))
+}
+
+// IOBluetoothPDUServiceCenterAddressType returns the string constant IOBluetoothPDUServiceCenterAddressType, for use as a dictionary key or argument.
+func IOBluetoothPDUServiceCenterAddressType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothPDUServiceCenterAddressType")))
+}
+
+// IOBluetoothPDUType returns the string constant IOBluetoothPDUType, for use as a dictionary key or argument.
+func IOBluetoothPDUType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothPDUType")))
+}
+
+// IOBluetoothPDUOriginatingAddress returns the string constant IOBluetoothPDUOriginatingAddress, for use as a dictionary key or argument.
+func IOBluetoothPDUOriginatingAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothPDUOriginatingAddress")))
+}
+
+// IOBluetoothPDUOriginatingAddressType returns the string constant IOBluetoothPDUOriginatingAddressType, for use as a dictionary key or argument.
+func IOBluetoothPDUOriginatingAddressType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothPDUOriginatingAddressType")))
+}
+
+// IOBluetoothPDUProtocolID returns the string constant IOBluetoothPDUProtocolID, for use as a dictionary key or argument.
+func IOBluetoothPDUProtocolID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothPDUProtocolID")))
+}
+
+// IOBluetoothPDUTimestamp returns the string constant IOBluetoothPDUTimestamp, for use as a dictionary key or argument.
+func IOBluetoothPDUTimestamp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothPDUTimestamp")))
+}
+
+// IOBluetoothPDUEncoding returns the string constant IOBluetoothPDUEncoding, for use as a dictionary key or argument.
+func IOBluetoothPDUEncoding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothPDUEncoding")))
+}
+
+// IOBluetoothPDUUserData returns the string constant IOBluetoothPDUUserData, for use as a dictionary key or argument.
+func IOBluetoothPDUUserData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("IOBluetoothPDUUserData")))
 }

@@ -5,58 +5,82 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ObjectSection wraps [raw.INObjectSection] with a fluent Go API.
+// ObjectSection is an idiomatic wrapper over the Objective-C class INObjectSection.
 type ObjectSection struct {
-	inner *raw.INObjectSection[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INObjectSection].
-func (x *ObjectSection) Unwrap() *raw.INObjectSection[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ObjectSection) ID() objc.ID { return x.inner.Ptr() }
-
-// ObjectSectionFromID adopts an existing object pointer as a ObjectSection (nil for 0).
+// ObjectSectionFromID adopts an existing Objective-C object as a ObjectSection
+// (nil for 0), retaining it and registering a release finalizer.
 func ObjectSectionFromID(id objc.ID) *ObjectSection {
 	if id == 0 {
 		return nil
 	}
-	return &ObjectSection{inner: raw.INObjectSectionFromID[objc.ID](id)}
+	x := &ObjectSection{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewObjectSectionWithTitleItems creates a new [ObjectSection].
-func NewObjectSectionWithTitleItems(title string, items *foundation.NSArray[objc.ID]) *ObjectSection {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INObjectSection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:items:"), foundation.NSStringStringWithUTF8String(title).Ptr(), items.Ptr())
-	return &ObjectSection{inner: raw.INObjectSectionFromID[objc.ID](_id)}
+// objectSectionAdopt wraps an Objective-C object that this code just created as a
+// ObjectSection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func objectSectionAdopt(id objc.ID) *ObjectSection {
+	if id == 0 {
+		return nil
+	}
+	x := &ObjectSection{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Title calls the underlying Title.
+// Description returns the object's -description text.
+func (x *ObjectSection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ObjectSection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ObjectSection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewObjectSectionWithTitleItems creates a new ObjectSection.
+func NewObjectSectionWithTitleItems(title string, items []obj.Object) *ObjectSection {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INObjectSection")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:items:"), purego.NSString(title), purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return objectSectionAdopt(_id)
+}
+
 func (x *ObjectSection) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Items calls the underlying Items.
-func (x *ObjectSection) Items() *foundation.NSArray[objc.ID] {
-	return x.inner.Items()
+func (x *ObjectSection) Items() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("items"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ObjectSectionable is the interface implemented by [ObjectSection], for mocking and DI.
 type ObjectSectionable interface {
-	Unwrap() *raw.INObjectSection[objc.ID]
+	obj.Object
 	Title() string
-	Items() *foundation.NSArray[objc.ID]
+	Items() []obj.Object
 }
 
 var _ ObjectSectionable = (*ObjectSection)(nil)

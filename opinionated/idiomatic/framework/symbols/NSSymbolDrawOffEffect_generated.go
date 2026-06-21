@@ -5,98 +5,98 @@
 package symbols
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/symbols"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A symbol effect that applies the DrawOff animation to symbol images.
 //
-// SymbolDrawOffEffect wraps [raw.NSSymbolDrawOffEffect] with a fluent Go API.
+// SymbolDrawOffEffect is an idiomatic wrapper over the Objective-C class NSSymbolDrawOffEffect.
 type SymbolDrawOffEffect struct {
-	inner *raw.NSSymbolDrawOffEffect
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSymbolDrawOffEffect].
-func (x *SymbolDrawOffEffect) Unwrap() *raw.NSSymbolDrawOffEffect { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SymbolDrawOffEffect) ID() objc.ID { return x.inner.Ptr() }
-
-// SymbolDrawOffEffectFromID adopts an existing object pointer as a SymbolDrawOffEffect (nil for 0).
+// SymbolDrawOffEffectFromID adopts an existing Objective-C object as a SymbolDrawOffEffect
+// (nil for 0), retaining it and registering a release finalizer.
 func SymbolDrawOffEffectFromID(id objc.ID) *SymbolDrawOffEffect {
 	if id == 0 {
 		return nil
 	}
-	return &SymbolDrawOffEffect{inner: raw.NSSymbolDrawOffEffectFromID(id)}
+	x := &SymbolDrawOffEffect{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSymbolDrawOffEffect creates a new [SymbolDrawOffEffect].
+// symbolDrawOffEffectAdopt wraps an Objective-C object that this code just created as a
+// SymbolDrawOffEffect (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func symbolDrawOffEffectAdopt(id objc.ID) *SymbolDrawOffEffect {
+	if id == 0 {
+		return nil
+	}
+	x := &SymbolDrawOffEffect{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SymbolDrawOffEffect) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SymbolDrawOffEffect) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SymbolDrawOffEffect) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSymbolDrawOffEffect creates a new SymbolDrawOffEffect.
 func NewSymbolDrawOffEffect() *SymbolDrawOffEffect {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSymbolDrawOffEffect")), objc.RegisterName("new"))
-	return &SymbolDrawOffEffect{inner: raw.NSSymbolDrawOffEffectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolDrawOffEffect")), objc.RegisterName("new"))
+	return symbolDrawOffEffectAdopt(_id)
 }
 
 // Returns a copy of the effect requesting an animation that applies separately to each motion group.
-//
-// EffectWithByLayer calls the underlying EffectWithByLayer.
 func (x *SymbolDrawOffEffect) EffectWithByLayer() *SymbolDrawOffEffect {
-	_r := x.inner.EffectWithByLayer()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolDrawOffEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+	return SymbolDrawOffEffectFromID(_r)
 }
 
 // Returns a copy of the effect requesting an animation that applies to all motion groups simultaneously.
-//
-// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
 func (x *SymbolDrawOffEffect) EffectWithWholeSymbol() *SymbolDrawOffEffect {
-	_r := x.inner.EffectWithWholeSymbol()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolDrawOffEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+	return SymbolDrawOffEffectFromID(_r)
 }
 
 // Returns a copy of the effect requesting an animation that applies separately to each motion group, where only one motion group is active at a time.
-//
-// EffectWithIndividually calls the underlying EffectWithIndividually.
 func (x *SymbolDrawOffEffect) EffectWithIndividually() *SymbolDrawOffEffect {
-	_r := x.inner.EffectWithIndividually()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolDrawOffEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithIndividually"))
+	return SymbolDrawOffEffectFromID(_r)
 }
 
 // Returns a copy of the effect that animates in reverse. This cancels the nonReversed variant.
-//
-// EffectWithReversed calls the underlying EffectWithReversed.
 func (x *SymbolDrawOffEffect) EffectWithReversed() *SymbolDrawOffEffect {
-	_r := x.inner.EffectWithReversed()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolDrawOffEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithReversed"))
+	return SymbolDrawOffEffectFromID(_r)
 }
 
 // Returns a copy of the effect that only animates forwards. This cancels the reversed variant.
-//
-// EffectWithNonReversed calls the underlying EffectWithNonReversed.
 func (x *SymbolDrawOffEffect) EffectWithNonReversed() *SymbolDrawOffEffect {
-	_r := x.inner.EffectWithNonReversed()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolDrawOffEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithNonReversed"))
+	return SymbolDrawOffEffectFromID(_r)
 }
-
-func (x *SymbolDrawOffEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
 
 // SymbolDrawOffEffectable is the interface implemented by [SymbolDrawOffEffect], for mocking and DI.
 type SymbolDrawOffEffectable interface {
-	Unwrap() *raw.NSSymbolDrawOffEffect
+	obj.Object
 	EffectWithByLayer() *SymbolDrawOffEffect
 	EffectWithWholeSymbol() *SymbolDrawOffEffect
 	EffectWithIndividually() *SymbolDrawOffEffect

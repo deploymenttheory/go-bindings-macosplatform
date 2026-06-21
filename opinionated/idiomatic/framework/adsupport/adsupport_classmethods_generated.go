@@ -5,14 +5,11 @@
 package adsupport
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/adsupport"
+	"github.com/ebitengine/purego/objc"
 )
 
-// SharedManager calls the underlying ASIdentifierManagerSharedManager.
+// The shared instance of the identifier manager class.
 func SharedManager() *IdentifierManager {
-	_r := raw.ASIdentifierManagerSharedManager()
-	if _r == nil {
-		return nil
-	}
-	return &IdentifierManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ASIdentifierManager")), objc.RegisterName("sharedManager"))
+	return IdentifierManagerFromID(_r)
 }

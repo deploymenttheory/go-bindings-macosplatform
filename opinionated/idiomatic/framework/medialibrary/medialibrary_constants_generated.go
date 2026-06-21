@@ -5,747 +5,746 @@
 package medialibrary
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/medialibrary"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// MLFolderRootGroupTypeIdentifier returns the string constant MLFolderRootGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLFolderRootGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLFolderRootGroupTypeIdentifier())
+// MLFolderRootGroupTypeIdentifier returns the string constant MLFolderRootGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLFolderRootGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLFolderRootGroupTypeIdentifier")))
 }
 
-// MLFolderGroupTypeIdentifier returns the string constant MLFolderGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLFolderGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLFolderGroupTypeIdentifier())
+// MLFolderGroupTypeIdentifier returns the string constant MLFolderGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLFolderGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLFolderGroupTypeIdentifier")))
 }
 
-// MLiTunesRootGroupTypeIdentifier returns the string constant MLiTunesRootGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiTunesRootGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiTunesRootGroupTypeIdentifier())
+// MLiTunesRootGroupTypeIdentifier returns the string constant MLiTunesRootGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLiTunesRootGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiTunesRootGroupTypeIdentifier")))
 }
 
-// MLiTunesPlaylistTypeIdentifier returns the string constant MLiTunesPlaylistTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiTunesPlaylistTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiTunesPlaylistTypeIdentifier())
+// MLiTunesPlaylistTypeIdentifier returns the string constant MLiTunesPlaylistTypeIdentifier, for use as a dictionary key or argument.
+func MLiTunesPlaylistTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiTunesPlaylistTypeIdentifier")))
 }
 
-// MLiTunesPurchasedPlaylistTypeIdentifier returns the string constant MLiTunesPurchasedPlaylistTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiTunesPurchasedPlaylistTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiTunesPurchasedPlaylistTypeIdentifier())
+// MLiTunesPurchasedPlaylistTypeIdentifier returns the string constant MLiTunesPurchasedPlaylistTypeIdentifier, for use as a dictionary key or argument.
+func MLiTunesPurchasedPlaylistTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiTunesPurchasedPlaylistTypeIdentifier")))
 }
 
-// MLiTunesPodcastPlaylistTypeIdentifier returns the string constant MLiTunesPodcastPlaylistTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiTunesPodcastPlaylistTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiTunesPodcastPlaylistTypeIdentifier())
+// MLiTunesPodcastPlaylistTypeIdentifier returns the string constant MLiTunesPodcastPlaylistTypeIdentifier, for use as a dictionary key or argument.
+func MLiTunesPodcastPlaylistTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiTunesPodcastPlaylistTypeIdentifier")))
 }
 
-// MLiTunesVideoPlaylistTypeIdentifier returns the string constant MLiTunesVideoPlaylistTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiTunesVideoPlaylistTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiTunesVideoPlaylistTypeIdentifier())
+// MLiTunesVideoPlaylistTypeIdentifier returns the string constant MLiTunesVideoPlaylistTypeIdentifier, for use as a dictionary key or argument.
+func MLiTunesVideoPlaylistTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiTunesVideoPlaylistTypeIdentifier")))
 }
 
-// MLiTunesSmartPlaylistTypeIdentifier returns the string constant MLiTunesSmartPlaylistTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiTunesSmartPlaylistTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiTunesSmartPlaylistTypeIdentifier())
+// MLiTunesSmartPlaylistTypeIdentifier returns the string constant MLiTunesSmartPlaylistTypeIdentifier, for use as a dictionary key or argument.
+func MLiTunesSmartPlaylistTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiTunesSmartPlaylistTypeIdentifier")))
 }
 
-// MLiTunesFolderPlaylistTypeIdentifier returns the string constant MLiTunesFolderPlaylistTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiTunesFolderPlaylistTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiTunesFolderPlaylistTypeIdentifier())
+// MLiTunesFolderPlaylistTypeIdentifier returns the string constant MLiTunesFolderPlaylistTypeIdentifier, for use as a dictionary key or argument.
+func MLiTunesFolderPlaylistTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiTunesFolderPlaylistTypeIdentifier")))
 }
 
-// MLiTunesMoviesPlaylistTypeIdentifier returns the string constant MLiTunesMoviesPlaylistTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiTunesMoviesPlaylistTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiTunesMoviesPlaylistTypeIdentifier())
+// MLiTunesMoviesPlaylistTypeIdentifier returns the string constant MLiTunesMoviesPlaylistTypeIdentifier, for use as a dictionary key or argument.
+func MLiTunesMoviesPlaylistTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiTunesMoviesPlaylistTypeIdentifier")))
 }
 
-// MLiTunesTVShowsPlaylistTypeIdentifier returns the string constant MLiTunesTVShowsPlaylistTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiTunesTVShowsPlaylistTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiTunesTVShowsPlaylistTypeIdentifier())
+// MLiTunesTVShowsPlaylistTypeIdentifier returns the string constant MLiTunesTVShowsPlaylistTypeIdentifier, for use as a dictionary key or argument.
+func MLiTunesTVShowsPlaylistTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiTunesTVShowsPlaylistTypeIdentifier")))
 }
 
-// MLiTunesAudioBooksPlaylistTypeIdentifier returns the string constant MLiTunesAudioBooksPlaylistTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiTunesAudioBooksPlaylistTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiTunesAudioBooksPlaylistTypeIdentifier())
+// MLiTunesAudioBooksPlaylistTypeIdentifier returns the string constant MLiTunesAudioBooksPlaylistTypeIdentifier, for use as a dictionary key or argument.
+func MLiTunesAudioBooksPlaylistTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiTunesAudioBooksPlaylistTypeIdentifier")))
 }
 
-// MLiTunesMusicPlaylistTypeIdentifier returns the string constant MLiTunesMusicPlaylistTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiTunesMusicPlaylistTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiTunesMusicPlaylistTypeIdentifier())
+// MLiTunesMusicPlaylistTypeIdentifier returns the string constant MLiTunesMusicPlaylistTypeIdentifier, for use as a dictionary key or argument.
+func MLiTunesMusicPlaylistTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiTunesMusicPlaylistTypeIdentifier")))
 }
 
-// MLiTunesMusicVideosPlaylistTypeIdentifier returns the string constant MLiTunesMusicVideosPlaylistTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiTunesMusicVideosPlaylistTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiTunesMusicVideosPlaylistTypeIdentifier())
+// MLiTunesMusicVideosPlaylistTypeIdentifier returns the string constant MLiTunesMusicVideosPlaylistTypeIdentifier, for use as a dictionary key or argument.
+func MLiTunesMusicVideosPlaylistTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiTunesMusicVideosPlaylistTypeIdentifier")))
 }
 
-// MLiTunesGeniusPlaylistTypeIdentifier returns the string constant MLiTunesGeniusPlaylistTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiTunesGeniusPlaylistTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiTunesGeniusPlaylistTypeIdentifier())
+// MLiTunesGeniusPlaylistTypeIdentifier returns the string constant MLiTunesGeniusPlaylistTypeIdentifier, for use as a dictionary key or argument.
+func MLiTunesGeniusPlaylistTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiTunesGeniusPlaylistTypeIdentifier")))
 }
 
-// MLiTunesSavedGeniusPlaylistTypeIdentifier returns the string constant MLiTunesSavedGeniusPlaylistTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiTunesSavedGeniusPlaylistTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiTunesSavedGeniusPlaylistTypeIdentifier())
+// MLiTunesSavedGeniusPlaylistTypeIdentifier returns the string constant MLiTunesSavedGeniusPlaylistTypeIdentifier, for use as a dictionary key or argument.
+func MLiTunesSavedGeniusPlaylistTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiTunesSavedGeniusPlaylistTypeIdentifier")))
 }
 
-// MLiTunesiTunesUPlaylistTypeIdentifier returns the string constant MLiTunesiTunesUPlaylistTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiTunesiTunesUPlaylistTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiTunesiTunesUPlaylistTypeIdentifier())
+// MLiTunesiTunesUPlaylistTypeIdentifier returns the string constant MLiTunesiTunesUPlaylistTypeIdentifier, for use as a dictionary key or argument.
+func MLiTunesiTunesUPlaylistTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiTunesiTunesUPlaylistTypeIdentifier")))
 }
 
-// MLPhotosRootGroupTypeIdentifier returns the string constant MLPhotosRootGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosRootGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosRootGroupTypeIdentifier())
+// MLPhotosRootGroupTypeIdentifier returns the string constant MLPhotosRootGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosRootGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosRootGroupTypeIdentifier")))
 }
 
-// MLPhotosSharedGroupTypeIdentifier returns the string constant MLPhotosSharedGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosSharedGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosSharedGroupTypeIdentifier())
+// MLPhotosSharedGroupTypeIdentifier returns the string constant MLPhotosSharedGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosSharedGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosSharedGroupTypeIdentifier")))
 }
 
-// MLPhotosAlbumsGroupTypeIdentifier returns the string constant MLPhotosAlbumsGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosAlbumsGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosAlbumsGroupTypeIdentifier())
+// MLPhotosAlbumsGroupTypeIdentifier returns the string constant MLPhotosAlbumsGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosAlbumsGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosAlbumsGroupTypeIdentifier")))
 }
 
-// MLPhotosAlbumTypeIdentifier returns the string constant MLPhotosAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosAlbumTypeIdentifier())
+// MLPhotosAlbumTypeIdentifier returns the string constant MLPhotosAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosAlbumTypeIdentifier")))
 }
 
-// MLPhotosFolderTypeIdentifier returns the string constant MLPhotosFolderTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosFolderTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosFolderTypeIdentifier())
+// MLPhotosFolderTypeIdentifier returns the string constant MLPhotosFolderTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosFolderTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosFolderTypeIdentifier")))
 }
 
-// MLPhotosSmartAlbumTypeIdentifier returns the string constant MLPhotosSmartAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosSmartAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosSmartAlbumTypeIdentifier())
+// MLPhotosSmartAlbumTypeIdentifier returns the string constant MLPhotosSmartAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosSmartAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosSmartAlbumTypeIdentifier")))
 }
 
-// MLPhotosPublishedAlbumTypeIdentifier returns the string constant MLPhotosPublishedAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosPublishedAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosPublishedAlbumTypeIdentifier())
+// MLPhotosPublishedAlbumTypeIdentifier returns the string constant MLPhotosPublishedAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosPublishedAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosPublishedAlbumTypeIdentifier")))
 }
 
-// MLPhotosAllMomentsGroupTypeIdentifier returns the string constant MLPhotosAllMomentsGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosAllMomentsGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosAllMomentsGroupTypeIdentifier())
+// MLPhotosAllMomentsGroupTypeIdentifier returns the string constant MLPhotosAllMomentsGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosAllMomentsGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosAllMomentsGroupTypeIdentifier")))
 }
 
-// MLPhotosMomentGroupTypeIdentifier returns the string constant MLPhotosMomentGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosMomentGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosMomentGroupTypeIdentifier())
+// MLPhotosMomentGroupTypeIdentifier returns the string constant MLPhotosMomentGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosMomentGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosMomentGroupTypeIdentifier")))
 }
 
-// MLPhotosAllCollectionsGroupTypeIdentifier returns the string constant MLPhotosAllCollectionsGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosAllCollectionsGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosAllCollectionsGroupTypeIdentifier())
+// MLPhotosAllCollectionsGroupTypeIdentifier returns the string constant MLPhotosAllCollectionsGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosAllCollectionsGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosAllCollectionsGroupTypeIdentifier")))
 }
 
-// MLPhotosCollectionGroupTypeIdentifier returns the string constant MLPhotosCollectionGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosCollectionGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosCollectionGroupTypeIdentifier())
+// MLPhotosCollectionGroupTypeIdentifier returns the string constant MLPhotosCollectionGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosCollectionGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosCollectionGroupTypeIdentifier")))
 }
 
-// MLPhotosAllYearsGroupTypeIdentifier returns the string constant MLPhotosAllYearsGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosAllYearsGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosAllYearsGroupTypeIdentifier())
+// MLPhotosAllYearsGroupTypeIdentifier returns the string constant MLPhotosAllYearsGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosAllYearsGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosAllYearsGroupTypeIdentifier")))
 }
 
-// MLPhotosYearGroupTypeIdentifier returns the string constant MLPhotosYearGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosYearGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosYearGroupTypeIdentifier())
+// MLPhotosYearGroupTypeIdentifier returns the string constant MLPhotosYearGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosYearGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosYearGroupTypeIdentifier")))
 }
 
-// MLPhotosLastImportGroupTypeIdentifier returns the string constant MLPhotosLastImportGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosLastImportGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosLastImportGroupTypeIdentifier())
+// MLPhotosLastImportGroupTypeIdentifier returns the string constant MLPhotosLastImportGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosLastImportGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosLastImportGroupTypeIdentifier")))
 }
 
-// MLPhotosMyPhotoStreamTypeIdentifier returns the string constant MLPhotosMyPhotoStreamTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosMyPhotoStreamTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosMyPhotoStreamTypeIdentifier())
+// MLPhotosMyPhotoStreamTypeIdentifier returns the string constant MLPhotosMyPhotoStreamTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosMyPhotoStreamTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosMyPhotoStreamTypeIdentifier")))
 }
 
-// MLPhotosSharedPhotoStreamTypeIdentifier returns the string constant MLPhotosSharedPhotoStreamTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosSharedPhotoStreamTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosSharedPhotoStreamTypeIdentifier())
+// MLPhotosSharedPhotoStreamTypeIdentifier returns the string constant MLPhotosSharedPhotoStreamTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosSharedPhotoStreamTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosSharedPhotoStreamTypeIdentifier")))
 }
 
-// MLPhotosFavoritesGroupTypeIdentifier returns the string constant MLPhotosFavoritesGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosFavoritesGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosFavoritesGroupTypeIdentifier())
+// MLPhotosFavoritesGroupTypeIdentifier returns the string constant MLPhotosFavoritesGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosFavoritesGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosFavoritesGroupTypeIdentifier")))
 }
 
-// MLPhotosFrontCameraGroupTypeIdentifier returns the string constant MLPhotosFrontCameraGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosFrontCameraGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosFrontCameraGroupTypeIdentifier())
+// MLPhotosFrontCameraGroupTypeIdentifier returns the string constant MLPhotosFrontCameraGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosFrontCameraGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosFrontCameraGroupTypeIdentifier")))
 }
 
-// MLPhotosLivePhotosGroupTypeIdentifier returns the string constant MLPhotosLivePhotosGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosLivePhotosGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosLivePhotosGroupTypeIdentifier())
+// MLPhotosLivePhotosGroupTypeIdentifier returns the string constant MLPhotosLivePhotosGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosLivePhotosGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosLivePhotosGroupTypeIdentifier")))
 }
 
-// MLPhotosLongExposureGroupTypeIdentifier returns the string constant MLPhotosLongExposureGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosLongExposureGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosLongExposureGroupTypeIdentifier())
+// MLPhotosLongExposureGroupTypeIdentifier returns the string constant MLPhotosLongExposureGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosLongExposureGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosLongExposureGroupTypeIdentifier")))
 }
 
-// MLPhotosAnimatedGroupTypeIdentifier returns the string constant MLPhotosAnimatedGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosAnimatedGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosAnimatedGroupTypeIdentifier())
+// MLPhotosAnimatedGroupTypeIdentifier returns the string constant MLPhotosAnimatedGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosAnimatedGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosAnimatedGroupTypeIdentifier")))
 }
 
-// MLPhotosPanoramasGroupTypeIdentifier returns the string constant MLPhotosPanoramasGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosPanoramasGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosPanoramasGroupTypeIdentifier())
+// MLPhotosPanoramasGroupTypeIdentifier returns the string constant MLPhotosPanoramasGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosPanoramasGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosPanoramasGroupTypeIdentifier")))
 }
 
-// MLPhotosVideosGroupTypeIdentifier returns the string constant MLPhotosVideosGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosVideosGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosVideosGroupTypeIdentifier())
+// MLPhotosVideosGroupTypeIdentifier returns the string constant MLPhotosVideosGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosVideosGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosVideosGroupTypeIdentifier")))
 }
 
-// MLPhotosSloMoGroupTypeIdentifier returns the string constant MLPhotosSloMoGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosSloMoGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosSloMoGroupTypeIdentifier())
+// MLPhotosSloMoGroupTypeIdentifier returns the string constant MLPhotosSloMoGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosSloMoGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosSloMoGroupTypeIdentifier")))
 }
 
-// MLPhotosDepthEffectGroupTypeIdentifier returns the string constant MLPhotosDepthEffectGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosDepthEffectGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosDepthEffectGroupTypeIdentifier())
+// MLPhotosDepthEffectGroupTypeIdentifier returns the string constant MLPhotosDepthEffectGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosDepthEffectGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosDepthEffectGroupTypeIdentifier")))
 }
 
-// MLPhotosTimelapseGroupTypeIdentifier returns the string constant MLPhotosTimelapseGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosTimelapseGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosTimelapseGroupTypeIdentifier())
+// MLPhotosTimelapseGroupTypeIdentifier returns the string constant MLPhotosTimelapseGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosTimelapseGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosTimelapseGroupTypeIdentifier")))
 }
 
-// MLPhotosBurstGroupTypeIdentifier returns the string constant MLPhotosBurstGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosBurstGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosBurstGroupTypeIdentifier())
+// MLPhotosBurstGroupTypeIdentifier returns the string constant MLPhotosBurstGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosBurstGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosBurstGroupTypeIdentifier")))
 }
 
-// MLPhotosScreenshotGroupTypeIdentifier returns the string constant MLPhotosScreenshotGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosScreenshotGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosScreenshotGroupTypeIdentifier())
+// MLPhotosScreenshotGroupTypeIdentifier returns the string constant MLPhotosScreenshotGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosScreenshotGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosScreenshotGroupTypeIdentifier")))
 }
 
-// MLPhotosFacesAlbumTypeIdentifier returns the string constant MLPhotosFacesAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosFacesAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosFacesAlbumTypeIdentifier())
+// MLPhotosFacesAlbumTypeIdentifier returns the string constant MLPhotosFacesAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosFacesAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosFacesAlbumTypeIdentifier")))
 }
 
-// MLPhotosAllPhotosAlbumTypeIdentifier returns the string constant MLPhotosAllPhotosAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLPhotosAllPhotosAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLPhotosAllPhotosAlbumTypeIdentifier())
+// MLPhotosAllPhotosAlbumTypeIdentifier returns the string constant MLPhotosAllPhotosAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLPhotosAllPhotosAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLPhotosAllPhotosAlbumTypeIdentifier")))
 }
 
-// MLiPhotoRootGroupTypeIdentifier returns the string constant MLiPhotoRootGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoRootGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoRootGroupTypeIdentifier())
+// MLiPhotoRootGroupTypeIdentifier returns the string constant MLiPhotoRootGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoRootGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoRootGroupTypeIdentifier")))
 }
 
-// MLiPhotoAlbumTypeIdentifier returns the string constant MLiPhotoAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoAlbumTypeIdentifier())
+// MLiPhotoAlbumTypeIdentifier returns the string constant MLiPhotoAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoAlbumTypeIdentifier")))
 }
 
-// MLiPhotoLibraryAlbumTypeIdentifier returns the string constant MLiPhotoLibraryAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoLibraryAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoLibraryAlbumTypeIdentifier())
+// MLiPhotoLibraryAlbumTypeIdentifier returns the string constant MLiPhotoLibraryAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoLibraryAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoLibraryAlbumTypeIdentifier")))
 }
 
-// MLiPhotoEventsFolderTypeIdentifier returns the string constant MLiPhotoEventsFolderTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoEventsFolderTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoEventsFolderTypeIdentifier())
+// MLiPhotoEventsFolderTypeIdentifier returns the string constant MLiPhotoEventsFolderTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoEventsFolderTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoEventsFolderTypeIdentifier")))
 }
 
-// MLiPhotoSmartAlbumTypeIdentifier returns the string constant MLiPhotoSmartAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoSmartAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoSmartAlbumTypeIdentifier())
+// MLiPhotoSmartAlbumTypeIdentifier returns the string constant MLiPhotoSmartAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoSmartAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoSmartAlbumTypeIdentifier")))
 }
 
-// MLiPhotoEventAlbumTypeIdentifier returns the string constant MLiPhotoEventAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoEventAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoEventAlbumTypeIdentifier())
+// MLiPhotoEventAlbumTypeIdentifier returns the string constant MLiPhotoEventAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoEventAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoEventAlbumTypeIdentifier")))
 }
 
-// MLiPhotoLastImportAlbumTypeIdentifier returns the string constant MLiPhotoLastImportAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoLastImportAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoLastImportAlbumTypeIdentifier())
+// MLiPhotoLastImportAlbumTypeIdentifier returns the string constant MLiPhotoLastImportAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoLastImportAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoLastImportAlbumTypeIdentifier")))
 }
 
-// MLiPhotoLastNMonthsAlbumTypeIdentifier returns the string constant MLiPhotoLastNMonthsAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoLastNMonthsAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoLastNMonthsAlbumTypeIdentifier())
+// MLiPhotoLastNMonthsAlbumTypeIdentifier returns the string constant MLiPhotoLastNMonthsAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoLastNMonthsAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoLastNMonthsAlbumTypeIdentifier")))
 }
 
-// MLiPhotoFlaggedAlbumTypeIdentifier returns the string constant MLiPhotoFlaggedAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoFlaggedAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoFlaggedAlbumTypeIdentifier())
+// MLiPhotoFlaggedAlbumTypeIdentifier returns the string constant MLiPhotoFlaggedAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoFlaggedAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoFlaggedAlbumTypeIdentifier")))
 }
 
-// MLiPhotoFolderAlbumTypeIdentifier returns the string constant MLiPhotoFolderAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoFolderAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoFolderAlbumTypeIdentifier())
+// MLiPhotoFolderAlbumTypeIdentifier returns the string constant MLiPhotoFolderAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoFolderAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoFolderAlbumTypeIdentifier")))
 }
 
-// MLiPhotoSubscribedAlbumTypeIdentifier returns the string constant MLiPhotoSubscribedAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoSubscribedAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoSubscribedAlbumTypeIdentifier())
+// MLiPhotoSubscribedAlbumTypeIdentifier returns the string constant MLiPhotoSubscribedAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoSubscribedAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoSubscribedAlbumTypeIdentifier")))
 }
 
-// MLiPhotoFacesAlbumTypeIdentifier returns the string constant MLiPhotoFacesAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoFacesAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoFacesAlbumTypeIdentifier())
+// MLiPhotoFacesAlbumTypeIdentifier returns the string constant MLiPhotoFacesAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoFacesAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoFacesAlbumTypeIdentifier")))
 }
 
-// MLiPhotoPlacesAlbumTypeIdentifier returns the string constant MLiPhotoPlacesAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoPlacesAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoPlacesAlbumTypeIdentifier())
+// MLiPhotoPlacesAlbumTypeIdentifier returns the string constant MLiPhotoPlacesAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoPlacesAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoPlacesAlbumTypeIdentifier")))
 }
 
-// MLiPhotoPlacesCountryAlbumTypeIdentifier returns the string constant MLiPhotoPlacesCountryAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoPlacesCountryAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoPlacesCountryAlbumTypeIdentifier())
+// MLiPhotoPlacesCountryAlbumTypeIdentifier returns the string constant MLiPhotoPlacesCountryAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoPlacesCountryAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoPlacesCountryAlbumTypeIdentifier")))
 }
 
-// MLiPhotoPlacesProvinceAlbumTypeIdentifier returns the string constant MLiPhotoPlacesProvinceAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoPlacesProvinceAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoPlacesProvinceAlbumTypeIdentifier())
+// MLiPhotoPlacesProvinceAlbumTypeIdentifier returns the string constant MLiPhotoPlacesProvinceAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoPlacesProvinceAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoPlacesProvinceAlbumTypeIdentifier")))
 }
 
-// MLiPhotoPlacesCityAlbumTypeIdentifier returns the string constant MLiPhotoPlacesCityAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoPlacesCityAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoPlacesCityAlbumTypeIdentifier())
+// MLiPhotoPlacesCityAlbumTypeIdentifier returns the string constant MLiPhotoPlacesCityAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoPlacesCityAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoPlacesCityAlbumTypeIdentifier")))
 }
 
-// MLiPhotoPlacesPointOfInterestAlbumTypeIdentifier returns the string constant MLiPhotoPlacesPointOfInterestAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoPlacesPointOfInterestAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoPlacesPointOfInterestAlbumTypeIdentifier())
+// MLiPhotoPlacesPointOfInterestAlbumTypeIdentifier returns the string constant MLiPhotoPlacesPointOfInterestAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoPlacesPointOfInterestAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoPlacesPointOfInterestAlbumTypeIdentifier")))
 }
 
-// MLiPhotoFacebookAlbumTypeIdentifier returns the string constant MLiPhotoFacebookAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoFacebookAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoFacebookAlbumTypeIdentifier())
+// MLiPhotoFacebookAlbumTypeIdentifier returns the string constant MLiPhotoFacebookAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoFacebookAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoFacebookAlbumTypeIdentifier")))
 }
 
-// MLiPhotoFlickrAlbumTypeIdentifier returns the string constant MLiPhotoFlickrAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoFlickrAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoFlickrAlbumTypeIdentifier())
+// MLiPhotoFlickrAlbumTypeIdentifier returns the string constant MLiPhotoFlickrAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoFlickrAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoFlickrAlbumTypeIdentifier")))
 }
 
-// MLiPhotoFacebookGroupTypeIdentifier returns the string constant MLiPhotoFacebookGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoFacebookGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoFacebookGroupTypeIdentifier())
+// MLiPhotoFacebookGroupTypeIdentifier returns the string constant MLiPhotoFacebookGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoFacebookGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoFacebookGroupTypeIdentifier")))
 }
 
-// MLiPhotoFlickrGroupTypeIdentifier returns the string constant MLiPhotoFlickrGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoFlickrGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoFlickrGroupTypeIdentifier())
+// MLiPhotoFlickrGroupTypeIdentifier returns the string constant MLiPhotoFlickrGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoFlickrGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoFlickrGroupTypeIdentifier")))
 }
 
-// MLiPhotoSlideShowAlbumTypeIdentifier returns the string constant MLiPhotoSlideShowAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoSlideShowAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoSlideShowAlbumTypeIdentifier())
+// MLiPhotoSlideShowAlbumTypeIdentifier returns the string constant MLiPhotoSlideShowAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoSlideShowAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoSlideShowAlbumTypeIdentifier")))
 }
 
-// MLiPhotoLastViewedEventAlbumTypeIdentifier returns the string constant MLiPhotoLastViewedEventAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoLastViewedEventAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoLastViewedEventAlbumTypeIdentifier())
+// MLiPhotoLastViewedEventAlbumTypeIdentifier returns the string constant MLiPhotoLastViewedEventAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoLastViewedEventAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoLastViewedEventAlbumTypeIdentifier")))
 }
 
-// MLiPhotoPhotoStreamAlbumTypeIdentifier returns the string constant MLiPhotoPhotoStreamAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiPhotoPhotoStreamAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiPhotoPhotoStreamAlbumTypeIdentifier())
+// MLiPhotoPhotoStreamAlbumTypeIdentifier returns the string constant MLiPhotoPhotoStreamAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLiPhotoPhotoStreamAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiPhotoPhotoStreamAlbumTypeIdentifier")))
 }
 
-// MLApertureRootGroupTypeIdentifier returns the string constant MLApertureRootGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureRootGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureRootGroupTypeIdentifier())
+// MLApertureRootGroupTypeIdentifier returns the string constant MLApertureRootGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureRootGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureRootGroupTypeIdentifier")))
 }
 
-// MLApertureUserAlbumTypeIdentifier returns the string constant MLApertureUserAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureUserAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureUserAlbumTypeIdentifier())
+// MLApertureUserAlbumTypeIdentifier returns the string constant MLApertureUserAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureUserAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureUserAlbumTypeIdentifier")))
 }
 
-// MLApertureUserSmartAlbumTypeIdentifier returns the string constant MLApertureUserSmartAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureUserSmartAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureUserSmartAlbumTypeIdentifier())
+// MLApertureUserSmartAlbumTypeIdentifier returns the string constant MLApertureUserSmartAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureUserSmartAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureUserSmartAlbumTypeIdentifier")))
 }
 
-// MLApertureProjectAlbumTypeIdentifier returns the string constant MLApertureProjectAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureProjectAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureProjectAlbumTypeIdentifier())
+// MLApertureProjectAlbumTypeIdentifier returns the string constant MLApertureProjectAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureProjectAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureProjectAlbumTypeIdentifier")))
 }
 
-// MLApertureFolderAlbumTypeIdentifier returns the string constant MLApertureFolderAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureFolderAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureFolderAlbumTypeIdentifier())
+// MLApertureFolderAlbumTypeIdentifier returns the string constant MLApertureFolderAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureFolderAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureFolderAlbumTypeIdentifier")))
 }
 
-// MLApertureProjectFolderAlbumTypeIdentifier returns the string constant MLApertureProjectFolderAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureProjectFolderAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureProjectFolderAlbumTypeIdentifier())
+// MLApertureProjectFolderAlbumTypeIdentifier returns the string constant MLApertureProjectFolderAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureProjectFolderAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureProjectFolderAlbumTypeIdentifier")))
 }
 
-// MLApertureLightTableTypeIdentifier returns the string constant MLApertureLightTableTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureLightTableTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureLightTableTypeIdentifier())
+// MLApertureLightTableTypeIdentifier returns the string constant MLApertureLightTableTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureLightTableTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureLightTableTypeIdentifier")))
 }
 
-// MLApertureFlickrGroupTypeIdentifier returns the string constant MLApertureFlickrGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureFlickrGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureFlickrGroupTypeIdentifier())
+// MLApertureFlickrGroupTypeIdentifier returns the string constant MLApertureFlickrGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureFlickrGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureFlickrGroupTypeIdentifier")))
 }
 
-// MLApertureFlickrAlbumTypeIdentifier returns the string constant MLApertureFlickrAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureFlickrAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureFlickrAlbumTypeIdentifier())
+// MLApertureFlickrAlbumTypeIdentifier returns the string constant MLApertureFlickrAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureFlickrAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureFlickrAlbumTypeIdentifier")))
 }
 
-// MLApertureFacebookGroupTypeIdentifier returns the string constant MLApertureFacebookGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureFacebookGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureFacebookGroupTypeIdentifier())
+// MLApertureFacebookGroupTypeIdentifier returns the string constant MLApertureFacebookGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureFacebookGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureFacebookGroupTypeIdentifier")))
 }
 
-// MLApertureFacebookAlbumTypeIdentifier returns the string constant MLApertureFacebookAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureFacebookAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureFacebookAlbumTypeIdentifier())
+// MLApertureFacebookAlbumTypeIdentifier returns the string constant MLApertureFacebookAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureFacebookAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureFacebookAlbumTypeIdentifier")))
 }
 
-// MLApertureSmugMugGroupTypeIdentifier returns the string constant MLApertureSmugMugGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureSmugMugGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureSmugMugGroupTypeIdentifier())
+// MLApertureSmugMugGroupTypeIdentifier returns the string constant MLApertureSmugMugGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureSmugMugGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureSmugMugGroupTypeIdentifier")))
 }
 
-// MLApertureSmugMugAlbumTypeIdentifier returns the string constant MLApertureSmugMugAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureSmugMugAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureSmugMugAlbumTypeIdentifier())
+// MLApertureSmugMugAlbumTypeIdentifier returns the string constant MLApertureSmugMugAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureSmugMugAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureSmugMugAlbumTypeIdentifier")))
 }
 
-// MLApertureSlideShowTypeIdentifier returns the string constant MLApertureSlideShowTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureSlideShowTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureSlideShowTypeIdentifier())
+// MLApertureSlideShowTypeIdentifier returns the string constant MLApertureSlideShowTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureSlideShowTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureSlideShowTypeIdentifier")))
 }
 
-// MLApertureAllPhotosTypeIdentifier returns the string constant MLApertureAllPhotosTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureAllPhotosTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureAllPhotosTypeIdentifier())
+// MLApertureAllPhotosTypeIdentifier returns the string constant MLApertureAllPhotosTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureAllPhotosTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureAllPhotosTypeIdentifier")))
 }
 
-// MLApertureFlaggedTypeIdentifier returns the string constant MLApertureFlaggedTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureFlaggedTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureFlaggedTypeIdentifier())
+// MLApertureFlaggedTypeIdentifier returns the string constant MLApertureFlaggedTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureFlaggedTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureFlaggedTypeIdentifier")))
 }
 
-// MLApertureAllProjectsTypeIdentifier returns the string constant MLApertureAllProjectsTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureAllProjectsTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureAllProjectsTypeIdentifier())
+// MLApertureAllProjectsTypeIdentifier returns the string constant MLApertureAllProjectsTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureAllProjectsTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureAllProjectsTypeIdentifier")))
 }
 
-// MLApertureFacesAlbumTypeIdentifier returns the string constant MLApertureFacesAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureFacesAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureFacesAlbumTypeIdentifier())
+// MLApertureFacesAlbumTypeIdentifier returns the string constant MLApertureFacesAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureFacesAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureFacesAlbumTypeIdentifier")))
 }
 
-// MLAperturePlacesAlbumTypeIdentifier returns the string constant MLAperturePlacesAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLAperturePlacesAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLAperturePlacesAlbumTypeIdentifier())
+// MLAperturePlacesAlbumTypeIdentifier returns the string constant MLAperturePlacesAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLAperturePlacesAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLAperturePlacesAlbumTypeIdentifier")))
 }
 
-// MLAperturePlacesCountryAlbumTypeIdentifier returns the string constant MLAperturePlacesCountryAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLAperturePlacesCountryAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLAperturePlacesCountryAlbumTypeIdentifier())
+// MLAperturePlacesCountryAlbumTypeIdentifier returns the string constant MLAperturePlacesCountryAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLAperturePlacesCountryAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLAperturePlacesCountryAlbumTypeIdentifier")))
 }
 
-// MLAperturePlacesProvinceAlbumTypeIdentifier returns the string constant MLAperturePlacesProvinceAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLAperturePlacesProvinceAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLAperturePlacesProvinceAlbumTypeIdentifier())
+// MLAperturePlacesProvinceAlbumTypeIdentifier returns the string constant MLAperturePlacesProvinceAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLAperturePlacesProvinceAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLAperturePlacesProvinceAlbumTypeIdentifier")))
 }
 
-// MLAperturePlacesCityAlbumTypeIdentifier returns the string constant MLAperturePlacesCityAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLAperturePlacesCityAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLAperturePlacesCityAlbumTypeIdentifier())
+// MLAperturePlacesCityAlbumTypeIdentifier returns the string constant MLAperturePlacesCityAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLAperturePlacesCityAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLAperturePlacesCityAlbumTypeIdentifier")))
 }
 
-// MLAperturePlacesPointOfInterestAlbumTypeIdentifier returns the string constant MLAperturePlacesPointOfInterestAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLAperturePlacesPointOfInterestAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLAperturePlacesPointOfInterestAlbumTypeIdentifier())
+// MLAperturePlacesPointOfInterestAlbumTypeIdentifier returns the string constant MLAperturePlacesPointOfInterestAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLAperturePlacesPointOfInterestAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLAperturePlacesPointOfInterestAlbumTypeIdentifier")))
 }
 
-// MLApertureLastImportAlbumTypeIdentifier returns the string constant MLApertureLastImportAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureLastImportAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureLastImportAlbumTypeIdentifier())
+// MLApertureLastImportAlbumTypeIdentifier returns the string constant MLApertureLastImportAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureLastImportAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureLastImportAlbumTypeIdentifier")))
 }
 
-// MLApertureLastNMonthsAlbumTypeIdentifier returns the string constant MLApertureLastNMonthsAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureLastNMonthsAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureLastNMonthsAlbumTypeIdentifier())
+// MLApertureLastNMonthsAlbumTypeIdentifier returns the string constant MLApertureLastNMonthsAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureLastNMonthsAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureLastNMonthsAlbumTypeIdentifier")))
 }
 
-// MLApertureLastViewedEventAlbumTypeIdentifier returns the string constant MLApertureLastViewedEventAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLApertureLastViewedEventAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLApertureLastViewedEventAlbumTypeIdentifier())
+// MLApertureLastViewedEventAlbumTypeIdentifier returns the string constant MLApertureLastViewedEventAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLApertureLastViewedEventAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLApertureLastViewedEventAlbumTypeIdentifier")))
 }
 
-// MLAperturePhotoStreamAlbumTypeIdentifier returns the string constant MLAperturePhotoStreamAlbumTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLAperturePhotoStreamAlbumTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLAperturePhotoStreamAlbumTypeIdentifier())
+// MLAperturePhotoStreamAlbumTypeIdentifier returns the string constant MLAperturePhotoStreamAlbumTypeIdentifier, for use as a dictionary key or argument.
+func MLAperturePhotoStreamAlbumTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLAperturePhotoStreamAlbumTypeIdentifier")))
 }
 
-// MLGarageBandRootGroupTypeIdentifier returns the string constant MLGarageBandRootGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLGarageBandRootGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLGarageBandRootGroupTypeIdentifier())
+// MLGarageBandRootGroupTypeIdentifier returns the string constant MLGarageBandRootGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLGarageBandRootGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLGarageBandRootGroupTypeIdentifier")))
 }
 
-// MLGarageBandFolderGroupTypeIdentifier returns the string constant MLGarageBandFolderGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLGarageBandFolderGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLGarageBandFolderGroupTypeIdentifier())
+// MLGarageBandFolderGroupTypeIdentifier returns the string constant MLGarageBandFolderGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLGarageBandFolderGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLGarageBandFolderGroupTypeIdentifier")))
 }
 
-// MLLogicRootGroupTypeIdentifier returns the string constant MLLogicRootGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLLogicRootGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLLogicRootGroupTypeIdentifier())
+// MLLogicRootGroupTypeIdentifier returns the string constant MLLogicRootGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLLogicRootGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLLogicRootGroupTypeIdentifier")))
 }
 
-// MLLogicBouncesGroupTypeIdentifier returns the string constant MLLogicBouncesGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLLogicBouncesGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLLogicBouncesGroupTypeIdentifier())
+// MLLogicBouncesGroupTypeIdentifier returns the string constant MLLogicBouncesGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLLogicBouncesGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLLogicBouncesGroupTypeIdentifier")))
 }
 
-// MLLogicProjectsGroupTypeIdentifier returns the string constant MLLogicProjectsGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLLogicProjectsGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLLogicProjectsGroupTypeIdentifier())
+// MLLogicProjectsGroupTypeIdentifier returns the string constant MLLogicProjectsGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLLogicProjectsGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLLogicProjectsGroupTypeIdentifier")))
 }
 
-// MLLogicProjectTypeIdentifier returns the string constant MLLogicProjectTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLLogicProjectTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLLogicProjectTypeIdentifier())
+// MLLogicProjectTypeIdentifier returns the string constant MLLogicProjectTypeIdentifier, for use as a dictionary key or argument.
+func MLLogicProjectTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLLogicProjectTypeIdentifier")))
 }
 
-// MLiMovieRootGroupTypeIdentifier returns the string constant MLiMovieRootGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiMovieRootGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiMovieRootGroupTypeIdentifier())
+// MLiMovieRootGroupTypeIdentifier returns the string constant MLiMovieRootGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLiMovieRootGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiMovieRootGroupTypeIdentifier")))
 }
 
-// MLiMovieEventGroupTypeIdentifier returns the string constant MLiMovieEventGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiMovieEventGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiMovieEventGroupTypeIdentifier())
+// MLiMovieEventGroupTypeIdentifier returns the string constant MLiMovieEventGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLiMovieEventGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiMovieEventGroupTypeIdentifier")))
 }
 
-// MLiMovieProjectGroupTypeIdentifier returns the string constant MLiMovieProjectGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiMovieProjectGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiMovieProjectGroupTypeIdentifier())
+// MLiMovieProjectGroupTypeIdentifier returns the string constant MLiMovieProjectGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLiMovieProjectGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiMovieProjectGroupTypeIdentifier")))
 }
 
-// MLiMovieEventLibraryGroupTypeIdentifier returns the string constant MLiMovieEventLibraryGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiMovieEventLibraryGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiMovieEventLibraryGroupTypeIdentifier())
+// MLiMovieEventLibraryGroupTypeIdentifier returns the string constant MLiMovieEventLibraryGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLiMovieEventLibraryGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiMovieEventLibraryGroupTypeIdentifier")))
 }
 
-// MLiMovieEventCalendarGroupTypeIdentifier returns the string constant MLiMovieEventCalendarGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiMovieEventCalendarGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiMovieEventCalendarGroupTypeIdentifier())
+// MLiMovieEventCalendarGroupTypeIdentifier returns the string constant MLiMovieEventCalendarGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLiMovieEventCalendarGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiMovieEventCalendarGroupTypeIdentifier")))
 }
 
-// MLiMovieFolderGroupTypeIdentifier returns the string constant MLiMovieFolderGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLiMovieFolderGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLiMovieFolderGroupTypeIdentifier())
+// MLiMovieFolderGroupTypeIdentifier returns the string constant MLiMovieFolderGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLiMovieFolderGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLiMovieFolderGroupTypeIdentifier")))
 }
 
-// MLFinalCutRootGroupTypeIdentifier returns the string constant MLFinalCutRootGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLFinalCutRootGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLFinalCutRootGroupTypeIdentifier())
+// MLFinalCutRootGroupTypeIdentifier returns the string constant MLFinalCutRootGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLFinalCutRootGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLFinalCutRootGroupTypeIdentifier")))
 }
 
-// MLFinalCutEventGroupTypeIdentifier returns the string constant MLFinalCutEventGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLFinalCutEventGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLFinalCutEventGroupTypeIdentifier())
+// MLFinalCutEventGroupTypeIdentifier returns the string constant MLFinalCutEventGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLFinalCutEventGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLFinalCutEventGroupTypeIdentifier")))
 }
 
-// MLFinalCutProjectGroupTypeIdentifier returns the string constant MLFinalCutProjectGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLFinalCutProjectGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLFinalCutProjectGroupTypeIdentifier())
+// MLFinalCutProjectGroupTypeIdentifier returns the string constant MLFinalCutProjectGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLFinalCutProjectGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLFinalCutProjectGroupTypeIdentifier")))
 }
 
-// MLFinalCutEventLibraryGroupTypeIdentifier returns the string constant MLFinalCutEventLibraryGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLFinalCutEventLibraryGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLFinalCutEventLibraryGroupTypeIdentifier())
+// MLFinalCutEventLibraryGroupTypeIdentifier returns the string constant MLFinalCutEventLibraryGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLFinalCutEventLibraryGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLFinalCutEventLibraryGroupTypeIdentifier")))
 }
 
-// MLFinalCutEventCalendarGroupTypeIdentifier returns the string constant MLFinalCutEventCalendarGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLFinalCutEventCalendarGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLFinalCutEventCalendarGroupTypeIdentifier())
+// MLFinalCutEventCalendarGroupTypeIdentifier returns the string constant MLFinalCutEventCalendarGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLFinalCutEventCalendarGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLFinalCutEventCalendarGroupTypeIdentifier")))
 }
 
-// MLFinalCutFolderGroupTypeIdentifier returns the string constant MLFinalCutFolderGroupTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLFinalCutFolderGroupTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLFinalCutFolderGroupTypeIdentifier())
+// MLFinalCutFolderGroupTypeIdentifier returns the string constant MLFinalCutFolderGroupTypeIdentifier, for use as a dictionary key or argument.
+func MLFinalCutFolderGroupTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLFinalCutFolderGroupTypeIdentifier")))
 }
 
-// MLMediaObjectDurationKey returns the string constant MLMediaObjectDurationKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaObjectDurationKey() objc.ID {
-	return purego.CFConstant(raw.MLMediaObjectDurationKey())
+// MLMediaObjectDurationKey returns the string constant MLMediaObjectDurationKey, for use as a dictionary key or argument.
+func MLMediaObjectDurationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaObjectDurationKey")))
 }
 
-// MLMediaObjectArtistKey returns the string constant MLMediaObjectArtistKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaObjectArtistKey() objc.ID {
-	return purego.CFConstant(raw.MLMediaObjectArtistKey())
+// MLMediaObjectArtistKey returns the string constant MLMediaObjectArtistKey, for use as a dictionary key or argument.
+func MLMediaObjectArtistKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaObjectArtistKey")))
 }
 
-// MLMediaObjectAlbumKey returns the string constant MLMediaObjectAlbumKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaObjectAlbumKey() objc.ID {
-	return purego.CFConstant(raw.MLMediaObjectAlbumKey())
+// MLMediaObjectAlbumKey returns the string constant MLMediaObjectAlbumKey, for use as a dictionary key or argument.
+func MLMediaObjectAlbumKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaObjectAlbumKey")))
 }
 
-// MLMediaObjectGenreKey returns the string constant MLMediaObjectGenreKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaObjectGenreKey() objc.ID {
-	return purego.CFConstant(raw.MLMediaObjectGenreKey())
+// MLMediaObjectGenreKey returns the string constant MLMediaObjectGenreKey, for use as a dictionary key or argument.
+func MLMediaObjectGenreKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaObjectGenreKey")))
 }
 
-// MLMediaObjectKindKey returns the string constant MLMediaObjectKindKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaObjectKindKey() objc.ID {
-	return purego.CFConstant(raw.MLMediaObjectKindKey())
+// MLMediaObjectKindKey returns the string constant MLMediaObjectKindKey, for use as a dictionary key or argument.
+func MLMediaObjectKindKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaObjectKindKey")))
 }
 
-// MLMediaObjectTrackNumberKey returns the string constant MLMediaObjectTrackNumberKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaObjectTrackNumberKey() objc.ID {
-	return purego.CFConstant(raw.MLMediaObjectTrackNumberKey())
+// MLMediaObjectTrackNumberKey returns the string constant MLMediaObjectTrackNumberKey, for use as a dictionary key or argument.
+func MLMediaObjectTrackNumberKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaObjectTrackNumberKey")))
 }
 
-// MLMediaObjectBitRateKey returns the string constant MLMediaObjectBitRateKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaObjectBitRateKey() objc.ID {
-	return purego.CFConstant(raw.MLMediaObjectBitRateKey())
+// MLMediaObjectBitRateKey returns the string constant MLMediaObjectBitRateKey, for use as a dictionary key or argument.
+func MLMediaObjectBitRateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaObjectBitRateKey")))
 }
 
-// MLMediaObjectSampleRateKey returns the string constant MLMediaObjectSampleRateKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaObjectSampleRateKey() objc.ID {
-	return purego.CFConstant(raw.MLMediaObjectSampleRateKey())
+// MLMediaObjectSampleRateKey returns the string constant MLMediaObjectSampleRateKey, for use as a dictionary key or argument.
+func MLMediaObjectSampleRateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaObjectSampleRateKey")))
 }
 
-// MLMediaObjectChannelCountKey returns the string constant MLMediaObjectChannelCountKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaObjectChannelCountKey() objc.ID {
-	return purego.CFConstant(raw.MLMediaObjectChannelCountKey())
+// MLMediaObjectChannelCountKey returns the string constant MLMediaObjectChannelCountKey, for use as a dictionary key or argument.
+func MLMediaObjectChannelCountKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaObjectChannelCountKey")))
 }
 
-// MLMediaObjectResolutionStringKey returns the string constant MLMediaObjectResolutionStringKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaObjectResolutionStringKey() objc.ID {
-	return purego.CFConstant(raw.MLMediaObjectResolutionStringKey())
+// MLMediaObjectResolutionStringKey returns the string constant MLMediaObjectResolutionStringKey, for use as a dictionary key or argument.
+func MLMediaObjectResolutionStringKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaObjectResolutionStringKey")))
 }
 
-// MLMediaObjectCommentsKey returns the string constant MLMediaObjectCommentsKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaObjectCommentsKey() objc.ID {
-	return purego.CFConstant(raw.MLMediaObjectCommentsKey())
+// MLMediaObjectCommentsKey returns the string constant MLMediaObjectCommentsKey, for use as a dictionary key or argument.
+func MLMediaObjectCommentsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaObjectCommentsKey")))
 }
 
-// MLMediaObjectKeywordsKey returns the string constant MLMediaObjectKeywordsKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaObjectKeywordsKey() objc.ID {
-	return purego.CFConstant(raw.MLMediaObjectKeywordsKey())
+// MLMediaObjectKeywordsKey returns the string constant MLMediaObjectKeywordsKey, for use as a dictionary key or argument.
+func MLMediaObjectKeywordsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaObjectKeywordsKey")))
 }
 
-// MLMediaObjectProtectedKey returns the string constant MLMediaObjectProtectedKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaObjectProtectedKey() objc.ID {
-	return purego.CFConstant(raw.MLMediaObjectProtectedKey())
+// MLMediaObjectProtectedKey returns the string constant MLMediaObjectProtectedKey, for use as a dictionary key or argument.
+func MLMediaObjectProtectedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaObjectProtectedKey")))
 }
 
-// MLMediaSourcePhotosIdentifier returns the string constant MLMediaSourcePhotosIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaSourcePhotosIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLMediaSourcePhotosIdentifier())
+// MLMediaSourcePhotosIdentifier returns the string constant MLMediaSourcePhotosIdentifier, for use as a dictionary key or argument.
+func MLMediaSourcePhotosIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaSourcePhotosIdentifier")))
 }
 
-// MLMediaSourceiPhotoIdentifier returns the string constant MLMediaSourceiPhotoIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaSourceiPhotoIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLMediaSourceiPhotoIdentifier())
+// MLMediaSourceiPhotoIdentifier returns the string constant MLMediaSourceiPhotoIdentifier, for use as a dictionary key or argument.
+func MLMediaSourceiPhotoIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaSourceiPhotoIdentifier")))
 }
 
-// MLMediaSourceiTunesIdentifier returns the string constant MLMediaSourceiTunesIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaSourceiTunesIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLMediaSourceiTunesIdentifier())
+// MLMediaSourceiTunesIdentifier returns the string constant MLMediaSourceiTunesIdentifier, for use as a dictionary key or argument.
+func MLMediaSourceiTunesIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaSourceiTunesIdentifier")))
 }
 
-// MLMediaSourceApertureIdentifier returns the string constant MLMediaSourceApertureIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaSourceApertureIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLMediaSourceApertureIdentifier())
+// MLMediaSourceApertureIdentifier returns the string constant MLMediaSourceApertureIdentifier, for use as a dictionary key or argument.
+func MLMediaSourceApertureIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaSourceApertureIdentifier")))
 }
 
-// MLMediaSourceiMovieIdentifier returns the string constant MLMediaSourceiMovieIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaSourceiMovieIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLMediaSourceiMovieIdentifier())
+// MLMediaSourceiMovieIdentifier returns the string constant MLMediaSourceiMovieIdentifier, for use as a dictionary key or argument.
+func MLMediaSourceiMovieIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaSourceiMovieIdentifier")))
 }
 
-// MLMediaSourceFinalCutIdentifier returns the string constant MLMediaSourceFinalCutIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaSourceFinalCutIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLMediaSourceFinalCutIdentifier())
+// MLMediaSourceFinalCutIdentifier returns the string constant MLMediaSourceFinalCutIdentifier, for use as a dictionary key or argument.
+func MLMediaSourceFinalCutIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaSourceFinalCutIdentifier")))
 }
 
-// MLMediaSourceGarageBandIdentifier returns the string constant MLMediaSourceGarageBandIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaSourceGarageBandIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLMediaSourceGarageBandIdentifier())
+// MLMediaSourceGarageBandIdentifier returns the string constant MLMediaSourceGarageBandIdentifier, for use as a dictionary key or argument.
+func MLMediaSourceGarageBandIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaSourceGarageBandIdentifier")))
 }
 
-// MLMediaSourceLogicIdentifier returns the string constant MLMediaSourceLogicIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaSourceLogicIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLMediaSourceLogicIdentifier())
+// MLMediaSourceLogicIdentifier returns the string constant MLMediaSourceLogicIdentifier, for use as a dictionary key or argument.
+func MLMediaSourceLogicIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaSourceLogicIdentifier")))
 }
 
-// MLMediaSourcePhotoBoothIdentifier returns the string constant MLMediaSourcePhotoBoothIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaSourcePhotoBoothIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLMediaSourcePhotoBoothIdentifier())
+// MLMediaSourcePhotoBoothIdentifier returns the string constant MLMediaSourcePhotoBoothIdentifier, for use as a dictionary key or argument.
+func MLMediaSourcePhotoBoothIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaSourcePhotoBoothIdentifier")))
 }
 
-// MLMediaSourceCustomFoldersIdentifier returns the string constant MLMediaSourceCustomFoldersIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaSourceCustomFoldersIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLMediaSourceCustomFoldersIdentifier())
+// MLMediaSourceCustomFoldersIdentifier returns the string constant MLMediaSourceCustomFoldersIdentifier, for use as a dictionary key or argument.
+func MLMediaSourceCustomFoldersIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaSourceCustomFoldersIdentifier")))
 }
 
-// MLMediaSourceMoviesFolderIdentifier returns the string constant MLMediaSourceMoviesFolderIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaSourceMoviesFolderIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLMediaSourceMoviesFolderIdentifier())
+// MLMediaSourceMoviesFolderIdentifier returns the string constant MLMediaSourceMoviesFolderIdentifier, for use as a dictionary key or argument.
+func MLMediaSourceMoviesFolderIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaSourceMoviesFolderIdentifier")))
 }
 
-// MLMediaSourceAppDefinedFoldersIdentifier returns the string constant MLMediaSourceAppDefinedFoldersIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaSourceAppDefinedFoldersIdentifier() objc.ID {
-	return purego.CFConstant(raw.MLMediaSourceAppDefinedFoldersIdentifier())
+// MLMediaSourceAppDefinedFoldersIdentifier returns the string constant MLMediaSourceAppDefinedFoldersIdentifier, for use as a dictionary key or argument.
+func MLMediaSourceAppDefinedFoldersIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaSourceAppDefinedFoldersIdentifier")))
 }
 
-// MLMediaLoadSourceTypesKey returns the string constant MLMediaLoadSourceTypesKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaLoadSourceTypesKey() objc.ID {
-	return purego.CFConstant(raw.MLMediaLoadSourceTypesKey())
+// MLMediaLoadSourceTypesKey returns the string constant MLMediaLoadSourceTypesKey, for use as a dictionary key or argument.
+func MLMediaLoadSourceTypesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaLoadSourceTypesKey")))
 }
 
-// MLMediaLoadIncludeSourcesKey returns the string constant MLMediaLoadIncludeSourcesKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaLoadIncludeSourcesKey() objc.ID {
-	return purego.CFConstant(raw.MLMediaLoadIncludeSourcesKey())
+// MLMediaLoadIncludeSourcesKey returns the string constant MLMediaLoadIncludeSourcesKey, for use as a dictionary key or argument.
+func MLMediaLoadIncludeSourcesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaLoadIncludeSourcesKey")))
 }
 
-// MLMediaLoadExcludeSourcesKey returns the string constant MLMediaLoadExcludeSourcesKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaLoadExcludeSourcesKey() objc.ID {
-	return purego.CFConstant(raw.MLMediaLoadExcludeSourcesKey())
+// MLMediaLoadExcludeSourcesKey returns the string constant MLMediaLoadExcludeSourcesKey, for use as a dictionary key or argument.
+func MLMediaLoadExcludeSourcesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaLoadExcludeSourcesKey")))
 }
 
-// MLMediaLoadFoldersKey returns the string constant MLMediaLoadFoldersKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaLoadFoldersKey() objc.ID {
-	return purego.CFConstant(raw.MLMediaLoadFoldersKey())
+// MLMediaLoadFoldersKey returns the string constant MLMediaLoadFoldersKey, for use as a dictionary key or argument.
+func MLMediaLoadFoldersKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaLoadFoldersKey")))
 }
 
-// MLMediaLoadAppleLoops returns the string constant MLMediaLoadAppleLoops as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaLoadAppleLoops() objc.ID {
-	return purego.CFConstant(raw.MLMediaLoadAppleLoops())
+// MLMediaLoadAppleLoops returns the string constant MLMediaLoadAppleLoops, for use as a dictionary key or argument.
+func MLMediaLoadAppleLoops() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaLoadAppleLoops")))
 }
 
-// MLMediaLoadMoviesFolder returns the string constant MLMediaLoadMoviesFolder as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaLoadMoviesFolder() objc.ID {
-	return purego.CFConstant(raw.MLMediaLoadMoviesFolder())
+// MLMediaLoadMoviesFolder returns the string constant MLMediaLoadMoviesFolder, for use as a dictionary key or argument.
+func MLMediaLoadMoviesFolder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaLoadMoviesFolder")))
 }
 
-// MLMediaLoadAppFoldersKey returns the string constant MLMediaLoadAppFoldersKey as an objc.ID, for use as a dictionary key or selector argument.
-func MLMediaLoadAppFoldersKey() objc.ID {
-	return purego.CFConstant(raw.MLMediaLoadAppFoldersKey())
+// MLMediaLoadAppFoldersKey returns the string constant MLMediaLoadAppFoldersKey, for use as a dictionary key or argument.
+func MLMediaLoadAppFoldersKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MLMediaLoadAppFoldersKey")))
 }

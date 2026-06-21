@@ -5,204 +5,216 @@
 package quartzcomposer
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcomposer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// View wraps [raw.QCView] with a fluent Go API.
+// View is an idiomatic wrapper over the Objective-C class QCView.
 type View struct {
-	inner *raw.QCView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QCView].
-func (x *View) Unwrap() *raw.QCView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *View) ID() objc.ID { return x.inner.Ptr() }
-
-// ViewFromID adopts an existing object pointer as a View (nil for 0).
+// ViewFromID adopts an existing Objective-C object as a View
+// (nil for 0), retaining it and registering a release finalizer.
 func ViewFromID(id objc.ID) *View {
 	if id == 0 {
 		return nil
 	}
-	return &View{inner: raw.QCViewFromID(id)}
+	x := &View{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewView creates a new [View].
+// viewAdopt wraps an Objective-C object that this code just created as a
+// View (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func viewAdopt(id objc.ID) *View {
+	if id == 0 {
+		return nil
+	}
+	x := &View{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *View) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *View) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *View) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewView creates a new View.
 func NewView() *View {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QCView")), objc.RegisterName("new"))
-	return &View{inner: raw.QCViewFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QCView")), objc.RegisterName("new"))
+	return viewAdopt(_id)
 }
 
-// LoadCompositionFromFile calls the underlying LoadCompositionFromFile.
 func (x *View) LoadCompositionFromFile(path string) bool {
-	return x.inner.LoadCompositionFromFile(foundation.NSStringStringWithUTF8String(path))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadCompositionFromFile:"), purego.NSString(path))
+	return _r
 }
 
-// LoadComposition calls the underlying LoadComposition.
-func (x *View) LoadComposition(composition *quartz.QCComposition) bool {
-	return x.inner.LoadComposition(composition)
+func (x *View) LoadComposition(composition obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadComposition:"), objref.IDOf(composition))
+	return _r
 }
 
-// LoadedComposition calls the underlying LoadedComposition.
-func (x *View) LoadedComposition() *quartz.QCComposition {
-	return x.inner.LoadedComposition()
+func (x *View) LoadedComposition() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadedComposition"))
+	return obj.Wrap(_r)
 }
 
-// UnloadComposition calls the underlying UnloadComposition.
 func (x *View) UnloadComposition() {
-	x.inner.UnloadComposition()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unloadComposition"))
 }
 
-// SetAutostartsRendering calls the underlying SetAutostartsRendering.
 func (x *View) SetAutostartsRendering(flag bool) {
-	x.inner.SetAutostartsRendering(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutostartsRendering:"), flag)
 }
 
-// AutostartsRendering calls the underlying AutostartsRendering.
 func (x *View) AutostartsRendering() bool {
-	return x.inner.AutostartsRendering()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autostartsRendering"))
+	return _r
 }
 
-// SetEraseColor calls the underlying SetEraseColor.
-func (x *View) SetEraseColor(color *appkit.NSColor) {
-	x.inner.SetEraseColor(color)
+func (x *View) SetEraseColor(color obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEraseColor:"), objref.IDOf(color))
 }
 
-// EraseColor calls the underlying EraseColor.
-func (x *View) EraseColor() *appkit.NSColor {
-	return x.inner.EraseColor()
+func (x *View) EraseColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eraseColor"))
+	return obj.Wrap(_r)
 }
 
-// SetEventForwardingMask calls the underlying SetEventForwardingMask.
-func (x *View) SetEventForwardingMask(mask uint) {
-	x.inner.SetEventForwardingMask(mask)
+func (x *View) SetEventForwardingMask(mask int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEventForwardingMask:"), mask)
 }
 
-// EventForwardingMask calls the underlying EventForwardingMask.
-func (x *View) EventForwardingMask() uint {
-	return x.inner.EventForwardingMask()
+func (x *View) EventForwardingMask() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("eventForwardingMask"))
+	return _r
 }
 
-// SetMaxRenderingFrameRate calls the underlying SetMaxRenderingFrameRate.
 func (x *View) SetMaxRenderingFrameRate(maxFPS float32) {
-	x.inner.SetMaxRenderingFrameRate(maxFPS)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxRenderingFrameRate:"), maxFPS)
 }
 
-// MaxRenderingFrameRate calls the underlying MaxRenderingFrameRate.
 func (x *View) MaxRenderingFrameRate() float32 {
-	return x.inner.MaxRenderingFrameRate()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maxRenderingFrameRate"))
+	return _r
 }
 
-// Erase calls the underlying Erase.
 func (x *View) Erase() {
-	x.inner.Erase()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("erase"))
 }
 
-// StartRendering calls the underlying StartRendering.
 func (x *View) StartRendering() bool {
-	return x.inner.StartRendering()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startRendering"))
+	return _r
 }
 
-// RenderAtTimeArguments calls the underlying RenderAtTimeArguments.
-func (x *View) RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool {
-	return x.inner.RenderAtTimeArguments(time_, arguments)
+func (x *View) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("renderAtTime:arguments:"), time_, objref.IDOf(arguments))
+	return _r
 }
 
-// PauseRendering calls the underlying PauseRendering.
 func (x *View) PauseRendering() {
-	x.inner.PauseRendering()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseRendering"))
 }
 
-// IsPausedRendering calls the underlying IsPausedRendering.
 func (x *View) IsPausedRendering() bool {
-	return x.inner.IsPausedRendering()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPausedRendering"))
+	return _r
 }
 
-// ResumeRendering calls the underlying ResumeRendering.
 func (x *View) ResumeRendering() {
-	x.inner.ResumeRendering()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeRendering"))
 }
 
-// StopRendering calls the underlying StopRendering.
 func (x *View) StopRendering() {
-	x.inner.StopRendering()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopRendering"))
 }
 
-// IsRendering calls the underlying IsRendering.
 func (x *View) IsRendering() bool {
-	return x.inner.IsRendering()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRendering"))
+	return _r
 }
 
-// SnapshotImage calls the underlying SnapshotImage.
-func (x *View) SnapshotImage() *appkit.NSImage {
-	return x.inner.SnapshotImage()
+func (x *View) SnapshotImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotImage"))
+	return obj.Wrap(_r)
 }
 
-// CreateSnapshotImageOfType calls the underlying CreateSnapshotImageOfType.
-func (x *View) CreateSnapshotImageOfType(type_ string) objc.ID {
-	return x.inner.CreateSnapshotImageOfType(foundation.NSStringStringWithUTF8String(type_))
+func (x *View) CreateSnapshotImageOfType(type_ string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createSnapshotImageOfType:"), purego.NSString(type_))
+	return obj.Wrap(_r)
 }
 
-// OpenGLContext calls the underlying OpenGLContext.
-func (x *View) OpenGLContext() *appkit.NSOpenGLContext {
-	return x.inner.OpenGLContext()
+func (x *View) OpenGLContext() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLContext"))
+	return obj.Wrap(_r)
 }
 
-// OpenGLPixelFormat calls the underlying OpenGLPixelFormat.
-func (x *View) OpenGLPixelFormat() *appkit.NSOpenGLPixelFormat {
-	return x.inner.OpenGLPixelFormat()
+func (x *View) OpenGLPixelFormat() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLPixelFormat"))
+	return obj.Wrap(_r)
 }
 
-// Start calls the underlying Start.
-func (x *View) Start(sender objc.ID) {
-	x.inner.Start(sender)
+func (x *View) Start(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start:"), objref.IDOf(sender))
 }
 
-// Stop calls the underlying Stop.
-func (x *View) Stop(sender objc.ID) {
-	x.inner.Stop(sender)
+func (x *View) Stop(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop:"), objref.IDOf(sender))
 }
 
-// Play calls the underlying Play.
-func (x *View) Play(sender objc.ID) {
-	x.inner.Play(sender)
+func (x *View) Play(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("play:"), objref.IDOf(sender))
 }
 
 // Viewable is the interface implemented by [View], for mocking and DI.
 type Viewable interface {
-	Unwrap() *raw.QCView
+	obj.Object
 	LoadCompositionFromFile(path string) bool
-	LoadComposition(composition *quartz.QCComposition) bool
-	LoadedComposition() *quartz.QCComposition
+	LoadComposition(composition obj.Object) bool
+	LoadedComposition() obj.Object
 	UnloadComposition()
 	SetAutostartsRendering(flag bool)
 	AutostartsRendering() bool
-	SetEraseColor(color *appkit.NSColor)
-	EraseColor() *appkit.NSColor
-	SetEventForwardingMask(mask uint)
-	EventForwardingMask() uint
+	SetEraseColor(color obj.Object)
+	EraseColor() obj.Object
+	SetEventForwardingMask(mask int)
+	EventForwardingMask() int
 	SetMaxRenderingFrameRate(maxFPS float32)
 	MaxRenderingFrameRate() float32
 	Erase()
 	StartRendering() bool
-	RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool
+	RenderAtTimeArguments(time_ float64, arguments obj.Object) bool
 	PauseRendering()
 	IsPausedRendering() bool
 	ResumeRendering()
 	StopRendering()
 	IsRendering() bool
-	SnapshotImage() *appkit.NSImage
-	CreateSnapshotImageOfType(type_ string) objc.ID
-	OpenGLContext() *appkit.NSOpenGLContext
-	OpenGLPixelFormat() *appkit.NSOpenGLPixelFormat
-	Start(sender objc.ID)
-	Stop(sender objc.ID)
-	Play(sender objc.ID)
+	SnapshotImage() obj.Object
+	CreateSnapshotImageOfType(type_ string) obj.Object
+	OpenGLContext() obj.Object
+	OpenGLPixelFormat() obj.Object
+	Start(sender obj.Object)
+	Stop(sender obj.Object)
+	Play(sender obj.Object)
 }
 
 var _ Viewable = (*View)(nil)

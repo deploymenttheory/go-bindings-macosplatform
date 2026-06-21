@@ -5,106 +5,80 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// AnimatedVector3Array wraps [raw.MDLAnimatedVector3Array] with a fluent Go API.
+// AnimatedVector3Array is an idiomatic wrapper over the Objective-C class MDLAnimatedVector3Array.
 type AnimatedVector3Array struct {
-	inner *raw.MDLAnimatedVector3Array
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLAnimatedVector3Array].
-func (x *AnimatedVector3Array) Unwrap() *raw.MDLAnimatedVector3Array { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AnimatedVector3Array) ID() objc.ID { return x.inner.Ptr() }
-
-// AnimatedVector3ArrayFromID adopts an existing object pointer as a AnimatedVector3Array (nil for 0).
+// AnimatedVector3ArrayFromID adopts an existing Objective-C object as a AnimatedVector3Array
+// (nil for 0), retaining it and registering a release finalizer.
 func AnimatedVector3ArrayFromID(id objc.ID) *AnimatedVector3Array {
 	if id == 0 {
 		return nil
 	}
-	return &AnimatedVector3Array{inner: raw.MDLAnimatedVector3ArrayFromID(id)}
-}
-
-// NewAnimatedVector3ArrayWithElementCount creates a new [AnimatedVector3Array].
-func NewAnimatedVector3ArrayWithElementCount(arrayElementCount uint) *AnimatedVector3Array {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLAnimatedVector3Array")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElementCount:"), arrayElementCount)
-	return &AnimatedVector3Array{inner: raw.MDLAnimatedVector3ArrayFromID(_id)}
-}
-
-// WithInterpolation sets the interpolation property and returns the receiver for chaining.
-func (x *AnimatedVector3Array) WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedVector3Array {
-	x.inner.MDLAnimatedValue.SetInterpolation(raw.MDLAnimatedValueInterpolation(interpolation))
+	x := &AnimatedVector3Array{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// SetFloat3ArrayCountAtTime calls the underlying SetFloat3ArrayCountAtTime.
-func (x *AnimatedVector3Array) SetFloat3ArrayCountAtTime(array unsafe.Pointer, count uint, time_ float64) {
-	x.inner.SetFloat3ArrayCountAtTime(array, count, time_)
+// animatedVector3ArrayAdopt wraps an Objective-C object that this code just created as a
+// AnimatedVector3Array (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func animatedVector3ArrayAdopt(id objc.ID) *AnimatedVector3Array {
+	if id == 0 {
+		return nil
+	}
+	x := &AnimatedVector3Array{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetDouble3ArrayCountAtTime calls the underlying SetDouble3ArrayCountAtTime.
-func (x *AnimatedVector3Array) SetDouble3ArrayCountAtTime(array unsafe.Pointer, count uint, time_ float64) {
-	x.inner.SetDouble3ArrayCountAtTime(array, count, time_)
+// Description returns the object's -description text.
+func (x *AnimatedVector3Array) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// GetFloat3ArrayMaxCountAtTime calls the underlying GetFloat3ArrayMaxCountAtTime.
-func (x *AnimatedVector3Array) GetFloat3ArrayMaxCountAtTime(array unsafe.Pointer, maxCount uint, time_ float64) uint {
-	return x.inner.GetFloat3ArrayMaxCountAtTime(array, maxCount, time_)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AnimatedVector3Array) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// GetDouble3ArrayMaxCountAtTime calls the underlying GetDouble3ArrayMaxCountAtTime.
-func (x *AnimatedVector3Array) GetDouble3ArrayMaxCountAtTime(array unsafe.Pointer, maxCount uint, time_ float64) uint {
-	return x.inner.GetDouble3ArrayMaxCountAtTime(array, maxCount, time_)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AnimatedVector3Array) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// ResetWithFloat3ArrayCountAtTimesCount calls the underlying ResetWithFloat3ArrayCountAtTimesCount.
-func (x *AnimatedVector3Array) ResetWithFloat3ArrayCountAtTimesCount(valuesArray unsafe.Pointer, valuesCount uint, timesArray *float64, timesCount uint) {
-	x.inner.ResetWithFloat3ArrayCountAtTimesCount(valuesArray, valuesCount, timesArray, timesCount)
+// NewAnimatedVector3ArrayWithElementCount creates a new AnimatedVector3Array.
+func NewAnimatedVector3ArrayWithElementCount(arrayElementCount int) *AnimatedVector3Array {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLAnimatedVector3Array")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElementCount:"), arrayElementCount)
+	return animatedVector3ArrayAdopt(_id)
 }
 
-// ResetWithDouble3ArrayCountAtTimesCount calls the underlying ResetWithDouble3ArrayCountAtTimesCount.
-func (x *AnimatedVector3Array) ResetWithDouble3ArrayCountAtTimesCount(valuesArray unsafe.Pointer, valuesCount uint, timesArray *float64, timesCount uint) {
-	x.inner.ResetWithDouble3ArrayCountAtTimesCount(valuesArray, valuesCount, timesArray, timesCount)
+// WithInterpolation sets interpolation and returns the receiver so calls can be chained.
+func (x *AnimatedVector3Array) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector3Array {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
+	return x
 }
 
-// GetFloat3ArrayMaxCount calls the underlying GetFloat3ArrayMaxCount.
-func (x *AnimatedVector3Array) GetFloat3ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint {
-	return x.inner.GetFloat3ArrayMaxCount(valuesArray, maxCount)
-}
-
-// GetDouble3ArrayMaxCount calls the underlying GetDouble3ArrayMaxCount.
-func (x *AnimatedVector3Array) GetDouble3ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint {
-	return x.inner.GetDouble3ArrayMaxCount(valuesArray, maxCount)
-}
-
-// ElementCount calls the underlying ElementCount.
-func (x *AnimatedVector3Array) ElementCount() uint {
-	return x.inner.ElementCount()
-}
-
-func (x *AnimatedVector3Array) asAnimatedValue() *raw.MDLAnimatedValue {
-	return &x.inner.MDLAnimatedValue
+func (x *AnimatedVector3Array) ElementCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("elementCount"))
+	return _r
 }
 
 // AnimatedVector3Arrayable is the interface implemented by [AnimatedVector3Array], for mocking and DI.
 type AnimatedVector3Arrayable interface {
-	Unwrap() *raw.MDLAnimatedVector3Array
-	WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedVector3Array
-	SetFloat3ArrayCountAtTime(array unsafe.Pointer, count uint, time_ float64)
-	SetDouble3ArrayCountAtTime(array unsafe.Pointer, count uint, time_ float64)
-	GetFloat3ArrayMaxCountAtTime(array unsafe.Pointer, maxCount uint, time_ float64) uint
-	GetDouble3ArrayMaxCountAtTime(array unsafe.Pointer, maxCount uint, time_ float64) uint
-	ResetWithFloat3ArrayCountAtTimesCount(valuesArray unsafe.Pointer, valuesCount uint, timesArray *float64, timesCount uint)
-	ResetWithDouble3ArrayCountAtTimesCount(valuesArray unsafe.Pointer, valuesCount uint, timesArray *float64, timesCount uint)
-	GetFloat3ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
-	GetDouble3ArrayMaxCount(valuesArray unsafe.Pointer, maxCount uint) uint
-	ElementCount() uint
+	obj.Object
+	WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector3Array
+	ElementCount() int
 }
 
 var _ AnimatedVector3Arrayable = (*AnimatedVector3Array)(nil)

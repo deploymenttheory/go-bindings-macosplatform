@@ -5,91 +5,103 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An abstract base class for subscriptions.
 //
-// Subscription wraps [raw.CKSubscription] with a fluent Go API.
+// Subscription is an idiomatic wrapper over the Objective-C class CKSubscription.
 type Subscription struct {
-	inner *raw.CKSubscription
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSubscription].
-func (x *Subscription) Unwrap() *raw.CKSubscription { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Subscription) ID() objc.ID { return x.inner.Ptr() }
-
-// SubscriptionFromID adopts an existing object pointer as a Subscription (nil for 0).
+// SubscriptionFromID adopts an existing Objective-C object as a Subscription
+// (nil for 0), retaining it and registering a release finalizer.
 func SubscriptionFromID(id objc.ID) *Subscription {
 	if id == 0 {
 		return nil
 	}
-	return &Subscription{inner: raw.CKSubscriptionFromID(id)}
+	x := &Subscription{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSubscription creates a new [Subscription].
+// subscriptionAdopt wraps an Objective-C object that this code just created as a
+// Subscription (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func subscriptionAdopt(id objc.ID) *Subscription {
+	if id == 0 {
+		return nil
+	}
+	x := &Subscription{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Subscription) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Subscription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Subscription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSubscription creates a new Subscription.
 func NewSubscription() *Subscription {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSubscription")), objc.RegisterName("new"))
-	return &Subscription{inner: raw.CKSubscriptionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKSubscription")), objc.RegisterName("new"))
+	return subscriptionAdopt(_id)
 }
 
 // The configuration for a subscription’s push notifications.
 //
-// WithNotificationInfo sets the notificationInfo property and returns the receiver for chaining.
+// WithNotificationInfo sets notificationInfo and returns the receiver so calls can be chained.
 func (x *Subscription) WithNotificationInfo(notificationInfo *NotificationInfo) *Subscription {
-	x.inner.SetNotificationInfo(notificationInfo.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
 	return x
 }
 
 // The subscription's unique identifier. This property's value is the subscription ID that you provide to the `initWithRecordType:predicate:subscriptionID:options:` or `initWithZoneID:subscriptionID:options:` methods when you create the subscription. If you use a different method to create the subscription, CloudKit automatically assigns a UUID as the subscription ID.
-//
-// SubscriptionID calls the underlying SubscriptionID.
-func (x *Subscription) SubscriptionID() string {
-	_r := x.inner.SubscriptionID()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *Subscription) SubscriptionID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionID"))
+	return obj.Wrap(_r)
 }
 
 // The behavior that a subscription provides.
-//
-// SubscriptionType calls the underlying SubscriptionType.
-func (x *Subscription) SubscriptionType() CKSubscriptionType {
-	return CKSubscriptionType(x.inner.SubscriptionType())
+func (x *Subscription) SubscriptionType() SubscriptionType {
+	_r := objc.Send[SubscriptionType](objref.IDOf(x), objc.RegisterName("subscriptionType"))
+	return _r
 }
 
 // The configuration for a subscription's push notifications. If you want the system to display your subscription's push notifications, assign a value to this property. The server uses the configuration you provide to determine the delivery options for notifications. For example, you can specify the text to display to the user, and the sound to play. You can also specify which fields of the record to include in the notification's payload. If you don't assign a value to this property, CloudKit still sends push notifications, but the system doesn't display them to the user. The default value of this property is `nil`.
-//
-// NotificationInfo calls the underlying NotificationInfo.
 func (x *Subscription) NotificationInfo() *NotificationInfo {
-	_r := x.inner.NotificationInfo()
-	if _r == nil {
-		return nil
-	}
-	return &NotificationInfo{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notificationInfo"))
+	return NotificationInfoFromID(_r)
 }
 
-// SetNotificationInfo calls the underlying SetNotificationInfo.
-func (x *Subscription) SetNotificationInfo(notificationInfo *raw.CKNotificationInfo) {
-	x.inner.SetNotificationInfo(notificationInfo)
+func (x *Subscription) SetNotificationInfo(notificationInfo *NotificationInfo) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
 }
-
-func (x *Subscription) asSubscription() *raw.CKSubscription { return x.inner }
 
 // Subscriptionable is the interface implemented by [Subscription], for mocking and DI.
 type Subscriptionable interface {
-	Unwrap() *raw.CKSubscription
+	obj.Object
 	WithNotificationInfo(notificationInfo *NotificationInfo) *Subscription
-	SubscriptionID() string
-	SubscriptionType() CKSubscriptionType
+	SubscriptionID() obj.Object
+	SubscriptionType() SubscriptionType
 	NotificationInfo() *NotificationInfo
-	SetNotificationInfo(notificationInfo *raw.CKNotificationInfo)
+	SetNotificationInfo(notificationInfo *NotificationInfo)
 }
 
 var _ Subscriptionable = (*Subscription)(nil)

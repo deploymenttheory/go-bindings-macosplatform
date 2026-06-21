@@ -5,53 +5,74 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A type that encapsulates output for various WebAuthn extensions during passkey assertion.
 //
-// PasskeyAssertionCredentialExtensionOutput wraps [raw.ASPasskeyAssertionCredentialExtensionOutput] with a fluent Go API.
+// PasskeyAssertionCredentialExtensionOutput is an idiomatic wrapper over the Objective-C class ASPasskeyAssertionCredentialExtensionOutput.
 type PasskeyAssertionCredentialExtensionOutput struct {
-	inner *raw.ASPasskeyAssertionCredentialExtensionOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASPasskeyAssertionCredentialExtensionOutput].
-func (x *PasskeyAssertionCredentialExtensionOutput) Unwrap() *raw.ASPasskeyAssertionCredentialExtensionOutput {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PasskeyAssertionCredentialExtensionOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// PasskeyAssertionCredentialExtensionOutputFromID adopts an existing object pointer as a PasskeyAssertionCredentialExtensionOutput (nil for 0).
+// PasskeyAssertionCredentialExtensionOutputFromID adopts an existing Objective-C object as a PasskeyAssertionCredentialExtensionOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func PasskeyAssertionCredentialExtensionOutputFromID(id objc.ID) *PasskeyAssertionCredentialExtensionOutput {
 	if id == 0 {
 		return nil
 	}
-	return &PasskeyAssertionCredentialExtensionOutput{inner: raw.ASPasskeyAssertionCredentialExtensionOutputFromID(id)}
+	x := &PasskeyAssertionCredentialExtensionOutput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPasskeyAssertionCredentialExtensionOutputWithLargeBlobOutput creates a new [PasskeyAssertionCredentialExtensionOutput].
-func NewPasskeyAssertionCredentialExtensionOutputWithLargeBlobOutput(largeBlob *raw.ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput) *PasskeyAssertionCredentialExtensionOutput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyAssertionCredentialExtensionOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLargeBlobOutput:"), largeBlob.Ptr())
-	return &PasskeyAssertionCredentialExtensionOutput{inner: raw.ASPasskeyAssertionCredentialExtensionOutputFromID(_id)}
-}
-
-// LargeBlobAssertionOutput calls the underlying LargeBlobAssertionOutput.
-func (x *PasskeyAssertionCredentialExtensionOutput) LargeBlobAssertionOutput() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
-	_r := x.inner.LargeBlobAssertionOutput()
-	if _r == nil {
+// passkeyAssertionCredentialExtensionOutputAdopt wraps an Objective-C object that this code just created as a
+// PasskeyAssertionCredentialExtensionOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func passkeyAssertionCredentialExtensionOutputAdopt(id objc.ID) *PasskeyAssertionCredentialExtensionOutput {
+	if id == 0 {
 		return nil
 	}
-	return &AuthorizationPublicKeyCredentialLargeBlobAssertionOutput{inner: _r}
+	x := &PasskeyAssertionCredentialExtensionOutput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PasskeyAssertionCredentialExtensionOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PasskeyAssertionCredentialExtensionOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PasskeyAssertionCredentialExtensionOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPasskeyAssertionCredentialExtensionOutputWithLargeBlobOutput creates a new PasskeyAssertionCredentialExtensionOutput.
+func NewPasskeyAssertionCredentialExtensionOutputWithLargeBlobOutput(largeBlob *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput) *PasskeyAssertionCredentialExtensionOutput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasskeyAssertionCredentialExtensionOutput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLargeBlobOutput:"), objref.IDOf(largeBlob))
+	return passkeyAssertionCredentialExtensionOutputAdopt(_id)
+}
+
+func (x *PasskeyAssertionCredentialExtensionOutput) LargeBlobAssertionOutput() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("largeBlobAssertionOutput"))
+	return AuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID(_r)
 }
 
 // PasskeyAssertionCredentialExtensionOutputable is the interface implemented by [PasskeyAssertionCredentialExtensionOutput], for mocking and DI.
 type PasskeyAssertionCredentialExtensionOutputable interface {
-	Unwrap() *raw.ASPasskeyAssertionCredentialExtensionOutput
+	obj.Object
 	LargeBlobAssertionOutput() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput
 }
 

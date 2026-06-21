@@ -5,299 +5,264 @@
 package inputmethodkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/inputmethodkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The IMKCandidates class presents candidates to users and notifies the appropriate IMKInputController object when the user selects a candidate. Candidates are alternate characters for a given input sequence. The IMKCandidates class supports using a candidates window in your input method; using IMKCandidates is optional. Not all input methods require them.
 //
-// Candidates wraps [raw.IMKCandidates] with a fluent Go API.
+// Candidates is an idiomatic wrapper over the Objective-C class IMKCandidates.
 type Candidates struct {
-	inner *raw.IMKCandidates
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IMKCandidates].
-func (x *Candidates) Unwrap() *raw.IMKCandidates { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Candidates) ID() objc.ID { return x.inner.Ptr() }
-
-// CandidatesFromID adopts an existing object pointer as a Candidates (nil for 0).
+// CandidatesFromID adopts an existing Objective-C object as a Candidates
+// (nil for 0), retaining it and registering a release finalizer.
 func CandidatesFromID(id objc.ID) *Candidates {
 	if id == 0 {
 		return nil
 	}
-	return &Candidates{inner: raw.IMKCandidatesFromID(id)}
+	x := &Candidates{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// candidatesAdopt wraps an Objective-C object that this code just created as a
+// Candidates (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func candidatesAdopt(id objc.ID) *Candidates {
+	if id == 0 {
+		return nil
+	}
+	x := &Candidates{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Candidates) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Candidates) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Candidates) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns the initialized IMKCandidates object.
 //
-// NewCandidatesWithServerPanelType creates a new [Candidates].
-func NewCandidatesWithServerPanelType(server *raw.IMKServer, panelType uint) *Candidates {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IMKCandidates")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServer:panelType:"), server.Ptr(), panelType)
-	return &Candidates{inner: raw.IMKCandidatesFromID(_id)}
+// NewCandidatesWithServerPanelType creates a new Candidates.
+func NewCandidatesWithServerPanelType(server *Server, panelType int) *Candidates {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("IMKCandidates")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServer:panelType:"), objref.IDOf(server), panelType)
+	return candidatesAdopt(_id)
 }
 
-// NewCandidatesWithServerPanelTypeStyleType creates a new [Candidates].
-func NewCandidatesWithServerPanelTypeStyleType(server *raw.IMKServer, panelType uint, style uint) *Candidates {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IMKCandidates")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServer:panelType:styleType:"), server.Ptr(), panelType, style)
-	return &Candidates{inner: raw.IMKCandidatesFromID(_id)}
+// NewCandidatesWithServerPanelTypeStyleType creates a new Candidates.
+func NewCandidatesWithServerPanelTypeStyleType(server *Server, panelType int, style int) *Candidates {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("IMKCandidates")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServer:panelType:styleType:"), objref.IDOf(server), panelType, style)
+	return candidatesAdopt(_id)
 }
 
 // Returns the style of the candidates window.
-//
-// PanelType calls the underlying PanelType.
-func (x *Candidates) PanelType() uint {
-	return x.inner.PanelType()
+func (x *Candidates) PanelType() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("panelType"))
+	return _r
 }
 
 // Sets the style of the candidates window.
-//
-// SetPanelType calls the underlying SetPanelType.
-func (x *Candidates) SetPanelType(panelType uint) {
-	x.inner.SetPanelType(panelType)
+func (x *Candidates) SetPanelType(panelType int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPanelType:"), panelType)
 }
 
 // Shows the candidates window.
-//
-// Show calls the underlying Show.
-func (x *Candidates) Show(locationHint uint) {
-	x.inner.Show(locationHint)
+func (x *Candidates) Show(locationHint int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("show:"), locationHint)
 }
 
 // Hides a candidates window, if it is visible.
-//
-// Hide calls the underlying Hide.
 func (x *Candidates) Hide() {
-	x.inner.Hide()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hide"))
 }
 
 // Returns whether or not the candidates window is visible.
-//
-// IsVisible calls the underlying IsVisible.
 func (x *Candidates) IsVisible() bool {
-	return x.inner.IsVisible()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVisible"))
+	return _r
 }
 
 // Updates the candidates that are displayed in the candidates window.
-//
-// UpdateCandidates calls the underlying UpdateCandidates.
 func (x *Candidates) UpdateCandidates() {
-	x.inner.UpdateCandidates()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateCandidates"))
 }
 
 // Displays an annotation string in an annotation window.
-//
-// ShowAnnotation calls the underlying ShowAnnotation.
-func (x *Candidates) ShowAnnotation(annotationString *foundation.NSAttributedString) {
-	x.inner.ShowAnnotation(annotationString)
+func (x *Candidates) ShowAnnotation(annotationString obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showAnnotation:"), objref.IDOf(annotationString))
 }
 
-// ShowSublistSubListDelegate calls the underlying ShowSublistSubListDelegate.
-func (x *Candidates) ShowSublistSubListDelegate(candidates *foundation.NSArray[objc.ID], delegate objc.ID) {
-	x.inner.ShowSublistSubListDelegate(candidates, delegate)
-}
-
-// CandidateFrame calls the underlying CandidateFrame.
-func (x *Candidates) CandidateFrame() corefoundation.CGRect {
-	return x.inner.CandidateFrame()
+func (x *Candidates) ShowSublistSubListDelegate(candidates obj.Object, delegate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showSublist:subListDelegate:"), objref.IDOf(candidates), objref.IDOf(delegate))
 }
 
 // Sets the selection keys for the candidates.
-//
-// SetSelectionKeys calls the underlying SetSelectionKeys.
-func (x *Candidates) SetSelectionKeys(keyCodes *foundation.NSArray[objc.ID]) {
-	x.inner.SetSelectionKeys(keyCodes)
+func (x *Candidates) SetSelectionKeys(keyCodes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionKeys:"), objref.IDOf(keyCodes))
 }
 
 // Returns an array of NSNumber objects where each NSNumber object represents a virtual key code.
-//
-// SelectionKeys calls the underlying SelectionKeys.
-func (x *Candidates) SelectionKeys() *foundation.NSArray[objc.ID] {
-	return x.inner.SelectionKeys()
+func (x *Candidates) SelectionKeys() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionKeys"))
+	return obj.Wrap(_r)
 }
 
 // Sets the key layout that is used to map virtual key codes to characters.
-//
-// SetSelectionKeysKeylayout calls the underlying SetSelectionKeysKeylayout.
-func (x *Candidates) SetSelectionKeysKeylayout(layout unsafe.Pointer) {
-	x.inner.SetSelectionKeysKeylayout(layout)
+func (x *Candidates) SetSelectionKeysKeylayout(layout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionKeysKeylayout:"), objref.IDOf(layout))
 }
 
 // Returns the key layout that maps virtual key codes to selection keys.
-//
-// SelectionKeysKeylayout calls the underlying SelectionKeysKeylayout.
-func (x *Candidates) SelectionKeysKeylayout() unsafe.Pointer {
-	return x.inner.SelectionKeysKeylayout()
+func (x *Candidates) SelectionKeysKeylayout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectionKeysKeylayout"))
+	return obj.Wrap(_r)
 }
 
 // Sets the style attributes for the candidates window.
-//
-// SetAttributes calls the underlying SetAttributes.
-func (x *Candidates) SetAttributes(attributes *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.SetAttributes(attributes)
+func (x *Candidates) SetAttributes(attributes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributes:"), objref.IDOf(attributes))
 }
 
 // Returns a dictionary of the style attributes used for the candidates window..
-//
-// Attributes calls the underlying Attributes.
-func (x *Candidates) Attributes() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.Attributes()
+func (x *Candidates) Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+	return obj.Wrap(_r)
 }
 
 // Sets the state of the flag that determines whether the candidates window dismisses automatically.
-//
-// SetDismissesAutomatically calls the underlying SetDismissesAutomatically.
 func (x *Candidates) SetDismissesAutomatically(flag bool) {
-	x.inner.SetDismissesAutomatically(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDismissesAutomatically:"), flag)
 }
 
 // Returns the state of the flag that determines whether the candidates window dismisses automatically.
-//
-// DismissesAutomatically calls the underlying DismissesAutomatically.
 func (x *Candidates) DismissesAutomatically() bool {
-	return x.inner.DismissesAutomatically()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("dismissesAutomatically"))
+	return _r
 }
 
-// @method @abstract	Returns the currently selected candidate identifer. @discussion Attempts to determine the identifier for the selected candidate.  If there is no selection the return value will be NSNotFound.
-//
-// SelectedCandidate calls the underlying SelectedCandidate.
+// Returns the currently selected candidate identifer. Attempts to determine the identifier for the selected candidate.  If there is no selection the return value will be NSNotFound.
 func (x *Candidates) SelectedCandidate() int {
-	return x.inner.SelectedCandidate()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectedCandidate"))
+	return _r
 }
 
-// @method @abstract	Positions the top-left corner of the candidate window’s frame rectangle at a given point in screen coordinates.
-//
-// SetCandidateFrameTopLeft calls the underlying SetCandidateFrameTopLeft.
-func (x *Candidates) SetCandidateFrameTopLeft(point corefoundation.CGPoint) {
-	x.inner.SetCandidateFrameTopLeft(point)
-}
-
-// @method @abstract	If the current selection has a child IMKCandidates object that will be shown. @discussion If there is a failure in showing the child this method will throw an exception.
-//
-// ShowChild calls the underlying ShowChild.
+// If the current selection has a child IMKCandidates object that will be shown. If there is a failure in showing the child this method will throw an exception.
 func (x *Candidates) ShowChild() {
-	x.inner.ShowChild()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showChild"))
 }
 
-// @method @abstract	If the current selection has a child IMKCandidates that is being shown hide it. @discussion Typically a client will not need to call this as IMKCandidates automatically hides and shows children.
-//
-// HideChild calls the underlying HideChild.
+// If the current selection has a child IMKCandidates that is being shown hide it. Typically a client will not need to call this as IMKCandidates automatically hides and shows children.
 func (x *Candidates) HideChild() {
-	x.inner.HideChild()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hideChild"))
 }
 
-// @method @abstract	Attach an IMKCandidates object to the specified selection. @discussion The IMKCandidate can be a sublist or an annotation.
-//
-// AttachChildToCandidateType calls the underlying AttachChildToCandidateType.
-func (x *Candidates) AttachChildToCandidateType(child *raw.IMKCandidates, candidateIdentifier int, theType uint) {
-	x.inner.AttachChildToCandidateType(child, candidateIdentifier, theType)
+// Attach an IMKCandidates object to the specified selection. The IMKCandidate can be a sublist or an annotation.
+func (x *Candidates) AttachChildToCandidateType(child *Candidates, candidateIdentifier int, theType int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachChild:toCandidate:type:"), objref.IDOf(child), candidateIdentifier, theType)
 }
 
-// @method @abstract	Detach the IMKCandidates object attached to candidate
-//
-// DetachChild calls the underlying DetachChild.
+// Detach the IMKCandidates object attached to candidate
 func (x *Candidates) DetachChild(candidateIdentifier int) {
-	x.inner.DetachChild(candidateIdentifier)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detachChild:"), candidateIdentifier)
 }
 
-// @method @abstract	Set the candidates data directly rather than supplying data via [IMKInputContoller candidates:]. @discussion The elements of the array can be strings or attributed strings.
-//
-// SetCandidateData calls the underlying SetCandidateData.
-func (x *Candidates) SetCandidateData(candidatesArray *foundation.NSArray[objc.ID]) {
-	x.inner.SetCandidateData(candidatesArray)
+// Set the candidates data directly rather than supplying data via [IMKInputContoller candidates:]. The elements of the array can be strings or attributed strings.
+func (x *Candidates) SetCandidateData(candidatesArray obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCandidateData:"), objref.IDOf(candidatesArray))
 }
 
-// @method @abstract	Select the candidate whose identifier matches the identifier parameter. @result YES if the candidateIdentifier is valid an the selection was made.  NO if canidateIdentifier is invalid or it was not possible make the selection. @param An identifier for a candidate.  You can obtain an identifier by mapping a candidate to an identifier via the [IMKCandidates candidateStringIdentifier:].
-//
-// SelectCandidateWithIdentifier calls the underlying SelectCandidateWithIdentifier.
+// Select the candidate whose identifier matches the identifier parameter.
 func (x *Candidates) SelectCandidateWithIdentifier(candidateIdentifier int) bool {
-	return x.inner.SelectCandidateWithIdentifier(candidateIdentifier)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("selectCandidateWithIdentifier:"), candidateIdentifier)
+	return _r
 }
 
-// SelectCandidate calls the underlying SelectCandidate.
 func (x *Candidates) SelectCandidate(candidateIdentifier int) {
-	x.inner.SelectCandidate(candidateIdentifier)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectCandidate:"), candidateIdentifier)
 }
 
-// @method @abstract	Show the candidate window. @discussion This simply shows the candidates.  No effort is made to position the candidate.  The caller should move the candidate window to an appropriate location prior to showing.
-//
-// ShowCandidates calls the underlying ShowCandidates.
+// Show the candidate window. This simply shows the candidates.  No effort is made to position the candidate.  The caller should move the candidate window to an appropriate location prior to showing.
 func (x *Candidates) ShowCandidates() {
-	x.inner.ShowCandidates()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showCandidates"))
 }
 
-// @method @abstract	Map a candidateString to an identifier. @discussion Beginning with MacOS 10.7, candidate strings are mapped internally to an unique identifier of type NSInteger.  Using identifiers to identify a particular candidate is the first stage of enabling data types other than NSString and NSAttributedString for containing the contents of a candidate.
-//
-// CandidateStringIdentifier calls the underlying CandidateStringIdentifier.
-func (x *Candidates) CandidateStringIdentifier(candidateString objc.ID) int {
-	return x.inner.CandidateStringIdentifier(candidateString)
+// Map a candidateString to an identifier. Beginning with MacOS 10.7, candidate strings are mapped internally to an unique identifier of type NSInteger.  Using identifiers to identify a particular candidate is the first stage of enabling data types other than NSString and NSAttributedString for containing the contents of a candidate.
+func (x *Candidates) CandidateStringIdentifier(candidateString obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("candidateStringIdentifier:"), objref.IDOf(candidateString))
+	return _r
 }
 
-// @method @abstract	Returns the currently selected candidate string. @discussion Attempts to determine the string for the selected candidate.  If there is no selection the return value can be nil.  The attributed string is an autoreleased object.
-//
-// SelectedCandidateString calls the underlying SelectedCandidateString.
-func (x *Candidates) SelectedCandidateString() *foundation.NSAttributedString {
-	return x.inner.SelectedCandidateString()
+// Returns the currently selected candidate string. Attempts to determine the string for the selected candidate.  If there is no selection the return value can be nil.  The attributed string is an autoreleased object.
+func (x *Candidates) SelectedCandidateString() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedCandidateString"))
+	return obj.Wrap(_r)
 }
 
-// @method @abstract	 Returns the candidate identifier for a given line in the candidate window display. @discussion Maps the lineNumber to a candidate identifier.  Line number 0 corresponds to the candidate in the cell currently in the first (top for vertical) line of the candidate window.  This is convienient for input methods that support selecting a candidate by a number key. Line Number values depend on the column arrangement of your candidate.  If you are displaying a single column candidate window, lines that have been scrolled out of view will have negative values.  For a single row grid line, numbers will correspond to the cell's position in the row (i.e. the first cell will be 0, the second 1, etc).  Finally, for a grid, the line numbers correspond to the grid row.  If the line number is invalid, NSNotFound is returned. @param lineNumber a number representing a cells position in the candidate window.
-//
-// CandidateIdentifierAtLineNumber calls the underlying CandidateIdentifierAtLineNumber.
+// Returns the candidate identifier for a given line in the candidate window display. Maps the lineNumber to a candidate identifier.  Line number 0 corresponds to the candidate in the cell currently in the first (top for vertical) line of the candidate window.  This is convienient for input methods that support selecting a candidate by a number key. Line Number values depend on the column arrangement of your candidate.  If you are displaying a single column candidate window, lines that have been scrolled out of view will have negative values.  For a single row grid line, numbers will correspond to the cell's position in the row (i.e. the first cell will be 0, the second 1, etc).  Finally, for a grid, the line numbers correspond to the grid row.  If the line number is invalid, NSNotFound is returned.
 func (x *Candidates) CandidateIdentifierAtLineNumber(lineNumber int) int {
-	return x.inner.CandidateIdentifierAtLineNumber(lineNumber)
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("candidateIdentifierAtLineNumber:"), lineNumber)
+	return _r
 }
 
-// @method @abstract	Returns the line number for a given CandidateID. @result  The line number.  NSNotFound if the candidateID is invalid. @param  candidateIdentifier - A valid identifier for a candidate. @discussion If the cell that contains the candidate is at the top line of the candidate window, the return value will be 0.
-//
-// LineNumberForCandidateWithIdentifier calls the underlying LineNumberForCandidateWithIdentifier.
+// Returns the line number for a given CandidateID. If the cell that contains the candidate is at the top line of the candidate window, the return value will be 0.
 func (x *Candidates) LineNumberForCandidateWithIdentifier(candidateIdentifier int) int {
-	return x.inner.LineNumberForCandidateWithIdentifier(candidateIdentifier)
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("lineNumberForCandidateWithIdentifier:"), candidateIdentifier)
+	return _r
 }
 
-// ClearSelection calls the underlying ClearSelection.
 func (x *Candidates) ClearSelection() {
-	x.inner.ClearSelection()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearSelection"))
 }
 
 // Candidatesable is the interface implemented by [Candidates], for mocking and DI.
 type Candidatesable interface {
-	Unwrap() *raw.IMKCandidates
-	PanelType() uint
-	SetPanelType(panelType uint)
-	Show(locationHint uint)
+	obj.Object
+	PanelType() int
+	SetPanelType(panelType int)
+	Show(locationHint int)
 	Hide()
 	IsVisible() bool
 	UpdateCandidates()
-	ShowAnnotation(annotationString *foundation.NSAttributedString)
-	ShowSublistSubListDelegate(candidates *foundation.NSArray[objc.ID], delegate objc.ID)
-	CandidateFrame() corefoundation.CGRect
-	SetSelectionKeys(keyCodes *foundation.NSArray[objc.ID])
-	SelectionKeys() *foundation.NSArray[objc.ID]
-	SetSelectionKeysKeylayout(layout unsafe.Pointer)
-	SelectionKeysKeylayout() unsafe.Pointer
-	SetAttributes(attributes *foundation.NSDictionary[objc.ID, objc.ID])
-	Attributes() *foundation.NSDictionary[objc.ID, objc.ID]
+	ShowAnnotation(annotationString obj.Object)
+	ShowSublistSubListDelegate(candidates obj.Object, delegate obj.Object)
+	SetSelectionKeys(keyCodes obj.Object)
+	SelectionKeys() obj.Object
+	SetSelectionKeysKeylayout(layout obj.Object)
+	SelectionKeysKeylayout() obj.Object
+	SetAttributes(attributes obj.Object)
+	Attributes() obj.Object
 	SetDismissesAutomatically(flag bool)
 	DismissesAutomatically() bool
 	SelectedCandidate() int
-	SetCandidateFrameTopLeft(point corefoundation.CGPoint)
 	ShowChild()
 	HideChild()
-	AttachChildToCandidateType(child *raw.IMKCandidates, candidateIdentifier int, theType uint)
+	AttachChildToCandidateType(child *Candidates, candidateIdentifier int, theType int)
 	DetachChild(candidateIdentifier int)
-	SetCandidateData(candidatesArray *foundation.NSArray[objc.ID])
+	SetCandidateData(candidatesArray obj.Object)
 	SelectCandidateWithIdentifier(candidateIdentifier int) bool
 	SelectCandidate(candidateIdentifier int)
 	ShowCandidates()
-	CandidateStringIdentifier(candidateString objc.ID) int
-	SelectedCandidateString() *foundation.NSAttributedString
+	CandidateStringIdentifier(candidateString obj.Object) int
+	SelectedCandidateString() obj.Object
 	CandidateIdentifierAtLineNumber(lineNumber int) int
 	LineNumberForCandidateWithIdentifier(candidateIdentifier int) int
 	ClearSelection()

@@ -5,63 +5,66 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// PullStreamNode wraps [raw.PHASEPullStreamNode] with a fluent Go API.
+// PullStreamNode is an idiomatic wrapper over the Objective-C class PHASEPullStreamNode.
 type PullStreamNode struct {
-	inner *raw.PHASEPullStreamNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEPullStreamNode].
-func (x *PullStreamNode) Unwrap() *raw.PHASEPullStreamNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PullStreamNode) ID() objc.ID { return x.inner.Ptr() }
-
-// PullStreamNodeFromID adopts an existing object pointer as a PullStreamNode (nil for 0).
+// PullStreamNodeFromID adopts an existing Objective-C object as a PullStreamNode
+// (nil for 0), retaining it and registering a release finalizer.
 func PullStreamNodeFromID(id objc.ID) *PullStreamNode {
 	if id == 0 {
 		return nil
 	}
-	return &PullStreamNode{inner: raw.PHASEPullStreamNodeFromID(id)}
-}
-
-// NewPullStreamNode creates a new [PullStreamNode].
-func NewPullStreamNode() *PullStreamNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEPullStreamNode")), objc.RegisterName("new"))
-	return &PullStreamNode{inner: raw.PHASEPullStreamNodeFromID(_id)}
-}
-
-// @property renderBlock @abstract A property to set the render block callback that will render the samplesIW @discussion The renderBlock must be set before the PHASESoundEvent is prepared or started.  The callback will be called from a high priority realtime thread. Your implementation must be performant and not perform any realtime unsafe operations such as lock mutexes or allocate memory.
-//
-// WithRenderBlock sets the renderBlock property and returns the receiver for chaining.
-func (x *PullStreamNode) WithRenderBlock(renderBlock func(*bool, *coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int) *PullStreamNode {
-	x.inner.SetRenderBlock(renderBlock)
+	x := &PullStreamNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// RenderBlock calls the underlying RenderBlock.
-func (x *PullStreamNode) RenderBlock() objc.Block {
-	return x.inner.RenderBlock()
+// pullStreamNodeAdopt wraps an Objective-C object that this code just created as a
+// PullStreamNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pullStreamNodeAdopt(id objc.ID) *PullStreamNode {
+	if id == 0 {
+		return nil
+	}
+	x := &PullStreamNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetRenderBlock calls the underlying SetRenderBlock.
-func (x *PullStreamNode) SetRenderBlock(renderBlock func(*bool, *coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int) {
-	x.inner.SetRenderBlock(renderBlock)
+// Description returns the object's -description text.
+func (x *PullStreamNode) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *PullStreamNode) asStreamNode() *raw.PHASEStreamNode { return &x.inner.PHASEStreamNode }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PullStreamNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PullStreamNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPullStreamNode creates a new PullStreamNode.
+func NewPullStreamNode() *PullStreamNode {
+	_id := objc.Send[objc.ID](objc.ID(_class("PHASEPullStreamNode")), objc.RegisterName("new"))
+	return pullStreamNodeAdopt(_id)
+}
 
 // PullStreamNodeable is the interface implemented by [PullStreamNode], for mocking and DI.
 type PullStreamNodeable interface {
-	Unwrap() *raw.PHASEPullStreamNode
-	WithRenderBlock(renderBlock func(*bool, *coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int) *PullStreamNode
-	RenderBlock() objc.Block
-	SetRenderBlock(renderBlock func(*bool, *coreaudiotypes.AudioTimeStamp, uint32, *coreaudiotypes.AudioBufferList) int)
+	obj.Object
 }
 
 var _ PullStreamNodeable = (*PullStreamNode)(nil)

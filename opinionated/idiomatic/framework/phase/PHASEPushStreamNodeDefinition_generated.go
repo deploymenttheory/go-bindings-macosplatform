@@ -5,132 +5,142 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A node that plays a sequence of audio buffers.
 //
-// PushStreamNodeDefinition wraps [raw.PHASEPushStreamNodeDefinition] with a fluent Go API.
+// PushStreamNodeDefinition is an idiomatic wrapper over the Objective-C class PHASEPushStreamNodeDefinition.
 type PushStreamNodeDefinition struct {
-	inner *raw.PHASEPushStreamNodeDefinition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEPushStreamNodeDefinition].
-func (x *PushStreamNodeDefinition) Unwrap() *raw.PHASEPushStreamNodeDefinition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PushStreamNodeDefinition) ID() objc.ID { return x.inner.Ptr() }
-
-// PushStreamNodeDefinitionFromID adopts an existing object pointer as a PushStreamNodeDefinition (nil for 0).
+// PushStreamNodeDefinitionFromID adopts an existing Objective-C object as a PushStreamNodeDefinition
+// (nil for 0), retaining it and registering a release finalizer.
 func PushStreamNodeDefinitionFromID(id objc.ID) *PushStreamNodeDefinition {
 	if id == 0 {
 		return nil
 	}
-	return &PushStreamNodeDefinition{inner: raw.PHASEPushStreamNodeDefinitionFromID(id)}
+	x := &PushStreamNodeDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// pushStreamNodeDefinitionAdopt wraps an Objective-C object that this code just created as a
+// PushStreamNodeDefinition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pushStreamNodeDefinitionAdopt(id objc.ID) *PushStreamNodeDefinition {
+	if id == 0 {
+		return nil
+	}
+	x := &PushStreamNodeDefinition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PushStreamNodeDefinition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PushStreamNodeDefinition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PushStreamNodeDefinition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a named node definition for audio streams.
 //
-// NewPushStreamNodeDefinitionWithMixerDefinitionFormatIdentifier creates a new [PushStreamNodeDefinition].
-func NewPushStreamNodeDefinitionWithMixerDefinitionFormatIdentifier(mixerDefinition *raw.PHASEMixerDefinition, format *avfaudio.AVAudioFormat, identifier string) *PushStreamNodeDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEPushStreamNodeDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMixerDefinition:format:identifier:"), mixerDefinition.Ptr(), format.Ptr(), foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &PushStreamNodeDefinition{inner: raw.PHASEPushStreamNodeDefinitionFromID(_id)}
+// NewPushStreamNodeDefinitionWithMixerDefinitionFormatIdentifier creates a new PushStreamNodeDefinition.
+func NewPushStreamNodeDefinitionWithMixerDefinitionFormatIdentifier(mixerDefinition *MixerDefinition, format obj.Object, identifier string) *PushStreamNodeDefinition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEPushStreamNodeDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMixerDefinition:format:identifier:"), objref.IDOf(mixerDefinition), objref.IDOf(format), purego.NSString(identifier))
+	return pushStreamNodeDefinitionAdopt(_id)
 }
 
 // Creates a node definition for audio streams.
 //
-// NewPushStreamNodeDefinitionWithMixerDefinitionFormat creates a new [PushStreamNodeDefinition].
-func NewPushStreamNodeDefinitionWithMixerDefinitionFormat(mixerDefinition *raw.PHASEMixerDefinition, format *avfaudio.AVAudioFormat) *PushStreamNodeDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEPushStreamNodeDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMixerDefinition:format:"), mixerDefinition.Ptr(), format.Ptr())
-	return &PushStreamNodeDefinition{inner: raw.PHASEPushStreamNodeDefinitionFromID(_id)}
+// NewPushStreamNodeDefinitionWithMixerDefinitionFormat creates a new PushStreamNodeDefinition.
+func NewPushStreamNodeDefinitionWithMixerDefinitionFormat(mixerDefinition *MixerDefinition, format obj.Object) *PushStreamNodeDefinition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEPushStreamNodeDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMixerDefinition:format:"), objref.IDOf(mixerDefinition), objref.IDOf(format))
+	return pushStreamNodeDefinitionAdopt(_id)
 }
 
 // An option that resizes loudness of the audio stream for consistency.
 //
-// WithNormalize sets the normalize property and returns the receiver for chaining.
+// WithNormalize sets normalize and returns the receiver so calls can be chained.
 func (x *PushStreamNodeDefinition) WithNormalize(normalize bool) *PushStreamNodeDefinition {
-	x.inner.SetNormalize(normalize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalize:"), normalize)
 	return x
 }
 
 // A playback speed for the node’s audio.
 //
-// WithRate sets the rate property and returns the receiver for chaining.
+// WithRate sets rate and returns the receiver so calls can be chained.
 func (x *PushStreamNodeDefinition) WithRate(rate float64) *PushStreamNodeDefinition {
-	x.inner.PHASEGeneratorNodeDefinition.SetRate(rate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 	return x
 }
 
 // A group this node conforms to for gain and rate control.
 //
-// WithGroup sets the group property and returns the receiver for chaining.
+// WithGroup sets group and returns the receiver so calls can be chained.
 func (x *PushStreamNodeDefinition) WithGroup(group *Group) *PushStreamNodeDefinition {
-	x.inner.PHASEGeneratorNodeDefinition.SetGroup(group.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
 // A meta parameter that dynamically changes the audio’s loudness.
 //
-// WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
+// WithGainMetaParameterDefinition sets gainMetaParameterDefinition and returns the receiver so calls can be chained.
 func (x *PushStreamNodeDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition {
-	x.inner.PHASEGeneratorNodeDefinition.SetGainMetaParameterDefinition(gainMetaParameterDefinition.asNumberMetaParameterDefinition())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
 	return x
 }
 
 // A meta parameter that dynamically changes the audio’s rate.
 //
-// WithRateMetaParameterDefinition sets the rateMetaParameterDefinition property and returns the receiver for chaining.
+// WithRateMetaParameterDefinition sets rateMetaParameterDefinition and returns the receiver so calls can be chained.
 func (x *PushStreamNodeDefinition) WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition {
-	x.inner.PHASEGeneratorNodeDefinition.SetRateMetaParameterDefinition(rateMetaParameterDefinition.asNumberMetaParameterDefinition())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRateMetaParameterDefinition:"), objref.IDOf(rateMetaParameterDefinition))
 	return x
 }
 
-// @property format @abstract The readonly property that returns the AVAudioFormat that this stream was initialized with
-//
-// Format calls the underlying Format.
-func (x *PushStreamNodeDefinition) Format() *avfaudio.AVAudioFormat {
-	return x.inner.Format()
+// The readonly property that returns the AVAudioFormat that this stream was initialized with
+func (x *PushStreamNodeDefinition) Format() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("format"))
+	return obj.Wrap(_r)
 }
 
-// @property normalize @abstract Determines whether or not the engine should normalize the stream. The default value is NO. @discussion In general, clients are advised to normalize the input. Normalization is required to properly calibrate the output level. If you set this value to NO, it's advised that you do custom normalization of the audio data prior to passing the buffers to PHASE.
-//
-// Normalize calls the underlying Normalize.
+// Determines whether or not the engine should normalize the stream. The default value is NO. In general, clients are advised to normalize the input. Normalization is required to properly calibrate the output level. If you set this value to NO, it's advised that you do custom normalization of the audio data prior to passing the buffers to PHASE.
 func (x *PushStreamNodeDefinition) Normalize() bool {
-	return x.inner.Normalize()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("normalize"))
+	return _r
 }
 
-// SetNormalize calls the underlying SetNormalize.
 func (x *PushStreamNodeDefinition) SetNormalize(normalize bool) {
-	x.inner.SetNormalize(normalize)
-}
-
-func (x *PushStreamNodeDefinition) asGeneratorNodeDefinition() *raw.PHASEGeneratorNodeDefinition {
-	return &x.inner.PHASEGeneratorNodeDefinition
-}
-
-func (x *PushStreamNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition {
-	return &x.inner.PHASEGeneratorNodeDefinition.PHASESoundEventNodeDefinition
-}
-
-func (x *PushStreamNodeDefinition) asDefinition() *raw.PHASEDefinition {
-	return &x.inner.PHASEGeneratorNodeDefinition.PHASESoundEventNodeDefinition.PHASEDefinition
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalize:"), normalize)
 }
 
 // PushStreamNodeDefinitionable is the interface implemented by [PushStreamNodeDefinition], for mocking and DI.
 type PushStreamNodeDefinitionable interface {
-	Unwrap() *raw.PHASEPushStreamNodeDefinition
+	obj.Object
 	WithNormalize(normalize bool) *PushStreamNodeDefinition
 	WithRate(rate float64) *PushStreamNodeDefinition
 	WithGroup(group *Group) *PushStreamNodeDefinition
 	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition
 	WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PushStreamNodeDefinition
-	Format() *avfaudio.AVAudioFormat
+	Format() obj.Object
 	Normalize() bool
 	SetNormalize(normalize bool)
 }

@@ -5,57 +5,81 @@
 package adsupport
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/adsupport"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The object that contains the advertising identifier.
 //
-// IdentifierManager wraps [raw.ASIdentifierManager] with a fluent Go API.
+// IdentifierManager is an idiomatic wrapper over the Objective-C class ASIdentifierManager.
 type IdentifierManager struct {
-	inner *raw.ASIdentifierManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASIdentifierManager].
-func (x *IdentifierManager) Unwrap() *raw.ASIdentifierManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IdentifierManager) ID() objc.ID { return x.inner.Ptr() }
-
-// IdentifierManagerFromID adopts an existing object pointer as a IdentifierManager (nil for 0).
+// IdentifierManagerFromID adopts an existing Objective-C object as a IdentifierManager
+// (nil for 0), retaining it and registering a release finalizer.
 func IdentifierManagerFromID(id objc.ID) *IdentifierManager {
 	if id == 0 {
 		return nil
 	}
-	return &IdentifierManager{inner: raw.ASIdentifierManagerFromID(id)}
+	x := &IdentifierManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewIdentifierManager creates a new [IdentifierManager].
+// identifierManagerAdopt wraps an Objective-C object that this code just created as a
+// IdentifierManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func identifierManagerAdopt(id objc.ID) *IdentifierManager {
+	if id == 0 {
+		return nil
+	}
+	x := &IdentifierManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IdentifierManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IdentifierManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IdentifierManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewIdentifierManager creates a new IdentifierManager.
 func NewIdentifierManager() *IdentifierManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASIdentifierManager")), objc.RegisterName("new"))
-	return &IdentifierManager{inner: raw.ASIdentifierManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ASIdentifierManager")), objc.RegisterName("new"))
+	return identifierManagerAdopt(_id)
 }
 
 // The UUID that is specific to a device. The “ASIdentifierManager/advertisingIdentifier“ is an alphanumeric string that’s unique to each device, and which you only use for advertising. Use this string for frequency capping, attribution, conversion events, estimating the number of unique users, advertising fraud detection, and debugging. On devices running iOS 14.5 and later and iPadOS 14.5 and later, your app must request tracking authorization before it can get the advertising identifier. For more information on getting the advertising identifier, see “AdSupport“. The advertising identifier returns either a unique UUID, or all zeros. It returns a unique UUID in the following cases: - If Settings &gt; Privacy &gt; Tracking &gt; Allow Apps to Request to Track is On, you’ve requested tracking authorization from the user by calling the <doc://com.apple.documentation/documentation/apptrackingtransparency> APIs, and received authorization, indicated by <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/authorized>. - If the user changes Settings &gt; Privacy &gt; Tracking &gt; Allow Apps to Request to Track to Off after authorizing your app, and leaves the permissions On for your app. The advertising identifier returns all zeros (`00000000-0000-0000-0000-000000000000`) in the following cases: - In Simulator, regardless of any settings. - When you call this API on a device running macOS. - When you call this API in a compatible iPad or iPhone app running in visionOS. - On devices running iOS 14.5 and later and iPadOS 14.5 and later, if you haven’t requested authorization using the <doc://com.apple.documentation/documentation/apptrackingtransparency> framework. - If you’ve requested authorization using the <doc://com.apple.documentation/documentation/apptrackingtransparency> framework and the user declines, which results in an authorization status of <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/denied>. - When a profile or configuration restricts access to the advertising identifier. For more information about restrictions, see <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/restricted>. As a best practice, don’t store the advertising identifier value; access “ASIdentifierManager/advertisingIdentifier“ instead. Users can change their authorization for tracking at any time in Settings &gt; Privacy &gt; Tracking. Check your app’s authorization using the App Tracking Transparency API <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/3547038-trackingauthorizationstatus> to determine the user’s intent. For more information about asking users for permission to track, see [User Privacy and Data Use](https://developer.apple.com/app-store/user-privacy-and-data-use/).
-//
-// AdvertisingIdentifier calls the underlying AdvertisingIdentifier.
-func (x *IdentifierManager) AdvertisingIdentifier() *foundation.NSUUID {
-	return x.inner.AdvertisingIdentifier()
+func (x *IdentifierManager) AdvertisingIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("advertisingIdentifier"))
+	return obj.Wrap(_r)
 }
 
 // A Boolean value that indicates whether the user has limited ad tracking enabled. - Warning: This property is deprecated. Functionality has been replaced by the <doc://com.apple.documentation/documentation/apptrackingtransparency> framework.
-//
-// IsAdvertisingTrackingEnabled calls the underlying IsAdvertisingTrackingEnabled.
 func (x *IdentifierManager) IsAdvertisingTrackingEnabled() bool {
-	return x.inner.IsAdvertisingTrackingEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAdvertisingTrackingEnabled"))
+	return _r
 }
 
 // IdentifierManagerable is the interface implemented by [IdentifierManager], for mocking and DI.
 type IdentifierManagerable interface {
-	Unwrap() *raw.ASIdentifierManager
-	AdvertisingIdentifier() *foundation.NSUUID
+	obj.Object
+	AdvertisingIdentifier() obj.Object
 	IsAdvertisingTrackingEnabled() bool
 }
 

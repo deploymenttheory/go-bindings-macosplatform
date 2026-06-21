@@ -5,77 +5,95 @@
 package fileprovider
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fileprovider"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides information about the application requesting data from the File Provider extension.
 //
-// FileProviderRequest wraps [raw.NSFileProviderRequest] with a fluent Go API.
+// FileProviderRequest is an idiomatic wrapper over the Objective-C class NSFileProviderRequest.
 type FileProviderRequest struct {
-	inner *raw.NSFileProviderRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFileProviderRequest].
-func (x *FileProviderRequest) Unwrap() *raw.NSFileProviderRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileProviderRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// FileProviderRequestFromID adopts an existing object pointer as a FileProviderRequest (nil for 0).
+// FileProviderRequestFromID adopts an existing Objective-C object as a FileProviderRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func FileProviderRequestFromID(id objc.ID) *FileProviderRequest {
 	if id == 0 {
 		return nil
 	}
-	return &FileProviderRequest{inner: raw.NSFileProviderRequestFromID(id)}
+	x := &FileProviderRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFileProviderRequest creates a new [FileProviderRequest].
+// fileProviderRequestAdopt wraps an Objective-C object that this code just created as a
+// FileProviderRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileProviderRequestAdopt(id objc.ID) *FileProviderRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &FileProviderRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FileProviderRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileProviderRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileProviderRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFileProviderRequest creates a new FileProviderRequest.
 func NewFileProviderRequest() *FileProviderRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileProviderRequest")), objc.RegisterName("new"))
-	return &FileProviderRequest{inner: raw.NSFileProviderRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSFileProviderRequest")), objc.RegisterName("new"))
+	return fileProviderRequestAdopt(_id)
 }
 
 // The request was made by the sync system, e.g. to update a file to its latest version after a remote update was pushed. This is only valid for NSFileProviderRequest objects passed to these methods: - [NSFileProviderEnumerating enumeratorForContainerItemIdentifier:] - [NSFileProviderReplicatedExtension fetchContentsForItemWithIdentifier:] For sync up methods (createItem/modifyItem/deleteItem), the system does not know which actor made the modifications to the file, so it cannot supply this information.
-//
-// IsSystemRequest calls the underlying IsSystemRequest.
 func (x *FileProviderRequest) IsSystemRequest() bool {
-	return x.inner.IsSystemRequest()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSystemRequest"))
+	return _r
 }
 
 // The request was made by Finder or one of its helpers. This is only valid for NSFileProviderRequest objects passed to these methods: - [NSFileProviderEnumerating enumeratorForContainerItemIdentifier:] - [NSFileProviderReplicatedExtension fetchContentsForItemWithIdentifier:] For sync up methods (createItem/modifyItem/deleteItem), the system does not know which actor made the modifications to the file, so it cannot supply this information.
-//
-// IsFileViewerRequest calls the underlying IsFileViewerRequest.
 func (x *FileProviderRequest) IsFileViewerRequest() bool {
-	return x.inner.IsFileViewerRequest()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFileViewerRequest"))
+	return _r
 }
 
 // The URL of the requesting executable. This will always be nil unless both an MDM profile key is set, and the provider's application is installed by an MDM profile.
-//
-// RequestingExecutable calls the underlying RequestingExecutable.
-func (x *FileProviderRequest) RequestingExecutable() *foundation.NSURL {
-	return x.inner.RequestingExecutable()
+func (x *FileProviderRequest) RequestingExecutable() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestingExecutable"))
+	return obj.Wrap(_r)
 }
 
 // The version of the domain when the event that triggered the request was observed. If the extension doesn't implement the NSFileProviderDomainState protocol, this will be nil.
-//
-// DomainVersion calls the underlying DomainVersion.
 func (x *FileProviderRequest) DomainVersion() *FileProviderDomainVersion {
-	_r := x.inner.DomainVersion()
-	if _r == nil {
-		return nil
-	}
-	return &FileProviderDomainVersion{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domainVersion"))
+	return FileProviderDomainVersionFromID(_r)
 }
 
 // FileProviderRequestable is the interface implemented by [FileProviderRequest], for mocking and DI.
 type FileProviderRequestable interface {
-	Unwrap() *raw.NSFileProviderRequest
+	obj.Object
 	IsSystemRequest() bool
 	IsFileViewerRequest() bool
-	RequestingExecutable() *foundation.NSURL
+	RequestingExecutable() obj.Object
 	DomainVersion() *FileProviderDomainVersion
 }
 

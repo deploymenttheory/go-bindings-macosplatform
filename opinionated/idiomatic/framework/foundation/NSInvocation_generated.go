@@ -5,171 +5,125 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An Objective-C message rendered as an object.
 //
-// Invocation wraps [raw.NSInvocation] with a fluent Go API.
+// Invocation is an idiomatic wrapper over the Objective-C class NSInvocation.
 type Invocation struct {
-	inner *raw.NSInvocation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSInvocation].
-func (x *Invocation) Unwrap() *raw.NSInvocation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Invocation) ID() objc.ID { return x.inner.Ptr() }
-
-// InvocationFromID adopts an existing object pointer as a Invocation (nil for 0).
+// InvocationFromID adopts an existing Objective-C object as a Invocation
+// (nil for 0), retaining it and registering a release finalizer.
 func InvocationFromID(id objc.ID) *Invocation {
 	if id == 0 {
 		return nil
 	}
-	return &Invocation{inner: raw.NSInvocationFromID(id)}
+	x := &Invocation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewInvocation creates a new [Invocation].
+// invocationAdopt wraps an Objective-C object that this code just created as a
+// Invocation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func invocationAdopt(id objc.ID) *Invocation {
+	if id == 0 {
+		return nil
+	}
+	x := &Invocation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Invocation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Invocation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Invocation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewInvocation creates a new Invocation.
 func NewInvocation() *Invocation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSInvocation")), objc.RegisterName("new"))
-	return &Invocation{inner: raw.NSInvocationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSInvocation")), objc.RegisterName("new"))
+	return invocationAdopt(_id)
 }
 
 // The receiver’s target, or nil if the receiver has no target.
 //
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *Invocation) WithTarget(target objc.ID) *Invocation {
-	x.inner.SetTarget(target)
+// WithTarget sets target and returns the receiver so calls can be chained.
+func (x *Invocation) WithTarget(target obj.Object) *Invocation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// The receiver’s selector, or 0 if it hasn’t been set.
-//
-// WithSelector sets the selector property and returns the receiver for chaining.
-func (x *Invocation) WithSelector(selector objc.SEL) *Invocation {
-	x.inner.SetSelector(selector)
-	return x
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Invocation) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Invocation {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *Invocation) WithScriptingProperties(scriptingProperties obj.Object) *Invocation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // If the receiver hasn’t already done so, retains the target and all object arguments of the receiver and copies all of its C-string arguments and blocks. If a returnvalue has been set, this is also retained or copied.
-//
-// RetainArguments calls the underlying RetainArguments.
 func (x *Invocation) RetainArguments() {
-	x.inner.RetainArguments()
-}
-
-// Gets the invocation’s return value.
-//
-// GetReturnValue calls the underlying GetReturnValue.
-func (x *Invocation) GetReturnValue(retLoc unsafe.Pointer) {
-	x.inner.GetReturnValue(retLoc)
-}
-
-// Sets the receiver’s return value.
-//
-// SetReturnValue calls the underlying SetReturnValue.
-func (x *Invocation) SetReturnValue(retLoc unsafe.Pointer) {
-	x.inner.SetReturnValue(retLoc)
-}
-
-// Returns by indirection the receiver’s argument at a specified index.
-//
-// GetArgumentAtIndex calls the underlying GetArgumentAtIndex.
-func (x *Invocation) GetArgumentAtIndex(argumentLocation unsafe.Pointer, idx int) {
-	x.inner.GetArgumentAtIndex(argumentLocation, idx)
-}
-
-// Sets an argument of the receiver.
-//
-// SetArgumentAtIndex calls the underlying SetArgumentAtIndex.
-func (x *Invocation) SetArgumentAtIndex(argumentLocation unsafe.Pointer, idx int) {
-	x.inner.SetArgumentAtIndex(argumentLocation, idx)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("retainArguments"))
 }
 
 // Sends the receiver’s message (with arguments) to its target and sets the return value.
-//
-// Invoke calls the underlying Invoke.
 func (x *Invocation) Invoke() {
-	x.inner.Invoke()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invoke"))
 }
 
 // Sets the receiver’s target, sends the receiver’s message (with arguments) to that target, and sets the return value.
-//
-// InvokeWithTarget calls the underlying InvokeWithTarget.
-func (x *Invocation) InvokeWithTarget(target objc.ID) {
-	x.inner.InvokeWithTarget(target)
+func (x *Invocation) InvokeWithTarget(target obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invokeWithTarget:"), objref.IDOf(target))
 }
 
-// InvokeUsingIMP calls the underlying InvokeUsingIMP.
-func (x *Invocation) InvokeUsingIMP(imp unsafe.Pointer) {
-	x.inner.InvokeUsingIMP(imp)
-}
-
-// MethodSignature calls the underlying MethodSignature.
 func (x *Invocation) MethodSignature() *MethodSignature {
-	_r := x.inner.MethodSignature()
-	if _r == nil {
-		return nil
-	}
-	return &MethodSignature{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("methodSignature"))
+	return MethodSignatureFromID(_r)
 }
 
-// ArgumentsRetained calls the underlying ArgumentsRetained.
 func (x *Invocation) ArgumentsRetained() bool {
-	return x.inner.ArgumentsRetained()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("argumentsRetained"))
+	return _r
 }
 
-// Target calls the underlying Target.
-func (x *Invocation) Target() objc.ID {
-	return x.inner.Target()
+func (x *Invocation) Target() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+	return obj.Wrap(_r)
 }
 
-// SetTarget calls the underlying SetTarget.
-func (x *Invocation) SetTarget(target objc.ID) {
-	x.inner.SetTarget(target)
+func (x *Invocation) SetTarget(target obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 }
-
-// Selector calls the underlying Selector.
-func (x *Invocation) Selector() objc.SEL {
-	return x.inner.Selector()
-}
-
-// SetSelector calls the underlying SetSelector.
-func (x *Invocation) SetSelector(selector objc.SEL) {
-	x.inner.SetSelector(selector)
-}
-
-func (x *Invocation) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Invocationable is the interface implemented by [Invocation], for mocking and DI.
 type Invocationable interface {
-	Unwrap() *raw.NSInvocation
-	WithTarget(target objc.ID) *Invocation
-	WithSelector(selector objc.SEL) *Invocation
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Invocation
+	obj.Object
+	WithTarget(target obj.Object) *Invocation
+	WithScriptingProperties(scriptingProperties obj.Object) *Invocation
 	RetainArguments()
-	GetReturnValue(retLoc unsafe.Pointer)
-	SetReturnValue(retLoc unsafe.Pointer)
-	GetArgumentAtIndex(argumentLocation unsafe.Pointer, idx int)
-	SetArgumentAtIndex(argumentLocation unsafe.Pointer, idx int)
 	Invoke()
-	InvokeWithTarget(target objc.ID)
-	InvokeUsingIMP(imp unsafe.Pointer)
+	InvokeWithTarget(target obj.Object)
 	MethodSignature() *MethodSignature
 	ArgumentsRetained() bool
-	Target() objc.ID
-	SetTarget(target objc.ID)
-	Selector() objc.SEL
-	SetSelector(selector objc.SEL)
+	Target() obj.Object
+	SetTarget(target obj.Object)
 }
 
 var _ Invocationable = (*Invocation)(nil)

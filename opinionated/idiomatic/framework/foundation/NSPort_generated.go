@@ -5,122 +5,126 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An abstract class that represents a communication channel.
 //
-// Port wraps [raw.NSPort] with a fluent Go API.
+// Port is an idiomatic wrapper over the Objective-C class NSPort.
 type Port struct {
-	inner *raw.NSPort
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPort].
-func (x *Port) Unwrap() *raw.NSPort { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Port) ID() objc.ID { return x.inner.Ptr() }
-
-// PortFromID adopts an existing object pointer as a Port (nil for 0).
+// PortFromID adopts an existing Objective-C object as a Port
+// (nil for 0), retaining it and registering a release finalizer.
 func PortFromID(id objc.ID) *Port {
 	if id == 0 {
 		return nil
 	}
-	return &Port{inner: raw.NSPortFromID(id)}
-}
-
-// NewPort creates a new [Port].
-func NewPort() *Port {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPort")), objc.RegisterName("new"))
-	return &Port{inner: raw.NSPortFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Port) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Port {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &Port{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Invalidate calls the underlying Invalidate.
+// portAdopt wraps an Objective-C object that this code just created as a
+// Port (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func portAdopt(id objc.ID) *Port {
+	if id == 0 {
+		return nil
+	}
+	x := &Port{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Port) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Port) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Port) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPort creates a new Port.
+func NewPort() *Port {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPort")), objc.RegisterName("new"))
+	return portAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *Port) WithScriptingProperties(scriptingProperties obj.Object) *Port {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
 func (x *Port) Invalidate() {
-	x.inner.Invalidate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *Port) SetDelegate(anObject raw.NSPortDelegate) {
-	x.inner.SetDelegate(anObject)
+func (x *Port) ScheduleInRunLoopForMode(runLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *Port) Delegate() raw.NSPortDelegate {
-	return x.inner.Delegate()
+func (x *Port) RemoveFromRunLoopForMode(runLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
-// ScheduleInRunLoopForMode calls the underlying ScheduleInRunLoopForMode.
-func (x *Port) ScheduleInRunLoopForMode(runLoop *raw.NSRunLoop, mode *raw.NSString) {
-	x.inner.ScheduleInRunLoopForMode(runLoop, mode)
+func (x *Port) SendBeforeDateComponentsFromReserved(limitDate *Date, components obj.Object, receivePort *Port, headerSpaceReserved int) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendBeforeDate:components:from:reserved:"), objref.IDOf(limitDate), objref.IDOf(components), objref.IDOf(receivePort), headerSpaceReserved)
+	return _r
 }
 
-// RemoveFromRunLoopForMode calls the underlying RemoveFromRunLoopForMode.
-func (x *Port) RemoveFromRunLoopForMode(runLoop *raw.NSRunLoop, mode *raw.NSString) {
-	x.inner.RemoveFromRunLoopForMode(runLoop, mode)
-}
-
-// SendBeforeDateComponentsFromReserved calls the underlying SendBeforeDateComponentsFromReserved.
-func (x *Port) SendBeforeDateComponentsFromReserved(limitDate *raw.NSDate, components *raw.NSMutableArray[objc.ID], receivePort *raw.NSPort, headerSpaceReserved uint) bool {
-	return x.inner.SendBeforeDateComponentsFromReserved(limitDate, components, receivePort, headerSpaceReserved)
-}
-
-// SendBeforeDateMsgidComponentsFromReserved calls the underlying SendBeforeDateMsgidComponentsFromReserved.
-func (x *Port) SendBeforeDateMsgidComponentsFromReserved(limitDate *raw.NSDate, msgID uint, components *raw.NSMutableArray[objc.ID], receivePort *raw.NSPort, headerSpaceReserved uint) bool {
-	return x.inner.SendBeforeDateMsgidComponentsFromReserved(limitDate, msgID, components, receivePort, headerSpaceReserved)
+func (x *Port) SendBeforeDateMsgidComponentsFromReserved(limitDate *Date, msgID int, components obj.Object, receivePort *Port, headerSpaceReserved int) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendBeforeDate:msgid:components:from:reserved:"), objref.IDOf(limitDate), msgID, objref.IDOf(components), objref.IDOf(receivePort), headerSpaceReserved)
+	return _r
 }
 
 // Adds the receiver to the list of ports monitored by a given run loop for the given input mode.
-//
-// AddConnectionToRunLoopForMode calls the underlying AddConnectionToRunLoopForMode.
-func (x *Port) AddConnectionToRunLoopForMode(conn *raw.NSConnection, runLoop *raw.NSRunLoop, mode *raw.NSString) {
-	x.inner.AddConnectionToRunLoopForMode(conn, runLoop, mode)
+func (x *Port) AddConnectionToRunLoopForMode(conn *Connection, runLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addConnection:toRunLoop:forMode:"), objref.IDOf(conn), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
 // Removes the receiver from the list of ports monitored by runLoop in the given input mode, mode.
-//
-// RemoveConnectionFromRunLoopForMode calls the underlying RemoveConnectionFromRunLoopForMode.
-func (x *Port) RemoveConnectionFromRunLoopForMode(conn *raw.NSConnection, runLoop *raw.NSRunLoop, mode *raw.NSString) {
-	x.inner.RemoveConnectionFromRunLoopForMode(conn, runLoop, mode)
+func (x *Port) RemoveConnectionFromRunLoopForMode(conn *Connection, runLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeConnection:fromRunLoop:forMode:"), objref.IDOf(conn), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
-// IsValid calls the underlying IsValid.
 func (x *Port) IsValid() bool {
-	return x.inner.IsValid()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isValid"))
+	return _r
 }
 
-// ReservedSpaceLength calls the underlying ReservedSpaceLength.
-func (x *Port) ReservedSpaceLength() uint {
-	return x.inner.ReservedSpaceLength()
+func (x *Port) ReservedSpaceLength() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("reservedSpaceLength"))
+	return _r
 }
-
-func (x *Port) asPort() *raw.NSPort { return x.inner }
-
-func (x *Port) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Portable is the interface implemented by [Port], for mocking and DI.
 type Portable interface {
-	Unwrap() *raw.NSPort
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Port
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Port
 	Invalidate()
-	SetDelegate(anObject raw.NSPortDelegate)
-	Delegate() raw.NSPortDelegate
-	ScheduleInRunLoopForMode(runLoop *raw.NSRunLoop, mode *raw.NSString)
-	RemoveFromRunLoopForMode(runLoop *raw.NSRunLoop, mode *raw.NSString)
-	SendBeforeDateComponentsFromReserved(limitDate *raw.NSDate, components *raw.NSMutableArray[objc.ID], receivePort *raw.NSPort, headerSpaceReserved uint) bool
-	SendBeforeDateMsgidComponentsFromReserved(limitDate *raw.NSDate, msgID uint, components *raw.NSMutableArray[objc.ID], receivePort *raw.NSPort, headerSpaceReserved uint) bool
-	AddConnectionToRunLoopForMode(conn *raw.NSConnection, runLoop *raw.NSRunLoop, mode *raw.NSString)
-	RemoveConnectionFromRunLoopForMode(conn *raw.NSConnection, runLoop *raw.NSRunLoop, mode *raw.NSString)
+	ScheduleInRunLoopForMode(runLoop *RunLoop, mode *String)
+	RemoveFromRunLoopForMode(runLoop *RunLoop, mode *String)
+	SendBeforeDateComponentsFromReserved(limitDate *Date, components obj.Object, receivePort *Port, headerSpaceReserved int) bool
+	SendBeforeDateMsgidComponentsFromReserved(limitDate *Date, msgID int, components obj.Object, receivePort *Port, headerSpaceReserved int) bool
+	AddConnectionToRunLoopForMode(conn *Connection, runLoop *RunLoop, mode *String)
+	RemoveConnectionFromRunLoopForMode(conn *Connection, runLoop *RunLoop, mode *String)
 	IsValid() bool
-	ReservedSpaceLength() uint
+	ReservedSpaceLength() int
 }
 
 var _ Portable = (*Port)(nil)

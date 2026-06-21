@@ -5,106 +5,122 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object representing the difference between two ordered collections.
 //
-// OrderedCollectionDifference wraps [raw.NSOrderedCollectionDifference] with a fluent Go API.
+// OrderedCollectionDifference is an idiomatic wrapper over the Objective-C class NSOrderedCollectionDifference.
 type OrderedCollectionDifference struct {
-	inner *raw.NSOrderedCollectionDifference[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSOrderedCollectionDifference].
-func (x *OrderedCollectionDifference) Unwrap() *raw.NSOrderedCollectionDifference[objc.ID] {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OrderedCollectionDifference) ID() objc.ID { return x.inner.Ptr() }
-
-// OrderedCollectionDifferenceFromID adopts an existing object pointer as a OrderedCollectionDifference (nil for 0).
+// OrderedCollectionDifferenceFromID adopts an existing Objective-C object as a OrderedCollectionDifference
+// (nil for 0), retaining it and registering a release finalizer.
 func OrderedCollectionDifferenceFromID(id objc.ID) *OrderedCollectionDifference {
 	if id == 0 {
 		return nil
 	}
-	return &OrderedCollectionDifference{inner: raw.NSOrderedCollectionDifferenceFromID[objc.ID](id)}
+	x := &OrderedCollectionDifference{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// orderedCollectionDifferenceAdopt wraps an Objective-C object that this code just created as a
+// OrderedCollectionDifference (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func orderedCollectionDifferenceAdopt(id objc.ID) *OrderedCollectionDifference {
+	if id == 0 {
+		return nil
+	}
+	x := &OrderedCollectionDifference{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *OrderedCollectionDifference) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *OrderedCollectionDifference) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *OrderedCollectionDifference) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an ordered collection difference using an array of ordered collection changes.
 //
-// NewOrderedCollectionDifferenceWithChanges creates a new [OrderedCollectionDifference].
-func NewOrderedCollectionDifferenceWithChanges(changes *raw.NSArray[objc.ID]) *OrderedCollectionDifference {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedCollectionDifference")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChanges:"), changes.Ptr())
-	return &OrderedCollectionDifference{inner: raw.NSOrderedCollectionDifferenceFromID[objc.ID](_id)}
+// NewOrderedCollectionDifferenceWithChanges creates a new OrderedCollectionDifference.
+func NewOrderedCollectionDifferenceWithChanges(changes []obj.Object) *OrderedCollectionDifference {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionDifference")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithChanges:"), purego.SliceToNSArray(changes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return orderedCollectionDifferenceAdopt(_id)
 }
 
 // Creates an ordered collection difference from arrays of inserted and removed objects with corresponding sets of indices, in addition to an array of ordered collection changes.
 //
-// NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjectsAdditionalChanges creates a new [OrderedCollectionDifference].
-func NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjectsAdditionalChanges(inserts *raw.NSIndexSet, insertedObjects *raw.NSArray[objc.ID], removes *raw.NSIndexSet, removedObjects *raw.NSArray[objc.ID], changes *raw.NSArray[objc.ID]) *OrderedCollectionDifference {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedCollectionDifference")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInsertIndexes:insertedObjects:removeIndexes:removedObjects:additionalChanges:"), inserts.Ptr(), insertedObjects.Ptr(), removes.Ptr(), removedObjects.Ptr(), changes.Ptr())
-	return &OrderedCollectionDifference{inner: raw.NSOrderedCollectionDifferenceFromID[objc.ID](_id)}
+// NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjectsAdditionalChanges creates a new OrderedCollectionDifference.
+func NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjectsAdditionalChanges(inserts *IndexSet, insertedObjects []obj.Object, removes *IndexSet, removedObjects []obj.Object, changes []obj.Object) *OrderedCollectionDifference {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionDifference")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInsertIndexes:insertedObjects:removeIndexes:removedObjects:additionalChanges:"), objref.IDOf(inserts), purego.SliceToNSArray(insertedObjects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(removes), purego.SliceToNSArray(removedObjects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(changes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return orderedCollectionDifferenceAdopt(_id)
 }
 
 // Creates an ordered collection difference from arrays of inserted and removed objects with corresponding sets of indices.
 //
-// NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjects creates a new [OrderedCollectionDifference].
-func NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjects(inserts *raw.NSIndexSet, insertedObjects *raw.NSArray[objc.ID], removes *raw.NSIndexSet, removedObjects *raw.NSArray[objc.ID]) *OrderedCollectionDifference {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOrderedCollectionDifference")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInsertIndexes:insertedObjects:removeIndexes:removedObjects:"), inserts.Ptr(), insertedObjects.Ptr(), removes.Ptr(), removedObjects.Ptr())
-	return &OrderedCollectionDifference{inner: raw.NSOrderedCollectionDifferenceFromID[objc.ID](_id)}
+// NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjects creates a new OrderedCollectionDifference.
+func NewOrderedCollectionDifferenceWithInsertIndexesInsertedObjectsRemoveIndexesRemovedObjects(inserts *IndexSet, insertedObjects []obj.Object, removes *IndexSet, removedObjects []obj.Object) *OrderedCollectionDifference {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOrderedCollectionDifference")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInsertIndexes:insertedObjects:removeIndexes:removedObjects:"), objref.IDOf(inserts), purego.SliceToNSArray(insertedObjects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(removes), purego.SliceToNSArray(removedObjects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return orderedCollectionDifferenceAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *OrderedCollectionDifference) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OrderedCollectionDifference {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *OrderedCollectionDifference) WithScriptingProperties(scriptingProperties obj.Object) *OrderedCollectionDifference {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Create a new ordered collection difference by mapping over this difference’s members, processing the change objects with the block provided.
-//
-// DifferenceByTransformingChangesWith calls the underlying DifferenceByTransformingChangesWith.
-func (x *OrderedCollectionDifference) DifferenceByTransformingChangesWith(block objc.Block) *raw.NSOrderedCollectionDifference[objc.ID] {
-	return x.inner.DifferenceByTransformingChangesWith(block)
-}
-
 // Calculate the difference between two objects in the reverse direction of comparison.
-//
-// InverseDifference calls the underlying InverseDifference.
-func (x *OrderedCollectionDifference) InverseDifference() *raw.NSOrderedCollectionDifference[objc.ID] {
-	return x.inner.InverseDifference()
+func (x *OrderedCollectionDifference) InverseDifference() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inverseDifference"))
+	return obj.Wrap(_r)
 }
 
-// Insertions calls the underlying Insertions.
-func (x *OrderedCollectionDifference) Insertions() *raw.NSArray[objc.ID] {
-	return x.inner.Insertions()
+// Insertions returns the collection as a Go slice.
+func (x *OrderedCollectionDifference) Insertions() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Removals calls the underlying Removals.
-func (x *OrderedCollectionDifference) Removals() *raw.NSArray[objc.ID] {
-	return x.inner.Removals()
+// Removals returns the collection as a Go slice.
+func (x *OrderedCollectionDifference) Removals() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removals"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// HasChanges calls the underlying HasChanges.
 func (x *OrderedCollectionDifference) HasChanges() bool {
-	return x.inner.HasChanges()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasChanges"))
+	return _r
 }
-
-func (x *OrderedCollectionDifference) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // OrderedCollectionDifferenceable is the interface implemented by [OrderedCollectionDifference], for mocking and DI.
 type OrderedCollectionDifferenceable interface {
-	Unwrap() *raw.NSOrderedCollectionDifference[objc.ID]
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OrderedCollectionDifference
-	DifferenceByTransformingChangesWith(block objc.Block) *raw.NSOrderedCollectionDifference[objc.ID]
-	InverseDifference() *raw.NSOrderedCollectionDifference[objc.ID]
-	Insertions() *raw.NSArray[objc.ID]
-	Removals() *raw.NSArray[objc.ID]
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *OrderedCollectionDifference
+	InverseDifference() obj.Object
+	Insertions() []obj.Object
+	Removals() []obj.Object
 	HasChanges() bool
 }
 

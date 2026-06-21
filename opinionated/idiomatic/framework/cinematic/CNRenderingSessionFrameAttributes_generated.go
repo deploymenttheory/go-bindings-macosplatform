@@ -5,97 +5,116 @@
 package cinematic
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Creates an object with the per frame attributes that control the appearance of a single frame of the Cinematic movie.
 //
-// RenderingSessionFrameAttributes wraps [raw.CNRenderingSessionFrameAttributes] with a fluent Go API.
+// RenderingSessionFrameAttributes is an idiomatic wrapper over the Objective-C class CNRenderingSessionFrameAttributes.
 type RenderingSessionFrameAttributes struct {
-	inner *raw.CNRenderingSessionFrameAttributes
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNRenderingSessionFrameAttributes].
-func (x *RenderingSessionFrameAttributes) Unwrap() *raw.CNRenderingSessionFrameAttributes {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RenderingSessionFrameAttributes) ID() objc.ID { return x.inner.Ptr() }
-
-// RenderingSessionFrameAttributesFromID adopts an existing object pointer as a RenderingSessionFrameAttributes (nil for 0).
+// RenderingSessionFrameAttributesFromID adopts an existing Objective-C object as a RenderingSessionFrameAttributes
+// (nil for 0), retaining it and registering a release finalizer.
 func RenderingSessionFrameAttributesFromID(id objc.ID) *RenderingSessionFrameAttributes {
 	if id == 0 {
 		return nil
 	}
-	return &RenderingSessionFrameAttributes{inner: raw.CNRenderingSessionFrameAttributesFromID(id)}
+	x := &RenderingSessionFrameAttributes{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// renderingSessionFrameAttributesAdopt wraps an Objective-C object that this code just created as a
+// RenderingSessionFrameAttributes (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func renderingSessionFrameAttributesAdopt(id objc.ID) *RenderingSessionFrameAttributes {
+	if id == 0 {
+		return nil
+	}
+	x := &RenderingSessionFrameAttributes{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RenderingSessionFrameAttributes) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RenderingSessionFrameAttributes) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RenderingSessionFrameAttributes) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes the rendering frame attributes from a sample buffer read from a Cinematic metadata track.
 //
-// NewRenderingSessionFrameAttributesWithSampleBufferSessionAttributes creates a new [RenderingSessionFrameAttributes].
-func NewRenderingSessionFrameAttributesWithSampleBufferSessionAttributes(sampleBuffer unsafe.Pointer, sessionAttributes *raw.CNRenderingSessionAttributes) *RenderingSessionFrameAttributes {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNRenderingSessionFrameAttributes")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleBuffer:sessionAttributes:"), sampleBuffer, sessionAttributes.Ptr())
-	return &RenderingSessionFrameAttributes{inner: raw.CNRenderingSessionFrameAttributesFromID(_id)}
+// NewRenderingSessionFrameAttributesWithSampleBufferSessionAttributes creates a new RenderingSessionFrameAttributes.
+func NewRenderingSessionFrameAttributesWithSampleBufferSessionAttributes(sampleBuffer obj.Object, sessionAttributes *RenderingSessionAttributes) *RenderingSessionFrameAttributes {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CNRenderingSessionFrameAttributes")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleBuffer:sessionAttributes:"), objref.IDOf(sampleBuffer), objref.IDOf(sessionAttributes))
+	return renderingSessionFrameAttributesAdopt(_id)
 }
 
 // Initializes the rendering frame attributes from a timed metadata group read from a Cinematic metadata track.
 //
-// NewRenderingSessionFrameAttributesWithTimedMetadataGroupSessionAttributes creates a new [RenderingSessionFrameAttributes].
-func NewRenderingSessionFrameAttributesWithTimedMetadataGroupSessionAttributes(metadataGroup *avfoundation.AVTimedMetadataGroup, sessionAttributes *raw.CNRenderingSessionAttributes) *RenderingSessionFrameAttributes {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CNRenderingSessionFrameAttributes")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimedMetadataGroup:sessionAttributes:"), metadataGroup.Ptr(), sessionAttributes.Ptr())
-	return &RenderingSessionFrameAttributes{inner: raw.CNRenderingSessionFrameAttributesFromID(_id)}
+// NewRenderingSessionFrameAttributesWithTimedMetadataGroupSessionAttributes creates a new RenderingSessionFrameAttributes.
+func NewRenderingSessionFrameAttributesWithTimedMetadataGroupSessionAttributes(metadataGroup obj.Object, sessionAttributes *RenderingSessionAttributes) *RenderingSessionFrameAttributes {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CNRenderingSessionFrameAttributes")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimedMetadataGroup:sessionAttributes:"), objref.IDOf(metadataGroup), objref.IDOf(sessionAttributes))
+	return renderingSessionFrameAttributesAdopt(_id)
 }
 
 // Represents the focus plane at which the rendered image should be in focus.
 //
-// WithFocusDisparity sets the focusDisparity property and returns the receiver for chaining.
+// WithFocusDisparity sets focusDisparity and returns the receiver so calls can be chained.
 func (x *RenderingSessionFrameAttributes) WithFocusDisparity(focusDisparity float32) *RenderingSessionFrameAttributes {
-	x.inner.SetFocusDisparity(focusDisparity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusDisparity:"), focusDisparity)
 	return x
 }
 
 // The f-stop value that inversely affects the aperture used to render the Cinematic image.
 //
-// WithFNumber sets the fNumber property and returns the receiver for chaining.
+// WithFNumber sets fNumber and returns the receiver so calls can be chained.
 func (x *RenderingSessionFrameAttributes) WithFNumber(fNumber float32) *RenderingSessionFrameAttributes {
-	x.inner.SetFNumber(fNumber)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFNumber:"), fNumber)
 	return x
 }
 
 // The disparity value which represents the focus plane at which the rendered image should be in focus. A larger disparity results in the focus plane being closer to the camera. The scale and offset of disparity is not defined. It is best practice to obtain disparity values from detections or by interpolation between known disparity values.
-//
-// FocusDisparity calls the underlying FocusDisparity.
 func (x *RenderingSessionFrameAttributes) FocusDisparity() float32 {
-	return x.inner.FocusDisparity()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("focusDisparity"))
+	return _r
 }
 
-// SetFocusDisparity calls the underlying SetFocusDisparity.
 func (x *RenderingSessionFrameAttributes) SetFocusDisparity(focusDisparity float32) {
-	x.inner.SetFocusDisparity(focusDisparity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusDisparity:"), focusDisparity)
 }
 
 // The f-stop value which inversely affects the aperture used to render the image. A smaller f/ number results in larger bokeh and a shallower depth of field in the rendered image.
-//
-// FNumber calls the underlying FNumber.
 func (x *RenderingSessionFrameAttributes) FNumber() float32 {
-	return x.inner.FNumber()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("fNumber"))
+	return _r
 }
 
-// SetFNumber calls the underlying SetFNumber.
 func (x *RenderingSessionFrameAttributes) SetFNumber(fNumber float32) {
-	x.inner.SetFNumber(fNumber)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFNumber:"), fNumber)
 }
 
 // RenderingSessionFrameAttributesable is the interface implemented by [RenderingSessionFrameAttributes], for mocking and DI.
 type RenderingSessionFrameAttributesable interface {
-	Unwrap() *raw.CNRenderingSessionFrameAttributes
+	obj.Object
 	WithFocusDisparity(focusDisparity float32) *RenderingSessionFrameAttributes
 	WithFNumber(fNumber float32) *RenderingSessionFrameAttributes
 	FocusDisparity() float32

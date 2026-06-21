@@ -5,126 +5,125 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNConvolutionNode wraps [raw.MPSCNNConvolutionNode] with a fluent Go API.
+// CNNConvolutionNode is an idiomatic wrapper over the Objective-C class MPSCNNConvolutionNode.
 type CNNConvolutionNode struct {
-	inner *raw.MPSCNNConvolutionNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNConvolutionNode].
-func (x *CNNConvolutionNode) Unwrap() *raw.MPSCNNConvolutionNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNConvolutionNode) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNConvolutionNodeFromID adopts an existing object pointer as a CNNConvolutionNode (nil for 0).
+// CNNConvolutionNodeFromID adopts an existing Objective-C object as a CNNConvolutionNode
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNConvolutionNodeFromID(id objc.ID) *CNNConvolutionNode {
 	if id == 0 {
 		return nil
 	}
-	return &CNNConvolutionNode{inner: raw.MPSCNNConvolutionNodeFromID(id)}
-}
-
-// @abstract   Init a node representing a MPSCNNConvolution kernel @param      sourceNode              The MPSNNImageNode representing the source MPSImage for the filter @param      weights                 A pointer to a valid object conforming to the MPSCNNConvolutionDataSource protocol. This object is provided by you to encapsulate storage for convolution weights and biases. If it is used for training, it may not have a neuron embedded in the convolution descriptor. @return     A new MPSNNFilter node for a MPSCNNConvolution kernel.
-//
-// NewCNNConvolutionNodeWithSourceWeights creates a new [CNNConvolutionNode].
-func NewCNNConvolutionNodeWithSourceWeights(sourceNode *raw.MPSNNImageNode, weights raw.MPSCNNConvolutionDataSource) *CNNConvolutionNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNConvolutionNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:weights:"), sourceNode.Ptr(), weights)
-	return &CNNConvolutionNode{inner: raw.MPSCNNConvolutionNodeFromID(_id)}
-}
-
-// @abstract   The training style of the forward node will be propagated to gradient nodes made from it
-//
-// WithTrainingStyle sets the trainingStyle property and returns the receiver for chaining.
-func (x *CNNConvolutionNode) WithTrainingStyle(trainingStyle MPSNNTrainingStyle) *CNNConvolutionNode {
-	x.inner.SetTrainingStyle(raw.MPSNNTrainingStyle(trainingStyle))
+	x := &CNNConvolutionNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @abstract   Set the floating-point precision used by the convolution accumulator @discussion Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
-//
-// WithAccumulatorPrecision sets the accumulatorPrecision property and returns the receiver for chaining.
-func (x *CNNConvolutionNode) WithAccumulatorPrecision(accumulatorPrecision MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionNode {
-	x.inner.SetAccumulatorPrecision(raw.MPSNNConvolutionAccumulatorPrecisionOption(accumulatorPrecision))
-	return x
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *CNNConvolutionNode) WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNConvolutionNode {
-	x.inner.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
-	return x
-}
-
-// @property label @abstract A string to help identify this object.
-//
-// WithLabel sets the label property and returns the receiver for chaining.
-func (x *CNNConvolutionNode) WithLabel(label string) *CNNConvolutionNode {
-	x.inner.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
-	return x
-}
-
-// @abstract   The training style of the forward node will be propagated to gradient nodes made from it
-//
-// TrainingStyle calls the underlying TrainingStyle.
-func (x *CNNConvolutionNode) TrainingStyle() MPSNNTrainingStyle {
-	return MPSNNTrainingStyle(x.inner.TrainingStyle())
-}
-
-// @abstract   The training style of the forward node will be propagated to gradient nodes made from it
-//
-// SetTrainingStyle calls the underlying SetTrainingStyle.
-func (x *CNNConvolutionNode) SetTrainingStyle(trainingStyle MPSNNTrainingStyle) {
-	x.inner.SetTrainingStyle(raw.MPSNNTrainingStyle(trainingStyle))
-}
-
-// @abstract   Set the floating-point precision used by the convolution accumulator @discussion Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
-//
-// AccumulatorPrecision calls the underlying AccumulatorPrecision.
-func (x *CNNConvolutionNode) AccumulatorPrecision() MPSNNConvolutionAccumulatorPrecisionOption {
-	return MPSNNConvolutionAccumulatorPrecisionOption(x.inner.AccumulatorPrecision())
-}
-
-// @abstract   Set the floating-point precision used by the convolution accumulator @discussion Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
-//
-// SetAccumulatorPrecision calls the underlying SetAccumulatorPrecision.
-func (x *CNNConvolutionNode) SetAccumulatorPrecision(accumulatorPrecision MPSNNConvolutionAccumulatorPrecisionOption) {
-	x.inner.SetAccumulatorPrecision(raw.MPSNNConvolutionAccumulatorPrecisionOption(accumulatorPrecision))
-}
-
-// @abstract   A node to represent a MPSCNNConvolutionGradientState object @discussion  Use this if the convolution is mirrored by a convolution transpose node later on in the graph to make sure that the size of the image returned from the convolution transpose matches the size of the image passed in to this node.
-//
-// ConvolutionGradientState calls the underlying ConvolutionGradientState.
-func (x *CNNConvolutionNode) ConvolutionGradientState() *CNNConvolutionGradientStateNode {
-	_r := x.inner.ConvolutionGradientState()
-	if _r == nil {
+// cNNConvolutionNodeAdopt wraps an Objective-C object that this code just created as a
+// CNNConvolutionNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNConvolutionNodeAdopt(id objc.ID) *CNNConvolutionNode {
+	if id == 0 {
 		return nil
 	}
-	return &CNNConvolutionGradientStateNode{inner: _r}
+	x := &CNNConvolutionNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *CNNConvolutionNode) asCNNConvolutionNode() *raw.MPSCNNConvolutionNode { return x.inner }
+// Description returns the object's -description text.
+func (x *CNNConvolutionNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
 
-func (x *CNNConvolutionNode) asNNFilterNode() *raw.MPSNNFilterNode { return &x.inner.MPSNNFilterNode }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNConvolutionNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNConvolutionNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNConvolutionNode creates a new CNNConvolutionNode.
+func NewCNNConvolutionNode() *CNNConvolutionNode {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNConvolutionNode")), objc.RegisterName("new"))
+	return cNNConvolutionNodeAdopt(_id)
+}
+
+// The training style of the forward node will be propagated to gradient nodes made from it
+//
+// WithTrainingStyle sets trainingStyle and returns the receiver so calls can be chained.
+func (x *CNNConvolutionNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNConvolutionNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
+	return x
+}
+
+// Set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
+//
+// WithAccumulatorPrecision sets accumulatorPrecision and returns the receiver so calls can be chained.
+func (x *CNNConvolutionNode) WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNConvolutionNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccumulatorPrecision:"), accumulatorPrecision)
+	return x
+}
+
+// A string to help identify this object.
+//
+// WithLabel sets label and returns the receiver so calls can be chained.
+func (x *CNNConvolutionNode) WithLabel(label string) *CNNConvolutionNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return x
+}
+
+// The training style of the forward node will be propagated to gradient nodes made from it
+func (x *CNNConvolutionNode) TrainingStyle() NNTrainingStyle {
+	_r := objc.Send[NNTrainingStyle](objref.IDOf(x), objc.RegisterName("trainingStyle"))
+	return _r
+}
+
+// The training style of the forward node will be propagated to gradient nodes made from it
+func (x *CNNConvolutionNode) SetTrainingStyle(trainingStyle NNTrainingStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
+}
+
+// Set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
+func (x *CNNConvolutionNode) AccumulatorPrecision() NNConvolutionAccumulatorPrecisionOption {
+	_r := objc.Send[NNConvolutionAccumulatorPrecisionOption](objref.IDOf(x), objc.RegisterName("accumulatorPrecision"))
+	return _r
+}
+
+// Set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
+func (x *CNNConvolutionNode) SetAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccumulatorPrecision:"), accumulatorPrecision)
+}
+
+// A node to represent a MPSCNNConvolutionGradientState object Use this if the convolution is mirrored by a convolution transpose node later on in the graph to make sure that the size of the image returned from the convolution transpose matches the size of the image passed in to this node.
+func (x *CNNConvolutionNode) ConvolutionGradientState() *CNNConvolutionGradientStateNode {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolutionGradientState"))
+	return CNNConvolutionGradientStateNodeFromID(_r)
+}
 
 // CNNConvolutionNodeable is the interface implemented by [CNNConvolutionNode], for mocking and DI.
 type CNNConvolutionNodeable interface {
-	Unwrap() *raw.MPSCNNConvolutionNode
-	WithTrainingStyle(trainingStyle MPSNNTrainingStyle) *CNNConvolutionNode
-	WithAccumulatorPrecision(accumulatorPrecision MPSNNConvolutionAccumulatorPrecisionOption) *CNNConvolutionNode
-	WithPaddingPolicy(paddingPolicy raw.MPSNNPadding) *CNNConvolutionNode
+	obj.Object
+	WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNConvolutionNode
+	WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNConvolutionNode
 	WithLabel(label string) *CNNConvolutionNode
-	TrainingStyle() MPSNNTrainingStyle
-	SetTrainingStyle(trainingStyle MPSNNTrainingStyle)
-	AccumulatorPrecision() MPSNNConvolutionAccumulatorPrecisionOption
-	SetAccumulatorPrecision(accumulatorPrecision MPSNNConvolutionAccumulatorPrecisionOption)
+	TrainingStyle() NNTrainingStyle
+	SetTrainingStyle(trainingStyle NNTrainingStyle)
+	AccumulatorPrecision() NNConvolutionAccumulatorPrecisionOption
+	SetAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption)
 	ConvolutionGradientState() *CNNConvolutionGradientStateNode
 }
 

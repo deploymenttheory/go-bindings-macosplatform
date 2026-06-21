@@ -5,190 +5,168 @@
 package mpsmatrix
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MatrixFindTopK wraps [raw.MPSMatrixFindTopK] with a fluent Go API.
+// MatrixFindTopK is an idiomatic wrapper over the Objective-C class MPSMatrixFindTopK.
 type MatrixFindTopK struct {
-	inner *raw.MPSMatrixFindTopK
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSMatrixFindTopK].
-func (x *MatrixFindTopK) Unwrap() *raw.MPSMatrixFindTopK { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatrixFindTopK) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixFindTopKFromID adopts an existing object pointer as a MatrixFindTopK (nil for 0).
+// MatrixFindTopKFromID adopts an existing Objective-C object as a MatrixFindTopK
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixFindTopKFromID(id objc.ID) *MatrixFindTopK {
 	if id == 0 {
 		return nil
 	}
-	return &MatrixFindTopK{inner: raw.MPSMatrixFindTopKFromID(id)}
-}
-
-// NewMatrixFindTopKWithDeviceNumberOfTopKValues creates a new [MatrixFindTopK].
-func NewMatrixFindTopKWithDeviceNumberOfTopKValues(device metal.MTLDevice, numberOfTopKValues uint) *MatrixFindTopK {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixFindTopK")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:numberOfTopKValues:"), device, numberOfTopKValues)
-	return &MatrixFindTopK{inner: raw.MPSMatrixFindTopKFromID(_id)}
-}
-
-// NewMatrixFindTopKWithCoderDevice creates a new [MatrixFindTopK].
-func NewMatrixFindTopKWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MatrixFindTopK {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixFindTopK")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &MatrixFindTopK{inner: raw.MPSMatrixFindTopKFromID(_id)}
-}
-
-// @property   sourceRows @discussion The number of rows to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.x, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultIndexMatrix and resultValueMatrix parameters in encodeToCommandBuffer are large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
-//
-// WithSourceRows sets the sourceRows property and returns the receiver for chaining.
-func (x *MatrixFindTopK) WithSourceRows(sourceRows uint) *MatrixFindTopK {
-	x.inner.SetSourceRows(sourceRows)
+	x := &MatrixFindTopK{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   sourceColumns @discussion The number of columns to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.y, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultIndexMatrix and resultValueMatrix parameters in encodeToCommandBuffer are large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
-//
-// WithSourceColumns sets the sourceColumns property and returns the receiver for chaining.
-func (x *MatrixFindTopK) WithSourceColumns(sourceColumns uint) *MatrixFindTopK {
-	x.inner.SetSourceColumns(sourceColumns)
+// matrixFindTopKAdopt wraps an Objective-C object that this code just created as a
+// MatrixFindTopK (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixFindTopKAdopt(id objc.ID) *MatrixFindTopK {
+	if id == 0 {
+		return nil
+	}
+	x := &MatrixFindTopK{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @property   indexOffset @discussion Specifies a number that will be added to all the indices written to resultIndexMatrix in encodeToCommandBuffer. This value can be used to offset later computations for example by adding the value for the source matrix column offset sourceMatrixOrigin.y. Example: Let numberOfTopKValues be 3, let the source be the following: source = [ 6.0, 3.0, 8.0, 1.0, 9.0, 4.0, 5.0 ] and let the sourceMatrixOrigin.y = 2. Then if indexOffset = 2 then the result value and result index matrices will be: result values  = [ 9.0, 8.0, 5.0 ] result indices = [  4 ,  2 ,  6  ], which gives the user indices into the original source matrix. On the other hand if the indexOffset = 0 then the results  are as follows: result values  = [ 9.0, 8.0, 5.0 ] result indices = [  2 ,  0 ,  4  ], which on the other hand gives the user indices into the submatrix starting from sourceMatrixOrigin.y == 2. This property is modifiable and defaults to 0. If a different behavior is desired then this should be modified prior to encoding the kernel.
+// Description returns the object's -description text.
+func (x *MatrixFindTopK) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatrixFindTopK) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatrixFindTopK) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMatrixFindTopK creates a new MatrixFindTopK.
+func NewMatrixFindTopK() *MatrixFindTopK {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixFindTopK")), objc.RegisterName("new"))
+	return matrixFindTopKAdopt(_id)
+}
+
+// The number of rows to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.x, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultIndexMatrix and resultValueMatrix parameters in encodeToCommandBuffer are large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
 //
-// WithIndexOffset sets the indexOffset property and returns the receiver for chaining.
-func (x *MatrixFindTopK) WithIndexOffset(indexOffset uint) *MatrixFindTopK {
-	x.inner.SetIndexOffset(indexOffset)
+// WithSourceRows sets sourceRows and returns the receiver so calls can be chained.
+func (x *MatrixFindTopK) WithSourceRows(sourceRows int) *MatrixFindTopK {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceRows:"), sourceRows)
 	return x
 }
 
-// @property   numberOfTopKValues @discussion The number of highest values (and their indices) to be found in each row by the kernel. This property is initialized in the kernel initialization call initWithDevice, but can be modified before encoding the kernel. Must be less or equal to 16 and requesting more values results in undefined behavior. It is the user's responsibility to ensure that the resultIndexMatrix and resultValueMatrix parameters in encodeToCommandBuffer are large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined.
+// The number of columns to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.y, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultIndexMatrix and resultValueMatrix parameters in encodeToCommandBuffer are large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
 //
-// WithNumberOfTopKValues sets the numberOfTopKValues property and returns the receiver for chaining.
-func (x *MatrixFindTopK) WithNumberOfTopKValues(numberOfTopKValues uint) *MatrixFindTopK {
-	x.inner.SetNumberOfTopKValues(numberOfTopKValues)
+// WithSourceColumns sets sourceColumns and returns the receiver so calls can be chained.
+func (x *MatrixFindTopK) WithSourceColumns(sourceColumns int) *MatrixFindTopK {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceColumns:"), sourceColumns)
 	return x
 }
 
-// @property   sourceMatrixOrigin @discussion The origin, relative to [0, 0] in the source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+// Specifies a number that will be added to all the indices written to resultIndexMatrix in encodeToCommandBuffer. This value can be used to offset later computations for example by adding the value for the source matrix column offset sourceMatrixOrigin.y. Example: Let numberOfTopKValues be 3, let the source be the following: source = [ 6.0, 3.0, 8.0, 1.0, 9.0, 4.0, 5.0 ] and let the sourceMatrixOrigin.y = 2. Then if indexOffset = 2 then the result value and result index matrices will be: result values  = [ 9.0, 8.0, 5.0 ] result indices = [  4 ,  2 ,  6  ], which gives the user indices into the original source matrix. On the other hand if the indexOffset = 0 then the results  are as follows: result values  = [ 9.0, 8.0, 5.0 ] result indices = [  2 ,  0 ,  4  ], which on the other hand gives the user indices into the submatrix starting from sourceMatrixOrigin.y == 2. This property is modifiable and defaults to 0. If a different behavior is desired then this should be modified prior to encoding the kernel.
 //
-// WithSourceMatrixOrigin sets the sourceMatrixOrigin property and returns the receiver for chaining.
-func (x *MatrixFindTopK) WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixFindTopK {
-	x.inner.MPSMatrixUnaryKernel.SetSourceMatrixOrigin(sourceMatrixOrigin)
+// WithIndexOffset sets indexOffset and returns the receiver so calls can be chained.
+func (x *MatrixFindTopK) WithIndexOffset(indexOffset int) *MatrixFindTopK {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexOffset:"), indexOffset)
 	return x
 }
 
-// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+// The number of highest values (and their indices) to be found in each row by the kernel. This property is initialized in the kernel initialization call initWithDevice, but can be modified before encoding the kernel. Must be less or equal to 16 and requesting more values results in undefined behavior. It is the user's responsibility to ensure that the resultIndexMatrix and resultValueMatrix parameters in encodeToCommandBuffer are large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined.
 //
-// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
-func (x *MatrixFindTopK) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixFindTopK {
-	x.inner.MPSMatrixUnaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
+// WithNumberOfTopKValues sets numberOfTopKValues and returns the receiver so calls can be chained.
+func (x *MatrixFindTopK) WithNumberOfTopKValues(numberOfTopKValues int) *MatrixFindTopK {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTopKValues:"), numberOfTopKValues)
 	return x
 }
 
-// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+// The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
 //
-// WithBatchStart sets the batchStart property and returns the receiver for chaining.
-func (x *MatrixFindTopK) WithBatchStart(batchStart uint) *MatrixFindTopK {
-	x.inner.MPSMatrixUnaryKernel.SetBatchStart(batchStart)
+// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+func (x *MatrixFindTopK) WithBatchStart(batchStart int) *MatrixFindTopK {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+// The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
 //
-// WithBatchSize sets the batchSize property and returns the receiver for chaining.
-func (x *MatrixFindTopK) WithBatchSize(batchSize uint) *MatrixFindTopK {
-	x.inner.MPSMatrixUnaryKernel.SetBatchSize(batchSize)
+// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+func (x *MatrixFindTopK) WithBatchSize(batchSize int) *MatrixFindTopK {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
 }
 
-// @abstract   Encode a MPSMatrixFindTopK object to a command buffer. @param      commandBuffer       A valid MTLCommandBuffer to receive the encoded kernel. @param      inputMatrix         A valid MPSMatrix object which specifies the input matrix. @param      resultIndexMatrix   A valid MPSMatrix object which specifies the matrix which will be overwritten by the result indices. This matrix must have datatype MPSDataTypeUInt32. @param      resultValueMatrix   A valid MPSMatrix object which specifies the matrix which will be overwritten by the result values. @discussion Certain constraints apply to the sizes of the matrices depending on the sizes requested at initialization time as well as the origins at the time this routine is called: Both result matrices must be large enough to hold a two dimensional array of 'sourceRows' rows and 'numberOfTopKValues' columns beginning at resultMatrixOrigin. The source matrix must be large enough to contain at least 'numberOfTopKValues' values starting from sourceMatrixOrigin.y. Each matrix within the range specified by batchStart and batchSize, which also specifies a valid set of matrices within inputMatrix, resultIndexMatrix and resultValueMatrix, will be processed. The datatypes of the matrices inputMatrix and resultValueMatrix must match and be either MPSDataTypeFloat32 or MPSDataTypeFloat16.
-//
-// EncodeToCommandBufferInputMatrixResultIndexMatrixResultValueMatrix calls the underlying EncodeToCommandBufferInputMatrixResultIndexMatrixResultValueMatrix.
-func (x *MatrixFindTopK) EncodeToCommandBufferInputMatrixResultIndexMatrixResultValueMatrix(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, resultIndexMatrix *mpscore.MPSMatrix, resultValueMatrix *mpscore.MPSMatrix) {
-	x.inner.EncodeToCommandBufferInputMatrixResultIndexMatrixResultValueMatrix(commandBuffer, inputMatrix, resultIndexMatrix, resultValueMatrix)
+// The number of rows to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.x, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultIndexMatrix and resultValueMatrix parameters in encodeToCommandBuffer are large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
+func (x *MatrixFindTopK) SourceRows() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceRows"))
+	return _r
 }
 
-// @property   sourceRows @discussion The number of rows to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.x, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultIndexMatrix and resultValueMatrix parameters in encodeToCommandBuffer are large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
-//
-// SourceRows calls the underlying SourceRows.
-func (x *MatrixFindTopK) SourceRows() uint {
-	return x.inner.SourceRows()
+func (x *MatrixFindTopK) SetSourceRows(sourceRows int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceRows:"), sourceRows)
 }
 
-// SetSourceRows calls the underlying SetSourceRows.
-func (x *MatrixFindTopK) SetSourceRows(sourceRows uint) {
-	x.inner.SetSourceRows(sourceRows)
+// The number of columns to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.y, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultIndexMatrix and resultValueMatrix parameters in encodeToCommandBuffer are large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
+func (x *MatrixFindTopK) SourceColumns() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceColumns"))
+	return _r
 }
 
-// @property   sourceColumns @discussion The number of columns to consider from the source in the operation. This property is modifiable and defaults to NSUIntegerMax and the number is adjusted dynamically at kernel encode time (see encodeToCommandBuffer) to fit into the source matrix available starting from sourceMatrixOrigin.y, indicating that by default the whole source matrix is used. If a different size is desired then this should be modified prior to encoding the kernel. It is the user's responsibility to ensure that the resultIndexMatrix and resultValueMatrix parameters in encodeToCommandBuffer are large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined. NOTE: sourceMatrixOrigin and resultMatrixOrigin from MPSMatrixUnaryKernel can be used to control the starting points in the source and destination at kernel encode time (see encodeToCommandBuffer).
-//
-// SourceColumns calls the underlying SourceColumns.
-func (x *MatrixFindTopK) SourceColumns() uint {
-	return x.inner.SourceColumns()
+func (x *MatrixFindTopK) SetSourceColumns(sourceColumns int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceColumns:"), sourceColumns)
 }
 
-// SetSourceColumns calls the underlying SetSourceColumns.
-func (x *MatrixFindTopK) SetSourceColumns(sourceColumns uint) {
-	x.inner.SetSourceColumns(sourceColumns)
+// Specifies a number that will be added to all the indices written to resultIndexMatrix in encodeToCommandBuffer. This value can be used to offset later computations for example by adding the value for the source matrix column offset sourceMatrixOrigin.y. Example: Let numberOfTopKValues be 3, let the source be the following: source = [ 6.0, 3.0, 8.0, 1.0, 9.0, 4.0, 5.0 ] and let the sourceMatrixOrigin.y = 2. Then if indexOffset = 2 then the result value and result index matrices will be: result values  = [ 9.0, 8.0, 5.0 ] result indices = [  4 ,  2 ,  6  ], which gives the user indices into the original source matrix. On the other hand if the indexOffset = 0 then the results  are as follows: result values  = [ 9.0, 8.0, 5.0 ] result indices = [  2 ,  0 ,  4  ], which on the other hand gives the user indices into the submatrix starting from sourceMatrixOrigin.y == 2. This property is modifiable and defaults to 0. If a different behavior is desired then this should be modified prior to encoding the kernel.
+func (x *MatrixFindTopK) IndexOffset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOffset"))
+	return _r
 }
 
-// @property   indexOffset @discussion Specifies a number that will be added to all the indices written to resultIndexMatrix in encodeToCommandBuffer. This value can be used to offset later computations for example by adding the value for the source matrix column offset sourceMatrixOrigin.y. Example: Let numberOfTopKValues be 3, let the source be the following: source = [ 6.0, 3.0, 8.0, 1.0, 9.0, 4.0, 5.0 ] and let the sourceMatrixOrigin.y = 2. Then if indexOffset = 2 then the result value and result index matrices will be: result values  = [ 9.0, 8.0, 5.0 ] result indices = [  4 ,  2 ,  6  ], which gives the user indices into the original source matrix. On the other hand if the indexOffset = 0 then the results  are as follows: result values  = [ 9.0, 8.0, 5.0 ] result indices = [  2 ,  0 ,  4  ], which on the other hand gives the user indices into the submatrix starting from sourceMatrixOrigin.y == 2. This property is modifiable and defaults to 0. If a different behavior is desired then this should be modified prior to encoding the kernel.
-//
-// IndexOffset calls the underlying IndexOffset.
-func (x *MatrixFindTopK) IndexOffset() uint {
-	return x.inner.IndexOffset()
+func (x *MatrixFindTopK) SetIndexOffset(indexOffset int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexOffset:"), indexOffset)
 }
 
-// SetIndexOffset calls the underlying SetIndexOffset.
-func (x *MatrixFindTopK) SetIndexOffset(indexOffset uint) {
-	x.inner.SetIndexOffset(indexOffset)
+// The number of highest values (and their indices) to be found in each row by the kernel. This property is initialized in the kernel initialization call initWithDevice, but can be modified before encoding the kernel. Must be less or equal to 16 and requesting more values results in undefined behavior. It is the user's responsibility to ensure that the resultIndexMatrix and resultValueMatrix parameters in encodeToCommandBuffer are large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined.
+func (x *MatrixFindTopK) NumberOfTopKValues() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfTopKValues"))
+	return _r
 }
 
-// @property   numberOfTopKValues @discussion The number of highest values (and their indices) to be found in each row by the kernel. This property is initialized in the kernel initialization call initWithDevice, but can be modified before encoding the kernel. Must be less or equal to 16 and requesting more values results in undefined behavior. It is the user's responsibility to ensure that the resultIndexMatrix and resultValueMatrix parameters in encodeToCommandBuffer are large enough to accommodate the results of this operation, otherwise the results of the encode call are undefined.
-//
-// NumberOfTopKValues calls the underlying NumberOfTopKValues.
-func (x *MatrixFindTopK) NumberOfTopKValues() uint {
-	return x.inner.NumberOfTopKValues()
-}
-
-// SetNumberOfTopKValues calls the underlying SetNumberOfTopKValues.
-func (x *MatrixFindTopK) SetNumberOfTopKValues(numberOfTopKValues uint) {
-	x.inner.SetNumberOfTopKValues(numberOfTopKValues)
-}
-
-func (x *MatrixFindTopK) asMatrixUnaryKernel() *raw.MPSMatrixUnaryKernel {
-	return &x.inner.MPSMatrixUnaryKernel
+func (x *MatrixFindTopK) SetNumberOfTopKValues(numberOfTopKValues int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTopKValues:"), numberOfTopKValues)
 }
 
 // MatrixFindTopKable is the interface implemented by [MatrixFindTopK], for mocking and DI.
 type MatrixFindTopKable interface {
-	Unwrap() *raw.MPSMatrixFindTopK
-	WithSourceRows(sourceRows uint) *MatrixFindTopK
-	WithSourceColumns(sourceColumns uint) *MatrixFindTopK
-	WithIndexOffset(indexOffset uint) *MatrixFindTopK
-	WithNumberOfTopKValues(numberOfTopKValues uint) *MatrixFindTopK
-	WithSourceMatrixOrigin(sourceMatrixOrigin metal.MTLOrigin) *MatrixFindTopK
-	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixFindTopK
-	WithBatchStart(batchStart uint) *MatrixFindTopK
-	WithBatchSize(batchSize uint) *MatrixFindTopK
-	EncodeToCommandBufferInputMatrixResultIndexMatrixResultValueMatrix(commandBuffer metal.MTLCommandBuffer, inputMatrix *mpscore.MPSMatrix, resultIndexMatrix *mpscore.MPSMatrix, resultValueMatrix *mpscore.MPSMatrix)
-	SourceRows() uint
-	SetSourceRows(sourceRows uint)
-	SourceColumns() uint
-	SetSourceColumns(sourceColumns uint)
-	IndexOffset() uint
-	SetIndexOffset(indexOffset uint)
-	NumberOfTopKValues() uint
-	SetNumberOfTopKValues(numberOfTopKValues uint)
+	obj.Object
+	WithSourceRows(sourceRows int) *MatrixFindTopK
+	WithSourceColumns(sourceColumns int) *MatrixFindTopK
+	WithIndexOffset(indexOffset int) *MatrixFindTopK
+	WithNumberOfTopKValues(numberOfTopKValues int) *MatrixFindTopK
+	WithBatchStart(batchStart int) *MatrixFindTopK
+	WithBatchSize(batchSize int) *MatrixFindTopK
+	SourceRows() int
+	SetSourceRows(sourceRows int)
+	SourceColumns() int
+	SetSourceColumns(sourceColumns int)
+	IndexOffset() int
+	SetIndexOffset(indexOffset int)
+	NumberOfTopKValues() int
+	SetNumberOfTopKValues(numberOfTopKValues int)
 }
 
 var _ MatrixFindTopKable = (*MatrixFindTopK)(nil)

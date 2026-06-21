@@ -5,132 +5,101 @@
 package corebluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A service with writeable property values.
 //
-// MutableService wraps [raw.CBMutableService] with a fluent Go API.
+// MutableService is an idiomatic wrapper over the Objective-C class CBMutableService.
 type MutableService struct {
-	inner *raw.CBMutableService
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CBMutableService].
-func (x *MutableService) Unwrap() *raw.CBMutableService { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableService) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableServiceFromID adopts an existing object pointer as a MutableService (nil for 0).
+// MutableServiceFromID adopts an existing Objective-C object as a MutableService
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableServiceFromID(id objc.ID) *MutableService {
 	if id == 0 {
 		return nil
 	}
-	return &MutableService{inner: raw.CBMutableServiceFromID(id)}
+	x := &MutableService{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mutableServiceAdopt wraps an Objective-C object that this code just created as a
+// MutableService (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableServiceAdopt(id objc.ID) *MutableService {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableService{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MutableService) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MutableService) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MutableService) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a newly initialized mutable service specified by UUID and service type.
 //
-// NewMutableServiceWithTypePrimary creates a new [MutableService].
-func NewMutableServiceWithTypePrimary(uUID *raw.CBUUID, isPrimary bool) *MutableService {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CBMutableService")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:primary:"), uUID.Ptr(), isPrimary)
-	return &MutableService{inner: raw.CBMutableServiceFromID(_id)}
+// NewMutableServiceWithTypePrimary creates a new MutableService.
+func NewMutableServiceWithTypePrimary(uUID *UUID, isPrimary bool) *MutableService {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CBMutableService")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:primary:"), objref.IDOf(uUID), isPrimary)
+	return mutableServiceAdopt(_id)
 }
 
 // A list of included services.
 //
-// WithIncludedServices sets the collection, converting the Go slice to an NSArray.
+// WithIncludedServices sets the collection and returns the receiver so calls can be chained.
 func (x *MutableService) WithIncludedServices(items ...ServiceProvider) *MutableService {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetIncludedServices(foundation.NSArrayFromID[*raw.CBService](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asService().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CBService](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetIncludedServices(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ServiceProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludedServices:"), _arr)
 	return x
 }
 
 // A list of characteristics of a service.
 //
-// WithCharacteristics sets the collection, converting the Go slice to an NSArray.
+// WithCharacteristics sets the collection and returns the receiver so calls can be chained.
 func (x *MutableService) WithCharacteristics(items ...CharacteristicProvider) *MutableService {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetCharacteristics(foundation.NSArrayFromID[*raw.CBCharacteristic](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asCharacteristic().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CBCharacteristic](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetCharacteristics(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v CharacteristicProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharacteristics:"), _arr)
 	return x
 }
 
-// SetIncludedServices calls the underlying SetIncludedServices.
-func (x *MutableService) SetIncludedServices(includedServices ...ServiceProvider) {
-	_ptrs := make([]objc.ID, len(includedServices))
-	for _i, _v := range includedServices {
-		_ptrs[_i] = _v.asService().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.CBService]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.CBService](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.CBService](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetIncludedServices(_arg0)
+func (x *MutableService) SetIncludedServices(includedServices []*Service) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludedServices:"), purego.SliceToNSArray(includedServices, func(_v *Service) objc.ID { return objref.IDOf(_v) }))
 }
 
-// SetCharacteristics calls the underlying SetCharacteristics.
-func (x *MutableService) SetCharacteristics(characteristics ...CharacteristicProvider) {
-	_ptrs := make([]objc.ID, len(characteristics))
-	for _i, _v := range characteristics {
-		_ptrs[_i] = _v.asCharacteristic().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.CBCharacteristic]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.CBCharacteristic](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.CBCharacteristic](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetCharacteristics(_arg0)
+func (x *MutableService) SetCharacteristics(characteristics []*Characteristic) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharacteristics:"), purego.SliceToNSArray(characteristics, func(_v *Characteristic) objc.ID { return objref.IDOf(_v) }))
 }
-
-func (x *MutableService) asService() *raw.CBService { return &x.inner.CBService }
-
-func (x *MutableService) asAttribute() *raw.CBAttribute { return &x.inner.CBService.CBAttribute }
 
 // MutableServiceable is the interface implemented by [MutableService], for mocking and DI.
 type MutableServiceable interface {
-	Unwrap() *raw.CBMutableService
+	obj.Object
 	WithIncludedServices(items ...ServiceProvider) *MutableService
 	WithCharacteristics(items ...CharacteristicProvider) *MutableService
-	SetIncludedServices(includedServices ...ServiceProvider)
-	SetCharacteristics(characteristics ...CharacteristicProvider)
+	SetIncludedServices(includedServices []*Service)
+	SetCharacteristics(characteristics []*Characteristic)
 }
 
 var _ MutableServiceable = (*MutableService)(nil)

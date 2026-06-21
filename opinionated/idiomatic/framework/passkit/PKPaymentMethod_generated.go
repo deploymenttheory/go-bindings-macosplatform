@@ -5,95 +5,107 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains information about payment methods.
 //
-// PaymentMethod wraps [raw.PKPaymentMethod] with a fluent Go API.
+// PaymentMethod is an idiomatic wrapper over the Objective-C class PKPaymentMethod.
 type PaymentMethod struct {
-	inner *raw.PKPaymentMethod
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKPaymentMethod].
-func (x *PaymentMethod) Unwrap() *raw.PKPaymentMethod { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PaymentMethod) ID() objc.ID { return x.inner.Ptr() }
-
-// PaymentMethodFromID adopts an existing object pointer as a PaymentMethod (nil for 0).
+// PaymentMethodFromID adopts an existing Objective-C object as a PaymentMethod
+// (nil for 0), retaining it and registering a release finalizer.
 func PaymentMethodFromID(id objc.ID) *PaymentMethod {
 	if id == 0 {
 		return nil
 	}
-	return &PaymentMethod{inner: raw.PKPaymentMethodFromID(id)}
+	x := &PaymentMethod{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPaymentMethod creates a new [PaymentMethod].
+// paymentMethodAdopt wraps an Objective-C object that this code just created as a
+// PaymentMethod (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paymentMethodAdopt(id objc.ID) *PaymentMethod {
+	if id == 0 {
+		return nil
+	}
+	x := &PaymentMethod{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PaymentMethod) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PaymentMethod) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PaymentMethod) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPaymentMethod creates a new PaymentMethod.
 func NewPaymentMethod() *PaymentMethod {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentMethod")), objc.RegisterName("new"))
-	return &PaymentMethod{inner: raw.PKPaymentMethodFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKPaymentMethod")), objc.RegisterName("new"))
+	return paymentMethodAdopt(_id)
 }
 
-// DisplayName calls the underlying DisplayName.
 func (x *PaymentMethod) DisplayName() string {
-	_r := x.inner.DisplayName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Network calls the underlying Network.
-func (x *PaymentMethod) Network() string {
-	_r := x.inner.Network()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *PaymentMethod) Network() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("network"))
+	return obj.Wrap(_r)
 }
 
-// Type calls the underlying Type.
-func (x *PaymentMethod) Type() PKPaymentMethodType {
-	return PKPaymentMethodType(x.inner.Type())
+func (x *PaymentMethod) Type() PaymentMethodType {
+	_r := objc.Send[PaymentMethodType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// PaymentPass calls the underlying PaymentPass.
 func (x *PaymentMethod) PaymentPass() *PaymentPass {
-	_r := x.inner.PaymentPass()
-	if _r == nil {
-		return nil
-	}
-	return &PaymentPass{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentPass"))
+	return PaymentPassFromID(_r)
 }
 
-// SecureElementPass calls the underlying SecureElementPass.
 func (x *PaymentMethod) SecureElementPass() *SecureElementPass {
-	_r := x.inner.SecureElementPass()
-	if _r == nil {
-		return nil
-	}
-	return &SecureElementPass{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("secureElementPass"))
+	return SecureElementPassFromID(_r)
 }
 
-// BillingAddress calls the underlying BillingAddress.
-func (x *PaymentMethod) BillingAddress() *contacts.CNContact {
-	return x.inner.BillingAddress()
+func (x *PaymentMethod) BillingAddress() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("billingAddress"))
+	return obj.Wrap(_r)
 }
 
 // PaymentMethodable is the interface implemented by [PaymentMethod], for mocking and DI.
 type PaymentMethodable interface {
-	Unwrap() *raw.PKPaymentMethod
+	obj.Object
 	DisplayName() string
-	Network() string
-	Type() PKPaymentMethodType
+	Network() obj.Object
+	Type() PaymentMethodType
 	PaymentPass() *PaymentPass
 	SecureElementPass() *SecureElementPass
-	BillingAddress() *contacts.CNContact
+	BillingAddress() obj.Object
 }
 
 var _ PaymentMethodable = (*PaymentMethod)(nil)

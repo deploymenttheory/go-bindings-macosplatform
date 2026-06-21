@@ -5,156 +5,98 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that represents text to present over a time range.
 //
-// Caption wraps [raw.AVCaption] with a fluent Go API.
+// Caption is an idiomatic wrapper over the Objective-C class AVCaption.
 type Caption struct {
-	inner *raw.AVCaption
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaption].
-func (x *Caption) Unwrap() *raw.AVCaption { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Caption) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptionFromID adopts an existing object pointer as a Caption (nil for 0).
+// CaptionFromID adopts an existing Objective-C object as a Caption
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptionFromID(id objc.ID) *Caption {
 	if id == 0 {
 		return nil
 	}
-	return &Caption{inner: raw.AVCaptionFromID(id)}
+	x := &Caption{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a caption that contains text and a time range.
-//
-// NewCaptionWithTextTimeRange creates a new [Caption].
-func NewCaptionWithTextTimeRange(text string, timeRange coremedia.CMTimeRange) *Caption {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaption")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithText:timeRange:"), foundation.NSStringStringWithUTF8String(text).Ptr(), timeRange)
-	return &Caption{inner: raw.AVCaptionFromID(_id)}
+// captionAdopt wraps an Objective-C object that this code just created as a
+// Caption (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captionAdopt(id objc.ID) *Caption {
+	if id == 0 {
+		return nil
+	}
+	x := &Caption{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property text @abstract The text content of the caption. @discussion The text may contain any of the line breaking character sequences (LF, CR, or CF+LF) and separating the lines in the presentation. The Apple iTT format supports all Unicode code points allowed in a XML document. Any XML special characters such as '&' are converted to a corresponding character reference syntax when written to the destination file. CEA608 closed captions support the following Unicode characters. Range: U+0020 - U+005F Range: U+0061 - U+007E Range: U+00A1 - U+00A5 Characters: U+00A9, U+00AB, U+00AE, U+00B0, U+00BB, U+00BD, U+00BF Range: U+00C0-U+00C5 Range: U+00C7-U+00CF Range: U+00D1-U+00D6 Range: U+00D8-U+00DC Range: U+00DF-U+00E5 Range: U+00E7-U+00EF Range: U+00F1-U+00FC Range: U+2018-U+2019 Range: U+2018-U+201D Character: U+2022 Range: U+2120-U+2122 Characters: U+2501, U+2503, U+250F, U+2513, U+2517, U+251B, U+2588, U+266A CEA608 closed captions don't support the line breaking character sequences (LF, CR, or CF+LF).
-//
-// Text calls the underlying Text.
+// Description returns the object's -description text.
+func (x *Caption) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Caption) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Caption) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaption creates a new Caption.
+func NewCaption() *Caption {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaption")), objc.RegisterName("new"))
+	return captionAdopt(_id)
+}
+
+// The text content of the caption. The text may contain any of the line breaking character sequences (LF, CR, or CF+LF) and separating the lines in the presentation. The Apple iTT format supports all Unicode code points allowed in a XML document. Any XML special characters such as '&' are converted to a corresponding character reference syntax when written to the destination file. CEA608 closed captions support the following Unicode characters. Range: U+0020 - U+005F Range: U+0061 - U+007E Range: U+00A1 - U+00A5 Characters: U+00A9, U+00AB, U+00AE, U+00B0, U+00BB, U+00BD, U+00BF Range: U+00C0-U+00C5 Range: U+00C7-U+00CF Range: U+00D1-U+00D6 Range: U+00D8-U+00DC Range: U+00DF-U+00E5 Range: U+00E7-U+00EF Range: U+00F1-U+00FC Range: U+2018-U+2019 Range: U+2018-U+201D Character: U+2022 Range: U+2120-U+2122 Characters: U+2501, U+2503, U+250F, U+2513, U+2517, U+251B, U+2588, U+266A CEA608 closed captions don't support the line breaking character sequences (LF, CR, or CF+LF).
 func (x *Caption) Text() string {
-	_r := x.inner.Text()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("text"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property timeRange @abstract The time range during which the caption should be presented. Apple iTT format doesn't allow two captions to have overlapped time range except when the two captions are associated with different regions. CEA608 closed caption time ranges can't start with zero, because the decoder needs some transmission time. CEA608 closed caption time ranges should be aligned with the video frame rate because this is how often the commands are delivered.
-//
-// TimeRange calls the underlying TimeRange.
-func (x *Caption) TimeRange() coremedia.CMTimeRange {
-	return x.inner.TimeRange()
-}
-
-// Returns the text color at the index position.
-//
-// TextColorAtIndexRange calls the underlying TextColorAtIndexRange.
-func (x *Caption) TextColorAtIndexRange(index int, outRange *foundation.NSRange) unsafe.Pointer {
-	return x.inner.TextColorAtIndexRange(index, outRange)
-}
-
-// Returns the background color at the index position.
-//
-// BackgroundColorAtIndexRange calls the underlying BackgroundColorAtIndexRange.
-func (x *Caption) BackgroundColorAtIndexRange(index int, outRange *foundation.NSRange) unsafe.Pointer {
-	return x.inner.BackgroundColorAtIndexRange(index, outRange)
-}
-
-// Returns the font weight and range at the index position.
-//
-// FontWeightAtIndexRange calls the underlying FontWeightAtIndexRange.
-func (x *Caption) FontWeightAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionFontWeight {
-	return AVCaptionFontWeight(x.inner.FontWeightAtIndexRange(index, outRange))
-}
-
-// Returns the font style and range at the index position.
-//
-// FontStyleAtIndexRange calls the underlying FontStyleAtIndexRange.
-func (x *Caption) FontStyleAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionFontStyle {
-	return AVCaptionFontStyle(x.inner.FontStyleAtIndexRange(index, outRange))
-}
-
-// Returns the text decoration at the index position.
-//
-// DecorationAtIndexRange calls the underlying DecorationAtIndexRange.
-func (x *Caption) DecorationAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionDecoration {
-	return AVCaptionDecoration(x.inner.DecorationAtIndexRange(index, outRange))
-}
-
-// Returns the text combine at the index position.
-//
-// TextCombineAtIndexRange calls the underlying TextCombineAtIndexRange.
-func (x *Caption) TextCombineAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionTextCombine {
-	return AVCaptionTextCombine(x.inner.TextCombineAtIndexRange(index, outRange))
-}
-
-// Returns the ruby text at the index position.
-//
-// RubyAtIndexRange calls the underlying RubyAtIndexRange.
-func (x *Caption) RubyAtIndexRange(index int, outRange *foundation.NSRange) *CaptionRuby {
-	_r := x.inner.RubyAtIndexRange(index, outRange)
-	if _r == nil {
-		return nil
-	}
-	return &CaptionRuby{inner: _r}
-}
-
-// @property region @abstract The region where the caption is placed. @discussion It can be nil when the underlying caption format doesn't support or use regions.
-//
-// Region calls the underlying Region.
+// The region where the caption is placed. It can be nil when the underlying caption format doesn't support or use regions.
 func (x *Caption) Region() *CaptionRegion {
-	_r := x.inner.Region()
-	if _r == nil {
-		return nil
-	}
-	return &CaptionRegion{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("region"))
+	return CaptionRegionFromID(_r)
 }
 
-// @property textAlignment @abstract The text alignment within the containing region. @discussion This property throws an exception if a value is set which is not a valid AVCaptionTextAlignment.
-//
-// TextAlignment calls the underlying TextAlignment.
-func (x *Caption) TextAlignment() AVCaptionTextAlignment {
-	return AVCaptionTextAlignment(x.inner.TextAlignment())
+// The text alignment within the containing region. This property throws an exception if a value is set which is not a valid AVCaptionTextAlignment.
+func (x *Caption) TextAlignment() CaptionTextAlignment {
+	_r := objc.Send[CaptionTextAlignment](objref.IDOf(x), objc.RegisterName("textAlignment"))
+	return _r
 }
 
-// Animation calls the underlying Animation.
-func (x *Caption) Animation() AVCaptionAnimation {
-	return AVCaptionAnimation(x.inner.Animation())
+func (x *Caption) Animation() CaptionAnimation {
+	_r := objc.Send[CaptionAnimation](objref.IDOf(x), objc.RegisterName("animation"))
+	return _r
 }
-
-func (x *Caption) asCaption() *raw.AVCaption { return x.inner }
 
 // Captionable is the interface implemented by [Caption], for mocking and DI.
 type Captionable interface {
-	Unwrap() *raw.AVCaption
+	obj.Object
 	Text() string
-	TimeRange() coremedia.CMTimeRange
-	TextColorAtIndexRange(index int, outRange *foundation.NSRange) unsafe.Pointer
-	BackgroundColorAtIndexRange(index int, outRange *foundation.NSRange) unsafe.Pointer
-	FontWeightAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionFontWeight
-	FontStyleAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionFontStyle
-	DecorationAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionDecoration
-	TextCombineAtIndexRange(index int, outRange *foundation.NSRange) AVCaptionTextCombine
-	RubyAtIndexRange(index int, outRange *foundation.NSRange) *CaptionRuby
 	Region() *CaptionRegion
-	TextAlignment() AVCaptionTextAlignment
-	Animation() AVCaptionAnimation
+	TextAlignment() CaptionTextAlignment
+	Animation() CaptionAnimation
 }
 
 var _ Captionable = (*Caption)(nil)

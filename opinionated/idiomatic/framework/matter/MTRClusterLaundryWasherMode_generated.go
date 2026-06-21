@@ -6,61 +6,83 @@ package matter
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Cluster Laundry Washer Mode Attributes and commands for selecting a mode from a list of supported options.
 //
-// MTRClusterLaundryWasherMode wraps [raw.MTRClusterLaundryWasherMode] with a fluent Go API.
+// MTRClusterLaundryWasherMode is an idiomatic wrapper over the Objective-C class MTRClusterLaundryWasherMode.
 type MTRClusterLaundryWasherMode struct {
-	inner *raw.MTRClusterLaundryWasherMode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterLaundryWasherMode].
-func (x *MTRClusterLaundryWasherMode) Unwrap() *raw.MTRClusterLaundryWasherMode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterLaundryWasherMode) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterLaundryWasherModeFromID adopts an existing object pointer as a MTRClusterLaundryWasherMode (nil for 0).
+// MTRClusterLaundryWasherModeFromID adopts an existing Objective-C object as a MTRClusterLaundryWasherMode
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterLaundryWasherModeFromID(id objc.ID) *MTRClusterLaundryWasherMode {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterLaundryWasherMode{inner: raw.MTRClusterLaundryWasherModeFromID(id)}
+	x := &MTRClusterLaundryWasherMode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterLaundryWasherModeAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterLaundryWasherMode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterLaundryWasherModeAdopt(id objc.ID) *MTRClusterLaundryWasherMode {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterLaundryWasherMode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterLaundryWasherMode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterLaundryWasherMode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterLaundryWasherMode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterLaundryWasherModeWithDeviceEndpointIDQueue creates a new [MTRClusterLaundryWasherMode].
-func NewMTRClusterLaundryWasherModeWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterLaundryWasherMode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterLaundryWasherMode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterLaundryWasherMode{inner: raw.MTRClusterLaundryWasherModeFromID(_id)}
+// NewMTRClusterLaundryWasherModeWithDeviceEndpointIDQueue creates a new MTRClusterLaundryWasherMode.
+func NewMTRClusterLaundryWasherModeWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterLaundryWasherMode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterLaundryWasherMode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterLaundryWasherModeAdopt(_id)
 }
 
 // ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterLaundryWasherMode) ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRLaundryWasherModeClusterChangeToModeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRLaundryWasherModeClusterChangeToModeResponseParams, error) {
+func (x *MTRClusterLaundryWasherMode) ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRLaundryWasherModeClusterChangeToModeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRLaundryWasherModeClusterChangeToModeResponseParams, error) {
 	type _result struct {
 		val *MTRLaundryWasherModeClusterChangeToModeResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRLaundryWasherModeClusterChangeToModeResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRLaundryWasherModeClusterChangeToModeResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRLaundryWasherModeClusterChangeToModeResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeToModeWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -70,60 +92,52 @@ func (x *MTRClusterLaundryWasherMode) ChangeToModeWithParamsExpectedValuesExpect
 	}
 }
 
-// ReadAttributeSupportedModesWithParams calls the underlying ReadAttributeSupportedModesWithParams.
-func (x *MTRClusterLaundryWasherMode) ReadAttributeSupportedModesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSupportedModesWithParams(params)
+func (x *MTRClusterLaundryWasherMode) ReadAttributeSupportedModesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedModesWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentModeWithParams calls the underlying ReadAttributeCurrentModeWithParams.
-func (x *MTRClusterLaundryWasherMode) ReadAttributeCurrentModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentModeWithParams(params)
+func (x *MTRClusterLaundryWasherMode) ReadAttributeCurrentModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentModeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterLaundryWasherMode) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterLaundryWasherMode) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterLaundryWasherMode) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterLaundryWasherMode) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterLaundryWasherMode) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterLaundryWasherMode) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterLaundryWasherMode) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+func (x *MTRClusterLaundryWasherMode) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterLaundryWasherMode) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterLaundryWasherMode) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterLaundryWasherMode) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterLaundryWasherMode) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterLaundryWasherModeable is the interface implemented by [MTRClusterLaundryWasherMode], for mocking and DI.
 type MTRClusterLaundryWasherModeable interface {
-	Unwrap() *raw.MTRClusterLaundryWasherMode
-	ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRLaundryWasherModeClusterChangeToModeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRLaundryWasherModeClusterChangeToModeResponseParams, error)
-	ReadAttributeSupportedModesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ChangeToModeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRLaundryWasherModeClusterChangeToModeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRLaundryWasherModeClusterChangeToModeResponseParams, error)
+	ReadAttributeSupportedModesWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentModeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterLaundryWasherModeable = (*MTRClusterLaundryWasherMode)(nil)

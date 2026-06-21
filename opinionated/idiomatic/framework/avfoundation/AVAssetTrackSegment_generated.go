@@ -5,55 +5,73 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a time range segment of an asset track.
 //
-// AssetTrackSegment wraps [raw.AVAssetTrackSegment] with a fluent Go API.
+// AssetTrackSegment is an idiomatic wrapper over the Objective-C class AVAssetTrackSegment.
 type AssetTrackSegment struct {
-	inner *raw.AVAssetTrackSegment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetTrackSegment].
-func (x *AssetTrackSegment) Unwrap() *raw.AVAssetTrackSegment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetTrackSegment) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetTrackSegmentFromID adopts an existing object pointer as a AssetTrackSegment (nil for 0).
+// AssetTrackSegmentFromID adopts an existing Objective-C object as a AssetTrackSegment
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetTrackSegmentFromID(id objc.ID) *AssetTrackSegment {
 	if id == 0 {
 		return nil
 	}
-	return &AssetTrackSegment{inner: raw.AVAssetTrackSegmentFromID(id)}
+	x := &AssetTrackSegment{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAssetTrackSegment creates a new [AssetTrackSegment].
+// assetTrackSegmentAdopt wraps an Objective-C object that this code just created as a
+// AssetTrackSegment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetTrackSegmentAdopt(id objc.ID) *AssetTrackSegment {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetTrackSegment{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetTrackSegment) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetTrackSegment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetTrackSegment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAssetTrackSegment creates a new AssetTrackSegment.
 func NewAssetTrackSegment() *AssetTrackSegment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetTrackSegment")), objc.RegisterName("new"))
-	return &AssetTrackSegment{inner: raw.AVAssetTrackSegmentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetTrackSegment")), objc.RegisterName("new"))
+	return assetTrackSegmentAdopt(_id)
 }
 
-// TimeMapping calls the underlying TimeMapping.
-func (x *AssetTrackSegment) TimeMapping() coremedia.CMTimeMapping {
-	return x.inner.TimeMapping()
-}
-
-// IsEmpty calls the underlying IsEmpty.
 func (x *AssetTrackSegment) IsEmpty() bool {
-	return x.inner.IsEmpty()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEmpty"))
+	return _r
 }
-
-func (x *AssetTrackSegment) asAssetTrackSegment() *raw.AVAssetTrackSegment { return x.inner }
 
 // AssetTrackSegmentable is the interface implemented by [AssetTrackSegment], for mocking and DI.
 type AssetTrackSegmentable interface {
-	Unwrap() *raw.AVAssetTrackSegment
-	TimeMapping() coremedia.CMTimeMapping
+	obj.Object
 	IsEmpty() bool
 }
 

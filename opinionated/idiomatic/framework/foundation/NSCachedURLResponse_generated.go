@@ -5,103 +5,115 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A cached response to a URL request.
 //
-// CachedURLResponse wraps [raw.NSCachedURLResponse] with a fluent Go API.
+// CachedURLResponse is an idiomatic wrapper over the Objective-C class NSCachedURLResponse.
 type CachedURLResponse struct {
-	inner *raw.NSCachedURLResponse
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCachedURLResponse].
-func (x *CachedURLResponse) Unwrap() *raw.NSCachedURLResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CachedURLResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// CachedURLResponseFromID adopts an existing object pointer as a CachedURLResponse (nil for 0).
+// CachedURLResponseFromID adopts an existing Objective-C object as a CachedURLResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func CachedURLResponseFromID(id objc.ID) *CachedURLResponse {
 	if id == 0 {
 		return nil
 	}
-	return &CachedURLResponse{inner: raw.NSCachedURLResponseFromID(id)}
-}
-
-// @method initWithResponse:data @abstract Initializes an NSCachedURLResponse with the given response and data. @discussion A default NSURLCacheStoragePolicy is used for NSCachedURLResponse objects initialized with this method: NSURLCacheStorageAllowed. @param response a NSURLResponse object. @param data an NSData object representing the URL content corresponding to the given response. @result an initialized NSCachedURLResponse.
-//
-// NewCachedURLResponseWithResponseData creates a new [CachedURLResponse].
-func NewCachedURLResponseWithResponseData(response *raw.NSURLResponse, data *raw.NSData) *CachedURLResponse {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCachedURLResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponse:data:"), response.Ptr(), data.Ptr())
-	return &CachedURLResponse{inner: raw.NSCachedURLResponseFromID(_id)}
-}
-
-// @method initWithResponse:data:userInfo:storagePolicy: @abstract Initializes an NSCachedURLResponse with the given response, data, user-info dictionary, and storage policy. @param response a NSURLResponse object. @param data an NSData object representing the URL content corresponding to the given response. @param userInfo a dictionary user-specified information to be stored with the NSCachedURLResponse. @param storagePolicy an NSURLCacheStoragePolicy constant. @result an initialized NSCachedURLResponse.
-//
-// NewCachedURLResponseWithResponseDataUserInfoStoragePolicy creates a new [CachedURLResponse].
-func NewCachedURLResponseWithResponseDataUserInfoStoragePolicy(response *raw.NSURLResponse, data *raw.NSData, userInfo purego.IDer, storagePolicy NSURLCacheStoragePolicy) *CachedURLResponse {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCachedURLResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponse:data:userInfo:storagePolicy:"), response.Ptr(), data.Ptr(), userInfo.ID(), raw.NSURLCacheStoragePolicy(storagePolicy))
-	return &CachedURLResponse{inner: raw.NSCachedURLResponseFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *CachedURLResponse) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CachedURLResponse {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &CachedURLResponse{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @abstract Returns the response wrapped by this instance. @result The response wrapped by this instance.
+// cachedURLResponseAdopt wraps an Objective-C object that this code just created as a
+// CachedURLResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cachedURLResponseAdopt(id objc.ID) *CachedURLResponse {
+	if id == 0 {
+		return nil
+	}
+	x := &CachedURLResponse{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CachedURLResponse) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CachedURLResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CachedURLResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// Initializes an NSCachedURLResponse with the given response and data. A default NSURLCacheStoragePolicy is used for NSCachedURLResponse objects initialized with this method: NSURLCacheStorageAllowed.
 //
-// Response calls the underlying Response.
+// NewCachedURLResponseWithResponseData creates a new CachedURLResponse.
+func NewCachedURLResponseWithResponseData(response *URLResponse, data *Data) *CachedURLResponse {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCachedURLResponse")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponse:data:"), objref.IDOf(response), objref.IDOf(data))
+	return cachedURLResponseAdopt(_id)
+}
+
+// Initializes an NSCachedURLResponse with the given response, data, user-info dictionary, and storage policy.
+//
+// NewCachedURLResponseWithResponseDataUserInfoStoragePolicy creates a new CachedURLResponse.
+func NewCachedURLResponseWithResponseDataUserInfoStoragePolicy(response *URLResponse, data *Data, userInfo obj.Object, storagePolicy URLCacheStoragePolicy) *CachedURLResponse {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCachedURLResponse")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponse:data:userInfo:storagePolicy:"), objref.IDOf(response), objref.IDOf(data), objref.IDOf(userInfo), storagePolicy)
+	return cachedURLResponseAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *CachedURLResponse) WithScriptingProperties(scriptingProperties obj.Object) *CachedURLResponse {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// Returns the response wrapped by this instance.
 func (x *CachedURLResponse) Response() *URLResponse {
-	_r := x.inner.Response()
-	if _r == nil {
-		return nil
-	}
-	return &URLResponse{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("response"))
+	return URLResponseFromID(_r)
 }
 
-// @abstract Returns the data of the receiver. @result The data of the receiver.
-//
-// Data calls the underlying Data.
+// Returns the data of the receiver.
 func (x *CachedURLResponse) Data() *Data {
-	_r := x.inner.Data()
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return DataFromID(_r)
 }
 
-// @abstract Returns the userInfo dictionary of the receiver. @result The userInfo dictionary of the receiver.
-//
-// UserInfo calls the underlying UserInfo.
-func (x *CachedURLResponse) UserInfo() *raw.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.UserInfo()
+// Returns the userInfo dictionary of the receiver.
+func (x *CachedURLResponse) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+	return obj.Wrap(_r)
 }
 
-// @abstract Returns the NSURLCacheStoragePolicy constant of the receiver. @result The NSURLCacheStoragePolicy constant of the receiver.
-//
-// StoragePolicy calls the underlying StoragePolicy.
-func (x *CachedURLResponse) StoragePolicy() NSURLCacheStoragePolicy {
-	return NSURLCacheStoragePolicy(x.inner.StoragePolicy())
+// Returns the NSURLCacheStoragePolicy constant of the receiver.
+func (x *CachedURLResponse) StoragePolicy() URLCacheStoragePolicy {
+	_r := objc.Send[URLCacheStoragePolicy](objref.IDOf(x), objc.RegisterName("storagePolicy"))
+	return _r
 }
-
-func (x *CachedURLResponse) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // CachedURLResponseable is the interface implemented by [CachedURLResponse], for mocking and DI.
 type CachedURLResponseable interface {
-	Unwrap() *raw.NSCachedURLResponse
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CachedURLResponse
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *CachedURLResponse
 	Response() *URLResponse
 	Data() *Data
-	UserInfo() *raw.NSDictionary[objc.ID, objc.ID]
-	StoragePolicy() NSURLCacheStoragePolicy
+	UserInfo() obj.Object
+	StoragePolicy() URLCacheStoragePolicy
 }
 
 var _ CachedURLResponseable = (*CachedURLResponse)(nil)

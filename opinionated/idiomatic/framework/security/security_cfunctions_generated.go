@@ -5,3280 +5,1019 @@
 package security
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/security"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// AuthorizationCopyInfo calls [raw.AuthorizationCopyInfo] (C function AuthorizationCopyInfo).
-func AuthorizationCopyInfo(authorization unsafe.Pointer, tag string, info *raw.AuthorizationItemSet) int {
-	return raw.AuthorizationCopyInfo(authorization, tag, info)
-}
+var _fnCMSDecoderGetTypeID func() int
 
-// AuthorizationCopyPrivilegedReference calls [raw.AuthorizationCopyPrivilegedReference] (C function AuthorizationCopyPrivilegedReference).
-func AuthorizationCopyPrivilegedReference(authorization unsafe.Pointer, flags AuthorizationFlags) int {
-	return raw.AuthorizationCopyPrivilegedReference(authorization, raw.AuthorizationFlags(flags))
-}
-
-// AuthorizationCopyRights calls [raw.AuthorizationCopyRights] (C function AuthorizationCopyRights).
-func AuthorizationCopyRights(authorization unsafe.Pointer, rights *raw.AuthorizationItemSet, environment *raw.AuthorizationItemSet, flags AuthorizationFlags, authorizedRights *raw.AuthorizationItemSet) int {
-	return raw.AuthorizationCopyRights(authorization, rights, environment, raw.AuthorizationFlags(flags), authorizedRights)
-}
-
-// AuthorizationCopyRightsAsync calls [raw.AuthorizationCopyRightsAsync] (C function AuthorizationCopyRightsAsync).
-func AuthorizationCopyRightsAsync(authorization unsafe.Pointer, rights *raw.AuthorizationItemSet, environment *raw.AuthorizationItemSet, flags AuthorizationFlags, callbackBlock func(int, *raw.AuthorizationItemSet)) {
-	raw.AuthorizationCopyRightsAsync(authorization, rights, environment, raw.AuthorizationFlags(flags), callbackBlock)
-}
-
-// AuthorizationCreate calls [raw.AuthorizationCreate] (C function AuthorizationCreate).
-func AuthorizationCreate(rights *raw.AuthorizationItemSet, environment *raw.AuthorizationItemSet, flags AuthorizationFlags, authorization unsafe.Pointer) int {
-	return raw.AuthorizationCreate(rights, environment, raw.AuthorizationFlags(flags), authorization)
-}
-
-// AuthorizationCreateFromExternalForm calls [raw.AuthorizationCreateFromExternalForm] (C function AuthorizationCreateFromExternalForm).
-func AuthorizationCreateFromExternalForm(extForm *raw.AuthorizationExternalForm, authorization unsafe.Pointer) int {
-	return raw.AuthorizationCreateFromExternalForm(extForm, authorization)
-}
-
-// AuthorizationExecuteWithPrivileges calls [raw.AuthorizationExecuteWithPrivileges] (C function AuthorizationExecuteWithPrivileges).
-func AuthorizationExecuteWithPrivileges(authorization unsafe.Pointer, pathToTool string, options AuthorizationFlags, arguments unsafe.Pointer, communicationsPipe unsafe.Pointer) int {
-	return raw.AuthorizationExecuteWithPrivileges(authorization, pathToTool, raw.AuthorizationFlags(options), arguments, communicationsPipe)
-}
-
-// AuthorizationFree calls [raw.AuthorizationFree] (C function AuthorizationFree).
-func AuthorizationFree(authorization unsafe.Pointer, flags AuthorizationFlags) int {
-	return raw.AuthorizationFree(authorization, raw.AuthorizationFlags(flags))
-}
-
-// AuthorizationMakeExternalForm calls [raw.AuthorizationMakeExternalForm] (C function AuthorizationMakeExternalForm).
-func AuthorizationMakeExternalForm(authorization unsafe.Pointer, extForm *raw.AuthorizationExternalForm) int {
-	return raw.AuthorizationMakeExternalForm(authorization, extForm)
-}
-
-// AuthorizationRightRemove calls [raw.AuthorizationRightRemove] (C function AuthorizationRightRemove).
-func AuthorizationRightRemove(authRef unsafe.Pointer, rightName string) int {
-	return raw.AuthorizationRightRemove(authRef, rightName)
-}
-
-// AuthorizationRightSet calls [raw.AuthorizationRightSet] (C function AuthorizationRightSet).
-func AuthorizationRightSet(authRef unsafe.Pointer, rightName string, rightDefinition unsafe.Pointer, descriptionKey unsafe.Pointer, bundle unsafe.Pointer, localeTableName unsafe.Pointer) int {
-	return raw.AuthorizationRightSet(authRef, rightName, rightDefinition, descriptionKey, bundle, localeTableName)
-}
-
-// CMSDecoderCopyAllCerts calls [raw.CMSDecoderCopyAllCerts] (C function CMSDecoderCopyAllCerts).
-func CMSDecoderCopyAllCerts(cmsDecoder unsafe.Pointer, certsOut unsafe.Pointer) int {
-	return raw.CMSDecoderCopyAllCerts(cmsDecoder, certsOut)
-}
-
-// CMSDecoderCopyContent calls [raw.CMSDecoderCopyContent] (C function CMSDecoderCopyContent).
-func CMSDecoderCopyContent(cmsDecoder unsafe.Pointer, contentOut unsafe.Pointer) int {
-	return raw.CMSDecoderCopyContent(cmsDecoder, contentOut)
-}
-
-// CMSDecoderCopyDetachedContent calls [raw.CMSDecoderCopyDetachedContent] (C function CMSDecoderCopyDetachedContent).
-func CMSDecoderCopyDetachedContent(cmsDecoder unsafe.Pointer, detachedContentOut unsafe.Pointer) int {
-	return raw.CMSDecoderCopyDetachedContent(cmsDecoder, detachedContentOut)
-}
-
-// CMSDecoderCopyEncapsulatedContentType calls [raw.CMSDecoderCopyEncapsulatedContentType] (C function CMSDecoderCopyEncapsulatedContentType).
-func CMSDecoderCopyEncapsulatedContentType(cmsDecoder unsafe.Pointer, eContentTypeOut unsafe.Pointer) int {
-	return raw.CMSDecoderCopyEncapsulatedContentType(cmsDecoder, eContentTypeOut)
-}
-
-// CMSDecoderCopySignerCert calls [raw.CMSDecoderCopySignerCert] (C function CMSDecoderCopySignerCert).
-func CMSDecoderCopySignerCert(cmsDecoder unsafe.Pointer, signerIndex uint, signerCertOut unsafe.Pointer) int {
-	return raw.CMSDecoderCopySignerCert(cmsDecoder, signerIndex, signerCertOut)
-}
-
-// CMSDecoderCopySignerEmailAddress calls [raw.CMSDecoderCopySignerEmailAddress] (C function CMSDecoderCopySignerEmailAddress).
-func CMSDecoderCopySignerEmailAddress(cmsDecoder unsafe.Pointer, signerIndex uint, signerEmailAddressOut unsafe.Pointer) int {
-	return raw.CMSDecoderCopySignerEmailAddress(cmsDecoder, signerIndex, signerEmailAddressOut)
-}
-
-// CMSDecoderCopySignerSigningTime calls [raw.CMSDecoderCopySignerSigningTime] (C function CMSDecoderCopySignerSigningTime).
-func CMSDecoderCopySignerSigningTime(cmsDecoder unsafe.Pointer, signerIndex uint, signingTime *float64) int {
-	return raw.CMSDecoderCopySignerSigningTime(cmsDecoder, signerIndex, signingTime)
-}
-
-// CMSDecoderCopySignerStatus calls [raw.CMSDecoderCopySignerStatus] (C function CMSDecoderCopySignerStatus).
-func CMSDecoderCopySignerStatus(cmsDecoder unsafe.Pointer, signerIndex uint, policyOrArray unsafe.Pointer, evaluateSecTrust uint8, signerStatusOut *CMSSignerStatus, secTrustOut unsafe.Pointer, certVerifyResultCodeOut *int) int {
-	var _signerStatusOut raw.CMSSignerStatus
-	_ret := raw.CMSDecoderCopySignerStatus(cmsDecoder, signerIndex, policyOrArray, evaluateSecTrust, &_signerStatusOut, secTrustOut, certVerifyResultCodeOut)
-	if signerStatusOut != nil {
-		*signerStatusOut = CMSSignerStatus(_signerStatusOut)
+// CMSDecoderGetTypeID calls the Security framework function CMSDecoderGetTypeID.
+func CMSDecoderGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSDecoderGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSDecoderGetTypeID, _lib, "CMSDecoderGetTypeID")
 	}
-	return _ret
+	return _fnCMSDecoderGetTypeID()
 }
 
-// CMSDecoderCopySignerTimestamp calls [raw.CMSDecoderCopySignerTimestamp] (C function CMSDecoderCopySignerTimestamp).
-func CMSDecoderCopySignerTimestamp(cmsDecoder unsafe.Pointer, signerIndex uint, timestamp *float64) int {
-	return raw.CMSDecoderCopySignerTimestamp(cmsDecoder, signerIndex, timestamp)
-}
+var _fnCMSEncoderGetTypeID func() int
 
-// CMSDecoderCopySignerTimestampCertificates calls [raw.CMSDecoderCopySignerTimestampCertificates] (C function CMSDecoderCopySignerTimestampCertificates).
-func CMSDecoderCopySignerTimestampCertificates(cmsDecoder unsafe.Pointer, signerIndex uint, certificateRefs unsafe.Pointer) int {
-	return raw.CMSDecoderCopySignerTimestampCertificates(cmsDecoder, signerIndex, certificateRefs)
-}
-
-// CMSDecoderCopySignerTimestampWithPolicy calls [raw.CMSDecoderCopySignerTimestampWithPolicy] (C function CMSDecoderCopySignerTimestampWithPolicy).
-func CMSDecoderCopySignerTimestampWithPolicy(cmsDecoder unsafe.Pointer, timeStampPolicy unsafe.Pointer, signerIndex uint, timestamp *float64) int {
-	return raw.CMSDecoderCopySignerTimestampWithPolicy(cmsDecoder, timeStampPolicy, signerIndex, timestamp)
-}
-
-// CMSDecoderCreate calls [raw.CMSDecoderCreate] (C function CMSDecoderCreate).
-func CMSDecoderCreate(cmsDecoderOut unsafe.Pointer) int {
-	return raw.CMSDecoderCreate(cmsDecoderOut)
-}
-
-// CMSDecoderFinalizeMessage calls [raw.CMSDecoderFinalizeMessage] (C function CMSDecoderFinalizeMessage).
-func CMSDecoderFinalizeMessage(cmsDecoder unsafe.Pointer) int {
-	return raw.CMSDecoderFinalizeMessage(cmsDecoder)
-}
-
-// CMSDecoderGetNumSigners calls [raw.CMSDecoderGetNumSigners] (C function CMSDecoderGetNumSigners).
-func CMSDecoderGetNumSigners(cmsDecoder unsafe.Pointer, numSignersOut *uint) int {
-	return raw.CMSDecoderGetNumSigners(cmsDecoder, numSignersOut)
-}
-
-// CMSDecoderGetTypeID calls [raw.CMSDecoderGetTypeID] (C function CMSDecoderGetTypeID).
-func CMSDecoderGetTypeID() uint {
-	return raw.CMSDecoderGetTypeID()
-}
-
-// CMSDecoderIsContentEncrypted calls [raw.CMSDecoderIsContentEncrypted] (C function CMSDecoderIsContentEncrypted).
-func CMSDecoderIsContentEncrypted(cmsDecoder unsafe.Pointer, isEncryptedOut *uint8) int {
-	return raw.CMSDecoderIsContentEncrypted(cmsDecoder, isEncryptedOut)
-}
-
-// CMSDecoderSetDetachedContent calls [raw.CMSDecoderSetDetachedContent] (C function CMSDecoderSetDetachedContent).
-func CMSDecoderSetDetachedContent(cmsDecoder unsafe.Pointer, detachedContent unsafe.Pointer) int {
-	return raw.CMSDecoderSetDetachedContent(cmsDecoder, detachedContent)
-}
-
-// CMSDecoderSetSearchKeychain calls [raw.CMSDecoderSetSearchKeychain] (C function CMSDecoderSetSearchKeychain).
-func CMSDecoderSetSearchKeychain(cmsDecoder unsafe.Pointer, keychainOrArray unsafe.Pointer) int {
-	return raw.CMSDecoderSetSearchKeychain(cmsDecoder, keychainOrArray)
-}
-
-// CMSDecoderUpdateMessage calls [raw.CMSDecoderUpdateMessage] (C function CMSDecoderUpdateMessage).
-func CMSDecoderUpdateMessage(cmsDecoder unsafe.Pointer, msgBytes unsafe.Pointer, msgBytesLen uint) int {
-	return raw.CMSDecoderUpdateMessage(cmsDecoder, msgBytes, msgBytesLen)
-}
-
-// CMSEncode calls [raw.CMSEncode] (C function CMSEncode).
-func CMSEncode(signers unsafe.Pointer, recipients unsafe.Pointer, eContentType *raw.CssmData, detachedContent uint8, signedAttributes CMSSignedAttributes, content unsafe.Pointer, contentLen uint, encodedContentOut unsafe.Pointer) int {
-	return raw.CMSEncode(signers, recipients, eContentType, detachedContent, raw.CMSSignedAttributes(signedAttributes), content, contentLen, encodedContentOut)
-}
-
-// CMSEncodeContent calls [raw.CMSEncodeContent] (C function CMSEncodeContent).
-func CMSEncodeContent(signers unsafe.Pointer, recipients unsafe.Pointer, eContentTypeOID unsafe.Pointer, detachedContent uint8, signedAttributes CMSSignedAttributes, content unsafe.Pointer, contentLen uint, encodedContentOut unsafe.Pointer) int {
-	return raw.CMSEncodeContent(signers, recipients, eContentTypeOID, detachedContent, raw.CMSSignedAttributes(signedAttributes), content, contentLen, encodedContentOut)
-}
-
-// CMSEncoderAddRecipients calls [raw.CMSEncoderAddRecipients] (C function CMSEncoderAddRecipients).
-func CMSEncoderAddRecipients(cmsEncoder unsafe.Pointer, recipientOrArray unsafe.Pointer) int {
-	return raw.CMSEncoderAddRecipients(cmsEncoder, recipientOrArray)
-}
-
-// CMSEncoderAddSignedAttributes calls [raw.CMSEncoderAddSignedAttributes] (C function CMSEncoderAddSignedAttributes).
-func CMSEncoderAddSignedAttributes(cmsEncoder unsafe.Pointer, signedAttributes CMSSignedAttributes) int {
-	return raw.CMSEncoderAddSignedAttributes(cmsEncoder, raw.CMSSignedAttributes(signedAttributes))
-}
-
-// CMSEncoderAddSigners calls [raw.CMSEncoderAddSigners] (C function CMSEncoderAddSigners).
-func CMSEncoderAddSigners(cmsEncoder unsafe.Pointer, signerOrArray unsafe.Pointer) int {
-	return raw.CMSEncoderAddSigners(cmsEncoder, signerOrArray)
-}
-
-// CMSEncoderAddSupportingCerts calls [raw.CMSEncoderAddSupportingCerts] (C function CMSEncoderAddSupportingCerts).
-func CMSEncoderAddSupportingCerts(cmsEncoder unsafe.Pointer, certOrArray unsafe.Pointer) int {
-	return raw.CMSEncoderAddSupportingCerts(cmsEncoder, certOrArray)
-}
-
-// CMSEncoderCopyEncapsulatedContentType calls [raw.CMSEncoderCopyEncapsulatedContentType] (C function CMSEncoderCopyEncapsulatedContentType).
-func CMSEncoderCopyEncapsulatedContentType(cmsEncoder unsafe.Pointer, eContentTypeOut unsafe.Pointer) int {
-	return raw.CMSEncoderCopyEncapsulatedContentType(cmsEncoder, eContentTypeOut)
-}
-
-// CMSEncoderCopyEncodedContent calls [raw.CMSEncoderCopyEncodedContent] (C function CMSEncoderCopyEncodedContent).
-func CMSEncoderCopyEncodedContent(cmsEncoder unsafe.Pointer, encodedContentOut unsafe.Pointer) int {
-	return raw.CMSEncoderCopyEncodedContent(cmsEncoder, encodedContentOut)
-}
-
-// CMSEncoderCopyRecipients calls [raw.CMSEncoderCopyRecipients] (C function CMSEncoderCopyRecipients).
-func CMSEncoderCopyRecipients(cmsEncoder unsafe.Pointer, recipientsOut unsafe.Pointer) int {
-	return raw.CMSEncoderCopyRecipients(cmsEncoder, recipientsOut)
-}
-
-// CMSEncoderCopySignerTimestamp calls [raw.CMSEncoderCopySignerTimestamp] (C function CMSEncoderCopySignerTimestamp).
-func CMSEncoderCopySignerTimestamp(cmsEncoder unsafe.Pointer, signerIndex uint, timestamp *float64) int {
-	return raw.CMSEncoderCopySignerTimestamp(cmsEncoder, signerIndex, timestamp)
-}
-
-// CMSEncoderCopySignerTimestampWithPolicy calls [raw.CMSEncoderCopySignerTimestampWithPolicy] (C function CMSEncoderCopySignerTimestampWithPolicy).
-func CMSEncoderCopySignerTimestampWithPolicy(cmsEncoder unsafe.Pointer, timeStampPolicy unsafe.Pointer, signerIndex uint, timestamp *float64) int {
-	return raw.CMSEncoderCopySignerTimestampWithPolicy(cmsEncoder, timeStampPolicy, signerIndex, timestamp)
-}
-
-// CMSEncoderCopySigners calls [raw.CMSEncoderCopySigners] (C function CMSEncoderCopySigners).
-func CMSEncoderCopySigners(cmsEncoder unsafe.Pointer, signersOut unsafe.Pointer) int {
-	return raw.CMSEncoderCopySigners(cmsEncoder, signersOut)
-}
-
-// CMSEncoderCopySupportingCerts calls [raw.CMSEncoderCopySupportingCerts] (C function CMSEncoderCopySupportingCerts).
-func CMSEncoderCopySupportingCerts(cmsEncoder unsafe.Pointer, certsOut unsafe.Pointer) int {
-	return raw.CMSEncoderCopySupportingCerts(cmsEncoder, certsOut)
-}
-
-// CMSEncoderCreate calls [raw.CMSEncoderCreate] (C function CMSEncoderCreate).
-func CMSEncoderCreate(cmsEncoderOut unsafe.Pointer) int {
-	return raw.CMSEncoderCreate(cmsEncoderOut)
-}
-
-// CMSEncoderGetCertificateChainMode calls [raw.CMSEncoderGetCertificateChainMode] (C function CMSEncoderGetCertificateChainMode).
-func CMSEncoderGetCertificateChainMode(cmsEncoder unsafe.Pointer, chainModeOut *CMSCertificateChainMode) int {
-	var _chainModeOut raw.CMSCertificateChainMode
-	_ret := raw.CMSEncoderGetCertificateChainMode(cmsEncoder, &_chainModeOut)
-	if chainModeOut != nil {
-		*chainModeOut = CMSCertificateChainMode(_chainModeOut)
+// CMSEncoderGetTypeID calls the Security framework function CMSEncoderGetTypeID.
+func CMSEncoderGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSEncoderGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSEncoderGetTypeID, _lib, "CMSEncoderGetTypeID")
 	}
-	return _ret
+	return _fnCMSEncoderGetTypeID()
 }
 
-// CMSEncoderGetHasDetachedContent calls [raw.CMSEncoderGetHasDetachedContent] (C function CMSEncoderGetHasDetachedContent).
-func CMSEncoderGetHasDetachedContent(cmsEncoder unsafe.Pointer, detachedContentOut *uint8) int {
-	return raw.CMSEncoderGetHasDetachedContent(cmsEncoder, detachedContentOut)
-}
+var _fnCSSM_CL_CertAbortCache func(int, int) int32
 
-// CMSEncoderGetTypeID calls [raw.CMSEncoderGetTypeID] (C function CMSEncoderGetTypeID).
-func CMSEncoderGetTypeID() uint {
-	return raw.CMSEncoderGetTypeID()
-}
-
-// CMSEncoderSetCertificateChainMode calls [raw.CMSEncoderSetCertificateChainMode] (C function CMSEncoderSetCertificateChainMode).
-func CMSEncoderSetCertificateChainMode(cmsEncoder unsafe.Pointer, chainMode CMSCertificateChainMode) int {
-	return raw.CMSEncoderSetCertificateChainMode(cmsEncoder, raw.CMSCertificateChainMode(chainMode))
-}
-
-// CMSEncoderSetEncapsulatedContentType calls [raw.CMSEncoderSetEncapsulatedContentType] (C function CMSEncoderSetEncapsulatedContentType).
-func CMSEncoderSetEncapsulatedContentType(cmsEncoder unsafe.Pointer, eContentType *raw.CssmData) int {
-	return raw.CMSEncoderSetEncapsulatedContentType(cmsEncoder, eContentType)
-}
-
-// CMSEncoderSetEncapsulatedContentTypeOID calls [raw.CMSEncoderSetEncapsulatedContentTypeOID] (C function CMSEncoderSetEncapsulatedContentTypeOID).
-func CMSEncoderSetEncapsulatedContentTypeOID(cmsEncoder unsafe.Pointer, eContentTypeOID unsafe.Pointer) int {
-	return raw.CMSEncoderSetEncapsulatedContentTypeOID(cmsEncoder, eContentTypeOID)
-}
-
-// CMSEncoderSetHasDetachedContent calls [raw.CMSEncoderSetHasDetachedContent] (C function CMSEncoderSetHasDetachedContent).
-func CMSEncoderSetHasDetachedContent(cmsEncoder unsafe.Pointer, detachedContent uint8) int {
-	return raw.CMSEncoderSetHasDetachedContent(cmsEncoder, detachedContent)
-}
-
-// CMSEncoderSetSignerAlgorithm calls [raw.CMSEncoderSetSignerAlgorithm] (C function CMSEncoderSetSignerAlgorithm).
-func CMSEncoderSetSignerAlgorithm(cmsEncoder unsafe.Pointer, digestAlgorithm unsafe.Pointer) int {
-	return raw.CMSEncoderSetSignerAlgorithm(cmsEncoder, digestAlgorithm)
-}
-
-// CMSEncoderUpdateContent calls [raw.CMSEncoderUpdateContent] (C function CMSEncoderUpdateContent).
-func CMSEncoderUpdateContent(cmsEncoder unsafe.Pointer, content unsafe.Pointer, contentLen uint) int {
-	return raw.CMSEncoderUpdateContent(cmsEncoder, content, contentLen)
-}
-
-// CSSM_AC_AuthCompute calls [raw.CSSM_AC_AuthCompute] (C function CSSM_AC_AuthCompute).
-func CSSM_AC_AuthCompute(aCHandle int, baseAuthorizations *raw.CssmTuplegroup, credentials *raw.CssmTuplegroup, numberOfRequestors uint32, requestors *raw.CssmList, requestedAuthorizationPeriod *raw.CssmList, requestedAuthorization *raw.CssmList, authorizationResult *raw.CssmTuplegroup) int32 {
-	return raw.CSSM_AC_AuthCompute(aCHandle, baseAuthorizations, credentials, numberOfRequestors, requestors, requestedAuthorizationPeriod, requestedAuthorization, authorizationResult)
-}
-
-// CSSM_AC_PassThrough calls [raw.CSSM_AC_PassThrough] (C function CSSM_AC_PassThrough).
-func CSSM_AC_PassThrough(aCHandle int, tPHandle int, cLHandle int, cCHandle uint64, dBList *raw.CssmDlDbList, passThroughId uint32, inputParams unsafe.Pointer, outputParams unsafe.Pointer) int32 {
-	return raw.CSSM_AC_PassThrough(aCHandle, tPHandle, cLHandle, cCHandle, dBList, passThroughId, inputParams, outputParams)
-}
-
-// CSSM_CL_CertAbortCache calls [raw.CSSM_CL_CertAbortCache] (C function CSSM_CL_CertAbortCache).
+// CSSM_CL_CertAbortCache calls the Security framework function CSSM_CL_CertAbortCache.
 func CSSM_CL_CertAbortCache(cLHandle int, certHandle int) int32 {
-	return raw.CSSM_CL_CertAbortCache(cLHandle, certHandle)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CertAbortCache == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CertAbortCache, _lib, "CSSM_CL_CertAbortCache")
+	}
+	return _fnCSSM_CL_CertAbortCache(cLHandle, certHandle)
 }
 
-// CSSM_CL_CertAbortQuery calls [raw.CSSM_CL_CertAbortQuery] (C function CSSM_CL_CertAbortQuery).
+var _fnCSSM_CL_CertAbortQuery func(int, int) int32
+
+// CSSM_CL_CertAbortQuery calls the Security framework function CSSM_CL_CertAbortQuery.
 func CSSM_CL_CertAbortQuery(cLHandle int, resultsHandle int) int32 {
-	return raw.CSSM_CL_CertAbortQuery(cLHandle, resultsHandle)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CertAbortQuery == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CertAbortQuery, _lib, "CSSM_CL_CertAbortQuery")
+	}
+	return _fnCSSM_CL_CertAbortQuery(cLHandle, resultsHandle)
 }
 
-// CSSM_CL_CertCache calls [raw.CSSM_CL_CertCache] (C function CSSM_CL_CertCache).
-func CSSM_CL_CertCache(cLHandle int, cert *raw.CssmData, certHandle *int) int32 {
-	return raw.CSSM_CL_CertCache(cLHandle, cert, certHandle)
-}
+var _fnCSSM_CL_CrlAbortCache func(int, int) int32
 
-// CSSM_CL_CertCreateTemplate calls [raw.CSSM_CL_CertCreateTemplate] (C function CSSM_CL_CertCreateTemplate).
-func CSSM_CL_CertCreateTemplate(cLHandle int, numberOfFields uint32, certFields *raw.CssmField, certTemplate *raw.CssmData) int32 {
-	return raw.CSSM_CL_CertCreateTemplate(cLHandle, numberOfFields, certFields, certTemplate)
-}
-
-// CSSM_CL_CertDescribeFormat calls [raw.CSSM_CL_CertDescribeFormat] (C function CSSM_CL_CertDescribeFormat).
-func CSSM_CL_CertDescribeFormat(cLHandle int, numberOfFields *uint32, oidList **raw.CssmData) int32 {
-	return raw.CSSM_CL_CertDescribeFormat(cLHandle, numberOfFields, oidList)
-}
-
-// CSSM_CL_CertGetAllFields calls [raw.CSSM_CL_CertGetAllFields] (C function CSSM_CL_CertGetAllFields).
-func CSSM_CL_CertGetAllFields(cLHandle int, cert *raw.CssmData, numberOfFields *uint32, certFields **raw.CssmField) int32 {
-	return raw.CSSM_CL_CertGetAllFields(cLHandle, cert, numberOfFields, certFields)
-}
-
-// CSSM_CL_CertGetAllTemplateFields calls [raw.CSSM_CL_CertGetAllTemplateFields] (C function CSSM_CL_CertGetAllTemplateFields).
-func CSSM_CL_CertGetAllTemplateFields(cLHandle int, certTemplate *raw.CssmData, numberOfFields *uint32, certFields **raw.CssmField) int32 {
-	return raw.CSSM_CL_CertGetAllTemplateFields(cLHandle, certTemplate, numberOfFields, certFields)
-}
-
-// CSSM_CL_CertGetFirstCachedFieldValue calls [raw.CSSM_CL_CertGetFirstCachedFieldValue] (C function CSSM_CL_CertGetFirstCachedFieldValue).
-func CSSM_CL_CertGetFirstCachedFieldValue(cLHandle int, certHandle int, certField *raw.CssmData, resultsHandle *int, numberOfMatchedFields *uint32, value **raw.CssmData) int32 {
-	return raw.CSSM_CL_CertGetFirstCachedFieldValue(cLHandle, certHandle, certField, resultsHandle, numberOfMatchedFields, value)
-}
-
-// CSSM_CL_CertGetFirstFieldValue calls [raw.CSSM_CL_CertGetFirstFieldValue] (C function CSSM_CL_CertGetFirstFieldValue).
-func CSSM_CL_CertGetFirstFieldValue(cLHandle int, cert *raw.CssmData, certField *raw.CssmData, resultsHandle *int, numberOfMatchedFields *uint32, value **raw.CssmData) int32 {
-	return raw.CSSM_CL_CertGetFirstFieldValue(cLHandle, cert, certField, resultsHandle, numberOfMatchedFields, value)
-}
-
-// CSSM_CL_CertGetKeyInfo calls [raw.CSSM_CL_CertGetKeyInfo] (C function CSSM_CL_CertGetKeyInfo).
-func CSSM_CL_CertGetKeyInfo(cLHandle int, cert *raw.CssmData, key **raw.CssmKey) int32 {
-	return raw.CSSM_CL_CertGetKeyInfo(cLHandle, cert, key)
-}
-
-// CSSM_CL_CertGetNextCachedFieldValue calls [raw.CSSM_CL_CertGetNextCachedFieldValue] (C function CSSM_CL_CertGetNextCachedFieldValue).
-func CSSM_CL_CertGetNextCachedFieldValue(cLHandle int, resultsHandle int, value **raw.CssmData) int32 {
-	return raw.CSSM_CL_CertGetNextCachedFieldValue(cLHandle, resultsHandle, value)
-}
-
-// CSSM_CL_CertGetNextFieldValue calls [raw.CSSM_CL_CertGetNextFieldValue] (C function CSSM_CL_CertGetNextFieldValue).
-func CSSM_CL_CertGetNextFieldValue(cLHandle int, resultsHandle int, value **raw.CssmData) int32 {
-	return raw.CSSM_CL_CertGetNextFieldValue(cLHandle, resultsHandle, value)
-}
-
-// CSSM_CL_CertGroupFromVerifiedBundle calls [raw.CSSM_CL_CertGroupFromVerifiedBundle] (C function CSSM_CL_CertGroupFromVerifiedBundle).
-func CSSM_CL_CertGroupFromVerifiedBundle(cLHandle int, cCHandle uint64, certBundle *raw.CssmCertBundle, signerCert *raw.CssmData, certGroup **raw.CssmCertgroup) int32 {
-	return raw.CSSM_CL_CertGroupFromVerifiedBundle(cLHandle, cCHandle, certBundle, signerCert, certGroup)
-}
-
-// CSSM_CL_CertGroupToSignedBundle calls [raw.CSSM_CL_CertGroupToSignedBundle] (C function CSSM_CL_CertGroupToSignedBundle).
-func CSSM_CL_CertGroupToSignedBundle(cLHandle int, cCHandle uint64, certGroupToBundle *raw.CssmCertgroup, bundleInfo *raw.CssmCertBundleHeader, signedBundle *raw.CssmData) int32 {
-	return raw.CSSM_CL_CertGroupToSignedBundle(cLHandle, cCHandle, certGroupToBundle, bundleInfo, signedBundle)
-}
-
-// CSSM_CL_CertSign calls [raw.CSSM_CL_CertSign] (C function CSSM_CL_CertSign).
-func CSSM_CL_CertSign(cLHandle int, cCHandle uint64, certTemplate *raw.CssmData, signScope *raw.CssmField, scopeSize uint32, signedCert *raw.CssmData) int32 {
-	return raw.CSSM_CL_CertSign(cLHandle, cCHandle, certTemplate, signScope, scopeSize, signedCert)
-}
-
-// CSSM_CL_CertVerify calls [raw.CSSM_CL_CertVerify] (C function CSSM_CL_CertVerify).
-func CSSM_CL_CertVerify(cLHandle int, cCHandle uint64, certToBeVerified *raw.CssmData, signerCert *raw.CssmData, verifyScope *raw.CssmField, scopeSize uint32) int32 {
-	return raw.CSSM_CL_CertVerify(cLHandle, cCHandle, certToBeVerified, signerCert, verifyScope, scopeSize)
-}
-
-// CSSM_CL_CertVerifyWithKey calls [raw.CSSM_CL_CertVerifyWithKey] (C function CSSM_CL_CertVerifyWithKey).
-func CSSM_CL_CertVerifyWithKey(cLHandle int, cCHandle uint64, certToBeVerified *raw.CssmData) int32 {
-	return raw.CSSM_CL_CertVerifyWithKey(cLHandle, cCHandle, certToBeVerified)
-}
-
-// CSSM_CL_CrlAbortCache calls [raw.CSSM_CL_CrlAbortCache] (C function CSSM_CL_CrlAbortCache).
+// CSSM_CL_CrlAbortCache calls the Security framework function CSSM_CL_CrlAbortCache.
 func CSSM_CL_CrlAbortCache(cLHandle int, crlHandle int) int32 {
-	return raw.CSSM_CL_CrlAbortCache(cLHandle, crlHandle)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CrlAbortCache == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CrlAbortCache, _lib, "CSSM_CL_CrlAbortCache")
+	}
+	return _fnCSSM_CL_CrlAbortCache(cLHandle, crlHandle)
 }
 
-// CSSM_CL_CrlAbortQuery calls [raw.CSSM_CL_CrlAbortQuery] (C function CSSM_CL_CrlAbortQuery).
+var _fnCSSM_CL_CrlAbortQuery func(int, int) int32
+
+// CSSM_CL_CrlAbortQuery calls the Security framework function CSSM_CL_CrlAbortQuery.
 func CSSM_CL_CrlAbortQuery(cLHandle int, resultsHandle int) int32 {
-	return raw.CSSM_CL_CrlAbortQuery(cLHandle, resultsHandle)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CL_CrlAbortQuery == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CL_CrlAbortQuery, _lib, "CSSM_CL_CrlAbortQuery")
+	}
+	return _fnCSSM_CL_CrlAbortQuery(cLHandle, resultsHandle)
 }
 
-// CSSM_CL_CrlAddCert calls [raw.CSSM_CL_CrlAddCert] (C function CSSM_CL_CrlAddCert).
-func CSSM_CL_CrlAddCert(cLHandle int, cCHandle uint64, cert *raw.CssmData, numberOfFields uint32, crlEntryFields *raw.CssmField, oldCrl *raw.CssmData, newCrl *raw.CssmData) int32 {
-	return raw.CSSM_CL_CrlAddCert(cLHandle, cCHandle, cert, numberOfFields, crlEntryFields, oldCrl, newCrl)
-}
+var _fnCSSM_CSP_Logout func(int) int32
 
-// CSSM_CL_CrlCache calls [raw.CSSM_CL_CrlCache] (C function CSSM_CL_CrlCache).
-func CSSM_CL_CrlCache(cLHandle int, crl *raw.CssmData, crlHandle *int) int32 {
-	return raw.CSSM_CL_CrlCache(cLHandle, crl, crlHandle)
-}
-
-// CSSM_CL_CrlCreateTemplate calls [raw.CSSM_CL_CrlCreateTemplate] (C function CSSM_CL_CrlCreateTemplate).
-func CSSM_CL_CrlCreateTemplate(cLHandle int, numberOfFields uint32, crlTemplate *raw.CssmField, newCrl *raw.CssmData) int32 {
-	return raw.CSSM_CL_CrlCreateTemplate(cLHandle, numberOfFields, crlTemplate, newCrl)
-}
-
-// CSSM_CL_CrlDescribeFormat calls [raw.CSSM_CL_CrlDescribeFormat] (C function CSSM_CL_CrlDescribeFormat).
-func CSSM_CL_CrlDescribeFormat(cLHandle int, numberOfFields *uint32, oidList **raw.CssmData) int32 {
-	return raw.CSSM_CL_CrlDescribeFormat(cLHandle, numberOfFields, oidList)
-}
-
-// CSSM_CL_CrlGetAllCachedRecordFields calls [raw.CSSM_CL_CrlGetAllCachedRecordFields] (C function CSSM_CL_CrlGetAllCachedRecordFields).
-func CSSM_CL_CrlGetAllCachedRecordFields(cLHandle int, crlHandle int, crlRecordIndex *raw.CssmData, numberOfFields *uint32, crlFields **raw.CssmField) int32 {
-	return raw.CSSM_CL_CrlGetAllCachedRecordFields(cLHandle, crlHandle, crlRecordIndex, numberOfFields, crlFields)
-}
-
-// CSSM_CL_CrlGetAllFields calls [raw.CSSM_CL_CrlGetAllFields] (C function CSSM_CL_CrlGetAllFields).
-func CSSM_CL_CrlGetAllFields(cLHandle int, crl *raw.CssmData, numberOfCrlFields *uint32, crlFields **raw.CssmField) int32 {
-	return raw.CSSM_CL_CrlGetAllFields(cLHandle, crl, numberOfCrlFields, crlFields)
-}
-
-// CSSM_CL_CrlGetFirstCachedFieldValue calls [raw.CSSM_CL_CrlGetFirstCachedFieldValue] (C function CSSM_CL_CrlGetFirstCachedFieldValue).
-func CSSM_CL_CrlGetFirstCachedFieldValue(cLHandle int, crlHandle int, crlRecordIndex *raw.CssmData, crlField *raw.CssmData, resultsHandle *int, numberOfMatchedFields *uint32, value **raw.CssmData) int32 {
-	return raw.CSSM_CL_CrlGetFirstCachedFieldValue(cLHandle, crlHandle, crlRecordIndex, crlField, resultsHandle, numberOfMatchedFields, value)
-}
-
-// CSSM_CL_CrlGetFirstFieldValue calls [raw.CSSM_CL_CrlGetFirstFieldValue] (C function CSSM_CL_CrlGetFirstFieldValue).
-func CSSM_CL_CrlGetFirstFieldValue(cLHandle int, crl *raw.CssmData, crlField *raw.CssmData, resultsHandle *int, numberOfMatchedFields *uint32, value **raw.CssmData) int32 {
-	return raw.CSSM_CL_CrlGetFirstFieldValue(cLHandle, crl, crlField, resultsHandle, numberOfMatchedFields, value)
-}
-
-// CSSM_CL_CrlGetNextCachedFieldValue calls [raw.CSSM_CL_CrlGetNextCachedFieldValue] (C function CSSM_CL_CrlGetNextCachedFieldValue).
-func CSSM_CL_CrlGetNextCachedFieldValue(cLHandle int, resultsHandle int, value **raw.CssmData) int32 {
-	return raw.CSSM_CL_CrlGetNextCachedFieldValue(cLHandle, resultsHandle, value)
-}
-
-// CSSM_CL_CrlGetNextFieldValue calls [raw.CSSM_CL_CrlGetNextFieldValue] (C function CSSM_CL_CrlGetNextFieldValue).
-func CSSM_CL_CrlGetNextFieldValue(cLHandle int, resultsHandle int, value **raw.CssmData) int32 {
-	return raw.CSSM_CL_CrlGetNextFieldValue(cLHandle, resultsHandle, value)
-}
-
-// CSSM_CL_CrlRemoveCert calls [raw.CSSM_CL_CrlRemoveCert] (C function CSSM_CL_CrlRemoveCert).
-func CSSM_CL_CrlRemoveCert(cLHandle int, cert *raw.CssmData, oldCrl *raw.CssmData, newCrl *raw.CssmData) int32 {
-	return raw.CSSM_CL_CrlRemoveCert(cLHandle, cert, oldCrl, newCrl)
-}
-
-// CSSM_CL_CrlSetFields calls [raw.CSSM_CL_CrlSetFields] (C function CSSM_CL_CrlSetFields).
-func CSSM_CL_CrlSetFields(cLHandle int, numberOfFields uint32, crlTemplate *raw.CssmField, oldCrl *raw.CssmData, modifiedCrl *raw.CssmData) int32 {
-	return raw.CSSM_CL_CrlSetFields(cLHandle, numberOfFields, crlTemplate, oldCrl, modifiedCrl)
-}
-
-// CSSM_CL_CrlSign calls [raw.CSSM_CL_CrlSign] (C function CSSM_CL_CrlSign).
-func CSSM_CL_CrlSign(cLHandle int, cCHandle uint64, unsignedCrl *raw.CssmData, signScope *raw.CssmField, scopeSize uint32, signedCrl *raw.CssmData) int32 {
-	return raw.CSSM_CL_CrlSign(cLHandle, cCHandle, unsignedCrl, signScope, scopeSize, signedCrl)
-}
-
-// CSSM_CL_CrlVerify calls [raw.CSSM_CL_CrlVerify] (C function CSSM_CL_CrlVerify).
-func CSSM_CL_CrlVerify(cLHandle int, cCHandle uint64, crlToBeVerified *raw.CssmData, signerCert *raw.CssmData, verifyScope *raw.CssmField, scopeSize uint32) int32 {
-	return raw.CSSM_CL_CrlVerify(cLHandle, cCHandle, crlToBeVerified, signerCert, verifyScope, scopeSize)
-}
-
-// CSSM_CL_CrlVerifyWithKey calls [raw.CSSM_CL_CrlVerifyWithKey] (C function CSSM_CL_CrlVerifyWithKey).
-func CSSM_CL_CrlVerifyWithKey(cLHandle int, cCHandle uint64, crlToBeVerified *raw.CssmData) int32 {
-	return raw.CSSM_CL_CrlVerifyWithKey(cLHandle, cCHandle, crlToBeVerified)
-}
-
-// CSSM_CL_FreeFieldValue calls [raw.CSSM_CL_FreeFieldValue] (C function CSSM_CL_FreeFieldValue).
-func CSSM_CL_FreeFieldValue(cLHandle int, certOrCrlOid *raw.CssmData, value *raw.CssmData) int32 {
-	return raw.CSSM_CL_FreeFieldValue(cLHandle, certOrCrlOid, value)
-}
-
-// CSSM_CL_FreeFields calls [raw.CSSM_CL_FreeFields] (C function CSSM_CL_FreeFields).
-func CSSM_CL_FreeFields(cLHandle int, numberOfFields uint32, fields **raw.CssmField) int32 {
-	return raw.CSSM_CL_FreeFields(cLHandle, numberOfFields, fields)
-}
-
-// CSSM_CL_IsCertInCachedCrl calls [raw.CSSM_CL_IsCertInCachedCrl] (C function CSSM_CL_IsCertInCachedCrl).
-func CSSM_CL_IsCertInCachedCrl(cLHandle int, cert *raw.CssmData, crlHandle int, certFound *int32, crlRecordIndex *raw.CssmData) int32 {
-	return raw.CSSM_CL_IsCertInCachedCrl(cLHandle, cert, crlHandle, certFound, crlRecordIndex)
-}
-
-// CSSM_CL_IsCertInCrl calls [raw.CSSM_CL_IsCertInCrl] (C function CSSM_CL_IsCertInCrl).
-func CSSM_CL_IsCertInCrl(cLHandle int, cert *raw.CssmData, crl *raw.CssmData, certFound *int32) int32 {
-	return raw.CSSM_CL_IsCertInCrl(cLHandle, cert, crl, certFound)
-}
-
-// CSSM_CL_PassThrough calls [raw.CSSM_CL_PassThrough] (C function CSSM_CL_PassThrough).
-func CSSM_CL_PassThrough(cLHandle int, cCHandle uint64, passThroughId uint32, inputParams unsafe.Pointer, outputParams unsafe.Pointer) int32 {
-	return raw.CSSM_CL_PassThrough(cLHandle, cCHandle, passThroughId, inputParams, outputParams)
-}
-
-// CSSM_CSP_ChangeLoginAcl calls [raw.CSSM_CSP_ChangeLoginAcl] (C function CSSM_CSP_ChangeLoginAcl).
-func CSSM_CSP_ChangeLoginAcl(cSPHandle int, accessCred *raw.CssmAccessCredentials, aclEdit *raw.CssmAclEdit) int32 {
-	return raw.CSSM_CSP_ChangeLoginAcl(cSPHandle, accessCred, aclEdit)
-}
-
-// CSSM_CSP_ChangeLoginOwner calls [raw.CSSM_CSP_ChangeLoginOwner] (C function CSSM_CSP_ChangeLoginOwner).
-func CSSM_CSP_ChangeLoginOwner(cSPHandle int, accessCred *raw.CssmAccessCredentials, newOwner *raw.CssmAclOwnerPrototype) int32 {
-	return raw.CSSM_CSP_ChangeLoginOwner(cSPHandle, accessCred, newOwner)
-}
-
-// CSSM_CSP_CreateAsymmetricContext calls [raw.CSSM_CSP_CreateAsymmetricContext] (C function CSSM_CSP_CreateAsymmetricContext).
-func CSSM_CSP_CreateAsymmetricContext(cSPHandle int, algorithmID uint32, accessCred *raw.CssmAccessCredentials, key *raw.CssmKey, padding uint32, newContextHandle *uint64) int32 {
-	return raw.CSSM_CSP_CreateAsymmetricContext(cSPHandle, algorithmID, accessCred, key, padding, newContextHandle)
-}
-
-// CSSM_CSP_CreateDeriveKeyContext calls [raw.CSSM_CSP_CreateDeriveKeyContext] (C function CSSM_CSP_CreateDeriveKeyContext).
-func CSSM_CSP_CreateDeriveKeyContext(cSPHandle int, algorithmID uint32, deriveKeyType uint32, deriveKeyLengthInBits uint32, accessCred *raw.CssmAccessCredentials, baseKey *raw.CssmKey, iterationCount uint32, salt *raw.CssmData, seed *raw.CssmCryptoData, newContextHandle *uint64) int32 {
-	return raw.CSSM_CSP_CreateDeriveKeyContext(cSPHandle, algorithmID, deriveKeyType, deriveKeyLengthInBits, accessCred, baseKey, iterationCount, salt, seed, newContextHandle)
-}
-
-// CSSM_CSP_CreateDigestContext calls [raw.CSSM_CSP_CreateDigestContext] (C function CSSM_CSP_CreateDigestContext).
-func CSSM_CSP_CreateDigestContext(cSPHandle int, algorithmID uint32, newContextHandle *uint64) int32 {
-	return raw.CSSM_CSP_CreateDigestContext(cSPHandle, algorithmID, newContextHandle)
-}
-
-// CSSM_CSP_CreateKeyGenContext calls [raw.CSSM_CSP_CreateKeyGenContext] (C function CSSM_CSP_CreateKeyGenContext).
-func CSSM_CSP_CreateKeyGenContext(cSPHandle int, algorithmID uint32, keySizeInBits uint32, seed *raw.CssmCryptoData, salt *raw.CssmData, startDate *raw.CssmDate, endDate *raw.CssmDate, params *raw.CssmData, newContextHandle *uint64) int32 {
-	return raw.CSSM_CSP_CreateKeyGenContext(cSPHandle, algorithmID, keySizeInBits, seed, salt, startDate, endDate, params, newContextHandle)
-}
-
-// CSSM_CSP_CreateMacContext calls [raw.CSSM_CSP_CreateMacContext] (C function CSSM_CSP_CreateMacContext).
-func CSSM_CSP_CreateMacContext(cSPHandle int, algorithmID uint32, key *raw.CssmKey, newContextHandle *uint64) int32 {
-	return raw.CSSM_CSP_CreateMacContext(cSPHandle, algorithmID, key, newContextHandle)
-}
-
-// CSSM_CSP_CreatePassThroughContext calls [raw.CSSM_CSP_CreatePassThroughContext] (C function CSSM_CSP_CreatePassThroughContext).
-func CSSM_CSP_CreatePassThroughContext(cSPHandle int, key *raw.CssmKey, newContextHandle *uint64) int32 {
-	return raw.CSSM_CSP_CreatePassThroughContext(cSPHandle, key, newContextHandle)
-}
-
-// CSSM_CSP_CreateRandomGenContext calls [raw.CSSM_CSP_CreateRandomGenContext] (C function CSSM_CSP_CreateRandomGenContext).
-func CSSM_CSP_CreateRandomGenContext(cSPHandle int, algorithmID uint32, seed *raw.CssmCryptoData, length uint, newContextHandle *uint64) int32 {
-	return raw.CSSM_CSP_CreateRandomGenContext(cSPHandle, algorithmID, seed, length, newContextHandle)
-}
-
-// CSSM_CSP_CreateSignatureContext calls [raw.CSSM_CSP_CreateSignatureContext] (C function CSSM_CSP_CreateSignatureContext).
-func CSSM_CSP_CreateSignatureContext(cSPHandle int, algorithmID uint32, accessCred *raw.CssmAccessCredentials, key *raw.CssmKey, newContextHandle *uint64) int32 {
-	return raw.CSSM_CSP_CreateSignatureContext(cSPHandle, algorithmID, accessCred, key, newContextHandle)
-}
-
-// CSSM_CSP_CreateSymmetricContext calls [raw.CSSM_CSP_CreateSymmetricContext] (C function CSSM_CSP_CreateSymmetricContext).
-func CSSM_CSP_CreateSymmetricContext(cSPHandle int, algorithmID uint32, mode uint32, accessCred *raw.CssmAccessCredentials, key *raw.CssmKey, initVector *raw.CssmData, padding uint32, reserved unsafe.Pointer, newContextHandle *uint64) int32 {
-	return raw.CSSM_CSP_CreateSymmetricContext(cSPHandle, algorithmID, mode, accessCred, key, initVector, padding, reserved, newContextHandle)
-}
-
-// CSSM_CSP_GetLoginAcl calls [raw.CSSM_CSP_GetLoginAcl] (C function CSSM_CSP_GetLoginAcl).
-func CSSM_CSP_GetLoginAcl(cSPHandle int, selectionTag *[68]int8, numberOfAclInfos *uint32, aclInfos **raw.CssmAclEntryInfo) int32 {
-	return raw.CSSM_CSP_GetLoginAcl(cSPHandle, selectionTag, numberOfAclInfos, aclInfos)
-}
-
-// CSSM_CSP_GetLoginOwner calls [raw.CSSM_CSP_GetLoginOwner] (C function CSSM_CSP_GetLoginOwner).
-func CSSM_CSP_GetLoginOwner(cSPHandle int, owner *raw.CssmAclOwnerPrototype) int32 {
-	return raw.CSSM_CSP_GetLoginOwner(cSPHandle, owner)
-}
-
-// CSSM_CSP_GetOperationalStatistics calls [raw.CSSM_CSP_GetOperationalStatistics] (C function CSSM_CSP_GetOperationalStatistics).
-func CSSM_CSP_GetOperationalStatistics(cSPHandle int, statistics *raw.CssmCspOperationalStatistics) int32 {
-	return raw.CSSM_CSP_GetOperationalStatistics(cSPHandle, statistics)
-}
-
-// CSSM_CSP_Login calls [raw.CSSM_CSP_Login] (C function CSSM_CSP_Login).
-func CSSM_CSP_Login(cSPHandle int, accessCred *raw.CssmAccessCredentials, loginName *raw.CssmData, reserved unsafe.Pointer) int32 {
-	return raw.CSSM_CSP_Login(cSPHandle, accessCred, loginName, reserved)
-}
-
-// CSSM_CSP_Logout calls [raw.CSSM_CSP_Logout] (C function CSSM_CSP_Logout).
+// CSSM_CSP_Logout calls the Security framework function CSSM_CSP_Logout.
 func CSSM_CSP_Logout(cSPHandle int) int32 {
-	return raw.CSSM_CSP_Logout(cSPHandle)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_CSP_Logout == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_CSP_Logout, _lib, "CSSM_CSP_Logout")
+	}
+	return _fnCSSM_CSP_Logout(cSPHandle)
 }
 
-// CSSM_CSP_ObtainPrivateKeyFromPublicKey calls [raw.CSSM_CSP_ObtainPrivateKeyFromPublicKey] (C function CSSM_CSP_ObtainPrivateKeyFromPublicKey).
-func CSSM_CSP_ObtainPrivateKeyFromPublicKey(cSPHandle int, publicKey *raw.CssmKey, privateKey *raw.CssmKey) int32 {
-	return raw.CSSM_CSP_ObtainPrivateKeyFromPublicKey(cSPHandle, publicKey, privateKey)
-}
+var _fnCSSM_DecryptDataInit func(uint64) int32
 
-// CSSM_CSP_PassThrough calls [raw.CSSM_CSP_PassThrough] (C function CSSM_CSP_PassThrough).
-func CSSM_CSP_PassThrough(cCHandle uint64, passThroughId uint32, inData unsafe.Pointer, outData unsafe.Pointer) int32 {
-	return raw.CSSM_CSP_PassThrough(cCHandle, passThroughId, inData, outData)
-}
-
-// CSSM_ChangeKeyAcl calls [raw.CSSM_ChangeKeyAcl] (C function CSSM_ChangeKeyAcl).
-func CSSM_ChangeKeyAcl(cSPHandle int, accessCred *raw.CssmAccessCredentials, aclEdit *raw.CssmAclEdit, key *raw.CssmKey) int32 {
-	return raw.CSSM_ChangeKeyAcl(cSPHandle, accessCred, aclEdit, key)
-}
-
-// CSSM_ChangeKeyOwner calls [raw.CSSM_ChangeKeyOwner] (C function CSSM_ChangeKeyOwner).
-func CSSM_ChangeKeyOwner(cSPHandle int, accessCred *raw.CssmAccessCredentials, key *raw.CssmKey, newOwner *raw.CssmAclOwnerPrototype) int32 {
-	return raw.CSSM_ChangeKeyOwner(cSPHandle, accessCred, key, newOwner)
-}
-
-// CSSM_DL_Authenticate calls [raw.CSSM_DL_Authenticate] (C function CSSM_DL_Authenticate).
-func CSSM_DL_Authenticate(dLDBHandle raw.CssmDlDbHandle, accessRequest uint32, accessCred *raw.CssmAccessCredentials) int32 {
-	return raw.CSSM_DL_Authenticate(dLDBHandle, accessRequest, accessCred)
-}
-
-// CSSM_DL_ChangeDbAcl calls [raw.CSSM_DL_ChangeDbAcl] (C function CSSM_DL_ChangeDbAcl).
-func CSSM_DL_ChangeDbAcl(dLDBHandle raw.CssmDlDbHandle, accessCred *raw.CssmAccessCredentials, aclEdit *raw.CssmAclEdit) int32 {
-	return raw.CSSM_DL_ChangeDbAcl(dLDBHandle, accessCred, aclEdit)
-}
-
-// CSSM_DL_ChangeDbOwner calls [raw.CSSM_DL_ChangeDbOwner] (C function CSSM_DL_ChangeDbOwner).
-func CSSM_DL_ChangeDbOwner(dLDBHandle raw.CssmDlDbHandle, accessCred *raw.CssmAccessCredentials, newOwner *raw.CssmAclOwnerPrototype) int32 {
-	return raw.CSSM_DL_ChangeDbOwner(dLDBHandle, accessCred, newOwner)
-}
-
-// CSSM_DL_CreateRelation calls [raw.CSSM_DL_CreateRelation] (C function CSSM_DL_CreateRelation).
-func CSSM_DL_CreateRelation(dLDBHandle raw.CssmDlDbHandle, relationID uint32, relationName string, numberOfAttributes uint32, pAttributeInfo *raw.CssmDbSchemaAttributeInfo, numberOfIndexes uint32, pIndexInfo *raw.CssmDbSchemaIndexInfo) int32 {
-	return raw.CSSM_DL_CreateRelation(dLDBHandle, relationID, relationName, numberOfAttributes, pAttributeInfo, numberOfIndexes, pIndexInfo)
-}
-
-// CSSM_DL_DataAbortQuery calls [raw.CSSM_DL_DataAbortQuery] (C function CSSM_DL_DataAbortQuery).
-func CSSM_DL_DataAbortQuery(dLDBHandle raw.CssmDlDbHandle, resultsHandle int) int32 {
-	return raw.CSSM_DL_DataAbortQuery(dLDBHandle, resultsHandle)
-}
-
-// CSSM_DL_DataDelete calls [raw.CSSM_DL_DataDelete] (C function CSSM_DL_DataDelete).
-func CSSM_DL_DataDelete(dLDBHandle raw.CssmDlDbHandle, uniqueRecordIdentifier *raw.CssmDbUniqueRecord) int32 {
-	return raw.CSSM_DL_DataDelete(dLDBHandle, uniqueRecordIdentifier)
-}
-
-// CSSM_DL_DataGetFirst calls [raw.CSSM_DL_DataGetFirst] (C function CSSM_DL_DataGetFirst).
-func CSSM_DL_DataGetFirst(dLDBHandle raw.CssmDlDbHandle, query *raw.CssmQuery, resultsHandle *int, attributes *raw.CssmDbRecordAttributeData, data *raw.CssmData, uniqueId **raw.CssmDbUniqueRecord) int32 {
-	return raw.CSSM_DL_DataGetFirst(dLDBHandle, query, resultsHandle, attributes, data, uniqueId)
-}
-
-// CSSM_DL_DataGetFromUniqueRecordId calls [raw.CSSM_DL_DataGetFromUniqueRecordId] (C function CSSM_DL_DataGetFromUniqueRecordId).
-func CSSM_DL_DataGetFromUniqueRecordId(dLDBHandle raw.CssmDlDbHandle, uniqueRecord *raw.CssmDbUniqueRecord, attributes *raw.CssmDbRecordAttributeData, data *raw.CssmData) int32 {
-	return raw.CSSM_DL_DataGetFromUniqueRecordId(dLDBHandle, uniqueRecord, attributes, data)
-}
-
-// CSSM_DL_DataGetNext calls [raw.CSSM_DL_DataGetNext] (C function CSSM_DL_DataGetNext).
-func CSSM_DL_DataGetNext(dLDBHandle raw.CssmDlDbHandle, resultsHandle int, attributes *raw.CssmDbRecordAttributeData, data *raw.CssmData, uniqueId **raw.CssmDbUniqueRecord) int32 {
-	return raw.CSSM_DL_DataGetNext(dLDBHandle, resultsHandle, attributes, data, uniqueId)
-}
-
-// CSSM_DL_DataInsert calls [raw.CSSM_DL_DataInsert] (C function CSSM_DL_DataInsert).
-func CSSM_DL_DataInsert(dLDBHandle raw.CssmDlDbHandle, recordType uint32, attributes *raw.CssmDbRecordAttributeData, data *raw.CssmData, uniqueId **raw.CssmDbUniqueRecord) int32 {
-	return raw.CSSM_DL_DataInsert(dLDBHandle, recordType, attributes, data, uniqueId)
-}
-
-// CSSM_DL_DataModify calls [raw.CSSM_DL_DataModify] (C function CSSM_DL_DataModify).
-func CSSM_DL_DataModify(dLDBHandle raw.CssmDlDbHandle, recordType uint32, uniqueRecordIdentifier *raw.CssmDbUniqueRecord, attributesToBeModified *raw.CssmDbRecordAttributeData, dataToBeModified *raw.CssmData, modifyMode uint32) int32 {
-	return raw.CSSM_DL_DataModify(dLDBHandle, recordType, uniqueRecordIdentifier, attributesToBeModified, dataToBeModified, modifyMode)
-}
-
-// CSSM_DL_DbClose calls [raw.CSSM_DL_DbClose] (C function CSSM_DL_DbClose).
-func CSSM_DL_DbClose(dLDBHandle raw.CssmDlDbHandle) int32 {
-	return raw.CSSM_DL_DbClose(dLDBHandle)
-}
-
-// CSSM_DL_DbCreate calls [raw.CSSM_DL_DbCreate] (C function CSSM_DL_DbCreate).
-func CSSM_DL_DbCreate(dLHandle int, dbName string, dbLocation *raw.CssmNetAddress, dBInfo *raw.CssmDbinfo, accessRequest uint32, credAndAclEntry *raw.CssmResourceControlContext, openParameters unsafe.Pointer, dbHandle *int) int32 {
-	return raw.CSSM_DL_DbCreate(dLHandle, dbName, dbLocation, dBInfo, accessRequest, credAndAclEntry, openParameters, dbHandle)
-}
-
-// CSSM_DL_DbDelete calls [raw.CSSM_DL_DbDelete] (C function CSSM_DL_DbDelete).
-func CSSM_DL_DbDelete(dLHandle int, dbName string, dbLocation *raw.CssmNetAddress, accessCred *raw.CssmAccessCredentials) int32 {
-	return raw.CSSM_DL_DbDelete(dLHandle, dbName, dbLocation, accessCred)
-}
-
-// CSSM_DL_DbOpen calls [raw.CSSM_DL_DbOpen] (C function CSSM_DL_DbOpen).
-func CSSM_DL_DbOpen(dLHandle int, dbName string, dbLocation *raw.CssmNetAddress, accessRequest uint32, accessCred *raw.CssmAccessCredentials, openParameters unsafe.Pointer, dbHandle *int) int32 {
-	return raw.CSSM_DL_DbOpen(dLHandle, dbName, dbLocation, accessRequest, accessCred, openParameters, dbHandle)
-}
-
-// CSSM_DL_DestroyRelation calls [raw.CSSM_DL_DestroyRelation] (C function CSSM_DL_DestroyRelation).
-func CSSM_DL_DestroyRelation(dLDBHandle raw.CssmDlDbHandle, relationID uint32) int32 {
-	return raw.CSSM_DL_DestroyRelation(dLDBHandle, relationID)
-}
-
-// CSSM_DL_FreeNameList calls [raw.CSSM_DL_FreeNameList] (C function CSSM_DL_FreeNameList).
-func CSSM_DL_FreeNameList(dLHandle int, nameList *raw.CssmNameList) int32 {
-	return raw.CSSM_DL_FreeNameList(dLHandle, nameList)
-}
-
-// CSSM_DL_FreeUniqueRecord calls [raw.CSSM_DL_FreeUniqueRecord] (C function CSSM_DL_FreeUniqueRecord).
-func CSSM_DL_FreeUniqueRecord(dLDBHandle raw.CssmDlDbHandle, uniqueRecord *raw.CssmDbUniqueRecord) int32 {
-	return raw.CSSM_DL_FreeUniqueRecord(dLDBHandle, uniqueRecord)
-}
-
-// CSSM_DL_GetDbAcl calls [raw.CSSM_DL_GetDbAcl] (C function CSSM_DL_GetDbAcl).
-func CSSM_DL_GetDbAcl(dLDBHandle raw.CssmDlDbHandle, selectionTag *[68]int8, numberOfAclInfos *uint32, aclInfos **raw.CssmAclEntryInfo) int32 {
-	return raw.CSSM_DL_GetDbAcl(dLDBHandle, selectionTag, numberOfAclInfos, aclInfos)
-}
-
-// CSSM_DL_GetDbNameFromHandle calls [raw.CSSM_DL_GetDbNameFromHandle] (C function CSSM_DL_GetDbNameFromHandle).
-func CSSM_DL_GetDbNameFromHandle(dLDBHandle raw.CssmDlDbHandle, dbName string) int32 {
-	return raw.CSSM_DL_GetDbNameFromHandle(dLDBHandle, dbName)
-}
-
-// CSSM_DL_GetDbNames calls [raw.CSSM_DL_GetDbNames] (C function CSSM_DL_GetDbNames).
-func CSSM_DL_GetDbNames(dLHandle int, nameList **raw.CssmNameList) int32 {
-	return raw.CSSM_DL_GetDbNames(dLHandle, nameList)
-}
-
-// CSSM_DL_GetDbOwner calls [raw.CSSM_DL_GetDbOwner] (C function CSSM_DL_GetDbOwner).
-func CSSM_DL_GetDbOwner(dLDBHandle raw.CssmDlDbHandle, owner *raw.CssmAclOwnerPrototype) int32 {
-	return raw.CSSM_DL_GetDbOwner(dLDBHandle, owner)
-}
-
-// CSSM_DL_PassThrough calls [raw.CSSM_DL_PassThrough] (C function CSSM_DL_PassThrough).
-func CSSM_DL_PassThrough(dLDBHandle raw.CssmDlDbHandle, passThroughId uint32, inputParams unsafe.Pointer, outputParams unsafe.Pointer) int32 {
-	return raw.CSSM_DL_PassThrough(dLDBHandle, passThroughId, inputParams, outputParams)
-}
-
-// CSSM_DecryptData calls [raw.CSSM_DecryptData] (C function CSSM_DecryptData).
-func CSSM_DecryptData(cCHandle uint64, cipherBufs *raw.CssmData, cipherBufCount uint32, clearBufs *raw.CssmData, clearBufCount uint32, bytesDecrypted *uint, remData *raw.CssmData) int32 {
-	return raw.CSSM_DecryptData(cCHandle, cipherBufs, cipherBufCount, clearBufs, clearBufCount, bytesDecrypted, remData)
-}
-
-// CSSM_DecryptDataFinal calls [raw.CSSM_DecryptDataFinal] (C function CSSM_DecryptDataFinal).
-func CSSM_DecryptDataFinal(cCHandle uint64, remData *raw.CssmData) int32 {
-	return raw.CSSM_DecryptDataFinal(cCHandle, remData)
-}
-
-// CSSM_DecryptDataInit calls [raw.CSSM_DecryptDataInit] (C function CSSM_DecryptDataInit).
+// CSSM_DecryptDataInit calls the Security framework function CSSM_DecryptDataInit.
 func CSSM_DecryptDataInit(cCHandle uint64) int32 {
-	return raw.CSSM_DecryptDataInit(cCHandle)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DecryptDataInit == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DecryptDataInit, _lib, "CSSM_DecryptDataInit")
+	}
+	return _fnCSSM_DecryptDataInit(cCHandle)
 }
 
-// CSSM_DecryptDataInitP calls [raw.CSSM_DecryptDataInitP] (C function CSSM_DecryptDataInitP).
+var _fnCSSM_DecryptDataInitP func(uint64, uint64) int32
+
+// CSSM_DecryptDataInitP calls the Security framework function CSSM_DecryptDataInitP.
 func CSSM_DecryptDataInitP(cCHandle uint64, privilege uint64) int32 {
-	return raw.CSSM_DecryptDataInitP(cCHandle, privilege)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DecryptDataInitP == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DecryptDataInitP, _lib, "CSSM_DecryptDataInitP")
+	}
+	return _fnCSSM_DecryptDataInitP(cCHandle, privilege)
 }
 
-// CSSM_DecryptDataP calls [raw.CSSM_DecryptDataP] (C function CSSM_DecryptDataP).
-func CSSM_DecryptDataP(cCHandle uint64, cipherBufs *raw.CssmData, cipherBufCount uint32, clearBufs *raw.CssmData, clearBufCount uint32, bytesDecrypted *uint, remData *raw.CssmData, privilege uint64) int32 {
-	return raw.CSSM_DecryptDataP(cCHandle, cipherBufs, cipherBufCount, clearBufs, clearBufCount, bytesDecrypted, remData, privilege)
-}
+var _fnCSSM_DeleteContext func(uint64) int32
 
-// CSSM_DecryptDataUpdate calls [raw.CSSM_DecryptDataUpdate] (C function CSSM_DecryptDataUpdate).
-func CSSM_DecryptDataUpdate(cCHandle uint64, cipherBufs *raw.CssmData, cipherBufCount uint32, clearBufs *raw.CssmData, clearBufCount uint32, bytesDecrypted *uint) int32 {
-	return raw.CSSM_DecryptDataUpdate(cCHandle, cipherBufs, cipherBufCount, clearBufs, clearBufCount, bytesDecrypted)
-}
-
-// CSSM_DeleteContext calls [raw.CSSM_DeleteContext] (C function CSSM_DeleteContext).
+// CSSM_DeleteContext calls the Security framework function CSSM_DeleteContext.
 func CSSM_DeleteContext(cCHandle uint64) int32 {
-	return raw.CSSM_DeleteContext(cCHandle)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DeleteContext == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DeleteContext, _lib, "CSSM_DeleteContext")
+	}
+	return _fnCSSM_DeleteContext(cCHandle)
 }
 
-// CSSM_DeleteContextAttributes calls [raw.CSSM_DeleteContextAttributes] (C function CSSM_DeleteContextAttributes).
-func CSSM_DeleteContextAttributes(cCHandle uint64, numberOfAttributes uint32, contextAttributes *raw.CssmContextAttribute) int32 {
-	return raw.CSSM_DeleteContextAttributes(cCHandle, numberOfAttributes, contextAttributes)
-}
+var _fnCSSM_DigestDataInit func(uint64) int32
 
-// CSSM_DeriveKey calls [raw.CSSM_DeriveKey] (C function CSSM_DeriveKey).
-func CSSM_DeriveKey(cCHandle uint64, param *raw.CssmData, keyUsage uint32, keyAttr uint32, keyLabel *raw.CssmData, credAndAclEntry *raw.CssmResourceControlContext, derivedKey *raw.CssmKey) int32 {
-	return raw.CSSM_DeriveKey(cCHandle, param, keyUsage, keyAttr, keyLabel, credAndAclEntry, derivedKey)
-}
-
-// CSSM_DigestData calls [raw.CSSM_DigestData] (C function CSSM_DigestData).
-func CSSM_DigestData(cCHandle uint64, dataBufs *raw.CssmData, dataBufCount uint32, digest *raw.CssmData) int32 {
-	return raw.CSSM_DigestData(cCHandle, dataBufs, dataBufCount, digest)
-}
-
-// CSSM_DigestDataClone calls [raw.CSSM_DigestDataClone] (C function CSSM_DigestDataClone).
-func CSSM_DigestDataClone(cCHandle uint64, clonednewCCHandle *uint64) int32 {
-	return raw.CSSM_DigestDataClone(cCHandle, clonednewCCHandle)
-}
-
-// CSSM_DigestDataFinal calls [raw.CSSM_DigestDataFinal] (C function CSSM_DigestDataFinal).
-func CSSM_DigestDataFinal(cCHandle uint64, digest *raw.CssmData) int32 {
-	return raw.CSSM_DigestDataFinal(cCHandle, digest)
-}
-
-// CSSM_DigestDataInit calls [raw.CSSM_DigestDataInit] (C function CSSM_DigestDataInit).
+// CSSM_DigestDataInit calls the Security framework function CSSM_DigestDataInit.
 func CSSM_DigestDataInit(cCHandle uint64) int32 {
-	return raw.CSSM_DigestDataInit(cCHandle)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_DigestDataInit == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_DigestDataInit, _lib, "CSSM_DigestDataInit")
+	}
+	return _fnCSSM_DigestDataInit(cCHandle)
 }
 
-// CSSM_DigestDataUpdate calls [raw.CSSM_DigestDataUpdate] (C function CSSM_DigestDataUpdate).
-func CSSM_DigestDataUpdate(cCHandle uint64, dataBufs *raw.CssmData, dataBufCount uint32) int32 {
-	return raw.CSSM_DigestDataUpdate(cCHandle, dataBufs, dataBufCount)
-}
+var _fnCSSM_EncryptDataInit func(uint64) int32
 
-// CSSM_EncryptData calls [raw.CSSM_EncryptData] (C function CSSM_EncryptData).
-func CSSM_EncryptData(cCHandle uint64, clearBufs *raw.CssmData, clearBufCount uint32, cipherBufs *raw.CssmData, cipherBufCount uint32, bytesEncrypted *uint, remData *raw.CssmData) int32 {
-	return raw.CSSM_EncryptData(cCHandle, clearBufs, clearBufCount, cipherBufs, cipherBufCount, bytesEncrypted, remData)
-}
-
-// CSSM_EncryptDataFinal calls [raw.CSSM_EncryptDataFinal] (C function CSSM_EncryptDataFinal).
-func CSSM_EncryptDataFinal(cCHandle uint64, remData *raw.CssmData) int32 {
-	return raw.CSSM_EncryptDataFinal(cCHandle, remData)
-}
-
-// CSSM_EncryptDataInit calls [raw.CSSM_EncryptDataInit] (C function CSSM_EncryptDataInit).
+// CSSM_EncryptDataInit calls the Security framework function CSSM_EncryptDataInit.
 func CSSM_EncryptDataInit(cCHandle uint64) int32 {
-	return raw.CSSM_EncryptDataInit(cCHandle)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_EncryptDataInit == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_EncryptDataInit, _lib, "CSSM_EncryptDataInit")
+	}
+	return _fnCSSM_EncryptDataInit(cCHandle)
 }
 
-// CSSM_EncryptDataInitP calls [raw.CSSM_EncryptDataInitP] (C function CSSM_EncryptDataInitP).
+var _fnCSSM_EncryptDataInitP func(uint64, uint64) int32
+
+// CSSM_EncryptDataInitP calls the Security framework function CSSM_EncryptDataInitP.
 func CSSM_EncryptDataInitP(cCHandle uint64, privilege uint64) int32 {
-	return raw.CSSM_EncryptDataInitP(cCHandle, privilege)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_EncryptDataInitP == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_EncryptDataInitP, _lib, "CSSM_EncryptDataInitP")
+	}
+	return _fnCSSM_EncryptDataInitP(cCHandle, privilege)
 }
 
-// CSSM_EncryptDataP calls [raw.CSSM_EncryptDataP] (C function CSSM_EncryptDataP).
-func CSSM_EncryptDataP(cCHandle uint64, clearBufs *raw.CssmData, clearBufCount uint32, cipherBufs *raw.CssmData, cipherBufCount uint32, bytesEncrypted *uint, remData *raw.CssmData, privilege uint64) int32 {
-	return raw.CSSM_EncryptDataP(cCHandle, clearBufs, clearBufCount, cipherBufs, cipherBufCount, bytesEncrypted, remData, privilege)
-}
+var _fnCSSM_GenerateMacInit func(uint64) int32
 
-// CSSM_EncryptDataUpdate calls [raw.CSSM_EncryptDataUpdate] (C function CSSM_EncryptDataUpdate).
-func CSSM_EncryptDataUpdate(cCHandle uint64, clearBufs *raw.CssmData, clearBufCount uint32, cipherBufs *raw.CssmData, cipherBufCount uint32, bytesEncrypted *uint) int32 {
-	return raw.CSSM_EncryptDataUpdate(cCHandle, clearBufs, clearBufCount, cipherBufs, cipherBufCount, bytesEncrypted)
-}
-
-// CSSM_FreeContext calls [raw.CSSM_FreeContext] (C function CSSM_FreeContext).
-func CSSM_FreeContext(context_ *raw.CssmContext) int32 {
-	return raw.CSSM_FreeContext(context_)
-}
-
-// CSSM_FreeKey calls [raw.CSSM_FreeKey] (C function CSSM_FreeKey).
-func CSSM_FreeKey(cSPHandle int, accessCred *raw.CssmAccessCredentials, keyPtr *raw.CssmKey, delete_ int32) int32 {
-	return raw.CSSM_FreeKey(cSPHandle, accessCred, keyPtr, delete_)
-}
-
-// CSSM_GenerateAlgorithmParams calls [raw.CSSM_GenerateAlgorithmParams] (C function CSSM_GenerateAlgorithmParams).
-func CSSM_GenerateAlgorithmParams(cCHandle uint64, paramBits uint32, param *raw.CssmData) int32 {
-	return raw.CSSM_GenerateAlgorithmParams(cCHandle, paramBits, param)
-}
-
-// CSSM_GenerateKey calls [raw.CSSM_GenerateKey] (C function CSSM_GenerateKey).
-func CSSM_GenerateKey(cCHandle uint64, keyUsage uint32, keyAttr uint32, keyLabel *raw.CssmData, credAndAclEntry *raw.CssmResourceControlContext, key *raw.CssmKey) int32 {
-	return raw.CSSM_GenerateKey(cCHandle, keyUsage, keyAttr, keyLabel, credAndAclEntry, key)
-}
-
-// CSSM_GenerateKeyP calls [raw.CSSM_GenerateKeyP] (C function CSSM_GenerateKeyP).
-func CSSM_GenerateKeyP(cCHandle uint64, keyUsage uint32, keyAttr uint32, keyLabel *raw.CssmData, credAndAclEntry *raw.CssmResourceControlContext, key *raw.CssmKey, privilege uint64) int32 {
-	return raw.CSSM_GenerateKeyP(cCHandle, keyUsage, keyAttr, keyLabel, credAndAclEntry, key, privilege)
-}
-
-// CSSM_GenerateKeyPair calls [raw.CSSM_GenerateKeyPair] (C function CSSM_GenerateKeyPair).
-func CSSM_GenerateKeyPair(cCHandle uint64, publicKeyUsage uint32, publicKeyAttr uint32, publicKeyLabel *raw.CssmData, publicKey *raw.CssmKey, privateKeyUsage uint32, privateKeyAttr uint32, privateKeyLabel *raw.CssmData, credAndAclEntry *raw.CssmResourceControlContext, privateKey *raw.CssmKey) int32 {
-	return raw.CSSM_GenerateKeyPair(cCHandle, publicKeyUsage, publicKeyAttr, publicKeyLabel, publicKey, privateKeyUsage, privateKeyAttr, privateKeyLabel, credAndAclEntry, privateKey)
-}
-
-// CSSM_GenerateKeyPairP calls [raw.CSSM_GenerateKeyPairP] (C function CSSM_GenerateKeyPairP).
-func CSSM_GenerateKeyPairP(cCHandle uint64, publicKeyUsage uint32, publicKeyAttr uint32, publicKeyLabel *raw.CssmData, publicKey *raw.CssmKey, privateKeyUsage uint32, privateKeyAttr uint32, privateKeyLabel *raw.CssmData, credAndAclEntry *raw.CssmResourceControlContext, privateKey *raw.CssmKey, privilege uint64) int32 {
-	return raw.CSSM_GenerateKeyPairP(cCHandle, publicKeyUsage, publicKeyAttr, publicKeyLabel, publicKey, privateKeyUsage, privateKeyAttr, privateKeyLabel, credAndAclEntry, privateKey, privilege)
-}
-
-// CSSM_GenerateMac calls [raw.CSSM_GenerateMac] (C function CSSM_GenerateMac).
-func CSSM_GenerateMac(cCHandle uint64, dataBufs *raw.CssmData, dataBufCount uint32, mac *raw.CssmData) int32 {
-	return raw.CSSM_GenerateMac(cCHandle, dataBufs, dataBufCount, mac)
-}
-
-// CSSM_GenerateMacFinal calls [raw.CSSM_GenerateMacFinal] (C function CSSM_GenerateMacFinal).
-func CSSM_GenerateMacFinal(cCHandle uint64, mac *raw.CssmData) int32 {
-	return raw.CSSM_GenerateMacFinal(cCHandle, mac)
-}
-
-// CSSM_GenerateMacInit calls [raw.CSSM_GenerateMacInit] (C function CSSM_GenerateMacInit).
+// CSSM_GenerateMacInit calls the Security framework function CSSM_GenerateMacInit.
 func CSSM_GenerateMacInit(cCHandle uint64) int32 {
-	return raw.CSSM_GenerateMacInit(cCHandle)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_GenerateMacInit == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_GenerateMacInit, _lib, "CSSM_GenerateMacInit")
+	}
+	return _fnCSSM_GenerateMacInit(cCHandle)
 }
 
-// CSSM_GenerateMacUpdate calls [raw.CSSM_GenerateMacUpdate] (C function CSSM_GenerateMacUpdate).
-func CSSM_GenerateMacUpdate(cCHandle uint64, dataBufs *raw.CssmData, dataBufCount uint32) int32 {
-	return raw.CSSM_GenerateMacUpdate(cCHandle, dataBufs, dataBufCount)
-}
+var _fnCSSM_ModuleDetach func(int) int32
 
-// CSSM_GenerateRandom calls [raw.CSSM_GenerateRandom] (C function CSSM_GenerateRandom).
-func CSSM_GenerateRandom(cCHandle uint64, randomNumber *raw.CssmData) int32 {
-	return raw.CSSM_GenerateRandom(cCHandle, randomNumber)
-}
-
-// CSSM_GetAPIMemoryFunctions calls [raw.CSSM_GetAPIMemoryFunctions] (C function CSSM_GetAPIMemoryFunctions).
-func CSSM_GetAPIMemoryFunctions(addInHandle int, appMemoryFuncs *raw.CssmMemoryFuncs) int32 {
-	return raw.CSSM_GetAPIMemoryFunctions(addInHandle, appMemoryFuncs)
-}
-
-// CSSM_GetContext calls [raw.CSSM_GetContext] (C function CSSM_GetContext).
-func CSSM_GetContext(cCHandle uint64, context_ **raw.CssmContext) int32 {
-	return raw.CSSM_GetContext(cCHandle, context_)
-}
-
-// CSSM_GetContextAttribute calls [raw.CSSM_GetContextAttribute] (C function CSSM_GetContextAttribute).
-func CSSM_GetContextAttribute(context_ *raw.CssmContext, attributeType uint32, contextAttribute **raw.CssmContextAttribute) int32 {
-	return raw.CSSM_GetContextAttribute(context_, attributeType, contextAttribute)
-}
-
-// CSSM_GetKeyAcl calls [raw.CSSM_GetKeyAcl] (C function CSSM_GetKeyAcl).
-func CSSM_GetKeyAcl(cSPHandle int, key *raw.CssmKey, selectionTag *[68]int8, numberOfAclInfos *uint32, aclInfos **raw.CssmAclEntryInfo) int32 {
-	return raw.CSSM_GetKeyAcl(cSPHandle, key, selectionTag, numberOfAclInfos, aclInfos)
-}
-
-// CSSM_GetKeyOwner calls [raw.CSSM_GetKeyOwner] (C function CSSM_GetKeyOwner).
-func CSSM_GetKeyOwner(cSPHandle int, key *raw.CssmKey, owner *raw.CssmAclOwnerPrototype) int32 {
-	return raw.CSSM_GetKeyOwner(cSPHandle, key, owner)
-}
-
-// CSSM_GetModuleGUIDFromHandle calls [raw.CSSM_GetModuleGUIDFromHandle] (C function CSSM_GetModuleGUIDFromHandle).
-func CSSM_GetModuleGUIDFromHandle(moduleHandle int, moduleGUID *raw.CssmGuid) int32 {
-	return raw.CSSM_GetModuleGUIDFromHandle(moduleHandle, moduleGUID)
-}
-
-// CSSM_GetPrivilege calls [raw.CSSM_GetPrivilege] (C function CSSM_GetPrivilege).
-func CSSM_GetPrivilege(privilege *uint64) int32 {
-	return raw.CSSM_GetPrivilege(privilege)
-}
-
-// CSSM_GetSubserviceUIDFromHandle calls [raw.CSSM_GetSubserviceUIDFromHandle] (C function CSSM_GetSubserviceUIDFromHandle).
-func CSSM_GetSubserviceUIDFromHandle(moduleHandle int, subserviceUID *raw.CssmSubserviceUid) int32 {
-	return raw.CSSM_GetSubserviceUIDFromHandle(moduleHandle, subserviceUID)
-}
-
-// CSSM_GetTimeValue calls [raw.CSSM_GetTimeValue] (C function CSSM_GetTimeValue).
-func CSSM_GetTimeValue(cSPHandle int, timeAlgorithm uint32, timeData *raw.CssmData) int32 {
-	return raw.CSSM_GetTimeValue(cSPHandle, timeAlgorithm, timeData)
-}
-
-// CSSM_Init calls [raw.CSSM_Init] (C function CSSM_Init).
-func CSSM_Init(version *raw.CssmVersion, scope uint32, callerGuid *raw.CssmGuid, keyHierarchy uint32, pvcPolicy *uint32, reserved unsafe.Pointer) int32 {
-	return raw.CSSM_Init(version, scope, callerGuid, keyHierarchy, pvcPolicy, reserved)
-}
-
-// CSSM_Introduce calls [raw.CSSM_Introduce] (C function CSSM_Introduce).
-func CSSM_Introduce(moduleID *raw.CssmGuid, keyHierarchy uint32) int32 {
-	return raw.CSSM_Introduce(moduleID, keyHierarchy)
-}
-
-// CSSM_ListAttachedModuleManagers calls [raw.CSSM_ListAttachedModuleManagers] (C function CSSM_ListAttachedModuleManagers).
-func CSSM_ListAttachedModuleManagers(numberOfModuleManagers *uint32, moduleManagerGuids *raw.CssmGuid) int32 {
-	return raw.CSSM_ListAttachedModuleManagers(numberOfModuleManagers, moduleManagerGuids)
-}
-
-// CSSM_ModuleAttach calls [raw.CSSM_ModuleAttach] (C function CSSM_ModuleAttach).
-func CSSM_ModuleAttach(moduleGuid *raw.CssmGuid, version *raw.CssmVersion, memoryFuncs *raw.CssmMemoryFuncs, subserviceID uint32, subServiceType uint32, attachFlags uint32, keyHierarchy uint32, functionTable *raw.CssmFuncNameAddr, numFunctionTable uint32, reserved unsafe.Pointer, newModuleHandle *int) int32 {
-	return raw.CSSM_ModuleAttach(moduleGuid, version, memoryFuncs, subserviceID, subServiceType, attachFlags, keyHierarchy, functionTable, numFunctionTable, reserved, newModuleHandle)
-}
-
-// CSSM_ModuleDetach calls [raw.CSSM_ModuleDetach] (C function CSSM_ModuleDetach).
+// CSSM_ModuleDetach calls the Security framework function CSSM_ModuleDetach.
 func CSSM_ModuleDetach(moduleHandle int) int32 {
-	return raw.CSSM_ModuleDetach(moduleHandle)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_ModuleDetach == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_ModuleDetach, _lib, "CSSM_ModuleDetach")
+	}
+	return _fnCSSM_ModuleDetach(moduleHandle)
 }
 
-// CSSM_ModuleLoad calls [raw.CSSM_ModuleLoad] (C function CSSM_ModuleLoad).
-func CSSM_ModuleLoad(moduleGuid *raw.CssmGuid, keyHierarchy uint32, appNotifyCallback unsafe.Pointer, appNotifyCallbackCtx unsafe.Pointer) int32 {
-	return raw.CSSM_ModuleLoad(moduleGuid, keyHierarchy, appNotifyCallback, appNotifyCallbackCtx)
-}
+var _fnCSSM_SetPrivilege func(uint64) int32
 
-// CSSM_ModuleUnload calls [raw.CSSM_ModuleUnload] (C function CSSM_ModuleUnload).
-func CSSM_ModuleUnload(moduleGuid *raw.CssmGuid, appNotifyCallback unsafe.Pointer, appNotifyCallbackCtx unsafe.Pointer) int32 {
-	return raw.CSSM_ModuleUnload(moduleGuid, appNotifyCallback, appNotifyCallbackCtx)
-}
-
-// CSSM_QueryKeySizeInBits calls [raw.CSSM_QueryKeySizeInBits] (C function CSSM_QueryKeySizeInBits).
-func CSSM_QueryKeySizeInBits(cSPHandle int, cCHandle uint64, key *raw.CssmKey, keySize *raw.CssmKeySize) int32 {
-	return raw.CSSM_QueryKeySizeInBits(cSPHandle, cCHandle, key, keySize)
-}
-
-// CSSM_QuerySize calls [raw.CSSM_QuerySize] (C function CSSM_QuerySize).
-func CSSM_QuerySize(cCHandle uint64, encrypt int32, querySizeCount uint32, dataBlockSizes *raw.CssmQuerySizeData) int32 {
-	return raw.CSSM_QuerySize(cCHandle, encrypt, querySizeCount, dataBlockSizes)
-}
-
-// CSSM_RetrieveCounter calls [raw.CSSM_RetrieveCounter] (C function CSSM_RetrieveCounter).
-func CSSM_RetrieveCounter(cSPHandle int, counter *raw.CssmData) int32 {
-	return raw.CSSM_RetrieveCounter(cSPHandle, counter)
-}
-
-// CSSM_RetrieveUniqueId calls [raw.CSSM_RetrieveUniqueId] (C function CSSM_RetrieveUniqueId).
-func CSSM_RetrieveUniqueId(cSPHandle int, uniqueID *raw.CssmData) int32 {
-	return raw.CSSM_RetrieveUniqueId(cSPHandle, uniqueID)
-}
-
-// CSSM_SetContext calls [raw.CSSM_SetContext] (C function CSSM_SetContext).
-func CSSM_SetContext(cCHandle uint64, context_ *raw.CssmContext) int32 {
-	return raw.CSSM_SetContext(cCHandle, context_)
-}
-
-// CSSM_SetPrivilege calls [raw.CSSM_SetPrivilege] (C function CSSM_SetPrivilege).
+// CSSM_SetPrivilege calls the Security framework function CSSM_SetPrivilege.
 func CSSM_SetPrivilege(privilege uint64) int32 {
-	return raw.CSSM_SetPrivilege(privilege)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_SetPrivilege == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_SetPrivilege, _lib, "CSSM_SetPrivilege")
+	}
+	return _fnCSSM_SetPrivilege(privilege)
 }
 
-// CSSM_SignData calls [raw.CSSM_SignData] (C function CSSM_SignData).
-func CSSM_SignData(cCHandle uint64, dataBufs *raw.CssmData, dataBufCount uint32, digestAlgorithm uint32, signature *raw.CssmData) int32 {
-	return raw.CSSM_SignData(cCHandle, dataBufs, dataBufCount, digestAlgorithm, signature)
-}
+var _fnCSSM_SignDataInit func(uint64) int32
 
-// CSSM_SignDataFinal calls [raw.CSSM_SignDataFinal] (C function CSSM_SignDataFinal).
-func CSSM_SignDataFinal(cCHandle uint64, signature *raw.CssmData) int32 {
-	return raw.CSSM_SignDataFinal(cCHandle, signature)
-}
-
-// CSSM_SignDataInit calls [raw.CSSM_SignDataInit] (C function CSSM_SignDataInit).
+// CSSM_SignDataInit calls the Security framework function CSSM_SignDataInit.
 func CSSM_SignDataInit(cCHandle uint64) int32 {
-	return raw.CSSM_SignDataInit(cCHandle)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_SignDataInit == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_SignDataInit, _lib, "CSSM_SignDataInit")
+	}
+	return _fnCSSM_SignDataInit(cCHandle)
 }
 
-// CSSM_SignDataUpdate calls [raw.CSSM_SignDataUpdate] (C function CSSM_SignDataUpdate).
-func CSSM_SignDataUpdate(cCHandle uint64, dataBufs *raw.CssmData, dataBufCount uint32) int32 {
-	return raw.CSSM_SignDataUpdate(cCHandle, dataBufs, dataBufCount)
-}
+var _fnCSSM_TP_CertReclaimAbort func(int, uint64) int32
 
-// CSSM_TP_ApplyCrlToDb calls [raw.CSSM_TP_ApplyCrlToDb] (C function CSSM_TP_ApplyCrlToDb).
-func CSSM_TP_ApplyCrlToDb(tPHandle int, cLHandle int, cSPHandle int, crlToBeApplied *raw.CssmEncodedCrl, signerCertGroup *raw.CssmCertgroup, applyCrlVerifyContext *raw.CssmTpVerifyContext, applyCrlVerifyResult *raw.CssmTpVerifyContextResult) int32 {
-	return raw.CSSM_TP_ApplyCrlToDb(tPHandle, cLHandle, cSPHandle, crlToBeApplied, signerCertGroup, applyCrlVerifyContext, applyCrlVerifyResult)
-}
-
-// CSSM_TP_CertCreateTemplate calls [raw.CSSM_TP_CertCreateTemplate] (C function CSSM_TP_CertCreateTemplate).
-func CSSM_TP_CertCreateTemplate(tPHandle int, cLHandle int, numberOfFields uint32, certFields *raw.CssmField, certTemplate *raw.CssmData) int32 {
-	return raw.CSSM_TP_CertCreateTemplate(tPHandle, cLHandle, numberOfFields, certFields, certTemplate)
-}
-
-// CSSM_TP_CertGetAllTemplateFields calls [raw.CSSM_TP_CertGetAllTemplateFields] (C function CSSM_TP_CertGetAllTemplateFields).
-func CSSM_TP_CertGetAllTemplateFields(tPHandle int, cLHandle int, certTemplate *raw.CssmData, numberOfFields *uint32, certFields **raw.CssmField) int32 {
-	return raw.CSSM_TP_CertGetAllTemplateFields(tPHandle, cLHandle, certTemplate, numberOfFields, certFields)
-}
-
-// CSSM_TP_CertGroupConstruct calls [raw.CSSM_TP_CertGroupConstruct] (C function CSSM_TP_CertGroupConstruct).
-func CSSM_TP_CertGroupConstruct(tPHandle int, cLHandle int, cSPHandle int, dBList *raw.CssmDlDbList, constructParams unsafe.Pointer, certGroupFrag *raw.CssmCertgroup, certGroup **raw.CssmCertgroup) int32 {
-	return raw.CSSM_TP_CertGroupConstruct(tPHandle, cLHandle, cSPHandle, dBList, constructParams, certGroupFrag, certGroup)
-}
-
-// CSSM_TP_CertGroupPrune calls [raw.CSSM_TP_CertGroupPrune] (C function CSSM_TP_CertGroupPrune).
-func CSSM_TP_CertGroupPrune(tPHandle int, cLHandle int, dBList *raw.CssmDlDbList, orderedCertGroup *raw.CssmCertgroup, prunedCertGroup **raw.CssmCertgroup) int32 {
-	return raw.CSSM_TP_CertGroupPrune(tPHandle, cLHandle, dBList, orderedCertGroup, prunedCertGroup)
-}
-
-// CSSM_TP_CertGroupToTupleGroup calls [raw.CSSM_TP_CertGroupToTupleGroup] (C function CSSM_TP_CertGroupToTupleGroup).
-func CSSM_TP_CertGroupToTupleGroup(tPHandle int, cLHandle int, certGroup *raw.CssmCertgroup, tupleGroup **raw.CssmTuplegroup) int32 {
-	return raw.CSSM_TP_CertGroupToTupleGroup(tPHandle, cLHandle, certGroup, tupleGroup)
-}
-
-// CSSM_TP_CertGroupVerify calls [raw.CSSM_TP_CertGroupVerify] (C function CSSM_TP_CertGroupVerify).
-func CSSM_TP_CertGroupVerify(tPHandle int, cLHandle int, cSPHandle int, certGroupToBeVerified *raw.CssmCertgroup, verifyContext *raw.CssmTpVerifyContext, verifyContextResult *raw.CssmTpVerifyContextResult) int32 {
-	return raw.CSSM_TP_CertGroupVerify(tPHandle, cLHandle, cSPHandle, certGroupToBeVerified, verifyContext, verifyContextResult)
-}
-
-// CSSM_TP_CertReclaimAbort calls [raw.CSSM_TP_CertReclaimAbort] (C function CSSM_TP_CertReclaimAbort).
+// CSSM_TP_CertReclaimAbort calls the Security framework function CSSM_TP_CertReclaimAbort.
 func CSSM_TP_CertReclaimAbort(tPHandle int, keyCacheHandle uint64) int32 {
-	return raw.CSSM_TP_CertReclaimAbort(tPHandle, keyCacheHandle)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_TP_CertReclaimAbort == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_TP_CertReclaimAbort, _lib, "CSSM_TP_CertReclaimAbort")
+	}
+	return _fnCSSM_TP_CertReclaimAbort(tPHandle, keyCacheHandle)
 }
 
-// CSSM_TP_CertReclaimKey calls [raw.CSSM_TP_CertReclaimKey] (C function CSSM_TP_CertReclaimKey).
-func CSSM_TP_CertReclaimKey(tPHandle int, certGroup *raw.CssmCertgroup, certIndex uint32, keyCacheHandle uint64, cSPHandle int, credAndAclEntry *raw.CssmResourceControlContext) int32 {
-	return raw.CSSM_TP_CertReclaimKey(tPHandle, certGroup, certIndex, keyCacheHandle, cSPHandle, credAndAclEntry)
-}
+var _fnCSSM_Terminate func() int32
 
-// CSSM_TP_CertRemoveFromCrlTemplate calls [raw.CSSM_TP_CertRemoveFromCrlTemplate] (C function CSSM_TP_CertRemoveFromCrlTemplate).
-func CSSM_TP_CertRemoveFromCrlTemplate(tPHandle int, cLHandle int, cSPHandle int, oldCrlTemplate *raw.CssmData, certGroupToBeRemoved *raw.CssmCertgroup, revokerCertGroup *raw.CssmCertgroup, revokerVerifyContext *raw.CssmTpVerifyContext, revokerVerifyResult *raw.CssmTpVerifyContextResult, newCrlTemplate *raw.CssmData) int32 {
-	return raw.CSSM_TP_CertRemoveFromCrlTemplate(tPHandle, cLHandle, cSPHandle, oldCrlTemplate, certGroupToBeRemoved, revokerCertGroup, revokerVerifyContext, revokerVerifyResult, newCrlTemplate)
-}
-
-// CSSM_TP_CertRevoke calls [raw.CSSM_TP_CertRevoke] (C function CSSM_TP_CertRevoke).
-func CSSM_TP_CertRevoke(tPHandle int, cLHandle int, cSPHandle int, oldCrlTemplate *raw.CssmData, certGroupToBeRevoked *raw.CssmCertgroup, revokerCertGroup *raw.CssmCertgroup, revokerVerifyContext *raw.CssmTpVerifyContext, revokerVerifyResult *raw.CssmTpVerifyContextResult, reason uint32, newCrlTemplate *raw.CssmData) int32 {
-	return raw.CSSM_TP_CertRevoke(tPHandle, cLHandle, cSPHandle, oldCrlTemplate, certGroupToBeRevoked, revokerCertGroup, revokerVerifyContext, revokerVerifyResult, reason, newCrlTemplate)
-}
-
-// CSSM_TP_CertSign calls [raw.CSSM_TP_CertSign] (C function CSSM_TP_CertSign).
-func CSSM_TP_CertSign(tPHandle int, cLHandle int, cCHandle uint64, certTemplateToBeSigned *raw.CssmData, signerCertGroup *raw.CssmCertgroup, signerVerifyContext *raw.CssmTpVerifyContext, signerVerifyResult *raw.CssmTpVerifyContextResult, signedCert *raw.CssmData) int32 {
-	return raw.CSSM_TP_CertSign(tPHandle, cLHandle, cCHandle, certTemplateToBeSigned, signerCertGroup, signerVerifyContext, signerVerifyResult, signedCert)
-}
-
-// CSSM_TP_ConfirmCredResult calls [raw.CSSM_TP_ConfirmCredResult] (C function CSSM_TP_ConfirmCredResult).
-func CSSM_TP_ConfirmCredResult(tPHandle int, referenceIdentifier *raw.CssmData, callerAuthCredentials *raw.CssmTpCallerauthContext, responses *raw.CssmTpConfirmResponse, preferredAuthority *raw.CssmTpAuthorityId) int32 {
-	return raw.CSSM_TP_ConfirmCredResult(tPHandle, referenceIdentifier, callerAuthCredentials, responses, preferredAuthority)
-}
-
-// CSSM_TP_CrlCreateTemplate calls [raw.CSSM_TP_CrlCreateTemplate] (C function CSSM_TP_CrlCreateTemplate).
-func CSSM_TP_CrlCreateTemplate(tPHandle int, cLHandle int, numberOfFields uint32, crlFields *raw.CssmField, newCrlTemplate *raw.CssmData) int32 {
-	return raw.CSSM_TP_CrlCreateTemplate(tPHandle, cLHandle, numberOfFields, crlFields, newCrlTemplate)
-}
-
-// CSSM_TP_CrlSign calls [raw.CSSM_TP_CrlSign] (C function CSSM_TP_CrlSign).
-func CSSM_TP_CrlSign(tPHandle int, cLHandle int, cCHandle uint64, crlToBeSigned *raw.CssmEncodedCrl, signerCertGroup *raw.CssmCertgroup, signerVerifyContext *raw.CssmTpVerifyContext, signerVerifyResult *raw.CssmTpVerifyContextResult, signedCrl *raw.CssmData) int32 {
-	return raw.CSSM_TP_CrlSign(tPHandle, cLHandle, cCHandle, crlToBeSigned, signerCertGroup, signerVerifyContext, signerVerifyResult, signedCrl)
-}
-
-// CSSM_TP_CrlVerify calls [raw.CSSM_TP_CrlVerify] (C function CSSM_TP_CrlVerify).
-func CSSM_TP_CrlVerify(tPHandle int, cLHandle int, cSPHandle int, crlToBeVerified *raw.CssmEncodedCrl, signerCertGroup *raw.CssmCertgroup, verifyContext *raw.CssmTpVerifyContext, revokerVerifyResult *raw.CssmTpVerifyContextResult) int32 {
-	return raw.CSSM_TP_CrlVerify(tPHandle, cLHandle, cSPHandle, crlToBeVerified, signerCertGroup, verifyContext, revokerVerifyResult)
-}
-
-// CSSM_TP_FormRequest calls [raw.CSSM_TP_FormRequest] (C function CSSM_TP_FormRequest).
-func CSSM_TP_FormRequest(tPHandle int, preferredAuthority *raw.CssmTpAuthorityId, formType uint32, blankForm *raw.CssmData) int32 {
-	return raw.CSSM_TP_FormRequest(tPHandle, preferredAuthority, formType, blankForm)
-}
-
-// CSSM_TP_FormSubmit calls [raw.CSSM_TP_FormSubmit] (C function CSSM_TP_FormSubmit).
-func CSSM_TP_FormSubmit(tPHandle int, formType uint32, form *raw.CssmData, clearanceAuthority *raw.CssmTpAuthorityId, representedAuthority *raw.CssmTpAuthorityId, credentials *raw.CssmAccessCredentials) int32 {
-	return raw.CSSM_TP_FormSubmit(tPHandle, formType, form, clearanceAuthority, representedAuthority, credentials)
-}
-
-// CSSM_TP_PassThrough calls [raw.CSSM_TP_PassThrough] (C function CSSM_TP_PassThrough).
-func CSSM_TP_PassThrough(tPHandle int, cLHandle int, cCHandle uint64, dBList *raw.CssmDlDbList, passThroughId uint32, inputParams unsafe.Pointer, outputParams unsafe.Pointer) int32 {
-	return raw.CSSM_TP_PassThrough(tPHandle, cLHandle, cCHandle, dBList, passThroughId, inputParams, outputParams)
-}
-
-// CSSM_TP_ReceiveConfirmation calls [raw.CSSM_TP_ReceiveConfirmation] (C function CSSM_TP_ReceiveConfirmation).
-func CSSM_TP_ReceiveConfirmation(tPHandle int, referenceIdentifier *raw.CssmData, responses **raw.CssmTpConfirmResponse, elapsedTime *int32) int32 {
-	return raw.CSSM_TP_ReceiveConfirmation(tPHandle, referenceIdentifier, responses, elapsedTime)
-}
-
-// CSSM_TP_RetrieveCredResult calls [raw.CSSM_TP_RetrieveCredResult] (C function CSSM_TP_RetrieveCredResult).
-func CSSM_TP_RetrieveCredResult(tPHandle int, referenceIdentifier *raw.CssmData, callerAuthCredentials *raw.CssmTpCallerauthContext, estimatedTime *int32, confirmationRequired *int32, retrieveOutput **raw.CssmTpResultSet) int32 {
-	return raw.CSSM_TP_RetrieveCredResult(tPHandle, referenceIdentifier, callerAuthCredentials, estimatedTime, confirmationRequired, retrieveOutput)
-}
-
-// CSSM_TP_SubmitCredRequest calls [raw.CSSM_TP_SubmitCredRequest] (C function CSSM_TP_SubmitCredRequest).
-func CSSM_TP_SubmitCredRequest(tPHandle int, preferredAuthority *raw.CssmTpAuthorityId, requestType uint32, requestInput *raw.CssmTpRequestSet, callerAuthContext *raw.CssmTpCallerauthContext, estimatedTime *int32, referenceIdentifier *raw.CssmData) int32 {
-	return raw.CSSM_TP_SubmitCredRequest(tPHandle, preferredAuthority, requestType, requestInput, callerAuthContext, estimatedTime, referenceIdentifier)
-}
-
-// CSSM_TP_TupleGroupToCertGroup calls [raw.CSSM_TP_TupleGroupToCertGroup] (C function CSSM_TP_TupleGroupToCertGroup).
-func CSSM_TP_TupleGroupToCertGroup(tPHandle int, cLHandle int, tupleGroup *raw.CssmTuplegroup, certTemplates **raw.CssmCertgroup) int32 {
-	return raw.CSSM_TP_TupleGroupToCertGroup(tPHandle, cLHandle, tupleGroup, certTemplates)
-}
-
-// CSSM_Terminate calls [raw.CSSM_Terminate] (C function CSSM_Terminate).
+// CSSM_Terminate calls the Security framework function CSSM_Terminate.
 func CSSM_Terminate() int32 {
-	return raw.CSSM_Terminate()
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_Terminate == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_Terminate, _lib, "CSSM_Terminate")
+	}
+	return _fnCSSM_Terminate()
 }
 
-// CSSM_Unintroduce calls [raw.CSSM_Unintroduce] (C function CSSM_Unintroduce).
-func CSSM_Unintroduce(moduleID *raw.CssmGuid) int32 {
-	return raw.CSSM_Unintroduce(moduleID)
-}
+var _fnCSSM_VerifyDataInit func(uint64) int32
 
-// CSSM_UnwrapKey calls [raw.CSSM_UnwrapKey] (C function CSSM_UnwrapKey).
-func CSSM_UnwrapKey(cCHandle uint64, publicKey *raw.CssmKey, wrappedKey *raw.CssmKey, keyUsage uint32, keyAttr uint32, keyLabel *raw.CssmData, credAndAclEntry *raw.CssmResourceControlContext, unwrappedKey *raw.CssmKey, descriptiveData *raw.CssmData) int32 {
-	return raw.CSSM_UnwrapKey(cCHandle, publicKey, wrappedKey, keyUsage, keyAttr, keyLabel, credAndAclEntry, unwrappedKey, descriptiveData)
-}
-
-// CSSM_UnwrapKeyP calls [raw.CSSM_UnwrapKeyP] (C function CSSM_UnwrapKeyP).
-func CSSM_UnwrapKeyP(cCHandle uint64, publicKey *raw.CssmKey, wrappedKey *raw.CssmKey, keyUsage uint32, keyAttr uint32, keyLabel *raw.CssmData, credAndAclEntry *raw.CssmResourceControlContext, unwrappedKey *raw.CssmKey, descriptiveData *raw.CssmData, privilege uint64) int32 {
-	return raw.CSSM_UnwrapKeyP(cCHandle, publicKey, wrappedKey, keyUsage, keyAttr, keyLabel, credAndAclEntry, unwrappedKey, descriptiveData, privilege)
-}
-
-// CSSM_UpdateContextAttributes calls [raw.CSSM_UpdateContextAttributes] (C function CSSM_UpdateContextAttributes).
-func CSSM_UpdateContextAttributes(cCHandle uint64, numberOfAttributes uint32, contextAttributes *raw.CssmContextAttribute) int32 {
-	return raw.CSSM_UpdateContextAttributes(cCHandle, numberOfAttributes, contextAttributes)
-}
-
-// CSSM_VerifyData calls [raw.CSSM_VerifyData] (C function CSSM_VerifyData).
-func CSSM_VerifyData(cCHandle uint64, dataBufs *raw.CssmData, dataBufCount uint32, digestAlgorithm uint32, signature *raw.CssmData) int32 {
-	return raw.CSSM_VerifyData(cCHandle, dataBufs, dataBufCount, digestAlgorithm, signature)
-}
-
-// CSSM_VerifyDataFinal calls [raw.CSSM_VerifyDataFinal] (C function CSSM_VerifyDataFinal).
-func CSSM_VerifyDataFinal(cCHandle uint64, signature *raw.CssmData) int32 {
-	return raw.CSSM_VerifyDataFinal(cCHandle, signature)
-}
-
-// CSSM_VerifyDataInit calls [raw.CSSM_VerifyDataInit] (C function CSSM_VerifyDataInit).
+// CSSM_VerifyDataInit calls the Security framework function CSSM_VerifyDataInit.
 func CSSM_VerifyDataInit(cCHandle uint64) int32 {
-	return raw.CSSM_VerifyDataInit(cCHandle)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_VerifyDataInit == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_VerifyDataInit, _lib, "CSSM_VerifyDataInit")
+	}
+	return _fnCSSM_VerifyDataInit(cCHandle)
 }
 
-// CSSM_VerifyDataUpdate calls [raw.CSSM_VerifyDataUpdate] (C function CSSM_VerifyDataUpdate).
-func CSSM_VerifyDataUpdate(cCHandle uint64, dataBufs *raw.CssmData, dataBufCount uint32) int32 {
-	return raw.CSSM_VerifyDataUpdate(cCHandle, dataBufs, dataBufCount)
-}
+var _fnCSSM_VerifyMacInit func(uint64) int32
 
-// CSSM_VerifyDevice calls [raw.CSSM_VerifyDevice] (C function CSSM_VerifyDevice).
-func CSSM_VerifyDevice(cSPHandle int, deviceCert *raw.CssmData) int32 {
-	return raw.CSSM_VerifyDevice(cSPHandle, deviceCert)
-}
-
-// CSSM_VerifyMac calls [raw.CSSM_VerifyMac] (C function CSSM_VerifyMac).
-func CSSM_VerifyMac(cCHandle uint64, dataBufs *raw.CssmData, dataBufCount uint32, mac *raw.CssmData) int32 {
-	return raw.CSSM_VerifyMac(cCHandle, dataBufs, dataBufCount, mac)
-}
-
-// CSSM_VerifyMacFinal calls [raw.CSSM_VerifyMacFinal] (C function CSSM_VerifyMacFinal).
-func CSSM_VerifyMacFinal(cCHandle uint64, mac *raw.CssmData) int32 {
-	return raw.CSSM_VerifyMacFinal(cCHandle, mac)
-}
-
-// CSSM_VerifyMacInit calls [raw.CSSM_VerifyMacInit] (C function CSSM_VerifyMacInit).
+// CSSM_VerifyMacInit calls the Security framework function CSSM_VerifyMacInit.
 func CSSM_VerifyMacInit(cCHandle uint64) int32 {
-	return raw.CSSM_VerifyMacInit(cCHandle)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSSM_VerifyMacInit == nil {
+		ebipurego.RegisterLibFunc(&_fnCSSM_VerifyMacInit, _lib, "CSSM_VerifyMacInit")
+	}
+	return _fnCSSM_VerifyMacInit(cCHandle)
 }
 
-// CSSM_VerifyMacUpdate calls [raw.CSSM_VerifyMacUpdate] (C function CSSM_VerifyMacUpdate).
-func CSSM_VerifyMacUpdate(cCHandle uint64, dataBufs *raw.CssmData, dataBufCount uint32) int32 {
-	return raw.CSSM_VerifyMacUpdate(cCHandle, dataBufs, dataBufCount)
-}
+var _fnMDS_Install func(int) int32
 
-// CSSM_WrapKey calls [raw.CSSM_WrapKey] (C function CSSM_WrapKey).
-func CSSM_WrapKey(cCHandle uint64, accessCred *raw.CssmAccessCredentials, key *raw.CssmKey, descriptiveData *raw.CssmData, wrappedKey *raw.CssmKey) int32 {
-	return raw.CSSM_WrapKey(cCHandle, accessCred, key, descriptiveData, wrappedKey)
-}
-
-// CSSM_WrapKeyP calls [raw.CSSM_WrapKeyP] (C function CSSM_WrapKeyP).
-func CSSM_WrapKeyP(cCHandle uint64, accessCred *raw.CssmAccessCredentials, key *raw.CssmKey, descriptiveData *raw.CssmData, wrappedKey *raw.CssmKey, privilege uint64) int32 {
-	return raw.CSSM_WrapKeyP(cCHandle, accessCred, key, descriptiveData, wrappedKey, privilege)
-}
-
-// MDS_Initialize calls [raw.MDS_Initialize] (C function MDS_Initialize).
-func MDS_Initialize(pCallerGuid *raw.CssmGuid, pMemoryFunctions *raw.CssmMemoryFuncs, pDlFunctions *raw.MdsFuncs, hMds *int) int32 {
-	return raw.MDS_Initialize(pCallerGuid, pMemoryFunctions, pDlFunctions, hMds)
-}
-
-// MDS_Install calls [raw.MDS_Install] (C function MDS_Install).
+// MDS_Install calls the Security framework function MDS_Install.
 func MDS_Install(mdsHandle int) int32 {
-	return raw.MDS_Install(mdsHandle)
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDS_Install == nil {
+		ebipurego.RegisterLibFunc(&_fnMDS_Install, _lib, "MDS_Install")
+	}
+	return _fnMDS_Install(mdsHandle)
 }
 
-// MDS_Terminate calls [raw.MDS_Terminate] (C function MDS_Terminate).
+var _fnMDS_Terminate func(int) int32
+
+// MDS_Terminate calls the Security framework function MDS_Terminate.
 func MDS_Terminate(mdsHandle int) int32 {
-	return raw.MDS_Terminate(mdsHandle)
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDS_Terminate == nil {
+		ebipurego.RegisterLibFunc(&_fnMDS_Terminate, _lib, "MDS_Terminate")
+	}
+	return _fnMDS_Terminate(mdsHandle)
 }
 
-// MDS_Uninstall calls [raw.MDS_Uninstall] (C function MDS_Uninstall).
+var _fnMDS_Uninstall func(int) int32
+
+// MDS_Uninstall calls the Security framework function MDS_Uninstall.
 func MDS_Uninstall(mdsHandle int) int32 {
-	return raw.MDS_Uninstall(mdsHandle)
-}
-
-// SSLAddDistinguishedName calls [raw.SSLAddDistinguishedName] (C function SSLAddDistinguishedName).
-func SSLAddDistinguishedName(context_ unsafe.Pointer, derDN unsafe.Pointer, derDNLen uint) int {
-	return raw.SSLAddDistinguishedName(context_, derDN, derDNLen)
-}
-
-// SSLClose calls [raw.SSLClose] (C function SSLClose).
-func SSLClose(context_ unsafe.Pointer) int {
-	return raw.SSLClose(context_)
-}
-
-// SSLContextGetTypeID calls [raw.SSLContextGetTypeID] (C function SSLContextGetTypeID).
-func SSLContextGetTypeID() uint {
-	return raw.SSLContextGetTypeID()
-}
-
-// SSLCopyALPNProtocols calls [raw.SSLCopyALPNProtocols] (C function SSLCopyALPNProtocols).
-func SSLCopyALPNProtocols(context_ unsafe.Pointer, protocols unsafe.Pointer) int {
-	return raw.SSLCopyALPNProtocols(context_, protocols)
-}
-
-// SSLCopyCertificateAuthorities calls [raw.SSLCopyCertificateAuthorities] (C function SSLCopyCertificateAuthorities).
-func SSLCopyCertificateAuthorities(context_ unsafe.Pointer, certificates unsafe.Pointer) int {
-	return raw.SSLCopyCertificateAuthorities(context_, certificates)
-}
-
-// SSLCopyDistinguishedNames calls [raw.SSLCopyDistinguishedNames] (C function SSLCopyDistinguishedNames).
-func SSLCopyDistinguishedNames(context_ unsafe.Pointer, names unsafe.Pointer) int {
-	return raw.SSLCopyDistinguishedNames(context_, names)
-}
-
-// SSLCopyPeerCertificates calls [raw.SSLCopyPeerCertificates] (C function SSLCopyPeerCertificates).
-func SSLCopyPeerCertificates(context_ unsafe.Pointer, certs unsafe.Pointer) int {
-	return raw.SSLCopyPeerCertificates(context_, certs)
-}
-
-// SSLCopyPeerTrust calls [raw.SSLCopyPeerTrust] (C function SSLCopyPeerTrust).
-func SSLCopyPeerTrust(context_ unsafe.Pointer, trust unsafe.Pointer) int {
-	return raw.SSLCopyPeerTrust(context_, trust)
-}
-
-// SSLCopyRequestedPeerName calls [raw.SSLCopyRequestedPeerName] (C function SSLCopyRequestedPeerName).
-func SSLCopyRequestedPeerName(context_ unsafe.Pointer, peerName string, peerNameLen *uint) int {
-	return raw.SSLCopyRequestedPeerName(context_, peerName, peerNameLen)
-}
-
-// SSLCopyRequestedPeerNameLength calls [raw.SSLCopyRequestedPeerNameLength] (C function SSLCopyRequestedPeerNameLength).
-func SSLCopyRequestedPeerNameLength(ctx unsafe.Pointer, peerNameLen *uint) int {
-	return raw.SSLCopyRequestedPeerNameLength(ctx, peerNameLen)
-}
-
-// SSLCopyTrustedRoots calls [raw.SSLCopyTrustedRoots] (C function SSLCopyTrustedRoots).
-func SSLCopyTrustedRoots(context_ unsafe.Pointer, trustedRoots unsafe.Pointer) int {
-	return raw.SSLCopyTrustedRoots(context_, trustedRoots)
-}
-
-// SSLCreateContext calls [raw.SSLCreateContext] (C function SSLCreateContext).
-func SSLCreateContext(alloc unsafe.Pointer, protocolSide SSLProtocolSide, connectionType SSLConnectionType) unsafe.Pointer {
-	return raw.SSLCreateContext(alloc, raw.SSLProtocolSide(protocolSide), raw.SSLConnectionType(connectionType))
-}
-
-// SSLDisposeContext calls [raw.SSLDisposeContext] (C function SSLDisposeContext).
-func SSLDisposeContext(context_ unsafe.Pointer) int {
-	return raw.SSLDisposeContext(context_)
-}
-
-// SSLGetAllowsAnyRoot calls [raw.SSLGetAllowsAnyRoot] (C function SSLGetAllowsAnyRoot).
-func SSLGetAllowsAnyRoot(context_ unsafe.Pointer, anyRoot *uint8) int {
-	return raw.SSLGetAllowsAnyRoot(context_, anyRoot)
-}
-
-// SSLGetAllowsExpiredCerts calls [raw.SSLGetAllowsExpiredCerts] (C function SSLGetAllowsExpiredCerts).
-func SSLGetAllowsExpiredCerts(context_ unsafe.Pointer, allowsExpired *uint8) int {
-	return raw.SSLGetAllowsExpiredCerts(context_, allowsExpired)
-}
-
-// SSLGetAllowsExpiredRoots calls [raw.SSLGetAllowsExpiredRoots] (C function SSLGetAllowsExpiredRoots).
-func SSLGetAllowsExpiredRoots(context_ unsafe.Pointer, allowsExpired *uint8) int {
-	return raw.SSLGetAllowsExpiredRoots(context_, allowsExpired)
-}
-
-// SSLGetBufferedReadSize calls [raw.SSLGetBufferedReadSize] (C function SSLGetBufferedReadSize).
-func SSLGetBufferedReadSize(context_ unsafe.Pointer, bufferSize *uint) int {
-	return raw.SSLGetBufferedReadSize(context_, bufferSize)
-}
-
-// SSLGetClientCertificateState calls [raw.SSLGetClientCertificateState] (C function SSLGetClientCertificateState).
-func SSLGetClientCertificateState(context_ unsafe.Pointer, clientState *SSLClientCertificateState) int {
-	var _clientState raw.SSLClientCertificateState
-	_ret := raw.SSLGetClientCertificateState(context_, &_clientState)
-	if clientState != nil {
-		*clientState = SSLClientCertificateState(_clientState)
+	_loadOnce.Do(_loadLibrary)
+	if _fnMDS_Uninstall == nil {
+		ebipurego.RegisterLibFunc(&_fnMDS_Uninstall, _lib, "MDS_Uninstall")
 	}
-	return _ret
+	return _fnMDS_Uninstall(mdsHandle)
 }
 
-// SSLGetConnection calls [raw.SSLGetConnection] (C function SSLGetConnection).
-func SSLGetConnection(context_ unsafe.Pointer, connection unsafe.Pointer) int {
-	return raw.SSLGetConnection(context_, connection)
-}
+var _fnSSLContextGetTypeID func() int
 
-// SSLGetDatagramWriteSize calls [raw.SSLGetDatagramWriteSize] (C function SSLGetDatagramWriteSize).
-func SSLGetDatagramWriteSize(dtlsContext unsafe.Pointer, bufSize *uint) int {
-	return raw.SSLGetDatagramWriteSize(dtlsContext, bufSize)
-}
-
-// SSLGetDiffieHellmanParams calls [raw.SSLGetDiffieHellmanParams] (C function SSLGetDiffieHellmanParams).
-func SSLGetDiffieHellmanParams(context_ unsafe.Pointer, dhParams unsafe.Pointer, dhParamsLen *uint) int {
-	return raw.SSLGetDiffieHellmanParams(context_, dhParams, dhParamsLen)
-}
-
-// SSLGetEnableCertVerify calls [raw.SSLGetEnableCertVerify] (C function SSLGetEnableCertVerify).
-func SSLGetEnableCertVerify(context_ unsafe.Pointer, enableVerify *uint8) int {
-	return raw.SSLGetEnableCertVerify(context_, enableVerify)
-}
-
-// SSLGetEnabledCiphers calls [raw.SSLGetEnabledCiphers] (C function SSLGetEnabledCiphers).
-func SSLGetEnabledCiphers(context_ unsafe.Pointer, ciphers *uint16, numCiphers *uint) int {
-	return raw.SSLGetEnabledCiphers(context_, ciphers, numCiphers)
-}
-
-// SSLGetMaxDatagramRecordSize calls [raw.SSLGetMaxDatagramRecordSize] (C function SSLGetMaxDatagramRecordSize).
-func SSLGetMaxDatagramRecordSize(dtlsContext unsafe.Pointer, maxSize *uint) int {
-	return raw.SSLGetMaxDatagramRecordSize(dtlsContext, maxSize)
-}
-
-// SSLGetNegotiatedCipher calls [raw.SSLGetNegotiatedCipher] (C function SSLGetNegotiatedCipher).
-func SSLGetNegotiatedCipher(context_ unsafe.Pointer, cipherSuite *uint16) int {
-	return raw.SSLGetNegotiatedCipher(context_, cipherSuite)
-}
-
-// SSLGetNegotiatedProtocolVersion calls [raw.SSLGetNegotiatedProtocolVersion] (C function SSLGetNegotiatedProtocolVersion).
-func SSLGetNegotiatedProtocolVersion(context_ unsafe.Pointer, protocol *SSLProtocol) int {
-	var _protocol raw.SSLProtocol
-	_ret := raw.SSLGetNegotiatedProtocolVersion(context_, &_protocol)
-	if protocol != nil {
-		*protocol = SSLProtocol(_protocol)
+// SSLContextGetTypeID calls the Security framework function SSLContextGetTypeID.
+func SSLContextGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSSLContextGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSSLContextGetTypeID, _lib, "SSLContextGetTypeID")
 	}
-	return _ret
+	return _fnSSLContextGetTypeID()
 }
 
-// SSLGetNumberEnabledCiphers calls [raw.SSLGetNumberEnabledCiphers] (C function SSLGetNumberEnabledCiphers).
-func SSLGetNumberEnabledCiphers(context_ unsafe.Pointer, numCiphers *uint) int {
-	return raw.SSLGetNumberEnabledCiphers(context_, numCiphers)
-}
+var _fnSSLCreateContext func(objc.ID, SSLProtocolSide, SSLConnectionType) objc.ID
 
-// SSLGetNumberSupportedCiphers calls [raw.SSLGetNumberSupportedCiphers] (C function SSLGetNumberSupportedCiphers).
-func SSLGetNumberSupportedCiphers(context_ unsafe.Pointer, numCiphers *uint) int {
-	return raw.SSLGetNumberSupportedCiphers(context_, numCiphers)
-}
-
-// SSLGetPeerDomainName calls [raw.SSLGetPeerDomainName] (C function SSLGetPeerDomainName).
-func SSLGetPeerDomainName(context_ unsafe.Pointer, peerName string, peerNameLen *uint) int {
-	return raw.SSLGetPeerDomainName(context_, peerName, peerNameLen)
-}
-
-// SSLGetPeerDomainNameLength calls [raw.SSLGetPeerDomainNameLength] (C function SSLGetPeerDomainNameLength).
-func SSLGetPeerDomainNameLength(context_ unsafe.Pointer, peerNameLen *uint) int {
-	return raw.SSLGetPeerDomainNameLength(context_, peerNameLen)
-}
-
-// SSLGetPeerID calls [raw.SSLGetPeerID] (C function SSLGetPeerID).
-func SSLGetPeerID(context_ unsafe.Pointer, peerID unsafe.Pointer, peerIDLen *uint) int {
-	return raw.SSLGetPeerID(context_, peerID, peerIDLen)
-}
-
-// SSLGetProtocolVersion calls [raw.SSLGetProtocolVersion] (C function SSLGetProtocolVersion).
-func SSLGetProtocolVersion(context_ unsafe.Pointer, protocol *SSLProtocol) int {
-	var _protocol raw.SSLProtocol
-	_ret := raw.SSLGetProtocolVersion(context_, &_protocol)
-	if protocol != nil {
-		*protocol = SSLProtocol(_protocol)
+// SSLCreateContext calls the Security framework function SSLCreateContext.
+func SSLCreateContext(alloc obj.Object, protocolSide SSLProtocolSide, connectionType SSLConnectionType) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSSLCreateContext == nil {
+		ebipurego.RegisterLibFunc(&_fnSSLCreateContext, _lib, "SSLCreateContext")
 	}
-	return _ret
+	_ret := _fnSSLCreateContext(objref.IDOf(alloc), protocolSide, connectionType)
+	return obj.Wrap(_ret)
 }
 
-// SSLGetProtocolVersionEnabled calls [raw.SSLGetProtocolVersionEnabled] (C function SSLGetProtocolVersionEnabled).
-func SSLGetProtocolVersionEnabled(context_ unsafe.Pointer, protocol SSLProtocol, enable *uint8) int {
-	return raw.SSLGetProtocolVersionEnabled(context_, raw.SSLProtocol(protocol), enable)
-}
+var _fnSecACLCopyAuthorizations func(objc.ID) objc.ID
 
-// SSLGetProtocolVersionMax calls [raw.SSLGetProtocolVersionMax] (C function SSLGetProtocolVersionMax).
-func SSLGetProtocolVersionMax(context_ unsafe.Pointer, maxVersion *SSLProtocol) int {
-	var _maxVersion raw.SSLProtocol
-	_ret := raw.SSLGetProtocolVersionMax(context_, &_maxVersion)
-	if maxVersion != nil {
-		*maxVersion = SSLProtocol(_maxVersion)
+// SecACLCopyAuthorizations calls the Security framework function SecACLCopyAuthorizations.
+func SecACLCopyAuthorizations(acl obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecACLCopyAuthorizations == nil {
+		ebipurego.RegisterLibFunc(&_fnSecACLCopyAuthorizations, _lib, "SecACLCopyAuthorizations")
 	}
-	return _ret
+	_ret := _fnSecACLCopyAuthorizations(objref.IDOf(acl))
+	return obj.Wrap(_ret)
 }
 
-// SSLGetProtocolVersionMin calls [raw.SSLGetProtocolVersionMin] (C function SSLGetProtocolVersionMin).
-func SSLGetProtocolVersionMin(context_ unsafe.Pointer, minVersion *SSLProtocol) int {
-	var _minVersion raw.SSLProtocol
-	_ret := raw.SSLGetProtocolVersionMin(context_, &_minVersion)
-	if minVersion != nil {
-		*minVersion = SSLProtocol(_minVersion)
+var _fnSecACLGetTypeID func() int
+
+// SecACLGetTypeID calls the Security framework function SecACLGetTypeID.
+func SecACLGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecACLGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecACLGetTypeID, _lib, "SecACLGetTypeID")
 	}
-	return _ret
+	return _fnSecACLGetTypeID()
 }
 
-// SSLGetRsaBlinding calls [raw.SSLGetRsaBlinding] (C function SSLGetRsaBlinding).
-func SSLGetRsaBlinding(context_ unsafe.Pointer, blinding *uint8) int {
-	return raw.SSLGetRsaBlinding(context_, blinding)
-}
+var _fnSecAccessControlGetTypeID func() int
 
-// SSLGetSessionOption calls [raw.SSLGetSessionOption] (C function SSLGetSessionOption).
-func SSLGetSessionOption(context_ unsafe.Pointer, option SSLSessionOption, value *uint8) int {
-	return raw.SSLGetSessionOption(context_, raw.SSLSessionOption(option), value)
-}
-
-// SSLGetSessionState calls [raw.SSLGetSessionState] (C function SSLGetSessionState).
-func SSLGetSessionState(context_ unsafe.Pointer, state *SSLSessionState) int {
-	var _state raw.SSLSessionState
-	_ret := raw.SSLGetSessionState(context_, &_state)
-	if state != nil {
-		*state = SSLSessionState(_state)
+// SecAccessControlGetTypeID calls the Security framework function SecAccessControlGetTypeID.
+func SecAccessControlGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecAccessControlGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecAccessControlGetTypeID, _lib, "SecAccessControlGetTypeID")
 	}
-	return _ret
+	return _fnSecAccessControlGetTypeID()
 }
 
-// SSLGetSupportedCiphers calls [raw.SSLGetSupportedCiphers] (C function SSLGetSupportedCiphers).
-func SSLGetSupportedCiphers(context_ unsafe.Pointer, ciphers *uint16, numCiphers *uint) int {
-	return raw.SSLGetSupportedCiphers(context_, ciphers, numCiphers)
-}
+var _fnSecAccessCopyMatchingACLList func(objc.ID, objc.ID) objc.ID
 
-// SSLHandshake calls [raw.SSLHandshake] (C function SSLHandshake).
-func SSLHandshake(context_ unsafe.Pointer) int {
-	return raw.SSLHandshake(context_)
-}
-
-// SSLNewContext calls [raw.SSLNewContext] (C function SSLNewContext).
-func SSLNewContext(isServer uint8, contextPtr unsafe.Pointer) int {
-	return raw.SSLNewContext(isServer, contextPtr)
-}
-
-// SSLReHandshake calls [raw.SSLReHandshake] (C function SSLReHandshake).
-func SSLReHandshake(context_ unsafe.Pointer) int {
-	return raw.SSLReHandshake(context_)
-}
-
-// SSLRead calls [raw.SSLRead] (C function SSLRead).
-func SSLRead(context_ unsafe.Pointer, data unsafe.Pointer, dataLength uint, processed *uint) int {
-	return raw.SSLRead(context_, data, dataLength, processed)
-}
-
-// SSLSetALPNProtocols calls [raw.SSLSetALPNProtocols] (C function SSLSetALPNProtocols).
-func SSLSetALPNProtocols(context_ unsafe.Pointer, protocols unsafe.Pointer) int {
-	return raw.SSLSetALPNProtocols(context_, protocols)
-}
-
-// SSLSetAllowsAnyRoot calls [raw.SSLSetAllowsAnyRoot] (C function SSLSetAllowsAnyRoot).
-func SSLSetAllowsAnyRoot(context_ unsafe.Pointer, anyRoot uint8) int {
-	return raw.SSLSetAllowsAnyRoot(context_, anyRoot)
-}
-
-// SSLSetAllowsExpiredCerts calls [raw.SSLSetAllowsExpiredCerts] (C function SSLSetAllowsExpiredCerts).
-func SSLSetAllowsExpiredCerts(context_ unsafe.Pointer, allowsExpired uint8) int {
-	return raw.SSLSetAllowsExpiredCerts(context_, allowsExpired)
-}
-
-// SSLSetAllowsExpiredRoots calls [raw.SSLSetAllowsExpiredRoots] (C function SSLSetAllowsExpiredRoots).
-func SSLSetAllowsExpiredRoots(context_ unsafe.Pointer, allowsExpired uint8) int {
-	return raw.SSLSetAllowsExpiredRoots(context_, allowsExpired)
-}
-
-// SSLSetCertificate calls [raw.SSLSetCertificate] (C function SSLSetCertificate).
-func SSLSetCertificate(context_ unsafe.Pointer, certRefs unsafe.Pointer) int {
-	return raw.SSLSetCertificate(context_, certRefs)
-}
-
-// SSLSetCertificateAuthorities calls [raw.SSLSetCertificateAuthorities] (C function SSLSetCertificateAuthorities).
-func SSLSetCertificateAuthorities(context_ unsafe.Pointer, certificateOrArray unsafe.Pointer, replaceExisting uint8) int {
-	return raw.SSLSetCertificateAuthorities(context_, certificateOrArray, replaceExisting)
-}
-
-// SSLSetClientSideAuthenticate calls [raw.SSLSetClientSideAuthenticate] (C function SSLSetClientSideAuthenticate).
-func SSLSetClientSideAuthenticate(context_ unsafe.Pointer, auth SSLAuthenticate) int {
-	return raw.SSLSetClientSideAuthenticate(context_, raw.SSLAuthenticate(auth))
-}
-
-// SSLSetConnection calls [raw.SSLSetConnection] (C function SSLSetConnection).
-func SSLSetConnection(context_ unsafe.Pointer, connection unsafe.Pointer) int {
-	return raw.SSLSetConnection(context_, connection)
-}
-
-// SSLSetDatagramHelloCookie calls [raw.SSLSetDatagramHelloCookie] (C function SSLSetDatagramHelloCookie).
-func SSLSetDatagramHelloCookie(dtlsContext unsafe.Pointer, cookie unsafe.Pointer, cookieLen uint) int {
-	return raw.SSLSetDatagramHelloCookie(dtlsContext, cookie, cookieLen)
-}
-
-// SSLSetDiffieHellmanParams calls [raw.SSLSetDiffieHellmanParams] (C function SSLSetDiffieHellmanParams).
-func SSLSetDiffieHellmanParams(context_ unsafe.Pointer, dhParams unsafe.Pointer, dhParamsLen uint) int {
-	return raw.SSLSetDiffieHellmanParams(context_, dhParams, dhParamsLen)
-}
-
-// SSLSetEnableCertVerify calls [raw.SSLSetEnableCertVerify] (C function SSLSetEnableCertVerify).
-func SSLSetEnableCertVerify(context_ unsafe.Pointer, enableVerify uint8) int {
-	return raw.SSLSetEnableCertVerify(context_, enableVerify)
-}
-
-// SSLSetEnabledCiphers calls [raw.SSLSetEnabledCiphers] (C function SSLSetEnabledCiphers).
-func SSLSetEnabledCiphers(context_ unsafe.Pointer, ciphers *uint16, numCiphers uint) int {
-	return raw.SSLSetEnabledCiphers(context_, ciphers, numCiphers)
-}
-
-// SSLSetEncryptionCertificate calls [raw.SSLSetEncryptionCertificate] (C function SSLSetEncryptionCertificate).
-func SSLSetEncryptionCertificate(context_ unsafe.Pointer, certRefs unsafe.Pointer) int {
-	return raw.SSLSetEncryptionCertificate(context_, certRefs)
-}
-
-// SSLSetError calls [raw.SSLSetError] (C function SSLSetError).
-func SSLSetError(context_ unsafe.Pointer, status int) int {
-	return raw.SSLSetError(context_, status)
-}
-
-// SSLSetIOFuncs calls [raw.SSLSetIOFuncs] (C function SSLSetIOFuncs).
-func SSLSetIOFuncs(context_ unsafe.Pointer, readFunc unsafe.Pointer, writeFunc unsafe.Pointer) int {
-	return raw.SSLSetIOFuncs(context_, readFunc, writeFunc)
-}
-
-// SSLSetMaxDatagramRecordSize calls [raw.SSLSetMaxDatagramRecordSize] (C function SSLSetMaxDatagramRecordSize).
-func SSLSetMaxDatagramRecordSize(dtlsContext unsafe.Pointer, maxSize uint) int {
-	return raw.SSLSetMaxDatagramRecordSize(dtlsContext, maxSize)
-}
-
-// SSLSetOCSPResponse calls [raw.SSLSetOCSPResponse] (C function SSLSetOCSPResponse).
-func SSLSetOCSPResponse(context_ unsafe.Pointer, response unsafe.Pointer) int {
-	return raw.SSLSetOCSPResponse(context_, response)
-}
-
-// SSLSetPeerDomainName calls [raw.SSLSetPeerDomainName] (C function SSLSetPeerDomainName).
-func SSLSetPeerDomainName(context_ unsafe.Pointer, peerName string, peerNameLen uint) int {
-	return raw.SSLSetPeerDomainName(context_, peerName, peerNameLen)
-}
-
-// SSLSetPeerID calls [raw.SSLSetPeerID] (C function SSLSetPeerID).
-func SSLSetPeerID(context_ unsafe.Pointer, peerID unsafe.Pointer, peerIDLen uint) int {
-	return raw.SSLSetPeerID(context_, peerID, peerIDLen)
-}
-
-// SSLSetProtocolVersion calls [raw.SSLSetProtocolVersion] (C function SSLSetProtocolVersion).
-func SSLSetProtocolVersion(context_ unsafe.Pointer, version SSLProtocol) int {
-	return raw.SSLSetProtocolVersion(context_, raw.SSLProtocol(version))
-}
-
-// SSLSetProtocolVersionEnabled calls [raw.SSLSetProtocolVersionEnabled] (C function SSLSetProtocolVersionEnabled).
-func SSLSetProtocolVersionEnabled(context_ unsafe.Pointer, protocol SSLProtocol, enable uint8) int {
-	return raw.SSLSetProtocolVersionEnabled(context_, raw.SSLProtocol(protocol), enable)
-}
-
-// SSLSetProtocolVersionMax calls [raw.SSLSetProtocolVersionMax] (C function SSLSetProtocolVersionMax).
-func SSLSetProtocolVersionMax(context_ unsafe.Pointer, maxVersion SSLProtocol) int {
-	return raw.SSLSetProtocolVersionMax(context_, raw.SSLProtocol(maxVersion))
-}
-
-// SSLSetProtocolVersionMin calls [raw.SSLSetProtocolVersionMin] (C function SSLSetProtocolVersionMin).
-func SSLSetProtocolVersionMin(context_ unsafe.Pointer, minVersion SSLProtocol) int {
-	return raw.SSLSetProtocolVersionMin(context_, raw.SSLProtocol(minVersion))
-}
-
-// SSLSetRsaBlinding calls [raw.SSLSetRsaBlinding] (C function SSLSetRsaBlinding).
-func SSLSetRsaBlinding(context_ unsafe.Pointer, blinding uint8) int {
-	return raw.SSLSetRsaBlinding(context_, blinding)
-}
-
-// SSLSetSessionConfig calls [raw.SSLSetSessionConfig] (C function SSLSetSessionConfig).
-func SSLSetSessionConfig(context_ unsafe.Pointer, config unsafe.Pointer) int {
-	return raw.SSLSetSessionConfig(context_, config)
-}
-
-// SSLSetSessionOption calls [raw.SSLSetSessionOption] (C function SSLSetSessionOption).
-func SSLSetSessionOption(context_ unsafe.Pointer, option SSLSessionOption, value uint8) int {
-	return raw.SSLSetSessionOption(context_, raw.SSLSessionOption(option), value)
-}
-
-// SSLSetSessionTicketsEnabled calls [raw.SSLSetSessionTicketsEnabled] (C function SSLSetSessionTicketsEnabled).
-func SSLSetSessionTicketsEnabled(context_ unsafe.Pointer, enabled uint8) int {
-	return raw.SSLSetSessionTicketsEnabled(context_, enabled)
-}
-
-// SSLSetTrustedRoots calls [raw.SSLSetTrustedRoots] (C function SSLSetTrustedRoots).
-func SSLSetTrustedRoots(context_ unsafe.Pointer, trustedRoots unsafe.Pointer, replaceExisting uint8) int {
-	return raw.SSLSetTrustedRoots(context_, trustedRoots, replaceExisting)
-}
-
-// SSLWrite calls [raw.SSLWrite] (C function SSLWrite).
-func SSLWrite(context_ unsafe.Pointer, data unsafe.Pointer, dataLength uint, processed *uint) int {
-	return raw.SSLWrite(context_, data, dataLength, processed)
-}
-
-// SecACLCopyAuthorizations calls [raw.SecACLCopyAuthorizations] (C function SecACLCopyAuthorizations).
-func SecACLCopyAuthorizations(acl unsafe.Pointer) unsafe.Pointer {
-	return raw.SecACLCopyAuthorizations(acl)
-}
-
-// SecACLCopyContents calls [raw.SecACLCopyContents] (C function SecACLCopyContents).
-func SecACLCopyContents(acl unsafe.Pointer, applicationList unsafe.Pointer, description unsafe.Pointer, promptSelector *SecKeychainPromptSelector) int {
-	var _promptSelector raw.SecKeychainPromptSelector
-	_ret := raw.SecACLCopyContents(acl, applicationList, description, &_promptSelector)
-	if promptSelector != nil {
-		*promptSelector = SecKeychainPromptSelector(_promptSelector)
+// SecAccessCopyMatchingACLList calls the Security framework function SecAccessCopyMatchingACLList.
+func SecAccessCopyMatchingACLList(accessRef obj.Object, authorizationTag obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecAccessCopyMatchingACLList == nil {
+		ebipurego.RegisterLibFunc(&_fnSecAccessCopyMatchingACLList, _lib, "SecAccessCopyMatchingACLList")
 	}
-	return _ret
+	_ret := _fnSecAccessCopyMatchingACLList(objref.IDOf(accessRef), objref.IDOf(authorizationTag))
+	return obj.Wrap(_ret)
 }
 
-// SecACLCopySimpleContents calls [raw.SecACLCopySimpleContents] (C function SecACLCopySimpleContents).
-func SecACLCopySimpleContents(acl unsafe.Pointer, applicationList unsafe.Pointer, description unsafe.Pointer, promptSelector *raw.CssmAclKeychainPromptSelector) int {
-	return raw.SecACLCopySimpleContents(acl, applicationList, description, promptSelector)
-}
-
-// SecACLCreateFromSimpleContents calls [raw.SecACLCreateFromSimpleContents] (C function SecACLCreateFromSimpleContents).
-func SecACLCreateFromSimpleContents(access unsafe.Pointer, applicationList unsafe.Pointer, description unsafe.Pointer, promptSelector *raw.CssmAclKeychainPromptSelector, newAcl unsafe.Pointer) int {
-	return raw.SecACLCreateFromSimpleContents(access, applicationList, description, promptSelector, newAcl)
-}
-
-// SecACLCreateWithSimpleContents calls [raw.SecACLCreateWithSimpleContents] (C function SecACLCreateWithSimpleContents).
-func SecACLCreateWithSimpleContents(access unsafe.Pointer, applicationList unsafe.Pointer, description unsafe.Pointer, promptSelector SecKeychainPromptSelector, newAcl unsafe.Pointer) int {
-	return raw.SecACLCreateWithSimpleContents(access, applicationList, description, raw.SecKeychainPromptSelector(promptSelector), newAcl)
-}
-
-// SecACLGetAuthorizations calls [raw.SecACLGetAuthorizations] (C function SecACLGetAuthorizations).
-func SecACLGetAuthorizations(acl unsafe.Pointer, tags *int32, tagCount *uint32) int {
-	return raw.SecACLGetAuthorizations(acl, tags, tagCount)
-}
-
-// SecACLGetTypeID calls [raw.SecACLGetTypeID] (C function SecACLGetTypeID).
-func SecACLGetTypeID() uint {
-	return raw.SecACLGetTypeID()
-}
-
-// SecACLRemove calls [raw.SecACLRemove] (C function SecACLRemove).
-func SecACLRemove(aclRef unsafe.Pointer) int {
-	return raw.SecACLRemove(aclRef)
-}
-
-// SecACLSetAuthorizations calls [raw.SecACLSetAuthorizations] (C function SecACLSetAuthorizations).
-func SecACLSetAuthorizations(acl unsafe.Pointer, tags *int32, tagCount uint32) int {
-	return raw.SecACLSetAuthorizations(acl, tags, tagCount)
-}
-
-// SecACLSetContents calls [raw.SecACLSetContents] (C function SecACLSetContents).
-func SecACLSetContents(acl unsafe.Pointer, applicationList unsafe.Pointer, description unsafe.Pointer, promptSelector SecKeychainPromptSelector) int {
-	return raw.SecACLSetContents(acl, applicationList, description, raw.SecKeychainPromptSelector(promptSelector))
-}
-
-// SecACLSetSimpleContents calls [raw.SecACLSetSimpleContents] (C function SecACLSetSimpleContents).
-func SecACLSetSimpleContents(acl unsafe.Pointer, applicationList unsafe.Pointer, description unsafe.Pointer, promptSelector *raw.CssmAclKeychainPromptSelector) int {
-	return raw.SecACLSetSimpleContents(acl, applicationList, description, promptSelector)
-}
-
-// SecACLUpdateAuthorizations calls [raw.SecACLUpdateAuthorizations] (C function SecACLUpdateAuthorizations).
-func SecACLUpdateAuthorizations(acl unsafe.Pointer, authorizations unsafe.Pointer) int {
-	return raw.SecACLUpdateAuthorizations(acl, authorizations)
-}
-
-// SecAccessControlCreateWithFlags calls [raw.SecAccessControlCreateWithFlags] (C function SecAccessControlCreateWithFlags).
-func SecAccessControlCreateWithFlags(allocator unsafe.Pointer, protection unsafe.Pointer, flags SecAccessControlCreateFlags, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecAccessControlCreateWithFlags(allocator, protection, raw.SecAccessControlCreateFlags(flags), error_)
-}
-
-// SecAccessControlGetTypeID calls [raw.SecAccessControlGetTypeID] (C function SecAccessControlGetTypeID).
-func SecAccessControlGetTypeID() uint {
-	return raw.SecAccessControlGetTypeID()
-}
-
-// SecAccessCopyACLList calls [raw.SecAccessCopyACLList] (C function SecAccessCopyACLList).
-func SecAccessCopyACLList(accessRef unsafe.Pointer, aclList unsafe.Pointer) int {
-	return raw.SecAccessCopyACLList(accessRef, aclList)
-}
-
-// SecAccessCopyMatchingACLList calls [raw.SecAccessCopyMatchingACLList] (C function SecAccessCopyMatchingACLList).
-func SecAccessCopyMatchingACLList(accessRef unsafe.Pointer, authorizationTag unsafe.Pointer) unsafe.Pointer {
-	return raw.SecAccessCopyMatchingACLList(accessRef, authorizationTag)
-}
-
-// SecAccessCopyOwnerAndACL calls [raw.SecAccessCopyOwnerAndACL] (C function SecAccessCopyOwnerAndACL).
-func SecAccessCopyOwnerAndACL(accessRef unsafe.Pointer, userId *uint, groupId *uint, ownerType *uint, aclList unsafe.Pointer) int {
-	return raw.SecAccessCopyOwnerAndACL(accessRef, userId, groupId, ownerType, aclList)
-}
-
-// SecAccessCopySelectedACLList calls [raw.SecAccessCopySelectedACLList] (C function SecAccessCopySelectedACLList).
-func SecAccessCopySelectedACLList(accessRef unsafe.Pointer, action int32, aclList unsafe.Pointer) int {
-	return raw.SecAccessCopySelectedACLList(accessRef, action, aclList)
-}
-
-// SecAccessCreate calls [raw.SecAccessCreate] (C function SecAccessCreate).
-func SecAccessCreate(descriptor unsafe.Pointer, trustedlist unsafe.Pointer, accessRef unsafe.Pointer) int {
-	return raw.SecAccessCreate(descriptor, trustedlist, accessRef)
-}
-
-// SecAccessCreateFromOwnerAndACL calls [raw.SecAccessCreateFromOwnerAndACL] (C function SecAccessCreateFromOwnerAndACL).
-func SecAccessCreateFromOwnerAndACL(owner *raw.CssmAclOwnerPrototype, aclCount uint32, acls *raw.CssmAclEntryInfo, accessRef unsafe.Pointer) int {
-	return raw.SecAccessCreateFromOwnerAndACL(owner, aclCount, acls, accessRef)
-}
-
-// SecAccessCreateWithOwnerAndACL calls [raw.SecAccessCreateWithOwnerAndACL] (C function SecAccessCreateWithOwnerAndACL).
-func SecAccessCreateWithOwnerAndACL(userId uint, groupId uint, ownerType uint, acls unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecAccessCreateWithOwnerAndACL(userId, groupId, ownerType, acls, error_)
-}
-
-// SecAccessGetOwnerAndACL calls [raw.SecAccessGetOwnerAndACL] (C function SecAccessGetOwnerAndACL).
-func SecAccessGetOwnerAndACL(accessRef unsafe.Pointer, owner **raw.CssmAclOwnerPrototype, aclCount *uint32, acls **raw.CssmAclEntryInfo) int {
-	return raw.SecAccessGetOwnerAndACL(accessRef, owner, aclCount, acls)
-}
-
-// SecAccessGetTypeID calls [raw.SecAccessGetTypeID] (C function SecAccessGetTypeID).
-func SecAccessGetTypeID() uint {
-	return raw.SecAccessGetTypeID()
-}
-
-// SecAddSharedWebCredential calls [raw.SecAddSharedWebCredential] (C function SecAddSharedWebCredential).
-func SecAddSharedWebCredential(fqdn unsafe.Pointer, account unsafe.Pointer, password unsafe.Pointer, completionHandler func(unsafe.Pointer)) {
-	raw.SecAddSharedWebCredential(fqdn, account, password, completionHandler)
-}
-
-// SecCertificateAddToKeychain calls [raw.SecCertificateAddToKeychain] (C function SecCertificateAddToKeychain).
-func SecCertificateAddToKeychain(certificate unsafe.Pointer, keychain unsafe.Pointer) int {
-	return raw.SecCertificateAddToKeychain(certificate, keychain)
-}
-
-// SecCertificateCopyCommonName calls [raw.SecCertificateCopyCommonName] (C function SecCertificateCopyCommonName).
-func SecCertificateCopyCommonName(certificate unsafe.Pointer, commonName unsafe.Pointer) int {
-	return raw.SecCertificateCopyCommonName(certificate, commonName)
-}
-
-// SecCertificateCopyData calls [raw.SecCertificateCopyData] (C function SecCertificateCopyData).
-func SecCertificateCopyData(certificate unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCertificateCopyData(certificate)
-}
-
-// SecCertificateCopyEmailAddresses calls [raw.SecCertificateCopyEmailAddresses] (C function SecCertificateCopyEmailAddresses).
-func SecCertificateCopyEmailAddresses(certificate unsafe.Pointer, emailAddresses unsafe.Pointer) int {
-	return raw.SecCertificateCopyEmailAddresses(certificate, emailAddresses)
-}
-
-// SecCertificateCopyKey calls [raw.SecCertificateCopyKey] (C function SecCertificateCopyKey).
-func SecCertificateCopyKey(certificate unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCertificateCopyKey(certificate)
-}
-
-// SecCertificateCopyLongDescription calls [raw.SecCertificateCopyLongDescription] (C function SecCertificateCopyLongDescription).
-func SecCertificateCopyLongDescription(alloc unsafe.Pointer, certificate unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCertificateCopyLongDescription(alloc, certificate, error_)
-}
-
-// SecCertificateCopyNormalizedIssuerContent calls [raw.SecCertificateCopyNormalizedIssuerContent] (C function SecCertificateCopyNormalizedIssuerContent).
-func SecCertificateCopyNormalizedIssuerContent(certificate unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCertificateCopyNormalizedIssuerContent(certificate, error_)
-}
-
-// SecCertificateCopyNormalizedIssuerSequence calls [raw.SecCertificateCopyNormalizedIssuerSequence] (C function SecCertificateCopyNormalizedIssuerSequence).
-func SecCertificateCopyNormalizedIssuerSequence(certificate unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCertificateCopyNormalizedIssuerSequence(certificate)
-}
-
-// SecCertificateCopyNormalizedSubjectContent calls [raw.SecCertificateCopyNormalizedSubjectContent] (C function SecCertificateCopyNormalizedSubjectContent).
-func SecCertificateCopyNormalizedSubjectContent(certificate unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCertificateCopyNormalizedSubjectContent(certificate, error_)
-}
-
-// SecCertificateCopyNormalizedSubjectSequence calls [raw.SecCertificateCopyNormalizedSubjectSequence] (C function SecCertificateCopyNormalizedSubjectSequence).
-func SecCertificateCopyNormalizedSubjectSequence(certificate unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCertificateCopyNormalizedSubjectSequence(certificate)
-}
-
-// SecCertificateCopyNotValidAfterDate calls [raw.SecCertificateCopyNotValidAfterDate] (C function SecCertificateCopyNotValidAfterDate).
-func SecCertificateCopyNotValidAfterDate(certificate unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCertificateCopyNotValidAfterDate(certificate)
-}
-
-// SecCertificateCopyNotValidBeforeDate calls [raw.SecCertificateCopyNotValidBeforeDate] (C function SecCertificateCopyNotValidBeforeDate).
-func SecCertificateCopyNotValidBeforeDate(certificate unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCertificateCopyNotValidBeforeDate(certificate)
-}
-
-// SecCertificateCopyPreference calls [raw.SecCertificateCopyPreference] (C function SecCertificateCopyPreference).
-func SecCertificateCopyPreference(name unsafe.Pointer, keyUsage uint32, certificate unsafe.Pointer) int {
-	return raw.SecCertificateCopyPreference(name, keyUsage, certificate)
-}
-
-// SecCertificateCopyPreferred calls [raw.SecCertificateCopyPreferred] (C function SecCertificateCopyPreferred).
-func SecCertificateCopyPreferred(name unsafe.Pointer, keyUsage unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCertificateCopyPreferred(name, keyUsage)
-}
-
-// SecCertificateCopyPublicKey calls [raw.SecCertificateCopyPublicKey] (C function SecCertificateCopyPublicKey).
-func SecCertificateCopyPublicKey(certificate unsafe.Pointer, key unsafe.Pointer) int {
-	return raw.SecCertificateCopyPublicKey(certificate, key)
-}
-
-// SecCertificateCopySerialNumber calls [raw.SecCertificateCopySerialNumber] (C function SecCertificateCopySerialNumber).
-func SecCertificateCopySerialNumber(certificate unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCertificateCopySerialNumber(certificate, error_)
-}
-
-// SecCertificateCopySerialNumberData calls [raw.SecCertificateCopySerialNumberData] (C function SecCertificateCopySerialNumberData).
-func SecCertificateCopySerialNumberData(certificate unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCertificateCopySerialNumberData(certificate, error_)
-}
-
-// SecCertificateCopyShortDescription calls [raw.SecCertificateCopyShortDescription] (C function SecCertificateCopyShortDescription).
-func SecCertificateCopyShortDescription(alloc unsafe.Pointer, certificate unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCertificateCopyShortDescription(alloc, certificate, error_)
-}
-
-// SecCertificateCopySubjectSummary calls [raw.SecCertificateCopySubjectSummary] (C function SecCertificateCopySubjectSummary).
-func SecCertificateCopySubjectSummary(certificate unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCertificateCopySubjectSummary(certificate)
-}
-
-// SecCertificateCopyValues calls [raw.SecCertificateCopyValues] (C function SecCertificateCopyValues).
-func SecCertificateCopyValues(certificate unsafe.Pointer, keys unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCertificateCopyValues(certificate, keys, error_)
-}
-
-// SecCertificateCreateFromData calls [raw.SecCertificateCreateFromData] (C function SecCertificateCreateFromData).
-func SecCertificateCreateFromData(data *raw.CssmData, type_ uint32, encoding uint32, certificate unsafe.Pointer) int {
-	return raw.SecCertificateCreateFromData(data, type_, encoding, certificate)
-}
-
-// SecCertificateCreateWithData calls [raw.SecCertificateCreateWithData] (C function SecCertificateCreateWithData).
-func SecCertificateCreateWithData(allocator unsafe.Pointer, data unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCertificateCreateWithData(allocator, data)
-}
-
-// SecCertificateGetAlgorithmID calls [raw.SecCertificateGetAlgorithmID] (C function SecCertificateGetAlgorithmID).
-func SecCertificateGetAlgorithmID(certificate unsafe.Pointer, algid *raw.SecAsn1AlgId) int {
-	return raw.SecCertificateGetAlgorithmID(certificate, algid)
-}
-
-// SecCertificateGetCLHandle calls [raw.SecCertificateGetCLHandle] (C function SecCertificateGetCLHandle).
-func SecCertificateGetCLHandle(certificate unsafe.Pointer, clHandle *int) int {
-	return raw.SecCertificateGetCLHandle(certificate, clHandle)
-}
-
-// SecCertificateGetData calls [raw.SecCertificateGetData] (C function SecCertificateGetData).
-func SecCertificateGetData(certificate unsafe.Pointer, data *raw.CssmData) int {
-	return raw.SecCertificateGetData(certificate, data)
-}
-
-// SecCertificateGetIssuer calls [raw.SecCertificateGetIssuer] (C function SecCertificateGetIssuer).
-func SecCertificateGetIssuer(certificate unsafe.Pointer, issuer *raw.CssmX509Name) int {
-	return raw.SecCertificateGetIssuer(certificate, issuer)
-}
-
-// SecCertificateGetSubject calls [raw.SecCertificateGetSubject] (C function SecCertificateGetSubject).
-func SecCertificateGetSubject(certificate unsafe.Pointer, subject *raw.CssmX509Name) int {
-	return raw.SecCertificateGetSubject(certificate, subject)
-}
-
-// SecCertificateGetType calls [raw.SecCertificateGetType] (C function SecCertificateGetType).
-func SecCertificateGetType(certificate unsafe.Pointer, certificateType *uint32) int {
-	return raw.SecCertificateGetType(certificate, certificateType)
-}
-
-// SecCertificateGetTypeID calls [raw.SecCertificateGetTypeID] (C function SecCertificateGetTypeID).
-func SecCertificateGetTypeID() uint {
-	return raw.SecCertificateGetTypeID()
-}
-
-// SecCertificateSetPreference calls [raw.SecCertificateSetPreference] (C function SecCertificateSetPreference).
-func SecCertificateSetPreference(certificate unsafe.Pointer, name unsafe.Pointer, keyUsage uint32, date unsafe.Pointer) int {
-	return raw.SecCertificateSetPreference(certificate, name, keyUsage, date)
-}
-
-// SecCertificateSetPreferred calls [raw.SecCertificateSetPreferred] (C function SecCertificateSetPreferred).
-func SecCertificateSetPreferred(certificate unsafe.Pointer, name unsafe.Pointer, keyUsage unsafe.Pointer) int {
-	return raw.SecCertificateSetPreferred(certificate, name, keyUsage)
-}
-
-// SecCodeCheckValidity calls [raw.SecCodeCheckValidity] (C function SecCodeCheckValidity).
-func SecCodeCheckValidity(code unsafe.Pointer, flags SecCSFlags, requirement unsafe.Pointer) int {
-	return raw.SecCodeCheckValidity(code, raw.SecCSFlags(flags), requirement)
-}
-
-// SecCodeCheckValidityWithErrors calls [raw.SecCodeCheckValidityWithErrors] (C function SecCodeCheckValidityWithErrors).
-func SecCodeCheckValidityWithErrors(code unsafe.Pointer, flags SecCSFlags, requirement unsafe.Pointer, errors_ unsafe.Pointer) int {
-	return raw.SecCodeCheckValidityWithErrors(code, raw.SecCSFlags(flags), requirement, errors_)
-}
-
-// SecCodeCopyDesignatedRequirement calls [raw.SecCodeCopyDesignatedRequirement] (C function SecCodeCopyDesignatedRequirement).
-func SecCodeCopyDesignatedRequirement(code unsafe.Pointer, flags SecCSFlags, requirement unsafe.Pointer) int {
-	return raw.SecCodeCopyDesignatedRequirement(code, raw.SecCSFlags(flags), requirement)
-}
-
-// SecCodeCopyGuestWithAttributes calls [raw.SecCodeCopyGuestWithAttributes] (C function SecCodeCopyGuestWithAttributes).
-func SecCodeCopyGuestWithAttributes(host unsafe.Pointer, attributes unsafe.Pointer, flags SecCSFlags, guest unsafe.Pointer) int {
-	return raw.SecCodeCopyGuestWithAttributes(host, attributes, raw.SecCSFlags(flags), guest)
-}
-
-// SecCodeCopyHost calls [raw.SecCodeCopyHost] (C function SecCodeCopyHost).
-func SecCodeCopyHost(guest unsafe.Pointer, flags SecCSFlags, host unsafe.Pointer) int {
-	return raw.SecCodeCopyHost(guest, raw.SecCSFlags(flags), host)
-}
-
-// SecCodeCopyPath calls [raw.SecCodeCopyPath] (C function SecCodeCopyPath).
-func SecCodeCopyPath(staticCode unsafe.Pointer, flags SecCSFlags, path unsafe.Pointer) int {
-	return raw.SecCodeCopyPath(staticCode, raw.SecCSFlags(flags), path)
-}
-
-// SecCodeCopySelf calls [raw.SecCodeCopySelf] (C function SecCodeCopySelf).
-func SecCodeCopySelf(flags SecCSFlags, self unsafe.Pointer) int {
-	return raw.SecCodeCopySelf(raw.SecCSFlags(flags), self)
-}
-
-// SecCodeCopySigningInformation calls [raw.SecCodeCopySigningInformation] (C function SecCodeCopySigningInformation).
-func SecCodeCopySigningInformation(code unsafe.Pointer, flags SecCSFlags, information unsafe.Pointer) int {
-	return raw.SecCodeCopySigningInformation(code, raw.SecCSFlags(flags), information)
-}
-
-// SecCodeCopyStaticCode calls [raw.SecCodeCopyStaticCode] (C function SecCodeCopyStaticCode).
-func SecCodeCopyStaticCode(code unsafe.Pointer, flags SecCSFlags, staticCode unsafe.Pointer) int {
-	return raw.SecCodeCopyStaticCode(code, raw.SecCSFlags(flags), staticCode)
-}
-
-// SecCodeCreateWithXPCMessage calls [raw.SecCodeCreateWithXPCMessage] (C function SecCodeCreateWithXPCMessage).
-func SecCodeCreateWithXPCMessage(message unsafe.Pointer, flags SecCSFlags, target unsafe.Pointer) int {
-	return raw.SecCodeCreateWithXPCMessage(message, raw.SecCSFlags(flags), target)
-}
-
-// SecCodeGetTypeID calls [raw.SecCodeGetTypeID] (C function SecCodeGetTypeID).
-func SecCodeGetTypeID() uint {
-	return raw.SecCodeGetTypeID()
-}
-
-// SecCodeMapMemory calls [raw.SecCodeMapMemory] (C function SecCodeMapMemory).
-func SecCodeMapMemory(code unsafe.Pointer, flags SecCSFlags) int {
-	return raw.SecCodeMapMemory(code, raw.SecCSFlags(flags))
-}
-
-// SecCodeValidateFileResource calls [raw.SecCodeValidateFileResource] (C function SecCodeValidateFileResource).
-func SecCodeValidateFileResource(code unsafe.Pointer, relativePath unsafe.Pointer, fileData unsafe.Pointer, flags SecCSFlags) int {
-	return raw.SecCodeValidateFileResource(code, relativePath, fileData, raw.SecCSFlags(flags))
-}
-
-// SecCopyErrorMessageString calls [raw.SecCopyErrorMessageString] (C function SecCopyErrorMessageString).
-func SecCopyErrorMessageString(status int, reserved unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCopyErrorMessageString(status, reserved)
-}
-
-// SecCreateSharedWebCredentialPassword calls [raw.SecCreateSharedWebCredentialPassword] (C function SecCreateSharedWebCredentialPassword).
-func SecCreateSharedWebCredentialPassword() unsafe.Pointer {
-	return raw.SecCreateSharedWebCredentialPassword()
-}
-
-// SecDecodeTransformCreate calls [raw.SecDecodeTransformCreate] (C function SecDecodeTransformCreate).
-func SecDecodeTransformCreate(decodeType unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecDecodeTransformCreate(decodeType, error_)
-}
-
-// SecDecryptTransformCreate calls [raw.SecDecryptTransformCreate] (C function SecDecryptTransformCreate).
-func SecDecryptTransformCreate(keyRef unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecDecryptTransformCreate(keyRef, error_)
-}
-
-// SecDecryptTransformGetTypeID calls [raw.SecDecryptTransformGetTypeID] (C function SecDecryptTransformGetTypeID).
-func SecDecryptTransformGetTypeID() uint {
-	return raw.SecDecryptTransformGetTypeID()
-}
-
-// SecDigestTransformCreate calls [raw.SecDigestTransformCreate] (C function SecDigestTransformCreate).
-func SecDigestTransformCreate(digestType unsafe.Pointer, digestLength int, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecDigestTransformCreate(digestType, digestLength, error_)
-}
-
-// SecDigestTransformGetTypeID calls [raw.SecDigestTransformGetTypeID] (C function SecDigestTransformGetTypeID).
-func SecDigestTransformGetTypeID() uint {
-	return raw.SecDigestTransformGetTypeID()
-}
-
-// SecEncodeTransformCreate calls [raw.SecEncodeTransformCreate] (C function SecEncodeTransformCreate).
-func SecEncodeTransformCreate(encodeType unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecEncodeTransformCreate(encodeType, error_)
-}
-
-// SecEncryptTransformCreate calls [raw.SecEncryptTransformCreate] (C function SecEncryptTransformCreate).
-func SecEncryptTransformCreate(keyRef unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecEncryptTransformCreate(keyRef, error_)
-}
-
-// SecEncryptTransformGetTypeID calls [raw.SecEncryptTransformGetTypeID] (C function SecEncryptTransformGetTypeID).
-func SecEncryptTransformGetTypeID() uint {
-	return raw.SecEncryptTransformGetTypeID()
-}
-
-// SecGroupTransformGetTypeID calls [raw.SecGroupTransformGetTypeID] (C function SecGroupTransformGetTypeID).
-func SecGroupTransformGetTypeID() uint {
-	return raw.SecGroupTransformGetTypeID()
-}
-
-// SecIdentityCopyCertificate calls [raw.SecIdentityCopyCertificate] (C function SecIdentityCopyCertificate).
-func SecIdentityCopyCertificate(identityRef unsafe.Pointer, certificateRef unsafe.Pointer) int {
-	return raw.SecIdentityCopyCertificate(identityRef, certificateRef)
-}
-
-// SecIdentityCopyPreference calls [raw.SecIdentityCopyPreference] (C function SecIdentityCopyPreference).
-func SecIdentityCopyPreference(name unsafe.Pointer, keyUsage uint32, validIssuers unsafe.Pointer, identity unsafe.Pointer) int {
-	return raw.SecIdentityCopyPreference(name, keyUsage, validIssuers, identity)
-}
-
-// SecIdentityCopyPreferred calls [raw.SecIdentityCopyPreferred] (C function SecIdentityCopyPreferred).
-func SecIdentityCopyPreferred(name unsafe.Pointer, keyUsage unsafe.Pointer, validIssuers unsafe.Pointer) unsafe.Pointer {
-	return raw.SecIdentityCopyPreferred(name, keyUsage, validIssuers)
-}
-
-// SecIdentityCopyPrivateKey calls [raw.SecIdentityCopyPrivateKey] (C function SecIdentityCopyPrivateKey).
-func SecIdentityCopyPrivateKey(identityRef unsafe.Pointer, privateKeyRef unsafe.Pointer) int {
-	return raw.SecIdentityCopyPrivateKey(identityRef, privateKeyRef)
-}
-
-// SecIdentityCopySystemIdentity calls [raw.SecIdentityCopySystemIdentity] (C function SecIdentityCopySystemIdentity).
-func SecIdentityCopySystemIdentity(domain unsafe.Pointer, idRef unsafe.Pointer, actualDomain unsafe.Pointer) int {
-	return raw.SecIdentityCopySystemIdentity(domain, idRef, actualDomain)
-}
-
-// SecIdentityCreate calls [raw.SecIdentityCreate] (C function SecIdentityCreate).
-func SecIdentityCreate(allocator unsafe.Pointer, certificate unsafe.Pointer, privateKey unsafe.Pointer) unsafe.Pointer {
-	return raw.SecIdentityCreate(allocator, certificate, privateKey)
-}
-
-// SecIdentityCreateWithCertificate calls [raw.SecIdentityCreateWithCertificate] (C function SecIdentityCreateWithCertificate).
-func SecIdentityCreateWithCertificate(keychainOrArray unsafe.Pointer, certificateRef unsafe.Pointer, identityRef unsafe.Pointer) int {
-	return raw.SecIdentityCreateWithCertificate(keychainOrArray, certificateRef, identityRef)
-}
-
-// SecIdentityGetTypeID calls [raw.SecIdentityGetTypeID] (C function SecIdentityGetTypeID).
-func SecIdentityGetTypeID() uint {
-	return raw.SecIdentityGetTypeID()
-}
-
-// SecIdentitySearchCopyNext calls [raw.SecIdentitySearchCopyNext] (C function SecIdentitySearchCopyNext).
-func SecIdentitySearchCopyNext(searchRef unsafe.Pointer, identity unsafe.Pointer) int {
-	return raw.SecIdentitySearchCopyNext(searchRef, identity)
-}
-
-// SecIdentitySearchCreate calls [raw.SecIdentitySearchCreate] (C function SecIdentitySearchCreate).
-func SecIdentitySearchCreate(keychainOrArray unsafe.Pointer, keyUsage uint32, searchRef unsafe.Pointer) int {
-	return raw.SecIdentitySearchCreate(keychainOrArray, keyUsage, searchRef)
-}
-
-// SecIdentitySearchGetTypeID calls [raw.SecIdentitySearchGetTypeID] (C function SecIdentitySearchGetTypeID).
-func SecIdentitySearchGetTypeID() uint {
-	return raw.SecIdentitySearchGetTypeID()
-}
-
-// SecIdentitySetPreference calls [raw.SecIdentitySetPreference] (C function SecIdentitySetPreference).
-func SecIdentitySetPreference(identity unsafe.Pointer, name unsafe.Pointer, keyUsage uint32) int {
-	return raw.SecIdentitySetPreference(identity, name, keyUsage)
-}
-
-// SecIdentitySetPreferred calls [raw.SecIdentitySetPreferred] (C function SecIdentitySetPreferred).
-func SecIdentitySetPreferred(identity unsafe.Pointer, name unsafe.Pointer, keyUsage unsafe.Pointer) int {
-	return raw.SecIdentitySetPreferred(identity, name, keyUsage)
-}
-
-// SecIdentitySetSystemIdentity calls [raw.SecIdentitySetSystemIdentity] (C function SecIdentitySetSystemIdentity).
-func SecIdentitySetSystemIdentity(domain unsafe.Pointer, idRef unsafe.Pointer) int {
-	return raw.SecIdentitySetSystemIdentity(domain, idRef)
-}
+var _fnSecAccessGetTypeID func() int
 
-// SecItemImport calls [raw.SecItemImport] (C function SecItemImport).
-func SecItemImport(importedData unsafe.Pointer, fileNameOrExtension unsafe.Pointer, inputFormat *SecExternalFormat, itemType *SecExternalItemType, flags SecItemImportExportFlags, keyParams *raw.SecItemImportExportKeyParameters, importKeychain unsafe.Pointer, outItems unsafe.Pointer) int {
-	var _inputFormat raw.SecExternalFormat
-	var _itemType raw.SecExternalItemType
-	_ret := raw.SecItemImport(importedData, fileNameOrExtension, &_inputFormat, &_itemType, raw.SecItemImportExportFlags(flags), keyParams, importKeychain, outItems)
-	if inputFormat != nil {
-		*inputFormat = SecExternalFormat(_inputFormat)
+// SecAccessGetTypeID calls the Security framework function SecAccessGetTypeID.
+func SecAccessGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecAccessGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecAccessGetTypeID, _lib, "SecAccessGetTypeID")
 	}
-	if itemType != nil {
-		*itemType = SecExternalItemType(_itemType)
+	return _fnSecAccessGetTypeID()
+}
+
+var _fnSecCertificateCopyData func(objc.ID) objc.ID
+
+// SecCertificateCopyData calls the Security framework function SecCertificateCopyData.
+func SecCertificateCopyData(certificate obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecCertificateCopyData == nil {
+		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyData, _lib, "SecCertificateCopyData")
 	}
-	return _ret
+	_ret := _fnSecCertificateCopyData(objref.IDOf(certificate))
+	return obj.Wrap(_ret)
 }
 
-// SecKeyCopyAttributes calls [raw.SecKeyCopyAttributes] (C function SecKeyCopyAttributes).
-func SecKeyCopyAttributes(key unsafe.Pointer) unsafe.Pointer {
-	return raw.SecKeyCopyAttributes(key)
-}
+var _fnSecCertificateCopyKey func(objc.ID) objc.ID
 
-// SecKeyCopyExternalRepresentation calls [raw.SecKeyCopyExternalRepresentation] (C function SecKeyCopyExternalRepresentation).
-func SecKeyCopyExternalRepresentation(key unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecKeyCopyExternalRepresentation(key, error_)
-}
-
-// SecKeyCopyKeyExchangeResult calls [raw.SecKeyCopyKeyExchangeResult] (C function SecKeyCopyKeyExchangeResult).
-func SecKeyCopyKeyExchangeResult(privateKey unsafe.Pointer, algorithm unsafe.Pointer, publicKey unsafe.Pointer, parameters unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecKeyCopyKeyExchangeResult(privateKey, algorithm, publicKey, parameters, error_)
-}
-
-// SecKeyCopyPublicKey calls [raw.SecKeyCopyPublicKey] (C function SecKeyCopyPublicKey).
-func SecKeyCopyPublicKey(key unsafe.Pointer) unsafe.Pointer {
-	return raw.SecKeyCopyPublicKey(key)
-}
-
-// SecKeyCreateDecryptedData calls [raw.SecKeyCreateDecryptedData] (C function SecKeyCreateDecryptedData).
-func SecKeyCreateDecryptedData(key unsafe.Pointer, algorithm unsafe.Pointer, ciphertext unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecKeyCreateDecryptedData(key, algorithm, ciphertext, error_)
-}
-
-// SecKeyCreateEncryptedData calls [raw.SecKeyCreateEncryptedData] (C function SecKeyCreateEncryptedData).
-func SecKeyCreateEncryptedData(key unsafe.Pointer, algorithm unsafe.Pointer, plaintext unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecKeyCreateEncryptedData(key, algorithm, plaintext, error_)
-}
-
-// SecKeyCreateFromData calls [raw.SecKeyCreateFromData] (C function SecKeyCreateFromData).
-func SecKeyCreateFromData(parameters unsafe.Pointer, keyData unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecKeyCreateFromData(parameters, keyData, error_)
-}
-
-// SecKeyCreatePair calls [raw.SecKeyCreatePair] (C function SecKeyCreatePair).
-func SecKeyCreatePair(keychainRef unsafe.Pointer, algorithm uint32, keySizeInBits uint32, contextHandle uint64, publicKeyUsage uint32, publicKeyAttr uint32, privateKeyUsage uint32, privateKeyAttr uint32, initialAccess unsafe.Pointer, publicKey unsafe.Pointer, privateKey unsafe.Pointer) int {
-	return raw.SecKeyCreatePair(keychainRef, algorithm, keySizeInBits, contextHandle, publicKeyUsage, publicKeyAttr, privateKeyUsage, privateKeyAttr, initialAccess, publicKey, privateKey)
-}
-
-// SecKeyCreateRandomKey calls [raw.SecKeyCreateRandomKey] (C function SecKeyCreateRandomKey).
-func SecKeyCreateRandomKey(parameters unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecKeyCreateRandomKey(parameters, error_)
-}
-
-// SecKeyCreateSignature calls [raw.SecKeyCreateSignature] (C function SecKeyCreateSignature).
-func SecKeyCreateSignature(key unsafe.Pointer, algorithm unsafe.Pointer, dataToSign unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecKeyCreateSignature(key, algorithm, dataToSign, error_)
-}
-
-// SecKeyCreateWithData calls [raw.SecKeyCreateWithData] (C function SecKeyCreateWithData).
-func SecKeyCreateWithData(keyData unsafe.Pointer, attributes unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecKeyCreateWithData(keyData, attributes, error_)
-}
-
-// SecKeyDeriveFromPassword calls [raw.SecKeyDeriveFromPassword] (C function SecKeyDeriveFromPassword).
-func SecKeyDeriveFromPassword(password unsafe.Pointer, parameters unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecKeyDeriveFromPassword(password, parameters, error_)
-}
-
-// SecKeyGenerate calls [raw.SecKeyGenerate] (C function SecKeyGenerate).
-func SecKeyGenerate(keychainRef unsafe.Pointer, algorithm uint32, keySizeInBits uint32, contextHandle uint64, keyUsage uint32, keyAttr uint32, initialAccess unsafe.Pointer, keyRef unsafe.Pointer) int {
-	return raw.SecKeyGenerate(keychainRef, algorithm, keySizeInBits, contextHandle, keyUsage, keyAttr, initialAccess, keyRef)
-}
-
-// SecKeyGeneratePair calls [raw.SecKeyGeneratePair] (C function SecKeyGeneratePair).
-func SecKeyGeneratePair(parameters unsafe.Pointer, publicKey unsafe.Pointer, privateKey unsafe.Pointer) int {
-	return raw.SecKeyGeneratePair(parameters, publicKey, privateKey)
-}
-
-// SecKeyGeneratePairAsync calls [raw.SecKeyGeneratePairAsync] (C function SecKeyGeneratePairAsync).
-func SecKeyGeneratePairAsync(parameters unsafe.Pointer, deliveryQueue unsafe.Pointer, result func(unsafe.Pointer, unsafe.Pointer, unsafe.Pointer)) {
-	raw.SecKeyGeneratePairAsync(parameters, deliveryQueue, result)
-}
-
-// SecKeyGenerateSymmetric calls [raw.SecKeyGenerateSymmetric] (C function SecKeyGenerateSymmetric).
-func SecKeyGenerateSymmetric(parameters unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecKeyGenerateSymmetric(parameters, error_)
-}
-
-// SecKeyGetBlockSize calls [raw.SecKeyGetBlockSize] (C function SecKeyGetBlockSize).
-func SecKeyGetBlockSize(key unsafe.Pointer) uint {
-	return raw.SecKeyGetBlockSize(key)
-}
-
-// SecKeyGetCSPHandle calls [raw.SecKeyGetCSPHandle] (C function SecKeyGetCSPHandle).
-func SecKeyGetCSPHandle(keyRef unsafe.Pointer, cspHandle *int) int {
-	return raw.SecKeyGetCSPHandle(keyRef, cspHandle)
-}
-
-// SecKeyGetCSSMKey calls [raw.SecKeyGetCSSMKey] (C function SecKeyGetCSSMKey).
-func SecKeyGetCSSMKey(key unsafe.Pointer, cssmKey *raw.CssmKey) int {
-	return raw.SecKeyGetCSSMKey(key, cssmKey)
-}
-
-// SecKeyGetCredentials calls [raw.SecKeyGetCredentials] (C function SecKeyGetCredentials).
-func SecKeyGetCredentials(keyRef unsafe.Pointer, operation int32, credentialType SecCredentialType, outCredentials *raw.CssmAccessCredentials) int {
-	return raw.SecKeyGetCredentials(keyRef, operation, raw.SecCredentialType(credentialType), outCredentials)
-}
-
-// SecKeyGetTypeID calls [raw.SecKeyGetTypeID] (C function SecKeyGetTypeID).
-func SecKeyGetTypeID() uint {
-	return raw.SecKeyGetTypeID()
-}
-
-// SecKeyIsAlgorithmSupported calls [raw.SecKeyIsAlgorithmSupported] (C function SecKeyIsAlgorithmSupported).
-func SecKeyIsAlgorithmSupported(key unsafe.Pointer, operation SecKeyOperationType, algorithm unsafe.Pointer) uint8 {
-	return raw.SecKeyIsAlgorithmSupported(key, raw.SecKeyOperationType(operation), algorithm)
-}
-
-// SecKeyUnwrapSymmetric calls [raw.SecKeyUnwrapSymmetric] (C function SecKeyUnwrapSymmetric).
-func SecKeyUnwrapSymmetric(keyToUnwrap unsafe.Pointer, unwrappingKey unsafe.Pointer, parameters unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecKeyUnwrapSymmetric(keyToUnwrap, unwrappingKey, parameters, error_)
-}
-
-// SecKeyVerifySignature calls [raw.SecKeyVerifySignature] (C function SecKeyVerifySignature).
-func SecKeyVerifySignature(key unsafe.Pointer, algorithm unsafe.Pointer, signedData unsafe.Pointer, signature unsafe.Pointer, error_ unsafe.Pointer) uint8 {
-	return raw.SecKeyVerifySignature(key, algorithm, signedData, signature, error_)
-}
-
-// SecKeyWrapSymmetric calls [raw.SecKeyWrapSymmetric] (C function SecKeyWrapSymmetric).
-func SecKeyWrapSymmetric(keyToWrap unsafe.Pointer, wrappingKey unsafe.Pointer, parameters unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecKeyWrapSymmetric(keyToWrap, wrappingKey, parameters, error_)
-}
-
-// SecKeychainAddCallback calls [raw.SecKeychainAddCallback] (C function SecKeychainAddCallback).
-func SecKeychainAddCallback(callbackFunction unsafe.Pointer, eventMask SecKeychainEventMask, userContext unsafe.Pointer) int {
-	return raw.SecKeychainAddCallback(callbackFunction, raw.SecKeychainEventMask(eventMask), userContext)
-}
-
-// SecKeychainAddGenericPassword calls [raw.SecKeychainAddGenericPassword] (C function SecKeychainAddGenericPassword).
-func SecKeychainAddGenericPassword(keychain unsafe.Pointer, serviceNameLength uint, serviceName string, accountNameLength uint, accountName string, passwordLength uint, passwordData unsafe.Pointer, itemRef unsafe.Pointer) int {
-	return raw.SecKeychainAddGenericPassword(keychain, serviceNameLength, serviceName, accountNameLength, accountName, passwordLength, passwordData, itemRef)
-}
-
-// SecKeychainAddInternetPassword calls [raw.SecKeychainAddInternetPassword] (C function SecKeychainAddInternetPassword).
-func SecKeychainAddInternetPassword(keychain unsafe.Pointer, serverNameLength uint, serverName string, securityDomainLength uint, securityDomain string, accountNameLength uint, accountName string, pathLength uint, path string, port uint16, protocol SecProtocolType, authenticationType SecAuthenticationType, passwordLength uint, passwordData unsafe.Pointer, itemRef unsafe.Pointer) int {
-	return raw.SecKeychainAddInternetPassword(keychain, serverNameLength, serverName, securityDomainLength, securityDomain, accountNameLength, accountName, pathLength, path, port, raw.SecProtocolType(protocol), raw.SecAuthenticationType(authenticationType), passwordLength, passwordData, itemRef)
-}
-
-// SecKeychainAttributeInfoForItemID calls [raw.SecKeychainAttributeInfoForItemID] (C function SecKeychainAttributeInfoForItemID).
-func SecKeychainAttributeInfoForItemID(keychain unsafe.Pointer, itemID uint, info *raw.SecKeychainAttributeInfo) int {
-	return raw.SecKeychainAttributeInfoForItemID(keychain, itemID, info)
-}
-
-// SecKeychainCopyAccess calls [raw.SecKeychainCopyAccess] (C function SecKeychainCopyAccess).
-func SecKeychainCopyAccess(keychain unsafe.Pointer, access unsafe.Pointer) int {
-	return raw.SecKeychainCopyAccess(keychain, access)
-}
-
-// SecKeychainCopyDefault calls [raw.SecKeychainCopyDefault] (C function SecKeychainCopyDefault).
-func SecKeychainCopyDefault(keychain unsafe.Pointer) int {
-	return raw.SecKeychainCopyDefault(keychain)
-}
-
-// SecKeychainCopyDomainDefault calls [raw.SecKeychainCopyDomainDefault] (C function SecKeychainCopyDomainDefault).
-func SecKeychainCopyDomainDefault(domain SecPreferencesDomain, keychain unsafe.Pointer) int {
-	return raw.SecKeychainCopyDomainDefault(raw.SecPreferencesDomain(domain), keychain)
-}
-
-// SecKeychainCopySettings calls [raw.SecKeychainCopySettings] (C function SecKeychainCopySettings).
-func SecKeychainCopySettings(keychain unsafe.Pointer, outSettings *raw.SecKeychainSettings) int {
-	return raw.SecKeychainCopySettings(keychain, outSettings)
-}
-
-// SecKeychainCreate calls [raw.SecKeychainCreate] (C function SecKeychainCreate).
-func SecKeychainCreate(pathName string, passwordLength uint, password unsafe.Pointer, promptUser uint8, initialAccess unsafe.Pointer, keychain unsafe.Pointer) int {
-	return raw.SecKeychainCreate(pathName, passwordLength, password, promptUser, initialAccess, keychain)
-}
-
-// SecKeychainDelete calls [raw.SecKeychainDelete] (C function SecKeychainDelete).
-func SecKeychainDelete(keychainOrArray unsafe.Pointer) int {
-	return raw.SecKeychainDelete(keychainOrArray)
-}
-
-// SecKeychainFindGenericPassword calls [raw.SecKeychainFindGenericPassword] (C function SecKeychainFindGenericPassword).
-func SecKeychainFindGenericPassword(keychainOrArray unsafe.Pointer, serviceNameLength uint, serviceName string, accountNameLength uint, accountName string, passwordLength *uint, passwordData unsafe.Pointer, itemRef unsafe.Pointer) int {
-	return raw.SecKeychainFindGenericPassword(keychainOrArray, serviceNameLength, serviceName, accountNameLength, accountName, passwordLength, passwordData, itemRef)
-}
-
-// SecKeychainFindInternetPassword calls [raw.SecKeychainFindInternetPassword] (C function SecKeychainFindInternetPassword).
-func SecKeychainFindInternetPassword(keychainOrArray unsafe.Pointer, serverNameLength uint, serverName string, securityDomainLength uint, securityDomain string, accountNameLength uint, accountName string, pathLength uint, path string, port uint16, protocol SecProtocolType, authenticationType SecAuthenticationType, passwordLength *uint, passwordData unsafe.Pointer, itemRef unsafe.Pointer) int {
-	return raw.SecKeychainFindInternetPassword(keychainOrArray, serverNameLength, serverName, securityDomainLength, securityDomain, accountNameLength, accountName, pathLength, path, port, raw.SecProtocolType(protocol), raw.SecAuthenticationType(authenticationType), passwordLength, passwordData, itemRef)
-}
-
-// SecKeychainGetCSPHandle calls [raw.SecKeychainGetCSPHandle] (C function SecKeychainGetCSPHandle).
-func SecKeychainGetCSPHandle(keychain unsafe.Pointer, cspHandle *int) int {
-	return raw.SecKeychainGetCSPHandle(keychain, cspHandle)
-}
-
-// SecKeychainGetDLDBHandle calls [raw.SecKeychainGetDLDBHandle] (C function SecKeychainGetDLDBHandle).
-func SecKeychainGetDLDBHandle(keychain unsafe.Pointer, dldbHandle *raw.CssmDlDbHandle) int {
-	return raw.SecKeychainGetDLDBHandle(keychain, dldbHandle)
-}
-
-// SecKeychainGetPath calls [raw.SecKeychainGetPath] (C function SecKeychainGetPath).
-func SecKeychainGetPath(keychain unsafe.Pointer, ioPathLength *uint, pathName string) int {
-	return raw.SecKeychainGetPath(keychain, ioPathLength, pathName)
-}
-
-// SecKeychainGetStatus calls [raw.SecKeychainGetStatus] (C function SecKeychainGetStatus).
-func SecKeychainGetStatus(keychain unsafe.Pointer, keychainStatus *uint) int {
-	return raw.SecKeychainGetStatus(keychain, keychainStatus)
-}
-
-// SecKeychainGetTypeID calls [raw.SecKeychainGetTypeID] (C function SecKeychainGetTypeID).
-func SecKeychainGetTypeID() uint {
-	return raw.SecKeychainGetTypeID()
-}
-
-// SecKeychainItemCopyAccess calls [raw.SecKeychainItemCopyAccess] (C function SecKeychainItemCopyAccess).
-func SecKeychainItemCopyAccess(itemRef unsafe.Pointer, access unsafe.Pointer) int {
-	return raw.SecKeychainItemCopyAccess(itemRef, access)
-}
-
-// SecKeychainItemCopyAttributesAndData calls [raw.SecKeychainItemCopyAttributesAndData] (C function SecKeychainItemCopyAttributesAndData).
-func SecKeychainItemCopyAttributesAndData(itemRef unsafe.Pointer, info *raw.SecKeychainAttributeInfo, itemClass *SecItemClass, attrList *raw.SecKeychainAttributeList, length *uint, outData unsafe.Pointer) int {
-	var _itemClass raw.SecItemClass
-	_ret := raw.SecKeychainItemCopyAttributesAndData(itemRef, info, &_itemClass, attrList, length, outData)
-	if itemClass != nil {
-		*itemClass = SecItemClass(_itemClass)
+// SecCertificateCopyKey calls the Security framework function SecCertificateCopyKey.
+func SecCertificateCopyKey(certificate obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecCertificateCopyKey == nil {
+		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyKey, _lib, "SecCertificateCopyKey")
 	}
-	return _ret
+	_ret := _fnSecCertificateCopyKey(objref.IDOf(certificate))
+	return obj.Wrap(_ret)
 }
 
-// SecKeychainItemCopyContent calls [raw.SecKeychainItemCopyContent] (C function SecKeychainItemCopyContent).
-func SecKeychainItemCopyContent(itemRef unsafe.Pointer, itemClass *SecItemClass, attrList *raw.SecKeychainAttributeList, length *uint, outData unsafe.Pointer) int {
-	var _itemClass raw.SecItemClass
-	_ret := raw.SecKeychainItemCopyContent(itemRef, &_itemClass, attrList, length, outData)
-	if itemClass != nil {
-		*itemClass = SecItemClass(_itemClass)
+var _fnSecCertificateCopyNormalizedIssuerSequence func(objc.ID) objc.ID
+
+// SecCertificateCopyNormalizedIssuerSequence calls the Security framework function SecCertificateCopyNormalizedIssuerSequence.
+func SecCertificateCopyNormalizedIssuerSequence(certificate obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecCertificateCopyNormalizedIssuerSequence == nil {
+		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyNormalizedIssuerSequence, _lib, "SecCertificateCopyNormalizedIssuerSequence")
 	}
-	return _ret
+	_ret := _fnSecCertificateCopyNormalizedIssuerSequence(objref.IDOf(certificate))
+	return obj.Wrap(_ret)
 }
 
-// SecKeychainItemCopyFromPersistentReference calls [raw.SecKeychainItemCopyFromPersistentReference] (C function SecKeychainItemCopyFromPersistentReference).
-func SecKeychainItemCopyFromPersistentReference(persistentItemRef unsafe.Pointer, itemRef unsafe.Pointer) int {
-	return raw.SecKeychainItemCopyFromPersistentReference(persistentItemRef, itemRef)
-}
+var _fnSecCertificateCopyNormalizedSubjectSequence func(objc.ID) objc.ID
 
-// SecKeychainItemCopyKeychain calls [raw.SecKeychainItemCopyKeychain] (C function SecKeychainItemCopyKeychain).
-func SecKeychainItemCopyKeychain(itemRef unsafe.Pointer, keychainRef unsafe.Pointer) int {
-	return raw.SecKeychainItemCopyKeychain(itemRef, keychainRef)
-}
-
-// SecKeychainItemCreateCopy calls [raw.SecKeychainItemCreateCopy] (C function SecKeychainItemCreateCopy).
-func SecKeychainItemCreateCopy(itemRef unsafe.Pointer, destKeychainRef unsafe.Pointer, initialAccess unsafe.Pointer, itemCopy unsafe.Pointer) int {
-	return raw.SecKeychainItemCreateCopy(itemRef, destKeychainRef, initialAccess, itemCopy)
-}
-
-// SecKeychainItemCreateFromContent calls [raw.SecKeychainItemCreateFromContent] (C function SecKeychainItemCreateFromContent).
-func SecKeychainItemCreateFromContent(itemClass SecItemClass, attrList *raw.SecKeychainAttributeList, length uint, data unsafe.Pointer, keychainRef unsafe.Pointer, initialAccess unsafe.Pointer, itemRef unsafe.Pointer) int {
-	return raw.SecKeychainItemCreateFromContent(raw.SecItemClass(itemClass), attrList, length, data, keychainRef, initialAccess, itemRef)
-}
-
-// SecKeychainItemCreatePersistentReference calls [raw.SecKeychainItemCreatePersistentReference] (C function SecKeychainItemCreatePersistentReference).
-func SecKeychainItemCreatePersistentReference(itemRef unsafe.Pointer, persistentItemRef unsafe.Pointer) int {
-	return raw.SecKeychainItemCreatePersistentReference(itemRef, persistentItemRef)
-}
-
-// SecKeychainItemDelete calls [raw.SecKeychainItemDelete] (C function SecKeychainItemDelete).
-func SecKeychainItemDelete(itemRef unsafe.Pointer) int {
-	return raw.SecKeychainItemDelete(itemRef)
-}
-
-// SecKeychainItemFreeAttributesAndData calls [raw.SecKeychainItemFreeAttributesAndData] (C function SecKeychainItemFreeAttributesAndData).
-func SecKeychainItemFreeAttributesAndData(attrList *raw.SecKeychainAttributeList, data unsafe.Pointer) int {
-	return raw.SecKeychainItemFreeAttributesAndData(attrList, data)
-}
-
-// SecKeychainItemFreeContent calls [raw.SecKeychainItemFreeContent] (C function SecKeychainItemFreeContent).
-func SecKeychainItemFreeContent(attrList *raw.SecKeychainAttributeList, data unsafe.Pointer) int {
-	return raw.SecKeychainItemFreeContent(attrList, data)
-}
-
-// SecKeychainItemGetDLDBHandle calls [raw.SecKeychainItemGetDLDBHandle] (C function SecKeychainItemGetDLDBHandle).
-func SecKeychainItemGetDLDBHandle(keyItemRef unsafe.Pointer, dldbHandle *raw.CssmDlDbHandle) int {
-	return raw.SecKeychainItemGetDLDBHandle(keyItemRef, dldbHandle)
-}
-
-// SecKeychainItemGetTypeID calls [raw.SecKeychainItemGetTypeID] (C function SecKeychainItemGetTypeID).
-func SecKeychainItemGetTypeID() uint {
-	return raw.SecKeychainItemGetTypeID()
-}
-
-// SecKeychainItemGetUniqueRecordID calls [raw.SecKeychainItemGetUniqueRecordID] (C function SecKeychainItemGetUniqueRecordID).
-func SecKeychainItemGetUniqueRecordID(itemRef unsafe.Pointer, uniqueRecordID *raw.CssmDbUniqueRecord) int {
-	return raw.SecKeychainItemGetUniqueRecordID(itemRef, uniqueRecordID)
-}
-
-// SecKeychainItemImport calls [raw.SecKeychainItemImport] (C function SecKeychainItemImport).
-func SecKeychainItemImport(importedData unsafe.Pointer, fileNameOrExtension unsafe.Pointer, inputFormat *SecExternalFormat, itemType *SecExternalItemType, flags SecItemImportExportFlags, keyParams *raw.SecKeyImportExportParameters, importKeychain unsafe.Pointer, outItems unsafe.Pointer) int {
-	var _inputFormat raw.SecExternalFormat
-	var _itemType raw.SecExternalItemType
-	_ret := raw.SecKeychainItemImport(importedData, fileNameOrExtension, &_inputFormat, &_itemType, raw.SecItemImportExportFlags(flags), keyParams, importKeychain, outItems)
-	if inputFormat != nil {
-		*inputFormat = SecExternalFormat(_inputFormat)
+// SecCertificateCopyNormalizedSubjectSequence calls the Security framework function SecCertificateCopyNormalizedSubjectSequence.
+func SecCertificateCopyNormalizedSubjectSequence(certificate obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecCertificateCopyNormalizedSubjectSequence == nil {
+		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyNormalizedSubjectSequence, _lib, "SecCertificateCopyNormalizedSubjectSequence")
 	}
-	if itemType != nil {
-		*itemType = SecExternalItemType(_itemType)
+	_ret := _fnSecCertificateCopyNormalizedSubjectSequence(objref.IDOf(certificate))
+	return obj.Wrap(_ret)
+}
+
+var _fnSecCertificateCopyNotValidAfterDate func(objc.ID) objc.ID
+
+// SecCertificateCopyNotValidAfterDate calls the Security framework function SecCertificateCopyNotValidAfterDate.
+func SecCertificateCopyNotValidAfterDate(certificate obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecCertificateCopyNotValidAfterDate == nil {
+		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyNotValidAfterDate, _lib, "SecCertificateCopyNotValidAfterDate")
 	}
-	return _ret
+	_ret := _fnSecCertificateCopyNotValidAfterDate(objref.IDOf(certificate))
+	return obj.Wrap(_ret)
 }
 
-// SecKeychainItemModifyAttributesAndData calls [raw.SecKeychainItemModifyAttributesAndData] (C function SecKeychainItemModifyAttributesAndData).
-func SecKeychainItemModifyAttributesAndData(itemRef unsafe.Pointer, attrList *raw.SecKeychainAttributeList, length uint, data unsafe.Pointer) int {
-	return raw.SecKeychainItemModifyAttributesAndData(itemRef, attrList, length, data)
-}
-
-// SecKeychainItemModifyContent calls [raw.SecKeychainItemModifyContent] (C function SecKeychainItemModifyContent).
-func SecKeychainItemModifyContent(itemRef unsafe.Pointer, attrList *raw.SecKeychainAttributeList, length uint, data unsafe.Pointer) int {
-	return raw.SecKeychainItemModifyContent(itemRef, attrList, length, data)
-}
-
-// SecKeychainItemSetAccess calls [raw.SecKeychainItemSetAccess] (C function SecKeychainItemSetAccess).
-func SecKeychainItemSetAccess(itemRef unsafe.Pointer, access unsafe.Pointer) int {
-	return raw.SecKeychainItemSetAccess(itemRef, access)
-}
-
-// SecKeychainLock calls [raw.SecKeychainLock] (C function SecKeychainLock).
-func SecKeychainLock(keychain unsafe.Pointer) int {
-	return raw.SecKeychainLock(keychain)
-}
-
-// SecKeychainOpen calls [raw.SecKeychainOpen] (C function SecKeychainOpen).
-func SecKeychainOpen(pathName string, keychain unsafe.Pointer) int {
-	return raw.SecKeychainOpen(pathName, keychain)
-}
-
-// SecKeychainRemoveCallback calls [raw.SecKeychainRemoveCallback] (C function SecKeychainRemoveCallback).
-func SecKeychainRemoveCallback(callbackFunction unsafe.Pointer) int {
-	return raw.SecKeychainRemoveCallback(callbackFunction)
-}
-
-// SecKeychainSearchCopyNext calls [raw.SecKeychainSearchCopyNext] (C function SecKeychainSearchCopyNext).
-func SecKeychainSearchCopyNext(searchRef unsafe.Pointer, itemRef unsafe.Pointer) int {
-	return raw.SecKeychainSearchCopyNext(searchRef, itemRef)
-}
-
-// SecKeychainSearchCreateFromAttributes calls [raw.SecKeychainSearchCreateFromAttributes] (C function SecKeychainSearchCreateFromAttributes).
-func SecKeychainSearchCreateFromAttributes(keychainOrArray unsafe.Pointer, itemClass SecItemClass, attrList *raw.SecKeychainAttributeList, searchRef unsafe.Pointer) int {
-	return raw.SecKeychainSearchCreateFromAttributes(keychainOrArray, raw.SecItemClass(itemClass), attrList, searchRef)
-}
-
-// SecKeychainSearchGetTypeID calls [raw.SecKeychainSearchGetTypeID] (C function SecKeychainSearchGetTypeID).
-func SecKeychainSearchGetTypeID() uint {
-	return raw.SecKeychainSearchGetTypeID()
-}
-
-// SecKeychainSetAccess calls [raw.SecKeychainSetAccess] (C function SecKeychainSetAccess).
-func SecKeychainSetAccess(keychain unsafe.Pointer, access unsafe.Pointer) int {
-	return raw.SecKeychainSetAccess(keychain, access)
-}
-
-// SecKeychainSetDefault calls [raw.SecKeychainSetDefault] (C function SecKeychainSetDefault).
-func SecKeychainSetDefault(keychain unsafe.Pointer) int {
-	return raw.SecKeychainSetDefault(keychain)
-}
-
-// SecKeychainSetDomainDefault calls [raw.SecKeychainSetDomainDefault] (C function SecKeychainSetDomainDefault).
-func SecKeychainSetDomainDefault(domain SecPreferencesDomain, keychain unsafe.Pointer) int {
-	return raw.SecKeychainSetDomainDefault(raw.SecPreferencesDomain(domain), keychain)
-}
-
-// SecKeychainSetSettings calls [raw.SecKeychainSetSettings] (C function SecKeychainSetSettings).
-func SecKeychainSetSettings(keychain unsafe.Pointer, newSettings *raw.SecKeychainSettings) int {
-	return raw.SecKeychainSetSettings(keychain, newSettings)
-}
-
-// SecKeychainUnlock calls [raw.SecKeychainUnlock] (C function SecKeychainUnlock).
-func SecKeychainUnlock(keychain unsafe.Pointer, passwordLength uint, password unsafe.Pointer, usePassword uint8) int {
-	return raw.SecKeychainUnlock(keychain, passwordLength, password, usePassword)
-}
-
-// SecPolicyCopyProperties calls [raw.SecPolicyCopyProperties] (C function SecPolicyCopyProperties).
-func SecPolicyCopyProperties(policyRef unsafe.Pointer) unsafe.Pointer {
-	return raw.SecPolicyCopyProperties(policyRef)
-}
-
-// SecPolicyCreateBasicX509 calls [raw.SecPolicyCreateBasicX509] (C function SecPolicyCreateBasicX509).
-func SecPolicyCreateBasicX509() unsafe.Pointer {
-	return raw.SecPolicyCreateBasicX509()
-}
-
-// SecPolicyCreateRevocation calls [raw.SecPolicyCreateRevocation] (C function SecPolicyCreateRevocation).
-func SecPolicyCreateRevocation(revocationFlags uint) unsafe.Pointer {
-	return raw.SecPolicyCreateRevocation(revocationFlags)
-}
-
-// SecPolicyCreateSSL calls [raw.SecPolicyCreateSSL] (C function SecPolicyCreateSSL).
-func SecPolicyCreateSSL(server uint8, hostname unsafe.Pointer) unsafe.Pointer {
-	return raw.SecPolicyCreateSSL(server, hostname)
-}
-
-// SecPolicyCreateWithOID calls [raw.SecPolicyCreateWithOID] (C function SecPolicyCreateWithOID).
-func SecPolicyCreateWithOID(policyOID unsafe.Pointer) unsafe.Pointer {
-	return raw.SecPolicyCreateWithOID(policyOID)
-}
-
-// SecPolicyCreateWithProperties calls [raw.SecPolicyCreateWithProperties] (C function SecPolicyCreateWithProperties).
-func SecPolicyCreateWithProperties(policyIdentifier unsafe.Pointer, properties unsafe.Pointer) unsafe.Pointer {
-	return raw.SecPolicyCreateWithProperties(policyIdentifier, properties)
-}
-
-// SecPolicyGetOID calls [raw.SecPolicyGetOID] (C function SecPolicyGetOID).
-func SecPolicyGetOID(policyRef unsafe.Pointer, oid *raw.CssmData) int {
-	return raw.SecPolicyGetOID(policyRef, oid)
-}
-
-// SecPolicyGetTPHandle calls [raw.SecPolicyGetTPHandle] (C function SecPolicyGetTPHandle).
-func SecPolicyGetTPHandle(policyRef unsafe.Pointer, tpHandle *int) int {
-	return raw.SecPolicyGetTPHandle(policyRef, tpHandle)
-}
-
-// SecPolicyGetTypeID calls [raw.SecPolicyGetTypeID] (C function SecPolicyGetTypeID).
-func SecPolicyGetTypeID() uint {
-	return raw.SecPolicyGetTypeID()
-}
-
-// SecPolicyGetValue calls [raw.SecPolicyGetValue] (C function SecPolicyGetValue).
-func SecPolicyGetValue(policyRef unsafe.Pointer, value *raw.CssmData) int {
-	return raw.SecPolicyGetValue(policyRef, value)
-}
-
-// SecPolicySearchCopyNext calls [raw.SecPolicySearchCopyNext] (C function SecPolicySearchCopyNext).
-func SecPolicySearchCopyNext(searchRef unsafe.Pointer, policyRef unsafe.Pointer) int {
-	return raw.SecPolicySearchCopyNext(searchRef, policyRef)
-}
-
-// SecPolicySearchCreate calls [raw.SecPolicySearchCreate] (C function SecPolicySearchCreate).
-func SecPolicySearchCreate(certType uint32, policyOID *raw.CssmData, value *raw.CssmData, searchRef unsafe.Pointer) int {
-	return raw.SecPolicySearchCreate(certType, policyOID, value, searchRef)
-}
-
-// SecPolicySearchGetTypeID calls [raw.SecPolicySearchGetTypeID] (C function SecPolicySearchGetTypeID).
-func SecPolicySearchGetTypeID() uint {
-	return raw.SecPolicySearchGetTypeID()
-}
-
-// SecPolicySetProperties calls [raw.SecPolicySetProperties] (C function SecPolicySetProperties).
-func SecPolicySetProperties(policyRef unsafe.Pointer, properties unsafe.Pointer) int {
-	return raw.SecPolicySetProperties(policyRef, properties)
-}
-
-// SecPolicySetValue calls [raw.SecPolicySetValue] (C function SecPolicySetValue).
-func SecPolicySetValue(policyRef unsafe.Pointer, value *raw.CssmData) int {
-	return raw.SecPolicySetValue(policyRef, value)
-}
-
-// SecRandomCopyBytes calls [raw.SecRandomCopyBytes] (C function SecRandomCopyBytes).
-func SecRandomCopyBytes(rnd unsafe.Pointer, count uint, bytes_ unsafe.Pointer) int {
-	return raw.SecRandomCopyBytes(rnd, count, bytes_)
-}
-
-// SecRequestSharedWebCredential calls [raw.SecRequestSharedWebCredential] (C function SecRequestSharedWebCredential).
-func SecRequestSharedWebCredential(fqdn unsafe.Pointer, account unsafe.Pointer, completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	raw.SecRequestSharedWebCredential(fqdn, account, completionHandler)
-}
-
-// SecRequirementCopyData calls [raw.SecRequirementCopyData] (C function SecRequirementCopyData).
-func SecRequirementCopyData(requirement unsafe.Pointer, flags SecCSFlags, data unsafe.Pointer) int {
-	return raw.SecRequirementCopyData(requirement, raw.SecCSFlags(flags), data)
-}
-
-// SecRequirementCopyString calls [raw.SecRequirementCopyString] (C function SecRequirementCopyString).
-func SecRequirementCopyString(requirement unsafe.Pointer, flags SecCSFlags, text unsafe.Pointer) int {
-	return raw.SecRequirementCopyString(requirement, raw.SecCSFlags(flags), text)
-}
-
-// SecRequirementCreateWithData calls [raw.SecRequirementCreateWithData] (C function SecRequirementCreateWithData).
-func SecRequirementCreateWithData(data unsafe.Pointer, flags SecCSFlags, requirement unsafe.Pointer) int {
-	return raw.SecRequirementCreateWithData(data, raw.SecCSFlags(flags), requirement)
-}
-
-// SecRequirementCreateWithString calls [raw.SecRequirementCreateWithString] (C function SecRequirementCreateWithString).
-func SecRequirementCreateWithString(text unsafe.Pointer, flags SecCSFlags, requirement unsafe.Pointer) int {
-	return raw.SecRequirementCreateWithString(text, raw.SecCSFlags(flags), requirement)
-}
-
-// SecRequirementCreateWithStringAndErrors calls [raw.SecRequirementCreateWithStringAndErrors] (C function SecRequirementCreateWithStringAndErrors).
-func SecRequirementCreateWithStringAndErrors(text unsafe.Pointer, flags SecCSFlags, errors_ unsafe.Pointer, requirement unsafe.Pointer) int {
-	return raw.SecRequirementCreateWithStringAndErrors(text, raw.SecCSFlags(flags), errors_, requirement)
-}
-
-// SecRequirementGetTypeID calls [raw.SecRequirementGetTypeID] (C function SecRequirementGetTypeID).
-func SecRequirementGetTypeID() uint {
-	return raw.SecRequirementGetTypeID()
-}
-
-// SecSignTransformCreate calls [raw.SecSignTransformCreate] (C function SecSignTransformCreate).
-func SecSignTransformCreate(key unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecSignTransformCreate(key, error_)
-}
-
-// SecStaticCodeCheckValidity calls [raw.SecStaticCodeCheckValidity] (C function SecStaticCodeCheckValidity).
-func SecStaticCodeCheckValidity(staticCode unsafe.Pointer, flags SecCSFlags, requirement unsafe.Pointer) int {
-	return raw.SecStaticCodeCheckValidity(staticCode, raw.SecCSFlags(flags), requirement)
-}
-
-// SecStaticCodeCheckValidityWithErrors calls [raw.SecStaticCodeCheckValidityWithErrors] (C function SecStaticCodeCheckValidityWithErrors).
-func SecStaticCodeCheckValidityWithErrors(staticCode unsafe.Pointer, flags SecCSFlags, requirement unsafe.Pointer, errors_ unsafe.Pointer) int {
-	return raw.SecStaticCodeCheckValidityWithErrors(staticCode, raw.SecCSFlags(flags), requirement, errors_)
-}
-
-// SecStaticCodeCreateWithPath calls [raw.SecStaticCodeCreateWithPath] (C function SecStaticCodeCreateWithPath).
-func SecStaticCodeCreateWithPath(path unsafe.Pointer, flags SecCSFlags, staticCode unsafe.Pointer) int {
-	return raw.SecStaticCodeCreateWithPath(path, raw.SecCSFlags(flags), staticCode)
-}
-
-// SecStaticCodeCreateWithPathAndAttributes calls [raw.SecStaticCodeCreateWithPathAndAttributes] (C function SecStaticCodeCreateWithPathAndAttributes).
-func SecStaticCodeCreateWithPathAndAttributes(path unsafe.Pointer, flags SecCSFlags, attributes unsafe.Pointer, staticCode unsafe.Pointer) int {
-	return raw.SecStaticCodeCreateWithPathAndAttributes(path, raw.SecCSFlags(flags), attributes, staticCode)
-}
-
-// SecStaticCodeGetTypeID calls [raw.SecStaticCodeGetTypeID] (C function SecStaticCodeGetTypeID).
-func SecStaticCodeGetTypeID() uint {
-	return raw.SecStaticCodeGetTypeID()
-}
-
-// SecTaskCopySigningIdentifier calls [raw.SecTaskCopySigningIdentifier] (C function SecTaskCopySigningIdentifier).
-func SecTaskCopySigningIdentifier(task unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTaskCopySigningIdentifier(task, error_)
-}
-
-// SecTaskCopyValueForEntitlement calls [raw.SecTaskCopyValueForEntitlement] (C function SecTaskCopyValueForEntitlement).
-func SecTaskCopyValueForEntitlement(task unsafe.Pointer, entitlement unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTaskCopyValueForEntitlement(task, entitlement, error_)
-}
-
-// SecTaskCopyValuesForEntitlements calls [raw.SecTaskCopyValuesForEntitlements] (C function SecTaskCopyValuesForEntitlements).
-func SecTaskCopyValuesForEntitlements(task unsafe.Pointer, entitlements unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTaskCopyValuesForEntitlements(task, entitlements, error_)
-}
-
-// SecTaskCreateFromSelf calls [raw.SecTaskCreateFromSelf] (C function SecTaskCreateFromSelf).
-func SecTaskCreateFromSelf(allocator unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTaskCreateFromSelf(allocator)
-}
-
-// SecTaskCreateWithAuditToken calls [raw.SecTaskCreateWithAuditToken] (C function SecTaskCreateWithAuditToken).
-func SecTaskCreateWithAuditToken(allocator unsafe.Pointer, token unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTaskCreateWithAuditToken(allocator, token)
-}
-
-// SecTaskGetTypeID calls [raw.SecTaskGetTypeID] (C function SecTaskGetTypeID).
-func SecTaskGetTypeID() uint {
-	return raw.SecTaskGetTypeID()
-}
-
-// SecTranformCustomGetAttribute calls [raw.SecTranformCustomGetAttribute] (C function SecTranformCustomGetAttribute).
-func SecTranformCustomGetAttribute(ref unsafe.Pointer, attribute unsafe.Pointer, type_ SecTransformMetaAttributeType) unsafe.Pointer {
-	return raw.SecTranformCustomGetAttribute(ref, attribute, raw.SecTransformMetaAttributeType(type_))
-}
-
-// SecTransformConnectTransforms calls [raw.SecTransformConnectTransforms] (C function SecTransformConnectTransforms).
-func SecTransformConnectTransforms(sourceTransformRef unsafe.Pointer, sourceAttributeName unsafe.Pointer, destinationTransformRef unsafe.Pointer, destinationAttributeName unsafe.Pointer, group unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTransformConnectTransforms(sourceTransformRef, sourceAttributeName, destinationTransformRef, destinationAttributeName, group, error_)
-}
-
-// SecTransformCopyExternalRepresentation calls [raw.SecTransformCopyExternalRepresentation] (C function SecTransformCopyExternalRepresentation).
-func SecTransformCopyExternalRepresentation(transformRef unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTransformCopyExternalRepresentation(transformRef)
-}
-
-// SecTransformCreate calls [raw.SecTransformCreate] (C function SecTransformCreate).
-func SecTransformCreate(name unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTransformCreate(name, error_)
-}
-
-// SecTransformCreateFromExternalRepresentation calls [raw.SecTransformCreateFromExternalRepresentation] (C function SecTransformCreateFromExternalRepresentation).
-func SecTransformCreateFromExternalRepresentation(dictionary unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTransformCreateFromExternalRepresentation(dictionary, error_)
-}
-
-// SecTransformCreateGroupTransform calls [raw.SecTransformCreateGroupTransform] (C function SecTransformCreateGroupTransform).
-func SecTransformCreateGroupTransform() unsafe.Pointer {
-	return raw.SecTransformCreateGroupTransform()
-}
-
-// SecTransformCreateReadTransformWithReadStream calls [raw.SecTransformCreateReadTransformWithReadStream] (C function SecTransformCreateReadTransformWithReadStream).
-func SecTransformCreateReadTransformWithReadStream(inputStream unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTransformCreateReadTransformWithReadStream(inputStream)
-}
-
-// SecTransformCustomGetAttribute calls [raw.SecTransformCustomGetAttribute] (C function SecTransformCustomGetAttribute).
-func SecTransformCustomGetAttribute(ref unsafe.Pointer, attribute unsafe.Pointer, type_ SecTransformMetaAttributeType) unsafe.Pointer {
-	return raw.SecTransformCustomGetAttribute(ref, attribute, raw.SecTransformMetaAttributeType(type_))
-}
-
-// SecTransformCustomSetAttribute calls [raw.SecTransformCustomSetAttribute] (C function SecTransformCustomSetAttribute).
-func SecTransformCustomSetAttribute(ref unsafe.Pointer, attribute unsafe.Pointer, type_ SecTransformMetaAttributeType, value unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTransformCustomSetAttribute(ref, attribute, raw.SecTransformMetaAttributeType(type_), value)
-}
-
-// SecTransformExecute calls [raw.SecTransformExecute] (C function SecTransformExecute).
-func SecTransformExecute(transformRef unsafe.Pointer, errorRef unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTransformExecute(transformRef, errorRef)
-}
-
-// SecTransformExecuteAsync calls [raw.SecTransformExecuteAsync] (C function SecTransformExecuteAsync).
-func SecTransformExecuteAsync(transformRef unsafe.Pointer, deliveryQueue unsafe.Pointer, deliveryBlock func(unsafe.Pointer, unsafe.Pointer, uint8)) {
-	raw.SecTransformExecuteAsync(transformRef, deliveryQueue, deliveryBlock)
-}
-
-// SecTransformFindByName calls [raw.SecTransformFindByName] (C function SecTransformFindByName).
-func SecTransformFindByName(transform unsafe.Pointer, name unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTransformFindByName(transform, name)
-}
-
-// SecTransformGetAttribute calls [raw.SecTransformGetAttribute] (C function SecTransformGetAttribute).
-func SecTransformGetAttribute(transformRef unsafe.Pointer, key unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTransformGetAttribute(transformRef, key)
-}
-
-// SecTransformGetTypeID calls [raw.SecTransformGetTypeID] (C function SecTransformGetTypeID).
-func SecTransformGetTypeID() uint {
-	return raw.SecTransformGetTypeID()
-}
-
-// SecTransformNoData calls [raw.SecTransformNoData] (C function SecTransformNoData).
-func SecTransformNoData() unsafe.Pointer {
-	return raw.SecTransformNoData()
-}
-
-// SecTransformPushbackAttribute calls [raw.SecTransformPushbackAttribute] (C function SecTransformPushbackAttribute).
-func SecTransformPushbackAttribute(ref unsafe.Pointer, attribute unsafe.Pointer, value unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTransformPushbackAttribute(ref, attribute, value)
-}
-
-// SecTransformRegister calls [raw.SecTransformRegister] (C function SecTransformRegister).
-func SecTransformRegister(uniqueName unsafe.Pointer, createTransformFunction unsafe.Pointer, error_ unsafe.Pointer) uint8 {
-	return raw.SecTransformRegister(uniqueName, createTransformFunction, error_)
-}
-
-// SecTransformSetAttribute calls [raw.SecTransformSetAttribute] (C function SecTransformSetAttribute).
-func SecTransformSetAttribute(transformRef unsafe.Pointer, key unsafe.Pointer, value unsafe.Pointer, error_ unsafe.Pointer) uint8 {
-	return raw.SecTransformSetAttribute(transformRef, key, value, error_)
-}
-
-// SecTransformSetAttributeAction calls [raw.SecTransformSetAttributeAction] (C function SecTransformSetAttributeAction).
-func SecTransformSetAttributeAction(ref unsafe.Pointer, action unsafe.Pointer, attribute unsafe.Pointer, newAction func(unsafe.Pointer, unsafe.Pointer) unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTransformSetAttributeAction(ref, action, attribute, newAction)
-}
-
-// SecTransformSetDataAction calls [raw.SecTransformSetDataAction] (C function SecTransformSetDataAction).
-func SecTransformSetDataAction(ref unsafe.Pointer, action unsafe.Pointer, newAction func(unsafe.Pointer) unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTransformSetDataAction(ref, action, newAction)
-}
-
-// SecTransformSetTransformAction calls [raw.SecTransformSetTransformAction] (C function SecTransformSetTransformAction).
-func SecTransformSetTransformAction(ref unsafe.Pointer, action unsafe.Pointer, newAction func() unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTransformSetTransformAction(ref, action, newAction)
-}
-
-// SecTrustCopyCertificateChain calls [raw.SecTrustCopyCertificateChain] (C function SecTrustCopyCertificateChain).
-func SecTrustCopyCertificateChain(trust unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTrustCopyCertificateChain(trust)
-}
-
-// SecTrustCopyCustomAnchorCertificates calls [raw.SecTrustCopyCustomAnchorCertificates] (C function SecTrustCopyCustomAnchorCertificates).
-func SecTrustCopyCustomAnchorCertificates(trust unsafe.Pointer, anchors unsafe.Pointer) int {
-	return raw.SecTrustCopyCustomAnchorCertificates(trust, anchors)
-}
-
-// SecTrustCopyExceptions calls [raw.SecTrustCopyExceptions] (C function SecTrustCopyExceptions).
-func SecTrustCopyExceptions(trust unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTrustCopyExceptions(trust)
-}
-
-// SecTrustCopyKey calls [raw.SecTrustCopyKey] (C function SecTrustCopyKey).
-func SecTrustCopyKey(trust unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTrustCopyKey(trust)
-}
-
-// SecTrustCopyPolicies calls [raw.SecTrustCopyPolicies] (C function SecTrustCopyPolicies).
-func SecTrustCopyPolicies(trust unsafe.Pointer, policies unsafe.Pointer) int {
-	return raw.SecTrustCopyPolicies(trust, policies)
-}
-
-// SecTrustCopyProperties calls [raw.SecTrustCopyProperties] (C function SecTrustCopyProperties).
-func SecTrustCopyProperties(trust unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTrustCopyProperties(trust)
-}
-
-// SecTrustCopyPublicKey calls [raw.SecTrustCopyPublicKey] (C function SecTrustCopyPublicKey).
-func SecTrustCopyPublicKey(trust unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTrustCopyPublicKey(trust)
-}
-
-// SecTrustCopyResult calls [raw.SecTrustCopyResult] (C function SecTrustCopyResult).
-func SecTrustCopyResult(trust unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTrustCopyResult(trust)
-}
-
-// SecTrustCreateWithCertificates calls [raw.SecTrustCreateWithCertificates] (C function SecTrustCreateWithCertificates).
-func SecTrustCreateWithCertificates(certificates unsafe.Pointer, policies unsafe.Pointer, trust unsafe.Pointer) int {
-	return raw.SecTrustCreateWithCertificates(certificates, policies, trust)
-}
+var _fnSecCertificateCopyNotValidBeforeDate func(objc.ID) objc.ID
 
-// SecTrustEvaluate calls [raw.SecTrustEvaluate] (C function SecTrustEvaluate).
-func SecTrustEvaluate(trust unsafe.Pointer, result *SecTrustResultType) int {
-	var _result raw.SecTrustResultType
-	_ret := raw.SecTrustEvaluate(trust, &_result)
-	if result != nil {
-		*result = SecTrustResultType(_result)
+// SecCertificateCopyNotValidBeforeDate calls the Security framework function SecCertificateCopyNotValidBeforeDate.
+func SecCertificateCopyNotValidBeforeDate(certificate obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecCertificateCopyNotValidBeforeDate == nil {
+		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyNotValidBeforeDate, _lib, "SecCertificateCopyNotValidBeforeDate")
 	}
-	return _ret
+	_ret := _fnSecCertificateCopyNotValidBeforeDate(objref.IDOf(certificate))
+	return obj.Wrap(_ret)
 }
 
-// SecTrustEvaluateAsync calls [raw.SecTrustEvaluateAsync] (C function SecTrustEvaluateAsync).
-func SecTrustEvaluateAsync(trust unsafe.Pointer, queue unsafe.Pointer, result func(unsafe.Pointer, SecTrustResultType)) int {
-	return raw.SecTrustEvaluateAsync(trust, queue, func(_a0 unsafe.Pointer, _a1 raw.SecTrustResultType) { result(_a0, SecTrustResultType(_a1)) })
-}
+var _fnSecCertificateCopyPreferred func(objc.ID, objc.ID) objc.ID
 
-// SecTrustEvaluateAsyncWithError calls [raw.SecTrustEvaluateAsyncWithError] (C function SecTrustEvaluateAsyncWithError).
-func SecTrustEvaluateAsyncWithError(trust unsafe.Pointer, queue unsafe.Pointer, result func(unsafe.Pointer, bool, unsafe.Pointer)) int {
-	return raw.SecTrustEvaluateAsyncWithError(trust, queue, result)
-}
-
-// SecTrustEvaluateWithError calls [raw.SecTrustEvaluateWithError] (C function SecTrustEvaluateWithError).
-func SecTrustEvaluateWithError(trust unsafe.Pointer, error_ unsafe.Pointer) bool {
-	return raw.SecTrustEvaluateWithError(trust, error_)
-}
-
-// SecTrustGetCertificateAtIndex calls [raw.SecTrustGetCertificateAtIndex] (C function SecTrustGetCertificateAtIndex).
-func SecTrustGetCertificateAtIndex(trust unsafe.Pointer, ix int) unsafe.Pointer {
-	return raw.SecTrustGetCertificateAtIndex(trust, ix)
-}
-
-// SecTrustGetCertificateCount calls [raw.SecTrustGetCertificateCount] (C function SecTrustGetCertificateCount).
-func SecTrustGetCertificateCount(trust unsafe.Pointer) int {
-	return raw.SecTrustGetCertificateCount(trust)
-}
-
-// SecTrustGetCssmResult calls [raw.SecTrustGetCssmResult] (C function SecTrustGetCssmResult).
-func SecTrustGetCssmResult(trust unsafe.Pointer, result **raw.CssmTpVerifyContextResult) int {
-	return raw.SecTrustGetCssmResult(trust, result)
-}
-
-// SecTrustGetCssmResultCode calls [raw.SecTrustGetCssmResultCode] (C function SecTrustGetCssmResultCode).
-func SecTrustGetCssmResultCode(trust unsafe.Pointer, resultCode *int) int {
-	return raw.SecTrustGetCssmResultCode(trust, resultCode)
-}
-
-// SecTrustGetNetworkFetchAllowed calls [raw.SecTrustGetNetworkFetchAllowed] (C function SecTrustGetNetworkFetchAllowed).
-func SecTrustGetNetworkFetchAllowed(trust unsafe.Pointer, allowFetch *uint8) int {
-	return raw.SecTrustGetNetworkFetchAllowed(trust, allowFetch)
-}
-
-// SecTrustGetResult calls [raw.SecTrustGetResult] (C function SecTrustGetResult).
-func SecTrustGetResult(trustRef unsafe.Pointer, result *SecTrustResultType, certChain unsafe.Pointer, statusChain *raw.CSSM_TP_APPLE_EVIDENCE_INFO) int {
-	var _result raw.SecTrustResultType
-	_ret := raw.SecTrustGetResult(trustRef, &_result, certChain, statusChain)
-	if result != nil {
-		*result = SecTrustResultType(_result)
+// SecCertificateCopyPreferred calls the Security framework function SecCertificateCopyPreferred.
+func SecCertificateCopyPreferred(name obj.Object, keyUsage obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecCertificateCopyPreferred == nil {
+		ebipurego.RegisterLibFunc(&_fnSecCertificateCopyPreferred, _lib, "SecCertificateCopyPreferred")
 	}
-	return _ret
+	_ret := _fnSecCertificateCopyPreferred(objref.IDOf(name), objref.IDOf(keyUsage))
+	return obj.Wrap(_ret)
 }
 
-// SecTrustGetTPHandle calls [raw.SecTrustGetTPHandle] (C function SecTrustGetTPHandle).
-func SecTrustGetTPHandle(trust unsafe.Pointer, handle *int) int {
-	return raw.SecTrustGetTPHandle(trust, handle)
-}
+var _fnSecCertificateCopySubjectSummary func(objc.ID) objc.ID
 
-// SecTrustGetTrustResult calls [raw.SecTrustGetTrustResult] (C function SecTrustGetTrustResult).
-func SecTrustGetTrustResult(trust unsafe.Pointer, result *SecTrustResultType) int {
-	var _result raw.SecTrustResultType
-	_ret := raw.SecTrustGetTrustResult(trust, &_result)
-	if result != nil {
-		*result = SecTrustResultType(_result)
+// SecCertificateCopySubjectSummary calls the Security framework function SecCertificateCopySubjectSummary.
+func SecCertificateCopySubjectSummary(certificate obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecCertificateCopySubjectSummary == nil {
+		ebipurego.RegisterLibFunc(&_fnSecCertificateCopySubjectSummary, _lib, "SecCertificateCopySubjectSummary")
 	}
-	return _ret
+	_ret := _fnSecCertificateCopySubjectSummary(objref.IDOf(certificate))
+	return obj.Wrap(_ret)
 }
 
-// SecTrustGetTypeID calls [raw.SecTrustGetTypeID] (C function SecTrustGetTypeID).
-func SecTrustGetTypeID() uint {
-	return raw.SecTrustGetTypeID()
+var _fnSecCertificateCreateWithData func(objc.ID, objc.ID) objc.ID
+
+// SecCertificateCreateWithData calls the Security framework function SecCertificateCreateWithData.
+func SecCertificateCreateWithData(allocator obj.Object, data obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecCertificateCreateWithData == nil {
+		ebipurego.RegisterLibFunc(&_fnSecCertificateCreateWithData, _lib, "SecCertificateCreateWithData")
+	}
+	_ret := _fnSecCertificateCreateWithData(objref.IDOf(allocator), objref.IDOf(data))
+	return obj.Wrap(_ret)
 }
 
-// SecTrustGetVerifyTime calls [raw.SecTrustGetVerifyTime] (C function SecTrustGetVerifyTime).
-func SecTrustGetVerifyTime(trust unsafe.Pointer) float64 {
-	return raw.SecTrustGetVerifyTime(trust)
+var _fnSecCertificateGetTypeID func() int
+
+// SecCertificateGetTypeID calls the Security framework function SecCertificateGetTypeID.
+func SecCertificateGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecCertificateGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecCertificateGetTypeID, _lib, "SecCertificateGetTypeID")
+	}
+	return _fnSecCertificateGetTypeID()
 }
 
-// SecTrustSetAnchorCertificates calls [raw.SecTrustSetAnchorCertificates] (C function SecTrustSetAnchorCertificates).
-func SecTrustSetAnchorCertificates(trust unsafe.Pointer, anchorCertificates unsafe.Pointer) int {
-	return raw.SecTrustSetAnchorCertificates(trust, anchorCertificates)
+var _fnSecCodeGetTypeID func() int
+
+// SecCodeGetTypeID calls the Security framework function SecCodeGetTypeID.
+func SecCodeGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecCodeGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecCodeGetTypeID, _lib, "SecCodeGetTypeID")
+	}
+	return _fnSecCodeGetTypeID()
 }
 
-// SecTrustSetAnchorCertificatesOnly calls [raw.SecTrustSetAnchorCertificatesOnly] (C function SecTrustSetAnchorCertificatesOnly).
-func SecTrustSetAnchorCertificatesOnly(trust unsafe.Pointer, anchorCertificatesOnly uint8) int {
-	return raw.SecTrustSetAnchorCertificatesOnly(trust, anchorCertificatesOnly)
+var _fnSecCreateSharedWebCredentialPassword func() objc.ID
+
+// SecCreateSharedWebCredentialPassword calls the Security framework function SecCreateSharedWebCredentialPassword.
+func SecCreateSharedWebCredentialPassword() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecCreateSharedWebCredentialPassword == nil {
+		ebipurego.RegisterLibFunc(&_fnSecCreateSharedWebCredentialPassword, _lib, "SecCreateSharedWebCredentialPassword")
+	}
+	_ret := _fnSecCreateSharedWebCredentialPassword()
+	return obj.Wrap(_ret)
 }
 
-// SecTrustSetExceptions calls [raw.SecTrustSetExceptions] (C function SecTrustSetExceptions).
-func SecTrustSetExceptions(trust unsafe.Pointer, exceptions unsafe.Pointer) bool {
-	return raw.SecTrustSetExceptions(trust, exceptions)
+var _fnSecDecryptTransformGetTypeID func() int
+
+// SecDecryptTransformGetTypeID calls the Security framework function SecDecryptTransformGetTypeID.
+func SecDecryptTransformGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecDecryptTransformGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecDecryptTransformGetTypeID, _lib, "SecDecryptTransformGetTypeID")
+	}
+	return _fnSecDecryptTransformGetTypeID()
 }
 
-// SecTrustSetKeychains calls [raw.SecTrustSetKeychains] (C function SecTrustSetKeychains).
-func SecTrustSetKeychains(trust unsafe.Pointer, keychainOrArray unsafe.Pointer) int {
-	return raw.SecTrustSetKeychains(trust, keychainOrArray)
+var _fnSecDigestTransformGetTypeID func() int
+
+// SecDigestTransformGetTypeID calls the Security framework function SecDigestTransformGetTypeID.
+func SecDigestTransformGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecDigestTransformGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecDigestTransformGetTypeID, _lib, "SecDigestTransformGetTypeID")
+	}
+	return _fnSecDigestTransformGetTypeID()
 }
 
-// SecTrustSetNetworkFetchAllowed calls [raw.SecTrustSetNetworkFetchAllowed] (C function SecTrustSetNetworkFetchAllowed).
-func SecTrustSetNetworkFetchAllowed(trust unsafe.Pointer, allowFetch uint8) int {
-	return raw.SecTrustSetNetworkFetchAllowed(trust, allowFetch)
+var _fnSecEncryptTransformGetTypeID func() int
+
+// SecEncryptTransformGetTypeID calls the Security framework function SecEncryptTransformGetTypeID.
+func SecEncryptTransformGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecEncryptTransformGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecEncryptTransformGetTypeID, _lib, "SecEncryptTransformGetTypeID")
+	}
+	return _fnSecEncryptTransformGetTypeID()
 }
 
-// SecTrustSetOCSPResponse calls [raw.SecTrustSetOCSPResponse] (C function SecTrustSetOCSPResponse).
-func SecTrustSetOCSPResponse(trust unsafe.Pointer, responseData unsafe.Pointer) int {
-	return raw.SecTrustSetOCSPResponse(trust, responseData)
+var _fnSecGroupTransformGetTypeID func() int
+
+// SecGroupTransformGetTypeID calls the Security framework function SecGroupTransformGetTypeID.
+func SecGroupTransformGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecGroupTransformGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecGroupTransformGetTypeID, _lib, "SecGroupTransformGetTypeID")
+	}
+	return _fnSecGroupTransformGetTypeID()
 }
 
-// SecTrustSetOptions calls [raw.SecTrustSetOptions] (C function SecTrustSetOptions).
-func SecTrustSetOptions(trustRef unsafe.Pointer, options SecTrustOptionFlags) int {
-	return raw.SecTrustSetOptions(trustRef, raw.SecTrustOptionFlags(options))
+var _fnSecIdentityCopyPreferred func(objc.ID, objc.ID, objc.ID) objc.ID
+
+// SecIdentityCopyPreferred calls the Security framework function SecIdentityCopyPreferred.
+func SecIdentityCopyPreferred(name obj.Object, keyUsage obj.Object, validIssuers obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecIdentityCopyPreferred == nil {
+		ebipurego.RegisterLibFunc(&_fnSecIdentityCopyPreferred, _lib, "SecIdentityCopyPreferred")
+	}
+	_ret := _fnSecIdentityCopyPreferred(objref.IDOf(name), objref.IDOf(keyUsage), objref.IDOf(validIssuers))
+	return obj.Wrap(_ret)
 }
 
-// SecTrustSetParameters calls [raw.SecTrustSetParameters] (C function SecTrustSetParameters).
-func SecTrustSetParameters(trustRef unsafe.Pointer, action uint32, actionData unsafe.Pointer) int {
-	return raw.SecTrustSetParameters(trustRef, action, actionData)
+var _fnSecIdentityCreate func(objc.ID, objc.ID, objc.ID) objc.ID
+
+// SecIdentityCreate calls the Security framework function SecIdentityCreate.
+func SecIdentityCreate(allocator obj.Object, certificate obj.Object, privateKey obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecIdentityCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnSecIdentityCreate, _lib, "SecIdentityCreate")
+	}
+	_ret := _fnSecIdentityCreate(objref.IDOf(allocator), objref.IDOf(certificate), objref.IDOf(privateKey))
+	return obj.Wrap(_ret)
 }
 
-// SecTrustSetPolicies calls [raw.SecTrustSetPolicies] (C function SecTrustSetPolicies).
-func SecTrustSetPolicies(trust unsafe.Pointer, policies unsafe.Pointer) int {
-	return raw.SecTrustSetPolicies(trust, policies)
+var _fnSecIdentityGetTypeID func() int
+
+// SecIdentityGetTypeID calls the Security framework function SecIdentityGetTypeID.
+func SecIdentityGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecIdentityGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecIdentityGetTypeID, _lib, "SecIdentityGetTypeID")
+	}
+	return _fnSecIdentityGetTypeID()
 }
 
-// SecTrustSetSignedCertificateTimestamps calls [raw.SecTrustSetSignedCertificateTimestamps] (C function SecTrustSetSignedCertificateTimestamps).
-func SecTrustSetSignedCertificateTimestamps(trust unsafe.Pointer, sctArray unsafe.Pointer) int {
-	return raw.SecTrustSetSignedCertificateTimestamps(trust, sctArray)
+var _fnSecIdentitySearchGetTypeID func() int
+
+// SecIdentitySearchGetTypeID calls the Security framework function SecIdentitySearchGetTypeID.
+func SecIdentitySearchGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecIdentitySearchGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecIdentitySearchGetTypeID, _lib, "SecIdentitySearchGetTypeID")
+	}
+	return _fnSecIdentitySearchGetTypeID()
 }
 
-// SecTrustSetVerifyDate calls [raw.SecTrustSetVerifyDate] (C function SecTrustSetVerifyDate).
-func SecTrustSetVerifyDate(trust unsafe.Pointer, verifyDate unsafe.Pointer) int {
-	return raw.SecTrustSetVerifyDate(trust, verifyDate)
+var _fnSecKeyCopyAttributes func(objc.ID) objc.ID
+
+// SecKeyCopyAttributes calls the Security framework function SecKeyCopyAttributes.
+func SecKeyCopyAttributes(key obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeyCopyAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeyCopyAttributes, _lib, "SecKeyCopyAttributes")
+	}
+	_ret := _fnSecKeyCopyAttributes(objref.IDOf(key))
+	return obj.Wrap(_ret)
 }
 
-// SecTrustSettingsCopyModificationDate calls [raw.SecTrustSettingsCopyModificationDate] (C function SecTrustSettingsCopyModificationDate).
-func SecTrustSettingsCopyModificationDate(certRef unsafe.Pointer, domain SecTrustSettingsDomain, modificationDate unsafe.Pointer) int {
-	return raw.SecTrustSettingsCopyModificationDate(certRef, raw.SecTrustSettingsDomain(domain), modificationDate)
+var _fnSecKeyCopyPublicKey func(objc.ID) objc.ID
+
+// SecKeyCopyPublicKey calls the Security framework function SecKeyCopyPublicKey.
+func SecKeyCopyPublicKey(key obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeyCopyPublicKey == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeyCopyPublicKey, _lib, "SecKeyCopyPublicKey")
+	}
+	_ret := _fnSecKeyCopyPublicKey(objref.IDOf(key))
+	return obj.Wrap(_ret)
 }
 
-// SecTrustSettingsCopyTrustSettings calls [raw.SecTrustSettingsCopyTrustSettings] (C function SecTrustSettingsCopyTrustSettings).
-func SecTrustSettingsCopyTrustSettings(certRef unsafe.Pointer, domain SecTrustSettingsDomain, trustSettings unsafe.Pointer) int {
-	return raw.SecTrustSettingsCopyTrustSettings(certRef, raw.SecTrustSettingsDomain(domain), trustSettings)
+var _fnSecKeyGetBlockSize func(objc.ID) int
+
+// SecKeyGetBlockSize calls the Security framework function SecKeyGetBlockSize.
+func SecKeyGetBlockSize(key obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeyGetBlockSize == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeyGetBlockSize, _lib, "SecKeyGetBlockSize")
+	}
+	return _fnSecKeyGetBlockSize(objref.IDOf(key))
 }
 
-// SecTrustSettingsRemoveTrustSettings calls [raw.SecTrustSettingsRemoveTrustSettings] (C function SecTrustSettingsRemoveTrustSettings).
-func SecTrustSettingsRemoveTrustSettings(certRef unsafe.Pointer, domain SecTrustSettingsDomain) int {
-	return raw.SecTrustSettingsRemoveTrustSettings(certRef, raw.SecTrustSettingsDomain(domain))
+var _fnSecKeyGetTypeID func() int
+
+// SecKeyGetTypeID calls the Security framework function SecKeyGetTypeID.
+func SecKeyGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeyGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeyGetTypeID, _lib, "SecKeyGetTypeID")
+	}
+	return _fnSecKeyGetTypeID()
 }
 
-// SecTrustSettingsSetTrustSettings calls [raw.SecTrustSettingsSetTrustSettings] (C function SecTrustSettingsSetTrustSettings).
-func SecTrustSettingsSetTrustSettings(certRef unsafe.Pointer, domain SecTrustSettingsDomain, trustSettingsDictOrArray unsafe.Pointer) int {
-	return raw.SecTrustSettingsSetTrustSettings(certRef, raw.SecTrustSettingsDomain(domain), trustSettingsDictOrArray)
+var _fnSecKeychainGetTypeID func() int
+
+// SecKeychainGetTypeID calls the Security framework function SecKeychainGetTypeID.
+func SecKeychainGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeychainGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeychainGetTypeID, _lib, "SecKeychainGetTypeID")
+	}
+	return _fnSecKeychainGetTypeID()
 }
 
-// SecTrustedApplicationCopyData calls [raw.SecTrustedApplicationCopyData] (C function SecTrustedApplicationCopyData).
-func SecTrustedApplicationCopyData(appRef unsafe.Pointer, data unsafe.Pointer) int {
-	return raw.SecTrustedApplicationCopyData(appRef, data)
+var _fnSecKeychainItemGetTypeID func() int
+
+// SecKeychainItemGetTypeID calls the Security framework function SecKeychainItemGetTypeID.
+func SecKeychainItemGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeychainItemGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeychainItemGetTypeID, _lib, "SecKeychainItemGetTypeID")
+	}
+	return _fnSecKeychainItemGetTypeID()
 }
 
-// SecTrustedApplicationCreateFromPath calls [raw.SecTrustedApplicationCreateFromPath] (C function SecTrustedApplicationCreateFromPath).
-func SecTrustedApplicationCreateFromPath(path string, app unsafe.Pointer) int {
-	return raw.SecTrustedApplicationCreateFromPath(path, app)
+var _fnSecKeychainSearchGetTypeID func() int
+
+// SecKeychainSearchGetTypeID calls the Security framework function SecKeychainSearchGetTypeID.
+func SecKeychainSearchGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecKeychainSearchGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecKeychainSearchGetTypeID, _lib, "SecKeychainSearchGetTypeID")
+	}
+	return _fnSecKeychainSearchGetTypeID()
 }
 
-// SecTrustedApplicationGetTypeID calls [raw.SecTrustedApplicationGetTypeID] (C function SecTrustedApplicationGetTypeID).
-func SecTrustedApplicationGetTypeID() uint {
-	return raw.SecTrustedApplicationGetTypeID()
+var _fnSecPolicyCopyProperties func(objc.ID) objc.ID
+
+// SecPolicyCopyProperties calls the Security framework function SecPolicyCopyProperties.
+func SecPolicyCopyProperties(policyRef obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecPolicyCopyProperties == nil {
+		ebipurego.RegisterLibFunc(&_fnSecPolicyCopyProperties, _lib, "SecPolicyCopyProperties")
+	}
+	_ret := _fnSecPolicyCopyProperties(objref.IDOf(policyRef))
+	return obj.Wrap(_ret)
 }
 
-// SecTrustedApplicationSetData calls [raw.SecTrustedApplicationSetData] (C function SecTrustedApplicationSetData).
-func SecTrustedApplicationSetData(appRef unsafe.Pointer, data unsafe.Pointer) int {
-	return raw.SecTrustedApplicationSetData(appRef, data)
+var _fnSecPolicyCreateBasicX509 func() objc.ID
+
+// SecPolicyCreateBasicX509 calls the Security framework function SecPolicyCreateBasicX509.
+func SecPolicyCreateBasicX509() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecPolicyCreateBasicX509 == nil {
+		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateBasicX509, _lib, "SecPolicyCreateBasicX509")
+	}
+	_ret := _fnSecPolicyCreateBasicX509()
+	return obj.Wrap(_ret)
 }
 
-// SecVerifyTransformCreate calls [raw.SecVerifyTransformCreate] (C function SecVerifyTransformCreate).
-func SecVerifyTransformCreate(key unsafe.Pointer, signature unsafe.Pointer, error_ unsafe.Pointer) unsafe.Pointer {
-	return raw.SecVerifyTransformCreate(key, signature, error_)
+var _fnSecPolicyCreateRevocation func(int) objc.ID
+
+// SecPolicyCreateRevocation calls the Security framework function SecPolicyCreateRevocation.
+func SecPolicyCreateRevocation(revocationFlags int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecPolicyCreateRevocation == nil {
+		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateRevocation, _lib, "SecPolicyCreateRevocation")
+	}
+	_ret := _fnSecPolicyCreateRevocation(revocationFlags)
+	return obj.Wrap(_ret)
 }
 
-// CssmAlgToOid calls [raw.CssmAlgToOid] (C function cssmAlgToOid).
-func CssmAlgToOid(algId uint32) *raw.CssmData {
-	return raw.CssmAlgToOid(algId)
+var _fnSecPolicyCreateSSL func(uint8, objc.ID) objc.ID
+
+// SecPolicyCreateSSL calls the Security framework function SecPolicyCreateSSL.
+func SecPolicyCreateSSL(server uint8, hostname obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecPolicyCreateSSL == nil {
+		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateSSL, _lib, "SecPolicyCreateSSL")
+	}
+	_ret := _fnSecPolicyCreateSSL(server, objref.IDOf(hostname))
+	return obj.Wrap(_ret)
 }
 
-// CssmOidToAlg calls [raw.CssmOidToAlg] (C function cssmOidToAlg).
-func CssmOidToAlg(oid *raw.CssmData, alg *uint32) bool {
-	return raw.CssmOidToAlg(oid, alg)
+var _fnSecPolicyCreateWithOID func(objc.ID) objc.ID
+
+// SecPolicyCreateWithOID calls the Security framework function SecPolicyCreateWithOID.
+func SecPolicyCreateWithOID(policyOID obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecPolicyCreateWithOID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateWithOID, _lib, "SecPolicyCreateWithOID")
+	}
+	_ret := _fnSecPolicyCreateWithOID(objref.IDOf(policyOID))
+	return obj.Wrap(_ret)
 }
 
-// CssmPerror calls [raw.CssmPerror] (C function cssmPerror).
+var _fnSecPolicyCreateWithProperties func(objc.ID, objc.ID) objc.ID
+
+// SecPolicyCreateWithProperties calls the Security framework function SecPolicyCreateWithProperties.
+func SecPolicyCreateWithProperties(policyIdentifier obj.Object, properties obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecPolicyCreateWithProperties == nil {
+		ebipurego.RegisterLibFunc(&_fnSecPolicyCreateWithProperties, _lib, "SecPolicyCreateWithProperties")
+	}
+	_ret := _fnSecPolicyCreateWithProperties(objref.IDOf(policyIdentifier), objref.IDOf(properties))
+	return obj.Wrap(_ret)
+}
+
+var _fnSecPolicyGetTypeID func() int
+
+// SecPolicyGetTypeID calls the Security framework function SecPolicyGetTypeID.
+func SecPolicyGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecPolicyGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecPolicyGetTypeID, _lib, "SecPolicyGetTypeID")
+	}
+	return _fnSecPolicyGetTypeID()
+}
+
+var _fnSecPolicySearchGetTypeID func() int
+
+// SecPolicySearchGetTypeID calls the Security framework function SecPolicySearchGetTypeID.
+func SecPolicySearchGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecPolicySearchGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecPolicySearchGetTypeID, _lib, "SecPolicySearchGetTypeID")
+	}
+	return _fnSecPolicySearchGetTypeID()
+}
+
+var _fnSecRequirementGetTypeID func() int
+
+// SecRequirementGetTypeID calls the Security framework function SecRequirementGetTypeID.
+func SecRequirementGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecRequirementGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecRequirementGetTypeID, _lib, "SecRequirementGetTypeID")
+	}
+	return _fnSecRequirementGetTypeID()
+}
+
+var _fnSecStaticCodeGetTypeID func() int
+
+// SecStaticCodeGetTypeID calls the Security framework function SecStaticCodeGetTypeID.
+func SecStaticCodeGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecStaticCodeGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecStaticCodeGetTypeID, _lib, "SecStaticCodeGetTypeID")
+	}
+	return _fnSecStaticCodeGetTypeID()
+}
+
+var _fnSecTaskCreateFromSelf func(objc.ID) objc.ID
+
+// SecTaskCreateFromSelf calls the Security framework function SecTaskCreateFromSelf.
+func SecTaskCreateFromSelf(allocator obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTaskCreateFromSelf == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTaskCreateFromSelf, _lib, "SecTaskCreateFromSelf")
+	}
+	_ret := _fnSecTaskCreateFromSelf(objref.IDOf(allocator))
+	return obj.Wrap(_ret)
+}
+
+var _fnSecTaskGetTypeID func() int
+
+// SecTaskGetTypeID calls the Security framework function SecTaskGetTypeID.
+func SecTaskGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTaskGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTaskGetTypeID, _lib, "SecTaskGetTypeID")
+	}
+	return _fnSecTaskGetTypeID()
+}
+
+var _fnSecTransformGetTypeID func() int
+
+// SecTransformGetTypeID calls the Security framework function SecTransformGetTypeID.
+func SecTransformGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTransformGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTransformGetTypeID, _lib, "SecTransformGetTypeID")
+	}
+	return _fnSecTransformGetTypeID()
+}
+
+var _fnSecTransformNoData func() objc.ID
+
+// SecTransformNoData calls the Security framework function SecTransformNoData.
+func SecTransformNoData() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTransformNoData == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTransformNoData, _lib, "SecTransformNoData")
+	}
+	_ret := _fnSecTransformNoData()
+	return obj.Wrap(_ret)
+}
+
+var _fnSecTrustCopyCertificateChain func(objc.ID) objc.ID
+
+// SecTrustCopyCertificateChain calls the Security framework function SecTrustCopyCertificateChain.
+func SecTrustCopyCertificateChain(trust obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustCopyCertificateChain == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustCopyCertificateChain, _lib, "SecTrustCopyCertificateChain")
+	}
+	_ret := _fnSecTrustCopyCertificateChain(objref.IDOf(trust))
+	return obj.Wrap(_ret)
+}
+
+var _fnSecTrustCopyExceptions func(objc.ID) objc.ID
+
+// SecTrustCopyExceptions calls the Security framework function SecTrustCopyExceptions.
+func SecTrustCopyExceptions(trust obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustCopyExceptions == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustCopyExceptions, _lib, "SecTrustCopyExceptions")
+	}
+	_ret := _fnSecTrustCopyExceptions(objref.IDOf(trust))
+	return obj.Wrap(_ret)
+}
+
+var _fnSecTrustCopyKey func(objc.ID) objc.ID
+
+// SecTrustCopyKey calls the Security framework function SecTrustCopyKey.
+func SecTrustCopyKey(trust obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustCopyKey == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustCopyKey, _lib, "SecTrustCopyKey")
+	}
+	_ret := _fnSecTrustCopyKey(objref.IDOf(trust))
+	return obj.Wrap(_ret)
+}
+
+var _fnSecTrustCopyProperties func(objc.ID) objc.ID
+
+// SecTrustCopyProperties calls the Security framework function SecTrustCopyProperties.
+func SecTrustCopyProperties(trust obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustCopyProperties == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustCopyProperties, _lib, "SecTrustCopyProperties")
+	}
+	_ret := _fnSecTrustCopyProperties(objref.IDOf(trust))
+	return obj.Wrap(_ret)
+}
+
+var _fnSecTrustCopyPublicKey func(objc.ID) objc.ID
+
+// SecTrustCopyPublicKey calls the Security framework function SecTrustCopyPublicKey.
+func SecTrustCopyPublicKey(trust obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustCopyPublicKey == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustCopyPublicKey, _lib, "SecTrustCopyPublicKey")
+	}
+	_ret := _fnSecTrustCopyPublicKey(objref.IDOf(trust))
+	return obj.Wrap(_ret)
+}
+
+var _fnSecTrustCopyResult func(objc.ID) objc.ID
+
+// SecTrustCopyResult calls the Security framework function SecTrustCopyResult.
+func SecTrustCopyResult(trust obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustCopyResult == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustCopyResult, _lib, "SecTrustCopyResult")
+	}
+	_ret := _fnSecTrustCopyResult(objref.IDOf(trust))
+	return obj.Wrap(_ret)
+}
+
+var _fnSecTrustGetCertificateAtIndex func(objc.ID, int) objc.ID
+
+// SecTrustGetCertificateAtIndex calls the Security framework function SecTrustGetCertificateAtIndex.
+func SecTrustGetCertificateAtIndex(trust obj.Object, ix int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustGetCertificateAtIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustGetCertificateAtIndex, _lib, "SecTrustGetCertificateAtIndex")
+	}
+	_ret := _fnSecTrustGetCertificateAtIndex(objref.IDOf(trust), ix)
+	return obj.Wrap(_ret)
+}
+
+var _fnSecTrustGetCertificateCount func(objc.ID) int
+
+// SecTrustGetCertificateCount calls the Security framework function SecTrustGetCertificateCount.
+func SecTrustGetCertificateCount(trust obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustGetCertificateCount == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustGetCertificateCount, _lib, "SecTrustGetCertificateCount")
+	}
+	return _fnSecTrustGetCertificateCount(objref.IDOf(trust))
+}
+
+var _fnSecTrustGetTypeID func() int
+
+// SecTrustGetTypeID calls the Security framework function SecTrustGetTypeID.
+func SecTrustGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustGetTypeID, _lib, "SecTrustGetTypeID")
+	}
+	return _fnSecTrustGetTypeID()
+}
+
+var _fnSecTrustGetVerifyTime func(objc.ID) float64
+
+// SecTrustGetVerifyTime calls the Security framework function SecTrustGetVerifyTime.
+func SecTrustGetVerifyTime(trust obj.Object) float64 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustGetVerifyTime == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustGetVerifyTime, _lib, "SecTrustGetVerifyTime")
+	}
+	return _fnSecTrustGetVerifyTime(objref.IDOf(trust))
+}
+
+var _fnSecTrustSetExceptions func(objc.ID, objc.ID) bool
+
+// SecTrustSetExceptions calls the Security framework function SecTrustSetExceptions.
+func SecTrustSetExceptions(trust obj.Object, exceptions obj.Object) bool {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustSetExceptions == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustSetExceptions, _lib, "SecTrustSetExceptions")
+	}
+	return _fnSecTrustSetExceptions(objref.IDOf(trust), objref.IDOf(exceptions))
+}
+
+var _fnSecTrustedApplicationGetTypeID func() int
+
+// SecTrustedApplicationGetTypeID calls the Security framework function SecTrustedApplicationGetTypeID.
+func SecTrustedApplicationGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecTrustedApplicationGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnSecTrustedApplicationGetTypeID, _lib, "SecTrustedApplicationGetTypeID")
+	}
+	return _fnSecTrustedApplicationGetTypeID()
+}
+
+var _fnCssmPerror func(string, int32)
+
+// CssmPerror calls the Security framework function cssmPerror.
 func CssmPerror(how string, error_ int32) {
-	raw.CssmPerror(how, error_)
+	_loadOnce.Do(_loadLibrary)
+	if _fnCssmPerror == nil {
+		ebipurego.RegisterLibFunc(&_fnCssmPerror, _lib, "cssmPerror")
+	}
+	_fnCssmPerror(how, error_)
 }
 
-// SecCertificateCopyRef calls [raw.SecCertificateCopyRef] (C function sec_certificate_copy_ref).
-func SecCertificateCopyRef(certificate unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCertificateCopyRef(certificate)
-}
+var _fnSecProtocolOptionsGetDefaultMaxDtlsProtocolVersion func() Tls_protocol_version_t
 
-// SecCertificateCreate calls [raw.SecCertificateCreate] (C function sec_certificate_create).
-func SecCertificateCreate(certificate unsafe.Pointer) unsafe.Pointer {
-	return raw.SecCertificateCreate(certificate)
-}
-
-// SecIdentityAccessCertificates calls [raw.SecIdentityAccessCertificates] (C function sec_identity_access_certificates).
-func SecIdentityAccessCertificates(identity unsafe.Pointer, handler func(unsafe.Pointer)) bool {
-	return raw.SecIdentityAccessCertificates(identity, handler)
-}
-
-// SecIdentityCopyCertificatesRef calls [raw.SecIdentityCopyCertificatesRef] (C function sec_identity_copy_certificates_ref).
-func SecIdentityCopyCertificatesRef(identity unsafe.Pointer) unsafe.Pointer {
-	return raw.SecIdentityCopyCertificatesRef(identity)
-}
-
-// SecIdentityCopyRef calls [raw.SecIdentityCopyRef] (C function sec_identity_copy_ref).
-func SecIdentityCopyRef(identity unsafe.Pointer) unsafe.Pointer {
-	return raw.SecIdentityCopyRef(identity)
-}
-
-// SecIdentityCreateWithCertificates calls [raw.SecIdentityCreateWithCertificates] (C function sec_identity_create_with_certificates).
-func SecIdentityCreateWithCertificates(identity unsafe.Pointer, certificates unsafe.Pointer) unsafe.Pointer {
-	return raw.SecIdentityCreateWithCertificates(identity, certificates)
-}
-
-// SecProtocolMetadataAccessDistinguishedNames calls [raw.SecProtocolMetadataAccessDistinguishedNames] (C function sec_protocol_metadata_access_distinguished_names).
-func SecProtocolMetadataAccessDistinguishedNames(metadata unsafe.Pointer, handler func(unsafe.Pointer)) bool {
-	return raw.SecProtocolMetadataAccessDistinguishedNames(metadata, handler)
-}
-
-// SecProtocolMetadataAccessOcspResponse calls [raw.SecProtocolMetadataAccessOcspResponse] (C function sec_protocol_metadata_access_ocsp_response).
-func SecProtocolMetadataAccessOcspResponse(metadata unsafe.Pointer, handler func(unsafe.Pointer)) bool {
-	return raw.SecProtocolMetadataAccessOcspResponse(metadata, handler)
-}
-
-// SecProtocolMetadataAccessPeerCertificateChain calls [raw.SecProtocolMetadataAccessPeerCertificateChain] (C function sec_protocol_metadata_access_peer_certificate_chain).
-func SecProtocolMetadataAccessPeerCertificateChain(metadata unsafe.Pointer, handler func(unsafe.Pointer)) bool {
-	return raw.SecProtocolMetadataAccessPeerCertificateChain(metadata, handler)
-}
-
-// SecProtocolMetadataAccessPreSharedKeys calls [raw.SecProtocolMetadataAccessPreSharedKeys] (C function sec_protocol_metadata_access_pre_shared_keys).
-func SecProtocolMetadataAccessPreSharedKeys(metadata unsafe.Pointer, handler func(unsafe.Pointer, unsafe.Pointer)) bool {
-	return raw.SecProtocolMetadataAccessPreSharedKeys(metadata, handler)
-}
-
-// SecProtocolMetadataAccessSupportedSignatureAlgorithms calls [raw.SecProtocolMetadataAccessSupportedSignatureAlgorithms] (C function sec_protocol_metadata_access_supported_signature_algorithms).
-func SecProtocolMetadataAccessSupportedSignatureAlgorithms(metadata unsafe.Pointer, handler func(uint16)) bool {
-	return raw.SecProtocolMetadataAccessSupportedSignatureAlgorithms(metadata, handler)
-}
-
-// SecProtocolMetadataChallengeParametersAreEqual calls [raw.SecProtocolMetadataChallengeParametersAreEqual] (C function sec_protocol_metadata_challenge_parameters_are_equal).
-func SecProtocolMetadataChallengeParametersAreEqual(metadataA unsafe.Pointer, metadataB unsafe.Pointer) bool {
-	return raw.SecProtocolMetadataChallengeParametersAreEqual(metadataA, metadataB)
-}
-
-// SecProtocolMetadataCopyNegotiatedProtocol calls [raw.SecProtocolMetadataCopyNegotiatedProtocol] (C function sec_protocol_metadata_copy_negotiated_protocol).
-func SecProtocolMetadataCopyNegotiatedProtocol(metadata unsafe.Pointer) string {
-	return raw.SecProtocolMetadataCopyNegotiatedProtocol(metadata)
-}
-
-// SecProtocolMetadataCopyPeerPublicKey calls [raw.SecProtocolMetadataCopyPeerPublicKey] (C function sec_protocol_metadata_copy_peer_public_key).
-func SecProtocolMetadataCopyPeerPublicKey(metadata unsafe.Pointer) unsafe.Pointer {
-	return raw.SecProtocolMetadataCopyPeerPublicKey(metadata)
-}
-
-// SecProtocolMetadataCopyServerName calls [raw.SecProtocolMetadataCopyServerName] (C function sec_protocol_metadata_copy_server_name).
-func SecProtocolMetadataCopyServerName(metadata unsafe.Pointer) string {
-	return raw.SecProtocolMetadataCopyServerName(metadata)
-}
-
-// SecProtocolMetadataCreateSecret calls [raw.SecProtocolMetadataCreateSecret] (C function sec_protocol_metadata_create_secret).
-func SecProtocolMetadataCreateSecret(metadata unsafe.Pointer, label_len uint, label string, exporter_length uint) unsafe.Pointer {
-	return raw.SecProtocolMetadataCreateSecret(metadata, label_len, label, exporter_length)
-}
-
-// SecProtocolMetadataCreateSecretWithContext calls [raw.SecProtocolMetadataCreateSecretWithContext] (C function sec_protocol_metadata_create_secret_with_context).
-func SecProtocolMetadataCreateSecretWithContext(metadata unsafe.Pointer, label_len uint, label string, context_len uint, context_ *uint8, exporter_length uint) unsafe.Pointer {
-	return raw.SecProtocolMetadataCreateSecretWithContext(metadata, label_len, label, context_len, context_, exporter_length)
-}
-
-// SecProtocolMetadataGetEarlyDataAccepted calls [raw.SecProtocolMetadataGetEarlyDataAccepted] (C function sec_protocol_metadata_get_early_data_accepted).
-func SecProtocolMetadataGetEarlyDataAccepted(metadata unsafe.Pointer) bool {
-	return raw.SecProtocolMetadataGetEarlyDataAccepted(metadata)
-}
-
-// SecProtocolMetadataGetNegotiatedCiphersuite calls [raw.SecProtocolMetadataGetNegotiatedCiphersuite] (C function sec_protocol_metadata_get_negotiated_ciphersuite).
-func SecProtocolMetadataGetNegotiatedCiphersuite(metadata unsafe.Pointer) uint16 {
-	return raw.SecProtocolMetadataGetNegotiatedCiphersuite(metadata)
-}
-
-// SecProtocolMetadataGetNegotiatedProtocol calls [raw.SecProtocolMetadataGetNegotiatedProtocol] (C function sec_protocol_metadata_get_negotiated_protocol).
-func SecProtocolMetadataGetNegotiatedProtocol(metadata unsafe.Pointer) string {
-	return raw.SecProtocolMetadataGetNegotiatedProtocol(metadata)
-}
-
-// SecProtocolMetadataGetNegotiatedProtocolVersion calls [raw.SecProtocolMetadataGetNegotiatedProtocolVersion] (C function sec_protocol_metadata_get_negotiated_protocol_version).
-func SecProtocolMetadataGetNegotiatedProtocolVersion(metadata unsafe.Pointer) SSLProtocol {
-	return SSLProtocol(raw.SecProtocolMetadataGetNegotiatedProtocolVersion(metadata))
-}
-
-// SecProtocolMetadataGetNegotiatedTlsCiphersuite calls [raw.SecProtocolMetadataGetNegotiatedTlsCiphersuite] (C function sec_protocol_metadata_get_negotiated_tls_ciphersuite).
-func SecProtocolMetadataGetNegotiatedTlsCiphersuite(metadata unsafe.Pointer) Tls_ciphersuite_t {
-	return Tls_ciphersuite_t(raw.SecProtocolMetadataGetNegotiatedTlsCiphersuite(metadata))
-}
-
-// SecProtocolMetadataGetNegotiatedTlsProtocolVersion calls [raw.SecProtocolMetadataGetNegotiatedTlsProtocolVersion] (C function sec_protocol_metadata_get_negotiated_tls_protocol_version).
-func SecProtocolMetadataGetNegotiatedTlsProtocolVersion(metadata unsafe.Pointer) Tls_protocol_version_t {
-	return Tls_protocol_version_t(raw.SecProtocolMetadataGetNegotiatedTlsProtocolVersion(metadata))
-}
-
-// SecProtocolMetadataGetServerName calls [raw.SecProtocolMetadataGetServerName] (C function sec_protocol_metadata_get_server_name).
-func SecProtocolMetadataGetServerName(metadata unsafe.Pointer) string {
-	return raw.SecProtocolMetadataGetServerName(metadata)
-}
-
-// SecProtocolMetadataPeersAreEqual calls [raw.SecProtocolMetadataPeersAreEqual] (C function sec_protocol_metadata_peers_are_equal).
-func SecProtocolMetadataPeersAreEqual(metadataA unsafe.Pointer, metadataB unsafe.Pointer) bool {
-	return raw.SecProtocolMetadataPeersAreEqual(metadataA, metadataB)
-}
-
-// SecProtocolOptionsAddPreSharedKey calls [raw.SecProtocolOptionsAddPreSharedKey] (C function sec_protocol_options_add_pre_shared_key).
-func SecProtocolOptionsAddPreSharedKey(options unsafe.Pointer, psk unsafe.Pointer, psk_identity unsafe.Pointer) {
-	raw.SecProtocolOptionsAddPreSharedKey(options, psk, psk_identity)
-}
-
-// SecProtocolOptionsAddTlsApplicationProtocol calls [raw.SecProtocolOptionsAddTlsApplicationProtocol] (C function sec_protocol_options_add_tls_application_protocol).
-func SecProtocolOptionsAddTlsApplicationProtocol(options unsafe.Pointer, application_protocol string) {
-	raw.SecProtocolOptionsAddTlsApplicationProtocol(options, application_protocol)
-}
-
-// SecProtocolOptionsAddTlsCiphersuite calls [raw.SecProtocolOptionsAddTlsCiphersuite] (C function sec_protocol_options_add_tls_ciphersuite).
-func SecProtocolOptionsAddTlsCiphersuite(options unsafe.Pointer, ciphersuite uint16) {
-	raw.SecProtocolOptionsAddTlsCiphersuite(options, ciphersuite)
-}
-
-// SecProtocolOptionsAddTlsCiphersuiteGroup calls [raw.SecProtocolOptionsAddTlsCiphersuiteGroup] (C function sec_protocol_options_add_tls_ciphersuite_group).
-func SecProtocolOptionsAddTlsCiphersuiteGroup(options unsafe.Pointer, group SSLCiphersuiteGroup) {
-	raw.SecProtocolOptionsAddTlsCiphersuiteGroup(options, raw.SSLCiphersuiteGroup(group))
-}
-
-// SecProtocolOptionsAppendTlsCiphersuite calls [raw.SecProtocolOptionsAppendTlsCiphersuite] (C function sec_protocol_options_append_tls_ciphersuite).
-func SecProtocolOptionsAppendTlsCiphersuite(options unsafe.Pointer, ciphersuite Tls_ciphersuite_t) {
-	raw.SecProtocolOptionsAppendTlsCiphersuite(options, raw.Tls_ciphersuite_t(ciphersuite))
-}
-
-// SecProtocolOptionsAppendTlsCiphersuiteGroup calls [raw.SecProtocolOptionsAppendTlsCiphersuiteGroup] (C function sec_protocol_options_append_tls_ciphersuite_group).
-func SecProtocolOptionsAppendTlsCiphersuiteGroup(options unsafe.Pointer, group Tls_ciphersuite_group_t) {
-	raw.SecProtocolOptionsAppendTlsCiphersuiteGroup(options, raw.Tls_ciphersuite_group_t(group))
-}
-
-// SecProtocolOptionsAreEqual calls [raw.SecProtocolOptionsAreEqual] (C function sec_protocol_options_are_equal).
-func SecProtocolOptionsAreEqual(optionsA unsafe.Pointer, optionsB unsafe.Pointer) bool {
-	return raw.SecProtocolOptionsAreEqual(optionsA, optionsB)
-}
-
-// SecProtocolOptionsGetDefaultMaxDtlsProtocolVersion calls [raw.SecProtocolOptionsGetDefaultMaxDtlsProtocolVersion] (C function sec_protocol_options_get_default_max_dtls_protocol_version).
+// SecProtocolOptionsGetDefaultMaxDtlsProtocolVersion calls the Security framework function sec_protocol_options_get_default_max_dtls_protocol_version.
 func SecProtocolOptionsGetDefaultMaxDtlsProtocolVersion() Tls_protocol_version_t {
-	return Tls_protocol_version_t(raw.SecProtocolOptionsGetDefaultMaxDtlsProtocolVersion())
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecProtocolOptionsGetDefaultMaxDtlsProtocolVersion == nil {
+		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsGetDefaultMaxDtlsProtocolVersion, _lib, "sec_protocol_options_get_default_max_dtls_protocol_version")
+	}
+	return _fnSecProtocolOptionsGetDefaultMaxDtlsProtocolVersion()
 }
 
-// SecProtocolOptionsGetDefaultMaxTlsProtocolVersion calls [raw.SecProtocolOptionsGetDefaultMaxTlsProtocolVersion] (C function sec_protocol_options_get_default_max_tls_protocol_version).
+var _fnSecProtocolOptionsGetDefaultMaxTlsProtocolVersion func() Tls_protocol_version_t
+
+// SecProtocolOptionsGetDefaultMaxTlsProtocolVersion calls the Security framework function sec_protocol_options_get_default_max_tls_protocol_version.
 func SecProtocolOptionsGetDefaultMaxTlsProtocolVersion() Tls_protocol_version_t {
-	return Tls_protocol_version_t(raw.SecProtocolOptionsGetDefaultMaxTlsProtocolVersion())
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecProtocolOptionsGetDefaultMaxTlsProtocolVersion == nil {
+		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsGetDefaultMaxTlsProtocolVersion, _lib, "sec_protocol_options_get_default_max_tls_protocol_version")
+	}
+	return _fnSecProtocolOptionsGetDefaultMaxTlsProtocolVersion()
 }
 
-// SecProtocolOptionsGetDefaultMinDtlsProtocolVersion calls [raw.SecProtocolOptionsGetDefaultMinDtlsProtocolVersion] (C function sec_protocol_options_get_default_min_dtls_protocol_version).
+var _fnSecProtocolOptionsGetDefaultMinDtlsProtocolVersion func() Tls_protocol_version_t
+
+// SecProtocolOptionsGetDefaultMinDtlsProtocolVersion calls the Security framework function sec_protocol_options_get_default_min_dtls_protocol_version.
 func SecProtocolOptionsGetDefaultMinDtlsProtocolVersion() Tls_protocol_version_t {
-	return Tls_protocol_version_t(raw.SecProtocolOptionsGetDefaultMinDtlsProtocolVersion())
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecProtocolOptionsGetDefaultMinDtlsProtocolVersion == nil {
+		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsGetDefaultMinDtlsProtocolVersion, _lib, "sec_protocol_options_get_default_min_dtls_protocol_version")
+	}
+	return _fnSecProtocolOptionsGetDefaultMinDtlsProtocolVersion()
 }
 
-// SecProtocolOptionsGetDefaultMinTlsProtocolVersion calls [raw.SecProtocolOptionsGetDefaultMinTlsProtocolVersion] (C function sec_protocol_options_get_default_min_tls_protocol_version).
+var _fnSecProtocolOptionsGetDefaultMinTlsProtocolVersion func() Tls_protocol_version_t
+
+// SecProtocolOptionsGetDefaultMinTlsProtocolVersion calls the Security framework function sec_protocol_options_get_default_min_tls_protocol_version.
 func SecProtocolOptionsGetDefaultMinTlsProtocolVersion() Tls_protocol_version_t {
-	return Tls_protocol_version_t(raw.SecProtocolOptionsGetDefaultMinTlsProtocolVersion())
-}
-
-// SecProtocolOptionsSetChallengeBlock calls [raw.SecProtocolOptionsSetChallengeBlock] (C function sec_protocol_options_set_challenge_block).
-func SecProtocolOptionsSetChallengeBlock(options unsafe.Pointer, challenge_block func(unsafe.Pointer, objc.Block), challenge_queue unsafe.Pointer) {
-	raw.SecProtocolOptionsSetChallengeBlock(options, challenge_block, challenge_queue)
-}
-
-// SecProtocolOptionsSetKeyUpdateBlock calls [raw.SecProtocolOptionsSetKeyUpdateBlock] (C function sec_protocol_options_set_key_update_block).
-func SecProtocolOptionsSetKeyUpdateBlock(options unsafe.Pointer, key_update_block func(unsafe.Pointer, objc.Block), key_update_queue unsafe.Pointer) {
-	raw.SecProtocolOptionsSetKeyUpdateBlock(options, key_update_block, key_update_queue)
-}
-
-// SecProtocolOptionsSetLocalIdentity calls [raw.SecProtocolOptionsSetLocalIdentity] (C function sec_protocol_options_set_local_identity).
-func SecProtocolOptionsSetLocalIdentity(options unsafe.Pointer, identity unsafe.Pointer) {
-	raw.SecProtocolOptionsSetLocalIdentity(options, identity)
-}
-
-// SecProtocolOptionsSetMaxTlsProtocolVersion calls [raw.SecProtocolOptionsSetMaxTlsProtocolVersion] (C function sec_protocol_options_set_max_tls_protocol_version).
-func SecProtocolOptionsSetMaxTlsProtocolVersion(options unsafe.Pointer, version Tls_protocol_version_t) {
-	raw.SecProtocolOptionsSetMaxTlsProtocolVersion(options, raw.Tls_protocol_version_t(version))
-}
-
-// SecProtocolOptionsSetMinTlsProtocolVersion calls [raw.SecProtocolOptionsSetMinTlsProtocolVersion] (C function sec_protocol_options_set_min_tls_protocol_version).
-func SecProtocolOptionsSetMinTlsProtocolVersion(options unsafe.Pointer, version Tls_protocol_version_t) {
-	raw.SecProtocolOptionsSetMinTlsProtocolVersion(options, raw.Tls_protocol_version_t(version))
-}
-
-// SecProtocolOptionsSetPeerAuthenticationRequired calls [raw.SecProtocolOptionsSetPeerAuthenticationRequired] (C function sec_protocol_options_set_peer_authentication_required).
-func SecProtocolOptionsSetPeerAuthenticationRequired(options unsafe.Pointer, peer_authentication_required bool) {
-	raw.SecProtocolOptionsSetPeerAuthenticationRequired(options, peer_authentication_required)
-}
-
-// SecProtocolOptionsSetPreSharedKeySelectionBlock calls [raw.SecProtocolOptionsSetPreSharedKeySelectionBlock] (C function sec_protocol_options_set_pre_shared_key_selection_block).
-func SecProtocolOptionsSetPreSharedKeySelectionBlock(options unsafe.Pointer, psk_selection_block func(unsafe.Pointer, unsafe.Pointer, objc.Block), psk_selection_queue unsafe.Pointer) {
-	raw.SecProtocolOptionsSetPreSharedKeySelectionBlock(options, psk_selection_block, psk_selection_queue)
-}
-
-// SecProtocolOptionsSetTlsDiffieHellmanParameters calls [raw.SecProtocolOptionsSetTlsDiffieHellmanParameters] (C function sec_protocol_options_set_tls_diffie_hellman_parameters).
-func SecProtocolOptionsSetTlsDiffieHellmanParameters(options unsafe.Pointer, params unsafe.Pointer) {
-	raw.SecProtocolOptionsSetTlsDiffieHellmanParameters(options, params)
-}
-
-// SecProtocolOptionsSetTlsFalseStartEnabled calls [raw.SecProtocolOptionsSetTlsFalseStartEnabled] (C function sec_protocol_options_set_tls_false_start_enabled).
-func SecProtocolOptionsSetTlsFalseStartEnabled(options unsafe.Pointer, false_start_enabled bool) {
-	raw.SecProtocolOptionsSetTlsFalseStartEnabled(options, false_start_enabled)
-}
-
-// SecProtocolOptionsSetTlsIsFallbackAttempt calls [raw.SecProtocolOptionsSetTlsIsFallbackAttempt] (C function sec_protocol_options_set_tls_is_fallback_attempt).
-func SecProtocolOptionsSetTlsIsFallbackAttempt(options unsafe.Pointer, is_fallback_attempt bool) {
-	raw.SecProtocolOptionsSetTlsIsFallbackAttempt(options, is_fallback_attempt)
-}
-
-// SecProtocolOptionsSetTlsMaxVersion calls [raw.SecProtocolOptionsSetTlsMaxVersion] (C function sec_protocol_options_set_tls_max_version).
-func SecProtocolOptionsSetTlsMaxVersion(options unsafe.Pointer, version SSLProtocol) {
-	raw.SecProtocolOptionsSetTlsMaxVersion(options, raw.SSLProtocol(version))
-}
-
-// SecProtocolOptionsSetTlsMinVersion calls [raw.SecProtocolOptionsSetTlsMinVersion] (C function sec_protocol_options_set_tls_min_version).
-func SecProtocolOptionsSetTlsMinVersion(options unsafe.Pointer, version SSLProtocol) {
-	raw.SecProtocolOptionsSetTlsMinVersion(options, raw.SSLProtocol(version))
-}
-
-// SecProtocolOptionsSetTlsOcspEnabled calls [raw.SecProtocolOptionsSetTlsOcspEnabled] (C function sec_protocol_options_set_tls_ocsp_enabled).
-func SecProtocolOptionsSetTlsOcspEnabled(options unsafe.Pointer, ocsp_enabled bool) {
-	raw.SecProtocolOptionsSetTlsOcspEnabled(options, ocsp_enabled)
-}
-
-// SecProtocolOptionsSetTlsPreSharedKeyIdentityHint calls [raw.SecProtocolOptionsSetTlsPreSharedKeyIdentityHint] (C function sec_protocol_options_set_tls_pre_shared_key_identity_hint).
-func SecProtocolOptionsSetTlsPreSharedKeyIdentityHint(options unsafe.Pointer, psk_identity_hint unsafe.Pointer) {
-	raw.SecProtocolOptionsSetTlsPreSharedKeyIdentityHint(options, psk_identity_hint)
-}
-
-// SecProtocolOptionsSetTlsRenegotiationEnabled calls [raw.SecProtocolOptionsSetTlsRenegotiationEnabled] (C function sec_protocol_options_set_tls_renegotiation_enabled).
-func SecProtocolOptionsSetTlsRenegotiationEnabled(options unsafe.Pointer, renegotiation_enabled bool) {
-	raw.SecProtocolOptionsSetTlsRenegotiationEnabled(options, renegotiation_enabled)
-}
-
-// SecProtocolOptionsSetTlsResumptionEnabled calls [raw.SecProtocolOptionsSetTlsResumptionEnabled] (C function sec_protocol_options_set_tls_resumption_enabled).
-func SecProtocolOptionsSetTlsResumptionEnabled(options unsafe.Pointer, resumption_enabled bool) {
-	raw.SecProtocolOptionsSetTlsResumptionEnabled(options, resumption_enabled)
-}
-
-// SecProtocolOptionsSetTlsSctEnabled calls [raw.SecProtocolOptionsSetTlsSctEnabled] (C function sec_protocol_options_set_tls_sct_enabled).
-func SecProtocolOptionsSetTlsSctEnabled(options unsafe.Pointer, sct_enabled bool) {
-	raw.SecProtocolOptionsSetTlsSctEnabled(options, sct_enabled)
-}
-
-// SecProtocolOptionsSetTlsServerName calls [raw.SecProtocolOptionsSetTlsServerName] (C function sec_protocol_options_set_tls_server_name).
-func SecProtocolOptionsSetTlsServerName(options unsafe.Pointer, server_name string) {
-	raw.SecProtocolOptionsSetTlsServerName(options, server_name)
-}
-
-// SecProtocolOptionsSetTlsTicketsEnabled calls [raw.SecProtocolOptionsSetTlsTicketsEnabled] (C function sec_protocol_options_set_tls_tickets_enabled).
-func SecProtocolOptionsSetTlsTicketsEnabled(options unsafe.Pointer, tickets_enabled bool) {
-	raw.SecProtocolOptionsSetTlsTicketsEnabled(options, tickets_enabled)
-}
-
-// SecProtocolOptionsSetVerifyBlock calls [raw.SecProtocolOptionsSetVerifyBlock] (C function sec_protocol_options_set_verify_block).
-func SecProtocolOptionsSetVerifyBlock(options unsafe.Pointer, verify_block func(unsafe.Pointer, unsafe.Pointer, objc.Block), verify_block_queue unsafe.Pointer) {
-	raw.SecProtocolOptionsSetVerifyBlock(options, verify_block, verify_block_queue)
-}
-
-// SecRelease calls [raw.SecRelease] (C function sec_release).
-func SecRelease(obj unsafe.Pointer) {
-	raw.SecRelease(obj)
-}
-
-// SecRetain calls [raw.SecRetain] (C function sec_retain).
-func SecRetain(obj unsafe.Pointer) unsafe.Pointer {
-	return raw.SecRetain(obj)
-}
-
-// SecTrustCopyRef calls [raw.SecTrustCopyRef] (C function sec_trust_copy_ref).
-func SecTrustCopyRef(trust unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTrustCopyRef(trust)
-}
-
-// SecTrustCreate calls [raw.SecTrustCreate] (C function sec_trust_create).
-func SecTrustCreate(trust unsafe.Pointer) unsafe.Pointer {
-	return raw.SecTrustCreate(trust)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecProtocolOptionsGetDefaultMinTlsProtocolVersion == nil {
+		ebipurego.RegisterLibFunc(&_fnSecProtocolOptionsGetDefaultMinTlsProtocolVersion, _lib, "sec_protocol_options_get_default_min_tls_protocol_version")
+	}
+	return _fnSecProtocolOptionsGetDefaultMinTlsProtocolVersion()
 }

@@ -5,177 +5,126 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A capture output for processing timed metadata produced by a capture session.
 //
-// CaptureMetadataOutput wraps [raw.AVCaptureMetadataOutput] with a fluent Go API.
+// CaptureMetadataOutput is an idiomatic wrapper over the Objective-C class AVCaptureMetadataOutput.
 type CaptureMetadataOutput struct {
-	inner *raw.AVCaptureMetadataOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureMetadataOutput].
-func (x *CaptureMetadataOutput) Unwrap() *raw.AVCaptureMetadataOutput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureMetadataOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureMetadataOutputFromID adopts an existing object pointer as a CaptureMetadataOutput (nil for 0).
+// CaptureMetadataOutputFromID adopts an existing Objective-C object as a CaptureMetadataOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureMetadataOutputFromID(id objc.ID) *CaptureMetadataOutput {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureMetadataOutput{inner: raw.AVCaptureMetadataOutputFromID(id)}
+	x := &CaptureMetadataOutput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCaptureMetadataOutput creates a new [CaptureMetadataOutput].
+// captureMetadataOutputAdopt wraps an Objective-C object that this code just created as a
+// CaptureMetadataOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureMetadataOutputAdopt(id objc.ID) *CaptureMetadataOutput {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureMetadataOutput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptureMetadataOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureMetadataOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureMetadataOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptureMetadataOutput creates a new CaptureMetadataOutput.
 func NewCaptureMetadataOutput() *CaptureMetadataOutput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureMetadataOutput")), objc.RegisterName("new"))
-	return &CaptureMetadataOutput{inner: raw.AVCaptureMetadataOutputFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureMetadataOutput")), objc.RegisterName("new"))
+	return captureMetadataOutputAdopt(_id)
 }
 
 // An array of strings identifying the types of metadata objects to process.
 //
-// WithMetadataObjectTypes sets the collection, converting the Go slice to an NSArray.
-func (x *CaptureMetadataOutput) WithMetadataObjectTypes(items ...*foundation.NSString) *CaptureMetadataOutput {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetMetadataObjectTypes(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetMetadataObjectTypes(_arr)
-	return x
-}
-
-// A rectangle of interest for limiting the search area for visual metadata.
-//
-// WithRectOfInterest sets the rectOfInterest property and returns the receiver for chaining.
-func (x *CaptureMetadataOutput) WithRectOfInterest(rectOfInterest corefoundation.CGRect) *CaptureMetadataOutput {
-	x.inner.SetRectOfInterest(rectOfInterest)
+// WithMetadataObjectTypes sets the collection and returns the receiver so calls can be chained.
+func (x *CaptureMetadataOutput) WithMetadataObjectTypes(items ...obj.Object) *CaptureMetadataOutput {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadataObjectTypes:"), _arr)
 	return x
 }
 
 // A Boolean value that indicates whether to defer starting this capture output.
 //
-// WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
+// WithDeferredStartEnabled sets deferredStartEnabled and returns the receiver so calls can be chained.
 func (x *CaptureMetadataOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureMetadataOutput {
-	x.inner.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
 	return x
 }
 
-// Sets the delegate and dispatch queue to use handle callbacks.
-//
-// SetMetadataObjectsDelegateQueue calls the underlying SetMetadataObjectsDelegateQueue.
-func (x *CaptureMetadataOutput) SetMetadataObjectsDelegateQueue(objectsDelegate raw.AVCaptureMetadataOutputObjectsDelegate, objectsCallbackQueue *foundation.NSObject) {
-	x.inner.SetMetadataObjectsDelegateQueue(objectsDelegate, objectsCallbackQueue)
+// The dispatch queue on which all metadata object delegate methods will be called. The value of this property is a dispatch_queue_t. The queue is set using the setMetadataObjectsDelegate:queue: method.
+func (x *CaptureMetadataOutput) MetadataObjectsCallbackQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadataObjectsCallbackQueue"))
+	return obj.Wrap(_r)
 }
 
-// @property metadataObjectsDelegate @abstract The receiver's delegate. @discussion The value of this property is an object conforming to the AVCaptureMetadataOutputObjectsDelegate protocol that will receive metadata objects after they are captured. The delegate is set using the setMetadataObjectsDelegate:queue: method.
-//
-// MetadataObjectsDelegate calls the underlying MetadataObjectsDelegate.
-func (x *CaptureMetadataOutput) MetadataObjectsDelegate() raw.AVCaptureMetadataOutputObjectsDelegate {
-	return x.inner.MetadataObjectsDelegate()
-}
-
-// @property metadataObjectsCallbackQueue @abstract The dispatch queue on which all metadata object delegate methods will be called. @discussion The value of this property is a dispatch_queue_t. The queue is set using the setMetadataObjectsDelegate:queue: method.
-//
-// MetadataObjectsCallbackQueue calls the underlying MetadataObjectsCallbackQueue.
-func (x *CaptureMetadataOutput) MetadataObjectsCallbackQueue() *foundation.NSObject {
-	return x.inner.MetadataObjectsCallbackQueue()
-}
-
-// @property availableMetadataObjectTypes @abstract Indicates the receiver's supported metadata object types. @discussion The value of this property is an NSArray of NSStrings corresponding to AVMetadataObjectType strings defined in AVMetadataObject.h -- one for each metadata object type supported by the receiver. Available metadata object types are dependent on the capabilities of the AVCaptureInputPort to which this receiver's AVCaptureConnection is connected. Clients may specify the types of objects they would like to process by calling setMetadataObjectTypes:. This property is key-value observable.
+// Indicates the receiver's supported metadata object types. The value of this property is an NSArray of NSStrings corresponding to AVMetadataObjectType strings defined in AVMetadataObject.h -- one for each metadata object type supported by the receiver. Available metadata object types are dependent on the capabilities of the AVCaptureInputPort to which this receiver's AVCaptureConnection is connected. Clients may specify the types of objects they would like to process by calling setMetadataObjectTypes:. This property is key-value observable.
 //
 // AvailableMetadataObjectTypes returns the collection as a Go slice.
-func (x *CaptureMetadataOutput) AvailableMetadataObjectTypes() []*foundation.NSString {
-	arr := x.inner.AvailableMetadataObjectTypes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *CaptureMetadataOutput) AvailableMetadataObjectTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableMetadataObjectTypes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @property metadataObjectTypes @abstract Specifies the types of metadata objects that the receiver should present to the client. @discussion AVCaptureMetadataOutput may detect and emit multiple metadata object types. For apps linked before iOS 7.0, the receiver defaults to capturing face metadata objects if supported (see -availableMetadataObjectTypes). For apps linked on or after iOS 7.0, the receiver captures no metadata objects by default. -setMetadataObjectTypes: throws an NSInvalidArgumentException if any elements in the array are not present in the -availableMetadataObjectTypes array. If you've set your AVCaptureMetadataOutput's connected input's `cinematicVideoCaptureEnabled` property to YES, you must set your `metadataObjectTypes` property to `requiredMetadataObjectTypesForCinematicVideoCapture` or an NSInvalidArgumentException is thrown.
+// Specifies the types of metadata objects that the receiver should present to the client. AVCaptureMetadataOutput may detect and emit multiple metadata object types. For apps linked before iOS 7.0, the receiver defaults to capturing face metadata objects if supported (see -availableMetadataObjectTypes). For apps linked on or after iOS 7.0, the receiver captures no metadata objects by default. -setMetadataObjectTypes: throws an NSInvalidArgumentException if any elements in the array are not present in the -availableMetadataObjectTypes array. If you've set your AVCaptureMetadataOutput's connected input's `cinematicVideoCaptureEnabled` property to YES, you must set your `metadataObjectTypes` property to `requiredMetadataObjectTypesForCinematicVideoCapture` or an NSInvalidArgumentException is thrown.
 //
 // MetadataObjectTypes returns the collection as a Go slice.
-func (x *CaptureMetadataOutput) MetadataObjectTypes() []*foundation.NSString {
-	arr := x.inner.MetadataObjectTypes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *CaptureMetadataOutput) MetadataObjectTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadataObjectTypes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetMetadataObjectTypes calls the underlying SetMetadataObjectTypes.
-func (x *CaptureMetadataOutput) SetMetadataObjectTypes(metadataObjectTypes *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetMetadataObjectTypes(metadataObjectTypes)
-}
-
-// @property rectOfInterest @abstract Specifies a rectangle of interest for limiting the search area for visual metadata. @discussion The value of this property is a CGRect that determines the receiver's rectangle of interest for each frame of video. The rectangle's origin is top left and is relative to the coordinate space of the device providing the metadata. Specifying a rectOfInterest may improve detection performance for certain types of metadata. The default value of this property is the value CGRectMake(0, 0, 1, 1). Metadata objects whose bounds do not intersect with the rectOfInterest will not be returned. As of iOS 13, this property can be set without requiring a lengthy rebuild of the session in which video preview is disrupted.
-//
-// RectOfInterest calls the underlying RectOfInterest.
-func (x *CaptureMetadataOutput) RectOfInterest() corefoundation.CGRect {
-	return x.inner.RectOfInterest()
-}
-
-// SetRectOfInterest calls the underlying SetRectOfInterest.
-func (x *CaptureMetadataOutput) SetRectOfInterest(rectOfInterest corefoundation.CGRect) {
-	x.inner.SetRectOfInterest(rectOfInterest)
+func (x *CaptureMetadataOutput) SetMetadataObjectTypes(metadataObjectTypes []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetadataObjectTypes:"), purego.SliceToNSArray(metadataObjectTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // The required metadata object types when Cinematic Video capture is enabled. Since the Cinematic Video algorithm requires a particular set of metadata objects to function optimally, you must set your “metadataObjectTypes“ property to this property's returned value if you've set “AVCaptureDeviceInput/cinematicVideoCaptureEnabled“ to `true` on the connected device input, otherwise an `NSInvalidArgumentException` is thrown.
 //
 // RequiredMetadataObjectTypesForCinematicVideoCapture returns the collection as a Go slice.
-func (x *CaptureMetadataOutput) RequiredMetadataObjectTypesForCinematicVideoCapture() []*foundation.NSString {
-	arr := x.inner.RequiredMetadataObjectTypesForCinematicVideoCapture()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
-}
-
-func (x *CaptureMetadataOutput) asCaptureOutput() *raw.AVCaptureOutput {
-	return &x.inner.AVCaptureOutput
+func (x *CaptureMetadataOutput) RequiredMetadataObjectTypesForCinematicVideoCapture() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requiredMetadataObjectTypesForCinematicVideoCapture"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // CaptureMetadataOutputable is the interface implemented by [CaptureMetadataOutput], for mocking and DI.
 type CaptureMetadataOutputable interface {
-	Unwrap() *raw.AVCaptureMetadataOutput
-	WithMetadataObjectTypes(items ...*foundation.NSString) *CaptureMetadataOutput
-	WithRectOfInterest(rectOfInterest corefoundation.CGRect) *CaptureMetadataOutput
+	obj.Object
+	WithMetadataObjectTypes(items ...obj.Object) *CaptureMetadataOutput
 	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureMetadataOutput
-	SetMetadataObjectsDelegateQueue(objectsDelegate raw.AVCaptureMetadataOutputObjectsDelegate, objectsCallbackQueue *foundation.NSObject)
-	MetadataObjectsDelegate() raw.AVCaptureMetadataOutputObjectsDelegate
-	MetadataObjectsCallbackQueue() *foundation.NSObject
-	AvailableMetadataObjectTypes() []*foundation.NSString
-	MetadataObjectTypes() []*foundation.NSString
-	SetMetadataObjectTypes(metadataObjectTypes *foundation.NSArray[*foundation.NSString])
-	RectOfInterest() corefoundation.CGRect
-	SetRectOfInterest(rectOfInterest corefoundation.CGRect)
-	RequiredMetadataObjectTypesForCinematicVideoCapture() []*foundation.NSString
+	MetadataObjectsCallbackQueue() obj.Object
+	AvailableMetadataObjectTypes() []obj.Object
+	MetadataObjectTypes() []obj.Object
+	SetMetadataObjectTypes(metadataObjectTypes []obj.Object)
+	RequiredMetadataObjectTypesForCinematicVideoCapture() []obj.Object
 }
 
 var _ CaptureMetadataOutputable = (*CaptureMetadataOutput)(nil)

@@ -10,104 +10,104 @@ import (
 )
 
 // Values that indicate the state of an export session.
-type AVAssetExportSessionStatus int64
+type AssetExportSessionStatus int64
 
 const (
-	AVAssetExportSessionStatusUnknown   AVAssetExportSessionStatus = 0
-	AVAssetExportSessionStatusWaiting   AVAssetExportSessionStatus = 1
-	AVAssetExportSessionStatusExporting AVAssetExportSessionStatus = 2
-	AVAssetExportSessionStatusCompleted AVAssetExportSessionStatus = 3
-	AVAssetExportSessionStatusFailed    AVAssetExportSessionStatus = 4
-	AVAssetExportSessionStatusCancelled AVAssetExportSessionStatus = 5
+	AssetExportSessionStatusUnknown   AssetExportSessionStatus = 0
+	AssetExportSessionStatusWaiting   AssetExportSessionStatus = 1
+	AssetExportSessionStatusExporting AssetExportSessionStatus = 2
+	AssetExportSessionStatusCompleted AssetExportSessionStatus = 3
+	AssetExportSessionStatusFailed    AssetExportSessionStatus = 4
+	AssetExportSessionStatusCancelled AssetExportSessionStatus = 5
 )
 
-func (e AVAssetExportSessionStatus) String() string {
+func (e AssetExportSessionStatus) String() string {
 	switch e {
-	case AVAssetExportSessionStatusUnknown:
-		return "AVAssetExportSessionStatusUnknown"
-	case AVAssetExportSessionStatusWaiting:
-		return "AVAssetExportSessionStatusWaiting"
-	case AVAssetExportSessionStatusExporting:
-		return "AVAssetExportSessionStatusExporting"
-	case AVAssetExportSessionStatusCompleted:
-		return "AVAssetExportSessionStatusCompleted"
-	case AVAssetExportSessionStatusFailed:
-		return "AVAssetExportSessionStatusFailed"
-	case AVAssetExportSessionStatusCancelled:
-		return "AVAssetExportSessionStatusCancelled"
+	case AssetExportSessionStatusUnknown:
+		return "AssetExportSessionStatusUnknown"
+	case AssetExportSessionStatusWaiting:
+		return "AssetExportSessionStatusWaiting"
+	case AssetExportSessionStatusExporting:
+		return "AssetExportSessionStatusExporting"
+	case AssetExportSessionStatusCompleted:
+		return "AssetExportSessionStatusCompleted"
+	case AssetExportSessionStatusFailed:
+		return "AssetExportSessionStatusFailed"
+	case AssetExportSessionStatusCancelled:
+		return "AssetExportSessionStatusCancelled"
 	default:
-		return fmt.Sprintf("AVAssetExportSessionStatus(%d)", int64(e))
+		return fmt.Sprintf("AssetExportSessionStatus(%d)", int64(e))
 	}
 }
 
 // Values that represent the possible states of an asset reader.
-type AVAssetReaderStatus int64
+type AssetReaderStatus int64
 
 const (
-	AVAssetReaderStatusUnknown   AVAssetReaderStatus = 0
-	AVAssetReaderStatusReading   AVAssetReaderStatus = 1
-	AVAssetReaderStatusCompleted AVAssetReaderStatus = 2
-	AVAssetReaderStatusFailed    AVAssetReaderStatus = 3
-	AVAssetReaderStatusCancelled AVAssetReaderStatus = 4
+	AssetReaderStatusUnknown   AssetReaderStatus = 0
+	AssetReaderStatusReading   AssetReaderStatus = 1
+	AssetReaderStatusCompleted AssetReaderStatus = 2
+	AssetReaderStatusFailed    AssetReaderStatus = 3
+	AssetReaderStatusCancelled AssetReaderStatus = 4
 )
 
-func (e AVAssetReaderStatus) String() string {
+func (e AssetReaderStatus) String() string {
 	switch e {
-	case AVAssetReaderStatusUnknown:
-		return "AVAssetReaderStatusUnknown"
-	case AVAssetReaderStatusReading:
-		return "AVAssetReaderStatusReading"
-	case AVAssetReaderStatusCompleted:
-		return "AVAssetReaderStatusCompleted"
-	case AVAssetReaderStatusFailed:
-		return "AVAssetReaderStatusFailed"
-	case AVAssetReaderStatusCancelled:
-		return "AVAssetReaderStatusCancelled"
+	case AssetReaderStatusUnknown:
+		return "AssetReaderStatusUnknown"
+	case AssetReaderStatusReading:
+		return "AssetReaderStatusReading"
+	case AssetReaderStatusCompleted:
+		return "AssetReaderStatusCompleted"
+	case AssetReaderStatusFailed:
+		return "AssetReaderStatusFailed"
+	case AssetReaderStatusCancelled:
+		return "AssetReaderStatusCancelled"
 	default:
-		return fmt.Sprintf("AVAssetReaderStatus(%d)", int64(e))
+		return fmt.Sprintf("AssetReaderStatus(%d)", int64(e))
 	}
 }
 
 // Restrictions to use when resolving references to external media data.
 // Bitmask — values may be combined with |.
-type AVAssetReferenceRestrictions uint64
+type AssetReferenceRestrictions uint64
 
 const (
 	// The asset should follow all media references.
-	AVAssetReferenceRestrictionForbidNone AVAssetReferenceRestrictions = 0
+	AssetReferenceRestrictionForbidNone AssetReferenceRestrictions = 0
 	// A remote asset shouldn’t follow references to local media.
-	AVAssetReferenceRestrictionForbidRemoteReferenceToLocal AVAssetReferenceRestrictions = 1
+	AssetReferenceRestrictionForbidRemoteReferenceToLocal AssetReferenceRestrictions = 1
 	// A local asset shouldn’t follow references to remote media.
-	AVAssetReferenceRestrictionForbidLocalReferenceToRemote AVAssetReferenceRestrictions = 2
+	AssetReferenceRestrictionForbidLocalReferenceToRemote AssetReferenceRestrictions = 2
 	// A remote asset shouldn’t follow references to remote media data stored at a different host.
-	AVAssetReferenceRestrictionForbidCrossSiteReference AVAssetReferenceRestrictions = 4
+	AssetReferenceRestrictionForbidCrossSiteReference AssetReferenceRestrictions = 4
 	// A local asset shouldn’t follow references to local media data stored outside its container file.
-	AVAssetReferenceRestrictionForbidLocalReferenceToLocal AVAssetReferenceRestrictions = 8
+	AssetReferenceRestrictionForbidLocalReferenceToLocal AssetReferenceRestrictions = 8
 	// The asset can only reference media stored within its container file.
-	AVAssetReferenceRestrictionForbidAll AVAssetReferenceRestrictions = 65535
+	AssetReferenceRestrictionForbidAll AssetReferenceRestrictions = 65535
 	// The asset should use the default reference restrictions policy.
-	AVAssetReferenceRestrictionDefaultPolicy AVAssetReferenceRestrictions = 2
+	AssetReferenceRestrictionDefaultPolicy AssetReferenceRestrictions = 2
 )
 
-func (e AVAssetReferenceRestrictions) String() string {
+func (e AssetReferenceRestrictions) String() string {
 	var parts []string
-	if e&AVAssetReferenceRestrictionForbidRemoteReferenceToLocal != 0 {
-		parts = append(parts, "AVAssetReferenceRestrictionForbidRemoteReferenceToLocal")
+	if e&AssetReferenceRestrictionForbidRemoteReferenceToLocal != 0 {
+		parts = append(parts, "AssetReferenceRestrictionForbidRemoteReferenceToLocal")
 	}
-	if e&AVAssetReferenceRestrictionForbidLocalReferenceToRemote != 0 {
-		parts = append(parts, "AVAssetReferenceRestrictionForbidLocalReferenceToRemote")
+	if e&AssetReferenceRestrictionForbidLocalReferenceToRemote != 0 {
+		parts = append(parts, "AssetReferenceRestrictionForbidLocalReferenceToRemote")
 	}
-	if e&AVAssetReferenceRestrictionForbidCrossSiteReference != 0 {
-		parts = append(parts, "AVAssetReferenceRestrictionForbidCrossSiteReference")
+	if e&AssetReferenceRestrictionForbidCrossSiteReference != 0 {
+		parts = append(parts, "AssetReferenceRestrictionForbidCrossSiteReference")
 	}
-	if e&AVAssetReferenceRestrictionForbidLocalReferenceToLocal != 0 {
-		parts = append(parts, "AVAssetReferenceRestrictionForbidLocalReferenceToLocal")
+	if e&AssetReferenceRestrictionForbidLocalReferenceToLocal != 0 {
+		parts = append(parts, "AssetReferenceRestrictionForbidLocalReferenceToLocal")
 	}
-	if e&AVAssetReferenceRestrictionForbidAll != 0 {
-		parts = append(parts, "AVAssetReferenceRestrictionForbidAll")
+	if e&AssetReferenceRestrictionForbidAll != 0 {
+		parts = append(parts, "AssetReferenceRestrictionForbidAll")
 	}
-	if e&AVAssetReferenceRestrictionDefaultPolicy != 0 {
-		parts = append(parts, "AVAssetReferenceRestrictionDefaultPolicy")
+	if e&AssetReferenceRestrictionDefaultPolicy != 0 {
+		parts = append(parts, "AssetReferenceRestrictionDefaultPolicy")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -116,43 +116,43 @@ func (e AVAssetReferenceRestrictions) String() string {
 }
 
 // Constants that define the type of a segment.
-type AVAssetSegmentType int64
+type AssetSegmentType int64
 
 const (
 	// An initialization segment type.
-	AVAssetSegmentTypeInitialization AVAssetSegmentType = 1
+	AssetSegmentTypeInitialization AssetSegmentType = 1
 	// A separable segment type.
-	AVAssetSegmentTypeSeparable AVAssetSegmentType = 2
+	AssetSegmentTypeSeparable AssetSegmentType = 2
 )
 
-func (e AVAssetSegmentType) String() string {
+func (e AssetSegmentType) String() string {
 	switch e {
-	case AVAssetSegmentTypeInitialization:
-		return "AVAssetSegmentTypeInitialization"
-	case AVAssetSegmentTypeSeparable:
-		return "AVAssetSegmentTypeSeparable"
+	case AssetSegmentTypeInitialization:
+		return "AssetSegmentTypeInitialization"
+	case AssetSegmentTypeSeparable:
+		return "AssetSegmentTypeSeparable"
 	default:
-		return fmt.Sprintf("AVAssetSegmentType(%d)", int64(e))
+		return fmt.Sprintf("AssetSegmentType(%d)", int64(e))
 	}
 }
 
 // A type that specifies policies for how an export session processes alternate tracks in a track group.
 // Bitmask — values may be combined with |.
-type AVAssetTrackGroupOutputHandling uint64
+type AssetTrackGroupOutputHandling uint64
 
 const (
 	// A policy that doesn’t pass through alternate audio tracks from the source asset during export.
-	AVAssetTrackGroupOutputHandlingNone AVAssetTrackGroupOutputHandling = 0
+	AssetTrackGroupOutputHandlingNone AssetTrackGroupOutputHandling = 0
 	// A policy that passes through alternate audio tracks from the source asset during export.
-	AVAssetTrackGroupOutputHandlingPreserveAlternateTracks AVAssetTrackGroupOutputHandling = 1
+	AssetTrackGroupOutputHandlingPreserveAlternateTracks AssetTrackGroupOutputHandling = 1
 	// The default track group output handling policy.
-	AVAssetTrackGroupOutputHandlingDefaultPolicy AVAssetTrackGroupOutputHandling = 0
+	AssetTrackGroupOutputHandlingDefaultPolicy AssetTrackGroupOutputHandling = 0
 )
 
-func (e AVAssetTrackGroupOutputHandling) String() string {
+func (e AssetTrackGroupOutputHandling) String() string {
 	var parts []string
-	if e&AVAssetTrackGroupOutputHandlingPreserveAlternateTracks != 0 {
-		parts = append(parts, "AVAssetTrackGroupOutputHandlingPreserveAlternateTracks")
+	if e&AssetTrackGroupOutputHandlingPreserveAlternateTracks != 0 {
+		parts = append(parts, "AssetTrackGroupOutputHandlingPreserveAlternateTracks")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -161,58 +161,58 @@ func (e AVAssetTrackGroupOutputHandling) String() string {
 }
 
 // Values that indicate the state of an asset writer.
-type AVAssetWriterStatus int64
+type AssetWriterStatus int64
 
 const (
-	AVAssetWriterStatusUnknown   AVAssetWriterStatus = 0
-	AVAssetWriterStatusWriting   AVAssetWriterStatus = 1
-	AVAssetWriterStatusCompleted AVAssetWriterStatus = 2
-	AVAssetWriterStatusFailed    AVAssetWriterStatus = 3
-	AVAssetWriterStatusCancelled AVAssetWriterStatus = 4
+	AssetWriterStatusUnknown   AssetWriterStatus = 0
+	AssetWriterStatusWriting   AssetWriterStatus = 1
+	AssetWriterStatusCompleted AssetWriterStatus = 2
+	AssetWriterStatusFailed    AssetWriterStatus = 3
+	AssetWriterStatusCancelled AssetWriterStatus = 4
 )
 
-func (e AVAssetWriterStatus) String() string {
+func (e AssetWriterStatus) String() string {
 	switch e {
-	case AVAssetWriterStatusUnknown:
-		return "AVAssetWriterStatusUnknown"
-	case AVAssetWriterStatusWriting:
-		return "AVAssetWriterStatusWriting"
-	case AVAssetWriterStatusCompleted:
-		return "AVAssetWriterStatusCompleted"
-	case AVAssetWriterStatusFailed:
-		return "AVAssetWriterStatusFailed"
-	case AVAssetWriterStatusCancelled:
-		return "AVAssetWriterStatusCancelled"
+	case AssetWriterStatusUnknown:
+		return "AssetWriterStatusUnknown"
+	case AssetWriterStatusWriting:
+		return "AssetWriterStatusWriting"
+	case AssetWriterStatusCompleted:
+		return "AssetWriterStatusCompleted"
+	case AssetWriterStatusFailed:
+		return "AssetWriterStatusFailed"
+	case AssetWriterStatusCancelled:
+		return "AssetWriterStatusCancelled"
 	default:
-		return fmt.Sprintf("AVAssetWriterStatus(%d)", int64(e))
+		return fmt.Sprintf("AssetWriterStatus(%d)", int64(e))
 	}
 }
 
 // A structure that defines the spatialization formats that a player item supports.
 // Bitmask — values may be combined with |.
-type AVAudioSpatializationFormats uint64
+type AudioSpatializationFormats uint64
 
 const (
 	// A value that indicates the player item doesn’t support audio spatialization.
-	AVAudioSpatializationFormatNone AVAudioSpatializationFormats = 0
+	AudioSpatializationFormatNone AudioSpatializationFormats = 0
 	// A value that indicates the player item only supports mono and stereo layouts for audio spatialization.
-	AVAudioSpatializationFormatMonoAndStereo AVAudioSpatializationFormats = 3
+	AudioSpatializationFormatMonoAndStereo AudioSpatializationFormats = 3
 	// A value that indicates the player item only supports multichannel layouts for audio spatialization.
-	AVAudioSpatializationFormatMultichannel AVAudioSpatializationFormats = 4
+	AudioSpatializationFormatMultichannel AudioSpatializationFormats = 4
 	// A value that indicates the player item supports mono, stereo, and multichannel layouts for audio spatialization.
-	AVAudioSpatializationFormatMonoStereoAndMultichannel AVAudioSpatializationFormats = 7
+	AudioSpatializationFormatMonoStereoAndMultichannel AudioSpatializationFormats = 7
 )
 
-func (e AVAudioSpatializationFormats) String() string {
+func (e AudioSpatializationFormats) String() string {
 	var parts []string
-	if e&AVAudioSpatializationFormatMonoAndStereo != 0 {
-		parts = append(parts, "AVAudioSpatializationFormatMonoAndStereo")
+	if e&AudioSpatializationFormatMonoAndStereo != 0 {
+		parts = append(parts, "AudioSpatializationFormatMonoAndStereo")
 	}
-	if e&AVAudioSpatializationFormatMultichannel != 0 {
-		parts = append(parts, "AVAudioSpatializationFormatMultichannel")
+	if e&AudioSpatializationFormatMultichannel != 0 {
+		parts = append(parts, "AudioSpatializationFormatMultichannel")
 	}
-	if e&AVAudioSpatializationFormatMonoStereoAndMultichannel != 0 {
-		parts = append(parts, "AVAudioSpatializationFormatMonoStereoAndMultichannel")
+	if e&AudioSpatializationFormatMonoStereoAndMultichannel != 0 {
+		parts = append(parts, "AudioSpatializationFormatMonoStereoAndMultichannel")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -221,100 +221,100 @@ func (e AVAudioSpatializationFormats) String() string {
 }
 
 // Constants that indicate the status of an app’s authorization to capture media.
-type AVAuthorizationStatus int64
+type AuthorizationStatus int64
 
 const (
 	// A status that indicates the user hasn’t yet granted or denied authorization.
-	AVAuthorizationStatusNotDetermined AVAuthorizationStatus = 0
+	AuthorizationStatusNotDetermined AuthorizationStatus = 0
 	// A status that indicates the app isn’t permitted to use media capture devices.
-	AVAuthorizationStatusRestricted AVAuthorizationStatus = 1
+	AuthorizationStatusRestricted AuthorizationStatus = 1
 	// A status that indicates the user has explicitly denied an app permission to capture media.
-	AVAuthorizationStatusDenied AVAuthorizationStatus = 2
+	AuthorizationStatusDenied AuthorizationStatus = 2
 	// A status that indicates the user has explicitly granted an app permission to capture media.
-	AVAuthorizationStatusAuthorized AVAuthorizationStatus = 3
+	AuthorizationStatusAuthorized AuthorizationStatus = 3
 )
 
-func (e AVAuthorizationStatus) String() string {
+func (e AuthorizationStatus) String() string {
 	switch e {
-	case AVAuthorizationStatusNotDetermined:
-		return "AVAuthorizationStatusNotDetermined"
-	case AVAuthorizationStatusRestricted:
-		return "AVAuthorizationStatusRestricted"
-	case AVAuthorizationStatusDenied:
-		return "AVAuthorizationStatusDenied"
-	case AVAuthorizationStatusAuthorized:
-		return "AVAuthorizationStatusAuthorized"
+	case AuthorizationStatusNotDetermined:
+		return "AuthorizationStatusNotDetermined"
+	case AuthorizationStatusRestricted:
+		return "AuthorizationStatusRestricted"
+	case AuthorizationStatusDenied:
+		return "AuthorizationStatusDenied"
+	case AuthorizationStatusAuthorized:
+		return "AuthorizationStatusAuthorized"
 	default:
-		return fmt.Sprintf("AVAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationStatus(%d)", int64(e))
 	}
 }
 
 // Animation options for a caption.
-type AVCaptionAnimation int64
+type CaptionAnimation int64
 
 const (
-	AVCaptionAnimationNone            AVCaptionAnimation = 0
-	AVCaptionAnimationCharacterReveal AVCaptionAnimation = 1
+	CaptionAnimationNone            CaptionAnimation = 0
+	CaptionAnimationCharacterReveal CaptionAnimation = 1
 )
 
-func (e AVCaptionAnimation) String() string {
+func (e CaptionAnimation) String() string {
 	switch e {
-	case AVCaptionAnimationNone:
-		return "AVCaptionAnimationNone"
-	case AVCaptionAnimationCharacterReveal:
-		return "AVCaptionAnimationCharacterReveal"
+	case CaptionAnimationNone:
+		return "CaptionAnimationNone"
+	case CaptionAnimationCharacterReveal:
+		return "CaptionAnimationCharacterReveal"
 	default:
-		return fmt.Sprintf("AVCaptionAnimation(%d)", int64(e))
+		return fmt.Sprintf("CaptionAnimation(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the status of a validator.
-type AVCaptionConversionValidatorStatus int64
+type CaptionConversionValidatorStatus int64
 
 const (
-	AVCaptionConversionValidatorStatusUnknown    AVCaptionConversionValidatorStatus = 0
-	AVCaptionConversionValidatorStatusValidating AVCaptionConversionValidatorStatus = 1
-	AVCaptionConversionValidatorStatusCompleted  AVCaptionConversionValidatorStatus = 2
-	AVCaptionConversionValidatorStatusStopped    AVCaptionConversionValidatorStatus = 3
+	CaptionConversionValidatorStatusUnknown    CaptionConversionValidatorStatus = 0
+	CaptionConversionValidatorStatusValidating CaptionConversionValidatorStatus = 1
+	CaptionConversionValidatorStatusCompleted  CaptionConversionValidatorStatus = 2
+	CaptionConversionValidatorStatusStopped    CaptionConversionValidatorStatus = 3
 )
 
-func (e AVCaptionConversionValidatorStatus) String() string {
+func (e CaptionConversionValidatorStatus) String() string {
 	switch e {
-	case AVCaptionConversionValidatorStatusUnknown:
-		return "AVCaptionConversionValidatorStatusUnknown"
-	case AVCaptionConversionValidatorStatusValidating:
-		return "AVCaptionConversionValidatorStatusValidating"
-	case AVCaptionConversionValidatorStatusCompleted:
-		return "AVCaptionConversionValidatorStatusCompleted"
-	case AVCaptionConversionValidatorStatusStopped:
-		return "AVCaptionConversionValidatorStatusStopped"
+	case CaptionConversionValidatorStatusUnknown:
+		return "CaptionConversionValidatorStatusUnknown"
+	case CaptionConversionValidatorStatusValidating:
+		return "CaptionConversionValidatorStatusValidating"
+	case CaptionConversionValidatorStatusCompleted:
+		return "CaptionConversionValidatorStatusCompleted"
+	case CaptionConversionValidatorStatusStopped:
+		return "CaptionConversionValidatorStatusStopped"
 	default:
-		return fmt.Sprintf("AVCaptionConversionValidatorStatus(%d)", int64(e))
+		return fmt.Sprintf("CaptionConversionValidatorStatus(%d)", int64(e))
 	}
 }
 
 // Text decorations for caption text.
 // Bitmask — values may be combined with |.
-type AVCaptionDecoration uint64
+type CaptionDecoration uint64
 
 const (
 	// No text decoration.
-	AVCaptionDecorationNone        AVCaptionDecoration = 0
-	AVCaptionDecorationUnderline   AVCaptionDecoration = 1
-	AVCaptionDecorationLineThrough AVCaptionDecoration = 2
-	AVCaptionDecorationOverline    AVCaptionDecoration = 4
+	CaptionDecorationNone        CaptionDecoration = 0
+	CaptionDecorationUnderline   CaptionDecoration = 1
+	CaptionDecorationLineThrough CaptionDecoration = 2
+	CaptionDecorationOverline    CaptionDecoration = 4
 )
 
-func (e AVCaptionDecoration) String() string {
+func (e CaptionDecoration) String() string {
 	var parts []string
-	if e&AVCaptionDecorationUnderline != 0 {
-		parts = append(parts, "AVCaptionDecorationUnderline")
+	if e&CaptionDecorationUnderline != 0 {
+		parts = append(parts, "CaptionDecorationUnderline")
 	}
-	if e&AVCaptionDecorationLineThrough != 0 {
-		parts = append(parts, "AVCaptionDecorationLineThrough")
+	if e&CaptionDecorationLineThrough != 0 {
+		parts = append(parts, "CaptionDecorationLineThrough")
 	}
-	if e&AVCaptionDecorationOverline != 0 {
-		parts = append(parts, "AVCaptionDecorationOverline")
+	if e&CaptionDecorationOverline != 0 {
+		parts = append(parts, "CaptionDecorationOverline")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -323,582 +323,582 @@ func (e AVCaptionDecoration) String() string {
 }
 
 // Font styles for caption text.
-type AVCaptionFontStyle int64
+type CaptionFontStyle int64
 
 const (
-	AVCaptionFontStyleUnknown AVCaptionFontStyle = 0
-	AVCaptionFontStyleNormal  AVCaptionFontStyle = 1
-	AVCaptionFontStyleItalic  AVCaptionFontStyle = 2
+	CaptionFontStyleUnknown CaptionFontStyle = 0
+	CaptionFontStyleNormal  CaptionFontStyle = 1
+	CaptionFontStyleItalic  CaptionFontStyle = 2
 )
 
-func (e AVCaptionFontStyle) String() string {
+func (e CaptionFontStyle) String() string {
 	switch e {
-	case AVCaptionFontStyleUnknown:
-		return "AVCaptionFontStyleUnknown"
-	case AVCaptionFontStyleNormal:
-		return "AVCaptionFontStyleNormal"
-	case AVCaptionFontStyleItalic:
-		return "AVCaptionFontStyleItalic"
+	case CaptionFontStyleUnknown:
+		return "CaptionFontStyleUnknown"
+	case CaptionFontStyleNormal:
+		return "CaptionFontStyleNormal"
+	case CaptionFontStyleItalic:
+		return "CaptionFontStyleItalic"
 	default:
-		return fmt.Sprintf("AVCaptionFontStyle(%d)", int64(e))
+		return fmt.Sprintf("CaptionFontStyle(%d)", int64(e))
 	}
 }
 
 // Font weights for a caption.
-type AVCaptionFontWeight int64
+type CaptionFontWeight int64
 
 const (
-	AVCaptionFontWeightUnknown AVCaptionFontWeight = 0
-	AVCaptionFontWeightNormal  AVCaptionFontWeight = 1
-	AVCaptionFontWeightBold    AVCaptionFontWeight = 2
+	CaptionFontWeightUnknown CaptionFontWeight = 0
+	CaptionFontWeightNormal  CaptionFontWeight = 1
+	CaptionFontWeightBold    CaptionFontWeight = 2
 )
 
-func (e AVCaptionFontWeight) String() string {
+func (e CaptionFontWeight) String() string {
 	switch e {
-	case AVCaptionFontWeightUnknown:
-		return "AVCaptionFontWeightUnknown"
-	case AVCaptionFontWeightNormal:
-		return "AVCaptionFontWeightNormal"
-	case AVCaptionFontWeightBold:
-		return "AVCaptionFontWeightBold"
+	case CaptionFontWeightUnknown:
+		return "CaptionFontWeightUnknown"
+	case CaptionFontWeightNormal:
+		return "CaptionFontWeightNormal"
+	case CaptionFontWeightBold:
+		return "CaptionFontWeightBold"
 	default:
-		return fmt.Sprintf("AVCaptionFontWeight(%d)", int64(e))
+		return fmt.Sprintf("CaptionFontWeight(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the alignment of lines in a region.
-type AVCaptionRegionDisplayAlignment int64
+type CaptionRegionDisplayAlignment int64
 
 const (
-	AVCaptionRegionDisplayAlignmentBefore AVCaptionRegionDisplayAlignment = 0
-	AVCaptionRegionDisplayAlignmentCenter AVCaptionRegionDisplayAlignment = 1
-	AVCaptionRegionDisplayAlignmentAfter  AVCaptionRegionDisplayAlignment = 2
+	CaptionRegionDisplayAlignmentBefore CaptionRegionDisplayAlignment = 0
+	CaptionRegionDisplayAlignmentCenter CaptionRegionDisplayAlignment = 1
+	CaptionRegionDisplayAlignmentAfter  CaptionRegionDisplayAlignment = 2
 )
 
-func (e AVCaptionRegionDisplayAlignment) String() string {
+func (e CaptionRegionDisplayAlignment) String() string {
 	switch e {
-	case AVCaptionRegionDisplayAlignmentBefore:
-		return "AVCaptionRegionDisplayAlignmentBefore"
-	case AVCaptionRegionDisplayAlignmentCenter:
-		return "AVCaptionRegionDisplayAlignmentCenter"
-	case AVCaptionRegionDisplayAlignmentAfter:
-		return "AVCaptionRegionDisplayAlignmentAfter"
+	case CaptionRegionDisplayAlignmentBefore:
+		return "CaptionRegionDisplayAlignmentBefore"
+	case CaptionRegionDisplayAlignmentCenter:
+		return "CaptionRegionDisplayAlignmentCenter"
+	case CaptionRegionDisplayAlignmentAfter:
+		return "CaptionRegionDisplayAlignmentAfter"
 	default:
-		return fmt.Sprintf("AVCaptionRegionDisplayAlignment(%d)", int64(e))
+		return fmt.Sprintf("CaptionRegionDisplayAlignment(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the scrolling effects the system applies to a region.
-type AVCaptionRegionScroll int64
+type CaptionRegionScroll int64
 
 const (
-	AVCaptionRegionScrollNone   AVCaptionRegionScroll = 0
-	AVCaptionRegionScrollRollUp AVCaptionRegionScroll = 1
+	CaptionRegionScrollNone   CaptionRegionScroll = 0
+	CaptionRegionScrollRollUp CaptionRegionScroll = 1
 )
 
-func (e AVCaptionRegionScroll) String() string {
+func (e CaptionRegionScroll) String() string {
 	switch e {
-	case AVCaptionRegionScrollNone:
-		return "AVCaptionRegionScrollNone"
-	case AVCaptionRegionScrollRollUp:
-		return "AVCaptionRegionScrollRollUp"
+	case CaptionRegionScrollNone:
+		return "CaptionRegionScrollNone"
+	case CaptionRegionScrollRollUp:
+		return "CaptionRegionScrollRollUp"
 	default:
-		return fmt.Sprintf("AVCaptionRegionScroll(%d)", int64(e))
+		return fmt.Sprintf("CaptionRegionScroll(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the writing mode for a region.
-type AVCaptionRegionWritingMode int64
+type CaptionRegionWritingMode int64
 
 const (
-	AVCaptionRegionWritingModeLeftToRightAndTopToBottom AVCaptionRegionWritingMode = 0
-	AVCaptionRegionWritingModeTopToBottomAndRightToLeft AVCaptionRegionWritingMode = 2
+	CaptionRegionWritingModeLeftToRightAndTopToBottom CaptionRegionWritingMode = 0
+	CaptionRegionWritingModeTopToBottomAndRightToLeft CaptionRegionWritingMode = 2
 )
 
-func (e AVCaptionRegionWritingMode) String() string {
+func (e CaptionRegionWritingMode) String() string {
 	switch e {
-	case AVCaptionRegionWritingModeLeftToRightAndTopToBottom:
-		return "AVCaptionRegionWritingModeLeftToRightAndTopToBottom"
-	case AVCaptionRegionWritingModeTopToBottomAndRightToLeft:
-		return "AVCaptionRegionWritingModeTopToBottomAndRightToLeft"
+	case CaptionRegionWritingModeLeftToRightAndTopToBottom:
+		return "CaptionRegionWritingModeLeftToRightAndTopToBottom"
+	case CaptionRegionWritingModeTopToBottomAndRightToLeft:
+		return "CaptionRegionWritingModeTopToBottomAndRightToLeft"
 	default:
-		return fmt.Sprintf("AVCaptionRegionWritingMode(%d)", int64(e))
+		return fmt.Sprintf("CaptionRegionWritingMode(%d)", int64(e))
 	}
 }
 
-type AVCaptionRubyAlignment int64
+type CaptionRubyAlignment int64
 
 const (
-	AVCaptionRubyAlignmentStart                  AVCaptionRubyAlignment = 0
-	AVCaptionRubyAlignmentCenter                 AVCaptionRubyAlignment = 1
-	AVCaptionRubyAlignmentDistributeSpaceBetween AVCaptionRubyAlignment = 2
-	AVCaptionRubyAlignmentDistributeSpaceAround  AVCaptionRubyAlignment = 3
+	CaptionRubyAlignmentStart                  CaptionRubyAlignment = 0
+	CaptionRubyAlignmentCenter                 CaptionRubyAlignment = 1
+	CaptionRubyAlignmentDistributeSpaceBetween CaptionRubyAlignment = 2
+	CaptionRubyAlignmentDistributeSpaceAround  CaptionRubyAlignment = 3
 )
 
-func (e AVCaptionRubyAlignment) String() string {
+func (e CaptionRubyAlignment) String() string {
 	switch e {
-	case AVCaptionRubyAlignmentStart:
-		return "AVCaptionRubyAlignmentStart"
-	case AVCaptionRubyAlignmentCenter:
-		return "AVCaptionRubyAlignmentCenter"
-	case AVCaptionRubyAlignmentDistributeSpaceBetween:
-		return "AVCaptionRubyAlignmentDistributeSpaceBetween"
-	case AVCaptionRubyAlignmentDistributeSpaceAround:
-		return "AVCaptionRubyAlignmentDistributeSpaceAround"
+	case CaptionRubyAlignmentStart:
+		return "CaptionRubyAlignmentStart"
+	case CaptionRubyAlignmentCenter:
+		return "CaptionRubyAlignmentCenter"
+	case CaptionRubyAlignmentDistributeSpaceBetween:
+		return "CaptionRubyAlignmentDistributeSpaceBetween"
+	case CaptionRubyAlignmentDistributeSpaceAround:
+		return "CaptionRubyAlignmentDistributeSpaceAround"
 	default:
-		return fmt.Sprintf("AVCaptionRubyAlignment(%d)", int64(e))
+		return fmt.Sprintf("CaptionRubyAlignment(%d)", int64(e))
 	}
 }
 
-type AVCaptionRubyPosition int64
+type CaptionRubyPosition int64
 
 const (
-	AVCaptionRubyPositionBefore AVCaptionRubyPosition = 0
-	AVCaptionRubyPositionAfter  AVCaptionRubyPosition = 1
+	CaptionRubyPositionBefore CaptionRubyPosition = 0
+	CaptionRubyPositionAfter  CaptionRubyPosition = 1
 )
 
-func (e AVCaptionRubyPosition) String() string {
+func (e CaptionRubyPosition) String() string {
 	switch e {
-	case AVCaptionRubyPositionBefore:
-		return "AVCaptionRubyPositionBefore"
-	case AVCaptionRubyPositionAfter:
-		return "AVCaptionRubyPositionAfter"
+	case CaptionRubyPositionBefore:
+		return "CaptionRubyPositionBefore"
+	case CaptionRubyPositionAfter:
+		return "CaptionRubyPositionAfter"
 	default:
-		return fmt.Sprintf("AVCaptionRubyPosition(%d)", int64(e))
+		return fmt.Sprintf("CaptionRubyPosition(%d)", int64(e))
 	}
 }
 
 // Text alignment options for a caption.
-type AVCaptionTextAlignment int64
+type CaptionTextAlignment int64
 
 const (
-	AVCaptionTextAlignmentStart  AVCaptionTextAlignment = 0
-	AVCaptionTextAlignmentEnd    AVCaptionTextAlignment = 1
-	AVCaptionTextAlignmentCenter AVCaptionTextAlignment = 2
-	AVCaptionTextAlignmentLeft   AVCaptionTextAlignment = 3
-	AVCaptionTextAlignmentRight  AVCaptionTextAlignment = 4
+	CaptionTextAlignmentStart  CaptionTextAlignment = 0
+	CaptionTextAlignmentEnd    CaptionTextAlignment = 1
+	CaptionTextAlignmentCenter CaptionTextAlignment = 2
+	CaptionTextAlignmentLeft   CaptionTextAlignment = 3
+	CaptionTextAlignmentRight  CaptionTextAlignment = 4
 )
 
-func (e AVCaptionTextAlignment) String() string {
+func (e CaptionTextAlignment) String() string {
 	switch e {
-	case AVCaptionTextAlignmentStart:
-		return "AVCaptionTextAlignmentStart"
-	case AVCaptionTextAlignmentEnd:
-		return "AVCaptionTextAlignmentEnd"
-	case AVCaptionTextAlignmentCenter:
-		return "AVCaptionTextAlignmentCenter"
-	case AVCaptionTextAlignmentLeft:
-		return "AVCaptionTextAlignmentLeft"
-	case AVCaptionTextAlignmentRight:
-		return "AVCaptionTextAlignmentRight"
+	case CaptionTextAlignmentStart:
+		return "CaptionTextAlignmentStart"
+	case CaptionTextAlignmentEnd:
+		return "CaptionTextAlignmentEnd"
+	case CaptionTextAlignmentCenter:
+		return "CaptionTextAlignmentCenter"
+	case CaptionTextAlignmentLeft:
+		return "CaptionTextAlignmentLeft"
+	case CaptionTextAlignmentRight:
+		return "CaptionTextAlignmentRight"
 	default:
-		return fmt.Sprintf("AVCaptionTextAlignment(%d)", int64(e))
+		return fmt.Sprintf("CaptionTextAlignment(%d)", int64(e))
 	}
 }
 
 // The caption’s supported rendering policy options.
-type AVCaptionTextCombine int64
+type CaptionTextCombine int64
 
 const (
-	AVCaptionTextCombineAll         AVCaptionTextCombine = -1
-	AVCaptionTextCombineNone        AVCaptionTextCombine = 0
-	AVCaptionTextCombineOneDigit    AVCaptionTextCombine = 1
-	AVCaptionTextCombineTwoDigits   AVCaptionTextCombine = 2
-	AVCaptionTextCombineThreeDigits AVCaptionTextCombine = 3
-	AVCaptionTextCombineFourDigits  AVCaptionTextCombine = 4
+	CaptionTextCombineAll         CaptionTextCombine = -1
+	CaptionTextCombineNone        CaptionTextCombine = 0
+	CaptionTextCombineOneDigit    CaptionTextCombine = 1
+	CaptionTextCombineTwoDigits   CaptionTextCombine = 2
+	CaptionTextCombineThreeDigits CaptionTextCombine = 3
+	CaptionTextCombineFourDigits  CaptionTextCombine = 4
 )
 
-func (e AVCaptionTextCombine) String() string {
+func (e CaptionTextCombine) String() string {
 	switch e {
-	case AVCaptionTextCombineAll:
-		return "AVCaptionTextCombineAll"
-	case AVCaptionTextCombineNone:
-		return "AVCaptionTextCombineNone"
-	case AVCaptionTextCombineOneDigit:
-		return "AVCaptionTextCombineOneDigit"
-	case AVCaptionTextCombineTwoDigits:
-		return "AVCaptionTextCombineTwoDigits"
-	case AVCaptionTextCombineThreeDigits:
-		return "AVCaptionTextCombineThreeDigits"
-	case AVCaptionTextCombineFourDigits:
-		return "AVCaptionTextCombineFourDigits"
+	case CaptionTextCombineAll:
+		return "CaptionTextCombineAll"
+	case CaptionTextCombineNone:
+		return "CaptionTextCombineNone"
+	case CaptionTextCombineOneDigit:
+		return "CaptionTextCombineOneDigit"
+	case CaptionTextCombineTwoDigits:
+		return "CaptionTextCombineTwoDigits"
+	case CaptionTextCombineThreeDigits:
+		return "CaptionTextCombineThreeDigits"
+	case CaptionTextCombineFourDigits:
+		return "CaptionTextCombineFourDigits"
 	default:
-		return fmt.Sprintf("AVCaptionTextCombine(%d)", int64(e))
+		return fmt.Sprintf("CaptionTextCombine(%d)", int64(e))
 	}
 }
 
 // A structure that defines a units for caption formats.
-type AVCaptionUnitsType int64
+type CaptionUnitsType int64
 
 const (
 	// An unspecified unit type.
-	AVCaptionUnitsTypeUnspecified AVCaptionUnitsType = 0
+	CaptionUnitsTypeUnspecified CaptionUnitsType = 0
 	// A cell-based unit type.
-	AVCaptionUnitsTypeCells AVCaptionUnitsType = 1
+	CaptionUnitsTypeCells CaptionUnitsType = 1
 	// A percentage-based unit type.
-	AVCaptionUnitsTypePercent AVCaptionUnitsType = 2
+	CaptionUnitsTypePercent CaptionUnitsType = 2
 )
 
-func (e AVCaptionUnitsType) String() string {
+func (e CaptionUnitsType) String() string {
 	switch e {
-	case AVCaptionUnitsTypeUnspecified:
-		return "AVCaptionUnitsTypeUnspecified"
-	case AVCaptionUnitsTypeCells:
-		return "AVCaptionUnitsTypeCells"
-	case AVCaptionUnitsTypePercent:
-		return "AVCaptionUnitsTypePercent"
+	case CaptionUnitsTypeUnspecified:
+		return "CaptionUnitsTypeUnspecified"
+	case CaptionUnitsTypeCells:
+		return "CaptionUnitsTypeCells"
+	case CaptionUnitsTypePercent:
+		return "CaptionUnitsTypePercent"
 	default:
-		return fmt.Sprintf("AVCaptionUnitsType(%d)", int64(e))
+		return fmt.Sprintf("CaptionUnitsType(%d)", int64(e))
 	}
 }
 
 // An enumeration of auto focus systems.
-type AVCaptureAutoFocusSystem int64
+type CaptureAutoFocusSystem int64
 
 const (
-	AVCaptureAutoFocusSystemNone              AVCaptureAutoFocusSystem = 0
-	AVCaptureAutoFocusSystemContrastDetection AVCaptureAutoFocusSystem = 1
-	AVCaptureAutoFocusSystemPhaseDetection    AVCaptureAutoFocusSystem = 2
+	CaptureAutoFocusSystemNone              CaptureAutoFocusSystem = 0
+	CaptureAutoFocusSystemContrastDetection CaptureAutoFocusSystem = 1
+	CaptureAutoFocusSystemPhaseDetection    CaptureAutoFocusSystem = 2
 )
 
-func (e AVCaptureAutoFocusSystem) String() string {
+func (e CaptureAutoFocusSystem) String() string {
 	switch e {
-	case AVCaptureAutoFocusSystemNone:
-		return "AVCaptureAutoFocusSystemNone"
-	case AVCaptureAutoFocusSystemContrastDetection:
-		return "AVCaptureAutoFocusSystemContrastDetection"
-	case AVCaptureAutoFocusSystemPhaseDetection:
-		return "AVCaptureAutoFocusSystemPhaseDetection"
+	case CaptureAutoFocusSystemNone:
+		return "CaptureAutoFocusSystemNone"
+	case CaptureAutoFocusSystemContrastDetection:
+		return "CaptureAutoFocusSystemContrastDetection"
+	case CaptureAutoFocusSystemPhaseDetection:
+		return "CaptureAutoFocusSystemPhaseDetection"
 	default:
-		return fmt.Sprintf("AVCaptureAutoFocusSystem(%d)", int64(e))
+		return fmt.Sprintf("CaptureAutoFocusSystem(%d)", int64(e))
 	}
 }
 
 // Constants indicating the current camera lens smudge detection status.
-type AVCaptureCameraLensSmudgeDetectionStatus int64
+type CaptureCameraLensSmudgeDetectionStatus int64
 
 const (
 	// Indicates that the detection is not enabled.
-	AVCaptureCameraLensSmudgeDetectionStatusDisabled AVCaptureCameraLensSmudgeDetectionStatus = 0
+	CaptureCameraLensSmudgeDetectionStatusDisabled CaptureCameraLensSmudgeDetectionStatus = 0
 	// Indicates that the most recent detection found no smudge on the camera lens.
-	AVCaptureCameraLensSmudgeDetectionStatusSmudgeNotDetected AVCaptureCameraLensSmudgeDetectionStatus = 1
+	CaptureCameraLensSmudgeDetectionStatusSmudgeNotDetected CaptureCameraLensSmudgeDetectionStatus = 1
 	// Indicates that the most recent detection found the camera lens to be smudged.
-	AVCaptureCameraLensSmudgeDetectionStatusSmudged AVCaptureCameraLensSmudgeDetectionStatus = 2
+	CaptureCameraLensSmudgeDetectionStatusSmudged CaptureCameraLensSmudgeDetectionStatus = 2
 	// Indicates that the detection result has not settled, commonly caused by excessive camera movement or the content of the scene.
-	AVCaptureCameraLensSmudgeDetectionStatusUnknown AVCaptureCameraLensSmudgeDetectionStatus = 3
+	CaptureCameraLensSmudgeDetectionStatusUnknown CaptureCameraLensSmudgeDetectionStatus = 3
 )
 
-func (e AVCaptureCameraLensSmudgeDetectionStatus) String() string {
+func (e CaptureCameraLensSmudgeDetectionStatus) String() string {
 	switch e {
-	case AVCaptureCameraLensSmudgeDetectionStatusDisabled:
-		return "AVCaptureCameraLensSmudgeDetectionStatusDisabled"
-	case AVCaptureCameraLensSmudgeDetectionStatusSmudgeNotDetected:
-		return "AVCaptureCameraLensSmudgeDetectionStatusSmudgeNotDetected"
-	case AVCaptureCameraLensSmudgeDetectionStatusSmudged:
-		return "AVCaptureCameraLensSmudgeDetectionStatusSmudged"
-	case AVCaptureCameraLensSmudgeDetectionStatusUnknown:
-		return "AVCaptureCameraLensSmudgeDetectionStatusUnknown"
+	case CaptureCameraLensSmudgeDetectionStatusDisabled:
+		return "CaptureCameraLensSmudgeDetectionStatusDisabled"
+	case CaptureCameraLensSmudgeDetectionStatusSmudgeNotDetected:
+		return "CaptureCameraLensSmudgeDetectionStatusSmudgeNotDetected"
+	case CaptureCameraLensSmudgeDetectionStatusSmudged:
+		return "CaptureCameraLensSmudgeDetectionStatusSmudged"
+	case CaptureCameraLensSmudgeDetectionStatusUnknown:
+		return "CaptureCameraLensSmudgeDetectionStatusUnknown"
 	default:
-		return fmt.Sprintf("AVCaptureCameraLensSmudgeDetectionStatus(%d)", int64(e))
+		return fmt.Sprintf("CaptureCameraLensSmudgeDetectionStatus(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the current Center Stage control mode.
-type AVCaptureCenterStageControlMode int64
+type CaptureCenterStageControlMode int64
 
 const (
-	AVCaptureCenterStageControlModeUser        AVCaptureCenterStageControlMode = 0
-	AVCaptureCenterStageControlModeApp         AVCaptureCenterStageControlMode = 1
-	AVCaptureCenterStageControlModeCooperative AVCaptureCenterStageControlMode = 2
+	CaptureCenterStageControlModeUser        CaptureCenterStageControlMode = 0
+	CaptureCenterStageControlModeApp         CaptureCenterStageControlMode = 1
+	CaptureCenterStageControlModeCooperative CaptureCenterStageControlMode = 2
 )
 
-func (e AVCaptureCenterStageControlMode) String() string {
+func (e CaptureCenterStageControlMode) String() string {
 	switch e {
-	case AVCaptureCenterStageControlModeUser:
-		return "AVCaptureCenterStageControlModeUser"
-	case AVCaptureCenterStageControlModeApp:
-		return "AVCaptureCenterStageControlModeApp"
-	case AVCaptureCenterStageControlModeCooperative:
-		return "AVCaptureCenterStageControlModeCooperative"
+	case CaptureCenterStageControlModeUser:
+		return "CaptureCenterStageControlModeUser"
+	case CaptureCenterStageControlModeApp:
+		return "CaptureCenterStageControlModeApp"
+	case CaptureCenterStageControlModeCooperative:
+		return "CaptureCenterStageControlModeCooperative"
 	default:
-		return fmt.Sprintf("AVCaptureCenterStageControlMode(%d)", int64(e))
+		return fmt.Sprintf("CaptureCenterStageControlMode(%d)", int64(e))
 	}
 }
 
-type AVCaptureCinematicVideoFocusMode int64
+type CaptureCinematicVideoFocusMode int64
 
 const (
 	// Indicates that no focus mode is specified, in which case weak focus is used as default.
-	AVCaptureCinematicVideoFocusModeNone AVCaptureCinematicVideoFocusMode = 0
+	CaptureCinematicVideoFocusModeNone CaptureCinematicVideoFocusMode = 0
 	// Indicates that the subject should remain in focus until it exits the scene.
-	AVCaptureCinematicVideoFocusModeStrong AVCaptureCinematicVideoFocusMode = 1
+	CaptureCinematicVideoFocusModeStrong CaptureCinematicVideoFocusMode = 1
 	// Indicates that the Cinematic Video algorithm should automatically adjust focus according to the prominence of the subjects in the scene.
-	AVCaptureCinematicVideoFocusModeWeak AVCaptureCinematicVideoFocusMode = 2
+	CaptureCinematicVideoFocusModeWeak CaptureCinematicVideoFocusMode = 2
 )
 
-func (e AVCaptureCinematicVideoFocusMode) String() string {
+func (e CaptureCinematicVideoFocusMode) String() string {
 	switch e {
-	case AVCaptureCinematicVideoFocusModeNone:
-		return "AVCaptureCinematicVideoFocusModeNone"
-	case AVCaptureCinematicVideoFocusModeStrong:
-		return "AVCaptureCinematicVideoFocusModeStrong"
-	case AVCaptureCinematicVideoFocusModeWeak:
-		return "AVCaptureCinematicVideoFocusModeWeak"
+	case CaptureCinematicVideoFocusModeNone:
+		return "CaptureCinematicVideoFocusModeNone"
+	case CaptureCinematicVideoFocusModeStrong:
+		return "CaptureCinematicVideoFocusModeStrong"
+	case CaptureCinematicVideoFocusModeWeak:
+		return "CaptureCinematicVideoFocusModeWeak"
 	default:
-		return fmt.Sprintf("AVCaptureCinematicVideoFocusMode(%d)", int64(e))
+		return fmt.Sprintf("CaptureCinematicVideoFocusMode(%d)", int64(e))
 	}
 }
 
 // An enumeration of color spaces a device can support.
-type AVCaptureColorSpace int64
+type CaptureColorSpace int64
 
 const (
 	// The standard RGB color space.
-	AVCaptureColorSpace_sRGB AVCaptureColorSpace = 0
+	CaptureColorSpace_sRGB CaptureColorSpace = 0
 	// The P3 D65 wide color space that uses Illuminant D65 as the white point.
-	AVCaptureColorSpace_P3_D65 AVCaptureColorSpace = 1
+	CaptureColorSpace_P3_D65 CaptureColorSpace = 1
 )
 
-func (e AVCaptureColorSpace) String() string {
+func (e CaptureColorSpace) String() string {
 	switch e {
-	case AVCaptureColorSpace_sRGB:
-		return "AVCaptureColorSpace_sRGB"
-	case AVCaptureColorSpace_P3_D65:
-		return "AVCaptureColorSpace_P3_D65"
+	case CaptureColorSpace_sRGB:
+		return "CaptureColorSpace_sRGB"
+	case CaptureColorSpace_P3_D65:
+		return "CaptureColorSpace_P3_D65"
 	default:
-		return fmt.Sprintf("AVCaptureColorSpace(%d)", int64(e))
+		return fmt.Sprintf("CaptureColorSpace(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the physical position of a capture device.
-type AVCaptureDevicePosition int64
+type CaptureDevicePosition int64
 
 const (
-	AVCaptureDevicePositionUnspecified AVCaptureDevicePosition = 0
-	AVCaptureDevicePositionBack        AVCaptureDevicePosition = 1
-	AVCaptureDevicePositionFront       AVCaptureDevicePosition = 2
+	CaptureDevicePositionUnspecified CaptureDevicePosition = 0
+	CaptureDevicePositionBack        CaptureDevicePosition = 1
+	CaptureDevicePositionFront       CaptureDevicePosition = 2
 )
 
-func (e AVCaptureDevicePosition) String() string {
+func (e CaptureDevicePosition) String() string {
 	switch e {
-	case AVCaptureDevicePositionUnspecified:
-		return "AVCaptureDevicePositionUnspecified"
-	case AVCaptureDevicePositionBack:
-		return "AVCaptureDevicePositionBack"
-	case AVCaptureDevicePositionFront:
-		return "AVCaptureDevicePositionFront"
+	case CaptureDevicePositionUnspecified:
+		return "CaptureDevicePositionUnspecified"
+	case CaptureDevicePositionBack:
+		return "CaptureDevicePositionBack"
+	case CaptureDevicePositionFront:
+		return "CaptureDevicePositionFront"
 	default:
-		return fmt.Sprintf("AVCaptureDevicePosition(%d)", int64(e))
+		return fmt.Sprintf("CaptureDevicePosition(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the transport control’s current mode of playback, if it has one.
-type AVCaptureDeviceTransportControlsPlaybackMode int64
+type CaptureDeviceTransportControlsPlaybackMode int64
 
 const (
-	AVCaptureDeviceTransportControlsNotPlayingMode AVCaptureDeviceTransportControlsPlaybackMode = 0
-	AVCaptureDeviceTransportControlsPlayingMode    AVCaptureDeviceTransportControlsPlaybackMode = 1
+	CaptureDeviceTransportControlsNotPlayingMode CaptureDeviceTransportControlsPlaybackMode = 0
+	CaptureDeviceTransportControlsPlayingMode    CaptureDeviceTransportControlsPlaybackMode = 1
 )
 
-func (e AVCaptureDeviceTransportControlsPlaybackMode) String() string {
+func (e CaptureDeviceTransportControlsPlaybackMode) String() string {
 	switch e {
-	case AVCaptureDeviceTransportControlsNotPlayingMode:
-		return "AVCaptureDeviceTransportControlsNotPlayingMode"
-	case AVCaptureDeviceTransportControlsPlayingMode:
-		return "AVCaptureDeviceTransportControlsPlayingMode"
+	case CaptureDeviceTransportControlsNotPlayingMode:
+		return "CaptureDeviceTransportControlsNotPlayingMode"
+	case CaptureDeviceTransportControlsPlayingMode:
+		return "CaptureDeviceTransportControlsPlayingMode"
 	default:
-		return fmt.Sprintf("AVCaptureDeviceTransportControlsPlaybackMode(%d)", int64(e))
+		return fmt.Sprintf("CaptureDeviceTransportControlsPlaybackMode(%d)", int64(e))
 	}
 }
 
 // Constants that specify the exposure mode of a capture device.
-type AVCaptureExposureMode int64
+type CaptureExposureMode int64
 
 const (
-	AVCaptureExposureModeLocked                 AVCaptureExposureMode = 0
-	AVCaptureExposureModeAutoExpose             AVCaptureExposureMode = 1
-	AVCaptureExposureModeContinuousAutoExposure AVCaptureExposureMode = 2
-	AVCaptureExposureModeCustom                 AVCaptureExposureMode = 3
+	CaptureExposureModeLocked                 CaptureExposureMode = 0
+	CaptureExposureModeAutoExpose             CaptureExposureMode = 1
+	CaptureExposureModeContinuousAutoExposure CaptureExposureMode = 2
+	CaptureExposureModeCustom                 CaptureExposureMode = 3
 )
 
-func (e AVCaptureExposureMode) String() string {
+func (e CaptureExposureMode) String() string {
 	switch e {
-	case AVCaptureExposureModeLocked:
-		return "AVCaptureExposureModeLocked"
-	case AVCaptureExposureModeAutoExpose:
-		return "AVCaptureExposureModeAutoExpose"
-	case AVCaptureExposureModeContinuousAutoExposure:
-		return "AVCaptureExposureModeContinuousAutoExposure"
-	case AVCaptureExposureModeCustom:
-		return "AVCaptureExposureModeCustom"
+	case CaptureExposureModeLocked:
+		return "CaptureExposureModeLocked"
+	case CaptureExposureModeAutoExpose:
+		return "CaptureExposureModeAutoExpose"
+	case CaptureExposureModeContinuousAutoExposure:
+		return "CaptureExposureModeContinuousAutoExposure"
+	case CaptureExposureModeCustom:
+		return "CaptureExposureModeCustom"
 	default:
-		return fmt.Sprintf("AVCaptureExposureMode(%d)", int64(e))
+		return fmt.Sprintf("CaptureExposureMode(%d)", int64(e))
 	}
 }
 
 // Constants that specify the flash modes of a capture device.
-type AVCaptureFlashMode int64
+type CaptureFlashMode int64
 
 const (
-	AVCaptureFlashModeOff  AVCaptureFlashMode = 0
-	AVCaptureFlashModeOn   AVCaptureFlashMode = 1
-	AVCaptureFlashModeAuto AVCaptureFlashMode = 2
+	CaptureFlashModeOff  CaptureFlashMode = 0
+	CaptureFlashModeOn   CaptureFlashMode = 1
+	CaptureFlashModeAuto CaptureFlashMode = 2
 )
 
-func (e AVCaptureFlashMode) String() string {
+func (e CaptureFlashMode) String() string {
 	switch e {
-	case AVCaptureFlashModeOff:
-		return "AVCaptureFlashModeOff"
-	case AVCaptureFlashModeOn:
-		return "AVCaptureFlashModeOn"
-	case AVCaptureFlashModeAuto:
-		return "AVCaptureFlashModeAuto"
+	case CaptureFlashModeOff:
+		return "CaptureFlashModeOff"
+	case CaptureFlashModeOn:
+		return "CaptureFlashModeOn"
+	case CaptureFlashModeAuto:
+		return "CaptureFlashModeAuto"
 	default:
-		return fmt.Sprintf("AVCaptureFlashMode(%d)", int64(e))
+		return fmt.Sprintf("CaptureFlashMode(%d)", int64(e))
 	}
 }
 
 // Constants to specify the focus mode of a capture device.
-type AVCaptureFocusMode int64
+type CaptureFocusMode int64
 
 const (
-	AVCaptureFocusModeLocked              AVCaptureFocusMode = 0
-	AVCaptureFocusModeAutoFocus           AVCaptureFocusMode = 1
-	AVCaptureFocusModeContinuousAutoFocus AVCaptureFocusMode = 2
+	CaptureFocusModeLocked              CaptureFocusMode = 0
+	CaptureFocusModeAutoFocus           CaptureFocusMode = 1
+	CaptureFocusModeContinuousAutoFocus CaptureFocusMode = 2
 )
 
-func (e AVCaptureFocusMode) String() string {
+func (e CaptureFocusMode) String() string {
 	switch e {
-	case AVCaptureFocusModeLocked:
-		return "AVCaptureFocusModeLocked"
-	case AVCaptureFocusModeAutoFocus:
-		return "AVCaptureFocusModeAutoFocus"
-	case AVCaptureFocusModeContinuousAutoFocus:
-		return "AVCaptureFocusModeContinuousAutoFocus"
+	case CaptureFocusModeLocked:
+		return "CaptureFocusModeLocked"
+	case CaptureFocusModeAutoFocus:
+		return "CaptureFocusModeAutoFocus"
+	case CaptureFocusModeContinuousAutoFocus:
+		return "CaptureFocusModeContinuousAutoFocus"
 	default:
-		return fmt.Sprintf("AVCaptureFocusMode(%d)", int64(e))
+		return fmt.Sprintf("CaptureFocusMode(%d)", int64(e))
 	}
 }
 
 // Constants that define the available microphone modes.
-type AVCaptureMicrophoneMode int64
+type CaptureMicrophoneMode int64
 
 const (
-	AVCaptureMicrophoneModeStandard       AVCaptureMicrophoneMode = 0
-	AVCaptureMicrophoneModeWideSpectrum   AVCaptureMicrophoneMode = 1
-	AVCaptureMicrophoneModeVoiceIsolation AVCaptureMicrophoneMode = 2
+	CaptureMicrophoneModeStandard       CaptureMicrophoneMode = 0
+	CaptureMicrophoneModeWideSpectrum   CaptureMicrophoneMode = 1
+	CaptureMicrophoneModeVoiceIsolation CaptureMicrophoneMode = 2
 )
 
-func (e AVCaptureMicrophoneMode) String() string {
+func (e CaptureMicrophoneMode) String() string {
 	switch e {
-	case AVCaptureMicrophoneModeStandard:
-		return "AVCaptureMicrophoneModeStandard"
-	case AVCaptureMicrophoneModeWideSpectrum:
-		return "AVCaptureMicrophoneModeWideSpectrum"
-	case AVCaptureMicrophoneModeVoiceIsolation:
-		return "AVCaptureMicrophoneModeVoiceIsolation"
+	case CaptureMicrophoneModeStandard:
+		return "CaptureMicrophoneModeStandard"
+	case CaptureMicrophoneModeWideSpectrum:
+		return "CaptureMicrophoneModeWideSpectrum"
+	case CaptureMicrophoneModeVoiceIsolation:
+		return "CaptureMicrophoneModeVoiceIsolation"
 	default:
-		return fmt.Sprintf("AVCaptureMicrophoneMode(%d)", int64(e))
+		return fmt.Sprintf("CaptureMicrophoneMode(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the modes of multichannel audio.
-type AVCaptureMultichannelAudioMode int64
+type CaptureMultichannelAudioMode int64
 
 const (
 	// A mode that indicates there’s no multichannel audio.
-	AVCaptureMultichannelAudioModeNone AVCaptureMultichannelAudioMode = 0
+	CaptureMultichannelAudioModeNone CaptureMultichannelAudioMode = 0
 	// A mode that indicates the recording uses stereo audio.
-	AVCaptureMultichannelAudioModeStereo AVCaptureMultichannelAudioMode = 1
+	CaptureMultichannelAudioModeStereo CaptureMultichannelAudioMode = 1
 	// An audio mode that indicates the recording uses first-order ambisonics.
-	AVCaptureMultichannelAudioModeFirstOrderAmbisonics AVCaptureMultichannelAudioMode = 2
+	CaptureMultichannelAudioModeFirstOrderAmbisonics CaptureMultichannelAudioMode = 2
 )
 
-func (e AVCaptureMultichannelAudioMode) String() string {
+func (e CaptureMultichannelAudioMode) String() string {
 	switch e {
-	case AVCaptureMultichannelAudioModeNone:
-		return "AVCaptureMultichannelAudioModeNone"
-	case AVCaptureMultichannelAudioModeStereo:
-		return "AVCaptureMultichannelAudioModeStereo"
-	case AVCaptureMultichannelAudioModeFirstOrderAmbisonics:
-		return "AVCaptureMultichannelAudioModeFirstOrderAmbisonics"
+	case CaptureMultichannelAudioModeNone:
+		return "CaptureMultichannelAudioModeNone"
+	case CaptureMultichannelAudioModeStereo:
+		return "CaptureMultichannelAudioModeStereo"
+	case CaptureMultichannelAudioModeFirstOrderAmbisonics:
+		return "CaptureMultichannelAudioModeFirstOrderAmbisonics"
 	default:
-		return fmt.Sprintf("AVCaptureMultichannelAudioMode(%d)", int64(e))
+		return fmt.Sprintf("CaptureMultichannelAudioMode(%d)", int64(e))
 	}
 }
 
 // Constants that indicate whether the output is ready to receive capture requests.
-type AVCapturePhotoOutputCaptureReadiness int64
+type CapturePhotoOutputCaptureReadiness int64
 
 const (
-	AVCapturePhotoOutputCaptureReadinessSessionNotRunning            AVCapturePhotoOutputCaptureReadiness = 0
-	AVCapturePhotoOutputCaptureReadinessReady                        AVCapturePhotoOutputCaptureReadiness = 1
-	AVCapturePhotoOutputCaptureReadinessNotReadyMomentarily          AVCapturePhotoOutputCaptureReadiness = 2
-	AVCapturePhotoOutputCaptureReadinessNotReadyWaitingForCapture    AVCapturePhotoOutputCaptureReadiness = 3
-	AVCapturePhotoOutputCaptureReadinessNotReadyWaitingForProcessing AVCapturePhotoOutputCaptureReadiness = 4
+	CapturePhotoOutputCaptureReadinessSessionNotRunning            CapturePhotoOutputCaptureReadiness = 0
+	CapturePhotoOutputCaptureReadinessReady                        CapturePhotoOutputCaptureReadiness = 1
+	CapturePhotoOutputCaptureReadinessNotReadyMomentarily          CapturePhotoOutputCaptureReadiness = 2
+	CapturePhotoOutputCaptureReadinessNotReadyWaitingForCapture    CapturePhotoOutputCaptureReadiness = 3
+	CapturePhotoOutputCaptureReadinessNotReadyWaitingForProcessing CapturePhotoOutputCaptureReadiness = 4
 )
 
-func (e AVCapturePhotoOutputCaptureReadiness) String() string {
+func (e CapturePhotoOutputCaptureReadiness) String() string {
 	switch e {
-	case AVCapturePhotoOutputCaptureReadinessSessionNotRunning:
-		return "AVCapturePhotoOutputCaptureReadinessSessionNotRunning"
-	case AVCapturePhotoOutputCaptureReadinessReady:
-		return "AVCapturePhotoOutputCaptureReadinessReady"
-	case AVCapturePhotoOutputCaptureReadinessNotReadyMomentarily:
-		return "AVCapturePhotoOutputCaptureReadinessNotReadyMomentarily"
-	case AVCapturePhotoOutputCaptureReadinessNotReadyWaitingForCapture:
-		return "AVCapturePhotoOutputCaptureReadinessNotReadyWaitingForCapture"
-	case AVCapturePhotoOutputCaptureReadinessNotReadyWaitingForProcessing:
-		return "AVCapturePhotoOutputCaptureReadinessNotReadyWaitingForProcessing"
+	case CapturePhotoOutputCaptureReadinessSessionNotRunning:
+		return "CapturePhotoOutputCaptureReadinessSessionNotRunning"
+	case CapturePhotoOutputCaptureReadinessReady:
+		return "CapturePhotoOutputCaptureReadinessReady"
+	case CapturePhotoOutputCaptureReadinessNotReadyMomentarily:
+		return "CapturePhotoOutputCaptureReadinessNotReadyMomentarily"
+	case CapturePhotoOutputCaptureReadinessNotReadyWaitingForCapture:
+		return "CapturePhotoOutputCaptureReadinessNotReadyWaitingForCapture"
+	case CapturePhotoOutputCaptureReadinessNotReadyWaitingForProcessing:
+		return "CapturePhotoOutputCaptureReadinessNotReadyWaitingForProcessing"
 	default:
-		return fmt.Sprintf("AVCapturePhotoOutputCaptureReadiness(%d)", int64(e))
+		return fmt.Sprintf("CapturePhotoOutputCaptureReadiness(%d)", int64(e))
 	}
 }
 
 // Constants that indicate how to prioritize photo quality relative to capture speed.
-type AVCapturePhotoQualityPrioritization int64
+type CapturePhotoQualityPrioritization int64
 
 const (
-	AVCapturePhotoQualityPrioritizationSpeed    AVCapturePhotoQualityPrioritization = 1
-	AVCapturePhotoQualityPrioritizationBalanced AVCapturePhotoQualityPrioritization = 2
-	AVCapturePhotoQualityPrioritizationQuality  AVCapturePhotoQualityPrioritization = 3
+	CapturePhotoQualityPrioritizationSpeed    CapturePhotoQualityPrioritization = 1
+	CapturePhotoQualityPrioritizationBalanced CapturePhotoQualityPrioritization = 2
+	CapturePhotoQualityPrioritizationQuality  CapturePhotoQualityPrioritization = 3
 )
 
-func (e AVCapturePhotoQualityPrioritization) String() string {
+func (e CapturePhotoQualityPrioritization) String() string {
 	switch e {
-	case AVCapturePhotoQualityPrioritizationSpeed:
-		return "AVCapturePhotoQualityPrioritizationSpeed"
-	case AVCapturePhotoQualityPrioritizationBalanced:
-		return "AVCapturePhotoQualityPrioritizationBalanced"
-	case AVCapturePhotoQualityPrioritizationQuality:
-		return "AVCapturePhotoQualityPrioritizationQuality"
+	case CapturePhotoQualityPrioritizationSpeed:
+		return "CapturePhotoQualityPrioritizationSpeed"
+	case CapturePhotoQualityPrioritizationBalanced:
+		return "CapturePhotoQualityPrioritizationBalanced"
+	case CapturePhotoQualityPrioritizationQuality:
+		return "CapturePhotoQualityPrioritizationQuality"
 	default:
-		return fmt.Sprintf("AVCapturePhotoQualityPrioritization(%d)", int64(e))
+		return fmt.Sprintf("CapturePhotoQualityPrioritization(%d)", int64(e))
 	}
 }
 
 // A structure that defines the conditions in which to restrict camera switching.
 // Bitmask — values may be combined with |.
-type AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions uint64
+type CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions uint64
 
 const (
 	// Disallow switching to a fallback camera.
-	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone                AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 0
-	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged    AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 1
-	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged    AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 2
-	AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionExposureModeChanged AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 4
+	CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone                CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 0
+	CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged    CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 1
+	CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged    CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 2
+	CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionExposureModeChanged CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions = 4
 )
 
-func (e AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) String() string {
+func (e CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) String() string {
 	var parts []string
-	if e&AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged != 0 {
-		parts = append(parts, "AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged")
+	if e&CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged != 0 {
+		parts = append(parts, "CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionVideoZoomChanged")
 	}
-	if e&AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged != 0 {
-		parts = append(parts, "AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged")
+	if e&CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged != 0 {
+		parts = append(parts, "CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionFocusModeChanged")
 	}
-	if e&AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionExposureModeChanged != 0 {
-		parts = append(parts, "AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionExposureModeChanged")
+	if e&CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionExposureModeChanged != 0 {
+		parts = append(parts, "CapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionExposureModeChanged")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -907,259 +907,239 @@ func (e AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions) 
 }
 
 // Constants that control when to allow a virtual device to switch its active primary constituent device.
-type AVCapturePrimaryConstituentDeviceSwitchingBehavior int64
+type CapturePrimaryConstituentDeviceSwitchingBehavior int64
 
 const (
-	AVCapturePrimaryConstituentDeviceSwitchingBehaviorUnsupported AVCapturePrimaryConstituentDeviceSwitchingBehavior = 0
-	AVCapturePrimaryConstituentDeviceSwitchingBehaviorAuto        AVCapturePrimaryConstituentDeviceSwitchingBehavior = 1
-	AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted  AVCapturePrimaryConstituentDeviceSwitchingBehavior = 2
-	AVCapturePrimaryConstituentDeviceSwitchingBehaviorLocked      AVCapturePrimaryConstituentDeviceSwitchingBehavior = 3
+	CapturePrimaryConstituentDeviceSwitchingBehaviorUnsupported CapturePrimaryConstituentDeviceSwitchingBehavior = 0
+	CapturePrimaryConstituentDeviceSwitchingBehaviorAuto        CapturePrimaryConstituentDeviceSwitchingBehavior = 1
+	CapturePrimaryConstituentDeviceSwitchingBehaviorRestricted  CapturePrimaryConstituentDeviceSwitchingBehavior = 2
+	CapturePrimaryConstituentDeviceSwitchingBehaviorLocked      CapturePrimaryConstituentDeviceSwitchingBehavior = 3
 )
 
-func (e AVCapturePrimaryConstituentDeviceSwitchingBehavior) String() string {
+func (e CapturePrimaryConstituentDeviceSwitchingBehavior) String() string {
 	switch e {
-	case AVCapturePrimaryConstituentDeviceSwitchingBehaviorUnsupported:
-		return "AVCapturePrimaryConstituentDeviceSwitchingBehaviorUnsupported"
-	case AVCapturePrimaryConstituentDeviceSwitchingBehaviorAuto:
-		return "AVCapturePrimaryConstituentDeviceSwitchingBehaviorAuto"
-	case AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted:
-		return "AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted"
-	case AVCapturePrimaryConstituentDeviceSwitchingBehaviorLocked:
-		return "AVCapturePrimaryConstituentDeviceSwitchingBehaviorLocked"
+	case CapturePrimaryConstituentDeviceSwitchingBehaviorUnsupported:
+		return "CapturePrimaryConstituentDeviceSwitchingBehaviorUnsupported"
+	case CapturePrimaryConstituentDeviceSwitchingBehaviorAuto:
+		return "CapturePrimaryConstituentDeviceSwitchingBehaviorAuto"
+	case CapturePrimaryConstituentDeviceSwitchingBehaviorRestricted:
+		return "CapturePrimaryConstituentDeviceSwitchingBehaviorRestricted"
+	case CapturePrimaryConstituentDeviceSwitchingBehaviorLocked:
+		return "CapturePrimaryConstituentDeviceSwitchingBehaviorLocked"
 	default:
-		return fmt.Sprintf("AVCapturePrimaryConstituentDeviceSwitchingBehavior(%d)", int64(e))
+		return fmt.Sprintf("CapturePrimaryConstituentDeviceSwitchingBehavior(%d)", int64(e))
 	}
 }
 
 // Constants that describe the capture device configuration user interfaces.
-type AVCaptureSystemUserInterface int64
+type CaptureSystemUserInterface int64
 
 const (
-	AVCaptureSystemUserInterfaceVideoEffects    AVCaptureSystemUserInterface = 1
-	AVCaptureSystemUserInterfaceMicrophoneModes AVCaptureSystemUserInterface = 2
+	CaptureSystemUserInterfaceVideoEffects    CaptureSystemUserInterface = 1
+	CaptureSystemUserInterfaceMicrophoneModes CaptureSystemUserInterface = 2
 )
 
-func (e AVCaptureSystemUserInterface) String() string {
+func (e CaptureSystemUserInterface) String() string {
 	switch e {
-	case AVCaptureSystemUserInterfaceVideoEffects:
-		return "AVCaptureSystemUserInterfaceVideoEffects"
-	case AVCaptureSystemUserInterfaceMicrophoneModes:
-		return "AVCaptureSystemUserInterfaceMicrophoneModes"
+	case CaptureSystemUserInterfaceVideoEffects:
+		return "CaptureSystemUserInterfaceVideoEffects"
+	case CaptureSystemUserInterfaceMicrophoneModes:
+		return "CaptureSystemUserInterfaceMicrophoneModes"
 	default:
-		return fmt.Sprintf("AVCaptureSystemUserInterface(%d)", int64(e))
+		return fmt.Sprintf("CaptureSystemUserInterface(%d)", int64(e))
 	}
 }
 
-type AVCaptureTimecodeSourceType int64
+type CaptureTimecodeSourceType int64
 
 const (
 	// No internal or external source is adopted. Timecodes are zero-based, sequentially generated frame counts.
-	AVCaptureTimecodeSourceTypeFrameCount AVCaptureTimecodeSourceType = 0
+	CaptureTimecodeSourceTypeFrameCount CaptureTimecodeSourceType = 0
 	// Synchronizes timecode to the system clock for real-time applications. Useful for live events or scenarios requiring alignment with the actual time of day.
-	AVCaptureTimecodeSourceTypeRealTimeClock AVCaptureTimecodeSourceType = 1
+	CaptureTimecodeSourceTypeRealTimeClock CaptureTimecodeSourceType = 1
 	// Synchronizes timecode to an external timecode data stream. Ideal for professional audio and video synchronization with external quarter-frame MIDI or HID timecode hardware.
-	AVCaptureTimecodeSourceTypeExternal AVCaptureTimecodeSourceType = 2
+	CaptureTimecodeSourceTypeExternal CaptureTimecodeSourceType = 2
 )
 
-func (e AVCaptureTimecodeSourceType) String() string {
+func (e CaptureTimecodeSourceType) String() string {
 	switch e {
-	case AVCaptureTimecodeSourceTypeFrameCount:
-		return "AVCaptureTimecodeSourceTypeFrameCount"
-	case AVCaptureTimecodeSourceTypeRealTimeClock:
-		return "AVCaptureTimecodeSourceTypeRealTimeClock"
-	case AVCaptureTimecodeSourceTypeExternal:
-		return "AVCaptureTimecodeSourceTypeExternal"
+	case CaptureTimecodeSourceTypeFrameCount:
+		return "CaptureTimecodeSourceTypeFrameCount"
+	case CaptureTimecodeSourceTypeRealTimeClock:
+		return "CaptureTimecodeSourceTypeRealTimeClock"
+	case CaptureTimecodeSourceTypeExternal:
+		return "CaptureTimecodeSourceTypeExternal"
 	default:
-		return fmt.Sprintf("AVCaptureTimecodeSourceType(%d)", int64(e))
+		return fmt.Sprintf("CaptureTimecodeSourceType(%d)", int64(e))
 	}
 }
 
 // Constants to specify the capture device’s torch mode.
-type AVCaptureTorchMode int64
+type CaptureTorchMode int64
 
 const (
-	AVCaptureTorchModeOff  AVCaptureTorchMode = 0
-	AVCaptureTorchModeOn   AVCaptureTorchMode = 1
-	AVCaptureTorchModeAuto AVCaptureTorchMode = 2
+	CaptureTorchModeOff  CaptureTorchMode = 0
+	CaptureTorchModeOn   CaptureTorchMode = 1
+	CaptureTorchModeAuto CaptureTorchMode = 2
 )
 
-func (e AVCaptureTorchMode) String() string {
+func (e CaptureTorchMode) String() string {
 	switch e {
-	case AVCaptureTorchModeOff:
-		return "AVCaptureTorchModeOff"
-	case AVCaptureTorchModeOn:
-		return "AVCaptureTorchModeOn"
-	case AVCaptureTorchModeAuto:
-		return "AVCaptureTorchModeAuto"
+	case CaptureTorchModeOff:
+		return "CaptureTorchModeOff"
+	case CaptureTorchModeOn:
+		return "CaptureTorchModeOn"
+	case CaptureTorchModeAuto:
+		return "CaptureTorchModeAuto"
 	default:
-		return fmt.Sprintf("AVCaptureTorchMode(%d)", int64(e))
+		return fmt.Sprintf("CaptureTorchMode(%d)", int64(e))
 	}
 }
 
 // Constants indicating video orientation.
 //
 // Deprecated: Use AVCaptureDeviceRotationCoordinator instead
-type AVCaptureVideoOrientation int64
+type CaptureVideoOrientation int64
 
 const (
 	// Indicates that video should be oriented vertically, top at the top.
-	AVCaptureVideoOrientationPortrait AVCaptureVideoOrientation = 1
+	CaptureVideoOrientationPortrait CaptureVideoOrientation = 1
 	// Indicates that video should be oriented vertically, top at the bottom.
-	AVCaptureVideoOrientationPortraitUpsideDown AVCaptureVideoOrientation = 2
+	CaptureVideoOrientationPortraitUpsideDown CaptureVideoOrientation = 2
 	// Indicates that video should be oriented horizontally, top on the left.
-	AVCaptureVideoOrientationLandscapeRight AVCaptureVideoOrientation = 3
+	CaptureVideoOrientationLandscapeRight CaptureVideoOrientation = 3
 	// Indicates that video should be oriented horizontally, top on the right.
-	AVCaptureVideoOrientationLandscapeLeft AVCaptureVideoOrientation = 4
+	CaptureVideoOrientationLandscapeLeft CaptureVideoOrientation = 4
 )
 
-func (e AVCaptureVideoOrientation) String() string {
+func (e CaptureVideoOrientation) String() string {
 	switch e {
-	case AVCaptureVideoOrientationPortrait:
-		return "AVCaptureVideoOrientationPortrait"
-	case AVCaptureVideoOrientationPortraitUpsideDown:
-		return "AVCaptureVideoOrientationPortraitUpsideDown"
-	case AVCaptureVideoOrientationLandscapeRight:
-		return "AVCaptureVideoOrientationLandscapeRight"
-	case AVCaptureVideoOrientationLandscapeLeft:
-		return "AVCaptureVideoOrientationLandscapeLeft"
+	case CaptureVideoOrientationPortrait:
+		return "CaptureVideoOrientationPortrait"
+	case CaptureVideoOrientationPortraitUpsideDown:
+		return "CaptureVideoOrientationPortraitUpsideDown"
+	case CaptureVideoOrientationLandscapeRight:
+		return "CaptureVideoOrientationLandscapeRight"
+	case CaptureVideoOrientationLandscapeLeft:
+		return "CaptureVideoOrientationLandscapeLeft"
 	default:
-		return fmt.Sprintf("AVCaptureVideoOrientation(%d)", int64(e))
+		return fmt.Sprintf("CaptureVideoOrientation(%d)", int64(e))
 	}
 }
 
 // Constants to specify the white balance mode of a capture device.
-type AVCaptureWhiteBalanceMode int64
+type CaptureWhiteBalanceMode int64
 
 const (
-	AVCaptureWhiteBalanceModeLocked                     AVCaptureWhiteBalanceMode = 0
-	AVCaptureWhiteBalanceModeAutoWhiteBalance           AVCaptureWhiteBalanceMode = 1
-	AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance AVCaptureWhiteBalanceMode = 2
+	CaptureWhiteBalanceModeLocked                     CaptureWhiteBalanceMode = 0
+	CaptureWhiteBalanceModeAutoWhiteBalance           CaptureWhiteBalanceMode = 1
+	CaptureWhiteBalanceModeContinuousAutoWhiteBalance CaptureWhiteBalanceMode = 2
 )
 
-func (e AVCaptureWhiteBalanceMode) String() string {
+func (e CaptureWhiteBalanceMode) String() string {
 	switch e {
-	case AVCaptureWhiteBalanceModeLocked:
-		return "AVCaptureWhiteBalanceModeLocked"
-	case AVCaptureWhiteBalanceModeAutoWhiteBalance:
-		return "AVCaptureWhiteBalanceModeAutoWhiteBalance"
-	case AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance:
-		return "AVCaptureWhiteBalanceModeContinuousAutoWhiteBalance"
+	case CaptureWhiteBalanceModeLocked:
+		return "CaptureWhiteBalanceModeLocked"
+	case CaptureWhiteBalanceModeAutoWhiteBalance:
+		return "CaptureWhiteBalanceModeAutoWhiteBalance"
+	case CaptureWhiteBalanceModeContinuousAutoWhiteBalance:
+		return "CaptureWhiteBalanceModeContinuousAutoWhiteBalance"
 	default:
-		return fmt.Sprintf("AVCaptureWhiteBalanceMode(%d)", int64(e))
+		return fmt.Sprintf("CaptureWhiteBalanceMode(%d)", int64(e))
 	}
 }
 
 // A value representing the status of a content authorization request.
-type AVContentAuthorizationStatus int64
+type ContentAuthorizationStatus int64
 
 const (
 	// The content authorization content request hasn’t completed.
-	AVContentAuthorizationUnknown AVContentAuthorizationStatus = 0
+	ContentAuthorizationUnknown ContentAuthorizationStatus = 0
 	// The last completed call to request content authorization completed.
-	AVContentAuthorizationCompleted AVContentAuthorizationStatus = 1
+	ContentAuthorizationCompleted ContentAuthorizationStatus = 1
 	// The last call to request content authorization was cancelled by the user.
-	AVContentAuthorizationCancelled AVContentAuthorizationStatus = 2
+	ContentAuthorizationCancelled ContentAuthorizationStatus = 2
 	// The last call to request content authorization was cancelled because the timeout interval was reached.
-	AVContentAuthorizationTimedOut AVContentAuthorizationStatus = 3
+	ContentAuthorizationTimedOut ContentAuthorizationStatus = 3
 	// The last call to request content authorization couldn’t be completed because another asset is currently attempting authorization.
-	AVContentAuthorizationBusy AVContentAuthorizationStatus = 4
+	ContentAuthorizationBusy ContentAuthorizationStatus = 4
 	// The last call to request content authorization couldn’t be completed because there was no known mechanism by which to attempt authorization.
-	AVContentAuthorizationNotAvailable AVContentAuthorizationStatus = 5
+	ContentAuthorizationNotAvailable ContentAuthorizationStatus = 5
 	// The last call to request content authorization couldn’t be completed in a non-recoverable way.
-	AVContentAuthorizationNotPossible AVContentAuthorizationStatus = 6
+	ContentAuthorizationNotPossible ContentAuthorizationStatus = 6
 )
 
-func (e AVContentAuthorizationStatus) String() string {
+func (e ContentAuthorizationStatus) String() string {
 	switch e {
-	case AVContentAuthorizationUnknown:
-		return "AVContentAuthorizationUnknown"
-	case AVContentAuthorizationCompleted:
-		return "AVContentAuthorizationCompleted"
-	case AVContentAuthorizationCancelled:
-		return "AVContentAuthorizationCancelled"
-	case AVContentAuthorizationTimedOut:
-		return "AVContentAuthorizationTimedOut"
-	case AVContentAuthorizationBusy:
-		return "AVContentAuthorizationBusy"
-	case AVContentAuthorizationNotAvailable:
-		return "AVContentAuthorizationNotAvailable"
-	case AVContentAuthorizationNotPossible:
-		return "AVContentAuthorizationNotPossible"
+	case ContentAuthorizationUnknown:
+		return "ContentAuthorizationUnknown"
+	case ContentAuthorizationCompleted:
+		return "ContentAuthorizationCompleted"
+	case ContentAuthorizationCancelled:
+		return "ContentAuthorizationCancelled"
+	case ContentAuthorizationTimedOut:
+		return "ContentAuthorizationTimedOut"
+	case ContentAuthorizationBusy:
+		return "ContentAuthorizationBusy"
+	case ContentAuthorizationNotAvailable:
+		return "ContentAuthorizationNotAvailable"
+	case ContentAuthorizationNotPossible:
+		return "ContentAuthorizationNotPossible"
 	default:
-		return fmt.Sprintf("AVContentAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("ContentAuthorizationStatus(%d)", int64(e))
 	}
 }
 
 // The status for a content key request.
-type AVContentKeyRequestStatus int64
+type ContentKeyRequestStatus int64
 
 const (
 	// Indicates that the request has just been created.
-	AVContentKeyRequestStatusRequestingResponse AVContentKeyRequestStatus = 0
+	ContentKeyRequestStatusRequestingResponse ContentKeyRequestStatus = 0
 	// Indicates that a response to a key reequest was received and key is in use. This does not indicate that the key is valid.
-	AVContentKeyRequestStatusReceivedResponse AVContentKeyRequestStatus = 1
+	ContentKeyRequestStatusReceivedResponse ContentKeyRequestStatus = 1
 	// Indicates that the key request was renewed. This does not indicate that the key is valid.
-	AVContentKeyRequestStatusRenewed AVContentKeyRequestStatus = 2
+	ContentKeyRequestStatusRenewed ContentKeyRequestStatus = 2
 	// Indicates that the key request was retried.
-	AVContentKeyRequestStatusRetried AVContentKeyRequestStatus = 3
+	ContentKeyRequestStatusRetried ContentKeyRequestStatus = 3
 	// Indicates that the key request was cancelled.
-	AVContentKeyRequestStatusCancelled AVContentKeyRequestStatus = 4
+	ContentKeyRequestStatusCancelled ContentKeyRequestStatus = 4
 	// Indicates that the request has encountered an error. See also the error property.
-	AVContentKeyRequestStatusFailed AVContentKeyRequestStatus = 5
+	ContentKeyRequestStatusFailed ContentKeyRequestStatus = 5
 )
 
-func (e AVContentKeyRequestStatus) String() string {
+func (e ContentKeyRequestStatus) String() string {
 	switch e {
-	case AVContentKeyRequestStatusRequestingResponse:
-		return "AVContentKeyRequestStatusRequestingResponse"
-	case AVContentKeyRequestStatusReceivedResponse:
-		return "AVContentKeyRequestStatusReceivedResponse"
-	case AVContentKeyRequestStatusRenewed:
-		return "AVContentKeyRequestStatusRenewed"
-	case AVContentKeyRequestStatusRetried:
-		return "AVContentKeyRequestStatusRetried"
-	case AVContentKeyRequestStatusCancelled:
-		return "AVContentKeyRequestStatusCancelled"
-	case AVContentKeyRequestStatusFailed:
-		return "AVContentKeyRequestStatusFailed"
+	case ContentKeyRequestStatusRequestingResponse:
+		return "ContentKeyRequestStatusRequestingResponse"
+	case ContentKeyRequestStatusReceivedResponse:
+		return "ContentKeyRequestStatusReceivedResponse"
+	case ContentKeyRequestStatusRenewed:
+		return "ContentKeyRequestStatusRenewed"
+	case ContentKeyRequestStatusRetried:
+		return "ContentKeyRequestStatusRetried"
+	case ContentKeyRequestStatusCancelled:
+		return "ContentKeyRequestStatusCancelled"
+	case ContentKeyRequestStatusFailed:
+		return "ContentKeyRequestStatusFailed"
 	default:
-		return fmt.Sprintf("AVContentKeyRequestStatus(%d)", int64(e))
+		return fmt.Sprintf("ContentKeyRequestStatus(%d)", int64(e))
 	}
 }
 
 // Constants that define rate change options.
 // Bitmask — values may be combined with |.
-type AVDelegatingPlaybackCoordinatorRateChangeOptions uint64
+type DelegatingPlaybackCoordinatorRateChangeOptions uint64
 
 const (
 	// Indicates that the coordinator should begin playback as soon as possible, regardless of other participant’s readiness or suspensions.
-	AVDelegatingPlaybackCoordinatorRateChangeOptionPlayImmediately AVDelegatingPlaybackCoordinatorRateChangeOptions = 1
+	DelegatingPlaybackCoordinatorRateChangeOptionPlayImmediately DelegatingPlaybackCoordinatorRateChangeOptions = 1
 )
 
-func (e AVDelegatingPlaybackCoordinatorRateChangeOptions) String() string {
+func (e DelegatingPlaybackCoordinatorRateChangeOptions) String() string {
 	var parts []string
-	if e&AVDelegatingPlaybackCoordinatorRateChangeOptionPlayImmediately != 0 {
-		parts = append(parts, "AVDelegatingPlaybackCoordinatorRateChangeOptionPlayImmediately")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-// Constants that define seek options.
-// Bitmask — values may be combined with |.
-type AVDelegatingPlaybackCoordinatorSeekOptions uint64
-
-const (
-	// An option that Indicates that the coordinator needs to resume playback as soon as possible, regardless of other participant’s readiness or suspensions.
-	AVDelegatingPlaybackCoordinatorSeekOptionResumeImmediately AVDelegatingPlaybackCoordinatorSeekOptions = 1
-)
-
-func (e AVDelegatingPlaybackCoordinatorSeekOptions) String() string {
-	var parts []string
-	if e&AVDelegatingPlaybackCoordinatorSeekOptionResumeImmediately != 0 {
-		parts = append(parts, "AVDelegatingPlaybackCoordinatorSeekOptionResumeImmediately")
+	if e&DelegatingPlaybackCoordinatorRateChangeOptionPlayImmediately != 0 {
+		parts = append(parts, "DelegatingPlaybackCoordinatorRateChangeOptionPlayImmediately")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1168,149 +1148,149 @@ func (e AVDelegatingPlaybackCoordinatorSeekOptions) String() string {
 }
 
 // Values indicating the general accuracy of a depth data map.
-type AVDepthDataAccuracy int64
+type DepthDataAccuracy int64
 
 const (
-	AVDepthDataAccuracyRelative AVDepthDataAccuracy = 0
-	AVDepthDataAccuracyAbsolute AVDepthDataAccuracy = 1
+	DepthDataAccuracyRelative DepthDataAccuracy = 0
+	DepthDataAccuracyAbsolute DepthDataAccuracy = 1
 )
 
-func (e AVDepthDataAccuracy) String() string {
+func (e DepthDataAccuracy) String() string {
 	switch e {
-	case AVDepthDataAccuracyRelative:
-		return "AVDepthDataAccuracyRelative"
-	case AVDepthDataAccuracyAbsolute:
-		return "AVDepthDataAccuracyAbsolute"
+	case DepthDataAccuracyRelative:
+		return "DepthDataAccuracyRelative"
+	case DepthDataAccuracyAbsolute:
+		return "DepthDataAccuracyAbsolute"
 	default:
-		return fmt.Sprintf("AVDepthDataAccuracy(%d)", int64(e))
+		return fmt.Sprintf("DepthDataAccuracy(%d)", int64(e))
 	}
 }
 
 // Values indicating the overall quality of a depth data map.
-type AVDepthDataQuality int64
+type DepthDataQuality int64
 
 const (
-	AVDepthDataQualityLow  AVDepthDataQuality = 0
-	AVDepthDataQualityHigh AVDepthDataQuality = 1
+	DepthDataQualityLow  DepthDataQuality = 0
+	DepthDataQualityHigh DepthDataQuality = 1
 )
 
-func (e AVDepthDataQuality) String() string {
+func (e DepthDataQuality) String() string {
 	switch e {
-	case AVDepthDataQualityLow:
-		return "AVDepthDataQualityLow"
-	case AVDepthDataQualityHigh:
-		return "AVDepthDataQualityHigh"
+	case DepthDataQualityLow:
+		return "DepthDataQualityLow"
+	case DepthDataQualityHigh:
+		return "DepthDataQualityHigh"
 	default:
-		return fmt.Sprintf("AVDepthDataQuality(%d)", int64(e))
+		return fmt.Sprintf("DepthDataQuality(%d)", int64(e))
 	}
 }
 
 // Constants that specify whether sufficient protection exists to display the content.
-type AVExternalContentProtectionStatus int64
+type ExternalContentProtectionStatus int64
 
 const (
 	// A status that indicates content protections are pending.
-	AVExternalContentProtectionStatusPending AVExternalContentProtectionStatus = 0
+	ExternalContentProtectionStatusPending ExternalContentProtectionStatus = 0
 	// A status that indicates sufficient protections exists for display.
-	AVExternalContentProtectionStatusSufficient AVExternalContentProtectionStatus = 1
+	ExternalContentProtectionStatusSufficient ExternalContentProtectionStatus = 1
 	// A status that indicates insufficient protections exists for display.
-	AVExternalContentProtectionStatusInsufficient AVExternalContentProtectionStatus = 2
+	ExternalContentProtectionStatusInsufficient ExternalContentProtectionStatus = 2
 )
 
-func (e AVExternalContentProtectionStatus) String() string {
+func (e ExternalContentProtectionStatus) String() string {
 	switch e {
-	case AVExternalContentProtectionStatusPending:
-		return "AVExternalContentProtectionStatusPending"
-	case AVExternalContentProtectionStatusSufficient:
-		return "AVExternalContentProtectionStatusSufficient"
-	case AVExternalContentProtectionStatusInsufficient:
-		return "AVExternalContentProtectionStatusInsufficient"
+	case ExternalContentProtectionStatusPending:
+		return "ExternalContentProtectionStatusPending"
+	case ExternalContentProtectionStatusSufficient:
+		return "ExternalContentProtectionStatusSufficient"
+	case ExternalContentProtectionStatusInsufficient:
+		return "ExternalContentProtectionStatusInsufficient"
 	default:
-		return fmt.Sprintf("AVExternalContentProtectionStatus(%d)", int64(e))
+		return fmt.Sprintf("ExternalContentProtectionStatus(%d)", int64(e))
 	}
 }
 
 // Connection state of an external sync device
-type AVExternalSyncDeviceStatus int64
+type ExternalSyncDeviceStatus int64
 
 const (
 	// Indicates that external sync signal is not connected, or has transitioned to a state that is not recoverable.
-	AVExternalSyncDeviceStatusUnavailable AVExternalSyncDeviceStatus = 0
+	ExternalSyncDeviceStatusUnavailable ExternalSyncDeviceStatus = 0
 	// Indicates that a device supporting external sync is connected, but calibration has not started.
-	AVExternalSyncDeviceStatusReady AVExternalSyncDeviceStatus = 1
+	ExternalSyncDeviceStatusReady ExternalSyncDeviceStatus = 1
 	// Indicates that the external sync signal is connected and that the AVExternalSyncDevice object is calibrating to follow.
-	AVExternalSyncDeviceStatusCalibrating AVExternalSyncDeviceStatus = 2
+	ExternalSyncDeviceStatusCalibrating ExternalSyncDeviceStatus = 2
 	// Indicates that the AVExternalSyncDevice object is running and that the clock property on AVExternalSyncDevice is calibrated to the external sync signal.
-	AVExternalSyncDeviceStatusActiveSync AVExternalSyncDeviceStatus = 3
+	ExternalSyncDeviceStatusActiveSync ExternalSyncDeviceStatus = 3
 	// Indicates that the AVExternalSyncDevice was calibrated to follow the external sync, but the sync signal has been lost. The camera will continue to match the last signal it received, but sync is not guaranteed.
-	AVExternalSyncDeviceStatusFreeRunSync AVExternalSyncDeviceStatus = 4
+	ExternalSyncDeviceStatusFreeRunSync ExternalSyncDeviceStatus = 4
 )
 
-func (e AVExternalSyncDeviceStatus) String() string {
+func (e ExternalSyncDeviceStatus) String() string {
 	switch e {
-	case AVExternalSyncDeviceStatusUnavailable:
-		return "AVExternalSyncDeviceStatusUnavailable"
-	case AVExternalSyncDeviceStatusReady:
-		return "AVExternalSyncDeviceStatusReady"
-	case AVExternalSyncDeviceStatusCalibrating:
-		return "AVExternalSyncDeviceStatusCalibrating"
-	case AVExternalSyncDeviceStatusActiveSync:
-		return "AVExternalSyncDeviceStatusActiveSync"
-	case AVExternalSyncDeviceStatusFreeRunSync:
-		return "AVExternalSyncDeviceStatusFreeRunSync"
+	case ExternalSyncDeviceStatusUnavailable:
+		return "ExternalSyncDeviceStatusUnavailable"
+	case ExternalSyncDeviceStatusReady:
+		return "ExternalSyncDeviceStatusReady"
+	case ExternalSyncDeviceStatusCalibrating:
+		return "ExternalSyncDeviceStatusCalibrating"
+	case ExternalSyncDeviceStatusActiveSync:
+		return "ExternalSyncDeviceStatusActiveSync"
+	case ExternalSyncDeviceStatusFreeRunSync:
+		return "ExternalSyncDeviceStatusFreeRunSync"
 	default:
-		return fmt.Sprintf("AVExternalSyncDeviceStatus(%d)", int64(e))
+		return fmt.Sprintf("ExternalSyncDeviceStatus(%d)", int64(e))
 	}
 }
 
 // Values that indicate the loaded status of a property.
-type AVKeyValueStatus int64
+type KeyValueStatus int64
 
 const (
 	// The property value’s status is unknown.
-	AVKeyValueStatusUnknown AVKeyValueStatus = 0
+	KeyValueStatusUnknown KeyValueStatus = 0
 	// The system is loading the property value.
-	AVKeyValueStatusLoading AVKeyValueStatus = 1
+	KeyValueStatusLoading KeyValueStatus = 1
 	// The property value is ready to use.
-	AVKeyValueStatusLoaded AVKeyValueStatus = 2
+	KeyValueStatusLoaded KeyValueStatus = 2
 	// The system is unable to load the property value.
-	AVKeyValueStatusFailed AVKeyValueStatus = 3
+	KeyValueStatusFailed KeyValueStatus = 3
 	// You canceled loading a property value.
-	AVKeyValueStatusCancelled AVKeyValueStatus = 4
+	KeyValueStatusCancelled KeyValueStatus = 4
 )
 
-func (e AVKeyValueStatus) String() string {
+func (e KeyValueStatus) String() string {
 	switch e {
-	case AVKeyValueStatusUnknown:
-		return "AVKeyValueStatusUnknown"
-	case AVKeyValueStatusLoading:
-		return "AVKeyValueStatusLoading"
-	case AVKeyValueStatusLoaded:
-		return "AVKeyValueStatusLoaded"
-	case AVKeyValueStatusFailed:
-		return "AVKeyValueStatusFailed"
-	case AVKeyValueStatusCancelled:
-		return "AVKeyValueStatusCancelled"
+	case KeyValueStatusUnknown:
+		return "KeyValueStatusUnknown"
+	case KeyValueStatusLoading:
+		return "KeyValueStatusLoading"
+	case KeyValueStatusLoaded:
+		return "KeyValueStatusLoaded"
+	case KeyValueStatusFailed:
+		return "KeyValueStatusFailed"
+	case KeyValueStatusCancelled:
+		return "KeyValueStatusCancelled"
 	default:
-		return fmt.Sprintf("AVKeyValueStatus(%d)", int64(e))
+		return fmt.Sprintf("KeyValueStatus(%d)", int64(e))
 	}
 }
 
 // A structure that defines options to control the writing of a movie header to a destination URL.
 // Bitmask — values may be combined with |.
-type AVMovieWritingOptions uint64
+type MovieWritingOptions uint64
 
 const (
 	// The new movie header overwrites any existing movie header.
-	AVMovieWritingAddMovieHeaderToDestination AVMovieWritingOptions = 0
+	MovieWritingAddMovieHeaderToDestination MovieWritingOptions = 0
 	// The movie header overwrites all existing data and creates a pure reference movie file.
-	AVMovieWritingTruncateDestinationToMovieHeaderOnly AVMovieWritingOptions = 1
+	MovieWritingTruncateDestinationToMovieHeaderOnly MovieWritingOptions = 1
 )
 
-func (e AVMovieWritingOptions) String() string {
+func (e MovieWritingOptions) String() string {
 	var parts []string
-	if e&AVMovieWritingTruncateDestinationToMovieHeaderOnly != 0 {
-		parts = append(parts, "AVMovieWritingTruncateDestinationToMovieHeaderOnly")
+	if e&MovieWritingTruncateDestinationToMovieHeaderOnly != 0 {
+		parts = append(parts, "MovieWritingTruncateDestinationToMovieHeaderOnly")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1319,77 +1299,77 @@ func (e AVMovieWritingOptions) String() string {
 }
 
 // The actions a player can take when it finishes playing.
-type AVPlayerActionAtItemEnd int64
+type PlayerActionAtItemEnd int64
 
 const (
 	// Indicates that when an AVPlayerItem reaches its end time the player will automatically advance to the next item in its queue. This value is supported only for players of class AVQueuePlayer. An AVPlayer that's not an AVQueuePlayer will raise an NSInvalidArgumentException if an attempt is made to set its actionAtItemEnd to AVPlayerActionAtItemEndAdvance.
-	AVPlayerActionAtItemEndAdvance AVPlayerActionAtItemEnd = 0
+	PlayerActionAtItemEndAdvance PlayerActionAtItemEnd = 0
 	// Indicates that when an AVPlayerItem reaches its end time the player will automatically pause (which is to say, the player's rate will automatically be set to 0).
-	AVPlayerActionAtItemEndPause AVPlayerActionAtItemEnd = 1
+	PlayerActionAtItemEndPause PlayerActionAtItemEnd = 1
 	// Indicates that when an AVPlayerItem reaches its end time the player will take no action (which is to say, the player's rate will not change, its currentItem will not change, and its currentTime will continue to be incremented or decremented as time elapses, according to its rate). After this, if the player's actionAtItemEnd is set to a value other than AVPlayerActionAtItemEndNone, the player will immediately take the action appropriate to that value.
-	AVPlayerActionAtItemEndNone AVPlayerActionAtItemEnd = 2
+	PlayerActionAtItemEndNone PlayerActionAtItemEnd = 2
 )
 
-func (e AVPlayerActionAtItemEnd) String() string {
+func (e PlayerActionAtItemEnd) String() string {
 	switch e {
-	case AVPlayerActionAtItemEndAdvance:
-		return "AVPlayerActionAtItemEndAdvance"
-	case AVPlayerActionAtItemEndPause:
-		return "AVPlayerActionAtItemEndPause"
-	case AVPlayerActionAtItemEndNone:
-		return "AVPlayerActionAtItemEndNone"
+	case PlayerActionAtItemEndAdvance:
+		return "PlayerActionAtItemEndAdvance"
+	case PlayerActionAtItemEndPause:
+		return "PlayerActionAtItemEndPause"
+	case PlayerActionAtItemEndNone:
+		return "PlayerActionAtItemEndNone"
 	default:
-		return fmt.Sprintf("AVPlayerActionAtItemEnd(%d)", int64(e))
+		return fmt.Sprintf("PlayerActionAtItemEnd(%d)", int64(e))
 	}
 }
 
 // Policies that describe playback behavior when an app transitions to the background while playing video.
-type AVPlayerAudiovisualBackgroundPlaybackPolicy int64
+type PlayerAudiovisualBackgroundPlaybackPolicy int64
 
 const (
 	// The system decides whether playback continues.
-	AVPlayerAudiovisualBackgroundPlaybackPolicyAutomatic AVPlayerAudiovisualBackgroundPlaybackPolicy = 1
+	PlayerAudiovisualBackgroundPlaybackPolicyAutomatic PlayerAudiovisualBackgroundPlaybackPolicy = 1
 	// The app pauses playback.
-	AVPlayerAudiovisualBackgroundPlaybackPolicyPauses AVPlayerAudiovisualBackgroundPlaybackPolicy = 2
+	PlayerAudiovisualBackgroundPlaybackPolicyPauses PlayerAudiovisualBackgroundPlaybackPolicy = 2
 	// The app continues playback, if possible.
-	AVPlayerAudiovisualBackgroundPlaybackPolicyContinuesIfPossible AVPlayerAudiovisualBackgroundPlaybackPolicy = 3
+	PlayerAudiovisualBackgroundPlaybackPolicyContinuesIfPossible PlayerAudiovisualBackgroundPlaybackPolicy = 3
 )
 
-func (e AVPlayerAudiovisualBackgroundPlaybackPolicy) String() string {
+func (e PlayerAudiovisualBackgroundPlaybackPolicy) String() string {
 	switch e {
-	case AVPlayerAudiovisualBackgroundPlaybackPolicyAutomatic:
-		return "AVPlayerAudiovisualBackgroundPlaybackPolicyAutomatic"
-	case AVPlayerAudiovisualBackgroundPlaybackPolicyPauses:
-		return "AVPlayerAudiovisualBackgroundPlaybackPolicyPauses"
-	case AVPlayerAudiovisualBackgroundPlaybackPolicyContinuesIfPossible:
-		return "AVPlayerAudiovisualBackgroundPlaybackPolicyContinuesIfPossible"
+	case PlayerAudiovisualBackgroundPlaybackPolicyAutomatic:
+		return "PlayerAudiovisualBackgroundPlaybackPolicyAutomatic"
+	case PlayerAudiovisualBackgroundPlaybackPolicyPauses:
+		return "PlayerAudiovisualBackgroundPlaybackPolicyPauses"
+	case PlayerAudiovisualBackgroundPlaybackPolicyContinuesIfPossible:
+		return "PlayerAudiovisualBackgroundPlaybackPolicyContinuesIfPossible"
 	default:
-		return fmt.Sprintf("AVPlayerAudiovisualBackgroundPlaybackPolicy(%d)", int64(e))
+		return fmt.Sprintf("PlayerAudiovisualBackgroundPlaybackPolicy(%d)", int64(e))
 	}
 }
 
 // Constants that define restrictions on the playback of interstitial content.
 // Bitmask — values may be combined with |.
-type AVPlayerInterstitialEventRestrictions uint64
+type PlayerInterstitialEventRestrictions uint64
 
 const (
 	// A value that indicates no restrictions on playback of primary or interstitial content.
-	AVPlayerInterstitialEventRestrictionNone AVPlayerInterstitialEventRestrictions = 0
+	PlayerInterstitialEventRestrictionNone PlayerInterstitialEventRestrictions = 0
 	// Indicates that seeking within the primary content from a date prior to the date of the event to a date subsequent to the date of the event is not permitted.
-	AVPlayerInterstitialEventRestrictionConstrainsSeekingForwardInPrimaryContent AVPlayerInterstitialEventRestrictions = 1
+	PlayerInterstitialEventRestrictionConstrainsSeekingForwardInPrimaryContent PlayerInterstitialEventRestrictions = 1
 	// Indicates that advancing the currentTime within an interstitial item, either by seeking ahead or by setting the playback rate to a value greater than the item's asset's preferredRate, is not permitted.
-	AVPlayerInterstitialEventRestrictionRequiresPlaybackAtPreferredRateForAdvancement AVPlayerInterstitialEventRestrictions = 4
+	PlayerInterstitialEventRestrictionRequiresPlaybackAtPreferredRateForAdvancement PlayerInterstitialEventRestrictions = 4
 	// The default restriction policy.
-	AVPlayerInterstitialEventRestrictionDefaultPolicy AVPlayerInterstitialEventRestrictions = 0
+	PlayerInterstitialEventRestrictionDefaultPolicy PlayerInterstitialEventRestrictions = 0
 )
 
-func (e AVPlayerInterstitialEventRestrictions) String() string {
+func (e PlayerInterstitialEventRestrictions) String() string {
 	var parts []string
-	if e&AVPlayerInterstitialEventRestrictionConstrainsSeekingForwardInPrimaryContent != 0 {
-		parts = append(parts, "AVPlayerInterstitialEventRestrictionConstrainsSeekingForwardInPrimaryContent")
+	if e&PlayerInterstitialEventRestrictionConstrainsSeekingForwardInPrimaryContent != 0 {
+		parts = append(parts, "PlayerInterstitialEventRestrictionConstrainsSeekingForwardInPrimaryContent")
 	}
-	if e&AVPlayerInterstitialEventRestrictionRequiresPlaybackAtPreferredRateForAdvancement != 0 {
-		parts = append(parts, "AVPlayerInterstitialEventRestrictionRequiresPlaybackAtPreferredRateForAdvancement")
+	if e&PlayerInterstitialEventRestrictionRequiresPlaybackAtPreferredRateForAdvancement != 0 {
+		parts = append(parts, "PlayerInterstitialEventRestrictionRequiresPlaybackAtPreferredRateForAdvancement")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1397,301 +1377,282 @@ func (e AVPlayerInterstitialEventRestrictions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type AVPlayerInterstitialEventSkippableEventState int64
+type PlayerInterstitialEventSkippableEventState int64
 
 const (
 	// Indicates that the interstitial event is not skippable.
-	AVPlayerInterstitialEventSkippableEventStateNotSkippable AVPlayerInterstitialEventSkippableEventState = 0
+	PlayerInterstitialEventSkippableEventStateNotSkippable PlayerInterstitialEventSkippableEventState = 0
 	// Indicates that the interstitial event will eventually become eligible to be skipped.
-	AVPlayerInterstitialEventSkippableEventStateNotYetEligible AVPlayerInterstitialEventSkippableEventState = 1
+	PlayerInterstitialEventSkippableEventStateNotYetEligible PlayerInterstitialEventSkippableEventState = 1
 	// Indicates that the interstitial event is currently skippable.
-	AVPlayerInterstitialEventSkippableEventStateEligible AVPlayerInterstitialEventSkippableEventState = 2
+	PlayerInterstitialEventSkippableEventStateEligible PlayerInterstitialEventSkippableEventState = 2
 	// Indicates that the interstitial event is no longer eligible to be skipped.
-	AVPlayerInterstitialEventSkippableEventStateNoLongerEligible AVPlayerInterstitialEventSkippableEventState = 3
+	PlayerInterstitialEventSkippableEventStateNoLongerEligible PlayerInterstitialEventSkippableEventState = 3
 )
 
-func (e AVPlayerInterstitialEventSkippableEventState) String() string {
+func (e PlayerInterstitialEventSkippableEventState) String() string {
 	switch e {
-	case AVPlayerInterstitialEventSkippableEventStateNotSkippable:
-		return "AVPlayerInterstitialEventSkippableEventStateNotSkippable"
-	case AVPlayerInterstitialEventSkippableEventStateNotYetEligible:
-		return "AVPlayerInterstitialEventSkippableEventStateNotYetEligible"
-	case AVPlayerInterstitialEventSkippableEventStateEligible:
-		return "AVPlayerInterstitialEventSkippableEventStateEligible"
-	case AVPlayerInterstitialEventSkippableEventStateNoLongerEligible:
-		return "AVPlayerInterstitialEventSkippableEventStateNoLongerEligible"
+	case PlayerInterstitialEventSkippableEventStateNotSkippable:
+		return "PlayerInterstitialEventSkippableEventStateNotSkippable"
+	case PlayerInterstitialEventSkippableEventStateNotYetEligible:
+		return "PlayerInterstitialEventSkippableEventStateNotYetEligible"
+	case PlayerInterstitialEventSkippableEventStateEligible:
+		return "PlayerInterstitialEventSkippableEventStateEligible"
+	case PlayerInterstitialEventSkippableEventStateNoLongerEligible:
+		return "PlayerInterstitialEventSkippableEventStateNoLongerEligible"
 	default:
-		return fmt.Sprintf("AVPlayerInterstitialEventSkippableEventState(%d)", int64(e))
+		return fmt.Sprintf("PlayerInterstitialEventSkippableEventState(%d)", int64(e))
 	}
 }
 
 // Constants that specify how an event occupies time on an integrated timeline.
-type AVPlayerInterstitialEventTimelineOccupancy int64
+type PlayerInterstitialEventTimelineOccupancy int64
 
 const (
 	// Indicates this interstitial event occupies a single point on AVPlayerItemIntegratedTimeline.
-	AVPlayerInterstitialEventTimelineOccupancySinglePoint AVPlayerInterstitialEventTimelineOccupancy = 0
+	PlayerInterstitialEventTimelineOccupancySinglePoint PlayerInterstitialEventTimelineOccupancy = 0
 	// Indicates this interstitial event fills AVPlayerItemIntegratedTimeline with the duration of this event.
-	AVPlayerInterstitialEventTimelineOccupancyFill AVPlayerInterstitialEventTimelineOccupancy = 1
+	PlayerInterstitialEventTimelineOccupancyFill PlayerInterstitialEventTimelineOccupancy = 1
 )
 
-func (e AVPlayerInterstitialEventTimelineOccupancy) String() string {
+func (e PlayerInterstitialEventTimelineOccupancy) String() string {
 	switch e {
-	case AVPlayerInterstitialEventTimelineOccupancySinglePoint:
-		return "AVPlayerInterstitialEventTimelineOccupancySinglePoint"
-	case AVPlayerInterstitialEventTimelineOccupancyFill:
-		return "AVPlayerInterstitialEventTimelineOccupancyFill"
+	case PlayerInterstitialEventTimelineOccupancySinglePoint:
+		return "PlayerInterstitialEventTimelineOccupancySinglePoint"
+	case PlayerInterstitialEventTimelineOccupancyFill:
+		return "PlayerInterstitialEventTimelineOccupancyFill"
 	default:
-		return fmt.Sprintf("AVPlayerInterstitialEventTimelineOccupancy(%d)", int64(e))
+		return fmt.Sprintf("PlayerInterstitialEventTimelineOccupancy(%d)", int64(e))
 	}
 }
 
 // Constants that specify the type of segment.
-type AVPlayerItemSegmentType int64
+type PlayerItemSegmentType int64
 
 const (
-	AVPlayerItemSegmentTypePrimary      AVPlayerItemSegmentType = 0
-	AVPlayerItemSegmentTypeInterstitial AVPlayerItemSegmentType = 1
+	PlayerItemSegmentTypePrimary      PlayerItemSegmentType = 0
+	PlayerItemSegmentTypeInterstitial PlayerItemSegmentType = 1
 )
 
-func (e AVPlayerItemSegmentType) String() string {
+func (e PlayerItemSegmentType) String() string {
 	switch e {
-	case AVPlayerItemSegmentTypePrimary:
-		return "AVPlayerItemSegmentTypePrimary"
-	case AVPlayerItemSegmentTypeInterstitial:
-		return "AVPlayerItemSegmentTypeInterstitial"
+	case PlayerItemSegmentTypePrimary:
+		return "PlayerItemSegmentTypePrimary"
+	case PlayerItemSegmentTypeInterstitial:
+		return "PlayerItemSegmentTypeInterstitial"
 	default:
-		return fmt.Sprintf("AVPlayerItemSegmentType(%d)", int64(e))
+		return fmt.Sprintf("PlayerItemSegmentType(%d)", int64(e))
 	}
 }
 
 // The statuses for a player item.
-type AVPlayerItemStatus int64
+type PlayerItemStatus int64
 
 const (
 	// Indicates that the status of the player item is not yet known because it has not tried to load new media resources for playback.
-	AVPlayerItemStatusUnknown AVPlayerItemStatus = 0
+	PlayerItemStatusUnknown PlayerItemStatus = 0
 	// Indicates that the player item is ready to be played.
-	AVPlayerItemStatusReadyToPlay AVPlayerItemStatus = 1
+	PlayerItemStatusReadyToPlay PlayerItemStatus = 1
 	// Indicates that the player item can no longer be played because of an error. The error is described by the value of the player item's error property. The player item's errorLog property might contain additional information about the error.
-	AVPlayerItemStatusFailed AVPlayerItemStatus = 2
+	PlayerItemStatusFailed PlayerItemStatus = 2
 )
 
-func (e AVPlayerItemStatus) String() string {
+func (e PlayerItemStatus) String() string {
 	switch e {
-	case AVPlayerItemStatusUnknown:
-		return "AVPlayerItemStatusUnknown"
-	case AVPlayerItemStatusReadyToPlay:
-		return "AVPlayerItemStatusReadyToPlay"
-	case AVPlayerItemStatusFailed:
-		return "AVPlayerItemStatusFailed"
+	case PlayerItemStatusUnknown:
+		return "PlayerItemStatusUnknown"
+	case PlayerItemStatusReadyToPlay:
+		return "PlayerItemStatusReadyToPlay"
+	case PlayerItemStatusFailed:
+		return "PlayerItemStatusFailed"
 	default:
-		return fmt.Sprintf("AVPlayerItemStatus(%d)", int64(e))
-	}
-}
-
-// Constants that define the ordering of items in a player looper.
-type AVPlayerLooperItemOrdering int64
-
-const (
-	AVPlayerLooperItemOrderingLoopingItemsPrecedeExistingItems AVPlayerLooperItemOrdering = 0
-	AVPlayerLooperItemOrderingLoopingItemsFollowExistingItems  AVPlayerLooperItemOrdering = 1
-)
-
-func (e AVPlayerLooperItemOrdering) String() string {
-	switch e {
-	case AVPlayerLooperItemOrderingLoopingItemsPrecedeExistingItems:
-		return "AVPlayerLooperItemOrderingLoopingItemsPrecedeExistingItems"
-	case AVPlayerLooperItemOrderingLoopingItemsFollowExistingItems:
-		return "AVPlayerLooperItemOrderingLoopingItemsFollowExistingItems"
-	default:
-		return fmt.Sprintf("AVPlayerLooperItemOrdering(%d)", int64(e))
+		return fmt.Sprintf("PlayerItemStatus(%d)", int64(e))
 	}
 }
 
 // Status constants that indicate whether a looper can successfully perform looping playback.
-type AVPlayerLooperStatus int64
+type PlayerLooperStatus int64
 
 const (
-	AVPlayerLooperStatusUnknown   AVPlayerLooperStatus = 0
-	AVPlayerLooperStatusReady     AVPlayerLooperStatus = 1
-	AVPlayerLooperStatusFailed    AVPlayerLooperStatus = 2
-	AVPlayerLooperStatusCancelled AVPlayerLooperStatus = 3
+	PlayerLooperStatusUnknown   PlayerLooperStatus = 0
+	PlayerLooperStatusReady     PlayerLooperStatus = 1
+	PlayerLooperStatusFailed    PlayerLooperStatus = 2
+	PlayerLooperStatusCancelled PlayerLooperStatus = 3
 )
 
-func (e AVPlayerLooperStatus) String() string {
+func (e PlayerLooperStatus) String() string {
 	switch e {
-	case AVPlayerLooperStatusUnknown:
-		return "AVPlayerLooperStatusUnknown"
-	case AVPlayerLooperStatusReady:
-		return "AVPlayerLooperStatusReady"
-	case AVPlayerLooperStatusFailed:
-		return "AVPlayerLooperStatusFailed"
-	case AVPlayerLooperStatusCancelled:
-		return "AVPlayerLooperStatusCancelled"
+	case PlayerLooperStatusUnknown:
+		return "PlayerLooperStatusUnknown"
+	case PlayerLooperStatusReady:
+		return "PlayerLooperStatusReady"
+	case PlayerLooperStatusFailed:
+		return "PlayerLooperStatusFailed"
+	case PlayerLooperStatusCancelled:
+		return "PlayerLooperStatusCancelled"
 	default:
-		return fmt.Sprintf("AVPlayerLooperStatus(%d)", int64(e))
+		return fmt.Sprintf("PlayerLooperStatus(%d)", int64(e))
 	}
 }
 
-type AVPlayerNetworkResourcePriority int64
+type PlayerNetworkResourcePriority int64
 
 const (
 	// The default priority level given to a player for loading network resources. Use this when the player requires an optimal level of network resources and streaming in high-quality resolution is ideal. Players with AVPlayerNetworkResourcePriorityHigh will take precedence over this player. This player will take precedence over players with AVPlayerNetworkResourcePriorityLow.
-	AVPlayerNetworkResourcePriorityDefault AVPlayerNetworkResourcePriority = 0
+	PlayerNetworkResourcePriorityDefault PlayerNetworkResourcePriority = 0
 	// Indicates a low priority level for loading network resources. Use this when the player requires minimal network bandwidth and streaming in high-quality resolution is not crucial. Other players with higher priority will take precedence over this player.
-	AVPlayerNetworkResourcePriorityLow AVPlayerNetworkResourcePriority = 1
+	PlayerNetworkResourcePriorityLow PlayerNetworkResourcePriority = 1
 	// Indicates a high priority level for loading network resources. Use this when the player requires a high level of network resources and streaming in high-quality resolution is crucial. This player will take precedence over other lower priority players.
-	AVPlayerNetworkResourcePriorityHigh AVPlayerNetworkResourcePriority = 2
+	PlayerNetworkResourcePriorityHigh PlayerNetworkResourcePriority = 2
 )
 
-func (e AVPlayerNetworkResourcePriority) String() string {
+func (e PlayerNetworkResourcePriority) String() string {
 	switch e {
-	case AVPlayerNetworkResourcePriorityDefault:
-		return "AVPlayerNetworkResourcePriorityDefault"
-	case AVPlayerNetworkResourcePriorityLow:
-		return "AVPlayerNetworkResourcePriorityLow"
-	case AVPlayerNetworkResourcePriorityHigh:
-		return "AVPlayerNetworkResourcePriorityHigh"
+	case PlayerNetworkResourcePriorityDefault:
+		return "PlayerNetworkResourcePriorityDefault"
+	case PlayerNetworkResourcePriorityLow:
+		return "PlayerNetworkResourcePriorityLow"
+	case PlayerNetworkResourcePriorityHigh:
+		return "PlayerNetworkResourcePriorityHigh"
 	default:
-		return fmt.Sprintf("AVPlayerNetworkResourcePriority(%d)", int64(e))
+		return fmt.Sprintf("PlayerNetworkResourcePriority(%d)", int64(e))
 	}
 }
 
 // Status values that indicate whether a player can successfully play media.
-type AVPlayerStatus int64
+type PlayerStatus int64
 
 const (
 	// Indicates that the status of the player is not yet known because it has not tried to load new media resources for playback.
-	AVPlayerStatusUnknown AVPlayerStatus = 0
+	PlayerStatusUnknown PlayerStatus = 0
 	// Indicates that the player is ready to play AVPlayerItem instances.
-	AVPlayerStatusReadyToPlay AVPlayerStatus = 1
+	PlayerStatusReadyToPlay PlayerStatus = 1
 	// Indicates that the player can no longer play AVPlayerItem instances because of an error. The error is described by the value of the player's error property.
-	AVPlayerStatusFailed AVPlayerStatus = 2
+	PlayerStatusFailed PlayerStatus = 2
 )
 
-func (e AVPlayerStatus) String() string {
+func (e PlayerStatus) String() string {
 	switch e {
-	case AVPlayerStatusUnknown:
-		return "AVPlayerStatusUnknown"
-	case AVPlayerStatusReadyToPlay:
-		return "AVPlayerStatusReadyToPlay"
-	case AVPlayerStatusFailed:
-		return "AVPlayerStatusFailed"
+	case PlayerStatusUnknown:
+		return "PlayerStatusUnknown"
+	case PlayerStatusReadyToPlay:
+		return "PlayerStatusReadyToPlay"
+	case PlayerStatusFailed:
+		return "PlayerStatusFailed"
 	default:
-		return fmt.Sprintf("AVPlayerStatus(%d)", int64(e))
+		return fmt.Sprintf("PlayerStatus(%d)", int64(e))
 	}
 }
 
 // Constants that indicate the state of playback control.
-type AVPlayerTimeControlStatus int64
+type PlayerTimeControlStatus int64
 
 const (
 	// This state is entered upon receipt of a -pause message, an invocation of -setRate: with a value of 0.0, when a change in overall state requires playback to be halted, such as when an interruption occurs on iOS, as announced by AVAudioSession. In this state, playback is paused indefinitely and will not resume until 1) a subsequent -play message is received or 2) a -setRate: or -playImmediatelyAtRate: message with a non-zero value for rate is received and sufficient media data has been buffered for playback to proceed.
-	AVPlayerTimeControlStatusPaused AVPlayerTimeControlStatus = 0
+	PlayerTimeControlStatusPaused PlayerTimeControlStatus = 0
 	// This state is entered when 1) the playback buffer becomes empty and playback stalls in AVPlayerTimeControlStatusPlaying, 2) when rate is set from zero to non-zero in AVPlayerTimeControlStatusPaused and insufficient media data has been buffered for playback to occur, or 3) when the player has no item to play, i.e. when the receiver's currentItem is nil. In this state, the value of the rate property is not currently effective but instead indicates the rate at which playback will start or resume. Refer to the value of reasonForWaitingToPlay for details about why the receiver is waiting and the conditions that allow waitStatus to change to AVPlayerWaitStatusPlaying. While waiting for buffering, you can attempt to start playback of any available media data via -playImmediatelyAtRate:.
-	AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate AVPlayerTimeControlStatus = 1
+	PlayerTimeControlStatusWaitingToPlayAtSpecifiedRate PlayerTimeControlStatus = 1
 	// In this state, playback is currently progressing and rate changes will take effect immediately. Should playback stall because of insufficient media data, timeControlStatus will change to AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate.
-	AVPlayerTimeControlStatusPlaying AVPlayerTimeControlStatus = 2
+	PlayerTimeControlStatusPlaying PlayerTimeControlStatus = 2
 )
 
-func (e AVPlayerTimeControlStatus) String() string {
+func (e PlayerTimeControlStatus) String() string {
 	switch e {
-	case AVPlayerTimeControlStatusPaused:
-		return "AVPlayerTimeControlStatusPaused"
-	case AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate:
-		return "AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate"
-	case AVPlayerTimeControlStatusPlaying:
-		return "AVPlayerTimeControlStatusPlaying"
+	case PlayerTimeControlStatusPaused:
+		return "PlayerTimeControlStatusPaused"
+	case PlayerTimeControlStatusWaitingToPlayAtSpecifiedRate:
+		return "PlayerTimeControlStatusWaitingToPlayAtSpecifiedRate"
+	case PlayerTimeControlStatusPlaying:
+		return "PlayerTimeControlStatusPlaying"
 	default:
-		return fmt.Sprintf("AVPlayerTimeControlStatus(%d)", int64(e))
+		return fmt.Sprintf("PlayerTimeControlStatus(%d)", int64(e))
 	}
 }
 
 // The statuses for sample buffer rendering.
-type AVQueuedSampleBufferRenderingStatus int64
+type QueuedSampleBufferRenderingStatus int64
 
 const (
 	// The object doesn’t have any sample buffers enqueued.
-	AVQueuedSampleBufferRenderingStatusUnknown AVQueuedSampleBufferRenderingStatus = 0
+	QueuedSampleBufferRenderingStatusUnknown QueuedSampleBufferRenderingStatus = 0
 	// The object is rendering the sample buffer.
-	AVQueuedSampleBufferRenderingStatusRendering AVQueuedSampleBufferRenderingStatus = 1
+	QueuedSampleBufferRenderingStatusRendering QueuedSampleBufferRenderingStatus = 1
 	// The object can no longer render sample buffers because of an error.
-	AVQueuedSampleBufferRenderingStatusFailed AVQueuedSampleBufferRenderingStatus = 2
+	QueuedSampleBufferRenderingStatusFailed QueuedSampleBufferRenderingStatus = 2
 )
 
-func (e AVQueuedSampleBufferRenderingStatus) String() string {
+func (e QueuedSampleBufferRenderingStatus) String() string {
 	switch e {
-	case AVQueuedSampleBufferRenderingStatusUnknown:
-		return "AVQueuedSampleBufferRenderingStatusUnknown"
-	case AVQueuedSampleBufferRenderingStatusRendering:
-		return "AVQueuedSampleBufferRenderingStatusRendering"
-	case AVQueuedSampleBufferRenderingStatusFailed:
-		return "AVQueuedSampleBufferRenderingStatusFailed"
+	case QueuedSampleBufferRenderingStatusUnknown:
+		return "QueuedSampleBufferRenderingStatusUnknown"
+	case QueuedSampleBufferRenderingStatusRendering:
+		return "QueuedSampleBufferRenderingStatusRendering"
+	case QueuedSampleBufferRenderingStatusFailed:
+		return "QueuedSampleBufferRenderingStatusFailed"
 	default:
-		return fmt.Sprintf("AVQueuedSampleBufferRenderingStatus(%d)", int64(e))
+		return fmt.Sprintf("QueuedSampleBufferRenderingStatus(%d)", int64(e))
 	}
 }
 
 // The modes that describe the buffer request direction.
-type AVSampleBufferRequestDirection int64
+type SampleBufferRequestDirection int64
 
 const (
-	AVSampleBufferRequestDirectionForward AVSampleBufferRequestDirection = 1
-	AVSampleBufferRequestDirectionNone    AVSampleBufferRequestDirection = 0
-	AVSampleBufferRequestDirectionReverse AVSampleBufferRequestDirection = -1
+	SampleBufferRequestDirectionForward SampleBufferRequestDirection = 1
+	SampleBufferRequestDirectionNone    SampleBufferRequestDirection = 0
+	SampleBufferRequestDirectionReverse SampleBufferRequestDirection = -1
 )
 
-func (e AVSampleBufferRequestDirection) String() string {
+func (e SampleBufferRequestDirection) String() string {
 	switch e {
-	case AVSampleBufferRequestDirectionForward:
-		return "AVSampleBufferRequestDirectionForward"
-	case AVSampleBufferRequestDirectionNone:
-		return "AVSampleBufferRequestDirectionNone"
-	case AVSampleBufferRequestDirectionReverse:
-		return "AVSampleBufferRequestDirectionReverse"
+	case SampleBufferRequestDirectionForward:
+		return "SampleBufferRequestDirectionForward"
+	case SampleBufferRequestDirectionNone:
+		return "SampleBufferRequestDirectionNone"
+	case SampleBufferRequestDirectionReverse:
+		return "SampleBufferRequestDirectionReverse"
 	default:
-		return fmt.Sprintf("AVSampleBufferRequestDirection(%d)", int64(e))
+		return fmt.Sprintf("SampleBufferRequestDirection(%d)", int64(e))
 	}
 }
 
 // The modes in which a sample buffer generator processes a request.
-type AVSampleBufferRequestMode int64
+type SampleBufferRequestMode int64
 
 const (
-	AVSampleBufferRequestModeImmediate     AVSampleBufferRequestMode = 0
-	AVSampleBufferRequestModeScheduled     AVSampleBufferRequestMode = 1
-	AVSampleBufferRequestModeOpportunistic AVSampleBufferRequestMode = 2
+	SampleBufferRequestModeImmediate     SampleBufferRequestMode = 0
+	SampleBufferRequestModeScheduled     SampleBufferRequestMode = 1
+	SampleBufferRequestModeOpportunistic SampleBufferRequestMode = 2
 )
 
-func (e AVSampleBufferRequestMode) String() string {
+func (e SampleBufferRequestMode) String() string {
 	switch e {
-	case AVSampleBufferRequestModeImmediate:
-		return "AVSampleBufferRequestModeImmediate"
-	case AVSampleBufferRequestModeScheduled:
-		return "AVSampleBufferRequestModeScheduled"
-	case AVSampleBufferRequestModeOpportunistic:
-		return "AVSampleBufferRequestModeOpportunistic"
+	case SampleBufferRequestModeImmediate:
+		return "SampleBufferRequestModeImmediate"
+	case SampleBufferRequestModeScheduled:
+		return "SampleBufferRequestModeScheduled"
+	case SampleBufferRequestModeOpportunistic:
+		return "SampleBufferRequestModeOpportunistic"
 	default:
-		return fmt.Sprintf("AVSampleBufferRequestMode(%d)", int64(e))
+		return fmt.Sprintf("SampleBufferRequestMode(%d)", int64(e))
 	}
 }
 
 // Defines the preferences the player item uses when selecting variant playlists.
 // Bitmask — values may be combined with |.
-type AVVariantPreferences uint64
+type VariantPreferences uint64
 
 const (
 	// Indicates that the player item uses the default behavior for determining variant playlist selection.
-	AVVariantPreferenceNone AVVariantPreferences = 0
+	VariantPreferenceNone VariantPreferences = 0
 	// A preference that indicates the player item supports variant playlists that contain losslessly encoded audio when sufficient bandwidth is available.
-	AVVariantPreferenceScalabilityToLosslessAudio AVVariantPreferences = 1
+	VariantPreferenceScalabilityToLosslessAudio VariantPreferences = 1
 )
 
-func (e AVVariantPreferences) String() string {
+func (e VariantPreferences) String() string {
 	var parts []string
-	if e&AVVariantPreferenceScalabilityToLosslessAudio != 0 {
-		parts = append(parts, "AVVariantPreferenceScalabilityToLosslessAudio")
+	if e&VariantPreferenceScalabilityToLosslessAudio != 0 {
+		parts = append(parts, "VariantPreferenceScalabilityToLosslessAudio")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1700,31 +1661,31 @@ func (e AVVariantPreferences) String() string {
 }
 
 // Constants that indicate which interlacing modes the connection applies to video flowing through it.
-type AVVideoFieldMode int64
+type VideoFieldMode int64
 
 const (
 	// A value that indicates that a video connection passes both the top and bottom video fields.
-	AVVideoFieldModeBoth AVVideoFieldMode = 0
+	VideoFieldModeBoth VideoFieldMode = 0
 	// A value that indicates that a video connection only passes the top video field.
-	AVVideoFieldModeTopOnly AVVideoFieldMode = 1
+	VideoFieldModeTopOnly VideoFieldMode = 1
 	// A value that indicates that a video connection only passes the bottom video field.
-	AVVideoFieldModeBottomOnly AVVideoFieldMode = 2
+	VideoFieldModeBottomOnly VideoFieldMode = 2
 	// A value that indicates that a video connection deinterlaces the top and bottom video fields.
-	AVVideoFieldModeDeinterlace AVVideoFieldMode = 3
+	VideoFieldModeDeinterlace VideoFieldMode = 3
 )
 
-func (e AVVideoFieldMode) String() string {
+func (e VideoFieldMode) String() string {
 	switch e {
-	case AVVideoFieldModeBoth:
-		return "AVVideoFieldModeBoth"
-	case AVVideoFieldModeTopOnly:
-		return "AVVideoFieldModeTopOnly"
-	case AVVideoFieldModeBottomOnly:
-		return "AVVideoFieldModeBottomOnly"
-	case AVVideoFieldModeDeinterlace:
-		return "AVVideoFieldModeDeinterlace"
+	case VideoFieldModeBoth:
+		return "VideoFieldModeBoth"
+	case VideoFieldModeTopOnly:
+		return "VideoFieldModeTopOnly"
+	case VideoFieldModeBottomOnly:
+		return "VideoFieldModeBottomOnly"
+	case VideoFieldModeDeinterlace:
+		return "VideoFieldModeDeinterlace"
 	default:
-		return fmt.Sprintf("AVVideoFieldMode(%d)", int64(e))
+		return fmt.Sprintf("VideoFieldMode(%d)", int64(e))
 	}
 }
 

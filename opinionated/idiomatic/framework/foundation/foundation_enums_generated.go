@@ -10,159 +10,56 @@ import (
 )
 
 // Bitmask — values may be combined with |.
-type NSActivityOptions int64
+type ActivityOptions int64
 
 const (
-	NSActivityIdleDisplaySleepDisabled             NSActivityOptions = 1099511627776
-	NSActivityIdleSystemSleepDisabled              NSActivityOptions = 1048576
-	NSActivitySuddenTerminationDisabled            NSActivityOptions = 16384
-	NSActivityAutomaticTerminationDisabled         NSActivityOptions = 32768
-	NSActivityAnimationTrackingEnabled             NSActivityOptions = 35184372088832
-	NSActivityTrackingEnabled                      NSActivityOptions = 70368744177664
-	NSActivityUserInitiated                        NSActivityOptions = 16777215
-	NSActivityUserInitiatedAllowingIdleSystemSleep NSActivityOptions = 15728639
-	NSActivityBackground                           NSActivityOptions = 255
-	NSActivityLatencyCritical                      NSActivityOptions = 1095216660480
-	NSActivityUserInteractive                      NSActivityOptions = 1095233437695
+	ActivityIdleDisplaySleepDisabled             ActivityOptions = 1099511627776
+	ActivityIdleSystemSleepDisabled              ActivityOptions = 1048576
+	ActivitySuddenTerminationDisabled            ActivityOptions = 16384
+	ActivityAutomaticTerminationDisabled         ActivityOptions = 32768
+	ActivityAnimationTrackingEnabled             ActivityOptions = 35184372088832
+	ActivityTrackingEnabled                      ActivityOptions = 70368744177664
+	ActivityUserInitiated                        ActivityOptions = 16777215
+	ActivityUserInitiatedAllowingIdleSystemSleep ActivityOptions = 15728639
+	ActivityBackground                           ActivityOptions = 255
+	ActivityLatencyCritical                      ActivityOptions = 1095216660480
+	ActivityUserInteractive                      ActivityOptions = 1095233437695
 )
 
-func (e NSActivityOptions) String() string {
+func (e ActivityOptions) String() string {
 	var parts []string
-	if e&NSActivityIdleDisplaySleepDisabled != 0 {
-		parts = append(parts, "NSActivityIdleDisplaySleepDisabled")
+	if e&ActivityIdleDisplaySleepDisabled != 0 {
+		parts = append(parts, "ActivityIdleDisplaySleepDisabled")
 	}
-	if e&NSActivityIdleSystemSleepDisabled != 0 {
-		parts = append(parts, "NSActivityIdleSystemSleepDisabled")
+	if e&ActivityIdleSystemSleepDisabled != 0 {
+		parts = append(parts, "ActivityIdleSystemSleepDisabled")
 	}
-	if e&NSActivitySuddenTerminationDisabled != 0 {
-		parts = append(parts, "NSActivitySuddenTerminationDisabled")
+	if e&ActivitySuddenTerminationDisabled != 0 {
+		parts = append(parts, "ActivitySuddenTerminationDisabled")
 	}
-	if e&NSActivityAutomaticTerminationDisabled != 0 {
-		parts = append(parts, "NSActivityAutomaticTerminationDisabled")
+	if e&ActivityAutomaticTerminationDisabled != 0 {
+		parts = append(parts, "ActivityAutomaticTerminationDisabled")
 	}
-	if e&NSActivityAnimationTrackingEnabled != 0 {
-		parts = append(parts, "NSActivityAnimationTrackingEnabled")
+	if e&ActivityAnimationTrackingEnabled != 0 {
+		parts = append(parts, "ActivityAnimationTrackingEnabled")
 	}
-	if e&NSActivityTrackingEnabled != 0 {
-		parts = append(parts, "NSActivityTrackingEnabled")
+	if e&ActivityTrackingEnabled != 0 {
+		parts = append(parts, "ActivityTrackingEnabled")
 	}
-	if e&NSActivityUserInitiated != 0 {
-		parts = append(parts, "NSActivityUserInitiated")
+	if e&ActivityUserInitiated != 0 {
+		parts = append(parts, "ActivityUserInitiated")
 	}
-	if e&NSActivityUserInitiatedAllowingIdleSystemSleep != 0 {
-		parts = append(parts, "NSActivityUserInitiatedAllowingIdleSystemSleep")
+	if e&ActivityUserInitiatedAllowingIdleSystemSleep != 0 {
+		parts = append(parts, "ActivityUserInitiatedAllowingIdleSystemSleep")
 	}
-	if e&NSActivityBackground != 0 {
-		parts = append(parts, "NSActivityBackground")
+	if e&ActivityBackground != 0 {
+		parts = append(parts, "ActivityBackground")
 	}
-	if e&NSActivityLatencyCritical != 0 {
-		parts = append(parts, "NSActivityLatencyCritical")
+	if e&ActivityLatencyCritical != 0 {
+		parts = append(parts, "ActivityLatencyCritical")
 	}
-	if e&NSActivityUserInteractive != 0 {
-		parts = append(parts, "NSActivityUserInteractive")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-// Values representing alignment operations.
-// Bitmask — values may be combined with |.
-type NSAlignmentOptions uint64
-
-const (
-	NSAlignMinXInward      NSAlignmentOptions = 1
-	NSAlignMinYInward      NSAlignmentOptions = 2
-	NSAlignMaxXInward      NSAlignmentOptions = 4
-	NSAlignMaxYInward      NSAlignmentOptions = 8
-	NSAlignWidthInward     NSAlignmentOptions = 16
-	NSAlignHeightInward    NSAlignmentOptions = 32
-	NSAlignMinXOutward     NSAlignmentOptions = 256
-	NSAlignMinYOutward     NSAlignmentOptions = 512
-	NSAlignMaxXOutward     NSAlignmentOptions = 1024
-	NSAlignMaxYOutward     NSAlignmentOptions = 2048
-	NSAlignWidthOutward    NSAlignmentOptions = 4096
-	NSAlignHeightOutward   NSAlignmentOptions = 8192
-	NSAlignMinXNearest     NSAlignmentOptions = 65536
-	NSAlignMinYNearest     NSAlignmentOptions = 131072
-	NSAlignMaxXNearest     NSAlignmentOptions = 262144
-	NSAlignMaxYNearest     NSAlignmentOptions = 524288
-	NSAlignWidthNearest    NSAlignmentOptions = 1048576
-	NSAlignHeightNearest   NSAlignmentOptions = 2097152
-	NSAlignRectFlipped     NSAlignmentOptions = 9223372036854775808
-	NSAlignAllEdgesInward  NSAlignmentOptions = 15
-	NSAlignAllEdgesOutward NSAlignmentOptions = 3840
-	NSAlignAllEdgesNearest NSAlignmentOptions = 983040
-)
-
-func (e NSAlignmentOptions) String() string {
-	var parts []string
-	if e&NSAlignMinXInward != 0 {
-		parts = append(parts, "NSAlignMinXInward")
-	}
-	if e&NSAlignMinYInward != 0 {
-		parts = append(parts, "NSAlignMinYInward")
-	}
-	if e&NSAlignMaxXInward != 0 {
-		parts = append(parts, "NSAlignMaxXInward")
-	}
-	if e&NSAlignMaxYInward != 0 {
-		parts = append(parts, "NSAlignMaxYInward")
-	}
-	if e&NSAlignWidthInward != 0 {
-		parts = append(parts, "NSAlignWidthInward")
-	}
-	if e&NSAlignHeightInward != 0 {
-		parts = append(parts, "NSAlignHeightInward")
-	}
-	if e&NSAlignMinXOutward != 0 {
-		parts = append(parts, "NSAlignMinXOutward")
-	}
-	if e&NSAlignMinYOutward != 0 {
-		parts = append(parts, "NSAlignMinYOutward")
-	}
-	if e&NSAlignMaxXOutward != 0 {
-		parts = append(parts, "NSAlignMaxXOutward")
-	}
-	if e&NSAlignMaxYOutward != 0 {
-		parts = append(parts, "NSAlignMaxYOutward")
-	}
-	if e&NSAlignWidthOutward != 0 {
-		parts = append(parts, "NSAlignWidthOutward")
-	}
-	if e&NSAlignHeightOutward != 0 {
-		parts = append(parts, "NSAlignHeightOutward")
-	}
-	if e&NSAlignMinXNearest != 0 {
-		parts = append(parts, "NSAlignMinXNearest")
-	}
-	if e&NSAlignMinYNearest != 0 {
-		parts = append(parts, "NSAlignMinYNearest")
-	}
-	if e&NSAlignMaxXNearest != 0 {
-		parts = append(parts, "NSAlignMaxXNearest")
-	}
-	if e&NSAlignMaxYNearest != 0 {
-		parts = append(parts, "NSAlignMaxYNearest")
-	}
-	if e&NSAlignWidthNearest != 0 {
-		parts = append(parts, "NSAlignWidthNearest")
-	}
-	if e&NSAlignHeightNearest != 0 {
-		parts = append(parts, "NSAlignHeightNearest")
-	}
-	if e&NSAlignRectFlipped != 0 {
-		parts = append(parts, "NSAlignRectFlipped")
-	}
-	if e&NSAlignAllEdgesInward != 0 {
-		parts = append(parts, "NSAlignAllEdgesInward")
-	}
-	if e&NSAlignAllEdgesOutward != 0 {
-		parts = append(parts, "NSAlignAllEdgesOutward")
-	}
-	if e&NSAlignAllEdgesNearest != 0 {
-		parts = append(parts, "NSAlignAllEdgesNearest")
+	if e&ActivityUserInteractive != 0 {
+		parts = append(parts, "ActivityUserInteractive")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -171,79 +68,56 @@ func (e NSAlignmentOptions) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type NSAppleEventSendOptions uint64
+type AppleEventSendOptions uint64
 
 const (
-	NSAppleEventSendNoReply        NSAppleEventSendOptions = 1
-	NSAppleEventSendQueueReply     NSAppleEventSendOptions = 2
-	NSAppleEventSendWaitForReply   NSAppleEventSendOptions = 3
-	NSAppleEventSendNeverInteract  NSAppleEventSendOptions = 16
-	NSAppleEventSendCanInteract    NSAppleEventSendOptions = 32
-	NSAppleEventSendAlwaysInteract NSAppleEventSendOptions = 48
-	NSAppleEventSendCanSwitchLayer NSAppleEventSendOptions = 64
-	NSAppleEventSendDontRecord     NSAppleEventSendOptions = 4096
-	NSAppleEventSendDontExecute    NSAppleEventSendOptions = 8192
-	NSAppleEventSendDontAnnotate   NSAppleEventSendOptions = 65536
-	NSAppleEventSendDefaultOptions NSAppleEventSendOptions = 35
+	AppleEventSendNoReply        AppleEventSendOptions = 1
+	AppleEventSendQueueReply     AppleEventSendOptions = 2
+	AppleEventSendWaitForReply   AppleEventSendOptions = 3
+	AppleEventSendNeverInteract  AppleEventSendOptions = 16
+	AppleEventSendCanInteract    AppleEventSendOptions = 32
+	AppleEventSendAlwaysInteract AppleEventSendOptions = 48
+	AppleEventSendCanSwitchLayer AppleEventSendOptions = 64
+	AppleEventSendDontRecord     AppleEventSendOptions = 4096
+	AppleEventSendDontExecute    AppleEventSendOptions = 8192
+	AppleEventSendDontAnnotate   AppleEventSendOptions = 65536
+	AppleEventSendDefaultOptions AppleEventSendOptions = 35
 )
 
-func (e NSAppleEventSendOptions) String() string {
+func (e AppleEventSendOptions) String() string {
 	var parts []string
-	if e&NSAppleEventSendNoReply != 0 {
-		parts = append(parts, "NSAppleEventSendNoReply")
+	if e&AppleEventSendNoReply != 0 {
+		parts = append(parts, "AppleEventSendNoReply")
 	}
-	if e&NSAppleEventSendQueueReply != 0 {
-		parts = append(parts, "NSAppleEventSendQueueReply")
+	if e&AppleEventSendQueueReply != 0 {
+		parts = append(parts, "AppleEventSendQueueReply")
 	}
-	if e&NSAppleEventSendWaitForReply != 0 {
-		parts = append(parts, "NSAppleEventSendWaitForReply")
+	if e&AppleEventSendWaitForReply != 0 {
+		parts = append(parts, "AppleEventSendWaitForReply")
 	}
-	if e&NSAppleEventSendNeverInteract != 0 {
-		parts = append(parts, "NSAppleEventSendNeverInteract")
+	if e&AppleEventSendNeverInteract != 0 {
+		parts = append(parts, "AppleEventSendNeverInteract")
 	}
-	if e&NSAppleEventSendCanInteract != 0 {
-		parts = append(parts, "NSAppleEventSendCanInteract")
+	if e&AppleEventSendCanInteract != 0 {
+		parts = append(parts, "AppleEventSendCanInteract")
 	}
-	if e&NSAppleEventSendAlwaysInteract != 0 {
-		parts = append(parts, "NSAppleEventSendAlwaysInteract")
+	if e&AppleEventSendAlwaysInteract != 0 {
+		parts = append(parts, "AppleEventSendAlwaysInteract")
 	}
-	if e&NSAppleEventSendCanSwitchLayer != 0 {
-		parts = append(parts, "NSAppleEventSendCanSwitchLayer")
+	if e&AppleEventSendCanSwitchLayer != 0 {
+		parts = append(parts, "AppleEventSendCanSwitchLayer")
 	}
-	if e&NSAppleEventSendDontRecord != 0 {
-		parts = append(parts, "NSAppleEventSendDontRecord")
+	if e&AppleEventSendDontRecord != 0 {
+		parts = append(parts, "AppleEventSendDontRecord")
 	}
-	if e&NSAppleEventSendDontExecute != 0 {
-		parts = append(parts, "NSAppleEventSendDontExecute")
+	if e&AppleEventSendDontExecute != 0 {
+		parts = append(parts, "AppleEventSendDontExecute")
 	}
-	if e&NSAppleEventSendDontAnnotate != 0 {
-		parts = append(parts, "NSAppleEventSendDontAnnotate")
+	if e&AppleEventSendDontAnnotate != 0 {
+		parts = append(parts, "AppleEventSendDontAnnotate")
 	}
-	if e&NSAppleEventSendDefaultOptions != 0 {
-		parts = append(parts, "NSAppleEventSendDefaultOptions")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-// Options for enumerating attributes.
-// Bitmask — values may be combined with |.
-type NSAttributedStringEnumerationOptions uint64
-
-const (
-	NSAttributedStringEnumerationReverse                          NSAttributedStringEnumerationOptions = 2
-	NSAttributedStringEnumerationLongestEffectiveRangeNotRequired NSAttributedStringEnumerationOptions = 1048576
-)
-
-func (e NSAttributedStringEnumerationOptions) String() string {
-	var parts []string
-	if e&NSAttributedStringEnumerationReverse != 0 {
-		parts = append(parts, "NSAttributedStringEnumerationReverse")
-	}
-	if e&NSAttributedStringEnumerationLongestEffectiveRangeNotRequired != 0 {
-		parts = append(parts, "NSAttributedStringEnumerationLongestEffectiveRangeNotRequired")
+	if e&AppleEventSendDefaultOptions != 0 {
+		parts = append(parts, "AppleEventSendDefaultOptions")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -253,22 +127,22 @@ func (e NSAttributedStringEnumerationOptions) String() string {
 
 // Options to use when creating an attributed string from a format string and variable list of arguments.
 // Bitmask — values may be combined with |.
-type NSAttributedStringFormattingOptions uint64
+type AttributedStringFormattingOptions uint64
 
 const (
 	// An option to replace the attributes in a substituted string with those of the provided attributed string.
-	NSAttributedStringFormattingInsertArgumentAttributesWithoutMerging NSAttributedStringFormattingOptions = 1
+	AttributedStringFormattingInsertArgumentAttributesWithoutMerging AttributedStringFormattingOptions = 1
 	// An option to apply to the replaced portions of text in a format string.
-	NSAttributedStringFormattingApplyReplacementIndexAttribute NSAttributedStringFormattingOptions = 2
+	AttributedStringFormattingApplyReplacementIndexAttribute AttributedStringFormattingOptions = 2
 )
 
-func (e NSAttributedStringFormattingOptions) String() string {
+func (e AttributedStringFormattingOptions) String() string {
 	var parts []string
-	if e&NSAttributedStringFormattingInsertArgumentAttributesWithoutMerging != 0 {
-		parts = append(parts, "NSAttributedStringFormattingInsertArgumentAttributesWithoutMerging")
+	if e&AttributedStringFormattingInsertArgumentAttributesWithoutMerging != 0 {
+		parts = append(parts, "AttributedStringFormattingInsertArgumentAttributesWithoutMerging")
 	}
-	if e&NSAttributedStringFormattingApplyReplacementIndexAttribute != 0 {
-		parts = append(parts, "NSAttributedStringFormattingApplyReplacementIndexAttribute")
+	if e&AttributedStringFormattingApplyReplacementIndexAttribute != 0 {
+		parts = append(parts, "AttributedStringFormattingApplyReplacementIndexAttribute")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -277,156 +151,126 @@ func (e NSAttributedStringFormattingOptions) String() string {
 }
 
 // A type that represents the syntax for intepreting a Markdown string.
-type NSAttributedStringMarkdownInterpretedSyntax int64
+type AttributedStringMarkdownInterpretedSyntax int64
 
 const (
 	// A syntax value that interprets the full Markdown syntax and produces all relevant attributes.
-	NSAttributedStringMarkdownInterpretedSyntaxFull NSAttributedStringMarkdownInterpretedSyntax = 0
+	AttributedStringMarkdownInterpretedSyntaxFull AttributedStringMarkdownInterpretedSyntax = 0
 	// A syntax value that parses all Markdown text, but interprets only attributes that apply to inline spans.
-	NSAttributedStringMarkdownInterpretedSyntaxInlineOnly NSAttributedStringMarkdownInterpretedSyntax = 1
+	AttributedStringMarkdownInterpretedSyntaxInlineOnly AttributedStringMarkdownInterpretedSyntax = 1
 	// A syntax value that parses all Markdown text, but interprets only attributes that apply to inline spans, perserving white space.
-	NSAttributedStringMarkdownInterpretedSyntaxInlineOnlyPreservingWhitespace NSAttributedStringMarkdownInterpretedSyntax = 2
+	AttributedStringMarkdownInterpretedSyntaxInlineOnlyPreservingWhitespace AttributedStringMarkdownInterpretedSyntax = 2
 )
 
-func (e NSAttributedStringMarkdownInterpretedSyntax) String() string {
+func (e AttributedStringMarkdownInterpretedSyntax) String() string {
 	switch e {
-	case NSAttributedStringMarkdownInterpretedSyntaxFull:
-		return "NSAttributedStringMarkdownInterpretedSyntaxFull"
-	case NSAttributedStringMarkdownInterpretedSyntaxInlineOnly:
-		return "NSAttributedStringMarkdownInterpretedSyntaxInlineOnly"
-	case NSAttributedStringMarkdownInterpretedSyntaxInlineOnlyPreservingWhitespace:
-		return "NSAttributedStringMarkdownInterpretedSyntaxInlineOnlyPreservingWhitespace"
+	case AttributedStringMarkdownInterpretedSyntaxFull:
+		return "AttributedStringMarkdownInterpretedSyntaxFull"
+	case AttributedStringMarkdownInterpretedSyntaxInlineOnly:
+		return "AttributedStringMarkdownInterpretedSyntaxInlineOnly"
+	case AttributedStringMarkdownInterpretedSyntaxInlineOnlyPreservingWhitespace:
+		return "AttributedStringMarkdownInterpretedSyntaxInlineOnlyPreservingWhitespace"
 	default:
-		return fmt.Sprintf("NSAttributedStringMarkdownInterpretedSyntax(%d)", int64(e))
+		return fmt.Sprintf("AttributedStringMarkdownInterpretedSyntax(%d)", int64(e))
 	}
 }
 
 // A type that represents policies for handling parsing failures.
-type NSAttributedStringMarkdownParsingFailurePolicy int64
+type AttributedStringMarkdownParsingFailurePolicy int64
 
 const (
 	// A policy to return an error from the initializer if parsing fails.
-	NSAttributedStringMarkdownParsingFailureReturnError NSAttributedStringMarkdownParsingFailurePolicy = 0
+	AttributedStringMarkdownParsingFailureReturnError AttributedStringMarkdownParsingFailurePolicy = 0
 	// A policy to return a partially parsed string, if possible.
-	NSAttributedStringMarkdownParsingFailureReturnPartiallyParsedIfPossible NSAttributedStringMarkdownParsingFailurePolicy = 1
+	AttributedStringMarkdownParsingFailureReturnPartiallyParsedIfPossible AttributedStringMarkdownParsingFailurePolicy = 1
 )
 
-func (e NSAttributedStringMarkdownParsingFailurePolicy) String() string {
+func (e AttributedStringMarkdownParsingFailurePolicy) String() string {
 	switch e {
-	case NSAttributedStringMarkdownParsingFailureReturnError:
-		return "NSAttributedStringMarkdownParsingFailureReturnError"
-	case NSAttributedStringMarkdownParsingFailureReturnPartiallyParsedIfPossible:
-		return "NSAttributedStringMarkdownParsingFailureReturnPartiallyParsedIfPossible"
+	case AttributedStringMarkdownParsingFailureReturnError:
+		return "AttributedStringMarkdownParsingFailureReturnError"
+	case AttributedStringMarkdownParsingFailureReturnPartiallyParsedIfPossible:
+		return "AttributedStringMarkdownParsingFailureReturnPartiallyParsedIfPossible"
 	default:
-		return fmt.Sprintf("NSAttributedStringMarkdownParsingFailurePolicy(%d)", int64(e))
+		return fmt.Sprintf("AttributedStringMarkdownParsingFailurePolicy(%d)", int64(e))
 	}
-}
-
-// Options for searches and insertions using indexOfObject:inSortedRange:options:usingComparator:.
-// Bitmask — values may be combined with |.
-type NSBinarySearchingOptions uint64
-
-const (
-	// Specifies that the search should return the first object in the range that is equal to the given object.
-	NSBinarySearchingFirstEqual NSBinarySearchingOptions = 256
-	// Specifies that the search should return the last object in the range that is equal to the given object.
-	NSBinarySearchingLastEqual NSBinarySearchingOptions = 512
-	// Returns the index at which you should insert the object in order to maintain a sorted array.
-	NSBinarySearchingInsertionIndex NSBinarySearchingOptions = 1024
-)
-
-func (e NSBinarySearchingOptions) String() string {
-	var parts []string
-	if e&NSBinarySearchingFirstEqual != 0 {
-		parts = append(parts, "NSBinarySearchingFirstEqual")
-	}
-	if e&NSBinarySearchingLastEqual != 0 {
-		parts = append(parts, "NSBinarySearchingLastEqual")
-	}
-	if e&NSBinarySearchingInsertionIndex != 0 {
-		parts = append(parts, "NSBinarySearchingInsertionIndex")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }
 
 // Specifies display of file or storage byte counts. The display style is platform specific.
-type NSByteCountFormatterCountStyle int64
+type ByteCountFormatterCountStyle int64
 
 const (
-	NSByteCountFormatterCountStyleFile    NSByteCountFormatterCountStyle = 0
-	NSByteCountFormatterCountStyleMemory  NSByteCountFormatterCountStyle = 1
-	NSByteCountFormatterCountStyleDecimal NSByteCountFormatterCountStyle = 2
-	NSByteCountFormatterCountStyleBinary  NSByteCountFormatterCountStyle = 3
+	ByteCountFormatterCountStyleFile    ByteCountFormatterCountStyle = 0
+	ByteCountFormatterCountStyleMemory  ByteCountFormatterCountStyle = 1
+	ByteCountFormatterCountStyleDecimal ByteCountFormatterCountStyle = 2
+	ByteCountFormatterCountStyleBinary  ByteCountFormatterCountStyle = 3
 )
 
-func (e NSByteCountFormatterCountStyle) String() string {
+func (e ByteCountFormatterCountStyle) String() string {
 	switch e {
-	case NSByteCountFormatterCountStyleFile:
-		return "NSByteCountFormatterCountStyleFile"
-	case NSByteCountFormatterCountStyleMemory:
-		return "NSByteCountFormatterCountStyleMemory"
-	case NSByteCountFormatterCountStyleDecimal:
-		return "NSByteCountFormatterCountStyleDecimal"
-	case NSByteCountFormatterCountStyleBinary:
-		return "NSByteCountFormatterCountStyleBinary"
+	case ByteCountFormatterCountStyleFile:
+		return "ByteCountFormatterCountStyleFile"
+	case ByteCountFormatterCountStyleMemory:
+		return "ByteCountFormatterCountStyleMemory"
+	case ByteCountFormatterCountStyleDecimal:
+		return "ByteCountFormatterCountStyleDecimal"
+	case ByteCountFormatterCountStyleBinary:
+		return "ByteCountFormatterCountStyleBinary"
 	default:
-		return fmt.Sprintf("NSByteCountFormatterCountStyle(%d)", int64(e))
+		return fmt.Sprintf("ByteCountFormatterCountStyle(%d)", int64(e))
 	}
 }
 
 // Specifies the units appropriate for the formatter to display. Specifying any units explicitly causes just those units to be used in showing the number.
 // Bitmask — values may be combined with |.
-type NSByteCountFormatterUnits uint64
+type ByteCountFormatterUnits uint64
 
 const (
 	// This causes default units appropriate for the platform to be used. This is the default.
-	NSByteCountFormatterUseDefault    NSByteCountFormatterUnits = 0
-	NSByteCountFormatterUseBytes      NSByteCountFormatterUnits = 1
-	NSByteCountFormatterUseKB         NSByteCountFormatterUnits = 2
-	NSByteCountFormatterUseMB         NSByteCountFormatterUnits = 4
-	NSByteCountFormatterUseGB         NSByteCountFormatterUnits = 8
-	NSByteCountFormatterUseTB         NSByteCountFormatterUnits = 16
-	NSByteCountFormatterUsePB         NSByteCountFormatterUnits = 32
-	NSByteCountFormatterUseEB         NSByteCountFormatterUnits = 64
-	NSByteCountFormatterUseZB         NSByteCountFormatterUnits = 128
-	NSByteCountFormatterUseYBOrHigher NSByteCountFormatterUnits = 65280
-	NSByteCountFormatterUseAll        NSByteCountFormatterUnits = 65535
+	ByteCountFormatterUseDefault    ByteCountFormatterUnits = 0
+	ByteCountFormatterUseBytes      ByteCountFormatterUnits = 1
+	ByteCountFormatterUseKB         ByteCountFormatterUnits = 2
+	ByteCountFormatterUseMB         ByteCountFormatterUnits = 4
+	ByteCountFormatterUseGB         ByteCountFormatterUnits = 8
+	ByteCountFormatterUseTB         ByteCountFormatterUnits = 16
+	ByteCountFormatterUsePB         ByteCountFormatterUnits = 32
+	ByteCountFormatterUseEB         ByteCountFormatterUnits = 64
+	ByteCountFormatterUseZB         ByteCountFormatterUnits = 128
+	ByteCountFormatterUseYBOrHigher ByteCountFormatterUnits = 65280
+	ByteCountFormatterUseAll        ByteCountFormatterUnits = 65535
 )
 
-func (e NSByteCountFormatterUnits) String() string {
+func (e ByteCountFormatterUnits) String() string {
 	var parts []string
-	if e&NSByteCountFormatterUseBytes != 0 {
-		parts = append(parts, "NSByteCountFormatterUseBytes")
+	if e&ByteCountFormatterUseBytes != 0 {
+		parts = append(parts, "ByteCountFormatterUseBytes")
 	}
-	if e&NSByteCountFormatterUseKB != 0 {
-		parts = append(parts, "NSByteCountFormatterUseKB")
+	if e&ByteCountFormatterUseKB != 0 {
+		parts = append(parts, "ByteCountFormatterUseKB")
 	}
-	if e&NSByteCountFormatterUseMB != 0 {
-		parts = append(parts, "NSByteCountFormatterUseMB")
+	if e&ByteCountFormatterUseMB != 0 {
+		parts = append(parts, "ByteCountFormatterUseMB")
 	}
-	if e&NSByteCountFormatterUseGB != 0 {
-		parts = append(parts, "NSByteCountFormatterUseGB")
+	if e&ByteCountFormatterUseGB != 0 {
+		parts = append(parts, "ByteCountFormatterUseGB")
 	}
-	if e&NSByteCountFormatterUseTB != 0 {
-		parts = append(parts, "NSByteCountFormatterUseTB")
+	if e&ByteCountFormatterUseTB != 0 {
+		parts = append(parts, "ByteCountFormatterUseTB")
 	}
-	if e&NSByteCountFormatterUsePB != 0 {
-		parts = append(parts, "NSByteCountFormatterUsePB")
+	if e&ByteCountFormatterUsePB != 0 {
+		parts = append(parts, "ByteCountFormatterUsePB")
 	}
-	if e&NSByteCountFormatterUseEB != 0 {
-		parts = append(parts, "NSByteCountFormatterUseEB")
+	if e&ByteCountFormatterUseEB != 0 {
+		parts = append(parts, "ByteCountFormatterUseEB")
 	}
-	if e&NSByteCountFormatterUseZB != 0 {
-		parts = append(parts, "NSByteCountFormatterUseZB")
+	if e&ByteCountFormatterUseZB != 0 {
+		parts = append(parts, "ByteCountFormatterUseZB")
 	}
-	if e&NSByteCountFormatterUseYBOrHigher != 0 {
-		parts = append(parts, "NSByteCountFormatterUseYBOrHigher")
+	if e&ByteCountFormatterUseYBOrHigher != 0 {
+		parts = append(parts, "ByteCountFormatterUseYBOrHigher")
 	}
-	if e&NSByteCountFormatterUseAll != 0 {
-		parts = append(parts, "NSByteCountFormatterUseAll")
+	if e&ByteCountFormatterUseAll != 0 {
+		parts = append(parts, "ByteCountFormatterUseAll")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -434,73 +278,46 @@ func (e NSByteCountFormatterUnits) String() string {
 	return strings.Join(parts, "|")
 }
 
-type NSCalculationError uint64
-
-const (
-	NSCalculationNoError         NSCalculationError = 0
-	NSCalculationLossOfPrecision NSCalculationError = 1
-	NSCalculationUnderflow       NSCalculationError = 2
-	NSCalculationOverflow        NSCalculationError = 3
-	NSCalculationDivideByZero    NSCalculationError = 4
-)
-
-func (e NSCalculationError) String() string {
-	switch e {
-	case NSCalculationNoError:
-		return "NSCalculationNoError"
-	case NSCalculationLossOfPrecision:
-		return "NSCalculationLossOfPrecision"
-	case NSCalculationUnderflow:
-		return "NSCalculationUnderflow"
-	case NSCalculationOverflow:
-		return "NSCalculationOverflow"
-	case NSCalculationDivideByZero:
-		return "NSCalculationDivideByZero"
-	default:
-		return fmt.Sprintf("NSCalculationError(%d)", int64(e))
-	}
-}
-
 // The options for arithmetic operations involving calendars.
 // Bitmask — values may be combined with |.
-type NSCalendarOptions uint64
+type CalendarOptions uint64
 
 const (
-	NSCalendarWrapComponents                          NSCalendarOptions = 1
-	NSCalendarMatchStrictly                           NSCalendarOptions = 2
-	NSCalendarSearchBackwards                         NSCalendarOptions = 4
-	NSCalendarMatchPreviousTimePreservingSmallerUnits NSCalendarOptions = 256
-	NSCalendarMatchNextTimePreservingSmallerUnits     NSCalendarOptions = 512
-	NSCalendarMatchNextTime                           NSCalendarOptions = 1024
-	NSCalendarMatchFirst                              NSCalendarOptions = 4096
-	NSCalendarMatchLast                               NSCalendarOptions = 8192
+	CalendarWrapComponents                          CalendarOptions = 1
+	CalendarMatchStrictly                           CalendarOptions = 2
+	CalendarSearchBackwards                         CalendarOptions = 4
+	CalendarMatchPreviousTimePreservingSmallerUnits CalendarOptions = 256
+	CalendarMatchNextTimePreservingSmallerUnits     CalendarOptions = 512
+	CalendarMatchNextTime                           CalendarOptions = 1024
+	CalendarMatchFirst                              CalendarOptions = 4096
+	CalendarMatchLast                               CalendarOptions = 8192
 )
 
-func (e NSCalendarOptions) String() string {
+func (e CalendarOptions) String() string {
 	var parts []string
-	if e&NSCalendarWrapComponents != 0 {
-		parts = append(parts, "NSCalendarWrapComponents")
+	if e&CalendarWrapComponents != 0 {
+		parts = append(parts, "CalendarWrapComponents")
 	}
-	if e&NSCalendarMatchStrictly != 0 {
-		parts = append(parts, "NSCalendarMatchStrictly")
+	if e&CalendarMatchStrictly != 0 {
+		parts = append(parts, "CalendarMatchStrictly")
 	}
-	if e&NSCalendarSearchBackwards != 0 {
-		parts = append(parts, "NSCalendarSearchBackwards")
+	if e&CalendarSearchBackwards != 0 {
+		parts = append(parts, "CalendarSearchBackwards")
 	}
-	if e&NSCalendarMatchPreviousTimePreservingSmallerUnits != 0 {
-		parts = append(parts, "NSCalendarMatchPreviousTimePreservingSmallerUnits")
+	if e&CalendarMatchPreviousTimePreservingSmallerUnits != 0 {
+		parts = append(parts, "CalendarMatchPreviousTimePreservingSmallerUnits")
 	}
-	if e&NSCalendarMatchNextTimePreservingSmallerUnits != 0 {
-		parts = append(parts, "NSCalendarMatchNextTimePreservingSmallerUnits")
+	if e&CalendarMatchNextTimePreservingSmallerUnits != 0 {
+		parts = append(parts, "CalendarMatchNextTimePreservingSmallerUnits")
 	}
-	if e&NSCalendarMatchNextTime != 0 {
-		parts = append(parts, "NSCalendarMatchNextTime")
+	if e&CalendarMatchNextTime != 0 {
+		parts = append(parts, "CalendarMatchNextTime")
 	}
-	if e&NSCalendarMatchFirst != 0 {
-		parts = append(parts, "NSCalendarMatchFirst")
+	if e&CalendarMatchFirst != 0 {
+		parts = append(parts, "CalendarMatchFirst")
 	}
-	if e&NSCalendarMatchLast != 0 {
-		parts = append(parts, "NSCalendarMatchLast")
+	if e&CalendarMatchLast != 0 {
+		parts = append(parts, "CalendarMatchLast")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -510,168 +327,168 @@ func (e NSCalendarOptions) String() string {
 
 // Calendrical units such as year, month, day and hour.
 // Bitmask — values may be combined with |.
-type NSCalendarUnit uint64
+type CalendarUnit uint64
 
 const (
-	NSCalendarUnitEra               NSCalendarUnit = 2
-	NSCalendarUnitYear              NSCalendarUnit = 4
-	NSCalendarUnitMonth             NSCalendarUnit = 8
-	NSCalendarUnitDay               NSCalendarUnit = 16
-	NSCalendarUnitHour              NSCalendarUnit = 32
-	NSCalendarUnitMinute            NSCalendarUnit = 64
-	NSCalendarUnitSecond            NSCalendarUnit = 128
-	NSCalendarUnitWeekday           NSCalendarUnit = 512
-	NSCalendarUnitWeekdayOrdinal    NSCalendarUnit = 1024
-	NSCalendarUnitQuarter           NSCalendarUnit = 2048
-	NSCalendarUnitWeekOfMonth       NSCalendarUnit = 4096
-	NSCalendarUnitWeekOfYear        NSCalendarUnit = 8192
-	NSCalendarUnitYearForWeekOfYear NSCalendarUnit = 16384
-	NSCalendarUnitNanosecond        NSCalendarUnit = 32768
-	NSCalendarUnitDayOfYear         NSCalendarUnit = 65536
-	NSCalendarUnitCalendar          NSCalendarUnit = 1048576
-	NSCalendarUnitTimeZone          NSCalendarUnit = 2097152
-	NSCalendarUnitIsLeapMonth       NSCalendarUnit = 1073741824
-	NSCalendarUnitIsRepeatedDay     NSCalendarUnit = 2147483648
+	CalendarUnitEra               CalendarUnit = 2
+	CalendarUnitYear              CalendarUnit = 4
+	CalendarUnitMonth             CalendarUnit = 8
+	CalendarUnitDay               CalendarUnit = 16
+	CalendarUnitHour              CalendarUnit = 32
+	CalendarUnitMinute            CalendarUnit = 64
+	CalendarUnitSecond            CalendarUnit = 128
+	CalendarUnitWeekday           CalendarUnit = 512
+	CalendarUnitWeekdayOrdinal    CalendarUnit = 1024
+	CalendarUnitQuarter           CalendarUnit = 2048
+	CalendarUnitWeekOfMonth       CalendarUnit = 4096
+	CalendarUnitWeekOfYear        CalendarUnit = 8192
+	CalendarUnitYearForWeekOfYear CalendarUnit = 16384
+	CalendarUnitNanosecond        CalendarUnit = 32768
+	CalendarUnitDayOfYear         CalendarUnit = 65536
+	CalendarUnitCalendar          CalendarUnit = 1048576
+	CalendarUnitTimeZone          CalendarUnit = 2097152
+	CalendarUnitIsLeapMonth       CalendarUnit = 1073741824
+	CalendarUnitIsRepeatedDay     CalendarUnit = 2147483648
 	// Deprecated: since macOS 10.10.
-	NSEraCalendarUnit NSCalendarUnit = 2
+	EraCalendarUnit CalendarUnit = 2
 	// Deprecated: since macOS 10.10.
-	NSYearCalendarUnit NSCalendarUnit = 4
+	YearCalendarUnit CalendarUnit = 4
 	// Deprecated: since macOS 10.10.
-	NSMonthCalendarUnit NSCalendarUnit = 8
+	MonthCalendarUnit CalendarUnit = 8
 	// Deprecated: since macOS 10.10.
-	NSDayCalendarUnit NSCalendarUnit = 16
+	DayCalendarUnit CalendarUnit = 16
 	// Deprecated: since macOS 10.10.
-	NSHourCalendarUnit NSCalendarUnit = 32
+	HourCalendarUnit CalendarUnit = 32
 	// Deprecated: since macOS 10.10.
-	NSMinuteCalendarUnit NSCalendarUnit = 64
+	MinuteCalendarUnit CalendarUnit = 64
 	// Deprecated: since macOS 10.10.
-	NSSecondCalendarUnit NSCalendarUnit = 128
+	SecondCalendarUnit CalendarUnit = 128
 	// Deprecated: NSCalendarUnitWeekOfMonth or NSCalendarUnitWeekOfYear, depending on which you mean
-	NSWeekCalendarUnit NSCalendarUnit = 256
+	WeekCalendarUnit CalendarUnit = 256
 	// Deprecated: since macOS 10.10.
-	NSWeekdayCalendarUnit NSCalendarUnit = 512
+	WeekdayCalendarUnit CalendarUnit = 512
 	// Deprecated: since macOS 10.10.
-	NSWeekdayOrdinalCalendarUnit NSCalendarUnit = 1024
+	WeekdayOrdinalCalendarUnit CalendarUnit = 1024
 	// Deprecated: since macOS 10.10.
-	NSQuarterCalendarUnit NSCalendarUnit = 2048
+	QuarterCalendarUnit CalendarUnit = 2048
 	// Deprecated: since macOS 10.10.
-	NSWeekOfMonthCalendarUnit NSCalendarUnit = 4096
+	WeekOfMonthCalendarUnit CalendarUnit = 4096
 	// Deprecated: since macOS 10.10.
-	NSWeekOfYearCalendarUnit NSCalendarUnit = 8192
+	WeekOfYearCalendarUnit CalendarUnit = 8192
 	// Deprecated: since macOS 10.10.
-	NSYearForWeekOfYearCalendarUnit NSCalendarUnit = 16384
+	YearForWeekOfYearCalendarUnit CalendarUnit = 16384
 	// Deprecated: since macOS 10.10.
-	NSCalendarCalendarUnit NSCalendarUnit = 1048576
+	CalendarCalendarUnit CalendarUnit = 1048576
 	// Deprecated: since macOS 10.10.
-	NSTimeZoneCalendarUnit NSCalendarUnit = 2097152
+	TimeZoneCalendarUnit CalendarUnit = 2097152
 )
 
-func (e NSCalendarUnit) String() string {
+func (e CalendarUnit) String() string {
 	var parts []string
-	if e&NSCalendarUnitEra != 0 {
-		parts = append(parts, "NSCalendarUnitEra")
+	if e&CalendarUnitEra != 0 {
+		parts = append(parts, "CalendarUnitEra")
 	}
-	if e&NSCalendarUnitYear != 0 {
-		parts = append(parts, "NSCalendarUnitYear")
+	if e&CalendarUnitYear != 0 {
+		parts = append(parts, "CalendarUnitYear")
 	}
-	if e&NSCalendarUnitMonth != 0 {
-		parts = append(parts, "NSCalendarUnitMonth")
+	if e&CalendarUnitMonth != 0 {
+		parts = append(parts, "CalendarUnitMonth")
 	}
-	if e&NSCalendarUnitDay != 0 {
-		parts = append(parts, "NSCalendarUnitDay")
+	if e&CalendarUnitDay != 0 {
+		parts = append(parts, "CalendarUnitDay")
 	}
-	if e&NSCalendarUnitHour != 0 {
-		parts = append(parts, "NSCalendarUnitHour")
+	if e&CalendarUnitHour != 0 {
+		parts = append(parts, "CalendarUnitHour")
 	}
-	if e&NSCalendarUnitMinute != 0 {
-		parts = append(parts, "NSCalendarUnitMinute")
+	if e&CalendarUnitMinute != 0 {
+		parts = append(parts, "CalendarUnitMinute")
 	}
-	if e&NSCalendarUnitSecond != 0 {
-		parts = append(parts, "NSCalendarUnitSecond")
+	if e&CalendarUnitSecond != 0 {
+		parts = append(parts, "CalendarUnitSecond")
 	}
-	if e&NSCalendarUnitWeekday != 0 {
-		parts = append(parts, "NSCalendarUnitWeekday")
+	if e&CalendarUnitWeekday != 0 {
+		parts = append(parts, "CalendarUnitWeekday")
 	}
-	if e&NSCalendarUnitWeekdayOrdinal != 0 {
-		parts = append(parts, "NSCalendarUnitWeekdayOrdinal")
+	if e&CalendarUnitWeekdayOrdinal != 0 {
+		parts = append(parts, "CalendarUnitWeekdayOrdinal")
 	}
-	if e&NSCalendarUnitQuarter != 0 {
-		parts = append(parts, "NSCalendarUnitQuarter")
+	if e&CalendarUnitQuarter != 0 {
+		parts = append(parts, "CalendarUnitQuarter")
 	}
-	if e&NSCalendarUnitWeekOfMonth != 0 {
-		parts = append(parts, "NSCalendarUnitWeekOfMonth")
+	if e&CalendarUnitWeekOfMonth != 0 {
+		parts = append(parts, "CalendarUnitWeekOfMonth")
 	}
-	if e&NSCalendarUnitWeekOfYear != 0 {
-		parts = append(parts, "NSCalendarUnitWeekOfYear")
+	if e&CalendarUnitWeekOfYear != 0 {
+		parts = append(parts, "CalendarUnitWeekOfYear")
 	}
-	if e&NSCalendarUnitYearForWeekOfYear != 0 {
-		parts = append(parts, "NSCalendarUnitYearForWeekOfYear")
+	if e&CalendarUnitYearForWeekOfYear != 0 {
+		parts = append(parts, "CalendarUnitYearForWeekOfYear")
 	}
-	if e&NSCalendarUnitNanosecond != 0 {
-		parts = append(parts, "NSCalendarUnitNanosecond")
+	if e&CalendarUnitNanosecond != 0 {
+		parts = append(parts, "CalendarUnitNanosecond")
 	}
-	if e&NSCalendarUnitDayOfYear != 0 {
-		parts = append(parts, "NSCalendarUnitDayOfYear")
+	if e&CalendarUnitDayOfYear != 0 {
+		parts = append(parts, "CalendarUnitDayOfYear")
 	}
-	if e&NSCalendarUnitCalendar != 0 {
-		parts = append(parts, "NSCalendarUnitCalendar")
+	if e&CalendarUnitCalendar != 0 {
+		parts = append(parts, "CalendarUnitCalendar")
 	}
-	if e&NSCalendarUnitTimeZone != 0 {
-		parts = append(parts, "NSCalendarUnitTimeZone")
+	if e&CalendarUnitTimeZone != 0 {
+		parts = append(parts, "CalendarUnitTimeZone")
 	}
-	if e&NSCalendarUnitIsLeapMonth != 0 {
-		parts = append(parts, "NSCalendarUnitIsLeapMonth")
+	if e&CalendarUnitIsLeapMonth != 0 {
+		parts = append(parts, "CalendarUnitIsLeapMonth")
 	}
-	if e&NSCalendarUnitIsRepeatedDay != 0 {
-		parts = append(parts, "NSCalendarUnitIsRepeatedDay")
+	if e&CalendarUnitIsRepeatedDay != 0 {
+		parts = append(parts, "CalendarUnitIsRepeatedDay")
 	}
-	if e&NSEraCalendarUnit != 0 {
-		parts = append(parts, "NSEraCalendarUnit")
+	if e&EraCalendarUnit != 0 {
+		parts = append(parts, "EraCalendarUnit")
 	}
-	if e&NSYearCalendarUnit != 0 {
-		parts = append(parts, "NSYearCalendarUnit")
+	if e&YearCalendarUnit != 0 {
+		parts = append(parts, "YearCalendarUnit")
 	}
-	if e&NSMonthCalendarUnit != 0 {
-		parts = append(parts, "NSMonthCalendarUnit")
+	if e&MonthCalendarUnit != 0 {
+		parts = append(parts, "MonthCalendarUnit")
 	}
-	if e&NSDayCalendarUnit != 0 {
-		parts = append(parts, "NSDayCalendarUnit")
+	if e&DayCalendarUnit != 0 {
+		parts = append(parts, "DayCalendarUnit")
 	}
-	if e&NSHourCalendarUnit != 0 {
-		parts = append(parts, "NSHourCalendarUnit")
+	if e&HourCalendarUnit != 0 {
+		parts = append(parts, "HourCalendarUnit")
 	}
-	if e&NSMinuteCalendarUnit != 0 {
-		parts = append(parts, "NSMinuteCalendarUnit")
+	if e&MinuteCalendarUnit != 0 {
+		parts = append(parts, "MinuteCalendarUnit")
 	}
-	if e&NSSecondCalendarUnit != 0 {
-		parts = append(parts, "NSSecondCalendarUnit")
+	if e&SecondCalendarUnit != 0 {
+		parts = append(parts, "SecondCalendarUnit")
 	}
-	if e&NSWeekCalendarUnit != 0 {
-		parts = append(parts, "NSWeekCalendarUnit")
+	if e&WeekCalendarUnit != 0 {
+		parts = append(parts, "WeekCalendarUnit")
 	}
-	if e&NSWeekdayCalendarUnit != 0 {
-		parts = append(parts, "NSWeekdayCalendarUnit")
+	if e&WeekdayCalendarUnit != 0 {
+		parts = append(parts, "WeekdayCalendarUnit")
 	}
-	if e&NSWeekdayOrdinalCalendarUnit != 0 {
-		parts = append(parts, "NSWeekdayOrdinalCalendarUnit")
+	if e&WeekdayOrdinalCalendarUnit != 0 {
+		parts = append(parts, "WeekdayOrdinalCalendarUnit")
 	}
-	if e&NSQuarterCalendarUnit != 0 {
-		parts = append(parts, "NSQuarterCalendarUnit")
+	if e&QuarterCalendarUnit != 0 {
+		parts = append(parts, "QuarterCalendarUnit")
 	}
-	if e&NSWeekOfMonthCalendarUnit != 0 {
-		parts = append(parts, "NSWeekOfMonthCalendarUnit")
+	if e&WeekOfMonthCalendarUnit != 0 {
+		parts = append(parts, "WeekOfMonthCalendarUnit")
 	}
-	if e&NSWeekOfYearCalendarUnit != 0 {
-		parts = append(parts, "NSWeekOfYearCalendarUnit")
+	if e&WeekOfYearCalendarUnit != 0 {
+		parts = append(parts, "WeekOfYearCalendarUnit")
 	}
-	if e&NSYearForWeekOfYearCalendarUnit != 0 {
-		parts = append(parts, "NSYearForWeekOfYearCalendarUnit")
+	if e&YearForWeekOfYearCalendarUnit != 0 {
+		parts = append(parts, "YearForWeekOfYearCalendarUnit")
 	}
-	if e&NSCalendarCalendarUnit != 0 {
-		parts = append(parts, "NSCalendarCalendarUnit")
+	if e&CalendarCalendarUnit != 0 {
+		parts = append(parts, "CalendarCalendarUnit")
 	}
-	if e&NSTimeZoneCalendarUnit != 0 {
-		parts = append(parts, "NSTimeZoneCalendarUnit")
+	if e&TimeZoneCalendarUnit != 0 {
+		parts = append(parts, "TimeZoneCalendarUnit")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -680,68 +497,68 @@ func (e NSCalendarUnit) String() string {
 }
 
 // The type of change represented in computing the difference of an ordered collection.
-type NSCollectionChangeType int64
+type CollectionChangeType int64
 
 const (
 	// A change type that represents the insertion of an object into an ordered collection.
-	NSCollectionChangeInsert NSCollectionChangeType = 0
+	CollectionChangeInsert CollectionChangeType = 0
 	// A change type that represents the removal of an object from an ordered collection.
-	NSCollectionChangeRemove NSCollectionChangeType = 1
+	CollectionChangeRemove CollectionChangeType = 1
 )
 
-func (e NSCollectionChangeType) String() string {
+func (e CollectionChangeType) String() string {
 	switch e {
-	case NSCollectionChangeInsert:
-		return "NSCollectionChangeInsert"
-	case NSCollectionChangeRemove:
-		return "NSCollectionChangeRemove"
+	case CollectionChangeInsert:
+		return "CollectionChangeInsert"
+	case CollectionChangeRemove:
+		return "CollectionChangeRemove"
 	default:
-		return fmt.Sprintf("NSCollectionChangeType(%d)", int64(e))
+		return fmt.Sprintf("CollectionChangeType(%d)", int64(e))
 	}
 }
 
 // Constants that describe the possible types of modifier for a comparison predicate.
-type NSComparisonPredicateModifier uint64
+type ComparisonPredicateModifier uint64
 
 const (
-	NSDirectPredicateModifier NSComparisonPredicateModifier = 0
-	NSAllPredicateModifier    NSComparisonPredicateModifier = 1
-	NSAnyPredicateModifier    NSComparisonPredicateModifier = 2
+	DirectPredicateModifier ComparisonPredicateModifier = 0
+	AllPredicateModifier    ComparisonPredicateModifier = 1
+	AnyPredicateModifier    ComparisonPredicateModifier = 2
 )
 
-func (e NSComparisonPredicateModifier) String() string {
+func (e ComparisonPredicateModifier) String() string {
 	switch e {
-	case NSDirectPredicateModifier:
-		return "NSDirectPredicateModifier"
-	case NSAllPredicateModifier:
-		return "NSAllPredicateModifier"
-	case NSAnyPredicateModifier:
-		return "NSAnyPredicateModifier"
+	case DirectPredicateModifier:
+		return "DirectPredicateModifier"
+	case AllPredicateModifier:
+		return "AllPredicateModifier"
+	case AnyPredicateModifier:
+		return "AnyPredicateModifier"
 	default:
-		return fmt.Sprintf("NSComparisonPredicateModifier(%d)", int64(e))
+		return fmt.Sprintf("ComparisonPredicateModifier(%d)", int64(e))
 	}
 }
 
 // Constants that describe the possible types of string comparison for comparison predicates.
 // Bitmask — values may be combined with |.
-type NSComparisonPredicateOptions uint64
+type ComparisonPredicateOptions uint64
 
 const (
-	NSCaseInsensitivePredicateOption      NSComparisonPredicateOptions = 1
-	NSDiacriticInsensitivePredicateOption NSComparisonPredicateOptions = 2
-	NSNormalizedPredicateOption           NSComparisonPredicateOptions = 4
+	CaseInsensitivePredicateOption      ComparisonPredicateOptions = 1
+	DiacriticInsensitivePredicateOption ComparisonPredicateOptions = 2
+	NormalizedPredicateOption           ComparisonPredicateOptions = 4
 )
 
-func (e NSComparisonPredicateOptions) String() string {
+func (e ComparisonPredicateOptions) String() string {
 	var parts []string
-	if e&NSCaseInsensitivePredicateOption != 0 {
-		parts = append(parts, "NSCaseInsensitivePredicateOption")
+	if e&CaseInsensitivePredicateOption != 0 {
+		parts = append(parts, "CaseInsensitivePredicateOption")
 	}
-	if e&NSDiacriticInsensitivePredicateOption != 0 {
-		parts = append(parts, "NSDiacriticInsensitivePredicateOption")
+	if e&DiacriticInsensitivePredicateOption != 0 {
+		parts = append(parts, "DiacriticInsensitivePredicateOption")
 	}
-	if e&NSNormalizedPredicateOption != 0 {
-		parts = append(parts, "NSNormalizedPredicateOption")
+	if e&NormalizedPredicateOption != 0 {
+		parts = append(parts, "NormalizedPredicateOption")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -750,61 +567,61 @@ func (e NSComparisonPredicateOptions) String() string {
 }
 
 // Constants that indicate sort order.
-type NSComparisonResult int64
+type ComparisonResult int64
 
 const (
-	NSOrderedAscending  NSComparisonResult = -1
-	NSOrderedSame       NSComparisonResult = 0
-	NSOrderedDescending NSComparisonResult = 1
+	OrderedAscending  ComparisonResult = -1
+	OrderedSame       ComparisonResult = 0
+	OrderedDescending ComparisonResult = 1
 )
 
-func (e NSComparisonResult) String() string {
+func (e ComparisonResult) String() string {
 	switch e {
-	case NSOrderedAscending:
-		return "NSOrderedAscending"
-	case NSOrderedSame:
-		return "NSOrderedSame"
-	case NSOrderedDescending:
-		return "NSOrderedDescending"
+	case OrderedAscending:
+		return "OrderedAscending"
+	case OrderedSame:
+		return "OrderedSame"
+	case OrderedDescending:
+		return "OrderedDescending"
 	default:
-		return fmt.Sprintf("NSComparisonResult(%d)", int64(e))
+		return fmt.Sprintf("ComparisonResult(%d)", int64(e))
 	}
 }
 
 // Constants that describe the possible types of a compound predicate.
-type NSCompoundPredicateType uint64
+type CompoundPredicateType uint64
 
 const (
-	NSNotPredicateType NSCompoundPredicateType = 0
-	NSAndPredicateType NSCompoundPredicateType = 1
-	NSOrPredicateType  NSCompoundPredicateType = 2
+	NotPredicateType CompoundPredicateType = 0
+	AndPredicateType CompoundPredicateType = 1
+	OrPredicateType  CompoundPredicateType = 2
 )
 
-func (e NSCompoundPredicateType) String() string {
+func (e CompoundPredicateType) String() string {
 	switch e {
-	case NSNotPredicateType:
-		return "NSNotPredicateType"
-	case NSAndPredicateType:
-		return "NSAndPredicateType"
-	case NSOrPredicateType:
-		return "NSOrPredicateType"
+	case NotPredicateType:
+		return "NotPredicateType"
+	case AndPredicateType:
+		return "AndPredicateType"
+	case OrPredicateType:
+		return "OrPredicateType"
 	default:
-		return fmt.Sprintf("NSCompoundPredicateType(%d)", int64(e))
+		return fmt.Sprintf("CompoundPredicateType(%d)", int64(e))
 	}
 }
 
 // Options to modify the decoding algorithm used to decode Base64 encoded data.
 // Bitmask — values may be combined with |.
-type NSDataBase64DecodingOptions uint64
+type DataBase64DecodingOptions uint64
 
 const (
-	NSDataBase64DecodingIgnoreUnknownCharacters NSDataBase64DecodingOptions = 1
+	DataBase64DecodingIgnoreUnknownCharacters DataBase64DecodingOptions = 1
 )
 
-func (e NSDataBase64DecodingOptions) String() string {
+func (e DataBase64DecodingOptions) String() string {
 	var parts []string
-	if e&NSDataBase64DecodingIgnoreUnknownCharacters != 0 {
-		parts = append(parts, "NSDataBase64DecodingIgnoreUnknownCharacters")
+	if e&DataBase64DecodingIgnoreUnknownCharacters != 0 {
+		parts = append(parts, "DataBase64DecodingIgnoreUnknownCharacters")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -814,28 +631,28 @@ func (e NSDataBase64DecodingOptions) String() string {
 
 // Options for methods used to Base64 encode data.
 // Bitmask — values may be combined with |.
-type NSDataBase64EncodingOptions uint64
+type DataBase64EncodingOptions uint64
 
 const (
-	NSDataBase64Encoding64CharacterLineLength     NSDataBase64EncodingOptions = 1
-	NSDataBase64Encoding76CharacterLineLength     NSDataBase64EncodingOptions = 2
-	NSDataBase64EncodingEndLineWithCarriageReturn NSDataBase64EncodingOptions = 16
-	NSDataBase64EncodingEndLineWithLineFeed       NSDataBase64EncodingOptions = 32
+	DataBase64Encoding64CharacterLineLength     DataBase64EncodingOptions = 1
+	DataBase64Encoding76CharacterLineLength     DataBase64EncodingOptions = 2
+	DataBase64EncodingEndLineWithCarriageReturn DataBase64EncodingOptions = 16
+	DataBase64EncodingEndLineWithLineFeed       DataBase64EncodingOptions = 32
 )
 
-func (e NSDataBase64EncodingOptions) String() string {
+func (e DataBase64EncodingOptions) String() string {
 	var parts []string
-	if e&NSDataBase64Encoding64CharacterLineLength != 0 {
-		parts = append(parts, "NSDataBase64Encoding64CharacterLineLength")
+	if e&DataBase64Encoding64CharacterLineLength != 0 {
+		parts = append(parts, "DataBase64Encoding64CharacterLineLength")
 	}
-	if e&NSDataBase64Encoding76CharacterLineLength != 0 {
-		parts = append(parts, "NSDataBase64Encoding76CharacterLineLength")
+	if e&DataBase64Encoding76CharacterLineLength != 0 {
+		parts = append(parts, "DataBase64Encoding76CharacterLineLength")
 	}
-	if e&NSDataBase64EncodingEndLineWithCarriageReturn != 0 {
-		parts = append(parts, "NSDataBase64EncodingEndLineWithCarriageReturn")
+	if e&DataBase64EncodingEndLineWithCarriageReturn != 0 {
+		parts = append(parts, "DataBase64EncodingEndLineWithCarriageReturn")
 	}
-	if e&NSDataBase64EncodingEndLineWithLineFeed != 0 {
-		parts = append(parts, "NSDataBase64EncodingEndLineWithLineFeed")
+	if e&DataBase64EncodingEndLineWithLineFeed != 0 {
+		parts = append(parts, "DataBase64EncodingEndLineWithLineFeed")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -844,65 +661,65 @@ func (e NSDataBase64EncodingOptions) String() string {
 }
 
 // An algorithm that indicates how to compress or decompress data.
-type NSDataCompressionAlgorithm int64
+type DataCompressionAlgorithm int64
 
 const (
-	NSDataCompressionAlgorithmLZFSE NSDataCompressionAlgorithm = 0
-	NSDataCompressionAlgorithmLZ4   NSDataCompressionAlgorithm = 1
-	NSDataCompressionAlgorithmLZMA  NSDataCompressionAlgorithm = 2
-	NSDataCompressionAlgorithmZlib  NSDataCompressionAlgorithm = 3
+	DataCompressionAlgorithmLZFSE DataCompressionAlgorithm = 0
+	DataCompressionAlgorithmLZ4   DataCompressionAlgorithm = 1
+	DataCompressionAlgorithmLZMA  DataCompressionAlgorithm = 2
+	DataCompressionAlgorithmZlib  DataCompressionAlgorithm = 3
 )
 
-func (e NSDataCompressionAlgorithm) String() string {
+func (e DataCompressionAlgorithm) String() string {
 	switch e {
-	case NSDataCompressionAlgorithmLZFSE:
-		return "NSDataCompressionAlgorithmLZFSE"
-	case NSDataCompressionAlgorithmLZ4:
-		return "NSDataCompressionAlgorithmLZ4"
-	case NSDataCompressionAlgorithmLZMA:
-		return "NSDataCompressionAlgorithmLZMA"
-	case NSDataCompressionAlgorithmZlib:
-		return "NSDataCompressionAlgorithmZlib"
+	case DataCompressionAlgorithmLZFSE:
+		return "DataCompressionAlgorithmLZFSE"
+	case DataCompressionAlgorithmLZ4:
+		return "DataCompressionAlgorithmLZ4"
+	case DataCompressionAlgorithmLZMA:
+		return "DataCompressionAlgorithmLZMA"
+	case DataCompressionAlgorithmZlib:
+		return "DataCompressionAlgorithmZlib"
 	default:
-		return fmt.Sprintf("NSDataCompressionAlgorithm(%d)", int64(e))
+		return fmt.Sprintf("DataCompressionAlgorithm(%d)", int64(e))
 	}
 }
 
 // Options for methods used to read data objects.
 // Bitmask — values may be combined with |.
-type NSDataReadingOptions uint64
+type DataReadingOptions uint64
 
 const (
-	NSDataReadingMappedIfSafe NSDataReadingOptions = 1
-	NSDataReadingUncached     NSDataReadingOptions = 2
-	NSDataReadingMappedAlways NSDataReadingOptions = 8
+	DataReadingMappedIfSafe DataReadingOptions = 1
+	DataReadingUncached     DataReadingOptions = 2
+	DataReadingMappedAlways DataReadingOptions = 8
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
-	NSDataReadingMapped NSDataReadingOptions = 1
+	DataReadingMapped DataReadingOptions = 1
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
-	NSMappedRead NSDataReadingOptions = 1
+	MappedRead DataReadingOptions = 1
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
-	NSUncachedRead NSDataReadingOptions = 2
+	UncachedRead DataReadingOptions = 2
 )
 
-func (e NSDataReadingOptions) String() string {
+func (e DataReadingOptions) String() string {
 	var parts []string
-	if e&NSDataReadingMappedIfSafe != 0 {
-		parts = append(parts, "NSDataReadingMappedIfSafe")
+	if e&DataReadingMappedIfSafe != 0 {
+		parts = append(parts, "DataReadingMappedIfSafe")
 	}
-	if e&NSDataReadingUncached != 0 {
-		parts = append(parts, "NSDataReadingUncached")
+	if e&DataReadingUncached != 0 {
+		parts = append(parts, "DataReadingUncached")
 	}
-	if e&NSDataReadingMappedAlways != 0 {
-		parts = append(parts, "NSDataReadingMappedAlways")
+	if e&DataReadingMappedAlways != 0 {
+		parts = append(parts, "DataReadingMappedAlways")
 	}
-	if e&NSDataReadingMapped != 0 {
-		parts = append(parts, "NSDataReadingMapped")
+	if e&DataReadingMapped != 0 {
+		parts = append(parts, "DataReadingMapped")
 	}
-	if e&NSMappedRead != 0 {
-		parts = append(parts, "NSMappedRead")
+	if e&MappedRead != 0 {
+		parts = append(parts, "MappedRead")
 	}
-	if e&NSUncachedRead != 0 {
-		parts = append(parts, "NSUncachedRead")
+	if e&UncachedRead != 0 {
+		parts = append(parts, "UncachedRead")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -912,20 +729,20 @@ func (e NSDataReadingOptions) String() string {
 
 // Options for method used to search data objects.
 // Bitmask — values may be combined with |.
-type NSDataSearchOptions uint64
+type DataSearchOptions uint64
 
 const (
-	NSDataSearchBackwards NSDataSearchOptions = 1
-	NSDataSearchAnchored  NSDataSearchOptions = 2
+	DataSearchBackwards DataSearchOptions = 1
+	DataSearchAnchored  DataSearchOptions = 2
 )
 
-func (e NSDataSearchOptions) String() string {
+func (e DataSearchOptions) String() string {
 	var parts []string
-	if e&NSDataSearchBackwards != 0 {
-		parts = append(parts, "NSDataSearchBackwards")
+	if e&DataSearchBackwards != 0 {
+		parts = append(parts, "DataSearchBackwards")
 	}
-	if e&NSDataSearchAnchored != 0 {
-		parts = append(parts, "NSDataSearchAnchored")
+	if e&DataSearchAnchored != 0 {
+		parts = append(parts, "DataSearchAnchored")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -935,46 +752,46 @@ func (e NSDataSearchOptions) String() string {
 
 // Options for methods used to write data objects.
 // Bitmask — values may be combined with |.
-type NSDataWritingOptions uint64
+type DataWritingOptions uint64
 
 const (
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
-	NSDataWritingAtomic                                             NSDataWritingOptions = 1
-	NSDataWritingWithoutOverwriting                                 NSDataWritingOptions = 2
-	NSDataWritingFileProtectionNone                                 NSDataWritingOptions = 268435456
-	NSDataWritingFileProtectionComplete                             NSDataWritingOptions = 536870912
-	NSDataWritingFileProtectionCompleteUnlessOpen                   NSDataWritingOptions = 805306368
-	NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication NSDataWritingOptions = 1073741824
-	NSDataWritingFileProtectionMask                                 NSDataWritingOptions = 4026531840
+	DataWritingAtomic                                             DataWritingOptions = 1
+	DataWritingWithoutOverwriting                                 DataWritingOptions = 2
+	DataWritingFileProtectionNone                                 DataWritingOptions = 268435456
+	DataWritingFileProtectionComplete                             DataWritingOptions = 536870912
+	DataWritingFileProtectionCompleteUnlessOpen                   DataWritingOptions = 805306368
+	DataWritingFileProtectionCompleteUntilFirstUserAuthentication DataWritingOptions = 1073741824
+	DataWritingFileProtectionMask                                 DataWritingOptions = 4026531840
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
-	NSAtomicWrite NSDataWritingOptions = 1
+	AtomicWrite DataWritingOptions = 1
 )
 
-func (e NSDataWritingOptions) String() string {
+func (e DataWritingOptions) String() string {
 	var parts []string
-	if e&NSDataWritingAtomic != 0 {
-		parts = append(parts, "NSDataWritingAtomic")
+	if e&DataWritingAtomic != 0 {
+		parts = append(parts, "DataWritingAtomic")
 	}
-	if e&NSDataWritingWithoutOverwriting != 0 {
-		parts = append(parts, "NSDataWritingWithoutOverwriting")
+	if e&DataWritingWithoutOverwriting != 0 {
+		parts = append(parts, "DataWritingWithoutOverwriting")
 	}
-	if e&NSDataWritingFileProtectionNone != 0 {
-		parts = append(parts, "NSDataWritingFileProtectionNone")
+	if e&DataWritingFileProtectionNone != 0 {
+		parts = append(parts, "DataWritingFileProtectionNone")
 	}
-	if e&NSDataWritingFileProtectionComplete != 0 {
-		parts = append(parts, "NSDataWritingFileProtectionComplete")
+	if e&DataWritingFileProtectionComplete != 0 {
+		parts = append(parts, "DataWritingFileProtectionComplete")
 	}
-	if e&NSDataWritingFileProtectionCompleteUnlessOpen != 0 {
-		parts = append(parts, "NSDataWritingFileProtectionCompleteUnlessOpen")
+	if e&DataWritingFileProtectionCompleteUnlessOpen != 0 {
+		parts = append(parts, "DataWritingFileProtectionCompleteUnlessOpen")
 	}
-	if e&NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication != 0 {
-		parts = append(parts, "NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication")
+	if e&DataWritingFileProtectionCompleteUntilFirstUserAuthentication != 0 {
+		parts = append(parts, "DataWritingFileProtectionCompleteUntilFirstUserAuthentication")
 	}
-	if e&NSDataWritingFileProtectionMask != 0 {
-		parts = append(parts, "NSDataWritingFileProtectionMask")
+	if e&DataWritingFileProtectionMask != 0 {
+		parts = append(parts, "DataWritingFileProtectionMask")
 	}
-	if e&NSAtomicWrite != 0 {
-		parts = append(parts, "NSAtomicWrite")
+	if e&AtomicWrite != 0 {
+		parts = append(parts, "AtomicWrite")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -983,70 +800,70 @@ func (e NSDataWritingOptions) String() string {
 }
 
 // Constants for specifying how to represent quantities of time.
-type NSDateComponentsFormatterUnitsStyle int64
+type DateComponentsFormatterUnitsStyle int64
 
 const (
-	NSDateComponentsFormatterUnitsStylePositional  NSDateComponentsFormatterUnitsStyle = 0
-	NSDateComponentsFormatterUnitsStyleAbbreviated NSDateComponentsFormatterUnitsStyle = 1
-	NSDateComponentsFormatterUnitsStyleShort       NSDateComponentsFormatterUnitsStyle = 2
-	NSDateComponentsFormatterUnitsStyleFull        NSDateComponentsFormatterUnitsStyle = 3
-	NSDateComponentsFormatterUnitsStyleSpellOut    NSDateComponentsFormatterUnitsStyle = 4
-	NSDateComponentsFormatterUnitsStyleBrief       NSDateComponentsFormatterUnitsStyle = 5
+	DateComponentsFormatterUnitsStylePositional  DateComponentsFormatterUnitsStyle = 0
+	DateComponentsFormatterUnitsStyleAbbreviated DateComponentsFormatterUnitsStyle = 1
+	DateComponentsFormatterUnitsStyleShort       DateComponentsFormatterUnitsStyle = 2
+	DateComponentsFormatterUnitsStyleFull        DateComponentsFormatterUnitsStyle = 3
+	DateComponentsFormatterUnitsStyleSpellOut    DateComponentsFormatterUnitsStyle = 4
+	DateComponentsFormatterUnitsStyleBrief       DateComponentsFormatterUnitsStyle = 5
 )
 
-func (e NSDateComponentsFormatterUnitsStyle) String() string {
+func (e DateComponentsFormatterUnitsStyle) String() string {
 	switch e {
-	case NSDateComponentsFormatterUnitsStylePositional:
-		return "NSDateComponentsFormatterUnitsStylePositional"
-	case NSDateComponentsFormatterUnitsStyleAbbreviated:
-		return "NSDateComponentsFormatterUnitsStyleAbbreviated"
-	case NSDateComponentsFormatterUnitsStyleShort:
-		return "NSDateComponentsFormatterUnitsStyleShort"
-	case NSDateComponentsFormatterUnitsStyleFull:
-		return "NSDateComponentsFormatterUnitsStyleFull"
-	case NSDateComponentsFormatterUnitsStyleSpellOut:
-		return "NSDateComponentsFormatterUnitsStyleSpellOut"
-	case NSDateComponentsFormatterUnitsStyleBrief:
-		return "NSDateComponentsFormatterUnitsStyleBrief"
+	case DateComponentsFormatterUnitsStylePositional:
+		return "DateComponentsFormatterUnitsStylePositional"
+	case DateComponentsFormatterUnitsStyleAbbreviated:
+		return "DateComponentsFormatterUnitsStyleAbbreviated"
+	case DateComponentsFormatterUnitsStyleShort:
+		return "DateComponentsFormatterUnitsStyleShort"
+	case DateComponentsFormatterUnitsStyleFull:
+		return "DateComponentsFormatterUnitsStyleFull"
+	case DateComponentsFormatterUnitsStyleSpellOut:
+		return "DateComponentsFormatterUnitsStyleSpellOut"
+	case DateComponentsFormatterUnitsStyleBrief:
+		return "DateComponentsFormatterUnitsStyleBrief"
 	default:
-		return fmt.Sprintf("NSDateComponentsFormatterUnitsStyle(%d)", int64(e))
+		return fmt.Sprintf("DateComponentsFormatterUnitsStyle(%d)", int64(e))
 	}
 }
 
 // Formatting constants for when values contain zeroes.
 // Bitmask — values may be combined with |.
-type NSDateComponentsFormatterZeroFormattingBehavior uint64
+type DateComponentsFormatterZeroFormattingBehavior uint64
 
 const (
 	// No formatting behavior. This behavior prevents the dropping of zero values or adding of zeroes for padding. For example, with hours, minutes, and seconds displayed, the abbreviated value for one hour and 10 seconds is “1h 0m 10s”.
-	NSDateComponentsFormatterZeroFormattingBehaviorNone         NSDateComponentsFormatterZeroFormattingBehavior = 0
-	NSDateComponentsFormatterZeroFormattingBehaviorDefault      NSDateComponentsFormatterZeroFormattingBehavior = 1
-	NSDateComponentsFormatterZeroFormattingBehaviorDropLeading  NSDateComponentsFormatterZeroFormattingBehavior = 2
-	NSDateComponentsFormatterZeroFormattingBehaviorDropMiddle   NSDateComponentsFormatterZeroFormattingBehavior = 4
-	NSDateComponentsFormatterZeroFormattingBehaviorDropTrailing NSDateComponentsFormatterZeroFormattingBehavior = 8
-	NSDateComponentsFormatterZeroFormattingBehaviorDropAll      NSDateComponentsFormatterZeroFormattingBehavior = 14
-	NSDateComponentsFormatterZeroFormattingBehaviorPad          NSDateComponentsFormatterZeroFormattingBehavior = 65536
+	DateComponentsFormatterZeroFormattingBehaviorNone         DateComponentsFormatterZeroFormattingBehavior = 0
+	DateComponentsFormatterZeroFormattingBehaviorDefault      DateComponentsFormatterZeroFormattingBehavior = 1
+	DateComponentsFormatterZeroFormattingBehaviorDropLeading  DateComponentsFormatterZeroFormattingBehavior = 2
+	DateComponentsFormatterZeroFormattingBehaviorDropMiddle   DateComponentsFormatterZeroFormattingBehavior = 4
+	DateComponentsFormatterZeroFormattingBehaviorDropTrailing DateComponentsFormatterZeroFormattingBehavior = 8
+	DateComponentsFormatterZeroFormattingBehaviorDropAll      DateComponentsFormatterZeroFormattingBehavior = 14
+	DateComponentsFormatterZeroFormattingBehaviorPad          DateComponentsFormatterZeroFormattingBehavior = 65536
 )
 
-func (e NSDateComponentsFormatterZeroFormattingBehavior) String() string {
+func (e DateComponentsFormatterZeroFormattingBehavior) String() string {
 	var parts []string
-	if e&NSDateComponentsFormatterZeroFormattingBehaviorDefault != 0 {
-		parts = append(parts, "NSDateComponentsFormatterZeroFormattingBehaviorDefault")
+	if e&DateComponentsFormatterZeroFormattingBehaviorDefault != 0 {
+		parts = append(parts, "DateComponentsFormatterZeroFormattingBehaviorDefault")
 	}
-	if e&NSDateComponentsFormatterZeroFormattingBehaviorDropLeading != 0 {
-		parts = append(parts, "NSDateComponentsFormatterZeroFormattingBehaviorDropLeading")
+	if e&DateComponentsFormatterZeroFormattingBehaviorDropLeading != 0 {
+		parts = append(parts, "DateComponentsFormatterZeroFormattingBehaviorDropLeading")
 	}
-	if e&NSDateComponentsFormatterZeroFormattingBehaviorDropMiddle != 0 {
-		parts = append(parts, "NSDateComponentsFormatterZeroFormattingBehaviorDropMiddle")
+	if e&DateComponentsFormatterZeroFormattingBehaviorDropMiddle != 0 {
+		parts = append(parts, "DateComponentsFormatterZeroFormattingBehaviorDropMiddle")
 	}
-	if e&NSDateComponentsFormatterZeroFormattingBehaviorDropTrailing != 0 {
-		parts = append(parts, "NSDateComponentsFormatterZeroFormattingBehaviorDropTrailing")
+	if e&DateComponentsFormatterZeroFormattingBehaviorDropTrailing != 0 {
+		parts = append(parts, "DateComponentsFormatterZeroFormattingBehaviorDropTrailing")
 	}
-	if e&NSDateComponentsFormatterZeroFormattingBehaviorDropAll != 0 {
-		parts = append(parts, "NSDateComponentsFormatterZeroFormattingBehaviorDropAll")
+	if e&DateComponentsFormatterZeroFormattingBehaviorDropAll != 0 {
+		parts = append(parts, "DateComponentsFormatterZeroFormattingBehaviorDropAll")
 	}
-	if e&NSDateComponentsFormatterZeroFormattingBehaviorPad != 0 {
-		parts = append(parts, "NSDateComponentsFormatterZeroFormattingBehaviorPad")
+	if e&DateComponentsFormatterZeroFormattingBehaviorPad != 0 {
+		parts = append(parts, "DateComponentsFormatterZeroFormattingBehaviorPad")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1055,130 +872,130 @@ func (e NSDateComponentsFormatterZeroFormattingBehavior) String() string {
 }
 
 // Constants that specify the behavior NSDateFormatter should exhibit.
-type NSDateFormatterBehavior uint64
+type DateFormatterBehavior uint64
 
 const (
-	NSDateFormatterBehaviorDefault NSDateFormatterBehavior = 0
-	NSDateFormatterBehavior10_0    NSDateFormatterBehavior = 1000
-	NSDateFormatterBehavior10_4    NSDateFormatterBehavior = 1040
+	DateFormatterBehaviorDefault DateFormatterBehavior = 0
+	DateFormatterBehavior10_0    DateFormatterBehavior = 1000
+	DateFormatterBehavior10_4    DateFormatterBehavior = 1040
 )
 
-func (e NSDateFormatterBehavior) String() string {
+func (e DateFormatterBehavior) String() string {
 	switch e {
-	case NSDateFormatterBehaviorDefault:
-		return "NSDateFormatterBehaviorDefault"
-	case NSDateFormatterBehavior10_0:
-		return "NSDateFormatterBehavior10_0"
-	case NSDateFormatterBehavior10_4:
-		return "NSDateFormatterBehavior10_4"
+	case DateFormatterBehaviorDefault:
+		return "DateFormatterBehaviorDefault"
+	case DateFormatterBehavior10_0:
+		return "DateFormatterBehavior10_0"
+	case DateFormatterBehavior10_4:
+		return "DateFormatterBehavior10_4"
 	default:
-		return fmt.Sprintf("NSDateFormatterBehavior(%d)", int64(e))
+		return fmt.Sprintf("DateFormatterBehavior(%d)", int64(e))
 	}
 }
 
 // The following constants specify predefined format styles for dates and times.
-type NSDateFormatterStyle uint64
+type DateFormatterStyle uint64
 
 const (
-	NSDateFormatterNoStyle     NSDateFormatterStyle = 0
-	NSDateFormatterShortStyle  NSDateFormatterStyle = 1
-	NSDateFormatterMediumStyle NSDateFormatterStyle = 2
-	NSDateFormatterLongStyle   NSDateFormatterStyle = 3
-	NSDateFormatterFullStyle   NSDateFormatterStyle = 4
+	DateFormatterNoStyle     DateFormatterStyle = 0
+	DateFormatterShortStyle  DateFormatterStyle = 1
+	DateFormatterMediumStyle DateFormatterStyle = 2
+	DateFormatterLongStyle   DateFormatterStyle = 3
+	DateFormatterFullStyle   DateFormatterStyle = 4
 )
 
-func (e NSDateFormatterStyle) String() string {
+func (e DateFormatterStyle) String() string {
 	switch e {
-	case NSDateFormatterNoStyle:
-		return "NSDateFormatterNoStyle"
-	case NSDateFormatterShortStyle:
-		return "NSDateFormatterShortStyle"
-	case NSDateFormatterMediumStyle:
-		return "NSDateFormatterMediumStyle"
-	case NSDateFormatterLongStyle:
-		return "NSDateFormatterLongStyle"
-	case NSDateFormatterFullStyle:
-		return "NSDateFormatterFullStyle"
+	case DateFormatterNoStyle:
+		return "DateFormatterNoStyle"
+	case DateFormatterShortStyle:
+		return "DateFormatterShortStyle"
+	case DateFormatterMediumStyle:
+		return "DateFormatterMediumStyle"
+	case DateFormatterLongStyle:
+		return "DateFormatterLongStyle"
+	case DateFormatterFullStyle:
+		return "DateFormatterFullStyle"
 	default:
-		return fmt.Sprintf("NSDateFormatterStyle(%d)", int64(e))
+		return fmt.Sprintf("DateFormatterStyle(%d)", int64(e))
 	}
 }
 
 // Formatting styles for individual date and time values.
-type NSDateIntervalFormatterStyle uint64
+type DateIntervalFormatterStyle uint64
 
 const (
-	NSDateIntervalFormatterNoStyle     NSDateIntervalFormatterStyle = 0
-	NSDateIntervalFormatterShortStyle  NSDateIntervalFormatterStyle = 1
-	NSDateIntervalFormatterMediumStyle NSDateIntervalFormatterStyle = 2
-	NSDateIntervalFormatterLongStyle   NSDateIntervalFormatterStyle = 3
-	NSDateIntervalFormatterFullStyle   NSDateIntervalFormatterStyle = 4
+	DateIntervalFormatterNoStyle     DateIntervalFormatterStyle = 0
+	DateIntervalFormatterShortStyle  DateIntervalFormatterStyle = 1
+	DateIntervalFormatterMediumStyle DateIntervalFormatterStyle = 2
+	DateIntervalFormatterLongStyle   DateIntervalFormatterStyle = 3
+	DateIntervalFormatterFullStyle   DateIntervalFormatterStyle = 4
 )
 
-func (e NSDateIntervalFormatterStyle) String() string {
+func (e DateIntervalFormatterStyle) String() string {
 	switch e {
-	case NSDateIntervalFormatterNoStyle:
-		return "NSDateIntervalFormatterNoStyle"
-	case NSDateIntervalFormatterShortStyle:
-		return "NSDateIntervalFormatterShortStyle"
-	case NSDateIntervalFormatterMediumStyle:
-		return "NSDateIntervalFormatterMediumStyle"
-	case NSDateIntervalFormatterLongStyle:
-		return "NSDateIntervalFormatterLongStyle"
-	case NSDateIntervalFormatterFullStyle:
-		return "NSDateIntervalFormatterFullStyle"
+	case DateIntervalFormatterNoStyle:
+		return "DateIntervalFormatterNoStyle"
+	case DateIntervalFormatterShortStyle:
+		return "DateIntervalFormatterShortStyle"
+	case DateIntervalFormatterMediumStyle:
+		return "DateIntervalFormatterMediumStyle"
+	case DateIntervalFormatterLongStyle:
+		return "DateIntervalFormatterLongStyle"
+	case DateIntervalFormatterFullStyle:
+		return "DateIntervalFormatterFullStyle"
 	default:
-		return fmt.Sprintf("NSDateIntervalFormatterStyle(%d)", int64(e))
+		return fmt.Sprintf("DateIntervalFormatterStyle(%d)", int64(e))
 	}
 }
 
 // Policies describing the action the coder should take when encountering decode failures.
-type NSDecodingFailurePolicy int64
+type DecodingFailurePolicy int64
 
 const (
-	NSDecodingFailurePolicyRaiseException    NSDecodingFailurePolicy = 0
-	NSDecodingFailurePolicySetErrorAndReturn NSDecodingFailurePolicy = 1
+	DecodingFailurePolicyRaiseException    DecodingFailurePolicy = 0
+	DecodingFailurePolicySetErrorAndReturn DecodingFailurePolicy = 1
 )
 
-func (e NSDecodingFailurePolicy) String() string {
+func (e DecodingFailurePolicy) String() string {
 	switch e {
-	case NSDecodingFailurePolicyRaiseException:
-		return "NSDecodingFailurePolicyRaiseException"
-	case NSDecodingFailurePolicySetErrorAndReturn:
-		return "NSDecodingFailurePolicySetErrorAndReturn"
+	case DecodingFailurePolicyRaiseException:
+		return "DecodingFailurePolicyRaiseException"
+	case DecodingFailurePolicySetErrorAndReturn:
+		return "DecodingFailurePolicySetErrorAndReturn"
 	default:
-		return fmt.Sprintf("NSDecodingFailurePolicy(%d)", int64(e))
+		return fmt.Sprintf("DecodingFailurePolicy(%d)", int64(e))
 	}
 }
 
 // Options for enumerating the contents of directories.
 // Bitmask — values may be combined with |.
-type NSDirectoryEnumerationOptions uint64
+type DirectoryEnumerationOptions uint64
 
 const (
-	NSDirectoryEnumerationSkipsSubdirectoryDescendants NSDirectoryEnumerationOptions = 1
-	NSDirectoryEnumerationSkipsPackageDescendants      NSDirectoryEnumerationOptions = 2
-	NSDirectoryEnumerationSkipsHiddenFiles             NSDirectoryEnumerationOptions = 4
-	NSDirectoryEnumerationIncludesDirectoriesPostOrder NSDirectoryEnumerationOptions = 8
-	NSDirectoryEnumerationProducesRelativePathURLs     NSDirectoryEnumerationOptions = 16
+	DirectoryEnumerationSkipsSubdirectoryDescendants DirectoryEnumerationOptions = 1
+	DirectoryEnumerationSkipsPackageDescendants      DirectoryEnumerationOptions = 2
+	DirectoryEnumerationSkipsHiddenFiles             DirectoryEnumerationOptions = 4
+	DirectoryEnumerationIncludesDirectoriesPostOrder DirectoryEnumerationOptions = 8
+	DirectoryEnumerationProducesRelativePathURLs     DirectoryEnumerationOptions = 16
 )
 
-func (e NSDirectoryEnumerationOptions) String() string {
+func (e DirectoryEnumerationOptions) String() string {
 	var parts []string
-	if e&NSDirectoryEnumerationSkipsSubdirectoryDescendants != 0 {
-		parts = append(parts, "NSDirectoryEnumerationSkipsSubdirectoryDescendants")
+	if e&DirectoryEnumerationSkipsSubdirectoryDescendants != 0 {
+		parts = append(parts, "DirectoryEnumerationSkipsSubdirectoryDescendants")
 	}
-	if e&NSDirectoryEnumerationSkipsPackageDescendants != 0 {
-		parts = append(parts, "NSDirectoryEnumerationSkipsPackageDescendants")
+	if e&DirectoryEnumerationSkipsPackageDescendants != 0 {
+		parts = append(parts, "DirectoryEnumerationSkipsPackageDescendants")
 	}
-	if e&NSDirectoryEnumerationSkipsHiddenFiles != 0 {
-		parts = append(parts, "NSDirectoryEnumerationSkipsHiddenFiles")
+	if e&DirectoryEnumerationSkipsHiddenFiles != 0 {
+		parts = append(parts, "DirectoryEnumerationSkipsHiddenFiles")
 	}
-	if e&NSDirectoryEnumerationIncludesDirectoriesPostOrder != 0 {
-		parts = append(parts, "NSDirectoryEnumerationIncludesDirectoriesPostOrder")
+	if e&DirectoryEnumerationIncludesDirectoriesPostOrder != 0 {
+		parts = append(parts, "DirectoryEnumerationIncludesDirectoriesPostOrder")
 	}
-	if e&NSDirectoryEnumerationProducesRelativePathURLs != 0 {
-		parts = append(parts, "NSDirectoryEnumerationProducesRelativePathURLs")
+	if e&DirectoryEnumerationProducesRelativePathURLs != 0 {
+		parts = append(parts, "DirectoryEnumerationProducesRelativePathURLs")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1187,20 +1004,20 @@ func (e NSDirectoryEnumerationOptions) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type NSDistributedNotificationOptions uint64
+type DistributedNotificationOptions uint64
 
 const (
-	NSDistributedNotificationDeliverImmediately NSDistributedNotificationOptions = 1
-	NSDistributedNotificationPostToAllSessions  NSDistributedNotificationOptions = 2
+	DistributedNotificationDeliverImmediately DistributedNotificationOptions = 1
+	DistributedNotificationPostToAllSessions  DistributedNotificationOptions = 2
 )
 
-func (e NSDistributedNotificationOptions) String() string {
+func (e DistributedNotificationOptions) String() string {
 	var parts []string
-	if e&NSDistributedNotificationDeliverImmediately != 0 {
-		parts = append(parts, "NSDistributedNotificationDeliverImmediately")
+	if e&DistributedNotificationDeliverImmediately != 0 {
+		parts = append(parts, "DistributedNotificationDeliverImmediately")
 	}
-	if e&NSDistributedNotificationPostToAllSessions != 0 {
-		parts = append(parts, "NSDistributedNotificationPostToAllSessions")
+	if e&DistributedNotificationPostToAllSessions != 0 {
+		parts = append(parts, "DistributedNotificationPostToAllSessions")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1209,48 +1026,48 @@ func (e NSDistributedNotificationOptions) String() string {
 }
 
 // The units supported by the NSEnergyFormatter class.
-type NSEnergyFormatterUnit int64
+type EnergyFormatterUnit int64
 
 const (
-	NSEnergyFormatterUnitJoule       NSEnergyFormatterUnit = 11
-	NSEnergyFormatterUnitKilojoule   NSEnergyFormatterUnit = 14
-	NSEnergyFormatterUnitCalorie     NSEnergyFormatterUnit = 1793
-	NSEnergyFormatterUnitKilocalorie NSEnergyFormatterUnit = 1794
+	EnergyFormatterUnitJoule       EnergyFormatterUnit = 11
+	EnergyFormatterUnitKilojoule   EnergyFormatterUnit = 14
+	EnergyFormatterUnitCalorie     EnergyFormatterUnit = 1793
+	EnergyFormatterUnitKilocalorie EnergyFormatterUnit = 1794
 )
 
-func (e NSEnergyFormatterUnit) String() string {
+func (e EnergyFormatterUnit) String() string {
 	switch e {
-	case NSEnergyFormatterUnitJoule:
-		return "NSEnergyFormatterUnitJoule"
-	case NSEnergyFormatterUnitKilojoule:
-		return "NSEnergyFormatterUnitKilojoule"
-	case NSEnergyFormatterUnitCalorie:
-		return "NSEnergyFormatterUnitCalorie"
-	case NSEnergyFormatterUnitKilocalorie:
-		return "NSEnergyFormatterUnitKilocalorie"
+	case EnergyFormatterUnitJoule:
+		return "EnergyFormatterUnitJoule"
+	case EnergyFormatterUnitKilojoule:
+		return "EnergyFormatterUnitKilojoule"
+	case EnergyFormatterUnitCalorie:
+		return "EnergyFormatterUnitCalorie"
+	case EnergyFormatterUnitKilocalorie:
+		return "EnergyFormatterUnitKilocalorie"
 	default:
-		return fmt.Sprintf("NSEnergyFormatterUnit(%d)", int64(e))
+		return fmt.Sprintf("EnergyFormatterUnit(%d)", int64(e))
 	}
 }
 
 // Options for block enumeration operations.
 // Bitmask — values may be combined with |.
-type NSEnumerationOptions uint64
+type EnumerationOptions uint64
 
 const (
 	// Specifies that the Block enumeration should be concurrent.
-	NSEnumerationConcurrent NSEnumerationOptions = 1
+	EnumerationConcurrent EnumerationOptions = 1
 	// Specifies that the enumeration should be performed in reverse.
-	NSEnumerationReverse NSEnumerationOptions = 2
+	EnumerationReverse EnumerationOptions = 2
 )
 
-func (e NSEnumerationOptions) String() string {
+func (e EnumerationOptions) String() string {
 	var parts []string
-	if e&NSEnumerationConcurrent != 0 {
-		parts = append(parts, "NSEnumerationConcurrent")
+	if e&EnumerationConcurrent != 0 {
+		parts = append(parts, "EnumerationConcurrent")
 	}
-	if e&NSEnumerationReverse != 0 {
-		parts = append(parts, "NSEnumerationReverse")
+	if e&EnumerationReverse != 0 {
+		parts = append(parts, "EnumerationReverse")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1259,81 +1076,81 @@ func (e NSEnumerationOptions) String() string {
 }
 
 // Defines the possible types of an expression.
-type NSExpressionType uint64
+type ExpressionType uint64
 
 const (
-	NSConstantValueExpressionType   NSExpressionType = 0
-	NSEvaluatedObjectExpressionType NSExpressionType = 1
-	NSVariableExpressionType        NSExpressionType = 2
-	NSKeyPathExpressionType         NSExpressionType = 3
-	NSFunctionExpressionType        NSExpressionType = 4
-	NSUnionSetExpressionType        NSExpressionType = 5
-	NSIntersectSetExpressionType    NSExpressionType = 6
-	NSMinusSetExpressionType        NSExpressionType = 7
-	NSSubqueryExpressionType        NSExpressionType = 13
-	NSAggregateExpressionType       NSExpressionType = 14
-	NSAnyKeyExpressionType          NSExpressionType = 15
-	NSBlockExpressionType           NSExpressionType = 19
-	NSConditionalExpressionType     NSExpressionType = 20
+	ConstantValueExpressionType   ExpressionType = 0
+	EvaluatedObjectExpressionType ExpressionType = 1
+	VariableExpressionType        ExpressionType = 2
+	KeyPathExpressionType         ExpressionType = 3
+	FunctionExpressionType        ExpressionType = 4
+	UnionSetExpressionType        ExpressionType = 5
+	IntersectSetExpressionType    ExpressionType = 6
+	MinusSetExpressionType        ExpressionType = 7
+	SubqueryExpressionType        ExpressionType = 13
+	AggregateExpressionType       ExpressionType = 14
+	AnyKeyExpressionType          ExpressionType = 15
+	BlockExpressionType           ExpressionType = 19
+	ConditionalExpressionType     ExpressionType = 20
 )
 
-func (e NSExpressionType) String() string {
+func (e ExpressionType) String() string {
 	switch e {
-	case NSConstantValueExpressionType:
-		return "NSConstantValueExpressionType"
-	case NSEvaluatedObjectExpressionType:
-		return "NSEvaluatedObjectExpressionType"
-	case NSVariableExpressionType:
-		return "NSVariableExpressionType"
-	case NSKeyPathExpressionType:
-		return "NSKeyPathExpressionType"
-	case NSFunctionExpressionType:
-		return "NSFunctionExpressionType"
-	case NSUnionSetExpressionType:
-		return "NSUnionSetExpressionType"
-	case NSIntersectSetExpressionType:
-		return "NSIntersectSetExpressionType"
-	case NSMinusSetExpressionType:
-		return "NSMinusSetExpressionType"
-	case NSSubqueryExpressionType:
-		return "NSSubqueryExpressionType"
-	case NSAggregateExpressionType:
-		return "NSAggregateExpressionType"
-	case NSAnyKeyExpressionType:
-		return "NSAnyKeyExpressionType"
-	case NSBlockExpressionType:
-		return "NSBlockExpressionType"
-	case NSConditionalExpressionType:
-		return "NSConditionalExpressionType"
+	case ConstantValueExpressionType:
+		return "ConstantValueExpressionType"
+	case EvaluatedObjectExpressionType:
+		return "EvaluatedObjectExpressionType"
+	case VariableExpressionType:
+		return "VariableExpressionType"
+	case KeyPathExpressionType:
+		return "KeyPathExpressionType"
+	case FunctionExpressionType:
+		return "FunctionExpressionType"
+	case UnionSetExpressionType:
+		return "UnionSetExpressionType"
+	case IntersectSetExpressionType:
+		return "IntersectSetExpressionType"
+	case MinusSetExpressionType:
+		return "MinusSetExpressionType"
+	case SubqueryExpressionType:
+		return "SubqueryExpressionType"
+	case AggregateExpressionType:
+		return "AggregateExpressionType"
+	case AnyKeyExpressionType:
+		return "AnyKeyExpressionType"
+	case BlockExpressionType:
+		return "BlockExpressionType"
+	case ConditionalExpressionType:
+		return "ConditionalExpressionType"
 	default:
-		return fmt.Sprintf("NSExpressionType(%d)", int64(e))
+		return fmt.Sprintf("ExpressionType(%d)", int64(e))
 	}
 }
 
 // Options to use when reading the contents or attributes of a file or directory.
 // Bitmask — values may be combined with |.
-type NSFileCoordinatorReadingOptions uint64
+type FileCoordinatorReadingOptions uint64
 
 const (
-	NSFileCoordinatorReadingWithoutChanges                   NSFileCoordinatorReadingOptions = 1
-	NSFileCoordinatorReadingResolvesSymbolicLink             NSFileCoordinatorReadingOptions = 2
-	NSFileCoordinatorReadingImmediatelyAvailableMetadataOnly NSFileCoordinatorReadingOptions = 4
-	NSFileCoordinatorReadingForUploading                     NSFileCoordinatorReadingOptions = 8
+	FileCoordinatorReadingWithoutChanges                   FileCoordinatorReadingOptions = 1
+	FileCoordinatorReadingResolvesSymbolicLink             FileCoordinatorReadingOptions = 2
+	FileCoordinatorReadingImmediatelyAvailableMetadataOnly FileCoordinatorReadingOptions = 4
+	FileCoordinatorReadingForUploading                     FileCoordinatorReadingOptions = 8
 )
 
-func (e NSFileCoordinatorReadingOptions) String() string {
+func (e FileCoordinatorReadingOptions) String() string {
 	var parts []string
-	if e&NSFileCoordinatorReadingWithoutChanges != 0 {
-		parts = append(parts, "NSFileCoordinatorReadingWithoutChanges")
+	if e&FileCoordinatorReadingWithoutChanges != 0 {
+		parts = append(parts, "FileCoordinatorReadingWithoutChanges")
 	}
-	if e&NSFileCoordinatorReadingResolvesSymbolicLink != 0 {
-		parts = append(parts, "NSFileCoordinatorReadingResolvesSymbolicLink")
+	if e&FileCoordinatorReadingResolvesSymbolicLink != 0 {
+		parts = append(parts, "FileCoordinatorReadingResolvesSymbolicLink")
 	}
-	if e&NSFileCoordinatorReadingImmediatelyAvailableMetadataOnly != 0 {
-		parts = append(parts, "NSFileCoordinatorReadingImmediatelyAvailableMetadataOnly")
+	if e&FileCoordinatorReadingImmediatelyAvailableMetadataOnly != 0 {
+		parts = append(parts, "FileCoordinatorReadingImmediatelyAvailableMetadataOnly")
 	}
-	if e&NSFileCoordinatorReadingForUploading != 0 {
-		parts = append(parts, "NSFileCoordinatorReadingForUploading")
+	if e&FileCoordinatorReadingForUploading != 0 {
+		parts = append(parts, "FileCoordinatorReadingForUploading")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1343,32 +1160,32 @@ func (e NSFileCoordinatorReadingOptions) String() string {
 
 // Options to use when changing the contents or attributes of a file or directory.
 // Bitmask — values may be combined with |.
-type NSFileCoordinatorWritingOptions uint64
+type FileCoordinatorWritingOptions uint64
 
 const (
-	NSFileCoordinatorWritingForDeleting                    NSFileCoordinatorWritingOptions = 1
-	NSFileCoordinatorWritingForMoving                      NSFileCoordinatorWritingOptions = 2
-	NSFileCoordinatorWritingForMerging                     NSFileCoordinatorWritingOptions = 4
-	NSFileCoordinatorWritingForReplacing                   NSFileCoordinatorWritingOptions = 8
-	NSFileCoordinatorWritingContentIndependentMetadataOnly NSFileCoordinatorWritingOptions = 16
+	FileCoordinatorWritingForDeleting                    FileCoordinatorWritingOptions = 1
+	FileCoordinatorWritingForMoving                      FileCoordinatorWritingOptions = 2
+	FileCoordinatorWritingForMerging                     FileCoordinatorWritingOptions = 4
+	FileCoordinatorWritingForReplacing                   FileCoordinatorWritingOptions = 8
+	FileCoordinatorWritingContentIndependentMetadataOnly FileCoordinatorWritingOptions = 16
 )
 
-func (e NSFileCoordinatorWritingOptions) String() string {
+func (e FileCoordinatorWritingOptions) String() string {
 	var parts []string
-	if e&NSFileCoordinatorWritingForDeleting != 0 {
-		parts = append(parts, "NSFileCoordinatorWritingForDeleting")
+	if e&FileCoordinatorWritingForDeleting != 0 {
+		parts = append(parts, "FileCoordinatorWritingForDeleting")
 	}
-	if e&NSFileCoordinatorWritingForMoving != 0 {
-		parts = append(parts, "NSFileCoordinatorWritingForMoving")
+	if e&FileCoordinatorWritingForMoving != 0 {
+		parts = append(parts, "FileCoordinatorWritingForMoving")
 	}
-	if e&NSFileCoordinatorWritingForMerging != 0 {
-		parts = append(parts, "NSFileCoordinatorWritingForMerging")
+	if e&FileCoordinatorWritingForMerging != 0 {
+		parts = append(parts, "FileCoordinatorWritingForMerging")
 	}
-	if e&NSFileCoordinatorWritingForReplacing != 0 {
-		parts = append(parts, "NSFileCoordinatorWritingForReplacing")
+	if e&FileCoordinatorWritingForReplacing != 0 {
+		parts = append(parts, "FileCoordinatorWritingForReplacing")
 	}
-	if e&NSFileCoordinatorWritingContentIndependentMetadataOnly != 0 {
-		parts = append(parts, "NSFileCoordinatorWritingContentIndependentMetadataOnly")
+	if e&FileCoordinatorWritingContentIndependentMetadataOnly != 0 {
+		parts = append(parts, "FileCoordinatorWritingContentIndependentMetadataOnly")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1378,20 +1195,20 @@ func (e NSFileCoordinatorWritingOptions) String() string {
 
 // Options for specifying the behavior of file replacement operations.
 // Bitmask — values may be combined with |.
-type NSFileManagerItemReplacementOptions uint64
+type FileManagerItemReplacementOptions uint64
 
 const (
-	NSFileManagerItemReplacementUsingNewMetadataOnly      NSFileManagerItemReplacementOptions = 1
-	NSFileManagerItemReplacementWithoutDeletingBackupItem NSFileManagerItemReplacementOptions = 2
+	FileManagerItemReplacementUsingNewMetadataOnly      FileManagerItemReplacementOptions = 1
+	FileManagerItemReplacementWithoutDeletingBackupItem FileManagerItemReplacementOptions = 2
 )
 
-func (e NSFileManagerItemReplacementOptions) String() string {
+func (e FileManagerItemReplacementOptions) String() string {
 	var parts []string
-	if e&NSFileManagerItemReplacementUsingNewMetadataOnly != 0 {
-		parts = append(parts, "NSFileManagerItemReplacementUsingNewMetadataOnly")
+	if e&FileManagerItemReplacementUsingNewMetadataOnly != 0 {
+		parts = append(parts, "FileManagerItemReplacementUsingNewMetadataOnly")
 	}
-	if e&NSFileManagerItemReplacementWithoutDeletingBackupItem != 0 {
-		parts = append(parts, "NSFileManagerItemReplacementWithoutDeletingBackupItem")
+	if e&FileManagerItemReplacementWithoutDeletingBackupItem != 0 {
+		parts = append(parts, "FileManagerItemReplacementWithoutDeletingBackupItem")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1400,45 +1217,45 @@ func (e NSFileManagerItemReplacementOptions) String() string {
 }
 
 // The behaviors the file manager can apply to resolve conflicts when resuming a sync.
-type NSFileManagerResumeSyncBehavior int64
+type FileManagerResumeSyncBehavior int64
 
 const (
 	// Resumes synchronizing by uploading the local version of the file.
-	NSFileManagerResumeSyncBehaviorPreserveLocalChanges NSFileManagerResumeSyncBehavior = 0
+	FileManagerResumeSyncBehaviorPreserveLocalChanges FileManagerResumeSyncBehavior = 0
 	// Resumes sync by first uploading the local version of the file, failing if the provider detects a conflict.
-	NSFileManagerResumeSyncBehaviorAfterUploadWithFailOnConflict NSFileManagerResumeSyncBehavior = 1
+	FileManagerResumeSyncBehaviorAfterUploadWithFailOnConflict FileManagerResumeSyncBehavior = 1
 	// Resumes synchronizing by overwriting any local changes with the remote version of the file.
-	NSFileManagerResumeSyncBehaviorDropLocalChanges NSFileManagerResumeSyncBehavior = 2
+	FileManagerResumeSyncBehaviorDropLocalChanges FileManagerResumeSyncBehavior = 2
 )
 
-func (e NSFileManagerResumeSyncBehavior) String() string {
+func (e FileManagerResumeSyncBehavior) String() string {
 	switch e {
-	case NSFileManagerResumeSyncBehaviorPreserveLocalChanges:
-		return "NSFileManagerResumeSyncBehaviorPreserveLocalChanges"
-	case NSFileManagerResumeSyncBehaviorAfterUploadWithFailOnConflict:
-		return "NSFileManagerResumeSyncBehaviorAfterUploadWithFailOnConflict"
-	case NSFileManagerResumeSyncBehaviorDropLocalChanges:
-		return "NSFileManagerResumeSyncBehaviorDropLocalChanges"
+	case FileManagerResumeSyncBehaviorPreserveLocalChanges:
+		return "FileManagerResumeSyncBehaviorPreserveLocalChanges"
+	case FileManagerResumeSyncBehaviorAfterUploadWithFailOnConflict:
+		return "FileManagerResumeSyncBehaviorAfterUploadWithFailOnConflict"
+	case FileManagerResumeSyncBehaviorDropLocalChanges:
+		return "FileManagerResumeSyncBehaviorDropLocalChanges"
 	default:
-		return fmt.Sprintf("NSFileManagerResumeSyncBehavior(%d)", int64(e))
+		return fmt.Sprintf("FileManagerResumeSyncBehavior(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type NSFileManagerUnmountOptions uint64
+type FileManagerUnmountOptions uint64
 
 const (
-	NSFileManagerUnmountAllPartitionsAndEjectDisk NSFileManagerUnmountOptions = 1
-	NSFileManagerUnmountWithoutUI                 NSFileManagerUnmountOptions = 2
+	FileManagerUnmountAllPartitionsAndEjectDisk FileManagerUnmountOptions = 1
+	FileManagerUnmountWithoutUI                 FileManagerUnmountOptions = 2
 )
 
-func (e NSFileManagerUnmountOptions) String() string {
+func (e FileManagerUnmountOptions) String() string {
 	var parts []string
-	if e&NSFileManagerUnmountAllPartitionsAndEjectDisk != 0 {
-		parts = append(parts, "NSFileManagerUnmountAllPartitionsAndEjectDisk")
+	if e&FileManagerUnmountAllPartitionsAndEjectDisk != 0 {
+		parts = append(parts, "FileManagerUnmountAllPartitionsAndEjectDisk")
 	}
-	if e&NSFileManagerUnmountWithoutUI != 0 {
-		parts = append(parts, "NSFileManagerUnmountWithoutUI")
+	if e&FileManagerUnmountWithoutUI != 0 {
+		parts = append(parts, "FileManagerUnmountWithoutUI")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1447,38 +1264,38 @@ func (e NSFileManagerUnmountOptions) String() string {
 }
 
 // The policies the file manager can apply to resolve conflicts when uploading a local version of a file.
-type NSFileManagerUploadLocalVersionConflictPolicy int64
+type FileManagerUploadLocalVersionConflictPolicy int64
 
 const (
 	// Resolves the conflict using the policy defined by the file provider.
-	NSFileManagerUploadConflictPolicyDefault NSFileManagerUploadLocalVersionConflictPolicy = 0
+	FileManagerUploadConflictPolicyDefault FileManagerUploadLocalVersionConflictPolicy = 0
 	// Resolves the conflict by causing the upload to fail.
-	NSFileManagerUploadConflictPolicyFailOnConflict NSFileManagerUploadLocalVersionConflictPolicy = 1
+	FileManagerUploadConflictPolicyFailOnConflict FileManagerUploadLocalVersionConflictPolicy = 1
 )
 
-func (e NSFileManagerUploadLocalVersionConflictPolicy) String() string {
+func (e FileManagerUploadLocalVersionConflictPolicy) String() string {
 	switch e {
-	case NSFileManagerUploadConflictPolicyDefault:
-		return "NSFileManagerUploadConflictPolicyDefault"
-	case NSFileManagerUploadConflictPolicyFailOnConflict:
-		return "NSFileManagerUploadConflictPolicyFailOnConflict"
+	case FileManagerUploadConflictPolicyDefault:
+		return "FileManagerUploadConflictPolicyDefault"
+	case FileManagerUploadConflictPolicyFailOnConflict:
+		return "FileManagerUploadConflictPolicyFailOnConflict"
 	default:
-		return fmt.Sprintf("NSFileManagerUploadLocalVersionConflictPolicy(%d)", int64(e))
+		return fmt.Sprintf("FileManagerUploadLocalVersionConflictPolicy(%d)", int64(e))
 	}
 }
 
 // Options for adding a new file version.
 // Bitmask — values may be combined with |.
-type NSFileVersionAddingOptions uint64
+type FileVersionAddingOptions uint64
 
 const (
-	NSFileVersionAddingByMoving NSFileVersionAddingOptions = 1
+	FileVersionAddingByMoving FileVersionAddingOptions = 1
 )
 
-func (e NSFileVersionAddingOptions) String() string {
+func (e FileVersionAddingOptions) String() string {
 	var parts []string
-	if e&NSFileVersionAddingByMoving != 0 {
-		parts = append(parts, "NSFileVersionAddingByMoving")
+	if e&FileVersionAddingByMoving != 0 {
+		parts = append(parts, "FileVersionAddingByMoving")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1488,16 +1305,16 @@ func (e NSFileVersionAddingOptions) String() string {
 
 // Options for replacing a file version.
 // Bitmask — values may be combined with |.
-type NSFileVersionReplacingOptions uint64
+type FileVersionReplacingOptions uint64
 
 const (
-	NSFileVersionReplacingByMoving NSFileVersionReplacingOptions = 1
+	FileVersionReplacingByMoving FileVersionReplacingOptions = 1
 )
 
-func (e NSFileVersionReplacingOptions) String() string {
+func (e FileVersionReplacingOptions) String() string {
 	var parts []string
-	if e&NSFileVersionReplacingByMoving != 0 {
-		parts = append(parts, "NSFileVersionReplacingByMoving")
+	if e&FileVersionReplacingByMoving != 0 {
+		parts = append(parts, "FileVersionReplacingByMoving")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1507,20 +1324,20 @@ func (e NSFileVersionReplacingOptions) String() string {
 
 // Reading options that can be set by the initWithURL:options:error: and readFromURL:options:error: methods.
 // Bitmask — values may be combined with |.
-type NSFileWrapperReadingOptions uint64
+type FileWrapperReadingOptions uint64
 
 const (
-	NSFileWrapperReadingImmediate      NSFileWrapperReadingOptions = 1
-	NSFileWrapperReadingWithoutMapping NSFileWrapperReadingOptions = 2
+	FileWrapperReadingImmediate      FileWrapperReadingOptions = 1
+	FileWrapperReadingWithoutMapping FileWrapperReadingOptions = 2
 )
 
-func (e NSFileWrapperReadingOptions) String() string {
+func (e FileWrapperReadingOptions) String() string {
 	var parts []string
-	if e&NSFileWrapperReadingImmediate != 0 {
-		parts = append(parts, "NSFileWrapperReadingImmediate")
+	if e&FileWrapperReadingImmediate != 0 {
+		parts = append(parts, "FileWrapperReadingImmediate")
 	}
-	if e&NSFileWrapperReadingWithoutMapping != 0 {
-		parts = append(parts, "NSFileWrapperReadingWithoutMapping")
+	if e&FileWrapperReadingWithoutMapping != 0 {
+		parts = append(parts, "FileWrapperReadingWithoutMapping")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1530,20 +1347,20 @@ func (e NSFileWrapperReadingOptions) String() string {
 
 // Writing options that can be set by the writeToURL:options:originalContentsURL:error: method.
 // Bitmask — values may be combined with |.
-type NSFileWrapperWritingOptions uint64
+type FileWrapperWritingOptions uint64
 
 const (
-	NSFileWrapperWritingAtomic           NSFileWrapperWritingOptions = 1
-	NSFileWrapperWritingWithNameUpdating NSFileWrapperWritingOptions = 2
+	FileWrapperWritingAtomic           FileWrapperWritingOptions = 1
+	FileWrapperWritingWithNameUpdating FileWrapperWritingOptions = 2
 )
 
-func (e NSFileWrapperWritingOptions) String() string {
+func (e FileWrapperWritingOptions) String() string {
 	var parts []string
-	if e&NSFileWrapperWritingAtomic != 0 {
-		parts = append(parts, "NSFileWrapperWritingAtomic")
+	if e&FileWrapperWritingAtomic != 0 {
+		parts = append(parts, "FileWrapperWritingAtomic")
 	}
-	if e&NSFileWrapperWritingWithNameUpdating != 0 {
-		parts = append(parts, "NSFileWrapperWritingWithNameUpdating")
+	if e&FileWrapperWritingWithNameUpdating != 0 {
+		parts = append(parts, "FileWrapperWritingWithNameUpdating")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1552,434 +1369,434 @@ func (e NSFileWrapperWritingOptions) String() string {
 }
 
 // The formatting context for a formatter.
-type NSFormattingContext int64
+type FormattingContext int64
 
 const (
-	NSFormattingContextUnknown             NSFormattingContext = 0
-	NSFormattingContextDynamic             NSFormattingContext = 1
-	NSFormattingContextStandalone          NSFormattingContext = 2
-	NSFormattingContextListItem            NSFormattingContext = 3
-	NSFormattingContextBeginningOfSentence NSFormattingContext = 4
-	NSFormattingContextMiddleOfSentence    NSFormattingContext = 5
+	FormattingContextUnknown             FormattingContext = 0
+	FormattingContextDynamic             FormattingContext = 1
+	FormattingContextStandalone          FormattingContext = 2
+	FormattingContextListItem            FormattingContext = 3
+	FormattingContextBeginningOfSentence FormattingContext = 4
+	FormattingContextMiddleOfSentence    FormattingContext = 5
 )
 
-func (e NSFormattingContext) String() string {
+func (e FormattingContext) String() string {
 	switch e {
-	case NSFormattingContextUnknown:
-		return "NSFormattingContextUnknown"
-	case NSFormattingContextDynamic:
-		return "NSFormattingContextDynamic"
-	case NSFormattingContextStandalone:
-		return "NSFormattingContextStandalone"
-	case NSFormattingContextListItem:
-		return "NSFormattingContextListItem"
-	case NSFormattingContextBeginningOfSentence:
-		return "NSFormattingContextBeginningOfSentence"
-	case NSFormattingContextMiddleOfSentence:
-		return "NSFormattingContextMiddleOfSentence"
+	case FormattingContextUnknown:
+		return "FormattingContextUnknown"
+	case FormattingContextDynamic:
+		return "FormattingContextDynamic"
+	case FormattingContextStandalone:
+		return "FormattingContextStandalone"
+	case FormattingContextListItem:
+		return "FormattingContextListItem"
+	case FormattingContextBeginningOfSentence:
+		return "FormattingContextBeginningOfSentence"
+	case FormattingContextMiddleOfSentence:
+		return "FormattingContextMiddleOfSentence"
 	default:
-		return fmt.Sprintf("NSFormattingContext(%d)", int64(e))
+		return fmt.Sprintf("FormattingContext(%d)", int64(e))
 	}
 }
 
 // Specifies the width of the unit, determining the textual representation.
-type NSFormattingUnitStyle int64
+type FormattingUnitStyle int64
 
 const (
-	NSFormattingUnitStyleShort  NSFormattingUnitStyle = 1
-	NSFormattingUnitStyleMedium NSFormattingUnitStyle = 2
-	NSFormattingUnitStyleLong   NSFormattingUnitStyle = 3
+	FormattingUnitStyleShort  FormattingUnitStyle = 1
+	FormattingUnitStyleMedium FormattingUnitStyle = 2
+	FormattingUnitStyleLong   FormattingUnitStyle = 3
 )
 
-func (e NSFormattingUnitStyle) String() string {
+func (e FormattingUnitStyle) String() string {
 	switch e {
-	case NSFormattingUnitStyleShort:
-		return "NSFormattingUnitStyleShort"
-	case NSFormattingUnitStyleMedium:
-		return "NSFormattingUnitStyleMedium"
-	case NSFormattingUnitStyleLong:
-		return "NSFormattingUnitStyleLong"
+	case FormattingUnitStyleShort:
+		return "FormattingUnitStyleShort"
+	case FormattingUnitStyleMedium:
+		return "FormattingUnitStyleMedium"
+	case FormattingUnitStyleLong:
+		return "FormattingUnitStyleLong"
 	default:
-		return fmt.Sprintf("NSFormattingUnitStyle(%d)", int64(e))
+		return fmt.Sprintf("FormattingUnitStyle(%d)", int64(e))
 	}
 }
 
-type NSGrammaticalCase int64
+type GrammaticalCase int64
 
 const (
-	NSGrammaticalCaseNotSet        NSGrammaticalCase = 0
-	NSGrammaticalCaseNominative    NSGrammaticalCase = 1
-	NSGrammaticalCaseAccusative    NSGrammaticalCase = 2
-	NSGrammaticalCaseDative        NSGrammaticalCase = 3
-	NSGrammaticalCaseGenitive      NSGrammaticalCase = 4
-	NSGrammaticalCasePrepositional NSGrammaticalCase = 5
-	NSGrammaticalCaseAblative      NSGrammaticalCase = 6
-	NSGrammaticalCaseAdessive      NSGrammaticalCase = 7
-	NSGrammaticalCaseAllative      NSGrammaticalCase = 8
-	NSGrammaticalCaseElative       NSGrammaticalCase = 9
-	NSGrammaticalCaseIllative      NSGrammaticalCase = 10
-	NSGrammaticalCaseEssive        NSGrammaticalCase = 11
-	NSGrammaticalCaseInessive      NSGrammaticalCase = 12
-	NSGrammaticalCaseLocative      NSGrammaticalCase = 13
-	NSGrammaticalCaseTranslative   NSGrammaticalCase = 14
+	GrammaticalCaseNotSet        GrammaticalCase = 0
+	GrammaticalCaseNominative    GrammaticalCase = 1
+	GrammaticalCaseAccusative    GrammaticalCase = 2
+	GrammaticalCaseDative        GrammaticalCase = 3
+	GrammaticalCaseGenitive      GrammaticalCase = 4
+	GrammaticalCasePrepositional GrammaticalCase = 5
+	GrammaticalCaseAblative      GrammaticalCase = 6
+	GrammaticalCaseAdessive      GrammaticalCase = 7
+	GrammaticalCaseAllative      GrammaticalCase = 8
+	GrammaticalCaseElative       GrammaticalCase = 9
+	GrammaticalCaseIllative      GrammaticalCase = 10
+	GrammaticalCaseEssive        GrammaticalCase = 11
+	GrammaticalCaseInessive      GrammaticalCase = 12
+	GrammaticalCaseLocative      GrammaticalCase = 13
+	GrammaticalCaseTranslative   GrammaticalCase = 14
 )
 
-func (e NSGrammaticalCase) String() string {
+func (e GrammaticalCase) String() string {
 	switch e {
-	case NSGrammaticalCaseNotSet:
-		return "NSGrammaticalCaseNotSet"
-	case NSGrammaticalCaseNominative:
-		return "NSGrammaticalCaseNominative"
-	case NSGrammaticalCaseAccusative:
-		return "NSGrammaticalCaseAccusative"
-	case NSGrammaticalCaseDative:
-		return "NSGrammaticalCaseDative"
-	case NSGrammaticalCaseGenitive:
-		return "NSGrammaticalCaseGenitive"
-	case NSGrammaticalCasePrepositional:
-		return "NSGrammaticalCasePrepositional"
-	case NSGrammaticalCaseAblative:
-		return "NSGrammaticalCaseAblative"
-	case NSGrammaticalCaseAdessive:
-		return "NSGrammaticalCaseAdessive"
-	case NSGrammaticalCaseAllative:
-		return "NSGrammaticalCaseAllative"
-	case NSGrammaticalCaseElative:
-		return "NSGrammaticalCaseElative"
-	case NSGrammaticalCaseIllative:
-		return "NSGrammaticalCaseIllative"
-	case NSGrammaticalCaseEssive:
-		return "NSGrammaticalCaseEssive"
-	case NSGrammaticalCaseInessive:
-		return "NSGrammaticalCaseInessive"
-	case NSGrammaticalCaseLocative:
-		return "NSGrammaticalCaseLocative"
-	case NSGrammaticalCaseTranslative:
-		return "NSGrammaticalCaseTranslative"
+	case GrammaticalCaseNotSet:
+		return "GrammaticalCaseNotSet"
+	case GrammaticalCaseNominative:
+		return "GrammaticalCaseNominative"
+	case GrammaticalCaseAccusative:
+		return "GrammaticalCaseAccusative"
+	case GrammaticalCaseDative:
+		return "GrammaticalCaseDative"
+	case GrammaticalCaseGenitive:
+		return "GrammaticalCaseGenitive"
+	case GrammaticalCasePrepositional:
+		return "GrammaticalCasePrepositional"
+	case GrammaticalCaseAblative:
+		return "GrammaticalCaseAblative"
+	case GrammaticalCaseAdessive:
+		return "GrammaticalCaseAdessive"
+	case GrammaticalCaseAllative:
+		return "GrammaticalCaseAllative"
+	case GrammaticalCaseElative:
+		return "GrammaticalCaseElative"
+	case GrammaticalCaseIllative:
+		return "GrammaticalCaseIllative"
+	case GrammaticalCaseEssive:
+		return "GrammaticalCaseEssive"
+	case GrammaticalCaseInessive:
+		return "GrammaticalCaseInessive"
+	case GrammaticalCaseLocative:
+		return "GrammaticalCaseLocative"
+	case GrammaticalCaseTranslative:
+		return "GrammaticalCaseTranslative"
 	default:
-		return fmt.Sprintf("NSGrammaticalCase(%d)", int64(e))
+		return fmt.Sprintf("GrammaticalCase(%d)", int64(e))
 	}
 }
 
-type NSGrammaticalDefiniteness int64
+type GrammaticalDefiniteness int64
 
 const (
-	NSGrammaticalDefinitenessNotSet     NSGrammaticalDefiniteness = 0
-	NSGrammaticalDefinitenessIndefinite NSGrammaticalDefiniteness = 1
-	NSGrammaticalDefinitenessDefinite   NSGrammaticalDefiniteness = 2
+	GrammaticalDefinitenessNotSet     GrammaticalDefiniteness = 0
+	GrammaticalDefinitenessIndefinite GrammaticalDefiniteness = 1
+	GrammaticalDefinitenessDefinite   GrammaticalDefiniteness = 2
 )
 
-func (e NSGrammaticalDefiniteness) String() string {
+func (e GrammaticalDefiniteness) String() string {
 	switch e {
-	case NSGrammaticalDefinitenessNotSet:
-		return "NSGrammaticalDefinitenessNotSet"
-	case NSGrammaticalDefinitenessIndefinite:
-		return "NSGrammaticalDefinitenessIndefinite"
-	case NSGrammaticalDefinitenessDefinite:
-		return "NSGrammaticalDefinitenessDefinite"
+	case GrammaticalDefinitenessNotSet:
+		return "GrammaticalDefinitenessNotSet"
+	case GrammaticalDefinitenessIndefinite:
+		return "GrammaticalDefinitenessIndefinite"
+	case GrammaticalDefinitenessDefinite:
+		return "GrammaticalDefinitenessDefinite"
 	default:
-		return fmt.Sprintf("NSGrammaticalDefiniteness(%d)", int64(e))
+		return fmt.Sprintf("GrammaticalDefiniteness(%d)", int64(e))
 	}
 }
 
-type NSGrammaticalDetermination int64
+type GrammaticalDetermination int64
 
 const (
-	NSGrammaticalDeterminationNotSet      NSGrammaticalDetermination = 0
-	NSGrammaticalDeterminationIndependent NSGrammaticalDetermination = 1
-	NSGrammaticalDeterminationDependent   NSGrammaticalDetermination = 2
+	GrammaticalDeterminationNotSet      GrammaticalDetermination = 0
+	GrammaticalDeterminationIndependent GrammaticalDetermination = 1
+	GrammaticalDeterminationDependent   GrammaticalDetermination = 2
 )
 
-func (e NSGrammaticalDetermination) String() string {
+func (e GrammaticalDetermination) String() string {
 	switch e {
-	case NSGrammaticalDeterminationNotSet:
-		return "NSGrammaticalDeterminationNotSet"
-	case NSGrammaticalDeterminationIndependent:
-		return "NSGrammaticalDeterminationIndependent"
-	case NSGrammaticalDeterminationDependent:
-		return "NSGrammaticalDeterminationDependent"
+	case GrammaticalDeterminationNotSet:
+		return "GrammaticalDeterminationNotSet"
+	case GrammaticalDeterminationIndependent:
+		return "GrammaticalDeterminationIndependent"
+	case GrammaticalDeterminationDependent:
+		return "GrammaticalDeterminationDependent"
 	default:
-		return fmt.Sprintf("NSGrammaticalDetermination(%d)", int64(e))
+		return fmt.Sprintf("GrammaticalDetermination(%d)", int64(e))
 	}
 }
 
 // A representation of grammatical gender, used for inflecting strings.
-type NSGrammaticalGender int64
+type GrammaticalGender int64
 
 const (
 	// A value that indicates the gender is unset.
-	NSGrammaticalGenderNotSet NSGrammaticalGender = 0
+	GrammaticalGenderNotSet GrammaticalGender = 0
 	// The feminine grammatical gender.
-	NSGrammaticalGenderFeminine NSGrammaticalGender = 1
+	GrammaticalGenderFeminine GrammaticalGender = 1
 	// The masculine grammatical gender.
-	NSGrammaticalGenderMasculine NSGrammaticalGender = 2
+	GrammaticalGenderMasculine GrammaticalGender = 2
 	// A value to not specify gender when inflecting a string.
-	NSGrammaticalGenderNeuter NSGrammaticalGender = 3
+	GrammaticalGenderNeuter GrammaticalGender = 3
 )
 
-func (e NSGrammaticalGender) String() string {
+func (e GrammaticalGender) String() string {
 	switch e {
-	case NSGrammaticalGenderNotSet:
-		return "NSGrammaticalGenderNotSet"
-	case NSGrammaticalGenderFeminine:
-		return "NSGrammaticalGenderFeminine"
-	case NSGrammaticalGenderMasculine:
-		return "NSGrammaticalGenderMasculine"
-	case NSGrammaticalGenderNeuter:
-		return "NSGrammaticalGenderNeuter"
+	case GrammaticalGenderNotSet:
+		return "GrammaticalGenderNotSet"
+	case GrammaticalGenderFeminine:
+		return "GrammaticalGenderFeminine"
+	case GrammaticalGenderMasculine:
+		return "GrammaticalGenderMasculine"
+	case GrammaticalGenderNeuter:
+		return "GrammaticalGenderNeuter"
 	default:
-		return fmt.Sprintf("NSGrammaticalGender(%d)", int64(e))
+		return fmt.Sprintf("GrammaticalGender(%d)", int64(e))
 	}
 }
 
 // A representation of grammatical number, used for inflecting strings.
-type NSGrammaticalNumber int64
+type GrammaticalNumber int64
 
 const (
 	// A value that indicates the number is unset.
-	NSGrammaticalNumberNotSet NSGrammaticalNumber = 0
+	GrammaticalNumberNotSet GrammaticalNumber = 0
 	// A single person or thing, as used for a grammatical number.
-	NSGrammaticalNumberSingular NSGrammaticalNumber = 1
+	GrammaticalNumberSingular GrammaticalNumber = 1
 	// Zero persons or things, as used for a grammatical number.
-	NSGrammaticalNumberZero NSGrammaticalNumber = 2
+	GrammaticalNumberZero GrammaticalNumber = 2
 	// Multiple persons or things, as used for a grammatical number.
-	NSGrammaticalNumberPlural NSGrammaticalNumber = 3
+	GrammaticalNumberPlural GrammaticalNumber = 3
 	// Two persons or things, as used for a grammatical number.
-	NSGrammaticalNumberPluralTwo NSGrammaticalNumber = 4
+	GrammaticalNumberPluralTwo GrammaticalNumber = 4
 	// A small number of persons or things, as used for a grammatical number.
-	NSGrammaticalNumberPluralFew NSGrammaticalNumber = 5
+	GrammaticalNumberPluralFew GrammaticalNumber = 5
 	// A large number of persons or things, as used for a grammatical number.
-	NSGrammaticalNumberPluralMany NSGrammaticalNumber = 6
+	GrammaticalNumberPluralMany GrammaticalNumber = 6
 )
 
-func (e NSGrammaticalNumber) String() string {
+func (e GrammaticalNumber) String() string {
 	switch e {
-	case NSGrammaticalNumberNotSet:
-		return "NSGrammaticalNumberNotSet"
-	case NSGrammaticalNumberSingular:
-		return "NSGrammaticalNumberSingular"
-	case NSGrammaticalNumberZero:
-		return "NSGrammaticalNumberZero"
-	case NSGrammaticalNumberPlural:
-		return "NSGrammaticalNumberPlural"
-	case NSGrammaticalNumberPluralTwo:
-		return "NSGrammaticalNumberPluralTwo"
-	case NSGrammaticalNumberPluralFew:
-		return "NSGrammaticalNumberPluralFew"
-	case NSGrammaticalNumberPluralMany:
-		return "NSGrammaticalNumberPluralMany"
+	case GrammaticalNumberNotSet:
+		return "GrammaticalNumberNotSet"
+	case GrammaticalNumberSingular:
+		return "GrammaticalNumberSingular"
+	case GrammaticalNumberZero:
+		return "GrammaticalNumberZero"
+	case GrammaticalNumberPlural:
+		return "GrammaticalNumberPlural"
+	case GrammaticalNumberPluralTwo:
+		return "GrammaticalNumberPluralTwo"
+	case GrammaticalNumberPluralFew:
+		return "GrammaticalNumberPluralFew"
+	case GrammaticalNumberPluralMany:
+		return "GrammaticalNumberPluralMany"
 	default:
-		return fmt.Sprintf("NSGrammaticalNumber(%d)", int64(e))
+		return fmt.Sprintf("GrammaticalNumber(%d)", int64(e))
 	}
 }
 
 // A representation of grammatical parts of speech, used for inflecting strings.
-type NSGrammaticalPartOfSpeech int64
+type GrammaticalPartOfSpeech int64
 
 const (
 	// A value that indicates the part of speech is unset.
-	NSGrammaticalPartOfSpeechNotSet NSGrammaticalPartOfSpeech = 0
+	GrammaticalPartOfSpeechNotSet GrammaticalPartOfSpeech = 0
 	// A determiner, as used as a part of speech.
-	NSGrammaticalPartOfSpeechDeterminer NSGrammaticalPartOfSpeech = 1
+	GrammaticalPartOfSpeechDeterminer GrammaticalPartOfSpeech = 1
 	// A pronoun, as used as a part of speech.
-	NSGrammaticalPartOfSpeechPronoun NSGrammaticalPartOfSpeech = 2
+	GrammaticalPartOfSpeechPronoun GrammaticalPartOfSpeech = 2
 	// A letter, as used as a part of speech.
-	NSGrammaticalPartOfSpeechLetter NSGrammaticalPartOfSpeech = 3
+	GrammaticalPartOfSpeechLetter GrammaticalPartOfSpeech = 3
 	// An adverb, as used as a part of speech.
-	NSGrammaticalPartOfSpeechAdverb NSGrammaticalPartOfSpeech = 4
+	GrammaticalPartOfSpeechAdverb GrammaticalPartOfSpeech = 4
 	// A particle, as used as a part of speech.
-	NSGrammaticalPartOfSpeechParticle NSGrammaticalPartOfSpeech = 5
+	GrammaticalPartOfSpeechParticle GrammaticalPartOfSpeech = 5
 	// An adjective, as used as a part of speech.
-	NSGrammaticalPartOfSpeechAdjective NSGrammaticalPartOfSpeech = 6
+	GrammaticalPartOfSpeechAdjective GrammaticalPartOfSpeech = 6
 	// An adposition, as used as a part of speech.
-	NSGrammaticalPartOfSpeechAdposition NSGrammaticalPartOfSpeech = 7
+	GrammaticalPartOfSpeechAdposition GrammaticalPartOfSpeech = 7
 	// A verb, as used as a part of speech.
-	NSGrammaticalPartOfSpeechVerb NSGrammaticalPartOfSpeech = 8
+	GrammaticalPartOfSpeechVerb GrammaticalPartOfSpeech = 8
 	// A noun, as used as a part of speech.
-	NSGrammaticalPartOfSpeechNoun NSGrammaticalPartOfSpeech = 9
+	GrammaticalPartOfSpeechNoun GrammaticalPartOfSpeech = 9
 	// A conjunction, as used as a part of speech.
-	NSGrammaticalPartOfSpeechConjunction NSGrammaticalPartOfSpeech = 10
+	GrammaticalPartOfSpeechConjunction GrammaticalPartOfSpeech = 10
 	// A numeral, as used as a part of speech.
-	NSGrammaticalPartOfSpeechNumeral NSGrammaticalPartOfSpeech = 11
+	GrammaticalPartOfSpeechNumeral GrammaticalPartOfSpeech = 11
 	// An interjection, as used as a part of speech.
-	NSGrammaticalPartOfSpeechInterjection NSGrammaticalPartOfSpeech = 12
+	GrammaticalPartOfSpeechInterjection GrammaticalPartOfSpeech = 12
 	// A preposition, as used as a part of speech.
-	NSGrammaticalPartOfSpeechPreposition NSGrammaticalPartOfSpeech = 13
+	GrammaticalPartOfSpeechPreposition GrammaticalPartOfSpeech = 13
 	// An abbreviation, as used as a part of speech.
-	NSGrammaticalPartOfSpeechAbbreviation NSGrammaticalPartOfSpeech = 14
+	GrammaticalPartOfSpeechAbbreviation GrammaticalPartOfSpeech = 14
 )
 
-func (e NSGrammaticalPartOfSpeech) String() string {
+func (e GrammaticalPartOfSpeech) String() string {
 	switch e {
-	case NSGrammaticalPartOfSpeechNotSet:
-		return "NSGrammaticalPartOfSpeechNotSet"
-	case NSGrammaticalPartOfSpeechDeterminer:
-		return "NSGrammaticalPartOfSpeechDeterminer"
-	case NSGrammaticalPartOfSpeechPronoun:
-		return "NSGrammaticalPartOfSpeechPronoun"
-	case NSGrammaticalPartOfSpeechLetter:
-		return "NSGrammaticalPartOfSpeechLetter"
-	case NSGrammaticalPartOfSpeechAdverb:
-		return "NSGrammaticalPartOfSpeechAdverb"
-	case NSGrammaticalPartOfSpeechParticle:
-		return "NSGrammaticalPartOfSpeechParticle"
-	case NSGrammaticalPartOfSpeechAdjective:
-		return "NSGrammaticalPartOfSpeechAdjective"
-	case NSGrammaticalPartOfSpeechAdposition:
-		return "NSGrammaticalPartOfSpeechAdposition"
-	case NSGrammaticalPartOfSpeechVerb:
-		return "NSGrammaticalPartOfSpeechVerb"
-	case NSGrammaticalPartOfSpeechNoun:
-		return "NSGrammaticalPartOfSpeechNoun"
-	case NSGrammaticalPartOfSpeechConjunction:
-		return "NSGrammaticalPartOfSpeechConjunction"
-	case NSGrammaticalPartOfSpeechNumeral:
-		return "NSGrammaticalPartOfSpeechNumeral"
-	case NSGrammaticalPartOfSpeechInterjection:
-		return "NSGrammaticalPartOfSpeechInterjection"
-	case NSGrammaticalPartOfSpeechPreposition:
-		return "NSGrammaticalPartOfSpeechPreposition"
-	case NSGrammaticalPartOfSpeechAbbreviation:
-		return "NSGrammaticalPartOfSpeechAbbreviation"
+	case GrammaticalPartOfSpeechNotSet:
+		return "GrammaticalPartOfSpeechNotSet"
+	case GrammaticalPartOfSpeechDeterminer:
+		return "GrammaticalPartOfSpeechDeterminer"
+	case GrammaticalPartOfSpeechPronoun:
+		return "GrammaticalPartOfSpeechPronoun"
+	case GrammaticalPartOfSpeechLetter:
+		return "GrammaticalPartOfSpeechLetter"
+	case GrammaticalPartOfSpeechAdverb:
+		return "GrammaticalPartOfSpeechAdverb"
+	case GrammaticalPartOfSpeechParticle:
+		return "GrammaticalPartOfSpeechParticle"
+	case GrammaticalPartOfSpeechAdjective:
+		return "GrammaticalPartOfSpeechAdjective"
+	case GrammaticalPartOfSpeechAdposition:
+		return "GrammaticalPartOfSpeechAdposition"
+	case GrammaticalPartOfSpeechVerb:
+		return "GrammaticalPartOfSpeechVerb"
+	case GrammaticalPartOfSpeechNoun:
+		return "GrammaticalPartOfSpeechNoun"
+	case GrammaticalPartOfSpeechConjunction:
+		return "GrammaticalPartOfSpeechConjunction"
+	case GrammaticalPartOfSpeechNumeral:
+		return "GrammaticalPartOfSpeechNumeral"
+	case GrammaticalPartOfSpeechInterjection:
+		return "GrammaticalPartOfSpeechInterjection"
+	case GrammaticalPartOfSpeechPreposition:
+		return "GrammaticalPartOfSpeechPreposition"
+	case GrammaticalPartOfSpeechAbbreviation:
+		return "GrammaticalPartOfSpeechAbbreviation"
 	default:
-		return fmt.Sprintf("NSGrammaticalPartOfSpeech(%d)", int64(e))
+		return fmt.Sprintf("GrammaticalPartOfSpeech(%d)", int64(e))
 	}
 }
 
-type NSGrammaticalPerson int64
+type GrammaticalPerson int64
 
 const (
-	NSGrammaticalPersonNotSet NSGrammaticalPerson = 0
-	NSGrammaticalPersonFirst  NSGrammaticalPerson = 1
-	NSGrammaticalPersonSecond NSGrammaticalPerson = 2
-	NSGrammaticalPersonThird  NSGrammaticalPerson = 3
+	GrammaticalPersonNotSet GrammaticalPerson = 0
+	GrammaticalPersonFirst  GrammaticalPerson = 1
+	GrammaticalPersonSecond GrammaticalPerson = 2
+	GrammaticalPersonThird  GrammaticalPerson = 3
 )
 
-func (e NSGrammaticalPerson) String() string {
+func (e GrammaticalPerson) String() string {
 	switch e {
-	case NSGrammaticalPersonNotSet:
-		return "NSGrammaticalPersonNotSet"
-	case NSGrammaticalPersonFirst:
-		return "NSGrammaticalPersonFirst"
-	case NSGrammaticalPersonSecond:
-		return "NSGrammaticalPersonSecond"
-	case NSGrammaticalPersonThird:
-		return "NSGrammaticalPersonThird"
+	case GrammaticalPersonNotSet:
+		return "GrammaticalPersonNotSet"
+	case GrammaticalPersonFirst:
+		return "GrammaticalPersonFirst"
+	case GrammaticalPersonSecond:
+		return "GrammaticalPersonSecond"
+	case GrammaticalPersonThird:
+		return "GrammaticalPersonThird"
 	default:
-		return fmt.Sprintf("NSGrammaticalPerson(%d)", int64(e))
+		return fmt.Sprintf("GrammaticalPerson(%d)", int64(e))
 	}
 }
 
-type NSGrammaticalPronounType int64
+type GrammaticalPronounType int64
 
 const (
-	NSGrammaticalPronounTypeNotSet     NSGrammaticalPronounType = 0
-	NSGrammaticalPronounTypePersonal   NSGrammaticalPronounType = 1
-	NSGrammaticalPronounTypeReflexive  NSGrammaticalPronounType = 2
-	NSGrammaticalPronounTypePossessive NSGrammaticalPronounType = 3
+	GrammaticalPronounTypeNotSet     GrammaticalPronounType = 0
+	GrammaticalPronounTypePersonal   GrammaticalPronounType = 1
+	GrammaticalPronounTypeReflexive  GrammaticalPronounType = 2
+	GrammaticalPronounTypePossessive GrammaticalPronounType = 3
 )
 
-func (e NSGrammaticalPronounType) String() string {
+func (e GrammaticalPronounType) String() string {
 	switch e {
-	case NSGrammaticalPronounTypeNotSet:
-		return "NSGrammaticalPronounTypeNotSet"
-	case NSGrammaticalPronounTypePersonal:
-		return "NSGrammaticalPronounTypePersonal"
-	case NSGrammaticalPronounTypeReflexive:
-		return "NSGrammaticalPronounTypeReflexive"
-	case NSGrammaticalPronounTypePossessive:
-		return "NSGrammaticalPronounTypePossessive"
+	case GrammaticalPronounTypeNotSet:
+		return "GrammaticalPronounTypeNotSet"
+	case GrammaticalPronounTypePersonal:
+		return "GrammaticalPronounTypePersonal"
+	case GrammaticalPronounTypeReflexive:
+		return "GrammaticalPronounTypeReflexive"
+	case GrammaticalPronounTypePossessive:
+		return "GrammaticalPronounTypePossessive"
 	default:
-		return fmt.Sprintf("NSGrammaticalPronounType(%d)", int64(e))
+		return fmt.Sprintf("GrammaticalPronounType(%d)", int64(e))
 	}
 }
 
 // Cookie acceptance policies implemented by the NSHTTPCookieStorage class.
-type NSHTTPCookieAcceptPolicy uint64
+type HTTPCookieAcceptPolicy uint64
 
 const (
-	NSHTTPCookieAcceptPolicyAlways                     NSHTTPCookieAcceptPolicy = 0
-	NSHTTPCookieAcceptPolicyNever                      NSHTTPCookieAcceptPolicy = 1
-	NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain NSHTTPCookieAcceptPolicy = 2
+	HTTPCookieAcceptPolicyAlways                     HTTPCookieAcceptPolicy = 0
+	HTTPCookieAcceptPolicyNever                      HTTPCookieAcceptPolicy = 1
+	HTTPCookieAcceptPolicyOnlyFromMainDocumentDomain HTTPCookieAcceptPolicy = 2
 )
 
-func (e NSHTTPCookieAcceptPolicy) String() string {
+func (e HTTPCookieAcceptPolicy) String() string {
 	switch e {
-	case NSHTTPCookieAcceptPolicyAlways:
-		return "NSHTTPCookieAcceptPolicyAlways"
-	case NSHTTPCookieAcceptPolicyNever:
-		return "NSHTTPCookieAcceptPolicyNever"
-	case NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain:
-		return "NSHTTPCookieAcceptPolicyOnlyFromMainDocumentDomain"
+	case HTTPCookieAcceptPolicyAlways:
+		return "HTTPCookieAcceptPolicyAlways"
+	case HTTPCookieAcceptPolicyNever:
+		return "HTTPCookieAcceptPolicyNever"
+	case HTTPCookieAcceptPolicyOnlyFromMainDocumentDomain:
+		return "HTTPCookieAcceptPolicyOnlyFromMainDocumentDomain"
 	default:
-		return fmt.Sprintf("NSHTTPCookieAcceptPolicy(%d)", int64(e))
+		return fmt.Sprintf("HTTPCookieAcceptPolicy(%d)", int64(e))
 	}
 }
 
 // Options used to generate and parse ISO 8601 date representations.
 // Bitmask — values may be combined with |.
-type NSISO8601DateFormatOptions uint64
+type ISO8601DateFormatOptions uint64
 
 const (
-	NSISO8601DateFormatWithYear                     NSISO8601DateFormatOptions = 1
-	NSISO8601DateFormatWithMonth                    NSISO8601DateFormatOptions = 2
-	NSISO8601DateFormatWithWeekOfYear               NSISO8601DateFormatOptions = 4
-	NSISO8601DateFormatWithDay                      NSISO8601DateFormatOptions = 16
-	NSISO8601DateFormatWithTime                     NSISO8601DateFormatOptions = 32
-	NSISO8601DateFormatWithTimeZone                 NSISO8601DateFormatOptions = 64
-	NSISO8601DateFormatWithSpaceBetweenDateAndTime  NSISO8601DateFormatOptions = 128
-	NSISO8601DateFormatWithDashSeparatorInDate      NSISO8601DateFormatOptions = 256
-	NSISO8601DateFormatWithColonSeparatorInTime     NSISO8601DateFormatOptions = 512
-	NSISO8601DateFormatWithColonSeparatorInTimeZone NSISO8601DateFormatOptions = 1024
-	NSISO8601DateFormatWithFractionalSeconds        NSISO8601DateFormatOptions = 2048
-	NSISO8601DateFormatWithFullDate                 NSISO8601DateFormatOptions = 275
-	NSISO8601DateFormatWithFullTime                 NSISO8601DateFormatOptions = 1632
-	NSISO8601DateFormatWithInternetDateTime         NSISO8601DateFormatOptions = 1907
+	ISO8601DateFormatWithYear                     ISO8601DateFormatOptions = 1
+	ISO8601DateFormatWithMonth                    ISO8601DateFormatOptions = 2
+	ISO8601DateFormatWithWeekOfYear               ISO8601DateFormatOptions = 4
+	ISO8601DateFormatWithDay                      ISO8601DateFormatOptions = 16
+	ISO8601DateFormatWithTime                     ISO8601DateFormatOptions = 32
+	ISO8601DateFormatWithTimeZone                 ISO8601DateFormatOptions = 64
+	ISO8601DateFormatWithSpaceBetweenDateAndTime  ISO8601DateFormatOptions = 128
+	ISO8601DateFormatWithDashSeparatorInDate      ISO8601DateFormatOptions = 256
+	ISO8601DateFormatWithColonSeparatorInTime     ISO8601DateFormatOptions = 512
+	ISO8601DateFormatWithColonSeparatorInTimeZone ISO8601DateFormatOptions = 1024
+	ISO8601DateFormatWithFractionalSeconds        ISO8601DateFormatOptions = 2048
+	ISO8601DateFormatWithFullDate                 ISO8601DateFormatOptions = 275
+	ISO8601DateFormatWithFullTime                 ISO8601DateFormatOptions = 1632
+	ISO8601DateFormatWithInternetDateTime         ISO8601DateFormatOptions = 1907
 )
 
-func (e NSISO8601DateFormatOptions) String() string {
+func (e ISO8601DateFormatOptions) String() string {
 	var parts []string
-	if e&NSISO8601DateFormatWithYear != 0 {
-		parts = append(parts, "NSISO8601DateFormatWithYear")
+	if e&ISO8601DateFormatWithYear != 0 {
+		parts = append(parts, "ISO8601DateFormatWithYear")
 	}
-	if e&NSISO8601DateFormatWithMonth != 0 {
-		parts = append(parts, "NSISO8601DateFormatWithMonth")
+	if e&ISO8601DateFormatWithMonth != 0 {
+		parts = append(parts, "ISO8601DateFormatWithMonth")
 	}
-	if e&NSISO8601DateFormatWithWeekOfYear != 0 {
-		parts = append(parts, "NSISO8601DateFormatWithWeekOfYear")
+	if e&ISO8601DateFormatWithWeekOfYear != 0 {
+		parts = append(parts, "ISO8601DateFormatWithWeekOfYear")
 	}
-	if e&NSISO8601DateFormatWithDay != 0 {
-		parts = append(parts, "NSISO8601DateFormatWithDay")
+	if e&ISO8601DateFormatWithDay != 0 {
+		parts = append(parts, "ISO8601DateFormatWithDay")
 	}
-	if e&NSISO8601DateFormatWithTime != 0 {
-		parts = append(parts, "NSISO8601DateFormatWithTime")
+	if e&ISO8601DateFormatWithTime != 0 {
+		parts = append(parts, "ISO8601DateFormatWithTime")
 	}
-	if e&NSISO8601DateFormatWithTimeZone != 0 {
-		parts = append(parts, "NSISO8601DateFormatWithTimeZone")
+	if e&ISO8601DateFormatWithTimeZone != 0 {
+		parts = append(parts, "ISO8601DateFormatWithTimeZone")
 	}
-	if e&NSISO8601DateFormatWithSpaceBetweenDateAndTime != 0 {
-		parts = append(parts, "NSISO8601DateFormatWithSpaceBetweenDateAndTime")
+	if e&ISO8601DateFormatWithSpaceBetweenDateAndTime != 0 {
+		parts = append(parts, "ISO8601DateFormatWithSpaceBetweenDateAndTime")
 	}
-	if e&NSISO8601DateFormatWithDashSeparatorInDate != 0 {
-		parts = append(parts, "NSISO8601DateFormatWithDashSeparatorInDate")
+	if e&ISO8601DateFormatWithDashSeparatorInDate != 0 {
+		parts = append(parts, "ISO8601DateFormatWithDashSeparatorInDate")
 	}
-	if e&NSISO8601DateFormatWithColonSeparatorInTime != 0 {
-		parts = append(parts, "NSISO8601DateFormatWithColonSeparatorInTime")
+	if e&ISO8601DateFormatWithColonSeparatorInTime != 0 {
+		parts = append(parts, "ISO8601DateFormatWithColonSeparatorInTime")
 	}
-	if e&NSISO8601DateFormatWithColonSeparatorInTimeZone != 0 {
-		parts = append(parts, "NSISO8601DateFormatWithColonSeparatorInTimeZone")
+	if e&ISO8601DateFormatWithColonSeparatorInTimeZone != 0 {
+		parts = append(parts, "ISO8601DateFormatWithColonSeparatorInTimeZone")
 	}
-	if e&NSISO8601DateFormatWithFractionalSeconds != 0 {
-		parts = append(parts, "NSISO8601DateFormatWithFractionalSeconds")
+	if e&ISO8601DateFormatWithFractionalSeconds != 0 {
+		parts = append(parts, "ISO8601DateFormatWithFractionalSeconds")
 	}
-	if e&NSISO8601DateFormatWithFullDate != 0 {
-		parts = append(parts, "NSISO8601DateFormatWithFullDate")
+	if e&ISO8601DateFormatWithFullDate != 0 {
+		parts = append(parts, "ISO8601DateFormatWithFullDate")
 	}
-	if e&NSISO8601DateFormatWithFullTime != 0 {
-		parts = append(parts, "NSISO8601DateFormatWithFullTime")
+	if e&ISO8601DateFormatWithFullTime != 0 {
+		parts = append(parts, "ISO8601DateFormatWithFullTime")
 	}
-	if e&NSISO8601DateFormatWithInternetDateTime != 0 {
-		parts = append(parts, "NSISO8601DateFormatWithInternetDateTime")
+	if e&ISO8601DateFormatWithInternetDateTime != 0 {
+		parts = append(parts, "ISO8601DateFormatWithInternetDateTime")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1988,71 +1805,71 @@ func (e NSISO8601DateFormatOptions) String() string {
 }
 
 // The following constants are defined by NSPositionalSpecifier to specify an insertion position.
-type NSInsertionPosition uint64
+type InsertionPosition uint64
 
 const (
-	NSPositionAfter     NSInsertionPosition = 0
-	NSPositionBefore    NSInsertionPosition = 1
-	NSPositionBeginning NSInsertionPosition = 2
-	NSPositionEnd       NSInsertionPosition = 3
-	NSPositionReplace   NSInsertionPosition = 4
+	PositionAfter     InsertionPosition = 0
+	PositionBefore    InsertionPosition = 1
+	PositionBeginning InsertionPosition = 2
+	PositionEnd       InsertionPosition = 3
+	PositionReplace   InsertionPosition = 4
 )
 
-func (e NSInsertionPosition) String() string {
+func (e InsertionPosition) String() string {
 	switch e {
-	case NSPositionAfter:
-		return "NSPositionAfter"
-	case NSPositionBefore:
-		return "NSPositionBefore"
-	case NSPositionBeginning:
-		return "NSPositionBeginning"
-	case NSPositionEnd:
-		return "NSPositionEnd"
-	case NSPositionReplace:
-		return "NSPositionReplace"
+	case PositionAfter:
+		return "PositionAfter"
+	case PositionBefore:
+		return "PositionBefore"
+	case PositionBeginning:
+		return "PositionBeginning"
+	case PositionEnd:
+		return "PositionEnd"
+	case PositionReplace:
+		return "PositionReplace"
 	default:
-		return fmt.Sprintf("NSInsertionPosition(%d)", int64(e))
+		return fmt.Sprintf("InsertionPosition(%d)", int64(e))
 	}
 }
 
 // The error codes that describe problems with consuming data from an item provider.
-type NSItemProviderErrorCode int64
+type ItemProviderErrorCode int64
 
 const (
-	NSItemProviderUnknownError              NSItemProviderErrorCode = -1
-	NSItemProviderItemUnavailableError      NSItemProviderErrorCode = -1000
-	NSItemProviderUnexpectedValueClassError NSItemProviderErrorCode = -1100
-	NSItemProviderUnavailableCoercionError  NSItemProviderErrorCode = -1200
+	ItemProviderUnknownError              ItemProviderErrorCode = -1
+	ItemProviderItemUnavailableError      ItemProviderErrorCode = -1000
+	ItemProviderUnexpectedValueClassError ItemProviderErrorCode = -1100
+	ItemProviderUnavailableCoercionError  ItemProviderErrorCode = -1200
 )
 
-func (e NSItemProviderErrorCode) String() string {
+func (e ItemProviderErrorCode) String() string {
 	switch e {
-	case NSItemProviderUnknownError:
-		return "NSItemProviderUnknownError"
-	case NSItemProviderItemUnavailableError:
-		return "NSItemProviderItemUnavailableError"
-	case NSItemProviderUnexpectedValueClassError:
-		return "NSItemProviderUnexpectedValueClassError"
-	case NSItemProviderUnavailableCoercionError:
-		return "NSItemProviderUnavailableCoercionError"
+	case ItemProviderUnknownError:
+		return "ItemProviderUnknownError"
+	case ItemProviderItemUnavailableError:
+		return "ItemProviderItemUnavailableError"
+	case ItemProviderUnexpectedValueClassError:
+		return "ItemProviderUnexpectedValueClassError"
+	case ItemProviderUnavailableCoercionError:
+		return "ItemProviderUnavailableCoercionError"
 	default:
-		return fmt.Sprintf("NSItemProviderErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ItemProviderErrorCode(%d)", int64(e))
 	}
 }
 
 // Data-access specifications that declare how to handle items.
 // Bitmask — values may be combined with |.
-type NSItemProviderFileOptions int64
+type ItemProviderFileOptions int64
 
 const (
 	// A data-access specification declaring that items should open in place, rather than being copied.
-	NSItemProviderFileOptionOpenInPlace NSItemProviderFileOptions = 1
+	ItemProviderFileOptionOpenInPlace ItemProviderFileOptions = 1
 )
 
-func (e NSItemProviderFileOptions) String() string {
+func (e ItemProviderFileOptions) String() string {
 	var parts []string
-	if e&NSItemProviderFileOptionOpenInPlace != 0 {
-		parts = append(parts, "NSItemProviderFileOptionOpenInPlace")
+	if e&ItemProviderFileOptionOpenInPlace != 0 {
+		parts = append(parts, "ItemProviderFileOptionOpenInPlace")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2061,63 +1878,63 @@ func (e NSItemProviderFileOptions) String() string {
 }
 
 // Specifications that control which categories of processes can see an item.
-type NSItemProviderRepresentationVisibility int64
+type ItemProviderRepresentationVisibility int64
 
 const (
 	// A representation visibility specification conferring item visibility to all processes.
-	NSItemProviderRepresentationVisibilityAll NSItemProviderRepresentationVisibility = 0
+	ItemProviderRepresentationVisibilityAll ItemProviderRepresentationVisibility = 0
 	// A representation visibility specification confining item visibility to the app’s app group.
-	NSItemProviderRepresentationVisibilityGroup NSItemProviderRepresentationVisibility = 2
+	ItemProviderRepresentationVisibilityGroup ItemProviderRepresentationVisibility = 2
 	// A representation visibility specification confining item visibility to the app that is the source of the item.
-	NSItemProviderRepresentationVisibilityOwnProcess NSItemProviderRepresentationVisibility = 3
+	ItemProviderRepresentationVisibilityOwnProcess ItemProviderRepresentationVisibility = 3
 )
 
-func (e NSItemProviderRepresentationVisibility) String() string {
+func (e ItemProviderRepresentationVisibility) String() string {
 	switch e {
-	case NSItemProviderRepresentationVisibilityAll:
-		return "NSItemProviderRepresentationVisibilityAll"
-	case NSItemProviderRepresentationVisibilityGroup:
-		return "NSItemProviderRepresentationVisibilityGroup"
-	case NSItemProviderRepresentationVisibilityOwnProcess:
-		return "NSItemProviderRepresentationVisibilityOwnProcess"
+	case ItemProviderRepresentationVisibilityAll:
+		return "ItemProviderRepresentationVisibilityAll"
+	case ItemProviderRepresentationVisibilityGroup:
+		return "ItemProviderRepresentationVisibilityGroup"
+	case ItemProviderRepresentationVisibilityOwnProcess:
+		return "ItemProviderRepresentationVisibilityOwnProcess"
 	default:
-		return fmt.Sprintf("NSItemProviderRepresentationVisibility(%d)", int64(e))
+		return fmt.Sprintf("ItemProviderRepresentationVisibility(%d)", int64(e))
 	}
 }
 
 // Options used when creating Foundation objects from JSON data.
 // Bitmask — values may be combined with |.
-type NSJSONReadingOptions uint64
+type JSONReadingOptions uint64
 
 const (
-	NSJSONReadingMutableContainers         NSJSONReadingOptions = 1
-	NSJSONReadingMutableLeaves             NSJSONReadingOptions = 2
-	NSJSONReadingFragmentsAllowed          NSJSONReadingOptions = 4
-	NSJSONReadingJSON5Allowed              NSJSONReadingOptions = 8
-	NSJSONReadingTopLevelDictionaryAssumed NSJSONReadingOptions = 16
+	JSONReadingMutableContainers         JSONReadingOptions = 1
+	JSONReadingMutableLeaves             JSONReadingOptions = 2
+	JSONReadingFragmentsAllowed          JSONReadingOptions = 4
+	JSONReadingJSON5Allowed              JSONReadingOptions = 8
+	JSONReadingTopLevelDictionaryAssumed JSONReadingOptions = 16
 	// Deprecated: since macOS API_TO_BE_DEPRECATED.
-	NSJSONReadingAllowFragments NSJSONReadingOptions = 4
+	JSONReadingAllowFragments JSONReadingOptions = 4
 )
 
-func (e NSJSONReadingOptions) String() string {
+func (e JSONReadingOptions) String() string {
 	var parts []string
-	if e&NSJSONReadingMutableContainers != 0 {
-		parts = append(parts, "NSJSONReadingMutableContainers")
+	if e&JSONReadingMutableContainers != 0 {
+		parts = append(parts, "JSONReadingMutableContainers")
 	}
-	if e&NSJSONReadingMutableLeaves != 0 {
-		parts = append(parts, "NSJSONReadingMutableLeaves")
+	if e&JSONReadingMutableLeaves != 0 {
+		parts = append(parts, "JSONReadingMutableLeaves")
 	}
-	if e&NSJSONReadingFragmentsAllowed != 0 {
-		parts = append(parts, "NSJSONReadingFragmentsAllowed")
+	if e&JSONReadingFragmentsAllowed != 0 {
+		parts = append(parts, "JSONReadingFragmentsAllowed")
 	}
-	if e&NSJSONReadingJSON5Allowed != 0 {
-		parts = append(parts, "NSJSONReadingJSON5Allowed")
+	if e&JSONReadingJSON5Allowed != 0 {
+		parts = append(parts, "JSONReadingJSON5Allowed")
 	}
-	if e&NSJSONReadingTopLevelDictionaryAssumed != 0 {
-		parts = append(parts, "NSJSONReadingTopLevelDictionaryAssumed")
+	if e&JSONReadingTopLevelDictionaryAssumed != 0 {
+		parts = append(parts, "JSONReadingTopLevelDictionaryAssumed")
 	}
-	if e&NSJSONReadingAllowFragments != 0 {
-		parts = append(parts, "NSJSONReadingAllowFragments")
+	if e&JSONReadingAllowFragments != 0 {
+		parts = append(parts, "JSONReadingAllowFragments")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2127,28 +1944,28 @@ func (e NSJSONReadingOptions) String() string {
 
 // Options for writing JSON data.
 // Bitmask — values may be combined with |.
-type NSJSONWritingOptions uint64
+type JSONWritingOptions uint64
 
 const (
-	NSJSONWritingPrettyPrinted          NSJSONWritingOptions = 1
-	NSJSONWritingSortedKeys             NSJSONWritingOptions = 2
-	NSJSONWritingFragmentsAllowed       NSJSONWritingOptions = 4
-	NSJSONWritingWithoutEscapingSlashes NSJSONWritingOptions = 8
+	JSONWritingPrettyPrinted          JSONWritingOptions = 1
+	JSONWritingSortedKeys             JSONWritingOptions = 2
+	JSONWritingFragmentsAllowed       JSONWritingOptions = 4
+	JSONWritingWithoutEscapingSlashes JSONWritingOptions = 8
 )
 
-func (e NSJSONWritingOptions) String() string {
+func (e JSONWritingOptions) String() string {
 	var parts []string
-	if e&NSJSONWritingPrettyPrinted != 0 {
-		parts = append(parts, "NSJSONWritingPrettyPrinted")
+	if e&JSONWritingPrettyPrinted != 0 {
+		parts = append(parts, "JSONWritingPrettyPrinted")
 	}
-	if e&NSJSONWritingSortedKeys != 0 {
-		parts = append(parts, "NSJSONWritingSortedKeys")
+	if e&JSONWritingSortedKeys != 0 {
+		parts = append(parts, "JSONWritingSortedKeys")
 	}
-	if e&NSJSONWritingFragmentsAllowed != 0 {
-		parts = append(parts, "NSJSONWritingFragmentsAllowed")
+	if e&JSONWritingFragmentsAllowed != 0 {
+		parts = append(parts, "JSONWritingFragmentsAllowed")
 	}
-	if e&NSJSONWritingWithoutEscapingSlashes != 0 {
-		parts = append(parts, "NSJSONWritingWithoutEscapingSlashes")
+	if e&JSONWritingWithoutEscapingSlashes != 0 {
+		parts = append(parts, "JSONWritingWithoutEscapingSlashes")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2157,62 +1974,62 @@ func (e NSJSONWritingOptions) String() string {
 }
 
 // The kinds of changes that can be observed.
-type NSKeyValueChange uint64
+type KeyValueChange uint64
 
 const (
 	// Indicates that the value of the observed key path was set to a new value. This change can occur when observing an attribute of an object, as well as properties that specify to-one and to-many relationships.
-	NSKeyValueChangeSetting NSKeyValueChange = 1
+	KeyValueChangeSetting KeyValueChange = 1
 	// Indicates that an object has been inserted into the to-many relationship that is being observed.
-	NSKeyValueChangeInsertion NSKeyValueChange = 2
+	KeyValueChangeInsertion KeyValueChange = 2
 	// Indicates that an object has been removed from the to-many relationship that is being observed.
-	NSKeyValueChangeRemoval NSKeyValueChange = 3
+	KeyValueChangeRemoval KeyValueChange = 3
 	// Indicates that an object has been replaced in the to-many relationship that is being observed.
-	NSKeyValueChangeReplacement NSKeyValueChange = 4
+	KeyValueChangeReplacement KeyValueChange = 4
 )
 
-func (e NSKeyValueChange) String() string {
+func (e KeyValueChange) String() string {
 	switch e {
-	case NSKeyValueChangeSetting:
-		return "NSKeyValueChangeSetting"
-	case NSKeyValueChangeInsertion:
-		return "NSKeyValueChangeInsertion"
-	case NSKeyValueChangeRemoval:
-		return "NSKeyValueChangeRemoval"
-	case NSKeyValueChangeReplacement:
-		return "NSKeyValueChangeReplacement"
+	case KeyValueChangeSetting:
+		return "KeyValueChangeSetting"
+	case KeyValueChangeInsertion:
+		return "KeyValueChangeInsertion"
+	case KeyValueChangeRemoval:
+		return "KeyValueChangeRemoval"
+	case KeyValueChangeReplacement:
+		return "KeyValueChangeReplacement"
 	default:
-		return fmt.Sprintf("NSKeyValueChange(%d)", int64(e))
+		return fmt.Sprintf("KeyValueChange(%d)", int64(e))
 	}
 }
 
 // The values that can be returned in a change dictionary.
 // Bitmask — values may be combined with |.
-type NSKeyValueObservingOptions uint64
+type KeyValueObservingOptions uint64
 
 const (
 	// Indicates that the change dictionary should provide the new attribute value, if applicable.
-	NSKeyValueObservingOptionNew NSKeyValueObservingOptions = 1
+	KeyValueObservingOptionNew KeyValueObservingOptions = 1
 	// Indicates that the change dictionary should contain the old attribute value, if applicable.
-	NSKeyValueObservingOptionOld NSKeyValueObservingOptions = 2
+	KeyValueObservingOptionOld KeyValueObservingOptions = 2
 	// If specified, a notification should be sent to the observer immediately, before the observer registration method even returns.
-	NSKeyValueObservingOptionInitial NSKeyValueObservingOptions = 4
+	KeyValueObservingOptionInitial KeyValueObservingOptions = 4
 	// Whether separate notifications should be sent to the observer before and after each change, instead of a single notification after the change.
-	NSKeyValueObservingOptionPrior NSKeyValueObservingOptions = 8
+	KeyValueObservingOptionPrior KeyValueObservingOptions = 8
 )
 
-func (e NSKeyValueObservingOptions) String() string {
+func (e KeyValueObservingOptions) String() string {
 	var parts []string
-	if e&NSKeyValueObservingOptionNew != 0 {
-		parts = append(parts, "NSKeyValueObservingOptionNew")
+	if e&KeyValueObservingOptionNew != 0 {
+		parts = append(parts, "KeyValueObservingOptionNew")
 	}
-	if e&NSKeyValueObservingOptionOld != 0 {
-		parts = append(parts, "NSKeyValueObservingOptionOld")
+	if e&KeyValueObservingOptionOld != 0 {
+		parts = append(parts, "KeyValueObservingOptionOld")
 	}
-	if e&NSKeyValueObservingOptionInitial != 0 {
-		parts = append(parts, "NSKeyValueObservingOptionInitial")
+	if e&KeyValueObservingOptionInitial != 0 {
+		parts = append(parts, "KeyValueObservingOptionInitial")
 	}
-	if e&NSKeyValueObservingOptionPrior != 0 {
-		parts = append(parts, "NSKeyValueObservingOptionPrior")
+	if e&KeyValueObservingOptionPrior != 0 {
+		parts = append(parts, "KeyValueObservingOptionPrior")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2220,177 +2037,142 @@ func (e NSKeyValueObservingOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-type NSKeyValueSetMutationKind uint64
+type KeyValueSetMutationKind uint64
 
 const (
-	NSKeyValueUnionSetMutation     NSKeyValueSetMutationKind = 1
-	NSKeyValueMinusSetMutation     NSKeyValueSetMutationKind = 2
-	NSKeyValueIntersectSetMutation NSKeyValueSetMutationKind = 3
-	NSKeyValueSetSetMutation       NSKeyValueSetMutationKind = 4
+	KeyValueUnionSetMutation     KeyValueSetMutationKind = 1
+	KeyValueMinusSetMutation     KeyValueSetMutationKind = 2
+	KeyValueIntersectSetMutation KeyValueSetMutationKind = 3
+	KeyValueSetSetMutation       KeyValueSetMutationKind = 4
 )
 
-func (e NSKeyValueSetMutationKind) String() string {
+func (e KeyValueSetMutationKind) String() string {
 	switch e {
-	case NSKeyValueUnionSetMutation:
-		return "NSKeyValueUnionSetMutation"
-	case NSKeyValueMinusSetMutation:
-		return "NSKeyValueMinusSetMutation"
-	case NSKeyValueIntersectSetMutation:
-		return "NSKeyValueIntersectSetMutation"
-	case NSKeyValueSetSetMutation:
-		return "NSKeyValueSetSetMutation"
+	case KeyValueUnionSetMutation:
+		return "KeyValueUnionSetMutation"
+	case KeyValueMinusSetMutation:
+		return "KeyValueMinusSetMutation"
+	case KeyValueIntersectSetMutation:
+		return "KeyValueIntersectSetMutation"
+	case KeyValueSetSetMutation:
+		return "KeyValueSetSetMutation"
 	default:
-		return fmt.Sprintf("NSKeyValueSetMutationKind(%d)", int64(e))
+		return fmt.Sprintf("KeyValueSetMutationKind(%d)", int64(e))
 	}
 }
 
 // The units supported by the NSLengthFormatter class.
-type NSLengthFormatterUnit int64
+type LengthFormatterUnit int64
 
 const (
-	NSLengthFormatterUnitMillimeter NSLengthFormatterUnit = 8
-	NSLengthFormatterUnitCentimeter NSLengthFormatterUnit = 9
-	NSLengthFormatterUnitMeter      NSLengthFormatterUnit = 11
-	NSLengthFormatterUnitKilometer  NSLengthFormatterUnit = 14
-	NSLengthFormatterUnitInch       NSLengthFormatterUnit = 1281
-	NSLengthFormatterUnitFoot       NSLengthFormatterUnit = 1282
-	NSLengthFormatterUnitYard       NSLengthFormatterUnit = 1283
-	NSLengthFormatterUnitMile       NSLengthFormatterUnit = 1284
+	LengthFormatterUnitMillimeter LengthFormatterUnit = 8
+	LengthFormatterUnitCentimeter LengthFormatterUnit = 9
+	LengthFormatterUnitMeter      LengthFormatterUnit = 11
+	LengthFormatterUnitKilometer  LengthFormatterUnit = 14
+	LengthFormatterUnitInch       LengthFormatterUnit = 1281
+	LengthFormatterUnitFoot       LengthFormatterUnit = 1282
+	LengthFormatterUnitYard       LengthFormatterUnit = 1283
+	LengthFormatterUnitMile       LengthFormatterUnit = 1284
 )
 
-func (e NSLengthFormatterUnit) String() string {
+func (e LengthFormatterUnit) String() string {
 	switch e {
-	case NSLengthFormatterUnitMillimeter:
-		return "NSLengthFormatterUnitMillimeter"
-	case NSLengthFormatterUnitCentimeter:
-		return "NSLengthFormatterUnitCentimeter"
-	case NSLengthFormatterUnitMeter:
-		return "NSLengthFormatterUnitMeter"
-	case NSLengthFormatterUnitKilometer:
-		return "NSLengthFormatterUnitKilometer"
-	case NSLengthFormatterUnitInch:
-		return "NSLengthFormatterUnitInch"
-	case NSLengthFormatterUnitFoot:
-		return "NSLengthFormatterUnitFoot"
-	case NSLengthFormatterUnitYard:
-		return "NSLengthFormatterUnitYard"
-	case NSLengthFormatterUnitMile:
-		return "NSLengthFormatterUnitMile"
+	case LengthFormatterUnitMillimeter:
+		return "LengthFormatterUnitMillimeter"
+	case LengthFormatterUnitCentimeter:
+		return "LengthFormatterUnitCentimeter"
+	case LengthFormatterUnitMeter:
+		return "LengthFormatterUnitMeter"
+	case LengthFormatterUnitKilometer:
+		return "LengthFormatterUnitKilometer"
+	case LengthFormatterUnitInch:
+		return "LengthFormatterUnitInch"
+	case LengthFormatterUnitFoot:
+		return "LengthFormatterUnitFoot"
+	case LengthFormatterUnitYard:
+		return "LengthFormatterUnitYard"
+	case LengthFormatterUnitMile:
+		return "LengthFormatterUnitMile"
 	default:
-		return fmt.Sprintf("NSLengthFormatterUnit(%d)", int64(e))
+		return fmt.Sprintf("LengthFormatterUnit(%d)", int64(e))
 	}
-}
-
-// Constants for linguistic tagger enumeration specifying which tokens to omit and whether to join names.
-// Bitmask — values may be combined with |.
-type NSLinguisticTaggerOptions uint64
-
-const (
-	NSLinguisticTaggerOmitWords       NSLinguisticTaggerOptions = 1
-	NSLinguisticTaggerOmitPunctuation NSLinguisticTaggerOptions = 2
-	NSLinguisticTaggerOmitWhitespace  NSLinguisticTaggerOptions = 4
-	NSLinguisticTaggerOmitOther       NSLinguisticTaggerOptions = 8
-	NSLinguisticTaggerJoinNames       NSLinguisticTaggerOptions = 16
-)
-
-func (e NSLinguisticTaggerOptions) String() string {
-	var parts []string
-	if e&NSLinguisticTaggerOmitWords != 0 {
-		parts = append(parts, "NSLinguisticTaggerOmitWords")
-	}
-	if e&NSLinguisticTaggerOmitPunctuation != 0 {
-		parts = append(parts, "NSLinguisticTaggerOmitPunctuation")
-	}
-	if e&NSLinguisticTaggerOmitWhitespace != 0 {
-		parts = append(parts, "NSLinguisticTaggerOmitWhitespace")
-	}
-	if e&NSLinguisticTaggerOmitOther != 0 {
-		parts = append(parts, "NSLinguisticTaggerOmitOther")
-	}
-	if e&NSLinguisticTaggerJoinNames != 0 {
-		parts = append(parts, "NSLinguisticTaggerJoinNames")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }
 
 // Constants representing linguistic units.
-type NSLinguisticTaggerUnit int64
+type LinguisticTaggerUnit int64
 
 const (
 	// An individual word.
-	NSLinguisticTaggerUnitWord NSLinguisticTaggerUnit = 0
+	LinguisticTaggerUnitWord LinguisticTaggerUnit = 0
 	// An individual sentence.
-	NSLinguisticTaggerUnitSentence NSLinguisticTaggerUnit = 1
+	LinguisticTaggerUnitSentence LinguisticTaggerUnit = 1
 	// An individual paragraph.
-	NSLinguisticTaggerUnitParagraph NSLinguisticTaggerUnit = 2
+	LinguisticTaggerUnitParagraph LinguisticTaggerUnit = 2
 	// The document in its entirety.
-	NSLinguisticTaggerUnitDocument NSLinguisticTaggerUnit = 3
+	LinguisticTaggerUnitDocument LinguisticTaggerUnit = 3
 )
 
-func (e NSLinguisticTaggerUnit) String() string {
+func (e LinguisticTaggerUnit) String() string {
 	switch e {
-	case NSLinguisticTaggerUnitWord:
-		return "NSLinguisticTaggerUnitWord"
-	case NSLinguisticTaggerUnitSentence:
-		return "NSLinguisticTaggerUnitSentence"
-	case NSLinguisticTaggerUnitParagraph:
-		return "NSLinguisticTaggerUnitParagraph"
-	case NSLinguisticTaggerUnitDocument:
-		return "NSLinguisticTaggerUnitDocument"
+	case LinguisticTaggerUnitWord:
+		return "LinguisticTaggerUnitWord"
+	case LinguisticTaggerUnitSentence:
+		return "LinguisticTaggerUnitSentence"
+	case LinguisticTaggerUnitParagraph:
+		return "LinguisticTaggerUnitParagraph"
+	case LinguisticTaggerUnitDocument:
+		return "LinguisticTaggerUnitDocument"
 	default:
-		return fmt.Sprintf("NSLinguisticTaggerUnit(%d)", int64(e))
+		return fmt.Sprintf("LinguisticTaggerUnit(%d)", int64(e))
 	}
 }
 
 // The directions that a language may take across a page of text.
-type NSLocaleLanguageDirection uint64
+type LocaleLanguageDirection uint64
 
 const (
-	NSLocaleLanguageDirectionUnknown     NSLocaleLanguageDirection = 0
-	NSLocaleLanguageDirectionLeftToRight NSLocaleLanguageDirection = 1
-	NSLocaleLanguageDirectionRightToLeft NSLocaleLanguageDirection = 2
-	NSLocaleLanguageDirectionTopToBottom NSLocaleLanguageDirection = 3
-	NSLocaleLanguageDirectionBottomToTop NSLocaleLanguageDirection = 4
+	LocaleLanguageDirectionUnknown     LocaleLanguageDirection = 0
+	LocaleLanguageDirectionLeftToRight LocaleLanguageDirection = 1
+	LocaleLanguageDirectionRightToLeft LocaleLanguageDirection = 2
+	LocaleLanguageDirectionTopToBottom LocaleLanguageDirection = 3
+	LocaleLanguageDirectionBottomToTop LocaleLanguageDirection = 4
 )
 
-func (e NSLocaleLanguageDirection) String() string {
+func (e LocaleLanguageDirection) String() string {
 	switch e {
-	case NSLocaleLanguageDirectionUnknown:
-		return "NSLocaleLanguageDirectionUnknown"
-	case NSLocaleLanguageDirectionLeftToRight:
-		return "NSLocaleLanguageDirectionLeftToRight"
-	case NSLocaleLanguageDirectionRightToLeft:
-		return "NSLocaleLanguageDirectionRightToLeft"
-	case NSLocaleLanguageDirectionTopToBottom:
-		return "NSLocaleLanguageDirectionTopToBottom"
-	case NSLocaleLanguageDirectionBottomToTop:
-		return "NSLocaleLanguageDirectionBottomToTop"
+	case LocaleLanguageDirectionUnknown:
+		return "LocaleLanguageDirectionUnknown"
+	case LocaleLanguageDirectionLeftToRight:
+		return "LocaleLanguageDirectionLeftToRight"
+	case LocaleLanguageDirectionRightToLeft:
+		return "LocaleLanguageDirectionRightToLeft"
+	case LocaleLanguageDirectionTopToBottom:
+		return "LocaleLanguageDirectionTopToBottom"
+	case LocaleLanguageDirectionBottomToTop:
+		return "LocaleLanguageDirectionBottomToTop"
 	default:
-		return fmt.Sprintf("NSLocaleLanguageDirection(%d)", int64(e))
+		return fmt.Sprintf("LocaleLanguageDirection(%d)", int64(e))
 	}
 }
 
 // Used to remove access rights to a mach port when the NSMachPort object is invalidated or destroyed.
 // Bitmask — values may be combined with |.
-type NSMachPortOptions uint64
+type MachPortOptions uint64
 
 const (
 	// Do not remove any send or receive rights.
-	NSMachPortDeallocateNone         NSMachPortOptions = 0
-	NSMachPortDeallocateSendRight    NSMachPortOptions = 1
-	NSMachPortDeallocateReceiveRight NSMachPortOptions = 2
+	MachPortDeallocateNone         MachPortOptions = 0
+	MachPortDeallocateSendRight    MachPortOptions = 1
+	MachPortDeallocateReceiveRight MachPortOptions = 2
 )
 
-func (e NSMachPortOptions) String() string {
+func (e MachPortOptions) String() string {
 	var parts []string
-	if e&NSMachPortDeallocateSendRight != 0 {
-		parts = append(parts, "NSMachPortDeallocateSendRight")
+	if e&MachPortDeallocateSendRight != 0 {
+		parts = append(parts, "MachPortDeallocateSendRight")
 	}
-	if e&NSMachPortDeallocateReceiveRight != 0 {
-		parts = append(parts, "NSMachPortDeallocateReceiveRight")
+	if e&MachPortDeallocateReceiveRight != 0 {
+		parts = append(parts, "MachPortDeallocateReceiveRight")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2399,95 +2181,61 @@ func (e NSMachPortOptions) String() string {
 }
 
 // The units supported by the NSMassFormatter class.
-type NSMassFormatterUnit int64
+type MassFormatterUnit int64
 
 const (
-	NSMassFormatterUnitGram     NSMassFormatterUnit = 11
-	NSMassFormatterUnitKilogram NSMassFormatterUnit = 14
-	NSMassFormatterUnitOunce    NSMassFormatterUnit = 1537
-	NSMassFormatterUnitPound    NSMassFormatterUnit = 1538
-	NSMassFormatterUnitStone    NSMassFormatterUnit = 1539
+	MassFormatterUnitGram     MassFormatterUnit = 11
+	MassFormatterUnitKilogram MassFormatterUnit = 14
+	MassFormatterUnitOunce    MassFormatterUnit = 1537
+	MassFormatterUnitPound    MassFormatterUnit = 1538
+	MassFormatterUnitStone    MassFormatterUnit = 1539
 )
 
-func (e NSMassFormatterUnit) String() string {
+func (e MassFormatterUnit) String() string {
 	switch e {
-	case NSMassFormatterUnitGram:
-		return "NSMassFormatterUnitGram"
-	case NSMassFormatterUnitKilogram:
-		return "NSMassFormatterUnitKilogram"
-	case NSMassFormatterUnitOunce:
-		return "NSMassFormatterUnitOunce"
-	case NSMassFormatterUnitPound:
-		return "NSMassFormatterUnitPound"
-	case NSMassFormatterUnitStone:
-		return "NSMassFormatterUnitStone"
+	case MassFormatterUnitGram:
+		return "MassFormatterUnitGram"
+	case MassFormatterUnitKilogram:
+		return "MassFormatterUnitKilogram"
+	case MassFormatterUnitOunce:
+		return "MassFormatterUnitOunce"
+	case MassFormatterUnitPound:
+		return "MassFormatterUnitPound"
+	case MassFormatterUnitStone:
+		return "MassFormatterUnitStone"
 	default:
-		return fmt.Sprintf("NSMassFormatterUnit(%d)", int64(e))
+		return fmt.Sprintf("MassFormatterUnit(%d)", int64(e))
 	}
-}
-
-// Bitmask — values may be combined with |.
-type NSMatchingFlags uint64
-
-const (
-	NSMatchingProgress      NSMatchingFlags = 1
-	NSMatchingCompleted     NSMatchingFlags = 2
-	NSMatchingHitEnd        NSMatchingFlags = 4
-	NSMatchingRequiredEnd   NSMatchingFlags = 8
-	NSMatchingInternalError NSMatchingFlags = 16
-)
-
-func (e NSMatchingFlags) String() string {
-	var parts []string
-	if e&NSMatchingProgress != 0 {
-		parts = append(parts, "NSMatchingProgress")
-	}
-	if e&NSMatchingCompleted != 0 {
-		parts = append(parts, "NSMatchingCompleted")
-	}
-	if e&NSMatchingHitEnd != 0 {
-		parts = append(parts, "NSMatchingHitEnd")
-	}
-	if e&NSMatchingRequiredEnd != 0 {
-		parts = append(parts, "NSMatchingRequiredEnd")
-	}
-	if e&NSMatchingInternalError != 0 {
-		parts = append(parts, "NSMatchingInternalError")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }
 
 // The matching options constants specify the reporting, completion and matching rules to the expression matching methods. These constants are used by all methods that search for, or replace values, using a regular expression.
 // Bitmask — values may be combined with |.
-type NSMatchingOptions uint64
+type MatchingOptions uint64
 
 const (
-	NSMatchingReportProgress         NSMatchingOptions = 1
-	NSMatchingReportCompletion       NSMatchingOptions = 2
-	NSMatchingAnchored               NSMatchingOptions = 4
-	NSMatchingWithTransparentBounds  NSMatchingOptions = 8
-	NSMatchingWithoutAnchoringBounds NSMatchingOptions = 16
+	MatchingReportProgress         MatchingOptions = 1
+	MatchingReportCompletion       MatchingOptions = 2
+	MatchingAnchored               MatchingOptions = 4
+	MatchingWithTransparentBounds  MatchingOptions = 8
+	MatchingWithoutAnchoringBounds MatchingOptions = 16
 )
 
-func (e NSMatchingOptions) String() string {
+func (e MatchingOptions) String() string {
 	var parts []string
-	if e&NSMatchingReportProgress != 0 {
-		parts = append(parts, "NSMatchingReportProgress")
+	if e&MatchingReportProgress != 0 {
+		parts = append(parts, "MatchingReportProgress")
 	}
-	if e&NSMatchingReportCompletion != 0 {
-		parts = append(parts, "NSMatchingReportCompletion")
+	if e&MatchingReportCompletion != 0 {
+		parts = append(parts, "MatchingReportCompletion")
 	}
-	if e&NSMatchingAnchored != 0 {
-		parts = append(parts, "NSMatchingAnchored")
+	if e&MatchingAnchored != 0 {
+		parts = append(parts, "MatchingAnchored")
 	}
-	if e&NSMatchingWithTransparentBounds != 0 {
-		parts = append(parts, "NSMatchingWithTransparentBounds")
+	if e&MatchingWithTransparentBounds != 0 {
+		parts = append(parts, "MatchingWithTransparentBounds")
 	}
-	if e&NSMatchingWithoutAnchoringBounds != 0 {
-		parts = append(parts, "NSMatchingWithoutAnchoringBounds")
+	if e&MatchingWithoutAnchoringBounds != 0 {
+		parts = append(parts, "MatchingWithoutAnchoringBounds")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2497,24 +2245,24 @@ func (e NSMatchingOptions) String() string {
 
 // Measurement formatter options.
 // Bitmask — values may be combined with |.
-type NSMeasurementFormatterUnitOptions uint64
+type MeasurementFormatterUnitOptions uint64
 
 const (
-	NSMeasurementFormatterUnitOptionsProvidedUnit           NSMeasurementFormatterUnitOptions = 1
-	NSMeasurementFormatterUnitOptionsNaturalScale           NSMeasurementFormatterUnitOptions = 2
-	NSMeasurementFormatterUnitOptionsTemperatureWithoutUnit NSMeasurementFormatterUnitOptions = 4
+	MeasurementFormatterUnitOptionsProvidedUnit           MeasurementFormatterUnitOptions = 1
+	MeasurementFormatterUnitOptionsNaturalScale           MeasurementFormatterUnitOptions = 2
+	MeasurementFormatterUnitOptionsTemperatureWithoutUnit MeasurementFormatterUnitOptions = 4
 )
 
-func (e NSMeasurementFormatterUnitOptions) String() string {
+func (e MeasurementFormatterUnitOptions) String() string {
 	var parts []string
-	if e&NSMeasurementFormatterUnitOptionsProvidedUnit != 0 {
-		parts = append(parts, "NSMeasurementFormatterUnitOptionsProvidedUnit")
+	if e&MeasurementFormatterUnitOptionsProvidedUnit != 0 {
+		parts = append(parts, "MeasurementFormatterUnitOptionsProvidedUnit")
 	}
-	if e&NSMeasurementFormatterUnitOptionsNaturalScale != 0 {
-		parts = append(parts, "NSMeasurementFormatterUnitOptionsNaturalScale")
+	if e&MeasurementFormatterUnitOptionsNaturalScale != 0 {
+		parts = append(parts, "MeasurementFormatterUnitOptionsNaturalScale")
 	}
-	if e&NSMeasurementFormatterUnitOptionsTemperatureWithoutUnit != 0 {
-		parts = append(parts, "NSMeasurementFormatterUnitOptionsTemperatureWithoutUnit")
+	if e&MeasurementFormatterUnitOptionsTemperatureWithoutUnit != 0 {
+		parts = append(parts, "MeasurementFormatterUnitOptionsTemperatureWithoutUnit")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2524,20 +2272,20 @@ func (e NSMeasurementFormatterUnitOptions) String() string {
 
 // These constants specify options for a network service.
 // Bitmask — values may be combined with |.
-type NSNetServiceOptions uint64
+type NetServiceOptions uint64
 
 const (
-	NSNetServiceNoAutoRename         NSNetServiceOptions = 1
-	NSNetServiceListenForConnections NSNetServiceOptions = 2
+	NetServiceNoAutoRename         NetServiceOptions = 1
+	NetServiceListenForConnections NetServiceOptions = 2
 )
 
-func (e NSNetServiceOptions) String() string {
+func (e NetServiceOptions) String() string {
 	var parts []string
-	if e&NSNetServiceNoAutoRename != 0 {
-		parts = append(parts, "NSNetServiceNoAutoRename")
+	if e&NetServiceNoAutoRename != 0 {
+		parts = append(parts, "NetServiceNoAutoRename")
 	}
-	if e&NSNetServiceListenForConnections != 0 {
-		parts = append(parts, "NSNetServiceListenForConnections")
+	if e&NetServiceListenForConnections != 0 {
+		parts = append(parts, "NetServiceListenForConnections")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2547,21 +2295,21 @@ func (e NSNetServiceOptions) String() string {
 
 // The constants that specify how notifications are coalesced.
 // Bitmask — values may be combined with |.
-type NSNotificationCoalescing uint64
+type NotificationCoalescing uint64
 
 const (
-	NSNotificationNoCoalescing       NSNotificationCoalescing = 0
-	NSNotificationCoalescingOnName   NSNotificationCoalescing = 1
-	NSNotificationCoalescingOnSender NSNotificationCoalescing = 2
+	NotificationNoCoalescing       NotificationCoalescing = 0
+	NotificationCoalescingOnName   NotificationCoalescing = 1
+	NotificationCoalescingOnSender NotificationCoalescing = 2
 )
 
-func (e NSNotificationCoalescing) String() string {
+func (e NotificationCoalescing) String() string {
 	var parts []string
-	if e&NSNotificationCoalescingOnName != 0 {
-		parts = append(parts, "NSNotificationCoalescingOnName")
+	if e&NotificationCoalescingOnName != 0 {
+		parts = append(parts, "NotificationCoalescingOnName")
 	}
-	if e&NSNotificationCoalescingOnSender != 0 {
-		parts = append(parts, "NSNotificationCoalescingOnSender")
+	if e&NotificationCoalescingOnSender != 0 {
+		parts = append(parts, "NotificationCoalescingOnSender")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2569,206 +2317,181 @@ func (e NSNotificationCoalescing) String() string {
 	return strings.Join(parts, "|")
 }
 
-// These constants specify the types of notification delivery suspension behaviors.
-type NSNotificationSuspensionBehavior uint64
-
-const (
-	NSNotificationSuspensionBehaviorDrop               NSNotificationSuspensionBehavior = 1
-	NSNotificationSuspensionBehaviorCoalesce           NSNotificationSuspensionBehavior = 2
-	NSNotificationSuspensionBehaviorHold               NSNotificationSuspensionBehavior = 3
-	NSNotificationSuspensionBehaviorDeliverImmediately NSNotificationSuspensionBehavior = 4
-)
-
-func (e NSNotificationSuspensionBehavior) String() string {
-	switch e {
-	case NSNotificationSuspensionBehaviorDrop:
-		return "NSNotificationSuspensionBehaviorDrop"
-	case NSNotificationSuspensionBehaviorCoalesce:
-		return "NSNotificationSuspensionBehaviorCoalesce"
-	case NSNotificationSuspensionBehaviorHold:
-		return "NSNotificationSuspensionBehaviorHold"
-	case NSNotificationSuspensionBehaviorDeliverImmediately:
-		return "NSNotificationSuspensionBehaviorDeliverImmediately"
-	default:
-		return fmt.Sprintf("NSNotificationSuspensionBehavior(%d)", int64(e))
-	}
-}
-
 // These constants specify the behavior of a number formatter. These constants are returned by the defaultFormatterBehavior class method and the formatterBehavior property.
-type NSNumberFormatterBehavior uint64
+type NumberFormatterBehavior uint64
 
 const (
-	NSNumberFormatterBehaviorDefault NSNumberFormatterBehavior = 0
-	NSNumberFormatterBehavior10_0    NSNumberFormatterBehavior = 1000
-	NSNumberFormatterBehavior10_4    NSNumberFormatterBehavior = 1040
+	NumberFormatterBehaviorDefault NumberFormatterBehavior = 0
+	NumberFormatterBehavior10_0    NumberFormatterBehavior = 1000
+	NumberFormatterBehavior10_4    NumberFormatterBehavior = 1040
 )
 
-func (e NSNumberFormatterBehavior) String() string {
+func (e NumberFormatterBehavior) String() string {
 	switch e {
-	case NSNumberFormatterBehaviorDefault:
-		return "NSNumberFormatterBehaviorDefault"
-	case NSNumberFormatterBehavior10_0:
-		return "NSNumberFormatterBehavior10_0"
-	case NSNumberFormatterBehavior10_4:
-		return "NSNumberFormatterBehavior10_4"
+	case NumberFormatterBehaviorDefault:
+		return "NumberFormatterBehaviorDefault"
+	case NumberFormatterBehavior10_0:
+		return "NumberFormatterBehavior10_0"
+	case NumberFormatterBehavior10_4:
+		return "NumberFormatterBehavior10_4"
 	default:
-		return fmt.Sprintf("NSNumberFormatterBehavior(%d)", int64(e))
+		return fmt.Sprintf("NumberFormatterBehavior(%d)", int64(e))
 	}
 }
 
 // These constants are used to specify how numbers should be padded. These constants are used by the paddingPosition property.
-type NSNumberFormatterPadPosition uint64
+type NumberFormatterPadPosition uint64
 
 const (
-	NSNumberFormatterPadBeforePrefix NSNumberFormatterPadPosition = 0
-	NSNumberFormatterPadAfterPrefix  NSNumberFormatterPadPosition = 1
-	NSNumberFormatterPadBeforeSuffix NSNumberFormatterPadPosition = 2
-	NSNumberFormatterPadAfterSuffix  NSNumberFormatterPadPosition = 3
+	NumberFormatterPadBeforePrefix NumberFormatterPadPosition = 0
+	NumberFormatterPadAfterPrefix  NumberFormatterPadPosition = 1
+	NumberFormatterPadBeforeSuffix NumberFormatterPadPosition = 2
+	NumberFormatterPadAfterSuffix  NumberFormatterPadPosition = 3
 )
 
-func (e NSNumberFormatterPadPosition) String() string {
+func (e NumberFormatterPadPosition) String() string {
 	switch e {
-	case NSNumberFormatterPadBeforePrefix:
-		return "NSNumberFormatterPadBeforePrefix"
-	case NSNumberFormatterPadAfterPrefix:
-		return "NSNumberFormatterPadAfterPrefix"
-	case NSNumberFormatterPadBeforeSuffix:
-		return "NSNumberFormatterPadBeforeSuffix"
-	case NSNumberFormatterPadAfterSuffix:
-		return "NSNumberFormatterPadAfterSuffix"
+	case NumberFormatterPadBeforePrefix:
+		return "NumberFormatterPadBeforePrefix"
+	case NumberFormatterPadAfterPrefix:
+		return "NumberFormatterPadAfterPrefix"
+	case NumberFormatterPadBeforeSuffix:
+		return "NumberFormatterPadBeforeSuffix"
+	case NumberFormatterPadAfterSuffix:
+		return "NumberFormatterPadAfterSuffix"
 	default:
-		return fmt.Sprintf("NSNumberFormatterPadPosition(%d)", int64(e))
+		return fmt.Sprintf("NumberFormatterPadPosition(%d)", int64(e))
 	}
 }
 
 // These constants are used to specify how numbers should be rounded. These constants are used by the roundingMode property.
-type NSNumberFormatterRoundingMode uint64
+type NumberFormatterRoundingMode uint64
 
 const (
-	NSNumberFormatterRoundCeiling  NSNumberFormatterRoundingMode = 0
-	NSNumberFormatterRoundFloor    NSNumberFormatterRoundingMode = 1
-	NSNumberFormatterRoundDown     NSNumberFormatterRoundingMode = 2
-	NSNumberFormatterRoundUp       NSNumberFormatterRoundingMode = 3
-	NSNumberFormatterRoundHalfEven NSNumberFormatterRoundingMode = 4
-	NSNumberFormatterRoundHalfDown NSNumberFormatterRoundingMode = 5
-	NSNumberFormatterRoundHalfUp   NSNumberFormatterRoundingMode = 6
+	NumberFormatterRoundCeiling  NumberFormatterRoundingMode = 0
+	NumberFormatterRoundFloor    NumberFormatterRoundingMode = 1
+	NumberFormatterRoundDown     NumberFormatterRoundingMode = 2
+	NumberFormatterRoundUp       NumberFormatterRoundingMode = 3
+	NumberFormatterRoundHalfEven NumberFormatterRoundingMode = 4
+	NumberFormatterRoundHalfDown NumberFormatterRoundingMode = 5
+	NumberFormatterRoundHalfUp   NumberFormatterRoundingMode = 6
 )
 
-func (e NSNumberFormatterRoundingMode) String() string {
+func (e NumberFormatterRoundingMode) String() string {
 	switch e {
-	case NSNumberFormatterRoundCeiling:
-		return "NSNumberFormatterRoundCeiling"
-	case NSNumberFormatterRoundFloor:
-		return "NSNumberFormatterRoundFloor"
-	case NSNumberFormatterRoundDown:
-		return "NSNumberFormatterRoundDown"
-	case NSNumberFormatterRoundUp:
-		return "NSNumberFormatterRoundUp"
-	case NSNumberFormatterRoundHalfEven:
-		return "NSNumberFormatterRoundHalfEven"
-	case NSNumberFormatterRoundHalfDown:
-		return "NSNumberFormatterRoundHalfDown"
-	case NSNumberFormatterRoundHalfUp:
-		return "NSNumberFormatterRoundHalfUp"
+	case NumberFormatterRoundCeiling:
+		return "NumberFormatterRoundCeiling"
+	case NumberFormatterRoundFloor:
+		return "NumberFormatterRoundFloor"
+	case NumberFormatterRoundDown:
+		return "NumberFormatterRoundDown"
+	case NumberFormatterRoundUp:
+		return "NumberFormatterRoundUp"
+	case NumberFormatterRoundHalfEven:
+		return "NumberFormatterRoundHalfEven"
+	case NumberFormatterRoundHalfDown:
+		return "NumberFormatterRoundHalfDown"
+	case NumberFormatterRoundHalfUp:
+		return "NumberFormatterRoundHalfUp"
 	default:
-		return fmt.Sprintf("NSNumberFormatterRoundingMode(%d)", int64(e))
+		return fmt.Sprintf("NumberFormatterRoundingMode(%d)", int64(e))
 	}
 }
 
 // The predefined number format styles used by the numberStyle property.
-type NSNumberFormatterStyle uint64
+type NumberFormatterStyle uint64
 
 const (
-	NSNumberFormatterNoStyle                 NSNumberFormatterStyle = 0
-	NSNumberFormatterDecimalStyle            NSNumberFormatterStyle = 1
-	NSNumberFormatterCurrencyStyle           NSNumberFormatterStyle = 2
-	NSNumberFormatterPercentStyle            NSNumberFormatterStyle = 3
-	NSNumberFormatterScientificStyle         NSNumberFormatterStyle = 4
-	NSNumberFormatterSpellOutStyle           NSNumberFormatterStyle = 5
-	NSNumberFormatterOrdinalStyle            NSNumberFormatterStyle = 6
-	NSNumberFormatterCurrencyISOCodeStyle    NSNumberFormatterStyle = 8
-	NSNumberFormatterCurrencyPluralStyle     NSNumberFormatterStyle = 9
-	NSNumberFormatterCurrencyAccountingStyle NSNumberFormatterStyle = 10
+	NumberFormatterNoStyle                 NumberFormatterStyle = 0
+	NumberFormatterDecimalStyle            NumberFormatterStyle = 1
+	NumberFormatterCurrencyStyle           NumberFormatterStyle = 2
+	NumberFormatterPercentStyle            NumberFormatterStyle = 3
+	NumberFormatterScientificStyle         NumberFormatterStyle = 4
+	NumberFormatterSpellOutStyle           NumberFormatterStyle = 5
+	NumberFormatterOrdinalStyle            NumberFormatterStyle = 6
+	NumberFormatterCurrencyISOCodeStyle    NumberFormatterStyle = 8
+	NumberFormatterCurrencyPluralStyle     NumberFormatterStyle = 9
+	NumberFormatterCurrencyAccountingStyle NumberFormatterStyle = 10
 )
 
-func (e NSNumberFormatterStyle) String() string {
+func (e NumberFormatterStyle) String() string {
 	switch e {
-	case NSNumberFormatterNoStyle:
-		return "NSNumberFormatterNoStyle"
-	case NSNumberFormatterDecimalStyle:
-		return "NSNumberFormatterDecimalStyle"
-	case NSNumberFormatterCurrencyStyle:
-		return "NSNumberFormatterCurrencyStyle"
-	case NSNumberFormatterPercentStyle:
-		return "NSNumberFormatterPercentStyle"
-	case NSNumberFormatterScientificStyle:
-		return "NSNumberFormatterScientificStyle"
-	case NSNumberFormatterSpellOutStyle:
-		return "NSNumberFormatterSpellOutStyle"
-	case NSNumberFormatterOrdinalStyle:
-		return "NSNumberFormatterOrdinalStyle"
-	case NSNumberFormatterCurrencyISOCodeStyle:
-		return "NSNumberFormatterCurrencyISOCodeStyle"
-	case NSNumberFormatterCurrencyPluralStyle:
-		return "NSNumberFormatterCurrencyPluralStyle"
-	case NSNumberFormatterCurrencyAccountingStyle:
-		return "NSNumberFormatterCurrencyAccountingStyle"
+	case NumberFormatterNoStyle:
+		return "NumberFormatterNoStyle"
+	case NumberFormatterDecimalStyle:
+		return "NumberFormatterDecimalStyle"
+	case NumberFormatterCurrencyStyle:
+		return "NumberFormatterCurrencyStyle"
+	case NumberFormatterPercentStyle:
+		return "NumberFormatterPercentStyle"
+	case NumberFormatterScientificStyle:
+		return "NumberFormatterScientificStyle"
+	case NumberFormatterSpellOutStyle:
+		return "NumberFormatterSpellOutStyle"
+	case NumberFormatterOrdinalStyle:
+		return "NumberFormatterOrdinalStyle"
+	case NumberFormatterCurrencyISOCodeStyle:
+		return "NumberFormatterCurrencyISOCodeStyle"
+	case NumberFormatterCurrencyPluralStyle:
+		return "NumberFormatterCurrencyPluralStyle"
+	case NumberFormatterCurrencyAccountingStyle:
+		return "NumberFormatterCurrencyAccountingStyle"
 	default:
-		return fmt.Sprintf("NSNumberFormatterStyle(%d)", int64(e))
+		return fmt.Sprintf("NumberFormatterStyle(%d)", int64(e))
 	}
 }
 
 // These constants let you prioritize the order in which operations execute.
-type NSOperationQueuePriority int64
+type OperationQueuePriority int64
 
 const (
-	NSOperationQueuePriorityVeryLow  NSOperationQueuePriority = -8
-	NSOperationQueuePriorityLow      NSOperationQueuePriority = -4
-	NSOperationQueuePriorityNormal   NSOperationQueuePriority = 0
-	NSOperationQueuePriorityHigh     NSOperationQueuePriority = 4
-	NSOperationQueuePriorityVeryHigh NSOperationQueuePriority = 8
+	OperationQueuePriorityVeryLow  OperationQueuePriority = -8
+	OperationQueuePriorityLow      OperationQueuePriority = -4
+	OperationQueuePriorityNormal   OperationQueuePriority = 0
+	OperationQueuePriorityHigh     OperationQueuePriority = 4
+	OperationQueuePriorityVeryHigh OperationQueuePriority = 8
 )
 
-func (e NSOperationQueuePriority) String() string {
+func (e OperationQueuePriority) String() string {
 	switch e {
-	case NSOperationQueuePriorityVeryLow:
-		return "NSOperationQueuePriorityVeryLow"
-	case NSOperationQueuePriorityLow:
-		return "NSOperationQueuePriorityLow"
-	case NSOperationQueuePriorityNormal:
-		return "NSOperationQueuePriorityNormal"
-	case NSOperationQueuePriorityHigh:
-		return "NSOperationQueuePriorityHigh"
-	case NSOperationQueuePriorityVeryHigh:
-		return "NSOperationQueuePriorityVeryHigh"
+	case OperationQueuePriorityVeryLow:
+		return "OperationQueuePriorityVeryLow"
+	case OperationQueuePriorityLow:
+		return "OperationQueuePriorityLow"
+	case OperationQueuePriorityNormal:
+		return "OperationQueuePriorityNormal"
+	case OperationQueuePriorityHigh:
+		return "OperationQueuePriorityHigh"
+	case OperationQueuePriorityVeryHigh:
+		return "OperationQueuePriorityVeryHigh"
 	default:
-		return fmt.Sprintf("NSOperationQueuePriority(%d)", int64(e))
+		return fmt.Sprintf("OperationQueuePriority(%d)", int64(e))
 	}
 }
 
 // Constants that specify the options to use when creating an ordered collection difference.
 // Bitmask — values may be combined with |.
-type NSOrderedCollectionDifferenceCalculationOptions uint64
+type OrderedCollectionDifferenceCalculationOptions uint64
 
 const (
 	// An option that indicates that the difference should omit references to the insertions.
-	NSOrderedCollectionDifferenceCalculationOmitInsertedObjects NSOrderedCollectionDifferenceCalculationOptions = 1
+	OrderedCollectionDifferenceCalculationOmitInsertedObjects OrderedCollectionDifferenceCalculationOptions = 1
 	// An option that indicates that the difference should omit references to the removals.
-	NSOrderedCollectionDifferenceCalculationOmitRemovedObjects NSOrderedCollectionDifferenceCalculationOptions = 2
+	OrderedCollectionDifferenceCalculationOmitRemovedObjects OrderedCollectionDifferenceCalculationOptions = 2
 	// An option that identifies insertions or removals as moves.
-	NSOrderedCollectionDifferenceCalculationInferMoves NSOrderedCollectionDifferenceCalculationOptions = 4
+	OrderedCollectionDifferenceCalculationInferMoves OrderedCollectionDifferenceCalculationOptions = 4
 )
 
-func (e NSOrderedCollectionDifferenceCalculationOptions) String() string {
+func (e OrderedCollectionDifferenceCalculationOptions) String() string {
 	var parts []string
-	if e&NSOrderedCollectionDifferenceCalculationOmitInsertedObjects != 0 {
-		parts = append(parts, "NSOrderedCollectionDifferenceCalculationOmitInsertedObjects")
+	if e&OrderedCollectionDifferenceCalculationOmitInsertedObjects != 0 {
+		parts = append(parts, "OrderedCollectionDifferenceCalculationOmitInsertedObjects")
 	}
-	if e&NSOrderedCollectionDifferenceCalculationOmitRemovedObjects != 0 {
-		parts = append(parts, "NSOrderedCollectionDifferenceCalculationOmitRemovedObjects")
+	if e&OrderedCollectionDifferenceCalculationOmitRemovedObjects != 0 {
+		parts = append(parts, "OrderedCollectionDifferenceCalculationOmitRemovedObjects")
 	}
-	if e&NSOrderedCollectionDifferenceCalculationInferMoves != 0 {
-		parts = append(parts, "NSOrderedCollectionDifferenceCalculationInferMoves")
+	if e&OrderedCollectionDifferenceCalculationInferMoves != 0 {
+		parts = append(parts, "OrderedCollectionDifferenceCalculationInferMoves")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2778,16 +2501,16 @@ func (e NSOrderedCollectionDifferenceCalculationOptions) String() string {
 
 // Options for formatting person name components.
 // Bitmask — values may be combined with |.
-type NSPersonNameComponentsFormatterOptions uint64
+type PersonNameComponentsFormatterOptions uint64
 
 const (
-	NSPersonNameComponentsFormatterPhonetic NSPersonNameComponentsFormatterOptions = 2
+	PersonNameComponentsFormatterPhonetic PersonNameComponentsFormatterOptions = 2
 )
 
-func (e NSPersonNameComponentsFormatterOptions) String() string {
+func (e PersonNameComponentsFormatterOptions) String() string {
 	var parts []string
-	if e&NSPersonNameComponentsFormatterPhonetic != 0 {
-		parts = append(parts, "NSPersonNameComponentsFormatterPhonetic")
+	if e&PersonNameComponentsFormatterPhonetic != 0 {
+		parts = append(parts, "PersonNameComponentsFormatterPhonetic")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2796,90 +2519,90 @@ func (e NSPersonNameComponentsFormatterOptions) String() string {
 }
 
 // The formatting styles for person name components.
-type NSPersonNameComponentsFormatterStyle int64
+type PersonNameComponentsFormatterStyle int64
 
 const (
-	NSPersonNameComponentsFormatterStyleDefault     NSPersonNameComponentsFormatterStyle = 0
-	NSPersonNameComponentsFormatterStyleShort       NSPersonNameComponentsFormatterStyle = 1
-	NSPersonNameComponentsFormatterStyleMedium      NSPersonNameComponentsFormatterStyle = 2
-	NSPersonNameComponentsFormatterStyleLong        NSPersonNameComponentsFormatterStyle = 3
-	NSPersonNameComponentsFormatterStyleAbbreviated NSPersonNameComponentsFormatterStyle = 4
+	PersonNameComponentsFormatterStyleDefault     PersonNameComponentsFormatterStyle = 0
+	PersonNameComponentsFormatterStyleShort       PersonNameComponentsFormatterStyle = 1
+	PersonNameComponentsFormatterStyleMedium      PersonNameComponentsFormatterStyle = 2
+	PersonNameComponentsFormatterStyleLong        PersonNameComponentsFormatterStyle = 3
+	PersonNameComponentsFormatterStyleAbbreviated PersonNameComponentsFormatterStyle = 4
 )
 
-func (e NSPersonNameComponentsFormatterStyle) String() string {
+func (e PersonNameComponentsFormatterStyle) String() string {
 	switch e {
-	case NSPersonNameComponentsFormatterStyleDefault:
-		return "NSPersonNameComponentsFormatterStyleDefault"
-	case NSPersonNameComponentsFormatterStyleShort:
-		return "NSPersonNameComponentsFormatterStyleShort"
-	case NSPersonNameComponentsFormatterStyleMedium:
-		return "NSPersonNameComponentsFormatterStyleMedium"
-	case NSPersonNameComponentsFormatterStyleLong:
-		return "NSPersonNameComponentsFormatterStyleLong"
-	case NSPersonNameComponentsFormatterStyleAbbreviated:
-		return "NSPersonNameComponentsFormatterStyleAbbreviated"
+	case PersonNameComponentsFormatterStyleDefault:
+		return "PersonNameComponentsFormatterStyleDefault"
+	case PersonNameComponentsFormatterStyleShort:
+		return "PersonNameComponentsFormatterStyleShort"
+	case PersonNameComponentsFormatterStyleMedium:
+		return "PersonNameComponentsFormatterStyleMedium"
+	case PersonNameComponentsFormatterStyleLong:
+		return "PersonNameComponentsFormatterStyleLong"
+	case PersonNameComponentsFormatterStyleAbbreviated:
+		return "PersonNameComponentsFormatterStyleAbbreviated"
 	default:
-		return fmt.Sprintf("NSPersonNameComponentsFormatterStyle(%d)", int64(e))
+		return fmt.Sprintf("PersonNameComponentsFormatterStyle(%d)", int64(e))
 	}
 }
 
 // Defines the memory and personality options for an NSPointerFunctions object.
 // Bitmask — values may be combined with |.
-type NSPointerFunctionsOptions uint64
+type PointerFunctionsOptions uint64
 
 const (
-	NSPointerFunctionsStrongMemory NSPointerFunctionsOptions = 0
+	PointerFunctionsStrongMemory PointerFunctionsOptions = 0
 	// Use weak read and write barriers; use garbage-collected memory on copyIn.
 	//
 	// Deprecated: GC no longer supported
-	NSPointerFunctionsZeroingWeakMemory        NSPointerFunctionsOptions = 1
-	NSPointerFunctionsOpaqueMemory             NSPointerFunctionsOptions = 2
-	NSPointerFunctionsMallocMemory             NSPointerFunctionsOptions = 3
-	NSPointerFunctionsMachVirtualMemory        NSPointerFunctionsOptions = 4
-	NSPointerFunctionsWeakMemory               NSPointerFunctionsOptions = 5
-	NSPointerFunctionsObjectPersonality        NSPointerFunctionsOptions = 0
-	NSPointerFunctionsOpaquePersonality        NSPointerFunctionsOptions = 256
-	NSPointerFunctionsObjectPointerPersonality NSPointerFunctionsOptions = 512
-	NSPointerFunctionsCStringPersonality       NSPointerFunctionsOptions = 768
-	NSPointerFunctionsStructPersonality        NSPointerFunctionsOptions = 1024
-	NSPointerFunctionsIntegerPersonality       NSPointerFunctionsOptions = 1280
-	NSPointerFunctionsCopyIn                   NSPointerFunctionsOptions = 65536
+	PointerFunctionsZeroingWeakMemory        PointerFunctionsOptions = 1
+	PointerFunctionsOpaqueMemory             PointerFunctionsOptions = 2
+	PointerFunctionsMallocMemory             PointerFunctionsOptions = 3
+	PointerFunctionsMachVirtualMemory        PointerFunctionsOptions = 4
+	PointerFunctionsWeakMemory               PointerFunctionsOptions = 5
+	PointerFunctionsObjectPersonality        PointerFunctionsOptions = 0
+	PointerFunctionsOpaquePersonality        PointerFunctionsOptions = 256
+	PointerFunctionsObjectPointerPersonality PointerFunctionsOptions = 512
+	PointerFunctionsCStringPersonality       PointerFunctionsOptions = 768
+	PointerFunctionsStructPersonality        PointerFunctionsOptions = 1024
+	PointerFunctionsIntegerPersonality       PointerFunctionsOptions = 1280
+	PointerFunctionsCopyIn                   PointerFunctionsOptions = 65536
 )
 
-func (e NSPointerFunctionsOptions) String() string {
+func (e PointerFunctionsOptions) String() string {
 	var parts []string
-	if e&NSPointerFunctionsZeroingWeakMemory != 0 {
-		parts = append(parts, "NSPointerFunctionsZeroingWeakMemory")
+	if e&PointerFunctionsZeroingWeakMemory != 0 {
+		parts = append(parts, "PointerFunctionsZeroingWeakMemory")
 	}
-	if e&NSPointerFunctionsOpaqueMemory != 0 {
-		parts = append(parts, "NSPointerFunctionsOpaqueMemory")
+	if e&PointerFunctionsOpaqueMemory != 0 {
+		parts = append(parts, "PointerFunctionsOpaqueMemory")
 	}
-	if e&NSPointerFunctionsMallocMemory != 0 {
-		parts = append(parts, "NSPointerFunctionsMallocMemory")
+	if e&PointerFunctionsMallocMemory != 0 {
+		parts = append(parts, "PointerFunctionsMallocMemory")
 	}
-	if e&NSPointerFunctionsMachVirtualMemory != 0 {
-		parts = append(parts, "NSPointerFunctionsMachVirtualMemory")
+	if e&PointerFunctionsMachVirtualMemory != 0 {
+		parts = append(parts, "PointerFunctionsMachVirtualMemory")
 	}
-	if e&NSPointerFunctionsWeakMemory != 0 {
-		parts = append(parts, "NSPointerFunctionsWeakMemory")
+	if e&PointerFunctionsWeakMemory != 0 {
+		parts = append(parts, "PointerFunctionsWeakMemory")
 	}
-	if e&NSPointerFunctionsOpaquePersonality != 0 {
-		parts = append(parts, "NSPointerFunctionsOpaquePersonality")
+	if e&PointerFunctionsOpaquePersonality != 0 {
+		parts = append(parts, "PointerFunctionsOpaquePersonality")
 	}
-	if e&NSPointerFunctionsObjectPointerPersonality != 0 {
-		parts = append(parts, "NSPointerFunctionsObjectPointerPersonality")
+	if e&PointerFunctionsObjectPointerPersonality != 0 {
+		parts = append(parts, "PointerFunctionsObjectPointerPersonality")
 	}
-	if e&NSPointerFunctionsCStringPersonality != 0 {
-		parts = append(parts, "NSPointerFunctionsCStringPersonality")
+	if e&PointerFunctionsCStringPersonality != 0 {
+		parts = append(parts, "PointerFunctionsCStringPersonality")
 	}
-	if e&NSPointerFunctionsStructPersonality != 0 {
-		parts = append(parts, "NSPointerFunctionsStructPersonality")
+	if e&PointerFunctionsStructPersonality != 0 {
+		parts = append(parts, "PointerFunctionsStructPersonality")
 	}
-	if e&NSPointerFunctionsIntegerPersonality != 0 {
-		parts = append(parts, "NSPointerFunctionsIntegerPersonality")
+	if e&PointerFunctionsIntegerPersonality != 0 {
+		parts = append(parts, "PointerFunctionsIntegerPersonality")
 	}
-	if e&NSPointerFunctionsCopyIn != 0 {
-		parts = append(parts, "NSPointerFunctionsCopyIn")
+	if e&PointerFunctionsCopyIn != 0 {
+		parts = append(parts, "PointerFunctionsCopyIn")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2888,208 +2611,208 @@ func (e NSPointerFunctionsOptions) String() string {
 }
 
 // The constants that specify when notifications are posted.
-type NSPostingStyle uint64
+type PostingStyle uint64
 
 const (
-	NSPostWhenIdle NSPostingStyle = 1
-	NSPostASAP     NSPostingStyle = 2
-	NSPostNow      NSPostingStyle = 3
+	PostWhenIdle PostingStyle = 1
+	PostASAP     PostingStyle = 2
+	PostNow      PostingStyle = 3
 )
 
-func (e NSPostingStyle) String() string {
+func (e PostingStyle) String() string {
 	switch e {
-	case NSPostWhenIdle:
-		return "NSPostWhenIdle"
-	case NSPostASAP:
-		return "NSPostASAP"
-	case NSPostNow:
-		return "NSPostNow"
+	case PostWhenIdle:
+		return "PostWhenIdle"
+	case PostASAP:
+		return "PostASAP"
+	case PostNow:
+		return "PostNow"
 	default:
-		return fmt.Sprintf("NSPostingStyle(%d)", int64(e))
+		return fmt.Sprintf("PostingStyle(%d)", int64(e))
 	}
 }
 
 // Defines the type of comparison for a comparison predicate.
-type NSPredicateOperatorType uint64
+type PredicateOperatorType uint64
 
 const (
-	NSLessThanPredicateOperatorType             NSPredicateOperatorType = 0
-	NSLessThanOrEqualToPredicateOperatorType    NSPredicateOperatorType = 1
-	NSGreaterThanPredicateOperatorType          NSPredicateOperatorType = 2
-	NSGreaterThanOrEqualToPredicateOperatorType NSPredicateOperatorType = 3
-	NSEqualToPredicateOperatorType              NSPredicateOperatorType = 4
-	NSNotEqualToPredicateOperatorType           NSPredicateOperatorType = 5
-	NSMatchesPredicateOperatorType              NSPredicateOperatorType = 6
-	NSLikePredicateOperatorType                 NSPredicateOperatorType = 7
-	NSBeginsWithPredicateOperatorType           NSPredicateOperatorType = 8
-	NSEndsWithPredicateOperatorType             NSPredicateOperatorType = 9
-	NSInPredicateOperatorType                   NSPredicateOperatorType = 10
-	NSCustomSelectorPredicateOperatorType       NSPredicateOperatorType = 11
-	NSContainsPredicateOperatorType             NSPredicateOperatorType = 99
-	NSBetweenPredicateOperatorType              NSPredicateOperatorType = 100
+	LessThanPredicateOperatorType             PredicateOperatorType = 0
+	LessThanOrEqualToPredicateOperatorType    PredicateOperatorType = 1
+	GreaterThanPredicateOperatorType          PredicateOperatorType = 2
+	GreaterThanOrEqualToPredicateOperatorType PredicateOperatorType = 3
+	EqualToPredicateOperatorType              PredicateOperatorType = 4
+	NotEqualToPredicateOperatorType           PredicateOperatorType = 5
+	MatchesPredicateOperatorType              PredicateOperatorType = 6
+	LikePredicateOperatorType                 PredicateOperatorType = 7
+	BeginsWithPredicateOperatorType           PredicateOperatorType = 8
+	EndsWithPredicateOperatorType             PredicateOperatorType = 9
+	InPredicateOperatorType                   PredicateOperatorType = 10
+	CustomSelectorPredicateOperatorType       PredicateOperatorType = 11
+	ContainsPredicateOperatorType             PredicateOperatorType = 99
+	BetweenPredicateOperatorType              PredicateOperatorType = 100
 )
 
-func (e NSPredicateOperatorType) String() string {
+func (e PredicateOperatorType) String() string {
 	switch e {
-	case NSLessThanPredicateOperatorType:
-		return "NSLessThanPredicateOperatorType"
-	case NSLessThanOrEqualToPredicateOperatorType:
-		return "NSLessThanOrEqualToPredicateOperatorType"
-	case NSGreaterThanPredicateOperatorType:
-		return "NSGreaterThanPredicateOperatorType"
-	case NSGreaterThanOrEqualToPredicateOperatorType:
-		return "NSGreaterThanOrEqualToPredicateOperatorType"
-	case NSEqualToPredicateOperatorType:
-		return "NSEqualToPredicateOperatorType"
-	case NSNotEqualToPredicateOperatorType:
-		return "NSNotEqualToPredicateOperatorType"
-	case NSMatchesPredicateOperatorType:
-		return "NSMatchesPredicateOperatorType"
-	case NSLikePredicateOperatorType:
-		return "NSLikePredicateOperatorType"
-	case NSBeginsWithPredicateOperatorType:
-		return "NSBeginsWithPredicateOperatorType"
-	case NSEndsWithPredicateOperatorType:
-		return "NSEndsWithPredicateOperatorType"
-	case NSInPredicateOperatorType:
-		return "NSInPredicateOperatorType"
-	case NSCustomSelectorPredicateOperatorType:
-		return "NSCustomSelectorPredicateOperatorType"
-	case NSContainsPredicateOperatorType:
-		return "NSContainsPredicateOperatorType"
-	case NSBetweenPredicateOperatorType:
-		return "NSBetweenPredicateOperatorType"
+	case LessThanPredicateOperatorType:
+		return "LessThanPredicateOperatorType"
+	case LessThanOrEqualToPredicateOperatorType:
+		return "LessThanOrEqualToPredicateOperatorType"
+	case GreaterThanPredicateOperatorType:
+		return "GreaterThanPredicateOperatorType"
+	case GreaterThanOrEqualToPredicateOperatorType:
+		return "GreaterThanOrEqualToPredicateOperatorType"
+	case EqualToPredicateOperatorType:
+		return "EqualToPredicateOperatorType"
+	case NotEqualToPredicateOperatorType:
+		return "NotEqualToPredicateOperatorType"
+	case MatchesPredicateOperatorType:
+		return "MatchesPredicateOperatorType"
+	case LikePredicateOperatorType:
+		return "LikePredicateOperatorType"
+	case BeginsWithPredicateOperatorType:
+		return "BeginsWithPredicateOperatorType"
+	case EndsWithPredicateOperatorType:
+		return "EndsWithPredicateOperatorType"
+	case InPredicateOperatorType:
+		return "InPredicateOperatorType"
+	case CustomSelectorPredicateOperatorType:
+		return "CustomSelectorPredicateOperatorType"
+	case ContainsPredicateOperatorType:
+		return "ContainsPredicateOperatorType"
+	case BetweenPredicateOperatorType:
+		return "BetweenPredicateOperatorType"
 	default:
-		return fmt.Sprintf("NSPredicateOperatorType(%d)", int64(e))
+		return fmt.Sprintf("PredicateOperatorType(%d)", int64(e))
 	}
 }
 
 // An enumeration of intended display styles for blocks of text like paragraphs, lists, and code blocks.
-type NSPresentationIntentKind int64
+type PresentationIntentKind int64
 
 const (
 	// A presentation style for a paragraph of text.
-	NSPresentationIntentKindParagraph NSPresentationIntentKind = 0
+	PresentationIntentKindParagraph PresentationIntentKind = 0
 	// A presentation style for a section header.
-	NSPresentationIntentKindHeader NSPresentationIntentKind = 1
+	PresentationIntentKindHeader PresentationIntentKind = 1
 	// A presentation style for an ordered list of items.
-	NSPresentationIntentKindOrderedList NSPresentationIntentKind = 2
+	PresentationIntentKindOrderedList PresentationIntentKind = 2
 	// A presentation style for an unordered list of items.
-	NSPresentationIntentKindUnorderedList NSPresentationIntentKind = 3
+	PresentationIntentKindUnorderedList PresentationIntentKind = 3
 	// A presentation style for a list of items.
-	NSPresentationIntentKindListItem NSPresentationIntentKind = 4
+	PresentationIntentKindListItem PresentationIntentKind = 4
 	// A presentation style for a block of code.
-	NSPresentationIntentKindCodeBlock NSPresentationIntentKind = 5
+	PresentationIntentKindCodeBlock PresentationIntentKind = 5
 	// A presentation style for a block quote.
-	NSPresentationIntentKindBlockQuote NSPresentationIntentKind = 6
+	PresentationIntentKindBlockQuote PresentationIntentKind = 6
 	// A presentation style for a horizontal rule.
-	NSPresentationIntentKindThematicBreak NSPresentationIntentKind = 7
+	PresentationIntentKindThematicBreak PresentationIntentKind = 7
 	// A presentation style for a table.
-	NSPresentationIntentKindTable NSPresentationIntentKind = 8
+	PresentationIntentKindTable PresentationIntentKind = 8
 	// A presentation style for the header row of a table.
-	NSPresentationIntentKindTableHeaderRow NSPresentationIntentKind = 9
+	PresentationIntentKindTableHeaderRow PresentationIntentKind = 9
 	// A presentation style for a row of a table.
-	NSPresentationIntentKindTableRow NSPresentationIntentKind = 10
+	PresentationIntentKindTableRow PresentationIntentKind = 10
 	// A presentation style for a single cell of a table.
-	NSPresentationIntentKindTableCell NSPresentationIntentKind = 11
+	PresentationIntentKindTableCell PresentationIntentKind = 11
 )
 
-func (e NSPresentationIntentKind) String() string {
+func (e PresentationIntentKind) String() string {
 	switch e {
-	case NSPresentationIntentKindParagraph:
-		return "NSPresentationIntentKindParagraph"
-	case NSPresentationIntentKindHeader:
-		return "NSPresentationIntentKindHeader"
-	case NSPresentationIntentKindOrderedList:
-		return "NSPresentationIntentKindOrderedList"
-	case NSPresentationIntentKindUnorderedList:
-		return "NSPresentationIntentKindUnorderedList"
-	case NSPresentationIntentKindListItem:
-		return "NSPresentationIntentKindListItem"
-	case NSPresentationIntentKindCodeBlock:
-		return "NSPresentationIntentKindCodeBlock"
-	case NSPresentationIntentKindBlockQuote:
-		return "NSPresentationIntentKindBlockQuote"
-	case NSPresentationIntentKindThematicBreak:
-		return "NSPresentationIntentKindThematicBreak"
-	case NSPresentationIntentKindTable:
-		return "NSPresentationIntentKindTable"
-	case NSPresentationIntentKindTableHeaderRow:
-		return "NSPresentationIntentKindTableHeaderRow"
-	case NSPresentationIntentKindTableRow:
-		return "NSPresentationIntentKindTableRow"
-	case NSPresentationIntentKindTableCell:
-		return "NSPresentationIntentKindTableCell"
+	case PresentationIntentKindParagraph:
+		return "PresentationIntentKindParagraph"
+	case PresentationIntentKindHeader:
+		return "PresentationIntentKindHeader"
+	case PresentationIntentKindOrderedList:
+		return "PresentationIntentKindOrderedList"
+	case PresentationIntentKindUnorderedList:
+		return "PresentationIntentKindUnorderedList"
+	case PresentationIntentKindListItem:
+		return "PresentationIntentKindListItem"
+	case PresentationIntentKindCodeBlock:
+		return "PresentationIntentKindCodeBlock"
+	case PresentationIntentKindBlockQuote:
+		return "PresentationIntentKindBlockQuote"
+	case PresentationIntentKindThematicBreak:
+		return "PresentationIntentKindThematicBreak"
+	case PresentationIntentKindTable:
+		return "PresentationIntentKindTable"
+	case PresentationIntentKindTableHeaderRow:
+		return "PresentationIntentKindTableHeaderRow"
+	case PresentationIntentKindTableRow:
+		return "PresentationIntentKindTableRow"
+	case PresentationIntentKindTableCell:
+		return "PresentationIntentKindTableCell"
 	default:
-		return fmt.Sprintf("NSPresentationIntentKind(%d)", int64(e))
+		return fmt.Sprintf("PresentationIntentKind(%d)", int64(e))
 	}
 }
 
 // Values used to indicate the system’s thermal state.
-type NSProcessInfoThermalState int64
+type ProcessInfoThermalState int64
 
 const (
-	NSProcessInfoThermalStateNominal  NSProcessInfoThermalState = 0
-	NSProcessInfoThermalStateFair     NSProcessInfoThermalState = 1
-	NSProcessInfoThermalStateSerious  NSProcessInfoThermalState = 2
-	NSProcessInfoThermalStateCritical NSProcessInfoThermalState = 3
+	ProcessInfoThermalStateNominal  ProcessInfoThermalState = 0
+	ProcessInfoThermalStateFair     ProcessInfoThermalState = 1
+	ProcessInfoThermalStateSerious  ProcessInfoThermalState = 2
+	ProcessInfoThermalStateCritical ProcessInfoThermalState = 3
 )
 
-func (e NSProcessInfoThermalState) String() string {
+func (e ProcessInfoThermalState) String() string {
 	switch e {
-	case NSProcessInfoThermalStateNominal:
-		return "NSProcessInfoThermalStateNominal"
-	case NSProcessInfoThermalStateFair:
-		return "NSProcessInfoThermalStateFair"
-	case NSProcessInfoThermalStateSerious:
-		return "NSProcessInfoThermalStateSerious"
-	case NSProcessInfoThermalStateCritical:
-		return "NSProcessInfoThermalStateCritical"
+	case ProcessInfoThermalStateNominal:
+		return "ProcessInfoThermalStateNominal"
+	case ProcessInfoThermalStateFair:
+		return "ProcessInfoThermalStateFair"
+	case ProcessInfoThermalStateSerious:
+		return "ProcessInfoThermalStateSerious"
+	case ProcessInfoThermalStateCritical:
+		return "ProcessInfoThermalStateCritical"
 	default:
-		return fmt.Sprintf("NSProcessInfoThermalState(%d)", int64(e))
+		return fmt.Sprintf("ProcessInfoThermalState(%d)", int64(e))
 	}
 }
 
 // These constants are used to specify a property list serialization format.
-type NSPropertyListFormat uint64
+type PropertyListFormat uint64
 
 const (
-	NSPropertyListOpenStepFormat    NSPropertyListFormat = 1
-	NSPropertyListXMLFormat_v1_0    NSPropertyListFormat = 100
-	NSPropertyListBinaryFormat_v1_0 NSPropertyListFormat = 200
+	PropertyListOpenStepFormat    PropertyListFormat = 1
+	PropertyListXMLFormat_v1_0    PropertyListFormat = 100
+	PropertyListBinaryFormat_v1_0 PropertyListFormat = 200
 )
 
-func (e NSPropertyListFormat) String() string {
+func (e PropertyListFormat) String() string {
 	switch e {
-	case NSPropertyListOpenStepFormat:
-		return "NSPropertyListOpenStepFormat"
-	case NSPropertyListXMLFormat_v1_0:
-		return "NSPropertyListXMLFormat_v1_0"
-	case NSPropertyListBinaryFormat_v1_0:
-		return "NSPropertyListBinaryFormat_v1_0"
+	case PropertyListOpenStepFormat:
+		return "PropertyListOpenStepFormat"
+	case PropertyListXMLFormat_v1_0:
+		return "PropertyListXMLFormat_v1_0"
+	case PropertyListBinaryFormat_v1_0:
+		return "PropertyListBinaryFormat_v1_0"
 	default:
-		return fmt.Sprintf("NSPropertyListFormat(%d)", int64(e))
+		return fmt.Sprintf("PropertyListFormat(%d)", int64(e))
 	}
 }
 
 // These constants specify mutability options in property lists.
 // Bitmask — values may be combined with |.
-type NSPropertyListMutabilityOptions uint64
+type PropertyListMutabilityOptions uint64
 
 const (
 	// Causes the returned property list to contain immutable objects.
-	NSPropertyListImmutable                  NSPropertyListMutabilityOptions = 0
-	NSPropertyListMutableContainers          NSPropertyListMutabilityOptions = 1
-	NSPropertyListMutableContainersAndLeaves NSPropertyListMutabilityOptions = 2
+	PropertyListImmutable                  PropertyListMutabilityOptions = 0
+	PropertyListMutableContainers          PropertyListMutabilityOptions = 1
+	PropertyListMutableContainersAndLeaves PropertyListMutabilityOptions = 2
 )
 
-func (e NSPropertyListMutabilityOptions) String() string {
+func (e PropertyListMutabilityOptions) String() string {
 	var parts []string
-	if e&NSPropertyListMutableContainers != 0 {
-		parts = append(parts, "NSPropertyListMutableContainers")
+	if e&PropertyListMutableContainers != 0 {
+		parts = append(parts, "PropertyListMutableContainers")
 	}
-	if e&NSPropertyListMutableContainersAndLeaves != 0 {
-		parts = append(parts, "NSPropertyListMutableContainersAndLeaves")
+	if e&PropertyListMutableContainersAndLeaves != 0 {
+		parts = append(parts, "PropertyListMutableContainersAndLeaves")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -3098,104 +2821,68 @@ func (e NSPropertyListMutabilityOptions) String() string {
 }
 
 // Constants that indicate the nature and importance of work to the system.
-type NSQualityOfService int64
+type QualityOfService int64
 
 const (
-	NSQualityOfServiceUserInteractive NSQualityOfService = 33
-	NSQualityOfServiceUserInitiated   NSQualityOfService = 25
-	NSQualityOfServiceUtility         NSQualityOfService = 17
-	NSQualityOfServiceBackground      NSQualityOfService = 9
-	NSQualityOfServiceDefault         NSQualityOfService = -1
+	QualityOfServiceUserInteractive QualityOfService = 33
+	QualityOfServiceUserInitiated   QualityOfService = 25
+	QualityOfServiceUtility         QualityOfService = 17
+	QualityOfServiceBackground      QualityOfService = 9
+	QualityOfServiceDefault         QualityOfService = -1
 )
 
-func (e NSQualityOfService) String() string {
+func (e QualityOfService) String() string {
 	switch e {
-	case NSQualityOfServiceUserInteractive:
-		return "NSQualityOfServiceUserInteractive"
-	case NSQualityOfServiceUserInitiated:
-		return "NSQualityOfServiceUserInitiated"
-	case NSQualityOfServiceUtility:
-		return "NSQualityOfServiceUtility"
-	case NSQualityOfServiceBackground:
-		return "NSQualityOfServiceBackground"
-	case NSQualityOfServiceDefault:
-		return "NSQualityOfServiceDefault"
+	case QualityOfServiceUserInteractive:
+		return "QualityOfServiceUserInteractive"
+	case QualityOfServiceUserInitiated:
+		return "QualityOfServiceUserInitiated"
+	case QualityOfServiceUtility:
+		return "QualityOfServiceUtility"
+	case QualityOfServiceBackground:
+		return "QualityOfServiceBackground"
+	case QualityOfServiceDefault:
+		return "QualityOfServiceDefault"
 	default:
-		return fmt.Sprintf("NSQualityOfService(%d)", int64(e))
-	}
-}
-
-type NSRectEdge uint64
-
-const (
-	// The minimum X edge.
-	NSRectEdgeMinX NSRectEdge = 0
-	// The minimum Y edge.
-	NSRectEdgeMinY NSRectEdge = 1
-	// The maximum X edge.
-	NSRectEdgeMaxX NSRectEdge = 2
-	// The maximum Y edge.
-	NSRectEdgeMaxY NSRectEdge = 3
-	// The minimum X edge.
-	NSMinXEdge NSRectEdge = 0
-	// The minimum Y edge.
-	NSMinYEdge NSRectEdge = 1
-	// The maximum X edge.
-	NSMaxXEdge NSRectEdge = 2
-	// The maximum Y edge.
-	NSMaxYEdge NSRectEdge = 3
-)
-
-func (e NSRectEdge) String() string {
-	switch e {
-	case NSRectEdgeMinX:
-		return "NSRectEdgeMinX"
-	case NSRectEdgeMinY:
-		return "NSRectEdgeMinY"
-	case NSRectEdgeMaxX:
-		return "NSRectEdgeMaxX"
-	case NSRectEdgeMaxY:
-		return "NSRectEdgeMaxY"
-	default:
-		return fmt.Sprintf("NSRectEdge(%d)", int64(e))
+		return fmt.Sprintf("QualityOfService(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type NSRegularExpressionOptions uint64
+type RegularExpressionOptions uint64
 
 const (
-	NSRegularExpressionCaseInsensitive            NSRegularExpressionOptions = 1
-	NSRegularExpressionAllowCommentsAndWhitespace NSRegularExpressionOptions = 2
-	NSRegularExpressionIgnoreMetacharacters       NSRegularExpressionOptions = 4
-	NSRegularExpressionDotMatchesLineSeparators   NSRegularExpressionOptions = 8
-	NSRegularExpressionAnchorsMatchLines          NSRegularExpressionOptions = 16
-	NSRegularExpressionUseUnixLineSeparators      NSRegularExpressionOptions = 32
-	NSRegularExpressionUseUnicodeWordBoundaries   NSRegularExpressionOptions = 64
+	RegularExpressionCaseInsensitive            RegularExpressionOptions = 1
+	RegularExpressionAllowCommentsAndWhitespace RegularExpressionOptions = 2
+	RegularExpressionIgnoreMetacharacters       RegularExpressionOptions = 4
+	RegularExpressionDotMatchesLineSeparators   RegularExpressionOptions = 8
+	RegularExpressionAnchorsMatchLines          RegularExpressionOptions = 16
+	RegularExpressionUseUnixLineSeparators      RegularExpressionOptions = 32
+	RegularExpressionUseUnicodeWordBoundaries   RegularExpressionOptions = 64
 )
 
-func (e NSRegularExpressionOptions) String() string {
+func (e RegularExpressionOptions) String() string {
 	var parts []string
-	if e&NSRegularExpressionCaseInsensitive != 0 {
-		parts = append(parts, "NSRegularExpressionCaseInsensitive")
+	if e&RegularExpressionCaseInsensitive != 0 {
+		parts = append(parts, "RegularExpressionCaseInsensitive")
 	}
-	if e&NSRegularExpressionAllowCommentsAndWhitespace != 0 {
-		parts = append(parts, "NSRegularExpressionAllowCommentsAndWhitespace")
+	if e&RegularExpressionAllowCommentsAndWhitespace != 0 {
+		parts = append(parts, "RegularExpressionAllowCommentsAndWhitespace")
 	}
-	if e&NSRegularExpressionIgnoreMetacharacters != 0 {
-		parts = append(parts, "NSRegularExpressionIgnoreMetacharacters")
+	if e&RegularExpressionIgnoreMetacharacters != 0 {
+		parts = append(parts, "RegularExpressionIgnoreMetacharacters")
 	}
-	if e&NSRegularExpressionDotMatchesLineSeparators != 0 {
-		parts = append(parts, "NSRegularExpressionDotMatchesLineSeparators")
+	if e&RegularExpressionDotMatchesLineSeparators != 0 {
+		parts = append(parts, "RegularExpressionDotMatchesLineSeparators")
 	}
-	if e&NSRegularExpressionAnchorsMatchLines != 0 {
-		parts = append(parts, "NSRegularExpressionAnchorsMatchLines")
+	if e&RegularExpressionAnchorsMatchLines != 0 {
+		parts = append(parts, "RegularExpressionAnchorsMatchLines")
 	}
-	if e&NSRegularExpressionUseUnixLineSeparators != 0 {
-		parts = append(parts, "NSRegularExpressionUseUnixLineSeparators")
+	if e&RegularExpressionUseUnixLineSeparators != 0 {
+		parts = append(parts, "RegularExpressionUseUnixLineSeparators")
 	}
-	if e&NSRegularExpressionUseUnicodeWordBoundaries != 0 {
-		parts = append(parts, "NSRegularExpressionUseUnicodeWordBoundaries")
+	if e&RegularExpressionUseUnicodeWordBoundaries != 0 {
+		parts = append(parts, "RegularExpressionUseUnicodeWordBoundaries")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -3204,240 +2891,240 @@ func (e NSRegularExpressionOptions) String() string {
 }
 
 // A type that represents the style to use when formatting relative dates, such as “1 week ago” or “last week”.
-type NSRelativeDateTimeFormatterStyle int64
+type RelativeDateTimeFormatterStyle int64
 
 const (
-	NSRelativeDateTimeFormatterStyleNumeric NSRelativeDateTimeFormatterStyle = 0
-	NSRelativeDateTimeFormatterStyleNamed   NSRelativeDateTimeFormatterStyle = 1
+	RelativeDateTimeFormatterStyleNumeric RelativeDateTimeFormatterStyle = 0
+	RelativeDateTimeFormatterStyleNamed   RelativeDateTimeFormatterStyle = 1
 )
 
-func (e NSRelativeDateTimeFormatterStyle) String() string {
+func (e RelativeDateTimeFormatterStyle) String() string {
 	switch e {
-	case NSRelativeDateTimeFormatterStyleNumeric:
-		return "NSRelativeDateTimeFormatterStyleNumeric"
-	case NSRelativeDateTimeFormatterStyleNamed:
-		return "NSRelativeDateTimeFormatterStyleNamed"
+	case RelativeDateTimeFormatterStyleNumeric:
+		return "RelativeDateTimeFormatterStyleNumeric"
+	case RelativeDateTimeFormatterStyleNamed:
+		return "RelativeDateTimeFormatterStyleNamed"
 	default:
-		return fmt.Sprintf("NSRelativeDateTimeFormatterStyle(%d)", int64(e))
+		return fmt.Sprintf("RelativeDateTimeFormatterStyle(%d)", int64(e))
 	}
 }
 
 // A type that represents the style to use when formatting the units of relative dates.
-type NSRelativeDateTimeFormatterUnitsStyle int64
+type RelativeDateTimeFormatterUnitsStyle int64
 
 const (
-	NSRelativeDateTimeFormatterUnitsStyleFull        NSRelativeDateTimeFormatterUnitsStyle = 0
-	NSRelativeDateTimeFormatterUnitsStyleSpellOut    NSRelativeDateTimeFormatterUnitsStyle = 1
-	NSRelativeDateTimeFormatterUnitsStyleShort       NSRelativeDateTimeFormatterUnitsStyle = 2
-	NSRelativeDateTimeFormatterUnitsStyleAbbreviated NSRelativeDateTimeFormatterUnitsStyle = 3
+	RelativeDateTimeFormatterUnitsStyleFull        RelativeDateTimeFormatterUnitsStyle = 0
+	RelativeDateTimeFormatterUnitsStyleSpellOut    RelativeDateTimeFormatterUnitsStyle = 1
+	RelativeDateTimeFormatterUnitsStyleShort       RelativeDateTimeFormatterUnitsStyle = 2
+	RelativeDateTimeFormatterUnitsStyleAbbreviated RelativeDateTimeFormatterUnitsStyle = 3
 )
 
-func (e NSRelativeDateTimeFormatterUnitsStyle) String() string {
+func (e RelativeDateTimeFormatterUnitsStyle) String() string {
 	switch e {
-	case NSRelativeDateTimeFormatterUnitsStyleFull:
-		return "NSRelativeDateTimeFormatterUnitsStyleFull"
-	case NSRelativeDateTimeFormatterUnitsStyleSpellOut:
-		return "NSRelativeDateTimeFormatterUnitsStyleSpellOut"
-	case NSRelativeDateTimeFormatterUnitsStyleShort:
-		return "NSRelativeDateTimeFormatterUnitsStyleShort"
-	case NSRelativeDateTimeFormatterUnitsStyleAbbreviated:
-		return "NSRelativeDateTimeFormatterUnitsStyleAbbreviated"
+	case RelativeDateTimeFormatterUnitsStyleFull:
+		return "RelativeDateTimeFormatterUnitsStyleFull"
+	case RelativeDateTimeFormatterUnitsStyleSpellOut:
+		return "RelativeDateTimeFormatterUnitsStyleSpellOut"
+	case RelativeDateTimeFormatterUnitsStyleShort:
+		return "RelativeDateTimeFormatterUnitsStyleShort"
+	case RelativeDateTimeFormatterUnitsStyleAbbreviated:
+		return "RelativeDateTimeFormatterUnitsStyleAbbreviated"
 	default:
-		return fmt.Sprintf("NSRelativeDateTimeFormatterUnitsStyle(%d)", int64(e))
+		return fmt.Sprintf("RelativeDateTimeFormatterUnitsStyle(%d)", int64(e))
 	}
 }
 
 // These constants are used by relativePosition and relativePosition.
-type NSRelativePosition uint64
+type RelativePosition uint64
 
 const (
-	NSRelativeAfter  NSRelativePosition = 0
-	NSRelativeBefore NSRelativePosition = 1
+	RelativeAfter  RelativePosition = 0
+	RelativeBefore RelativePosition = 1
 )
 
-func (e NSRelativePosition) String() string {
+func (e RelativePosition) String() string {
 	switch e {
-	case NSRelativeAfter:
-		return "NSRelativeAfter"
-	case NSRelativeBefore:
-		return "NSRelativeBefore"
+	case RelativeAfter:
+		return "RelativeAfter"
+	case RelativeBefore:
+		return "RelativeBefore"
 	default:
-		return fmt.Sprintf("NSRelativePosition(%d)", int64(e))
+		return fmt.Sprintf("RelativePosition(%d)", int64(e))
 	}
 }
 
 // These constants specify rounding behaviors.
-type NSRoundingMode uint64
+type RoundingMode uint64
 
 const (
-	NSRoundPlain   NSRoundingMode = 0
-	NSRoundDown    NSRoundingMode = 1
-	NSRoundUp      NSRoundingMode = 2
-	NSRoundBankers NSRoundingMode = 3
+	RoundPlain   RoundingMode = 0
+	RoundDown    RoundingMode = 1
+	RoundUp      RoundingMode = 2
+	RoundBankers RoundingMode = 3
 )
 
-func (e NSRoundingMode) String() string {
+func (e RoundingMode) String() string {
 	switch e {
-	case NSRoundPlain:
-		return "NSRoundPlain"
-	case NSRoundDown:
-		return "NSRoundDown"
-	case NSRoundUp:
-		return "NSRoundUp"
-	case NSRoundBankers:
-		return "NSRoundBankers"
+	case RoundPlain:
+		return "RoundPlain"
+	case RoundDown:
+		return "RoundDown"
+	case RoundUp:
+		return "RoundUp"
+	case RoundBankers:
+		return "RoundBankers"
 	default:
-		return fmt.Sprintf("NSRoundingMode(%d)", int64(e))
+		return fmt.Sprintf("RoundingMode(%d)", int64(e))
 	}
 }
 
 // The saveOptions method returns one of the following constants to indicate how to deal with saving any modified documents:
-type NSSaveOptions uint64
+type SaveOptions uint64
 
 const (
 	// Indicates a modified document should be saved on closing without asking the user.
-	NSSaveOptionsYes NSSaveOptions = 0
+	SaveOptionsYes SaveOptions = 0
 	// Indicates a modified document should not be saved on closing.
-	NSSaveOptionsNo NSSaveOptions = 1
+	SaveOptionsNo SaveOptions = 1
 	// Indicates the user should be asked before saving any modified documents on closing. When no option is specified, this is the default.
-	NSSaveOptionsAsk NSSaveOptions = 2
+	SaveOptionsAsk SaveOptions = 2
 )
 
-func (e NSSaveOptions) String() string {
+func (e SaveOptions) String() string {
 	switch e {
-	case NSSaveOptionsYes:
-		return "NSSaveOptionsYes"
-	case NSSaveOptionsNo:
-		return "NSSaveOptionsNo"
-	case NSSaveOptionsAsk:
-		return "NSSaveOptionsAsk"
+	case SaveOptionsYes:
+		return "SaveOptionsYes"
+	case SaveOptionsNo:
+		return "SaveOptionsNo"
+	case SaveOptionsAsk:
+		return "SaveOptionsAsk"
 	default:
-		return fmt.Sprintf("NSSaveOptions(%d)", int64(e))
+		return fmt.Sprintf("SaveOptions(%d)", int64(e))
 	}
 }
 
 // The location of significant directories.
-type NSSearchPathDirectory uint64
+type SearchPathDirectory uint64
 
 const (
-	NSApplicationDirectory          NSSearchPathDirectory = 1
-	NSDemoApplicationDirectory      NSSearchPathDirectory = 2
-	NSDeveloperApplicationDirectory NSSearchPathDirectory = 3
-	NSAdminApplicationDirectory     NSSearchPathDirectory = 4
-	NSLibraryDirectory              NSSearchPathDirectory = 5
-	NSDeveloperDirectory            NSSearchPathDirectory = 6
-	NSUserDirectory                 NSSearchPathDirectory = 7
-	NSDocumentationDirectory        NSSearchPathDirectory = 8
-	NSDocumentDirectory             NSSearchPathDirectory = 9
-	NSCoreServiceDirectory          NSSearchPathDirectory = 10
-	NSAutosavedInformationDirectory NSSearchPathDirectory = 11
-	NSDesktopDirectory              NSSearchPathDirectory = 12
-	NSCachesDirectory               NSSearchPathDirectory = 13
-	NSApplicationSupportDirectory   NSSearchPathDirectory = 14
-	NSDownloadsDirectory            NSSearchPathDirectory = 15
-	NSInputMethodsDirectory         NSSearchPathDirectory = 16
-	NSMoviesDirectory               NSSearchPathDirectory = 17
-	NSMusicDirectory                NSSearchPathDirectory = 18
-	NSPicturesDirectory             NSSearchPathDirectory = 19
-	NSPrinterDescriptionDirectory   NSSearchPathDirectory = 20
-	NSSharedPublicDirectory         NSSearchPathDirectory = 21
-	NSPreferencePanesDirectory      NSSearchPathDirectory = 22
-	NSApplicationScriptsDirectory   NSSearchPathDirectory = 23
-	NSItemReplacementDirectory      NSSearchPathDirectory = 99
-	NSAllApplicationsDirectory      NSSearchPathDirectory = 100
-	NSAllLibrariesDirectory         NSSearchPathDirectory = 101
-	NSTrashDirectory                NSSearchPathDirectory = 102
+	ApplicationDirectory          SearchPathDirectory = 1
+	DemoApplicationDirectory      SearchPathDirectory = 2
+	DeveloperApplicationDirectory SearchPathDirectory = 3
+	AdminApplicationDirectory     SearchPathDirectory = 4
+	LibraryDirectory              SearchPathDirectory = 5
+	DeveloperDirectory            SearchPathDirectory = 6
+	UserDirectory                 SearchPathDirectory = 7
+	DocumentationDirectory        SearchPathDirectory = 8
+	DocumentDirectory             SearchPathDirectory = 9
+	CoreServiceDirectory          SearchPathDirectory = 10
+	AutosavedInformationDirectory SearchPathDirectory = 11
+	DesktopDirectory              SearchPathDirectory = 12
+	CachesDirectory               SearchPathDirectory = 13
+	ApplicationSupportDirectory   SearchPathDirectory = 14
+	DownloadsDirectory            SearchPathDirectory = 15
+	InputMethodsDirectory         SearchPathDirectory = 16
+	MoviesDirectory               SearchPathDirectory = 17
+	MusicDirectory                SearchPathDirectory = 18
+	PicturesDirectory             SearchPathDirectory = 19
+	PrinterDescriptionDirectory   SearchPathDirectory = 20
+	SharedPublicDirectory         SearchPathDirectory = 21
+	PreferencePanesDirectory      SearchPathDirectory = 22
+	ApplicationScriptsDirectory   SearchPathDirectory = 23
+	ItemReplacementDirectory      SearchPathDirectory = 99
+	AllApplicationsDirectory      SearchPathDirectory = 100
+	AllLibrariesDirectory         SearchPathDirectory = 101
+	TrashDirectory                SearchPathDirectory = 102
 )
 
-func (e NSSearchPathDirectory) String() string {
+func (e SearchPathDirectory) String() string {
 	switch e {
-	case NSApplicationDirectory:
-		return "NSApplicationDirectory"
-	case NSDemoApplicationDirectory:
-		return "NSDemoApplicationDirectory"
-	case NSDeveloperApplicationDirectory:
-		return "NSDeveloperApplicationDirectory"
-	case NSAdminApplicationDirectory:
-		return "NSAdminApplicationDirectory"
-	case NSLibraryDirectory:
-		return "NSLibraryDirectory"
-	case NSDeveloperDirectory:
-		return "NSDeveloperDirectory"
-	case NSUserDirectory:
-		return "NSUserDirectory"
-	case NSDocumentationDirectory:
-		return "NSDocumentationDirectory"
-	case NSDocumentDirectory:
-		return "NSDocumentDirectory"
-	case NSCoreServiceDirectory:
-		return "NSCoreServiceDirectory"
-	case NSAutosavedInformationDirectory:
-		return "NSAutosavedInformationDirectory"
-	case NSDesktopDirectory:
-		return "NSDesktopDirectory"
-	case NSCachesDirectory:
-		return "NSCachesDirectory"
-	case NSApplicationSupportDirectory:
-		return "NSApplicationSupportDirectory"
-	case NSDownloadsDirectory:
-		return "NSDownloadsDirectory"
-	case NSInputMethodsDirectory:
-		return "NSInputMethodsDirectory"
-	case NSMoviesDirectory:
-		return "NSMoviesDirectory"
-	case NSMusicDirectory:
-		return "NSMusicDirectory"
-	case NSPicturesDirectory:
-		return "NSPicturesDirectory"
-	case NSPrinterDescriptionDirectory:
-		return "NSPrinterDescriptionDirectory"
-	case NSSharedPublicDirectory:
-		return "NSSharedPublicDirectory"
-	case NSPreferencePanesDirectory:
-		return "NSPreferencePanesDirectory"
-	case NSApplicationScriptsDirectory:
-		return "NSApplicationScriptsDirectory"
-	case NSItemReplacementDirectory:
-		return "NSItemReplacementDirectory"
-	case NSAllApplicationsDirectory:
-		return "NSAllApplicationsDirectory"
-	case NSAllLibrariesDirectory:
-		return "NSAllLibrariesDirectory"
-	case NSTrashDirectory:
-		return "NSTrashDirectory"
+	case ApplicationDirectory:
+		return "ApplicationDirectory"
+	case DemoApplicationDirectory:
+		return "DemoApplicationDirectory"
+	case DeveloperApplicationDirectory:
+		return "DeveloperApplicationDirectory"
+	case AdminApplicationDirectory:
+		return "AdminApplicationDirectory"
+	case LibraryDirectory:
+		return "LibraryDirectory"
+	case DeveloperDirectory:
+		return "DeveloperDirectory"
+	case UserDirectory:
+		return "UserDirectory"
+	case DocumentationDirectory:
+		return "DocumentationDirectory"
+	case DocumentDirectory:
+		return "DocumentDirectory"
+	case CoreServiceDirectory:
+		return "CoreServiceDirectory"
+	case AutosavedInformationDirectory:
+		return "AutosavedInformationDirectory"
+	case DesktopDirectory:
+		return "DesktopDirectory"
+	case CachesDirectory:
+		return "CachesDirectory"
+	case ApplicationSupportDirectory:
+		return "ApplicationSupportDirectory"
+	case DownloadsDirectory:
+		return "DownloadsDirectory"
+	case InputMethodsDirectory:
+		return "InputMethodsDirectory"
+	case MoviesDirectory:
+		return "MoviesDirectory"
+	case MusicDirectory:
+		return "MusicDirectory"
+	case PicturesDirectory:
+		return "PicturesDirectory"
+	case PrinterDescriptionDirectory:
+		return "PrinterDescriptionDirectory"
+	case SharedPublicDirectory:
+		return "SharedPublicDirectory"
+	case PreferencePanesDirectory:
+		return "PreferencePanesDirectory"
+	case ApplicationScriptsDirectory:
+		return "ApplicationScriptsDirectory"
+	case ItemReplacementDirectory:
+		return "ItemReplacementDirectory"
+	case AllApplicationsDirectory:
+		return "AllApplicationsDirectory"
+	case AllLibrariesDirectory:
+		return "AllLibrariesDirectory"
+	case TrashDirectory:
+		return "TrashDirectory"
 	default:
-		return fmt.Sprintf("NSSearchPathDirectory(%d)", int64(e))
+		return fmt.Sprintf("SearchPathDirectory(%d)", int64(e))
 	}
 }
 
 // Domain constants specifying base locations to use when you search for significant directories.
 // Bitmask — values may be combined with |.
-type NSSearchPathDomainMask uint64
+type SearchPathDomainMask uint64
 
 const (
-	NSUserDomainMask    NSSearchPathDomainMask = 1
-	NSLocalDomainMask   NSSearchPathDomainMask = 2
-	NSNetworkDomainMask NSSearchPathDomainMask = 4
-	NSSystemDomainMask  NSSearchPathDomainMask = 8
-	NSAllDomainsMask    NSSearchPathDomainMask = 65535
+	UserDomainMask    SearchPathDomainMask = 1
+	LocalDomainMask   SearchPathDomainMask = 2
+	NetworkDomainMask SearchPathDomainMask = 4
+	SystemDomainMask  SearchPathDomainMask = 8
+	AllDomainsMask    SearchPathDomainMask = 65535
 )
 
-func (e NSSearchPathDomainMask) String() string {
+func (e SearchPathDomainMask) String() string {
 	var parts []string
-	if e&NSUserDomainMask != 0 {
-		parts = append(parts, "NSUserDomainMask")
+	if e&UserDomainMask != 0 {
+		parts = append(parts, "UserDomainMask")
 	}
-	if e&NSLocalDomainMask != 0 {
-		parts = append(parts, "NSLocalDomainMask")
+	if e&LocalDomainMask != 0 {
+		parts = append(parts, "LocalDomainMask")
 	}
-	if e&NSNetworkDomainMask != 0 {
-		parts = append(parts, "NSNetworkDomainMask")
+	if e&NetworkDomainMask != 0 {
+		parts = append(parts, "NetworkDomainMask")
 	}
-	if e&NSSystemDomainMask != 0 {
-		parts = append(parts, "NSSystemDomainMask")
+	if e&SystemDomainMask != 0 {
+		parts = append(parts, "SystemDomainMask")
 	}
-	if e&NSAllDomainsMask != 0 {
-		parts = append(parts, "NSAllDomainsMask")
+	if e&AllDomainsMask != 0 {
+		parts = append(parts, "AllDomainsMask")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -3447,22 +3134,22 @@ func (e NSSearchPathDomainMask) String() string {
 
 // Options for block sorting operations.
 // Bitmask — values may be combined with |.
-type NSSortOptions uint64
+type SortOptions uint64
 
 const (
 	// Specifies that the Block sort operation should be concurrent.
-	NSSortConcurrent NSSortOptions = 1
+	SortConcurrent SortOptions = 1
 	// Specifies that the sorted results should return compared items having equal value in the order they occurred originally.
-	NSSortStable NSSortOptions = 16
+	SortStable SortOptions = 16
 )
 
-func (e NSSortOptions) String() string {
+func (e SortOptions) String() string {
 	var parts []string
-	if e&NSSortConcurrent != 0 {
-		parts = append(parts, "NSSortConcurrent")
+	if e&SortConcurrent != 0 {
+		parts = append(parts, "SortConcurrent")
 	}
-	if e&NSSortStable != 0 {
-		parts = append(parts, "NSSortStable")
+	if e&SortStable != 0 {
+		parts = append(parts, "SortStable")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -3471,161 +3158,86 @@ func (e NSSortOptions) String() string {
 }
 
 // The type declared for the constants listed in doc:stream/stream_status_constants.
-type NSStreamStatus uint64
+type StreamStatus uint64
 
 const (
-	NSStreamStatusNotOpen NSStreamStatus = 0
-	NSStreamStatusOpening NSStreamStatus = 1
-	NSStreamStatusOpen    NSStreamStatus = 2
-	NSStreamStatusReading NSStreamStatus = 3
-	NSStreamStatusWriting NSStreamStatus = 4
-	NSStreamStatusAtEnd   NSStreamStatus = 5
-	NSStreamStatusClosed  NSStreamStatus = 6
-	NSStreamStatusError   NSStreamStatus = 7
+	StreamStatusNotOpen StreamStatus = 0
+	StreamStatusOpening StreamStatus = 1
+	StreamStatusOpen    StreamStatus = 2
+	StreamStatusReading StreamStatus = 3
+	StreamStatusWriting StreamStatus = 4
+	StreamStatusAtEnd   StreamStatus = 5
+	StreamStatusClosed  StreamStatus = 6
+	StreamStatusError   StreamStatus = 7
 )
 
-func (e NSStreamStatus) String() string {
+func (e StreamStatus) String() string {
 	switch e {
-	case NSStreamStatusNotOpen:
-		return "NSStreamStatusNotOpen"
-	case NSStreamStatusOpening:
-		return "NSStreamStatusOpening"
-	case NSStreamStatusOpen:
-		return "NSStreamStatusOpen"
-	case NSStreamStatusReading:
-		return "NSStreamStatusReading"
-	case NSStreamStatusWriting:
-		return "NSStreamStatusWriting"
-	case NSStreamStatusAtEnd:
-		return "NSStreamStatusAtEnd"
-	case NSStreamStatusClosed:
-		return "NSStreamStatusClosed"
-	case NSStreamStatusError:
-		return "NSStreamStatusError"
+	case StreamStatusNotOpen:
+		return "StreamStatusNotOpen"
+	case StreamStatusOpening:
+		return "StreamStatusOpening"
+	case StreamStatusOpen:
+		return "StreamStatusOpen"
+	case StreamStatusReading:
+		return "StreamStatusReading"
+	case StreamStatusWriting:
+		return "StreamStatusWriting"
+	case StreamStatusAtEnd:
+		return "StreamStatusAtEnd"
+	case StreamStatusClosed:
+		return "StreamStatusClosed"
+	case StreamStatusError:
+		return "StreamStatusError"
 	default:
-		return fmt.Sprintf("NSStreamStatus(%d)", int64(e))
+		return fmt.Sprintf("StreamStatus(%d)", int64(e))
 	}
 }
 
 // These values represent the options available to many of the string classes’ search and comparison methods.
 // Bitmask — values may be combined with |.
-type NSStringCompareOptions uint64
+type StringCompareOptions uint64
 
 const (
-	NSCaseInsensitiveSearch      NSStringCompareOptions = 1
-	NSLiteralSearch              NSStringCompareOptions = 2
-	NSBackwardsSearch            NSStringCompareOptions = 4
-	NSAnchoredSearch             NSStringCompareOptions = 8
-	NSNumericSearch              NSStringCompareOptions = 64
-	NSDiacriticInsensitiveSearch NSStringCompareOptions = 128
-	NSWidthInsensitiveSearch     NSStringCompareOptions = 256
-	NSForcedOrderingSearch       NSStringCompareOptions = 512
-	NSRegularExpressionSearch    NSStringCompareOptions = 1024
+	CaseInsensitiveSearch      StringCompareOptions = 1
+	LiteralSearch              StringCompareOptions = 2
+	BackwardsSearch            StringCompareOptions = 4
+	AnchoredSearch             StringCompareOptions = 8
+	NumericSearch              StringCompareOptions = 64
+	DiacriticInsensitiveSearch StringCompareOptions = 128
+	WidthInsensitiveSearch     StringCompareOptions = 256
+	ForcedOrderingSearch       StringCompareOptions = 512
+	RegularExpressionSearch    StringCompareOptions = 1024
 )
 
-func (e NSStringCompareOptions) String() string {
+func (e StringCompareOptions) String() string {
 	var parts []string
-	if e&NSCaseInsensitiveSearch != 0 {
-		parts = append(parts, "NSCaseInsensitiveSearch")
+	if e&CaseInsensitiveSearch != 0 {
+		parts = append(parts, "CaseInsensitiveSearch")
 	}
-	if e&NSLiteralSearch != 0 {
-		parts = append(parts, "NSLiteralSearch")
+	if e&LiteralSearch != 0 {
+		parts = append(parts, "LiteralSearch")
 	}
-	if e&NSBackwardsSearch != 0 {
-		parts = append(parts, "NSBackwardsSearch")
+	if e&BackwardsSearch != 0 {
+		parts = append(parts, "BackwardsSearch")
 	}
-	if e&NSAnchoredSearch != 0 {
-		parts = append(parts, "NSAnchoredSearch")
+	if e&AnchoredSearch != 0 {
+		parts = append(parts, "AnchoredSearch")
 	}
-	if e&NSNumericSearch != 0 {
-		parts = append(parts, "NSNumericSearch")
+	if e&NumericSearch != 0 {
+		parts = append(parts, "NumericSearch")
 	}
-	if e&NSDiacriticInsensitiveSearch != 0 {
-		parts = append(parts, "NSDiacriticInsensitiveSearch")
+	if e&DiacriticInsensitiveSearch != 0 {
+		parts = append(parts, "DiacriticInsensitiveSearch")
 	}
-	if e&NSWidthInsensitiveSearch != 0 {
-		parts = append(parts, "NSWidthInsensitiveSearch")
+	if e&WidthInsensitiveSearch != 0 {
+		parts = append(parts, "WidthInsensitiveSearch")
 	}
-	if e&NSForcedOrderingSearch != 0 {
-		parts = append(parts, "NSForcedOrderingSearch")
+	if e&ForcedOrderingSearch != 0 {
+		parts = append(parts, "ForcedOrderingSearch")
 	}
-	if e&NSRegularExpressionSearch != 0 {
-		parts = append(parts, "NSRegularExpressionSearch")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-// Options for converting string encodings.
-// Bitmask — values may be combined with |.
-type NSStringEncodingConversionOptions uint64
-
-const (
-	NSStringEncodingConversionAllowLossy             NSStringEncodingConversionOptions = 1
-	NSStringEncodingConversionExternalRepresentation NSStringEncodingConversionOptions = 2
-)
-
-func (e NSStringEncodingConversionOptions) String() string {
-	var parts []string
-	if e&NSStringEncodingConversionAllowLossy != 0 {
-		parts = append(parts, "NSStringEncodingConversionAllowLossy")
-	}
-	if e&NSStringEncodingConversionExternalRepresentation != 0 {
-		parts = append(parts, "NSStringEncodingConversionExternalRepresentation")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-// Constants to specify kinds of substrings and styles of enumeration.
-// Bitmask — values may be combined with |.
-type NSStringEnumerationOptions uint64
-
-const (
-	NSStringEnumerationByLines                      NSStringEnumerationOptions = 0
-	NSStringEnumerationByParagraphs                 NSStringEnumerationOptions = 1
-	NSStringEnumerationByComposedCharacterSequences NSStringEnumerationOptions = 2
-	NSStringEnumerationByWords                      NSStringEnumerationOptions = 3
-	NSStringEnumerationBySentences                  NSStringEnumerationOptions = 4
-	NSStringEnumerationByCaretPositions             NSStringEnumerationOptions = 5
-	NSStringEnumerationByDeletionClusters           NSStringEnumerationOptions = 6
-	NSStringEnumerationReverse                      NSStringEnumerationOptions = 256
-	NSStringEnumerationSubstringNotRequired         NSStringEnumerationOptions = 512
-	NSStringEnumerationLocalized                    NSStringEnumerationOptions = 1024
-)
-
-func (e NSStringEnumerationOptions) String() string {
-	var parts []string
-	if e&NSStringEnumerationByParagraphs != 0 {
-		parts = append(parts, "NSStringEnumerationByParagraphs")
-	}
-	if e&NSStringEnumerationByComposedCharacterSequences != 0 {
-		parts = append(parts, "NSStringEnumerationByComposedCharacterSequences")
-	}
-	if e&NSStringEnumerationByWords != 0 {
-		parts = append(parts, "NSStringEnumerationByWords")
-	}
-	if e&NSStringEnumerationBySentences != 0 {
-		parts = append(parts, "NSStringEnumerationBySentences")
-	}
-	if e&NSStringEnumerationByCaretPositions != 0 {
-		parts = append(parts, "NSStringEnumerationByCaretPositions")
-	}
-	if e&NSStringEnumerationByDeletionClusters != 0 {
-		parts = append(parts, "NSStringEnumerationByDeletionClusters")
-	}
-	if e&NSStringEnumerationReverse != 0 {
-		parts = append(parts, "NSStringEnumerationReverse")
-	}
-	if e&NSStringEnumerationSubstringNotRequired != 0 {
-		parts = append(parts, "NSStringEnumerationSubstringNotRequired")
-	}
-	if e&NSStringEnumerationLocalized != 0 {
-		parts = append(parts, "NSStringEnumerationLocalized")
+	if e&RegularExpressionSearch != 0 {
+		parts = append(parts, "RegularExpressionSearch")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -3634,120 +3246,120 @@ func (e NSStringEnumerationOptions) String() string {
 }
 
 // Constants that specify the termination reason values that the system returns.
-type NSTaskTerminationReason int64
+type TaskTerminationReason int64
 
 const (
-	NSTaskTerminationReasonExit           NSTaskTerminationReason = 1
-	NSTaskTerminationReasonUncaughtSignal NSTaskTerminationReason = 2
+	TaskTerminationReasonExit           TaskTerminationReason = 1
+	TaskTerminationReasonUncaughtSignal TaskTerminationReason = 2
 )
 
-func (e NSTaskTerminationReason) String() string {
+func (e TaskTerminationReason) String() string {
 	switch e {
-	case NSTaskTerminationReasonExit:
-		return "NSTaskTerminationReasonExit"
-	case NSTaskTerminationReasonUncaughtSignal:
-		return "NSTaskTerminationReasonUncaughtSignal"
+	case TaskTerminationReasonExit:
+		return "TaskTerminationReasonExit"
+	case TaskTerminationReasonUncaughtSignal:
+		return "TaskTerminationReasonUncaughtSignal"
 	default:
-		return fmt.Sprintf("NSTaskTerminationReason(%d)", int64(e))
+		return fmt.Sprintf("TaskTerminationReason(%d)", int64(e))
 	}
 }
 
 // These are passed to initWithObjectSpecifier:comparisonOperator:testObject: to specify the comparison operator.
-type NSTestComparisonOperation uint64
+type TestComparisonOperation uint64
 
 const (
-	NSEqualToComparison              NSTestComparisonOperation = 0
-	NSLessThanOrEqualToComparison    NSTestComparisonOperation = 1
-	NSLessThanComparison             NSTestComparisonOperation = 2
-	NSGreaterThanOrEqualToComparison NSTestComparisonOperation = 3
-	NSGreaterThanComparison          NSTestComparisonOperation = 4
-	NSBeginsWithComparison           NSTestComparisonOperation = 5
-	NSEndsWithComparison             NSTestComparisonOperation = 6
-	NSContainsComparison             NSTestComparisonOperation = 7
+	EqualToComparison              TestComparisonOperation = 0
+	LessThanOrEqualToComparison    TestComparisonOperation = 1
+	LessThanComparison             TestComparisonOperation = 2
+	GreaterThanOrEqualToComparison TestComparisonOperation = 3
+	GreaterThanComparison          TestComparisonOperation = 4
+	BeginsWithComparison           TestComparisonOperation = 5
+	EndsWithComparison             TestComparisonOperation = 6
+	ContainsComparison             TestComparisonOperation = 7
 )
 
-func (e NSTestComparisonOperation) String() string {
+func (e TestComparisonOperation) String() string {
 	switch e {
-	case NSEqualToComparison:
-		return "NSEqualToComparison"
-	case NSLessThanOrEqualToComparison:
-		return "NSLessThanOrEqualToComparison"
-	case NSLessThanComparison:
-		return "NSLessThanComparison"
-	case NSGreaterThanOrEqualToComparison:
-		return "NSGreaterThanOrEqualToComparison"
-	case NSGreaterThanComparison:
-		return "NSGreaterThanComparison"
-	case NSBeginsWithComparison:
-		return "NSBeginsWithComparison"
-	case NSEndsWithComparison:
-		return "NSEndsWithComparison"
-	case NSContainsComparison:
-		return "NSContainsComparison"
+	case EqualToComparison:
+		return "EqualToComparison"
+	case LessThanOrEqualToComparison:
+		return "LessThanOrEqualToComparison"
+	case LessThanComparison:
+		return "LessThanComparison"
+	case GreaterThanOrEqualToComparison:
+		return "GreaterThanOrEqualToComparison"
+	case GreaterThanComparison:
+		return "GreaterThanComparison"
+	case BeginsWithComparison:
+		return "BeginsWithComparison"
+	case EndsWithComparison:
+		return "EndsWithComparison"
+	case ContainsComparison:
+		return "ContainsComparison"
 	default:
-		return fmt.Sprintf("NSTestComparisonOperation(%d)", int64(e))
+		return fmt.Sprintf("TestComparisonOperation(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type NSTextCheckingType int64
+type TextCheckingType int64
 
 const (
-	NSTextCheckingTypeOrthography        NSTextCheckingType = 1
-	NSTextCheckingTypeSpelling           NSTextCheckingType = 2
-	NSTextCheckingTypeGrammar            NSTextCheckingType = 4
-	NSTextCheckingTypeDate               NSTextCheckingType = 8
-	NSTextCheckingTypeAddress            NSTextCheckingType = 16
-	NSTextCheckingTypeLink               NSTextCheckingType = 32
-	NSTextCheckingTypeQuote              NSTextCheckingType = 64
-	NSTextCheckingTypeDash               NSTextCheckingType = 128
-	NSTextCheckingTypeReplacement        NSTextCheckingType = 256
-	NSTextCheckingTypeCorrection         NSTextCheckingType = 512
-	NSTextCheckingTypeRegularExpression  NSTextCheckingType = 1024
-	NSTextCheckingTypePhoneNumber        NSTextCheckingType = 2048
-	NSTextCheckingTypeTransitInformation NSTextCheckingType = 4096
+	TextCheckingTypeOrthography        TextCheckingType = 1
+	TextCheckingTypeSpelling           TextCheckingType = 2
+	TextCheckingTypeGrammar            TextCheckingType = 4
+	TextCheckingTypeDate               TextCheckingType = 8
+	TextCheckingTypeAddress            TextCheckingType = 16
+	TextCheckingTypeLink               TextCheckingType = 32
+	TextCheckingTypeQuote              TextCheckingType = 64
+	TextCheckingTypeDash               TextCheckingType = 128
+	TextCheckingTypeReplacement        TextCheckingType = 256
+	TextCheckingTypeCorrection         TextCheckingType = 512
+	TextCheckingTypeRegularExpression  TextCheckingType = 1024
+	TextCheckingTypePhoneNumber        TextCheckingType = 2048
+	TextCheckingTypeTransitInformation TextCheckingType = 4096
 )
 
-func (e NSTextCheckingType) String() string {
+func (e TextCheckingType) String() string {
 	var parts []string
-	if e&NSTextCheckingTypeOrthography != 0 {
-		parts = append(parts, "NSTextCheckingTypeOrthography")
+	if e&TextCheckingTypeOrthography != 0 {
+		parts = append(parts, "TextCheckingTypeOrthography")
 	}
-	if e&NSTextCheckingTypeSpelling != 0 {
-		parts = append(parts, "NSTextCheckingTypeSpelling")
+	if e&TextCheckingTypeSpelling != 0 {
+		parts = append(parts, "TextCheckingTypeSpelling")
 	}
-	if e&NSTextCheckingTypeGrammar != 0 {
-		parts = append(parts, "NSTextCheckingTypeGrammar")
+	if e&TextCheckingTypeGrammar != 0 {
+		parts = append(parts, "TextCheckingTypeGrammar")
 	}
-	if e&NSTextCheckingTypeDate != 0 {
-		parts = append(parts, "NSTextCheckingTypeDate")
+	if e&TextCheckingTypeDate != 0 {
+		parts = append(parts, "TextCheckingTypeDate")
 	}
-	if e&NSTextCheckingTypeAddress != 0 {
-		parts = append(parts, "NSTextCheckingTypeAddress")
+	if e&TextCheckingTypeAddress != 0 {
+		parts = append(parts, "TextCheckingTypeAddress")
 	}
-	if e&NSTextCheckingTypeLink != 0 {
-		parts = append(parts, "NSTextCheckingTypeLink")
+	if e&TextCheckingTypeLink != 0 {
+		parts = append(parts, "TextCheckingTypeLink")
 	}
-	if e&NSTextCheckingTypeQuote != 0 {
-		parts = append(parts, "NSTextCheckingTypeQuote")
+	if e&TextCheckingTypeQuote != 0 {
+		parts = append(parts, "TextCheckingTypeQuote")
 	}
-	if e&NSTextCheckingTypeDash != 0 {
-		parts = append(parts, "NSTextCheckingTypeDash")
+	if e&TextCheckingTypeDash != 0 {
+		parts = append(parts, "TextCheckingTypeDash")
 	}
-	if e&NSTextCheckingTypeReplacement != 0 {
-		parts = append(parts, "NSTextCheckingTypeReplacement")
+	if e&TextCheckingTypeReplacement != 0 {
+		parts = append(parts, "TextCheckingTypeReplacement")
 	}
-	if e&NSTextCheckingTypeCorrection != 0 {
-		parts = append(parts, "NSTextCheckingTypeCorrection")
+	if e&TextCheckingTypeCorrection != 0 {
+		parts = append(parts, "TextCheckingTypeCorrection")
 	}
-	if e&NSTextCheckingTypeRegularExpression != 0 {
-		parts = append(parts, "NSTextCheckingTypeRegularExpression")
+	if e&TextCheckingTypeRegularExpression != 0 {
+		parts = append(parts, "TextCheckingTypeRegularExpression")
 	}
-	if e&NSTextCheckingTypePhoneNumber != 0 {
-		parts = append(parts, "NSTextCheckingTypePhoneNumber")
+	if e&TextCheckingTypePhoneNumber != 0 {
+		parts = append(parts, "TextCheckingTypePhoneNumber")
 	}
-	if e&NSTextCheckingTypeTransitInformation != 0 {
-		parts = append(parts, "NSTextCheckingTypeTransitInformation")
+	if e&TextCheckingTypeTransitInformation != 0 {
+		parts = append(parts, "TextCheckingTypeTransitInformation")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -3756,71 +3368,71 @@ func (e NSTextCheckingType) String() string {
 }
 
 // Constants you use to specify a style when presenting time zone names.
-type NSTimeZoneNameStyle int64
+type TimeZoneNameStyle int64
 
 const (
-	NSTimeZoneNameStyleStandard            NSTimeZoneNameStyle = 0
-	NSTimeZoneNameStyleShortStandard       NSTimeZoneNameStyle = 1
-	NSTimeZoneNameStyleDaylightSaving      NSTimeZoneNameStyle = 2
-	NSTimeZoneNameStyleShortDaylightSaving NSTimeZoneNameStyle = 3
-	NSTimeZoneNameStyleGeneric             NSTimeZoneNameStyle = 4
-	NSTimeZoneNameStyleShortGeneric        NSTimeZoneNameStyle = 5
+	TimeZoneNameStyleStandard            TimeZoneNameStyle = 0
+	TimeZoneNameStyleShortStandard       TimeZoneNameStyle = 1
+	TimeZoneNameStyleDaylightSaving      TimeZoneNameStyle = 2
+	TimeZoneNameStyleShortDaylightSaving TimeZoneNameStyle = 3
+	TimeZoneNameStyleGeneric             TimeZoneNameStyle = 4
+	TimeZoneNameStyleShortGeneric        TimeZoneNameStyle = 5
 )
 
-func (e NSTimeZoneNameStyle) String() string {
+func (e TimeZoneNameStyle) String() string {
 	switch e {
-	case NSTimeZoneNameStyleStandard:
-		return "NSTimeZoneNameStyleStandard"
-	case NSTimeZoneNameStyleShortStandard:
-		return "NSTimeZoneNameStyleShortStandard"
-	case NSTimeZoneNameStyleDaylightSaving:
-		return "NSTimeZoneNameStyleDaylightSaving"
-	case NSTimeZoneNameStyleShortDaylightSaving:
-		return "NSTimeZoneNameStyleShortDaylightSaving"
-	case NSTimeZoneNameStyleGeneric:
-		return "NSTimeZoneNameStyleGeneric"
-	case NSTimeZoneNameStyleShortGeneric:
-		return "NSTimeZoneNameStyleShortGeneric"
+	case TimeZoneNameStyleStandard:
+		return "TimeZoneNameStyleStandard"
+	case TimeZoneNameStyleShortStandard:
+		return "TimeZoneNameStyleShortStandard"
+	case TimeZoneNameStyleDaylightSaving:
+		return "TimeZoneNameStyleDaylightSaving"
+	case TimeZoneNameStyleShortDaylightSaving:
+		return "TimeZoneNameStyleShortDaylightSaving"
+	case TimeZoneNameStyleGeneric:
+		return "TimeZoneNameStyleGeneric"
+	case TimeZoneNameStyleShortGeneric:
+		return "TimeZoneNameStyleShortGeneric"
 	default:
-		return fmt.Sprintf("NSTimeZoneNameStyle(%d)", int64(e))
+		return fmt.Sprintf("TimeZoneNameStyle(%d)", int64(e))
 	}
 }
 
 // Options used when creating bookmark data.
 // Bitmask — values may be combined with |.
-type NSURLBookmarkCreationOptions uint64
+type URLBookmarkCreationOptions uint64
 
 const (
 	// Deprecated: Not supported
-	NSURLBookmarkCreationPreferFileIDResolution NSURLBookmarkCreationOptions = 256
+	URLBookmarkCreationPreferFileIDResolution URLBookmarkCreationOptions = 256
 	// Deprecated: Not supported
-	NSURLBookmarkCreationMinimalBookmark NSURLBookmarkCreationOptions = 512
+	URLBookmarkCreationMinimalBookmark URLBookmarkCreationOptions = 512
 	// Deprecated: Not supported
-	NSURLBookmarkCreationSuitableForBookmarkFile          NSURLBookmarkCreationOptions = 1024
-	NSURLBookmarkCreationWithSecurityScope                NSURLBookmarkCreationOptions = 2048
-	NSURLBookmarkCreationSecurityScopeAllowOnlyReadAccess NSURLBookmarkCreationOptions = 4096
-	NSURLBookmarkCreationWithoutImplicitSecurityScope     NSURLBookmarkCreationOptions = 536870912
+	URLBookmarkCreationSuitableForBookmarkFile          URLBookmarkCreationOptions = 1024
+	URLBookmarkCreationWithSecurityScope                URLBookmarkCreationOptions = 2048
+	URLBookmarkCreationSecurityScopeAllowOnlyReadAccess URLBookmarkCreationOptions = 4096
+	URLBookmarkCreationWithoutImplicitSecurityScope     URLBookmarkCreationOptions = 536870912
 )
 
-func (e NSURLBookmarkCreationOptions) String() string {
+func (e URLBookmarkCreationOptions) String() string {
 	var parts []string
-	if e&NSURLBookmarkCreationPreferFileIDResolution != 0 {
-		parts = append(parts, "NSURLBookmarkCreationPreferFileIDResolution")
+	if e&URLBookmarkCreationPreferFileIDResolution != 0 {
+		parts = append(parts, "URLBookmarkCreationPreferFileIDResolution")
 	}
-	if e&NSURLBookmarkCreationMinimalBookmark != 0 {
-		parts = append(parts, "NSURLBookmarkCreationMinimalBookmark")
+	if e&URLBookmarkCreationMinimalBookmark != 0 {
+		parts = append(parts, "URLBookmarkCreationMinimalBookmark")
 	}
-	if e&NSURLBookmarkCreationSuitableForBookmarkFile != 0 {
-		parts = append(parts, "NSURLBookmarkCreationSuitableForBookmarkFile")
+	if e&URLBookmarkCreationSuitableForBookmarkFile != 0 {
+		parts = append(parts, "URLBookmarkCreationSuitableForBookmarkFile")
 	}
-	if e&NSURLBookmarkCreationWithSecurityScope != 0 {
-		parts = append(parts, "NSURLBookmarkCreationWithSecurityScope")
+	if e&URLBookmarkCreationWithSecurityScope != 0 {
+		parts = append(parts, "URLBookmarkCreationWithSecurityScope")
 	}
-	if e&NSURLBookmarkCreationSecurityScopeAllowOnlyReadAccess != 0 {
-		parts = append(parts, "NSURLBookmarkCreationSecurityScopeAllowOnlyReadAccess")
+	if e&URLBookmarkCreationSecurityScopeAllowOnlyReadAccess != 0 {
+		parts = append(parts, "URLBookmarkCreationSecurityScopeAllowOnlyReadAccess")
 	}
-	if e&NSURLBookmarkCreationWithoutImplicitSecurityScope != 0 {
-		parts = append(parts, "NSURLBookmarkCreationWithoutImplicitSecurityScope")
+	if e&URLBookmarkCreationWithoutImplicitSecurityScope != 0 {
+		parts = append(parts, "URLBookmarkCreationWithoutImplicitSecurityScope")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -3830,28 +3442,28 @@ func (e NSURLBookmarkCreationOptions) String() string {
 
 // Options used when resolving bookmark data.
 // Bitmask — values may be combined with |.
-type NSURLBookmarkResolutionOptions uint64
+type URLBookmarkResolutionOptions uint64
 
 const (
-	NSURLBookmarkResolutionWithoutUI                     NSURLBookmarkResolutionOptions = 256
-	NSURLBookmarkResolutionWithoutMounting               NSURLBookmarkResolutionOptions = 512
-	NSURLBookmarkResolutionWithSecurityScope             NSURLBookmarkResolutionOptions = 1024
-	NSURLBookmarkResolutionWithoutImplicitStartAccessing NSURLBookmarkResolutionOptions = 32768
+	URLBookmarkResolutionWithoutUI                     URLBookmarkResolutionOptions = 256
+	URLBookmarkResolutionWithoutMounting               URLBookmarkResolutionOptions = 512
+	URLBookmarkResolutionWithSecurityScope             URLBookmarkResolutionOptions = 1024
+	URLBookmarkResolutionWithoutImplicitStartAccessing URLBookmarkResolutionOptions = 32768
 )
 
-func (e NSURLBookmarkResolutionOptions) String() string {
+func (e URLBookmarkResolutionOptions) String() string {
 	var parts []string
-	if e&NSURLBookmarkResolutionWithoutUI != 0 {
-		parts = append(parts, "NSURLBookmarkResolutionWithoutUI")
+	if e&URLBookmarkResolutionWithoutUI != 0 {
+		parts = append(parts, "URLBookmarkResolutionWithoutUI")
 	}
-	if e&NSURLBookmarkResolutionWithoutMounting != 0 {
-		parts = append(parts, "NSURLBookmarkResolutionWithoutMounting")
+	if e&URLBookmarkResolutionWithoutMounting != 0 {
+		parts = append(parts, "URLBookmarkResolutionWithoutMounting")
 	}
-	if e&NSURLBookmarkResolutionWithSecurityScope != 0 {
-		parts = append(parts, "NSURLBookmarkResolutionWithSecurityScope")
+	if e&URLBookmarkResolutionWithSecurityScope != 0 {
+		parts = append(parts, "URLBookmarkResolutionWithSecurityScope")
 	}
-	if e&NSURLBookmarkResolutionWithoutImplicitStartAccessing != 0 {
-		parts = append(parts, "NSURLBookmarkResolutionWithoutImplicitStartAccessing")
+	if e&URLBookmarkResolutionWithoutImplicitStartAccessing != 0 {
+		parts = append(parts, "URLBookmarkResolutionWithoutImplicitStartAccessing")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -3860,368 +3472,368 @@ func (e NSURLBookmarkResolutionOptions) String() string {
 }
 
 // These constants specify the caching strategy used by an NSCachedURLResponse object.
-type NSURLCacheStoragePolicy uint64
+type URLCacheStoragePolicy uint64
 
 const (
-	NSURLCacheStorageAllowed             NSURLCacheStoragePolicy = 0
-	NSURLCacheStorageAllowedInMemoryOnly NSURLCacheStoragePolicy = 1
-	NSURLCacheStorageNotAllowed          NSURLCacheStoragePolicy = 2
+	URLCacheStorageAllowed             URLCacheStoragePolicy = 0
+	URLCacheStorageAllowedInMemoryOnly URLCacheStoragePolicy = 1
+	URLCacheStorageNotAllowed          URLCacheStoragePolicy = 2
 )
 
-func (e NSURLCacheStoragePolicy) String() string {
+func (e URLCacheStoragePolicy) String() string {
 	switch e {
-	case NSURLCacheStorageAllowed:
-		return "NSURLCacheStorageAllowed"
-	case NSURLCacheStorageAllowedInMemoryOnly:
-		return "NSURLCacheStorageAllowedInMemoryOnly"
-	case NSURLCacheStorageNotAllowed:
-		return "NSURLCacheStorageNotAllowed"
+	case URLCacheStorageAllowed:
+		return "URLCacheStorageAllowed"
+	case URLCacheStorageAllowedInMemoryOnly:
+		return "URLCacheStorageAllowedInMemoryOnly"
+	case URLCacheStorageNotAllowed:
+		return "URLCacheStorageNotAllowed"
 	default:
-		return fmt.Sprintf("NSURLCacheStoragePolicy(%d)", int64(e))
+		return fmt.Sprintf("URLCacheStoragePolicy(%d)", int64(e))
 	}
 }
 
 // Constants that specify how long the credential will be kept.
-type NSURLCredentialPersistence uint64
+type URLCredentialPersistence uint64
 
 const (
-	NSURLCredentialPersistenceNone           NSURLCredentialPersistence = 0
-	NSURLCredentialPersistenceForSession     NSURLCredentialPersistence = 1
-	NSURLCredentialPersistencePermanent      NSURLCredentialPersistence = 2
-	NSURLCredentialPersistenceSynchronizable NSURLCredentialPersistence = 3
+	URLCredentialPersistenceNone           URLCredentialPersistence = 0
+	URLCredentialPersistenceForSession     URLCredentialPersistence = 1
+	URLCredentialPersistencePermanent      URLCredentialPersistence = 2
+	URLCredentialPersistenceSynchronizable URLCredentialPersistence = 3
 )
 
-func (e NSURLCredentialPersistence) String() string {
+func (e URLCredentialPersistence) String() string {
 	switch e {
-	case NSURLCredentialPersistenceNone:
-		return "NSURLCredentialPersistenceNone"
-	case NSURLCredentialPersistenceForSession:
-		return "NSURLCredentialPersistenceForSession"
-	case NSURLCredentialPersistencePermanent:
-		return "NSURLCredentialPersistencePermanent"
-	case NSURLCredentialPersistenceSynchronizable:
-		return "NSURLCredentialPersistenceSynchronizable"
+	case URLCredentialPersistenceNone:
+		return "URLCredentialPersistenceNone"
+	case URLCredentialPersistenceForSession:
+		return "URLCredentialPersistenceForSession"
+	case URLCredentialPersistencePermanent:
+		return "URLCredentialPersistencePermanent"
+	case URLCredentialPersistenceSynchronizable:
+		return "URLCredentialPersistenceSynchronizable"
 	default:
-		return fmt.Sprintf("NSURLCredentialPersistence(%d)", int64(e))
+		return fmt.Sprintf("URLCredentialPersistence(%d)", int64(e))
 	}
 }
 
 // These following constants are defined by NSURLHandle and are returned by status.
-type NSURLHandleStatus uint64
+type URLHandleStatus uint64
 
 const (
-	NSURLHandleNotLoaded      NSURLHandleStatus = 0
-	NSURLHandleLoadSucceeded  NSURLHandleStatus = 1
-	NSURLHandleLoadInProgress NSURLHandleStatus = 2
-	NSURLHandleLoadFailed     NSURLHandleStatus = 3
+	URLHandleNotLoaded      URLHandleStatus = 0
+	URLHandleLoadSucceeded  URLHandleStatus = 1
+	URLHandleLoadInProgress URLHandleStatus = 2
+	URLHandleLoadFailed     URLHandleStatus = 3
 )
 
-func (e NSURLHandleStatus) String() string {
+func (e URLHandleStatus) String() string {
 	switch e {
-	case NSURLHandleNotLoaded:
-		return "NSURLHandleNotLoaded"
-	case NSURLHandleLoadSucceeded:
-		return "NSURLHandleLoadSucceeded"
-	case NSURLHandleLoadInProgress:
-		return "NSURLHandleLoadInProgress"
-	case NSURLHandleLoadFailed:
-		return "NSURLHandleLoadFailed"
+	case URLHandleNotLoaded:
+		return "URLHandleNotLoaded"
+	case URLHandleLoadSucceeded:
+		return "URLHandleLoadSucceeded"
+	case URLHandleLoadInProgress:
+		return "URLHandleLoadInProgress"
+	case URLHandleLoadFailed:
+		return "URLHandleLoadFailed"
 	default:
-		return fmt.Sprintf("NSURLHandleStatus(%d)", int64(e))
+		return fmt.Sprintf("URLHandleStatus(%d)", int64(e))
 	}
 }
 
 // The entities that can make a network request.
-type NSURLRequestAttribution uint64
+type URLRequestAttribution uint64
 
 const (
-	NSURLRequestAttributionDeveloper NSURLRequestAttribution = 0
-	NSURLRequestAttributionUser      NSURLRequestAttribution = 1
+	URLRequestAttributionDeveloper URLRequestAttribution = 0
+	URLRequestAttributionUser      URLRequestAttribution = 1
 )
 
-func (e NSURLRequestAttribution) String() string {
+func (e URLRequestAttribution) String() string {
 	switch e {
-	case NSURLRequestAttributionDeveloper:
-		return "NSURLRequestAttributionDeveloper"
-	case NSURLRequestAttributionUser:
-		return "NSURLRequestAttributionUser"
+	case URLRequestAttributionDeveloper:
+		return "URLRequestAttributionDeveloper"
+	case URLRequestAttributionUser:
+		return "URLRequestAttributionUser"
 	default:
-		return fmt.Sprintf("NSURLRequestAttribution(%d)", int64(e))
+		return fmt.Sprintf("URLRequestAttribution(%d)", int64(e))
 	}
 }
 
 // The constants used to specify interaction with the cached responses.
-type NSURLRequestCachePolicy uint64
+type URLRequestCachePolicy uint64
 
 const (
-	NSURLRequestUseProtocolCachePolicy                NSURLRequestCachePolicy = 0
-	NSURLRequestReloadIgnoringLocalCacheData          NSURLRequestCachePolicy = 1
-	NSURLRequestReloadIgnoringLocalAndRemoteCacheData NSURLRequestCachePolicy = 4
-	NSURLRequestReloadIgnoringCacheData               NSURLRequestCachePolicy = 1
-	NSURLRequestReturnCacheDataElseLoad               NSURLRequestCachePolicy = 2
-	NSURLRequestReturnCacheDataDontLoad               NSURLRequestCachePolicy = 3
-	NSURLRequestReloadRevalidatingCacheData           NSURLRequestCachePolicy = 5
+	URLRequestUseProtocolCachePolicy                URLRequestCachePolicy = 0
+	URLRequestReloadIgnoringLocalCacheData          URLRequestCachePolicy = 1
+	URLRequestReloadIgnoringLocalAndRemoteCacheData URLRequestCachePolicy = 4
+	URLRequestReloadIgnoringCacheData               URLRequestCachePolicy = 1
+	URLRequestReturnCacheDataElseLoad               URLRequestCachePolicy = 2
+	URLRequestReturnCacheDataDontLoad               URLRequestCachePolicy = 3
+	URLRequestReloadRevalidatingCacheData           URLRequestCachePolicy = 5
 )
 
-func (e NSURLRequestCachePolicy) String() string {
+func (e URLRequestCachePolicy) String() string {
 	switch e {
-	case NSURLRequestUseProtocolCachePolicy:
-		return "NSURLRequestUseProtocolCachePolicy"
-	case NSURLRequestReloadIgnoringLocalCacheData:
-		return "NSURLRequestReloadIgnoringLocalCacheData"
-	case NSURLRequestReloadIgnoringLocalAndRemoteCacheData:
-		return "NSURLRequestReloadIgnoringLocalAndRemoteCacheData"
-	case NSURLRequestReturnCacheDataElseLoad:
-		return "NSURLRequestReturnCacheDataElseLoad"
-	case NSURLRequestReturnCacheDataDontLoad:
-		return "NSURLRequestReturnCacheDataDontLoad"
-	case NSURLRequestReloadRevalidatingCacheData:
-		return "NSURLRequestReloadRevalidatingCacheData"
+	case URLRequestUseProtocolCachePolicy:
+		return "URLRequestUseProtocolCachePolicy"
+	case URLRequestReloadIgnoringLocalCacheData:
+		return "URLRequestReloadIgnoringLocalCacheData"
+	case URLRequestReloadIgnoringLocalAndRemoteCacheData:
+		return "URLRequestReloadIgnoringLocalAndRemoteCacheData"
+	case URLRequestReturnCacheDataElseLoad:
+		return "URLRequestReturnCacheDataElseLoad"
+	case URLRequestReturnCacheDataDontLoad:
+		return "URLRequestReturnCacheDataDontLoad"
+	case URLRequestReloadRevalidatingCacheData:
+		return "URLRequestReloadRevalidatingCacheData"
 	default:
-		return fmt.Sprintf("NSURLRequestCachePolicy(%d)", int64(e))
+		return fmt.Sprintf("URLRequestCachePolicy(%d)", int64(e))
 	}
 }
 
 // Constants that specify how a request uses network resources.
-type NSURLRequestNetworkServiceType uint64
+type URLRequestNetworkServiceType uint64
 
 const (
-	NSURLNetworkServiceTypeDefault NSURLRequestNetworkServiceType = 0
+	URLNetworkServiceTypeDefault URLRequestNetworkServiceType = 0
 	// Deprecated: Use PushKit for VoIP control purposes
-	NSURLNetworkServiceTypeVoIP NSURLRequestNetworkServiceType = 1
+	URLNetworkServiceTypeVoIP URLRequestNetworkServiceType = 1
 	// Deprecated: Use PushKit for VoIP control purposes
-	NSURLNetworkServiceTypeVideo NSURLRequestNetworkServiceType = 2
+	URLNetworkServiceTypeVideo URLRequestNetworkServiceType = 2
 	// Deprecated: Use PushKit for VoIP control purposes
-	NSURLNetworkServiceTypeBackground NSURLRequestNetworkServiceType = 3
+	URLNetworkServiceTypeBackground URLRequestNetworkServiceType = 3
 	// Deprecated: Use PushKit for VoIP control purposes
-	NSURLNetworkServiceTypeVoice NSURLRequestNetworkServiceType = 4
+	URLNetworkServiceTypeVoice URLRequestNetworkServiceType = 4
 	// Deprecated: Use PushKit for VoIP control purposes
-	NSURLNetworkServiceTypeResponsiveData NSURLRequestNetworkServiceType = 6
-	NSURLNetworkServiceTypeAVStreaming    NSURLRequestNetworkServiceType = 8
-	NSURLNetworkServiceTypeResponsiveAV   NSURLRequestNetworkServiceType = 9
-	NSURLNetworkServiceTypeCallSignaling  NSURLRequestNetworkServiceType = 11
+	URLNetworkServiceTypeResponsiveData URLRequestNetworkServiceType = 6
+	URLNetworkServiceTypeAVStreaming    URLRequestNetworkServiceType = 8
+	URLNetworkServiceTypeResponsiveAV   URLRequestNetworkServiceType = 9
+	URLNetworkServiceTypeCallSignaling  URLRequestNetworkServiceType = 11
 )
 
-func (e NSURLRequestNetworkServiceType) String() string {
+func (e URLRequestNetworkServiceType) String() string {
 	switch e {
-	case NSURLNetworkServiceTypeDefault:
-		return "NSURLNetworkServiceTypeDefault"
-	case NSURLNetworkServiceTypeVoIP:
-		return "NSURLNetworkServiceTypeVoIP"
-	case NSURLNetworkServiceTypeVideo:
-		return "NSURLNetworkServiceTypeVideo"
-	case NSURLNetworkServiceTypeBackground:
-		return "NSURLNetworkServiceTypeBackground"
-	case NSURLNetworkServiceTypeVoice:
-		return "NSURLNetworkServiceTypeVoice"
-	case NSURLNetworkServiceTypeResponsiveData:
-		return "NSURLNetworkServiceTypeResponsiveData"
-	case NSURLNetworkServiceTypeAVStreaming:
-		return "NSURLNetworkServiceTypeAVStreaming"
-	case NSURLNetworkServiceTypeResponsiveAV:
-		return "NSURLNetworkServiceTypeResponsiveAV"
-	case NSURLNetworkServiceTypeCallSignaling:
-		return "NSURLNetworkServiceTypeCallSignaling"
+	case URLNetworkServiceTypeDefault:
+		return "URLNetworkServiceTypeDefault"
+	case URLNetworkServiceTypeVoIP:
+		return "URLNetworkServiceTypeVoIP"
+	case URLNetworkServiceTypeVideo:
+		return "URLNetworkServiceTypeVideo"
+	case URLNetworkServiceTypeBackground:
+		return "URLNetworkServiceTypeBackground"
+	case URLNetworkServiceTypeVoice:
+		return "URLNetworkServiceTypeVoice"
+	case URLNetworkServiceTypeResponsiveData:
+		return "URLNetworkServiceTypeResponsiveData"
+	case URLNetworkServiceTypeAVStreaming:
+		return "URLNetworkServiceTypeAVStreaming"
+	case URLNetworkServiceTypeResponsiveAV:
+		return "URLNetworkServiceTypeResponsiveAV"
+	case URLNetworkServiceTypeCallSignaling:
+		return "URLNetworkServiceTypeCallSignaling"
 	default:
-		return fmt.Sprintf("NSURLRequestNetworkServiceType(%d)", int64(e))
+		return fmt.Sprintf("URLRequestNetworkServiceType(%d)", int64(e))
 	}
 }
 
-type NSURLSessionTaskMetricsDomainResolutionProtocol int64
+type URLSessionTaskMetricsDomainResolutionProtocol int64
 
 const (
-	NSURLSessionTaskMetricsDomainResolutionProtocolUnknown NSURLSessionTaskMetricsDomainResolutionProtocol = 0
-	NSURLSessionTaskMetricsDomainResolutionProtocolUDP     NSURLSessionTaskMetricsDomainResolutionProtocol = 1
-	NSURLSessionTaskMetricsDomainResolutionProtocolTCP     NSURLSessionTaskMetricsDomainResolutionProtocol = 2
-	NSURLSessionTaskMetricsDomainResolutionProtocolTLS     NSURLSessionTaskMetricsDomainResolutionProtocol = 3
-	NSURLSessionTaskMetricsDomainResolutionProtocolHTTPS   NSURLSessionTaskMetricsDomainResolutionProtocol = 4
+	URLSessionTaskMetricsDomainResolutionProtocolUnknown URLSessionTaskMetricsDomainResolutionProtocol = 0
+	URLSessionTaskMetricsDomainResolutionProtocolUDP     URLSessionTaskMetricsDomainResolutionProtocol = 1
+	URLSessionTaskMetricsDomainResolutionProtocolTCP     URLSessionTaskMetricsDomainResolutionProtocol = 2
+	URLSessionTaskMetricsDomainResolutionProtocolTLS     URLSessionTaskMetricsDomainResolutionProtocol = 3
+	URLSessionTaskMetricsDomainResolutionProtocolHTTPS   URLSessionTaskMetricsDomainResolutionProtocol = 4
 )
 
-func (e NSURLSessionTaskMetricsDomainResolutionProtocol) String() string {
+func (e URLSessionTaskMetricsDomainResolutionProtocol) String() string {
 	switch e {
-	case NSURLSessionTaskMetricsDomainResolutionProtocolUnknown:
-		return "NSURLSessionTaskMetricsDomainResolutionProtocolUnknown"
-	case NSURLSessionTaskMetricsDomainResolutionProtocolUDP:
-		return "NSURLSessionTaskMetricsDomainResolutionProtocolUDP"
-	case NSURLSessionTaskMetricsDomainResolutionProtocolTCP:
-		return "NSURLSessionTaskMetricsDomainResolutionProtocolTCP"
-	case NSURLSessionTaskMetricsDomainResolutionProtocolTLS:
-		return "NSURLSessionTaskMetricsDomainResolutionProtocolTLS"
-	case NSURLSessionTaskMetricsDomainResolutionProtocolHTTPS:
-		return "NSURLSessionTaskMetricsDomainResolutionProtocolHTTPS"
+	case URLSessionTaskMetricsDomainResolutionProtocolUnknown:
+		return "URLSessionTaskMetricsDomainResolutionProtocolUnknown"
+	case URLSessionTaskMetricsDomainResolutionProtocolUDP:
+		return "URLSessionTaskMetricsDomainResolutionProtocolUDP"
+	case URLSessionTaskMetricsDomainResolutionProtocolTCP:
+		return "URLSessionTaskMetricsDomainResolutionProtocolTCP"
+	case URLSessionTaskMetricsDomainResolutionProtocolTLS:
+		return "URLSessionTaskMetricsDomainResolutionProtocolTLS"
+	case URLSessionTaskMetricsDomainResolutionProtocolHTTPS:
+		return "URLSessionTaskMetricsDomainResolutionProtocolHTTPS"
 	default:
-		return fmt.Sprintf("NSURLSessionTaskMetricsDomainResolutionProtocol(%d)", int64(e))
+		return fmt.Sprintf("URLSessionTaskMetricsDomainResolutionProtocol(%d)", int64(e))
 	}
 }
 
 // The manner in which a resource is fetched.
-type NSURLSessionTaskMetricsResourceFetchType int64
+type URLSessionTaskMetricsResourceFetchType int64
 
 const (
-	NSURLSessionTaskMetricsResourceFetchTypeUnknown     NSURLSessionTaskMetricsResourceFetchType = 0
-	NSURLSessionTaskMetricsResourceFetchTypeNetworkLoad NSURLSessionTaskMetricsResourceFetchType = 1
+	URLSessionTaskMetricsResourceFetchTypeUnknown     URLSessionTaskMetricsResourceFetchType = 0
+	URLSessionTaskMetricsResourceFetchTypeNetworkLoad URLSessionTaskMetricsResourceFetchType = 1
 	// Deprecated: Server push is no longer supported as of iOS 17 and aligned releases
-	NSURLSessionTaskMetricsResourceFetchTypeServerPush NSURLSessionTaskMetricsResourceFetchType = 2
+	URLSessionTaskMetricsResourceFetchTypeServerPush URLSessionTaskMetricsResourceFetchType = 2
 	// Deprecated: Server push is no longer supported as of iOS 17 and aligned releases
-	NSURLSessionTaskMetricsResourceFetchTypeLocalCache NSURLSessionTaskMetricsResourceFetchType = 3
+	URLSessionTaskMetricsResourceFetchTypeLocalCache URLSessionTaskMetricsResourceFetchType = 3
 )
 
-func (e NSURLSessionTaskMetricsResourceFetchType) String() string {
+func (e URLSessionTaskMetricsResourceFetchType) String() string {
 	switch e {
-	case NSURLSessionTaskMetricsResourceFetchTypeUnknown:
-		return "NSURLSessionTaskMetricsResourceFetchTypeUnknown"
-	case NSURLSessionTaskMetricsResourceFetchTypeNetworkLoad:
-		return "NSURLSessionTaskMetricsResourceFetchTypeNetworkLoad"
-	case NSURLSessionTaskMetricsResourceFetchTypeServerPush:
-		return "NSURLSessionTaskMetricsResourceFetchTypeServerPush"
-	case NSURLSessionTaskMetricsResourceFetchTypeLocalCache:
-		return "NSURLSessionTaskMetricsResourceFetchTypeLocalCache"
+	case URLSessionTaskMetricsResourceFetchTypeUnknown:
+		return "URLSessionTaskMetricsResourceFetchTypeUnknown"
+	case URLSessionTaskMetricsResourceFetchTypeNetworkLoad:
+		return "URLSessionTaskMetricsResourceFetchTypeNetworkLoad"
+	case URLSessionTaskMetricsResourceFetchTypeServerPush:
+		return "URLSessionTaskMetricsResourceFetchTypeServerPush"
+	case URLSessionTaskMetricsResourceFetchTypeLocalCache:
+		return "URLSessionTaskMetricsResourceFetchTypeLocalCache"
 	default:
-		return fmt.Sprintf("NSURLSessionTaskMetricsResourceFetchType(%d)", int64(e))
+		return fmt.Sprintf("URLSessionTaskMetricsResourceFetchType(%d)", int64(e))
 	}
 }
 
 // Constants for determining the current state of a task.
-type NSURLSessionTaskState int64
+type URLSessionTaskState int64
 
 const (
-	NSURLSessionTaskStateRunning   NSURLSessionTaskState = 0
-	NSURLSessionTaskStateSuspended NSURLSessionTaskState = 1
-	NSURLSessionTaskStateCanceling NSURLSessionTaskState = 2
-	NSURLSessionTaskStateCompleted NSURLSessionTaskState = 3
+	URLSessionTaskStateRunning   URLSessionTaskState = 0
+	URLSessionTaskStateSuspended URLSessionTaskState = 1
+	URLSessionTaskStateCanceling URLSessionTaskState = 2
+	URLSessionTaskStateCompleted URLSessionTaskState = 3
 )
 
-func (e NSURLSessionTaskState) String() string {
+func (e URLSessionTaskState) String() string {
 	switch e {
-	case NSURLSessionTaskStateRunning:
-		return "NSURLSessionTaskStateRunning"
-	case NSURLSessionTaskStateSuspended:
-		return "NSURLSessionTaskStateSuspended"
-	case NSURLSessionTaskStateCanceling:
-		return "NSURLSessionTaskStateCanceling"
-	case NSURLSessionTaskStateCompleted:
-		return "NSURLSessionTaskStateCompleted"
+	case URLSessionTaskStateRunning:
+		return "URLSessionTaskStateRunning"
+	case URLSessionTaskStateSuspended:
+		return "URLSessionTaskStateSuspended"
+	case URLSessionTaskStateCanceling:
+		return "URLSessionTaskStateCanceling"
+	case URLSessionTaskStateCompleted:
+		return "URLSessionTaskStateCompleted"
 	default:
-		return fmt.Sprintf("NSURLSessionTaskState(%d)", int64(e))
+		return fmt.Sprintf("URLSessionTaskState(%d)", int64(e))
 	}
 }
 
 // A code that indicates why a WebSocket connection closed.
-type NSURLSessionWebSocketCloseCode int64
+type URLSessionWebSocketCloseCode int64
 
 const (
-	NSURLSessionWebSocketCloseCodeInvalid                   NSURLSessionWebSocketCloseCode = 0
-	NSURLSessionWebSocketCloseCodeNormalClosure             NSURLSessionWebSocketCloseCode = 1000
-	NSURLSessionWebSocketCloseCodeGoingAway                 NSURLSessionWebSocketCloseCode = 1001
-	NSURLSessionWebSocketCloseCodeProtocolError             NSURLSessionWebSocketCloseCode = 1002
-	NSURLSessionWebSocketCloseCodeUnsupportedData           NSURLSessionWebSocketCloseCode = 1003
-	NSURLSessionWebSocketCloseCodeNoStatusReceived          NSURLSessionWebSocketCloseCode = 1005
-	NSURLSessionWebSocketCloseCodeAbnormalClosure           NSURLSessionWebSocketCloseCode = 1006
-	NSURLSessionWebSocketCloseCodeInvalidFramePayloadData   NSURLSessionWebSocketCloseCode = 1007
-	NSURLSessionWebSocketCloseCodePolicyViolation           NSURLSessionWebSocketCloseCode = 1008
-	NSURLSessionWebSocketCloseCodeMessageTooBig             NSURLSessionWebSocketCloseCode = 1009
-	NSURLSessionWebSocketCloseCodeMandatoryExtensionMissing NSURLSessionWebSocketCloseCode = 1010
-	NSURLSessionWebSocketCloseCodeInternalServerError       NSURLSessionWebSocketCloseCode = 1011
-	NSURLSessionWebSocketCloseCodeTLSHandshakeFailure       NSURLSessionWebSocketCloseCode = 1015
+	URLSessionWebSocketCloseCodeInvalid                   URLSessionWebSocketCloseCode = 0
+	URLSessionWebSocketCloseCodeNormalClosure             URLSessionWebSocketCloseCode = 1000
+	URLSessionWebSocketCloseCodeGoingAway                 URLSessionWebSocketCloseCode = 1001
+	URLSessionWebSocketCloseCodeProtocolError             URLSessionWebSocketCloseCode = 1002
+	URLSessionWebSocketCloseCodeUnsupportedData           URLSessionWebSocketCloseCode = 1003
+	URLSessionWebSocketCloseCodeNoStatusReceived          URLSessionWebSocketCloseCode = 1005
+	URLSessionWebSocketCloseCodeAbnormalClosure           URLSessionWebSocketCloseCode = 1006
+	URLSessionWebSocketCloseCodeInvalidFramePayloadData   URLSessionWebSocketCloseCode = 1007
+	URLSessionWebSocketCloseCodePolicyViolation           URLSessionWebSocketCloseCode = 1008
+	URLSessionWebSocketCloseCodeMessageTooBig             URLSessionWebSocketCloseCode = 1009
+	URLSessionWebSocketCloseCodeMandatoryExtensionMissing URLSessionWebSocketCloseCode = 1010
+	URLSessionWebSocketCloseCodeInternalServerError       URLSessionWebSocketCloseCode = 1011
+	URLSessionWebSocketCloseCodeTLSHandshakeFailure       URLSessionWebSocketCloseCode = 1015
 )
 
-func (e NSURLSessionWebSocketCloseCode) String() string {
+func (e URLSessionWebSocketCloseCode) String() string {
 	switch e {
-	case NSURLSessionWebSocketCloseCodeInvalid:
-		return "NSURLSessionWebSocketCloseCodeInvalid"
-	case NSURLSessionWebSocketCloseCodeNormalClosure:
-		return "NSURLSessionWebSocketCloseCodeNormalClosure"
-	case NSURLSessionWebSocketCloseCodeGoingAway:
-		return "NSURLSessionWebSocketCloseCodeGoingAway"
-	case NSURLSessionWebSocketCloseCodeProtocolError:
-		return "NSURLSessionWebSocketCloseCodeProtocolError"
-	case NSURLSessionWebSocketCloseCodeUnsupportedData:
-		return "NSURLSessionWebSocketCloseCodeUnsupportedData"
-	case NSURLSessionWebSocketCloseCodeNoStatusReceived:
-		return "NSURLSessionWebSocketCloseCodeNoStatusReceived"
-	case NSURLSessionWebSocketCloseCodeAbnormalClosure:
-		return "NSURLSessionWebSocketCloseCodeAbnormalClosure"
-	case NSURLSessionWebSocketCloseCodeInvalidFramePayloadData:
-		return "NSURLSessionWebSocketCloseCodeInvalidFramePayloadData"
-	case NSURLSessionWebSocketCloseCodePolicyViolation:
-		return "NSURLSessionWebSocketCloseCodePolicyViolation"
-	case NSURLSessionWebSocketCloseCodeMessageTooBig:
-		return "NSURLSessionWebSocketCloseCodeMessageTooBig"
-	case NSURLSessionWebSocketCloseCodeMandatoryExtensionMissing:
-		return "NSURLSessionWebSocketCloseCodeMandatoryExtensionMissing"
-	case NSURLSessionWebSocketCloseCodeInternalServerError:
-		return "NSURLSessionWebSocketCloseCodeInternalServerError"
-	case NSURLSessionWebSocketCloseCodeTLSHandshakeFailure:
-		return "NSURLSessionWebSocketCloseCodeTLSHandshakeFailure"
+	case URLSessionWebSocketCloseCodeInvalid:
+		return "URLSessionWebSocketCloseCodeInvalid"
+	case URLSessionWebSocketCloseCodeNormalClosure:
+		return "URLSessionWebSocketCloseCodeNormalClosure"
+	case URLSessionWebSocketCloseCodeGoingAway:
+		return "URLSessionWebSocketCloseCodeGoingAway"
+	case URLSessionWebSocketCloseCodeProtocolError:
+		return "URLSessionWebSocketCloseCodeProtocolError"
+	case URLSessionWebSocketCloseCodeUnsupportedData:
+		return "URLSessionWebSocketCloseCodeUnsupportedData"
+	case URLSessionWebSocketCloseCodeNoStatusReceived:
+		return "URLSessionWebSocketCloseCodeNoStatusReceived"
+	case URLSessionWebSocketCloseCodeAbnormalClosure:
+		return "URLSessionWebSocketCloseCodeAbnormalClosure"
+	case URLSessionWebSocketCloseCodeInvalidFramePayloadData:
+		return "URLSessionWebSocketCloseCodeInvalidFramePayloadData"
+	case URLSessionWebSocketCloseCodePolicyViolation:
+		return "URLSessionWebSocketCloseCodePolicyViolation"
+	case URLSessionWebSocketCloseCodeMessageTooBig:
+		return "URLSessionWebSocketCloseCodeMessageTooBig"
+	case URLSessionWebSocketCloseCodeMandatoryExtensionMissing:
+		return "URLSessionWebSocketCloseCodeMandatoryExtensionMissing"
+	case URLSessionWebSocketCloseCodeInternalServerError:
+		return "URLSessionWebSocketCloseCodeInternalServerError"
+	case URLSessionWebSocketCloseCodeTLSHandshakeFailure:
+		return "URLSessionWebSocketCloseCodeTLSHandshakeFailure"
 	default:
-		return fmt.Sprintf("NSURLSessionWebSocketCloseCode(%d)", int64(e))
+		return fmt.Sprintf("URLSessionWebSocketCloseCode(%d)", int64(e))
 	}
 }
 
 // An enumeration of the types of messages sent and received.
-type NSURLSessionWebSocketMessageType int64
+type URLSessionWebSocketMessageType int64
 
 const (
-	NSURLSessionWebSocketMessageTypeData   NSURLSessionWebSocketMessageType = 0
-	NSURLSessionWebSocketMessageTypeString NSURLSessionWebSocketMessageType = 1
+	URLSessionWebSocketMessageTypeData   URLSessionWebSocketMessageType = 0
+	URLSessionWebSocketMessageTypeString URLSessionWebSocketMessageType = 1
 )
 
-func (e NSURLSessionWebSocketMessageType) String() string {
+func (e URLSessionWebSocketMessageType) String() string {
 	switch e {
-	case NSURLSessionWebSocketMessageTypeData:
-		return "NSURLSessionWebSocketMessageTypeData"
-	case NSURLSessionWebSocketMessageTypeString:
-		return "NSURLSessionWebSocketMessageTypeString"
+	case URLSessionWebSocketMessageTypeData:
+		return "URLSessionWebSocketMessageTypeData"
+	case URLSessionWebSocketMessageTypeString:
+		return "URLSessionWebSocketMessageTypeString"
 	default:
-		return fmt.Sprintf("NSURLSessionWebSocketMessageType(%d)", int64(e))
+		return fmt.Sprintf("URLSessionWebSocketMessageType(%d)", int64(e))
 	}
 }
 
 // These constants describe how the user notification was activated.
 //
 // Deprecated: All NSUserNotifications API should be replaced with UserNotifications.frameworks API
-type NSUserNotificationActivationType int64
+type UserNotificationActivationType int64
 
 const (
-	NSUserNotificationActivationTypeNone                    NSUserNotificationActivationType = 0
-	NSUserNotificationActivationTypeContentsClicked         NSUserNotificationActivationType = 1
-	NSUserNotificationActivationTypeActionButtonClicked     NSUserNotificationActivationType = 2
-	NSUserNotificationActivationTypeReplied                 NSUserNotificationActivationType = 3
-	NSUserNotificationActivationTypeAdditionalActionClicked NSUserNotificationActivationType = 4
+	UserNotificationActivationTypeNone                    UserNotificationActivationType = 0
+	UserNotificationActivationTypeContentsClicked         UserNotificationActivationType = 1
+	UserNotificationActivationTypeActionButtonClicked     UserNotificationActivationType = 2
+	UserNotificationActivationTypeReplied                 UserNotificationActivationType = 3
+	UserNotificationActivationTypeAdditionalActionClicked UserNotificationActivationType = 4
 )
 
-func (e NSUserNotificationActivationType) String() string {
+func (e UserNotificationActivationType) String() string {
 	switch e {
-	case NSUserNotificationActivationTypeNone:
-		return "NSUserNotificationActivationTypeNone"
-	case NSUserNotificationActivationTypeContentsClicked:
-		return "NSUserNotificationActivationTypeContentsClicked"
-	case NSUserNotificationActivationTypeActionButtonClicked:
-		return "NSUserNotificationActivationTypeActionButtonClicked"
-	case NSUserNotificationActivationTypeReplied:
-		return "NSUserNotificationActivationTypeReplied"
-	case NSUserNotificationActivationTypeAdditionalActionClicked:
-		return "NSUserNotificationActivationTypeAdditionalActionClicked"
+	case UserNotificationActivationTypeNone:
+		return "UserNotificationActivationTypeNone"
+	case UserNotificationActivationTypeContentsClicked:
+		return "UserNotificationActivationTypeContentsClicked"
+	case UserNotificationActivationTypeActionButtonClicked:
+		return "UserNotificationActivationTypeActionButtonClicked"
+	case UserNotificationActivationTypeReplied:
+		return "UserNotificationActivationTypeReplied"
+	case UserNotificationActivationTypeAdditionalActionClicked:
+		return "UserNotificationActivationTypeAdditionalActionClicked"
 	default:
-		return fmt.Sprintf("NSUserNotificationActivationType(%d)", int64(e))
+		return fmt.Sprintf("UserNotificationActivationType(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type NSVolumeEnumerationOptions uint64
+type VolumeEnumerationOptions uint64
 
 const (
-	NSVolumeEnumerationSkipHiddenVolumes        NSVolumeEnumerationOptions = 2
-	NSVolumeEnumerationProduceFileReferenceURLs NSVolumeEnumerationOptions = 4
+	VolumeEnumerationSkipHiddenVolumes        VolumeEnumerationOptions = 2
+	VolumeEnumerationProduceFileReferenceURLs VolumeEnumerationOptions = 4
 )
 
-func (e NSVolumeEnumerationOptions) String() string {
+func (e VolumeEnumerationOptions) String() string {
 	var parts []string
-	if e&NSVolumeEnumerationSkipHiddenVolumes != 0 {
-		parts = append(parts, "NSVolumeEnumerationSkipHiddenVolumes")
+	if e&VolumeEnumerationSkipHiddenVolumes != 0 {
+		parts = append(parts, "VolumeEnumerationSkipHiddenVolumes")
 	}
-	if e&NSVolumeEnumerationProduceFileReferenceURLs != 0 {
-		parts = append(parts, "NSVolumeEnumerationProduceFileReferenceURLs")
+	if e&VolumeEnumerationProduceFileReferenceURLs != 0 {
+		parts = append(parts, "VolumeEnumerationProduceFileReferenceURLs")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -4230,301 +3842,301 @@ func (e NSVolumeEnumerationOptions) String() string {
 }
 
 // NSWhoseSpecifier uses these constants to specify sub-elements within the collection of objects being tested that pass the specifier’s test.
-type NSWhoseSubelementIdentifier uint64
+type WhoseSubelementIdentifier uint64
 
 const (
-	NSIndexSubelement  NSWhoseSubelementIdentifier = 0
-	NSEverySubelement  NSWhoseSubelementIdentifier = 1
-	NSMiddleSubelement NSWhoseSubelementIdentifier = 2
-	NSRandomSubelement NSWhoseSubelementIdentifier = 3
-	NSNoSubelement     NSWhoseSubelementIdentifier = 4
+	IndexSubelement  WhoseSubelementIdentifier = 0
+	EverySubelement  WhoseSubelementIdentifier = 1
+	MiddleSubelement WhoseSubelementIdentifier = 2
+	RandomSubelement WhoseSubelementIdentifier = 3
+	NoSubelement     WhoseSubelementIdentifier = 4
 )
 
-func (e NSWhoseSubelementIdentifier) String() string {
+func (e WhoseSubelementIdentifier) String() string {
 	switch e {
-	case NSIndexSubelement:
-		return "NSIndexSubelement"
-	case NSEverySubelement:
-		return "NSEverySubelement"
-	case NSMiddleSubelement:
-		return "NSMiddleSubelement"
-	case NSRandomSubelement:
-		return "NSRandomSubelement"
-	case NSNoSubelement:
-		return "NSNoSubelement"
+	case IndexSubelement:
+		return "IndexSubelement"
+	case EverySubelement:
+		return "EverySubelement"
+	case MiddleSubelement:
+		return "MiddleSubelement"
+	case RandomSubelement:
+		return "RandomSubelement"
+	case NoSubelement:
+		return "NoSubelement"
 	default:
-		return fmt.Sprintf("NSWhoseSubelementIdentifier(%d)", int64(e))
+		return fmt.Sprintf("WhoseSubelementIdentifier(%d)", int64(e))
 	}
 }
 
 // The type defined for the constants that specify the kind and subkind of DTD declaration represented by an NSXMLDTDNode object. You set the DTD-node kind using the doc:nsxmldtdnode/1806486-setdtdkind method.
-type NSXMLDTDNodeKind uint64
+type XMLDTDNodeKind uint64
 
 const (
-	NSXMLEntityGeneralKind               NSXMLDTDNodeKind = 1
-	NSXMLEntityParsedKind                NSXMLDTDNodeKind = 2
-	NSXMLEntityUnparsedKind              NSXMLDTDNodeKind = 3
-	NSXMLEntityParameterKind             NSXMLDTDNodeKind = 4
-	NSXMLEntityPredefined                NSXMLDTDNodeKind = 5
-	NSXMLAttributeCDATAKind              NSXMLDTDNodeKind = 6
-	NSXMLAttributeIDKind                 NSXMLDTDNodeKind = 7
-	NSXMLAttributeIDRefKind              NSXMLDTDNodeKind = 8
-	NSXMLAttributeIDRefsKind             NSXMLDTDNodeKind = 9
-	NSXMLAttributeEntityKind             NSXMLDTDNodeKind = 10
-	NSXMLAttributeEntitiesKind           NSXMLDTDNodeKind = 11
-	NSXMLAttributeNMTokenKind            NSXMLDTDNodeKind = 12
-	NSXMLAttributeNMTokensKind           NSXMLDTDNodeKind = 13
-	NSXMLAttributeEnumerationKind        NSXMLDTDNodeKind = 14
-	NSXMLAttributeNotationKind           NSXMLDTDNodeKind = 15
-	NSXMLElementDeclarationUndefinedKind NSXMLDTDNodeKind = 16
-	NSXMLElementDeclarationEmptyKind     NSXMLDTDNodeKind = 17
-	NSXMLElementDeclarationAnyKind       NSXMLDTDNodeKind = 18
-	NSXMLElementDeclarationMixedKind     NSXMLDTDNodeKind = 19
-	NSXMLElementDeclarationElementKind   NSXMLDTDNodeKind = 20
+	XMLEntityGeneralKind               XMLDTDNodeKind = 1
+	XMLEntityParsedKind                XMLDTDNodeKind = 2
+	XMLEntityUnparsedKind              XMLDTDNodeKind = 3
+	XMLEntityParameterKind             XMLDTDNodeKind = 4
+	XMLEntityPredefined                XMLDTDNodeKind = 5
+	XMLAttributeCDATAKind              XMLDTDNodeKind = 6
+	XMLAttributeIDKind                 XMLDTDNodeKind = 7
+	XMLAttributeIDRefKind              XMLDTDNodeKind = 8
+	XMLAttributeIDRefsKind             XMLDTDNodeKind = 9
+	XMLAttributeEntityKind             XMLDTDNodeKind = 10
+	XMLAttributeEntitiesKind           XMLDTDNodeKind = 11
+	XMLAttributeNMTokenKind            XMLDTDNodeKind = 12
+	XMLAttributeNMTokensKind           XMLDTDNodeKind = 13
+	XMLAttributeEnumerationKind        XMLDTDNodeKind = 14
+	XMLAttributeNotationKind           XMLDTDNodeKind = 15
+	XMLElementDeclarationUndefinedKind XMLDTDNodeKind = 16
+	XMLElementDeclarationEmptyKind     XMLDTDNodeKind = 17
+	XMLElementDeclarationAnyKind       XMLDTDNodeKind = 18
+	XMLElementDeclarationMixedKind     XMLDTDNodeKind = 19
+	XMLElementDeclarationElementKind   XMLDTDNodeKind = 20
 )
 
-func (e NSXMLDTDNodeKind) String() string {
+func (e XMLDTDNodeKind) String() string {
 	switch e {
-	case NSXMLEntityGeneralKind:
-		return "NSXMLEntityGeneralKind"
-	case NSXMLEntityParsedKind:
-		return "NSXMLEntityParsedKind"
-	case NSXMLEntityUnparsedKind:
-		return "NSXMLEntityUnparsedKind"
-	case NSXMLEntityParameterKind:
-		return "NSXMLEntityParameterKind"
-	case NSXMLEntityPredefined:
-		return "NSXMLEntityPredefined"
-	case NSXMLAttributeCDATAKind:
-		return "NSXMLAttributeCDATAKind"
-	case NSXMLAttributeIDKind:
-		return "NSXMLAttributeIDKind"
-	case NSXMLAttributeIDRefKind:
-		return "NSXMLAttributeIDRefKind"
-	case NSXMLAttributeIDRefsKind:
-		return "NSXMLAttributeIDRefsKind"
-	case NSXMLAttributeEntityKind:
-		return "NSXMLAttributeEntityKind"
-	case NSXMLAttributeEntitiesKind:
-		return "NSXMLAttributeEntitiesKind"
-	case NSXMLAttributeNMTokenKind:
-		return "NSXMLAttributeNMTokenKind"
-	case NSXMLAttributeNMTokensKind:
-		return "NSXMLAttributeNMTokensKind"
-	case NSXMLAttributeEnumerationKind:
-		return "NSXMLAttributeEnumerationKind"
-	case NSXMLAttributeNotationKind:
-		return "NSXMLAttributeNotationKind"
-	case NSXMLElementDeclarationUndefinedKind:
-		return "NSXMLElementDeclarationUndefinedKind"
-	case NSXMLElementDeclarationEmptyKind:
-		return "NSXMLElementDeclarationEmptyKind"
-	case NSXMLElementDeclarationAnyKind:
-		return "NSXMLElementDeclarationAnyKind"
-	case NSXMLElementDeclarationMixedKind:
-		return "NSXMLElementDeclarationMixedKind"
-	case NSXMLElementDeclarationElementKind:
-		return "NSXMLElementDeclarationElementKind"
+	case XMLEntityGeneralKind:
+		return "XMLEntityGeneralKind"
+	case XMLEntityParsedKind:
+		return "XMLEntityParsedKind"
+	case XMLEntityUnparsedKind:
+		return "XMLEntityUnparsedKind"
+	case XMLEntityParameterKind:
+		return "XMLEntityParameterKind"
+	case XMLEntityPredefined:
+		return "XMLEntityPredefined"
+	case XMLAttributeCDATAKind:
+		return "XMLAttributeCDATAKind"
+	case XMLAttributeIDKind:
+		return "XMLAttributeIDKind"
+	case XMLAttributeIDRefKind:
+		return "XMLAttributeIDRefKind"
+	case XMLAttributeIDRefsKind:
+		return "XMLAttributeIDRefsKind"
+	case XMLAttributeEntityKind:
+		return "XMLAttributeEntityKind"
+	case XMLAttributeEntitiesKind:
+		return "XMLAttributeEntitiesKind"
+	case XMLAttributeNMTokenKind:
+		return "XMLAttributeNMTokenKind"
+	case XMLAttributeNMTokensKind:
+		return "XMLAttributeNMTokensKind"
+	case XMLAttributeEnumerationKind:
+		return "XMLAttributeEnumerationKind"
+	case XMLAttributeNotationKind:
+		return "XMLAttributeNotationKind"
+	case XMLElementDeclarationUndefinedKind:
+		return "XMLElementDeclarationUndefinedKind"
+	case XMLElementDeclarationEmptyKind:
+		return "XMLElementDeclarationEmptyKind"
+	case XMLElementDeclarationAnyKind:
+		return "XMLElementDeclarationAnyKind"
+	case XMLElementDeclarationMixedKind:
+		return "XMLElementDeclarationMixedKind"
+	case XMLElementDeclarationElementKind:
+		return "XMLElementDeclarationElementKind"
 	default:
-		return fmt.Sprintf("NSXMLDTDNodeKind(%d)", int64(e))
+		return fmt.Sprintf("XMLDTDNodeKind(%d)", int64(e))
 	}
 }
 
 // Type used to define the kind of document content.
-type NSXMLDocumentContentKind uint64
+type XMLDocumentContentKind uint64
 
 const (
-	NSXMLDocumentXMLKind   NSXMLDocumentContentKind = 0
-	NSXMLDocumentXHTMLKind NSXMLDocumentContentKind = 1
-	NSXMLDocumentHTMLKind  NSXMLDocumentContentKind = 2
-	NSXMLDocumentTextKind  NSXMLDocumentContentKind = 3
+	XMLDocumentXMLKind   XMLDocumentContentKind = 0
+	XMLDocumentXHTMLKind XMLDocumentContentKind = 1
+	XMLDocumentHTMLKind  XMLDocumentContentKind = 2
+	XMLDocumentTextKind  XMLDocumentContentKind = 3
 )
 
-func (e NSXMLDocumentContentKind) String() string {
+func (e XMLDocumentContentKind) String() string {
 	switch e {
-	case NSXMLDocumentXMLKind:
-		return "NSXMLDocumentXMLKind"
-	case NSXMLDocumentXHTMLKind:
-		return "NSXMLDocumentXHTMLKind"
-	case NSXMLDocumentHTMLKind:
-		return "NSXMLDocumentHTMLKind"
-	case NSXMLDocumentTextKind:
-		return "NSXMLDocumentTextKind"
+	case XMLDocumentXMLKind:
+		return "XMLDocumentXMLKind"
+	case XMLDocumentXHTMLKind:
+		return "XMLDocumentXHTMLKind"
+	case XMLDocumentHTMLKind:
+		return "XMLDocumentHTMLKind"
+	case XMLDocumentTextKind:
+		return "XMLDocumentTextKind"
 	default:
-		return fmt.Sprintf("NSXMLDocumentContentKind(%d)", int64(e))
+		return fmt.Sprintf("XMLDocumentContentKind(%d)", int64(e))
 	}
 }
 
 // NSXMLNode declares the following constants of type NSXMLNodeKind for specifying a node’s kind in the initializer methods initWithKind: and initWithKind:options::
-type NSXMLNodeKind uint64
+type XMLNodeKind uint64
 
 const (
-	NSXMLInvalidKind               NSXMLNodeKind = 0
-	NSXMLDocumentKind              NSXMLNodeKind = 1
-	NSXMLElementKind               NSXMLNodeKind = 2
-	NSXMLAttributeKind             NSXMLNodeKind = 3
-	NSXMLNamespaceKind             NSXMLNodeKind = 4
-	NSXMLProcessingInstructionKind NSXMLNodeKind = 5
-	NSXMLCommentKind               NSXMLNodeKind = 6
-	NSXMLTextKind                  NSXMLNodeKind = 7
-	NSXMLDTDKind                   NSXMLNodeKind = 8
-	NSXMLEntityDeclarationKind     NSXMLNodeKind = 9
-	NSXMLAttributeDeclarationKind  NSXMLNodeKind = 10
-	NSXMLElementDeclarationKind    NSXMLNodeKind = 11
-	NSXMLNotationDeclarationKind   NSXMLNodeKind = 12
+	XMLInvalidKind               XMLNodeKind = 0
+	XMLDocumentKind              XMLNodeKind = 1
+	XMLElementKind               XMLNodeKind = 2
+	XMLAttributeKind             XMLNodeKind = 3
+	XMLNamespaceKind             XMLNodeKind = 4
+	XMLProcessingInstructionKind XMLNodeKind = 5
+	XMLCommentKind               XMLNodeKind = 6
+	XMLTextKind                  XMLNodeKind = 7
+	XMLDTDKind                   XMLNodeKind = 8
+	XMLEntityDeclarationKind     XMLNodeKind = 9
+	XMLAttributeDeclarationKind  XMLNodeKind = 10
+	XMLElementDeclarationKind    XMLNodeKind = 11
+	XMLNotationDeclarationKind   XMLNodeKind = 12
 )
 
-func (e NSXMLNodeKind) String() string {
+func (e XMLNodeKind) String() string {
 	switch e {
-	case NSXMLInvalidKind:
-		return "NSXMLInvalidKind"
-	case NSXMLDocumentKind:
-		return "NSXMLDocumentKind"
-	case NSXMLElementKind:
-		return "NSXMLElementKind"
-	case NSXMLAttributeKind:
-		return "NSXMLAttributeKind"
-	case NSXMLNamespaceKind:
-		return "NSXMLNamespaceKind"
-	case NSXMLProcessingInstructionKind:
-		return "NSXMLProcessingInstructionKind"
-	case NSXMLCommentKind:
-		return "NSXMLCommentKind"
-	case NSXMLTextKind:
-		return "NSXMLTextKind"
-	case NSXMLDTDKind:
-		return "NSXMLDTDKind"
-	case NSXMLEntityDeclarationKind:
-		return "NSXMLEntityDeclarationKind"
-	case NSXMLAttributeDeclarationKind:
-		return "NSXMLAttributeDeclarationKind"
-	case NSXMLElementDeclarationKind:
-		return "NSXMLElementDeclarationKind"
-	case NSXMLNotationDeclarationKind:
-		return "NSXMLNotationDeclarationKind"
+	case XMLInvalidKind:
+		return "XMLInvalidKind"
+	case XMLDocumentKind:
+		return "XMLDocumentKind"
+	case XMLElementKind:
+		return "XMLElementKind"
+	case XMLAttributeKind:
+		return "XMLAttributeKind"
+	case XMLNamespaceKind:
+		return "XMLNamespaceKind"
+	case XMLProcessingInstructionKind:
+		return "XMLProcessingInstructionKind"
+	case XMLCommentKind:
+		return "XMLCommentKind"
+	case XMLTextKind:
+		return "XMLTextKind"
+	case XMLDTDKind:
+		return "XMLDTDKind"
+	case XMLEntityDeclarationKind:
+		return "XMLEntityDeclarationKind"
+	case XMLAttributeDeclarationKind:
+		return "XMLAttributeDeclarationKind"
+	case XMLElementDeclarationKind:
+		return "XMLElementDeclarationKind"
+	case XMLNotationDeclarationKind:
+		return "XMLNotationDeclarationKind"
 	default:
-		return fmt.Sprintf("NSXMLNodeKind(%d)", int64(e))
+		return fmt.Sprintf("XMLNodeKind(%d)", int64(e))
 	}
 }
 
 // These constants are input and output options for all NSXMLNode objects (unless otherwise indicated), including NSXMLDocument objects. You can specify these options in the NSXMLNode methods initWithKind:options: and XMLStringWithOptions:.
 // Bitmask — values may be combined with |.
-type NSXMLNodeOptions uint64
+type XMLNodeOptions uint64
 
 const (
 	// No options are requested for this input or output action.
-	NSXMLNodeOptionsNone                        NSXMLNodeOptions = 0
-	NSXMLNodeIsCDATA                            NSXMLNodeOptions = 1
-	NSXMLNodeExpandEmptyElement                 NSXMLNodeOptions = 2
-	NSXMLNodeCompactEmptyElement                NSXMLNodeOptions = 4
-	NSXMLNodeUseSingleQuotes                    NSXMLNodeOptions = 8
-	NSXMLNodeUseDoubleQuotes                    NSXMLNodeOptions = 16
-	NSXMLNodeNeverEscapeContents                NSXMLNodeOptions = 32
-	NSXMLDocumentTidyHTML                       NSXMLNodeOptions = 512
-	NSXMLDocumentTidyXML                        NSXMLNodeOptions = 1024
-	NSXMLDocumentValidate                       NSXMLNodeOptions = 8192
-	NSXMLNodeLoadExternalEntitiesAlways         NSXMLNodeOptions = 16384
-	NSXMLNodeLoadExternalEntitiesSameOriginOnly NSXMLNodeOptions = 32768
-	NSXMLNodeLoadExternalEntitiesNever          NSXMLNodeOptions = 524288
-	NSXMLDocumentXInclude                       NSXMLNodeOptions = 65536
-	NSXMLNodePrettyPrint                        NSXMLNodeOptions = 131072
-	NSXMLDocumentIncludeContentTypeDeclaration  NSXMLNodeOptions = 262144
-	NSXMLNodePreserveNamespaceOrder             NSXMLNodeOptions = 1048576
-	NSXMLNodePreserveAttributeOrder             NSXMLNodeOptions = 2097152
-	NSXMLNodePreserveEntities                   NSXMLNodeOptions = 4194304
-	NSXMLNodePreservePrefixes                   NSXMLNodeOptions = 8388608
-	NSXMLNodePreserveCDATA                      NSXMLNodeOptions = 16777216
-	NSXMLNodePreserveWhitespace                 NSXMLNodeOptions = 33554432
-	NSXMLNodePreserveDTD                        NSXMLNodeOptions = 67108864
-	NSXMLNodePreserveCharacterReferences        NSXMLNodeOptions = 134217728
-	NSXMLNodePromoteSignificantWhitespace       NSXMLNodeOptions = 268435456
-	NSXMLNodePreserveEmptyElements              NSXMLNodeOptions = 6
-	NSXMLNodePreserveQuotes                     NSXMLNodeOptions = 24
-	NSXMLNodePreserveAll                        NSXMLNodeOptions = 4293918750
+	XMLNodeOptionsNone                        XMLNodeOptions = 0
+	XMLNodeIsCDATA                            XMLNodeOptions = 1
+	XMLNodeExpandEmptyElement                 XMLNodeOptions = 2
+	XMLNodeCompactEmptyElement                XMLNodeOptions = 4
+	XMLNodeUseSingleQuotes                    XMLNodeOptions = 8
+	XMLNodeUseDoubleQuotes                    XMLNodeOptions = 16
+	XMLNodeNeverEscapeContents                XMLNodeOptions = 32
+	XMLDocumentTidyHTML                       XMLNodeOptions = 512
+	XMLDocumentTidyXML                        XMLNodeOptions = 1024
+	XMLDocumentValidate                       XMLNodeOptions = 8192
+	XMLNodeLoadExternalEntitiesAlways         XMLNodeOptions = 16384
+	XMLNodeLoadExternalEntitiesSameOriginOnly XMLNodeOptions = 32768
+	XMLNodeLoadExternalEntitiesNever          XMLNodeOptions = 524288
+	XMLDocumentXInclude                       XMLNodeOptions = 65536
+	XMLNodePrettyPrint                        XMLNodeOptions = 131072
+	XMLDocumentIncludeContentTypeDeclaration  XMLNodeOptions = 262144
+	XMLNodePreserveNamespaceOrder             XMLNodeOptions = 1048576
+	XMLNodePreserveAttributeOrder             XMLNodeOptions = 2097152
+	XMLNodePreserveEntities                   XMLNodeOptions = 4194304
+	XMLNodePreservePrefixes                   XMLNodeOptions = 8388608
+	XMLNodePreserveCDATA                      XMLNodeOptions = 16777216
+	XMLNodePreserveWhitespace                 XMLNodeOptions = 33554432
+	XMLNodePreserveDTD                        XMLNodeOptions = 67108864
+	XMLNodePreserveCharacterReferences        XMLNodeOptions = 134217728
+	XMLNodePromoteSignificantWhitespace       XMLNodeOptions = 268435456
+	XMLNodePreserveEmptyElements              XMLNodeOptions = 6
+	XMLNodePreserveQuotes                     XMLNodeOptions = 24
+	XMLNodePreserveAll                        XMLNodeOptions = 4293918750
 )
 
-func (e NSXMLNodeOptions) String() string {
+func (e XMLNodeOptions) String() string {
 	var parts []string
-	if e&NSXMLNodeIsCDATA != 0 {
-		parts = append(parts, "NSXMLNodeIsCDATA")
+	if e&XMLNodeIsCDATA != 0 {
+		parts = append(parts, "XMLNodeIsCDATA")
 	}
-	if e&NSXMLNodeExpandEmptyElement != 0 {
-		parts = append(parts, "NSXMLNodeExpandEmptyElement")
+	if e&XMLNodeExpandEmptyElement != 0 {
+		parts = append(parts, "XMLNodeExpandEmptyElement")
 	}
-	if e&NSXMLNodeCompactEmptyElement != 0 {
-		parts = append(parts, "NSXMLNodeCompactEmptyElement")
+	if e&XMLNodeCompactEmptyElement != 0 {
+		parts = append(parts, "XMLNodeCompactEmptyElement")
 	}
-	if e&NSXMLNodeUseSingleQuotes != 0 {
-		parts = append(parts, "NSXMLNodeUseSingleQuotes")
+	if e&XMLNodeUseSingleQuotes != 0 {
+		parts = append(parts, "XMLNodeUseSingleQuotes")
 	}
-	if e&NSXMLNodeUseDoubleQuotes != 0 {
-		parts = append(parts, "NSXMLNodeUseDoubleQuotes")
+	if e&XMLNodeUseDoubleQuotes != 0 {
+		parts = append(parts, "XMLNodeUseDoubleQuotes")
 	}
-	if e&NSXMLNodeNeverEscapeContents != 0 {
-		parts = append(parts, "NSXMLNodeNeverEscapeContents")
+	if e&XMLNodeNeverEscapeContents != 0 {
+		parts = append(parts, "XMLNodeNeverEscapeContents")
 	}
-	if e&NSXMLDocumentTidyHTML != 0 {
-		parts = append(parts, "NSXMLDocumentTidyHTML")
+	if e&XMLDocumentTidyHTML != 0 {
+		parts = append(parts, "XMLDocumentTidyHTML")
 	}
-	if e&NSXMLDocumentTidyXML != 0 {
-		parts = append(parts, "NSXMLDocumentTidyXML")
+	if e&XMLDocumentTidyXML != 0 {
+		parts = append(parts, "XMLDocumentTidyXML")
 	}
-	if e&NSXMLDocumentValidate != 0 {
-		parts = append(parts, "NSXMLDocumentValidate")
+	if e&XMLDocumentValidate != 0 {
+		parts = append(parts, "XMLDocumentValidate")
 	}
-	if e&NSXMLNodeLoadExternalEntitiesAlways != 0 {
-		parts = append(parts, "NSXMLNodeLoadExternalEntitiesAlways")
+	if e&XMLNodeLoadExternalEntitiesAlways != 0 {
+		parts = append(parts, "XMLNodeLoadExternalEntitiesAlways")
 	}
-	if e&NSXMLNodeLoadExternalEntitiesSameOriginOnly != 0 {
-		parts = append(parts, "NSXMLNodeLoadExternalEntitiesSameOriginOnly")
+	if e&XMLNodeLoadExternalEntitiesSameOriginOnly != 0 {
+		parts = append(parts, "XMLNodeLoadExternalEntitiesSameOriginOnly")
 	}
-	if e&NSXMLNodeLoadExternalEntitiesNever != 0 {
-		parts = append(parts, "NSXMLNodeLoadExternalEntitiesNever")
+	if e&XMLNodeLoadExternalEntitiesNever != 0 {
+		parts = append(parts, "XMLNodeLoadExternalEntitiesNever")
 	}
-	if e&NSXMLDocumentXInclude != 0 {
-		parts = append(parts, "NSXMLDocumentXInclude")
+	if e&XMLDocumentXInclude != 0 {
+		parts = append(parts, "XMLDocumentXInclude")
 	}
-	if e&NSXMLNodePrettyPrint != 0 {
-		parts = append(parts, "NSXMLNodePrettyPrint")
+	if e&XMLNodePrettyPrint != 0 {
+		parts = append(parts, "XMLNodePrettyPrint")
 	}
-	if e&NSXMLDocumentIncludeContentTypeDeclaration != 0 {
-		parts = append(parts, "NSXMLDocumentIncludeContentTypeDeclaration")
+	if e&XMLDocumentIncludeContentTypeDeclaration != 0 {
+		parts = append(parts, "XMLDocumentIncludeContentTypeDeclaration")
 	}
-	if e&NSXMLNodePreserveNamespaceOrder != 0 {
-		parts = append(parts, "NSXMLNodePreserveNamespaceOrder")
+	if e&XMLNodePreserveNamespaceOrder != 0 {
+		parts = append(parts, "XMLNodePreserveNamespaceOrder")
 	}
-	if e&NSXMLNodePreserveAttributeOrder != 0 {
-		parts = append(parts, "NSXMLNodePreserveAttributeOrder")
+	if e&XMLNodePreserveAttributeOrder != 0 {
+		parts = append(parts, "XMLNodePreserveAttributeOrder")
 	}
-	if e&NSXMLNodePreserveEntities != 0 {
-		parts = append(parts, "NSXMLNodePreserveEntities")
+	if e&XMLNodePreserveEntities != 0 {
+		parts = append(parts, "XMLNodePreserveEntities")
 	}
-	if e&NSXMLNodePreservePrefixes != 0 {
-		parts = append(parts, "NSXMLNodePreservePrefixes")
+	if e&XMLNodePreservePrefixes != 0 {
+		parts = append(parts, "XMLNodePreservePrefixes")
 	}
-	if e&NSXMLNodePreserveCDATA != 0 {
-		parts = append(parts, "NSXMLNodePreserveCDATA")
+	if e&XMLNodePreserveCDATA != 0 {
+		parts = append(parts, "XMLNodePreserveCDATA")
 	}
-	if e&NSXMLNodePreserveWhitespace != 0 {
-		parts = append(parts, "NSXMLNodePreserveWhitespace")
+	if e&XMLNodePreserveWhitespace != 0 {
+		parts = append(parts, "XMLNodePreserveWhitespace")
 	}
-	if e&NSXMLNodePreserveDTD != 0 {
-		parts = append(parts, "NSXMLNodePreserveDTD")
+	if e&XMLNodePreserveDTD != 0 {
+		parts = append(parts, "XMLNodePreserveDTD")
 	}
-	if e&NSXMLNodePreserveCharacterReferences != 0 {
-		parts = append(parts, "NSXMLNodePreserveCharacterReferences")
+	if e&XMLNodePreserveCharacterReferences != 0 {
+		parts = append(parts, "XMLNodePreserveCharacterReferences")
 	}
-	if e&NSXMLNodePromoteSignificantWhitespace != 0 {
-		parts = append(parts, "NSXMLNodePromoteSignificantWhitespace")
+	if e&XMLNodePromoteSignificantWhitespace != 0 {
+		parts = append(parts, "XMLNodePromoteSignificantWhitespace")
 	}
-	if e&NSXMLNodePreserveEmptyElements != 0 {
-		parts = append(parts, "NSXMLNodePreserveEmptyElements")
+	if e&XMLNodePreserveEmptyElements != 0 {
+		parts = append(parts, "XMLNodePreserveEmptyElements")
 	}
-	if e&NSXMLNodePreserveQuotes != 0 {
-		parts = append(parts, "NSXMLNodePreserveQuotes")
+	if e&XMLNodePreserveQuotes != 0 {
+		parts = append(parts, "XMLNodePreserveQuotes")
 	}
-	if e&NSXMLNodePreserveAll != 0 {
-		parts = append(parts, "NSXMLNodePreserveAll")
+	if e&XMLNodePreserveAll != 0 {
+		parts = append(parts, "XMLNodePreserveAll")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -4533,42 +4145,42 @@ func (e NSXMLNodeOptions) String() string {
 }
 
 // Defines the external entity resolving policy used by an NSXMLParser instance.
-type NSXMLParserExternalEntityResolvingPolicy uint64
+type XMLParserExternalEntityResolvingPolicy uint64
 
 const (
-	NSXMLParserResolveExternalEntitiesNever          NSXMLParserExternalEntityResolvingPolicy = 0
-	NSXMLParserResolveExternalEntitiesNoNetwork      NSXMLParserExternalEntityResolvingPolicy = 1
-	NSXMLParserResolveExternalEntitiesSameOriginOnly NSXMLParserExternalEntityResolvingPolicy = 2
-	NSXMLParserResolveExternalEntitiesAlways         NSXMLParserExternalEntityResolvingPolicy = 3
+	XMLParserResolveExternalEntitiesNever          XMLParserExternalEntityResolvingPolicy = 0
+	XMLParserResolveExternalEntitiesNoNetwork      XMLParserExternalEntityResolvingPolicy = 1
+	XMLParserResolveExternalEntitiesSameOriginOnly XMLParserExternalEntityResolvingPolicy = 2
+	XMLParserResolveExternalEntitiesAlways         XMLParserExternalEntityResolvingPolicy = 3
 )
 
-func (e NSXMLParserExternalEntityResolvingPolicy) String() string {
+func (e XMLParserExternalEntityResolvingPolicy) String() string {
 	switch e {
-	case NSXMLParserResolveExternalEntitiesNever:
-		return "NSXMLParserResolveExternalEntitiesNever"
-	case NSXMLParserResolveExternalEntitiesNoNetwork:
-		return "NSXMLParserResolveExternalEntitiesNoNetwork"
-	case NSXMLParserResolveExternalEntitiesSameOriginOnly:
-		return "NSXMLParserResolveExternalEntitiesSameOriginOnly"
-	case NSXMLParserResolveExternalEntitiesAlways:
-		return "NSXMLParserResolveExternalEntitiesAlways"
+	case XMLParserResolveExternalEntitiesNever:
+		return "XMLParserResolveExternalEntitiesNever"
+	case XMLParserResolveExternalEntitiesNoNetwork:
+		return "XMLParserResolveExternalEntitiesNoNetwork"
+	case XMLParserResolveExternalEntitiesSameOriginOnly:
+		return "XMLParserResolveExternalEntitiesSameOriginOnly"
+	case XMLParserResolveExternalEntitiesAlways:
+		return "XMLParserResolveExternalEntitiesAlways"
 	default:
-		return fmt.Sprintf("NSXMLParserExternalEntityResolvingPolicy(%d)", int64(e))
+		return fmt.Sprintf("XMLParserExternalEntityResolvingPolicy(%d)", int64(e))
 	}
 }
 
 // Options that you can pass to a connection.
 // Bitmask — values may be combined with |.
-type NSXPCConnectionOptions uint64
+type XPCConnectionOptions uint64
 
 const (
-	NSXPCConnectionPrivileged NSXPCConnectionOptions = 4096
+	XPCConnectionPrivileged XPCConnectionOptions = 4096
 )
 
-func (e NSXPCConnectionOptions) String() string {
+func (e XPCConnectionOptions) String() string {
 	var parts []string
-	if e&NSXPCConnectionPrivileged != 0 {
-		parts = append(parts, "NSXPCConnectionPrivileged")
+	if e&XPCConnectionPrivileged != 0 {
+		parts = append(parts, "XPCConnectionPrivileged")
 	}
 	if len(parts) == 0 {
 		return "0"

@@ -5,147 +5,162 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams wraps [raw.MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams] with a fluent Go API.
+// MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams is an idiomatic wrapper over the Objective-C class MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams.
 type MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams struct {
-	inner *raw.MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams].
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Unwrap() *raw.MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsFromID adopts an existing object pointer as a MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams (nil for 0).
+// MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsFromID adopts an existing Objective-C object as a MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsFromID(id objc.ID) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams{inner: raw.MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsFromID(id)}
+	x := &MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams creates a new [MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams].
+// mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsAdopt(id objc.ID) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams creates a new MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams.
 func NewMTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams() *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams")), objc.RegisterName("new"))
-	return &MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams{inner: raw.MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams")), objc.RegisterName("new"))
+	return mTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsAdopt(_id)
 }
 
-// WithSsid sets the ssid property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithSsid(ssid *foundation.NSData) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
-	x.inner.SetSsid(ssid)
+// WithSsid sets ssid and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithSsid(ssid obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSsid:"), objref.IDOf(ssid))
 	return x
 }
 
-// WithCredentials sets the credentials property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithCredentials(credentials *foundation.NSData) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
-	x.inner.SetCredentials(credentials)
+// WithCredentials sets credentials and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithCredentials(credentials obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentials:"), objref.IDOf(credentials))
 	return x
 }
 
-// WithBreadcrumb sets the breadcrumb property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithBreadcrumb(breadcrumb *foundation.NSNumber) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
-	x.inner.SetBreadcrumb(breadcrumb)
+// WithBreadcrumb sets breadcrumb and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithBreadcrumb(breadcrumb obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// Ssid calls the underlying Ssid.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Ssid() *foundation.NSData {
-	return x.inner.Ssid()
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Ssid() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ssid"))
+	return obj.Wrap(_r)
 }
 
-// SetSsid calls the underlying SetSsid.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetSsid(ssid *foundation.NSData) {
-	x.inner.SetSsid(ssid)
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetSsid(ssid obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSsid:"), objref.IDOf(ssid))
 }
 
-// Credentials calls the underlying Credentials.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Credentials() *foundation.NSData {
-	return x.inner.Credentials()
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Credentials() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentials"))
+	return obj.Wrap(_r)
 }
 
-// SetCredentials calls the underlying SetCredentials.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetCredentials(credentials *foundation.NSData) {
-	x.inner.SetCredentials(credentials)
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetCredentials(credentials obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredentials:"), objref.IDOf(credentials))
 }
 
-// Breadcrumb calls the underlying Breadcrumb.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Breadcrumb() *foundation.NSNumber {
-	return x.inner.Breadcrumb()
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) Breadcrumb() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("breadcrumb"))
+	return obj.Wrap(_r)
 }
 
-// SetBreadcrumb calls the underlying SetBreadcrumb.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetBreadcrumb(breadcrumb *foundation.NSNumber) {
-	x.inner.SetBreadcrumb(breadcrumb)
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetBreadcrumb(breadcrumb obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsable is the interface implemented by [MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams], for mocking and DI.
 type MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsable interface {
-	Unwrap() *raw.MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
-	WithSsid(ssid *foundation.NSData) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
-	WithCredentials(credentials *foundation.NSData) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
-	WithBreadcrumb(breadcrumb *foundation.NSNumber) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
-	Ssid() *foundation.NSData
-	SetSsid(ssid *foundation.NSData)
-	Credentials() *foundation.NSData
-	SetCredentials(credentials *foundation.NSData)
-	Breadcrumb() *foundation.NSNumber
-	SetBreadcrumb(breadcrumb *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithSsid(ssid obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
+	WithCredentials(credentials obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
+	WithBreadcrumb(breadcrumb obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams
+	Ssid() obj.Object
+	SetSsid(ssid obj.Object)
+	Credentials() obj.Object
+	SetCredentials(credentials obj.Object)
+	Breadcrumb() obj.Object
+	SetBreadcrumb(breadcrumb obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParamsable = (*MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams)(nil)

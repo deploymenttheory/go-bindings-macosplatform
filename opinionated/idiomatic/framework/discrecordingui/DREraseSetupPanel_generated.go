@@ -5,60 +5,81 @@
 package discrecordingui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecordingui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// @class			DREraseSetupPanel @abstract		Manages a panel that allows users to specify the parameters of an erase. @discussion		This class supports choosing the device to use and what sort of erase to perform. When the panel is closed by the user choosing to erase the media in the device, the device is exclusively held by the application for its own use to prevent possible bad or corrupt media from causing problem for the rest of the system. This means that if the erase object obtained from the panel is not used to do an erase, the device will remain unavailable to other applications until the exclusive access is released.
+// Manages a panel that allows users to specify the parameters of an erase. This class supports choosing the device to use and what sort of erase to perform. When the panel is closed by the user choosing to erase the media in the device, the device is exclusively held by the application for its own use to prevent possible bad or corrupt media from causing problem for the rest of the system. This means that if the erase object obtained from the panel is not used to do an erase, the device will remain unavailable to other applications until the exclusive access is released.
 //
-// EraseSetupPanel wraps [raw.DREraseSetupPanel] with a fluent Go API.
+// EraseSetupPanel is an idiomatic wrapper over the Objective-C class DREraseSetupPanel.
 type EraseSetupPanel struct {
-	inner *raw.DREraseSetupPanel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DREraseSetupPanel].
-func (x *EraseSetupPanel) Unwrap() *raw.DREraseSetupPanel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EraseSetupPanel) ID() objc.ID { return x.inner.Ptr() }
-
-// EraseSetupPanelFromID adopts an existing object pointer as a EraseSetupPanel (nil for 0).
+// EraseSetupPanelFromID adopts an existing Objective-C object as a EraseSetupPanel
+// (nil for 0), retaining it and registering a release finalizer.
 func EraseSetupPanelFromID(id objc.ID) *EraseSetupPanel {
 	if id == 0 {
 		return nil
 	}
-	return &EraseSetupPanel{inner: raw.DREraseSetupPanelFromID(id)}
+	x := &EraseSetupPanel{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEraseSetupPanel creates a new [EraseSetupPanel].
+// eraseSetupPanelAdopt wraps an Objective-C object that this code just created as a
+// EraseSetupPanel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func eraseSetupPanelAdopt(id objc.ID) *EraseSetupPanel {
+	if id == 0 {
+		return nil
+	}
+	x := &EraseSetupPanel{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EraseSetupPanel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EraseSetupPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EraseSetupPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEraseSetupPanel creates a new EraseSetupPanel.
 func NewEraseSetupPanel() *EraseSetupPanel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DREraseSetupPanel")), objc.RegisterName("new"))
-	return &EraseSetupPanel{inner: raw.DREraseSetupPanelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DREraseSetupPanel")), objc.RegisterName("new"))
+	return eraseSetupPanelAdopt(_id)
 }
 
-// @method 	eraseObject @abstract	Creates and returns a new DRErase object that's configured to erase the disc in the currently selected device. @discussion	The new DRErase object is configured based on the settings in the setup panel when the user clicks the OK button. Do not invoke this method within a modal session (@link //apple_ref/occ/instm/DRSetupPanel/runSetupPanel runSetupPanel @/link or @link //apple_ref/occ/instm/DRSetupPanel/beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: beginSetupSheetForWindow:modalDelegate:didEndSelector:contextInfo: @/link) because the erase object information is only updated just before the modal session ends. @result  	A new DRErase object.
-//
-// EraseObject calls the underlying EraseObject.
-func (x *EraseSetupPanel) EraseObject() *discrecording.DRErase {
-	return x.inner.EraseObject()
+// Creates and returns a new DRErase object that's configured to erase the disc in the currently selected device. The new DRErase object is configured based on the settings in the setup panel when the user clicks the OK button. Do not invoke this method within a modal session (
+func (x *EraseSetupPanel) EraseObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eraseObject"))
+	return obj.Wrap(_r)
 }
 
-// @method 			eraseType: @abstract 		Invoked when the user clicks one of the panel's erase type radio buttons. @param 			sender	The object that invoked this method.
-//
-// EraseType calls the underlying EraseType.
-func (x *EraseSetupPanel) EraseType(sender objc.ID) {
-	x.inner.EraseType(sender)
+// Invoked when the user clicks one of the panel's erase type radio buttons.
+func (x *EraseSetupPanel) EraseType(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eraseType:"), objref.IDOf(sender))
 }
-
-func (x *EraseSetupPanel) asSetupPanel() *raw.DRSetupPanel { return &x.inner.DRSetupPanel }
 
 // EraseSetupPanelable is the interface implemented by [EraseSetupPanel], for mocking and DI.
 type EraseSetupPanelable interface {
-	Unwrap() *raw.DREraseSetupPanel
-	EraseObject() *discrecording.DRErase
-	EraseType(sender objc.ID)
+	obj.Object
+	EraseObject() obj.Object
+	EraseType(sender obj.Object)
 }
 
 var _ EraseSetupPanelable = (*EraseSetupPanel)(nil)

@@ -5,126 +5,144 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRGroupsClusterRemoveGroupParams wraps [raw.MTRGroupsClusterRemoveGroupParams] with a fluent Go API.
+// MTRGroupsClusterRemoveGroupParams is an idiomatic wrapper over the Objective-C class MTRGroupsClusterRemoveGroupParams.
 type MTRGroupsClusterRemoveGroupParams struct {
-	inner *raw.MTRGroupsClusterRemoveGroupParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRGroupsClusterRemoveGroupParams].
-func (x *MTRGroupsClusterRemoveGroupParams) Unwrap() *raw.MTRGroupsClusterRemoveGroupParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGroupsClusterRemoveGroupParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRGroupsClusterRemoveGroupParamsFromID adopts an existing object pointer as a MTRGroupsClusterRemoveGroupParams (nil for 0).
+// MTRGroupsClusterRemoveGroupParamsFromID adopts an existing Objective-C object as a MTRGroupsClusterRemoveGroupParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRGroupsClusterRemoveGroupParamsFromID(id objc.ID) *MTRGroupsClusterRemoveGroupParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRGroupsClusterRemoveGroupParams{inner: raw.MTRGroupsClusterRemoveGroupParamsFromID(id)}
+	x := &MTRGroupsClusterRemoveGroupParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRGroupsClusterRemoveGroupParams creates a new [MTRGroupsClusterRemoveGroupParams].
+// mTRGroupsClusterRemoveGroupParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRGroupsClusterRemoveGroupParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRGroupsClusterRemoveGroupParamsAdopt(id objc.ID) *MTRGroupsClusterRemoveGroupParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRGroupsClusterRemoveGroupParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRGroupsClusterRemoveGroupParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRGroupsClusterRemoveGroupParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRGroupsClusterRemoveGroupParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRGroupsClusterRemoveGroupParams creates a new MTRGroupsClusterRemoveGroupParams.
 func NewMTRGroupsClusterRemoveGroupParams() *MTRGroupsClusterRemoveGroupParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGroupsClusterRemoveGroupParams")), objc.RegisterName("new"))
-	return &MTRGroupsClusterRemoveGroupParams{inner: raw.MTRGroupsClusterRemoveGroupParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRGroupsClusterRemoveGroupParams")), objc.RegisterName("new"))
+	return mTRGroupsClusterRemoveGroupParamsAdopt(_id)
 }
 
-// WithGroupID sets the groupID property and returns the receiver for chaining.
-func (x *MTRGroupsClusterRemoveGroupParams) WithGroupID(groupID *foundation.NSNumber) *MTRGroupsClusterRemoveGroupParams {
-	x.inner.SetGroupID(groupID)
+// WithGroupID sets groupID and returns the receiver so calls can be chained.
+func (x *MTRGroupsClusterRemoveGroupParams) WithGroupID(groupID obj.Object) *MTRGroupsClusterRemoveGroupParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupID:"), objref.IDOf(groupID))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRGroupsClusterRemoveGroupParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupsClusterRemoveGroupParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRGroupsClusterRemoveGroupParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupsClusterRemoveGroupParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRGroupsClusterRemoveGroupParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGroupsClusterRemoveGroupParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRGroupsClusterRemoveGroupParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGroupsClusterRemoveGroupParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// WithGroupId sets the groupId property and returns the receiver for chaining.
-func (x *MTRGroupsClusterRemoveGroupParams) WithGroupId(groupId *foundation.NSNumber) *MTRGroupsClusterRemoveGroupParams {
-	x.inner.SetGroupId(groupId)
+// WithGroupId sets groupId and returns the receiver so calls can be chained.
+func (x *MTRGroupsClusterRemoveGroupParams) WithGroupId(groupId obj.Object) *MTRGroupsClusterRemoveGroupParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupId:"), objref.IDOf(groupId))
 	return x
 }
 
-// GroupID calls the underlying GroupID.
-func (x *MTRGroupsClusterRemoveGroupParams) GroupID() *foundation.NSNumber {
-	return x.inner.GroupID()
+func (x *MTRGroupsClusterRemoveGroupParams) GroupID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupID"))
+	return obj.Wrap(_r)
 }
 
-// SetGroupID calls the underlying SetGroupID.
-func (x *MTRGroupsClusterRemoveGroupParams) SetGroupID(groupID *foundation.NSNumber) {
-	x.inner.SetGroupID(groupID)
+func (x *MTRGroupsClusterRemoveGroupParams) SetGroupID(groupID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupID:"), objref.IDOf(groupID))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRGroupsClusterRemoveGroupParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRGroupsClusterRemoveGroupParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRGroupsClusterRemoveGroupParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRGroupsClusterRemoveGroupParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRGroupsClusterRemoveGroupParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRGroupsClusterRemoveGroupParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRGroupsClusterRemoveGroupParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRGroupsClusterRemoveGroupParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
-// GroupId calls the underlying GroupId.
-func (x *MTRGroupsClusterRemoveGroupParams) GroupId() *foundation.NSNumber {
-	return x.inner.GroupId()
+func (x *MTRGroupsClusterRemoveGroupParams) GroupId() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupId"))
+	return obj.Wrap(_r)
 }
 
-// SetGroupId calls the underlying SetGroupId.
-func (x *MTRGroupsClusterRemoveGroupParams) SetGroupId(groupId *foundation.NSNumber) {
-	x.inner.SetGroupId(groupId)
+func (x *MTRGroupsClusterRemoveGroupParams) SetGroupId(groupId obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupId:"), objref.IDOf(groupId))
 }
 
 // MTRGroupsClusterRemoveGroupParamsable is the interface implemented by [MTRGroupsClusterRemoveGroupParams], for mocking and DI.
 type MTRGroupsClusterRemoveGroupParamsable interface {
-	Unwrap() *raw.MTRGroupsClusterRemoveGroupParams
-	WithGroupID(groupID *foundation.NSNumber) *MTRGroupsClusterRemoveGroupParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupsClusterRemoveGroupParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGroupsClusterRemoveGroupParams
-	WithGroupId(groupId *foundation.NSNumber) *MTRGroupsClusterRemoveGroupParams
-	GroupID() *foundation.NSNumber
-	SetGroupID(groupID *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
-	GroupId() *foundation.NSNumber
-	SetGroupId(groupId *foundation.NSNumber)
+	obj.Object
+	WithGroupID(groupID obj.Object) *MTRGroupsClusterRemoveGroupParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupsClusterRemoveGroupParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGroupsClusterRemoveGroupParams
+	WithGroupId(groupId obj.Object) *MTRGroupsClusterRemoveGroupParams
+	GroupID() obj.Object
+	SetGroupID(groupID obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
+	GroupId() obj.Object
+	SetGroupId(groupId obj.Object)
 }
 
 var _ MTRGroupsClusterRemoveGroupParamsable = (*MTRGroupsClusterRemoveGroupParams)(nil)

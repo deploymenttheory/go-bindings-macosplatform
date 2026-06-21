@@ -5,83 +5,95 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A configuration for one class of token.
 //
-// TokenDriverConfiguration wraps [raw.TKTokenDriverConfiguration] with a fluent Go API.
+// TokenDriverConfiguration is an idiomatic wrapper over the Objective-C class TKTokenDriverConfiguration.
 type TokenDriverConfiguration struct {
-	inner *raw.TKTokenDriverConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKTokenDriverConfiguration].
-func (x *TokenDriverConfiguration) Unwrap() *raw.TKTokenDriverConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TokenDriverConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// TokenDriverConfigurationFromID adopts an existing object pointer as a TokenDriverConfiguration (nil for 0).
+// TokenDriverConfigurationFromID adopts an existing Objective-C object as a TokenDriverConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func TokenDriverConfigurationFromID(id objc.ID) *TokenDriverConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &TokenDriverConfiguration{inner: raw.TKTokenDriverConfigurationFromID(id)}
+	x := &TokenDriverConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTokenDriverConfiguration creates a new [TokenDriverConfiguration].
+// tokenDriverConfigurationAdopt wraps an Objective-C object that this code just created as a
+// TokenDriverConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tokenDriverConfigurationAdopt(id objc.ID) *TokenDriverConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &TokenDriverConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TokenDriverConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TokenDriverConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TokenDriverConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTokenDriverConfiguration creates a new TokenDriverConfiguration.
 func NewTokenDriverConfiguration() *TokenDriverConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenDriverConfiguration")), objc.RegisterName("new"))
-	return &TokenDriverConfiguration{inner: raw.TKTokenDriverConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("TKTokenDriverConfiguration")), objc.RegisterName("new"))
+	return tokenDriverConfigurationAdopt(_id)
 }
 
 // Creates new configuration object for token with specified instanceID and adds it into tokenConfigurations dictionary. If configuration with specified instanceID already exists, it is replaced with new empty configuration.
-//
-// AddTokenConfigurationForTokenInstanceID calls the underlying AddTokenConfigurationForTokenInstanceID.
-func (x *TokenDriverConfiguration) AddTokenConfigurationForTokenInstanceID(instanceID *foundation.NSString) *TokenConfiguration {
-	_r := x.inner.AddTokenConfigurationForTokenInstanceID(instanceID)
-	if _r == nil {
-		return nil
-	}
-	return &TokenConfiguration{inner: _r}
+func (x *TokenDriverConfiguration) AddTokenConfigurationForTokenInstanceID(instanceID obj.Object) *TokenConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTokenConfigurationForTokenInstanceID:"), objref.IDOf(instanceID))
+	return TokenConfigurationFromID(_r)
 }
 
 // Removes configuration with specified tokenID. Does nothing if no such token configuration exists.
-//
-// RemoveTokenConfigurationForTokenInstanceID calls the underlying RemoveTokenConfigurationForTokenInstanceID.
-func (x *TokenDriverConfiguration) RemoveTokenConfigurationForTokenInstanceID(instanceID *foundation.NSString) {
-	x.inner.RemoveTokenConfigurationForTokenInstanceID(instanceID)
+func (x *TokenDriverConfiguration) RemoveTokenConfigurationForTokenInstanceID(instanceID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTokenConfigurationForTokenInstanceID:"), objref.IDOf(instanceID))
 }
 
-// ClassID of the token configuration. ClassID is taken from @p com.apple.ctk.class-id token extension attribute.
-//
-// ClassID calls the underlying ClassID.
-func (x *TokenDriverConfiguration) ClassID() string {
-	_r := x.inner.ClassID()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// ClassID of the token configuration. ClassID is taken from
+func (x *TokenDriverConfiguration) ClassID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classID"))
+	return obj.Wrap(_r)
 }
 
 // Dictionary of all currently configured tokens for this token class, keyed by instanceID.
-//
-// TokenConfigurations calls the underlying TokenConfigurations.
-func (x *TokenDriverConfiguration) TokenConfigurations() *foundation.NSDictionary[*foundation.NSString, *raw.TKTokenConfiguration] {
-	return x.inner.TokenConfigurations()
+func (x *TokenDriverConfiguration) TokenConfigurations() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenConfigurations"))
+	return obj.Wrap(_r)
 }
 
 // TokenDriverConfigurationable is the interface implemented by [TokenDriverConfiguration], for mocking and DI.
 type TokenDriverConfigurationable interface {
-	Unwrap() *raw.TKTokenDriverConfiguration
-	AddTokenConfigurationForTokenInstanceID(instanceID *foundation.NSString) *TokenConfiguration
-	RemoveTokenConfigurationForTokenInstanceID(instanceID *foundation.NSString)
-	ClassID() string
-	TokenConfigurations() *foundation.NSDictionary[*foundation.NSString, *raw.TKTokenConfiguration]
+	obj.Object
+	AddTokenConfigurationForTokenInstanceID(instanceID obj.Object) *TokenConfiguration
+	RemoveTokenConfigurationForTokenInstanceID(instanceID obj.Object)
+	ClassID() obj.Object
+	TokenConfigurations() obj.Object
 }
 
 var _ TokenDriverConfigurationable = (*TokenDriverConfiguration)(nil)

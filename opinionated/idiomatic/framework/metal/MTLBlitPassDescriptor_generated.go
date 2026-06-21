@@ -5,50 +5,73 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A configuration you create to customize a blit command encoder, which affects the runtime behavior of the blit pass you encode with it.
 //
-// BlitPassDescriptor wraps [raw.MTLBlitPassDescriptor] with a fluent Go API.
+// BlitPassDescriptor is an idiomatic wrapper over the Objective-C class MTLBlitPassDescriptor.
 type BlitPassDescriptor struct {
-	inner *raw.MTLBlitPassDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLBlitPassDescriptor].
-func (x *BlitPassDescriptor) Unwrap() *raw.MTLBlitPassDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BlitPassDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// BlitPassDescriptorFromID adopts an existing object pointer as a BlitPassDescriptor (nil for 0).
+// BlitPassDescriptorFromID adopts an existing Objective-C object as a BlitPassDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func BlitPassDescriptorFromID(id objc.ID) *BlitPassDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &BlitPassDescriptor{inner: raw.MTLBlitPassDescriptorFromID(id)}
+	x := &BlitPassDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBlitPassDescriptor creates a new [BlitPassDescriptor].
-func NewBlitPassDescriptor() *BlitPassDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLBlitPassDescriptor")), objc.RegisterName("new"))
-	return &BlitPassDescriptor{inner: raw.MTLBlitPassDescriptorFromID(_id)}
-}
-
-// SampleBufferAttachments calls the underlying SampleBufferAttachments.
-func (x *BlitPassDescriptor) SampleBufferAttachments() *BlitPassSampleBufferAttachmentDescriptorArray {
-	_r := x.inner.SampleBufferAttachments()
-	if _r == nil {
+// blitPassDescriptorAdopt wraps an Objective-C object that this code just created as a
+// BlitPassDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func blitPassDescriptorAdopt(id objc.ID) *BlitPassDescriptor {
+	if id == 0 {
 		return nil
 	}
-	return &BlitPassSampleBufferAttachmentDescriptorArray{inner: _r}
+	x := &BlitPassDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BlitPassDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BlitPassDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BlitPassDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBlitPassDescriptor creates a new BlitPassDescriptor.
+func NewBlitPassDescriptor() *BlitPassDescriptor {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLBlitPassDescriptor")), objc.RegisterName("new"))
+	return blitPassDescriptorAdopt(_id)
+}
+
+func (x *BlitPassDescriptor) SampleBufferAttachments() *BlitPassSampleBufferAttachmentDescriptorArray {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferAttachments"))
+	return BlitPassSampleBufferAttachmentDescriptorArrayFromID(_r)
 }
 
 // BlitPassDescriptorable is the interface implemented by [BlitPassDescriptor], for mocking and DI.
 type BlitPassDescriptorable interface {
-	Unwrap() *raw.MTLBlitPassDescriptor
+	obj.Object
 	SampleBufferAttachments() *BlitPassSampleBufferAttachmentDescriptorArray
 }
 

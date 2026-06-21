@@ -5,112 +5,110 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A configuration that customizes the behavior for a new command buffer.
 //
-// CommandBufferDescriptor wraps [raw.MTLCommandBufferDescriptor] with a fluent Go API.
+// CommandBufferDescriptor is an idiomatic wrapper over the Objective-C class MTLCommandBufferDescriptor.
 type CommandBufferDescriptor struct {
-	inner *raw.MTLCommandBufferDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLCommandBufferDescriptor].
-func (x *CommandBufferDescriptor) Unwrap() *raw.MTLCommandBufferDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CommandBufferDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// CommandBufferDescriptorFromID adopts an existing object pointer as a CommandBufferDescriptor (nil for 0).
+// CommandBufferDescriptorFromID adopts an existing Objective-C object as a CommandBufferDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func CommandBufferDescriptorFromID(id objc.ID) *CommandBufferDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &CommandBufferDescriptor{inner: raw.MTLCommandBufferDescriptorFromID(id)}
+	x := &CommandBufferDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCommandBufferDescriptor creates a new [CommandBufferDescriptor].
+// commandBufferDescriptorAdopt wraps an Objective-C object that this code just created as a
+// CommandBufferDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func commandBufferDescriptorAdopt(id objc.ID) *CommandBufferDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &CommandBufferDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CommandBufferDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CommandBufferDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CommandBufferDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCommandBufferDescriptor creates a new CommandBufferDescriptor.
 func NewCommandBufferDescriptor() *CommandBufferDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLCommandBufferDescriptor")), objc.RegisterName("new"))
-	return &CommandBufferDescriptor{inner: raw.MTLCommandBufferDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLCommandBufferDescriptor")), objc.RegisterName("new"))
+	return commandBufferDescriptorAdopt(_id)
 }
 
 // A Boolean value that indicates whether the command buffer the descriptor creates maintains strong references to the resources it uses.
 //
-// WithRetainedReferences sets the retainedReferences property and returns the receiver for chaining.
+// WithRetainedReferences sets retainedReferences and returns the receiver so calls can be chained.
 func (x *CommandBufferDescriptor) WithRetainedReferences(retainedReferences bool) *CommandBufferDescriptor {
-	x.inner.SetRetainedReferences(retainedReferences)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRetainedReferences:"), retainedReferences)
 	return x
 }
 
 // The reporting configuration that indicates which information the GPU driver stores in a command buffer’s error property.
 //
-// WithErrorOptions sets the errorOptions property and returns the receiver for chaining.
-func (x *CommandBufferDescriptor) WithErrorOptions(errorOptions MTLCommandBufferErrorOption) *CommandBufferDescriptor {
-	x.inner.SetErrorOptions(raw.MTLCommandBufferErrorOption(errorOptions))
+// WithErrorOptions sets errorOptions and returns the receiver so calls can be chained.
+func (x *CommandBufferDescriptor) WithErrorOptions(errorOptions CommandBufferErrorOption) *CommandBufferDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorOptions:"), errorOptions)
 	return x
 }
 
-// The shader logging configuration that the command buffer uses.
-//
-// WithLogState sets the logState property and returns the receiver for chaining.
-func (x *CommandBufferDescriptor) WithLogState(logState raw.MTLLogState) *CommandBufferDescriptor {
-	x.inner.SetLogState(logState)
-	return x
-}
-
-// @property retainedReferences @abstract If YES, the created command buffer holds strong references to objects needed for it to execute. If NO, the created command buffer does not hold strong references to objects needed for it to execute.
-//
-// RetainedReferences calls the underlying RetainedReferences.
+// If YES, the created command buffer holds strong references to objects needed for it to execute. If NO, the created command buffer does not hold strong references to objects needed for it to execute.
 func (x *CommandBufferDescriptor) RetainedReferences() bool {
-	return x.inner.RetainedReferences()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("retainedReferences"))
+	return _r
 }
 
-// SetRetainedReferences calls the underlying SetRetainedReferences.
 func (x *CommandBufferDescriptor) SetRetainedReferences(retainedReferences bool) {
-	x.inner.SetRetainedReferences(retainedReferences)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRetainedReferences:"), retainedReferences)
 }
 
-// @property errorOptions @abstract A set of options to influence the error reporting of the created command buffer. See MTLCommandBufferErrorOption.
-//
-// ErrorOptions calls the underlying ErrorOptions.
-func (x *CommandBufferDescriptor) ErrorOptions() MTLCommandBufferErrorOption {
-	return MTLCommandBufferErrorOption(x.inner.ErrorOptions())
+// A set of options to influence the error reporting of the created command buffer. See MTLCommandBufferErrorOption.
+func (x *CommandBufferDescriptor) ErrorOptions() CommandBufferErrorOption {
+	_r := objc.Send[CommandBufferErrorOption](objref.IDOf(x), objc.RegisterName("errorOptions"))
+	return _r
 }
 
-// SetErrorOptions calls the underlying SetErrorOptions.
-func (x *CommandBufferDescriptor) SetErrorOptions(errorOptions MTLCommandBufferErrorOption) {
-	x.inner.SetErrorOptions(raw.MTLCommandBufferErrorOption(errorOptions))
-}
-
-// @property logState @abstract Contains information related to shader logging.
-//
-// LogState calls the underlying LogState.
-func (x *CommandBufferDescriptor) LogState() raw.MTLLogState {
-	return x.inner.LogState()
-}
-
-// @property logState @abstract Contains information related to shader logging.
-//
-// SetLogState calls the underlying SetLogState.
-func (x *CommandBufferDescriptor) SetLogState(logState raw.MTLLogState) {
-	x.inner.SetLogState(logState)
+func (x *CommandBufferDescriptor) SetErrorOptions(errorOptions CommandBufferErrorOption) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorOptions:"), errorOptions)
 }
 
 // CommandBufferDescriptorable is the interface implemented by [CommandBufferDescriptor], for mocking and DI.
 type CommandBufferDescriptorable interface {
-	Unwrap() *raw.MTLCommandBufferDescriptor
+	obj.Object
 	WithRetainedReferences(retainedReferences bool) *CommandBufferDescriptor
-	WithErrorOptions(errorOptions MTLCommandBufferErrorOption) *CommandBufferDescriptor
-	WithLogState(logState raw.MTLLogState) *CommandBufferDescriptor
+	WithErrorOptions(errorOptions CommandBufferErrorOption) *CommandBufferDescriptor
 	RetainedReferences() bool
 	SetRetainedReferences(retainedReferences bool)
-	ErrorOptions() MTLCommandBufferErrorOption
-	SetErrorOptions(errorOptions MTLCommandBufferErrorOption)
-	LogState() raw.MTLLogState
-	SetLogState(logState raw.MTLLogState)
+	ErrorOptions() CommandBufferErrorOption
+	SetErrorOptions(errorOptions CommandBufferErrorOption)
 }
 
 var _ CommandBufferDescriptorable = (*CommandBufferDescriptor)(nil)

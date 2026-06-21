@@ -10,46 +10,46 @@ import (
 )
 
 // The app’s level of access to the user’s photo library.
-type PHAccessLevel int64
+type AccessLevel int64
 
 const (
 	// A value that indicates the app may only add to the user’s photo library.
-	PHAccessLevelAddOnly PHAccessLevel = 1
+	AccessLevelAddOnly AccessLevel = 1
 	// A value that indicates the app can read from and write to the user’s photo library.
-	PHAccessLevelReadWrite PHAccessLevel = 2
+	AccessLevelReadWrite AccessLevel = 2
 )
 
-func (e PHAccessLevel) String() string {
+func (e AccessLevel) String() string {
 	switch e {
-	case PHAccessLevelAddOnly:
-		return "PHAccessLevelAddOnly"
-	case PHAccessLevelReadWrite:
-		return "PHAccessLevelReadWrite"
+	case AccessLevelAddOnly:
+		return "AccessLevelAddOnly"
+	case AccessLevelReadWrite:
+		return "AccessLevelReadWrite"
 	default:
-		return fmt.Sprintf("PHAccessLevel(%d)", int64(e))
+		return fmt.Sprintf("AccessLevel(%d)", int64(e))
 	}
 }
 
 // Bit mask values indicating whether and how an asset is marked as a favorite member of a burst photo sequence. Used by the burstSelectionTypes property.
 // Bitmask — values may be combined with |.
-type PHAssetBurstSelectionType uint64
+type AssetBurstSelectionType uint64
 
 const (
 	// The asset is not marked as a favorite member of its burst sequence or is not a member of a burst sequence.
-	PHAssetBurstSelectionTypeNone PHAssetBurstSelectionType = 0
+	AssetBurstSelectionTypeNone AssetBurstSelectionType = 0
 	// Photos has automatically identified the asset as a potential user favorite.
-	PHAssetBurstSelectionTypeAutoPick PHAssetBurstSelectionType = 1
+	AssetBurstSelectionTypeAutoPick AssetBurstSelectionType = 1
 	// The user has marked the asset as a favorite member of its burst sequence.
-	PHAssetBurstSelectionTypeUserPick PHAssetBurstSelectionType = 2
+	AssetBurstSelectionTypeUserPick AssetBurstSelectionType = 2
 )
 
-func (e PHAssetBurstSelectionType) String() string {
+func (e AssetBurstSelectionType) String() string {
 	var parts []string
-	if e&PHAssetBurstSelectionTypeAutoPick != 0 {
-		parts = append(parts, "PHAssetBurstSelectionTypeAutoPick")
+	if e&AssetBurstSelectionTypeAutoPick != 0 {
+		parts = append(parts, "AssetBurstSelectionTypeAutoPick")
 	}
-	if e&PHAssetBurstSelectionTypeUserPick != 0 {
-		parts = append(parts, "PHAssetBurstSelectionTypeUserPick")
+	if e&AssetBurstSelectionTypeUserPick != 0 {
+		parts = append(parts, "AssetBurstSelectionTypeUserPick")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -58,115 +58,115 @@ func (e PHAssetBurstSelectionType) String() string {
 }
 
 // Major distinctions between kinds of asset collections, used by the assetCollectionType property and the fetchAssetCollectionsContainingAsset:withType:options: and fetchAssetCollectionsWithType:subtype:options: methods.
-type PHAssetCollectionType int64
+type AssetCollectionType int64
 
 const (
 	// An album in the Photos app.
-	PHAssetCollectionTypeAlbum PHAssetCollectionType = 1
+	AssetCollectionTypeAlbum AssetCollectionType = 1
 	// A smart album whose contents update dynamically.
-	PHAssetCollectionTypeSmartAlbum PHAssetCollectionType = 2
+	AssetCollectionTypeSmartAlbum AssetCollectionType = 2
 )
 
-func (e PHAssetCollectionType) String() string {
+func (e AssetCollectionType) String() string {
 	switch e {
-	case PHAssetCollectionTypeAlbum:
-		return "PHAssetCollectionTypeAlbum"
-	case PHAssetCollectionTypeSmartAlbum:
-		return "PHAssetCollectionTypeSmartAlbum"
+	case AssetCollectionTypeAlbum:
+		return "AssetCollectionTypeAlbum"
+	case AssetCollectionTypeSmartAlbum:
+		return "AssetCollectionTypeSmartAlbum"
 	default:
-		return fmt.Sprintf("PHAssetCollectionType(%d)", int64(e))
+		return fmt.Sprintf("AssetCollectionType(%d)", int64(e))
 	}
 }
 
 // Values identifying possible actions an asset can support, used by the canPerformEditOperation: method.
-type PHAssetEditOperation int64
+type AssetEditOperation int64
 
 const (
 	// The asset can be deleted from the photo library.
-	PHAssetEditOperationDelete PHAssetEditOperation = 1
+	AssetEditOperationDelete AssetEditOperation = 1
 	// The asset’s photo or video content can be edited.
-	PHAssetEditOperationContent PHAssetEditOperation = 2
+	AssetEditOperationContent AssetEditOperation = 2
 	// The asset’s metadata properties can be edited.
-	PHAssetEditOperationProperties PHAssetEditOperation = 3
+	AssetEditOperationProperties AssetEditOperation = 3
 )
 
-func (e PHAssetEditOperation) String() string {
+func (e AssetEditOperation) String() string {
 	switch e {
-	case PHAssetEditOperationDelete:
-		return "PHAssetEditOperationDelete"
-	case PHAssetEditOperationContent:
-		return "PHAssetEditOperationContent"
-	case PHAssetEditOperationProperties:
-		return "PHAssetEditOperationProperties"
+	case AssetEditOperationDelete:
+		return "AssetEditOperationDelete"
+	case AssetEditOperationContent:
+		return "AssetEditOperationContent"
+	case AssetEditOperationProperties:
+		return "AssetEditOperationProperties"
 	default:
-		return fmt.Sprintf("PHAssetEditOperation(%d)", int64(e))
+		return fmt.Sprintf("AssetEditOperation(%d)", int64(e))
 	}
 }
 
 // Constants identifying specific variations of asset media, such as panorama or screenshot photos, and time-lapse or high-frame-rate video.
 // Bitmask — values may be combined with |.
-type PHAssetMediaSubtype uint64
+type AssetMediaSubtype uint64
 
 const (
 	// The asset has no subtype.
-	PHAssetMediaSubtypeNone PHAssetMediaSubtype = 0
+	AssetMediaSubtypeNone AssetMediaSubtype = 0
 	// The asset is a large-format panorama photo.
-	PHAssetMediaSubtypePhotoPanorama PHAssetMediaSubtype = 1
+	AssetMediaSubtypePhotoPanorama AssetMediaSubtype = 1
 	// The asset is a high-dynamic range photo.
-	PHAssetMediaSubtypePhotoHDR PHAssetMediaSubtype = 2
+	AssetMediaSubtypePhotoHDR AssetMediaSubtype = 2
 	// The asset is an image captured with the device’s screenshot feature.
-	PHAssetMediaSubtypePhotoScreenshot PHAssetMediaSubtype = 4
+	AssetMediaSubtypePhotoScreenshot AssetMediaSubtype = 4
 	// The asset is a Live Photo that includes movement and sounds from the moments just before and after its capture.
-	PHAssetMediaSubtypePhotoLive PHAssetMediaSubtype = 8
+	AssetMediaSubtypePhotoLive AssetMediaSubtype = 8
 	// The asset is a photo captured with the Camera app’s Portrait mode depth effect.
-	PHAssetMediaSubtypePhotoDepthEffect PHAssetMediaSubtype = 16
-	PHAssetMediaSubtypeSpatialMedia     PHAssetMediaSubtype = 1024
+	AssetMediaSubtypePhotoDepthEffect AssetMediaSubtype = 16
+	AssetMediaSubtypeSpatialMedia     AssetMediaSubtype = 1024
 	// The asset is a video with contents that always stream over a network connection.
-	PHAssetMediaSubtypeVideoStreamed PHAssetMediaSubtype = 65536
+	AssetMediaSubtypeVideoStreamed AssetMediaSubtype = 65536
 	// The asset is a high-frame-rate video.
-	PHAssetMediaSubtypeVideoHighFrameRate PHAssetMediaSubtype = 131072
+	AssetMediaSubtypeVideoHighFrameRate AssetMediaSubtype = 131072
 	// The asset is a time-lapse video.
-	PHAssetMediaSubtypeVideoTimelapse PHAssetMediaSubtype = 262144
+	AssetMediaSubtypeVideoTimelapse AssetMediaSubtype = 262144
 	// The media subtype is a photo animation such as a GIF, animated PNGs, etc.
-	PHAssetMediaSubtypeVideoScreenRecording PHAssetMediaSubtype = 524288
+	AssetMediaSubtypeVideoScreenRecording AssetMediaSubtype = 524288
 	// The asset is a cinematic video.
-	PHAssetMediaSubtypeVideoCinematic PHAssetMediaSubtype = 2097152
+	AssetMediaSubtypeVideoCinematic AssetMediaSubtype = 2097152
 )
 
-func (e PHAssetMediaSubtype) String() string {
+func (e AssetMediaSubtype) String() string {
 	var parts []string
-	if e&PHAssetMediaSubtypePhotoPanorama != 0 {
-		parts = append(parts, "PHAssetMediaSubtypePhotoPanorama")
+	if e&AssetMediaSubtypePhotoPanorama != 0 {
+		parts = append(parts, "AssetMediaSubtypePhotoPanorama")
 	}
-	if e&PHAssetMediaSubtypePhotoHDR != 0 {
-		parts = append(parts, "PHAssetMediaSubtypePhotoHDR")
+	if e&AssetMediaSubtypePhotoHDR != 0 {
+		parts = append(parts, "AssetMediaSubtypePhotoHDR")
 	}
-	if e&PHAssetMediaSubtypePhotoScreenshot != 0 {
-		parts = append(parts, "PHAssetMediaSubtypePhotoScreenshot")
+	if e&AssetMediaSubtypePhotoScreenshot != 0 {
+		parts = append(parts, "AssetMediaSubtypePhotoScreenshot")
 	}
-	if e&PHAssetMediaSubtypePhotoLive != 0 {
-		parts = append(parts, "PHAssetMediaSubtypePhotoLive")
+	if e&AssetMediaSubtypePhotoLive != 0 {
+		parts = append(parts, "AssetMediaSubtypePhotoLive")
 	}
-	if e&PHAssetMediaSubtypePhotoDepthEffect != 0 {
-		parts = append(parts, "PHAssetMediaSubtypePhotoDepthEffect")
+	if e&AssetMediaSubtypePhotoDepthEffect != 0 {
+		parts = append(parts, "AssetMediaSubtypePhotoDepthEffect")
 	}
-	if e&PHAssetMediaSubtypeSpatialMedia != 0 {
-		parts = append(parts, "PHAssetMediaSubtypeSpatialMedia")
+	if e&AssetMediaSubtypeSpatialMedia != 0 {
+		parts = append(parts, "AssetMediaSubtypeSpatialMedia")
 	}
-	if e&PHAssetMediaSubtypeVideoStreamed != 0 {
-		parts = append(parts, "PHAssetMediaSubtypeVideoStreamed")
+	if e&AssetMediaSubtypeVideoStreamed != 0 {
+		parts = append(parts, "AssetMediaSubtypeVideoStreamed")
 	}
-	if e&PHAssetMediaSubtypeVideoHighFrameRate != 0 {
-		parts = append(parts, "PHAssetMediaSubtypeVideoHighFrameRate")
+	if e&AssetMediaSubtypeVideoHighFrameRate != 0 {
+		parts = append(parts, "AssetMediaSubtypeVideoHighFrameRate")
 	}
-	if e&PHAssetMediaSubtypeVideoTimelapse != 0 {
-		parts = append(parts, "PHAssetMediaSubtypeVideoTimelapse")
+	if e&AssetMediaSubtypeVideoTimelapse != 0 {
+		parts = append(parts, "AssetMediaSubtypeVideoTimelapse")
 	}
-	if e&PHAssetMediaSubtypeVideoScreenRecording != 0 {
-		parts = append(parts, "PHAssetMediaSubtypeVideoScreenRecording")
+	if e&AssetMediaSubtypeVideoScreenRecording != 0 {
+		parts = append(parts, "AssetMediaSubtypeVideoScreenRecording")
 	}
-	if e&PHAssetMediaSubtypeVideoCinematic != 0 {
-		parts = append(parts, "PHAssetMediaSubtypeVideoCinematic")
+	if e&AssetMediaSubtypeVideoCinematic != 0 {
+		parts = append(parts, "AssetMediaSubtypeVideoCinematic")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -175,154 +175,154 @@ func (e PHAssetMediaSubtype) String() string {
 }
 
 // Identifies the general type of an asset, such as image or video.
-type PHAssetMediaType int64
+type AssetMediaType int64
 
 const (
 	// The asset’s type is unknown.
-	PHAssetMediaTypeUnknown PHAssetMediaType = 0
+	AssetMediaTypeUnknown AssetMediaType = 0
 	// The asset is a photo or other static image.
-	PHAssetMediaTypeImage PHAssetMediaType = 1
+	AssetMediaTypeImage AssetMediaType = 1
 	// The asset is a video file.
-	PHAssetMediaTypeVideo PHAssetMediaType = 2
+	AssetMediaTypeVideo AssetMediaType = 2
 	// The asset is an audio file.
-	PHAssetMediaTypeAudio PHAssetMediaType = 3
+	AssetMediaTypeAudio AssetMediaType = 3
 )
 
-func (e PHAssetMediaType) String() string {
+func (e AssetMediaType) String() string {
 	switch e {
-	case PHAssetMediaTypeUnknown:
-		return "PHAssetMediaTypeUnknown"
-	case PHAssetMediaTypeImage:
-		return "PHAssetMediaTypeImage"
-	case PHAssetMediaTypeVideo:
-		return "PHAssetMediaTypeVideo"
-	case PHAssetMediaTypeAudio:
-		return "PHAssetMediaTypeAudio"
+	case AssetMediaTypeUnknown:
+		return "AssetMediaTypeUnknown"
+	case AssetMediaTypeImage:
+		return "AssetMediaTypeImage"
+	case AssetMediaTypeVideo:
+		return "AssetMediaTypeVideo"
+	case AssetMediaTypeAudio:
+		return "AssetMediaTypeAudio"
 	default:
-		return fmt.Sprintf("PHAssetMediaType(%d)", int64(e))
+		return fmt.Sprintf("AssetMediaType(%d)", int64(e))
 	}
 }
 
 // An enumeration of asset playback styles that dictate how to present an asset to the user.
-type PHAssetPlaybackStyle int64
+type AssetPlaybackStyle int64
 
 const (
-	PHAssetPlaybackStyleUnsupported   PHAssetPlaybackStyle = 0
-	PHAssetPlaybackStyleImage         PHAssetPlaybackStyle = 1
-	PHAssetPlaybackStyleImageAnimated PHAssetPlaybackStyle = 2
-	PHAssetPlaybackStyleLivePhoto     PHAssetPlaybackStyle = 3
-	PHAssetPlaybackStyleVideo         PHAssetPlaybackStyle = 4
-	PHAssetPlaybackStyleVideoLooping  PHAssetPlaybackStyle = 5
+	AssetPlaybackStyleUnsupported   AssetPlaybackStyle = 0
+	AssetPlaybackStyleImage         AssetPlaybackStyle = 1
+	AssetPlaybackStyleImageAnimated AssetPlaybackStyle = 2
+	AssetPlaybackStyleLivePhoto     AssetPlaybackStyle = 3
+	AssetPlaybackStyleVideo         AssetPlaybackStyle = 4
+	AssetPlaybackStyleVideoLooping  AssetPlaybackStyle = 5
 )
 
-func (e PHAssetPlaybackStyle) String() string {
+func (e AssetPlaybackStyle) String() string {
 	switch e {
-	case PHAssetPlaybackStyleUnsupported:
-		return "PHAssetPlaybackStyleUnsupported"
-	case PHAssetPlaybackStyleImage:
-		return "PHAssetPlaybackStyleImage"
-	case PHAssetPlaybackStyleImageAnimated:
-		return "PHAssetPlaybackStyleImageAnimated"
-	case PHAssetPlaybackStyleLivePhoto:
-		return "PHAssetPlaybackStyleLivePhoto"
-	case PHAssetPlaybackStyleVideo:
-		return "PHAssetPlaybackStyleVideo"
-	case PHAssetPlaybackStyleVideoLooping:
-		return "PHAssetPlaybackStyleVideoLooping"
+	case AssetPlaybackStyleUnsupported:
+		return "AssetPlaybackStyleUnsupported"
+	case AssetPlaybackStyleImage:
+		return "AssetPlaybackStyleImage"
+	case AssetPlaybackStyleImageAnimated:
+		return "AssetPlaybackStyleImageAnimated"
+	case AssetPlaybackStyleLivePhoto:
+		return "AssetPlaybackStyleLivePhoto"
+	case AssetPlaybackStyleVideo:
+		return "AssetPlaybackStyleVideo"
+	case AssetPlaybackStyleVideoLooping:
+		return "AssetPlaybackStyleVideoLooping"
 	default:
-		return fmt.Sprintf("PHAssetPlaybackStyle(%d)", int64(e))
+		return fmt.Sprintf("AssetPlaybackStyle(%d)", int64(e))
 	}
 }
 
 // Describes the relationship of an asset resource to its owning asset.
-type PHAssetResourceType int64
+type AssetResourceType int64
 
 const (
 	// Provides the original photo data for its asset.
-	PHAssetResourceTypePhoto PHAssetResourceType = 1
+	AssetResourceTypePhoto AssetResourceType = 1
 	// Provides the original video data for its asset.
-	PHAssetResourceTypeVideo PHAssetResourceType = 2
+	AssetResourceTypeVideo AssetResourceType = 2
 	// Provides the original audio data for its asset.
-	PHAssetResourceTypeAudio PHAssetResourceType = 3
+	AssetResourceTypeAudio AssetResourceType = 3
 	// Provides photo data that isn’t the primary form of its asset.
-	PHAssetResourceTypeAlternatePhoto PHAssetResourceType = 4
+	AssetResourceTypeAlternatePhoto AssetResourceType = 4
 	// Provides a modified version of the original photo asset.
-	PHAssetResourceTypeFullSizePhoto PHAssetResourceType = 5
+	AssetResourceTypeFullSizePhoto AssetResourceType = 5
 	// Provides a modified version of the original video asset.
-	PHAssetResourceTypeFullSizeVideo PHAssetResourceType = 6
+	AssetResourceTypeFullSizeVideo AssetResourceType = 6
 	// Provides data for use in reconstructing recent edits to its asset.
-	PHAssetResourceTypeAdjustmentData PHAssetResourceType = 7
+	AssetResourceTypeAdjustmentData AssetResourceType = 7
 	// Provides an unaltered version of its photo asset for use in for use in reconstructing recent edits.
-	PHAssetResourceTypeAdjustmentBasePhoto PHAssetResourceType = 8
+	AssetResourceTypeAdjustmentBasePhoto AssetResourceType = 8
 	// Provides the original video data component of a Live Photo asset.
-	PHAssetResourceTypePairedVideo PHAssetResourceType = 9
+	AssetResourceTypePairedVideo AssetResourceType = 9
 	// Provides the current video data component of a Live Photo asset.
-	PHAssetResourceTypeFullSizePairedVideo PHAssetResourceType = 10
+	AssetResourceTypeFullSizePairedVideo AssetResourceType = 10
 	// Provides an unaltered version of the video data for a Live Photo asset for use in reconstructing recent edits.
-	PHAssetResourceTypeAdjustmentBasePairedVideo PHAssetResourceType = 11
+	AssetResourceTypeAdjustmentBasePairedVideo AssetResourceType = 11
 	// Provides an unaltered version of its video asset.
-	PHAssetResourceTypeAdjustmentBaseVideo PHAssetResourceType = 12
-	PHAssetResourceTypePhotoProxy          PHAssetResourceType = 19
+	AssetResourceTypeAdjustmentBaseVideo AssetResourceType = 12
+	AssetResourceTypePhotoProxy          AssetResourceType = 19
 )
 
-func (e PHAssetResourceType) String() string {
+func (e AssetResourceType) String() string {
 	switch e {
-	case PHAssetResourceTypePhoto:
-		return "PHAssetResourceTypePhoto"
-	case PHAssetResourceTypeVideo:
-		return "PHAssetResourceTypeVideo"
-	case PHAssetResourceTypeAudio:
-		return "PHAssetResourceTypeAudio"
-	case PHAssetResourceTypeAlternatePhoto:
-		return "PHAssetResourceTypeAlternatePhoto"
-	case PHAssetResourceTypeFullSizePhoto:
-		return "PHAssetResourceTypeFullSizePhoto"
-	case PHAssetResourceTypeFullSizeVideo:
-		return "PHAssetResourceTypeFullSizeVideo"
-	case PHAssetResourceTypeAdjustmentData:
-		return "PHAssetResourceTypeAdjustmentData"
-	case PHAssetResourceTypeAdjustmentBasePhoto:
-		return "PHAssetResourceTypeAdjustmentBasePhoto"
-	case PHAssetResourceTypePairedVideo:
-		return "PHAssetResourceTypePairedVideo"
-	case PHAssetResourceTypeFullSizePairedVideo:
-		return "PHAssetResourceTypeFullSizePairedVideo"
-	case PHAssetResourceTypeAdjustmentBasePairedVideo:
-		return "PHAssetResourceTypeAdjustmentBasePairedVideo"
-	case PHAssetResourceTypeAdjustmentBaseVideo:
-		return "PHAssetResourceTypeAdjustmentBaseVideo"
-	case PHAssetResourceTypePhotoProxy:
-		return "PHAssetResourceTypePhotoProxy"
+	case AssetResourceTypePhoto:
+		return "AssetResourceTypePhoto"
+	case AssetResourceTypeVideo:
+		return "AssetResourceTypeVideo"
+	case AssetResourceTypeAudio:
+		return "AssetResourceTypeAudio"
+	case AssetResourceTypeAlternatePhoto:
+		return "AssetResourceTypeAlternatePhoto"
+	case AssetResourceTypeFullSizePhoto:
+		return "AssetResourceTypeFullSizePhoto"
+	case AssetResourceTypeFullSizeVideo:
+		return "AssetResourceTypeFullSizeVideo"
+	case AssetResourceTypeAdjustmentData:
+		return "AssetResourceTypeAdjustmentData"
+	case AssetResourceTypeAdjustmentBasePhoto:
+		return "AssetResourceTypeAdjustmentBasePhoto"
+	case AssetResourceTypePairedVideo:
+		return "AssetResourceTypePairedVideo"
+	case AssetResourceTypeFullSizePairedVideo:
+		return "AssetResourceTypeFullSizePairedVideo"
+	case AssetResourceTypeAdjustmentBasePairedVideo:
+		return "AssetResourceTypeAdjustmentBasePairedVideo"
+	case AssetResourceTypeAdjustmentBaseVideo:
+		return "AssetResourceTypeAdjustmentBaseVideo"
+	case AssetResourceTypePhotoProxy:
+		return "AssetResourceTypePhotoProxy"
 	default:
-		return fmt.Sprintf("PHAssetResourceType(%d)", int64(e))
+		return fmt.Sprintf("AssetResourceType(%d)", int64(e))
 	}
 }
 
 // The means by which an asset enters the Photos library.
 // Bitmask — values may be combined with |.
-type PHAssetSourceType uint64
+type AssetSourceType uint64
 
 const (
 	// Source information is not available for the asset.
-	PHAssetSourceTypeNone PHAssetSourceType = 0
+	AssetSourceTypeNone AssetSourceType = 0
 	// The asset is part of the user’s main Photos library.
-	PHAssetSourceTypeUserLibrary PHAssetSourceType = 1
+	AssetSourceTypeUserLibrary AssetSourceType = 1
 	// The asset originates from an iCloud Shared Album.
-	PHAssetSourceTypeCloudShared PHAssetSourceType = 2
+	AssetSourceTypeCloudShared AssetSourceType = 2
 	// The asset originates from a Mac or PC and is present on the device through iTunes sync.
-	PHAssetSourceTypeiTunesSynced PHAssetSourceType = 4
+	AssetSourceTypeiTunesSynced AssetSourceType = 4
 )
 
-func (e PHAssetSourceType) String() string {
+func (e AssetSourceType) String() string {
 	var parts []string
-	if e&PHAssetSourceTypeUserLibrary != 0 {
-		parts = append(parts, "PHAssetSourceTypeUserLibrary")
+	if e&AssetSourceTypeUserLibrary != 0 {
+		parts = append(parts, "AssetSourceTypeUserLibrary")
 	}
-	if e&PHAssetSourceTypeCloudShared != 0 {
-		parts = append(parts, "PHAssetSourceTypeCloudShared")
+	if e&AssetSourceTypeCloudShared != 0 {
+		parts = append(parts, "AssetSourceTypeCloudShared")
 	}
-	if e&PHAssetSourceTypeiTunesSynced != 0 {
-		parts = append(parts, "PHAssetSourceTypeiTunesSynced")
+	if e&AssetSourceTypeiTunesSynced != 0 {
+		parts = append(parts, "AssetSourceTypeiTunesSynced")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -331,254 +331,231 @@ func (e PHAssetSourceType) String() string {
 }
 
 // Information about your app’s authorization to access the user’s photo library.
-type PHAuthorizationStatus int64
+type AuthorizationStatus int64
 
 const (
 	// The user hasn’t set the app’s authorization status.
-	PHAuthorizationStatusNotDetermined PHAuthorizationStatus = 0
+	AuthorizationStatusNotDetermined AuthorizationStatus = 0
 	// The app isn’t authorized to access the photo library, and the user can’t grant such permission.
-	PHAuthorizationStatusRestricted PHAuthorizationStatus = 1
+	AuthorizationStatusRestricted AuthorizationStatus = 1
 	// The user explicitly denied this app access to the photo library.
-	PHAuthorizationStatusDenied PHAuthorizationStatus = 2
+	AuthorizationStatusDenied AuthorizationStatus = 2
 	// The user explicitly granted this app access to the photo library.
-	PHAuthorizationStatusAuthorized PHAuthorizationStatus = 3
+	AuthorizationStatusAuthorized AuthorizationStatus = 3
 	// The user authorized this app for limited photo library access.
-	PHAuthorizationStatusLimited PHAuthorizationStatus = 4
+	AuthorizationStatusLimited AuthorizationStatus = 4
 )
 
-func (e PHAuthorizationStatus) String() string {
+func (e AuthorizationStatus) String() string {
 	switch e {
-	case PHAuthorizationStatusNotDetermined:
-		return "PHAuthorizationStatusNotDetermined"
-	case PHAuthorizationStatusRestricted:
-		return "PHAuthorizationStatusRestricted"
-	case PHAuthorizationStatusDenied:
-		return "PHAuthorizationStatusDenied"
-	case PHAuthorizationStatusAuthorized:
-		return "PHAuthorizationStatusAuthorized"
-	case PHAuthorizationStatusLimited:
-		return "PHAuthorizationStatusLimited"
+	case AuthorizationStatusNotDetermined:
+		return "AuthorizationStatusNotDetermined"
+	case AuthorizationStatusRestricted:
+		return "AuthorizationStatusRestricted"
+	case AuthorizationStatusDenied:
+		return "AuthorizationStatusDenied"
+	case AuthorizationStatusAuthorized:
+		return "AuthorizationStatusAuthorized"
+	case AuthorizationStatusLimited:
+		return "AuthorizationStatusLimited"
 	default:
-		return fmt.Sprintf("PHAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("AuthorizationStatus(%d)", int64(e))
 	}
 }
 
 // Values identifying possible actions that a collection can support, used by the canPerformEditOperation: method.
-type PHCollectionEditOperation int64
+type CollectionEditOperation int64
 
 const (
 	// The collection supports deleting the items it contains.
-	PHCollectionEditOperationDeleteContent PHCollectionEditOperation = 1
+	CollectionEditOperationDeleteContent CollectionEditOperation = 1
 	// The collection supports removing the items it contains.
-	PHCollectionEditOperationRemoveContent PHCollectionEditOperation = 2
+	CollectionEditOperationRemoveContent CollectionEditOperation = 2
 	// The collection supports adding items that already exist elsewhere in the photo library.
-	PHCollectionEditOperationAddContent PHCollectionEditOperation = 3
+	CollectionEditOperationAddContent CollectionEditOperation = 3
 	// The collection supports creating new items.
-	PHCollectionEditOperationCreateContent PHCollectionEditOperation = 4
+	CollectionEditOperationCreateContent CollectionEditOperation = 4
 	// The collection supports reordering the arrangement of items it contains.
-	PHCollectionEditOperationRearrangeContent PHCollectionEditOperation = 5
+	CollectionEditOperationRearrangeContent CollectionEditOperation = 5
 	// The collection itself can be deleted.
-	PHCollectionEditOperationDelete PHCollectionEditOperation = 6
+	CollectionEditOperationDelete CollectionEditOperation = 6
 	// The collection itself can be renamed.
-	PHCollectionEditOperationRename PHCollectionEditOperation = 7
+	CollectionEditOperationRename CollectionEditOperation = 7
 )
 
-func (e PHCollectionEditOperation) String() string {
+func (e CollectionEditOperation) String() string {
 	switch e {
-	case PHCollectionEditOperationDeleteContent:
-		return "PHCollectionEditOperationDeleteContent"
-	case PHCollectionEditOperationRemoveContent:
-		return "PHCollectionEditOperationRemoveContent"
-	case PHCollectionEditOperationAddContent:
-		return "PHCollectionEditOperationAddContent"
-	case PHCollectionEditOperationCreateContent:
-		return "PHCollectionEditOperationCreateContent"
-	case PHCollectionEditOperationRearrangeContent:
-		return "PHCollectionEditOperationRearrangeContent"
-	case PHCollectionEditOperationDelete:
-		return "PHCollectionEditOperationDelete"
-	case PHCollectionEditOperationRename:
-		return "PHCollectionEditOperationRename"
+	case CollectionEditOperationDeleteContent:
+		return "CollectionEditOperationDeleteContent"
+	case CollectionEditOperationRemoveContent:
+		return "CollectionEditOperationRemoveContent"
+	case CollectionEditOperationAddContent:
+		return "CollectionEditOperationAddContent"
+	case CollectionEditOperationCreateContent:
+		return "CollectionEditOperationCreateContent"
+	case CollectionEditOperationRearrangeContent:
+		return "CollectionEditOperationRearrangeContent"
+	case CollectionEditOperationDelete:
+		return "CollectionEditOperationDelete"
+	case CollectionEditOperationRename:
+		return "CollectionEditOperationRename"
 	default:
-		return fmt.Sprintf("PHCollectionEditOperation(%d)", int64(e))
+		return fmt.Sprintf("CollectionEditOperation(%d)", int64(e))
 	}
 }
 
 // Major distinctions between kinds of collection list, used by the collectionListSubtype property and fetchCollectionListsWithType:subtype:options:, fetchMomentListsWithSubtype:containingMoment:options:, and fetchMomentListsWithSubtype:options: methods.
-type PHCollectionListSubtype uint64
+type CollectionListSubtype uint64
 
 const (
 	// The collection list is a smart folder containing one or more Events synced from iPhoto.
-	PHCollectionListSubtypeSmartFolderEvents PHCollectionListSubtype = 200
+	CollectionListSubtypeSmartFolderEvents CollectionListSubtype = 200
 	// The collection list is a smart folder containing one or more Faces synced from iPhoto.
-	PHCollectionListSubtypeSmartFolderFaces PHCollectionListSubtype = 201
+	CollectionListSubtypeSmartFolderFaces CollectionListSubtype = 201
 	// Use this value to fetch collection lists of all possible subtypes.
-	PHCollectionListSubtypeAny PHCollectionListSubtype = 9223372036854775807
+	CollectionListSubtypeAny CollectionListSubtype = 9223372036854775807
 )
 
-func (e PHCollectionListSubtype) String() string {
+func (e CollectionListSubtype) String() string {
 	switch e {
-	case PHCollectionListSubtypeSmartFolderEvents:
-		return "PHCollectionListSubtypeSmartFolderEvents"
-	case PHCollectionListSubtypeSmartFolderFaces:
-		return "PHCollectionListSubtypeSmartFolderFaces"
-	case PHCollectionListSubtypeAny:
-		return "PHCollectionListSubtypeAny"
+	case CollectionListSubtypeSmartFolderEvents:
+		return "CollectionListSubtypeSmartFolderEvents"
+	case CollectionListSubtypeSmartFolderFaces:
+		return "CollectionListSubtypeSmartFolderFaces"
+	case CollectionListSubtypeAny:
+		return "CollectionListSubtypeAny"
 	default:
-		return fmt.Sprintf("PHCollectionListSubtype(%d)", int64(e))
-	}
-}
-
-// Options for fitting an image’s aspect ratio to a requested size, used by the requestImageForAsset:targetSize:contentMode:options:resultHandler: method.
-type PHImageContentMode int64
-
-const (
-	// Scales the image so that its larger dimension fits the target size.
-	PHImageContentModeAspectFit PHImageContentMode = 0
-	// Scales the image so that it completely fills the target size.
-	PHImageContentModeAspectFill PHImageContentMode = 1
-	// Fits the image to the requested size using the default option, PHImageContentModeAspectFit.
-	PHImageContentModeDefault PHImageContentMode = 0
-)
-
-func (e PHImageContentMode) String() string {
-	switch e {
-	case PHImageContentModeAspectFit:
-		return "PHImageContentModeAspectFit"
-	case PHImageContentModeAspectFill:
-		return "PHImageContentModeAspectFill"
-	default:
-		return fmt.Sprintf("PHImageContentMode(%d)", int64(e))
+		return fmt.Sprintf("CollectionListSubtype(%d)", int64(e))
 	}
 }
 
 // Options for delivering requested image data, used by the deliveryMode property.
-type PHImageRequestOptionsDeliveryMode int64
+type ImageRequestOptionsDeliveryMode int64
 
 const (
 	// Photos automatically provides one or more results in order to balance image quality and responsiveness.
-	PHImageRequestOptionsDeliveryModeOpportunistic PHImageRequestOptionsDeliveryMode = 0
+	ImageRequestOptionsDeliveryModeOpportunistic ImageRequestOptionsDeliveryMode = 0
 	// Photos provides only the highest-quality image available, regardless of how much time it takes to load.
-	PHImageRequestOptionsDeliveryModeHighQualityFormat PHImageRequestOptionsDeliveryMode = 1
+	ImageRequestOptionsDeliveryModeHighQualityFormat ImageRequestOptionsDeliveryMode = 1
 	// Photos provides only a fast-loading image, possibly sacrificing image quality.
-	PHImageRequestOptionsDeliveryModeFastFormat PHImageRequestOptionsDeliveryMode = 2
+	ImageRequestOptionsDeliveryModeFastFormat ImageRequestOptionsDeliveryMode = 2
 )
 
-func (e PHImageRequestOptionsDeliveryMode) String() string {
+func (e ImageRequestOptionsDeliveryMode) String() string {
 	switch e {
-	case PHImageRequestOptionsDeliveryModeOpportunistic:
-		return "PHImageRequestOptionsDeliveryModeOpportunistic"
-	case PHImageRequestOptionsDeliveryModeHighQualityFormat:
-		return "PHImageRequestOptionsDeliveryModeHighQualityFormat"
-	case PHImageRequestOptionsDeliveryModeFastFormat:
-		return "PHImageRequestOptionsDeliveryModeFastFormat"
+	case ImageRequestOptionsDeliveryModeOpportunistic:
+		return "ImageRequestOptionsDeliveryModeOpportunistic"
+	case ImageRequestOptionsDeliveryModeHighQualityFormat:
+		return "ImageRequestOptionsDeliveryModeHighQualityFormat"
+	case ImageRequestOptionsDeliveryModeFastFormat:
+		return "ImageRequestOptionsDeliveryModeFastFormat"
 	default:
-		return fmt.Sprintf("PHImageRequestOptionsDeliveryMode(%d)", int64(e))
+		return fmt.Sprintf("ImageRequestOptionsDeliveryMode(%d)", int64(e))
 	}
 }
 
 // Options for how to resize the requested image to fit a target size, used by the resizeMode property.
-type PHImageRequestOptionsResizeMode int64
+type ImageRequestOptionsResizeMode int64
 
 const (
 	// Photos does not resize the image asset.
-	PHImageRequestOptionsResizeModeNone PHImageRequestOptionsResizeMode = 0
+	ImageRequestOptionsResizeModeNone ImageRequestOptionsResizeMode = 0
 	// Photos efficiently resizes the image to a size similar to, or slightly larger than, the target size.
-	PHImageRequestOptionsResizeModeFast PHImageRequestOptionsResizeMode = 1
+	ImageRequestOptionsResizeModeFast ImageRequestOptionsResizeMode = 1
 	// Photos resizes the image to match the target size exactly.
-	PHImageRequestOptionsResizeModeExact PHImageRequestOptionsResizeMode = 2
+	ImageRequestOptionsResizeModeExact ImageRequestOptionsResizeMode = 2
 )
 
-func (e PHImageRequestOptionsResizeMode) String() string {
+func (e ImageRequestOptionsResizeMode) String() string {
 	switch e {
-	case PHImageRequestOptionsResizeModeNone:
-		return "PHImageRequestOptionsResizeModeNone"
-	case PHImageRequestOptionsResizeModeFast:
-		return "PHImageRequestOptionsResizeModeFast"
-	case PHImageRequestOptionsResizeModeExact:
-		return "PHImageRequestOptionsResizeModeExact"
+	case ImageRequestOptionsResizeModeNone:
+		return "ImageRequestOptionsResizeModeNone"
+	case ImageRequestOptionsResizeModeFast:
+		return "ImageRequestOptionsResizeModeFast"
+	case ImageRequestOptionsResizeModeExact:
+		return "ImageRequestOptionsResizeModeExact"
 	default:
-		return fmt.Sprintf("PHImageRequestOptionsResizeMode(%d)", int64(e))
+		return fmt.Sprintf("ImageRequestOptionsResizeMode(%d)", int64(e))
 	}
 }
 
 // Error codes for Live Photo editing errors.
 //
 // Deprecated: since macOS 10.15.
-type PHLivePhotoEditingErrorCode int64
+type LivePhotoEditingErrorCode int64
 
 const (
 	// No further information is available about the cause of the error.
 	//
 	// Deprecated: since macOS 10.15.
-	PHLivePhotoEditingErrorCodeUnknown PHLivePhotoEditingErrorCode = 0
+	LivePhotoEditingErrorCodeUnknown LivePhotoEditingErrorCode = 0
 	// Live Photo processing was canceled by the Processing an Editing Context’s Live Photo method.
 	//
 	// Deprecated: since macOS 10.15.
-	PHLivePhotoEditingErrorCodeAborted PHLivePhotoEditingErrorCode = 1
+	LivePhotoEditingErrorCodeAborted LivePhotoEditingErrorCode = 1
 )
 
-func (e PHLivePhotoEditingErrorCode) String() string {
+func (e LivePhotoEditingErrorCode) String() string {
 	switch e {
-	case PHLivePhotoEditingErrorCodeUnknown:
-		return "PHLivePhotoEditingErrorCodeUnknown"
-	case PHLivePhotoEditingErrorCodeAborted:
-		return "PHLivePhotoEditingErrorCodeAborted"
+	case LivePhotoEditingErrorCodeUnknown:
+		return "LivePhotoEditingErrorCodeUnknown"
+	case LivePhotoEditingErrorCodeAborted:
+		return "LivePhotoEditingErrorCodeAborted"
 	default:
-		return fmt.Sprintf("PHLivePhotoEditingErrorCode(%d)", int64(e))
+		return fmt.Sprintf("LivePhotoEditingErrorCode(%d)", int64(e))
 	}
 }
 
 // Identifies the type of objects in a change request.
-type PHObjectType int64
+type ObjectType int64
 
 const (
 	// A type that represents an asset.
-	PHObjectTypeAsset PHObjectType = 1
+	ObjectTypeAsset ObjectType = 1
 	// A type that represents a collection of assets.
-	PHObjectTypeAssetCollection PHObjectType = 2
+	ObjectTypeAssetCollection ObjectType = 2
 	// A type that represents a collection list.
-	PHObjectTypeCollectionList PHObjectType = 3
+	ObjectTypeCollectionList ObjectType = 3
 )
 
-func (e PHObjectType) String() string {
+func (e ObjectType) String() string {
 	switch e {
-	case PHObjectTypeAsset:
-		return "PHObjectTypeAsset"
-	case PHObjectTypeAssetCollection:
-		return "PHObjectTypeAssetCollection"
-	case PHObjectTypeCollectionList:
-		return "PHObjectTypeCollectionList"
+	case ObjectTypeAsset:
+		return "ObjectTypeAsset"
+	case ObjectTypeAssetCollection:
+		return "ObjectTypeAssetCollection"
+	case ObjectTypeCollectionList:
+		return "ObjectTypeCollectionList"
 	default:
-		return fmt.Sprintf("PHObjectType(%d)", int64(e))
+		return fmt.Sprintf("ObjectType(%d)", int64(e))
 	}
 }
 
 // Options for delivering requested video data, used by the deliveryMode property.
-type PHVideoRequestOptionsDeliveryMode int64
+type VideoRequestOptionsDeliveryMode int64
 
 const (
 	// Photos automatically determines which quality of video data to provide based on the request and current conditions.
-	PHVideoRequestOptionsDeliveryModeAutomatic PHVideoRequestOptionsDeliveryMode = 0
+	VideoRequestOptionsDeliveryModeAutomatic VideoRequestOptionsDeliveryMode = 0
 	// Photos provides only the highest quality video available.
-	PHVideoRequestOptionsDeliveryModeHighQualityFormat PHVideoRequestOptionsDeliveryMode = 1
+	VideoRequestOptionsDeliveryModeHighQualityFormat VideoRequestOptionsDeliveryMode = 1
 	// Photos provides a video of moderate quality unless a higher quality version is locally cached.
-	PHVideoRequestOptionsDeliveryModeMediumQualityFormat PHVideoRequestOptionsDeliveryMode = 2
+	VideoRequestOptionsDeliveryModeMediumQualityFormat VideoRequestOptionsDeliveryMode = 2
 	// Photos provides whatever quality of video can be most quickly loaded.
-	PHVideoRequestOptionsDeliveryModeFastFormat PHVideoRequestOptionsDeliveryMode = 3
+	VideoRequestOptionsDeliveryModeFastFormat VideoRequestOptionsDeliveryMode = 3
 )
 
-func (e PHVideoRequestOptionsDeliveryMode) String() string {
+func (e VideoRequestOptionsDeliveryMode) String() string {
 	switch e {
-	case PHVideoRequestOptionsDeliveryModeAutomatic:
-		return "PHVideoRequestOptionsDeliveryModeAutomatic"
-	case PHVideoRequestOptionsDeliveryModeHighQualityFormat:
-		return "PHVideoRequestOptionsDeliveryModeHighQualityFormat"
-	case PHVideoRequestOptionsDeliveryModeMediumQualityFormat:
-		return "PHVideoRequestOptionsDeliveryModeMediumQualityFormat"
-	case PHVideoRequestOptionsDeliveryModeFastFormat:
-		return "PHVideoRequestOptionsDeliveryModeFastFormat"
+	case VideoRequestOptionsDeliveryModeAutomatic:
+		return "VideoRequestOptionsDeliveryModeAutomatic"
+	case VideoRequestOptionsDeliveryModeHighQualityFormat:
+		return "VideoRequestOptionsDeliveryModeHighQualityFormat"
+	case VideoRequestOptionsDeliveryModeMediumQualityFormat:
+		return "VideoRequestOptionsDeliveryModeMediumQualityFormat"
+	case VideoRequestOptionsDeliveryModeFastFormat:
+		return "VideoRequestOptionsDeliveryModeFastFormat"
 	default:
-		return fmt.Sprintf("PHVideoRequestOptionsDeliveryMode(%d)", int64(e))
+		return fmt.Sprintf("VideoRequestOptionsDeliveryMode(%d)", int64(e))
 	}
 }

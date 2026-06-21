@@ -5,120 +5,153 @@
 package opendirectory
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/opendirectory"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An ODSession object serves as a Cocoa wrapper for an Open Directory session.
 //
-// Session wraps [raw.ODSession] with a fluent Go API.
+// Session is an idiomatic wrapper over the Objective-C class ODSession.
 type Session struct {
-	inner *raw.ODSession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ODSession].
-func (x *Session) Unwrap() *raw.ODSession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Session) ID() objc.ID { return x.inner.Ptr() }
-
-// SessionFromID adopts an existing object pointer as a Session (nil for 0).
+// SessionFromID adopts an existing Objective-C object as a Session
+// (nil for 0), retaining it and registering a release finalizer.
 func SessionFromID(id objc.ID) *Session {
 	if id == 0 {
 		return nil
 	}
-	return &Session{inner: raw.ODSessionFromID(id)}
+	x := &Session{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// sessionAdopt wraps an Objective-C object that this code just created as a
+// Session (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sessionAdopt(id objc.ID) *Session {
+	if id == 0 {
+		return nil
+	}
+	x := &Session{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Session) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Session) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Session) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a session object directed over proxy to another host.
 //
-// NewSessionWithOptionsError creates a new [Session].
-func NewSessionWithOptionsError(inOptions purego.IDer) (*Session, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ODSession")), objc.RegisterName("alloc"))
+// NewSessionWithOptionsError creates a new Session.
+func NewSessionWithOptionsError(inOptions obj.Object) (*Session, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ODSession")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:error:"), inOptions.ID(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:error:"), objref.IDOf(inOptions), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Session{inner: raw.ODSessionFromID(_id)}, nil
+	return sessionAdopt(_id), nil
 }
 
 // Returns the node names that are registered with this session.
-//
-// NodeNamesAndReturnError calls the underlying NodeNamesAndReturnError.
-func (x *Session) NodeNamesAndReturnError() (*foundation.NSArray[objc.ID], error) {
-	return x.inner.NodeNamesAndReturnError()
-}
-
-// @method configurationAuthorizationAllowingUserInteraction: @abstract Returns an authorization appropriate for managing configurations. @discussion Returns an authorization appropriate for managing configurations.  If a proxy session is in use this method will return nil and no error.
-//
-// ConfigurationAuthorizationAllowingUserInteractionError calls the underlying ConfigurationAuthorizationAllowingUserInteractionError.
-func (x *Session) ConfigurationAuthorizationAllowingUserInteractionError(allowInteraction bool) (*securityfoundation.SFAuthorization, error) {
-	return x.inner.ConfigurationAuthorizationAllowingUserInteractionError(allowInteraction)
-}
-
-// @method configurationForNodename: @abstract Reads the configuration for a given nodename. @discussion Reads the configuration for a given nodename.
-//
-// ConfigurationForNodename calls the underlying ConfigurationForNodename.
-func (x *Session) ConfigurationForNodename(nodename string) *Configuration {
-	_r := x.inner.ConfigurationForNodename(foundation.NSStringStringWithUTF8String(nodename))
-	if _r == nil {
-		return nil
+func (x *Session) NodeNamesAndReturnError() (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeNamesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Configuration{inner: _r}
+	return obj.Wrap(_r), nil
 }
 
-// @method addConfiguration:authorization:error: @abstract Adds a new configuration to the existing ODSession. @discussion Adds a new configuration to the existing ODSession.  An SFAuthorization can be provided if necessary.
-//
-// AddConfigurationAuthorizationError calls the underlying AddConfigurationAuthorizationError.
-func (x *Session) AddConfigurationAuthorizationError(configuration *raw.ODConfiguration, authorization *securityfoundation.SFAuthorization) (bool, error) {
-	return x.inner.AddConfigurationAuthorizationError(configuration, authorization)
+// Returns an authorization appropriate for managing configurations. Returns an authorization appropriate for managing configurations.  If a proxy session is in use this method will return nil and no error.
+func (x *Session) ConfigurationAuthorizationAllowingUserInteractionError(allowInteraction bool) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationAuthorizationAllowingUserInteraction:error:"), allowInteraction, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
-// @method deleteConfiguration:authorization:error: @abstract Deletes an existing configuration from the ODSession. @discussion Deletes an existing configuration from the ODSession.  An authorization can be provided if necessary.
-//
-// DeleteConfigurationAuthorizationError calls the underlying DeleteConfigurationAuthorizationError.
-func (x *Session) DeleteConfigurationAuthorizationError(configuration *raw.ODConfiguration, authorization *securityfoundation.SFAuthorization) (bool, error) {
-	return x.inner.DeleteConfigurationAuthorizationError(configuration, authorization)
+// Reads the configuration for a given nodename. Reads the configuration for a given nodename.
+func (x *Session) ConfigurationForNodename(nodename string) *Configuration {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationForNodename:"), purego.NSString(nodename))
+	return ConfigurationFromID(_r)
 }
 
-// @method deleteConfigurationWithNodename:authorization:error: @abstract Deletes an existing configuration from the ODSession. @discussion Deletes an existing configuration from the ODSession.  An authorization can be provided if necessary.
-//
-// DeleteConfigurationWithNodenameAuthorizationError calls the underlying DeleteConfigurationWithNodenameAuthorizationError.
-func (x *Session) DeleteConfigurationWithNodenameAuthorizationError(nodename string, authorization *securityfoundation.SFAuthorization) (bool, error) {
-	return x.inner.DeleteConfigurationWithNodenameAuthorizationError(foundation.NSStringStringWithUTF8String(nodename), authorization)
+// Adds a new configuration to the existing ODSession. Adds a new configuration to the existing ODSession.  An SFAuthorization can be provided if necessary.
+func (x *Session) AddConfigurationAuthorization(configuration *Configuration, authorization obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addConfiguration:authorization:error:"), objref.IDOf(configuration), objref.IDOf(authorization), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @method configurationTemplateNames @abstract Returns a list of names as NSStrings for all available configuration templates. @discussion Returns a list of names as NSStrings for all available configuration templates.  Configuration templates have pre-configured modules and/or mappings.  Useful for re-using existing configurations that may change with operating system without changing the actual configuration.
-//
-// ConfigurationTemplateNames calls the underlying ConfigurationTemplateNames.
-func (x *Session) ConfigurationTemplateNames() *foundation.NSArray[objc.ID] {
-	return x.inner.ConfigurationTemplateNames()
+// Deletes an existing configuration from the ODSession. Deletes an existing configuration from the ODSession.  An authorization can be provided if necessary.
+func (x *Session) DeleteConfigurationAuthorization(configuration *Configuration, authorization obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("deleteConfiguration:authorization:error:"), objref.IDOf(configuration), objref.IDOf(authorization), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @method mappingTemplateNames @abstract Returns a list names as NSStrings for all available mapping templates. @discussion Returns a list names as NSStrings for all available mapping templates.  Mapping templates have pre-configured record/attribute mappings.  Useful if a configuration uses a common layout of mappings for a type of server.
-//
-// MappingTemplateNames calls the underlying MappingTemplateNames.
-func (x *Session) MappingTemplateNames() *foundation.NSArray[objc.ID] {
-	return x.inner.MappingTemplateNames()
+// Deletes an existing configuration from the ODSession. Deletes an existing configuration from the ODSession.  An authorization can be provided if necessary.
+func (x *Session) DeleteConfigurationWithNodenameAuthorization(nodename string, authorization obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("deleteConfigurationWithNodename:authorization:error:"), purego.NSString(nodename), objref.IDOf(authorization), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// Returns a list of names as NSStrings for all available configuration templates. Returns a list of names as NSStrings for all available configuration templates.  Configuration templates have pre-configured modules and/or mappings.  Useful for re-using existing configurations that may change with operating system without changing the actual configuration.
+func (x *Session) ConfigurationTemplateNames() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationTemplateNames"))
+	return obj.Wrap(_r)
+}
+
+// Returns a list names as NSStrings for all available mapping templates. Returns a list names as NSStrings for all available mapping templates.  Mapping templates have pre-configured record/attribute mappings.  Useful if a configuration uses a common layout of mappings for a type of server.
+func (x *Session) MappingTemplateNames() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mappingTemplateNames"))
+	return obj.Wrap(_r)
 }
 
 // Sessionable is the interface implemented by [Session], for mocking and DI.
 type Sessionable interface {
-	Unwrap() *raw.ODSession
-	NodeNamesAndReturnError() (*foundation.NSArray[objc.ID], error)
-	ConfigurationAuthorizationAllowingUserInteractionError(allowInteraction bool) (*securityfoundation.SFAuthorization, error)
+	obj.Object
+	NodeNamesAndReturnError() (obj.Object, error)
+	ConfigurationAuthorizationAllowingUserInteractionError(allowInteraction bool) (obj.Object, error)
 	ConfigurationForNodename(nodename string) *Configuration
-	AddConfigurationAuthorizationError(configuration *raw.ODConfiguration, authorization *securityfoundation.SFAuthorization) (bool, error)
-	DeleteConfigurationAuthorizationError(configuration *raw.ODConfiguration, authorization *securityfoundation.SFAuthorization) (bool, error)
-	DeleteConfigurationWithNodenameAuthorizationError(nodename string, authorization *securityfoundation.SFAuthorization) (bool, error)
-	ConfigurationTemplateNames() *foundation.NSArray[objc.ID]
-	MappingTemplateNames() *foundation.NSArray[objc.ID]
+	AddConfigurationAuthorization(configuration *Configuration, authorization obj.Object) error
+	DeleteConfigurationAuthorization(configuration *Configuration, authorization obj.Object) error
+	DeleteConfigurationWithNodenameAuthorization(nodename string, authorization obj.Object) error
+	ConfigurationTemplateNames() obj.Object
+	MappingTemplateNames() obj.Object
 }
 
 var _ Sessionable = (*Session)(nil)

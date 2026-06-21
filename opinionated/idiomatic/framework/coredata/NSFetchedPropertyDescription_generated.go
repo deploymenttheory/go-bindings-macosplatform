@@ -5,148 +5,169 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description object used to define which properties are fetched from Core Data.
 //
-// FetchedPropertyDescription wraps [raw.NSFetchedPropertyDescription] with a fluent Go API.
+// FetchedPropertyDescription is an idiomatic wrapper over the Objective-C class NSFetchedPropertyDescription.
 type FetchedPropertyDescription struct {
-	inner *raw.NSFetchedPropertyDescription
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFetchedPropertyDescription].
-func (x *FetchedPropertyDescription) Unwrap() *raw.NSFetchedPropertyDescription { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FetchedPropertyDescription) ID() objc.ID { return x.inner.Ptr() }
-
-// FetchedPropertyDescriptionFromID adopts an existing object pointer as a FetchedPropertyDescription (nil for 0).
+// FetchedPropertyDescriptionFromID adopts an existing Objective-C object as a FetchedPropertyDescription
+// (nil for 0), retaining it and registering a release finalizer.
 func FetchedPropertyDescriptionFromID(id objc.ID) *FetchedPropertyDescription {
 	if id == 0 {
 		return nil
 	}
-	return &FetchedPropertyDescription{inner: raw.NSFetchedPropertyDescriptionFromID(id)}
+	x := &FetchedPropertyDescription{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFetchedPropertyDescription creates a new [FetchedPropertyDescription].
+// fetchedPropertyDescriptionAdopt wraps an Objective-C object that this code just created as a
+// FetchedPropertyDescription (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fetchedPropertyDescriptionAdopt(id objc.ID) *FetchedPropertyDescription {
+	if id == 0 {
+		return nil
+	}
+	x := &FetchedPropertyDescription{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FetchedPropertyDescription) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FetchedPropertyDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FetchedPropertyDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFetchedPropertyDescription creates a new FetchedPropertyDescription.
 func NewFetchedPropertyDescription() *FetchedPropertyDescription {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFetchedPropertyDescription")), objc.RegisterName("new"))
-	return &FetchedPropertyDescription{inner: raw.NSFetchedPropertyDescriptionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSFetchedPropertyDescription")), objc.RegisterName("new"))
+	return fetchedPropertyDescriptionAdopt(_id)
 }
 
 // The fetch request of the receiver.
 //
-// WithFetchRequest sets the fetchRequest property and returns the receiver for chaining.
-func (x *FetchedPropertyDescription) WithFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID]) *FetchedPropertyDescription {
-	x.inner.SetFetchRequest(fetchRequest)
+// WithFetchRequest sets fetchRequest and returns the receiver so calls can be chained.
+func (x *FetchedPropertyDescription) WithFetchRequest(fetchRequest obj.Object) *FetchedPropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchRequest:"), objref.IDOf(fetchRequest))
 	return x
 }
 
 // The name of the receiver.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *FetchedPropertyDescription) WithName(name string) *FetchedPropertyDescription {
-	x.inner.NSPropertyDescription.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // A Boolean value that indicates whether the receiver is optional.
 //
-// WithOptional sets the optional property and returns the receiver for chaining.
+// WithOptional sets optional and returns the receiver so calls can be chained.
 func (x *FetchedPropertyDescription) WithOptional(optional bool) *FetchedPropertyDescription {
-	x.inner.NSPropertyDescription.SetOptional(optional)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptional:"), optional)
 	return x
 }
 
 // A Boolean value that indicates whether the receiver is transient.
 //
-// WithTransient sets the transient property and returns the receiver for chaining.
+// WithTransient sets transient and returns the receiver so calls can be chained.
 func (x *FetchedPropertyDescription) WithTransient(transient bool) *FetchedPropertyDescription {
-	x.inner.NSPropertyDescription.SetTransient(transient)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransient:"), transient)
 	return x
 }
 
 // The user info dictionary of the receiver.
 //
-// WithUserInfo sets the userInfo property and returns the receiver for chaining.
-func (x *FetchedPropertyDescription) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *FetchedPropertyDescription {
-	x.inner.NSPropertyDescription.SetUserInfo(userInfo)
+// WithUserInfo sets userInfo and returns the receiver so calls can be chained.
+func (x *FetchedPropertyDescription) WithUserInfo(userInfo obj.Object) *FetchedPropertyDescription {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return x
 }
 
 // A Boolean value that indicates whether the receiver should be indexed for searching.
 //
-// WithIndexed sets the indexed property and returns the receiver for chaining.
+// WithIndexed sets indexed and returns the receiver so calls can be chained.
 func (x *FetchedPropertyDescription) WithIndexed(indexed bool) *FetchedPropertyDescription {
-	x.inner.NSPropertyDescription.SetIndexed(indexed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexed:"), indexed)
 	return x
 }
 
 // The version hash modifier for the receiver.
 //
-// WithVersionHashModifier sets the versionHashModifier property and returns the receiver for chaining.
+// WithVersionHashModifier sets versionHashModifier and returns the receiver so calls can be chained.
 func (x *FetchedPropertyDescription) WithVersionHashModifier(versionHashModifier string) *FetchedPropertyDescription {
-	x.inner.NSPropertyDescription.SetVersionHashModifier(foundation.NSStringStringWithUTF8String(versionHashModifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
 	return x
 }
 
 // A Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
 //
-// WithIndexedBySpotlight sets the indexedBySpotlight property and returns the receiver for chaining.
+// WithIndexedBySpotlight sets indexedBySpotlight and returns the receiver so calls can be chained.
 func (x *FetchedPropertyDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *FetchedPropertyDescription {
-	x.inner.NSPropertyDescription.SetIndexedBySpotlight(indexedBySpotlight)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexedBySpotlight:"), indexedBySpotlight)
 	return x
 }
 
 // A Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
 //
-// WithStoredInExternalRecord sets the storedInExternalRecord property and returns the receiver for chaining.
+// WithStoredInExternalRecord sets storedInExternalRecord and returns the receiver so calls can be chained.
 func (x *FetchedPropertyDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *FetchedPropertyDescription {
-	x.inner.NSPropertyDescription.SetStoredInExternalRecord(storedInExternalRecord)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoredInExternalRecord:"), storedInExternalRecord)
 	return x
 }
 
 // The renaming identifier for the receiver.
 //
-// WithRenamingIdentifier sets the renamingIdentifier property and returns the receiver for chaining.
+// WithRenamingIdentifier sets renamingIdentifier and returns the receiver so calls can be chained.
 func (x *FetchedPropertyDescription) WithRenamingIdentifier(renamingIdentifier string) *FetchedPropertyDescription {
-	x.inner.NSPropertyDescription.SetRenamingIdentifier(foundation.NSStringStringWithUTF8String(renamingIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
 	return x
 }
 
-// FetchRequest calls the underlying FetchRequest.
-func (x *FetchedPropertyDescription) FetchRequest() *raw.NSFetchRequest[objc.ID] {
-	return x.inner.FetchRequest()
+func (x *FetchedPropertyDescription) FetchRequest() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRequest"))
+	return obj.Wrap(_r)
 }
 
-// SetFetchRequest calls the underlying SetFetchRequest.
-func (x *FetchedPropertyDescription) SetFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID]) {
-	x.inner.SetFetchRequest(fetchRequest)
-}
-
-func (x *FetchedPropertyDescription) asPropertyDescription() *raw.NSPropertyDescription {
-	return &x.inner.NSPropertyDescription
+func (x *FetchedPropertyDescription) SetFetchRequest(fetchRequest obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchRequest:"), objref.IDOf(fetchRequest))
 }
 
 // FetchedPropertyDescriptionable is the interface implemented by [FetchedPropertyDescription], for mocking and DI.
 type FetchedPropertyDescriptionable interface {
-	Unwrap() *raw.NSFetchedPropertyDescription
-	WithFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID]) *FetchedPropertyDescription
+	obj.Object
+	WithFetchRequest(fetchRequest obj.Object) *FetchedPropertyDescription
 	WithName(name string) *FetchedPropertyDescription
 	WithOptional(optional bool) *FetchedPropertyDescription
 	WithTransient(transient bool) *FetchedPropertyDescription
-	WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *FetchedPropertyDescription
+	WithUserInfo(userInfo obj.Object) *FetchedPropertyDescription
 	WithIndexed(indexed bool) *FetchedPropertyDescription
 	WithVersionHashModifier(versionHashModifier string) *FetchedPropertyDescription
 	WithIndexedBySpotlight(indexedBySpotlight bool) *FetchedPropertyDescription
 	WithStoredInExternalRecord(storedInExternalRecord bool) *FetchedPropertyDescription
 	WithRenamingIdentifier(renamingIdentifier string) *FetchedPropertyDescription
-	FetchRequest() *raw.NSFetchRequest[objc.ID]
-	SetFetchRequest(fetchRequest *raw.NSFetchRequest[objc.ID])
+	FetchRequest() obj.Object
+	SetFetchRequest(fetchRequest obj.Object)
 }
 
 var _ FetchedPropertyDescriptionable = (*FetchedPropertyDescription)(nil)

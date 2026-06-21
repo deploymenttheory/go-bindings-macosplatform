@@ -5,60 +5,79 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MaterialPropertyConnection wraps [raw.MDLMaterialPropertyConnection] with a fluent Go API.
+// MaterialPropertyConnection is an idiomatic wrapper over the Objective-C class MDLMaterialPropertyConnection.
 type MaterialPropertyConnection struct {
-	inner *raw.MDLMaterialPropertyConnection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLMaterialPropertyConnection].
-func (x *MaterialPropertyConnection) Unwrap() *raw.MDLMaterialPropertyConnection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MaterialPropertyConnection) ID() objc.ID { return x.inner.Ptr() }
-
-// MaterialPropertyConnectionFromID adopts an existing object pointer as a MaterialPropertyConnection (nil for 0).
+// MaterialPropertyConnectionFromID adopts an existing Objective-C object as a MaterialPropertyConnection
+// (nil for 0), retaining it and registering a release finalizer.
 func MaterialPropertyConnectionFromID(id objc.ID) *MaterialPropertyConnection {
 	if id == 0 {
 		return nil
 	}
-	return &MaterialPropertyConnection{inner: raw.MDLMaterialPropertyConnectionFromID(id)}
+	x := &MaterialPropertyConnection{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// materialPropertyConnectionAdopt wraps an Objective-C object that this code just created as a
+// MaterialPropertyConnection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func materialPropertyConnectionAdopt(id objc.ID) *MaterialPropertyConnection {
+	if id == 0 {
+		return nil
+	}
+	x := &MaterialPropertyConnection{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MaterialPropertyConnection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MaterialPropertyConnection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MaterialPropertyConnection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Connects the output to the input
 //
-// NewMaterialPropertyConnectionWithOutputInput creates a new [MaterialPropertyConnection].
-func NewMaterialPropertyConnectionWithOutputInput(output *raw.MDLMaterialProperty, input *raw.MDLMaterialProperty) *MaterialPropertyConnection {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMaterialPropertyConnection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOutput:input:"), output.Ptr(), input.Ptr())
-	return &MaterialPropertyConnection{inner: raw.MDLMaterialPropertyConnectionFromID(_id)}
+// NewMaterialPropertyConnectionWithOutputInput creates a new MaterialPropertyConnection.
+func NewMaterialPropertyConnectionWithOutputInput(output *MaterialProperty, input *MaterialProperty) *MaterialPropertyConnection {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLMaterialPropertyConnection")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOutput:input:"), objref.IDOf(output), objref.IDOf(input))
+	return materialPropertyConnectionAdopt(_id)
 }
 
-// Output calls the underlying Output.
 func (x *MaterialPropertyConnection) Output() *MaterialProperty {
-	_r := x.inner.Output()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("output"))
+	return MaterialPropertyFromID(_r)
 }
 
-// Input calls the underlying Input.
 func (x *MaterialPropertyConnection) Input() *MaterialProperty {
-	_r := x.inner.Input()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("input"))
+	return MaterialPropertyFromID(_r)
 }
 
 // MaterialPropertyConnectionable is the interface implemented by [MaterialPropertyConnection], for mocking and DI.
 type MaterialPropertyConnectionable interface {
-	Unwrap() *raw.MDLMaterialPropertyConnection
+	obj.Object
 	Output() *MaterialProperty
 	Input() *MaterialProperty
 }

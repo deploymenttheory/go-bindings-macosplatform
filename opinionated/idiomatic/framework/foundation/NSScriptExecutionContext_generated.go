@@ -5,113 +5,135 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The context in which the current script command is executed.
 //
-// ScriptExecutionContext wraps [raw.NSScriptExecutionContext] with a fluent Go API.
+// ScriptExecutionContext is an idiomatic wrapper over the Objective-C class NSScriptExecutionContext.
 type ScriptExecutionContext struct {
-	inner *raw.NSScriptExecutionContext
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSScriptExecutionContext].
-func (x *ScriptExecutionContext) Unwrap() *raw.NSScriptExecutionContext { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScriptExecutionContext) ID() objc.ID { return x.inner.Ptr() }
-
-// ScriptExecutionContextFromID adopts an existing object pointer as a ScriptExecutionContext (nil for 0).
+// ScriptExecutionContextFromID adopts an existing Objective-C object as a ScriptExecutionContext
+// (nil for 0), retaining it and registering a release finalizer.
 func ScriptExecutionContextFromID(id objc.ID) *ScriptExecutionContext {
 	if id == 0 {
 		return nil
 	}
-	return &ScriptExecutionContext{inner: raw.NSScriptExecutionContextFromID(id)}
+	x := &ScriptExecutionContext{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewScriptExecutionContext creates a new [ScriptExecutionContext].
+// scriptExecutionContextAdopt wraps an Objective-C object that this code just created as a
+// ScriptExecutionContext (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scriptExecutionContextAdopt(id objc.ID) *ScriptExecutionContext {
+	if id == 0 {
+		return nil
+	}
+	x := &ScriptExecutionContext{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScriptExecutionContext) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScriptExecutionContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScriptExecutionContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScriptExecutionContext creates a new ScriptExecutionContext.
 func NewScriptExecutionContext() *ScriptExecutionContext {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScriptExecutionContext")), objc.RegisterName("new"))
-	return &ScriptExecutionContext{inner: raw.NSScriptExecutionContextFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSScriptExecutionContext")), objc.RegisterName("new"))
+	return scriptExecutionContextAdopt(_id)
 }
 
 // Sets the top-level object for an object-specifier evaluation.
 //
-// WithTopLevelObject sets the topLevelObject property and returns the receiver for chaining.
-func (x *ScriptExecutionContext) WithTopLevelObject(topLevelObject objc.ID) *ScriptExecutionContext {
-	x.inner.SetTopLevelObject(topLevelObject)
+// WithTopLevelObject sets topLevelObject and returns the receiver so calls can be chained.
+func (x *ScriptExecutionContext) WithTopLevelObject(topLevelObject obj.Object) *ScriptExecutionContext {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopLevelObject:"), objref.IDOf(topLevelObject))
 	return x
 }
 
 // Sets the top-level container object currently being tested in a “whose” qualifier to a given object.
 //
-// WithObjectBeingTested sets the objectBeingTested property and returns the receiver for chaining.
-func (x *ScriptExecutionContext) WithObjectBeingTested(objectBeingTested objc.ID) *ScriptExecutionContext {
-	x.inner.SetObjectBeingTested(objectBeingTested)
+// WithObjectBeingTested sets objectBeingTested and returns the receiver so calls can be chained.
+func (x *ScriptExecutionContext) WithObjectBeingTested(objectBeingTested obj.Object) *ScriptExecutionContext {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectBeingTested:"), objref.IDOf(objectBeingTested))
 	return x
 }
 
 // Sets the top-level container object for a range-specifier evaluation to a give object.
 //
-// WithRangeContainerObject sets the rangeContainerObject property and returns the receiver for chaining.
-func (x *ScriptExecutionContext) WithRangeContainerObject(rangeContainerObject objc.ID) *ScriptExecutionContext {
-	x.inner.SetRangeContainerObject(rangeContainerObject)
+// WithRangeContainerObject sets rangeContainerObject and returns the receiver so calls can be chained.
+func (x *ScriptExecutionContext) WithRangeContainerObject(rangeContainerObject obj.Object) *ScriptExecutionContext {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRangeContainerObject:"), objref.IDOf(rangeContainerObject))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *ScriptExecutionContext) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptExecutionContext {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *ScriptExecutionContext) WithScriptingProperties(scriptingProperties obj.Object) *ScriptExecutionContext {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// TopLevelObject calls the underlying TopLevelObject.
-func (x *ScriptExecutionContext) TopLevelObject() objc.ID {
-	return x.inner.TopLevelObject()
+func (x *ScriptExecutionContext) TopLevelObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topLevelObject"))
+	return obj.Wrap(_r)
 }
 
-// SetTopLevelObject calls the underlying SetTopLevelObject.
-func (x *ScriptExecutionContext) SetTopLevelObject(topLevelObject objc.ID) {
-	x.inner.SetTopLevelObject(topLevelObject)
+func (x *ScriptExecutionContext) SetTopLevelObject(topLevelObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopLevelObject:"), objref.IDOf(topLevelObject))
 }
 
-// ObjectBeingTested calls the underlying ObjectBeingTested.
-func (x *ScriptExecutionContext) ObjectBeingTested() objc.ID {
-	return x.inner.ObjectBeingTested()
+func (x *ScriptExecutionContext) ObjectBeingTested() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectBeingTested"))
+	return obj.Wrap(_r)
 }
 
-// SetObjectBeingTested calls the underlying SetObjectBeingTested.
-func (x *ScriptExecutionContext) SetObjectBeingTested(objectBeingTested objc.ID) {
-	x.inner.SetObjectBeingTested(objectBeingTested)
+func (x *ScriptExecutionContext) SetObjectBeingTested(objectBeingTested obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectBeingTested:"), objref.IDOf(objectBeingTested))
 }
 
-// RangeContainerObject calls the underlying RangeContainerObject.
-func (x *ScriptExecutionContext) RangeContainerObject() objc.ID {
-	return x.inner.RangeContainerObject()
+func (x *ScriptExecutionContext) RangeContainerObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rangeContainerObject"))
+	return obj.Wrap(_r)
 }
 
-// SetRangeContainerObject calls the underlying SetRangeContainerObject.
-func (x *ScriptExecutionContext) SetRangeContainerObject(rangeContainerObject objc.ID) {
-	x.inner.SetRangeContainerObject(rangeContainerObject)
+func (x *ScriptExecutionContext) SetRangeContainerObject(rangeContainerObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRangeContainerObject:"), objref.IDOf(rangeContainerObject))
 }
-
-func (x *ScriptExecutionContext) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // ScriptExecutionContextable is the interface implemented by [ScriptExecutionContext], for mocking and DI.
 type ScriptExecutionContextable interface {
-	Unwrap() *raw.NSScriptExecutionContext
-	WithTopLevelObject(topLevelObject objc.ID) *ScriptExecutionContext
-	WithObjectBeingTested(objectBeingTested objc.ID) *ScriptExecutionContext
-	WithRangeContainerObject(rangeContainerObject objc.ID) *ScriptExecutionContext
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptExecutionContext
-	TopLevelObject() objc.ID
-	SetTopLevelObject(topLevelObject objc.ID)
-	ObjectBeingTested() objc.ID
-	SetObjectBeingTested(objectBeingTested objc.ID)
-	RangeContainerObject() objc.ID
-	SetRangeContainerObject(rangeContainerObject objc.ID)
+	obj.Object
+	WithTopLevelObject(topLevelObject obj.Object) *ScriptExecutionContext
+	WithObjectBeingTested(objectBeingTested obj.Object) *ScriptExecutionContext
+	WithRangeContainerObject(rangeContainerObject obj.Object) *ScriptExecutionContext
+	WithScriptingProperties(scriptingProperties obj.Object) *ScriptExecutionContext
+	TopLevelObject() obj.Object
+	SetTopLevelObject(topLevelObject obj.Object)
+	ObjectBeingTested() obj.Object
+	SetObjectBeingTested(objectBeingTested obj.Object)
+	RangeContainerObject() obj.Object
+	SetRangeContainerObject(rangeContainerObject obj.Object)
 }
 
 var _ ScriptExecutionContextable = (*ScriptExecutionContext)(nil)

@@ -5,137 +5,121 @@
 package quartzcomposer
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcomposer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// PlugIn wraps [raw.QCPlugIn] with a fluent Go API.
+// PlugIn is an idiomatic wrapper over the Objective-C class QCPlugIn.
 type PlugIn struct {
-	inner *raw.QCPlugIn
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QCPlugIn].
-func (x *PlugIn) Unwrap() *raw.QCPlugIn { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlugIn) ID() objc.ID { return x.inner.Ptr() }
-
-// PlugInFromID adopts an existing object pointer as a PlugIn (nil for 0).
+// PlugInFromID adopts an existing Objective-C object as a PlugIn
+// (nil for 0), retaining it and registering a release finalizer.
 func PlugInFromID(id objc.ID) *PlugIn {
 	if id == 0 {
 		return nil
 	}
-	return &PlugIn{inner: raw.QCPlugInFromID(id)}
+	x := &PlugIn{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPlugIn creates a new [PlugIn].
+// plugInAdopt wraps an Objective-C object that this code just created as a
+// PlugIn (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func plugInAdopt(id objc.ID) *PlugIn {
+	if id == 0 {
+		return nil
+	}
+	x := &PlugIn{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PlugIn) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlugIn) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlugIn) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPlugIn creates a new PlugIn.
 func NewPlugIn() *PlugIn {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QCPlugIn")), objc.RegisterName("new"))
-	return &PlugIn{inner: raw.QCPlugInFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QCPlugIn")), objc.RegisterName("new"))
+	return plugInAdopt(_id)
 }
 
-// StartExecution calls the underlying StartExecution.
-func (x *PlugIn) StartExecution(context_ raw.QCPlugInContext) bool {
-	return x.inner.StartExecution(context_)
+func (x *PlugIn) SerializedValueForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serializedValueForKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// EnableExecution calls the underlying EnableExecution.
-func (x *PlugIn) EnableExecution(context_ raw.QCPlugInContext) {
-	x.inner.EnableExecution(context_)
+func (x *PlugIn) SetSerializedValueForKey(serializedValue obj.Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSerializedValue:forKey:"), objref.IDOf(serializedValue), purego.NSString(key))
 }
 
-// ExecutionTimeForContextAtTimeWithArguments calls the underlying ExecutionTimeForContextAtTimeWithArguments.
-func (x *PlugIn) ExecutionTimeForContextAtTimeWithArguments(context_ raw.QCPlugInContext, time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) float64 {
-	return x.inner.ExecutionTimeForContextAtTimeWithArguments(context_, time_, arguments)
-}
-
-// ExecuteAtTimeWithArguments calls the underlying ExecuteAtTimeWithArguments.
-func (x *PlugIn) ExecuteAtTimeWithArguments(context_ raw.QCPlugInContext, time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool {
-	return x.inner.ExecuteAtTimeWithArguments(context_, time_, arguments)
-}
-
-// DisableExecution calls the underlying DisableExecution.
-func (x *PlugIn) DisableExecution(context_ raw.QCPlugInContext) {
-	x.inner.DisableExecution(context_)
-}
-
-// StopExecution calls the underlying StopExecution.
-func (x *PlugIn) StopExecution(context_ raw.QCPlugInContext) {
-	x.inner.StopExecution(context_)
-}
-
-// SerializedValueForKey calls the underlying SerializedValueForKey.
-func (x *PlugIn) SerializedValueForKey(key string) objc.ID {
-	return x.inner.SerializedValueForKey(foundation.NSStringStringWithUTF8String(key))
-}
-
-// SetSerializedValueForKey calls the underlying SetSerializedValueForKey.
-func (x *PlugIn) SetSerializedValueForKey(serializedValue objc.ID, key string) {
-	x.inner.SetSerializedValueForKey(serializedValue, foundation.NSStringStringWithUTF8String(key))
-}
-
-// DidValueForInputKeyChange calls the underlying DidValueForInputKeyChange.
 func (x *PlugIn) DidValueForInputKeyChange(key string) bool {
-	return x.inner.DidValueForInputKeyChange(foundation.NSStringStringWithUTF8String(key))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("didValueForInputKeyChange:"), purego.NSString(key))
+	return _r
 }
 
-// ValueForInputKey calls the underlying ValueForInputKey.
-func (x *PlugIn) ValueForInputKey(key string) objc.ID {
-	return x.inner.ValueForInputKey(foundation.NSStringStringWithUTF8String(key))
+func (x *PlugIn) ValueForInputKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForInputKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
-// SetValueForOutputKey calls the underlying SetValueForOutputKey.
-func (x *PlugIn) SetValueForOutputKey(value objc.ID, key string) bool {
-	return x.inner.SetValueForOutputKey(value, foundation.NSStringStringWithUTF8String(key))
+func (x *PlugIn) SetValueForOutputKey(value obj.Object, key string) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setValue:forOutputKey:"), objref.IDOf(value), purego.NSString(key))
+	return _r
 }
 
-// AddInputPortWithTypeForKeyWithAttributes calls the underlying AddInputPortWithTypeForKeyWithAttributes.
-func (x *PlugIn) AddInputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.AddInputPortWithTypeForKeyWithAttributes(foundation.NSStringStringWithUTF8String(type_), foundation.NSStringStringWithUTF8String(key), attributes)
+func (x *PlugIn) AddInputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addInputPortWithType:forKey:withAttributes:"), purego.NSString(type_), purego.NSString(key), objref.IDOf(attributes))
 }
 
-// RemoveInputPortForKey calls the underlying RemoveInputPortForKey.
 func (x *PlugIn) RemoveInputPortForKey(key string) {
-	x.inner.RemoveInputPortForKey(foundation.NSStringStringWithUTF8String(key))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeInputPortForKey:"), purego.NSString(key))
 }
 
-// AddOutputPortWithTypeForKeyWithAttributes calls the underlying AddOutputPortWithTypeForKeyWithAttributes.
-func (x *PlugIn) AddOutputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.AddOutputPortWithTypeForKeyWithAttributes(foundation.NSStringStringWithUTF8String(type_), foundation.NSStringStringWithUTF8String(key), attributes)
+func (x *PlugIn) AddOutputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOutputPortWithType:forKey:withAttributes:"), purego.NSString(type_), purego.NSString(key), objref.IDOf(attributes))
 }
 
-// RemoveOutputPortForKey calls the underlying RemoveOutputPortForKey.
 func (x *PlugIn) RemoveOutputPortForKey(key string) {
-	x.inner.RemoveOutputPortForKey(foundation.NSStringStringWithUTF8String(key))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeOutputPortForKey:"), purego.NSString(key))
 }
 
-// CreateViewController calls the underlying CreateViewController.
-func (x *PlugIn) CreateViewController() *quartz.QCPlugInViewController {
-	return x.inner.CreateViewController()
+func (x *PlugIn) CreateViewController() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createViewController"))
+	return obj.Wrap(_r)
 }
 
 // PlugInable is the interface implemented by [PlugIn], for mocking and DI.
 type PlugInable interface {
-	Unwrap() *raw.QCPlugIn
-	StartExecution(context_ raw.QCPlugInContext) bool
-	EnableExecution(context_ raw.QCPlugInContext)
-	ExecutionTimeForContextAtTimeWithArguments(context_ raw.QCPlugInContext, time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) float64
-	ExecuteAtTimeWithArguments(context_ raw.QCPlugInContext, time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool
-	DisableExecution(context_ raw.QCPlugInContext)
-	StopExecution(context_ raw.QCPlugInContext)
-	SerializedValueForKey(key string) objc.ID
-	SetSerializedValueForKey(serializedValue objc.ID, key string)
+	obj.Object
+	SerializedValueForKey(key string) obj.Object
+	SetSerializedValueForKey(serializedValue obj.Object, key string)
 	DidValueForInputKeyChange(key string) bool
-	ValueForInputKey(key string) objc.ID
-	SetValueForOutputKey(value objc.ID, key string) bool
-	AddInputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes *foundation.NSDictionary[objc.ID, objc.ID])
+	ValueForInputKey(key string) obj.Object
+	SetValueForOutputKey(value obj.Object, key string) bool
+	AddInputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes obj.Object)
 	RemoveInputPortForKey(key string)
-	AddOutputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes *foundation.NSDictionary[objc.ID, objc.ID])
+	AddOutputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes obj.Object)
 	RemoveOutputPortForKey(key string)
-	CreateViewController() *quartz.QCPlugInViewController
+	CreateViewController() obj.Object
 }
 
 var _ PlugInable = (*PlugIn)(nil)

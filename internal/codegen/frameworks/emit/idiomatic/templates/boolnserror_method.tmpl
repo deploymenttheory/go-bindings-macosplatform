@@ -1,13 +1,17 @@
 {{/*
-    boolnserror_method.tmpl — a (BOOL, NSError**) raw method surfaced as a method
-    returning only error. Recv is "(x *Type) " for an instance method or "" for a
-    package-level class function; Target is the receiver/raw-package expression.
+    boolnserror_method.tmpl renders an Objective-C method that returns a success
+    flag plus an error out-parameter as a Go method that returns only error
+    (nil on success). RecvExpr is the object the call is sent to.
 */}}
 {{define "boolnserror_method"}}{{if .DocComment}}{{.DocComment}}//
-{{end}}// {{.GoName}} returns any validation error.
+{{end}}// {{.GoName}} returns an error if the operation did not succeed.
 func {{.Recv}}{{.GoName}}() error {
-_, err := {{.Target}}.{{.RawGoName}}()
-return err
+var _nsErr uintptr
+objc.Send[bool]({{.RecvExpr}}, objc.RegisterName({{.Selector | printf "%q"}}), unsafe.Pointer(&_nsErr))
+if _nsErr != 0 {
+return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+}
+return nil
 }
 
 {{end}}

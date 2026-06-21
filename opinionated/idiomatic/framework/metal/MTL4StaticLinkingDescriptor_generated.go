@@ -5,92 +5,88 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Groups together properties to drive a static linking process.
 //
-// MTL4StaticLinkingDescriptor wraps [raw.MTL4StaticLinkingDescriptor] with a fluent Go API.
+// MTL4StaticLinkingDescriptor is an idiomatic wrapper over the Objective-C class MTL4StaticLinkingDescriptor.
 type MTL4StaticLinkingDescriptor struct {
-	inner *raw.MTL4StaticLinkingDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTL4StaticLinkingDescriptor].
-func (x *MTL4StaticLinkingDescriptor) Unwrap() *raw.MTL4StaticLinkingDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTL4StaticLinkingDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MTL4StaticLinkingDescriptorFromID adopts an existing object pointer as a MTL4StaticLinkingDescriptor (nil for 0).
+// MTL4StaticLinkingDescriptorFromID adopts an existing Objective-C object as a MTL4StaticLinkingDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MTL4StaticLinkingDescriptorFromID(id objc.ID) *MTL4StaticLinkingDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MTL4StaticLinkingDescriptor{inner: raw.MTL4StaticLinkingDescriptorFromID(id)}
+	x := &MTL4StaticLinkingDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTL4StaticLinkingDescriptor creates a new [MTL4StaticLinkingDescriptor].
+// mTL4StaticLinkingDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MTL4StaticLinkingDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTL4StaticLinkingDescriptorAdopt(id objc.ID) *MTL4StaticLinkingDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MTL4StaticLinkingDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTL4StaticLinkingDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTL4StaticLinkingDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTL4StaticLinkingDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTL4StaticLinkingDescriptor creates a new MTL4StaticLinkingDescriptor.
 func NewMTL4StaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4StaticLinkingDescriptor")), objc.RegisterName("new"))
-	return &MTL4StaticLinkingDescriptor{inner: raw.MTL4StaticLinkingDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTL4StaticLinkingDescriptor")), objc.RegisterName("new"))
+	return mTL4StaticLinkingDescriptorAdopt(_id)
 }
 
 // Provides an array of functions to link at the Metal IR level.
 //
-// WithFunctionDescriptors sets the collection, converting the Go slice to an NSArray.
+// WithFunctionDescriptors sets the collection and returns the receiver so calls can be chained.
 func (x *MTL4StaticLinkingDescriptor) WithFunctionDescriptors(items ...MTL4FunctionDescriptorProvider) *MTL4StaticLinkingDescriptor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetFunctionDescriptors(foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asMTL4FunctionDescriptor().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetFunctionDescriptors(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v MTL4FunctionDescriptorProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionDescriptors:"), _arr)
 	return x
 }
 
 // Provides an array of private functions to link at the Metal IR level.
 //
-// WithPrivateFunctionDescriptors sets the collection, converting the Go slice to an NSArray.
+// WithPrivateFunctionDescriptors sets the collection and returns the receiver so calls can be chained.
 func (x *MTL4StaticLinkingDescriptor) WithPrivateFunctionDescriptors(items ...MTL4FunctionDescriptorProvider) *MTL4StaticLinkingDescriptor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetPrivateFunctionDescriptors(foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asMTL4FunctionDescriptor().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetPrivateFunctionDescriptors(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v MTL4FunctionDescriptorProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrivateFunctionDescriptors:"), _arr)
 	return x
 }
 
 // Assigns groups of functions to match call-site attributes in shader code.
 //
-// WithGroups sets the groups property and returns the receiver for chaining.
-func (x *MTL4StaticLinkingDescriptor) WithGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTL4StaticLinkingDescriptor {
-	x.inner.SetGroups(groups)
+// WithGroups sets groups and returns the receiver so calls can be chained.
+func (x *MTL4StaticLinkingDescriptor) WithGroups(groups obj.Object) *MTL4StaticLinkingDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroups:"), objref.IDOf(groups))
 	return x
 }
 
@@ -98,84 +94,48 @@ func (x *MTL4StaticLinkingDescriptor) WithGroups(groups *foundation.NSDictionary
 //
 // FunctionDescriptors returns the collection as a Go slice.
 func (x *MTL4StaticLinkingDescriptor) FunctionDescriptors() []*MTL4FunctionDescriptor {
-	arr := x.inner.FunctionDescriptors()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTL4FunctionDescriptor {
-		return &MTL4FunctionDescriptor{inner: raw.MTL4FunctionDescriptorFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("functionDescriptors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTL4FunctionDescriptor { return MTL4FunctionDescriptorFromID(_id) })
 }
 
-// SetFunctionDescriptors calls the underlying SetFunctionDescriptors.
-func (x *MTL4StaticLinkingDescriptor) SetFunctionDescriptors(functionDescriptors ...MTL4FunctionDescriptorProvider) {
-	_ptrs := make([]objc.ID, len(functionDescriptors))
-	for _i, _v := range functionDescriptors {
-		_ptrs[_i] = _v.asMTL4FunctionDescriptor().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.MTL4FunctionDescriptor]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetFunctionDescriptors(_arg0)
+func (x *MTL4StaticLinkingDescriptor) SetFunctionDescriptors(functionDescriptors []*MTL4FunctionDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionDescriptors:"), purego.SliceToNSArray(functionDescriptors, func(_v *MTL4FunctionDescriptor) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Provides an array of private functions to link at the Metal IR level. You specify private functions to link separately from “functionDescriptors“ because pipelines don't export private functions as “MTLFunctionHandle“ instances. - Note: You can link private functions even when your “MTLDevice“ doesn't support function pointers.
 //
 // PrivateFunctionDescriptors returns the collection as a Go slice.
 func (x *MTL4StaticLinkingDescriptor) PrivateFunctionDescriptors() []*MTL4FunctionDescriptor {
-	arr := x.inner.PrivateFunctionDescriptors()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTL4FunctionDescriptor {
-		return &MTL4FunctionDescriptor{inner: raw.MTL4FunctionDescriptorFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("privateFunctionDescriptors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTL4FunctionDescriptor { return MTL4FunctionDescriptorFromID(_id) })
 }
 
-// SetPrivateFunctionDescriptors calls the underlying SetPrivateFunctionDescriptors.
-func (x *MTL4StaticLinkingDescriptor) SetPrivateFunctionDescriptors(privateFunctionDescriptors ...MTL4FunctionDescriptorProvider) {
-	_ptrs := make([]objc.ID, len(privateFunctionDescriptors))
-	for _i, _v := range privateFunctionDescriptors {
-		_ptrs[_i] = _v.asMTL4FunctionDescriptor().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.MTL4FunctionDescriptor]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.MTL4FunctionDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetPrivateFunctionDescriptors(_arg0)
+func (x *MTL4StaticLinkingDescriptor) SetPrivateFunctionDescriptors(privateFunctionDescriptors []*MTL4FunctionDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrivateFunctionDescriptors:"), purego.SliceToNSArray(privateFunctionDescriptors, func(_v *MTL4FunctionDescriptor) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Assigns groups of functions to match call-site attributes in shader code. Function groups help the compiler reduce the number of candidate functions it needs to evaluate for shader function calls, potentially increasing runtime performance.
-//
-// Groups calls the underlying Groups.
-func (x *MTL4StaticLinkingDescriptor) Groups() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.Groups()
+func (x *MTL4StaticLinkingDescriptor) Groups() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groups"))
+	return obj.Wrap(_r)
 }
 
-// SetGroups calls the underlying SetGroups.
-func (x *MTL4StaticLinkingDescriptor) SetGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.SetGroups(groups)
+func (x *MTL4StaticLinkingDescriptor) SetGroups(groups obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroups:"), objref.IDOf(groups))
 }
 
 // MTL4StaticLinkingDescriptorable is the interface implemented by [MTL4StaticLinkingDescriptor], for mocking and DI.
 type MTL4StaticLinkingDescriptorable interface {
-	Unwrap() *raw.MTL4StaticLinkingDescriptor
+	obj.Object
 	WithFunctionDescriptors(items ...MTL4FunctionDescriptorProvider) *MTL4StaticLinkingDescriptor
 	WithPrivateFunctionDescriptors(items ...MTL4FunctionDescriptorProvider) *MTL4StaticLinkingDescriptor
-	WithGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTL4StaticLinkingDescriptor
+	WithGroups(groups obj.Object) *MTL4StaticLinkingDescriptor
 	FunctionDescriptors() []*MTL4FunctionDescriptor
-	SetFunctionDescriptors(functionDescriptors ...MTL4FunctionDescriptorProvider)
+	SetFunctionDescriptors(functionDescriptors []*MTL4FunctionDescriptor)
 	PrivateFunctionDescriptors() []*MTL4FunctionDescriptor
-	SetPrivateFunctionDescriptors(privateFunctionDescriptors ...MTL4FunctionDescriptorProvider)
-	Groups() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SetGroups(groups *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	SetPrivateFunctionDescriptors(privateFunctionDescriptors []*MTL4FunctionDescriptor)
+	Groups() obj.Object
+	SetGroups(groups obj.Object)
 }
 
 var _ MTL4StaticLinkingDescriptorable = (*MTL4StaticLinkingDescriptor)(nil)

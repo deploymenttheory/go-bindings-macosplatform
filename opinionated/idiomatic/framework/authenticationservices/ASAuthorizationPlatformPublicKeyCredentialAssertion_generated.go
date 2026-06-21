@@ -5,67 +5,84 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that represents the platform credential assertion type.
 //
-// AuthorizationPlatformPublicKeyCredentialAssertion wraps [raw.ASAuthorizationPlatformPublicKeyCredentialAssertion] with a fluent Go API.
+// AuthorizationPlatformPublicKeyCredentialAssertion is an idiomatic wrapper over the Objective-C class ASAuthorizationPlatformPublicKeyCredentialAssertion.
 type AuthorizationPlatformPublicKeyCredentialAssertion struct {
-	inner *raw.ASAuthorizationPlatformPublicKeyCredentialAssertion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationPlatformPublicKeyCredentialAssertion].
-func (x *AuthorizationPlatformPublicKeyCredentialAssertion) Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialAssertion {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationPlatformPublicKeyCredentialAssertion) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationPlatformPublicKeyCredentialAssertionFromID adopts an existing object pointer as a AuthorizationPlatformPublicKeyCredentialAssertion (nil for 0).
+// AuthorizationPlatformPublicKeyCredentialAssertionFromID adopts an existing Objective-C object as a AuthorizationPlatformPublicKeyCredentialAssertion
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationPlatformPublicKeyCredentialAssertionFromID(id objc.ID) *AuthorizationPlatformPublicKeyCredentialAssertion {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationPlatformPublicKeyCredentialAssertion{inner: raw.ASAuthorizationPlatformPublicKeyCredentialAssertionFromID(id)}
+	x := &AuthorizationPlatformPublicKeyCredentialAssertion{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorizationPlatformPublicKeyCredentialAssertion creates a new [AuthorizationPlatformPublicKeyCredentialAssertion].
+// authorizationPlatformPublicKeyCredentialAssertionAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationPlatformPublicKeyCredentialAssertion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationPlatformPublicKeyCredentialAssertionAdopt(id objc.ID) *AuthorizationPlatformPublicKeyCredentialAssertion {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationPlatformPublicKeyCredentialAssertion{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthorizationPlatformPublicKeyCredentialAssertion) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationPlatformPublicKeyCredentialAssertion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationPlatformPublicKeyCredentialAssertion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAuthorizationPlatformPublicKeyCredentialAssertion creates a new AuthorizationPlatformPublicKeyCredentialAssertion.
 func NewAuthorizationPlatformPublicKeyCredentialAssertion() *AuthorizationPlatformPublicKeyCredentialAssertion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPlatformPublicKeyCredentialAssertion")), objc.RegisterName("new"))
-	return &AuthorizationPlatformPublicKeyCredentialAssertion{inner: raw.ASAuthorizationPlatformPublicKeyCredentialAssertionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPlatformPublicKeyCredentialAssertion")), objc.RegisterName("new"))
+	return authorizationPlatformPublicKeyCredentialAssertionAdopt(_id)
 }
 
-// Attachment calls the underlying Attachment.
-func (x *AuthorizationPlatformPublicKeyCredentialAssertion) Attachment() ASAuthorizationPublicKeyCredentialAttachment {
-	return ASAuthorizationPublicKeyCredentialAttachment(x.inner.Attachment())
+func (x *AuthorizationPlatformPublicKeyCredentialAssertion) Attachment() AuthorizationPublicKeyCredentialAttachment {
+	_r := objc.Send[AuthorizationPublicKeyCredentialAttachment](objref.IDOf(x), objc.RegisterName("attachment"))
+	return _r
 }
 
-// LargeBlob calls the underlying LargeBlob.
 func (x *AuthorizationPlatformPublicKeyCredentialAssertion) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput {
-	_r := x.inner.LargeBlob()
-	if _r == nil {
-		return nil
-	}
-	return &AuthorizationPublicKeyCredentialLargeBlobAssertionOutput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("largeBlob"))
+	return AuthorizationPublicKeyCredentialLargeBlobAssertionOutputFromID(_r)
 }
 
-// Prf calls the underlying Prf.
 func (x *AuthorizationPlatformPublicKeyCredentialAssertion) Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput {
-	_r := x.inner.Prf()
-	if _r == nil {
-		return nil
-	}
-	return &AuthorizationPublicKeyCredentialPRFAssertionOutput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prf"))
+	return AuthorizationPublicKeyCredentialPRFAssertionOutputFromID(_r)
 }
 
 // AuthorizationPlatformPublicKeyCredentialAssertionable is the interface implemented by [AuthorizationPlatformPublicKeyCredentialAssertion], for mocking and DI.
 type AuthorizationPlatformPublicKeyCredentialAssertionable interface {
-	Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialAssertion
-	Attachment() ASAuthorizationPublicKeyCredentialAttachment
+	obj.Object
+	Attachment() AuthorizationPublicKeyCredentialAttachment
 	LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionOutput
 	Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput
 }

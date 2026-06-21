@@ -5,63 +5,85 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A record of the data that a particular website stores persistently.
 //
-// WKWebsiteDataRecord wraps [raw.WKWebsiteDataRecord] with a fluent Go API.
+// WKWebsiteDataRecord is an idiomatic wrapper over the Objective-C class WKWebsiteDataRecord.
 type WKWebsiteDataRecord struct {
-	inner *raw.WKWebsiteDataRecord
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKWebsiteDataRecord].
-func (x *WKWebsiteDataRecord) Unwrap() *raw.WKWebsiteDataRecord { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKWebsiteDataRecord) ID() objc.ID { return x.inner.Ptr() }
-
-// WKWebsiteDataRecordFromID adopts an existing object pointer as a WKWebsiteDataRecord (nil for 0).
+// WKWebsiteDataRecordFromID adopts an existing Objective-C object as a WKWebsiteDataRecord
+// (nil for 0), retaining it and registering a release finalizer.
 func WKWebsiteDataRecordFromID(id objc.ID) *WKWebsiteDataRecord {
 	if id == 0 {
 		return nil
 	}
-	return &WKWebsiteDataRecord{inner: raw.WKWebsiteDataRecordFromID(id)}
+	x := &WKWebsiteDataRecord{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWKWebsiteDataRecord creates a new [WKWebsiteDataRecord].
+// wKWebsiteDataRecordAdopt wraps an Objective-C object that this code just created as a
+// WKWebsiteDataRecord (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKWebsiteDataRecordAdopt(id objc.ID) *WKWebsiteDataRecord {
+	if id == 0 {
+		return nil
+	}
+	x := &WKWebsiteDataRecord{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WKWebsiteDataRecord) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKWebsiteDataRecord) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKWebsiteDataRecord) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWKWebsiteDataRecord creates a new WKWebsiteDataRecord.
 func NewWKWebsiteDataRecord() *WKWebsiteDataRecord {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKWebsiteDataRecord")), objc.RegisterName("new"))
-	return &WKWebsiteDataRecord{inner: raw.WKWebsiteDataRecordFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WKWebsiteDataRecord")), objc.RegisterName("new"))
+	return wKWebsiteDataRecordAdopt(_id)
 }
 
-// @abstract The display name for the data record. This is usually the domain name.
-//
-// DisplayName calls the underlying DisplayName.
+// The display name for the data record. This is usually the domain name.
 func (x *WKWebsiteDataRecord) DisplayName() string {
-	_r := x.inner.DisplayName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The various types of website data that exist for this data record.
-//
-// DataTypes calls the underlying DataTypes.
-func (x *WKWebsiteDataRecord) DataTypes() *foundation.NSSet[*foundation.NSString] {
-	return x.inner.DataTypes()
+// The various types of website data that exist for this data record.
+func (x *WKWebsiteDataRecord) DataTypes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataTypes"))
+	return obj.Wrap(_r)
 }
 
 // WKWebsiteDataRecordable is the interface implemented by [WKWebsiteDataRecord], for mocking and DI.
 type WKWebsiteDataRecordable interface {
-	Unwrap() *raw.WKWebsiteDataRecord
+	obj.Object
 	DisplayName() string
-	DataTypes() *foundation.NSSet[*foundation.NSString]
+	DataTypes() obj.Object
 }
 
 var _ WKWebsiteDataRecordable = (*WKWebsiteDataRecord)(nil)

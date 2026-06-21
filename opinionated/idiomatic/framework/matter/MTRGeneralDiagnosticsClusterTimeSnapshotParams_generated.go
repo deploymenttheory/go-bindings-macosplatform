@@ -5,88 +5,108 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRGeneralDiagnosticsClusterTimeSnapshotParams wraps [raw.MTRGeneralDiagnosticsClusterTimeSnapshotParams] with a fluent Go API.
+// MTRGeneralDiagnosticsClusterTimeSnapshotParams is an idiomatic wrapper over the Objective-C class MTRGeneralDiagnosticsClusterTimeSnapshotParams.
 type MTRGeneralDiagnosticsClusterTimeSnapshotParams struct {
-	inner *raw.MTRGeneralDiagnosticsClusterTimeSnapshotParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRGeneralDiagnosticsClusterTimeSnapshotParams].
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) Unwrap() *raw.MTRGeneralDiagnosticsClusterTimeSnapshotParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRGeneralDiagnosticsClusterTimeSnapshotParamsFromID adopts an existing object pointer as a MTRGeneralDiagnosticsClusterTimeSnapshotParams (nil for 0).
+// MTRGeneralDiagnosticsClusterTimeSnapshotParamsFromID adopts an existing Objective-C object as a MTRGeneralDiagnosticsClusterTimeSnapshotParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRGeneralDiagnosticsClusterTimeSnapshotParamsFromID(id objc.ID) *MTRGeneralDiagnosticsClusterTimeSnapshotParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRGeneralDiagnosticsClusterTimeSnapshotParams{inner: raw.MTRGeneralDiagnosticsClusterTimeSnapshotParamsFromID(id)}
+	x := &MTRGeneralDiagnosticsClusterTimeSnapshotParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRGeneralDiagnosticsClusterTimeSnapshotParams creates a new [MTRGeneralDiagnosticsClusterTimeSnapshotParams].
+// mTRGeneralDiagnosticsClusterTimeSnapshotParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRGeneralDiagnosticsClusterTimeSnapshotParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRGeneralDiagnosticsClusterTimeSnapshotParamsAdopt(id objc.ID) *MTRGeneralDiagnosticsClusterTimeSnapshotParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRGeneralDiagnosticsClusterTimeSnapshotParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRGeneralDiagnosticsClusterTimeSnapshotParams creates a new MTRGeneralDiagnosticsClusterTimeSnapshotParams.
 func NewMTRGeneralDiagnosticsClusterTimeSnapshotParams() *MTRGeneralDiagnosticsClusterTimeSnapshotParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGeneralDiagnosticsClusterTimeSnapshotParams")), objc.RegisterName("new"))
-	return &MTRGeneralDiagnosticsClusterTimeSnapshotParams{inner: raw.MTRGeneralDiagnosticsClusterTimeSnapshotParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRGeneralDiagnosticsClusterTimeSnapshotParams")), objc.RegisterName("new"))
+	return mTRGeneralDiagnosticsClusterTimeSnapshotParamsAdopt(_id)
 }
 
 // Controls whether the command is a timed command (using Timed Invoke).
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGeneralDiagnosticsClusterTimeSnapshotParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGeneralDiagnosticsClusterTimeSnapshotParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRGeneralDiagnosticsClusterTimeSnapshotParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRGeneralDiagnosticsClusterTimeSnapshotParamsable is the interface implemented by [MTRGeneralDiagnosticsClusterTimeSnapshotParams], for mocking and DI.
 type MTRGeneralDiagnosticsClusterTimeSnapshotParamsable interface {
-	Unwrap() *raw.MTRGeneralDiagnosticsClusterTimeSnapshotParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGeneralDiagnosticsClusterTimeSnapshotParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRGeneralDiagnosticsClusterTimeSnapshotParams
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRGeneralDiagnosticsClusterTimeSnapshotParams
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRGeneralDiagnosticsClusterTimeSnapshotParamsable = (*MTRGeneralDiagnosticsClusterTimeSnapshotParams)(nil)

@@ -5,15 +5,17 @@
 package mpsimage
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/ebitengine/purego/objc"
 )
 
-// MaxKernelDiameter calls the underlying MPSImageMedianMaxKernelDiameter.
-func MaxKernelDiameter() uint {
-	return raw.MPSImageMedianMaxKernelDiameter()
+// The maximum diameter in pixels of the filter window supported by the median filter.
+func MaxKernelDiameter() int {
+	_r := objc.Send[int](objc.ID(_class("MPSImageMedian")), objc.RegisterName("maxKernelDiameter"))
+	return _r
 }
 
-// MinKernelDiameter calls the underlying MPSImageMedianMinKernelDiameter.
-func MinKernelDiameter() uint {
-	return raw.MPSImageMedianMinKernelDiameter()
+// The minimum diameter in pixels of the filter window supported by the median filter.
+func MinKernelDiameter() int {
+	_r := objc.Send[int](objc.ID(_class("MPSImageMedian")), objc.RegisterName("minKernelDiameter"))
+	return _r
 }

@@ -5,64 +5,74 @@
 package mediaextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides information about the sample location with the media.
 //
-// SampleLocation wraps [raw.MESampleLocation] with a fluent Go API.
+// SampleLocation is an idiomatic wrapper over the Objective-C class MESampleLocation.
 type SampleLocation struct {
-	inner *raw.MESampleLocation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MESampleLocation].
-func (x *SampleLocation) Unwrap() *raw.MESampleLocation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SampleLocation) ID() objc.ID { return x.inner.Ptr() }
-
-// SampleLocationFromID adopts an existing object pointer as a SampleLocation (nil for 0).
+// SampleLocationFromID adopts an existing Objective-C object as a SampleLocation
+// (nil for 0), retaining it and registering a release finalizer.
 func SampleLocationFromID(id objc.ID) *SampleLocation {
 	if id == 0 {
 		return nil
 	}
-	return &SampleLocation{inner: raw.MESampleLocationFromID(id)}
+	x := &SampleLocation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a sample location object with the byte source and sample location that you specify.
-//
-// NewSampleLocationWithByteSourceSampleLocation creates a new [SampleLocation].
-func NewSampleLocationWithByteSourceSampleLocation(byteSource *raw.MEByteSource, sampleLocation avfoundation.AVSampleCursorStorageRange) *SampleLocation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MESampleLocation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithByteSource:sampleLocation:"), byteSource.Ptr(), sampleLocation)
-	return &SampleLocation{inner: raw.MESampleLocationFromID(_id)}
-}
-
-// @property		sampleLocation @abstract		The starting file offset and size in bytes of the sample.
-//
-// SampleLocation calls the underlying SampleLocation.
-func (x *SampleLocation) SampleLocation() avfoundation.AVSampleCursorStorageRange {
-	return x.inner.SampleLocation()
-}
-
-// @property		byteSource @abstract		The MEByteSource to be used to read the data for the sample.
-//
-// ByteSource calls the underlying ByteSource.
-func (x *SampleLocation) ByteSource() *ByteSource {
-	_r := x.inner.ByteSource()
-	if _r == nil {
+// sampleLocationAdopt wraps an Objective-C object that this code just created as a
+// SampleLocation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sampleLocationAdopt(id objc.ID) *SampleLocation {
+	if id == 0 {
 		return nil
 	}
-	return &ByteSource{inner: _r}
+	x := &SampleLocation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SampleLocation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SampleLocation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SampleLocation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSampleLocation creates a new SampleLocation.
+func NewSampleLocation() *SampleLocation {
+	_id := objc.Send[objc.ID](objc.ID(_class("MESampleLocation")), objc.RegisterName("new"))
+	return sampleLocationAdopt(_id)
+}
+
+// The MEByteSource to be used to read the data for the sample.
+func (x *SampleLocation) ByteSource() *ByteSource {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("byteSource"))
+	return ByteSourceFromID(_r)
 }
 
 // SampleLocationable is the interface implemented by [SampleLocation], for mocking and DI.
 type SampleLocationable interface {
-	Unwrap() *raw.MESampleLocation
-	SampleLocation() avfoundation.AVSampleCursorStorageRange
+	obj.Object
 	ByteSource() *ByteSource
 }
 

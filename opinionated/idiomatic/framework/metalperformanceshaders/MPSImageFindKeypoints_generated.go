@@ -5,91 +5,77 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A kernel that is used to find a list of keypoints.
 //
-// ImageFindKeypoints wraps [raw.MPSImageFindKeypoints] with a fluent Go API.
+// ImageFindKeypoints is an idiomatic wrapper over the Objective-C class MPSImageFindKeypoints.
 type ImageFindKeypoints struct {
-	inner *raw.MPSImageFindKeypoints
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageFindKeypoints].
-func (x *ImageFindKeypoints) Unwrap() *raw.MPSImageFindKeypoints { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageFindKeypoints) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageFindKeypointsFromID adopts an existing object pointer as a ImageFindKeypoints (nil for 0).
+// ImageFindKeypointsFromID adopts an existing Objective-C object as a ImageFindKeypoints
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageFindKeypointsFromID(id objc.ID) *ImageFindKeypoints {
 	if id == 0 {
 		return nil
 	}
-	return &ImageFindKeypoints{inner: raw.MPSImageFindKeypointsFromID(id)}
-}
-
-// NewImageFindKeypointsWithDeviceInfo creates a new [ImageFindKeypoints].
-func NewImageFindKeypointsWithDeviceInfo(device metal.MTLDevice, info *mpsimage.MPSImageKeypointRangeInfo) *ImageFindKeypoints {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageFindKeypoints")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:info:"), device, info)
-	return &ImageFindKeypoints{inner: raw.MPSImageFindKeypointsFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewImageFindKeypointsWithCoderDevice creates a new [ImageFindKeypoints].
-func NewImageFindKeypointsWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageFindKeypoints {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageFindKeypoints")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageFindKeypoints{inner: raw.MPSImageFindKeypointsFromID(_id)}
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageFindKeypoints) WithOptions(options mpscore.MPSKernelOptions) *ImageFindKeypoints {
-	x.inner.MPSKernel.SetOptions(options)
+	x := &ImageFindKeypoints{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// imageFindKeypointsAdopt wraps an Objective-C object that this code just created as a
+// ImageFindKeypoints (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageFindKeypointsAdopt(id objc.ID) *ImageFindKeypoints {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageFindKeypoints{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ImageFindKeypoints) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageFindKeypoints) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageFindKeypoints) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageFindKeypoints creates a new ImageFindKeypoints.
+func NewImageFindKeypoints() *ImageFindKeypoints {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageFindKeypoints")), objc.RegisterName("new"))
+	return imageFindKeypointsAdopt(_id)
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ImageFindKeypoints) WithLabel(label string) *ImageFindKeypoints {
-	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract Encode the filter to a command buffer using a MTLComputeCommandEncoder. @discussion The filter will not begin to execute until after the command buffer has been enqueued and committed. @param  commandBuffer               A valid MTLCommandBuffer. @param  source                      A valid MTLTexture containing the source image for the filter. @param  regions                     An array of rectangles that describe regions in the image. The list of keypoints is generated for each individual rectangle specifed. @param  keypointCountBuffer         The list of keypoints for each specified region @param  keypointCountBufferOffset   Byte offset into keypointCountBufferOffset buffer at which to write the keypoint results. Must be a multiple of 32 bytes. @param  keypointDataBuffer          A valid MTLBuffer to receive the keypoint data results for each rectangle. The keypoint data for keypoints in each rectangle are stored consecutively. The keypoint data for each rectangle starts at the following offset: MPSImageKeypointRangeInfo.maximumKeyPoints * rectangle index @param  keypointDataBufferOffset    Byte offset into keypointData buffer at which to write the keypoint results. Must be a multiple of 32 bytes.
-//
-// EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset calls the underlying EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset.
-func (x *ImageFindKeypoints) EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, regions *metal.MTLRegion, numberOfRegions uint, keypointCountBuffer metal.MTLBuffer, keypointCountBufferOffset uint, keypointDataBuffer metal.MTLBuffer, keypointDataBufferOffset uint) {
-	x.inner.EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset(commandBuffer, source, regions, numberOfRegions, keypointCountBuffer, keypointCountBufferOffset, keypointDataBuffer, keypointDataBufferOffset)
-}
-
-// @property   keypointRangeInfo @abstract   Return a structure describing the keypoint range info @discussion Returns a MPSImageKeypointRangeInfo structure
-//
-// KeypointRangeInfo calls the underlying KeypointRangeInfo.
-func (x *ImageFindKeypoints) KeypointRangeInfo() mpsimage.MPSImageKeypointRangeInfo {
-	return x.inner.KeypointRangeInfo()
-}
-
-func (x *ImageFindKeypoints) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
-
 // ImageFindKeypointsable is the interface implemented by [ImageFindKeypoints], for mocking and DI.
 type ImageFindKeypointsable interface {
-	Unwrap() *raw.MPSImageFindKeypoints
-	WithOptions(options mpscore.MPSKernelOptions) *ImageFindKeypoints
+	obj.Object
 	WithLabel(label string) *ImageFindKeypoints
-	EncodeToCommandBufferSourceTextureRegionsNumberOfRegionsKeypointCountBufferKeypointCountBufferOffsetKeypointDataBufferKeypointDataBufferOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, regions *metal.MTLRegion, numberOfRegions uint, keypointCountBuffer metal.MTLBuffer, keypointCountBufferOffset uint, keypointDataBuffer metal.MTLBuffer, keypointDataBufferOffset uint)
-	KeypointRangeInfo() mpsimage.MPSImageKeypointRangeInfo
 }
 
 var _ ImageFindKeypointsable = (*ImageFindKeypoints)(nil)

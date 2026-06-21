@@ -5,43 +5,68 @@
 package coreimage
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An abstract base class that represents a machine-readable code’s attributes.
 //
-// BarcodeDescriptor wraps [raw.CIBarcodeDescriptor] with a fluent Go API.
+// BarcodeDescriptor is an idiomatic wrapper over the Objective-C class CIBarcodeDescriptor.
 type BarcodeDescriptor struct {
-	inner *raw.CIBarcodeDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CIBarcodeDescriptor].
-func (x *BarcodeDescriptor) Unwrap() *raw.CIBarcodeDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BarcodeDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// BarcodeDescriptorFromID adopts an existing object pointer as a BarcodeDescriptor (nil for 0).
+// BarcodeDescriptorFromID adopts an existing Objective-C object as a BarcodeDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func BarcodeDescriptorFromID(id objc.ID) *BarcodeDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &BarcodeDescriptor{inner: raw.CIBarcodeDescriptorFromID(id)}
+	x := &BarcodeDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBarcodeDescriptor creates a new [BarcodeDescriptor].
+// barcodeDescriptorAdopt wraps an Objective-C object that this code just created as a
+// BarcodeDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func barcodeDescriptorAdopt(id objc.ID) *BarcodeDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &BarcodeDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BarcodeDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BarcodeDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BarcodeDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBarcodeDescriptor creates a new BarcodeDescriptor.
 func NewBarcodeDescriptor() *BarcodeDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CIBarcodeDescriptor")), objc.RegisterName("new"))
-	return &BarcodeDescriptor{inner: raw.CIBarcodeDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CIBarcodeDescriptor")), objc.RegisterName("new"))
+	return barcodeDescriptorAdopt(_id)
 }
-
-func (x *BarcodeDescriptor) asBarcodeDescriptor() *raw.CIBarcodeDescriptor { return x.inner }
 
 // BarcodeDescriptorable is the interface implemented by [BarcodeDescriptor], for mocking and DI.
 type BarcodeDescriptorable interface {
-	Unwrap() *raw.CIBarcodeDescriptor
+	obj.Object
 }
 
 var _ BarcodeDescriptorable = (*BarcodeDescriptor)(nil)

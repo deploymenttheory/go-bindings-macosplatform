@@ -8,845 +8,845 @@ import (
 	"fmt"
 )
 
-type MDLAnimatedValueInterpolation uint64
+type AnimatedValueInterpolation uint64
 
 const (
-	MDLAnimatedValueInterpolationConstant MDLAnimatedValueInterpolation = 0
-	MDLAnimatedValueInterpolationLinear   MDLAnimatedValueInterpolation = 1
+	AnimatedValueInterpolationConstant AnimatedValueInterpolation = 0
+	AnimatedValueInterpolationLinear   AnimatedValueInterpolation = 1
 )
 
-func (e MDLAnimatedValueInterpolation) String() string {
+func (e AnimatedValueInterpolation) String() string {
 	switch e {
-	case MDLAnimatedValueInterpolationConstant:
-		return "MDLAnimatedValueInterpolationConstant"
-	case MDLAnimatedValueInterpolationLinear:
-		return "MDLAnimatedValueInterpolationLinear"
+	case AnimatedValueInterpolationConstant:
+		return "AnimatedValueInterpolationConstant"
+	case AnimatedValueInterpolationLinear:
+		return "AnimatedValueInterpolationLinear"
 	default:
-		return fmt.Sprintf("MDLAnimatedValueInterpolation(%d)", int64(e))
+		return fmt.Sprintf("AnimatedValueInterpolation(%d)", int64(e))
 	}
 }
 
 // Options for camera projection styles, used by the projection property.
-type MDLCameraProjection uint64
+type CameraProjection uint64
 
 const (
 	// A perspective projection.
-	MDLCameraProjectionPerspective MDLCameraProjection = 0
+	CameraProjectionPerspective CameraProjection = 0
 	// An orthographic projection.
-	MDLCameraProjectionOrthographic MDLCameraProjection = 1
+	CameraProjectionOrthographic CameraProjection = 1
 )
 
-func (e MDLCameraProjection) String() string {
+func (e CameraProjection) String() string {
 	switch e {
-	case MDLCameraProjectionPerspective:
-		return "MDLCameraProjectionPerspective"
-	case MDLCameraProjectionOrthographic:
-		return "MDLCameraProjectionOrthographic"
+	case CameraProjectionPerspective:
+		return "CameraProjectionPerspective"
+	case CameraProjectionOrthographic:
+		return "CameraProjectionOrthographic"
 	default:
-		return fmt.Sprintf("MDLCameraProjection(%d)", int64(e))
+		return fmt.Sprintf("CameraProjection(%d)", int64(e))
 	}
 }
 
-type MDLDataPrecision uint64
+type DataPrecision uint64
 
 const (
-	MDLDataPrecisionUndefined MDLDataPrecision = 0
-	MDLDataPrecisionFloat     MDLDataPrecision = 1
-	MDLDataPrecisionDouble    MDLDataPrecision = 2
+	DataPrecisionUndefined DataPrecision = 0
+	DataPrecisionFloat     DataPrecision = 1
+	DataPrecisionDouble    DataPrecision = 2
 )
 
-func (e MDLDataPrecision) String() string {
+func (e DataPrecision) String() string {
 	switch e {
-	case MDLDataPrecisionUndefined:
-		return "MDLDataPrecisionUndefined"
-	case MDLDataPrecisionFloat:
-		return "MDLDataPrecisionFloat"
-	case MDLDataPrecisionDouble:
-		return "MDLDataPrecisionDouble"
+	case DataPrecisionUndefined:
+		return "DataPrecisionUndefined"
+	case DataPrecisionFloat:
+		return "DataPrecisionFloat"
+	case DataPrecisionDouble:
+		return "DataPrecisionDouble"
 	default:
-		return fmt.Sprintf("MDLDataPrecision(%d)", int64(e))
+		return fmt.Sprintf("DataPrecision(%d)", int64(e))
 	}
 }
 
 // Types of geometric primitives for rendering a submesh, used by the geometryType property.
-type MDLGeometryType int64
+type GeometryType int64
 
 const (
 	// Each index in the submesh refers to a vertex to be rendered as a single point.
-	MDLGeometryTypePoints MDLGeometryType = 0
+	GeometryTypePoints GeometryType = 0
 	// Each pair of consecutive indices in the submesh refers to two vertices to be rendered as a line segment.
-	MDLGeometryTypeLines MDLGeometryType = 1
+	GeometryTypeLines GeometryType = 1
 	// Each set of three consecutive indices in the submesh refers to three vertices to be rendered as a triangle.
-	MDLGeometryTypeTriangles MDLGeometryType = 2
+	GeometryTypeTriangles GeometryType = 2
 	// The first three consecutive indices in the submesh refer to three vertices to be rendered as a triangle. Each subsequent index refers to another vertex that completes a triangle formed by connecting it to the previous two vertices.
-	MDLGeometryTypeTriangleStrips MDLGeometryType = 3
+	GeometryTypeTriangleStrips GeometryType = 3
 	// Each set of four consecutive indices in the submesh refers to four vertices to be rendered as a quadrilateral.
-	MDLGeometryTypeQuads MDLGeometryType = 4
+	GeometryTypeQuads GeometryType = 4
 	// The submesh’s index buffer does not contain a uniform set of primitives.
-	MDLGeometryTypeVariableTopology MDLGeometryType = 5
+	GeometryTypeVariableTopology GeometryType = 5
 )
 
-func (e MDLGeometryType) String() string {
+func (e GeometryType) String() string {
 	switch e {
-	case MDLGeometryTypePoints:
-		return "MDLGeometryTypePoints"
-	case MDLGeometryTypeLines:
-		return "MDLGeometryTypeLines"
-	case MDLGeometryTypeTriangles:
-		return "MDLGeometryTypeTriangles"
-	case MDLGeometryTypeTriangleStrips:
-		return "MDLGeometryTypeTriangleStrips"
-	case MDLGeometryTypeQuads:
-		return "MDLGeometryTypeQuads"
-	case MDLGeometryTypeVariableTopology:
-		return "MDLGeometryTypeVariableTopology"
+	case GeometryTypePoints:
+		return "GeometryTypePoints"
+	case GeometryTypeLines:
+		return "GeometryTypeLines"
+	case GeometryTypeTriangles:
+		return "GeometryTypeTriangles"
+	case GeometryTypeTriangleStrips:
+		return "GeometryTypeTriangleStrips"
+	case GeometryTypeQuads:
+		return "GeometryTypeQuads"
+	case GeometryTypeVariableTopology:
+		return "GeometryTypeVariableTopology"
 	default:
-		return fmt.Sprintf("MDLGeometryType(%d)", int64(e))
+		return fmt.Sprintf("GeometryType(%d)", int64(e))
 	}
 }
 
 // Options for the size of integer data in a submesh’s index buffer, used by the indexType property.
-type MDLIndexBitDepth uint64
+type IndexBitDepth uint64
 
 const (
 	// The submesh has not been initialized or its data type is unknown.
-	MDLIndexBitDepthInvalid MDLIndexBitDepth = 0
+	IndexBitDepthInvalid IndexBitDepth = 0
 	// Each index in the submesh’s index buffer is an 8-bit integer.
-	MDLIndexBitDepthUInt8 MDLIndexBitDepth = 8
-	MDLIndexBitDepthUint8 MDLIndexBitDepth = 8
+	IndexBitDepthUInt8 IndexBitDepth = 8
+	IndexBitDepthUint8 IndexBitDepth = 8
 	// Each index in the submesh’s index buffer is a 16-bit integer.
-	MDLIndexBitDepthUInt16 MDLIndexBitDepth = 16
-	MDLIndexBitDepthUint16 MDLIndexBitDepth = 16
+	IndexBitDepthUInt16 IndexBitDepth = 16
+	IndexBitDepthUint16 IndexBitDepth = 16
 	// Each index in the submesh’s index buffer is a 32-bit integer.
-	MDLIndexBitDepthUInt32 MDLIndexBitDepth = 32
-	MDLIndexBitDepthUint32 MDLIndexBitDepth = 32
+	IndexBitDepthUInt32 IndexBitDepth = 32
+	IndexBitDepthUint32 IndexBitDepth = 32
 )
 
-func (e MDLIndexBitDepth) String() string {
+func (e IndexBitDepth) String() string {
 	switch e {
-	case MDLIndexBitDepthInvalid:
-		return "MDLIndexBitDepthInvalid"
-	case MDLIndexBitDepthUInt8:
-		return "MDLIndexBitDepthUInt8"
-	case MDLIndexBitDepthUInt16:
-		return "MDLIndexBitDepthUInt16"
-	case MDLIndexBitDepthUInt32:
-		return "MDLIndexBitDepthUInt32"
+	case IndexBitDepthInvalid:
+		return "IndexBitDepthInvalid"
+	case IndexBitDepthUInt8:
+		return "IndexBitDepthUInt8"
+	case IndexBitDepthUInt16:
+		return "IndexBitDepthUInt16"
+	case IndexBitDepthUInt32:
+		return "IndexBitDepthUInt32"
 	default:
-		return fmt.Sprintf("MDLIndexBitDepth(%d)", int64(e))
+		return fmt.Sprintf("IndexBitDepth(%d)", int64(e))
 	}
 }
 
 // Options for the shape and style of illumination provided by a light, used by the lightType property.
-type MDLLightType uint64
+type LightType uint64
 
 const (
 	// The type of the light is unknown or has not been initialized.
-	MDLLightTypeUnknown MDLLightType = 0
+	LightTypeUnknown LightType = 0
 	// The light source should illuminate a scene evenly regardless of position or direction.
-	MDLLightTypeAmbient MDLLightType = 1
+	LightTypeAmbient LightType = 1
 	// The light source illuminates a scene from a uniform direction regardless of its position.
-	MDLLightTypeDirectional MDLLightType = 2
+	LightTypeDirectional LightType = 2
 	// The light source illuminates a scene from a specific position and direction.
-	MDLLightTypeSpot MDLLightType = 3
+	LightTypeSpot LightType = 3
 	// The light source illuminates a scene in all directions from a specific position.
-	MDLLightTypePoint MDLLightType = 4
+	LightTypePoint LightType = 4
 	// The light source illuminates a scene in all directions from an area in the shape of a line.
-	MDLLightTypeLinear MDLLightType = 5
+	LightTypeLinear LightType = 5
 	// The light source illuminates a scene in all directions from an area in the shape of a disc.
-	MDLLightTypeDiscArea MDLLightType = 6
+	LightTypeDiscArea LightType = 6
 	// The light source illuminates a scene in all directions from an area in the shape of a rectangle.
-	MDLLightTypeRectangularArea MDLLightType = 7
+	LightTypeRectangularArea LightType = 7
 	// The light source illuminates a scene in all directions from an area in the shape of a superellipse.
-	MDLLightTypeSuperElliptical MDLLightType = 8
+	LightTypeSuperElliptical LightType = 8
 	// The illumination from the light is determined by a photometric profile.
-	MDLLightTypePhotometric MDLLightType = 9
+	LightTypePhotometric LightType = 9
 	// The illumination from the light is determined by texture images representing a sample of a scene at a specific point.
-	MDLLightTypeProbe MDLLightType = 10
+	LightTypeProbe LightType = 10
 	// The illumination from the light is determined by texture images representing a sample of the surrounding environment for a scene.
-	MDLLightTypeEnvironment MDLLightType = 11
+	LightTypeEnvironment LightType = 11
 )
 
-func (e MDLLightType) String() string {
+func (e LightType) String() string {
 	switch e {
-	case MDLLightTypeUnknown:
-		return "MDLLightTypeUnknown"
-	case MDLLightTypeAmbient:
-		return "MDLLightTypeAmbient"
-	case MDLLightTypeDirectional:
-		return "MDLLightTypeDirectional"
-	case MDLLightTypeSpot:
-		return "MDLLightTypeSpot"
-	case MDLLightTypePoint:
-		return "MDLLightTypePoint"
-	case MDLLightTypeLinear:
-		return "MDLLightTypeLinear"
-	case MDLLightTypeDiscArea:
-		return "MDLLightTypeDiscArea"
-	case MDLLightTypeRectangularArea:
-		return "MDLLightTypeRectangularArea"
-	case MDLLightTypeSuperElliptical:
-		return "MDLLightTypeSuperElliptical"
-	case MDLLightTypePhotometric:
-		return "MDLLightTypePhotometric"
-	case MDLLightTypeProbe:
-		return "MDLLightTypeProbe"
-	case MDLLightTypeEnvironment:
-		return "MDLLightTypeEnvironment"
+	case LightTypeUnknown:
+		return "LightTypeUnknown"
+	case LightTypeAmbient:
+		return "LightTypeAmbient"
+	case LightTypeDirectional:
+		return "LightTypeDirectional"
+	case LightTypeSpot:
+		return "LightTypeSpot"
+	case LightTypePoint:
+		return "LightTypePoint"
+	case LightTypeLinear:
+		return "LightTypeLinear"
+	case LightTypeDiscArea:
+		return "LightTypeDiscArea"
+	case LightTypeRectangularArea:
+		return "LightTypeRectangularArea"
+	case LightTypeSuperElliptical:
+		return "LightTypeSuperElliptical"
+	case LightTypePhotometric:
+		return "LightTypePhotometric"
+	case LightTypeProbe:
+		return "LightTypeProbe"
+	case LightTypeEnvironment:
+		return "LightTypeEnvironment"
 	default:
-		return fmt.Sprintf("MDLLightType(%d)", int64(e))
+		return fmt.Sprintf("LightType(%d)", int64(e))
 	}
 }
 
-type MDLMaterialFace uint64
+type MaterialFace uint64
 
 const (
-	MDLMaterialFaceFront       MDLMaterialFace = 0
-	MDLMaterialFaceBack        MDLMaterialFace = 1
-	MDLMaterialFaceDoubleSided MDLMaterialFace = 2
+	MaterialFaceFront       MaterialFace = 0
+	MaterialFaceBack        MaterialFace = 1
+	MaterialFaceDoubleSided MaterialFace = 2
 )
 
-func (e MDLMaterialFace) String() string {
+func (e MaterialFace) String() string {
 	switch e {
-	case MDLMaterialFaceFront:
-		return "MDLMaterialFaceFront"
-	case MDLMaterialFaceBack:
-		return "MDLMaterialFaceBack"
-	case MDLMaterialFaceDoubleSided:
-		return "MDLMaterialFaceDoubleSided"
+	case MaterialFaceFront:
+		return "MaterialFaceFront"
+	case MaterialFaceBack:
+		return "MaterialFaceBack"
+	case MaterialFaceDoubleSided:
+		return "MaterialFaceDoubleSided"
 	default:
-		return fmt.Sprintf("MDLMaterialFace(%d)", int64(e))
+		return fmt.Sprintf("MaterialFace(%d)", int64(e))
 	}
 }
 
 // Modes for sampling textures at sizes between mipmap levels, used by the mipFilter property.
-type MDLMaterialMipMapFilterMode uint64
+type MaterialMipMapFilterMode uint64
 
 const (
 	// Sampling a texture at a size between mipmap levels should return a texel value from the nearest mipmap level.
-	MDLMaterialMipMapFilterModeNearest MDLMaterialMipMapFilterMode = 0
+	MaterialMipMapFilterModeNearest MaterialMipMapFilterMode = 0
 	// Sampling a texture at a size between mipmap levels should linearly interpolate between mipmap levels.
-	MDLMaterialMipMapFilterModeLinear MDLMaterialMipMapFilterMode = 1
+	MaterialMipMapFilterModeLinear MaterialMipMapFilterMode = 1
 )
 
-func (e MDLMaterialMipMapFilterMode) String() string {
+func (e MaterialMipMapFilterMode) String() string {
 	switch e {
-	case MDLMaterialMipMapFilterModeNearest:
-		return "MDLMaterialMipMapFilterModeNearest"
-	case MDLMaterialMipMapFilterModeLinear:
-		return "MDLMaterialMipMapFilterModeLinear"
+	case MaterialMipMapFilterModeNearest:
+		return "MaterialMipMapFilterModeNearest"
+	case MaterialMipMapFilterModeLinear:
+		return "MaterialMipMapFilterModeLinear"
 	default:
-		return fmt.Sprintf("MDLMaterialMipMapFilterMode(%d)", int64(e))
+		return fmt.Sprintf("MaterialMipMapFilterMode(%d)", int64(e))
 	}
 }
 
 // Options for the data type of a material property, used by the type property.
-type MDLMaterialPropertyType uint64
+type MaterialPropertyType uint64
 
 const (
 	// The material property’s value has not been initialized.
-	MDLMaterialPropertyTypeNone MDLMaterialPropertyType = 0
+	MaterialPropertyTypeNone MaterialPropertyType = 0
 	// The material’s value is a string.
-	MDLMaterialPropertyTypeString MDLMaterialPropertyType = 1
+	MaterialPropertyTypeString MaterialPropertyType = 1
 	// The material property’s value is a URL—typically, a URL referencing a texture image.
-	MDLMaterialPropertyTypeURL MDLMaterialPropertyType = 2
+	MaterialPropertyTypeURL MaterialPropertyType = 2
 	// The material property’s value is a MDLTextureSampler object that provides both a texture image and texture rendering parameters.
-	MDLMaterialPropertyTypeTexture MDLMaterialPropertyType = 3
+	MaterialPropertyTypeTexture MaterialPropertyType = 3
 	// The material property’s value is a uniform color.
-	MDLMaterialPropertyTypeColor MDLMaterialPropertyType = 4
+	MaterialPropertyTypeColor MaterialPropertyType = 4
 	// The material property’s value is a floating-point scalar.
-	MDLMaterialPropertyTypeFloat MDLMaterialPropertyType = 5
+	MaterialPropertyTypeFloat MaterialPropertyType = 5
 	// The material property’s value is a 2-component floating-point vector.
-	MDLMaterialPropertyTypeFloat2 MDLMaterialPropertyType = 6
+	MaterialPropertyTypeFloat2 MaterialPropertyType = 6
 	// The material property’s value is a 3-component floating-point vector.
-	MDLMaterialPropertyTypeFloat3 MDLMaterialPropertyType = 7
+	MaterialPropertyTypeFloat3 MaterialPropertyType = 7
 	// The material property’s value is a 4-component floating-point vector.
-	MDLMaterialPropertyTypeFloat4 MDLMaterialPropertyType = 8
+	MaterialPropertyTypeFloat4 MaterialPropertyType = 8
 	// The material property’s value is a 4 x 4 floating-point matrix.
-	MDLMaterialPropertyTypeMatrix44 MDLMaterialPropertyType = 9
-	MDLMaterialPropertyTypeBuffer   MDLMaterialPropertyType = 10
+	MaterialPropertyTypeMatrix44 MaterialPropertyType = 9
+	MaterialPropertyTypeBuffer   MaterialPropertyType = 10
 )
 
-func (e MDLMaterialPropertyType) String() string {
+func (e MaterialPropertyType) String() string {
 	switch e {
-	case MDLMaterialPropertyTypeNone:
-		return "MDLMaterialPropertyTypeNone"
-	case MDLMaterialPropertyTypeString:
-		return "MDLMaterialPropertyTypeString"
-	case MDLMaterialPropertyTypeURL:
-		return "MDLMaterialPropertyTypeURL"
-	case MDLMaterialPropertyTypeTexture:
-		return "MDLMaterialPropertyTypeTexture"
-	case MDLMaterialPropertyTypeColor:
-		return "MDLMaterialPropertyTypeColor"
-	case MDLMaterialPropertyTypeFloat:
-		return "MDLMaterialPropertyTypeFloat"
-	case MDLMaterialPropertyTypeFloat2:
-		return "MDLMaterialPropertyTypeFloat2"
-	case MDLMaterialPropertyTypeFloat3:
-		return "MDLMaterialPropertyTypeFloat3"
-	case MDLMaterialPropertyTypeFloat4:
-		return "MDLMaterialPropertyTypeFloat4"
-	case MDLMaterialPropertyTypeMatrix44:
-		return "MDLMaterialPropertyTypeMatrix44"
-	case MDLMaterialPropertyTypeBuffer:
-		return "MDLMaterialPropertyTypeBuffer"
+	case MaterialPropertyTypeNone:
+		return "MaterialPropertyTypeNone"
+	case MaterialPropertyTypeString:
+		return "MaterialPropertyTypeString"
+	case MaterialPropertyTypeURL:
+		return "MaterialPropertyTypeURL"
+	case MaterialPropertyTypeTexture:
+		return "MaterialPropertyTypeTexture"
+	case MaterialPropertyTypeColor:
+		return "MaterialPropertyTypeColor"
+	case MaterialPropertyTypeFloat:
+		return "MaterialPropertyTypeFloat"
+	case MaterialPropertyTypeFloat2:
+		return "MaterialPropertyTypeFloat2"
+	case MaterialPropertyTypeFloat3:
+		return "MaterialPropertyTypeFloat3"
+	case MaterialPropertyTypeFloat4:
+		return "MaterialPropertyTypeFloat4"
+	case MaterialPropertyTypeMatrix44:
+		return "MaterialPropertyTypeMatrix44"
+	case MaterialPropertyTypeBuffer:
+		return "MaterialPropertyTypeBuffer"
 	default:
-		return fmt.Sprintf("MDLMaterialPropertyType(%d)", int64(e))
+		return fmt.Sprintf("MaterialPropertyType(%d)", int64(e))
 	}
 }
 
 // Options for the semantic use of a material property’s value in rendering a particular surface appearance; used by the semantic property.
-type MDLMaterialSemantic uint64
+type MaterialSemantic uint64
 
 const (
 	// The inherent color of a surface, to be used as a modulator during shading.
-	MDLMaterialSemanticBaseColor MDLMaterialSemantic = 0
+	MaterialSemanticBaseColor MaterialSemantic = 0
 	// The degree to which light scatters under the surface of a material.
-	MDLMaterialSemanticSubsurface MDLMaterialSemantic = 1
+	MaterialSemanticSubsurface MaterialSemantic = 1
 	// The degree to which a material appears as a dielectric surface (lower values) or as a metal (higher values).
-	MDLMaterialSemanticMetallic MDLMaterialSemantic = 2
+	MaterialSemanticMetallic MaterialSemantic = 2
 	// The intensity of specular highlights that appear on the material’s surface.
-	MDLMaterialSemanticSpecular MDLMaterialSemantic = 3
+	MaterialSemanticSpecular MaterialSemantic = 3
 	// The exponent to be used in Blinn-Phong approximation of the material’s specular response.
-	MDLMaterialSemanticSpecularExponent MDLMaterialSemantic = 4
+	MaterialSemanticSpecularExponent MaterialSemantic = 4
 	// The balance of color for specular highlights, between the light color (lower values) and the material’s base color (at higher values).
-	MDLMaterialSemanticSpecularTint MDLMaterialSemantic = 5
+	MaterialSemanticSpecularTint MaterialSemantic = 5
 	// The degree to which a material appears smooth, affecting both diffuse and specular response.
-	MDLMaterialSemanticRoughness MDLMaterialSemantic = 6
+	MaterialSemanticRoughness MaterialSemantic = 6
 	// The degree to which specular highlights elongate in the direction of the local tangent basis.
-	MDLMaterialSemanticAnisotropic MDLMaterialSemantic = 7
+	MaterialSemanticAnisotropic MaterialSemantic = 7
 	// The angle at which anisotropic effects are rotated relative to the local tangent basis.
-	MDLMaterialSemanticAnisotropicRotation MDLMaterialSemantic = 8
+	MaterialSemanticAnisotropicRotation MaterialSemantic = 8
 	// The intensity of highlights that appear only at glancing angles on a material’s surface.
-	MDLMaterialSemanticSheen MDLMaterialSemantic = 9
+	MaterialSemanticSheen MaterialSemantic = 9
 	// The balance of color for highlights that appear only at glancing angles, between the light color (lower values) and the material’s base color (at higher values).
-	MDLMaterialSemanticSheenTint MDLMaterialSemantic = 10
+	MaterialSemanticSheenTint MaterialSemantic = 10
 	// The intensity of a second specular highlight, similar to the gloss that results from a clear coat on an automotive finish.
-	MDLMaterialSemanticClearcoat MDLMaterialSemantic = 11
+	MaterialSemanticClearcoat MaterialSemantic = 11
 	// The spread of a second specular highlight, similar to the gloss that results from a clear coat on an automotive finish.
-	MDLMaterialSemanticClearcoatGloss MDLMaterialSemantic = 12
+	MaterialSemanticClearcoatGloss MaterialSemantic = 12
 	// The color emitted as radiance from a material’s surface.
-	MDLMaterialSemanticEmission MDLMaterialSemantic = 13
+	MaterialSemanticEmission MaterialSemantic = 13
 	// The degree of perturbation in a material’s surface.
-	MDLMaterialSemanticBump MDLMaterialSemantic = 14
+	MaterialSemanticBump MaterialSemantic = 14
 	// The opacity of a material’s surface.
-	MDLMaterialSemanticOpacity MDLMaterialSemantic = 15
+	MaterialSemanticOpacity MaterialSemantic = 15
 	// The index of refraction for the medium surrounding a material.
-	MDLMaterialSemanticInterfaceIndexOfRefraction MDLMaterialSemantic = 16
+	MaterialSemanticInterfaceIndexOfRefraction MaterialSemantic = 16
 	// The index of refraction for a material itself.
-	MDLMaterialSemanticMaterialIndexOfRefraction MDLMaterialSemantic = 17
+	MaterialSemanticMaterialIndexOfRefraction MaterialSemantic = 17
 	// The variation in the surface normal vectors in a material, relative to model coordinate space.
-	MDLMaterialSemanticObjectSpaceNormal MDLMaterialSemantic = 18
+	MaterialSemanticObjectSpaceNormal MaterialSemantic = 18
 	// The variation in the surface normal vectors in a material, relative to surface tangent coordinate space.
-	MDLMaterialSemanticTangentSpaceNormal MDLMaterialSemantic = 19
+	MaterialSemanticTangentSpaceNormal MaterialSemantic = 19
 	// The displacement of a material’s surface relative to the surface normal.
-	MDLMaterialSemanticDisplacement MDLMaterialSemantic = 20
+	MaterialSemanticDisplacement MaterialSemantic = 20
 	// The scaling factor for displacement of a material’s surface.
-	MDLMaterialSemanticDisplacementScale MDLMaterialSemantic = 21
+	MaterialSemanticDisplacementScale MaterialSemantic = 21
 	// The attenuation of ambient light due to local geometry variations on a surface.
-	MDLMaterialSemanticAmbientOcclusion MDLMaterialSemantic = 22
+	MaterialSemanticAmbientOcclusion MaterialSemantic = 22
 	// The scaling factor for ambient occlusion shading.
-	MDLMaterialSemanticAmbientOcclusionScale MDLMaterialSemantic = 23
+	MaterialSemanticAmbientOcclusionScale MaterialSemantic = 23
 	// The material property’s semantic property has not been initialized.
-	MDLMaterialSemanticNone MDLMaterialSemantic = 32768
+	MaterialSemanticNone MaterialSemantic = 32768
 	// The meaning of the material property’s value is not one of the standard semantic uses recognized by Model I/O.
-	MDLMaterialSemanticUserDefined MDLMaterialSemantic = 32769
+	MaterialSemanticUserDefined MaterialSemantic = 32769
 )
 
-func (e MDLMaterialSemantic) String() string {
+func (e MaterialSemantic) String() string {
 	switch e {
-	case MDLMaterialSemanticBaseColor:
-		return "MDLMaterialSemanticBaseColor"
-	case MDLMaterialSemanticSubsurface:
-		return "MDLMaterialSemanticSubsurface"
-	case MDLMaterialSemanticMetallic:
-		return "MDLMaterialSemanticMetallic"
-	case MDLMaterialSemanticSpecular:
-		return "MDLMaterialSemanticSpecular"
-	case MDLMaterialSemanticSpecularExponent:
-		return "MDLMaterialSemanticSpecularExponent"
-	case MDLMaterialSemanticSpecularTint:
-		return "MDLMaterialSemanticSpecularTint"
-	case MDLMaterialSemanticRoughness:
-		return "MDLMaterialSemanticRoughness"
-	case MDLMaterialSemanticAnisotropic:
-		return "MDLMaterialSemanticAnisotropic"
-	case MDLMaterialSemanticAnisotropicRotation:
-		return "MDLMaterialSemanticAnisotropicRotation"
-	case MDLMaterialSemanticSheen:
-		return "MDLMaterialSemanticSheen"
-	case MDLMaterialSemanticSheenTint:
-		return "MDLMaterialSemanticSheenTint"
-	case MDLMaterialSemanticClearcoat:
-		return "MDLMaterialSemanticClearcoat"
-	case MDLMaterialSemanticClearcoatGloss:
-		return "MDLMaterialSemanticClearcoatGloss"
-	case MDLMaterialSemanticEmission:
-		return "MDLMaterialSemanticEmission"
-	case MDLMaterialSemanticBump:
-		return "MDLMaterialSemanticBump"
-	case MDLMaterialSemanticOpacity:
-		return "MDLMaterialSemanticOpacity"
-	case MDLMaterialSemanticInterfaceIndexOfRefraction:
-		return "MDLMaterialSemanticInterfaceIndexOfRefraction"
-	case MDLMaterialSemanticMaterialIndexOfRefraction:
-		return "MDLMaterialSemanticMaterialIndexOfRefraction"
-	case MDLMaterialSemanticObjectSpaceNormal:
-		return "MDLMaterialSemanticObjectSpaceNormal"
-	case MDLMaterialSemanticTangentSpaceNormal:
-		return "MDLMaterialSemanticTangentSpaceNormal"
-	case MDLMaterialSemanticDisplacement:
-		return "MDLMaterialSemanticDisplacement"
-	case MDLMaterialSemanticDisplacementScale:
-		return "MDLMaterialSemanticDisplacementScale"
-	case MDLMaterialSemanticAmbientOcclusion:
-		return "MDLMaterialSemanticAmbientOcclusion"
-	case MDLMaterialSemanticAmbientOcclusionScale:
-		return "MDLMaterialSemanticAmbientOcclusionScale"
-	case MDLMaterialSemanticNone:
-		return "MDLMaterialSemanticNone"
-	case MDLMaterialSemanticUserDefined:
-		return "MDLMaterialSemanticUserDefined"
+	case MaterialSemanticBaseColor:
+		return "MaterialSemanticBaseColor"
+	case MaterialSemanticSubsurface:
+		return "MaterialSemanticSubsurface"
+	case MaterialSemanticMetallic:
+		return "MaterialSemanticMetallic"
+	case MaterialSemanticSpecular:
+		return "MaterialSemanticSpecular"
+	case MaterialSemanticSpecularExponent:
+		return "MaterialSemanticSpecularExponent"
+	case MaterialSemanticSpecularTint:
+		return "MaterialSemanticSpecularTint"
+	case MaterialSemanticRoughness:
+		return "MaterialSemanticRoughness"
+	case MaterialSemanticAnisotropic:
+		return "MaterialSemanticAnisotropic"
+	case MaterialSemanticAnisotropicRotation:
+		return "MaterialSemanticAnisotropicRotation"
+	case MaterialSemanticSheen:
+		return "MaterialSemanticSheen"
+	case MaterialSemanticSheenTint:
+		return "MaterialSemanticSheenTint"
+	case MaterialSemanticClearcoat:
+		return "MaterialSemanticClearcoat"
+	case MaterialSemanticClearcoatGloss:
+		return "MaterialSemanticClearcoatGloss"
+	case MaterialSemanticEmission:
+		return "MaterialSemanticEmission"
+	case MaterialSemanticBump:
+		return "MaterialSemanticBump"
+	case MaterialSemanticOpacity:
+		return "MaterialSemanticOpacity"
+	case MaterialSemanticInterfaceIndexOfRefraction:
+		return "MaterialSemanticInterfaceIndexOfRefraction"
+	case MaterialSemanticMaterialIndexOfRefraction:
+		return "MaterialSemanticMaterialIndexOfRefraction"
+	case MaterialSemanticObjectSpaceNormal:
+		return "MaterialSemanticObjectSpaceNormal"
+	case MaterialSemanticTangentSpaceNormal:
+		return "MaterialSemanticTangentSpaceNormal"
+	case MaterialSemanticDisplacement:
+		return "MaterialSemanticDisplacement"
+	case MaterialSemanticDisplacementScale:
+		return "MaterialSemanticDisplacementScale"
+	case MaterialSemanticAmbientOcclusion:
+		return "MaterialSemanticAmbientOcclusion"
+	case MaterialSemanticAmbientOcclusionScale:
+		return "MaterialSemanticAmbientOcclusionScale"
+	case MaterialSemanticNone:
+		return "MaterialSemanticNone"
+	case MaterialSemanticUserDefined:
+		return "MaterialSemanticUserDefined"
 	default:
-		return fmt.Sprintf("MDLMaterialSemantic(%d)", int64(e))
+		return fmt.Sprintf("MaterialSemantic(%d)", int64(e))
 	}
 }
 
 // Modes for sampling textures at coordinates between texels, used by the minFilter and magFilter properties.
-type MDLMaterialTextureFilterMode uint64
+type MaterialTextureFilterMode uint64
 
 const (
 	// Sampling at texture coordinates between texels should return the value of the nearest texel.
-	MDLMaterialTextureFilterModeNearest MDLMaterialTextureFilterMode = 0
+	MaterialTextureFilterModeNearest MaterialTextureFilterMode = 0
 	// Sampling at texture coordinates between texels should linearly interpolate between texel values.
-	MDLMaterialTextureFilterModeLinear MDLMaterialTextureFilterMode = 1
+	MaterialTextureFilterModeLinear MaterialTextureFilterMode = 1
 )
 
-func (e MDLMaterialTextureFilterMode) String() string {
+func (e MaterialTextureFilterMode) String() string {
 	switch e {
-	case MDLMaterialTextureFilterModeNearest:
-		return "MDLMaterialTextureFilterModeNearest"
-	case MDLMaterialTextureFilterModeLinear:
-		return "MDLMaterialTextureFilterModeLinear"
+	case MaterialTextureFilterModeNearest:
+		return "MaterialTextureFilterModeNearest"
+	case MaterialTextureFilterModeLinear:
+		return "MaterialTextureFilterModeLinear"
 	default:
-		return fmt.Sprintf("MDLMaterialTextureFilterMode(%d)", int64(e))
+		return fmt.Sprintf("MaterialTextureFilterMode(%d)", int64(e))
 	}
 }
 
 // Modes for sampling textures at coordinates outside the texture bounds, used by the sWrapMode, tWrapMode, and rWrapMode properties.
-type MDLMaterialTextureWrapMode uint64
+type MaterialTextureWrapMode uint64
 
 const (
 	// Sampling at any texture coordinate outside the 0.0 to 1.0 range returns the texel color from the nearest edge.
-	MDLMaterialTextureWrapModeClamp MDLMaterialTextureWrapMode = 0
+	MaterialTextureWrapModeClamp MaterialTextureWrapMode = 0
 	// Sampling at texture coordinates outside the 0.0 to 1.0 range results in a repeated tiling effect.
-	MDLMaterialTextureWrapModeRepeat MDLMaterialTextureWrapMode = 1
+	MaterialTextureWrapModeRepeat MaterialTextureWrapMode = 1
 	// Sampling at texture coordinates outside the 0.0 to 1.0 range results in a mirrored tiling effect.
-	MDLMaterialTextureWrapModeMirror MDLMaterialTextureWrapMode = 2
+	MaterialTextureWrapModeMirror MaterialTextureWrapMode = 2
 )
 
-func (e MDLMaterialTextureWrapMode) String() string {
+func (e MaterialTextureWrapMode) String() string {
 	switch e {
-	case MDLMaterialTextureWrapModeClamp:
-		return "MDLMaterialTextureWrapModeClamp"
-	case MDLMaterialTextureWrapModeRepeat:
-		return "MDLMaterialTextureWrapModeRepeat"
-	case MDLMaterialTextureWrapModeMirror:
-		return "MDLMaterialTextureWrapModeMirror"
+	case MaterialTextureWrapModeClamp:
+		return "MaterialTextureWrapModeClamp"
+	case MaterialTextureWrapModeRepeat:
+		return "MaterialTextureWrapModeRepeat"
+	case MaterialTextureWrapModeMirror:
+		return "MaterialTextureWrapModeMirror"
 	default:
-		return fmt.Sprintf("MDLMaterialTextureWrapMode(%d)", int64(e))
+		return fmt.Sprintf("MaterialTextureWrapMode(%d)", int64(e))
 	}
 }
 
 // Options for the content of a mesh buffer, used by the type property and by MDLMeshBufferAllocator methods for creating buffers.
-type MDLMeshBufferType uint64
+type MeshBufferType uint64
 
 const (
 	// The buffer contains per-vertex data for one or more vertex attributes of a MDLMesh object.
-	MDLMeshBufferTypeVertex MDLMeshBufferType = 1
+	MeshBufferTypeVertex MeshBufferType = 1
 	// The buffer contains index data for a MDLSubmesh object.
-	MDLMeshBufferTypeIndex  MDLMeshBufferType = 2
-	MDLMeshBufferTypeCustom MDLMeshBufferType = 3
+	MeshBufferTypeIndex  MeshBufferType = 2
+	MeshBufferTypeCustom MeshBufferType = 3
 )
 
-func (e MDLMeshBufferType) String() string {
+func (e MeshBufferType) String() string {
 	switch e {
-	case MDLMeshBufferTypeVertex:
-		return "MDLMeshBufferTypeVertex"
-	case MDLMeshBufferTypeIndex:
-		return "MDLMeshBufferTypeIndex"
-	case MDLMeshBufferTypeCustom:
-		return "MDLMeshBufferTypeCustom"
+	case MeshBufferTypeVertex:
+		return "MeshBufferTypeVertex"
+	case MeshBufferTypeIndex:
+		return "MeshBufferTypeIndex"
+	case MeshBufferTypeCustom:
+		return "MeshBufferTypeCustom"
 	default:
-		return fmt.Sprintf("MDLMeshBufferType(%d)", int64(e))
+		return fmt.Sprintf("MeshBufferType(%d)", int64(e))
 	}
 }
 
 // Options affecting automatic placement of light probes in a scene, used with the placeLightProbesWithDensity:heuristic:usingIrradianceDataSource: method.
-type MDLProbePlacement int64
+type ProbePlacement int64
 
 const (
 	// An option to place light probes at each unit coordinate in a three-dimensional grid that evenly divides the region being evaluated.
-	MDLProbePlacementUniformGrid MDLProbePlacement = 0
+	ProbePlacementUniformGrid ProbePlacement = 0
 	// An option to examine the lighting conditions at various positions in the scene being evaluated, then place light probes only at the locations where each contributes optimally to scene lighting.
-	MDLProbePlacementIrradianceDistribution MDLProbePlacement = 1
+	ProbePlacementIrradianceDistribution ProbePlacement = 1
 )
 
-func (e MDLProbePlacement) String() string {
+func (e ProbePlacement) String() string {
 	switch e {
-	case MDLProbePlacementUniformGrid:
-		return "MDLProbePlacementUniformGrid"
-	case MDLProbePlacementIrradianceDistribution:
-		return "MDLProbePlacementIrradianceDistribution"
+	case ProbePlacementUniformGrid:
+		return "ProbePlacementUniformGrid"
+	case ProbePlacementIrradianceDistribution:
+		return "ProbePlacementIrradianceDistribution"
 	default:
-		return fmt.Sprintf("MDLProbePlacement(%d)", int64(e))
+		return fmt.Sprintf("ProbePlacement(%d)", int64(e))
 	}
 }
 
 // Options for the data size and type of texel channel values, used by the channelEncoding property.
-type MDLTextureChannelEncoding int64
+type TextureChannelEncoding int64
 
 const (
 	// Each channel value per texel is an 8-bit unsigned integer.
-	MDLTextureChannelEncodingUInt8 MDLTextureChannelEncoding = 1
+	TextureChannelEncodingUInt8 TextureChannelEncoding = 1
 	// Each channel value per texel is an 8-bit unsigned integer.
-	MDLTextureChannelEncodingUint8 MDLTextureChannelEncoding = 1
+	TextureChannelEncodingUint8 TextureChannelEncoding = 1
 	// Each channel value per texel is a 16-bit unsigned integer.
-	MDLTextureChannelEncodingUInt16 MDLTextureChannelEncoding = 2
+	TextureChannelEncodingUInt16 TextureChannelEncoding = 2
 	// Each channel value per texel is a 16-bit unsigned integer.
-	MDLTextureChannelEncodingUint16 MDLTextureChannelEncoding = 2
+	TextureChannelEncodingUint16 TextureChannelEncoding = 2
 	// Each channel value per texel is a 24-bit unsigned integer.
-	MDLTextureChannelEncodingUInt24 MDLTextureChannelEncoding = 3
+	TextureChannelEncodingUInt24 TextureChannelEncoding = 3
 	// Each channel value per texel is a 24-bit unsigned integer.
-	MDLTextureChannelEncodingUint24 MDLTextureChannelEncoding = 3
+	TextureChannelEncodingUint24 TextureChannelEncoding = 3
 	// Each channel value per texel is a 32-bit unsigned integer.
-	MDLTextureChannelEncodingUInt32 MDLTextureChannelEncoding = 4
+	TextureChannelEncodingUInt32 TextureChannelEncoding = 4
 	// Each channel value per texel is a 32-bit unsigned integer.
-	MDLTextureChannelEncodingUint32 MDLTextureChannelEncoding = 4
+	TextureChannelEncodingUint32 TextureChannelEncoding = 4
 	// Each channel value per texel is a 16-bit floating-point value.
-	MDLTextureChannelEncodingFloat16   MDLTextureChannelEncoding = 258
-	MDLTextureChannelEncodingFloat16SR MDLTextureChannelEncoding = 770
+	TextureChannelEncodingFloat16   TextureChannelEncoding = 258
+	TextureChannelEncodingFloat16SR TextureChannelEncoding = 770
 	// Each channel value per texel is a 32-bit floating-point value.
-	MDLTextureChannelEncodingFloat32 MDLTextureChannelEncoding = 260
+	TextureChannelEncodingFloat32 TextureChannelEncoding = 260
 )
 
-func (e MDLTextureChannelEncoding) String() string {
+func (e TextureChannelEncoding) String() string {
 	switch e {
-	case MDLTextureChannelEncodingUInt8:
-		return "MDLTextureChannelEncodingUInt8"
-	case MDLTextureChannelEncodingUInt16:
-		return "MDLTextureChannelEncodingUInt16"
-	case MDLTextureChannelEncodingUInt24:
-		return "MDLTextureChannelEncodingUInt24"
-	case MDLTextureChannelEncodingUInt32:
-		return "MDLTextureChannelEncodingUInt32"
-	case MDLTextureChannelEncodingFloat16:
-		return "MDLTextureChannelEncodingFloat16"
-	case MDLTextureChannelEncodingFloat16SR:
-		return "MDLTextureChannelEncodingFloat16SR"
-	case MDLTextureChannelEncodingFloat32:
-		return "MDLTextureChannelEncodingFloat32"
+	case TextureChannelEncodingUInt8:
+		return "TextureChannelEncodingUInt8"
+	case TextureChannelEncodingUInt16:
+		return "TextureChannelEncodingUInt16"
+	case TextureChannelEncodingUInt24:
+		return "TextureChannelEncodingUInt24"
+	case TextureChannelEncodingUInt32:
+		return "TextureChannelEncodingUInt32"
+	case TextureChannelEncodingFloat16:
+		return "TextureChannelEncodingFloat16"
+	case TextureChannelEncodingFloat16SR:
+		return "TextureChannelEncodingFloat16SR"
+	case TextureChannelEncodingFloat32:
+		return "TextureChannelEncodingFloat32"
 	default:
-		return fmt.Sprintf("MDLTextureChannelEncoding(%d)", int64(e))
+		return fmt.Sprintf("TextureChannelEncoding(%d)", int64(e))
 	}
 }
 
-type MDLTransformOpRotationOrder uint64
+type TransformOpRotationOrder uint64
 
 const (
-	MDLTransformOpRotationOrderXYZ MDLTransformOpRotationOrder = 1
-	MDLTransformOpRotationOrderXZY MDLTransformOpRotationOrder = 2
-	MDLTransformOpRotationOrderYXZ MDLTransformOpRotationOrder = 3
-	MDLTransformOpRotationOrderYZX MDLTransformOpRotationOrder = 4
-	MDLTransformOpRotationOrderZXY MDLTransformOpRotationOrder = 5
-	MDLTransformOpRotationOrderZYX MDLTransformOpRotationOrder = 6
+	TransformOpRotationOrderXYZ TransformOpRotationOrder = 1
+	TransformOpRotationOrderXZY TransformOpRotationOrder = 2
+	TransformOpRotationOrderYXZ TransformOpRotationOrder = 3
+	TransformOpRotationOrderYZX TransformOpRotationOrder = 4
+	TransformOpRotationOrderZXY TransformOpRotationOrder = 5
+	TransformOpRotationOrderZYX TransformOpRotationOrder = 6
 )
 
-func (e MDLTransformOpRotationOrder) String() string {
+func (e TransformOpRotationOrder) String() string {
 	switch e {
-	case MDLTransformOpRotationOrderXYZ:
-		return "MDLTransformOpRotationOrderXYZ"
-	case MDLTransformOpRotationOrderXZY:
-		return "MDLTransformOpRotationOrderXZY"
-	case MDLTransformOpRotationOrderYXZ:
-		return "MDLTransformOpRotationOrderYXZ"
-	case MDLTransformOpRotationOrderYZX:
-		return "MDLTransformOpRotationOrderYZX"
-	case MDLTransformOpRotationOrderZXY:
-		return "MDLTransformOpRotationOrderZXY"
-	case MDLTransformOpRotationOrderZYX:
-		return "MDLTransformOpRotationOrderZYX"
+	case TransformOpRotationOrderXYZ:
+		return "TransformOpRotationOrderXYZ"
+	case TransformOpRotationOrderXZY:
+		return "TransformOpRotationOrderXZY"
+	case TransformOpRotationOrderYXZ:
+		return "TransformOpRotationOrderYXZ"
+	case TransformOpRotationOrderYZX:
+		return "TransformOpRotationOrderYZX"
+	case TransformOpRotationOrderZXY:
+		return "TransformOpRotationOrderZXY"
+	case TransformOpRotationOrderZYX:
+		return "TransformOpRotationOrderZYX"
 	default:
-		return fmt.Sprintf("MDLTransformOpRotationOrder(%d)", int64(e))
+		return fmt.Sprintf("TransformOpRotationOrder(%d)", int64(e))
 	}
 }
 
 // Descriptions of the data size and layout for a vertex attribute, used by the format property.
-type MDLVertexFormat uint64
+type VertexFormat uint64
 
 const (
 	// The vertex attribute has just been initialized or its format is unknown.
-	MDLVertexFormatInvalid MDLVertexFormat = 0
+	VertexFormatInvalid VertexFormat = 0
 	// A bit mask for vertex attributes in packed vector formats.
-	MDLVertexFormatPackedBit MDLVertexFormat = 4096
+	VertexFormatPackedBit VertexFormat = 4096
 	// A bit mask for vertex attributes whose components are in 8-bit unsigned integer format.
-	MDLVertexFormatUCharBits MDLVertexFormat = 65536
+	VertexFormatUCharBits VertexFormat = 65536
 	// A bit mask for vertex attributes whose components are in 8-bit signed integer format.
-	MDLVertexFormatCharBits MDLVertexFormat = 131072
+	VertexFormatCharBits VertexFormat = 131072
 	// A bit mask for vertex attributes whose components are in 8-bit unsigned normalized integer format.
-	MDLVertexFormatUCharNormalizedBits MDLVertexFormat = 196608
+	VertexFormatUCharNormalizedBits VertexFormat = 196608
 	// A bit mask for vertex attributes whose components are in 8-bit signed normalized integer format.
-	MDLVertexFormatCharNormalizedBits MDLVertexFormat = 262144
+	VertexFormatCharNormalizedBits VertexFormat = 262144
 	// A bit mask for vertex attributes whose components are in 16-bit unsigned integer format.
-	MDLVertexFormatUShortBits MDLVertexFormat = 327680
+	VertexFormatUShortBits VertexFormat = 327680
 	// A bit mask for vertex attributes whose components are in 16-bit signed integer format.
-	MDLVertexFormatShortBits MDLVertexFormat = 393216
+	VertexFormatShortBits VertexFormat = 393216
 	// A bit mask for vertex attributes whose components are in 16-bit unsigned normalized integer format.
-	MDLVertexFormatUShortNormalizedBits MDLVertexFormat = 458752
+	VertexFormatUShortNormalizedBits VertexFormat = 458752
 	// A bit mask for vertex attributes whose components are in 16-bit signed normalized integer format.
-	MDLVertexFormatShortNormalizedBits MDLVertexFormat = 524288
+	VertexFormatShortNormalizedBits VertexFormat = 524288
 	// A bit mask for vertex attributes whose components are in 32-bit unsigned integer format.
-	MDLVertexFormatUIntBits MDLVertexFormat = 589824
+	VertexFormatUIntBits VertexFormat = 589824
 	// A bit mask for vertex attributes whose components are in 32-bit signed integer format.
-	MDLVertexFormatIntBits MDLVertexFormat = 655360
+	VertexFormatIntBits VertexFormat = 655360
 	// A bit mask for vertex attributes whose components are in 16-bit floating-point format.
-	MDLVertexFormatHalfBits MDLVertexFormat = 720896
+	VertexFormatHalfBits VertexFormat = 720896
 	// A bit mask for vertex attributes whose components are in 32-bit floating-point format.
-	MDLVertexFormatFloatBits MDLVertexFormat = 786432
+	VertexFormatFloatBits VertexFormat = 786432
 	// The attribute value for each vertex is a scalar of unsigned 8-bit integer type.
-	MDLVertexFormatUChar MDLVertexFormat = 65537
+	VertexFormatUChar VertexFormat = 65537
 	// The attribute value for each vertex is a vector with 2 components, each of unsigned 8-bit integer type.
-	MDLVertexFormatUChar2 MDLVertexFormat = 65538
+	VertexFormatUChar2 VertexFormat = 65538
 	// The attribute value for each vertex is a vector with 3 components, each of unsigned 8-bit integer type.
-	MDLVertexFormatUChar3 MDLVertexFormat = 65539
+	VertexFormatUChar3 VertexFormat = 65539
 	// The attribute value for each vertex is a vector with 4 components, each of unsigned 8-bit integer type.
-	MDLVertexFormatUChar4 MDLVertexFormat = 65540
+	VertexFormatUChar4 VertexFormat = 65540
 	// The attribute value for each vertex is a scalar of signed 8-bit integer type.
-	MDLVertexFormatChar MDLVertexFormat = 131073
+	VertexFormatChar VertexFormat = 131073
 	// The attribute value for each vertex is a vector with 2 components, each of signed 8-bit integer type.
-	MDLVertexFormatChar2 MDLVertexFormat = 131074
+	VertexFormatChar2 VertexFormat = 131074
 	// The attribute value for each vertex is a vector with 3 components, each of signed 8-bit integer type.
-	MDLVertexFormatChar3 MDLVertexFormat = 131075
+	VertexFormatChar3 VertexFormat = 131075
 	// The attribute value for each vertex is a vector with 4 components, each of signed 8-bit integer type.
-	MDLVertexFormatChar4 MDLVertexFormat = 131076
+	VertexFormatChar4 VertexFormat = 131076
 	// The attribute value for each vertex is a normalized scalar of unsigned 8-bit integer type.
-	MDLVertexFormatUCharNormalized MDLVertexFormat = 196609
+	VertexFormatUCharNormalized VertexFormat = 196609
 	// The attribute value for each vertex is a vector with 2 components, each with a normalized value of unsigned 8-bit integer type.
-	MDLVertexFormatUChar2Normalized MDLVertexFormat = 196610
+	VertexFormatUChar2Normalized VertexFormat = 196610
 	// The attribute value for each vertex is a vector with 3 components, each with a normalized value of unsigned 8-bit integer type.
-	MDLVertexFormatUChar3Normalized MDLVertexFormat = 196611
+	VertexFormatUChar3Normalized VertexFormat = 196611
 	// The attribute value for each vertex is a vector with 4 components, each with a normalized value of unsigned 8-bit integer type.
-	MDLVertexFormatUChar4Normalized MDLVertexFormat = 196612
+	VertexFormatUChar4Normalized VertexFormat = 196612
 	// The attribute value for each vertex is a normalized scalar of signed 8-bit integer type.
-	MDLVertexFormatCharNormalized MDLVertexFormat = 262145
+	VertexFormatCharNormalized VertexFormat = 262145
 	// The attribute value for each vertex is a vector with 2 components, each with a normalized value of signed 8-bit integer type.
-	MDLVertexFormatChar2Normalized MDLVertexFormat = 262146
+	VertexFormatChar2Normalized VertexFormat = 262146
 	// The attribute value for each vertex is a vector with 3 components, each with a normalized value of signed 8-bit integer type.
-	MDLVertexFormatChar3Normalized MDLVertexFormat = 262147
+	VertexFormatChar3Normalized VertexFormat = 262147
 	// The attribute value for each vertex is a vector with 4 components, each with a normalized value of signed 8-bit integer type.
-	MDLVertexFormatChar4Normalized MDLVertexFormat = 262148
+	VertexFormatChar4Normalized VertexFormat = 262148
 	// The attribute value for each vertex is a scalar of unsigned 16-bit integer type.
-	MDLVertexFormatUShort MDLVertexFormat = 327681
+	VertexFormatUShort VertexFormat = 327681
 	// The attribute value for each vertex is a vector with 2 components, each of unsigned 16-bit integer type.
-	MDLVertexFormatUShort2 MDLVertexFormat = 327682
+	VertexFormatUShort2 VertexFormat = 327682
 	// The attribute value for each vertex is a vector with 3 components, each of unsigned 16-bit integer type.
-	MDLVertexFormatUShort3 MDLVertexFormat = 327683
+	VertexFormatUShort3 VertexFormat = 327683
 	// The attribute value for each vertex is a vector with 4 components, each of unsigned 16-bit integer type.
-	MDLVertexFormatUShort4 MDLVertexFormat = 327684
+	VertexFormatUShort4 VertexFormat = 327684
 	// The attribute value for each vertex is a scalar of signed 16-bit integer type.
-	MDLVertexFormatShort MDLVertexFormat = 393217
+	VertexFormatShort VertexFormat = 393217
 	// The attribute value for each vertex is a vector with 2 components, each of signed 16-bit integer type.
-	MDLVertexFormatShort2 MDLVertexFormat = 393218
+	VertexFormatShort2 VertexFormat = 393218
 	// The attribute value for each vertex is a vector with 3 components, each of signed 16-bit integer type.
-	MDLVertexFormatShort3 MDLVertexFormat = 393219
+	VertexFormatShort3 VertexFormat = 393219
 	// The attribute value for each vertex is a vector with 4 components, each of signed 16-bit integer type.
-	MDLVertexFormatShort4 MDLVertexFormat = 393220
+	VertexFormatShort4 VertexFormat = 393220
 	// The attribute value for each vertex is a normalized scalar of unsigned 16-bit integer type.
-	MDLVertexFormatUShortNormalized MDLVertexFormat = 458753
+	VertexFormatUShortNormalized VertexFormat = 458753
 	// The attribute value for each vertex is a vector with 2 components, each with a normalized value of unsigned 16-bit integer type.
-	MDLVertexFormatUShort2Normalized MDLVertexFormat = 458754
+	VertexFormatUShort2Normalized VertexFormat = 458754
 	// The attribute value for each vertex is a vector with 3 components, each with a normalized value of unsigned 16-bit integer type.
-	MDLVertexFormatUShort3Normalized MDLVertexFormat = 458755
+	VertexFormatUShort3Normalized VertexFormat = 458755
 	// The attribute value for each vertex is a vector with 4 components, each with a normalized value of unsigned 16-bit integer type.
-	MDLVertexFormatUShort4Normalized MDLVertexFormat = 458756
+	VertexFormatUShort4Normalized VertexFormat = 458756
 	// The attribute value for each vertex is a normalized scalar of signed 16-bit integer type.
-	MDLVertexFormatShortNormalized MDLVertexFormat = 524289
+	VertexFormatShortNormalized VertexFormat = 524289
 	// The attribute value for each vertex is a vector with 2 components, each with a normalized value of signed 16-bit integer type.
-	MDLVertexFormatShort2Normalized MDLVertexFormat = 524290
+	VertexFormatShort2Normalized VertexFormat = 524290
 	// The attribute value for each vertex is a vector with 3 components, each with a normalized value of signed 16-bit integer type.
-	MDLVertexFormatShort3Normalized MDLVertexFormat = 524291
+	VertexFormatShort3Normalized VertexFormat = 524291
 	// The attribute value for each vertex is a vector with 4 components, each with a normalized value of signed 16-bit integer type.
-	MDLVertexFormatShort4Normalized MDLVertexFormat = 524292
+	VertexFormatShort4Normalized VertexFormat = 524292
 	// The attribute value for each vertex is a scalar of unsigned 32-bit integer type.
-	MDLVertexFormatUInt MDLVertexFormat = 589825
+	VertexFormatUInt VertexFormat = 589825
 	// The attribute value for each vertex is a vector with 2 components, each of unsigned 32-bit integer type.
-	MDLVertexFormatUInt2 MDLVertexFormat = 589826
+	VertexFormatUInt2 VertexFormat = 589826
 	// The attribute value for each vertex is a vector with 3 components, each of unsigned 32-bit integer type.
-	MDLVertexFormatUInt3 MDLVertexFormat = 589827
+	VertexFormatUInt3 VertexFormat = 589827
 	// The attribute value for each vertex is a vector with 4 components, each of unsigned 32-bit integer type.
-	MDLVertexFormatUInt4 MDLVertexFormat = 589828
+	VertexFormatUInt4 VertexFormat = 589828
 	// The attribute value for each vertex is a scalar of signed 32-bit integer type.
-	MDLVertexFormatInt MDLVertexFormat = 655361
+	VertexFormatInt VertexFormat = 655361
 	// The attribute value for each vertex is a vector with 2 components, each of signed 32-bit integer type.
-	MDLVertexFormatInt2 MDLVertexFormat = 655362
+	VertexFormatInt2 VertexFormat = 655362
 	// The attribute value for each vertex is a vector with 3 components, each of signed 32-bit integer type.
-	MDLVertexFormatInt3 MDLVertexFormat = 655363
+	VertexFormatInt3 VertexFormat = 655363
 	// The attribute value for each vertex is a vector with 4 components, each of signed 32-bit integer type.
-	MDLVertexFormatInt4 MDLVertexFormat = 655364
+	VertexFormatInt4 VertexFormat = 655364
 	// The attribute value for each vertex is a scalar of 16-bit floating-point type.
-	MDLVertexFormatHalf MDLVertexFormat = 720897
+	VertexFormatHalf VertexFormat = 720897
 	// The attribute value for each vertex is a vector with 2 components, each of 16-bit floating-point type.
-	MDLVertexFormatHalf2 MDLVertexFormat = 720898
+	VertexFormatHalf2 VertexFormat = 720898
 	// The attribute value for each vertex is a vector with 3 components, each of 16-bit floating-point type.
-	MDLVertexFormatHalf3 MDLVertexFormat = 720899
+	VertexFormatHalf3 VertexFormat = 720899
 	// The attribute value for each vertex is a vector with 4 components, each of 16-bit floating-point type.
-	MDLVertexFormatHalf4 MDLVertexFormat = 720900
+	VertexFormatHalf4 VertexFormat = 720900
 	// The attribute value for each vertex is a scalar of 32-bit floating-point type.
-	MDLVertexFormatFloat MDLVertexFormat = 786433
+	VertexFormatFloat VertexFormat = 786433
 	// The attribute value for each vertex is a vector with 2 components, each of 32-bit floating-point type.
-	MDLVertexFormatFloat2 MDLVertexFormat = 786434
+	VertexFormatFloat2 VertexFormat = 786434
 	// The attribute value for each vertex is a vector with 3 components, each of 32-bit floating-point type.
-	MDLVertexFormatFloat3 MDLVertexFormat = 786435
+	VertexFormatFloat3 VertexFormat = 786435
 	// The attribute value for each vertex is a vector with 4 components, each of 32-bit floating-point type.
-	MDLVertexFormatFloat4 MDLVertexFormat = 786436
+	VertexFormatFloat4 VertexFormat = 786436
 	// The attribute value for each vertex is a packed vector with 4 components of signed integer type. The first three components are 10 bits each, and the fourth component is 2 bits.
-	MDLVertexFormatInt1010102Normalized MDLVertexFormat = 659460
+	VertexFormatInt1010102Normalized VertexFormat = 659460
 	// The attribute value for each vertex is a packed vector with 4 components of unsigned integer type. The first three components are 10 bits each, and the fourth component is 2 bits.
-	MDLVertexFormatUInt1010102Normalized MDLVertexFormat = 593924
+	VertexFormatUInt1010102Normalized VertexFormat = 593924
 )
 
-func (e MDLVertexFormat) String() string {
+func (e VertexFormat) String() string {
 	switch e {
-	case MDLVertexFormatInvalid:
-		return "MDLVertexFormatInvalid"
-	case MDLVertexFormatPackedBit:
-		return "MDLVertexFormatPackedBit"
-	case MDLVertexFormatUCharBits:
-		return "MDLVertexFormatUCharBits"
-	case MDLVertexFormatCharBits:
-		return "MDLVertexFormatCharBits"
-	case MDLVertexFormatUCharNormalizedBits:
-		return "MDLVertexFormatUCharNormalizedBits"
-	case MDLVertexFormatCharNormalizedBits:
-		return "MDLVertexFormatCharNormalizedBits"
-	case MDLVertexFormatUShortBits:
-		return "MDLVertexFormatUShortBits"
-	case MDLVertexFormatShortBits:
-		return "MDLVertexFormatShortBits"
-	case MDLVertexFormatUShortNormalizedBits:
-		return "MDLVertexFormatUShortNormalizedBits"
-	case MDLVertexFormatShortNormalizedBits:
-		return "MDLVertexFormatShortNormalizedBits"
-	case MDLVertexFormatUIntBits:
-		return "MDLVertexFormatUIntBits"
-	case MDLVertexFormatIntBits:
-		return "MDLVertexFormatIntBits"
-	case MDLVertexFormatHalfBits:
-		return "MDLVertexFormatHalfBits"
-	case MDLVertexFormatFloatBits:
-		return "MDLVertexFormatFloatBits"
-	case MDLVertexFormatUChar:
-		return "MDLVertexFormatUChar"
-	case MDLVertexFormatUChar2:
-		return "MDLVertexFormatUChar2"
-	case MDLVertexFormatUChar3:
-		return "MDLVertexFormatUChar3"
-	case MDLVertexFormatUChar4:
-		return "MDLVertexFormatUChar4"
-	case MDLVertexFormatChar:
-		return "MDLVertexFormatChar"
-	case MDLVertexFormatChar2:
-		return "MDLVertexFormatChar2"
-	case MDLVertexFormatChar3:
-		return "MDLVertexFormatChar3"
-	case MDLVertexFormatChar4:
-		return "MDLVertexFormatChar4"
-	case MDLVertexFormatUCharNormalized:
-		return "MDLVertexFormatUCharNormalized"
-	case MDLVertexFormatUChar2Normalized:
-		return "MDLVertexFormatUChar2Normalized"
-	case MDLVertexFormatUChar3Normalized:
-		return "MDLVertexFormatUChar3Normalized"
-	case MDLVertexFormatUChar4Normalized:
-		return "MDLVertexFormatUChar4Normalized"
-	case MDLVertexFormatCharNormalized:
-		return "MDLVertexFormatCharNormalized"
-	case MDLVertexFormatChar2Normalized:
-		return "MDLVertexFormatChar2Normalized"
-	case MDLVertexFormatChar3Normalized:
-		return "MDLVertexFormatChar3Normalized"
-	case MDLVertexFormatChar4Normalized:
-		return "MDLVertexFormatChar4Normalized"
-	case MDLVertexFormatUShort:
-		return "MDLVertexFormatUShort"
-	case MDLVertexFormatUShort2:
-		return "MDLVertexFormatUShort2"
-	case MDLVertexFormatUShort3:
-		return "MDLVertexFormatUShort3"
-	case MDLVertexFormatUShort4:
-		return "MDLVertexFormatUShort4"
-	case MDLVertexFormatShort:
-		return "MDLVertexFormatShort"
-	case MDLVertexFormatShort2:
-		return "MDLVertexFormatShort2"
-	case MDLVertexFormatShort3:
-		return "MDLVertexFormatShort3"
-	case MDLVertexFormatShort4:
-		return "MDLVertexFormatShort4"
-	case MDLVertexFormatUShortNormalized:
-		return "MDLVertexFormatUShortNormalized"
-	case MDLVertexFormatUShort2Normalized:
-		return "MDLVertexFormatUShort2Normalized"
-	case MDLVertexFormatUShort3Normalized:
-		return "MDLVertexFormatUShort3Normalized"
-	case MDLVertexFormatUShort4Normalized:
-		return "MDLVertexFormatUShort4Normalized"
-	case MDLVertexFormatShortNormalized:
-		return "MDLVertexFormatShortNormalized"
-	case MDLVertexFormatShort2Normalized:
-		return "MDLVertexFormatShort2Normalized"
-	case MDLVertexFormatShort3Normalized:
-		return "MDLVertexFormatShort3Normalized"
-	case MDLVertexFormatShort4Normalized:
-		return "MDLVertexFormatShort4Normalized"
-	case MDLVertexFormatUInt:
-		return "MDLVertexFormatUInt"
-	case MDLVertexFormatUInt2:
-		return "MDLVertexFormatUInt2"
-	case MDLVertexFormatUInt3:
-		return "MDLVertexFormatUInt3"
-	case MDLVertexFormatUInt4:
-		return "MDLVertexFormatUInt4"
-	case MDLVertexFormatInt:
-		return "MDLVertexFormatInt"
-	case MDLVertexFormatInt2:
-		return "MDLVertexFormatInt2"
-	case MDLVertexFormatInt3:
-		return "MDLVertexFormatInt3"
-	case MDLVertexFormatInt4:
-		return "MDLVertexFormatInt4"
-	case MDLVertexFormatHalf:
-		return "MDLVertexFormatHalf"
-	case MDLVertexFormatHalf2:
-		return "MDLVertexFormatHalf2"
-	case MDLVertexFormatHalf3:
-		return "MDLVertexFormatHalf3"
-	case MDLVertexFormatHalf4:
-		return "MDLVertexFormatHalf4"
-	case MDLVertexFormatFloat:
-		return "MDLVertexFormatFloat"
-	case MDLVertexFormatFloat2:
-		return "MDLVertexFormatFloat2"
-	case MDLVertexFormatFloat3:
-		return "MDLVertexFormatFloat3"
-	case MDLVertexFormatFloat4:
-		return "MDLVertexFormatFloat4"
-	case MDLVertexFormatInt1010102Normalized:
-		return "MDLVertexFormatInt1010102Normalized"
-	case MDLVertexFormatUInt1010102Normalized:
-		return "MDLVertexFormatUInt1010102Normalized"
+	case VertexFormatInvalid:
+		return "VertexFormatInvalid"
+	case VertexFormatPackedBit:
+		return "VertexFormatPackedBit"
+	case VertexFormatUCharBits:
+		return "VertexFormatUCharBits"
+	case VertexFormatCharBits:
+		return "VertexFormatCharBits"
+	case VertexFormatUCharNormalizedBits:
+		return "VertexFormatUCharNormalizedBits"
+	case VertexFormatCharNormalizedBits:
+		return "VertexFormatCharNormalizedBits"
+	case VertexFormatUShortBits:
+		return "VertexFormatUShortBits"
+	case VertexFormatShortBits:
+		return "VertexFormatShortBits"
+	case VertexFormatUShortNormalizedBits:
+		return "VertexFormatUShortNormalizedBits"
+	case VertexFormatShortNormalizedBits:
+		return "VertexFormatShortNormalizedBits"
+	case VertexFormatUIntBits:
+		return "VertexFormatUIntBits"
+	case VertexFormatIntBits:
+		return "VertexFormatIntBits"
+	case VertexFormatHalfBits:
+		return "VertexFormatHalfBits"
+	case VertexFormatFloatBits:
+		return "VertexFormatFloatBits"
+	case VertexFormatUChar:
+		return "VertexFormatUChar"
+	case VertexFormatUChar2:
+		return "VertexFormatUChar2"
+	case VertexFormatUChar3:
+		return "VertexFormatUChar3"
+	case VertexFormatUChar4:
+		return "VertexFormatUChar4"
+	case VertexFormatChar:
+		return "VertexFormatChar"
+	case VertexFormatChar2:
+		return "VertexFormatChar2"
+	case VertexFormatChar3:
+		return "VertexFormatChar3"
+	case VertexFormatChar4:
+		return "VertexFormatChar4"
+	case VertexFormatUCharNormalized:
+		return "VertexFormatUCharNormalized"
+	case VertexFormatUChar2Normalized:
+		return "VertexFormatUChar2Normalized"
+	case VertexFormatUChar3Normalized:
+		return "VertexFormatUChar3Normalized"
+	case VertexFormatUChar4Normalized:
+		return "VertexFormatUChar4Normalized"
+	case VertexFormatCharNormalized:
+		return "VertexFormatCharNormalized"
+	case VertexFormatChar2Normalized:
+		return "VertexFormatChar2Normalized"
+	case VertexFormatChar3Normalized:
+		return "VertexFormatChar3Normalized"
+	case VertexFormatChar4Normalized:
+		return "VertexFormatChar4Normalized"
+	case VertexFormatUShort:
+		return "VertexFormatUShort"
+	case VertexFormatUShort2:
+		return "VertexFormatUShort2"
+	case VertexFormatUShort3:
+		return "VertexFormatUShort3"
+	case VertexFormatUShort4:
+		return "VertexFormatUShort4"
+	case VertexFormatShort:
+		return "VertexFormatShort"
+	case VertexFormatShort2:
+		return "VertexFormatShort2"
+	case VertexFormatShort3:
+		return "VertexFormatShort3"
+	case VertexFormatShort4:
+		return "VertexFormatShort4"
+	case VertexFormatUShortNormalized:
+		return "VertexFormatUShortNormalized"
+	case VertexFormatUShort2Normalized:
+		return "VertexFormatUShort2Normalized"
+	case VertexFormatUShort3Normalized:
+		return "VertexFormatUShort3Normalized"
+	case VertexFormatUShort4Normalized:
+		return "VertexFormatUShort4Normalized"
+	case VertexFormatShortNormalized:
+		return "VertexFormatShortNormalized"
+	case VertexFormatShort2Normalized:
+		return "VertexFormatShort2Normalized"
+	case VertexFormatShort3Normalized:
+		return "VertexFormatShort3Normalized"
+	case VertexFormatShort4Normalized:
+		return "VertexFormatShort4Normalized"
+	case VertexFormatUInt:
+		return "VertexFormatUInt"
+	case VertexFormatUInt2:
+		return "VertexFormatUInt2"
+	case VertexFormatUInt3:
+		return "VertexFormatUInt3"
+	case VertexFormatUInt4:
+		return "VertexFormatUInt4"
+	case VertexFormatInt:
+		return "VertexFormatInt"
+	case VertexFormatInt2:
+		return "VertexFormatInt2"
+	case VertexFormatInt3:
+		return "VertexFormatInt3"
+	case VertexFormatInt4:
+		return "VertexFormatInt4"
+	case VertexFormatHalf:
+		return "VertexFormatHalf"
+	case VertexFormatHalf2:
+		return "VertexFormatHalf2"
+	case VertexFormatHalf3:
+		return "VertexFormatHalf3"
+	case VertexFormatHalf4:
+		return "VertexFormatHalf4"
+	case VertexFormatFloat:
+		return "VertexFormatFloat"
+	case VertexFormatFloat2:
+		return "VertexFormatFloat2"
+	case VertexFormatFloat3:
+		return "VertexFormatFloat3"
+	case VertexFormatFloat4:
+		return "VertexFormatFloat4"
+	case VertexFormatInt1010102Normalized:
+		return "VertexFormatInt1010102Normalized"
+	case VertexFormatUInt1010102Normalized:
+		return "VertexFormatUInt1010102Normalized"
 	default:
-		return fmt.Sprintf("MDLVertexFormat(%d)", int64(e))
+		return fmt.Sprintf("VertexFormat(%d)", int64(e))
 	}
 }

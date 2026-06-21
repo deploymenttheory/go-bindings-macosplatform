@@ -5,52 +5,74 @@
 package quartz
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The QCCompositionPickerPanel class represents a utility window that allows users to browse compositions that are in the Quartz Composer composition repository and, if supported, preview the composition. The QCCompositionPickerPanel class cannot be subclassed.
 //
-// QCCompositionPickerPanel wraps [raw.QCCompositionPickerPanel] with a fluent Go API.
+// QCCompositionPickerPanel is an idiomatic wrapper over the Objective-C class QCCompositionPickerPanel.
 type QCCompositionPickerPanel struct {
-	inner *raw.QCCompositionPickerPanel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QCCompositionPickerPanel].
-func (x *QCCompositionPickerPanel) Unwrap() *raw.QCCompositionPickerPanel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QCCompositionPickerPanel) ID() objc.ID { return x.inner.Ptr() }
-
-// QCCompositionPickerPanelFromID adopts an existing object pointer as a QCCompositionPickerPanel (nil for 0).
+// QCCompositionPickerPanelFromID adopts an existing Objective-C object as a QCCompositionPickerPanel
+// (nil for 0), retaining it and registering a release finalizer.
 func QCCompositionPickerPanelFromID(id objc.ID) *QCCompositionPickerPanel {
 	if id == 0 {
 		return nil
 	}
-	return &QCCompositionPickerPanel{inner: raw.QCCompositionPickerPanelFromID(id)}
+	x := &QCCompositionPickerPanel{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewQCCompositionPickerPanel creates a new [QCCompositionPickerPanel].
+// qCCompositionPickerPanelAdopt wraps an Objective-C object that this code just created as a
+// QCCompositionPickerPanel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func qCCompositionPickerPanelAdopt(id objc.ID) *QCCompositionPickerPanel {
+	if id == 0 {
+		return nil
+	}
+	x := &QCCompositionPickerPanel{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *QCCompositionPickerPanel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QCCompositionPickerPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QCCompositionPickerPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewQCCompositionPickerPanel creates a new QCCompositionPickerPanel.
 func NewQCCompositionPickerPanel() *QCCompositionPickerPanel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QCCompositionPickerPanel")), objc.RegisterName("new"))
-	return &QCCompositionPickerPanel{inner: raw.QCCompositionPickerPanelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionPickerPanel")), objc.RegisterName("new"))
+	return qCCompositionPickerPanelAdopt(_id)
 }
 
 // Returns the composition picker view used by the panel so that it can be configured.
-//
-// CompositionPickerView calls the underlying CompositionPickerView.
 func (x *QCCompositionPickerPanel) CompositionPickerView() *QCCompositionPickerView {
-	_r := x.inner.CompositionPickerView()
-	if _r == nil {
-		return nil
-	}
-	return &QCCompositionPickerView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionPickerView"))
+	return QCCompositionPickerViewFromID(_r)
 }
 
 // QCCompositionPickerPanelable is the interface implemented by [QCCompositionPickerPanel], for mocking and DI.
 type QCCompositionPickerPanelable interface {
-	Unwrap() *raw.QCCompositionPickerPanel
+	obj.Object
 	CompositionPickerView() *QCCompositionPickerView
 }
 

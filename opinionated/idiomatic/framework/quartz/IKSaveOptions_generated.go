@@ -5,135 +5,147 @@
 package quartz
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The IKSaveOptions class initializes, adds, and manages user interface options for saving image data.
 //
-// IKSaveOptions wraps [raw.IKSaveOptions] with a fluent Go API.
+// IKSaveOptions is an idiomatic wrapper over the Objective-C class IKSaveOptions.
 type IKSaveOptions struct {
-	inner *raw.IKSaveOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IKSaveOptions].
-func (x *IKSaveOptions) Unwrap() *raw.IKSaveOptions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IKSaveOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// IKSaveOptionsFromID adopts an existing object pointer as a IKSaveOptions (nil for 0).
+// IKSaveOptionsFromID adopts an existing Objective-C object as a IKSaveOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func IKSaveOptionsFromID(id objc.ID) *IKSaveOptions {
 	if id == 0 {
 		return nil
 	}
-	return &IKSaveOptions{inner: raw.IKSaveOptionsFromID(id)}
+	x := &IKSaveOptions{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// iKSaveOptionsAdopt wraps an Objective-C object that this code just created as a
+// IKSaveOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iKSaveOptionsAdopt(id objc.ID) *IKSaveOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &IKSaveOptions{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IKSaveOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IKSaveOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IKSaveOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a save options accessory pane for the provided image properties and uniform type identifier.
 //
-// NewIKSaveOptionsWithImagePropertiesImageUTType creates a new [IKSaveOptions].
-func NewIKSaveOptionsWithImagePropertiesImageUTType(imageProperties purego.IDer, imageUTType string) *IKSaveOptions {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IKSaveOptions")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageProperties:imageUTType:"), imageProperties.ID(), foundation.NSStringStringWithUTF8String(imageUTType).Ptr())
-	return &IKSaveOptions{inner: raw.IKSaveOptionsFromID(_id)}
+// NewIKSaveOptionsWithImagePropertiesImageUTType creates a new IKSaveOptions.
+func NewIKSaveOptionsWithImagePropertiesImageUTType(imageProperties obj.Object, imageUTType string) *IKSaveOptions {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("IKSaveOptions")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageProperties:imageUTType:"), objref.IDOf(imageProperties), purego.NSString(imageUTType))
+	return iKSaveOptionsAdopt(_id)
 }
 
 // Specifies the delegate object.
 //
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *IKSaveOptions) WithDelegate(delegate objc.ID) *IKSaveOptions {
-	x.inner.SetDelegate(delegate)
+// WithDelegate sets delegate and returns the receiver so calls can be chained.
+func (x *IKSaveOptions) WithDelegate(delegate obj.Object) *IKSaveOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return x
 }
 
-// @property rememberLastSetting @abstract If set, the last used UI choices are preserved for the next time IKSaveOptions is used. [default is YES]
+// If set, the last used UI choices are preserved for the next time IKSaveOptions is used. [default is YES]
 //
-// WithRememberLastSetting sets the rememberLastSetting property and returns the receiver for chaining.
+// WithRememberLastSetting sets rememberLastSetting and returns the receiver so calls can be chained.
 func (x *IKSaveOptions) WithRememberLastSetting(rememberLastSetting bool) *IKSaveOptions {
-	x.inner.SetRememberLastSetting(rememberLastSetting)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRememberLastSetting:"), rememberLastSetting)
 	return x
 }
 
 // Adds IKSaveOptions accessory view to a NSSavePanel.
-//
-// AddSaveOptionsAccessoryViewToSavePanel calls the underlying AddSaveOptionsAccessoryViewToSavePanel.
-func (x *IKSaveOptions) AddSaveOptionsAccessoryViewToSavePanel(savePanel *appkit.NSSavePanel) {
-	x.inner.AddSaveOptionsAccessoryViewToSavePanel(savePanel)
+func (x *IKSaveOptions) AddSaveOptionsAccessoryViewToSavePanel(savePanel obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSaveOptionsAccessoryViewToSavePanel:"), objref.IDOf(savePanel))
 }
 
-// @method addSaveOptionsToView: @abstract Adds IKSaveOptions UI to a NSView.
-//
-// AddSaveOptionsToView calls the underlying AddSaveOptionsToView.
-func (x *IKSaveOptions) AddSaveOptionsToView(view *appkit.NSView) {
-	x.inner.AddSaveOptionsToView(view)
+// Adds IKSaveOptions UI to a NSView.
+func (x *IKSaveOptions) AddSaveOptionsToView(view obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSaveOptionsToView:"), objref.IDOf(view))
 }
 
-// @property delegate @abstract Delegate of the IKSaveOptions.
-//
-// Delegate calls the underlying Delegate.
-func (x *IKSaveOptions) Delegate() objc.ID {
-	return x.inner.Delegate()
+// Delegate of the IKSaveOptions.
+func (x *IKSaveOptions) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+	return obj.Wrap(_r)
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *IKSaveOptions) SetDelegate(delegate objc.ID) {
-	x.inner.SetDelegate(delegate)
+func (x *IKSaveOptions) SetDelegate(delegate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
-// @property imageProperties @abstract current imageProperties (respecting user UI selection).
-//
-// ImageProperties calls the underlying ImageProperties.
-func (x *IKSaveOptions) ImageProperties() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.ImageProperties()
+// current imageProperties (respecting user UI selection).
+func (x *IKSaveOptions) ImageProperties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageProperties"))
+	return obj.Wrap(_r)
 }
 
-// @property imageUTType @abstract current imageUTType (respecting user UI selection).
-//
-// ImageUTType calls the underlying ImageUTType.
+// current imageUTType (respecting user UI selection).
 func (x *IKSaveOptions) ImageUTType() string {
-	_r := x.inner.ImageUTType()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageUTType"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property userSelection @abstract information about the UI settings.
-//
-// UserSelection calls the underlying UserSelection.
-func (x *IKSaveOptions) UserSelection() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.UserSelection()
+// information about the UI settings.
+func (x *IKSaveOptions) UserSelection() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userSelection"))
+	return obj.Wrap(_r)
 }
 
-// @property rememberLastSetting @abstract If set, the last used UI choices are preserved for the next time IKSaveOptions is used. [default is YES]
-//
-// RememberLastSetting calls the underlying RememberLastSetting.
+// If set, the last used UI choices are preserved for the next time IKSaveOptions is used. [default is YES]
 func (x *IKSaveOptions) RememberLastSetting() bool {
-	return x.inner.RememberLastSetting()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("rememberLastSetting"))
+	return _r
 }
 
-// SetRememberLastSetting calls the underlying SetRememberLastSetting.
 func (x *IKSaveOptions) SetRememberLastSetting(rememberLastSetting bool) {
-	x.inner.SetRememberLastSetting(rememberLastSetting)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRememberLastSetting:"), rememberLastSetting)
 }
 
 // IKSaveOptionsable is the interface implemented by [IKSaveOptions], for mocking and DI.
 type IKSaveOptionsable interface {
-	Unwrap() *raw.IKSaveOptions
-	WithDelegate(delegate objc.ID) *IKSaveOptions
+	obj.Object
+	WithDelegate(delegate obj.Object) *IKSaveOptions
 	WithRememberLastSetting(rememberLastSetting bool) *IKSaveOptions
-	AddSaveOptionsAccessoryViewToSavePanel(savePanel *appkit.NSSavePanel)
-	AddSaveOptionsToView(view *appkit.NSView)
-	Delegate() objc.ID
-	SetDelegate(delegate objc.ID)
-	ImageProperties() *foundation.NSDictionary[objc.ID, objc.ID]
+	AddSaveOptionsAccessoryViewToSavePanel(savePanel obj.Object)
+	AddSaveOptionsToView(view obj.Object)
+	Delegate() obj.Object
+	SetDelegate(delegate obj.Object)
+	ImageProperties() obj.Object
 	ImageUTType() string
-	UserSelection() *foundation.NSDictionary[objc.ID, objc.ID]
+	UserSelection() obj.Object
 	RememberLastSetting() bool
 	SetRememberLastSetting(rememberLastSetting bool)
 }

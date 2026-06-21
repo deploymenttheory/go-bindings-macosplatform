@@ -5,185 +5,192 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A formatter that creates locale-aware string representations of a relative date or time.
 //
-// RelativeDateTimeFormatter wraps [raw.NSRelativeDateTimeFormatter] with a fluent Go API.
+// RelativeDateTimeFormatter is an idiomatic wrapper over the Objective-C class NSRelativeDateTimeFormatter.
 type RelativeDateTimeFormatter struct {
-	inner *raw.NSRelativeDateTimeFormatter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSRelativeDateTimeFormatter].
-func (x *RelativeDateTimeFormatter) Unwrap() *raw.NSRelativeDateTimeFormatter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RelativeDateTimeFormatter) ID() objc.ID { return x.inner.Ptr() }
-
-// RelativeDateTimeFormatterFromID adopts an existing object pointer as a RelativeDateTimeFormatter (nil for 0).
+// RelativeDateTimeFormatterFromID adopts an existing Objective-C object as a RelativeDateTimeFormatter
+// (nil for 0), retaining it and registering a release finalizer.
 func RelativeDateTimeFormatterFromID(id objc.ID) *RelativeDateTimeFormatter {
 	if id == 0 {
 		return nil
 	}
-	return &RelativeDateTimeFormatter{inner: raw.NSRelativeDateTimeFormatterFromID(id)}
+	x := &RelativeDateTimeFormatter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRelativeDateTimeFormatter creates a new [RelativeDateTimeFormatter].
+// relativeDateTimeFormatterAdopt wraps an Objective-C object that this code just created as a
+// RelativeDateTimeFormatter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func relativeDateTimeFormatterAdopt(id objc.ID) *RelativeDateTimeFormatter {
+	if id == 0 {
+		return nil
+	}
+	x := &RelativeDateTimeFormatter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RelativeDateTimeFormatter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RelativeDateTimeFormatter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RelativeDateTimeFormatter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRelativeDateTimeFormatter creates a new RelativeDateTimeFormatter.
 func NewRelativeDateTimeFormatter() *RelativeDateTimeFormatter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSRelativeDateTimeFormatter")), objc.RegisterName("new"))
-	return &RelativeDateTimeFormatter{inner: raw.NSRelativeDateTimeFormatterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSRelativeDateTimeFormatter")), objc.RegisterName("new"))
+	return relativeDateTimeFormatterAdopt(_id)
 }
 
-// WithDateTimeStyle sets the dateTimeStyle property and returns the receiver for chaining.
-func (x *RelativeDateTimeFormatter) WithDateTimeStyle(dateTimeStyle NSRelativeDateTimeFormatterStyle) *RelativeDateTimeFormatter {
-	x.inner.SetDateTimeStyle(raw.NSRelativeDateTimeFormatterStyle(dateTimeStyle))
+// WithDateTimeStyle sets dateTimeStyle and returns the receiver so calls can be chained.
+func (x *RelativeDateTimeFormatter) WithDateTimeStyle(dateTimeStyle RelativeDateTimeFormatterStyle) *RelativeDateTimeFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateTimeStyle:"), dateTimeStyle)
 	return x
 }
 
-// WithUnitsStyle sets the unitsStyle property and returns the receiver for chaining.
-func (x *RelativeDateTimeFormatter) WithUnitsStyle(unitsStyle NSRelativeDateTimeFormatterUnitsStyle) *RelativeDateTimeFormatter {
-	x.inner.SetUnitsStyle(raw.NSRelativeDateTimeFormatterUnitsStyle(unitsStyle))
+// WithUnitsStyle sets unitsStyle and returns the receiver so calls can be chained.
+func (x *RelativeDateTimeFormatter) WithUnitsStyle(unitsStyle RelativeDateTimeFormatterUnitsStyle) *RelativeDateTimeFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitsStyle:"), unitsStyle)
 	return x
 }
 
-// WithFormattingContext sets the formattingContext property and returns the receiver for chaining.
-func (x *RelativeDateTimeFormatter) WithFormattingContext(formattingContext NSFormattingContext) *RelativeDateTimeFormatter {
-	x.inner.SetFormattingContext(raw.NSFormattingContext(formattingContext))
+// WithFormattingContext sets formattingContext and returns the receiver so calls can be chained.
+func (x *RelativeDateTimeFormatter) WithFormattingContext(formattingContext FormattingContext) *RelativeDateTimeFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingContext:"), formattingContext)
 	return x
 }
 
-// WithCalendar sets the calendar property and returns the receiver for chaining.
+// WithCalendar sets calendar and returns the receiver so calls can be chained.
 func (x *RelativeDateTimeFormatter) WithCalendar(calendar *Calendar) *RelativeDateTimeFormatter {
-	x.inner.SetCalendar(calendar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return x
 }
 
-// WithLocale sets the locale property and returns the receiver for chaining.
+// WithLocale sets locale and returns the receiver so calls can be chained.
 func (x *RelativeDateTimeFormatter) WithLocale(locale *Locale) *RelativeDateTimeFormatter {
-	x.inner.SetLocale(locale.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *RelativeDateTimeFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RelativeDateTimeFormatter {
-	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *RelativeDateTimeFormatter) WithScriptingProperties(scriptingProperties obj.Object) *RelativeDateTimeFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// LocalizedStringFromDateComponents calls the underlying LocalizedStringFromDateComponents.
-func (x *RelativeDateTimeFormatter) LocalizedStringFromDateComponents(dateComponents *raw.NSDateComponents) *String {
-	_r := x.inner.LocalizedStringFromDateComponents(dateComponents)
-	if _r == nil {
-		return nil
+func (x *RelativeDateTimeFormatter) LocalizedStringFromDateComponents(dateComponents *DateComponents) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringFromDateComponents:"), objref.IDOf(dateComponents))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// LocalizedStringFromTimeInterval calls the underlying LocalizedStringFromTimeInterval.
-func (x *RelativeDateTimeFormatter) LocalizedStringFromTimeInterval(timeInterval float64) *String {
-	_r := x.inner.LocalizedStringFromTimeInterval(timeInterval)
-	if _r == nil {
-		return nil
+func (x *RelativeDateTimeFormatter) LocalizedStringFromTimeInterval(timeInterval float64) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringFromTimeInterval:"), timeInterval)
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// LocalizedStringForDateRelativeToDate calls the underlying LocalizedStringForDateRelativeToDate.
-func (x *RelativeDateTimeFormatter) LocalizedStringForDateRelativeToDate(date *raw.NSDate, referenceDate *raw.NSDate) *String {
-	_r := x.inner.LocalizedStringForDateRelativeToDate(date, referenceDate)
-	if _r == nil {
-		return nil
+func (x *RelativeDateTimeFormatter) LocalizedStringForDateRelativeToDate(date *Date, referenceDate *Date) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringForDate:relativeToDate:"), objref.IDOf(date), objref.IDOf(referenceDate))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// DateTimeStyle calls the underlying DateTimeStyle.
-func (x *RelativeDateTimeFormatter) DateTimeStyle() NSRelativeDateTimeFormatterStyle {
-	return NSRelativeDateTimeFormatterStyle(x.inner.DateTimeStyle())
+func (x *RelativeDateTimeFormatter) DateTimeStyle() RelativeDateTimeFormatterStyle {
+	_r := objc.Send[RelativeDateTimeFormatterStyle](objref.IDOf(x), objc.RegisterName("dateTimeStyle"))
+	return _r
 }
 
-// SetDateTimeStyle calls the underlying SetDateTimeStyle.
-func (x *RelativeDateTimeFormatter) SetDateTimeStyle(dateTimeStyle NSRelativeDateTimeFormatterStyle) {
-	x.inner.SetDateTimeStyle(raw.NSRelativeDateTimeFormatterStyle(dateTimeStyle))
+func (x *RelativeDateTimeFormatter) SetDateTimeStyle(dateTimeStyle RelativeDateTimeFormatterStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateTimeStyle:"), dateTimeStyle)
 }
 
-// UnitsStyle calls the underlying UnitsStyle.
-func (x *RelativeDateTimeFormatter) UnitsStyle() NSRelativeDateTimeFormatterUnitsStyle {
-	return NSRelativeDateTimeFormatterUnitsStyle(x.inner.UnitsStyle())
+func (x *RelativeDateTimeFormatter) UnitsStyle() RelativeDateTimeFormatterUnitsStyle {
+	_r := objc.Send[RelativeDateTimeFormatterUnitsStyle](objref.IDOf(x), objc.RegisterName("unitsStyle"))
+	return _r
 }
 
-// SetUnitsStyle calls the underlying SetUnitsStyle.
-func (x *RelativeDateTimeFormatter) SetUnitsStyle(unitsStyle NSRelativeDateTimeFormatterUnitsStyle) {
-	x.inner.SetUnitsStyle(raw.NSRelativeDateTimeFormatterUnitsStyle(unitsStyle))
+func (x *RelativeDateTimeFormatter) SetUnitsStyle(unitsStyle RelativeDateTimeFormatterUnitsStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnitsStyle:"), unitsStyle)
 }
 
-// FormattingContext calls the underlying FormattingContext.
-func (x *RelativeDateTimeFormatter) FormattingContext() NSFormattingContext {
-	return NSFormattingContext(x.inner.FormattingContext())
+func (x *RelativeDateTimeFormatter) FormattingContext() FormattingContext {
+	_r := objc.Send[FormattingContext](objref.IDOf(x), objc.RegisterName("formattingContext"))
+	return _r
 }
 
-// SetFormattingContext calls the underlying SetFormattingContext.
-func (x *RelativeDateTimeFormatter) SetFormattingContext(formattingContext NSFormattingContext) {
-	x.inner.SetFormattingContext(raw.NSFormattingContext(formattingContext))
+func (x *RelativeDateTimeFormatter) SetFormattingContext(formattingContext FormattingContext) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingContext:"), formattingContext)
 }
 
-// Calendar calls the underlying Calendar.
 func (x *RelativeDateTimeFormatter) Calendar() *Calendar {
-	_r := x.inner.Calendar()
-	if _r == nil {
-		return nil
-	}
-	return &Calendar{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendar"))
+	return CalendarFromID(_r)
 }
 
-// SetCalendar calls the underlying SetCalendar.
-func (x *RelativeDateTimeFormatter) SetCalendar(calendar *raw.NSCalendar) {
-	x.inner.SetCalendar(calendar)
+func (x *RelativeDateTimeFormatter) SetCalendar(calendar *Calendar) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 }
 
-// Locale calls the underlying Locale.
 func (x *RelativeDateTimeFormatter) Locale() *Locale {
-	_r := x.inner.Locale()
-	if _r == nil {
-		return nil
-	}
-	return &Locale{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
+	return LocaleFromID(_r)
 }
 
-// SetLocale calls the underlying SetLocale.
-func (x *RelativeDateTimeFormatter) SetLocale(locale *raw.NSLocale) {
-	x.inner.SetLocale(locale)
+func (x *RelativeDateTimeFormatter) SetLocale(locale *Locale) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 }
-
-func (x *RelativeDateTimeFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
-
-func (x *RelativeDateTimeFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.NSObject }
 
 // RelativeDateTimeFormatterable is the interface implemented by [RelativeDateTimeFormatter], for mocking and DI.
 type RelativeDateTimeFormatterable interface {
-	Unwrap() *raw.NSRelativeDateTimeFormatter
-	WithDateTimeStyle(dateTimeStyle NSRelativeDateTimeFormatterStyle) *RelativeDateTimeFormatter
-	WithUnitsStyle(unitsStyle NSRelativeDateTimeFormatterUnitsStyle) *RelativeDateTimeFormatter
-	WithFormattingContext(formattingContext NSFormattingContext) *RelativeDateTimeFormatter
+	obj.Object
+	WithDateTimeStyle(dateTimeStyle RelativeDateTimeFormatterStyle) *RelativeDateTimeFormatter
+	WithUnitsStyle(unitsStyle RelativeDateTimeFormatterUnitsStyle) *RelativeDateTimeFormatter
+	WithFormattingContext(formattingContext FormattingContext) *RelativeDateTimeFormatter
 	WithCalendar(calendar *Calendar) *RelativeDateTimeFormatter
 	WithLocale(locale *Locale) *RelativeDateTimeFormatter
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RelativeDateTimeFormatter
-	LocalizedStringFromDateComponents(dateComponents *raw.NSDateComponents) *String
-	LocalizedStringFromTimeInterval(timeInterval float64) *String
-	LocalizedStringForDateRelativeToDate(date *raw.NSDate, referenceDate *raw.NSDate) *String
-	DateTimeStyle() NSRelativeDateTimeFormatterStyle
-	SetDateTimeStyle(dateTimeStyle NSRelativeDateTimeFormatterStyle)
-	UnitsStyle() NSRelativeDateTimeFormatterUnitsStyle
-	SetUnitsStyle(unitsStyle NSRelativeDateTimeFormatterUnitsStyle)
-	FormattingContext() NSFormattingContext
-	SetFormattingContext(formattingContext NSFormattingContext)
+	WithScriptingProperties(scriptingProperties obj.Object) *RelativeDateTimeFormatter
+	LocalizedStringFromDateComponents(dateComponents *DateComponents) string
+	LocalizedStringFromTimeInterval(timeInterval float64) string
+	LocalizedStringForDateRelativeToDate(date *Date, referenceDate *Date) string
+	DateTimeStyle() RelativeDateTimeFormatterStyle
+	SetDateTimeStyle(dateTimeStyle RelativeDateTimeFormatterStyle)
+	UnitsStyle() RelativeDateTimeFormatterUnitsStyle
+	SetUnitsStyle(unitsStyle RelativeDateTimeFormatterUnitsStyle)
+	FormattingContext() FormattingContext
+	SetFormattingContext(formattingContext FormattingContext)
 	Calendar() *Calendar
-	SetCalendar(calendar *raw.NSCalendar)
+	SetCalendar(calendar *Calendar)
 	Locale() *Locale
-	SetLocale(locale *raw.NSLocale)
+	SetLocale(locale *Locale)
 }
 
 var _ RelativeDateTimeFormatterable = (*RelativeDateTimeFormatter)(nil)

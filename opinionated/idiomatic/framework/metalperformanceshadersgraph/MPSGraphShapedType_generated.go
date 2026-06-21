@@ -5,89 +5,68 @@
 package metalperformanceshadersgraph
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The shaped type class for types on tensors with a shape and data type.
 //
-// GraphShapedType wraps [raw.MPSGraphShapedType] with a fluent Go API.
+// GraphShapedType is an idiomatic wrapper over the Objective-C class MPSGraphShapedType.
 type GraphShapedType struct {
-	inner *raw.MPSGraphShapedType
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSGraphShapedType].
-func (x *GraphShapedType) Unwrap() *raw.MPSGraphShapedType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphShapedType) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphShapedTypeFromID adopts an existing object pointer as a GraphShapedType (nil for 0).
+// GraphShapedTypeFromID adopts an existing Objective-C object as a GraphShapedType
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphShapedTypeFromID(id objc.ID) *GraphShapedType {
 	if id == 0 {
 		return nil
 	}
-	return &GraphShapedType{inner: raw.MPSGraphShapedTypeFromID(id)}
-}
-
-// Initializes a shaped type.
-//
-// NewGraphShapedTypeWithShapeDataType creates a new [GraphShapedType].
-func NewGraphShapedTypeWithShapeDataType(shape unsafe.Pointer, dataType mpscore.MPSDataType) *GraphShapedType {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphShapedType")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithShape:dataType:"), shape, dataType)
-	return &GraphShapedType{inner: raw.MPSGraphShapedTypeFromID(_id)}
-}
-
-// The data type of the shaped type.
-//
-// WithDataType sets the dataType property and returns the receiver for chaining.
-func (x *GraphShapedType) WithDataType(dataType mpscore.MPSDataType) *GraphShapedType {
-	x.inner.SetDataType(dataType)
+	x := &GraphShapedType{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// The Shape of the shaped type.
-//
-// Shape calls the underlying Shape.
-func (x *GraphShapedType) Shape() unsafe.Pointer {
-	return x.inner.Shape()
+// graphShapedTypeAdopt wraps an Objective-C object that this code just created as a
+// GraphShapedType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphShapedTypeAdopt(id objc.ID) *GraphShapedType {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphShapedType{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetShape calls the underlying SetShape.
-func (x *GraphShapedType) SetShape(shape unsafe.Pointer) {
-	x.inner.SetShape(shape)
+// Description returns the object's -description text.
+func (x *GraphShapedType) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The data type of the shaped type.
-//
-// DataType calls the underlying DataType.
-func (x *GraphShapedType) DataType() mpscore.MPSDataType {
-	return x.inner.DataType()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GraphShapedType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetDataType calls the underlying SetDataType.
-func (x *GraphShapedType) SetDataType(dataType mpscore.MPSDataType) {
-	x.inner.SetDataType(dataType)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GraphShapedType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-func (x *GraphShapedType) asGraphType() *raw.MPSGraphType { return &x.inner.MPSGraphType }
-
-func (x *GraphShapedType) asGraphObject() *raw.MPSGraphObject {
-	return &x.inner.MPSGraphType.MPSGraphObject
+// NewGraphShapedType creates a new GraphShapedType.
+func NewGraphShapedType() *GraphShapedType {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphShapedType")), objc.RegisterName("new"))
+	return graphShapedTypeAdopt(_id)
 }
 
 // GraphShapedTypeable is the interface implemented by [GraphShapedType], for mocking and DI.
 type GraphShapedTypeable interface {
-	Unwrap() *raw.MPSGraphShapedType
-	WithDataType(dataType mpscore.MPSDataType) *GraphShapedType
-	Shape() unsafe.Pointer
-	SetShape(shape unsafe.Pointer)
-	DataType() mpscore.MPSDataType
-	SetDataType(dataType mpscore.MPSDataType)
+	obj.Object
 }
 
 var _ GraphShapedTypeable = (*GraphShapedType)(nil)

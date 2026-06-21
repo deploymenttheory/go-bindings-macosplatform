@@ -5,72 +5,88 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A PCM stream of input audio data, such as from a microphone.
 //
-// VirtioSoundDeviceInputStreamConfiguration wraps [raw.VZVirtioSoundDeviceInputStreamConfiguration] with a fluent Go API.
+// VirtioSoundDeviceInputStreamConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioSoundDeviceInputStreamConfiguration.
 type VirtioSoundDeviceInputStreamConfiguration struct {
-	inner *raw.VZVirtioSoundDeviceInputStreamConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZVirtioSoundDeviceInputStreamConfiguration].
-func (x *VirtioSoundDeviceInputStreamConfiguration) Unwrap() *raw.VZVirtioSoundDeviceInputStreamConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioSoundDeviceInputStreamConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioSoundDeviceInputStreamConfigurationFromID adopts an existing object pointer as a VirtioSoundDeviceInputStreamConfiguration (nil for 0).
+// VirtioSoundDeviceInputStreamConfigurationFromID adopts an existing Objective-C object as a VirtioSoundDeviceInputStreamConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioSoundDeviceInputStreamConfigurationFromID(id objc.ID) *VirtioSoundDeviceInputStreamConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioSoundDeviceInputStreamConfiguration{inner: raw.VZVirtioSoundDeviceInputStreamConfigurationFromID(id)}
+	x := &VirtioSoundDeviceInputStreamConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVirtioSoundDeviceInputStreamConfiguration creates a new [VirtioSoundDeviceInputStreamConfiguration].
+// virtioSoundDeviceInputStreamConfigurationAdopt wraps an Objective-C object that this code just created as a
+// VirtioSoundDeviceInputStreamConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioSoundDeviceInputStreamConfigurationAdopt(id objc.ID) *VirtioSoundDeviceInputStreamConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtioSoundDeviceInputStreamConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VirtioSoundDeviceInputStreamConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VirtioSoundDeviceInputStreamConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VirtioSoundDeviceInputStreamConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVirtioSoundDeviceInputStreamConfiguration creates a new VirtioSoundDeviceInputStreamConfiguration.
 func NewVirtioSoundDeviceInputStreamConfiguration() *VirtioSoundDeviceInputStreamConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioSoundDeviceInputStreamConfiguration")), objc.RegisterName("new"))
-	return &VirtioSoundDeviceInputStreamConfiguration{inner: raw.VZVirtioSoundDeviceInputStreamConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioSoundDeviceInputStreamConfiguration")), objc.RegisterName("new"))
+	return virtioSoundDeviceInputStreamConfigurationAdopt(_id)
 }
 
 // An audio stream source that defines how the host supplies audio data for the guest.
 //
-// WithSource sets the source property and returns the receiver for chaining.
+// WithSource sets source and returns the receiver so calls can be chained.
 func (x *VirtioSoundDeviceInputStreamConfiguration) WithSource(source AudioInputStreamSourceProvider) *VirtioSoundDeviceInputStreamConfiguration {
-	x.inner.SetSource(source.asAudioInputStreamSource())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), objref.IDOf(source))
 	return x
 }
 
-// Source calls the underlying Source.
 func (x *VirtioSoundDeviceInputStreamConfiguration) Source() *AudioInputStreamSource {
-	_r := x.inner.Source()
-	if _r == nil {
-		return nil
-	}
-	return &AudioInputStreamSource{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
+	return AudioInputStreamSourceFromID(_r)
 }
 
-// SetSource calls the underlying SetSource.
-func (x *VirtioSoundDeviceInputStreamConfiguration) SetSource(source *raw.VZAudioInputStreamSource) {
-	x.inner.SetSource(source)
-}
-
-func (x *VirtioSoundDeviceInputStreamConfiguration) asVirtioSoundDeviceStreamConfiguration() *raw.VZVirtioSoundDeviceStreamConfiguration {
-	return &x.inner.VZVirtioSoundDeviceStreamConfiguration
+func (x *VirtioSoundDeviceInputStreamConfiguration) SetSource(source *AudioInputStreamSource) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSource:"), objref.IDOf(source))
 }
 
 // VirtioSoundDeviceInputStreamConfigurationable is the interface implemented by [VirtioSoundDeviceInputStreamConfiguration], for mocking and DI.
 type VirtioSoundDeviceInputStreamConfigurationable interface {
-	Unwrap() *raw.VZVirtioSoundDeviceInputStreamConfiguration
+	obj.Object
 	WithSource(source AudioInputStreamSourceProvider) *VirtioSoundDeviceInputStreamConfiguration
 	Source() *AudioInputStreamSource
-	SetSource(source *raw.VZAudioInputStreamSource)
+	SetSource(source *AudioInputStreamSource)
 }
 
 var _ VirtioSoundDeviceInputStreamConfigurationable = (*VirtioSoundDeviceInputStreamConfiguration)(nil)

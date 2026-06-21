@@ -5,202 +5,145 @@
 package discrecording
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// BurnForDevice calls the underlying DRBurnBurnForDevice.
-func BurnForDevice(device *raw.DRDevice) *Burn {
-	_r := raw.DRBurnBurnForDevice(device)
-	if _r == nil {
-		return nil
-	}
-	return &Burn{inner: _r}
+// Creates an autoreleased burn object. Once a burn is created with this method, the object is ready to write data to the disc.
+func BurnForDevice(device *Device) *Burn {
+	_r := objc.Send[objc.ID](objc.ID(_class("DRBurn")), objc.RegisterName("burnForDevice:"), objref.IDOf(device))
+	return BurnFromID(_r)
 }
 
-// LayoutForImageFile calls the underlying DRBurnLayoutForImageFile.
-func LayoutForImageFile(path string) objc.ID {
-	return raw.DRBurnLayoutForImageFile(foundation.NSStringStringWithUTF8String(path))
+// Creates a layout capable of burning an image to disc. The layout created by this method may be any type of object. No assumptions should be made as to what sort of object may be returned based on the input image type.
+func LayoutForImageFile(path string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("DRBurn")), objc.RegisterName("layoutForImageFile:"), purego.NSString(path))
+	return obj.Wrap(_r)
 }
 
-// ArrayOfCDTextBlocksFromPacks calls the underlying DRCDTextBlockArrayOfCDTextBlocksFromPacks.
-func ArrayOfCDTextBlocksFromPacks(packs *foundation.NSData) *foundation.NSArray[objc.ID] {
-	return raw.DRCDTextBlockArrayOfCDTextBlocksFromPacks(packs)
+// Parses raw CD-Text data from a disc into DRCDTextBlock objects. This method can be used to parse any data blob containing CD-Text PACKs, such as the result of +[DRDevice readCDText], or the data returned by the IOKit ioctl DKIOCCDREADTOC with format=5. The NSData should be sized to fit the exact number of PACKs.  Each PACK occupies 18 bytes, and the 4-byte header from a READ TOC command may optionally be included.
+func ArrayOfCDTextBlocksFromPacks(packs obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("DRCDTextBlock")), objc.RegisterName("arrayOfCDTextBlocksFromPacks:"), objref.IDOf(packs))
+	return obj.Wrap(_r)
 }
 
-// CdTextBlockWithLanguageEncoding calls the underlying DRCDTextBlockCdTextBlockWithLanguageEncoding.
-func CdTextBlockWithLanguageEncoding(lang string, enc uint) *CDTextBlock {
-	_r := raw.DRCDTextBlockCdTextBlockWithLanguageEncoding(foundation.NSStringStringWithUTF8String(lang), enc)
-	if _r == nil {
-		return nil
-	}
-	return &CDTextBlock{inner: _r}
+// Creates a CD-Text block.
+func CdTextBlockWithLanguageEncoding(lang string, enc int) *CDTextBlock {
+	_r := objc.Send[objc.ID](objc.ID(_class("DRCDTextBlock")), objc.RegisterName("cdTextBlockWithLanguage:encoding:"), purego.NSString(lang), enc)
+	return CDTextBlockFromID(_r)
 }
 
-// Devices calls the underlying DRDeviceDevices.
-func Devices() *foundation.NSArray[objc.ID] {
-	return raw.DRDeviceDevices()
+// Obtains a static list of devices connected to the computer. Returns all CD/DVD devices connected to the computer at the time this method is called. Since devices can come and go at any time, the output of this method is simply a snapshot of the set of devices connected.
+func Devices() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("DRDevice")), objc.RegisterName("devices"))
+	return obj.Wrap(_r)
 }
 
-// DeviceForBSDName calls the underlying DRDeviceDeviceForBSDName.
+// Obtains a DRDevice for the device corresponding to the bsd /dev node. If the device is not an authoring device (i.e., CDR, CDRW, DVR-R, etc), returns nil.
 func DeviceForBSDName(bsdName string) *Device {
-	_r := raw.DRDeviceDeviceForBSDName(foundation.NSStringStringWithUTF8String(bsdName))
-	if _r == nil {
-		return nil
-	}
-	return &Device{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("DRDevice")), objc.RegisterName("deviceForBSDName:"), purego.NSString(bsdName))
+	return DeviceFromID(_r)
 }
 
-// DeviceForIORegistryEntryPath calls the underlying DRDeviceDeviceForIORegistryEntryPath.
+// Obtains a DRDevice for the device at the path. If the device is not an authoring device (i.e., CDR, CDRW, DVR-R, etc), returns nil.
 func DeviceForIORegistryEntryPath(path string) *Device {
-	_r := raw.DRDeviceDeviceForIORegistryEntryPath(foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
-	}
-	return &Device{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("DRDevice")), objc.RegisterName("deviceForIORegistryEntryPath:"), purego.NSString(path))
+	return DeviceFromID(_r)
 }
 
-// EraseForDevice calls the underlying DREraseEraseForDevice.
-func EraseForDevice(device *raw.DRDevice) *Erase {
-	_r := raw.DREraseEraseForDevice(device)
-	if _r == nil {
-		return nil
-	}
-	return &Erase{inner: _r}
+// Creates and returns an erase object. An erase object created with this method is ready to erase media.
+func EraseForDevice(device *Device) *Erase {
+	_r := objc.Send[objc.ID](objc.ID(_class("DRErase")), objc.RegisterName("eraseForDevice:"), objref.IDOf(device))
+	return EraseFromID(_r)
 }
 
-// FileWithPath calls the underlying DRFileFileWithPath.
+// Creates a real file object This type of DRFile reads in data from an existing file located at path and burns that data to disc.
 func FileWithPath(path string) *File {
-	_r := raw.DRFileFileWithPath(foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
-	}
-	return &File{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("fileWithPath:"), purego.NSString(path))
+	return FileFromID(_r)
 }
 
-// VirtualFileWithNameData calls the underlying DRFileVirtualFileWithNameData.
-func VirtualFileWithNameData(name string, data *foundation.NSData) *File {
-	_r := raw.DRFileVirtualFileWithNameData(foundation.NSStringStringWithUTF8String(name), data)
-	if _r == nil {
-		return nil
-	}
-	return &File{inner: _r}
+// Creates a virtual file object This type of DRFile burns the data passed in to disc, creating a file with the passed in name.
+func VirtualFileWithNameData(name string, data obj.Object) *File {
+	_r := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("virtualFileWithName:data:"), purego.NSString(name), objref.IDOf(data))
+	return FileFromID(_r)
 }
 
-// VirtualFileWithNameDataProducer calls the underlying DRFileVirtualFileWithNameDataProducer.
-func VirtualFileWithNameDataProducer(name string, producer objc.ID) *File {
-	_r := raw.DRFileVirtualFileWithNameDataProducer(foundation.NSStringStringWithUTF8String(name), producer)
-	if _r == nil {
-		return nil
-	}
-	return &File{inner: _r}
+// Creates a virtual file object This type of DRFile burns the data produced to the output disc, creating a file with the passed in name.
+func VirtualFileWithNameDataProducer(name string, producer obj.Object) *File {
+	_r := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("virtualFileWithName:dataProducer:"), purego.NSString(name), objref.IDOf(producer))
+	return FileFromID(_r)
 }
 
-// HardLinkPointingToInFilesystem calls the underlying DRFileHardLinkPointingToInFilesystem.
-func HardLinkPointingToInFilesystem(original *raw.DRFile, filesystem string) *File {
-	_r := raw.DRFileHardLinkPointingToInFilesystem(original, foundation.NSStringStringWithUTF8String(filesystem))
-	if _r == nil {
-		return nil
-	}
-	return &File{inner: _r}
+// Creates a hard link to another file on the output disc.
+func HardLinkPointingToInFilesystem(original *File, filesystem string) *File {
+	_r := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("hardLinkPointingTo:inFilesystem:"), objref.IDOf(original), purego.NSString(filesystem))
+	return FileFromID(_r)
 }
 
-// SymLinkPointingToInFilesystem calls the underlying DRFileSymLinkPointingToInFilesystem.
-func SymLinkPointingToInFilesystem(original *raw.DRFSObject, filesystem string) *File {
-	_r := raw.DRFileSymLinkPointingToInFilesystem(original, foundation.NSStringStringWithUTF8String(filesystem))
-	if _r == nil {
-		return nil
-	}
-	return &File{inner: _r}
+// Creates a symbolic link to another file on the output disc.
+func SymLinkPointingToInFilesystem(original *FSObject, filesystem string) *File {
+	_r := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("symLinkPointingTo:inFilesystem:"), objref.IDOf(original), purego.NSString(filesystem))
+	return FileFromID(_r)
 }
 
-// FinderAliasPointingToInFilesystem calls the underlying DRFileFinderAliasPointingToInFilesystem.
-func FinderAliasPointingToInFilesystem(original *raw.DRFSObject, filesystem string) *File {
-	_r := raw.DRFileFinderAliasPointingToInFilesystem(original, foundation.NSStringStringWithUTF8String(filesystem))
-	if _r == nil {
-		return nil
-	}
-	return &File{inner: _r}
+// Creates a Finder alias to another file on the output disc.
+func FinderAliasPointingToInFilesystem(original *FSObject, filesystem string) *File {
+	_r := objc.Send[objc.ID](objc.ID(_class("DRFile")), objc.RegisterName("finderAliasPointingTo:inFilesystem:"), objref.IDOf(original), purego.NSString(filesystem))
+	return FileFromID(_r)
 }
 
-// FolderWithPath calls the underlying DRFolderFolderWithPath.
+// Creates a real folder object Creates and initializes a DRFolder object that will use the folder contents of the folder located at path as a source.
 func FolderWithPath(path string) *Folder {
-	_r := raw.DRFolderFolderWithPath(foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
-	}
-	return &Folder{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("DRFolder")), objc.RegisterName("folderWithPath:"), purego.NSString(path))
+	return FolderFromID(_r)
 }
 
-// VirtualFolderWithName calls the underlying DRFolderVirtualFolderWithName.
+// Creates a virtual folder object Creates and initializes a DRFolder object that will be populated with specified
 func VirtualFolderWithName(name string) *Folder {
-	_r := raw.DRFolderVirtualFolderWithName(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &Folder{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("DRFolder")), objc.RegisterName("virtualFolderWithName:"), purego.NSString(name))
+	return FolderFromID(_r)
 }
 
-// Msf calls the underlying DRMSFMsf.
+// Creates an msf object with no length/time.
 func Msf() *MSF {
-	_r := raw.DRMSFMsf()
-	if _r == nil {
-		return nil
-	}
-	return &MSF{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("DRMSF")), objc.RegisterName("msf"))
+	return MSFFromID(_r)
 }
 
-// MsfWithFrames calls the underlying DRMSFMsfWithFrames.
-func MsfWithFrames(frames uint) *MSF {
-	_r := raw.DRMSFMsfWithFrames(frames)
-	if _r == nil {
-		return nil
-	}
-	return &MSF{inner: _r}
+// Creates an msf object whose length is frames.
+func MsfWithFrames(frames int) *MSF {
+	_r := objc.Send[objc.ID](objc.ID(_class("DRMSF")), objc.RegisterName("msfWithFrames:"), frames)
+	return MSFFromID(_r)
 }
 
-// MsfWithString calls the underlying DRMSFMsfWithString.
+// Creates an msf object initialized to the value represented by string
 func MsfWithString(string_ string) *MSF {
-	_r := raw.DRMSFMsfWithString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
-	}
-	return &MSF{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("DRMSF")), objc.RegisterName("msfWithString:"), purego.NSString(string_))
+	return MSFFromID(_r)
 }
 
-// CurrentRunLoopCenter calls the underlying DRNotificationCenterCurrentRunLoopCenter.
+// Creates an initializes a DRNotificationCenter The instance returned sends Disc Recording notifications only to the current run loop. If you want to receive notifications on another run loop, this method must be called from that runloop.
 func CurrentRunLoopCenter() *NotificationCenter {
-	_r := raw.DRNotificationCenterCurrentRunLoopCenter()
-	if _r == nil {
-		return nil
-	}
-	return &NotificationCenter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("DRNotificationCenter")), objc.RegisterName("currentRunLoopCenter"))
+	return NotificationCenterFromID(_r)
 }
 
-// TrackForAudioOfLengthProducer calls the underlying DRTrackTrackForAudioOfLengthProducer.
-func TrackForAudioOfLengthProducer(length *raw.DRMSF, producer objc.ID) *Track {
-	_r := raw.DRTrackTrackForAudioOfLengthProducer(length, producer)
-	if _r == nil {
-		return nil
-	}
-	return &Track{inner: _r}
+func TrackForAudioOfLengthProducer(length *MSF, producer obj.Object) *Track {
+	_r := objc.Send[objc.ID](objc.ID(_class("DRTrack")), objc.RegisterName("trackForAudioOfLength:producer:"), objref.IDOf(length), objref.IDOf(producer))
+	return TrackFromID(_r)
 }
 
-// TrackForAudioFile calls the underlying DRTrackTrackForAudioFile.
+// Creates a DRTrack capable of burning RedBook CD audio from a QuickTime readable file. This method creates a track object configured and primed to output RedBook audio CD data. It accepts any file readable by QuickTime and extracts the audio data (if any) from the file, translating that into the correct format for output to the disc.
 func TrackForAudioFile(path string) *Track {
-	_r := raw.DRTrackTrackForAudioFile(foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
-	}
-	return &Track{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("DRTrack")), objc.RegisterName("trackForAudioFile:"), purego.NSString(path))
+	return TrackFromID(_r)
 }
 
-// TrackForRootFolder calls the underlying DRTrackTrackForRootFolder.
-func TrackForRootFolder(rootFolder *raw.DRFolder) *Track {
-	_r := raw.DRTrackTrackForRootFolder(rootFolder)
-	if _r == nil {
-		return nil
-	}
-	return &Track{inner: _r}
+// Creates a DRTrack capable of burning a folder to disc. Additional track properties can be set controlling the various filesystems to be generated. See the documentation for
+func TrackForRootFolder(rootFolder *Folder) *Track {
+	_r := objc.Send[objc.ID](objc.ID(_class("DRTrack")), objc.RegisterName("trackForRootFolder:"), objref.IDOf(rootFolder))
+	return TrackFromID(_r)
 }

@@ -5,81 +5,101 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that customizes how a store description aligns with a CloudKit database.
 //
-// PersistentCloudKitContainerOptions wraps [raw.NSPersistentCloudKitContainerOptions] with a fluent Go API.
+// PersistentCloudKitContainerOptions is an idiomatic wrapper over the Objective-C class NSPersistentCloudKitContainerOptions.
 type PersistentCloudKitContainerOptions struct {
-	inner *raw.NSPersistentCloudKitContainerOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPersistentCloudKitContainerOptions].
-func (x *PersistentCloudKitContainerOptions) Unwrap() *raw.NSPersistentCloudKitContainerOptions {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersistentCloudKitContainerOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// PersistentCloudKitContainerOptionsFromID adopts an existing object pointer as a PersistentCloudKitContainerOptions (nil for 0).
+// PersistentCloudKitContainerOptionsFromID adopts an existing Objective-C object as a PersistentCloudKitContainerOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func PersistentCloudKitContainerOptionsFromID(id objc.ID) *PersistentCloudKitContainerOptions {
 	if id == 0 {
 		return nil
 	}
-	return &PersistentCloudKitContainerOptions{inner: raw.NSPersistentCloudKitContainerOptionsFromID(id)}
+	x := &PersistentCloudKitContainerOptions{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// persistentCloudKitContainerOptionsAdopt wraps an Objective-C object that this code just created as a
+// PersistentCloudKitContainerOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func persistentCloudKitContainerOptionsAdopt(id objc.ID) *PersistentCloudKitContainerOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &PersistentCloudKitContainerOptions{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PersistentCloudKitContainerOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PersistentCloudKitContainerOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PersistentCloudKitContainerOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes container options using the given CloudKit container identifier.
 //
-// NewPersistentCloudKitContainerOptionsWithContainerIdentifier creates a new [PersistentCloudKitContainerOptions].
+// NewPersistentCloudKitContainerOptionsWithContainerIdentifier creates a new PersistentCloudKitContainerOptions.
 func NewPersistentCloudKitContainerOptionsWithContainerIdentifier(containerIdentifier string) *PersistentCloudKitContainerOptions {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentCloudKitContainerOptions")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerIdentifier:"), foundation.NSStringStringWithUTF8String(containerIdentifier).Ptr())
-	return &PersistentCloudKitContainerOptions{inner: raw.NSPersistentCloudKitContainerOptionsFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPersistentCloudKitContainerOptions")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerIdentifier:"), purego.NSString(containerIdentifier))
+	return persistentCloudKitContainerOptionsAdopt(_id)
 }
 
 // The database scope — public, private, or shared — to use for a specified store in a persistent CloudKit container.
 //
-// WithDatabaseScope sets the databaseScope property and returns the receiver for chaining.
-func (x *PersistentCloudKitContainerOptions) WithDatabaseScope(databaseScope objc.ID) *PersistentCloudKitContainerOptions {
-	x.inner.SetDatabaseScope(databaseScope)
+// WithDatabaseScope sets databaseScope and returns the receiver so calls can be chained.
+func (x *PersistentCloudKitContainerOptions) WithDatabaseScope(databaseScope obj.Object) *PersistentCloudKitContainerOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabaseScope:"), objref.IDOf(databaseScope))
 	return x
 }
 
 // The container identifier of the CKContainer to use with a given instance of NSPersistentStoreDescription
-//
-// ContainerIdentifier calls the underlying ContainerIdentifier.
 func (x *PersistentCloudKitContainerOptions) ContainerIdentifier() string {
-	_r := x.inner.ContainerIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// DatabaseScope calls the underlying DatabaseScope.
-func (x *PersistentCloudKitContainerOptions) DatabaseScope() objc.ID {
-	return x.inner.DatabaseScope()
+func (x *PersistentCloudKitContainerOptions) DatabaseScope() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("databaseScope"))
+	return obj.Wrap(_r)
 }
 
-// SetDatabaseScope calls the underlying SetDatabaseScope.
-func (x *PersistentCloudKitContainerOptions) SetDatabaseScope(databaseScope objc.ID) {
-	x.inner.SetDatabaseScope(databaseScope)
+func (x *PersistentCloudKitContainerOptions) SetDatabaseScope(databaseScope obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabaseScope:"), objref.IDOf(databaseScope))
 }
 
 // PersistentCloudKitContainerOptionsable is the interface implemented by [PersistentCloudKitContainerOptions], for mocking and DI.
 type PersistentCloudKitContainerOptionsable interface {
-	Unwrap() *raw.NSPersistentCloudKitContainerOptions
-	WithDatabaseScope(databaseScope objc.ID) *PersistentCloudKitContainerOptions
+	obj.Object
+	WithDatabaseScope(databaseScope obj.Object) *PersistentCloudKitContainerOptions
 	ContainerIdentifier() string
-	DatabaseScope() objc.ID
-	SetDatabaseScope(databaseScope objc.ID)
+	DatabaseScope() obj.Object
+	SetDatabaseScope(databaseScope obj.Object)
 }
 
 var _ PersistentCloudKitContainerOptionsable = (*PersistentCloudKitContainerOptions)(nil)

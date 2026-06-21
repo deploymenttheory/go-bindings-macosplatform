@@ -5,10 +5,10 @@
 package oslog
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/oslog"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// LogEntryProvider is implemented by LogEntry and any idiomatic type wrapping a OSLogEntry subclass.
+// LogEntryProvider is accepted wherever a OSLogEntry (or one of its subclasses) is expected.
 type LogEntryProvider interface {
-	asLogEntry() *raw.OSLogEntry
+	objref.Object
 }

@@ -5,126 +5,163 @@
 package iosurface
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iosurface"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KIOSurfaceAllocSize returns the value of the CoreFoundation reference constant kIOSurfaceAllocSize as an objc.ID.
-func KIOSurfaceAllocSize() objc.ID { return purego.CFConstant(raw.KIOSurfaceAllocSize()) }
-
-// KIOSurfaceWidth returns the value of the CoreFoundation reference constant kIOSurfaceWidth as an objc.ID.
-func KIOSurfaceWidth() objc.ID { return purego.CFConstant(raw.KIOSurfaceWidth()) }
-
-// KIOSurfaceHeight returns the value of the CoreFoundation reference constant kIOSurfaceHeight as an objc.ID.
-func KIOSurfaceHeight() objc.ID { return purego.CFConstant(raw.KIOSurfaceHeight()) }
-
-// KIOSurfaceBytesPerRow returns the value of the CoreFoundation reference constant kIOSurfaceBytesPerRow as an objc.ID.
-func KIOSurfaceBytesPerRow() objc.ID { return purego.CFConstant(raw.KIOSurfaceBytesPerRow()) }
-
-// KIOSurfaceBytesPerElement returns the value of the CoreFoundation reference constant kIOSurfaceBytesPerElement as an objc.ID.
-func KIOSurfaceBytesPerElement() objc.ID { return purego.CFConstant(raw.KIOSurfaceBytesPerElement()) }
-
-// KIOSurfaceElementWidth returns the value of the CoreFoundation reference constant kIOSurfaceElementWidth as an objc.ID.
-func KIOSurfaceElementWidth() objc.ID { return purego.CFConstant(raw.KIOSurfaceElementWidth()) }
-
-// KIOSurfaceElementHeight returns the value of the CoreFoundation reference constant kIOSurfaceElementHeight as an objc.ID.
-func KIOSurfaceElementHeight() objc.ID { return purego.CFConstant(raw.KIOSurfaceElementHeight()) }
-
-// KIOSurfaceOffset returns the value of the CoreFoundation reference constant kIOSurfaceOffset as an objc.ID.
-func KIOSurfaceOffset() objc.ID { return purego.CFConstant(raw.KIOSurfaceOffset()) }
-
-// KIOSurfacePlaneInfo returns the value of the CoreFoundation reference constant kIOSurfacePlaneInfo as an objc.ID.
-func KIOSurfacePlaneInfo() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneInfo()) }
-
-// KIOSurfacePlaneWidth returns the value of the CoreFoundation reference constant kIOSurfacePlaneWidth as an objc.ID.
-func KIOSurfacePlaneWidth() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneWidth()) }
-
-// KIOSurfacePlaneHeight returns the value of the CoreFoundation reference constant kIOSurfacePlaneHeight as an objc.ID.
-func KIOSurfacePlaneHeight() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneHeight()) }
-
-// KIOSurfacePlaneBytesPerRow returns the value of the CoreFoundation reference constant kIOSurfacePlaneBytesPerRow as an objc.ID.
-func KIOSurfacePlaneBytesPerRow() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneBytesPerRow()) }
-
-// KIOSurfacePlaneOffset returns the value of the CoreFoundation reference constant kIOSurfacePlaneOffset as an objc.ID.
-func KIOSurfacePlaneOffset() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneOffset()) }
-
-// KIOSurfacePlaneSize returns the value of the CoreFoundation reference constant kIOSurfacePlaneSize as an objc.ID.
-func KIOSurfacePlaneSize() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneSize()) }
-
-// KIOSurfacePlaneBase returns the value of the CoreFoundation reference constant kIOSurfacePlaneBase as an objc.ID.
-func KIOSurfacePlaneBase() objc.ID { return purego.CFConstant(raw.KIOSurfacePlaneBase()) }
-
-// KIOSurfacePlaneBitsPerElement returns the value of the CoreFoundation reference constant kIOSurfacePlaneBitsPerElement as an objc.ID.
-func KIOSurfacePlaneBitsPerElement() objc.ID {
-	return purego.CFConstant(raw.KIOSurfacePlaneBitsPerElement())
+// KIOSurfaceAllocSize returns the value of the constant kIOSurfaceAllocSize.
+func KIOSurfaceAllocSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfaceAllocSize")))
 }
 
-// KIOSurfacePlaneBytesPerElement returns the value of the CoreFoundation reference constant kIOSurfacePlaneBytesPerElement as an objc.ID.
-func KIOSurfacePlaneBytesPerElement() objc.ID {
-	return purego.CFConstant(raw.KIOSurfacePlaneBytesPerElement())
+// KIOSurfaceWidth returns the value of the constant kIOSurfaceWidth.
+func KIOSurfaceWidth() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kIOSurfaceWidth"))) }
+
+// KIOSurfaceHeight returns the value of the constant kIOSurfaceHeight.
+func KIOSurfaceHeight() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kIOSurfaceHeight"))) }
+
+// KIOSurfaceBytesPerRow returns the value of the constant kIOSurfaceBytesPerRow.
+func KIOSurfaceBytesPerRow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfaceBytesPerRow")))
 }
 
-// KIOSurfacePlaneElementWidth returns the value of the CoreFoundation reference constant kIOSurfacePlaneElementWidth as an objc.ID.
-func KIOSurfacePlaneElementWidth() objc.ID {
-	return purego.CFConstant(raw.KIOSurfacePlaneElementWidth())
+// KIOSurfaceBytesPerElement returns the value of the constant kIOSurfaceBytesPerElement.
+func KIOSurfaceBytesPerElement() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfaceBytesPerElement")))
 }
 
-// KIOSurfacePlaneElementHeight returns the value of the CoreFoundation reference constant kIOSurfacePlaneElementHeight as an objc.ID.
-func KIOSurfacePlaneElementHeight() objc.ID {
-	return purego.CFConstant(raw.KIOSurfacePlaneElementHeight())
+// KIOSurfaceElementWidth returns the value of the constant kIOSurfaceElementWidth.
+func KIOSurfaceElementWidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfaceElementWidth")))
 }
 
-// KIOSurfaceCacheMode returns the value of the CoreFoundation reference constant kIOSurfaceCacheMode as an objc.ID.
-func KIOSurfaceCacheMode() objc.ID { return purego.CFConstant(raw.KIOSurfaceCacheMode()) }
-
-// KIOSurfaceIsGlobal returns the value of the CoreFoundation reference constant kIOSurfaceIsGlobal as an objc.ID.
-func KIOSurfaceIsGlobal() objc.ID { return purego.CFConstant(raw.KIOSurfaceIsGlobal()) }
-
-// KIOSurfacePixelFormat returns the value of the CoreFoundation reference constant kIOSurfacePixelFormat as an objc.ID.
-func KIOSurfacePixelFormat() objc.ID { return purego.CFConstant(raw.KIOSurfacePixelFormat()) }
-
-// KIOSurfacePixelSizeCastingAllowed returns the value of the CoreFoundation reference constant kIOSurfacePixelSizeCastingAllowed as an objc.ID.
-func KIOSurfacePixelSizeCastingAllowed() objc.ID {
-	return purego.CFConstant(raw.KIOSurfacePixelSizeCastingAllowed())
+// KIOSurfaceElementHeight returns the value of the constant kIOSurfaceElementHeight.
+func KIOSurfaceElementHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfaceElementHeight")))
 }
 
-// KIOSurfacePlaneComponentBitDepths returns the value of the CoreFoundation reference constant kIOSurfacePlaneComponentBitDepths as an objc.ID.
-func KIOSurfacePlaneComponentBitDepths() objc.ID {
-	return purego.CFConstant(raw.KIOSurfacePlaneComponentBitDepths())
+// KIOSurfaceOffset returns the value of the constant kIOSurfaceOffset.
+func KIOSurfaceOffset() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kIOSurfaceOffset"))) }
+
+// KIOSurfacePlaneInfo returns the value of the constant kIOSurfacePlaneInfo.
+func KIOSurfacePlaneInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfacePlaneInfo")))
 }
 
-// KIOSurfacePlaneComponentBitOffsets returns the value of the CoreFoundation reference constant kIOSurfacePlaneComponentBitOffsets as an objc.ID.
-func KIOSurfacePlaneComponentBitOffsets() objc.ID {
-	return purego.CFConstant(raw.KIOSurfacePlaneComponentBitOffsets())
+// KIOSurfacePlaneWidth returns the value of the constant kIOSurfacePlaneWidth.
+func KIOSurfacePlaneWidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfacePlaneWidth")))
 }
 
-// KIOSurfaceName returns the value of the CoreFoundation reference constant kIOSurfaceName as an objc.ID.
-func KIOSurfaceName() objc.ID { return purego.CFConstant(raw.KIOSurfaceName()) }
-
-// KIOSurfacePlaneComponentNames returns the value of the CoreFoundation reference constant kIOSurfacePlaneComponentNames as an objc.ID.
-func KIOSurfacePlaneComponentNames() objc.ID {
-	return purego.CFConstant(raw.KIOSurfacePlaneComponentNames())
+// KIOSurfacePlaneHeight returns the value of the constant kIOSurfacePlaneHeight.
+func KIOSurfacePlaneHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfacePlaneHeight")))
 }
 
-// KIOSurfacePlaneComponentTypes returns the value of the CoreFoundation reference constant kIOSurfacePlaneComponentTypes as an objc.ID.
-func KIOSurfacePlaneComponentTypes() objc.ID {
-	return purego.CFConstant(raw.KIOSurfacePlaneComponentTypes())
+// KIOSurfacePlaneBytesPerRow returns the value of the constant kIOSurfacePlaneBytesPerRow.
+func KIOSurfacePlaneBytesPerRow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfacePlaneBytesPerRow")))
 }
 
-// KIOSurfacePlaneComponentRanges returns the value of the CoreFoundation reference constant kIOSurfacePlaneComponentRanges as an objc.ID.
-func KIOSurfacePlaneComponentRanges() objc.ID {
-	return purego.CFConstant(raw.KIOSurfacePlaneComponentRanges())
+// KIOSurfacePlaneOffset returns the value of the constant kIOSurfacePlaneOffset.
+func KIOSurfacePlaneOffset() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfacePlaneOffset")))
 }
 
-// KIOSurfaceSubsampling returns the value of the CoreFoundation reference constant kIOSurfaceSubsampling as an objc.ID.
-func KIOSurfaceSubsampling() objc.ID { return purego.CFConstant(raw.KIOSurfaceSubsampling()) }
+// KIOSurfacePlaneSize returns the value of the constant kIOSurfacePlaneSize.
+func KIOSurfacePlaneSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfacePlaneSize")))
+}
 
-// KIOSurfaceColorSpace returns the value of the CoreFoundation reference constant kIOSurfaceColorSpace as an objc.ID.
-func KIOSurfaceColorSpace() objc.ID { return purego.CFConstant(raw.KIOSurfaceColorSpace()) }
+// KIOSurfacePlaneBase returns the value of the constant kIOSurfacePlaneBase.
+func KIOSurfacePlaneBase() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfacePlaneBase")))
+}
 
-// KIOSurfaceICCProfile returns the value of the CoreFoundation reference constant kIOSurfaceICCProfile as an objc.ID.
-func KIOSurfaceICCProfile() objc.ID { return purego.CFConstant(raw.KIOSurfaceICCProfile()) }
+// KIOSurfacePlaneBitsPerElement returns the value of the constant kIOSurfacePlaneBitsPerElement.
+func KIOSurfacePlaneBitsPerElement() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfacePlaneBitsPerElement")))
+}
 
-// KIOSurfaceContentHeadroom returns the value of the CoreFoundation reference constant kIOSurfaceContentHeadroom as an objc.ID.
-func KIOSurfaceContentHeadroom() objc.ID { return purego.CFConstant(raw.KIOSurfaceContentHeadroom()) }
+// KIOSurfacePlaneBytesPerElement returns the value of the constant kIOSurfacePlaneBytesPerElement.
+func KIOSurfacePlaneBytesPerElement() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfacePlaneBytesPerElement")))
+}
+
+// KIOSurfacePlaneElementWidth returns the value of the constant kIOSurfacePlaneElementWidth.
+func KIOSurfacePlaneElementWidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfacePlaneElementWidth")))
+}
+
+// KIOSurfacePlaneElementHeight returns the value of the constant kIOSurfacePlaneElementHeight.
+func KIOSurfacePlaneElementHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfacePlaneElementHeight")))
+}
+
+// KIOSurfaceCacheMode returns the value of the constant kIOSurfaceCacheMode.
+func KIOSurfaceCacheMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfaceCacheMode")))
+}
+
+// KIOSurfaceIsGlobal returns the value of the constant kIOSurfaceIsGlobal.
+func KIOSurfaceIsGlobal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfaceIsGlobal")))
+}
+
+// KIOSurfacePixelFormat returns the value of the constant kIOSurfacePixelFormat.
+func KIOSurfacePixelFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfacePixelFormat")))
+}
+
+// KIOSurfacePixelSizeCastingAllowed returns the value of the constant kIOSurfacePixelSizeCastingAllowed.
+func KIOSurfacePixelSizeCastingAllowed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfacePixelSizeCastingAllowed")))
+}
+
+// KIOSurfacePlaneComponentBitDepths returns the value of the constant kIOSurfacePlaneComponentBitDepths.
+func KIOSurfacePlaneComponentBitDepths() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfacePlaneComponentBitDepths")))
+}
+
+// KIOSurfacePlaneComponentBitOffsets returns the value of the constant kIOSurfacePlaneComponentBitOffsets.
+func KIOSurfacePlaneComponentBitOffsets() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfacePlaneComponentBitOffsets")))
+}
+
+// KIOSurfaceName returns the value of the constant kIOSurfaceName.
+func KIOSurfaceName() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kIOSurfaceName"))) }
+
+// KIOSurfacePlaneComponentNames returns the value of the constant kIOSurfacePlaneComponentNames.
+func KIOSurfacePlaneComponentNames() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfacePlaneComponentNames")))
+}
+
+// KIOSurfacePlaneComponentTypes returns the value of the constant kIOSurfacePlaneComponentTypes.
+func KIOSurfacePlaneComponentTypes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfacePlaneComponentTypes")))
+}
+
+// KIOSurfacePlaneComponentRanges returns the value of the constant kIOSurfacePlaneComponentRanges.
+func KIOSurfacePlaneComponentRanges() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfacePlaneComponentRanges")))
+}
+
+// KIOSurfaceSubsampling returns the value of the constant kIOSurfaceSubsampling.
+func KIOSurfaceSubsampling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfaceSubsampling")))
+}
+
+// KIOSurfaceColorSpace returns the value of the constant kIOSurfaceColorSpace.
+func KIOSurfaceColorSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfaceColorSpace")))
+}
+
+// KIOSurfaceICCProfile returns the value of the constant kIOSurfaceICCProfile.
+func KIOSurfaceICCProfile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfaceICCProfile")))
+}
+
+// KIOSurfaceContentHeadroom returns the value of the constant kIOSurfaceContentHeadroom.
+func KIOSurfaceContentHeadroom() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kIOSurfaceContentHeadroom")))
+}

@@ -5,150 +5,97 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The shared infrastructure for drawing overlays on the map surface.
 //
-// OverlayRenderer wraps [raw.MKOverlayRenderer] with a fluent Go API.
+// OverlayRenderer is an idiomatic wrapper over the Objective-C class MKOverlayRenderer.
 type OverlayRenderer struct {
-	inner *raw.MKOverlayRenderer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKOverlayRenderer].
-func (x *OverlayRenderer) Unwrap() *raw.MKOverlayRenderer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OverlayRenderer) ID() objc.ID { return x.inner.Ptr() }
-
-// OverlayRendererFromID adopts an existing object pointer as a OverlayRenderer (nil for 0).
+// OverlayRendererFromID adopts an existing Objective-C object as a OverlayRenderer
+// (nil for 0), retaining it and registering a release finalizer.
 func OverlayRendererFromID(id objc.ID) *OverlayRenderer {
 	if id == 0 {
 		return nil
 	}
-	return &OverlayRenderer{inner: raw.MKOverlayRendererFromID(id)}
+	x := &OverlayRenderer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates and returns the overlay renderer and associates it with the specified overlay object.
-//
-// NewOverlayRendererWithOverlay creates a new [OverlayRenderer].
-func NewOverlayRendererWithOverlay(overlay raw.MKOverlay) *OverlayRenderer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKOverlayRenderer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOverlay:"), overlay)
-	return &OverlayRenderer{inner: raw.MKOverlayRendererFromID(_id)}
+// overlayRendererAdopt wraps an Objective-C object that this code just created as a
+// OverlayRenderer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func overlayRendererAdopt(id objc.ID) *OverlayRenderer {
+	if id == 0 {
+		return nil
+	}
+	x := &OverlayRenderer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *OverlayRenderer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *OverlayRenderer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *OverlayRenderer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewOverlayRenderer creates a new OverlayRenderer.
+func NewOverlayRenderer() *OverlayRenderer {
+	_id := objc.Send[objc.ID](objc.ID(_class("MKOverlayRenderer")), objc.RegisterName("new"))
+	return overlayRendererAdopt(_id)
 }
 
 // The amount of transparency to apply to the overlay.
 //
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha sets alpha and returns the receiver so calls can be chained.
 func (x *OverlayRenderer) WithAlpha(alpha float64) *OverlayRenderer {
-	x.inner.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// Returns the point in the overlay renderer’s drawing area corresponding to the specified point on the map.
-//
-// PointForMapPoint calls the underlying PointForMapPoint.
-func (x *OverlayRenderer) PointForMapPoint(mapPoint raw.MKMapPoint) corefoundation.CGPoint {
-	return x.inner.PointForMapPoint(mapPoint)
-}
-
-// Returns the point on the map that corresponds to the specified point in the overlay renderer’s drawing area.
-//
-// MapPointForPoint calls the underlying MapPointForPoint.
-func (x *OverlayRenderer) MapPointForPoint(point corefoundation.CGPoint) raw.MKMapPoint {
-	return x.inner.MapPointForPoint(point)
-}
-
-// Returns the rectangle in the overlay renderer’s drawing area corresponding to the specified rectangle on the map.
-//
-// RectForMapRect calls the underlying RectForMapRect.
-func (x *OverlayRenderer) RectForMapRect(mapRect raw.MKMapRect) corefoundation.CGRect {
-	return x.inner.RectForMapRect(mapRect)
-}
-
-// Returns the rectangle on the map that corresponds to the specified rectangle in the overlay renderer’s drawing area.
-//
-// MapRectForRect calls the underlying MapRectForRect.
-func (x *OverlayRenderer) MapRectForRect(rect corefoundation.CGRect) raw.MKMapRect {
-	return x.inner.MapRectForRect(rect)
-}
-
-// Returns a Boolean value that indicates whether the overlay view is ready to draw its content.
-//
-// CanDrawMapRectZoomScale calls the underlying CanDrawMapRectZoomScale.
-func (x *OverlayRenderer) CanDrawMapRectZoomScale(mapRect raw.MKMapRect, zoomScale float64) bool {
-	return x.inner.CanDrawMapRectZoomScale(mapRect, zoomScale)
-}
-
-// Draws the overlay’s contents at the specified location on the map.
-//
-// DrawMapRectZoomScaleInContext calls the underlying DrawMapRectZoomScaleInContext.
-func (x *OverlayRenderer) DrawMapRectZoomScaleInContext(mapRect raw.MKMapRect, zoomScale float64, context_ unsafe.Pointer) {
-	x.inner.DrawMapRectZoomScaleInContext(mapRect, zoomScale, context_)
-}
-
 // Invalidates the entire contents of the overlay for all zoom scales.
-//
-// SetNeedsDisplay calls the underlying SetNeedsDisplay.
 func (x *OverlayRenderer) SetNeedsDisplay() {
-	x.inner.SetNeedsDisplay()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay"))
 }
 
-// Invalidates the specified portion of the overlay at all zoom scales.
-//
-// SetNeedsDisplayInMapRect calls the underlying SetNeedsDisplayInMapRect.
-func (x *OverlayRenderer) SetNeedsDisplayInMapRect(mapRect raw.MKMapRect) {
-	x.inner.SetNeedsDisplayInMapRect(mapRect)
-}
-
-// Invalidates the specified portion of the overlay, but only at the specified zoom scale.
-//
-// SetNeedsDisplayInMapRectZoomScale calls the underlying SetNeedsDisplayInMapRectZoomScale.
-func (x *OverlayRenderer) SetNeedsDisplayInMapRectZoomScale(mapRect raw.MKMapRect, zoomScale float64) {
-	x.inner.SetNeedsDisplayInMapRectZoomScale(mapRect, zoomScale)
-}
-
-// Overlay calls the underlying Overlay.
-func (x *OverlayRenderer) Overlay() raw.MKOverlay {
-	return x.inner.Overlay()
-}
-
-// Alpha calls the underlying Alpha.
 func (x *OverlayRenderer) Alpha() float64 {
-	return x.inner.Alpha()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
+	return _r
 }
 
-// SetAlpha calls the underlying SetAlpha.
 func (x *OverlayRenderer) SetAlpha(alpha float64) {
-	x.inner.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
-// ContentScaleFactor calls the underlying ContentScaleFactor.
 func (x *OverlayRenderer) ContentScaleFactor() float64 {
-	return x.inner.ContentScaleFactor()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("contentScaleFactor"))
+	return _r
 }
-
-func (x *OverlayRenderer) asOverlayRenderer() *raw.MKOverlayRenderer { return x.inner }
 
 // OverlayRendererable is the interface implemented by [OverlayRenderer], for mocking and DI.
 type OverlayRendererable interface {
-	Unwrap() *raw.MKOverlayRenderer
+	obj.Object
 	WithAlpha(alpha float64) *OverlayRenderer
-	PointForMapPoint(mapPoint raw.MKMapPoint) corefoundation.CGPoint
-	MapPointForPoint(point corefoundation.CGPoint) raw.MKMapPoint
-	RectForMapRect(mapRect raw.MKMapRect) corefoundation.CGRect
-	MapRectForRect(rect corefoundation.CGRect) raw.MKMapRect
-	CanDrawMapRectZoomScale(mapRect raw.MKMapRect, zoomScale float64) bool
-	DrawMapRectZoomScaleInContext(mapRect raw.MKMapRect, zoomScale float64, context_ unsafe.Pointer)
 	SetNeedsDisplay()
-	SetNeedsDisplayInMapRect(mapRect raw.MKMapRect)
-	SetNeedsDisplayInMapRectZoomScale(mapRect raw.MKMapRect, zoomScale float64)
-	Overlay() raw.MKOverlay
 	Alpha() float64
 	SetAlpha(alpha float64)
 	ContentScaleFactor() float64

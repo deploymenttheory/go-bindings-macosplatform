@@ -5,237 +5,165 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNDilatedPoolingMaxGradient wraps [raw.MPSCNNDilatedPoolingMaxGradient] with a fluent Go API.
+// CNNDilatedPoolingMaxGradient is an idiomatic wrapper over the Objective-C class MPSCNNDilatedPoolingMaxGradient.
 type CNNDilatedPoolingMaxGradient struct {
-	inner *raw.MPSCNNDilatedPoolingMaxGradient
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNDilatedPoolingMaxGradient].
-func (x *CNNDilatedPoolingMaxGradient) Unwrap() *raw.MPSCNNDilatedPoolingMaxGradient { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNDilatedPoolingMaxGradient) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNDilatedPoolingMaxGradientFromID adopts an existing object pointer as a CNNDilatedPoolingMaxGradient (nil for 0).
+// CNNDilatedPoolingMaxGradientFromID adopts an existing Objective-C object as a CNNDilatedPoolingMaxGradient
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNDilatedPoolingMaxGradientFromID(id objc.ID) *CNNDilatedPoolingMaxGradient {
 	if id == 0 {
 		return nil
 	}
-	return &CNNDilatedPoolingMaxGradient{inner: raw.MPSCNNDilatedPoolingMaxGradientFromID(id)}
-}
-
-// @abstract   Initialize a MPSCNNDilatedPoolingMaxGradient pooling filter @param      device              The device the filter will run on @param      kernelWidth         The width of the kernel.  Can be an odd or even value. @param      kernelHeight        The height of the kernel.  Can be an odd or even value. @param      dilationRateX       The dilation rate in the x dimension. @param      dilationRateY       The dilation rate in the y dimension. @param      strideInPixelsX     The output stride (downsampling factor) in the x dimension. @param      strideInPixelsY     The output stride (downsampling factor) in the y dimension. @return     A valid MPSCNNDilatedPoolingMax object or nil, if failure.
-//
-// NewCNNDilatedPoolingMaxGradientWithDeviceKernelWidthKernelHeightDilationRateXDilationRateYStrideInPixelsXStrideInPixelsY creates a new [CNNDilatedPoolingMaxGradient].
-func NewCNNDilatedPoolingMaxGradientWithDeviceKernelWidthKernelHeightDilationRateXDilationRateYStrideInPixelsXStrideInPixelsY(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, dilationRateX uint, dilationRateY uint, strideInPixelsX uint, strideInPixelsY uint) *CNNDilatedPoolingMaxGradient {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNDilatedPoolingMaxGradient")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:dilationRateX:dilationRateY:strideInPixelsX:strideInPixelsY:"), device, kernelWidth, kernelHeight, dilationRateX, dilationRateY, strideInPixelsX, strideInPixelsY)
-	return &CNNDilatedPoolingMaxGradient{inner: raw.MPSCNNDilatedPoolingMaxGradientFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSCNNPoolingMaxGradient @param      device      The MTLDevice on which to make the MPSCNNPoolingMaxGradient @return     A new MPSCNNPoolingMaxGradient object, or nil if failure.
-//
-// NewCNNDilatedPoolingMaxGradientWithCoderDevice creates a new [CNNDilatedPoolingMaxGradient].
-func NewCNNDilatedPoolingMaxGradientWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *CNNDilatedPoolingMaxGradient {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNDilatedPoolingMaxGradient")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &CNNDilatedPoolingMaxGradient{inner: raw.MPSCNNDilatedPoolingMaxGradientFromID(_id)}
-}
-
-// @property   sourceSize @abstract   An optional source size which defines together with primaryOffset, the set of input gradient pixels to take into account in the gradient computations. @discussion A MTLSize that together with primaryOffset indicates which part of the source gradient to consider. If the area does not lie completely within the primary source image, the intersection between source area rectangle and primary source bounds is used. Default: A size where every component is NSUIntegerMax indicating the entire rest of the image, starting from an offset (see primaryOffset).
-//
-// WithSourceSize sets the sourceSize property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxGradient) WithSourceSize(sourceSize metal.MTLSize) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.SetSourceSize(sourceSize)
+	x := &CNNDilatedPoolingMaxGradient{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   kernelOffsetX @abstract   Offset in the kernel reference frame to position the kernel in the X dimension @discussion In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
+// cNNDilatedPoolingMaxGradientAdopt wraps an Objective-C object that this code just created as a
+// CNNDilatedPoolingMaxGradient (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNDilatedPoolingMaxGradientAdopt(id objc.ID) *CNNDilatedPoolingMaxGradient {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNDilatedPoolingMaxGradient{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CNNDilatedPoolingMaxGradient) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNDilatedPoolingMaxGradient) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNDilatedPoolingMaxGradient) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNDilatedPoolingMaxGradient creates a new CNNDilatedPoolingMaxGradient.
+func NewCNNDilatedPoolingMaxGradient() *CNNDilatedPoolingMaxGradient {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNDilatedPoolingMaxGradient")), objc.RegisterName("new"))
+	return cNNDilatedPoolingMaxGradientAdopt(_id)
+}
+
+// Offset in the kernel reference frame to position the kernel in the X dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
 //
-// WithKernelOffsetX sets the kernelOffsetX property and returns the receiver for chaining.
+// WithKernelOffsetX sets kernelOffsetX and returns the receiver so calls can be chained.
 func (x *CNNDilatedPoolingMaxGradient) WithKernelOffsetX(kernelOffsetX int) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.SetKernelOffsetX(kernelOffsetX)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelOffsetX:"), kernelOffsetX)
 	return x
 }
 
-// @property   kernelOffsetY @abstract   Offset in the kernel reference frame to position the kernel in the Y dimension @discussion In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
+// Offset in the kernel reference frame to position the kernel in the Y dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
 //
-// WithKernelOffsetY sets the kernelOffsetY property and returns the receiver for chaining.
+// WithKernelOffsetY sets kernelOffsetY and returns the receiver so calls can be chained.
 func (x *CNNDilatedPoolingMaxGradient) WithKernelOffsetY(kernelOffsetY int) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.SetKernelOffsetY(kernelOffsetY)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelOffsetY:"), kernelOffsetY)
 	return x
 }
 
-// @property   primaryOffset @abstract   The position of the destination clip rectangle origin relative to the primary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref subsubsection_mpsoffset
+// The number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
 //
-// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *CNNDilatedPoolingMaxGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNDilatedPoolingMaxGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   secondaryOffset @abstract   The position of the destination clip rectangle origin relative to the secondary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref subsubsection_mpsoffset
+// The number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
 //
-// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+// WithPrimarySourceFeatureChannelOffset sets primarySourceFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *CNNDilatedPoolingMaxGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNDilatedPoolingMaxGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also: @ref subsubsection_clipRect
+// The number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
 //
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxGradient) WithClipRect(clipRect metal.MTLRegion) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetClipRect(clipRect)
+// WithSecondarySourceFeatureChannelOffset sets secondarySourceFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *CNNDilatedPoolingMaxGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNDilatedPoolingMaxGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
 	return x
 }
 
-// @property   destinationFeatureChannelOffset @abstract   The number of channels in the destination MPSImage to skip before writing output. @discussion This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+// The maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 //
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithPrimarySourceFeatureChannelMaxCount sets primarySourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+func (x *CNNDilatedPoolingMaxGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNDilatedPoolingMaxGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
 	return x
 }
 
-// @property   primarySourceFeatureChannelOffset @abstract   The number of channels in the primary source MPSImage to skip before reading the input. @discussion This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+// The maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 //
-// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+// WithSecondarySourceFeatureChannelMaxCount sets secondarySourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+func (x *CNNDilatedPoolingMaxGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNDilatedPoolingMaxGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
 	return x
 }
 
-// @property   secondarySourceFeatureChannelOffset @abstract   The number of channels in the secondary source MPSImage to skip before reading the input. @discussion This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+// The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
 //
-// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+// WithPrimaryStrideInPixelsX sets primaryStrideInPixelsX and returns the receiver so calls can be chained.
+func (x *CNNDilatedPoolingMaxGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNDilatedPoolingMaxGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
 	return x
 }
 
-// @property   primarySourceFeatureChannelMaxCount @abstract   The maximum number of channels in the primary source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+// The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
 //
-// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+// WithPrimaryStrideInPixelsY sets primaryStrideInPixelsY and returns the receiver so calls can be chained.
+func (x *CNNDilatedPoolingMaxGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNDilatedPoolingMaxGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
 	return x
 }
 
-// @property   secondarySourceFeatureChannelMaxCount @abstract   The maximum number of channels in the secondary source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+// The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
 //
-// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+// WithSecondaryStrideInPixelsX sets secondaryStrideInPixelsX and returns the receiver so calls can be chained.
+func (x *CNNDilatedPoolingMaxGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNDilatedPoolingMaxGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return x
 }
 
-// @property   primaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref subsubsection_edgemode
+// The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
 //
-// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxGradient) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
+// WithSecondaryStrideInPixelsY sets secondaryStrideInPixelsY and returns the receiver so calls can be chained.
+func (x *CNNDilatedPoolingMaxGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNDilatedPoolingMaxGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return x
-}
-
-// @property   secondaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref subsubsection_edgemode
-//
-// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxGradient) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
-	return x
-}
-
-// @property   primaryStrideInPixelsX @abstract   The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
-	return x
-}
-
-// @property   primaryStrideInPixelsY @abstract   The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
-	return x
-}
-
-// @property   secondaryStrideInPixelsX @abstract   The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
-	return x
-}
-
-// @property   secondaryStrideInPixelsY @abstract   The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how strideInPixelsX/Y should be interpreted. Default:  MPSNNPaddingMethodAlignCentered | MPSNNPaddingMethodAddRemainderToTopLeft | MPSNNPaddingMethodSizeSame Some object types (e.g. MPSCNNFullyConnected) may override this default with something appropriate to its operation.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxGradient) WithPadding(padding raw.MPSNNPadding) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *CNNDilatedPoolingMaxGradient) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNDilatedPoolingMaxGradient {
-	x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-func (x *CNNDilatedPoolingMaxGradient) asCNNPoolingGradient() *raw.MPSCNNPoolingGradient {
-	return &x.inner.MPSCNNPoolingGradient
-}
-
-func (x *CNNDilatedPoolingMaxGradient) asCNNGradientKernel() *raw.MPSCNNGradientKernel {
-	return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel
-}
-
-func (x *CNNDilatedPoolingMaxGradient) asCNNBinaryKernel() *raw.MPSCNNBinaryKernel {
-	return &x.inner.MPSCNNPoolingGradient.MPSCNNGradientKernel.MPSCNNBinaryKernel
 }
 
 // CNNDilatedPoolingMaxGradientable is the interface implemented by [CNNDilatedPoolingMaxGradient], for mocking and DI.
 type CNNDilatedPoolingMaxGradientable interface {
-	Unwrap() *raw.MPSCNNDilatedPoolingMaxGradient
-	WithSourceSize(sourceSize metal.MTLSize) *CNNDilatedPoolingMaxGradient
+	obj.Object
 	WithKernelOffsetX(kernelOffsetX int) *CNNDilatedPoolingMaxGradient
 	WithKernelOffsetY(kernelOffsetY int) *CNNDilatedPoolingMaxGradient
-	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNDilatedPoolingMaxGradient
-	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNDilatedPoolingMaxGradient
-	WithClipRect(clipRect metal.MTLRegion) *CNNDilatedPoolingMaxGradient
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNDilatedPoolingMaxGradient
-	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *CNNDilatedPoolingMaxGradient
-	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *CNNDilatedPoolingMaxGradient
-	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *CNNDilatedPoolingMaxGradient
-	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *CNNDilatedPoolingMaxGradient
-	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *CNNDilatedPoolingMaxGradient
-	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *CNNDilatedPoolingMaxGradient
-	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *CNNDilatedPoolingMaxGradient
-	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *CNNDilatedPoolingMaxGradient
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *CNNDilatedPoolingMaxGradient
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *CNNDilatedPoolingMaxGradient
-	WithPadding(padding raw.MPSNNPadding) *CNNDilatedPoolingMaxGradient
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNDilatedPoolingMaxGradient
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNDilatedPoolingMaxGradient
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNDilatedPoolingMaxGradient
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNDilatedPoolingMaxGradient
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNDilatedPoolingMaxGradient
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNDilatedPoolingMaxGradient
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNDilatedPoolingMaxGradient
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNDilatedPoolingMaxGradient
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNDilatedPoolingMaxGradient
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNDilatedPoolingMaxGradient
 }
 
 var _ CNNDilatedPoolingMaxGradientable = (*CNNDilatedPoolingMaxGradient)(nil)

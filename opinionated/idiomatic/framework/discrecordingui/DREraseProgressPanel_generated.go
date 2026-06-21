@@ -5,67 +5,85 @@
 package discrecordingui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecordingui"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// @class			DREraseProgressPanel @abstract 		Manages a panel that displays progress while erasing media. @discussion		A DREraseProgressPanel object manages a panel that displays and updates erase progress. The erase panel is responsible for begining the erase. The erase is begun and a progress panel is displayed on screen by calling @link //apple_ref/occ/instm/DREraseProgressPanel/beginProgressSheetForErase:modalForWindow: beginProgressSheetForErase:modalForWindow: @/link if a sheet interface is desired, or @link //apple_ref/occ/instm/DREraseProgressPanel/beginProgressPanelForErase: beginProgressPanelForErase:  @/link for a non-modal panel. A DREraseProgressPanel sends a @link //apple_ref/occ/instm/NSObject/eraseProgressPanel:eraseDidFinish: eraseProgressPanel:eraseDidFinish: @/link message to it's delegate when the erase completes. This method allows the delegate to take over end-of-erase handling from the erase progress panel to customize error dialogs or user notification.
+// Manages a panel that displays progress while erasing media. A DREraseProgressPanel object manages a panel that displays and updates erase progress. The erase panel is responsible for begining the erase. The erase is begun and a progress panel is displayed on screen by calling
 //
-// EraseProgressPanel wraps [raw.DREraseProgressPanel] with a fluent Go API.
+// EraseProgressPanel is an idiomatic wrapper over the Objective-C class DREraseProgressPanel.
 type EraseProgressPanel struct {
-	inner *raw.DREraseProgressPanel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DREraseProgressPanel].
-func (x *EraseProgressPanel) Unwrap() *raw.DREraseProgressPanel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EraseProgressPanel) ID() objc.ID { return x.inner.Ptr() }
-
-// EraseProgressPanelFromID adopts an existing object pointer as a EraseProgressPanel (nil for 0).
+// EraseProgressPanelFromID adopts an existing Objective-C object as a EraseProgressPanel
+// (nil for 0), retaining it and registering a release finalizer.
 func EraseProgressPanelFromID(id objc.ID) *EraseProgressPanel {
 	if id == 0 {
 		return nil
 	}
-	return &EraseProgressPanel{inner: raw.DREraseProgressPanelFromID(id)}
+	x := &EraseProgressPanel{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEraseProgressPanel creates a new [EraseProgressPanel].
+// eraseProgressPanelAdopt wraps an Objective-C object that this code just created as a
+// EraseProgressPanel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func eraseProgressPanelAdopt(id objc.ID) *EraseProgressPanel {
+	if id == 0 {
+		return nil
+	}
+	x := &EraseProgressPanel{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EraseProgressPanel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EraseProgressPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EraseProgressPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEraseProgressPanel creates a new EraseProgressPanel.
 func NewEraseProgressPanel() *EraseProgressPanel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DREraseProgressPanel")), objc.RegisterName("new"))
-	return &EraseProgressPanel{inner: raw.DREraseProgressPanelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DREraseProgressPanel")), objc.RegisterName("new"))
+	return eraseProgressPanelAdopt(_id)
 }
 
-// @method			beginProgressSheetForErase:modalForWindow: @abstract		Presents the progress panel as a sheet and begins the erase process. @discussion		This method returns control to the caller after it has displayed the progress sheet and begun the erase. Once the method has returned the caller can perform other operations while the erase continues. @param			erase		The object performing the erase. @param			docWindow	The window the sheet will be attached to. If docWindow is not nil, the panel slides down as a sheet running as a document modal window. If owner is nil, this is an error.
-//
-// BeginProgressSheetForEraseModalForWindow calls the underlying BeginProgressSheetForEraseModalForWindow.
-func (x *EraseProgressPanel) BeginProgressSheetForEraseModalForWindow(erase *discrecording.DRErase, docWindow *appkit.NSWindow) {
-	x.inner.BeginProgressSheetForEraseModalForWindow(erase, docWindow)
+// Presents the progress panel as a sheet and begins the erase process. This method returns control to the caller after it has displayed the progress sheet and begun the erase. Once the method has returned the caller can perform other operations while the erase continues.
+func (x *EraseProgressPanel) BeginProgressSheetForEraseModalForWindow(erase obj.Object, docWindow obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginProgressSheetForErase:modalForWindow:"), objref.IDOf(erase), objref.IDOf(docWindow))
 }
 
-// @method			beginProgressPanelForErase: @abstract		Presents the progress panel on screen and begins the erase process. @discussion		This method returns control to the caller after it has displayed the progress sheet and begun the erase. Once the method has returned the caller can perform other operations while the erase continues. @param			erase		The object performing the erase.
-//
-// BeginProgressPanelForErase calls the underlying BeginProgressPanelForErase.
-func (x *EraseProgressPanel) BeginProgressPanelForErase(erase *discrecording.DRErase) {
-	x.inner.BeginProgressPanelForErase(erase)
+// Presents the progress panel on screen and begins the erase process. This method returns control to the caller after it has displayed the progress sheet and begun the erase. Once the method has returned the caller can perform other operations while the erase continues.
+func (x *EraseProgressPanel) BeginProgressPanelForErase(erase obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginProgressPanelForErase:"), objref.IDOf(erase))
 }
 
-// @method			setDescription: @abstract		Sets the panel text displayed to the user. @discussion		The panel's description is typically a short text string that gives an indication to the user what operation is being performed. If no description is explicitly set, the progress panel uses a standard text string suitable to the erase. @param			description	The text to display.
-//
-// SetDescription calls the underlying SetDescription.
+// Sets the panel text displayed to the user. The panel's description is typically a short text string that gives an indication to the user what operation is being performed. If no description is explicitly set, the progress panel uses a standard text string suitable to the erase.
 func (x *EraseProgressPanel) SetDescription(description string) {
-	x.inner.SetDescription(foundation.NSStringStringWithUTF8String(description))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDescription:"), purego.NSString(description))
 }
 
 // EraseProgressPanelable is the interface implemented by [EraseProgressPanel], for mocking and DI.
 type EraseProgressPanelable interface {
-	Unwrap() *raw.DREraseProgressPanel
-	BeginProgressSheetForEraseModalForWindow(erase *discrecording.DRErase, docWindow *appkit.NSWindow)
-	BeginProgressPanelForErase(erase *discrecording.DRErase)
+	obj.Object
+	BeginProgressSheetForEraseModalForWindow(erase obj.Object, docWindow obj.Object)
+	BeginProgressPanelForErase(erase obj.Object)
 	SetDescription(description string)
 }
 

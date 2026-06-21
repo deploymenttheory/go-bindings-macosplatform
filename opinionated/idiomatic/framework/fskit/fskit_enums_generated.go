@@ -10,192 +10,192 @@ import (
 )
 
 // An enumeration of container state values.
-type FSContainerState int64
+type ContainerState int64
 
 const (
 	// The container isn’t ready.
-	FSContainerStateNotReady FSContainerState = 0
+	ContainerStateNotReady ContainerState = 0
 	// The container is blocked from transitioning from the not-ready state to the ready state by a potentially-recoverable error.
-	FSContainerStateBlocked FSContainerState = 1
+	ContainerStateBlocked ContainerState = 1
 	// The container is ready, but inactive.
-	FSContainerStateReady FSContainerState = 2
+	ContainerStateReady ContainerState = 2
 	// The container is active, and one or more volumes are active.
-	FSContainerStateActive FSContainerState = 3
+	ContainerStateActive ContainerState = 3
 )
 
-func (e FSContainerState) String() string {
+func (e ContainerState) String() string {
 	switch e {
-	case FSContainerStateNotReady:
-		return "FSContainerStateNotReady"
-	case FSContainerStateBlocked:
-		return "FSContainerStateBlocked"
-	case FSContainerStateReady:
-		return "FSContainerStateReady"
-	case FSContainerStateActive:
-		return "FSContainerStateActive"
+	case ContainerStateNotReady:
+		return "ContainerStateNotReady"
+	case ContainerStateBlocked:
+		return "ContainerStateBlocked"
+	case ContainerStateReady:
+		return "ContainerStateReady"
+	case ContainerStateActive:
+		return "ContainerStateActive"
 	default:
-		return fmt.Sprintf("FSContainerState(%d)", int64(e))
+		return fmt.Sprintf("ContainerState(%d)", int64(e))
 	}
 }
 
-type FSErrorCode int64
+type ErrorCode int64
 
 const (
 	// The module failed to load.
-	FSErrorModuleLoadFailed FSErrorCode = 4500
+	ErrorModuleLoadFailed ErrorCode = 4500
 	// FSKit didn't recognize the resource, and probing failed to find a match.
-	FSErrorResourceUnrecognized FSErrorCode = 4501
+	ErrorResourceUnrecognized ErrorCode = 4501
 	// The resource is damaged. This error indicates the resource needs a repair operation, or that a repair operation failed. > Note: The status in this error applies to the resource. A failing repair operation reports a more specific error status.
-	FSErrorResourceDamaged FSErrorCode = 4502
+	ErrorResourceDamaged ErrorCode = 4502
 	// FSKit recognizes the resource, but the resource isn't usable. For example, this error occurs when a resource uses a file system's internal feature flags. If the only modules that support the file system don't support those feature flags, this code indicates an unusable resource. The error tells the person using the module why the resource isn't usable.
-	FSErrorResourceUnusable FSErrorCode = 4503
+	ErrorResourceUnusable ErrorCode = 4503
 	// An operation is in progress.
-	FSErrorStatusOperationInProgress FSErrorCode = 4504
+	ErrorStatusOperationInProgress ErrorCode = 4504
 	// An operation is paused.
-	FSErrorStatusOperationPaused FSErrorCode = 4505
+	ErrorStatusOperationPaused ErrorCode = 4505
 	// While enumerating a directory, the given cookie didn't resolve to a valid directory entry.
-	FSErrorInvalidDirectoryCookie FSErrorCode = 4506
+	ErrorInvalidDirectoryCookie ErrorCode = 4506
 )
 
-func (e FSErrorCode) String() string {
+func (e ErrorCode) String() string {
 	switch e {
-	case FSErrorModuleLoadFailed:
-		return "FSErrorModuleLoadFailed"
-	case FSErrorResourceUnrecognized:
-		return "FSErrorResourceUnrecognized"
-	case FSErrorResourceDamaged:
-		return "FSErrorResourceDamaged"
-	case FSErrorResourceUnusable:
-		return "FSErrorResourceUnusable"
-	case FSErrorStatusOperationInProgress:
-		return "FSErrorStatusOperationInProgress"
-	case FSErrorStatusOperationPaused:
-		return "FSErrorStatusOperationPaused"
-	case FSErrorInvalidDirectoryCookie:
-		return "FSErrorInvalidDirectoryCookie"
+	case ErrorModuleLoadFailed:
+		return "ErrorModuleLoadFailed"
+	case ErrorResourceUnrecognized:
+		return "ErrorResourceUnrecognized"
+	case ErrorResourceDamaged:
+		return "ErrorResourceDamaged"
+	case ErrorResourceUnusable:
+		return "ErrorResourceUnusable"
+	case ErrorStatusOperationInProgress:
+		return "ErrorStatusOperationInProgress"
+	case ErrorStatusOperationPaused:
+		return "ErrorStatusOperationPaused"
+	case ErrorInvalidDirectoryCookie:
+		return "ErrorInvalidDirectoryCookie"
 	default:
-		return fmt.Sprintf("FSErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }
 
 // An enumeration of types of extents.
-type FSExtentType int64
+type ExtentType int64
 
 const (
 	// An extent type to indicate valid data.
-	FSExtentTypeData FSExtentType = 0
+	ExtentTypeData ExtentType = 0
 	// An extent type to indicate uninitialized data.
-	FSExtentTypeZeroFill FSExtentType = 1
+	ExtentTypeZeroFill ExtentType = 1
 )
 
-func (e FSExtentType) String() string {
+func (e ExtentType) String() string {
 	switch e {
-	case FSExtentTypeData:
-		return "FSExtentTypeData"
-	case FSExtentTypeZeroFill:
-		return "FSExtentTypeZeroFill"
+	case ExtentTypeData:
+		return "ExtentTypeData"
+	case ExtentTypeZeroFill:
+		return "ExtentTypeZeroFill"
 	default:
-		return fmt.Sprintf("FSExtentType(%d)", int64(e))
+		return fmt.Sprintf("ExtentType(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type FSItemAttribute int64
+type ItemAttribute int64
 
 const (
 	// The type attribute.
-	FSItemAttributeType FSItemAttribute = 1
+	ItemAttributeType ItemAttribute = 1
 	// The mode attribute.
-	FSItemAttributeMode FSItemAttribute = 2
+	ItemAttributeMode ItemAttribute = 2
 	// The link count attribute.
-	FSItemAttributeLinkCount FSItemAttribute = 4
+	ItemAttributeLinkCount ItemAttribute = 4
 	// The user ID (uid) attribute.
-	FSItemAttributeUID FSItemAttribute = 8
+	ItemAttributeUID ItemAttribute = 8
 	// The group ID (gid) attribute.
-	FSItemAttributeGID FSItemAttribute = 16
+	ItemAttributeGID ItemAttribute = 16
 	// The flags attribute.
-	FSItemAttributeFlags FSItemAttribute = 32
+	ItemAttributeFlags ItemAttribute = 32
 	// The size attribute.
-	FSItemAttributeSize FSItemAttribute = 64
+	ItemAttributeSize ItemAttribute = 64
 	// The allocated size attribute.
-	FSItemAttributeAllocSize FSItemAttribute = 128
+	ItemAttributeAllocSize ItemAttribute = 128
 	// The file ID attribute.
-	FSItemAttributeFileID FSItemAttribute = 256
+	ItemAttributeFileID ItemAttribute = 256
 	// The parent ID attribute.
-	FSItemAttributeParentID FSItemAttribute = 512
+	ItemAttributeParentID ItemAttribute = 512
 	// The last-accessed time attribute.
-	FSItemAttributeAccessTime FSItemAttribute = 1024
+	ItemAttributeAccessTime ItemAttribute = 1024
 	// The last-modified time attribute.
-	FSItemAttributeModifyTime FSItemAttribute = 2048
+	ItemAttributeModifyTime ItemAttribute = 2048
 	// The last-changed time attribute.
-	FSItemAttributeChangeTime FSItemAttribute = 4096
+	ItemAttributeChangeTime ItemAttribute = 4096
 	// The creation time attribute.
-	FSItemAttributeBirthTime FSItemAttribute = 8192
+	ItemAttributeBirthTime ItemAttribute = 8192
 	// The backup time attribute.
-	FSItemAttributeBackupTime FSItemAttribute = 16384
+	ItemAttributeBackupTime ItemAttribute = 16384
 	// The time added attribute.
-	FSItemAttributeAddedTime FSItemAttribute = 32768
+	ItemAttributeAddedTime ItemAttribute = 32768
 	// The supports limited extended attributes attribute.
-	FSItemAttributeSupportsLimitedXAttrs FSItemAttribute = 65536
+	ItemAttributeSupportsLimitedXAttrs ItemAttribute = 65536
 	// The inhibit kernel offloaded I/O attribute.
-	FSItemAttributeInhibitKernelOffloadedIO FSItemAttribute = 131072
+	ItemAttributeInhibitKernelOffloadedIO ItemAttribute = 131072
 )
 
-func (e FSItemAttribute) String() string {
+func (e ItemAttribute) String() string {
 	var parts []string
-	if e&FSItemAttributeType != 0 {
-		parts = append(parts, "FSItemAttributeType")
+	if e&ItemAttributeType != 0 {
+		parts = append(parts, "ItemAttributeType")
 	}
-	if e&FSItemAttributeMode != 0 {
-		parts = append(parts, "FSItemAttributeMode")
+	if e&ItemAttributeMode != 0 {
+		parts = append(parts, "ItemAttributeMode")
 	}
-	if e&FSItemAttributeLinkCount != 0 {
-		parts = append(parts, "FSItemAttributeLinkCount")
+	if e&ItemAttributeLinkCount != 0 {
+		parts = append(parts, "ItemAttributeLinkCount")
 	}
-	if e&FSItemAttributeUID != 0 {
-		parts = append(parts, "FSItemAttributeUID")
+	if e&ItemAttributeUID != 0 {
+		parts = append(parts, "ItemAttributeUID")
 	}
-	if e&FSItemAttributeGID != 0 {
-		parts = append(parts, "FSItemAttributeGID")
+	if e&ItemAttributeGID != 0 {
+		parts = append(parts, "ItemAttributeGID")
 	}
-	if e&FSItemAttributeFlags != 0 {
-		parts = append(parts, "FSItemAttributeFlags")
+	if e&ItemAttributeFlags != 0 {
+		parts = append(parts, "ItemAttributeFlags")
 	}
-	if e&FSItemAttributeSize != 0 {
-		parts = append(parts, "FSItemAttributeSize")
+	if e&ItemAttributeSize != 0 {
+		parts = append(parts, "ItemAttributeSize")
 	}
-	if e&FSItemAttributeAllocSize != 0 {
-		parts = append(parts, "FSItemAttributeAllocSize")
+	if e&ItemAttributeAllocSize != 0 {
+		parts = append(parts, "ItemAttributeAllocSize")
 	}
-	if e&FSItemAttributeFileID != 0 {
-		parts = append(parts, "FSItemAttributeFileID")
+	if e&ItemAttributeFileID != 0 {
+		parts = append(parts, "ItemAttributeFileID")
 	}
-	if e&FSItemAttributeParentID != 0 {
-		parts = append(parts, "FSItemAttributeParentID")
+	if e&ItemAttributeParentID != 0 {
+		parts = append(parts, "ItemAttributeParentID")
 	}
-	if e&FSItemAttributeAccessTime != 0 {
-		parts = append(parts, "FSItemAttributeAccessTime")
+	if e&ItemAttributeAccessTime != 0 {
+		parts = append(parts, "ItemAttributeAccessTime")
 	}
-	if e&FSItemAttributeModifyTime != 0 {
-		parts = append(parts, "FSItemAttributeModifyTime")
+	if e&ItemAttributeModifyTime != 0 {
+		parts = append(parts, "ItemAttributeModifyTime")
 	}
-	if e&FSItemAttributeChangeTime != 0 {
-		parts = append(parts, "FSItemAttributeChangeTime")
+	if e&ItemAttributeChangeTime != 0 {
+		parts = append(parts, "ItemAttributeChangeTime")
 	}
-	if e&FSItemAttributeBirthTime != 0 {
-		parts = append(parts, "FSItemAttributeBirthTime")
+	if e&ItemAttributeBirthTime != 0 {
+		parts = append(parts, "ItemAttributeBirthTime")
 	}
-	if e&FSItemAttributeBackupTime != 0 {
-		parts = append(parts, "FSItemAttributeBackupTime")
+	if e&ItemAttributeBackupTime != 0 {
+		parts = append(parts, "ItemAttributeBackupTime")
 	}
-	if e&FSItemAttributeAddedTime != 0 {
-		parts = append(parts, "FSItemAttributeAddedTime")
+	if e&ItemAttributeAddedTime != 0 {
+		parts = append(parts, "ItemAttributeAddedTime")
 	}
-	if e&FSItemAttributeSupportsLimitedXAttrs != 0 {
-		parts = append(parts, "FSItemAttributeSupportsLimitedXAttrs")
+	if e&ItemAttributeSupportsLimitedXAttrs != 0 {
+		parts = append(parts, "ItemAttributeSupportsLimitedXAttrs")
 	}
-	if e&FSItemAttributeInhibitKernelOffloadedIO != 0 {
-		parts = append(parts, "FSItemAttributeInhibitKernelOffloadedIO")
+	if e&ItemAttributeInhibitKernelOffloadedIO != 0 {
+		parts = append(parts, "ItemAttributeInhibitKernelOffloadedIO")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -203,123 +203,123 @@ func (e FSItemAttribute) String() string {
 	return strings.Join(parts, "|")
 }
 
-type FSItemID int64
+type ItemID int64
 
 const (
 	// The identifier for an invalid item.
-	FSItemIDInvalid FSItemID = 0
+	ItemIDInvalid ItemID = 0
 	// The identifier for an item that serves as the parent of the root directory.
-	FSItemIDParentOfRoot FSItemID = 1
+	ItemIDParentOfRoot ItemID = 1
 	// The item identifier for the root directory.
-	FSItemIDRootDirectory FSItemID = 2
+	ItemIDRootDirectory ItemID = 2
 )
 
-func (e FSItemID) String() string {
+func (e ItemID) String() string {
 	switch e {
-	case FSItemIDInvalid:
-		return "FSItemIDInvalid"
-	case FSItemIDParentOfRoot:
-		return "FSItemIDParentOfRoot"
-	case FSItemIDRootDirectory:
-		return "FSItemIDRootDirectory"
+	case ItemIDInvalid:
+		return "ItemIDInvalid"
+	case ItemIDParentOfRoot:
+		return "ItemIDParentOfRoot"
+	case ItemIDRootDirectory:
+		return "ItemIDRootDirectory"
 	default:
-		return fmt.Sprintf("FSItemID(%d)", int64(e))
+		return fmt.Sprintf("ItemID(%d)", int64(e))
 	}
 }
 
-type FSItemType int64
+type ItemType int64
 
 const (
 	// The item type of an unknown item.
-	FSItemTypeUnknown FSItemType = 0
+	ItemTypeUnknown ItemType = 0
 	// The item type of a regular file.
-	FSItemTypeFile FSItemType = 1
+	ItemTypeFile ItemType = 1
 	// The item type of a directory.
-	FSItemTypeDirectory FSItemType = 2
+	ItemTypeDirectory ItemType = 2
 	// The item type of a symbolic link.
-	FSItemTypeSymlink FSItemType = 3
+	ItemTypeSymlink ItemType = 3
 	// The item type of a first-in/first-out named pipe.
-	FSItemTypeFIFO FSItemType = 4
+	ItemTypeFIFO ItemType = 4
 	// The item type of a character device.
-	FSItemTypeCharDevice FSItemType = 5
+	ItemTypeCharDevice ItemType = 5
 	// The item type of a block device.
-	FSItemTypeBlockDevice FSItemType = 6
+	ItemTypeBlockDevice ItemType = 6
 	// The item type of a socket.
-	FSItemTypeSocket FSItemType = 7
+	ItemTypeSocket ItemType = 7
 )
 
-func (e FSItemType) String() string {
+func (e ItemType) String() string {
 	switch e {
-	case FSItemTypeUnknown:
-		return "FSItemTypeUnknown"
-	case FSItemTypeFile:
-		return "FSItemTypeFile"
-	case FSItemTypeDirectory:
-		return "FSItemTypeDirectory"
-	case FSItemTypeSymlink:
-		return "FSItemTypeSymlink"
-	case FSItemTypeFIFO:
-		return "FSItemTypeFIFO"
-	case FSItemTypeCharDevice:
-		return "FSItemTypeCharDevice"
-	case FSItemTypeBlockDevice:
-		return "FSItemTypeBlockDevice"
-	case FSItemTypeSocket:
-		return "FSItemTypeSocket"
+	case ItemTypeUnknown:
+		return "ItemTypeUnknown"
+	case ItemTypeFile:
+		return "ItemTypeFile"
+	case ItemTypeDirectory:
+		return "ItemTypeDirectory"
+	case ItemTypeSymlink:
+		return "ItemTypeSymlink"
+	case ItemTypeFIFO:
+		return "ItemTypeFIFO"
+	case ItemTypeCharDevice:
+		return "ItemTypeCharDevice"
+	case ItemTypeBlockDevice:
+		return "ItemTypeBlockDevice"
+	case ItemTypeSocket:
+		return "ItemTypeSocket"
 	default:
-		return fmt.Sprintf("FSItemType(%d)", int64(e))
+		return fmt.Sprintf("ItemType(%d)", int64(e))
 	}
 }
 
 // A type that represents the recognition and usability of a probed resource.
-type FSMatchResult int64
+type MatchResult int64
 
 const (
 	// The probe doesn’t recognize the resource.
-	FSMatchResultNotRecognized FSMatchResult = 0
+	MatchResultNotRecognized MatchResult = 0
 	// The probe recognizes the resource but can’t use it.
-	FSMatchResultRecognized FSMatchResult = 1
+	MatchResultRecognized MatchResult = 1
 	// The probe recognizes the resource and is ready to use it, but only in a limited capacity.
-	FSMatchResultUsableButLimited FSMatchResult = 2
+	MatchResultUsableButLimited MatchResult = 2
 	// The probe recognizes the resource and is ready to use it.
-	FSMatchResultUsable FSMatchResult = 3
+	MatchResultUsable MatchResult = 3
 )
 
-func (e FSMatchResult) String() string {
+func (e MatchResult) String() string {
 	switch e {
-	case FSMatchResultNotRecognized:
-		return "FSMatchResultNotRecognized"
-	case FSMatchResultRecognized:
-		return "FSMatchResultRecognized"
-	case FSMatchResultUsableButLimited:
-		return "FSMatchResultUsableButLimited"
-	case FSMatchResultUsable:
-		return "FSMatchResultUsable"
+	case MatchResultNotRecognized:
+		return "MatchResultNotRecognized"
+	case MatchResultRecognized:
+		return "MatchResultRecognized"
+	case MatchResultUsableButLimited:
+		return "MatchResultUsableButLimited"
+	case MatchResultUsable:
+		return "MatchResultUsable"
 	default:
-		return fmt.Sprintf("FSMatchResult(%d)", int64(e))
+		return fmt.Sprintf("MatchResult(%d)", int64(e))
 	}
 }
 
-type FSVolumeCaseFormat int64
+type VolumeCaseFormat int64
 
 const (
 	// The volume is case sensitive.
-	FSVolumeCaseFormatSensitive FSVolumeCaseFormat = 0
+	VolumeCaseFormatSensitive VolumeCaseFormat = 0
 	// The volume isn't case sensitive.
-	FSVolumeCaseFormatInsensitive FSVolumeCaseFormat = 1
+	VolumeCaseFormatInsensitive VolumeCaseFormat = 1
 	// The volume isn't case sensitive, but supports preserving the case of file and directory names.
-	FSVolumeCaseFormatInsensitiveCasePreserving FSVolumeCaseFormat = 2
+	VolumeCaseFormatInsensitiveCasePreserving VolumeCaseFormat = 2
 )
 
-func (e FSVolumeCaseFormat) String() string {
+func (e VolumeCaseFormat) String() string {
 	switch e {
-	case FSVolumeCaseFormatSensitive:
-		return "FSVolumeCaseFormatSensitive"
-	case FSVolumeCaseFormatInsensitive:
-		return "FSVolumeCaseFormatInsensitive"
-	case FSVolumeCaseFormatInsensitiveCasePreserving:
-		return "FSVolumeCaseFormatInsensitiveCasePreserving"
+	case VolumeCaseFormatSensitive:
+		return "VolumeCaseFormatSensitive"
+	case VolumeCaseFormatInsensitive:
+		return "VolumeCaseFormatInsensitive"
+	case VolumeCaseFormatInsensitiveCasePreserving:
+		return "VolumeCaseFormatInsensitiveCasePreserving"
 	default:
-		return fmt.Sprintf("FSVolumeCaseFormat(%d)", int64(e))
+		return fmt.Sprintf("VolumeCaseFormat(%d)", int64(e))
 	}
 }

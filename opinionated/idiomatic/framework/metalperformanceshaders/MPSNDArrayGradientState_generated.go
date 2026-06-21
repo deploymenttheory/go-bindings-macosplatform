@@ -5,58 +5,81 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NDArrayGradientState wraps [raw.MPSNDArrayGradientState] with a fluent Go API.
+// NDArrayGradientState is an idiomatic wrapper over the Objective-C class MPSNDArrayGradientState.
 type NDArrayGradientState struct {
-	inner *raw.MPSNDArrayGradientState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayGradientState].
-func (x *NDArrayGradientState) Unwrap() *raw.MPSNDArrayGradientState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NDArrayGradientState) ID() objc.ID { return x.inner.Ptr() }
-
-// NDArrayGradientStateFromID adopts an existing object pointer as a NDArrayGradientState (nil for 0).
+// NDArrayGradientStateFromID adopts an existing Objective-C object as a NDArrayGradientState
+// (nil for 0), retaining it and registering a release finalizer.
 func NDArrayGradientStateFromID(id objc.ID) *NDArrayGradientState {
 	if id == 0 {
 		return nil
 	}
-	return &NDArrayGradientState{inner: raw.MPSNDArrayGradientStateFromID(id)}
+	x := &NDArrayGradientState{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNDArrayGradientState creates a new [NDArrayGradientState].
+// nDArrayGradientStateAdopt wraps an Objective-C object that this code just created as a
+// NDArrayGradientState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nDArrayGradientStateAdopt(id objc.ID) *NDArrayGradientState {
+	if id == 0 {
+		return nil
+	}
+	x := &NDArrayGradientState{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NDArrayGradientState) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NDArrayGradientState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NDArrayGradientState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNDArrayGradientState creates a new NDArrayGradientState.
 func NewNDArrayGradientState() *NDArrayGradientState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayGradientState")), objc.RegisterName("new"))
-	return &NDArrayGradientState{inner: raw.MPSNDArrayGradientStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayGradientState")), objc.RegisterName("new"))
+	return nDArrayGradientStateAdopt(_id)
 }
 
-// WithReadCount sets the readCount property and returns the receiver for chaining.
-func (x *NDArrayGradientState) WithReadCount(readCount uint) *NDArrayGradientState {
-	x.inner.MPSState.SetReadCount(readCount)
+// WithReadCount sets readCount and returns the receiver so calls can be chained.
+func (x *NDArrayGradientState) WithReadCount(readCount int) *NDArrayGradientState {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// A string to help identify this object.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *NDArrayGradientState) WithLabel(label string) *NDArrayGradientState {
-	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
-
-func (x *NDArrayGradientState) asState() *mpscore.MPSState { return &x.inner.MPSState }
 
 // NDArrayGradientStateable is the interface implemented by [NDArrayGradientState], for mocking and DI.
 type NDArrayGradientStateable interface {
-	Unwrap() *raw.MPSNDArrayGradientState
-	WithReadCount(readCount uint) *NDArrayGradientState
+	obj.Object
+	WithReadCount(readCount int) *NDArrayGradientState
 	WithLabel(label string) *NDArrayGradientState
 }
 

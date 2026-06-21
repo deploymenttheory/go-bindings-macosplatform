@@ -5,65 +5,80 @@
 package symbols
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/symbols"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A symbol effect that applies the Breathe animation to symbol images.
 //
-// SymbolBreatheEffect wraps [raw.NSSymbolBreatheEffect] with a fluent Go API.
+// SymbolBreatheEffect is an idiomatic wrapper over the Objective-C class NSSymbolBreatheEffect.
 type SymbolBreatheEffect struct {
-	inner *raw.NSSymbolBreatheEffect
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSymbolBreatheEffect].
-func (x *SymbolBreatheEffect) Unwrap() *raw.NSSymbolBreatheEffect { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SymbolBreatheEffect) ID() objc.ID { return x.inner.Ptr() }
-
-// SymbolBreatheEffectFromID adopts an existing object pointer as a SymbolBreatheEffect (nil for 0).
+// SymbolBreatheEffectFromID adopts an existing Objective-C object as a SymbolBreatheEffect
+// (nil for 0), retaining it and registering a release finalizer.
 func SymbolBreatheEffectFromID(id objc.ID) *SymbolBreatheEffect {
 	if id == 0 {
 		return nil
 	}
-	return &SymbolBreatheEffect{inner: raw.NSSymbolBreatheEffectFromID(id)}
+	x := &SymbolBreatheEffect{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSymbolBreatheEffect creates a new [SymbolBreatheEffect].
+// symbolBreatheEffectAdopt wraps an Objective-C object that this code just created as a
+// SymbolBreatheEffect (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func symbolBreatheEffectAdopt(id objc.ID) *SymbolBreatheEffect {
+	if id == 0 {
+		return nil
+	}
+	x := &SymbolBreatheEffect{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SymbolBreatheEffect) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SymbolBreatheEffect) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SymbolBreatheEffect) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSymbolBreatheEffect creates a new SymbolBreatheEffect.
 func NewSymbolBreatheEffect() *SymbolBreatheEffect {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSymbolBreatheEffect")), objc.RegisterName("new"))
-	return &SymbolBreatheEffect{inner: raw.NSSymbolBreatheEffectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolBreatheEffect")), objc.RegisterName("new"))
+	return symbolBreatheEffectAdopt(_id)
 }
 
 // Returns a copy of the effect that animates incrementally, by layer.
-//
-// EffectWithByLayer calls the underlying EffectWithByLayer.
 func (x *SymbolBreatheEffect) EffectWithByLayer() *SymbolBreatheEffect {
-	_r := x.inner.EffectWithByLayer()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolBreatheEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+	return SymbolBreatheEffectFromID(_r)
 }
 
 // Returns a copy of the effect that animates all layers of the symbol simultaneously.
-//
-// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
 func (x *SymbolBreatheEffect) EffectWithWholeSymbol() *SymbolBreatheEffect {
-	_r := x.inner.EffectWithWholeSymbol()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolBreatheEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+	return SymbolBreatheEffectFromID(_r)
 }
-
-func (x *SymbolBreatheEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
 
 // SymbolBreatheEffectable is the interface implemented by [SymbolBreatheEffect], for mocking and DI.
 type SymbolBreatheEffectable interface {
-	Unwrap() *raw.NSSymbolBreatheEffect
+	obj.Object
 	EffectWithByLayer() *SymbolBreatheEffect
 	EffectWithWholeSymbol() *SymbolBreatheEffect
 }

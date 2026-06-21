@@ -5,69 +5,90 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CaptureTimecodeSource wraps [raw.AVCaptureTimecodeSource] with a fluent Go API.
+// CaptureTimecodeSource is an idiomatic wrapper over the Objective-C class AVCaptureTimecodeSource.
 type CaptureTimecodeSource struct {
-	inner *raw.AVCaptureTimecodeSource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureTimecodeSource].
-func (x *CaptureTimecodeSource) Unwrap() *raw.AVCaptureTimecodeSource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureTimecodeSource) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureTimecodeSourceFromID adopts an existing object pointer as a CaptureTimecodeSource (nil for 0).
+// CaptureTimecodeSourceFromID adopts an existing Objective-C object as a CaptureTimecodeSource
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureTimecodeSourceFromID(id objc.ID) *CaptureTimecodeSource {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureTimecodeSource{inner: raw.AVCaptureTimecodeSourceFromID(id)}
+	x := &CaptureTimecodeSource{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCaptureTimecodeSource creates a new [CaptureTimecodeSource].
+// captureTimecodeSourceAdopt wraps an Objective-C object that this code just created as a
+// CaptureTimecodeSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureTimecodeSourceAdopt(id objc.ID) *CaptureTimecodeSource {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureTimecodeSource{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptureTimecodeSource) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureTimecodeSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureTimecodeSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptureTimecodeSource creates a new CaptureTimecodeSource.
 func NewCaptureTimecodeSource() *CaptureTimecodeSource {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureTimecodeSource")), objc.RegisterName("new"))
-	return &CaptureTimecodeSource{inner: raw.AVCaptureTimecodeSourceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureTimecodeSource")), objc.RegisterName("new"))
+	return captureTimecodeSourceAdopt(_id)
 }
 
 // The name of the timecode source. This property provides a descriptive name of the timecode source, useful for display in user interfaces or logging.
-//
-// DisplayName calls the underlying DisplayName.
 func (x *CaptureTimecodeSource) DisplayName() string {
-	_r := x.inner.DisplayName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The type of timecode source. Indicates the type of timecode source, represented as a value from the “AVCaptureTimecodeSynchronizationSourceType“ enum. This helps you identify the source for specific synchronization use cases, such as frame counter, real-time clock, MIDI, or HID.
-//
-// Type calls the underlying Type.
-func (x *CaptureTimecodeSource) Type() AVCaptureTimecodeSourceType {
-	return AVCaptureTimecodeSourceType(x.inner.Type())
+func (x *CaptureTimecodeSource) Type() CaptureTimecodeSourceType {
+	_r := objc.Send[CaptureTimecodeSourceType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
 // A unique identifier for the timecode source. The UUID uniquely identifies this timecode source. It is particularly useful when multiple sources of the same type are available, allowing your application to distinguish between them. - Note: This value does not persist across application sessions.
-//
-// Uuid calls the underlying Uuid.
-func (x *CaptureTimecodeSource) Uuid() *foundation.NSUUID {
-	return x.inner.Uuid()
+func (x *CaptureTimecodeSource) Uuid() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uuid"))
+	return obj.Wrap(_r)
 }
 
 // CaptureTimecodeSourceable is the interface implemented by [CaptureTimecodeSource], for mocking and DI.
 type CaptureTimecodeSourceable interface {
-	Unwrap() *raw.AVCaptureTimecodeSource
+	obj.Object
 	DisplayName() string
-	Type() AVCaptureTimecodeSourceType
-	Uuid() *foundation.NSUUID
+	Type() CaptureTimecodeSourceType
+	Uuid() obj.Object
 }
 
 var _ CaptureTimecodeSourceable = (*CaptureTimecodeSource)(nil)

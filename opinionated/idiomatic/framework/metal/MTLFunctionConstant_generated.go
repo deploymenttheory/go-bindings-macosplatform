@@ -5,69 +5,94 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A constant that specializes the behavior of a shader.
 //
-// FunctionConstant wraps [raw.MTLFunctionConstant] with a fluent Go API.
+// FunctionConstant is an idiomatic wrapper over the Objective-C class MTLFunctionConstant.
 type FunctionConstant struct {
-	inner *raw.MTLFunctionConstant
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLFunctionConstant].
-func (x *FunctionConstant) Unwrap() *raw.MTLFunctionConstant { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FunctionConstant) ID() objc.ID { return x.inner.Ptr() }
-
-// FunctionConstantFromID adopts an existing object pointer as a FunctionConstant (nil for 0).
+// FunctionConstantFromID adopts an existing Objective-C object as a FunctionConstant
+// (nil for 0), retaining it and registering a release finalizer.
 func FunctionConstantFromID(id objc.ID) *FunctionConstant {
 	if id == 0 {
 		return nil
 	}
-	return &FunctionConstant{inner: raw.MTLFunctionConstantFromID(id)}
+	x := &FunctionConstant{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFunctionConstant creates a new [FunctionConstant].
+// functionConstantAdopt wraps an Objective-C object that this code just created as a
+// FunctionConstant (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func functionConstantAdopt(id objc.ID) *FunctionConstant {
+	if id == 0 {
+		return nil
+	}
+	x := &FunctionConstant{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FunctionConstant) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FunctionConstant) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FunctionConstant) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFunctionConstant creates a new FunctionConstant.
 func NewFunctionConstant() *FunctionConstant {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLFunctionConstant")), objc.RegisterName("new"))
-	return &FunctionConstant{inner: raw.MTLFunctionConstantFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLFunctionConstant")), objc.RegisterName("new"))
+	return functionConstantAdopt(_id)
 }
 
-// Name calls the underlying Name.
 func (x *FunctionConstant) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Type calls the underlying Type.
-func (x *FunctionConstant) Type() MTLDataType {
-	return MTLDataType(x.inner.Type())
+func (x *FunctionConstant) Type() DataType {
+	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// Index calls the underlying Index.
-func (x *FunctionConstant) Index() uint {
-	return x.inner.Index()
+func (x *FunctionConstant) Index() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("index"))
+	return _r
 }
 
-// Required calls the underlying Required.
 func (x *FunctionConstant) Required() bool {
-	return x.inner.Required()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("required"))
+	return _r
 }
 
 // FunctionConstantable is the interface implemented by [FunctionConstant], for mocking and DI.
 type FunctionConstantable interface {
-	Unwrap() *raw.MTLFunctionConstant
+	obj.Object
 	Name() string
-	Type() MTLDataType
-	Index() uint
+	Type() DataType
+	Index() int
 	Required() bool
 }
 

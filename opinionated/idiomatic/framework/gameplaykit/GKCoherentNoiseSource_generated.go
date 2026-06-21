@@ -5,117 +5,136 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The abstract superclass for procedural noise generators that create coherent noise.
 //
-// CoherentNoiseSource wraps [raw.GKCoherentNoiseSource] with a fluent Go API.
+// CoherentNoiseSource is an idiomatic wrapper over the Objective-C class GKCoherentNoiseSource.
 type CoherentNoiseSource struct {
-	inner *raw.GKCoherentNoiseSource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKCoherentNoiseSource].
-func (x *CoherentNoiseSource) Unwrap() *raw.GKCoherentNoiseSource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CoherentNoiseSource) ID() objc.ID { return x.inner.Ptr() }
-
-// CoherentNoiseSourceFromID adopts an existing object pointer as a CoherentNoiseSource (nil for 0).
+// CoherentNoiseSourceFromID adopts an existing Objective-C object as a CoherentNoiseSource
+// (nil for 0), retaining it and registering a release finalizer.
 func CoherentNoiseSourceFromID(id objc.ID) *CoherentNoiseSource {
 	if id == 0 {
 		return nil
 	}
-	return &CoherentNoiseSource{inner: raw.GKCoherentNoiseSourceFromID(id)}
+	x := &CoherentNoiseSource{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCoherentNoiseSource creates a new [CoherentNoiseSource].
+// coherentNoiseSourceAdopt wraps an Objective-C object that this code just created as a
+// CoherentNoiseSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func coherentNoiseSourceAdopt(id objc.ID) *CoherentNoiseSource {
+	if id == 0 {
+		return nil
+	}
+	x := &CoherentNoiseSource{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CoherentNoiseSource) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CoherentNoiseSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CoherentNoiseSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCoherentNoiseSource creates a new CoherentNoiseSource.
 func NewCoherentNoiseSource() *CoherentNoiseSource {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKCoherentNoiseSource")), objc.RegisterName("new"))
-	return &CoherentNoiseSource{inner: raw.GKCoherentNoiseSourceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKCoherentNoiseSource")), objc.RegisterName("new"))
+	return coherentNoiseSourceAdopt(_id)
 }
 
 // A value that determines the size and spacing of features in generated noise.
 //
-// WithFrequency sets the frequency property and returns the receiver for chaining.
+// WithFrequency sets frequency and returns the receiver so calls can be chained.
 func (x *CoherentNoiseSource) WithFrequency(frequency float64) *CoherentNoiseSource {
-	x.inner.SetFrequency(frequency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 	return x
 }
 
 // The number of octaves of the underlying noise function to use for generating noise.
 //
-// WithOctaveCount sets the octaveCount property and returns the receiver for chaining.
+// WithOctaveCount sets octaveCount and returns the receiver so calls can be chained.
 func (x *CoherentNoiseSource) WithOctaveCount(octaveCount int) *CoherentNoiseSource {
-	x.inner.SetOctaveCount(octaveCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOctaveCount:"), octaveCount)
 	return x
 }
 
 // The rate at which successive octaves of the noise function increase in frequency.
 //
-// WithLacunarity sets the lacunarity property and returns the receiver for chaining.
+// WithLacunarity sets lacunarity and returns the receiver so calls can be chained.
 func (x *CoherentNoiseSource) WithLacunarity(lacunarity float64) *CoherentNoiseSource {
-	x.inner.SetLacunarity(lacunarity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLacunarity:"), lacunarity)
 	return x
 }
 
 // The value that determines the specific configuration of noise produced by the noise source.
 //
-// WithSeed sets the seed property and returns the receiver for chaining.
+// WithSeed sets seed and returns the receiver so calls can be chained.
 func (x *CoherentNoiseSource) WithSeed(seed int32) *CoherentNoiseSource {
-	x.inner.SetSeed(seed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
 	return x
 }
 
-// Frequency calls the underlying Frequency.
 func (x *CoherentNoiseSource) Frequency() float64 {
-	return x.inner.Frequency()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frequency"))
+	return _r
 }
 
-// SetFrequency calls the underlying SetFrequency.
 func (x *CoherentNoiseSource) SetFrequency(frequency float64) {
-	x.inner.SetFrequency(frequency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 }
 
-// OctaveCount calls the underlying OctaveCount.
 func (x *CoherentNoiseSource) OctaveCount() int {
-	return x.inner.OctaveCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("octaveCount"))
+	return _r
 }
 
-// SetOctaveCount calls the underlying SetOctaveCount.
 func (x *CoherentNoiseSource) SetOctaveCount(octaveCount int) {
-	x.inner.SetOctaveCount(octaveCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOctaveCount:"), octaveCount)
 }
 
-// Lacunarity calls the underlying Lacunarity.
 func (x *CoherentNoiseSource) Lacunarity() float64 {
-	return x.inner.Lacunarity()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lacunarity"))
+	return _r
 }
 
-// SetLacunarity calls the underlying SetLacunarity.
 func (x *CoherentNoiseSource) SetLacunarity(lacunarity float64) {
-	x.inner.SetLacunarity(lacunarity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLacunarity:"), lacunarity)
 }
 
-// Seed calls the underlying Seed.
 func (x *CoherentNoiseSource) Seed() int32 {
-	return x.inner.Seed()
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("seed"))
+	return _r
 }
 
-// SetSeed calls the underlying SetSeed.
 func (x *CoherentNoiseSource) SetSeed(seed int32) {
-	x.inner.SetSeed(seed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
 }
-
-func (x *CoherentNoiseSource) asCoherentNoiseSource() *raw.GKCoherentNoiseSource { return x.inner }
-
-func (x *CoherentNoiseSource) asNoiseSource() *raw.GKNoiseSource { return &x.inner.GKNoiseSource }
 
 // CoherentNoiseSourceable is the interface implemented by [CoherentNoiseSource], for mocking and DI.
 type CoherentNoiseSourceable interface {
-	Unwrap() *raw.GKCoherentNoiseSource
+	obj.Object
 	WithFrequency(frequency float64) *CoherentNoiseSource
 	WithOctaveCount(octaveCount int) *CoherentNoiseSource
 	WithLacunarity(lacunarity float64) *CoherentNoiseSource

@@ -5,586 +5,494 @@
 package quartzcore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A layer that provides a way to asynchronously provide tiles of the layer’s content, potentially cached at multiple levels of detail.
 //
-// TiledLayer wraps [raw.CATiledLayer] with a fluent Go API.
+// TiledLayer is an idiomatic wrapper over the Objective-C class CATiledLayer.
 type TiledLayer struct {
-	inner *raw.CATiledLayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CATiledLayer].
-func (x *TiledLayer) Unwrap() *raw.CATiledLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TiledLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// TiledLayerFromID adopts an existing object pointer as a TiledLayer (nil for 0).
+// TiledLayerFromID adopts an existing Objective-C object as a TiledLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func TiledLayerFromID(id objc.ID) *TiledLayer {
 	if id == 0 {
 		return nil
 	}
-	return &TiledLayer{inner: raw.CATiledLayerFromID(id)}
+	x := &TiledLayer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTiledLayer creates a new [TiledLayer].
+// tiledLayerAdopt wraps an Objective-C object that this code just created as a
+// TiledLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tiledLayerAdopt(id objc.ID) *TiledLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &TiledLayer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TiledLayer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TiledLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TiledLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTiledLayer creates a new TiledLayer.
 func NewTiledLayer() *TiledLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CATiledLayer")), objc.RegisterName("new"))
-	return &TiledLayer{inner: raw.CATiledLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CATiledLayer")), objc.RegisterName("new"))
+	return tiledLayerAdopt(_id)
 }
 
 // The number of levels of detail maintained by this layer.
 //
-// WithLevelsOfDetail sets the levelsOfDetail property and returns the receiver for chaining.
-func (x *TiledLayer) WithLevelsOfDetail(levelsOfDetail uint) *TiledLayer {
-	x.inner.SetLevelsOfDetail(levelsOfDetail)
+// WithLevelsOfDetail sets levelsOfDetail and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithLevelsOfDetail(levelsOfDetail int) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetail:"), levelsOfDetail)
 	return x
 }
 
 // The number of magnified levels of detail for this layer.
 //
-// WithLevelsOfDetailBias sets the levelsOfDetailBias property and returns the receiver for chaining.
-func (x *TiledLayer) WithLevelsOfDetailBias(levelsOfDetailBias uint) *TiledLayer {
-	x.inner.SetLevelsOfDetailBias(levelsOfDetailBias)
-	return x
-}
-
-// The maximum size of each tile used to create the layer’s content.
-//
-// WithTileSize sets the tileSize property and returns the receiver for chaining.
-func (x *TiledLayer) WithTileSize(tileSize corefoundation.CGSize) *TiledLayer {
-	x.inner.SetTileSize(tileSize)
-	return x
-}
-
-// The layer’s bounds rectangle. Animatable.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *TiledLayer) WithBounds(bounds corefoundation.CGRect) *TiledLayer {
-	x.inner.CALayer.SetBounds(bounds)
-	return x
-}
-
-// The layer’s position in its superlayer’s coordinate space. Animatable.
-//
-// WithPosition sets the position property and returns the receiver for chaining.
-func (x *TiledLayer) WithPosition(position corefoundation.CGPoint) *TiledLayer {
-	x.inner.CALayer.SetPosition(position)
+// WithLevelsOfDetailBias sets levelsOfDetailBias and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithLevelsOfDetailBias(levelsOfDetailBias int) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetailBias:"), levelsOfDetailBias)
 	return x
 }
 
 // The layer’s position on the z axis. Animatable.
 //
-// WithZPosition sets the zPosition property and returns the receiver for chaining.
+// WithZPosition sets zPosition and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithZPosition(zPosition float64) *TiledLayer {
-	x.inner.CALayer.SetZPosition(zPosition)
-	return x
-}
-
-// Defines the anchor point of the layer’s bounds rectangle. Animatable.
-//
-// WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
-func (x *TiledLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TiledLayer {
-	x.inner.CALayer.SetAnchorPoint(anchorPoint)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
 // The anchor point for the layer’s position along the z axis. Animatable.
 //
-// WithAnchorPointZ sets the anchorPointZ property and returns the receiver for chaining.
+// WithAnchorPointZ sets anchorPointZ and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithAnchorPointZ(anchorPointZ float64) *TiledLayer {
-	x.inner.CALayer.SetAnchorPointZ(anchorPointZ)
-	return x
-}
-
-// The transform applied to the layer’s contents. Animatable.
-//
-// WithTransform sets the transform property and returns the receiver for chaining.
-func (x *TiledLayer) WithTransform(transform raw.CATransform3D) *TiledLayer {
-	x.inner.CALayer.SetTransform(transform)
-	return x
-}
-
-// The layer’s frame rectangle.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
-func (x *TiledLayer) WithFrame(frame corefoundation.CGRect) *TiledLayer {
-	x.inner.CALayer.SetFrame(frame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
 	return x
 }
 
 // A Boolean indicating whether the layer is displayed. Animatable.
 //
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithHidden(hidden bool) *TiledLayer {
-	x.inner.CALayer.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
 // A Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
 //
-// WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
+// WithDoubleSided sets doubleSided and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithDoubleSided(doubleSided bool) *TiledLayer {
-	x.inner.CALayer.SetDoubleSided(doubleSided)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleSided:"), doubleSided)
 	return x
 }
 
 // A Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
 //
-// WithGeometryFlipped sets the geometryFlipped property and returns the receiver for chaining.
+// WithGeometryFlipped sets geometryFlipped and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithGeometryFlipped(geometryFlipped bool) *TiledLayer {
-	x.inner.CALayer.SetGeometryFlipped(geometryFlipped)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
 	return x
 }
 
 // An array containing the layer’s sublayers.
 //
-// WithSublayers sets the collection, converting the Go slice to an NSArray.
+// WithSublayers sets the collection and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithSublayers(items ...LayerProvider) *TiledLayer {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.CALayer.SetSublayers(foundation.NSArrayFromID[*raw.CALayer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asLayer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CALayer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.CALayer.SetSublayers(_arr)
-	return x
-}
-
-// Specifies the transform to apply to sublayers when rendering. Animatable.
-//
-// WithSublayerTransform sets the sublayerTransform property and returns the receiver for chaining.
-func (x *TiledLayer) WithSublayerTransform(sublayerTransform raw.CATransform3D) *TiledLayer {
-	x.inner.CALayer.SetSublayerTransform(sublayerTransform)
+	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSublayers:"), _arr)
 	return x
 }
 
 // An optional layer whose alpha channel is used to mask the layer’s content.
 //
-// WithMask sets the mask property and returns the receiver for chaining.
+// WithMask sets mask and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithMask(mask LayerProvider) *TiledLayer {
-	x.inner.CALayer.SetMask(mask.asLayer())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMask:"), objref.IDOf(mask))
 	return x
 }
 
 // A Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
 //
-// WithMasksToBounds sets the masksToBounds property and returns the receiver for chaining.
+// WithMasksToBounds sets masksToBounds and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithMasksToBounds(masksToBounds bool) *TiledLayer {
-	x.inner.CALayer.SetMasksToBounds(masksToBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasksToBounds:"), masksToBounds)
 	return x
 }
 
 // An object that provides the contents of the layer. Animatable.
 //
-// WithContents sets the contents property and returns the receiver for chaining.
-func (x *TiledLayer) WithContents(contents objc.ID) *TiledLayer {
-	x.inner.CALayer.SetContents(contents)
-	return x
-}
-
-// The rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
-//
-// WithContentsRect sets the contentsRect property and returns the receiver for chaining.
-func (x *TiledLayer) WithContentsRect(contentsRect corefoundation.CGRect) *TiledLayer {
-	x.inner.CALayer.SetContentsRect(contentsRect)
+// WithContents sets contents and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithContents(contents obj.Object) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
 	return x
 }
 
 // A constant that specifies how the layer’s contents are positioned or scaled within its bounds.
 //
-// WithContentsGravity sets the contentsGravity property and returns the receiver for chaining.
-func (x *TiledLayer) WithContentsGravity(contentsGravity *foundation.NSString) *TiledLayer {
-	x.inner.CALayer.SetContentsGravity(contentsGravity)
+// WithContentsGravity sets contentsGravity and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithContentsGravity(contentsGravity obj.Object) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
 	return x
 }
 
 // The scale factor applied to the layer.
 //
-// WithContentsScale sets the contentsScale property and returns the receiver for chaining.
+// WithContentsScale sets contentsScale and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithContentsScale(contentsScale float64) *TiledLayer {
-	x.inner.CALayer.SetContentsScale(contentsScale)
-	return x
-}
-
-// The rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
-//
-// WithContentsCenter sets the contentsCenter property and returns the receiver for chaining.
-func (x *TiledLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *TiledLayer {
-	x.inner.CALayer.SetContentsCenter(contentsCenter)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsScale:"), contentsScale)
 	return x
 }
 
 // A hint for the desired storage format of the layer contents.
 //
-// WithContentsFormat sets the contentsFormat property and returns the receiver for chaining.
-func (x *TiledLayer) WithContentsFormat(contentsFormat *foundation.NSString) *TiledLayer {
-	x.inner.CALayer.SetContentsFormat(contentsFormat)
+// WithContentsFormat sets contentsFormat and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithContentsFormat(contentsFormat obj.Object) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
 	return x
 }
 
-// WithWantsExtendedDynamicRangeContent sets the wantsExtendedDynamicRangeContent property and returns the receiver for chaining.
+// WithWantsExtendedDynamicRangeContent sets wantsExtendedDynamicRangeContent and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *TiledLayer {
-	x.inner.CALayer.SetWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
 	return x
 }
 
-// WithToneMapMode sets the toneMapMode property and returns the receiver for chaining.
-func (x *TiledLayer) WithToneMapMode(toneMapMode *foundation.NSString) *TiledLayer {
-	x.inner.CALayer.SetToneMapMode(toneMapMode)
+// WithToneMapMode sets toneMapMode and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithToneMapMode(toneMapMode obj.Object) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return x
 }
 
-// WithPreferredDynamicRange sets the preferredDynamicRange property and returns the receiver for chaining.
-func (x *TiledLayer) WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *TiledLayer {
-	x.inner.CALayer.SetPreferredDynamicRange(preferredDynamicRange)
+// WithPreferredDynamicRange sets preferredDynamicRange and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return x
 }
 
-// WithContentsHeadroom sets the contentsHeadroom property and returns the receiver for chaining.
+// WithContentsHeadroom sets contentsHeadroom and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithContentsHeadroom(contentsHeadroom float64) *TiledLayer {
-	x.inner.CALayer.SetContentsHeadroom(contentsHeadroom)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
 	return x
 }
 
 // The filter used when reducing the size of the content.
 //
-// WithMinificationFilter sets the minificationFilter property and returns the receiver for chaining.
-func (x *TiledLayer) WithMinificationFilter(minificationFilter *foundation.NSString) *TiledLayer {
-	x.inner.CALayer.SetMinificationFilter(minificationFilter)
+// WithMinificationFilter sets minificationFilter and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithMinificationFilter(minificationFilter obj.Object) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
 	return x
 }
 
 // The filter used when increasing the size of the content.
 //
-// WithMagnificationFilter sets the magnificationFilter property and returns the receiver for chaining.
-func (x *TiledLayer) WithMagnificationFilter(magnificationFilter *foundation.NSString) *TiledLayer {
-	x.inner.CALayer.SetMagnificationFilter(magnificationFilter)
+// WithMagnificationFilter sets magnificationFilter and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithMagnificationFilter(magnificationFilter obj.Object) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
 	return x
 }
 
 // The bias factor used by the minification filter to determine the levels of detail.
 //
-// WithMinificationFilterBias sets the minificationFilterBias property and returns the receiver for chaining.
+// WithMinificationFilterBias sets minificationFilterBias and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithMinificationFilterBias(minificationFilterBias float32) *TiledLayer {
-	x.inner.CALayer.SetMinificationFilterBias(minificationFilterBias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
 	return x
 }
 
 // A Boolean value indicating whether the layer contains completely opaque content.
 //
-// WithOpaque sets the opaque property and returns the receiver for chaining.
+// WithOpaque sets opaque and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithOpaque(opaque bool) *TiledLayer {
-	x.inner.CALayer.SetOpaque(opaque)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 	return x
 }
 
 // A Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
 //
-// WithNeedsDisplayOnBoundsChange sets the needsDisplayOnBoundsChange property and returns the receiver for chaining.
+// WithNeedsDisplayOnBoundsChange sets needsDisplayOnBoundsChange and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *TiledLayer {
-	x.inner.CALayer.SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
 	return x
 }
 
 // A Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
 //
-// WithDrawsAsynchronously sets the drawsAsynchronously property and returns the receiver for chaining.
+// WithDrawsAsynchronously sets drawsAsynchronously and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *TiledLayer {
-	x.inner.CALayer.SetDrawsAsynchronously(drawsAsynchronously)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
 	return x
 }
 
 // A bitmask defining how the edges of the receiver are rasterized.
 //
-// WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
-func (x *TiledLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *TiledLayer {
-	x.inner.CALayer.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
+// WithEdgeAntialiasingMask sets edgeAntialiasingMask and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
 	return x
 }
 
 // A Boolean indicating whether the layer is allowed to perform edge antialiasing.
 //
-// WithAllowsEdgeAntialiasing sets the allowsEdgeAntialiasing property and returns the receiver for chaining.
+// WithAllowsEdgeAntialiasing sets allowsEdgeAntialiasing and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *TiledLayer {
-	x.inner.CALayer.SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
+	return x
+}
+
+// The background color of the receiver. Animatable.
+//
+// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithBackgroundColor(backgroundColor obj.Object) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
 // The radius to use when drawing rounded corners for the layer’s background. Animatable.
 //
-// WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
+// WithCornerRadius sets cornerRadius and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithCornerRadius(cornerRadius float64) *TiledLayer {
-	x.inner.CALayer.SetCornerRadius(cornerRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 	return x
 }
 
-// WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
-func (x *TiledLayer) WithMaskedCorners(maskedCorners CACornerMask) *TiledLayer {
-	x.inner.CALayer.SetMaskedCorners(raw.CACornerMask(maskedCorners))
+// WithMaskedCorners sets maskedCorners and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithMaskedCorners(maskedCorners CornerMask) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskedCorners:"), maskedCorners)
 	return x
 }
 
-// WithCornerCurve sets the cornerCurve property and returns the receiver for chaining.
-func (x *TiledLayer) WithCornerCurve(cornerCurve *foundation.NSString) *TiledLayer {
-	x.inner.CALayer.SetCornerCurve(cornerCurve)
+// WithCornerCurve sets cornerCurve and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithCornerCurve(cornerCurve obj.Object) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return x
 }
 
 // The width of the layer’s border. Animatable.
 //
-// WithBorderWidth sets the borderWidth property and returns the receiver for chaining.
+// WithBorderWidth sets borderWidth and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithBorderWidth(borderWidth float64) *TiledLayer {
-	x.inner.CALayer.SetBorderWidth(borderWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderWidth:"), borderWidth)
+	return x
+}
+
+// The color of the layer’s border. Animatable.
+//
+// WithBorderColor sets borderColor and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithBorderColor(borderColor obj.Object) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 	return x
 }
 
 // The opacity of the receiver. Animatable.
 //
-// WithOpacity sets the opacity property and returns the receiver for chaining.
+// WithOpacity sets opacity and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithOpacity(opacity float32) *TiledLayer {
-	x.inner.CALayer.SetOpacity(opacity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpacity:"), opacity)
 	return x
 }
 
 // A Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
 //
-// WithAllowsGroupOpacity sets the allowsGroupOpacity property and returns the receiver for chaining.
+// WithAllowsGroupOpacity sets allowsGroupOpacity and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *TiledLayer {
-	x.inner.CALayer.SetAllowsGroupOpacity(allowsGroupOpacity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
 	return x
 }
 
 // A CoreImage filter used to composite the layer and the content behind it. Animatable.
 //
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *TiledLayer) WithCompositingFilter(compositingFilter objc.ID) *TiledLayer {
-	x.inner.CALayer.SetCompositingFilter(compositingFilter)
+// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithCompositingFilter(compositingFilter obj.Object) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
 // A Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
 //
-// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+// WithShouldRasterize sets shouldRasterize and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithShouldRasterize(shouldRasterize bool) *TiledLayer {
-	x.inner.CALayer.SetShouldRasterize(shouldRasterize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
 	return x
 }
 
 // The scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
 //
-// WithRasterizationScale sets the rasterizationScale property and returns the receiver for chaining.
+// WithRasterizationScale sets rasterizationScale and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithRasterizationScale(rasterizationScale float64) *TiledLayer {
-	x.inner.CALayer.SetRasterizationScale(rasterizationScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
+	return x
+}
+
+// The color of the layer’s shadow. Animatable.
+//
+// WithShadowColor sets shadowColor and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithShadowColor(shadowColor obj.Object) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 	return x
 }
 
 // The opacity of the layer’s shadow. Animatable.
 //
-// WithShadowOpacity sets the shadowOpacity property and returns the receiver for chaining.
+// WithShadowOpacity sets shadowOpacity and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithShadowOpacity(shadowOpacity float32) *TiledLayer {
-	x.inner.CALayer.SetShadowOpacity(shadowOpacity)
-	return x
-}
-
-// The offset (in points) of the layer’s shadow. Animatable.
-//
-// WithShadowOffset sets the shadowOffset property and returns the receiver for chaining.
-func (x *TiledLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *TiledLayer {
-	x.inner.CALayer.SetShadowOffset(shadowOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
 	return x
 }
 
 // The blur radius (in points) used to render the layer’s shadow. Animatable.
 //
-// WithShadowRadius sets the shadowRadius property and returns the receiver for chaining.
+// WithShadowRadius sets shadowRadius and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithShadowRadius(shadowRadius float64) *TiledLayer {
-	x.inner.CALayer.SetShadowRadius(shadowRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowRadius:"), shadowRadius)
+	return x
+}
+
+// The shape of the layer’s shadow. Animatable.
+//
+// WithShadowPath sets shadowPath and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithShadowPath(shadowPath obj.Object) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
 	return x
 }
 
 // A bitmask defining how the layer is resized when the bounds of its superlayer changes.
 //
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *TiledLayer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *TiledLayer {
-	x.inner.CALayer.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
-	return x
-}
-
-// The object responsible for laying out the layer’s sublayers.
-//
-// WithLayoutManager sets the layoutManager property and returns the receiver for chaining.
-func (x *TiledLayer) WithLayoutManager(layoutManager raw.CALayoutManager) *TiledLayer {
-	x.inner.CALayer.SetLayoutManager(layoutManager)
+// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
 // A dictionary containing layer actions.
 //
-// WithActions sets the actions property and returns the receiver for chaining.
-func (x *TiledLayer) WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *TiledLayer {
-	x.inner.CALayer.SetActions(actions)
+// WithActions sets actions and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithActions(actions obj.Object) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActions:"), objref.IDOf(actions))
 	return x
 }
 
 // The name of the receiver.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *TiledLayer) WithName(name string) *TiledLayer {
-	x.inner.CALayer.SetName(foundation.NSStringStringWithUTF8String(name))
-	return x
-}
-
-// The layer’s delegate object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *TiledLayer) WithDelegate(delegate raw.CALayerDelegate) *TiledLayer {
-	x.inner.CALayer.SetDelegate(delegate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // An optional dictionary used to store property values that aren’t explicitly defined by the layer.
 //
-// WithStyle sets the style property and returns the receiver for chaining.
-func (x *TiledLayer) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *TiledLayer {
-	x.inner.CALayer.SetStyle(style)
+// WithStyle sets style and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithStyle(style obj.Object) *TiledLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), objref.IDOf(style))
 	return x
 }
 
 // The constraints used to position current layer’s sublayers.
 //
-// WithConstraints sets the collection, converting the Go slice to an NSArray.
-func (x *TiledLayer) WithConstraints(items ...*raw.CAConstraint) *TiledLayer {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.CALayer.SetConstraints(foundation.NSArrayFromID[*raw.CAConstraint](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CAConstraint](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.CALayer.SetConstraints(_arr)
+// WithConstraints sets the collection and returns the receiver so calls can be chained.
+func (x *TiledLayer) WithConstraints(items ...*Constraint) *TiledLayer {
+	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
-// LevelsOfDetail calls the underlying LevelsOfDetail.
-func (x *TiledLayer) LevelsOfDetail() uint {
-	return x.inner.LevelsOfDetail()
+func (x *TiledLayer) LevelsOfDetail() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("levelsOfDetail"))
+	return _r
 }
 
-// SetLevelsOfDetail calls the underlying SetLevelsOfDetail.
-func (x *TiledLayer) SetLevelsOfDetail(levelsOfDetail uint) {
-	x.inner.SetLevelsOfDetail(levelsOfDetail)
+func (x *TiledLayer) SetLevelsOfDetail(levelsOfDetail int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetail:"), levelsOfDetail)
 }
 
-// LevelsOfDetailBias calls the underlying LevelsOfDetailBias.
-func (x *TiledLayer) LevelsOfDetailBias() uint {
-	return x.inner.LevelsOfDetailBias()
+func (x *TiledLayer) LevelsOfDetailBias() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("levelsOfDetailBias"))
+	return _r
 }
 
-// SetLevelsOfDetailBias calls the underlying SetLevelsOfDetailBias.
-func (x *TiledLayer) SetLevelsOfDetailBias(levelsOfDetailBias uint) {
-	x.inner.SetLevelsOfDetailBias(levelsOfDetailBias)
+func (x *TiledLayer) SetLevelsOfDetailBias(levelsOfDetailBias int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetailBias:"), levelsOfDetailBias)
 }
-
-// TileSize calls the underlying TileSize.
-func (x *TiledLayer) TileSize() corefoundation.CGSize {
-	return x.inner.TileSize()
-}
-
-// SetTileSize calls the underlying SetTileSize.
-func (x *TiledLayer) SetTileSize(tileSize corefoundation.CGSize) {
-	x.inner.SetTileSize(tileSize)
-}
-
-func (x *TiledLayer) asLayer() *raw.CALayer { return &x.inner.CALayer }
 
 // TiledLayerable is the interface implemented by [TiledLayer], for mocking and DI.
 type TiledLayerable interface {
-	Unwrap() *raw.CATiledLayer
-	WithLevelsOfDetail(levelsOfDetail uint) *TiledLayer
-	WithLevelsOfDetailBias(levelsOfDetailBias uint) *TiledLayer
-	WithTileSize(tileSize corefoundation.CGSize) *TiledLayer
-	WithBounds(bounds corefoundation.CGRect) *TiledLayer
-	WithPosition(position corefoundation.CGPoint) *TiledLayer
+	obj.Object
+	WithLevelsOfDetail(levelsOfDetail int) *TiledLayer
+	WithLevelsOfDetailBias(levelsOfDetailBias int) *TiledLayer
 	WithZPosition(zPosition float64) *TiledLayer
-	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *TiledLayer
 	WithAnchorPointZ(anchorPointZ float64) *TiledLayer
-	WithTransform(transform raw.CATransform3D) *TiledLayer
-	WithFrame(frame corefoundation.CGRect) *TiledLayer
 	WithHidden(hidden bool) *TiledLayer
 	WithDoubleSided(doubleSided bool) *TiledLayer
 	WithGeometryFlipped(geometryFlipped bool) *TiledLayer
 	WithSublayers(items ...LayerProvider) *TiledLayer
-	WithSublayerTransform(sublayerTransform raw.CATransform3D) *TiledLayer
 	WithMask(mask LayerProvider) *TiledLayer
 	WithMasksToBounds(masksToBounds bool) *TiledLayer
-	WithContents(contents objc.ID) *TiledLayer
-	WithContentsRect(contentsRect corefoundation.CGRect) *TiledLayer
-	WithContentsGravity(contentsGravity *foundation.NSString) *TiledLayer
+	WithContents(contents obj.Object) *TiledLayer
+	WithContentsGravity(contentsGravity obj.Object) *TiledLayer
 	WithContentsScale(contentsScale float64) *TiledLayer
-	WithContentsCenter(contentsCenter corefoundation.CGRect) *TiledLayer
-	WithContentsFormat(contentsFormat *foundation.NSString) *TiledLayer
+	WithContentsFormat(contentsFormat obj.Object) *TiledLayer
 	WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *TiledLayer
-	WithToneMapMode(toneMapMode *foundation.NSString) *TiledLayer
-	WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *TiledLayer
+	WithToneMapMode(toneMapMode obj.Object) *TiledLayer
+	WithPreferredDynamicRange(preferredDynamicRange obj.Object) *TiledLayer
 	WithContentsHeadroom(contentsHeadroom float64) *TiledLayer
-	WithMinificationFilter(minificationFilter *foundation.NSString) *TiledLayer
-	WithMagnificationFilter(magnificationFilter *foundation.NSString) *TiledLayer
+	WithMinificationFilter(minificationFilter obj.Object) *TiledLayer
+	WithMagnificationFilter(magnificationFilter obj.Object) *TiledLayer
 	WithMinificationFilterBias(minificationFilterBias float32) *TiledLayer
 	WithOpaque(opaque bool) *TiledLayer
 	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *TiledLayer
 	WithDrawsAsynchronously(drawsAsynchronously bool) *TiledLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *TiledLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *TiledLayer
 	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *TiledLayer
+	WithBackgroundColor(backgroundColor obj.Object) *TiledLayer
 	WithCornerRadius(cornerRadius float64) *TiledLayer
-	WithMaskedCorners(maskedCorners CACornerMask) *TiledLayer
-	WithCornerCurve(cornerCurve *foundation.NSString) *TiledLayer
+	WithMaskedCorners(maskedCorners CornerMask) *TiledLayer
+	WithCornerCurve(cornerCurve obj.Object) *TiledLayer
 	WithBorderWidth(borderWidth float64) *TiledLayer
+	WithBorderColor(borderColor obj.Object) *TiledLayer
 	WithOpacity(opacity float32) *TiledLayer
 	WithAllowsGroupOpacity(allowsGroupOpacity bool) *TiledLayer
-	WithCompositingFilter(compositingFilter objc.ID) *TiledLayer
+	WithCompositingFilter(compositingFilter obj.Object) *TiledLayer
 	WithShouldRasterize(shouldRasterize bool) *TiledLayer
 	WithRasterizationScale(rasterizationScale float64) *TiledLayer
+	WithShadowColor(shadowColor obj.Object) *TiledLayer
 	WithShadowOpacity(shadowOpacity float32) *TiledLayer
-	WithShadowOffset(shadowOffset corefoundation.CGSize) *TiledLayer
 	WithShadowRadius(shadowRadius float64) *TiledLayer
-	WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *TiledLayer
-	WithLayoutManager(layoutManager raw.CALayoutManager) *TiledLayer
-	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *TiledLayer
+	WithShadowPath(shadowPath obj.Object) *TiledLayer
+	WithAutoresizingMask(autoresizingMask AutoresizingMask) *TiledLayer
+	WithActions(actions obj.Object) *TiledLayer
 	WithName(name string) *TiledLayer
-	WithDelegate(delegate raw.CALayerDelegate) *TiledLayer
-	WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *TiledLayer
-	WithConstraints(items ...*raw.CAConstraint) *TiledLayer
-	LevelsOfDetail() uint
-	SetLevelsOfDetail(levelsOfDetail uint)
-	LevelsOfDetailBias() uint
-	SetLevelsOfDetailBias(levelsOfDetailBias uint)
-	TileSize() corefoundation.CGSize
-	SetTileSize(tileSize corefoundation.CGSize)
+	WithStyle(style obj.Object) *TiledLayer
+	WithConstraints(items ...*Constraint) *TiledLayer
+	LevelsOfDetail() int
+	SetLevelsOfDetail(levelsOfDetail int)
+	LevelsOfDetailBias() int
+	SetLevelsOfDetailBias(levelsOfDetailBias int)
 }
 
 var _ TiledLayerable = (*TiledLayer)(nil)

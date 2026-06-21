@@ -5,297 +5,284 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A node that’s defined in an archived .sks file.
 //
-// ReferenceNode wraps [raw.SKReferenceNode] with a fluent Go API.
+// ReferenceNode is an idiomatic wrapper over the Objective-C class SKReferenceNode.
 type ReferenceNode struct {
-	inner *raw.SKReferenceNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKReferenceNode].
-func (x *ReferenceNode) Unwrap() *raw.SKReferenceNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ReferenceNode) ID() objc.ID { return x.inner.Ptr() }
-
-// ReferenceNodeFromID adopts an existing object pointer as a ReferenceNode (nil for 0).
+// ReferenceNodeFromID adopts an existing Objective-C object as a ReferenceNode
+// (nil for 0), retaining it and registering a release finalizer.
 func ReferenceNodeFromID(id objc.ID) *ReferenceNode {
 	if id == 0 {
 		return nil
 	}
-	return &ReferenceNode{inner: raw.SKReferenceNodeFromID(id)}
+	x := &ReferenceNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// referenceNodeAdopt wraps an Objective-C object that this code just created as a
+// ReferenceNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func referenceNodeAdopt(id objc.ID) *ReferenceNode {
+	if id == 0 {
+		return nil
+	}
+	x := &ReferenceNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ReferenceNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ReferenceNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ReferenceNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a reference node from a URL.
 //
-// NewReferenceNodeWithURL creates a new [ReferenceNode].
+// NewReferenceNodeWithURL creates a new ReferenceNode.
 func NewReferenceNodeWithURL(url string) *ReferenceNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKReferenceNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr())
-	return &ReferenceNode{inner: raw.SKReferenceNodeFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKReferenceNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
+	return referenceNodeAdopt(_id)
 }
 
 // Initializes a reference node from a file in the app’s main bundle.
 //
-// NewReferenceNodeWithFileNamed creates a new [ReferenceNode].
+// NewReferenceNodeWithFileNamed creates a new ReferenceNode.
 func NewReferenceNodeWithFileNamed(fileName string) *ReferenceNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKReferenceNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileNamed:"), foundation.NSStringStringWithUTF8String(fileName).Ptr())
-	return &ReferenceNode{inner: raw.SKReferenceNodeFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKReferenceNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileNamed:"), purego.NSString(fileName))
+	return referenceNodeAdopt(_id)
 }
 
 // A method that initializes a reference node from an archive.
 //
-// NewReferenceNodeWithCoder creates a new [ReferenceNode].
-func NewReferenceNodeWithCoder(aDecoder *foundation.NSCoder) *ReferenceNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKReferenceNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), aDecoder.Ptr())
-	return &ReferenceNode{inner: raw.SKReferenceNodeFromID(_id)}
-}
-
-// The position of the node in its parent’s coordinate system.
-//
-// WithPosition sets the position property and returns the receiver for chaining.
-func (x *ReferenceNode) WithPosition(position corefoundation.CGPoint) *ReferenceNode {
-	x.inner.SKNode.SetPosition(position)
-	return x
+// NewReferenceNodeWithCoder creates a new ReferenceNode.
+func NewReferenceNodeWithCoder(aDecoder obj.Object) *ReferenceNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKReferenceNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
+	return referenceNodeAdopt(_id)
 }
 
 // The height of the node relative to its parent.
 //
-// WithZPosition sets the zPosition property and returns the receiver for chaining.
+// WithZPosition sets zPosition and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithZPosition(zPosition float64) *ReferenceNode {
-	x.inner.SKNode.SetZPosition(zPosition)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
 // The Euler rotation about the z axis (in radians).
 //
-// WithZRotation sets the zRotation property and returns the receiver for chaining.
+// WithZRotation sets zRotation and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithZRotation(zRotation float64) *ReferenceNode {
-	x.inner.SKNode.SetZRotation(zRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
 	return x
 }
 
 // A scaling factor that multiplies the width of a node and its children.
 //
-// WithXScale sets the xScale property and returns the receiver for chaining.
+// WithXScale sets xScale and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithXScale(xScale float64) *ReferenceNode {
-	x.inner.SKNode.SetXScale(xScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
 	return x
 }
 
 // A scaling factor that multiplies the height of a node and its children.
 //
-// WithYScale sets the yScale property and returns the receiver for chaining.
+// WithYScale sets yScale and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithYScale(yScale float64) *ReferenceNode {
-	x.inner.SKNode.SetYScale(yScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
 	return x
 }
 
 // A speed modifier applied to all actions executed by a node and its descendants.
 //
-// WithSpeed sets the speed property and returns the receiver for chaining.
+// WithSpeed sets speed and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithSpeed(speed float64) *ReferenceNode {
-	x.inner.SKNode.SetSpeed(speed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
 // The transparency value applied to the node’s contents.
 //
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha sets alpha and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithAlpha(alpha float64) *ReferenceNode {
-	x.inner.SKNode.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
 // A Boolean value that determines whether actions on the node and its descendants are processed.
 //
-// WithPaused sets the paused property and returns the receiver for chaining.
+// WithPaused sets paused and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithPaused(paused bool) *ReferenceNode {
-	x.inner.SKNode.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
 // A Boolean value that determines whether a node and its descendants are rendered.
 //
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithHidden(hidden bool) *ReferenceNode {
-	x.inner.SKNode.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
 // A Boolean value that indicates whether the node receives touch events.
 //
-// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+// WithUserInteractionEnabled sets userInteractionEnabled and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithUserInteractionEnabled(userInteractionEnabled bool) *ReferenceNode {
-	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
 	return x
 }
 
 // The node’s assignable name.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithName(name string) *ReferenceNode {
-	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // The physics body associated with the node.
 //
-// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+// WithPhysicsBody sets physicsBody and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
 // A dictionary containing arbitrary data.
 //
-// WithUserData sets the userData property and returns the receiver for chaining.
-func (x *ReferenceNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *ReferenceNode {
-	x.inner.SKNode.SetUserData(userData)
+// WithUserData sets userData and returns the receiver so calls can be chained.
+func (x *ReferenceNode) WithUserData(userData obj.Object) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	return x
 }
 
 // The reach constraints to apply to the node when executing a reach action.
 //
-// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+// WithReachConstraints sets reachConstraints and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithReachConstraints(reachConstraints *ReachConstraints) *ReferenceNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	return x
 }
 
 // A list of constraints to apply to the node.
 //
-// WithConstraints sets the collection, converting the Go slice to an NSArray.
-func (x *ReferenceNode) WithConstraints(items ...*raw.SKConstraint) *ReferenceNode {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SKNode.SetConstraints(foundation.NSArrayFromID[*raw.SKConstraint](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SKNode.SetConstraints(_arr)
+// WithConstraints sets the collection and returns the receiver so calls can be chained.
+func (x *ReferenceNode) WithConstraints(items ...*Constraint) *ReferenceNode {
+	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
 // The values of each attribute associated with the node’s attached shader.
 //
-// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
-func (x *ReferenceNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *ReferenceNode {
-	x.inner.SKNode.SetAttributeValues(attributeValues)
+// WithAttributeValues sets attributeValues and returns the receiver so calls can be chained.
+func (x *ReferenceNode) WithAttributeValues(attributeValues obj.Object) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
 	return x
 }
 
 // A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 //
-// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+// WithAccessibilityElement sets accessibilityElement and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithAccessibilityElement(accessibilityElement bool) *ReferenceNode {
-	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
 	return x
 }
 
 // A string value describing the user interface element type; for example, a button.
 //
-// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+// WithAccessibilityRole sets accessibilityRole and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithAccessibilityRole(accessibilityRole string) *ReferenceNode {
-	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
 	return x
 }
 
 // A string value describing the user interface element name and type; for example, the Buy button.
 //
-// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+// WithAccessibilityRoleDescription sets accessibilityRoleDescription and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *ReferenceNode {
-	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
 	return x
 }
 
 // A string that defines this user interface element’s subrole; for example, a full-screen button.
 //
-// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+// WithAccessibilitySubrole sets accessibilitySubrole and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithAccessibilitySubrole(accessibilitySubrole string) *ReferenceNode {
-	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
-	return x
-}
-
-// The size of this user interface element, in screen points.
-//
-// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
-func (x *ReferenceNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *ReferenceNode {
-	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
 	return x
 }
 
 // The user interface element that contains this element.
 //
-// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
-func (x *ReferenceNode) WithAccessibilityParent(accessibilityParent objc.ID) *ReferenceNode {
-	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+// WithAccessibilityParent sets accessibilityParent and returns the receiver so calls can be chained.
+func (x *ReferenceNode) WithAccessibilityParent(accessibilityParent obj.Object) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	return x
 }
 
 // The help description of this user interface element; for example, the text shown in a tooltip.
 //
-// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+// WithAccessibilityHelp sets accessibilityHelp and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithAccessibilityHelp(accessibilityHelp string) *ReferenceNode {
-	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
 	return x
 }
 
 // A short description of this user interface element.
 //
-// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+// WithAccessibilityLabel sets accessibilityLabel and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithAccessibilityLabel(accessibilityLabel string) *ReferenceNode {
-	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
 	return x
 }
 
 // A toggle you implement to indicate to the system whether this user interface element should respond to user input.
 //
-// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+// WithAccessibilityEnabled sets accessibilityEnabled and returns the receiver so calls can be chained.
 func (x *ReferenceNode) WithAccessibilityEnabled(accessibilityEnabled bool) *ReferenceNode {
-	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
 	return x
 }
 
 // A method called by SpriteKit after the reference node’s contents are loaded.
-//
-// DidLoadReferenceNode calls the underlying DidLoadReferenceNode.
-func (x *ReferenceNode) DidLoadReferenceNode(node *raw.SKNode) {
-	x.inner.DidLoadReferenceNode(node)
+func (x *ReferenceNode) DidLoadReferenceNode(node *Node) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didLoadReferenceNode:"), objref.IDOf(node))
 }
 
 // Loads the reference node’s content and adds it as a new child node.
-//
-// ResolveReferenceNode calls the underlying ResolveReferenceNode.
 func (x *ReferenceNode) ResolveReferenceNode() {
-	x.inner.ResolveReferenceNode()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolveReferenceNode"))
 }
-
-func (x *ReferenceNode) asNode() *raw.SKNode { return &x.inner.SKNode }
 
 // ReferenceNodeable is the interface implemented by [ReferenceNode], for mocking and DI.
 type ReferenceNodeable interface {
-	Unwrap() *raw.SKReferenceNode
-	WithPosition(position corefoundation.CGPoint) *ReferenceNode
+	obj.Object
 	WithZPosition(zPosition float64) *ReferenceNode
 	WithZRotation(zRotation float64) *ReferenceNode
 	WithXScale(xScale float64) *ReferenceNode
@@ -307,20 +294,19 @@ type ReferenceNodeable interface {
 	WithUserInteractionEnabled(userInteractionEnabled bool) *ReferenceNode
 	WithName(name string) *ReferenceNode
 	WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNode
-	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *ReferenceNode
+	WithUserData(userData obj.Object) *ReferenceNode
 	WithReachConstraints(reachConstraints *ReachConstraints) *ReferenceNode
-	WithConstraints(items ...*raw.SKConstraint) *ReferenceNode
-	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *ReferenceNode
+	WithConstraints(items ...*Constraint) *ReferenceNode
+	WithAttributeValues(attributeValues obj.Object) *ReferenceNode
 	WithAccessibilityElement(accessibilityElement bool) *ReferenceNode
 	WithAccessibilityRole(accessibilityRole string) *ReferenceNode
 	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *ReferenceNode
 	WithAccessibilitySubrole(accessibilitySubrole string) *ReferenceNode
-	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *ReferenceNode
-	WithAccessibilityParent(accessibilityParent objc.ID) *ReferenceNode
+	WithAccessibilityParent(accessibilityParent obj.Object) *ReferenceNode
 	WithAccessibilityHelp(accessibilityHelp string) *ReferenceNode
 	WithAccessibilityLabel(accessibilityLabel string) *ReferenceNode
 	WithAccessibilityEnabled(accessibilityEnabled bool) *ReferenceNode
-	DidLoadReferenceNode(node *raw.SKNode)
+	DidLoadReferenceNode(node *Node)
 	ResolveReferenceNode()
 }
 

@@ -5,112 +5,86 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A definition for a grid-based deformation of nodes that conform to SKWarpable.
 //
-// WarpGeometryGrid wraps [raw.SKWarpGeometryGrid] with a fluent Go API.
+// WarpGeometryGrid is an idiomatic wrapper over the Objective-C class SKWarpGeometryGrid.
 type WarpGeometryGrid struct {
-	inner *raw.SKWarpGeometryGrid
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKWarpGeometryGrid].
-func (x *WarpGeometryGrid) Unwrap() *raw.SKWarpGeometryGrid { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WarpGeometryGrid) ID() objc.ID { return x.inner.Ptr() }
-
-// WarpGeometryGridFromID adopts an existing object pointer as a WarpGeometryGrid (nil for 0).
+// WarpGeometryGridFromID adopts an existing Objective-C object as a WarpGeometryGrid
+// (nil for 0), retaining it and registering a release finalizer.
 func WarpGeometryGridFromID(id objc.ID) *WarpGeometryGrid {
 	if id == 0 {
 		return nil
 	}
-	return &WarpGeometryGrid{inner: raw.SKWarpGeometryGridFromID(id)}
+	x := &WarpGeometryGrid{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// warpGeometryGridAdopt wraps an Objective-C object that this code just created as a
+// WarpGeometryGrid (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func warpGeometryGridAdopt(id objc.ID) *WarpGeometryGrid {
+	if id == 0 {
+		return nil
+	}
+	x := &WarpGeometryGrid{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WarpGeometryGrid) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WarpGeometryGrid) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WarpGeometryGrid) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Tells you when to intialize a grid that was loaded from an archive.
 //
-// NewWarpGeometryGridWithCoder creates a new [WarpGeometryGrid].
-func NewWarpGeometryGridWithCoder(aDecoder *foundation.NSCoder) *WarpGeometryGrid {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKWarpGeometryGrid")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), aDecoder.Ptr())
-	return &WarpGeometryGrid{inner: raw.SKWarpGeometryGridFromID(_id)}
+// NewWarpGeometryGridWithCoder creates a new WarpGeometryGrid.
+func NewWarpGeometryGridWithCoder(aDecoder obj.Object) *WarpGeometryGrid {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKWarpGeometryGrid")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(aDecoder))
+	return warpGeometryGridAdopt(_id)
 }
 
-// Creates a warp geometry grid of a specific size and warp translation, in pointers to point arrays.
-//
-// NewWarpGeometryGridWithColumnsRowsSourcePositionsDestPositions creates a new [WarpGeometryGrid].
-func NewWarpGeometryGridWithColumnsRowsSourcePositionsDestPositions(cols int, rows int, sourcePositions unsafe.Pointer, destPositions unsafe.Pointer) *WarpGeometryGrid {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKWarpGeometryGrid")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithColumns:rows:sourcePositions:destPositions:"), cols, rows, sourcePositions, destPositions)
-	return &WarpGeometryGrid{inner: raw.SKWarpGeometryGridFromID(_id)}
-}
-
-// Returns the source position of a vertex.
-//
-// SourcePositionAtIndex calls the underlying SourcePositionAtIndex.
-func (x *WarpGeometryGrid) SourcePositionAtIndex(index int) unsafe.Pointer {
-	return x.inner.SourcePositionAtIndex(index)
-}
-
-// Returns the destination position of a vertex.
-//
-// DestPositionAtIndex calls the underlying DestPositionAtIndex.
-func (x *WarpGeometryGrid) DestPositionAtIndex(index int) unsafe.Pointer {
-	return x.inner.DestPositionAtIndex(index)
-}
-
-// Returns a copy of the receiver with the source positions replaced by a specified array.
-//
-// GridByReplacingSourcePositions calls the underlying GridByReplacingSourcePositions.
-func (x *WarpGeometryGrid) GridByReplacingSourcePositions(sourcePositions unsafe.Pointer) *WarpGeometryGrid {
-	_r := x.inner.GridByReplacingSourcePositions(sourcePositions)
-	if _r == nil {
-		return nil
-	}
-	return &WarpGeometryGrid{inner: _r}
-}
-
-// Returns a copy of the receiver with the destination positions replaced by a specified array.
-//
-// GridByReplacingDestPositions calls the underlying GridByReplacingDestPositions.
-func (x *WarpGeometryGrid) GridByReplacingDestPositions(destPositions unsafe.Pointer) *WarpGeometryGrid {
-	_r := x.inner.GridByReplacingDestPositions(destPositions)
-	if _r == nil {
-		return nil
-	}
-	return &WarpGeometryGrid{inner: _r}
-}
-
-// NumberOfColumns calls the underlying NumberOfColumns.
 func (x *WarpGeometryGrid) NumberOfColumns() int {
-	return x.inner.NumberOfColumns()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfColumns"))
+	return _r
 }
 
-// NumberOfRows calls the underlying NumberOfRows.
 func (x *WarpGeometryGrid) NumberOfRows() int {
-	return x.inner.NumberOfRows()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfRows"))
+	return _r
 }
 
-// VertexCount calls the underlying VertexCount.
 func (x *WarpGeometryGrid) VertexCount() int {
-	return x.inner.VertexCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexCount"))
+	return _r
 }
-
-func (x *WarpGeometryGrid) asWarpGeometry() *raw.SKWarpGeometry { return &x.inner.SKWarpGeometry }
 
 // WarpGeometryGridable is the interface implemented by [WarpGeometryGrid], for mocking and DI.
 type WarpGeometryGridable interface {
-	Unwrap() *raw.SKWarpGeometryGrid
-	SourcePositionAtIndex(index int) unsafe.Pointer
-	DestPositionAtIndex(index int) unsafe.Pointer
-	GridByReplacingSourcePositions(sourcePositions unsafe.Pointer) *WarpGeometryGrid
-	GridByReplacingDestPositions(destPositions unsafe.Pointer) *WarpGeometryGrid
+	obj.Object
 	NumberOfColumns() int
 	NumberOfRows() int
 	VertexCount() int

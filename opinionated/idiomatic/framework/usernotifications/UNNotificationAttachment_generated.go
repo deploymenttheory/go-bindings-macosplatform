@@ -5,68 +5,91 @@
 package usernotifications
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A media file associated with a notification.
 //
-// NotificationAttachment wraps [raw.UNNotificationAttachment] with a fluent Go API.
+// NotificationAttachment is an idiomatic wrapper over the Objective-C class UNNotificationAttachment.
 type NotificationAttachment struct {
-	inner *raw.UNNotificationAttachment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.UNNotificationAttachment].
-func (x *NotificationAttachment) Unwrap() *raw.UNNotificationAttachment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NotificationAttachment) ID() objc.ID { return x.inner.Ptr() }
-
-// NotificationAttachmentFromID adopts an existing object pointer as a NotificationAttachment (nil for 0).
+// NotificationAttachmentFromID adopts an existing Objective-C object as a NotificationAttachment
+// (nil for 0), retaining it and registering a release finalizer.
 func NotificationAttachmentFromID(id objc.ID) *NotificationAttachment {
 	if id == 0 {
 		return nil
 	}
-	return &NotificationAttachment{inner: raw.UNNotificationAttachmentFromID(id)}
+	x := &NotificationAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNotificationAttachment creates a new [NotificationAttachment].
+// notificationAttachmentAdopt wraps an Objective-C object that this code just created as a
+// NotificationAttachment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func notificationAttachmentAdopt(id objc.ID) *NotificationAttachment {
+	if id == 0 {
+		return nil
+	}
+	x := &NotificationAttachment{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NotificationAttachment) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NotificationAttachment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NotificationAttachment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNotificationAttachment creates a new NotificationAttachment.
 func NewNotificationAttachment() *NotificationAttachment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNNotificationAttachment")), objc.RegisterName("new"))
-	return &NotificationAttachment{inner: raw.UNNotificationAttachmentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("UNNotificationAttachment")), objc.RegisterName("new"))
+	return notificationAttachmentAdopt(_id)
 }
 
-// Identifier calls the underlying Identifier.
 func (x *NotificationAttachment) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// URL calls the underlying URL.
-func (x *NotificationAttachment) URL() *foundation.NSURL {
-	return x.inner.URL()
+func (x *NotificationAttachment) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
-// Type calls the underlying Type.
 func (x *NotificationAttachment) Type() string {
-	_r := x.inner.Type()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // NotificationAttachmentable is the interface implemented by [NotificationAttachment], for mocking and DI.
 type NotificationAttachmentable interface {
-	Unwrap() *raw.UNNotificationAttachment
+	obj.Object
 	Identifier() string
-	URL() *foundation.NSURL
+	URL() obj.Object
 	Type() string
 }
 

@@ -5,55 +5,75 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRTestClusterClusterTestListInt8UReverseResponseParams wraps [raw.MTRTestClusterClusterTestListInt8UReverseResponseParams] with a fluent Go API.
+// MTRTestClusterClusterTestListInt8UReverseResponseParams is an idiomatic wrapper over the Objective-C class MTRTestClusterClusterTestListInt8UReverseResponseParams.
 type MTRTestClusterClusterTestListInt8UReverseResponseParams struct {
-	inner *raw.MTRTestClusterClusterTestListInt8UReverseResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRTestClusterClusterTestListInt8UReverseResponseParams].
-func (x *MTRTestClusterClusterTestListInt8UReverseResponseParams) Unwrap() *raw.MTRTestClusterClusterTestListInt8UReverseResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTestClusterClusterTestListInt8UReverseResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRTestClusterClusterTestListInt8UReverseResponseParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTestListInt8UReverseResponseParams (nil for 0).
+// MTRTestClusterClusterTestListInt8UReverseResponseParamsFromID adopts an existing Objective-C object as a MTRTestClusterClusterTestListInt8UReverseResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRTestClusterClusterTestListInt8UReverseResponseParamsFromID(id objc.ID) *MTRTestClusterClusterTestListInt8UReverseResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRTestClusterClusterTestListInt8UReverseResponseParams{inner: raw.MTRTestClusterClusterTestListInt8UReverseResponseParamsFromID(id)}
+	x := &MTRTestClusterClusterTestListInt8UReverseResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRTestClusterClusterTestListInt8UReverseResponseParams creates a new [MTRTestClusterClusterTestListInt8UReverseResponseParams].
+// mTRTestClusterClusterTestListInt8UReverseResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRTestClusterClusterTestListInt8UReverseResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRTestClusterClusterTestListInt8UReverseResponseParamsAdopt(id objc.ID) *MTRTestClusterClusterTestListInt8UReverseResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRTestClusterClusterTestListInt8UReverseResponseParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRTestClusterClusterTestListInt8UReverseResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRTestClusterClusterTestListInt8UReverseResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRTestClusterClusterTestListInt8UReverseResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRTestClusterClusterTestListInt8UReverseResponseParams creates a new MTRTestClusterClusterTestListInt8UReverseResponseParams.
 func NewMTRTestClusterClusterTestListInt8UReverseResponseParams() *MTRTestClusterClusterTestListInt8UReverseResponseParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTestClusterClusterTestListInt8UReverseResponseParams")), objc.RegisterName("new"))
-	return &MTRTestClusterClusterTestListInt8UReverseResponseParams{inner: raw.MTRTestClusterClusterTestListInt8UReverseResponseParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRTestClusterClusterTestListInt8UReverseResponseParams")), objc.RegisterName("new"))
+	return mTRTestClusterClusterTestListInt8UReverseResponseParamsAdopt(_id)
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestListInt8UReverseResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestListInt8UReverseResponseParams {
-	x.inner.MTRUnitTestingClusterTestListInt8UReverseResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRTestClusterClusterTestListInt8UReverseResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestListInt8UReverseResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
-}
-
-func (x *MTRTestClusterClusterTestListInt8UReverseResponseParams) asMTRUnitTestingClusterTestListInt8UReverseResponseParams() *raw.MTRUnitTestingClusterTestListInt8UReverseResponseParams {
-	return &x.inner.MTRUnitTestingClusterTestListInt8UReverseResponseParams
 }
 
 // MTRTestClusterClusterTestListInt8UReverseResponseParamsable is the interface implemented by [MTRTestClusterClusterTestListInt8UReverseResponseParams], for mocking and DI.
 type MTRTestClusterClusterTestListInt8UReverseResponseParamsable interface {
-	Unwrap() *raw.MTRTestClusterClusterTestListInt8UReverseResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestListInt8UReverseResponseParams
+	obj.Object
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestListInt8UReverseResponseParams
 }
 
 var _ MTRTestClusterClusterTestListInt8UReverseResponseParamsable = (*MTRTestClusterClusterTestListInt8UReverseResponseParams)(nil)

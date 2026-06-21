@@ -5,47 +5,68 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A query that returns the underlying voltage measurements for an electrocardiogram sample.
 //
-// ElectrocardiogramQuery wraps [raw.HKElectrocardiogramQuery] with a fluent Go API.
+// ElectrocardiogramQuery is an idiomatic wrapper over the Objective-C class HKElectrocardiogramQuery.
 type ElectrocardiogramQuery struct {
-	inner *raw.HKElectrocardiogramQuery
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKElectrocardiogramQuery].
-func (x *ElectrocardiogramQuery) Unwrap() *raw.HKElectrocardiogramQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ElectrocardiogramQuery) ID() objc.ID { return x.inner.Ptr() }
-
-// ElectrocardiogramQueryFromID adopts an existing object pointer as a ElectrocardiogramQuery (nil for 0).
+// ElectrocardiogramQueryFromID adopts an existing Objective-C object as a ElectrocardiogramQuery
+// (nil for 0), retaining it and registering a release finalizer.
 func ElectrocardiogramQueryFromID(id objc.ID) *ElectrocardiogramQuery {
 	if id == 0 {
 		return nil
 	}
-	return &ElectrocardiogramQuery{inner: raw.HKElectrocardiogramQueryFromID(id)}
+	x := &ElectrocardiogramQuery{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a new electrocardiogram query object.
-//
-// NewElectrocardiogramQueryWithElectrocardiogramDataHandler creates a new [ElectrocardiogramQuery].
-func NewElectrocardiogramQueryWithElectrocardiogramDataHandler(electrocardiogram *raw.HKElectrocardiogram, dataHandler func(*raw.HKElectrocardiogramQuery, *raw.HKElectrocardiogramVoltageMeasurement, bool, unsafe.Pointer)) *ElectrocardiogramQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKElectrocardiogramQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElectrocardiogram:dataHandler:"), electrocardiogram.Ptr(), dataHandler)
-	return &ElectrocardiogramQuery{inner: raw.HKElectrocardiogramQueryFromID(_id)}
+// electrocardiogramQueryAdopt wraps an Objective-C object that this code just created as a
+// ElectrocardiogramQuery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func electrocardiogramQueryAdopt(id objc.ID) *ElectrocardiogramQuery {
+	if id == 0 {
+		return nil
+	}
+	x := &ElectrocardiogramQuery{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *ElectrocardiogramQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+// Description returns the object's -description text.
+func (x *ElectrocardiogramQuery) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ElectrocardiogramQuery) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ElectrocardiogramQuery) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewElectrocardiogramQuery creates a new ElectrocardiogramQuery.
+func NewElectrocardiogramQuery() *ElectrocardiogramQuery {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKElectrocardiogramQuery")), objc.RegisterName("new"))
+	return electrocardiogramQueryAdopt(_id)
+}
 
 // ElectrocardiogramQueryable is the interface implemented by [ElectrocardiogramQuery], for mocking and DI.
 type ElectrocardiogramQueryable interface {
-	Unwrap() *raw.HKElectrocardiogramQuery
+	obj.Object
 }
 
 var _ ElectrocardiogramQueryable = (*ElectrocardiogramQuery)(nil)

@@ -5,54 +5,77 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A metaparameter with a text definition that can change over time.
 //
-// StringMetaParameter wraps [raw.PHASEStringMetaParameter] with a fluent Go API.
+// StringMetaParameter is an idiomatic wrapper over the Objective-C class PHASEStringMetaParameter.
 type StringMetaParameter struct {
-	inner *raw.PHASEStringMetaParameter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEStringMetaParameter].
-func (x *StringMetaParameter) Unwrap() *raw.PHASEStringMetaParameter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StringMetaParameter) ID() objc.ID { return x.inner.Ptr() }
-
-// StringMetaParameterFromID adopts an existing object pointer as a StringMetaParameter (nil for 0).
+// StringMetaParameterFromID adopts an existing Objective-C object as a StringMetaParameter
+// (nil for 0), retaining it and registering a release finalizer.
 func StringMetaParameterFromID(id objc.ID) *StringMetaParameter {
 	if id == 0 {
 		return nil
 	}
-	return &StringMetaParameter{inner: raw.PHASEStringMetaParameterFromID(id)}
+	x := &StringMetaParameter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewStringMetaParameter creates a new [StringMetaParameter].
+// stringMetaParameterAdopt wraps an Objective-C object that this code just created as a
+// StringMetaParameter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func stringMetaParameterAdopt(id objc.ID) *StringMetaParameter {
+	if id == 0 {
+		return nil
+	}
+	x := &StringMetaParameter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *StringMetaParameter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StringMetaParameter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StringMetaParameter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewStringMetaParameter creates a new StringMetaParameter.
 func NewStringMetaParameter() *StringMetaParameter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEStringMetaParameter")), objc.RegisterName("new"))
-	return &StringMetaParameter{inner: raw.PHASEStringMetaParameterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHASEStringMetaParameter")), objc.RegisterName("new"))
+	return stringMetaParameterAdopt(_id)
 }
 
 // A value for the metaparameter.
 //
-// WithValue sets the value property and returns the receiver for chaining.
-func (x *StringMetaParameter) WithValue(value objc.ID) *StringMetaParameter {
-	x.inner.PHASEMetaParameter.SetValue(value)
+// WithValue sets value and returns the receiver so calls can be chained.
+func (x *StringMetaParameter) WithValue(value obj.Object) *StringMetaParameter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
-}
-
-func (x *StringMetaParameter) asMetaParameter() *raw.PHASEMetaParameter {
-	return &x.inner.PHASEMetaParameter
 }
 
 // StringMetaParameterable is the interface implemented by [StringMetaParameter], for mocking and DI.
 type StringMetaParameterable interface {
-	Unwrap() *raw.PHASEStringMetaParameter
-	WithValue(value objc.ID) *StringMetaParameter
+	obj.Object
+	WithValue(value obj.Object) *StringMetaParameter
 }
 
 var _ StringMetaParameterable = (*StringMetaParameter)(nil)

@@ -5,80 +5,96 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A notification that triggers when a record that matches the subscription’s predicate changes.
 //
-// QueryNotification wraps [raw.CKQueryNotification] with a fluent Go API.
+// QueryNotification is an idiomatic wrapper over the Objective-C class CKQueryNotification.
 type QueryNotification struct {
-	inner *raw.CKQueryNotification
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKQueryNotification].
-func (x *QueryNotification) Unwrap() *raw.CKQueryNotification { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QueryNotification) ID() objc.ID { return x.inner.Ptr() }
-
-// QueryNotificationFromID adopts an existing object pointer as a QueryNotification (nil for 0).
+// QueryNotificationFromID adopts an existing Objective-C object as a QueryNotification
+// (nil for 0), retaining it and registering a release finalizer.
 func QueryNotificationFromID(id objc.ID) *QueryNotification {
 	if id == 0 {
 		return nil
 	}
-	return &QueryNotification{inner: raw.CKQueryNotificationFromID(id)}
+	x := &QueryNotification{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewQueryNotification creates a new [QueryNotification].
+// queryNotificationAdopt wraps an Objective-C object that this code just created as a
+// QueryNotification (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func queryNotificationAdopt(id objc.ID) *QueryNotification {
+	if id == 0 {
+		return nil
+	}
+	x := &QueryNotification{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *QueryNotification) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QueryNotification) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QueryNotification) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewQueryNotification creates a new QueryNotification.
 func NewQueryNotification() *QueryNotification {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKQueryNotification")), objc.RegisterName("new"))
-	return &QueryNotification{inner: raw.CKQueryNotificationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKQueryNotification")), objc.RegisterName("new"))
+	return queryNotificationAdopt(_id)
 }
 
 // The event that triggers the push notification. Subscription notifications result from the creation, deletion, or updating of a single record. The record in question must match the subscription's predicate for an event to trigger.
-//
-// QueryNotificationReason calls the underlying QueryNotificationReason.
-func (x *QueryNotification) QueryNotificationReason() CKQueryNotificationReason {
-	return CKQueryNotificationReason(x.inner.QueryNotificationReason())
+func (x *QueryNotification) QueryNotificationReason() QueryNotificationReason {
+	_r := objc.Send[QueryNotificationReason](objref.IDOf(x), objc.RegisterName("queryNotificationReason"))
+	return _r
 }
 
 // A dictionary of fields that have changes. For record updates and creations, this property contains the subscription's desired keys. When you configure the notification info of a subscription, you specify the names of one or more fields in the “CKSubscription/NotificationInfo/desiredKeys“ property. When a push notification triggers, CloudKit retrieves the values for each of those keys from the record and includes them in the notification's payload. For query notifications that you fetch from a container, all keys and values are present. For query notifications that you create from push notifications, one or more keys and values may be missing. Push notification payloads have a size limit, and CloudKit can exclude record fields when a payload exceeds that limit. For information about the order, see the overview of this class.
-//
-// RecordFields calls the underlying RecordFields.
-func (x *QueryNotification) RecordFields() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.RecordFields()
+func (x *QueryNotification) RecordFields() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordFields"))
+	return obj.Wrap(_r)
 }
 
 // The ID of the record that CloudKit creates, updates, or deletes. Use this value to fetch the record.
-//
-// RecordID calls the underlying RecordID.
 func (x *QueryNotification) RecordID() *RecordID {
-	_r := x.inner.RecordID()
-	if _r == nil {
-		return nil
-	}
-	return &RecordID{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordID"))
+	return RecordIDFromID(_r)
 }
 
 // The type of database for the record zone. This property's value is one of the constants that “CKDatabase/Scope“ defines.
-//
-// DatabaseScope calls the underlying DatabaseScope.
-func (x *QueryNotification) DatabaseScope() CKDatabaseScope {
-	return CKDatabaseScope(x.inner.DatabaseScope())
+func (x *QueryNotification) DatabaseScope() DatabaseScope {
+	_r := objc.Send[DatabaseScope](objref.IDOf(x), objc.RegisterName("databaseScope"))
+	return _r
 }
-
-func (x *QueryNotification) asNotification() *raw.CKNotification { return &x.inner.CKNotification }
 
 // QueryNotificationable is the interface implemented by [QueryNotification], for mocking and DI.
 type QueryNotificationable interface {
-	Unwrap() *raw.CKQueryNotification
-	QueryNotificationReason() CKQueryNotificationReason
-	RecordFields() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	QueryNotificationReason() QueryNotificationReason
+	RecordFields() obj.Object
 	RecordID() *RecordID
-	DatabaseScope() CKDatabaseScope
+	DatabaseScope() DatabaseScope
 }
 
 var _ QueryNotificationable = (*QueryNotification)(nil)

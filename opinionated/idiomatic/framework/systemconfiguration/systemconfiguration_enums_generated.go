@@ -6,7 +6,6 @@ package systemconfiguration
 
 import (
 	"fmt"
-	"strings"
 )
 
 // The current status of the network connection.
@@ -40,59 +39,4 @@ func (e SCNetworkConnectionStatus) String() string {
 	default:
 		return fmt.Sprintf("SCNetworkConnectionStatus(%d)", int64(e))
 	}
-}
-
-// Flags that indicate the reachability of a network node name or address, including whether a connection is required, and whether some user intervention might be required when establishing a connection.
-// Bitmask — values may be combined with |.
-type SCNetworkReachabilityFlags int64
-
-const (
-	// The specified node name or address can be reached via a transient connection, such as PPP.
-	KSCNetworkReachabilityFlagsTransientConnection SCNetworkReachabilityFlags = 1
-	// The specified node name or address can be reached using the current network configuration.
-	KSCNetworkReachabilityFlagsReachable SCNetworkReachabilityFlags = 2
-	// The specified node name or address can be reached using the current network configuration, but a connection must first be established. If this flag is set, the kSCNetworkReachabilityFlagsConnectionOnTraffic flag, kSCNetworkReachabilityFlagsConnectionOnDemand flag, or kSCNetworkReachabilityFlagsIsWWAN flag is also typically set to indicate the type of connection required. If the user must manually make the connection, the kSCNetworkReachabilityFlagsInterventionRequired flag is also set.
-	KSCNetworkReachabilityFlagsConnectionRequired SCNetworkReachabilityFlags = 4
-	// The specified node name or address can be reached using the current network configuration, but a connection must first be established. Any traffic directed to the specified name or address will initiate the connection.
-	KSCNetworkReachabilityFlagsConnectionOnTraffic SCNetworkReachabilityFlags = 8
-	// The specified node name or address can be reached using the current network configuration, but a connection must first be established.
-	KSCNetworkReachabilityFlagsInterventionRequired SCNetworkReachabilityFlags = 16
-	// The specified node name or address can be reached using the current network configuration, but a connection must first be established.
-	KSCNetworkReachabilityFlagsConnectionOnDemand SCNetworkReachabilityFlags = 32
-	// The specified node name or address is one that is associated with a network interface on the current system.
-	KSCNetworkReachabilityFlagsIsLocalAddress SCNetworkReachabilityFlags = 65536
-	// Network traffic to the specified node name or address will not go through a gateway, but is routed directly to one of the interfaces in the system.
-	KSCNetworkReachabilityFlagsIsDirect SCNetworkReachabilityFlags = 131072
-)
-
-func (e SCNetworkReachabilityFlags) String() string {
-	var parts []string
-	if e&KSCNetworkReachabilityFlagsTransientConnection != 0 {
-		parts = append(parts, "KSCNetworkReachabilityFlagsTransientConnection")
-	}
-	if e&KSCNetworkReachabilityFlagsReachable != 0 {
-		parts = append(parts, "KSCNetworkReachabilityFlagsReachable")
-	}
-	if e&KSCNetworkReachabilityFlagsConnectionRequired != 0 {
-		parts = append(parts, "KSCNetworkReachabilityFlagsConnectionRequired")
-	}
-	if e&KSCNetworkReachabilityFlagsConnectionOnTraffic != 0 {
-		parts = append(parts, "KSCNetworkReachabilityFlagsConnectionOnTraffic")
-	}
-	if e&KSCNetworkReachabilityFlagsInterventionRequired != 0 {
-		parts = append(parts, "KSCNetworkReachabilityFlagsInterventionRequired")
-	}
-	if e&KSCNetworkReachabilityFlagsConnectionOnDemand != 0 {
-		parts = append(parts, "KSCNetworkReachabilityFlagsConnectionOnDemand")
-	}
-	if e&KSCNetworkReachabilityFlagsIsLocalAddress != 0 {
-		parts = append(parts, "KSCNetworkReachabilityFlagsIsLocalAddress")
-	}
-	if e&KSCNetworkReachabilityFlagsIsDirect != 0 {
-		parts = append(parts, "KSCNetworkReachabilityFlagsIsDirect")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }

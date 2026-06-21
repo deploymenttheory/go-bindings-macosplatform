@@ -5,20 +5,11 @@
 package coreaudiokit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiokit"
+	"github.com/ebitengine/purego/objc"
 )
 
-// AUPannerViewWithAudioUnit calls the underlying AUPannerViewAUPannerViewWithAudioUnit.
-func AUPannerViewWithAudioUnit(au *carboncore.ComponentInstanceRecord) *AUPannerView {
-	_r := raw.AUPannerViewAUPannerViewWithAudioUnit(au)
-	if _r == nil {
-		return nil
-	}
-	return &AUPannerView{inner: _r}
-}
-
-// IsAVBSupported calls the underlying CANetworkBrowserWindowControllerIsAVBSupported.
+// Returns a Boolean value that indicates whether the current machine hardware supports Audio Video Bridging (AVB).
 func IsAVBSupported() bool {
-	return raw.CANetworkBrowserWindowControllerIsAVBSupported()
+	_r := objc.Send[bool](objc.ID(_class("CANetworkBrowserWindowController")), objc.RegisterName("isAVBSupported"))
+	return _r
 }

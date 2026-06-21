@@ -5,70 +5,89 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The decoded representation of a GeoJSON feature.
 //
-// GeoJSONFeature wraps [raw.MKGeoJSONFeature] with a fluent Go API.
+// GeoJSONFeature is an idiomatic wrapper over the Objective-C class MKGeoJSONFeature.
 type GeoJSONFeature struct {
-	inner *raw.MKGeoJSONFeature
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKGeoJSONFeature].
-func (x *GeoJSONFeature) Unwrap() *raw.MKGeoJSONFeature { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GeoJSONFeature) ID() objc.ID { return x.inner.Ptr() }
-
-// GeoJSONFeatureFromID adopts an existing object pointer as a GeoJSONFeature (nil for 0).
+// GeoJSONFeatureFromID adopts an existing Objective-C object as a GeoJSONFeature
+// (nil for 0), retaining it and registering a release finalizer.
 func GeoJSONFeatureFromID(id objc.ID) *GeoJSONFeature {
 	if id == 0 {
 		return nil
 	}
-	return &GeoJSONFeature{inner: raw.MKGeoJSONFeatureFromID(id)}
+	x := &GeoJSONFeature{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGeoJSONFeature creates a new [GeoJSONFeature].
+// geoJSONFeatureAdopt wraps an Objective-C object that this code just created as a
+// GeoJSONFeature (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func geoJSONFeatureAdopt(id objc.ID) *GeoJSONFeature {
+	if id == 0 {
+		return nil
+	}
+	x := &GeoJSONFeature{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GeoJSONFeature) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GeoJSONFeature) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GeoJSONFeature) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGeoJSONFeature creates a new GeoJSONFeature.
 func NewGeoJSONFeature() *GeoJSONFeature {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKGeoJSONFeature")), objc.RegisterName("new"))
-	return &GeoJSONFeature{inner: raw.MKGeoJSONFeatureFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKGeoJSONFeature")), objc.RegisterName("new"))
+	return geoJSONFeatureAdopt(_id)
 }
 
-// Identifier calls the underlying Identifier.
 func (x *GeoJSONFeature) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Properties calls the underlying Properties.
-func (x *GeoJSONFeature) Properties() *foundation.NSData {
-	return x.inner.Properties()
+func (x *GeoJSONFeature) Properties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("properties"))
+	return obj.Wrap(_r)
 }
 
 // Geometry returns the collection as a Go slice.
 func (x *GeoJSONFeature) Geometry() []*Shape {
-	arr := x.inner.Geometry()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Shape {
-		return &Shape{inner: raw.MKShapeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("geometry"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Shape { return ShapeFromID(_id) })
 }
 
 // GeoJSONFeatureable is the interface implemented by [GeoJSONFeature], for mocking and DI.
 type GeoJSONFeatureable interface {
-	Unwrap() *raw.MKGeoJSONFeature
+	obj.Object
 	Identifier() string
-	Properties() *foundation.NSData
+	Properties() obj.Object
 	Geometry() []*Shape
 }
 

@@ -5,200 +5,214 @@
 package pdfkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents appearance characteristics of a widget annotation.
 //
-// AppearanceCharacteristics wraps [raw.PDFAppearanceCharacteristics] with a fluent Go API.
+// AppearanceCharacteristics is an idiomatic wrapper over the Objective-C class PDFAppearanceCharacteristics.
 type AppearanceCharacteristics struct {
-	inner *raw.PDFAppearanceCharacteristics
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PDFAppearanceCharacteristics].
-func (x *AppearanceCharacteristics) Unwrap() *raw.PDFAppearanceCharacteristics { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AppearanceCharacteristics) ID() objc.ID { return x.inner.Ptr() }
-
-// AppearanceCharacteristicsFromID adopts an existing object pointer as a AppearanceCharacteristics (nil for 0).
+// AppearanceCharacteristicsFromID adopts an existing Objective-C object as a AppearanceCharacteristics
+// (nil for 0), retaining it and registering a release finalizer.
 func AppearanceCharacteristicsFromID(id objc.ID) *AppearanceCharacteristics {
 	if id == 0 {
 		return nil
 	}
-	return &AppearanceCharacteristics{inner: raw.PDFAppearanceCharacteristicsFromID(id)}
+	x := &AppearanceCharacteristics{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAppearanceCharacteristics creates a new [AppearanceCharacteristics].
+// appearanceCharacteristicsAdopt wraps an Objective-C object that this code just created as a
+// AppearanceCharacteristics (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func appearanceCharacteristicsAdopt(id objc.ID) *AppearanceCharacteristics {
+	if id == 0 {
+		return nil
+	}
+	x := &AppearanceCharacteristics{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AppearanceCharacteristics) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AppearanceCharacteristics) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AppearanceCharacteristics) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAppearanceCharacteristics creates a new AppearanceCharacteristics.
 func NewAppearanceCharacteristics() *AppearanceCharacteristics {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFAppearanceCharacteristics")), objc.RegisterName("new"))
-	return &AppearanceCharacteristics{inner: raw.PDFAppearanceCharacteristicsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PDFAppearanceCharacteristics")), objc.RegisterName("new"))
+	return appearanceCharacteristicsAdopt(_id)
 }
 
 // The type of button widget annotation.
 //
-// WithControlType sets the controlType property and returns the receiver for chaining.
-func (x *AppearanceCharacteristics) WithControlType(controlType PDFWidgetControlType) *AppearanceCharacteristics {
-	x.inner.SetControlType(raw.PDFWidgetControlType(controlType))
+// WithControlType sets controlType and returns the receiver so calls can be chained.
+func (x *AppearanceCharacteristics) WithControlType(controlType WidgetControlType) *AppearanceCharacteristics {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlType:"), controlType)
 	return x
 }
 
 // The background color of the widget annotation.
 //
-// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *AppearanceCharacteristics) WithBackgroundColor(backgroundColor *appkit.NSColor) *AppearanceCharacteristics {
-	x.inner.SetBackgroundColor(backgroundColor)
+// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+func (x *AppearanceCharacteristics) WithBackgroundColor(backgroundColor obj.Object) *AppearanceCharacteristics {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
 // The border color of the widget annotation.
 //
-// WithBorderColor sets the borderColor property and returns the receiver for chaining.
-func (x *AppearanceCharacteristics) WithBorderColor(borderColor *appkit.NSColor) *AppearanceCharacteristics {
-	x.inner.SetBorderColor(borderColor)
+// WithBorderColor sets borderColor and returns the receiver so calls can be chained.
+func (x *AppearanceCharacteristics) WithBorderColor(borderColor obj.Object) *AppearanceCharacteristics {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 	return x
 }
 
 // The number of degrees, in multiples of 90, that the widget annotation rotates counterclockwise relative to the page.
 //
-// WithRotation sets the rotation property and returns the receiver for chaining.
+// WithRotation sets rotation and returns the receiver so calls can be chained.
 func (x *AppearanceCharacteristics) WithRotation(rotation int) *AppearanceCharacteristics {
-	x.inner.SetRotation(rotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotation:"), rotation)
 	return x
 }
 
 // The text that the button widget annotation displays when the user isn’t interacting with it.
 //
-// WithCaption sets the caption property and returns the receiver for chaining.
+// WithCaption sets caption and returns the receiver so calls can be chained.
 func (x *AppearanceCharacteristics) WithCaption(caption string) *AppearanceCharacteristics {
-	x.inner.SetCaption(foundation.NSStringStringWithUTF8String(caption))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaption:"), purego.NSString(caption))
 	return x
 }
 
 // The text that the widget annotation displays when the user hovers the pointer over it.
 //
-// WithRolloverCaption sets the rolloverCaption property and returns the receiver for chaining.
+// WithRolloverCaption sets rolloverCaption and returns the receiver so calls can be chained.
 func (x *AppearanceCharacteristics) WithRolloverCaption(rolloverCaption string) *AppearanceCharacteristics {
-	x.inner.SetRolloverCaption(foundation.NSStringStringWithUTF8String(rolloverCaption))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRolloverCaption:"), purego.NSString(rolloverCaption))
 	return x
 }
 
 // The text that the button widget annotation displays when the user holds down on it.
 //
-// WithDownCaption sets the downCaption property and returns the receiver for chaining.
+// WithDownCaption sets downCaption and returns the receiver so calls can be chained.
 func (x *AppearanceCharacteristics) WithDownCaption(downCaption string) *AppearanceCharacteristics {
-	x.inner.SetDownCaption(foundation.NSStringStringWithUTF8String(downCaption))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownCaption:"), purego.NSString(downCaption))
 	return x
 }
 
-// ControlType calls the underlying ControlType.
-func (x *AppearanceCharacteristics) ControlType() PDFWidgetControlType {
-	return PDFWidgetControlType(x.inner.ControlType())
+func (x *AppearanceCharacteristics) ControlType() WidgetControlType {
+	_r := objc.Send[WidgetControlType](objref.IDOf(x), objc.RegisterName("controlType"))
+	return _r
 }
 
-// SetControlType calls the underlying SetControlType.
-func (x *AppearanceCharacteristics) SetControlType(controlType PDFWidgetControlType) {
-	x.inner.SetControlType(raw.PDFWidgetControlType(controlType))
+func (x *AppearanceCharacteristics) SetControlType(controlType WidgetControlType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlType:"), controlType)
 }
 
-// BackgroundColor calls the underlying BackgroundColor.
-func (x *AppearanceCharacteristics) BackgroundColor() *appkit.NSColor {
-	return x.inner.BackgroundColor()
+func (x *AppearanceCharacteristics) BackgroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+	return obj.Wrap(_r)
 }
 
-// SetBackgroundColor calls the underlying SetBackgroundColor.
-func (x *AppearanceCharacteristics) SetBackgroundColor(backgroundColor *appkit.NSColor) {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *AppearanceCharacteristics) SetBackgroundColor(backgroundColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
-// BorderColor calls the underlying BorderColor.
-func (x *AppearanceCharacteristics) BorderColor() *appkit.NSColor {
-	return x.inner.BorderColor()
+func (x *AppearanceCharacteristics) BorderColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderColor"))
+	return obj.Wrap(_r)
 }
 
-// SetBorderColor calls the underlying SetBorderColor.
-func (x *AppearanceCharacteristics) SetBorderColor(borderColor *appkit.NSColor) {
-	x.inner.SetBorderColor(borderColor)
+func (x *AppearanceCharacteristics) SetBorderColor(borderColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 }
 
-// Rotation calls the underlying Rotation.
 func (x *AppearanceCharacteristics) Rotation() int {
-	return x.inner.Rotation()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rotation"))
+	return _r
 }
 
-// SetRotation calls the underlying SetRotation.
 func (x *AppearanceCharacteristics) SetRotation(rotation int) {
-	x.inner.SetRotation(rotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotation:"), rotation)
 }
 
-// Caption calls the underlying Caption.
 func (x *AppearanceCharacteristics) Caption() string {
-	_r := x.inner.Caption()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("caption"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCaption calls the underlying SetCaption.
 func (x *AppearanceCharacteristics) SetCaption(caption string) {
-	x.inner.SetCaption(foundation.NSStringStringWithUTF8String(caption))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaption:"), purego.NSString(caption))
 }
 
-// RolloverCaption calls the underlying RolloverCaption.
 func (x *AppearanceCharacteristics) RolloverCaption() string {
-	_r := x.inner.RolloverCaption()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rolloverCaption"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetRolloverCaption calls the underlying SetRolloverCaption.
 func (x *AppearanceCharacteristics) SetRolloverCaption(rolloverCaption string) {
-	x.inner.SetRolloverCaption(foundation.NSStringStringWithUTF8String(rolloverCaption))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRolloverCaption:"), purego.NSString(rolloverCaption))
 }
 
-// DownCaption calls the underlying DownCaption.
 func (x *AppearanceCharacteristics) DownCaption() string {
-	_r := x.inner.DownCaption()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downCaption"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetDownCaption calls the underlying SetDownCaption.
 func (x *AppearanceCharacteristics) SetDownCaption(downCaption string) {
-	x.inner.SetDownCaption(foundation.NSStringStringWithUTF8String(downCaption))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownCaption:"), purego.NSString(downCaption))
 }
 
-// AppearanceCharacteristicsKeyValues calls the underlying AppearanceCharacteristicsKeyValues.
-func (x *AppearanceCharacteristics) AppearanceCharacteristicsKeyValues() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.AppearanceCharacteristicsKeyValues()
+func (x *AppearanceCharacteristics) AppearanceCharacteristicsKeyValues() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appearanceCharacteristicsKeyValues"))
+	return obj.Wrap(_r)
 }
 
 // AppearanceCharacteristicsable is the interface implemented by [AppearanceCharacteristics], for mocking and DI.
 type AppearanceCharacteristicsable interface {
-	Unwrap() *raw.PDFAppearanceCharacteristics
-	WithControlType(controlType PDFWidgetControlType) *AppearanceCharacteristics
-	WithBackgroundColor(backgroundColor *appkit.NSColor) *AppearanceCharacteristics
-	WithBorderColor(borderColor *appkit.NSColor) *AppearanceCharacteristics
+	obj.Object
+	WithControlType(controlType WidgetControlType) *AppearanceCharacteristics
+	WithBackgroundColor(backgroundColor obj.Object) *AppearanceCharacteristics
+	WithBorderColor(borderColor obj.Object) *AppearanceCharacteristics
 	WithRotation(rotation int) *AppearanceCharacteristics
 	WithCaption(caption string) *AppearanceCharacteristics
 	WithRolloverCaption(rolloverCaption string) *AppearanceCharacteristics
 	WithDownCaption(downCaption string) *AppearanceCharacteristics
-	ControlType() PDFWidgetControlType
-	SetControlType(controlType PDFWidgetControlType)
-	BackgroundColor() *appkit.NSColor
-	SetBackgroundColor(backgroundColor *appkit.NSColor)
-	BorderColor() *appkit.NSColor
-	SetBorderColor(borderColor *appkit.NSColor)
+	ControlType() WidgetControlType
+	SetControlType(controlType WidgetControlType)
+	BackgroundColor() obj.Object
+	SetBackgroundColor(backgroundColor obj.Object)
+	BorderColor() obj.Object
+	SetBorderColor(borderColor obj.Object)
 	Rotation() int
 	SetRotation(rotation int)
 	Caption() string
@@ -207,7 +221,7 @@ type AppearanceCharacteristicsable interface {
 	SetRolloverCaption(rolloverCaption string)
 	DownCaption() string
 	SetDownCaption(downCaption string)
-	AppearanceCharacteristicsKeyValues() *foundation.NSDictionary[objc.ID, objc.ID]
+	AppearanceCharacteristicsKeyValues() obj.Object
 }
 
 var _ AppearanceCharacteristicsable = (*AppearanceCharacteristics)(nil)

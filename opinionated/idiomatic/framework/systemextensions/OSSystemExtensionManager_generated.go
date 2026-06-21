@@ -5,49 +5,74 @@
 package systemextensions
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/systemextensions"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A type that facilitates activation and deactivation of system extensions.
 //
-// SystemExtensionManager wraps [raw.OSSystemExtensionManager] with a fluent Go API.
+// SystemExtensionManager is an idiomatic wrapper over the Objective-C class OSSystemExtensionManager.
 type SystemExtensionManager struct {
-	inner *raw.OSSystemExtensionManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.OSSystemExtensionManager].
-func (x *SystemExtensionManager) Unwrap() *raw.OSSystemExtensionManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SystemExtensionManager) ID() objc.ID { return x.inner.Ptr() }
-
-// SystemExtensionManagerFromID adopts an existing object pointer as a SystemExtensionManager (nil for 0).
+// SystemExtensionManagerFromID adopts an existing Objective-C object as a SystemExtensionManager
+// (nil for 0), retaining it and registering a release finalizer.
 func SystemExtensionManagerFromID(id objc.ID) *SystemExtensionManager {
 	if id == 0 {
 		return nil
 	}
-	return &SystemExtensionManager{inner: raw.OSSystemExtensionManagerFromID(id)}
+	x := &SystemExtensionManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSystemExtensionManager creates a new [SystemExtensionManager].
+// systemExtensionManagerAdopt wraps an Objective-C object that this code just created as a
+// SystemExtensionManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func systemExtensionManagerAdopt(id objc.ID) *SystemExtensionManager {
+	if id == 0 {
+		return nil
+	}
+	x := &SystemExtensionManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SystemExtensionManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SystemExtensionManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SystemExtensionManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSystemExtensionManager creates a new SystemExtensionManager.
 func NewSystemExtensionManager() *SystemExtensionManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSSystemExtensionManager")), objc.RegisterName("new"))
-	return &SystemExtensionManager{inner: raw.OSSystemExtensionManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionManager")), objc.RegisterName("new"))
+	return systemExtensionManagerAdopt(_id)
 }
 
 // Submits a system extension request to the manager.
-//
-// SubmitRequest calls the underlying SubmitRequest.
-func (x *SystemExtensionManager) SubmitRequest(request *raw.OSSystemExtensionRequest) {
-	x.inner.SubmitRequest(request)
+func (x *SystemExtensionManager) SubmitRequest(request *SystemExtensionRequest) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("submitRequest:"), objref.IDOf(request))
 }
 
 // SystemExtensionManagerable is the interface implemented by [SystemExtensionManager], for mocking and DI.
 type SystemExtensionManagerable interface {
-	Unwrap() *raw.OSSystemExtensionManager
-	SubmitRequest(request *raw.OSSystemExtensionRequest)
+	obj.Object
+	SubmitRequest(request *SystemExtensionRequest)
 }
 
 var _ SystemExtensionManagerable = (*SystemExtensionManager)(nil)

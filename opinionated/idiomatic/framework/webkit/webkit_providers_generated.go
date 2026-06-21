@@ -5,80 +5,80 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// DOMBlobProvider is implemented by DOMBlob and any idiomatic type wrapping a DOMBlob subclass.
+// DOMBlobProvider is accepted wherever a DOMBlob (or one of its subclasses) is expected.
 type DOMBlobProvider interface {
-	asDOMBlob() *raw.DOMBlob
+	objref.Object
 }
 
-// DOMCSSRuleProvider is implemented by DOMCSSRule and any idiomatic type wrapping a DOMCSSRule subclass.
+// DOMCSSRuleProvider is accepted wherever a DOMCSSRule (or one of its subclasses) is expected.
 type DOMCSSRuleProvider interface {
-	asDOMCSSRule() *raw.DOMCSSRule
+	objref.Object
 }
 
-// DOMCSSValueProvider is implemented by DOMCSSValue and any idiomatic type wrapping a DOMCSSValue subclass.
+// DOMCSSValueProvider is accepted wherever a DOMCSSValue (or one of its subclasses) is expected.
 type DOMCSSValueProvider interface {
-	asDOMCSSValue() *raw.DOMCSSValue
+	objref.Object
 }
 
-// DOMCharacterDataProvider is implemented by DOMCharacterData and any idiomatic type wrapping a DOMCharacterData subclass.
+// DOMCharacterDataProvider is accepted wherever a DOMCharacterData (or one of its subclasses) is expected.
 type DOMCharacterDataProvider interface {
-	asDOMCharacterData() *raw.DOMCharacterData
+	objref.Object
 }
 
-// DOMDocumentProvider is implemented by DOMDocument and any idiomatic type wrapping a DOMDocument subclass.
+// DOMDocumentProvider is accepted wherever a DOMDocument (or one of its subclasses) is expected.
 type DOMDocumentProvider interface {
-	asDOMDocument() *raw.DOMDocument
+	objref.Object
 }
 
-// DOMElementProvider is implemented by DOMElement and any idiomatic type wrapping a DOMElement subclass.
+// DOMElementProvider is accepted wherever a DOMElement (or one of its subclasses) is expected.
 type DOMElementProvider interface {
-	asDOMElement() *raw.DOMElement
+	objref.Object
 }
 
-// DOMEventProvider is implemented by DOMEvent and any idiomatic type wrapping a DOMEvent subclass.
+// DOMEventProvider is accepted wherever a DOMEvent (or one of its subclasses) is expected.
 type DOMEventProvider interface {
-	asDOMEvent() *raw.DOMEvent
+	objref.Object
 }
 
-// DOMHTMLElementProvider is implemented by DOMHTMLElement and any idiomatic type wrapping a DOMHTMLElement subclass.
+// DOMHTMLElementProvider is accepted wherever a DOMHTMLElement (or one of its subclasses) is expected.
 type DOMHTMLElementProvider interface {
-	asDOMHTMLElement() *raw.DOMHTMLElement
+	objref.Object
 }
 
-// DOMMouseEventProvider is implemented by DOMMouseEvent and any idiomatic type wrapping a DOMMouseEvent subclass.
+// DOMMouseEventProvider is accepted wherever a DOMMouseEvent (or one of its subclasses) is expected.
 type DOMMouseEventProvider interface {
-	asDOMMouseEvent() *raw.DOMMouseEvent
+	objref.Object
 }
 
-// DOMNodeProvider is implemented by DOMNode and any idiomatic type wrapping a DOMNode subclass.
+// DOMNodeProvider is accepted wherever a DOMNode (or one of its subclasses) is expected.
 type DOMNodeProvider interface {
-	asDOMNode() *raw.DOMNode
+	objref.Object
 }
 
-// DOMObjectProvider is implemented by DOMObject and any idiomatic type wrapping a DOMObject subclass.
+// DOMObjectProvider is accepted wherever a DOMObject (or one of its subclasses) is expected.
 type DOMObjectProvider interface {
-	asDOMObject() *raw.DOMObject
+	objref.Object
 }
 
-// DOMStyleSheetProvider is implemented by DOMStyleSheet and any idiomatic type wrapping a DOMStyleSheet subclass.
+// DOMStyleSheetProvider is accepted wherever a DOMStyleSheet (or one of its subclasses) is expected.
 type DOMStyleSheetProvider interface {
-	asDOMStyleSheet() *raw.DOMStyleSheet
+	objref.Object
 }
 
-// DOMTextProvider is implemented by DOMText and any idiomatic type wrapping a DOMText subclass.
+// DOMTextProvider is accepted wherever a DOMText (or one of its subclasses) is expected.
 type DOMTextProvider interface {
-	asDOMText() *raw.DOMText
+	objref.Object
 }
 
-// DOMUIEventProvider is implemented by DOMUIEvent and any idiomatic type wrapping a DOMUIEvent subclass.
+// DOMUIEventProvider is accepted wherever a DOMUIEvent (or one of its subclasses) is expected.
 type DOMUIEventProvider interface {
-	asDOMUIEvent() *raw.DOMUIEvent
+	objref.Object
 }
 
-// WebScriptObjectProvider is implemented by WebScriptObject and any idiomatic type wrapping a WebScriptObject subclass.
+// WebScriptObjectProvider is accepted wherever a WebScriptObject (or one of its subclasses) is expected.
 type WebScriptObjectProvider interface {
-	asWebScriptObject() *raw.WebScriptObject
+	objref.Object
 }

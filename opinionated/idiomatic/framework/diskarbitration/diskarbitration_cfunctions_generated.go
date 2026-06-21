@@ -5,202 +5,281 @@
 package diskarbitration
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/diskarbitration"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// DAApprovalSessionCreate calls [raw.DAApprovalSessionCreate] (C function DAApprovalSessionCreate).
-func DAApprovalSessionCreate(allocator unsafe.Pointer) unsafe.Pointer {
-	return raw.DAApprovalSessionCreate(allocator)
+var _fnDAApprovalSessionCreate func(objc.ID) objc.ID
+
+// DAApprovalSessionCreate calls the DiskArbitration framework function DAApprovalSessionCreate.
+func DAApprovalSessionCreate(allocator obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDAApprovalSessionCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnDAApprovalSessionCreate, _lib, "DAApprovalSessionCreate")
+	}
+	_ret := _fnDAApprovalSessionCreate(objref.IDOf(allocator))
+	return obj.Wrap(_ret)
 }
 
-// DAApprovalSessionGetTypeID calls [raw.DAApprovalSessionGetTypeID] (C function DAApprovalSessionGetTypeID).
-func DAApprovalSessionGetTypeID() uint {
-	return raw.DAApprovalSessionGetTypeID()
+var _fnDAApprovalSessionGetTypeID func() int
+
+// DAApprovalSessionGetTypeID calls the DiskArbitration framework function DAApprovalSessionGetTypeID.
+func DAApprovalSessionGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDAApprovalSessionGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnDAApprovalSessionGetTypeID, _lib, "DAApprovalSessionGetTypeID")
+	}
+	return _fnDAApprovalSessionGetTypeID()
 }
 
-// DAApprovalSessionScheduleWithRunLoop calls [raw.DAApprovalSessionScheduleWithRunLoop] (C function DAApprovalSessionScheduleWithRunLoop).
-func DAApprovalSessionScheduleWithRunLoop(session unsafe.Pointer, runLoop unsafe.Pointer, runLoopMode unsafe.Pointer) {
-	raw.DAApprovalSessionScheduleWithRunLoop(session, runLoop, runLoopMode)
+var _fnDAApprovalSessionScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID)
+
+// DAApprovalSessionScheduleWithRunLoop calls the DiskArbitration framework function DAApprovalSessionScheduleWithRunLoop.
+func DAApprovalSessionScheduleWithRunLoop(session obj.Object, runLoop obj.Object, runLoopMode obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDAApprovalSessionScheduleWithRunLoop == nil {
+		ebipurego.RegisterLibFunc(&_fnDAApprovalSessionScheduleWithRunLoop, _lib, "DAApprovalSessionScheduleWithRunLoop")
+	}
+	_fnDAApprovalSessionScheduleWithRunLoop(objref.IDOf(session), objref.IDOf(runLoop), objref.IDOf(runLoopMode))
 }
 
-// DAApprovalSessionUnscheduleFromRunLoop calls [raw.DAApprovalSessionUnscheduleFromRunLoop] (C function DAApprovalSessionUnscheduleFromRunLoop).
-func DAApprovalSessionUnscheduleFromRunLoop(session unsafe.Pointer, runLoop unsafe.Pointer, runLoopMode unsafe.Pointer) {
-	raw.DAApprovalSessionUnscheduleFromRunLoop(session, runLoop, runLoopMode)
+var _fnDAApprovalSessionUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID)
+
+// DAApprovalSessionUnscheduleFromRunLoop calls the DiskArbitration framework function DAApprovalSessionUnscheduleFromRunLoop.
+func DAApprovalSessionUnscheduleFromRunLoop(session obj.Object, runLoop obj.Object, runLoopMode obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDAApprovalSessionUnscheduleFromRunLoop == nil {
+		ebipurego.RegisterLibFunc(&_fnDAApprovalSessionUnscheduleFromRunLoop, _lib, "DAApprovalSessionUnscheduleFromRunLoop")
+	}
+	_fnDAApprovalSessionUnscheduleFromRunLoop(objref.IDOf(session), objref.IDOf(runLoop), objref.IDOf(runLoopMode))
 }
 
-// DADiskClaim calls [raw.DADiskClaim] (C function DADiskClaim).
-func DADiskClaim(disk unsafe.Pointer, options uint, release unsafe.Pointer, releaseContext unsafe.Pointer, callback unsafe.Pointer, callbackContext unsafe.Pointer) {
-	raw.DADiskClaim(disk, options, release, releaseContext, callback, callbackContext)
+var _fnDADiskCopyDescription func(objc.ID) objc.ID
+
+// DADiskCopyDescription calls the DiskArbitration framework function DADiskCopyDescription.
+func DADiskCopyDescription(disk obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDADiskCopyDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnDADiskCopyDescription, _lib, "DADiskCopyDescription")
+	}
+	_ret := _fnDADiskCopyDescription(objref.IDOf(disk))
+	return obj.Wrap(_ret)
 }
 
-// DADiskCopyDescription calls [raw.DADiskCopyDescription] (C function DADiskCopyDescription).
-func DADiskCopyDescription(disk unsafe.Pointer) unsafe.Pointer {
-	return raw.DADiskCopyDescription(disk)
+var _fnDADiskCopyIOMedia func(objc.ID) int
+
+// DADiskCopyIOMedia calls the DiskArbitration framework function DADiskCopyIOMedia.
+func DADiskCopyIOMedia(disk obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDADiskCopyIOMedia == nil {
+		ebipurego.RegisterLibFunc(&_fnDADiskCopyIOMedia, _lib, "DADiskCopyIOMedia")
+	}
+	return _fnDADiskCopyIOMedia(objref.IDOf(disk))
 }
 
-// DADiskCopyIOMedia calls [raw.DADiskCopyIOMedia] (C function DADiskCopyIOMedia).
-func DADiskCopyIOMedia(disk unsafe.Pointer) uint {
-	return raw.DADiskCopyIOMedia(disk)
+var _fnDADiskCopyWholeDisk func(objc.ID) objc.ID
+
+// DADiskCopyWholeDisk calls the DiskArbitration framework function DADiskCopyWholeDisk.
+func DADiskCopyWholeDisk(disk obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDADiskCopyWholeDisk == nil {
+		ebipurego.RegisterLibFunc(&_fnDADiskCopyWholeDisk, _lib, "DADiskCopyWholeDisk")
+	}
+	_ret := _fnDADiskCopyWholeDisk(objref.IDOf(disk))
+	return obj.Wrap(_ret)
 }
 
-// DADiskCopyWholeDisk calls [raw.DADiskCopyWholeDisk] (C function DADiskCopyWholeDisk).
-func DADiskCopyWholeDisk(disk unsafe.Pointer) unsafe.Pointer {
-	return raw.DADiskCopyWholeDisk(disk)
+var _fnDADiskCreateFromBSDName func(objc.ID, objc.ID, string) objc.ID
+
+// DADiskCreateFromBSDName calls the DiskArbitration framework function DADiskCreateFromBSDName.
+func DADiskCreateFromBSDName(allocator obj.Object, session obj.Object, name string) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDADiskCreateFromBSDName == nil {
+		ebipurego.RegisterLibFunc(&_fnDADiskCreateFromBSDName, _lib, "DADiskCreateFromBSDName")
+	}
+	_ret := _fnDADiskCreateFromBSDName(objref.IDOf(allocator), objref.IDOf(session), name)
+	return obj.Wrap(_ret)
 }
 
-// DADiskCreateFromBSDName calls [raw.DADiskCreateFromBSDName] (C function DADiskCreateFromBSDName).
-func DADiskCreateFromBSDName(allocator unsafe.Pointer, session unsafe.Pointer, name string) unsafe.Pointer {
-	return raw.DADiskCreateFromBSDName(allocator, session, name)
+var _fnDADiskCreateFromIOMedia func(objc.ID, objc.ID, int) objc.ID
+
+// DADiskCreateFromIOMedia calls the DiskArbitration framework function DADiskCreateFromIOMedia.
+func DADiskCreateFromIOMedia(allocator obj.Object, session obj.Object, media int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDADiskCreateFromIOMedia == nil {
+		ebipurego.RegisterLibFunc(&_fnDADiskCreateFromIOMedia, _lib, "DADiskCreateFromIOMedia")
+	}
+	_ret := _fnDADiskCreateFromIOMedia(objref.IDOf(allocator), objref.IDOf(session), media)
+	return obj.Wrap(_ret)
 }
 
-// DADiskCreateFromIOMedia calls [raw.DADiskCreateFromIOMedia] (C function DADiskCreateFromIOMedia).
-func DADiskCreateFromIOMedia(allocator unsafe.Pointer, session unsafe.Pointer, media uint) unsafe.Pointer {
-	return raw.DADiskCreateFromIOMedia(allocator, session, media)
+var _fnDADiskCreateFromVolumePath func(objc.ID, objc.ID, objc.ID) objc.ID
+
+// DADiskCreateFromVolumePath calls the DiskArbitration framework function DADiskCreateFromVolumePath.
+func DADiskCreateFromVolumePath(allocator obj.Object, session obj.Object, path obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDADiskCreateFromVolumePath == nil {
+		ebipurego.RegisterLibFunc(&_fnDADiskCreateFromVolumePath, _lib, "DADiskCreateFromVolumePath")
+	}
+	_ret := _fnDADiskCreateFromVolumePath(objref.IDOf(allocator), objref.IDOf(session), objref.IDOf(path))
+	return obj.Wrap(_ret)
 }
 
-// DADiskCreateFromVolumePath calls [raw.DADiskCreateFromVolumePath] (C function DADiskCreateFromVolumePath).
-func DADiskCreateFromVolumePath(allocator unsafe.Pointer, session unsafe.Pointer, path unsafe.Pointer) unsafe.Pointer {
-	return raw.DADiskCreateFromVolumePath(allocator, session, path)
+var _fnDADiskGetBSDName func(objc.ID) string
+
+// DADiskGetBSDName calls the DiskArbitration framework function DADiskGetBSDName.
+func DADiskGetBSDName(disk obj.Object) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDADiskGetBSDName == nil {
+		ebipurego.RegisterLibFunc(&_fnDADiskGetBSDName, _lib, "DADiskGetBSDName")
+	}
+	return _fnDADiskGetBSDName(objref.IDOf(disk))
 }
 
-// DADiskEject calls [raw.DADiskEject] (C function DADiskEject).
-func DADiskEject(disk unsafe.Pointer, options uint, callback unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.DADiskEject(disk, options, callback, context_)
+var _fnDADiskGetOptions func(objc.ID) int
+
+// DADiskGetOptions calls the DiskArbitration framework function DADiskGetOptions.
+func DADiskGetOptions(disk obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDADiskGetOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnDADiskGetOptions, _lib, "DADiskGetOptions")
+	}
+	return _fnDADiskGetOptions(objref.IDOf(disk))
 }
 
-// DADiskGetBSDName calls [raw.DADiskGetBSDName] (C function DADiskGetBSDName).
-func DADiskGetBSDName(disk unsafe.Pointer) string {
-	return raw.DADiskGetBSDName(disk)
+var _fnDADiskGetTypeID func() int
+
+// DADiskGetTypeID calls the DiskArbitration framework function DADiskGetTypeID.
+func DADiskGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDADiskGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnDADiskGetTypeID, _lib, "DADiskGetTypeID")
+	}
+	return _fnDADiskGetTypeID()
 }
 
-// DADiskGetOptions calls [raw.DADiskGetOptions] (C function DADiskGetOptions).
-func DADiskGetOptions(disk unsafe.Pointer) uint {
-	return raw.DADiskGetOptions(disk)
+var _fnDADiskIsClaimed func(objc.ID) uint8
+
+// DADiskIsClaimed calls the DiskArbitration framework function DADiskIsClaimed.
+func DADiskIsClaimed(disk obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDADiskIsClaimed == nil {
+		ebipurego.RegisterLibFunc(&_fnDADiskIsClaimed, _lib, "DADiskIsClaimed")
+	}
+	return _fnDADiskIsClaimed(objref.IDOf(disk))
 }
 
-// DADiskGetTypeID calls [raw.DADiskGetTypeID] (C function DADiskGetTypeID).
-func DADiskGetTypeID() uint {
-	return raw.DADiskGetTypeID()
+var _fnDADiskSetOptions func(objc.ID, int, uint8) int
+
+// DADiskSetOptions calls the DiskArbitration framework function DADiskSetOptions.
+func DADiskSetOptions(disk obj.Object, options int, value uint8) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDADiskSetOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnDADiskSetOptions, _lib, "DADiskSetOptions")
+	}
+	return _fnDADiskSetOptions(objref.IDOf(disk), options, value)
 }
 
-// DADiskIsClaimed calls [raw.DADiskIsClaimed] (C function DADiskIsClaimed).
-func DADiskIsClaimed(disk unsafe.Pointer) uint8 {
-	return raw.DADiskIsClaimed(disk)
+var _fnDADiskUnclaim func(objc.ID)
+
+// DADiskUnclaim calls the DiskArbitration framework function DADiskUnclaim.
+func DADiskUnclaim(disk obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDADiskUnclaim == nil {
+		ebipurego.RegisterLibFunc(&_fnDADiskUnclaim, _lib, "DADiskUnclaim")
+	}
+	_fnDADiskUnclaim(objref.IDOf(disk))
 }
 
-// DADiskMount calls [raw.DADiskMount] (C function DADiskMount).
-func DADiskMount(disk unsafe.Pointer, path unsafe.Pointer, options uint, callback unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.DADiskMount(disk, path, options, callback, context_)
+var _fnDADissenterCreate func(objc.ID, int, objc.ID) objc.ID
+
+// DADissenterCreate calls the DiskArbitration framework function DADissenterCreate.
+func DADissenterCreate(allocator obj.Object, status int, string_ obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDADissenterCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnDADissenterCreate, _lib, "DADissenterCreate")
+	}
+	_ret := _fnDADissenterCreate(objref.IDOf(allocator), status, objref.IDOf(string_))
+	return obj.Wrap(_ret)
 }
 
-// DADiskMountWithArguments calls [raw.DADiskMountWithArguments] (C function DADiskMountWithArguments).
-func DADiskMountWithArguments(disk unsafe.Pointer, path unsafe.Pointer, options uint, callback unsafe.Pointer, context_ unsafe.Pointer, arguments unsafe.Pointer) {
-	raw.DADiskMountWithArguments(disk, path, options, callback, context_, arguments)
+var _fnDADissenterGetStatus func(objc.ID) int
+
+// DADissenterGetStatus calls the DiskArbitration framework function DADissenterGetStatus.
+func DADissenterGetStatus(dissenter obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDADissenterGetStatus == nil {
+		ebipurego.RegisterLibFunc(&_fnDADissenterGetStatus, _lib, "DADissenterGetStatus")
+	}
+	return _fnDADissenterGetStatus(objref.IDOf(dissenter))
 }
 
-// DADiskRename calls [raw.DADiskRename] (C function DADiskRename).
-func DADiskRename(disk unsafe.Pointer, name unsafe.Pointer, options uint, callback unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.DADiskRename(disk, name, options, callback, context_)
+var _fnDADissenterGetStatusString func(objc.ID) objc.ID
+
+// DADissenterGetStatusString calls the DiskArbitration framework function DADissenterGetStatusString.
+func DADissenterGetStatusString(dissenter obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDADissenterGetStatusString == nil {
+		ebipurego.RegisterLibFunc(&_fnDADissenterGetStatusString, _lib, "DADissenterGetStatusString")
+	}
+	_ret := _fnDADissenterGetStatusString(objref.IDOf(dissenter))
+	return obj.Wrap(_ret)
 }
 
-// DADiskSetOptions calls [raw.DADiskSetOptions] (C function DADiskSetOptions).
-func DADiskSetOptions(disk unsafe.Pointer, options uint, value uint8) int {
-	return raw.DADiskSetOptions(disk, options, value)
+var _fnDASessionCreate func(objc.ID) objc.ID
+
+// DASessionCreate calls the DiskArbitration framework function DASessionCreate.
+func DASessionCreate(allocator obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDASessionCreate == nil {
+		ebipurego.RegisterLibFunc(&_fnDASessionCreate, _lib, "DASessionCreate")
+	}
+	_ret := _fnDASessionCreate(objref.IDOf(allocator))
+	return obj.Wrap(_ret)
 }
 
-// DADiskUnclaim calls [raw.DADiskUnclaim] (C function DADiskUnclaim).
-func DADiskUnclaim(disk unsafe.Pointer) {
-	raw.DADiskUnclaim(disk)
+var _fnDASessionGetTypeID func() int
+
+// DASessionGetTypeID calls the DiskArbitration framework function DASessionGetTypeID.
+func DASessionGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDASessionGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnDASessionGetTypeID, _lib, "DASessionGetTypeID")
+	}
+	return _fnDASessionGetTypeID()
 }
 
-// DADiskUnmount calls [raw.DADiskUnmount] (C function DADiskUnmount).
-func DADiskUnmount(disk unsafe.Pointer, options uint, callback unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.DADiskUnmount(disk, options, callback, context_)
+var _fnDASessionScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID)
+
+// DASessionScheduleWithRunLoop calls the DiskArbitration framework function DASessionScheduleWithRunLoop.
+func DASessionScheduleWithRunLoop(session obj.Object, runLoop obj.Object, runLoopMode obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDASessionScheduleWithRunLoop == nil {
+		ebipurego.RegisterLibFunc(&_fnDASessionScheduleWithRunLoop, _lib, "DASessionScheduleWithRunLoop")
+	}
+	_fnDASessionScheduleWithRunLoop(objref.IDOf(session), objref.IDOf(runLoop), objref.IDOf(runLoopMode))
 }
 
-// DADissenterCreate calls [raw.DADissenterCreate] (C function DADissenterCreate).
-func DADissenterCreate(allocator unsafe.Pointer, status int, string_ unsafe.Pointer) unsafe.Pointer {
-	return raw.DADissenterCreate(allocator, status, string_)
+var _fnDASessionSetDispatchQueue func(objc.ID, objc.ID)
+
+// DASessionSetDispatchQueue calls the DiskArbitration framework function DASessionSetDispatchQueue.
+func DASessionSetDispatchQueue(session obj.Object, queue obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDASessionSetDispatchQueue == nil {
+		ebipurego.RegisterLibFunc(&_fnDASessionSetDispatchQueue, _lib, "DASessionSetDispatchQueue")
+	}
+	_fnDASessionSetDispatchQueue(objref.IDOf(session), objref.IDOf(queue))
 }
 
-// DADissenterGetStatus calls [raw.DADissenterGetStatus] (C function DADissenterGetStatus).
-func DADissenterGetStatus(dissenter unsafe.Pointer) int {
-	return raw.DADissenterGetStatus(dissenter)
-}
+var _fnDASessionUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID)
 
-// DADissenterGetStatusString calls [raw.DADissenterGetStatusString] (C function DADissenterGetStatusString).
-func DADissenterGetStatusString(dissenter unsafe.Pointer) unsafe.Pointer {
-	return raw.DADissenterGetStatusString(dissenter)
-}
-
-// DARegisterDiskAppearedCallback calls [raw.DARegisterDiskAppearedCallback] (C function DARegisterDiskAppearedCallback).
-func DARegisterDiskAppearedCallback(session unsafe.Pointer, match unsafe.Pointer, callback unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.DARegisterDiskAppearedCallback(session, match, callback, context_)
-}
-
-// DARegisterDiskDescriptionChangedCallback calls [raw.DARegisterDiskDescriptionChangedCallback] (C function DARegisterDiskDescriptionChangedCallback).
-func DARegisterDiskDescriptionChangedCallback(session unsafe.Pointer, match unsafe.Pointer, watch unsafe.Pointer, callback unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.DARegisterDiskDescriptionChangedCallback(session, match, watch, callback, context_)
-}
-
-// DARegisterDiskDisappearedCallback calls [raw.DARegisterDiskDisappearedCallback] (C function DARegisterDiskDisappearedCallback).
-func DARegisterDiskDisappearedCallback(session unsafe.Pointer, match unsafe.Pointer, callback unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.DARegisterDiskDisappearedCallback(session, match, callback, context_)
-}
-
-// DARegisterDiskEjectApprovalCallback calls [raw.DARegisterDiskEjectApprovalCallback] (C function DARegisterDiskEjectApprovalCallback).
-func DARegisterDiskEjectApprovalCallback(session unsafe.Pointer, match unsafe.Pointer, callback unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.DARegisterDiskEjectApprovalCallback(session, match, callback, context_)
-}
-
-// DARegisterDiskMountApprovalCallback calls [raw.DARegisterDiskMountApprovalCallback] (C function DARegisterDiskMountApprovalCallback).
-func DARegisterDiskMountApprovalCallback(session unsafe.Pointer, match unsafe.Pointer, callback unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.DARegisterDiskMountApprovalCallback(session, match, callback, context_)
-}
-
-// DARegisterDiskPeekCallback calls [raw.DARegisterDiskPeekCallback] (C function DARegisterDiskPeekCallback).
-func DARegisterDiskPeekCallback(session unsafe.Pointer, match unsafe.Pointer, order int, callback unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.DARegisterDiskPeekCallback(session, match, order, callback, context_)
-}
-
-// DARegisterDiskUnmountApprovalCallback calls [raw.DARegisterDiskUnmountApprovalCallback] (C function DARegisterDiskUnmountApprovalCallback).
-func DARegisterDiskUnmountApprovalCallback(session unsafe.Pointer, match unsafe.Pointer, callback unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.DARegisterDiskUnmountApprovalCallback(session, match, callback, context_)
-}
-
-// DASessionCreate calls [raw.DASessionCreate] (C function DASessionCreate).
-func DASessionCreate(allocator unsafe.Pointer) unsafe.Pointer {
-	return raw.DASessionCreate(allocator)
-}
-
-// DASessionGetTypeID calls [raw.DASessionGetTypeID] (C function DASessionGetTypeID).
-func DASessionGetTypeID() uint {
-	return raw.DASessionGetTypeID()
-}
-
-// DASessionScheduleWithRunLoop calls [raw.DASessionScheduleWithRunLoop] (C function DASessionScheduleWithRunLoop).
-func DASessionScheduleWithRunLoop(session unsafe.Pointer, runLoop unsafe.Pointer, runLoopMode unsafe.Pointer) {
-	raw.DASessionScheduleWithRunLoop(session, runLoop, runLoopMode)
-}
-
-// DASessionSetDispatchQueue calls [raw.DASessionSetDispatchQueue] (C function DASessionSetDispatchQueue).
-func DASessionSetDispatchQueue(session unsafe.Pointer, queue *foundation.NSObject) {
-	raw.DASessionSetDispatchQueue(session, queue)
-}
-
-// DASessionUnscheduleFromRunLoop calls [raw.DASessionUnscheduleFromRunLoop] (C function DASessionUnscheduleFromRunLoop).
-func DASessionUnscheduleFromRunLoop(session unsafe.Pointer, runLoop unsafe.Pointer, runLoopMode unsafe.Pointer) {
-	raw.DASessionUnscheduleFromRunLoop(session, runLoop, runLoopMode)
-}
-
-// DAUnregisterApprovalCallback calls [raw.DAUnregisterApprovalCallback] (C function DAUnregisterApprovalCallback).
-func DAUnregisterApprovalCallback(session unsafe.Pointer, callback unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.DAUnregisterApprovalCallback(session, callback, context_)
-}
-
-// DAUnregisterCallback calls [raw.DAUnregisterCallback] (C function DAUnregisterCallback).
-func DAUnregisterCallback(session unsafe.Pointer, callback unsafe.Pointer, context_ unsafe.Pointer) {
-	raw.DAUnregisterCallback(session, callback, context_)
+// DASessionUnscheduleFromRunLoop calls the DiskArbitration framework function DASessionUnscheduleFromRunLoop.
+func DASessionUnscheduleFromRunLoop(session obj.Object, runLoop obj.Object, runLoopMode obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDASessionUnscheduleFromRunLoop == nil {
+		ebipurego.RegisterLibFunc(&_fnDASessionUnscheduleFromRunLoop, _lib, "DASessionUnscheduleFromRunLoop")
+	}
+	_fnDASessionUnscheduleFromRunLoop(objref.IDOf(session), objref.IDOf(runLoop), objref.IDOf(runLoopMode))
 }

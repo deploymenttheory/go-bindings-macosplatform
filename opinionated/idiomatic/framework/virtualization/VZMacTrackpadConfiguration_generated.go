@@ -5,45 +5,68 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The class that represents the configuration for a Mac trackpad.
 //
-// MacTrackpadConfiguration wraps [raw.VZMacTrackpadConfiguration] with a fluent Go API.
+// MacTrackpadConfiguration is an idiomatic wrapper over the Objective-C class VZMacTrackpadConfiguration.
 type MacTrackpadConfiguration struct {
-	inner *raw.VZMacTrackpadConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZMacTrackpadConfiguration].
-func (x *MacTrackpadConfiguration) Unwrap() *raw.VZMacTrackpadConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MacTrackpadConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// MacTrackpadConfigurationFromID adopts an existing object pointer as a MacTrackpadConfiguration (nil for 0).
+// MacTrackpadConfigurationFromID adopts an existing Objective-C object as a MacTrackpadConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func MacTrackpadConfigurationFromID(id objc.ID) *MacTrackpadConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &MacTrackpadConfiguration{inner: raw.VZMacTrackpadConfigurationFromID(id)}
+	x := &MacTrackpadConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMacTrackpadConfiguration creates a new [MacTrackpadConfiguration].
+// macTrackpadConfigurationAdopt wraps an Objective-C object that this code just created as a
+// MacTrackpadConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func macTrackpadConfigurationAdopt(id objc.ID) *MacTrackpadConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &MacTrackpadConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MacTrackpadConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MacTrackpadConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MacTrackpadConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMacTrackpadConfiguration creates a new MacTrackpadConfiguration.
 func NewMacTrackpadConfiguration() *MacTrackpadConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMacTrackpadConfiguration")), objc.RegisterName("new"))
-	return &MacTrackpadConfiguration{inner: raw.VZMacTrackpadConfigurationFromID(_id)}
-}
-
-func (x *MacTrackpadConfiguration) asPointingDeviceConfiguration() *raw.VZPointingDeviceConfiguration {
-	return &x.inner.VZPointingDeviceConfiguration
+	_id := objc.Send[objc.ID](objc.ID(_class("VZMacTrackpadConfiguration")), objc.RegisterName("new"))
+	return macTrackpadConfigurationAdopt(_id)
 }
 
 // MacTrackpadConfigurationable is the interface implemented by [MacTrackpadConfiguration], for mocking and DI.
 type MacTrackpadConfigurationable interface {
-	Unwrap() *raw.VZMacTrackpadConfiguration
+	obj.Object
 }
 
 var _ MacTrackpadConfigurationable = (*MacTrackpadConfiguration)(nil)

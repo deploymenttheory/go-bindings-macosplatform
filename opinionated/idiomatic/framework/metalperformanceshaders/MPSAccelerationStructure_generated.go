@@ -5,199 +5,108 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsrayintersector"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The base class for data structures that are built over geometry and used to accelerate ray tracing.
 //
-// AccelerationStructure wraps [raw.MPSAccelerationStructure] with a fluent Go API.
+// AccelerationStructure is an idiomatic wrapper over the Objective-C class MPSAccelerationStructure.
 type AccelerationStructure struct {
-	inner *raw.MPSAccelerationStructure
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSAccelerationStructure].
-func (x *AccelerationStructure) Unwrap() *raw.MPSAccelerationStructure { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AccelerationStructure) ID() objc.ID { return x.inner.Ptr() }
-
-// AccelerationStructureFromID adopts an existing object pointer as a AccelerationStructure (nil for 0).
+// AccelerationStructureFromID adopts an existing Objective-C object as a AccelerationStructure
+// (nil for 0), retaining it and registering a release finalizer.
 func AccelerationStructureFromID(id objc.ID) *AccelerationStructure {
 	if id == 0 {
 		return nil
 	}
-	return &AccelerationStructure{inner: raw.MPSAccelerationStructureFromID(id)}
-}
-
-// @brief Initialize the acceleration structure with a Metal device
-//
-// NewAccelerationStructureWithDevice creates a new [AccelerationStructure].
-func NewAccelerationStructureWithDevice(device metal.MTLDevice) *AccelerationStructure {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSAccelerationStructure")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &AccelerationStructure{inner: raw.MPSAccelerationStructureFromID(_id)}
-}
-
-// @brief Initialize the acceleration structure with an NSCoder and a Metal device. Buffer properties such as the vertex buffer, instance buffer, etc. are set to nil. Encode and decode these buffers along with the acceleration structure instead.
-//
-// NewAccelerationStructureWithCoderDevice creates a new [AccelerationStructure].
-func NewAccelerationStructureWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *AccelerationStructure {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSAccelerationStructure")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &AccelerationStructure{inner: raw.MPSAccelerationStructureFromID(_id)}
-}
-
-// @brief Initialize the acceleration structure with an acceleration structure group, if the acceleration structure will be used in an instance hierarchy. @discussion The Metal device is determined from the acceleration structure group. All acceleration structures in the instance hierarchy must share the same group.
-//
-// NewAccelerationStructureWithGroup creates a new [AccelerationStructure].
-func NewAccelerationStructureWithGroup(group *mpsrayintersector.MPSAccelerationStructureGroup) *AccelerationStructure {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSAccelerationStructure")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGroup:"), group.Ptr())
-	return &AccelerationStructure{inner: raw.MPSAccelerationStructureFromID(_id)}
-}
-
-// @brief Initialize the acceleration structure with an NSCoder and an acceleration structure group, if the acceleration structure will be used in an instance hierarchy. All acceleration structures in the instance hierarchy must share the same group. Buffer properties such as the vertex buffer, instance buffer, etc. are set to nil. Encode and decode these buffers along with the acceleration structure instead.
-//
-// NewAccelerationStructureWithCoderGroup creates a new [AccelerationStructure].
-func NewAccelerationStructureWithCoderGroup(aDecoder *foundation.NSCoder, group *mpsrayintersector.MPSAccelerationStructureGroup) *AccelerationStructure {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSAccelerationStructure")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:group:"), aDecoder.Ptr(), group.Ptr())
-	return &AccelerationStructure{inner: raw.MPSAccelerationStructureFromID(_id)}
-}
-
-// @brief Acceleration structure usage options. Changes to this property require rebuilding the acceleration structure. Defaults to MPSAccelerationStructureUsageNone.
-//
-// WithUsage sets the usage property and returns the receiver for chaining.
-func (x *AccelerationStructure) WithUsage(usage mpsrayintersector.MPSAccelerationStructureUsage) *AccelerationStructure {
-	x.inner.SetUsage(usage)
+	x := &AccelerationStructure{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *AccelerationStructure) WithOptions(options mpscore.MPSKernelOptions) *AccelerationStructure {
-	x.inner.MPSKernel.SetOptions(options)
+// accelerationStructureAdopt wraps an Objective-C object that this code just created as a
+// AccelerationStructure (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func accelerationStructureAdopt(id objc.ID) *AccelerationStructure {
+	if id == 0 {
+		return nil
+	}
+	x := &AccelerationStructure{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
+}
+
+// Description returns the object's -description text.
+func (x *AccelerationStructure) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AccelerationStructure) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AccelerationStructure) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// Initialize the acceleration structure with an acceleration structure group, if the acceleration structure will be used in an instance hierarchy. The Metal device is determined from the acceleration structure group. All acceleration structures in the instance hierarchy must share the same group.
+//
+// NewAccelerationStructureWithGroup creates a new AccelerationStructure.
+func NewAccelerationStructureWithGroup(group obj.Object) *AccelerationStructure {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSAccelerationStructure")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGroup:"), objref.IDOf(group))
+	return accelerationStructureAdopt(_id)
+}
+
+// Initialize the acceleration structure with an NSCoder and an acceleration structure group, if the acceleration structure will be used in an instance hierarchy. All acceleration structures in the instance hierarchy must share the same group. Buffer properties such as the vertex buffer, instance buffer, etc. are set to nil. Encode and decode these buffers along with the acceleration structure instead.
+//
+// NewAccelerationStructureWithCoderGroup creates a new AccelerationStructure.
+func NewAccelerationStructureWithCoderGroup(aDecoder obj.Object, group obj.Object) *AccelerationStructure {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSAccelerationStructure")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:group:"), objref.IDOf(aDecoder), objref.IDOf(group))
+	return accelerationStructureAdopt(_id)
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *AccelerationStructure) WithLabel(label string) *AccelerationStructure {
-	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @brief Rebuild the acceleration structure @discussion This method must be called before any intersection tests can be scheduled with this acceleration structure. Before calling this method, fill out the properties of the acceleration structure such as vertex buffer, instance buffer, etc. The acceleration structure should be rebuilt when its contents (e.g. vertices in a triangle acceleration structure) have been modified significantly and must be rebuilt when properties such as triangle count, vertex stride, etc. have changed. When the contents of the acceleration structure have only been modified slightly, it may be cheaper to refit the acceleration structure instead. This method blocks until the acceleration structure has been rebuilt. Until the rebuild has completed, the acceleration structure cannot be copied, encoded with NSSecureCoding, rebuilt, or refit. Before this method can be called, any pending GPU writes to the vertex buffer, index buffer, etc. must be completed (and, for managed buffers, synchronized). Any prior intersection tests must also be completed before the acceleration structure can be rebuilt.
-//
-// Rebuild calls the underlying Rebuild.
+// Rebuild the acceleration structure This method must be called before any intersection tests can be scheduled with this acceleration structure. Before calling this method, fill out the properties of the acceleration structure such as vertex buffer, instance buffer, etc. The acceleration structure should be rebuilt when its contents (e.g. vertices in a triangle acceleration structure) have been modified significantly and must be rebuilt when properties such as triangle count, vertex stride, etc. have changed. When the contents of the acceleration structure have only been modified slightly, it may be cheaper to refit the acceleration structure instead. This method blocks until the acceleration structure has been rebuilt. Until the rebuild has completed, the acceleration structure cannot be copied, encoded with NSSecureCoding, rebuilt, or refit. Before this method can be called, any pending GPU writes to the vertex buffer, index buffer, etc. must be completed (and, for managed buffers, synchronized). Any prior intersection tests must also be completed before the acceleration structure can be rebuilt.
 func (x *AccelerationStructure) Rebuild() {
-	x.inner.Rebuild()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rebuild"))
 }
 
-// @brief Rebuild the acceleration structure asynchronously @discussion This method must be called before any intersection tests can be scheduled with this acceleration structure. Before calling this method, fill out the properties of the acceleration structure such as vertex buffer, instance buffer, etc. The acceleration structure should be rebuilt when its contents (e.g. vertices in a triangle acceleration structure) have been modified significantly and must be rebuilt when properties such as triangle count, vertex stride, etc. have changed. When the contents of the acceleration structure have only been modified slightly, it may be cheaper to refit the acceleration structure instead. Until the rebuild has completed, the acceleration structure cannot be copied, encoded with NSSecureCoding, rebuilt, or refit. Before this method can be called, any pending GPU writes to the vertex buffer, index buffer, etc. must be completed (and, for managed buffers, synchronized). Any prior intersection tests must also be completed before the acceleration structure can be rebuilt.
-//
-// RebuildWithCompletionHandler calls the underlying RebuildWithCompletionHandler.
-func (x *AccelerationStructure) RebuildWithCompletionHandler(completionHandler func(*mpsrayintersector.MPSAccelerationStructure)) {
-	x.inner.RebuildWithCompletionHandler(completionHandler)
+// Encode the acceleration structure with an NSCoder Buffer properties such as the vertex buffer, index buffer, etc. are not be encoded. Encode and decode these buffers along with the acceleration structure instead. Do not encode the acceleration structure until any prior refit or rebuild operations have completed.
+func (x *AccelerationStructure) EncodeWithCoder(coder obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }
 
-// @brief Refit the existing acceleration structure to new data @discussion This method is used to refit the acceleration structure to new vertex data, index data, instance data, etc. while preserving the existing acceleration structure topology. This is typically much faster than a full rebuild of the acceleration structure. Refitting can also be pipelined with other GPU work such as ray intersection. Until the command buffer has completed, the acceleration structure cannot be copied, encoded with NSSecureCoding, or rebuilt. Changes to properties such as the triangle count or instance count might not be reflected. These changes require that the acceleration structure be rebuilt instead. The acceleration structure must be rebuilt at least once before this method can be called.
-//
-// EncodeRefitToCommandBuffer calls the underlying EncodeRefitToCommandBuffer.
-func (x *AccelerationStructure) EncodeRefitToCommandBuffer(commandBuffer metal.MTLCommandBuffer) {
-	x.inner.EncodeRefitToCommandBuffer(commandBuffer)
+// The group this acceleration structure was created with
+func (x *AccelerationStructure) Group() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("group"))
+	return obj.Wrap(_r)
 }
-
-// @brief Create a a copy of this acceleration structure @discussion The acceleration structure may be copied to a different Metal device. Buffer properties of the acceleration structure such as the vertex buffer, instance, buffer, etc. are set to nil. Copy these buffers to the new Metal device and assign them to the new acceleration structure instead. Do not copy the acceleration structure until any prior refit or rebuild operations have completed. @param zone   This parameter is ignored. Memory zones are no longer used by Objective-C. @param device New Metal device
-//
-// CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
-func (x *AccelerationStructure) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *AccelerationStructure {
-	_r := x.inner.CopyWithZoneDevice(zone, device)
-	if _r == nil {
-		return nil
-	}
-	return &AccelerationStructure{inner: _r}
-}
-
-// @brief Create a a copy of this acceleration structure @discussion The acceleration structure may be copied with a different acceleration structure group. Buffer properties of the acceleration structure such as the vertex buffer, instance buffer, etc. are set to nil. Copy these buffers with the new Metal device and assign them to the new acceleration structure instead. Do not copy the acceleration structure until any prior refit or rebuild operations have completed. @param zone  This parameter is ignored. Memory zones are no longer used by Objective-C. @param group New acceleration structure group
-//
-// CopyWithZoneGroup calls the underlying CopyWithZoneGroup.
-func (x *AccelerationStructure) CopyWithZoneGroup(zone unsafe.Pointer, group *mpsrayintersector.MPSAccelerationStructureGroup) *AccelerationStructure {
-	_r := x.inner.CopyWithZoneGroup(zone, group)
-	if _r == nil {
-		return nil
-	}
-	return &AccelerationStructure{inner: _r}
-}
-
-// @brief Encode the acceleration structure with an NSCoder @discussion Buffer properties such as the vertex buffer, index buffer, etc. are not be encoded. Encode and decode these buffers along with the acceleration structure instead. Do not encode the acceleration structure until any prior refit or rebuild operations have completed. @param coder An archiver object
-//
-// EncodeWithCoder calls the underlying EncodeWithCoder.
-func (x *AccelerationStructure) EncodeWithCoder(coder *foundation.NSCoder) {
-	x.inner.EncodeWithCoder(coder)
-}
-
-// @brief The group this acceleration structure was created with
-//
-// Group calls the underlying Group.
-func (x *AccelerationStructure) Group() *mpsrayintersector.MPSAccelerationStructureGroup {
-	return x.inner.Group()
-}
-
-// @brief The bounding box fully enclosing the geometry this acceleration structure was built over. @discussion The value of this property is not available until the acceleration structure has finished rebuilding or refitting
-//
-// BoundingBox calls the underlying BoundingBox.
-func (x *AccelerationStructure) BoundingBox() mpsrayintersector.MPSAxisAlignedBoundingBox {
-	return x.inner.BoundingBox()
-}
-
-// @brief Status indicating whether the acceleration structure has finished building
-//
-// Status calls the underlying Status.
-func (x *AccelerationStructure) Status() mpsrayintersector.MPSAccelerationStructureStatus {
-	return x.inner.Status()
-}
-
-// @brief Acceleration structure usage options. Changes to this property require rebuilding the acceleration structure. Defaults to MPSAccelerationStructureUsageNone.
-//
-// Usage calls the underlying Usage.
-func (x *AccelerationStructure) Usage() mpsrayintersector.MPSAccelerationStructureUsage {
-	return x.inner.Usage()
-}
-
-// SetUsage calls the underlying SetUsage.
-func (x *AccelerationStructure) SetUsage(usage mpsrayintersector.MPSAccelerationStructureUsage) {
-	x.inner.SetUsage(usage)
-}
-
-func (x *AccelerationStructure) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
 
 // AccelerationStructureable is the interface implemented by [AccelerationStructure], for mocking and DI.
 type AccelerationStructureable interface {
-	Unwrap() *raw.MPSAccelerationStructure
-	WithUsage(usage mpsrayintersector.MPSAccelerationStructureUsage) *AccelerationStructure
-	WithOptions(options mpscore.MPSKernelOptions) *AccelerationStructure
+	obj.Object
 	WithLabel(label string) *AccelerationStructure
 	Rebuild()
-	RebuildWithCompletionHandler(completionHandler func(*mpsrayintersector.MPSAccelerationStructure))
-	EncodeRefitToCommandBuffer(commandBuffer metal.MTLCommandBuffer)
-	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *AccelerationStructure
-	CopyWithZoneGroup(zone unsafe.Pointer, group *mpsrayintersector.MPSAccelerationStructureGroup) *AccelerationStructure
-	EncodeWithCoder(coder *foundation.NSCoder)
-	Group() *mpsrayintersector.MPSAccelerationStructureGroup
-	BoundingBox() mpsrayintersector.MPSAxisAlignedBoundingBox
-	Status() mpsrayintersector.MPSAccelerationStructureStatus
-	Usage() mpsrayintersector.MPSAccelerationStructureUsage
-	SetUsage(usage mpsrayintersector.MPSAccelerationStructureUsage)
+	EncodeWithCoder(coder obj.Object)
+	Group() obj.Object
 }
 
 var _ AccelerationStructureable = (*AccelerationStructure)(nil)

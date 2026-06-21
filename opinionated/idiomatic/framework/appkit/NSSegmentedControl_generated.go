@@ -5,1017 +5,875 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Display one or more buttons in a single horizontal group.
 //
-// SegmentedControl wraps [raw.NSSegmentedControl] with a fluent Go API.
+// SegmentedControl is an idiomatic wrapper over the Objective-C class NSSegmentedControl.
 type SegmentedControl struct {
-	inner *raw.NSSegmentedControl
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSegmentedControl].
-func (x *SegmentedControl) Unwrap() *raw.NSSegmentedControl { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SegmentedControl) ID() objc.ID { return x.inner.Ptr() }
-
-// SegmentedControlFromID adopts an existing object pointer as a SegmentedControl (nil for 0).
+// SegmentedControlFromID adopts an existing Objective-C object as a SegmentedControl
+// (nil for 0), retaining it and registering a release finalizer.
 func SegmentedControlFromID(id objc.ID) *SegmentedControl {
 	if id == 0 {
 		return nil
 	}
-	return &SegmentedControl{inner: raw.NSSegmentedControlFromID(id)}
+	x := &SegmentedControl{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSegmentedControl creates a new [SegmentedControl].
+// segmentedControlAdopt wraps an Objective-C object that this code just created as a
+// SegmentedControl (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func segmentedControlAdopt(id objc.ID) *SegmentedControl {
+	if id == 0 {
+		return nil
+	}
+	x := &SegmentedControl{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SegmentedControl) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SegmentedControl) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SegmentedControl) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSegmentedControl creates a new SegmentedControl.
 func NewSegmentedControl() *SegmentedControl {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSegmentedControl")), objc.RegisterName("new"))
-	return &SegmentedControl{inner: raw.NSSegmentedControlFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSegmentedControl")), objc.RegisterName("new"))
+	return segmentedControlAdopt(_id)
 }
 
 // The number of segments in the control.
 //
-// WithSegmentCount sets the segmentCount property and returns the receiver for chaining.
+// WithSegmentCount sets segmentCount and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithSegmentCount(segmentCount int) *SegmentedControl {
-	x.inner.SetSegmentCount(segmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentCount:"), segmentCount)
 	return x
 }
 
 // The index of the selected segment of the control, or -1 if no segment is selected.
 //
-// WithSelectedSegment sets the selectedSegment property and returns the receiver for chaining.
+// WithSelectedSegment sets selectedSegment and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithSelectedSegment(selectedSegment int) *SegmentedControl {
-	x.inner.SetSelectedSegment(selectedSegment)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedSegment:"), selectedSegment)
 	return x
 }
 
 // The visual style used to display the control.
 //
-// WithSegmentStyle sets the segmentStyle property and returns the receiver for chaining.
-func (x *SegmentedControl) WithSegmentStyle(segmentStyle NSSegmentStyle) *SegmentedControl {
-	x.inner.SetSegmentStyle(raw.NSSegmentStyle(segmentStyle))
+// WithSegmentStyle sets segmentStyle and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithSegmentStyle(segmentStyle SegmentStyle) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentStyle:"), segmentStyle)
 	return x
 }
 
 // A Boolean value that indicates whether spring loading is enabled for the control.
 //
-// WithSpringLoaded sets the springLoaded property and returns the receiver for chaining.
+// WithSpringLoaded sets springLoaded and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithSpringLoaded(springLoaded bool) *SegmentedControl {
-	x.inner.SetSpringLoaded(springLoaded)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpringLoaded:"), springLoaded)
 	return x
 }
 
 // The type of tracking behavior the control exhibits.
 //
-// WithTrackingMode sets the trackingMode property and returns the receiver for chaining.
-func (x *SegmentedControl) WithTrackingMode(trackingMode NSSegmentSwitchTracking) *SegmentedControl {
-	x.inner.SetTrackingMode(raw.NSSegmentSwitchTracking(trackingMode))
+// WithTrackingMode sets trackingMode and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithTrackingMode(trackingMode SegmentSwitchTracking) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackingMode:"), trackingMode)
 	return x
 }
 
 // The color of the selected segment’s bezel, in appearances that support it.
 //
-// WithSelectedSegmentBezelColor sets the selectedSegmentBezelColor property and returns the receiver for chaining.
+// WithSelectedSegmentBezelColor sets selectedSegmentBezelColor and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithSelectedSegmentBezelColor(selectedSegmentBezelColor *Color) *SegmentedControl {
-	x.inner.SetSelectedSegmentBezelColor(selectedSegmentBezelColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedSegmentBezelColor:"), objref.IDOf(selectedSegmentBezelColor))
 	return x
 }
 
-// WithSegmentDistribution sets the segmentDistribution property and returns the receiver for chaining.
-func (x *SegmentedControl) WithSegmentDistribution(segmentDistribution NSSegmentDistribution) *SegmentedControl {
-	x.inner.SetSegmentDistribution(raw.NSSegmentDistribution(segmentDistribution))
+// WithSegmentDistribution sets segmentDistribution and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithSegmentDistribution(segmentDistribution SegmentDistribution) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentDistribution:"), segmentDistribution)
 	return x
 }
 
-// WithBorderShape sets the borderShape property and returns the receiver for chaining.
-func (x *SegmentedControl) WithBorderShape(borderShape NSControlBorderShape) *SegmentedControl {
-	x.inner.SetBorderShape(raw.NSControlBorderShape(borderShape))
+// WithBorderShape sets borderShape and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithBorderShape(borderShape ControlBorderShape) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderShape:"), borderShape)
 	return x
 }
 
 // The target object that receives action messages from the cell.
 //
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *SegmentedControl) WithTarget(target objc.ID) *SegmentedControl {
-	x.inner.NSControl.SetTarget(target)
-	return x
-}
-
-// The default action-message selector associated with the control.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *SegmentedControl) WithAction(action objc.SEL) *SegmentedControl {
-	x.inner.NSControl.SetAction(action)
+// WithTarget sets target and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithTarget(target obj.Object) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
 // The tag identifying the receiver (not the tag of the receiver’s cell).
 //
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag sets tag and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithTag(tag int) *SegmentedControl {
-	x.inner.NSControl.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
 // A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 //
-// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+// WithIgnoresMultiClick sets ignoresMultiClick and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithIgnoresMultiClick(ignoresMultiClick bool) *SegmentedControl {
-	x.inner.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
 	return x
 }
 
 // A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 //
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous sets continuous and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithContinuous(continuous bool) *SegmentedControl {
-	x.inner.NSControl.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
 // A Boolean value that indicates whether the receiver reacts to mouse events.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithEnabled(enabled bool) *SegmentedControl {
-	x.inner.NSControl.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // A Boolean value indicating whether the receiver refuses the first responder role.
 //
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithRefusesFirstResponder(refusesFirstResponder bool) *SegmentedControl {
-	x.inner.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
 // A Boolean value that indicates whether the cell is highlighted.
 //
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithHighlighted(highlighted bool) *SegmentedControl {
-	x.inner.NSControl.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
 // The size of the control.
 //
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *SegmentedControl) WithControlSize(controlSize NSControlSize) *SegmentedControl {
-	x.inner.NSControl.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithControlSize(controlSize ControlSize) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
 // The receiver’s formatter.
 //
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *SegmentedControl) WithFormatter(formatter *foundation.NSFormatter) *SegmentedControl {
-	x.inner.NSControl.SetFormatter(formatter)
+// WithFormatter sets formatter and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithFormatter(formatter obj.Object) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
 // The value of the receiver’s cell as an Objective-C object.
 //
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *SegmentedControl) WithObjectValue(objectValue objc.ID) *SegmentedControl {
-	x.inner.NSControl.SetObjectValue(objectValue)
+// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithObjectValue(objectValue obj.Object) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
 // The value of the receiver’s cell as an NSString object.
 //
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue sets stringValue and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithStringValue(stringValue string) *SegmentedControl {
-	x.inner.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
 // The value of the receiver’s cell as an attributed string.
 //
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *SegmentedControl) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SegmentedControl {
-	x.inner.NSControl.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithAttributedStringValue(attributedStringValue obj.Object) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
 // The value of the receiver’s cell as an integer.
 //
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue sets intValue and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithIntValue(intValue int) *SegmentedControl {
-	x.inner.NSControl.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
 // The value of the receiver’s cell as an integer value.
 //
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithIntegerValue(integerValue int) *SegmentedControl {
-	x.inner.NSControl.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
 // The value of the receiver’s cell as a single-precision floating-point number.
 //
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithFloatValue(floatValue float32) *SegmentedControl {
-	x.inner.NSControl.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
 // The value of the receiver’s cell as a double-precision floating-point number.
 //
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithDoubleValue(doubleValue float64) *SegmentedControl {
-	x.inner.NSControl.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
 // The font used to draw text in the receiver’s cell.
 //
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont sets font and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithFont(font *Font) *SegmentedControl {
-	x.inner.NSControl.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
 // A Boolean value that indicates whether the text in the control’s cell uses single line mode.
 //
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithUsesSingleLineMode(usesSingleLineMode bool) *SegmentedControl {
-	x.inner.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
 // The line break mode to use for text in the control’s cell.
 //
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *SegmentedControl) WithLineBreakMode(lineBreakMode NSLineBreakMode) *SegmentedControl {
-	x.inner.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithLineBreakMode(lineBreakMode LineBreakMode) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
 // The alignment mode of the text in the receiver’s cell.
 //
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *SegmentedControl) WithAlignment(alignment NSTextAlignment) *SegmentedControl {
-	x.inner.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment sets alignment and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithAlignment(alignment TextAlignment) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
 // The initial writing direction used to determine the actual writing direction for text.
 //
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *SegmentedControl) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SegmentedControl {
-	x.inner.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithBaseWritingDirection(baseWritingDirection WritingDirection) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
 // A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 //
-// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+// WithAllowsExpansionToolTips sets allowsExpansionToolTips and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *SegmentedControl {
-	x.inner.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
 	return x
 }
 
-// WithCell sets the cell property and returns the receiver for chaining.
+// WithCell sets cell and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithCell(cell CellProvider) *SegmentedControl {
-	x.inner.NSControl.SetCell(cell.asCell())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return x
 }
 
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
+// WithSubviews sets the collection and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithSubviews(items ...ViewProvider) *SegmentedControl {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetSubviews(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithHidden(hidden bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+// WithPostsFrameChangedNotifications sets postsFrameChangedNotifications and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+// WithAutoresizesSubviews sets autoresizesSubviews and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithAutoresizesSubviews(autoresizesSubviews bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *SegmentedControl) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *SegmentedControl {
-	x.inner.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
+// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
-func (x *SegmentedControl) WithFrame(frame corefoundation.CGRect) *SegmentedControl {
-	x.inner.NSControl.NSView.SetFrame(frame)
-	return x
-}
-
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+// WithFrameRotation sets frameRotation and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithFrameRotation(frameRotation float64) *SegmentedControl {
-	x.inner.NSControl.NSView.SetFrameRotation(frameRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+// WithFrameCenterRotation sets frameCenterRotation and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithFrameCenterRotation(frameCenterRotation float64) *SegmentedControl {
-	x.inner.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+// WithBoundsRotation sets boundsRotation and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithBoundsRotation(boundsRotation float64) *SegmentedControl {
-	x.inner.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *SegmentedControl) WithBounds(bounds corefoundation.CGRect) *SegmentedControl {
-	x.inner.NSControl.NSView.SetBounds(bounds)
-	return x
-}
-
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+// WithCanDrawConcurrently sets canDrawConcurrently and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithCanDrawConcurrently(canDrawConcurrently bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
 // A Boolean value that determines whether the view needs to be redrawn before being displayed.
 //
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+// WithNeedsDisplay sets needsDisplay and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithNeedsDisplay(needsDisplay bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+// WithAcceptsTouchEvents sets acceptsTouchEvents and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithAcceptsTouchEvents(acceptsTouchEvents bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+// WithWantsRestingTouches sets wantsRestingTouches and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithWantsRestingTouches(wantsRestingTouches bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *SegmentedControl) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *SegmentedControl {
-	x.inner.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
+// WithLayerContentsRedrawPolicy sets layerContentsRedrawPolicy and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *SegmentedControl) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *SegmentedControl {
-	x.inner.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
+// WithLayerContentsPlacement sets layerContentsPlacement and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+// WithWantsLayer sets wantsLayer and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithWantsLayer(wantsLayer bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetWantsLayer(wantsLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *SegmentedControl) WithLayer(layer *quartzcore.CALayer) *SegmentedControl {
-	x.inner.NSControl.NSView.SetLayer(layer)
+// WithLayer sets layer and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithLayer(layer obj.Object) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+// WithCanDrawSubviewsIntoLayer sets canDrawSubviewsIntoLayer and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+// WithNeedsLayout sets needsLayout and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithNeedsLayout(needsLayout bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetNeedsLayout(needsLayout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithAlphaValue(alphaValue float64) *SegmentedControl {
-	x.inner.NSControl.NSView.SetAlphaValue(alphaValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+// WithLayerUsesCoreImageFilters sets layerUsesCoreImageFilters and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *SegmentedControl) WithBackgroundFilters(items ...*coreimage.CIFilter) *SegmentedControl {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetBackgroundFilters(_arr)
+// WithBackgroundFilters sets the collection and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithBackgroundFilters(items ...obj.Object) *SegmentedControl {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *SegmentedControl) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *SegmentedControl {
-	x.inner.NSControl.NSView.SetCompositingFilter(compositingFilter)
+// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithCompositingFilter(compositingFilter obj.Object) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *SegmentedControl) WithContentFilters(items ...*coreimage.CIFilter) *SegmentedControl {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetContentFilters(_arr)
+// WithContentFilters sets the collection and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithContentFilters(items ...obj.Object) *SegmentedControl {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets the shadow property and returns the receiver for chaining.
+// WithShadow sets shadow and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithShadow(shadow *Shadow) *SegmentedControl {
-	x.inner.NSControl.NSView.SetShadow(shadow.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+// WithClipsToBounds sets clipsToBounds and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithClipsToBounds(clipsToBounds bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+// WithPostsBoundsChangedNotifications sets postsBoundsChangedNotifications and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip sets toolTip and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithToolTip(toolTip string) *SegmentedControl {
-	x.inner.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *SegmentedControl) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SegmentedControl {
-	x.inner.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
-func (x *SegmentedControl) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SegmentedControl {
-	x.inner.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
-	return x
-}
-
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+// WithNextKeyView sets nextKeyView and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithNextKeyView(nextKeyView ViewProvider) *SegmentedControl {
-	x.inner.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *SegmentedControl) WithFocusRingType(focusRingType NSFocusRingType) *SegmentedControl {
-	x.inner.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithFocusRingType(focusRingType FocusRingType) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+// WithGestureRecognizers sets the collection and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithGestureRecognizers(items ...GestureRecognizerProvider) *SegmentedControl {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSControl.NSView.SetGestureRecognizers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *SegmentedControl) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *SegmentedControl {
-	x.inner.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
-	return x
-}
-
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
-func (x *SegmentedControl) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SegmentedControl {
-	x.inner.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+// WithAllowedTouchTypes sets allowedTouchTypes and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
 // When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+// WithPrefersCompactControlSizeMetrics sets prefersCompactControlSizeMetrics and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+// WithWritingToolsCoordinator sets writingToolsCoordinator and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SegmentedControl {
-	x.inner.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+// WithNeedsUpdateConstraints sets needsUpdateConstraints and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+// WithTranslatesAutoresizingMaskIntoConstraints sets translatesAutoresizingMaskIntoConstraints and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithHorizontalContentSizeConstraintActive sets horizontalContentSizeConstraintActive and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithVerticalContentSizeConstraintActive sets verticalContentSizeConstraintActive and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+// WithWantsBestResolutionOpenGLSurface sets wantsBestResolutionOpenGLSurface and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets wantsExtendedDynamicRangeOpenGLSurface and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *SegmentedControl {
-	x.inner.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+// WithPressureConfiguration sets pressureConfiguration and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SegmentedControl {
-	x.inner.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
 // The next responder after this one, or nil if it has none.
 //
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithNextResponder(nextResponder ResponderProvider) *SegmentedControl {
-	x.inner.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
 // Returns the responder’s menu.
 //
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu sets menu and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithMenu(menu *Menu) *SegmentedControl {
-	x.inner.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
 // An object encapsulating a user activity supported by this responder.
 //
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *SegmentedControl) WithUserActivity(userActivity *foundation.NSUserActivity) *SegmentedControl {
-	x.inner.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+func (x *SegmentedControl) WithUserActivity(userActivity obj.Object) *SegmentedControl {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
 // The NSTouchBar object associated with the responder.
 //
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
 func (x *SegmentedControl) WithTouchBar(touchBar *TouchBar) *SegmentedControl {
-	x.inner.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
 // Selects the segment with the specified tag.
-//
-// SelectSegmentWithTag calls the underlying SelectSegmentWithTag.
 func (x *SegmentedControl) SelectSegmentWithTag(tag int) bool {
-	return x.inner.SelectSegmentWithTag(tag)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("selectSegmentWithTag:"), tag)
+	return _r
 }
 
 // Sets the width of the specified segment.
-//
-// SetWidthForSegment calls the underlying SetWidthForSegment.
 func (x *SegmentedControl) SetWidthForSegment(width float64, segment int) {
-	x.inner.SetWidthForSegment(width, segment)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:forSegment:"), width, segment)
 }
 
 // Returns the width of the specified segment.
-//
-// WidthForSegment calls the underlying WidthForSegment.
 func (x *SegmentedControl) WidthForSegment(segment int) float64 {
-	return x.inner.WidthForSegment(segment)
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("widthForSegment:"), segment)
+	return _r
 }
 
 // Sets the image for the specified segment.
-//
-// SetImageForSegment calls the underlying SetImageForSegment.
-func (x *SegmentedControl) SetImageForSegment(image *raw.NSImage, segment int) {
-	x.inner.SetImageForSegment(image, segment)
+func (x *SegmentedControl) SetImageForSegment(image *Image, segment int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:forSegment:"), objref.IDOf(image), segment)
 }
 
 // Returns the image associated with the specified segment.
-//
-// ImageForSegment calls the underlying ImageForSegment.
 func (x *SegmentedControl) ImageForSegment(segment int) *Image {
-	_r := x.inner.ImageForSegment(segment)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageForSegment:"), segment)
+	return ImageFromID(_r)
 }
 
 // Sets the scaling mode used to display the specified segment’s image.
-//
-// SetImageScalingForSegment calls the underlying SetImageScalingForSegment.
-func (x *SegmentedControl) SetImageScalingForSegment(scaling NSImageScaling, segment int) {
-	x.inner.SetImageScalingForSegment(raw.NSImageScaling(scaling), segment)
+func (x *SegmentedControl) SetImageScalingForSegment(scaling ImageScaling, segment int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageScaling:forSegment:"), scaling, segment)
 }
 
 // Returns the scaling mode used to display the specified segment’s image.
-//
-// ImageScalingForSegment calls the underlying ImageScalingForSegment.
-func (x *SegmentedControl) ImageScalingForSegment(segment int) NSImageScaling {
-	return NSImageScaling(x.inner.ImageScalingForSegment(segment))
+func (x *SegmentedControl) ImageScalingForSegment(segment int) ImageScaling {
+	_r := objc.Send[ImageScaling](objref.IDOf(x), objc.RegisterName("imageScalingForSegment:"), segment)
+	return _r
 }
 
 // Sets the label for the specified segment.
-//
-// SetLabelForSegment calls the underlying SetLabelForSegment.
 func (x *SegmentedControl) SetLabelForSegment(label string, segment int) {
-	x.inner.SetLabelForSegment(foundation.NSStringStringWithUTF8String(label), segment)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:forSegment:"), purego.NSString(label), segment)
 }
 
 // Returns the label of the specified segment.
-//
-// LabelForSegment calls the underlying LabelForSegment.
 func (x *SegmentedControl) LabelForSegment(segment int) string {
-	_r := x.inner.LabelForSegment(segment)
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labelForSegment:"), segment)
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Sets the menu for the specified segment.
-//
-// SetMenuForSegment calls the underlying SetMenuForSegment.
-func (x *SegmentedControl) SetMenuForSegment(menu *raw.NSMenu, segment int) {
-	x.inner.SetMenuForSegment(menu, segment)
+func (x *SegmentedControl) SetMenuForSegment(menu *Menu, segment int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:forSegment:"), objref.IDOf(menu), segment)
 }
 
 // Returns the menu for the specified segment.
-//
-// MenuForSegment calls the underlying MenuForSegment.
 func (x *SegmentedControl) MenuForSegment(segment int) *Menu {
-	_r := x.inner.MenuForSegment(segment)
-	if _r == nil {
-		return nil
-	}
-	return &Menu{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuForSegment:"), segment)
+	return MenuFromID(_r)
 }
 
 // Sets the selection state of the specified segment.
-//
-// SetSelectedForSegment calls the underlying SetSelectedForSegment.
 func (x *SegmentedControl) SetSelectedForSegment(selected bool, segment int) {
-	x.inner.SetSelectedForSegment(selected, segment)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:forSegment:"), selected, segment)
 }
 
 // Returns a Boolean value indicating whether the specified segment is selected.
-//
-// IsSelectedForSegment calls the underlying IsSelectedForSegment.
 func (x *SegmentedControl) IsSelectedForSegment(segment int) bool {
-	return x.inner.IsSelectedForSegment(segment)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelectedForSegment:"), segment)
+	return _r
 }
 
 // Sets the enabled state of the specified segment
-//
-// SetEnabledForSegment calls the underlying SetEnabledForSegment.
 func (x *SegmentedControl) SetEnabledForSegment(enabled bool, segment int) {
-	x.inner.SetEnabledForSegment(enabled, segment)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:forSegment:"), enabled, segment)
 }
 
 // Returns a Boolean value indicating whether the specified segment is enabled.
-//
-// IsEnabledForSegment calls the underlying IsEnabledForSegment.
 func (x *SegmentedControl) IsEnabledForSegment(segment int) bool {
-	return x.inner.IsEnabledForSegment(segment)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabledForSegment:"), segment)
+	return _r
 }
 
-// SetToolTipForSegment calls the underlying SetToolTipForSegment.
 func (x *SegmentedControl) SetToolTipForSegment(toolTip string, segment int) {
-	x.inner.SetToolTipForSegment(foundation.NSStringStringWithUTF8String(toolTip), segment)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:forSegment:"), purego.NSString(toolTip), segment)
 }
 
-// ToolTipForSegment calls the underlying ToolTipForSegment.
 func (x *SegmentedControl) ToolTipForSegment(segment int) string {
-	_r := x.inner.ToolTipForSegment(segment)
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolTipForSegment:"), segment)
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTagForSegment calls the underlying SetTagForSegment.
 func (x *SegmentedControl) SetTagForSegment(tag int, segment int) {
-	x.inner.SetTagForSegment(tag, segment)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:forSegment:"), tag, segment)
 }
 
-// TagForSegment calls the underlying TagForSegment.
 func (x *SegmentedControl) TagForSegment(segment int) int {
-	return x.inner.TagForSegment(segment)
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tagForSegment:"), segment)
+	return _r
 }
 
-// SetShowsMenuIndicatorForSegment calls the underlying SetShowsMenuIndicatorForSegment.
 func (x *SegmentedControl) SetShowsMenuIndicatorForSegment(showsMenuIndicator bool, segment int) {
-	x.inner.SetShowsMenuIndicatorForSegment(showsMenuIndicator, segment)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsMenuIndicator:forSegment:"), showsMenuIndicator, segment)
 }
 
-// ShowsMenuIndicatorForSegment calls the underlying ShowsMenuIndicatorForSegment.
 func (x *SegmentedControl) ShowsMenuIndicatorForSegment(segment int) bool {
-	return x.inner.ShowsMenuIndicatorForSegment(segment)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsMenuIndicatorForSegment:"), segment)
+	return _r
 }
 
-// SetAlignmentForSegment calls the underlying SetAlignmentForSegment.
-func (x *SegmentedControl) SetAlignmentForSegment(alignment NSTextAlignment, segment int) {
-	x.inner.SetAlignmentForSegment(raw.NSTextAlignment(alignment), segment)
+func (x *SegmentedControl) SetAlignmentForSegment(alignment TextAlignment, segment int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:forSegment:"), alignment, segment)
 }
 
-// AlignmentForSegment calls the underlying AlignmentForSegment.
-func (x *SegmentedControl) AlignmentForSegment(segment int) NSTextAlignment {
-	return NSTextAlignment(x.inner.AlignmentForSegment(segment))
+func (x *SegmentedControl) AlignmentForSegment(segment int) TextAlignment {
+	_r := objc.Send[TextAlignment](objref.IDOf(x), objc.RegisterName("alignmentForSegment:"), segment)
+	return _r
 }
 
-// CompressWithPrioritizedCompressionOptions calls the underlying CompressWithPrioritizedCompressionOptions.
-func (x *SegmentedControl) CompressWithPrioritizedCompressionOptions(prioritizedOptions *foundation.NSArray[*raw.NSUserInterfaceCompressionOptions]) {
-	x.inner.CompressWithPrioritizedCompressionOptions(prioritizedOptions)
+func (x *SegmentedControl) CompressWithPrioritizedCompressionOptions(prioritizedOptions []*UserInterfaceCompressionOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compressWithPrioritizedCompressionOptions:"), purego.SliceToNSArray(prioritizedOptions, func(_v *UserInterfaceCompressionOptions) objc.ID { return objref.IDOf(_v) }))
 }
 
-// MinimumSizeWithPrioritizedCompressionOptions calls the underlying MinimumSizeWithPrioritizedCompressionOptions.
-func (x *SegmentedControl) MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptions *foundation.NSArray[*raw.NSUserInterfaceCompressionOptions]) corefoundation.CGSize {
-	return x.inner.MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptions)
-}
-
-// SegmentCount calls the underlying SegmentCount.
 func (x *SegmentedControl) SegmentCount() int {
-	return x.inner.SegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("segmentCount"))
+	return _r
 }
 
-// SetSegmentCount calls the underlying SetSegmentCount.
 func (x *SegmentedControl) SetSegmentCount(segmentCount int) {
-	x.inner.SetSegmentCount(segmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentCount:"), segmentCount)
 }
 
-// SelectedSegment calls the underlying SelectedSegment.
 func (x *SegmentedControl) SelectedSegment() int {
-	return x.inner.SelectedSegment()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectedSegment"))
+	return _r
 }
 
-// SetSelectedSegment calls the underlying SetSelectedSegment.
 func (x *SegmentedControl) SetSelectedSegment(selectedSegment int) {
-	x.inner.SetSelectedSegment(selectedSegment)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedSegment:"), selectedSegment)
 }
 
-// SegmentStyle calls the underlying SegmentStyle.
-func (x *SegmentedControl) SegmentStyle() NSSegmentStyle {
-	return NSSegmentStyle(x.inner.SegmentStyle())
+func (x *SegmentedControl) SegmentStyle() SegmentStyle {
+	_r := objc.Send[SegmentStyle](objref.IDOf(x), objc.RegisterName("segmentStyle"))
+	return _r
 }
 
-// SetSegmentStyle calls the underlying SetSegmentStyle.
-func (x *SegmentedControl) SetSegmentStyle(segmentStyle NSSegmentStyle) {
-	x.inner.SetSegmentStyle(raw.NSSegmentStyle(segmentStyle))
+func (x *SegmentedControl) SetSegmentStyle(segmentStyle SegmentStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentStyle:"), segmentStyle)
 }
 
-// IsSpringLoaded calls the underlying IsSpringLoaded.
 func (x *SegmentedControl) IsSpringLoaded() bool {
-	return x.inner.IsSpringLoaded()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSpringLoaded"))
+	return _r
 }
 
-// SetSpringLoaded calls the underlying SetSpringLoaded.
 func (x *SegmentedControl) SetSpringLoaded(springLoaded bool) {
-	x.inner.SetSpringLoaded(springLoaded)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpringLoaded:"), springLoaded)
 }
 
-// TrackingMode calls the underlying TrackingMode.
-func (x *SegmentedControl) TrackingMode() NSSegmentSwitchTracking {
-	return NSSegmentSwitchTracking(x.inner.TrackingMode())
+func (x *SegmentedControl) TrackingMode() SegmentSwitchTracking {
+	_r := objc.Send[SegmentSwitchTracking](objref.IDOf(x), objc.RegisterName("trackingMode"))
+	return _r
 }
 
-// SetTrackingMode calls the underlying SetTrackingMode.
-func (x *SegmentedControl) SetTrackingMode(trackingMode NSSegmentSwitchTracking) {
-	x.inner.SetTrackingMode(raw.NSSegmentSwitchTracking(trackingMode))
+func (x *SegmentedControl) SetTrackingMode(trackingMode SegmentSwitchTracking) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackingMode:"), trackingMode)
 }
 
-// DoubleValueForSelectedSegment calls the underlying DoubleValueForSelectedSegment.
 func (x *SegmentedControl) DoubleValueForSelectedSegment() float64 {
-	return x.inner.DoubleValueForSelectedSegment()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleValueForSelectedSegment"))
+	return _r
 }
 
-// SelectedSegmentBezelColor calls the underlying SelectedSegmentBezelColor.
 func (x *SegmentedControl) SelectedSegmentBezelColor() *Color {
-	_r := x.inner.SelectedSegmentBezelColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedSegmentBezelColor"))
+	return ColorFromID(_r)
 }
 
-// SetSelectedSegmentBezelColor calls the underlying SetSelectedSegmentBezelColor.
-func (x *SegmentedControl) SetSelectedSegmentBezelColor(selectedSegmentBezelColor *raw.NSColor) {
-	x.inner.SetSelectedSegmentBezelColor(selectedSegmentBezelColor)
+func (x *SegmentedControl) SetSelectedSegmentBezelColor(selectedSegmentBezelColor *Color) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedSegmentBezelColor:"), objref.IDOf(selectedSegmentBezelColor))
 }
 
-// IndexOfSelectedItem calls the underlying IndexOfSelectedItem.
 func (x *SegmentedControl) IndexOfSelectedItem() int {
-	return x.inner.IndexOfSelectedItem()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfSelectedItem"))
+	return _r
 }
 
-// SegmentDistribution calls the underlying SegmentDistribution.
-func (x *SegmentedControl) SegmentDistribution() NSSegmentDistribution {
-	return NSSegmentDistribution(x.inner.SegmentDistribution())
+func (x *SegmentedControl) SegmentDistribution() SegmentDistribution {
+	_r := objc.Send[SegmentDistribution](objref.IDOf(x), objc.RegisterName("segmentDistribution"))
+	return _r
 }
 
-// SetSegmentDistribution calls the underlying SetSegmentDistribution.
-func (x *SegmentedControl) SetSegmentDistribution(segmentDistribution NSSegmentDistribution) {
-	x.inner.SetSegmentDistribution(raw.NSSegmentDistribution(segmentDistribution))
+func (x *SegmentedControl) SetSegmentDistribution(segmentDistribution SegmentDistribution) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentDistribution:"), segmentDistribution)
 }
 
-// ActiveCompressionOptions calls the underlying ActiveCompressionOptions.
 func (x *SegmentedControl) ActiveCompressionOptions() *UserInterfaceCompressionOptions {
-	_r := x.inner.ActiveCompressionOptions()
-	if _r == nil {
-		return nil
-	}
-	return &UserInterfaceCompressionOptions{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeCompressionOptions"))
+	return UserInterfaceCompressionOptionsFromID(_r)
 }
 
-// BorderShape calls the underlying BorderShape.
-func (x *SegmentedControl) BorderShape() NSControlBorderShape {
-	return NSControlBorderShape(x.inner.BorderShape())
+func (x *SegmentedControl) BorderShape() ControlBorderShape {
+	_r := objc.Send[ControlBorderShape](objref.IDOf(x), objc.RegisterName("borderShape"))
+	return _r
 }
 
-// SetBorderShape calls the underlying SetBorderShape.
-func (x *SegmentedControl) SetBorderShape(borderShape NSControlBorderShape) {
-	x.inner.SetBorderShape(raw.NSControlBorderShape(borderShape))
-}
-
-func (x *SegmentedControl) asControl() *raw.NSControl { return &x.inner.NSControl }
-
-func (x *SegmentedControl) asView() *raw.NSView { return &x.inner.NSControl.NSView }
-
-func (x *SegmentedControl) asResponder() *raw.NSResponder {
-	return &x.inner.NSControl.NSView.NSResponder
+func (x *SegmentedControl) SetBorderShape(borderShape ControlBorderShape) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderShape:"), borderShape)
 }
 
 // SegmentedControlable is the interface implemented by [SegmentedControl], for mocking and DI.
 type SegmentedControlable interface {
-	Unwrap() *raw.NSSegmentedControl
+	obj.Object
 	WithSegmentCount(segmentCount int) *SegmentedControl
 	WithSelectedSegment(selectedSegment int) *SegmentedControl
-	WithSegmentStyle(segmentStyle NSSegmentStyle) *SegmentedControl
+	WithSegmentStyle(segmentStyle SegmentStyle) *SegmentedControl
 	WithSpringLoaded(springLoaded bool) *SegmentedControl
-	WithTrackingMode(trackingMode NSSegmentSwitchTracking) *SegmentedControl
+	WithTrackingMode(trackingMode SegmentSwitchTracking) *SegmentedControl
 	WithSelectedSegmentBezelColor(selectedSegmentBezelColor *Color) *SegmentedControl
-	WithSegmentDistribution(segmentDistribution NSSegmentDistribution) *SegmentedControl
-	WithBorderShape(borderShape NSControlBorderShape) *SegmentedControl
-	WithTarget(target objc.ID) *SegmentedControl
-	WithAction(action objc.SEL) *SegmentedControl
+	WithSegmentDistribution(segmentDistribution SegmentDistribution) *SegmentedControl
+	WithBorderShape(borderShape ControlBorderShape) *SegmentedControl
+	WithTarget(target obj.Object) *SegmentedControl
 	WithTag(tag int) *SegmentedControl
 	WithIgnoresMultiClick(ignoresMultiClick bool) *SegmentedControl
 	WithContinuous(continuous bool) *SegmentedControl
 	WithEnabled(enabled bool) *SegmentedControl
 	WithRefusesFirstResponder(refusesFirstResponder bool) *SegmentedControl
 	WithHighlighted(highlighted bool) *SegmentedControl
-	WithControlSize(controlSize NSControlSize) *SegmentedControl
-	WithFormatter(formatter *foundation.NSFormatter) *SegmentedControl
-	WithObjectValue(objectValue objc.ID) *SegmentedControl
+	WithControlSize(controlSize ControlSize) *SegmentedControl
+	WithFormatter(formatter obj.Object) *SegmentedControl
+	WithObjectValue(objectValue obj.Object) *SegmentedControl
 	WithStringValue(stringValue string) *SegmentedControl
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SegmentedControl
+	WithAttributedStringValue(attributedStringValue obj.Object) *SegmentedControl
 	WithIntValue(intValue int) *SegmentedControl
 	WithIntegerValue(integerValue int) *SegmentedControl
 	WithFloatValue(floatValue float32) *SegmentedControl
 	WithDoubleValue(doubleValue float64) *SegmentedControl
 	WithFont(font *Font) *SegmentedControl
 	WithUsesSingleLineMode(usesSingleLineMode bool) *SegmentedControl
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *SegmentedControl
-	WithAlignment(alignment NSTextAlignment) *SegmentedControl
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SegmentedControl
+	WithLineBreakMode(lineBreakMode LineBreakMode) *SegmentedControl
+	WithAlignment(alignment TextAlignment) *SegmentedControl
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *SegmentedControl
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *SegmentedControl
 	WithCell(cell CellProvider) *SegmentedControl
 	WithSubviews(items ...ViewProvider) *SegmentedControl
 	WithHidden(hidden bool) *SegmentedControl
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SegmentedControl
 	WithAutoresizesSubviews(autoresizesSubviews bool) *SegmentedControl
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *SegmentedControl
-	WithFrame(frame corefoundation.CGRect) *SegmentedControl
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *SegmentedControl
 	WithFrameRotation(frameRotation float64) *SegmentedControl
 	WithFrameCenterRotation(frameCenterRotation float64) *SegmentedControl
 	WithBoundsRotation(boundsRotation float64) *SegmentedControl
-	WithBounds(bounds corefoundation.CGRect) *SegmentedControl
 	WithCanDrawConcurrently(canDrawConcurrently bool) *SegmentedControl
 	WithNeedsDisplay(needsDisplay bool) *SegmentedControl
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *SegmentedControl
 	WithWantsRestingTouches(wantsRestingTouches bool) *SegmentedControl
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *SegmentedControl
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *SegmentedControl
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *SegmentedControl
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *SegmentedControl
 	WithWantsLayer(wantsLayer bool) *SegmentedControl
-	WithLayer(layer *quartzcore.CALayer) *SegmentedControl
+	WithLayer(layer obj.Object) *SegmentedControl
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SegmentedControl
 	WithNeedsLayout(needsLayout bool) *SegmentedControl
 	WithAlphaValue(alphaValue float64) *SegmentedControl
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *SegmentedControl
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *SegmentedControl
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *SegmentedControl
-	WithContentFilters(items ...*coreimage.CIFilter) *SegmentedControl
+	WithBackgroundFilters(items ...obj.Object) *SegmentedControl
+	WithCompositingFilter(compositingFilter obj.Object) *SegmentedControl
+	WithContentFilters(items ...obj.Object) *SegmentedControl
 	WithShadow(shadow *Shadow) *SegmentedControl
 	WithClipsToBounds(clipsToBounds bool) *SegmentedControl
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SegmentedControl
 	WithToolTip(toolTip string) *SegmentedControl
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SegmentedControl
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SegmentedControl
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SegmentedControl
 	WithNextKeyView(nextKeyView ViewProvider) *SegmentedControl
-	WithFocusRingType(focusRingType NSFocusRingType) *SegmentedControl
+	WithFocusRingType(focusRingType FocusRingType) *SegmentedControl
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *SegmentedControl
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *SegmentedControl
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SegmentedControl
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *SegmentedControl
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SegmentedControl
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SegmentedControl
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *SegmentedControl
@@ -1027,18 +885,18 @@ type SegmentedControlable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SegmentedControl
 	WithNextResponder(nextResponder ResponderProvider) *SegmentedControl
 	WithMenu(menu *Menu) *SegmentedControl
-	WithUserActivity(userActivity *foundation.NSUserActivity) *SegmentedControl
+	WithUserActivity(userActivity obj.Object) *SegmentedControl
 	WithTouchBar(touchBar *TouchBar) *SegmentedControl
 	SelectSegmentWithTag(tag int) bool
 	SetWidthForSegment(width float64, segment int)
 	WidthForSegment(segment int) float64
-	SetImageForSegment(image *raw.NSImage, segment int)
+	SetImageForSegment(image *Image, segment int)
 	ImageForSegment(segment int) *Image
-	SetImageScalingForSegment(scaling NSImageScaling, segment int)
-	ImageScalingForSegment(segment int) NSImageScaling
+	SetImageScalingForSegment(scaling ImageScaling, segment int)
+	ImageScalingForSegment(segment int) ImageScaling
 	SetLabelForSegment(label string, segment int)
 	LabelForSegment(segment int) string
-	SetMenuForSegment(menu *raw.NSMenu, segment int)
+	SetMenuForSegment(menu *Menu, segment int)
 	MenuForSegment(segment int) *Menu
 	SetSelectedForSegment(selected bool, segment int)
 	IsSelectedForSegment(segment int) bool
@@ -1050,29 +908,28 @@ type SegmentedControlable interface {
 	TagForSegment(segment int) int
 	SetShowsMenuIndicatorForSegment(showsMenuIndicator bool, segment int)
 	ShowsMenuIndicatorForSegment(segment int) bool
-	SetAlignmentForSegment(alignment NSTextAlignment, segment int)
-	AlignmentForSegment(segment int) NSTextAlignment
-	CompressWithPrioritizedCompressionOptions(prioritizedOptions *foundation.NSArray[*raw.NSUserInterfaceCompressionOptions])
-	MinimumSizeWithPrioritizedCompressionOptions(prioritizedOptions *foundation.NSArray[*raw.NSUserInterfaceCompressionOptions]) corefoundation.CGSize
+	SetAlignmentForSegment(alignment TextAlignment, segment int)
+	AlignmentForSegment(segment int) TextAlignment
+	CompressWithPrioritizedCompressionOptions(prioritizedOptions []*UserInterfaceCompressionOptions)
 	SegmentCount() int
 	SetSegmentCount(segmentCount int)
 	SelectedSegment() int
 	SetSelectedSegment(selectedSegment int)
-	SegmentStyle() NSSegmentStyle
-	SetSegmentStyle(segmentStyle NSSegmentStyle)
+	SegmentStyle() SegmentStyle
+	SetSegmentStyle(segmentStyle SegmentStyle)
 	IsSpringLoaded() bool
 	SetSpringLoaded(springLoaded bool)
-	TrackingMode() NSSegmentSwitchTracking
-	SetTrackingMode(trackingMode NSSegmentSwitchTracking)
+	TrackingMode() SegmentSwitchTracking
+	SetTrackingMode(trackingMode SegmentSwitchTracking)
 	DoubleValueForSelectedSegment() float64
 	SelectedSegmentBezelColor() *Color
-	SetSelectedSegmentBezelColor(selectedSegmentBezelColor *raw.NSColor)
+	SetSelectedSegmentBezelColor(selectedSegmentBezelColor *Color)
 	IndexOfSelectedItem() int
-	SegmentDistribution() NSSegmentDistribution
-	SetSegmentDistribution(segmentDistribution NSSegmentDistribution)
+	SegmentDistribution() SegmentDistribution
+	SetSegmentDistribution(segmentDistribution SegmentDistribution)
 	ActiveCompressionOptions() *UserInterfaceCompressionOptions
-	BorderShape() NSControlBorderShape
-	SetBorderShape(borderShape NSControlBorderShape)
+	BorderShape() ControlBorderShape
+	SetBorderShape(borderShape ControlBorderShape)
 }
 
 var _ SegmentedControlable = (*SegmentedControl)(nil)

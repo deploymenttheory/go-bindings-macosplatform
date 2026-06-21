@@ -5,63 +5,79 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that directs sound in a heart-shaped curve surrounding a sound source.
 //
-// CardioidDirectivityModelParameters wraps [raw.PHASECardioidDirectivityModelParameters] with a fluent Go API.
+// CardioidDirectivityModelParameters is an idiomatic wrapper over the Objective-C class PHASECardioidDirectivityModelParameters.
 type CardioidDirectivityModelParameters struct {
-	inner *raw.PHASECardioidDirectivityModelParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASECardioidDirectivityModelParameters].
-func (x *CardioidDirectivityModelParameters) Unwrap() *raw.PHASECardioidDirectivityModelParameters {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CardioidDirectivityModelParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// CardioidDirectivityModelParametersFromID adopts an existing object pointer as a CardioidDirectivityModelParameters (nil for 0).
+// CardioidDirectivityModelParametersFromID adopts an existing Objective-C object as a CardioidDirectivityModelParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func CardioidDirectivityModelParametersFromID(id objc.ID) *CardioidDirectivityModelParameters {
 	if id == 0 {
 		return nil
 	}
-	return &CardioidDirectivityModelParameters{inner: raw.PHASECardioidDirectivityModelParametersFromID(id)}
+	x := &CardioidDirectivityModelParameters{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// cardioidDirectivityModelParametersAdopt wraps an Objective-C object that this code just created as a
+// CardioidDirectivityModelParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cardioidDirectivityModelParametersAdopt(id objc.ID) *CardioidDirectivityModelParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &CardioidDirectivityModelParameters{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CardioidDirectivityModelParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CardioidDirectivityModelParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CardioidDirectivityModelParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an object that directs sound in a heart-shaped curve surrounding a sound source.
 //
-// NewCardioidDirectivityModelParametersWithSubbandParameters creates a new [CardioidDirectivityModelParameters].
-func NewCardioidDirectivityModelParametersWithSubbandParameters(subbandParameters *foundation.NSArray[*raw.PHASECardioidDirectivityModelSubbandParameters]) *CardioidDirectivityModelParameters {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASECardioidDirectivityModelParameters")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubbandParameters:"), subbandParameters.Ptr())
-	return &CardioidDirectivityModelParameters{inner: raw.PHASECardioidDirectivityModelParametersFromID(_id)}
+// NewCardioidDirectivityModelParametersWithSubbandParameters creates a new CardioidDirectivityModelParameters.
+func NewCardioidDirectivityModelParametersWithSubbandParameters(subbandParameters []*CardioidDirectivityModelSubbandParameters) *CardioidDirectivityModelParameters {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASECardioidDirectivityModelParameters")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubbandParameters:"), purego.SliceToNSArray(subbandParameters, func(_v *CardioidDirectivityModelSubbandParameters) objc.ID { return objref.IDOf(_v) }))
+	return cardioidDirectivityModelParametersAdopt(_id)
 }
 
 // SubbandParameters returns the collection as a Go slice.
 func (x *CardioidDirectivityModelParameters) SubbandParameters() []*CardioidDirectivityModelSubbandParameters {
-	arr := x.inner.SubbandParameters()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CardioidDirectivityModelSubbandParameters {
-		return &CardioidDirectivityModelSubbandParameters{inner: raw.PHASECardioidDirectivityModelSubbandParametersFromID(purego.Retain(_id))}
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subbandParameters"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CardioidDirectivityModelSubbandParameters {
+		return CardioidDirectivityModelSubbandParametersFromID(_id)
 	})
-}
-
-func (x *CardioidDirectivityModelParameters) asDirectivityModelParameters() *raw.PHASEDirectivityModelParameters {
-	return &x.inner.PHASEDirectivityModelParameters
 }
 
 // CardioidDirectivityModelParametersable is the interface implemented by [CardioidDirectivityModelParameters], for mocking and DI.
 type CardioidDirectivityModelParametersable interface {
-	Unwrap() *raw.PHASECardioidDirectivityModelParameters
+	obj.Object
 	SubbandParameters() []*CardioidDirectivityModelSubbandParameters
 }
 

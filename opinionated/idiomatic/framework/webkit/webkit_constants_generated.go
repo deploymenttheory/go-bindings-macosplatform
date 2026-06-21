@@ -5,609 +5,410 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @constant WKErrorDomain Indicates a WebKit error.
-// WKErrorDomain returns the string constant WKErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func WKErrorDomain() objc.ID {
-	return purego.CFConstant(raw.WKErrorDomain())
-}
-
-// WKWebExtensionPermissionActiveTab returns the string constant WKWebExtensionPermissionActiveTab as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionPermissionActiveTab() objc.ID {
-	if _r := raw.WKWebExtensionPermissionActiveTab(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// WKWebExtensionPermissionAlarms returns the string constant WKWebExtensionPermissionAlarms as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionPermissionAlarms() objc.ID {
-	if _r := raw.WKWebExtensionPermissionAlarms(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// WKWebExtensionPermissionClipboardWrite returns the string constant WKWebExtensionPermissionClipboardWrite as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionPermissionClipboardWrite() objc.ID {
-	if _r := raw.WKWebExtensionPermissionClipboardWrite(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// WKWebExtensionPermissionContextMenus returns the string constant WKWebExtensionPermissionContextMenus as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionPermissionContextMenus() objc.ID {
-	if _r := raw.WKWebExtensionPermissionContextMenus(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// WKWebExtensionPermissionCookies returns the string constant WKWebExtensionPermissionCookies as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionPermissionCookies() objc.ID {
-	if _r := raw.WKWebExtensionPermissionCookies(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// WKWebExtensionPermissionDeclarativeNetRequest returns the string constant WKWebExtensionPermissionDeclarativeNetRequest as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionPermissionDeclarativeNetRequest() objc.ID {
-	if _r := raw.WKWebExtensionPermissionDeclarativeNetRequest(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WKErrorDomain returns the string constant WKErrorDomain, for use as a dictionary key or argument.
+func WKErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("WKErrorDomain"))) }
+
+// WKWebExtensionPermissionActiveTab returns the string constant WKWebExtensionPermissionActiveTab, for use as a dictionary key or argument.
+func WKWebExtensionPermissionActiveTab() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionPermissionActiveTab")))
 }
-
-// WKWebExtensionPermissionDeclarativeNetRequestFeedback returns the string constant WKWebExtensionPermissionDeclarativeNetRequestFeedback as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionPermissionDeclarativeNetRequestFeedback() objc.ID {
-	if _r := raw.WKWebExtensionPermissionDeclarativeNetRequestFeedback(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// WKWebExtensionPermissionAlarms returns the string constant WKWebExtensionPermissionAlarms, for use as a dictionary key or argument.
+func WKWebExtensionPermissionAlarms() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionPermissionAlarms")))
 }
-
-// WKWebExtensionPermissionDeclarativeNetRequestWithHostAccess returns the string constant WKWebExtensionPermissionDeclarativeNetRequestWithHostAccess as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionPermissionDeclarativeNetRequestWithHostAccess() objc.ID {
-	if _r := raw.WKWebExtensionPermissionDeclarativeNetRequestWithHostAccess(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// WKWebExtensionPermissionClipboardWrite returns the string constant WKWebExtensionPermissionClipboardWrite, for use as a dictionary key or argument.
+func WKWebExtensionPermissionClipboardWrite() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionPermissionClipboardWrite")))
 }
-
-// WKWebExtensionPermissionMenus returns the string constant WKWebExtensionPermissionMenus as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionPermissionMenus() objc.ID {
-	if _r := raw.WKWebExtensionPermissionMenus(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// WKWebExtensionPermissionContextMenus returns the string constant WKWebExtensionPermissionContextMenus, for use as a dictionary key or argument.
+func WKWebExtensionPermissionContextMenus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionPermissionContextMenus")))
 }
-
-// WKWebExtensionPermissionNativeMessaging returns the string constant WKWebExtensionPermissionNativeMessaging as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionPermissionNativeMessaging() objc.ID {
-	if _r := raw.WKWebExtensionPermissionNativeMessaging(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// WKWebExtensionPermissionCookies returns the string constant WKWebExtensionPermissionCookies, for use as a dictionary key or argument.
+func WKWebExtensionPermissionCookies() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionPermissionCookies")))
 }
 
-// WKWebExtensionPermissionScripting returns the string constant WKWebExtensionPermissionScripting as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionPermissionScripting() objc.ID {
-	if _r := raw.WKWebExtensionPermissionScripting(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WKWebExtensionPermissionDeclarativeNetRequest returns the string constant WKWebExtensionPermissionDeclarativeNetRequest, for use as a dictionary key or argument.
+func WKWebExtensionPermissionDeclarativeNetRequest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionPermissionDeclarativeNetRequest")))
 }
 
-// WKWebExtensionPermissionStorage returns the string constant WKWebExtensionPermissionStorage as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionPermissionStorage() objc.ID {
-	if _r := raw.WKWebExtensionPermissionStorage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WKWebExtensionPermissionDeclarativeNetRequestFeedback returns the string constant WKWebExtensionPermissionDeclarativeNetRequestFeedback, for use as a dictionary key or argument.
+func WKWebExtensionPermissionDeclarativeNetRequestFeedback() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionPermissionDeclarativeNetRequestFeedback")))
 }
 
-// WKWebExtensionPermissionTabs returns the string constant WKWebExtensionPermissionTabs as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionPermissionTabs() objc.ID {
-	if _r := raw.WKWebExtensionPermissionTabs(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WKWebExtensionPermissionDeclarativeNetRequestWithHostAccess returns the string constant WKWebExtensionPermissionDeclarativeNetRequestWithHostAccess, for use as a dictionary key or argument.
+func WKWebExtensionPermissionDeclarativeNetRequestWithHostAccess() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionPermissionDeclarativeNetRequestWithHostAccess")))
 }
 
-// WKWebExtensionPermissionUnlimitedStorage returns the string constant WKWebExtensionPermissionUnlimitedStorage as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionPermissionUnlimitedStorage() objc.ID {
-	if _r := raw.WKWebExtensionPermissionUnlimitedStorage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WKWebExtensionPermissionMenus returns the string constant WKWebExtensionPermissionMenus, for use as a dictionary key or argument.
+func WKWebExtensionPermissionMenus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionPermissionMenus")))
 }
 
-// WKWebExtensionPermissionWebNavigation returns the string constant WKWebExtensionPermissionWebNavigation as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionPermissionWebNavigation() objc.ID {
-	if _r := raw.WKWebExtensionPermissionWebNavigation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WKWebExtensionPermissionNativeMessaging returns the string constant WKWebExtensionPermissionNativeMessaging, for use as a dictionary key or argument.
+func WKWebExtensionPermissionNativeMessaging() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionPermissionNativeMessaging")))
 }
 
-// WKWebExtensionPermissionWebRequest returns the string constant WKWebExtensionPermissionWebRequest as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionPermissionWebRequest() objc.ID {
-	if _r := raw.WKWebExtensionPermissionWebRequest(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WKWebExtensionPermissionScripting returns the string constant WKWebExtensionPermissionScripting, for use as a dictionary key or argument.
+func WKWebExtensionPermissionScripting() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionPermissionScripting")))
 }
 
-// WKWebExtensionContextNotificationUserInfoKeyPermissions returns the string constant WKWebExtensionContextNotificationUserInfoKeyPermissions as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionContextNotificationUserInfoKeyPermissions() objc.ID {
-	if _r := raw.WKWebExtensionContextNotificationUserInfoKeyPermissions(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WKWebExtensionPermissionStorage returns the string constant WKWebExtensionPermissionStorage, for use as a dictionary key or argument.
+func WKWebExtensionPermissionStorage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionPermissionStorage")))
 }
 
-// WKWebExtensionContextNotificationUserInfoKeyMatchPatterns returns the string constant WKWebExtensionContextNotificationUserInfoKeyMatchPatterns as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionContextNotificationUserInfoKeyMatchPatterns() objc.ID {
-	if _r := raw.WKWebExtensionContextNotificationUserInfoKeyMatchPatterns(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WKWebExtensionPermissionTabs returns the string constant WKWebExtensionPermissionTabs, for use as a dictionary key or argument.
+func WKWebExtensionPermissionTabs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionPermissionTabs")))
 }
 
-// WKWebExtensionDataTypeLocal returns the string constant WKWebExtensionDataTypeLocal as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionDataTypeLocal() objc.ID {
-	if _r := raw.WKWebExtensionDataTypeLocal(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WKWebExtensionPermissionUnlimitedStorage returns the string constant WKWebExtensionPermissionUnlimitedStorage, for use as a dictionary key or argument.
+func WKWebExtensionPermissionUnlimitedStorage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionPermissionUnlimitedStorage")))
 }
 
-// WKWebExtensionDataTypeSession returns the string constant WKWebExtensionDataTypeSession as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionDataTypeSession() objc.ID {
-	if _r := raw.WKWebExtensionDataTypeSession(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WKWebExtensionPermissionWebNavigation returns the string constant WKWebExtensionPermissionWebNavigation, for use as a dictionary key or argument.
+func WKWebExtensionPermissionWebNavigation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionPermissionWebNavigation")))
 }
 
-// WKWebExtensionDataTypeSynchronized returns the string constant WKWebExtensionDataTypeSynchronized as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebExtensionDataTypeSynchronized() objc.ID {
-	if _r := raw.WKWebExtensionDataTypeSynchronized(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WKWebExtensionPermissionWebRequest returns the string constant WKWebExtensionPermissionWebRequest, for use as a dictionary key or argument.
+func WKWebExtensionPermissionWebRequest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionPermissionWebRequest")))
 }
 
-// @constant WKWebsiteDataTypeFetchCache On-disk Fetch caches.
-// WKWebsiteDataTypeFetchCache returns the string constant WKWebsiteDataTypeFetchCache as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebsiteDataTypeFetchCache() objc.ID {
-	return purego.CFConstant(raw.WKWebsiteDataTypeFetchCache())
+// WKWebExtensionContextNotificationUserInfoKeyPermissions returns the string constant WKWebExtensionContextNotificationUserInfoKeyPermissions, for use as a dictionary key or argument.
+func WKWebExtensionContextNotificationUserInfoKeyPermissions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionContextNotificationUserInfoKeyPermissions")))
 }
 
-// @constant WKWebsiteDataTypeDiskCache On-disk caches.
-// WKWebsiteDataTypeDiskCache returns the string constant WKWebsiteDataTypeDiskCache as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebsiteDataTypeDiskCache() objc.ID {
-	return purego.CFConstant(raw.WKWebsiteDataTypeDiskCache())
+// WKWebExtensionContextNotificationUserInfoKeyMatchPatterns returns the string constant WKWebExtensionContextNotificationUserInfoKeyMatchPatterns, for use as a dictionary key or argument.
+func WKWebExtensionContextNotificationUserInfoKeyMatchPatterns() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionContextNotificationUserInfoKeyMatchPatterns")))
 }
 
-// @constant WKWebsiteDataTypeMemoryCache In-memory caches.
-// WKWebsiteDataTypeMemoryCache returns the string constant WKWebsiteDataTypeMemoryCache as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebsiteDataTypeMemoryCache() objc.ID {
-	return purego.CFConstant(raw.WKWebsiteDataTypeMemoryCache())
+// WKWebExtensionDataTypeLocal returns the string constant WKWebExtensionDataTypeLocal, for use as a dictionary key or argument.
+func WKWebExtensionDataTypeLocal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionDataTypeLocal")))
 }
 
-// @constant WKWebsiteDataTypeOfflineWebApplicationCache HTML offline web application caches.
-// WKWebsiteDataTypeOfflineWebApplicationCache returns the string constant WKWebsiteDataTypeOfflineWebApplicationCache as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebsiteDataTypeOfflineWebApplicationCache() objc.ID {
-	return purego.CFConstant(raw.WKWebsiteDataTypeOfflineWebApplicationCache())
+// WKWebExtensionDataTypeSession returns the string constant WKWebExtensionDataTypeSession, for use as a dictionary key or argument.
+func WKWebExtensionDataTypeSession() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionDataTypeSession")))
 }
 
-// @constant WKWebsiteDataTypeCookies Cookies.
-// WKWebsiteDataTypeCookies returns the string constant WKWebsiteDataTypeCookies as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebsiteDataTypeCookies() objc.ID {
-	return purego.CFConstant(raw.WKWebsiteDataTypeCookies())
+// WKWebExtensionDataTypeSynchronized returns the string constant WKWebExtensionDataTypeSynchronized, for use as a dictionary key or argument.
+func WKWebExtensionDataTypeSynchronized() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebExtensionDataTypeSynchronized")))
 }
 
-// @constant WKWebsiteDataTypeSessionStorage HTML session storage.
-// WKWebsiteDataTypeSessionStorage returns the string constant WKWebsiteDataTypeSessionStorage as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebsiteDataTypeSessionStorage() objc.ID {
-	return purego.CFConstant(raw.WKWebsiteDataTypeSessionStorage())
+// WKWebsiteDataTypeFetchCache returns the string constant WKWebsiteDataTypeFetchCache, for use as a dictionary key or argument.
+func WKWebsiteDataTypeFetchCache() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebsiteDataTypeFetchCache")))
 }
 
-// @constant WKWebsiteDataTypeLocalStorage HTML local storage.
-// WKWebsiteDataTypeLocalStorage returns the string constant WKWebsiteDataTypeLocalStorage as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebsiteDataTypeLocalStorage() objc.ID {
-	return purego.CFConstant(raw.WKWebsiteDataTypeLocalStorage())
+// WKWebsiteDataTypeDiskCache returns the string constant WKWebsiteDataTypeDiskCache, for use as a dictionary key or argument.
+func WKWebsiteDataTypeDiskCache() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebsiteDataTypeDiskCache")))
 }
 
-// @constant WKWebsiteDataTypeWebSQLDatabases WebSQL databases.
-// WKWebsiteDataTypeWebSQLDatabases returns the string constant WKWebsiteDataTypeWebSQLDatabases as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebsiteDataTypeWebSQLDatabases() objc.ID {
-	return purego.CFConstant(raw.WKWebsiteDataTypeWebSQLDatabases())
+// WKWebsiteDataTypeMemoryCache returns the string constant WKWebsiteDataTypeMemoryCache, for use as a dictionary key or argument.
+func WKWebsiteDataTypeMemoryCache() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebsiteDataTypeMemoryCache")))
 }
 
-// @constant WKWebsiteDataTypeIndexedDBDatabases IndexedDB databases.
-// WKWebsiteDataTypeIndexedDBDatabases returns the string constant WKWebsiteDataTypeIndexedDBDatabases as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebsiteDataTypeIndexedDBDatabases() objc.ID {
-	return purego.CFConstant(raw.WKWebsiteDataTypeIndexedDBDatabases())
+// WKWebsiteDataTypeOfflineWebApplicationCache returns the string constant WKWebsiteDataTypeOfflineWebApplicationCache, for use as a dictionary key or argument.
+func WKWebsiteDataTypeOfflineWebApplicationCache() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebsiteDataTypeOfflineWebApplicationCache")))
 }
 
-// @constant WKWebsiteDataTypeServiceWorkerRegistrations Service worker registrations.
-// WKWebsiteDataTypeServiceWorkerRegistrations returns the string constant WKWebsiteDataTypeServiceWorkerRegistrations as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebsiteDataTypeServiceWorkerRegistrations() objc.ID {
-	return purego.CFConstant(raw.WKWebsiteDataTypeServiceWorkerRegistrations())
+// WKWebsiteDataTypeCookies returns the string constant WKWebsiteDataTypeCookies, for use as a dictionary key or argument.
+func WKWebsiteDataTypeCookies() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebsiteDataTypeCookies")))
 }
 
-// @constant WKWebsiteDataTypeFileSystem File system storage.
-// WKWebsiteDataTypeFileSystem returns the string constant WKWebsiteDataTypeFileSystem as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebsiteDataTypeFileSystem() objc.ID {
-	return purego.CFConstant(raw.WKWebsiteDataTypeFileSystem())
+// WKWebsiteDataTypeSessionStorage returns the string constant WKWebsiteDataTypeSessionStorage, for use as a dictionary key or argument.
+func WKWebsiteDataTypeSessionStorage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebsiteDataTypeSessionStorage")))
 }
 
-// @constant WKWebsiteDataTypeSearchFieldRecentSearches Search field history.
-// WKWebsiteDataTypeSearchFieldRecentSearches returns the string constant WKWebsiteDataTypeSearchFieldRecentSearches as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebsiteDataTypeSearchFieldRecentSearches() objc.ID {
-	return purego.CFConstant(raw.WKWebsiteDataTypeSearchFieldRecentSearches())
+// WKWebsiteDataTypeLocalStorage returns the string constant WKWebsiteDataTypeLocalStorage, for use as a dictionary key or argument.
+func WKWebsiteDataTypeLocalStorage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebsiteDataTypeLocalStorage")))
 }
 
-// @constant WKWebsiteDataTypeMediaKeys MediaKeys storage
-// WKWebsiteDataTypeMediaKeys returns the string constant WKWebsiteDataTypeMediaKeys as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebsiteDataTypeMediaKeys() objc.ID {
-	return purego.CFConstant(raw.WKWebsiteDataTypeMediaKeys())
+// WKWebsiteDataTypeWebSQLDatabases returns the string constant WKWebsiteDataTypeWebSQLDatabases, for use as a dictionary key or argument.
+func WKWebsiteDataTypeWebSQLDatabases() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebsiteDataTypeWebSQLDatabases")))
 }
 
-// @constant WKWebsiteDataTypeHashSalt Hash salt for deviceId
-// WKWebsiteDataTypeHashSalt returns the string constant WKWebsiteDataTypeHashSalt as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebsiteDataTypeHashSalt() objc.ID {
-	return purego.CFConstant(raw.WKWebsiteDataTypeHashSalt())
+// WKWebsiteDataTypeIndexedDBDatabases returns the string constant WKWebsiteDataTypeIndexedDBDatabases, for use as a dictionary key or argument.
+func WKWebsiteDataTypeIndexedDBDatabases() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebsiteDataTypeIndexedDBDatabases")))
 }
 
-// @constant WKWebsiteDataTypeScreenTime Screen Time information
-// WKWebsiteDataTypeScreenTime returns the string constant WKWebsiteDataTypeScreenTime as an objc.ID, for use as a dictionary key or selector argument.
-func WKWebsiteDataTypeScreenTime() objc.ID {
-	return purego.CFConstant(raw.WKWebsiteDataTypeScreenTime())
+// WKWebsiteDataTypeServiceWorkerRegistrations returns the string constant WKWebsiteDataTypeServiceWorkerRegistrations, for use as a dictionary key or argument.
+func WKWebsiteDataTypeServiceWorkerRegistrations() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebsiteDataTypeServiceWorkerRegistrations")))
 }
 
-// DOMException returns the string constant DOMException as an objc.ID, for use as a dictionary key or selector argument.
-func DOMException() objc.ID {
-	return purego.CFConstant(raw.DOMException())
+// WKWebsiteDataTypeFileSystem returns the string constant WKWebsiteDataTypeFileSystem, for use as a dictionary key or argument.
+func WKWebsiteDataTypeFileSystem() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebsiteDataTypeFileSystem")))
 }
 
-// DOMRangeException returns the string constant DOMRangeException as an objc.ID, for use as a dictionary key or selector argument.
-func DOMRangeException() objc.ID {
-	return purego.CFConstant(raw.DOMRangeException())
+// WKWebsiteDataTypeSearchFieldRecentSearches returns the string constant WKWebsiteDataTypeSearchFieldRecentSearches, for use as a dictionary key or argument.
+func WKWebsiteDataTypeSearchFieldRecentSearches() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebsiteDataTypeSearchFieldRecentSearches")))
 }
 
-// DOMEventException returns the string constant DOMEventException as an objc.ID, for use as a dictionary key or selector argument.
-func DOMEventException() objc.ID {
-	return purego.CFConstant(raw.DOMEventException())
+// WKWebsiteDataTypeMediaKeys returns the string constant WKWebsiteDataTypeMediaKeys, for use as a dictionary key or argument.
+func WKWebsiteDataTypeMediaKeys() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebsiteDataTypeMediaKeys")))
 }
 
-// DOMXPathException returns the string constant DOMXPathException as an objc.ID, for use as a dictionary key or selector argument.
-func DOMXPathException() objc.ID {
-	return purego.CFConstant(raw.DOMXPathException())
+// WKWebsiteDataTypeHashSalt returns the string constant WKWebsiteDataTypeHashSalt, for use as a dictionary key or argument.
+func WKWebsiteDataTypeHashSalt() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebsiteDataTypeHashSalt")))
 }
 
-// @const WebArchivePboardType @abstract The pasteboard type constant used when adding or accessing a WebArchive on the pasteboard.
-// WebArchivePboardType returns the string constant WebArchivePboardType as an objc.ID, for use as a dictionary key or selector argument.
-func WebArchivePboardType() objc.ID {
-	if _r := raw.WebArchivePboardType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WKWebsiteDataTypeScreenTime returns the string constant WKWebsiteDataTypeScreenTime, for use as a dictionary key or argument.
+func WKWebsiteDataTypeScreenTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WKWebsiteDataTypeScreenTime")))
 }
+
+// DOMException returns the string constant DOMException, for use as a dictionary key or argument.
+func DOMException() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DOMException"))) }
 
-// WebHistoryItemsAddedNotification returns the string constant WebHistoryItemsAddedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func WebHistoryItemsAddedNotification() objc.ID {
-	if _r := raw.WebHistoryItemsAddedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// DOMRangeException returns the string constant DOMRangeException, for use as a dictionary key or argument.
+func DOMRangeException() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DOMRangeException"))) }
+
+// DOMEventException returns the string constant DOMEventException, for use as a dictionary key or argument.
+func DOMEventException() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DOMEventException"))) }
+
+// DOMXPathException returns the string constant DOMXPathException, for use as a dictionary key or argument.
+func DOMXPathException() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("DOMXPathException"))) }
+
+// The pasteboard type constant used when adding or accessing a WebArchive on the pasteboard.
+// WebArchivePboardType returns the string constant WebArchivePboardType, for use as a dictionary key or argument.
+func WebArchivePboardType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebArchivePboardType")))
 }
 
-// WebHistoryItemsRemovedNotification returns the string constant WebHistoryItemsRemovedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func WebHistoryItemsRemovedNotification() objc.ID {
-	if _r := raw.WebHistoryItemsRemovedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebHistoryItemsAddedNotification returns the string constant WebHistoryItemsAddedNotification, for use as a dictionary key or argument.
+func WebHistoryItemsAddedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebHistoryItemsAddedNotification")))
 }
 
-// WebHistoryAllItemsRemovedNotification returns the string constant WebHistoryAllItemsRemovedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func WebHistoryAllItemsRemovedNotification() objc.ID {
-	if _r := raw.WebHistoryAllItemsRemovedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebHistoryItemsRemovedNotification returns the string constant WebHistoryItemsRemovedNotification, for use as a dictionary key or argument.
+func WebHistoryItemsRemovedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebHistoryItemsRemovedNotification")))
 }
 
-// WebHistoryLoadedNotification returns the string constant WebHistoryLoadedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func WebHistoryLoadedNotification() objc.ID {
-	if _r := raw.WebHistoryLoadedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebHistoryAllItemsRemovedNotification returns the string constant WebHistoryAllItemsRemovedNotification, for use as a dictionary key or argument.
+func WebHistoryAllItemsRemovedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebHistoryAllItemsRemovedNotification")))
 }
 
-// WebHistorySavedNotification returns the string constant WebHistorySavedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func WebHistorySavedNotification() objc.ID {
-	if _r := raw.WebHistorySavedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebHistoryLoadedNotification returns the string constant WebHistoryLoadedNotification, for use as a dictionary key or argument.
+func WebHistoryLoadedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebHistoryLoadedNotification")))
 }
 
-// WebHistoryItemsKey returns the string constant WebHistoryItemsKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebHistoryItemsKey() objc.ID {
-	if _r := raw.WebHistoryItemsKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebHistorySavedNotification returns the string constant WebHistorySavedNotification, for use as a dictionary key or argument.
+func WebHistorySavedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebHistorySavedNotification")))
 }
 
-// WebHistoryItemChangedNotification returns the string constant WebHistoryItemChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func WebHistoryItemChangedNotification() objc.ID {
-	if _r := raw.WebHistoryItemChangedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebHistoryItemsKey returns the string constant WebHistoryItemsKey, for use as a dictionary key or argument.
+func WebHistoryItemsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebHistoryItemsKey")))
 }
 
-// WebKitErrorDomain returns the string constant WebKitErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func WebKitErrorDomain() objc.ID {
-	if _r := raw.WebKitErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebHistoryItemChangedNotification returns the string constant WebHistoryItemChangedNotification, for use as a dictionary key or argument.
+func WebHistoryItemChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebHistoryItemChangedNotification")))
 }
+
+// WebKitErrorDomain returns the string constant WebKitErrorDomain, for use as a dictionary key or argument.
+func WebKitErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("WebKitErrorDomain"))) }
 
-// WebKitErrorMIMETypeKey returns the string constant WebKitErrorMIMETypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebKitErrorMIMETypeKey() objc.ID {
-	return purego.CFConstant(raw.WebKitErrorMIMETypeKey())
+// WebKitErrorMIMETypeKey returns the string constant WebKitErrorMIMETypeKey, for use as a dictionary key or argument.
+func WebKitErrorMIMETypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebKitErrorMIMETypeKey")))
 }
 
-// WebKitErrorPlugInNameKey returns the string constant WebKitErrorPlugInNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebKitErrorPlugInNameKey() objc.ID {
-	return purego.CFConstant(raw.WebKitErrorPlugInNameKey())
+// WebKitErrorPlugInNameKey returns the string constant WebKitErrorPlugInNameKey, for use as a dictionary key or argument.
+func WebKitErrorPlugInNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebKitErrorPlugInNameKey")))
 }
 
-// WebKitErrorPlugInPageURLStringKey returns the string constant WebKitErrorPlugInPageURLStringKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebKitErrorPlugInPageURLStringKey() objc.ID {
-	return purego.CFConstant(raw.WebKitErrorPlugInPageURLStringKey())
+// WebKitErrorPlugInPageURLStringKey returns the string constant WebKitErrorPlugInPageURLStringKey, for use as a dictionary key or argument.
+func WebKitErrorPlugInPageURLStringKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebKitErrorPlugInPageURLStringKey")))
 }
 
-// @constant WebPlugInBaseURLKey REQUIRED. The base URL of the document containing the plug-in's view.
-// WebPlugInBaseURLKey returns the string constant WebPlugInBaseURLKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebPlugInBaseURLKey() objc.ID {
-	if _r := raw.WebPlugInBaseURLKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebPlugInBaseURLKey returns the string constant WebPlugInBaseURLKey, for use as a dictionary key or argument.
+func WebPlugInBaseURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebPlugInBaseURLKey")))
 }
 
-// @constant WebPlugInAttributesKey REQUIRED. The dictionary containing the names and values of all attributes of the HTML element associated with the plug-in AND the names and values of all parameters to be passed to the plug-in (e.g. PARAM elements within an APPLET element). In the case of a conflict between names, the attributes of an element take precedence over any PARAMs.  All of the keys and values in this NSDictionary must be NSStrings.
-// WebPlugInAttributesKey returns the string constant WebPlugInAttributesKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebPlugInAttributesKey() objc.ID {
-	if _r := raw.WebPlugInAttributesKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebPlugInAttributesKey returns the string constant WebPlugInAttributesKey, for use as a dictionary key or argument.
+func WebPlugInAttributesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebPlugInAttributesKey")))
 }
 
-// @constant WebPlugInContainer OPTIONAL. An object that conforms to the WebPlugInContainer informal protocol. This object is used for callbacks from the plug-in to the app. if this argument is nil, no callbacks will occur.
-// WebPlugInContainerKey returns the string constant WebPlugInContainerKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebPlugInContainerKey() objc.ID {
-	if _r := raw.WebPlugInContainerKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebPlugInContainerKey returns the string constant WebPlugInContainerKey, for use as a dictionary key or argument.
+func WebPlugInContainerKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebPlugInContainerKey")))
 }
 
-// @constant WebPlugInContainingElementKey The DOMElement that was used to specify the plug-in.  May be nil.
-// WebPlugInContainingElementKey returns the string constant WebPlugInContainingElementKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebPlugInContainingElementKey() objc.ID {
-	if _r := raw.WebPlugInContainingElementKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebPlugInContainingElementKey returns the string constant WebPlugInContainingElementKey, for use as a dictionary key or argument.
+func WebPlugInContainingElementKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebPlugInContainingElementKey")))
 }
 
-// @constant WebPlugInShouldLoadMainResourceKey REQUIRED. NSNumber (BOOL) indicating whether the plug-in should load its own main resource (the "src" URL, in most cases). If YES, the plug-in should load its own main resource. If NO, the plug-in should use the data provided by WebKit. See -webPlugInMainResourceReceivedData: in WebPluginPrivate.h. For compatibility with older versions of WebKit, the plug-in should assume that the value for WebPlugInShouldLoadMainResourceKey is NO if it is absent from the arguments dictionary.
-// WebPlugInShouldLoadMainResourceKey returns the string constant WebPlugInShouldLoadMainResourceKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebPlugInShouldLoadMainResourceKey() objc.ID {
-	if _r := raw.WebPlugInShouldLoadMainResourceKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebPlugInShouldLoadMainResourceKey returns the string constant WebPlugInShouldLoadMainResourceKey, for use as a dictionary key or argument.
+func WebPlugInShouldLoadMainResourceKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebPlugInShouldLoadMainResourceKey")))
 }
 
-// WebActionNavigationTypeKey returns the string constant WebActionNavigationTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebActionNavigationTypeKey() objc.ID {
-	if _r := raw.WebActionNavigationTypeKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebActionNavigationTypeKey returns the string constant WebActionNavigationTypeKey, for use as a dictionary key or argument.
+func WebActionNavigationTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebActionNavigationTypeKey")))
 }
 
-// WebActionElementKey returns the string constant WebActionElementKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebActionElementKey() objc.ID {
-	if _r := raw.WebActionElementKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebActionElementKey returns the string constant WebActionElementKey, for use as a dictionary key or argument.
+func WebActionElementKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebActionElementKey")))
 }
 
-// WebActionButtonKey returns the string constant WebActionButtonKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebActionButtonKey() objc.ID {
-	if _r := raw.WebActionButtonKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebActionButtonKey returns the string constant WebActionButtonKey, for use as a dictionary key or argument.
+func WebActionButtonKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebActionButtonKey")))
 }
 
-// WebActionModifierFlagsKey returns the string constant WebActionModifierFlagsKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebActionModifierFlagsKey() objc.ID {
-	if _r := raw.WebActionModifierFlagsKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebActionModifierFlagsKey returns the string constant WebActionModifierFlagsKey, for use as a dictionary key or argument.
+func WebActionModifierFlagsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebActionModifierFlagsKey")))
 }
 
-// WebActionOriginalURLKey returns the string constant WebActionOriginalURLKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebActionOriginalURLKey() objc.ID {
-	if _r := raw.WebActionOriginalURLKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebActionOriginalURLKey returns the string constant WebActionOriginalURLKey, for use as a dictionary key or argument.
+func WebActionOriginalURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebActionOriginalURLKey")))
 }
 
-// WebPreferencesChangedNotification returns the string constant WebPreferencesChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func WebPreferencesChangedNotification() objc.ID {
-	if _r := raw.WebPreferencesChangedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebPreferencesChangedNotification returns the string constant WebPreferencesChangedNotification, for use as a dictionary key or argument.
+func WebPreferencesChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebPreferencesChangedNotification")))
 }
 
-// WebElementDOMNodeKey returns the string constant WebElementDOMNodeKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebElementDOMNodeKey() objc.ID {
-	if _r := raw.WebElementDOMNodeKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebElementDOMNodeKey returns the string constant WebElementDOMNodeKey, for use as a dictionary key or argument.
+func WebElementDOMNodeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebElementDOMNodeKey")))
 }
 
-// WebElementFrameKey returns the string constant WebElementFrameKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebElementFrameKey() objc.ID {
-	if _r := raw.WebElementFrameKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebElementFrameKey returns the string constant WebElementFrameKey, for use as a dictionary key or argument.
+func WebElementFrameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebElementFrameKey")))
 }
 
-// WebElementImageAltStringKey returns the string constant WebElementImageAltStringKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebElementImageAltStringKey() objc.ID {
-	if _r := raw.WebElementImageAltStringKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebElementImageAltStringKey returns the string constant WebElementImageAltStringKey, for use as a dictionary key or argument.
+func WebElementImageAltStringKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebElementImageAltStringKey")))
 }
 
-// WebElementImageKey returns the string constant WebElementImageKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebElementImageKey() objc.ID {
-	if _r := raw.WebElementImageKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebElementImageKey returns the string constant WebElementImageKey, for use as a dictionary key or argument.
+func WebElementImageKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebElementImageKey")))
 }
 
-// WebElementImageRectKey returns the string constant WebElementImageRectKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebElementImageRectKey() objc.ID {
-	if _r := raw.WebElementImageRectKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebElementImageRectKey returns the string constant WebElementImageRectKey, for use as a dictionary key or argument.
+func WebElementImageRectKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebElementImageRectKey")))
 }
 
-// WebElementImageURLKey returns the string constant WebElementImageURLKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebElementImageURLKey() objc.ID {
-	if _r := raw.WebElementImageURLKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebElementImageURLKey returns the string constant WebElementImageURLKey, for use as a dictionary key or argument.
+func WebElementImageURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebElementImageURLKey")))
 }
 
-// WebElementIsSelectedKey returns the string constant WebElementIsSelectedKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebElementIsSelectedKey() objc.ID {
-	if _r := raw.WebElementIsSelectedKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebElementIsSelectedKey returns the string constant WebElementIsSelectedKey, for use as a dictionary key or argument.
+func WebElementIsSelectedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebElementIsSelectedKey")))
 }
 
-// WebElementLinkURLKey returns the string constant WebElementLinkURLKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebElementLinkURLKey() objc.ID {
-	if _r := raw.WebElementLinkURLKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebElementLinkURLKey returns the string constant WebElementLinkURLKey, for use as a dictionary key or argument.
+func WebElementLinkURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebElementLinkURLKey")))
 }
 
-// WebElementLinkTargetFrameKey returns the string constant WebElementLinkTargetFrameKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebElementLinkTargetFrameKey() objc.ID {
-	if _r := raw.WebElementLinkTargetFrameKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebElementLinkTargetFrameKey returns the string constant WebElementLinkTargetFrameKey, for use as a dictionary key or argument.
+func WebElementLinkTargetFrameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebElementLinkTargetFrameKey")))
 }
 
-// WebElementLinkTitleKey returns the string constant WebElementLinkTitleKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebElementLinkTitleKey() objc.ID {
-	if _r := raw.WebElementLinkTitleKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebElementLinkTitleKey returns the string constant WebElementLinkTitleKey, for use as a dictionary key or argument.
+func WebElementLinkTitleKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebElementLinkTitleKey")))
 }
 
-// WebElementLinkLabelKey returns the string constant WebElementLinkLabelKey as an objc.ID, for use as a dictionary key or selector argument.
-func WebElementLinkLabelKey() objc.ID {
-	if _r := raw.WebElementLinkLabelKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebElementLinkLabelKey returns the string constant WebElementLinkLabelKey, for use as a dictionary key or argument.
+func WebElementLinkLabelKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebElementLinkLabelKey")))
 }
 
-// WebViewProgressStartedNotification returns the string constant WebViewProgressStartedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func WebViewProgressStartedNotification() objc.ID {
-	if _r := raw.WebViewProgressStartedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebViewProgressStartedNotification returns the string constant WebViewProgressStartedNotification, for use as a dictionary key or argument.
+func WebViewProgressStartedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebViewProgressStartedNotification")))
 }
 
-// WebViewProgressEstimateChangedNotification returns the string constant WebViewProgressEstimateChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func WebViewProgressEstimateChangedNotification() objc.ID {
-	if _r := raw.WebViewProgressEstimateChangedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebViewProgressEstimateChangedNotification returns the string constant WebViewProgressEstimateChangedNotification, for use as a dictionary key or argument.
+func WebViewProgressEstimateChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebViewProgressEstimateChangedNotification")))
 }
 
-// WebViewProgressFinishedNotification returns the string constant WebViewProgressFinishedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func WebViewProgressFinishedNotification() objc.ID {
-	if _r := raw.WebViewProgressFinishedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// WebViewProgressFinishedNotification returns the string constant WebViewProgressFinishedNotification, for use as a dictionary key or argument.
+func WebViewProgressFinishedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebViewProgressFinishedNotification")))
 }
 
-// WebViewDidBeginEditingNotification returns the string constant WebViewDidBeginEditingNotification as an objc.ID, for use as a dictionary key or selector argument.
-func WebViewDidBeginEditingNotification() objc.ID {
-	return purego.CFConstant(raw.WebViewDidBeginEditingNotification())
+// WebViewDidBeginEditingNotification returns the string constant WebViewDidBeginEditingNotification, for use as a dictionary key or argument.
+func WebViewDidBeginEditingNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebViewDidBeginEditingNotification")))
 }
 
-// WebViewDidChangeNotification returns the string constant WebViewDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func WebViewDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.WebViewDidChangeNotification())
+// WebViewDidChangeNotification returns the string constant WebViewDidChangeNotification, for use as a dictionary key or argument.
+func WebViewDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebViewDidChangeNotification")))
 }
 
-// WebViewDidEndEditingNotification returns the string constant WebViewDidEndEditingNotification as an objc.ID, for use as a dictionary key or selector argument.
-func WebViewDidEndEditingNotification() objc.ID {
-	return purego.CFConstant(raw.WebViewDidEndEditingNotification())
+// WebViewDidEndEditingNotification returns the string constant WebViewDidEndEditingNotification, for use as a dictionary key or argument.
+func WebViewDidEndEditingNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebViewDidEndEditingNotification")))
 }
 
-// WebViewDidChangeTypingStyleNotification returns the string constant WebViewDidChangeTypingStyleNotification as an objc.ID, for use as a dictionary key or selector argument.
-func WebViewDidChangeTypingStyleNotification() objc.ID {
-	return purego.CFConstant(raw.WebViewDidChangeTypingStyleNotification())
+// WebViewDidChangeTypingStyleNotification returns the string constant WebViewDidChangeTypingStyleNotification, for use as a dictionary key or argument.
+func WebViewDidChangeTypingStyleNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebViewDidChangeTypingStyleNotification")))
 }
 
-// WebViewDidChangeSelectionNotification returns the string constant WebViewDidChangeSelectionNotification as an objc.ID, for use as a dictionary key or selector argument.
-func WebViewDidChangeSelectionNotification() objc.ID {
-	return purego.CFConstant(raw.WebViewDidChangeSelectionNotification())
+// WebViewDidChangeSelectionNotification returns the string constant WebViewDidChangeSelectionNotification, for use as a dictionary key or argument.
+func WebViewDidChangeSelectionNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("WebViewDidChangeSelectionNotification")))
 }

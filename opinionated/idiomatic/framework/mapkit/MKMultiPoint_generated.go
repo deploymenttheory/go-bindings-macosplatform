@@ -5,103 +5,106 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An abstract class that defines the common behavior that open and closed polygon overlays share.
 //
-// MultiPoint wraps [raw.MKMultiPoint] with a fluent Go API.
+// MultiPoint is an idiomatic wrapper over the Objective-C class MKMultiPoint.
 type MultiPoint struct {
-	inner *raw.MKMultiPoint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKMultiPoint].
-func (x *MultiPoint) Unwrap() *raw.MKMultiPoint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MultiPoint) ID() objc.ID { return x.inner.Ptr() }
-
-// MultiPointFromID adopts an existing object pointer as a MultiPoint (nil for 0).
+// MultiPointFromID adopts an existing Objective-C object as a MultiPoint
+// (nil for 0), retaining it and registering a release finalizer.
 func MultiPointFromID(id objc.ID) *MultiPoint {
 	if id == 0 {
 		return nil
 	}
-	return &MultiPoint{inner: raw.MKMultiPointFromID(id)}
+	x := &MultiPoint{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMultiPoint creates a new [MultiPoint].
+// multiPointAdopt wraps an Objective-C object that this code just created as a
+// MultiPoint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func multiPointAdopt(id objc.ID) *MultiPoint {
+	if id == 0 {
+		return nil
+	}
+	x := &MultiPoint{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MultiPoint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MultiPoint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MultiPoint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMultiPoint creates a new MultiPoint.
 func NewMultiPoint() *MultiPoint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMultiPoint")), objc.RegisterName("new"))
-	return &MultiPoint{inner: raw.MKMultiPointFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKMultiPoint")), objc.RegisterName("new"))
+	return multiPointAdopt(_id)
 }
 
 // The title of the shape annotation.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *MultiPoint) WithTitle(title string) *MultiPoint {
-	x.inner.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // The subtitle of the shape annotation.
 //
-// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
 func (x *MultiPoint) WithSubtitle(subtitle string) *MultiPoint {
-	x.inner.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
-// Returns an array of map points associated with the shape.
-//
-// Points calls the underlying Points.
-func (x *MultiPoint) Points() *raw.MKMapPoint {
-	return x.inner.Points()
-}
-
-// Retrieves one or more points associated with the shape and converts them to coordinate values.
-//
-// GetCoordinatesRange calls the underlying GetCoordinatesRange.
-func (x *MultiPoint) GetCoordinatesRange(coords unsafe.Pointer, range_ foundation.NSRange) {
-	x.inner.GetCoordinatesRange(coords, range_)
-}
-
 // Translates a point index into a unit distance along the shape.
-//
-// LocationAtPointIndex calls the underlying LocationAtPointIndex.
-func (x *MultiPoint) LocationAtPointIndex(index uint) float64 {
-	return x.inner.LocationAtPointIndex(index)
+func (x *MultiPoint) LocationAtPointIndex(index int) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("locationAtPointIndex:"), index)
+	return _r
 }
 
 // Returns a set of unit distance values that correspond to the point indexes along the shape.
-//
-// LocationsAtPointIndexes calls the underlying LocationsAtPointIndexes.
-func (x *MultiPoint) LocationsAtPointIndexes(indexes *foundation.NSIndexSet) *foundation.NSArray[*foundation.NSNumber] {
-	return x.inner.LocationsAtPointIndexes(indexes)
+func (x *MultiPoint) LocationsAtPointIndexes(indexes obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locationsAtPointIndexes:"), objref.IDOf(indexes))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// PointCount calls the underlying PointCount.
-func (x *MultiPoint) PointCount() uint {
-	return x.inner.PointCount()
+func (x *MultiPoint) PointCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pointCount"))
+	return _r
 }
-
-func (x *MultiPoint) asMultiPoint() *raw.MKMultiPoint { return x.inner }
-
-func (x *MultiPoint) asShape() *raw.MKShape { return &x.inner.MKShape }
 
 // MultiPointable is the interface implemented by [MultiPoint], for mocking and DI.
 type MultiPointable interface {
-	Unwrap() *raw.MKMultiPoint
+	obj.Object
 	WithTitle(title string) *MultiPoint
 	WithSubtitle(subtitle string) *MultiPoint
-	Points() *raw.MKMapPoint
-	GetCoordinatesRange(coords unsafe.Pointer, range_ foundation.NSRange)
-	LocationAtPointIndex(index uint) float64
-	LocationsAtPointIndexes(indexes *foundation.NSIndexSet) *foundation.NSArray[*foundation.NSNumber]
-	PointCount() uint
+	LocationAtPointIndex(index int) float64
+	LocationsAtPointIndexes(indexes obj.Object) []obj.Object
+	PointCount() int
 }
 
 var _ MultiPointable = (*MultiPoint)(nil)

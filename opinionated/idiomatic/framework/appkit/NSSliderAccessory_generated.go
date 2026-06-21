@@ -5,87 +5,106 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// SliderAccessory wraps [raw.NSSliderAccessory] with a fluent Go API.
+// SliderAccessory is an idiomatic wrapper over the Objective-C class NSSliderAccessory.
 type SliderAccessory struct {
-	inner *raw.NSSliderAccessory
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSliderAccessory].
-func (x *SliderAccessory) Unwrap() *raw.NSSliderAccessory { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SliderAccessory) ID() objc.ID { return x.inner.Ptr() }
-
-// SliderAccessoryFromID adopts an existing object pointer as a SliderAccessory (nil for 0).
+// SliderAccessoryFromID adopts an existing Objective-C object as a SliderAccessory
+// (nil for 0), retaining it and registering a release finalizer.
 func SliderAccessoryFromID(id objc.ID) *SliderAccessory {
 	if id == 0 {
 		return nil
 	}
-	return &SliderAccessory{inner: raw.NSSliderAccessoryFromID(id)}
+	x := &SliderAccessory{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSliderAccessory creates a new [SliderAccessory].
+// sliderAccessoryAdopt wraps an Objective-C object that this code just created as a
+// SliderAccessory (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sliderAccessoryAdopt(id objc.ID) *SliderAccessory {
+	if id == 0 {
+		return nil
+	}
+	x := &SliderAccessory{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SliderAccessory) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SliderAccessory) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SliderAccessory) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSliderAccessory creates a new SliderAccessory.
 func NewSliderAccessory() *SliderAccessory {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSliderAccessory")), objc.RegisterName("new"))
-	return &SliderAccessory{inner: raw.NSSliderAccessoryFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSliderAccessory")), objc.RegisterName("new"))
+	return sliderAccessoryAdopt(_id)
 }
 
 // The effect on interaction with the accessory.
 //
-// WithBehavior sets the behavior property and returns the receiver for chaining.
+// WithBehavior sets behavior and returns the receiver so calls can be chained.
 func (x *SliderAccessory) WithBehavior(behavior *SliderAccessoryBehavior) *SliderAccessory {
-	x.inner.SetBehavior(behavior.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
 	return x
 }
 
 // Determines whether or not the accessory is interactive and draws with an enabled appearance. Defaults to true.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *SliderAccessory) WithEnabled(enabled bool) *SliderAccessory {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // The effect on interaction with the accessory. The default value is `automaticBehavior`.
-//
-// Behavior calls the underlying Behavior.
 func (x *SliderAccessory) Behavior() *SliderAccessoryBehavior {
-	_r := x.inner.Behavior()
-	if _r == nil {
-		return nil
-	}
-	return &SliderAccessoryBehavior{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("behavior"))
+	return SliderAccessoryBehaviorFromID(_r)
 }
 
-// SetBehavior calls the underlying SetBehavior.
-func (x *SliderAccessory) SetBehavior(behavior *raw.NSSliderAccessoryBehavior) {
-	x.inner.SetBehavior(behavior)
+func (x *SliderAccessory) SetBehavior(behavior *SliderAccessoryBehavior) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
 }
 
 // Determines whether or not the accessory is interactive and draws with an enabled appearance. Defaults to `true`.
-//
-// IsEnabled calls the underlying IsEnabled.
 func (x *SliderAccessory) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// SetEnabled calls the underlying SetEnabled.
 func (x *SliderAccessory) SetEnabled(enabled bool) {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
 // SliderAccessoryable is the interface implemented by [SliderAccessory], for mocking and DI.
 type SliderAccessoryable interface {
-	Unwrap() *raw.NSSliderAccessory
+	obj.Object
 	WithBehavior(behavior *SliderAccessoryBehavior) *SliderAccessory
 	WithEnabled(enabled bool) *SliderAccessory
 	Behavior() *SliderAccessoryBehavior
-	SetBehavior(behavior *raw.NSSliderAccessoryBehavior)
+	SetBehavior(behavior *SliderAccessoryBehavior)
 	IsEnabled() bool
 	SetEnabled(enabled bool)
 }

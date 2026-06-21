@@ -5,388 +5,344 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRCommissioningParameters wraps [raw.MTRCommissioningParameters] with a fluent Go API.
+// MTRCommissioningParameters is an idiomatic wrapper over the Objective-C class MTRCommissioningParameters.
 type MTRCommissioningParameters struct {
-	inner *raw.MTRCommissioningParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRCommissioningParameters].
-func (x *MTRCommissioningParameters) Unwrap() *raw.MTRCommissioningParameters { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRCommissioningParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRCommissioningParametersFromID adopts an existing object pointer as a MTRCommissioningParameters (nil for 0).
+// MTRCommissioningParametersFromID adopts an existing Objective-C object as a MTRCommissioningParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRCommissioningParametersFromID(id objc.ID) *MTRCommissioningParameters {
 	if id == 0 {
 		return nil
 	}
-	return &MTRCommissioningParameters{inner: raw.MTRCommissioningParametersFromID(id)}
+	x := &MTRCommissioningParameters{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRCommissioningParameters creates a new [MTRCommissioningParameters].
+// mTRCommissioningParametersAdopt wraps an Objective-C object that this code just created as a
+// MTRCommissioningParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRCommissioningParametersAdopt(id objc.ID) *MTRCommissioningParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRCommissioningParameters{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRCommissioningParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRCommissioningParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRCommissioningParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRCommissioningParameters creates a new MTRCommissioningParameters.
 func NewMTRCommissioningParameters() *MTRCommissioningParameters {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRCommissioningParameters")), objc.RegisterName("new"))
-	return &MTRCommissioningParameters{inner: raw.MTRCommissioningParametersFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRCommissioningParameters")), objc.RegisterName("new"))
+	return mTRCommissioningParametersAdopt(_id)
 }
 
 // The nonce to use when requesting a CSR for the node's operational certificate. If nil, a random nonce will be generated automatically. If not nil, must be 32 bytes of data.
 //
-// WithCsrNonce sets the csrNonce property and returns the receiver for chaining.
-func (x *MTRCommissioningParameters) WithCsrNonce(csrNonce *foundation.NSData) *MTRCommissioningParameters {
-	x.inner.SetCsrNonce(csrNonce)
+// WithCsrNonce sets csrNonce and returns the receiver so calls can be chained.
+func (x *MTRCommissioningParameters) WithCsrNonce(csrNonce obj.Object) *MTRCommissioningParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCsrNonce:"), objref.IDOf(csrNonce))
 	return x
 }
 
 // The nonce to use when requesting attestation information from the device. If nil, a random nonce will be generated automatically. If not nil, must be 32 bytes of data.
 //
-// WithAttestationNonce sets the attestationNonce property and returns the receiver for chaining.
-func (x *MTRCommissioningParameters) WithAttestationNonce(attestationNonce *foundation.NSData) *MTRCommissioningParameters {
-	x.inner.SetAttestationNonce(attestationNonce)
+// WithAttestationNonce sets attestationNonce and returns the receiver so calls can be chained.
+func (x *MTRCommissioningParameters) WithAttestationNonce(attestationNonce obj.Object) *MTRCommissioningParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttestationNonce:"), objref.IDOf(attestationNonce))
 	return x
 }
 
 // The Wi-Fi SSID, if available.
 //
-// WithWifiSSID sets the wifiSSID property and returns the receiver for chaining.
-func (x *MTRCommissioningParameters) WithWifiSSID(wifiSSID *foundation.NSData) *MTRCommissioningParameters {
-	x.inner.SetWifiSSID(wifiSSID)
+// WithWifiSSID sets wifiSSID and returns the receiver so calls can be chained.
+func (x *MTRCommissioningParameters) WithWifiSSID(wifiSSID obj.Object) *MTRCommissioningParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWifiSSID:"), objref.IDOf(wifiSSID))
 	return x
 }
 
 // The Wi-Fi Credentials.  Allowed to be nil or 0-length data for an open network, as long as wifiSSID is not nil.
 //
-// WithWifiCredentials sets the wifiCredentials property and returns the receiver for chaining.
-func (x *MTRCommissioningParameters) WithWifiCredentials(wifiCredentials *foundation.NSData) *MTRCommissioningParameters {
-	x.inner.SetWifiCredentials(wifiCredentials)
+// WithWifiCredentials sets wifiCredentials and returns the receiver so calls can be chained.
+func (x *MTRCommissioningParameters) WithWifiCredentials(wifiCredentials obj.Object) *MTRCommissioningParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWifiCredentials:"), objref.IDOf(wifiCredentials))
 	return x
 }
 
 // The Thread operational dataset, if available.
 //
-// WithThreadOperationalDataset sets the threadOperationalDataset property and returns the receiver for chaining.
-func (x *MTRCommissioningParameters) WithThreadOperationalDataset(threadOperationalDataset *foundation.NSData) *MTRCommissioningParameters {
-	x.inner.SetThreadOperationalDataset(threadOperationalDataset)
-	return x
-}
-
-// An optional delegate that can be notified upon completion of device attestation.  See documentation for MTRDeviceAttestationDelegate for details. The delegate methods will be invoked on an arbitrary thread.
-//
-// WithDeviceAttestationDelegate sets the deviceAttestationDelegate property and returns the receiver for chaining.
-func (x *MTRCommissioningParameters) WithDeviceAttestationDelegate(deviceAttestationDelegate raw.MTRDeviceAttestationDelegate) *MTRCommissioningParameters {
-	x.inner.SetDeviceAttestationDelegate(deviceAttestationDelegate)
+// WithThreadOperationalDataset sets threadOperationalDataset and returns the receiver so calls can be chained.
+func (x *MTRCommissioningParameters) WithThreadOperationalDataset(threadOperationalDataset obj.Object) *MTRCommissioningParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadOperationalDataset:"), objref.IDOf(threadOperationalDataset))
 	return x
 }
 
 // The timeout, in seconds, to set for the fail-safe when calling into the deviceAttestationDelegate and waiting for it to respond. If nil, the fail-safe will not be extended before calling into the deviceAttestationDelegate.
 //
-// WithFailSafeTimeout sets the failSafeTimeout property and returns the receiver for chaining.
-func (x *MTRCommissioningParameters) WithFailSafeTimeout(failSafeTimeout *foundation.NSNumber) *MTRCommissioningParameters {
-	x.inner.SetFailSafeTimeout(failSafeTimeout)
+// WithFailSafeTimeout sets failSafeTimeout and returns the receiver so calls can be chained.
+func (x *MTRCommissioningParameters) WithFailSafeTimeout(failSafeTimeout obj.Object) *MTRCommissioningParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFailSafeTimeout:"), objref.IDOf(failSafeTimeout))
 	return x
 }
 
 // Only perform the PASE steps of commissioning. If set to YES, commissioning will be completed by another admin on the network. Defaults to NO.
 //
-// WithSkipCommissioningComplete sets the skipCommissioningComplete property and returns the receiver for chaining.
+// WithSkipCommissioningComplete sets skipCommissioningComplete and returns the receiver so calls can be chained.
 func (x *MTRCommissioningParameters) WithSkipCommissioningComplete(skipCommissioningComplete bool) *MTRCommissioningParameters {
-	x.inner.SetSkipCommissioningComplete(skipCommissioningComplete)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkipCommissioningComplete:"), skipCommissioningComplete)
 	return x
 }
 
 // The country code to provide to the device during commissioning. If not nil, this must be a 2-character ISO 3166-1 country code, which the device can use to decide on things like radio communications bands.
 //
-// WithCountryCode sets the countryCode property and returns the receiver for chaining.
+// WithCountryCode sets countryCode and returns the receiver so calls can be chained.
 func (x *MTRCommissioningParameters) WithCountryCode(countryCode string) *MTRCommissioningParameters {
-	x.inner.SetCountryCode(foundation.NSStringStringWithUTF8String(countryCode))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountryCode:"), purego.NSString(countryCode))
 	return x
 }
 
 // Read device type information from all endpoints during commissioning. Defaults to NO.
 //
-// WithReadEndpointInformation sets the readEndpointInformation property and returns the receiver for chaining.
+// WithReadEndpointInformation sets readEndpointInformation and returns the receiver so calls can be chained.
 func (x *MTRCommissioningParameters) WithReadEndpointInformation(readEndpointInformation bool) *MTRCommissioningParameters {
-	x.inner.SetReadEndpointInformation(readEndpointInformation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadEndpointInformation:"), readEndpointInformation)
 	return x
 }
 
 // List of attribute paths to read from the commissionee (in addition to whatever attributes are already read to handle readEndpointInformation being YES, or to handle other commissioning tasks).
 //
-// WithExtraAttributesToRead sets the collection, converting the Go slice to an NSArray.
-func (x *MTRCommissioningParameters) WithExtraAttributesToRead(items ...*raw.MTRAttributeRequestPath) *MTRCommissioningParameters {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetExtraAttributesToRead(foundation.NSArrayFromID[*raw.MTRAttributeRequestPath](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.MTRAttributeRequestPath](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetExtraAttributesToRead(_arr)
+// WithExtraAttributesToRead sets the collection and returns the receiver so calls can be chained.
+func (x *MTRCommissioningParameters) WithExtraAttributesToRead(items ...*MTRAttributeRequestPath) *MTRCommissioningParameters {
+	_arr := purego.SliceToNSArray(items, func(_v *MTRAttributeRequestPath) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtraAttributesToRead:"), _arr)
 	return x
 }
 
 // Whether to force a network scan before requesting Wi-Fi credentials. The default is NO.
 //
-// WithForceWiFiScan sets the forceWiFiScan property and returns the receiver for chaining.
+// WithForceWiFiScan sets forceWiFiScan and returns the receiver so calls can be chained.
 func (x *MTRCommissioningParameters) WithForceWiFiScan(forceWiFiScan bool) *MTRCommissioningParameters {
-	x.inner.SetForceWiFiScan(forceWiFiScan)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForceWiFiScan:"), forceWiFiScan)
 	return x
 }
 
 // Whether to force a network scan before requesting Thread credentials. The default is NO.
 //
-// WithForceThreadScan sets the forceThreadScan property and returns the receiver for chaining.
+// WithForceThreadScan sets forceThreadScan and returns the receiver so calls can be chained.
 func (x *MTRCommissioningParameters) WithForceThreadScan(forceThreadScan bool) *MTRCommissioningParameters {
-	x.inner.SetForceThreadScan(forceThreadScan)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForceThreadScan:"), forceThreadScan)
 	return x
 }
 
-// WithCSRNonce sets the cSRNonce property and returns the receiver for chaining.
-func (x *MTRCommissioningParameters) WithCSRNonce(cSRNonce *foundation.NSData) *MTRCommissioningParameters {
-	x.inner.SetCSRNonce(cSRNonce)
+// WithCSRNonce sets cSRNonce and returns the receiver so calls can be chained.
+func (x *MTRCommissioningParameters) WithCSRNonce(cSRNonce obj.Object) *MTRCommissioningParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCSRNonce:"), objref.IDOf(cSRNonce))
 	return x
 }
 
-// WithFailSafeExpiryTimeoutSecs sets the failSafeExpiryTimeoutSecs property and returns the receiver for chaining.
-func (x *MTRCommissioningParameters) WithFailSafeExpiryTimeoutSecs(failSafeExpiryTimeoutSecs *foundation.NSNumber) *MTRCommissioningParameters {
-	x.inner.SetFailSafeExpiryTimeoutSecs(failSafeExpiryTimeoutSecs)
+// WithFailSafeExpiryTimeoutSecs sets failSafeExpiryTimeoutSecs and returns the receiver so calls can be chained.
+func (x *MTRCommissioningParameters) WithFailSafeExpiryTimeoutSecs(failSafeExpiryTimeoutSecs obj.Object) *MTRCommissioningParameters {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFailSafeExpiryTimeoutSecs:"), objref.IDOf(failSafeExpiryTimeoutSecs))
 	return x
 }
 
 // The nonce to use when requesting a CSR for the node's operational certificate. If nil, a random nonce will be generated automatically. If not nil, must be 32 bytes of data.
-//
-// CsrNonce calls the underlying CsrNonce.
-func (x *MTRCommissioningParameters) CsrNonce() *foundation.NSData {
-	return x.inner.CsrNonce()
+func (x *MTRCommissioningParameters) CsrNonce() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("csrNonce"))
+	return obj.Wrap(_r)
 }
 
-// SetCsrNonce calls the underlying SetCsrNonce.
-func (x *MTRCommissioningParameters) SetCsrNonce(csrNonce *foundation.NSData) {
-	x.inner.SetCsrNonce(csrNonce)
+func (x *MTRCommissioningParameters) SetCsrNonce(csrNonce obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCsrNonce:"), objref.IDOf(csrNonce))
 }
 
 // The nonce to use when requesting attestation information from the device. If nil, a random nonce will be generated automatically. If not nil, must be 32 bytes of data.
-//
-// AttestationNonce calls the underlying AttestationNonce.
-func (x *MTRCommissioningParameters) AttestationNonce() *foundation.NSData {
-	return x.inner.AttestationNonce()
+func (x *MTRCommissioningParameters) AttestationNonce() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attestationNonce"))
+	return obj.Wrap(_r)
 }
 
-// SetAttestationNonce calls the underlying SetAttestationNonce.
-func (x *MTRCommissioningParameters) SetAttestationNonce(attestationNonce *foundation.NSData) {
-	x.inner.SetAttestationNonce(attestationNonce)
+func (x *MTRCommissioningParameters) SetAttestationNonce(attestationNonce obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttestationNonce:"), objref.IDOf(attestationNonce))
 }
 
 // The Wi-Fi SSID, if available.
-//
-// WifiSSID calls the underlying WifiSSID.
-func (x *MTRCommissioningParameters) WifiSSID() *foundation.NSData {
-	return x.inner.WifiSSID()
+func (x *MTRCommissioningParameters) WifiSSID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wifiSSID"))
+	return obj.Wrap(_r)
 }
 
-// SetWifiSSID calls the underlying SetWifiSSID.
-func (x *MTRCommissioningParameters) SetWifiSSID(wifiSSID *foundation.NSData) {
-	x.inner.SetWifiSSID(wifiSSID)
+func (x *MTRCommissioningParameters) SetWifiSSID(wifiSSID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWifiSSID:"), objref.IDOf(wifiSSID))
 }
 
 // The Wi-Fi Credentials.  Allowed to be nil or 0-length data for an open network, as long as wifiSSID is not nil.
-//
-// WifiCredentials calls the underlying WifiCredentials.
-func (x *MTRCommissioningParameters) WifiCredentials() *foundation.NSData {
-	return x.inner.WifiCredentials()
+func (x *MTRCommissioningParameters) WifiCredentials() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wifiCredentials"))
+	return obj.Wrap(_r)
 }
 
-// SetWifiCredentials calls the underlying SetWifiCredentials.
-func (x *MTRCommissioningParameters) SetWifiCredentials(wifiCredentials *foundation.NSData) {
-	x.inner.SetWifiCredentials(wifiCredentials)
+func (x *MTRCommissioningParameters) SetWifiCredentials(wifiCredentials obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWifiCredentials:"), objref.IDOf(wifiCredentials))
 }
 
 // The Thread operational dataset, if available.
-//
-// ThreadOperationalDataset calls the underlying ThreadOperationalDataset.
-func (x *MTRCommissioningParameters) ThreadOperationalDataset() *foundation.NSData {
-	return x.inner.ThreadOperationalDataset()
+func (x *MTRCommissioningParameters) ThreadOperationalDataset() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("threadOperationalDataset"))
+	return obj.Wrap(_r)
 }
 
-// SetThreadOperationalDataset calls the underlying SetThreadOperationalDataset.
-func (x *MTRCommissioningParameters) SetThreadOperationalDataset(threadOperationalDataset *foundation.NSData) {
-	x.inner.SetThreadOperationalDataset(threadOperationalDataset)
-}
-
-// An optional delegate that can be notified upon completion of device attestation.  See documentation for MTRDeviceAttestationDelegate for details. The delegate methods will be invoked on an arbitrary thread.
-//
-// DeviceAttestationDelegate calls the underlying DeviceAttestationDelegate.
-func (x *MTRCommissioningParameters) DeviceAttestationDelegate() raw.MTRDeviceAttestationDelegate {
-	return x.inner.DeviceAttestationDelegate()
-}
-
-// SetDeviceAttestationDelegate calls the underlying SetDeviceAttestationDelegate.
-func (x *MTRCommissioningParameters) SetDeviceAttestationDelegate(deviceAttestationDelegate raw.MTRDeviceAttestationDelegate) {
-	x.inner.SetDeviceAttestationDelegate(deviceAttestationDelegate)
+func (x *MTRCommissioningParameters) SetThreadOperationalDataset(threadOperationalDataset obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadOperationalDataset:"), objref.IDOf(threadOperationalDataset))
 }
 
 // The timeout, in seconds, to set for the fail-safe when calling into the deviceAttestationDelegate and waiting for it to respond. If nil, the fail-safe will not be extended before calling into the deviceAttestationDelegate.
-//
-// FailSafeTimeout calls the underlying FailSafeTimeout.
-func (x *MTRCommissioningParameters) FailSafeTimeout() *foundation.NSNumber {
-	return x.inner.FailSafeTimeout()
+func (x *MTRCommissioningParameters) FailSafeTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("failSafeTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetFailSafeTimeout calls the underlying SetFailSafeTimeout.
-func (x *MTRCommissioningParameters) SetFailSafeTimeout(failSafeTimeout *foundation.NSNumber) {
-	x.inner.SetFailSafeTimeout(failSafeTimeout)
+func (x *MTRCommissioningParameters) SetFailSafeTimeout(failSafeTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFailSafeTimeout:"), objref.IDOf(failSafeTimeout))
 }
 
 // Only perform the PASE steps of commissioning. If set to YES, commissioning will be completed by another admin on the network. Defaults to NO.
-//
-// SkipCommissioningComplete calls the underlying SkipCommissioningComplete.
 func (x *MTRCommissioningParameters) SkipCommissioningComplete() bool {
-	return x.inner.SkipCommissioningComplete()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("skipCommissioningComplete"))
+	return _r
 }
 
-// SetSkipCommissioningComplete calls the underlying SetSkipCommissioningComplete.
 func (x *MTRCommissioningParameters) SetSkipCommissioningComplete(skipCommissioningComplete bool) {
-	x.inner.SetSkipCommissioningComplete(skipCommissioningComplete)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkipCommissioningComplete:"), skipCommissioningComplete)
 }
 
 // The country code to provide to the device during commissioning. If not nil, this must be a 2-character ISO 3166-1 country code, which the device can use to decide on things like radio communications bands.
-//
-// CountryCode calls the underlying CountryCode.
 func (x *MTRCommissioningParameters) CountryCode() string {
-	_r := x.inner.CountryCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("countryCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCountryCode calls the underlying SetCountryCode.
 func (x *MTRCommissioningParameters) SetCountryCode(countryCode string) {
-	x.inner.SetCountryCode(foundation.NSStringStringWithUTF8String(countryCode))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountryCode:"), purego.NSString(countryCode))
 }
 
 // Read device type information from all endpoints during commissioning. Defaults to NO.
-//
-// ReadEndpointInformation calls the underlying ReadEndpointInformation.
 func (x *MTRCommissioningParameters) ReadEndpointInformation() bool {
-	return x.inner.ReadEndpointInformation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("readEndpointInformation"))
+	return _r
 }
 
-// SetReadEndpointInformation calls the underlying SetReadEndpointInformation.
 func (x *MTRCommissioningParameters) SetReadEndpointInformation(readEndpointInformation bool) {
-	x.inner.SetReadEndpointInformation(readEndpointInformation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadEndpointInformation:"), readEndpointInformation)
 }
 
 // List of attribute paths to read from the commissionee (in addition to whatever attributes are already read to handle readEndpointInformation being YES, or to handle other commissioning tasks). The FeatureMap attribute of all Network Commissioning clusters on the commissionee will always be read and does not need to be included in this list.
 //
 // ExtraAttributesToRead returns the collection as a Go slice.
 func (x *MTRCommissioningParameters) ExtraAttributesToRead() []*MTRAttributeRequestPath {
-	arr := x.inner.ExtraAttributesToRead()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTRAttributeRequestPath {
-		return &MTRAttributeRequestPath{inner: raw.MTRAttributeRequestPathFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extraAttributesToRead"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRAttributeRequestPath { return MTRAttributeRequestPathFromID(_id) })
 }
 
-// SetExtraAttributesToRead calls the underlying SetExtraAttributesToRead.
-func (x *MTRCommissioningParameters) SetExtraAttributesToRead(extraAttributesToRead *foundation.NSArray[*raw.MTRAttributeRequestPath]) {
-	x.inner.SetExtraAttributesToRead(extraAttributesToRead)
+func (x *MTRCommissioningParameters) SetExtraAttributesToRead(extraAttributesToRead []*MTRAttributeRequestPath) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtraAttributesToRead:"), purego.SliceToNSArray(extraAttributesToRead, func(_v *MTRAttributeRequestPath) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Whether to force a network scan before requesting Wi-Fi credentials. The default is NO. Even if this value is NO a scan may still be performed. This value will be ignored if Wi-Fi credentials are provided or not needed. NOTE: Not all APIs that take MTRCommissioningParameters pay attention to this flag.
-//
-// ForceWiFiScan calls the underlying ForceWiFiScan.
 func (x *MTRCommissioningParameters) ForceWiFiScan() bool {
-	return x.inner.ForceWiFiScan()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("forceWiFiScan"))
+	return _r
 }
 
-// SetForceWiFiScan calls the underlying SetForceWiFiScan.
 func (x *MTRCommissioningParameters) SetForceWiFiScan(forceWiFiScan bool) {
-	x.inner.SetForceWiFiScan(forceWiFiScan)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForceWiFiScan:"), forceWiFiScan)
 }
 
 // Whether to force a network scan before requesting Thread credentials. The default is NO. Even if this value is NO a scan may still be performed. This value will be ignored if a Thread operational dataset is provided or not needed. NOTE: Not all APIs that take MTRCommissioningParameters pay attention to this flag.
-//
-// ForceThreadScan calls the underlying ForceThreadScan.
 func (x *MTRCommissioningParameters) ForceThreadScan() bool {
-	return x.inner.ForceThreadScan()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("forceThreadScan"))
+	return _r
 }
 
-// SetForceThreadScan calls the underlying SetForceThreadScan.
 func (x *MTRCommissioningParameters) SetForceThreadScan(forceThreadScan bool) {
-	x.inner.SetForceThreadScan(forceThreadScan)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForceThreadScan:"), forceThreadScan)
 }
 
-// CSRNonce calls the underlying CSRNonce.
-func (x *MTRCommissioningParameters) CSRNonce() *foundation.NSData {
-	return x.inner.CSRNonce()
+func (x *MTRCommissioningParameters) CSRNonce() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CSRNonce"))
+	return obj.Wrap(_r)
 }
 
-// SetCSRNonce calls the underlying SetCSRNonce.
-func (x *MTRCommissioningParameters) SetCSRNonce(cSRNonce *foundation.NSData) {
-	x.inner.SetCSRNonce(cSRNonce)
+func (x *MTRCommissioningParameters) SetCSRNonce(cSRNonce obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCSRNonce:"), objref.IDOf(cSRNonce))
 }
 
-// FailSafeExpiryTimeoutSecs calls the underlying FailSafeExpiryTimeoutSecs.
-func (x *MTRCommissioningParameters) FailSafeExpiryTimeoutSecs() *foundation.NSNumber {
-	return x.inner.FailSafeExpiryTimeoutSecs()
+func (x *MTRCommissioningParameters) FailSafeExpiryTimeoutSecs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("failSafeExpiryTimeoutSecs"))
+	return obj.Wrap(_r)
 }
 
-// SetFailSafeExpiryTimeoutSecs calls the underlying SetFailSafeExpiryTimeoutSecs.
-func (x *MTRCommissioningParameters) SetFailSafeExpiryTimeoutSecs(failSafeExpiryTimeoutSecs *foundation.NSNumber) {
-	x.inner.SetFailSafeExpiryTimeoutSecs(failSafeExpiryTimeoutSecs)
+func (x *MTRCommissioningParameters) SetFailSafeExpiryTimeoutSecs(failSafeExpiryTimeoutSecs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFailSafeExpiryTimeoutSecs:"), objref.IDOf(failSafeExpiryTimeoutSecs))
 }
 
 // MTRCommissioningParametersable is the interface implemented by [MTRCommissioningParameters], for mocking and DI.
 type MTRCommissioningParametersable interface {
-	Unwrap() *raw.MTRCommissioningParameters
-	WithCsrNonce(csrNonce *foundation.NSData) *MTRCommissioningParameters
-	WithAttestationNonce(attestationNonce *foundation.NSData) *MTRCommissioningParameters
-	WithWifiSSID(wifiSSID *foundation.NSData) *MTRCommissioningParameters
-	WithWifiCredentials(wifiCredentials *foundation.NSData) *MTRCommissioningParameters
-	WithThreadOperationalDataset(threadOperationalDataset *foundation.NSData) *MTRCommissioningParameters
-	WithDeviceAttestationDelegate(deviceAttestationDelegate raw.MTRDeviceAttestationDelegate) *MTRCommissioningParameters
-	WithFailSafeTimeout(failSafeTimeout *foundation.NSNumber) *MTRCommissioningParameters
+	obj.Object
+	WithCsrNonce(csrNonce obj.Object) *MTRCommissioningParameters
+	WithAttestationNonce(attestationNonce obj.Object) *MTRCommissioningParameters
+	WithWifiSSID(wifiSSID obj.Object) *MTRCommissioningParameters
+	WithWifiCredentials(wifiCredentials obj.Object) *MTRCommissioningParameters
+	WithThreadOperationalDataset(threadOperationalDataset obj.Object) *MTRCommissioningParameters
+	WithFailSafeTimeout(failSafeTimeout obj.Object) *MTRCommissioningParameters
 	WithSkipCommissioningComplete(skipCommissioningComplete bool) *MTRCommissioningParameters
 	WithCountryCode(countryCode string) *MTRCommissioningParameters
 	WithReadEndpointInformation(readEndpointInformation bool) *MTRCommissioningParameters
-	WithExtraAttributesToRead(items ...*raw.MTRAttributeRequestPath) *MTRCommissioningParameters
+	WithExtraAttributesToRead(items ...*MTRAttributeRequestPath) *MTRCommissioningParameters
 	WithForceWiFiScan(forceWiFiScan bool) *MTRCommissioningParameters
 	WithForceThreadScan(forceThreadScan bool) *MTRCommissioningParameters
-	WithCSRNonce(cSRNonce *foundation.NSData) *MTRCommissioningParameters
-	WithFailSafeExpiryTimeoutSecs(failSafeExpiryTimeoutSecs *foundation.NSNumber) *MTRCommissioningParameters
-	CsrNonce() *foundation.NSData
-	SetCsrNonce(csrNonce *foundation.NSData)
-	AttestationNonce() *foundation.NSData
-	SetAttestationNonce(attestationNonce *foundation.NSData)
-	WifiSSID() *foundation.NSData
-	SetWifiSSID(wifiSSID *foundation.NSData)
-	WifiCredentials() *foundation.NSData
-	SetWifiCredentials(wifiCredentials *foundation.NSData)
-	ThreadOperationalDataset() *foundation.NSData
-	SetThreadOperationalDataset(threadOperationalDataset *foundation.NSData)
-	DeviceAttestationDelegate() raw.MTRDeviceAttestationDelegate
-	SetDeviceAttestationDelegate(deviceAttestationDelegate raw.MTRDeviceAttestationDelegate)
-	FailSafeTimeout() *foundation.NSNumber
-	SetFailSafeTimeout(failSafeTimeout *foundation.NSNumber)
+	WithCSRNonce(cSRNonce obj.Object) *MTRCommissioningParameters
+	WithFailSafeExpiryTimeoutSecs(failSafeExpiryTimeoutSecs obj.Object) *MTRCommissioningParameters
+	CsrNonce() obj.Object
+	SetCsrNonce(csrNonce obj.Object)
+	AttestationNonce() obj.Object
+	SetAttestationNonce(attestationNonce obj.Object)
+	WifiSSID() obj.Object
+	SetWifiSSID(wifiSSID obj.Object)
+	WifiCredentials() obj.Object
+	SetWifiCredentials(wifiCredentials obj.Object)
+	ThreadOperationalDataset() obj.Object
+	SetThreadOperationalDataset(threadOperationalDataset obj.Object)
+	FailSafeTimeout() obj.Object
+	SetFailSafeTimeout(failSafeTimeout obj.Object)
 	SkipCommissioningComplete() bool
 	SetSkipCommissioningComplete(skipCommissioningComplete bool)
 	CountryCode() string
@@ -394,15 +350,15 @@ type MTRCommissioningParametersable interface {
 	ReadEndpointInformation() bool
 	SetReadEndpointInformation(readEndpointInformation bool)
 	ExtraAttributesToRead() []*MTRAttributeRequestPath
-	SetExtraAttributesToRead(extraAttributesToRead *foundation.NSArray[*raw.MTRAttributeRequestPath])
+	SetExtraAttributesToRead(extraAttributesToRead []*MTRAttributeRequestPath)
 	ForceWiFiScan() bool
 	SetForceWiFiScan(forceWiFiScan bool)
 	ForceThreadScan() bool
 	SetForceThreadScan(forceThreadScan bool)
-	CSRNonce() *foundation.NSData
-	SetCSRNonce(cSRNonce *foundation.NSData)
-	FailSafeExpiryTimeoutSecs() *foundation.NSNumber
-	SetFailSafeExpiryTimeoutSecs(failSafeExpiryTimeoutSecs *foundation.NSNumber)
+	CSRNonce() obj.Object
+	SetCSRNonce(cSRNonce obj.Object)
+	FailSafeExpiryTimeoutSecs() obj.Object
+	SetFailSafeExpiryTimeoutSecs(failSafeExpiryTimeoutSecs obj.Object)
 }
 
 var _ MTRCommissioningParametersable = (*MTRCommissioningParameters)(nil)

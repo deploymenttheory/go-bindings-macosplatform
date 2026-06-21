@@ -5,54 +5,78 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterPath wraps [raw.MTRClusterPath] with a fluent Go API.
+// MTRClusterPath is an idiomatic wrapper over the Objective-C class MTRClusterPath.
 type MTRClusterPath struct {
-	inner *raw.MTRClusterPath
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterPath].
-func (x *MTRClusterPath) Unwrap() *raw.MTRClusterPath { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterPath) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterPathFromID adopts an existing object pointer as a MTRClusterPath (nil for 0).
+// MTRClusterPathFromID adopts an existing Objective-C object as a MTRClusterPath
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterPathFromID(id objc.ID) *MTRClusterPath {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterPath{inner: raw.MTRClusterPathFromID(id)}
+	x := &MTRClusterPath{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRClusterPath creates a new [MTRClusterPath].
+// mTRClusterPathAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterPath (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterPathAdopt(id objc.ID) *MTRClusterPath {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterPath{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterPath) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterPath) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterPath) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRClusterPath creates a new MTRClusterPath.
 func NewMTRClusterPath() *MTRClusterPath {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterPath")), objc.RegisterName("new"))
-	return &MTRClusterPath{inner: raw.MTRClusterPathFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRClusterPath")), objc.RegisterName("new"))
+	return mTRClusterPathAdopt(_id)
 }
 
-// Endpoint calls the underlying Endpoint.
-func (x *MTRClusterPath) Endpoint() *foundation.NSNumber {
-	return x.inner.Endpoint()
+func (x *MTRClusterPath) Endpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
+	return obj.Wrap(_r)
 }
 
-// Cluster calls the underlying Cluster.
-func (x *MTRClusterPath) Cluster() *foundation.NSNumber {
-	return x.inner.Cluster()
+func (x *MTRClusterPath) Cluster() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cluster"))
+	return obj.Wrap(_r)
 }
-
-func (x *MTRClusterPath) asMTRClusterPath() *raw.MTRClusterPath { return x.inner }
 
 // MTRClusterPathable is the interface implemented by [MTRClusterPath], for mocking and DI.
 type MTRClusterPathable interface {
-	Unwrap() *raw.MTRClusterPath
-	Endpoint() *foundation.NSNumber
-	Cluster() *foundation.NSNumber
+	obj.Object
+	Endpoint() obj.Object
+	Cluster() obj.Object
 }
 
 var _ MTRClusterPathable = (*MTRClusterPath)(nil)

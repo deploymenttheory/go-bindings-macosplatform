@@ -5,114 +5,130 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterTemperatureMeasurement wraps [raw.MTRClusterTemperatureMeasurement] with a fluent Go API.
+// MTRClusterTemperatureMeasurement is an idiomatic wrapper over the Objective-C class MTRClusterTemperatureMeasurement.
 type MTRClusterTemperatureMeasurement struct {
-	inner *raw.MTRClusterTemperatureMeasurement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterTemperatureMeasurement].
-func (x *MTRClusterTemperatureMeasurement) Unwrap() *raw.MTRClusterTemperatureMeasurement {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterTemperatureMeasurement) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterTemperatureMeasurementFromID adopts an existing object pointer as a MTRClusterTemperatureMeasurement (nil for 0).
+// MTRClusterTemperatureMeasurementFromID adopts an existing Objective-C object as a MTRClusterTemperatureMeasurement
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterTemperatureMeasurementFromID(id objc.ID) *MTRClusterTemperatureMeasurement {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterTemperatureMeasurement{inner: raw.MTRClusterTemperatureMeasurementFromID(id)}
+	x := &MTRClusterTemperatureMeasurement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterTemperatureMeasurementAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterTemperatureMeasurement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterTemperatureMeasurementAdopt(id objc.ID) *MTRClusterTemperatureMeasurement {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterTemperatureMeasurement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterTemperatureMeasurement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterTemperatureMeasurement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterTemperatureMeasurement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 //
-// NewMTRClusterTemperatureMeasurementWithDeviceEndpointIDQueue creates a new [MTRClusterTemperatureMeasurement].
-func NewMTRClusterTemperatureMeasurementWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterTemperatureMeasurement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterTemperatureMeasurement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterTemperatureMeasurement{inner: raw.MTRClusterTemperatureMeasurementFromID(_id)}
+// NewMTRClusterTemperatureMeasurementWithDeviceEndpointIDQueue creates a new MTRClusterTemperatureMeasurement.
+func NewMTRClusterTemperatureMeasurementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterTemperatureMeasurement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterTemperatureMeasurement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterTemperatureMeasurementAdopt(_id)
 }
 
-// NewMTRClusterTemperatureMeasurementWithDeviceEndpointQueue creates a new [MTRClusterTemperatureMeasurement].
-func NewMTRClusterTemperatureMeasurementWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterTemperatureMeasurement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterTemperatureMeasurement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterTemperatureMeasurement{inner: raw.MTRClusterTemperatureMeasurementFromID(_id)}
+// NewMTRClusterTemperatureMeasurementWithDeviceEndpointQueue creates a new MTRClusterTemperatureMeasurement.
+func NewMTRClusterTemperatureMeasurementWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterTemperatureMeasurement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterTemperatureMeasurement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterTemperatureMeasurementAdopt(_id)
 }
 
-// ReadAttributeMeasuredValueWithParams calls the underlying ReadAttributeMeasuredValueWithParams.
-func (x *MTRClusterTemperatureMeasurement) ReadAttributeMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMeasuredValueWithParams(params)
+func (x *MTRClusterTemperatureMeasurement) ReadAttributeMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasuredValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinMeasuredValueWithParams calls the underlying ReadAttributeMinMeasuredValueWithParams.
-func (x *MTRClusterTemperatureMeasurement) ReadAttributeMinMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMinMeasuredValueWithParams(params)
+func (x *MTRClusterTemperatureMeasurement) ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinMeasuredValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxMeasuredValueWithParams calls the underlying ReadAttributeMaxMeasuredValueWithParams.
-func (x *MTRClusterTemperatureMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxMeasuredValueWithParams(params)
+func (x *MTRClusterTemperatureMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxMeasuredValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeToleranceWithParams calls the underlying ReadAttributeToleranceWithParams.
-func (x *MTRClusterTemperatureMeasurement) ReadAttributeToleranceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeToleranceWithParams(params)
+func (x *MTRClusterTemperatureMeasurement) ReadAttributeToleranceWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeToleranceWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterTemperatureMeasurement) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterTemperatureMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterTemperatureMeasurement) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterTemperatureMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterTemperatureMeasurement) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterTemperatureMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterTemperatureMeasurement) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+func (x *MTRClusterTemperatureMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterTemperatureMeasurement) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterTemperatureMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterTemperatureMeasurement) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterTemperatureMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterTemperatureMeasurementable is the interface implemented by [MTRClusterTemperatureMeasurement], for mocking and DI.
 type MTRClusterTemperatureMeasurementable interface {
-	Unwrap() *raw.MTRClusterTemperatureMeasurement
-	ReadAttributeMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMinMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMaxMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeToleranceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeMeasuredValueWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeToleranceWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterTemperatureMeasurementable = (*MTRClusterTemperatureMeasurement)(nil)

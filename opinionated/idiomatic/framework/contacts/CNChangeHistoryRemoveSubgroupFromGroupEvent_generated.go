@@ -5,65 +5,78 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a user removing a subgroup from a group.
 //
-// ChangeHistoryRemoveSubgroupFromGroupEvent wraps [raw.CNChangeHistoryRemoveSubgroupFromGroupEvent] with a fluent Go API.
+// ChangeHistoryRemoveSubgroupFromGroupEvent is an idiomatic wrapper over the Objective-C class CNChangeHistoryRemoveSubgroupFromGroupEvent.
 type ChangeHistoryRemoveSubgroupFromGroupEvent struct {
-	inner *raw.CNChangeHistoryRemoveSubgroupFromGroupEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNChangeHistoryRemoveSubgroupFromGroupEvent].
-func (x *ChangeHistoryRemoveSubgroupFromGroupEvent) Unwrap() *raw.CNChangeHistoryRemoveSubgroupFromGroupEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChangeHistoryRemoveSubgroupFromGroupEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangeHistoryRemoveSubgroupFromGroupEventFromID adopts an existing object pointer as a ChangeHistoryRemoveSubgroupFromGroupEvent (nil for 0).
+// ChangeHistoryRemoveSubgroupFromGroupEventFromID adopts an existing Objective-C object as a ChangeHistoryRemoveSubgroupFromGroupEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangeHistoryRemoveSubgroupFromGroupEventFromID(id objc.ID) *ChangeHistoryRemoveSubgroupFromGroupEvent {
 	if id == 0 {
 		return nil
 	}
-	return &ChangeHistoryRemoveSubgroupFromGroupEvent{inner: raw.CNChangeHistoryRemoveSubgroupFromGroupEventFromID(id)}
+	x := &ChangeHistoryRemoveSubgroupFromGroupEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewChangeHistoryRemoveSubgroupFromGroupEvent creates a new [ChangeHistoryRemoveSubgroupFromGroupEvent].
+// changeHistoryRemoveSubgroupFromGroupEventAdopt wraps an Objective-C object that this code just created as a
+// ChangeHistoryRemoveSubgroupFromGroupEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changeHistoryRemoveSubgroupFromGroupEventAdopt(id objc.ID) *ChangeHistoryRemoveSubgroupFromGroupEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &ChangeHistoryRemoveSubgroupFromGroupEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ChangeHistoryRemoveSubgroupFromGroupEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ChangeHistoryRemoveSubgroupFromGroupEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ChangeHistoryRemoveSubgroupFromGroupEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewChangeHistoryRemoveSubgroupFromGroupEvent creates a new ChangeHistoryRemoveSubgroupFromGroupEvent.
 func NewChangeHistoryRemoveSubgroupFromGroupEvent() *ChangeHistoryRemoveSubgroupFromGroupEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNChangeHistoryRemoveSubgroupFromGroupEvent")), objc.RegisterName("new"))
-	return &ChangeHistoryRemoveSubgroupFromGroupEvent{inner: raw.CNChangeHistoryRemoveSubgroupFromGroupEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNChangeHistoryRemoveSubgroupFromGroupEvent")), objc.RegisterName("new"))
+	return changeHistoryRemoveSubgroupFromGroupEventAdopt(_id)
 }
 
-// Subgroup calls the underlying Subgroup.
 func (x *ChangeHistoryRemoveSubgroupFromGroupEvent) Subgroup() *Group {
-	_r := x.inner.Subgroup()
-	if _r == nil {
-		return nil
-	}
-	return &Group{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subgroup"))
+	return GroupFromID(_r)
 }
 
-// Group calls the underlying Group.
 func (x *ChangeHistoryRemoveSubgroupFromGroupEvent) Group() *Group {
-	_r := x.inner.Group()
-	if _r == nil {
-		return nil
-	}
-	return &Group{inner: _r}
-}
-
-func (x *ChangeHistoryRemoveSubgroupFromGroupEvent) asChangeHistoryEvent() *raw.CNChangeHistoryEvent {
-	return &x.inner.CNChangeHistoryEvent
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("group"))
+	return GroupFromID(_r)
 }
 
 // ChangeHistoryRemoveSubgroupFromGroupEventable is the interface implemented by [ChangeHistoryRemoveSubgroupFromGroupEvent], for mocking and DI.
 type ChangeHistoryRemoveSubgroupFromGroupEventable interface {
-	Unwrap() *raw.CNChangeHistoryRemoveSubgroupFromGroupEvent
+	obj.Object
 	Subgroup() *Group
 	Group() *Group
 }

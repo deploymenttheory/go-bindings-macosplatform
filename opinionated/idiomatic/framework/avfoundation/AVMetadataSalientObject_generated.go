@@ -5,45 +5,68 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object representing a single salient area in a picture.
 //
-// MetadataSalientObject wraps [raw.AVMetadataSalientObject] with a fluent Go API.
+// MetadataSalientObject is an idiomatic wrapper over the Objective-C class AVMetadataSalientObject.
 type MetadataSalientObject struct {
-	inner *raw.AVMetadataSalientObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMetadataSalientObject].
-func (x *MetadataSalientObject) Unwrap() *raw.AVMetadataSalientObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetadataSalientObject) ID() objc.ID { return x.inner.Ptr() }
-
-// MetadataSalientObjectFromID adopts an existing object pointer as a MetadataSalientObject (nil for 0).
+// MetadataSalientObjectFromID adopts an existing Objective-C object as a MetadataSalientObject
+// (nil for 0), retaining it and registering a release finalizer.
 func MetadataSalientObjectFromID(id objc.ID) *MetadataSalientObject {
 	if id == 0 {
 		return nil
 	}
-	return &MetadataSalientObject{inner: raw.AVMetadataSalientObjectFromID(id)}
+	x := &MetadataSalientObject{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMetadataSalientObject creates a new [MetadataSalientObject].
+// metadataSalientObjectAdopt wraps an Objective-C object that this code just created as a
+// MetadataSalientObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metadataSalientObjectAdopt(id objc.ID) *MetadataSalientObject {
+	if id == 0 {
+		return nil
+	}
+	x := &MetadataSalientObject{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetadataSalientObject) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetadataSalientObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetadataSalientObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMetadataSalientObject creates a new MetadataSalientObject.
 func NewMetadataSalientObject() *MetadataSalientObject {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetadataSalientObject")), objc.RegisterName("new"))
-	return &MetadataSalientObject{inner: raw.AVMetadataSalientObjectFromID(_id)}
-}
-
-func (x *MetadataSalientObject) asMetadataObject() *raw.AVMetadataObject {
-	return &x.inner.AVMetadataObject
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetadataSalientObject")), objc.RegisterName("new"))
+	return metadataSalientObjectAdopt(_id)
 }
 
 // MetadataSalientObjectable is the interface implemented by [MetadataSalientObject], for mocking and DI.
 type MetadataSalientObjectable interface {
-	Unwrap() *raw.AVMetadataSalientObject
+	obj.Object
 }
 
 var _ MetadataSalientObjectable = (*MetadataSalientObject)(nil)

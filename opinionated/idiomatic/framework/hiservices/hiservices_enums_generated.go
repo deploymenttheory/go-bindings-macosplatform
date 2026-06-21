@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-// @enum kAXCopyMultipleAttributeOptionStopOnError @discussion Pass this option to @link AXUIElementCopyMultipleAttributeValues AXUIElementCopyMultipleAttributeValues@/link to force the function to stop when it gets an error.
+// Pass this option to
 // Bitmask — values may be combined with |.
 type AXCopyMultipleAttributeOptions int64
 
@@ -104,7 +104,7 @@ func (e AXError) String() string {
 	}
 }
 
-// @enum AXValueType Wrappers @discussion These are AXValueType wrappers for other structures. You must use the AXValueCreate and AXValueGetValue functions to convert between the wrapped structure and the native structure. @constant kAXValueTypeCGPoint a wrapper for CGPoint; see CoreGraphics.h @constant kAXValueTypeCGSize a wrapper for CGSize; see CoreGraphics.h @constant kAXValueTypeCGRect a wrapper for CGRect; see CoreGraphics.h @constant kAXValueTypeCFRange a wrapper for CFRange; see CFBase.h @constant kAXValueTypeAXError See AXError.h @constant kAXValueTypeIllegal a wrapper for unsupported structures
+// These are AXValueType wrappers for other structures. You must use the AXValueCreate and AXValueGetValue functions to convert between the wrapped structure and the native structure.
 type AXValueType int64
 
 const (
@@ -133,45 +133,6 @@ func (e AXValueType) String() string {
 	default:
 		return fmt.Sprintf("AXValueType(%d)", int64(e))
 	}
-}
-
-// Bitmask — values may be combined with |.
-type PasteboardFlavorFlags int64
-
-const (
-	KPasteboardFlavorNoFlags          PasteboardFlavorFlags = 0
-	KPasteboardFlavorSenderOnly       PasteboardFlavorFlags = 1
-	KPasteboardFlavorSenderTranslated PasteboardFlavorFlags = 2
-	KPasteboardFlavorNotSaved         PasteboardFlavorFlags = 4
-	KPasteboardFlavorRequestOnly      PasteboardFlavorFlags = 8
-	KPasteboardFlavorSystemTranslated PasteboardFlavorFlags = 256
-	KPasteboardFlavorPromised         PasteboardFlavorFlags = 512
-)
-
-func (e PasteboardFlavorFlags) String() string {
-	var parts []string
-	if e&KPasteboardFlavorSenderOnly != 0 {
-		parts = append(parts, "KPasteboardFlavorSenderOnly")
-	}
-	if e&KPasteboardFlavorSenderTranslated != 0 {
-		parts = append(parts, "KPasteboardFlavorSenderTranslated")
-	}
-	if e&KPasteboardFlavorNotSaved != 0 {
-		parts = append(parts, "KPasteboardFlavorNotSaved")
-	}
-	if e&KPasteboardFlavorRequestOnly != 0 {
-		parts = append(parts, "KPasteboardFlavorRequestOnly")
-	}
-	if e&KPasteboardFlavorSystemTranslated != 0 {
-		parts = append(parts, "KPasteboardFlavorSystemTranslated")
-	}
-	if e&KPasteboardFlavorPromised != 0 {
-		parts = append(parts, "KPasteboardFlavorPromised")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }
 
 // Bitmask — values may be combined with |.

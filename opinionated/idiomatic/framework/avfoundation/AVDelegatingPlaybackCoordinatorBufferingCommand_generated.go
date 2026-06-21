@@ -5,64 +5,82 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A command that indicates to start buffering data in preparation for playback.
 //
-// DelegatingPlaybackCoordinatorBufferingCommand wraps [raw.AVDelegatingPlaybackCoordinatorBufferingCommand] with a fluent Go API.
+// DelegatingPlaybackCoordinatorBufferingCommand is an idiomatic wrapper over the Objective-C class AVDelegatingPlaybackCoordinatorBufferingCommand.
 type DelegatingPlaybackCoordinatorBufferingCommand struct {
-	inner *raw.AVDelegatingPlaybackCoordinatorBufferingCommand
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVDelegatingPlaybackCoordinatorBufferingCommand].
-func (x *DelegatingPlaybackCoordinatorBufferingCommand) Unwrap() *raw.AVDelegatingPlaybackCoordinatorBufferingCommand {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DelegatingPlaybackCoordinatorBufferingCommand) ID() objc.ID { return x.inner.Ptr() }
-
-// DelegatingPlaybackCoordinatorBufferingCommandFromID adopts an existing object pointer as a DelegatingPlaybackCoordinatorBufferingCommand (nil for 0).
+// DelegatingPlaybackCoordinatorBufferingCommandFromID adopts an existing Objective-C object as a DelegatingPlaybackCoordinatorBufferingCommand
+// (nil for 0), retaining it and registering a release finalizer.
 func DelegatingPlaybackCoordinatorBufferingCommandFromID(id objc.ID) *DelegatingPlaybackCoordinatorBufferingCommand {
 	if id == 0 {
 		return nil
 	}
-	return &DelegatingPlaybackCoordinatorBufferingCommand{inner: raw.AVDelegatingPlaybackCoordinatorBufferingCommandFromID(id)}
+	x := &DelegatingPlaybackCoordinatorBufferingCommand{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDelegatingPlaybackCoordinatorBufferingCommand creates a new [DelegatingPlaybackCoordinatorBufferingCommand].
+// delegatingPlaybackCoordinatorBufferingCommandAdopt wraps an Objective-C object that this code just created as a
+// DelegatingPlaybackCoordinatorBufferingCommand (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func delegatingPlaybackCoordinatorBufferingCommandAdopt(id objc.ID) *DelegatingPlaybackCoordinatorBufferingCommand {
+	if id == 0 {
+		return nil
+	}
+	x := &DelegatingPlaybackCoordinatorBufferingCommand{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DelegatingPlaybackCoordinatorBufferingCommand) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DelegatingPlaybackCoordinatorBufferingCommand) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DelegatingPlaybackCoordinatorBufferingCommand) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDelegatingPlaybackCoordinatorBufferingCommand creates a new DelegatingPlaybackCoordinatorBufferingCommand.
 func NewDelegatingPlaybackCoordinatorBufferingCommand() *DelegatingPlaybackCoordinatorBufferingCommand {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVDelegatingPlaybackCoordinatorBufferingCommand")), objc.RegisterName("new"))
-	return &DelegatingPlaybackCoordinatorBufferingCommand{inner: raw.AVDelegatingPlaybackCoordinatorBufferingCommandFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVDelegatingPlaybackCoordinatorBufferingCommand")), objc.RegisterName("new"))
+	return delegatingPlaybackCoordinatorBufferingCommandAdopt(_id)
 }
 
 // The rate to prepare playback for. The command should only be considered complete once the player is ready to receive an AVDelegatingPlaybackCoordinatorPlayCommand with the indicated rate.
-//
-// AnticipatedPlaybackRate calls the underlying AnticipatedPlaybackRate.
 func (x *DelegatingPlaybackCoordinatorBufferingCommand) AnticipatedPlaybackRate() float32 {
-	return x.inner.AnticipatedPlaybackRate()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("anticipatedPlaybackRate"))
+	return _r
 }
 
 // Communicates when the coordinator expects the command's completion handler at the latest. A receiver of a buffering command should fire the completion handler by this date at the latest. This is useful in buffering situations where the receiver has not yet buffered enough data to be considered ready to play by the due date. The receiver should then decide to either complete the command as is to try and keep up with the group, or alternatively begin a stall recovery suspension to communicate the situation to the other participants. Completing the command after this date means that the coordinator will likely send a play command for a later time than the receiver buffered for.
-//
-// CompletionDueDate calls the underlying CompletionDueDate.
-func (x *DelegatingPlaybackCoordinatorBufferingCommand) CompletionDueDate() *foundation.NSDate {
-	return x.inner.CompletionDueDate()
-}
-
-func (x *DelegatingPlaybackCoordinatorBufferingCommand) asDelegatingPlaybackCoordinatorPlaybackControlCommand() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand {
-	return &x.inner.AVDelegatingPlaybackCoordinatorPlaybackControlCommand
+func (x *DelegatingPlaybackCoordinatorBufferingCommand) CompletionDueDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completionDueDate"))
+	return obj.Wrap(_r)
 }
 
 // DelegatingPlaybackCoordinatorBufferingCommandable is the interface implemented by [DelegatingPlaybackCoordinatorBufferingCommand], for mocking and DI.
 type DelegatingPlaybackCoordinatorBufferingCommandable interface {
-	Unwrap() *raw.AVDelegatingPlaybackCoordinatorBufferingCommand
+	obj.Object
 	AnticipatedPlaybackRate() float32
-	CompletionDueDate() *foundation.NSDate
+	CompletionDueDate() obj.Object
 }
 
 var _ DelegatingPlaybackCoordinatorBufferingCommandable = (*DelegatingPlaybackCoordinatorBufferingCommand)(nil)

@@ -5,86 +5,101 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A sound event node that invokes one of its child nodes at random.
 //
-// RandomNodeDefinition wraps [raw.PHASERandomNodeDefinition] with a fluent Go API.
+// RandomNodeDefinition is an idiomatic wrapper over the Objective-C class PHASERandomNodeDefinition.
 type RandomNodeDefinition struct {
-	inner *raw.PHASERandomNodeDefinition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASERandomNodeDefinition].
-func (x *RandomNodeDefinition) Unwrap() *raw.PHASERandomNodeDefinition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RandomNodeDefinition) ID() objc.ID { return x.inner.Ptr() }
-
-// RandomNodeDefinitionFromID adopts an existing object pointer as a RandomNodeDefinition (nil for 0).
+// RandomNodeDefinitionFromID adopts an existing Objective-C object as a RandomNodeDefinition
+// (nil for 0), retaining it and registering a release finalizer.
 func RandomNodeDefinitionFromID(id objc.ID) *RandomNodeDefinition {
 	if id == 0 {
 		return nil
 	}
-	return &RandomNodeDefinition{inner: raw.PHASERandomNodeDefinitionFromID(id)}
+	x := &RandomNodeDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRandomNodeDefinition creates a new [RandomNodeDefinition].
+// randomNodeDefinitionAdopt wraps an Objective-C object that this code just created as a
+// RandomNodeDefinition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func randomNodeDefinitionAdopt(id objc.ID) *RandomNodeDefinition {
+	if id == 0 {
+		return nil
+	}
+	x := &RandomNodeDefinition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RandomNodeDefinition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RandomNodeDefinition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RandomNodeDefinition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRandomNodeDefinition creates a new RandomNodeDefinition.
 func NewRandomNodeDefinition() *RandomNodeDefinition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASERandomNodeDefinition")), objc.RegisterName("new"))
-	return &RandomNodeDefinition{inner: raw.PHASERandomNodeDefinitionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHASERandomNodeDefinition")), objc.RegisterName("new"))
+	return randomNodeDefinitionAdopt(_id)
 }
 
 // Creates a random node with the name you specify.
 //
-// NewRandomNodeDefinitionWithIdentifier creates a new [RandomNodeDefinition].
+// NewRandomNodeDefinitionWithIdentifier creates a new RandomNodeDefinition.
 func NewRandomNodeDefinitionWithIdentifier(identifier string) *RandomNodeDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASERandomNodeDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &RandomNodeDefinition{inner: raw.PHASERandomNodeDefinitionFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASERandomNodeDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), purego.NSString(identifier))
+	return randomNodeDefinitionAdopt(_id)
 }
 
 // The length of the unique selection queue.
 //
-// WithUniqueSelectionQueueLength sets the uniqueSelectionQueueLength property and returns the receiver for chaining.
+// WithUniqueSelectionQueueLength sets uniqueSelectionQueueLength and returns the receiver so calls can be chained.
 func (x *RandomNodeDefinition) WithUniqueSelectionQueueLength(uniqueSelectionQueueLength int) *RandomNodeDefinition {
-	x.inner.SetUniqueSelectionQueueLength(uniqueSelectionQueueLength)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniqueSelectionQueueLength:"), uniqueSelectionQueueLength)
 	return x
 }
 
 // Adds a node tree that’s one of the random-selection options.
-//
-// AddSubtreeWeight calls the underlying AddSubtreeWeight.
-func (x *RandomNodeDefinition) AddSubtreeWeight(subtree *raw.PHASESoundEventNodeDefinition, weight *foundation.NSNumber) {
-	x.inner.AddSubtreeWeight(subtree, weight)
+func (x *RandomNodeDefinition) AddSubtreeWeight(subtree *SoundEventNodeDefinition, weight obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSubtree:weight:"), objref.IDOf(subtree), objref.IDOf(weight))
 }
 
-// UniqueSelectionQueueLength calls the underlying UniqueSelectionQueueLength.
 func (x *RandomNodeDefinition) UniqueSelectionQueueLength() int {
-	return x.inner.UniqueSelectionQueueLength()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("uniqueSelectionQueueLength"))
+	return _r
 }
 
-// SetUniqueSelectionQueueLength calls the underlying SetUniqueSelectionQueueLength.
 func (x *RandomNodeDefinition) SetUniqueSelectionQueueLength(uniqueSelectionQueueLength int) {
-	x.inner.SetUniqueSelectionQueueLength(uniqueSelectionQueueLength)
-}
-
-func (x *RandomNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition {
-	return &x.inner.PHASESoundEventNodeDefinition
-}
-
-func (x *RandomNodeDefinition) asDefinition() *raw.PHASEDefinition {
-	return &x.inner.PHASESoundEventNodeDefinition.PHASEDefinition
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniqueSelectionQueueLength:"), uniqueSelectionQueueLength)
 }
 
 // RandomNodeDefinitionable is the interface implemented by [RandomNodeDefinition], for mocking and DI.
 type RandomNodeDefinitionable interface {
-	Unwrap() *raw.PHASERandomNodeDefinition
+	obj.Object
 	WithUniqueSelectionQueueLength(uniqueSelectionQueueLength int) *RandomNodeDefinition
-	AddSubtreeWeight(subtree *raw.PHASESoundEventNodeDefinition, weight *foundation.NSNumber)
+	AddSubtreeWeight(subtree *SoundEventNodeDefinition, weight obj.Object)
 	UniqueSelectionQueueLength() int
 	SetUniqueSelectionQueueLength(uniqueSelectionQueueLength int)
 }

@@ -5,41 +5,66 @@
 package iobluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// IOBluetoothObject wraps [raw.IOBluetoothObject] with a fluent Go API.
+// IOBluetoothObject is an idiomatic wrapper over the Objective-C class IOBluetoothObject.
 type IOBluetoothObject struct {
-	inner *raw.IOBluetoothObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IOBluetoothObject].
-func (x *IOBluetoothObject) Unwrap() *raw.IOBluetoothObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IOBluetoothObject) ID() objc.ID { return x.inner.Ptr() }
-
-// IOBluetoothObjectFromID adopts an existing object pointer as a IOBluetoothObject (nil for 0).
+// IOBluetoothObjectFromID adopts an existing Objective-C object as a IOBluetoothObject
+// (nil for 0), retaining it and registering a release finalizer.
 func IOBluetoothObjectFromID(id objc.ID) *IOBluetoothObject {
 	if id == 0 {
 		return nil
 	}
-	return &IOBluetoothObject{inner: raw.IOBluetoothObjectFromID(id)}
+	x := &IOBluetoothObject{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewIOBluetoothObject creates a new [IOBluetoothObject].
+// iOBluetoothObjectAdopt wraps an Objective-C object that this code just created as a
+// IOBluetoothObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iOBluetoothObjectAdopt(id objc.ID) *IOBluetoothObject {
+	if id == 0 {
+		return nil
+	}
+	x := &IOBluetoothObject{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IOBluetoothObject) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IOBluetoothObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IOBluetoothObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewIOBluetoothObject creates a new IOBluetoothObject.
 func NewIOBluetoothObject() *IOBluetoothObject {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothObject")), objc.RegisterName("new"))
-	return &IOBluetoothObject{inner: raw.IOBluetoothObjectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothObject")), objc.RegisterName("new"))
+	return iOBluetoothObjectAdopt(_id)
 }
-
-func (x *IOBluetoothObject) asIOBluetoothObject() *raw.IOBluetoothObject { return x.inner }
 
 // IOBluetoothObjectable is the interface implemented by [IOBluetoothObject], for mocking and DI.
 type IOBluetoothObjectable interface {
-	Unwrap() *raw.IOBluetoothObject
+	obj.Object
 }
 
 var _ IOBluetoothObjectable = (*IOBluetoothObject)(nil)

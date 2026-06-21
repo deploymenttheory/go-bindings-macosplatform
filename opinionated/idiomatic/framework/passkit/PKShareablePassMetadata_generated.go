@@ -5,228 +5,229 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Information that you use to configure the sharing sheet for a pass.
 //
-// ShareablePassMetadata wraps [raw.PKShareablePassMetadata] with a fluent Go API.
+// ShareablePassMetadata is an idiomatic wrapper over the Objective-C class PKShareablePassMetadata.
 type ShareablePassMetadata struct {
-	inner *raw.PKShareablePassMetadata
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKShareablePassMetadata].
-func (x *ShareablePassMetadata) Unwrap() *raw.PKShareablePassMetadata { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ShareablePassMetadata) ID() objc.ID { return x.inner.Ptr() }
-
-// ShareablePassMetadataFromID adopts an existing object pointer as a ShareablePassMetadata (nil for 0).
+// ShareablePassMetadataFromID adopts an existing Objective-C object as a ShareablePassMetadata
+// (nil for 0), retaining it and registering a release finalizer.
 func ShareablePassMetadataFromID(id objc.ID) *ShareablePassMetadata {
 	if id == 0 {
 		return nil
 	}
-	return &ShareablePassMetadata{inner: raw.PKShareablePassMetadataFromID(id)}
+	x := &ShareablePassMetadata{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// shareablePassMetadataAdopt wraps an Objective-C object that this code just created as a
+// ShareablePassMetadata (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shareablePassMetadataAdopt(id objc.ID) *ShareablePassMetadata {
+	if id == 0 {
+		return nil
+	}
+	x := &ShareablePassMetadata{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ShareablePassMetadata) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ShareablePassMetadata) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ShareablePassMetadata) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a shareable pass metadata object.
 //
-// NewShareablePassMetadataWithProvisioningCredentialIdentifierCardConfigurationIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescription creates a new [ShareablePassMetadata].
-func NewShareablePassMetadataWithProvisioningCredentialIdentifierCardConfigurationIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescription(credentialIdentifier string, cardConfigurationIdentifier string, sharingInstanceIdentifier string, passThumbnailImage unsafe.Pointer, ownerDisplayName string, localizedDescription string) *ShareablePassMetadata {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKShareablePassMetadata")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvisioningCredentialIdentifier:cardConfigurationIdentifier:sharingInstanceIdentifier:passThumbnailImage:ownerDisplayName:localizedDescription:"), foundation.NSStringStringWithUTF8String(credentialIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(cardConfigurationIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(sharingInstanceIdentifier).Ptr(), passThumbnailImage, foundation.NSStringStringWithUTF8String(ownerDisplayName).Ptr(), foundation.NSStringStringWithUTF8String(localizedDescription).Ptr())
-	return &ShareablePassMetadata{inner: raw.PKShareablePassMetadataFromID(_id)}
+// NewShareablePassMetadataWithProvisioningCredentialIdentifierCardConfigurationIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescription creates a new ShareablePassMetadata.
+func NewShareablePassMetadataWithProvisioningCredentialIdentifierCardConfigurationIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescription(credentialIdentifier string, cardConfigurationIdentifier string, sharingInstanceIdentifier string, passThumbnailImage obj.Object, ownerDisplayName string, localizedDescription string) *ShareablePassMetadata {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKShareablePassMetadata")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvisioningCredentialIdentifier:cardConfigurationIdentifier:sharingInstanceIdentifier:passThumbnailImage:ownerDisplayName:localizedDescription:"), purego.NSString(credentialIdentifier), purego.NSString(cardConfigurationIdentifier), purego.NSString(sharingInstanceIdentifier), objref.IDOf(passThumbnailImage), purego.NSString(ownerDisplayName), purego.NSString(localizedDescription))
+	return shareablePassMetadataAdopt(_id)
 }
 
-// NewShareablePassMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescriptionAccountHashTemplateIdentifierRelyingPartyIdentifierRequiresUnifiedAccessCapableDevice creates a new [ShareablePassMetadata].
-func NewShareablePassMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescriptionAccountHashTemplateIdentifierRelyingPartyIdentifierRequiresUnifiedAccessCapableDevice(credentialIdentifier string, sharingInstanceIdentifier string, passThumbnailImage unsafe.Pointer, ownerDisplayName string, localizedDescription string, accountHash string, templateIdentifier string, relyingPartyIdentifier string, requiresUnifiedAccessCapableDevice bool) *ShareablePassMetadata {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKShareablePassMetadata")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvisioningCredentialIdentifier:sharingInstanceIdentifier:passThumbnailImage:ownerDisplayName:localizedDescription:accountHash:templateIdentifier:relyingPartyIdentifier:requiresUnifiedAccessCapableDevice:"), foundation.NSStringStringWithUTF8String(credentialIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(sharingInstanceIdentifier).Ptr(), passThumbnailImage, foundation.NSStringStringWithUTF8String(ownerDisplayName).Ptr(), foundation.NSStringStringWithUTF8String(localizedDescription).Ptr(), foundation.NSStringStringWithUTF8String(accountHash).Ptr(), foundation.NSStringStringWithUTF8String(templateIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(relyingPartyIdentifier).Ptr(), requiresUnifiedAccessCapableDevice)
-	return &ShareablePassMetadata{inner: raw.PKShareablePassMetadataFromID(_id)}
+// NewShareablePassMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescriptionAccountHashTemplateIdentifierRelyingPartyIdentifierRequiresUnifiedAccessCapableDevice creates a new ShareablePassMetadata.
+func NewShareablePassMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescriptionAccountHashTemplateIdentifierRelyingPartyIdentifierRequiresUnifiedAccessCapableDevice(credentialIdentifier string, sharingInstanceIdentifier string, passThumbnailImage obj.Object, ownerDisplayName string, localizedDescription string, accountHash string, templateIdentifier string, relyingPartyIdentifier string, requiresUnifiedAccessCapableDevice bool) *ShareablePassMetadata {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKShareablePassMetadata")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvisioningCredentialIdentifier:sharingInstanceIdentifier:passThumbnailImage:ownerDisplayName:localizedDescription:accountHash:templateIdentifier:relyingPartyIdentifier:requiresUnifiedAccessCapableDevice:"), purego.NSString(credentialIdentifier), purego.NSString(sharingInstanceIdentifier), objref.IDOf(passThumbnailImage), purego.NSString(ownerDisplayName), purego.NSString(localizedDescription), purego.NSString(accountHash), purego.NSString(templateIdentifier), purego.NSString(relyingPartyIdentifier), requiresUnifiedAccessCapableDevice)
+	return shareablePassMetadataAdopt(_id)
 }
 
-// NewShareablePassMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierPreview creates a new [ShareablePassMetadata].
-func NewShareablePassMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierPreview(credentialIdentifier string, sharingInstanceIdentifier string, templateIdentifier string, preview *raw.PKShareablePassMetadataPreview) *ShareablePassMetadata {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKShareablePassMetadata")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvisioningCredentialIdentifier:sharingInstanceIdentifier:cardTemplateIdentifier:preview:"), foundation.NSStringStringWithUTF8String(credentialIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(sharingInstanceIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(templateIdentifier).Ptr(), preview.Ptr())
-	return &ShareablePassMetadata{inner: raw.PKShareablePassMetadataFromID(_id)}
+// NewShareablePassMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierPreview creates a new ShareablePassMetadata.
+func NewShareablePassMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierPreview(credentialIdentifier string, sharingInstanceIdentifier string, templateIdentifier string, preview *ShareablePassMetadataPreview) *ShareablePassMetadata {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKShareablePassMetadata")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvisioningCredentialIdentifier:sharingInstanceIdentifier:cardTemplateIdentifier:preview:"), purego.NSString(credentialIdentifier), purego.NSString(sharingInstanceIdentifier), purego.NSString(templateIdentifier), objref.IDOf(preview))
+	return shareablePassMetadataAdopt(_id)
 }
 
-// NewShareablePassMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardConfigurationIdentifierPreview creates a new [ShareablePassMetadata].
-func NewShareablePassMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardConfigurationIdentifierPreview(credentialIdentifier string, sharingInstanceIdentifier string, templateIdentifier string, preview *raw.PKShareablePassMetadataPreview) *ShareablePassMetadata {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKShareablePassMetadata")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvisioningCredentialIdentifier:sharingInstanceIdentifier:cardConfigurationIdentifier:preview:"), foundation.NSStringStringWithUTF8String(credentialIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(sharingInstanceIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(templateIdentifier).Ptr(), preview.Ptr())
-	return &ShareablePassMetadata{inner: raw.PKShareablePassMetadataFromID(_id)}
+// NewShareablePassMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardConfigurationIdentifierPreview creates a new ShareablePassMetadata.
+func NewShareablePassMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardConfigurationIdentifierPreview(credentialIdentifier string, sharingInstanceIdentifier string, templateIdentifier string, preview *ShareablePassMetadataPreview) *ShareablePassMetadata {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKShareablePassMetadata")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvisioningCredentialIdentifier:sharingInstanceIdentifier:cardConfigurationIdentifier:preview:"), purego.NSString(credentialIdentifier), purego.NSString(sharingInstanceIdentifier), purego.NSString(templateIdentifier), objref.IDOf(preview))
+	return shareablePassMetadataAdopt(_id)
 }
 
-// WithRequiresUnifiedAccessCapableDevice sets the requiresUnifiedAccessCapableDevice property and returns the receiver for chaining.
+// WithRequiresUnifiedAccessCapableDevice sets requiresUnifiedAccessCapableDevice and returns the receiver so calls can be chained.
 func (x *ShareablePassMetadata) WithRequiresUnifiedAccessCapableDevice(requiresUnifiedAccessCapableDevice bool) *ShareablePassMetadata {
-	x.inner.SetRequiresUnifiedAccessCapableDevice(requiresUnifiedAccessCapableDevice)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresUnifiedAccessCapableDevice:"), requiresUnifiedAccessCapableDevice)
 	return x
 }
 
-// WithServerEnvironmentIdentifier sets the serverEnvironmentIdentifier property and returns the receiver for chaining.
+// WithServerEnvironmentIdentifier sets serverEnvironmentIdentifier and returns the receiver so calls can be chained.
 func (x *ShareablePassMetadata) WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *ShareablePassMetadata {
-	x.inner.SetServerEnvironmentIdentifier(foundation.NSStringStringWithUTF8String(serverEnvironmentIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerEnvironmentIdentifier:"), purego.NSString(serverEnvironmentIdentifier))
 	return x
 }
 
 // An Apple Push Notification push token.
 //
-// WithAccountHash sets the accountHash property and returns the receiver for chaining.
+// WithAccountHash sets accountHash and returns the receiver so calls can be chained.
 func (x *ShareablePassMetadata) WithAccountHash(accountHash string) *ShareablePassMetadata {
-	x.inner.SetAccountHash(foundation.NSStringStringWithUTF8String(accountHash))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountHash:"), purego.NSString(accountHash))
 	return x
 }
 
 // An identifier used in push notifications.
 //
-// WithRelyingPartyIdentifier sets the relyingPartyIdentifier property and returns the receiver for chaining.
+// WithRelyingPartyIdentifier sets relyingPartyIdentifier and returns the receiver so calls can be chained.
 func (x *ShareablePassMetadata) WithRelyingPartyIdentifier(relyingPartyIdentifier string) *ShareablePassMetadata {
-	x.inner.SetRelyingPartyIdentifier(foundation.NSStringStringWithUTF8String(relyingPartyIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelyingPartyIdentifier:"), purego.NSString(relyingPartyIdentifier))
 	return x
 }
 
-// CredentialIdentifier calls the underlying CredentialIdentifier.
 func (x *ShareablePassMetadata) CredentialIdentifier() string {
-	_r := x.inner.CredentialIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SharingInstanceIdentifier calls the underlying SharingInstanceIdentifier.
 func (x *ShareablePassMetadata) SharingInstanceIdentifier() string {
-	_r := x.inner.SharingInstanceIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sharingInstanceIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// TemplateIdentifier calls the underlying TemplateIdentifier.
-func (x *ShareablePassMetadata) TemplateIdentifier() unsafe.Pointer {
-	return x.inner.TemplateIdentifier()
-}
-
-// CardTemplateIdentifier calls the underlying CardTemplateIdentifier.
 func (x *ShareablePassMetadata) CardTemplateIdentifier() string {
-	_r := x.inner.CardTemplateIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cardTemplateIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// CardConfigurationIdentifier calls the underlying CardConfigurationIdentifier.
 func (x *ShareablePassMetadata) CardConfigurationIdentifier() string {
-	_r := x.inner.CardConfigurationIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cardConfigurationIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// RequiresUnifiedAccessCapableDevice calls the underlying RequiresUnifiedAccessCapableDevice.
 func (x *ShareablePassMetadata) RequiresUnifiedAccessCapableDevice() bool {
-	return x.inner.RequiresUnifiedAccessCapableDevice()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresUnifiedAccessCapableDevice"))
+	return _r
 }
 
-// SetRequiresUnifiedAccessCapableDevice calls the underlying SetRequiresUnifiedAccessCapableDevice.
 func (x *ShareablePassMetadata) SetRequiresUnifiedAccessCapableDevice(requiresUnifiedAccessCapableDevice bool) {
-	x.inner.SetRequiresUnifiedAccessCapableDevice(requiresUnifiedAccessCapableDevice)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresUnifiedAccessCapableDevice:"), requiresUnifiedAccessCapableDevice)
 }
 
-// ServerEnvironmentIdentifier calls the underlying ServerEnvironmentIdentifier.
 func (x *ShareablePassMetadata) ServerEnvironmentIdentifier() string {
-	_r := x.inner.ServerEnvironmentIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverEnvironmentIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetServerEnvironmentIdentifier calls the underlying SetServerEnvironmentIdentifier.
 func (x *ShareablePassMetadata) SetServerEnvironmentIdentifier(serverEnvironmentIdentifier string) {
-	x.inner.SetServerEnvironmentIdentifier(foundation.NSStringStringWithUTF8String(serverEnvironmentIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerEnvironmentIdentifier:"), purego.NSString(serverEnvironmentIdentifier))
 }
 
-// Preview calls the underlying Preview.
 func (x *ShareablePassMetadata) Preview() *ShareablePassMetadataPreview {
-	_r := x.inner.Preview()
-	if _r == nil {
-		return nil
-	}
-	return &ShareablePassMetadataPreview{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preview"))
+	return ShareablePassMetadataPreviewFromID(_r)
 }
 
-// PassThumbnailImage calls the underlying PassThumbnailImage.
-func (x *ShareablePassMetadata) PassThumbnailImage() unsafe.Pointer {
-	return x.inner.PassThumbnailImage()
+func (x *ShareablePassMetadata) PassThumbnailImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passThumbnailImage"))
+	return obj.Wrap(_r)
 }
 
-// LocalizedDescription calls the underlying LocalizedDescription.
 func (x *ShareablePassMetadata) LocalizedDescription() string {
-	_r := x.inner.LocalizedDescription()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// OwnerDisplayName calls the underlying OwnerDisplayName.
 func (x *ShareablePassMetadata) OwnerDisplayName() string {
-	_r := x.inner.OwnerDisplayName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerDisplayName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// AccountHash calls the underlying AccountHash.
 func (x *ShareablePassMetadata) AccountHash() string {
-	_r := x.inner.AccountHash()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountHash"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetAccountHash calls the underlying SetAccountHash.
 func (x *ShareablePassMetadata) SetAccountHash(accountHash string) {
-	x.inner.SetAccountHash(foundation.NSStringStringWithUTF8String(accountHash))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountHash:"), purego.NSString(accountHash))
 }
 
-// RelyingPartyIdentifier calls the underlying RelyingPartyIdentifier.
 func (x *ShareablePassMetadata) RelyingPartyIdentifier() string {
-	_r := x.inner.RelyingPartyIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relyingPartyIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetRelyingPartyIdentifier calls the underlying SetRelyingPartyIdentifier.
 func (x *ShareablePassMetadata) SetRelyingPartyIdentifier(relyingPartyIdentifier string) {
-	x.inner.SetRelyingPartyIdentifier(foundation.NSStringStringWithUTF8String(relyingPartyIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelyingPartyIdentifier:"), purego.NSString(relyingPartyIdentifier))
 }
 
 // ShareablePassMetadataable is the interface implemented by [ShareablePassMetadata], for mocking and DI.
 type ShareablePassMetadataable interface {
-	Unwrap() *raw.PKShareablePassMetadata
+	obj.Object
 	WithRequiresUnifiedAccessCapableDevice(requiresUnifiedAccessCapableDevice bool) *ShareablePassMetadata
 	WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *ShareablePassMetadata
 	WithAccountHash(accountHash string) *ShareablePassMetadata
 	WithRelyingPartyIdentifier(relyingPartyIdentifier string) *ShareablePassMetadata
 	CredentialIdentifier() string
 	SharingInstanceIdentifier() string
-	TemplateIdentifier() unsafe.Pointer
 	CardTemplateIdentifier() string
 	CardConfigurationIdentifier() string
 	RequiresUnifiedAccessCapableDevice() bool
@@ -234,7 +235,7 @@ type ShareablePassMetadataable interface {
 	ServerEnvironmentIdentifier() string
 	SetServerEnvironmentIdentifier(serverEnvironmentIdentifier string)
 	Preview() *ShareablePassMetadataPreview
-	PassThumbnailImage() unsafe.Pointer
+	PassThumbnailImage() obj.Object
 	LocalizedDescription() string
 	OwnerDisplayName() string
 	AccountHash() string

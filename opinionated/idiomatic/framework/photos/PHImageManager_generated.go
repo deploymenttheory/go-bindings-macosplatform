@@ -5,104 +5,97 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that facilitates retrieving or generating preview thumbnails and asset data.
 //
-// ImageManager wraps [raw.PHImageManager] with a fluent Go API.
+// ImageManager is an idiomatic wrapper over the Objective-C class PHImageManager.
 type ImageManager struct {
-	inner *raw.PHImageManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHImageManager].
-func (x *ImageManager) Unwrap() *raw.PHImageManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageManager) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageManagerFromID adopts an existing object pointer as a ImageManager (nil for 0).
+// ImageManagerFromID adopts an existing Objective-C object as a ImageManager
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageManagerFromID(id objc.ID) *ImageManager {
 	if id == 0 {
 		return nil
 	}
-	return &ImageManager{inner: raw.PHImageManagerFromID(id)}
+	x := &ImageManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewImageManager creates a new [ImageManager].
+// imageManagerAdopt wraps an Objective-C object that this code just created as a
+// ImageManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageManagerAdopt(id objc.ID) *ImageManager {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ImageManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageManager creates a new ImageManager.
 func NewImageManager() *ImageManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHImageManager")), objc.RegisterName("new"))
-	return &ImageManager{inner: raw.PHImageManagerFromID(_id)}
-}
-
-// Requests an image representation for the specified asset.
-//
-// RequestImageForAssetTargetSizeContentModeOptionsResultHandler calls the underlying RequestImageForAssetTargetSizeContentModeOptionsResultHandler.
-func (x *ImageManager) RequestImageForAssetTargetSizeContentModeOptionsResultHandler(asset *raw.PHAsset, targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHImageRequestOptions, resultHandler func(*appkit.NSImage, *foundation.NSDictionary[objc.ID, objc.ID])) int32 {
-	return x.inner.RequestImageForAssetTargetSizeContentModeOptionsResultHandler(asset, targetSize, raw.PHImageContentMode(contentMode), options, resultHandler)
-}
-
-// Requests the largest represented image as data bytes and EXIF orientation for the specified asset.
-//
-// RequestImageDataAndOrientationForAssetOptionsResultHandler calls the underlying RequestImageDataAndOrientationForAssetOptionsResultHandler.
-func (x *ImageManager) RequestImageDataAndOrientationForAssetOptionsResultHandler(asset *raw.PHAsset, options *raw.PHImageRequestOptions, resultHandler func(*foundation.NSData, *foundation.NSString, imageio.CGImagePropertyOrientation, *foundation.NSDictionary[objc.ID, objc.ID])) int32 {
-	return x.inner.RequestImageDataAndOrientationForAssetOptionsResultHandler(asset, options, resultHandler)
+	_id := objc.Send[objc.ID](objc.ID(_class("PHImageManager")), objc.RegisterName("new"))
+	return imageManagerAdopt(_id)
 }
 
 // Cancels an asynchronous request
-//
-// CancelImageRequest calls the underlying CancelImageRequest.
 func (x *ImageManager) CancelImageRequest(requestID int32) {
-	x.inner.CancelImageRequest(requestID)
-}
-
-// Requests a Live Photo representation for the specified asset.
-//
-// RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler calls the underlying RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler.
-func (x *ImageManager) RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset *raw.PHAsset, targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHLivePhotoRequestOptions, resultHandler func(*raw.PHLivePhoto, *foundation.NSDictionary[objc.ID, objc.ID])) int32 {
-	return x.inner.RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset, targetSize, raw.PHImageContentMode(contentMode), options, resultHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelImageRequest:"), requestID)
 }
 
 // Requests a representation of the video asset for playback, to be loaded asynchronously.
-//
-// RequestPlayerItemForVideoOptionsResultHandler calls the underlying RequestPlayerItemForVideoOptionsResultHandler.
-func (x *ImageManager) RequestPlayerItemForVideoOptionsResultHandler(asset *raw.PHAsset, options *raw.PHVideoRequestOptions, resultHandler func(*avfoundation.AVPlayerItem, *foundation.NSDictionary[objc.ID, objc.ID])) int32 {
-	return x.inner.RequestPlayerItemForVideoOptionsResultHandler(asset, options, resultHandler)
+func (x *ImageManager) RequestPlayerItemForVideoOptionsResultHandler(asset *Asset, options *VideoRequestOptions, resultHandler func(obj.Object, obj.Object)) int32 {
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("requestPlayerItemForVideo:options:resultHandler:"), objref.IDOf(asset), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { resultHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return _r
 }
 
 // Requests an export session for writing the video asset’s data to a file, to be loaded asynchronously.
-//
-// RequestExportSessionForVideoOptionsExportPresetResultHandler calls the underlying RequestExportSessionForVideoOptionsExportPresetResultHandler.
-func (x *ImageManager) RequestExportSessionForVideoOptionsExportPresetResultHandler(asset *raw.PHAsset, options *raw.PHVideoRequestOptions, exportPreset string, resultHandler func(*avfoundation.AVAssetExportSession, *foundation.NSDictionary[objc.ID, objc.ID])) int32 {
-	return x.inner.RequestExportSessionForVideoOptionsExportPresetResultHandler(asset, options, foundation.NSStringStringWithUTF8String(exportPreset), resultHandler)
+func (x *ImageManager) RequestExportSessionForVideoOptionsExportPresetResultHandler(asset *Asset, options *VideoRequestOptions, exportPreset string, resultHandler func(obj.Object, obj.Object)) int32 {
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("requestExportSessionForVideo:options:exportPreset:resultHandler:"), objref.IDOf(asset), objref.IDOf(options), purego.NSString(exportPreset), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { resultHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return _r
 }
 
 // Requests AVFoundation objects representing the video asset’s content and state, to be loaded asynchronously.
-//
-// RequestAVAssetForVideoOptionsResultHandler calls the underlying RequestAVAssetForVideoOptionsResultHandler.
-func (x *ImageManager) RequestAVAssetForVideoOptionsResultHandler(asset *raw.PHAsset, options *raw.PHVideoRequestOptions, resultHandler func(*avfoundation.AVAsset, *avfoundation.AVAudioMix, *foundation.NSDictionary[objc.ID, objc.ID])) int32 {
-	return x.inner.RequestAVAssetForVideoOptionsResultHandler(asset, options, resultHandler)
+func (x *ImageManager) RequestAVAssetForVideoOptionsResultHandler(asset *Asset, options *VideoRequestOptions, resultHandler func(obj.Object, obj.Object, obj.Object)) int32 {
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("requestAVAssetForVideo:options:resultHandler:"), objref.IDOf(asset), objref.IDOf(options), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID) {
+		resultHandler(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2))
+	}))
+	return _r
 }
-
-func (x *ImageManager) asImageManager() *raw.PHImageManager { return x.inner }
 
 // ImageManagerable is the interface implemented by [ImageManager], for mocking and DI.
 type ImageManagerable interface {
-	Unwrap() *raw.PHImageManager
-	RequestImageForAssetTargetSizeContentModeOptionsResultHandler(asset *raw.PHAsset, targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHImageRequestOptions, resultHandler func(*appkit.NSImage, *foundation.NSDictionary[objc.ID, objc.ID])) int32
-	RequestImageDataAndOrientationForAssetOptionsResultHandler(asset *raw.PHAsset, options *raw.PHImageRequestOptions, resultHandler func(*foundation.NSData, *foundation.NSString, imageio.CGImagePropertyOrientation, *foundation.NSDictionary[objc.ID, objc.ID])) int32
+	obj.Object
 	CancelImageRequest(requestID int32)
-	RequestLivePhotoForAssetTargetSizeContentModeOptionsResultHandler(asset *raw.PHAsset, targetSize corefoundation.CGSize, contentMode PHImageContentMode, options *raw.PHLivePhotoRequestOptions, resultHandler func(*raw.PHLivePhoto, *foundation.NSDictionary[objc.ID, objc.ID])) int32
-	RequestPlayerItemForVideoOptionsResultHandler(asset *raw.PHAsset, options *raw.PHVideoRequestOptions, resultHandler func(*avfoundation.AVPlayerItem, *foundation.NSDictionary[objc.ID, objc.ID])) int32
-	RequestExportSessionForVideoOptionsExportPresetResultHandler(asset *raw.PHAsset, options *raw.PHVideoRequestOptions, exportPreset string, resultHandler func(*avfoundation.AVAssetExportSession, *foundation.NSDictionary[objc.ID, objc.ID])) int32
-	RequestAVAssetForVideoOptionsResultHandler(asset *raw.PHAsset, options *raw.PHVideoRequestOptions, resultHandler func(*avfoundation.AVAsset, *avfoundation.AVAudioMix, *foundation.NSDictionary[objc.ID, objc.ID])) int32
+	RequestPlayerItemForVideoOptionsResultHandler(asset *Asset, options *VideoRequestOptions, resultHandler func(obj.Object, obj.Object)) int32
+	RequestExportSessionForVideoOptionsExportPresetResultHandler(asset *Asset, options *VideoRequestOptions, exportPreset string, resultHandler func(obj.Object, obj.Object)) int32
+	RequestAVAssetForVideoOptionsResultHandler(asset *Asset, options *VideoRequestOptions, resultHandler func(obj.Object, obj.Object, obj.Object)) int32
 }
 
 var _ ImageManagerable = (*ImageManager)(nil)

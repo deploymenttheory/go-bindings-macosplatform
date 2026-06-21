@@ -5,102 +5,82 @@
 package gameplaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A data structure for organizing objects based on their locations in a two-dimensional space.
 //
-// Quadtree wraps [raw.GKQuadtree] with a fluent Go API.
+// Quadtree is an idiomatic wrapper over the Objective-C class GKQuadtree.
 type Quadtree struct {
-	inner *raw.GKQuadtree[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKQuadtree].
-func (x *Quadtree) Unwrap() *raw.GKQuadtree[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Quadtree) ID() objc.ID { return x.inner.Ptr() }
-
-// QuadtreeFromID adopts an existing object pointer as a Quadtree (nil for 0).
+// QuadtreeFromID adopts an existing Objective-C object as a Quadtree
+// (nil for 0), retaining it and registering a release finalizer.
 func QuadtreeFromID(id objc.ID) *Quadtree {
 	if id == 0 {
 		return nil
 	}
-	return &Quadtree{inner: raw.GKQuadtreeFromID[objc.ID](id)}
+	x := &Quadtree{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes a quadtree with the specified dimensions.
-//
-// NewQuadtreeWithBoundingQuadMinimumCellSize creates a new [Quadtree].
-func NewQuadtreeWithBoundingQuadMinimumCellSize(quad raw.GKQuad, minCellSize float32) *Quadtree {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKQuadtree")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBoundingQuad:minimumCellSize:"), quad, minCellSize)
-	return &Quadtree{inner: raw.GKQuadtreeFromID[objc.ID](_id)}
-}
-
-// Adds an object to the tree corresponding to the specified point in 2D space.
-//
-// AddElementWithPoint calls the underlying AddElementWithPoint.
-func (x *Quadtree) AddElementWithPoint(element objc.ID, point unsafe.Pointer) *QuadtreeNode {
-	_r := x.inner.AddElementWithPoint(element, point)
-	if _r == nil {
+// quadtreeAdopt wraps an Objective-C object that this code just created as a
+// Quadtree (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func quadtreeAdopt(id objc.ID) *Quadtree {
+	if id == 0 {
 		return nil
 	}
-	return &QuadtreeNode{inner: _r}
+	x := &Quadtree{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Adds an object to the tree corresponding to the specified region of 2D space.
-//
-// AddElementWithQuad calls the underlying AddElementWithQuad.
-func (x *Quadtree) AddElementWithQuad(element objc.ID, quad raw.GKQuad) *QuadtreeNode {
-	_r := x.inner.AddElementWithQuad(element, quad)
-	if _r == nil {
-		return nil
-	}
-	return &QuadtreeNode{inner: _r}
+// Description returns the object's -description text.
+func (x *Quadtree) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns all objects whose corresponding locations overlap the specified point.
-//
-// ElementsAtPoint calls the underlying ElementsAtPoint.
-func (x *Quadtree) ElementsAtPoint(point unsafe.Pointer) *foundation.NSArray[objc.ID] {
-	return x.inner.ElementsAtPoint(point)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Quadtree) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Returns all objects whose corresponding locations overlap the specified region.
-//
-// ElementsInQuad calls the underlying ElementsInQuad.
-func (x *Quadtree) ElementsInQuad(quad raw.GKQuad) *foundation.NSArray[objc.ID] {
-	return x.inner.ElementsInQuad(quad)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Quadtree) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewQuadtree creates a new Quadtree.
+func NewQuadtree() *Quadtree {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKQuadtree")), objc.RegisterName("new"))
+	return quadtreeAdopt(_id)
 }
 
 // Searches for the specified object and removes it from the tree.
-//
-// RemoveElement calls the underlying RemoveElement.
-func (x *Quadtree) RemoveElement(element objc.ID) bool {
-	return x.inner.RemoveElement(element)
+func (x *Quadtree) RemoveElement(element obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeElement:"), objref.IDOf(element))
+	return _r
 }
 
 // Removes the specified object from the tree, using a reference to its containing node.
-//
-// RemoveElementWithNode calls the underlying RemoveElementWithNode.
-func (x *Quadtree) RemoveElementWithNode(data objc.ID, node *raw.GKQuadtreeNode) bool {
-	return x.inner.RemoveElementWithNode(data, node)
+func (x *Quadtree) RemoveElementWithNode(data obj.Object, node *QuadtreeNode) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeElement:withNode:"), objref.IDOf(data), objref.IDOf(node))
+	return _r
 }
 
 // Quadtreeable is the interface implemented by [Quadtree], for mocking and DI.
 type Quadtreeable interface {
-	Unwrap() *raw.GKQuadtree[objc.ID]
-	AddElementWithPoint(element objc.ID, point unsafe.Pointer) *QuadtreeNode
-	AddElementWithQuad(element objc.ID, quad raw.GKQuad) *QuadtreeNode
-	ElementsAtPoint(point unsafe.Pointer) *foundation.NSArray[objc.ID]
-	ElementsInQuad(quad raw.GKQuad) *foundation.NSArray[objc.ID]
-	RemoveElement(element objc.ID) bool
-	RemoveElementWithNode(data objc.ID, node *raw.GKQuadtreeNode) bool
+	obj.Object
+	RemoveElement(element obj.Object) bool
+	RemoveElementWithNode(data obj.Object, node *QuadtreeNode) bool
 }
 
 var _ Quadtreeable = (*Quadtree)(nil)

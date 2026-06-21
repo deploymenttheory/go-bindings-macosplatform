@@ -5,64 +5,88 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A specification of how to create a visible function table.
 //
-// VisibleFunctionTableDescriptor wraps [raw.MTLVisibleFunctionTableDescriptor] with a fluent Go API.
+// VisibleFunctionTableDescriptor is an idiomatic wrapper over the Objective-C class MTLVisibleFunctionTableDescriptor.
 type VisibleFunctionTableDescriptor struct {
-	inner *raw.MTLVisibleFunctionTableDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLVisibleFunctionTableDescriptor].
-func (x *VisibleFunctionTableDescriptor) Unwrap() *raw.MTLVisibleFunctionTableDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VisibleFunctionTableDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// VisibleFunctionTableDescriptorFromID adopts an existing object pointer as a VisibleFunctionTableDescriptor (nil for 0).
+// VisibleFunctionTableDescriptorFromID adopts an existing Objective-C object as a VisibleFunctionTableDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func VisibleFunctionTableDescriptorFromID(id objc.ID) *VisibleFunctionTableDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &VisibleFunctionTableDescriptor{inner: raw.MTLVisibleFunctionTableDescriptorFromID(id)}
+	x := &VisibleFunctionTableDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVisibleFunctionTableDescriptor creates a new [VisibleFunctionTableDescriptor].
+// visibleFunctionTableDescriptorAdopt wraps an Objective-C object that this code just created as a
+// VisibleFunctionTableDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func visibleFunctionTableDescriptorAdopt(id objc.ID) *VisibleFunctionTableDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &VisibleFunctionTableDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VisibleFunctionTableDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VisibleFunctionTableDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VisibleFunctionTableDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVisibleFunctionTableDescriptor creates a new VisibleFunctionTableDescriptor.
 func NewVisibleFunctionTableDescriptor() *VisibleFunctionTableDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLVisibleFunctionTableDescriptor")), objc.RegisterName("new"))
-	return &VisibleFunctionTableDescriptor{inner: raw.MTLVisibleFunctionTableDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLVisibleFunctionTableDescriptor")), objc.RegisterName("new"))
+	return visibleFunctionTableDescriptorAdopt(_id)
 }
 
 // The number of entries in the function table.
 //
-// WithFunctionCount sets the functionCount property and returns the receiver for chaining.
-func (x *VisibleFunctionTableDescriptor) WithFunctionCount(functionCount uint) *VisibleFunctionTableDescriptor {
-	x.inner.SetFunctionCount(functionCount)
+// WithFunctionCount sets functionCount and returns the receiver so calls can be chained.
+func (x *VisibleFunctionTableDescriptor) WithFunctionCount(functionCount int) *VisibleFunctionTableDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionCount:"), functionCount)
 	return x
 }
 
-// FunctionCount calls the underlying FunctionCount.
-func (x *VisibleFunctionTableDescriptor) FunctionCount() uint {
-	return x.inner.FunctionCount()
+func (x *VisibleFunctionTableDescriptor) FunctionCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("functionCount"))
+	return _r
 }
 
-// SetFunctionCount calls the underlying SetFunctionCount.
-func (x *VisibleFunctionTableDescriptor) SetFunctionCount(functionCount uint) {
-	x.inner.SetFunctionCount(functionCount)
+func (x *VisibleFunctionTableDescriptor) SetFunctionCount(functionCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionCount:"), functionCount)
 }
 
 // VisibleFunctionTableDescriptorable is the interface implemented by [VisibleFunctionTableDescriptor], for mocking and DI.
 type VisibleFunctionTableDescriptorable interface {
-	Unwrap() *raw.MTLVisibleFunctionTableDescriptor
-	WithFunctionCount(functionCount uint) *VisibleFunctionTableDescriptor
-	FunctionCount() uint
-	SetFunctionCount(functionCount uint)
+	obj.Object
+	WithFunctionCount(functionCount int) *VisibleFunctionTableDescriptor
+	FunctionCount() int
+	SetFunctionCount(functionCount int)
 }
 
 var _ VisibleFunctionTableDescriptorable = (*VisibleFunctionTableDescriptor)(nil)

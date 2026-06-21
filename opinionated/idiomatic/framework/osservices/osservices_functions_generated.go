@@ -5,39 +5,42 @@
 package osservices
 
 import (
-	"fmt"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego/objcerrors"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// CSIdentityCommit calls [raw.CSIdentityCommit], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CSIdentityCommit(identity unsafe.Pointer, authorization unsafe.Pointer) error {
+// CSIdentityCommit reports an error if the OSServices framework function CSIdentityCommit fails.
+var _fnCSIdentityCommit func(objc.ID, objc.ID, unsafe.Pointer) uint8
+
+func CSIdentityCommit(identity obj.Object, authorization obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSIdentityCommit == nil {
+		ebipurego.RegisterLibFunc(&_fnCSIdentityCommit, _lib, "CSIdentityCommit")
+	}
 	var _cfErr unsafe.Pointer
-	_ok := raw.CSIdentityCommit(identity, authorization, unsafe.Pointer(&_cfErr))
+	_ok := _fnCSIdentityCommit(objref.IDOf(identity), objref.IDOf(authorization), unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
-		return _cfErrOrMsg(_cfErr, "CSIdentityCommit")
+		return errkit.FromCFError(_cfErr)
 	}
 	return nil
 }
 
-// CSIdentityQueryExecute calls [raw.CSIdentityQueryExecute], converting the CFErrorRef out-parameter to a structured Go error on failure.
-func CSIdentityQueryExecute(query unsafe.Pointer, flags uint) error {
+// CSIdentityQueryExecute reports an error if the OSServices framework function CSIdentityQueryExecute fails.
+var _fnCSIdentityQueryExecute func(objc.ID, int, unsafe.Pointer) uint8
+
+func CSIdentityQueryExecute(query obj.Object, flags int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSIdentityQueryExecute == nil {
+		ebipurego.RegisterLibFunc(&_fnCSIdentityQueryExecute, _lib, "CSIdentityQueryExecute")
+	}
 	var _cfErr unsafe.Pointer
-	_ok := raw.CSIdentityQueryExecute(query, flags, unsafe.Pointer(&_cfErr))
+	_ok := _fnCSIdentityQueryExecute(objref.IDOf(query), flags, unsafe.Pointer(&_cfErr))
 	if _ok == 0 {
-		return _cfErrOrMsg(_cfErr, "CSIdentityQueryExecute")
+		return errkit.FromCFError(_cfErr)
 	}
 	return nil
-}
-
-// _cfErrOrMsg converts a CFErrorRef to a structured Go error (domain, code,
-// description, failure reason). A CFErrorRef is an NSError, so it is read
-// through the NSError path with no CGo. Falls back to a plain message if no
-// error was populated.
-func _cfErrOrMsg(ptr unsafe.Pointer, fn string) error {
-	if ptr != nil {
-		return objcerrors.CFErrorToError(ptr)
-	}
-	return fmt.Errorf("[%s] operation failed", fn)
 }

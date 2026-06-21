@@ -5,102 +5,108 @@
 package screencapturekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An instance that represents an onscreen window.
 //
-// Window wraps [raw.SCWindow] with a fluent Go API.
+// Window is an idiomatic wrapper over the Objective-C class SCWindow.
 type Window struct {
-	inner *raw.SCWindow
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCWindow].
-func (x *Window) Unwrap() *raw.SCWindow { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Window) ID() objc.ID { return x.inner.Ptr() }
-
-// WindowFromID adopts an existing object pointer as a Window (nil for 0).
+// WindowFromID adopts an existing Objective-C object as a Window
+// (nil for 0), retaining it and registering a release finalizer.
 func WindowFromID(id objc.ID) *Window {
 	if id == 0 {
 		return nil
 	}
-	return &Window{inner: raw.SCWindowFromID(id)}
+	x := &Window{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWindow creates a new [Window].
-func NewWindow() *Window {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCWindow")), objc.RegisterName("new"))
-	return &Window{inner: raw.SCWindowFromID(_id)}
-}
-
-// @abstract windowID the CGWindowID for the SCWindow
-//
-// WindowID calls the underlying WindowID.
-func (x *Window) WindowID() uint32 {
-	return x.inner.WindowID()
-}
-
-// @abstract frame the CGRect for the SCWindow
-//
-// Frame calls the underlying Frame.
-func (x *Window) Frame() corefoundation.CGRect {
-	return x.inner.Frame()
-}
-
-// @abstract title the window title for the SCWindow
-//
-// Title calls the underlying Title.
-func (x *Window) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// @abstract windowLayer the window layer for the SCWindow
-//
-// WindowLayer calls the underlying WindowLayer.
-func (x *Window) WindowLayer() int {
-	return x.inner.WindowLayer()
-}
-
-// @abstract owningApplication is the SCRunningApplication that owns this SCWindow
-//
-// OwningApplication calls the underlying OwningApplication.
-func (x *Window) OwningApplication() *RunningApplication {
-	_r := x.inner.OwningApplication()
-	if _r == nil {
+// windowAdopt wraps an Objective-C object that this code just created as a
+// Window (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func windowAdopt(id objc.ID) *Window {
+	if id == 0 {
 		return nil
 	}
-	return &RunningApplication{inner: _r}
+	x := &Window{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @abstract onScreen the bool property denoting of the SCWindow is on the screen
-//
-// IsOnScreen calls the underlying IsOnScreen.
+// Description returns the object's -description text.
+func (x *Window) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Window) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Window) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWindow creates a new Window.
+func NewWindow() *Window {
+	_id := objc.Send[objc.ID](objc.ID(_class("SCWindow")), objc.RegisterName("new"))
+	return windowAdopt(_id)
+}
+
+// windowID the CGWindowID for the SCWindow
+func (x *Window) WindowID() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("windowID"))
+	return _r
+}
+
+// title the window title for the SCWindow
+func (x *Window) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// windowLayer the window layer for the SCWindow
+func (x *Window) WindowLayer() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("windowLayer"))
+	return _r
+}
+
+// owningApplication is the SCRunningApplication that owns this SCWindow
+func (x *Window) OwningApplication() *RunningApplication {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("owningApplication"))
+	return RunningApplicationFromID(_r)
+}
+
+// onScreen the bool property denoting of the SCWindow is on the screen
 func (x *Window) IsOnScreen() bool {
-	return x.inner.IsOnScreen()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOnScreen"))
+	return _r
 }
 
-// @abstract active the bool property denoting of the SCWindow is active. with Stage Manager, SCWindow can be offScreen and active
-//
-// IsActive calls the underlying IsActive.
+// active the bool property denoting of the SCWindow is active. with Stage Manager, SCWindow can be offScreen and active
 func (x *Window) IsActive() bool {
-	return x.inner.IsActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+	return _r
 }
 
 // Windowable is the interface implemented by [Window], for mocking and DI.
 type Windowable interface {
-	Unwrap() *raw.SCWindow
+	obj.Object
 	WindowID() uint32
-	Frame() corefoundation.CGRect
 	Title() string
 	WindowLayer() int
 	OwningApplication() *RunningApplication

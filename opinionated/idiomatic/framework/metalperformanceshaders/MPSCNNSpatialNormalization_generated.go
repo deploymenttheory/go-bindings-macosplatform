@@ -5,217 +5,160 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A spatial normalization kernel.
 //
-// CNNSpatialNormalization wraps [raw.MPSCNNSpatialNormalization] with a fluent Go API.
+// CNNSpatialNormalization is an idiomatic wrapper over the Objective-C class MPSCNNSpatialNormalization.
 type CNNSpatialNormalization struct {
-	inner *raw.MPSCNNSpatialNormalization
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNSpatialNormalization].
-func (x *CNNSpatialNormalization) Unwrap() *raw.MPSCNNSpatialNormalization { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNSpatialNormalization) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNSpatialNormalizationFromID adopts an existing object pointer as a CNNSpatialNormalization (nil for 0).
+// CNNSpatialNormalizationFromID adopts an existing Objective-C object as a CNNSpatialNormalization
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNSpatialNormalizationFromID(id objc.ID) *CNNSpatialNormalization {
 	if id == 0 {
 		return nil
 	}
-	return &CNNSpatialNormalization{inner: raw.MPSCNNSpatialNormalizationFromID(id)}
+	x := &CNNSpatialNormalization{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes a spatial normalization kernel.
-//
-// NewCNNSpatialNormalizationWithDeviceKernelWidthKernelHeight creates a new [CNNSpatialNormalization].
-func NewCNNSpatialNormalizationWithDeviceKernelWidthKernelHeight(device metal.MTLDevice, kernelWidth uint, kernelHeight uint) *CNNSpatialNormalization {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNSpatialNormalization")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:"), device, kernelWidth, kernelHeight)
-	return &CNNSpatialNormalization{inner: raw.MPSCNNSpatialNormalizationFromID(_id)}
+// cNNSpatialNormalizationAdopt wraps an Objective-C object that this code just created as a
+// CNNSpatialNormalization (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNSpatialNormalizationAdopt(id objc.ID) *CNNSpatialNormalization {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNSpatialNormalization{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Initializes a spatial normalization kernel.
-//
-// NewCNNSpatialNormalizationWithCoderDevice creates a new [CNNSpatialNormalization].
-func NewCNNSpatialNormalizationWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *CNNSpatialNormalization {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNSpatialNormalization")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &CNNSpatialNormalization{inner: raw.MPSCNNSpatialNormalizationFromID(_id)}
+// Description returns the object's -description text.
+func (x *CNNSpatialNormalization) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNSpatialNormalization) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNSpatialNormalization) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNSpatialNormalization creates a new CNNSpatialNormalization.
+func NewCNNSpatialNormalization() *CNNSpatialNormalization {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNSpatialNormalization")), objc.RegisterName("new"))
+	return cNNSpatialNormalizationAdopt(_id)
 }
 
 // The “alpha” variable of the kernel function.
 //
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha sets alpha and returns the receiver so calls can be chained.
 func (x *CNNSpatialNormalization) WithAlpha(alpha float32) *CNNSpatialNormalization {
-	x.inner.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
 // The “beta” variable of the kernel function.
 //
-// WithBeta sets the beta property and returns the receiver for chaining.
+// WithBeta sets beta and returns the receiver so calls can be chained.
 func (x *CNNSpatialNormalization) WithBeta(beta float32) *CNNSpatialNormalization {
-	x.inner.SetBeta(beta)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 	return x
 }
 
 // The “delta” variable of the kernel function.
 //
-// WithDelta sets the delta property and returns the receiver for chaining.
+// WithDelta sets delta and returns the receiver so calls can be chained.
 func (x *CNNSpatialNormalization) WithDelta(delta float32) *CNNSpatialNormalization {
-	x.inner.SetDelta(delta)
-	return x
-}
-
-// The position of the destination image’s clip rectangle origin, relative to the source image.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *CNNSpatialNormalization) WithOffset(offset mpscore.MPSOffset) *CNNSpatialNormalization {
-	x.inner.MPSCNNKernel.SetOffset(offset)
-	return x
-}
-
-// An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *CNNSpatialNormalization) WithClipRect(clipRect metal.MTLRegion) *CNNSpatialNormalization {
-	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
 	return x
 }
 
 // The number of channels in the destination image to skip before writing output data.
 //
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNSpatialNormalization) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNSpatialNormalization {
-	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *CNNSpatialNormalization) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNSpatialNormalization {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+// The number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
 //
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNSpatialNormalization) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNSpatialNormalization {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset sets sourceFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *CNNSpatialNormalization) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNSpatialNormalization {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+// The maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 //
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *CNNSpatialNormalization) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNSpatialNormalization {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
-	return x
-}
-
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *CNNSpatialNormalization) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNSpatialNormalization {
-	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *CNNSpatialNormalization) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNSpatialNormalization {
-	x.inner.MPSCNNKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *CNNSpatialNormalization) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNSpatialNormalization {
-	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *CNNSpatialNormalization) WithOptions(options mpscore.MPSKernelOptions) *CNNSpatialNormalization {
-	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+// WithSourceFeatureChannelMaxCount sets sourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+func (x *CNNSpatialNormalization) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNSpatialNormalization {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *CNNSpatialNormalization) WithLabel(label string) *CNNSpatialNormalization {
-	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property   alpha @abstract   The value of alpha.  Default is 1.0. Must be non-negative.
-//
-// Alpha calls the underlying Alpha.
+// The value of alpha.  Default is 1.0. Must be non-negative.
 func (x *CNNSpatialNormalization) Alpha() float32 {
-	return x.inner.Alpha()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
+	return _r
 }
 
-// SetAlpha calls the underlying SetAlpha.
 func (x *CNNSpatialNormalization) SetAlpha(alpha float32) {
-	x.inner.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
-// @property   beta @abstract   The value of beta.  Default is 5.0
-//
-// Beta calls the underlying Beta.
+// The value of beta.  Default is 5.0
 func (x *CNNSpatialNormalization) Beta() float32 {
-	return x.inner.Beta()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("beta"))
+	return _r
 }
 
-// SetBeta calls the underlying SetBeta.
 func (x *CNNSpatialNormalization) SetBeta(beta float32) {
-	x.inner.SetBeta(beta)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
 }
 
-// @property   delta @abstract   The value of delta.  Default is 1.0
-//
-// Delta calls the underlying Delta.
+// The value of delta.  Default is 1.0
 func (x *CNNSpatialNormalization) Delta() float32 {
-	return x.inner.Delta()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
+	return _r
 }
 
-// SetDelta calls the underlying SetDelta.
 func (x *CNNSpatialNormalization) SetDelta(delta float32) {
-	x.inner.SetDelta(delta)
-}
-
-func (x *CNNSpatialNormalization) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
-	return &x.inner.MPSCNNKernel
-}
-
-func (x *CNNSpatialNormalization) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSCNNKernel.MPSKernel
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
 }
 
 // CNNSpatialNormalizationable is the interface implemented by [CNNSpatialNormalization], for mocking and DI.
 type CNNSpatialNormalizationable interface {
-	Unwrap() *raw.MPSCNNSpatialNormalization
+	obj.Object
 	WithAlpha(alpha float32) *CNNSpatialNormalization
 	WithBeta(beta float32) *CNNSpatialNormalization
 	WithDelta(delta float32) *CNNSpatialNormalization
-	WithOffset(offset mpscore.MPSOffset) *CNNSpatialNormalization
-	WithClipRect(clipRect metal.MTLRegion) *CNNSpatialNormalization
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNSpatialNormalization
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNSpatialNormalization
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNSpatialNormalization
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNSpatialNormalization
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNSpatialNormalization
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNSpatialNormalization
-	WithOptions(options mpscore.MPSKernelOptions) *CNNSpatialNormalization
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNSpatialNormalization
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNSpatialNormalization
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNSpatialNormalization
 	WithLabel(label string) *CNNSpatialNormalization
 	Alpha() float32
 	SetAlpha(alpha float32)

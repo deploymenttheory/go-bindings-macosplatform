@@ -5,108 +5,110 @@
 package speech
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A discrete part of an entire transcription, as identified by the speech recognizer.
 //
-// TranscriptionSegment wraps [raw.SFTranscriptionSegment] with a fluent Go API.
+// TranscriptionSegment is an idiomatic wrapper over the Objective-C class SFTranscriptionSegment.
 type TranscriptionSegment struct {
-	inner *raw.SFTranscriptionSegment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFTranscriptionSegment].
-func (x *TranscriptionSegment) Unwrap() *raw.SFTranscriptionSegment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TranscriptionSegment) ID() objc.ID { return x.inner.Ptr() }
-
-// TranscriptionSegmentFromID adopts an existing object pointer as a TranscriptionSegment (nil for 0).
+// TranscriptionSegmentFromID adopts an existing Objective-C object as a TranscriptionSegment
+// (nil for 0), retaining it and registering a release finalizer.
 func TranscriptionSegmentFromID(id objc.ID) *TranscriptionSegment {
 	if id == 0 {
 		return nil
 	}
-	return &TranscriptionSegment{inner: raw.SFTranscriptionSegmentFromID(id)}
+	x := &TranscriptionSegment{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTranscriptionSegment creates a new [TranscriptionSegment].
+// transcriptionSegmentAdopt wraps an Objective-C object that this code just created as a
+// TranscriptionSegment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func transcriptionSegmentAdopt(id objc.ID) *TranscriptionSegment {
+	if id == 0 {
+		return nil
+	}
+	x := &TranscriptionSegment{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TranscriptionSegment) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TranscriptionSegment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TranscriptionSegment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTranscriptionSegment creates a new TranscriptionSegment.
 func NewTranscriptionSegment() *TranscriptionSegment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFTranscriptionSegment")), objc.RegisterName("new"))
-	return &TranscriptionSegment{inner: raw.SFTranscriptionSegmentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFTranscriptionSegment")), objc.RegisterName("new"))
+	return transcriptionSegmentAdopt(_id)
 }
 
 // The string representation of the utterance in the transcription segment.
-//
-// Substring calls the underlying Substring.
 func (x *TranscriptionSegment) Substring() string {
-	_r := x.inner.Substring()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("substring"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-// The range information for the transcription segment's substring, relative to the overall transcription. Use the range information to find the position of the segment within the “SFTranscription/formattedString“ property of the “SFTranscription“ object containing this segment.
-//
-// SubstringRange calls the underlying SubstringRange.
-func (x *TranscriptionSegment) SubstringRange() foundation.NSRange {
-	return x.inner.SubstringRange()
+	return purego.GoString(_r)
 }
 
 // The start time of the segment in the processed audio stream. The “timestamp“ is the number of seconds between the beginning of the audio content and when the user spoke the word represented by the segment. For example, if the user said the word "time" one second into the transcription "What time is it", the timestamp would be equal to `1.0`.
-//
-// Timestamp calls the underlying Timestamp.
 func (x *TranscriptionSegment) Timestamp() float64 {
-	return x.inner.Timestamp()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timestamp"))
+	return _r
 }
 
 // The number of seconds it took for the user to speak the utterance represented by the segment. The “duration“ contains the number of seconds it took for the user to speak the one or more words (utterance) represented by the segment. For example, the “SFSpeechRecognizer“ sets “duration“ to `0.6` if the user took `0.6` seconds to say `“time”` in the transcription of `“What time is it?"`.
-//
-// Duration calls the underlying Duration.
 func (x *TranscriptionSegment) Duration() float64 {
-	return x.inner.Duration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+	return _r
 }
 
 // The level of confidence the speech recognizer has in its recognition of the speech transcribed for the segment. This property reflects the overall confidence in the recognition of the entire phrase. The value is `0` if there was no recognition, and it is closer to `1` when there is a high certainty that a transcription matches the user's speech exactly. For example, a confidence value of `0.94` represents a very high confidence level, and is more likely to be correct than a transcription with a confidence value of `0.72`.
-//
-// Confidence calls the underlying Confidence.
 func (x *TranscriptionSegment) Confidence() float32 {
-	return x.inner.Confidence()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("confidence"))
+	return _r
 }
 
 // An array of alternate interpretations of the utterance in the transcription segment.
 //
 // AlternativeSubstrings returns the collection as a Go slice.
 func (x *TranscriptionSegment) AlternativeSubstrings() []string {
-	arr := x.inner.AlternativeSubstrings()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternativeSubstrings"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // An analysis of the transcription segment's vocal properties.
-//
-// VoiceAnalytics calls the underlying VoiceAnalytics.
 func (x *TranscriptionSegment) VoiceAnalytics() *VoiceAnalytics {
-	_r := x.inner.VoiceAnalytics()
-	if _r == nil {
-		return nil
-	}
-	return &VoiceAnalytics{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voiceAnalytics"))
+	return VoiceAnalyticsFromID(_r)
 }
 
 // TranscriptionSegmentable is the interface implemented by [TranscriptionSegment], for mocking and DI.
 type TranscriptionSegmentable interface {
-	Unwrap() *raw.SFTranscriptionSegment
+	obj.Object
 	Substring() string
-	SubstringRange() foundation.NSRange
 	Timestamp() float64
 	Duration() float64
 	Confidence() float32

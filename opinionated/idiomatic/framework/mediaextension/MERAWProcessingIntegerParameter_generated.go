@@ -5,132 +5,134 @@
 package mediaextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// RAWProcessingIntegerParameter wraps [raw.MERAWProcessingIntegerParameter] with a fluent Go API.
+// RAWProcessingIntegerParameter is an idiomatic wrapper over the Objective-C class MERAWProcessingIntegerParameter.
 type RAWProcessingIntegerParameter struct {
-	inner *raw.MERAWProcessingIntegerParameter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MERAWProcessingIntegerParameter].
-func (x *RAWProcessingIntegerParameter) Unwrap() *raw.MERAWProcessingIntegerParameter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RAWProcessingIntegerParameter) ID() objc.ID { return x.inner.Ptr() }
-
-// RAWProcessingIntegerParameterFromID adopts an existing object pointer as a RAWProcessingIntegerParameter (nil for 0).
+// RAWProcessingIntegerParameterFromID adopts an existing Objective-C object as a RAWProcessingIntegerParameter
+// (nil for 0), retaining it and registering a release finalizer.
 func RAWProcessingIntegerParameterFromID(id objc.ID) *RAWProcessingIntegerParameter {
 	if id == 0 {
 		return nil
 	}
-	return &RAWProcessingIntegerParameter{inner: raw.MERAWProcessingIntegerParameterFromID(id)}
+	x := &RAWProcessingIntegerParameter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRAWProcessingIntegerParameter creates a new [RAWProcessingIntegerParameter].
+// rAWProcessingIntegerParameterAdopt wraps an Objective-C object that this code just created as a
+// RAWProcessingIntegerParameter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rAWProcessingIntegerParameterAdopt(id objc.ID) *RAWProcessingIntegerParameter {
+	if id == 0 {
+		return nil
+	}
+	x := &RAWProcessingIntegerParameter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RAWProcessingIntegerParameter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RAWProcessingIntegerParameter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RAWProcessingIntegerParameter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRAWProcessingIntegerParameter creates a new RAWProcessingIntegerParameter.
 func NewRAWProcessingIntegerParameter() *RAWProcessingIntegerParameter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingIntegerParameter")), objc.RegisterName("new"))
-	return &RAWProcessingIntegerParameter{inner: raw.MERAWProcessingIntegerParameterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MERAWProcessingIntegerParameter")), objc.RegisterName("new"))
+	return rAWProcessingIntegerParameterAdopt(_id)
 }
 
-// NewRAWProcessingIntegerParameterWithNameKeyDescriptionInitialValueMaximumMinimum creates a new [RAWProcessingIntegerParameter].
+// NewRAWProcessingIntegerParameterWithNameKeyDescriptionInitialValueMaximumMinimum creates a new RAWProcessingIntegerParameter.
 func NewRAWProcessingIntegerParameterWithNameKeyDescriptionInitialValueMaximumMinimum(name string, key string, description string, initialValue int, maximum int, minimum int) *RAWProcessingIntegerParameter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingIntegerParameter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:initialValue:maximum:minimum:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(key).Ptr(), foundation.NSStringStringWithUTF8String(description).Ptr(), initialValue, maximum, minimum)
-	return &RAWProcessingIntegerParameter{inner: raw.MERAWProcessingIntegerParameterFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MERAWProcessingIntegerParameter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:initialValue:maximum:minimum:"), purego.NSString(name), purego.NSString(key), purego.NSString(description), initialValue, maximum, minimum)
+	return rAWProcessingIntegerParameterAdopt(_id)
 }
 
-// NewRAWProcessingIntegerParameterWithNameKeyDescriptionInitialValueMaximumMinimumNeutralValue creates a new [RAWProcessingIntegerParameter].
+// NewRAWProcessingIntegerParameterWithNameKeyDescriptionInitialValueMaximumMinimumNeutralValue creates a new RAWProcessingIntegerParameter.
 func NewRAWProcessingIntegerParameterWithNameKeyDescriptionInitialValueMaximumMinimumNeutralValue(name string, key string, description string, initialValue int, maximum int, minimum int, neutralValue int) *RAWProcessingIntegerParameter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingIntegerParameter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:initialValue:maximum:minimum:neutralValue:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(key).Ptr(), foundation.NSStringStringWithUTF8String(description).Ptr(), initialValue, maximum, minimum, neutralValue)
-	return &RAWProcessingIntegerParameter{inner: raw.MERAWProcessingIntegerParameterFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MERAWProcessingIntegerParameter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:initialValue:maximum:minimum:neutralValue:"), purego.NSString(name), purego.NSString(key), purego.NSString(description), initialValue, maximum, minimum, neutralValue)
+	return rAWProcessingIntegerParameterAdopt(_id)
 }
 
-// NewRAWProcessingIntegerParameterWithNameKeyDescriptionInitialValueMaximumMinimumCameraValue creates a new [RAWProcessingIntegerParameter].
+// NewRAWProcessingIntegerParameterWithNameKeyDescriptionInitialValueMaximumMinimumCameraValue creates a new RAWProcessingIntegerParameter.
 func NewRAWProcessingIntegerParameterWithNameKeyDescriptionInitialValueMaximumMinimumCameraValue(name string, key string, description string, initialValue int, maximum int, minimum int, cameraValue int) *RAWProcessingIntegerParameter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingIntegerParameter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:initialValue:maximum:minimum:cameraValue:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(key).Ptr(), foundation.NSStringStringWithUTF8String(description).Ptr(), initialValue, maximum, minimum, cameraValue)
-	return &RAWProcessingIntegerParameter{inner: raw.MERAWProcessingIntegerParameterFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MERAWProcessingIntegerParameter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:initialValue:maximum:minimum:cameraValue:"), purego.NSString(name), purego.NSString(key), purego.NSString(description), initialValue, maximum, minimum, cameraValue)
+	return rAWProcessingIntegerParameterAdopt(_id)
 }
 
-// NewRAWProcessingIntegerParameterWithNameKeyDescriptionInitialValueMaximumMinimumNeutralValueCameraValue creates a new [RAWProcessingIntegerParameter].
+// NewRAWProcessingIntegerParameterWithNameKeyDescriptionInitialValueMaximumMinimumNeutralValueCameraValue creates a new RAWProcessingIntegerParameter.
 func NewRAWProcessingIntegerParameterWithNameKeyDescriptionInitialValueMaximumMinimumNeutralValueCameraValue(name string, key string, description string, initialValue int, maximum int, minimum int, neutralValue int, cameraValue int) *RAWProcessingIntegerParameter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingIntegerParameter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:initialValue:maximum:minimum:neutralValue:cameraValue:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(key).Ptr(), foundation.NSStringStringWithUTF8String(description).Ptr(), initialValue, maximum, minimum, neutralValue, cameraValue)
-	return &RAWProcessingIntegerParameter{inner: raw.MERAWProcessingIntegerParameterFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MERAWProcessingIntegerParameter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:initialValue:maximum:minimum:neutralValue:cameraValue:"), purego.NSString(name), purego.NSString(key), purego.NSString(description), initialValue, maximum, minimum, neutralValue, cameraValue)
+	return rAWProcessingIntegerParameterAdopt(_id)
 }
 
-// @property		currentValue @abstract		Get or set the current value for this parameter. @discussion		This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
+// Get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
 //
-// WithCurrentValue sets the currentValue property and returns the receiver for chaining.
+// WithCurrentValue sets currentValue and returns the receiver so calls can be chained.
 func (x *RAWProcessingIntegerParameter) WithCurrentValue(currentValue int) *RAWProcessingIntegerParameter {
-	x.inner.SetCurrentValue(currentValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
 	return x
 }
 
 // A Boolean value that indicates whether the extension enables the parameter.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *RAWProcessingIntegerParameter) WithEnabled(enabled bool) *RAWProcessingIntegerParameter {
-	x.inner.MERAWProcessingParameter.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// @property		hasNeutralValue @abstract		Return value indicates whether the MERAWProcessingIntegerParameter has an optional declared Neutral value. @discussion	If the return value is YES and outNeutralValue is not nil, the value held by outNeutralValue will be set to the neutral value. If the return value is NO and outNeutralValue is not nil, the value held by outNeutralValue will be set to 0.
-//
-// HasNeutralValue calls the underlying HasNeutralValue.
-func (x *RAWProcessingIntegerParameter) HasNeutralValue(outNeutralValue *int64) bool {
-	return x.inner.HasNeutralValue(outNeutralValue)
-}
-
-// @property		hasCameraValue @abstract		Return value indicates whether the MERAWProcessingIntegerParameter has an optional declared Camera value. If the return value is YES and outCameraValue is not nil, the value held by outCameraValue will be set to the camera value. If the return value is NO and outCameraValue is not nil, the value held by outCameraValue will be set to 0.
-//
-// HasCameraValue calls the underlying HasCameraValue.
-func (x *RAWProcessingIntegerParameter) HasCameraValue(outCameraValue *int64) bool {
-	return x.inner.HasCameraValue(outCameraValue)
-}
-
-// @property		maximumValue @abstract		The maximum value for this parameter.
-//
-// MaximumValue calls the underlying MaximumValue.
+// The maximum value for this parameter.
 func (x *RAWProcessingIntegerParameter) MaximumValue() int {
-	return x.inner.MaximumValue()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumValue"))
+	return _r
 }
 
-// @property		minimumValue @abstract		The minimum value for this parameter.
-//
-// MinimumValue calls the underlying MinimumValue.
+// The minimum value for this parameter.
 func (x *RAWProcessingIntegerParameter) MinimumValue() int {
-	return x.inner.MinimumValue()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumValue"))
+	return _r
 }
 
-// @property		currentValue @abstract		Get or set the current value for this parameter. @discussion		This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
-//
-// CurrentValue calls the underlying CurrentValue.
+// Get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
 func (x *RAWProcessingIntegerParameter) CurrentValue() int {
-	return x.inner.CurrentValue()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("currentValue"))
+	return _r
 }
 
-// SetCurrentValue calls the underlying SetCurrentValue.
 func (x *RAWProcessingIntegerParameter) SetCurrentValue(currentValue int) {
-	x.inner.SetCurrentValue(currentValue)
-}
-
-func (x *RAWProcessingIntegerParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter {
-	return &x.inner.MERAWProcessingParameter
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
 }
 
 // RAWProcessingIntegerParameterable is the interface implemented by [RAWProcessingIntegerParameter], for mocking and DI.
 type RAWProcessingIntegerParameterable interface {
-	Unwrap() *raw.MERAWProcessingIntegerParameter
+	obj.Object
 	WithCurrentValue(currentValue int) *RAWProcessingIntegerParameter
 	WithEnabled(enabled bool) *RAWProcessingIntegerParameter
-	HasNeutralValue(outNeutralValue *int64) bool
-	HasCameraValue(outCameraValue *int64) bool
 	MaximumValue() int
 	MinimumValue() int
 	CurrentValue() int

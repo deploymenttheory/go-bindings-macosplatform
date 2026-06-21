@@ -5,87 +5,88 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A configuration that customizes the behavior for a new command queue.
 //
-// CommandQueueDescriptor wraps [raw.MTLCommandQueueDescriptor] with a fluent Go API.
+// CommandQueueDescriptor is an idiomatic wrapper over the Objective-C class MTLCommandQueueDescriptor.
 type CommandQueueDescriptor struct {
-	inner *raw.MTLCommandQueueDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLCommandQueueDescriptor].
-func (x *CommandQueueDescriptor) Unwrap() *raw.MTLCommandQueueDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CommandQueueDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// CommandQueueDescriptorFromID adopts an existing object pointer as a CommandQueueDescriptor (nil for 0).
+// CommandQueueDescriptorFromID adopts an existing Objective-C object as a CommandQueueDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func CommandQueueDescriptorFromID(id objc.ID) *CommandQueueDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &CommandQueueDescriptor{inner: raw.MTLCommandQueueDescriptorFromID(id)}
+	x := &CommandQueueDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCommandQueueDescriptor creates a new [CommandQueueDescriptor].
+// commandQueueDescriptorAdopt wraps an Objective-C object that this code just created as a
+// CommandQueueDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func commandQueueDescriptorAdopt(id objc.ID) *CommandQueueDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &CommandQueueDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CommandQueueDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CommandQueueDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CommandQueueDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCommandQueueDescriptor creates a new CommandQueueDescriptor.
 func NewCommandQueueDescriptor() *CommandQueueDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLCommandQueueDescriptor")), objc.RegisterName("new"))
-	return &CommandQueueDescriptor{inner: raw.MTLCommandQueueDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLCommandQueueDescriptor")), objc.RegisterName("new"))
+	return commandQueueDescriptorAdopt(_id)
 }
 
 // An integer that sets the maximum number of uncompleted command buffers the queue can allow.
 //
-// WithMaxCommandBufferCount sets the maxCommandBufferCount property and returns the receiver for chaining.
-func (x *CommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCount uint) *CommandQueueDescriptor {
-	x.inner.SetMaxCommandBufferCount(maxCommandBufferCount)
+// WithMaxCommandBufferCount sets maxCommandBufferCount and returns the receiver so calls can be chained.
+func (x *CommandQueueDescriptor) WithMaxCommandBufferCount(maxCommandBufferCount int) *CommandQueueDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCommandBufferCount:"), maxCommandBufferCount)
 	return x
 }
 
-// The shader logging configuration that the command queue uses.
-//
-// WithLogState sets the logState property and returns the receiver for chaining.
-func (x *CommandQueueDescriptor) WithLogState(logState raw.MTLLogState) *CommandQueueDescriptor {
-	x.inner.SetLogState(logState)
-	return x
+func (x *CommandQueueDescriptor) MaxCommandBufferCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxCommandBufferCount"))
+	return _r
 }
 
-// @property maxCommandBufferCount @ Specify upper bound on uncompleted command buffers that may be enqueued on this queue
-//
-// MaxCommandBufferCount calls the underlying MaxCommandBufferCount.
-func (x *CommandQueueDescriptor) MaxCommandBufferCount() uint {
-	return x.inner.MaxCommandBufferCount()
-}
-
-// SetMaxCommandBufferCount calls the underlying SetMaxCommandBufferCount.
-func (x *CommandQueueDescriptor) SetMaxCommandBufferCount(maxCommandBufferCount uint) {
-	x.inner.SetMaxCommandBufferCount(maxCommandBufferCount)
-}
-
-// @property logState @ Specify the MTLLogState to enable shader logging
-//
-// LogState calls the underlying LogState.
-func (x *CommandQueueDescriptor) LogState() raw.MTLLogState {
-	return x.inner.LogState()
-}
-
-// SetLogState calls the underlying SetLogState.
-func (x *CommandQueueDescriptor) SetLogState(logState raw.MTLLogState) {
-	x.inner.SetLogState(logState)
+func (x *CommandQueueDescriptor) SetMaxCommandBufferCount(maxCommandBufferCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxCommandBufferCount:"), maxCommandBufferCount)
 }
 
 // CommandQueueDescriptorable is the interface implemented by [CommandQueueDescriptor], for mocking and DI.
 type CommandQueueDescriptorable interface {
-	Unwrap() *raw.MTLCommandQueueDescriptor
-	WithMaxCommandBufferCount(maxCommandBufferCount uint) *CommandQueueDescriptor
-	WithLogState(logState raw.MTLLogState) *CommandQueueDescriptor
-	MaxCommandBufferCount() uint
-	SetMaxCommandBufferCount(maxCommandBufferCount uint)
-	LogState() raw.MTLLogState
-	SetLogState(logState raw.MTLLogState)
+	obj.Object
+	WithMaxCommandBufferCount(maxCommandBufferCount int) *CommandQueueDescriptor
+	MaxCommandBufferCount() int
+	SetMaxCommandBufferCount(maxCommandBufferCount int)
 }
 
 var _ CommandQueueDescriptorable = (*CommandQueueDescriptor)(nil)

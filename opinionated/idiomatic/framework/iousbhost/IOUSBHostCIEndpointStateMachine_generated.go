@@ -5,115 +5,104 @@
 package iousbhost
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iousbhost"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// @class   IOUSBHostCIEndpointStateMachine @brief   The object representing the state of a user-mode USB host controller endpoint @details This class assists with tracking internal state transitions of a user-mode USB host controller endpoint, and parses IOUSBHostCIMessage command structures to update state and generate properly formatted command responses.  Clients should create an IOUSBHostCIEndpointStateMachine in response to an IOUSBHostCIMessageTypeEndpointCreate command, and then use the provided interfaces to identify and process commands, doorbells, and transfer structures for the endpoint.  The IOUSBHostCIEndpointStateMachine should be destroyed in response to an IOUSBHostCIMessageTypeEndpointDestroy command. Endpoint state is controlled by IOUSBHostCIMessage structures representing commands and transfer completions, and IOUSBHostCIDoorbell messages. Only an endpoint in the IOUSBHostCIEndpointStateActive state may inspect transfer structures, read or modify IO buffers, and generate transfer completions. IOUSBHostCIEndpointStateMachine does not provide any concurrency protection, the client is responsible for necessary serialization.
+// The object representing the state of a user-mode USB host controller endpoint This class assists with tracking internal state transitions of a user-mode USB host controller endpoint, and parses IOUSBHostCIMessage command structures to update state and generate properly formatted command responses.  Clients should create an IOUSBHostCIEndpointStateMachine in response to an IOUSBHostCIMessageTypeEndpointCreate command, and then use the provided interfaces to identify and process commands, doorbells, and transfer structures for the endpoint.  The IOUSBHostCIEndpointStateMachine should be destroyed in response to an IOUSBHostCIMessageTypeEndpointDestroy command. Endpoint state is controlled by IOUSBHostCIMessage structures representing commands and transfer completions, and IOUSBHostCIDoorbell messages. Only an endpoint in the IOUSBHostCIEndpointStateActive state may inspect transfer structures, read or modify IO buffers, and generate transfer completions. IOUSBHostCIEndpointStateMachine does not provide any concurrency protection, the client is responsible for necessary serialization.
 //
-// HostCIEndpointStateMachine wraps [raw.IOUSBHostCIEndpointStateMachine] with a fluent Go API.
+// HostCIEndpointStateMachine is an idiomatic wrapper over the Objective-C class IOUSBHostCIEndpointStateMachine.
 type HostCIEndpointStateMachine struct {
-	inner *raw.IOUSBHostCIEndpointStateMachine
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IOUSBHostCIEndpointStateMachine].
-func (x *HostCIEndpointStateMachine) Unwrap() *raw.IOUSBHostCIEndpointStateMachine { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HostCIEndpointStateMachine) ID() objc.ID { return x.inner.Ptr() }
-
-// HostCIEndpointStateMachineFromID adopts an existing object pointer as a HostCIEndpointStateMachine (nil for 0).
+// HostCIEndpointStateMachineFromID adopts an existing Objective-C object as a HostCIEndpointStateMachine
+// (nil for 0), retaining it and registering a release finalizer.
 func HostCIEndpointStateMachineFromID(id objc.ID) *HostCIEndpointStateMachine {
 	if id == 0 {
 		return nil
 	}
-	return &HostCIEndpointStateMachine{inner: raw.IOUSBHostCIEndpointStateMachineFromID(id)}
+	x := &HostCIEndpointStateMachine{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @brief       Initializes an IOUSBHostCIEndpointStateMachine object @discussion  The IOUSBHostCIEndpointStateMachine defaults to the IOUSBHostCIEndpointStatePaused state. @param       interface IOUSBHostControllerInterface which will be used to send command responses. @param       command IOUSBHostCIMessage with type IOUSBHostCIMessageTypeEndpointCreate @return      IOUSBHostCIEndpointStateMachine instance, to be released by the caller.
-//
-// NewHostCIEndpointStateMachineWithInterfaceCommandError creates a new [HostCIEndpointStateMachine].
-func NewHostCIEndpointStateMachineWithInterfaceCommandError(interface_ *raw.IOUSBHostControllerInterface, command *raw.IOUSBHostCIMessage) (*HostCIEndpointStateMachine, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOUSBHostCIEndpointStateMachine")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:command:error:"), interface_.Ptr(), command, unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &HostCIEndpointStateMachine{inner: raw.IOUSBHostCIEndpointStateMachineFromID(_id)}, nil
-}
-
-// @brief       Inspect an IOUSBHostCIMessage command @discussion  The IOUSBHostCIMessage command is inspected to determine if it is handled by this state machine and is appropriate for the current state. @param       command IOUSBHostCIMessage command structure received from the kernel driver. @return      BOOL YES if the command is targeting this endpoint, and can be handled in the current state BOOL NO if the command does not target this endpoint, or cannot be handled in the current state
-//
-// InspectCommandError calls the underlying InspectCommandError.
-func (x *HostCIEndpointStateMachine) InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error) {
-	return x.inner.InspectCommandError(command)
-}
-
-// @brief       Advance the state machine and respond to an IOUSBHostCIMessage command @discussion  If the command passes inspectCommand and the client indicates the command was processed successfully, endpointState is updated and a properly formatted command response message is sent to the kernel driver.  If the client indicates the command was not processed successfully, endpointState is not updated but a properly formatted command response message is sent to the kernel driver. @param       command IOUSBHostCIMessage command structure received from the kernel driver. @param       status IOUSBHostCIMessageStatus reported by the user-mode USB host controller implementation for the command response. @return      BOOL YES if the command response was sent to the kernel driver BOOL NO if the command response was not sent to the kernel driver
-//
-// RespondToCommandStatusError calls the underlying RespondToCommandStatusError.
-func (x *HostCIEndpointStateMachine) RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus) (bool, error) {
-	return x.inner.RespondToCommandStatusError(command, raw.IOUSBHostCIMessageStatus(status))
-}
-
-// @brief       Advance the state machine and process an IOUSBHostCIDoorbell message @discussion  The IOUSBHostCIDoorbell is inspected to determine if it is handled by this state machine and is appropriate for the current state.  If successful, the client should check for an IOUSBHostCIEndpointStateActive endpointState and a currentTransferMessage with IOUSBHostCIMessageControlValid set to determine if more IOUSBHostCIMessages should be processed. @param       doorbell IOUSBHostCIDoorbell message received from the kernel driver. @return      BOOL YES if the doorbell is targeting this endpoint and can be handled in the current state. BOOL NO is the doorbell does not target this endpoint or cannot be handled in the current state.
-//
-// ProcessDoorbellError calls the underlying ProcessDoorbellError.
-func (x *HostCIEndpointStateMachine) ProcessDoorbellError(doorbell uint32) (bool, error) {
-	return x.inner.ProcessDoorbellError(doorbell)
-}
-
-// @brief       Send an IOUSBHostCIMessage representing a transfer completion to the kernel, and advance the state machine @discussion  When a client has processed an IOUSBHostCIMessage representing a transfer, the result is reported to the kernel by another IOUSBHostCIMessage.  If successful, this object will use controllerInterface's enqueueInterrupt interface to send a properly formatted IOUSBHostCIMessage to the kernel with IOUSBHostCITransferCompletionMessageData1TransferStructure populated with currentTransferMessage's virtual address, and endpointState and currentTransferMessage are updated.  After a successful call, the client should check for an IOUSBHostCIEndpointStateActive endpointState and a currentTransferMessage with IOUSBHostCIMessageControlValid set to determine if more IOUSBHostCIMessages should be processed. @param       message pointer to the IOUSBHostCIMessage which generated this tranafer completion message.  This must match currentTransferMessage to be successful. @param       status IOUSBHostCIMessageStatus @param       transferLength The number of bytes transferred for the specified transfer structure.
-//
-// EnqueueTransferCompletionForMessageStatusTransferLengthError calls the underlying EnqueueTransferCompletionForMessageStatusTransferLengthError.
-func (x *HostCIEndpointStateMachine) EnqueueTransferCompletionForMessageStatusTransferLengthError(message *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus, transferLength uint) (bool, error) {
-	return x.inner.EnqueueTransferCompletionForMessageStatusTransferLengthError(message, raw.IOUSBHostCIMessageStatus(status), transferLength)
-}
-
-// EndpointState calls the underlying EndpointState.
-func (x *HostCIEndpointStateMachine) EndpointState() IOUSBHostCIEndpointState {
-	return IOUSBHostCIEndpointState(x.inner.EndpointState())
-}
-
-// DeviceAddress calls the underlying DeviceAddress.
-func (x *HostCIEndpointStateMachine) DeviceAddress() uint {
-	return x.inner.DeviceAddress()
-}
-
-// EndpointAddress calls the underlying EndpointAddress.
-func (x *HostCIEndpointStateMachine) EndpointAddress() uint {
-	return x.inner.EndpointAddress()
-}
-
-// CurrentTransferMessage calls the underlying CurrentTransferMessage.
-func (x *HostCIEndpointStateMachine) CurrentTransferMessage() *raw.IOUSBHostCIMessage {
-	return x.inner.CurrentTransferMessage()
-}
-
-// ControllerInterface calls the underlying ControllerInterface.
-func (x *HostCIEndpointStateMachine) ControllerInterface() *HostControllerInterface {
-	_r := x.inner.ControllerInterface()
-	if _r == nil {
+// hostCIEndpointStateMachineAdopt wraps an Objective-C object that this code just created as a
+// HostCIEndpointStateMachine (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hostCIEndpointStateMachineAdopt(id objc.ID) *HostCIEndpointStateMachine {
+	if id == 0 {
 		return nil
 	}
-	return &HostControllerInterface{inner: _r}
+	x := &HostCIEndpointStateMachine{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HostCIEndpointStateMachine) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HostCIEndpointStateMachine) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HostCIEndpointStateMachine) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHostCIEndpointStateMachine creates a new HostCIEndpointStateMachine.
+func NewHostCIEndpointStateMachine() *HostCIEndpointStateMachine {
+	_id := objc.Send[objc.ID](objc.ID(_class("IOUSBHostCIEndpointStateMachine")), objc.RegisterName("new"))
+	return hostCIEndpointStateMachineAdopt(_id)
+}
+
+// Advance the state machine and process an IOUSBHostCIDoorbell message The IOUSBHostCIDoorbell is inspected to determine if it is handled by this state machine and is appropriate for the current state.  If successful, the client should check for an IOUSBHostCIEndpointStateActive endpointState and a currentTransferMessage with IOUSBHostCIMessageControlValid set to determine if more IOUSBHostCIMessages should be processed.
+func (x *HostCIEndpointStateMachine) ProcessDoorbell(doorbell uint32) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("processDoorbell:error:"), doorbell, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+func (x *HostCIEndpointStateMachine) EndpointState() HostCIEndpointState {
+	_r := objc.Send[HostCIEndpointState](objref.IDOf(x), objc.RegisterName("endpointState"))
+	return _r
+}
+
+func (x *HostCIEndpointStateMachine) DeviceAddress() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("deviceAddress"))
+	return _r
+}
+
+func (x *HostCIEndpointStateMachine) EndpointAddress() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("endpointAddress"))
+	return _r
+}
+
+func (x *HostCIEndpointStateMachine) ControllerInterface() *HostControllerInterface {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controllerInterface"))
+	return HostControllerInterfaceFromID(_r)
 }
 
 // HostCIEndpointStateMachineable is the interface implemented by [HostCIEndpointStateMachine], for mocking and DI.
 type HostCIEndpointStateMachineable interface {
-	Unwrap() *raw.IOUSBHostCIEndpointStateMachine
-	InspectCommandError(command *raw.IOUSBHostCIMessage) (bool, error)
-	RespondToCommandStatusError(command *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus) (bool, error)
-	ProcessDoorbellError(doorbell uint32) (bool, error)
-	EnqueueTransferCompletionForMessageStatusTransferLengthError(message *raw.IOUSBHostCIMessage, status IOUSBHostCIMessageStatus, transferLength uint) (bool, error)
-	EndpointState() IOUSBHostCIEndpointState
-	DeviceAddress() uint
-	EndpointAddress() uint
-	CurrentTransferMessage() *raw.IOUSBHostCIMessage
+	obj.Object
+	ProcessDoorbell(doorbell uint32) error
+	EndpointState() HostCIEndpointState
+	DeviceAddress() int
+	EndpointAddress() int
 	ControllerInterface() *HostControllerInterface
 }
 

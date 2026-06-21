@@ -5,72 +5,87 @@
 package localauthentication
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DomainState wraps [raw.LADomainState] with a fluent Go API.
+// DomainState is an idiomatic wrapper over the Objective-C class LADomainState.
 type DomainState struct {
-	inner *raw.LADomainState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.LADomainState].
-func (x *DomainState) Unwrap() *raw.LADomainState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DomainState) ID() objc.ID { return x.inner.Ptr() }
-
-// DomainStateFromID adopts an existing object pointer as a DomainState (nil for 0).
+// DomainStateFromID adopts an existing Objective-C object as a DomainState
+// (nil for 0), retaining it and registering a release finalizer.
 func DomainStateFromID(id objc.ID) *DomainState {
 	if id == 0 {
 		return nil
 	}
-	return &DomainState{inner: raw.LADomainStateFromID(id)}
+	x := &DomainState{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDomainState creates a new [DomainState].
+// domainStateAdopt wraps an Objective-C object that this code just created as a
+// DomainState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func domainStateAdopt(id objc.ID) *DomainState {
+	if id == 0 {
+		return nil
+	}
+	x := &DomainState{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DomainState) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DomainState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DomainState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDomainState creates a new DomainState.
 func NewDomainState() *DomainState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LADomainState")), objc.RegisterName("new"))
-	return &DomainState{inner: raw.LADomainStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("LADomainState")), objc.RegisterName("new"))
+	return domainStateAdopt(_id)
 }
 
 // Contains biometric domain state.
-//
-// Biometry calls the underlying Biometry.
 func (x *DomainState) Biometry() *DomainStateBiometry {
-	_r := x.inner.Biometry()
-	if _r == nil {
-		return nil
-	}
-	return &DomainStateBiometry{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biometry"))
+	return DomainStateBiometryFromID(_r)
 }
 
 // Contains companion domain state.
-//
-// Companion calls the underlying Companion.
 func (x *DomainState) Companion() *DomainStateCompanion {
-	_r := x.inner.Companion()
-	if _r == nil {
-		return nil
-	}
-	return &DomainStateCompanion{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("companion"))
+	return DomainStateCompanionFromID(_r)
 }
 
-// Contains combined state hash data for biometry and companion state hashes. @warning Please note that the value returned by this property can change exceptionally between major OS versions even if the list of paired companions has not changed.
-//
-// StateHash calls the underlying StateHash.
-func (x *DomainState) StateHash() *foundation.NSData {
-	return x.inner.StateHash()
+// Contains combined state hash data for biometry and companion state hashes.
+func (x *DomainState) StateHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateHash"))
+	return obj.Wrap(_r)
 }
 
 // DomainStateable is the interface implemented by [DomainState], for mocking and DI.
 type DomainStateable interface {
-	Unwrap() *raw.LADomainState
+	obj.Object
 	Biometry() *DomainStateBiometry
 	Companion() *DomainStateCompanion
-	StateHash() *foundation.NSData
+	StateHash() obj.Object
 }
 
 var _ DomainStateable = (*DomainState)(nil)

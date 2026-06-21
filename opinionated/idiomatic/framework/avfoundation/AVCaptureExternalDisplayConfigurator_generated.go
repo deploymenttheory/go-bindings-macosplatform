@@ -5,89 +5,103 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A configurator class allowing you to configure properties of an external display to match the camera’s active video format.
 //
-// CaptureExternalDisplayConfigurator wraps [raw.AVCaptureExternalDisplayConfigurator] with a fluent Go API.
+// CaptureExternalDisplayConfigurator is an idiomatic wrapper over the Objective-C class AVCaptureExternalDisplayConfigurator.
 type CaptureExternalDisplayConfigurator struct {
-	inner *raw.AVCaptureExternalDisplayConfigurator
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureExternalDisplayConfigurator].
-func (x *CaptureExternalDisplayConfigurator) Unwrap() *raw.AVCaptureExternalDisplayConfigurator {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureExternalDisplayConfigurator) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureExternalDisplayConfiguratorFromID adopts an existing object pointer as a CaptureExternalDisplayConfigurator (nil for 0).
+// CaptureExternalDisplayConfiguratorFromID adopts an existing Objective-C object as a CaptureExternalDisplayConfigurator
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureExternalDisplayConfiguratorFromID(id objc.ID) *CaptureExternalDisplayConfigurator {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureExternalDisplayConfigurator{inner: raw.AVCaptureExternalDisplayConfiguratorFromID(id)}
+	x := &CaptureExternalDisplayConfigurator{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// captureExternalDisplayConfiguratorAdopt wraps an Objective-C object that this code just created as a
+// CaptureExternalDisplayConfigurator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureExternalDisplayConfiguratorAdopt(id objc.ID) *CaptureExternalDisplayConfigurator {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureExternalDisplayConfigurator{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptureExternalDisplayConfigurator) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureExternalDisplayConfigurator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureExternalDisplayConfigurator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // An external display configurator instance that attempts to synchronize the preview layer configuration with the device capture configuration.
 //
-// NewCaptureExternalDisplayConfiguratorWithDevicePreviewLayerConfiguration creates a new [CaptureExternalDisplayConfigurator].
-func NewCaptureExternalDisplayConfiguratorWithDevicePreviewLayerConfiguration(device *raw.AVCaptureDevice, previewLayer *quartzcore.CALayer, configuration *raw.AVCaptureExternalDisplayConfiguration) *CaptureExternalDisplayConfigurator {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureExternalDisplayConfigurator")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:previewLayer:configuration:"), device.Ptr(), previewLayer.Ptr(), configuration.Ptr())
-	return &CaptureExternalDisplayConfigurator{inner: raw.AVCaptureExternalDisplayConfiguratorFromID(_id)}
+// NewCaptureExternalDisplayConfiguratorWithDevicePreviewLayerConfiguration creates a new CaptureExternalDisplayConfigurator.
+func NewCaptureExternalDisplayConfiguratorWithDevicePreviewLayerConfiguration(device *CaptureDevice, previewLayer obj.Object, configuration *CaptureExternalDisplayConfiguration) *CaptureExternalDisplayConfigurator {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptureExternalDisplayConfigurator")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:previewLayer:configuration:"), objref.IDOf(device), objref.IDOf(previewLayer), objref.IDOf(configuration))
+	return captureExternalDisplayConfiguratorAdopt(_id)
 }
 
 // Forces the external display configurator to asynchronously stop configuring the external display.
-//
-// Stop calls the underlying Stop.
 func (x *CaptureExternalDisplayConfigurator) Stop() {
-	x.inner.Stop()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
 // The device for which the coordinator configures the preview layer. The value of this property is the “AVCaptureDevice“ instance you provided when instantiating the configurator. “AVCaptureExternalDisplayConfigurator“ holds a weak reference to the device. If the device is released, this property returns `nil`.
-//
-// Device calls the underlying Device.
 func (x *CaptureExternalDisplayConfigurator) Device() *CaptureDevice {
-	_r := x.inner.Device()
-	if _r == nil {
-		return nil
-	}
-	return &CaptureDevice{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+	return CaptureDeviceFromID(_r)
 }
 
 // The layer for which the configurator adjusts display properties to match the device's state. The value of this property is the “CALayer“ instance that you provided when instantiating the configurator. You may specify either an “AVCaptureVideoPreviewLayer“ or another “CALayer“ instance that displays a camera's video preview. “AVCaptureExternalDisplayConfigurator“holds a weak reference to the layer. If the layer is released, this property returns `nil`.
-//
-// PreviewLayer calls the underlying PreviewLayer.
-func (x *CaptureExternalDisplayConfigurator) PreviewLayer() *quartzcore.CALayer {
-	return x.inner.PreviewLayer()
+func (x *CaptureExternalDisplayConfigurator) PreviewLayer() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previewLayer"))
+	return obj.Wrap(_r)
 }
 
 // This property tells you whether the configurator is actively configuring the external display. When this property returns `true`, the external display is successfully configured to match the device. If it returns`false`, the configurator is not making any configuration changes to the external display. If another “AVCaptureExternalDisplayConfigurator“ instance takes over the configuration of the external display, this property returns `false`.
-//
-// IsActive calls the underlying IsActive.
 func (x *CaptureExternalDisplayConfigurator) IsActive() bool {
-	return x.inner.IsActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+	return _r
 }
 
 // The currently configured frame rate on the external display that's displaying the preview layer. Observe this property to determine if the configured frame rate matches the max frame rate (“AVCaptureDevice/activeVideoMinFrameDuration“) of the device. When the “active“ property becomes `false`, this property changes to 0.
-//
-// ActiveExternalDisplayFrameRate calls the underlying ActiveExternalDisplayFrameRate.
 func (x *CaptureExternalDisplayConfigurator) ActiveExternalDisplayFrameRate() float64 {
-	return x.inner.ActiveExternalDisplayFrameRate()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("activeExternalDisplayFrameRate"))
+	return _r
 }
 
 // CaptureExternalDisplayConfiguratorable is the interface implemented by [CaptureExternalDisplayConfigurator], for mocking and DI.
 type CaptureExternalDisplayConfiguratorable interface {
-	Unwrap() *raw.AVCaptureExternalDisplayConfigurator
+	obj.Object
 	Stop()
 	Device() *CaptureDevice
-	PreviewLayer() *quartzcore.CALayer
+	PreviewLayer() obj.Object
 	IsActive() bool
 	ActiveExternalDisplayFrameRate() float64
 }

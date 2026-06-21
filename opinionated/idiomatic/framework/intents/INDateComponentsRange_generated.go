@@ -5,90 +5,114 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A span of time.
 //
-// DateComponentsRange wraps [raw.INDateComponentsRange] with a fluent Go API.
+// DateComponentsRange is an idiomatic wrapper over the Objective-C class INDateComponentsRange.
 type DateComponentsRange struct {
-	inner *raw.INDateComponentsRange
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INDateComponentsRange].
-func (x *DateComponentsRange) Unwrap() *raw.INDateComponentsRange { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DateComponentsRange) ID() objc.ID { return x.inner.Ptr() }
-
-// DateComponentsRangeFromID adopts an existing object pointer as a DateComponentsRange (nil for 0).
+// DateComponentsRangeFromID adopts an existing Objective-C object as a DateComponentsRange
+// (nil for 0), retaining it and registering a release finalizer.
 func DateComponentsRangeFromID(id objc.ID) *DateComponentsRange {
 	if id == 0 {
 		return nil
 	}
-	return &DateComponentsRange{inner: raw.INDateComponentsRangeFromID(id)}
+	x := &DateComponentsRange{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// dateComponentsRangeAdopt wraps an Objective-C object that this code just created as a
+// DateComponentsRange (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dateComponentsRangeAdopt(id objc.ID) *DateComponentsRange {
+	if id == 0 {
+		return nil
+	}
+	x := &DateComponentsRange{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DateComponentsRange) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DateComponentsRange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DateComponentsRange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes the object using the specified start and end dates.
 //
-// NewDateComponentsRangeWithStartDateComponentsEndDateComponents creates a new [DateComponentsRange].
-func NewDateComponentsRangeWithStartDateComponentsEndDateComponents(startDateComponents *foundation.NSDateComponents, endDateComponents *foundation.NSDateComponents) *DateComponentsRange {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INDateComponentsRange")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartDateComponents:endDateComponents:"), startDateComponents.Ptr(), endDateComponents.Ptr())
-	return &DateComponentsRange{inner: raw.INDateComponentsRangeFromID(_id)}
+// NewDateComponentsRangeWithStartDateComponentsEndDateComponents creates a new DateComponentsRange.
+func NewDateComponentsRangeWithStartDateComponentsEndDateComponents(startDateComponents obj.Object, endDateComponents obj.Object) *DateComponentsRange {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INDateComponentsRange")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartDateComponents:endDateComponents:"), objref.IDOf(startDateComponents), objref.IDOf(endDateComponents))
+	return dateComponentsRangeAdopt(_id)
 }
 
 // Initializes the date range to a repeating time period.
 //
-// NewDateComponentsRangeWithStartDateComponentsEndDateComponentsRecurrenceRule creates a new [DateComponentsRange].
-func NewDateComponentsRangeWithStartDateComponentsEndDateComponentsRecurrenceRule(startDateComponents *foundation.NSDateComponents, endDateComponents *foundation.NSDateComponents, recurrenceRule objc.ID) *DateComponentsRange {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INDateComponentsRange")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartDateComponents:endDateComponents:recurrenceRule:"), startDateComponents.Ptr(), endDateComponents.Ptr(), recurrenceRule)
-	return &DateComponentsRange{inner: raw.INDateComponentsRangeFromID(_id)}
+// NewDateComponentsRangeWithStartDateComponentsEndDateComponentsRecurrenceRule creates a new DateComponentsRange.
+func NewDateComponentsRangeWithStartDateComponentsEndDateComponentsRecurrenceRule(startDateComponents obj.Object, endDateComponents obj.Object, recurrenceRule obj.Object) *DateComponentsRange {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INDateComponentsRange")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStartDateComponents:endDateComponents:recurrenceRule:"), objref.IDOf(startDateComponents), objref.IDOf(endDateComponents), objref.IDOf(recurrenceRule))
+	return dateComponentsRangeAdopt(_id)
 }
 
 // Initializes the date range using the specified recurrence rule.
 //
-// NewDateComponentsRangeWithEKRecurrenceRule creates a new [DateComponentsRange].
-func NewDateComponentsRangeWithEKRecurrenceRule(recurrenceRule *eventkit.EKRecurrenceRule) *DateComponentsRange {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INDateComponentsRange")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEKRecurrenceRule:"), recurrenceRule.Ptr())
-	return &DateComponentsRange{inner: raw.INDateComponentsRangeFromID(_id)}
+// NewDateComponentsRangeWithEKRecurrenceRule creates a new DateComponentsRange.
+func NewDateComponentsRangeWithEKRecurrenceRule(recurrenceRule obj.Object) *DateComponentsRange {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INDateComponentsRange")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEKRecurrenceRule:"), objref.IDOf(recurrenceRule))
+	return dateComponentsRangeAdopt(_id)
 }
 
 // Returns an Event Kit recurrence rule that matches the available information.
-//
-// EKRecurrenceRule calls the underlying EKRecurrenceRule.
-func (x *DateComponentsRange) EKRecurrenceRule() *eventkit.EKRecurrenceRule {
-	return x.inner.EKRecurrenceRule()
+func (x *DateComponentsRange) EKRecurrenceRule() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("EKRecurrenceRule"))
+	return obj.Wrap(_r)
 }
 
-// StartDateComponents calls the underlying StartDateComponents.
-func (x *DateComponentsRange) StartDateComponents() *foundation.NSDateComponents {
-	return x.inner.StartDateComponents()
+func (x *DateComponentsRange) StartDateComponents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDateComponents"))
+	return obj.Wrap(_r)
 }
 
-// EndDateComponents calls the underlying EndDateComponents.
-func (x *DateComponentsRange) EndDateComponents() *foundation.NSDateComponents {
-	return x.inner.EndDateComponents()
+func (x *DateComponentsRange) EndDateComponents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDateComponents"))
+	return obj.Wrap(_r)
 }
 
-// RecurrenceRule calls the underlying RecurrenceRule.
-func (x *DateComponentsRange) RecurrenceRule() objc.ID {
-	return x.inner.RecurrenceRule()
+func (x *DateComponentsRange) RecurrenceRule() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recurrenceRule"))
+	return obj.Wrap(_r)
 }
 
 // DateComponentsRangeable is the interface implemented by [DateComponentsRange], for mocking and DI.
 type DateComponentsRangeable interface {
-	Unwrap() *raw.INDateComponentsRange
-	EKRecurrenceRule() *eventkit.EKRecurrenceRule
-	StartDateComponents() *foundation.NSDateComponents
-	EndDateComponents() *foundation.NSDateComponents
-	RecurrenceRule() objc.ID
+	obj.Object
+	EKRecurrenceRule() obj.Object
+	StartDateComponents() obj.Object
+	EndDateComponents() obj.Object
+	RecurrenceRule() obj.Object
 }
 
 var _ DateComponentsRangeable = (*DateComponentsRange)(nil)

@@ -5,270 +5,155 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description of how a submesh’s index buffer data is arranged and how that arrangement should be used to produce the submesh’s intended 3D shape.
 //
-// SubmeshTopology wraps [raw.MDLSubmeshTopology] with a fluent Go API.
+// SubmeshTopology is an idiomatic wrapper over the Objective-C class MDLSubmeshTopology.
 type SubmeshTopology struct {
-	inner *raw.MDLSubmeshTopology
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLSubmeshTopology].
-func (x *SubmeshTopology) Unwrap() *raw.MDLSubmeshTopology { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SubmeshTopology) ID() objc.ID { return x.inner.Ptr() }
-
-// SubmeshTopologyFromID adopts an existing object pointer as a SubmeshTopology (nil for 0).
+// SubmeshTopologyFromID adopts an existing Objective-C object as a SubmeshTopology
+// (nil for 0), retaining it and registering a release finalizer.
 func SubmeshTopologyFromID(id objc.ID) *SubmeshTopology {
 	if id == 0 {
 		return nil
 	}
-	return &SubmeshTopology{inner: raw.MDLSubmeshTopologyFromID(id)}
-}
-
-// @method initWithSubmesh: @abstract create a topology object corresponding to the topology in the submesh
-//
-// NewSubmeshTopologyWithSubmesh creates a new [SubmeshTopology].
-func NewSubmeshTopologyWithSubmesh(submesh *raw.MDLSubmesh) *SubmeshTopology {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLSubmeshTopology")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubmesh:"), submesh.Ptr())
-	return &SubmeshTopology{inner: raw.MDLSubmeshTopologyFromID(_id)}
-}
-
-// A buffer identifying the faces in the submesh and the number of vertices in each.
-//
-// WithFaceTopology sets the faceTopology property and returns the receiver for chaining.
-func (x *SubmeshTopology) WithFaceTopology(faceTopology raw.MDLMeshBuffer) *SubmeshTopology {
-	x.inner.SetFaceTopology(faceTopology)
+	x := &SubmeshTopology{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// submeshTopologyAdopt wraps an Objective-C object that this code just created as a
+// SubmeshTopology (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func submeshTopologyAdopt(id objc.ID) *SubmeshTopology {
+	if id == 0 {
+		return nil
+	}
+	x := &SubmeshTopology{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SubmeshTopology) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SubmeshTopology) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SubmeshTopology) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// create a topology object corresponding to the topology in the submesh
+//
+// NewSubmeshTopologyWithSubmesh creates a new SubmeshTopology.
+func NewSubmeshTopologyWithSubmesh(submesh *Submesh) *SubmeshTopology {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLSubmeshTopology")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubmesh:"), objref.IDOf(submesh))
+	return submeshTopologyAdopt(_id)
 }
 
 // The number of faces in the submesh’s face topology buffer.
 //
-// WithFaceCount sets the faceCount property and returns the receiver for chaining.
-func (x *SubmeshTopology) WithFaceCount(faceCount uint) *SubmeshTopology {
-	x.inner.SetFaceCount(faceCount)
-	return x
-}
-
-// A buffer containing vertex indices to be treated as creases during surface subdivision.
-//
-// WithVertexCreaseIndices sets the vertexCreaseIndices property and returns the receiver for chaining.
-func (x *SubmeshTopology) WithVertexCreaseIndices(vertexCreaseIndices raw.MDLMeshBuffer) *SubmeshTopology {
-	x.inner.SetVertexCreaseIndices(vertexCreaseIndices)
-	return x
-}
-
-// A buffer containing sharpness values to be applied to points during surface subdivision.
-//
-// WithVertexCreases sets the vertexCreases property and returns the receiver for chaining.
-func (x *SubmeshTopology) WithVertexCreases(vertexCreases raw.MDLMeshBuffer) *SubmeshTopology {
-	x.inner.SetVertexCreases(vertexCreases)
+// WithFaceCount sets faceCount and returns the receiver so calls can be chained.
+func (x *SubmeshTopology) WithFaceCount(faceCount int) *SubmeshTopology {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFaceCount:"), faceCount)
 	return x
 }
 
 // The number of entries in the vertex creases buffers.
 //
-// WithVertexCreaseCount sets the vertexCreaseCount property and returns the receiver for chaining.
-func (x *SubmeshTopology) WithVertexCreaseCount(vertexCreaseCount uint) *SubmeshTopology {
-	x.inner.SetVertexCreaseCount(vertexCreaseCount)
-	return x
-}
-
-// A buffer containing vertex indices that describe edges to be treated as creases during surface subdivision.
-//
-// WithEdgeCreaseIndices sets the edgeCreaseIndices property and returns the receiver for chaining.
-func (x *SubmeshTopology) WithEdgeCreaseIndices(edgeCreaseIndices raw.MDLMeshBuffer) *SubmeshTopology {
-	x.inner.SetEdgeCreaseIndices(edgeCreaseIndices)
-	return x
-}
-
-// A buffer containing sharpness values to be applied to edges during surface subdivision.
-//
-// WithEdgeCreases sets the edgeCreases property and returns the receiver for chaining.
-func (x *SubmeshTopology) WithEdgeCreases(edgeCreases raw.MDLMeshBuffer) *SubmeshTopology {
-	x.inner.SetEdgeCreases(edgeCreases)
+// WithVertexCreaseCount sets vertexCreaseCount and returns the receiver so calls can be chained.
+func (x *SubmeshTopology) WithVertexCreaseCount(vertexCreaseCount int) *SubmeshTopology {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexCreaseCount:"), vertexCreaseCount)
 	return x
 }
 
 // The number of entries in the edge creases buffers.
 //
-// WithEdgeCreaseCount sets the edgeCreaseCount property and returns the receiver for chaining.
-func (x *SubmeshTopology) WithEdgeCreaseCount(edgeCreaseCount uint) *SubmeshTopology {
-	x.inner.SetEdgeCreaseCount(edgeCreaseCount)
-	return x
-}
-
-// An index buffer identifying faces to be treated as holes in the mesh during surface subdivision.
-//
-// WithHoles sets the holes property and returns the receiver for chaining.
-func (x *SubmeshTopology) WithHoles(holes raw.MDLMeshBuffer) *SubmeshTopology {
-	x.inner.SetHoles(holes)
+// WithEdgeCreaseCount sets edgeCreaseCount and returns the receiver so calls can be chained.
+func (x *SubmeshTopology) WithEdgeCreaseCount(edgeCreaseCount int) *SubmeshTopology {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreaseCount:"), edgeCreaseCount)
 	return x
 }
 
 // The number of entries in the holes buffer.
 //
-// WithHoleCount sets the holeCount property and returns the receiver for chaining.
-func (x *SubmeshTopology) WithHoleCount(holeCount uint) *SubmeshTopology {
-	x.inner.SetHoleCount(holeCount)
+// WithHoleCount sets holeCount and returns the receiver so calls can be chained.
+func (x *SubmeshTopology) WithHoleCount(holeCount int) *SubmeshTopology {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoleCount:"), holeCount)
 	return x
 }
 
-// @property faceTopologyBuffer @abstract A buffer of 8 bit unsigned integer values, where each entry corresponds to the number of vertices making up a face. @discussion A submesh containing two triangles, a four sided polygon, and a line, would contain the data 3 3 4 2. If geometryType is of a fixed type, such as triangles, the buffer is optional, and will be created on demand if read. Indices to the vertex buffer will be stored in the index buffer correspondingly. In the example above, the indices would be stored in order, three indices for the first triangle, followed by three for the second, followed by four for the polygon, and finally two indices for the line.
-//
-// FaceTopology calls the underlying FaceTopology.
-func (x *SubmeshTopology) FaceTopology() raw.MDLMeshBuffer {
-	return x.inner.FaceTopology()
+// The number of faces encoded in faceTopologyBuffer
+func (x *SubmeshTopology) FaceCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("faceCount"))
+	return _r
 }
 
-// SetFaceTopology calls the underlying SetFaceTopology.
-func (x *SubmeshTopology) SetFaceTopology(faceTopology raw.MDLMeshBuffer) {
-	x.inner.SetFaceTopology(faceTopology)
+func (x *SubmeshTopology) SetFaceCount(faceCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFaceCount:"), faceCount)
 }
 
-// @property faceCount @abstract The number of faces encoded in faceTopologyBuffer
-//
-// FaceCount calls the underlying FaceCount.
-func (x *SubmeshTopology) FaceCount() uint {
-	return x.inner.FaceCount()
+// The number of vertex creases encoded in vertexCreases
+func (x *SubmeshTopology) VertexCreaseCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexCreaseCount"))
+	return _r
 }
 
-// SetFaceCount calls the underlying SetFaceCount.
-func (x *SubmeshTopology) SetFaceCount(faceCount uint) {
-	x.inner.SetFaceCount(faceCount)
+func (x *SubmeshTopology) SetVertexCreaseCount(vertexCreaseCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexCreaseCount:"), vertexCreaseCount)
 }
 
-// A crease value at a vertex to be applied during subdivision. Vertex creases A zero value is smooth, a one value is peaked. It is intended to be used with an index buffer, where the index buffer entries are vertex indices. The corresponding values in the corner sharpness attribute indicate the corner sharpness of those vertices. The index buffer is sparse. If a mesh has three sharp vertices, then the index buffer will have three entries. Since the number of entries in this vertex buffer is likely to be different than the number of entries in any other vertex buffer, it shouldn't be interleaved with other data.
-//
-// VertexCreaseIndices calls the underlying VertexCreaseIndices.
-func (x *SubmeshTopology) VertexCreaseIndices() raw.MDLMeshBuffer {
-	return x.inner.VertexCreaseIndices()
+// The number of edge creases encoded in edgeCreases
+func (x *SubmeshTopology) EdgeCreaseCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("edgeCreaseCount"))
+	return _r
 }
 
-// SetVertexCreaseIndices calls the underlying SetVertexCreaseIndices.
-func (x *SubmeshTopology) SetVertexCreaseIndices(vertexCreaseIndices raw.MDLMeshBuffer) {
-	x.inner.SetVertexCreaseIndices(vertexCreaseIndices)
+func (x *SubmeshTopology) SetEdgeCreaseCount(edgeCreaseCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreaseCount:"), edgeCreaseCount)
 }
 
-// VertexCreases calls the underlying VertexCreases.
-func (x *SubmeshTopology) VertexCreases() raw.MDLMeshBuffer {
-	return x.inner.VertexCreases()
+// The number of holes encoded in holes
+func (x *SubmeshTopology) HoleCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("holeCount"))
+	return _r
 }
 
-// SetVertexCreases calls the underlying SetVertexCreases.
-func (x *SubmeshTopology) SetVertexCreases(vertexCreases raw.MDLMeshBuffer) {
-	x.inner.SetVertexCreases(vertexCreases)
-}
-
-// @property vertexCreaseCount @abstract The number of vertex creases encoded in vertexCreases
-//
-// VertexCreaseCount calls the underlying VertexCreaseCount.
-func (x *SubmeshTopology) VertexCreaseCount() uint {
-	return x.inner.VertexCreaseCount()
-}
-
-// SetVertexCreaseCount calls the underlying SetVertexCreaseCount.
-func (x *SubmeshTopology) SetVertexCreaseCount(vertexCreaseCount uint) {
-	x.inner.SetVertexCreaseCount(vertexCreaseCount)
-}
-
-// A crease value at an edge to be applied during subdivision. Edge creases A zero value is smooth, a one value is peaked. It is intended to be used with an index buffer, where the index buffer entries are edge index pairs. Accordingly, there will be two index entries for each edge sharpness entry, and the sharpness entry corresponds to the edge itself. The corresponding values in the edge sharpness attribute indicate the edge sharpness of those edges.  The index buffer is sparse. If a mesh has three sharp edges, then the index buffer will have six entries. Since the number of entries in this vertex buffer is likely to be different than the number of entries in any other vertex buffer, it shouldn't be interleaved with other data.
-//
-// EdgeCreaseIndices calls the underlying EdgeCreaseIndices.
-func (x *SubmeshTopology) EdgeCreaseIndices() raw.MDLMeshBuffer {
-	return x.inner.EdgeCreaseIndices()
-}
-
-// SetEdgeCreaseIndices calls the underlying SetEdgeCreaseIndices.
-func (x *SubmeshTopology) SetEdgeCreaseIndices(edgeCreaseIndices raw.MDLMeshBuffer) {
-	x.inner.SetEdgeCreaseIndices(edgeCreaseIndices)
-}
-
-// EdgeCreases calls the underlying EdgeCreases.
-func (x *SubmeshTopology) EdgeCreases() raw.MDLMeshBuffer {
-	return x.inner.EdgeCreases()
-}
-
-// SetEdgeCreases calls the underlying SetEdgeCreases.
-func (x *SubmeshTopology) SetEdgeCreases(edgeCreases raw.MDLMeshBuffer) {
-	x.inner.SetEdgeCreases(edgeCreases)
-}
-
-// @property edgeCreaseCount @abstract The number of edge creases encoded in edgeCreases
-//
-// EdgeCreaseCount calls the underlying EdgeCreaseCount.
-func (x *SubmeshTopology) EdgeCreaseCount() uint {
-	return x.inner.EdgeCreaseCount()
-}
-
-// SetEdgeCreaseCount calls the underlying SetEdgeCreaseCount.
-func (x *SubmeshTopology) SetEdgeCreaseCount(edgeCreaseCount uint) {
-	x.inner.SetEdgeCreaseCount(edgeCreaseCount)
-}
-
-// The hole attribute is a vertex attribute of single integer values where each integer is an index of a face that is to be used as a hole. If there are two holes in a mesh, then the vertex buffer will have two entries. Since the number of entries in this vertex buffer is likely to be different than the number of entries in any other vertex buffer, it shouldn't be interleaved with other data.
-//
-// Holes calls the underlying Holes.
-func (x *SubmeshTopology) Holes() raw.MDLMeshBuffer {
-	return x.inner.Holes()
-}
-
-// SetHoles calls the underlying SetHoles.
-func (x *SubmeshTopology) SetHoles(holes raw.MDLMeshBuffer) {
-	x.inner.SetHoles(holes)
-}
-
-// @property holeCount @abstract The number of holes encoded in holes
-//
-// HoleCount calls the underlying HoleCount.
-func (x *SubmeshTopology) HoleCount() uint {
-	return x.inner.HoleCount()
-}
-
-// SetHoleCount calls the underlying SetHoleCount.
-func (x *SubmeshTopology) SetHoleCount(holeCount uint) {
-	x.inner.SetHoleCount(holeCount)
+func (x *SubmeshTopology) SetHoleCount(holeCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoleCount:"), holeCount)
 }
 
 // SubmeshTopologyable is the interface implemented by [SubmeshTopology], for mocking and DI.
 type SubmeshTopologyable interface {
-	Unwrap() *raw.MDLSubmeshTopology
-	WithFaceTopology(faceTopology raw.MDLMeshBuffer) *SubmeshTopology
-	WithFaceCount(faceCount uint) *SubmeshTopology
-	WithVertexCreaseIndices(vertexCreaseIndices raw.MDLMeshBuffer) *SubmeshTopology
-	WithVertexCreases(vertexCreases raw.MDLMeshBuffer) *SubmeshTopology
-	WithVertexCreaseCount(vertexCreaseCount uint) *SubmeshTopology
-	WithEdgeCreaseIndices(edgeCreaseIndices raw.MDLMeshBuffer) *SubmeshTopology
-	WithEdgeCreases(edgeCreases raw.MDLMeshBuffer) *SubmeshTopology
-	WithEdgeCreaseCount(edgeCreaseCount uint) *SubmeshTopology
-	WithHoles(holes raw.MDLMeshBuffer) *SubmeshTopology
-	WithHoleCount(holeCount uint) *SubmeshTopology
-	FaceTopology() raw.MDLMeshBuffer
-	SetFaceTopology(faceTopology raw.MDLMeshBuffer)
-	FaceCount() uint
-	SetFaceCount(faceCount uint)
-	VertexCreaseIndices() raw.MDLMeshBuffer
-	SetVertexCreaseIndices(vertexCreaseIndices raw.MDLMeshBuffer)
-	VertexCreases() raw.MDLMeshBuffer
-	SetVertexCreases(vertexCreases raw.MDLMeshBuffer)
-	VertexCreaseCount() uint
-	SetVertexCreaseCount(vertexCreaseCount uint)
-	EdgeCreaseIndices() raw.MDLMeshBuffer
-	SetEdgeCreaseIndices(edgeCreaseIndices raw.MDLMeshBuffer)
-	EdgeCreases() raw.MDLMeshBuffer
-	SetEdgeCreases(edgeCreases raw.MDLMeshBuffer)
-	EdgeCreaseCount() uint
-	SetEdgeCreaseCount(edgeCreaseCount uint)
-	Holes() raw.MDLMeshBuffer
-	SetHoles(holes raw.MDLMeshBuffer)
-	HoleCount() uint
-	SetHoleCount(holeCount uint)
+	obj.Object
+	WithFaceCount(faceCount int) *SubmeshTopology
+	WithVertexCreaseCount(vertexCreaseCount int) *SubmeshTopology
+	WithEdgeCreaseCount(edgeCreaseCount int) *SubmeshTopology
+	WithHoleCount(holeCount int) *SubmeshTopology
+	FaceCount() int
+	SetFaceCount(faceCount int)
+	VertexCreaseCount() int
+	SetVertexCreaseCount(vertexCreaseCount int)
+	EdgeCreaseCount() int
+	SetEdgeCreaseCount(edgeCreaseCount int)
+	HoleCount() int
+	SetHoleCount(holeCount int)
 }
 
 var _ SubmeshTopologyable = (*SubmeshTopology)(nil)

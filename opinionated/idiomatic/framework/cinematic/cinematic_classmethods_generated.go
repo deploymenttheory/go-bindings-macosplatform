@@ -6,37 +6,34 @@ package cinematic
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// CheckIfCinematicCompletionHandler calls the underlying CNAssetInfoCheckIfCinematicCompletionHandler.
-func CheckIfCinematicCompletionHandler(asset *avfoundation.AVAsset, completionHandler func(bool)) {
-	raw.CNAssetInfoCheckIfCinematicCompletionHandler(asset, completionHandler)
+// Check if asset is cinematic asynchronously.
+func CheckIfCinematicCompletionHandler(asset obj.Object, completionHandler func(bool)) {
+	objc.Send[objc.ID](objc.ID(_class("CNAssetInfo")), objc.RegisterName("checkIfCinematic:completionHandler:"), objref.IDOf(asset), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
+// Load cinematic asset information asynchronously.
+//
 // LoadFromAsset blocks until the operation completes or ctx is cancelled.
-func LoadFromAsset(ctx context.Context, asset *avfoundation.AVAsset) (*AssetInfo, error) {
+func LoadFromAsset(ctx context.Context, asset obj.Object) (*AssetInfo, error) {
 	type _result struct {
 		val *AssetInfo
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.CNAssetInfoLoadFromAssetCompletionHandler(asset, func(_p0 *raw.CNAssetInfo, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &AssetInfo{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = AssetInfoFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("CNAssetInfo")), objc.RegisterName("loadFromAsset:completionHandler:"), objref.IDOf(asset), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -46,28 +43,27 @@ func LoadFromAsset(ctx context.Context, asset *avfoundation.AVAsset) (*AssetInfo
 	}
 }
 
-// CheckIfContainsSpatialAudioCompletionHandler calls the underlying CNAssetSpatialAudioInfoCheckIfContainsSpatialAudioCompletionHandler.
-func CheckIfContainsSpatialAudioCompletionHandler(asset *avfoundation.AVAsset, completionHandler func(bool)) {
-	raw.CNAssetSpatialAudioInfoCheckIfContainsSpatialAudioCompletionHandler(asset, completionHandler)
+// Check if asset meets all the requirements to operate with Spatial Audio and its accompanying effects
+func CheckIfContainsSpatialAudioCompletionHandler(asset obj.Object, completionHandler func(bool)) {
+	objc.Send[objc.ID](objc.ID(_class("CNAssetSpatialAudioInfo")), objc.RegisterName("checkIfContainsSpatialAudio:completionHandler:"), objref.IDOf(asset), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
+// Returns an instance of CNAssetAudioInfo for an AVAsset object asynchronously.
+//
 // CNAssetSpatialAudioInfoLoadFromAsset blocks until the operation completes or ctx is cancelled.
-func CNAssetSpatialAudioInfoLoadFromAsset(ctx context.Context, asset *avfoundation.AVAsset) (*AssetSpatialAudioInfo, error) {
+func CNAssetSpatialAudioInfoLoadFromAsset(ctx context.Context, asset obj.Object) (*AssetSpatialAudioInfo, error) {
 	type _result struct {
 		val *AssetSpatialAudioInfo
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.CNAssetSpatialAudioInfoLoadFromAssetCompletionHandler(asset, func(_p0 *raw.CNAssetSpatialAudioInfo, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &AssetSpatialAudioInfo{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = AssetSpatialAudioInfoFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("CNAssetSpatialAudioInfo")), objc.RegisterName("loadFromAsset:completionHandler:"), objref.IDOf(asset), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -77,79 +73,71 @@ func CNAssetSpatialAudioInfoLoadFromAsset(ctx context.Context, asset *avfoundati
 	}
 }
 
-// IsSupported calls the underlying CNAssetSpatialAudioInfoIsSupported.
+// Indicates whether the current device supports Audio Mix.
 func IsSupported() bool {
-	return raw.CNAssetSpatialAudioInfoIsSupported()
+	_r := objc.Send[bool](objc.ID(_class("CNAssetSpatialAudioInfo")), objc.RegisterName("isSupported"))
+	return _r
 }
 
-// IsValidDetectionID calls the underlying CNDetectionIsValidDetectionID.
+// Determine whether a given detectionID is valid
 func IsValidDetectionID(detectionID int64) bool {
-	return raw.CNDetectionIsValidDetectionID(detectionID)
+	_r := objc.Send[bool](objc.ID(_class("CNDetection")), objc.RegisterName("isValidDetectionID:"), detectionID)
+	return _r
 }
 
-// IsValidDetectionGroupID calls the underlying CNDetectionIsValidDetectionGroupID.
+// Determine whether a given detectionGroupID is valid
 func IsValidDetectionGroupID(detectionGroupID int64) bool {
-	return raw.CNDetectionIsValidDetectionGroupID(detectionGroupID)
+	_r := objc.Send[bool](objc.ID(_class("CNDetection")), objc.RegisterName("isValidDetectionGroupID:"), detectionGroupID)
+	return _r
 }
 
-// AccessibilityLabelForDetectionType calls the underlying CNDetectionAccessibilityLabelForDetectionType.
-func AccessibilityLabelForDetectionType(detectionType CNDetectionType) string {
-	_r := raw.CNDetectionAccessibilityLabelForDetectionType(raw.CNDetectionType(detectionType))
-	if _r == nil {
+// A localized accessibility label converting a specific detection type into a broad category (person, pet, etc.).
+func AccessibilityLabelForDetectionType(detectionType DetectionType) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("CNDetection")), objc.RegisterName("accessibilityLabelForDetectionType:"), detectionType)
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// DisparityInNormalizedRectSourceDisparityDetectionTypePriorDisparity calls the underlying CNDetectionDisparityInNormalizedRectSourceDisparityDetectionTypePriorDisparity.
-func DisparityInNormalizedRectSourceDisparityDetectionTypePriorDisparity(normalizedRect corefoundation.CGRect, sourceDisparity unsafe.Pointer, detectionType CNDetectionType, priorDisparity float32) float32 {
-	return raw.CNDetectionDisparityInNormalizedRectSourceDisparityDetectionTypePriorDisparity(normalizedRect, sourceDisparity, raw.CNDetectionType(detectionType), priorDisparity)
-}
-
-// CNObjectTrackerIsSupported calls the underlying CNObjectTrackerIsSupported.
+// Indicates whether the current device supports object detection and tracking.
 func CNObjectTrackerIsSupported() bool {
-	return raw.CNObjectTrackerIsSupported()
+	_r := objc.Send[bool](objc.ID(_class("CNObjectTracker")), objc.RegisterName("isSupported"))
+	return _r
 }
 
+// The pixel format types supported for the input source. Use with kCVPixelBufferPixelFormatTypeKey in the video compositor's sourcePixelBufferAttributes dictionary when implementing AVVideoCompositing.
+//
 // SourcePixelFormatTypes returns the collection as a Go slice.
-func SourcePixelFormatTypes() []*foundation.NSNumber {
-	arr := raw.CNRenderingSessionSourcePixelFormatTypes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func SourcePixelFormatTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objc.ID(_class("CNRenderingSession")), objc.RegisterName("sourcePixelFormatTypes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// The pixel format types supported for the output destination. Use with kCVPixelBufferPixelFormatTypeKey in the video compositor's requiredPixelBufferAttributesForRenderContext dictionary when implementing AVVideoCompositing.
+//
 // DestinationPixelFormatTypes returns the collection as a Go slice.
-func DestinationPixelFormatTypes() []*foundation.NSNumber {
-	arr := raw.CNRenderingSessionDestinationPixelFormatTypes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func DestinationPixelFormatTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objc.ID(_class("CNRenderingSession")), objc.RegisterName("destinationPixelFormatTypes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
+// Loads the rendering session attributes from an asset asynchronously.
+//
 // CNRenderingSessionAttributesLoadFromAsset blocks until the operation completes or ctx is cancelled.
-func CNRenderingSessionAttributesLoadFromAsset(ctx context.Context, asset *avfoundation.AVAsset) (*RenderingSessionAttributes, error) {
+func CNRenderingSessionAttributesLoadFromAsset(ctx context.Context, asset obj.Object) (*RenderingSessionAttributes, error) {
 	type _result struct {
 		val *RenderingSessionAttributes
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.CNRenderingSessionAttributesLoadFromAssetCompletionHandler(asset, func(_p0 *raw.CNRenderingSessionAttributes, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &RenderingSessionAttributes{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = RenderingSessionAttributesFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("CNRenderingSessionAttributes")), objc.RegisterName("loadFromAsset:completionHandler:"), objref.IDOf(asset), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -159,23 +147,22 @@ func CNRenderingSessionAttributesLoadFromAsset(ctx context.Context, asset *avfou
 	}
 }
 
+// Load cinematic script asynchronously from a cinematic asset. - Parameters: - asset: the cinematic asset to be loaded. - changes: optional changes since asset was recorded. Can be obtained from a previous editing session. If `nil`, the asset is loaded as originally recorded. - progress: optional progress object to track progress or cancel loading. Represents just the loading of this asset. Create with desired total unit count or use zero to have the unit count filled in automatically.  If `nil`, no progress is reported. - completionHandler: called with the loaded cinematic script when done, or with with an error if it fails. If progress is canceled before it completes, the completion handler is called with an error.
+//
 // LoadFromAssetChangesProgress blocks until the operation completes or ctx is cancelled.
-func LoadFromAssetChangesProgress(ctx context.Context, asset *avfoundation.AVAsset, changes *raw.CNScriptChanges, progress *foundation.NSProgress) (*Script, error) {
+func LoadFromAssetChangesProgress(ctx context.Context, asset obj.Object, changes *ScriptChanges, progress obj.Object) (*Script, error) {
 	type _result struct {
 		val *Script
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.CNScriptLoadFromAssetChangesProgressCompletionHandler(asset, changes, progress, func(_p0 *raw.CNScript, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &Script{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = ScriptFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("CNScript")), objc.RegisterName("loadFromAsset:changes:progress:completionHandler:"), objref.IDOf(asset), objref.IDOf(changes), objref.IDOf(progress), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

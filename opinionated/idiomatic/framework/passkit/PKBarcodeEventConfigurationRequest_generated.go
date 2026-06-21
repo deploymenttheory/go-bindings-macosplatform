@@ -5,65 +5,87 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// BarcodeEventConfigurationRequest wraps [raw.PKBarcodeEventConfigurationRequest] with a fluent Go API.
+// BarcodeEventConfigurationRequest is an idiomatic wrapper over the Objective-C class PKBarcodeEventConfigurationRequest.
 type BarcodeEventConfigurationRequest struct {
-	inner *raw.PKBarcodeEventConfigurationRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKBarcodeEventConfigurationRequest].
-func (x *BarcodeEventConfigurationRequest) Unwrap() *raw.PKBarcodeEventConfigurationRequest {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BarcodeEventConfigurationRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// BarcodeEventConfigurationRequestFromID adopts an existing object pointer as a BarcodeEventConfigurationRequest (nil for 0).
+// BarcodeEventConfigurationRequestFromID adopts an existing Objective-C object as a BarcodeEventConfigurationRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func BarcodeEventConfigurationRequestFromID(id objc.ID) *BarcodeEventConfigurationRequest {
 	if id == 0 {
 		return nil
 	}
-	return &BarcodeEventConfigurationRequest{inner: raw.PKBarcodeEventConfigurationRequestFromID(id)}
+	x := &BarcodeEventConfigurationRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBarcodeEventConfigurationRequest creates a new [BarcodeEventConfigurationRequest].
+// barcodeEventConfigurationRequestAdopt wraps an Objective-C object that this code just created as a
+// BarcodeEventConfigurationRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func barcodeEventConfigurationRequestAdopt(id objc.ID) *BarcodeEventConfigurationRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &BarcodeEventConfigurationRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BarcodeEventConfigurationRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BarcodeEventConfigurationRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BarcodeEventConfigurationRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBarcodeEventConfigurationRequest creates a new BarcodeEventConfigurationRequest.
 func NewBarcodeEventConfigurationRequest() *BarcodeEventConfigurationRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKBarcodeEventConfigurationRequest")), objc.RegisterName("new"))
-	return &BarcodeEventConfigurationRequest{inner: raw.PKBarcodeEventConfigurationRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKBarcodeEventConfigurationRequest")), objc.RegisterName("new"))
+	return barcodeEventConfigurationRequestAdopt(_id)
 }
 
-// DeviceAccountIdentifier calls the underlying DeviceAccountIdentifier.
 func (x *BarcodeEventConfigurationRequest) DeviceAccountIdentifier() string {
-	_r := x.inner.DeviceAccountIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceAccountIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ConfigurationData calls the underlying ConfigurationData.
-func (x *BarcodeEventConfigurationRequest) ConfigurationData() *foundation.NSData {
-	return x.inner.ConfigurationData()
+func (x *BarcodeEventConfigurationRequest) ConfigurationData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationData"))
+	return obj.Wrap(_r)
 }
 
-// ConfigurationDataType calls the underlying ConfigurationDataType.
-func (x *BarcodeEventConfigurationRequest) ConfigurationDataType() PKBarcodeEventConfigurationDataType {
-	return PKBarcodeEventConfigurationDataType(x.inner.ConfigurationDataType())
+func (x *BarcodeEventConfigurationRequest) ConfigurationDataType() BarcodeEventConfigurationDataType {
+	_r := objc.Send[BarcodeEventConfigurationDataType](objref.IDOf(x), objc.RegisterName("configurationDataType"))
+	return _r
 }
 
 // BarcodeEventConfigurationRequestable is the interface implemented by [BarcodeEventConfigurationRequest], for mocking and DI.
 type BarcodeEventConfigurationRequestable interface {
-	Unwrap() *raw.PKBarcodeEventConfigurationRequest
+	obj.Object
 	DeviceAccountIdentifier() string
-	ConfigurationData() *foundation.NSData
-	ConfigurationDataType() PKBarcodeEventConfigurationDataType
+	ConfigurationData() obj.Object
+	ConfigurationDataType() BarcodeEventConfigurationDataType
 }
 
 var _ BarcodeEventConfigurationRequestable = (*BarcodeEventConfigurationRequest)(nil)

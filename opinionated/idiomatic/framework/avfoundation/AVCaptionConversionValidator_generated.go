@@ -6,42 +6,63 @@ package avfoundation
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that validates captions for a conversion operation.
 //
-// CaptionConversionValidator wraps [raw.AVCaptionConversionValidator] with a fluent Go API.
+// CaptionConversionValidator is an idiomatic wrapper over the Objective-C class AVCaptionConversionValidator.
 type CaptionConversionValidator struct {
-	inner *raw.AVCaptionConversionValidator
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptionConversionValidator].
-func (x *CaptionConversionValidator) Unwrap() *raw.AVCaptionConversionValidator { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptionConversionValidator) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptionConversionValidatorFromID adopts an existing object pointer as a CaptionConversionValidator (nil for 0).
+// CaptionConversionValidatorFromID adopts an existing Objective-C object as a CaptionConversionValidator
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptionConversionValidatorFromID(id objc.ID) *CaptionConversionValidator {
 	if id == 0 {
 		return nil
 	}
-	return &CaptionConversionValidator{inner: raw.AVCaptionConversionValidatorFromID(id)}
+	x := &CaptionConversionValidator{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates an object that validates captions for a conversion operation.
-//
-// NewCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings creates a new [CaptionConversionValidator].
-func NewCaptionConversionValidatorWithCaptionsTimeRangeConversionSettings(captions *foundation.NSArray[*raw.AVCaption], timeRange coremedia.CMTimeRange, conversionSettings purego.IDer) *CaptionConversionValidator {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionConversionValidator")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCaptions:timeRange:conversionSettings:"), captions.Ptr(), timeRange, conversionSettings.ID())
-	return &CaptionConversionValidator{inner: raw.AVCaptionConversionValidatorFromID(_id)}
+// captionConversionValidatorAdopt wraps an Objective-C object that this code just created as a
+// CaptionConversionValidator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captionConversionValidatorAdopt(id objc.ID) *CaptionConversionValidator {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptionConversionValidator{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptionConversionValidator) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptionConversionValidator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptionConversionValidator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptionConversionValidator creates a new CaptionConversionValidator.
+func NewCaptionConversionValidator() *CaptionConversionValidator {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptionConversionValidator")), objc.RegisterName("new"))
+	return captionConversionValidatorAdopt(_id)
 }
 
 // Validates the object’s captions.
@@ -53,13 +74,12 @@ func (x *CaptionConversionValidator) ValidateCaptionConversionWithWarningHandler
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ValidateCaptionConversionWithWarningHandler(func(_p0 *raw.AVCaptionConversionWarning) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &CaptionConversionWarning{inner: _p0}
-		}
+		_o.val = CaptionConversionWarningFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validateCaptionConversionWithWarningHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -70,60 +90,39 @@ func (x *CaptionConversionValidator) ValidateCaptionConversionWithWarningHandler
 }
 
 // Stops the active validation operation.
-//
-// StopValidating calls the underlying StopValidating.
 func (x *CaptionConversionValidator) StopValidating() {
-	x.inner.StopValidating()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopValidating"))
 }
 
-// @property      status @abstract      Indicates the status of the validation.
-//
-// Status calls the underlying Status.
-func (x *CaptionConversionValidator) Status() AVCaptionConversionValidatorStatus {
-	return AVCaptionConversionValidatorStatus(x.inner.Status())
+// Indicates the status of the validation.
+func (x *CaptionConversionValidator) Status() CaptionConversionValidatorStatus {
+	_r := objc.Send[CaptionConversionValidatorStatus](objref.IDOf(x), objc.RegisterName("status"))
+	return _r
 }
 
-// @property      captions @abstract      The array of captions to be validated for the specified conversion operation.
+// The array of captions to be validated for the specified conversion operation.
 //
 // Captions returns the collection as a Go slice.
 func (x *CaptionConversionValidator) Captions() []*Caption {
-	arr := x.inner.Captions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Caption {
-		return &Caption{inner: raw.AVCaptionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("captions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Caption { return CaptionFromID(_id) })
 }
 
-// @property      timeRange @abstract      The timeRange of the media timeline into which the specified captions must be integrated. @discussion The start of this timeRange may be less than the start of the timeRange of the initial caption in the captions array, if the captions are to appear only after the start of accompanying video or audio. If no definite duration for the media timeline is known, the timeRange can have a duration of kCMTimePositiveInfinity. However, in order to perform a comprehensive validation of a conversion to closed captions, setting the duration of the timeRange to the duration of accompanying video media is recommended.
-//
-// TimeRange calls the underlying TimeRange.
-func (x *CaptionConversionValidator) TimeRange() coremedia.CMTimeRange {
-	return x.inner.TimeRange()
-}
-
-// @property      warnings @abstract      Provides the collection of warnings for problems that have been encountered. While the value of status is AVCaptionConversionValidatorStatusValidating, the count of warnings may increase.
+// Provides the collection of warnings for problems that have been encountered. While the value of status is AVCaptionConversionValidatorStatusValidating, the count of warnings may increase.
 //
 // Warnings returns the collection as a Go slice.
 func (x *CaptionConversionValidator) Warnings() []*CaptionConversionWarning {
-	arr := x.inner.Warnings()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CaptionConversionWarning {
-		return &CaptionConversionWarning{inner: raw.AVCaptionConversionWarningFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("warnings"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptionConversionWarning { return CaptionConversionWarningFromID(_id) })
 }
 
 // CaptionConversionValidatorable is the interface implemented by [CaptionConversionValidator], for mocking and DI.
 type CaptionConversionValidatorable interface {
-	Unwrap() *raw.AVCaptionConversionValidator
+	obj.Object
 	ValidateCaptionConversionWithWarningHandler(ctx context.Context) (*CaptionConversionWarning, error)
 	StopValidating()
-	Status() AVCaptionConversionValidatorStatus
+	Status() CaptionConversionValidatorStatus
 	Captions() []*Caption
-	TimeRange() coremedia.CMTimeRange
 	Warnings() []*CaptionConversionWarning
 }
 

@@ -5,81 +5,103 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // An object that converts a canonical caption to a specific format.
 //
-// CaptionFormatConformer wraps [raw.AVCaptionFormatConformer] with a fluent Go API.
+// CaptionFormatConformer is an idiomatic wrapper over the Objective-C class AVCaptionFormatConformer.
 type CaptionFormatConformer struct {
-	inner *raw.AVCaptionFormatConformer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptionFormatConformer].
-func (x *CaptionFormatConformer) Unwrap() *raw.AVCaptionFormatConformer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptionFormatConformer) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptionFormatConformerFromID adopts an existing object pointer as a CaptionFormatConformer (nil for 0).
+// CaptionFormatConformerFromID adopts an existing Objective-C object as a CaptionFormatConformer
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptionFormatConformerFromID(id objc.ID) *CaptionFormatConformer {
 	if id == 0 {
 		return nil
 	}
-	return &CaptionFormatConformer{inner: raw.AVCaptionFormatConformerFromID(id)}
+	x := &CaptionFormatConformer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// captionFormatConformerAdopt wraps an Objective-C object that this code just created as a
+// CaptionFormatConformer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captionFormatConformerAdopt(id objc.ID) *CaptionFormatConformer {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptionFormatConformer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptionFormatConformer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptionFormatConformer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptionFormatConformer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new object with format conversion settings.
 //
-// NewCaptionFormatConformerWithConversionSettings creates a new [CaptionFormatConformer].
-func NewCaptionFormatConformerWithConversionSettings(conversionSettings purego.IDer) *CaptionFormatConformer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionFormatConformer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConversionSettings:"), conversionSettings.ID())
-	return &CaptionFormatConformer{inner: raw.AVCaptionFormatConformerFromID(_id)}
+// NewCaptionFormatConformerWithConversionSettings creates a new CaptionFormatConformer.
+func NewCaptionFormatConformerWithConversionSettings(conversionSettings obj.Object) *CaptionFormatConformer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVCaptionFormatConformer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConversionSettings:"), objref.IDOf(conversionSettings))
+	return captionFormatConformerAdopt(_id)
 }
 
 // A Boolean value that indicates whether to conform the time range of a canonical caption.
 //
-// WithConformsCaptionsToTimeRange sets the conformsCaptionsToTimeRange property and returns the receiver for chaining.
+// WithConformsCaptionsToTimeRange sets conformsCaptionsToTimeRange and returns the receiver so calls can be chained.
 func (x *CaptionFormatConformer) WithConformsCaptionsToTimeRange(conformsCaptionsToTimeRange bool) *CaptionFormatConformer {
-	x.inner.SetConformsCaptionsToTimeRange(conformsCaptionsToTimeRange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConformsCaptionsToTimeRange:"), conformsCaptionsToTimeRange)
 	return x
 }
 
 // Creates a caption that conforms to a specific format.
-//
-// ConformedCaptionForCaptionError calls the underlying ConformedCaptionForCaptionError.
-func (x *CaptionFormatConformer) ConformedCaptionForCaptionError(caption *raw.AVCaption) (*Caption, error) {
-	_r, _err := x.inner.ConformedCaptionForCaptionError(caption)
-	if _err != nil {
-		return nil, _err
+func (x *CaptionFormatConformer) ConformedCaptionForCaptionError(caption *Caption) (*Caption, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("conformedCaptionForCaption:error:"), objref.IDOf(caption), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Caption{inner: _r}, nil
+	return CaptionFromID(_r), nil
 }
 
-// @property	conformsCaptionsToTimeRange @abstract	Specifies whether to conform the time range of a given canonical caption as well. @discussion When set to YES, conforms time range. When set to NO, the time range of the conformed caption will be same as a given canonical caption. In the case of conforming to CAE608 format, AVCaption is encoded so that each CAE608 control code (2 bytes) fits into 1 frame duration (1001/30000). When set to YES and if all the encoded data can not fit inside the canonical caption time range, the caption time range will be extended to fit all the data and will be returned in the conformed AVCaption. The default value is NO.
-//
-// ConformsCaptionsToTimeRange calls the underlying ConformsCaptionsToTimeRange.
+// Specifies whether to conform the time range of a given canonical caption as well. When set to YES, conforms time range. When set to NO, the time range of the conformed caption will be same as a given canonical caption. In the case of conforming to CAE608 format, AVCaption is encoded so that each CAE608 control code (2 bytes) fits into 1 frame duration (1001/30000). When set to YES and if all the encoded data can not fit inside the canonical caption time range, the caption time range will be extended to fit all the data and will be returned in the conformed AVCaption. The default value is NO.
 func (x *CaptionFormatConformer) ConformsCaptionsToTimeRange() bool {
-	return x.inner.ConformsCaptionsToTimeRange()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("conformsCaptionsToTimeRange"))
+	return _r
 }
 
-// SetConformsCaptionsToTimeRange calls the underlying SetConformsCaptionsToTimeRange.
 func (x *CaptionFormatConformer) SetConformsCaptionsToTimeRange(conformsCaptionsToTimeRange bool) {
-	x.inner.SetConformsCaptionsToTimeRange(conformsCaptionsToTimeRange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConformsCaptionsToTimeRange:"), conformsCaptionsToTimeRange)
 }
 
 // CaptionFormatConformerable is the interface implemented by [CaptionFormatConformer], for mocking and DI.
 type CaptionFormatConformerable interface {
-	Unwrap() *raw.AVCaptionFormatConformer
+	obj.Object
 	WithConformsCaptionsToTimeRange(conformsCaptionsToTimeRange bool) *CaptionFormatConformer
-	ConformedCaptionForCaptionError(caption *raw.AVCaption) (*Caption, error)
+	ConformedCaptionForCaptionError(caption *Caption) (*Caption, error)
 	ConformsCaptionsToTimeRange() bool
 	SetConformsCaptionsToTimeRange(conformsCaptionsToTimeRange bool)
 }

@@ -5,124 +5,91 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A filter that convolves an image with a given kernel of odd width and height.
 //
-// ImageBox wraps [raw.MPSImageBox] with a fluent Go API.
+// ImageBox is an idiomatic wrapper over the Objective-C class MPSImageBox.
 type ImageBox struct {
-	inner *raw.MPSImageBox
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageBox].
-func (x *ImageBox) Unwrap() *raw.MPSImageBox { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageBox) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageBoxFromID adopts an existing object pointer as a ImageBox (nil for 0).
+// ImageBoxFromID adopts an existing Objective-C object as a ImageBox
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageBoxFromID(id objc.ID) *ImageBox {
 	if id == 0 {
 		return nil
 	}
-	return &ImageBox{inner: raw.MPSImageBoxFromID(id)}
-}
-
-// Initializes a box filter.
-//
-// NewImageBoxWithDeviceKernelWidthKernelHeight creates a new [ImageBox].
-func NewImageBoxWithDeviceKernelWidthKernelHeight(device metal.MTLDevice, kernelWidth uint, kernelHeight uint) *ImageBox {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageBox")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:"), device, kernelWidth, kernelHeight)
-	return &ImageBox{inner: raw.MPSImageBoxFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewImageBoxWithCoderDevice creates a new [ImageBox].
-func NewImageBoxWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageBox {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageBox")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageBox{inner: raw.MPSImageBoxFromID(_id)}
-}
-
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageBox) WithOffset(offset mpscore.MPSOffset) *ImageBox {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	x := &ImageBox{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageBox) WithClipRect(clipRect metal.MTLRegion) *ImageBox {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+// imageBoxAdopt wraps an Objective-C object that this code just created as a
+// ImageBox (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageBoxAdopt(id objc.ID) *ImageBox {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageBox{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageBox) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageBox {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
+// Description returns the object's -description text.
+func (x *ImageBox) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageBox) WithOptions(options mpscore.MPSKernelOptions) *ImageBox {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageBox) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageBox) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageBox creates a new ImageBox.
+func NewImageBox() *ImageBox {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageBox")), objc.RegisterName("new"))
+	return imageBoxAdopt(_id)
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ImageBox) WithLabel(label string) *ImageBox {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property kernelHeight @abstract  The height of the filter window.
-//
-// KernelHeight calls the underlying KernelHeight.
-func (x *ImageBox) KernelHeight() uint {
-	return x.inner.KernelHeight()
+// The height of the filter window.
+func (x *ImageBox) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+	return _r
 }
 
-// @property kernelWidth @abstract  The width of the filter window.
-//
-// KernelWidth calls the underlying KernelWidth.
-func (x *ImageBox) KernelWidth() uint {
-	return x.inner.KernelWidth()
+// The width of the filter window.
+func (x *ImageBox) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+	return _r
 }
-
-func (x *ImageBox) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
-}
-
-func (x *ImageBox) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
 // ImageBoxable is the interface implemented by [ImageBox], for mocking and DI.
 type ImageBoxable interface {
-	Unwrap() *raw.MPSImageBox
-	WithOffset(offset mpscore.MPSOffset) *ImageBox
-	WithClipRect(clipRect metal.MTLRegion) *ImageBox
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageBox
-	WithOptions(options mpscore.MPSKernelOptions) *ImageBox
+	obj.Object
 	WithLabel(label string) *ImageBox
-	KernelHeight() uint
-	KernelWidth() uint
+	KernelHeight() int
+	KernelWidth() int
 }
 
 var _ ImageBoxable = (*ImageBox)(nil)

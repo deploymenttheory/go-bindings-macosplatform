@@ -5,47 +5,74 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // This class acts as a wrapper for the wheelchair use enumeration.
 //
-// WheelchairUseObject wraps [raw.HKWheelchairUseObject] with a fluent Go API.
+// WheelchairUseObject is an idiomatic wrapper over the Objective-C class HKWheelchairUseObject.
 type WheelchairUseObject struct {
-	inner *raw.HKWheelchairUseObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKWheelchairUseObject].
-func (x *WheelchairUseObject) Unwrap() *raw.HKWheelchairUseObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WheelchairUseObject) ID() objc.ID { return x.inner.Ptr() }
-
-// WheelchairUseObjectFromID adopts an existing object pointer as a WheelchairUseObject (nil for 0).
+// WheelchairUseObjectFromID adopts an existing Objective-C object as a WheelchairUseObject
+// (nil for 0), retaining it and registering a release finalizer.
 func WheelchairUseObjectFromID(id objc.ID) *WheelchairUseObject {
 	if id == 0 {
 		return nil
 	}
-	return &WheelchairUseObject{inner: raw.HKWheelchairUseObjectFromID(id)}
+	x := &WheelchairUseObject{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWheelchairUseObject creates a new [WheelchairUseObject].
+// wheelchairUseObjectAdopt wraps an Objective-C object that this code just created as a
+// WheelchairUseObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wheelchairUseObjectAdopt(id objc.ID) *WheelchairUseObject {
+	if id == 0 {
+		return nil
+	}
+	x := &WheelchairUseObject{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WheelchairUseObject) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WheelchairUseObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WheelchairUseObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWheelchairUseObject creates a new WheelchairUseObject.
 func NewWheelchairUseObject() *WheelchairUseObject {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWheelchairUseObject")), objc.RegisterName("new"))
-	return &WheelchairUseObject{inner: raw.HKWheelchairUseObjectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKWheelchairUseObject")), objc.RegisterName("new"))
+	return wheelchairUseObjectAdopt(_id)
 }
 
-// WheelchairUse calls the underlying WheelchairUse.
-func (x *WheelchairUseObject) WheelchairUse() HKWheelchairUse {
-	return HKWheelchairUse(x.inner.WheelchairUse())
+func (x *WheelchairUseObject) WheelchairUse() WheelchairUse {
+	_r := objc.Send[WheelchairUse](objref.IDOf(x), objc.RegisterName("wheelchairUse"))
+	return _r
 }
 
 // WheelchairUseObjectable is the interface implemented by [WheelchairUseObject], for mocking and DI.
 type WheelchairUseObjectable interface {
-	Unwrap() *raw.HKWheelchairUseObject
-	WheelchairUse() HKWheelchairUse
+	obj.Object
+	WheelchairUse() WheelchairUse
 }
 
 var _ WheelchairUseObjectable = (*WheelchairUseObject)(nil)

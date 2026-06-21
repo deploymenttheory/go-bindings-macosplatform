@@ -5,175 +5,175 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// AudioDeviceConfigurationProvider is implemented by AudioDeviceConfiguration and any idiomatic type wrapping a VZAudioDeviceConfiguration subclass.
+// AudioDeviceConfigurationProvider is accepted wherever a VZAudioDeviceConfiguration (or one of its subclasses) is expected.
 type AudioDeviceConfigurationProvider interface {
-	asAudioDeviceConfiguration() *raw.VZAudioDeviceConfiguration
+	objref.Object
 }
 
-// AudioInputStreamSourceProvider is implemented by AudioInputStreamSource and any idiomatic type wrapping a VZAudioInputStreamSource subclass.
+// AudioInputStreamSourceProvider is accepted wherever a VZAudioInputStreamSource (or one of its subclasses) is expected.
 type AudioInputStreamSourceProvider interface {
-	asAudioInputStreamSource() *raw.VZAudioInputStreamSource
+	objref.Object
 }
 
-// AudioOutputStreamSinkProvider is implemented by AudioOutputStreamSink and any idiomatic type wrapping a VZAudioOutputStreamSink subclass.
+// AudioOutputStreamSinkProvider is accepted wherever a VZAudioOutputStreamSink (or one of its subclasses) is expected.
 type AudioOutputStreamSinkProvider interface {
-	asAudioOutputStreamSink() *raw.VZAudioOutputStreamSink
+	objref.Object
 }
 
-// BootLoaderProvider is implemented by BootLoader and any idiomatic type wrapping a VZBootLoader subclass.
+// BootLoaderProvider is accepted wherever a VZBootLoader (or one of its subclasses) is expected.
 type BootLoaderProvider interface {
-	asBootLoader() *raw.VZBootLoader
+	objref.Object
 }
 
-// ConsoleDeviceProvider is implemented by ConsoleDevice and any idiomatic type wrapping a VZConsoleDevice subclass.
+// ConsoleDeviceProvider is accepted wherever a VZConsoleDevice (or one of its subclasses) is expected.
 type ConsoleDeviceProvider interface {
-	asConsoleDevice() *raw.VZConsoleDevice
+	objref.Object
 }
 
-// ConsoleDeviceConfigurationProvider is implemented by ConsoleDeviceConfiguration and any idiomatic type wrapping a VZConsoleDeviceConfiguration subclass.
+// ConsoleDeviceConfigurationProvider is accepted wherever a VZConsoleDeviceConfiguration (or one of its subclasses) is expected.
 type ConsoleDeviceConfigurationProvider interface {
-	asConsoleDeviceConfiguration() *raw.VZConsoleDeviceConfiguration
+	objref.Object
 }
 
-// ConsolePortConfigurationProvider is implemented by ConsolePortConfiguration and any idiomatic type wrapping a VZConsolePortConfiguration subclass.
+// ConsolePortConfigurationProvider is accepted wherever a VZConsolePortConfiguration (or one of its subclasses) is expected.
 type ConsolePortConfigurationProvider interface {
-	asConsolePortConfiguration() *raw.VZConsolePortConfiguration
+	objref.Object
 }
 
-// DirectoryShareProvider is implemented by DirectoryShare and any idiomatic type wrapping a VZDirectoryShare subclass.
+// DirectoryShareProvider is accepted wherever a VZDirectoryShare (or one of its subclasses) is expected.
 type DirectoryShareProvider interface {
-	asDirectoryShare() *raw.VZDirectoryShare
+	objref.Object
 }
 
-// DirectorySharingDeviceProvider is implemented by DirectorySharingDevice and any idiomatic type wrapping a VZDirectorySharingDevice subclass.
+// DirectorySharingDeviceProvider is accepted wherever a VZDirectorySharingDevice (or one of its subclasses) is expected.
 type DirectorySharingDeviceProvider interface {
-	asDirectorySharingDevice() *raw.VZDirectorySharingDevice
+	objref.Object
 }
 
-// DirectorySharingDeviceConfigurationProvider is implemented by DirectorySharingDeviceConfiguration and any idiomatic type wrapping a VZDirectorySharingDeviceConfiguration subclass.
+// DirectorySharingDeviceConfigurationProvider is accepted wherever a VZDirectorySharingDeviceConfiguration (or one of its subclasses) is expected.
 type DirectorySharingDeviceConfigurationProvider interface {
-	asDirectorySharingDeviceConfiguration() *raw.VZDirectorySharingDeviceConfiguration
+	objref.Object
 }
 
-// EntropyDeviceConfigurationProvider is implemented by EntropyDeviceConfiguration and any idiomatic type wrapping a VZEntropyDeviceConfiguration subclass.
+// EntropyDeviceConfigurationProvider is accepted wherever a VZEntropyDeviceConfiguration (or one of its subclasses) is expected.
 type EntropyDeviceConfigurationProvider interface {
-	asEntropyDeviceConfiguration() *raw.VZEntropyDeviceConfiguration
+	objref.Object
 }
 
-// GraphicsDeviceProvider is implemented by GraphicsDevice and any idiomatic type wrapping a VZGraphicsDevice subclass.
+// GraphicsDeviceProvider is accepted wherever a VZGraphicsDevice (or one of its subclasses) is expected.
 type GraphicsDeviceProvider interface {
-	asGraphicsDevice() *raw.VZGraphicsDevice
+	objref.Object
 }
 
-// GraphicsDeviceConfigurationProvider is implemented by GraphicsDeviceConfiguration and any idiomatic type wrapping a VZGraphicsDeviceConfiguration subclass.
+// GraphicsDeviceConfigurationProvider is accepted wherever a VZGraphicsDeviceConfiguration (or one of its subclasses) is expected.
 type GraphicsDeviceConfigurationProvider interface {
-	asGraphicsDeviceConfiguration() *raw.VZGraphicsDeviceConfiguration
+	objref.Object
 }
 
-// GraphicsDisplayProvider is implemented by GraphicsDisplay and any idiomatic type wrapping a VZGraphicsDisplay subclass.
+// GraphicsDisplayProvider is accepted wherever a VZGraphicsDisplay (or one of its subclasses) is expected.
 type GraphicsDisplayProvider interface {
-	asGraphicsDisplay() *raw.VZGraphicsDisplay
+	objref.Object
 }
 
-// GraphicsDisplayConfigurationProvider is implemented by GraphicsDisplayConfiguration and any idiomatic type wrapping a VZGraphicsDisplayConfiguration subclass.
+// GraphicsDisplayConfigurationProvider is accepted wherever a VZGraphicsDisplayConfiguration (or one of its subclasses) is expected.
 type GraphicsDisplayConfigurationProvider interface {
-	asGraphicsDisplayConfiguration() *raw.VZGraphicsDisplayConfiguration
+	objref.Object
 }
 
-// KeyboardConfigurationProvider is implemented by KeyboardConfiguration and any idiomatic type wrapping a VZKeyboardConfiguration subclass.
+// KeyboardConfigurationProvider is accepted wherever a VZKeyboardConfiguration (or one of its subclasses) is expected.
 type KeyboardConfigurationProvider interface {
-	asKeyboardConfiguration() *raw.VZKeyboardConfiguration
+	objref.Object
 }
 
-// LinuxRosettaCachingOptionsProvider is implemented by LinuxRosettaCachingOptions and any idiomatic type wrapping a VZLinuxRosettaCachingOptions subclass.
+// LinuxRosettaCachingOptionsProvider is accepted wherever a VZLinuxRosettaCachingOptions (or one of its subclasses) is expected.
 type LinuxRosettaCachingOptionsProvider interface {
-	asLinuxRosettaCachingOptions() *raw.VZLinuxRosettaCachingOptions
+	objref.Object
 }
 
-// MemoryBalloonDeviceProvider is implemented by MemoryBalloonDevice and any idiomatic type wrapping a VZMemoryBalloonDevice subclass.
+// MemoryBalloonDeviceProvider is accepted wherever a VZMemoryBalloonDevice (or one of its subclasses) is expected.
 type MemoryBalloonDeviceProvider interface {
-	asMemoryBalloonDevice() *raw.VZMemoryBalloonDevice
+	objref.Object
 }
 
-// MemoryBalloonDeviceConfigurationProvider is implemented by MemoryBalloonDeviceConfiguration and any idiomatic type wrapping a VZMemoryBalloonDeviceConfiguration subclass.
+// MemoryBalloonDeviceConfigurationProvider is accepted wherever a VZMemoryBalloonDeviceConfiguration (or one of its subclasses) is expected.
 type MemoryBalloonDeviceConfigurationProvider interface {
-	asMemoryBalloonDeviceConfiguration() *raw.VZMemoryBalloonDeviceConfiguration
+	objref.Object
 }
 
-// NetworkDeviceAttachmentProvider is implemented by NetworkDeviceAttachment and any idiomatic type wrapping a VZNetworkDeviceAttachment subclass.
+// NetworkDeviceAttachmentProvider is accepted wherever a VZNetworkDeviceAttachment (or one of its subclasses) is expected.
 type NetworkDeviceAttachmentProvider interface {
-	asNetworkDeviceAttachment() *raw.VZNetworkDeviceAttachment
+	objref.Object
 }
 
-// NetworkDeviceConfigurationProvider is implemented by NetworkDeviceConfiguration and any idiomatic type wrapping a VZNetworkDeviceConfiguration subclass.
+// NetworkDeviceConfigurationProvider is accepted wherever a VZNetworkDeviceConfiguration (or one of its subclasses) is expected.
 type NetworkDeviceConfigurationProvider interface {
-	asNetworkDeviceConfiguration() *raw.VZNetworkDeviceConfiguration
+	objref.Object
 }
 
-// PlatformConfigurationProvider is implemented by PlatformConfiguration and any idiomatic type wrapping a VZPlatformConfiguration subclass.
+// PlatformConfigurationProvider is accepted wherever a VZPlatformConfiguration (or one of its subclasses) is expected.
 type PlatformConfigurationProvider interface {
-	asPlatformConfiguration() *raw.VZPlatformConfiguration
+	objref.Object
 }
 
-// PointingDeviceConfigurationProvider is implemented by PointingDeviceConfiguration and any idiomatic type wrapping a VZPointingDeviceConfiguration subclass.
+// PointingDeviceConfigurationProvider is accepted wherever a VZPointingDeviceConfiguration (or one of its subclasses) is expected.
 type PointingDeviceConfigurationProvider interface {
-	asPointingDeviceConfiguration() *raw.VZPointingDeviceConfiguration
+	objref.Object
 }
 
-// SerialPortAttachmentProvider is implemented by SerialPortAttachment and any idiomatic type wrapping a VZSerialPortAttachment subclass.
+// SerialPortAttachmentProvider is accepted wherever a VZSerialPortAttachment (or one of its subclasses) is expected.
 type SerialPortAttachmentProvider interface {
-	asSerialPortAttachment() *raw.VZSerialPortAttachment
+	objref.Object
 }
 
-// SerialPortConfigurationProvider is implemented by SerialPortConfiguration and any idiomatic type wrapping a VZSerialPortConfiguration subclass.
+// SerialPortConfigurationProvider is accepted wherever a VZSerialPortConfiguration (or one of its subclasses) is expected.
 type SerialPortConfigurationProvider interface {
-	asSerialPortConfiguration() *raw.VZSerialPortConfiguration
+	objref.Object
 }
 
-// SocketDeviceProvider is implemented by SocketDevice and any idiomatic type wrapping a VZSocketDevice subclass.
+// SocketDeviceProvider is accepted wherever a VZSocketDevice (or one of its subclasses) is expected.
 type SocketDeviceProvider interface {
-	asSocketDevice() *raw.VZSocketDevice
+	objref.Object
 }
 
-// SocketDeviceConfigurationProvider is implemented by SocketDeviceConfiguration and any idiomatic type wrapping a VZSocketDeviceConfiguration subclass.
+// SocketDeviceConfigurationProvider is accepted wherever a VZSocketDeviceConfiguration (or one of its subclasses) is expected.
 type SocketDeviceConfigurationProvider interface {
-	asSocketDeviceConfiguration() *raw.VZSocketDeviceConfiguration
+	objref.Object
 }
 
-// StorageDeviceProvider is implemented by StorageDevice and any idiomatic type wrapping a VZStorageDevice subclass.
+// StorageDeviceProvider is accepted wherever a VZStorageDevice (or one of its subclasses) is expected.
 type StorageDeviceProvider interface {
-	asStorageDevice() *raw.VZStorageDevice
+	objref.Object
 }
 
-// StorageDeviceAttachmentProvider is implemented by StorageDeviceAttachment and any idiomatic type wrapping a VZStorageDeviceAttachment subclass.
+// StorageDeviceAttachmentProvider is accepted wherever a VZStorageDeviceAttachment (or one of its subclasses) is expected.
 type StorageDeviceAttachmentProvider interface {
-	asStorageDeviceAttachment() *raw.VZStorageDeviceAttachment
+	objref.Object
 }
 
-// StorageDeviceConfigurationProvider is implemented by StorageDeviceConfiguration and any idiomatic type wrapping a VZStorageDeviceConfiguration subclass.
+// StorageDeviceConfigurationProvider is accepted wherever a VZStorageDeviceConfiguration (or one of its subclasses) is expected.
 type StorageDeviceConfigurationProvider interface {
-	asStorageDeviceConfiguration() *raw.VZStorageDeviceConfiguration
+	objref.Object
 }
 
-// USBControllerProvider is implemented by USBController and any idiomatic type wrapping a VZUSBController subclass.
+// USBControllerProvider is accepted wherever a VZUSBController (or one of its subclasses) is expected.
 type USBControllerProvider interface {
-	asUSBController() *raw.VZUSBController
+	objref.Object
 }
 
-// USBControllerConfigurationProvider is implemented by USBControllerConfiguration and any idiomatic type wrapping a VZUSBControllerConfiguration subclass.
+// USBControllerConfigurationProvider is accepted wherever a VZUSBControllerConfiguration (or one of its subclasses) is expected.
 type USBControllerConfigurationProvider interface {
-	asUSBControllerConfiguration() *raw.VZUSBControllerConfiguration
+	objref.Object
 }
 
-// VirtioSoundDeviceStreamConfigurationProvider is implemented by VirtioSoundDeviceStreamConfiguration and any idiomatic type wrapping a VZVirtioSoundDeviceStreamConfiguration subclass.
+// VirtioSoundDeviceStreamConfigurationProvider is accepted wherever a VZVirtioSoundDeviceStreamConfiguration (or one of its subclasses) is expected.
 type VirtioSoundDeviceStreamConfigurationProvider interface {
-	asVirtioSoundDeviceStreamConfiguration() *raw.VZVirtioSoundDeviceStreamConfiguration
+	objref.Object
 }
 
-// VirtualMachineStartOptionsProvider is implemented by VirtualMachineStartOptions and any idiomatic type wrapping a VZVirtualMachineStartOptions subclass.
+// VirtualMachineStartOptionsProvider is accepted wherever a VZVirtualMachineStartOptions (or one of its subclasses) is expected.
 type VirtualMachineStartOptionsProvider interface {
-	asVirtualMachineStartOptions() *raw.VZVirtualMachineStartOptions
+	objref.Object
 }

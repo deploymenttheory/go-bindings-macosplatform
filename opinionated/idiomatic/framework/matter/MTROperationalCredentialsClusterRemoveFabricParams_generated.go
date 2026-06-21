@@ -5,107 +5,126 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROperationalCredentialsClusterRemoveFabricParams wraps [raw.MTROperationalCredentialsClusterRemoveFabricParams] with a fluent Go API.
+// MTROperationalCredentialsClusterRemoveFabricParams is an idiomatic wrapper over the Objective-C class MTROperationalCredentialsClusterRemoveFabricParams.
 type MTROperationalCredentialsClusterRemoveFabricParams struct {
-	inner *raw.MTROperationalCredentialsClusterRemoveFabricParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROperationalCredentialsClusterRemoveFabricParams].
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) Unwrap() *raw.MTROperationalCredentialsClusterRemoveFabricParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTROperationalCredentialsClusterRemoveFabricParamsFromID adopts an existing object pointer as a MTROperationalCredentialsClusterRemoveFabricParams (nil for 0).
+// MTROperationalCredentialsClusterRemoveFabricParamsFromID adopts an existing Objective-C object as a MTROperationalCredentialsClusterRemoveFabricParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROperationalCredentialsClusterRemoveFabricParamsFromID(id objc.ID) *MTROperationalCredentialsClusterRemoveFabricParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTROperationalCredentialsClusterRemoveFabricParams{inner: raw.MTROperationalCredentialsClusterRemoveFabricParamsFromID(id)}
+	x := &MTROperationalCredentialsClusterRemoveFabricParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTROperationalCredentialsClusterRemoveFabricParams creates a new [MTROperationalCredentialsClusterRemoveFabricParams].
+// mTROperationalCredentialsClusterRemoveFabricParamsAdopt wraps an Objective-C object that this code just created as a
+// MTROperationalCredentialsClusterRemoveFabricParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROperationalCredentialsClusterRemoveFabricParamsAdopt(id objc.ID) *MTROperationalCredentialsClusterRemoveFabricParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTROperationalCredentialsClusterRemoveFabricParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTROperationalCredentialsClusterRemoveFabricParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROperationalCredentialsClusterRemoveFabricParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROperationalCredentialsClusterRemoveFabricParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTROperationalCredentialsClusterRemoveFabricParams creates a new MTROperationalCredentialsClusterRemoveFabricParams.
 func NewMTROperationalCredentialsClusterRemoveFabricParams() *MTROperationalCredentialsClusterRemoveFabricParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROperationalCredentialsClusterRemoveFabricParams")), objc.RegisterName("new"))
-	return &MTROperationalCredentialsClusterRemoveFabricParams{inner: raw.MTROperationalCredentialsClusterRemoveFabricParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTROperationalCredentialsClusterRemoveFabricParams")), objc.RegisterName("new"))
+	return mTROperationalCredentialsClusterRemoveFabricParamsAdopt(_id)
 }
 
-// WithFabricIndex sets the fabricIndex property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) WithFabricIndex(fabricIndex *foundation.NSNumber) *MTROperationalCredentialsClusterRemoveFabricParams {
-	x.inner.SetFabricIndex(fabricIndex)
+// WithFabricIndex sets fabricIndex and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterRemoveFabricParams) WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterRemoveFabricParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterRemoveFabricParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROperationalCredentialsClusterRemoveFabricParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterRemoveFabricParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// FabricIndex calls the underlying FabricIndex.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) FabricIndex() *foundation.NSNumber {
-	return x.inner.FabricIndex()
+func (x *MTROperationalCredentialsClusterRemoveFabricParams) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+	return obj.Wrap(_r)
 }
 
-// SetFabricIndex calls the underlying SetFabricIndex.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) SetFabricIndex(fabricIndex *foundation.NSNumber) {
-	x.inner.SetFabricIndex(fabricIndex)
+func (x *MTROperationalCredentialsClusterRemoveFabricParams) SetFabricIndex(fabricIndex obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTROperationalCredentialsClusterRemoveFabricParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTROperationalCredentialsClusterRemoveFabricParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTROperationalCredentialsClusterRemoveFabricParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTROperationalCredentialsClusterRemoveFabricParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTROperationalCredentialsClusterRemoveFabricParamsable is the interface implemented by [MTROperationalCredentialsClusterRemoveFabricParams], for mocking and DI.
 type MTROperationalCredentialsClusterRemoveFabricParamsable interface {
-	Unwrap() *raw.MTROperationalCredentialsClusterRemoveFabricParams
-	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTROperationalCredentialsClusterRemoveFabricParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterRemoveFabricParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROperationalCredentialsClusterRemoveFabricParams
-	FabricIndex() *foundation.NSNumber
-	SetFabricIndex(fabricIndex *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams
+	FabricIndex() obj.Object
+	SetFabricIndex(fabricIndex obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTROperationalCredentialsClusterRemoveFabricParamsable = (*MTROperationalCredentialsClusterRemoveFabricParams)(nil)

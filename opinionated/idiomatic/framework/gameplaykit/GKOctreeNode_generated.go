@@ -5,47 +5,68 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A helper class for managing the objects you organize in an octree.
 //
-// OctreeNode wraps [raw.GKOctreeNode] with a fluent Go API.
+// OctreeNode is an idiomatic wrapper over the Objective-C class GKOctreeNode.
 type OctreeNode struct {
-	inner *raw.GKOctreeNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKOctreeNode].
-func (x *OctreeNode) Unwrap() *raw.GKOctreeNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OctreeNode) ID() objc.ID { return x.inner.Ptr() }
-
-// OctreeNodeFromID adopts an existing object pointer as a OctreeNode (nil for 0).
+// OctreeNodeFromID adopts an existing Objective-C object as a OctreeNode
+// (nil for 0), retaining it and registering a release finalizer.
 func OctreeNodeFromID(id objc.ID) *OctreeNode {
 	if id == 0 {
 		return nil
 	}
-	return &OctreeNode{inner: raw.GKOctreeNodeFromID(id)}
+	x := &OctreeNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewOctreeNode creates a new [OctreeNode].
+// octreeNodeAdopt wraps an Objective-C object that this code just created as a
+// OctreeNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func octreeNodeAdopt(id objc.ID) *OctreeNode {
+	if id == 0 {
+		return nil
+	}
+	x := &OctreeNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *OctreeNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *OctreeNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *OctreeNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewOctreeNode creates a new OctreeNode.
 func NewOctreeNode() *OctreeNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKOctreeNode")), objc.RegisterName("new"))
-	return &OctreeNode{inner: raw.GKOctreeNodeFromID(_id)}
-}
-
-// Box calls the underlying Box.
-func (x *OctreeNode) Box() raw.GKBox {
-	return x.inner.Box()
+	_id := objc.Send[objc.ID](objc.ID(_class("GKOctreeNode")), objc.RegisterName("new"))
+	return octreeNodeAdopt(_id)
 }
 
 // OctreeNodeable is the interface implemented by [OctreeNode], for mocking and DI.
 type OctreeNodeable interface {
-	Unwrap() *raw.GKOctreeNode
-	Box() raw.GKBox
+	obj.Object
 }
 
 var _ OctreeNodeable = (*OctreeNode)(nil)

@@ -5,162 +5,148 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An animation of an app’s views, limited to changes in frame location and size, and to fade-in and fade-out effects.
 //
-// ViewAnimation wraps [raw.NSViewAnimation] with a fluent Go API.
+// ViewAnimation is an idiomatic wrapper over the Objective-C class NSViewAnimation.
 type ViewAnimation struct {
-	inner *raw.NSViewAnimation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSViewAnimation].
-func (x *ViewAnimation) Unwrap() *raw.NSViewAnimation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ViewAnimation) ID() objc.ID { return x.inner.Ptr() }
-
-// ViewAnimationFromID adopts an existing object pointer as a ViewAnimation (nil for 0).
+// ViewAnimationFromID adopts an existing Objective-C object as a ViewAnimation
+// (nil for 0), retaining it and registering a release finalizer.
 func ViewAnimationFromID(id objc.ID) *ViewAnimation {
 	if id == 0 {
 		return nil
 	}
-	return &ViewAnimation{inner: raw.NSViewAnimationFromID(id)}
+	x := &ViewAnimation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// viewAnimationAdopt wraps an Objective-C object that this code just created as a
+// ViewAnimation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func viewAnimationAdopt(id objc.ID) *ViewAnimation {
+	if id == 0 {
+		return nil
+	}
+	x := &ViewAnimation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ViewAnimation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ViewAnimation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ViewAnimation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns an NSViewAnimation object initialized with the supplied information.
 //
-// NewViewAnimationWithViewAnimations creates a new [ViewAnimation].
-func NewViewAnimationWithViewAnimations(viewAnimations *foundation.NSArray[objc.ID]) *ViewAnimation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSViewAnimation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithViewAnimations:"), viewAnimations.Ptr())
-	return &ViewAnimation{inner: raw.NSViewAnimationFromID(_id)}
+// NewViewAnimationWithViewAnimations creates a new ViewAnimation.
+func NewViewAnimationWithViewAnimations(viewAnimations []obj.Object) *ViewAnimation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSViewAnimation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithViewAnimations:"), purego.SliceToNSArray(viewAnimations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return viewAnimationAdopt(_id)
 }
 
 // The dictionaries defining the objects to animate.
 //
-// WithViewAnimations sets the collection, converting the Go slice to an NSArray.
-func (x *ViewAnimation) WithViewAnimations(items ...*foundation.NSDictionary[*foundation.NSString, objc.ID]) *ViewAnimation {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetViewAnimations(foundation.NSArrayFromID[objc.ID](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[objc.ID](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetViewAnimations(_arr)
+// WithViewAnimations sets the collection and returns the receiver so calls can be chained.
+func (x *ViewAnimation) WithViewAnimations(items ...obj.Object) *ViewAnimation {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewAnimations:"), _arr)
 	return x
 }
 
 // The current progress of the animation.
 //
-// WithCurrentProgress sets the currentProgress property and returns the receiver for chaining.
+// WithCurrentProgress sets currentProgress and returns the receiver so calls can be chained.
 func (x *ViewAnimation) WithCurrentProgress(currentProgress float32) *ViewAnimation {
-	x.inner.NSAnimation.SetCurrentProgress(currentProgress)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentProgress:"), currentProgress)
 	return x
 }
 
 // The duration of the animation, in seconds.
 //
-// WithDuration sets the duration property and returns the receiver for chaining.
+// WithDuration sets duration and returns the receiver so calls can be chained.
 func (x *ViewAnimation) WithDuration(duration float64) *ViewAnimation {
-	x.inner.NSAnimation.SetDuration(duration)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
 	return x
 }
 
 // The blocking mode of the animation.
 //
-// WithAnimationBlockingMode sets the animationBlockingMode property and returns the receiver for chaining.
-func (x *ViewAnimation) WithAnimationBlockingMode(animationBlockingMode NSAnimationBlockingMode) *ViewAnimation {
-	x.inner.NSAnimation.SetAnimationBlockingMode(raw.NSAnimationBlockingMode(animationBlockingMode))
+// WithAnimationBlockingMode sets animationBlockingMode and returns the receiver so calls can be chained.
+func (x *ViewAnimation) WithAnimationBlockingMode(animationBlockingMode AnimationBlockingMode) *ViewAnimation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationBlockingMode:"), animationBlockingMode)
 	return x
 }
 
 // The number of frame updates per second to generate for the animation.
 //
-// WithFrameRate sets the frameRate property and returns the receiver for chaining.
+// WithFrameRate sets frameRate and returns the receiver so calls can be chained.
 func (x *ViewAnimation) WithFrameRate(frameRate float32) *ViewAnimation {
-	x.inner.NSAnimation.SetFrameRate(frameRate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRate:"), frameRate)
 	return x
 }
 
 // The timing curve for the animation.
 //
-// WithAnimationCurve sets the animationCurve property and returns the receiver for chaining.
-func (x *ViewAnimation) WithAnimationCurve(animationCurve NSAnimationCurve) *ViewAnimation {
-	x.inner.NSAnimation.SetAnimationCurve(raw.NSAnimationCurve(animationCurve))
-	return x
-}
-
-// The animation delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *ViewAnimation) WithDelegate(delegate raw.NSAnimationDelegate) *ViewAnimation {
-	x.inner.NSAnimation.SetDelegate(delegate)
+// WithAnimationCurve sets animationCurve and returns the receiver so calls can be chained.
+func (x *ViewAnimation) WithAnimationCurve(animationCurve AnimationCurve) *ViewAnimation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationCurve:"), animationCurve)
 	return x
 }
 
 // An array of floating-point numbers representing current progress marks.
 //
-// WithProgressMarks sets the collection, converting the Go slice to an NSArray.
-func (x *ViewAnimation) WithProgressMarks(items ...*foundation.NSNumber) *ViewAnimation {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSAnimation.SetProgressMarks(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSAnimation.SetProgressMarks(_arr)
+// WithProgressMarks sets the collection and returns the receiver so calls can be chained.
+func (x *ViewAnimation) WithProgressMarks(items ...obj.Object) *ViewAnimation {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressMarks:"), _arr)
 	return x
 }
 
-// ViewAnimations calls the underlying ViewAnimations.
-func (x *ViewAnimation) ViewAnimations() *foundation.NSArray[objc.ID] {
-	return x.inner.ViewAnimations()
+// ViewAnimations returns the collection as a Go slice.
+func (x *ViewAnimation) ViewAnimations() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewAnimations"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetViewAnimations calls the underlying SetViewAnimations.
-func (x *ViewAnimation) SetViewAnimations(viewAnimations *foundation.NSArray[objc.ID]) {
-	x.inner.SetViewAnimations(viewAnimations)
+func (x *ViewAnimation) SetViewAnimations(viewAnimations []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewAnimations:"), purego.SliceToNSArray(viewAnimations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
-
-func (x *ViewAnimation) asAnimation() *raw.NSAnimation { return &x.inner.NSAnimation }
 
 // ViewAnimationable is the interface implemented by [ViewAnimation], for mocking and DI.
 type ViewAnimationable interface {
-	Unwrap() *raw.NSViewAnimation
-	WithViewAnimations(items ...*foundation.NSDictionary[*foundation.NSString, objc.ID]) *ViewAnimation
+	obj.Object
+	WithViewAnimations(items ...obj.Object) *ViewAnimation
 	WithCurrentProgress(currentProgress float32) *ViewAnimation
 	WithDuration(duration float64) *ViewAnimation
-	WithAnimationBlockingMode(animationBlockingMode NSAnimationBlockingMode) *ViewAnimation
+	WithAnimationBlockingMode(animationBlockingMode AnimationBlockingMode) *ViewAnimation
 	WithFrameRate(frameRate float32) *ViewAnimation
-	WithAnimationCurve(animationCurve NSAnimationCurve) *ViewAnimation
-	WithDelegate(delegate raw.NSAnimationDelegate) *ViewAnimation
-	WithProgressMarks(items ...*foundation.NSNumber) *ViewAnimation
-	ViewAnimations() *foundation.NSArray[objc.ID]
-	SetViewAnimations(viewAnimations *foundation.NSArray[objc.ID])
+	WithAnimationCurve(animationCurve AnimationCurve) *ViewAnimation
+	WithProgressMarks(items ...obj.Object) *ViewAnimation
+	ViewAnimations() []obj.Object
+	SetViewAnimations(viewAnimations []obj.Object)
 }
 
 var _ ViewAnimationable = (*ViewAnimation)(nil)

@@ -5,964 +5,715 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An object that manages an app’s main event loop and resources used by all of that app’s objects.
 //
-// Application wraps [raw.NSApplication] with a fluent Go API.
+// Application is an idiomatic wrapper over the Objective-C class NSApplication.
 type Application struct {
-	inner *raw.NSApplication
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSApplication].
-func (x *Application) Unwrap() *raw.NSApplication { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Application) ID() objc.ID { return x.inner.Ptr() }
-
-// ApplicationFromID adopts an existing object pointer as a Application (nil for 0).
+// ApplicationFromID adopts an existing Objective-C object as a Application
+// (nil for 0), retaining it and registering a release finalizer.
 func ApplicationFromID(id objc.ID) *Application {
 	if id == 0 {
 		return nil
 	}
-	return &Application{inner: raw.NSApplicationFromID(id)}
-}
-
-// NewApplication creates a new [Application].
-func NewApplication() *Application {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSApplication")), objc.RegisterName("new"))
-	return &Application{inner: raw.NSApplicationFromID(_id)}
-}
-
-// The app delegate object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Application) WithDelegate(delegate raw.NSApplicationDelegate) *Application {
-	x.inner.SetDelegate(delegate)
+	x := &Application{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithMainMenu sets the mainMenu property and returns the receiver for chaining.
+// applicationAdopt wraps an Objective-C object that this code just created as a
+// Application (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func applicationAdopt(id objc.ID) *Application {
+	if id == 0 {
+		return nil
+	}
+	x := &Application{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Application) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Application) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Application) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewApplication creates a new Application.
+func NewApplication() *Application {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSApplication")), objc.RegisterName("new"))
+	return applicationAdopt(_id)
+}
+
+// WithMainMenu sets mainMenu and returns the receiver so calls can be chained.
 func (x *Application) WithMainMenu(mainMenu *Menu) *Application {
-	x.inner.SetMainMenu(mainMenu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMainMenu:"), objref.IDOf(mainMenu))
 	return x
 }
 
 // The help menu used by the app.
 //
-// WithHelpMenu sets the helpMenu property and returns the receiver for chaining.
+// WithHelpMenu sets helpMenu and returns the receiver so calls can be chained.
 func (x *Application) WithHelpMenu(helpMenu *Menu) *Application {
-	x.inner.SetHelpMenu(helpMenu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpMenu:"), objref.IDOf(helpMenu))
 	return x
 }
 
 // The image used for the app’s icon.
 //
-// WithApplicationIconImage sets the applicationIconImage property and returns the receiver for chaining.
+// WithApplicationIconImage sets applicationIconImage and returns the receiver so calls can be chained.
 func (x *Application) WithApplicationIconImage(applicationIconImage *Image) *Application {
-	x.inner.SetApplicationIconImage(applicationIconImage.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationIconImage:"), objref.IDOf(applicationIconImage))
 	return x
 }
 
 // The presentation options that should be in effect for the system when this app is active.
 //
-// WithPresentationOptions sets the presentationOptions property and returns the receiver for chaining.
-func (x *Application) WithPresentationOptions(presentationOptions NSApplicationPresentationOptions) *Application {
-	x.inner.SetPresentationOptions(raw.NSApplicationPresentationOptions(presentationOptions))
+// WithPresentationOptions sets presentationOptions and returns the receiver so calls can be chained.
+func (x *Application) WithPresentationOptions(presentationOptions ApplicationPresentationOptions) *Application {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresentationOptions:"), presentationOptions)
 	return x
 }
 
 // The appearance associated with the app’s windows.
 //
-// WithAppearance sets the appearance property and returns the receiver for chaining.
+// WithAppearance sets appearance and returns the receiver so calls can be chained.
 func (x *Application) WithAppearance(appearance *Appearance) *Application {
-	x.inner.SetAppearance(appearance.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppearance:"), objref.IDOf(appearance))
 	return x
 }
 
-// WithWindowsMenu sets the windowsMenu property and returns the receiver for chaining.
+// WithWindowsMenu sets windowsMenu and returns the receiver so calls can be chained.
 func (x *Application) WithWindowsMenu(windowsMenu *Menu) *Application {
-	x.inner.SetWindowsMenu(windowsMenu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindowsMenu:"), objref.IDOf(windowsMenu))
 	return x
 }
 
-// WithServicesMenu sets the servicesMenu property and returns the receiver for chaining.
+// WithServicesMenu sets servicesMenu and returns the receiver so calls can be chained.
 func (x *Application) WithServicesMenu(servicesMenu *Menu) *Application {
-	x.inner.SetServicesMenu(servicesMenu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServicesMenu:"), objref.IDOf(servicesMenu))
 	return x
 }
 
 // The object that provides the services the current app advertises in the Services menu of other apps.
 //
-// WithServicesProvider sets the servicesProvider property and returns the receiver for chaining.
-func (x *Application) WithServicesProvider(servicesProvider objc.ID) *Application {
-	x.inner.SetServicesProvider(servicesProvider)
+// WithServicesProvider sets servicesProvider and returns the receiver so calls can be chained.
+func (x *Application) WithServicesProvider(servicesProvider obj.Object) *Application {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServicesProvider:"), objref.IDOf(servicesProvider))
 	return x
 }
 
 // Whether or not a menu item to customize the NSTouchBar can be automatically added to the main menu. It will only actually be added when Touch Bar hardware or simulator is present. Defaults to NO. Setting this property to YES is the recommended way to add the customization menu item. But if non-standard placement of the menu item is needed, creating a menu item with an action of `toggleTouchBarCustomizationPalette:` can be used instead.
 //
-// WithAutomaticCustomizeTouchBarMenuItemEnabled sets the automaticCustomizeTouchBarMenuItemEnabled property and returns the receiver for chaining.
+// WithAutomaticCustomizeTouchBarMenuItemEnabled sets automaticCustomizeTouchBarMenuItemEnabled and returns the receiver so calls can be chained.
 func (x *Application) WithAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled bool) *Application {
-	x.inner.SetAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticCustomizeTouchBarMenuItemEnabled:"), automaticCustomizeTouchBarMenuItemEnabled)
 	return x
 }
 
 // The next responder after this one, or nil if it has none.
 //
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
 func (x *Application) WithNextResponder(nextResponder ResponderProvider) *Application {
-	x.inner.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
 // Returns the responder’s menu.
 //
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu sets menu and returns the receiver so calls can be chained.
 func (x *Application) WithMenu(menu *Menu) *Application {
-	x.inner.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
 // An object encapsulating a user activity supported by this responder.
 //
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *Application) WithUserActivity(userActivity *foundation.NSUserActivity) *Application {
-	x.inner.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+func (x *Application) WithUserActivity(userActivity obj.Object) *Application {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
 // The NSTouchBar object associated with the responder.
 //
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
 func (x *Application) WithTouchBar(touchBar *TouchBar) *Application {
-	x.inner.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
 // Hides all the receiver’s windows, and the next app in line is activated.
-//
-// Hide calls the underlying Hide.
-func (x *Application) Hide(sender objc.ID) {
-	x.inner.Hide(sender)
+func (x *Application) Hide(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hide:"), objref.IDOf(sender))
 }
 
-// Unhide calls the underlying Unhide.
-func (x *Application) Unhide(sender objc.ID) {
-	x.inner.Unhide(sender)
+func (x *Application) Unhide(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unhide:"), objref.IDOf(sender))
 }
 
 // Restores hidden windows without activating their owner (the receiver).
-//
-// UnhideWithoutActivation calls the underlying UnhideWithoutActivation.
 func (x *Application) UnhideWithoutActivation() {
-	x.inner.UnhideWithoutActivation()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unhideWithoutActivation"))
 }
 
-// WindowWithWindowNumber calls the underlying WindowWithWindowNumber.
 func (x *Application) WindowWithWindowNumber(windowNum int) *Window {
-	_r := x.inner.WindowWithWindowNumber(windowNum)
-	if _r == nil {
-		return nil
-	}
-	return &Window{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("windowWithWindowNumber:"), windowNum)
+	return WindowFromID(_r)
 }
 
 // Deactivates the receiver.
-//
-// Deactivate calls the underlying Deactivate.
 func (x *Application) Deactivate() {
-	x.inner.Deactivate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deactivate"))
 }
 
 // Makes the receiver the active app. - Parameter ignoreOtherApps: If `NO`, the app is activated only if no other app is currently active. If `YES`, the app activates regardless.
-//
-// ActivateIgnoringOtherApps calls the underlying ActivateIgnoringOtherApps.
 func (x *Application) ActivateIgnoringOtherApps(ignoreOtherApps bool) {
-	x.inner.ActivateIgnoringOtherApps(ignoreOtherApps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activateIgnoringOtherApps:"), ignoreOtherApps)
 }
 
 // Activates the receiver app, if appropriate.
-//
-// Activate calls the underlying Activate.
 func (x *Application) Activate() {
-	x.inner.Activate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activate"))
 }
 
 // Explicitly allows another app to make itself active.
-//
-// YieldActivationToApplication calls the underlying YieldActivationToApplication.
-func (x *Application) YieldActivationToApplication(application *raw.NSRunningApplication) {
-	x.inner.YieldActivationToApplication(application)
+func (x *Application) YieldActivationToApplication(application *RunningApplication) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("yieldActivationToApplication:"), objref.IDOf(application))
 }
 
 // Explicitly allows another app to make itself active.
-//
-// YieldActivationToApplicationWithBundleIdentifier calls the underlying YieldActivationToApplicationWithBundleIdentifier.
 func (x *Application) YieldActivationToApplicationWithBundleIdentifier(bundleIdentifier string) {
-	x.inner.YieldActivationToApplicationWithBundleIdentifier(foundation.NSStringStringWithUTF8String(bundleIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("yieldActivationToApplicationWithBundleIdentifier:"), purego.NSString(bundleIdentifier))
 }
 
 // Hides all apps, except the receiver.
-//
-// HideOtherApplications calls the underlying HideOtherApplications.
-func (x *Application) HideOtherApplications(sender objc.ID) {
-	x.inner.HideOtherApplications(sender)
+func (x *Application) HideOtherApplications(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hideOtherApplications:"), objref.IDOf(sender))
 }
 
 // Unhides all apps, including the receiver.
-//
-// UnhideAllApplications calls the underlying UnhideAllApplications.
-func (x *Application) UnhideAllApplications(sender objc.ID) {
-	x.inner.UnhideAllApplications(sender)
+func (x *Application) UnhideAllApplications(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unhideAllApplications:"), objref.IDOf(sender))
 }
 
 // Activates the app, opens any files specified by the NSOpen user default, and unhighlights the app’s icon.
-//
-// FinishLaunching calls the underlying FinishLaunching.
 func (x *Application) FinishLaunching() {
-	x.inner.FinishLaunching()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishLaunching"))
 }
 
 // Starts the main event loop.
-//
-// Run calls the underlying Run.
 func (x *Application) Run() {
-	x.inner.Run()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("run"))
 }
 
-// RunModalForWindow calls the underlying RunModalForWindow.
-func (x *Application) RunModalForWindow(window *raw.NSWindow) int {
-	return x.inner.RunModalForWindow(window)
+func (x *Application) RunModalForWindow(window *Window) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalForWindow:"), objref.IDOf(window))
+	return _r
 }
 
 // Stops the main event loop.
-//
-// Stop calls the underlying Stop.
-func (x *Application) Stop(sender objc.ID) {
-	x.inner.Stop(sender)
+func (x *Application) Stop(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop:"), objref.IDOf(sender))
 }
 
-// StopModal calls the underlying StopModal.
 func (x *Application) StopModal() {
-	x.inner.StopModal()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopModal"))
 }
 
-// StopModalWithCode calls the underlying StopModalWithCode.
 func (x *Application) StopModalWithCode(returnCode int) {
-	x.inner.StopModalWithCode(returnCode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopModalWithCode:"), returnCode)
 }
 
-// AbortModal calls the underlying AbortModal.
 func (x *Application) AbortModal() {
-	x.inner.AbortModal()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("abortModal"))
 }
 
-// BeginModalSessionForWindow calls the underlying BeginModalSessionForWindow.
-func (x *Application) BeginModalSessionForWindow(window *raw.NSWindow) unsafe.Pointer {
-	return x.inner.BeginModalSessionForWindow(window)
+func (x *Application) BeginModalSessionForWindow(window *Window) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginModalSessionForWindow:"), objref.IDOf(window))
+	return obj.Wrap(_r)
 }
 
-// RunModalSession calls the underlying RunModalSession.
-func (x *Application) RunModalSession(session unsafe.Pointer) int {
-	return x.inner.RunModalSession(session)
+func (x *Application) RunModalSession(session obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalSession:"), objref.IDOf(session))
+	return _r
 }
 
-// EndModalSession calls the underlying EndModalSession.
-func (x *Application) EndModalSession(session unsafe.Pointer) {
-	x.inner.EndModalSession(session)
+func (x *Application) EndModalSession(session obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endModalSession:"), objref.IDOf(session))
 }
 
 // Terminates the receiver.
-//
-// Terminate calls the underlying Terminate.
-func (x *Application) Terminate(sender objc.ID) {
-	x.inner.Terminate(sender)
+func (x *Application) Terminate(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("terminate:"), objref.IDOf(sender))
 }
 
 // Starts a user attention request.
-//
-// RequestUserAttention calls the underlying RequestUserAttention.
-func (x *Application) RequestUserAttention(requestType NSRequestUserAttentionType) int {
-	return x.inner.RequestUserAttention(raw.NSRequestUserAttentionType(requestType))
+func (x *Application) RequestUserAttention(requestType RequestUserAttentionType) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("requestUserAttention:"), requestType)
+	return _r
 }
 
 // Cancels a previous user attention request.
-//
-// CancelUserAttentionRequest calls the underlying CancelUserAttentionRequest.
 func (x *Application) CancelUserAttentionRequest(request int) {
-	x.inner.CancelUserAttentionRequest(request)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelUserAttentionRequest:"), request)
 }
 
 // Execute a block for each of the app's windows. Set `*stop = YES` if desired, to halt the enumeration early.
-//
-// EnumerateWindowsWithOptionsUsing calls the underlying EnumerateWindowsWithOptionsUsing.
-func (x *Application) EnumerateWindowsWithOptionsUsing(options NSWindowListOptions, block func(*raw.NSWindow, *bool)) {
-	x.inner.EnumerateWindowsWithOptionsUsing(raw.NSWindowListOptions(options), block)
+func (x *Application) EnumerateWindowsWithOptionsUsing(options WindowListOptions, block func(obj.Object, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateWindowsWithOptions:usingBlock:"), options, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
-// PreventWindowOrdering calls the underlying PreventWindowOrdering.
 func (x *Application) PreventWindowOrdering() {
-	x.inner.PreventWindowOrdering()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preventWindowOrdering"))
 }
 
-// SetWindowsNeedUpdate calls the underlying SetWindowsNeedUpdate.
 func (x *Application) SetWindowsNeedUpdate(needUpdate bool) {
-	x.inner.SetWindowsNeedUpdate(needUpdate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindowsNeedUpdate:"), needUpdate)
 }
 
 // Sends an message to each onscreen window.
-//
-// UpdateWindows calls the underlying UpdateWindows.
 func (x *Application) UpdateWindows() {
-	x.inner.UpdateWindows()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWindows"))
 }
 
 // Returns the app’s activation policy.
-//
-// ActivationPolicy calls the underlying ActivationPolicy.
-func (x *Application) ActivationPolicy() NSApplicationActivationPolicy {
-	return NSApplicationActivationPolicy(x.inner.ActivationPolicy())
+func (x *Application) ActivationPolicy() ApplicationActivationPolicy {
+	_r := objc.Send[ApplicationActivationPolicy](objref.IDOf(x), objc.RegisterName("activationPolicy"))
+	return _r
 }
 
 // Attempts to modify the app’s activation policy.
-//
-// SetActivationPolicy calls the underlying SetActivationPolicy.
-func (x *Application) SetActivationPolicy(activationPolicy NSApplicationActivationPolicy) bool {
-	return x.inner.SetActivationPolicy(raw.NSApplicationActivationPolicy(activationPolicy))
+func (x *Application) SetActivationPolicy(activationPolicy ApplicationActivationPolicy) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setActivationPolicy:"), activationPolicy)
+	return _r
 }
 
 // Logs a given exception by calling NSLog().
-//
-// ReportException calls the underlying ReportException.
-func (x *Application) ReportException(exception *foundation.NSException) {
-	x.inner.ReportException(exception)
+func (x *Application) ReportException(exception obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reportException:"), objref.IDOf(exception))
 }
 
 // Responds to NSTerminateLater once the app knows whether it can terminate.
-//
-// ReplyToApplicationShouldTerminate calls the underlying ReplyToApplicationShouldTerminate.
 func (x *Application) ReplyToApplicationShouldTerminate(shouldTerminate bool) {
-	x.inner.ReplyToApplicationShouldTerminate(shouldTerminate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replyToApplicationShouldTerminate:"), shouldTerminate)
 }
 
 // Handles errors that might occur when the user attempts to open or print files.
-//
-// ReplyToOpenOrPrint calls the underlying ReplyToOpenOrPrint.
-func (x *Application) ReplyToOpenOrPrint(reply NSApplicationDelegateReply) {
-	x.inner.ReplyToOpenOrPrint(raw.NSApplicationDelegateReply(reply))
+func (x *Application) ReplyToOpenOrPrint(reply ApplicationDelegateReply) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replyToOpenOrPrint:"), reply)
 }
 
 // Opens the character palette.
-//
-// OrderFrontCharacterPalette calls the underlying OrderFrontCharacterPalette.
-func (x *Application) OrderFrontCharacterPalette(sender objc.ID) {
-	x.inner.OrderFrontCharacterPalette(sender)
+func (x *Application) OrderFrontCharacterPalette(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderFrontCharacterPalette:"), objref.IDOf(sender))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *Application) Delegate() raw.NSApplicationDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *Application) SetDelegate(delegate raw.NSApplicationDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// MainWindow calls the underlying MainWindow.
 func (x *Application) MainWindow() *Window {
-	_r := x.inner.MainWindow()
-	if _r == nil {
-		return nil
-	}
-	return &Window{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainWindow"))
+	return WindowFromID(_r)
 }
 
-// KeyWindow calls the underlying KeyWindow.
 func (x *Application) KeyWindow() *Window {
-	_r := x.inner.KeyWindow()
-	if _r == nil {
-		return nil
-	}
-	return &Window{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyWindow"))
+	return WindowFromID(_r)
 }
 
-// IsActive calls the underlying IsActive.
 func (x *Application) IsActive() bool {
-	return x.inner.IsActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+	return _r
 }
 
-// IsHidden calls the underlying IsHidden.
 func (x *Application) IsHidden() bool {
-	return x.inner.IsHidden()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+	return _r
 }
 
-// IsRunning calls the underlying IsRunning.
 func (x *Application) IsRunning() bool {
-	return x.inner.IsRunning()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRunning"))
+	return _r
 }
 
 // A boolean value indicating whether your application should suppress HDR content based on established policy. Built-in AppKit components such as NSImageView will automatically behave correctly with HDR content. You should use this value in conjunction with notifications (`NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification` and `NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification`) to suppress HDR content in your application when signaled to do so.
-//
-// ApplicationShouldSuppressHighDynamicRangeContent calls the underlying ApplicationShouldSuppressHighDynamicRangeContent.
 func (x *Application) ApplicationShouldSuppressHighDynamicRangeContent() bool {
-	return x.inner.ApplicationShouldSuppressHighDynamicRangeContent()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("applicationShouldSuppressHighDynamicRangeContent"))
+	return _r
 }
 
-// ModalWindow calls the underlying ModalWindow.
 func (x *Application) ModalWindow() *Window {
-	_r := x.inner.ModalWindow()
-	if _r == nil {
-		return nil
-	}
-	return &Window{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modalWindow"))
+	return WindowFromID(_r)
 }
 
 // Windows returns the collection as a Go slice.
 func (x *Application) Windows() []*Window {
-	arr := x.inner.Windows()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Window {
-		return &Window{inner: raw.NSWindowFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("windows"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
 }
 
-// MainMenu calls the underlying MainMenu.
 func (x *Application) MainMenu() *Menu {
-	_r := x.inner.MainMenu()
-	if _r == nil {
-		return nil
-	}
-	return &Menu{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainMenu"))
+	return MenuFromID(_r)
 }
 
-// SetMainMenu calls the underlying SetMainMenu.
-func (x *Application) SetMainMenu(mainMenu *raw.NSMenu) {
-	x.inner.SetMainMenu(mainMenu)
+func (x *Application) SetMainMenu(mainMenu *Menu) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMainMenu:"), objref.IDOf(mainMenu))
 }
 
-// Set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from `-helpMenu`).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.  @c NSApplication retains its Help menu and releases it when a different menu is set.
-//
-// HelpMenu calls the underlying HelpMenu.
+// Set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from `-helpMenu`).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.
 func (x *Application) HelpMenu() *Menu {
-	_r := x.inner.HelpMenu()
-	if _r == nil {
-		return nil
-	}
-	return &Menu{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("helpMenu"))
+	return MenuFromID(_r)
 }
 
-// Set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from `-helpMenu`).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.  @c NSApplication retains its Help menu and releases it when a different menu is set.
-//
-// SetHelpMenu calls the underlying SetHelpMenu.
-func (x *Application) SetHelpMenu(helpMenu *raw.NSMenu) {
-	x.inner.SetHelpMenu(helpMenu)
+// Set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from `-helpMenu`).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.
+func (x *Application) SetHelpMenu(helpMenu *Menu) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpMenu:"), objref.IDOf(helpMenu))
 }
 
-// ApplicationIconImage calls the underlying ApplicationIconImage.
 func (x *Application) ApplicationIconImage() *Image {
-	_r := x.inner.ApplicationIconImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationIconImage"))
+	return ImageFromID(_r)
 }
 
-// SetApplicationIconImage calls the underlying SetApplicationIconImage.
-func (x *Application) SetApplicationIconImage(applicationIconImage *raw.NSImage) {
-	x.inner.SetApplicationIconImage(applicationIconImage)
+func (x *Application) SetApplicationIconImage(applicationIconImage *Image) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationIconImage:"), objref.IDOf(applicationIconImage))
 }
 
-// DockTile calls the underlying DockTile.
 func (x *Application) DockTile() *DockTile {
-	_r := x.inner.DockTile()
-	if _r == nil {
-		return nil
-	}
-	return &DockTile{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dockTile"))
+	return DockTileFromID(_r)
 }
 
-// Gets or sets the @c presentationOptions that should be in effect for the system when this application is the active application.  Only certain combinations of @c NSApplicationPresentationOptions flags are allowed, as detailed in the AppKit Release Notes and the reference documentation for `-setPresentationOptions:`.  When given an invalid combination of option flags, `-setPresentationOptions:` raises an exception.
-//
-// PresentationOptions calls the underlying PresentationOptions.
-func (x *Application) PresentationOptions() NSApplicationPresentationOptions {
-	return NSApplicationPresentationOptions(x.inner.PresentationOptions())
+// Gets or sets the
+func (x *Application) PresentationOptions() ApplicationPresentationOptions {
+	_r := objc.Send[ApplicationPresentationOptions](objref.IDOf(x), objc.RegisterName("presentationOptions"))
+	return _r
 }
 
-// Gets or sets the @c presentationOptions that should be in effect for the system when this application is the active application.  Only certain combinations of @c NSApplicationPresentationOptions flags are allowed, as detailed in the AppKit Release Notes and the reference documentation for `-setPresentationOptions:`.  When given an invalid combination of option flags, `-setPresentationOptions:` raises an exception.
-//
-// SetPresentationOptions calls the underlying SetPresentationOptions.
-func (x *Application) SetPresentationOptions(presentationOptions NSApplicationPresentationOptions) {
-	x.inner.SetPresentationOptions(raw.NSApplicationPresentationOptions(presentationOptions))
+// Gets or sets the
+func (x *Application) SetPresentationOptions(presentationOptions ApplicationPresentationOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresentationOptions:"), presentationOptions)
 }
 
-// @return The set of application presentation options that are currently in effect for the system. These are the presentation options that have been put into effect by the currently active application.
-//
-// CurrentSystemPresentationOptions calls the underlying CurrentSystemPresentationOptions.
-func (x *Application) CurrentSystemPresentationOptions() NSApplicationPresentationOptions {
-	return NSApplicationPresentationOptions(x.inner.CurrentSystemPresentationOptions())
+func (x *Application) CurrentSystemPresentationOptions() ApplicationPresentationOptions {
+	_r := objc.Send[ApplicationPresentationOptions](objref.IDOf(x), objc.RegisterName("currentSystemPresentationOptions"))
+	return _r
 }
 
-// OcclusionState calls the underlying OcclusionState.
-func (x *Application) OcclusionState() NSApplicationOcclusionState {
-	return NSApplicationOcclusionState(x.inner.OcclusionState())
+func (x *Application) OcclusionState() ApplicationOcclusionState {
+	_r := objc.Send[ApplicationOcclusionState](objref.IDOf(x), objc.RegisterName("occlusionState"))
+	return _r
 }
 
-// IsProtectedDataAvailable calls the underlying IsProtectedDataAvailable.
 func (x *Application) IsProtectedDataAvailable() bool {
-	return x.inner.IsProtectedDataAvailable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isProtectedDataAvailable"))
+	return _r
 }
 
-// Appearance calls the underlying Appearance.
 func (x *Application) Appearance() *Appearance {
-	_r := x.inner.Appearance()
-	if _r == nil {
-		return nil
-	}
-	return &Appearance{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appearance"))
+	return AppearanceFromID(_r)
 }
 
-// SetAppearance calls the underlying SetAppearance.
-func (x *Application) SetAppearance(appearance *raw.NSAppearance) {
-	x.inner.SetAppearance(appearance)
+func (x *Application) SetAppearance(appearance *Appearance) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppearance:"), objref.IDOf(appearance))
 }
 
-// EffectiveAppearance calls the underlying EffectiveAppearance.
 func (x *Application) EffectiveAppearance() *Appearance {
-	_r := x.inner.EffectiveAppearance()
-	if _r == nil {
-		return nil
-	}
-	return &Appearance{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectiveAppearance"))
+	return AppearanceFromID(_r)
 }
 
 // Dispatches an event to other objects.
-//
-// SendEvent calls the underlying SendEvent.
-func (x *Application) SendEvent(event *raw.NSEvent) {
-	x.inner.SendEvent(event)
+func (x *Application) SendEvent(event *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendEvent:"), objref.IDOf(event))
 }
 
 // Adds a given event to the receiver’s event queue.
-//
-// PostEventAtStart calls the underlying PostEventAtStart.
-func (x *Application) PostEventAtStart(event *raw.NSEvent, atStart bool) {
-	x.inner.PostEventAtStart(event, atStart)
+func (x *Application) PostEventAtStart(event *Event, atStart bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postEvent:atStart:"), objref.IDOf(event), atStart)
 }
 
 // Returns the next event matching a given mask, or nil if no such event is found before a specified expiration date.
-//
-// NextEventMatchingMaskUntilDateInModeDequeue calls the underlying NextEventMatchingMaskUntilDateInModeDequeue.
-func (x *Application) NextEventMatchingMaskUntilDateInModeDequeue(mask NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *Event {
-	_r := x.inner.NextEventMatchingMaskUntilDateInModeDequeue(raw.NSEventMask(mask), expiration, mode, deqFlag)
-	if _r == nil {
-		return nil
-	}
-	return &Event{inner: _r}
+func (x *Application) NextEventMatchingMaskUntilDateInModeDequeue(mask EventMask, expiration obj.Object, mode obj.Object, deqFlag bool) *Event {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextEventMatchingMask:untilDate:inMode:dequeue:"), mask, objref.IDOf(expiration), objref.IDOf(mode), deqFlag)
+	return EventFromID(_r)
 }
 
 // Removes all events matching the given mask and generated before the specified event.
-//
-// DiscardEventsMatchingMaskBeforeEvent calls the underlying DiscardEventsMatchingMaskBeforeEvent.
-func (x *Application) DiscardEventsMatchingMaskBeforeEvent(mask NSEventMask, lastEvent *raw.NSEvent) {
-	x.inner.DiscardEventsMatchingMaskBeforeEvent(raw.NSEventMask(mask), lastEvent)
+func (x *Application) DiscardEventsMatchingMaskBeforeEvent(mask EventMask, lastEvent *Event) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discardEventsMatchingMask:beforeEvent:"), mask, objref.IDOf(lastEvent))
 }
 
-// CurrentEvent calls the underlying CurrentEvent.
 func (x *Application) CurrentEvent() *Event {
-	_r := x.inner.CurrentEvent()
-	if _r == nil {
-		return nil
-	}
-	return &Event{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentEvent"))
+	return EventFromID(_r)
 }
 
-// Sends the given action message to the given target.
-//
-// SendActionToFrom calls the underlying SendActionToFrom.
-func (x *Application) SendActionToFrom(action objc.SEL, target objc.ID, sender objc.ID) bool {
-	return x.inner.SendActionToFrom(action, target, sender)
+func (x *Application) ArrangeInFront(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrangeInFront:"), objref.IDOf(sender))
 }
 
-// Returns the object that receives the action message specified by the given selector.
-//
-// TargetForAction calls the underlying TargetForAction.
-func (x *Application) TargetForAction(action objc.SEL) objc.ID {
-	return x.inner.TargetForAction(action)
+func (x *Application) RemoveWindowsItem(win *Window) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeWindowsItem:"), objref.IDOf(win))
 }
 
-// Searches for an object that can receive the message specified by the given selector.
-//
-// TargetForActionToFrom calls the underlying TargetForActionToFrom.
-func (x *Application) TargetForActionToFrom(action objc.SEL, target objc.ID, sender objc.ID) objc.ID {
-	return x.inner.TargetForActionToFrom(action, target, sender)
+func (x *Application) AddWindowsItemTitleFilename(win *Window, string_ string, isFilename bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addWindowsItem:title:filename:"), objref.IDOf(win), purego.NSString(string_), isFilename)
 }
 
-// ArrangeInFront calls the underlying ArrangeInFront.
-func (x *Application) ArrangeInFront(sender objc.ID) {
-	x.inner.ArrangeInFront(sender)
+func (x *Application) ChangeWindowsItemTitleFilename(win *Window, string_ string, isFilename bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeWindowsItem:title:filename:"), objref.IDOf(win), purego.NSString(string_), isFilename)
 }
 
-// RemoveWindowsItem calls the underlying RemoveWindowsItem.
-func (x *Application) RemoveWindowsItem(win *raw.NSWindow) {
-	x.inner.RemoveWindowsItem(win)
+func (x *Application) UpdateWindowsItem(win *Window) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWindowsItem:"), objref.IDOf(win))
 }
 
-// AddWindowsItemTitleFilename calls the underlying AddWindowsItemTitleFilename.
-func (x *Application) AddWindowsItemTitleFilename(win *raw.NSWindow, string_ string, isFilename bool) {
-	x.inner.AddWindowsItemTitleFilename(win, foundation.NSStringStringWithUTF8String(string_), isFilename)
+func (x *Application) MiniaturizeAll(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("miniaturizeAll:"), objref.IDOf(sender))
 }
 
-// ChangeWindowsItemTitleFilename calls the underlying ChangeWindowsItemTitleFilename.
-func (x *Application) ChangeWindowsItemTitleFilename(win *raw.NSWindow, string_ string, isFilename bool) {
-	x.inner.ChangeWindowsItemTitleFilename(win, foundation.NSStringStringWithUTF8String(string_), isFilename)
-}
-
-// UpdateWindowsItem calls the underlying UpdateWindowsItem.
-func (x *Application) UpdateWindowsItem(win *raw.NSWindow) {
-	x.inner.UpdateWindowsItem(win)
-}
-
-// MiniaturizeAll calls the underlying MiniaturizeAll.
-func (x *Application) MiniaturizeAll(sender objc.ID) {
-	x.inner.MiniaturizeAll(sender)
-}
-
-// WindowsMenu calls the underlying WindowsMenu.
 func (x *Application) WindowsMenu() *Menu {
-	_r := x.inner.WindowsMenu()
-	if _r == nil {
-		return nil
-	}
-	return &Menu{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("windowsMenu"))
+	return MenuFromID(_r)
 }
 
-// SetWindowsMenu calls the underlying SetWindowsMenu.
-func (x *Application) SetWindowsMenu(windowsMenu *raw.NSMenu) {
-	x.inner.SetWindowsMenu(windowsMenu)
+func (x *Application) SetWindowsMenu(windowsMenu *Menu) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWindowsMenu:"), objref.IDOf(windowsMenu))
 }
 
 // A Boolean value indicating whether keyboard navigation is enabled in System Settings > Keyboard. - Note: The value of this property is `YES` if keyboard navigation is enabled or `NO` if it’s not. You might use this value to implement your own key loop or to implement in-control tabbing behavior similar to `NSTableView`. Because of the nature of the preference storage, you won’t be notified of changes to this property if you attempt to observe it through key-value observing; however, accessing this property is fairly inexpensive, so you can access it directly rather than caching it. - Note: This property’s value isn’t necessarily reflective of the separate accessibility setting named “Full Keyboard Access” in System Settings > Accessibility > Keyboard.
-//
-// IsFullKeyboardAccessEnabled calls the underlying IsFullKeyboardAccessEnabled.
 func (x *Application) IsFullKeyboardAccessEnabled() bool {
-	return x.inner.IsFullKeyboardAccessEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFullKeyboardAccessEnabled"))
+	return _r
 }
 
-// RegisterServicesMenuSendTypesReturnTypes calls the underlying RegisterServicesMenuSendTypesReturnTypes.
-func (x *Application) RegisterServicesMenuSendTypesReturnTypes(sendTypes *foundation.NSArray[*foundation.NSString], returnTypes *foundation.NSArray[*foundation.NSString]) {
-	x.inner.RegisterServicesMenuSendTypesReturnTypes(sendTypes, returnTypes)
+func (x *Application) RegisterServicesMenuSendTypesReturnTypes(sendTypes []obj.Object, returnTypes []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerServicesMenuSendTypes:returnTypes:"), purego.SliceToNSArray(sendTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(returnTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// ServicesMenu calls the underlying ServicesMenu.
 func (x *Application) ServicesMenu() *Menu {
-	_r := x.inner.ServicesMenu()
-	if _r == nil {
-		return nil
-	}
-	return &Menu{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("servicesMenu"))
+	return MenuFromID(_r)
 }
 
-// SetServicesMenu calls the underlying SetServicesMenu.
-func (x *Application) SetServicesMenu(servicesMenu *raw.NSMenu) {
-	x.inner.SetServicesMenu(servicesMenu)
+func (x *Application) SetServicesMenu(servicesMenu *Menu) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServicesMenu:"), objref.IDOf(servicesMenu))
 }
 
-// ServicesProvider calls the underlying ServicesProvider.
-func (x *Application) ServicesProvider() objc.ID {
-	return x.inner.ServicesProvider()
+func (x *Application) ServicesProvider() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("servicesProvider"))
+	return obj.Wrap(_r)
 }
 
-// SetServicesProvider calls the underlying SetServicesProvider.
-func (x *Application) SetServicesProvider(servicesProvider objc.ID) {
-	x.inner.SetServicesProvider(servicesProvider)
+func (x *Application) SetServicesProvider(servicesProvider obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServicesProvider:"), objref.IDOf(servicesProvider))
 }
 
-// OrderFrontStandardAboutPanel calls the underlying OrderFrontStandardAboutPanel.
-func (x *Application) OrderFrontStandardAboutPanel(sender objc.ID) {
-	x.inner.OrderFrontStandardAboutPanel(sender)
+func (x *Application) OrderFrontStandardAboutPanel(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderFrontStandardAboutPanel:"), objref.IDOf(sender))
 }
 
-// OrderFrontStandardAboutPanelWithOptions calls the underlying OrderFrontStandardAboutPanelWithOptions.
-func (x *Application) OrderFrontStandardAboutPanelWithOptions(optionsDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.OrderFrontStandardAboutPanelWithOptions(optionsDictionary)
+func (x *Application) OrderFrontStandardAboutPanelWithOptions(optionsDictionary obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderFrontStandardAboutPanelWithOptions:"), objref.IDOf(optionsDictionary))
 }
 
-// UserInterfaceLayoutDirection calls the underlying UserInterfaceLayoutDirection.
-func (x *Application) UserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection {
-	return NSUserInterfaceLayoutDirection(x.inner.UserInterfaceLayoutDirection())
+func (x *Application) UserInterfaceLayoutDirection() UserInterfaceLayoutDirection {
+	_r := objc.Send[UserInterfaceLayoutDirection](objref.IDOf(x), objc.RegisterName("userInterfaceLayoutDirection"))
+	return _r
 }
 
 // Disables relaunching the app on login.
-//
-// DisableRelaunchOnLogin calls the underlying DisableRelaunchOnLogin.
 func (x *Application) DisableRelaunchOnLogin() {
-	x.inner.DisableRelaunchOnLogin()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableRelaunchOnLogin"))
 }
 
 // Enables relaunching the app on login.
-//
-// EnableRelaunchOnLogin calls the underlying EnableRelaunchOnLogin.
 func (x *Application) EnableRelaunchOnLogin() {
-	x.inner.EnableRelaunchOnLogin()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableRelaunchOnLogin"))
 }
 
 // Register for notifications sent by Apple Push Notification service (APNs).
-//
-// RegisterForRemoteNotifications calls the underlying RegisterForRemoteNotifications.
 func (x *Application) RegisterForRemoteNotifications() {
-	x.inner.RegisterForRemoteNotifications()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerForRemoteNotifications"))
 }
 
 // Unregister for notifications received from Apple Push Notification service.
-//
-// UnregisterForRemoteNotifications calls the underlying UnregisterForRemoteNotifications.
 func (x *Application) UnregisterForRemoteNotifications() {
-	x.inner.UnregisterForRemoteNotifications()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unregisterForRemoteNotifications"))
 }
 
 // Register to receive notifications of the specified types from a provider through the Apple Push Notification service.
-//
-// RegisterForRemoteNotificationTypes calls the underlying RegisterForRemoteNotificationTypes.
-func (x *Application) RegisterForRemoteNotificationTypes(types NSRemoteNotificationType) {
-	x.inner.RegisterForRemoteNotificationTypes(raw.NSRemoteNotificationType(types))
+func (x *Application) RegisterForRemoteNotificationTypes(types RemoteNotificationType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerForRemoteNotificationTypes:"), types)
 }
 
-// @return @c YES if the application is currently registered for remote notifications, taking into account any systemwide settings; doesn't relate to connectivity.
-//
-// IsRegisteredForRemoteNotifications calls the underlying IsRegisteredForRemoteNotifications.
 func (x *Application) IsRegisteredForRemoteNotifications() bool {
-	return x.inner.IsRegisteredForRemoteNotifications()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRegisteredForRemoteNotifications"))
+	return _r
 }
 
-// EnabledRemoteNotificationTypes calls the underlying EnabledRemoteNotificationTypes.
-func (x *Application) EnabledRemoteNotificationTypes() NSRemoteNotificationType {
-	return NSRemoteNotificationType(x.inner.EnabledRemoteNotificationTypes())
+func (x *Application) EnabledRemoteNotificationTypes() RemoteNotificationType {
+	_r := objc.Send[RemoteNotificationType](objref.IDOf(x), objc.RegisterName("enabledRemoteNotificationTypes"))
+	return _r
 }
 
 // `-runModalForWindow:relativeToWindow:` was deprecated in Mac OS X 10.0. Please use `-[NSWindow beginSheet:completionHandler:]` instead.
-//
-// RunModalForWindowRelativeToWindow calls the underlying RunModalForWindowRelativeToWindow.
-func (x *Application) RunModalForWindowRelativeToWindow(window *raw.NSWindow, docWindow *raw.NSWindow) int {
-	return x.inner.RunModalForWindowRelativeToWindow(window, docWindow)
+func (x *Application) RunModalForWindowRelativeToWindow(window *Window, docWindow *Window) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalForWindow:relativeToWindow:"), objref.IDOf(window), objref.IDOf(docWindow))
+	return _r
 }
 
 // `-beginModalSessionForWindow:relativeToWindow:` was deprecated in Mac OS X 10.0. Please use `-[NSWindow beginSheet:completionHandler:]` instead.
-//
-// BeginModalSessionForWindowRelativeToWindow calls the underlying BeginModalSessionForWindowRelativeToWindow.
-func (x *Application) BeginModalSessionForWindowRelativeToWindow(window *raw.NSWindow, docWindow *raw.NSWindow) unsafe.Pointer {
-	return x.inner.BeginModalSessionForWindowRelativeToWindow(window, docWindow)
+func (x *Application) BeginModalSessionForWindowRelativeToWindow(window *Window, docWindow *Window) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginModalSessionForWindow:relativeToWindow:"), objref.IDOf(window), objref.IDOf(docWindow))
+	return obj.Wrap(_r)
 }
 
 // `-application:printFiles:` was deprecated in Mac OS X 10.4. Implement `-application:printFiles:withSettings:showPrintPanels:` in your application delegate instead.
-//
-// ApplicationPrintFiles calls the underlying ApplicationPrintFiles.
-func (x *Application) ApplicationPrintFiles(sender *raw.NSApplication, filenames *foundation.NSArray[*foundation.NSString]) {
-	x.inner.ApplicationPrintFiles(sender, filenames)
+func (x *Application) ApplicationPrintFiles(sender *Application, filenames []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("application:printFiles:"), objref.IDOf(sender), purego.SliceToNSArray(filenames, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// `NSWindow`'s `-beginSheet:completionHandler:` and `-endSheet:returnCode:` should be used instead.  `NSApplication`'s `-beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo:` will continue to work as it previously did, leaking contextInfo and failing when there is already an existing sheet.
-//
-// BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo calls the underlying BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo.
-func (x *Application) BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheet *raw.NSWindow, docWindow *raw.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheet, docWindow, modalDelegate, didEndSelector, contextInfo)
+func (x *Application) EndSheet(sheet *Window) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endSheet:"), objref.IDOf(sheet))
 }
 
-// EndSheet calls the underlying EndSheet.
-func (x *Application) EndSheet(sheet *raw.NSWindow) {
-	x.inner.EndSheet(sheet)
-}
-
-// EndSheetReturnCode calls the underlying EndSheetReturnCode.
-func (x *Application) EndSheetReturnCode(sheet *raw.NSWindow, returnCode int) {
-	x.inner.EndSheetReturnCode(sheet, returnCode)
-}
-
-// MakeWindowsPerformInOrder calls the underlying MakeWindowsPerformInOrder.
-func (x *Application) MakeWindowsPerformInOrder(selector objc.SEL, inOrder bool) *Window {
-	_r := x.inner.MakeWindowsPerformInOrder(selector, inOrder)
-	if _r == nil {
-		return nil
-	}
-	return &Window{inner: _r}
+func (x *Application) EndSheetReturnCode(sheet *Window, returnCode int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endSheet:returnCode:"), objref.IDOf(sheet), returnCode)
 }
 
 // This method is deprecated as of macOS 10.12. Beginning in OS X 10.11 it would always return nil. Prior to this it would return an undefined graphics context that was not generally suitable for drawing.
-//
-// Context calls the underlying Context.
 func (x *Application) Context() *GraphicsContext {
-	_r := x.inner.Context()
-	if _r == nil {
-		return nil
-	}
-	return &GraphicsContext{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
+	return GraphicsContextFromID(_r)
 }
 
 // Places the receiver in context-sensitive help mode.
-//
-// ActivateContextHelpMode calls the underlying ActivateContextHelpMode.
-func (x *Application) ActivateContextHelpMode(sender objc.ID) {
-	x.inner.ActivateContextHelpMode(sender)
+func (x *Application) ActivateContextHelpMode(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activateContextHelpMode:"), objref.IDOf(sender))
 }
 
 // If your project is properly registered, and the necessary keys have been set in the property list, this method launches Help Viewer and displays the first page of your app’s help book.
-//
-// ShowHelp calls the underlying ShowHelp.
-func (x *Application) ShowHelp(sender objc.ID) {
-	x.inner.ShowHelp(sender)
+func (x *Application) ShowHelp(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showHelp:"), objref.IDOf(sender))
 }
 
 // Show or hides the interface for customizing the Touch Bar.
-//
-// ToggleTouchBarCustomizationPalette calls the underlying ToggleTouchBarCustomizationPalette.
-func (x *Application) ToggleTouchBarCustomizationPalette(sender objc.ID) {
-	x.inner.ToggleTouchBarCustomizationPalette(sender)
+func (x *Application) ToggleTouchBarCustomizationPalette(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toggleTouchBarCustomizationPalette:"), objref.IDOf(sender))
 }
 
 // Whether or not a menu item to customize the NSTouchBar can be automatically added to the main menu. It will only actually be added when Touch Bar hardware or simulator is present. Defaults to NO. Setting this property to YES is the recommended way to add the customization menu item. But if non-standard placement of the menu item is needed, creating a menu item with an action of `toggleTouchBarCustomizationPalette:` can be used instead.
-//
-// IsAutomaticCustomizeTouchBarMenuItemEnabled calls the underlying IsAutomaticCustomizeTouchBarMenuItemEnabled.
 func (x *Application) IsAutomaticCustomizeTouchBarMenuItemEnabled() bool {
-	return x.inner.IsAutomaticCustomizeTouchBarMenuItemEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAutomaticCustomizeTouchBarMenuItemEnabled"))
+	return _r
 }
 
-// SetAutomaticCustomizeTouchBarMenuItemEnabled calls the underlying SetAutomaticCustomizeTouchBarMenuItemEnabled.
 func (x *Application) SetAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled bool) {
-	x.inner.SetAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticCustomizeTouchBarMenuItemEnabled:"), automaticCustomizeTouchBarMenuItemEnabled)
 }
 
-// OrderFrontColorPanel calls the underlying OrderFrontColorPanel.
-func (x *Application) OrderFrontColorPanel(sender objc.ID) {
-	x.inner.OrderFrontColorPanel(sender)
+func (x *Application) OrderFrontColorPanel(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderFrontColorPanel:"), objref.IDOf(sender))
 }
 
-// RunPageLayout calls the underlying RunPageLayout.
-func (x *Application) RunPageLayout(sender objc.ID) {
-	x.inner.RunPageLayout(sender)
+func (x *Application) RunPageLayout(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runPageLayout:"), objref.IDOf(sender))
 }
 
 // OrderedDocuments returns the collection as a Go slice.
 func (x *Application) OrderedDocuments() []*Document {
-	arr := x.inner.OrderedDocuments()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Document {
-		return &Document{inner: raw.NSDocumentFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderedDocuments"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Document { return DocumentFromID(_id) })
 }
 
 // OrderedWindows returns the collection as a Go slice.
 func (x *Application) OrderedWindows() []*Window {
-	arr := x.inner.OrderedWindows()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Window {
-		return &Window{inner: raw.NSWindowFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderedWindows"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
 }
 
-// Register an object that provides help data to your app.
-//
-// RegisterUserInterfaceItemSearchHandler calls the underlying RegisterUserInterfaceItemSearchHandler.
-func (x *Application) RegisterUserInterfaceItemSearchHandler(handler raw.NSUserInterfaceItemSearching) {
-	x.inner.RegisterUserInterfaceItemSearchHandler(handler)
-}
-
-// Unregister an object that provides help data to your app.
-//
-// UnregisterUserInterfaceItemSearchHandler calls the underlying UnregisterUserInterfaceItemSearchHandler.
-func (x *Application) UnregisterUserInterfaceItemSearchHandler(handler raw.NSUserInterfaceItemSearching) {
-	x.inner.UnregisterUserInterfaceItemSearchHandler(handler)
-}
-
-// Searches for the string in the user interface.
-//
-// SearchStringInUserInterfaceItemStringSearchRangeFoundRange calls the underlying SearchStringInUserInterfaceItemStringSearchRangeFoundRange.
-func (x *Application) SearchStringInUserInterfaceItemStringSearchRangeFoundRange(searchString string, stringToSearch string, searchRange foundation.NSRange, foundRange *foundation.NSRange) bool {
-	return x.inner.SearchStringInUserInterfaceItemStringSearchRangeFoundRange(foundation.NSStringStringWithUTF8String(searchString), foundation.NSStringStringWithUTF8String(stringToSearch), searchRange, foundRange)
-}
-
-// RestoreWindowWithIdentifierStateCompletionHandler calls the underlying RestoreWindowWithIdentifierStateCompletionHandler.
-func (x *Application) RestoreWindowWithIdentifierStateCompletionHandler(identifier *foundation.NSString, state *foundation.NSCoder, completionHandler func(*raw.NSWindow, unsafe.Pointer)) bool {
-	return x.inner.RestoreWindowWithIdentifierStateCompletionHandler(identifier, state, completionHandler)
-}
-
-// ExtendStateRestoration calls the underlying ExtendStateRestoration.
 func (x *Application) ExtendStateRestoration() {
-	x.inner.ExtendStateRestoration()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendStateRestoration"))
 }
 
-// CompleteStateRestoration calls the underlying CompleteStateRestoration.
 func (x *Application) CompleteStateRestoration() {
-	x.inner.CompleteStateRestoration()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeStateRestoration"))
 }
-
-func (x *Application) asResponder() *raw.NSResponder { return &x.inner.NSResponder }
 
 // Applicationable is the interface implemented by [Application], for mocking and DI.
 type Applicationable interface {
-	Unwrap() *raw.NSApplication
-	WithDelegate(delegate raw.NSApplicationDelegate) *Application
+	obj.Object
 	WithMainMenu(mainMenu *Menu) *Application
 	WithHelpMenu(helpMenu *Menu) *Application
 	WithApplicationIconImage(applicationIconImage *Image) *Application
-	WithPresentationOptions(presentationOptions NSApplicationPresentationOptions) *Application
+	WithPresentationOptions(presentationOptions ApplicationPresentationOptions) *Application
 	WithAppearance(appearance *Appearance) *Application
 	WithWindowsMenu(windowsMenu *Menu) *Application
 	WithServicesMenu(servicesMenu *Menu) *Application
-	WithServicesProvider(servicesProvider objc.ID) *Application
+	WithServicesProvider(servicesProvider obj.Object) *Application
 	WithAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled bool) *Application
 	WithNextResponder(nextResponder ResponderProvider) *Application
 	WithMenu(menu *Menu) *Application
-	WithUserActivity(userActivity *foundation.NSUserActivity) *Application
+	WithUserActivity(userActivity obj.Object) *Application
 	WithTouchBar(touchBar *TouchBar) *Application
-	Hide(sender objc.ID)
-	Unhide(sender objc.ID)
+	Hide(sender obj.Object)
+	Unhide(sender obj.Object)
 	UnhideWithoutActivation()
 	WindowWithWindowNumber(windowNum int) *Window
 	Deactivate()
 	ActivateIgnoringOtherApps(ignoreOtherApps bool)
 	Activate()
-	YieldActivationToApplication(application *raw.NSRunningApplication)
+	YieldActivationToApplication(application *RunningApplication)
 	YieldActivationToApplicationWithBundleIdentifier(bundleIdentifier string)
-	HideOtherApplications(sender objc.ID)
-	UnhideAllApplications(sender objc.ID)
+	HideOtherApplications(sender obj.Object)
+	UnhideAllApplications(sender obj.Object)
 	FinishLaunching()
 	Run()
-	RunModalForWindow(window *raw.NSWindow) int
-	Stop(sender objc.ID)
+	RunModalForWindow(window *Window) int
+	Stop(sender obj.Object)
 	StopModal()
 	StopModalWithCode(returnCode int)
 	AbortModal()
-	BeginModalSessionForWindow(window *raw.NSWindow) unsafe.Pointer
-	RunModalSession(session unsafe.Pointer) int
-	EndModalSession(session unsafe.Pointer)
-	Terminate(sender objc.ID)
-	RequestUserAttention(requestType NSRequestUserAttentionType) int
+	BeginModalSessionForWindow(window *Window) obj.Object
+	RunModalSession(session obj.Object) int
+	EndModalSession(session obj.Object)
+	Terminate(sender obj.Object)
+	RequestUserAttention(requestType RequestUserAttentionType) int
 	CancelUserAttentionRequest(request int)
-	EnumerateWindowsWithOptionsUsing(options NSWindowListOptions, block func(*raw.NSWindow, *bool))
+	EnumerateWindowsWithOptionsUsing(options WindowListOptions, block func(obj.Object, *bool))
 	PreventWindowOrdering()
 	SetWindowsNeedUpdate(needUpdate bool)
 	UpdateWindows()
-	ActivationPolicy() NSApplicationActivationPolicy
-	SetActivationPolicy(activationPolicy NSApplicationActivationPolicy) bool
-	ReportException(exception *foundation.NSException)
+	ActivationPolicy() ApplicationActivationPolicy
+	SetActivationPolicy(activationPolicy ApplicationActivationPolicy) bool
+	ReportException(exception obj.Object)
 	ReplyToApplicationShouldTerminate(shouldTerminate bool)
-	ReplyToOpenOrPrint(reply NSApplicationDelegateReply)
-	OrderFrontCharacterPalette(sender objc.ID)
-	Delegate() raw.NSApplicationDelegate
-	SetDelegate(delegate raw.NSApplicationDelegate)
+	ReplyToOpenOrPrint(reply ApplicationDelegateReply)
+	OrderFrontCharacterPalette(sender obj.Object)
 	MainWindow() *Window
 	KeyWindow() *Window
 	IsActive() bool
@@ -972,73 +723,64 @@ type Applicationable interface {
 	ModalWindow() *Window
 	Windows() []*Window
 	MainMenu() *Menu
-	SetMainMenu(mainMenu *raw.NSMenu)
+	SetMainMenu(mainMenu *Menu)
 	HelpMenu() *Menu
-	SetHelpMenu(helpMenu *raw.NSMenu)
+	SetHelpMenu(helpMenu *Menu)
 	ApplicationIconImage() *Image
-	SetApplicationIconImage(applicationIconImage *raw.NSImage)
+	SetApplicationIconImage(applicationIconImage *Image)
 	DockTile() *DockTile
-	PresentationOptions() NSApplicationPresentationOptions
-	SetPresentationOptions(presentationOptions NSApplicationPresentationOptions)
-	CurrentSystemPresentationOptions() NSApplicationPresentationOptions
-	OcclusionState() NSApplicationOcclusionState
+	PresentationOptions() ApplicationPresentationOptions
+	SetPresentationOptions(presentationOptions ApplicationPresentationOptions)
+	CurrentSystemPresentationOptions() ApplicationPresentationOptions
+	OcclusionState() ApplicationOcclusionState
 	IsProtectedDataAvailable() bool
 	Appearance() *Appearance
-	SetAppearance(appearance *raw.NSAppearance)
+	SetAppearance(appearance *Appearance)
 	EffectiveAppearance() *Appearance
-	SendEvent(event *raw.NSEvent)
-	PostEventAtStart(event *raw.NSEvent, atStart bool)
-	NextEventMatchingMaskUntilDateInModeDequeue(mask NSEventMask, expiration *foundation.NSDate, mode *foundation.NSString, deqFlag bool) *Event
-	DiscardEventsMatchingMaskBeforeEvent(mask NSEventMask, lastEvent *raw.NSEvent)
+	SendEvent(event *Event)
+	PostEventAtStart(event *Event, atStart bool)
+	NextEventMatchingMaskUntilDateInModeDequeue(mask EventMask, expiration obj.Object, mode obj.Object, deqFlag bool) *Event
+	DiscardEventsMatchingMaskBeforeEvent(mask EventMask, lastEvent *Event)
 	CurrentEvent() *Event
-	SendActionToFrom(action objc.SEL, target objc.ID, sender objc.ID) bool
-	TargetForAction(action objc.SEL) objc.ID
-	TargetForActionToFrom(action objc.SEL, target objc.ID, sender objc.ID) objc.ID
-	ArrangeInFront(sender objc.ID)
-	RemoveWindowsItem(win *raw.NSWindow)
-	AddWindowsItemTitleFilename(win *raw.NSWindow, string_ string, isFilename bool)
-	ChangeWindowsItemTitleFilename(win *raw.NSWindow, string_ string, isFilename bool)
-	UpdateWindowsItem(win *raw.NSWindow)
-	MiniaturizeAll(sender objc.ID)
+	ArrangeInFront(sender obj.Object)
+	RemoveWindowsItem(win *Window)
+	AddWindowsItemTitleFilename(win *Window, string_ string, isFilename bool)
+	ChangeWindowsItemTitleFilename(win *Window, string_ string, isFilename bool)
+	UpdateWindowsItem(win *Window)
+	MiniaturizeAll(sender obj.Object)
 	WindowsMenu() *Menu
-	SetWindowsMenu(windowsMenu *raw.NSMenu)
+	SetWindowsMenu(windowsMenu *Menu)
 	IsFullKeyboardAccessEnabled() bool
-	RegisterServicesMenuSendTypesReturnTypes(sendTypes *foundation.NSArray[*foundation.NSString], returnTypes *foundation.NSArray[*foundation.NSString])
+	RegisterServicesMenuSendTypesReturnTypes(sendTypes []obj.Object, returnTypes []obj.Object)
 	ServicesMenu() *Menu
-	SetServicesMenu(servicesMenu *raw.NSMenu)
-	ServicesProvider() objc.ID
-	SetServicesProvider(servicesProvider objc.ID)
-	OrderFrontStandardAboutPanel(sender objc.ID)
-	OrderFrontStandardAboutPanelWithOptions(optionsDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID])
-	UserInterfaceLayoutDirection() NSUserInterfaceLayoutDirection
+	SetServicesMenu(servicesMenu *Menu)
+	ServicesProvider() obj.Object
+	SetServicesProvider(servicesProvider obj.Object)
+	OrderFrontStandardAboutPanel(sender obj.Object)
+	OrderFrontStandardAboutPanelWithOptions(optionsDictionary obj.Object)
+	UserInterfaceLayoutDirection() UserInterfaceLayoutDirection
 	DisableRelaunchOnLogin()
 	EnableRelaunchOnLogin()
 	RegisterForRemoteNotifications()
 	UnregisterForRemoteNotifications()
-	RegisterForRemoteNotificationTypes(types NSRemoteNotificationType)
+	RegisterForRemoteNotificationTypes(types RemoteNotificationType)
 	IsRegisteredForRemoteNotifications() bool
-	EnabledRemoteNotificationTypes() NSRemoteNotificationType
-	RunModalForWindowRelativeToWindow(window *raw.NSWindow, docWindow *raw.NSWindow) int
-	BeginModalSessionForWindowRelativeToWindow(window *raw.NSWindow, docWindow *raw.NSWindow) unsafe.Pointer
-	ApplicationPrintFiles(sender *raw.NSApplication, filenames *foundation.NSArray[*foundation.NSString])
-	BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheet *raw.NSWindow, docWindow *raw.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer)
-	EndSheet(sheet *raw.NSWindow)
-	EndSheetReturnCode(sheet *raw.NSWindow, returnCode int)
-	MakeWindowsPerformInOrder(selector objc.SEL, inOrder bool) *Window
+	EnabledRemoteNotificationTypes() RemoteNotificationType
+	RunModalForWindowRelativeToWindow(window *Window, docWindow *Window) int
+	BeginModalSessionForWindowRelativeToWindow(window *Window, docWindow *Window) obj.Object
+	ApplicationPrintFiles(sender *Application, filenames []string)
+	EndSheet(sheet *Window)
+	EndSheetReturnCode(sheet *Window, returnCode int)
 	Context() *GraphicsContext
-	ActivateContextHelpMode(sender objc.ID)
-	ShowHelp(sender objc.ID)
-	ToggleTouchBarCustomizationPalette(sender objc.ID)
+	ActivateContextHelpMode(sender obj.Object)
+	ShowHelp(sender obj.Object)
+	ToggleTouchBarCustomizationPalette(sender obj.Object)
 	IsAutomaticCustomizeTouchBarMenuItemEnabled() bool
 	SetAutomaticCustomizeTouchBarMenuItemEnabled(automaticCustomizeTouchBarMenuItemEnabled bool)
-	OrderFrontColorPanel(sender objc.ID)
-	RunPageLayout(sender objc.ID)
+	OrderFrontColorPanel(sender obj.Object)
+	RunPageLayout(sender obj.Object)
 	OrderedDocuments() []*Document
 	OrderedWindows() []*Window
-	RegisterUserInterfaceItemSearchHandler(handler raw.NSUserInterfaceItemSearching)
-	UnregisterUserInterfaceItemSearchHandler(handler raw.NSUserInterfaceItemSearching)
-	SearchStringInUserInterfaceItemStringSearchRangeFoundRange(searchString string, stringToSearch string, searchRange foundation.NSRange, foundRange *foundation.NSRange) bool
-	RestoreWindowWithIdentifierStateCompletionHandler(identifier *foundation.NSString, state *foundation.NSCoder, completionHandler func(*raw.NSWindow, unsafe.Pointer)) bool
 	ExtendStateRestoration()
 	CompleteStateRestoration()
 }

@@ -5,45 +5,68 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A device that defines the configuration for a USB keyboard.
 //
-// USBKeyboardConfiguration wraps [raw.VZUSBKeyboardConfiguration] with a fluent Go API.
+// USBKeyboardConfiguration is an idiomatic wrapper over the Objective-C class VZUSBKeyboardConfiguration.
 type USBKeyboardConfiguration struct {
-	inner *raw.VZUSBKeyboardConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZUSBKeyboardConfiguration].
-func (x *USBKeyboardConfiguration) Unwrap() *raw.VZUSBKeyboardConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *USBKeyboardConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// USBKeyboardConfigurationFromID adopts an existing object pointer as a USBKeyboardConfiguration (nil for 0).
+// USBKeyboardConfigurationFromID adopts an existing Objective-C object as a USBKeyboardConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func USBKeyboardConfigurationFromID(id objc.ID) *USBKeyboardConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &USBKeyboardConfiguration{inner: raw.VZUSBKeyboardConfigurationFromID(id)}
+	x := &USBKeyboardConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewUSBKeyboardConfiguration creates a new [USBKeyboardConfiguration].
+// uSBKeyboardConfigurationAdopt wraps an Objective-C object that this code just created as a
+// USBKeyboardConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uSBKeyboardConfigurationAdopt(id objc.ID) *USBKeyboardConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &USBKeyboardConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *USBKeyboardConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *USBKeyboardConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *USBKeyboardConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUSBKeyboardConfiguration creates a new USBKeyboardConfiguration.
 func NewUSBKeyboardConfiguration() *USBKeyboardConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZUSBKeyboardConfiguration")), objc.RegisterName("new"))
-	return &USBKeyboardConfiguration{inner: raw.VZUSBKeyboardConfigurationFromID(_id)}
-}
-
-func (x *USBKeyboardConfiguration) asKeyboardConfiguration() *raw.VZKeyboardConfiguration {
-	return &x.inner.VZKeyboardConfiguration
+	_id := objc.Send[objc.ID](objc.ID(_class("VZUSBKeyboardConfiguration")), objc.RegisterName("new"))
+	return uSBKeyboardConfigurationAdopt(_id)
 }
 
 // USBKeyboardConfigurationable is the interface implemented by [USBKeyboardConfiguration], for mocking and DI.
 type USBKeyboardConfigurationable interface {
-	Unwrap() *raw.VZUSBKeyboardConfiguration
+	obj.Object
 }
 
 var _ USBKeyboardConfigurationable = (*USBKeyboardConfiguration)(nil)

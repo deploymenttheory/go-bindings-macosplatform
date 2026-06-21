@@ -5,50 +5,74 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object representing metrics about disk usage.
 //
-// DiskIOMetric wraps [raw.MXDiskIOMetric] with a fluent Go API.
+// DiskIOMetric is an idiomatic wrapper over the Objective-C class MXDiskIOMetric.
 type DiskIOMetric struct {
-	inner *raw.MXDiskIOMetric
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MXDiskIOMetric].
-func (x *DiskIOMetric) Unwrap() *raw.MXDiskIOMetric { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DiskIOMetric) ID() objc.ID { return x.inner.Ptr() }
-
-// DiskIOMetricFromID adopts an existing object pointer as a DiskIOMetric (nil for 0).
+// DiskIOMetricFromID adopts an existing Objective-C object as a DiskIOMetric
+// (nil for 0), retaining it and registering a release finalizer.
 func DiskIOMetricFromID(id objc.ID) *DiskIOMetric {
 	if id == 0 {
 		return nil
 	}
-	return &DiskIOMetric{inner: raw.MXDiskIOMetricFromID(id)}
+	x := &DiskIOMetric{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDiskIOMetric creates a new [DiskIOMetric].
+// diskIOMetricAdopt wraps an Objective-C object that this code just created as a
+// DiskIOMetric (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func diskIOMetricAdopt(id objc.ID) *DiskIOMetric {
+	if id == 0 {
+		return nil
+	}
+	x := &DiskIOMetric{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DiskIOMetric) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DiskIOMetric) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DiskIOMetric) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDiskIOMetric creates a new DiskIOMetric.
 func NewDiskIOMetric() *DiskIOMetric {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXDiskIOMetric")), objc.RegisterName("new"))
-	return &DiskIOMetric{inner: raw.MXDiskIOMetricFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXDiskIOMetric")), objc.RegisterName("new"))
+	return diskIOMetricAdopt(_id)
 }
 
-// CumulativeLogicalWrites calls the underlying CumulativeLogicalWrites.
-func (x *DiskIOMetric) CumulativeLogicalWrites() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage] {
-	return x.inner.CumulativeLogicalWrites()
+func (x *DiskIOMetric) CumulativeLogicalWrites() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cumulativeLogicalWrites"))
+	return obj.Wrap(_r)
 }
-
-func (x *DiskIOMetric) asMetric() *raw.MXMetric { return &x.inner.MXMetric }
 
 // DiskIOMetricable is the interface implemented by [DiskIOMetric], for mocking and DI.
 type DiskIOMetricable interface {
-	Unwrap() *raw.MXDiskIOMetric
-	CumulativeLogicalWrites() *foundation.NSMeasurement[*foundation.NSUnitInformationStorage]
+	obj.Object
+	CumulativeLogicalWrites() obj.Object
 }
 
 var _ DiskIOMetricable = (*DiskIOMetric)(nil)

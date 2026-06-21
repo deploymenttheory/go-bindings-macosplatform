@@ -5,170 +5,167 @@
 package notificationcenter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/notificationcenter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides a list view for displaying content in a macOS Today widget.
 //
-// WidgetListViewController wraps [raw.NCWidgetListViewController] with a fluent Go API.
+// WidgetListViewController is an idiomatic wrapper over the Objective-C class NCWidgetListViewController.
 type WidgetListViewController struct {
-	inner *raw.NCWidgetListViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NCWidgetListViewController].
-func (x *WidgetListViewController) Unwrap() *raw.NCWidgetListViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WidgetListViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// WidgetListViewControllerFromID adopts an existing object pointer as a WidgetListViewController (nil for 0).
+// WidgetListViewControllerFromID adopts an existing Objective-C object as a WidgetListViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func WidgetListViewControllerFromID(id objc.ID) *WidgetListViewController {
 	if id == 0 {
 		return nil
 	}
-	return &WidgetListViewController{inner: raw.NCWidgetListViewControllerFromID(id)}
-}
-
-// NewWidgetListViewController creates a new [WidgetListViewController].
-func NewWidgetListViewController() *WidgetListViewController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NCWidgetListViewController")), objc.RegisterName("new"))
-	return &WidgetListViewController{inner: raw.NCWidgetListViewControllerFromID(_id)}
-}
-
-// The list view controller’s delegate or nil if the receiver doesn’t have a delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *WidgetListViewController) WithDelegate(delegate raw.NCWidgetListViewDelegate) *WidgetListViewController {
-	x.inner.SetDelegate(delegate)
+	x := &WidgetListViewController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// widgetListViewControllerAdopt wraps an Objective-C object that this code just created as a
+// WidgetListViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func widgetListViewControllerAdopt(id objc.ID) *WidgetListViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &WidgetListViewController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WidgetListViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WidgetListViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WidgetListViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWidgetListViewController creates a new WidgetListViewController.
+func NewWidgetListViewController() *WidgetListViewController {
+	_id := objc.Send[objc.ID](objc.ID(_class("NCWidgetListViewController")), objc.RegisterName("new"))
+	return widgetListViewControllerAdopt(_id)
 }
 
 // The minimum number of visible rows to display.
 //
-// WithMinimumVisibleRowCount sets the minimumVisibleRowCount property and returns the receiver for chaining.
-func (x *WidgetListViewController) WithMinimumVisibleRowCount(minimumVisibleRowCount uint) *WidgetListViewController {
-	x.inner.SetMinimumVisibleRowCount(minimumVisibleRowCount)
+// WithMinimumVisibleRowCount sets minimumVisibleRowCount and returns the receiver so calls can be chained.
+func (x *WidgetListViewController) WithMinimumVisibleRowCount(minimumVisibleRowCount int) *WidgetListViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumVisibleRowCount:"), minimumVisibleRowCount)
 	return x
 }
 
 // A Boolean value that indicates whether list displays divider lines between rows.
 //
-// WithHasDividerLines sets the hasDividerLines property and returns the receiver for chaining.
+// WithHasDividerLines sets hasDividerLines and returns the receiver so calls can be chained.
 func (x *WidgetListViewController) WithHasDividerLines(hasDividerLines bool) *WidgetListViewController {
-	x.inner.SetHasDividerLines(hasDividerLines)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDividerLines:"), hasDividerLines)
 	return x
 }
 
 // A Boolean value that indicates whether the list is in editing mode.
 //
-// WithEditing sets the editing property and returns the receiver for chaining.
+// WithEditing sets editing and returns the receiver so calls can be chained.
 func (x *WidgetListViewController) WithEditing(editing bool) *WidgetListViewController {
-	x.inner.SetEditing(editing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditing:"), editing)
 	return x
 }
 
 // A Boolean value that indicates whether an Add (+) button is displayed while the list is in editing mode.
 //
-// WithShowsAddButtonWhenEditing sets the showsAddButtonWhenEditing property and returns the receiver for chaining.
+// WithShowsAddButtonWhenEditing sets showsAddButtonWhenEditing and returns the receiver so calls can be chained.
 func (x *WidgetListViewController) WithShowsAddButtonWhenEditing(showsAddButtonWhenEditing bool) *WidgetListViewController {
-	x.inner.SetShowsAddButtonWhenEditing(showsAddButtonWhenEditing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsAddButtonWhenEditing:"), showsAddButtonWhenEditing)
 	return x
 }
 
 // Returns the content view controller associated with the specified row, or a new content view controller if desired.
-//
-// ViewControllerAtRowMakeIfNecessary calls the underlying ViewControllerAtRowMakeIfNecessary.
-func (x *WidgetListViewController) ViewControllerAtRowMakeIfNecessary(row uint, makeIfNecesary bool) *appkit.NSViewController {
-	return x.inner.ViewControllerAtRowMakeIfNecessary(row, makeIfNecesary)
+func (x *WidgetListViewController) ViewControllerAtRowMakeIfNecessary(row int, makeIfNecesary bool) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewControllerAtRow:makeIfNecessary:"), row, makeIfNecesary)
+	return obj.Wrap(_r)
 }
 
 // Returns the row represented by the specified content view controller.
-//
-// RowForViewController calls the underlying RowForViewController.
-func (x *WidgetListViewController) RowForViewController(viewController *appkit.NSViewController) uint {
-	return x.inner.RowForViewController(viewController)
+func (x *WidgetListViewController) RowForViewController(viewController obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowForViewController:"), objref.IDOf(viewController))
+	return _r
 }
 
-// Delegate calls the underlying Delegate.
-func (x *WidgetListViewController) Delegate() raw.NCWidgetListViewDelegate {
-	return x.inner.Delegate()
+func (x *WidgetListViewController) Contents() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contents"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *WidgetListViewController) SetDelegate(delegate raw.NCWidgetListViewDelegate) {
-	x.inner.SetDelegate(delegate)
+func (x *WidgetListViewController) SetContents(contents []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), purego.SliceToNSArray(contents, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Contents calls the underlying Contents.
-func (x *WidgetListViewController) Contents() *foundation.NSArray[objc.ID] {
-	return x.inner.Contents()
+func (x *WidgetListViewController) MinimumVisibleRowCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minimumVisibleRowCount"))
+	return _r
 }
 
-// SetContents calls the underlying SetContents.
-func (x *WidgetListViewController) SetContents(contents *foundation.NSArray[objc.ID]) {
-	x.inner.SetContents(contents)
+func (x *WidgetListViewController) SetMinimumVisibleRowCount(minimumVisibleRowCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumVisibleRowCount:"), minimumVisibleRowCount)
 }
 
-// MinimumVisibleRowCount calls the underlying MinimumVisibleRowCount.
-func (x *WidgetListViewController) MinimumVisibleRowCount() uint {
-	return x.inner.MinimumVisibleRowCount()
-}
-
-// SetMinimumVisibleRowCount calls the underlying SetMinimumVisibleRowCount.
-func (x *WidgetListViewController) SetMinimumVisibleRowCount(minimumVisibleRowCount uint) {
-	x.inner.SetMinimumVisibleRowCount(minimumVisibleRowCount)
-}
-
-// HasDividerLines calls the underlying HasDividerLines.
 func (x *WidgetListViewController) HasDividerLines() bool {
-	return x.inner.HasDividerLines()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasDividerLines"))
+	return _r
 }
 
-// SetHasDividerLines calls the underlying SetHasDividerLines.
 func (x *WidgetListViewController) SetHasDividerLines(hasDividerLines bool) {
-	x.inner.SetHasDividerLines(hasDividerLines)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDividerLines:"), hasDividerLines)
 }
 
-// Editing calls the underlying Editing.
 func (x *WidgetListViewController) Editing() bool {
-	return x.inner.Editing()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("editing"))
+	return _r
 }
 
-// SetEditing calls the underlying SetEditing.
 func (x *WidgetListViewController) SetEditing(editing bool) {
-	x.inner.SetEditing(editing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditing:"), editing)
 }
 
-// ShowsAddButtonWhenEditing calls the underlying ShowsAddButtonWhenEditing.
 func (x *WidgetListViewController) ShowsAddButtonWhenEditing() bool {
-	return x.inner.ShowsAddButtonWhenEditing()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsAddButtonWhenEditing"))
+	return _r
 }
 
-// SetShowsAddButtonWhenEditing calls the underlying SetShowsAddButtonWhenEditing.
 func (x *WidgetListViewController) SetShowsAddButtonWhenEditing(showsAddButtonWhenEditing bool) {
-	x.inner.SetShowsAddButtonWhenEditing(showsAddButtonWhenEditing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsAddButtonWhenEditing:"), showsAddButtonWhenEditing)
 }
 
 // WidgetListViewControllerable is the interface implemented by [WidgetListViewController], for mocking and DI.
 type WidgetListViewControllerable interface {
-	Unwrap() *raw.NCWidgetListViewController
-	WithDelegate(delegate raw.NCWidgetListViewDelegate) *WidgetListViewController
-	WithMinimumVisibleRowCount(minimumVisibleRowCount uint) *WidgetListViewController
+	obj.Object
+	WithMinimumVisibleRowCount(minimumVisibleRowCount int) *WidgetListViewController
 	WithHasDividerLines(hasDividerLines bool) *WidgetListViewController
 	WithEditing(editing bool) *WidgetListViewController
 	WithShowsAddButtonWhenEditing(showsAddButtonWhenEditing bool) *WidgetListViewController
-	ViewControllerAtRowMakeIfNecessary(row uint, makeIfNecesary bool) *appkit.NSViewController
-	RowForViewController(viewController *appkit.NSViewController) uint
-	Delegate() raw.NCWidgetListViewDelegate
-	SetDelegate(delegate raw.NCWidgetListViewDelegate)
-	Contents() *foundation.NSArray[objc.ID]
-	SetContents(contents *foundation.NSArray[objc.ID])
-	MinimumVisibleRowCount() uint
-	SetMinimumVisibleRowCount(minimumVisibleRowCount uint)
+	ViewControllerAtRowMakeIfNecessary(row int, makeIfNecesary bool) obj.Object
+	RowForViewController(viewController obj.Object) int
+	Contents() []obj.Object
+	SetContents(contents []obj.Object)
+	MinimumVisibleRowCount() int
+	SetMinimumVisibleRowCount(minimumVisibleRowCount int)
 	HasDividerLines() bool
 	SetHasDividerLines(hasDividerLines bool)
 	Editing() bool

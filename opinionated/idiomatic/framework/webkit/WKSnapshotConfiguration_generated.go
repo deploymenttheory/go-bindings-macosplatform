@@ -5,110 +5,108 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The configuration data to use when generating an image from a web view’s contents.
 //
-// WKSnapshotConfiguration wraps [raw.WKSnapshotConfiguration] with a fluent Go API.
+// WKSnapshotConfiguration is an idiomatic wrapper over the Objective-C class WKSnapshotConfiguration.
 type WKSnapshotConfiguration struct {
-	inner *raw.WKSnapshotConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKSnapshotConfiguration].
-func (x *WKSnapshotConfiguration) Unwrap() *raw.WKSnapshotConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKSnapshotConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// WKSnapshotConfigurationFromID adopts an existing object pointer as a WKSnapshotConfiguration (nil for 0).
+// WKSnapshotConfigurationFromID adopts an existing Objective-C object as a WKSnapshotConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func WKSnapshotConfigurationFromID(id objc.ID) *WKSnapshotConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &WKSnapshotConfiguration{inner: raw.WKSnapshotConfigurationFromID(id)}
-}
-
-// NewWKSnapshotConfiguration creates a new [WKSnapshotConfiguration].
-func NewWKSnapshotConfiguration() *WKSnapshotConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKSnapshotConfiguration")), objc.RegisterName("new"))
-	return &WKSnapshotConfiguration{inner: raw.WKSnapshotConfigurationFromID(_id)}
-}
-
-// The portion of your web view to capture, specified as a rectangle in the view’s coordinate system.
-//
-// WithRect sets the rect property and returns the receiver for chaining.
-func (x *WKSnapshotConfiguration) WithRect(rect corefoundation.CGRect) *WKSnapshotConfiguration {
-	x.inner.SetRect(rect)
+	x := &WKSnapshotConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// wKSnapshotConfigurationAdopt wraps an Objective-C object that this code just created as a
+// WKSnapshotConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKSnapshotConfigurationAdopt(id objc.ID) *WKSnapshotConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &WKSnapshotConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WKSnapshotConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKSnapshotConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKSnapshotConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWKSnapshotConfiguration creates a new WKSnapshotConfiguration.
+func NewWKSnapshotConfiguration() *WKSnapshotConfiguration {
+	_id := objc.Send[objc.ID](objc.ID(_class("WKSnapshotConfiguration")), objc.RegisterName("new"))
+	return wKSnapshotConfigurationAdopt(_id)
 }
 
 // The width of the captured image, in points.
 //
-// WithSnapshotWidth sets the snapshotWidth property and returns the receiver for chaining.
-func (x *WKSnapshotConfiguration) WithSnapshotWidth(snapshotWidth *foundation.NSNumber) *WKSnapshotConfiguration {
-	x.inner.SetSnapshotWidth(snapshotWidth)
+// WithSnapshotWidth sets snapshotWidth and returns the receiver so calls can be chained.
+func (x *WKSnapshotConfiguration) WithSnapshotWidth(snapshotWidth obj.Object) *WKSnapshotConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSnapshotWidth:"), objref.IDOf(snapshotWidth))
 	return x
 }
 
 // A Boolean value that indicates whether to take the snapshot after incorporating any pending screen updates.
 //
-// WithAfterScreenUpdates sets the afterScreenUpdates property and returns the receiver for chaining.
+// WithAfterScreenUpdates sets afterScreenUpdates and returns the receiver so calls can be chained.
 func (x *WKSnapshotConfiguration) WithAfterScreenUpdates(afterScreenUpdates bool) *WKSnapshotConfiguration {
-	x.inner.SetAfterScreenUpdates(afterScreenUpdates)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAfterScreenUpdates:"), afterScreenUpdates)
 	return x
 }
 
-// @abstract The rect to snapshot in view coordinates. @discussion This rect should be contained within WKWebView's bounds. If the rect is set to the null rect, the view's bounds will be used. The initial value is the null rect.
-//
-// Rect calls the underlying Rect.
-func (x *WKSnapshotConfiguration) Rect() corefoundation.CGRect {
-	return x.inner.Rect()
+// Specify a custom width to control the size of image you get back. The height will be computed to maintain the aspect ratio established by rect. snapshotWidth represents the width in points. If the snapshotWidth is nil, rect's width will be used.
+func (x *WKSnapshotConfiguration) SnapshotWidth() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotWidth"))
+	return obj.Wrap(_r)
 }
 
-// SetRect calls the underlying SetRect.
-func (x *WKSnapshotConfiguration) SetRect(rect corefoundation.CGRect) {
-	x.inner.SetRect(rect)
+func (x *WKSnapshotConfiguration) SetSnapshotWidth(snapshotWidth obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSnapshotWidth:"), objref.IDOf(snapshotWidth))
 }
 
-// @abstract Specify a custom width to control the size of image you get back. The height will be computed to maintain the aspect ratio established by rect. @discussion snapshotWidth represents the width in points. If the snapshotWidth is nil, rect's width will be used.
-//
-// SnapshotWidth calls the underlying SnapshotWidth.
-func (x *WKSnapshotConfiguration) SnapshotWidth() *foundation.NSNumber {
-	return x.inner.SnapshotWidth()
-}
-
-// SetSnapshotWidth calls the underlying SetSnapshotWidth.
-func (x *WKSnapshotConfiguration) SetSnapshotWidth(snapshotWidth *foundation.NSNumber) {
-	x.inner.SetSnapshotWidth(snapshotWidth)
-}
-
-// @abstract A Boolean value that specifies whether the snapshot should be taken after recent changes have been incorporated. The value NO will capture the screen in its current state, which might not include recent changes. @discussion The default value is YES.
-//
-// AfterScreenUpdates calls the underlying AfterScreenUpdates.
+// A Boolean value that specifies whether the snapshot should be taken after recent changes have been incorporated. The value NO will capture the screen in its current state, which might not include recent changes. The default value is YES.
 func (x *WKSnapshotConfiguration) AfterScreenUpdates() bool {
-	return x.inner.AfterScreenUpdates()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("afterScreenUpdates"))
+	return _r
 }
 
-// SetAfterScreenUpdates calls the underlying SetAfterScreenUpdates.
 func (x *WKSnapshotConfiguration) SetAfterScreenUpdates(afterScreenUpdates bool) {
-	x.inner.SetAfterScreenUpdates(afterScreenUpdates)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAfterScreenUpdates:"), afterScreenUpdates)
 }
 
 // WKSnapshotConfigurationable is the interface implemented by [WKSnapshotConfiguration], for mocking and DI.
 type WKSnapshotConfigurationable interface {
-	Unwrap() *raw.WKSnapshotConfiguration
-	WithRect(rect corefoundation.CGRect) *WKSnapshotConfiguration
-	WithSnapshotWidth(snapshotWidth *foundation.NSNumber) *WKSnapshotConfiguration
+	obj.Object
+	WithSnapshotWidth(snapshotWidth obj.Object) *WKSnapshotConfiguration
 	WithAfterScreenUpdates(afterScreenUpdates bool) *WKSnapshotConfiguration
-	Rect() corefoundation.CGRect
-	SetRect(rect corefoundation.CGRect)
-	SnapshotWidth() *foundation.NSNumber
-	SetSnapshotWidth(snapshotWidth *foundation.NSNumber)
+	SnapshotWidth() obj.Object
+	SetSnapshotWidth(snapshotWidth obj.Object)
 	AfterScreenUpdates() bool
 	SetAfterScreenUpdates(afterScreenUpdates bool)
 }

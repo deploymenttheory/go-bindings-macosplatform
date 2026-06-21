@@ -5,50 +5,71 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The configuration object that represents an NVM Express Controller storage device.
 //
-// NVMExpressControllerDeviceConfiguration wraps [raw.VZNVMExpressControllerDeviceConfiguration] with a fluent Go API.
+// NVMExpressControllerDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZNVMExpressControllerDeviceConfiguration.
 type NVMExpressControllerDeviceConfiguration struct {
-	inner *raw.VZNVMExpressControllerDeviceConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZNVMExpressControllerDeviceConfiguration].
-func (x *NVMExpressControllerDeviceConfiguration) Unwrap() *raw.VZNVMExpressControllerDeviceConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NVMExpressControllerDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// NVMExpressControllerDeviceConfigurationFromID adopts an existing object pointer as a NVMExpressControllerDeviceConfiguration (nil for 0).
+// NVMExpressControllerDeviceConfigurationFromID adopts an existing Objective-C object as a NVMExpressControllerDeviceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func NVMExpressControllerDeviceConfigurationFromID(id objc.ID) *NVMExpressControllerDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &NVMExpressControllerDeviceConfiguration{inner: raw.VZNVMExpressControllerDeviceConfigurationFromID(id)}
+	x := &NVMExpressControllerDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// nVMExpressControllerDeviceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// NVMExpressControllerDeviceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nVMExpressControllerDeviceConfigurationAdopt(id objc.ID) *NVMExpressControllerDeviceConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &NVMExpressControllerDeviceConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NVMExpressControllerDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NVMExpressControllerDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NVMExpressControllerDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new NVM Express controller configuration with the storage device attachment you provide.
 //
-// NewNVMExpressControllerDeviceConfigurationWithAttachment creates a new [NVMExpressControllerDeviceConfiguration].
-func NewNVMExpressControllerDeviceConfigurationWithAttachment(attachment *raw.VZStorageDeviceAttachment) *NVMExpressControllerDeviceConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZNVMExpressControllerDeviceConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttachment:"), attachment.Ptr())
-	return &NVMExpressControllerDeviceConfiguration{inner: raw.VZNVMExpressControllerDeviceConfigurationFromID(_id)}
-}
-
-func (x *NVMExpressControllerDeviceConfiguration) asStorageDeviceConfiguration() *raw.VZStorageDeviceConfiguration {
-	return &x.inner.VZStorageDeviceConfiguration
+// NewNVMExpressControllerDeviceConfigurationWithAttachment creates a new NVMExpressControllerDeviceConfiguration.
+func NewNVMExpressControllerDeviceConfigurationWithAttachment(attachment *StorageDeviceAttachment) *NVMExpressControllerDeviceConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZNVMExpressControllerDeviceConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttachment:"), objref.IDOf(attachment))
+	return nVMExpressControllerDeviceConfigurationAdopt(_id)
 }
 
 // NVMExpressControllerDeviceConfigurationable is the interface implemented by [NVMExpressControllerDeviceConfiguration], for mocking and DI.
 type NVMExpressControllerDeviceConfigurationable interface {
-	Unwrap() *raw.VZNVMExpressControllerDeviceConfiguration
+	obj.Object
 }
 
 var _ NVMExpressControllerDeviceConfigurationable = (*NVMExpressControllerDeviceConfiguration)(nil)

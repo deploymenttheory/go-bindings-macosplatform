@@ -5,78 +5,56 @@
 package coremidi
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/ebitengine/purego/objc"
 )
 
-// SharedInstance calls the underlying MIDICIDeviceManagerSharedInstance.
+// Retrieve the shared MIDI-CI device manager for the client process. After the first access of the property, the client process may observe notifications which are posted when the system-wide cache changes. In environments where virtual MIDI endpoint creation is not allowed, callbacks are only invoked when the process is not suspended. However, any suspended process will receive an updated copy of the cache when it resumes its running state.
 func SharedInstance() *CIDeviceManager {
-	_r := raw.MIDICIDeviceManagerSharedInstance()
-	if _r == nil {
-		return nil
-	}
-	return &CIDeviceManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MIDICIDeviceManager")), objc.RegisterName("sharedInstance"))
+	return CIDeviceManagerFromID(_r)
 }
 
-// MIDICIDiscoveryManagerSharedInstance calls the underlying MIDICIDiscoveryManagerSharedInstance.
+// Returns the singleton discovery manager instance.
 func MIDICIDiscoveryManagerSharedInstance() *CIDiscoveryManager {
-	_r := raw.MIDICIDiscoveryManagerSharedInstance()
-	if _r == nil {
-		return nil
-	}
-	return &CIDiscoveryManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MIDICIDiscoveryManager")), objc.RegisterName("sharedInstance"))
+	return CIDiscoveryManagerFromID(_r)
 }
 
-// ConnectionWithHost calls the underlying MIDINetworkConnectionConnectionWithHost.
-func ConnectionWithHost(host *raw.MIDINetworkHost) *NetworkConnection {
-	_r := raw.MIDINetworkConnectionConnectionWithHost(host)
-	if _r == nil {
-		return nil
-	}
-	return &NetworkConnection{inner: _r}
+// Creates a connection to the specified host.
+func ConnectionWithHost(host *NetworkHost) *NetworkConnection {
+	_r := objc.Send[objc.ID](objc.ID(_class("MIDINetworkConnection")), objc.RegisterName("connectionWithHost:"), objref.IDOf(host))
+	return NetworkConnectionFromID(_r)
 }
 
-// HostWithNameAddressPort calls the underlying MIDINetworkHostHostWithNameAddressPort.
-func HostWithNameAddressPort(name string, address string, port uint) *NetworkHost {
-	_r := raw.MIDINetworkHostHostWithNameAddressPort(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(address), port)
-	if _r == nil {
-		return nil
-	}
-	return &NetworkHost{inner: _r}
+// Creates a host with the specified name, adress, and port.
+func HostWithNameAddressPort(name string, address string, port int) *NetworkHost {
+	_r := objc.Send[objc.ID](objc.ID(_class("MIDINetworkHost")), objc.RegisterName("hostWithName:address:port:"), purego.NSString(name), purego.NSString(address), port)
+	return NetworkHostFromID(_r)
 }
 
-// HostWithNameNetService calls the underlying MIDINetworkHostHostWithNameNetService.
-func HostWithNameNetService(name string, netService *foundation.NSNetService) *NetworkHost {
-	_r := raw.MIDINetworkHostHostWithNameNetService(foundation.NSStringStringWithUTF8String(name), netService)
-	if _r == nil {
-		return nil
-	}
-	return &NetworkHost{inner: _r}
+// Creates a host with the specified name and net service.
+func HostWithNameNetService(name string, netService obj.Object) *NetworkHost {
+	_r := objc.Send[objc.ID](objc.ID(_class("MIDINetworkHost")), objc.RegisterName("hostWithName:netService:"), purego.NSString(name), objref.IDOf(netService))
+	return NetworkHostFromID(_r)
 }
 
-// HostWithNameNetServiceNameNetServiceDomain calls the underlying MIDINetworkHostHostWithNameNetServiceNameNetServiceDomain.
+// Creates a host with the specified name, net service name, and domain.
 func HostWithNameNetServiceNameNetServiceDomain(name string, netServiceName string, netServiceDomain string) *NetworkHost {
-	_r := raw.MIDINetworkHostHostWithNameNetServiceNameNetServiceDomain(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(netServiceName), foundation.NSStringStringWithUTF8String(netServiceDomain))
-	if _r == nil {
-		return nil
-	}
-	return &NetworkHost{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MIDINetworkHost")), objc.RegisterName("hostWithName:netServiceName:netServiceDomain:"), purego.NSString(name), purego.NSString(netServiceName), purego.NSString(netServiceDomain))
+	return NetworkHostFromID(_r)
 }
 
-// DefaultSession calls the underlying MIDINetworkSessionDefaultSession.
+// Returns the default singleton session.
 func DefaultSession() *NetworkSession {
-	_r := raw.MIDINetworkSessionDefaultSession()
-	if _r == nil {
-		return nil
-	}
-	return &NetworkSession{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MIDINetworkSession")), objc.RegisterName("defaultSession"))
+	return NetworkSessionFromID(_r)
 }
 
-// MIDIUMPEndpointManagerSharedInstance calls the underlying MIDIUMPEndpointManagerSharedInstance.
+// Retrieve the shared UMP Endpoint manager for the client process. After first access to this property, the client process may begin observing notifications which are posted when the system-wide cache changes.
 func MIDIUMPEndpointManagerSharedInstance() *UMPEndpointManager {
-	_r := raw.MIDIUMPEndpointManagerSharedInstance()
-	if _r == nil {
-		return nil
-	}
-	return &UMPEndpointManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MIDIUMPEndpointManager")), objc.RegisterName("sharedInstance"))
+	return UMPEndpointManagerFromID(_r)
 }

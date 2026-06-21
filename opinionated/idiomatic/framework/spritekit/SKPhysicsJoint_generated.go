@@ -5,105 +5,113 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The abstract superclass for objects that connect physics bodies.
 //
-// PhysicsJoint wraps [raw.SKPhysicsJoint] with a fluent Go API.
+// PhysicsJoint is an idiomatic wrapper over the Objective-C class SKPhysicsJoint.
 type PhysicsJoint struct {
-	inner *raw.SKPhysicsJoint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKPhysicsJoint].
-func (x *PhysicsJoint) Unwrap() *raw.SKPhysicsJoint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhysicsJoint) ID() objc.ID { return x.inner.Ptr() }
-
-// PhysicsJointFromID adopts an existing object pointer as a PhysicsJoint (nil for 0).
+// PhysicsJointFromID adopts an existing Objective-C object as a PhysicsJoint
+// (nil for 0), retaining it and registering a release finalizer.
 func PhysicsJointFromID(id objc.ID) *PhysicsJoint {
 	if id == 0 {
 		return nil
 	}
-	return &PhysicsJoint{inner: raw.SKPhysicsJointFromID(id)}
+	x := &PhysicsJoint{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPhysicsJoint creates a new [PhysicsJoint].
+// physicsJointAdopt wraps an Objective-C object that this code just created as a
+// PhysicsJoint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func physicsJointAdopt(id objc.ID) *PhysicsJoint {
+	if id == 0 {
+		return nil
+	}
+	x := &PhysicsJoint{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PhysicsJoint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PhysicsJoint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PhysicsJoint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPhysicsJoint creates a new PhysicsJoint.
 func NewPhysicsJoint() *PhysicsJoint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKPhysicsJoint")), objc.RegisterName("new"))
-	return &PhysicsJoint{inner: raw.SKPhysicsJointFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKPhysicsJoint")), objc.RegisterName("new"))
+	return physicsJointAdopt(_id)
 }
 
 // The first body connected by the joint.
 //
-// WithBodyA sets the bodyA property and returns the receiver for chaining.
+// WithBodyA sets bodyA and returns the receiver so calls can be chained.
 func (x *PhysicsJoint) WithBodyA(bodyA *PhysicsBody) *PhysicsJoint {
-	x.inner.SetBodyA(bodyA.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
 	return x
 }
 
 // The second body connected by the joint.
 //
-// WithBodyB sets the bodyB property and returns the receiver for chaining.
+// WithBodyB sets bodyB and returns the receiver so calls can be chained.
 func (x *PhysicsJoint) WithBodyB(bodyB *PhysicsBody) *PhysicsJoint {
-	x.inner.SetBodyB(bodyB.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
 	return x
 }
 
-// BodyA calls the underlying BodyA.
 func (x *PhysicsJoint) BodyA() *PhysicsBody {
-	_r := x.inner.BodyA()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyA"))
+	return PhysicsBodyFromID(_r)
 }
 
-// SetBodyA calls the underlying SetBodyA.
-func (x *PhysicsJoint) SetBodyA(bodyA *raw.SKPhysicsBody) {
-	x.inner.SetBodyA(bodyA)
+func (x *PhysicsJoint) SetBodyA(bodyA *PhysicsBody) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyA:"), objref.IDOf(bodyA))
 }
 
-// BodyB calls the underlying BodyB.
 func (x *PhysicsJoint) BodyB() *PhysicsBody {
-	_r := x.inner.BodyB()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyB"))
+	return PhysicsBodyFromID(_r)
 }
 
-// SetBodyB calls the underlying SetBodyB.
-func (x *PhysicsJoint) SetBodyB(bodyB *raw.SKPhysicsBody) {
-	x.inner.SetBodyB(bodyB)
+func (x *PhysicsJoint) SetBodyB(bodyB *PhysicsBody) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBodyB:"), objref.IDOf(bodyB))
 }
 
-// ReactionForce calls the underlying ReactionForce.
-func (x *PhysicsJoint) ReactionForce() corefoundation.CGVector {
-	return x.inner.ReactionForce()
-}
-
-// ReactionTorque calls the underlying ReactionTorque.
 func (x *PhysicsJoint) ReactionTorque() float64 {
-	return x.inner.ReactionTorque()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("reactionTorque"))
+	return _r
 }
-
-func (x *PhysicsJoint) asPhysicsJoint() *raw.SKPhysicsJoint { return x.inner }
 
 // PhysicsJointable is the interface implemented by [PhysicsJoint], for mocking and DI.
 type PhysicsJointable interface {
-	Unwrap() *raw.SKPhysicsJoint
+	obj.Object
 	WithBodyA(bodyA *PhysicsBody) *PhysicsJoint
 	WithBodyB(bodyB *PhysicsBody) *PhysicsJoint
 	BodyA() *PhysicsBody
-	SetBodyA(bodyA *raw.SKPhysicsBody)
+	SetBodyA(bodyA *PhysicsBody)
 	BodyB() *PhysicsBody
-	SetBodyB(bodyB *raw.SKPhysicsBody)
-	ReactionForce() corefoundation.CGVector
+	SetBodyB(bodyB *PhysicsBody)
 	ReactionTorque() float64
 }
 

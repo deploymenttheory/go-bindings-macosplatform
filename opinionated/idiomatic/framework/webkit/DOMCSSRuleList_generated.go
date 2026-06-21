@@ -5,61 +5,78 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMCSSRuleList wraps [raw.DOMCSSRuleList] with a fluent Go API.
+// DOMCSSRuleList is an idiomatic wrapper over the Objective-C class DOMCSSRuleList.
 type DOMCSSRuleList struct {
-	inner *raw.DOMCSSRuleList
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMCSSRuleList].
-func (x *DOMCSSRuleList) Unwrap() *raw.DOMCSSRuleList { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMCSSRuleList) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMCSSRuleListFromID adopts an existing object pointer as a DOMCSSRuleList (nil for 0).
+// DOMCSSRuleListFromID adopts an existing Objective-C object as a DOMCSSRuleList
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMCSSRuleListFromID(id objc.ID) *DOMCSSRuleList {
 	if id == 0 {
 		return nil
 	}
-	return &DOMCSSRuleList{inner: raw.DOMCSSRuleListFromID(id)}
+	x := &DOMCSSRuleList{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDOMCSSRuleList creates a new [DOMCSSRuleList].
-func NewDOMCSSRuleList() *DOMCSSRuleList {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMCSSRuleList")), objc.RegisterName("new"))
-	return &DOMCSSRuleList{inner: raw.DOMCSSRuleListFromID(_id)}
-}
-
-// Item calls the underlying Item.
-func (x *DOMCSSRuleList) Item(index uint) *DOMCSSRule {
-	_r := x.inner.Item(index)
-	if _r == nil {
+// dOMCSSRuleListAdopt wraps an Objective-C object that this code just created as a
+// DOMCSSRuleList (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMCSSRuleListAdopt(id objc.ID) *DOMCSSRuleList {
+	if id == 0 {
 		return nil
 	}
-	return &DOMCSSRule{inner: _r}
+	x := &DOMCSSRuleList{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Length calls the underlying Length.
-func (x *DOMCSSRuleList) Length() uint {
-	return x.inner.Length()
+// Description returns the object's -description text.
+func (x *DOMCSSRuleList) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *DOMCSSRuleList) asDOMObject() *raw.DOMObject { return &x.inner.DOMObject }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMCSSRuleList) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
 
-func (x *DOMCSSRuleList) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMObject.WebScriptObject
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMCSSRuleList) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMCSSRuleList creates a new DOMCSSRuleList.
+func NewDOMCSSRuleList() *DOMCSSRuleList {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMCSSRuleList")), objc.RegisterName("new"))
+	return dOMCSSRuleListAdopt(_id)
+}
+
+func (x *DOMCSSRuleList) Item(index int) *DOMCSSRule {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
+	return DOMCSSRuleFromID(_r)
+}
+
+func (x *DOMCSSRuleList) Length() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
 // DOMCSSRuleListable is the interface implemented by [DOMCSSRuleList], for mocking and DI.
 type DOMCSSRuleListable interface {
-	Unwrap() *raw.DOMCSSRuleList
-	Item(index uint) *DOMCSSRule
-	Length() uint
+	obj.Object
+	Item(index int) *DOMCSSRule
+	Length() int
 }
 
 var _ DOMCSSRuleListable = (*DOMCSSRuleList)(nil)

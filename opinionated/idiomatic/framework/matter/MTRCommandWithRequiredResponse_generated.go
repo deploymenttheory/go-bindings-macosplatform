@@ -5,117 +5,132 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object representing a single command to be invoked and the response required for the invoke to be considered successful.
 //
-// MTRCommandWithRequiredResponse wraps [raw.MTRCommandWithRequiredResponse] with a fluent Go API.
+// MTRCommandWithRequiredResponse is an idiomatic wrapper over the Objective-C class MTRCommandWithRequiredResponse.
 type MTRCommandWithRequiredResponse struct {
-	inner *raw.MTRCommandWithRequiredResponse
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRCommandWithRequiredResponse].
-func (x *MTRCommandWithRequiredResponse) Unwrap() *raw.MTRCommandWithRequiredResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRCommandWithRequiredResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRCommandWithRequiredResponseFromID adopts an existing object pointer as a MTRCommandWithRequiredResponse (nil for 0).
+// MTRCommandWithRequiredResponseFromID adopts an existing Objective-C object as a MTRCommandWithRequiredResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRCommandWithRequiredResponseFromID(id objc.ID) *MTRCommandWithRequiredResponse {
 	if id == 0 {
 		return nil
 	}
-	return &MTRCommandWithRequiredResponse{inner: raw.MTRCommandWithRequiredResponseFromID(id)}
+	x := &MTRCommandWithRequiredResponse{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRCommandWithRequiredResponseWithPathCommandFieldsRequiredResponse creates a new [MTRCommandWithRequiredResponse].
-func NewMTRCommandWithRequiredResponseWithPathCommandFieldsRequiredResponse(path *raw.MTRCommandPath, commandFields purego.IDer, requiredResponse purego.IDer) *MTRCommandWithRequiredResponse {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRCommandWithRequiredResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:commandFields:requiredResponse:"), path.Ptr(), commandFields.ID(), requiredResponse.ID())
-	return &MTRCommandWithRequiredResponse{inner: raw.MTRCommandWithRequiredResponseFromID(_id)}
+// mTRCommandWithRequiredResponseAdopt wraps an Objective-C object that this code just created as a
+// MTRCommandWithRequiredResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRCommandWithRequiredResponseAdopt(id objc.ID) *MTRCommandWithRequiredResponse {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRCommandWithRequiredResponse{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRCommandWithRequiredResponse) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRCommandWithRequiredResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRCommandWithRequiredResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRCommandWithRequiredResponseWithPathCommandFieldsRequiredResponse creates a new MTRCommandWithRequiredResponse.
+func NewMTRCommandWithRequiredResponseWithPathCommandFieldsRequiredResponse(path *MTRCommandPath, commandFields obj.Object, requiredResponse obj.Object) *MTRCommandWithRequiredResponse {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRCommandWithRequiredResponse")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPath:commandFields:requiredResponse:"), objref.IDOf(path), objref.IDOf(commandFields), objref.IDOf(requiredResponse))
+	return mTRCommandWithRequiredResponseAdopt(_id)
 }
 
 // The path of the command being invoked.
 //
-// WithPath sets the path property and returns the receiver for chaining.
+// WithPath sets path and returns the receiver so calls can be chained.
 func (x *MTRCommandWithRequiredResponse) WithPath(path *MTRCommandPath) *MTRCommandWithRequiredResponse {
-	x.inner.SetPath(path.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return x
 }
 
 // The command fields to pass for the command invoke. nil if this command does not have any fields. If not nil, this should be a data-value dictionary of MTRStructureValueType.
 //
-// WithCommandFields sets the commandFields property and returns the receiver for chaining.
-func (x *MTRCommandWithRequiredResponse) WithCommandFields(commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTRCommandWithRequiredResponse {
-	x.inner.SetCommandFields(commandFields)
+// WithCommandFields sets commandFields and returns the receiver so calls can be chained.
+func (x *MTRCommandWithRequiredResponse) WithCommandFields(commandFields obj.Object) *MTRCommandWithRequiredResponse {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandFields:"), objref.IDOf(commandFields))
 	return x
 }
 
 // The response that represents this command succeeding.
 //
-// WithRequiredResponse sets the requiredResponse property and returns the receiver for chaining.
-func (x *MTRCommandWithRequiredResponse) WithRequiredResponse(requiredResponse *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *MTRCommandWithRequiredResponse {
-	x.inner.SetRequiredResponse(requiredResponse)
+// WithRequiredResponse sets requiredResponse and returns the receiver so calls can be chained.
+func (x *MTRCommandWithRequiredResponse) WithRequiredResponse(requiredResponse obj.Object) *MTRCommandWithRequiredResponse {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredResponse:"), objref.IDOf(requiredResponse))
 	return x
 }
 
 // The path of the command being invoked.
-//
-// Path calls the underlying Path.
 func (x *MTRCommandWithRequiredResponse) Path() *MTRCommandPath {
-	_r := x.inner.Path()
-	if _r == nil {
-		return nil
-	}
-	return &MTRCommandPath{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+	return MTRCommandPathFromID(_r)
 }
 
-// SetPath calls the underlying SetPath.
-func (x *MTRCommandWithRequiredResponse) SetPath(path *raw.MTRCommandPath) {
-	x.inner.SetPath(path)
+func (x *MTRCommandWithRequiredResponse) SetPath(path *MTRCommandPath) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
 }
 
 // The command fields to pass for the command invoke.  nil if this command does not have any fields.  If not nil, this should be a data-value dictionary of MTRStructureValueType.
-//
-// CommandFields calls the underlying CommandFields.
-func (x *MTRCommandWithRequiredResponse) CommandFields() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.CommandFields()
+func (x *MTRCommandWithRequiredResponse) CommandFields() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commandFields"))
+	return obj.Wrap(_r)
 }
 
-// SetCommandFields calls the underlying SetCommandFields.
-func (x *MTRCommandWithRequiredResponse) SetCommandFields(commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.SetCommandFields(commandFields)
+func (x *MTRCommandWithRequiredResponse) SetCommandFields(commandFields obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandFields:"), objref.IDOf(commandFields))
 }
 
 // The response that represents this command succeeding. If this is nil, that indicates that the invoke is considered successful if it does not result in an error status response. If this is is not nil, then the invoke is considered successful if the response is a data response and for each entry in the provided requiredResponse the field whose field ID matches the key of the entry has a value that equals the value of the entry.  Values of entries are data-value dictionaries.
-//
-// RequiredResponse calls the underlying RequiredResponse.
-func (x *MTRCommandWithRequiredResponse) RequiredResponse() *foundation.NSDictionary[*foundation.NSNumber, objc.ID] {
-	return x.inner.RequiredResponse()
+func (x *MTRCommandWithRequiredResponse) RequiredResponse() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requiredResponse"))
+	return obj.Wrap(_r)
 }
 
-// SetRequiredResponse calls the underlying SetRequiredResponse.
-func (x *MTRCommandWithRequiredResponse) SetRequiredResponse(requiredResponse *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) {
-	x.inner.SetRequiredResponse(requiredResponse)
+func (x *MTRCommandWithRequiredResponse) SetRequiredResponse(requiredResponse obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredResponse:"), objref.IDOf(requiredResponse))
 }
 
 // MTRCommandWithRequiredResponseable is the interface implemented by [MTRCommandWithRequiredResponse], for mocking and DI.
 type MTRCommandWithRequiredResponseable interface {
-	Unwrap() *raw.MTRCommandWithRequiredResponse
+	obj.Object
 	WithPath(path *MTRCommandPath) *MTRCommandWithRequiredResponse
-	WithCommandFields(commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MTRCommandWithRequiredResponse
-	WithRequiredResponse(requiredResponse *foundation.NSDictionary[*foundation.NSNumber, objc.ID]) *MTRCommandWithRequiredResponse
+	WithCommandFields(commandFields obj.Object) *MTRCommandWithRequiredResponse
+	WithRequiredResponse(requiredResponse obj.Object) *MTRCommandWithRequiredResponse
 	Path() *MTRCommandPath
-	SetPath(path *raw.MTRCommandPath)
-	CommandFields() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SetCommandFields(commandFields *foundation.NSDictionary[*foundation.NSString, objc.ID])
-	RequiredResponse() *foundation.NSDictionary[*foundation.NSNumber, objc.ID]
-	SetRequiredResponse(requiredResponse *foundation.NSDictionary[*foundation.NSNumber, objc.ID])
+	SetPath(path *MTRCommandPath)
+	CommandFields() obj.Object
+	SetCommandFields(commandFields obj.Object)
+	RequiredResponse() obj.Object
+	SetRequiredResponse(requiredResponse obj.Object)
 }
 
 var _ MTRCommandWithRequiredResponseable = (*MTRCommandWithRequiredResponse)(nil)

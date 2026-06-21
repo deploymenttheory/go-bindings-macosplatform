@@ -5,75 +5,87 @@
 package browserenginekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/browserenginekit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An object that represents a running browser rendering extension process.
 //
-// RenderingProcess wraps [raw.BERenderingProcess] with a fluent Go API.
+// RenderingProcess is an idiomatic wrapper over the Objective-C class BERenderingProcess.
 type RenderingProcess struct {
-	inner *raw.BERenderingProcess
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.BERenderingProcess].
-func (x *RenderingProcess) Unwrap() *raw.BERenderingProcess { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RenderingProcess) ID() objc.ID { return x.inner.Ptr() }
-
-// RenderingProcessFromID adopts an existing object pointer as a RenderingProcess (nil for 0).
+// RenderingProcessFromID adopts an existing Objective-C object as a RenderingProcess
+// (nil for 0), retaining it and registering a release finalizer.
 func RenderingProcessFromID(id objc.ID) *RenderingProcess {
 	if id == 0 {
 		return nil
 	}
-	return &RenderingProcess{inner: raw.BERenderingProcessFromID(id)}
+	x := &RenderingProcess{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRenderingProcess creates a new [RenderingProcess].
+// renderingProcessAdopt wraps an Objective-C object that this code just created as a
+// RenderingProcess (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func renderingProcessAdopt(id objc.ID) *RenderingProcess {
+	if id == 0 {
+		return nil
+	}
+	x := &RenderingProcess{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RenderingProcess) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RenderingProcess) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RenderingProcess) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRenderingProcess creates a new RenderingProcess.
 func NewRenderingProcess() *RenderingProcess {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("BERenderingProcess")), objc.RegisterName("new"))
-	return &RenderingProcess{inner: raw.BERenderingProcessFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("BERenderingProcess")), objc.RegisterName("new"))
+	return renderingProcessAdopt(_id)
 }
 
 // Stops the rendering process.
-//
-// Invalidate calls the underlying Invalidate.
 func (x *RenderingProcess) Invalidate() {
-	x.inner.Invalidate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
 // Creates a new XPC connection to the extension process.
-//
-// MakeLibXPCConnectionError calls the underlying MakeLibXPCConnectionError.
-func (x *RenderingProcess) MakeLibXPCConnectionError() (*foundation.NSObject, error) {
-	return x.inner.MakeLibXPCConnectionError()
-}
-
-// Grants the specified capability to the process.
-//
-// GrantCapabilityError calls the underlying GrantCapabilityError.
-func (x *RenderingProcess) GrantCapabilityError(capability *raw.BEProcessCapability) (raw.BEProcessCapabilityGrant, error) {
-	return x.inner.GrantCapabilityError(capability)
-}
-
-// Grants the specified capability to the process, invoking the handler when the capability becomes invalid.
-//
-// GrantCapabilityErrorInvalidationHandler calls the underlying GrantCapabilityErrorInvalidationHandler.
-func (x *RenderingProcess) GrantCapabilityErrorInvalidationHandler(capability *raw.BEProcessCapability, error_ unsafe.Pointer, invalidationHandler func()) raw.BEProcessCapabilityGrant {
-	return x.inner.GrantCapabilityErrorInvalidationHandler(capability, error_, invalidationHandler)
+func (x *RenderingProcess) MakeLibXPCConnectionError() (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeLibXPCConnectionError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // RenderingProcessable is the interface implemented by [RenderingProcess], for mocking and DI.
 type RenderingProcessable interface {
-	Unwrap() *raw.BERenderingProcess
+	obj.Object
 	Invalidate()
-	MakeLibXPCConnectionError() (*foundation.NSObject, error)
-	GrantCapabilityError(capability *raw.BEProcessCapability) (raw.BEProcessCapabilityGrant, error)
-	GrantCapabilityErrorInvalidationHandler(capability *raw.BEProcessCapability, error_ unsafe.Pointer, invalidationHandler func()) raw.BEProcessCapabilityGrant
+	MakeLibXPCConnectionError() (obj.Object, error)
 }
 
 var _ RenderingProcessable = (*RenderingProcess)(nil)

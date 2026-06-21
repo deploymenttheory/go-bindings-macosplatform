@@ -5,55 +5,75 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MathExpressionText wraps [raw.AXMathExpressionText] with a fluent Go API.
+// MathExpressionText is an idiomatic wrapper over the Objective-C class AXMathExpressionText.
 type MathExpressionText struct {
-	inner *raw.AXMathExpressionText
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AXMathExpressionText].
-func (x *MathExpressionText) Unwrap() *raw.AXMathExpressionText { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MathExpressionText) ID() objc.ID { return x.inner.Ptr() }
-
-// MathExpressionTextFromID adopts an existing object pointer as a MathExpressionText (nil for 0).
+// MathExpressionTextFromID adopts an existing Objective-C object as a MathExpressionText
+// (nil for 0), retaining it and registering a release finalizer.
 func MathExpressionTextFromID(id objc.ID) *MathExpressionText {
 	if id == 0 {
 		return nil
 	}
-	return &MathExpressionText{inner: raw.AXMathExpressionTextFromID(id)}
+	x := &MathExpressionText{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMathExpressionTextWithContent creates a new [MathExpressionText].
+// mathExpressionTextAdopt wraps an Objective-C object that this code just created as a
+// MathExpressionText (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mathExpressionTextAdopt(id objc.ID) *MathExpressionText {
+	if id == 0 {
+		return nil
+	}
+	x := &MathExpressionText{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MathExpressionText) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MathExpressionText) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MathExpressionText) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMathExpressionTextWithContent creates a new MathExpressionText.
 func NewMathExpressionTextWithContent(content string) *MathExpressionText {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXMathExpressionText")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContent:"), foundation.NSStringStringWithUTF8String(content).Ptr())
-	return &MathExpressionText{inner: raw.AXMathExpressionTextFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AXMathExpressionText")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContent:"), purego.NSString(content))
+	return mathExpressionTextAdopt(_id)
 }
 
-// Content calls the underlying Content.
 func (x *MathExpressionText) Content() string {
-	_r := x.inner.Content()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("content"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *MathExpressionText) asMathExpression() *raw.AXMathExpression {
-	return &x.inner.AXMathExpression
+	return purego.GoString(_r)
 }
 
 // MathExpressionTextable is the interface implemented by [MathExpressionText], for mocking and DI.
 type MathExpressionTextable interface {
-	Unwrap() *raw.AXMathExpressionText
+	obj.Object
 	Content() string
 }
 

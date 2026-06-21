@@ -5,261 +5,262 @@
 package fileprovider
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fileprovider"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A File Provider extension’s domain.
 //
-// FileProviderDomain wraps [raw.NSFileProviderDomain] with a fluent Go API.
+// FileProviderDomain is an idiomatic wrapper over the Objective-C class NSFileProviderDomain.
 type FileProviderDomain struct {
-	inner *raw.NSFileProviderDomain
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFileProviderDomain].
-func (x *FileProviderDomain) Unwrap() *raw.NSFileProviderDomain { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileProviderDomain) ID() objc.ID { return x.inner.Ptr() }
-
-// FileProviderDomainFromID adopts an existing object pointer as a FileProviderDomain (nil for 0).
+// FileProviderDomainFromID adopts an existing Objective-C object as a FileProviderDomain
+// (nil for 0), retaining it and registering a release finalizer.
 func FileProviderDomainFromID(id objc.ID) *FileProviderDomain {
 	if id == 0 {
 		return nil
 	}
-	return &FileProviderDomain{inner: raw.NSFileProviderDomainFromID(id)}
+	x := &FileProviderDomain{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// fileProviderDomainAdopt wraps an Objective-C object that this code just created as a
+// FileProviderDomain (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileProviderDomainAdopt(id objc.ID) *FileProviderDomain {
+	if id == 0 {
+		return nil
+	}
+	x := &FileProviderDomain{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FileProviderDomain) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileProviderDomain) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileProviderDomain) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new file provider domain with the specified identifier and display name.
 //
-// NewFileProviderDomainWithIdentifierDisplayName creates a new [FileProviderDomain].
-func NewFileProviderDomainWithIdentifierDisplayName(identifier *foundation.NSString, displayName string) *FileProviderDomain {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileProviderDomain")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:displayName:"), identifier.Ptr(), foundation.NSStringStringWithUTF8String(displayName).Ptr())
-	return &FileProviderDomain{inner: raw.NSFileProviderDomainFromID(_id)}
+// NewFileProviderDomainWithIdentifierDisplayName creates a new FileProviderDomain.
+func NewFileProviderDomainWithIdentifierDisplayName(identifier obj.Object, displayName string) *FileProviderDomain {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileProviderDomain")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:displayName:"), objref.IDOf(identifier), purego.NSString(displayName))
+	return fileProviderDomainAdopt(_id)
 }
 
 // Creates a new file provider domain with the specified URL and display name.
 //
-// NewFileProviderDomainWithDisplayNameUserInfoVolumeURL creates a new [FileProviderDomain].
-func NewFileProviderDomainWithDisplayNameUserInfoVolumeURL(displayName string, userInfo purego.IDer, volumeURL string) *FileProviderDomain {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileProviderDomain")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplayName:userInfo:volumeURL:"), foundation.NSStringStringWithUTF8String(displayName).Ptr(), userInfo.ID(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(volumeURL)).Ptr())
-	return &FileProviderDomain{inner: raw.NSFileProviderDomainFromID(_id)}
+// NewFileProviderDomainWithDisplayNameUserInfoVolumeURL creates a new FileProviderDomain.
+func NewFileProviderDomainWithDisplayNameUserInfoVolumeURL(displayName string, userInfo obj.Object, volumeURL string) *FileProviderDomain {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileProviderDomain")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDisplayName:userInfo:volumeURL:"), purego.NSString(displayName), objref.IDOf(userInfo), rt.FileURL(volumeURL))
+	return fileProviderDomainAdopt(_id)
 }
 
 // A Boolean value that determines whether the domain is visible to users.
 //
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *FileProviderDomain) WithHidden(hidden bool) *FileProviderDomain {
-	x.inner.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
 // A mode that gives the File Provider extension more control over the system’s behavior during testing.
 //
-// WithTestingModes sets the testingModes property and returns the receiver for chaining.
-func (x *FileProviderDomain) WithTestingModes(testingModes NSFileProviderDomainTestingModes) *FileProviderDomain {
-	x.inner.SetTestingModes(raw.NSFileProviderDomainTestingModes(testingModes))
+// WithTestingModes sets testingModes and returns the receiver so calls can be chained.
+func (x *FileProviderDomain) WithTestingModes(testingModes FileProviderDomainTestingModes) *FileProviderDomain {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTestingModes:"), testingModes)
 	return x
 }
 
 // Whether the domain supports syncing the trash. The system supports syncing a trash folder (NSFileProviderTrashContainerItemIdentifier) to the extension. On iOS, this is surfaced to the user as "Recently Deleted" in the Files app. On macOS, this is surfaced to the user as the Trash in Finder. If the domain is configured with supportsSyncingTrash=YES, the system will reparent trashed files (which were located in the extension's domain) to NSFileProviderTrashContainerItemIdentifier. If the domain is configured with supportsSyncingTrash=NO, the system will decide how to handle the trashing operation (not guaranteed by API contract). This property is only applicable for NSFileProviderReplicatedExtension-based domains. This property defaults to YES.
 //
-// WithSupportsSyncingTrash sets the supportsSyncingTrash property and returns the receiver for chaining.
+// WithSupportsSyncingTrash sets supportsSyncingTrash and returns the receiver so calls can be chained.
 func (x *FileProviderDomain) WithSupportsSyncingTrash(supportsSyncingTrash bool) *FileProviderDomain {
-	x.inner.SetSupportsSyncingTrash(supportsSyncingTrash)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsSyncingTrash:"), supportsSyncingTrash)
 	return x
 }
 
 // A dictionary set by the client app. Keys must be strings, values must be [String, Number, Date, Data]
 //
-// WithUserInfo sets the userInfo property and returns the receiver for chaining.
-func (x *FileProviderDomain) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *FileProviderDomain {
-	x.inner.SetUserInfo(userInfo)
+// WithUserInfo sets userInfo and returns the receiver so calls can be chained.
+func (x *FileProviderDomain) WithUserInfo(userInfo obj.Object) *FileProviderDomain {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return x
 }
 
 // A list of known folders that the domain can replicate.
 //
-// WithSupportedKnownFolders sets the supportedKnownFolders property and returns the receiver for chaining.
-func (x *FileProviderDomain) WithSupportedKnownFolders(supportedKnownFolders NSFileProviderKnownFolders) *FileProviderDomain {
-	x.inner.SetSupportedKnownFolders(raw.NSFileProviderKnownFolders(supportedKnownFolders))
+// WithSupportedKnownFolders sets supportedKnownFolders and returns the receiver so calls can be chained.
+func (x *FileProviderDomain) WithSupportedKnownFolders(supportedKnownFolders FileProviderKnownFolders) *FileProviderDomain {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedKnownFolders:"), supportedKnownFolders)
 	return x
 }
 
 // A Boolean value that indicates whether the provider supports search.
 //
-// WithSupportsStringSearchRequest sets the supportsStringSearchRequest property and returns the receiver for chaining.
+// WithSupportsStringSearchRequest sets supportsStringSearchRequest and returns the receiver so calls can be chained.
 func (x *FileProviderDomain) WithSupportsStringSearchRequest(supportsStringSearchRequest bool) *FileProviderDomain {
-	x.inner.SetSupportsStringSearchRequest(supportsStringSearchRequest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsStringSearchRequest:"), supportsStringSearchRequest)
 	return x
 }
 
 // The identifier - as provided by the file provider extension.
-//
-// Identifier calls the underlying Identifier.
-func (x *FileProviderDomain) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *FileProviderDomain) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	return obj.Wrap(_r)
 }
 
 // The display name shown by the system to represent this domain.
-//
-// DisplayName calls the underlying DisplayName.
 func (x *FileProviderDomain) DisplayName() string {
-	_r := x.inner.DisplayName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // If set, the domain is present, but disconnected from its extension. In this state, the user continues to be able to browse the domain's contents, but the extension doesn't receive updates on modifications to the files, nor is it consulted to update folder's contents. The disconnected state can be modified on an existing domain via the disconnectWithReason method on NSFileProviderManager.
-//
-// IsDisconnected calls the underlying IsDisconnected.
 func (x *FileProviderDomain) IsDisconnected() bool {
-	return x.inner.IsDisconnected()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDisconnected"))
+	return _r
 }
 
 // If user has disabled this domain from Files.app on iOS or System Settings on macOS, this will be set to NO.
-//
-// UserEnabled calls the underlying UserEnabled.
 func (x *FileProviderDomain) UserEnabled() bool {
-	return x.inner.UserEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("userEnabled"))
+	return _r
 }
 
 // If this domain is not user visible. Typically, this can be used for dry-run migration. The files are still on disk though.
-//
-// IsHidden calls the underlying IsHidden.
 func (x *FileProviderDomain) IsHidden() bool {
-	return x.inner.IsHidden()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+	return _r
 }
 
-// SetHidden calls the underlying SetHidden.
 func (x *FileProviderDomain) SetHidden(hidden bool) {
-	x.inner.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 }
 
 // If the domain is a replicated domain. If set to YES, it means the domain is replicated. By default, on macOS, the value will always be YES. On iOS, it will depend on the way the NSFileProviderDomain object is contructed. Calling -[NSFileProviderDomain initWithIdentifier:displayName:] will initialize a replicated domain. -[NSFileProviderDomain initWithIdentifier:displayName:pathRelativeToDocumentStorage:] will initialize a non-replicated domain. To know whether a domain is replicated or not, users are advised to rely on the output of +[NSFileProviderManager getDomainsForProviderIdentifier:completionHandler:]
-//
-// IsReplicated calls the underlying IsReplicated.
 func (x *FileProviderDomain) IsReplicated() bool {
-	return x.inner.IsReplicated()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReplicated"))
+	return _r
 }
 
 // Testing modes. Testing modes are exposed as a means for the provider to have more control over the system in a testing environment. Enabling a testing mode alters the behavior of the system and enables some APIs for that mode. A process must have the com.apple.developer.fileprovider.testing-mode entitlement in order to configure a domain with non-empty testing modes.
-//
-// TestingModes calls the underlying TestingModes.
-func (x *FileProviderDomain) TestingModes() NSFileProviderDomainTestingModes {
-	return NSFileProviderDomainTestingModes(x.inner.TestingModes())
+func (x *FileProviderDomain) TestingModes() FileProviderDomainTestingModes {
+	_r := objc.Send[FileProviderDomainTestingModes](objref.IDOf(x), objc.RegisterName("testingModes"))
+	return _r
 }
 
-// SetTestingModes calls the underlying SetTestingModes.
-func (x *FileProviderDomain) SetTestingModes(testingModes NSFileProviderDomainTestingModes) {
-	x.inner.SetTestingModes(raw.NSFileProviderDomainTestingModes(testingModes))
+func (x *FileProviderDomain) SetTestingModes(testingModes FileProviderDomainTestingModes) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTestingModes:"), testingModes)
 }
 
 // Identity of the backing store of the domain on the system. This property only applies for extensions that implement NSFileProviderReplicatedExtension. This provides an identifier that uniquely identifies the backing store used by the system for the domain. When this identifier has changed, the system has dropped its backing store and is building a new one. The system may decide to rebuild its backing store if it got corrupted. The backing store can also be rebuilt as a response to the provider calling `-[NSFileProviderManager reimportItemsBelowItemWithIdentifier:completionHandler:]`. It is guaranteed that calling reimport on the root item will cause the backing store to be rebuilt, but the system can also decide to do so when reimport is called on other items. When rebuilding the backing store, the system will invalidate any extension instance associated to that domain. As a consequence, the identity of the backing store associated with that domain is guaranteed to be stable for the lifetime of the NSFileProviderReplicatedExtension instance.
-//
-// BackingStoreIdentity calls the underlying BackingStoreIdentity.
-func (x *FileProviderDomain) BackingStoreIdentity() *foundation.NSData {
-	return x.inner.BackingStoreIdentity()
+func (x *FileProviderDomain) BackingStoreIdentity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backingStoreIdentity"))
+	return obj.Wrap(_r)
 }
 
 // Whether the domain supports syncing the trash. The system supports syncing a trash folder (NSFileProviderTrashContainerItemIdentifier) to the extension. On iOS, this is surfaced to the user as "Recently Deleted" in the Files app. On macOS, this is surfaced to the user as the Trash in Finder. If the domain is configured with supportsSyncingTrash=YES, the system will reparent trashed files (which were located in the extension's domain) to NSFileProviderTrashContainerItemIdentifier. If the domain is configured with supportsSyncingTrash=NO, the system will decide how to handle the trashing operation (not guaranteed by API contract). This property is only applicable for NSFileProviderReplicatedExtension-based domains. This property defaults to YES.
-//
-// SupportsSyncingTrash calls the underlying SupportsSyncingTrash.
 func (x *FileProviderDomain) SupportsSyncingTrash() bool {
-	return x.inner.SupportsSyncingTrash()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsSyncingTrash"))
+	return _r
 }
 
-// SetSupportsSyncingTrash calls the underlying SetSupportsSyncingTrash.
 func (x *FileProviderDomain) SetSupportsSyncingTrash(supportsSyncingTrash bool) {
-	x.inner.SetSupportsSyncingTrash(supportsSyncingTrash)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsSyncingTrash:"), supportsSyncingTrash)
 }
 
-// VolumeUUID calls the underlying VolumeUUID.
-func (x *FileProviderDomain) VolumeUUID() *foundation.NSUUID {
-	return x.inner.VolumeUUID()
+func (x *FileProviderDomain) VolumeUUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("volumeUUID"))
+	return obj.Wrap(_r)
 }
 
 // A dictionary set by the client app. Keys must be strings, values must be [String, Number, Date, Data]
-//
-// UserInfo calls the underlying UserInfo.
-func (x *FileProviderDomain) UserInfo() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.UserInfo()
+func (x *FileProviderDomain) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+	return obj.Wrap(_r)
 }
 
-// SetUserInfo calls the underlying SetUserInfo.
-func (x *FileProviderDomain) SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.SetUserInfo(userInfo)
+func (x *FileProviderDomain) SetUserInfo(userInfo obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 }
 
 // List of known folders that are currently replicated by this domain.
-//
-// ReplicatedKnownFolders calls the underlying ReplicatedKnownFolders.
-func (x *FileProviderDomain) ReplicatedKnownFolders() NSFileProviderKnownFolders {
-	return NSFileProviderKnownFolders(x.inner.ReplicatedKnownFolders())
+func (x *FileProviderDomain) ReplicatedKnownFolders() FileProviderKnownFolders {
+	_r := objc.Send[FileProviderKnownFolders](objref.IDOf(x), objc.RegisterName("replicatedKnownFolders"))
+	return _r
 }
 
 // List known folders that can be replicated by this domain.
-//
-// SupportedKnownFolders calls the underlying SupportedKnownFolders.
-func (x *FileProviderDomain) SupportedKnownFolders() NSFileProviderKnownFolders {
-	return NSFileProviderKnownFolders(x.inner.SupportedKnownFolders())
+func (x *FileProviderDomain) SupportedKnownFolders() FileProviderKnownFolders {
+	_r := objc.Send[FileProviderKnownFolders](objref.IDOf(x), objc.RegisterName("supportedKnownFolders"))
+	return _r
 }
 
-// SetSupportedKnownFolders calls the underlying SetSupportedKnownFolders.
-func (x *FileProviderDomain) SetSupportedKnownFolders(supportedKnownFolders NSFileProviderKnownFolders) {
-	x.inner.SetSupportedKnownFolders(raw.NSFileProviderKnownFolders(supportedKnownFolders))
+func (x *FileProviderDomain) SetSupportedKnownFolders(supportedKnownFolders FileProviderKnownFolders) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedKnownFolders:"), supportedKnownFolders)
 }
 
 // Whether the system should use this domain's `NSFileProviderSearching` implementation to support search experiences. Defaults to NO.
-//
-// SupportsStringSearchRequest calls the underlying SupportsStringSearchRequest.
 func (x *FileProviderDomain) SupportsStringSearchRequest() bool {
-	return x.inner.SupportsStringSearchRequest()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsStringSearchRequest"))
+	return _r
 }
 
-// SetSupportsStringSearchRequest calls the underlying SetSupportsStringSearchRequest.
 func (x *FileProviderDomain) SetSupportsStringSearchRequest(supportsStringSearchRequest bool) {
-	x.inner.SetSupportsStringSearchRequest(supportsStringSearchRequest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsStringSearchRequest:"), supportsStringSearchRequest)
 }
 
 // FileProviderDomainable is the interface implemented by [FileProviderDomain], for mocking and DI.
 type FileProviderDomainable interface {
-	Unwrap() *raw.NSFileProviderDomain
+	obj.Object
 	WithHidden(hidden bool) *FileProviderDomain
-	WithTestingModes(testingModes NSFileProviderDomainTestingModes) *FileProviderDomain
+	WithTestingModes(testingModes FileProviderDomainTestingModes) *FileProviderDomain
 	WithSupportsSyncingTrash(supportsSyncingTrash bool) *FileProviderDomain
-	WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *FileProviderDomain
-	WithSupportedKnownFolders(supportedKnownFolders NSFileProviderKnownFolders) *FileProviderDomain
+	WithUserInfo(userInfo obj.Object) *FileProviderDomain
+	WithSupportedKnownFolders(supportedKnownFolders FileProviderKnownFolders) *FileProviderDomain
 	WithSupportsStringSearchRequest(supportsStringSearchRequest bool) *FileProviderDomain
-	Identifier() string
+	Identifier() obj.Object
 	DisplayName() string
 	IsDisconnected() bool
 	UserEnabled() bool
 	IsHidden() bool
 	SetHidden(hidden bool)
 	IsReplicated() bool
-	TestingModes() NSFileProviderDomainTestingModes
-	SetTestingModes(testingModes NSFileProviderDomainTestingModes)
-	BackingStoreIdentity() *foundation.NSData
+	TestingModes() FileProviderDomainTestingModes
+	SetTestingModes(testingModes FileProviderDomainTestingModes)
+	BackingStoreIdentity() obj.Object
 	SupportsSyncingTrash() bool
 	SetSupportsSyncingTrash(supportsSyncingTrash bool)
-	VolumeUUID() *foundation.NSUUID
-	UserInfo() *foundation.NSDictionary[objc.ID, objc.ID]
-	SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID])
-	ReplicatedKnownFolders() NSFileProviderKnownFolders
-	SupportedKnownFolders() NSFileProviderKnownFolders
-	SetSupportedKnownFolders(supportedKnownFolders NSFileProviderKnownFolders)
+	VolumeUUID() obj.Object
+	UserInfo() obj.Object
+	SetUserInfo(userInfo obj.Object)
+	ReplicatedKnownFolders() FileProviderKnownFolders
+	SupportedKnownFolders() FileProviderKnownFolders
+	SetSupportedKnownFolders(supportedKnownFolders FileProviderKnownFolders)
 	SupportsStringSearchRequest() bool
 	SetSupportsStringSearchRequest(supportsStringSearchRequest bool)
 }

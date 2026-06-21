@@ -5,98 +5,106 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Represents a summary metric event with aggregated metrics for the entire download task.
 //
-// MetricDownloadSummaryEvent wraps [raw.AVMetricDownloadSummaryEvent] with a fluent Go API.
+// MetricDownloadSummaryEvent is an idiomatic wrapper over the Objective-C class AVMetricDownloadSummaryEvent.
 type MetricDownloadSummaryEvent struct {
-	inner *raw.AVMetricDownloadSummaryEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMetricDownloadSummaryEvent].
-func (x *MetricDownloadSummaryEvent) Unwrap() *raw.AVMetricDownloadSummaryEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetricDownloadSummaryEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricDownloadSummaryEventFromID adopts an existing object pointer as a MetricDownloadSummaryEvent (nil for 0).
+// MetricDownloadSummaryEventFromID adopts an existing Objective-C object as a MetricDownloadSummaryEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricDownloadSummaryEventFromID(id objc.ID) *MetricDownloadSummaryEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MetricDownloadSummaryEvent{inner: raw.AVMetricDownloadSummaryEventFromID(id)}
+	x := &MetricDownloadSummaryEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMetricDownloadSummaryEvent creates a new [MetricDownloadSummaryEvent].
+// metricDownloadSummaryEventAdopt wraps an Objective-C object that this code just created as a
+// MetricDownloadSummaryEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricDownloadSummaryEventAdopt(id objc.ID) *MetricDownloadSummaryEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MetricDownloadSummaryEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetricDownloadSummaryEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetricDownloadSummaryEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetricDownloadSummaryEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMetricDownloadSummaryEvent creates a new MetricDownloadSummaryEvent.
 func NewMetricDownloadSummaryEvent() *MetricDownloadSummaryEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetricDownloadSummaryEvent")), objc.RegisterName("new"))
-	return &MetricDownloadSummaryEvent{inner: raw.AVMetricDownloadSummaryEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetricDownloadSummaryEvent")), objc.RegisterName("new"))
+	return metricDownloadSummaryEventAdopt(_id)
 }
 
 // Returns the error event if any. If no value is available, returns nil.
-//
-// ErrorEvent calls the underlying ErrorEvent.
 func (x *MetricDownloadSummaryEvent) ErrorEvent() *MetricErrorEvent {
-	_r := x.inner.ErrorEvent()
-	if _r == nil {
-		return nil
-	}
-	return &MetricErrorEvent{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorEvent"))
+	return MetricErrorEventFromID(_r)
 }
 
 // Returns the total count of recoverable errors encountered during the download. If no errors were encountered, returns 0. Error counts may not be consistent across OS versions. Comparisons should be made within a given OS version, as error reporting is subject to change with OS updates.
-//
-// RecoverableErrorCount calls the underlying RecoverableErrorCount.
 func (x *MetricDownloadSummaryEvent) RecoverableErrorCount() int {
-	return x.inner.RecoverableErrorCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("recoverableErrorCount"))
+	return _r
 }
 
 // Returns the total number of media requests performed by the download task. This includes playlist requests, media segment requests, and content key requests.
-//
-// MediaResourceRequestCount calls the underlying MediaResourceRequestCount.
 func (x *MetricDownloadSummaryEvent) MediaResourceRequestCount() int {
-	return x.inner.MediaResourceRequestCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mediaResourceRequestCount"))
+	return _r
 }
 
 // Returns the total number of bytes downloaded by the download task.
-//
-// BytesDownloadedCount calls the underlying BytesDownloadedCount.
 func (x *MetricDownloadSummaryEvent) BytesDownloadedCount() int {
-	return x.inner.BytesDownloadedCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesDownloadedCount"))
+	return _r
 }
 
 // Returns the total duration of the download in seconds.
-//
-// DownloadDuration calls the underlying DownloadDuration.
 func (x *MetricDownloadSummaryEvent) DownloadDuration() float64 {
-	return x.inner.DownloadDuration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("downloadDuration"))
+	return _r
 }
 
 // Returns the variants that were downloaded.
 //
 // Variants returns the collection as a Go slice.
 func (x *MetricDownloadSummaryEvent) Variants() []*AssetVariant {
-	arr := x.inner.Variants()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AssetVariant {
-		return &AssetVariant{inner: raw.AVAssetVariantFromID(purego.Retain(_id))}
-	})
-}
-
-func (x *MetricDownloadSummaryEvent) asMetricEvent() *raw.AVMetricEvent {
-	return &x.inner.AVMetricEvent
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variants"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetVariant { return AssetVariantFromID(_id) })
 }
 
 // MetricDownloadSummaryEventable is the interface implemented by [MetricDownloadSummaryEvent], for mocking and DI.
 type MetricDownloadSummaryEventable interface {
-	Unwrap() *raw.AVMetricDownloadSummaryEvent
+	obj.Object
 	ErrorEvent() *MetricErrorEvent
 	RecoverableErrorCount() int
 	MediaResourceRequestCount() int

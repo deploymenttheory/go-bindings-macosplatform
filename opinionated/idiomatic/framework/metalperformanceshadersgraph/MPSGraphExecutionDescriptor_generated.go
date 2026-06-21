@@ -5,161 +5,111 @@
 package metalperformanceshadersgraph
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A class that consists of all the levers to synchronize and schedule graph execution.
 //
-// GraphExecutionDescriptor wraps [raw.MPSGraphExecutionDescriptor] with a fluent Go API.
+// GraphExecutionDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphExecutionDescriptor.
 type GraphExecutionDescriptor struct {
-	inner *raw.MPSGraphExecutionDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSGraphExecutionDescriptor].
-func (x *GraphExecutionDescriptor) Unwrap() *raw.MPSGraphExecutionDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphExecutionDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphExecutionDescriptorFromID adopts an existing object pointer as a GraphExecutionDescriptor (nil for 0).
+// GraphExecutionDescriptorFromID adopts an existing Objective-C object as a GraphExecutionDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphExecutionDescriptorFromID(id objc.ID) *GraphExecutionDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &GraphExecutionDescriptor{inner: raw.MPSGraphExecutionDescriptorFromID(id)}
+	x := &GraphExecutionDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGraphExecutionDescriptor creates a new [GraphExecutionDescriptor].
+// graphExecutionDescriptorAdopt wraps an Objective-C object that this code just created as a
+// GraphExecutionDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphExecutionDescriptorAdopt(id objc.ID) *GraphExecutionDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphExecutionDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GraphExecutionDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GraphExecutionDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GraphExecutionDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGraphExecutionDescriptor creates a new GraphExecutionDescriptor.
 func NewGraphExecutionDescriptor() *GraphExecutionDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphExecutionDescriptor")), objc.RegisterName("new"))
-	return &GraphExecutionDescriptor{inner: raw.MPSGraphExecutionDescriptorFromID(_id)}
-}
-
-// The handler that graph calls when it schedules the execution.
-//
-// WithScheduledHandler sets the scheduledHandler property and returns the receiver for chaining.
-func (x *GraphExecutionDescriptor) WithScheduledHandler(scheduledHandler func(unsafe.Pointer, unsafe.Pointer)) *GraphExecutionDescriptor {
-	x.inner.SetScheduledHandler(scheduledHandler)
-	return x
-}
-
-// The handler that graph calls at the completion of the execution.
-//
-// WithCompletionHandler sets the completionHandler property and returns the receiver for chaining.
-func (x *GraphExecutionDescriptor) WithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) *GraphExecutionDescriptor {
-	x.inner.SetCompletionHandler(completionHandler)
-	return x
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphExecutionDescriptor")), objc.RegisterName("new"))
+	return graphExecutionDescriptorAdopt(_id)
 }
 
 // The flag that blocks the execution call until the entire execution is complete.
 //
-// WithWaitUntilCompleted sets the waitUntilCompleted property and returns the receiver for chaining.
+// WithWaitUntilCompleted sets waitUntilCompleted and returns the receiver so calls can be chained.
 func (x *GraphExecutionDescriptor) WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutionDescriptor {
-	x.inner.SetWaitUntilCompleted(waitUntilCompleted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaitUntilCompleted:"), waitUntilCompleted)
 	return x
 }
 
 // The compilation descriptor for the graph.
 //
-// WithCompilationDescriptor sets the compilationDescriptor property and returns the receiver for chaining.
+// WithCompilationDescriptor sets compilationDescriptor and returns the receiver so calls can be chained.
 func (x *GraphExecutionDescriptor) WithCompilationDescriptor(compilationDescriptor *GraphCompilationDescriptor) *GraphExecutionDescriptor {
-	x.inner.SetCompilationDescriptor(compilationDescriptor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompilationDescriptor:"), objref.IDOf(compilationDescriptor))
 	return x
 }
 
-// Executable waits on these shared events before scheduling execution on the HW, this does not include encoding which can still continue.
-//
-// WaitForEventValue calls the underlying WaitForEventValue.
-func (x *GraphExecutionDescriptor) WaitForEventValue(event metal.MTLSharedEvent, value uint64) {
-	x.inner.WaitForEventValue(event, value)
-}
-
-// Executable signals these shared events at execution stage and immediately proceeds.
-//
-// SignalEventAtExecutionEventValue calls the underlying SignalEventAtExecutionEventValue.
-func (x *GraphExecutionDescriptor) SignalEventAtExecutionEventValue(event metal.MTLSharedEvent, executionStage MPSGraphExecutionStage, value uint64) {
-	x.inner.SignalEventAtExecutionEventValue(event, raw.MPSGraphExecutionStage(executionStage), value)
-}
-
-// The handler that graph calls when it schedules the execution. Default value is nil.
-//
-// ScheduledHandler calls the underlying ScheduledHandler.
-func (x *GraphExecutionDescriptor) ScheduledHandler() objc.Block {
-	return x.inner.ScheduledHandler()
-}
-
-// SetScheduledHandler calls the underlying SetScheduledHandler.
-func (x *GraphExecutionDescriptor) SetScheduledHandler(scheduledHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	x.inner.SetScheduledHandler(scheduledHandler)
-}
-
-// The handler that graph calls at the completion of the execution. Default value is nil.
-//
-// CompletionHandler calls the underlying CompletionHandler.
-func (x *GraphExecutionDescriptor) CompletionHandler() objc.Block {
-	return x.inner.CompletionHandler()
-}
-
-// SetCompletionHandler calls the underlying SetCompletionHandler.
-func (x *GraphExecutionDescriptor) SetCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	x.inner.SetCompletionHandler(completionHandler)
-}
-
 // The flag that blocks the execution call until the entire execution is complete. Defaults to NO.
-//
-// WaitUntilCompleted calls the underlying WaitUntilCompleted.
 func (x *GraphExecutionDescriptor) WaitUntilCompleted() bool {
-	return x.inner.WaitUntilCompleted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("waitUntilCompleted"))
+	return _r
 }
 
-// SetWaitUntilCompleted calls the underlying SetWaitUntilCompleted.
 func (x *GraphExecutionDescriptor) SetWaitUntilCompleted(waitUntilCompleted bool) {
-	x.inner.SetWaitUntilCompleted(waitUntilCompleted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaitUntilCompleted:"), waitUntilCompleted)
 }
 
 // The compilation descriptor for the graph. Default value is nil.
-//
-// CompilationDescriptor calls the underlying CompilationDescriptor.
 func (x *GraphExecutionDescriptor) CompilationDescriptor() *GraphCompilationDescriptor {
-	_r := x.inner.CompilationDescriptor()
-	if _r == nil {
-		return nil
-	}
-	return &GraphCompilationDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compilationDescriptor"))
+	return GraphCompilationDescriptorFromID(_r)
 }
 
 // The compilation descriptor for the graph. Default value is nil.
-//
-// SetCompilationDescriptor calls the underlying SetCompilationDescriptor.
-func (x *GraphExecutionDescriptor) SetCompilationDescriptor(compilationDescriptor *raw.MPSGraphCompilationDescriptor) {
-	x.inner.SetCompilationDescriptor(compilationDescriptor)
-}
-
-func (x *GraphExecutionDescriptor) asGraphObject() *raw.MPSGraphObject {
-	return &x.inner.MPSGraphObject
+func (x *GraphExecutionDescriptor) SetCompilationDescriptor(compilationDescriptor *GraphCompilationDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompilationDescriptor:"), objref.IDOf(compilationDescriptor))
 }
 
 // GraphExecutionDescriptorable is the interface implemented by [GraphExecutionDescriptor], for mocking and DI.
 type GraphExecutionDescriptorable interface {
-	Unwrap() *raw.MPSGraphExecutionDescriptor
-	WithScheduledHandler(scheduledHandler func(unsafe.Pointer, unsafe.Pointer)) *GraphExecutionDescriptor
-	WithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) *GraphExecutionDescriptor
+	obj.Object
 	WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutionDescriptor
 	WithCompilationDescriptor(compilationDescriptor *GraphCompilationDescriptor) *GraphExecutionDescriptor
-	WaitForEventValue(event metal.MTLSharedEvent, value uint64)
-	SignalEventAtExecutionEventValue(event metal.MTLSharedEvent, executionStage MPSGraphExecutionStage, value uint64)
-	ScheduledHandler() objc.Block
-	SetScheduledHandler(scheduledHandler func(unsafe.Pointer, unsafe.Pointer))
-	CompletionHandler() objc.Block
-	SetCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer))
 	WaitUntilCompleted() bool
 	SetWaitUntilCompleted(waitUntilCompleted bool)
 	CompilationDescriptor() *GraphCompilationDescriptor
-	SetCompilationDescriptor(compilationDescriptor *raw.MPSGraphCompilationDescriptor)
+	SetCompilationDescriptor(compilationDescriptor *GraphCompilationDescriptor)
 }
 
 var _ GraphExecutionDescriptorable = (*GraphExecutionDescriptor)(nil)

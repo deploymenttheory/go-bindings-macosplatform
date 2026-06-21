@@ -5,58 +5,79 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// TransformRotateOp wraps [raw.MDLTransformRotateOp] with a fluent Go API.
+// TransformRotateOp is an idiomatic wrapper over the Objective-C class MDLTransformRotateOp.
 type TransformRotateOp struct {
-	inner *raw.MDLTransformRotateOp
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLTransformRotateOp].
-func (x *TransformRotateOp) Unwrap() *raw.MDLTransformRotateOp { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TransformRotateOp) ID() objc.ID { return x.inner.Ptr() }
-
-// TransformRotateOpFromID adopts an existing object pointer as a TransformRotateOp (nil for 0).
+// TransformRotateOpFromID adopts an existing Objective-C object as a TransformRotateOp
+// (nil for 0), retaining it and registering a release finalizer.
 func TransformRotateOpFromID(id objc.ID) *TransformRotateOp {
 	if id == 0 {
 		return nil
 	}
-	return &TransformRotateOp{inner: raw.MDLTransformRotateOpFromID(id)}
+	x := &TransformRotateOp{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTransformRotateOp creates a new [TransformRotateOp].
-func NewTransformRotateOp() *TransformRotateOp {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLTransformRotateOp")), objc.RegisterName("new"))
-	return &TransformRotateOp{inner: raw.MDLTransformRotateOpFromID(_id)}
-}
-
-// Name calls the underlying Name.
-func (x *TransformRotateOp) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// AnimatedValue calls the underlying AnimatedValue.
-func (x *TransformRotateOp) AnimatedValue() *AnimatedVector3 {
-	_r := x.inner.AnimatedValue()
-	if _r == nil {
+// transformRotateOpAdopt wraps an Objective-C object that this code just created as a
+// TransformRotateOp (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func transformRotateOpAdopt(id objc.ID) *TransformRotateOp {
+	if id == 0 {
 		return nil
 	}
-	return &AnimatedVector3{inner: _r}
+	x := &TransformRotateOp{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TransformRotateOp) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TransformRotateOp) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TransformRotateOp) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTransformRotateOp creates a new TransformRotateOp.
+func NewTransformRotateOp() *TransformRotateOp {
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLTransformRotateOp")), objc.RegisterName("new"))
+	return transformRotateOpAdopt(_id)
+}
+
+func (x *TransformRotateOp) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *TransformRotateOp) AnimatedValue() *AnimatedVector3 {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animatedValue"))
+	return AnimatedVector3FromID(_r)
 }
 
 // TransformRotateOpable is the interface implemented by [TransformRotateOp], for mocking and DI.
 type TransformRotateOpable interface {
-	Unwrap() *raw.MDLTransformRotateOp
+	obj.Object
 	Name() string
 	AnimatedValue() *AnimatedVector3
 }

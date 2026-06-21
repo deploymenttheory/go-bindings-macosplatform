@@ -5,107 +5,126 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRThreadNetworkDirectoryClusterRemoveNetworkParams wraps [raw.MTRThreadNetworkDirectoryClusterRemoveNetworkParams] with a fluent Go API.
+// MTRThreadNetworkDirectoryClusterRemoveNetworkParams is an idiomatic wrapper over the Objective-C class MTRThreadNetworkDirectoryClusterRemoveNetworkParams.
 type MTRThreadNetworkDirectoryClusterRemoveNetworkParams struct {
-	inner *raw.MTRThreadNetworkDirectoryClusterRemoveNetworkParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRThreadNetworkDirectoryClusterRemoveNetworkParams].
-func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) Unwrap() *raw.MTRThreadNetworkDirectoryClusterRemoveNetworkParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRThreadNetworkDirectoryClusterRemoveNetworkParamsFromID adopts an existing object pointer as a MTRThreadNetworkDirectoryClusterRemoveNetworkParams (nil for 0).
+// MTRThreadNetworkDirectoryClusterRemoveNetworkParamsFromID adopts an existing Objective-C object as a MTRThreadNetworkDirectoryClusterRemoveNetworkParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRThreadNetworkDirectoryClusterRemoveNetworkParamsFromID(id objc.ID) *MTRThreadNetworkDirectoryClusterRemoveNetworkParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRThreadNetworkDirectoryClusterRemoveNetworkParams{inner: raw.MTRThreadNetworkDirectoryClusterRemoveNetworkParamsFromID(id)}
+	x := &MTRThreadNetworkDirectoryClusterRemoveNetworkParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRThreadNetworkDirectoryClusterRemoveNetworkParams creates a new [MTRThreadNetworkDirectoryClusterRemoveNetworkParams].
+// mTRThreadNetworkDirectoryClusterRemoveNetworkParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRThreadNetworkDirectoryClusterRemoveNetworkParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRThreadNetworkDirectoryClusterRemoveNetworkParamsAdopt(id objc.ID) *MTRThreadNetworkDirectoryClusterRemoveNetworkParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRThreadNetworkDirectoryClusterRemoveNetworkParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRThreadNetworkDirectoryClusterRemoveNetworkParams creates a new MTRThreadNetworkDirectoryClusterRemoveNetworkParams.
 func NewMTRThreadNetworkDirectoryClusterRemoveNetworkParams() *MTRThreadNetworkDirectoryClusterRemoveNetworkParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRThreadNetworkDirectoryClusterRemoveNetworkParams")), objc.RegisterName("new"))
-	return &MTRThreadNetworkDirectoryClusterRemoveNetworkParams{inner: raw.MTRThreadNetworkDirectoryClusterRemoveNetworkParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRThreadNetworkDirectoryClusterRemoveNetworkParams")), objc.RegisterName("new"))
+	return mTRThreadNetworkDirectoryClusterRemoveNetworkParamsAdopt(_id)
 }
 
-// WithExtendedPanID sets the extendedPanID property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) WithExtendedPanID(extendedPanID *foundation.NSData) *MTRThreadNetworkDirectoryClusterRemoveNetworkParams {
-	x.inner.SetExtendedPanID(extendedPanID)
+// WithExtendedPanID sets extendedPanID and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) WithExtendedPanID(extendedPanID obj.Object) *MTRThreadNetworkDirectoryClusterRemoveNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedPanID:"), objref.IDOf(extendedPanID))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke).
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThreadNetworkDirectoryClusterRemoveNetworkParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThreadNetworkDirectoryClusterRemoveNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThreadNetworkDirectoryClusterRemoveNetworkParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThreadNetworkDirectoryClusterRemoveNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// ExtendedPanID calls the underlying ExtendedPanID.
-func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) ExtendedPanID() *foundation.NSData {
-	return x.inner.ExtendedPanID()
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) ExtendedPanID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedPanID"))
+	return obj.Wrap(_r)
 }
 
-// SetExtendedPanID calls the underlying SetExtendedPanID.
-func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) SetExtendedPanID(extendedPanID *foundation.NSData) {
-	x.inner.SetExtendedPanID(extendedPanID)
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) SetExtendedPanID(extendedPanID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedPanID:"), objref.IDOf(extendedPanID))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRThreadNetworkDirectoryClusterRemoveNetworkParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRThreadNetworkDirectoryClusterRemoveNetworkParamsable is the interface implemented by [MTRThreadNetworkDirectoryClusterRemoveNetworkParams], for mocking and DI.
 type MTRThreadNetworkDirectoryClusterRemoveNetworkParamsable interface {
-	Unwrap() *raw.MTRThreadNetworkDirectoryClusterRemoveNetworkParams
-	WithExtendedPanID(extendedPanID *foundation.NSData) *MTRThreadNetworkDirectoryClusterRemoveNetworkParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThreadNetworkDirectoryClusterRemoveNetworkParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThreadNetworkDirectoryClusterRemoveNetworkParams
-	ExtendedPanID() *foundation.NSData
-	SetExtendedPanID(extendedPanID *foundation.NSData)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithExtendedPanID(extendedPanID obj.Object) *MTRThreadNetworkDirectoryClusterRemoveNetworkParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThreadNetworkDirectoryClusterRemoveNetworkParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThreadNetworkDirectoryClusterRemoveNetworkParams
+	ExtendedPanID() obj.Object
+	SetExtendedPanID(extendedPanID obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRThreadNetworkDirectoryClusterRemoveNetworkParamsable = (*MTRThreadNetworkDirectoryClusterRemoveNetworkParams)(nil)

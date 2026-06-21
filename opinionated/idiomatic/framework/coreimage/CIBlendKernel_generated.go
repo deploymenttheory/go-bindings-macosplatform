@@ -5,68 +5,81 @@
 package coreimage
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A GPU-based image-processing routine that is optimized for blending two images.
 //
-// BlendKernel wraps [raw.CIBlendKernel] with a fluent Go API.
+// BlendKernel is an idiomatic wrapper over the Objective-C class CIBlendKernel.
 type BlendKernel struct {
-	inner *raw.CIBlendKernel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CIBlendKernel].
-func (x *BlendKernel) Unwrap() *raw.CIBlendKernel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BlendKernel) ID() objc.ID { return x.inner.Ptr() }
-
-// BlendKernelFromID adopts an existing object pointer as a BlendKernel (nil for 0).
+// BlendKernelFromID adopts an existing Objective-C object as a BlendKernel
+// (nil for 0), retaining it and registering a release finalizer.
 func BlendKernelFromID(id objc.ID) *BlendKernel {
 	if id == 0 {
 		return nil
 	}
-	return &BlendKernel{inner: raw.CIBlendKernelFromID(id)}
+	x := &BlendKernel{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBlendKernel creates a new [BlendKernel].
+// blendKernelAdopt wraps an Objective-C object that this code just created as a
+// BlendKernel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func blendKernelAdopt(id objc.ID) *BlendKernel {
+	if id == 0 {
+		return nil
+	}
+	x := &BlendKernel{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BlendKernel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BlendKernel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BlendKernel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBlendKernel creates a new BlendKernel.
 func NewBlendKernel() *BlendKernel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CIBlendKernel")), objc.RegisterName("new"))
-	return &BlendKernel{inner: raw.CIBlendKernelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CIBlendKernel")), objc.RegisterName("new"))
+	return blendKernelAdopt(_id)
 }
 
 // Creates a new image using the blend kernel and specified foreground and background images.
-//
-// ApplyWithForegroundBackground calls the underlying ApplyWithForegroundBackground.
-func (x *BlendKernel) ApplyWithForegroundBackground(foreground *raw.CIImage, background *raw.CIImage) *Image {
-	_r := x.inner.ApplyWithForegroundBackground(foreground, background)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+func (x *BlendKernel) ApplyWithForegroundBackground(foreground *Image, background *Image) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyWithForeground:background:"), objref.IDOf(foreground), objref.IDOf(background))
+	return ImageFromID(_r)
 }
 
-// ApplyWithForegroundBackgroundColorSpace calls the underlying ApplyWithForegroundBackgroundColorSpace.
-func (x *BlendKernel) ApplyWithForegroundBackgroundColorSpace(foreground *raw.CIImage, background *raw.CIImage, colorSpace unsafe.Pointer) *Image {
-	_r := x.inner.ApplyWithForegroundBackgroundColorSpace(foreground, background, colorSpace)
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+func (x *BlendKernel) ApplyWithForegroundBackgroundColorSpace(foreground *Image, background *Image, colorSpace obj.Object) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyWithForeground:background:colorSpace:"), objref.IDOf(foreground), objref.IDOf(background), objref.IDOf(colorSpace))
+	return ImageFromID(_r)
 }
-
-func (x *BlendKernel) asColorKernel() *raw.CIColorKernel { return &x.inner.CIColorKernel }
-
-func (x *BlendKernel) asKernel() *raw.CIKernel { return &x.inner.CIColorKernel.CIKernel }
 
 // BlendKernelable is the interface implemented by [BlendKernel], for mocking and DI.
 type BlendKernelable interface {
-	Unwrap() *raw.CIBlendKernel
-	ApplyWithForegroundBackground(foreground *raw.CIImage, background *raw.CIImage) *Image
-	ApplyWithForegroundBackgroundColorSpace(foreground *raw.CIImage, background *raw.CIImage, colorSpace unsafe.Pointer) *Image
+	obj.Object
+	ApplyWithForegroundBackground(foreground *Image, background *Image) *Image
+	ApplyWithForegroundBackgroundColorSpace(foreground *Image, background *Image, colorSpace obj.Object) *Image
 }
 
 var _ BlendKernelable = (*BlendKernel)(nil)

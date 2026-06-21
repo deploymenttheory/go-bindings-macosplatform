@@ -89,9 +89,7 @@ func (e NEFilterAction) String() string {
 type NEFilterManagerGrade int64
 
 const (
-	// @const NEFilterManagerGradeFirewall The filter acts as a firewall, blocking some network traffic. Firewall grade filters see network traffic before other filter grades.
-	NEFilterManagerGradeFirewall NEFilterManagerGrade = 1
-	// @const NEFilterManagerGradeInspector The filter acts as an inspector of network traffic. Inspector grade filters see network traffic after firewall grade filters.
+	NEFilterManagerGradeFirewall  NEFilterManagerGrade = 1
 	NEFilterManagerGradeInspector NEFilterManagerGrade = 2
 )
 
@@ -106,42 +104,14 @@ func (e NEFilterManagerGrade) String() string {
 	}
 }
 
-// The verdict returned by a packet handler indicating what the framework should do with a packet.
-type NEFilterPacketProviderVerdict int64
-
-const (
-	// @const NEFilterPacketProviderVerdictAllow Allow a packet
-	NEFilterPacketProviderVerdictAllow NEFilterPacketProviderVerdict = 0
-	// @const NEFilterPacketProviderVerdictDrop Drop a packet
-	NEFilterPacketProviderVerdictDrop  NEFilterPacketProviderVerdict = 1
-	NEFilterPacketProviderVerdictDelay NEFilterPacketProviderVerdict = 2
-)
-
-func (e NEFilterPacketProviderVerdict) String() string {
-	switch e {
-	case NEFilterPacketProviderVerdictAllow:
-		return "NEFilterPacketProviderVerdictAllow"
-	case NEFilterPacketProviderVerdictDrop:
-		return "NEFilterPacketProviderVerdictDrop"
-	case NEFilterPacketProviderVerdictDelay:
-		return "NEFilterPacketProviderVerdictDelay"
-	default:
-		return fmt.Sprintf("NEFilterPacketProviderVerdict(%d)", int64(e))
-	}
-}
-
 // A type that represents the kind of event indicated by a report.
 type NEFilterReportEvent int64
 
 const (
-	// @const NEFilterReportEventNewFlow The report is reporting a new flow
-	NEFilterReportEventNewFlow NEFilterReportEvent = 1
-	// @const NEFilterReportEventDataDecision The report is reporting a pass/block decision made after analyzing some amount of a flow's data
+	NEFilterReportEventNewFlow      NEFilterReportEvent = 1
 	NEFilterReportEventDataDecision NEFilterReportEvent = 2
-	// @const NEFilterReportEventFlowClosed The report is reporting that a flow has been closed
-	NEFilterReportEventFlowClosed NEFilterReportEvent = 3
-	// @const NEFilterReportEventStatistics The report is reporting the latest statistics of the flow
-	NEFilterReportEventStatistics NEFilterReportEvent = 4
+	NEFilterReportEventFlowClosed   NEFilterReportEvent = 3
+	NEFilterReportEventStatistics   NEFilterReportEvent = 4
 )
 
 func (e NEFilterReportEvent) String() string {
@@ -163,14 +133,10 @@ func (e NEFilterReportEvent) String() string {
 type NEFilterReportFrequency int64
 
 const (
-	// @const NEFilterReportFrequencyNone No frequency
-	NEFilterReportFrequencyNone NEFilterReportFrequency = 0
-	// @const NEFilterReportFrequencyLow Low frequency, approximately 5 seconds
-	NEFilterReportFrequencyLow NEFilterReportFrequency = 1
-	// @const NEFilterReportFrequencyMedium Medium frequency, approximately 1 second
+	NEFilterReportFrequencyNone   NEFilterReportFrequency = 0
+	NEFilterReportFrequencyLow    NEFilterReportFrequency = 1
 	NEFilterReportFrequencyMedium NEFilterReportFrequency = 2
-	// @const NEFilterReportFrequencyHigh High frequency, approximately half a second
-	NEFilterReportFrequencyHigh NEFilterReportFrequency = 3
+	NEFilterReportFrequencyHigh   NEFilterReportFrequency = 3
 )
 
 func (e NEFilterReportFrequency) String() string {
@@ -192,11 +158,8 @@ func (e NEFilterReportFrequency) String() string {
 type NENetworkRuleProtocol int64
 
 const (
-	// @const NENetworkRuleProtocolAny Matches TCP and UDP traffic
 	NENetworkRuleProtocolAny NENetworkRuleProtocol = 0
-	// @const NENetworkRuleProtocolTCP Matches TCP traffic
 	NENetworkRuleProtocolTCP NENetworkRuleProtocol = 1
-	// @const NENetworkRuleProtocolUDP Matches UDP traffic
 	NENetworkRuleProtocolUDP NENetworkRuleProtocol = 2
 )
 
@@ -300,8 +263,7 @@ const (
 	// The connection failed.
 	NEProviderStopReasonConnectionFailed NEProviderStopReason = 14
 	// A stop reason indicating the configuration enabled disconnect on sleep and the device went to sleep.
-	NEProviderStopReasonSleep NEProviderStopReason = 15
-	// @const NEProviderStopReasonAppUpdate The NEProvider is being updated
+	NEProviderStopReasonSleep     NEProviderStopReason = 15
 	NEProviderStopReasonAppUpdate NEProviderStopReason = 16
 	// The provider encountered an internal error.
 	NEProviderStopReasonInternalError NEProviderStopReason = 17
@@ -396,30 +358,6 @@ func (e NETunnelProviderRoutingMethod) String() string {
 		return "NETunnelProviderRoutingMethodNetworkRule"
 	default:
 		return fmt.Sprintf("NETunnelProviderRoutingMethod(%d)", int64(e))
-	}
-}
-
-type NEURLFilterVerdict int64
-
-const (
-	// @const NEURLFilterVerdictUnknown The validation failed
-	NEURLFilterVerdictUnknown NEURLFilterVerdict = 1
-	// @const NEURLFilterVerdictAllow URL should be allowed
-	NEURLFilterVerdictAllow NEURLFilterVerdict = 2
-	// @const NEURLFilterVerdictDeny URL should be denied.
-	NEURLFilterVerdictDeny NEURLFilterVerdict = 3
-)
-
-func (e NEURLFilterVerdict) String() string {
-	switch e {
-	case NEURLFilterVerdictUnknown:
-		return "NEURLFilterVerdictUnknown"
-	case NEURLFilterVerdictAllow:
-		return "NEURLFilterVerdictAllow"
-	case NEURLFilterVerdictDeny:
-		return "NEURLFilterVerdictDeny"
-	default:
-		return fmt.Sprintf("NEURLFilterVerdict(%d)", int64(e))
 	}
 }
 
@@ -520,12 +458,9 @@ type NEVPNIKEv2DiffieHellmanGroup int64
 const (
 	// A value indicating the group is not a valid Diffie-Hellman group.
 	NEVPNIKEv2DiffieHellmanGroupInvalid NEVPNIKEv2DiffieHellmanGroup = 0
-	// @const NEVPNIKEv2DiffieHellmanGroup1 Diffie Hellman group 1 (768-bit MODP)
-	NEVPNIKEv2DiffieHellmanGroup1 NEVPNIKEv2DiffieHellmanGroup = 1
-	// @const NEVPNIKEv2DiffieHellmanGroup2 Diffie Hellman group 2 (1024-bit MODP)
-	NEVPNIKEv2DiffieHellmanGroup2 NEVPNIKEv2DiffieHellmanGroup = 2
-	// @const NEVPNIKEv2DiffieHellmanGroup5 Diffie Hellman group 5 (1536-bit MODP)
-	NEVPNIKEv2DiffieHellmanGroup5 NEVPNIKEv2DiffieHellmanGroup = 5
+	NEVPNIKEv2DiffieHellmanGroup1       NEVPNIKEv2DiffieHellmanGroup = 1
+	NEVPNIKEv2DiffieHellmanGroup2       NEVPNIKEv2DiffieHellmanGroup = 2
+	NEVPNIKEv2DiffieHellmanGroup5       NEVPNIKEv2DiffieHellmanGroup = 5
 	// Diffie Hellman group 14 (2048-bit modular exponential [MODP]).
 	NEVPNIKEv2DiffieHellmanGroup14 NEVPNIKEv2DiffieHellmanGroup = 14
 	// Diffie Hellman group 15 (3072-bit modular exponential [MODP]).
@@ -587,9 +522,7 @@ func (e NEVPNIKEv2DiffieHellmanGroup) String() string {
 type NEVPNIKEv2EncryptionAlgorithm int64
 
 const (
-	// @const NEVPNIKEv2EncryptionAlgorithmDES Data Encryption Standard (DES)
-	NEVPNIKEv2EncryptionAlgorithmDES NEVPNIKEv2EncryptionAlgorithm = 1
-	// @const NEVPNIKEv2EncryptionAlgorithm3DES Triple Data Encryption Algorithm (aka 3DES)
+	NEVPNIKEv2EncryptionAlgorithmDES  NEVPNIKEv2EncryptionAlgorithm = 1
 	NEVPNIKEv2EncryptionAlgorithm3DES NEVPNIKEv2EncryptionAlgorithm = 2
 	// Advanced Encryption Standard 256-bit (AES256).
 	//
@@ -633,9 +566,7 @@ func (e NEVPNIKEv2EncryptionAlgorithm) String() string {
 type NEVPNIKEv2IntegrityAlgorithm int64
 
 const (
-	// @const NEVPNIKEv2IntegrityAlgorithmSHA96 SHA-1 96 bit
-	NEVPNIKEv2IntegrityAlgorithmSHA96 NEVPNIKEv2IntegrityAlgorithm = 1
-	// @const NEVPNIKEv2IntegrityAlgorithmSHA160 SHA-1 160 bit
+	NEVPNIKEv2IntegrityAlgorithmSHA96  NEVPNIKEv2IntegrityAlgorithm = 1
 	NEVPNIKEv2IntegrityAlgorithmSHA160 NEVPNIKEv2IntegrityAlgorithm = 2
 	// SHA-2 256-bit.
 	NEVPNIKEv2IntegrityAlgorithmSHA256 NEVPNIKEv2IntegrityAlgorithm = 3

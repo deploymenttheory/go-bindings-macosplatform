@@ -5,86 +5,86 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A query for one-time access to a SMART Health Card or EU Digital COVID Certificate.
 //
-// VerifiableClinicalRecordQuery wraps [raw.HKVerifiableClinicalRecordQuery] with a fluent Go API.
+// VerifiableClinicalRecordQuery is an idiomatic wrapper over the Objective-C class HKVerifiableClinicalRecordQuery.
 type VerifiableClinicalRecordQuery struct {
-	inner *raw.HKVerifiableClinicalRecordQuery
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKVerifiableClinicalRecordQuery].
-func (x *VerifiableClinicalRecordQuery) Unwrap() *raw.HKVerifiableClinicalRecordQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VerifiableClinicalRecordQuery) ID() objc.ID { return x.inner.Ptr() }
-
-// VerifiableClinicalRecordQueryFromID adopts an existing object pointer as a VerifiableClinicalRecordQuery (nil for 0).
+// VerifiableClinicalRecordQueryFromID adopts an existing Objective-C object as a VerifiableClinicalRecordQuery
+// (nil for 0), retaining it and registering a release finalizer.
 func VerifiableClinicalRecordQueryFromID(id objc.ID) *VerifiableClinicalRecordQuery {
 	if id == 0 {
 		return nil
 	}
-	return &VerifiableClinicalRecordQuery{inner: raw.HKVerifiableClinicalRecordQueryFromID(id)}
+	x := &VerifiableClinicalRecordQuery{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a query for one-time access to a SMART Health Card.
-//
-// NewVerifiableClinicalRecordQueryWithRecordTypesPredicateResultsHandler creates a new [VerifiableClinicalRecordQuery].
-func NewVerifiableClinicalRecordQueryWithRecordTypesPredicateResultsHandler(recordTypes *foundation.NSArray[*foundation.NSString], predicate *foundation.NSPredicate, resultsHandler func(*raw.HKVerifiableClinicalRecordQuery, *foundation.NSArray[*raw.HKVerifiableClinicalRecord], unsafe.Pointer)) *VerifiableClinicalRecordQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKVerifiableClinicalRecordQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordTypes:predicate:resultsHandler:"), recordTypes.Ptr(), predicate.Ptr(), resultsHandler)
-	return &VerifiableClinicalRecordQuery{inner: raw.HKVerifiableClinicalRecordQueryFromID(_id)}
+// verifiableClinicalRecordQueryAdopt wraps an Objective-C object that this code just created as a
+// VerifiableClinicalRecordQuery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func verifiableClinicalRecordQueryAdopt(id objc.ID) *VerifiableClinicalRecordQuery {
+	if id == 0 {
+		return nil
+	}
+	x := &VerifiableClinicalRecordQuery{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Creates a query for one-time access to a verifiable clinical record.
-//
-// NewVerifiableClinicalRecordQueryWithRecordTypesSourceTypesPredicateResultsHandler creates a new [VerifiableClinicalRecordQuery].
-func NewVerifiableClinicalRecordQueryWithRecordTypesSourceTypesPredicateResultsHandler(recordTypes *foundation.NSArray[*foundation.NSString], sourceTypes *foundation.NSArray[*foundation.NSString], predicate *foundation.NSPredicate, resultsHandler func(*raw.HKVerifiableClinicalRecordQuery, *foundation.NSArray[*raw.HKVerifiableClinicalRecord], unsafe.Pointer)) *VerifiableClinicalRecordQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKVerifiableClinicalRecordQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordTypes:sourceTypes:predicate:resultsHandler:"), recordTypes.Ptr(), sourceTypes.Ptr(), predicate.Ptr(), resultsHandler)
-	return &VerifiableClinicalRecordQuery{inner: raw.HKVerifiableClinicalRecordQueryFromID(_id)}
+// Description returns the object's -description text.
+func (x *VerifiableClinicalRecordQuery) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property      recordTypes @abstract      The record types that need to be present on desired records.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VerifiableClinicalRecordQuery) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VerifiableClinicalRecordQuery) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVerifiableClinicalRecordQuery creates a new VerifiableClinicalRecordQuery.
+func NewVerifiableClinicalRecordQuery() *VerifiableClinicalRecordQuery {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKVerifiableClinicalRecordQuery")), objc.RegisterName("new"))
+	return verifiableClinicalRecordQueryAdopt(_id)
+}
+
+// The record types that need to be present on desired records.
 //
 // RecordTypes returns the collection as a Go slice.
 func (x *VerifiableClinicalRecordQuery) RecordTypes() []string {
-	arr := x.inner.RecordTypes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordTypes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// @property      sourceTypes @abstract      The source type(s) of the records.
+// The source type(s) of the records.
 //
 // SourceTypes returns the collection as a Go slice.
-func (x *VerifiableClinicalRecordQuery) SourceTypes() []*foundation.NSString {
-	arr := x.inner.SourceTypes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *VerifiableClinicalRecordQuery) SourceTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceTypes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-func (x *VerifiableClinicalRecordQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
 
 // VerifiableClinicalRecordQueryable is the interface implemented by [VerifiableClinicalRecordQuery], for mocking and DI.
 type VerifiableClinicalRecordQueryable interface {
-	Unwrap() *raw.HKVerifiableClinicalRecordQuery
+	obj.Object
 	RecordTypes() []string
-	SourceTypes() []*foundation.NSString
+	SourceTypes() []obj.Object
 }
 
 var _ VerifiableClinicalRecordQueryable = (*VerifiableClinicalRecordQuery)(nil)

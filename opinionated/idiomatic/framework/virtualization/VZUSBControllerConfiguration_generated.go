@@ -5,71 +5,79 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The base class for a USB controller configuration.
 //
-// USBControllerConfiguration wraps [raw.VZUSBControllerConfiguration] with a fluent Go API.
+// USBControllerConfiguration is an idiomatic wrapper over the Objective-C class VZUSBControllerConfiguration.
 type USBControllerConfiguration struct {
-	inner *raw.VZUSBControllerConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZUSBControllerConfiguration].
-func (x *USBControllerConfiguration) Unwrap() *raw.VZUSBControllerConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *USBControllerConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// USBControllerConfigurationFromID adopts an existing object pointer as a USBControllerConfiguration (nil for 0).
+// USBControllerConfigurationFromID adopts an existing Objective-C object as a USBControllerConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func USBControllerConfigurationFromID(id objc.ID) *USBControllerConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &USBControllerConfiguration{inner: raw.VZUSBControllerConfigurationFromID(id)}
+	x := &USBControllerConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewUSBControllerConfiguration creates a new [USBControllerConfiguration].
+// uSBControllerConfigurationAdopt wraps an Objective-C object that this code just created as a
+// USBControllerConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uSBControllerConfigurationAdopt(id objc.ID) *USBControllerConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &USBControllerConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *USBControllerConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *USBControllerConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *USBControllerConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUSBControllerConfiguration creates a new USBControllerConfiguration.
 func NewUSBControllerConfiguration() *USBControllerConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZUSBControllerConfiguration")), objc.RegisterName("new"))
-	return &USBControllerConfiguration{inner: raw.VZUSBControllerConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZUSBControllerConfiguration")), objc.RegisterName("new"))
+	return uSBControllerConfigurationAdopt(_id)
 }
 
-// UsbDevices calls the underlying UsbDevices.
-func (x *USBControllerConfiguration) UsbDevices() *foundation.NSArray[raw.VZUSBDeviceConfiguration] {
-	return x.inner.UsbDevices()
+func (x *USBControllerConfiguration) UsbDevices() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("usbDevices"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetUsbDevices calls the underlying SetUsbDevices.
-func (x *USBControllerConfiguration) SetUsbDevices(usbDevices ...purego.IDer) {
-	_ptrs := make([]objc.ID, len(usbDevices))
-	for _i, _v := range usbDevices {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *foundation.NSArray[raw.VZUSBDeviceConfiguration]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.VZUSBDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.VZUSBDeviceConfiguration](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetUsbDevices(_arg0)
-}
-
-func (x *USBControllerConfiguration) asUSBControllerConfiguration() *raw.VZUSBControllerConfiguration {
-	return x.inner
+func (x *USBControllerConfiguration) SetUsbDevices(usbDevices []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsbDevices:"), purego.SliceToNSArray(usbDevices, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // USBControllerConfigurationable is the interface implemented by [USBControllerConfiguration], for mocking and DI.
 type USBControllerConfigurationable interface {
-	Unwrap() *raw.VZUSBControllerConfiguration
-	UsbDevices() *foundation.NSArray[raw.VZUSBDeviceConfiguration]
-	SetUsbDevices(usbDevices ...purego.IDer)
+	obj.Object
+	UsbDevices() []obj.Object
+	SetUsbDevices(usbDevices []obj.Object)
 }
 
 var _ USBControllerConfigurationable = (*USBControllerConfiguration)(nil)

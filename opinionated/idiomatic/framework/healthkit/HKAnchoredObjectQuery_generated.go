@@ -5,89 +5,68 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A query that returns changes to the HealthKit store, including a snapshot of new changes and continuous monitoring as a long-running query.
 //
-// AnchoredObjectQuery wraps [raw.HKAnchoredObjectQuery] with a fluent Go API.
+// AnchoredObjectQuery is an idiomatic wrapper over the Objective-C class HKAnchoredObjectQuery.
 type AnchoredObjectQuery struct {
-	inner *raw.HKAnchoredObjectQuery
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKAnchoredObjectQuery].
-func (x *AnchoredObjectQuery) Unwrap() *raw.HKAnchoredObjectQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AnchoredObjectQuery) ID() objc.ID { return x.inner.Ptr() }
-
-// AnchoredObjectQueryFromID adopts an existing object pointer as a AnchoredObjectQuery (nil for 0).
+// AnchoredObjectQueryFromID adopts an existing Objective-C object as a AnchoredObjectQuery
+// (nil for 0), retaining it and registering a release finalizer.
 func AnchoredObjectQueryFromID(id objc.ID) *AnchoredObjectQuery {
 	if id == 0 {
 		return nil
 	}
-	return &AnchoredObjectQuery{inner: raw.HKAnchoredObjectQueryFromID(id)}
-}
-
-// Initializes a new anchored object query.
-//
-// NewAnchoredObjectQueryWithTypePredicateAnchorLimitResultsHandler creates a new [AnchoredObjectQuery].
-func NewAnchoredObjectQueryWithTypePredicateAnchorLimitResultsHandler(type_ *raw.HKSampleType, predicate *foundation.NSPredicate, anchor *raw.HKQueryAnchor, limit uint, handler func(*raw.HKAnchoredObjectQuery, *foundation.NSArray[*raw.HKSample], *foundation.NSArray[*raw.HKDeletedObject], *raw.HKQueryAnchor, unsafe.Pointer)) *AnchoredObjectQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKAnchoredObjectQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:predicate:anchor:limit:resultsHandler:"), type_.Ptr(), predicate.Ptr(), anchor.Ptr(), limit, handler)
-	return &AnchoredObjectQuery{inner: raw.HKAnchoredObjectQueryFromID(_id)}
-}
-
-// Initializes a new anchored object query.
-//
-// NewAnchoredObjectQueryWithTypePredicateAnchorLimitCompletionHandler creates a new [AnchoredObjectQuery].
-func NewAnchoredObjectQueryWithTypePredicateAnchorLimitCompletionHandler(type_ *raw.HKSampleType, predicate *foundation.NSPredicate, anchor uint, limit uint, handler func(*raw.HKAnchoredObjectQuery, *foundation.NSArray[*raw.HKSample], uint, unsafe.Pointer)) *AnchoredObjectQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKAnchoredObjectQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:predicate:anchor:limit:completionHandler:"), type_.Ptr(), predicate.Ptr(), anchor, limit, handler)
-	return &AnchoredObjectQuery{inner: raw.HKAnchoredObjectQueryFromID(_id)}
-}
-
-// Creates an anchored object query that matches any of the query descriptors you provided.
-//
-// NewAnchoredObjectQueryWithQueryDescriptorsAnchorLimitResultsHandler creates a new [AnchoredObjectQuery].
-func NewAnchoredObjectQueryWithQueryDescriptorsAnchorLimitResultsHandler(queryDescriptors *foundation.NSArray[*raw.HKQueryDescriptor], anchor *raw.HKQueryAnchor, limit int, handler func(*raw.HKAnchoredObjectQuery, *foundation.NSArray[*raw.HKSample], *foundation.NSArray[*raw.HKDeletedObject], *raw.HKQueryAnchor, unsafe.Pointer)) *AnchoredObjectQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKAnchoredObjectQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueryDescriptors:anchor:limit:resultsHandler:"), queryDescriptors.Ptr(), anchor.Ptr(), limit, handler)
-	return &AnchoredObjectQuery{inner: raw.HKAnchoredObjectQueryFromID(_id)}
-}
-
-// Handler for monitoring updates to the HealthKit store.
-//
-// WithUpdateHandler sets the updateHandler property and returns the receiver for chaining.
-func (x *AnchoredObjectQuery) WithUpdateHandler(updateHandler func(*raw.HKAnchoredObjectQuery, *foundation.NSArray[*raw.HKSample], *foundation.NSArray[*raw.HKDeletedObject], *raw.HKQueryAnchor, unsafe.Pointer)) *AnchoredObjectQuery {
-	x.inner.SetUpdateHandler(updateHandler)
+	x := &AnchoredObjectQuery{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property      updateHandler @abstract      An optional handler to be called when samples matching the given predicate are added or deleted. @discussion    This property may not be modified once the query has been executed.  It may only be set if the query has no limit.
-//
-// UpdateHandler calls the underlying UpdateHandler.
-func (x *AnchoredObjectQuery) UpdateHandler() objc.Block {
-	return x.inner.UpdateHandler()
+// anchoredObjectQueryAdopt wraps an Objective-C object that this code just created as a
+// AnchoredObjectQuery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func anchoredObjectQueryAdopt(id objc.ID) *AnchoredObjectQuery {
+	if id == 0 {
+		return nil
+	}
+	x := &AnchoredObjectQuery{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetUpdateHandler calls the underlying SetUpdateHandler.
-func (x *AnchoredObjectQuery) SetUpdateHandler(updateHandler func(*raw.HKAnchoredObjectQuery, *foundation.NSArray[*raw.HKSample], *foundation.NSArray[*raw.HKDeletedObject], *raw.HKQueryAnchor, unsafe.Pointer)) {
-	x.inner.SetUpdateHandler(updateHandler)
+// Description returns the object's -description text.
+func (x *AnchoredObjectQuery) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *AnchoredObjectQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AnchoredObjectQuery) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AnchoredObjectQuery) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAnchoredObjectQuery creates a new AnchoredObjectQuery.
+func NewAnchoredObjectQuery() *AnchoredObjectQuery {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKAnchoredObjectQuery")), objc.RegisterName("new"))
+	return anchoredObjectQueryAdopt(_id)
+}
 
 // AnchoredObjectQueryable is the interface implemented by [AnchoredObjectQuery], for mocking and DI.
 type AnchoredObjectQueryable interface {
-	Unwrap() *raw.HKAnchoredObjectQuery
-	WithUpdateHandler(updateHandler func(*raw.HKAnchoredObjectQuery, *foundation.NSArray[*raw.HKSample], *foundation.NSArray[*raw.HKDeletedObject], *raw.HKQueryAnchor, unsafe.Pointer)) *AnchoredObjectQuery
-	UpdateHandler() objc.Block
-	SetUpdateHandler(updateHandler func(*raw.HKAnchoredObjectQuery, *foundation.NSArray[*raw.HKSample], *foundation.NSArray[*raw.HKDeletedObject], *raw.HKQueryAnchor, unsafe.Pointer))
+	obj.Object
 }
 
 var _ AnchoredObjectQueryable = (*AnchoredObjectQuery)(nil)

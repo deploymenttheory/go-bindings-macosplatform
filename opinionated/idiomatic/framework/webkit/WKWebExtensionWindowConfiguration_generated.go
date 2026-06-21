@@ -5,104 +5,108 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// WKWebExtensionWindowConfiguration wraps [raw.WKWebExtensionWindowConfiguration] with a fluent Go API.
+// WKWebExtensionWindowConfiguration is an idiomatic wrapper over the Objective-C class WKWebExtensionWindowConfiguration.
 type WKWebExtensionWindowConfiguration struct {
-	inner *raw.WKWebExtensionWindowConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKWebExtensionWindowConfiguration].
-func (x *WKWebExtensionWindowConfiguration) Unwrap() *raw.WKWebExtensionWindowConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKWebExtensionWindowConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// WKWebExtensionWindowConfigurationFromID adopts an existing object pointer as a WKWebExtensionWindowConfiguration (nil for 0).
+// WKWebExtensionWindowConfigurationFromID adopts an existing Objective-C object as a WKWebExtensionWindowConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func WKWebExtensionWindowConfigurationFromID(id objc.ID) *WKWebExtensionWindowConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &WKWebExtensionWindowConfiguration{inner: raw.WKWebExtensionWindowConfigurationFromID(id)}
+	x := &WKWebExtensionWindowConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWKWebExtensionWindowConfiguration creates a new [WKWebExtensionWindowConfiguration].
-func NewWKWebExtensionWindowConfiguration() *WKWebExtensionWindowConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKWebExtensionWindowConfiguration")), objc.RegisterName("new"))
-	return &WKWebExtensionWindowConfiguration{inner: raw.WKWebExtensionWindowConfigurationFromID(_id)}
-}
-
-// @abstract Indicates the window type for the window.
-//
-// WindowType calls the underlying WindowType.
-func (x *WKWebExtensionWindowConfiguration) WindowType() WKWebExtensionWindowType {
-	return WKWebExtensionWindowType(x.inner.WindowType())
-}
-
-// @abstract Indicates the window state for the window.
-//
-// WindowState calls the underlying WindowState.
-func (x *WKWebExtensionWindowConfiguration) WindowState() WKWebExtensionWindowState {
-	return WKWebExtensionWindowState(x.inner.WindowState())
-}
-
-// @abstract Indicates the frame where the window should be positioned on the main screen. @discussion This frame should override the app's default window position and size. Individual components (e.g., `origin.x`, `size.width`) will be `NaN` if not specified.
-//
-// Frame calls the underlying Frame.
-func (x *WKWebExtensionWindowConfiguration) Frame() corefoundation.CGRect {
-	return x.inner.Frame()
-}
-
-// @abstract Indicates the URLs that the window should initially load as tabs. @discussion If “tabURLs“ and “tabs“ are both empty, the app's default "start page" should appear in a tab. @seealso tabs
-//
-// TabURLs returns the collection as a Go slice.
-func (x *WKWebExtensionWindowConfiguration) TabURLs() []*foundation.NSURL {
-	arr := x.inner.TabURLs()
-	if arr == nil {
+// wKWebExtensionWindowConfigurationAdopt wraps an Objective-C object that this code just created as a
+// WKWebExtensionWindowConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKWebExtensionWindowConfigurationAdopt(id objc.ID) *WKWebExtensionWindowConfiguration {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSURL {
-		return foundation.NSURLFromID(purego.Retain(_id))
-	})
+	x := &WKWebExtensionWindowConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @abstract Indicates the existing tabs that should be moved to the window. @discussion If “tabs“ and “tabURLs“ are both empty, the app's default "start page" should appear in a tab. @seealso tabURLs
-//
-// Tabs calls the underlying Tabs.
-func (x *WKWebExtensionWindowConfiguration) Tabs() *foundation.NSArray[raw.WKWebExtensionTab] {
-	return x.inner.Tabs()
+// Description returns the object's -description text.
+func (x *WKWebExtensionWindowConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract Indicates whether the window should be focused.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKWebExtensionWindowConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKWebExtensionWindowConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWKWebExtensionWindowConfiguration creates a new WKWebExtensionWindowConfiguration.
+func NewWKWebExtensionWindowConfiguration() *WKWebExtensionWindowConfiguration {
+	_id := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionWindowConfiguration")), objc.RegisterName("new"))
+	return wKWebExtensionWindowConfigurationAdopt(_id)
+}
+
+// Indicates the window type for the window.
+func (x *WKWebExtensionWindowConfiguration) WindowType() WKWebExtensionWindowType {
+	_r := objc.Send[WKWebExtensionWindowType](objref.IDOf(x), objc.RegisterName("windowType"))
+	return _r
+}
+
+// Indicates the window state for the window.
+func (x *WKWebExtensionWindowConfiguration) WindowState() WKWebExtensionWindowState {
+	_r := objc.Send[WKWebExtensionWindowState](objref.IDOf(x), objc.RegisterName("windowState"))
+	return _r
+}
+
+// Indicates the URLs that the window should initially load as tabs. If “tabURLs“ and “tabs“ are both empty, the app's default "start page" should appear in a tab.
 //
-// ShouldBeFocused calls the underlying ShouldBeFocused.
+// TabURLs returns the collection as a Go slice.
+func (x *WKWebExtensionWindowConfiguration) TabURLs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabURLs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// Indicates the existing tabs that should be moved to the window. If “tabs“ and “tabURLs“ are both empty, the app's default "start page" should appear in a tab.
+func (x *WKWebExtensionWindowConfiguration) Tabs() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tabs"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// Indicates whether the window should be focused.
 func (x *WKWebExtensionWindowConfiguration) ShouldBeFocused() bool {
-	return x.inner.ShouldBeFocused()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBeFocused"))
+	return _r
 }
 
-// @abstract Indicates whether the window should be private. @note To ensure proper isolation between private and non-private data, web views associated with private data must use a different “WKUserContentController“. Likewise, to be identified as a private web view and to ensure that cookies and other website data is not shared, private web views must be configured to use a non-persistent “WKWebsiteDataStore“.
-//
-// ShouldBePrivate calls the underlying ShouldBePrivate.
+// Indicates whether the window should be private.
 func (x *WKWebExtensionWindowConfiguration) ShouldBePrivate() bool {
-	return x.inner.ShouldBePrivate()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldBePrivate"))
+	return _r
 }
 
 // WKWebExtensionWindowConfigurationable is the interface implemented by [WKWebExtensionWindowConfiguration], for mocking and DI.
 type WKWebExtensionWindowConfigurationable interface {
-	Unwrap() *raw.WKWebExtensionWindowConfiguration
+	obj.Object
 	WindowType() WKWebExtensionWindowType
 	WindowState() WKWebExtensionWindowState
-	Frame() corefoundation.CGRect
-	TabURLs() []*foundation.NSURL
-	Tabs() *foundation.NSArray[raw.WKWebExtensionTab]
+	TabURLs() []obj.Object
+	Tabs() []obj.Object
 	ShouldBeFocused() bool
 	ShouldBePrivate() bool
 }

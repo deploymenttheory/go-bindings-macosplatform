@@ -5,41 +5,68 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A mechanism for creating implicit animations and combining scene graph changes into atomic updates.
 //
-// Transaction wraps [raw.SCNTransaction] with a fluent Go API.
+// Transaction is an idiomatic wrapper over the Objective-C class SCNTransaction.
 type Transaction struct {
-	inner *raw.SCNTransaction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNTransaction].
-func (x *Transaction) Unwrap() *raw.SCNTransaction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Transaction) ID() objc.ID { return x.inner.Ptr() }
-
-// TransactionFromID adopts an existing object pointer as a Transaction (nil for 0).
+// TransactionFromID adopts an existing Objective-C object as a Transaction
+// (nil for 0), retaining it and registering a release finalizer.
 func TransactionFromID(id objc.ID) *Transaction {
 	if id == 0 {
 		return nil
 	}
-	return &Transaction{inner: raw.SCNTransactionFromID(id)}
+	x := &Transaction{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTransaction creates a new [Transaction].
+// transactionAdopt wraps an Objective-C object that this code just created as a
+// Transaction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func transactionAdopt(id objc.ID) *Transaction {
+	if id == 0 {
+		return nil
+	}
+	x := &Transaction{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Transaction) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Transaction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Transaction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTransaction creates a new Transaction.
 func NewTransaction() *Transaction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNTransaction")), objc.RegisterName("new"))
-	return &Transaction{inner: raw.SCNTransactionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNTransaction")), objc.RegisterName("new"))
+	return transactionAdopt(_id)
 }
 
 // Transactionable is the interface implemented by [Transaction], for mocking and DI.
 type Transactionable interface {
-	Unwrap() *raw.SCNTransaction
+	obj.Object
 }
 
 var _ Transactionable = (*Transaction)(nil)

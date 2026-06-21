@@ -5,41 +5,66 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRTimeSynchronizationClusterTimeFailureEvent wraps [raw.MTRTimeSynchronizationClusterTimeFailureEvent] with a fluent Go API.
+// MTRTimeSynchronizationClusterTimeFailureEvent is an idiomatic wrapper over the Objective-C class MTRTimeSynchronizationClusterTimeFailureEvent.
 type MTRTimeSynchronizationClusterTimeFailureEvent struct {
-	inner *raw.MTRTimeSynchronizationClusterTimeFailureEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRTimeSynchronizationClusterTimeFailureEvent].
-func (x *MTRTimeSynchronizationClusterTimeFailureEvent) Unwrap() *raw.MTRTimeSynchronizationClusterTimeFailureEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTimeSynchronizationClusterTimeFailureEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRTimeSynchronizationClusterTimeFailureEventFromID adopts an existing object pointer as a MTRTimeSynchronizationClusterTimeFailureEvent (nil for 0).
+// MTRTimeSynchronizationClusterTimeFailureEventFromID adopts an existing Objective-C object as a MTRTimeSynchronizationClusterTimeFailureEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRTimeSynchronizationClusterTimeFailureEventFromID(id objc.ID) *MTRTimeSynchronizationClusterTimeFailureEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRTimeSynchronizationClusterTimeFailureEvent{inner: raw.MTRTimeSynchronizationClusterTimeFailureEventFromID(id)}
+	x := &MTRTimeSynchronizationClusterTimeFailureEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRTimeSynchronizationClusterTimeFailureEvent creates a new [MTRTimeSynchronizationClusterTimeFailureEvent].
+// mTRTimeSynchronizationClusterTimeFailureEventAdopt wraps an Objective-C object that this code just created as a
+// MTRTimeSynchronizationClusterTimeFailureEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRTimeSynchronizationClusterTimeFailureEventAdopt(id objc.ID) *MTRTimeSynchronizationClusterTimeFailureEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRTimeSynchronizationClusterTimeFailureEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRTimeSynchronizationClusterTimeFailureEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRTimeSynchronizationClusterTimeFailureEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRTimeSynchronizationClusterTimeFailureEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRTimeSynchronizationClusterTimeFailureEvent creates a new MTRTimeSynchronizationClusterTimeFailureEvent.
 func NewMTRTimeSynchronizationClusterTimeFailureEvent() *MTRTimeSynchronizationClusterTimeFailureEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTimeSynchronizationClusterTimeFailureEvent")), objc.RegisterName("new"))
-	return &MTRTimeSynchronizationClusterTimeFailureEvent{inner: raw.MTRTimeSynchronizationClusterTimeFailureEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRTimeSynchronizationClusterTimeFailureEvent")), objc.RegisterName("new"))
+	return mTRTimeSynchronizationClusterTimeFailureEventAdopt(_id)
 }
 
 // MTRTimeSynchronizationClusterTimeFailureEventable is the interface implemented by [MTRTimeSynchronizationClusterTimeFailureEvent], for mocking and DI.
 type MTRTimeSynchronizationClusterTimeFailureEventable interface {
-	Unwrap() *raw.MTRTimeSynchronizationClusterTimeFailureEvent
+	obj.Object
 }
 
 var _ MTRTimeSynchronizationClusterTimeFailureEventable = (*MTRTimeSynchronizationClusterTimeFailureEvent)(nil)

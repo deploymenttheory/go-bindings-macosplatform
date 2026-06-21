@@ -5,171 +5,160 @@
 package networkextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The DNS resolver settings for a DNS-over-TLS server.
 //
-// NEDNSOverTLSSettings wraps [raw.NEDNSOverTLSSettings] with a fluent Go API.
+// NEDNSOverTLSSettings is an idiomatic wrapper over the Objective-C class NEDNSOverTLSSettings.
 type NEDNSOverTLSSettings struct {
-	inner *raw.NEDNSOverTLSSettings
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEDNSOverTLSSettings].
-func (x *NEDNSOverTLSSettings) Unwrap() *raw.NEDNSOverTLSSettings { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEDNSOverTLSSettings) ID() objc.ID { return x.inner.Ptr() }
-
-// NEDNSOverTLSSettingsFromID adopts an existing object pointer as a NEDNSOverTLSSettings (nil for 0).
+// NEDNSOverTLSSettingsFromID adopts an existing Objective-C object as a NEDNSOverTLSSettings
+// (nil for 0), retaining it and registering a release finalizer.
 func NEDNSOverTLSSettingsFromID(id objc.ID) *NEDNSOverTLSSettings {
 	if id == 0 {
 		return nil
 	}
-	return &NEDNSOverTLSSettings{inner: raw.NEDNSOverTLSSettingsFromID(id)}
+	x := &NEDNSOverTLSSettings{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNEDNSOverTLSSettings creates a new [NEDNSOverTLSSettings].
+// nEDNSOverTLSSettingsAdopt wraps an Objective-C object that this code just created as a
+// NEDNSOverTLSSettings (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEDNSOverTLSSettingsAdopt(id objc.ID) *NEDNSOverTLSSettings {
+	if id == 0 {
+		return nil
+	}
+	x := &NEDNSOverTLSSettings{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NEDNSOverTLSSettings) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEDNSOverTLSSettings) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEDNSOverTLSSettings) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNEDNSOverTLSSettings creates a new NEDNSOverTLSSettings.
 func NewNEDNSOverTLSSettings() *NEDNSOverTLSSettings {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEDNSOverTLSSettings")), objc.RegisterName("new"))
-	return &NEDNSOverTLSSettings{inner: raw.NEDNSOverTLSSettingsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NEDNSOverTLSSettings")), objc.RegisterName("new"))
+	return nEDNSOverTLSSettingsAdopt(_id)
 }
 
 // The TLS name of a DNS-over-TLS server.
 //
-// WithServerName sets the serverName property and returns the receiver for chaining.
+// WithServerName sets serverName and returns the receiver so calls can be chained.
 func (x *NEDNSOverTLSSettings) WithServerName(serverName string) *NEDNSOverTLSSettings {
-	x.inner.SetServerName(foundation.NSStringStringWithUTF8String(serverName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerName:"), purego.NSString(serverName))
 	return x
 }
 
 // A persistent keychain reference to a keychain item containing the certificate and private key components of the DNS client credential.
 //
-// WithIdentityReference sets the identityReference property and returns the receiver for chaining.
-func (x *NEDNSOverTLSSettings) WithIdentityReference(identityReference *foundation.NSData) *NEDNSOverTLSSettings {
-	x.inner.SetIdentityReference(identityReference)
+// WithIdentityReference sets identityReference and returns the receiver so calls can be chained.
+func (x *NEDNSOverTLSSettings) WithIdentityReference(identityReference obj.Object) *NEDNSOverTLSSettings {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
 	return x
 }
 
 // A list of domain strings used to fully qualify single-label host names.
 //
-// WithSearchDomains sets the collection, converting the Go slice to an NSArray.
-func (x *NEDNSOverTLSSettings) WithSearchDomains(items ...*foundation.NSString) *NEDNSOverTLSSettings {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NEDNSSettings.SetSearchDomains(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NEDNSSettings.SetSearchDomains(_arr)
+// WithSearchDomains sets the collection and returns the receiver so calls can be chained.
+func (x *NEDNSOverTLSSettings) WithSearchDomains(items ...obj.Object) *NEDNSOverTLSSettings {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchDomains:"), _arr)
 	return x
 }
 
 // The primary domain of the tunnel.
 //
-// WithDomainName sets the domainName property and returns the receiver for chaining.
+// WithDomainName sets domainName and returns the receiver so calls can be chained.
 func (x *NEDNSOverTLSSettings) WithDomainName(domainName string) *NEDNSOverTLSSettings {
-	x.inner.NEDNSSettings.SetDomainName(foundation.NSStringStringWithUTF8String(domainName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDomainName:"), purego.NSString(domainName))
 	return x
 }
 
 // A list of domain strings used to determine which DNS queries will use the DNS resolver settings contained in this object.
 //
-// WithMatchDomains sets the collection, converting the Go slice to an NSArray.
-func (x *NEDNSOverTLSSettings) WithMatchDomains(items ...*foundation.NSString) *NEDNSOverTLSSettings {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NEDNSSettings.SetMatchDomains(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NEDNSSettings.SetMatchDomains(_arr)
+// WithMatchDomains sets the collection and returns the receiver so calls can be chained.
+func (x *NEDNSOverTLSSettings) WithMatchDomains(items ...obj.Object) *NEDNSOverTLSSettings {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchDomains:"), _arr)
 	return x
 }
 
 // A Boolean that specifies if the domains in the matchDomains list should not be appended to the resolver’s list of search domains.
 //
-// WithMatchDomainsNoSearch sets the matchDomainsNoSearch property and returns the receiver for chaining.
+// WithMatchDomainsNoSearch sets matchDomainsNoSearch and returns the receiver so calls can be chained.
 func (x *NEDNSOverTLSSettings) WithMatchDomainsNoSearch(matchDomainsNoSearch bool) *NEDNSOverTLSSettings {
-	x.inner.NEDNSSettings.SetMatchDomainsNoSearch(matchDomainsNoSearch)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchDomainsNoSearch:"), matchDomainsNoSearch)
 	return x
 }
 
-// @property allowFailover @discussion A boolean indicating if failover to the default system resolver is permitted on resolution failure.
+// A boolean indicating if failover to the default system resolver is permitted on resolution failure.
 //
-// WithAllowFailover sets the allowFailover property and returns the receiver for chaining.
+// WithAllowFailover sets allowFailover and returns the receiver so calls can be chained.
 func (x *NEDNSOverTLSSettings) WithAllowFailover(allowFailover bool) *NEDNSOverTLSSettings {
-	x.inner.NEDNSSettings.SetAllowFailover(allowFailover)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowFailover:"), allowFailover)
 	return x
 }
 
-// @property serverName @discussion The name of the server to use for TLS certificate validation.
-//
-// ServerName calls the underlying ServerName.
+// The name of the server to use for TLS certificate validation.
 func (x *NEDNSOverTLSSettings) ServerName() string {
-	_r := x.inner.ServerName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetServerName calls the underlying SetServerName.
 func (x *NEDNSOverTLSSettings) SetServerName(serverName string) {
-	x.inner.SetServerName(foundation.NSStringStringWithUTF8String(serverName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerName:"), purego.NSString(serverName))
 }
 
-// @property identityReference @discussion The optional certificate identity keychain reference to use as a TLS client certificate.
-//
-// IdentityReference calls the underlying IdentityReference.
-func (x *NEDNSOverTLSSettings) IdentityReference() *foundation.NSData {
-	return x.inner.IdentityReference()
+// The optional certificate identity keychain reference to use as a TLS client certificate.
+func (x *NEDNSOverTLSSettings) IdentityReference() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identityReference"))
+	return obj.Wrap(_r)
 }
 
-// SetIdentityReference calls the underlying SetIdentityReference.
-func (x *NEDNSOverTLSSettings) SetIdentityReference(identityReference *foundation.NSData) {
-	x.inner.SetIdentityReference(identityReference)
+func (x *NEDNSOverTLSSettings) SetIdentityReference(identityReference obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
 }
-
-func (x *NEDNSOverTLSSettings) asNEDNSSettings() *raw.NEDNSSettings { return &x.inner.NEDNSSettings }
 
 // NEDNSOverTLSSettingsable is the interface implemented by [NEDNSOverTLSSettings], for mocking and DI.
 type NEDNSOverTLSSettingsable interface {
-	Unwrap() *raw.NEDNSOverTLSSettings
+	obj.Object
 	WithServerName(serverName string) *NEDNSOverTLSSettings
-	WithIdentityReference(identityReference *foundation.NSData) *NEDNSOverTLSSettings
-	WithSearchDomains(items ...*foundation.NSString) *NEDNSOverTLSSettings
+	WithIdentityReference(identityReference obj.Object) *NEDNSOverTLSSettings
+	WithSearchDomains(items ...obj.Object) *NEDNSOverTLSSettings
 	WithDomainName(domainName string) *NEDNSOverTLSSettings
-	WithMatchDomains(items ...*foundation.NSString) *NEDNSOverTLSSettings
+	WithMatchDomains(items ...obj.Object) *NEDNSOverTLSSettings
 	WithMatchDomainsNoSearch(matchDomainsNoSearch bool) *NEDNSOverTLSSettings
 	WithAllowFailover(allowFailover bool) *NEDNSOverTLSSettings
 	ServerName() string
 	SetServerName(serverName string)
-	IdentityReference() *foundation.NSData
-	SetIdentityReference(identityReference *foundation.NSData)
+	IdentityReference() obj.Object
+	SetIdentityReference(identityReference obj.Object)
 }
 
 var _ NEDNSOverTLSSettingsable = (*NEDNSOverTLSSettings)(nil)

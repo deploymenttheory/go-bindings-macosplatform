@@ -5,152 +5,164 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// WKWebExtensionMatchPattern wraps [raw.WKWebExtensionMatchPattern] with a fluent Go API.
+// WKWebExtensionMatchPattern is an idiomatic wrapper over the Objective-C class WKWebExtensionMatchPattern.
 type WKWebExtensionMatchPattern struct {
-	inner *raw.WKWebExtensionMatchPattern
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKWebExtensionMatchPattern].
-func (x *WKWebExtensionMatchPattern) Unwrap() *raw.WKWebExtensionMatchPattern { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKWebExtensionMatchPattern) ID() objc.ID { return x.inner.Ptr() }
-
-// WKWebExtensionMatchPatternFromID adopts an existing object pointer as a WKWebExtensionMatchPattern (nil for 0).
+// WKWebExtensionMatchPatternFromID adopts an existing Objective-C object as a WKWebExtensionMatchPattern
+// (nil for 0), retaining it and registering a release finalizer.
 func WKWebExtensionMatchPatternFromID(id objc.ID) *WKWebExtensionMatchPattern {
 	if id == 0 {
 		return nil
 	}
-	return &WKWebExtensionMatchPattern{inner: raw.WKWebExtensionMatchPatternFromID(id)}
+	x := &WKWebExtensionMatchPattern{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @abstract Returns a pattern object for the specified pattern string. @param error Set to \c nil or an error instance if an error occurred. @result A pattern object, or `nil` if the pattern string is invalid and an error will be set. @seealso initWithString:
+// wKWebExtensionMatchPatternAdopt wraps an Objective-C object that this code just created as a
+// WKWebExtensionMatchPattern (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKWebExtensionMatchPatternAdopt(id objc.ID) *WKWebExtensionMatchPattern {
+	if id == 0 {
+		return nil
+	}
+	x := &WKWebExtensionMatchPattern{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WKWebExtensionMatchPattern) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKWebExtensionMatchPattern) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKWebExtensionMatchPattern) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// Returns a pattern object for the specified pattern string.
 //
-// NewWKWebExtensionMatchPatternWithStringError creates a new [WKWebExtensionMatchPattern].
+// NewWKWebExtensionMatchPatternWithStringError creates a new WKWebExtensionMatchPattern.
 func NewWKWebExtensionMatchPatternWithStringError(string_ string) (*WKWebExtensionMatchPattern, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WKWebExtensionMatchPattern")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMatchPattern")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:error:"), foundation.NSStringStringWithUTF8String(string_).Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:error:"), purego.NSString(string_), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &WKWebExtensionMatchPattern{inner: raw.WKWebExtensionMatchPatternFromID(_id)}, nil
+	return wKWebExtensionMatchPatternAdopt(_id), nil
 }
 
-// @abstract Returns a pattern object for the specified scheme, host, and path strings. @param error Set to \c nil or an error instance if an error occurred. @result A pattern object, or `nil` if any of the strings are invalid and an error will be set. @seealso initWithScheme:host:path:
+// Returns a pattern object for the specified scheme, host, and path strings.
 //
-// NewWKWebExtensionMatchPatternWithSchemeHostPathError creates a new [WKWebExtensionMatchPattern].
+// NewWKWebExtensionMatchPatternWithSchemeHostPathError creates a new WKWebExtensionMatchPattern.
 func NewWKWebExtensionMatchPatternWithSchemeHostPathError(scheme string, host string, path string) (*WKWebExtensionMatchPattern, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WKWebExtensionMatchPattern")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("WKWebExtensionMatchPattern")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScheme:host:path:error:"), foundation.NSStringStringWithUTF8String(scheme).Ptr(), foundation.NSStringStringWithUTF8String(host).Ptr(), foundation.NSStringStringWithUTF8String(path).Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScheme:host:path:error:"), purego.NSString(scheme), purego.NSString(host), purego.NSString(path), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &WKWebExtensionMatchPattern{inner: raw.WKWebExtensionMatchPatternFromID(_id)}, nil
+	return wKWebExtensionMatchPatternAdopt(_id), nil
 }
 
-// @abstract Matches the reciever pattern against the specified URL. @param url The URL to match the against the reciever pattern. @result A Boolean value indicating if pattern matches the specified URL. @seealso matchesURL:options:
-//
-// MatchesURL calls the underlying MatchesURL.
+// Matches the reciever pattern against the specified URL.
 func (x *WKWebExtensionMatchPattern) MatchesURL(url string) bool {
-	return x.inner.MatchesURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchesURL:"), rt.FileURL(url))
+	return _r
 }
 
-// @abstract Matches the reciever pattern against the specified URL with options. @param url The URL to match the against the reciever pattern. @param options The options to use while matching. @result A Boolean value indicating if pattern matches the specified URL. @seealso matchesURL:
-//
-// MatchesURLOptions calls the underlying MatchesURLOptions.
+// Matches the reciever pattern against the specified URL with options.
 func (x *WKWebExtensionMatchPattern) MatchesURLOptions(url string, options WKWebExtensionMatchPatternOptions) bool {
-	return x.inner.MatchesURLOptions(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.WKWebExtensionMatchPatternOptions(options))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchesURL:options:"), rt.FileURL(url), options)
+	return _r
 }
 
-// @abstract Matches the receiver pattern against the specified pattern. @param pattern The pattern to match against the receiver pattern. @result A Boolean value indicating if receiver pattern matches the specified pattern. @seealso matchesPattern:options:
-//
-// MatchesPattern calls the underlying MatchesPattern.
-func (x *WKWebExtensionMatchPattern) MatchesPattern(pattern *raw.WKWebExtensionMatchPattern) bool {
-	return x.inner.MatchesPattern(pattern)
+// Matches the receiver pattern against the specified pattern.
+func (x *WKWebExtensionMatchPattern) MatchesPattern(pattern *WKWebExtensionMatchPattern) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchesPattern:"), objref.IDOf(pattern))
+	return _r
 }
 
-// @abstract Matches the receiver pattern against the specified pattern with options. @param pattern The pattern to match against the receiver pattern. @param options The options to use while matching. @result A Boolean value indicating if receiver pattern matches the specified pattern. @seealso matchesPattern:
-//
-// MatchesPatternOptions calls the underlying MatchesPatternOptions.
-func (x *WKWebExtensionMatchPattern) MatchesPatternOptions(pattern *raw.WKWebExtensionMatchPattern, options WKWebExtensionMatchPatternOptions) bool {
-	return x.inner.MatchesPatternOptions(pattern, raw.WKWebExtensionMatchPatternOptions(options))
+// Matches the receiver pattern against the specified pattern with options.
+func (x *WKWebExtensionMatchPattern) MatchesPatternOptions(pattern *WKWebExtensionMatchPattern, options WKWebExtensionMatchPatternOptions) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchesPattern:options:"), objref.IDOf(pattern), options)
+	return _r
 }
 
-// @abstract The original pattern string.
-//
-// String calls the underlying String.
+// The original pattern string.
 func (x *WKWebExtensionMatchPattern) String() string {
-	_r := x.inner.String()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("string"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The scheme part of the pattern string, unless “matchesAllURLs“ is `YES`.
-//
-// Scheme calls the underlying Scheme.
+// The scheme part of the pattern string, unless “matchesAllURLs“ is `YES`.
 func (x *WKWebExtensionMatchPattern) Scheme() string {
-	_r := x.inner.Scheme()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheme"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The host part of the pattern string, unless “matchesAllURLs“ is `YES`.
-//
-// Host calls the underlying Host.
+// The host part of the pattern string, unless “matchesAllURLs“ is `YES`.
 func (x *WKWebExtensionMatchPattern) Host() string {
-	_r := x.inner.Host()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("host"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The path part of the pattern string, unless “matchesAllURLs“ is `YES`.
-//
-// Path calls the underlying Path.
+// The path part of the pattern string, unless “matchesAllURLs“ is `YES`.
 func (x *WKWebExtensionMatchPattern) Path() string {
-	_r := x.inner.Path()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract If the pattern is `<all_urls>`.
-//
-// MatchesAllURLs calls the underlying MatchesAllURLs.
+// If the pattern is `<all_urls>`.
 func (x *WKWebExtensionMatchPattern) MatchesAllURLs() bool {
-	return x.inner.MatchesAllURLs()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchesAllURLs"))
+	return _r
 }
 
-// @abstract If the pattern is `<all_urls>` or has `*` as the host.
-//
-// MatchesAllHosts calls the underlying MatchesAllHosts.
+// If the pattern is `<all_urls>` or has `*` as the host.
 func (x *WKWebExtensionMatchPattern) MatchesAllHosts() bool {
-	return x.inner.MatchesAllHosts()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchesAllHosts"))
+	return _r
 }
 
 // WKWebExtensionMatchPatternable is the interface implemented by [WKWebExtensionMatchPattern], for mocking and DI.
 type WKWebExtensionMatchPatternable interface {
-	Unwrap() *raw.WKWebExtensionMatchPattern
+	obj.Object
 	MatchesURL(url string) bool
 	MatchesURLOptions(url string, options WKWebExtensionMatchPatternOptions) bool
-	MatchesPattern(pattern *raw.WKWebExtensionMatchPattern) bool
-	MatchesPatternOptions(pattern *raw.WKWebExtensionMatchPattern, options WKWebExtensionMatchPatternOptions) bool
+	MatchesPattern(pattern *WKWebExtensionMatchPattern) bool
+	MatchesPatternOptions(pattern *WKWebExtensionMatchPattern, options WKWebExtensionMatchPatternOptions) bool
 	String() string
 	Scheme() string
 	Host() string

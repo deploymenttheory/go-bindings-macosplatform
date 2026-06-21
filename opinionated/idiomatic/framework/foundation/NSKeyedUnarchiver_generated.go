@@ -5,152 +5,133 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // A decoder that restores data from an archive referenced by keys.
 //
-// KeyedUnarchiver wraps [raw.NSKeyedUnarchiver] with a fluent Go API.
+// KeyedUnarchiver is an idiomatic wrapper over the Objective-C class NSKeyedUnarchiver.
 type KeyedUnarchiver struct {
-	inner *raw.NSKeyedUnarchiver
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSKeyedUnarchiver].
-func (x *KeyedUnarchiver) Unwrap() *raw.NSKeyedUnarchiver { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *KeyedUnarchiver) ID() objc.ID { return x.inner.Ptr() }
-
-// KeyedUnarchiverFromID adopts an existing object pointer as a KeyedUnarchiver (nil for 0).
+// KeyedUnarchiverFromID adopts an existing Objective-C object as a KeyedUnarchiver
+// (nil for 0), retaining it and registering a release finalizer.
 func KeyedUnarchiverFromID(id objc.ID) *KeyedUnarchiver {
 	if id == 0 {
 		return nil
 	}
-	return &KeyedUnarchiver{inner: raw.NSKeyedUnarchiverFromID(id)}
-}
-
-// NewKeyedUnarchiver creates a new [KeyedUnarchiver].
-func NewKeyedUnarchiver() *KeyedUnarchiver {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSKeyedUnarchiver")), objc.RegisterName("new"))
-	return &KeyedUnarchiver{inner: raw.NSKeyedUnarchiverFromID(_id)}
-}
-
-// Initializes an archiver to decode data from the specified location.
-//
-// NewKeyedUnarchiverForReadingFromDataError creates a new [KeyedUnarchiver].
-func NewKeyedUnarchiverForReadingFromDataError(data *raw.NSData) (*KeyedUnarchiver, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSKeyedUnarchiver")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReadingFromData:error:"), data.Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &KeyedUnarchiver{inner: raw.NSKeyedUnarchiverFromID(_id)}, nil
-}
-
-// Initializes an archiver to decode data from the specified location.
-//
-// NewKeyedUnarchiverForReadingWithData creates a new [KeyedUnarchiver].
-func NewKeyedUnarchiverForReadingWithData(data *raw.NSData) *KeyedUnarchiver {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSKeyedUnarchiver")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReadingWithData:"), data.Ptr())
-	return &KeyedUnarchiver{inner: raw.NSKeyedUnarchiverFromID(_id)}
-}
-
-// The receiver’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *KeyedUnarchiver) WithDelegate(delegate raw.NSKeyedUnarchiverDelegate) *KeyedUnarchiver {
-	x.inner.SetDelegate(delegate)
+	x := &KeyedUnarchiver{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// keyedUnarchiverAdopt wraps an Objective-C object that this code just created as a
+// KeyedUnarchiver (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func keyedUnarchiverAdopt(id objc.ID) *KeyedUnarchiver {
+	if id == 0 {
+		return nil
+	}
+	x := &KeyedUnarchiver{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *KeyedUnarchiver) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *KeyedUnarchiver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *KeyedUnarchiver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewKeyedUnarchiver creates a new KeyedUnarchiver.
+func NewKeyedUnarchiver() *KeyedUnarchiver {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("new"))
+	return keyedUnarchiverAdopt(_id)
+}
+
+// Initializes an archiver to decode data from the specified location.
+//
+// NewKeyedUnarchiverForReadingFromDataError creates a new KeyedUnarchiver.
+func NewKeyedUnarchiverForReadingFromDataError(data *Data) (*KeyedUnarchiver, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReadingFromData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return keyedUnarchiverAdopt(_id), nil
+}
+
+// Initializes an archiver to decode data from the specified location.
+//
+// NewKeyedUnarchiverForReadingWithData creates a new KeyedUnarchiver.
+func NewKeyedUnarchiverForReadingWithData(data *Data) *KeyedUnarchiver {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSKeyedUnarchiver")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReadingWithData:"), objref.IDOf(data))
+	return keyedUnarchiverAdopt(_id)
 }
 
 // Indicates whether the receiver requires all unarchived classes to conform to NSSecureCoding.
 //
-// WithRequiresSecureCoding sets the requiresSecureCoding property and returns the receiver for chaining.
+// WithRequiresSecureCoding sets requiresSecureCoding and returns the receiver so calls can be chained.
 func (x *KeyedUnarchiver) WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedUnarchiver {
-	x.inner.SetRequiresSecureCoding(requiresSecureCoding)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSecureCoding:"), requiresSecureCoding)
 	return x
 }
 
 // The action to take when this unarchiver fails to decode an entry.
 //
-// WithDecodingFailurePolicy sets the decodingFailurePolicy property and returns the receiver for chaining.
-func (x *KeyedUnarchiver) WithDecodingFailurePolicy(decodingFailurePolicy NSDecodingFailurePolicy) *KeyedUnarchiver {
-	x.inner.SetDecodingFailurePolicy(raw.NSDecodingFailurePolicy(decodingFailurePolicy))
+// WithDecodingFailurePolicy sets decodingFailurePolicy and returns the receiver so calls can be chained.
+func (x *KeyedUnarchiver) WithDecodingFailurePolicy(decodingFailurePolicy DecodingFailurePolicy) *KeyedUnarchiver {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecodingFailurePolicy:"), decodingFailurePolicy)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *KeyedUnarchiver) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *KeyedUnarchiver {
-	x.inner.NSCoder.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *KeyedUnarchiver) WithScriptingProperties(scriptingProperties obj.Object) *KeyedUnarchiver {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Tells the receiver that you are finished decoding objects.
-//
-// FinishDecoding calls the underlying FinishDecoding.
 func (x *KeyedUnarchiver) FinishDecoding() {
-	x.inner.FinishDecoding()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishDecoding"))
 }
 
-// Sets a translation mapping on this unarchiver to decode objects encoded with a given class name as instances of a given class instead.
-//
-// SetClassForClassName calls the underlying SetClassForClassName.
-func (x *KeyedUnarchiver) SetClassForClassName(cls objc.Class, codedName string) {
-	x.inner.SetClassForClassName(cls, foundation.NSStringStringWithUTF8String(codedName))
-}
-
-// Returns the class from which this unarchiver instantiates an encoded object with a given class name.
-//
-// ClassForClassName calls the underlying ClassForClassName.
-func (x *KeyedUnarchiver) ClassForClassName(codedName string) objc.Class {
-	return x.inner.ClassForClassName(foundation.NSStringStringWithUTF8String(codedName))
-}
-
-// Delegate calls the underlying Delegate.
-func (x *KeyedUnarchiver) Delegate() raw.NSKeyedUnarchiverDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *KeyedUnarchiver) SetDelegate(delegate raw.NSKeyedUnarchiverDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// SetRequiresSecureCoding calls the underlying SetRequiresSecureCoding.
 func (x *KeyedUnarchiver) SetRequiresSecureCoding(requiresSecureCoding bool) {
-	x.inner.SetRequiresSecureCoding(requiresSecureCoding)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSecureCoding:"), requiresSecureCoding)
 }
 
-// SetDecodingFailurePolicy calls the underlying SetDecodingFailurePolicy.
-func (x *KeyedUnarchiver) SetDecodingFailurePolicy(decodingFailurePolicy NSDecodingFailurePolicy) {
-	x.inner.SetDecodingFailurePolicy(raw.NSDecodingFailurePolicy(decodingFailurePolicy))
+func (x *KeyedUnarchiver) SetDecodingFailurePolicy(decodingFailurePolicy DecodingFailurePolicy) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecodingFailurePolicy:"), decodingFailurePolicy)
 }
-
-func (x *KeyedUnarchiver) asCoder() *raw.NSCoder { return &x.inner.NSCoder }
-
-func (x *KeyedUnarchiver) asObject() *raw.NSObject { return &x.inner.NSCoder.NSObject }
 
 // KeyedUnarchiverable is the interface implemented by [KeyedUnarchiver], for mocking and DI.
 type KeyedUnarchiverable interface {
-	Unwrap() *raw.NSKeyedUnarchiver
-	WithDelegate(delegate raw.NSKeyedUnarchiverDelegate) *KeyedUnarchiver
+	obj.Object
 	WithRequiresSecureCoding(requiresSecureCoding bool) *KeyedUnarchiver
-	WithDecodingFailurePolicy(decodingFailurePolicy NSDecodingFailurePolicy) *KeyedUnarchiver
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *KeyedUnarchiver
+	WithDecodingFailurePolicy(decodingFailurePolicy DecodingFailurePolicy) *KeyedUnarchiver
+	WithScriptingProperties(scriptingProperties obj.Object) *KeyedUnarchiver
 	FinishDecoding()
-	SetClassForClassName(cls objc.Class, codedName string)
-	ClassForClassName(codedName string) objc.Class
-	Delegate() raw.NSKeyedUnarchiverDelegate
-	SetDelegate(delegate raw.NSKeyedUnarchiverDelegate)
 	SetRequiresSecureCoding(requiresSecureCoding bool)
-	SetDecodingFailurePolicy(decodingFailurePolicy NSDecodingFailurePolicy)
+	SetDecodingFailurePolicy(decodingFailurePolicy DecodingFailurePolicy)
 }
 
 var _ KeyedUnarchiverable = (*KeyedUnarchiver)(nil)

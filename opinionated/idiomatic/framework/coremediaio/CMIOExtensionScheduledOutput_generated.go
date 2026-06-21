@@ -5,58 +5,83 @@
 package coremediaio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents scheduled output.
 //
-// ExtensionScheduledOutput wraps [raw.CMIOExtensionScheduledOutput] with a fluent Go API.
+// ExtensionScheduledOutput is an idiomatic wrapper over the Objective-C class CMIOExtensionScheduledOutput.
 type ExtensionScheduledOutput struct {
-	inner *raw.CMIOExtensionScheduledOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CMIOExtensionScheduledOutput].
-func (x *ExtensionScheduledOutput) Unwrap() *raw.CMIOExtensionScheduledOutput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExtensionScheduledOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtensionScheduledOutputFromID adopts an existing object pointer as a ExtensionScheduledOutput (nil for 0).
+// ExtensionScheduledOutputFromID adopts an existing Objective-C object as a ExtensionScheduledOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtensionScheduledOutputFromID(id objc.ID) *ExtensionScheduledOutput {
 	if id == 0 {
 		return nil
 	}
-	return &ExtensionScheduledOutput{inner: raw.CMIOExtensionScheduledOutputFromID(id)}
+	x := &ExtensionScheduledOutput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// extensionScheduledOutputAdopt wraps an Objective-C object that this code just created as a
+// ExtensionScheduledOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extensionScheduledOutputAdopt(id objc.ID) *ExtensionScheduledOutput {
+	if id == 0 {
+		return nil
+	}
+	x := &ExtensionScheduledOutput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ExtensionScheduledOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExtensionScheduledOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExtensionScheduledOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a scheduled output object.
 //
-// NewExtensionScheduledOutputWithSequenceNumberHostTimeInNanoseconds creates a new [ExtensionScheduledOutput].
+// NewExtensionScheduledOutputWithSequenceNumberHostTimeInNanoseconds creates a new ExtensionScheduledOutput.
 func NewExtensionScheduledOutputWithSequenceNumberHostTimeInNanoseconds(sequenceNumber uint64, hostTimeInNanoseconds uint64) *ExtensionScheduledOutput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionScheduledOutput")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionScheduledOutput")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSequenceNumber:hostTimeInNanoseconds:"), sequenceNumber, hostTimeInNanoseconds)
-	return &ExtensionScheduledOutput{inner: raw.CMIOExtensionScheduledOutputFromID(_id)}
+	return extensionScheduledOutputAdopt(_id)
 }
 
-// @property sequenceNumber @abstract The buffer sequence number that was output.
-//
-// SequenceNumber calls the underlying SequenceNumber.
+// The buffer sequence number that was output.
 func (x *ExtensionScheduledOutput) SequenceNumber() uint64 {
-	return x.inner.SequenceNumber()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("sequenceNumber"))
+	return _r
 }
 
-// @property hostTimeInNanoseconds @abstract The host time in nanoseconds when the buffer was output.
-//
-// HostTimeInNanoseconds calls the underlying HostTimeInNanoseconds.
+// The host time in nanoseconds when the buffer was output.
 func (x *ExtensionScheduledOutput) HostTimeInNanoseconds() uint64 {
-	return x.inner.HostTimeInNanoseconds()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("hostTimeInNanoseconds"))
+	return _r
 }
 
 // ExtensionScheduledOutputable is the interface implemented by [ExtensionScheduledOutput], for mocking and DI.
 type ExtensionScheduledOutputable interface {
-	Unwrap() *raw.CMIOExtensionScheduledOutput
+	obj.Object
 	SequenceNumber() uint64
 	HostTimeInNanoseconds() uint64
 }

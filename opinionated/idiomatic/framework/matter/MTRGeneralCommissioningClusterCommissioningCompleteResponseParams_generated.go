@@ -5,118 +5,135 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRGeneralCommissioningClusterCommissioningCompleteResponseParams wraps [raw.MTRGeneralCommissioningClusterCommissioningCompleteResponseParams] with a fluent Go API.
+// MTRGeneralCommissioningClusterCommissioningCompleteResponseParams is an idiomatic wrapper over the Objective-C class MTRGeneralCommissioningClusterCommissioningCompleteResponseParams.
 type MTRGeneralCommissioningClusterCommissioningCompleteResponseParams struct {
-	inner *raw.MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRGeneralCommissioningClusterCommissioningCompleteResponseParams].
-func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) Unwrap() *raw.MTRGeneralCommissioningClusterCommissioningCompleteResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsFromID adopts an existing object pointer as a MTRGeneralCommissioningClusterCommissioningCompleteResponseParams (nil for 0).
+// MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsFromID adopts an existing Objective-C object as a MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsFromID(id objc.ID) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRGeneralCommissioningClusterCommissioningCompleteResponseParams{inner: raw.MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsFromID(id)}
+	x := &MTRGeneralCommissioningClusterCommissioningCompleteResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRGeneralCommissioningClusterCommissioningCompleteResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRGeneralCommissioningClusterCommissioningCompleteResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRGeneralCommissioningClusterCommissioningCompleteResponseParamsAdopt(id objc.ID) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRGeneralCommissioningClusterCommissioningCompleteResponseParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize an MTRGeneralCommissioningClusterCommissioningCompleteResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 //
-// NewMTRGeneralCommissioningClusterCommissioningCompleteResponseParamsWithResponseValueError creates a new [MTRGeneralCommissioningClusterCommissioningCompleteResponseParams].
-func NewMTRGeneralCommissioningClusterCommissioningCompleteResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGeneralCommissioningClusterCommissioningCompleteResponseParams")), objc.RegisterName("alloc"))
+// NewMTRGeneralCommissioningClusterCommissioningCompleteResponseParamsWithResponseValueError creates a new MTRGeneralCommissioningClusterCommissioningCompleteResponseParams.
+func NewMTRGeneralCommissioningClusterCommissioningCompleteResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRGeneralCommissioningClusterCommissioningCompleteResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &MTRGeneralCommissioningClusterCommissioningCompleteResponseParams{inner: raw.MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsFromID(_id)}, nil
+	return mTRGeneralCommissioningClusterCommissioningCompleteResponseParamsAdopt(_id), nil
 }
 
-// WithErrorCode sets the errorCode property and returns the receiver for chaining.
-func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) WithErrorCode(errorCode *foundation.NSNumber) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams {
-	x.inner.SetErrorCode(errorCode)
+// WithErrorCode sets errorCode and returns the receiver so calls can be chained.
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) WithErrorCode(errorCode obj.Object) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorCode:"), objref.IDOf(errorCode))
 	return x
 }
 
-// WithDebugText sets the debugText property and returns the receiver for chaining.
+// WithDebugText sets debugText and returns the receiver so calls can be chained.
 func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) WithDebugText(debugText string) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams {
-	x.inner.SetDebugText(foundation.NSStringStringWithUTF8String(debugText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// ErrorCode calls the underlying ErrorCode.
-func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) ErrorCode() *foundation.NSNumber {
-	return x.inner.ErrorCode()
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) ErrorCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorCode"))
+	return obj.Wrap(_r)
 }
 
-// SetErrorCode calls the underlying SetErrorCode.
-func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) SetErrorCode(errorCode *foundation.NSNumber) {
-	x.inner.SetErrorCode(errorCode)
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) SetErrorCode(errorCode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorCode:"), objref.IDOf(errorCode))
 }
 
-// DebugText calls the underlying DebugText.
 func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) DebugText() string {
-	_r := x.inner.DebugText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("debugText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetDebugText calls the underlying SetDebugText.
 func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) SetDebugText(debugText string) {
-	x.inner.SetDebugText(foundation.NSStringStringWithUTF8String(debugText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsable is the interface implemented by [MTRGeneralCommissioningClusterCommissioningCompleteResponseParams], for mocking and DI.
 type MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsable interface {
-	Unwrap() *raw.MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
-	WithErrorCode(errorCode *foundation.NSNumber) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
+	obj.Object
+	WithErrorCode(errorCode obj.Object) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
 	WithDebugText(debugText string) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
-	ErrorCode() *foundation.NSNumber
-	SetErrorCode(errorCode *foundation.NSNumber)
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
+	ErrorCode() obj.Object
+	SetErrorCode(errorCode obj.Object)
 	DebugText() string
 	SetDebugText(debugText string)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
 }
 
 var _ MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsable = (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams)(nil)

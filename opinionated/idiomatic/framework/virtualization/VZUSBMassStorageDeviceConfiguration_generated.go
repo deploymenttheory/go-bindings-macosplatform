@@ -5,50 +5,71 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The configuration object that represents a USB Mass storage device.
 //
-// USBMassStorageDeviceConfiguration wraps [raw.VZUSBMassStorageDeviceConfiguration] with a fluent Go API.
+// USBMassStorageDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZUSBMassStorageDeviceConfiguration.
 type USBMassStorageDeviceConfiguration struct {
-	inner *raw.VZUSBMassStorageDeviceConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZUSBMassStorageDeviceConfiguration].
-func (x *USBMassStorageDeviceConfiguration) Unwrap() *raw.VZUSBMassStorageDeviceConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *USBMassStorageDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// USBMassStorageDeviceConfigurationFromID adopts an existing object pointer as a USBMassStorageDeviceConfiguration (nil for 0).
+// USBMassStorageDeviceConfigurationFromID adopts an existing Objective-C object as a USBMassStorageDeviceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func USBMassStorageDeviceConfigurationFromID(id objc.ID) *USBMassStorageDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &USBMassStorageDeviceConfiguration{inner: raw.VZUSBMassStorageDeviceConfigurationFromID(id)}
+	x := &USBMassStorageDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// uSBMassStorageDeviceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// USBMassStorageDeviceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uSBMassStorageDeviceConfigurationAdopt(id objc.ID) *USBMassStorageDeviceConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &USBMassStorageDeviceConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *USBMassStorageDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *USBMassStorageDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *USBMassStorageDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new storage device configuration with the specified attachment.
 //
-// NewUSBMassStorageDeviceConfigurationWithAttachment creates a new [USBMassStorageDeviceConfiguration].
-func NewUSBMassStorageDeviceConfigurationWithAttachment(attachment *raw.VZStorageDeviceAttachment) *USBMassStorageDeviceConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZUSBMassStorageDeviceConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttachment:"), attachment.Ptr())
-	return &USBMassStorageDeviceConfiguration{inner: raw.VZUSBMassStorageDeviceConfigurationFromID(_id)}
-}
-
-func (x *USBMassStorageDeviceConfiguration) asStorageDeviceConfiguration() *raw.VZStorageDeviceConfiguration {
-	return &x.inner.VZStorageDeviceConfiguration
+// NewUSBMassStorageDeviceConfigurationWithAttachment creates a new USBMassStorageDeviceConfiguration.
+func NewUSBMassStorageDeviceConfigurationWithAttachment(attachment *StorageDeviceAttachment) *USBMassStorageDeviceConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZUSBMassStorageDeviceConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttachment:"), objref.IDOf(attachment))
+	return uSBMassStorageDeviceConfigurationAdopt(_id)
 }
 
 // USBMassStorageDeviceConfigurationable is the interface implemented by [USBMassStorageDeviceConfiguration], for mocking and DI.
 type USBMassStorageDeviceConfigurationable interface {
-	Unwrap() *raw.VZUSBMassStorageDeviceConfiguration
+	obj.Object
 }
 
 var _ USBMassStorageDeviceConfigurationable = (*USBMassStorageDeviceConfiguration)(nil)

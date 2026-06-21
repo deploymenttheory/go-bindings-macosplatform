@@ -10,81 +10,81 @@ import (
 )
 
 // Error codes that describe indexing-specific errors.
-type CSIndexErrorCode int64
+type IndexErrorCode int64
 
 const (
-	CSIndexErrorCodeUnknownError            CSIndexErrorCode = -1
-	CSIndexErrorCodeIndexUnavailableError   CSIndexErrorCode = -1000
-	CSIndexErrorCodeInvalidItemError        CSIndexErrorCode = -1001
-	CSIndexErrorCodeInvalidClientStateError CSIndexErrorCode = -1002
-	CSIndexErrorCodeRemoteConnectionError   CSIndexErrorCode = -1003
-	CSIndexErrorCodeQuotaExceeded           CSIndexErrorCode = -1004
-	CSIndexErrorCodeIndexingUnsupported     CSIndexErrorCode = -1005
-	CSIndexErrorCodeMismatchedClientState   CSIndexErrorCode = -1006
+	IndexErrorCodeUnknownError            IndexErrorCode = -1
+	IndexErrorCodeIndexUnavailableError   IndexErrorCode = -1000
+	IndexErrorCodeInvalidItemError        IndexErrorCode = -1001
+	IndexErrorCodeInvalidClientStateError IndexErrorCode = -1002
+	IndexErrorCodeRemoteConnectionError   IndexErrorCode = -1003
+	IndexErrorCodeQuotaExceeded           IndexErrorCode = -1004
+	IndexErrorCodeIndexingUnsupported     IndexErrorCode = -1005
+	IndexErrorCodeMismatchedClientState   IndexErrorCode = -1006
 )
 
-func (e CSIndexErrorCode) String() string {
+func (e IndexErrorCode) String() string {
 	switch e {
-	case CSIndexErrorCodeUnknownError:
-		return "CSIndexErrorCodeUnknownError"
-	case CSIndexErrorCodeIndexUnavailableError:
-		return "CSIndexErrorCodeIndexUnavailableError"
-	case CSIndexErrorCodeInvalidItemError:
-		return "CSIndexErrorCodeInvalidItemError"
-	case CSIndexErrorCodeInvalidClientStateError:
-		return "CSIndexErrorCodeInvalidClientStateError"
-	case CSIndexErrorCodeRemoteConnectionError:
-		return "CSIndexErrorCodeRemoteConnectionError"
-	case CSIndexErrorCodeQuotaExceeded:
-		return "CSIndexErrorCodeQuotaExceeded"
-	case CSIndexErrorCodeIndexingUnsupported:
-		return "CSIndexErrorCodeIndexingUnsupported"
-	case CSIndexErrorCodeMismatchedClientState:
-		return "CSIndexErrorCodeMismatchedClientState"
+	case IndexErrorCodeUnknownError:
+		return "IndexErrorCodeUnknownError"
+	case IndexErrorCodeIndexUnavailableError:
+		return "IndexErrorCodeIndexUnavailableError"
+	case IndexErrorCodeInvalidItemError:
+		return "IndexErrorCodeInvalidItemError"
+	case IndexErrorCodeInvalidClientStateError:
+		return "IndexErrorCodeInvalidClientStateError"
+	case IndexErrorCodeRemoteConnectionError:
+		return "IndexErrorCodeRemoteConnectionError"
+	case IndexErrorCodeQuotaExceeded:
+		return "IndexErrorCodeQuotaExceeded"
+	case IndexErrorCodeIndexingUnsupported:
+		return "IndexErrorCodeIndexingUnsupported"
+	case IndexErrorCodeMismatchedClientState:
+		return "IndexErrorCodeMismatchedClientState"
 	default:
-		return fmt.Sprintf("CSIndexErrorCode(%d)", int64(e))
+		return fmt.Sprintf("IndexErrorCode(%d)", int64(e))
 	}
 }
 
 // Error codes that describe reasons a query might fail.
-type CSSearchQueryErrorCode int64
+type SearchQueryErrorCode int64
 
 const (
-	CSSearchQueryErrorCodeUnknown          CSSearchQueryErrorCode = -2000
-	CSSearchQueryErrorCodeIndexUnreachable CSSearchQueryErrorCode = -2001
-	CSSearchQueryErrorCodeInvalidQuery     CSSearchQueryErrorCode = -2002
-	CSSearchQueryErrorCodeCancelled        CSSearchQueryErrorCode = -2003
+	SearchQueryErrorCodeUnknown          SearchQueryErrorCode = -2000
+	SearchQueryErrorCodeIndexUnreachable SearchQueryErrorCode = -2001
+	SearchQueryErrorCodeInvalidQuery     SearchQueryErrorCode = -2002
+	SearchQueryErrorCodeCancelled        SearchQueryErrorCode = -2003
 )
 
-func (e CSSearchQueryErrorCode) String() string {
+func (e SearchQueryErrorCode) String() string {
 	switch e {
-	case CSSearchQueryErrorCodeUnknown:
-		return "CSSearchQueryErrorCodeUnknown"
-	case CSSearchQueryErrorCodeIndexUnreachable:
-		return "CSSearchQueryErrorCodeIndexUnreachable"
-	case CSSearchQueryErrorCodeInvalidQuery:
-		return "CSSearchQueryErrorCodeInvalidQuery"
-	case CSSearchQueryErrorCodeCancelled:
-		return "CSSearchQueryErrorCodeCancelled"
+	case SearchQueryErrorCodeUnknown:
+		return "SearchQueryErrorCodeUnknown"
+	case SearchQueryErrorCodeIndexUnreachable:
+		return "SearchQueryErrorCodeIndexUnreachable"
+	case SearchQueryErrorCodeInvalidQuery:
+		return "SearchQueryErrorCodeInvalidQuery"
+	case SearchQueryErrorCodeCancelled:
+		return "SearchQueryErrorCodeCancelled"
 	default:
-		return fmt.Sprintf("CSSearchQueryErrorCode(%d)", int64(e))
+		return fmt.Sprintf("SearchQueryErrorCode(%d)", int64(e))
 	}
 }
 
 // The query source options to allow or deny Mail messages in the search.
 // Bitmask — values may be combined with |.
-type CSSearchQuerySourceOptions uint64
+type SearchQuerySourceOptions uint64
 
 const (
 	// The query uses the default search option that excludes Mail messages.
-	CSSearchQuerySourceOptionDefault   CSSearchQuerySourceOptions = 0
-	CSSearchQuerySourceOptionAllowMail CSSearchQuerySourceOptions = 1
+	SearchQuerySourceOptionDefault   SearchQuerySourceOptions = 0
+	SearchQuerySourceOptionAllowMail SearchQuerySourceOptions = 1
 )
 
-func (e CSSearchQuerySourceOptions) String() string {
+func (e SearchQuerySourceOptions) String() string {
 	var parts []string
-	if e&CSSearchQuerySourceOptionAllowMail != 0 {
-		parts = append(parts, "CSSearchQuerySourceOptionAllowMail")
+	if e&SearchQuerySourceOptionAllowMail != 0 {
+		parts = append(parts, "SearchQuerySourceOptionAllowMail")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -93,21 +93,21 @@ func (e CSSearchQuerySourceOptions) String() string {
 }
 
 // Bitmask — values may be combined with |.
-type CSSearchableItemUpdateListenerOptions uint64
+type SearchableItemUpdateListenerOptions uint64
 
 const (
-	CSSearchableItemUpdateListenerOptionDefault       CSSearchableItemUpdateListenerOptions = 0
-	CSSearchableItemUpdateListenerOptionSummarization CSSearchableItemUpdateListenerOptions = 2
-	CSSearchableItemUpdateListenerOptionPriority      CSSearchableItemUpdateListenerOptions = 4
+	SearchableItemUpdateListenerOptionDefault       SearchableItemUpdateListenerOptions = 0
+	SearchableItemUpdateListenerOptionSummarization SearchableItemUpdateListenerOptions = 2
+	SearchableItemUpdateListenerOptionPriority      SearchableItemUpdateListenerOptions = 4
 )
 
-func (e CSSearchableItemUpdateListenerOptions) String() string {
+func (e SearchableItemUpdateListenerOptions) String() string {
 	var parts []string
-	if e&CSSearchableItemUpdateListenerOptionSummarization != 0 {
-		parts = append(parts, "CSSearchableItemUpdateListenerOptionSummarization")
+	if e&SearchableItemUpdateListenerOptionSummarization != 0 {
+		parts = append(parts, "SearchableItemUpdateListenerOptionSummarization")
 	}
-	if e&CSSearchableItemUpdateListenerOptionPriority != 0 {
-		parts = append(parts, "CSSearchableItemUpdateListenerOptionPriority")
+	if e&SearchableItemUpdateListenerOptionPriority != 0 {
+		parts = append(parts, "SearchableItemUpdateListenerOptionPriority")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -116,42 +116,42 @@ func (e CSSearchableItemUpdateListenerOptions) String() string {
 }
 
 // The suggestion type that determines how the system handles a suggestion.
-type CSSuggestionKind int64
+type SuggestionKind int64
 
 const (
-	CSSuggestionKindNone    CSSuggestionKind = 0
-	CSSuggestionKindCustom  CSSuggestionKind = 1
-	CSSuggestionKindDefault CSSuggestionKind = 2
+	SuggestionKindNone    SuggestionKind = 0
+	SuggestionKindCustom  SuggestionKind = 1
+	SuggestionKindDefault SuggestionKind = 2
 )
 
-func (e CSSuggestionKind) String() string {
+func (e SuggestionKind) String() string {
 	switch e {
-	case CSSuggestionKindNone:
-		return "CSSuggestionKindNone"
-	case CSSuggestionKindCustom:
-		return "CSSuggestionKindCustom"
-	case CSSuggestionKindDefault:
-		return "CSSuggestionKindDefault"
+	case SuggestionKindNone:
+		return "SuggestionKindNone"
+	case SuggestionKindCustom:
+		return "SuggestionKindCustom"
+	case SuggestionKindDefault:
+		return "SuggestionKindDefault"
 	default:
-		return fmt.Sprintf("CSSuggestionKind(%d)", int64(e))
+		return fmt.Sprintf("SuggestionKind(%d)", int64(e))
 	}
 }
 
-type CSUserInteraction int64
+type UserInteraction int64
 
 const (
-	CSUserInteractionSelect  CSUserInteraction = 0
-	CSUserInteractionDefault CSUserInteraction = 0
-	CSUserInteractionFocus   CSUserInteraction = 1
+	UserInteractionSelect  UserInteraction = 0
+	UserInteractionDefault UserInteraction = 0
+	UserInteractionFocus   UserInteraction = 1
 )
 
-func (e CSUserInteraction) String() string {
+func (e UserInteraction) String() string {
 	switch e {
-	case CSUserInteractionSelect:
-		return "CSUserInteractionSelect"
-	case CSUserInteractionFocus:
-		return "CSUserInteractionFocus"
+	case UserInteractionSelect:
+		return "UserInteractionSelect"
+	case UserInteractionFocus:
+		return "UserInteractionFocus"
 	default:
-		return fmt.Sprintf("CSUserInteraction(%d)", int64(e))
+		return fmt.Sprintf("UserInteraction(%d)", int64(e))
 	}
 }

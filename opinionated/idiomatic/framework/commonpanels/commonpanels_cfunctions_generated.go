@@ -5,123 +5,67 @@
 package commonpanels
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/commonpanels"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/hitoolbox"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/qd"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// CMCalibrateDisplay calls [raw.CMCalibrateDisplay] (C function CMCalibrateDisplay).
-func CMCalibrateDisplay(theInfo *raw.CalibratorInfo) int16 {
-	return raw.CMCalibrateDisplay(theInfo)
+var _fnFCCopyCollectionNames func() objc.ID
+
+// FCCopyCollectionNames calls the CommonPanels framework function FCCopyCollectionNames.
+func FCCopyCollectionNames() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFCCopyCollectionNames == nil {
+		ebipurego.RegisterLibFunc(&_fnFCCopyCollectionNames, _lib, "FCCopyCollectionNames")
+	}
+	_ret := _fnFCCopyCollectionNames()
+	return obj.Wrap(_ret)
 }
 
-// DisposeCalibrateEventUPP calls [raw.DisposeCalibrateEventUPP] (C function DisposeCalibrateEventUPP).
-func DisposeCalibrateEventUPP(userUPP unsafe.Pointer) {
-	raw.DisposeCalibrateEventUPP(userUPP)
+var _fnFCCopyFontDescriptorsInCollection func(objc.ID) objc.ID
+
+// FCCopyFontDescriptorsInCollection calls the CommonPanels framework function FCCopyFontDescriptorsInCollection.
+func FCCopyFontDescriptorsInCollection(iCollection obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFCCopyFontDescriptorsInCollection == nil {
+		ebipurego.RegisterLibFunc(&_fnFCCopyFontDescriptorsInCollection, _lib, "FCCopyFontDescriptorsInCollection")
+	}
+	_ret := _fnFCCopyFontDescriptorsInCollection(objref.IDOf(iCollection))
+	return obj.Wrap(_ret)
 }
 
-// DisposeCalibrateUPP calls [raw.DisposeCalibrateUPP] (C function DisposeCalibrateUPP).
-func DisposeCalibrateUPP(userUPP unsafe.Pointer) {
-	raw.DisposeCalibrateUPP(userUPP)
+var _fnFCFontDescriptorCreateWithFontAttributes func(objc.ID) objc.ID
+
+// FCFontDescriptorCreateWithFontAttributes calls the CommonPanels framework function FCFontDescriptorCreateWithFontAttributes.
+func FCFontDescriptorCreateWithFontAttributes(iAttributes obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFCFontDescriptorCreateWithFontAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnFCFontDescriptorCreateWithFontAttributes, _lib, "FCFontDescriptorCreateWithFontAttributes")
+	}
+	_ret := _fnFCFontDescriptorCreateWithFontAttributes(objref.IDOf(iAttributes))
+	return obj.Wrap(_ret)
 }
 
-// DisposeCanCalibrateUPP calls [raw.DisposeCanCalibrateUPP] (C function DisposeCanCalibrateUPP).
-func DisposeCanCalibrateUPP(userUPP unsafe.Pointer) {
-	raw.DisposeCanCalibrateUPP(userUPP)
+var _fnFCFontDescriptorCreateWithName func(objc.ID, float64) objc.ID
+
+// FCFontDescriptorCreateWithName calls the CommonPanels framework function FCFontDescriptorCreateWithName.
+func FCFontDescriptorCreateWithName(iFontName obj.Object, iSize float64) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFCFontDescriptorCreateWithName == nil {
+		ebipurego.RegisterLibFunc(&_fnFCFontDescriptorCreateWithName, _lib, "FCFontDescriptorCreateWithName")
+	}
+	_ret := _fnFCFontDescriptorCreateWithName(objref.IDOf(iFontName), iSize)
+	return obj.Wrap(_ret)
 }
 
-// DisposeNColorChangedUPP calls [raw.DisposeNColorChangedUPP] (C function DisposeNColorChangedUPP).
-func DisposeNColorChangedUPP(userUPP unsafe.Pointer) {
-	raw.DisposeNColorChangedUPP(userUPP)
-}
+var _fnFPIsFontPanelVisible func() uint8
 
-// FCAddFontDescriptorToCollection calls [raw.FCAddFontDescriptorToCollection] (C function FCAddFontDescriptorToCollection).
-func FCAddFontDescriptorToCollection(iDescriptor unsafe.Pointer, iCollection unsafe.Pointer) int {
-	return raw.FCAddFontDescriptorToCollection(iDescriptor, iCollection)
-}
-
-// FCCopyCollectionNames calls [raw.FCCopyCollectionNames] (C function FCCopyCollectionNames).
-func FCCopyCollectionNames() unsafe.Pointer {
-	return raw.FCCopyCollectionNames()
-}
-
-// FCCopyFontDescriptorsInCollection calls [raw.FCCopyFontDescriptorsInCollection] (C function FCCopyFontDescriptorsInCollection).
-func FCCopyFontDescriptorsInCollection(iCollection unsafe.Pointer) unsafe.Pointer {
-	return raw.FCCopyFontDescriptorsInCollection(iCollection)
-}
-
-// FCFontDescriptorCreateWithFontAttributes calls [raw.FCFontDescriptorCreateWithFontAttributes] (C function FCFontDescriptorCreateWithFontAttributes).
-func FCFontDescriptorCreateWithFontAttributes(iAttributes unsafe.Pointer) unsafe.Pointer {
-	return raw.FCFontDescriptorCreateWithFontAttributes(iAttributes)
-}
-
-// FCFontDescriptorCreateWithName calls [raw.FCFontDescriptorCreateWithName] (C function FCFontDescriptorCreateWithName).
-func FCFontDescriptorCreateWithName(iFontName unsafe.Pointer, iSize float64) unsafe.Pointer {
-	return raw.FCFontDescriptorCreateWithName(iFontName, iSize)
-}
-
-// FCRemoveFontDescriptorFromCollection calls [raw.FCRemoveFontDescriptorFromCollection] (C function FCRemoveFontDescriptorFromCollection).
-func FCRemoveFontDescriptorFromCollection(iDescriptor unsafe.Pointer, iCollection unsafe.Pointer) int {
-	return raw.FCRemoveFontDescriptorFromCollection(iDescriptor, iCollection)
-}
-
-// FPIsFontPanelVisible calls [raw.FPIsFontPanelVisible] (C function FPIsFontPanelVisible).
+// FPIsFontPanelVisible calls the CommonPanels framework function FPIsFontPanelVisible.
 func FPIsFontPanelVisible() uint8 {
-	return raw.FPIsFontPanelVisible()
-}
-
-// GetColor calls [raw.GetColor] (C function GetColor).
-func GetColor(where unsafe.Pointer, prompt *uint8, inColor *qd.RGBColor, outColor *qd.RGBColor) uint8 {
-	return raw.GetColor(where, prompt, inColor, outColor)
-}
-
-// InvokeCalibrateEventUPP calls [raw.InvokeCalibrateEventUPP] (C function InvokeCalibrateEventUPP).
-func InvokeCalibrateEventUPP(event *hitoolbox.EventRecord, userUPP unsafe.Pointer) {
-	raw.InvokeCalibrateEventUPP(event, userUPP)
-}
-
-// InvokeCalibrateUPP calls [raw.InvokeCalibrateUPP] (C function InvokeCalibrateUPP).
-func InvokeCalibrateUPP(theInfo *raw.CalibratorInfo, userUPP unsafe.Pointer) int16 {
-	return raw.InvokeCalibrateUPP(theInfo, userUPP)
-}
-
-// InvokeCanCalibrateUPP calls [raw.InvokeCanCalibrateUPP] (C function InvokeCanCalibrateUPP).
-func InvokeCanCalibrateUPP(displayID uint, errMessage *uint8, userUPP unsafe.Pointer) uint8 {
-	return raw.InvokeCanCalibrateUPP(displayID, errMessage, userUPP)
-}
-
-// InvokeNColorChangedUPP calls [raw.InvokeNColorChangedUPP] (C function InvokeNColorChangedUPP).
-func InvokeNColorChangedUPP(userData unsafe.Pointer, newColor *raw.NPMColor, userUPP unsafe.Pointer) {
-	raw.InvokeNColorChangedUPP(userData, newColor, userUPP)
-}
-
-// NPickColor calls [raw.NPickColor] (C function NPickColor).
-func NPickColor(theColorInfo *raw.NColorPickerInfo) int16 {
-	return raw.NPickColor(theColorInfo)
-}
-
-// NewCalibrateEventUPP calls [raw.NewCalibrateEventUPP] (C function NewCalibrateEventUPP).
-func NewCalibrateEventUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewCalibrateEventUPP(userRoutine)
-}
-
-// NewCalibrateUPP calls [raw.NewCalibrateUPP] (C function NewCalibrateUPP).
-func NewCalibrateUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewCalibrateUPP(userRoutine)
-}
-
-// NewCanCalibrateUPP calls [raw.NewCanCalibrateUPP] (C function NewCanCalibrateUPP).
-func NewCanCalibrateUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewCanCalibrateUPP(userRoutine)
-}
-
-// NewNColorChangedUPP calls [raw.NewNColorChangedUPP] (C function NewNColorChangedUPP).
-func NewNColorChangedUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewNColorChangedUPP(userRoutine)
-}
-
-// SetFontInfoForSelection calls [raw.SetFontInfoForSelection] (C function SetFontInfoForSelection).
-func SetFontInfoForSelection(iStyleType uint, iNumStyles uint, iStyles unsafe.Pointer, iFPEventTarget unsafe.Pointer) int {
-	return raw.SetFontInfoForSelection(iStyleType, iNumStyles, iStyles, iFPEventTarget)
+	_loadOnce.Do(_loadLibrary)
+	if _fnFPIsFontPanelVisible == nil {
+		ebipurego.RegisterLibFunc(&_fnFPIsFontPanelVisible, _lib, "FPIsFontPanelVisible")
+	}
+	return _fnFPIsFontPanelVisible()
 }

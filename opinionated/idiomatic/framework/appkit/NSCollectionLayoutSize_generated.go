@@ -5,59 +5,78 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The width and the height of an item in a collection view.
 //
-// CollectionLayoutSize wraps [raw.NSCollectionLayoutSize] with a fluent Go API.
+// CollectionLayoutSize is an idiomatic wrapper over the Objective-C class NSCollectionLayoutSize.
 type CollectionLayoutSize struct {
-	inner *raw.NSCollectionLayoutSize
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCollectionLayoutSize].
-func (x *CollectionLayoutSize) Unwrap() *raw.NSCollectionLayoutSize { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionLayoutSize) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionLayoutSizeFromID adopts an existing object pointer as a CollectionLayoutSize (nil for 0).
+// CollectionLayoutSizeFromID adopts an existing Objective-C object as a CollectionLayoutSize
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionLayoutSizeFromID(id objc.ID) *CollectionLayoutSize {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionLayoutSize{inner: raw.NSCollectionLayoutSizeFromID(id)}
+	x := &CollectionLayoutSize{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCollectionLayoutSize creates a new [CollectionLayoutSize].
+// collectionLayoutSizeAdopt wraps an Objective-C object that this code just created as a
+// CollectionLayoutSize (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionLayoutSizeAdopt(id objc.ID) *CollectionLayoutSize {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionLayoutSize{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollectionLayoutSize) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollectionLayoutSize) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollectionLayoutSize) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCollectionLayoutSize creates a new CollectionLayoutSize.
 func NewCollectionLayoutSize() *CollectionLayoutSize {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionLayoutSize")), objc.RegisterName("new"))
-	return &CollectionLayoutSize{inner: raw.NSCollectionLayoutSizeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutSize")), objc.RegisterName("new"))
+	return collectionLayoutSizeAdopt(_id)
 }
 
-// WidthDimension calls the underlying WidthDimension.
 func (x *CollectionLayoutSize) WidthDimension() *CollectionLayoutDimension {
-	_r := x.inner.WidthDimension()
-	if _r == nil {
-		return nil
-	}
-	return &CollectionLayoutDimension{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("widthDimension"))
+	return CollectionLayoutDimensionFromID(_r)
 }
 
-// HeightDimension calls the underlying HeightDimension.
 func (x *CollectionLayoutSize) HeightDimension() *CollectionLayoutDimension {
-	_r := x.inner.HeightDimension()
-	if _r == nil {
-		return nil
-	}
-	return &CollectionLayoutDimension{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("heightDimension"))
+	return CollectionLayoutDimensionFromID(_r)
 }
 
 // CollectionLayoutSizeable is the interface implemented by [CollectionLayoutSize], for mocking and DI.
 type CollectionLayoutSizeable interface {
-	Unwrap() *raw.NSCollectionLayoutSize
+	obj.Object
 	WidthDimension() *CollectionLayoutDimension
 	HeightDimension() *CollectionLayoutDimension
 }

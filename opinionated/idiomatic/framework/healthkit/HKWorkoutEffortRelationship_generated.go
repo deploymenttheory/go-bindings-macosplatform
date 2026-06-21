@@ -5,75 +5,84 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// WorkoutEffortRelationship wraps [raw.HKWorkoutEffortRelationship] with a fluent Go API.
+// WorkoutEffortRelationship is an idiomatic wrapper over the Objective-C class HKWorkoutEffortRelationship.
 type WorkoutEffortRelationship struct {
-	inner *raw.HKWorkoutEffortRelationship
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKWorkoutEffortRelationship].
-func (x *WorkoutEffortRelationship) Unwrap() *raw.HKWorkoutEffortRelationship { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WorkoutEffortRelationship) ID() objc.ID { return x.inner.Ptr() }
-
-// WorkoutEffortRelationshipFromID adopts an existing object pointer as a WorkoutEffortRelationship (nil for 0).
+// WorkoutEffortRelationshipFromID adopts an existing Objective-C object as a WorkoutEffortRelationship
+// (nil for 0), retaining it and registering a release finalizer.
 func WorkoutEffortRelationshipFromID(id objc.ID) *WorkoutEffortRelationship {
 	if id == 0 {
 		return nil
 	}
-	return &WorkoutEffortRelationship{inner: raw.HKWorkoutEffortRelationshipFromID(id)}
+	x := &WorkoutEffortRelationship{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWorkoutEffortRelationship creates a new [WorkoutEffortRelationship].
+// workoutEffortRelationshipAdopt wraps an Objective-C object that this code just created as a
+// WorkoutEffortRelationship (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func workoutEffortRelationshipAdopt(id objc.ID) *WorkoutEffortRelationship {
+	if id == 0 {
+		return nil
+	}
+	x := &WorkoutEffortRelationship{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WorkoutEffortRelationship) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WorkoutEffortRelationship) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WorkoutEffortRelationship) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWorkoutEffortRelationship creates a new WorkoutEffortRelationship.
 func NewWorkoutEffortRelationship() *WorkoutEffortRelationship {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWorkoutEffortRelationship")), objc.RegisterName("new"))
-	return &WorkoutEffortRelationship{inner: raw.HKWorkoutEffortRelationshipFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEffortRelationship")), objc.RegisterName("new"))
+	return workoutEffortRelationshipAdopt(_id)
 }
 
-// @property      workout
-//
-// Workout calls the underlying Workout.
 func (x *WorkoutEffortRelationship) Workout() *Workout {
-	_r := x.inner.Workout()
-	if _r == nil {
-		return nil
-	}
-	return &Workout{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workout"))
+	return WorkoutFromID(_r)
 }
 
-// @property      activity
-//
-// Activity calls the underlying Activity.
 func (x *WorkoutEffortRelationship) Activity() *WorkoutActivity {
-	_r := x.inner.Activity()
-	if _r == nil {
-		return nil
-	}
-	return &WorkoutActivity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activity"))
+	return WorkoutActivityFromID(_r)
 }
 
-// @property      samples @abstract      The samples related to the workout but not any sub-activities
+// The samples related to the workout but not any sub-activities
 //
 // Samples returns the collection as a Go slice.
 func (x *WorkoutEffortRelationship) Samples() []*Sample {
-	arr := x.inner.Samples()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Sample {
-		return &Sample{inner: raw.HKSampleFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("samples"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Sample { return SampleFromID(_id) })
 }
 
 // WorkoutEffortRelationshipable is the interface implemented by [WorkoutEffortRelationship], for mocking and DI.
 type WorkoutEffortRelationshipable interface {
-	Unwrap() *raw.HKWorkoutEffortRelationship
+	obj.Object
 	Workout() *Workout
 	Activity() *WorkoutActivity
 	Samples() []*Sample

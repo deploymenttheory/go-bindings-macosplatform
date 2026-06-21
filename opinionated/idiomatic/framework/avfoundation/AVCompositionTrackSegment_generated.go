@@ -5,70 +5,79 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A track segment that maps a time from the source media track to the composition track.
 //
-// CompositionTrackSegment wraps [raw.AVCompositionTrackSegment] with a fluent Go API.
+// CompositionTrackSegment is an idiomatic wrapper over the Objective-C class AVCompositionTrackSegment.
 type CompositionTrackSegment struct {
-	inner *raw.AVCompositionTrackSegment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCompositionTrackSegment].
-func (x *CompositionTrackSegment) Unwrap() *raw.AVCompositionTrackSegment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CompositionTrackSegment) ID() objc.ID { return x.inner.Ptr() }
-
-// CompositionTrackSegmentFromID adopts an existing object pointer as a CompositionTrackSegment (nil for 0).
+// CompositionTrackSegmentFromID adopts an existing Objective-C object as a CompositionTrackSegment
+// (nil for 0), retaining it and registering a release finalizer.
 func CompositionTrackSegmentFromID(id objc.ID) *CompositionTrackSegment {
 	if id == 0 {
 		return nil
 	}
-	return &CompositionTrackSegment{inner: raw.AVCompositionTrackSegmentFromID(id)}
+	x := &CompositionTrackSegment{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates an object that presents a segment of a media file that the specified URL references.
-//
-// NewCompositionTrackSegmentWithURLTrackIDSourceTimeRangeTargetTimeRange creates a new [CompositionTrackSegment].
-func NewCompositionTrackSegmentWithURLTrackIDSourceTimeRangeTargetTimeRange(uRL string, trackID int32, sourceTimeRange coremedia.CMTimeRange, targetTimeRange coremedia.CMTimeRange) *CompositionTrackSegment {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCompositionTrackSegment")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:trackID:sourceTimeRange:targetTimeRange:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), trackID, sourceTimeRange, targetTimeRange)
-	return &CompositionTrackSegment{inner: raw.AVCompositionTrackSegmentFromID(_id)}
+// compositionTrackSegmentAdopt wraps an Objective-C object that this code just created as a
+// CompositionTrackSegment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func compositionTrackSegmentAdopt(id objc.ID) *CompositionTrackSegment {
+	if id == 0 {
+		return nil
+	}
+	x := &CompositionTrackSegment{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Creates an object that presents an empty composition track segment.
-//
-// NewCompositionTrackSegmentWithTimeRange creates a new [CompositionTrackSegment].
-func NewCompositionTrackSegmentWithTimeRange(timeRange coremedia.CMTimeRange) *CompositionTrackSegment {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCompositionTrackSegment")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTimeRange:"), timeRange)
-	return &CompositionTrackSegment{inner: raw.AVCompositionTrackSegmentFromID(_id)}
+// Description returns the object's -description text.
+func (x *CompositionTrackSegment) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SourceURL calls the underlying SourceURL.
-func (x *CompositionTrackSegment) SourceURL() *foundation.NSURL {
-	return x.inner.SourceURL()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CompositionTrackSegment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SourceTrackID calls the underlying SourceTrackID.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CompositionTrackSegment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCompositionTrackSegment creates a new CompositionTrackSegment.
+func NewCompositionTrackSegment() *CompositionTrackSegment {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCompositionTrackSegment")), objc.RegisterName("new"))
+	return compositionTrackSegmentAdopt(_id)
+}
+
+func (x *CompositionTrackSegment) SourceURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceURL"))
+	return obj.Wrap(_r)
+}
+
 func (x *CompositionTrackSegment) SourceTrackID() int32 {
-	return x.inner.SourceTrackID()
-}
-
-func (x *CompositionTrackSegment) asAssetTrackSegment() *raw.AVAssetTrackSegment {
-	return &x.inner.AVAssetTrackSegment
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("sourceTrackID"))
+	return _r
 }
 
 // CompositionTrackSegmentable is the interface implemented by [CompositionTrackSegment], for mocking and DI.
 type CompositionTrackSegmentable interface {
-	Unwrap() *raw.AVCompositionTrackSegment
-	SourceURL() *foundation.NSURL
+	obj.Object
+	SourceURL() obj.Object
 	SourceTrackID() int32
 }
 

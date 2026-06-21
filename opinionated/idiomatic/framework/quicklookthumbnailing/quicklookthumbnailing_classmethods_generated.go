@@ -5,44 +5,17 @@
 package quicklookthumbnailing
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookthumbnailing"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
+	"github.com/ebitengine/purego/objc"
 )
 
-// SharedGenerator calls the underlying QLThumbnailGeneratorSharedGenerator.
 func SharedGenerator() *ThumbnailGenerator {
-	_r := raw.QLThumbnailGeneratorSharedGenerator()
-	if _r == nil {
-		return nil
-	}
-	return &ThumbnailGenerator{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("QLThumbnailGenerator")), objc.RegisterName("sharedGenerator"))
+	return ThumbnailGeneratorFromID(_r)
 }
 
-// ReplyWithContextSizeDrawingBlock calls the underlying QLThumbnailReplyReplyWithContextSizeDrawingBlock.
-func ReplyWithContextSizeDrawingBlock(contextSize corefoundation.CGSize, drawingBlock func(unsafe.Pointer) bool) *ThumbnailReply {
-	_r := raw.QLThumbnailReplyReplyWithContextSizeDrawingBlock(contextSize, drawingBlock)
-	if _r == nil {
-		return nil
-	}
-	return &ThumbnailReply{inner: _r}
-}
-
-// ReplyWithContextSizeCurrentContextDrawingBlock calls the underlying QLThumbnailReplyReplyWithContextSizeCurrentContextDrawingBlock.
-func ReplyWithContextSizeCurrentContextDrawingBlock(contextSize corefoundation.CGSize, drawingBlock func() bool) *ThumbnailReply {
-	_r := raw.QLThumbnailReplyReplyWithContextSizeCurrentContextDrawingBlock(contextSize, drawingBlock)
-	if _r == nil {
-		return nil
-	}
-	return &ThumbnailReply{inner: _r}
-}
-
-// ReplyWithImageFileURL calls the underlying QLThumbnailReplyReplyWithImageFileURL.
+// Creates a new thumbnail for a custom file type using a file at the given URL.
 func ReplyWithImageFileURL(fileURL string) *ThumbnailReply {
-	_r := raw.QLThumbnailReplyReplyWithImageFileURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)))
-	if _r == nil {
-		return nil
-	}
-	return &ThumbnailReply{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("QLThumbnailReply")), objc.RegisterName("replyWithImageFileURL:"), rt.FileURL(fileURL))
+	return ThumbnailReplyFromID(_r)
 }

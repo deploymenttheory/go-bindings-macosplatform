@@ -10,80 +10,80 @@ import (
 )
 
 // Constants that describe the capture view’s supported controls styles.
-type AVCaptureViewControlsStyle int64
+type CaptureViewControlsStyle int64
 
 const (
 	// The view’s inline controls style.
-	AVCaptureViewControlsStyleInline AVCaptureViewControlsStyle = 0
+	CaptureViewControlsStyleInline CaptureViewControlsStyle = 0
 	// The view’s floating controls style, which matches the user interface of QuickTime Player.
-	AVCaptureViewControlsStyleFloating AVCaptureViewControlsStyle = 1
+	CaptureViewControlsStyleFloating CaptureViewControlsStyle = 1
 	// The view’s inline device selection style.
-	AVCaptureViewControlsStyleInlineDeviceSelection AVCaptureViewControlsStyle = 2
+	CaptureViewControlsStyleInlineDeviceSelection CaptureViewControlsStyle = 2
 	// The view’s default controls style.
-	AVCaptureViewControlsStyleDefault AVCaptureViewControlsStyle = 0
+	CaptureViewControlsStyleDefault CaptureViewControlsStyle = 0
 )
 
-func (e AVCaptureViewControlsStyle) String() string {
+func (e CaptureViewControlsStyle) String() string {
 	switch e {
-	case AVCaptureViewControlsStyleInline:
-		return "AVCaptureViewControlsStyleInline"
-	case AVCaptureViewControlsStyleFloating:
-		return "AVCaptureViewControlsStyleFloating"
-	case AVCaptureViewControlsStyleInlineDeviceSelection:
-		return "AVCaptureViewControlsStyleInlineDeviceSelection"
+	case CaptureViewControlsStyleInline:
+		return "CaptureViewControlsStyleInline"
+	case CaptureViewControlsStyleFloating:
+		return "CaptureViewControlsStyleFloating"
+	case CaptureViewControlsStyleInlineDeviceSelection:
+		return "CaptureViewControlsStyleInlineDeviceSelection"
 	default:
-		return fmt.Sprintf("AVCaptureViewControlsStyle(%d)", int64(e))
+		return fmt.Sprintf("CaptureViewControlsStyle(%d)", int64(e))
 	}
 }
 
 // Describes how High Dynamic Range (HDR) video content renders.
-type AVDisplayDynamicRange int64
+type DisplayDynamicRange int64
 
 const (
 	// Defines an automatic dynamic range. Indicates that the dynamic range will be set automatically.
-	AVDisplayDynamicRangeAutomatic AVDisplayDynamicRange = 0
+	DisplayDynamicRangeAutomatic DisplayDynamicRange = 0
 	// Defines a standard dynamic range. Restricts the video content dynamic range to the standard range regardless of the actual range of the video content.
-	AVDisplayDynamicRangeStandard AVDisplayDynamicRange = 1
+	DisplayDynamicRangeStandard DisplayDynamicRange = 1
 	// Defines a constrained high dynamic range. Allows for constrained High Dynamic Range (HDR) video content which is useful for mixing HDR and Standard Dynamic Range (SDR) content.
-	AVDisplayDynamicRangeConstrainedHigh AVDisplayDynamicRange = 2
+	DisplayDynamicRangeConstrainedHigh DisplayDynamicRange = 2
 	// Defines a high dynamic range. Allows video content to use extended dynamic range if it has dynamic range content.
-	AVDisplayDynamicRangeHigh AVDisplayDynamicRange = 3
+	DisplayDynamicRangeHigh DisplayDynamicRange = 3
 )
 
-func (e AVDisplayDynamicRange) String() string {
+func (e DisplayDynamicRange) String() string {
 	switch e {
-	case AVDisplayDynamicRangeAutomatic:
-		return "AVDisplayDynamicRangeAutomatic"
-	case AVDisplayDynamicRangeStandard:
-		return "AVDisplayDynamicRangeStandard"
-	case AVDisplayDynamicRangeConstrainedHigh:
-		return "AVDisplayDynamicRangeConstrainedHigh"
-	case AVDisplayDynamicRangeHigh:
-		return "AVDisplayDynamicRangeHigh"
+	case DisplayDynamicRangeAutomatic:
+		return "DisplayDynamicRangeAutomatic"
+	case DisplayDynamicRangeStandard:
+		return "DisplayDynamicRangeStandard"
+	case DisplayDynamicRangeConstrainedHigh:
+		return "DisplayDynamicRangeConstrainedHigh"
+	case DisplayDynamicRangeHigh:
+		return "DisplayDynamicRangeHigh"
 	default:
-		return fmt.Sprintf("AVDisplayDynamicRange(%d)", int64(e))
+		return fmt.Sprintf("DisplayDynamicRange(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type AVLegibleMediaOptionsMenuContents int64
+type LegibleMediaOptionsMenuContents int64
 
 const (
-	AVLegibleMediaOptionsMenuContentsLegible           AVLegibleMediaOptionsMenuContents = 1
-	AVLegibleMediaOptionsMenuContentsCaptionAppearance AVLegibleMediaOptionsMenuContents = 2
-	AVLegibleMediaOptionsMenuContentsAll               AVLegibleMediaOptionsMenuContents = 3
+	LegibleMediaOptionsMenuContentsLegible           LegibleMediaOptionsMenuContents = 1
+	LegibleMediaOptionsMenuContentsCaptionAppearance LegibleMediaOptionsMenuContents = 2
+	LegibleMediaOptionsMenuContentsAll               LegibleMediaOptionsMenuContents = 3
 )
 
-func (e AVLegibleMediaOptionsMenuContents) String() string {
+func (e LegibleMediaOptionsMenuContents) String() string {
 	var parts []string
-	if e&AVLegibleMediaOptionsMenuContentsLegible != 0 {
-		parts = append(parts, "AVLegibleMediaOptionsMenuContentsLegible")
+	if e&LegibleMediaOptionsMenuContentsLegible != 0 {
+		parts = append(parts, "LegibleMediaOptionsMenuContentsLegible")
 	}
-	if e&AVLegibleMediaOptionsMenuContentsCaptionAppearance != 0 {
-		parts = append(parts, "AVLegibleMediaOptionsMenuContentsCaptionAppearance")
+	if e&LegibleMediaOptionsMenuContentsCaptionAppearance != 0 {
+		parts = append(parts, "LegibleMediaOptionsMenuContentsCaptionAppearance")
 	}
-	if e&AVLegibleMediaOptionsMenuContentsAll != 0 {
-		parts = append(parts, "AVLegibleMediaOptionsMenuContentsAll")
+	if e&LegibleMediaOptionsMenuContentsAll != 0 {
+		parts = append(parts, "LegibleMediaOptionsMenuContentsAll")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -92,112 +92,91 @@ func (e AVLegibleMediaOptionsMenuContents) String() string {
 }
 
 // Constants that indicate which user interface controls the view displays.
-type AVPlayerViewControlsStyle int64
+type PlayerViewControlsStyle int64
 
 const (
 	// The view displays no playback controls.
-	AVPlayerViewControlsStyleNone AVPlayerViewControlsStyle = 0
+	PlayerViewControlsStyleNone PlayerViewControlsStyle = 0
 	// The view displays playback controls in a bar along the view’s bottom edge.
-	AVPlayerViewControlsStyleInline AVPlayerViewControlsStyle = 1
+	PlayerViewControlsStyleInline PlayerViewControlsStyle = 1
 	// The view displays playback controls in a floating window over the video content.
-	AVPlayerViewControlsStyleFloating AVPlayerViewControlsStyle = 2
+	PlayerViewControlsStyleFloating PlayerViewControlsStyle = 2
 	// The view presents basic controls to play and pause playback.
-	AVPlayerViewControlsStyleMinimal AVPlayerViewControlsStyle = 3
+	PlayerViewControlsStyleMinimal PlayerViewControlsStyle = 3
 	// The view’s default controls style.
-	AVPlayerViewControlsStyleDefault AVPlayerViewControlsStyle = 1
+	PlayerViewControlsStyleDefault PlayerViewControlsStyle = 1
 )
 
-func (e AVPlayerViewControlsStyle) String() string {
+func (e PlayerViewControlsStyle) String() string {
 	switch e {
-	case AVPlayerViewControlsStyleNone:
-		return "AVPlayerViewControlsStyleNone"
-	case AVPlayerViewControlsStyleInline:
-		return "AVPlayerViewControlsStyleInline"
-	case AVPlayerViewControlsStyleFloating:
-		return "AVPlayerViewControlsStyleFloating"
-	case AVPlayerViewControlsStyleMinimal:
-		return "AVPlayerViewControlsStyleMinimal"
+	case PlayerViewControlsStyleNone:
+		return "PlayerViewControlsStyleNone"
+	case PlayerViewControlsStyleInline:
+		return "PlayerViewControlsStyleInline"
+	case PlayerViewControlsStyleFloating:
+		return "PlayerViewControlsStyleFloating"
+	case PlayerViewControlsStyleMinimal:
+		return "PlayerViewControlsStyleMinimal"
 	default:
-		return fmt.Sprintf("AVPlayerViewControlsStyle(%d)", int64(e))
-	}
-}
-
-// Constants that specify an action a user takes when trimming media in a player view.
-type AVPlayerViewTrimResult int64
-
-const (
-	// The user clicked the Trim button.
-	AVPlayerViewTrimOKButton AVPlayerViewTrimResult = 0
-	// The user clicked the Cancel button.
-	AVPlayerViewTrimCancelButton AVPlayerViewTrimResult = 1
-)
-
-func (e AVPlayerViewTrimResult) String() string {
-	switch e {
-	case AVPlayerViewTrimOKButton:
-		return "AVPlayerViewTrimOKButton"
-	case AVPlayerViewTrimCancelButton:
-		return "AVPlayerViewTrimCancelButton"
-	default:
-		return fmt.Sprintf("AVPlayerViewTrimResult(%d)", int64(e))
+		return fmt.Sprintf("PlayerViewControlsStyle(%d)", int64(e))
 	}
 }
 
 // Constants that describe the available button states.
-type AVRoutePickerViewButtonState int64
+type RoutePickerViewButtonState int64
 
 const (
-	AVRoutePickerViewButtonStateNormal            AVRoutePickerViewButtonState = 0
-	AVRoutePickerViewButtonStateNormalHighlighted AVRoutePickerViewButtonState = 1
-	AVRoutePickerViewButtonStateActive            AVRoutePickerViewButtonState = 2
-	AVRoutePickerViewButtonStateActiveHighlighted AVRoutePickerViewButtonState = 3
+	RoutePickerViewButtonStateNormal            RoutePickerViewButtonState = 0
+	RoutePickerViewButtonStateNormalHighlighted RoutePickerViewButtonState = 1
+	RoutePickerViewButtonStateActive            RoutePickerViewButtonState = 2
+	RoutePickerViewButtonStateActiveHighlighted RoutePickerViewButtonState = 3
 )
 
-func (e AVRoutePickerViewButtonState) String() string {
+func (e RoutePickerViewButtonState) String() string {
 	switch e {
-	case AVRoutePickerViewButtonStateNormal:
-		return "AVRoutePickerViewButtonStateNormal"
-	case AVRoutePickerViewButtonStateNormalHighlighted:
-		return "AVRoutePickerViewButtonStateNormalHighlighted"
-	case AVRoutePickerViewButtonStateActive:
-		return "AVRoutePickerViewButtonStateActive"
-	case AVRoutePickerViewButtonStateActiveHighlighted:
-		return "AVRoutePickerViewButtonStateActiveHighlighted"
+	case RoutePickerViewButtonStateNormal:
+		return "RoutePickerViewButtonStateNormal"
+	case RoutePickerViewButtonStateNormalHighlighted:
+		return "RoutePickerViewButtonStateNormalHighlighted"
+	case RoutePickerViewButtonStateActive:
+		return "RoutePickerViewButtonStateActive"
+	case RoutePickerViewButtonStateActiveHighlighted:
+		return "RoutePickerViewButtonStateActiveHighlighted"
 	default:
-		return fmt.Sprintf("AVRoutePickerViewButtonState(%d)", int64(e))
+		return fmt.Sprintf("RoutePickerViewButtonState(%d)", int64(e))
 	}
 }
 
 // Constants that define the types of analysis a player view controller may perform on a paused video frame.
 // Bitmask — values may be combined with |.
-type AVVideoFrameAnalysisType uint64
+type VideoFrameAnalysisType uint64
 
 const (
 	// A type that performs no analysis.
-	AVVideoFrameAnalysisTypeNone AVVideoFrameAnalysisType = 0
+	VideoFrameAnalysisTypeNone VideoFrameAnalysisType = 0
 	// The default types of analysis to perform.
-	AVVideoFrameAnalysisTypeDefault AVVideoFrameAnalysisType = 1
+	VideoFrameAnalysisTypeDefault VideoFrameAnalysisType = 1
 	// A type that finds text in a paused video frame.
-	AVVideoFrameAnalysisTypeText AVVideoFrameAnalysisType = 2
+	VideoFrameAnalysisTypeText VideoFrameAnalysisType = 2
 	// A type that finds a subject that a user can copy out of frame.
-	AVVideoFrameAnalysisTypeSubject AVVideoFrameAnalysisType = 4
+	VideoFrameAnalysisTypeSubject VideoFrameAnalysisType = 4
 	// A type that identifies objects, landmarks, art, and so on.
-	AVVideoFrameAnalysisTypeVisualSearch AVVideoFrameAnalysisType = 8
+	VideoFrameAnalysisTypeVisualSearch VideoFrameAnalysisType = 8
 )
 
-func (e AVVideoFrameAnalysisType) String() string {
+func (e VideoFrameAnalysisType) String() string {
 	var parts []string
-	if e&AVVideoFrameAnalysisTypeDefault != 0 {
-		parts = append(parts, "AVVideoFrameAnalysisTypeDefault")
+	if e&VideoFrameAnalysisTypeDefault != 0 {
+		parts = append(parts, "VideoFrameAnalysisTypeDefault")
 	}
-	if e&AVVideoFrameAnalysisTypeText != 0 {
-		parts = append(parts, "AVVideoFrameAnalysisTypeText")
+	if e&VideoFrameAnalysisTypeText != 0 {
+		parts = append(parts, "VideoFrameAnalysisTypeText")
 	}
-	if e&AVVideoFrameAnalysisTypeSubject != 0 {
-		parts = append(parts, "AVVideoFrameAnalysisTypeSubject")
+	if e&VideoFrameAnalysisTypeSubject != 0 {
+		parts = append(parts, "VideoFrameAnalysisTypeSubject")
 	}
-	if e&AVVideoFrameAnalysisTypeVisualSearch != 0 {
-		parts = append(parts, "AVVideoFrameAnalysisTypeVisualSearch")
+	if e&VideoFrameAnalysisTypeVisualSearch != 0 {
+		parts = append(parts, "VideoFrameAnalysisTypeVisualSearch")
 	}
 	if len(parts) == 0 {
 		return "0"

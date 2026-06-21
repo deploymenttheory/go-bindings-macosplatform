@@ -5,116 +5,82 @@
 package audiotoolbox
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a top-level group node that contains all of an audio unit’s parameters.
 //
-// ParameterTree wraps [raw.AUParameterTree] with a fluent Go API.
+// ParameterTree is an idiomatic wrapper over the Objective-C class AUParameterTree.
 type ParameterTree struct {
-	inner *raw.AUParameterTree
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AUParameterTree].
-func (x *ParameterTree) Unwrap() *raw.AUParameterTree { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ParameterTree) ID() objc.ID { return x.inner.Ptr() }
-
-// ParameterTreeFromID adopts an existing object pointer as a ParameterTree (nil for 0).
+// ParameterTreeFromID adopts an existing Objective-C object as a ParameterTree
+// (nil for 0), retaining it and registering a release finalizer.
 func ParameterTreeFromID(id objc.ID) *ParameterTree {
 	if id == 0 {
 		return nil
 	}
-	return &ParameterTree{inner: raw.AUParameterTreeFromID(id)}
+	x := &ParameterTree{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewParameterTree creates a new [ParameterTree].
+// parameterTreeAdopt wraps an Objective-C object that this code just created as a
+// ParameterTree (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func parameterTreeAdopt(id objc.ID) *ParameterTree {
+	if id == 0 {
+		return nil
+	}
+	x := &ParameterTree{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ParameterTree) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ParameterTree) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ParameterTree) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewParameterTree creates a new ParameterTree.
 func NewParameterTree() *ParameterTree {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AUParameterTree")), objc.RegisterName("new"))
-	return &ParameterTree{inner: raw.AUParameterTreeFromID(_id)}
-}
-
-// The callback for parameter value changes.
-//
-// WithImplementorValueObserver sets the implementorValueObserver property and returns the receiver for chaining.
-func (x *ParameterTree) WithImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) *ParameterTree {
-	x.inner.AUParameterGroup.AUParameterNode.SetImplementorValueObserver(implementorValueObserver)
-	return x
-}
-
-// The callback for refreshing known stale values in a parameter tree.
-//
-// WithImplementorValueProvider sets the implementorValueProvider property and returns the receiver for chaining.
-func (x *ParameterTree) WithImplementorValueProvider(implementorValueProvider objc.Block) *ParameterTree {
-	x.inner.AUParameterGroup.AUParameterNode.SetImplementorValueProvider(implementorValueProvider)
-	return x
-}
-
-// The callback for providing a string representation of a parameter value.
-//
-// WithImplementorStringFromValueCallback sets the implementorStringFromValueCallback property and returns the receiver for chaining.
-func (x *ParameterTree) WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *ParameterTree {
-	x.inner.AUParameterGroup.AUParameterNode.SetImplementorStringFromValueCallback(implementorStringFromValueCallback)
-	return x
-}
-
-// The callback for converting a string to a parameter value.
-//
-// WithImplementorValueFromStringCallback sets the implementorValueFromStringCallback property and returns the receiver for chaining.
-func (x *ParameterTree) WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *ParameterTree {
-	x.inner.AUParameterGroup.AUParameterNode.SetImplementorValueFromStringCallback(implementorValueFromStringCallback)
-	return x
-}
-
-// The callback for obtaining an abbreviated version of a parameter node display name.
-//
-// WithImplementorDisplayNameWithLengthCallback sets the implementorDisplayNameWithLengthCallback property and returns the receiver for chaining.
-func (x *ParameterTree) WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *ParameterTree {
-	x.inner.AUParameterGroup.AUParameterNode.SetImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback)
-	return x
+	_id := objc.Send[objc.ID](objc.ID(_class("AUParameterTree")), objc.RegisterName("new"))
+	return parameterTreeAdopt(_id)
 }
 
 // Searches the tree for a parameter with a specific address.
-//
-// ParameterWithAddress calls the underlying ParameterWithAddress.
 func (x *ParameterTree) ParameterWithAddress(address uint64) *Parameter {
-	_r := x.inner.ParameterWithAddress(address)
-	if _r == nil {
-		return nil
-	}
-	return &Parameter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameterWithAddress:"), address)
+	return ParameterFromID(_r)
 }
 
 // Searches the tree for a specific version 2 audio unit parameter.
-//
-// ParameterWithIDScopeElement calls the underlying ParameterWithIDScopeElement.
-func (x *ParameterTree) ParameterWithIDScopeElement(paramID uint, scope uint, element uint) *Parameter {
-	_r := x.inner.ParameterWithIDScopeElement(paramID, scope, element)
-	if _r == nil {
-		return nil
-	}
-	return &Parameter{inner: _r}
-}
-
-func (x *ParameterTree) asParameterGroup() *raw.AUParameterGroup { return &x.inner.AUParameterGroup }
-
-func (x *ParameterTree) asParameterNode() *raw.AUParameterNode {
-	return &x.inner.AUParameterGroup.AUParameterNode
+func (x *ParameterTree) ParameterWithIDScopeElement(paramID int, scope int, element int) *Parameter {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameterWithID:scope:element:"), paramID, scope, element)
+	return ParameterFromID(_r)
 }
 
 // ParameterTreeable is the interface implemented by [ParameterTree], for mocking and DI.
 type ParameterTreeable interface {
-	Unwrap() *raw.AUParameterTree
-	WithImplementorValueObserver(implementorValueObserver func(*raw.AUParameter, float32)) *ParameterTree
-	WithImplementorValueProvider(implementorValueProvider objc.Block) *ParameterTree
-	WithImplementorStringFromValueCallback(implementorStringFromValueCallback objc.Block) *ParameterTree
-	WithImplementorValueFromStringCallback(implementorValueFromStringCallback objc.Block) *ParameterTree
-	WithImplementorDisplayNameWithLengthCallback(implementorDisplayNameWithLengthCallback objc.Block) *ParameterTree
+	obj.Object
 	ParameterWithAddress(address uint64) *Parameter
-	ParameterWithIDScopeElement(paramID uint, scope uint, element uint) *Parameter
+	ParameterWithIDScopeElement(paramID int, scope int, element int) *Parameter
 }
 
 var _ ParameterTreeable = (*ParameterTree)(nil)

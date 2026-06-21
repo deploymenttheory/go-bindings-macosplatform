@@ -5,91 +5,113 @@
 package automaticassessmentconfiguration
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automaticassessmentconfiguration"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A representation of an app that users can access during an assessment.
 //
-// AssessmentApplication wraps [raw.AEAssessmentApplication] with a fluent Go API.
+// AssessmentApplication is an idiomatic wrapper over the Objective-C class AEAssessmentApplication.
 type AssessmentApplication struct {
-	inner *raw.AEAssessmentApplication
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AEAssessmentApplication].
-func (x *AssessmentApplication) Unwrap() *raw.AEAssessmentApplication { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssessmentApplication) ID() objc.ID { return x.inner.Ptr() }
-
-// AssessmentApplicationFromID adopts an existing object pointer as a AssessmentApplication (nil for 0).
+// AssessmentApplicationFromID adopts an existing Objective-C object as a AssessmentApplication
+// (nil for 0), retaining it and registering a release finalizer.
 func AssessmentApplicationFromID(id objc.ID) *AssessmentApplication {
 	if id == 0 {
 		return nil
 	}
-	return &AssessmentApplication{inner: raw.AEAssessmentApplicationFromID(id)}
+	x := &AssessmentApplication{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// assessmentApplicationAdopt wraps an Objective-C object that this code just created as a
+// AssessmentApplication (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assessmentApplicationAdopt(id objc.ID) *AssessmentApplication {
+	if id == 0 {
+		return nil
+	}
+	x := &AssessmentApplication{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssessmentApplication) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssessmentApplication) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssessmentApplication) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a representation of an app using its bundle identifier.
 //
-// NewAssessmentApplicationWithBundleIdentifier creates a new [AssessmentApplication].
+// NewAssessmentApplicationWithBundleIdentifier creates a new AssessmentApplication.
 func NewAssessmentApplicationWithBundleIdentifier(bundleIdentifier string) *AssessmentApplication {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AEAssessmentApplication")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:"), foundation.NSStringStringWithUTF8String(bundleIdentifier).Ptr())
-	return &AssessmentApplication{inner: raw.AEAssessmentApplicationFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AEAssessmentApplication")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:"), purego.NSString(bundleIdentifier))
+	return assessmentApplicationAdopt(_id)
 }
 
 // Creates a representation of an app using its bundle and team identifiers.
 //
-// NewAssessmentApplicationWithBundleIdentifierTeamIdentifier creates a new [AssessmentApplication].
+// NewAssessmentApplicationWithBundleIdentifierTeamIdentifier creates a new AssessmentApplication.
 func NewAssessmentApplicationWithBundleIdentifierTeamIdentifier(bundleIdentifier string, teamIdentifier string) *AssessmentApplication {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AEAssessmentApplication")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:teamIdentifier:"), foundation.NSStringStringWithUTF8String(bundleIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(teamIdentifier).Ptr())
-	return &AssessmentApplication{inner: raw.AEAssessmentApplicationFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AEAssessmentApplication")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBundleIdentifier:teamIdentifier:"), purego.NSString(bundleIdentifier), purego.NSString(teamIdentifier))
+	return assessmentApplicationAdopt(_id)
 }
 
 // A Boolean that indicates whether the session requires the app to have a valid code signature to run.
 //
-// WithRequiresSignatureValidation sets the requiresSignatureValidation property and returns the receiver for chaining.
+// WithRequiresSignatureValidation sets requiresSignatureValidation and returns the receiver so calls can be chained.
 func (x *AssessmentApplication) WithRequiresSignatureValidation(requiresSignatureValidation bool) *AssessmentApplication {
-	x.inner.SetRequiresSignatureValidation(requiresSignatureValidation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSignatureValidation:"), requiresSignatureValidation)
 	return x
 }
 
-// BundleIdentifier calls the underlying BundleIdentifier.
 func (x *AssessmentApplication) BundleIdentifier() string {
-	_r := x.inner.BundleIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// TeamIdentifier calls the underlying TeamIdentifier.
 func (x *AssessmentApplication) TeamIdentifier() string {
-	_r := x.inner.TeamIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("teamIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// RequiresSignatureValidation calls the underlying RequiresSignatureValidation.
 func (x *AssessmentApplication) RequiresSignatureValidation() bool {
-	return x.inner.RequiresSignatureValidation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresSignatureValidation"))
+	return _r
 }
 
-// SetRequiresSignatureValidation calls the underlying SetRequiresSignatureValidation.
 func (x *AssessmentApplication) SetRequiresSignatureValidation(requiresSignatureValidation bool) {
-	x.inner.SetRequiresSignatureValidation(requiresSignatureValidation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSignatureValidation:"), requiresSignatureValidation)
 }
 
 // AssessmentApplicationable is the interface implemented by [AssessmentApplication], for mocking and DI.
 type AssessmentApplicationable interface {
-	Unwrap() *raw.AEAssessmentApplication
+	obj.Object
 	WithRequiresSignatureValidation(requiresSignatureValidation bool) *AssessmentApplication
 	BundleIdentifier() string
 	TeamIdentifier() string

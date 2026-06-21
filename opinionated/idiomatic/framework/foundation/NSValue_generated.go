@@ -5,136 +5,89 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A simple container for a single C or Objective-C data item.
 //
-// Value wraps [raw.NSValue] with a fluent Go API.
+// Value is an idiomatic wrapper over the Objective-C class NSValue.
 type Value struct {
-	inner *raw.NSValue
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSValue].
-func (x *Value) Unwrap() *raw.NSValue { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Value) ID() objc.ID { return x.inner.Ptr() }
-
-// ValueFromID adopts an existing object pointer as a Value (nil for 0).
+// ValueFromID adopts an existing Objective-C object as a Value
+// (nil for 0), retaining it and registering a release finalizer.
 func ValueFromID(id objc.ID) *Value {
 	if id == 0 {
 		return nil
 	}
-	return &Value{inner: raw.NSValueFromID(id)}
-}
-
-// Initializes a value object to contain the specified value, interpreted with the specified Objective-C type.
-//
-// NewValueWithBytesObjCType creates a new [Value].
-func NewValueWithBytesObjCType(value unsafe.Pointer, type_ string) *Value {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSValue")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:objCType:"), value, type_)
-	return &Value{inner: raw.NSValueFromID(_id)}
-}
-
-// NewValueWithCoder creates a new [Value].
-func NewValueWithCoder(coder *raw.NSCoder) *Value {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSValue")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &Value{inner: raw.NSValueFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Value) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Value {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &Value{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Copies the value into the specified buffer.
-//
-// GetValueSize calls the underlying GetValueSize.
-func (x *Value) GetValueSize(value unsafe.Pointer, size uint) {
-	x.inner.GetValueSize(value, size)
+// valueAdopt wraps an Objective-C object that this code just created as a
+// Value (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func valueAdopt(id objc.ID) *Value {
+	if id == 0 {
+		return nil
+	}
+	x := &Value{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// ObjCType calls the underlying ObjCType.
-func (x *Value) ObjCType() unsafe.Pointer {
-	return x.inner.ObjCType()
+// Description returns the object's -description text.
+func (x *Value) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Value) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Value) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewValueWithCoder creates a new Value.
+func NewValueWithCoder(coder *Coder) *Value {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSValue")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return valueAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *Value) WithScriptingProperties(scriptingProperties obj.Object) *Value {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
 }
 
 // Returns a Boolean value that indicates whether the value object and another value object are equal.
-//
-// IsEqualToValue calls the underlying IsEqualToValue.
-func (x *Value) IsEqualToValue(value *raw.NSValue) bool {
-	return x.inner.IsEqualToValue(value)
+func (x *Value) IsEqualToValue(value *Value) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToValue:"), objref.IDOf(value))
+	return _r
 }
 
-// NonretainedObjectValue calls the underlying NonretainedObjectValue.
-func (x *Value) NonretainedObjectValue() objc.ID {
-	return x.inner.NonretainedObjectValue()
+func (x *Value) NonretainedObjectValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nonretainedObjectValue"))
+	return obj.Wrap(_r)
 }
-
-// PointerValue calls the underlying PointerValue.
-func (x *Value) PointerValue() unsafe.Pointer {
-	return x.inner.PointerValue()
-}
-
-// Copies the value into the specified buffer.
-//
-// GetValue calls the underlying GetValue.
-func (x *Value) GetValue(value unsafe.Pointer) {
-	x.inner.GetValue(value)
-}
-
-// RangeValue calls the underlying RangeValue.
-func (x *Value) RangeValue() raw.NSRange {
-	return x.inner.RangeValue()
-}
-
-// PointValue calls the underlying PointValue.
-func (x *Value) PointValue() corefoundation.CGPoint {
-	return x.inner.PointValue()
-}
-
-// SizeValue calls the underlying SizeValue.
-func (x *Value) SizeValue() corefoundation.CGSize {
-	return x.inner.SizeValue()
-}
-
-// RectValue calls the underlying RectValue.
-func (x *Value) RectValue() corefoundation.CGRect {
-	return x.inner.RectValue()
-}
-
-// EdgeInsetsValue calls the underlying EdgeInsetsValue.
-func (x *Value) EdgeInsetsValue() raw.NSEdgeInsets {
-	return x.inner.EdgeInsetsValue()
-}
-
-func (x *Value) asValue() *raw.NSValue { return x.inner }
-
-func (x *Value) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Valueable is the interface implemented by [Value], for mocking and DI.
 type Valueable interface {
-	Unwrap() *raw.NSValue
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Value
-	GetValueSize(value unsafe.Pointer, size uint)
-	ObjCType() unsafe.Pointer
-	IsEqualToValue(value *raw.NSValue) bool
-	NonretainedObjectValue() objc.ID
-	PointerValue() unsafe.Pointer
-	GetValue(value unsafe.Pointer)
-	RangeValue() raw.NSRange
-	PointValue() corefoundation.CGPoint
-	SizeValue() corefoundation.CGSize
-	RectValue() corefoundation.CGRect
-	EdgeInsetsValue() raw.NSEdgeInsets
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Value
+	IsEqualToValue(value *Value) bool
+	NonretainedObjectValue() obj.Object
 }
 
 var _ Valueable = (*Value)(nil)

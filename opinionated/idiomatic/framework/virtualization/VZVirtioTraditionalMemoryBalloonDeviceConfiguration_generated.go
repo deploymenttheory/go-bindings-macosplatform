@@ -5,47 +5,68 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A configuration object that provides a way to reclaim memory from the guest system.
 //
-// VirtioTraditionalMemoryBalloonDeviceConfiguration wraps [raw.VZVirtioTraditionalMemoryBalloonDeviceConfiguration] with a fluent Go API.
+// VirtioTraditionalMemoryBalloonDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioTraditionalMemoryBalloonDeviceConfiguration.
 type VirtioTraditionalMemoryBalloonDeviceConfiguration struct {
-	inner *raw.VZVirtioTraditionalMemoryBalloonDeviceConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZVirtioTraditionalMemoryBalloonDeviceConfiguration].
-func (x *VirtioTraditionalMemoryBalloonDeviceConfiguration) Unwrap() *raw.VZVirtioTraditionalMemoryBalloonDeviceConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioTraditionalMemoryBalloonDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioTraditionalMemoryBalloonDeviceConfigurationFromID adopts an existing object pointer as a VirtioTraditionalMemoryBalloonDeviceConfiguration (nil for 0).
+// VirtioTraditionalMemoryBalloonDeviceConfigurationFromID adopts an existing Objective-C object as a VirtioTraditionalMemoryBalloonDeviceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioTraditionalMemoryBalloonDeviceConfigurationFromID(id objc.ID) *VirtioTraditionalMemoryBalloonDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioTraditionalMemoryBalloonDeviceConfiguration{inner: raw.VZVirtioTraditionalMemoryBalloonDeviceConfigurationFromID(id)}
+	x := &VirtioTraditionalMemoryBalloonDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVirtioTraditionalMemoryBalloonDeviceConfiguration creates a new [VirtioTraditionalMemoryBalloonDeviceConfiguration].
+// virtioTraditionalMemoryBalloonDeviceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// VirtioTraditionalMemoryBalloonDeviceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioTraditionalMemoryBalloonDeviceConfigurationAdopt(id objc.ID) *VirtioTraditionalMemoryBalloonDeviceConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtioTraditionalMemoryBalloonDeviceConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VirtioTraditionalMemoryBalloonDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VirtioTraditionalMemoryBalloonDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VirtioTraditionalMemoryBalloonDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVirtioTraditionalMemoryBalloonDeviceConfiguration creates a new VirtioTraditionalMemoryBalloonDeviceConfiguration.
 func NewVirtioTraditionalMemoryBalloonDeviceConfiguration() *VirtioTraditionalMemoryBalloonDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioTraditionalMemoryBalloonDeviceConfiguration")), objc.RegisterName("new"))
-	return &VirtioTraditionalMemoryBalloonDeviceConfiguration{inner: raw.VZVirtioTraditionalMemoryBalloonDeviceConfigurationFromID(_id)}
-}
-
-func (x *VirtioTraditionalMemoryBalloonDeviceConfiguration) asMemoryBalloonDeviceConfiguration() *raw.VZMemoryBalloonDeviceConfiguration {
-	return &x.inner.VZMemoryBalloonDeviceConfiguration
+	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioTraditionalMemoryBalloonDeviceConfiguration")), objc.RegisterName("new"))
+	return virtioTraditionalMemoryBalloonDeviceConfigurationAdopt(_id)
 }
 
 // VirtioTraditionalMemoryBalloonDeviceConfigurationable is the interface implemented by [VirtioTraditionalMemoryBalloonDeviceConfiguration], for mocking and DI.
 type VirtioTraditionalMemoryBalloonDeviceConfigurationable interface {
-	Unwrap() *raw.VZVirtioTraditionalMemoryBalloonDeviceConfiguration
+	obj.Object
 }
 
 var _ VirtioTraditionalMemoryBalloonDeviceConfigurationable = (*VirtioTraditionalMemoryBalloonDeviceConfiguration)(nil)

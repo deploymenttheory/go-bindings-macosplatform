@@ -5,65 +5,83 @@
 package corelocation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object for configuring a location monitor instance.
 //
-// MonitorConfiguration wraps [raw.CLMonitorConfiguration] with a fluent Go API.
+// MonitorConfiguration is an idiomatic wrapper over the Objective-C class CLMonitorConfiguration.
 type MonitorConfiguration struct {
-	inner *raw.CLMonitorConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLMonitorConfiguration].
-func (x *MonitorConfiguration) Unwrap() *raw.CLMonitorConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MonitorConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// MonitorConfigurationFromID adopts an existing object pointer as a MonitorConfiguration (nil for 0).
+// MonitorConfigurationFromID adopts an existing Objective-C object as a MonitorConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func MonitorConfigurationFromID(id objc.ID) *MonitorConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &MonitorConfiguration{inner: raw.CLMonitorConfigurationFromID(id)}
+	x := &MonitorConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMonitorConfiguration creates a new [MonitorConfiguration].
+// monitorConfigurationAdopt wraps an Objective-C object that this code just created as a
+// MonitorConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func monitorConfigurationAdopt(id objc.ID) *MonitorConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &MonitorConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MonitorConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MonitorConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MonitorConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMonitorConfiguration creates a new MonitorConfiguration.
 func NewMonitorConfiguration() *MonitorConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLMonitorConfiguration")), objc.RegisterName("new"))
-	return &MonitorConfiguration{inner: raw.CLMonitorConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CLMonitorConfiguration")), objc.RegisterName("new"))
+	return monitorConfigurationAdopt(_id)
 }
 
-// Name calls the underlying Name.
 func (x *MonitorConfiguration) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Queue calls the underlying Queue.
-func (x *MonitorConfiguration) Queue() *foundation.NSObject {
-	return x.inner.Queue()
-}
-
-// EventHandler calls the underlying EventHandler.
-func (x *MonitorConfiguration) EventHandler() objc.Block {
-	return x.inner.EventHandler()
+func (x *MonitorConfiguration) Queue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queue"))
+	return obj.Wrap(_r)
 }
 
 // MonitorConfigurationable is the interface implemented by [MonitorConfiguration], for mocking and DI.
 type MonitorConfigurationable interface {
-	Unwrap() *raw.CLMonitorConfiguration
+	obj.Object
 	Name() string
-	Queue() *foundation.NSObject
-	EventHandler() objc.Block
+	Queue() obj.Object
 }
 
 var _ MonitorConfigurationable = (*MonitorConfiguration)(nil)

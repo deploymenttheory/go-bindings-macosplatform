@@ -5,71 +5,89 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams wraps [raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams] with a fluent Go API.
+// MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams is an idiomatic wrapper over the Objective-C class MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams.
 type MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams struct {
-	inner *raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams].
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams) Unwrap() *raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParamsFromID adopts an existing object pointer as a MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams (nil for 0).
+// MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParamsFromID adopts an existing Objective-C object as a MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParamsFromID(id objc.ID) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams{inner: raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParamsFromID(id)}
-}
-
-// NewMTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams creates a new [MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams].
-func NewMTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams() *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams")), objc.RegisterName("new"))
-	return &MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams{inner: raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParamsFromID(_id)}
-}
-
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams) WithAction(action *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams {
-	x.inner.MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams.SetAction(action)
+	x := &MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithDelayedActionTime sets the delayedActionTime property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams) WithDelayedActionTime(delayedActionTime *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams {
-	x.inner.MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams.SetDelayedActionTime(delayedActionTime)
+// mTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParamsAdopt(id objc.ID) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams creates a new MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams.
+func NewMTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams() *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams")), objc.RegisterName("new"))
+	return mTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParamsAdopt(_id)
+}
+
+// WithAction sets action and returns the receiver so calls can be chained.
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams) WithAction(action obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAction:"), objref.IDOf(action))
+	return x
+}
+
+// WithDelayedActionTime sets delayedActionTime and returns the receiver so calls can be chained.
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams) WithDelayedActionTime(delayedActionTime obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelayedActionTime:"), objref.IDOf(delayedActionTime))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams {
-	x.inner.MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
-}
-
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams) asMTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams() *raw.MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams {
-	return &x.inner.MTROTASoftwareUpdateProviderClusterApplyUpdateResponseParams
 }
 
 // MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParamsable is the interface implemented by [MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams], for mocking and DI.
 type MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParamsable interface {
-	Unwrap() *raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
-	WithAction(action *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
-	WithDelayedActionTime(delayedActionTime *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
+	obj.Object
+	WithAction(action obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
+	WithDelayedActionTime(delayedActionTime obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
 }
 
 var _ MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParamsable = (*MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams)(nil)

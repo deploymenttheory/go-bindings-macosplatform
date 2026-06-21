@@ -5,54 +5,75 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A unit of measure for power.
 //
-// UnitPower wraps [raw.NSUnitPower] with a fluent Go API.
+// UnitPower is an idiomatic wrapper over the Objective-C class NSUnitPower.
 type UnitPower struct {
-	inner *raw.NSUnitPower
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSUnitPower].
-func (x *UnitPower) Unwrap() *raw.NSUnitPower { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitPower) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitPowerFromID adopts an existing object pointer as a UnitPower (nil for 0).
+// UnitPowerFromID adopts an existing Objective-C object as a UnitPower
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitPowerFromID(id objc.ID) *UnitPower {
 	if id == 0 {
 		return nil
 	}
-	return &UnitPower{inner: raw.NSUnitPowerFromID(id)}
-}
-
-// NewUnitPower creates a new [UnitPower].
-func NewUnitPower() *UnitPower {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitPower")), objc.RegisterName("new"))
-	return &UnitPower{inner: raw.NSUnitPowerFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitPower) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitPower {
-	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitPower{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-func (x *UnitPower) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
+// unitPowerAdopt wraps an Objective-C object that this code just created as a
+// UnitPower (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitPowerAdopt(id objc.ID) *UnitPower {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitPower{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
 
-func (x *UnitPower) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
+// Description returns the object's -description text.
+func (x *UnitPower) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
 
-func (x *UnitPower) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UnitPower) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UnitPower) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUnitPower creates a new UnitPower.
+func NewUnitPower() *UnitPower {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitPower")), objc.RegisterName("new"))
+	return unitPowerAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *UnitPower) WithScriptingProperties(scriptingProperties obj.Object) *UnitPower {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // UnitPowerable is the interface implemented by [UnitPower], for mocking and DI.
 type UnitPowerable interface {
-	Unwrap() *raw.NSUnitPower
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitPower
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitPower
 }
 
 var _ UnitPowerable = (*UnitPower)(nil)

@@ -6,66 +6,93 @@ package avfoundation
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides playback information for an asset.
 //
-// AssetPlaybackAssistant wraps [raw.AVAssetPlaybackAssistant] with a fluent Go API.
+// AssetPlaybackAssistant is an idiomatic wrapper over the Objective-C class AVAssetPlaybackAssistant.
 type AssetPlaybackAssistant struct {
-	inner *raw.AVAssetPlaybackAssistant
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetPlaybackAssistant].
-func (x *AssetPlaybackAssistant) Unwrap() *raw.AVAssetPlaybackAssistant { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetPlaybackAssistant) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetPlaybackAssistantFromID adopts an existing object pointer as a AssetPlaybackAssistant (nil for 0).
+// AssetPlaybackAssistantFromID adopts an existing Objective-C object as a AssetPlaybackAssistant
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetPlaybackAssistantFromID(id objc.ID) *AssetPlaybackAssistant {
 	if id == 0 {
 		return nil
 	}
-	return &AssetPlaybackAssistant{inner: raw.AVAssetPlaybackAssistantFromID(id)}
+	x := &AssetPlaybackAssistant{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAssetPlaybackAssistant creates a new [AssetPlaybackAssistant].
+// assetPlaybackAssistantAdopt wraps an Objective-C object that this code just created as a
+// AssetPlaybackAssistant (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetPlaybackAssistantAdopt(id objc.ID) *AssetPlaybackAssistant {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetPlaybackAssistant{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetPlaybackAssistant) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetPlaybackAssistant) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetPlaybackAssistant) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAssetPlaybackAssistant creates a new AssetPlaybackAssistant.
 func NewAssetPlaybackAssistant() *AssetPlaybackAssistant {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetPlaybackAssistant")), objc.RegisterName("new"))
-	return &AssetPlaybackAssistant{inner: raw.AVAssetPlaybackAssistantFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetPlaybackAssistant")), objc.RegisterName("new"))
+	return assetPlaybackAssistantAdopt(_id)
 }
 
 // Loads playback configuration options for an asset.
 //
 // LoadPlaybackConfigurationOptions blocks until the operation completes or ctx is cancelled.
-func (x *AssetPlaybackAssistant) LoadPlaybackConfigurationOptions(ctx context.Context) (*foundation.NSArray[*foundation.NSString], error) {
+func (x *AssetPlaybackAssistant) LoadPlaybackConfigurationOptions(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*foundation.NSString]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LoadPlaybackConfigurationOptionsWithCompletionHandler(func(_p0 *foundation.NSArray[*foundation.NSString]) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		_o.val = _p0
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadPlaybackConfigurationOptionsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*foundation.NSString]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // AssetPlaybackAssistantable is the interface implemented by [AssetPlaybackAssistant], for mocking and DI.
 type AssetPlaybackAssistantable interface {
-	Unwrap() *raw.AVAssetPlaybackAssistant
-	LoadPlaybackConfigurationOptions(ctx context.Context) (*foundation.NSArray[*foundation.NSString], error)
+	obj.Object
+	LoadPlaybackConfigurationOptions(ctx context.Context) (obj.Object, error)
 }
 
 var _ AssetPlaybackAssistantable = (*AssetPlaybackAssistant)(nil)

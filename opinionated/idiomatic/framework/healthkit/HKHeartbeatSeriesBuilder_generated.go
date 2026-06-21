@@ -6,56 +6,67 @@ package healthkit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A builder object for incrementally building a heartbeat series.
 //
-// HeartbeatSeriesBuilder wraps [raw.HKHeartbeatSeriesBuilder] with a fluent Go API.
+// HeartbeatSeriesBuilder is an idiomatic wrapper over the Objective-C class HKHeartbeatSeriesBuilder.
 type HeartbeatSeriesBuilder struct {
-	inner *raw.HKHeartbeatSeriesBuilder
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKHeartbeatSeriesBuilder].
-func (x *HeartbeatSeriesBuilder) Unwrap() *raw.HKHeartbeatSeriesBuilder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HeartbeatSeriesBuilder) ID() objc.ID { return x.inner.Ptr() }
-
-// HeartbeatSeriesBuilderFromID adopts an existing object pointer as a HeartbeatSeriesBuilder (nil for 0).
+// HeartbeatSeriesBuilderFromID adopts an existing Objective-C object as a HeartbeatSeriesBuilder
+// (nil for 0), retaining it and registering a release finalizer.
 func HeartbeatSeriesBuilderFromID(id objc.ID) *HeartbeatSeriesBuilder {
 	if id == 0 {
 		return nil
 	}
-	return &HeartbeatSeriesBuilder{inner: raw.HKHeartbeatSeriesBuilderFromID(id)}
+	x := &HeartbeatSeriesBuilder{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// heartbeatSeriesBuilderAdopt wraps an Objective-C object that this code just created as a
+// HeartbeatSeriesBuilder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func heartbeatSeriesBuilderAdopt(id objc.ID) *HeartbeatSeriesBuilder {
+	if id == 0 {
+		return nil
+	}
+	x := &HeartbeatSeriesBuilder{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HeartbeatSeriesBuilder) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HeartbeatSeriesBuilder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HeartbeatSeriesBuilder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new heartbeat series builder.
 //
-// NewHeartbeatSeriesBuilderWithHealthStoreDeviceStartDate creates a new [HeartbeatSeriesBuilder].
-func NewHeartbeatSeriesBuilderWithHealthStoreDeviceStartDate(healthStore *raw.HKHealthStore, device *raw.HKDevice, startDate *foundation.NSDate) *HeartbeatSeriesBuilder {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKHeartbeatSeriesBuilder")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:device:startDate:"), healthStore.Ptr(), device.Ptr(), startDate.Ptr())
-	return &HeartbeatSeriesBuilder{inner: raw.HKHeartbeatSeriesBuilderFromID(_id)}
-}
-
-// Adds a heartbeat to the series.
-//
-// AddHeartbeatWithTimeIntervalSinceSeriesStartDatePrecededByGapCompletion calls the underlying AddHeartbeatWithTimeIntervalSinceSeriesStartDatePrecededByGapCompletion.
-func (x *HeartbeatSeriesBuilder) AddHeartbeatWithTimeIntervalSinceSeriesStartDatePrecededByGapCompletion(timeIntervalSinceStart float64, precededByGap bool, completion func(bool, unsafe.Pointer)) {
-	x.inner.AddHeartbeatWithTimeIntervalSinceSeriesStartDatePrecededByGapCompletion(timeIntervalSinceStart, precededByGap, completion)
-}
-
-// Adds metadata to the sample.
-//
-// AddMetadataCompletion calls the underlying AddMetadataCompletion.
-func (x *HeartbeatSeriesBuilder) AddMetadataCompletion(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer)) {
-	x.inner.AddMetadataCompletion(metadata, completion)
+// NewHeartbeatSeriesBuilderWithHealthStoreDeviceStartDate creates a new HeartbeatSeriesBuilder.
+func NewHeartbeatSeriesBuilderWithHealthStoreDeviceStartDate(healthStore *HealthStore, device *Device, startDate obj.Object) *HeartbeatSeriesBuilder {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("HKHeartbeatSeriesBuilder")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHealthStore:device:startDate:"), objref.IDOf(healthStore), objref.IDOf(device), objref.IDOf(startDate))
+	return heartbeatSeriesBuilderAdopt(_id)
 }
 
 // Finalizes the series and returns the resulting heartbeat series sample.
@@ -67,16 +78,13 @@ func (x *HeartbeatSeriesBuilder) FinishSeriesWithCompletion(ctx context.Context)
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FinishSeriesWithCompletion(func(_p0 *raw.HKHeartbeatSeriesSample, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &HeartbeatSeriesSample{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = HeartbeatSeriesSampleFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishSeriesWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -86,15 +94,9 @@ func (x *HeartbeatSeriesBuilder) FinishSeriesWithCompletion(ctx context.Context)
 	}
 }
 
-func (x *HeartbeatSeriesBuilder) asSeriesBuilder() *raw.HKSeriesBuilder {
-	return &x.inner.HKSeriesBuilder
-}
-
 // HeartbeatSeriesBuilderable is the interface implemented by [HeartbeatSeriesBuilder], for mocking and DI.
 type HeartbeatSeriesBuilderable interface {
-	Unwrap() *raw.HKHeartbeatSeriesBuilder
-	AddHeartbeatWithTimeIntervalSinceSeriesStartDatePrecededByGapCompletion(timeIntervalSinceStart float64, precededByGap bool, completion func(bool, unsafe.Pointer))
-	AddMetadataCompletion(metadata *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(bool, unsafe.Pointer))
+	obj.Object
 	FinishSeriesWithCompletion(ctx context.Context) (*HeartbeatSeriesSample, error)
 }
 

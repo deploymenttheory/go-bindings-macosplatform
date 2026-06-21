@@ -5,85 +5,90 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Node representing a @ref MPSNNGramMatrixCalculationGradient kernel
+// Node representing a
 //
-// NNGramMatrixCalculationGradientNode wraps [raw.MPSNNGramMatrixCalculationGradientNode] with a fluent Go API.
+// NNGramMatrixCalculationGradientNode is an idiomatic wrapper over the Objective-C class MPSNNGramMatrixCalculationGradientNode.
 type NNGramMatrixCalculationGradientNode struct {
-	inner *raw.MPSNNGramMatrixCalculationGradientNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNGramMatrixCalculationGradientNode].
-func (x *NNGramMatrixCalculationGradientNode) Unwrap() *raw.MPSNNGramMatrixCalculationGradientNode {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNGramMatrixCalculationGradientNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNGramMatrixCalculationGradientNodeFromID adopts an existing object pointer as a NNGramMatrixCalculationGradientNode (nil for 0).
+// NNGramMatrixCalculationGradientNodeFromID adopts an existing Objective-C object as a NNGramMatrixCalculationGradientNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNGramMatrixCalculationGradientNodeFromID(id objc.ID) *NNGramMatrixCalculationGradientNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNGramMatrixCalculationGradientNode{inner: raw.MPSNNGramMatrixCalculationGradientNodeFromID(id)}
-}
-
-// NewNNGramMatrixCalculationGradientNodeWithSourceGradientSourceImageGradientState creates a new [NNGramMatrixCalculationGradientNode].
-func NewNNGramMatrixCalculationGradientNodeWithSourceGradientSourceImageGradientState(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode) *NNGramMatrixCalculationGradientNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNGramMatrixCalculationGradientNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:"), sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	return &NNGramMatrixCalculationGradientNode{inner: raw.MPSNNGramMatrixCalculationGradientNodeFromID(_id)}
-}
-
-// NewNNGramMatrixCalculationGradientNodeWithSourceGradientSourceImageGradientStateAlpha creates a new [NNGramMatrixCalculationGradientNode].
-func NewNNGramMatrixCalculationGradientNodeWithSourceGradientSourceImageGradientStateAlpha(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode, alpha float32) *NNGramMatrixCalculationGradientNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNGramMatrixCalculationGradientNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:alpha:"), sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr(), alpha)
-	return &NNGramMatrixCalculationGradientNode{inner: raw.MPSNNGramMatrixCalculationGradientNodeFromID(_id)}
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *NNGramMatrixCalculationGradientNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNGramMatrixCalculationGradientNode {
-	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	x := &NNGramMatrixCalculationGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// nNGramMatrixCalculationGradientNodeAdopt wraps an Objective-C object that this code just created as a
+// NNGramMatrixCalculationGradientNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNGramMatrixCalculationGradientNodeAdopt(id objc.ID) *NNGramMatrixCalculationGradientNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNGramMatrixCalculationGradientNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NNGramMatrixCalculationGradientNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNGramMatrixCalculationGradientNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNGramMatrixCalculationGradientNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNNGramMatrixCalculationGradientNodeWithSourceGradientSourceImageGradientState creates a new NNGramMatrixCalculationGradientNode.
+func NewNNGramMatrixCalculationGradientNodeWithSourceGradientSourceImageGradientState(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object) *NNGramMatrixCalculationGradientNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationGradientNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
+	return nNGramMatrixCalculationGradientNodeAdopt(_id)
+}
+
+// NewNNGramMatrixCalculationGradientNodeWithSourceGradientSourceImageGradientStateAlpha creates a new NNGramMatrixCalculationGradientNode.
+func NewNNGramMatrixCalculationGradientNodeWithSourceGradientSourceImageGradientStateAlpha(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object, alpha float32) *NNGramMatrixCalculationGradientNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNGramMatrixCalculationGradientNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:alpha:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState), alpha)
+	return nNGramMatrixCalculationGradientNodeAdopt(_id)
+}
+
+// A string to help identify this object.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *NNGramMatrixCalculationGradientNode) WithLabel(label string) *NNGramMatrixCalculationGradientNode {
-	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property   alpha @abstract   Scaling factor for the output. Default: 1.0f.
-//
-// Alpha calls the underlying Alpha.
+// Scaling factor for the output. Default: 1.0f.
 func (x *NNGramMatrixCalculationGradientNode) Alpha() float32 {
-	return x.inner.Alpha()
-}
-
-func (x *NNGramMatrixCalculationGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode {
-	return &x.inner.MPSNNGradientFilterNode
-}
-
-func (x *NNGramMatrixCalculationGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
+	return _r
 }
 
 // NNGramMatrixCalculationGradientNodeable is the interface implemented by [NNGramMatrixCalculationGradientNode], for mocking and DI.
 type NNGramMatrixCalculationGradientNodeable interface {
-	Unwrap() *raw.MPSNNGramMatrixCalculationGradientNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNGramMatrixCalculationGradientNode
+	obj.Object
 	WithLabel(label string) *NNGramMatrixCalculationGradientNode
 	Alpha() float32
 }

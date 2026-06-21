@@ -5,107 +5,126 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRMediaPlaybackClusterFastForwardParams wraps [raw.MTRMediaPlaybackClusterFastForwardParams] with a fluent Go API.
+// MTRMediaPlaybackClusterFastForwardParams is an idiomatic wrapper over the Objective-C class MTRMediaPlaybackClusterFastForwardParams.
 type MTRMediaPlaybackClusterFastForwardParams struct {
-	inner *raw.MTRMediaPlaybackClusterFastForwardParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRMediaPlaybackClusterFastForwardParams].
-func (x *MTRMediaPlaybackClusterFastForwardParams) Unwrap() *raw.MTRMediaPlaybackClusterFastForwardParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRMediaPlaybackClusterFastForwardParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRMediaPlaybackClusterFastForwardParamsFromID adopts an existing object pointer as a MTRMediaPlaybackClusterFastForwardParams (nil for 0).
+// MTRMediaPlaybackClusterFastForwardParamsFromID adopts an existing Objective-C object as a MTRMediaPlaybackClusterFastForwardParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRMediaPlaybackClusterFastForwardParamsFromID(id objc.ID) *MTRMediaPlaybackClusterFastForwardParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRMediaPlaybackClusterFastForwardParams{inner: raw.MTRMediaPlaybackClusterFastForwardParamsFromID(id)}
+	x := &MTRMediaPlaybackClusterFastForwardParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRMediaPlaybackClusterFastForwardParams creates a new [MTRMediaPlaybackClusterFastForwardParams].
+// mTRMediaPlaybackClusterFastForwardParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRMediaPlaybackClusterFastForwardParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRMediaPlaybackClusterFastForwardParamsAdopt(id objc.ID) *MTRMediaPlaybackClusterFastForwardParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRMediaPlaybackClusterFastForwardParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRMediaPlaybackClusterFastForwardParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRMediaPlaybackClusterFastForwardParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRMediaPlaybackClusterFastForwardParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRMediaPlaybackClusterFastForwardParams creates a new MTRMediaPlaybackClusterFastForwardParams.
 func NewMTRMediaPlaybackClusterFastForwardParams() *MTRMediaPlaybackClusterFastForwardParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRMediaPlaybackClusterFastForwardParams")), objc.RegisterName("new"))
-	return &MTRMediaPlaybackClusterFastForwardParams{inner: raw.MTRMediaPlaybackClusterFastForwardParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRMediaPlaybackClusterFastForwardParams")), objc.RegisterName("new"))
+	return mTRMediaPlaybackClusterFastForwardParamsAdopt(_id)
 }
 
-// WithAudioAdvanceUnmuted sets the audioAdvanceUnmuted property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterFastForwardParams) WithAudioAdvanceUnmuted(audioAdvanceUnmuted *foundation.NSNumber) *MTRMediaPlaybackClusterFastForwardParams {
-	x.inner.SetAudioAdvanceUnmuted(audioAdvanceUnmuted)
+// WithAudioAdvanceUnmuted sets audioAdvanceUnmuted and returns the receiver so calls can be chained.
+func (x *MTRMediaPlaybackClusterFastForwardParams) WithAudioAdvanceUnmuted(audioAdvanceUnmuted obj.Object) *MTRMediaPlaybackClusterFastForwardParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioAdvanceUnmuted:"), objref.IDOf(audioAdvanceUnmuted))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterFastForwardParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMediaPlaybackClusterFastForwardParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRMediaPlaybackClusterFastForwardParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaPlaybackClusterFastForwardParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterFastForwardParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMediaPlaybackClusterFastForwardParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRMediaPlaybackClusterFastForwardParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMediaPlaybackClusterFastForwardParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// AudioAdvanceUnmuted calls the underlying AudioAdvanceUnmuted.
-func (x *MTRMediaPlaybackClusterFastForwardParams) AudioAdvanceUnmuted() *foundation.NSNumber {
-	return x.inner.AudioAdvanceUnmuted()
+func (x *MTRMediaPlaybackClusterFastForwardParams) AudioAdvanceUnmuted() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioAdvanceUnmuted"))
+	return obj.Wrap(_r)
 }
 
-// SetAudioAdvanceUnmuted calls the underlying SetAudioAdvanceUnmuted.
-func (x *MTRMediaPlaybackClusterFastForwardParams) SetAudioAdvanceUnmuted(audioAdvanceUnmuted *foundation.NSNumber) {
-	x.inner.SetAudioAdvanceUnmuted(audioAdvanceUnmuted)
+func (x *MTRMediaPlaybackClusterFastForwardParams) SetAudioAdvanceUnmuted(audioAdvanceUnmuted obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioAdvanceUnmuted:"), objref.IDOf(audioAdvanceUnmuted))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRMediaPlaybackClusterFastForwardParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRMediaPlaybackClusterFastForwardParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRMediaPlaybackClusterFastForwardParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRMediaPlaybackClusterFastForwardParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRMediaPlaybackClusterFastForwardParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRMediaPlaybackClusterFastForwardParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRMediaPlaybackClusterFastForwardParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRMediaPlaybackClusterFastForwardParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRMediaPlaybackClusterFastForwardParamsable is the interface implemented by [MTRMediaPlaybackClusterFastForwardParams], for mocking and DI.
 type MTRMediaPlaybackClusterFastForwardParamsable interface {
-	Unwrap() *raw.MTRMediaPlaybackClusterFastForwardParams
-	WithAudioAdvanceUnmuted(audioAdvanceUnmuted *foundation.NSNumber) *MTRMediaPlaybackClusterFastForwardParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRMediaPlaybackClusterFastForwardParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRMediaPlaybackClusterFastForwardParams
-	AudioAdvanceUnmuted() *foundation.NSNumber
-	SetAudioAdvanceUnmuted(audioAdvanceUnmuted *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithAudioAdvanceUnmuted(audioAdvanceUnmuted obj.Object) *MTRMediaPlaybackClusterFastForwardParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaPlaybackClusterFastForwardParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMediaPlaybackClusterFastForwardParams
+	AudioAdvanceUnmuted() obj.Object
+	SetAudioAdvanceUnmuted(audioAdvanceUnmuted obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRMediaPlaybackClusterFastForwardParamsable = (*MTRMediaPlaybackClusterFastForwardParams)(nil)

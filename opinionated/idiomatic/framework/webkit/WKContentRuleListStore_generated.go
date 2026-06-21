@@ -6,39 +6,64 @@ package webkit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that contains the rules for how to load and filter content in the web view.
 //
-// WKContentRuleListStore wraps [raw.WKContentRuleListStore] with a fluent Go API.
+// WKContentRuleListStore is an idiomatic wrapper over the Objective-C class WKContentRuleListStore.
 type WKContentRuleListStore struct {
-	inner *raw.WKContentRuleListStore
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKContentRuleListStore].
-func (x *WKContentRuleListStore) Unwrap() *raw.WKContentRuleListStore { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKContentRuleListStore) ID() objc.ID { return x.inner.Ptr() }
-
-// WKContentRuleListStoreFromID adopts an existing object pointer as a WKContentRuleListStore (nil for 0).
+// WKContentRuleListStoreFromID adopts an existing Objective-C object as a WKContentRuleListStore
+// (nil for 0), retaining it and registering a release finalizer.
 func WKContentRuleListStoreFromID(id objc.ID) *WKContentRuleListStore {
 	if id == 0 {
 		return nil
 	}
-	return &WKContentRuleListStore{inner: raw.WKContentRuleListStoreFromID(id)}
+	x := &WKContentRuleListStore{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWKContentRuleListStore creates a new [WKContentRuleListStore].
+// wKContentRuleListStoreAdopt wraps an Objective-C object that this code just created as a
+// WKContentRuleListStore (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKContentRuleListStoreAdopt(id objc.ID) *WKContentRuleListStore {
+	if id == 0 {
+		return nil
+	}
+	x := &WKContentRuleListStore{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WKContentRuleListStore) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKContentRuleListStore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKContentRuleListStore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWKContentRuleListStore creates a new WKContentRuleListStore.
 func NewWKContentRuleListStore() *WKContentRuleListStore {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKContentRuleListStore")), objc.RegisterName("new"))
-	return &WKContentRuleListStore{inner: raw.WKContentRuleListStoreFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WKContentRuleListStore")), objc.RegisterName("new"))
+	return wKContentRuleListStoreAdopt(_id)
 }
 
 // Compiles the specified JSON content into a new rule list and adds it to the current data store.
@@ -50,16 +75,13 @@ func (x *WKContentRuleListStore) CompileContentRuleListForIdentifierEncodedConte
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.CompileContentRuleListForIdentifierEncodedContentRuleListCompletionHandler(foundation.NSStringStringWithUTF8String(identifier), foundation.NSStringStringWithUTF8String(encodedContentRuleList), func(_p0 *raw.WKContentRuleList, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &WKContentRuleList{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = WKContentRuleListFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compileContentRuleListForIdentifier:encodedContentRuleList:completionHandler:"), purego.NSString(identifier), purego.NSString(encodedContentRuleList), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -78,16 +100,13 @@ func (x *WKContentRuleListStore) LookUpContentRuleListForIdentifier(ctx context.
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.LookUpContentRuleListForIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(identifier), func(_p0 *raw.WKContentRuleList, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &WKContentRuleList{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = WKContentRuleListFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lookUpContentRuleListForIdentifier:completionHandler:"), purego.NSString(identifier), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -102,13 +121,12 @@ func (x *WKContentRuleListStore) LookUpContentRuleListForIdentifier(ctx context.
 // RemoveContentRuleListForIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *WKContentRuleListStore) RemoveContentRuleListForIdentifier(ctx context.Context, identifier string) error {
 	_ch := make(chan error, 1)
-	x.inner.RemoveContentRuleListForIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(identifier), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeContentRuleListForIdentifier:completionHandler:"), purego.NSString(identifier), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -120,33 +138,34 @@ func (x *WKContentRuleListStore) RemoveContentRuleListForIdentifier(ctx context.
 // Fetches the identifiers for all rule lists in the store asynchronously.
 //
 // GetAvailableContentRuleListIdentifiers blocks until the operation completes or ctx is cancelled.
-func (x *WKContentRuleListStore) GetAvailableContentRuleListIdentifiers(ctx context.Context) (*foundation.NSArray[*foundation.NSString], error) {
+func (x *WKContentRuleListStore) GetAvailableContentRuleListIdentifiers(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*foundation.NSString]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetAvailableContentRuleListIdentifiers(func(_p0 *foundation.NSArray[*foundation.NSString]) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		_o.val = _p0
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getAvailableContentRuleListIdentifiers:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*foundation.NSString]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // WKContentRuleListStoreable is the interface implemented by [WKContentRuleListStore], for mocking and DI.
 type WKContentRuleListStoreable interface {
-	Unwrap() *raw.WKContentRuleListStore
+	obj.Object
 	CompileContentRuleListForIdentifierEncodedContentRuleList(ctx context.Context, identifier string, encodedContentRuleList string) (*WKContentRuleList, error)
 	LookUpContentRuleListForIdentifier(ctx context.Context, identifier string) (*WKContentRuleList, error)
 	RemoveContentRuleListForIdentifier(ctx context.Context, identifier string) error
-	GetAvailableContentRuleListIdentifiers(ctx context.Context) (*foundation.NSArray[*foundation.NSString], error)
+	GetAvailableContentRuleListIdentifiers(ctx context.Context) (obj.Object, error)
 }
 
 var _ WKContentRuleListStoreable = (*WKContentRuleListStore)(nil)

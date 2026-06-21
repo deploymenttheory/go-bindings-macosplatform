@@ -5,15 +5,15 @@
 package eventkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// CalendarItemProvider is implemented by CalendarItem and any idiomatic type wrapping a EKCalendarItem subclass.
+// CalendarItemProvider is accepted wherever a EKCalendarItem (or one of its subclasses) is expected.
 type CalendarItemProvider interface {
-	asCalendarItem() *raw.EKCalendarItem
+	objref.Object
 }
 
-// ObjectProvider is implemented by Object and any idiomatic type wrapping a EKObject subclass.
+// ObjectProvider is accepted wherever a EKObject (or one of its subclasses) is expected.
 type ObjectProvider interface {
-	asObject() *raw.EKObject
+	objref.Object
 }

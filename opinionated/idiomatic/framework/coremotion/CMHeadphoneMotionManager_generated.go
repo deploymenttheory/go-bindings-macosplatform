@@ -5,124 +5,110 @@
 package coremotion
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that starts and manages headphone motion services.
 //
-// HeadphoneMotionManager wraps [raw.CMHeadphoneMotionManager] with a fluent Go API.
+// HeadphoneMotionManager is an idiomatic wrapper over the Objective-C class CMHeadphoneMotionManager.
 type HeadphoneMotionManager struct {
-	inner *raw.CMHeadphoneMotionManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CMHeadphoneMotionManager].
-func (x *HeadphoneMotionManager) Unwrap() *raw.CMHeadphoneMotionManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HeadphoneMotionManager) ID() objc.ID { return x.inner.Ptr() }
-
-// HeadphoneMotionManagerFromID adopts an existing object pointer as a HeadphoneMotionManager (nil for 0).
+// HeadphoneMotionManagerFromID adopts an existing Objective-C object as a HeadphoneMotionManager
+// (nil for 0), retaining it and registering a release finalizer.
 func HeadphoneMotionManagerFromID(id objc.ID) *HeadphoneMotionManager {
 	if id == 0 {
 		return nil
 	}
-	return &HeadphoneMotionManager{inner: raw.CMHeadphoneMotionManagerFromID(id)}
-}
-
-// NewHeadphoneMotionManager creates a new [HeadphoneMotionManager].
-func NewHeadphoneMotionManager() *HeadphoneMotionManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CMHeadphoneMotionManager")), objc.RegisterName("new"))
-	return &HeadphoneMotionManager{inner: raw.CMHeadphoneMotionManagerFromID(_id)}
-}
-
-// The object that receives headphone motion manager events.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *HeadphoneMotionManager) WithDelegate(delegate raw.CMHeadphoneMotionManagerDelegate) *HeadphoneMotionManager {
-	x.inner.SetDelegate(delegate)
+	x := &HeadphoneMotionManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Starts device-motion updates.
-//
-// StartDeviceMotionUpdates calls the underlying StartDeviceMotionUpdates.
-func (x *HeadphoneMotionManager) StartDeviceMotionUpdates() {
-	x.inner.StartDeviceMotionUpdates()
+// headphoneMotionManagerAdopt wraps an Objective-C object that this code just created as a
+// HeadphoneMotionManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func headphoneMotionManagerAdopt(id objc.ID) *HeadphoneMotionManager {
+	if id == 0 {
+		return nil
+	}
+	x := &HeadphoneMotionManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Starts device-motion updates with a handler.
-//
-// StartDeviceMotionUpdatesToQueueWithHandler calls the underlying StartDeviceMotionUpdatesToQueueWithHandler.
-func (x *HeadphoneMotionManager) StartDeviceMotionUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(*raw.CMDeviceMotion, unsafe.Pointer)) {
-	x.inner.StartDeviceMotionUpdatesToQueueWithHandler(queue, handler)
+// Description returns the object's -description text.
+func (x *HeadphoneMotionManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HeadphoneMotionManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HeadphoneMotionManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHeadphoneMotionManager creates a new HeadphoneMotionManager.
+func NewHeadphoneMotionManager() *HeadphoneMotionManager {
+	_id := objc.Send[objc.ID](objc.ID(_class("CMHeadphoneMotionManager")), objc.RegisterName("new"))
+	return headphoneMotionManagerAdopt(_id)
+}
+
+// Starts device-motion updates.
+func (x *HeadphoneMotionManager) StartDeviceMotionUpdates() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDeviceMotionUpdates"))
 }
 
 // Stops device-motion updates.
-//
-// StopDeviceMotionUpdates calls the underlying StopDeviceMotionUpdates.
 func (x *HeadphoneMotionManager) StopDeviceMotionUpdates() {
-	x.inner.StopDeviceMotionUpdates()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopDeviceMotionUpdates"))
 }
 
-// StartConnectionStatusUpdates calls the underlying StartConnectionStatusUpdates.
 func (x *HeadphoneMotionManager) StartConnectionStatusUpdates() {
-	x.inner.StartConnectionStatusUpdates()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startConnectionStatusUpdates"))
 }
 
-// StopConnectionStatusUpdates calls the underlying StopConnectionStatusUpdates.
 func (x *HeadphoneMotionManager) StopConnectionStatusUpdates() {
-	x.inner.StopConnectionStatusUpdates()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopConnectionStatusUpdates"))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *HeadphoneMotionManager) Delegate() raw.CMHeadphoneMotionManagerDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *HeadphoneMotionManager) SetDelegate(delegate raw.CMHeadphoneMotionManagerDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// IsConnectionStatusActive calls the underlying IsConnectionStatusActive.
 func (x *HeadphoneMotionManager) IsConnectionStatusActive() bool {
-	return x.inner.IsConnectionStatusActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConnectionStatusActive"))
+	return _r
 }
 
-// IsDeviceMotionAvailable calls the underlying IsDeviceMotionAvailable.
 func (x *HeadphoneMotionManager) IsDeviceMotionAvailable() bool {
-	return x.inner.IsDeviceMotionAvailable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDeviceMotionAvailable"))
+	return _r
 }
 
-// IsDeviceMotionActive calls the underlying IsDeviceMotionActive.
 func (x *HeadphoneMotionManager) IsDeviceMotionActive() bool {
-	return x.inner.IsDeviceMotionActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDeviceMotionActive"))
+	return _r
 }
 
-// DeviceMotion calls the underlying DeviceMotion.
 func (x *HeadphoneMotionManager) DeviceMotion() *DeviceMotion {
-	_r := x.inner.DeviceMotion()
-	if _r == nil {
-		return nil
-	}
-	return &DeviceMotion{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceMotion"))
+	return DeviceMotionFromID(_r)
 }
 
 // HeadphoneMotionManagerable is the interface implemented by [HeadphoneMotionManager], for mocking and DI.
 type HeadphoneMotionManagerable interface {
-	Unwrap() *raw.CMHeadphoneMotionManager
-	WithDelegate(delegate raw.CMHeadphoneMotionManagerDelegate) *HeadphoneMotionManager
+	obj.Object
 	StartDeviceMotionUpdates()
-	StartDeviceMotionUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(*raw.CMDeviceMotion, unsafe.Pointer))
 	StopDeviceMotionUpdates()
 	StartConnectionStatusUpdates()
 	StopConnectionStatusUpdates()
-	Delegate() raw.CMHeadphoneMotionManagerDelegate
-	SetDelegate(delegate raw.CMHeadphoneMotionManagerDelegate)
 	IsConnectionStatusActive() bool
 	IsDeviceMotionAvailable() bool
 	IsDeviceMotionActive() bool

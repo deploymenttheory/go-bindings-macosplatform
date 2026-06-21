@@ -5,177 +5,190 @@
 package quartz
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The IKDeviceBrowserView allows you to select a camera or scanner from a list of the available devices.
 //
-// IKDeviceBrowserView wraps [raw.IKDeviceBrowserView] with a fluent Go API.
+// IKDeviceBrowserView is an idiomatic wrapper over the Objective-C class IKDeviceBrowserView.
 type IKDeviceBrowserView struct {
-	inner *raw.IKDeviceBrowserView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IKDeviceBrowserView].
-func (x *IKDeviceBrowserView) Unwrap() *raw.IKDeviceBrowserView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IKDeviceBrowserView) ID() objc.ID { return x.inner.Ptr() }
-
-// IKDeviceBrowserViewFromID adopts an existing object pointer as a IKDeviceBrowserView (nil for 0).
+// IKDeviceBrowserViewFromID adopts an existing Objective-C object as a IKDeviceBrowserView
+// (nil for 0), retaining it and registering a release finalizer.
 func IKDeviceBrowserViewFromID(id objc.ID) *IKDeviceBrowserView {
 	if id == 0 {
 		return nil
 	}
-	return &IKDeviceBrowserView{inner: raw.IKDeviceBrowserViewFromID(id)}
+	x := &IKDeviceBrowserView{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewIKDeviceBrowserView creates a new [IKDeviceBrowserView].
+// iKDeviceBrowserViewAdopt wraps an Objective-C object that this code just created as a
+// IKDeviceBrowserView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iKDeviceBrowserViewAdopt(id objc.ID) *IKDeviceBrowserView {
+	if id == 0 {
+		return nil
+	}
+	x := &IKDeviceBrowserView{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IKDeviceBrowserView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IKDeviceBrowserView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IKDeviceBrowserView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewIKDeviceBrowserView creates a new IKDeviceBrowserView.
 func NewIKDeviceBrowserView() *IKDeviceBrowserView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IKDeviceBrowserView")), objc.RegisterName("new"))
-	return &IKDeviceBrowserView{inner: raw.IKDeviceBrowserViewFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("IKDeviceBrowserView")), objc.RegisterName("new"))
+	return iKDeviceBrowserViewAdopt(_id)
 }
 
 // Specifies the delegate object.
 //
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *IKDeviceBrowserView) WithDelegate(delegate objc.ID) *IKDeviceBrowserView {
-	x.inner.SetDelegate(delegate)
+// WithDelegate sets delegate and returns the receiver so calls can be chained.
+func (x *IKDeviceBrowserView) WithDelegate(delegate obj.Object) *IKDeviceBrowserView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return x
 }
 
 // Specifies whether local cameras are displayed by the browser.
 //
-// WithDisplaysLocalCameras sets the displaysLocalCameras property and returns the receiver for chaining.
+// WithDisplaysLocalCameras sets displaysLocalCameras and returns the receiver so calls can be chained.
 func (x *IKDeviceBrowserView) WithDisplaysLocalCameras(displaysLocalCameras bool) *IKDeviceBrowserView {
-	x.inner.SetDisplaysLocalCameras(displaysLocalCameras)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysLocalCameras:"), displaysLocalCameras)
 	return x
 }
 
 // Specifies whether network cameras are displayed by the browser.
 //
-// WithDisplaysNetworkCameras sets the displaysNetworkCameras property and returns the receiver for chaining.
+// WithDisplaysNetworkCameras sets displaysNetworkCameras and returns the receiver so calls can be chained.
 func (x *IKDeviceBrowserView) WithDisplaysNetworkCameras(displaysNetworkCameras bool) *IKDeviceBrowserView {
-	x.inner.SetDisplaysNetworkCameras(displaysNetworkCameras)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysNetworkCameras:"), displaysNetworkCameras)
 	return x
 }
 
 // Specifies whether local scanners are displayed by the browser.
 //
-// WithDisplaysLocalScanners sets the displaysLocalScanners property and returns the receiver for chaining.
+// WithDisplaysLocalScanners sets displaysLocalScanners and returns the receiver so calls can be chained.
 func (x *IKDeviceBrowserView) WithDisplaysLocalScanners(displaysLocalScanners bool) *IKDeviceBrowserView {
-	x.inner.SetDisplaysLocalScanners(displaysLocalScanners)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysLocalScanners:"), displaysLocalScanners)
 	return x
 }
 
 // Specifies whether network scanners are displayed by the browser.
 //
-// WithDisplaysNetworkScanners sets the displaysNetworkScanners property and returns the receiver for chaining.
+// WithDisplaysNetworkScanners sets displaysNetworkScanners and returns the receiver so calls can be chained.
 func (x *IKDeviceBrowserView) WithDisplaysNetworkScanners(displaysNetworkScanners bool) *IKDeviceBrowserView {
-	x.inner.SetDisplaysNetworkScanners(displaysNetworkScanners)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysNetworkScanners:"), displaysNetworkScanners)
 	return x
 }
 
 // Specifies the browser display mode.
 //
-// WithMode sets the mode property and returns the receiver for chaining.
-func (x *IKDeviceBrowserView) WithMode(mode objc.ID) *IKDeviceBrowserView {
-	x.inner.SetMode(mode)
+// WithMode sets mode and returns the receiver so calls can be chained.
+func (x *IKDeviceBrowserView) WithMode(mode obj.Object) *IKDeviceBrowserView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 	return x
 }
 
-// @property delegate @abstract delegate of the IKDeviceBrowserView.
-//
-// Delegate calls the underlying Delegate.
-func (x *IKDeviceBrowserView) Delegate() objc.ID {
-	return x.inner.Delegate()
+// delegate of the IKDeviceBrowserView.
+func (x *IKDeviceBrowserView) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+	return obj.Wrap(_r)
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *IKDeviceBrowserView) SetDelegate(delegate objc.ID) {
-	x.inner.SetDelegate(delegate)
+func (x *IKDeviceBrowserView) SetDelegate(delegate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
-// @property displaysLocalCameras @abstract for device filtering - indicates that the IKDeviceBrowserView should include local cameras.
-//
-// DisplaysLocalCameras calls the underlying DisplaysLocalCameras.
+// for device filtering - indicates that the IKDeviceBrowserView should include local cameras.
 func (x *IKDeviceBrowserView) DisplaysLocalCameras() bool {
-	return x.inner.DisplaysLocalCameras()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysLocalCameras"))
+	return _r
 }
 
-// SetDisplaysLocalCameras calls the underlying SetDisplaysLocalCameras.
 func (x *IKDeviceBrowserView) SetDisplaysLocalCameras(displaysLocalCameras bool) {
-	x.inner.SetDisplaysLocalCameras(displaysLocalCameras)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysLocalCameras:"), displaysLocalCameras)
 }
 
-// @property displaysNetworkCameras @abstract for device filtering - indicates that the IKDeviceBrowserView should include network/shared cameras.
-//
-// DisplaysNetworkCameras calls the underlying DisplaysNetworkCameras.
+// for device filtering - indicates that the IKDeviceBrowserView should include network/shared cameras.
 func (x *IKDeviceBrowserView) DisplaysNetworkCameras() bool {
-	return x.inner.DisplaysNetworkCameras()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysNetworkCameras"))
+	return _r
 }
 
-// SetDisplaysNetworkCameras calls the underlying SetDisplaysNetworkCameras.
 func (x *IKDeviceBrowserView) SetDisplaysNetworkCameras(displaysNetworkCameras bool) {
-	x.inner.SetDisplaysNetworkCameras(displaysNetworkCameras)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysNetworkCameras:"), displaysNetworkCameras)
 }
 
-// @property displaysLocalScanners @abstract for device filtering - indicates that the IKDeviceBrowserView should include local scanners.
-//
-// DisplaysLocalScanners calls the underlying DisplaysLocalScanners.
+// for device filtering - indicates that the IKDeviceBrowserView should include local scanners.
 func (x *IKDeviceBrowserView) DisplaysLocalScanners() bool {
-	return x.inner.DisplaysLocalScanners()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysLocalScanners"))
+	return _r
 }
 
-// SetDisplaysLocalScanners calls the underlying SetDisplaysLocalScanners.
 func (x *IKDeviceBrowserView) SetDisplaysLocalScanners(displaysLocalScanners bool) {
-	x.inner.SetDisplaysLocalScanners(displaysLocalScanners)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysLocalScanners:"), displaysLocalScanners)
 }
 
-// @property displaysNetworkScanners @abstract for device filtering - indicates that the IKDeviceBrowserView should include network/shared scanners.
-//
-// DisplaysNetworkScanners calls the underlying DisplaysNetworkScanners.
+// for device filtering - indicates that the IKDeviceBrowserView should include network/shared scanners.
 func (x *IKDeviceBrowserView) DisplaysNetworkScanners() bool {
-	return x.inner.DisplaysNetworkScanners()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysNetworkScanners"))
+	return _r
 }
 
-// SetDisplaysNetworkScanners calls the underlying SetDisplaysNetworkScanners.
 func (x *IKDeviceBrowserView) SetDisplaysNetworkScanners(displaysNetworkScanners bool) {
-	x.inner.SetDisplaysNetworkScanners(displaysNetworkScanners)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysNetworkScanners:"), displaysNetworkScanners)
 }
 
-// @property mode @abstract one of the supported display modes (table, outline, or icon mode).
-//
-// Mode calls the underlying Mode.
-func (x *IKDeviceBrowserView) Mode() objc.ID {
-	return x.inner.Mode()
+// one of the supported display modes (table, outline, or icon mode).
+func (x *IKDeviceBrowserView) Mode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mode"))
+	return obj.Wrap(_r)
 }
 
-// SetMode calls the underlying SetMode.
-func (x *IKDeviceBrowserView) SetMode(mode objc.ID) {
-	x.inner.SetMode(mode)
+func (x *IKDeviceBrowserView) SetMode(mode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
 }
 
-// @property selectedDevice @abstract user selected device (ICCameraDevice or ICScannerDevice).
-//
-// SelectedDevice calls the underlying SelectedDevice.
-func (x *IKDeviceBrowserView) SelectedDevice() *imagecapturecore.ICDevice {
-	return x.inner.SelectedDevice()
+// user selected device (ICCameraDevice or ICScannerDevice).
+func (x *IKDeviceBrowserView) SelectedDevice() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedDevice"))
+	return obj.Wrap(_r)
 }
 
 // IKDeviceBrowserViewable is the interface implemented by [IKDeviceBrowserView], for mocking and DI.
 type IKDeviceBrowserViewable interface {
-	Unwrap() *raw.IKDeviceBrowserView
-	WithDelegate(delegate objc.ID) *IKDeviceBrowserView
+	obj.Object
+	WithDelegate(delegate obj.Object) *IKDeviceBrowserView
 	WithDisplaysLocalCameras(displaysLocalCameras bool) *IKDeviceBrowserView
 	WithDisplaysNetworkCameras(displaysNetworkCameras bool) *IKDeviceBrowserView
 	WithDisplaysLocalScanners(displaysLocalScanners bool) *IKDeviceBrowserView
 	WithDisplaysNetworkScanners(displaysNetworkScanners bool) *IKDeviceBrowserView
-	WithMode(mode objc.ID) *IKDeviceBrowserView
-	Delegate() objc.ID
-	SetDelegate(delegate objc.ID)
+	WithMode(mode obj.Object) *IKDeviceBrowserView
+	Delegate() obj.Object
+	SetDelegate(delegate obj.Object)
 	DisplaysLocalCameras() bool
 	SetDisplaysLocalCameras(displaysLocalCameras bool)
 	DisplaysNetworkCameras() bool
@@ -184,9 +197,9 @@ type IKDeviceBrowserViewable interface {
 	SetDisplaysLocalScanners(displaysLocalScanners bool)
 	DisplaysNetworkScanners() bool
 	SetDisplaysNetworkScanners(displaysNetworkScanners bool)
-	Mode() objc.ID
-	SetMode(mode objc.ID)
-	SelectedDevice() *imagecapturecore.ICDevice
+	Mode() obj.Object
+	SetMode(mode obj.Object)
+	SelectedDevice() obj.Object
 }
 
 var _ IKDeviceBrowserViewable = (*IKDeviceBrowserView)(nil)

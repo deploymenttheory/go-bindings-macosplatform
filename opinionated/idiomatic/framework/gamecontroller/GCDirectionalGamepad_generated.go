@@ -5,83 +5,95 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A profile that supports only the directional pad, without motion or rotation.
 //
-// DirectionalGamepad wraps [raw.GCDirectionalGamepad] with a fluent Go API.
+// DirectionalGamepad is an idiomatic wrapper over the Objective-C class GCDirectionalGamepad.
 type DirectionalGamepad struct {
-	inner *raw.GCDirectionalGamepad
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCDirectionalGamepad].
-func (x *DirectionalGamepad) Unwrap() *raw.GCDirectionalGamepad { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DirectionalGamepad) ID() objc.ID { return x.inner.Ptr() }
-
-// DirectionalGamepadFromID adopts an existing object pointer as a DirectionalGamepad (nil for 0).
+// DirectionalGamepadFromID adopts an existing Objective-C object as a DirectionalGamepad
+// (nil for 0), retaining it and registering a release finalizer.
 func DirectionalGamepadFromID(id objc.ID) *DirectionalGamepad {
 	if id == 0 {
 		return nil
 	}
-	return &DirectionalGamepad{inner: raw.GCDirectionalGamepadFromID(id)}
-}
-
-// NewDirectionalGamepad creates a new [DirectionalGamepad].
-func NewDirectionalGamepad() *DirectionalGamepad {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCDirectionalGamepad")), objc.RegisterName("new"))
-	return &DirectionalGamepad{inner: raw.GCDirectionalGamepadFromID(_id)}
-}
-
-// The block that this profile calls when an element’s value changes.
-//
-// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
-func (x *DirectionalGamepad) WithValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement)) *DirectionalGamepad {
-	x.inner.GCMicroGamepad.SetValueChangedHandler(valueChangedHandler)
+	x := &DirectionalGamepad{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// directionalGamepadAdopt wraps an Objective-C object that this code just created as a
+// DirectionalGamepad (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func directionalGamepadAdopt(id objc.ID) *DirectionalGamepad {
+	if id == 0 {
+		return nil
+	}
+	x := &DirectionalGamepad{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DirectionalGamepad) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DirectionalGamepad) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DirectionalGamepad) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDirectionalGamepad creates a new DirectionalGamepad.
+func NewDirectionalGamepad() *DirectionalGamepad {
+	_id := objc.Send[objc.ID](objc.ID(_class("GCDirectionalGamepad")), objc.RegisterName("new"))
+	return directionalGamepadAdopt(_id)
 }
 
 // A Boolean value that indicates whether the directional pad reports absolute or relative values.
 //
-// WithReportsAbsoluteDpadValues sets the reportsAbsoluteDpadValues property and returns the receiver for chaining.
+// WithReportsAbsoluteDpadValues sets reportsAbsoluteDpadValues and returns the receiver so calls can be chained.
 func (x *DirectionalGamepad) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *DirectionalGamepad {
-	x.inner.GCMicroGamepad.SetReportsAbsoluteDpadValues(reportsAbsoluteDpadValues)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportsAbsoluteDpadValues:"), reportsAbsoluteDpadValues)
 	return x
 }
 
 // A Boolean value that indicates whether the profile reports the directional pad values relative to its current orientation.
 //
-// WithAllowsRotation sets the allowsRotation property and returns the receiver for chaining.
+// WithAllowsRotation sets allowsRotation and returns the receiver so calls can be chained.
 func (x *DirectionalGamepad) WithAllowsRotation(allowsRotation bool) *DirectionalGamepad {
-	x.inner.GCMicroGamepad.SetAllowsRotation(allowsRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsRotation:"), allowsRotation)
 	return x
 }
 
 // The block that the profile calls when an element’s value changes.
 //
-// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
-func (x *DirectionalGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *DirectionalGamepad {
-	x.inner.GCMicroGamepad.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
+// WithValueDidChangeHandler sets valueDidChangeHandler and returns the receiver so calls can be chained.
+func (x *DirectionalGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *DirectionalGamepad {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return x
-}
-
-func (x *DirectionalGamepad) asMicroGamepad() *raw.GCMicroGamepad { return &x.inner.GCMicroGamepad }
-
-func (x *DirectionalGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
-	return &x.inner.GCMicroGamepad.GCPhysicalInputProfile
 }
 
 // DirectionalGamepadable is the interface implemented by [DirectionalGamepad], for mocking and DI.
 type DirectionalGamepadable interface {
-	Unwrap() *raw.GCDirectionalGamepad
-	WithValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement)) *DirectionalGamepad
+	obj.Object
 	WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *DirectionalGamepad
 	WithAllowsRotation(allowsRotation bool) *DirectionalGamepad
-	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *DirectionalGamepad
+	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *DirectionalGamepad
 }
 
 var _ DirectionalGamepadable = (*DirectionalGamepad)(nil)

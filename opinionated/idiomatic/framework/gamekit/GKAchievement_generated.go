@@ -6,162 +6,171 @@ package gamekit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An achievement you can award a player as they make progress toward and reach a goal in your game.
 //
-// Achievement wraps [raw.GKAchievement] with a fluent Go API.
+// Achievement is an idiomatic wrapper over the Objective-C class GKAchievement.
 type Achievement struct {
-	inner *raw.GKAchievement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKAchievement].
-func (x *Achievement) Unwrap() *raw.GKAchievement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Achievement) ID() objc.ID { return x.inner.Ptr() }
-
-// AchievementFromID adopts an existing object pointer as a Achievement (nil for 0).
+// AchievementFromID adopts an existing Objective-C object as a Achievement
+// (nil for 0), retaining it and registering a release finalizer.
 func AchievementFromID(id objc.ID) *Achievement {
 	if id == 0 {
 		return nil
 	}
-	return &Achievement{inner: raw.GKAchievementFromID(id)}
+	x := &Achievement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// achievementAdopt wraps an Objective-C object that this code just created as a
+// Achievement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func achievementAdopt(id objc.ID) *Achievement {
+	if id == 0 {
+		return nil
+	}
+	x := &Achievement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Achievement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Achievement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Achievement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes an achievement for the local player.
 //
-// NewAchievementWithIdentifier creates a new [Achievement].
+// NewAchievementWithIdentifier creates a new Achievement.
 func NewAchievementWithIdentifier(identifier string) *Achievement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKAchievement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &Achievement{inner: raw.GKAchievementFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKAchievement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), purego.NSString(identifier))
+	return achievementAdopt(_id)
 }
 
 // Initializes an achievement for a player.
 //
-// NewAchievementWithIdentifierPlayer creates a new [Achievement].
-func NewAchievementWithIdentifierPlayer(identifier string, player *raw.GKPlayer) *Achievement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKAchievement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:player:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), player.Ptr())
-	return &Achievement{inner: raw.GKAchievementFromID(_id)}
+// NewAchievementWithIdentifierPlayer creates a new Achievement.
+func NewAchievementWithIdentifierPlayer(identifier string, player *Player) *Achievement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKAchievement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:player:"), purego.NSString(identifier), objref.IDOf(player))
+	return achievementAdopt(_id)
 }
 
 // * This method is obsolete. Calling this initializer does nothing and will return nil **
 //
-// NewAchievementWithIdentifierForPlayer creates a new [Achievement].
+// NewAchievementWithIdentifierForPlayer creates a new Achievement.
 func NewAchievementWithIdentifierForPlayer(identifier string, playerID string) *Achievement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKAchievement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:forPlayer:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), foundation.NSStringStringWithUTF8String(playerID).Ptr())
-	return &Achievement{inner: raw.GKAchievementFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKAchievement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:forPlayer:"), purego.NSString(identifier), purego.NSString(playerID))
+	return achievementAdopt(_id)
 }
 
 // The identifier for the achievement that you enter in App Store Connect.
 //
-// WithIdentifier sets the identifier property and returns the receiver for chaining.
+// WithIdentifier sets identifier and returns the receiver so calls can be chained.
 func (x *Achievement) WithIdentifier(identifier string) *Achievement {
-	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 	return x
 }
 
 // A percentage value that states how far the player has progressed on the achievement.
 //
-// WithPercentComplete sets the percentComplete property and returns the receiver for chaining.
+// WithPercentComplete sets percentComplete and returns the receiver so calls can be chained.
 func (x *Achievement) WithPercentComplete(percentComplete float64) *Achievement {
-	x.inner.SetPercentComplete(percentComplete)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentComplete:"), percentComplete)
 	return x
 }
 
 // A Boolean value that indicates whether GameKit displays a banner when the player completes the achievement.
 //
-// WithShowsCompletionBanner sets the showsCompletionBanner property and returns the receiver for chaining.
+// WithShowsCompletionBanner sets showsCompletionBanner and returns the receiver so calls can be chained.
 func (x *Achievement) WithShowsCompletionBanner(showsCompletionBanner bool) *Achievement {
-	x.inner.SetShowsCompletionBanner(showsCompletionBanner)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsCompletionBanner:"), showsCompletionBanner)
 	return x
 }
 
 // Achievement identifier
-//
-// Identifier calls the underlying Identifier.
 func (x *Achievement) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetIdentifier calls the underlying SetIdentifier.
 func (x *Achievement) SetIdentifier(identifier string) {
-	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 }
 
 // Required, Percentage of achievement complete.
-//
-// PercentComplete calls the underlying PercentComplete.
 func (x *Achievement) PercentComplete() float64 {
-	return x.inner.PercentComplete()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("percentComplete"))
+	return _r
 }
 
-// SetPercentComplete calls the underlying SetPercentComplete.
 func (x *Achievement) SetPercentComplete(percentComplete float64) {
-	x.inner.SetPercentComplete(percentComplete)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentComplete:"), percentComplete)
 }
 
 // Set to NO until percentComplete = 100.
-//
-// IsCompleted calls the underlying IsCompleted.
 func (x *Achievement) IsCompleted() bool {
-	return x.inner.IsCompleted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompleted"))
+	return _r
 }
 
 // Date the achievement was last reported. Read-only. Created at initialization
-//
-// LastReportedDate calls the underlying LastReportedDate.
-func (x *Achievement) LastReportedDate() *foundation.NSDate {
-	return x.inner.LastReportedDate()
+func (x *Achievement) LastReportedDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastReportedDate"))
+	return obj.Wrap(_r)
 }
 
 // A banner will be momentarily displayed after reporting a completed achievement
-//
-// ShowsCompletionBanner calls the underlying ShowsCompletionBanner.
 func (x *Achievement) ShowsCompletionBanner() bool {
-	return x.inner.ShowsCompletionBanner()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsCompletionBanner"))
+	return _r
 }
 
-// SetShowsCompletionBanner calls the underlying SetShowsCompletionBanner.
 func (x *Achievement) SetShowsCompletionBanner(showsCompletionBanner bool) {
-	x.inner.SetShowsCompletionBanner(showsCompletionBanner)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsCompletionBanner:"), showsCompletionBanner)
 }
 
 // The identifier of the player that earned the achievement.
-//
-// Player calls the underlying Player.
 func (x *Achievement) Player() *Player {
-	_r := x.inner.Player()
-	if _r == nil {
-		return nil
-	}
-	return &Player{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
+	return PlayerFromID(_r)
 }
 
 // ReportAchievement blocks until the operation completes or ctx is cancelled.
 func (x *Achievement) ReportAchievement(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.ReportAchievementWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reportAchievementWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -170,96 +179,77 @@ func (x *Achievement) ReportAchievement(ctx context.Context) error {
 	}
 }
 
-// IsHidden calls the underlying IsHidden.
 func (x *Achievement) IsHidden() bool {
-	return x.inner.IsHidden()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+	return _r
 }
 
-// PlayerID calls the underlying PlayerID.
 func (x *Achievement) PlayerID() string {
-	_r := x.inner.PlayerID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Finds the subset of players who can earn an achievement.
 //
 // SelectChallengeablePlayers blocks until the operation completes or ctx is cancelled.
-func (x *Achievement) SelectChallengeablePlayers(ctx context.Context, players *foundation.NSArray[*raw.GKPlayer]) (*foundation.NSArray[*raw.GKPlayer], error) {
+func (x *Achievement) SelectChallengeablePlayers(ctx context.Context, players []*Player) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.GKPlayer]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SelectChallengeablePlayersWithCompletionHandler(players, func(_p0 *foundation.NSArray[*raw.GKPlayer], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectChallengeablePlayers:withCompletionHandler:"), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.GKPlayer]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // * This method is obsolete. It will never be invoked and its implementation does nothing**
-//
-// IssueChallengeToPlayersMessage calls the underlying IssueChallengeToPlayersMessage.
-func (x *Achievement) IssueChallengeToPlayersMessage(playerIDs *foundation.NSArray[*foundation.NSString], message string) {
-	x.inner.IssueChallengeToPlayersMessage(playerIDs, foundation.NSStringStringWithUTF8String(message))
+func (x *Achievement) IssueChallengeToPlayersMessage(playerIDs []string, message string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issueChallengeToPlayers:message:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }), purego.NSString(message))
 }
 
 // * This method is obsolete. It will never be invoked and its implementation does nothing**
 //
 // SelectChallengeablePlayerIDs blocks until the operation completes or ctx is cancelled.
-func (x *Achievement) SelectChallengeablePlayerIDs(ctx context.Context, playerIDs *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*foundation.NSString], error) {
+func (x *Achievement) SelectChallengeablePlayerIDs(ctx context.Context, playerIDs []string) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*foundation.NSString]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SelectChallengeablePlayerIDsWithCompletionHandler(playerIDs, func(_p0 *foundation.NSArray[*foundation.NSString], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectChallengeablePlayerIDs:withCompletionHandler:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*foundation.NSString]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Provides a view controller that you present to the player to issue an achievement challenge.
-//
-// ChallengeComposeControllerWithMessagePlayersCompletionHandler calls the underlying ChallengeComposeControllerWithMessagePlayersCompletionHandler.
-func (x *Achievement) ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*foundation.NSString])) *appkit.NSViewController {
-	return x.inner.ChallengeComposeControllerWithMessagePlayersCompletionHandler(foundation.NSStringStringWithUTF8String(message), players, completionHandler)
-}
-
-// Provides a view controller that you present to the player to issue an achievement challenge.
-//
-// ChallengeComposeControllerWithMessagePlayersCompletion calls the underlying ChallengeComposeControllerWithMessagePlayersCompletion.
-func (x *Achievement) ChallengeComposeControllerWithMessagePlayersCompletion(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*raw.GKPlayer])) *appkit.NSViewController {
-	return x.inner.ChallengeComposeControllerWithMessagePlayersCompletion(foundation.NSStringStringWithUTF8String(message), players, completionHandler)
-}
-
 // Achievementable is the interface implemented by [Achievement], for mocking and DI.
 type Achievementable interface {
-	Unwrap() *raw.GKAchievement
+	obj.Object
 	WithIdentifier(identifier string) *Achievement
 	WithPercentComplete(percentComplete float64) *Achievement
 	WithShowsCompletionBanner(showsCompletionBanner bool) *Achievement
@@ -268,18 +258,16 @@ type Achievementable interface {
 	PercentComplete() float64
 	SetPercentComplete(percentComplete float64)
 	IsCompleted() bool
-	LastReportedDate() *foundation.NSDate
+	LastReportedDate() obj.Object
 	ShowsCompletionBanner() bool
 	SetShowsCompletionBanner(showsCompletionBanner bool)
 	Player() *Player
 	ReportAchievement(ctx context.Context) error
 	IsHidden() bool
 	PlayerID() string
-	SelectChallengeablePlayers(ctx context.Context, players *foundation.NSArray[*raw.GKPlayer]) (*foundation.NSArray[*raw.GKPlayer], error)
-	IssueChallengeToPlayersMessage(playerIDs *foundation.NSArray[*foundation.NSString], message string)
-	SelectChallengeablePlayerIDs(ctx context.Context, playerIDs *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*foundation.NSString], error)
-	ChallengeComposeControllerWithMessagePlayersCompletionHandler(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*foundation.NSString])) *appkit.NSViewController
-	ChallengeComposeControllerWithMessagePlayersCompletion(message string, players *foundation.NSArray[*raw.GKPlayer], completionHandler func(*appkit.NSViewController, bool, *foundation.NSArray[*raw.GKPlayer])) *appkit.NSViewController
+	SelectChallengeablePlayers(ctx context.Context, players []*Player) (obj.Object, error)
+	IssueChallengeToPlayersMessage(playerIDs []string, message string)
+	SelectChallengeablePlayerIDs(ctx context.Context, playerIDs []string) (obj.Object, error)
 }
 
 var _ Achievementable = (*Achievement)(nil)

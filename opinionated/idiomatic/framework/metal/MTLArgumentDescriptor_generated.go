@@ -5,179 +5,194 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A representation of an argument within an argument buffer.
 //
-// ArgumentDescriptor wraps [raw.MTLArgumentDescriptor] with a fluent Go API.
+// ArgumentDescriptor is an idiomatic wrapper over the Objective-C class MTLArgumentDescriptor.
 type ArgumentDescriptor struct {
-	inner *raw.MTLArgumentDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLArgumentDescriptor].
-func (x *ArgumentDescriptor) Unwrap() *raw.MTLArgumentDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArgumentDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// ArgumentDescriptorFromID adopts an existing object pointer as a ArgumentDescriptor (nil for 0).
+// ArgumentDescriptorFromID adopts an existing Objective-C object as a ArgumentDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func ArgumentDescriptorFromID(id objc.ID) *ArgumentDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &ArgumentDescriptor{inner: raw.MTLArgumentDescriptorFromID(id)}
+	x := &ArgumentDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewArgumentDescriptor creates a new [ArgumentDescriptor].
+// argumentDescriptorAdopt wraps an Objective-C object that this code just created as a
+// ArgumentDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func argumentDescriptorAdopt(id objc.ID) *ArgumentDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &ArgumentDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ArgumentDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ArgumentDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ArgumentDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewArgumentDescriptor creates a new ArgumentDescriptor.
 func NewArgumentDescriptor() *ArgumentDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLArgumentDescriptor")), objc.RegisterName("new"))
-	return &ArgumentDescriptor{inner: raw.MTLArgumentDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLArgumentDescriptor")), objc.RegisterName("new"))
+	return argumentDescriptorAdopt(_id)
 }
 
 // The data type of the argument.
 //
-// WithDataType sets the dataType property and returns the receiver for chaining.
-func (x *ArgumentDescriptor) WithDataType(dataType MTLDataType) *ArgumentDescriptor {
-	x.inner.SetDataType(raw.MTLDataType(dataType))
+// WithDataType sets dataType and returns the receiver so calls can be chained.
+func (x *ArgumentDescriptor) WithDataType(dataType DataType) *ArgumentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataType:"), dataType)
 	return x
 }
 
 // The index ID of the argument.
 //
-// WithIndex sets the index property and returns the receiver for chaining.
-func (x *ArgumentDescriptor) WithIndex(index uint) *ArgumentDescriptor {
-	x.inner.SetIndex(index)
+// WithIndex sets index and returns the receiver so calls can be chained.
+func (x *ArgumentDescriptor) WithIndex(index int) *ArgumentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), index)
 	return x
 }
 
 // The length of an array argument.
 //
-// WithArrayLength sets the arrayLength property and returns the receiver for chaining.
-func (x *ArgumentDescriptor) WithArrayLength(arrayLength uint) *ArgumentDescriptor {
-	x.inner.SetArrayLength(arrayLength)
+// WithArrayLength sets arrayLength and returns the receiver so calls can be chained.
+func (x *ArgumentDescriptor) WithArrayLength(arrayLength int) *ArgumentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArrayLength:"), arrayLength)
 	return x
 }
 
 // The access permissions of the argument.
 //
-// WithAccess sets the access property and returns the receiver for chaining.
-func (x *ArgumentDescriptor) WithAccess(access MTLBindingAccess) *ArgumentDescriptor {
-	x.inner.SetAccess(raw.MTLBindingAccess(access))
+// WithAccess sets access and returns the receiver so calls can be chained.
+func (x *ArgumentDescriptor) WithAccess(access BindingAccess) *ArgumentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccess:"), access)
 	return x
 }
 
 // The texture type of a texture argument.
 //
-// WithTextureType sets the textureType property and returns the receiver for chaining.
-func (x *ArgumentDescriptor) WithTextureType(textureType MTLTextureType) *ArgumentDescriptor {
-	x.inner.SetTextureType(raw.MTLTextureType(textureType))
+// WithTextureType sets textureType and returns the receiver so calls can be chained.
+func (x *ArgumentDescriptor) WithTextureType(textureType TextureType) *ArgumentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureType:"), textureType)
 	return x
 }
 
 // The alignment of the constant block.
 //
-// WithConstantBlockAlignment sets the constantBlockAlignment property and returns the receiver for chaining.
-func (x *ArgumentDescriptor) WithConstantBlockAlignment(constantBlockAlignment uint) *ArgumentDescriptor {
-	x.inner.SetConstantBlockAlignment(constantBlockAlignment)
+// WithConstantBlockAlignment sets constantBlockAlignment and returns the receiver so calls can be chained.
+func (x *ArgumentDescriptor) WithConstantBlockAlignment(constantBlockAlignment int) *ArgumentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantBlockAlignment:"), constantBlockAlignment)
 	return x
 }
 
-// @property dataType @abstract For constants, the data type. Otherwise, MTLDataTypeTexture, MTLDataTypeSampler, or MTLDataTypePointer.
-//
-// DataType calls the underlying DataType.
-func (x *ArgumentDescriptor) DataType() MTLDataType {
-	return MTLDataType(x.inner.DataType())
+// For constants, the data type. Otherwise, MTLDataTypeTexture, MTLDataTypeSampler, or MTLDataTypePointer.
+func (x *ArgumentDescriptor) DataType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("dataType"))
+	return _r
 }
 
-// SetDataType calls the underlying SetDataType.
-func (x *ArgumentDescriptor) SetDataType(dataType MTLDataType) {
-	x.inner.SetDataType(raw.MTLDataType(dataType))
+func (x *ArgumentDescriptor) SetDataType(dataType DataType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataType:"), dataType)
 }
 
-// @property index @abstract The binding point index of the argument
-//
-// Index calls the underlying Index.
-func (x *ArgumentDescriptor) Index() uint {
-	return x.inner.Index()
+// The binding point index of the argument
+func (x *ArgumentDescriptor) Index() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("index"))
+	return _r
 }
 
-// SetIndex calls the underlying SetIndex.
-func (x *ArgumentDescriptor) SetIndex(index uint) {
-	x.inner.SetIndex(index)
+func (x *ArgumentDescriptor) SetIndex(index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), index)
 }
 
-// @property arrayLength @abstract The length of an array of constants, textures, or samplers, or 0 for non-array arguments
-//
-// ArrayLength calls the underlying ArrayLength.
-func (x *ArgumentDescriptor) ArrayLength() uint {
-	return x.inner.ArrayLength()
+// The length of an array of constants, textures, or samplers, or 0 for non-array arguments
+func (x *ArgumentDescriptor) ArrayLength() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("arrayLength"))
+	return _r
 }
 
-// SetArrayLength calls the underlying SetArrayLength.
-func (x *ArgumentDescriptor) SetArrayLength(arrayLength uint) {
-	x.inner.SetArrayLength(arrayLength)
+func (x *ArgumentDescriptor) SetArrayLength(arrayLength int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArrayLength:"), arrayLength)
 }
 
-// @property access @abstract Access flags for the argument
-//
-// Access calls the underlying Access.
-func (x *ArgumentDescriptor) Access() MTLBindingAccess {
-	return MTLBindingAccess(x.inner.Access())
+// Access flags for the argument
+func (x *ArgumentDescriptor) Access() BindingAccess {
+	_r := objc.Send[BindingAccess](objref.IDOf(x), objc.RegisterName("access"))
+	return _r
 }
 
-// SetAccess calls the underlying SetAccess.
-func (x *ArgumentDescriptor) SetAccess(access MTLBindingAccess) {
-	x.inner.SetAccess(raw.MTLBindingAccess(access))
+func (x *ArgumentDescriptor) SetAccess(access BindingAccess) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccess:"), access)
 }
 
-// @property textureType @abstract For texture arguments, the texture type
-//
-// TextureType calls the underlying TextureType.
-func (x *ArgumentDescriptor) TextureType() MTLTextureType {
-	return MTLTextureType(x.inner.TextureType())
+// For texture arguments, the texture type
+func (x *ArgumentDescriptor) TextureType() TextureType {
+	_r := objc.Send[TextureType](objref.IDOf(x), objc.RegisterName("textureType"))
+	return _r
 }
 
-// SetTextureType calls the underlying SetTextureType.
-func (x *ArgumentDescriptor) SetTextureType(textureType MTLTextureType) {
-	x.inner.SetTextureType(raw.MTLTextureType(textureType))
+func (x *ArgumentDescriptor) SetTextureType(textureType TextureType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureType:"), textureType)
 }
 
-// @property constantBlockAlignment @abstract if set forces the constant block to be aligned to the given alignment @discussion Should only be set on the first constant of the block and is only valid if a corresponding explicit "alignas" is applied to the constant in the metal shader language.
-//
-// ConstantBlockAlignment calls the underlying ConstantBlockAlignment.
-func (x *ArgumentDescriptor) ConstantBlockAlignment() uint {
-	return x.inner.ConstantBlockAlignment()
+// if set forces the constant block to be aligned to the given alignment Should only be set on the first constant of the block and is only valid if a corresponding explicit "alignas" is applied to the constant in the metal shader language.
+func (x *ArgumentDescriptor) ConstantBlockAlignment() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("constantBlockAlignment"))
+	return _r
 }
 
-// SetConstantBlockAlignment calls the underlying SetConstantBlockAlignment.
-func (x *ArgumentDescriptor) SetConstantBlockAlignment(constantBlockAlignment uint) {
-	x.inner.SetConstantBlockAlignment(constantBlockAlignment)
+func (x *ArgumentDescriptor) SetConstantBlockAlignment(constantBlockAlignment int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantBlockAlignment:"), constantBlockAlignment)
 }
 
 // ArgumentDescriptorable is the interface implemented by [ArgumentDescriptor], for mocking and DI.
 type ArgumentDescriptorable interface {
-	Unwrap() *raw.MTLArgumentDescriptor
-	WithDataType(dataType MTLDataType) *ArgumentDescriptor
-	WithIndex(index uint) *ArgumentDescriptor
-	WithArrayLength(arrayLength uint) *ArgumentDescriptor
-	WithAccess(access MTLBindingAccess) *ArgumentDescriptor
-	WithTextureType(textureType MTLTextureType) *ArgumentDescriptor
-	WithConstantBlockAlignment(constantBlockAlignment uint) *ArgumentDescriptor
-	DataType() MTLDataType
-	SetDataType(dataType MTLDataType)
-	Index() uint
-	SetIndex(index uint)
-	ArrayLength() uint
-	SetArrayLength(arrayLength uint)
-	Access() MTLBindingAccess
-	SetAccess(access MTLBindingAccess)
-	TextureType() MTLTextureType
-	SetTextureType(textureType MTLTextureType)
-	ConstantBlockAlignment() uint
-	SetConstantBlockAlignment(constantBlockAlignment uint)
+	obj.Object
+	WithDataType(dataType DataType) *ArgumentDescriptor
+	WithIndex(index int) *ArgumentDescriptor
+	WithArrayLength(arrayLength int) *ArgumentDescriptor
+	WithAccess(access BindingAccess) *ArgumentDescriptor
+	WithTextureType(textureType TextureType) *ArgumentDescriptor
+	WithConstantBlockAlignment(constantBlockAlignment int) *ArgumentDescriptor
+	DataType() DataType
+	SetDataType(dataType DataType)
+	Index() int
+	SetIndex(index int)
+	ArrayLength() int
+	SetArrayLength(arrayLength int)
+	Access() BindingAccess
+	SetAccess(access BindingAccess)
+	TextureType() TextureType
+	SetTextureType(textureType TextureType)
+	ConstantBlockAlignment() int
+	SetConstantBlockAlignment(constantBlockAlignment int)
 }
 
 var _ ArgumentDescriptorable = (*ArgumentDescriptor)(nil)

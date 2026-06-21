@@ -5,49 +5,74 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A notification that triggers when the contents of a database change.
 //
-// DatabaseNotification wraps [raw.CKDatabaseNotification] with a fluent Go API.
+// DatabaseNotification is an idiomatic wrapper over the Objective-C class CKDatabaseNotification.
 type DatabaseNotification struct {
-	inner *raw.CKDatabaseNotification
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKDatabaseNotification].
-func (x *DatabaseNotification) Unwrap() *raw.CKDatabaseNotification { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DatabaseNotification) ID() objc.ID { return x.inner.Ptr() }
-
-// DatabaseNotificationFromID adopts an existing object pointer as a DatabaseNotification (nil for 0).
+// DatabaseNotificationFromID adopts an existing Objective-C object as a DatabaseNotification
+// (nil for 0), retaining it and registering a release finalizer.
 func DatabaseNotificationFromID(id objc.ID) *DatabaseNotification {
 	if id == 0 {
 		return nil
 	}
-	return &DatabaseNotification{inner: raw.CKDatabaseNotificationFromID(id)}
+	x := &DatabaseNotification{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDatabaseNotification creates a new [DatabaseNotification].
+// databaseNotificationAdopt wraps an Objective-C object that this code just created as a
+// DatabaseNotification (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func databaseNotificationAdopt(id objc.ID) *DatabaseNotification {
+	if id == 0 {
+		return nil
+	}
+	x := &DatabaseNotification{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DatabaseNotification) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DatabaseNotification) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DatabaseNotification) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDatabaseNotification creates a new DatabaseNotification.
 func NewDatabaseNotification() *DatabaseNotification {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKDatabaseNotification")), objc.RegisterName("new"))
-	return &DatabaseNotification{inner: raw.CKDatabaseNotificationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKDatabaseNotification")), objc.RegisterName("new"))
+	return databaseNotificationAdopt(_id)
 }
 
-// DatabaseScope calls the underlying DatabaseScope.
-func (x *DatabaseNotification) DatabaseScope() CKDatabaseScope {
-	return CKDatabaseScope(x.inner.DatabaseScope())
+func (x *DatabaseNotification) DatabaseScope() DatabaseScope {
+	_r := objc.Send[DatabaseScope](objref.IDOf(x), objc.RegisterName("databaseScope"))
+	return _r
 }
-
-func (x *DatabaseNotification) asNotification() *raw.CKNotification { return &x.inner.CKNotification }
 
 // DatabaseNotificationable is the interface implemented by [DatabaseNotification], for mocking and DI.
 type DatabaseNotificationable interface {
-	Unwrap() *raw.CKDatabaseNotification
-	DatabaseScope() CKDatabaseScope
+	obj.Object
+	DatabaseScope() DatabaseScope
 }
 
 var _ DatabaseNotificationable = (*DatabaseNotification)(nil)

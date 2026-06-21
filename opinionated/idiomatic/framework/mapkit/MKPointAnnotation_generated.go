@@ -5,93 +5,86 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A string-based piece of location-specific data that you apply to a specific point on a map.
 //
-// PointAnnotation wraps [raw.MKPointAnnotation] with a fluent Go API.
+// PointAnnotation is an idiomatic wrapper over the Objective-C class MKPointAnnotation.
 type PointAnnotation struct {
-	inner *raw.MKPointAnnotation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKPointAnnotation].
-func (x *PointAnnotation) Unwrap() *raw.MKPointAnnotation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PointAnnotation) ID() objc.ID { return x.inner.Ptr() }
-
-// PointAnnotationFromID adopts an existing object pointer as a PointAnnotation (nil for 0).
+// PointAnnotationFromID adopts an existing Objective-C object as a PointAnnotation
+// (nil for 0), retaining it and registering a release finalizer.
 func PointAnnotationFromID(id objc.ID) *PointAnnotation {
 	if id == 0 {
 		return nil
 	}
-	return &PointAnnotation{inner: raw.MKPointAnnotationFromID(id)}
+	x := &PointAnnotation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPointAnnotation creates a new [PointAnnotation].
+// pointAnnotationAdopt wraps an Objective-C object that this code just created as a
+// PointAnnotation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pointAnnotationAdopt(id objc.ID) *PointAnnotation {
+	if id == 0 {
+		return nil
+	}
+	x := &PointAnnotation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PointAnnotation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PointAnnotation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PointAnnotation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPointAnnotation creates a new PointAnnotation.
 func NewPointAnnotation() *PointAnnotation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPointAnnotation")), objc.RegisterName("new"))
-	return &PointAnnotation{inner: raw.MKPointAnnotationFromID(_id)}
-}
-
-// Creates a point annotation at the specified coordinate on the map.
-//
-// NewPointAnnotationWithCoordinate creates a new [PointAnnotation].
-func NewPointAnnotationWithCoordinate(coordinate unsafe.Pointer) *PointAnnotation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPointAnnotation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinate:"), coordinate)
-	return &PointAnnotation{inner: raw.MKPointAnnotationFromID(_id)}
-}
-
-// Creates a point annotation displaying a title and subtitle string at the specified coordinate on the map.
-//
-// NewPointAnnotationWithCoordinateTitleSubtitle creates a new [PointAnnotation].
-func NewPointAnnotationWithCoordinateTitleSubtitle(coordinate unsafe.Pointer, title string, subtitle string) *PointAnnotation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKPointAnnotation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinate:title:subtitle:"), coordinate, foundation.NSStringStringWithUTF8String(title).Ptr(), foundation.NSStringStringWithUTF8String(subtitle).Ptr())
-	return &PointAnnotation{inner: raw.MKPointAnnotationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKPointAnnotation")), objc.RegisterName("new"))
+	return pointAnnotationAdopt(_id)
 }
 
 // The title of the shape annotation.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *PointAnnotation) WithTitle(title string) *PointAnnotation {
-	x.inner.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // The subtitle of the shape annotation.
 //
-// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
 func (x *PointAnnotation) WithSubtitle(subtitle string) *PointAnnotation {
-	x.inner.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
-// Coordinate calls the underlying Coordinate.
-func (x *PointAnnotation) Coordinate() unsafe.Pointer {
-	return x.inner.Coordinate()
-}
-
-// SetCoordinate calls the underlying SetCoordinate.
-func (x *PointAnnotation) SetCoordinate(coordinate unsafe.Pointer) {
-	x.inner.SetCoordinate(coordinate)
-}
-
-func (x *PointAnnotation) asShape() *raw.MKShape { return &x.inner.MKShape }
-
 // PointAnnotationable is the interface implemented by [PointAnnotation], for mocking and DI.
 type PointAnnotationable interface {
-	Unwrap() *raw.MKPointAnnotation
+	obj.Object
 	WithTitle(title string) *PointAnnotation
 	WithSubtitle(subtitle string) *PointAnnotation
-	Coordinate() unsafe.Pointer
-	SetCoordinate(coordinate unsafe.Pointer)
 }
 
 var _ PointAnnotationable = (*PointAnnotation)(nil)

@@ -5,105 +5,132 @@
 package corehaptics
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corehaptics"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An object representing a haptic waveform.
 //
-// HapticPattern wraps [raw.CHHapticPattern] with a fluent Go API.
+// HapticPattern is an idiomatic wrapper over the Objective-C class CHHapticPattern.
 type HapticPattern struct {
-	inner *raw.CHHapticPattern
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CHHapticPattern].
-func (x *HapticPattern) Unwrap() *raw.CHHapticPattern { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HapticPattern) ID() objc.ID { return x.inner.Ptr() }
-
-// HapticPatternFromID adopts an existing object pointer as a HapticPattern (nil for 0).
+// HapticPatternFromID adopts an existing Objective-C object as a HapticPattern
+// (nil for 0), retaining it and registering a release finalizer.
 func HapticPatternFromID(id objc.ID) *HapticPattern {
 	if id == 0 {
 		return nil
 	}
-	return &HapticPattern{inner: raw.CHHapticPatternFromID(id)}
+	x := &HapticPattern{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// hapticPatternAdopt wraps an Objective-C object that this code just created as a
+// HapticPattern (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hapticPatternAdopt(id objc.ID) *HapticPattern {
+	if id == 0 {
+		return nil
+	}
+	x := &HapticPattern{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HapticPattern) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HapticPattern) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HapticPattern) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Constructs a haptic pattern from a series of events and parameters.
 //
-// NewHapticPatternWithEventsParametersError creates a new [HapticPattern].
-func NewHapticPatternWithEventsParametersError(events *foundation.NSArray[*raw.CHHapticEvent], parameters *foundation.NSArray[*raw.CHHapticDynamicParameter]) (*HapticPattern, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CHHapticPattern")), objc.RegisterName("alloc"))
+// NewHapticPatternWithEventsParametersError creates a new HapticPattern.
+func NewHapticPatternWithEventsParametersError(events []*HapticEvent, parameters []*HapticDynamicParameter) (*HapticPattern, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticPattern")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEvents:parameters:error:"), events.Ptr(), parameters.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEvents:parameters:error:"), purego.SliceToNSArray(events, func(_v *HapticEvent) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(parameters, func(_v *HapticDynamicParameter) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &HapticPattern{inner: raw.CHHapticPatternFromID(_id)}, nil
+	return hapticPatternAdopt(_id), nil
 }
 
 // Constructs a haptic pattern from a series of events and parameter curves.
 //
-// NewHapticPatternWithEventsParameterCurvesError creates a new [HapticPattern].
-func NewHapticPatternWithEventsParameterCurvesError(events *foundation.NSArray[*raw.CHHapticEvent], parameterCurves *foundation.NSArray[*raw.CHHapticParameterCurve]) (*HapticPattern, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CHHapticPattern")), objc.RegisterName("alloc"))
+// NewHapticPatternWithEventsParameterCurvesError creates a new HapticPattern.
+func NewHapticPatternWithEventsParameterCurvesError(events []*HapticEvent, parameterCurves []*HapticParameterCurve) (*HapticPattern, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticPattern")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEvents:parameterCurves:error:"), events.Ptr(), parameterCurves.Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEvents:parameterCurves:error:"), purego.SliceToNSArray(events, func(_v *HapticEvent) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(parameterCurves, func(_v *HapticParameterCurve) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &HapticPattern{inner: raw.CHHapticPatternFromID(_id)}, nil
+	return hapticPatternAdopt(_id), nil
 }
 
 // Creates a haptic pattern from a property list dictionary.
 //
-// NewHapticPatternWithDictionaryError creates a new [HapticPattern].
-func NewHapticPatternWithDictionaryError(patternDict purego.IDer) (*HapticPattern, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CHHapticPattern")), objc.RegisterName("alloc"))
+// NewHapticPatternWithDictionaryError creates a new HapticPattern.
+func NewHapticPatternWithDictionaryError(patternDict obj.Object) (*HapticPattern, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticPattern")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), patternDict.ID(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), objref.IDOf(patternDict), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &HapticPattern{inner: raw.CHHapticPatternFromID(_id)}, nil
+	return hapticPatternAdopt(_id), nil
 }
 
 // Creates a haptic pattern with the contents of an AHAP file.
 //
-// NewHapticPatternWithContentsOfURLError creates a new [HapticPattern].
+// NewHapticPatternWithContentsOfURLError creates a new HapticPattern.
 func NewHapticPatternWithContentsOfURLError(ahapURL string) (*HapticPattern, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CHHapticPattern")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CHHapticPattern")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(ahapURL)).Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:error:"), rt.FileURL(ahapURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &HapticPattern{inner: raw.CHHapticPatternFromID(_id)}, nil
+	return hapticPatternAdopt(_id), nil
 }
 
 // Returns the dictionary representation of the haptic pattern.
-//
-// ExportDictionaryAndReturnError calls the underlying ExportDictionaryAndReturnError.
-func (x *HapticPattern) ExportDictionaryAndReturnError() (*foundation.NSDictionary[*foundation.NSString, objc.ID], error) {
-	return x.inner.ExportDictionaryAndReturnError()
+func (x *HapticPattern) ExportDictionaryAndReturnError() (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exportDictionaryAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
-// @property duration Pattern duration is calculated as the start time of the pattern's last event or parameter, plus that event's duration if present.
-//
-// Duration calls the underlying Duration.
 func (x *HapticPattern) Duration() float64 {
-	return x.inner.Duration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+	return _r
 }
 
 // HapticPatternable is the interface implemented by [HapticPattern], for mocking and DI.
 type HapticPatternable interface {
-	Unwrap() *raw.CHHapticPattern
-	ExportDictionaryAndReturnError() (*foundation.NSDictionary[*foundation.NSString, objc.ID], error)
+	obj.Object
+	ExportDictionaryAndReturnError() (obj.Object, error)
 	Duration() float64
 }
 

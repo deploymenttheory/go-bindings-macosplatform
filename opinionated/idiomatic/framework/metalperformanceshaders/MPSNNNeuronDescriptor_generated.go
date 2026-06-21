@@ -5,138 +5,140 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that specifies properties used by a neuron kernel.
 //
-// NNNeuronDescriptor wraps [raw.MPSNNNeuronDescriptor] with a fluent Go API.
+// NNNeuronDescriptor is an idiomatic wrapper over the Objective-C class MPSNNNeuronDescriptor.
 type NNNeuronDescriptor struct {
-	inner *raw.MPSNNNeuronDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNNeuronDescriptor].
-func (x *NNNeuronDescriptor) Unwrap() *raw.MPSNNNeuronDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNNeuronDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// NNNeuronDescriptorFromID adopts an existing object pointer as a NNNeuronDescriptor (nil for 0).
+// NNNeuronDescriptorFromID adopts an existing Objective-C object as a NNNeuronDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func NNNeuronDescriptorFromID(id objc.ID) *NNNeuronDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &NNNeuronDescriptor{inner: raw.MPSNNNeuronDescriptorFromID(id)}
+	x := &NNNeuronDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNNNeuronDescriptor creates a new [NNNeuronDescriptor].
+// nNNeuronDescriptorAdopt wraps an Objective-C object that this code just created as a
+// NNNeuronDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNNeuronDescriptorAdopt(id objc.ID) *NNNeuronDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &NNNeuronDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NNNeuronDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNNeuronDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNNeuronDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNNNeuronDescriptor creates a new NNNeuronDescriptor.
 func NewNNNeuronDescriptor() *NNNeuronDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNNeuronDescriptor")), objc.RegisterName("new"))
-	return &NNNeuronDescriptor{inner: raw.MPSNNNeuronDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNNeuronDescriptor")), objc.RegisterName("new"))
+	return nNNeuronDescriptorAdopt(_id)
 }
 
-// WithNeuronType sets the neuronType property and returns the receiver for chaining.
-func (x *NNNeuronDescriptor) WithNeuronType(neuronType mpsneuralnetwork.MPSCNNNeuronType) *NNNeuronDescriptor {
-	x.inner.SetNeuronType(neuronType)
-	return x
-}
-
-// WithA sets the a property and returns the receiver for chaining.
+// WithA sets a and returns the receiver so calls can be chained.
 func (x *NNNeuronDescriptor) WithA(a float32) *NNNeuronDescriptor {
-	x.inner.SetA(a)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setA:"), a)
 	return x
 }
 
-// WithB sets the b property and returns the receiver for chaining.
+// WithB sets b and returns the receiver so calls can be chained.
 func (x *NNNeuronDescriptor) WithB(b float32) *NNNeuronDescriptor {
-	x.inner.SetB(b)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setB:"), b)
 	return x
 }
 
-// WithC sets the c property and returns the receiver for chaining.
+// WithC sets c and returns the receiver so calls can be chained.
 func (x *NNNeuronDescriptor) WithC(c float32) *NNNeuronDescriptor {
-	x.inner.SetC(c)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setC:"), c)
 	return x
 }
 
-// WithData sets the data property and returns the receiver for chaining.
-func (x *NNNeuronDescriptor) WithData(data *foundation.NSData) *NNNeuronDescriptor {
-	x.inner.SetData(data)
+// WithData sets data and returns the receiver so calls can be chained.
+func (x *NNNeuronDescriptor) WithData(data obj.Object) *NNNeuronDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 	return x
 }
 
-// NeuronType calls the underlying NeuronType.
-func (x *NNNeuronDescriptor) NeuronType() mpsneuralnetwork.MPSCNNNeuronType {
-	return x.inner.NeuronType()
-}
-
-// SetNeuronType calls the underlying SetNeuronType.
-func (x *NNNeuronDescriptor) SetNeuronType(neuronType mpsneuralnetwork.MPSCNNNeuronType) {
-	x.inner.SetNeuronType(neuronType)
-}
-
-// A calls the underlying A.
 func (x *NNNeuronDescriptor) A() float32 {
-	return x.inner.A()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("a"))
+	return _r
 }
 
-// SetA calls the underlying SetA.
 func (x *NNNeuronDescriptor) SetA(a float32) {
-	x.inner.SetA(a)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setA:"), a)
 }
 
-// B calls the underlying B.
 func (x *NNNeuronDescriptor) B() float32 {
-	return x.inner.B()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("b"))
+	return _r
 }
 
-// SetB calls the underlying SetB.
 func (x *NNNeuronDescriptor) SetB(b float32) {
-	x.inner.SetB(b)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setB:"), b)
 }
 
-// C calls the underlying C.
 func (x *NNNeuronDescriptor) C() float32 {
-	return x.inner.C()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("c"))
+	return _r
 }
 
-// SetC calls the underlying SetC.
 func (x *NNNeuronDescriptor) SetC(c float32) {
-	x.inner.SetC(c)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setC:"), c)
 }
 
-// Data calls the underlying Data.
-func (x *NNNeuronDescriptor) Data() *foundation.NSData {
-	return x.inner.Data()
+func (x *NNNeuronDescriptor) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
 
-// SetData calls the underlying SetData.
-func (x *NNNeuronDescriptor) SetData(data *foundation.NSData) {
-	x.inner.SetData(data)
+func (x *NNNeuronDescriptor) SetData(data obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 }
 
 // NNNeuronDescriptorable is the interface implemented by [NNNeuronDescriptor], for mocking and DI.
 type NNNeuronDescriptorable interface {
-	Unwrap() *raw.MPSNNNeuronDescriptor
-	WithNeuronType(neuronType mpsneuralnetwork.MPSCNNNeuronType) *NNNeuronDescriptor
+	obj.Object
 	WithA(a float32) *NNNeuronDescriptor
 	WithB(b float32) *NNNeuronDescriptor
 	WithC(c float32) *NNNeuronDescriptor
-	WithData(data *foundation.NSData) *NNNeuronDescriptor
-	NeuronType() mpsneuralnetwork.MPSCNNNeuronType
-	SetNeuronType(neuronType mpsneuralnetwork.MPSCNNNeuronType)
+	WithData(data obj.Object) *NNNeuronDescriptor
 	A() float32
 	SetA(a float32)
 	B() float32
 	SetB(b float32)
 	C() float32
 	SetC(c float32)
-	Data() *foundation.NSData
-	SetData(data *foundation.NSData)
+	Data() obj.Object
+	SetData(data obj.Object)
 }
 
 var _ NNNeuronDescriptorable = (*NNNeuronDescriptor)(nil)

@@ -5,55 +5,78 @@
 package fskit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A resource that represents an abstract URL.
 //
-// GenericURLResource wraps [raw.FSGenericURLResource] with a fluent Go API.
+// GenericURLResource is an idiomatic wrapper over the Objective-C class FSGenericURLResource.
 type GenericURLResource struct {
-	inner *raw.FSGenericURLResource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSGenericURLResource].
-func (x *GenericURLResource) Unwrap() *raw.FSGenericURLResource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GenericURLResource) ID() objc.ID { return x.inner.Ptr() }
-
-// GenericURLResourceFromID adopts an existing object pointer as a GenericURLResource (nil for 0).
+// GenericURLResourceFromID adopts an existing Objective-C object as a GenericURLResource
+// (nil for 0), retaining it and registering a release finalizer.
 func GenericURLResourceFromID(id objc.ID) *GenericURLResource {
 	if id == 0 {
 		return nil
 	}
-	return &GenericURLResource{inner: raw.FSGenericURLResourceFromID(id)}
+	x := &GenericURLResource{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// genericURLResourceAdopt wraps an Objective-C object that this code just created as a
+// GenericURLResource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func genericURLResourceAdopt(id objc.ID) *GenericURLResource {
+	if id == 0 {
+		return nil
+	}
+	x := &GenericURLResource{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GenericURLResource) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GenericURLResource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GenericURLResource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a generic URL resource with the given URL.
 //
-// NewGenericURLResourceWithURL creates a new [GenericURLResource].
+// NewGenericURLResourceWithURL creates a new GenericURLResource.
 func NewGenericURLResourceWithURL(url string) *GenericURLResource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSGenericURLResource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr())
-	return &GenericURLResource{inner: raw.FSGenericURLResourceFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("FSGenericURLResource")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
+	return genericURLResourceAdopt(_id)
 }
 
 // The URL represented by the resource.
-//
-// Url calls the underlying Url.
-func (x *GenericURLResource) Url() *foundation.NSURL {
-	return x.inner.Url()
+func (x *GenericURLResource) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
 }
-
-func (x *GenericURLResource) asResource() *raw.FSResource { return &x.inner.FSResource }
 
 // GenericURLResourceable is the interface implemented by [GenericURLResource], for mocking and DI.
 type GenericURLResourceable interface {
-	Unwrap() *raw.FSGenericURLResource
-	Url() *foundation.NSURL
+	obj.Object
+	Url() obj.Object
 }
 
 var _ GenericURLResourceable = (*GenericURLResource)(nil)

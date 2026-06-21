@@ -5,103 +5,120 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRContentLauncherClusterDimensionStruct wraps [raw.MTRContentLauncherClusterDimensionStruct] with a fluent Go API.
+// MTRContentLauncherClusterDimensionStruct is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterDimensionStruct.
 type MTRContentLauncherClusterDimensionStruct struct {
-	inner *raw.MTRContentLauncherClusterDimensionStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRContentLauncherClusterDimensionStruct].
-func (x *MTRContentLauncherClusterDimensionStruct) Unwrap() *raw.MTRContentLauncherClusterDimensionStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRContentLauncherClusterDimensionStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRContentLauncherClusterDimensionStructFromID adopts an existing object pointer as a MTRContentLauncherClusterDimensionStruct (nil for 0).
+// MTRContentLauncherClusterDimensionStructFromID adopts an existing Objective-C object as a MTRContentLauncherClusterDimensionStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRContentLauncherClusterDimensionStructFromID(id objc.ID) *MTRContentLauncherClusterDimensionStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRContentLauncherClusterDimensionStruct{inner: raw.MTRContentLauncherClusterDimensionStructFromID(id)}
+	x := &MTRContentLauncherClusterDimensionStruct{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRContentLauncherClusterDimensionStruct creates a new [MTRContentLauncherClusterDimensionStruct].
+// mTRContentLauncherClusterDimensionStructAdopt wraps an Objective-C object that this code just created as a
+// MTRContentLauncherClusterDimensionStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRContentLauncherClusterDimensionStructAdopt(id objc.ID) *MTRContentLauncherClusterDimensionStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRContentLauncherClusterDimensionStruct{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRContentLauncherClusterDimensionStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRContentLauncherClusterDimensionStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRContentLauncherClusterDimensionStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRContentLauncherClusterDimensionStruct creates a new MTRContentLauncherClusterDimensionStruct.
 func NewMTRContentLauncherClusterDimensionStruct() *MTRContentLauncherClusterDimensionStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRContentLauncherClusterDimensionStruct")), objc.RegisterName("new"))
-	return &MTRContentLauncherClusterDimensionStruct{inner: raw.MTRContentLauncherClusterDimensionStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRContentLauncherClusterDimensionStruct")), objc.RegisterName("new"))
+	return mTRContentLauncherClusterDimensionStructAdopt(_id)
 }
 
-// WithWidth sets the width property and returns the receiver for chaining.
-func (x *MTRContentLauncherClusterDimensionStruct) WithWidth(width *foundation.NSNumber) *MTRContentLauncherClusterDimensionStruct {
-	x.inner.SetWidth(width)
+// WithWidth sets width and returns the receiver so calls can be chained.
+func (x *MTRContentLauncherClusterDimensionStruct) WithWidth(width obj.Object) *MTRContentLauncherClusterDimensionStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), objref.IDOf(width))
 	return x
 }
 
-// WithHeight sets the height property and returns the receiver for chaining.
-func (x *MTRContentLauncherClusterDimensionStruct) WithHeight(height *foundation.NSNumber) *MTRContentLauncherClusterDimensionStruct {
-	x.inner.SetHeight(height)
+// WithHeight sets height and returns the receiver so calls can be chained.
+func (x *MTRContentLauncherClusterDimensionStruct) WithHeight(height obj.Object) *MTRContentLauncherClusterDimensionStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), objref.IDOf(height))
 	return x
 }
 
-// WithMetric sets the metric property and returns the receiver for chaining.
-func (x *MTRContentLauncherClusterDimensionStruct) WithMetric(metric *foundation.NSNumber) *MTRContentLauncherClusterDimensionStruct {
-	x.inner.SetMetric(metric)
+// WithMetric sets metric and returns the receiver so calls can be chained.
+func (x *MTRContentLauncherClusterDimensionStruct) WithMetric(metric obj.Object) *MTRContentLauncherClusterDimensionStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetric:"), objref.IDOf(metric))
 	return x
 }
 
-// Width calls the underlying Width.
-func (x *MTRContentLauncherClusterDimensionStruct) Width() *foundation.NSNumber {
-	return x.inner.Width()
+func (x *MTRContentLauncherClusterDimensionStruct) Width() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("width"))
+	return obj.Wrap(_r)
 }
 
-// SetWidth calls the underlying SetWidth.
-func (x *MTRContentLauncherClusterDimensionStruct) SetWidth(width *foundation.NSNumber) {
-	x.inner.SetWidth(width)
+func (x *MTRContentLauncherClusterDimensionStruct) SetWidth(width obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), objref.IDOf(width))
 }
 
-// Height calls the underlying Height.
-func (x *MTRContentLauncherClusterDimensionStruct) Height() *foundation.NSNumber {
-	return x.inner.Height()
+func (x *MTRContentLauncherClusterDimensionStruct) Height() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("height"))
+	return obj.Wrap(_r)
 }
 
-// SetHeight calls the underlying SetHeight.
-func (x *MTRContentLauncherClusterDimensionStruct) SetHeight(height *foundation.NSNumber) {
-	x.inner.SetHeight(height)
+func (x *MTRContentLauncherClusterDimensionStruct) SetHeight(height obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), objref.IDOf(height))
 }
 
-// Metric calls the underlying Metric.
-func (x *MTRContentLauncherClusterDimensionStruct) Metric() *foundation.NSNumber {
-	return x.inner.Metric()
+func (x *MTRContentLauncherClusterDimensionStruct) Metric() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metric"))
+	return obj.Wrap(_r)
 }
 
-// SetMetric calls the underlying SetMetric.
-func (x *MTRContentLauncherClusterDimensionStruct) SetMetric(metric *foundation.NSNumber) {
-	x.inner.SetMetric(metric)
-}
-
-func (x *MTRContentLauncherClusterDimensionStruct) asMTRContentLauncherClusterDimensionStruct() *raw.MTRContentLauncherClusterDimensionStruct {
-	return x.inner
+func (x *MTRContentLauncherClusterDimensionStruct) SetMetric(metric obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMetric:"), objref.IDOf(metric))
 }
 
 // MTRContentLauncherClusterDimensionStructable is the interface implemented by [MTRContentLauncherClusterDimensionStruct], for mocking and DI.
 type MTRContentLauncherClusterDimensionStructable interface {
-	Unwrap() *raw.MTRContentLauncherClusterDimensionStruct
-	WithWidth(width *foundation.NSNumber) *MTRContentLauncherClusterDimensionStruct
-	WithHeight(height *foundation.NSNumber) *MTRContentLauncherClusterDimensionStruct
-	WithMetric(metric *foundation.NSNumber) *MTRContentLauncherClusterDimensionStruct
-	Width() *foundation.NSNumber
-	SetWidth(width *foundation.NSNumber)
-	Height() *foundation.NSNumber
-	SetHeight(height *foundation.NSNumber)
-	Metric() *foundation.NSNumber
-	SetMetric(metric *foundation.NSNumber)
+	obj.Object
+	WithWidth(width obj.Object) *MTRContentLauncherClusterDimensionStruct
+	WithHeight(height obj.Object) *MTRContentLauncherClusterDimensionStruct
+	WithMetric(metric obj.Object) *MTRContentLauncherClusterDimensionStruct
+	Width() obj.Object
+	SetWidth(width obj.Object)
+	Height() obj.Object
+	SetHeight(height obj.Object)
+	Metric() obj.Object
+	SetMetric(metric obj.Object)
 }
 
 var _ MTRContentLauncherClusterDimensionStructable = (*MTRContentLauncherClusterDimensionStruct)(nil)

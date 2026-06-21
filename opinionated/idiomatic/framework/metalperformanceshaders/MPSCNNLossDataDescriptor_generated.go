@@ -5,105 +5,110 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that specifies properties used by a loss data descriptor.
 //
-// CNNLossDataDescriptor wraps [raw.MPSCNNLossDataDescriptor] with a fluent Go API.
+// CNNLossDataDescriptor is an idiomatic wrapper over the Objective-C class MPSCNNLossDataDescriptor.
 type CNNLossDataDescriptor struct {
-	inner *raw.MPSCNNLossDataDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNLossDataDescriptor].
-func (x *CNNLossDataDescriptor) Unwrap() *raw.MPSCNNLossDataDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNLossDataDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNLossDataDescriptorFromID adopts an existing object pointer as a CNNLossDataDescriptor (nil for 0).
+// CNNLossDataDescriptorFromID adopts an existing Objective-C object as a CNNLossDataDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNLossDataDescriptorFromID(id objc.ID) *CNNLossDataDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &CNNLossDataDescriptor{inner: raw.MPSCNNLossDataDescriptorFromID(id)}
+	x := &CNNLossDataDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCNNLossDataDescriptor creates a new [CNNLossDataDescriptor].
+// cNNLossDataDescriptorAdopt wraps an Objective-C object that this code just created as a
+// CNNLossDataDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNLossDataDescriptorAdopt(id objc.ID) *CNNLossDataDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNLossDataDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CNNLossDataDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNLossDataDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNLossDataDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNLossDataDescriptor creates a new CNNLossDataDescriptor.
 func NewCNNLossDataDescriptor() *CNNLossDataDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNLossDataDescriptor")), objc.RegisterName("new"))
-	return &CNNLossDataDescriptor{inner: raw.MPSCNNLossDataDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNLossDataDescriptor")), objc.RegisterName("new"))
+	return cNNLossDataDescriptorAdopt(_id)
 }
 
-// @property   bytesPerRow @abstract   Row bytes of loss data. @discussion This parameter specifies the row bytes of loss data.
+// Row bytes of loss data. This parameter specifies the row bytes of loss data.
 //
-// WithBytesPerRow sets the bytesPerRow property and returns the receiver for chaining.
-func (x *CNNLossDataDescriptor) WithBytesPerRow(bytesPerRow uint) *CNNLossDataDescriptor {
-	x.inner.SetBytesPerRow(bytesPerRow)
+// WithBytesPerRow sets bytesPerRow and returns the receiver so calls can be chained.
+func (x *CNNLossDataDescriptor) WithBytesPerRow(bytesPerRow int) *CNNLossDataDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBytesPerRow:"), bytesPerRow)
 	return x
 }
 
-// @property   bytesPerImage @abstract   Slice bytes of loss data. @discussion This parameter specifies the slice bytes of loss data.
+// Slice bytes of loss data. This parameter specifies the slice bytes of loss data.
 //
-// WithBytesPerImage sets the bytesPerImage property and returns the receiver for chaining.
-func (x *CNNLossDataDescriptor) WithBytesPerImage(bytesPerImage uint) *CNNLossDataDescriptor {
-	x.inner.SetBytesPerImage(bytesPerImage)
+// WithBytesPerImage sets bytesPerImage and returns the receiver so calls can be chained.
+func (x *CNNLossDataDescriptor) WithBytesPerImage(bytesPerImage int) *CNNLossDataDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBytesPerImage:"), bytesPerImage)
 	return x
 }
 
-// @property   layout @abstract   Data layout of loss data. See MPSImage.h for more information. @discussion This parameter specifies the layout of loss data.
-//
-// Layout calls the underlying Layout.
-func (x *CNNLossDataDescriptor) Layout() mpscore.MPSDataLayout {
-	return x.inner.Layout()
+// Row bytes of loss data. This parameter specifies the row bytes of loss data.
+func (x *CNNLossDataDescriptor) BytesPerRow() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesPerRow"))
+	return _r
 }
 
-// @property   size @abstract   Size of loss data: (width, height, feature channels}. @discussion This parameter specifies the size of loss data.
-//
-// Size calls the underlying Size.
-func (x *CNNLossDataDescriptor) Size() metal.MTLSize {
-	return x.inner.Size()
+func (x *CNNLossDataDescriptor) SetBytesPerRow(bytesPerRow int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBytesPerRow:"), bytesPerRow)
 }
 
-// @property   bytesPerRow @abstract   Row bytes of loss data. @discussion This parameter specifies the row bytes of loss data.
-//
-// BytesPerRow calls the underlying BytesPerRow.
-func (x *CNNLossDataDescriptor) BytesPerRow() uint {
-	return x.inner.BytesPerRow()
+// Slice bytes of loss data. This parameter specifies the slice bytes of loss data.
+func (x *CNNLossDataDescriptor) BytesPerImage() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesPerImage"))
+	return _r
 }
 
-// SetBytesPerRow calls the underlying SetBytesPerRow.
-func (x *CNNLossDataDescriptor) SetBytesPerRow(bytesPerRow uint) {
-	x.inner.SetBytesPerRow(bytesPerRow)
-}
-
-// @property   bytesPerImage @abstract   Slice bytes of loss data. @discussion This parameter specifies the slice bytes of loss data.
-//
-// BytesPerImage calls the underlying BytesPerImage.
-func (x *CNNLossDataDescriptor) BytesPerImage() uint {
-	return x.inner.BytesPerImage()
-}
-
-// SetBytesPerImage calls the underlying SetBytesPerImage.
-func (x *CNNLossDataDescriptor) SetBytesPerImage(bytesPerImage uint) {
-	x.inner.SetBytesPerImage(bytesPerImage)
+func (x *CNNLossDataDescriptor) SetBytesPerImage(bytesPerImage int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBytesPerImage:"), bytesPerImage)
 }
 
 // CNNLossDataDescriptorable is the interface implemented by [CNNLossDataDescriptor], for mocking and DI.
 type CNNLossDataDescriptorable interface {
-	Unwrap() *raw.MPSCNNLossDataDescriptor
-	WithBytesPerRow(bytesPerRow uint) *CNNLossDataDescriptor
-	WithBytesPerImage(bytesPerImage uint) *CNNLossDataDescriptor
-	Layout() mpscore.MPSDataLayout
-	Size() metal.MTLSize
-	BytesPerRow() uint
-	SetBytesPerRow(bytesPerRow uint)
-	BytesPerImage() uint
-	SetBytesPerImage(bytesPerImage uint)
+	obj.Object
+	WithBytesPerRow(bytesPerRow int) *CNNLossDataDescriptor
+	WithBytesPerImage(bytesPerImage int) *CNNLossDataDescriptor
+	BytesPerRow() int
+	SetBytesPerRow(bytesPerRow int)
+	BytesPerImage() int
+	SetBytesPerImage(bytesPerImage int)
 }
 
 var _ CNNLossDataDescriptorable = (*CNNLossDataDescriptor)(nil)

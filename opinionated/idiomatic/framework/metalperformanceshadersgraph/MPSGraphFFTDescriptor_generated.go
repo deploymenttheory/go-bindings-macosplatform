@@ -5,110 +5,129 @@
 package metalperformanceshadersgraph
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The class that defines the parameters for a fast Fourier transform (FFT) operation.
 //
-// GraphFFTDescriptor wraps [raw.MPSGraphFFTDescriptor] with a fluent Go API.
+// GraphFFTDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphFFTDescriptor.
 type GraphFFTDescriptor struct {
-	inner *raw.MPSGraphFFTDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSGraphFFTDescriptor].
-func (x *GraphFFTDescriptor) Unwrap() *raw.MPSGraphFFTDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphFFTDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphFFTDescriptorFromID adopts an existing object pointer as a GraphFFTDescriptor (nil for 0).
+// GraphFFTDescriptorFromID adopts an existing Objective-C object as a GraphFFTDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphFFTDescriptorFromID(id objc.ID) *GraphFFTDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &GraphFFTDescriptor{inner: raw.MPSGraphFFTDescriptorFromID(id)}
+	x := &GraphFFTDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGraphFFTDescriptor creates a new [GraphFFTDescriptor].
+// graphFFTDescriptorAdopt wraps an Objective-C object that this code just created as a
+// GraphFFTDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphFFTDescriptorAdopt(id objc.ID) *GraphFFTDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphFFTDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GraphFFTDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GraphFFTDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GraphFFTDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGraphFFTDescriptor creates a new GraphFFTDescriptor.
 func NewGraphFFTDescriptor() *GraphFFTDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphFFTDescriptor")), objc.RegisterName("new"))
-	return &GraphFFTDescriptor{inner: raw.MPSGraphFFTDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphFFTDescriptor")), objc.RegisterName("new"))
+	return graphFFTDescriptorAdopt(_id)
 }
 
 // A Boolean-valued parameter that defines the phase factor sign for Fourier transforms.
 //
-// WithInverse sets the inverse property and returns the receiver for chaining.
+// WithInverse sets inverse and returns the receiver so calls can be chained.
 func (x *GraphFFTDescriptor) WithInverse(inverse bool) *GraphFFTDescriptor {
-	x.inner.SetInverse(inverse)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInverse:"), inverse)
 	return x
 }
 
 // The scaling mode of the fast fourier transform (FFT) operation.
 //
-// WithScalingMode sets the scalingMode property and returns the receiver for chaining.
-func (x *GraphFFTDescriptor) WithScalingMode(scalingMode MPSGraphFFTScalingMode) *GraphFFTDescriptor {
-	x.inner.SetScalingMode(raw.MPSGraphFFTScalingMode(scalingMode))
+// WithScalingMode sets scalingMode and returns the receiver so calls can be chained.
+func (x *GraphFFTDescriptor) WithScalingMode(scalingMode GraphFFTScalingMode) *GraphFFTDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScalingMode:"), scalingMode)
 	return x
 }
 
 // A parameter which controls how graph rounds the output tensor size for a Hermitean-to-real Fourier transform.
 //
-// WithRoundToOddHermitean sets the roundToOddHermitean property and returns the receiver for chaining.
+// WithRoundToOddHermitean sets roundToOddHermitean and returns the receiver so calls can be chained.
 func (x *GraphFFTDescriptor) WithRoundToOddHermitean(roundToOddHermitean bool) *GraphFFTDescriptor {
-	x.inner.SetRoundToOddHermitean(roundToOddHermitean)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoundToOddHermitean:"), roundToOddHermitean)
 	return x
 }
 
 // A Boolean-valued parameter that defines the phase factor sign for Fourier transforms. When set to `YES` graph uses the positive phase factor: `exp(+i 2Pi mu nu / n)`, when computing the (inverse) Fourier transform. Otherwise MPSGraph uses the negative phase factor: `exp(-i 2Pi mu nu / n)`, when computing the Fourier transform. Default value: `NO`.
-//
-// Inverse calls the underlying Inverse.
 func (x *GraphFFTDescriptor) Inverse() bool {
-	return x.inner.Inverse()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("inverse"))
+	return _r
 }
 
-// SetInverse calls the underlying SetInverse.
 func (x *GraphFFTDescriptor) SetInverse(inverse bool) {
-	x.inner.SetInverse(inverse)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInverse:"), inverse)
 }
 
 // The scaling mode of the fast fourier transform (FFT) operation. Note that the scaling mode is independent from the phase factor. Default value: `MPSGraphFFTScalingModeNone`.
-//
-// ScalingMode calls the underlying ScalingMode.
-func (x *GraphFFTDescriptor) ScalingMode() MPSGraphFFTScalingMode {
-	return MPSGraphFFTScalingMode(x.inner.ScalingMode())
+func (x *GraphFFTDescriptor) ScalingMode() GraphFFTScalingMode {
+	_r := objc.Send[GraphFFTScalingMode](objref.IDOf(x), objc.RegisterName("scalingMode"))
+	return _r
 }
 
-// SetScalingMode calls the underlying SetScalingMode.
-func (x *GraphFFTDescriptor) SetScalingMode(scalingMode MPSGraphFFTScalingMode) {
-	x.inner.SetScalingMode(raw.MPSGraphFFTScalingMode(scalingMode))
+func (x *GraphFFTDescriptor) SetScalingMode(scalingMode GraphFFTScalingMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScalingMode:"), scalingMode)
 }
 
 // A parameter which controls how graph rounds the output tensor size for a Hermitean-to-real Fourier transform. If set to `YES` then MPSGraph rounds the last output dimension of the result tensor in “MPSGraph/HermiteanToRealFFTWithTensor:axesTensor:descriptor:name:“ to an odd value. Has no effect in the other Fourier transform operations. Default value: `NO`.
-//
-// RoundToOddHermitean calls the underlying RoundToOddHermitean.
 func (x *GraphFFTDescriptor) RoundToOddHermitean() bool {
-	return x.inner.RoundToOddHermitean()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("roundToOddHermitean"))
+	return _r
 }
 
-// SetRoundToOddHermitean calls the underlying SetRoundToOddHermitean.
 func (x *GraphFFTDescriptor) SetRoundToOddHermitean(roundToOddHermitean bool) {
-	x.inner.SetRoundToOddHermitean(roundToOddHermitean)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRoundToOddHermitean:"), roundToOddHermitean)
 }
-
-func (x *GraphFFTDescriptor) asGraphObject() *raw.MPSGraphObject { return &x.inner.MPSGraphObject }
 
 // GraphFFTDescriptorable is the interface implemented by [GraphFFTDescriptor], for mocking and DI.
 type GraphFFTDescriptorable interface {
-	Unwrap() *raw.MPSGraphFFTDescriptor
+	obj.Object
 	WithInverse(inverse bool) *GraphFFTDescriptor
-	WithScalingMode(scalingMode MPSGraphFFTScalingMode) *GraphFFTDescriptor
+	WithScalingMode(scalingMode GraphFFTScalingMode) *GraphFFTDescriptor
 	WithRoundToOddHermitean(roundToOddHermitean bool) *GraphFFTDescriptor
 	Inverse() bool
 	SetInverse(inverse bool)
-	ScalingMode() MPSGraphFFTScalingMode
-	SetScalingMode(scalingMode MPSGraphFFTScalingMode)
+	ScalingMode() GraphFFTScalingMode
+	SetScalingMode(scalingMode GraphFFTScalingMode)
 	RoundToOddHermitean() bool
 	SetRoundToOddHermitean(roundToOddHermitean bool)
 }

@@ -5,10 +5,10 @@
 package discrecording
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// FSObjectProvider is implemented by FSObject and any idiomatic type wrapping a DRFSObject subclass.
+// FSObjectProvider is accepted wherever a DRFSObject (or one of its subclasses) is expected.
 type FSObjectProvider interface {
-	asFSObject() *raw.DRFSObject
+	objref.Object
 }

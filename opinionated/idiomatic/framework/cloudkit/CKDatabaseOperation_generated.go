@@ -5,131 +5,149 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The abstract base class for operations that act upon databases in CloudKit.
 //
-// DatabaseOperation wraps [raw.CKDatabaseOperation] with a fluent Go API.
+// DatabaseOperation is an idiomatic wrapper over the Objective-C class CKDatabaseOperation.
 type DatabaseOperation struct {
-	inner *raw.CKDatabaseOperation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKDatabaseOperation].
-func (x *DatabaseOperation) Unwrap() *raw.CKDatabaseOperation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DatabaseOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// DatabaseOperationFromID adopts an existing object pointer as a DatabaseOperation (nil for 0).
+// DatabaseOperationFromID adopts an existing Objective-C object as a DatabaseOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func DatabaseOperationFromID(id objc.ID) *DatabaseOperation {
 	if id == 0 {
 		return nil
 	}
-	return &DatabaseOperation{inner: raw.CKDatabaseOperationFromID(id)}
+	x := &DatabaseOperation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDatabaseOperation creates a new [DatabaseOperation].
+// databaseOperationAdopt wraps an Objective-C object that this code just created as a
+// DatabaseOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func databaseOperationAdopt(id objc.ID) *DatabaseOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &DatabaseOperation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DatabaseOperation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DatabaseOperation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DatabaseOperation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDatabaseOperation creates a new DatabaseOperation.
 func NewDatabaseOperation() *DatabaseOperation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKDatabaseOperation")), objc.RegisterName("new"))
-	return &DatabaseOperation{inner: raw.CKDatabaseOperationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKDatabaseOperation")), objc.RegisterName("new"))
+	return databaseOperationAdopt(_id)
 }
 
 // The database that the operation uses.
 //
-// WithDatabase sets the database property and returns the receiver for chaining.
+// WithDatabase sets database and returns the receiver so calls can be chained.
 func (x *DatabaseOperation) WithDatabase(database *Database) *DatabaseOperation {
-	x.inner.SetDatabase(database.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return x
 }
 
 // The operation’s configuration.
 //
-// WithConfiguration sets the configuration property and returns the receiver for chaining.
+// WithConfiguration sets configuration and returns the receiver so calls can be chained.
 func (x *DatabaseOperation) WithConfiguration(configuration *OperationConfiguration) *DatabaseOperation {
-	x.inner.CKOperation.SetConfiguration(configuration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
 // The operation’s group.
 //
-// WithGroup sets the group property and returns the receiver for chaining.
+// WithGroup sets group and returns the receiver so calls can be chained.
 func (x *DatabaseOperation) WithGroup(group *OperationGroup) *DatabaseOperation {
-	x.inner.CKOperation.SetGroup(group.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
 // The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
-// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
 func (x *DatabaseOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DatabaseOperation {
-	x.inner.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+// The operation's container.
 //
-// WithContainer sets the container property and returns the receiver for chaining.
+// WithContainer sets container and returns the receiver so calls can be chained.
 func (x *DatabaseOperation) WithContainer(container *Container) *DatabaseOperation {
-	x.inner.CKOperation.SetContainer(container.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+// A Boolean value that indicates whether the operation can send data over the cellular network.
 //
-// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
 func (x *DatabaseOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *DatabaseOperation {
-	x.inner.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
 // A Boolean value that indicates whether the operation is long-lived.
 //
-// WithLongLived sets the longLived property and returns the receiver for chaining.
+// WithLongLived sets longLived and returns the receiver so calls can be chained.
 func (x *DatabaseOperation) WithLongLived(longLived bool) *DatabaseOperation {
-	x.inner.CKOperation.SetLongLived(longLived)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+// The timeout interval when waiting for additional data.
 //
-// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
 func (x *DatabaseOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DatabaseOperation {
-	x.inner.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+// The maximum amount of time that a resource request can use.
 //
-// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
 func (x *DatabaseOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DatabaseOperation {
-	x.inner.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
-// Database calls the underlying Database.
 func (x *DatabaseOperation) Database() *Database {
-	_r := x.inner.Database()
-	if _r == nil {
-		return nil
-	}
-	return &Database{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("database"))
+	return DatabaseFromID(_r)
 }
 
-// SetDatabase calls the underlying SetDatabase.
-func (x *DatabaseOperation) SetDatabase(database *raw.CKDatabase) {
-	x.inner.SetDatabase(database)
+func (x *DatabaseOperation) SetDatabase(database *Database) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 }
-
-func (x *DatabaseOperation) asDatabaseOperation() *raw.CKDatabaseOperation { return x.inner }
-
-func (x *DatabaseOperation) asOperation() *raw.CKOperation { return &x.inner.CKOperation }
 
 // DatabaseOperationable is the interface implemented by [DatabaseOperation], for mocking and DI.
 type DatabaseOperationable interface {
-	Unwrap() *raw.CKDatabaseOperation
+	obj.Object
 	WithDatabase(database *Database) *DatabaseOperation
 	WithConfiguration(configuration *OperationConfiguration) *DatabaseOperation
 	WithGroup(group *OperationGroup) *DatabaseOperation
@@ -140,7 +158,7 @@ type DatabaseOperationable interface {
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DatabaseOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DatabaseOperation
 	Database() *Database
-	SetDatabase(database *raw.CKDatabase)
+	SetDatabase(database *Database)
 }
 
 var _ DatabaseOperationable = (*DatabaseOperation)(nil)

@@ -5,79 +5,97 @@
 package usernotifications
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A task your app performs in response to a notification that the system delivers.
 //
-// NotificationAction wraps [raw.UNNotificationAction] with a fluent Go API.
+// NotificationAction is an idiomatic wrapper over the Objective-C class UNNotificationAction.
 type NotificationAction struct {
-	inner *raw.UNNotificationAction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.UNNotificationAction].
-func (x *NotificationAction) Unwrap() *raw.UNNotificationAction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NotificationAction) ID() objc.ID { return x.inner.Ptr() }
-
-// NotificationActionFromID adopts an existing object pointer as a NotificationAction (nil for 0).
+// NotificationActionFromID adopts an existing Objective-C object as a NotificationAction
+// (nil for 0), retaining it and registering a release finalizer.
 func NotificationActionFromID(id objc.ID) *NotificationAction {
 	if id == 0 {
 		return nil
 	}
-	return &NotificationAction{inner: raw.UNNotificationActionFromID(id)}
+	x := &NotificationAction{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNotificationAction creates a new [NotificationAction].
-func NewNotificationAction() *NotificationAction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNNotificationAction")), objc.RegisterName("new"))
-	return &NotificationAction{inner: raw.UNNotificationActionFromID(_id)}
-}
-
-// Identifier calls the underlying Identifier.
-func (x *NotificationAction) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// Title calls the underlying Title.
-func (x *NotificationAction) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// Options calls the underlying Options.
-func (x *NotificationAction) Options() UNNotificationActionOptions {
-	return UNNotificationActionOptions(x.inner.Options())
-}
-
-// Icon calls the underlying Icon.
-func (x *NotificationAction) Icon() *NotificationActionIcon {
-	_r := x.inner.Icon()
-	if _r == nil {
+// notificationActionAdopt wraps an Objective-C object that this code just created as a
+// NotificationAction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func notificationActionAdopt(id objc.ID) *NotificationAction {
+	if id == 0 {
 		return nil
 	}
-	return &NotificationActionIcon{inner: _r}
+	x := &NotificationAction{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *NotificationAction) asNotificationAction() *raw.UNNotificationAction { return x.inner }
+// Description returns the object's -description text.
+func (x *NotificationAction) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NotificationAction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NotificationAction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNotificationAction creates a new NotificationAction.
+func NewNotificationAction() *NotificationAction {
+	_id := objc.Send[objc.ID](objc.ID(_class("UNNotificationAction")), objc.RegisterName("new"))
+	return notificationActionAdopt(_id)
+}
+
+func (x *NotificationAction) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *NotificationAction) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *NotificationAction) Options() NotificationActionOptions {
+	_r := objc.Send[NotificationActionOptions](objref.IDOf(x), objc.RegisterName("options"))
+	return _r
+}
+
+func (x *NotificationAction) Icon() *NotificationActionIcon {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icon"))
+	return NotificationActionIconFromID(_r)
+}
 
 // NotificationActionable is the interface implemented by [NotificationAction], for mocking and DI.
 type NotificationActionable interface {
-	Unwrap() *raw.UNNotificationAction
+	obj.Object
 	Identifier() string
 	Title() string
-	Options() UNNotificationActionOptions
+	Options() NotificationActionOptions
 	Icon() *NotificationActionIcon
 }
 

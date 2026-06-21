@@ -5,45 +5,71 @@
 package javaruntimesupport
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/javaruntimesupport"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Symbolicator wraps [raw.JRSSymbolicator] with a fluent Go API.
+// Symbolicator is an idiomatic wrapper over the Objective-C class JRSSymbolicator.
 type Symbolicator struct {
-	inner *raw.JRSSymbolicator
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.JRSSymbolicator].
-func (x *Symbolicator) Unwrap() *raw.JRSSymbolicator { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Symbolicator) ID() objc.ID { return x.inner.Ptr() }
-
-// SymbolicatorFromID adopts an existing object pointer as a Symbolicator (nil for 0).
+// SymbolicatorFromID adopts an existing Objective-C object as a Symbolicator
+// (nil for 0), retaining it and registering a release finalizer.
 func SymbolicatorFromID(id objc.ID) *Symbolicator {
 	if id == 0 {
 		return nil
 	}
-	return &Symbolicator{inner: raw.JRSSymbolicatorFromID(id)}
+	x := &Symbolicator{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSymbolicator creates a new [Symbolicator].
+// symbolicatorAdopt wraps an Objective-C object that this code just created as a
+// Symbolicator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func symbolicatorAdopt(id objc.ID) *Symbolicator {
+	if id == 0 {
+		return nil
+	}
+	x := &Symbolicator{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Symbolicator) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Symbolicator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Symbolicator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSymbolicator creates a new Symbolicator.
 func NewSymbolicator() *Symbolicator {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("JRSSymbolicator")), objc.RegisterName("new"))
-	return &Symbolicator{inner: raw.JRSSymbolicatorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("JRSSymbolicator")), objc.RegisterName("new"))
+	return symbolicatorAdopt(_id)
 }
 
-// AddressForSymbol calls the underlying AddressForSymbol.
 func (x *Symbolicator) AddressForSymbol(symbolName string) uint64 {
-	return x.inner.AddressForSymbol(foundation.NSStringStringWithUTF8String(symbolName))
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("addressForSymbol:"), purego.NSString(symbolName))
+	return _r
 }
 
 // Symbolicatorable is the interface implemented by [Symbolicator], for mocking and DI.
 type Symbolicatorable interface {
-	Unwrap() *raw.JRSSymbolicator
+	obj.Object
 	AddressForSymbol(symbolName string) uint64
 }
 

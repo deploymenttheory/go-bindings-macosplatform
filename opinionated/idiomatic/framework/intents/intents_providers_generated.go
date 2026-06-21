@@ -5,40 +5,40 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// CallRecordResolutionResultProvider is implemented by CallRecordResolutionResult and any idiomatic type wrapping a INCallRecordResolutionResult subclass.
+// CallRecordResolutionResultProvider is accepted wherever a INCallRecordResolutionResult (or one of its subclasses) is expected.
 type CallRecordResolutionResultProvider interface {
-	asCallRecordResolutionResult() *raw.INCallRecordResolutionResult
+	objref.Object
 }
 
-// IntentProvider is implemented by Intent and any idiomatic type wrapping a INIntent subclass.
+// IntentProvider is accepted wherever a INIntent (or one of its subclasses) is expected.
 type IntentProvider interface {
-	asIntent() *raw.INIntent
+	objref.Object
 }
 
-// IntentDonationMetadataProvider is implemented by IntentDonationMetadata and any idiomatic type wrapping a INIntentDonationMetadata subclass.
+// IntentDonationMetadataProvider is accepted wherever a INIntentDonationMetadata (or one of its subclasses) is expected.
 type IntentDonationMetadataProvider interface {
-	asIntentDonationMetadata() *raw.INIntentDonationMetadata
+	objref.Object
 }
 
-// IntentResolutionResultProvider is implemented by IntentResolutionResult and any idiomatic type wrapping a INIntentResolutionResult subclass.
+// IntentResolutionResultProvider is accepted wherever a INIntentResolutionResult (or one of its subclasses) is expected.
 type IntentResolutionResultProvider interface {
-	asIntentResolutionResult() *raw.INIntentResolutionResult
+	objref.Object
 }
 
-// IntentResponseProvider is implemented by IntentResponse and any idiomatic type wrapping a INIntentResponse subclass.
+// IntentResponseProvider is accepted wherever a INIntentResponse (or one of its subclasses) is expected.
 type IntentResponseProvider interface {
-	asIntentResponse() *raw.INIntentResponse
+	objref.Object
 }
 
-// PersonResolutionResultProvider is implemented by PersonResolutionResult and any idiomatic type wrapping a INPersonResolutionResult subclass.
+// PersonResolutionResultProvider is accepted wherever a INPersonResolutionResult (or one of its subclasses) is expected.
 type PersonResolutionResultProvider interface {
-	asPersonResolutionResult() *raw.INPersonResolutionResult
+	objref.Object
 }
 
-// ReservationProvider is implemented by Reservation and any idiomatic type wrapping a INReservation subclass.
+// ReservationProvider is accepted wherever a INReservation (or one of its subclasses) is expected.
 type ReservationProvider interface {
-	asReservation() *raw.INReservation
+	objref.Object
 }

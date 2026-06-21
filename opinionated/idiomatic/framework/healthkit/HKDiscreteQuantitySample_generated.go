@@ -5,108 +5,103 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A sample that represents a discrete quantity.
 //
-// DiscreteQuantitySample wraps [raw.HKDiscreteQuantitySample] with a fluent Go API.
+// DiscreteQuantitySample is an idiomatic wrapper over the Objective-C class HKDiscreteQuantitySample.
 type DiscreteQuantitySample struct {
-	inner *raw.HKDiscreteQuantitySample
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKDiscreteQuantitySample].
-func (x *DiscreteQuantitySample) Unwrap() *raw.HKDiscreteQuantitySample { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DiscreteQuantitySample) ID() objc.ID { return x.inner.Ptr() }
-
-// DiscreteQuantitySampleFromID adopts an existing object pointer as a DiscreteQuantitySample (nil for 0).
+// DiscreteQuantitySampleFromID adopts an existing Objective-C object as a DiscreteQuantitySample
+// (nil for 0), retaining it and registering a release finalizer.
 func DiscreteQuantitySampleFromID(id objc.ID) *DiscreteQuantitySample {
 	if id == 0 {
 		return nil
 	}
-	return &DiscreteQuantitySample{inner: raw.HKDiscreteQuantitySampleFromID(id)}
+	x := &DiscreteQuantitySample{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDiscreteQuantitySample creates a new [DiscreteQuantitySample].
+// discreteQuantitySampleAdopt wraps an Objective-C object that this code just created as a
+// DiscreteQuantitySample (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func discreteQuantitySampleAdopt(id objc.ID) *DiscreteQuantitySample {
+	if id == 0 {
+		return nil
+	}
+	x := &DiscreteQuantitySample{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DiscreteQuantitySample) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DiscreteQuantitySample) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DiscreteQuantitySample) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDiscreteQuantitySample creates a new DiscreteQuantitySample.
 func NewDiscreteQuantitySample() *DiscreteQuantitySample {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKDiscreteQuantitySample")), objc.RegisterName("new"))
-	return &DiscreteQuantitySample{inner: raw.HKDiscreteQuantitySampleFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKDiscreteQuantitySample")), objc.RegisterName("new"))
+	return discreteQuantitySampleAdopt(_id)
 }
 
-// @property      minimumQuantity @abstract      The minimum of the receiver's quantities
-//
-// MinimumQuantity calls the underlying MinimumQuantity.
+// The minimum of the receiver's quantities
 func (x *DiscreteQuantitySample) MinimumQuantity() *Quantity {
-	_r := x.inner.MinimumQuantity()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minimumQuantity"))
+	return QuantityFromID(_r)
 }
 
-// @property      averageQuantity @abstract      The average of the receiver's quantities
-//
-// AverageQuantity calls the underlying AverageQuantity.
+// The average of the receiver's quantities
 func (x *DiscreteQuantitySample) AverageQuantity() *Quantity {
-	_r := x.inner.AverageQuantity()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("averageQuantity"))
+	return QuantityFromID(_r)
 }
 
-// @property      maximumQuantity @abstract      The maximum of the receiver's quantities
-//
-// MaximumQuantity calls the underlying MaximumQuantity.
+// The maximum of the receiver's quantities
 func (x *DiscreteQuantitySample) MaximumQuantity() *Quantity {
-	_r := x.inner.MaximumQuantity()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumQuantity"))
+	return QuantityFromID(_r)
 }
 
-// @property      mostRecentQuantity @abstract      The receiver's quantity with most recent date interval
-//
-// MostRecentQuantity calls the underlying MostRecentQuantity.
+// The receiver's quantity with most recent date interval
 func (x *DiscreteQuantitySample) MostRecentQuantity() *Quantity {
-	_r := x.inner.MostRecentQuantity()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mostRecentQuantity"))
+	return QuantityFromID(_r)
 }
 
-// @property      mostRecentQuantityDateInterval @abstract      The date interval for the receiver's most recent quantity
-//
-// MostRecentQuantityDateInterval calls the underlying MostRecentQuantityDateInterval.
-func (x *DiscreteQuantitySample) MostRecentQuantityDateInterval() *foundation.NSDateInterval {
-	return x.inner.MostRecentQuantityDateInterval()
-}
-
-func (x *DiscreteQuantitySample) asQuantitySample() *raw.HKQuantitySample {
-	return &x.inner.HKQuantitySample
-}
-
-func (x *DiscreteQuantitySample) asSample() *raw.HKSample { return &x.inner.HKQuantitySample.HKSample }
-
-func (x *DiscreteQuantitySample) asObject() *raw.HKObject {
-	return &x.inner.HKQuantitySample.HKSample.HKObject
+// The date interval for the receiver's most recent quantity
+func (x *DiscreteQuantitySample) MostRecentQuantityDateInterval() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mostRecentQuantityDateInterval"))
+	return obj.Wrap(_r)
 }
 
 // DiscreteQuantitySampleable is the interface implemented by [DiscreteQuantitySample], for mocking and DI.
 type DiscreteQuantitySampleable interface {
-	Unwrap() *raw.HKDiscreteQuantitySample
+	obj.Object
 	MinimumQuantity() *Quantity
 	AverageQuantity() *Quantity
 	MaximumQuantity() *Quantity
 	MostRecentQuantity() *Quantity
-	MostRecentQuantityDateInterval() *foundation.NSDateInterval
+	MostRecentQuantityDateInterval() obj.Object
 }
 
 var _ DiscreteQuantitySampleable = (*DiscreteQuantitySample)(nil)

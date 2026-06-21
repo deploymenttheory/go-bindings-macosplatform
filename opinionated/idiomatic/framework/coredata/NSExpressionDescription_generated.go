@@ -5,169 +5,189 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that describes an expression to include with a fetch request.
 //
-// ExpressionDescription wraps [raw.NSExpressionDescription] with a fluent Go API.
+// ExpressionDescription is an idiomatic wrapper over the Objective-C class NSExpressionDescription.
 type ExpressionDescription struct {
-	inner *raw.NSExpressionDescription
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSExpressionDescription].
-func (x *ExpressionDescription) Unwrap() *raw.NSExpressionDescription { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExpressionDescription) ID() objc.ID { return x.inner.Ptr() }
-
-// ExpressionDescriptionFromID adopts an existing object pointer as a ExpressionDescription (nil for 0).
+// ExpressionDescriptionFromID adopts an existing Objective-C object as a ExpressionDescription
+// (nil for 0), retaining it and registering a release finalizer.
 func ExpressionDescriptionFromID(id objc.ID) *ExpressionDescription {
 	if id == 0 {
 		return nil
 	}
-	return &ExpressionDescription{inner: raw.NSExpressionDescriptionFromID(id)}
+	x := &ExpressionDescription{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewExpressionDescription creates a new [ExpressionDescription].
+// expressionDescriptionAdopt wraps an Objective-C object that this code just created as a
+// ExpressionDescription (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func expressionDescriptionAdopt(id objc.ID) *ExpressionDescription {
+	if id == 0 {
+		return nil
+	}
+	x := &ExpressionDescription{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ExpressionDescription) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExpressionDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExpressionDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewExpressionDescription creates a new ExpressionDescription.
 func NewExpressionDescription() *ExpressionDescription {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSExpressionDescription")), objc.RegisterName("new"))
-	return &ExpressionDescription{inner: raw.NSExpressionDescriptionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSExpressionDescription")), objc.RegisterName("new"))
+	return expressionDescriptionAdopt(_id)
 }
 
 // The expression to evaluate.
 //
-// WithExpression sets the expression property and returns the receiver for chaining.
-func (x *ExpressionDescription) WithExpression(expression *foundation.NSExpression) *ExpressionDescription {
-	x.inner.SetExpression(expression)
+// WithExpression sets expression and returns the receiver so calls can be chained.
+func (x *ExpressionDescription) WithExpression(expression obj.Object) *ExpressionDescription {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpression:"), objref.IDOf(expression))
 	return x
 }
 
 // The attribute type of the expression’s result.
 //
-// WithExpressionResultType sets the expressionResultType property and returns the receiver for chaining.
-func (x *ExpressionDescription) WithExpressionResultType(expressionResultType NSAttributeType) *ExpressionDescription {
-	x.inner.SetExpressionResultType(raw.NSAttributeType(expressionResultType))
+// WithExpressionResultType sets expressionResultType and returns the receiver so calls can be chained.
+func (x *ExpressionDescription) WithExpressionResultType(expressionResultType AttributeType) *ExpressionDescription {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpressionResultType:"), expressionResultType)
 	return x
 }
 
 // The name of the receiver.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *ExpressionDescription) WithName(name string) *ExpressionDescription {
-	x.inner.NSPropertyDescription.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // A Boolean value that indicates whether the receiver is optional.
 //
-// WithOptional sets the optional property and returns the receiver for chaining.
+// WithOptional sets optional and returns the receiver so calls can be chained.
 func (x *ExpressionDescription) WithOptional(optional bool) *ExpressionDescription {
-	x.inner.NSPropertyDescription.SetOptional(optional)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptional:"), optional)
 	return x
 }
 
 // A Boolean value that indicates whether the receiver is transient.
 //
-// WithTransient sets the transient property and returns the receiver for chaining.
+// WithTransient sets transient and returns the receiver so calls can be chained.
 func (x *ExpressionDescription) WithTransient(transient bool) *ExpressionDescription {
-	x.inner.NSPropertyDescription.SetTransient(transient)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransient:"), transient)
 	return x
 }
 
 // The user info dictionary of the receiver.
 //
-// WithUserInfo sets the userInfo property and returns the receiver for chaining.
-func (x *ExpressionDescription) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *ExpressionDescription {
-	x.inner.NSPropertyDescription.SetUserInfo(userInfo)
+// WithUserInfo sets userInfo and returns the receiver so calls can be chained.
+func (x *ExpressionDescription) WithUserInfo(userInfo obj.Object) *ExpressionDescription {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return x
 }
 
 // A Boolean value that indicates whether the receiver should be indexed for searching.
 //
-// WithIndexed sets the indexed property and returns the receiver for chaining.
+// WithIndexed sets indexed and returns the receiver so calls can be chained.
 func (x *ExpressionDescription) WithIndexed(indexed bool) *ExpressionDescription {
-	x.inner.NSPropertyDescription.SetIndexed(indexed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexed:"), indexed)
 	return x
 }
 
 // The version hash modifier for the receiver.
 //
-// WithVersionHashModifier sets the versionHashModifier property and returns the receiver for chaining.
+// WithVersionHashModifier sets versionHashModifier and returns the receiver so calls can be chained.
 func (x *ExpressionDescription) WithVersionHashModifier(versionHashModifier string) *ExpressionDescription {
-	x.inner.NSPropertyDescription.SetVersionHashModifier(foundation.NSStringStringWithUTF8String(versionHashModifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
 	return x
 }
 
 // A Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
 //
-// WithIndexedBySpotlight sets the indexedBySpotlight property and returns the receiver for chaining.
+// WithIndexedBySpotlight sets indexedBySpotlight and returns the receiver so calls can be chained.
 func (x *ExpressionDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *ExpressionDescription {
-	x.inner.NSPropertyDescription.SetIndexedBySpotlight(indexedBySpotlight)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexedBySpotlight:"), indexedBySpotlight)
 	return x
 }
 
 // A Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
 //
-// WithStoredInExternalRecord sets the storedInExternalRecord property and returns the receiver for chaining.
+// WithStoredInExternalRecord sets storedInExternalRecord and returns the receiver so calls can be chained.
 func (x *ExpressionDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *ExpressionDescription {
-	x.inner.NSPropertyDescription.SetStoredInExternalRecord(storedInExternalRecord)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoredInExternalRecord:"), storedInExternalRecord)
 	return x
 }
 
 // The renaming identifier for the receiver.
 //
-// WithRenamingIdentifier sets the renamingIdentifier property and returns the receiver for chaining.
+// WithRenamingIdentifier sets renamingIdentifier and returns the receiver so calls can be chained.
 func (x *ExpressionDescription) WithRenamingIdentifier(renamingIdentifier string) *ExpressionDescription {
-	x.inner.NSPropertyDescription.SetRenamingIdentifier(foundation.NSStringStringWithUTF8String(renamingIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
 	return x
 }
 
-// Expression calls the underlying Expression.
-func (x *ExpressionDescription) Expression() *foundation.NSExpression {
-	return x.inner.Expression()
+func (x *ExpressionDescription) Expression() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expression"))
+	return obj.Wrap(_r)
 }
 
-// SetExpression calls the underlying SetExpression.
-func (x *ExpressionDescription) SetExpression(expression *foundation.NSExpression) {
-	x.inner.SetExpression(expression)
+func (x *ExpressionDescription) SetExpression(expression obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpression:"), objref.IDOf(expression))
 }
 
-// ExpressionResultType calls the underlying ExpressionResultType.
-func (x *ExpressionDescription) ExpressionResultType() NSAttributeType {
-	return NSAttributeType(x.inner.ExpressionResultType())
+func (x *ExpressionDescription) ExpressionResultType() AttributeType {
+	_r := objc.Send[AttributeType](objref.IDOf(x), objc.RegisterName("expressionResultType"))
+	return _r
 }
 
-// SetExpressionResultType calls the underlying SetExpressionResultType.
-func (x *ExpressionDescription) SetExpressionResultType(expressionResultType NSAttributeType) {
-	x.inner.SetExpressionResultType(raw.NSAttributeType(expressionResultType))
-}
-
-func (x *ExpressionDescription) asPropertyDescription() *raw.NSPropertyDescription {
-	return &x.inner.NSPropertyDescription
+func (x *ExpressionDescription) SetExpressionResultType(expressionResultType AttributeType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpressionResultType:"), expressionResultType)
 }
 
 // ExpressionDescriptionable is the interface implemented by [ExpressionDescription], for mocking and DI.
 type ExpressionDescriptionable interface {
-	Unwrap() *raw.NSExpressionDescription
-	WithExpression(expression *foundation.NSExpression) *ExpressionDescription
-	WithExpressionResultType(expressionResultType NSAttributeType) *ExpressionDescription
+	obj.Object
+	WithExpression(expression obj.Object) *ExpressionDescription
+	WithExpressionResultType(expressionResultType AttributeType) *ExpressionDescription
 	WithName(name string) *ExpressionDescription
 	WithOptional(optional bool) *ExpressionDescription
 	WithTransient(transient bool) *ExpressionDescription
-	WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *ExpressionDescription
+	WithUserInfo(userInfo obj.Object) *ExpressionDescription
 	WithIndexed(indexed bool) *ExpressionDescription
 	WithVersionHashModifier(versionHashModifier string) *ExpressionDescription
 	WithIndexedBySpotlight(indexedBySpotlight bool) *ExpressionDescription
 	WithStoredInExternalRecord(storedInExternalRecord bool) *ExpressionDescription
 	WithRenamingIdentifier(renamingIdentifier string) *ExpressionDescription
-	Expression() *foundation.NSExpression
-	SetExpression(expression *foundation.NSExpression)
-	ExpressionResultType() NSAttributeType
-	SetExpressionResultType(expressionResultType NSAttributeType)
+	Expression() obj.Object
+	SetExpression(expression obj.Object)
+	ExpressionResultType() AttributeType
+	SetExpressionResultType(expressionResultType AttributeType)
 }
 
 var _ ExpressionDescriptionable = (*ExpressionDescription)(nil)

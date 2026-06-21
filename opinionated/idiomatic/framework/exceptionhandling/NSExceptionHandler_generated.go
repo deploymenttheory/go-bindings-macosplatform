@@ -5,89 +5,107 @@
 package exceptionhandling
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/exceptionhandling"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The NSExceptionHandler class provides facilities for monitoring and debugging exceptional conditions in Objective-C programs. It works by installing a special uncaught exception handler via the NSSetUncaughtExceptionHandler function. Consequently, to use the services of NSExceptionHandler, you must not install your own custom uncaught exception handler.
 //
-// ExceptionHandler wraps [raw.NSExceptionHandler] with a fluent Go API.
+// ExceptionHandler is an idiomatic wrapper over the Objective-C class NSExceptionHandler.
 type ExceptionHandler struct {
-	inner *raw.NSExceptionHandler
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSExceptionHandler].
-func (x *ExceptionHandler) Unwrap() *raw.NSExceptionHandler { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExceptionHandler) ID() objc.ID { return x.inner.Ptr() }
-
-// ExceptionHandlerFromID adopts an existing object pointer as a ExceptionHandler (nil for 0).
+// ExceptionHandlerFromID adopts an existing Objective-C object as a ExceptionHandler
+// (nil for 0), retaining it and registering a release finalizer.
 func ExceptionHandlerFromID(id objc.ID) *ExceptionHandler {
 	if id == 0 {
 		return nil
 	}
-	return &ExceptionHandler{inner: raw.NSExceptionHandlerFromID(id)}
+	x := &ExceptionHandler{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewExceptionHandler creates a new [ExceptionHandler].
+// exceptionHandlerAdopt wraps an Objective-C object that this code just created as a
+// ExceptionHandler (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func exceptionHandlerAdopt(id objc.ID) *ExceptionHandler {
+	if id == 0 {
+		return nil
+	}
+	x := &ExceptionHandler{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ExceptionHandler) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExceptionHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExceptionHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewExceptionHandler creates a new ExceptionHandler.
 func NewExceptionHandler() *ExceptionHandler {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSExceptionHandler")), objc.RegisterName("new"))
-	return &ExceptionHandler{inner: raw.NSExceptionHandlerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSExceptionHandler")), objc.RegisterName("new"))
+	return exceptionHandlerAdopt(_id)
 }
 
 // Sets the bit mask of constants specifying the types of exceptions monitored by the receiver and its handling and logging behavior.
-//
-// SetExceptionHandlingMask calls the underlying SetExceptionHandlingMask.
-func (x *ExceptionHandler) SetExceptionHandlingMask(aMask uint) {
-	x.inner.SetExceptionHandlingMask(aMask)
+func (x *ExceptionHandler) SetExceptionHandlingMask(aMask int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExceptionHandlingMask:"), aMask)
 }
 
 // Returns a bit mask representing the types of exceptions monitored by the receiver and its handling and logging behavior.
-//
-// ExceptionHandlingMask calls the underlying ExceptionHandlingMask.
-func (x *ExceptionHandler) ExceptionHandlingMask() uint {
-	return x.inner.ExceptionHandlingMask()
+func (x *ExceptionHandler) ExceptionHandlingMask() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("exceptionHandlingMask"))
+	return _r
 }
 
 // Sets the bit mask of constants specifying the types of exceptions that will halt execution for debugging.
-//
-// SetExceptionHangingMask calls the underlying SetExceptionHangingMask.
-func (x *ExceptionHandler) SetExceptionHangingMask(aMask uint) {
-	x.inner.SetExceptionHangingMask(aMask)
+func (x *ExceptionHandler) SetExceptionHangingMask(aMask int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExceptionHangingMask:"), aMask)
 }
 
 // Returns a bit mask representing the types of exceptions that will halt execution for debugging.
-//
-// ExceptionHangingMask calls the underlying ExceptionHangingMask.
-func (x *ExceptionHandler) ExceptionHangingMask() uint {
-	return x.inner.ExceptionHangingMask()
+func (x *ExceptionHandler) ExceptionHangingMask() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("exceptionHangingMask"))
+	return _r
 }
 
 // Sets the delegate of the NSExceptionHandler object.
-//
-// SetDelegate calls the underlying SetDelegate.
-func (x *ExceptionHandler) SetDelegate(anObject objc.ID) {
-	x.inner.SetDelegate(anObject)
+func (x *ExceptionHandler) SetDelegate(anObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(anObject))
 }
 
 // Returns the delegate of the NSExceptionHandler object.
-//
-// Delegate calls the underlying Delegate.
-func (x *ExceptionHandler) Delegate() objc.ID {
-	return x.inner.Delegate()
+func (x *ExceptionHandler) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+	return obj.Wrap(_r)
 }
 
 // ExceptionHandlerable is the interface implemented by [ExceptionHandler], for mocking and DI.
 type ExceptionHandlerable interface {
-	Unwrap() *raw.NSExceptionHandler
-	SetExceptionHandlingMask(aMask uint)
-	ExceptionHandlingMask() uint
-	SetExceptionHangingMask(aMask uint)
-	ExceptionHangingMask() uint
-	SetDelegate(anObject objc.ID)
-	Delegate() objc.ID
+	obj.Object
+	SetExceptionHandlingMask(aMask int)
+	ExceptionHandlingMask() int
+	SetExceptionHangingMask(aMask int)
+	ExceptionHangingMask() int
+	SetDelegate(anObject obj.Object)
+	Delegate() obj.Object
 }
 
 var _ ExceptionHandlerable = (*ExceptionHandler)(nil)

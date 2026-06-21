@@ -5,41 +5,29 @@
 package discrecordingui
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecordingui"
+	"github.com/ebitengine/purego/objc"
 )
 
-// ProgressPanel calls the underlying DRBurnProgressPanelProgressPanel.
+// Creates and returns an instance of the burn progress panel.
 func ProgressPanel() *BurnProgressPanel {
-	_r := raw.DRBurnProgressPanelProgressPanel()
-	if _r == nil {
-		return nil
-	}
-	return &BurnProgressPanel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("DRBurnProgressPanel")), objc.RegisterName("progressPanel"))
+	return BurnProgressPanelFromID(_r)
 }
 
-// DRBurnSetupPanelSetupPanel calls the underlying DRBurnSetupPanelSetupPanel.
+// Creates and return an instance of a burn setup panel.
 func DRBurnSetupPanelSetupPanel() *BurnSetupPanel {
-	_r := raw.DRBurnSetupPanelSetupPanel()
-	if _r == nil {
-		return nil
-	}
-	return &BurnSetupPanel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("DRBurnSetupPanel")), objc.RegisterName("setupPanel"))
+	return BurnSetupPanelFromID(_r)
 }
 
-// DREraseProgressPanelProgressPanel calls the underlying DREraseProgressPanelProgressPanel.
+// Creates and returns an instance of the erase progress panel.
 func DREraseProgressPanelProgressPanel() *EraseProgressPanel {
-	_r := raw.DREraseProgressPanelProgressPanel()
-	if _r == nil {
-		return nil
-	}
-	return &EraseProgressPanel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("DREraseProgressPanel")), objc.RegisterName("progressPanel"))
+	return EraseProgressPanelFromID(_r)
 }
 
-// DREraseSetupPanelSetupPanel calls the underlying DREraseSetupPanelSetupPanel.
+// Returns an instance of a erase setup panel.
 func DREraseSetupPanelSetupPanel() *EraseSetupPanel {
-	_r := raw.DREraseSetupPanelSetupPanel()
-	if _r == nil {
-		return nil
-	}
-	return &EraseSetupPanel{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("DREraseSetupPanel")), objc.RegisterName("setupPanel"))
+	return EraseSetupPanelFromID(_r)
 }

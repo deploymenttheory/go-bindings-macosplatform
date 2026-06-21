@@ -5,20 +5,20 @@
 package corelocation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// BeaconIdentityConditionProvider is implemented by BeaconIdentityCondition and any idiomatic type wrapping a CLBeaconIdentityCondition subclass.
+// BeaconIdentityConditionProvider is accepted wherever a CLBeaconIdentityCondition (or one of its subclasses) is expected.
 type BeaconIdentityConditionProvider interface {
-	asBeaconIdentityCondition() *raw.CLBeaconIdentityCondition
+	objref.Object
 }
 
-// ConditionProvider is implemented by Condition and any idiomatic type wrapping a CLCondition subclass.
+// ConditionProvider is accepted wherever a CLCondition (or one of its subclasses) is expected.
 type ConditionProvider interface {
-	asCondition() *raw.CLCondition
+	objref.Object
 }
 
-// RegionProvider is implemented by Region and any idiomatic type wrapping a CLRegion subclass.
+// RegionProvider is accepted wherever a CLRegion (or one of its subclasses) is expected.
 type RegionProvider interface {
-	asRegion() *raw.CLRegion
+	objref.Object
 }

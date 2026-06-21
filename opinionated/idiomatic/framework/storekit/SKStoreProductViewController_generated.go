@@ -5,72 +5,68 @@
 package storekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A view controller that provides a page where customers can purchase media from the App Store.
 //
-// StoreProductViewController wraps [raw.SKStoreProductViewController] with a fluent Go API.
+// StoreProductViewController is an idiomatic wrapper over the Objective-C class SKStoreProductViewController.
 type StoreProductViewController struct {
-	inner *raw.SKStoreProductViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKStoreProductViewController].
-func (x *StoreProductViewController) Unwrap() *raw.SKStoreProductViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StoreProductViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// StoreProductViewControllerFromID adopts an existing object pointer as a StoreProductViewController (nil for 0).
+// StoreProductViewControllerFromID adopts an existing Objective-C object as a StoreProductViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func StoreProductViewControllerFromID(id objc.ID) *StoreProductViewController {
 	if id == 0 {
 		return nil
 	}
-	return &StoreProductViewController{inner: raw.SKStoreProductViewControllerFromID(id)}
-}
-
-// NewStoreProductViewController creates a new [StoreProductViewController].
-func NewStoreProductViewController() *StoreProductViewController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKStoreProductViewController")), objc.RegisterName("new"))
-	return &StoreProductViewController{inner: raw.SKStoreProductViewControllerFromID(_id)}
-}
-
-// The store view controller’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *StoreProductViewController) WithDelegate(delegate raw.SKStoreProductViewControllerDelegate) *StoreProductViewController {
-	x.inner.SetDelegate(delegate)
+	x := &StoreProductViewController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Loads a new product screen to display.
-//
-// LoadProductWithParametersCompletionBlock calls the underlying LoadProductWithParametersCompletionBlock.
-func (x *StoreProductViewController) LoadProductWithParametersCompletionBlock(parameters *foundation.NSDictionary[*foundation.NSString, objc.ID], block func(bool, unsafe.Pointer)) {
-	x.inner.LoadProductWithParametersCompletionBlock(parameters, block)
+// storeProductViewControllerAdopt wraps an Objective-C object that this code just created as a
+// StoreProductViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func storeProductViewControllerAdopt(id objc.ID) *StoreProductViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &StoreProductViewController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Delegate calls the underlying Delegate.
-func (x *StoreProductViewController) Delegate() raw.SKStoreProductViewControllerDelegate {
-	return x.inner.Delegate()
+// Description returns the object's -description text.
+func (x *StoreProductViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *StoreProductViewController) SetDelegate(delegate raw.SKStoreProductViewControllerDelegate) {
-	x.inner.SetDelegate(delegate)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StoreProductViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StoreProductViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewStoreProductViewController creates a new StoreProductViewController.
+func NewStoreProductViewController() *StoreProductViewController {
+	_id := objc.Send[objc.ID](objc.ID(_class("SKStoreProductViewController")), objc.RegisterName("new"))
+	return storeProductViewControllerAdopt(_id)
 }
 
 // StoreProductViewControllerable is the interface implemented by [StoreProductViewController], for mocking and DI.
 type StoreProductViewControllerable interface {
-	Unwrap() *raw.SKStoreProductViewController
-	WithDelegate(delegate raw.SKStoreProductViewControllerDelegate) *StoreProductViewController
-	LoadProductWithParametersCompletionBlock(parameters *foundation.NSDictionary[*foundation.NSString, objc.ID], block func(bool, unsafe.Pointer))
-	Delegate() raw.SKStoreProductViewControllerDelegate
-	SetDelegate(delegate raw.SKStoreProductViewControllerDelegate)
+	obj.Object
 }
 
 var _ StoreProductViewControllerable = (*StoreProductViewController)(nil)

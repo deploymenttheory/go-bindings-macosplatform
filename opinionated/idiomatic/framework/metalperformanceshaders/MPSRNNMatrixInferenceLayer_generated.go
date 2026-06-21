@@ -5,208 +5,140 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A recurrent neural network layer for inference on Metal Performance Shaders matrices.
 //
-// RNNMatrixInferenceLayer wraps [raw.MPSRNNMatrixInferenceLayer] with a fluent Go API.
+// RNNMatrixInferenceLayer is an idiomatic wrapper over the Objective-C class MPSRNNMatrixInferenceLayer.
 type RNNMatrixInferenceLayer struct {
-	inner *raw.MPSRNNMatrixInferenceLayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSRNNMatrixInferenceLayer].
-func (x *RNNMatrixInferenceLayer) Unwrap() *raw.MPSRNNMatrixInferenceLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RNNMatrixInferenceLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// RNNMatrixInferenceLayerFromID adopts an existing object pointer as a RNNMatrixInferenceLayer (nil for 0).
+// RNNMatrixInferenceLayerFromID adopts an existing Objective-C object as a RNNMatrixInferenceLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func RNNMatrixInferenceLayerFromID(id objc.ID) *RNNMatrixInferenceLayer {
 	if id == 0 {
 		return nil
 	}
-	return &RNNMatrixInferenceLayer{inner: raw.MPSRNNMatrixInferenceLayerFromID(id)}
+	x := &RNNMatrixInferenceLayer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initializes a linear (fully connected) RNN kernel @param      device                          The MTLDevice on which this MPSRNNMatrixLayer filter will be used @param      rnnDescriptor                   The descriptor that defines the RNN layer @return     A valid MPSRNNMatrixInferenceLayer object or nil, if failure.
-//
-// NewRNNMatrixInferenceLayerWithDeviceRnnDescriptor creates a new [RNNMatrixInferenceLayer].
-func NewRNNMatrixInferenceLayerWithDeviceRnnDescriptor(device metal.MTLDevice, rnnDescriptor *mpsneuralnetwork.MPSRNNDescriptor) *RNNMatrixInferenceLayer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSRNNMatrixInferenceLayer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:rnnDescriptor:"), device, rnnDescriptor.Ptr())
-	return &RNNMatrixInferenceLayer{inner: raw.MPSRNNMatrixInferenceLayerFromID(_id)}
+// rNNMatrixInferenceLayerAdopt wraps an Objective-C object that this code just created as a
+// RNNMatrixInferenceLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rNNMatrixInferenceLayerAdopt(id objc.ID) *RNNMatrixInferenceLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &RNNMatrixInferenceLayer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initializes a kernel that implements a stack of linear (fully connected) RNN layers @param      device                          The MTLDevice on which this MPSRNNMatrixLayer filter will be used @param      rnnDescriptors                  An array of RNN descriptors that defines a stack of RNN layers, starting at index zero. The number of layers in stack is the number of entries in the array. All entries in the array must be valid MPSRNNDescriptors. @return     A valid MPSRNNMatrixInferenceLayer object or nil, if failure.
-//
-// NewRNNMatrixInferenceLayerWithDeviceRnnDescriptors creates a new [RNNMatrixInferenceLayer].
-func NewRNNMatrixInferenceLayerWithDeviceRnnDescriptors(device metal.MTLDevice, rnnDescriptors *foundation.NSArray[*mpsneuralnetwork.MPSRNNDescriptor]) *RNNMatrixInferenceLayer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSRNNMatrixInferenceLayer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:rnnDescriptors:"), device, rnnDescriptors.Ptr())
-	return &RNNMatrixInferenceLayer{inner: raw.MPSRNNMatrixInferenceLayerFromID(_id)}
+// Description returns the object's -description text.
+func (x *RNNMatrixInferenceLayer) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSRNNMatrixInferenceLayer @param      device      The MTLDevice on which to make the MPSRNNMatrixInferenceLayer @return     A new MPSRNNMatrixInferenceLayer object, or nil if failure.
-//
-// NewRNNMatrixInferenceLayerWithCoderDevice creates a new [RNNMatrixInferenceLayer].
-func NewRNNMatrixInferenceLayerWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *RNNMatrixInferenceLayer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSRNNMatrixInferenceLayer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &RNNMatrixInferenceLayer{inner: raw.MPSRNNMatrixInferenceLayerFromID(_id)}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RNNMatrixInferenceLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property   recurrentOutputIsTemporary @abstract   How output states from @ref encodeSequenceToCommandBuffer are constructed. Defaults to NO. For reference @see MPSState.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RNNMatrixInferenceLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRNNMatrixInferenceLayer creates a new RNNMatrixInferenceLayer.
+func NewRNNMatrixInferenceLayer() *RNNMatrixInferenceLayer {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSRNNMatrixInferenceLayer")), objc.RegisterName("new"))
+	return rNNMatrixInferenceLayerAdopt(_id)
+}
+
+// How output states from
 //
-// WithRecurrentOutputIsTemporary sets the recurrentOutputIsTemporary property and returns the receiver for chaining.
+// WithRecurrentOutputIsTemporary sets recurrentOutputIsTemporary and returns the receiver so calls can be chained.
 func (x *RNNMatrixInferenceLayer) WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixInferenceLayer {
-	x.inner.SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
 	return x
 }
 
-// @property   storeAllIntermediateStates @abstract   If YES then calls to @ref encodeSequenceToCommandBuffer return every recurrent state in the array: recurrentOutputStates. Defaults to NO.
+// If YES then calls to
 //
-// WithStoreAllIntermediateStates sets the storeAllIntermediateStates property and returns the receiver for chaining.
+// WithStoreAllIntermediateStates sets storeAllIntermediateStates and returns the receiver so calls can be chained.
 func (x *RNNMatrixInferenceLayer) WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNMatrixInferenceLayer {
-	x.inner.SetStoreAllIntermediateStates(storeAllIntermediateStates)
-	return x
-}
-
-// @property   bidirectionalCombineMode @abstract   Defines how to combine the output-results, when encoding bidirectional layers using @ref encodeBidirectionalSequenceToCommandBuffer. Defaults to @ref MPSRNNBidirectionalCombineModeNone.
-//
-// WithBidirectionalCombineMode sets the bidirectionalCombineMode property and returns the receiver for chaining.
-func (x *RNNMatrixInferenceLayer) WithBidirectionalCombineMode(bidirectionalCombineMode mpsneuralnetwork.MPSRNNBidirectionalCombineMode) *RNNMatrixInferenceLayer {
-	x.inner.SetBidirectionalCombineMode(bidirectionalCombineMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *RNNMatrixInferenceLayer) WithOptions(options mpscore.MPSKernelOptions) *RNNMatrixInferenceLayer {
-	x.inner.MPSKernel.SetOptions(options)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *RNNMatrixInferenceLayer) WithLabel(label string) *RNNMatrixInferenceLayer {
-	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// EncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates calls the underlying EncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates.
-func (x *RNNMatrixInferenceLayer) EncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], sourceOffsets *uint, destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationOffsets *uint, recurrentInputState *mpsneuralnetwork.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNRecurrentMatrixState]) {
-	x.inner.EncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates(commandBuffer, sourceMatrices, sourceOffsets, destinationMatrices, destinationOffsets, recurrentInputState, recurrentOutputStates)
+// The number of feature channels input vector/matrix.
+func (x *RNNMatrixInferenceLayer) InputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputFeatureChannels"))
+	return _r
 }
 
-// EncodeSequenceToCommandBufferSourceMatricesDestinationMatricesRecurrentInputStateRecurrentOutputStates calls the underlying EncodeSequenceToCommandBufferSourceMatricesDestinationMatricesRecurrentInputStateRecurrentOutputStates.
-func (x *RNNMatrixInferenceLayer) EncodeSequenceToCommandBufferSourceMatricesDestinationMatricesRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], recurrentInputState *mpsneuralnetwork.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNRecurrentMatrixState]) {
-	x.inner.EncodeSequenceToCommandBufferSourceMatricesDestinationMatricesRecurrentInputStateRecurrentOutputStates(commandBuffer, sourceMatrices, destinationMatrices, recurrentInputState, recurrentOutputStates)
+// The number of feature channels in the output vector/matrix.
+func (x *RNNMatrixInferenceLayer) OutputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputFeatureChannels"))
+	return _r
 }
 
-// EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardMatricesDestinationBackwardMatrices calls the underlying EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardMatricesDestinationBackwardMatrices.
-func (x *RNNMatrixInferenceLayer) EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardMatricesDestinationBackwardMatrices(commandBuffer metal.MTLCommandBuffer, sourceSequence *foundation.NSArray[*mpscore.MPSMatrix], destinationForwardMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationBackwardMatrices *foundation.NSArray[*mpscore.MPSMatrix]) {
-	x.inner.EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardMatricesDestinationBackwardMatrices(commandBuffer, sourceSequence, destinationForwardMatrices, destinationBackwardMatrices)
+// Number of layers in the filter-stack. This will be one when using initWithDevice:rnnDescriptor to initialize this filter and the number of entries in the array 'rnnDescriptors' when initializing this filter with initWithDevice:rnnDescriptors.
+func (x *RNNMatrixInferenceLayer) NumberOfLayers() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfLayers"))
+	return _r
 }
 
-// CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
-func (x *RNNMatrixInferenceLayer) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *RNNMatrixInferenceLayer {
-	_r := x.inner.CopyWithZoneDevice(zone, device)
-	if _r == nil {
-		return nil
-	}
-	return &RNNMatrixInferenceLayer{inner: _r}
-}
-
-// @property   inputFeatureChannels @abstract   The number of feature channels input vector/matrix.
-//
-// InputFeatureChannels calls the underlying InputFeatureChannels.
-func (x *RNNMatrixInferenceLayer) InputFeatureChannels() uint {
-	return x.inner.InputFeatureChannels()
-}
-
-// @property   outputFeatureChannels @abstract   The number of feature channels in the output vector/matrix.
-//
-// OutputFeatureChannels calls the underlying OutputFeatureChannels.
-func (x *RNNMatrixInferenceLayer) OutputFeatureChannels() uint {
-	return x.inner.OutputFeatureChannels()
-}
-
-// @property   numberOfLayers @abstract   Number of layers in the filter-stack. This will be one when using initWithDevice:rnnDescriptor to initialize this filter and the number of entries in the array 'rnnDescriptors' when initializing this filter with initWithDevice:rnnDescriptors.
-//
-// NumberOfLayers calls the underlying NumberOfLayers.
-func (x *RNNMatrixInferenceLayer) NumberOfLayers() uint {
-	return x.inner.NumberOfLayers()
-}
-
-// @property   recurrentOutputIsTemporary @abstract   How output states from @ref encodeSequenceToCommandBuffer are constructed. Defaults to NO. For reference @see MPSState.
-//
-// RecurrentOutputIsTemporary calls the underlying RecurrentOutputIsTemporary.
+// How output states from
 func (x *RNNMatrixInferenceLayer) RecurrentOutputIsTemporary() bool {
-	return x.inner.RecurrentOutputIsTemporary()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("recurrentOutputIsTemporary"))
+	return _r
 }
 
-// SetRecurrentOutputIsTemporary calls the underlying SetRecurrentOutputIsTemporary.
 func (x *RNNMatrixInferenceLayer) SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) {
-	x.inner.SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrentOutputIsTemporary:"), recurrentOutputIsTemporary)
 }
 
-// @property   storeAllIntermediateStates @abstract   If YES then calls to @ref encodeSequenceToCommandBuffer return every recurrent state in the array: recurrentOutputStates. Defaults to NO.
-//
-// StoreAllIntermediateStates calls the underlying StoreAllIntermediateStates.
+// If YES then calls to
 func (x *RNNMatrixInferenceLayer) StoreAllIntermediateStates() bool {
-	return x.inner.StoreAllIntermediateStates()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("storeAllIntermediateStates"))
+	return _r
 }
 
-// SetStoreAllIntermediateStates calls the underlying SetStoreAllIntermediateStates.
 func (x *RNNMatrixInferenceLayer) SetStoreAllIntermediateStates(storeAllIntermediateStates bool) {
-	x.inner.SetStoreAllIntermediateStates(storeAllIntermediateStates)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAllIntermediateStates:"), storeAllIntermediateStates)
 }
-
-// @property   bidirectionalCombineMode @abstract   Defines how to combine the output-results, when encoding bidirectional layers using @ref encodeBidirectionalSequenceToCommandBuffer. Defaults to @ref MPSRNNBidirectionalCombineModeNone.
-//
-// BidirectionalCombineMode calls the underlying BidirectionalCombineMode.
-func (x *RNNMatrixInferenceLayer) BidirectionalCombineMode() mpsneuralnetwork.MPSRNNBidirectionalCombineMode {
-	return x.inner.BidirectionalCombineMode()
-}
-
-// SetBidirectionalCombineMode calls the underlying SetBidirectionalCombineMode.
-func (x *RNNMatrixInferenceLayer) SetBidirectionalCombineMode(bidirectionalCombineMode mpsneuralnetwork.MPSRNNBidirectionalCombineMode) {
-	x.inner.SetBidirectionalCombineMode(bidirectionalCombineMode)
-}
-
-func (x *RNNMatrixInferenceLayer) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
 
 // RNNMatrixInferenceLayerable is the interface implemented by [RNNMatrixInferenceLayer], for mocking and DI.
 type RNNMatrixInferenceLayerable interface {
-	Unwrap() *raw.MPSRNNMatrixInferenceLayer
+	obj.Object
 	WithRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool) *RNNMatrixInferenceLayer
 	WithStoreAllIntermediateStates(storeAllIntermediateStates bool) *RNNMatrixInferenceLayer
-	WithBidirectionalCombineMode(bidirectionalCombineMode mpsneuralnetwork.MPSRNNBidirectionalCombineMode) *RNNMatrixInferenceLayer
-	WithOptions(options mpscore.MPSKernelOptions) *RNNMatrixInferenceLayer
 	WithLabel(label string) *RNNMatrixInferenceLayer
-	EncodeSequenceToCommandBufferSourceMatricesSourceOffsetsDestinationMatricesDestinationOffsetsRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], sourceOffsets *uint, destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationOffsets *uint, recurrentInputState *mpsneuralnetwork.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNRecurrentMatrixState])
-	EncodeSequenceToCommandBufferSourceMatricesDestinationMatricesRecurrentInputStateRecurrentOutputStates(commandBuffer metal.MTLCommandBuffer, sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], recurrentInputState *mpsneuralnetwork.MPSRNNRecurrentMatrixState, recurrentOutputStates *foundation.NSMutableArray[*mpsneuralnetwork.MPSRNNRecurrentMatrixState])
-	EncodeBidirectionalSequenceToCommandBufferSourceSequenceDestinationForwardMatricesDestinationBackwardMatrices(commandBuffer metal.MTLCommandBuffer, sourceSequence *foundation.NSArray[*mpscore.MPSMatrix], destinationForwardMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationBackwardMatrices *foundation.NSArray[*mpscore.MPSMatrix])
-	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *RNNMatrixInferenceLayer
-	InputFeatureChannels() uint
-	OutputFeatureChannels() uint
-	NumberOfLayers() uint
+	InputFeatureChannels() int
+	OutputFeatureChannels() int
+	NumberOfLayers() int
 	RecurrentOutputIsTemporary() bool
 	SetRecurrentOutputIsTemporary(recurrentOutputIsTemporary bool)
 	StoreAllIntermediateStates() bool
 	SetStoreAllIntermediateStates(storeAllIntermediateStates bool)
-	BidirectionalCombineMode() mpsneuralnetwork.MPSRNNBidirectionalCombineMode
-	SetBidirectionalCombineMode(bidirectionalCombineMode mpsneuralnetwork.MPSRNNBidirectionalCombineMode)
 }
 
 var _ RNNMatrixInferenceLayerable = (*RNNMatrixInferenceLayer)(nil)

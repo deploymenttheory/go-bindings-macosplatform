@@ -5,126 +5,144 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRActionsClusterDisableActionParams wraps [raw.MTRActionsClusterDisableActionParams] with a fluent Go API.
+// MTRActionsClusterDisableActionParams is an idiomatic wrapper over the Objective-C class MTRActionsClusterDisableActionParams.
 type MTRActionsClusterDisableActionParams struct {
-	inner *raw.MTRActionsClusterDisableActionParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRActionsClusterDisableActionParams].
-func (x *MTRActionsClusterDisableActionParams) Unwrap() *raw.MTRActionsClusterDisableActionParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRActionsClusterDisableActionParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRActionsClusterDisableActionParamsFromID adopts an existing object pointer as a MTRActionsClusterDisableActionParams (nil for 0).
+// MTRActionsClusterDisableActionParamsFromID adopts an existing Objective-C object as a MTRActionsClusterDisableActionParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRActionsClusterDisableActionParamsFromID(id objc.ID) *MTRActionsClusterDisableActionParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRActionsClusterDisableActionParams{inner: raw.MTRActionsClusterDisableActionParamsFromID(id)}
+	x := &MTRActionsClusterDisableActionParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRActionsClusterDisableActionParams creates a new [MTRActionsClusterDisableActionParams].
+// mTRActionsClusterDisableActionParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRActionsClusterDisableActionParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRActionsClusterDisableActionParamsAdopt(id objc.ID) *MTRActionsClusterDisableActionParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRActionsClusterDisableActionParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRActionsClusterDisableActionParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRActionsClusterDisableActionParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRActionsClusterDisableActionParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRActionsClusterDisableActionParams creates a new MTRActionsClusterDisableActionParams.
 func NewMTRActionsClusterDisableActionParams() *MTRActionsClusterDisableActionParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRActionsClusterDisableActionParams")), objc.RegisterName("new"))
-	return &MTRActionsClusterDisableActionParams{inner: raw.MTRActionsClusterDisableActionParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRActionsClusterDisableActionParams")), objc.RegisterName("new"))
+	return mTRActionsClusterDisableActionParamsAdopt(_id)
 }
 
-// WithActionID sets the actionID property and returns the receiver for chaining.
-func (x *MTRActionsClusterDisableActionParams) WithActionID(actionID *foundation.NSNumber) *MTRActionsClusterDisableActionParams {
-	x.inner.SetActionID(actionID)
+// WithActionID sets actionID and returns the receiver so calls can be chained.
+func (x *MTRActionsClusterDisableActionParams) WithActionID(actionID obj.Object) *MTRActionsClusterDisableActionParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 	return x
 }
 
-// WithInvokeID sets the invokeID property and returns the receiver for chaining.
-func (x *MTRActionsClusterDisableActionParams) WithInvokeID(invokeID *foundation.NSNumber) *MTRActionsClusterDisableActionParams {
-	x.inner.SetInvokeID(invokeID)
+// WithInvokeID sets invokeID and returns the receiver so calls can be chained.
+func (x *MTRActionsClusterDisableActionParams) WithInvokeID(invokeID obj.Object) *MTRActionsClusterDisableActionParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRActionsClusterDisableActionParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRActionsClusterDisableActionParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRActionsClusterDisableActionParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRActionsClusterDisableActionParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRActionsClusterDisableActionParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRActionsClusterDisableActionParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRActionsClusterDisableActionParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRActionsClusterDisableActionParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// ActionID calls the underlying ActionID.
-func (x *MTRActionsClusterDisableActionParams) ActionID() *foundation.NSNumber {
-	return x.inner.ActionID()
+func (x *MTRActionsClusterDisableActionParams) ActionID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actionID"))
+	return obj.Wrap(_r)
 }
 
-// SetActionID calls the underlying SetActionID.
-func (x *MTRActionsClusterDisableActionParams) SetActionID(actionID *foundation.NSNumber) {
-	x.inner.SetActionID(actionID)
+func (x *MTRActionsClusterDisableActionParams) SetActionID(actionID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 }
 
-// InvokeID calls the underlying InvokeID.
-func (x *MTRActionsClusterDisableActionParams) InvokeID() *foundation.NSNumber {
-	return x.inner.InvokeID()
+func (x *MTRActionsClusterDisableActionParams) InvokeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invokeID"))
+	return obj.Wrap(_r)
 }
 
-// SetInvokeID calls the underlying SetInvokeID.
-func (x *MTRActionsClusterDisableActionParams) SetInvokeID(invokeID *foundation.NSNumber) {
-	x.inner.SetInvokeID(invokeID)
+func (x *MTRActionsClusterDisableActionParams) SetInvokeID(invokeID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRActionsClusterDisableActionParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRActionsClusterDisableActionParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRActionsClusterDisableActionParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRActionsClusterDisableActionParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRActionsClusterDisableActionParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRActionsClusterDisableActionParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRActionsClusterDisableActionParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRActionsClusterDisableActionParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRActionsClusterDisableActionParamsable is the interface implemented by [MTRActionsClusterDisableActionParams], for mocking and DI.
 type MTRActionsClusterDisableActionParamsable interface {
-	Unwrap() *raw.MTRActionsClusterDisableActionParams
-	WithActionID(actionID *foundation.NSNumber) *MTRActionsClusterDisableActionParams
-	WithInvokeID(invokeID *foundation.NSNumber) *MTRActionsClusterDisableActionParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRActionsClusterDisableActionParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRActionsClusterDisableActionParams
-	ActionID() *foundation.NSNumber
-	SetActionID(actionID *foundation.NSNumber)
-	InvokeID() *foundation.NSNumber
-	SetInvokeID(invokeID *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithActionID(actionID obj.Object) *MTRActionsClusterDisableActionParams
+	WithInvokeID(invokeID obj.Object) *MTRActionsClusterDisableActionParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRActionsClusterDisableActionParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRActionsClusterDisableActionParams
+	ActionID() obj.Object
+	SetActionID(actionID obj.Object)
+	InvokeID() obj.Object
+	SetInvokeID(invokeID obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRActionsClusterDisableActionParamsable = (*MTRActionsClusterDisableActionParams)(nil)

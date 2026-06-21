@@ -5,171 +5,165 @@
 package sharedwithyoucore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that determines how the system shares a document in a collaboration.
 //
-// CollaborationOption wraps [raw.SWCollaborationOption] with a fluent Go API.
+// CollaborationOption is an idiomatic wrapper over the Objective-C class SWCollaborationOption.
 type CollaborationOption struct {
-	inner *raw.SWCollaborationOption
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SWCollaborationOption].
-func (x *CollaborationOption) Unwrap() *raw.SWCollaborationOption { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollaborationOption) ID() objc.ID { return x.inner.Ptr() }
-
-// CollaborationOptionFromID adopts an existing object pointer as a CollaborationOption (nil for 0).
+// CollaborationOptionFromID adopts an existing Objective-C object as a CollaborationOption
+// (nil for 0), retaining it and registering a release finalizer.
 func CollaborationOptionFromID(id objc.ID) *CollaborationOption {
 	if id == 0 {
 		return nil
 	}
-	return &CollaborationOption{inner: raw.SWCollaborationOptionFromID(id)}
+	x := &CollaborationOption{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// collaborationOptionAdopt wraps an Objective-C object that this code just created as a
+// CollaborationOption (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collaborationOptionAdopt(id objc.ID) *CollaborationOption {
+	if id == 0 {
+		return nil
+	}
+	x := &CollaborationOption{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollaborationOption) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollaborationOption) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollaborationOption) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates and initializes a collaboration option object.
 //
-// NewCollaborationOptionWithTitleIdentifier creates a new [CollaborationOption].
+// NewCollaborationOptionWithTitleIdentifier creates a new CollaborationOption.
 func NewCollaborationOptionWithTitleIdentifier(title string, identifier string) *CollaborationOption {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWCollaborationOption")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:identifier:"), foundation.NSStringStringWithUTF8String(title).Ptr(), foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &CollaborationOption{inner: raw.SWCollaborationOptionFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationOption")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTitle:identifier:"), purego.NSString(title), purego.NSString(identifier))
+	return collaborationOptionAdopt(_id)
 }
 
 // A localized string the system displays as a title to represent the permissions option.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *CollaborationOption) WithTitle(title string) *CollaborationOption {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // A localized string the system displays to represent the permissions option in the collaboration view.
 //
-// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
 func (x *CollaborationOption) WithSubtitle(subtitle string) *CollaborationOption {
-	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
 // A Boolean value that represents the selected state of an option.
 //
-// WithSelected sets the selected property and returns the receiver for chaining.
+// WithSelected sets selected and returns the receiver so calls can be chained.
 func (x *CollaborationOption) WithSelected(selected bool) *CollaborationOption {
-	x.inner.SetSelected(selected)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:"), selected)
 	return x
 }
 
 // An array of option identifiers that the app must select before the system makes the option interactive.
 //
-// WithRequiredOptionsIdentifiers sets the collection, converting the Go slice to an NSArray.
-func (x *CollaborationOption) WithRequiredOptionsIdentifiers(items ...*foundation.NSString) *CollaborationOption {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetRequiredOptionsIdentifiers(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetRequiredOptionsIdentifiers(_arr)
+// WithRequiredOptionsIdentifiers sets the collection and returns the receiver so calls can be chained.
+func (x *CollaborationOption) WithRequiredOptionsIdentifiers(items ...obj.Object) *CollaborationOption {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredOptionsIdentifiers:"), _arr)
 	return x
 }
 
-// @abstract A localized title string to be used when displaying the option
-//
-// Title calls the underlying Title.
+// A localized title string to be used when displaying the option
 func (x *CollaborationOption) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
 func (x *CollaborationOption) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// @abstract Unique identifier
-//
-// Identifier calls the underlying Identifier.
+// Unique identifier
 func (x *CollaborationOption) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract A localized subtitle string to be used when displaying the option
-//
-// Subtitle calls the underlying Subtitle.
+// A localized subtitle string to be used when displaying the option
 func (x *CollaborationOption) Subtitle() string {
-	_r := x.inner.Subtitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSubtitle calls the underlying SetSubtitle.
 func (x *CollaborationOption) SetSubtitle(subtitle string) {
-	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 }
 
-// @abstract A flag that indicates whether the option is selected. @discussion This property should only be set directly when the option represents an individual switch. Defaults to NO
-//
-// IsSelected calls the underlying IsSelected.
+// A flag that indicates whether the option is selected. This property should only be set directly when the option represents an individual switch. Defaults to NO
 func (x *CollaborationOption) IsSelected() bool {
-	return x.inner.IsSelected()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSelected"))
+	return _r
 }
 
-// SetSelected calls the underlying SetSelected.
 func (x *CollaborationOption) SetSelected(selected bool) {
-	x.inner.SetSelected(selected)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:"), selected)
 }
 
-// @abstract An array of option identifiers that must already be selected in order to be interacted with
+// An array of option identifiers that must already be selected in order to be interacted with
 //
 // RequiredOptionsIdentifiers returns the collection as a Go slice.
 func (x *CollaborationOption) RequiredOptionsIdentifiers() []string {
-	arr := x.inner.RequiredOptionsIdentifiers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requiredOptionsIdentifiers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetRequiredOptionsIdentifiers calls the underlying SetRequiredOptionsIdentifiers.
-func (x *CollaborationOption) SetRequiredOptionsIdentifiers(requiredOptionsIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetRequiredOptionsIdentifiers(requiredOptionsIdentifiers)
+func (x *CollaborationOption) SetRequiredOptionsIdentifiers(requiredOptionsIdentifiers []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredOptionsIdentifiers:"), purego.SliceToNSArray(requiredOptionsIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // CollaborationOptionable is the interface implemented by [CollaborationOption], for mocking and DI.
 type CollaborationOptionable interface {
-	Unwrap() *raw.SWCollaborationOption
+	obj.Object
 	WithTitle(title string) *CollaborationOption
 	WithSubtitle(subtitle string) *CollaborationOption
 	WithSelected(selected bool) *CollaborationOption
-	WithRequiredOptionsIdentifiers(items ...*foundation.NSString) *CollaborationOption
+	WithRequiredOptionsIdentifiers(items ...obj.Object) *CollaborationOption
 	Title() string
 	SetTitle(title string)
 	Identifier() string
@@ -178,7 +172,7 @@ type CollaborationOptionable interface {
 	IsSelected() bool
 	SetSelected(selected bool)
 	RequiredOptionsIdentifiers() []string
-	SetRequiredOptionsIdentifiers(requiredOptionsIdentifiers *foundation.NSArray[*foundation.NSString])
+	SetRequiredOptionsIdentifiers(requiredOptionsIdentifiers []string)
 }
 
 var _ CollaborationOptionable = (*CollaborationOption)(nil)

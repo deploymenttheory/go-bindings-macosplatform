@@ -5,87 +5,91 @@
 package audiovideobridging
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// AVB17221ACMPInterface wraps [raw.AVB17221ACMPInterface] with a fluent Go API.
+// AVB17221ACMPInterface is an idiomatic wrapper over the Objective-C class AVB17221ACMPInterface.
 type AVB17221ACMPInterface struct {
-	inner *raw.AVB17221ACMPInterface
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVB17221ACMPInterface].
-func (x *AVB17221ACMPInterface) Unwrap() *raw.AVB17221ACMPInterface { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AVB17221ACMPInterface) ID() objc.ID { return x.inner.Ptr() }
-
-// AVB17221ACMPInterfaceFromID adopts an existing object pointer as a AVB17221ACMPInterface (nil for 0).
+// AVB17221ACMPInterfaceFromID adopts an existing Objective-C object as a AVB17221ACMPInterface
+// (nil for 0), retaining it and registering a release finalizer.
 func AVB17221ACMPInterfaceFromID(id objc.ID) *AVB17221ACMPInterface {
 	if id == 0 {
 		return nil
 	}
-	return &AVB17221ACMPInterface{inner: raw.AVB17221ACMPInterfaceFromID(id)}
+	x := &AVB17221ACMPInterface{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAVB17221ACMPInterface creates a new [AVB17221ACMPInterface].
-func NewAVB17221ACMPInterface() *AVB17221ACMPInterface {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVB17221ACMPInterface")), objc.RegisterName("new"))
-	return &AVB17221ACMPInterface{inner: raw.AVB17221ACMPInterfaceFromID(_id)}
-}
-
-// @method		setHandler:forEntityID: @abstract	Add an object implementing the AVB17221ACMPClient protocol as a handler for messages to or from a specified EntityID. @param		handler	The object which will handle all of the commands and responses. @param		targetEntityID	The EntityID of the entity the messages are to or from. @result		YES if the handler was added, NO if there is already a handler or if the routing ID couldn't be added.
-//
-// SetHandlerForEntityID calls the underlying SetHandlerForEntityID.
-func (x *AVB17221ACMPInterface) SetHandlerForEntityID(handler raw.AVB17221ACMPClient, targetEntityID uint64) bool {
-	return x.inner.SetHandlerForEntityID(handler, targetEntityID)
-}
-
-// @method		removeHandlerForEntityID: @abstract	Removed a handler  for messages to or from a specified EntityID. @param		targetEntityID	The EntityID of the entity the messages are to or from.
-//
-// RemoveHandlerForEntityID calls the underlying RemoveHandlerForEntityID.
-func (x *AVB17221ACMPInterface) RemoveHandlerForEntityID(targetEntityID uint64) {
-	x.inner.RemoveHandlerForEntityID(targetEntityID)
-}
-
-// @method		sendACMPResponseMessage: @abstract	Send an ACMP response message. @param		message	A pointer to an AVB17221ACMPMessage struct containing the ACMP message to send. @result		kIOReturnSuccess if the message was successfully sent, otherwise an error indicating failure reason. @discussion	This method synchronizes access to sending ACMP messages, and can safely be called from multiple threads and while handling a received command.
-//
-// SendACMPResponseMessageError calls the underlying SendACMPResponseMessageError.
-func (x *AVB17221ACMPInterface) SendACMPResponseMessageError(message *raw.AVB17221ACMPMessage) (bool, error) {
-	return x.inner.SendACMPResponseMessageError(message)
-}
-
-// @method		sendACMPCommandMessage:completionHandler: @abstract	Send an ACMP command message. @param		message	A pointer to an AVB17221ACMPMessage struct containing the ACMP message. @param		completionHandler	A block containing code to execute when the command has been sent or timed out. @result		kIOReturnSuccess if the message was successfully sent, otherwise an error indicating failure reason. @discussion	This method synchronizes access to sending ACMP messages, and can safely be called from multiple threads. The completionHandler is synchronized with the reception of messages from the kernel object providing the command transport. This method handles the retry and message timeout per the IEEE Std 1722.1™-2013 standard timeouts.
-//
-// SendACMPCommandMessageCompletionHandler calls the underlying SendACMPCommandMessageCompletionHandler.
-func (x *AVB17221ACMPInterface) SendACMPCommandMessageCompletionHandler(message *raw.AVB17221ACMPMessage, completionHandler func(unsafe.Pointer, *raw.AVB17221ACMPMessage)) bool {
-	return x.inner.SendACMPCommandMessageCompletionHandler(message, completionHandler)
-}
-
-// @property	multicastDestinationAddress @abstract	An AVBMACAddress of the multicast destination MAC address being used for all ACMP messages on the interface. @discussion	The MAC Address pointed to by the property is pre-initialized with the IEEE Std 1722.1™-2013 standard value, 91:e0:f0:01:00:00
-//
-// MulticastDestinationAddress calls the underlying MulticastDestinationAddress.
-func (x *AVB17221ACMPInterface) MulticastDestinationAddress() *MACAddress {
-	_r := x.inner.MulticastDestinationAddress()
-	if _r == nil {
+// aVB17221ACMPInterfaceAdopt wraps an Objective-C object that this code just created as a
+// AVB17221ACMPInterface (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func aVB17221ACMPInterfaceAdopt(id objc.ID) *AVB17221ACMPInterface {
+	if id == 0 {
 		return nil
 	}
-	return &MACAddress{inner: _r}
+	x := &AVB17221ACMPInterface{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *AVB17221ACMPInterface) asAVB1722ControlInterface() *raw.AVB1722ControlInterface {
-	return &x.inner.AVB1722ControlInterface
+// Description returns the object's -description text.
+func (x *AVB17221ACMPInterface) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AVB17221ACMPInterface) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AVB17221ACMPInterface) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAVB17221ACMPInterface creates a new AVB17221ACMPInterface.
+func NewAVB17221ACMPInterface() *AVB17221ACMPInterface {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVB17221ACMPInterface")), objc.RegisterName("new"))
+	return aVB17221ACMPInterfaceAdopt(_id)
+}
+
+// Removed a handler  for messages to or from a specified EntityID.
+func (x *AVB17221ACMPInterface) RemoveHandlerForEntityID(targetEntityID uint64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeHandlerForEntityID:"), targetEntityID)
+}
+
+// Send an ACMP response message. This method synchronizes access to sending ACMP messages, and can safely be called from multiple threads and while handling a received command.
+func (x *AVB17221ACMPInterface) SendACMPResponseMessage(message *AVB17221ACMPMessage) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendACMPResponseMessage:error:"), objref.IDOf(message), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// An AVBMACAddress of the multicast destination MAC address being used for all ACMP messages on the interface. The MAC Address pointed to by the property is pre-initialized with the IEEE Std 1722.1™-2013 standard value, 91:e0:f0:01:00:00
+func (x *AVB17221ACMPInterface) MulticastDestinationAddress() *MACAddress {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multicastDestinationAddress"))
+	return MACAddressFromID(_r)
 }
 
 // AVB17221ACMPInterfaceable is the interface implemented by [AVB17221ACMPInterface], for mocking and DI.
 type AVB17221ACMPInterfaceable interface {
-	Unwrap() *raw.AVB17221ACMPInterface
-	SetHandlerForEntityID(handler raw.AVB17221ACMPClient, targetEntityID uint64) bool
+	obj.Object
 	RemoveHandlerForEntityID(targetEntityID uint64)
-	SendACMPResponseMessageError(message *raw.AVB17221ACMPMessage) (bool, error)
-	SendACMPCommandMessageCompletionHandler(message *raw.AVB17221ACMPMessage, completionHandler func(unsafe.Pointer, *raw.AVB17221ACMPMessage)) bool
+	SendACMPResponseMessage(message *AVB17221ACMPMessage) error
 	MulticastDestinationAddress() *MACAddress
 }
 

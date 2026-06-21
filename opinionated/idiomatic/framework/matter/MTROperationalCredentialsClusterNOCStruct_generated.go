@@ -5,99 +5,120 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROperationalCredentialsClusterNOCStruct wraps [raw.MTROperationalCredentialsClusterNOCStruct] with a fluent Go API.
+// MTROperationalCredentialsClusterNOCStruct is an idiomatic wrapper over the Objective-C class MTROperationalCredentialsClusterNOCStruct.
 type MTROperationalCredentialsClusterNOCStruct struct {
-	inner *raw.MTROperationalCredentialsClusterNOCStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROperationalCredentialsClusterNOCStruct].
-func (x *MTROperationalCredentialsClusterNOCStruct) Unwrap() *raw.MTROperationalCredentialsClusterNOCStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROperationalCredentialsClusterNOCStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTROperationalCredentialsClusterNOCStructFromID adopts an existing object pointer as a MTROperationalCredentialsClusterNOCStruct (nil for 0).
+// MTROperationalCredentialsClusterNOCStructFromID adopts an existing Objective-C object as a MTROperationalCredentialsClusterNOCStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROperationalCredentialsClusterNOCStructFromID(id objc.ID) *MTROperationalCredentialsClusterNOCStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTROperationalCredentialsClusterNOCStruct{inner: raw.MTROperationalCredentialsClusterNOCStructFromID(id)}
+	x := &MTROperationalCredentialsClusterNOCStruct{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTROperationalCredentialsClusterNOCStruct creates a new [MTROperationalCredentialsClusterNOCStruct].
+// mTROperationalCredentialsClusterNOCStructAdopt wraps an Objective-C object that this code just created as a
+// MTROperationalCredentialsClusterNOCStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROperationalCredentialsClusterNOCStructAdopt(id objc.ID) *MTROperationalCredentialsClusterNOCStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTROperationalCredentialsClusterNOCStruct{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTROperationalCredentialsClusterNOCStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROperationalCredentialsClusterNOCStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROperationalCredentialsClusterNOCStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTROperationalCredentialsClusterNOCStruct creates a new MTROperationalCredentialsClusterNOCStruct.
 func NewMTROperationalCredentialsClusterNOCStruct() *MTROperationalCredentialsClusterNOCStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROperationalCredentialsClusterNOCStruct")), objc.RegisterName("new"))
-	return &MTROperationalCredentialsClusterNOCStruct{inner: raw.MTROperationalCredentialsClusterNOCStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTROperationalCredentialsClusterNOCStruct")), objc.RegisterName("new"))
+	return mTROperationalCredentialsClusterNOCStructAdopt(_id)
 }
 
-// WithNoc sets the noc property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterNOCStruct) WithNoc(noc *foundation.NSData) *MTROperationalCredentialsClusterNOCStruct {
-	x.inner.SetNoc(noc)
+// WithNoc sets noc and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterNOCStruct) WithNoc(noc obj.Object) *MTROperationalCredentialsClusterNOCStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNoc:"), objref.IDOf(noc))
 	return x
 }
 
-// WithIcac sets the icac property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterNOCStruct) WithIcac(icac *foundation.NSData) *MTROperationalCredentialsClusterNOCStruct {
-	x.inner.SetIcac(icac)
+// WithIcac sets icac and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterNOCStruct) WithIcac(icac obj.Object) *MTROperationalCredentialsClusterNOCStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIcac:"), objref.IDOf(icac))
 	return x
 }
 
-// WithFabricIndex sets the fabricIndex property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterNOCStruct) WithFabricIndex(fabricIndex *foundation.NSNumber) *MTROperationalCredentialsClusterNOCStruct {
-	x.inner.SetFabricIndex(fabricIndex)
+// WithFabricIndex sets fabricIndex and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterNOCStruct) WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterNOCStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 	return x
 }
 
-// Noc calls the underlying Noc.
-func (x *MTROperationalCredentialsClusterNOCStruct) Noc() *foundation.NSData {
-	return x.inner.Noc()
+func (x *MTROperationalCredentialsClusterNOCStruct) Noc() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("noc"))
+	return obj.Wrap(_r)
 }
 
-// SetNoc calls the underlying SetNoc.
-func (x *MTROperationalCredentialsClusterNOCStruct) SetNoc(noc *foundation.NSData) {
-	x.inner.SetNoc(noc)
+func (x *MTROperationalCredentialsClusterNOCStruct) SetNoc(noc obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNoc:"), objref.IDOf(noc))
 }
 
-// Icac calls the underlying Icac.
-func (x *MTROperationalCredentialsClusterNOCStruct) Icac() *foundation.NSData {
-	return x.inner.Icac()
+func (x *MTROperationalCredentialsClusterNOCStruct) Icac() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icac"))
+	return obj.Wrap(_r)
 }
 
-// SetIcac calls the underlying SetIcac.
-func (x *MTROperationalCredentialsClusterNOCStruct) SetIcac(icac *foundation.NSData) {
-	x.inner.SetIcac(icac)
+func (x *MTROperationalCredentialsClusterNOCStruct) SetIcac(icac obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIcac:"), objref.IDOf(icac))
 }
 
-// FabricIndex calls the underlying FabricIndex.
-func (x *MTROperationalCredentialsClusterNOCStruct) FabricIndex() *foundation.NSNumber {
-	return x.inner.FabricIndex()
+func (x *MTROperationalCredentialsClusterNOCStruct) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+	return obj.Wrap(_r)
 }
 
-// SetFabricIndex calls the underlying SetFabricIndex.
-func (x *MTROperationalCredentialsClusterNOCStruct) SetFabricIndex(fabricIndex *foundation.NSNumber) {
-	x.inner.SetFabricIndex(fabricIndex)
+func (x *MTROperationalCredentialsClusterNOCStruct) SetFabricIndex(fabricIndex obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
 }
 
 // MTROperationalCredentialsClusterNOCStructable is the interface implemented by [MTROperationalCredentialsClusterNOCStruct], for mocking and DI.
 type MTROperationalCredentialsClusterNOCStructable interface {
-	Unwrap() *raw.MTROperationalCredentialsClusterNOCStruct
-	WithNoc(noc *foundation.NSData) *MTROperationalCredentialsClusterNOCStruct
-	WithIcac(icac *foundation.NSData) *MTROperationalCredentialsClusterNOCStruct
-	WithFabricIndex(fabricIndex *foundation.NSNumber) *MTROperationalCredentialsClusterNOCStruct
-	Noc() *foundation.NSData
-	SetNoc(noc *foundation.NSData)
-	Icac() *foundation.NSData
-	SetIcac(icac *foundation.NSData)
-	FabricIndex() *foundation.NSNumber
-	SetFabricIndex(fabricIndex *foundation.NSNumber)
+	obj.Object
+	WithNoc(noc obj.Object) *MTROperationalCredentialsClusterNOCStruct
+	WithIcac(icac obj.Object) *MTROperationalCredentialsClusterNOCStruct
+	WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterNOCStruct
+	Noc() obj.Object
+	SetNoc(noc obj.Object)
+	Icac() obj.Object
+	SetIcac(icac obj.Object)
+	FabricIndex() obj.Object
+	SetFabricIndex(fabricIndex obj.Object)
 }
 
 var _ MTROperationalCredentialsClusterNOCStructable = (*MTROperationalCredentialsClusterNOCStruct)(nil)

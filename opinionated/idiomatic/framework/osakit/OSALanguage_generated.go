@@ -5,107 +5,119 @@
 package osakit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osakit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Language wraps [raw.OSALanguage] with a fluent Go API.
+// Language is an idiomatic wrapper over the Objective-C class OSALanguage.
 type Language struct {
-	inner *raw.OSALanguage
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.OSALanguage].
-func (x *Language) Unwrap() *raw.OSALanguage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Language) ID() objc.ID { return x.inner.Ptr() }
-
-// LanguageFromID adopts an existing object pointer as a Language (nil for 0).
+// LanguageFromID adopts an existing Objective-C object as a Language
+// (nil for 0), retaining it and registering a release finalizer.
 func LanguageFromID(id objc.ID) *Language {
 	if id == 0 {
 		return nil
 	}
-	return &Language{inner: raw.OSALanguageFromID(id)}
+	x := &Language{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLanguageWithComponent creates a new [Language].
-func NewLanguageWithComponent(component *carboncore.ComponentRecord) *Language {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("OSALanguage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComponent:"), component)
-	return &Language{inner: raw.OSALanguageFromID(_id)}
-}
-
-// SharedLanguageInstance calls the underlying SharedLanguageInstance.
-func (x *Language) SharedLanguageInstance() *LanguageInstance {
-	_r := x.inner.SharedLanguageInstance()
-	if _r == nil {
+// languageAdopt wraps an Objective-C object that this code just created as a
+// Language (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func languageAdopt(id objc.ID) *Language {
+	if id == 0 {
 		return nil
 	}
-	return &LanguageInstance{inner: _r}
+	x := &Language{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// ComponentInstance calls the underlying ComponentInstance.
-func (x *Language) ComponentInstance() *carboncore.ComponentInstanceRecord {
-	return x.inner.ComponentInstance()
+// Description returns the object's -description text.
+func (x *Language) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Name calls the underlying Name.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Language) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Language) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLanguage creates a new Language.
+func NewLanguage() *Language {
+	_id := objc.Send[objc.ID](objc.ID(_class("OSALanguage")), objc.RegisterName("new"))
+	return languageAdopt(_id)
+}
+
+func (x *Language) SharedLanguageInstance() *LanguageInstance {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sharedLanguageInstance"))
+	return LanguageInstanceFromID(_r)
+}
+
 func (x *Language) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Info calls the underlying Info.
 func (x *Language) Info() string {
-	_r := x.inner.Info()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("info"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Type calls the underlying Type.
-func (x *Language) Type() uint {
-	return x.inner.Type()
+func (x *Language) Type() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// SubType calls the underlying SubType.
-func (x *Language) SubType() uint {
-	return x.inner.SubType()
+func (x *Language) SubType() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("subType"))
+	return _r
 }
 
-// Manufacturer calls the underlying Manufacturer.
-func (x *Language) Manufacturer() uint {
-	return x.inner.Manufacturer()
+func (x *Language) Manufacturer() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("manufacturer"))
+	return _r
 }
 
-// Features calls the underlying Features.
-func (x *Language) Features() OSALanguageFeatures {
-	return OSALanguageFeatures(x.inner.Features())
+func (x *Language) Features() LanguageFeatures {
+	_r := objc.Send[LanguageFeatures](objref.IDOf(x), objc.RegisterName("features"))
+	return _r
 }
 
-// IsThreadSafe calls the underlying IsThreadSafe.
 func (x *Language) IsThreadSafe() bool {
-	return x.inner.IsThreadSafe()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isThreadSafe"))
+	return _r
 }
 
 // Languageable is the interface implemented by [Language], for mocking and DI.
 type Languageable interface {
-	Unwrap() *raw.OSALanguage
+	obj.Object
 	SharedLanguageInstance() *LanguageInstance
-	ComponentInstance() *carboncore.ComponentInstanceRecord
 	Name() string
 	Info() string
-	Type() uint
-	SubType() uint
-	Manufacturer() uint
-	Features() OSALanguageFeatures
+	Type() int
+	SubType() int
+	Manufacturer() int
+	Features() LanguageFeatures
 	IsThreadSafe() bool
 }
 

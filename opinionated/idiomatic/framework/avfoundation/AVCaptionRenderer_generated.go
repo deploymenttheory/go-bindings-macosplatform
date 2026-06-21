@@ -5,140 +5,92 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that renders captions for display at a particular time.
 //
-// CaptionRenderer wraps [raw.AVCaptionRenderer] with a fluent Go API.
+// CaptionRenderer is an idiomatic wrapper over the Objective-C class AVCaptionRenderer.
 type CaptionRenderer struct {
-	inner *raw.AVCaptionRenderer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptionRenderer].
-func (x *CaptionRenderer) Unwrap() *raw.AVCaptionRenderer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptionRenderer) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptionRendererFromID adopts an existing object pointer as a CaptionRenderer (nil for 0).
+// CaptionRendererFromID adopts an existing Objective-C object as a CaptionRenderer
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptionRendererFromID(id objc.ID) *CaptionRenderer {
 	if id == 0 {
 		return nil
 	}
-	return &CaptionRenderer{inner: raw.AVCaptionRendererFromID(id)}
+	x := &CaptionRenderer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCaptionRenderer creates a new [CaptionRenderer].
+// captionRendererAdopt wraps an Objective-C object that this code just created as a
+// CaptionRenderer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captionRendererAdopt(id objc.ID) *CaptionRenderer {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptionRenderer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptionRenderer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptionRenderer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptionRenderer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptionRenderer creates a new CaptionRenderer.
 func NewCaptionRenderer() *CaptionRenderer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionRenderer")), objc.RegisterName("new"))
-	return &CaptionRenderer{inner: raw.AVCaptionRendererFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptionRenderer")), objc.RegisterName("new"))
+	return captionRendererAdopt(_id)
 }
 
 // The captions to render.
 //
-// WithCaptions sets the collection, converting the Go slice to an NSArray.
+// WithCaptions sets the collection and returns the receiver so calls can be chained.
 func (x *CaptionRenderer) WithCaptions(items ...CaptionProvider) *CaptionRenderer {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetCaptions(foundation.NSArrayFromID[*raw.AVCaption](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asCaption().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.AVCaption](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetCaptions(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v CaptionProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptions:"), _arr)
 	return x
 }
 
-// The drawing bounds of caption scenes.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *CaptionRenderer) WithBounds(bounds corefoundation.CGRect) *CaptionRenderer {
-	x.inner.SetBounds(bounds)
-	return x
-}
-
-// Determine render time ranges within an enclosing time range to account for visual changes among captions.
-//
-// CaptionSceneChangesInRange calls the underlying CaptionSceneChangesInRange.
-func (x *CaptionRenderer) CaptionSceneChangesInRange(consideredTimeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.AVCaptionRendererScene] {
-	return x.inner.CaptionSceneChangesInRange(consideredTimeRange)
-}
-
-// Draw the captions for the time you specify.
-//
-// RenderInContextForTime calls the underlying RenderInContextForTime.
-func (x *CaptionRenderer) RenderInContextForTime(ctx unsafe.Pointer, time_ coremedia.CMTime) {
-	x.inner.RenderInContextForTime(ctx, time_)
-}
-
-// @property captions @abstract A NSArray holding captions to consider for rendering. @discussion This is the array of AVCaptions to consider when drawing. The array can contain no captions.
+// A NSArray holding captions to consider for rendering. This is the array of AVCaptions to consider when drawing. The array can contain no captions.
 //
 // Captions returns the collection as a Go slice.
 func (x *CaptionRenderer) Captions() []*Caption {
-	arr := x.inner.Captions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Caption {
-		return &Caption{inner: raw.AVCaptionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("captions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Caption { return CaptionFromID(_id) })
 }
 
-// SetCaptions calls the underlying SetCaptions.
-func (x *CaptionRenderer) SetCaptions(captions ...CaptionProvider) {
-	_ptrs := make([]objc.ID, len(captions))
-	for _i, _v := range captions {
-		_ptrs[_i] = _v.asCaption().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.AVCaption]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.AVCaption](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.AVCaption](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetCaptions(_arg0)
-}
-
-// @property bounds @abstract A CGRect holding bounds for the drawing of caption scene(s). @discussion This is a CGRect indicating where captions are drawn using renderInContext:atTime: Once established, this CGRect is used in each call to renderInContext:atTime: until it is changed to another value. This should be set up earlier than drawing.
-//
-// Bounds calls the underlying Bounds.
-func (x *CaptionRenderer) Bounds() corefoundation.CGRect {
-	return x.inner.Bounds()
-}
-
-// SetBounds calls the underlying SetBounds.
-func (x *CaptionRenderer) SetBounds(bounds corefoundation.CGRect) {
-	x.inner.SetBounds(bounds)
+func (x *CaptionRenderer) SetCaptions(captions []*Caption) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptions:"), purego.SliceToNSArray(captions, func(_v *Caption) objc.ID { return objref.IDOf(_v) }))
 }
 
 // CaptionRendererable is the interface implemented by [CaptionRenderer], for mocking and DI.
 type CaptionRendererable interface {
-	Unwrap() *raw.AVCaptionRenderer
+	obj.Object
 	WithCaptions(items ...CaptionProvider) *CaptionRenderer
-	WithBounds(bounds corefoundation.CGRect) *CaptionRenderer
-	CaptionSceneChangesInRange(consideredTimeRange coremedia.CMTimeRange) *foundation.NSArray[*raw.AVCaptionRendererScene]
-	RenderInContextForTime(ctx unsafe.Pointer, time_ coremedia.CMTime)
 	Captions() []*Caption
-	SetCaptions(captions ...CaptionProvider)
-	Bounds() corefoundation.CGRect
-	SetBounds(bounds corefoundation.CGRect)
+	SetCaptions(captions []*Caption)
 }
 
 var _ CaptionRendererable = (*CaptionRenderer)(nil)

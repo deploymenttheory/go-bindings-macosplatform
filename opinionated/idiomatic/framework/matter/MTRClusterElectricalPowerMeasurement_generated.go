@@ -5,197 +5,213 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterElectricalPowerMeasurement wraps [raw.MTRClusterElectricalPowerMeasurement] with a fluent Go API.
+// MTRClusterElectricalPowerMeasurement is an idiomatic wrapper over the Objective-C class MTRClusterElectricalPowerMeasurement.
 type MTRClusterElectricalPowerMeasurement struct {
-	inner *raw.MTRClusterElectricalPowerMeasurement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterElectricalPowerMeasurement].
-func (x *MTRClusterElectricalPowerMeasurement) Unwrap() *raw.MTRClusterElectricalPowerMeasurement {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterElectricalPowerMeasurement) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterElectricalPowerMeasurementFromID adopts an existing object pointer as a MTRClusterElectricalPowerMeasurement (nil for 0).
+// MTRClusterElectricalPowerMeasurementFromID adopts an existing Objective-C object as a MTRClusterElectricalPowerMeasurement
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterElectricalPowerMeasurementFromID(id objc.ID) *MTRClusterElectricalPowerMeasurement {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterElectricalPowerMeasurement{inner: raw.MTRClusterElectricalPowerMeasurementFromID(id)}
+	x := &MTRClusterElectricalPowerMeasurement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterElectricalPowerMeasurementAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterElectricalPowerMeasurement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterElectricalPowerMeasurementAdopt(id objc.ID) *MTRClusterElectricalPowerMeasurement {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterElectricalPowerMeasurement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterElectricalPowerMeasurement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterElectricalPowerMeasurement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterElectricalPowerMeasurement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 //
-// NewMTRClusterElectricalPowerMeasurementWithDeviceEndpointIDQueue creates a new [MTRClusterElectricalPowerMeasurement].
-func NewMTRClusterElectricalPowerMeasurementWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterElectricalPowerMeasurement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterElectricalPowerMeasurement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterElectricalPowerMeasurement{inner: raw.MTRClusterElectricalPowerMeasurementFromID(_id)}
+// NewMTRClusterElectricalPowerMeasurementWithDeviceEndpointIDQueue creates a new MTRClusterElectricalPowerMeasurement.
+func NewMTRClusterElectricalPowerMeasurementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterElectricalPowerMeasurement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterElectricalPowerMeasurement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterElectricalPowerMeasurementAdopt(_id)
 }
 
-// ReadAttributePowerModeWithParams calls the underlying ReadAttributePowerModeWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributePowerModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePowerModeWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributePowerModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePowerModeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeNumberOfMeasurementTypesWithParams calls the underlying ReadAttributeNumberOfMeasurementTypesWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeNumberOfMeasurementTypesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeNumberOfMeasurementTypesWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeNumberOfMeasurementTypesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfMeasurementTypesWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAccuracyWithParams calls the underlying ReadAttributeAccuracyWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeAccuracyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAccuracyWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeAccuracyWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAccuracyWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRangesWithParams calls the underlying ReadAttributeRangesWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeRangesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRangesWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeRangesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRangesWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeVoltageWithParams calls the underlying ReadAttributeVoltageWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeVoltageWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeVoltageWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeVoltageWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeVoltageWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveCurrentWithParams calls the underlying ReadAttributeActiveCurrentWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeActiveCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeActiveCurrentWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeActiveCurrentWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveCurrentWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeReactiveCurrentWithParams calls the underlying ReadAttributeReactiveCurrentWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeReactiveCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeReactiveCurrentWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeReactiveCurrentWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeReactiveCurrentWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeApparentCurrentWithParams calls the underlying ReadAttributeApparentCurrentWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeApparentCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeApparentCurrentWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeApparentCurrentWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeApparentCurrentWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeActivePowerWithParams calls the underlying ReadAttributeActivePowerWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeActivePowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeActivePowerWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeActivePowerWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActivePowerWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeReactivePowerWithParams calls the underlying ReadAttributeReactivePowerWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeReactivePowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeReactivePowerWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeReactivePowerWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeReactivePowerWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeApparentPowerWithParams calls the underlying ReadAttributeApparentPowerWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeApparentPowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeApparentPowerWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeApparentPowerWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeApparentPowerWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRMSVoltageWithParams calls the underlying ReadAttributeRMSVoltageWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeRMSVoltageWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRMSVoltageWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeRMSVoltageWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRMSVoltageWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRMSCurrentWithParams calls the underlying ReadAttributeRMSCurrentWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeRMSCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRMSCurrentWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeRMSCurrentWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRMSCurrentWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRMSPowerWithParams calls the underlying ReadAttributeRMSPowerWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeRMSPowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRMSPowerWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeRMSPowerWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRMSPowerWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFrequencyWithParams calls the underlying ReadAttributeFrequencyWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeFrequencyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFrequencyWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeFrequencyWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFrequencyWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeHarmonicCurrentsWithParams calls the underlying ReadAttributeHarmonicCurrentsWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeHarmonicCurrentsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeHarmonicCurrentsWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeHarmonicCurrentsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHarmonicCurrentsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeHarmonicPhasesWithParams calls the underlying ReadAttributeHarmonicPhasesWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeHarmonicPhasesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeHarmonicPhasesWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeHarmonicPhasesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHarmonicPhasesWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePowerFactorWithParams calls the underlying ReadAttributePowerFactorWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributePowerFactorWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePowerFactorWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributePowerFactorWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePowerFactorWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeNeutralCurrentWithParams calls the underlying ReadAttributeNeutralCurrentWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeNeutralCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeNeutralCurrentWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeNeutralCurrentWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNeutralCurrentWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterElectricalPowerMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterElectricalPowerMeasurement) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterElectricalPowerMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterElectricalPowerMeasurementable is the interface implemented by [MTRClusterElectricalPowerMeasurement], for mocking and DI.
 type MTRClusterElectricalPowerMeasurementable interface {
-	Unwrap() *raw.MTRClusterElectricalPowerMeasurement
-	ReadAttributePowerModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeNumberOfMeasurementTypesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAccuracyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRangesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeVoltageWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeActiveCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeReactiveCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeApparentCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeActivePowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeReactivePowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeApparentPowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRMSVoltageWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRMSCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRMSPowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFrequencyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeHarmonicCurrentsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeHarmonicPhasesWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePowerFactorWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeNeutralCurrentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributePowerModeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeNumberOfMeasurementTypesWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAccuracyWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRangesWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeVoltageWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeActiveCurrentWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeReactiveCurrentWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeApparentCurrentWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeActivePowerWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeReactivePowerWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeApparentPowerWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRMSVoltageWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRMSCurrentWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRMSPowerWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFrequencyWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeHarmonicCurrentsWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeHarmonicPhasesWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePowerFactorWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeNeutralCurrentWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterElectricalPowerMeasurementable = (*MTRClusterElectricalPowerMeasurement)(nil)

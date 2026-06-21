@@ -5,93 +5,95 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that holds public key credential transport information.
 //
-// AuthorizationSecurityKeyPublicKeyCredentialDescriptor wraps [raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor] with a fluent Go API.
+// AuthorizationSecurityKeyPublicKeyCredentialDescriptor is an idiomatic wrapper over the Objective-C class ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor.
 type AuthorizationSecurityKeyPublicKeyCredentialDescriptor struct {
-	inner *raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor].
-func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID adopts an existing object pointer as a AuthorizationSecurityKeyPublicKeyCredentialDescriptor (nil for 0).
+// AuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID adopts an existing Objective-C object as a AuthorizationSecurityKeyPublicKeyCredentialDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(id objc.ID) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationSecurityKeyPublicKeyCredentialDescriptor{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(id)}
+	x := &AuthorizationSecurityKeyPublicKeyCredentialDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// authorizationSecurityKeyPublicKeyCredentialDescriptorAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationSecurityKeyPublicKeyCredentialDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationSecurityKeyPublicKeyCredentialDescriptorAdopt(id objc.ID) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationSecurityKeyPublicKeyCredentialDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates the object with the credential ID and the array of transports.
 //
-// NewAuthorizationSecurityKeyPublicKeyCredentialDescriptorWithCredentialIDTransports creates a new [AuthorizationSecurityKeyPublicKeyCredentialDescriptor].
-func NewAuthorizationSecurityKeyPublicKeyCredentialDescriptorWithCredentialIDTransports(credentialID *foundation.NSData, allowedTransports *foundation.NSArray[*foundation.NSString]) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialID:transports:"), credentialID.Ptr(), allowedTransports.Ptr())
-	return &AuthorizationSecurityKeyPublicKeyCredentialDescriptor{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorFromID(_id)}
+// NewAuthorizationSecurityKeyPublicKeyCredentialDescriptorWithCredentialIDTransports creates a new AuthorizationSecurityKeyPublicKeyCredentialDescriptor.
+func NewAuthorizationSecurityKeyPublicKeyCredentialDescriptorWithCredentialIDTransports(credentialID obj.Object, allowedTransports []obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialID:transports:"), objref.IDOf(credentialID), purego.SliceToNSArray(allowedTransports, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return authorizationSecurityKeyPublicKeyCredentialDescriptorAdopt(_id)
 }
 
 // The array of transport types.
 //
-// WithTransports sets the collection, converting the Go slice to an NSArray.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) WithTransports(items ...*foundation.NSString) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetTransports(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetTransports(_arr)
+// WithTransports sets the collection and returns the receiver so calls can be chained.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) WithTransports(items ...obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransports:"), _arr)
 	return x
 }
 
-// @abstract An array indicating transports for the credential indicated by credentialID.
+// An array indicating transports for the credential indicated by credentialID.
 //
 // Transports returns the collection as a Go slice.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) Transports() []*foundation.NSString {
-	arr := x.inner.Transports()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) Transports() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transports"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetTransports calls the underlying SetTransports.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) SetTransports(transports *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetTransports(transports)
+func (x *AuthorizationSecurityKeyPublicKeyCredentialDescriptor) SetTransports(transports []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransports:"), purego.SliceToNSArray(transports, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // AuthorizationSecurityKeyPublicKeyCredentialDescriptorable is the interface implemented by [AuthorizationSecurityKeyPublicKeyCredentialDescriptor], for mocking and DI.
 type AuthorizationSecurityKeyPublicKeyCredentialDescriptorable interface {
-	Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptor
-	WithTransports(items ...*foundation.NSString) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor
-	Transports() []*foundation.NSString
-	SetTransports(transports *foundation.NSArray[*foundation.NSString])
+	obj.Object
+	WithTransports(items ...obj.Object) *AuthorizationSecurityKeyPublicKeyCredentialDescriptor
+	Transports() []obj.Object
+	SetTransports(transports []obj.Object)
 }
 
 var _ AuthorizationSecurityKeyPublicKeyCredentialDescriptorable = (*AuthorizationSecurityKeyPublicKeyCredentialDescriptor)(nil)

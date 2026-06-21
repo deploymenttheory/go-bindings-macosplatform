@@ -5,193 +5,188 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An object that encapsulates information about a resource request from a resource loader object.
 //
-// AssetResourceLoadingRequest wraps [raw.AVAssetResourceLoadingRequest] with a fluent Go API.
+// AssetResourceLoadingRequest is an idiomatic wrapper over the Objective-C class AVAssetResourceLoadingRequest.
 type AssetResourceLoadingRequest struct {
-	inner *raw.AVAssetResourceLoadingRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetResourceLoadingRequest].
-func (x *AssetResourceLoadingRequest) Unwrap() *raw.AVAssetResourceLoadingRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetResourceLoadingRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetResourceLoadingRequestFromID adopts an existing object pointer as a AssetResourceLoadingRequest (nil for 0).
+// AssetResourceLoadingRequestFromID adopts an existing Objective-C object as a AssetResourceLoadingRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetResourceLoadingRequestFromID(id objc.ID) *AssetResourceLoadingRequest {
 	if id == 0 {
 		return nil
 	}
-	return &AssetResourceLoadingRequest{inner: raw.AVAssetResourceLoadingRequestFromID(id)}
+	x := &AssetResourceLoadingRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAssetResourceLoadingRequest creates a new [AssetResourceLoadingRequest].
+// assetResourceLoadingRequestAdopt wraps an Objective-C object that this code just created as a
+// AssetResourceLoadingRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetResourceLoadingRequestAdopt(id objc.ID) *AssetResourceLoadingRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetResourceLoadingRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetResourceLoadingRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetResourceLoadingRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetResourceLoadingRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAssetResourceLoadingRequest creates a new AssetResourceLoadingRequest.
 func NewAssetResourceLoadingRequest() *AssetResourceLoadingRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetResourceLoadingRequest")), objc.RegisterName("new"))
-	return &AssetResourceLoadingRequest{inner: raw.AVAssetResourceLoadingRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetResourceLoadingRequest")), objc.RegisterName("new"))
+	return assetResourceLoadingRequestAdopt(_id)
 }
 
 // The URL response for the loading request.
 //
-// WithResponse sets the response property and returns the receiver for chaining.
-func (x *AssetResourceLoadingRequest) WithResponse(response *foundation.NSURLResponse) *AssetResourceLoadingRequest {
-	x.inner.SetResponse(response)
+// WithResponse sets response and returns the receiver so calls can be chained.
+func (x *AssetResourceLoadingRequest) WithResponse(response obj.Object) *AssetResourceLoadingRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResponse:"), objref.IDOf(response))
 	return x
 }
 
 // An URL request instance if the loading request was redirected.
 //
-// WithRedirect sets the redirect property and returns the receiver for chaining.
-func (x *AssetResourceLoadingRequest) WithRedirect(redirect *foundation.NSURLRequest) *AssetResourceLoadingRequest {
-	x.inner.SetRedirect(redirect)
+// WithRedirect sets redirect and returns the receiver so calls can be chained.
+func (x *AssetResourceLoadingRequest) WithRedirect(redirect obj.Object) *AssetResourceLoadingRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRedirect:"), objref.IDOf(redirect))
 	return x
 }
 
 // Causes the receiver to treat the processing of the request as complete.
-//
-// FinishLoading calls the underlying FinishLoading.
 func (x *AssetResourceLoadingRequest) FinishLoading() {
-	x.inner.FinishLoading()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishLoading"))
 }
 
-// Causes the receiver to handle the failure to load a resource for which a resource loader’s delegate took responsibility.
-//
-// FinishLoadingWithError calls the underlying FinishLoadingWithError.
-func (x *AssetResourceLoadingRequest) FinishLoadingWithError(error_ unsafe.Pointer) {
-	x.inner.FinishLoadingWithError(error_)
+// An NSURLRequest for the requested resource.
+func (x *AssetResourceLoadingRequest) Request() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("request"))
+	return obj.Wrap(_r)
 }
 
-// @property 		request @abstract		An NSURLRequest for the requested resource.
-//
-// Request calls the underlying Request.
-func (x *AssetResourceLoadingRequest) Request() *foundation.NSURLRequest {
-	return x.inner.Request()
-}
-
-// @property 		finished @abstract		Indicates whether loading of the resource has been finished. @discussion	The value of this property becomes YES only in response to an invocation of either -finishLoading or -finishLoadingWithError:.
-//
-// IsFinished calls the underlying IsFinished.
+// Indicates whether loading of the resource has been finished. The value of this property becomes YES only in response to an invocation of either -finishLoading or -finishLoadingWithError:.
 func (x *AssetResourceLoadingRequest) IsFinished() bool {
-	return x.inner.IsFinished()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFinished"))
+	return _r
 }
 
-// @property 		cancelled @abstract		Indicates whether the request has been cancelled. @discussion	The value of this property becomes YES when the resource loader cancels the loading of a request, just prior to sending the message -resourceLoader:didCancelLoadingRequest: to its delegate.
-//
-// IsCancelled calls the underlying IsCancelled.
+// Indicates whether the request has been cancelled. The value of this property becomes YES when the resource loader cancels the loading of a request, just prior to sending the message -resourceLoader:didCancelLoadingRequest: to its delegate.
 func (x *AssetResourceLoadingRequest) IsCancelled() bool {
-	return x.inner.IsCancelled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCancelled"))
+	return _r
 }
 
-// @property 		contentInformationRequest @abstract		An instance of AVAssetResourceLoadingContentInformationRequest that you must populate with information about the resource before responding to any AVAssetResourceLoadingDataRequests for the resource.  The value of this property will be nil if no such information is being requested.
-//
-// ContentInformationRequest calls the underlying ContentInformationRequest.
+// An instance of AVAssetResourceLoadingContentInformationRequest that you must populate with information about the resource before responding to any AVAssetResourceLoadingDataRequests for the resource.  The value of this property will be nil if no such information is being requested.
 func (x *AssetResourceLoadingRequest) ContentInformationRequest() *AssetResourceLoadingContentInformationRequest {
-	_r := x.inner.ContentInformationRequest()
-	if _r == nil {
-		return nil
-	}
-	return &AssetResourceLoadingContentInformationRequest{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentInformationRequest"))
+	return AssetResourceLoadingContentInformationRequestFromID(_r)
 }
 
-// @property 		dataRequest @abstract		An instance of AVAssetResourceLoadingDataRequest that indicates the range of resource data that's being requested.  If an AVAssetResourceLoadingContentInformationRequest has been provided, you must set its properties appropriately before responding to any AVAssetResourceLoadingDataRequests.  The value of this property will be nil if no data is being requested.
-//
-// DataRequest calls the underlying DataRequest.
+// An instance of AVAssetResourceLoadingDataRequest that indicates the range of resource data that's being requested.  If an AVAssetResourceLoadingContentInformationRequest has been provided, you must set its properties appropriately before responding to any AVAssetResourceLoadingDataRequests.  The value of this property will be nil if no data is being requested.
 func (x *AssetResourceLoadingRequest) DataRequest() *AssetResourceLoadingDataRequest {
-	_r := x.inner.DataRequest()
-	if _r == nil {
-		return nil
-	}
-	return &AssetResourceLoadingDataRequest{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRequest"))
+	return AssetResourceLoadingDataRequestFromID(_r)
 }
 
-// @property 		response @abstract		Set the value of this property to an instance of NSURLResponse indicating a response to the loading request. If no response is needed, leave the value of this property set to nil.
-//
-// Response calls the underlying Response.
-func (x *AssetResourceLoadingRequest) Response() *foundation.NSURLResponse {
-	return x.inner.Response()
+// Set the value of this property to an instance of NSURLResponse indicating a response to the loading request. If no response is needed, leave the value of this property set to nil.
+func (x *AssetResourceLoadingRequest) Response() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("response"))
+	return obj.Wrap(_r)
 }
 
-// SetResponse calls the underlying SetResponse.
-func (x *AssetResourceLoadingRequest) SetResponse(response *foundation.NSURLResponse) {
-	x.inner.SetResponse(response)
+func (x *AssetResourceLoadingRequest) SetResponse(response obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResponse:"), objref.IDOf(response))
 }
 
-// @property 		redirect @abstract		Set the value of this property to an instance of NSURLRequest indicating a redirection of the loading request to another URL. If no redirection is needed, leave the value of this property set to nil. @discussion	AVAssetResourceLoader supports redirects to HTTP URLs only. Redirects to other URLs will result in a loading failure.
-//
-// Redirect calls the underlying Redirect.
-func (x *AssetResourceLoadingRequest) Redirect() *foundation.NSURLRequest {
-	return x.inner.Redirect()
+// Set the value of this property to an instance of NSURLRequest indicating a redirection of the loading request to another URL. If no redirection is needed, leave the value of this property set to nil. AVAssetResourceLoader supports redirects to HTTP URLs only. Redirects to other URLs will result in a loading failure.
+func (x *AssetResourceLoadingRequest) Redirect() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("redirect"))
+	return obj.Wrap(_r)
 }
 
-// SetRedirect calls the underlying SetRedirect.
-func (x *AssetResourceLoadingRequest) SetRedirect(redirect *foundation.NSURLRequest) {
-	x.inner.SetRedirect(redirect)
+func (x *AssetResourceLoadingRequest) SetRedirect(redirect obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRedirect:"), objref.IDOf(redirect))
 }
 
-// @property 		requestor @abstract		The AVAssetResourceLoadingRequestor that made this request
-//
-// Requestor calls the underlying Requestor.
+// The AVAssetResourceLoadingRequestor that made this request
 func (x *AssetResourceLoadingRequest) Requestor() *AssetResourceLoadingRequestor {
-	_r := x.inner.Requestor()
-	if _r == nil {
-		return nil
-	}
-	return &AssetResourceLoadingRequestor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestor"))
+	return AssetResourceLoadingRequestorFromID(_r)
 }
 
 // Obtains key request data for a specific combination of application and content.
-//
-// StreamingContentKeyRequestDataForAppContentIdentifierOptionsError calls the underlying StreamingContentKeyRequestDataForAppContentIdentifierOptionsError.
-func (x *AssetResourceLoadingRequest) StreamingContentKeyRequestDataForAppContentIdentifierOptionsError(appIdentifier *foundation.NSData, contentIdentifier *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
-	return x.inner.StreamingContentKeyRequestDataForAppContentIdentifierOptionsError(appIdentifier, contentIdentifier, options)
+func (x *AssetResourceLoadingRequest) StreamingContentKeyRequestDataForAppContentIdentifierOptionsError(appIdentifier obj.Object, contentIdentifier obj.Object, options obj.Object) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("streamingContentKeyRequestDataForApp:contentIdentifier:options:error:"), objref.IDOf(appIdentifier), objref.IDOf(contentIdentifier), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // Obtains a persistable content key from a context.
-//
-// PersistentContentKeyFromKeyVendorResponseOptionsError calls the underlying PersistentContentKeyFromKeyVendorResponseOptionsError.
-func (x *AssetResourceLoadingRequest) PersistentContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
-	return x.inner.PersistentContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse, options)
+func (x *AssetResourceLoadingRequest) PersistentContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse obj.Object, options obj.Object) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentContentKeyFromKeyVendorResponse:options:error:"), objref.IDOf(keyVendorResponse), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // Causes the receiver to finish loading a resource for which a resource loader’s delegate took responsibility .
-//
-// FinishLoadingWithResponseDataRedirect calls the underlying FinishLoadingWithResponseDataRedirect.
-func (x *AssetResourceLoadingRequest) FinishLoadingWithResponseDataRedirect(response *foundation.NSURLResponse, data *foundation.NSData, redirect *foundation.NSURLRequest) {
-	x.inner.FinishLoadingWithResponseDataRedirect(response, data, redirect)
-}
-
-func (x *AssetResourceLoadingRequest) asAssetResourceLoadingRequest() *raw.AVAssetResourceLoadingRequest {
-	return x.inner
+func (x *AssetResourceLoadingRequest) FinishLoadingWithResponseDataRedirect(response obj.Object, data obj.Object, redirect obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishLoadingWithResponse:data:redirect:"), objref.IDOf(response), objref.IDOf(data), objref.IDOf(redirect))
 }
 
 // AssetResourceLoadingRequestable is the interface implemented by [AssetResourceLoadingRequest], for mocking and DI.
 type AssetResourceLoadingRequestable interface {
-	Unwrap() *raw.AVAssetResourceLoadingRequest
-	WithResponse(response *foundation.NSURLResponse) *AssetResourceLoadingRequest
-	WithRedirect(redirect *foundation.NSURLRequest) *AssetResourceLoadingRequest
+	obj.Object
+	WithResponse(response obj.Object) *AssetResourceLoadingRequest
+	WithRedirect(redirect obj.Object) *AssetResourceLoadingRequest
 	FinishLoading()
-	FinishLoadingWithError(error_ unsafe.Pointer)
-	Request() *foundation.NSURLRequest
+	Request() obj.Object
 	IsFinished() bool
 	IsCancelled() bool
 	ContentInformationRequest() *AssetResourceLoadingContentInformationRequest
 	DataRequest() *AssetResourceLoadingDataRequest
-	Response() *foundation.NSURLResponse
-	SetResponse(response *foundation.NSURLResponse)
-	Redirect() *foundation.NSURLRequest
-	SetRedirect(redirect *foundation.NSURLRequest)
+	Response() obj.Object
+	SetResponse(response obj.Object)
+	Redirect() obj.Object
+	SetRedirect(redirect obj.Object)
 	Requestor() *AssetResourceLoadingRequestor
-	StreamingContentKeyRequestDataForAppContentIdentifierOptionsError(appIdentifier *foundation.NSData, contentIdentifier *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error)
-	PersistentContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error)
-	FinishLoadingWithResponseDataRedirect(response *foundation.NSURLResponse, data *foundation.NSData, redirect *foundation.NSURLRequest)
+	StreamingContentKeyRequestDataForAppContentIdentifierOptionsError(appIdentifier obj.Object, contentIdentifier obj.Object, options obj.Object) (obj.Object, error)
+	PersistentContentKeyFromKeyVendorResponseOptionsError(keyVendorResponse obj.Object, options obj.Object) (obj.Object, error)
+	FinishLoadingWithResponseDataRedirect(response obj.Object, data obj.Object, redirect obj.Object)
 }
 
 var _ AssetResourceLoadingRequestable = (*AssetResourceLoadingRequest)(nil)

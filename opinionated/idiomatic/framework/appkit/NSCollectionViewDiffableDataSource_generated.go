@@ -5,88 +5,91 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The object you use to manage data and provide items for a collection view.
 //
-// CollectionViewDiffableDataSource wraps [raw.NSCollectionViewDiffableDataSource] with a fluent Go API.
+// CollectionViewDiffableDataSource is an idiomatic wrapper over the Objective-C class NSCollectionViewDiffableDataSource.
 type CollectionViewDiffableDataSource struct {
-	inner *raw.NSCollectionViewDiffableDataSource[objc.ID, objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCollectionViewDiffableDataSource].
-func (x *CollectionViewDiffableDataSource) Unwrap() *raw.NSCollectionViewDiffableDataSource[objc.ID, objc.ID] {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionViewDiffableDataSource) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionViewDiffableDataSourceFromID adopts an existing object pointer as a CollectionViewDiffableDataSource (nil for 0).
+// CollectionViewDiffableDataSourceFromID adopts an existing Objective-C object as a CollectionViewDiffableDataSource
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionViewDiffableDataSourceFromID(id objc.ID) *CollectionViewDiffableDataSource {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionViewDiffableDataSource{inner: raw.NSCollectionViewDiffableDataSourceFromID[objc.ID, objc.ID](id)}
-}
-
-// NewCollectionViewDiffableDataSourceWithCollectionViewItemProvider creates a new [CollectionViewDiffableDataSource].
-func NewCollectionViewDiffableDataSourceWithCollectionViewItemProvider(collectionView *raw.NSCollectionView, itemProvider objc.Block) *CollectionViewDiffableDataSource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionViewDiffableDataSource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCollectionView:itemProvider:"), collectionView.Ptr(), itemProvider)
-	return &CollectionViewDiffableDataSource{inner: raw.NSCollectionViewDiffableDataSourceFromID[objc.ID, objc.ID](_id)}
-}
-
-// WithSupplementaryViewProvider sets the supplementaryViewProvider property and returns the receiver for chaining.
-func (x *CollectionViewDiffableDataSource) WithSupplementaryViewProvider(supplementaryViewProvider objc.Block) *CollectionViewDiffableDataSource {
-	x.inner.SetSupplementaryViewProvider(supplementaryViewProvider)
+	x := &CollectionViewDiffableDataSource{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Snapshot calls the underlying Snapshot.
-func (x *CollectionViewDiffableDataSource) Snapshot() *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID] {
-	return x.inner.Snapshot()
+// collectionViewDiffableDataSourceAdopt wraps an Objective-C object that this code just created as a
+// CollectionViewDiffableDataSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionViewDiffableDataSourceAdopt(id objc.ID) *CollectionViewDiffableDataSource {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionViewDiffableDataSource{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// ApplySnapshotAnimatingDifferences calls the underlying ApplySnapshotAnimatingDifferences.
-func (x *CollectionViewDiffableDataSource) ApplySnapshotAnimatingDifferences(snapshot *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID], animatingDifferences bool) {
-	x.inner.ApplySnapshotAnimatingDifferences(snapshot, animatingDifferences)
+// Description returns the object's -description text.
+func (x *CollectionViewDiffableDataSource) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// ItemIdentifierForIndexPath calls the underlying ItemIdentifierForIndexPath.
-func (x *CollectionViewDiffableDataSource) ItemIdentifierForIndexPath(indexPath *foundation.NSIndexPath) objc.ID {
-	return x.inner.ItemIdentifierForIndexPath(indexPath)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollectionViewDiffableDataSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// IndexPathForItemIdentifier calls the underlying IndexPathForItemIdentifier.
-func (x *CollectionViewDiffableDataSource) IndexPathForItemIdentifier(identifier objc.ID) *foundation.NSIndexPath {
-	return x.inner.IndexPathForItemIdentifier(identifier)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollectionViewDiffableDataSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// SupplementaryViewProvider calls the underlying SupplementaryViewProvider.
-func (x *CollectionViewDiffableDataSource) SupplementaryViewProvider() objc.Block {
-	return x.inner.SupplementaryViewProvider()
+// NewCollectionViewDiffableDataSource creates a new CollectionViewDiffableDataSource.
+func NewCollectionViewDiffableDataSource() *CollectionViewDiffableDataSource {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewDiffableDataSource")), objc.RegisterName("new"))
+	return collectionViewDiffableDataSourceAdopt(_id)
 }
 
-// SetSupplementaryViewProvider calls the underlying SetSupplementaryViewProvider.
-func (x *CollectionViewDiffableDataSource) SetSupplementaryViewProvider(supplementaryViewProvider objc.Block) {
-	x.inner.SetSupplementaryViewProvider(supplementaryViewProvider)
+func (x *CollectionViewDiffableDataSource) Snapshot() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshot"))
+	return obj.Wrap(_r)
+}
+
+func (x *CollectionViewDiffableDataSource) ApplySnapshotAnimatingDifferences(snapshot obj.Object, animatingDifferences bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applySnapshot:animatingDifferences:"), objref.IDOf(snapshot), animatingDifferences)
+}
+
+func (x *CollectionViewDiffableDataSource) ItemIdentifierForIndexPath(indexPath obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemIdentifierForIndexPath:"), objref.IDOf(indexPath))
+	return obj.Wrap(_r)
+}
+
+func (x *CollectionViewDiffableDataSource) IndexPathForItemIdentifier(identifier obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPathForItemIdentifier:"), objref.IDOf(identifier))
+	return obj.Wrap(_r)
 }
 
 // CollectionViewDiffableDataSourceable is the interface implemented by [CollectionViewDiffableDataSource], for mocking and DI.
 type CollectionViewDiffableDataSourceable interface {
-	Unwrap() *raw.NSCollectionViewDiffableDataSource[objc.ID, objc.ID]
-	WithSupplementaryViewProvider(supplementaryViewProvider objc.Block) *CollectionViewDiffableDataSource
-	Snapshot() *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID]
-	ApplySnapshotAnimatingDifferences(snapshot *raw.NSDiffableDataSourceSnapshot[objc.ID, objc.ID], animatingDifferences bool)
-	ItemIdentifierForIndexPath(indexPath *foundation.NSIndexPath) objc.ID
-	IndexPathForItemIdentifier(identifier objc.ID) *foundation.NSIndexPath
-	SupplementaryViewProvider() objc.Block
-	SetSupplementaryViewProvider(supplementaryViewProvider objc.Block)
+	obj.Object
+	Snapshot() obj.Object
+	ApplySnapshotAnimatingDifferences(snapshot obj.Object, animatingDifferences bool)
+	ItemIdentifierForIndexPath(indexPath obj.Object) obj.Object
+	IndexPathForItemIdentifier(identifier obj.Object) obj.Object
 }
 
 var _ CollectionViewDiffableDataSourceable = (*CollectionViewDiffableDataSource)(nil)

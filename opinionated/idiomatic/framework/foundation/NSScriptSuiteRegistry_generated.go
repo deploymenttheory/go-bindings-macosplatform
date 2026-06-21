@@ -5,178 +5,163 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The top-level repository of scriptability information for an app at runtime.
 //
-// ScriptSuiteRegistry wraps [raw.NSScriptSuiteRegistry] with a fluent Go API.
+// ScriptSuiteRegistry is an idiomatic wrapper over the Objective-C class NSScriptSuiteRegistry.
 type ScriptSuiteRegistry struct {
-	inner *raw.NSScriptSuiteRegistry
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSScriptSuiteRegistry].
-func (x *ScriptSuiteRegistry) Unwrap() *raw.NSScriptSuiteRegistry { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScriptSuiteRegistry) ID() objc.ID { return x.inner.Ptr() }
-
-// ScriptSuiteRegistryFromID adopts an existing object pointer as a ScriptSuiteRegistry (nil for 0).
+// ScriptSuiteRegistryFromID adopts an existing Objective-C object as a ScriptSuiteRegistry
+// (nil for 0), retaining it and registering a release finalizer.
 func ScriptSuiteRegistryFromID(id objc.ID) *ScriptSuiteRegistry {
 	if id == 0 {
 		return nil
 	}
-	return &ScriptSuiteRegistry{inner: raw.NSScriptSuiteRegistryFromID(id)}
+	x := &ScriptSuiteRegistry{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewScriptSuiteRegistry creates a new [ScriptSuiteRegistry].
+// scriptSuiteRegistryAdopt wraps an Objective-C object that this code just created as a
+// ScriptSuiteRegistry (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scriptSuiteRegistryAdopt(id objc.ID) *ScriptSuiteRegistry {
+	if id == 0 {
+		return nil
+	}
+	x := &ScriptSuiteRegistry{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScriptSuiteRegistry) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScriptSuiteRegistry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScriptSuiteRegistry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScriptSuiteRegistry creates a new ScriptSuiteRegistry.
 func NewScriptSuiteRegistry() *ScriptSuiteRegistry {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScriptSuiteRegistry")), objc.RegisterName("new"))
-	return &ScriptSuiteRegistry{inner: raw.NSScriptSuiteRegistryFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSScriptSuiteRegistry")), objc.RegisterName("new"))
+	return scriptSuiteRegistryAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *ScriptSuiteRegistry) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptSuiteRegistry {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *ScriptSuiteRegistry) WithScriptingProperties(scriptingProperties obj.Object) *ScriptSuiteRegistry {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Loads the suite definitions in bundle aBundle, invoking loadSuiteWithDictionary:fromBundle: for each suite found.
-//
-// LoadSuitesFromBundle calls the underlying LoadSuitesFromBundle.
-func (x *ScriptSuiteRegistry) LoadSuitesFromBundle(bundle *raw.NSBundle) {
-	x.inner.LoadSuitesFromBundle(bundle)
+func (x *ScriptSuiteRegistry) LoadSuitesFromBundle(bundle *Bundle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadSuitesFromBundle:"), objref.IDOf(bundle))
 }
 
 // Loads the suite definition encapsulated in dictionary; previously, this suite definition was parsed from a .scriptSuite property list contained in a framework or in bundle.
-//
-// LoadSuiteWithDictionaryFromBundle calls the underlying LoadSuiteWithDictionaryFromBundle.
-func (x *ScriptSuiteRegistry) LoadSuiteWithDictionaryFromBundle(suiteDeclaration *raw.NSDictionary[objc.ID, objc.ID], bundle *raw.NSBundle) {
-	x.inner.LoadSuiteWithDictionaryFromBundle(suiteDeclaration, bundle)
+func (x *ScriptSuiteRegistry) LoadSuiteWithDictionaryFromBundle(suiteDeclaration obj.Object, bundle *Bundle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadSuiteWithDictionary:fromBundle:"), objref.IDOf(suiteDeclaration), objref.IDOf(bundle))
 }
 
 // Registers class description classDescription for use by Cocoa’s built-in scripting support by storing it in a per-suite internal dictionary under the class name.
-//
-// RegisterClassDescription calls the underlying RegisterClassDescription.
-func (x *ScriptSuiteRegistry) RegisterClassDescription(classDescription *raw.NSScriptClassDescription) {
-	x.inner.RegisterClassDescription(classDescription)
+func (x *ScriptSuiteRegistry) RegisterClassDescription(classDescription *ScriptClassDescription) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerClassDescription:"), objref.IDOf(classDescription))
 }
 
 // Registers command description commandDesc for use by Cocoa’s built-in scripting support by storing it in a per-suite internal dictionary under the command name.
-//
-// RegisterCommandDescription calls the underlying RegisterCommandDescription.
-func (x *ScriptSuiteRegistry) RegisterCommandDescription(commandDescription *raw.NSScriptCommandDescription) {
-	x.inner.RegisterCommandDescription(commandDescription)
+func (x *ScriptSuiteRegistry) RegisterCommandDescription(commandDescription *ScriptCommandDescription) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerCommandDescription:"), objref.IDOf(commandDescription))
 }
 
 // Returns the Apple event code associated with the suite named suiteName, such as ‘core’ for the Core suite.
-//
-// AppleEventCodeForSuite calls the underlying AppleEventCodeForSuite.
-func (x *ScriptSuiteRegistry) AppleEventCodeForSuite(suiteName string) uint {
-	return x.inner.AppleEventCodeForSuite(foundation.NSStringStringWithUTF8String(suiteName))
+func (x *ScriptSuiteRegistry) AppleEventCodeForSuite(suiteName string) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("appleEventCodeForSuite:"), purego.NSString(suiteName))
+	return _r
 }
 
 // Returns the bundle containing the suite-definition property list (extension .scriptSuite) identified by suiteName.
-//
-// BundleForSuite calls the underlying BundleForSuite.
 func (x *ScriptSuiteRegistry) BundleForSuite(suiteName string) *Bundle {
-	_r := x.inner.BundleForSuite(foundation.NSStringStringWithUTF8String(suiteName))
-	if _r == nil {
-		return nil
-	}
-	return &Bundle{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleForSuite:"), purego.NSString(suiteName))
+	return BundleFromID(_r)
 }
 
 // Returns the class descriptions contained in the suite identified by suiteName.
-//
-// ClassDescriptionsInSuite calls the underlying ClassDescriptionsInSuite.
-func (x *ScriptSuiteRegistry) ClassDescriptionsInSuite(suiteName string) *raw.NSDictionary[*raw.NSString, *raw.NSScriptClassDescription] {
-	return x.inner.ClassDescriptionsInSuite(foundation.NSStringStringWithUTF8String(suiteName))
+func (x *ScriptSuiteRegistry) ClassDescriptionsInSuite(suiteName string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classDescriptionsInSuite:"), purego.NSString(suiteName))
+	return obj.Wrap(_r)
 }
 
 // Returns the command descriptions contained in the suite identified by suiteName.
-//
-// CommandDescriptionsInSuite calls the underlying CommandDescriptionsInSuite.
-func (x *ScriptSuiteRegistry) CommandDescriptionsInSuite(suiteName string) *raw.NSDictionary[*raw.NSString, *raw.NSScriptCommandDescription] {
-	return x.inner.CommandDescriptionsInSuite(foundation.NSStringStringWithUTF8String(suiteName))
+func (x *ScriptSuiteRegistry) CommandDescriptionsInSuite(suiteName string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commandDescriptionsInSuite:"), purego.NSString(suiteName))
+	return obj.Wrap(_r)
 }
 
 // Returns the name of the suite definition associated with the given four-character Apple event code, code.
-//
-// SuiteForAppleEventCode calls the underlying SuiteForAppleEventCode.
-func (x *ScriptSuiteRegistry) SuiteForAppleEventCode(appleEventCode uint) *String {
-	_r := x.inner.SuiteForAppleEventCode(appleEventCode)
-	if _r == nil {
-		return nil
+func (x *ScriptSuiteRegistry) SuiteForAppleEventCode(appleEventCode int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suiteForAppleEventCode:"), appleEventCode)
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
 // Returns the class description associated with the given four-character Apple event code, code.
-//
-// ClassDescriptionWithAppleEventCode calls the underlying ClassDescriptionWithAppleEventCode.
-func (x *ScriptSuiteRegistry) ClassDescriptionWithAppleEventCode(appleEventCode uint) *ScriptClassDescription {
-	_r := x.inner.ClassDescriptionWithAppleEventCode(appleEventCode)
-	if _r == nil {
-		return nil
-	}
-	return &ScriptClassDescription{inner: _r}
+func (x *ScriptSuiteRegistry) ClassDescriptionWithAppleEventCode(appleEventCode int) *ScriptClassDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classDescriptionWithAppleEventCode:"), appleEventCode)
+	return ScriptClassDescriptionFromID(_r)
 }
 
 // Returns the command description identified by a suite’s four-character Apple event code of the class (eventClass) and the four-character Apple event code of the command (commandCode).
-//
-// CommandDescriptionWithAppleEventClassAndAppleEventCode calls the underlying CommandDescriptionWithAppleEventClassAndAppleEventCode.
-func (x *ScriptSuiteRegistry) CommandDescriptionWithAppleEventClassAndAppleEventCode(appleEventClassCode uint, appleEventIDCode uint) *ScriptCommandDescription {
-	_r := x.inner.CommandDescriptionWithAppleEventClassAndAppleEventCode(appleEventClassCode, appleEventIDCode)
-	if _r == nil {
-		return nil
-	}
-	return &ScriptCommandDescription{inner: _r}
+func (x *ScriptSuiteRegistry) CommandDescriptionWithAppleEventClassAndAppleEventCode(appleEventClassCode int, appleEventIDCode int) *ScriptCommandDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commandDescriptionWithAppleEventClass:andAppleEventCode:"), appleEventClassCode, appleEventIDCode)
+	return ScriptCommandDescriptionFromID(_r)
 }
 
 // Returns an NSData object that contains data in 'aete' resource format describing the scriptability information currently known to the application.
-//
-// AeteResource calls the underlying AeteResource.
 func (x *ScriptSuiteRegistry) AeteResource(languageName string) *Data {
-	_r := x.inner.AeteResource(foundation.NSStringStringWithUTF8String(languageName))
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("aeteResource:"), purego.NSString(languageName))
+	return DataFromID(_r)
 }
 
 // SuiteNames returns the collection as a Go slice.
 func (x *ScriptSuiteRegistry) SuiteNames() []string {
-	arr := x.inner.SuiteNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suiteNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-func (x *ScriptSuiteRegistry) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // ScriptSuiteRegistryable is the interface implemented by [ScriptSuiteRegistry], for mocking and DI.
 type ScriptSuiteRegistryable interface {
-	Unwrap() *raw.NSScriptSuiteRegistry
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptSuiteRegistry
-	LoadSuitesFromBundle(bundle *raw.NSBundle)
-	LoadSuiteWithDictionaryFromBundle(suiteDeclaration *raw.NSDictionary[objc.ID, objc.ID], bundle *raw.NSBundle)
-	RegisterClassDescription(classDescription *raw.NSScriptClassDescription)
-	RegisterCommandDescription(commandDescription *raw.NSScriptCommandDescription)
-	AppleEventCodeForSuite(suiteName string) uint
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *ScriptSuiteRegistry
+	LoadSuitesFromBundle(bundle *Bundle)
+	LoadSuiteWithDictionaryFromBundle(suiteDeclaration obj.Object, bundle *Bundle)
+	RegisterClassDescription(classDescription *ScriptClassDescription)
+	RegisterCommandDescription(commandDescription *ScriptCommandDescription)
+	AppleEventCodeForSuite(suiteName string) int
 	BundleForSuite(suiteName string) *Bundle
-	ClassDescriptionsInSuite(suiteName string) *raw.NSDictionary[*raw.NSString, *raw.NSScriptClassDescription]
-	CommandDescriptionsInSuite(suiteName string) *raw.NSDictionary[*raw.NSString, *raw.NSScriptCommandDescription]
-	SuiteForAppleEventCode(appleEventCode uint) *String
-	ClassDescriptionWithAppleEventCode(appleEventCode uint) *ScriptClassDescription
-	CommandDescriptionWithAppleEventClassAndAppleEventCode(appleEventClassCode uint, appleEventIDCode uint) *ScriptCommandDescription
+	ClassDescriptionsInSuite(suiteName string) obj.Object
+	CommandDescriptionsInSuite(suiteName string) obj.Object
+	SuiteForAppleEventCode(appleEventCode int) string
+	ClassDescriptionWithAppleEventCode(appleEventCode int) *ScriptClassDescription
+	CommandDescriptionWithAppleEventClassAndAppleEventCode(appleEventClassCode int, appleEventIDCode int) *ScriptCommandDescription
 	AeteResource(languageName string) *Data
 	SuiteNames() []string
 }

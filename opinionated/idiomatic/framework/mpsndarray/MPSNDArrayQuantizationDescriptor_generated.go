@@ -5,60 +5,73 @@
 package mpsndarray
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ArrayQuantizationDescriptor wraps [raw.MPSNDArrayQuantizationDescriptor] with a fluent Go API.
+// ArrayQuantizationDescriptor is an idiomatic wrapper over the Objective-C class MPSNDArrayQuantizationDescriptor.
 type ArrayQuantizationDescriptor struct {
-	inner *raw.MPSNDArrayQuantizationDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayQuantizationDescriptor].
-func (x *ArrayQuantizationDescriptor) Unwrap() *raw.MPSNDArrayQuantizationDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArrayQuantizationDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// ArrayQuantizationDescriptorFromID adopts an existing object pointer as a ArrayQuantizationDescriptor (nil for 0).
+// ArrayQuantizationDescriptorFromID adopts an existing Objective-C object as a ArrayQuantizationDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func ArrayQuantizationDescriptorFromID(id objc.ID) *ArrayQuantizationDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &ArrayQuantizationDescriptor{inner: raw.MPSNDArrayQuantizationDescriptorFromID(id)}
+	x := &ArrayQuantizationDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewArrayQuantizationDescriptor creates a new [ArrayQuantizationDescriptor].
+// arrayQuantizationDescriptorAdopt wraps an Objective-C object that this code just created as a
+// ArrayQuantizationDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arrayQuantizationDescriptorAdopt(id objc.ID) *ArrayQuantizationDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &ArrayQuantizationDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ArrayQuantizationDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ArrayQuantizationDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ArrayQuantizationDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewArrayQuantizationDescriptor creates a new ArrayQuantizationDescriptor.
 func NewArrayQuantizationDescriptor() *ArrayQuantizationDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayQuantizationDescriptor")), objc.RegisterName("new"))
-	return &ArrayQuantizationDescriptor{inner: raw.MPSNDArrayQuantizationDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayQuantizationDescriptor")), objc.RegisterName("new"))
+	return arrayQuantizationDescriptorAdopt(_id)
 }
 
-// @property  quantizationDataType @abstract  The datatype to use with quantization - the default is MPSDataTypeUint8
-//
-// QuantizationDataType calls the underlying QuantizationDataType.
-func (x *ArrayQuantizationDescriptor) QuantizationDataType() mpscore.MPSDataType {
-	return x.inner.QuantizationDataType()
-}
-
-// @property  quantizationScheme @abstract  The quantization scheme for this descriptor. The default is MPSNDArrayQuantizationTypeNone.
-//
-// QuantizationScheme calls the underlying QuantizationScheme.
-func (x *ArrayQuantizationDescriptor) QuantizationScheme() MPSNDArrayQuantizationScheme {
-	return MPSNDArrayQuantizationScheme(x.inner.QuantizationScheme())
-}
-
-func (x *ArrayQuantizationDescriptor) asArrayQuantizationDescriptor() *raw.MPSNDArrayQuantizationDescriptor {
-	return x.inner
+// The quantization scheme for this descriptor. The default is MPSNDArrayQuantizationTypeNone.
+func (x *ArrayQuantizationDescriptor) QuantizationScheme() ArrayQuantizationScheme {
+	_r := objc.Send[ArrayQuantizationScheme](objref.IDOf(x), objc.RegisterName("quantizationScheme"))
+	return _r
 }
 
 // ArrayQuantizationDescriptorable is the interface implemented by [ArrayQuantizationDescriptor], for mocking and DI.
 type ArrayQuantizationDescriptorable interface {
-	Unwrap() *raw.MPSNDArrayQuantizationDescriptor
-	QuantizationDataType() mpscore.MPSDataType
-	QuantizationScheme() MPSNDArrayQuantizationScheme
+	obj.Object
+	QuantizationScheme() ArrayQuantizationScheme
 }
 
 var _ ArrayQuantizationDescriptorable = (*ArrayQuantizationDescriptor)(nil)

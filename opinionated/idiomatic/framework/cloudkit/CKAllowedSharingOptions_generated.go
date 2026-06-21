@@ -5,132 +5,151 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that controls participant access and permission options.
 //
-// AllowedSharingOptions wraps [raw.CKAllowedSharingOptions] with a fluent Go API.
+// AllowedSharingOptions is an idiomatic wrapper over the Objective-C class CKAllowedSharingOptions.
 type AllowedSharingOptions struct {
-	inner *raw.CKAllowedSharingOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKAllowedSharingOptions].
-func (x *AllowedSharingOptions) Unwrap() *raw.CKAllowedSharingOptions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AllowedSharingOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// AllowedSharingOptionsFromID adopts an existing object pointer as a AllowedSharingOptions (nil for 0).
+// AllowedSharingOptionsFromID adopts an existing Objective-C object as a AllowedSharingOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func AllowedSharingOptionsFromID(id objc.ID) *AllowedSharingOptions {
 	if id == 0 {
 		return nil
 	}
-	return &AllowedSharingOptions{inner: raw.CKAllowedSharingOptionsFromID(id)}
+	x := &AllowedSharingOptions{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// allowedSharingOptionsAdopt wraps an Objective-C object that this code just created as a
+// AllowedSharingOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func allowedSharingOptionsAdopt(id objc.ID) *AllowedSharingOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &AllowedSharingOptions{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AllowedSharingOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AllowedSharingOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AllowedSharingOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates and initializes an allowed sharing options object.
 //
-// NewAllowedSharingOptionsWithAllowedParticipantPermissionOptionsAllowedParticipantAccessOptions creates a new [AllowedSharingOptions].
-func NewAllowedSharingOptionsWithAllowedParticipantPermissionOptionsAllowedParticipantAccessOptions(allowedParticipantPermissionOptions CKSharingParticipantPermissionOption, allowedParticipantAccessOptions CKSharingParticipantAccessOption) *AllowedSharingOptions {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKAllowedSharingOptions")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAllowedParticipantPermissionOptions:allowedParticipantAccessOptions:"), raw.CKSharingParticipantPermissionOption(allowedParticipantPermissionOptions), raw.CKSharingParticipantAccessOption(allowedParticipantAccessOptions))
-	return &AllowedSharingOptions{inner: raw.CKAllowedSharingOptionsFromID(_id)}
+// NewAllowedSharingOptionsWithAllowedParticipantPermissionOptionsAllowedParticipantAccessOptions creates a new AllowedSharingOptions.
+func NewAllowedSharingOptionsWithAllowedParticipantPermissionOptionsAllowedParticipantAccessOptions(allowedParticipantPermissionOptions SharingParticipantPermissionOption, allowedParticipantAccessOptions SharingParticipantAccessOption) *AllowedSharingOptions {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKAllowedSharingOptions")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAllowedParticipantPermissionOptions:allowedParticipantAccessOptions:"), allowedParticipantPermissionOptions, allowedParticipantAccessOptions)
+	return allowedSharingOptionsAdopt(_id)
 }
 
 // The permission option the system uses to control whether a user can grant read-only or write access.
 //
-// WithAllowedParticipantPermissionOptions sets the allowedParticipantPermissionOptions property and returns the receiver for chaining.
-func (x *AllowedSharingOptions) WithAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions CKSharingParticipantPermissionOption) *AllowedSharingOptions {
-	x.inner.SetAllowedParticipantPermissionOptions(raw.CKSharingParticipantPermissionOption(allowedParticipantPermissionOptions))
+// WithAllowedParticipantPermissionOptions sets allowedParticipantPermissionOptions and returns the receiver so calls can be chained.
+func (x *AllowedSharingOptions) WithAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions SharingParticipantPermissionOption) *AllowedSharingOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedParticipantPermissionOptions:"), allowedParticipantPermissionOptions)
 	return x
 }
 
 // The permission option the system uses to control whether a user can share publicly or privately.
 //
-// WithAllowedParticipantAccessOptions sets the allowedParticipantAccessOptions property and returns the receiver for chaining.
-func (x *AllowedSharingOptions) WithAllowedParticipantAccessOptions(allowedParticipantAccessOptions CKSharingParticipantAccessOption) *AllowedSharingOptions {
-	x.inner.SetAllowedParticipantAccessOptions(raw.CKSharingParticipantAccessOption(allowedParticipantAccessOptions))
+// WithAllowedParticipantAccessOptions sets allowedParticipantAccessOptions and returns the receiver so calls can be chained.
+func (x *AllowedSharingOptions) WithAllowedParticipantAccessOptions(allowedParticipantAccessOptions SharingParticipantAccessOption) *AllowedSharingOptions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedParticipantAccessOptions:"), allowedParticipantAccessOptions)
 	return x
 }
 
 // Default value is NO. If set, the system sharing UI allows the user to choose whether added participants can invite others to the share. CloudKit returns shares with CKShareParticipantRoleAdministrator participants as read-only to devices running OS versions prior to this role being introduced. CloudKit returns administrator participants on such read-only shares as CKShareParticipantRolePrivateUser.
 //
-// WithAllowsParticipantsToInviteOthers sets the allowsParticipantsToInviteOthers property and returns the receiver for chaining.
+// WithAllowsParticipantsToInviteOthers sets allowsParticipantsToInviteOthers and returns the receiver so calls can be chained.
 func (x *AllowedSharingOptions) WithAllowsParticipantsToInviteOthers(allowsParticipantsToInviteOthers bool) *AllowedSharingOptions {
-	x.inner.SetAllowsParticipantsToInviteOthers(allowsParticipantsToInviteOthers)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsParticipantsToInviteOthers:"), allowsParticipantsToInviteOthers)
 	return x
 }
 
 // Default value is NO. If set, the system sharing UI allows the user to configure whether participants can request access to the share.
 //
-// WithAllowsAccessRequests sets the allowsAccessRequests property and returns the receiver for chaining.
+// WithAllowsAccessRequests sets allowsAccessRequests and returns the receiver so calls can be chained.
 func (x *AllowedSharingOptions) WithAllowsAccessRequests(allowsAccessRequests bool) *AllowedSharingOptions {
-	x.inner.SetAllowsAccessRequests(allowsAccessRequests)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAccessRequests:"), allowsAccessRequests)
 	return x
 }
 
 // The permission option the system uses to control whether a user can grant read-only or write access.
-//
-// AllowedParticipantPermissionOptions calls the underlying AllowedParticipantPermissionOptions.
-func (x *AllowedSharingOptions) AllowedParticipantPermissionOptions() CKSharingParticipantPermissionOption {
-	return CKSharingParticipantPermissionOption(x.inner.AllowedParticipantPermissionOptions())
+func (x *AllowedSharingOptions) AllowedParticipantPermissionOptions() SharingParticipantPermissionOption {
+	_r := objc.Send[SharingParticipantPermissionOption](objref.IDOf(x), objc.RegisterName("allowedParticipantPermissionOptions"))
+	return _r
 }
 
-// SetAllowedParticipantPermissionOptions calls the underlying SetAllowedParticipantPermissionOptions.
-func (x *AllowedSharingOptions) SetAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions CKSharingParticipantPermissionOption) {
-	x.inner.SetAllowedParticipantPermissionOptions(raw.CKSharingParticipantPermissionOption(allowedParticipantPermissionOptions))
+func (x *AllowedSharingOptions) SetAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions SharingParticipantPermissionOption) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedParticipantPermissionOptions:"), allowedParticipantPermissionOptions)
 }
 
 // The permission option the system uses to control whether a user can share publicly or privately.
-//
-// AllowedParticipantAccessOptions calls the underlying AllowedParticipantAccessOptions.
-func (x *AllowedSharingOptions) AllowedParticipantAccessOptions() CKSharingParticipantAccessOption {
-	return CKSharingParticipantAccessOption(x.inner.AllowedParticipantAccessOptions())
+func (x *AllowedSharingOptions) AllowedParticipantAccessOptions() SharingParticipantAccessOption {
+	_r := objc.Send[SharingParticipantAccessOption](objref.IDOf(x), objc.RegisterName("allowedParticipantAccessOptions"))
+	return _r
 }
 
-// SetAllowedParticipantAccessOptions calls the underlying SetAllowedParticipantAccessOptions.
-func (x *AllowedSharingOptions) SetAllowedParticipantAccessOptions(allowedParticipantAccessOptions CKSharingParticipantAccessOption) {
-	x.inner.SetAllowedParticipantAccessOptions(raw.CKSharingParticipantAccessOption(allowedParticipantAccessOptions))
+func (x *AllowedSharingOptions) SetAllowedParticipantAccessOptions(allowedParticipantAccessOptions SharingParticipantAccessOption) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedParticipantAccessOptions:"), allowedParticipantAccessOptions)
 }
 
 // Default value is NO. If set, the system sharing UI allows the user to choose whether added participants can invite others to the share. CloudKit returns shares with “CKShare/ParticipantRole/administrator-enum.case“ participants as read-only to devices running OS versions prior to this role being introduced. CloudKit returns administrator participants on such read-only shares as “CKShare/ParticipantRole/privateUser-enum.case“.
-//
-// AllowsParticipantsToInviteOthers calls the underlying AllowsParticipantsToInviteOthers.
 func (x *AllowedSharingOptions) AllowsParticipantsToInviteOthers() bool {
-	return x.inner.AllowsParticipantsToInviteOthers()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsParticipantsToInviteOthers"))
+	return _r
 }
 
-// SetAllowsParticipantsToInviteOthers calls the underlying SetAllowsParticipantsToInviteOthers.
 func (x *AllowedSharingOptions) SetAllowsParticipantsToInviteOthers(allowsParticipantsToInviteOthers bool) {
-	x.inner.SetAllowsParticipantsToInviteOthers(allowsParticipantsToInviteOthers)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsParticipantsToInviteOthers:"), allowsParticipantsToInviteOthers)
 }
 
 // Default value is NO. If set, the system sharing UI allows the user to configure whether participants can request access to the share.
-//
-// AllowsAccessRequests calls the underlying AllowsAccessRequests.
 func (x *AllowedSharingOptions) AllowsAccessRequests() bool {
-	return x.inner.AllowsAccessRequests()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsAccessRequests"))
+	return _r
 }
 
-// SetAllowsAccessRequests calls the underlying SetAllowsAccessRequests.
 func (x *AllowedSharingOptions) SetAllowsAccessRequests(allowsAccessRequests bool) {
-	x.inner.SetAllowsAccessRequests(allowsAccessRequests)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsAccessRequests:"), allowsAccessRequests)
 }
 
 // AllowedSharingOptionsable is the interface implemented by [AllowedSharingOptions], for mocking and DI.
 type AllowedSharingOptionsable interface {
-	Unwrap() *raw.CKAllowedSharingOptions
-	WithAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions CKSharingParticipantPermissionOption) *AllowedSharingOptions
-	WithAllowedParticipantAccessOptions(allowedParticipantAccessOptions CKSharingParticipantAccessOption) *AllowedSharingOptions
+	obj.Object
+	WithAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions SharingParticipantPermissionOption) *AllowedSharingOptions
+	WithAllowedParticipantAccessOptions(allowedParticipantAccessOptions SharingParticipantAccessOption) *AllowedSharingOptions
 	WithAllowsParticipantsToInviteOthers(allowsParticipantsToInviteOthers bool) *AllowedSharingOptions
 	WithAllowsAccessRequests(allowsAccessRequests bool) *AllowedSharingOptions
-	AllowedParticipantPermissionOptions() CKSharingParticipantPermissionOption
-	SetAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions CKSharingParticipantPermissionOption)
-	AllowedParticipantAccessOptions() CKSharingParticipantAccessOption
-	SetAllowedParticipantAccessOptions(allowedParticipantAccessOptions CKSharingParticipantAccessOption)
+	AllowedParticipantPermissionOptions() SharingParticipantPermissionOption
+	SetAllowedParticipantPermissionOptions(allowedParticipantPermissionOptions SharingParticipantPermissionOption)
+	AllowedParticipantAccessOptions() SharingParticipantAccessOption
+	SetAllowedParticipantAccessOptions(allowedParticipantAccessOptions SharingParticipantAccessOption)
 	AllowsParticipantsToInviteOthers() bool
 	SetAllowsParticipantsToInviteOthers(allowsParticipantsToInviteOthers bool)
 	AllowsAccessRequests() bool

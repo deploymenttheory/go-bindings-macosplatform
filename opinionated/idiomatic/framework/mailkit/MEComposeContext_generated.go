@@ -5,87 +5,104 @@
 package mailkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ComposeContext wraps [raw.MEComposeContext] with a fluent Go API.
+// ComposeContext is an idiomatic wrapper over the Objective-C class MEComposeContext.
 type ComposeContext struct {
-	inner *raw.MEComposeContext
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEComposeContext].
-func (x *ComposeContext) Unwrap() *raw.MEComposeContext { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ComposeContext) ID() objc.ID { return x.inner.Ptr() }
-
-// ComposeContextFromID adopts an existing object pointer as a ComposeContext (nil for 0).
+// ComposeContextFromID adopts an existing Objective-C object as a ComposeContext
+// (nil for 0), retaining it and registering a release finalizer.
 func ComposeContextFromID(id objc.ID) *ComposeContext {
 	if id == 0 {
 		return nil
 	}
-	return &ComposeContext{inner: raw.MEComposeContextFromID(id)}
+	x := &ComposeContext{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewComposeContext creates a new [ComposeContext].
-func NewComposeContext() *ComposeContext {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MEComposeContext")), objc.RegisterName("new"))
-	return &ComposeContext{inner: raw.MEComposeContextFromID(_id)}
-}
-
-// @brief The original email message on which user performed an action It is @c nil for @c MEComposeUserActionNewMessage actions.
-//
-// OriginalMessage calls the underlying OriginalMessage.
-func (x *ComposeContext) OriginalMessage() *Message {
-	_r := x.inner.OriginalMessage()
-	if _r == nil {
+// composeContextAdopt wraps an Objective-C object that this code just created as a
+// ComposeContext (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func composeContextAdopt(id objc.ID) *ComposeContext {
+	if id == 0 {
 		return nil
 	}
-	return &Message{inner: _r}
+	x := &ComposeContext{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ComposeContext) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ComposeContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ComposeContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewComposeContext creates a new ComposeContext.
+func NewComposeContext() *ComposeContext {
+	_id := objc.Send[objc.ID](objc.ID(_class("MEComposeContext")), objc.RegisterName("new"))
+	return composeContextAdopt(_id)
+}
+
+// The original email message on which user performed an action It is
+func (x *ComposeContext) OriginalMessage() *Message {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalMessage"))
+	return MessageFromID(_r)
 }
 
 // Indicates the action performed by the user that created this compose context.
-//
-// Action calls the underlying Action.
-func (x *ComposeContext) Action() MEComposeUserAction {
-	return MEComposeUserAction(x.inner.Action())
+func (x *ComposeContext) Action() ComposeUserAction {
+	_r := objc.Send[ComposeUserAction](objref.IDOf(x), objc.RegisterName("action"))
+	return _r
 }
 
 // Boolean that indicates the message is encrypted by a Message Security extension.
-//
-// IsEncrypted calls the underlying IsEncrypted.
 func (x *ComposeContext) IsEncrypted() bool {
-	return x.inner.IsEncrypted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEncrypted"))
+	return _r
 }
 
 // Boolean that indicates if the user wants to encrypt the message.
-//
-// ShouldEncrypt calls the underlying ShouldEncrypt.
 func (x *ComposeContext) ShouldEncrypt() bool {
-	return x.inner.ShouldEncrypt()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldEncrypt"))
+	return _r
 }
 
 // Boolean that indicates the message is signed by a Message Security extension.
-//
-// IsSigned calls the underlying IsSigned.
 func (x *ComposeContext) IsSigned() bool {
-	return x.inner.IsSigned()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSigned"))
+	return _r
 }
 
 // A Boolean that indicates if the user wants to sign the message.
-//
-// ShouldSign calls the underlying ShouldSign.
 func (x *ComposeContext) ShouldSign() bool {
-	return x.inner.ShouldSign()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldSign"))
+	return _r
 }
 
 // ComposeContextable is the interface implemented by [ComposeContext], for mocking and DI.
 type ComposeContextable interface {
-	Unwrap() *raw.MEComposeContext
+	obj.Object
 	OriginalMessage() *Message
-	Action() MEComposeUserAction
+	Action() ComposeUserAction
 	IsEncrypted() bool
 	ShouldEncrypt() bool
 	IsSigned() bool

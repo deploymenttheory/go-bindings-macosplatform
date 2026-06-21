@@ -5,109 +5,129 @@
 package audiovideobridging
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AVB17221AECPAddressAccessTLV wraps [raw.AVB17221AECPAddressAccessTLV] with a fluent Go API.
+// AVB17221AECPAddressAccessTLV is an idiomatic wrapper over the Objective-C class AVB17221AECPAddressAccessTLV.
 type AVB17221AECPAddressAccessTLV struct {
-	inner *raw.AVB17221AECPAddressAccessTLV
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVB17221AECPAddressAccessTLV].
-func (x *AVB17221AECPAddressAccessTLV) Unwrap() *raw.AVB17221AECPAddressAccessTLV { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AVB17221AECPAddressAccessTLV) ID() objc.ID { return x.inner.Ptr() }
-
-// AVB17221AECPAddressAccessTLVFromID adopts an existing object pointer as a AVB17221AECPAddressAccessTLV (nil for 0).
+// AVB17221AECPAddressAccessTLVFromID adopts an existing Objective-C object as a AVB17221AECPAddressAccessTLV
+// (nil for 0), retaining it and registering a release finalizer.
 func AVB17221AECPAddressAccessTLVFromID(id objc.ID) *AVB17221AECPAddressAccessTLV {
 	if id == 0 {
 		return nil
 	}
-	return &AVB17221AECPAddressAccessTLV{inner: raw.AVB17221AECPAddressAccessTLVFromID(id)}
+	x := &AVB17221AECPAddressAccessTLV{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAVB17221AECPAddressAccessTLV creates a new [AVB17221AECPAddressAccessTLV].
+// aVB17221AECPAddressAccessTLVAdopt wraps an Objective-C object that this code just created as a
+// AVB17221AECPAddressAccessTLV (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func aVB17221AECPAddressAccessTLVAdopt(id objc.ID) *AVB17221AECPAddressAccessTLV {
+	if id == 0 {
+		return nil
+	}
+	x := &AVB17221AECPAddressAccessTLV{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AVB17221AECPAddressAccessTLV) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AVB17221AECPAddressAccessTLV) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AVB17221AECPAddressAccessTLV) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAVB17221AECPAddressAccessTLV creates a new AVB17221AECPAddressAccessTLV.
 func NewAVB17221AECPAddressAccessTLV() *AVB17221AECPAddressAccessTLV {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVB17221AECPAddressAccessTLV")), objc.RegisterName("new"))
-	return &AVB17221AECPAddressAccessTLV{inner: raw.AVB17221AECPAddressAccessTLVFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPAddressAccessTLV")), objc.RegisterName("new"))
+	return aVB17221AECPAddressAccessTLVAdopt(_id)
 }
 
-// @property	mode @abstract	The mode field of the Address Access TLV.
+// The mode field of the Address Access TLV.
 //
-// WithMode sets the mode property and returns the receiver for chaining.
+// WithMode sets mode and returns the receiver so calls can be chained.
 func (x *AVB17221AECPAddressAccessTLV) WithMode(mode AVB17221AECPAddressAccessTLVMode) *AVB17221AECPAddressAccessTLV {
-	x.inner.SetMode(raw.AVB17221AECPAddressAccessTLVMode(mode))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 	return x
 }
 
-// @property	address @abstract	The address field of the Address Access TLV.
+// The address field of the Address Access TLV.
 //
-// WithAddress sets the address property and returns the receiver for chaining.
+// WithAddress sets address and returns the receiver so calls can be chained.
 func (x *AVB17221AECPAddressAccessTLV) WithAddress(address uint64) *AVB17221AECPAddressAccessTLV {
-	x.inner.SetAddress(address)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddress:"), address)
 	return x
 }
 
-// @property	memoryData @abstract	The memory_data field of the Address Access TLV.
+// The memory_data field of the Address Access TLV.
 //
-// WithMemoryData sets the memoryData property and returns the receiver for chaining.
-func (x *AVB17221AECPAddressAccessTLV) WithMemoryData(memoryData *foundation.NSData) *AVB17221AECPAddressAccessTLV {
-	x.inner.SetMemoryData(memoryData)
+// WithMemoryData sets memoryData and returns the receiver so calls can be chained.
+func (x *AVB17221AECPAddressAccessTLV) WithMemoryData(memoryData obj.Object) *AVB17221AECPAddressAccessTLV {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMemoryData:"), objref.IDOf(memoryData))
 	return x
 }
 
-// @property	mode @abstract	The mode field of the Address Access TLV.
-//
-// Mode calls the underlying Mode.
+// The mode field of the Address Access TLV.
 func (x *AVB17221AECPAddressAccessTLV) Mode() AVB17221AECPAddressAccessTLVMode {
-	return AVB17221AECPAddressAccessTLVMode(x.inner.Mode())
+	_r := objc.Send[AVB17221AECPAddressAccessTLVMode](objref.IDOf(x), objc.RegisterName("mode"))
+	return _r
 }
 
-// SetMode calls the underlying SetMode.
 func (x *AVB17221AECPAddressAccessTLV) SetMode(mode AVB17221AECPAddressAccessTLVMode) {
-	x.inner.SetMode(raw.AVB17221AECPAddressAccessTLVMode(mode))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 }
 
-// @property	address @abstract	The address field of the Address Access TLV.
-//
-// Address calls the underlying Address.
+// The address field of the Address Access TLV.
 func (x *AVB17221AECPAddressAccessTLV) Address() uint64 {
-	return x.inner.Address()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("address"))
+	return _r
 }
 
-// SetAddress calls the underlying SetAddress.
 func (x *AVB17221AECPAddressAccessTLV) SetAddress(address uint64) {
-	x.inner.SetAddress(address)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddress:"), address)
 }
 
-// @property	memoryData @abstract	The memory_data field of the Address Access TLV.
-//
-// MemoryData calls the underlying MemoryData.
-func (x *AVB17221AECPAddressAccessTLV) MemoryData() *foundation.NSData {
-	return x.inner.MemoryData()
+// The memory_data field of the Address Access TLV.
+func (x *AVB17221AECPAddressAccessTLV) MemoryData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("memoryData"))
+	return obj.Wrap(_r)
 }
 
-// SetMemoryData calls the underlying SetMemoryData.
-func (x *AVB17221AECPAddressAccessTLV) SetMemoryData(memoryData *foundation.NSData) {
-	x.inner.SetMemoryData(memoryData)
+func (x *AVB17221AECPAddressAccessTLV) SetMemoryData(memoryData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMemoryData:"), objref.IDOf(memoryData))
 }
 
 // AVB17221AECPAddressAccessTLVable is the interface implemented by [AVB17221AECPAddressAccessTLV], for mocking and DI.
 type AVB17221AECPAddressAccessTLVable interface {
-	Unwrap() *raw.AVB17221AECPAddressAccessTLV
+	obj.Object
 	WithMode(mode AVB17221AECPAddressAccessTLVMode) *AVB17221AECPAddressAccessTLV
 	WithAddress(address uint64) *AVB17221AECPAddressAccessTLV
-	WithMemoryData(memoryData *foundation.NSData) *AVB17221AECPAddressAccessTLV
+	WithMemoryData(memoryData obj.Object) *AVB17221AECPAddressAccessTLV
 	Mode() AVB17221AECPAddressAccessTLVMode
 	SetMode(mode AVB17221AECPAddressAccessTLVMode)
 	Address() uint64
 	SetAddress(address uint64)
-	MemoryData() *foundation.NSData
-	SetMemoryData(memoryData *foundation.NSData)
+	MemoryData() obj.Object
+	SetMemoryData(memoryData obj.Object)
 }
 
 var _ AVB17221AECPAddressAccessTLVable = (*AVB17221AECPAddressAccessTLV)(nil)

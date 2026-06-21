@@ -5,47 +5,68 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A type that identifies samples that contain audiogram data.
 //
-// AudiogramSampleType wraps [raw.HKAudiogramSampleType] with a fluent Go API.
+// AudiogramSampleType is an idiomatic wrapper over the Objective-C class HKAudiogramSampleType.
 type AudiogramSampleType struct {
-	inner *raw.HKAudiogramSampleType
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKAudiogramSampleType].
-func (x *AudiogramSampleType) Unwrap() *raw.HKAudiogramSampleType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudiogramSampleType) ID() objc.ID { return x.inner.Ptr() }
-
-// AudiogramSampleTypeFromID adopts an existing object pointer as a AudiogramSampleType (nil for 0).
+// AudiogramSampleTypeFromID adopts an existing Objective-C object as a AudiogramSampleType
+// (nil for 0), retaining it and registering a release finalizer.
 func AudiogramSampleTypeFromID(id objc.ID) *AudiogramSampleType {
 	if id == 0 {
 		return nil
 	}
-	return &AudiogramSampleType{inner: raw.HKAudiogramSampleTypeFromID(id)}
+	x := &AudiogramSampleType{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAudiogramSampleType creates a new [AudiogramSampleType].
+// audiogramSampleTypeAdopt wraps an Objective-C object that this code just created as a
+// AudiogramSampleType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audiogramSampleTypeAdopt(id objc.ID) *AudiogramSampleType {
+	if id == 0 {
+		return nil
+	}
+	x := &AudiogramSampleType{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudiogramSampleType) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudiogramSampleType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudiogramSampleType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAudiogramSampleType creates a new AudiogramSampleType.
 func NewAudiogramSampleType() *AudiogramSampleType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKAudiogramSampleType")), objc.RegisterName("new"))
-	return &AudiogramSampleType{inner: raw.HKAudiogramSampleTypeFromID(_id)}
-}
-
-func (x *AudiogramSampleType) asSampleType() *raw.HKSampleType { return &x.inner.HKSampleType }
-
-func (x *AudiogramSampleType) asObjectType() *raw.HKObjectType {
-	return &x.inner.HKSampleType.HKObjectType
+	_id := objc.Send[objc.ID](objc.ID(_class("HKAudiogramSampleType")), objc.RegisterName("new"))
+	return audiogramSampleTypeAdopt(_id)
 }
 
 // AudiogramSampleTypeable is the interface implemented by [AudiogramSampleType], for mocking and DI.
 type AudiogramSampleTypeable interface {
-	Unwrap() *raw.HKAudiogramSampleType
+	obj.Object
 }
 
 var _ AudiogramSampleTypeable = (*AudiogramSampleType)(nil)

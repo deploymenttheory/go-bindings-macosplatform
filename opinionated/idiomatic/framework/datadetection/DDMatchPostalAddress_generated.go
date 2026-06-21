@@ -5,99 +5,113 @@
 package datadetection
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/datadetection"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains a postal address that the data detection system matches.
 //
-// MatchPostalAddress wraps [raw.DDMatchPostalAddress] with a fluent Go API.
+// MatchPostalAddress is an idiomatic wrapper over the Objective-C class DDMatchPostalAddress.
 type MatchPostalAddress struct {
-	inner *raw.DDMatchPostalAddress
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DDMatchPostalAddress].
-func (x *MatchPostalAddress) Unwrap() *raw.DDMatchPostalAddress { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatchPostalAddress) ID() objc.ID { return x.inner.Ptr() }
-
-// MatchPostalAddressFromID adopts an existing object pointer as a MatchPostalAddress (nil for 0).
+// MatchPostalAddressFromID adopts an existing Objective-C object as a MatchPostalAddress
+// (nil for 0), retaining it and registering a release finalizer.
 func MatchPostalAddressFromID(id objc.ID) *MatchPostalAddress {
 	if id == 0 {
 		return nil
 	}
-	return &MatchPostalAddress{inner: raw.DDMatchPostalAddressFromID(id)}
+	x := &MatchPostalAddress{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMatchPostalAddress creates a new [MatchPostalAddress].
+// matchPostalAddressAdopt wraps an Objective-C object that this code just created as a
+// MatchPostalAddress (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matchPostalAddressAdopt(id objc.ID) *MatchPostalAddress {
+	if id == 0 {
+		return nil
+	}
+	x := &MatchPostalAddress{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MatchPostalAddress) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatchPostalAddress) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatchPostalAddress) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMatchPostalAddress creates a new MatchPostalAddress.
 func NewMatchPostalAddress() *MatchPostalAddress {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DDMatchPostalAddress")), objc.RegisterName("new"))
-	return &MatchPostalAddress{inner: raw.DDMatchPostalAddressFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DDMatchPostalAddress")), objc.RegisterName("new"))
+	return matchPostalAddressAdopt(_id)
 }
 
 // The street name in a postal address.
-//
-// Street calls the underlying Street.
 func (x *MatchPostalAddress) Street() string {
-	_r := x.inner.Street()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("street"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The city name in a postal address.
-//
-// City calls the underlying City.
 func (x *MatchPostalAddress) City() string {
-	_r := x.inner.City()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("city"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The state name in a postal address.
-//
-// State calls the underlying State.
 func (x *MatchPostalAddress) State() string {
-	_r := x.inner.State()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The postal code in a postal address.
-//
-// PostalCode calls the underlying PostalCode.
 func (x *MatchPostalAddress) PostalCode() string {
-	_r := x.inner.PostalCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postalCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The country or region name in a postal address.
-//
-// Country calls the underlying Country.
 func (x *MatchPostalAddress) Country() string {
-	_r := x.inner.Country()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("country"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *MatchPostalAddress) asMatch() *raw.DDMatch { return &x.inner.DDMatch }
 
 // MatchPostalAddressable is the interface implemented by [MatchPostalAddress], for mocking and DI.
 type MatchPostalAddressable interface {
-	Unwrap() *raw.DDMatchPostalAddress
+	obj.Object
 	Street() string
 	City() string
 	State() string

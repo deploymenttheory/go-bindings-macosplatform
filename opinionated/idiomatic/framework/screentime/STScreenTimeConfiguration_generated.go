@@ -5,48 +5,74 @@
 package screentime
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screentime"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The configuration for this device.
 //
-// ScreenTimeConfiguration wraps [raw.STScreenTimeConfiguration] with a fluent Go API.
+// ScreenTimeConfiguration is an idiomatic wrapper over the Objective-C class STScreenTimeConfiguration.
 type ScreenTimeConfiguration struct {
-	inner *raw.STScreenTimeConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.STScreenTimeConfiguration].
-func (x *ScreenTimeConfiguration) Unwrap() *raw.STScreenTimeConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScreenTimeConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// ScreenTimeConfigurationFromID adopts an existing object pointer as a ScreenTimeConfiguration (nil for 0).
+// ScreenTimeConfigurationFromID adopts an existing Objective-C object as a ScreenTimeConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func ScreenTimeConfigurationFromID(id objc.ID) *ScreenTimeConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &ScreenTimeConfiguration{inner: raw.STScreenTimeConfigurationFromID(id)}
+	x := &ScreenTimeConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewScreenTimeConfiguration creates a new [ScreenTimeConfiguration].
+// screenTimeConfigurationAdopt wraps an Objective-C object that this code just created as a
+// ScreenTimeConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func screenTimeConfigurationAdopt(id objc.ID) *ScreenTimeConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &ScreenTimeConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScreenTimeConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScreenTimeConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScreenTimeConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScreenTimeConfiguration creates a new ScreenTimeConfiguration.
 func NewScreenTimeConfiguration() *ScreenTimeConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("STScreenTimeConfiguration")), objc.RegisterName("new"))
-	return &ScreenTimeConfiguration{inner: raw.STScreenTimeConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("STScreenTimeConfiguration")), objc.RegisterName("new"))
+	return screenTimeConfigurationAdopt(_id)
 }
 
 // A Boolean that indicates whether the device is currently enforcing child restrictions.
-//
-// EnforcesChildRestrictions calls the underlying EnforcesChildRestrictions.
 func (x *ScreenTimeConfiguration) EnforcesChildRestrictions() bool {
-	return x.inner.EnforcesChildRestrictions()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enforcesChildRestrictions"))
+	return _r
 }
 
 // ScreenTimeConfigurationable is the interface implemented by [ScreenTimeConfiguration], for mocking and DI.
 type ScreenTimeConfigurationable interface {
-	Unwrap() *raw.STScreenTimeConfiguration
+	obj.Object
 	EnforcesChildRestrictions() bool
 }
 

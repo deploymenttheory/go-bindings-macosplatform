@@ -5,130 +5,119 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A mutable caption region subclass that you use to create new caption regions.
 //
-// MutableCaptionRegion wraps [raw.AVMutableCaptionRegion] with a fluent Go API.
+// MutableCaptionRegion is an idiomatic wrapper over the Objective-C class AVMutableCaptionRegion.
 type MutableCaptionRegion struct {
-	inner *raw.AVMutableCaptionRegion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMutableCaptionRegion].
-func (x *MutableCaptionRegion) Unwrap() *raw.AVMutableCaptionRegion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableCaptionRegion) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableCaptionRegionFromID adopts an existing object pointer as a MutableCaptionRegion (nil for 0).
+// MutableCaptionRegionFromID adopts an existing Objective-C object as a MutableCaptionRegion
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableCaptionRegionFromID(id objc.ID) *MutableCaptionRegion {
 	if id == 0 {
 		return nil
 	}
-	return &MutableCaptionRegion{inner: raw.AVMutableCaptionRegionFromID(id)}
+	x := &MutableCaptionRegion{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMutableCaptionRegion creates a new [MutableCaptionRegion].
+// mutableCaptionRegionAdopt wraps an Objective-C object that this code just created as a
+// MutableCaptionRegion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableCaptionRegionAdopt(id objc.ID) *MutableCaptionRegion {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableCaptionRegion{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MutableCaptionRegion) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MutableCaptionRegion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MutableCaptionRegion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMutableCaptionRegion creates a new MutableCaptionRegion.
 func NewMutableCaptionRegion() *MutableCaptionRegion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableCaptionRegion")), objc.RegisterName("new"))
-	return &MutableCaptionRegion{inner: raw.AVMutableCaptionRegionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMutableCaptionRegion")), objc.RegisterName("new"))
+	return mutableCaptionRegionAdopt(_id)
 }
 
 // Creates a caption region that has an identifier.
 //
-// NewMutableCaptionRegionWithIdentifier creates a new [MutableCaptionRegion].
+// NewMutableCaptionRegionWithIdentifier creates a new MutableCaptionRegion.
 func NewMutableCaptionRegionWithIdentifier(identifier string) *MutableCaptionRegion {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableCaptionRegion")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &MutableCaptionRegion{inner: raw.AVMutableCaptionRegionFromID(_id)}
-}
-
-// The region’s top-left position.
-//
-// WithOrigin sets the origin property and returns the receiver for chaining.
-func (x *MutableCaptionRegion) WithOrigin(origin raw.AVCaptionPoint) *MutableCaptionRegion {
-	x.inner.SetOrigin(origin)
-	return x
-}
-
-// The height and width of the region.
-//
-// WithSize sets the size property and returns the receiver for chaining.
-func (x *MutableCaptionRegion) WithSize(size raw.AVCaptionSize) *MutableCaptionRegion {
-	x.inner.SetSize(size)
-	return x
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMutableCaptionRegion")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), purego.NSString(identifier))
+	return mutableCaptionRegionAdopt(_id)
 }
 
 // The scroll mode of the region.
 //
-// WithScroll sets the scroll property and returns the receiver for chaining.
-func (x *MutableCaptionRegion) WithScroll(scroll AVCaptionRegionScroll) *MutableCaptionRegion {
-	x.inner.SetScroll(raw.AVCaptionRegionScroll(scroll))
+// WithScroll sets scroll and returns the receiver so calls can be chained.
+func (x *MutableCaptionRegion) WithScroll(scroll CaptionRegionScroll) *MutableCaptionRegion {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScroll:"), scroll)
 	return x
 }
 
 // The alignment of lines for the region.
 //
-// WithDisplayAlignment sets the displayAlignment property and returns the receiver for chaining.
-func (x *MutableCaptionRegion) WithDisplayAlignment(displayAlignment AVCaptionRegionDisplayAlignment) *MutableCaptionRegion {
-	x.inner.SetDisplayAlignment(raw.AVCaptionRegionDisplayAlignment(displayAlignment))
+// WithDisplayAlignment sets displayAlignment and returns the receiver so calls can be chained.
+func (x *MutableCaptionRegion) WithDisplayAlignment(displayAlignment CaptionRegionDisplayAlignment) *MutableCaptionRegion {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayAlignment:"), displayAlignment)
 	return x
 }
 
 // The block and inline progression direction of the region.
 //
-// WithWritingMode sets the writingMode property and returns the receiver for chaining.
-func (x *MutableCaptionRegion) WithWritingMode(writingMode AVCaptionRegionWritingMode) *MutableCaptionRegion {
-	x.inner.SetWritingMode(raw.AVCaptionRegionWritingMode(writingMode))
+// WithWritingMode sets writingMode and returns the receiver so calls can be chained.
+func (x *MutableCaptionRegion) WithWritingMode(writingMode CaptionRegionWritingMode) *MutableCaptionRegion {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingMode:"), writingMode)
 	return x
 }
 
-// SetOrigin calls the underlying SetOrigin.
-func (x *MutableCaptionRegion) SetOrigin(origin raw.AVCaptionPoint) {
-	x.inner.SetOrigin(origin)
+func (x *MutableCaptionRegion) SetScroll(scroll CaptionRegionScroll) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScroll:"), scroll)
 }
 
-// SetSize calls the underlying SetSize.
-func (x *MutableCaptionRegion) SetSize(size raw.AVCaptionSize) {
-	x.inner.SetSize(size)
+func (x *MutableCaptionRegion) SetDisplayAlignment(displayAlignment CaptionRegionDisplayAlignment) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayAlignment:"), displayAlignment)
 }
 
-// SetScroll calls the underlying SetScroll.
-func (x *MutableCaptionRegion) SetScroll(scroll AVCaptionRegionScroll) {
-	x.inner.SetScroll(raw.AVCaptionRegionScroll(scroll))
-}
-
-// SetDisplayAlignment calls the underlying SetDisplayAlignment.
-func (x *MutableCaptionRegion) SetDisplayAlignment(displayAlignment AVCaptionRegionDisplayAlignment) {
-	x.inner.SetDisplayAlignment(raw.AVCaptionRegionDisplayAlignment(displayAlignment))
-}
-
-// SetWritingMode calls the underlying SetWritingMode.
-func (x *MutableCaptionRegion) SetWritingMode(writingMode AVCaptionRegionWritingMode) {
-	x.inner.SetWritingMode(raw.AVCaptionRegionWritingMode(writingMode))
-}
-
-func (x *MutableCaptionRegion) asCaptionRegion() *raw.AVCaptionRegion {
-	return &x.inner.AVCaptionRegion
+func (x *MutableCaptionRegion) SetWritingMode(writingMode CaptionRegionWritingMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingMode:"), writingMode)
 }
 
 // MutableCaptionRegionable is the interface implemented by [MutableCaptionRegion], for mocking and DI.
 type MutableCaptionRegionable interface {
-	Unwrap() *raw.AVMutableCaptionRegion
-	WithOrigin(origin raw.AVCaptionPoint) *MutableCaptionRegion
-	WithSize(size raw.AVCaptionSize) *MutableCaptionRegion
-	WithScroll(scroll AVCaptionRegionScroll) *MutableCaptionRegion
-	WithDisplayAlignment(displayAlignment AVCaptionRegionDisplayAlignment) *MutableCaptionRegion
-	WithWritingMode(writingMode AVCaptionRegionWritingMode) *MutableCaptionRegion
-	SetOrigin(origin raw.AVCaptionPoint)
-	SetSize(size raw.AVCaptionSize)
-	SetScroll(scroll AVCaptionRegionScroll)
-	SetDisplayAlignment(displayAlignment AVCaptionRegionDisplayAlignment)
-	SetWritingMode(writingMode AVCaptionRegionWritingMode)
+	obj.Object
+	WithScroll(scroll CaptionRegionScroll) *MutableCaptionRegion
+	WithDisplayAlignment(displayAlignment CaptionRegionDisplayAlignment) *MutableCaptionRegion
+	WithWritingMode(writingMode CaptionRegionWritingMode) *MutableCaptionRegion
+	SetScroll(scroll CaptionRegionScroll)
+	SetDisplayAlignment(displayAlignment CaptionRegionDisplayAlignment)
+	SetWritingMode(writingMode CaptionRegionWritingMode)
 }
 
 var _ MutableCaptionRegionable = (*MutableCaptionRegion)(nil)

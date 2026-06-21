@@ -6,71 +6,88 @@ package backgroundassets
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/backgroundassets"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // A class that manages asset packs.
 //
-// AssetPackManager wraps [raw.BAAssetPackManager] with a fluent Go API.
+// AssetPackManager is an idiomatic wrapper over the Objective-C class BAAssetPackManager.
 type AssetPackManager struct {
-	inner *raw.BAAssetPackManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.BAAssetPackManager].
-func (x *AssetPackManager) Unwrap() *raw.BAAssetPackManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetPackManager) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetPackManagerFromID adopts an existing object pointer as a AssetPackManager (nil for 0).
+// AssetPackManagerFromID adopts an existing Objective-C object as a AssetPackManager
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetPackManagerFromID(id objc.ID) *AssetPackManager {
 	if id == 0 {
 		return nil
 	}
-	return &AssetPackManager{inner: raw.BAAssetPackManagerFromID(id)}
-}
-
-// NewAssetPackManager creates a new [AssetPackManager].
-func NewAssetPackManager() *AssetPackManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("BAAssetPackManager")), objc.RegisterName("new"))
-	return &AssetPackManager{inner: raw.BAAssetPackManagerFromID(_id)}
-}
-
-// An object that receives notifications about events that occur as an asset pack is downloaded.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *AssetPackManager) WithDelegate(delegate raw.BAManagedAssetPackDownloadDelegate) *AssetPackManager {
-	x.inner.SetDelegate(delegate)
+	x := &AssetPackManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// assetPackManagerAdopt wraps an Objective-C object that this code just created as a
+// AssetPackManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetPackManagerAdopt(id objc.ID) *AssetPackManager {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetPackManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetPackManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetPackManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetPackManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAssetPackManager creates a new AssetPackManager.
+func NewAssetPackManager() *AssetPackManager {
+	_id := objc.Send[objc.ID](objc.ID(_class("BAAssetPackManager")), objc.RegisterName("new"))
+	return assetPackManagerAdopt(_id)
 }
 
 // Gets the asset packs that are available to download.
 //
 // GetAllAssetPacks blocks until the operation completes or ctx is cancelled.
-func (x *AssetPackManager) GetAllAssetPacks(ctx context.Context) (*foundation.NSSet[*raw.BAAssetPack], error) {
+func (x *AssetPackManager) GetAllAssetPacks(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSSet[*raw.BAAssetPack]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetAllAssetPacksWithCompletionHandler(func(_p0 *foundation.NSSet[*raw.BAAssetPack], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getAllAssetPacksWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSSet[*raw.BAAssetPack]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
@@ -84,16 +101,13 @@ func (x *AssetPackManager) GetAssetPackWithIdentifier(ctx context.Context, asset
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetAssetPackWithIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(assetPackIdentifier), func(_p0 *raw.BAAssetPack, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &AssetPack{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = AssetPackFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getAssetPackWithIdentifier:completionHandler:"), purego.NSString(assetPackIdentifier), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -103,39 +117,23 @@ func (x *AssetPackManager) GetAssetPackWithIdentifier(ctx context.Context, asset
 	}
 }
 
-// Gets the current status relative to a particular asset pack.
-//
-// GetStatusRelativeToAssetPackCompletionHandler calls the underlying GetStatusRelativeToAssetPackCompletionHandler.
-func (x *AssetPackManager) GetStatusRelativeToAssetPackCompletionHandler(assetPack *raw.BAAssetPack, completionHandler func(BAAssetPackStatus, unsafe.Pointer)) {
-	x.inner.GetStatusRelativeToAssetPackCompletionHandler(assetPack, func(_a0 raw.BAAssetPackStatus, _a1 unsafe.Pointer) { completionHandler(BAAssetPackStatus(_a0), _a1) })
-}
-
-// Gets an asset pack’s local status.
-//
-// GetLocalStatusOfAssetPackWithIdentifierCompletionHandler calls the underlying GetLocalStatusOfAssetPackWithIdentifierCompletionHandler.
-func (x *AssetPackManager) GetLocalStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier string, completionHandler func(BAAssetPackStatus)) {
-	x.inner.GetLocalStatusOfAssetPackWithIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(assetPackIdentifier), func(_a0 raw.BAAssetPackStatus) { completionHandler(BAAssetPackStatus(_a0)) })
-}
-
 // Checks whether the asset pack with the specified identifier is available locally.
-//
-// AssetPackIsAvailableLocallyWithIdentifier calls the underlying AssetPackIsAvailableLocallyWithIdentifier.
 func (x *AssetPackManager) AssetPackIsAvailableLocallyWithIdentifier(assetPackIdentifier string) bool {
-	return x.inner.AssetPackIsAvailableLocallyWithIdentifier(foundation.NSStringStringWithUTF8String(assetPackIdentifier))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("assetPackIsAvailableLocallyWithIdentifier:"), purego.NSString(assetPackIdentifier))
+	return _r
 }
 
 // Ensures that the specified asset pack be available locally.
 //
 // EnsureLocalAvailabilityOfAssetPack blocks until the operation completes or ctx is cancelled.
-func (x *AssetPackManager) EnsureLocalAvailabilityOfAssetPack(ctx context.Context, assetPack *raw.BAAssetPack) error {
+func (x *AssetPackManager) EnsureLocalAvailabilityOfAssetPack(ctx context.Context, assetPack *AssetPack) error {
 	_ch := make(chan error, 1)
-	x.inner.EnsureLocalAvailabilityOfAssetPackCompletionHandler(assetPack, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ensureLocalAvailabilityOfAssetPack:completionHandler:"), objref.IDOf(assetPack), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -147,15 +145,14 @@ func (x *AssetPackManager) EnsureLocalAvailabilityOfAssetPack(ctx context.Contex
 // Ensures that the specified asset pack is available locally, performing a download if necessary.
 //
 // EnsureLocalAvailabilityOfAssetPackRequireLatestVersion blocks until the operation completes or ctx is cancelled.
-func (x *AssetPackManager) EnsureLocalAvailabilityOfAssetPackRequireLatestVersion(ctx context.Context, assetPack *raw.BAAssetPack, shouldUpdate bool) error {
+func (x *AssetPackManager) EnsureLocalAvailabilityOfAssetPackRequireLatestVersion(ctx context.Context, assetPack *AssetPack, shouldUpdate bool) error {
 	_ch := make(chan error, 1)
-	x.inner.EnsureLocalAvailabilityOfAssetPackRequireLatestVersionCompletionHandler(assetPack, shouldUpdate, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ensureLocalAvailabilityOfAssetPack:requireLatestVersion:completionHandler:"), objref.IDOf(assetPack), shouldUpdate, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -164,32 +161,24 @@ func (x *AssetPackManager) EnsureLocalAvailabilityOfAssetPackRequireLatestVersio
 	}
 }
 
-// Gets the latest asset-pack information from the server, updates outdated asset packs, and removes obsolete asset packs.
-//
-// CheckForUpdatesWithCompletionHandler calls the underlying CheckForUpdatesWithCompletionHandler.
-func (x *AssetPackManager) CheckForUpdatesWithCompletionHandler(completionHandler func(*foundation.NSSet[*foundation.NSString], *foundation.NSSet[*foundation.NSString], unsafe.Pointer)) {
-	x.inner.CheckForUpdatesWithCompletionHandler(completionHandler)
-}
-
-// Returns the contents of an asset file at the specified relative path.
-//
-// ContentsAtPathSearchingInAssetPackWithIdentifierOptionsError calls the underlying ContentsAtPathSearchingInAssetPackWithIdentifierOptionsError.
-func (x *AssetPackManager) ContentsAtPathSearchingInAssetPackWithIdentifierOptionsError(path string, assetPackIdentifier string, options foundation.NSDataReadingOptions) (*foundation.NSData, error) {
-	return x.inner.ContentsAtPathSearchingInAssetPackWithIdentifierOptionsError(foundation.NSStringStringWithUTF8String(path), foundation.NSStringStringWithUTF8String(assetPackIdentifier), options)
-}
-
 // Opens and returns a file descriptor for the asset file at the specified relative path.
-//
-// FileDescriptorForPathSearchingInAssetPackWithIdentifierError calls the underlying FileDescriptorForPathSearchingInAssetPackWithIdentifierError.
 func (x *AssetPackManager) FileDescriptorForPathSearchingInAssetPackWithIdentifierError(path string, assetPackIdentifier string) (int, error) {
-	return x.inner.FileDescriptorForPathSearchingInAssetPackWithIdentifierError(foundation.NSStringStringWithUTF8String(path), foundation.NSStringStringWithUTF8String(assetPackIdentifier))
+	var _nsErr uintptr
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fileDescriptorForPath:searchingInAssetPackWithIdentifier:error:"), purego.NSString(path), purego.NSString(assetPackIdentifier), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _r, nil
 }
 
 // Returns a URL for the specified relative path.
-//
-// URLForPathError calls the underlying URLForPathError.
-func (x *AssetPackManager) URLForPathError(path string) (*foundation.NSURL, error) {
-	return x.inner.URLForPathError(foundation.NSStringStringWithUTF8String(path))
+func (x *AssetPackManager) URLForPathError(path string) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLForPath:error:"), purego.NSString(path), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // Removes the specified asset pack from the device.
@@ -197,13 +186,12 @@ func (x *AssetPackManager) URLForPathError(path string) (*foundation.NSURL, erro
 // RemoveAssetPackWithIdentifier blocks until the operation completes or ctx is cancelled.
 func (x *AssetPackManager) RemoveAssetPackWithIdentifier(ctx context.Context, assetPackIdentifier string) error {
 	_ch := make(chan error, 1)
-	x.inner.RemoveAssetPackWithIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(assetPackIdentifier), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAssetPackWithIdentifier:completionHandler:"), purego.NSString(assetPackIdentifier), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -212,44 +200,17 @@ func (x *AssetPackManager) RemoveAssetPackWithIdentifier(ctx context.Context, as
 	}
 }
 
-// Gets an asset pack’s status.
-//
-// GetStatusOfAssetPackWithIdentifierCompletionHandler calls the underlying GetStatusOfAssetPackWithIdentifierCompletionHandler.
-func (x *AssetPackManager) GetStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier string, completionHandler func(BAAssetPackStatus, unsafe.Pointer)) {
-	x.inner.GetStatusOfAssetPackWithIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(assetPackIdentifier), func(_a0 raw.BAAssetPackStatus, _a1 unsafe.Pointer) { completionHandler(BAAssetPackStatus(_a0), _a1) })
-}
-
-// An object that receives notifications about events that occur as an asset pack is downloaded.
-//
-// Delegate calls the underlying Delegate.
-func (x *AssetPackManager) Delegate() raw.BAManagedAssetPackDownloadDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *AssetPackManager) SetDelegate(delegate raw.BAManagedAssetPackDownloadDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
 // AssetPackManagerable is the interface implemented by [AssetPackManager], for mocking and DI.
 type AssetPackManagerable interface {
-	Unwrap() *raw.BAAssetPackManager
-	WithDelegate(delegate raw.BAManagedAssetPackDownloadDelegate) *AssetPackManager
-	GetAllAssetPacks(ctx context.Context) (*foundation.NSSet[*raw.BAAssetPack], error)
+	obj.Object
+	GetAllAssetPacks(ctx context.Context) (obj.Object, error)
 	GetAssetPackWithIdentifier(ctx context.Context, assetPackIdentifier string) (*AssetPack, error)
-	GetStatusRelativeToAssetPackCompletionHandler(assetPack *raw.BAAssetPack, completionHandler func(BAAssetPackStatus, unsafe.Pointer))
-	GetLocalStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier string, completionHandler func(BAAssetPackStatus))
 	AssetPackIsAvailableLocallyWithIdentifier(assetPackIdentifier string) bool
-	EnsureLocalAvailabilityOfAssetPack(ctx context.Context, assetPack *raw.BAAssetPack) error
-	EnsureLocalAvailabilityOfAssetPackRequireLatestVersion(ctx context.Context, assetPack *raw.BAAssetPack, shouldUpdate bool) error
-	CheckForUpdatesWithCompletionHandler(completionHandler func(*foundation.NSSet[*foundation.NSString], *foundation.NSSet[*foundation.NSString], unsafe.Pointer))
-	ContentsAtPathSearchingInAssetPackWithIdentifierOptionsError(path string, assetPackIdentifier string, options foundation.NSDataReadingOptions) (*foundation.NSData, error)
+	EnsureLocalAvailabilityOfAssetPack(ctx context.Context, assetPack *AssetPack) error
+	EnsureLocalAvailabilityOfAssetPackRequireLatestVersion(ctx context.Context, assetPack *AssetPack, shouldUpdate bool) error
 	FileDescriptorForPathSearchingInAssetPackWithIdentifierError(path string, assetPackIdentifier string) (int, error)
-	URLForPathError(path string) (*foundation.NSURL, error)
+	URLForPathError(path string) (obj.Object, error)
 	RemoveAssetPackWithIdentifier(ctx context.Context, assetPackIdentifier string) error
-	GetStatusOfAssetPackWithIdentifierCompletionHandler(assetPackIdentifier string, completionHandler func(BAAssetPackStatus, unsafe.Pointer))
-	Delegate() raw.BAManagedAssetPackDownloadDelegate
-	SetDelegate(delegate raw.BAManagedAssetPackDownloadDelegate)
 }
 
 var _ AssetPackManagerable = (*AssetPackManager)(nil)

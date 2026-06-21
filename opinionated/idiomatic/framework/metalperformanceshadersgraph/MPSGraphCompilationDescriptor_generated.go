@@ -5,217 +5,186 @@
 package metalperformanceshadersgraph
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A class that consists of all the levers for compiling graphs.
 //
-// GraphCompilationDescriptor wraps [raw.MPSGraphCompilationDescriptor] with a fluent Go API.
+// GraphCompilationDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphCompilationDescriptor.
 type GraphCompilationDescriptor struct {
-	inner *raw.MPSGraphCompilationDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSGraphCompilationDescriptor].
-func (x *GraphCompilationDescriptor) Unwrap() *raw.MPSGraphCompilationDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphCompilationDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphCompilationDescriptorFromID adopts an existing object pointer as a GraphCompilationDescriptor (nil for 0).
+// GraphCompilationDescriptorFromID adopts an existing Objective-C object as a GraphCompilationDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphCompilationDescriptorFromID(id objc.ID) *GraphCompilationDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &GraphCompilationDescriptor{inner: raw.MPSGraphCompilationDescriptorFromID(id)}
+	x := &GraphCompilationDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGraphCompilationDescriptor creates a new [GraphCompilationDescriptor].
+// graphCompilationDescriptorAdopt wraps an Objective-C object that this code just created as a
+// GraphCompilationDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphCompilationDescriptorAdopt(id objc.ID) *GraphCompilationDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphCompilationDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GraphCompilationDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GraphCompilationDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GraphCompilationDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGraphCompilationDescriptor creates a new GraphCompilationDescriptor.
 func NewGraphCompilationDescriptor() *GraphCompilationDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphCompilationDescriptor")), objc.RegisterName("new"))
-	return &GraphCompilationDescriptor{inner: raw.MPSGraphCompilationDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphCompilationDescriptor")), objc.RegisterName("new"))
+	return graphCompilationDescriptorAdopt(_id)
 }
 
 // The optimization level for the graph execution, default is MPSGraphOptimizationLevel1.
 //
-// WithOptimizationLevel sets the optimizationLevel property and returns the receiver for chaining.
-func (x *GraphCompilationDescriptor) WithOptimizationLevel(optimizationLevel MPSGraphOptimization) *GraphCompilationDescriptor {
-	x.inner.SetOptimizationLevel(raw.MPSGraphOptimization(optimizationLevel))
+// WithOptimizationLevel sets optimizationLevel and returns the receiver so calls can be chained.
+func (x *GraphCompilationDescriptor) WithOptimizationLevel(optimizationLevel GraphOptimization) *GraphCompilationDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptimizationLevel:"), optimizationLevel)
 	return x
 }
 
 // Flag that makes the compile or specialize call blocking till the entire compilation is complete, defaults to NO.
 //
-// WithWaitForCompilationCompletion sets the waitForCompilationCompletion property and returns the receiver for chaining.
+// WithWaitForCompilationCompletion sets waitForCompilationCompletion and returns the receiver so calls can be chained.
 func (x *GraphCompilationDescriptor) WithWaitForCompilationCompletion(waitForCompilationCompletion bool) *GraphCompilationDescriptor {
-	x.inner.SetWaitForCompilationCompletion(waitForCompilationCompletion)
-	return x
-}
-
-// The handler that the graph calls when the compilation completes.
-//
-// WithCompilationCompletionHandler sets the compilationCompletionHandler property and returns the receiver for chaining.
-func (x *GraphCompilationDescriptor) WithCompilationCompletionHandler(compilationCompletionHandler func(*raw.MPSGraphExecutable, unsafe.Pointer)) *GraphCompilationDescriptor {
-	x.inner.SetCompilationCompletionHandler(compilationCompletionHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaitForCompilationCompletion:"), waitForCompilationCompletion)
 	return x
 }
 
 // The dispatch queue used for the compilation.
 //
-// WithDispatchQueue sets the dispatchQueue property and returns the receiver for chaining.
-func (x *GraphCompilationDescriptor) WithDispatchQueue(dispatchQueue *foundation.NSObject) *GraphCompilationDescriptor {
-	x.inner.SetDispatchQueue(dispatchQueue)
+// WithDispatchQueue sets dispatchQueue and returns the receiver so calls can be chained.
+func (x *GraphCompilationDescriptor) WithDispatchQueue(dispatchQueue obj.Object) *GraphCompilationDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDispatchQueue:"), objref.IDOf(dispatchQueue))
 	return x
 }
 
 // The optimization profile for the graph optimization.
 //
-// WithOptimizationProfile sets the optimizationProfile property and returns the receiver for chaining.
-func (x *GraphCompilationDescriptor) WithOptimizationProfile(optimizationProfile MPSGraphOptimizationProfile) *GraphCompilationDescriptor {
-	x.inner.SetOptimizationProfile(raw.MPSGraphOptimizationProfile(optimizationProfile))
+// WithOptimizationProfile sets optimizationProfile and returns the receiver so calls can be chained.
+func (x *GraphCompilationDescriptor) WithOptimizationProfile(optimizationProfile GraphOptimizationProfile) *GraphCompilationDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptimizationProfile:"), optimizationProfile)
 	return x
 }
 
 // Across the executable allow reduced precision fast math optimizations.
 //
-// WithReducedPrecisionFastMath sets the reducedPrecisionFastMath property and returns the receiver for chaining.
-func (x *GraphCompilationDescriptor) WithReducedPrecisionFastMath(reducedPrecisionFastMath MPSGraphReducedPrecisionFastMath) *GraphCompilationDescriptor {
-	x.inner.SetReducedPrecisionFastMath(raw.MPSGraphReducedPrecisionFastMath(reducedPrecisionFastMath))
+// WithReducedPrecisionFastMath sets reducedPrecisionFastMath and returns the receiver so calls can be chained.
+func (x *GraphCompilationDescriptor) WithReducedPrecisionFastMath(reducedPrecisionFastMath GraphReducedPrecisionFastMath) *GraphCompilationDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReducedPrecisionFastMath:"), reducedPrecisionFastMath)
 	return x
 }
 
 // Turns off type inference and relies on type inference during runtime.
-//
-// DisableTypeInference calls the underlying DisableTypeInference.
 func (x *GraphCompilationDescriptor) DisableTypeInference() {
-	x.inner.DisableTypeInference()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableTypeInference"))
 }
 
 // Turns on Automatic Layout Conversion (for conv like operations) for GPU. DEPRECATED: Layout conversion is now default, so this function is a no-op.
-//
-// ConvertLayoutToNHWC calls the underlying ConvertLayoutToNHWC.
 func (x *GraphCompilationDescriptor) ConvertLayoutToNHWC() {
-	x.inner.ConvertLayoutToNHWC()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convertLayoutToNHWC"))
 }
 
 // The optimization level for the graph execution, default is MPSGraphOptimizationLevel1.
-//
-// OptimizationLevel calls the underlying OptimizationLevel.
-func (x *GraphCompilationDescriptor) OptimizationLevel() MPSGraphOptimization {
-	return MPSGraphOptimization(x.inner.OptimizationLevel())
+func (x *GraphCompilationDescriptor) OptimizationLevel() GraphOptimization {
+	_r := objc.Send[GraphOptimization](objref.IDOf(x), objc.RegisterName("optimizationLevel"))
+	return _r
 }
 
-// SetOptimizationLevel calls the underlying SetOptimizationLevel.
-func (x *GraphCompilationDescriptor) SetOptimizationLevel(optimizationLevel MPSGraphOptimization) {
-	x.inner.SetOptimizationLevel(raw.MPSGraphOptimization(optimizationLevel))
+func (x *GraphCompilationDescriptor) SetOptimizationLevel(optimizationLevel GraphOptimization) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptimizationLevel:"), optimizationLevel)
 }
 
 // Flag that makes the compile or specialize call blocking till the entire compilation is complete, defaults to NO.
-//
-// WaitForCompilationCompletion calls the underlying WaitForCompilationCompletion.
 func (x *GraphCompilationDescriptor) WaitForCompilationCompletion() bool {
-	return x.inner.WaitForCompilationCompletion()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("waitForCompilationCompletion"))
+	return _r
 }
 
-// SetWaitForCompilationCompletion calls the underlying SetWaitForCompilationCompletion.
 func (x *GraphCompilationDescriptor) SetWaitForCompilationCompletion(waitForCompilationCompletion bool) {
-	x.inner.SetWaitForCompilationCompletion(waitForCompilationCompletion)
-}
-
-// The handler that the graph calls when the compilation completes. Default value is nil.
-//
-// CompilationCompletionHandler calls the underlying CompilationCompletionHandler.
-func (x *GraphCompilationDescriptor) CompilationCompletionHandler() objc.Block {
-	return x.inner.CompilationCompletionHandler()
-}
-
-// SetCompilationCompletionHandler calls the underlying SetCompilationCompletionHandler.
-func (x *GraphCompilationDescriptor) SetCompilationCompletionHandler(compilationCompletionHandler func(*raw.MPSGraphExecutable, unsafe.Pointer)) {
-	x.inner.SetCompilationCompletionHandler(compilationCompletionHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaitForCompilationCompletion:"), waitForCompilationCompletion)
 }
 
 // The dispatch queue used for the compilation. Default value is nil.
-//
-// DispatchQueue calls the underlying DispatchQueue.
-func (x *GraphCompilationDescriptor) DispatchQueue() *foundation.NSObject {
-	return x.inner.DispatchQueue()
+func (x *GraphCompilationDescriptor) DispatchQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dispatchQueue"))
+	return obj.Wrap(_r)
 }
 
-// SetDispatchQueue calls the underlying SetDispatchQueue.
-func (x *GraphCompilationDescriptor) SetDispatchQueue(dispatchQueue *foundation.NSObject) {
-	x.inner.SetDispatchQueue(dispatchQueue)
-}
-
-// The optimization profile for the graph optimization. Default is MPSGraphOptimizationProfilePerformance.
-//
-// OptimizationProfile calls the underlying OptimizationProfile.
-func (x *GraphCompilationDescriptor) OptimizationProfile() MPSGraphOptimizationProfile {
-	return MPSGraphOptimizationProfile(x.inner.OptimizationProfile())
+func (x *GraphCompilationDescriptor) SetDispatchQueue(dispatchQueue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDispatchQueue:"), objref.IDOf(dispatchQueue))
 }
 
 // The optimization profile for the graph optimization. Default is MPSGraphOptimizationProfilePerformance.
-//
-// SetOptimizationProfile calls the underlying SetOptimizationProfile.
-func (x *GraphCompilationDescriptor) SetOptimizationProfile(optimizationProfile MPSGraphOptimizationProfile) {
-	x.inner.SetOptimizationProfile(raw.MPSGraphOptimizationProfile(optimizationProfile))
+func (x *GraphCompilationDescriptor) OptimizationProfile() GraphOptimizationProfile {
+	_r := objc.Send[GraphOptimizationProfile](objref.IDOf(x), objc.RegisterName("optimizationProfile"))
+	return _r
 }
 
-// The dictionary used during runtime to lookup the “MPSGraphExecutable“ which correspond to the “symbolName“.
-//
-// Callables calls the underlying Callables.
-func (x *GraphCompilationDescriptor) Callables() unsafe.Pointer {
-	return x.inner.Callables()
-}
-
-// SetCallables calls the underlying SetCallables.
-func (x *GraphCompilationDescriptor) SetCallables(callables unsafe.Pointer) {
-	x.inner.SetCallables(callables)
+// The optimization profile for the graph optimization. Default is MPSGraphOptimizationProfilePerformance.
+func (x *GraphCompilationDescriptor) SetOptimizationProfile(optimizationProfile GraphOptimizationProfile) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptimizationProfile:"), optimizationProfile)
 }
 
 // Across the executable allow reduced precision fast math optimizations.
-//
-// ReducedPrecisionFastMath calls the underlying ReducedPrecisionFastMath.
-func (x *GraphCompilationDescriptor) ReducedPrecisionFastMath() MPSGraphReducedPrecisionFastMath {
-	return MPSGraphReducedPrecisionFastMath(x.inner.ReducedPrecisionFastMath())
+func (x *GraphCompilationDescriptor) ReducedPrecisionFastMath() GraphReducedPrecisionFastMath {
+	_r := objc.Send[GraphReducedPrecisionFastMath](objref.IDOf(x), objc.RegisterName("reducedPrecisionFastMath"))
+	return _r
 }
 
-// SetReducedPrecisionFastMath calls the underlying SetReducedPrecisionFastMath.
-func (x *GraphCompilationDescriptor) SetReducedPrecisionFastMath(reducedPrecisionFastMath MPSGraphReducedPrecisionFastMath) {
-	x.inner.SetReducedPrecisionFastMath(raw.MPSGraphReducedPrecisionFastMath(reducedPrecisionFastMath))
-}
-
-func (x *GraphCompilationDescriptor) asGraphObject() *raw.MPSGraphObject {
-	return &x.inner.MPSGraphObject
+func (x *GraphCompilationDescriptor) SetReducedPrecisionFastMath(reducedPrecisionFastMath GraphReducedPrecisionFastMath) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReducedPrecisionFastMath:"), reducedPrecisionFastMath)
 }
 
 // GraphCompilationDescriptorable is the interface implemented by [GraphCompilationDescriptor], for mocking and DI.
 type GraphCompilationDescriptorable interface {
-	Unwrap() *raw.MPSGraphCompilationDescriptor
-	WithOptimizationLevel(optimizationLevel MPSGraphOptimization) *GraphCompilationDescriptor
+	obj.Object
+	WithOptimizationLevel(optimizationLevel GraphOptimization) *GraphCompilationDescriptor
 	WithWaitForCompilationCompletion(waitForCompilationCompletion bool) *GraphCompilationDescriptor
-	WithCompilationCompletionHandler(compilationCompletionHandler func(*raw.MPSGraphExecutable, unsafe.Pointer)) *GraphCompilationDescriptor
-	WithDispatchQueue(dispatchQueue *foundation.NSObject) *GraphCompilationDescriptor
-	WithOptimizationProfile(optimizationProfile MPSGraphOptimizationProfile) *GraphCompilationDescriptor
-	WithReducedPrecisionFastMath(reducedPrecisionFastMath MPSGraphReducedPrecisionFastMath) *GraphCompilationDescriptor
+	WithDispatchQueue(dispatchQueue obj.Object) *GraphCompilationDescriptor
+	WithOptimizationProfile(optimizationProfile GraphOptimizationProfile) *GraphCompilationDescriptor
+	WithReducedPrecisionFastMath(reducedPrecisionFastMath GraphReducedPrecisionFastMath) *GraphCompilationDescriptor
 	DisableTypeInference()
 	ConvertLayoutToNHWC()
-	OptimizationLevel() MPSGraphOptimization
-	SetOptimizationLevel(optimizationLevel MPSGraphOptimization)
+	OptimizationLevel() GraphOptimization
+	SetOptimizationLevel(optimizationLevel GraphOptimization)
 	WaitForCompilationCompletion() bool
 	SetWaitForCompilationCompletion(waitForCompilationCompletion bool)
-	CompilationCompletionHandler() objc.Block
-	SetCompilationCompletionHandler(compilationCompletionHandler func(*raw.MPSGraphExecutable, unsafe.Pointer))
-	DispatchQueue() *foundation.NSObject
-	SetDispatchQueue(dispatchQueue *foundation.NSObject)
-	OptimizationProfile() MPSGraphOptimizationProfile
-	SetOptimizationProfile(optimizationProfile MPSGraphOptimizationProfile)
-	Callables() unsafe.Pointer
-	SetCallables(callables unsafe.Pointer)
-	ReducedPrecisionFastMath() MPSGraphReducedPrecisionFastMath
-	SetReducedPrecisionFastMath(reducedPrecisionFastMath MPSGraphReducedPrecisionFastMath)
+	DispatchQueue() obj.Object
+	SetDispatchQueue(dispatchQueue obj.Object)
+	OptimizationProfile() GraphOptimizationProfile
+	SetOptimizationProfile(optimizationProfile GraphOptimizationProfile)
+	ReducedPrecisionFastMath() GraphReducedPrecisionFastMath
+	SetReducedPrecisionFastMath(reducedPrecisionFastMath GraphReducedPrecisionFastMath)
 }
 
 var _ GraphCompilationDescriptorable = (*GraphCompilationDescriptor)(nil)

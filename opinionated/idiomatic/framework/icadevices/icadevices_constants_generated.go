@@ -5,584 +5,695 @@
 package icadevices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/icadevices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KICADevicesArrayKey returns the value of the CoreFoundation reference constant kICADevicesArrayKey as an objc.ID.
-func KICADevicesArrayKey() objc.ID { return purego.CFConstant(raw.KICADevicesArrayKey()) }
+// KICADevicesArrayKey returns the value of the constant kICADevicesArrayKey.
+func KICADevicesArrayKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicesArrayKey")))
+}
 
-// KICAObjectKey returns the value of the CoreFoundation reference constant kICAObjectKey as an objc.ID.
-func KICAObjectKey() objc.ID { return purego.CFConstant(raw.KICAObjectKey()) }
+// KICAObjectKey returns the value of the constant kICAObjectKey.
+func KICAObjectKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kICAObjectKey"))) }
 
-// KICAObjectNameKey returns the value of the CoreFoundation reference constant kICAObjectNameKey as an objc.ID.
-func KICAObjectNameKey() objc.ID { return purego.CFConstant(raw.KICAObjectNameKey()) }
+// KICAObjectNameKey returns the value of the constant kICAObjectNameKey.
+func KICAObjectNameKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kICAObjectNameKey"))) }
 
-// KICAUSBVendorIDKey returns the value of the CoreFoundation reference constant kICAUSBVendorIDKey as an objc.ID.
-func KICAUSBVendorIDKey() objc.ID { return purego.CFConstant(raw.KICAUSBVendorIDKey()) }
+// KICAUSBVendorIDKey returns the value of the constant kICAUSBVendorIDKey.
+func KICAUSBVendorIDKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICAUSBVendorIDKey")))
+}
 
-// KICAUSBProductIDKey returns the value of the CoreFoundation reference constant kICAUSBProductIDKey as an objc.ID.
-func KICAUSBProductIDKey() objc.ID { return purego.CFConstant(raw.KICAUSBProductIDKey()) }
+// KICAUSBProductIDKey returns the value of the constant kICAUSBProductIDKey.
+func KICAUSBProductIDKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICAUSBProductIDKey")))
+}
 
-// KICADeviceTypeKey returns the value of the CoreFoundation reference constant kICADeviceTypeKey as an objc.ID.
-func KICADeviceTypeKey() objc.ID { return purego.CFConstant(raw.KICADeviceTypeKey()) }
+// KICADeviceTypeKey returns the value of the constant kICADeviceTypeKey.
+func KICADeviceTypeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kICADeviceTypeKey"))) }
 
-// KICAExecutableArchitectureKey returns the value of the CoreFoundation reference constant kICAExecutableArchitectureKey as an objc.ID.
-func KICAExecutableArchitectureKey() objc.ID {
-	return purego.CFConstant(raw.KICAExecutableArchitectureKey())
+// KICAExecutableArchitectureKey returns the value of the constant kICAExecutableArchitectureKey.
+func KICAExecutableArchitectureKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICAExecutableArchitectureKey")))
 }
 
-// KICARemoteDeviceKey returns the value of the CoreFoundation reference constant kICARemoteDeviceKey as an objc.ID.
-func KICARemoteDeviceKey() objc.ID { return purego.CFConstant(raw.KICARemoteDeviceKey()) }
+// KICARemoteDeviceKey returns the value of the constant kICARemoteDeviceKey.
+func KICARemoteDeviceKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICARemoteDeviceKey")))
+}
 
-// KICADeviceSharedKey returns the value of the CoreFoundation reference constant kICADeviceSharedKey as an objc.ID.
-func KICADeviceSharedKey() objc.ID { return purego.CFConstant(raw.KICADeviceSharedKey()) }
+// KICADeviceSharedKey returns the value of the constant kICADeviceSharedKey.
+func KICADeviceSharedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADeviceSharedKey")))
+}
 
-// KICADeviceWebSharedKey returns the value of the CoreFoundation reference constant kICADeviceWebSharedKey as an objc.ID.
-func KICADeviceWebSharedKey() objc.ID { return purego.CFConstant(raw.KICADeviceWebSharedKey()) }
+// KICADeviceWebSharedKey returns the value of the constant kICADeviceWebSharedKey.
+func KICADeviceWebSharedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADeviceWebSharedKey")))
+}
 
-// KICADeviceUsedKey returns the value of the CoreFoundation reference constant kICADeviceUsedKey as an objc.ID.
-func KICADeviceUsedKey() objc.ID { return purego.CFConstant(raw.KICADeviceUsedKey()) }
+// KICADeviceUsedKey returns the value of the constant kICADeviceUsedKey.
+func KICADeviceUsedKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kICADeviceUsedKey"))) }
 
-// KICABonjourServiceTypeKey returns the value of the CoreFoundation reference constant kICABonjourServiceTypeKey as an objc.ID.
-func KICABonjourServiceTypeKey() objc.ID { return purego.CFConstant(raw.KICABonjourServiceTypeKey()) }
+// KICABonjourServiceTypeKey returns the value of the constant kICABonjourServiceTypeKey.
+func KICABonjourServiceTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICABonjourServiceTypeKey")))
+}
 
-// KICABonjourServiceNameKey returns the value of the CoreFoundation reference constant kICABonjourServiceNameKey as an objc.ID.
-func KICABonjourServiceNameKey() objc.ID { return purego.CFConstant(raw.KICABonjourServiceNameKey()) }
+// KICABonjourServiceNameKey returns the value of the constant kICABonjourServiceNameKey.
+func KICABonjourServiceNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICABonjourServiceNameKey")))
+}
 
-// KICABonjourTXTRecordKey returns the value of the CoreFoundation reference constant kICABonjourTXTRecordKey as an objc.ID.
-func KICABonjourTXTRecordKey() objc.ID { return purego.CFConstant(raw.KICABonjourTXTRecordKey()) }
+// KICABonjourTXTRecordKey returns the value of the constant kICABonjourTXTRecordKey.
+func KICABonjourTXTRecordKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICABonjourTXTRecordKey")))
+}
 
-// KICADeviceCapabilitiesKey returns the value of the CoreFoundation reference constant kICADeviceCapabilitiesKey as an objc.ID.
-func KICADeviceCapabilitiesKey() objc.ID { return purego.CFConstant(raw.KICADeviceCapabilitiesKey()) }
+// KICADeviceCapabilitiesKey returns the value of the constant kICADeviceCapabilitiesKey.
+func KICADeviceCapabilitiesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADeviceCapabilitiesKey")))
+}
 
-// KICALockStatusKey returns the value of the CoreFoundation reference constant kICALockStatusKey as an objc.ID.
-func KICALockStatusKey() objc.ID { return purego.CFConstant(raw.KICALockStatusKey()) }
+// KICALockStatusKey returns the value of the constant kICALockStatusKey.
+func KICALockStatusKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kICALockStatusKey"))) }
 
-// KICADataPropertyKey returns the value of the CoreFoundation reference constant kICADataPropertyKey as an objc.ID.
-func KICADataPropertyKey() objc.ID { return purego.CFConstant(raw.KICADataPropertyKey()) }
+// KICADataPropertyKey returns the value of the constant kICADataPropertyKey.
+func KICADataPropertyKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADataPropertyKey")))
+}
 
-// KICADataTypeKey returns the value of the CoreFoundation reference constant kICADataTypeKey as an objc.ID.
-func KICADataTypeKey() objc.ID { return purego.CFConstant(raw.KICADataTypeKey()) }
+// KICADataTypeKey returns the value of the constant kICADataTypeKey.
+func KICADataTypeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kICADataTypeKey"))) }
 
-// KICADataSizeKey returns the value of the CoreFoundation reference constant kICADataSizeKey as an objc.ID.
-func KICADataSizeKey() objc.ID { return purego.CFConstant(raw.KICADataSizeKey()) }
+// KICADataSizeKey returns the value of the constant kICADataSizeKey.
+func KICADataSizeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kICADataSizeKey"))) }
 
-// KICAThumbnailPropertyKey returns the value of the CoreFoundation reference constant kICAThumbnailPropertyKey as an objc.ID.
-func KICAThumbnailPropertyKey() objc.ID { return purego.CFConstant(raw.KICAThumbnailPropertyKey()) }
+// KICAThumbnailPropertyKey returns the value of the constant kICAThumbnailPropertyKey.
+func KICAThumbnailPropertyKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICAThumbnailPropertyKey")))
+}
 
-// KICAThumbnailSizeKey returns the value of the CoreFoundation reference constant kICAThumbnailSizeKey as an objc.ID.
-func KICAThumbnailSizeKey() objc.ID { return purego.CFConstant(raw.KICAThumbnailSizeKey()) }
+// KICAThumbnailSizeKey returns the value of the constant kICAThumbnailSizeKey.
+func KICAThumbnailSizeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICAThumbnailSizeKey")))
+}
 
-// KICARawKey returns the value of the CoreFoundation reference constant kICARawKey as an objc.ID.
-func KICARawKey() objc.ID { return purego.CFConstant(raw.KICARawKey()) }
+// KICARawKey returns the value of the constant kICARawKey.
+func KICARawKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kICARawKey"))) }
 
-// KICAMediaHeightKey returns the value of the CoreFoundation reference constant kICAMediaHeightKey as an objc.ID.
-func KICAMediaHeightKey() objc.ID { return purego.CFConstant(raw.KICAMediaHeightKey()) }
+// KICAMediaHeightKey returns the value of the constant kICAMediaHeightKey.
+func KICAMediaHeightKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICAMediaHeightKey")))
+}
 
-// KICAMediaWidthKey returns the value of the CoreFoundation reference constant kICAMediaWidthKey as an objc.ID.
-func KICAMediaWidthKey() objc.ID { return purego.CFConstant(raw.KICAMediaWidthKey()) }
+// KICAMediaWidthKey returns the value of the constant kICAMediaWidthKey.
+func KICAMediaWidthKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kICAMediaWidthKey"))) }
 
-// KICACreationDateStringKey returns the value of the CoreFoundation reference constant kICACreationDateStringKey as an objc.ID.
-func KICACreationDateStringKey() objc.ID { return purego.CFConstant(raw.KICACreationDateStringKey()) }
+// KICACreationDateStringKey returns the value of the constant kICACreationDateStringKey.
+func KICACreationDateStringKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICACreationDateStringKey")))
+}
 
-// KICAModificationDateStringKey returns the value of the CoreFoundation reference constant kICAModificationDateStringKey as an objc.ID.
-func KICAModificationDateStringKey() objc.ID {
-	return purego.CFConstant(raw.KICAModificationDateStringKey())
+// KICAModificationDateStringKey returns the value of the constant kICAModificationDateStringKey.
+func KICAModificationDateStringKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICAModificationDateStringKey")))
 }
 
-// KMetaDataDictionaryKey returns the value of the CoreFoundation reference constant kMetaDataDictionaryKey as an objc.ID.
-func KMetaDataDictionaryKey() objc.ID { return purego.CFConstant(raw.KMetaDataDictionaryKey()) }
+// KMetaDataDictionaryKey returns the value of the constant kMetaDataDictionaryKey.
+func KMetaDataDictionaryKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMetaDataDictionaryKey")))
+}
 
-// KICAMediaDurationInSecondsKey returns the value of the CoreFoundation reference constant kICAMediaDurationInSecondsKey as an objc.ID.
-func KICAMediaDurationInSecondsKey() objc.ID {
-	return purego.CFConstant(raw.KICAMediaDurationInSecondsKey())
+// KICAMediaDurationInSecondsKey returns the value of the constant kICAMediaDurationInSecondsKey.
+func KICAMediaDurationInSecondsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICAMediaDurationInSecondsKey")))
 }
 
-// KICADeviceTypeCamera returns the value of the CoreFoundation reference constant kICADeviceTypeCamera as an objc.ID.
-func KICADeviceTypeCamera() objc.ID { return purego.CFConstant(raw.KICADeviceTypeCamera()) }
+// KICADeviceTypeCamera returns the value of the constant kICADeviceTypeCamera.
+func KICADeviceTypeCamera() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADeviceTypeCamera")))
+}
 
-// KICADeviceTypeScanner returns the value of the CoreFoundation reference constant kICADeviceTypeScanner as an objc.ID.
-func KICADeviceTypeScanner() objc.ID { return purego.CFConstant(raw.KICADeviceTypeScanner()) }
+// KICADeviceTypeScanner returns the value of the constant kICADeviceTypeScanner.
+func KICADeviceTypeScanner() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADeviceTypeScanner")))
+}
 
-// KICAUSBTransportType returns the value of the CoreFoundation reference constant kICAUSBTransportType as an objc.ID.
-func KICAUSBTransportType() objc.ID { return purego.CFConstant(raw.KICAUSBTransportType()) }
+// KICAUSBTransportType returns the value of the constant kICAUSBTransportType.
+func KICAUSBTransportType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICAUSBTransportType")))
+}
 
-// KICAFireWireTransportType returns the value of the CoreFoundation reference constant kICAFireWireTransportType as an objc.ID.
-func KICAFireWireTransportType() objc.ID { return purego.CFConstant(raw.KICAFireWireTransportType()) }
+// KICAFireWireTransportType returns the value of the constant kICAFireWireTransportType.
+func KICAFireWireTransportType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICAFireWireTransportType")))
+}
 
-// KICABluetoothTransportType returns the value of the CoreFoundation reference constant kICABluetoothTransportType as an objc.ID.
-func KICABluetoothTransportType() objc.ID { return purego.CFConstant(raw.KICABluetoothTransportType()) }
+// KICABluetoothTransportType returns the value of the constant kICABluetoothTransportType.
+func KICABluetoothTransportType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICABluetoothTransportType")))
+}
 
-// KICATCPIPTransportType returns the value of the CoreFoundation reference constant kICATCPIPTransportType as an objc.ID.
-func KICATCPIPTransportType() objc.ID { return purego.CFConstant(raw.KICATCPIPTransportType()) }
+// KICATCPIPTransportType returns the value of the constant kICATCPIPTransportType.
+func KICATCPIPTransportType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICATCPIPTransportType")))
+}
 
-// KICASCSITransportType returns the value of the CoreFoundation reference constant kICASCSITransportType as an objc.ID.
-func KICASCSITransportType() objc.ID { return purego.CFConstant(raw.KICASCSITransportType()) }
+// KICASCSITransportType returns the value of the constant kICASCSITransportType.
+func KICASCSITransportType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICASCSITransportType")))
+}
 
-// KICATWAINTransportType returns the value of the CoreFoundation reference constant kICATWAINTransportType as an objc.ID.
-func KICATWAINTransportType() objc.ID { return purego.CFConstant(raw.KICATWAINTransportType()) }
+// KICATWAINTransportType returns the value of the constant kICATWAINTransportType.
+func KICATWAINTransportType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICATWAINTransportType")))
+}
 
-// KICADeviceBrowserDeviceRefKey returns the value of the CoreFoundation reference constant kICADeviceBrowserDeviceRefKey as an objc.ID.
-func KICADeviceBrowserDeviceRefKey() objc.ID {
-	return purego.CFConstant(raw.KICADeviceBrowserDeviceRefKey())
+// KICADeviceBrowserDeviceRefKey returns the value of the constant kICADeviceBrowserDeviceRefKey.
+func KICADeviceBrowserDeviceRefKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADeviceBrowserDeviceRefKey")))
 }
 
-// KICADeviceModulePathKey returns the value of the CoreFoundation reference constant kICADeviceModulePathKey as an objc.ID.
-func KICADeviceModulePathKey() objc.ID { return purego.CFConstant(raw.KICADeviceModulePathKey()) }
+// KICADeviceModulePathKey returns the value of the constant kICADeviceModulePathKey.
+func KICADeviceModulePathKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADeviceModulePathKey")))
+}
 
-// KICADeviceIconPathKey returns the value of the CoreFoundation reference constant kICADeviceIconPathKey as an objc.ID.
-func KICADeviceIconPathKey() objc.ID { return purego.CFConstant(raw.KICADeviceIconPathKey()) }
+// KICADeviceIconPathKey returns the value of the constant kICADeviceIconPathKey.
+func KICADeviceIconPathKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADeviceIconPathKey")))
+}
 
-// KICATransportTypeKey returns the value of the CoreFoundation reference constant kICATransportTypeKey as an objc.ID.
-func KICATransportTypeKey() objc.ID { return purego.CFConstant(raw.KICATransportTypeKey()) }
+// KICATransportTypeKey returns the value of the constant kICATransportTypeKey.
+func KICATransportTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICATransportTypeKey")))
+}
 
-// KICABluetoothAddressKey returns the value of the CoreFoundation reference constant kICABluetoothAddressKey as an objc.ID.
-func KICABluetoothAddressKey() objc.ID { return purego.CFConstant(raw.KICABluetoothAddressKey()) }
+// KICABluetoothAddressKey returns the value of the constant kICABluetoothAddressKey.
+func KICABluetoothAddressKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICABluetoothAddressKey")))
+}
 
-// KICAUSBLocationIDKey returns the value of the CoreFoundation reference constant kICAUSBLocationIDKey as an objc.ID.
-func KICAUSBLocationIDKey() objc.ID { return purego.CFConstant(raw.KICAUSBLocationIDKey()) }
+// KICAUSBLocationIDKey returns the value of the constant kICAUSBLocationIDKey.
+func KICAUSBLocationIDKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICAUSBLocationIDKey")))
+}
 
-// KICAFireWireGUIDKey returns the value of the CoreFoundation reference constant kICAFireWireGUIDKey as an objc.ID.
-func KICAFireWireGUIDKey() objc.ID { return purego.CFConstant(raw.KICAFireWireGUIDKey()) }
+// KICAFireWireGUIDKey returns the value of the constant kICAFireWireGUIDKey.
+func KICAFireWireGUIDKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICAFireWireGUIDKey")))
+}
 
-// KICAIOServicePathKey returns the value of the CoreFoundation reference constant kICAIOServicePathKey as an objc.ID.
-func KICAIOServicePathKey() objc.ID { return purego.CFConstant(raw.KICAIOServicePathKey()) }
+// KICAIOServicePathKey returns the value of the constant kICAIOServicePathKey.
+func KICAIOServicePathKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICAIOServicePathKey")))
+}
 
-// KICAIPAddressKey returns the value of the CoreFoundation reference constant kICAIPAddressKey as an objc.ID.
-func KICAIPAddressKey() objc.ID { return purego.CFConstant(raw.KICAIPAddressKey()) }
+// KICAIPAddressKey returns the value of the constant kICAIPAddressKey.
+func KICAIPAddressKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kICAIPAddressKey"))) }
 
-// KICAIPPortKey returns the value of the CoreFoundation reference constant kICAIPPortKey as an objc.ID.
-func KICAIPPortKey() objc.ID { return purego.CFConstant(raw.KICAIPPortKey()) }
+// KICAIPPortKey returns the value of the constant kICAIPPortKey.
+func KICAIPPortKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kICAIPPortKey"))) }
 
-// KICAIPNameKey returns the value of the CoreFoundation reference constant kICAIPNameKey as an objc.ID.
-func KICAIPNameKey() objc.ID { return purego.CFConstant(raw.KICAIPNameKey()) }
+// KICAIPNameKey returns the value of the constant kICAIPNameKey.
+func KICAIPNameKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kICAIPNameKey"))) }
 
-// KICAIPGUIDKey returns the value of the CoreFoundation reference constant kICAIPGUIDKey as an objc.ID.
-func KICAIPGUIDKey() objc.ID { return purego.CFConstant(raw.KICAIPGUIDKey()) }
+// KICAIPGUIDKey returns the value of the constant kICAIPGUIDKey.
+func KICAIPGUIDKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kICAIPGUIDKey"))) }
 
-// KICATWAINDSPathKey returns the value of the CoreFoundation reference constant kICATWAINDSPathKey as an objc.ID.
-func KICATWAINDSPathKey() objc.ID { return purego.CFConstant(raw.KICATWAINDSPathKey()) }
+// KICATWAINDSPathKey returns the value of the constant kICATWAINDSPathKey.
+func KICATWAINDSPathKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICATWAINDSPathKey")))
+}
 
-// @const kICAUserAssignedDeviceNameKey @abstract This key may be present in the property dictionary of a device if the device has a user-assigned name. @discussion Value is of type CFStringRef.
-// KICAUserAssignedDeviceNameKey returns the value of the CoreFoundation reference constant kICAUserAssignedDeviceNameKey as an objc.ID.
-func KICAUserAssignedDeviceNameKey() objc.ID {
-	return purego.CFConstant(raw.KICAUserAssignedDeviceNameKey())
+// This key may be present in the property dictionary of a device if the device has a user-assigned name. Value is of type CFStringRef.
+// KICAUserAssignedDeviceNameKey returns the value of the constant kICAUserAssignedDeviceNameKey.
+func KICAUserAssignedDeviceNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICAUserAssignedDeviceNameKey")))
 }
 
-// KICANotificationTypeObjectAdded returns the value of the CoreFoundation reference constant kICANotificationTypeObjectAdded as an objc.ID.
-func KICANotificationTypeObjectAdded() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeObjectAdded())
+// KICANotificationTypeObjectAdded returns the value of the constant kICANotificationTypeObjectAdded.
+func KICANotificationTypeObjectAdded() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeObjectAdded")))
 }
 
-// KICANotificationTypeObjectRemoved returns the value of the CoreFoundation reference constant kICANotificationTypeObjectRemoved as an objc.ID.
-func KICANotificationTypeObjectRemoved() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeObjectRemoved())
+// KICANotificationTypeObjectRemoved returns the value of the constant kICANotificationTypeObjectRemoved.
+func KICANotificationTypeObjectRemoved() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeObjectRemoved")))
 }
 
-// KICANotificationTypeObjectInfoChanged returns the value of the CoreFoundation reference constant kICANotificationTypeObjectInfoChanged as an objc.ID.
-func KICANotificationTypeObjectInfoChanged() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeObjectInfoChanged())
+// KICANotificationTypeObjectInfoChanged returns the value of the constant kICANotificationTypeObjectInfoChanged.
+func KICANotificationTypeObjectInfoChanged() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeObjectInfoChanged")))
 }
 
-// KICANotificationTypeStoreAdded returns the value of the CoreFoundation reference constant kICANotificationTypeStoreAdded as an objc.ID.
-func KICANotificationTypeStoreAdded() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeStoreAdded())
+// KICANotificationTypeStoreAdded returns the value of the constant kICANotificationTypeStoreAdded.
+func KICANotificationTypeStoreAdded() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeStoreAdded")))
 }
 
-// KICANotificationTypeStoreRemoved returns the value of the CoreFoundation reference constant kICANotificationTypeStoreRemoved as an objc.ID.
-func KICANotificationTypeStoreRemoved() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeStoreRemoved())
+// KICANotificationTypeStoreRemoved returns the value of the constant kICANotificationTypeStoreRemoved.
+func KICANotificationTypeStoreRemoved() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeStoreRemoved")))
 }
 
-// KICANotificationTypeStoreFull returns the value of the CoreFoundation reference constant kICANotificationTypeStoreFull as an objc.ID.
-func KICANotificationTypeStoreFull() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeStoreFull())
+// KICANotificationTypeStoreFull returns the value of the constant kICANotificationTypeStoreFull.
+func KICANotificationTypeStoreFull() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeStoreFull")))
 }
 
-// KICANotificationTypeStoreInfoChanged returns the value of the CoreFoundation reference constant kICANotificationTypeStoreInfoChanged as an objc.ID.
-func KICANotificationTypeStoreInfoChanged() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeStoreInfoChanged())
+// KICANotificationTypeStoreInfoChanged returns the value of the constant kICANotificationTypeStoreInfoChanged.
+func KICANotificationTypeStoreInfoChanged() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeStoreInfoChanged")))
 }
 
-// KICANotificationTypeDeviceAdded returns the value of the CoreFoundation reference constant kICANotificationTypeDeviceAdded as an objc.ID.
-func KICANotificationTypeDeviceAdded() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeDeviceAdded())
+// KICANotificationTypeDeviceAdded returns the value of the constant kICANotificationTypeDeviceAdded.
+func KICANotificationTypeDeviceAdded() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeDeviceAdded")))
 }
 
-// KICANotificationTypeDeviceRemoved returns the value of the CoreFoundation reference constant kICANotificationTypeDeviceRemoved as an objc.ID.
-func KICANotificationTypeDeviceRemoved() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeDeviceRemoved())
+// KICANotificationTypeDeviceRemoved returns the value of the constant kICANotificationTypeDeviceRemoved.
+func KICANotificationTypeDeviceRemoved() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeDeviceRemoved")))
 }
 
-// KICANotificationTypeDeviceInfoChanged returns the value of the CoreFoundation reference constant kICANotificationTypeDeviceInfoChanged as an objc.ID.
-func KICANotificationTypeDeviceInfoChanged() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeDeviceInfoChanged())
+// KICANotificationTypeDeviceInfoChanged returns the value of the constant kICANotificationTypeDeviceInfoChanged.
+func KICANotificationTypeDeviceInfoChanged() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeDeviceInfoChanged")))
 }
 
-// KICANotificationTypeDevicePropertyChanged returns the value of the CoreFoundation reference constant kICANotificationTypeDevicePropertyChanged as an objc.ID.
-func KICANotificationTypeDevicePropertyChanged() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeDevicePropertyChanged())
+// KICANotificationTypeDevicePropertyChanged returns the value of the constant kICANotificationTypeDevicePropertyChanged.
+func KICANotificationTypeDevicePropertyChanged() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeDevicePropertyChanged")))
 }
 
-// KICANotificationTypeDeviceWasReset returns the value of the CoreFoundation reference constant kICANotificationTypeDeviceWasReset as an objc.ID.
-func KICANotificationTypeDeviceWasReset() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeDeviceWasReset())
+// KICANotificationTypeDeviceWasReset returns the value of the constant kICANotificationTypeDeviceWasReset.
+func KICANotificationTypeDeviceWasReset() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeDeviceWasReset")))
 }
 
-// KICANotificationTypeDeviceStatusInfo returns the value of the CoreFoundation reference constant kICANotificationTypeDeviceStatusInfo as an objc.ID.
-func KICANotificationTypeDeviceStatusInfo() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeDeviceStatusInfo())
+// KICANotificationTypeDeviceStatusInfo returns the value of the constant kICANotificationTypeDeviceStatusInfo.
+func KICANotificationTypeDeviceStatusInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeDeviceStatusInfo")))
 }
 
-// KICANotificationTypeDeviceStatusError returns the value of the CoreFoundation reference constant kICANotificationTypeDeviceStatusError as an objc.ID.
-func KICANotificationTypeDeviceStatusError() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeDeviceStatusError())
+// KICANotificationTypeDeviceStatusError returns the value of the constant kICANotificationTypeDeviceStatusError.
+func KICANotificationTypeDeviceStatusError() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeDeviceStatusError")))
 }
 
-// KICANotificationTypeCaptureComplete returns the value of the CoreFoundation reference constant kICANotificationTypeCaptureComplete as an objc.ID.
-func KICANotificationTypeCaptureComplete() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeCaptureComplete())
+// KICANotificationTypeCaptureComplete returns the value of the constant kICANotificationTypeCaptureComplete.
+func KICANotificationTypeCaptureComplete() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeCaptureComplete")))
 }
 
-// KICANotificationTypeRequestObjectTransfer returns the value of the CoreFoundation reference constant kICANotificationTypeRequestObjectTransfer as an objc.ID.
-func KICANotificationTypeRequestObjectTransfer() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeRequestObjectTransfer())
+// KICANotificationTypeRequestObjectTransfer returns the value of the constant kICANotificationTypeRequestObjectTransfer.
+func KICANotificationTypeRequestObjectTransfer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeRequestObjectTransfer")))
 }
 
-// KICANotificationTypeTransactionCanceled returns the value of the CoreFoundation reference constant kICANotificationTypeTransactionCanceled as an objc.ID.
-func KICANotificationTypeTransactionCanceled() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeTransactionCanceled())
+// KICANotificationTypeTransactionCanceled returns the value of the constant kICANotificationTypeTransactionCanceled.
+func KICANotificationTypeTransactionCanceled() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeTransactionCanceled")))
 }
 
-// KICANotificationTypeUnreportedStatus returns the value of the CoreFoundation reference constant kICANotificationTypeUnreportedStatus as an objc.ID.
-func KICANotificationTypeUnreportedStatus() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeUnreportedStatus())
+// KICANotificationTypeUnreportedStatus returns the value of the constant kICANotificationTypeUnreportedStatus.
+func KICANotificationTypeUnreportedStatus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeUnreportedStatus")))
 }
 
-// KICANotificationTypeProprietary returns the value of the CoreFoundation reference constant kICANotificationTypeProprietary as an objc.ID.
-func KICANotificationTypeProprietary() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeProprietary())
+// KICANotificationTypeProprietary returns the value of the constant kICANotificationTypeProprietary.
+func KICANotificationTypeProprietary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeProprietary")))
 }
 
-// KICANotificationTypeDeviceConnectionProgress returns the value of the CoreFoundation reference constant kICANotificationTypeDeviceConnectionProgress as an objc.ID.
-func KICANotificationTypeDeviceConnectionProgress() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeDeviceConnectionProgress())
+// KICANotificationTypeDeviceConnectionProgress returns the value of the constant kICANotificationTypeDeviceConnectionProgress.
+func KICANotificationTypeDeviceConnectionProgress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeDeviceConnectionProgress")))
 }
 
-// KICANotificationTypeDownloadProgressStatus returns the value of the CoreFoundation reference constant kICANotificationTypeDownloadProgressStatus as an objc.ID.
-func KICANotificationTypeDownloadProgressStatus() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeDownloadProgressStatus())
+// KICANotificationTypeDownloadProgressStatus returns the value of the constant kICANotificationTypeDownloadProgressStatus.
+func KICANotificationTypeDownloadProgressStatus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeDownloadProgressStatus")))
 }
 
-// KICANotificationTypeScanProgressStatus returns the value of the CoreFoundation reference constant kICANotificationTypeScanProgressStatus as an objc.ID.
-func KICANotificationTypeScanProgressStatus() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeScanProgressStatus())
+// KICANotificationTypeScanProgressStatus returns the value of the constant kICANotificationTypeScanProgressStatus.
+func KICANotificationTypeScanProgressStatus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeScanProgressStatus")))
 }
 
-// KICANotificationTypeScannerSessionClosed returns the value of the CoreFoundation reference constant kICANotificationTypeScannerSessionClosed as an objc.ID.
-func KICANotificationTypeScannerSessionClosed() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeScannerSessionClosed())
+// KICANotificationTypeScannerSessionClosed returns the value of the constant kICANotificationTypeScannerSessionClosed.
+func KICANotificationTypeScannerSessionClosed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeScannerSessionClosed")))
 }
 
-// KICANotificationTypeScannerScanDone returns the value of the CoreFoundation reference constant kICANotificationTypeScannerScanDone as an objc.ID.
-func KICANotificationTypeScannerScanDone() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeScannerScanDone())
+// KICANotificationTypeScannerScanDone returns the value of the constant kICANotificationTypeScannerScanDone.
+func KICANotificationTypeScannerScanDone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeScannerScanDone")))
 }
 
-// KICANotificationTypeScannerPageDone returns the value of the CoreFoundation reference constant kICANotificationTypeScannerPageDone as an objc.ID.
-func KICANotificationTypeScannerPageDone() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeScannerPageDone())
+// KICANotificationTypeScannerPageDone returns the value of the constant kICANotificationTypeScannerPageDone.
+func KICANotificationTypeScannerPageDone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeScannerPageDone")))
 }
 
-// KICANotificationTypeScannerButtonPressed returns the value of the CoreFoundation reference constant kICANotificationTypeScannerButtonPressed as an objc.ID.
-func KICANotificationTypeScannerButtonPressed() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeScannerButtonPressed())
+// KICANotificationTypeScannerButtonPressed returns the value of the constant kICANotificationTypeScannerButtonPressed.
+func KICANotificationTypeScannerButtonPressed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeScannerButtonPressed")))
 }
 
-// KICANotificationTypeScannerOverviewOverlayAvailable returns the value of the CoreFoundation reference constant kICANotificationTypeScannerOverviewOverlayAvailable as an objc.ID.
-func KICANotificationTypeScannerOverviewOverlayAvailable() objc.ID {
-	return purego.CFConstant(raw.KICANotificationTypeScannerOverviewOverlayAvailable())
+// KICANotificationTypeScannerOverviewOverlayAvailable returns the value of the constant kICANotificationTypeScannerOverviewOverlayAvailable.
+func KICANotificationTypeScannerOverviewOverlayAvailable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeScannerOverviewOverlayAvailable")))
 }
 
-// KICAErrorKey returns the value of the CoreFoundation reference constant kICAErrorKey as an objc.ID.
-func KICAErrorKey() objc.ID { return purego.CFConstant(raw.KICAErrorKey()) }
+// KICAErrorKey returns the value of the constant kICAErrorKey.
+func KICAErrorKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kICAErrorKey"))) }
 
-// KICARefconKey returns the value of the CoreFoundation reference constant kICARefconKey as an objc.ID.
-func KICARefconKey() objc.ID { return purego.CFConstant(raw.KICARefconKey()) }
+// KICARefconKey returns the value of the constant kICARefconKey.
+func KICARefconKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kICARefconKey"))) }
 
-// KICANotificationICAObjectKey returns the value of the CoreFoundation reference constant kICANotificationICAObjectKey as an objc.ID.
-func KICANotificationICAObjectKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationICAObjectKey())
+// KICANotificationICAObjectKey returns the value of the constant kICANotificationICAObjectKey.
+func KICANotificationICAObjectKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationICAObjectKey")))
 }
 
-// KICANotificationDeviceICAObjectKey returns the value of the CoreFoundation reference constant kICANotificationDeviceICAObjectKey as an objc.ID.
-func KICANotificationDeviceICAObjectKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationDeviceICAObjectKey())
+// KICANotificationDeviceICAObjectKey returns the value of the constant kICANotificationDeviceICAObjectKey.
+func KICANotificationDeviceICAObjectKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationDeviceICAObjectKey")))
 }
 
-// KICANotificationDeviceListICAObjectKey returns the value of the CoreFoundation reference constant kICANotificationDeviceListICAObjectKey as an objc.ID.
-func KICANotificationDeviceListICAObjectKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationDeviceListICAObjectKey())
+// KICANotificationDeviceListICAObjectKey returns the value of the constant kICANotificationDeviceListICAObjectKey.
+func KICANotificationDeviceListICAObjectKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationDeviceListICAObjectKey")))
 }
 
-// KICANotificationClassKey returns the value of the CoreFoundation reference constant kICANotificationClassKey as an objc.ID.
-func KICANotificationClassKey() objc.ID { return purego.CFConstant(raw.KICANotificationClassKey()) }
+// KICANotificationClassKey returns the value of the constant kICANotificationClassKey.
+func KICANotificationClassKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationClassKey")))
+}
 
-// KICANotificationTypeKey returns the value of the CoreFoundation reference constant kICANotificationTypeKey as an objc.ID.
-func KICANotificationTypeKey() objc.ID { return purego.CFConstant(raw.KICANotificationTypeKey()) }
+// KICANotificationTypeKey returns the value of the constant kICANotificationTypeKey.
+func KICANotificationTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationTypeKey")))
+}
 
-// KICANotificationRawEventKey returns the value of the CoreFoundation reference constant kICANotificationRawEventKey as an objc.ID.
-func KICANotificationRawEventKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationRawEventKey())
+// KICANotificationRawEventKey returns the value of the constant kICANotificationRawEventKey.
+func KICANotificationRawEventKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationRawEventKey")))
 }
 
-// KICANotificationDataKey returns the value of the CoreFoundation reference constant kICANotificationDataKey as an objc.ID.
-func KICANotificationDataKey() objc.ID { return purego.CFConstant(raw.KICANotificationDataKey()) }
+// KICANotificationDataKey returns the value of the constant kICANotificationDataKey.
+func KICANotificationDataKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationDataKey")))
+}
 
-// KICANotificationDataSizeKey returns the value of the CoreFoundation reference constant kICANotificationDataSizeKey as an objc.ID.
-func KICANotificationDataSizeKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationDataSizeKey())
+// KICANotificationDataSizeKey returns the value of the constant kICANotificationDataSizeKey.
+func KICANotificationDataSizeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationDataSizeKey")))
 }
 
-// KICANotificationDataCookieKey returns the value of the CoreFoundation reference constant kICANotificationDataCookieKey as an objc.ID.
-func KICANotificationDataCookieKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationDataCookieKey())
+// KICANotificationDataCookieKey returns the value of the constant kICANotificationDataCookieKey.
+func KICANotificationDataCookieKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationDataCookieKey")))
 }
 
-// KICANotificationImageKey returns the value of the CoreFoundation reference constant kICANotificationImageKey as an objc.ID.
-func KICANotificationImageKey() objc.ID { return purego.CFConstant(raw.KICANotificationImageKey()) }
+// KICANotificationImageKey returns the value of the constant kICANotificationImageKey.
+func KICANotificationImageKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationImageKey")))
+}
 
-// KICANotificationImageWidthKey returns the value of the CoreFoundation reference constant kICANotificationImageWidthKey as an objc.ID.
-func KICANotificationImageWidthKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationImageWidthKey())
+// KICANotificationImageWidthKey returns the value of the constant kICANotificationImageWidthKey.
+func KICANotificationImageWidthKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationImageWidthKey")))
 }
 
-// KICANotificationImageHeightKey returns the value of the CoreFoundation reference constant kICANotificationImageHeightKey as an objc.ID.
-func KICANotificationImageHeightKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationImageHeightKey())
+// KICANotificationImageHeightKey returns the value of the constant kICANotificationImageHeightKey.
+func KICANotificationImageHeightKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationImageHeightKey")))
 }
 
-// KICANotificationImageBytesPerRowKey returns the value of the CoreFoundation reference constant kICANotificationImageBytesPerRowKey as an objc.ID.
-func KICANotificationImageBytesPerRowKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationImageBytesPerRowKey())
+// KICANotificationImageBytesPerRowKey returns the value of the constant kICANotificationImageBytesPerRowKey.
+func KICANotificationImageBytesPerRowKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationImageBytesPerRowKey")))
 }
 
-// KICANotificationImageStartRowKey returns the value of the CoreFoundation reference constant kICANotificationImageStartRowKey as an objc.ID.
-func KICANotificationImageStartRowKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationImageStartRowKey())
+// KICANotificationImageStartRowKey returns the value of the constant kICANotificationImageStartRowKey.
+func KICANotificationImageStartRowKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationImageStartRowKey")))
 }
 
-// KICANotificationImageNumberOfRowsKey returns the value of the CoreFoundation reference constant kICANotificationImageNumberOfRowsKey as an objc.ID.
-func KICANotificationImageNumberOfRowsKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationImageNumberOfRowsKey())
+// KICANotificationImageNumberOfRowsKey returns the value of the constant kICANotificationImageNumberOfRowsKey.
+func KICANotificationImageNumberOfRowsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationImageNumberOfRowsKey")))
 }
 
-// KICANotificationImageDataKey returns the value of the CoreFoundation reference constant kICANotificationImageDataKey as an objc.ID.
-func KICANotificationImageDataKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationImageDataKey())
+// KICANotificationImageDataKey returns the value of the constant kICANotificationImageDataKey.
+func KICANotificationImageDataKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationImageDataKey")))
 }
 
-// KICANotificationImageDataSizeKey returns the value of the CoreFoundation reference constant kICANotificationImageDataSizeKey as an objc.ID.
-func KICANotificationImageDataSizeKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationImageDataSizeKey())
+// KICANotificationImageDataSizeKey returns the value of the constant kICANotificationImageDataSizeKey.
+func KICANotificationImageDataSizeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationImageDataSizeKey")))
 }
 
-// KICANotificationDataIsBigEndianKey returns the value of the CoreFoundation reference constant kICANotificationDataIsBigEndianKey as an objc.ID.
-func KICANotificationDataIsBigEndianKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationDataIsBigEndianKey())
+// KICANotificationDataIsBigEndianKey returns the value of the constant kICANotificationDataIsBigEndianKey.
+func KICANotificationDataIsBigEndianKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationDataIsBigEndianKey")))
 }
 
-// KICANotificationScannerDocumentNameKey returns the value of the CoreFoundation reference constant kICANotificationScannerDocumentNameKey as an objc.ID.
-func KICANotificationScannerDocumentNameKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationScannerDocumentNameKey())
+// KICANotificationScannerDocumentNameKey returns the value of the constant kICANotificationScannerDocumentNameKey.
+func KICANotificationScannerDocumentNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationScannerDocumentNameKey")))
 }
 
-// KICANotificationScannerButtonTypeKey returns the value of the CoreFoundation reference constant kICANotificationScannerButtonTypeKey as an objc.ID.
-func KICANotificationScannerButtonTypeKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationScannerButtonTypeKey())
+// KICANotificationScannerButtonTypeKey returns the value of the constant kICANotificationScannerButtonTypeKey.
+func KICANotificationScannerButtonTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationScannerButtonTypeKey")))
 }
 
-// KICANotificationNumerOfImagesRemainingKey returns the value of the CoreFoundation reference constant kICANotificationNumerOfImagesRemainingKey as an objc.ID.
-func KICANotificationNumerOfImagesRemainingKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationNumerOfImagesRemainingKey())
+// KICANotificationNumerOfImagesRemainingKey returns the value of the constant kICANotificationNumerOfImagesRemainingKey.
+func KICANotificationNumerOfImagesRemainingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationNumerOfImagesRemainingKey")))
 }
 
-// KICANotificationPercentDownloadedKey returns the value of the CoreFoundation reference constant kICANotificationPercentDownloadedKey as an objc.ID.
-func KICANotificationPercentDownloadedKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationPercentDownloadedKey())
+// KICANotificationPercentDownloadedKey returns the value of the constant kICANotificationPercentDownloadedKey.
+func KICANotificationPercentDownloadedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationPercentDownloadedKey")))
 }
 
-// KICANotificationSubTypeKey returns the value of the CoreFoundation reference constant kICANotificationSubTypeKey as an objc.ID.
-func KICANotificationSubTypeKey() objc.ID { return purego.CFConstant(raw.KICANotificationSubTypeKey()) }
+// KICANotificationSubTypeKey returns the value of the constant kICANotificationSubTypeKey.
+func KICANotificationSubTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationSubTypeKey")))
+}
 
-// KICANotificationSubTypeWarmUpStarted returns the value of the CoreFoundation reference constant kICANotificationSubTypeWarmUpStarted as an objc.ID.
-func KICANotificationSubTypeWarmUpStarted() objc.ID {
-	return purego.CFConstant(raw.KICANotificationSubTypeWarmUpStarted())
+// KICANotificationSubTypeWarmUpStarted returns the value of the constant kICANotificationSubTypeWarmUpStarted.
+func KICANotificationSubTypeWarmUpStarted() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationSubTypeWarmUpStarted")))
 }
 
-// KICANotificationSubTypeWarmUpDone returns the value of the CoreFoundation reference constant kICANotificationSubTypeWarmUpDone as an objc.ID.
-func KICANotificationSubTypeWarmUpDone() objc.ID {
-	return purego.CFConstant(raw.KICANotificationSubTypeWarmUpDone())
+// KICANotificationSubTypeWarmUpDone returns the value of the constant kICANotificationSubTypeWarmUpDone.
+func KICANotificationSubTypeWarmUpDone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationSubTypeWarmUpDone")))
 }
 
-// KICANotificationVendorErrorCodeKey returns the value of the CoreFoundation reference constant kICANotificationVendorErrorCodeKey as an objc.ID.
-func KICANotificationVendorErrorCodeKey() objc.ID {
-	return purego.CFConstant(raw.KICANotificationVendorErrorCodeKey())
+// KICANotificationVendorErrorCodeKey returns the value of the constant kICANotificationVendorErrorCodeKey.
+func KICANotificationVendorErrorCodeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationVendorErrorCodeKey")))
 }
 
-// KICANotificationSubTypePerformOverviewScan returns the value of the CoreFoundation reference constant kICANotificationSubTypePerformOverviewScan as an objc.ID.
-func KICANotificationSubTypePerformOverviewScan() objc.ID {
-	return purego.CFConstant(raw.KICANotificationSubTypePerformOverviewScan())
+// KICANotificationSubTypePerformOverviewScan returns the value of the constant kICANotificationSubTypePerformOverviewScan.
+func KICANotificationSubTypePerformOverviewScan() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationSubTypePerformOverviewScan")))
 }
 
-// KICANotificationSubTypeDocumentLoaded returns the value of the CoreFoundation reference constant kICANotificationSubTypeDocumentLoaded as an objc.ID.
-func KICANotificationSubTypeDocumentLoaded() objc.ID {
-	return purego.CFConstant(raw.KICANotificationSubTypeDocumentLoaded())
+// KICANotificationSubTypeDocumentLoaded returns the value of the constant kICANotificationSubTypeDocumentLoaded.
+func KICANotificationSubTypeDocumentLoaded() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationSubTypeDocumentLoaded")))
 }
 
-// KICANotificationSubTypeDocumentNotLoaded returns the value of the CoreFoundation reference constant kICANotificationSubTypeDocumentNotLoaded as an objc.ID.
-func KICANotificationSubTypeDocumentNotLoaded() objc.ID {
-	return purego.CFConstant(raw.KICANotificationSubTypeDocumentNotLoaded())
+// KICANotificationSubTypeDocumentNotLoaded returns the value of the constant kICANotificationSubTypeDocumentNotLoaded.
+func KICANotificationSubTypeDocumentNotLoaded() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationSubTypeDocumentNotLoaded")))
 }
 
-// KICANotificationClassPTPStandard returns the value of the CoreFoundation reference constant kICANotificationClassPTPStandard as an objc.ID.
-func KICANotificationClassPTPStandard() objc.ID {
-	return purego.CFConstant(raw.KICANotificationClassPTPStandard())
+// KICANotificationClassPTPStandard returns the value of the constant kICANotificationClassPTPStandard.
+func KICANotificationClassPTPStandard() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationClassPTPStandard")))
 }
 
-// KICANotificationClassPTPVendor returns the value of the CoreFoundation reference constant kICANotificationClassPTPVendor as an objc.ID.
-func KICANotificationClassPTPVendor() objc.ID {
-	return purego.CFConstant(raw.KICANotificationClassPTPVendor())
+// KICANotificationClassPTPVendor returns the value of the constant kICANotificationClassPTPVendor.
+func KICANotificationClassPTPVendor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationClassPTPVendor")))
 }
 
-// KICANotificationClassProprietary returns the value of the CoreFoundation reference constant kICANotificationClassProprietary as an objc.ID.
-func KICANotificationClassProprietary() objc.ID {
-	return purego.CFConstant(raw.KICANotificationClassProprietary())
+// KICANotificationClassProprietary returns the value of the constant kICANotificationClassProprietary.
+func KICANotificationClassProprietary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICANotificationClassProprietary")))
 }
 
-// KICADevicePropUndefined returns the value of the CoreFoundation reference constant kICADevicePropUndefined as an objc.ID.
-func KICADevicePropUndefined() objc.ID { return purego.CFConstant(raw.KICADevicePropUndefined()) }
+// KICADevicePropUndefined returns the value of the constant kICADevicePropUndefined.
+func KICADevicePropUndefined() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropUndefined")))
+}
 
-// KICADevicePropBatteryLevel returns the value of the CoreFoundation reference constant kICADevicePropBatteryLevel as an objc.ID.
-func KICADevicePropBatteryLevel() objc.ID { return purego.CFConstant(raw.KICADevicePropBatteryLevel()) }
+// KICADevicePropBatteryLevel returns the value of the constant kICADevicePropBatteryLevel.
+func KICADevicePropBatteryLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropBatteryLevel")))
+}
 
-// KICADevicePropFunctionalMode returns the value of the CoreFoundation reference constant kICADevicePropFunctionalMode as an objc.ID.
-func KICADevicePropFunctionalMode() objc.ID {
-	return purego.CFConstant(raw.KICADevicePropFunctionalMode())
+// KICADevicePropFunctionalMode returns the value of the constant kICADevicePropFunctionalMode.
+func KICADevicePropFunctionalMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropFunctionalMode")))
 }
 
-// KICADevicePropImageSize returns the value of the CoreFoundation reference constant kICADevicePropImageSize as an objc.ID.
-func KICADevicePropImageSize() objc.ID { return purego.CFConstant(raw.KICADevicePropImageSize()) }
+// KICADevicePropImageSize returns the value of the constant kICADevicePropImageSize.
+func KICADevicePropImageSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropImageSize")))
+}
 
-// KICADevicePropCompressionSetting returns the value of the CoreFoundation reference constant kICADevicePropCompressionSetting as an objc.ID.
-func KICADevicePropCompressionSetting() objc.ID {
-	return purego.CFConstant(raw.KICADevicePropCompressionSetting())
+// KICADevicePropCompressionSetting returns the value of the constant kICADevicePropCompressionSetting.
+func KICADevicePropCompressionSetting() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropCompressionSetting")))
 }
 
-// KICADevicePropWhiteBalance returns the value of the CoreFoundation reference constant kICADevicePropWhiteBalance as an objc.ID.
-func KICADevicePropWhiteBalance() objc.ID { return purego.CFConstant(raw.KICADevicePropWhiteBalance()) }
+// KICADevicePropWhiteBalance returns the value of the constant kICADevicePropWhiteBalance.
+func KICADevicePropWhiteBalance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropWhiteBalance")))
+}
 
-// KICADevicePropRGBGain returns the value of the CoreFoundation reference constant kICADevicePropRGBGain as an objc.ID.
-func KICADevicePropRGBGain() objc.ID { return purego.CFConstant(raw.KICADevicePropRGBGain()) }
+// KICADevicePropRGBGain returns the value of the constant kICADevicePropRGBGain.
+func KICADevicePropRGBGain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropRGBGain")))
+}
 
-// KICADevicePropFNumber returns the value of the CoreFoundation reference constant kICADevicePropFNumber as an objc.ID.
-func KICADevicePropFNumber() objc.ID { return purego.CFConstant(raw.KICADevicePropFNumber()) }
+// KICADevicePropFNumber returns the value of the constant kICADevicePropFNumber.
+func KICADevicePropFNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropFNumber")))
+}
 
-// KICADevicePropFocalLength returns the value of the CoreFoundation reference constant kICADevicePropFocalLength as an objc.ID.
-func KICADevicePropFocalLength() objc.ID { return purego.CFConstant(raw.KICADevicePropFocalLength()) }
+// KICADevicePropFocalLength returns the value of the constant kICADevicePropFocalLength.
+func KICADevicePropFocalLength() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropFocalLength")))
+}
 
-// KICADevicePropFocusDistance returns the value of the CoreFoundation reference constant kICADevicePropFocusDistance as an objc.ID.
-func KICADevicePropFocusDistance() objc.ID {
-	return purego.CFConstant(raw.KICADevicePropFocusDistance())
+// KICADevicePropFocusDistance returns the value of the constant kICADevicePropFocusDistance.
+func KICADevicePropFocusDistance() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropFocusDistance")))
 }
 
-// KICADevicePropFocusMode returns the value of the CoreFoundation reference constant kICADevicePropFocusMode as an objc.ID.
-func KICADevicePropFocusMode() objc.ID { return purego.CFConstant(raw.KICADevicePropFocusMode()) }
+// KICADevicePropFocusMode returns the value of the constant kICADevicePropFocusMode.
+func KICADevicePropFocusMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropFocusMode")))
+}
 
-// KICADevicePropExposureMeteringMode returns the value of the CoreFoundation reference constant kICADevicePropExposureMeteringMode as an objc.ID.
-func KICADevicePropExposureMeteringMode() objc.ID {
-	return purego.CFConstant(raw.KICADevicePropExposureMeteringMode())
+// KICADevicePropExposureMeteringMode returns the value of the constant kICADevicePropExposureMeteringMode.
+func KICADevicePropExposureMeteringMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropExposureMeteringMode")))
 }
 
-// KICADevicePropFlashMode returns the value of the CoreFoundation reference constant kICADevicePropFlashMode as an objc.ID.
-func KICADevicePropFlashMode() objc.ID { return purego.CFConstant(raw.KICADevicePropFlashMode()) }
+// KICADevicePropFlashMode returns the value of the constant kICADevicePropFlashMode.
+func KICADevicePropFlashMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropFlashMode")))
+}
 
-// KICADevicePropExposureTime returns the value of the CoreFoundation reference constant kICADevicePropExposureTime as an objc.ID.
-func KICADevicePropExposureTime() objc.ID { return purego.CFConstant(raw.KICADevicePropExposureTime()) }
+// KICADevicePropExposureTime returns the value of the constant kICADevicePropExposureTime.
+func KICADevicePropExposureTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropExposureTime")))
+}
 
-// KICADevicePropExposureProgramMode returns the value of the CoreFoundation reference constant kICADevicePropExposureProgramMode as an objc.ID.
-func KICADevicePropExposureProgramMode() objc.ID {
-	return purego.CFConstant(raw.KICADevicePropExposureProgramMode())
+// KICADevicePropExposureProgramMode returns the value of the constant kICADevicePropExposureProgramMode.
+func KICADevicePropExposureProgramMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropExposureProgramMode")))
 }
 
-// KICADevicePropExposureIndex returns the value of the CoreFoundation reference constant kICADevicePropExposureIndex as an objc.ID.
-func KICADevicePropExposureIndex() objc.ID {
-	return purego.CFConstant(raw.KICADevicePropExposureIndex())
+// KICADevicePropExposureIndex returns the value of the constant kICADevicePropExposureIndex.
+func KICADevicePropExposureIndex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropExposureIndex")))
 }
 
-// KICADevicePropExposureBiasCompensation returns the value of the CoreFoundation reference constant kICADevicePropExposureBiasCompensation as an objc.ID.
-func KICADevicePropExposureBiasCompensation() objc.ID {
-	return purego.CFConstant(raw.KICADevicePropExposureBiasCompensation())
+// KICADevicePropExposureBiasCompensation returns the value of the constant kICADevicePropExposureBiasCompensation.
+func KICADevicePropExposureBiasCompensation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropExposureBiasCompensation")))
 }
 
-// KICADevicePropDateTime returns the value of the CoreFoundation reference constant kICADevicePropDateTime as an objc.ID.
-func KICADevicePropDateTime() objc.ID { return purego.CFConstant(raw.KICADevicePropDateTime()) }
+// KICADevicePropDateTime returns the value of the constant kICADevicePropDateTime.
+func KICADevicePropDateTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropDateTime")))
+}
 
-// KICADevicePropCaptureDelay returns the value of the CoreFoundation reference constant kICADevicePropCaptureDelay as an objc.ID.
-func KICADevicePropCaptureDelay() objc.ID { return purego.CFConstant(raw.KICADevicePropCaptureDelay()) }
+// KICADevicePropCaptureDelay returns the value of the constant kICADevicePropCaptureDelay.
+func KICADevicePropCaptureDelay() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropCaptureDelay")))
+}
 
-// KICADevicePropStillCaptureMode returns the value of the CoreFoundation reference constant kICADevicePropStillCaptureMode as an objc.ID.
-func KICADevicePropStillCaptureMode() objc.ID {
-	return purego.CFConstant(raw.KICADevicePropStillCaptureMode())
+// KICADevicePropStillCaptureMode returns the value of the constant kICADevicePropStillCaptureMode.
+func KICADevicePropStillCaptureMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropStillCaptureMode")))
 }
 
-// KICADevicePropContrast returns the value of the CoreFoundation reference constant kICADevicePropContrast as an objc.ID.
-func KICADevicePropContrast() objc.ID { return purego.CFConstant(raw.KICADevicePropContrast()) }
+// KICADevicePropContrast returns the value of the constant kICADevicePropContrast.
+func KICADevicePropContrast() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropContrast")))
+}
 
-// KICADevicePropSharpness returns the value of the CoreFoundation reference constant kICADevicePropSharpness as an objc.ID.
-func KICADevicePropSharpness() objc.ID { return purego.CFConstant(raw.KICADevicePropSharpness()) }
+// KICADevicePropSharpness returns the value of the constant kICADevicePropSharpness.
+func KICADevicePropSharpness() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropSharpness")))
+}
 
-// KICADevicePropDigitalZoom returns the value of the CoreFoundation reference constant kICADevicePropDigitalZoom as an objc.ID.
-func KICADevicePropDigitalZoom() objc.ID { return purego.CFConstant(raw.KICADevicePropDigitalZoom()) }
+// KICADevicePropDigitalZoom returns the value of the constant kICADevicePropDigitalZoom.
+func KICADevicePropDigitalZoom() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropDigitalZoom")))
+}
 
-// KICADevicePropEffectMode returns the value of the CoreFoundation reference constant kICADevicePropEffectMode as an objc.ID.
-func KICADevicePropEffectMode() objc.ID { return purego.CFConstant(raw.KICADevicePropEffectMode()) }
+// KICADevicePropEffectMode returns the value of the constant kICADevicePropEffectMode.
+func KICADevicePropEffectMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropEffectMode")))
+}
 
-// KICADevicePropBurstNumber returns the value of the CoreFoundation reference constant kICADevicePropBurstNumber as an objc.ID.
-func KICADevicePropBurstNumber() objc.ID { return purego.CFConstant(raw.KICADevicePropBurstNumber()) }
+// KICADevicePropBurstNumber returns the value of the constant kICADevicePropBurstNumber.
+func KICADevicePropBurstNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropBurstNumber")))
+}
 
-// KICADevicePropBurstInterval returns the value of the CoreFoundation reference constant kICADevicePropBurstInterval as an objc.ID.
-func KICADevicePropBurstInterval() objc.ID {
-	return purego.CFConstant(raw.KICADevicePropBurstInterval())
+// KICADevicePropBurstInterval returns the value of the constant kICADevicePropBurstInterval.
+func KICADevicePropBurstInterval() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropBurstInterval")))
 }
 
-// KICADevicePropTimelapseNumber returns the value of the CoreFoundation reference constant kICADevicePropTimelapseNumber as an objc.ID.
-func KICADevicePropTimelapseNumber() objc.ID {
-	return purego.CFConstant(raw.KICADevicePropTimelapseNumber())
+// KICADevicePropTimelapseNumber returns the value of the constant kICADevicePropTimelapseNumber.
+func KICADevicePropTimelapseNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropTimelapseNumber")))
 }
 
-// KICADevicePropTimelapseInterval returns the value of the CoreFoundation reference constant kICADevicePropTimelapseInterval as an objc.ID.
-func KICADevicePropTimelapseInterval() objc.ID {
-	return purego.CFConstant(raw.KICADevicePropTimelapseInterval())
+// KICADevicePropTimelapseInterval returns the value of the constant kICADevicePropTimelapseInterval.
+func KICADevicePropTimelapseInterval() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropTimelapseInterval")))
 }
 
-// KICADevicePropFocusMeteringMode returns the value of the CoreFoundation reference constant kICADevicePropFocusMeteringMode as an objc.ID.
-func KICADevicePropFocusMeteringMode() objc.ID {
-	return purego.CFConstant(raw.KICADevicePropFocusMeteringMode())
+// KICADevicePropFocusMeteringMode returns the value of the constant kICADevicePropFocusMeteringMode.
+func KICADevicePropFocusMeteringMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropFocusMeteringMode")))
 }
 
-// KICADevicePropUploadURL returns the value of the CoreFoundation reference constant kICADevicePropUploadURL as an objc.ID.
-func KICADevicePropUploadURL() objc.ID { return purego.CFConstant(raw.KICADevicePropUploadURL()) }
+// KICADevicePropUploadURL returns the value of the constant kICADevicePropUploadURL.
+func KICADevicePropUploadURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropUploadURL")))
+}
 
-// KICADevicePropArtist returns the value of the CoreFoundation reference constant kICADevicePropArtist as an objc.ID.
-func KICADevicePropArtist() objc.ID { return purego.CFConstant(raw.KICADevicePropArtist()) }
+// KICADevicePropArtist returns the value of the constant kICADevicePropArtist.
+func KICADevicePropArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropArtist")))
+}
 
-// KICADevicePropCopyrightInfo returns the value of the CoreFoundation reference constant kICADevicePropCopyrightInfo as an objc.ID.
-func KICADevicePropCopyrightInfo() objc.ID {
-	return purego.CFConstant(raw.KICADevicePropCopyrightInfo())
+// KICADevicePropCopyrightInfo returns the value of the constant kICADevicePropCopyrightInfo.
+func KICADevicePropCopyrightInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kICADevicePropCopyrightInfo")))
 }
 
-// KICUTTypeRaw returns the value of the CoreFoundation reference constant kICUTTypeRaw as an objc.ID.
-func KICUTTypeRaw() objc.ID { return purego.CFConstant(raw.KICUTTypeRaw()) }
+// KICUTTypeRaw returns the value of the constant kICUTTypeRaw.
+func KICUTTypeRaw() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kICUTTypeRaw"))) }

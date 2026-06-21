@@ -5,510 +5,509 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The user interface of a browser.
 //
-// BrowserCell wraps [raw.NSBrowserCell] with a fluent Go API.
+// BrowserCell is an idiomatic wrapper over the Objective-C class NSBrowserCell.
 type BrowserCell struct {
-	inner *raw.NSBrowserCell
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSBrowserCell].
-func (x *BrowserCell) Unwrap() *raw.NSBrowserCell { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BrowserCell) ID() objc.ID { return x.inner.Ptr() }
-
-// BrowserCellFromID adopts an existing object pointer as a BrowserCell (nil for 0).
+// BrowserCellFromID adopts an existing Objective-C object as a BrowserCell
+// (nil for 0), retaining it and registering a release finalizer.
 func BrowserCellFromID(id objc.ID) *BrowserCell {
 	if id == 0 {
 		return nil
 	}
-	return &BrowserCell{inner: raw.NSBrowserCellFromID(id)}
+	x := &BrowserCell{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBrowserCellTextCell creates a new [BrowserCell].
+// browserCellAdopt wraps an Objective-C object that this code just created as a
+// BrowserCell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func browserCellAdopt(id objc.ID) *BrowserCell {
+	if id == 0 {
+		return nil
+	}
+	x := &BrowserCell{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BrowserCell) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BrowserCell) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BrowserCell) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBrowserCellTextCell creates a new BrowserCell.
 func NewBrowserCellTextCell(string_ string) *BrowserCell {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBrowserCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
-	return &BrowserCell{inner: raw.NSBrowserCellFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBrowserCell")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
+	return browserCellAdopt(_id)
 }
 
-// NewBrowserCellImageCell creates a new [BrowserCell].
-func NewBrowserCellImageCell(image *raw.NSImage) *BrowserCell {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBrowserCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initImageCell:"), image.Ptr())
-	return &BrowserCell{inner: raw.NSBrowserCellFromID(_id)}
+// NewBrowserCellImageCell creates a new BrowserCell.
+func NewBrowserCellImageCell(image *Image) *BrowserCell {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBrowserCell")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initImageCell:"), objref.IDOf(image))
+	return browserCellAdopt(_id)
 }
 
-// NewBrowserCellWithCoder creates a new [BrowserCell].
-func NewBrowserCellWithCoder(coder *foundation.NSCoder) *BrowserCell {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBrowserCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &BrowserCell{inner: raw.NSBrowserCellFromID(_id)}
+// NewBrowserCellWithCoder creates a new BrowserCell.
+func NewBrowserCellWithCoder(coder obj.Object) *BrowserCell {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSBrowserCell")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return browserCellAdopt(_id)
 }
 
 // A Boolean that indicates whether the browser cell is a leaf or a branch cell.
 //
-// WithLeaf sets the leaf property and returns the receiver for chaining.
+// WithLeaf sets leaf and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithLeaf(leaf bool) *BrowserCell {
-	x.inner.SetLeaf(leaf)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaf:"), leaf)
 	return x
 }
 
 // A Boolean that indicates whether the cell is ready to display.
 //
-// WithLoaded sets the loaded property and returns the receiver for chaining.
+// WithLoaded sets loaded and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithLoaded(loaded bool) *BrowserCell {
-	x.inner.SetLoaded(loaded)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoaded:"), loaded)
 	return x
 }
 
 // The browser cell’s image for the highlighted state.
 //
-// WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
+// WithAlternateImage sets alternateImage and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithAlternateImage(alternateImage *Image) *BrowserCell {
-	x.inner.SetAlternateImage(alternateImage.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
 	return x
 }
 
 // The view associated with the cell.
 //
-// WithControlView sets the controlView property and returns the receiver for chaining.
+// WithControlView sets controlView and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithControlView(controlView ViewProvider) *BrowserCell {
-	x.inner.NSCell.SetControlView(controlView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	return x
 }
 
 // The type of the cell.
 //
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *BrowserCell) WithType(type_ NSCellType) *BrowserCell {
-	x.inner.NSCell.SetType(raw.NSCellType(type_))
+// WithType sets type_ and returns the receiver so calls can be chained.
+func (x *BrowserCell) WithType(type_ CellType) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
 // The cell’s current state.
 //
-// WithState sets the state property and returns the receiver for chaining.
+// WithState sets state and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithState(state int) *BrowserCell {
-	x.inner.NSCell.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
 // The object that receives the cell’s action messages.
 //
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *BrowserCell) WithTarget(target objc.ID) *BrowserCell {
-	x.inner.NSCell.SetTarget(target)
-	return x
-}
-
-// The action performed by the cell.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *BrowserCell) WithAction(action objc.SEL) *BrowserCell {
-	x.inner.NSCell.SetAction(action)
+// WithTarget sets target and returns the receiver so calls can be chained.
+func (x *BrowserCell) WithTarget(target obj.Object) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
 // A tag for identifying the cell.
 //
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag sets tag and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithTag(tag int) *BrowserCell {
-	x.inner.NSCell.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
 // The cell’s title text.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithTitle(title string) *BrowserCell {
-	x.inner.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // A Boolean value indicating whether the cell is currently enabled.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithEnabled(enabled bool) *BrowserCell {
-	x.inner.NSCell.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 //
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous sets continuous and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithContinuous(continuous bool) *BrowserCell {
-	x.inner.NSCell.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
 // A Boolean value indicating whether the cell is editable.
 //
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable sets editable and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithEditable(editable bool) *BrowserCell {
-	x.inner.NSCell.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
 // A Boolean value indicating whether the cell’s text can be selected.
 //
-// WithSelectable sets the selectable property and returns the receiver for chaining.
+// WithSelectable sets selectable and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithSelectable(selectable bool) *BrowserCell {
-	x.inner.NSCell.SetSelectable(selectable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
 // A Boolean value indicating whether the cell draws itself outlined with a plain border.
 //
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered sets bordered and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithBordered(bordered bool) *BrowserCell {
-	x.inner.NSCell.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
 // A Boolean value indicating whether the cell has a bezeled border.
 //
-// WithBezeled sets the bezeled property and returns the receiver for chaining.
+// WithBezeled sets bezeled and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithBezeled(bezeled bool) *BrowserCell {
-	x.inner.NSCell.SetBezeled(bezeled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
 // A Boolean value indicating whether excess text scrolls past the cell’s bounds.
 //
-// WithScrollable sets the scrollable property and returns the receiver for chaining.
+// WithScrollable sets scrollable and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithScrollable(scrollable bool) *BrowserCell {
-	x.inner.NSCell.SetScrollable(scrollable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
 	return x
 }
 
 // A Boolean value indicating whether the cell has a highlighted appearance.
 //
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithHighlighted(highlighted bool) *BrowserCell {
-	x.inner.NSCell.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
 // The alignment of the cell’s text.
 //
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *BrowserCell) WithAlignment(alignment NSTextAlignment) *BrowserCell {
-	x.inner.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment sets alignment and returns the receiver so calls can be chained.
+func (x *BrowserCell) WithAlignment(alignment TextAlignment) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
 // A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 //
-// WithWraps sets the wraps property and returns the receiver for chaining.
+// WithWraps sets wraps and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithWraps(wraps bool) *BrowserCell {
-	x.inner.NSCell.SetWraps(wraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
 // The font that the cell uses to display text.
 //
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont sets font and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithFont(font *Font) *BrowserCell {
-	x.inner.NSCell.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
 // The cell’s formatter object.
 //
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *BrowserCell) WithFormatter(formatter *foundation.NSFormatter) *BrowserCell {
-	x.inner.NSCell.SetFormatter(formatter)
+// WithFormatter sets formatter and returns the receiver so calls can be chained.
+func (x *BrowserCell) WithFormatter(formatter obj.Object) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
 // The cell’s value as an Objective-C object.
 //
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *BrowserCell) WithObjectValue(objectValue objc.ID) *BrowserCell {
-	x.inner.NSCell.SetObjectValue(objectValue)
+// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+func (x *BrowserCell) WithObjectValue(objectValue obj.Object) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
 // The cell’s value as a string.
 //
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue sets stringValue and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithStringValue(stringValue string) *BrowserCell {
-	x.inner.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
 // The cell’s value as an integer.
 //
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue sets intValue and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithIntValue(intValue int) *BrowserCell {
-	x.inner.NSCell.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
 // The cell’s value as a single-precision floating-point number.
 //
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithFloatValue(floatValue float32) *BrowserCell {
-	x.inner.NSCell.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
 // The cell’s value as a double-precision floating-point number.
 //
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithDoubleValue(doubleValue float64) *BrowserCell {
-	x.inner.NSCell.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
 // The cell’s value as an integer value.
 //
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithIntegerValue(integerValue int) *BrowserCell {
-	x.inner.NSCell.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
 // The image displayed by the cell, if any.
 //
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage sets image and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithImage(image *Image) *BrowserCell {
-	x.inner.NSCell.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
 // The size of the cell.
 //
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *BrowserCell) WithControlSize(controlSize NSControlSize) *BrowserCell {
-	x.inner.NSCell.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+func (x *BrowserCell) WithControlSize(controlSize ControlSize) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
 // The object represented by the cell.
 //
-// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
-func (x *BrowserCell) WithRepresentedObject(representedObject objc.ID) *BrowserCell {
-	x.inner.NSCell.SetRepresentedObject(representedObject)
+// WithRepresentedObject sets representedObject and returns the receiver so calls can be chained.
+func (x *BrowserCell) WithRepresentedObject(representedObject obj.Object) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
 // The cell’s contextual menu.
 //
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu sets menu and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithMenu(menu *Menu) *BrowserCell {
-	x.inner.NSCell.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
 // A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 //
-// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+// WithSendsActionOnEndEditing sets sendsActionOnEndEditing and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *BrowserCell {
-	x.inner.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
 	return x
 }
 
 // The initial writing direction used to determine the actual writing direction for text.
 //
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *BrowserCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *BrowserCell {
-	x.inner.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+func (x *BrowserCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
 // The line break mode to use when drawing text in the cell.
 //
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *BrowserCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *BrowserCell {
-	x.inner.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+func (x *BrowserCell) WithLineBreakMode(lineBreakMode LineBreakMode) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
 // A Boolean value indicating whether the cell assumes responsibility for undo operations.
 //
-// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+// WithAllowsUndo sets allowsUndo and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithAllowsUndo(allowsUndo bool) *BrowserCell {
-	x.inner.NSCell.SetAllowsUndo(allowsUndo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
 	return x
 }
 
 // A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 //
-// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+// WithTruncatesLastVisibleLine sets truncatesLastVisibleLine and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *BrowserCell {
-	x.inner.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
 	return x
 }
 
 // The layout direction of the user interface.
 //
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *BrowserCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *BrowserCell {
-	x.inner.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+func (x *BrowserCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
 // A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 //
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithUsesSingleLineMode(usesSingleLineMode bool) *BrowserCell {
-	x.inner.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
 // A Boolean value indicating whether the cell refuses the first responder status.
 //
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithRefusesFirstResponder(refusesFirstResponder bool) *BrowserCell {
-	x.inner.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
 // A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 //
-// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+// WithShowsFirstResponder sets showsFirstResponder and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithShowsFirstResponder(showsFirstResponder bool) *BrowserCell {
-	x.inner.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
 	return x
 }
 
 // The type of focus ring to use with the associated view.
 //
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *BrowserCell) WithFocusRingType(focusRingType NSFocusRingType) *BrowserCell {
-	x.inner.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+func (x *BrowserCell) WithFocusRingType(focusRingType FocusRingType) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
 // The cell’s value as an attributed string.
 //
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *BrowserCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *BrowserCell {
-	x.inner.NSCell.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+func (x *BrowserCell) WithAttributedStringValue(attributedStringValue obj.Object) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
 // A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 //
-// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+// WithAllowsEditingTextAttributes sets allowsEditingTextAttributes and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *BrowserCell {
-	x.inner.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
 // A Boolean value indicating whether the cell supports the importation of images into its text.
 //
-// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+// WithImportsGraphics sets importsGraphics and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithImportsGraphics(importsGraphics bool) *BrowserCell {
-	x.inner.NSCell.SetImportsGraphics(importsGraphics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
 // A Boolean value indicating whether the cell supports three states instead of two.
 //
-// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+// WithAllowsMixedState sets allowsMixedState and returns the receiver so calls can be chained.
 func (x *BrowserCell) WithAllowsMixedState(allowsMixedState bool) *BrowserCell {
-	x.inner.NSCell.SetAllowsMixedState(allowsMixedState)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
 // The cell’s background style.
 //
-// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *BrowserCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *BrowserCell {
-	x.inner.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
+// WithBackgroundStyle sets backgroundStyle and returns the receiver so calls can be chained.
+func (x *BrowserCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 	return x
 }
 
 // The cell’s control tint.
 //
-// WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *BrowserCell) WithControlTint(controlTint NSControlTint) *BrowserCell {
-	x.inner.NSCell.SetControlTint(raw.NSControlTint(controlTint))
+// WithControlTint sets controlTint and returns the receiver so calls can be chained.
+func (x *BrowserCell) WithControlTint(controlTint ControlTint) *BrowserCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
 
 // Returns the highlight color that the receiver wants to display.
-//
-// HighlightColorInView calls the underlying HighlightColorInView.
-func (x *BrowserCell) HighlightColorInView(controlView *raw.NSView) *Color {
-	_r := x.inner.HighlightColorInView(controlView)
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+func (x *BrowserCell) HighlightColorInView(controlView *View) *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("highlightColorInView:"), objref.IDOf(controlView))
+	return ColorFromID(_r)
 }
 
 // Unhighlights the receiver and unsets its state.
-//
-// Reset calls the underlying Reset.
 func (x *BrowserCell) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
 // Highlights the receiver and sets its state.
-//
-// Set calls the underlying Set.
 func (x *BrowserCell) Set() {
-	x.inner.Set()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("set"))
 }
 
-// IsLeaf calls the underlying IsLeaf.
 func (x *BrowserCell) IsLeaf() bool {
-	return x.inner.IsLeaf()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLeaf"))
+	return _r
 }
 
-// SetLeaf calls the underlying SetLeaf.
 func (x *BrowserCell) SetLeaf(leaf bool) {
-	x.inner.SetLeaf(leaf)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaf:"), leaf)
 }
 
-// IsLoaded calls the underlying IsLoaded.
 func (x *BrowserCell) IsLoaded() bool {
-	return x.inner.IsLoaded()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoaded"))
+	return _r
 }
 
-// SetLoaded calls the underlying SetLoaded.
 func (x *BrowserCell) SetLoaded(loaded bool) {
-	x.inner.SetLoaded(loaded)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoaded:"), loaded)
 }
 
-// AlternateImage calls the underlying AlternateImage.
 func (x *BrowserCell) AlternateImage() *Image {
-	_r := x.inner.AlternateImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternateImage"))
+	return ImageFromID(_r)
 }
 
-// SetAlternateImage calls the underlying SetAlternateImage.
-func (x *BrowserCell) SetAlternateImage(alternateImage *raw.NSImage) {
-	x.inner.SetAlternateImage(alternateImage)
+func (x *BrowserCell) SetAlternateImage(alternateImage *Image) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
 }
-
-func (x *BrowserCell) asCell() *raw.NSCell { return &x.inner.NSCell }
 
 // BrowserCellable is the interface implemented by [BrowserCell], for mocking and DI.
 type BrowserCellable interface {
-	Unwrap() *raw.NSBrowserCell
+	obj.Object
 	WithLeaf(leaf bool) *BrowserCell
 	WithLoaded(loaded bool) *BrowserCell
 	WithAlternateImage(alternateImage *Image) *BrowserCell
 	WithControlView(controlView ViewProvider) *BrowserCell
-	WithType(type_ NSCellType) *BrowserCell
+	WithType(type_ CellType) *BrowserCell
 	WithState(state int) *BrowserCell
-	WithTarget(target objc.ID) *BrowserCell
-	WithAction(action objc.SEL) *BrowserCell
+	WithTarget(target obj.Object) *BrowserCell
 	WithTag(tag int) *BrowserCell
 	WithTitle(title string) *BrowserCell
 	WithEnabled(enabled bool) *BrowserCell
@@ -519,37 +518,37 @@ type BrowserCellable interface {
 	WithBezeled(bezeled bool) *BrowserCell
 	WithScrollable(scrollable bool) *BrowserCell
 	WithHighlighted(highlighted bool) *BrowserCell
-	WithAlignment(alignment NSTextAlignment) *BrowserCell
+	WithAlignment(alignment TextAlignment) *BrowserCell
 	WithWraps(wraps bool) *BrowserCell
 	WithFont(font *Font) *BrowserCell
-	WithFormatter(formatter *foundation.NSFormatter) *BrowserCell
-	WithObjectValue(objectValue objc.ID) *BrowserCell
+	WithFormatter(formatter obj.Object) *BrowserCell
+	WithObjectValue(objectValue obj.Object) *BrowserCell
 	WithStringValue(stringValue string) *BrowserCell
 	WithIntValue(intValue int) *BrowserCell
 	WithFloatValue(floatValue float32) *BrowserCell
 	WithDoubleValue(doubleValue float64) *BrowserCell
 	WithIntegerValue(integerValue int) *BrowserCell
 	WithImage(image *Image) *BrowserCell
-	WithControlSize(controlSize NSControlSize) *BrowserCell
-	WithRepresentedObject(representedObject objc.ID) *BrowserCell
+	WithControlSize(controlSize ControlSize) *BrowserCell
+	WithRepresentedObject(representedObject obj.Object) *BrowserCell
 	WithMenu(menu *Menu) *BrowserCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *BrowserCell
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *BrowserCell
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *BrowserCell
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *BrowserCell
+	WithLineBreakMode(lineBreakMode LineBreakMode) *BrowserCell
 	WithAllowsUndo(allowsUndo bool) *BrowserCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *BrowserCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *BrowserCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *BrowserCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *BrowserCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *BrowserCell
 	WithShowsFirstResponder(showsFirstResponder bool) *BrowserCell
-	WithFocusRingType(focusRingType NSFocusRingType) *BrowserCell
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *BrowserCell
+	WithFocusRingType(focusRingType FocusRingType) *BrowserCell
+	WithAttributedStringValue(attributedStringValue obj.Object) *BrowserCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *BrowserCell
 	WithImportsGraphics(importsGraphics bool) *BrowserCell
 	WithAllowsMixedState(allowsMixedState bool) *BrowserCell
-	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *BrowserCell
-	WithControlTint(controlTint NSControlTint) *BrowserCell
-	HighlightColorInView(controlView *raw.NSView) *Color
+	WithBackgroundStyle(backgroundStyle BackgroundStyle) *BrowserCell
+	WithControlTint(controlTint ControlTint) *BrowserCell
+	HighlightColorInView(controlView *View) *Color
 	Reset()
 	Set()
 	IsLeaf() bool
@@ -557,7 +556,7 @@ type BrowserCellable interface {
 	IsLoaded() bool
 	SetLoaded(loaded bool)
 	AlternateImage() *Image
-	SetAlternateImage(alternateImage *raw.NSImage)
+	SetAlternateImage(alternateImage *Image)
 }
 
 var _ BrowserCellable = (*BrowserCell)(nil)

@@ -5,67 +5,73 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The basic infrastructure necessary for interacting with an assistive app.
 //
-// AccessibilityElement wraps [raw.NSAccessibilityElement] with a fluent Go API.
+// AccessibilityElement is an idiomatic wrapper over the Objective-C class NSAccessibilityElement.
 type AccessibilityElement struct {
-	inner *raw.NSAccessibilityElement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSAccessibilityElement].
-func (x *AccessibilityElement) Unwrap() *raw.NSAccessibilityElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AccessibilityElement) ID() objc.ID { return x.inner.Ptr() }
-
-// AccessibilityElementFromID adopts an existing object pointer as a AccessibilityElement (nil for 0).
+// AccessibilityElementFromID adopts an existing Objective-C object as a AccessibilityElement
+// (nil for 0), retaining it and registering a release finalizer.
 func AccessibilityElementFromID(id objc.ID) *AccessibilityElement {
 	if id == 0 {
 		return nil
 	}
-	return &AccessibilityElement{inner: raw.NSAccessibilityElementFromID(id)}
-}
-
-// NewAccessibilityElement creates a new [AccessibilityElement].
-func NewAccessibilityElement() *AccessibilityElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAccessibilityElement")), objc.RegisterName("new"))
-	return &AccessibilityElement{inner: raw.NSAccessibilityElementFromID(_id)}
-}
-
-// WithAccessibilityFrameInParentSpace sets the accessibilityFrameInParentSpace property and returns the receiver for chaining.
-func (x *AccessibilityElement) WithAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace corefoundation.CGRect) *AccessibilityElement {
-	x.inner.SetAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace)
+	x := &AccessibilityElement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// AccessibilityAddChildElement calls the underlying AccessibilityAddChildElement.
-func (x *AccessibilityElement) AccessibilityAddChildElement(childElement *raw.NSAccessibilityElement) {
-	x.inner.AccessibilityAddChildElement(childElement)
+// accessibilityElementAdopt wraps an Objective-C object that this code just created as a
+// AccessibilityElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func accessibilityElementAdopt(id objc.ID) *AccessibilityElement {
+	if id == 0 {
+		return nil
+	}
+	x := &AccessibilityElement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// AccessibilityFrameInParentSpace calls the underlying AccessibilityFrameInParentSpace.
-func (x *AccessibilityElement) AccessibilityFrameInParentSpace() corefoundation.CGRect {
-	return x.inner.AccessibilityFrameInParentSpace()
+// Description returns the object's -description text.
+func (x *AccessibilityElement) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// SetAccessibilityFrameInParentSpace calls the underlying SetAccessibilityFrameInParentSpace.
-func (x *AccessibilityElement) SetAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace corefoundation.CGRect) {
-	x.inner.SetAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AccessibilityElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AccessibilityElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAccessibilityElement creates a new AccessibilityElement.
+func NewAccessibilityElement() *AccessibilityElement {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSAccessibilityElement")), objc.RegisterName("new"))
+	return accessibilityElementAdopt(_id)
+}
+
+func (x *AccessibilityElement) AccessibilityAddChildElement(childElement *AccessibilityElement) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessibilityAddChildElement:"), objref.IDOf(childElement))
 }
 
 // AccessibilityElementable is the interface implemented by [AccessibilityElement], for mocking and DI.
 type AccessibilityElementable interface {
-	Unwrap() *raw.NSAccessibilityElement
-	WithAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace corefoundation.CGRect) *AccessibilityElement
-	AccessibilityAddChildElement(childElement *raw.NSAccessibilityElement)
-	AccessibilityFrameInParentSpace() corefoundation.CGRect
-	SetAccessibilityFrameInParentSpace(accessibilityFrameInParentSpace corefoundation.CGRect)
+	obj.Object
+	AccessibilityAddChildElement(childElement *AccessibilityElement)
 }
 
 var _ AccessibilityElementable = (*AccessibilityElement)(nil)

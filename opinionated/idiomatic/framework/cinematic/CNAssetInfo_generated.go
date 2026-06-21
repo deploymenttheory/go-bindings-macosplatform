@@ -5,166 +5,133 @@
 package cinematic
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides Cinematic-specific information about an asset, including its tracks.
 //
-// AssetInfo wraps [raw.CNAssetInfo] with a fluent Go API.
+// AssetInfo is an idiomatic wrapper over the Objective-C class CNAssetInfo.
 type AssetInfo struct {
-	inner *raw.CNAssetInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNAssetInfo].
-func (x *AssetInfo) Unwrap() *raw.CNAssetInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetInfoFromID adopts an existing object pointer as a AssetInfo (nil for 0).
+// AssetInfoFromID adopts an existing Objective-C object as a AssetInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetInfoFromID(id objc.ID) *AssetInfo {
 	if id == 0 {
 		return nil
 	}
-	return &AssetInfo{inner: raw.CNAssetInfoFromID(id)}
+	x := &AssetInfo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAssetInfo creates a new [AssetInfo].
+// assetInfoAdopt wraps an Objective-C object that this code just created as a
+// AssetInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetInfoAdopt(id objc.ID) *AssetInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetInfo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAssetInfo creates a new AssetInfo.
 func NewAssetInfo() *AssetInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNAssetInfo")), objc.RegisterName("new"))
-	return &AssetInfo{inner: raw.CNAssetInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNAssetInfo")), objc.RegisterName("new"))
+	return assetInfoAdopt(_id)
 }
 
-// Asset calls the underlying Asset.
-func (x *AssetInfo) Asset() *avfoundation.AVAsset {
-	return x.inner.Asset()
+func (x *AssetInfo) Asset() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asset"))
+	return obj.Wrap(_r)
 }
 
 // AllCinematicTracks returns the collection as a Go slice.
-func (x *AssetInfo) AllCinematicTracks() []*avfoundation.AVAssetTrack {
-	arr := x.inner.AllCinematicTracks()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *avfoundation.AVAssetTrack {
-		return avfoundation.AVAssetTrackFromID(purego.Retain(_id))
-	})
+func (x *AssetInfo) AllCinematicTracks() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allCinematicTracks"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// CinematicVideoTrack calls the underlying CinematicVideoTrack.
-func (x *AssetInfo) CinematicVideoTrack() *avfoundation.AVAssetTrack {
-	return x.inner.CinematicVideoTrack()
+func (x *AssetInfo) CinematicVideoTrack() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cinematicVideoTrack"))
+	return obj.Wrap(_r)
 }
 
-// CinematicDisparityTrack calls the underlying CinematicDisparityTrack.
-func (x *AssetInfo) CinematicDisparityTrack() *avfoundation.AVAssetTrack {
-	return x.inner.CinematicDisparityTrack()
+func (x *AssetInfo) CinematicDisparityTrack() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cinematicDisparityTrack"))
+	return obj.Wrap(_r)
 }
 
-// CinematicMetadataTrack calls the underlying CinematicMetadataTrack.
-func (x *AssetInfo) CinematicMetadataTrack() *avfoundation.AVAssetTrack {
-	return x.inner.CinematicMetadataTrack()
-}
-
-// Time range over which all cinematic tracks are valid.
-//
-// TimeRange calls the underlying TimeRange.
-func (x *AssetInfo) TimeRange() coremedia.CMTimeRange {
-	return x.inner.TimeRange()
-}
-
-// Natural size at which cinematic video would be rendered
-//
-// NaturalSize calls the underlying NaturalSize.
-func (x *AssetInfo) NaturalSize() corefoundation.CGSize {
-	return x.inner.NaturalSize()
-}
-
-// Natural size at which cinematic video would be displayed. Same as naturalSize with preferredTransform applied.
-//
-// PreferredSize calls the underlying PreferredSize.
-func (x *AssetInfo) PreferredSize() corefoundation.CGSize {
-	return x.inner.PreferredSize()
-}
-
-// The preferred transform of the rendered image for display purposes. Always the identity transform or a multiple of a 90º rotation with no scaling.
-//
-// PreferredTransform calls the underlying PreferredTransform.
-func (x *AssetInfo) PreferredTransform() corefoundation.CGAffineTransform {
-	return x.inner.PreferredTransform()
+func (x *AssetInfo) CinematicMetadataTrack() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cinematicMetadataTrack"))
+	return obj.Wrap(_r)
 }
 
 // Track to be used for frame timing
-//
-// FrameTimingTrack calls the underlying FrameTimingTrack.
-func (x *AssetInfo) FrameTimingTrack() *avfoundation.AVAssetTrack {
-	return x.inner.FrameTimingTrack()
+func (x *AssetInfo) FrameTimingTrack() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frameTimingTrack"))
+	return obj.Wrap(_r)
 }
 
 // Tracks required to construct AVAssetReaderVideoCompositionOutput.
 //
 // VideoCompositionTracks returns the collection as a Go slice.
-func (x *AssetInfo) VideoCompositionTracks() []*avfoundation.AVAssetTrack {
-	arr := x.inner.VideoCompositionTracks()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *avfoundation.AVAssetTrack {
-		return avfoundation.AVAssetTrackFromID(purego.Retain(_id))
-	})
+func (x *AssetInfo) VideoCompositionTracks() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoCompositionTracks"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Source video track IDs required to implement AVVideoCompositionInstruction protocol
 //
 // VideoCompositionTrackIDs returns the collection as a Go slice.
-func (x *AssetInfo) VideoCompositionTrackIDs() []*foundation.NSNumber {
-	arr := x.inner.VideoCompositionTrackIDs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *AssetInfo) VideoCompositionTrackIDs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoCompositionTrackIDs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Source metadata track IDs required to implement AVVideoCompositionInstruction protocol
 //
 // SampleDataTrackIDs returns the collection as a Go slice.
-func (x *AssetInfo) SampleDataTrackIDs() []*foundation.NSNumber {
-	arr := x.inner.SampleDataTrackIDs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *AssetInfo) SampleDataTrackIDs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleDataTrackIDs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-func (x *AssetInfo) asAssetInfo() *raw.CNAssetInfo { return x.inner }
 
 // AssetInfoable is the interface implemented by [AssetInfo], for mocking and DI.
 type AssetInfoable interface {
-	Unwrap() *raw.CNAssetInfo
-	Asset() *avfoundation.AVAsset
-	AllCinematicTracks() []*avfoundation.AVAssetTrack
-	CinematicVideoTrack() *avfoundation.AVAssetTrack
-	CinematicDisparityTrack() *avfoundation.AVAssetTrack
-	CinematicMetadataTrack() *avfoundation.AVAssetTrack
-	TimeRange() coremedia.CMTimeRange
-	NaturalSize() corefoundation.CGSize
-	PreferredSize() corefoundation.CGSize
-	PreferredTransform() corefoundation.CGAffineTransform
-	FrameTimingTrack() *avfoundation.AVAssetTrack
-	VideoCompositionTracks() []*avfoundation.AVAssetTrack
-	VideoCompositionTrackIDs() []*foundation.NSNumber
-	SampleDataTrackIDs() []*foundation.NSNumber
+	obj.Object
+	Asset() obj.Object
+	AllCinematicTracks() []obj.Object
+	CinematicVideoTrack() obj.Object
+	CinematicDisparityTrack() obj.Object
+	CinematicMetadataTrack() obj.Object
+	FrameTimingTrack() obj.Object
+	VideoCompositionTracks() []obj.Object
+	VideoCompositionTrackIDs() []obj.Object
+	SampleDataTrackIDs() []obj.Object
 }
 
 var _ AssetInfoable = (*AssetInfo)(nil)

@@ -5,66 +5,82 @@
 package screencapturekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An instance that provides information for the content in a given stream.
 //
-// ShareableContentInfo wraps [raw.SCShareableContentInfo] with a fluent Go API.
+// ShareableContentInfo is an idiomatic wrapper over the Objective-C class SCShareableContentInfo.
 type ShareableContentInfo struct {
-	inner *raw.SCShareableContentInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCShareableContentInfo].
-func (x *ShareableContentInfo) Unwrap() *raw.SCShareableContentInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ShareableContentInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// ShareableContentInfoFromID adopts an existing object pointer as a ShareableContentInfo (nil for 0).
+// ShareableContentInfoFromID adopts an existing Objective-C object as a ShareableContentInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func ShareableContentInfoFromID(id objc.ID) *ShareableContentInfo {
 	if id == 0 {
 		return nil
 	}
-	return &ShareableContentInfo{inner: raw.SCShareableContentInfoFromID(id)}
+	x := &ShareableContentInfo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewShareableContentInfo creates a new [ShareableContentInfo].
+// shareableContentInfoAdopt wraps an Objective-C object that this code just created as a
+// ShareableContentInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shareableContentInfoAdopt(id objc.ID) *ShareableContentInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &ShareableContentInfo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ShareableContentInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ShareableContentInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ShareableContentInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewShareableContentInfo creates a new ShareableContentInfo.
 func NewShareableContentInfo() *ShareableContentInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCShareableContentInfo")), objc.RegisterName("new"))
-	return &ShareableContentInfo{inner: raw.SCShareableContentInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCShareableContentInfo")), objc.RegisterName("new"))
+	return shareableContentInfoAdopt(_id)
 }
 
-// @abstract style of stream
-//
-// Style calls the underlying Style.
-func (x *ShareableContentInfo) Style() SCShareableContentStyle {
-	return SCShareableContentStyle(x.inner.Style())
+// style of stream
+func (x *ShareableContentInfo) Style() ShareableContentStyle {
+	_r := objc.Send[ShareableContentStyle](objref.IDOf(x), objc.RegisterName("style"))
+	return _r
 }
 
-// @abstract Pixel to points scaling factor
-//
-// PointPixelScale calls the underlying PointPixelScale.
+// Pixel to points scaling factor
 func (x *ShareableContentInfo) PointPixelScale() float32 {
-	return x.inner.PointPixelScale()
-}
-
-// @abstract Size and location of content in points
-//
-// ContentRect calls the underlying ContentRect.
-func (x *ShareableContentInfo) ContentRect() corefoundation.CGRect {
-	return x.inner.ContentRect()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("pointPixelScale"))
+	return _r
 }
 
 // ShareableContentInfoable is the interface implemented by [ShareableContentInfo], for mocking and DI.
 type ShareableContentInfoable interface {
-	Unwrap() *raw.SCShareableContentInfo
-	Style() SCShareableContentStyle
+	obj.Object
+	Style() ShareableContentStyle
 	PointPixelScale() float32
-	ContentRect() corefoundation.CGRect
 }
 
 var _ ShareableContentInfoable = (*ShareableContentInfo)(nil)

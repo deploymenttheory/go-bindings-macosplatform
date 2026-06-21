@@ -5,135 +5,131 @@
 package networkextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // NEEvaluateConnectionRule associates properties of network connections with an action.
 //
-// NEEvaluateConnectionRule wraps [raw.NEEvaluateConnectionRule] with a fluent Go API.
+// NEEvaluateConnectionRule is an idiomatic wrapper over the Objective-C class NEEvaluateConnectionRule.
 type NEEvaluateConnectionRule struct {
-	inner *raw.NEEvaluateConnectionRule
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEEvaluateConnectionRule].
-func (x *NEEvaluateConnectionRule) Unwrap() *raw.NEEvaluateConnectionRule { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEEvaluateConnectionRule) ID() objc.ID { return x.inner.Ptr() }
-
-// NEEvaluateConnectionRuleFromID adopts an existing object pointer as a NEEvaluateConnectionRule (nil for 0).
+// NEEvaluateConnectionRuleFromID adopts an existing Objective-C object as a NEEvaluateConnectionRule
+// (nil for 0), retaining it and registering a release finalizer.
 func NEEvaluateConnectionRuleFromID(id objc.ID) *NEEvaluateConnectionRule {
 	if id == 0 {
 		return nil
 	}
-	return &NEEvaluateConnectionRule{inner: raw.NEEvaluateConnectionRuleFromID(id)}
+	x := &NEEvaluateConnectionRule{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// nEEvaluateConnectionRuleAdopt wraps an Objective-C object that this code just created as a
+// NEEvaluateConnectionRule (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEEvaluateConnectionRuleAdopt(id objc.ID) *NEEvaluateConnectionRule {
+	if id == 0 {
+		return nil
+	}
+	x := &NEEvaluateConnectionRule{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NEEvaluateConnectionRule) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEEvaluateConnectionRule) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEEvaluateConnectionRule) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize an NEEvaluateConnectionRule instance with a list of destination host domains and an action.
 //
-// NewNEEvaluateConnectionRuleWithMatchDomainsAndAction creates a new [NEEvaluateConnectionRule].
-func NewNEEvaluateConnectionRuleWithMatchDomainsAndAction(domains *foundation.NSArray[*foundation.NSString], action NEEvaluateConnectionRuleAction) *NEEvaluateConnectionRule {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NEEvaluateConnectionRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMatchDomains:andAction:"), domains.Ptr(), raw.NEEvaluateConnectionRuleAction(action))
-	return &NEEvaluateConnectionRule{inner: raw.NEEvaluateConnectionRuleFromID(_id)}
+// NewNEEvaluateConnectionRuleWithMatchDomainsAndAction creates a new NEEvaluateConnectionRule.
+func NewNEEvaluateConnectionRuleWithMatchDomainsAndAction(domains []string, action NEEvaluateConnectionRuleAction) *NEEvaluateConnectionRule {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NEEvaluateConnectionRule")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMatchDomains:andAction:"), purego.SliceToNSArray(domains, func(_v string) objc.ID { return purego.NSString(_v) }), action)
+	return nEEvaluateConnectionRuleAdopt(_id)
 }
 
 // If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded, the DNS servers specified in this array are used to resolve the destination hostname of the connection while evaluating connectivity to the destination of the connection. If the resolution fails for any reason, the VPN is started.
 //
-// WithUseDNSServers sets the collection, converting the Go slice to an NSArray.
-func (x *NEEvaluateConnectionRule) WithUseDNSServers(items ...*foundation.NSString) *NEEvaluateConnectionRule {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetUseDNSServers(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetUseDNSServers(_arr)
+// WithUseDNSServers sets the collection and returns the receiver so calls can be chained.
+func (x *NEEvaluateConnectionRule) WithUseDNSServers(items ...obj.Object) *NEEvaluateConnectionRule {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseDNSServers:"), _arr)
 	return x
 }
 
 // An HTTP or HTTPS URL. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded and a request sent to this URL results in a response with an HTTP response code other than 200, then the VPN is started.
 //
-// WithProbeURL sets the probeURL property and returns the receiver for chaining.
+// WithProbeURL sets probeURL and returns the receiver so calls can be chained.
 func (x *NEEvaluateConnectionRule) WithProbeURL(probeURL string) *NEEvaluateConnectionRule {
-	x.inner.SetProbeURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(probeURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
 	return x
 }
 
-// @property action @discussion The action to take if the properties of the network connection being established match the rule.
-//
-// Action calls the underlying Action.
+// The action to take if the properties of the network connection being established match the rule.
 func (x *NEEvaluateConnectionRule) Action() NEEvaluateConnectionRuleAction {
-	return NEEvaluateConnectionRuleAction(x.inner.Action())
+	_r := objc.Send[NEEvaluateConnectionRuleAction](objref.IDOf(x), objc.RegisterName("action"))
+	return _r
 }
 
-// @property matchDomains @discussion An array of NSString objects. If the host name of the destination of the network connection being established shares a suffix with one of the strings in this array, then the rule matches.
+// An array of NSString objects. If the host name of the destination of the network connection being established shares a suffix with one of the strings in this array, then the rule matches.
 //
 // MatchDomains returns the collection as a Go slice.
 func (x *NEEvaluateConnectionRule) MatchDomains() []string {
-	arr := x.inner.MatchDomains()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchDomains"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// @property useDNSServers @discussion An array of NSString objects. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded, the DNS servers specified in this array are used to resolve the host name of the destination while evaluating connectivity to the destination. If the resolution fails for any reason, the VPN is started.
+// An array of NSString objects. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded, the DNS servers specified in this array are used to resolve the host name of the destination while evaluating connectivity to the destination. If the resolution fails for any reason, the VPN is started.
 //
 // UseDNSServers returns the collection as a Go slice.
 func (x *NEEvaluateConnectionRule) UseDNSServers() []string {
-	arr := x.inner.UseDNSServers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("useDNSServers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetUseDNSServers calls the underlying SetUseDNSServers.
-func (x *NEEvaluateConnectionRule) SetUseDNSServers(useDNSServers *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetUseDNSServers(useDNSServers)
+func (x *NEEvaluateConnectionRule) SetUseDNSServers(useDNSServers []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseDNSServers:"), purego.SliceToNSArray(useDNSServers, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// @property probeURL @discussion An HTTP or HTTPS URL. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded and a request sent to this URL results in a response with an HTTP response code other than 200, then the VPN is started.
-//
-// ProbeURL calls the underlying ProbeURL.
-func (x *NEEvaluateConnectionRule) ProbeURL() *foundation.NSURL {
-	return x.inner.ProbeURL()
+// An HTTP or HTTPS URL. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded and a request sent to this URL results in a response with an HTTP response code other than 200, then the VPN is started.
+func (x *NEEvaluateConnectionRule) ProbeURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("probeURL"))
+	return obj.Wrap(_r)
 }
 
-// SetProbeURL calls the underlying SetProbeURL.
 func (x *NEEvaluateConnectionRule) SetProbeURL(probeURL string) {
-	x.inner.SetProbeURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(probeURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
 }
 
 // NEEvaluateConnectionRuleable is the interface implemented by [NEEvaluateConnectionRule], for mocking and DI.
 type NEEvaluateConnectionRuleable interface {
-	Unwrap() *raw.NEEvaluateConnectionRule
-	WithUseDNSServers(items ...*foundation.NSString) *NEEvaluateConnectionRule
+	obj.Object
+	WithUseDNSServers(items ...obj.Object) *NEEvaluateConnectionRule
 	WithProbeURL(probeURL string) *NEEvaluateConnectionRule
 	Action() NEEvaluateConnectionRuleAction
 	MatchDomains() []string
 	UseDNSServers() []string
-	SetUseDNSServers(useDNSServers *foundation.NSArray[*foundation.NSString])
-	ProbeURL() *foundation.NSURL
+	SetUseDNSServers(useDNSServers []string)
+	ProbeURL() obj.Object
 	SetProbeURL(probeURL string)
 }
 

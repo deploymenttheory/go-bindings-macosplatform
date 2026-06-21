@@ -5,39 +5,66 @@
 package syncservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/syncservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ISyncFilter wraps [raw.ISyncFilter] with a fluent Go API.
+// ISyncFilter is an idiomatic wrapper over the Objective-C class ISyncFilter.
 type ISyncFilter struct {
-	inner *raw.ISyncFilter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ISyncFilter].
-func (x *ISyncFilter) Unwrap() *raw.ISyncFilter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ISyncFilter) ID() objc.ID { return x.inner.Ptr() }
-
-// ISyncFilterFromID adopts an existing object pointer as a ISyncFilter (nil for 0).
+// ISyncFilterFromID adopts an existing Objective-C object as a ISyncFilter
+// (nil for 0), retaining it and registering a release finalizer.
 func ISyncFilterFromID(id objc.ID) *ISyncFilter {
 	if id == 0 {
 		return nil
 	}
-	return &ISyncFilter{inner: raw.ISyncFilterFromID(id)}
+	x := &ISyncFilter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewISyncFilter creates a new [ISyncFilter].
+// iSyncFilterAdopt wraps an Objective-C object that this code just created as a
+// ISyncFilter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iSyncFilterAdopt(id objc.ID) *ISyncFilter {
+	if id == 0 {
+		return nil
+	}
+	x := &ISyncFilter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ISyncFilter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ISyncFilter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ISyncFilter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewISyncFilter creates a new ISyncFilter.
 func NewISyncFilter() *ISyncFilter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ISyncFilter")), objc.RegisterName("new"))
-	return &ISyncFilter{inner: raw.ISyncFilterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ISyncFilter")), objc.RegisterName("new"))
+	return iSyncFilterAdopt(_id)
 }
 
 // ISyncFilterable is the interface implemented by [ISyncFilter], for mocking and DI.
 type ISyncFilterable interface {
-	Unwrap() *raw.ISyncFilter
+	obj.Object
 }
 
 var _ ISyncFilterable = (*ISyncFilter)(nil)

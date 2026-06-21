@@ -5,75 +5,97 @@
 package mediaplayer
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that responds to requests to change the current repeat mode used during playback.
 //
-// ChangeRepeatModeCommand wraps [raw.MPChangeRepeatModeCommand] with a fluent Go API.
+// ChangeRepeatModeCommand is an idiomatic wrapper over the Objective-C class MPChangeRepeatModeCommand.
 type ChangeRepeatModeCommand struct {
-	inner *raw.MPChangeRepeatModeCommand
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPChangeRepeatModeCommand].
-func (x *ChangeRepeatModeCommand) Unwrap() *raw.MPChangeRepeatModeCommand { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChangeRepeatModeCommand) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangeRepeatModeCommandFromID adopts an existing object pointer as a ChangeRepeatModeCommand (nil for 0).
+// ChangeRepeatModeCommandFromID adopts an existing Objective-C object as a ChangeRepeatModeCommand
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangeRepeatModeCommandFromID(id objc.ID) *ChangeRepeatModeCommand {
 	if id == 0 {
 		return nil
 	}
-	return &ChangeRepeatModeCommand{inner: raw.MPChangeRepeatModeCommandFromID(id)}
+	x := &ChangeRepeatModeCommand{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewChangeRepeatModeCommand creates a new [ChangeRepeatModeCommand].
+// changeRepeatModeCommandAdopt wraps an Objective-C object that this code just created as a
+// ChangeRepeatModeCommand (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changeRepeatModeCommandAdopt(id objc.ID) *ChangeRepeatModeCommand {
+	if id == 0 {
+		return nil
+	}
+	x := &ChangeRepeatModeCommand{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ChangeRepeatModeCommand) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ChangeRepeatModeCommand) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ChangeRepeatModeCommand) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewChangeRepeatModeCommand creates a new ChangeRepeatModeCommand.
 func NewChangeRepeatModeCommand() *ChangeRepeatModeCommand {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPChangeRepeatModeCommand")), objc.RegisterName("new"))
-	return &ChangeRepeatModeCommand{inner: raw.MPChangeRepeatModeCommandFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPChangeRepeatModeCommand")), objc.RegisterName("new"))
+	return changeRepeatModeCommandAdopt(_id)
 }
 
 // The current repeat option for a media item.
 //
-// WithCurrentRepeatType sets the currentRepeatType property and returns the receiver for chaining.
-func (x *ChangeRepeatModeCommand) WithCurrentRepeatType(currentRepeatType MPRepeatType) *ChangeRepeatModeCommand {
-	x.inner.SetCurrentRepeatType(raw.MPRepeatType(currentRepeatType))
+// WithCurrentRepeatType sets currentRepeatType and returns the receiver so calls can be chained.
+func (x *ChangeRepeatModeCommand) WithCurrentRepeatType(currentRepeatType RepeatType) *ChangeRepeatModeCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentRepeatType:"), currentRepeatType)
 	return x
 }
 
 // A Boolean value that indicates whether a user can interact with the displayed element.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *ChangeRepeatModeCommand) WithEnabled(enabled bool) *ChangeRepeatModeCommand {
-	x.inner.MPRemoteCommand.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// CurrentRepeatType calls the underlying CurrentRepeatType.
-func (x *ChangeRepeatModeCommand) CurrentRepeatType() MPRepeatType {
-	return MPRepeatType(x.inner.CurrentRepeatType())
+func (x *ChangeRepeatModeCommand) CurrentRepeatType() RepeatType {
+	_r := objc.Send[RepeatType](objref.IDOf(x), objc.RegisterName("currentRepeatType"))
+	return _r
 }
 
-// SetCurrentRepeatType calls the underlying SetCurrentRepeatType.
-func (x *ChangeRepeatModeCommand) SetCurrentRepeatType(currentRepeatType MPRepeatType) {
-	x.inner.SetCurrentRepeatType(raw.MPRepeatType(currentRepeatType))
-}
-
-func (x *ChangeRepeatModeCommand) asRemoteCommand() *raw.MPRemoteCommand {
-	return &x.inner.MPRemoteCommand
+func (x *ChangeRepeatModeCommand) SetCurrentRepeatType(currentRepeatType RepeatType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentRepeatType:"), currentRepeatType)
 }
 
 // ChangeRepeatModeCommandable is the interface implemented by [ChangeRepeatModeCommand], for mocking and DI.
 type ChangeRepeatModeCommandable interface {
-	Unwrap() *raw.MPChangeRepeatModeCommand
-	WithCurrentRepeatType(currentRepeatType MPRepeatType) *ChangeRepeatModeCommand
+	obj.Object
+	WithCurrentRepeatType(currentRepeatType RepeatType) *ChangeRepeatModeCommand
 	WithEnabled(enabled bool) *ChangeRepeatModeCommand
-	CurrentRepeatType() MPRepeatType
-	SetCurrentRepeatType(currentRepeatType MPRepeatType)
+	CurrentRepeatType() RepeatType
+	SetCurrentRepeatType(currentRepeatType RepeatType)
 }
 
 var _ ChangeRepeatModeCommandable = (*ChangeRepeatModeCommand)(nil)

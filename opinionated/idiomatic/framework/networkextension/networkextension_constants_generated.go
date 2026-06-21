@@ -5,109 +5,89 @@
 package networkextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @const NEAppProxyErrorDomain The NEAppProxyFlow error domain
-// NEAppProxyErrorDomain returns the string constant NEAppProxyErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func NEAppProxyErrorDomain() objc.ID {
-	return purego.CFConstant(raw.NEAppProxyErrorDomain())
+// NEAppProxyErrorDomain returns the string constant NEAppProxyErrorDomain, for use as a dictionary key or argument.
+func NEAppProxyErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NEAppProxyErrorDomain")))
 }
 
-// @const NETunnelProviderErrorDomain The tunnel provider error domain
-// NETunnelProviderErrorDomain returns the string constant NETunnelProviderErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func NETunnelProviderErrorDomain() objc.ID {
-	return purego.CFConstant(raw.NETunnelProviderErrorDomain())
+// NETunnelProviderErrorDomain returns the string constant NETunnelProviderErrorDomain, for use as a dictionary key or argument.
+func NETunnelProviderErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NETunnelProviderErrorDomain")))
 }
 
-// @const NEVPNErrorDomain The VPN error domain
-// NEVPNErrorDomain returns the string constant NEVPNErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func NEVPNErrorDomain() objc.ID {
-	return purego.CFConstant(raw.NEVPNErrorDomain())
+// NEVPNErrorDomain returns the string constant NEVPNErrorDomain, for use as a dictionary key or argument.
+func NEVPNErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NEVPNErrorDomain"))) }
+
+// NEVPNConfigurationChangeNotification returns the string constant NEVPNConfigurationChangeNotification, for use as a dictionary key or argument.
+func NEVPNConfigurationChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NEVPNConfigurationChangeNotification")))
 }
 
-// @const NEVPNConfigurationChangeNotification Name of the NSNotification that is posted when the VPN configuration changes.
-// NEVPNConfigurationChangeNotification returns the string constant NEVPNConfigurationChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NEVPNConfigurationChangeNotification() objc.ID {
-	return purego.CFConstant(raw.NEVPNConfigurationChangeNotification())
+// NEDNSProxyErrorDomain returns the string constant NEDNSProxyErrorDomain, for use as a dictionary key or argument.
+func NEDNSProxyErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NEDNSProxyErrorDomain")))
 }
 
-// @const NEDNSProxyManagerErrorDomain The DNS proxy error domain
-// NEDNSProxyErrorDomain returns the string constant NEDNSProxyErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func NEDNSProxyErrorDomain() objc.ID {
-	return purego.CFConstant(raw.NEDNSProxyErrorDomain())
+// NEDNSProxyConfigurationDidChangeNotification returns the string constant NEDNSProxyConfigurationDidChangeNotification, for use as a dictionary key or argument.
+func NEDNSProxyConfigurationDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NEDNSProxyConfigurationDidChangeNotification")))
 }
 
-// @const NEDNSProxyConfigurationDidChangeNotification Name of the NSNotification that is posted when the DNS proxy configuration changes.
-// NEDNSProxyConfigurationDidChangeNotification returns the string constant NEDNSProxyConfigurationDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NEDNSProxyConfigurationDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.NEDNSProxyConfigurationDidChangeNotification())
+// NEDNSSettingsErrorDomain returns the string constant NEDNSSettingsErrorDomain, for use as a dictionary key or argument.
+func NEDNSSettingsErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NEDNSSettingsErrorDomain")))
 }
 
-// @const NEDNSSettingsManagerErrorDomain The DNS settings error domain
-// NEDNSSettingsErrorDomain returns the string constant NEDNSSettingsErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func NEDNSSettingsErrorDomain() objc.ID {
-	return purego.CFConstant(raw.NEDNSSettingsErrorDomain())
+// NEDNSSettingsConfigurationDidChangeNotification returns the string constant NEDNSSettingsConfigurationDidChangeNotification, for use as a dictionary key or argument.
+func NEDNSSettingsConfigurationDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NEDNSSettingsConfigurationDidChangeNotification")))
 }
 
-// @const NEDNSSettingsConfigurationDidChangeNotification Name of the NSNotification that is posted when the DNS settings configuration changes.
-// NEDNSSettingsConfigurationDidChangeNotification returns the string constant NEDNSSettingsConfigurationDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NEDNSSettingsConfigurationDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.NEDNSSettingsConfigurationDidChangeNotification())
+// NEFilterErrorDomain returns the string constant NEFilterErrorDomain, for use as a dictionary key or argument.
+func NEFilterErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NEFilterErrorDomain")))
 }
 
-// @const NEFilterErrorDomain The filter error domain
-// NEFilterErrorDomain returns the string constant NEFilterErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func NEFilterErrorDomain() objc.ID {
-	return purego.CFConstant(raw.NEFilterErrorDomain())
+// NEFilterConfigurationDidChangeNotification returns the string constant NEFilterConfigurationDidChangeNotification, for use as a dictionary key or argument.
+func NEFilterConfigurationDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NEFilterConfigurationDidChangeNotification")))
 }
 
-// @const NEFilterConfigurationDidChangeNotification Name of the NSNotification that is posted when the filter configuration changes.
-// NEFilterConfigurationDidChangeNotification returns the string constant NEFilterConfigurationDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NEFilterConfigurationDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.NEFilterConfigurationDidChangeNotification())
+// NERelayErrorDomain returns the string constant NERelayErrorDomain, for use as a dictionary key or argument.
+func NERelayErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NERelayErrorDomain")))
 }
 
-// @const NERelayErrorDomain The NERelay error domain
-// NERelayErrorDomain returns the string constant NERelayErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func NERelayErrorDomain() objc.ID {
-	return purego.CFConstant(raw.NERelayErrorDomain())
+// NERelayClientErrorDomain returns the string constant NERelayClientErrorDomain, for use as a dictionary key or argument.
+func NERelayClientErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NERelayClientErrorDomain")))
 }
 
-// @const NERelayClientErrorDomain The NERelay error domain as detected by the client
-// NERelayClientErrorDomain returns the string constant NERelayClientErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func NERelayClientErrorDomain() objc.ID {
-	return purego.CFConstant(raw.NERelayClientErrorDomain())
+// NERelayConfigurationDidChangeNotification returns the string constant NERelayConfigurationDidChangeNotification, for use as a dictionary key or argument.
+func NERelayConfigurationDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NERelayConfigurationDidChangeNotification")))
 }
 
-// @const NERelayConfigurationDidChangeNotification Name of the NSNotification that is posted when the relay configuration changes.
-// NERelayConfigurationDidChangeNotification returns the string constant NERelayConfigurationDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NERelayConfigurationDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.NERelayConfigurationDidChangeNotification())
+// NEVPNStatusDidChangeNotification returns the string constant NEVPNStatusDidChangeNotification, for use as a dictionary key or argument.
+func NEVPNStatusDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NEVPNStatusDidChangeNotification")))
 }
 
-// @const NEVPNStatusDidChangeNotification Name of the NSNotification that is posted when the VPN status changes.
-// NEVPNStatusDidChangeNotification returns the string constant NEVPNStatusDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NEVPNStatusDidChangeNotification() objc.ID {
-	return purego.CFConstant(raw.NEVPNStatusDidChangeNotification())
+// NEVPNConnectionStartOptionUsername returns the string constant NEVPNConnectionStartOptionUsername, for use as a dictionary key or argument.
+func NEVPNConnectionStartOptionUsername() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NEVPNConnectionStartOptionUsername")))
 }
 
-// @const NEVPNConnectionStartOptionUsername Specify this key in the options dictionary passed to startVPNTunnelWithOptions:returningError: to override the username saved in the configuration. The value is a string
-// NEVPNConnectionStartOptionUsername returns the string constant NEVPNConnectionStartOptionUsername as an objc.ID, for use as a dictionary key or selector argument.
-func NEVPNConnectionStartOptionUsername() objc.ID {
-	return purego.CFConstant(raw.NEVPNConnectionStartOptionUsername())
+// NEVPNConnectionStartOptionPassword returns the string constant NEVPNConnectionStartOptionPassword, for use as a dictionary key or argument.
+func NEVPNConnectionStartOptionPassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NEVPNConnectionStartOptionPassword")))
 }
 
-// @const NEVPNConnectionStartOptionPassword Specify this key in the options dictionary passed to startVPNTunnelWithOptions:returningError: to override the password saved in the configuration. The value is a string
-// NEVPNConnectionStartOptionPassword returns the string constant NEVPNConnectionStartOptionPassword as an objc.ID, for use as a dictionary key or selector argument.
-func NEVPNConnectionStartOptionPassword() objc.ID {
-	return purego.CFConstant(raw.NEVPNConnectionStartOptionPassword())
-}
-
-// @const NEVPNConnectionErrorDomain The VPN connection error domain
-// NEVPNConnectionErrorDomain returns the string constant NEVPNConnectionErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func NEVPNConnectionErrorDomain() objc.ID {
-	return purego.CFConstant(raw.NEVPNConnectionErrorDomain())
+// NEVPNConnectionErrorDomain returns the string constant NEVPNConnectionErrorDomain, for use as a dictionary key or argument.
+func NEVPNConnectionErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NEVPNConnectionErrorDomain")))
 }

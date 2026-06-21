@@ -5,67 +5,90 @@
 package pdfkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // PDFActionURL, a subclass of PDFAction, defines methods for getting and setting the URL associated with a URL action.
 //
-// ActionURL wraps [raw.PDFActionURL] with a fluent Go API.
+// ActionURL is an idiomatic wrapper over the Objective-C class PDFActionURL.
 type ActionURL struct {
-	inner *raw.PDFActionURL
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PDFActionURL].
-func (x *ActionURL) Unwrap() *raw.PDFActionURL { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ActionURL) ID() objc.ID { return x.inner.Ptr() }
-
-// ActionURLFromID adopts an existing object pointer as a ActionURL (nil for 0).
+// ActionURLFromID adopts an existing Objective-C object as a ActionURL
+// (nil for 0), retaining it and registering a release finalizer.
 func ActionURLFromID(id objc.ID) *ActionURL {
 	if id == 0 {
 		return nil
 	}
-	return &ActionURL{inner: raw.PDFActionURLFromID(id)}
+	x := &ActionURL{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// actionURLAdopt wraps an Objective-C object that this code just created as a
+// ActionURL (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func actionURLAdopt(id objc.ID) *ActionURL {
+	if id == 0 {
+		return nil
+	}
+	x := &ActionURL{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ActionURL) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ActionURL) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ActionURL) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a URL action with the specified URL.
 //
-// NewActionURLWithURL creates a new [ActionURL].
+// NewActionURLWithURL creates a new ActionURL.
 func NewActionURLWithURL(url string) *ActionURL {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFActionURL")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr())
-	return &ActionURL{inner: raw.PDFActionURLFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PDFActionURL")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
+	return actionURLAdopt(_id)
 }
 
 // Returns the URL associated with the URL action.
 //
-// WithURL sets the uRL property and returns the receiver for chaining.
+// WithURL sets uRL and returns the receiver so calls can be chained.
 func (x *ActionURL) WithURL(uRL string) *ActionURL {
-	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 	return x
 }
 
-// URL calls the underlying URL.
-func (x *ActionURL) URL() *foundation.NSURL {
-	return x.inner.URL()
+func (x *ActionURL) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
-// SetURL calls the underlying SetURL.
 func (x *ActionURL) SetURL(uRL string) {
-	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 }
-
-func (x *ActionURL) asAction() *raw.PDFAction { return &x.inner.PDFAction }
 
 // ActionURLable is the interface implemented by [ActionURL], for mocking and DI.
 type ActionURLable interface {
-	Unwrap() *raw.PDFActionURL
+	obj.Object
 	WithURL(uRL string) *ActionURL
-	URL() *foundation.NSURL
+	URL() obj.Object
 	SetURL(uRL string)
 }
 

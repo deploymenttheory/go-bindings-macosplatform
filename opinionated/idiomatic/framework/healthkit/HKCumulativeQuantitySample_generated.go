@@ -5,66 +5,73 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A sample that represents a cumulative quantity.
 //
-// CumulativeQuantitySample wraps [raw.HKCumulativeQuantitySample] with a fluent Go API.
+// CumulativeQuantitySample is an idiomatic wrapper over the Objective-C class HKCumulativeQuantitySample.
 type CumulativeQuantitySample struct {
-	inner *raw.HKCumulativeQuantitySample
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKCumulativeQuantitySample].
-func (x *CumulativeQuantitySample) Unwrap() *raw.HKCumulativeQuantitySample { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CumulativeQuantitySample) ID() objc.ID { return x.inner.Ptr() }
-
-// CumulativeQuantitySampleFromID adopts an existing object pointer as a CumulativeQuantitySample (nil for 0).
+// CumulativeQuantitySampleFromID adopts an existing Objective-C object as a CumulativeQuantitySample
+// (nil for 0), retaining it and registering a release finalizer.
 func CumulativeQuantitySampleFromID(id objc.ID) *CumulativeQuantitySample {
 	if id == 0 {
 		return nil
 	}
-	return &CumulativeQuantitySample{inner: raw.HKCumulativeQuantitySampleFromID(id)}
+	x := &CumulativeQuantitySample{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCumulativeQuantitySample creates a new [CumulativeQuantitySample].
-func NewCumulativeQuantitySample() *CumulativeQuantitySample {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKCumulativeQuantitySample")), objc.RegisterName("new"))
-	return &CumulativeQuantitySample{inner: raw.HKCumulativeQuantitySampleFromID(_id)}
-}
-
-// SumQuantity calls the underlying SumQuantity.
-func (x *CumulativeQuantitySample) SumQuantity() *Quantity {
-	_r := x.inner.SumQuantity()
-	if _r == nil {
+// cumulativeQuantitySampleAdopt wraps an Objective-C object that this code just created as a
+// CumulativeQuantitySample (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cumulativeQuantitySampleAdopt(id objc.ID) *CumulativeQuantitySample {
+	if id == 0 {
 		return nil
 	}
-	return &Quantity{inner: _r}
+	x := &CumulativeQuantitySample{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *CumulativeQuantitySample) asCumulativeQuantitySample() *raw.HKCumulativeQuantitySample {
-	return x.inner
+// Description returns the object's -description text.
+func (x *CumulativeQuantitySample) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *CumulativeQuantitySample) asQuantitySample() *raw.HKQuantitySample {
-	return &x.inner.HKQuantitySample
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CumulativeQuantitySample) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-func (x *CumulativeQuantitySample) asSample() *raw.HKSample {
-	return &x.inner.HKQuantitySample.HKSample
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CumulativeQuantitySample) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-func (x *CumulativeQuantitySample) asObject() *raw.HKObject {
-	return &x.inner.HKQuantitySample.HKSample.HKObject
+// NewCumulativeQuantitySample creates a new CumulativeQuantitySample.
+func NewCumulativeQuantitySample() *CumulativeQuantitySample {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKCumulativeQuantitySample")), objc.RegisterName("new"))
+	return cumulativeQuantitySampleAdopt(_id)
+}
+
+func (x *CumulativeQuantitySample) SumQuantity() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sumQuantity"))
+	return QuantityFromID(_r)
 }
 
 // CumulativeQuantitySampleable is the interface implemented by [CumulativeQuantitySample], for mocking and DI.
 type CumulativeQuantitySampleable interface {
-	Unwrap() *raw.HKCumulativeQuantitySample
+	obj.Object
 	SumQuantity() *Quantity
 }
 

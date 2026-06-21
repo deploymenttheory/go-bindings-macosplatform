@@ -5,56 +5,71 @@
 package storekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that can retrieve localized information from the App Store about a specified list of products.
 //
-// ProductsRequest wraps [raw.SKProductsRequest] with a fluent Go API.
+// ProductsRequest is an idiomatic wrapper over the Objective-C class SKProductsRequest.
 type ProductsRequest struct {
-	inner *raw.SKProductsRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKProductsRequest].
-func (x *ProductsRequest) Unwrap() *raw.SKProductsRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProductsRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// ProductsRequestFromID adopts an existing object pointer as a ProductsRequest (nil for 0).
+// ProductsRequestFromID adopts an existing Objective-C object as a ProductsRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func ProductsRequestFromID(id objc.ID) *ProductsRequest {
 	if id == 0 {
 		return nil
 	}
-	return &ProductsRequest{inner: raw.SKProductsRequestFromID(id)}
+	x := &ProductsRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// productsRequestAdopt wraps an Objective-C object that this code just created as a
+// ProductsRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func productsRequestAdopt(id objc.ID) *ProductsRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &ProductsRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ProductsRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ProductsRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ProductsRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes the request with the set of product identifiers.
 //
-// NewProductsRequestWithProductIdentifiers creates a new [ProductsRequest].
-func NewProductsRequestWithProductIdentifiers(productIdentifiers *foundation.NSSet[*foundation.NSString]) *ProductsRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKProductsRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProductIdentifiers:"), productIdentifiers.Ptr())
-	return &ProductsRequest{inner: raw.SKProductsRequestFromID(_id)}
+// NewProductsRequestWithProductIdentifiers creates a new ProductsRequest.
+func NewProductsRequestWithProductIdentifiers(productIdentifiers obj.Object) *ProductsRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKProductsRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProductIdentifiers:"), objref.IDOf(productIdentifiers))
+	return productsRequestAdopt(_id)
 }
-
-// The delegate of the request object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *ProductsRequest) WithDelegate(delegate raw.SKRequestDelegate) *ProductsRequest {
-	x.inner.SKRequest.SetDelegate(delegate)
-	return x
-}
-
-func (x *ProductsRequest) asRequest() *raw.SKRequest { return &x.inner.SKRequest }
 
 // ProductsRequestable is the interface implemented by [ProductsRequest], for mocking and DI.
 type ProductsRequestable interface {
-	Unwrap() *raw.SKProductsRequest
-	WithDelegate(delegate raw.SKRequestDelegate) *ProductsRequest
+	obj.Object
 }
 
 var _ ProductsRequestable = (*ProductsRequest)(nil)

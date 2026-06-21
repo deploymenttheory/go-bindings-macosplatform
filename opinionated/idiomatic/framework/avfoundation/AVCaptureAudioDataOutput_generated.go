@@ -5,133 +5,133 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A capture output that records audio and provides access to audio sample buffers as they are recorded.
 //
-// CaptureAudioDataOutput wraps [raw.AVCaptureAudioDataOutput] with a fluent Go API.
+// CaptureAudioDataOutput is an idiomatic wrapper over the Objective-C class AVCaptureAudioDataOutput.
 type CaptureAudioDataOutput struct {
-	inner *raw.AVCaptureAudioDataOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureAudioDataOutput].
-func (x *CaptureAudioDataOutput) Unwrap() *raw.AVCaptureAudioDataOutput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureAudioDataOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureAudioDataOutputFromID adopts an existing object pointer as a CaptureAudioDataOutput (nil for 0).
+// CaptureAudioDataOutputFromID adopts an existing Objective-C object as a CaptureAudioDataOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureAudioDataOutputFromID(id objc.ID) *CaptureAudioDataOutput {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureAudioDataOutput{inner: raw.AVCaptureAudioDataOutputFromID(id)}
+	x := &CaptureAudioDataOutput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCaptureAudioDataOutput creates a new [CaptureAudioDataOutput].
+// captureAudioDataOutputAdopt wraps an Objective-C object that this code just created as a
+// CaptureAudioDataOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureAudioDataOutputAdopt(id objc.ID) *CaptureAudioDataOutput {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureAudioDataOutput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptureAudioDataOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureAudioDataOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureAudioDataOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptureAudioDataOutput creates a new CaptureAudioDataOutput.
 func NewCaptureAudioDataOutput() *CaptureAudioDataOutput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureAudioDataOutput")), objc.RegisterName("new"))
-	return &CaptureAudioDataOutput{inner: raw.AVCaptureAudioDataOutputFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureAudioDataOutput")), objc.RegisterName("new"))
+	return captureAudioDataOutputAdopt(_id)
 }
 
 // The settings used to decode or re-encode audio before it’s output.
 //
-// WithAudioSettings sets the audioSettings property and returns the receiver for chaining.
-func (x *CaptureAudioDataOutput) WithAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptureAudioDataOutput {
-	x.inner.SetAudioSettings(audioSettings)
+// WithAudioSettings sets audioSettings and returns the receiver so calls can be chained.
+func (x *CaptureAudioDataOutput) WithAudioSettings(audioSettings obj.Object) *CaptureAudioDataOutput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioSettings:"), objref.IDOf(audioSettings))
 	return x
 }
 
 // The audio channel layout tag of the audio sample buffers produced by the audio data output.
 //
-// WithSpatialAudioChannelLayoutTag sets the spatialAudioChannelLayoutTag property and returns the receiver for chaining.
-func (x *CaptureAudioDataOutput) WithSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag uint) *CaptureAudioDataOutput {
-	x.inner.SetSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag)
+// WithSpatialAudioChannelLayoutTag sets spatialAudioChannelLayoutTag and returns the receiver so calls can be chained.
+func (x *CaptureAudioDataOutput) WithSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag int) *CaptureAudioDataOutput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpatialAudioChannelLayoutTag:"), spatialAudioChannelLayoutTag)
 	return x
 }
 
 // A Boolean value that indicates whether to defer starting this capture output.
 //
-// WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
+// WithDeferredStartEnabled sets deferredStartEnabled and returns the receiver so calls can be chained.
 func (x *CaptureAudioDataOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioDataOutput {
-	x.inner.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
 	return x
 }
 
-// Sets the delegate that will accept captured buffers and the dispatch queue on which the delegate will be called.
-//
-// SetSampleBufferDelegateQueue calls the underlying SetSampleBufferDelegateQueue.
-func (x *CaptureAudioDataOutput) SetSampleBufferDelegateQueue(sampleBufferDelegate raw.AVCaptureAudioDataOutputSampleBufferDelegate, sampleBufferCallbackQueue *foundation.NSObject) {
-	x.inner.SetSampleBufferDelegateQueue(sampleBufferDelegate, sampleBufferCallbackQueue)
-}
-
 // Specifies the recommended settings for use with an AVAssetWriterInput.
-//
-// RecommendedAudioSettingsForAssetWriterWithOutputFileType calls the underlying RecommendedAudioSettingsForAssetWriterWithOutputFileType.
-func (x *CaptureAudioDataOutput) RecommendedAudioSettingsForAssetWriterWithOutputFileType(outputFileType *foundation.NSString) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.RecommendedAudioSettingsForAssetWriterWithOutputFileType(outputFileType)
+func (x *CaptureAudioDataOutput) RecommendedAudioSettingsForAssetWriterWithOutputFileType(outputFileType obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recommendedAudioSettingsForAssetWriterWithOutputFileType:"), objref.IDOf(outputFileType))
+	return obj.Wrap(_r)
 }
 
-// @property sampleBufferDelegate @abstract The receiver's delegate. @discussion The value of this property is an object conforming to the AVCaptureAudioDataOutputSampleBufferDelegate protocol that will receive sample buffers after they are captured. The delegate is set using the setSampleBufferDelegate:queue: method.
-//
-// SampleBufferDelegate calls the underlying SampleBufferDelegate.
-func (x *CaptureAudioDataOutput) SampleBufferDelegate() raw.AVCaptureAudioDataOutputSampleBufferDelegate {
-	return x.inner.SampleBufferDelegate()
+// The dispatch queue on which all sample buffer delegate methods will be called. The value of this property is a dispatch_queue_t. The queue is set using the setSampleBufferDelegate:queue: method.
+func (x *CaptureAudioDataOutput) SampleBufferCallbackQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferCallbackQueue"))
+	return obj.Wrap(_r)
 }
 
-// @property sampleBufferCallbackQueue @abstract The dispatch queue on which all sample buffer delegate methods will be called. @discussion The value of this property is a dispatch_queue_t. The queue is set using the setSampleBufferDelegate:queue: method.
-//
-// SampleBufferCallbackQueue calls the underlying SampleBufferCallbackQueue.
-func (x *CaptureAudioDataOutput) SampleBufferCallbackQueue() *foundation.NSObject {
-	return x.inner.SampleBufferCallbackQueue()
+// Specifies the settings used to decode or re-encode audio before it is output by the receiver. The value of this property is an NSDictionary containing values for audio settings keys defined in AVAudioSettings.h. When audioSettings is set to nil, the AVCaptureAudioDataOutput vends samples in their device native format.
+func (x *CaptureAudioDataOutput) AudioSettings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioSettings"))
+	return obj.Wrap(_r)
 }
 
-// @property audioSettings @abstract Specifies the settings used to decode or re-encode audio before it is output by the receiver. @discussion The value of this property is an NSDictionary containing values for audio settings keys defined in AVAudioSettings.h. When audioSettings is set to nil, the AVCaptureAudioDataOutput vends samples in their device native format.
-//
-// AudioSettings calls the underlying AudioSettings.
-func (x *CaptureAudioDataOutput) AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.AudioSettings()
-}
-
-// SetAudioSettings calls the underlying SetAudioSettings.
-func (x *CaptureAudioDataOutput) SetAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.SetAudioSettings(audioSettings)
+func (x *CaptureAudioDataOutput) SetAudioSettings(audioSettings obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioSettings:"), objref.IDOf(audioSettings))
 }
 
 // The audio channel layout tag of the audio sample buffers produced by the audio data output. When you set your audio data output's associated “AVCaptureDeviceInput/multichannelAudioMode“ property to “AVCaptureMultichannelAudioModeFirstOrderAmbisonics“, the “AVCaptureSession“ allows up to two “AVCaptureAudioDataOutput“ instances to be connected to the First-order Ambisonsics (FOA) input. If you connect a single “AVCaptureAudioDataOutput“ instance, you must configure its “AVCaptureAudioDataOutput/spatialAudioChannelLayoutTag“ property to produce either four channels of FOA audio or two channels of Stereo audio. If you connect two “AVCaptureAudioDataOutput“ instances, you must configure one to output four channels of FOA audio and the other to output two channels of Stereo audio. Thus, when you set your associated “AVCaptureDeviceInput/multichannelAudioMode“ property to “AVCaptureMultichannelAudioModeFirstOrderAmbisonics“, you must set your connected “AVCaptureAudioDataOutput“ instance's “AVCaptureAudioDataOutput/spatialAudioChannelLayoutTag“ property to either `kAudioChannelLayoutTag_Stereo` for stereo, or `(kAudioChannelLayoutTag_HOA_ACN_SN3D | 4)` for FOA (see <doc://com.apple.documentation/documentation/coreaudiotypes/audiochannellayouttag>). When you set your associated “AVCaptureDeviceInput/multichannelAudioMode“ to any other value, the “AVCaptureSession“ only supports one “AVCaptureAudioDataOutput“, and you may only set “AVCaptureAudioDataOutput/spatialAudioChannelLayoutTag“ to `kAudioChannelLayoutTag_Unknown` (the default value). Your “AVCaptureSession“ validates your app's adherence to the the above rules when you call “AVCaptureSession/startRunning:“ or “AVCaptureSession/commitConfiguration“ and throws a `NSInvalidArgumentException` if necessary.
-//
-// SpatialAudioChannelLayoutTag calls the underlying SpatialAudioChannelLayoutTag.
-func (x *CaptureAudioDataOutput) SpatialAudioChannelLayoutTag() uint {
-	return x.inner.SpatialAudioChannelLayoutTag()
+func (x *CaptureAudioDataOutput) SpatialAudioChannelLayoutTag() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("spatialAudioChannelLayoutTag"))
+	return _r
 }
 
-// SetSpatialAudioChannelLayoutTag calls the underlying SetSpatialAudioChannelLayoutTag.
-func (x *CaptureAudioDataOutput) SetSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag uint) {
-	x.inner.SetSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag)
-}
-
-func (x *CaptureAudioDataOutput) asCaptureOutput() *raw.AVCaptureOutput {
-	return &x.inner.AVCaptureOutput
+func (x *CaptureAudioDataOutput) SetSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpatialAudioChannelLayoutTag:"), spatialAudioChannelLayoutTag)
 }
 
 // CaptureAudioDataOutputable is the interface implemented by [CaptureAudioDataOutput], for mocking and DI.
 type CaptureAudioDataOutputable interface {
-	Unwrap() *raw.AVCaptureAudioDataOutput
-	WithAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID]) *CaptureAudioDataOutput
-	WithSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag uint) *CaptureAudioDataOutput
+	obj.Object
+	WithAudioSettings(audioSettings obj.Object) *CaptureAudioDataOutput
+	WithSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag int) *CaptureAudioDataOutput
 	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioDataOutput
-	SetSampleBufferDelegateQueue(sampleBufferDelegate raw.AVCaptureAudioDataOutputSampleBufferDelegate, sampleBufferCallbackQueue *foundation.NSObject)
-	RecommendedAudioSettingsForAssetWriterWithOutputFileType(outputFileType *foundation.NSString) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SampleBufferDelegate() raw.AVCaptureAudioDataOutputSampleBufferDelegate
-	SampleBufferCallbackQueue() *foundation.NSObject
-	AudioSettings() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SetAudioSettings(audioSettings *foundation.NSDictionary[*foundation.NSString, objc.ID])
-	SpatialAudioChannelLayoutTag() uint
-	SetSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag uint)
+	RecommendedAudioSettingsForAssetWriterWithOutputFileType(outputFileType obj.Object) obj.Object
+	SampleBufferCallbackQueue() obj.Object
+	AudioSettings() obj.Object
+	SetAudioSettings(audioSettings obj.Object)
+	SpatialAudioChannelLayoutTag() int
+	SetSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag int)
 }
 
 var _ CaptureAudioDataOutputable = (*CaptureAudioDataOutput)(nil)

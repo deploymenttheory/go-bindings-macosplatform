@@ -5,182 +5,202 @@
 package fskit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ItemSetAttributesRequest wraps [raw.FSItemSetAttributesRequest] with a fluent Go API.
+// ItemSetAttributesRequest is an idiomatic wrapper over the Objective-C class FSItemSetAttributesRequest.
 type ItemSetAttributesRequest struct {
-	inner *raw.FSItemSetAttributesRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSItemSetAttributesRequest].
-func (x *ItemSetAttributesRequest) Unwrap() *raw.FSItemSetAttributesRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ItemSetAttributesRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// ItemSetAttributesRequestFromID adopts an existing object pointer as a ItemSetAttributesRequest (nil for 0).
+// ItemSetAttributesRequestFromID adopts an existing Objective-C object as a ItemSetAttributesRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func ItemSetAttributesRequestFromID(id objc.ID) *ItemSetAttributesRequest {
 	if id == 0 {
 		return nil
 	}
-	return &ItemSetAttributesRequest{inner: raw.FSItemSetAttributesRequestFromID(id)}
+	x := &ItemSetAttributesRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewItemSetAttributesRequest creates a new [ItemSetAttributesRequest].
+// itemSetAttributesRequestAdopt wraps an Objective-C object that this code just created as a
+// ItemSetAttributesRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func itemSetAttributesRequestAdopt(id objc.ID) *ItemSetAttributesRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &ItemSetAttributesRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ItemSetAttributesRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ItemSetAttributesRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ItemSetAttributesRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewItemSetAttributesRequest creates a new ItemSetAttributesRequest.
 func NewItemSetAttributesRequest() *ItemSetAttributesRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSItemSetAttributesRequest")), objc.RegisterName("new"))
-	return &ItemSetAttributesRequest{inner: raw.FSItemSetAttributesRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("FSItemSetAttributesRequest")), objc.RegisterName("new"))
+	return itemSetAttributesRequestAdopt(_id)
 }
 
 // The attributes successfully used by the file system. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
 //
-// WithConsumedAttributes sets the consumedAttributes property and returns the receiver for chaining.
-func (x *ItemSetAttributesRequest) WithConsumedAttributes(consumedAttributes FSItemAttribute) *ItemSetAttributesRequest {
-	x.inner.SetConsumedAttributes(raw.FSItemAttribute(consumedAttributes))
+// WithConsumedAttributes sets consumedAttributes and returns the receiver so calls can be chained.
+func (x *ItemSetAttributesRequest) WithConsumedAttributes(consumedAttributes ItemAttribute) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConsumedAttributes:"), consumedAttributes)
 	return x
 }
 
 // The user identifier.
 //
-// WithUid sets the uid property and returns the receiver for chaining.
+// WithUid sets uid and returns the receiver so calls can be chained.
 func (x *ItemSetAttributesRequest) WithUid(uid uint32) *ItemSetAttributesRequest {
-	x.inner.FSItemAttributes.SetUid(uid)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUid:"), uid)
 	return x
 }
 
 // The group identifier.
 //
-// WithGid sets the gid property and returns the receiver for chaining.
+// WithGid sets gid and returns the receiver so calls can be chained.
 func (x *ItemSetAttributesRequest) WithGid(gid uint32) *ItemSetAttributesRequest {
-	x.inner.FSItemAttributes.SetGid(gid)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGid:"), gid)
 	return x
 }
 
 // The mode of the item. The mode is often used for `setuid`, `setgid`, and `sticky` bits.
 //
-// WithMode sets the mode property and returns the receiver for chaining.
+// WithMode sets mode and returns the receiver so calls can be chained.
 func (x *ItemSetAttributesRequest) WithMode(mode uint32) *ItemSetAttributesRequest {
-	x.inner.FSItemAttributes.SetMode(mode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
 	return x
 }
 
 // The item type, such as a regular file, directory, or symbolic link.
 //
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *ItemSetAttributesRequest) WithType(type_ FSItemType) *ItemSetAttributesRequest {
-	x.inner.FSItemAttributes.SetType(raw.FSItemType(type_))
+// WithType sets type_ and returns the receiver so calls can be chained.
+func (x *ItemSetAttributesRequest) WithType(type_ ItemType) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
 // The number of hard links to the item.
 //
-// WithLinkCount sets the linkCount property and returns the receiver for chaining.
+// WithLinkCount sets linkCount and returns the receiver so calls can be chained.
 func (x *ItemSetAttributesRequest) WithLinkCount(linkCount uint32) *ItemSetAttributesRequest {
-	x.inner.FSItemAttributes.SetLinkCount(linkCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinkCount:"), linkCount)
 	return x
 }
 
 // The item's behavior flags. See `st_flags` in `stat.h` for flag definitions.
 //
-// WithFlags sets the flags property and returns the receiver for chaining.
+// WithFlags sets flags and returns the receiver so calls can be chained.
 func (x *ItemSetAttributesRequest) WithFlags(flags uint32) *ItemSetAttributesRequest {
-	x.inner.FSItemAttributes.SetFlags(flags)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), flags)
 	return x
 }
 
 // The item's size.
 //
-// WithSize sets the size property and returns the receiver for chaining.
+// WithSize sets size and returns the receiver so calls can be chained.
 func (x *ItemSetAttributesRequest) WithSize(size uint64) *ItemSetAttributesRequest {
-	x.inner.FSItemAttributes.SetSize(size)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
 	return x
 }
 
 // The item's allocated size.
 //
-// WithAllocSize sets the allocSize property and returns the receiver for chaining.
+// WithAllocSize sets allocSize and returns the receiver so calls can be chained.
 func (x *ItemSetAttributesRequest) WithAllocSize(allocSize uint64) *ItemSetAttributesRequest {
-	x.inner.FSItemAttributes.SetAllocSize(allocSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllocSize:"), allocSize)
 	return x
 }
 
 // The item's file identifier.
 //
-// WithFileID sets the fileID property and returns the receiver for chaining.
-func (x *ItemSetAttributesRequest) WithFileID(fileID FSItemID) *ItemSetAttributesRequest {
-	x.inner.FSItemAttributes.SetFileID(raw.FSItemID(fileID))
+// WithFileID sets fileID and returns the receiver so calls can be chained.
+func (x *ItemSetAttributesRequest) WithFileID(fileID ItemID) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileID:"), fileID)
 	return x
 }
 
 // The identifier of the item's parent.
 //
-// WithParentID sets the parentID property and returns the receiver for chaining.
-func (x *ItemSetAttributesRequest) WithParentID(parentID FSItemID) *ItemSetAttributesRequest {
-	x.inner.FSItemAttributes.SetParentID(raw.FSItemID(parentID))
+// WithParentID sets parentID and returns the receiver so calls can be chained.
+func (x *ItemSetAttributesRequest) WithParentID(parentID ItemID) *ItemSetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentID:"), parentID)
 	return x
 }
 
 // A Boolean value that indicates whether the item supports a limited set of extended attributes.
 //
-// WithSupportsLimitedXAttrs sets the supportsLimitedXAttrs property and returns the receiver for chaining.
+// WithSupportsLimitedXAttrs sets supportsLimitedXAttrs and returns the receiver so calls can be chained.
 func (x *ItemSetAttributesRequest) WithSupportsLimitedXAttrs(supportsLimitedXAttrs bool) *ItemSetAttributesRequest {
-	x.inner.FSItemAttributes.SetSupportsLimitedXAttrs(supportsLimitedXAttrs)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsLimitedXAttrs:"), supportsLimitedXAttrs)
 	return x
 }
 
 // A Boolean value that indicates whether the file system overrides the per-volume settings for kernel offloaded I/O for a specific file. This property has no meaning if the volume doesn't conform to “FSVolumeKernelOffloadedIOOperations“.
 //
-// WithInhibitKernelOffloadedIO sets the inhibitKernelOffloadedIO property and returns the receiver for chaining.
+// WithInhibitKernelOffloadedIO sets inhibitKernelOffloadedIO and returns the receiver so calls can be chained.
 func (x *ItemSetAttributesRequest) WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) *ItemSetAttributesRequest {
-	x.inner.FSItemAttributes.SetInhibitKernelOffloadedIO(inhibitKernelOffloadedIO)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInhibitKernelOffloadedIO:"), inhibitKernelOffloadedIO)
 	return x
 }
 
 // A method that indicates whether the file system used the given attribute. - Parameter attribute: The “FSItemAttribute“ to check.
-//
-// WasAttributeConsumed calls the underlying WasAttributeConsumed.
-func (x *ItemSetAttributesRequest) WasAttributeConsumed(attribute FSItemAttribute) bool {
-	return x.inner.WasAttributeConsumed(raw.FSItemAttribute(attribute))
+func (x *ItemSetAttributesRequest) WasAttributeConsumed(attribute ItemAttribute) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wasAttributeConsumed:"), attribute)
+	return _r
 }
 
 // The attributes successfully used by the file system. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
-//
-// ConsumedAttributes calls the underlying ConsumedAttributes.
-func (x *ItemSetAttributesRequest) ConsumedAttributes() FSItemAttribute {
-	return FSItemAttribute(x.inner.ConsumedAttributes())
+func (x *ItemSetAttributesRequest) ConsumedAttributes() ItemAttribute {
+	_r := objc.Send[ItemAttribute](objref.IDOf(x), objc.RegisterName("consumedAttributes"))
+	return _r
 }
 
-// SetConsumedAttributes calls the underlying SetConsumedAttributes.
-func (x *ItemSetAttributesRequest) SetConsumedAttributes(consumedAttributes FSItemAttribute) {
-	x.inner.SetConsumedAttributes(raw.FSItemAttribute(consumedAttributes))
-}
-
-func (x *ItemSetAttributesRequest) asItemAttributes() *raw.FSItemAttributes {
-	return &x.inner.FSItemAttributes
+func (x *ItemSetAttributesRequest) SetConsumedAttributes(consumedAttributes ItemAttribute) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConsumedAttributes:"), consumedAttributes)
 }
 
 // ItemSetAttributesRequestable is the interface implemented by [ItemSetAttributesRequest], for mocking and DI.
 type ItemSetAttributesRequestable interface {
-	Unwrap() *raw.FSItemSetAttributesRequest
-	WithConsumedAttributes(consumedAttributes FSItemAttribute) *ItemSetAttributesRequest
+	obj.Object
+	WithConsumedAttributes(consumedAttributes ItemAttribute) *ItemSetAttributesRequest
 	WithUid(uid uint32) *ItemSetAttributesRequest
 	WithGid(gid uint32) *ItemSetAttributesRequest
 	WithMode(mode uint32) *ItemSetAttributesRequest
-	WithType(type_ FSItemType) *ItemSetAttributesRequest
+	WithType(type_ ItemType) *ItemSetAttributesRequest
 	WithLinkCount(linkCount uint32) *ItemSetAttributesRequest
 	WithFlags(flags uint32) *ItemSetAttributesRequest
 	WithSize(size uint64) *ItemSetAttributesRequest
 	WithAllocSize(allocSize uint64) *ItemSetAttributesRequest
-	WithFileID(fileID FSItemID) *ItemSetAttributesRequest
-	WithParentID(parentID FSItemID) *ItemSetAttributesRequest
+	WithFileID(fileID ItemID) *ItemSetAttributesRequest
+	WithParentID(parentID ItemID) *ItemSetAttributesRequest
 	WithSupportsLimitedXAttrs(supportsLimitedXAttrs bool) *ItemSetAttributesRequest
 	WithInhibitKernelOffloadedIO(inhibitKernelOffloadedIO bool) *ItemSetAttributesRequest
-	WasAttributeConsumed(attribute FSItemAttribute) bool
-	ConsumedAttributes() FSItemAttribute
-	SetConsumedAttributes(consumedAttributes FSItemAttribute)
+	WasAttributeConsumed(attribute ItemAttribute) bool
+	ConsumedAttributes() ItemAttribute
+	SetConsumedAttributes(consumedAttributes ItemAttribute)
 }
 
 var _ ItemSetAttributesRequestable = (*ItemSetAttributesRequest)(nil)

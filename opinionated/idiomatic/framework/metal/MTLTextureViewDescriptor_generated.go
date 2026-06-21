@@ -5,155 +5,108 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// TextureViewDescriptor wraps [raw.MTLTextureViewDescriptor] with a fluent Go API.
+// TextureViewDescriptor is an idiomatic wrapper over the Objective-C class MTLTextureViewDescriptor.
 type TextureViewDescriptor struct {
-	inner *raw.MTLTextureViewDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLTextureViewDescriptor].
-func (x *TextureViewDescriptor) Unwrap() *raw.MTLTextureViewDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextureViewDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// TextureViewDescriptorFromID adopts an existing object pointer as a TextureViewDescriptor (nil for 0).
+// TextureViewDescriptorFromID adopts an existing Objective-C object as a TextureViewDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func TextureViewDescriptorFromID(id objc.ID) *TextureViewDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &TextureViewDescriptor{inner: raw.MTLTextureViewDescriptorFromID(id)}
+	x := &TextureViewDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTextureViewDescriptor creates a new [TextureViewDescriptor].
+// textureViewDescriptorAdopt wraps an Objective-C object that this code just created as a
+// TextureViewDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textureViewDescriptorAdopt(id objc.ID) *TextureViewDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &TextureViewDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TextureViewDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextureViewDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextureViewDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTextureViewDescriptor creates a new TextureViewDescriptor.
 func NewTextureViewDescriptor() *TextureViewDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLTextureViewDescriptor")), objc.RegisterName("new"))
-	return &TextureViewDescriptor{inner: raw.MTLTextureViewDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLTextureViewDescriptor")), objc.RegisterName("new"))
+	return textureViewDescriptorAdopt(_id)
 }
 
-// @property pixelFormat @abstract A desired pixel format of a texture view.
+// A desired pixel format of a texture view.
 //
-// WithPixelFormat sets the pixelFormat property and returns the receiver for chaining.
-func (x *TextureViewDescriptor) WithPixelFormat(pixelFormat MTLPixelFormat) *TextureViewDescriptor {
-	x.inner.SetPixelFormat(raw.MTLPixelFormat(pixelFormat))
+// WithPixelFormat sets pixelFormat and returns the receiver so calls can be chained.
+func (x *TextureViewDescriptor) WithPixelFormat(pixelFormat PixelFormat) *TextureViewDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelFormat:"), pixelFormat)
 	return x
 }
 
-// @property textureType @abstract A desired texture view of a texture view.
+// A desired texture view of a texture view.
 //
-// WithTextureType sets the textureType property and returns the receiver for chaining.
-func (x *TextureViewDescriptor) WithTextureType(textureType MTLTextureType) *TextureViewDescriptor {
-	x.inner.SetTextureType(raw.MTLTextureType(textureType))
+// WithTextureType sets textureType and returns the receiver so calls can be chained.
+func (x *TextureViewDescriptor) WithTextureType(textureType TextureType) *TextureViewDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureType:"), textureType)
 	return x
 }
 
-// A desired range of mip levels of a texture view.
-//
-// WithLevelRange sets the levelRange property and returns the receiver for chaining.
-func (x *TextureViewDescriptor) WithLevelRange(levelRange foundation.NSRange) *TextureViewDescriptor {
-	x.inner.SetLevelRange(levelRange)
-	return x
+// A desired pixel format of a texture view.
+func (x *TextureViewDescriptor) PixelFormat() PixelFormat {
+	_r := objc.Send[PixelFormat](objref.IDOf(x), objc.RegisterName("pixelFormat"))
+	return _r
 }
 
-// A desired range of slices of a texture view.
-//
-// WithSliceRange sets the sliceRange property and returns the receiver for chaining.
-func (x *TextureViewDescriptor) WithSliceRange(sliceRange foundation.NSRange) *TextureViewDescriptor {
-	x.inner.SetSliceRange(sliceRange)
-	return x
+func (x *TextureViewDescriptor) SetPixelFormat(pixelFormat PixelFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelFormat:"), pixelFormat)
 }
 
-// @property swizzle @abstract A desired swizzle format of a texture view.
-//
-// WithSwizzle sets the swizzle property and returns the receiver for chaining.
-func (x *TextureViewDescriptor) WithSwizzle(swizzle raw.MTLTextureSwizzleChannels) *TextureViewDescriptor {
-	x.inner.SetSwizzle(swizzle)
-	return x
+// A desired texture view of a texture view.
+func (x *TextureViewDescriptor) TextureType() TextureType {
+	_r := objc.Send[TextureType](objref.IDOf(x), objc.RegisterName("textureType"))
+	return _r
 }
 
-// @property pixelFormat @abstract A desired pixel format of a texture view.
-//
-// PixelFormat calls the underlying PixelFormat.
-func (x *TextureViewDescriptor) PixelFormat() MTLPixelFormat {
-	return MTLPixelFormat(x.inner.PixelFormat())
-}
-
-// SetPixelFormat calls the underlying SetPixelFormat.
-func (x *TextureViewDescriptor) SetPixelFormat(pixelFormat MTLPixelFormat) {
-	x.inner.SetPixelFormat(raw.MTLPixelFormat(pixelFormat))
-}
-
-// @property textureType @abstract A desired texture view of a texture view.
-//
-// TextureType calls the underlying TextureType.
-func (x *TextureViewDescriptor) TextureType() MTLTextureType {
-	return MTLTextureType(x.inner.TextureType())
-}
-
-// SetTextureType calls the underlying SetTextureType.
-func (x *TextureViewDescriptor) SetTextureType(textureType MTLTextureType) {
-	x.inner.SetTextureType(raw.MTLTextureType(textureType))
-}
-
-// @property levelRange @abstract A desired range of mip levels of a texture view.
-//
-// LevelRange calls the underlying LevelRange.
-func (x *TextureViewDescriptor) LevelRange() foundation.NSRange {
-	return x.inner.LevelRange()
-}
-
-// SetLevelRange calls the underlying SetLevelRange.
-func (x *TextureViewDescriptor) SetLevelRange(levelRange foundation.NSRange) {
-	x.inner.SetLevelRange(levelRange)
-}
-
-// @property sliceRange @abstract A desired range of slices of a texture view.
-//
-// SliceRange calls the underlying SliceRange.
-func (x *TextureViewDescriptor) SliceRange() foundation.NSRange {
-	return x.inner.SliceRange()
-}
-
-// SetSliceRange calls the underlying SetSliceRange.
-func (x *TextureViewDescriptor) SetSliceRange(sliceRange foundation.NSRange) {
-	x.inner.SetSliceRange(sliceRange)
-}
-
-// @property swizzle @abstract A desired swizzle format of a texture view.
-//
-// Swizzle calls the underlying Swizzle.
-func (x *TextureViewDescriptor) Swizzle() raw.MTLTextureSwizzleChannels {
-	return x.inner.Swizzle()
-}
-
-// SetSwizzle calls the underlying SetSwizzle.
-func (x *TextureViewDescriptor) SetSwizzle(swizzle raw.MTLTextureSwizzleChannels) {
-	x.inner.SetSwizzle(swizzle)
+func (x *TextureViewDescriptor) SetTextureType(textureType TextureType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureType:"), textureType)
 }
 
 // TextureViewDescriptorable is the interface implemented by [TextureViewDescriptor], for mocking and DI.
 type TextureViewDescriptorable interface {
-	Unwrap() *raw.MTLTextureViewDescriptor
-	WithPixelFormat(pixelFormat MTLPixelFormat) *TextureViewDescriptor
-	WithTextureType(textureType MTLTextureType) *TextureViewDescriptor
-	WithLevelRange(levelRange foundation.NSRange) *TextureViewDescriptor
-	WithSliceRange(sliceRange foundation.NSRange) *TextureViewDescriptor
-	WithSwizzle(swizzle raw.MTLTextureSwizzleChannels) *TextureViewDescriptor
-	PixelFormat() MTLPixelFormat
-	SetPixelFormat(pixelFormat MTLPixelFormat)
-	TextureType() MTLTextureType
-	SetTextureType(textureType MTLTextureType)
-	LevelRange() foundation.NSRange
-	SetLevelRange(levelRange foundation.NSRange)
-	SliceRange() foundation.NSRange
-	SetSliceRange(sliceRange foundation.NSRange)
-	Swizzle() raw.MTLTextureSwizzleChannels
-	SetSwizzle(swizzle raw.MTLTextureSwizzleChannels)
+	obj.Object
+	WithPixelFormat(pixelFormat PixelFormat) *TextureViewDescriptor
+	WithTextureType(textureType TextureType) *TextureViewDescriptor
+	PixelFormat() PixelFormat
+	SetPixelFormat(pixelFormat PixelFormat)
+	TextureType() TextureType
+	SetTextureType(textureType TextureType)
 }
 
 var _ TextureViewDescriptorable = (*TextureViewDescriptor)(nil)

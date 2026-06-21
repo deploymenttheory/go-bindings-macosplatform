@@ -5,65 +5,88 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Groups together parameters for creating a command allocator.
 //
-// MTL4CommandAllocatorDescriptor wraps [raw.MTL4CommandAllocatorDescriptor] with a fluent Go API.
+// MTL4CommandAllocatorDescriptor is an idiomatic wrapper over the Objective-C class MTL4CommandAllocatorDescriptor.
 type MTL4CommandAllocatorDescriptor struct {
-	inner *raw.MTL4CommandAllocatorDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTL4CommandAllocatorDescriptor].
-func (x *MTL4CommandAllocatorDescriptor) Unwrap() *raw.MTL4CommandAllocatorDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTL4CommandAllocatorDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MTL4CommandAllocatorDescriptorFromID adopts an existing object pointer as a MTL4CommandAllocatorDescriptor (nil for 0).
+// MTL4CommandAllocatorDescriptorFromID adopts an existing Objective-C object as a MTL4CommandAllocatorDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MTL4CommandAllocatorDescriptorFromID(id objc.ID) *MTL4CommandAllocatorDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MTL4CommandAllocatorDescriptor{inner: raw.MTL4CommandAllocatorDescriptorFromID(id)}
+	x := &MTL4CommandAllocatorDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTL4CommandAllocatorDescriptor creates a new [MTL4CommandAllocatorDescriptor].
+// mTL4CommandAllocatorDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MTL4CommandAllocatorDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTL4CommandAllocatorDescriptorAdopt(id objc.ID) *MTL4CommandAllocatorDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MTL4CommandAllocatorDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTL4CommandAllocatorDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTL4CommandAllocatorDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTL4CommandAllocatorDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTL4CommandAllocatorDescriptor creates a new MTL4CommandAllocatorDescriptor.
 func NewMTL4CommandAllocatorDescriptor() *MTL4CommandAllocatorDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4CommandAllocatorDescriptor")), objc.RegisterName("new"))
-	return &MTL4CommandAllocatorDescriptor{inner: raw.MTL4CommandAllocatorDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTL4CommandAllocatorDescriptor")), objc.RegisterName("new"))
+	return mTL4CommandAllocatorDescriptorAdopt(_id)
 }
 
 // An optional label you can assign to the command allocator to aid debugging.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *MTL4CommandAllocatorDescriptor) WithLabel(label string) *MTL4CommandAllocatorDescriptor {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Label calls the underlying Label.
 func (x *MTL4CommandAllocatorDescriptor) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
 func (x *MTL4CommandAllocatorDescriptor) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
 // MTL4CommandAllocatorDescriptorable is the interface implemented by [MTL4CommandAllocatorDescriptor], for mocking and DI.
 type MTL4CommandAllocatorDescriptorable interface {
-	Unwrap() *raw.MTL4CommandAllocatorDescriptor
+	obj.Object
 	WithLabel(label string) *MTL4CommandAllocatorDescriptor
 	Label() string
 	SetLabel(label string)

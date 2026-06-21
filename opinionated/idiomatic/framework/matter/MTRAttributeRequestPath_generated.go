@@ -5,58 +5,84 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRAttributeRequestPath wraps [raw.MTRAttributeRequestPath] with a fluent Go API.
+// MTRAttributeRequestPath is an idiomatic wrapper over the Objective-C class MTRAttributeRequestPath.
 type MTRAttributeRequestPath struct {
-	inner *raw.MTRAttributeRequestPath
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRAttributeRequestPath].
-func (x *MTRAttributeRequestPath) Unwrap() *raw.MTRAttributeRequestPath { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAttributeRequestPath) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRAttributeRequestPathFromID adopts an existing object pointer as a MTRAttributeRequestPath (nil for 0).
+// MTRAttributeRequestPathFromID adopts an existing Objective-C object as a MTRAttributeRequestPath
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRAttributeRequestPathFromID(id objc.ID) *MTRAttributeRequestPath {
 	if id == 0 {
 		return nil
 	}
-	return &MTRAttributeRequestPath{inner: raw.MTRAttributeRequestPathFromID(id)}
+	x := &MTRAttributeRequestPath{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRAttributeRequestPath creates a new [MTRAttributeRequestPath].
+// mTRAttributeRequestPathAdopt wraps an Objective-C object that this code just created as a
+// MTRAttributeRequestPath (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRAttributeRequestPathAdopt(id objc.ID) *MTRAttributeRequestPath {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRAttributeRequestPath{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRAttributeRequestPath) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRAttributeRequestPath) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRAttributeRequestPath) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRAttributeRequestPath creates a new MTRAttributeRequestPath.
 func NewMTRAttributeRequestPath() *MTRAttributeRequestPath {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAttributeRequestPath")), objc.RegisterName("new"))
-	return &MTRAttributeRequestPath{inner: raw.MTRAttributeRequestPathFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRAttributeRequestPath")), objc.RegisterName("new"))
+	return mTRAttributeRequestPathAdopt(_id)
 }
 
-// Endpoint calls the underlying Endpoint.
-func (x *MTRAttributeRequestPath) Endpoint() *foundation.NSNumber {
-	return x.inner.Endpoint()
+func (x *MTRAttributeRequestPath) Endpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
+	return obj.Wrap(_r)
 }
 
-// Cluster calls the underlying Cluster.
-func (x *MTRAttributeRequestPath) Cluster() *foundation.NSNumber {
-	return x.inner.Cluster()
+func (x *MTRAttributeRequestPath) Cluster() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cluster"))
+	return obj.Wrap(_r)
 }
 
-// Attribute calls the underlying Attribute.
-func (x *MTRAttributeRequestPath) Attribute() *foundation.NSNumber {
-	return x.inner.Attribute()
+func (x *MTRAttributeRequestPath) Attribute() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attribute"))
+	return obj.Wrap(_r)
 }
 
 // MTRAttributeRequestPathable is the interface implemented by [MTRAttributeRequestPath], for mocking and DI.
 type MTRAttributeRequestPathable interface {
-	Unwrap() *raw.MTRAttributeRequestPath
-	Endpoint() *foundation.NSNumber
-	Cluster() *foundation.NSNumber
-	Attribute() *foundation.NSNumber
+	obj.Object
+	Endpoint() obj.Object
+	Cluster() obj.Object
+	Attribute() obj.Object
 }
 
 var _ MTRAttributeRequestPathable = (*MTRAttributeRequestPath)(nil)

@@ -5,62 +5,68 @@
 package sharedwithyoucore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains the shared collaboration coordinator.
 //
-// CollaborationCoordinator wraps [raw.SWCollaborationCoordinator] with a fluent Go API.
+// CollaborationCoordinator is an idiomatic wrapper over the Objective-C class SWCollaborationCoordinator.
 type CollaborationCoordinator struct {
-	inner *raw.SWCollaborationCoordinator
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SWCollaborationCoordinator].
-func (x *CollaborationCoordinator) Unwrap() *raw.SWCollaborationCoordinator { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollaborationCoordinator) ID() objc.ID { return x.inner.Ptr() }
-
-// CollaborationCoordinatorFromID adopts an existing object pointer as a CollaborationCoordinator (nil for 0).
+// CollaborationCoordinatorFromID adopts an existing Objective-C object as a CollaborationCoordinator
+// (nil for 0), retaining it and registering a release finalizer.
 func CollaborationCoordinatorFromID(id objc.ID) *CollaborationCoordinator {
 	if id == 0 {
 		return nil
 	}
-	return &CollaborationCoordinator{inner: raw.SWCollaborationCoordinatorFromID(id)}
-}
-
-// NewCollaborationCoordinator creates a new [CollaborationCoordinator].
-func NewCollaborationCoordinator() *CollaborationCoordinator {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SWCollaborationCoordinator")), objc.RegisterName("new"))
-	return &CollaborationCoordinator{inner: raw.SWCollaborationCoordinatorFromID(_id)}
-}
-
-// The collaboration action handler.
-//
-// WithActionHandler sets the actionHandler property and returns the receiver for chaining.
-func (x *CollaborationCoordinator) WithActionHandler(actionHandler raw.SWCollaborationActionHandler) *CollaborationCoordinator {
-	x.inner.SetActionHandler(actionHandler)
+	x := &CollaborationCoordinator{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// ActionHandler calls the underlying ActionHandler.
-func (x *CollaborationCoordinator) ActionHandler() raw.SWCollaborationActionHandler {
-	return x.inner.ActionHandler()
+// collaborationCoordinatorAdopt wraps an Objective-C object that this code just created as a
+// CollaborationCoordinator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collaborationCoordinatorAdopt(id objc.ID) *CollaborationCoordinator {
+	if id == 0 {
+		return nil
+	}
+	x := &CollaborationCoordinator{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetActionHandler calls the underlying SetActionHandler.
-func (x *CollaborationCoordinator) SetActionHandler(actionHandler raw.SWCollaborationActionHandler) {
-	x.inner.SetActionHandler(actionHandler)
+// Description returns the object's -description text.
+func (x *CollaborationCoordinator) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollaborationCoordinator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollaborationCoordinator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCollaborationCoordinator creates a new CollaborationCoordinator.
+func NewCollaborationCoordinator() *CollaborationCoordinator {
+	_id := objc.Send[objc.ID](objc.ID(_class("SWCollaborationCoordinator")), objc.RegisterName("new"))
+	return collaborationCoordinatorAdopt(_id)
 }
 
 // CollaborationCoordinatorable is the interface implemented by [CollaborationCoordinator], for mocking and DI.
 type CollaborationCoordinatorable interface {
-	Unwrap() *raw.SWCollaborationCoordinator
-	WithActionHandler(actionHandler raw.SWCollaborationActionHandler) *CollaborationCoordinator
-	ActionHandler() raw.SWCollaborationActionHandler
-	SetActionHandler(actionHandler raw.SWCollaborationActionHandler)
+	obj.Object
 }
 
 var _ CollaborationCoordinatorable = (*CollaborationCoordinator)(nil)

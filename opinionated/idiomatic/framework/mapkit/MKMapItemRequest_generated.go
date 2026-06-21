@@ -5,53 +5,76 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A utility class you use to request additional information about a map feature.
 //
-// MapItemRequest wraps [raw.MKMapItemRequest] with a fluent Go API.
+// MapItemRequest is an idiomatic wrapper over the Objective-C class MKMapItemRequest.
 type MapItemRequest struct {
-	inner *raw.MKMapItemRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKMapItemRequest].
-func (x *MapItemRequest) Unwrap() *raw.MKMapItemRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MapItemRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// MapItemRequestFromID adopts an existing object pointer as a MapItemRequest (nil for 0).
+// MapItemRequestFromID adopts an existing Objective-C object as a MapItemRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func MapItemRequestFromID(id objc.ID) *MapItemRequest {
 	if id == 0 {
 		return nil
 	}
-	return &MapItemRequest{inner: raw.MKMapItemRequestFromID(id)}
+	x := &MapItemRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mapItemRequestAdopt wraps an Objective-C object that this code just created as a
+// MapItemRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mapItemRequestAdopt(id objc.ID) *MapItemRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &MapItemRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MapItemRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MapItemRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MapItemRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Create a request with a map item identifier.
 //
-// NewMapItemRequestWithMapItemIdentifier creates a new [MapItemRequest].
-func NewMapItemRequestWithMapItemIdentifier(identifier *raw.MKMapItemIdentifier) *MapItemRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapItemRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItemIdentifier:"), identifier.Ptr())
-	return &MapItemRequest{inner: raw.MKMapItemRequestFromID(_id)}
+// NewMapItemRequestWithMapItemIdentifier creates a new MapItemRequest.
+func NewMapItemRequestWithMapItemIdentifier(identifier *MapItemIdentifier) *MapItemRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItemRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItemIdentifier:"), objref.IDOf(identifier))
+	return mapItemRequestAdopt(_id)
 }
 
-// MapItemIdentifier calls the underlying MapItemIdentifier.
 func (x *MapItemRequest) MapItemIdentifier() *MapItemIdentifier {
-	_r := x.inner.MapItemIdentifier()
-	if _r == nil {
-		return nil
-	}
-	return &MapItemIdentifier{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapItemIdentifier"))
+	return MapItemIdentifierFromID(_r)
 }
 
 // MapItemRequestable is the interface implemented by [MapItemRequest], for mocking and DI.
 type MapItemRequestable interface {
-	Unwrap() *raw.MKMapItemRequest
+	obj.Object
 	MapItemIdentifier() *MapItemIdentifier
 }
 

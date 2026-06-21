@@ -5,466 +5,478 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An NSImageCell object displays a single image (encapsulated in an NSImage object) in a frame. This class provides methods for choosing the frame and for aligning and scaling the image to fit the frame.
 //
-// ImageCell wraps [raw.NSImageCell] with a fluent Go API.
+// ImageCell is an idiomatic wrapper over the Objective-C class NSImageCell.
 type ImageCell struct {
-	inner *raw.NSImageCell
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSImageCell].
-func (x *ImageCell) Unwrap() *raw.NSImageCell { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageCell) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageCellFromID adopts an existing object pointer as a ImageCell (nil for 0).
+// ImageCellFromID adopts an existing Objective-C object as a ImageCell
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageCellFromID(id objc.ID) *ImageCell {
 	if id == 0 {
 		return nil
 	}
-	return &ImageCell{inner: raw.NSImageCellFromID(id)}
+	x := &ImageCell{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewImageCell creates a new [ImageCell].
+// imageCellAdopt wraps an Objective-C object that this code just created as a
+// ImageCell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageCellAdopt(id objc.ID) *ImageCell {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageCell{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ImageCell) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageCell) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageCell) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageCell creates a new ImageCell.
 func NewImageCell() *ImageCell {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSImageCell")), objc.RegisterName("new"))
-	return &ImageCell{inner: raw.NSImageCellFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSImageCell")), objc.RegisterName("new"))
+	return imageCellAdopt(_id)
 }
 
 // The alignment of the receiver’s image relative to its frame.
 //
-// WithImageAlignment sets the imageAlignment property and returns the receiver for chaining.
-func (x *ImageCell) WithImageAlignment(imageAlignment NSImageAlignment) *ImageCell {
-	x.inner.SetImageAlignment(raw.NSImageAlignment(imageAlignment))
+// WithImageAlignment sets imageAlignment and returns the receiver so calls can be chained.
+func (x *ImageCell) WithImageAlignment(imageAlignment ImageAlignment) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageAlignment:"), imageAlignment)
 	return x
 }
 
 // The scaling mode used to fit the receiver’s image into the frame.
 //
-// WithImageScaling sets the imageScaling property and returns the receiver for chaining.
-func (x *ImageCell) WithImageScaling(imageScaling NSImageScaling) *ImageCell {
-	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
+// WithImageScaling sets imageScaling and returns the receiver so calls can be chained.
+func (x *ImageCell) WithImageScaling(imageScaling ImageScaling) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageScaling:"), imageScaling)
 	return x
 }
 
 // The style of the frame that borders the image.
 //
-// WithImageFrameStyle sets the imageFrameStyle property and returns the receiver for chaining.
-func (x *ImageCell) WithImageFrameStyle(imageFrameStyle NSImageFrameStyle) *ImageCell {
-	x.inner.SetImageFrameStyle(raw.NSImageFrameStyle(imageFrameStyle))
+// WithImageFrameStyle sets imageFrameStyle and returns the receiver so calls can be chained.
+func (x *ImageCell) WithImageFrameStyle(imageFrameStyle ImageFrameStyle) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageFrameStyle:"), imageFrameStyle)
 	return x
 }
 
 // The view associated with the cell.
 //
-// WithControlView sets the controlView property and returns the receiver for chaining.
+// WithControlView sets controlView and returns the receiver so calls can be chained.
 func (x *ImageCell) WithControlView(controlView ViewProvider) *ImageCell {
-	x.inner.NSCell.SetControlView(controlView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	return x
 }
 
 // The type of the cell.
 //
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *ImageCell) WithType(type_ NSCellType) *ImageCell {
-	x.inner.NSCell.SetType(raw.NSCellType(type_))
+// WithType sets type_ and returns the receiver so calls can be chained.
+func (x *ImageCell) WithType(type_ CellType) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
 // The cell’s current state.
 //
-// WithState sets the state property and returns the receiver for chaining.
+// WithState sets state and returns the receiver so calls can be chained.
 func (x *ImageCell) WithState(state int) *ImageCell {
-	x.inner.NSCell.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
 // The object that receives the cell’s action messages.
 //
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *ImageCell) WithTarget(target objc.ID) *ImageCell {
-	x.inner.NSCell.SetTarget(target)
-	return x
-}
-
-// The action performed by the cell.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *ImageCell) WithAction(action objc.SEL) *ImageCell {
-	x.inner.NSCell.SetAction(action)
+// WithTarget sets target and returns the receiver so calls can be chained.
+func (x *ImageCell) WithTarget(target obj.Object) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
 // A tag for identifying the cell.
 //
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag sets tag and returns the receiver so calls can be chained.
 func (x *ImageCell) WithTag(tag int) *ImageCell {
-	x.inner.NSCell.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
 // The cell’s title text.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *ImageCell) WithTitle(title string) *ImageCell {
-	x.inner.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // A Boolean value indicating whether the cell is currently enabled.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *ImageCell) WithEnabled(enabled bool) *ImageCell {
-	x.inner.NSCell.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 //
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous sets continuous and returns the receiver so calls can be chained.
 func (x *ImageCell) WithContinuous(continuous bool) *ImageCell {
-	x.inner.NSCell.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
 // A Boolean value indicating whether the cell is editable.
 //
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable sets editable and returns the receiver so calls can be chained.
 func (x *ImageCell) WithEditable(editable bool) *ImageCell {
-	x.inner.NSCell.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
 // A Boolean value indicating whether the cell’s text can be selected.
 //
-// WithSelectable sets the selectable property and returns the receiver for chaining.
+// WithSelectable sets selectable and returns the receiver so calls can be chained.
 func (x *ImageCell) WithSelectable(selectable bool) *ImageCell {
-	x.inner.NSCell.SetSelectable(selectable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
 // A Boolean value indicating whether the cell draws itself outlined with a plain border.
 //
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered sets bordered and returns the receiver so calls can be chained.
 func (x *ImageCell) WithBordered(bordered bool) *ImageCell {
-	x.inner.NSCell.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
 // A Boolean value indicating whether the cell has a bezeled border.
 //
-// WithBezeled sets the bezeled property and returns the receiver for chaining.
+// WithBezeled sets bezeled and returns the receiver so calls can be chained.
 func (x *ImageCell) WithBezeled(bezeled bool) *ImageCell {
-	x.inner.NSCell.SetBezeled(bezeled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
 // A Boolean value indicating whether excess text scrolls past the cell’s bounds.
 //
-// WithScrollable sets the scrollable property and returns the receiver for chaining.
+// WithScrollable sets scrollable and returns the receiver so calls can be chained.
 func (x *ImageCell) WithScrollable(scrollable bool) *ImageCell {
-	x.inner.NSCell.SetScrollable(scrollable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
 	return x
 }
 
 // A Boolean value indicating whether the cell has a highlighted appearance.
 //
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
 func (x *ImageCell) WithHighlighted(highlighted bool) *ImageCell {
-	x.inner.NSCell.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
 // The alignment of the cell’s text.
 //
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *ImageCell) WithAlignment(alignment NSTextAlignment) *ImageCell {
-	x.inner.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment sets alignment and returns the receiver so calls can be chained.
+func (x *ImageCell) WithAlignment(alignment TextAlignment) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
 // A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 //
-// WithWraps sets the wraps property and returns the receiver for chaining.
+// WithWraps sets wraps and returns the receiver so calls can be chained.
 func (x *ImageCell) WithWraps(wraps bool) *ImageCell {
-	x.inner.NSCell.SetWraps(wraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
 // The font that the cell uses to display text.
 //
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont sets font and returns the receiver so calls can be chained.
 func (x *ImageCell) WithFont(font *Font) *ImageCell {
-	x.inner.NSCell.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
 // The cell’s formatter object.
 //
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *ImageCell) WithFormatter(formatter *foundation.NSFormatter) *ImageCell {
-	x.inner.NSCell.SetFormatter(formatter)
+// WithFormatter sets formatter and returns the receiver so calls can be chained.
+func (x *ImageCell) WithFormatter(formatter obj.Object) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
 // The cell’s value as an Objective-C object.
 //
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *ImageCell) WithObjectValue(objectValue objc.ID) *ImageCell {
-	x.inner.NSCell.SetObjectValue(objectValue)
+// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+func (x *ImageCell) WithObjectValue(objectValue obj.Object) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
 // The cell’s value as a string.
 //
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue sets stringValue and returns the receiver so calls can be chained.
 func (x *ImageCell) WithStringValue(stringValue string) *ImageCell {
-	x.inner.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
 // The cell’s value as an integer.
 //
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue sets intValue and returns the receiver so calls can be chained.
 func (x *ImageCell) WithIntValue(intValue int) *ImageCell {
-	x.inner.NSCell.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
 // The cell’s value as a single-precision floating-point number.
 //
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
 func (x *ImageCell) WithFloatValue(floatValue float32) *ImageCell {
-	x.inner.NSCell.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
 // The cell’s value as a double-precision floating-point number.
 //
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
 func (x *ImageCell) WithDoubleValue(doubleValue float64) *ImageCell {
-	x.inner.NSCell.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
 // The cell’s value as an integer value.
 //
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
 func (x *ImageCell) WithIntegerValue(integerValue int) *ImageCell {
-	x.inner.NSCell.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
 // The image displayed by the cell, if any.
 //
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage sets image and returns the receiver so calls can be chained.
 func (x *ImageCell) WithImage(image *Image) *ImageCell {
-	x.inner.NSCell.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
 // The size of the cell.
 //
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *ImageCell) WithControlSize(controlSize NSControlSize) *ImageCell {
-	x.inner.NSCell.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+func (x *ImageCell) WithControlSize(controlSize ControlSize) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
 // The object represented by the cell.
 //
-// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
-func (x *ImageCell) WithRepresentedObject(representedObject objc.ID) *ImageCell {
-	x.inner.NSCell.SetRepresentedObject(representedObject)
+// WithRepresentedObject sets representedObject and returns the receiver so calls can be chained.
+func (x *ImageCell) WithRepresentedObject(representedObject obj.Object) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
 // The cell’s contextual menu.
 //
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu sets menu and returns the receiver so calls can be chained.
 func (x *ImageCell) WithMenu(menu *Menu) *ImageCell {
-	x.inner.NSCell.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
 // A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 //
-// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+// WithSendsActionOnEndEditing sets sendsActionOnEndEditing and returns the receiver so calls can be chained.
 func (x *ImageCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ImageCell {
-	x.inner.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
 	return x
 }
 
 // The initial writing direction used to determine the actual writing direction for text.
 //
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *ImageCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ImageCell {
-	x.inner.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+func (x *ImageCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
 // The line break mode to use when drawing text in the cell.
 //
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *ImageCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *ImageCell {
-	x.inner.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+func (x *ImageCell) WithLineBreakMode(lineBreakMode LineBreakMode) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
 // A Boolean value indicating whether the cell assumes responsibility for undo operations.
 //
-// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+// WithAllowsUndo sets allowsUndo and returns the receiver so calls can be chained.
 func (x *ImageCell) WithAllowsUndo(allowsUndo bool) *ImageCell {
-	x.inner.NSCell.SetAllowsUndo(allowsUndo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
 	return x
 }
 
 // A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 //
-// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+// WithTruncatesLastVisibleLine sets truncatesLastVisibleLine and returns the receiver so calls can be chained.
 func (x *ImageCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ImageCell {
-	x.inner.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
 	return x
 }
 
 // The layout direction of the user interface.
 //
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *ImageCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ImageCell {
-	x.inner.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+func (x *ImageCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
 // A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 //
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
 func (x *ImageCell) WithUsesSingleLineMode(usesSingleLineMode bool) *ImageCell {
-	x.inner.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
 // A Boolean value indicating whether the cell refuses the first responder status.
 //
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
 func (x *ImageCell) WithRefusesFirstResponder(refusesFirstResponder bool) *ImageCell {
-	x.inner.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
 // A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 //
-// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+// WithShowsFirstResponder sets showsFirstResponder and returns the receiver so calls can be chained.
 func (x *ImageCell) WithShowsFirstResponder(showsFirstResponder bool) *ImageCell {
-	x.inner.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
 	return x
 }
 
 // The type of focus ring to use with the associated view.
 //
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *ImageCell) WithFocusRingType(focusRingType NSFocusRingType) *ImageCell {
-	x.inner.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+func (x *ImageCell) WithFocusRingType(focusRingType FocusRingType) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
 // The cell’s value as an attributed string.
 //
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *ImageCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ImageCell {
-	x.inner.NSCell.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+func (x *ImageCell) WithAttributedStringValue(attributedStringValue obj.Object) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
 // A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 //
-// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+// WithAllowsEditingTextAttributes sets allowsEditingTextAttributes and returns the receiver so calls can be chained.
 func (x *ImageCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ImageCell {
-	x.inner.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
 // A Boolean value indicating whether the cell supports the importation of images into its text.
 //
-// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+// WithImportsGraphics sets importsGraphics and returns the receiver so calls can be chained.
 func (x *ImageCell) WithImportsGraphics(importsGraphics bool) *ImageCell {
-	x.inner.NSCell.SetImportsGraphics(importsGraphics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
 // A Boolean value indicating whether the cell supports three states instead of two.
 //
-// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+// WithAllowsMixedState sets allowsMixedState and returns the receiver so calls can be chained.
 func (x *ImageCell) WithAllowsMixedState(allowsMixedState bool) *ImageCell {
-	x.inner.NSCell.SetAllowsMixedState(allowsMixedState)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
 // The cell’s background style.
 //
-// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *ImageCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *ImageCell {
-	x.inner.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
+// WithBackgroundStyle sets backgroundStyle and returns the receiver so calls can be chained.
+func (x *ImageCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 	return x
 }
 
 // The cell’s control tint.
 //
-// WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *ImageCell) WithControlTint(controlTint NSControlTint) *ImageCell {
-	x.inner.NSCell.SetControlTint(raw.NSControlTint(controlTint))
+// WithControlTint sets controlTint and returns the receiver so calls can be chained.
+func (x *ImageCell) WithControlTint(controlTint ControlTint) *ImageCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
 
-// ImageAlignment calls the underlying ImageAlignment.
-func (x *ImageCell) ImageAlignment() NSImageAlignment {
-	return NSImageAlignment(x.inner.ImageAlignment())
+func (x *ImageCell) ImageAlignment() ImageAlignment {
+	_r := objc.Send[ImageAlignment](objref.IDOf(x), objc.RegisterName("imageAlignment"))
+	return _r
 }
 
-// SetImageAlignment calls the underlying SetImageAlignment.
-func (x *ImageCell) SetImageAlignment(imageAlignment NSImageAlignment) {
-	x.inner.SetImageAlignment(raw.NSImageAlignment(imageAlignment))
+func (x *ImageCell) SetImageAlignment(imageAlignment ImageAlignment) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageAlignment:"), imageAlignment)
 }
 
-// ImageScaling calls the underlying ImageScaling.
-func (x *ImageCell) ImageScaling() NSImageScaling {
-	return NSImageScaling(x.inner.ImageScaling())
+func (x *ImageCell) ImageScaling() ImageScaling {
+	_r := objc.Send[ImageScaling](objref.IDOf(x), objc.RegisterName("imageScaling"))
+	return _r
 }
 
-// SetImageScaling calls the underlying SetImageScaling.
-func (x *ImageCell) SetImageScaling(imageScaling NSImageScaling) {
-	x.inner.SetImageScaling(raw.NSImageScaling(imageScaling))
+func (x *ImageCell) SetImageScaling(imageScaling ImageScaling) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageScaling:"), imageScaling)
 }
 
-// ImageFrameStyle calls the underlying ImageFrameStyle.
-func (x *ImageCell) ImageFrameStyle() NSImageFrameStyle {
-	return NSImageFrameStyle(x.inner.ImageFrameStyle())
+func (x *ImageCell) ImageFrameStyle() ImageFrameStyle {
+	_r := objc.Send[ImageFrameStyle](objref.IDOf(x), objc.RegisterName("imageFrameStyle"))
+	return _r
 }
 
-// SetImageFrameStyle calls the underlying SetImageFrameStyle.
-func (x *ImageCell) SetImageFrameStyle(imageFrameStyle NSImageFrameStyle) {
-	x.inner.SetImageFrameStyle(raw.NSImageFrameStyle(imageFrameStyle))
+func (x *ImageCell) SetImageFrameStyle(imageFrameStyle ImageFrameStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageFrameStyle:"), imageFrameStyle)
 }
-
-func (x *ImageCell) asCell() *raw.NSCell { return &x.inner.NSCell }
 
 // ImageCellable is the interface implemented by [ImageCell], for mocking and DI.
 type ImageCellable interface {
-	Unwrap() *raw.NSImageCell
-	WithImageAlignment(imageAlignment NSImageAlignment) *ImageCell
-	WithImageScaling(imageScaling NSImageScaling) *ImageCell
-	WithImageFrameStyle(imageFrameStyle NSImageFrameStyle) *ImageCell
+	obj.Object
+	WithImageAlignment(imageAlignment ImageAlignment) *ImageCell
+	WithImageScaling(imageScaling ImageScaling) *ImageCell
+	WithImageFrameStyle(imageFrameStyle ImageFrameStyle) *ImageCell
 	WithControlView(controlView ViewProvider) *ImageCell
-	WithType(type_ NSCellType) *ImageCell
+	WithType(type_ CellType) *ImageCell
 	WithState(state int) *ImageCell
-	WithTarget(target objc.ID) *ImageCell
-	WithAction(action objc.SEL) *ImageCell
+	WithTarget(target obj.Object) *ImageCell
 	WithTag(tag int) *ImageCell
 	WithTitle(title string) *ImageCell
 	WithEnabled(enabled bool) *ImageCell
@@ -475,42 +487,42 @@ type ImageCellable interface {
 	WithBezeled(bezeled bool) *ImageCell
 	WithScrollable(scrollable bool) *ImageCell
 	WithHighlighted(highlighted bool) *ImageCell
-	WithAlignment(alignment NSTextAlignment) *ImageCell
+	WithAlignment(alignment TextAlignment) *ImageCell
 	WithWraps(wraps bool) *ImageCell
 	WithFont(font *Font) *ImageCell
-	WithFormatter(formatter *foundation.NSFormatter) *ImageCell
-	WithObjectValue(objectValue objc.ID) *ImageCell
+	WithFormatter(formatter obj.Object) *ImageCell
+	WithObjectValue(objectValue obj.Object) *ImageCell
 	WithStringValue(stringValue string) *ImageCell
 	WithIntValue(intValue int) *ImageCell
 	WithFloatValue(floatValue float32) *ImageCell
 	WithDoubleValue(doubleValue float64) *ImageCell
 	WithIntegerValue(integerValue int) *ImageCell
 	WithImage(image *Image) *ImageCell
-	WithControlSize(controlSize NSControlSize) *ImageCell
-	WithRepresentedObject(representedObject objc.ID) *ImageCell
+	WithControlSize(controlSize ControlSize) *ImageCell
+	WithRepresentedObject(representedObject obj.Object) *ImageCell
 	WithMenu(menu *Menu) *ImageCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *ImageCell
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *ImageCell
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *ImageCell
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *ImageCell
+	WithLineBreakMode(lineBreakMode LineBreakMode) *ImageCell
 	WithAllowsUndo(allowsUndo bool) *ImageCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *ImageCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *ImageCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ImageCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *ImageCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *ImageCell
 	WithShowsFirstResponder(showsFirstResponder bool) *ImageCell
-	WithFocusRingType(focusRingType NSFocusRingType) *ImageCell
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *ImageCell
+	WithFocusRingType(focusRingType FocusRingType) *ImageCell
+	WithAttributedStringValue(attributedStringValue obj.Object) *ImageCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *ImageCell
 	WithImportsGraphics(importsGraphics bool) *ImageCell
 	WithAllowsMixedState(allowsMixedState bool) *ImageCell
-	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *ImageCell
-	WithControlTint(controlTint NSControlTint) *ImageCell
-	ImageAlignment() NSImageAlignment
-	SetImageAlignment(imageAlignment NSImageAlignment)
-	ImageScaling() NSImageScaling
-	SetImageScaling(imageScaling NSImageScaling)
-	ImageFrameStyle() NSImageFrameStyle
-	SetImageFrameStyle(imageFrameStyle NSImageFrameStyle)
+	WithBackgroundStyle(backgroundStyle BackgroundStyle) *ImageCell
+	WithControlTint(controlTint ControlTint) *ImageCell
+	ImageAlignment() ImageAlignment
+	SetImageAlignment(imageAlignment ImageAlignment)
+	ImageScaling() ImageScaling
+	SetImageScaling(imageScaling ImageScaling)
+	ImageFrameStyle() ImageFrameStyle
+	SetImageFrameStyle(imageFrameStyle ImageFrameStyle)
 }
 
 var _ ImageCellable = (*ImageCell)(nil)

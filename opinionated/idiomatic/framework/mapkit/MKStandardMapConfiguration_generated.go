@@ -5,146 +5,162 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The class that represents the default map presentation, which is a street map that shows the position of all roads and some road names.
 //
-// StandardMapConfiguration wraps [raw.MKStandardMapConfiguration] with a fluent Go API.
+// StandardMapConfiguration is an idiomatic wrapper over the Objective-C class MKStandardMapConfiguration.
 type StandardMapConfiguration struct {
-	inner *raw.MKStandardMapConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKStandardMapConfiguration].
-func (x *StandardMapConfiguration) Unwrap() *raw.MKStandardMapConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StandardMapConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// StandardMapConfigurationFromID adopts an existing object pointer as a StandardMapConfiguration (nil for 0).
+// StandardMapConfigurationFromID adopts an existing Objective-C object as a StandardMapConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func StandardMapConfigurationFromID(id objc.ID) *StandardMapConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &StandardMapConfiguration{inner: raw.MKStandardMapConfigurationFromID(id)}
+	x := &StandardMapConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewStandardMapConfiguration creates a new [StandardMapConfiguration].
+// standardMapConfigurationAdopt wraps an Objective-C object that this code just created as a
+// StandardMapConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func standardMapConfigurationAdopt(id objc.ID) *StandardMapConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &StandardMapConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *StandardMapConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StandardMapConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StandardMapConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewStandardMapConfiguration creates a new StandardMapConfiguration.
 func NewStandardMapConfiguration() *StandardMapConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKStandardMapConfiguration")), objc.RegisterName("new"))
-	return &StandardMapConfiguration{inner: raw.MKStandardMapConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKStandardMapConfiguration")), objc.RegisterName("new"))
+	return standardMapConfigurationAdopt(_id)
 }
 
 // Creates a new standard map configuration with the specified elevation style.
 //
-// NewStandardMapConfigurationWithElevationStyle creates a new [StandardMapConfiguration].
-func NewStandardMapConfigurationWithElevationStyle(elevationStyle MKMapElevationStyle) *StandardMapConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKStandardMapConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:"), raw.MKMapElevationStyle(elevationStyle))
-	return &StandardMapConfiguration{inner: raw.MKStandardMapConfigurationFromID(_id)}
+// NewStandardMapConfigurationWithElevationStyle creates a new StandardMapConfiguration.
+func NewStandardMapConfigurationWithElevationStyle(elevationStyle MapElevationStyle) *StandardMapConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKStandardMapConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:"), elevationStyle)
+	return standardMapConfigurationAdopt(_id)
 }
 
 // Creates a standard map configuration with the specified elevation and emphasis styles.
 //
-// NewStandardMapConfigurationWithElevationStyleEmphasisStyle creates a new [StandardMapConfiguration].
-func NewStandardMapConfigurationWithElevationStyleEmphasisStyle(elevationStyle MKMapElevationStyle, emphasisStyle MKStandardMapEmphasisStyle) *StandardMapConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKStandardMapConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:emphasisStyle:"), raw.MKMapElevationStyle(elevationStyle), raw.MKStandardMapEmphasisStyle(emphasisStyle))
-	return &StandardMapConfiguration{inner: raw.MKStandardMapConfigurationFromID(_id)}
+// NewStandardMapConfigurationWithElevationStyleEmphasisStyle creates a new StandardMapConfiguration.
+func NewStandardMapConfigurationWithElevationStyleEmphasisStyle(elevationStyle MapElevationStyle, emphasisStyle StandardMapEmphasisStyle) *StandardMapConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKStandardMapConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:emphasisStyle:"), elevationStyle, emphasisStyle)
+	return standardMapConfigurationAdopt(_id)
 }
 
 // Creates a standard map configuration with the specified emphasis style.
 //
-// NewStandardMapConfigurationWithEmphasisStyle creates a new [StandardMapConfiguration].
-func NewStandardMapConfigurationWithEmphasisStyle(emphasisStyle MKStandardMapEmphasisStyle) *StandardMapConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKStandardMapConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEmphasisStyle:"), raw.MKStandardMapEmphasisStyle(emphasisStyle))
-	return &StandardMapConfiguration{inner: raw.MKStandardMapConfigurationFromID(_id)}
+// NewStandardMapConfigurationWithEmphasisStyle creates a new StandardMapConfiguration.
+func NewStandardMapConfigurationWithEmphasisStyle(emphasisStyle StandardMapEmphasisStyle) *StandardMapConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKStandardMapConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEmphasisStyle:"), emphasisStyle)
+	return standardMapConfigurationAdopt(_id)
 }
 
 // The value that indicates how the framework emphasizes map features.
 //
-// WithEmphasisStyle sets the emphasisStyle property and returns the receiver for chaining.
-func (x *StandardMapConfiguration) WithEmphasisStyle(emphasisStyle MKStandardMapEmphasisStyle) *StandardMapConfiguration {
-	x.inner.SetEmphasisStyle(raw.MKStandardMapEmphasisStyle(emphasisStyle))
+// WithEmphasisStyle sets emphasisStyle and returns the receiver so calls can be chained.
+func (x *StandardMapConfiguration) WithEmphasisStyle(emphasisStyle StandardMapEmphasisStyle) *StandardMapConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmphasisStyle:"), emphasisStyle)
 	return x
 }
 
 // The filter used to determine the points of interest shown on the map.
 //
-// WithPointOfInterestFilter sets the pointOfInterestFilter property and returns the receiver for chaining.
+// WithPointOfInterestFilter sets pointOfInterestFilter and returns the receiver so calls can be chained.
 func (x *StandardMapConfiguration) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *StandardMapConfiguration {
-	x.inner.SetPointOfInterestFilter(pointOfInterestFilter.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 	return x
 }
 
 // A Boolean value that controls whether the map displays traffic conditions.
 //
-// WithShowsTraffic sets the showsTraffic property and returns the receiver for chaining.
+// WithShowsTraffic sets showsTraffic and returns the receiver so calls can be chained.
 func (x *StandardMapConfiguration) WithShowsTraffic(showsTraffic bool) *StandardMapConfiguration {
-	x.inner.SetShowsTraffic(showsTraffic)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsTraffic:"), showsTraffic)
 	return x
 }
 
 // The value that indicates the map’s elevation style.
 //
-// WithElevationStyle sets the elevationStyle property and returns the receiver for chaining.
-func (x *StandardMapConfiguration) WithElevationStyle(elevationStyle MKMapElevationStyle) *StandardMapConfiguration {
-	x.inner.MKMapConfiguration.SetElevationStyle(raw.MKMapElevationStyle(elevationStyle))
+// WithElevationStyle sets elevationStyle and returns the receiver so calls can be chained.
+func (x *StandardMapConfiguration) WithElevationStyle(elevationStyle MapElevationStyle) *StandardMapConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElevationStyle:"), elevationStyle)
 	return x
 }
 
-// EmphasisStyle calls the underlying EmphasisStyle.
-func (x *StandardMapConfiguration) EmphasisStyle() MKStandardMapEmphasisStyle {
-	return MKStandardMapEmphasisStyle(x.inner.EmphasisStyle())
+func (x *StandardMapConfiguration) EmphasisStyle() StandardMapEmphasisStyle {
+	_r := objc.Send[StandardMapEmphasisStyle](objref.IDOf(x), objc.RegisterName("emphasisStyle"))
+	return _r
 }
 
-// SetEmphasisStyle calls the underlying SetEmphasisStyle.
-func (x *StandardMapConfiguration) SetEmphasisStyle(emphasisStyle MKStandardMapEmphasisStyle) {
-	x.inner.SetEmphasisStyle(raw.MKStandardMapEmphasisStyle(emphasisStyle))
+func (x *StandardMapConfiguration) SetEmphasisStyle(emphasisStyle StandardMapEmphasisStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmphasisStyle:"), emphasisStyle)
 }
 
-// PointOfInterestFilter calls the underlying PointOfInterestFilter.
 func (x *StandardMapConfiguration) PointOfInterestFilter() *PointOfInterestFilter {
-	_r := x.inner.PointOfInterestFilter()
-	if _r == nil {
-		return nil
-	}
-	return &PointOfInterestFilter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestFilter"))
+	return PointOfInterestFilterFromID(_r)
 }
 
-// SetPointOfInterestFilter calls the underlying SetPointOfInterestFilter.
-func (x *StandardMapConfiguration) SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) {
-	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+func (x *StandardMapConfiguration) SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 }
 
-// ShowsTraffic calls the underlying ShowsTraffic.
 func (x *StandardMapConfiguration) ShowsTraffic() bool {
-	return x.inner.ShowsTraffic()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsTraffic"))
+	return _r
 }
 
-// SetShowsTraffic calls the underlying SetShowsTraffic.
 func (x *StandardMapConfiguration) SetShowsTraffic(showsTraffic bool) {
-	x.inner.SetShowsTraffic(showsTraffic)
-}
-
-func (x *StandardMapConfiguration) asMapConfiguration() *raw.MKMapConfiguration {
-	return &x.inner.MKMapConfiguration
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsTraffic:"), showsTraffic)
 }
 
 // StandardMapConfigurationable is the interface implemented by [StandardMapConfiguration], for mocking and DI.
 type StandardMapConfigurationable interface {
-	Unwrap() *raw.MKStandardMapConfiguration
-	WithEmphasisStyle(emphasisStyle MKStandardMapEmphasisStyle) *StandardMapConfiguration
+	obj.Object
+	WithEmphasisStyle(emphasisStyle StandardMapEmphasisStyle) *StandardMapConfiguration
 	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *StandardMapConfiguration
 	WithShowsTraffic(showsTraffic bool) *StandardMapConfiguration
-	WithElevationStyle(elevationStyle MKMapElevationStyle) *StandardMapConfiguration
-	EmphasisStyle() MKStandardMapEmphasisStyle
-	SetEmphasisStyle(emphasisStyle MKStandardMapEmphasisStyle)
+	WithElevationStyle(elevationStyle MapElevationStyle) *StandardMapConfiguration
+	EmphasisStyle() StandardMapEmphasisStyle
+	SetEmphasisStyle(emphasisStyle StandardMapEmphasisStyle)
 	PointOfInterestFilter() *PointOfInterestFilter
-	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
+	SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter)
 	ShowsTraffic() bool
 	SetShowsTraffic(showsTraffic bool)
 }

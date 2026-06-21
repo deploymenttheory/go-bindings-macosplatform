@@ -5,68 +5,89 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The base class encapsulating a Tag-Length-Value record.
 //
-// TLVRecord wraps [raw.TKTLVRecord] with a fluent Go API.
+// TLVRecord is an idiomatic wrapper over the Objective-C class TKTLVRecord.
 type TLVRecord struct {
-	inner *raw.TKTLVRecord
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKTLVRecord].
-func (x *TLVRecord) Unwrap() *raw.TKTLVRecord { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TLVRecord) ID() objc.ID { return x.inner.Ptr() }
-
-// TLVRecordFromID adopts an existing object pointer as a TLVRecord (nil for 0).
+// TLVRecordFromID adopts an existing Objective-C object as a TLVRecord
+// (nil for 0), retaining it and registering a release finalizer.
 func TLVRecordFromID(id objc.ID) *TLVRecord {
 	if id == 0 {
 		return nil
 	}
-	return &TLVRecord{inner: raw.TKTLVRecordFromID(id)}
+	x := &TLVRecord{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTLVRecord creates a new [TLVRecord].
+// tLVRecordAdopt wraps an Objective-C object that this code just created as a
+// TLVRecord (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tLVRecordAdopt(id objc.ID) *TLVRecord {
+	if id == 0 {
+		return nil
+	}
+	x := &TLVRecord{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TLVRecord) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TLVRecord) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TLVRecord) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTLVRecord creates a new TLVRecord.
 func NewTLVRecord() *TLVRecord {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTLVRecord")), objc.RegisterName("new"))
-	return &TLVRecord{inner: raw.TKTLVRecordFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("TKTLVRecord")), objc.RegisterName("new"))
+	return tLVRecordAdopt(_id)
 }
 
 // Tag value of the record.
-//
-// Tag calls the underlying Tag.
 func (x *TLVRecord) Tag() uint64 {
-	return x.inner.Tag()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("tag"))
+	return _r
 }
 
 // Value field of the record.
-//
-// Value calls the underlying Value.
-func (x *TLVRecord) Value() *foundation.NSData {
-	return x.inner.Value()
+func (x *TLVRecord) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
 }
 
 // Data object containing whole encoded record, including tag, length and value.
-//
-// Data calls the underlying Data.
-func (x *TLVRecord) Data() *foundation.NSData {
-	return x.inner.Data()
+func (x *TLVRecord) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
-
-func (x *TLVRecord) asTLVRecord() *raw.TKTLVRecord { return x.inner }
 
 // TLVRecordable is the interface implemented by [TLVRecord], for mocking and DI.
 type TLVRecordable interface {
-	Unwrap() *raw.TKTLVRecord
+	obj.Object
 	Tag() uint64
-	Value() *foundation.NSData
-	Data() *foundation.NSData
+	Value() obj.Object
+	Data() obj.Object
 }
 
 var _ TLVRecordable = (*TLVRecord)(nil)

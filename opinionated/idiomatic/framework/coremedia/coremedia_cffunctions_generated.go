@@ -5,147 +5,554 @@
 package coremedia
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// CMMetadataCreateIdentifierForKeyAndKeySpace wraps [raw.CMMetadataCreateIdentifierForKeyAndKeySpace], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMMetadataCreateIdentifierForKeyAndKeySpace(allocator objc.ID, key objc.ID, keySpace objc.ID) (objc.ID, error) {
+var _fnCMAudioDeviceClockSetAudioDeviceID func(objc.ID, int) int32
+
+// CMAudioDeviceClockSetAudioDeviceID reports an error if the CoreMedia framework function CMAudioDeviceClockSetAudioDeviceID fails.
+func CMAudioDeviceClockSetAudioDeviceID(clock obj.Object, deviceID int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMAudioDeviceClockSetAudioDeviceID == nil {
+		ebipurego.RegisterLibFunc(&_fnCMAudioDeviceClockSetAudioDeviceID, _lib, "CMAudioDeviceClockSetAudioDeviceID")
+	}
+	_rc := _fnCMAudioDeviceClockSetAudioDeviceID(objref.IDOf(clock), deviceID)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMAudioDeviceClockSetAudioDeviceUID func(objc.ID, objc.ID) int32
+
+// CMAudioDeviceClockSetAudioDeviceUID reports an error if the CoreMedia framework function CMAudioDeviceClockSetAudioDeviceUID fails.
+func CMAudioDeviceClockSetAudioDeviceUID(clock obj.Object, deviceUID obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMAudioDeviceClockSetAudioDeviceUID == nil {
+		ebipurego.RegisterLibFunc(&_fnCMAudioDeviceClockSetAudioDeviceUID, _lib, "CMAudioDeviceClockSetAudioDeviceUID")
+	}
+	_rc := _fnCMAudioDeviceClockSetAudioDeviceUID(objref.IDOf(clock), objref.IDOf(deviceUID))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMBlockBufferAppendBufferReference func(objc.ID, objc.ID, int, int, uint32) int32
+
+// CMBlockBufferAppendBufferReference reports an error if the CoreMedia framework function CMBlockBufferAppendBufferReference fails.
+func CMBlockBufferAppendBufferReference(theBuffer obj.Object, targetBBuf obj.Object, offsetToData int, dataLength int, flags uint32) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBlockBufferAppendBufferReference == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBlockBufferAppendBufferReference, _lib, "CMBlockBufferAppendBufferReference")
+	}
+	_rc := _fnCMBlockBufferAppendBufferReference(objref.IDOf(theBuffer), objref.IDOf(targetBBuf), offsetToData, dataLength, flags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMBlockBufferAssureBlockMemory func(objc.ID) int32
+
+// CMBlockBufferAssureBlockMemory reports an error if the CoreMedia framework function CMBlockBufferAssureBlockMemory fails.
+func CMBlockBufferAssureBlockMemory(theBuffer obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBlockBufferAssureBlockMemory == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBlockBufferAssureBlockMemory, _lib, "CMBlockBufferAssureBlockMemory")
+	}
+	_rc := _fnCMBlockBufferAssureBlockMemory(objref.IDOf(theBuffer))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMBlockBufferFillDataBytes func(int8, objc.ID, int, int) int32
+
+// CMBlockBufferFillDataBytes reports an error if the CoreMedia framework function CMBlockBufferFillDataBytes fails.
+func CMBlockBufferFillDataBytes(fillByte int8, destinationBuffer obj.Object, offsetIntoDestination int, dataLength int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBlockBufferFillDataBytes == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBlockBufferFillDataBytes, _lib, "CMBlockBufferFillDataBytes")
+	}
+	_rc := _fnCMBlockBufferFillDataBytes(fillByte, objref.IDOf(destinationBuffer), offsetIntoDestination, dataLength)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMBufferQueueMarkEndOfData func(objc.ID) int32
+
+// CMBufferQueueMarkEndOfData reports an error if the CoreMedia framework function CMBufferQueueMarkEndOfData fails.
+func CMBufferQueueMarkEndOfData(queue obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBufferQueueMarkEndOfData == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBufferQueueMarkEndOfData, _lib, "CMBufferQueueMarkEndOfData")
+	}
+	_rc := _fnCMBufferQueueMarkEndOfData(objref.IDOf(queue))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMBufferQueueRemoveTrigger func(objc.ID, objc.ID) int32
+
+// CMBufferQueueRemoveTrigger reports an error if the CoreMedia framework function CMBufferQueueRemoveTrigger fails.
+func CMBufferQueueRemoveTrigger(queue obj.Object, triggerToken obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBufferQueueRemoveTrigger == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBufferQueueRemoveTrigger, _lib, "CMBufferQueueRemoveTrigger")
+	}
+	_rc := _fnCMBufferQueueRemoveTrigger(objref.IDOf(queue), objref.IDOf(triggerToken))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMBufferQueueReset func(objc.ID) int32
+
+// CMBufferQueueReset reports an error if the CoreMedia framework function CMBufferQueueReset fails.
+func CMBufferQueueReset(queue obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMBufferQueueReset == nil {
+		ebipurego.RegisterLibFunc(&_fnCMBufferQueueReset, _lib, "CMBufferQueueReset")
+	}
+	_rc := _fnCMBufferQueueReset(objref.IDOf(queue))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMMetadataCreateIdentifierForKeyAndKeySpace func(objc.ID, objc.ID, objc.ID, unsafe.Pointer) int32
+
+// CMMetadataCreateIdentifierForKeyAndKeySpace reports an error if the CoreMedia framework function CMMetadataCreateIdentifierForKeyAndKeySpace fails.
+func CMMetadataCreateIdentifierForKeyAndKeySpace(allocator obj.Object, key obj.Object, keySpace obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMMetadataCreateIdentifierForKeyAndKeySpace == nil {
+		ebipurego.RegisterLibFunc(&_fnCMMetadataCreateIdentifierForKeyAndKeySpace, _lib, "CMMetadataCreateIdentifierForKeyAndKeySpace")
+	}
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.CMMetadataCreateIdentifierForKeyAndKeySpace(purego.CFRef(allocator), purego.CFRef(key), purego.CFRef(keySpace), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnCMMetadataCreateIdentifierForKeyAndKeySpace(objref.IDOf(allocator), objref.IDOf(key), objref.IDOf(keySpace), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// CMMetadataCreateKeyFromIdentifier wraps [raw.CMMetadataCreateKeyFromIdentifier], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMMetadataCreateKeyFromIdentifier(allocator objc.ID, identifier objc.ID) (objc.ID, error) {
+var _fnCMMetadataCreateKeyFromIdentifier func(objc.ID, objc.ID, unsafe.Pointer) int32
+
+// CMMetadataCreateKeyFromIdentifier reports an error if the CoreMedia framework function CMMetadataCreateKeyFromIdentifier fails.
+func CMMetadataCreateKeyFromIdentifier(allocator obj.Object, identifier obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMMetadataCreateKeyFromIdentifier == nil {
+		ebipurego.RegisterLibFunc(&_fnCMMetadataCreateKeyFromIdentifier, _lib, "CMMetadataCreateKeyFromIdentifier")
+	}
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.CMMetadataCreateKeyFromIdentifier(purego.CFRef(allocator), purego.CFRef(identifier), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnCMMetadataCreateKeyFromIdentifier(objref.IDOf(allocator), objref.IDOf(identifier), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// CMMetadataCreateKeyFromIdentifierAsCFData wraps [raw.CMMetadataCreateKeyFromIdentifierAsCFData], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMMetadataCreateKeyFromIdentifierAsCFData(allocator objc.ID, identifier objc.ID) (objc.ID, error) {
+var _fnCMMetadataCreateKeyFromIdentifierAsCFData func(objc.ID, objc.ID, unsafe.Pointer) int32
+
+// CMMetadataCreateKeyFromIdentifierAsCFData reports an error if the CoreMedia framework function CMMetadataCreateKeyFromIdentifierAsCFData fails.
+func CMMetadataCreateKeyFromIdentifierAsCFData(allocator obj.Object, identifier obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMMetadataCreateKeyFromIdentifierAsCFData == nil {
+		ebipurego.RegisterLibFunc(&_fnCMMetadataCreateKeyFromIdentifierAsCFData, _lib, "CMMetadataCreateKeyFromIdentifierAsCFData")
+	}
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.CMMetadataCreateKeyFromIdentifierAsCFData(purego.CFRef(allocator), purego.CFRef(identifier), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnCMMetadataCreateKeyFromIdentifierAsCFData(objref.IDOf(allocator), objref.IDOf(identifier), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// CMMetadataCreateKeySpaceFromIdentifier wraps [raw.CMMetadataCreateKeySpaceFromIdentifier], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMMetadataCreateKeySpaceFromIdentifier(allocator objc.ID, identifier objc.ID) (objc.ID, error) {
+var _fnCMMetadataCreateKeySpaceFromIdentifier func(objc.ID, objc.ID, unsafe.Pointer) int32
+
+// CMMetadataCreateKeySpaceFromIdentifier reports an error if the CoreMedia framework function CMMetadataCreateKeySpaceFromIdentifier fails.
+func CMMetadataCreateKeySpaceFromIdentifier(allocator obj.Object, identifier obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMMetadataCreateKeySpaceFromIdentifier == nil {
+		ebipurego.RegisterLibFunc(&_fnCMMetadataCreateKeySpaceFromIdentifier, _lib, "CMMetadataCreateKeySpaceFromIdentifier")
+	}
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.CMMetadataCreateKeySpaceFromIdentifier(purego.CFRef(allocator), purego.CFRef(identifier), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnCMMetadataCreateKeySpaceFromIdentifier(objref.IDOf(allocator), objref.IDOf(identifier), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// CMMetadataDataTypeRegistryRegisterDataType wraps [raw.CMMetadataDataTypeRegistryRegisterDataType], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMMetadataDataTypeRegistryRegisterDataType(dataType objc.ID, description objc.ID, conformingDataTypes objc.ID) error {
-	if _err := purego.NewOSStatus(raw.CMMetadataDataTypeRegistryRegisterDataType(purego.CFRef(dataType), purego.CFRef(description), purego.CFRef(conformingDataTypes))).Err(); _err != nil {
+var _fnCMMetadataDataTypeRegistryRegisterDataType func(objc.ID, objc.ID, objc.ID) int32
+
+// CMMetadataDataTypeRegistryRegisterDataType reports an error if the CoreMedia framework function CMMetadataDataTypeRegistryRegisterDataType fails.
+func CMMetadataDataTypeRegistryRegisterDataType(dataType obj.Object, description obj.Object, conformingDataTypes obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMMetadataDataTypeRegistryRegisterDataType == nil {
+		ebipurego.RegisterLibFunc(&_fnCMMetadataDataTypeRegistryRegisterDataType, _lib, "CMMetadataDataTypeRegistryRegisterDataType")
+	}
+	_rc := _fnCMMetadataDataTypeRegistryRegisterDataType(objref.IDOf(dataType), objref.IDOf(description), objref.IDOf(conformingDataTypes))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CMSwapBigEndianClosedCaptionDescriptionToHost wraps [raw.CMSwapBigEndianClosedCaptionDescriptionToHost], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMSwapBigEndianClosedCaptionDescriptionToHost(closedCaptionDescriptionData *uint8, closedCaptionDescriptionSize uint) error {
-	if _err := purego.NewOSStatus(raw.CMSwapBigEndianClosedCaptionDescriptionToHost(closedCaptionDescriptionData, closedCaptionDescriptionSize)).Err(); _err != nil {
+var _fnCMSampleBufferInvalidate func(objc.ID) int32
+
+// CMSampleBufferInvalidate reports an error if the CoreMedia framework function CMSampleBufferInvalidate fails.
+func CMSampleBufferInvalidate(sbuf obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferInvalidate == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferInvalidate, _lib, "CMSampleBufferInvalidate")
+	}
+	_rc := _fnCMSampleBufferInvalidate(objref.IDOf(sbuf))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CMSwapBigEndianImageDescriptionToHost wraps [raw.CMSwapBigEndianImageDescriptionToHost], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMSwapBigEndianImageDescriptionToHost(imageDescriptionData *uint8, imageDescriptionSize uint) error {
-	if _err := purego.NewOSStatus(raw.CMSwapBigEndianImageDescriptionToHost(imageDescriptionData, imageDescriptionSize)).Err(); _err != nil {
+var _fnCMSampleBufferMakeDataReady func(objc.ID) int32
+
+// CMSampleBufferMakeDataReady reports an error if the CoreMedia framework function CMSampleBufferMakeDataReady fails.
+func CMSampleBufferMakeDataReady(sbuf obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferMakeDataReady == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferMakeDataReady, _lib, "CMSampleBufferMakeDataReady")
+	}
+	_rc := _fnCMSampleBufferMakeDataReady(objref.IDOf(sbuf))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CMSwapBigEndianMetadataDescriptionToHost wraps [raw.CMSwapBigEndianMetadataDescriptionToHost], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMSwapBigEndianMetadataDescriptionToHost(metadataDescriptionData *uint8, metadataDescriptionSize uint) error {
-	if _err := purego.NewOSStatus(raw.CMSwapBigEndianMetadataDescriptionToHost(metadataDescriptionData, metadataDescriptionSize)).Err(); _err != nil {
+var _fnCMSampleBufferSetDataBuffer func(objc.ID, objc.ID) int32
+
+// CMSampleBufferSetDataBuffer reports an error if the CoreMedia framework function CMSampleBufferSetDataBuffer fails.
+func CMSampleBufferSetDataBuffer(sbuf obj.Object, dataBuffer obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferSetDataBuffer == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferSetDataBuffer, _lib, "CMSampleBufferSetDataBuffer")
+	}
+	_rc := _fnCMSampleBufferSetDataBuffer(objref.IDOf(sbuf), objref.IDOf(dataBuffer))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CMSwapBigEndianSoundDescriptionToHost wraps [raw.CMSwapBigEndianSoundDescriptionToHost], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMSwapBigEndianSoundDescriptionToHost(soundDescriptionData *uint8, soundDescriptionSize uint) error {
-	if _err := purego.NewOSStatus(raw.CMSwapBigEndianSoundDescriptionToHost(soundDescriptionData, soundDescriptionSize)).Err(); _err != nil {
+var _fnCMSampleBufferSetDataFailed func(objc.ID, int) int32
+
+// CMSampleBufferSetDataFailed reports an error if the CoreMedia framework function CMSampleBufferSetDataFailed fails.
+func CMSampleBufferSetDataFailed(sbuf obj.Object, status int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferSetDataFailed == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferSetDataFailed, _lib, "CMSampleBufferSetDataFailed")
+	}
+	_rc := _fnCMSampleBufferSetDataFailed(objref.IDOf(sbuf), status)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CMSwapBigEndianTextDescriptionToHost wraps [raw.CMSwapBigEndianTextDescriptionToHost], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMSwapBigEndianTextDescriptionToHost(textDescriptionData *uint8, textDescriptionSize uint) error {
-	if _err := purego.NewOSStatus(raw.CMSwapBigEndianTextDescriptionToHost(textDescriptionData, textDescriptionSize)).Err(); _err != nil {
+var _fnCMSampleBufferSetDataReady func(objc.ID) int32
+
+// CMSampleBufferSetDataReady reports an error if the CoreMedia framework function CMSampleBufferSetDataReady fails.
+func CMSampleBufferSetDataReady(sbuf obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferSetDataReady == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferSetDataReady, _lib, "CMSampleBufferSetDataReady")
+	}
+	_rc := _fnCMSampleBufferSetDataReady(objref.IDOf(sbuf))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CMSwapBigEndianTimeCodeDescriptionToHost wraps [raw.CMSwapBigEndianTimeCodeDescriptionToHost], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMSwapBigEndianTimeCodeDescriptionToHost(timeCodeDescriptionData *uint8, timeCodeDescriptionSize uint) error {
-	if _err := purego.NewOSStatus(raw.CMSwapBigEndianTimeCodeDescriptionToHost(timeCodeDescriptionData, timeCodeDescriptionSize)).Err(); _err != nil {
+var _fnCMSampleBufferTrackDataReadiness func(objc.ID, objc.ID) int32
+
+// CMSampleBufferTrackDataReadiness reports an error if the CoreMedia framework function CMSampleBufferTrackDataReadiness fails.
+func CMSampleBufferTrackDataReadiness(sbuf obj.Object, sampleBufferToTrack obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSampleBufferTrackDataReadiness == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSampleBufferTrackDataReadiness, _lib, "CMSampleBufferTrackDataReadiness")
+	}
+	_rc := _fnCMSampleBufferTrackDataReadiness(objref.IDOf(sbuf), objref.IDOf(sampleBufferToTrack))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CMSwapHostEndianClosedCaptionDescriptionToBig wraps [raw.CMSwapHostEndianClosedCaptionDescriptionToBig], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMSwapHostEndianClosedCaptionDescriptionToBig(closedCaptionDescriptionData *uint8, closedCaptionDescriptionSize uint) error {
-	if _err := purego.NewOSStatus(raw.CMSwapHostEndianClosedCaptionDescriptionToBig(closedCaptionDescriptionData, closedCaptionDescriptionSize)).Err(); _err != nil {
+var _fnCMSimpleQueueReset func(objc.ID) int32
+
+// CMSimpleQueueReset reports an error if the CoreMedia framework function CMSimpleQueueReset fails.
+func CMSimpleQueueReset(queue obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMSimpleQueueReset == nil {
+		ebipurego.RegisterLibFunc(&_fnCMSimpleQueueReset, _lib, "CMSimpleQueueReset")
+	}
+	_rc := _fnCMSimpleQueueReset(objref.IDOf(queue))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CMSwapHostEndianImageDescriptionToBig wraps [raw.CMSwapHostEndianImageDescriptionToBig], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMSwapHostEndianImageDescriptionToBig(imageDescriptionData *uint8, imageDescriptionSize uint) error {
-	if _err := purego.NewOSStatus(raw.CMSwapHostEndianImageDescriptionToBig(imageDescriptionData, imageDescriptionSize)).Err(); _err != nil {
+var _fnCMTagCollectionAddTagsFromCollection func(objc.ID, objc.ID) int32
+
+// CMTagCollectionAddTagsFromCollection reports an error if the CoreMedia framework function CMTagCollectionAddTagsFromCollection fails.
+func CMTagCollectionAddTagsFromCollection(tagCollection obj.Object, collectionWithTagsToAdd obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCollectionAddTagsFromCollection == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCollectionAddTagsFromCollection, _lib, "CMTagCollectionAddTagsFromCollection")
+	}
+	_rc := _fnCMTagCollectionAddTagsFromCollection(objref.IDOf(tagCollection), objref.IDOf(collectionWithTagsToAdd))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CMSwapHostEndianMetadataDescriptionToBig wraps [raw.CMSwapHostEndianMetadataDescriptionToBig], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMSwapHostEndianMetadataDescriptionToBig(metadataDescriptionData *uint8, metadataDescriptionSize uint) error {
-	if _err := purego.NewOSStatus(raw.CMSwapHostEndianMetadataDescriptionToBig(metadataDescriptionData, metadataDescriptionSize)).Err(); _err != nil {
+var _fnCMTagCollectionRemoveAllTags func(objc.ID) int32
+
+// CMTagCollectionRemoveAllTags reports an error if the CoreMedia framework function CMTagCollectionRemoveAllTags fails.
+func CMTagCollectionRemoveAllTags(tagCollection obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCollectionRemoveAllTags == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCollectionRemoveAllTags, _lib, "CMTagCollectionRemoveAllTags")
+	}
+	_rc := _fnCMTagCollectionRemoveAllTags(objref.IDOf(tagCollection))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CMSwapHostEndianSoundDescriptionToBig wraps [raw.CMSwapHostEndianSoundDescriptionToBig], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMSwapHostEndianSoundDescriptionToBig(soundDescriptionData *uint8, soundDescriptionSize uint) error {
-	if _err := purego.NewOSStatus(raw.CMSwapHostEndianSoundDescriptionToBig(soundDescriptionData, soundDescriptionSize)).Err(); _err != nil {
+var _fnCMTagCollectionRemoveAllTagsOfCategory func(objc.ID, CMTagCategory) int32
+
+// CMTagCollectionRemoveAllTagsOfCategory reports an error if the CoreMedia framework function CMTagCollectionRemoveAllTagsOfCategory fails.
+func CMTagCollectionRemoveAllTagsOfCategory(tagCollection obj.Object, category CMTagCategory) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTagCollectionRemoveAllTagsOfCategory == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTagCollectionRemoveAllTagsOfCategory, _lib, "CMTagCollectionRemoveAllTagsOfCategory")
+	}
+	_rc := _fnCMTagCollectionRemoveAllTagsOfCategory(objref.IDOf(tagCollection), category)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CMSwapHostEndianTextDescriptionToBig wraps [raw.CMSwapHostEndianTextDescriptionToBig], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMSwapHostEndianTextDescriptionToBig(textDescriptionData *uint8, textDescriptionSize uint) error {
-	if _err := purego.NewOSStatus(raw.CMSwapHostEndianTextDescriptionToBig(textDescriptionData, textDescriptionSize)).Err(); _err != nil {
+var _fnCMTextFormatDescriptionGetFontName func(objc.ID, uint16, unsafe.Pointer) int32
+
+// CMTextFormatDescriptionGetFontName reports an error if the CoreMedia framework function CMTextFormatDescriptionGetFontName fails.
+func CMTextFormatDescriptionGetFontName(desc obj.Object, localFontID uint16) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTextFormatDescriptionGetFontName == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTextFormatDescriptionGetFontName, _lib, "CMTextFormatDescriptionGetFontName")
+	}
+	var _out0 uintptr
+	_rc := _fnCMTextFormatDescriptionGetFontName(objref.IDOf(desc), localFontID, unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnCMTimebaseAddTimer func(objc.ID, objc.ID, objc.ID) int32
+
+// CMTimebaseAddTimer reports an error if the CoreMedia framework function CMTimebaseAddTimer fails.
+func CMTimebaseAddTimer(timebase obj.Object, timer obj.Object, runloop obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseAddTimer == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseAddTimer, _lib, "CMTimebaseAddTimer")
+	}
+	_rc := _fnCMTimebaseAddTimer(objref.IDOf(timebase), objref.IDOf(timer), objref.IDOf(runloop))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CMSwapHostEndianTimeCodeDescriptionToBig wraps [raw.CMSwapHostEndianTimeCodeDescriptionToBig], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CMSwapHostEndianTimeCodeDescriptionToBig(timeCodeDescriptionData *uint8, timeCodeDescriptionSize uint) error {
-	if _err := purego.NewOSStatus(raw.CMSwapHostEndianTimeCodeDescriptionToBig(timeCodeDescriptionData, timeCodeDescriptionSize)).Err(); _err != nil {
+var _fnCMTimebaseAddTimerDispatchSource func(objc.ID, objc.ID) int32
+
+// CMTimebaseAddTimerDispatchSource reports an error if the CoreMedia framework function CMTimebaseAddTimerDispatchSource fails.
+func CMTimebaseAddTimerDispatchSource(timebase obj.Object, timerSource obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseAddTimerDispatchSource == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseAddTimerDispatchSource, _lib, "CMTimebaseAddTimerDispatchSource")
+	}
+	_rc := _fnCMTimebaseAddTimerDispatchSource(objref.IDOf(timebase), objref.IDOf(timerSource))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMTimebaseNotificationBarrier func(objc.ID) int32
+
+// CMTimebaseNotificationBarrier reports an error if the CoreMedia framework function CMTimebaseNotificationBarrier fails.
+func CMTimebaseNotificationBarrier(timebase obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseNotificationBarrier == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseNotificationBarrier, _lib, "CMTimebaseNotificationBarrier")
+	}
+	_rc := _fnCMTimebaseNotificationBarrier(objref.IDOf(timebase))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMTimebaseRemoveTimer func(objc.ID, objc.ID) int32
+
+// CMTimebaseRemoveTimer reports an error if the CoreMedia framework function CMTimebaseRemoveTimer fails.
+func CMTimebaseRemoveTimer(timebase obj.Object, timer obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseRemoveTimer == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseRemoveTimer, _lib, "CMTimebaseRemoveTimer")
+	}
+	_rc := _fnCMTimebaseRemoveTimer(objref.IDOf(timebase), objref.IDOf(timer))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMTimebaseRemoveTimerDispatchSource func(objc.ID, objc.ID) int32
+
+// CMTimebaseRemoveTimerDispatchSource reports an error if the CoreMedia framework function CMTimebaseRemoveTimerDispatchSource fails.
+func CMTimebaseRemoveTimerDispatchSource(timebase obj.Object, timerSource obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseRemoveTimerDispatchSource == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseRemoveTimerDispatchSource, _lib, "CMTimebaseRemoveTimerDispatchSource")
+	}
+	_rc := _fnCMTimebaseRemoveTimerDispatchSource(objref.IDOf(timebase), objref.IDOf(timerSource))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMTimebaseSetMasterClock func(objc.ID, objc.ID) int32
+
+// CMTimebaseSetMasterClock reports an error if the CoreMedia framework function CMTimebaseSetMasterClock fails.
+func CMTimebaseSetMasterClock(timebase obj.Object, newMasterClock obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseSetMasterClock == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseSetMasterClock, _lib, "CMTimebaseSetMasterClock")
+	}
+	_rc := _fnCMTimebaseSetMasterClock(objref.IDOf(timebase), objref.IDOf(newMasterClock))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMTimebaseSetMasterTimebase func(objc.ID, objc.ID) int32
+
+// CMTimebaseSetMasterTimebase reports an error if the CoreMedia framework function CMTimebaseSetMasterTimebase fails.
+func CMTimebaseSetMasterTimebase(timebase obj.Object, newMasterTimebase obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseSetMasterTimebase == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseSetMasterTimebase, _lib, "CMTimebaseSetMasterTimebase")
+	}
+	_rc := _fnCMTimebaseSetMasterTimebase(objref.IDOf(timebase), objref.IDOf(newMasterTimebase))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMTimebaseSetRate func(objc.ID, float64) int32
+
+// CMTimebaseSetRate reports an error if the CoreMedia framework function CMTimebaseSetRate fails.
+func CMTimebaseSetRate(timebase obj.Object, rate float64) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseSetRate == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseSetRate, _lib, "CMTimebaseSetRate")
+	}
+	_rc := _fnCMTimebaseSetRate(objref.IDOf(timebase), rate)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMTimebaseSetSourceClock func(objc.ID, objc.ID) int32
+
+// CMTimebaseSetSourceClock reports an error if the CoreMedia framework function CMTimebaseSetSourceClock fails.
+func CMTimebaseSetSourceClock(timebase obj.Object, newSourceClock obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseSetSourceClock == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseSetSourceClock, _lib, "CMTimebaseSetSourceClock")
+	}
+	_rc := _fnCMTimebaseSetSourceClock(objref.IDOf(timebase), objref.IDOf(newSourceClock))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMTimebaseSetSourceTimebase func(objc.ID, objc.ID) int32
+
+// CMTimebaseSetSourceTimebase reports an error if the CoreMedia framework function CMTimebaseSetSourceTimebase fails.
+func CMTimebaseSetSourceTimebase(timebase obj.Object, newSourceTimebase obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseSetSourceTimebase == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseSetSourceTimebase, _lib, "CMTimebaseSetSourceTimebase")
+	}
+	_rc := _fnCMTimebaseSetSourceTimebase(objref.IDOf(timebase), objref.IDOf(newSourceTimebase))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMTimebaseSetTimerDispatchSourceToFireImmediately func(objc.ID, objc.ID) int32
+
+// CMTimebaseSetTimerDispatchSourceToFireImmediately reports an error if the CoreMedia framework function CMTimebaseSetTimerDispatchSourceToFireImmediately fails.
+func CMTimebaseSetTimerDispatchSourceToFireImmediately(timebase obj.Object, timerSource obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseSetTimerDispatchSourceToFireImmediately == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseSetTimerDispatchSourceToFireImmediately, _lib, "CMTimebaseSetTimerDispatchSourceToFireImmediately")
+	}
+	_rc := _fnCMTimebaseSetTimerDispatchSourceToFireImmediately(objref.IDOf(timebase), objref.IDOf(timerSource))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnCMTimebaseSetTimerToFireImmediately func(objc.ID, objc.ID) int32
+
+// CMTimebaseSetTimerToFireImmediately reports an error if the CoreMedia framework function CMTimebaseSetTimerToFireImmediately fails.
+func CMTimebaseSetTimerToFireImmediately(timebase obj.Object, timer obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCMTimebaseSetTimerToFireImmediately == nil {
+		ebipurego.RegisterLibFunc(&_fnCMTimebaseSetTimerToFireImmediately, _lib, "CMTimebaseSetTimerToFireImmediately")
+	}
+	_rc := _fnCMTimebaseSetTimerToFireImmediately(objref.IDOf(timebase), objref.IDOf(timer))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil

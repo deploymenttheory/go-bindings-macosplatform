@@ -5,86 +5,96 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Meta-data about an endpoint of a Matter node.
 //
-// MTREndpointInfo wraps [raw.MTREndpointInfo] with a fluent Go API.
+// MTREndpointInfo is an idiomatic wrapper over the Objective-C class MTREndpointInfo.
 type MTREndpointInfo struct {
-	inner *raw.MTREndpointInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTREndpointInfo].
-func (x *MTREndpointInfo) Unwrap() *raw.MTREndpointInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTREndpointInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// MTREndpointInfoFromID adopts an existing object pointer as a MTREndpointInfo (nil for 0).
+// MTREndpointInfoFromID adopts an existing Objective-C object as a MTREndpointInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func MTREndpointInfoFromID(id objc.ID) *MTREndpointInfo {
 	if id == 0 {
 		return nil
 	}
-	return &MTREndpointInfo{inner: raw.MTREndpointInfoFromID(id)}
+	x := &MTREndpointInfo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTREndpointInfo creates a new [MTREndpointInfo].
+// mTREndpointInfoAdopt wraps an Objective-C object that this code just created as a
+// MTREndpointInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTREndpointInfoAdopt(id objc.ID) *MTREndpointInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &MTREndpointInfo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTREndpointInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTREndpointInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTREndpointInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTREndpointInfo creates a new MTREndpointInfo.
 func NewMTREndpointInfo() *MTREndpointInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTREndpointInfo")), objc.RegisterName("new"))
-	return &MTREndpointInfo{inner: raw.MTREndpointInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTREndpointInfo")), objc.RegisterName("new"))
+	return mTREndpointInfoAdopt(_id)
 }
 
-// EndpointID calls the underlying EndpointID.
-func (x *MTREndpointInfo) EndpointID() *foundation.NSNumber {
-	return x.inner.EndpointID()
+func (x *MTREndpointInfo) EndpointID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpointID"))
+	return obj.Wrap(_r)
 }
 
 // DeviceTypes returns the collection as a Go slice.
 func (x *MTREndpointInfo) DeviceTypes() []*MTRDeviceTypeRevision {
-	arr := x.inner.DeviceTypes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTRDeviceTypeRevision {
-		return &MTRDeviceTypeRevision{inner: raw.MTRDeviceTypeRevisionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceTypes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRDeviceTypeRevision { return MTRDeviceTypeRevisionFromID(_id) })
 }
 
 // PartsList returns the collection as a Go slice.
-func (x *MTREndpointInfo) PartsList() []*foundation.NSNumber {
-	arr := x.inner.PartsList()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *MTREndpointInfo) PartsList() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("partsList"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // The direct children of this endpoint. This excludes indirect descendants even if they are listed in the PartsList attribute of this endpoint due to the Full-Family Pattern being used. Refer to Endpoint Composition Patterns in the Matter specification for details.
 //
 // Children returns the collection as a Go slice.
 func (x *MTREndpointInfo) Children() []*MTREndpointInfo {
-	arr := x.inner.Children()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MTREndpointInfo {
-		return &MTREndpointInfo{inner: raw.MTREndpointInfoFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("children"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTREndpointInfo { return MTREndpointInfoFromID(_id) })
 }
 
 // MTREndpointInfoable is the interface implemented by [MTREndpointInfo], for mocking and DI.
 type MTREndpointInfoable interface {
-	Unwrap() *raw.MTREndpointInfo
-	EndpointID() *foundation.NSNumber
+	obj.Object
+	EndpointID() obj.Object
 	DeviceTypes() []*MTRDeviceTypeRevision
-	PartsList() []*foundation.NSNumber
+	PartsList() []obj.Object
 	Children() []*MTREndpointInfo
 }
 

@@ -5,96 +5,99 @@
 package coremotion
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that starts and manages headphone activity services.
 //
-// HeadphoneActivityManager wraps [raw.CMHeadphoneActivityManager] with a fluent Go API.
+// HeadphoneActivityManager is an idiomatic wrapper over the Objective-C class CMHeadphoneActivityManager.
 type HeadphoneActivityManager struct {
-	inner *raw.CMHeadphoneActivityManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CMHeadphoneActivityManager].
-func (x *HeadphoneActivityManager) Unwrap() *raw.CMHeadphoneActivityManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HeadphoneActivityManager) ID() objc.ID { return x.inner.Ptr() }
-
-// HeadphoneActivityManagerFromID adopts an existing object pointer as a HeadphoneActivityManager (nil for 0).
+// HeadphoneActivityManagerFromID adopts an existing Objective-C object as a HeadphoneActivityManager
+// (nil for 0), retaining it and registering a release finalizer.
 func HeadphoneActivityManagerFromID(id objc.ID) *HeadphoneActivityManager {
 	if id == 0 {
 		return nil
 	}
-	return &HeadphoneActivityManager{inner: raw.CMHeadphoneActivityManagerFromID(id)}
+	x := &HeadphoneActivityManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewHeadphoneActivityManager creates a new [HeadphoneActivityManager].
+// headphoneActivityManagerAdopt wraps an Objective-C object that this code just created as a
+// HeadphoneActivityManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func headphoneActivityManagerAdopt(id objc.ID) *HeadphoneActivityManager {
+	if id == 0 {
+		return nil
+	}
+	x := &HeadphoneActivityManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HeadphoneActivityManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HeadphoneActivityManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HeadphoneActivityManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHeadphoneActivityManager creates a new HeadphoneActivityManager.
 func NewHeadphoneActivityManager() *HeadphoneActivityManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CMHeadphoneActivityManager")), objc.RegisterName("new"))
-	return &HeadphoneActivityManager{inner: raw.CMHeadphoneActivityManagerFromID(_id)}
-}
-
-// Starts headphone activity updates, providing data to the given handler through the given queue.
-//
-// StartActivityUpdatesToQueueWithHandler calls the underlying StartActivityUpdatesToQueueWithHandler.
-func (x *HeadphoneActivityManager) StartActivityUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(*raw.CMMotionActivity, unsafe.Pointer)) {
-	x.inner.StartActivityUpdatesToQueueWithHandler(queue, handler)
+	_id := objc.Send[objc.ID](objc.ID(_class("CMHeadphoneActivityManager")), objc.RegisterName("new"))
+	return headphoneActivityManagerAdopt(_id)
 }
 
 // Stops headphone activity updates.
-//
-// StopActivityUpdates calls the underlying StopActivityUpdates.
 func (x *HeadphoneActivityManager) StopActivityUpdates() {
-	x.inner.StopActivityUpdates()
-}
-
-// Starts headphone status updates, providing data to the given handler through the given queue.
-//
-// StartStatusUpdatesToQueueWithHandler calls the underlying StartStatusUpdatesToQueueWithHandler.
-func (x *HeadphoneActivityManager) StartStatusUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(CMHeadphoneActivityStatus, unsafe.Pointer)) {
-	x.inner.StartStatusUpdatesToQueueWithHandler(queue, func(_a0 raw.CMHeadphoneActivityStatus, _a1 unsafe.Pointer) {
-		handler(CMHeadphoneActivityStatus(_a0), _a1)
-	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopActivityUpdates"))
 }
 
 // Stops headphone status updates.
-//
-// StopStatusUpdates calls the underlying StopStatusUpdates.
 func (x *HeadphoneActivityManager) StopStatusUpdates() {
-	x.inner.StopStatusUpdates()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopStatusUpdates"))
 }
 
-// IsActivityAvailable calls the underlying IsActivityAvailable.
 func (x *HeadphoneActivityManager) IsActivityAvailable() bool {
-	return x.inner.IsActivityAvailable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActivityAvailable"))
+	return _r
 }
 
-// IsActivityActive calls the underlying IsActivityActive.
 func (x *HeadphoneActivityManager) IsActivityActive() bool {
-	return x.inner.IsActivityActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActivityActive"))
+	return _r
 }
 
-// IsStatusAvailable calls the underlying IsStatusAvailable.
 func (x *HeadphoneActivityManager) IsStatusAvailable() bool {
-	return x.inner.IsStatusAvailable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStatusAvailable"))
+	return _r
 }
 
-// IsStatusActive calls the underlying IsStatusActive.
 func (x *HeadphoneActivityManager) IsStatusActive() bool {
-	return x.inner.IsStatusActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStatusActive"))
+	return _r
 }
 
 // HeadphoneActivityManagerable is the interface implemented by [HeadphoneActivityManager], for mocking and DI.
 type HeadphoneActivityManagerable interface {
-	Unwrap() *raw.CMHeadphoneActivityManager
-	StartActivityUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(*raw.CMMotionActivity, unsafe.Pointer))
+	obj.Object
 	StopActivityUpdates()
-	StartStatusUpdatesToQueueWithHandler(queue *foundation.NSOperationQueue, handler func(CMHeadphoneActivityStatus, unsafe.Pointer))
 	StopStatusUpdates()
 	IsActivityAvailable() bool
 	IsActivityActive() bool

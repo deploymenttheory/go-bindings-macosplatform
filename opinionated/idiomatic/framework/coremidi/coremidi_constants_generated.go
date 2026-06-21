@@ -5,310 +5,355 @@
 package coremidi
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @constant		kMIDIPropertyName @discussion device/entity/endpoint property, string Devices, entities, and endpoints may all have names.  The recommended way to display an endpoint's name is to ask for the endpoint name, and display only that name if it is unique.  If it is non-unique, prepend the device name. A setup editor may allow the user to set the names of both driver-owned and external devices.
-// KMIDIPropertyName returns the value of the CoreFoundation reference constant kMIDIPropertyName as an objc.ID.
-func KMIDIPropertyName() objc.ID { return purego.CFConstant(raw.KMIDIPropertyName()) }
+// device/entity/endpoint property, string Devices, entities, and endpoints may all have names.  The recommended way to display an endpoint's name is to ask for the endpoint name, and display only that name if it is unique.  If it is non-unique, prepend the device name. A setup editor may allow the user to set the names of both driver-owned and external devices.
+// KMIDIPropertyName returns the value of the constant kMIDIPropertyName.
+func KMIDIPropertyName() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyName"))) }
 
-// @constant		kMIDIPropertyManufacturer @discussion device/endpoint property, string Drivers should set this property on their devices. Setup editors may allow the user to set this property on external devices. Creators of virtual endpoints may set this property on their endpoints.
-// KMIDIPropertyManufacturer returns the value of the CoreFoundation reference constant kMIDIPropertyManufacturer as an objc.ID.
-func KMIDIPropertyManufacturer() objc.ID { return purego.CFConstant(raw.KMIDIPropertyManufacturer()) }
-
-// @constant		kMIDIPropertyModel @discussion device/endpoint property, string Drivers should set this property on their devices. Setup editors may allow the user to set this property on external devices. Creators of virtual endpoints may set this property on their endpoints.
-// KMIDIPropertyModel returns the value of the CoreFoundation reference constant kMIDIPropertyModel as an objc.ID.
-func KMIDIPropertyModel() objc.ID { return purego.CFConstant(raw.KMIDIPropertyModel()) }
-
-// @constant		kMIDIPropertyUniqueID @discussion devices, entities, endpoints all have unique ID's, integer The system assigns unique ID's to all objects.  Creators of virtual endpoints may set this property on their endpoints, though doing so may fail if the chosen ID is not unique.
-// KMIDIPropertyUniqueID returns the value of the CoreFoundation reference constant kMIDIPropertyUniqueID as an objc.ID.
-func KMIDIPropertyUniqueID() objc.ID { return purego.CFConstant(raw.KMIDIPropertyUniqueID()) }
-
-// @constant		kMIDIPropertyDeviceID @discussion device/entity property, integer The entity's system-exclusive ID, in user-visible form Drivers may set this property on their devices or entities. Setup editors may allow the user to set this property on external devices.
-// KMIDIPropertyDeviceID returns the value of the CoreFoundation reference constant kMIDIPropertyDeviceID as an objc.ID.
-func KMIDIPropertyDeviceID() objc.ID { return purego.CFConstant(raw.KMIDIPropertyDeviceID()) }
-
-// @constant		kMIDIPropertyReceiveChannels @discussion endpoint property, integer The value is a bitmap of channels on which the object receives: 1=ch 1, 2=ch 2, 4=ch 3 ... 0x8000=ch 16. Drivers may set this property on their entities or endpoints. Setup editors may allow the user to set this property on external endpoints. Virtual destination may set this property on their endpoints.
-// KMIDIPropertyReceiveChannels returns the value of the CoreFoundation reference constant kMIDIPropertyReceiveChannels as an objc.ID.
-func KMIDIPropertyReceiveChannels() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyReceiveChannels())
+// device/endpoint property, string Drivers should set this property on their devices. Setup editors may allow the user to set this property on external devices. Creators of virtual endpoints may set this property on their endpoints.
+// KMIDIPropertyManufacturer returns the value of the constant kMIDIPropertyManufacturer.
+func KMIDIPropertyManufacturer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyManufacturer")))
 }
 
-// @constant		kMIDIPropertyTransmitChannels @discussion endpoint property, integer The value is a bitmap of channels on which the object transmits: 1=ch 1, 2=ch 2, 4=ch 3 ... 0x8000=ch 16.
-// KMIDIPropertyTransmitChannels returns the value of the CoreFoundation reference constant kMIDIPropertyTransmitChannels as an objc.ID.
-func KMIDIPropertyTransmitChannels() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyTransmitChannels())
+// device/endpoint property, string Drivers should set this property on their devices. Setup editors may allow the user to set this property on external devices. Creators of virtual endpoints may set this property on their endpoints.
+// KMIDIPropertyModel returns the value of the constant kMIDIPropertyModel.
+func KMIDIPropertyModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyModel")))
 }
 
-// @constant		kMIDIPropertyMaxSysExSpeed @discussion device/entity/endpoint property, integer Set by the owning driver; should not be touched by other clients. The value is the maximum rate, in bytes/second, at which sysex messages may be sent reliably to this object. (The default value is 3125, as with MIDI 1.0)
-// KMIDIPropertyMaxSysExSpeed returns the value of the CoreFoundation reference constant kMIDIPropertyMaxSysExSpeed as an objc.ID.
-func KMIDIPropertyMaxSysExSpeed() objc.ID { return purego.CFConstant(raw.KMIDIPropertyMaxSysExSpeed()) }
-
-// @constant		kMIDIPropertyAdvanceScheduleTimeMuSec @discussion device/entity/endpoint property, integer Set by the owning driver; should not be touched by other clients. If it is non-zero, then it is a recommendation of how many microseconds in advance clients should schedule output. Clients should treat this value as a minimum.  For devices with a non-zero advance schedule time, drivers will receive outgoing messages to the device at the time they are sent by the client, via MIDISend, and the driver is responsible for scheduling events to be played at the right times according to their timestamps. As of CoreMIDI 1.3, this property may also be set on virtual destinations (but only the creator of the destination should do so). When a client sends to a virtual destination with an advance schedule time of 0, the virtual destination receives its messages at their scheduled delivery time.  If a virtual destination has a non-zero advance schedule time, it receives timestamped messages as soon as they are sent, and must do its own internal scheduling of received events.
-// KMIDIPropertyAdvanceScheduleTimeMuSec returns the value of the CoreFoundation reference constant kMIDIPropertyAdvanceScheduleTimeMuSec as an objc.ID.
-func KMIDIPropertyAdvanceScheduleTimeMuSec() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyAdvanceScheduleTimeMuSec())
+// devices, entities, endpoints all have unique ID's, integer The system assigns unique ID's to all objects.  Creators of virtual endpoints may set this property on their endpoints, though doing so may fail if the chosen ID is not unique.
+// KMIDIPropertyUniqueID returns the value of the constant kMIDIPropertyUniqueID.
+func KMIDIPropertyUniqueID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyUniqueID")))
 }
 
-// @constant		kMIDIPropertyIsEmbeddedEntity @discussion entity/endpoint property, integer 0 if there are external MIDI connectors, 1 if not.
-// KMIDIPropertyIsEmbeddedEntity returns the value of the CoreFoundation reference constant kMIDIPropertyIsEmbeddedEntity as an objc.ID.
-func KMIDIPropertyIsEmbeddedEntity() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyIsEmbeddedEntity())
+// device/entity property, integer The entity's system-exclusive ID, in user-visible form Drivers may set this property on their devices or entities. Setup editors may allow the user to set this property on external devices.
+// KMIDIPropertyDeviceID returns the value of the constant kMIDIPropertyDeviceID.
+func KMIDIPropertyDeviceID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyDeviceID")))
 }
 
-// @constant		kMIDIPropertyIsBroadcast @discussion entity/endpoint property, integer 1 if the endpoint broadcasts messages to all of the other endpoints in the device, 0 if not.  Set by the owning driver; should not be touched by other clients.
-// KMIDIPropertyIsBroadcast returns the value of the CoreFoundation reference constant kMIDIPropertyIsBroadcast as an objc.ID.
-func KMIDIPropertyIsBroadcast() objc.ID { return purego.CFConstant(raw.KMIDIPropertyIsBroadcast()) }
-
-// @constant		kMIDIPropertySingleRealtimeEntity @discussion device property, integer Some MIDI interfaces cannot route MIDI realtime messages to individual outputs; they are broadcast.  On such devices the inverse is usually also true -- incoming realtime messages cannot be identified as originating from any particular source. When this property is set on a driver device, it signifies the 0-based index of the entity on which incoming realtime messages from the device will appear to have originated from.
-// KMIDIPropertySingleRealtimeEntity returns the value of the CoreFoundation reference constant kMIDIPropertySingleRealtimeEntity as an objc.ID.
-func KMIDIPropertySingleRealtimeEntity() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertySingleRealtimeEntity())
+// endpoint property, integer The value is a bitmap of channels on which the object receives: 1=ch 1, 2=ch 2, 4=ch 3 ... 0x8000=ch 16. Drivers may set this property on their entities or endpoints. Setup editors may allow the user to set this property on external endpoints. Virtual destination may set this property on their endpoints.
+// KMIDIPropertyReceiveChannels returns the value of the constant kMIDIPropertyReceiveChannels.
+func KMIDIPropertyReceiveChannels() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyReceiveChannels")))
 }
 
-// @constant		kMIDIPropertyConnectionUniqueID @discussion device/entity/endpoint property, integer or CFDataRef UniqueID of an external device/entity/endpoint attached to this one. As of Mac OS X 10.3, Audio MIDI Setup maintains endpoint-to-external endpoint connections (in 10.2, it connected devices to devices). The property is non-existant or 0 if there is no connection. Beginning with CoreMIDI 1.3 (Mac OS X 10.2), this property may also be a CFDataRef containing an array of big-endian SInt32's, to allow specifying that a driver object connects to multiple external objects (via MIDI thru-ing or splitting). This property may also exist for external devices/entities/endpoints, in which case it signifies a MIDI Thru connection to another external device/entity/endpoint (again, it is strongly recommended that it be an endpoint).
-// KMIDIPropertyConnectionUniqueID returns the value of the CoreFoundation reference constant kMIDIPropertyConnectionUniqueID as an objc.ID.
-func KMIDIPropertyConnectionUniqueID() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyConnectionUniqueID())
+// endpoint property, integer The value is a bitmap of channels on which the object transmits: 1=ch 1, 2=ch 2, 4=ch 3 ... 0x8000=ch 16.
+// KMIDIPropertyTransmitChannels returns the value of the constant kMIDIPropertyTransmitChannels.
+func KMIDIPropertyTransmitChannels() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyTransmitChannels")))
 }
 
-// @constant		kMIDIPropertyOffline @discussion device/entity/endpoint property, integer 1 = device is offline (is temporarily absent), 0 = present. Set by the owning driver, on the device; should not be touched by other clients. Property is inherited from the device by its entities and endpoints.
-// KMIDIPropertyOffline returns the value of the CoreFoundation reference constant kMIDIPropertyOffline as an objc.ID.
-func KMIDIPropertyOffline() objc.ID { return purego.CFConstant(raw.KMIDIPropertyOffline()) }
-
-// @constant		kMIDIPropertyPrivate @discussion device/entity/endpoint property, integer 1 = endpoint is private, hidden from other clients. May be set on a device or entity, but they will still appear in the API; only affects whether the owned endpoints are hidden.
-// KMIDIPropertyPrivate returns the value of the CoreFoundation reference constant kMIDIPropertyPrivate as an objc.ID.
-func KMIDIPropertyPrivate() objc.ID { return purego.CFConstant(raw.KMIDIPropertyPrivate()) }
-
-// @constant		kMIDIPropertyDriverOwner @discussion device/entity/endpoint property, string Name of the driver that owns a device. Set by the owning driver, on the device; should not be touched by other clients. Property is inherited from the device by its entities and endpoints.
-// KMIDIPropertyDriverOwner returns the value of the CoreFoundation reference constant kMIDIPropertyDriverOwner as an objc.ID.
-func KMIDIPropertyDriverOwner() objc.ID { return purego.CFConstant(raw.KMIDIPropertyDriverOwner()) }
-
-// @constant		kMIDIPropertyFactoryPatchNameFile @discussion device/entity/endpoint property, CFData containing AliasHandle. An alias to the device's current factory patch name file. Added in CoreMIDI 1.1 (Mac OS X 10.1).  DEPRECATED as of CoreMIDI 1.3. Use kMIDIPropertyNameConfiguration instead.
-// KMIDIPropertyFactoryPatchNameFile returns the value of the CoreFoundation reference constant kMIDIPropertyFactoryPatchNameFile as an objc.ID.
-func KMIDIPropertyFactoryPatchNameFile() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyFactoryPatchNameFile())
+// device/entity/endpoint property, integer Set by the owning driver; should not be touched by other clients. The value is the maximum rate, in bytes/second, at which sysex messages may be sent reliably to this object. (The default value is 3125, as with MIDI 1.0)
+// KMIDIPropertyMaxSysExSpeed returns the value of the constant kMIDIPropertyMaxSysExSpeed.
+func KMIDIPropertyMaxSysExSpeed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyMaxSysExSpeed")))
 }
 
-// @constant		kMIDIPropertyUserPatchNameFile @discussion device/entity/endpoint property, CFData containing AliasHandle An alias to the device's current user patch name file. Added in CoreMIDI 1.1 (Mac OS X 10.1).  DEPRECATED as of CoreMIDI 1.3. Use kMIDIPropertyNameConfiguration instead.
-// KMIDIPropertyUserPatchNameFile returns the value of the CoreFoundation reference constant kMIDIPropertyUserPatchNameFile as an objc.ID.
-func KMIDIPropertyUserPatchNameFile() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyUserPatchNameFile())
+// device/entity/endpoint property, integer Set by the owning driver; should not be touched by other clients. If it is non-zero, then it is a recommendation of how many microseconds in advance clients should schedule output. Clients should treat this value as a minimum.  For devices with a non-zero advance schedule time, drivers will receive outgoing messages to the device at the time they are sent by the client, via MIDISend, and the driver is responsible for scheduling events to be played at the right times according to their timestamps. As of CoreMIDI 1.3, this property may also be set on virtual destinations (but only the creator of the destination should do so). When a client sends to a virtual destination with an advance schedule time of 0, the virtual destination receives its messages at their scheduled delivery time.  If a virtual destination has a non-zero advance schedule time, it receives timestamped messages as soon as they are sent, and must do its own internal scheduling of received events.
+// KMIDIPropertyAdvanceScheduleTimeMuSec returns the value of the constant kMIDIPropertyAdvanceScheduleTimeMuSec.
+func KMIDIPropertyAdvanceScheduleTimeMuSec() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyAdvanceScheduleTimeMuSec")))
 }
 
-// @constant		kMIDIPropertyNameConfiguration @discussion device/entity/endpoint property, CFDictionary This specifies the device's current patch, note and control name values using the MIDINameDocument XML format.  This specification requires the use of higher-level, OS-specific constructs outside of the specification to fully define the current names for a device. The MIDINameConfiguration property is implementated as a CFDictionary: key "master" maps to a CFDataRef containing an AliasHandle referring to the device's master name document. This is deprecated as of Mac OS X 10.10. key "masterDocumentPath" maps to a CFStringRef containing the filesystem path to the device's master name document. (This is new as of Mac OS X 10.10, but since the CoreMIDI implementation does not parse this dictionary, the convention can be safely ported to earlier versions of Mac OS X.) key "banks" maps to a CFDictionaryRef.  This dictionary's keys are CFStringRef names of patchBank elements in the master document, and its values are each a CFDictionaryRef: key "file" maps to a CFDataRef containing an AliasHandle to a document containing patches that override those in the master document, and key "patchNameList" maps to a CFStringRef which is the name of the patchNameList element in the overriding document. key "currentChannelNameSets" maps to a 16-element CFArrayRef, each element of which is a CFStringRef of the name of the current mode for each of the 16 MIDI channels. key "currentDeviceMode" maps to a CFStringRef containing the name of the device's mode. Clients setting this property must take particular care to preserve dictionary values other than the ones they are interested in changing and to properly structure the dictionary.
-// KMIDIPropertyNameConfiguration returns the value of the CoreFoundation reference constant kMIDIPropertyNameConfiguration as an objc.ID.
-func KMIDIPropertyNameConfiguration() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyNameConfiguration())
+// entity/endpoint property, integer 0 if there are external MIDI connectors, 1 if not.
+// KMIDIPropertyIsEmbeddedEntity returns the value of the constant kMIDIPropertyIsEmbeddedEntity.
+func KMIDIPropertyIsEmbeddedEntity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyIsEmbeddedEntity")))
 }
 
-// @constant        kMIDIPropertyNameConfigurationDictionary @discussion device/entity/endpoint property, CFDictionary This specifies the device's current patch, note and control name values using the MIDINameDocument XML format.  This specification requires the use of higher-level, OS-specific constructs outside of the specification to fully define the current names for a device. The MIDINameConfiguration property is implementated as a CFDictionary: key "masterDocumentPath" maps to a CFStringRef containing the filesystem path to the device's master name document. key "banks" maps to a CFDictionaryRef.  This dictionary's keys are CFStringRef names of patchBank elements in the master document, and its values are each a CFDictionaryRef: key "file" maps to a CFDataRef containing URL bookmark data to a document containing patches that override those in the master document, and key "patchNameList" maps to a CFStringRef which is the name of the patchNameList element in the overriding document. key "currentChannelNameSets" maps to a 16-element CFArrayRef, each element of which is a CFStringRef of the name of the current mode for each of the 16 MIDI channels. key "currentDeviceMode" maps to a CFStringRef containing the name of the device's mode. Clients setting this property must take particular care to preserve dictionary values other than the ones they are interested in changing and to properly structure the dictionary.
-// KMIDIPropertyNameConfigurationDictionary returns the value of the CoreFoundation reference constant kMIDIPropertyNameConfigurationDictionary as an objc.ID.
-func KMIDIPropertyNameConfigurationDictionary() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyNameConfigurationDictionary())
+// entity/endpoint property, integer 1 if the endpoint broadcasts messages to all of the other endpoints in the device, 0 if not.  Set by the owning driver; should not be touched by other clients.
+// KMIDIPropertyIsBroadcast returns the value of the constant kMIDIPropertyIsBroadcast.
+func KMIDIPropertyIsBroadcast() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyIsBroadcast")))
 }
 
-// @constant		kMIDIPropertyImage @discussion device property, CFStringRef which is a full POSIX path to a device or external device's icon, stored in any standard graphic file format such as JPEG, GIF, PNG and TIFF are all acceptable.  (See CFURL for functions to convert between POSIX paths and other ways of specifying files.)  The image's maximum size should be 128x128. Drivers should set the icon on the devices they add. A studio setup editor should allow the user to choose icons for external devices.
-// KMIDIPropertyImage returns the value of the CoreFoundation reference constant kMIDIPropertyImage as an objc.ID.
-func KMIDIPropertyImage() objc.ID { return purego.CFConstant(raw.KMIDIPropertyImage()) }
-
-// @constant		kMIDIPropertyDriverVersion @discussion device/entity/endpoint property, integer, returns the driver version API of the owning driver (only for driver- owned devices).  Drivers need not set this property; applications should not write to it.
-// KMIDIPropertyDriverVersion returns the value of the CoreFoundation reference constant kMIDIPropertyDriverVersion as an objc.ID.
-func KMIDIPropertyDriverVersion() objc.ID { return purego.CFConstant(raw.KMIDIPropertyDriverVersion()) }
-
-// @constant		kMIDIPropertySupportsGeneralMIDI @discussion device/entity property, integer (0/1). Indicates whether the device or entity implements the General MIDI specification.
-// KMIDIPropertySupportsGeneralMIDI returns the value of the CoreFoundation reference constant kMIDIPropertySupportsGeneralMIDI as an objc.ID.
-func KMIDIPropertySupportsGeneralMIDI() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertySupportsGeneralMIDI())
+// device property, integer Some MIDI interfaces cannot route MIDI realtime messages to individual outputs; they are broadcast.  On such devices the inverse is usually also true -- incoming realtime messages cannot be identified as originating from any particular source. When this property is set on a driver device, it signifies the 0-based index of the entity on which incoming realtime messages from the device will appear to have originated from.
+// KMIDIPropertySingleRealtimeEntity returns the value of the constant kMIDIPropertySingleRealtimeEntity.
+func KMIDIPropertySingleRealtimeEntity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertySingleRealtimeEntity")))
 }
 
-// @constant		kMIDIPropertySupportsMMC @discussion device/entity property, integer (0/1). Indicates whether the device or entity implements the MIDI Machine Control portion of the MIDI specification.
-// KMIDIPropertySupportsMMC returns the value of the CoreFoundation reference constant kMIDIPropertySupportsMMC as an objc.ID.
-func KMIDIPropertySupportsMMC() objc.ID { return purego.CFConstant(raw.KMIDIPropertySupportsMMC()) }
-
-// @constant		kMIDIPropertyCanRoute @discussion device/entity property, integer (0/1). Indicates whether the device or entity can route MIDI messages to or from other external MIDI devices (as with MIDI patch bays). This should NOT be set on devices which are controlled by drivers.
-// KMIDIPropertyCanRoute returns the value of the CoreFoundation reference constant kMIDIPropertyCanRoute as an objc.ID.
-func KMIDIPropertyCanRoute() objc.ID { return purego.CFConstant(raw.KMIDIPropertyCanRoute()) }
-
-// @constant		kMIDIPropertyReceivesClock @discussion device/entity property, integer (0/1). Indicates whether the device or entity  responds to MIDI beat clock messages.
-// KMIDIPropertyReceivesClock returns the value of the CoreFoundation reference constant kMIDIPropertyReceivesClock as an objc.ID.
-func KMIDIPropertyReceivesClock() objc.ID { return purego.CFConstant(raw.KMIDIPropertyReceivesClock()) }
-
-// @constant		kMIDIPropertyReceivesMTC @discussion device/entity property, integer (0/1). Indicates whether the device or entity responds to MIDI Time Code messages.
-// KMIDIPropertyReceivesMTC returns the value of the CoreFoundation reference constant kMIDIPropertyReceivesMTC as an objc.ID.
-func KMIDIPropertyReceivesMTC() objc.ID { return purego.CFConstant(raw.KMIDIPropertyReceivesMTC()) }
-
-// @constant		kMIDIPropertyReceivesNotes @discussion device/entity property, integer (0/1). Indicates whether the device or entity responds to MIDI Note On messages.
-// KMIDIPropertyReceivesNotes returns the value of the CoreFoundation reference constant kMIDIPropertyReceivesNotes as an objc.ID.
-func KMIDIPropertyReceivesNotes() objc.ID { return purego.CFConstant(raw.KMIDIPropertyReceivesNotes()) }
-
-// @constant		kMIDIPropertyReceivesProgramChanges @discussion device/entity property, integer (0/1). Indicates whether the device or entity responds to MIDI program change messages.
-// KMIDIPropertyReceivesProgramChanges returns the value of the CoreFoundation reference constant kMIDIPropertyReceivesProgramChanges as an objc.ID.
-func KMIDIPropertyReceivesProgramChanges() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyReceivesProgramChanges())
+// device/entity/endpoint property, integer or CFDataRef UniqueID of an external device/entity/endpoint attached to this one. As of Mac OS X 10.3, Audio MIDI Setup maintains endpoint-to-external endpoint connections (in 10.2, it connected devices to devices). The property is non-existant or 0 if there is no connection. Beginning with CoreMIDI 1.3 (Mac OS X 10.2), this property may also be a CFDataRef containing an array of big-endian SInt32's, to allow specifying that a driver object connects to multiple external objects (via MIDI thru-ing or splitting). This property may also exist for external devices/entities/endpoints, in which case it signifies a MIDI Thru connection to another external device/entity/endpoint (again, it is strongly recommended that it be an endpoint).
+// KMIDIPropertyConnectionUniqueID returns the value of the constant kMIDIPropertyConnectionUniqueID.
+func KMIDIPropertyConnectionUniqueID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyConnectionUniqueID")))
 }
 
-// @constant		kMIDIPropertyReceivesBankSelectMSB @discussion device/entity property, integer (0/1). Indicates whether the device or entity responds to MIDI bank select MSB messages (control 0).
-// KMIDIPropertyReceivesBankSelectMSB returns the value of the CoreFoundation reference constant kMIDIPropertyReceivesBankSelectMSB as an objc.ID.
-func KMIDIPropertyReceivesBankSelectMSB() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyReceivesBankSelectMSB())
+// device/entity/endpoint property, integer 1 = device is offline (is temporarily absent), 0 = present. Set by the owning driver, on the device; should not be touched by other clients. Property is inherited from the device by its entities and endpoints.
+// KMIDIPropertyOffline returns the value of the constant kMIDIPropertyOffline.
+func KMIDIPropertyOffline() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyOffline")))
 }
 
-// @constant		kMIDIPropertyReceivesBankSelectLSB @discussion device/entity property, integer (0/1). Indicates whether the device or entity responds to MIDI bank select LSB messages (control 32).
-// KMIDIPropertyReceivesBankSelectLSB returns the value of the CoreFoundation reference constant kMIDIPropertyReceivesBankSelectLSB as an objc.ID.
-func KMIDIPropertyReceivesBankSelectLSB() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyReceivesBankSelectLSB())
+// device/entity/endpoint property, integer 1 = endpoint is private, hidden from other clients. May be set on a device or entity, but they will still appear in the API; only affects whether the owned endpoints are hidden.
+// KMIDIPropertyPrivate returns the value of the constant kMIDIPropertyPrivate.
+func KMIDIPropertyPrivate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyPrivate")))
 }
 
-// @constant		kMIDIPropertyTransmitsClock @discussion device/entity property, integer (0/1). Indicates whether the device or entity transmits MIDI beat clock messages.
-// KMIDIPropertyTransmitsClock returns the value of the CoreFoundation reference constant kMIDIPropertyTransmitsClock as an objc.ID.
-func KMIDIPropertyTransmitsClock() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyTransmitsClock())
+// device/entity/endpoint property, string Name of the driver that owns a device. Set by the owning driver, on the device; should not be touched by other clients. Property is inherited from the device by its entities and endpoints.
+// KMIDIPropertyDriverOwner returns the value of the constant kMIDIPropertyDriverOwner.
+func KMIDIPropertyDriverOwner() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyDriverOwner")))
 }
 
-// @constant		kMIDIPropertyTransmitsMTC @discussion device/entity property, integer (0/1). Indicates whether the device or entity transmits MIDI Time Code messages.
-// KMIDIPropertyTransmitsMTC returns the value of the CoreFoundation reference constant kMIDIPropertyTransmitsMTC as an objc.ID.
-func KMIDIPropertyTransmitsMTC() objc.ID { return purego.CFConstant(raw.KMIDIPropertyTransmitsMTC()) }
-
-// @constant		kMIDIPropertyTransmitsNotes @discussion device/entity property, integer (0/1). Indicates whether the device or entity transmits MIDI note messages.
-// KMIDIPropertyTransmitsNotes returns the value of the CoreFoundation reference constant kMIDIPropertyTransmitsNotes as an objc.ID.
-func KMIDIPropertyTransmitsNotes() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyTransmitsNotes())
+// device/entity/endpoint property, CFData containing AliasHandle. An alias to the device's current factory patch name file. Added in CoreMIDI 1.1 (Mac OS X 10.1).  DEPRECATED as of CoreMIDI 1.3. Use kMIDIPropertyNameConfiguration instead.
+// KMIDIPropertyFactoryPatchNameFile returns the value of the constant kMIDIPropertyFactoryPatchNameFile.
+func KMIDIPropertyFactoryPatchNameFile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyFactoryPatchNameFile")))
 }
 
-// @constant		kMIDIPropertyTransmitsProgramChanges @discussion device/entity property, integer (0/1). Indicates whether the device or entity transmits MIDI program change messages.
-// KMIDIPropertyTransmitsProgramChanges returns the value of the CoreFoundation reference constant kMIDIPropertyTransmitsProgramChanges as an objc.ID.
-func KMIDIPropertyTransmitsProgramChanges() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyTransmitsProgramChanges())
+// device/entity/endpoint property, CFData containing AliasHandle An alias to the device's current user patch name file. Added in CoreMIDI 1.1 (Mac OS X 10.1).  DEPRECATED as of CoreMIDI 1.3. Use kMIDIPropertyNameConfiguration instead.
+// KMIDIPropertyUserPatchNameFile returns the value of the constant kMIDIPropertyUserPatchNameFile.
+func KMIDIPropertyUserPatchNameFile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyUserPatchNameFile")))
 }
 
-// @constant		kMIDIPropertyTransmitsBankSelectMSB @discussion device/entity property, integer (0/1). Indicates whether the device or entity transmits MIDI bank select MSB messages (control 0).
-// KMIDIPropertyTransmitsBankSelectMSB returns the value of the CoreFoundation reference constant kMIDIPropertyTransmitsBankSelectMSB as an objc.ID.
-func KMIDIPropertyTransmitsBankSelectMSB() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyTransmitsBankSelectMSB())
+// device/entity/endpoint property, CFDictionary This specifies the device's current patch, note and control name values using the MIDINameDocument XML format.  This specification requires the use of higher-level, OS-specific constructs outside of the specification to fully define the current names for a device. The MIDINameConfiguration property is implementated as a CFDictionary: key "master" maps to a CFDataRef containing an AliasHandle referring to the device's master name document. This is deprecated as of Mac OS X 10.10. key "masterDocumentPath" maps to a CFStringRef containing the filesystem path to the device's master name document. (This is new as of Mac OS X 10.10, but since the CoreMIDI implementation does not parse this dictionary, the convention can be safely ported to earlier versions of Mac OS X.) key "banks" maps to a CFDictionaryRef.  This dictionary's keys are CFStringRef names of patchBank elements in the master document, and its values are each a CFDictionaryRef: key "file" maps to a CFDataRef containing an AliasHandle to a document containing patches that override those in the master document, and key "patchNameList" maps to a CFStringRef which is the name of the patchNameList element in the overriding document. key "currentChannelNameSets" maps to a 16-element CFArrayRef, each element of which is a CFStringRef of the name of the current mode for each of the 16 MIDI channels. key "currentDeviceMode" maps to a CFStringRef containing the name of the device's mode. Clients setting this property must take particular care to preserve dictionary values other than the ones they are interested in changing and to properly structure the dictionary.
+// KMIDIPropertyNameConfiguration returns the value of the constant kMIDIPropertyNameConfiguration.
+func KMIDIPropertyNameConfiguration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyNameConfiguration")))
 }
 
-// @constant		kMIDIPropertyTransmitsBankSelectLSB @discussion device/entity property, integer (0/1). Indicates whether the device or entity transmits MIDI bank select LSB messages (control 32).
-// KMIDIPropertyTransmitsBankSelectLSB returns the value of the CoreFoundation reference constant kMIDIPropertyTransmitsBankSelectLSB as an objc.ID.
-func KMIDIPropertyTransmitsBankSelectLSB() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyTransmitsBankSelectLSB())
+// device/entity/endpoint property, CFDictionary This specifies the device's current patch, note and control name values using the MIDINameDocument XML format.  This specification requires the use of higher-level, OS-specific constructs outside of the specification to fully define the current names for a device. The MIDINameConfiguration property is implementated as a CFDictionary: key "masterDocumentPath" maps to a CFStringRef containing the filesystem path to the device's master name document. key "banks" maps to a CFDictionaryRef.  This dictionary's keys are CFStringRef names of patchBank elements in the master document, and its values are each a CFDictionaryRef: key "file" maps to a CFDataRef containing URL bookmark data to a document containing patches that override those in the master document, and key "patchNameList" maps to a CFStringRef which is the name of the patchNameList element in the overriding document. key "currentChannelNameSets" maps to a 16-element CFArrayRef, each element of which is a CFStringRef of the name of the current mode for each of the 16 MIDI channels. key "currentDeviceMode" maps to a CFStringRef containing the name of the device's mode. Clients setting this property must take particular care to preserve dictionary values other than the ones they are interested in changing and to properly structure the dictionary.
+// KMIDIPropertyNameConfigurationDictionary returns the value of the constant kMIDIPropertyNameConfigurationDictionary.
+func KMIDIPropertyNameConfigurationDictionary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyNameConfigurationDictionary")))
 }
 
-// @constant		kMIDIPropertyPanDisruptsStereo @discussion device/entity property, integer (0/1). Indicates whether the MIDI pan messages (control 10), when sent to the device or entity, cause undesirable effects when playing stereo sounds (e.g. converting the signal to mono).
-// KMIDIPropertyPanDisruptsStereo returns the value of the CoreFoundation reference constant kMIDIPropertyPanDisruptsStereo as an objc.ID.
-func KMIDIPropertyPanDisruptsStereo() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyPanDisruptsStereo())
+// device property, CFStringRef which is a full POSIX path to a device or external device's icon, stored in any standard graphic file format such as JPEG, GIF, PNG and TIFF are all acceptable.  (See CFURL for functions to convert between POSIX paths and other ways of specifying files.)  The image's maximum size should be 128x128. Drivers should set the icon on the devices they add. A studio setup editor should allow the user to choose icons for external devices.
+// KMIDIPropertyImage returns the value of the constant kMIDIPropertyImage.
+func KMIDIPropertyImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyImage")))
 }
 
-// @constant		kMIDIPropertyIsSampler @discussion device/entity property, integer (0/1). Indicates whether the device or entity plays audio samples in response to MIDI note messages.
-// KMIDIPropertyIsSampler returns the value of the CoreFoundation reference constant kMIDIPropertyIsSampler as an objc.ID.
-func KMIDIPropertyIsSampler() objc.ID { return purego.CFConstant(raw.KMIDIPropertyIsSampler()) }
-
-// @constant		kMIDIPropertyIsDrumMachine @discussion device/entity property, integer (0/1). Indicates whether the device or entity's sound presets tend to be collections of non-transposable samples (e.g. drum kits).
-// KMIDIPropertyIsDrumMachine returns the value of the CoreFoundation reference constant kMIDIPropertyIsDrumMachine as an objc.ID.
-func KMIDIPropertyIsDrumMachine() objc.ID { return purego.CFConstant(raw.KMIDIPropertyIsDrumMachine()) }
-
-// @constant		kMIDIPropertyIsMixer @discussion device/entity property, integer (0/1). Indicates whether the device or entity mixes external audio signals, controlled by MIDI messages.
-// KMIDIPropertyIsMixer returns the value of the CoreFoundation reference constant kMIDIPropertyIsMixer as an objc.ID.
-func KMIDIPropertyIsMixer() objc.ID { return purego.CFConstant(raw.KMIDIPropertyIsMixer()) }
-
-// @constant		kMIDIPropertyIsEffectUnit @discussion device/entity property, integer (0/1). Indicates whether the device or entity is primarily a MIDI-controlled audio effect unit (i.e. does not generate sound on its own).
-// KMIDIPropertyIsEffectUnit returns the value of the CoreFoundation reference constant kMIDIPropertyIsEffectUnit as an objc.ID.
-func KMIDIPropertyIsEffectUnit() objc.ID { return purego.CFConstant(raw.KMIDIPropertyIsEffectUnit()) }
-
-// @constant		kMIDIPropertyMaxReceiveChannels @discussion device/entity property, integer (0-16). Indicates the maximum number of MIDI channels on which a device may simultaneously receive MIDI Channel Messages. Common values are 0 (devices which only respond to System Messages), 1 (non-multitimbral devices), and 16 (fully multitimbral devices). Other values are possible, for example devices which are multi-timbral but have fewer than 16 "parts".
-// KMIDIPropertyMaxReceiveChannels returns the value of the CoreFoundation reference constant kMIDIPropertyMaxReceiveChannels as an objc.ID.
-func KMIDIPropertyMaxReceiveChannels() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyMaxReceiveChannels())
+// device/entity/endpoint property, integer, returns the driver version API of the owning driver (only for driver- owned devices).  Drivers need not set this property; applications should not write to it.
+// KMIDIPropertyDriverVersion returns the value of the constant kMIDIPropertyDriverVersion.
+func KMIDIPropertyDriverVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyDriverVersion")))
 }
 
-// @constant		kMIDIPropertyMaxTransmitChannels @discussion device/entity property, integer (0/1). Indicates the maximum number of MIDI channels on which a device may simultaneously transmit MIDI Channel Messages. Common values are 0, 1 and 16.
-// KMIDIPropertyMaxTransmitChannels returns the value of the CoreFoundation reference constant kMIDIPropertyMaxTransmitChannels as an objc.ID.
-func KMIDIPropertyMaxTransmitChannels() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyMaxTransmitChannels())
+// device/entity property, integer (0/1). Indicates whether the device or entity implements the General MIDI specification.
+// KMIDIPropertySupportsGeneralMIDI returns the value of the constant kMIDIPropertySupportsGeneralMIDI.
+func KMIDIPropertySupportsGeneralMIDI() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertySupportsGeneralMIDI")))
 }
 
-// @constant		kMIDIPropertyDriverDeviceEditorApp @discussion device property, string, contains the full path to an application which knows how to configure this driver-owned devices. Drivers may set this property on their owned devices. Applications must not write to it.
-// KMIDIPropertyDriverDeviceEditorApp returns the value of the CoreFoundation reference constant kMIDIPropertyDriverDeviceEditorApp as an objc.ID.
-func KMIDIPropertyDriverDeviceEditorApp() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyDriverDeviceEditorApp())
+// device/entity property, integer (0/1). Indicates whether the device or entity implements the MIDI Machine Control portion of the MIDI specification.
+// KMIDIPropertySupportsMMC returns the value of the constant kMIDIPropertySupportsMMC.
+func KMIDIPropertySupportsMMC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertySupportsMMC")))
 }
 
-// @constant		kMIDIPropertySupportsShowControl @discussion device/entity property, integer (0/1). Indicates whether the device implements the MIDI Show Control specification.
-// KMIDIPropertySupportsShowControl returns the value of the CoreFoundation reference constant kMIDIPropertySupportsShowControl as an objc.ID.
-func KMIDIPropertySupportsShowControl() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertySupportsShowControl())
+// device/entity property, integer (0/1). Indicates whether the device or entity can route MIDI messages to or from other external MIDI devices (as with MIDI patch bays). This should NOT be set on devices which are controlled by drivers.
+// KMIDIPropertyCanRoute returns the value of the constant kMIDIPropertyCanRoute.
+func KMIDIPropertyCanRoute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyCanRoute")))
 }
 
-// @constant		kMIDIPropertyDisplayName @discussion device/entity/endpoint property, string. Provides the Apple-recommended user-visible name for an endpoint, by combining the device and endpoint names. For objects other than endpoints, the display name is the same as the name.
-// KMIDIPropertyDisplayName returns the value of the CoreFoundation reference constant kMIDIPropertyDisplayName as an objc.ID.
-func KMIDIPropertyDisplayName() objc.ID { return purego.CFConstant(raw.KMIDIPropertyDisplayName()) }
-
-// constant		kMIDIPropertyProtocolID @discussion device/entity/endpoint property (UMP-native), MIDIProtocolID. Indicates the native protocol in which the endpoint communicates. The value is set by the system on endpoints, when they are created. Drivers may dynamically change the protocol of an endpoint as a result of a MIDI-CI negotiation, by setting this property on the endpoint. Clients can observe changes to this property.
-// KMIDIPropertyProtocolID returns the value of the CoreFoundation reference constant kMIDIPropertyProtocolID as an objc.ID.
-func KMIDIPropertyProtocolID() objc.ID { return purego.CFConstant(raw.KMIDIPropertyProtocolID()) }
-
-// constant		kMIDIPropertyUMPActiveGroupBitmap @discussion entity and endpoint property (UMP-native), 16-bit unsigned integer. If present, describes which groups are currently active and available for message transmission. The most significant bit represents group 16, and the least significant bit represents group 1. If a driver sets this property on a UMP-native endpoint provided for legacy MIDI 1.0 compatibility, only a single bit of the bitfield may be used. As a convenience, MIDI messages sent to a driver- created destination provided for legacy MIDI 1.0 compatibility will have all messages converted to the supported group prior to delivery. Any UMP-native endpoint lacking this property and subsequently defined property kMIDIPropertyCanTransmitGroupless is assumed to handle/transmit all UMP traffic.
-// KMIDIPropertyUMPActiveGroupBitmap returns the value of the CoreFoundation reference constant kMIDIPropertyUMPActiveGroupBitmap as an objc.ID.
-func KMIDIPropertyUMPActiveGroupBitmap() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyUMPActiveGroupBitmap())
+// device/entity property, integer (0/1). Indicates whether the device or entity  responds to MIDI beat clock messages.
+// KMIDIPropertyReceivesClock returns the value of the constant kMIDIPropertyReceivesClock.
+func KMIDIPropertyReceivesClock() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyReceivesClock")))
 }
 
-// constant		kMIDIPropertyUMPCanTransmitGroupless @discussion entity and endpoint property (UMP-native), integer. If this property is present and set to 1, the referenced MIDI object is or has (an) endpoint/endpoints capable of transmitting UMP messages with no group (e.g., message type 0 and message type F).
-// KMIDIPropertyUMPCanTransmitGroupless returns the value of the CoreFoundation reference constant kMIDIPropertyUMPCanTransmitGroupless as an objc.ID.
-func KMIDIPropertyUMPCanTransmitGroupless() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyUMPCanTransmitGroupless())
+// device/entity property, integer (0/1). Indicates whether the device or entity responds to MIDI Time Code messages.
+// KMIDIPropertyReceivesMTC returns the value of the constant kMIDIPropertyReceivesMTC.
+func KMIDIPropertyReceivesMTC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyReceivesMTC")))
 }
 
-// constant		kMIDIPropertyAssociatedEndpoint @discussion endpoint property, MIDIUniqueID. If this property is present, the indicated endpoint should be used for bidirectional communication purposes, (e.g. UMP Endpoint pairing or MIDI-CI devices). When setting this property on an endpoint, it should also be set on the assocated endpoint to create a bidirectional mapping. Note: This value is a MIDIUniqueID, use MIDIObjectFindByUniqueID to resolve it to a MIDIObjectRef.
-// KMIDIPropertyAssociatedEndpoint returns the value of the CoreFoundation reference constant kMIDIPropertyAssociatedEndpoint as an objc.ID.
-func KMIDIPropertyAssociatedEndpoint() objc.ID {
-	return purego.CFConstant(raw.KMIDIPropertyAssociatedEndpoint())
+// device/entity property, integer (0/1). Indicates whether the device or entity responds to MIDI Note On messages.
+// KMIDIPropertyReceivesNotes returns the value of the constant kMIDIPropertyReceivesNotes.
+func KMIDIPropertyReceivesNotes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyReceivesNotes")))
 }
 
-// @constant		kMIDIDriverPropertyUsesSerial @discussion		This constant, "MIDIDriverUsesSerial", when defined to "YES" in a driver's bundle, tells MIDIServer that the driver uses serial ports and is eligible to have serial ports assigned to it. When a serial driver's Start() method is called, it should use MIDIGetSerialPortOwner to discover which serial ports it has been assigned to use, and only use those ports. New for CoreMIDI 1.1.
-// KMIDIDriverPropertyUsesSerial returns the value of the CoreFoundation reference constant kMIDIDriverPropertyUsesSerial as an objc.ID.
-func KMIDIDriverPropertyUsesSerial() objc.ID {
-	return purego.CFConstant(raw.KMIDIDriverPropertyUsesSerial())
+// device/entity property, integer (0/1). Indicates whether the device or entity responds to MIDI program change messages.
+// KMIDIPropertyReceivesProgramChanges returns the value of the constant kMIDIPropertyReceivesProgramChanges.
+func KMIDIPropertyReceivesProgramChanges() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyReceivesProgramChanges")))
 }
 
-// MIDINetworkBonjourServiceType returns the string constant MIDINetworkBonjourServiceType as an objc.ID, for use as a dictionary key or selector argument.
-func MIDINetworkBonjourServiceType() objc.ID {
-	return purego.CFConstant(raw.MIDINetworkBonjourServiceType())
+// device/entity property, integer (0/1). Indicates whether the device or entity responds to MIDI bank select MSB messages (control 0).
+// KMIDIPropertyReceivesBankSelectMSB returns the value of the constant kMIDIPropertyReceivesBankSelectMSB.
+func KMIDIPropertyReceivesBankSelectMSB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyReceivesBankSelectMSB")))
 }
 
-// MIDINetworkNotificationContactsDidChange returns the string constant MIDINetworkNotificationContactsDidChange as an objc.ID, for use as a dictionary key or selector argument.
-func MIDINetworkNotificationContactsDidChange() objc.ID {
-	return purego.CFConstant(raw.MIDINetworkNotificationContactsDidChange())
+// device/entity property, integer (0/1). Indicates whether the device or entity responds to MIDI bank select LSB messages (control 32).
+// KMIDIPropertyReceivesBankSelectLSB returns the value of the constant kMIDIPropertyReceivesBankSelectLSB.
+func KMIDIPropertyReceivesBankSelectLSB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyReceivesBankSelectLSB")))
 }
 
-// MIDINetworkNotificationSessionDidChange returns the string constant MIDINetworkNotificationSessionDidChange as an objc.ID, for use as a dictionary key or selector argument.
-func MIDINetworkNotificationSessionDidChange() objc.ID {
-	return purego.CFConstant(raw.MIDINetworkNotificationSessionDidChange())
+// device/entity property, integer (0/1). Indicates whether the device or entity transmits MIDI beat clock messages.
+// KMIDIPropertyTransmitsClock returns the value of the constant kMIDIPropertyTransmitsClock.
+func KMIDIPropertyTransmitsClock() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyTransmitsClock")))
 }
 
-// @constant      MIDIUMPEndpointObjectKey @brief         Value is a MIDIUMPEndpoint
-// MIDIUMPEndpointObjectKey returns the string constant MIDIUMPEndpointObjectKey as an objc.ID, for use as a dictionary key or selector argument.
-func MIDIUMPEndpointObjectKey() objc.ID {
-	return purego.CFConstant(raw.MIDIUMPEndpointObjectKey())
+// device/entity property, integer (0/1). Indicates whether the device or entity transmits MIDI Time Code messages.
+// KMIDIPropertyTransmitsMTC returns the value of the constant kMIDIPropertyTransmitsMTC.
+func KMIDIPropertyTransmitsMTC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyTransmitsMTC")))
 }
 
-// @constant      MIDIUMPFunctionBlockObjectKey @brief         Value is a MIDIUMPFunctionBlock
-// MIDIUMPFunctionBlockObjectKey returns the string constant MIDIUMPFunctionBlockObjectKey as an objc.ID, for use as a dictionary key or selector argument.
-func MIDIUMPFunctionBlockObjectKey() objc.ID {
-	return purego.CFConstant(raw.MIDIUMPFunctionBlockObjectKey())
+// device/entity property, integer (0/1). Indicates whether the device or entity transmits MIDI note messages.
+// KMIDIPropertyTransmitsNotes returns the value of the constant kMIDIPropertyTransmitsNotes.
+func KMIDIPropertyTransmitsNotes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyTransmitsNotes")))
 }
 
-// @constant		MIDICIDeviceObjectKey @brief			Value is an MIDIUMPEndpoint.
-// MIDICIDeviceObjectKey returns the string constant MIDICIDeviceObjectKey as an objc.ID, for use as a dictionary key or selector argument.
-func MIDICIDeviceObjectKey() objc.ID {
-	return purego.CFConstant(raw.MIDICIDeviceObjectKey())
+// device/entity property, integer (0/1). Indicates whether the device or entity transmits MIDI program change messages.
+// KMIDIPropertyTransmitsProgramChanges returns the value of the constant kMIDIPropertyTransmitsProgramChanges.
+func KMIDIPropertyTransmitsProgramChanges() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyTransmitsProgramChanges")))
 }
 
-// @constant		MIDICIProfileObjectKey @brief			Value is an MIDIUMPCIProfile
-// MIDICIProfileObjectKey returns the string constant MIDICIProfileObjectKey as an objc.ID, for use as a dictionary key or selector argument.
-func MIDICIProfileObjectKey() objc.ID {
-	return purego.CFConstant(raw.MIDICIProfileObjectKey())
+// device/entity property, integer (0/1). Indicates whether the device or entity transmits MIDI bank select MSB messages (control 0).
+// KMIDIPropertyTransmitsBankSelectMSB returns the value of the constant kMIDIPropertyTransmitsBankSelectMSB.
+func KMIDIPropertyTransmitsBankSelectMSB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyTransmitsBankSelectMSB")))
+}
+
+// device/entity property, integer (0/1). Indicates whether the device or entity transmits MIDI bank select LSB messages (control 32).
+// KMIDIPropertyTransmitsBankSelectLSB returns the value of the constant kMIDIPropertyTransmitsBankSelectLSB.
+func KMIDIPropertyTransmitsBankSelectLSB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyTransmitsBankSelectLSB")))
+}
+
+// device/entity property, integer (0/1). Indicates whether the MIDI pan messages (control 10), when sent to the device or entity, cause undesirable effects when playing stereo sounds (e.g. converting the signal to mono).
+// KMIDIPropertyPanDisruptsStereo returns the value of the constant kMIDIPropertyPanDisruptsStereo.
+func KMIDIPropertyPanDisruptsStereo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyPanDisruptsStereo")))
+}
+
+// device/entity property, integer (0/1). Indicates whether the device or entity plays audio samples in response to MIDI note messages.
+// KMIDIPropertyIsSampler returns the value of the constant kMIDIPropertyIsSampler.
+func KMIDIPropertyIsSampler() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyIsSampler")))
+}
+
+// device/entity property, integer (0/1). Indicates whether the device or entity's sound presets tend to be collections of non-transposable samples (e.g. drum kits).
+// KMIDIPropertyIsDrumMachine returns the value of the constant kMIDIPropertyIsDrumMachine.
+func KMIDIPropertyIsDrumMachine() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyIsDrumMachine")))
+}
+
+// device/entity property, integer (0/1). Indicates whether the device or entity mixes external audio signals, controlled by MIDI messages.
+// KMIDIPropertyIsMixer returns the value of the constant kMIDIPropertyIsMixer.
+func KMIDIPropertyIsMixer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyIsMixer")))
+}
+
+// device/entity property, integer (0/1). Indicates whether the device or entity is primarily a MIDI-controlled audio effect unit (i.e. does not generate sound on its own).
+// KMIDIPropertyIsEffectUnit returns the value of the constant kMIDIPropertyIsEffectUnit.
+func KMIDIPropertyIsEffectUnit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyIsEffectUnit")))
+}
+
+// device/entity property, integer (0-16). Indicates the maximum number of MIDI channels on which a device may simultaneously receive MIDI Channel Messages. Common values are 0 (devices which only respond to System Messages), 1 (non-multitimbral devices), and 16 (fully multitimbral devices). Other values are possible, for example devices which are multi-timbral but have fewer than 16 "parts".
+// KMIDIPropertyMaxReceiveChannels returns the value of the constant kMIDIPropertyMaxReceiveChannels.
+func KMIDIPropertyMaxReceiveChannels() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyMaxReceiveChannels")))
+}
+
+// device/entity property, integer (0/1). Indicates the maximum number of MIDI channels on which a device may simultaneously transmit MIDI Channel Messages. Common values are 0, 1 and 16.
+// KMIDIPropertyMaxTransmitChannels returns the value of the constant kMIDIPropertyMaxTransmitChannels.
+func KMIDIPropertyMaxTransmitChannels() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyMaxTransmitChannels")))
+}
+
+// device property, string, contains the full path to an application which knows how to configure this driver-owned devices. Drivers may set this property on their owned devices. Applications must not write to it.
+// KMIDIPropertyDriverDeviceEditorApp returns the value of the constant kMIDIPropertyDriverDeviceEditorApp.
+func KMIDIPropertyDriverDeviceEditorApp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyDriverDeviceEditorApp")))
+}
+
+// device/entity property, integer (0/1). Indicates whether the device implements the MIDI Show Control specification.
+// KMIDIPropertySupportsShowControl returns the value of the constant kMIDIPropertySupportsShowControl.
+func KMIDIPropertySupportsShowControl() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertySupportsShowControl")))
+}
+
+// device/entity/endpoint property, string. Provides the Apple-recommended user-visible name for an endpoint, by combining the device and endpoint names. For objects other than endpoints, the display name is the same as the name.
+// KMIDIPropertyDisplayName returns the value of the constant kMIDIPropertyDisplayName.
+func KMIDIPropertyDisplayName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyDisplayName")))
+}
+
+// constant		kMIDIPropertyProtocolID device/entity/endpoint property (UMP-native), MIDIProtocolID. Indicates the native protocol in which the endpoint communicates. The value is set by the system on endpoints, when they are created. Drivers may dynamically change the protocol of an endpoint as a result of a MIDI-CI negotiation, by setting this property on the endpoint. Clients can observe changes to this property.
+// KMIDIPropertyProtocolID returns the value of the constant kMIDIPropertyProtocolID.
+func KMIDIPropertyProtocolID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyProtocolID")))
+}
+
+// constant		kMIDIPropertyUMPActiveGroupBitmap entity and endpoint property (UMP-native), 16-bit unsigned integer. If present, describes which groups are currently active and available for message transmission. The most significant bit represents group 16, and the least significant bit represents group 1. If a driver sets this property on a UMP-native endpoint provided for legacy MIDI 1.0 compatibility, only a single bit of the bitfield may be used. As a convenience, MIDI messages sent to a driver- created destination provided for legacy MIDI 1.0 compatibility will have all messages converted to the supported group prior to delivery. Any UMP-native endpoint lacking this property and subsequently defined property kMIDIPropertyCanTransmitGroupless is assumed to handle/transmit all UMP traffic.
+// KMIDIPropertyUMPActiveGroupBitmap returns the value of the constant kMIDIPropertyUMPActiveGroupBitmap.
+func KMIDIPropertyUMPActiveGroupBitmap() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyUMPActiveGroupBitmap")))
+}
+
+// constant		kMIDIPropertyUMPCanTransmitGroupless entity and endpoint property (UMP-native), integer. If this property is present and set to 1, the referenced MIDI object is or has (an) endpoint/endpoints capable of transmitting UMP messages with no group (e.g., message type 0 and message type F).
+// KMIDIPropertyUMPCanTransmitGroupless returns the value of the constant kMIDIPropertyUMPCanTransmitGroupless.
+func KMIDIPropertyUMPCanTransmitGroupless() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyUMPCanTransmitGroupless")))
+}
+
+// constant		kMIDIPropertyAssociatedEndpoint endpoint property, MIDIUniqueID. If this property is present, the indicated endpoint should be used for bidirectional communication purposes, (e.g. UMP Endpoint pairing or MIDI-CI devices). When setting this property on an endpoint, it should also be set on the assocated endpoint to create a bidirectional mapping. Note: This value is a MIDIUniqueID, use MIDIObjectFindByUniqueID to resolve it to a MIDIObjectRef.
+// KMIDIPropertyAssociatedEndpoint returns the value of the constant kMIDIPropertyAssociatedEndpoint.
+func KMIDIPropertyAssociatedEndpoint() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIPropertyAssociatedEndpoint")))
+}
+
+// This constant, "MIDIDriverUsesSerial", when defined to "YES" in a driver's bundle, tells MIDIServer that the driver uses serial ports and is eligible to have serial ports assigned to it. When a serial driver's Start() method is called, it should use MIDIGetSerialPortOwner to discover which serial ports it has been assigned to use, and only use those ports. New for CoreMIDI 1.1.
+// KMIDIDriverPropertyUsesSerial returns the value of the constant kMIDIDriverPropertyUsesSerial.
+func KMIDIDriverPropertyUsesSerial() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kMIDIDriverPropertyUsesSerial")))
+}
+
+// MIDINetworkBonjourServiceType returns the string constant MIDINetworkBonjourServiceType, for use as a dictionary key or argument.
+func MIDINetworkBonjourServiceType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MIDINetworkBonjourServiceType")))
+}
+
+// MIDINetworkNotificationContactsDidChange returns the string constant MIDINetworkNotificationContactsDidChange, for use as a dictionary key or argument.
+func MIDINetworkNotificationContactsDidChange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MIDINetworkNotificationContactsDidChange")))
+}
+
+// MIDINetworkNotificationSessionDidChange returns the string constant MIDINetworkNotificationSessionDidChange, for use as a dictionary key or argument.
+func MIDINetworkNotificationSessionDidChange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MIDINetworkNotificationSessionDidChange")))
+}
+
+// Value is a MIDIUMPEndpoint
+// MIDIUMPEndpointObjectKey returns the string constant MIDIUMPEndpointObjectKey, for use as a dictionary key or argument.
+func MIDIUMPEndpointObjectKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MIDIUMPEndpointObjectKey")))
+}
+
+// Value is a MIDIUMPFunctionBlock
+// MIDIUMPFunctionBlockObjectKey returns the string constant MIDIUMPFunctionBlockObjectKey, for use as a dictionary key or argument.
+func MIDIUMPFunctionBlockObjectKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MIDIUMPFunctionBlockObjectKey")))
+}
+
+// Value is an MIDIUMPEndpoint.
+// MIDICIDeviceObjectKey returns the string constant MIDICIDeviceObjectKey, for use as a dictionary key or argument.
+func MIDICIDeviceObjectKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MIDICIDeviceObjectKey")))
+}
+
+// Value is an MIDIUMPCIProfile
+// MIDICIProfileObjectKey returns the string constant MIDICIProfileObjectKey, for use as a dictionary key or argument.
+func MIDICIProfileObjectKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MIDICIProfileObjectKey")))
 }

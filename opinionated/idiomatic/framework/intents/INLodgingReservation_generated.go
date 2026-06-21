@@ -5,85 +5,104 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The information that describes a lodging reservation.
 //
-// LodgingReservation wraps [raw.INLodgingReservation] with a fluent Go API.
+// LodgingReservation is an idiomatic wrapper over the Objective-C class INLodgingReservation.
 type LodgingReservation struct {
-	inner *raw.INLodgingReservation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INLodgingReservation].
-func (x *LodgingReservation) Unwrap() *raw.INLodgingReservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LodgingReservation) ID() objc.ID { return x.inner.Ptr() }
-
-// LodgingReservationFromID adopts an existing object pointer as a LodgingReservation (nil for 0).
+// LodgingReservationFromID adopts an existing Objective-C object as a LodgingReservation
+// (nil for 0), retaining it and registering a release finalizer.
 func LodgingReservationFromID(id objc.ID) *LodgingReservation {
 	if id == 0 {
 		return nil
 	}
-	return &LodgingReservation{inner: raw.INLodgingReservationFromID(id)}
+	x := &LodgingReservation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// lodgingReservationAdopt wraps an Objective-C object that this code just created as a
+// LodgingReservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func lodgingReservationAdopt(id objc.ID) *LodgingReservation {
+	if id == 0 {
+		return nil
+	}
+	x := &LodgingReservation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LodgingReservation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LodgingReservation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LodgingReservation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a lodging reservation with the specified contents and attributes.
 //
-// NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren creates a new [LodgingReservation].
-func NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], uRL string, lodgingBusinessLocation *corelocation.CLPlacemark, reservationDuration *raw.INDateComponentsRange, numberOfAdults *foundation.NSNumber, numberOfChildren *foundation.NSNumber) *LodgingReservation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INLodgingReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:lodgingBusinessLocation:reservationDuration:numberOfAdults:numberOfChildren:"), itemReference.Ptr(), foundation.NSStringStringWithUTF8String(reservationNumber).Ptr(), bookingTime.Ptr(), raw.INReservationStatus(reservationStatus), foundation.NSStringStringWithUTF8String(reservationHolderName).Ptr(), actions.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), lodgingBusinessLocation.Ptr(), reservationDuration.Ptr(), numberOfAdults.Ptr(), numberOfChildren.Ptr())
-	return &LodgingReservation{inner: raw.INLodgingReservationFromID(_id)}
+// NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren creates a new LodgingReservation.
+func NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, lodgingBusinessLocation obj.Object, reservationDuration *DateComponentsRange, numberOfAdults obj.Object, numberOfChildren obj.Object) *LodgingReservation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INLodgingReservation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:lodgingBusinessLocation:reservationDuration:numberOfAdults:numberOfChildren:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(lodgingBusinessLocation), objref.IDOf(reservationDuration), objref.IDOf(numberOfAdults), objref.IDOf(numberOfChildren))
+	return lodgingReservationAdopt(_id)
 }
 
 // Creates a new lodging reservation with the provided information.
 //
-// NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren creates a new [LodgingReservation].
-func NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], lodgingBusinessLocation *corelocation.CLPlacemark, reservationDuration *raw.INDateComponentsRange, numberOfAdults *foundation.NSNumber, numberOfChildren *foundation.NSNumber) *LodgingReservation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INLodgingReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:lodgingBusinessLocation:reservationDuration:numberOfAdults:numberOfChildren:"), itemReference.Ptr(), foundation.NSStringStringWithUTF8String(reservationNumber).Ptr(), bookingTime.Ptr(), raw.INReservationStatus(reservationStatus), foundation.NSStringStringWithUTF8String(reservationHolderName).Ptr(), actions.Ptr(), lodgingBusinessLocation.Ptr(), reservationDuration.Ptr(), numberOfAdults.Ptr(), numberOfChildren.Ptr())
-	return &LodgingReservation{inner: raw.INLodgingReservationFromID(_id)}
+// NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren creates a new LodgingReservation.
+func NewLodgingReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsLodgingBusinessLocationReservationDurationNumberOfAdultsNumberOfChildren(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, lodgingBusinessLocation obj.Object, reservationDuration *DateComponentsRange, numberOfAdults obj.Object, numberOfChildren obj.Object) *LodgingReservation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INLodgingReservation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:lodgingBusinessLocation:reservationDuration:numberOfAdults:numberOfChildren:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(lodgingBusinessLocation), objref.IDOf(reservationDuration), objref.IDOf(numberOfAdults), objref.IDOf(numberOfChildren))
+	return lodgingReservationAdopt(_id)
 }
 
-// LodgingBusinessLocation calls the underlying LodgingBusinessLocation.
-func (x *LodgingReservation) LodgingBusinessLocation() *corelocation.CLPlacemark {
-	return x.inner.LodgingBusinessLocation()
+func (x *LodgingReservation) LodgingBusinessLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lodgingBusinessLocation"))
+	return obj.Wrap(_r)
 }
 
-// ReservationDuration calls the underlying ReservationDuration.
 func (x *LodgingReservation) ReservationDuration() *DateComponentsRange {
-	_r := x.inner.ReservationDuration()
-	if _r == nil {
-		return nil
-	}
-	return &DateComponentsRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservationDuration"))
+	return DateComponentsRangeFromID(_r)
 }
 
-// NumberOfAdults calls the underlying NumberOfAdults.
-func (x *LodgingReservation) NumberOfAdults() *foundation.NSNumber {
-	return x.inner.NumberOfAdults()
+func (x *LodgingReservation) NumberOfAdults() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberOfAdults"))
+	return obj.Wrap(_r)
 }
 
-// NumberOfChildren calls the underlying NumberOfChildren.
-func (x *LodgingReservation) NumberOfChildren() *foundation.NSNumber {
-	return x.inner.NumberOfChildren()
+func (x *LodgingReservation) NumberOfChildren() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberOfChildren"))
+	return obj.Wrap(_r)
 }
-
-func (x *LodgingReservation) asReservation() *raw.INReservation { return &x.inner.INReservation }
 
 // LodgingReservationable is the interface implemented by [LodgingReservation], for mocking and DI.
 type LodgingReservationable interface {
-	Unwrap() *raw.INLodgingReservation
-	LodgingBusinessLocation() *corelocation.CLPlacemark
+	obj.Object
+	LodgingBusinessLocation() obj.Object
 	ReservationDuration() *DateComponentsRange
-	NumberOfAdults() *foundation.NSNumber
-	NumberOfChildren() *foundation.NSNumber
+	NumberOfAdults() obj.Object
+	NumberOfChildren() obj.Object
 }
 
 var _ LodgingReservationable = (*LodgingReservation)(nil)

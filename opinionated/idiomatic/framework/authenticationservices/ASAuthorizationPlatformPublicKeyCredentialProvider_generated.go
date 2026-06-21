@@ -5,95 +5,101 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A mechanism for providing public key credential requests to an app or service with iCloud Keychain.
 //
-// AuthorizationPlatformPublicKeyCredentialProvider wraps [raw.ASAuthorizationPlatformPublicKeyCredentialProvider] with a fluent Go API.
+// AuthorizationPlatformPublicKeyCredentialProvider is an idiomatic wrapper over the Objective-C class ASAuthorizationPlatformPublicKeyCredentialProvider.
 type AuthorizationPlatformPublicKeyCredentialProvider struct {
-	inner *raw.ASAuthorizationPlatformPublicKeyCredentialProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationPlatformPublicKeyCredentialProvider].
-func (x *AuthorizationPlatformPublicKeyCredentialProvider) Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialProvider {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationPlatformPublicKeyCredentialProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationPlatformPublicKeyCredentialProviderFromID adopts an existing object pointer as a AuthorizationPlatformPublicKeyCredentialProvider (nil for 0).
+// AuthorizationPlatformPublicKeyCredentialProviderFromID adopts an existing Objective-C object as a AuthorizationPlatformPublicKeyCredentialProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationPlatformPublicKeyCredentialProviderFromID(id objc.ID) *AuthorizationPlatformPublicKeyCredentialProvider {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationPlatformPublicKeyCredentialProvider{inner: raw.ASAuthorizationPlatformPublicKeyCredentialProviderFromID(id)}
+	x := &AuthorizationPlatformPublicKeyCredentialProvider{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// authorizationPlatformPublicKeyCredentialProviderAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationPlatformPublicKeyCredentialProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationPlatformPublicKeyCredentialProviderAdopt(id objc.ID) *AuthorizationPlatformPublicKeyCredentialProvider {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationPlatformPublicKeyCredentialProvider{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthorizationPlatformPublicKeyCredentialProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationPlatformPublicKeyCredentialProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationPlatformPublicKeyCredentialProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates the object with a relying party identifier.
 //
-// NewAuthorizationPlatformPublicKeyCredentialProviderWithRelyingPartyIdentifier creates a new [AuthorizationPlatformPublicKeyCredentialProvider].
+// NewAuthorizationPlatformPublicKeyCredentialProviderWithRelyingPartyIdentifier creates a new AuthorizationPlatformPublicKeyCredentialProvider.
 func NewAuthorizationPlatformPublicKeyCredentialProviderWithRelyingPartyIdentifier(relyingPartyIdentifier string) *AuthorizationPlatformPublicKeyCredentialProvider {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPlatformPublicKeyCredentialProvider")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRelyingPartyIdentifier:"), foundation.NSStringStringWithUTF8String(relyingPartyIdentifier).Ptr())
-	return &AuthorizationPlatformPublicKeyCredentialProvider{inner: raw.ASAuthorizationPlatformPublicKeyCredentialProviderFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPlatformPublicKeyCredentialProvider")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRelyingPartyIdentifier:"), purego.NSString(relyingPartyIdentifier))
+	return authorizationPlatformPublicKeyCredentialProviderAdopt(_id)
 }
 
 // Creates a registration request with a challenge, name, and user ID.
-//
-// CreateCredentialRegistrationRequestWithChallengeNameUserID calls the underlying CreateCredentialRegistrationRequestWithChallengeNameUserID.
-func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeNameUserID(challenge *foundation.NSData, name string, userID *foundation.NSData) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
-	_r := x.inner.CreateCredentialRegistrationRequestWithChallengeNameUserID(challenge, foundation.NSStringStringWithUTF8String(name), userID)
-	if _r == nil {
-		return nil
-	}
-	return &AuthorizationPlatformPublicKeyCredentialRegistrationRequest{inner: _r}
+func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeNameUserID(challenge obj.Object, name string, userID obj.Object) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createCredentialRegistrationRequestWithChallenge:name:userID:"), objref.IDOf(challenge), purego.NSString(name), objref.IDOf(userID))
+	return AuthorizationPlatformPublicKeyCredentialRegistrationRequestFromID(_r)
 }
 
-// @abstract Create a request to register a new platform credential. @param challenge The challenge to sign. @param name The user name for the new credential. @param userID An identifier to be stored alongside the credential, which will be returned with the credential when it is used to authenticate. @param requestStyle The style for this request.
-//
-// CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle calls the underlying CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle.
-func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle(challenge *foundation.NSData, name string, userID *foundation.NSData, requestStyle ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
-	_r := x.inner.CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle(challenge, foundation.NSStringStringWithUTF8String(name), userID, raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle(requestStyle))
-	if _r == nil {
-		return nil
-	}
-	return &AuthorizationPlatformPublicKeyCredentialRegistrationRequest{inner: _r}
+// Create a request to register a new platform credential.
+func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle(challenge obj.Object, name string, userID obj.Object, requestStyle AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createCredentialRegistrationRequestWithChallenge:name:userID:requestStyle:"), objref.IDOf(challenge), purego.NSString(name), objref.IDOf(userID), requestStyle)
+	return AuthorizationPlatformPublicKeyCredentialRegistrationRequestFromID(_r)
 }
 
 // Creates an assertion request with a challenge.
-//
-// CreateCredentialAssertionRequestWithChallenge calls the underlying CreateCredentialAssertionRequestWithChallenge.
-func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialAssertionRequestWithChallenge(challenge *foundation.NSData) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
-	_r := x.inner.CreateCredentialAssertionRequestWithChallenge(challenge)
-	if _r == nil {
-		return nil
-	}
-	return &AuthorizationPlatformPublicKeyCredentialAssertionRequest{inner: _r}
+func (x *AuthorizationPlatformPublicKeyCredentialProvider) CreateCredentialAssertionRequestWithChallenge(challenge obj.Object) *AuthorizationPlatformPublicKeyCredentialAssertionRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createCredentialAssertionRequestWithChallenge:"), objref.IDOf(challenge))
+	return AuthorizationPlatformPublicKeyCredentialAssertionRequestFromID(_r)
 }
 
-// @abstract The Relying Party identifier used for all requests created by this object.
-//
-// RelyingPartyIdentifier calls the underlying RelyingPartyIdentifier.
+// The Relying Party identifier used for all requests created by this object.
 func (x *AuthorizationPlatformPublicKeyCredentialProvider) RelyingPartyIdentifier() string {
-	_r := x.inner.RelyingPartyIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relyingPartyIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // AuthorizationPlatformPublicKeyCredentialProviderable is the interface implemented by [AuthorizationPlatformPublicKeyCredentialProvider], for mocking and DI.
 type AuthorizationPlatformPublicKeyCredentialProviderable interface {
-	Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialProvider
-	CreateCredentialRegistrationRequestWithChallengeNameUserID(challenge *foundation.NSData, name string, userID *foundation.NSData) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
-	CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle(challenge *foundation.NSData, name string, userID *foundation.NSData, requestStyle ASAuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
-	CreateCredentialAssertionRequestWithChallenge(challenge *foundation.NSData) *AuthorizationPlatformPublicKeyCredentialAssertionRequest
+	obj.Object
+	CreateCredentialRegistrationRequestWithChallengeNameUserID(challenge obj.Object, name string, userID obj.Object) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
+	CreateCredentialRegistrationRequestWithChallengeNameUserIDRequestStyle(challenge obj.Object, name string, userID obj.Object, requestStyle AuthorizationPlatformPublicKeyCredentialRegistrationRequestStyle) *AuthorizationPlatformPublicKeyCredentialRegistrationRequest
+	CreateCredentialAssertionRequestWithChallenge(challenge obj.Object) *AuthorizationPlatformPublicKeyCredentialAssertionRequest
 	RelyingPartyIdentifier() string
 }
 

@@ -5,21 +5,43 @@
 package servicemanagement
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/servicemanagement"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// SMCopyAllJobDictionaries calls [raw.SMCopyAllJobDictionaries] (C function SMCopyAllJobDictionaries).
-func SMCopyAllJobDictionaries(domain unsafe.Pointer) unsafe.Pointer {
-	return raw.SMCopyAllJobDictionaries(domain)
+var _fnSMCopyAllJobDictionaries func(objc.ID) objc.ID
+
+// SMCopyAllJobDictionaries calls the ServiceManagement framework function SMCopyAllJobDictionaries.
+func SMCopyAllJobDictionaries(domain obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSMCopyAllJobDictionaries == nil {
+		ebipurego.RegisterLibFunc(&_fnSMCopyAllJobDictionaries, _lib, "SMCopyAllJobDictionaries")
+	}
+	_ret := _fnSMCopyAllJobDictionaries(objref.IDOf(domain))
+	return obj.Wrap(_ret)
 }
 
-// SMJobCopyDictionary calls [raw.SMJobCopyDictionary] (C function SMJobCopyDictionary).
-func SMJobCopyDictionary(domain unsafe.Pointer, jobLabel unsafe.Pointer) unsafe.Pointer {
-	return raw.SMJobCopyDictionary(domain, jobLabel)
+var _fnSMJobCopyDictionary func(objc.ID, objc.ID) objc.ID
+
+// SMJobCopyDictionary calls the ServiceManagement framework function SMJobCopyDictionary.
+func SMJobCopyDictionary(domain obj.Object, jobLabel obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSMJobCopyDictionary == nil {
+		ebipurego.RegisterLibFunc(&_fnSMJobCopyDictionary, _lib, "SMJobCopyDictionary")
+	}
+	_ret := _fnSMJobCopyDictionary(objref.IDOf(domain), objref.IDOf(jobLabel))
+	return obj.Wrap(_ret)
 }
 
-// SMLoginItemSetEnabled calls [raw.SMLoginItemSetEnabled] (C function SMLoginItemSetEnabled).
-func SMLoginItemSetEnabled(identifier unsafe.Pointer, enabled uint8) uint8 {
-	return raw.SMLoginItemSetEnabled(identifier, enabled)
+var _fnSMLoginItemSetEnabled func(objc.ID, uint8) uint8
+
+// SMLoginItemSetEnabled calls the ServiceManagement framework function SMLoginItemSetEnabled.
+func SMLoginItemSetEnabled(identifier obj.Object, enabled uint8) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSMLoginItemSetEnabled == nil {
+		ebipurego.RegisterLibFunc(&_fnSMLoginItemSetEnabled, _lib, "SMLoginItemSetEnabled")
+	}
+	return _fnSMLoginItemSetEnabled(objref.IDOf(identifier), enabled)
 }

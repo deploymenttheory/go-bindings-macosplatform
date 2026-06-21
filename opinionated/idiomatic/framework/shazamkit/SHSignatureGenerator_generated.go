@@ -5,61 +5,87 @@
 package shazamkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/shazamkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // An object for converting audio data into a signature.
 //
-// SignatureGenerator wraps [raw.SHSignatureGenerator] with a fluent Go API.
+// SignatureGenerator is an idiomatic wrapper over the Objective-C class SHSignatureGenerator.
 type SignatureGenerator struct {
-	inner *raw.SHSignatureGenerator
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SHSignatureGenerator].
-func (x *SignatureGenerator) Unwrap() *raw.SHSignatureGenerator { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SignatureGenerator) ID() objc.ID { return x.inner.Ptr() }
-
-// SignatureGeneratorFromID adopts an existing object pointer as a SignatureGenerator (nil for 0).
+// SignatureGeneratorFromID adopts an existing Objective-C object as a SignatureGenerator
+// (nil for 0), retaining it and registering a release finalizer.
 func SignatureGeneratorFromID(id objc.ID) *SignatureGenerator {
 	if id == 0 {
 		return nil
 	}
-	return &SignatureGenerator{inner: raw.SHSignatureGeneratorFromID(id)}
+	x := &SignatureGenerator{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSignatureGenerator creates a new [SignatureGenerator].
+// signatureGeneratorAdopt wraps an Objective-C object that this code just created as a
+// SignatureGenerator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func signatureGeneratorAdopt(id objc.ID) *SignatureGenerator {
+	if id == 0 {
+		return nil
+	}
+	x := &SignatureGenerator{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SignatureGenerator) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SignatureGenerator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SignatureGenerator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSignatureGenerator creates a new SignatureGenerator.
 func NewSignatureGenerator() *SignatureGenerator {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SHSignatureGenerator")), objc.RegisterName("new"))
-	return &SignatureGenerator{inner: raw.SHSignatureGeneratorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SHSignatureGenerator")), objc.RegisterName("new"))
+	return signatureGeneratorAdopt(_id)
 }
 
 // Adds audio to the generator.
-//
-// AppendBufferAtTimeError calls the underlying AppendBufferAtTimeError.
-func (x *SignatureGenerator) AppendBufferAtTimeError(buffer *avfaudio.AVAudioPCMBuffer, time_ *avfaudio.AVAudioTime) (bool, error) {
-	return x.inner.AppendBufferAtTimeError(buffer, time_)
+func (x *SignatureGenerator) AppendBufferAtTime(buffer obj.Object, time_ obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("appendBuffer:atTime:error:"), objref.IDOf(buffer), objref.IDOf(time_), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Converts the audio buffer into a signature.
-//
-// Signature calls the underlying Signature.
 func (x *SignatureGenerator) Signature() *Signature {
-	_r := x.inner.Signature()
-	if _r == nil {
-		return nil
-	}
-	return &Signature{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signature"))
+	return SignatureFromID(_r)
 }
 
 // SignatureGeneratorable is the interface implemented by [SignatureGenerator], for mocking and DI.
 type SignatureGeneratorable interface {
-	Unwrap() *raw.SHSignatureGenerator
-	AppendBufferAtTimeError(buffer *avfaudio.AVAudioPCMBuffer, time_ *avfaudio.AVAudioTime) (bool, error)
+	obj.Object
+	AppendBufferAtTime(buffer obj.Object, time_ obj.Object) error
 	Signature() *Signature
 }
 

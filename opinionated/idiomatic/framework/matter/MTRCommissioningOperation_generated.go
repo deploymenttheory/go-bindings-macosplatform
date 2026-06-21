@@ -5,67 +5,83 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRCommissioningOperation wraps [raw.MTRCommissioningOperation] with a fluent Go API.
+// MTRCommissioningOperation is an idiomatic wrapper over the Objective-C class MTRCommissioningOperation.
 type MTRCommissioningOperation struct {
-	inner *raw.MTRCommissioningOperation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRCommissioningOperation].
-func (x *MTRCommissioningOperation) Unwrap() *raw.MTRCommissioningOperation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRCommissioningOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRCommissioningOperationFromID adopts an existing object pointer as a MTRCommissioningOperation (nil for 0).
+// MTRCommissioningOperationFromID adopts an existing Objective-C object as a MTRCommissioningOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRCommissioningOperationFromID(id objc.ID) *MTRCommissioningOperation {
 	if id == 0 {
 		return nil
 	}
-	return &MTRCommissioningOperation{inner: raw.MTRCommissioningOperationFromID(id)}
+	x := &MTRCommissioningOperation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Prepare to commission a device with the given parameters and the given setup payload (QR code, manual pairing code, etc). Returns nil if the payload is not valid.
-//
-// NewMTRCommissioningOperationWithParametersSetupPayloadDelegateQueue creates a new [MTRCommissioningOperation].
-func NewMTRCommissioningOperationWithParametersSetupPayloadDelegateQueue(parameters *raw.MTRCommissioningParameters, payload string, delegate raw.MTRCommissioningDelegate, queue *foundation.NSObject) *MTRCommissioningOperation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRCommissioningOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParameters:setupPayload:delegate:queue:"), parameters.Ptr(), foundation.NSStringStringWithUTF8String(payload).Ptr(), delegate, queue.Ptr())
-	return &MTRCommissioningOperation{inner: raw.MTRCommissioningOperationFromID(_id)}
+// mTRCommissioningOperationAdopt wraps an Objective-C object that this code just created as a
+// MTRCommissioningOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRCommissioningOperationAdopt(id objc.ID) *MTRCommissioningOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRCommissioningOperation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRCommissioningOperation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRCommissioningOperation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRCommissioningOperation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRCommissioningOperation creates a new MTRCommissioningOperation.
+func NewMTRCommissioningOperation() *MTRCommissioningOperation {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRCommissioningOperation")), objc.RegisterName("new"))
+	return mTRCommissioningOperationAdopt(_id)
 }
 
 // Start commissioning with the given controller (which identifies the fabric the commissionee should be commissioned into). The delegate will be notified if there are any failures.
-//
-// StartWithController calls the underlying StartWithController.
-func (x *MTRCommissioningOperation) StartWithController(controller *raw.MTRDeviceController) {
-	x.inner.StartWithController(controller)
+func (x *MTRCommissioningOperation) StartWithController(controller *MTRDeviceController) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startWithController:"), objref.IDOf(controller))
 }
 
 // Stop commissioning. This will typically result in commissioning:failedWithError: callbacks to delegates.
-//
-// Stop calls the underlying Stop.
 func (x *MTRCommissioningOperation) Stop() bool {
-	return x.inner.Stop()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stop"))
+	return _r
 }
 
-// MatchedPayload calls the underlying MatchedPayload.
 func (x *MTRCommissioningOperation) MatchedPayload() *MTRSetupPayload {
-	_r := x.inner.MatchedPayload()
-	if _r == nil {
-		return nil
-	}
-	return &MTRSetupPayload{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchedPayload"))
+	return MTRSetupPayloadFromID(_r)
 }
 
 // MTRCommissioningOperationable is the interface implemented by [MTRCommissioningOperation], for mocking and DI.
 type MTRCommissioningOperationable interface {
-	Unwrap() *raw.MTRCommissioningOperation
-	StartWithController(controller *raw.MTRDeviceController)
+	obj.Object
+	StartWithController(controller *MTRDeviceController)
 	Stop() bool
 	MatchedPayload() *MTRSetupPayload
 }

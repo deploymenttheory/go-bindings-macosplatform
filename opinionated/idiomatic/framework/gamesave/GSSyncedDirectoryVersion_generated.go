@@ -5,77 +5,97 @@
 package gamesave
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamesave"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// SyncedDirectoryVersion wraps [raw.GSSyncedDirectoryVersion] with a fluent Go API.
+// SyncedDirectoryVersion is an idiomatic wrapper over the Objective-C class GSSyncedDirectoryVersion.
 type SyncedDirectoryVersion struct {
-	inner *raw.GSSyncedDirectoryVersion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GSSyncedDirectoryVersion].
-func (x *SyncedDirectoryVersion) Unwrap() *raw.GSSyncedDirectoryVersion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncedDirectoryVersion) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncedDirectoryVersionFromID adopts an existing object pointer as a SyncedDirectoryVersion (nil for 0).
+// SyncedDirectoryVersionFromID adopts an existing Objective-C object as a SyncedDirectoryVersion
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncedDirectoryVersionFromID(id objc.ID) *SyncedDirectoryVersion {
 	if id == 0 {
 		return nil
 	}
-	return &SyncedDirectoryVersion{inner: raw.GSSyncedDirectoryVersionFromID(id)}
+	x := &SyncedDirectoryVersion{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSyncedDirectoryVersion creates a new [SyncedDirectoryVersion].
+// syncedDirectoryVersionAdopt wraps an Objective-C object that this code just created as a
+// SyncedDirectoryVersion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncedDirectoryVersionAdopt(id objc.ID) *SyncedDirectoryVersion {
+	if id == 0 {
+		return nil
+	}
+	x := &SyncedDirectoryVersion{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SyncedDirectoryVersion) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncedDirectoryVersion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncedDirectoryVersion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSyncedDirectoryVersion creates a new SyncedDirectoryVersion.
 func NewSyncedDirectoryVersion() *SyncedDirectoryVersion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GSSyncedDirectoryVersion")), objc.RegisterName("new"))
-	return &SyncedDirectoryVersion{inner: raw.GSSyncedDirectoryVersionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GSSyncedDirectoryVersion")), objc.RegisterName("new"))
+	return syncedDirectoryVersionAdopt(_id)
 }
 
 // `YES` if the directory version is local; otherwise `NO`.
-//
-// IsLocal calls the underlying IsLocal.
 func (x *SyncedDirectoryVersion) IsLocal() bool {
-	return x.inner.IsLocal()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLocal"))
+	return _r
 }
 
 // The localized name of the device that saved this version.
-//
-// LocalizedNameOfSavingComputer calls the underlying LocalizedNameOfSavingComputer.
 func (x *SyncedDirectoryVersion) LocalizedNameOfSavingComputer() string {
-	_r := x.inner.LocalizedNameOfSavingComputer()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedNameOfSavingComputer"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The date that this version was last modified.
-//
-// ModifiedDate calls the underlying ModifiedDate.
-func (x *SyncedDirectoryVersion) ModifiedDate() *foundation.NSDate {
-	return x.inner.ModifiedDate()
+func (x *SyncedDirectoryVersion) ModifiedDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modifiedDate"))
+	return obj.Wrap(_r)
 }
 
 // The URL of a directory where you read and write game-save data. You define the format and structure of files you write in this directory.
-//
-// Url calls the underlying Url.
-func (x *SyncedDirectoryVersion) Url() *foundation.NSURL {
-	return x.inner.Url()
+func (x *SyncedDirectoryVersion) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
 }
 
 // SyncedDirectoryVersionable is the interface implemented by [SyncedDirectoryVersion], for mocking and DI.
 type SyncedDirectoryVersionable interface {
-	Unwrap() *raw.GSSyncedDirectoryVersion
+	obj.Object
 	IsLocal() bool
 	LocalizedNameOfSavingComputer() string
-	ModifiedDate() *foundation.NSDate
-	Url() *foundation.NSURL
+	ModifiedDate() obj.Object
+	Url() obj.Object
 }
 
 var _ SyncedDirectoryVersionable = (*SyncedDirectoryVersion)(nil)

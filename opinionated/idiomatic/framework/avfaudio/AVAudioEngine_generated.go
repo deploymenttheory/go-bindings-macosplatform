@@ -5,418 +5,336 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An object that manages a graph of audio nodes, controls playback, and configures real-time rendering constraints.
 //
-// AudioEngine wraps [raw.AVAudioEngine] with a fluent Go API.
+// AudioEngine is an idiomatic wrapper over the Objective-C class AVAudioEngine.
 type AudioEngine struct {
-	inner *raw.AVAudioEngine
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioEngine].
-func (x *AudioEngine) Unwrap() *raw.AVAudioEngine { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioEngine) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioEngineFromID adopts an existing object pointer as a AudioEngine (nil for 0).
+// AudioEngineFromID adopts an existing Objective-C object as a AudioEngine
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioEngineFromID(id objc.ID) *AudioEngine {
 	if id == 0 {
 		return nil
 	}
-	return &AudioEngine{inner: raw.AVAudioEngineFromID(id)}
+	x := &AudioEngine{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAudioEngine creates a new [AudioEngine].
+// audioEngineAdopt wraps an Objective-C object that this code just created as a
+// AudioEngine (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioEngineAdopt(id objc.ID) *AudioEngine {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioEngine{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudioEngine) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioEngine) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioEngine) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAudioEngine creates a new AudioEngine.
 func NewAudioEngine() *AudioEngine {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioEngine")), objc.RegisterName("new"))
-	return &AudioEngine{inner: raw.AVAudioEngineFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioEngine")), objc.RegisterName("new"))
+	return audioEngineAdopt(_id)
+}
+
+// The MusicSequence previously attached to the engine (if any).
+//
+// WithMusicSequence sets musicSequence and returns the receiver so calls can be chained.
+func (x *AudioEngine) WithMusicSequence(musicSequence obj.Object) *AudioEngine {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMusicSequence:"), objref.IDOf(musicSequence))
+	return x
 }
 
 // A Boolean value that indicates whether autoshutdown is in an enabled state.
 //
-// WithAutoShutdownEnabled sets the autoShutdownEnabled property and returns the receiver for chaining.
+// WithAutoShutdownEnabled sets autoShutdownEnabled and returns the receiver so calls can be chained.
 func (x *AudioEngine) WithAutoShutdownEnabled(autoShutdownEnabled bool) *AudioEngine {
-	x.inner.SetAutoShutdownEnabled(autoShutdownEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoShutdownEnabled:"), autoShutdownEnabled)
 	return x
 }
 
 // Attaches an audio node to the audio engine.
-//
-// AttachNode calls the underlying AttachNode.
-func (x *AudioEngine) AttachNode(node *raw.AVAudioNode) {
-	x.inner.AttachNode(node)
+func (x *AudioEngine) AttachNode(node *AudioNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachNode:"), objref.IDOf(node))
 }
 
 // Detaches an audio node from the audio engine.
-//
-// DetachNode calls the underlying DetachNode.
-func (x *AudioEngine) DetachNode(node *raw.AVAudioNode) {
-	x.inner.DetachNode(node)
+func (x *AudioEngine) DetachNode(node *AudioNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detachNode:"), objref.IDOf(node))
 }
 
 // Establishes a connection between two nodes, specifying the input and output busses.
-//
-// ConnectToFromBusToBusFormat calls the underlying ConnectToFromBusToBusFormat.
-func (x *AudioEngine) ConnectToFromBusToBusFormat(node1 *raw.AVAudioNode, node2 *raw.AVAudioNode, bus1 uint, bus2 uint, format *raw.AVAudioFormat) {
-	x.inner.ConnectToFromBusToBusFormat(node1, node2, bus1, bus2, format)
+func (x *AudioEngine) ConnectToFromBusToBusFormat(node1 *AudioNode, node2 *AudioNode, bus1 int, bus2 int, format *AudioFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connect:to:fromBus:toBus:format:"), objref.IDOf(node1), objref.IDOf(node2), bus1, bus2, objref.IDOf(format))
 }
 
 // Establishes a connection between two nodes.
-//
-// ConnectToFormat calls the underlying ConnectToFormat.
-func (x *AudioEngine) ConnectToFormat(node1 *raw.AVAudioNode, node2 *raw.AVAudioNode, format *raw.AVAudioFormat) {
-	x.inner.ConnectToFormat(node1, node2, format)
+func (x *AudioEngine) ConnectToFormat(node1 *AudioNode, node2 *AudioNode, format *AudioFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connect:to:format:"), objref.IDOf(node1), objref.IDOf(node2), objref.IDOf(format))
 }
 
 // Establishes a connection between a source node and multiple destination nodes.
-//
-// ConnectToConnectionPointsFromBusFormat calls the underlying ConnectToConnectionPointsFromBusFormat.
-func (x *AudioEngine) ConnectToConnectionPointsFromBusFormat(sourceNode *raw.AVAudioNode, destNodes *foundation.NSArray[*raw.AVAudioConnectionPoint], sourceBus uint, format *raw.AVAudioFormat) {
-	x.inner.ConnectToConnectionPointsFromBusFormat(sourceNode, destNodes, sourceBus, format)
+func (x *AudioEngine) ConnectToConnectionPointsFromBusFormat(sourceNode *AudioNode, destNodes []*AudioConnectionPoint, sourceBus int, format *AudioFormat) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connect:toConnectionPoints:fromBus:format:"), objref.IDOf(sourceNode), purego.SliceToNSArray(destNodes, func(_v *AudioConnectionPoint) objc.ID { return objref.IDOf(_v) }), sourceBus, objref.IDOf(format))
 }
 
 // Removes the input connection of a node on the specified bus.
-//
-// DisconnectNodeInputBus calls the underlying DisconnectNodeInputBus.
-func (x *AudioEngine) DisconnectNodeInputBus(node *raw.AVAudioNode, bus uint) {
-	x.inner.DisconnectNodeInputBus(node, bus)
+func (x *AudioEngine) DisconnectNodeInputBus(node *AudioNode, bus int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnectNodeInput:bus:"), objref.IDOf(node), bus)
 }
 
 // Removes all input connections of the node.
-//
-// DisconnectNodeInput calls the underlying DisconnectNodeInput.
-func (x *AudioEngine) DisconnectNodeInput(node *raw.AVAudioNode) {
-	x.inner.DisconnectNodeInput(node)
+func (x *AudioEngine) DisconnectNodeInput(node *AudioNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnectNodeInput:"), objref.IDOf(node))
 }
 
 // Removes the output connection of a node on the specified bus.
-//
-// DisconnectNodeOutputBus calls the underlying DisconnectNodeOutputBus.
-func (x *AudioEngine) DisconnectNodeOutputBus(node *raw.AVAudioNode, bus uint) {
-	x.inner.DisconnectNodeOutputBus(node, bus)
+func (x *AudioEngine) DisconnectNodeOutputBus(node *AudioNode, bus int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnectNodeOutput:bus:"), objref.IDOf(node), bus)
 }
 
 // Removes all output connections of a node.
-//
-// DisconnectNodeOutput calls the underlying DisconnectNodeOutput.
-func (x *AudioEngine) DisconnectNodeOutput(node *raw.AVAudioNode) {
-	x.inner.DisconnectNodeOutput(node)
+func (x *AudioEngine) DisconnectNodeOutput(node *AudioNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnectNodeOutput:"), objref.IDOf(node))
 }
 
 // Prepares the audio engine for starting.
-//
-// Prepare calls the underlying Prepare.
 func (x *AudioEngine) Prepare() {
-	x.inner.Prepare()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepare"))
 }
 
 // Starts the audio engine.
 //
-// StartAndReturnError returns any validation error.
+// StartAndReturnError returns an error if the operation did not succeed.
 func (x *AudioEngine) StartAndReturnError() error {
-	_, err := x.inner.StartAndReturnError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("startAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Pauses the audio engine.
-//
-// Pause calls the underlying Pause.
 func (x *AudioEngine) Pause() {
-	x.inner.Pause()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause"))
 }
 
 // Resets all audio nodes in the audio engine.
-//
-// Reset calls the underlying Reset.
 func (x *AudioEngine) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
 // Stops the audio engine and releases any previously prepared resources.
-//
-// Stop calls the underlying Stop.
 func (x *AudioEngine) Stop() {
-	x.inner.Stop()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
 // Returns connection information about a node’s input bus.
-//
-// InputConnectionPointForNodeInputBus calls the underlying InputConnectionPointForNodeInputBus.
-func (x *AudioEngine) InputConnectionPointForNodeInputBus(node *raw.AVAudioNode, bus uint) *AudioConnectionPoint {
-	_r := x.inner.InputConnectionPointForNodeInputBus(node, bus)
-	if _r == nil {
-		return nil
-	}
-	return &AudioConnectionPoint{inner: _r}
+func (x *AudioEngine) InputConnectionPointForNodeInputBus(node *AudioNode, bus int) *AudioConnectionPoint {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputConnectionPointForNode:inputBus:"), objref.IDOf(node), bus)
+	return AudioConnectionPointFromID(_r)
 }
 
 // Returns connection information about a node’s output bus.
-//
-// OutputConnectionPointsForNodeOutputBus calls the underlying OutputConnectionPointsForNodeOutputBus.
-func (x *AudioEngine) OutputConnectionPointsForNodeOutputBus(node *raw.AVAudioNode, bus uint) *foundation.NSArray[*raw.AVAudioConnectionPoint] {
-	return x.inner.OutputConnectionPointsForNodeOutputBus(node, bus)
+func (x *AudioEngine) OutputConnectionPointsForNodeOutputBus(node *AudioNode, bus int) []*AudioConnectionPoint {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputConnectionPointsForNode:outputBus:"), objref.IDOf(node), bus)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *AudioConnectionPoint { return AudioConnectionPointFromID(_id) })
 }
 
 // Sets the engine to operate in manual rendering mode with the render format and maximum frame count you specify.
-//
-// EnableManualRenderingModeFormatMaximumFrameCountError calls the underlying EnableManualRenderingModeFormatMaximumFrameCountError.
-func (x *AudioEngine) EnableManualRenderingModeFormatMaximumFrameCountError(mode AVAudioEngineManualRenderingMode, pcmFormat *raw.AVAudioFormat, maximumFrameCount uint32) (bool, error) {
-	return x.inner.EnableManualRenderingModeFormatMaximumFrameCountError(raw.AVAudioEngineManualRenderingMode(mode), pcmFormat, maximumFrameCount)
+func (x *AudioEngine) EnableManualRenderingModeFormatMaximumFrameCount(mode AudioEngineManualRenderingMode, pcmFormat *AudioFormat, maximumFrameCount uint32) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("enableManualRenderingMode:format:maximumFrameCount:error:"), mode, objref.IDOf(pcmFormat), maximumFrameCount, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Sets the engine to render to or from an audio device.
-//
-// DisableManualRenderingMode calls the underlying DisableManualRenderingMode.
 func (x *AudioEngine) DisableManualRenderingMode() {
-	x.inner.DisableManualRenderingMode()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableManualRenderingMode"))
 }
 
 // Makes a render call to the engine operating in the offline manual rendering mode.
-//
-// RenderOfflineToBufferError calls the underlying RenderOfflineToBufferError.
-func (x *AudioEngine) RenderOfflineToBufferError(numberOfFrames uint32, buffer *raw.AVAudioPCMBuffer) (AVAudioEngineManualRenderingStatus, error) {
-	_r, _err := x.inner.RenderOfflineToBufferError(numberOfFrames, buffer)
-	if _err != nil {
-		var _zero AVAudioEngineManualRenderingStatus
-		return _zero, _err
+func (x *AudioEngine) RenderOfflineToBufferError(numberOfFrames uint32, buffer *AudioPCMBuffer) (AudioEngineManualRenderingStatus, error) {
+	var _nsErr uintptr
+	_r := objc.Send[AudioEngineManualRenderingStatus](objref.IDOf(x), objc.RegisterName("renderOffline:toBuffer:error:"), numberOfFrames, objref.IDOf(buffer), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return AudioEngineManualRenderingStatus(0), errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return AVAudioEngineManualRenderingStatus(_r), nil
-}
-
-// Establishes a MIDI-only connection between two nodes.
-//
-// ConnectMIDIToFormatBlock calls the underlying ConnectMIDIToFormatBlock.
-func (x *AudioEngine) ConnectMIDIToFormatBlock(sourceNode *raw.AVAudioNode, destinationNode *raw.AVAudioNode, format *raw.AVAudioFormat, tapBlock func(int64, uint8, int, unsafe.Pointer) int) {
-	x.inner.ConnectMIDIToFormatBlock(sourceNode, destinationNode, format, tapBlock)
-}
-
-// Establishes a MIDI connection between two nodes.
-//
-// ConnectMIDIToFormatEventListBlock calls the underlying ConnectMIDIToFormatEventListBlock.
-func (x *AudioEngine) ConnectMIDIToFormatEventListBlock(sourceNode *raw.AVAudioNode, destinationNode *raw.AVAudioNode, format *raw.AVAudioFormat, tapBlock func(int64, uint8, unsafe.Pointer) int) {
-	x.inner.ConnectMIDIToFormatEventListBlock(sourceNode, destinationNode, format, tapBlock)
-}
-
-// Establishes a MIDI-only connection between a source node and multiple destination nodes.
-//
-// ConnectMIDIToNodesFormatBlock calls the underlying ConnectMIDIToNodesFormatBlock.
-func (x *AudioEngine) ConnectMIDIToNodesFormatBlock(sourceNode *raw.AVAudioNode, destinationNodes *foundation.NSArray[*raw.AVAudioNode], format *raw.AVAudioFormat, tapBlock func(int64, uint8, int, unsafe.Pointer) int) {
-	x.inner.ConnectMIDIToNodesFormatBlock(sourceNode, destinationNodes, format, tapBlock)
-}
-
-// Establishes a MIDI connection between a source node and multiple destination nodes.
-//
-// ConnectMIDIToNodesFormatEventListBlock calls the underlying ConnectMIDIToNodesFormatEventListBlock.
-func (x *AudioEngine) ConnectMIDIToNodesFormatEventListBlock(sourceNode *raw.AVAudioNode, destinationNodes *foundation.NSArray[*raw.AVAudioNode], format *raw.AVAudioFormat, tapBlock func(int64, uint8, unsafe.Pointer) int) {
-	x.inner.ConnectMIDIToNodesFormatEventListBlock(sourceNode, destinationNodes, format, tapBlock)
+	return _r, nil
 }
 
 // Removes a MIDI connection between two nodes.
-//
-// DisconnectMIDIFrom calls the underlying DisconnectMIDIFrom.
-func (x *AudioEngine) DisconnectMIDIFrom(sourceNode *raw.AVAudioNode, destinationNode *raw.AVAudioNode) {
-	x.inner.DisconnectMIDIFrom(sourceNode, destinationNode)
+func (x *AudioEngine) DisconnectMIDIFrom(sourceNode *AudioNode, destinationNode *AudioNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnectMIDI:from:"), objref.IDOf(sourceNode), objref.IDOf(destinationNode))
 }
 
 // Removes a MIDI connection between one source node and multiple destination nodes.
-//
-// DisconnectMIDIFromNodes calls the underlying DisconnectMIDIFromNodes.
-func (x *AudioEngine) DisconnectMIDIFromNodes(sourceNode *raw.AVAudioNode, destinationNodes ...AudioNodeProvider) {
-	_ptrs := make([]objc.ID, len(destinationNodes))
-	for _i, _v := range destinationNodes {
-		_ptrs[_i] = _v.asAudioNode().Ptr()
-	}
-	var _arg1 *foundation.NSArray[*raw.AVAudioNode]
-	if len(_ptrs) > 0 {
-		_arg1 = foundation.NSArrayFromID[*raw.AVAudioNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg1 = foundation.NSArrayFromID[*raw.AVAudioNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.DisconnectMIDIFromNodes(sourceNode, _arg1)
+func (x *AudioEngine) DisconnectMIDIFromNodes(sourceNode *AudioNode, destinationNodes []*AudioNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnectMIDI:fromNodes:"), objref.IDOf(sourceNode), purego.SliceToNSArray(destinationNodes, func(_v *AudioNode) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Disconnects all input MIDI connections from a node.
-//
-// DisconnectMIDIInput calls the underlying DisconnectMIDIInput.
-func (x *AudioEngine) DisconnectMIDIInput(node *raw.AVAudioNode) {
-	x.inner.DisconnectMIDIInput(node)
+func (x *AudioEngine) DisconnectMIDIInput(node *AudioNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnectMIDIInput:"), objref.IDOf(node))
 }
 
 // Disconnects all output MIDI connections from a node.
-//
-// DisconnectMIDIOutput calls the underlying DisconnectMIDIOutput.
-func (x *AudioEngine) DisconnectMIDIOutput(node *raw.AVAudioNode) {
-	x.inner.DisconnectMIDIOutput(node)
+func (x *AudioEngine) DisconnectMIDIOutput(node *AudioNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnectMIDIOutput:"), objref.IDOf(node))
 }
 
-// @property musicSequence @abstract The MusicSequence previously attached to the engine (if any).
-//
-// MusicSequence calls the underlying MusicSequence.
-func (x *AudioEngine) MusicSequence() unsafe.Pointer {
-	return x.inner.MusicSequence()
+// The MusicSequence previously attached to the engine (if any).
+func (x *AudioEngine) MusicSequence() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("musicSequence"))
+	return obj.Wrap(_r)
 }
 
-// SetMusicSequence calls the underlying SetMusicSequence.
-func (x *AudioEngine) SetMusicSequence(musicSequence unsafe.Pointer) {
-	x.inner.SetMusicSequence(musicSequence)
+func (x *AudioEngine) SetMusicSequence(musicSequence obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMusicSequence:"), objref.IDOf(musicSequence))
 }
 
-// @property outputNode @abstract The engine's singleton output node. Audio output is performed via an output node. The engine creates a singleton on demand when this property is first accessed. Connect another node to the input of the output node, or obtain a mixer that is connected there by default, using the "mainMixerNode" property. When the engine is rendering to/from an audio device, the AVAudioSesssion category and/or availability of hardware determine whether an app can perform output. Check the output format of output node (i.e. hardware format) for non-zero sample rate and channel count to see if output is enabled. Trying to perform output through the output node when it is not enabled or available will cause the engine to throw an error (when possible) or an exception. In manual rendering mode, the output format of the output node will determine the render format of the engine. It can be changed through `enableManualRenderingMode:format:maximumFrameCount:error:`.
-//
-// OutputNode calls the underlying OutputNode.
+// The engine's singleton output node. Audio output is performed via an output node. The engine creates a singleton on demand when this property is first accessed. Connect another node to the input of the output node, or obtain a mixer that is connected there by default, using the "mainMixerNode" property. When the engine is rendering to/from an audio device, the AVAudioSesssion category and/or availability of hardware determine whether an app can perform output. Check the output format of output node (i.e. hardware format) for non-zero sample rate and channel count to see if output is enabled. Trying to perform output through the output node when it is not enabled or available will cause the engine to throw an error (when possible) or an exception. In manual rendering mode, the output format of the output node will determine the render format of the engine. It can be changed through `enableManualRenderingMode:format:maximumFrameCount:error:`.
 func (x *AudioEngine) OutputNode() *AudioOutputNode {
-	_r := x.inner.OutputNode()
-	if _r == nil {
-		return nil
-	}
-	return &AudioOutputNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputNode"))
+	return AudioOutputNodeFromID(_r)
 }
 
-// @property inputNode @abstract The engine's singleton input node. Audio input is performed via an input node. The engine creates a singleton on demand when this property is first accessed. To receive input, connect another node from the output of the input node, or create a recording tap on it. When the engine is rendering to/from an audio device, the AVAudioSesssion category and/or availability of hardware determine whether an app can perform input. Check for the input node's input format (i.e. hardware format) for non-zero sample rate and channel count to see if input is enabled. Trying to perform input through the input node when it is not enabled or available will cause the engine to throw an error (when possible) or an exception. Note that if the engine has at any point previously had its inputNode enabled and permission to record was granted, then any time the engine is running, the mic-in-use indicator will appear. For applications which may need to dynamically switch between output-only and input-output modes, it may be advantageous to use two engine instances. In manual rendering mode, the input node can be used to synchronously supply data to the engine while it is rendering (see `AVAudioInputNode(setManualRenderingInputPCMFormat:inputBlock:)`.
-//
-// InputNode calls the underlying InputNode.
+// The engine's singleton input node. Audio input is performed via an input node. The engine creates a singleton on demand when this property is first accessed. To receive input, connect another node from the output of the input node, or create a recording tap on it. When the engine is rendering to/from an audio device, the AVAudioSesssion category and/or availability of hardware determine whether an app can perform input. Check for the input node's input format (i.e. hardware format) for non-zero sample rate and channel count to see if input is enabled. Trying to perform input through the input node when it is not enabled or available will cause the engine to throw an error (when possible) or an exception. Note that if the engine has at any point previously had its inputNode enabled and permission to record was granted, then any time the engine is running, the mic-in-use indicator will appear. For applications which may need to dynamically switch between output-only and input-output modes, it may be advantageous to use two engine instances. In manual rendering mode, the input node can be used to synchronously supply data to the engine while it is rendering (see `AVAudioInputNode(setManualRenderingInputPCMFormat:inputBlock:)`.
 func (x *AudioEngine) InputNode() *AudioInputNode {
-	_r := x.inner.InputNode()
-	if _r == nil {
-		return nil
-	}
-	return &AudioInputNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputNode"))
+	return AudioInputNodeFromID(_r)
 }
 
-// @property mainMixerNode @abstract The engine's optional singleton main mixer node. The engine will construct a singleton main mixer and connect it to the outputNode on demand, when this property is first accessed. You can then connect additional nodes to the mixer. If the client has never explicitly set the connection format between the mainMixerNode and the outputNode, the engine will always set/update the format to track the format of the outputNode on (re)start, even after an AVAudioEngineConfigurationChangeNotification. Otherwise, it's the client's responsibility to set/update this connection format after an AVAudioEngineConfigurationChangeNotification. By default, the mixer's output format (sample rate and channel count) will track the format of the output node. You may however make the connection explicitly with a different format.
-//
-// MainMixerNode calls the underlying MainMixerNode.
+// The engine's optional singleton main mixer node. The engine will construct a singleton main mixer and connect it to the outputNode on demand, when this property is first accessed. You can then connect additional nodes to the mixer. If the client has never explicitly set the connection format between the mainMixerNode and the outputNode, the engine will always set/update the format to track the format of the outputNode on (re)start, even after an AVAudioEngineConfigurationChangeNotification. Otherwise, it's the client's responsibility to set/update this connection format after an AVAudioEngineConfigurationChangeNotification. By default, the mixer's output format (sample rate and channel count) will track the format of the output node. You may however make the connection explicitly with a different format.
 func (x *AudioEngine) MainMixerNode() *AudioMixerNode {
-	_r := x.inner.MainMixerNode()
-	if _r == nil {
-		return nil
-	}
-	return &AudioMixerNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainMixerNode"))
+	return AudioMixerNodeFromID(_r)
 }
 
-// @property running @abstract The engine's running state.
-//
-// IsRunning calls the underlying IsRunning.
+// The engine's running state.
 func (x *AudioEngine) IsRunning() bool {
-	return x.inner.IsRunning()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRunning"))
+	return _r
 }
 
-// @property autoShutdownEnabled @abstract When auto shutdown is enabled, the engine can start and stop the audio hardware dynamically, to conserve power. This is the enforced behavior on watchOS and can be optionally enabled on other platforms. To conserve power, it is advised that the client pause/stop the engine when not in use. But when auto shutdown is enabled, the engine will stop the audio hardware if it was running idle for a certain duration, and restart it later when required. Note that, because this operation is dynamic, it may affect the start times of the source nodes (e.g. `AVAudioPlayerNode`), if the engine has to resume from its shutdown state. On watchOS, auto shutdown is always enabled. On other platforms, it is disabled by default, but the client can enable it if needed. This property is applicable only when the engine is rendering to/from an audio device. If the value is changed when the engine is in manual rendering mode, it will take effect whenever the engine is switched to render to/from the audio device.
-//
-// IsAutoShutdownEnabled calls the underlying IsAutoShutdownEnabled.
+// When auto shutdown is enabled, the engine can start and stop the audio hardware dynamically, to conserve power. This is the enforced behavior on watchOS and can be optionally enabled on other platforms. To conserve power, it is advised that the client pause/stop the engine when not in use. But when auto shutdown is enabled, the engine will stop the audio hardware if it was running idle for a certain duration, and restart it later when required. Note that, because this operation is dynamic, it may affect the start times of the source nodes (e.g. `AVAudioPlayerNode`), if the engine has to resume from its shutdown state. On watchOS, auto shutdown is always enabled. On other platforms, it is disabled by default, but the client can enable it if needed. This property is applicable only when the engine is rendering to/from an audio device. If the value is changed when the engine is in manual rendering mode, it will take effect whenever the engine is switched to render to/from the audio device.
 func (x *AudioEngine) IsAutoShutdownEnabled() bool {
-	return x.inner.IsAutoShutdownEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAutoShutdownEnabled"))
+	return _r
 }
 
-// SetAutoShutdownEnabled calls the underlying SetAutoShutdownEnabled.
 func (x *AudioEngine) SetAutoShutdownEnabled(autoShutdownEnabled bool) {
-	x.inner.SetAutoShutdownEnabled(autoShutdownEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoShutdownEnabled:"), autoShutdownEnabled)
 }
 
-// @property attachedNodes @abstract Set of all nodes attached to the engine.
-//
-// AttachedNodes calls the underlying AttachedNodes.
-func (x *AudioEngine) AttachedNodes() *foundation.NSSet[*raw.AVAudioNode] {
-	return x.inner.AttachedNodes()
+// Set of all nodes attached to the engine.
+func (x *AudioEngine) AttachedNodes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachedNodes"))
+	return obj.Wrap(_r)
 }
 
-// @property manualRenderingBlock @abstract Block to render the engine operating in manual rendering mode This block based render call must be used to render the engine when operating in `AVAudioEngineManualRenderingModeRealtime`. In this mode, the engine operates under realtime constraints and will not make any blocking call (e.g. calling libdispatch, blocking on a mutex, allocating memory etc.) while rendering. Before invoking the rendering functionality, client must fetch this block and cache the result. The block can then be called from a realtime context, without any possibility of blocking. When rendering in `AVAudioEngineManualRenderingModeOffline`, either this block based render call or	`renderOffline:toBuffer:error:` ObjC method can be used. All the rules outlined in `renderOffline:toBuffer:error:` are applicable here as well.
-//
-// ManualRenderingBlock calls the underlying ManualRenderingBlock.
-func (x *AudioEngine) ManualRenderingBlock() objc.Block {
-	return x.inner.ManualRenderingBlock()
-}
-
-// @property isInManualRenderingMode @abstract Whether or not the engine is operating in manual rendering mode, i.e. not connected to an audio device and rendering in response to the requests from the client
-//
-// IsInManualRenderingMode calls the underlying IsInManualRenderingMode.
+// Whether or not the engine is operating in manual rendering mode, i.e. not connected to an audio device and rendering in response to the requests from the client
 func (x *AudioEngine) IsInManualRenderingMode() bool {
-	return x.inner.IsInManualRenderingMode()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInManualRenderingMode"))
+	return _r
 }
 
-// @property manualRenderingMode @abstract The manual rendering mode configured on the engine This property is meaningful only when the engine is operating in manual rendering mode, i.e. when `isInManualRenderingMode` returns true.
-//
-// ManualRenderingMode calls the underlying ManualRenderingMode.
-func (x *AudioEngine) ManualRenderingMode() AVAudioEngineManualRenderingMode {
-	return AVAudioEngineManualRenderingMode(x.inner.ManualRenderingMode())
+// The manual rendering mode configured on the engine This property is meaningful only when the engine is operating in manual rendering mode, i.e. when `isInManualRenderingMode` returns true.
+func (x *AudioEngine) ManualRenderingMode() AudioEngineManualRenderingMode {
+	_r := objc.Send[AudioEngineManualRenderingMode](objref.IDOf(x), objc.RegisterName("manualRenderingMode"))
+	return _r
 }
 
-// @property manualRenderingFormat @abstract The render format of the engine in manual rendering mode. Querying this property when the engine is not in manual rendering mode will return an invalid format, with zero sample rate and channel count.
-//
-// ManualRenderingFormat calls the underlying ManualRenderingFormat.
+// The render format of the engine in manual rendering mode. Querying this property when the engine is not in manual rendering mode will return an invalid format, with zero sample rate and channel count.
 func (x *AudioEngine) ManualRenderingFormat() *AudioFormat {
-	_r := x.inner.ManualRenderingFormat()
-	if _r == nil {
-		return nil
-	}
-	return &AudioFormat{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manualRenderingFormat"))
+	return AudioFormatFromID(_r)
 }
 
-// @property manualRenderingMaximumFrameCount @abstract The maximum number of PCM sample frames the engine can produce in any single render call in the manual rendering mode. Querying this property when the engine is not in manual rendering mode will return zero.
-//
-// ManualRenderingMaximumFrameCount calls the underlying ManualRenderingMaximumFrameCount.
+// The maximum number of PCM sample frames the engine can produce in any single render call in the manual rendering mode. Querying this property when the engine is not in manual rendering mode will return zero.
 func (x *AudioEngine) ManualRenderingMaximumFrameCount() uint32 {
-	return x.inner.ManualRenderingMaximumFrameCount()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("manualRenderingMaximumFrameCount"))
+	return _r
 }
 
-// @property manualRenderingSampleTime @abstract Indicates where the engine is on its render timeline in manual rendering mode. The timeline in manual rendering mode starts at a sample time of zero, and is in terms of the render format's sample rate. Resetting the engine (see `reset`) will reset the timeline back to zero.
-//
-// ManualRenderingSampleTime calls the underlying ManualRenderingSampleTime.
+// Indicates where the engine is on its render timeline in manual rendering mode. The timeline in manual rendering mode starts at a sample time of zero, and is in terms of the render format's sample rate. Resetting the engine (see `reset`) will reset the timeline back to zero.
 func (x *AudioEngine) ManualRenderingSampleTime() int64 {
-	return x.inner.ManualRenderingSampleTime()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("manualRenderingSampleTime"))
+	return _r
 }
 
 // AudioEngineable is the interface implemented by [AudioEngine], for mocking and DI.
 type AudioEngineable interface {
-	Unwrap() *raw.AVAudioEngine
+	obj.Object
+	WithMusicSequence(musicSequence obj.Object) *AudioEngine
 	WithAutoShutdownEnabled(autoShutdownEnabled bool) *AudioEngine
-	AttachNode(node *raw.AVAudioNode)
-	DetachNode(node *raw.AVAudioNode)
-	ConnectToFromBusToBusFormat(node1 *raw.AVAudioNode, node2 *raw.AVAudioNode, bus1 uint, bus2 uint, format *raw.AVAudioFormat)
-	ConnectToFormat(node1 *raw.AVAudioNode, node2 *raw.AVAudioNode, format *raw.AVAudioFormat)
-	ConnectToConnectionPointsFromBusFormat(sourceNode *raw.AVAudioNode, destNodes *foundation.NSArray[*raw.AVAudioConnectionPoint], sourceBus uint, format *raw.AVAudioFormat)
-	DisconnectNodeInputBus(node *raw.AVAudioNode, bus uint)
-	DisconnectNodeInput(node *raw.AVAudioNode)
-	DisconnectNodeOutputBus(node *raw.AVAudioNode, bus uint)
-	DisconnectNodeOutput(node *raw.AVAudioNode)
+	AttachNode(node *AudioNode)
+	DetachNode(node *AudioNode)
+	ConnectToFromBusToBusFormat(node1 *AudioNode, node2 *AudioNode, bus1 int, bus2 int, format *AudioFormat)
+	ConnectToFormat(node1 *AudioNode, node2 *AudioNode, format *AudioFormat)
+	ConnectToConnectionPointsFromBusFormat(sourceNode *AudioNode, destNodes []*AudioConnectionPoint, sourceBus int, format *AudioFormat)
+	DisconnectNodeInputBus(node *AudioNode, bus int)
+	DisconnectNodeInput(node *AudioNode)
+	DisconnectNodeOutputBus(node *AudioNode, bus int)
+	DisconnectNodeOutput(node *AudioNode)
 	Prepare()
 	StartAndReturnError() error
 	Pause()
 	Reset()
 	Stop()
-	InputConnectionPointForNodeInputBus(node *raw.AVAudioNode, bus uint) *AudioConnectionPoint
-	OutputConnectionPointsForNodeOutputBus(node *raw.AVAudioNode, bus uint) *foundation.NSArray[*raw.AVAudioConnectionPoint]
-	EnableManualRenderingModeFormatMaximumFrameCountError(mode AVAudioEngineManualRenderingMode, pcmFormat *raw.AVAudioFormat, maximumFrameCount uint32) (bool, error)
+	InputConnectionPointForNodeInputBus(node *AudioNode, bus int) *AudioConnectionPoint
+	OutputConnectionPointsForNodeOutputBus(node *AudioNode, bus int) []*AudioConnectionPoint
+	EnableManualRenderingModeFormatMaximumFrameCount(mode AudioEngineManualRenderingMode, pcmFormat *AudioFormat, maximumFrameCount uint32) error
 	DisableManualRenderingMode()
-	RenderOfflineToBufferError(numberOfFrames uint32, buffer *raw.AVAudioPCMBuffer) (AVAudioEngineManualRenderingStatus, error)
-	ConnectMIDIToFormatBlock(sourceNode *raw.AVAudioNode, destinationNode *raw.AVAudioNode, format *raw.AVAudioFormat, tapBlock func(int64, uint8, int, unsafe.Pointer) int)
-	ConnectMIDIToFormatEventListBlock(sourceNode *raw.AVAudioNode, destinationNode *raw.AVAudioNode, format *raw.AVAudioFormat, tapBlock func(int64, uint8, unsafe.Pointer) int)
-	ConnectMIDIToNodesFormatBlock(sourceNode *raw.AVAudioNode, destinationNodes *foundation.NSArray[*raw.AVAudioNode], format *raw.AVAudioFormat, tapBlock func(int64, uint8, int, unsafe.Pointer) int)
-	ConnectMIDIToNodesFormatEventListBlock(sourceNode *raw.AVAudioNode, destinationNodes *foundation.NSArray[*raw.AVAudioNode], format *raw.AVAudioFormat, tapBlock func(int64, uint8, unsafe.Pointer) int)
-	DisconnectMIDIFrom(sourceNode *raw.AVAudioNode, destinationNode *raw.AVAudioNode)
-	DisconnectMIDIFromNodes(sourceNode *raw.AVAudioNode, destinationNodes ...AudioNodeProvider)
-	DisconnectMIDIInput(node *raw.AVAudioNode)
-	DisconnectMIDIOutput(node *raw.AVAudioNode)
-	MusicSequence() unsafe.Pointer
-	SetMusicSequence(musicSequence unsafe.Pointer)
+	RenderOfflineToBufferError(numberOfFrames uint32, buffer *AudioPCMBuffer) (AudioEngineManualRenderingStatus, error)
+	DisconnectMIDIFrom(sourceNode *AudioNode, destinationNode *AudioNode)
+	DisconnectMIDIFromNodes(sourceNode *AudioNode, destinationNodes []*AudioNode)
+	DisconnectMIDIInput(node *AudioNode)
+	DisconnectMIDIOutput(node *AudioNode)
+	MusicSequence() obj.Object
+	SetMusicSequence(musicSequence obj.Object)
 	OutputNode() *AudioOutputNode
 	InputNode() *AudioInputNode
 	MainMixerNode() *AudioMixerNode
 	IsRunning() bool
 	IsAutoShutdownEnabled() bool
 	SetAutoShutdownEnabled(autoShutdownEnabled bool)
-	AttachedNodes() *foundation.NSSet[*raw.AVAudioNode]
-	ManualRenderingBlock() objc.Block
+	AttachedNodes() obj.Object
 	IsInManualRenderingMode() bool
-	ManualRenderingMode() AVAudioEngineManualRenderingMode
+	ManualRenderingMode() AudioEngineManualRenderingMode
 	ManualRenderingFormat() *AudioFormat
 	ManualRenderingMaximumFrameCount() uint32
 	ManualRenderingSampleTime() int64

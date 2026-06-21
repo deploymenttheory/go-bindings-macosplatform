@@ -6,39 +6,64 @@ package sensitivecontentanalysis
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sensitivecontentanalysis"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that analyzes media for sensitive content.
 //
-// SensitivityAnalyzer wraps [raw.SCSensitivityAnalyzer] with a fluent Go API.
+// SensitivityAnalyzer is an idiomatic wrapper over the Objective-C class SCSensitivityAnalyzer.
 type SensitivityAnalyzer struct {
-	inner *raw.SCSensitivityAnalyzer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCSensitivityAnalyzer].
-func (x *SensitivityAnalyzer) Unwrap() *raw.SCSensitivityAnalyzer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SensitivityAnalyzer) ID() objc.ID { return x.inner.Ptr() }
-
-// SensitivityAnalyzerFromID adopts an existing object pointer as a SensitivityAnalyzer (nil for 0).
+// SensitivityAnalyzerFromID adopts an existing Objective-C object as a SensitivityAnalyzer
+// (nil for 0), retaining it and registering a release finalizer.
 func SensitivityAnalyzerFromID(id objc.ID) *SensitivityAnalyzer {
 	if id == 0 {
 		return nil
 	}
-	return &SensitivityAnalyzer{inner: raw.SCSensitivityAnalyzerFromID(id)}
+	x := &SensitivityAnalyzer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSensitivityAnalyzer creates a new [SensitivityAnalyzer].
+// sensitivityAnalyzerAdopt wraps an Objective-C object that this code just created as a
+// SensitivityAnalyzer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sensitivityAnalyzerAdopt(id objc.ID) *SensitivityAnalyzer {
+	if id == 0 {
+		return nil
+	}
+	x := &SensitivityAnalyzer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SensitivityAnalyzer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SensitivityAnalyzer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SensitivityAnalyzer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSensitivityAnalyzer creates a new SensitivityAnalyzer.
 func NewSensitivityAnalyzer() *SensitivityAnalyzer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCSensitivityAnalyzer")), objc.RegisterName("new"))
-	return &SensitivityAnalyzer{inner: raw.SCSensitivityAnalyzerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCSensitivityAnalyzer")), objc.RegisterName("new"))
+	return sensitivityAnalyzerAdopt(_id)
 }
 
 // Analyzes an image file on disk at a URL and runs code on completion.
@@ -50,16 +75,13 @@ func (x *SensitivityAnalyzer) AnalyzeImageFile(ctx context.Context, fileURL stri
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.AnalyzeImageFileCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), func(_p0 *raw.SCSensitivityAnalysis, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &SensitivityAnalysis{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = SensitivityAnalysisFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("analyzeImageFile:completionHandler:"), rt.FileURL(fileURL), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -72,22 +94,19 @@ func (x *SensitivityAnalyzer) AnalyzeImageFile(ctx context.Context, fileURL stri
 // Analyzes an image for sensitive content and runs code on completion.
 //
 // AnalyzeCGImage blocks until the operation completes or ctx is cancelled.
-func (x *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image unsafe.Pointer) (*SensitivityAnalysis, error) {
+func (x *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image obj.Object) (*SensitivityAnalysis, error) {
 	type _result struct {
 		val *SensitivityAnalysis
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.AnalyzeCGImageCompletionHandler(image, func(_p0 *raw.SCSensitivityAnalysis, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &SensitivityAnalysis{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = SensitivityAnalysisFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("analyzeCGImage:completionHandler:"), objref.IDOf(image), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -97,27 +116,18 @@ func (x *SensitivityAnalyzer) AnalyzeCGImage(ctx context.Context, image unsafe.P
 	}
 }
 
-// Analyzes a video file on disk at the given URL and runs the given code on completion.
-//
-// AnalyzeVideoFileCompletionHandler calls the underlying AnalyzeVideoFileCompletionHandler.
-func (x *SensitivityAnalyzer) AnalyzeVideoFileCompletionHandler(fileURL string, completionHandler func(*raw.SCSensitivityAnalysis, unsafe.Pointer)) *foundation.NSProgress {
-	return x.inner.AnalyzeVideoFileCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), completionHandler)
-}
-
 // Current SCSensitivityAnalysisPolicy set on device. Can be used to determine whether analysis is available or not
-//
-// AnalysisPolicy calls the underlying AnalysisPolicy.
-func (x *SensitivityAnalyzer) AnalysisPolicy() SCSensitivityAnalysisPolicy {
-	return SCSensitivityAnalysisPolicy(x.inner.AnalysisPolicy())
+func (x *SensitivityAnalyzer) AnalysisPolicy() SensitivityAnalysisPolicy {
+	_r := objc.Send[SensitivityAnalysisPolicy](objref.IDOf(x), objc.RegisterName("analysisPolicy"))
+	return _r
 }
 
 // SensitivityAnalyzerable is the interface implemented by [SensitivityAnalyzer], for mocking and DI.
 type SensitivityAnalyzerable interface {
-	Unwrap() *raw.SCSensitivityAnalyzer
+	obj.Object
 	AnalyzeImageFile(ctx context.Context, fileURL string) (*SensitivityAnalysis, error)
-	AnalyzeCGImage(ctx context.Context, image unsafe.Pointer) (*SensitivityAnalysis, error)
-	AnalyzeVideoFileCompletionHandler(fileURL string, completionHandler func(*raw.SCSensitivityAnalysis, unsafe.Pointer)) *foundation.NSProgress
-	AnalysisPolicy() SCSensitivityAnalysisPolicy
+	AnalyzeCGImage(ctx context.Context, image obj.Object) (*SensitivityAnalysis, error)
+	AnalysisPolicy() SensitivityAnalysisPolicy
 }
 
 var _ SensitivityAnalyzerable = (*SensitivityAnalyzer)(nil)

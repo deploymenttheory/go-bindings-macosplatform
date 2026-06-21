@@ -5,79 +5,89 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An object that executes scripts.
 //
-// UserScriptTask wraps [raw.NSUserScriptTask] with a fluent Go API.
+// UserScriptTask is an idiomatic wrapper over the Objective-C class NSUserScriptTask.
 type UserScriptTask struct {
-	inner *raw.NSUserScriptTask
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSUserScriptTask].
-func (x *UserScriptTask) Unwrap() *raw.NSUserScriptTask { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UserScriptTask) ID() objc.ID { return x.inner.Ptr() }
-
-// UserScriptTaskFromID adopts an existing object pointer as a UserScriptTask (nil for 0).
+// UserScriptTaskFromID adopts an existing Objective-C object as a UserScriptTask
+// (nil for 0), retaining it and registering a release finalizer.
 func UserScriptTaskFromID(id objc.ID) *UserScriptTask {
 	if id == 0 {
 		return nil
 	}
-	return &UserScriptTask{inner: raw.NSUserScriptTaskFromID(id)}
+	x := &UserScriptTask{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// userScriptTaskAdopt wraps an Objective-C object that this code just created as a
+// UserScriptTask (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func userScriptTaskAdopt(id objc.ID) *UserScriptTask {
+	if id == 0 {
+		return nil
+	}
+	x := &UserScriptTask{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UserScriptTask) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UserScriptTask) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UserScriptTask) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Return a user script task instance given a URL for a script file.
 //
-// NewUserScriptTaskWithURLError creates a new [UserScriptTask].
+// NewUserScriptTaskWithURLError creates a new UserScriptTask.
 func NewUserScriptTaskWithURLError(url string) (*UserScriptTask, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUserScriptTask")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUserScriptTask")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &UserScriptTask{inner: raw.NSUserScriptTaskFromID(_id)}, nil
+	return userScriptTaskAdopt(_id), nil
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UserScriptTask) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserScriptTask {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *UserScriptTask) WithScriptingProperties(scriptingProperties obj.Object) *UserScriptTask {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Executes the script with no input and ignoring any result.
-//
-// ExecuteWithCompletionHandler calls the underlying ExecuteWithCompletionHandler.
-func (x *UserScriptTask) ExecuteWithCompletionHandler(handler func(unsafe.Pointer)) {
-	x.inner.ExecuteWithCompletionHandler(handler)
-}
-
-// ScriptURL calls the underlying ScriptURL.
 func (x *UserScriptTask) ScriptURL() *URL {
-	_r := x.inner.ScriptURL()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scriptURL"))
+	return URLFromID(_r)
 }
-
-func (x *UserScriptTask) asUserScriptTask() *raw.NSUserScriptTask { return x.inner }
-
-func (x *UserScriptTask) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // UserScriptTaskable is the interface implemented by [UserScriptTask], for mocking and DI.
 type UserScriptTaskable interface {
-	Unwrap() *raw.NSUserScriptTask
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UserScriptTask
-	ExecuteWithCompletionHandler(handler func(unsafe.Pointer))
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UserScriptTask
 	ScriptURL() *URL
 }
 

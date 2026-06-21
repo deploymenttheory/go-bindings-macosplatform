@@ -5,118 +5,132 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Base interface for other function-derived interfaces.
 //
-// MTL4BinaryFunctionDescriptor wraps [raw.MTL4BinaryFunctionDescriptor] with a fluent Go API.
+// MTL4BinaryFunctionDescriptor is an idiomatic wrapper over the Objective-C class MTL4BinaryFunctionDescriptor.
 type MTL4BinaryFunctionDescriptor struct {
-	inner *raw.MTL4BinaryFunctionDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTL4BinaryFunctionDescriptor].
-func (x *MTL4BinaryFunctionDescriptor) Unwrap() *raw.MTL4BinaryFunctionDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTL4BinaryFunctionDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MTL4BinaryFunctionDescriptorFromID adopts an existing object pointer as a MTL4BinaryFunctionDescriptor (nil for 0).
+// MTL4BinaryFunctionDescriptorFromID adopts an existing Objective-C object as a MTL4BinaryFunctionDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MTL4BinaryFunctionDescriptorFromID(id objc.ID) *MTL4BinaryFunctionDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MTL4BinaryFunctionDescriptor{inner: raw.MTL4BinaryFunctionDescriptorFromID(id)}
+	x := &MTL4BinaryFunctionDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTL4BinaryFunctionDescriptor creates a new [MTL4BinaryFunctionDescriptor].
+// mTL4BinaryFunctionDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MTL4BinaryFunctionDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTL4BinaryFunctionDescriptorAdopt(id objc.ID) *MTL4BinaryFunctionDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MTL4BinaryFunctionDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTL4BinaryFunctionDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTL4BinaryFunctionDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTL4BinaryFunctionDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTL4BinaryFunctionDescriptor creates a new MTL4BinaryFunctionDescriptor.
 func NewMTL4BinaryFunctionDescriptor() *MTL4BinaryFunctionDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4BinaryFunctionDescriptor")), objc.RegisterName("new"))
-	return &MTL4BinaryFunctionDescriptor{inner: raw.MTL4BinaryFunctionDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTL4BinaryFunctionDescriptor")), objc.RegisterName("new"))
+	return mTL4BinaryFunctionDescriptorAdopt(_id)
 }
 
 // Associates a string that uniquely identifies a binary function.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *MTL4BinaryFunctionDescriptor) WithName(name string) *MTL4BinaryFunctionDescriptor {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // Provides the function descriptor corresponding to the function to compile into a binary function.
 //
-// WithFunctionDescriptor sets the functionDescriptor property and returns the receiver for chaining.
+// WithFunctionDescriptor sets functionDescriptor and returns the receiver so calls can be chained.
 func (x *MTL4BinaryFunctionDescriptor) WithFunctionDescriptor(functionDescriptor MTL4FunctionDescriptorProvider) *MTL4BinaryFunctionDescriptor {
-	x.inner.SetFunctionDescriptor(functionDescriptor.asMTL4FunctionDescriptor())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionDescriptor:"), objref.IDOf(functionDescriptor))
 	return x
 }
 
 // Configure the options to use at binary function creation time.
 //
-// WithOptions sets the options property and returns the receiver for chaining.
+// WithOptions sets options and returns the receiver so calls can be chained.
 func (x *MTL4BinaryFunctionDescriptor) WithOptions(options MTL4BinaryFunctionOptions) *MTL4BinaryFunctionDescriptor {
-	x.inner.SetOptions(raw.MTL4BinaryFunctionOptions(options))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
 	return x
 }
 
 // Associates a string that uniquely identifies a binary function. You can use this property to look up a corresponding binary function by name in a “MTL4Archive“ instance.
-//
-// Name calls the underlying Name.
 func (x *MTL4BinaryFunctionDescriptor) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
 func (x *MTL4BinaryFunctionDescriptor) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
 // Provides the function descriptor corresponding to the function to compile into a binary function.
-//
-// FunctionDescriptor calls the underlying FunctionDescriptor.
 func (x *MTL4BinaryFunctionDescriptor) FunctionDescriptor() *MTL4FunctionDescriptor {
-	_r := x.inner.FunctionDescriptor()
-	if _r == nil {
-		return nil
-	}
-	return &MTL4FunctionDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("functionDescriptor"))
+	return MTL4FunctionDescriptorFromID(_r)
 }
 
-// SetFunctionDescriptor calls the underlying SetFunctionDescriptor.
-func (x *MTL4BinaryFunctionDescriptor) SetFunctionDescriptor(functionDescriptor *raw.MTL4FunctionDescriptor) {
-	x.inner.SetFunctionDescriptor(functionDescriptor)
+func (x *MTL4BinaryFunctionDescriptor) SetFunctionDescriptor(functionDescriptor *MTL4FunctionDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionDescriptor:"), objref.IDOf(functionDescriptor))
 }
 
 // Configure the options to use at binary function creation time.
-//
-// Options calls the underlying Options.
 func (x *MTL4BinaryFunctionDescriptor) Options() MTL4BinaryFunctionOptions {
-	return MTL4BinaryFunctionOptions(x.inner.Options())
+	_r := objc.Send[MTL4BinaryFunctionOptions](objref.IDOf(x), objc.RegisterName("options"))
+	return _r
 }
 
-// SetOptions calls the underlying SetOptions.
 func (x *MTL4BinaryFunctionDescriptor) SetOptions(options MTL4BinaryFunctionOptions) {
-	x.inner.SetOptions(raw.MTL4BinaryFunctionOptions(options))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
 }
 
 // MTL4BinaryFunctionDescriptorable is the interface implemented by [MTL4BinaryFunctionDescriptor], for mocking and DI.
 type MTL4BinaryFunctionDescriptorable interface {
-	Unwrap() *raw.MTL4BinaryFunctionDescriptor
+	obj.Object
 	WithName(name string) *MTL4BinaryFunctionDescriptor
 	WithFunctionDescriptor(functionDescriptor MTL4FunctionDescriptorProvider) *MTL4BinaryFunctionDescriptor
 	WithOptions(options MTL4BinaryFunctionOptions) *MTL4BinaryFunctionDescriptor
 	Name() string
 	SetName(name string)
 	FunctionDescriptor() *MTL4FunctionDescriptor
-	SetFunctionDescriptor(functionDescriptor *raw.MTL4FunctionDescriptor)
+	SetFunctionDescriptor(functionDescriptor *MTL4FunctionDescriptor)
 	Options() MTL4BinaryFunctionOptions
 	SetOptions(options MTL4BinaryFunctionOptions)
 }

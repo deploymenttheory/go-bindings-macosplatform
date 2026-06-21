@@ -5,15 +5,15 @@
 package cinematic
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// AssetInfoProvider is implemented by AssetInfo and any idiomatic type wrapping a CNAssetInfo subclass.
+// AssetInfoProvider is accepted wherever a CNAssetInfo (or one of its subclasses) is expected.
 type AssetInfoProvider interface {
-	asAssetInfo() *raw.CNAssetInfo
+	objref.Object
 }
 
-// DetectionTrackProvider is implemented by DetectionTrack and any idiomatic type wrapping a CNDetectionTrack subclass.
+// DetectionTrackProvider is accepted wherever a CNDetectionTrack (or one of its subclasses) is expected.
 type DetectionTrackProvider interface {
-	asDetectionTrack() *raw.CNDetectionTrack
+	objref.Object
 }

@@ -5,43 +5,66 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent wraps [raw.MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent] with a fluent Go API.
+// MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent is an idiomatic wrapper over the Objective-C class MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent.
 type MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent struct {
-	inner *raw.MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent].
-func (x *MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRPumpConfigurationAndControlClusterElectronicFatalFailureEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent (nil for 0).
+// MTRPumpConfigurationAndControlClusterElectronicFatalFailureEventFromID adopts an existing Objective-C object as a MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRPumpConfigurationAndControlClusterElectronicFatalFailureEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent{inner: raw.MTRPumpConfigurationAndControlClusterElectronicFatalFailureEventFromID(id)}
+	x := &MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent creates a new [MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent].
+// mTRPumpConfigurationAndControlClusterElectronicFatalFailureEventAdopt wraps an Objective-C object that this code just created as a
+// MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRPumpConfigurationAndControlClusterElectronicFatalFailureEventAdopt(id objc.ID) *MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent creates a new MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent.
 func NewMTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent() *MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent")), objc.RegisterName("new"))
-	return &MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent{inner: raw.MTRPumpConfigurationAndControlClusterElectronicFatalFailureEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent")), objc.RegisterName("new"))
+	return mTRPumpConfigurationAndControlClusterElectronicFatalFailureEventAdopt(_id)
 }
 
 // MTRPumpConfigurationAndControlClusterElectronicFatalFailureEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent], for mocking and DI.
 type MTRPumpConfigurationAndControlClusterElectronicFatalFailureEventable interface {
-	Unwrap() *raw.MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent
+	obj.Object
 }
 
 var _ MTRPumpConfigurationAndControlClusterElectronicFatalFailureEventable = (*MTRPumpConfigurationAndControlClusterElectronicFatalFailureEvent)(nil)

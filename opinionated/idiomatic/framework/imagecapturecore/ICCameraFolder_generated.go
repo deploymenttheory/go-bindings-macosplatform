@@ -5,55 +5,74 @@
 package imagecapturecore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a folder on a camera.
 //
-// CameraFolder wraps [raw.ICCameraFolder] with a fluent Go API.
+// CameraFolder is an idiomatic wrapper over the Objective-C class ICCameraFolder.
 type CameraFolder struct {
-	inner *raw.ICCameraFolder
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ICCameraFolder].
-func (x *CameraFolder) Unwrap() *raw.ICCameraFolder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CameraFolder) ID() objc.ID { return x.inner.Ptr() }
-
-// CameraFolderFromID adopts an existing object pointer as a CameraFolder (nil for 0).
+// CameraFolderFromID adopts an existing Objective-C object as a CameraFolder
+// (nil for 0), retaining it and registering a release finalizer.
 func CameraFolderFromID(id objc.ID) *CameraFolder {
 	if id == 0 {
 		return nil
 	}
-	return &CameraFolder{inner: raw.ICCameraFolderFromID(id)}
+	x := &CameraFolder{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCameraFolder creates a new [CameraFolder].
+// cameraFolderAdopt wraps an Objective-C object that this code just created as a
+// CameraFolder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cameraFolderAdopt(id objc.ID) *CameraFolder {
+	if id == 0 {
+		return nil
+	}
+	x := &CameraFolder{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CameraFolder) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CameraFolder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CameraFolder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCameraFolder creates a new CameraFolder.
 func NewCameraFolder() *CameraFolder {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ICCameraFolder")), objc.RegisterName("new"))
-	return &CameraFolder{inner: raw.ICCameraFolderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ICCameraFolder")), objc.RegisterName("new"))
+	return cameraFolderAdopt(_id)
 }
 
 // Contents returns the collection as a Go slice.
 func (x *CameraFolder) Contents() []*CameraItem {
-	arr := x.inner.Contents()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CameraItem {
-		return &CameraItem{inner: raw.ICCameraItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contents"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CameraItem { return CameraItemFromID(_id) })
 }
-
-func (x *CameraFolder) asCameraItem() *raw.ICCameraItem { return &x.inner.ICCameraItem }
 
 // CameraFolderable is the interface implemented by [CameraFolder], for mocking and DI.
 type CameraFolderable interface {
-	Unwrap() *raw.ICCameraFolder
+	obj.Object
 	Contents() []*CameraItem
 }
 

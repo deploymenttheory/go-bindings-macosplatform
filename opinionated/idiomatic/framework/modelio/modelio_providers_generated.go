@@ -5,45 +5,45 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// AnimatedValueProvider is implemented by AnimatedValue and any idiomatic type wrapping a MDLAnimatedValue subclass.
+// AnimatedValueProvider is accepted wherever a MDLAnimatedValue (or one of its subclasses) is expected.
 type AnimatedValueProvider interface {
-	asAnimatedValue() *raw.MDLAnimatedValue
+	objref.Object
 }
 
-// CameraProvider is implemented by Camera and any idiomatic type wrapping a MDLCamera subclass.
+// CameraProvider is accepted wherever a MDLCamera (or one of its subclasses) is expected.
 type CameraProvider interface {
-	asCamera() *raw.MDLCamera
+	objref.Object
 }
 
-// LightProvider is implemented by Light and any idiomatic type wrapping a MDLLight subclass.
+// LightProvider is accepted wherever a MDLLight (or one of its subclasses) is expected.
 type LightProvider interface {
-	asLight() *raw.MDLLight
+	objref.Object
 }
 
-// MaterialPropertyNodeProvider is implemented by MaterialPropertyNode and any idiomatic type wrapping a MDLMaterialPropertyNode subclass.
+// MaterialPropertyNodeProvider is accepted wherever a MDLMaterialPropertyNode (or one of its subclasses) is expected.
 type MaterialPropertyNodeProvider interface {
-	asMaterialPropertyNode() *raw.MDLMaterialPropertyNode
+	objref.Object
 }
 
-// ObjectProvider is implemented by Object and any idiomatic type wrapping a MDLObject subclass.
+// ObjectProvider is accepted wherever a MDLObject (or one of its subclasses) is expected.
 type ObjectProvider interface {
-	asObject() *raw.MDLObject
+	objref.Object
 }
 
-// PhysicallyPlausibleLightProvider is implemented by PhysicallyPlausibleLight and any idiomatic type wrapping a MDLPhysicallyPlausibleLight subclass.
+// PhysicallyPlausibleLightProvider is accepted wherever a MDLPhysicallyPlausibleLight (or one of its subclasses) is expected.
 type PhysicallyPlausibleLightProvider interface {
-	asPhysicallyPlausibleLight() *raw.MDLPhysicallyPlausibleLight
+	objref.Object
 }
 
-// ScatteringFunctionProvider is implemented by ScatteringFunction and any idiomatic type wrapping a MDLScatteringFunction subclass.
+// ScatteringFunctionProvider is accepted wherever a MDLScatteringFunction (or one of its subclasses) is expected.
 type ScatteringFunctionProvider interface {
-	asScatteringFunction() *raw.MDLScatteringFunction
+	objref.Object
 }
 
-// TextureProvider is implemented by Texture and any idiomatic type wrapping a MDLTexture subclass.
+// TextureProvider is accepted wherever a MDLTexture (or one of its subclasses) is expected.
 type TextureProvider interface {
-	asTexture() *raw.MDLTexture
+	objref.Object
 }

@@ -5,127 +5,124 @@
 package syncservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/syncservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// ISyncChangePropertyActionKey returns the string constant ISyncChangePropertyActionKey as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncChangePropertyActionKey() objc.ID {
-	return purego.CFConstant(raw.ISyncChangePropertyActionKey())
+// ISyncChangePropertyActionKey returns the string constant ISyncChangePropertyActionKey, for use as a dictionary key or argument.
+func ISyncChangePropertyActionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncChangePropertyActionKey")))
 }
 
-// ISyncChangePropertySet returns the string constant ISyncChangePropertySet as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncChangePropertySet() objc.ID {
-	return purego.CFConstant(raw.ISyncChangePropertySet())
+// ISyncChangePropertySet returns the string constant ISyncChangePropertySet, for use as a dictionary key or argument.
+func ISyncChangePropertySet() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncChangePropertySet")))
 }
 
-// ISyncChangePropertyClear returns the string constant ISyncChangePropertyClear as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncChangePropertyClear() objc.ID {
-	return purego.CFConstant(raw.ISyncChangePropertyClear())
+// ISyncChangePropertyClear returns the string constant ISyncChangePropertyClear, for use as a dictionary key or argument.
+func ISyncChangePropertyClear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncChangePropertyClear")))
 }
 
-// ISyncChangePropertyNameKey returns the string constant ISyncChangePropertyNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncChangePropertyNameKey() objc.ID {
-	return purego.CFConstant(raw.ISyncChangePropertyNameKey())
+// ISyncChangePropertyNameKey returns the string constant ISyncChangePropertyNameKey, for use as a dictionary key or argument.
+func ISyncChangePropertyNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncChangePropertyNameKey")))
 }
 
-// ISyncChangePropertyValueKey returns the string constant ISyncChangePropertyValueKey as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncChangePropertyValueKey() objc.ID {
-	return purego.CFConstant(raw.ISyncChangePropertyValueKey())
+// ISyncChangePropertyValueKey returns the string constant ISyncChangePropertyValueKey, for use as a dictionary key or argument.
+func ISyncChangePropertyValueKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncChangePropertyValueKey")))
 }
 
-// ISyncChangePropertyValueIsDefaultKey returns the string constant ISyncChangePropertyValueIsDefaultKey as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncChangePropertyValueIsDefaultKey() objc.ID {
-	return purego.CFConstant(raw.ISyncChangePropertyValueIsDefaultKey())
+// ISyncChangePropertyValueIsDefaultKey returns the string constant ISyncChangePropertyValueIsDefaultKey, for use as a dictionary key or argument.
+func ISyncChangePropertyValueIsDefaultKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncChangePropertyValueIsDefaultKey")))
 }
 
-// ISyncClientTypeApplication returns the string constant ISyncClientTypeApplication as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncClientTypeApplication() objc.ID {
-	return purego.CFConstant(raw.ISyncClientTypeApplication())
+// ISyncClientTypeApplication returns the string constant ISyncClientTypeApplication, for use as a dictionary key or argument.
+func ISyncClientTypeApplication() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncClientTypeApplication")))
 }
 
-// ISyncClientTypeDevice returns the string constant ISyncClientTypeDevice as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncClientTypeDevice() objc.ID {
-	return purego.CFConstant(raw.ISyncClientTypeDevice())
+// ISyncClientTypeDevice returns the string constant ISyncClientTypeDevice, for use as a dictionary key or argument.
+func ISyncClientTypeDevice() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncClientTypeDevice")))
 }
 
-// ISyncClientTypeServer returns the string constant ISyncClientTypeServer as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncClientTypeServer() objc.ID {
-	return purego.CFConstant(raw.ISyncClientTypeServer())
+// ISyncClientTypeServer returns the string constant ISyncClientTypeServer, for use as a dictionary key or argument.
+func ISyncClientTypeServer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncClientTypeServer")))
 }
 
-// ISyncClientTypePeer returns the string constant ISyncClientTypePeer as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncClientTypePeer() objc.ID {
-	return purego.CFConstant(raw.ISyncClientTypePeer())
+// ISyncClientTypePeer returns the string constant ISyncClientTypePeer, for use as a dictionary key or argument.
+func ISyncClientTypePeer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncClientTypePeer")))
 }
 
-// ISyncAvailabilityChangedNotification returns the string constant ISyncAvailabilityChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncAvailabilityChangedNotification() objc.ID {
-	return purego.CFConstant(raw.ISyncAvailabilityChangedNotification())
+// ISyncAvailabilityChangedNotification returns the string constant ISyncAvailabilityChangedNotification, for use as a dictionary key or argument.
+func ISyncAvailabilityChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncAvailabilityChangedNotification")))
 }
 
-// ISyncServerUnavailableException returns the string constant ISyncServerUnavailableException as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncServerUnavailableException() objc.ID {
-	return purego.CFConstant(raw.ISyncServerUnavailableException())
+// ISyncServerUnavailableException returns the string constant ISyncServerUnavailableException, for use as a dictionary key or argument.
+func ISyncServerUnavailableException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncServerUnavailableException")))
 }
 
-// ISyncSessionCancelledException returns the string constant ISyncSessionCancelledException as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncSessionCancelledException() objc.ID {
-	return purego.CFConstant(raw.ISyncSessionCancelledException())
+// ISyncSessionCancelledException returns the string constant ISyncSessionCancelledException, for use as a dictionary key or argument.
+func ISyncSessionCancelledException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncSessionCancelledException")))
 }
 
-// ISyncSessionUnavailableException returns the string constant ISyncSessionUnavailableException as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncSessionUnavailableException() objc.ID {
-	return purego.CFConstant(raw.ISyncSessionUnavailableException())
+// ISyncSessionUnavailableException returns the string constant ISyncSessionUnavailableException, for use as a dictionary key or argument.
+func ISyncSessionUnavailableException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncSessionUnavailableException")))
 }
 
-// ISyncInvalidRecordException returns the string constant ISyncInvalidRecordException as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncInvalidRecordException() objc.ID {
-	return purego.CFConstant(raw.ISyncInvalidRecordException())
+// ISyncInvalidRecordException returns the string constant ISyncInvalidRecordException, for use as a dictionary key or argument.
+func ISyncInvalidRecordException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncInvalidRecordException")))
 }
 
-// ISyncInvalidRecordIdentifiersKey returns the string constant ISyncInvalidRecordIdentifiersKey as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncInvalidRecordIdentifiersKey() objc.ID {
-	return purego.CFConstant(raw.ISyncInvalidRecordIdentifiersKey())
+// ISyncInvalidRecordIdentifiersKey returns the string constant ISyncInvalidRecordIdentifiersKey, for use as a dictionary key or argument.
+func ISyncInvalidRecordIdentifiersKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncInvalidRecordIdentifiersKey")))
 }
 
-// ISyncInvalidRecordReasonsKey returns the string constant ISyncInvalidRecordReasonsKey as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncInvalidRecordReasonsKey() objc.ID {
-	return purego.CFConstant(raw.ISyncInvalidRecordReasonsKey())
+// ISyncInvalidRecordReasonsKey returns the string constant ISyncInvalidRecordReasonsKey, for use as a dictionary key or argument.
+func ISyncInvalidRecordReasonsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncInvalidRecordReasonsKey")))
 }
 
-// ISyncInvalidRecordsKey returns the string constant ISyncInvalidRecordsKey as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncInvalidRecordsKey() objc.ID {
-	return purego.CFConstant(raw.ISyncInvalidRecordsKey())
+// ISyncInvalidRecordsKey returns the string constant ISyncInvalidRecordsKey, for use as a dictionary key or argument.
+func ISyncInvalidRecordsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncInvalidRecordsKey")))
 }
 
-// ISyncInvalidEntityException returns the string constant ISyncInvalidEntityException as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncInvalidEntityException() objc.ID {
-	return purego.CFConstant(raw.ISyncInvalidEntityException())
+// ISyncInvalidEntityException returns the string constant ISyncInvalidEntityException, for use as a dictionary key or argument.
+func ISyncInvalidEntityException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncInvalidEntityException")))
 }
 
-// ISyncUnsupportedEntityException returns the string constant ISyncUnsupportedEntityException as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncUnsupportedEntityException() objc.ID {
-	return purego.CFConstant(raw.ISyncUnsupportedEntityException())
+// ISyncUnsupportedEntityException returns the string constant ISyncUnsupportedEntityException, for use as a dictionary key or argument.
+func ISyncUnsupportedEntityException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncUnsupportedEntityException")))
 }
 
-// ISyncRecordEntityNameKey returns the string constant ISyncRecordEntityNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncRecordEntityNameKey() objc.ID {
-	return purego.CFConstant(raw.ISyncRecordEntityNameKey())
+// ISyncRecordEntityNameKey returns the string constant ISyncRecordEntityNameKey, for use as a dictionary key or argument.
+func ISyncRecordEntityNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncRecordEntityNameKey")))
 }
 
-// ISyncErrorDomain returns the string constant ISyncErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncErrorDomain() objc.ID {
-	return purego.CFConstant(raw.ISyncErrorDomain())
+// ISyncErrorDomain returns the string constant ISyncErrorDomain, for use as a dictionary key or argument.
+func ISyncErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("ISyncErrorDomain"))) }
+
+// ISyncInvalidSchemaException returns the string constant ISyncInvalidSchemaException, for use as a dictionary key or argument.
+func ISyncInvalidSchemaException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncInvalidSchemaException")))
 }
 
-// ISyncInvalidSchemaException returns the string constant ISyncInvalidSchemaException as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncInvalidSchemaException() objc.ID {
-	return purego.CFConstant(raw.ISyncInvalidSchemaException())
-}
-
-// ISyncInvalidArgumentsException returns the string constant ISyncInvalidArgumentsException as an objc.ID, for use as a dictionary key or selector argument.
-func ISyncInvalidArgumentsException() objc.ID {
-	return purego.CFConstant(raw.ISyncInvalidArgumentsException())
+// ISyncInvalidArgumentsException returns the string constant ISyncInvalidArgumentsException, for use as a dictionary key or argument.
+func ISyncInvalidArgumentsException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ISyncInvalidArgumentsException")))
 }

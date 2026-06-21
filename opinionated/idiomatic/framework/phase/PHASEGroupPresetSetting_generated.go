@@ -5,76 +5,99 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Settings for group presets.
 //
-// GroupPresetSetting wraps [raw.PHASEGroupPresetSetting] with a fluent Go API.
+// GroupPresetSetting is an idiomatic wrapper over the Objective-C class PHASEGroupPresetSetting.
 type GroupPresetSetting struct {
-	inner *raw.PHASEGroupPresetSetting
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEGroupPresetSetting].
-func (x *GroupPresetSetting) Unwrap() *raw.PHASEGroupPresetSetting { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GroupPresetSetting) ID() objc.ID { return x.inner.Ptr() }
-
-// GroupPresetSettingFromID adopts an existing object pointer as a GroupPresetSetting (nil for 0).
+// GroupPresetSettingFromID adopts an existing Objective-C object as a GroupPresetSetting
+// (nil for 0), retaining it and registering a release finalizer.
 func GroupPresetSettingFromID(id objc.ID) *GroupPresetSetting {
 	if id == 0 {
 		return nil
 	}
-	return &GroupPresetSetting{inner: raw.PHASEGroupPresetSettingFromID(id)}
+	x := &GroupPresetSetting{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// groupPresetSettingAdopt wraps an Objective-C object that this code just created as a
+// GroupPresetSetting (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func groupPresetSettingAdopt(id objc.ID) *GroupPresetSetting {
+	if id == 0 {
+		return nil
+	}
+	x := &GroupPresetSetting{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GroupPresetSetting) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GroupPresetSetting) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GroupPresetSetting) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a group preset setting.
 //
-// NewGroupPresetSettingWithGainRateGainCurveTypeRateCurveType creates a new [GroupPresetSetting].
-func NewGroupPresetSettingWithGainRateGainCurveTypeRateCurveType(gain float64, rate float64, gainCurveType PHASECurveType, rateCurveType PHASECurveType) *GroupPresetSetting {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEGroupPresetSetting")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGain:rate:gainCurveType:rateCurveType:"), gain, rate, raw.PHASECurveType(gainCurveType), raw.PHASECurveType(rateCurveType))
-	return &GroupPresetSetting{inner: raw.PHASEGroupPresetSettingFromID(_id)}
+// NewGroupPresetSettingWithGainRateGainCurveTypeRateCurveType creates a new GroupPresetSetting.
+func NewGroupPresetSettingWithGainRateGainCurveTypeRateCurveType(gain float64, rate float64, gainCurveType CurveType, rateCurveType CurveType) *GroupPresetSetting {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEGroupPresetSetting")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGain:rate:gainCurveType:rateCurveType:"), gain, rate, gainCurveType, rateCurveType)
+	return groupPresetSettingAdopt(_id)
 }
 
-// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
-//
-// Gain calls the underlying Gain.
+// Linear gain scalar.
 func (x *GroupPresetSetting) Gain() float64 {
-	return x.inner.Gain()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("gain"))
+	return _r
 }
 
-// @property rate @abstract Linear rate scalar.
-//
-// Rate calls the underlying Rate.
+// Linear rate scalar.
 func (x *GroupPresetSetting) Rate() float64 {
-	return x.inner.Rate()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rate"))
+	return _r
 }
 
-// @property gainCurveType @abstract The type of curve to apply to the gain as the preset changes to this new setting.
-//
-// GainCurveType calls the underlying GainCurveType.
-func (x *GroupPresetSetting) GainCurveType() PHASECurveType {
-	return PHASECurveType(x.inner.GainCurveType())
+// The type of curve to apply to the gain as the preset changes to this new setting.
+func (x *GroupPresetSetting) GainCurveType() CurveType {
+	_r := objc.Send[CurveType](objref.IDOf(x), objc.RegisterName("gainCurveType"))
+	return _r
 }
 
-// @property rateCurveType @abstract The type of curve to apply to the rate as the preset changes to this new setting.
-//
-// RateCurveType calls the underlying RateCurveType.
-func (x *GroupPresetSetting) RateCurveType() PHASECurveType {
-	return PHASECurveType(x.inner.RateCurveType())
+// The type of curve to apply to the rate as the preset changes to this new setting.
+func (x *GroupPresetSetting) RateCurveType() CurveType {
+	_r := objc.Send[CurveType](objref.IDOf(x), objc.RegisterName("rateCurveType"))
+	return _r
 }
 
 // GroupPresetSettingable is the interface implemented by [GroupPresetSetting], for mocking and DI.
 type GroupPresetSettingable interface {
-	Unwrap() *raw.PHASEGroupPresetSetting
+	obj.Object
 	Gain() float64
 	Rate() float64
-	GainCurveType() PHASECurveType
-	RateCurveType() PHASECurveType
+	GainCurveType() CurveType
+	RateCurveType() CurveType
 }
 
 var _ GroupPresetSettingable = (*GroupPresetSetting)(nil)

@@ -5,64 +5,84 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRTestClusterClusterTestSpecificParams wraps [raw.MTRTestClusterClusterTestSpecificParams] with a fluent Go API.
+// MTRTestClusterClusterTestSpecificParams is an idiomatic wrapper over the Objective-C class MTRTestClusterClusterTestSpecificParams.
 type MTRTestClusterClusterTestSpecificParams struct {
-	inner *raw.MTRTestClusterClusterTestSpecificParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRTestClusterClusterTestSpecificParams].
-func (x *MTRTestClusterClusterTestSpecificParams) Unwrap() *raw.MTRTestClusterClusterTestSpecificParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTestClusterClusterTestSpecificParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRTestClusterClusterTestSpecificParamsFromID adopts an existing object pointer as a MTRTestClusterClusterTestSpecificParams (nil for 0).
+// MTRTestClusterClusterTestSpecificParamsFromID adopts an existing Objective-C object as a MTRTestClusterClusterTestSpecificParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRTestClusterClusterTestSpecificParamsFromID(id objc.ID) *MTRTestClusterClusterTestSpecificParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRTestClusterClusterTestSpecificParams{inner: raw.MTRTestClusterClusterTestSpecificParamsFromID(id)}
+	x := &MTRTestClusterClusterTestSpecificParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRTestClusterClusterTestSpecificParams creates a new [MTRTestClusterClusterTestSpecificParams].
+// mTRTestClusterClusterTestSpecificParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRTestClusterClusterTestSpecificParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRTestClusterClusterTestSpecificParamsAdopt(id objc.ID) *MTRTestClusterClusterTestSpecificParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRTestClusterClusterTestSpecificParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRTestClusterClusterTestSpecificParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRTestClusterClusterTestSpecificParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRTestClusterClusterTestSpecificParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRTestClusterClusterTestSpecificParams creates a new MTRTestClusterClusterTestSpecificParams.
 func NewMTRTestClusterClusterTestSpecificParams() *MTRTestClusterClusterTestSpecificParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTestClusterClusterTestSpecificParams")), objc.RegisterName("new"))
-	return &MTRTestClusterClusterTestSpecificParams{inner: raw.MTRTestClusterClusterTestSpecificParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRTestClusterClusterTestSpecificParams")), objc.RegisterName("new"))
+	return mTRTestClusterClusterTestSpecificParamsAdopt(_id)
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestSpecificParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestSpecificParams {
-	x.inner.MTRUnitTestingClusterTestSpecificParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRTestClusterClusterTestSpecificParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestSpecificParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestSpecificParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestSpecificParams {
-	x.inner.MTRUnitTestingClusterTestSpecificParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRTestClusterClusterTestSpecificParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestSpecificParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
-}
-
-func (x *MTRTestClusterClusterTestSpecificParams) asMTRUnitTestingClusterTestSpecificParams() *raw.MTRUnitTestingClusterTestSpecificParams {
-	return &x.inner.MTRUnitTestingClusterTestSpecificParams
 }
 
 // MTRTestClusterClusterTestSpecificParamsable is the interface implemented by [MTRTestClusterClusterTestSpecificParams], for mocking and DI.
 type MTRTestClusterClusterTestSpecificParamsable interface {
-	Unwrap() *raw.MTRTestClusterClusterTestSpecificParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRTestClusterClusterTestSpecificParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRTestClusterClusterTestSpecificParams
+	obj.Object
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestSpecificParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTestClusterClusterTestSpecificParams
 }
 
 var _ MTRTestClusterClusterTestSpecificParamsable = (*MTRTestClusterClusterTestSpecificParams)(nil)

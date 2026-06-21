@@ -5,95 +5,92 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A class you use to request a LookAround scene at the location you specify.
 //
-// LookAroundSceneRequest wraps [raw.MKLookAroundSceneRequest] with a fluent Go API.
+// LookAroundSceneRequest is an idiomatic wrapper over the Objective-C class MKLookAroundSceneRequest.
 type LookAroundSceneRequest struct {
-	inner *raw.MKLookAroundSceneRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKLookAroundSceneRequest].
-func (x *LookAroundSceneRequest) Unwrap() *raw.MKLookAroundSceneRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LookAroundSceneRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// LookAroundSceneRequestFromID adopts an existing object pointer as a LookAroundSceneRequest (nil for 0).
+// LookAroundSceneRequestFromID adopts an existing Objective-C object as a LookAroundSceneRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func LookAroundSceneRequestFromID(id objc.ID) *LookAroundSceneRequest {
 	if id == 0 {
 		return nil
 	}
-	return &LookAroundSceneRequest{inner: raw.MKLookAroundSceneRequestFromID(id)}
+	x := &LookAroundSceneRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a LookAround scene at the specified coordinates.
-//
-// NewLookAroundSceneRequestWithCoordinate creates a new [LookAroundSceneRequest].
-func NewLookAroundSceneRequestWithCoordinate(coordinate unsafe.Pointer) *LookAroundSceneRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLookAroundSceneRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoordinate:"), coordinate)
-	return &LookAroundSceneRequest{inner: raw.MKLookAroundSceneRequestFromID(_id)}
+// lookAroundSceneRequestAdopt wraps an Objective-C object that this code just created as a
+// LookAroundSceneRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func lookAroundSceneRequestAdopt(id objc.ID) *LookAroundSceneRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &LookAroundSceneRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LookAroundSceneRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LookAroundSceneRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LookAroundSceneRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a LookAround scene with the location described by the specified map item.
 //
-// NewLookAroundSceneRequestWithMapItem creates a new [LookAroundSceneRequest].
-func NewLookAroundSceneRequestWithMapItem(mapItem *raw.MKMapItem) *LookAroundSceneRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLookAroundSceneRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItem:"), mapItem.Ptr())
-	return &LookAroundSceneRequest{inner: raw.MKLookAroundSceneRequestFromID(_id)}
-}
-
-// Requests a LookAround scene and calls the specified completion handler.
-//
-// GetSceneWithCompletionHandler calls the underlying GetSceneWithCompletionHandler.
-func (x *LookAroundSceneRequest) GetSceneWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer)) {
-	x.inner.GetSceneWithCompletionHandler(completionHandler)
+// NewLookAroundSceneRequestWithMapItem creates a new LookAroundSceneRequest.
+func NewLookAroundSceneRequestWithMapItem(mapItem *MapItem) *LookAroundSceneRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLookAroundSceneRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItem:"), objref.IDOf(mapItem))
+	return lookAroundSceneRequestAdopt(_id)
 }
 
 // Cancels the pending scene request.
-//
-// Cancel calls the underlying Cancel.
 func (x *LookAroundSceneRequest) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// Coordinate calls the underlying Coordinate.
-func (x *LookAroundSceneRequest) Coordinate() unsafe.Pointer {
-	return x.inner.Coordinate()
-}
-
-// MapItem calls the underlying MapItem.
 func (x *LookAroundSceneRequest) MapItem() *MapItem {
-	_r := x.inner.MapItem()
-	if _r == nil {
-		return nil
-	}
-	return &MapItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapItem"))
+	return MapItemFromID(_r)
 }
 
-// IsCancelled calls the underlying IsCancelled.
 func (x *LookAroundSceneRequest) IsCancelled() bool {
-	return x.inner.IsCancelled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCancelled"))
+	return _r
 }
 
-// IsLoading calls the underlying IsLoading.
 func (x *LookAroundSceneRequest) IsLoading() bool {
-	return x.inner.IsLoading()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoading"))
+	return _r
 }
 
 // LookAroundSceneRequestable is the interface implemented by [LookAroundSceneRequest], for mocking and DI.
 type LookAroundSceneRequestable interface {
-	Unwrap() *raw.MKLookAroundSceneRequest
-	GetSceneWithCompletionHandler(completionHandler func(unsafe.Pointer, unsafe.Pointer))
+	obj.Object
 	Cancel()
-	Coordinate() unsafe.Pointer
 	MapItem() *MapItem
 	IsCancelled() bool
 	IsLoading() bool

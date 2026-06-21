@@ -5,178 +5,193 @@
 package screentime
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screentime"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // The controller you use to report web usage and block restricted webpages.
 //
-// WebpageController wraps [raw.STWebpageController] with a fluent Go API.
+// WebpageController is an idiomatic wrapper over the Objective-C class STWebpageController.
 type WebpageController struct {
-	inner *raw.STWebpageController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.STWebpageController].
-func (x *WebpageController) Unwrap() *raw.STWebpageController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WebpageController) ID() objc.ID { return x.inner.Ptr() }
-
-// WebpageControllerFromID adopts an existing object pointer as a WebpageController (nil for 0).
+// WebpageControllerFromID adopts an existing Objective-C object as a WebpageController
+// (nil for 0), retaining it and registering a release finalizer.
 func WebpageControllerFromID(id objc.ID) *WebpageController {
 	if id == 0 {
 		return nil
 	}
-	return &WebpageController{inner: raw.STWebpageControllerFromID(id)}
+	x := &WebpageController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWebpageController creates a new [WebpageController].
+// webpageControllerAdopt wraps an Objective-C object that this code just created as a
+// WebpageController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func webpageControllerAdopt(id objc.ID) *WebpageController {
+	if id == 0 {
+		return nil
+	}
+	x := &WebpageController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WebpageController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WebpageController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WebpageController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWebpageController creates a new WebpageController.
 func NewWebpageController() *WebpageController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("STWebpageController")), objc.RegisterName("new"))
-	return &WebpageController{inner: raw.STWebpageControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("STWebpageController")), objc.RegisterName("new"))
+	return webpageControllerAdopt(_id)
 }
 
 // A Boolean that indicates whether the webpage controller is not recording web usage.
 //
-// WithSuppressUsageRecording sets the suppressUsageRecording property and returns the receiver for chaining.
+// WithSuppressUsageRecording sets suppressUsageRecording and returns the receiver so calls can be chained.
 func (x *WebpageController) WithSuppressUsageRecording(suppressUsageRecording bool) *WebpageController {
-	x.inner.SetSuppressUsageRecording(suppressUsageRecording)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressUsageRecording:"), suppressUsageRecording)
 	return x
 }
 
 // The URL for the webpage.
 //
-// WithURL sets the uRL property and returns the receiver for chaining.
+// WithURL sets uRL and returns the receiver so calls can be chained.
 func (x *WebpageController) WithURL(uRL string) *WebpageController {
-	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 	return x
 }
 
 // A Boolean that indicates whether there are one or more videos currently playing in the webpage.
 //
-// WithURLIsPlayingVideo sets the uRLIsPlayingVideo property and returns the receiver for chaining.
+// WithURLIsPlayingVideo sets uRLIsPlayingVideo and returns the receiver so calls can be chained.
 func (x *WebpageController) WithURLIsPlayingVideo(uRLIsPlayingVideo bool) *WebpageController {
-	x.inner.SetURLIsPlayingVideo(uRLIsPlayingVideo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURLIsPlayingVideo:"), uRLIsPlayingVideo)
 	return x
 }
 
 // A Boolean that indicates whether the webpage is currently displaying a floating picture in picture window.
 //
-// WithURLIsPictureInPicture sets the uRLIsPictureInPicture property and returns the receiver for chaining.
+// WithURLIsPictureInPicture sets uRLIsPictureInPicture and returns the receiver so calls can be chained.
 func (x *WebpageController) WithURLIsPictureInPicture(uRLIsPictureInPicture bool) *WebpageController {
-	x.inner.SetURLIsPictureInPicture(uRLIsPictureInPicture)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURLIsPictureInPicture:"), uRLIsPictureInPicture)
 	return x
 }
 
 // An optional identifier for the current browsing profile.
 //
-// WithProfileIdentifier sets the profileIdentifier property and returns the receiver for chaining.
-func (x *WebpageController) WithProfileIdentifier(profileIdentifier *foundation.NSString) *WebpageController {
-	x.inner.SetProfileIdentifier(profileIdentifier)
+// WithProfileIdentifier sets profileIdentifier and returns the receiver so calls can be chained.
+func (x *WebpageController) WithProfileIdentifier(profileIdentifier obj.Object) *WebpageController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProfileIdentifier:"), objref.IDOf(profileIdentifier))
 	return x
 }
 
 // Changes the bundle identifier used to report web usage.
-//
-// SetBundleIdentifierError calls the underlying SetBundleIdentifierError.
-func (x *WebpageController) SetBundleIdentifierError(bundleIdentifier string) (bool, error) {
-	return x.inner.SetBundleIdentifierError(foundation.NSStringStringWithUTF8String(bundleIdentifier))
+func (x *WebpageController) SetBundleIdentifier(bundleIdentifier string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setBundleIdentifier:error:"), purego.NSString(bundleIdentifier), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // A Boolean that indicates whether the webpage controller is not recording web usage. Set to <doc://com.apple.documentation/documentation/objectivec/yes> to stop recording and reporting web-usage data.
-//
-// SuppressUsageRecording calls the underlying SuppressUsageRecording.
 func (x *WebpageController) SuppressUsageRecording() bool {
-	return x.inner.SuppressUsageRecording()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("suppressUsageRecording"))
+	return _r
 }
 
-// SetSuppressUsageRecording calls the underlying SetSuppressUsageRecording.
 func (x *WebpageController) SetSuppressUsageRecording(suppressUsageRecording bool) {
-	x.inner.SetSuppressUsageRecording(suppressUsageRecording)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressUsageRecording:"), suppressUsageRecording)
 }
 
 // The URL for the webpage. Set this value to the webpage’s URL when the user navigates to a new URL.
-//
-// URL calls the underlying URL.
-func (x *WebpageController) URL() *foundation.NSURL {
-	return x.inner.URL()
+func (x *WebpageController) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
-// SetURL calls the underlying SetURL.
 func (x *WebpageController) SetURL(uRL string) {
-	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 }
 
 // A Boolean that indicates whether there are one or more videos currently playing in the webpage. The default value is <doc://com.apple.documentation/documentation/objectivec/no>. Set this value when the webpage starts or stops playing video. - Important: Set this value to <doc://com.apple.documentation/documentation/objectivec/no> prior to changing “ScreenTime/STWebpageController/URL“ if the new webpage at that URL stops currently playing media and won’t immediately start playing new media.
-//
-// URLIsPlayingVideo calls the underlying URLIsPlayingVideo.
 func (x *WebpageController) URLIsPlayingVideo() bool {
-	return x.inner.URLIsPlayingVideo()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("URLIsPlayingVideo"))
+	return _r
 }
 
-// SetURLIsPlayingVideo calls the underlying SetURLIsPlayingVideo.
 func (x *WebpageController) SetURLIsPlayingVideo(uRLIsPlayingVideo bool) {
-	x.inner.SetURLIsPlayingVideo(uRLIsPlayingVideo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURLIsPlayingVideo:"), uRLIsPlayingVideo)
 }
 
 // A Boolean that indicates whether the webpage is currently displaying a floating picture in picture window. The default value is <doc://com.apple.documentation/documentation/objectivec/no>. Set this value when the webpage starts or stops displaying a Picture in Picture window. - Important: Set this value to <doc://com.apple.documentation/documentation/objectivec/no> prior to changing “ScreenTime/STWebpageController/URL“ if the new webpage at that URL ends all currently displayed Picture in Picture windows, and won’t immediately display a new one.
-//
-// URLIsPictureInPicture calls the underlying URLIsPictureInPicture.
 func (x *WebpageController) URLIsPictureInPicture() bool {
-	return x.inner.URLIsPictureInPicture()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("URLIsPictureInPicture"))
+	return _r
 }
 
-// SetURLIsPictureInPicture calls the underlying SetURLIsPictureInPicture.
 func (x *WebpageController) SetURLIsPictureInPicture(uRLIsPictureInPicture bool) {
-	x.inner.SetURLIsPictureInPicture(uRLIsPictureInPicture)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURLIsPictureInPicture:"), uRLIsPictureInPicture)
 }
 
 // A Boolean that indicates whether a parent or guardian has blocked the URL. When a parent or guardian blocks the webpage’s URL, the webpage controller displays a blocking UI and then sets this property to <doc://com.apple.documentation/documentation/objectivec/yes>.
-//
-// URLIsBlocked calls the underlying URLIsBlocked.
 func (x *WebpageController) URLIsBlocked() bool {
-	return x.inner.URLIsBlocked()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("URLIsBlocked"))
+	return _r
 }
 
 // An optional identifier for the current browsing profile. The default value is `nil`. This identifier represents a profile and allows you to keep your browsing separate for topics like work, personal, or school. Using `nil` will report web history without a profile identifier. Web browsers with a "default" profile may want to use `nil` in order to match any web history reported prior to this API.
-//
-// ProfileIdentifier calls the underlying ProfileIdentifier.
-func (x *WebpageController) ProfileIdentifier() string {
-	_r := x.inner.ProfileIdentifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *WebpageController) ProfileIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("profileIdentifier"))
+	return obj.Wrap(_r)
 }
 
-// SetProfileIdentifier calls the underlying SetProfileIdentifier.
-func (x *WebpageController) SetProfileIdentifier(profileIdentifier *foundation.NSString) {
-	x.inner.SetProfileIdentifier(profileIdentifier)
+func (x *WebpageController) SetProfileIdentifier(profileIdentifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProfileIdentifier:"), objref.IDOf(profileIdentifier))
 }
 
 // WebpageControllerable is the interface implemented by [WebpageController], for mocking and DI.
 type WebpageControllerable interface {
-	Unwrap() *raw.STWebpageController
+	obj.Object
 	WithSuppressUsageRecording(suppressUsageRecording bool) *WebpageController
 	WithURL(uRL string) *WebpageController
 	WithURLIsPlayingVideo(uRLIsPlayingVideo bool) *WebpageController
 	WithURLIsPictureInPicture(uRLIsPictureInPicture bool) *WebpageController
-	WithProfileIdentifier(profileIdentifier *foundation.NSString) *WebpageController
-	SetBundleIdentifierError(bundleIdentifier string) (bool, error)
+	WithProfileIdentifier(profileIdentifier obj.Object) *WebpageController
+	SetBundleIdentifier(bundleIdentifier string) error
 	SuppressUsageRecording() bool
 	SetSuppressUsageRecording(suppressUsageRecording bool)
-	URL() *foundation.NSURL
+	URL() obj.Object
 	SetURL(uRL string)
 	URLIsPlayingVideo() bool
 	SetURLIsPlayingVideo(uRLIsPlayingVideo bool)
 	URLIsPictureInPicture() bool
 	SetURLIsPictureInPicture(uRLIsPictureInPicture bool)
 	URLIsBlocked() bool
-	ProfileIdentifier() string
-	SetProfileIdentifier(profileIdentifier *foundation.NSString)
+	ProfileIdentifier() obj.Object
+	SetProfileIdentifier(profileIdentifier obj.Object)
 }
 
 var _ WebpageControllerable = (*WebpageController)(nil)

@@ -5,113 +5,131 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A set of methods implemented by arranged objects to give access to information about those objects.
 //
-// DictionaryControllerKeyValuePair wraps [raw.NSDictionaryControllerKeyValuePair] with a fluent Go API.
+// DictionaryControllerKeyValuePair is an idiomatic wrapper over the Objective-C class NSDictionaryControllerKeyValuePair.
 type DictionaryControllerKeyValuePair struct {
-	inner *raw.NSDictionaryControllerKeyValuePair
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSDictionaryControllerKeyValuePair].
-func (x *DictionaryControllerKeyValuePair) Unwrap() *raw.NSDictionaryControllerKeyValuePair {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DictionaryControllerKeyValuePair) ID() objc.ID { return x.inner.Ptr() }
-
-// DictionaryControllerKeyValuePairFromID adopts an existing object pointer as a DictionaryControllerKeyValuePair (nil for 0).
+// DictionaryControllerKeyValuePairFromID adopts an existing Objective-C object as a DictionaryControllerKeyValuePair
+// (nil for 0), retaining it and registering a release finalizer.
 func DictionaryControllerKeyValuePairFromID(id objc.ID) *DictionaryControllerKeyValuePair {
 	if id == 0 {
 		return nil
 	}
-	return &DictionaryControllerKeyValuePair{inner: raw.NSDictionaryControllerKeyValuePairFromID(id)}
+	x := &DictionaryControllerKeyValuePair{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDictionaryControllerKeyValuePair creates a new [DictionaryControllerKeyValuePair].
+// dictionaryControllerKeyValuePairAdopt wraps an Objective-C object that this code just created as a
+// DictionaryControllerKeyValuePair (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dictionaryControllerKeyValuePairAdopt(id objc.ID) *DictionaryControllerKeyValuePair {
+	if id == 0 {
+		return nil
+	}
+	x := &DictionaryControllerKeyValuePair{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DictionaryControllerKeyValuePair) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DictionaryControllerKeyValuePair) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DictionaryControllerKeyValuePair) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDictionaryControllerKeyValuePair creates a new DictionaryControllerKeyValuePair.
 func NewDictionaryControllerKeyValuePair() *DictionaryControllerKeyValuePair {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDictionaryControllerKeyValuePair")), objc.RegisterName("new"))
-	return &DictionaryControllerKeyValuePair{inner: raw.NSDictionaryControllerKeyValuePairFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSDictionaryControllerKeyValuePair")), objc.RegisterName("new"))
+	return dictionaryControllerKeyValuePairAdopt(_id)
 }
 
-// WithKey sets the key property and returns the receiver for chaining.
+// WithKey sets key and returns the receiver so calls can be chained.
 func (x *DictionaryControllerKeyValuePair) WithKey(key string) *DictionaryControllerKeyValuePair {
-	x.inner.SetKey(foundation.NSStringStringWithUTF8String(key))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), purego.NSString(key))
 	return x
 }
 
-// WithValue sets the value property and returns the receiver for chaining.
-func (x *DictionaryControllerKeyValuePair) WithValue(value objc.ID) *DictionaryControllerKeyValuePair {
-	x.inner.SetValue(value)
+// WithValue sets value and returns the receiver so calls can be chained.
+func (x *DictionaryControllerKeyValuePair) WithValue(value obj.Object) *DictionaryControllerKeyValuePair {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
-// WithLocalizedKey sets the localizedKey property and returns the receiver for chaining.
+// WithLocalizedKey sets localizedKey and returns the receiver so calls can be chained.
 func (x *DictionaryControllerKeyValuePair) WithLocalizedKey(localizedKey string) *DictionaryControllerKeyValuePair {
-	x.inner.SetLocalizedKey(foundation.NSStringStringWithUTF8String(localizedKey))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedKey:"), purego.NSString(localizedKey))
 	return x
 }
 
-// Key calls the underlying Key.
 func (x *DictionaryControllerKeyValuePair) Key() string {
-	_r := x.inner.Key()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetKey calls the underlying SetKey.
 func (x *DictionaryControllerKeyValuePair) SetKey(key string) {
-	x.inner.SetKey(foundation.NSStringStringWithUTF8String(key))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), purego.NSString(key))
 }
 
-// Value calls the underlying Value.
-func (x *DictionaryControllerKeyValuePair) Value() objc.ID {
-	return x.inner.Value()
+func (x *DictionaryControllerKeyValuePair) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
 }
 
-// SetValue calls the underlying SetValue.
-func (x *DictionaryControllerKeyValuePair) SetValue(value objc.ID) {
-	x.inner.SetValue(value)
+func (x *DictionaryControllerKeyValuePair) SetValue(value obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 }
 
-// LocalizedKey calls the underlying LocalizedKey.
 func (x *DictionaryControllerKeyValuePair) LocalizedKey() string {
-	_r := x.inner.LocalizedKey()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedKey"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLocalizedKey calls the underlying SetLocalizedKey.
 func (x *DictionaryControllerKeyValuePair) SetLocalizedKey(localizedKey string) {
-	x.inner.SetLocalizedKey(foundation.NSStringStringWithUTF8String(localizedKey))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedKey:"), purego.NSString(localizedKey))
 }
 
-// IsExplicitlyIncluded calls the underlying IsExplicitlyIncluded.
 func (x *DictionaryControllerKeyValuePair) IsExplicitlyIncluded() bool {
-	return x.inner.IsExplicitlyIncluded()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExplicitlyIncluded"))
+	return _r
 }
 
 // DictionaryControllerKeyValuePairable is the interface implemented by [DictionaryControllerKeyValuePair], for mocking and DI.
 type DictionaryControllerKeyValuePairable interface {
-	Unwrap() *raw.NSDictionaryControllerKeyValuePair
+	obj.Object
 	WithKey(key string) *DictionaryControllerKeyValuePair
-	WithValue(value objc.ID) *DictionaryControllerKeyValuePair
+	WithValue(value obj.Object) *DictionaryControllerKeyValuePair
 	WithLocalizedKey(localizedKey string) *DictionaryControllerKeyValuePair
 	Key() string
 	SetKey(key string)
-	Value() objc.ID
-	SetValue(value objc.ID)
+	Value() obj.Object
+	SetValue(value obj.Object)
 	LocalizedKey() string
 	SetLocalizedKey(localizedKey string)
 	IsExplicitlyIncluded() bool

@@ -5,86 +5,106 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that you use to format contact information before displaying it to the user.
 //
-// ContactFormatter wraps [raw.CNContactFormatter] with a fluent Go API.
+// ContactFormatter is an idiomatic wrapper over the Objective-C class CNContactFormatter.
 type ContactFormatter struct {
-	inner *raw.CNContactFormatter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNContactFormatter].
-func (x *ContactFormatter) Unwrap() *raw.CNContactFormatter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContactFormatter) ID() objc.ID { return x.inner.Ptr() }
-
-// ContactFormatterFromID adopts an existing object pointer as a ContactFormatter (nil for 0).
+// ContactFormatterFromID adopts an existing Objective-C object as a ContactFormatter
+// (nil for 0), retaining it and registering a release finalizer.
 func ContactFormatterFromID(id objc.ID) *ContactFormatter {
 	if id == 0 {
 		return nil
 	}
-	return &ContactFormatter{inner: raw.CNContactFormatterFromID(id)}
+	x := &ContactFormatter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewContactFormatter creates a new [ContactFormatter].
+// contactFormatterAdopt wraps an Objective-C object that this code just created as a
+// ContactFormatter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contactFormatterAdopt(id objc.ID) *ContactFormatter {
+	if id == 0 {
+		return nil
+	}
+	x := &ContactFormatter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ContactFormatter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ContactFormatter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ContactFormatter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewContactFormatter creates a new ContactFormatter.
 func NewContactFormatter() *ContactFormatter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNContactFormatter")), objc.RegisterName("new"))
-	return &ContactFormatter{inner: raw.CNContactFormatterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNContactFormatter")), objc.RegisterName("new"))
+	return contactFormatterAdopt(_id)
 }
 
 // The formatting style for the contact name.
 //
-// WithStyle sets the style property and returns the receiver for chaining.
-func (x *ContactFormatter) WithStyle(style CNContactFormatterStyle) *ContactFormatter {
-	x.inner.SetStyle(raw.CNContactFormatterStyle(style))
+// WithStyle sets style and returns the receiver so calls can be chained.
+func (x *ContactFormatter) WithStyle(style ContactFormatterStyle) *ContactFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 	return x
 }
 
 // Formats the contact name.
-//
-// StringFromContact calls the underlying StringFromContact.
-func (x *ContactFormatter) StringFromContact(contact *raw.CNContact) string {
-	_r := x.inner.StringFromContact(contact)
-	if _r == nil {
+func (x *ContactFormatter) StringFromContact(contact *Contact) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromContact:"), objref.IDOf(contact))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Formats the contact name as an attributed string.
-//
-// AttributedStringFromContactDefaultAttributes calls the underlying AttributedStringFromContactDefaultAttributes.
-func (x *ContactFormatter) AttributedStringFromContactDefaultAttributes(contact *raw.CNContact, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {
-	return x.inner.AttributedStringFromContactDefaultAttributes(contact, attributes)
+func (x *ContactFormatter) AttributedStringFromContactDefaultAttributes(contact *Contact, attributes obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringFromContact:defaultAttributes:"), objref.IDOf(contact), objref.IDOf(attributes))
+	return obj.Wrap(_r)
 }
 
-// @abstract The style for a contact formatter instance. @discussion The default value is CNContactFormatterStyleFullName.
-//
-// Style calls the underlying Style.
-func (x *ContactFormatter) Style() CNContactFormatterStyle {
-	return CNContactFormatterStyle(x.inner.Style())
+// The style for a contact formatter instance. The default value is CNContactFormatterStyleFullName.
+func (x *ContactFormatter) Style() ContactFormatterStyle {
+	_r := objc.Send[ContactFormatterStyle](objref.IDOf(x), objc.RegisterName("style"))
+	return _r
 }
 
-// SetStyle calls the underlying SetStyle.
-func (x *ContactFormatter) SetStyle(style CNContactFormatterStyle) {
-	x.inner.SetStyle(raw.CNContactFormatterStyle(style))
+func (x *ContactFormatter) SetStyle(style ContactFormatterStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 }
 
 // ContactFormatterable is the interface implemented by [ContactFormatter], for mocking and DI.
 type ContactFormatterable interface {
-	Unwrap() *raw.CNContactFormatter
-	WithStyle(style CNContactFormatterStyle) *ContactFormatter
-	StringFromContact(contact *raw.CNContact) string
-	AttributedStringFromContactDefaultAttributes(contact *raw.CNContact, attributes *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString
-	Style() CNContactFormatterStyle
-	SetStyle(style CNContactFormatterStyle)
+	obj.Object
+	WithStyle(style ContactFormatterStyle) *ContactFormatter
+	StringFromContact(contact *Contact) string
+	AttributedStringFromContactDefaultAttributes(contact *Contact, attributes obj.Object) obj.Object
+	Style() ContactFormatterStyle
+	SetStyle(style ContactFormatterStyle)
 }
 
 var _ ContactFormatterable = (*ContactFormatter)(nil)

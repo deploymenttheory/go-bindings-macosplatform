@@ -5,96 +5,111 @@
 package quartzcomposer
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcomposer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// Renderer wraps [raw.QCRenderer] with a fluent Go API.
+// Renderer is an idiomatic wrapper over the Objective-C class QCRenderer.
 type Renderer struct {
-	inner *raw.QCRenderer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QCRenderer].
-func (x *Renderer) Unwrap() *raw.QCRenderer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Renderer) ID() objc.ID { return x.inner.Ptr() }
-
-// RendererFromID adopts an existing object pointer as a Renderer (nil for 0).
+// RendererFromID adopts an existing Objective-C object as a Renderer
+// (nil for 0), retaining it and registering a release finalizer.
 func RendererFromID(id objc.ID) *Renderer {
 	if id == 0 {
 		return nil
 	}
-	return &Renderer{inner: raw.QCRendererFromID(id)}
+	x := &Renderer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRendererWithCompositionColorSpace creates a new [Renderer].
-func NewRendererWithCompositionColorSpace(composition *quartz.QCComposition, colorSpace unsafe.Pointer) *Renderer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QCRenderer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComposition:colorSpace:"), composition.Ptr(), colorSpace)
-	return &Renderer{inner: raw.QCRendererFromID(_id)}
+// rendererAdopt wraps an Objective-C object that this code just created as a
+// Renderer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rendererAdopt(id objc.ID) *Renderer {
+	if id == 0 {
+		return nil
+	}
+	x := &Renderer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// NewRendererWithCGLContextPixelFormatColorSpaceComposition creates a new [Renderer].
-func NewRendererWithCGLContextPixelFormatColorSpaceComposition(context_ unsafe.Pointer, format unsafe.Pointer, colorSpace unsafe.Pointer, composition *quartz.QCComposition) *Renderer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QCRenderer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLContext:pixelFormat:colorSpace:composition:"), context_, format, colorSpace, composition.Ptr())
-	return &Renderer{inner: raw.QCRendererFromID(_id)}
+// Description returns the object's -description text.
+func (x *Renderer) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// NewRendererOffScreenWithSizeColorSpaceComposition creates a new [Renderer].
-func NewRendererOffScreenWithSizeColorSpaceComposition(size corefoundation.CGSize, colorSpace unsafe.Pointer, composition *quartz.QCComposition) *Renderer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QCRenderer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initOffScreenWithSize:colorSpace:composition:"), size, colorSpace, composition.Ptr())
-	return &Renderer{inner: raw.QCRendererFromID(_id)}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Renderer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// NewRendererWithOpenGLContextPixelFormatFile creates a new [Renderer].
-func NewRendererWithOpenGLContextPixelFormatFile(context_ *appkit.NSOpenGLContext, format *appkit.NSOpenGLPixelFormat, path string) *Renderer {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QCRenderer")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOpenGLContext:pixelFormat:file:"), context_.Ptr(), format.Ptr(), foundation.NSStringStringWithUTF8String(path).Ptr())
-	return &Renderer{inner: raw.QCRendererFromID(_id)}
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Renderer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// RenderAtTimeArguments calls the underlying RenderAtTimeArguments.
-func (x *Renderer) RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool {
-	return x.inner.RenderAtTimeArguments(time_, arguments)
+// NewRendererWithCompositionColorSpace creates a new Renderer.
+func NewRendererWithCompositionColorSpace(composition obj.Object, colorSpace obj.Object) *Renderer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("QCRenderer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithComposition:colorSpace:"), objref.IDOf(composition), objref.IDOf(colorSpace))
+	return rendererAdopt(_id)
 }
 
-// RenderingTimeForTimeArguments calls the underlying RenderingTimeForTimeArguments.
-func (x *Renderer) RenderingTimeForTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) float64 {
-	return x.inner.RenderingTimeForTimeArguments(time_, arguments)
+// NewRendererWithCGLContextPixelFormatColorSpaceComposition creates a new Renderer.
+func NewRendererWithCGLContextPixelFormatColorSpaceComposition(context_ obj.Object, format obj.Object, colorSpace obj.Object, composition obj.Object) *Renderer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("QCRenderer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGLContext:pixelFormat:colorSpace:composition:"), objref.IDOf(context_), objref.IDOf(format), objref.IDOf(colorSpace), objref.IDOf(composition))
+	return rendererAdopt(_id)
 }
 
-// Composition calls the underlying Composition.
-func (x *Renderer) Composition() *quartz.QCComposition {
-	return x.inner.Composition()
+// NewRendererWithOpenGLContextPixelFormatFile creates a new Renderer.
+func NewRendererWithOpenGLContextPixelFormatFile(context_ obj.Object, format obj.Object, path string) *Renderer {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("QCRenderer")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOpenGLContext:pixelFormat:file:"), objref.IDOf(context_), objref.IDOf(format), purego.NSString(path))
+	return rendererAdopt(_id)
 }
 
-// SnapshotImage calls the underlying SnapshotImage.
-func (x *Renderer) SnapshotImage() *appkit.NSImage {
-	return x.inner.SnapshotImage()
+func (x *Renderer) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("renderAtTime:arguments:"), time_, objref.IDOf(arguments))
+	return _r
 }
 
-// CreateSnapshotImageOfType calls the underlying CreateSnapshotImageOfType.
-func (x *Renderer) CreateSnapshotImageOfType(type_ string) objc.ID {
-	return x.inner.CreateSnapshotImageOfType(foundation.NSStringStringWithUTF8String(type_))
+func (x *Renderer) RenderingTimeForTimeArguments(time_ float64, arguments obj.Object) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("renderingTimeForTime:arguments:"), time_, objref.IDOf(arguments))
+	return _r
+}
+
+func (x *Renderer) Composition() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composition"))
+	return obj.Wrap(_r)
+}
+
+func (x *Renderer) SnapshotImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotImage"))
+	return obj.Wrap(_r)
+}
+
+func (x *Renderer) CreateSnapshotImageOfType(type_ string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createSnapshotImageOfType:"), purego.NSString(type_))
+	return obj.Wrap(_r)
 }
 
 // Rendererable is the interface implemented by [Renderer], for mocking and DI.
 type Rendererable interface {
-	Unwrap() *raw.QCRenderer
-	RenderAtTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) bool
-	RenderingTimeForTimeArguments(time_ float64, arguments *foundation.NSDictionary[objc.ID, objc.ID]) float64
-	Composition() *quartz.QCComposition
-	SnapshotImage() *appkit.NSImage
-	CreateSnapshotImageOfType(type_ string) objc.ID
+	obj.Object
+	RenderAtTimeArguments(time_ float64, arguments obj.Object) bool
+	RenderingTimeForTimeArguments(time_ float64, arguments obj.Object) float64
+	Composition() obj.Object
+	SnapshotImage() obj.Object
+	CreateSnapshotImageOfType(type_ string) obj.Object
 }
 
 var _ Rendererable = (*Renderer)(nil)

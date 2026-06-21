@@ -5,99 +5,116 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The NSMetadataQueryResultGroup class represents a collection of grouped attribute results returned by an NSMetadataQuery object.
 //
-// MetadataQueryResultGroup wraps [raw.NSMetadataQueryResultGroup] with a fluent Go API.
+// MetadataQueryResultGroup is an idiomatic wrapper over the Objective-C class NSMetadataQueryResultGroup.
 type MetadataQueryResultGroup struct {
-	inner *raw.NSMetadataQueryResultGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSMetadataQueryResultGroup].
-func (x *MetadataQueryResultGroup) Unwrap() *raw.NSMetadataQueryResultGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetadataQueryResultGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// MetadataQueryResultGroupFromID adopts an existing object pointer as a MetadataQueryResultGroup (nil for 0).
+// MetadataQueryResultGroupFromID adopts an existing Objective-C object as a MetadataQueryResultGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func MetadataQueryResultGroupFromID(id objc.ID) *MetadataQueryResultGroup {
 	if id == 0 {
 		return nil
 	}
-	return &MetadataQueryResultGroup{inner: raw.NSMetadataQueryResultGroupFromID(id)}
+	x := &MetadataQueryResultGroup{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMetadataQueryResultGroup creates a new [MetadataQueryResultGroup].
+// metadataQueryResultGroupAdopt wraps an Objective-C object that this code just created as a
+// MetadataQueryResultGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metadataQueryResultGroupAdopt(id objc.ID) *MetadataQueryResultGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &MetadataQueryResultGroup{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetadataQueryResultGroup) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetadataQueryResultGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetadataQueryResultGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMetadataQueryResultGroup creates a new MetadataQueryResultGroup.
 func NewMetadataQueryResultGroup() *MetadataQueryResultGroup {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMetadataQueryResultGroup")), objc.RegisterName("new"))
-	return &MetadataQueryResultGroup{inner: raw.NSMetadataQueryResultGroupFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSMetadataQueryResultGroup")), objc.RegisterName("new"))
+	return metadataQueryResultGroupAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MetadataQueryResultGroup) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MetadataQueryResultGroup {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *MetadataQueryResultGroup) WithScriptingProperties(scriptingProperties obj.Object) *MetadataQueryResultGroup {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Returns the query result at a specific index.
-//
-// ResultAtIndex calls the underlying ResultAtIndex.
-func (x *MetadataQueryResultGroup) ResultAtIndex(idx uint) objc.ID {
-	return x.inner.ResultAtIndex(idx)
+func (x *MetadataQueryResultGroup) ResultAtIndex(idx int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultAtIndex:"), idx)
+	return obj.Wrap(_r)
 }
 
-// Attribute calls the underlying Attribute.
-func (x *MetadataQueryResultGroup) Attribute() *String {
-	_r := x.inner.Attribute()
-	if _r == nil {
-		return nil
+func (x *MetadataQueryResultGroup) Attribute() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attribute"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Value calls the underlying Value.
-func (x *MetadataQueryResultGroup) Value() objc.ID {
-	return x.inner.Value()
+func (x *MetadataQueryResultGroup) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
 }
 
 // Subgroups returns the collection as a Go slice.
 func (x *MetadataQueryResultGroup) Subgroups() []*MetadataQueryResultGroup {
-	arr := x.inner.Subgroups()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MetadataQueryResultGroup {
-		return &MetadataQueryResultGroup{inner: raw.NSMetadataQueryResultGroupFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subgroups"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MetadataQueryResultGroup { return MetadataQueryResultGroupFromID(_id) })
 }
 
-// ResultCount calls the underlying ResultCount.
-func (x *MetadataQueryResultGroup) ResultCount() uint {
-	return x.inner.ResultCount()
+func (x *MetadataQueryResultGroup) ResultCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resultCount"))
+	return _r
 }
 
-// Results calls the underlying Results.
-func (x *MetadataQueryResultGroup) Results() *raw.NSArray[objc.ID] {
-	return x.inner.Results()
+func (x *MetadataQueryResultGroup) Results() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("results"))
+	return obj.Wrap(_r)
 }
-
-func (x *MetadataQueryResultGroup) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // MetadataQueryResultGroupable is the interface implemented by [MetadataQueryResultGroup], for mocking and DI.
 type MetadataQueryResultGroupable interface {
-	Unwrap() *raw.NSMetadataQueryResultGroup
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MetadataQueryResultGroup
-	ResultAtIndex(idx uint) objc.ID
-	Attribute() *String
-	Value() objc.ID
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *MetadataQueryResultGroup
+	ResultAtIndex(idx int) obj.Object
+	Attribute() string
+	Value() obj.Object
 	Subgroups() []*MetadataQueryResultGroup
-	ResultCount() uint
-	Results() *raw.NSArray[objc.ID]
+	ResultCount() int
+	Results() obj.Object
 }
 
 var _ MetadataQueryResultGroupable = (*MetadataQueryResultGroup)(nil)

@@ -5,145 +5,162 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AccelerationConstraint wraps [raw.SCNAccelerationConstraint] with a fluent Go API.
+// AccelerationConstraint is an idiomatic wrapper over the Objective-C class SCNAccelerationConstraint.
 type AccelerationConstraint struct {
-	inner *raw.SCNAccelerationConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNAccelerationConstraint].
-func (x *AccelerationConstraint) Unwrap() *raw.SCNAccelerationConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AccelerationConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// AccelerationConstraintFromID adopts an existing object pointer as a AccelerationConstraint (nil for 0).
+// AccelerationConstraintFromID adopts an existing Objective-C object as a AccelerationConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func AccelerationConstraintFromID(id objc.ID) *AccelerationConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &AccelerationConstraint{inner: raw.SCNAccelerationConstraintFromID(id)}
+	x := &AccelerationConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAccelerationConstraint creates a new [AccelerationConstraint].
+// accelerationConstraintAdopt wraps an Objective-C object that this code just created as a
+// AccelerationConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func accelerationConstraintAdopt(id objc.ID) *AccelerationConstraint {
+	if id == 0 {
+		return nil
+	}
+	x := &AccelerationConstraint{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AccelerationConstraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AccelerationConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AccelerationConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAccelerationConstraint creates a new AccelerationConstraint.
 func NewAccelerationConstraint() *AccelerationConstraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNAccelerationConstraint")), objc.RegisterName("new"))
-	return &AccelerationConstraint{inner: raw.SCNAccelerationConstraintFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNAccelerationConstraint")), objc.RegisterName("new"))
+	return accelerationConstraintAdopt(_id)
 }
 
-// @property maximumLinearAcceleration @abstract Controls the maximum linear acceleration. Defaults to MAXFLOAT. Animatable. @discussion The maximum linear acceleration is in m.s^-2
+// Controls the maximum linear acceleration. Defaults to MAXFLOAT. Animatable. The maximum linear acceleration is in m.s^-2
 //
-// WithMaximumLinearAcceleration sets the maximumLinearAcceleration property and returns the receiver for chaining.
+// WithMaximumLinearAcceleration sets maximumLinearAcceleration and returns the receiver so calls can be chained.
 func (x *AccelerationConstraint) WithMaximumLinearAcceleration(maximumLinearAcceleration float64) *AccelerationConstraint {
-	x.inner.SetMaximumLinearAcceleration(maximumLinearAcceleration)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLinearAcceleration:"), maximumLinearAcceleration)
 	return x
 }
 
-// @property maximumLinearVelocity @abstract Controls the maximum linear velocity. Defaults to MAXFLOAT. Animatable. @discussion The maximum linear velocity is in m.s
+// Controls the maximum linear velocity. Defaults to MAXFLOAT. Animatable. The maximum linear velocity is in m.s
 //
-// WithMaximumLinearVelocity sets the maximumLinearVelocity property and returns the receiver for chaining.
+// WithMaximumLinearVelocity sets maximumLinearVelocity and returns the receiver so calls can be chained.
 func (x *AccelerationConstraint) WithMaximumLinearVelocity(maximumLinearVelocity float64) *AccelerationConstraint {
-	x.inner.SetMaximumLinearVelocity(maximumLinearVelocity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLinearVelocity:"), maximumLinearVelocity)
 	return x
 }
 
-// @property decelerationDistance @abstract Controls the distance at which the node should start decelerating. Defaults to 0. Animatable.
+// Controls the distance at which the node should start decelerating. Defaults to 0. Animatable.
 //
-// WithDecelerationDistance sets the decelerationDistance property and returns the receiver for chaining.
+// WithDecelerationDistance sets decelerationDistance and returns the receiver so calls can be chained.
 func (x *AccelerationConstraint) WithDecelerationDistance(decelerationDistance float64) *AccelerationConstraint {
-	x.inner.SetDecelerationDistance(decelerationDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecelerationDistance:"), decelerationDistance)
 	return x
 }
 
-// @property damping @abstract Specifies the damping factor of the receiver. Optionally reduce the body's linear velocity each frame to simulate fluid/air friction. Value should be zero or greater. Defaults to 0.1. Animatable.
+// Specifies the damping factor of the receiver. Optionally reduce the body's linear velocity each frame to simulate fluid/air friction. Value should be zero or greater. Defaults to 0.1. Animatable.
 //
-// WithDamping sets the damping property and returns the receiver for chaining.
+// WithDamping sets damping and returns the receiver so calls can be chained.
 func (x *AccelerationConstraint) WithDamping(damping float64) *AccelerationConstraint {
-	x.inner.SetDamping(damping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDamping:"), damping)
 	return x
 }
 
-// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
+// Determines whether the constraint is enabled or not. Defaults to YES.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *AccelerationConstraint) WithEnabled(enabled bool) *AccelerationConstraint {
-	x.inner.SCNConstraint.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // The influence of the constraint on the node’s transformation.
 //
-// WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
+// WithInfluenceFactor sets influenceFactor and returns the receiver so calls can be chained.
 func (x *AccelerationConstraint) WithInfluenceFactor(influenceFactor float64) *AccelerationConstraint {
-	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
 	return x
 }
 
-// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+// Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
 //
-// WithIncremental sets the incremental property and returns the receiver for chaining.
+// WithIncremental sets incremental and returns the receiver so calls can be chained.
 func (x *AccelerationConstraint) WithIncremental(incremental bool) *AccelerationConstraint {
-	x.inner.SCNConstraint.SetIncremental(incremental)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
 	return x
 }
 
-// @property maximumLinearAcceleration @abstract Controls the maximum linear acceleration. Defaults to MAXFLOAT. Animatable. @discussion The maximum linear acceleration is in m.s^-2
-//
-// MaximumLinearAcceleration calls the underlying MaximumLinearAcceleration.
+// Controls the maximum linear acceleration. Defaults to MAXFLOAT. Animatable. The maximum linear acceleration is in m.s^-2
 func (x *AccelerationConstraint) MaximumLinearAcceleration() float64 {
-	return x.inner.MaximumLinearAcceleration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumLinearAcceleration"))
+	return _r
 }
 
-// SetMaximumLinearAcceleration calls the underlying SetMaximumLinearAcceleration.
 func (x *AccelerationConstraint) SetMaximumLinearAcceleration(maximumLinearAcceleration float64) {
-	x.inner.SetMaximumLinearAcceleration(maximumLinearAcceleration)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLinearAcceleration:"), maximumLinearAcceleration)
 }
 
-// @property maximumLinearVelocity @abstract Controls the maximum linear velocity. Defaults to MAXFLOAT. Animatable. @discussion The maximum linear velocity is in m.s
-//
-// MaximumLinearVelocity calls the underlying MaximumLinearVelocity.
+// Controls the maximum linear velocity. Defaults to MAXFLOAT. Animatable. The maximum linear velocity is in m.s
 func (x *AccelerationConstraint) MaximumLinearVelocity() float64 {
-	return x.inner.MaximumLinearVelocity()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumLinearVelocity"))
+	return _r
 }
 
-// SetMaximumLinearVelocity calls the underlying SetMaximumLinearVelocity.
 func (x *AccelerationConstraint) SetMaximumLinearVelocity(maximumLinearVelocity float64) {
-	x.inner.SetMaximumLinearVelocity(maximumLinearVelocity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLinearVelocity:"), maximumLinearVelocity)
 }
 
-// @property decelerationDistance @abstract Controls the distance at which the node should start decelerating. Defaults to 0. Animatable.
-//
-// DecelerationDistance calls the underlying DecelerationDistance.
+// Controls the distance at which the node should start decelerating. Defaults to 0. Animatable.
 func (x *AccelerationConstraint) DecelerationDistance() float64 {
-	return x.inner.DecelerationDistance()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("decelerationDistance"))
+	return _r
 }
 
-// SetDecelerationDistance calls the underlying SetDecelerationDistance.
 func (x *AccelerationConstraint) SetDecelerationDistance(decelerationDistance float64) {
-	x.inner.SetDecelerationDistance(decelerationDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecelerationDistance:"), decelerationDistance)
 }
 
-// @property damping @abstract Specifies the damping factor of the receiver. Optionally reduce the body's linear velocity each frame to simulate fluid/air friction. Value should be zero or greater. Defaults to 0.1. Animatable.
-//
-// Damping calls the underlying Damping.
+// Specifies the damping factor of the receiver. Optionally reduce the body's linear velocity each frame to simulate fluid/air friction. Value should be zero or greater. Defaults to 0.1. Animatable.
 func (x *AccelerationConstraint) Damping() float64 {
-	return x.inner.Damping()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("damping"))
+	return _r
 }
 
-// SetDamping calls the underlying SetDamping.
 func (x *AccelerationConstraint) SetDamping(damping float64) {
-	x.inner.SetDamping(damping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDamping:"), damping)
 }
-
-func (x *AccelerationConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNConstraint }
 
 // AccelerationConstraintable is the interface implemented by [AccelerationConstraint], for mocking and DI.
 type AccelerationConstraintable interface {
-	Unwrap() *raw.SCNAccelerationConstraint
+	obj.Object
 	WithMaximumLinearAcceleration(maximumLinearAcceleration float64) *AccelerationConstraint
 	WithMaximumLinearVelocity(maximumLinearVelocity float64) *AccelerationConstraint
 	WithDecelerationDistance(decelerationDistance float64) *AccelerationConstraint

@@ -5,63 +5,75 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A polygon-shaped impassable area in a 2D game world.
 //
-// PolygonObstacle wraps [raw.GKPolygonObstacle] with a fluent Go API.
+// PolygonObstacle is an idiomatic wrapper over the Objective-C class GKPolygonObstacle.
 type PolygonObstacle struct {
-	inner *raw.GKPolygonObstacle
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKPolygonObstacle].
-func (x *PolygonObstacle) Unwrap() *raw.GKPolygonObstacle { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PolygonObstacle) ID() objc.ID { return x.inner.Ptr() }
-
-// PolygonObstacleFromID adopts an existing object pointer as a PolygonObstacle (nil for 0).
+// PolygonObstacleFromID adopts an existing Objective-C object as a PolygonObstacle
+// (nil for 0), retaining it and registering a release finalizer.
 func PolygonObstacleFromID(id objc.ID) *PolygonObstacle {
 	if id == 0 {
 		return nil
 	}
-	return &PolygonObstacle{inner: raw.GKPolygonObstacleFromID(id)}
+	x := &PolygonObstacle{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes a polygon obstacle with the specified list of vertices.
-//
-// NewPolygonObstacleWithPointsCount creates a new [PolygonObstacle].
-func NewPolygonObstacleWithPointsCount(points unsafe.Pointer, numPoints uint) *PolygonObstacle {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKPolygonObstacle")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPoints:count:"), points, numPoints)
-	return &PolygonObstacle{inner: raw.GKPolygonObstacleFromID(_id)}
+// polygonObstacleAdopt wraps an Objective-C object that this code just created as a
+// PolygonObstacle (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func polygonObstacleAdopt(id objc.ID) *PolygonObstacle {
+	if id == 0 {
+		return nil
+	}
+	x := &PolygonObstacle{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Returns the point coordinates of the specified vertex.
-//
-// VertexAtIndex calls the underlying VertexAtIndex.
-func (x *PolygonObstacle) VertexAtIndex(index uint) unsafe.Pointer {
-	return x.inner.VertexAtIndex(index)
+// Description returns the object's -description text.
+func (x *PolygonObstacle) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PolygonObstacle) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PolygonObstacle) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPolygonObstacle creates a new PolygonObstacle.
+func NewPolygonObstacle() *PolygonObstacle {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKPolygonObstacle")), objc.RegisterName("new"))
+	return polygonObstacleAdopt(_id)
 }
 
 // Number of vertices on this polygon
-//
-// VertexCount calls the underlying VertexCount.
-func (x *PolygonObstacle) VertexCount() uint {
-	return x.inner.VertexCount()
+func (x *PolygonObstacle) VertexCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexCount"))
+	return _r
 }
-
-func (x *PolygonObstacle) asObstacle() *raw.GKObstacle { return &x.inner.GKObstacle }
 
 // PolygonObstacleable is the interface implemented by [PolygonObstacle], for mocking and DI.
 type PolygonObstacleable interface {
-	Unwrap() *raw.GKPolygonObstacle
-	VertexAtIndex(index uint) unsafe.Pointer
-	VertexCount() uint
+	obj.Object
+	VertexCount() int
 }
 
 var _ PolygonObstacleable = (*PolygonObstacle)(nil)

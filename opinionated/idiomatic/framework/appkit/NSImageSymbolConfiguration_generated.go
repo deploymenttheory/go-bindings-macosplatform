@@ -5,53 +5,75 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains the specific font, style, and weight attributes to apply to a symbol image.
 //
-// ImageSymbolConfiguration wraps [raw.NSImageSymbolConfiguration] with a fluent Go API.
+// ImageSymbolConfiguration is an idiomatic wrapper over the Objective-C class NSImageSymbolConfiguration.
 type ImageSymbolConfiguration struct {
-	inner *raw.NSImageSymbolConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSImageSymbolConfiguration].
-func (x *ImageSymbolConfiguration) Unwrap() *raw.NSImageSymbolConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageSymbolConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageSymbolConfigurationFromID adopts an existing object pointer as a ImageSymbolConfiguration (nil for 0).
+// ImageSymbolConfigurationFromID adopts an existing Objective-C object as a ImageSymbolConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageSymbolConfigurationFromID(id objc.ID) *ImageSymbolConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &ImageSymbolConfiguration{inner: raw.NSImageSymbolConfigurationFromID(id)}
+	x := &ImageSymbolConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewImageSymbolConfiguration creates a new [ImageSymbolConfiguration].
+// imageSymbolConfigurationAdopt wraps an Objective-C object that this code just created as a
+// ImageSymbolConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageSymbolConfigurationAdopt(id objc.ID) *ImageSymbolConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageSymbolConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ImageSymbolConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageSymbolConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageSymbolConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageSymbolConfiguration creates a new ImageSymbolConfiguration.
 func NewImageSymbolConfiguration() *ImageSymbolConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSImageSymbolConfiguration")), objc.RegisterName("new"))
-	return &ImageSymbolConfiguration{inner: raw.NSImageSymbolConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSImageSymbolConfiguration")), objc.RegisterName("new"))
+	return imageSymbolConfigurationAdopt(_id)
 }
 
 // Returns a new configuration object whose values are defined by applying values from the provided configuration and the receiver. Values defined by both configurations will use the provided configuration’s values.
-//
-// ConfigurationByApplyingConfiguration calls the underlying ConfigurationByApplyingConfiguration.
-func (x *ImageSymbolConfiguration) ConfigurationByApplyingConfiguration(configuration *raw.NSImageSymbolConfiguration) *ImageSymbolConfiguration {
-	_r := x.inner.ConfigurationByApplyingConfiguration(configuration)
-	if _r == nil {
-		return nil
-	}
-	return &ImageSymbolConfiguration{inner: _r}
+func (x *ImageSymbolConfiguration) ConfigurationByApplyingConfiguration(configuration *ImageSymbolConfiguration) *ImageSymbolConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationByApplyingConfiguration:"), objref.IDOf(configuration))
+	return ImageSymbolConfigurationFromID(_r)
 }
 
 // ImageSymbolConfigurationable is the interface implemented by [ImageSymbolConfiguration], for mocking and DI.
 type ImageSymbolConfigurationable interface {
-	Unwrap() *raw.NSImageSymbolConfiguration
-	ConfigurationByApplyingConfiguration(configuration *raw.NSImageSymbolConfiguration) *ImageSymbolConfiguration
+	obj.Object
+	ConfigurationByApplyingConfiguration(configuration *ImageSymbolConfiguration) *ImageSymbolConfiguration
 }
 
 var _ ImageSymbolConfigurationable = (*ImageSymbolConfiguration)(nil)

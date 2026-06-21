@@ -5,57 +5,73 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object for configuring macOS apps to participate in AirPods Automatic Switching.
 //
-// AudioRoutingArbiter wraps [raw.AVAudioRoutingArbiter] with a fluent Go API.
+// AudioRoutingArbiter is an idiomatic wrapper over the Objective-C class AVAudioRoutingArbiter.
 type AudioRoutingArbiter struct {
-	inner *raw.AVAudioRoutingArbiter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioRoutingArbiter].
-func (x *AudioRoutingArbiter) Unwrap() *raw.AVAudioRoutingArbiter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioRoutingArbiter) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioRoutingArbiterFromID adopts an existing object pointer as a AudioRoutingArbiter (nil for 0).
+// AudioRoutingArbiterFromID adopts an existing Objective-C object as a AudioRoutingArbiter
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioRoutingArbiterFromID(id objc.ID) *AudioRoutingArbiter {
 	if id == 0 {
 		return nil
 	}
-	return &AudioRoutingArbiter{inner: raw.AVAudioRoutingArbiterFromID(id)}
+	x := &AudioRoutingArbiter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAudioRoutingArbiter creates a new [AudioRoutingArbiter].
+// audioRoutingArbiterAdopt wraps an Objective-C object that this code just created as a
+// AudioRoutingArbiter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioRoutingArbiterAdopt(id objc.ID) *AudioRoutingArbiter {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioRoutingArbiter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudioRoutingArbiter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioRoutingArbiter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioRoutingArbiter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAudioRoutingArbiter creates a new AudioRoutingArbiter.
 func NewAudioRoutingArbiter() *AudioRoutingArbiter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioRoutingArbiter")), objc.RegisterName("new"))
-	return &AudioRoutingArbiter{inner: raw.AVAudioRoutingArbiterFromID(_id)}
-}
-
-// Begins routing arbitration to take ownership of a nearby Bluetooth audio route.
-//
-// BeginArbitrationWithCategoryCompletionHandler calls the underlying BeginArbitrationWithCategoryCompletionHandler.
-func (x *AudioRoutingArbiter) BeginArbitrationWithCategoryCompletionHandler(category AVAudioRoutingArbitrationCategory, handler func(bool, unsafe.Pointer)) {
-	x.inner.BeginArbitrationWithCategoryCompletionHandler(raw.AVAudioRoutingArbitrationCategory(category), handler)
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioRoutingArbiter")), objc.RegisterName("new"))
+	return audioRoutingArbiterAdopt(_id)
 }
 
 // Stops an app’s participation in audio routing arbitration.
-//
-// LeaveArbitration calls the underlying LeaveArbitration.
 func (x *AudioRoutingArbiter) LeaveArbitration() {
-	x.inner.LeaveArbitration()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leaveArbitration"))
 }
 
 // AudioRoutingArbiterable is the interface implemented by [AudioRoutingArbiter], for mocking and DI.
 type AudioRoutingArbiterable interface {
-	Unwrap() *raw.AVAudioRoutingArbiter
-	BeginArbitrationWithCategoryCompletionHandler(category AVAudioRoutingArbitrationCategory, handler func(bool, unsafe.Pointer))
+	obj.Object
 	LeaveArbitration()
 }
 

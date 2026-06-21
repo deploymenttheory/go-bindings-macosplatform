@@ -5,118 +5,77 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A filter that performs a conversion of color space, alpha, or pixel format.
 //
-// ImageConversion wraps [raw.MPSImageConversion] with a fluent Go API.
+// ImageConversion is an idiomatic wrapper over the Objective-C class MPSImageConversion.
 type ImageConversion struct {
-	inner *raw.MPSImageConversion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageConversion].
-func (x *ImageConversion) Unwrap() *raw.MPSImageConversion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageConversion) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageConversionFromID adopts an existing object pointer as a ImageConversion (nil for 0).
+// ImageConversionFromID adopts an existing Objective-C object as a ImageConversion
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageConversionFromID(id objc.ID) *ImageConversion {
 	if id == 0 {
 		return nil
 	}
-	return &ImageConversion{inner: raw.MPSImageConversionFromID(id)}
-}
-
-// Initializes a filter that can convert texture color space, alpha, and pixel format.
-//
-// NewImageConversionWithDeviceSrcAlphaDestAlphaBackgroundColorConversionInfo creates a new [ImageConversion].
-func NewImageConversionWithDeviceSrcAlphaDestAlphaBackgroundColorConversionInfo(device metal.MTLDevice, srcAlpha mpsimage.MPSAlphaType, destAlpha mpsimage.MPSAlphaType, backgroundColor *float64, conversionInfo unsafe.Pointer) *ImageConversion {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageConversion")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:srcAlpha:destAlpha:backgroundColor:conversionInfo:"), device, srcAlpha, destAlpha, backgroundColor, conversionInfo)
-	return &ImageConversion{inner: raw.MPSImageConversionFromID(_id)}
-}
-
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageConversion) WithOffset(offset mpscore.MPSOffset) *ImageConversion {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	x := &ImageConversion{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageConversion) WithClipRect(clipRect metal.MTLRegion) *ImageConversion {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+// imageConversionAdopt wraps an Objective-C object that this code just created as a
+// ImageConversion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageConversionAdopt(id objc.ID) *ImageConversion {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageConversion{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageConversion) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageConversion {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
+// Description returns the object's -description text.
+func (x *ImageConversion) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageConversion) WithOptions(options mpscore.MPSKernelOptions) *ImageConversion {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageConversion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageConversion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageConversion creates a new ImageConversion.
+func NewImageConversion() *ImageConversion {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageConversion")), objc.RegisterName("new"))
+	return imageConversionAdopt(_id)
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ImageConversion) WithLabel(label string) *ImageConversion {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-// @property   sourceAlpha @abstract   Premultiplication description for the source texture @discussion Most colorspace conversion operations can not work directly on premultiplied data. Use this property to tag premultiplied data so that the source texture can be unpremultiplied prior to application of these transforms. Default: MPSPixelAlpha_AlphaIsOne
-//
-// SourceAlpha calls the underlying SourceAlpha.
-func (x *ImageConversion) SourceAlpha() mpsimage.MPSAlphaType {
-	return x.inner.SourceAlpha()
-}
-
-// @property   destinationAlpha @abstract   Premultiplication description for the destinationAlpha texture @discussion Colorspace conversion operations produce non-premultiplied data. Use this property to tag cases where premultiplied results are required. If MPSPixelAlpha_AlphaIsOne is used, the alpha channel will be set to 1. Default: MPSPixelAlpha_AlphaIsOne
-//
-// DestinationAlpha calls the underlying DestinationAlpha.
-func (x *ImageConversion) DestinationAlpha() mpsimage.MPSAlphaType {
-	return x.inner.DestinationAlpha()
-}
-
-func (x *ImageConversion) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
-}
-
-func (x *ImageConversion) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSUnaryImageKernel.MPSKernel
 }
 
 // ImageConversionable is the interface implemented by [ImageConversion], for mocking and DI.
 type ImageConversionable interface {
-	Unwrap() *raw.MPSImageConversion
-	WithOffset(offset mpscore.MPSOffset) *ImageConversion
-	WithClipRect(clipRect metal.MTLRegion) *ImageConversion
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageConversion
-	WithOptions(options mpscore.MPSKernelOptions) *ImageConversion
+	obj.Object
 	WithLabel(label string) *ImageConversion
-	SourceAlpha() mpsimage.MPSAlphaType
-	DestinationAlpha() mpsimage.MPSAlphaType
 }
 
 var _ ImageConversionable = (*ImageConversion)(nil)

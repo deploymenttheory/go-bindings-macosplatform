@@ -5,135 +5,143 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The visual representation of your app’s miniaturized windows and app icon as they appear in the Dock.
 //
-// DockTile wraps [raw.NSDockTile] with a fluent Go API.
+// DockTile is an idiomatic wrapper over the Objective-C class NSDockTile.
 type DockTile struct {
-	inner *raw.NSDockTile
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSDockTile].
-func (x *DockTile) Unwrap() *raw.NSDockTile { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DockTile) ID() objc.ID { return x.inner.Ptr() }
-
-// DockTileFromID adopts an existing object pointer as a DockTile (nil for 0).
+// DockTileFromID adopts an existing Objective-C object as a DockTile
+// (nil for 0), retaining it and registering a release finalizer.
 func DockTileFromID(id objc.ID) *DockTile {
 	if id == 0 {
 		return nil
 	}
-	return &DockTile{inner: raw.NSDockTileFromID(id)}
+	x := &DockTile{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDockTile creates a new [DockTile].
+// dockTileAdopt wraps an Objective-C object that this code just created as a
+// DockTile (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dockTileAdopt(id objc.ID) *DockTile {
+	if id == 0 {
+		return nil
+	}
+	x := &DockTile{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DockTile) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DockTile) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DockTile) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDockTile creates a new DockTile.
 func NewDockTile() *DockTile {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDockTile")), objc.RegisterName("new"))
-	return &DockTile{inner: raw.NSDockTileFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSDockTile")), objc.RegisterName("new"))
+	return dockTileAdopt(_id)
 }
 
 // The view to use for drawing the dock tile contents.
 //
-// WithContentView sets the contentView property and returns the receiver for chaining.
+// WithContentView sets contentView and returns the receiver so calls can be chained.
 func (x *DockTile) WithContentView(contentView ViewProvider) *DockTile {
-	x.inner.SetContentView(contentView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	return x
 }
 
 // A Boolean showing whether the tile is badged with the application’s icon
 //
-// WithShowsApplicationBadge sets the showsApplicationBadge property and returns the receiver for chaining.
+// WithShowsApplicationBadge sets showsApplicationBadge and returns the receiver so calls can be chained.
 func (x *DockTile) WithShowsApplicationBadge(showsApplicationBadge bool) *DockTile {
-	x.inner.SetShowsApplicationBadge(showsApplicationBadge)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsApplicationBadge:"), showsApplicationBadge)
 	return x
 }
 
 // The string to be displayed in the tile’s badging area.
 //
-// WithBadgeLabel sets the badgeLabel property and returns the receiver for chaining.
+// WithBadgeLabel sets badgeLabel and returns the receiver so calls can be chained.
 func (x *DockTile) WithBadgeLabel(badgeLabel string) *DockTile {
-	x.inner.SetBadgeLabel(foundation.NSStringStringWithUTF8String(badgeLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadgeLabel:"), purego.NSString(badgeLabel))
 	return x
 }
 
 // Redraws the dock tile’s content.
-//
-// Display calls the underlying Display.
 func (x *DockTile) Display() {
-	x.inner.Display()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("display"))
 }
 
-// Size calls the underlying Size.
-func (x *DockTile) Size() corefoundation.CGSize {
-	return x.inner.Size()
-}
-
-// ContentView calls the underlying ContentView.
 func (x *DockTile) ContentView() *View {
-	_r := x.inner.ContentView()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentView"))
+	return ViewFromID(_r)
 }
 
-// SetContentView calls the underlying SetContentView.
-func (x *DockTile) SetContentView(contentView *raw.NSView) {
-	x.inner.SetContentView(contentView)
+func (x *DockTile) SetContentView(contentView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 }
 
-// ShowsApplicationBadge calls the underlying ShowsApplicationBadge.
 func (x *DockTile) ShowsApplicationBadge() bool {
-	return x.inner.ShowsApplicationBadge()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsApplicationBadge"))
+	return _r
 }
 
-// SetShowsApplicationBadge calls the underlying SetShowsApplicationBadge.
 func (x *DockTile) SetShowsApplicationBadge(showsApplicationBadge bool) {
-	x.inner.SetShowsApplicationBadge(showsApplicationBadge)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsApplicationBadge:"), showsApplicationBadge)
 }
 
-// BadgeLabel calls the underlying BadgeLabel.
 func (x *DockTile) BadgeLabel() string {
-	_r := x.inner.BadgeLabel()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("badgeLabel"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBadgeLabel calls the underlying SetBadgeLabel.
 func (x *DockTile) SetBadgeLabel(badgeLabel string) {
-	x.inner.SetBadgeLabel(foundation.NSStringStringWithUTF8String(badgeLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadgeLabel:"), purego.NSString(badgeLabel))
 }
 
-// Owner calls the underlying Owner.
-func (x *DockTile) Owner() objc.ID {
-	return x.inner.Owner()
+func (x *DockTile) Owner() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("owner"))
+	return obj.Wrap(_r)
 }
 
 // DockTileable is the interface implemented by [DockTile], for mocking and DI.
 type DockTileable interface {
-	Unwrap() *raw.NSDockTile
+	obj.Object
 	WithContentView(contentView ViewProvider) *DockTile
 	WithShowsApplicationBadge(showsApplicationBadge bool) *DockTile
 	WithBadgeLabel(badgeLabel string) *DockTile
 	Display()
-	Size() corefoundation.CGSize
 	ContentView() *View
-	SetContentView(contentView *raw.NSView)
+	SetContentView(contentView *View)
 	ShowsApplicationBadge() bool
 	SetShowsApplicationBadge(showsApplicationBadge bool)
 	BadgeLabel() string
 	SetBadgeLabel(badgeLabel string)
-	Owner() objc.ID
+	Owner() obj.Object
 }
 
 var _ DockTileable = (*DockTile)(nil)

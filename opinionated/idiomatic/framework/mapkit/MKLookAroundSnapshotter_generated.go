@@ -6,41 +6,67 @@ package mapkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A utility class that you use to create a static image from a LookAround scene.
 //
-// LookAroundSnapshotter wraps [raw.MKLookAroundSnapshotter] with a fluent Go API.
+// LookAroundSnapshotter is an idiomatic wrapper over the Objective-C class MKLookAroundSnapshotter.
 type LookAroundSnapshotter struct {
-	inner *raw.MKLookAroundSnapshotter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKLookAroundSnapshotter].
-func (x *LookAroundSnapshotter) Unwrap() *raw.MKLookAroundSnapshotter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LookAroundSnapshotter) ID() objc.ID { return x.inner.Ptr() }
-
-// LookAroundSnapshotterFromID adopts an existing object pointer as a LookAroundSnapshotter (nil for 0).
+// LookAroundSnapshotterFromID adopts an existing Objective-C object as a LookAroundSnapshotter
+// (nil for 0), retaining it and registering a release finalizer.
 func LookAroundSnapshotterFromID(id objc.ID) *LookAroundSnapshotter {
 	if id == 0 {
 		return nil
 	}
-	return &LookAroundSnapshotter{inner: raw.MKLookAroundSnapshotterFromID(id)}
+	x := &LookAroundSnapshotter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// lookAroundSnapshotterAdopt wraps an Objective-C object that this code just created as a
+// LookAroundSnapshotter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func lookAroundSnapshotterAdopt(id objc.ID) *LookAroundSnapshotter {
+	if id == 0 {
+		return nil
+	}
+	x := &LookAroundSnapshotter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LookAroundSnapshotter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LookAroundSnapshotter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LookAroundSnapshotter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Create a new snapshotter object with the scene and options you specify.
 //
-// NewLookAroundSnapshotterWithSceneOptions creates a new [LookAroundSnapshotter].
-func NewLookAroundSnapshotterWithSceneOptions(scene *raw.MKLookAroundScene, options *raw.MKLookAroundSnapshotOptions) *LookAroundSnapshotter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLookAroundSnapshotter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScene:options:"), scene.Ptr(), options.Ptr())
-	return &LookAroundSnapshotter{inner: raw.MKLookAroundSnapshotterFromID(_id)}
+// NewLookAroundSnapshotterWithSceneOptions creates a new LookAroundSnapshotter.
+func NewLookAroundSnapshotterWithSceneOptions(scene *LookAroundScene, options *LookAroundSnapshotOptions) *LookAroundSnapshotter {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKLookAroundSnapshotter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScene:options:"), objref.IDOf(scene), objref.IDOf(options))
+	return lookAroundSnapshotterAdopt(_id)
 }
 
 // Requests a new snapshot and calls the completion handler you provide.
@@ -52,16 +78,13 @@ func (x *LookAroundSnapshotter) GetSnapshot(ctx context.Context) (*LookAroundSna
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetSnapshotWithCompletionHandler(func(_p0 *raw.MKLookAroundSnapshot, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &LookAroundSnapshot{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = LookAroundSnapshotFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getSnapshotWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -72,20 +95,18 @@ func (x *LookAroundSnapshotter) GetSnapshot(ctx context.Context) (*LookAroundSna
 }
 
 // Cancels an in-progress snapshot request.
-//
-// Cancel calls the underlying Cancel.
 func (x *LookAroundSnapshotter) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// IsLoading calls the underlying IsLoading.
 func (x *LookAroundSnapshotter) IsLoading() bool {
-	return x.inner.IsLoading()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoading"))
+	return _r
 }
 
 // LookAroundSnapshotterable is the interface implemented by [LookAroundSnapshotter], for mocking and DI.
 type LookAroundSnapshotterable interface {
-	Unwrap() *raw.MKLookAroundSnapshotter
+	obj.Object
 	GetSnapshot(ctx context.Context) (*LookAroundSnapshot, error)
 	Cancel()
 	IsLoading() bool

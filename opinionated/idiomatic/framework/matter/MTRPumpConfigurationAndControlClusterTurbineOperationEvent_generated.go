@@ -5,43 +5,66 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRPumpConfigurationAndControlClusterTurbineOperationEvent wraps [raw.MTRPumpConfigurationAndControlClusterTurbineOperationEvent] with a fluent Go API.
+// MTRPumpConfigurationAndControlClusterTurbineOperationEvent is an idiomatic wrapper over the Objective-C class MTRPumpConfigurationAndControlClusterTurbineOperationEvent.
 type MTRPumpConfigurationAndControlClusterTurbineOperationEvent struct {
-	inner *raw.MTRPumpConfigurationAndControlClusterTurbineOperationEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterTurbineOperationEvent].
-func (x *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterTurbineOperationEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRPumpConfigurationAndControlClusterTurbineOperationEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterTurbineOperationEvent (nil for 0).
+// MTRPumpConfigurationAndControlClusterTurbineOperationEventFromID adopts an existing Objective-C object as a MTRPumpConfigurationAndControlClusterTurbineOperationEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRPumpConfigurationAndControlClusterTurbineOperationEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterTurbineOperationEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRPumpConfigurationAndControlClusterTurbineOperationEvent{inner: raw.MTRPumpConfigurationAndControlClusterTurbineOperationEventFromID(id)}
+	x := &MTRPumpConfigurationAndControlClusterTurbineOperationEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRPumpConfigurationAndControlClusterTurbineOperationEvent creates a new [MTRPumpConfigurationAndControlClusterTurbineOperationEvent].
+// mTRPumpConfigurationAndControlClusterTurbineOperationEventAdopt wraps an Objective-C object that this code just created as a
+// MTRPumpConfigurationAndControlClusterTurbineOperationEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRPumpConfigurationAndControlClusterTurbineOperationEventAdopt(id objc.ID) *MTRPumpConfigurationAndControlClusterTurbineOperationEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRPumpConfigurationAndControlClusterTurbineOperationEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRPumpConfigurationAndControlClusterTurbineOperationEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRPumpConfigurationAndControlClusterTurbineOperationEvent creates a new MTRPumpConfigurationAndControlClusterTurbineOperationEvent.
 func NewMTRPumpConfigurationAndControlClusterTurbineOperationEvent() *MTRPumpConfigurationAndControlClusterTurbineOperationEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRPumpConfigurationAndControlClusterTurbineOperationEvent")), objc.RegisterName("new"))
-	return &MTRPumpConfigurationAndControlClusterTurbineOperationEvent{inner: raw.MTRPumpConfigurationAndControlClusterTurbineOperationEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterTurbineOperationEvent")), objc.RegisterName("new"))
+	return mTRPumpConfigurationAndControlClusterTurbineOperationEventAdopt(_id)
 }
 
 // MTRPumpConfigurationAndControlClusterTurbineOperationEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterTurbineOperationEvent], for mocking and DI.
 type MTRPumpConfigurationAndControlClusterTurbineOperationEventable interface {
-	Unwrap() *raw.MTRPumpConfigurationAndControlClusterTurbineOperationEvent
+	obj.Object
 }
 
 var _ MTRPumpConfigurationAndControlClusterTurbineOperationEventable = (*MTRPumpConfigurationAndControlClusterTurbineOperationEvent)(nil)

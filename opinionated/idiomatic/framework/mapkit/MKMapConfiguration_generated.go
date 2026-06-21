@@ -5,64 +5,88 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An abstract class that represents the shared elements of map configurations.
 //
-// MapConfiguration wraps [raw.MKMapConfiguration] with a fluent Go API.
+// MapConfiguration is an idiomatic wrapper over the Objective-C class MKMapConfiguration.
 type MapConfiguration struct {
-	inner *raw.MKMapConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKMapConfiguration].
-func (x *MapConfiguration) Unwrap() *raw.MKMapConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MapConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// MapConfigurationFromID adopts an existing object pointer as a MapConfiguration (nil for 0).
+// MapConfigurationFromID adopts an existing Objective-C object as a MapConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func MapConfigurationFromID(id objc.ID) *MapConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &MapConfiguration{inner: raw.MKMapConfigurationFromID(id)}
+	x := &MapConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMapConfiguration creates a new [MapConfiguration].
+// mapConfigurationAdopt wraps an Objective-C object that this code just created as a
+// MapConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mapConfigurationAdopt(id objc.ID) *MapConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &MapConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MapConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MapConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MapConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMapConfiguration creates a new MapConfiguration.
 func NewMapConfiguration() *MapConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapConfiguration")), objc.RegisterName("new"))
-	return &MapConfiguration{inner: raw.MKMapConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKMapConfiguration")), objc.RegisterName("new"))
+	return mapConfigurationAdopt(_id)
 }
 
 // The value that indicates the map’s elevation style.
 //
-// WithElevationStyle sets the elevationStyle property and returns the receiver for chaining.
-func (x *MapConfiguration) WithElevationStyle(elevationStyle MKMapElevationStyle) *MapConfiguration {
-	x.inner.SetElevationStyle(raw.MKMapElevationStyle(elevationStyle))
+// WithElevationStyle sets elevationStyle and returns the receiver so calls can be chained.
+func (x *MapConfiguration) WithElevationStyle(elevationStyle MapElevationStyle) *MapConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElevationStyle:"), elevationStyle)
 	return x
 }
 
-// ElevationStyle calls the underlying ElevationStyle.
-func (x *MapConfiguration) ElevationStyle() MKMapElevationStyle {
-	return MKMapElevationStyle(x.inner.ElevationStyle())
+func (x *MapConfiguration) ElevationStyle() MapElevationStyle {
+	_r := objc.Send[MapElevationStyle](objref.IDOf(x), objc.RegisterName("elevationStyle"))
+	return _r
 }
 
-// SetElevationStyle calls the underlying SetElevationStyle.
-func (x *MapConfiguration) SetElevationStyle(elevationStyle MKMapElevationStyle) {
-	x.inner.SetElevationStyle(raw.MKMapElevationStyle(elevationStyle))
+func (x *MapConfiguration) SetElevationStyle(elevationStyle MapElevationStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElevationStyle:"), elevationStyle)
 }
-
-func (x *MapConfiguration) asMapConfiguration() *raw.MKMapConfiguration { return x.inner }
 
 // MapConfigurationable is the interface implemented by [MapConfiguration], for mocking and DI.
 type MapConfigurationable interface {
-	Unwrap() *raw.MKMapConfiguration
-	WithElevationStyle(elevationStyle MKMapElevationStyle) *MapConfiguration
-	ElevationStyle() MKMapElevationStyle
-	SetElevationStyle(elevationStyle MKMapElevationStyle)
+	obj.Object
+	WithElevationStyle(elevationStyle MapElevationStyle) *MapConfiguration
+	ElevationStyle() MapElevationStyle
+	SetElevationStyle(elevationStyle MapElevationStyle)
 }
 
 var _ MapConfigurationable = (*MapConfiguration)(nil)

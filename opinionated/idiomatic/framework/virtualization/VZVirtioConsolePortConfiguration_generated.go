@@ -5,101 +5,115 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that represents the configuration options you can set on a Virtio console port.
 //
-// VirtioConsolePortConfiguration wraps [raw.VZVirtioConsolePortConfiguration] with a fluent Go API.
+// VirtioConsolePortConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioConsolePortConfiguration.
 type VirtioConsolePortConfiguration struct {
-	inner *raw.VZVirtioConsolePortConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZVirtioConsolePortConfiguration].
-func (x *VirtioConsolePortConfiguration) Unwrap() *raw.VZVirtioConsolePortConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioConsolePortConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioConsolePortConfigurationFromID adopts an existing object pointer as a VirtioConsolePortConfiguration (nil for 0).
+// VirtioConsolePortConfigurationFromID adopts an existing Objective-C object as a VirtioConsolePortConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioConsolePortConfigurationFromID(id objc.ID) *VirtioConsolePortConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioConsolePortConfiguration{inner: raw.VZVirtioConsolePortConfigurationFromID(id)}
+	x := &VirtioConsolePortConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVirtioConsolePortConfiguration creates a new [VirtioConsolePortConfiguration].
+// virtioConsolePortConfigurationAdopt wraps an Objective-C object that this code just created as a
+// VirtioConsolePortConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioConsolePortConfigurationAdopt(id objc.ID) *VirtioConsolePortConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtioConsolePortConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VirtioConsolePortConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VirtioConsolePortConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VirtioConsolePortConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVirtioConsolePortConfiguration creates a new VirtioConsolePortConfiguration.
 func NewVirtioConsolePortConfiguration() *VirtioConsolePortConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioConsolePortConfiguration")), objc.RegisterName("new"))
-	return &VirtioConsolePortConfiguration{inner: raw.VZVirtioConsolePortConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioConsolePortConfiguration")), objc.RegisterName("new"))
+	return virtioConsolePortConfigurationAdopt(_id)
 }
 
 // The name of the port.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *VirtioConsolePortConfiguration) WithName(name string) *VirtioConsolePortConfiguration {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // A Boolean value that indicates whether this port is a console.
 //
-// WithIsConsole sets the isConsole property and returns the receiver for chaining.
+// WithIsConsole sets isConsole and returns the receiver so calls can be chained.
 func (x *VirtioConsolePortConfiguration) WithIsConsole(isConsole bool) *VirtioConsolePortConfiguration {
-	x.inner.SetIsConsole(isConsole)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsConsole:"), isConsole)
 	return x
 }
 
 // The serial port attachment.
 //
-// WithAttachment sets the attachment property and returns the receiver for chaining.
+// WithAttachment sets attachment and returns the receiver so calls can be chained.
 func (x *VirtioConsolePortConfiguration) WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsolePortConfiguration {
-	x.inner.VZConsolePortConfiguration.SetAttachment(attachment.asSerialPortAttachment())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
 	return x
 }
 
-// @abstract The console port's name. The default behavior is to not use a name unless set.
-//
-// Name calls the underlying Name.
+// The console port's name. The default behavior is to not use a name unless set.
 func (x *VirtioConsolePortConfiguration) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
 func (x *VirtioConsolePortConfiguration) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// @abstract The console port may be marked for use as the system console. The default is false.
-//
-// IsConsole calls the underlying IsConsole.
+// The console port may be marked for use as the system console. The default is false.
 func (x *VirtioConsolePortConfiguration) IsConsole() bool {
-	return x.inner.IsConsole()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConsole"))
+	return _r
 }
 
-// SetIsConsole calls the underlying SetIsConsole.
 func (x *VirtioConsolePortConfiguration) SetIsConsole(isConsole bool) {
-	x.inner.SetIsConsole(isConsole)
-}
-
-func (x *VirtioConsolePortConfiguration) asConsolePortConfiguration() *raw.VZConsolePortConfiguration {
-	return &x.inner.VZConsolePortConfiguration
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsConsole:"), isConsole)
 }
 
 // VirtioConsolePortConfigurationable is the interface implemented by [VirtioConsolePortConfiguration], for mocking and DI.
 type VirtioConsolePortConfigurationable interface {
-	Unwrap() *raw.VZVirtioConsolePortConfiguration
+	obj.Object
 	WithName(name string) *VirtioConsolePortConfiguration
 	WithIsConsole(isConsole bool) *VirtioConsolePortConfiguration
 	WithAttachment(attachment SerialPortAttachmentProvider) *VirtioConsolePortConfiguration

@@ -5,74 +5,98 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A script that the web view injects into a webpage.
 //
-// WKUserScript wraps [raw.WKUserScript] with a fluent Go API.
+// WKUserScript is an idiomatic wrapper over the Objective-C class WKUserScript.
 type WKUserScript struct {
-	inner *raw.WKUserScript
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKUserScript].
-func (x *WKUserScript) Unwrap() *raw.WKUserScript { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKUserScript) ID() objc.ID { return x.inner.Ptr() }
-
-// WKUserScriptFromID adopts an existing object pointer as a WKUserScript (nil for 0).
+// WKUserScriptFromID adopts an existing Objective-C object as a WKUserScript
+// (nil for 0), retaining it and registering a release finalizer.
 func WKUserScriptFromID(id objc.ID) *WKUserScript {
 	if id == 0 {
 		return nil
 	}
-	return &WKUserScript{inner: raw.WKUserScriptFromID(id)}
+	x := &WKUserScript{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// wKUserScriptAdopt wraps an Objective-C object that this code just created as a
+// WKUserScript (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKUserScriptAdopt(id objc.ID) *WKUserScript {
+	if id == 0 {
+		return nil
+	}
+	x := &WKUserScript{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WKUserScript) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKUserScript) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKUserScript) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a user script object that contains the specified source code and attributes.
 //
-// NewWKUserScriptWithSourceInjectionTimeForMainFrameOnly creates a new [WKUserScript].
+// NewWKUserScriptWithSourceInjectionTimeForMainFrameOnly creates a new WKUserScript.
 func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnly(source string, injectionTime WKUserScriptInjectionTime, forMainFrameOnly bool) *WKUserScript {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WKUserScript")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:injectionTime:forMainFrameOnly:"), foundation.NSStringStringWithUTF8String(source).Ptr(), raw.WKUserScriptInjectionTime(injectionTime), forMainFrameOnly)
-	return &WKUserScript{inner: raw.WKUserScriptFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("WKUserScript")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:injectionTime:forMainFrameOnly:"), purego.NSString(source), injectionTime, forMainFrameOnly)
+	return wKUserScriptAdopt(_id)
 }
 
 // Creates a user script object that is scoped to a particular content world.
 //
-// NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld creates a new [WKUserScript].
-func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld(source string, injectionTime WKUserScriptInjectionTime, forMainFrameOnly bool, contentWorld *raw.WKContentWorld) *WKUserScript {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("WKUserScript")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:injectionTime:forMainFrameOnly:inContentWorld:"), foundation.NSStringStringWithUTF8String(source).Ptr(), raw.WKUserScriptInjectionTime(injectionTime), forMainFrameOnly, contentWorld.Ptr())
-	return &WKUserScript{inner: raw.WKUserScriptFromID(_id)}
+// NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld creates a new WKUserScript.
+func NewWKUserScriptWithSourceInjectionTimeForMainFrameOnlyInContentWorld(source string, injectionTime WKUserScriptInjectionTime, forMainFrameOnly bool, contentWorld *WKContentWorld) *WKUserScript {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("WKUserScript")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSource:injectionTime:forMainFrameOnly:inContentWorld:"), purego.NSString(source), injectionTime, forMainFrameOnly, objref.IDOf(contentWorld))
+	return wKUserScriptAdopt(_id)
 }
 
-// Source calls the underlying Source.
 func (x *WKUserScript) Source() string {
-	_r := x.inner.Source()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// InjectionTime calls the underlying InjectionTime.
 func (x *WKUserScript) InjectionTime() WKUserScriptInjectionTime {
-	return WKUserScriptInjectionTime(x.inner.InjectionTime())
+	_r := objc.Send[WKUserScriptInjectionTime](objref.IDOf(x), objc.RegisterName("injectionTime"))
+	return _r
 }
 
-// IsForMainFrameOnly calls the underlying IsForMainFrameOnly.
 func (x *WKUserScript) IsForMainFrameOnly() bool {
-	return x.inner.IsForMainFrameOnly()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isForMainFrameOnly"))
+	return _r
 }
 
 // WKUserScriptable is the interface implemented by [WKUserScript], for mocking and DI.
 type WKUserScriptable interface {
-	Unwrap() *raw.WKUserScript
+	obj.Object
 	Source() string
 	InjectionTime() WKUserScriptInjectionTime
 	IsForMainFrameOnly() bool

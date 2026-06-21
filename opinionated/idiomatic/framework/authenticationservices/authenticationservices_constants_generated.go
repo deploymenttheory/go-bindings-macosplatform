@@ -5,208 +5,138 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// ASWebAuthenticationSessionErrorDomain returns the string constant ASWebAuthenticationSessionErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func ASWebAuthenticationSessionErrorDomain() objc.ID {
-	if _r := raw.ASWebAuthenticationSessionErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASWebAuthenticationSessionErrorDomain returns the string constant ASWebAuthenticationSessionErrorDomain, for use as a dictionary key or argument.
+func ASWebAuthenticationSessionErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASWebAuthenticationSessionErrorDomain")))
 }
 
-// ASCredentialIdentityStoreErrorDomain returns the string constant ASCredentialIdentityStoreErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func ASCredentialIdentityStoreErrorDomain() objc.ID {
-	if _r := raw.ASCredentialIdentityStoreErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASCredentialIdentityStoreErrorDomain returns the string constant ASCredentialIdentityStoreErrorDomain, for use as a dictionary key or argument.
+func ASCredentialIdentityStoreErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASCredentialIdentityStoreErrorDomain")))
 }
 
-// ASExtensionErrorDomain returns the string constant ASExtensionErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func ASExtensionErrorDomain() objc.ID {
-	if _r := raw.ASExtensionErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASExtensionErrorDomain returns the string constant ASExtensionErrorDomain, for use as a dictionary key or argument.
+func ASExtensionErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASExtensionErrorDomain")))
 }
 
-// ASAuthorizationScopeFullName returns the string constant ASAuthorizationScopeFullName as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationScopeFullName() objc.ID {
-	if _r := raw.ASAuthorizationScopeFullName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASAuthorizationScopeFullName returns the string constant ASAuthorizationScopeFullName, for use as a dictionary key or argument.
+func ASAuthorizationScopeFullName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationScopeFullName")))
 }
 
-// ASAuthorizationScopeEmail returns the string constant ASAuthorizationScopeEmail as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationScopeEmail() objc.ID {
-	if _r := raw.ASAuthorizationScopeEmail(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASAuthorizationScopeEmail returns the string constant ASAuthorizationScopeEmail, for use as a dictionary key or argument.
+func ASAuthorizationScopeEmail() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationScopeEmail")))
 }
 
-// ASAuthorizationOperationImplicit returns the string constant ASAuthorizationOperationImplicit as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationOperationImplicit() objc.ID {
-	if _r := raw.ASAuthorizationOperationImplicit(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASAuthorizationOperationImplicit returns the string constant ASAuthorizationOperationImplicit, for use as a dictionary key or argument.
+func ASAuthorizationOperationImplicit() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationOperationImplicit")))
 }
 
-// ASAuthorizationOperationLogin returns the string constant ASAuthorizationOperationLogin as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationOperationLogin() objc.ID {
-	if _r := raw.ASAuthorizationOperationLogin(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASAuthorizationOperationLogin returns the string constant ASAuthorizationOperationLogin, for use as a dictionary key or argument.
+func ASAuthorizationOperationLogin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationOperationLogin")))
 }
 
-// ASAuthorizationOperationRefresh returns the string constant ASAuthorizationOperationRefresh as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationOperationRefresh() objc.ID {
-	if _r := raw.ASAuthorizationOperationRefresh(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASAuthorizationOperationRefresh returns the string constant ASAuthorizationOperationRefresh, for use as a dictionary key or argument.
+func ASAuthorizationOperationRefresh() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationOperationRefresh")))
 }
 
-// ASAuthorizationOperationLogout returns the string constant ASAuthorizationOperationLogout as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationOperationLogout() objc.ID {
-	if _r := raw.ASAuthorizationOperationLogout(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASAuthorizationOperationLogout returns the string constant ASAuthorizationOperationLogout, for use as a dictionary key or argument.
+func ASAuthorizationOperationLogout() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationOperationLogout")))
 }
 
-// ASAuthorizationAppleIDProviderCredentialRevokedNotification returns the string constant ASAuthorizationAppleIDProviderCredentialRevokedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationAppleIDProviderCredentialRevokedNotification() objc.ID {
-	if _r := raw.ASAuthorizationAppleIDProviderCredentialRevokedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASAuthorizationAppleIDProviderCredentialRevokedNotification returns the string constant ASAuthorizationAppleIDProviderCredentialRevokedNotification, for use as a dictionary key or argument.
+func ASAuthorizationAppleIDProviderCredentialRevokedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationAppleIDProviderCredentialRevokedNotification")))
 }
 
-// ASAuthorizationErrorDomain returns the string constant ASAuthorizationErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationErrorDomain() objc.ID {
-	if _r := raw.ASAuthorizationErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASAuthorizationErrorDomain returns the string constant ASAuthorizationErrorDomain, for use as a dictionary key or argument.
+func ASAuthorizationErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationErrorDomain")))
 }
 
-// @abstract Operation which is invoked when the extension configuration is removed from the system.
-// ASAuthorizationProviderAuthorizationOperationConfigurationRemoved returns the string constant ASAuthorizationProviderAuthorizationOperationConfigurationRemoved as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationProviderAuthorizationOperationConfigurationRemoved() objc.ID {
-	if _r := raw.ASAuthorizationProviderAuthorizationOperationConfigurationRemoved(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// Operation which is invoked when the extension configuration is removed from the system.
+// ASAuthorizationProviderAuthorizationOperationConfigurationRemoved returns the string constant ASAuthorizationProviderAuthorizationOperationConfigurationRemoved, for use as a dictionary key or argument.
+func ASAuthorizationProviderAuthorizationOperationConfigurationRemoved() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationProviderAuthorizationOperationConfigurationRemoved")))
 }
 
-// @abstract Operation which is invoked when a request is sent direct to the extension instead of loaded in an ASWebAuthenticationSession.
-// ASAuthorizationProviderAuthorizationOperationDirectRequest returns the string constant ASAuthorizationProviderAuthorizationOperationDirectRequest as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationProviderAuthorizationOperationDirectRequest() objc.ID {
-	if _r := raw.ASAuthorizationProviderAuthorizationOperationDirectRequest(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// Operation which is invoked when a request is sent direct to the extension instead of loaded in an ASWebAuthenticationSession.
+// ASAuthorizationProviderAuthorizationOperationDirectRequest returns the string constant ASAuthorizationProviderAuthorizationOperationDirectRequest, for use as a dictionary key or argument.
+func ASAuthorizationProviderAuthorizationOperationDirectRequest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationProviderAuthorizationOperationDirectRequest")))
 }
 
-// ASAuthorizationPublicKeyCredentialUserVerificationPreferencePreferred returns the string constant ASAuthorizationPublicKeyCredentialUserVerificationPreferencePreferred as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationPublicKeyCredentialUserVerificationPreferencePreferred() objc.ID {
-	if _r := raw.ASAuthorizationPublicKeyCredentialUserVerificationPreferencePreferred(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASAuthorizationPublicKeyCredentialUserVerificationPreferencePreferred returns the string constant ASAuthorizationPublicKeyCredentialUserVerificationPreferencePreferred, for use as a dictionary key or argument.
+func ASAuthorizationPublicKeyCredentialUserVerificationPreferencePreferred() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationPublicKeyCredentialUserVerificationPreferencePreferred")))
 }
 
-// ASAuthorizationPublicKeyCredentialUserVerificationPreferenceRequired returns the string constant ASAuthorizationPublicKeyCredentialUserVerificationPreferenceRequired as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationPublicKeyCredentialUserVerificationPreferenceRequired() objc.ID {
-	if _r := raw.ASAuthorizationPublicKeyCredentialUserVerificationPreferenceRequired(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASAuthorizationPublicKeyCredentialUserVerificationPreferenceRequired returns the string constant ASAuthorizationPublicKeyCredentialUserVerificationPreferenceRequired, for use as a dictionary key or argument.
+func ASAuthorizationPublicKeyCredentialUserVerificationPreferenceRequired() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationPublicKeyCredentialUserVerificationPreferenceRequired")))
 }
 
-// ASAuthorizationPublicKeyCredentialUserVerificationPreferenceDiscouraged returns the string constant ASAuthorizationPublicKeyCredentialUserVerificationPreferenceDiscouraged as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationPublicKeyCredentialUserVerificationPreferenceDiscouraged() objc.ID {
-	if _r := raw.ASAuthorizationPublicKeyCredentialUserVerificationPreferenceDiscouraged(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASAuthorizationPublicKeyCredentialUserVerificationPreferenceDiscouraged returns the string constant ASAuthorizationPublicKeyCredentialUserVerificationPreferenceDiscouraged, for use as a dictionary key or argument.
+func ASAuthorizationPublicKeyCredentialUserVerificationPreferenceDiscouraged() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationPublicKeyCredentialUserVerificationPreferenceDiscouraged")))
 }
 
-// ASAuthorizationPublicKeyCredentialAttestationKindNone returns the string constant ASAuthorizationPublicKeyCredentialAttestationKindNone as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationPublicKeyCredentialAttestationKindNone() objc.ID {
-	if _r := raw.ASAuthorizationPublicKeyCredentialAttestationKindNone(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASAuthorizationPublicKeyCredentialAttestationKindNone returns the string constant ASAuthorizationPublicKeyCredentialAttestationKindNone, for use as a dictionary key or argument.
+func ASAuthorizationPublicKeyCredentialAttestationKindNone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationPublicKeyCredentialAttestationKindNone")))
 }
 
-// ASAuthorizationPublicKeyCredentialAttestationKindDirect returns the string constant ASAuthorizationPublicKeyCredentialAttestationKindDirect as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationPublicKeyCredentialAttestationKindDirect() objc.ID {
-	if _r := raw.ASAuthorizationPublicKeyCredentialAttestationKindDirect(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASAuthorizationPublicKeyCredentialAttestationKindDirect returns the string constant ASAuthorizationPublicKeyCredentialAttestationKindDirect, for use as a dictionary key or argument.
+func ASAuthorizationPublicKeyCredentialAttestationKindDirect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationPublicKeyCredentialAttestationKindDirect")))
 }
 
-// ASAuthorizationPublicKeyCredentialAttestationKindIndirect returns the string constant ASAuthorizationPublicKeyCredentialAttestationKindIndirect as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationPublicKeyCredentialAttestationKindIndirect() objc.ID {
-	if _r := raw.ASAuthorizationPublicKeyCredentialAttestationKindIndirect(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASAuthorizationPublicKeyCredentialAttestationKindIndirect returns the string constant ASAuthorizationPublicKeyCredentialAttestationKindIndirect, for use as a dictionary key or argument.
+func ASAuthorizationPublicKeyCredentialAttestationKindIndirect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationPublicKeyCredentialAttestationKindIndirect")))
 }
 
-// ASAuthorizationPublicKeyCredentialAttestationKindEnterprise returns the string constant ASAuthorizationPublicKeyCredentialAttestationKindEnterprise as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationPublicKeyCredentialAttestationKindEnterprise() objc.ID {
-	if _r := raw.ASAuthorizationPublicKeyCredentialAttestationKindEnterprise(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASAuthorizationPublicKeyCredentialAttestationKindEnterprise returns the string constant ASAuthorizationPublicKeyCredentialAttestationKindEnterprise, for use as a dictionary key or argument.
+func ASAuthorizationPublicKeyCredentialAttestationKindEnterprise() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationPublicKeyCredentialAttestationKindEnterprise")))
 }
 
-// ASAuthorizationPublicKeyCredentialResidentKeyPreferenceDiscouraged returns the string constant ASAuthorizationPublicKeyCredentialResidentKeyPreferenceDiscouraged as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationPublicKeyCredentialResidentKeyPreferenceDiscouraged() objc.ID {
-	if _r := raw.ASAuthorizationPublicKeyCredentialResidentKeyPreferenceDiscouraged(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASAuthorizationPublicKeyCredentialResidentKeyPreferenceDiscouraged returns the string constant ASAuthorizationPublicKeyCredentialResidentKeyPreferenceDiscouraged, for use as a dictionary key or argument.
+func ASAuthorizationPublicKeyCredentialResidentKeyPreferenceDiscouraged() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationPublicKeyCredentialResidentKeyPreferenceDiscouraged")))
 }
 
-// ASAuthorizationPublicKeyCredentialResidentKeyPreferencePreferred returns the string constant ASAuthorizationPublicKeyCredentialResidentKeyPreferencePreferred as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationPublicKeyCredentialResidentKeyPreferencePreferred() objc.ID {
-	if _r := raw.ASAuthorizationPublicKeyCredentialResidentKeyPreferencePreferred(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASAuthorizationPublicKeyCredentialResidentKeyPreferencePreferred returns the string constant ASAuthorizationPublicKeyCredentialResidentKeyPreferencePreferred, for use as a dictionary key or argument.
+func ASAuthorizationPublicKeyCredentialResidentKeyPreferencePreferred() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationPublicKeyCredentialResidentKeyPreferencePreferred")))
 }
 
-// ASAuthorizationPublicKeyCredentialResidentKeyPreferenceRequired returns the string constant ASAuthorizationPublicKeyCredentialResidentKeyPreferenceRequired as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationPublicKeyCredentialResidentKeyPreferenceRequired() objc.ID {
-	if _r := raw.ASAuthorizationPublicKeyCredentialResidentKeyPreferenceRequired(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ASAuthorizationPublicKeyCredentialResidentKeyPreferenceRequired returns the string constant ASAuthorizationPublicKeyCredentialResidentKeyPreferenceRequired, for use as a dictionary key or argument.
+func ASAuthorizationPublicKeyCredentialResidentKeyPreferenceRequired() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationPublicKeyCredentialResidentKeyPreferenceRequired")))
 }
 
-// ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportUSB returns the string constant ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportUSB as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportUSB() objc.ID {
-	return purego.CFConstant(raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportUSB())
+// ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportUSB returns the string constant ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportUSB, for use as a dictionary key or argument.
+func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportUSB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportUSB")))
 }
 
-// ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportNFC returns the string constant ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportNFC as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportNFC() objc.ID {
-	return purego.CFConstant(raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportNFC())
+// ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportNFC returns the string constant ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportNFC, for use as a dictionary key or argument.
+func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportNFC() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportNFC")))
 }
 
-// ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportBluetooth returns the string constant ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportBluetooth as an objc.ID, for use as a dictionary key or selector argument.
-func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportBluetooth() objc.ID {
-	return purego.CFConstant(raw.ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportBluetooth())
+// ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportBluetooth returns the string constant ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportBluetooth, for use as a dictionary key or argument.
+func ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportBluetooth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ASAuthorizationSecurityKeyPublicKeyCredentialDescriptorTransportBluetooth")))
 }

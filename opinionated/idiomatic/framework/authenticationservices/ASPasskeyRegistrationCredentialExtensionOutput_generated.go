@@ -5,53 +5,74 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A type that encapsulates output for various WebAuthn extensions during passkey assertion.
 //
-// PasskeyRegistrationCredentialExtensionOutput wraps [raw.ASPasskeyRegistrationCredentialExtensionOutput] with a fluent Go API.
+// PasskeyRegistrationCredentialExtensionOutput is an idiomatic wrapper over the Objective-C class ASPasskeyRegistrationCredentialExtensionOutput.
 type PasskeyRegistrationCredentialExtensionOutput struct {
-	inner *raw.ASPasskeyRegistrationCredentialExtensionOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASPasskeyRegistrationCredentialExtensionOutput].
-func (x *PasskeyRegistrationCredentialExtensionOutput) Unwrap() *raw.ASPasskeyRegistrationCredentialExtensionOutput {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PasskeyRegistrationCredentialExtensionOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// PasskeyRegistrationCredentialExtensionOutputFromID adopts an existing object pointer as a PasskeyRegistrationCredentialExtensionOutput (nil for 0).
+// PasskeyRegistrationCredentialExtensionOutputFromID adopts an existing Objective-C object as a PasskeyRegistrationCredentialExtensionOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func PasskeyRegistrationCredentialExtensionOutputFromID(id objc.ID) *PasskeyRegistrationCredentialExtensionOutput {
 	if id == 0 {
 		return nil
 	}
-	return &PasskeyRegistrationCredentialExtensionOutput{inner: raw.ASPasskeyRegistrationCredentialExtensionOutputFromID(id)}
+	x := &PasskeyRegistrationCredentialExtensionOutput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPasskeyRegistrationCredentialExtensionOutputWithLargeBlobOutput creates a new [PasskeyRegistrationCredentialExtensionOutput].
-func NewPasskeyRegistrationCredentialExtensionOutputWithLargeBlobOutput(largeBlob *raw.ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) *PasskeyRegistrationCredentialExtensionOutput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyRegistrationCredentialExtensionOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLargeBlobOutput:"), largeBlob.Ptr())
-	return &PasskeyRegistrationCredentialExtensionOutput{inner: raw.ASPasskeyRegistrationCredentialExtensionOutputFromID(_id)}
-}
-
-// LargeBlobRegistrationOutput calls the underlying LargeBlobRegistrationOutput.
-func (x *PasskeyRegistrationCredentialExtensionOutput) LargeBlobRegistrationOutput() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput {
-	_r := x.inner.LargeBlobRegistrationOutput()
-	if _r == nil {
+// passkeyRegistrationCredentialExtensionOutputAdopt wraps an Objective-C object that this code just created as a
+// PasskeyRegistrationCredentialExtensionOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func passkeyRegistrationCredentialExtensionOutputAdopt(id objc.ID) *PasskeyRegistrationCredentialExtensionOutput {
+	if id == 0 {
 		return nil
 	}
-	return &AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput{inner: _r}
+	x := &PasskeyRegistrationCredentialExtensionOutput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PasskeyRegistrationCredentialExtensionOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PasskeyRegistrationCredentialExtensionOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PasskeyRegistrationCredentialExtensionOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPasskeyRegistrationCredentialExtensionOutputWithLargeBlobOutput creates a new PasskeyRegistrationCredentialExtensionOutput.
+func NewPasskeyRegistrationCredentialExtensionOutputWithLargeBlobOutput(largeBlob *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput) *PasskeyRegistrationCredentialExtensionOutput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasskeyRegistrationCredentialExtensionOutput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLargeBlobOutput:"), objref.IDOf(largeBlob))
+	return passkeyRegistrationCredentialExtensionOutputAdopt(_id)
+}
+
+func (x *PasskeyRegistrationCredentialExtensionOutput) LargeBlobRegistrationOutput() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("largeBlobRegistrationOutput"))
+	return AuthorizationPublicKeyCredentialLargeBlobRegistrationOutputFromID(_r)
 }
 
 // PasskeyRegistrationCredentialExtensionOutputable is the interface implemented by [PasskeyRegistrationCredentialExtensionOutput], for mocking and DI.
 type PasskeyRegistrationCredentialExtensionOutputable interface {
-	Unwrap() *raw.ASPasskeyRegistrationCredentialExtensionOutput
+	obj.Object
 	LargeBlobRegistrationOutput() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput
 }
 

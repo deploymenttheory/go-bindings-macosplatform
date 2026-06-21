@@ -5,1287 +5,558 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // A structural element of a scene graph, representing a position and transform in a 3D coordinate space, to which you can attach geometry, lights, cameras, or other displayable content.
 //
-// Node wraps [raw.SCNNode] with a fluent Go API.
+// Node is an idiomatic wrapper over the Objective-C class SCNNode.
 type Node struct {
-	inner *raw.SCNNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNNode].
-func (x *Node) Unwrap() *raw.SCNNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Node) ID() objc.ID { return x.inner.Ptr() }
-
-// NodeFromID adopts an existing object pointer as a Node (nil for 0).
+// NodeFromID adopts an existing Objective-C object as a Node
+// (nil for 0), retaining it and registering a release finalizer.
 func NodeFromID(id objc.ID) *Node {
 	if id == 0 {
 		return nil
 	}
-	return &Node{inner: raw.SCNNodeFromID(id)}
+	x := &Node{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNode creates a new [Node].
+// nodeAdopt wraps an Objective-C object that this code just created as a
+// Node (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nodeAdopt(id objc.ID) *Node {
+	if id == 0 {
+		return nil
+	}
+	x := &Node{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Node) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Node) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Node) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNode creates a new Node.
 func NewNode() *Node {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNNode")), objc.RegisterName("new"))
-	return &Node{inner: raw.SCNNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNNode")), objc.RegisterName("new"))
+	return nodeAdopt(_id)
 }
 
 // A name associated with the node.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *Node) WithName(name string) *Node {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // The light attached to the node.
 //
-// WithLight sets the light property and returns the receiver for chaining.
+// WithLight sets light and returns the receiver so calls can be chained.
 func (x *Node) WithLight(light *Light) *Node {
-	x.inner.SetLight(light.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLight:"), objref.IDOf(light))
 	return x
 }
 
 // The camera attached to the node.
 //
-// WithCamera sets the camera property and returns the receiver for chaining.
+// WithCamera sets camera and returns the receiver so calls can be chained.
 func (x *Node) WithCamera(camera *Camera) *Node {
-	x.inner.SetCamera(camera.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCamera:"), objref.IDOf(camera))
 	return x
 }
 
 // The geometry attached to the node.
 //
-// WithGeometry sets the geometry property and returns the receiver for chaining.
+// WithGeometry sets geometry and returns the receiver so calls can be chained.
 func (x *Node) WithGeometry(geometry GeometryProvider) *Node {
-	x.inner.SetGeometry(geometry.asGeometry())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometry:"), objref.IDOf(geometry))
 	return x
 }
 
 // The skinner object responsible for skeletal animations of node’s contents.
 //
-// WithSkinner sets the skinner property and returns the receiver for chaining.
+// WithSkinner sets skinner and returns the receiver so calls can be chained.
 func (x *Node) WithSkinner(skinner *Skinner) *Node {
-	x.inner.SetSkinner(skinner.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkinner:"), objref.IDOf(skinner))
 	return x
 }
 
 // The morpher object responsible for blending the node’s geometry.
 //
-// WithMorpher sets the morpher property and returns the receiver for chaining.
+// WithMorpher sets morpher and returns the receiver so calls can be chained.
 func (x *Node) WithMorpher(morpher *Morpher) *Node {
-	x.inner.SetMorpher(morpher.Unwrap())
-	return x
-}
-
-// The transform applied to the node relative to its parent. Animatable.
-//
-// WithTransform sets the transform property and returns the receiver for chaining.
-func (x *Node) WithTransform(transform quartzcore.CATransform3D) *Node {
-	x.inner.SetTransform(transform)
-	return x
-}
-
-// The world transform applied to the node.
-//
-// WithWorldTransform sets the worldTransform property and returns the receiver for chaining.
-func (x *Node) WithWorldTransform(worldTransform quartzcore.CATransform3D) *Node {
-	x.inner.SetWorldTransform(worldTransform)
-	return x
-}
-
-// The translation applied to the node. Animatable.
-//
-// WithPosition sets the position property and returns the receiver for chaining.
-func (x *Node) WithPosition(position raw.SCNVector3) *Node {
-	x.inner.SetPosition(position)
-	return x
-}
-
-// The node’s position relative to the scene’s world coordinate space.
-//
-// WithWorldPosition sets the worldPosition property and returns the receiver for chaining.
-func (x *Node) WithWorldPosition(worldPosition raw.SCNVector3) *Node {
-	x.inner.SetWorldPosition(worldPosition)
-	return x
-}
-
-// The node’s orientation, expressed as a rotation angle about an axis. Animatable.
-//
-// WithRotation sets the rotation property and returns the receiver for chaining.
-func (x *Node) WithRotation(rotation raw.SCNVector4) *Node {
-	x.inner.SetRotation(rotation)
-	return x
-}
-
-// The node’s orientation, expressed as a quaternion. Animatable.
-//
-// WithOrientation sets the orientation property and returns the receiver for chaining.
-func (x *Node) WithOrientation(orientation raw.SCNVector4) *Node {
-	x.inner.SetOrientation(orientation)
-	return x
-}
-
-// The node’s orientation relative to the scene’s world coordinate space.
-//
-// WithWorldOrientation sets the worldOrientation property and returns the receiver for chaining.
-func (x *Node) WithWorldOrientation(worldOrientation raw.SCNVector4) *Node {
-	x.inner.SetWorldOrientation(worldOrientation)
-	return x
-}
-
-// The node’s orientation, expressed as pitch, yaw, and roll angles in radians. Animatable.
-//
-// WithEulerAngles sets the eulerAngles property and returns the receiver for chaining.
-func (x *Node) WithEulerAngles(eulerAngles raw.SCNVector3) *Node {
-	x.inner.SetEulerAngles(eulerAngles)
-	return x
-}
-
-// The scale factor applied to the node. Animatable.
-//
-// WithScale sets the scale property and returns the receiver for chaining.
-func (x *Node) WithScale(scale raw.SCNVector3) *Node {
-	x.inner.SetScale(scale)
-	return x
-}
-
-// The pivot point for the node’s position, rotation, and scale. Animatable.
-//
-// WithPivot sets the pivot property and returns the receiver for chaining.
-func (x *Node) WithPivot(pivot quartzcore.CATransform3D) *Node {
-	x.inner.SetPivot(pivot)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMorpher:"), objref.IDOf(morpher))
 	return x
 }
 
 // A Boolean value that determines the visibility of the node’s contents. Animatable.
 //
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *Node) WithHidden(hidden bool) *Node {
-	x.inner.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
 // The opacity value of the node. Animatable.
 //
-// WithOpacity sets the opacity property and returns the receiver for chaining.
+// WithOpacity sets opacity and returns the receiver so calls can be chained.
 func (x *Node) WithOpacity(opacity float64) *Node {
-	x.inner.SetOpacity(opacity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpacity:"), opacity)
 	return x
 }
 
 // The order the node’s content is drawn in relative to that of other nodes.
 //
-// WithRenderingOrder sets the renderingOrder property and returns the receiver for chaining.
+// WithRenderingOrder sets renderingOrder and returns the receiver so calls can be chained.
 func (x *Node) WithRenderingOrder(renderingOrder int) *Node {
-	x.inner.SetRenderingOrder(renderingOrder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderingOrder:"), renderingOrder)
 	return x
 }
 
 // A Boolean value that determines whether SceneKit renders the node’s contents into shadow maps.
 //
-// WithCastsShadow sets the castsShadow property and returns the receiver for chaining.
+// WithCastsShadow sets castsShadow and returns the receiver so calls can be chained.
 func (x *Node) WithCastsShadow(castsShadow bool) *Node {
-	x.inner.SetCastsShadow(castsShadow)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCastsShadow:"), castsShadow)
 	return x
 }
 
 // A value that indicates how SceneKit should handle the node when rendering movement-related effects.
 //
-// WithMovabilityHint sets the movabilityHint property and returns the receiver for chaining.
-func (x *Node) WithMovabilityHint(movabilityHint SCNMovabilityHint) *Node {
-	x.inner.SetMovabilityHint(raw.SCNMovabilityHint(movabilityHint))
+// WithMovabilityHint sets movabilityHint and returns the receiver so calls can be chained.
+func (x *Node) WithMovabilityHint(movabilityHint MovabilityHint) *Node {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovabilityHint:"), movabilityHint)
 	return x
 }
 
 // The physics body associated with the node.
 //
-// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+// WithPhysicsBody sets physicsBody and returns the receiver so calls can be chained.
 func (x *Node) WithPhysicsBody(physicsBody *PhysicsBody) *Node {
-	x.inner.SetPhysicsBody(physicsBody.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
 // The physics field associated with the node.
 //
-// WithPhysicsField sets the physicsField property and returns the receiver for chaining.
+// WithPhysicsField sets physicsField and returns the receiver so calls can be chained.
 func (x *Node) WithPhysicsField(physicsField *PhysicsField) *Node {
-	x.inner.SetPhysicsField(physicsField.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsField:"), objref.IDOf(physicsField))
 	return x
 }
 
 // A list of constraints affecting the node’s transformation.
 //
-// WithConstraints sets the collection, converting the Go slice to an NSArray.
+// WithConstraints sets the collection and returns the receiver so calls can be chained.
 func (x *Node) WithConstraints(items ...ConstraintProvider) *Node {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetConstraints(foundation.NSArrayFromID[*raw.SCNConstraint](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asConstraint().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNConstraint](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetConstraints(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ConstraintProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
 // An array of Core Image filters to be applied to the rendered contents of the node.
 //
-// WithFilters sets the collection, converting the Go slice to an NSArray.
-func (x *Node) WithFilters(items ...*coreimage.CIFilter) *Node {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetFilters(_arr)
+// WithFilters sets the collection and returns the receiver so calls can be chained.
+func (x *Node) WithFilters(items ...obj.Object) *Node {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilters:"), _arr)
 	return x
 }
 
 // A Boolean value that determines whether to run actions and animations attached to the node and its child nodes.
 //
-// WithPaused sets the paused property and returns the receiver for chaining.
+// WithPaused sets paused and returns the receiver so calls can be chained.
 func (x *Node) WithPaused(paused bool) *Node {
-	x.inner.SetPaused(paused)
-	return x
-}
-
-// An object responsible for rendering custom contents for the node using Metal or OpenGL.
-//
-// WithRendererDelegate sets the rendererDelegate property and returns the receiver for chaining.
-func (x *Node) WithRendererDelegate(rendererDelegate raw.SCNNodeRendererDelegate) *Node {
-	x.inner.SetRendererDelegate(rendererDelegate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
 // A mask that defines which categories the node belongs to.
 //
-// WithCategoryBitMask sets the categoryBitMask property and returns the receiver for chaining.
-func (x *Node) WithCategoryBitMask(categoryBitMask uint) *Node {
-	x.inner.SetCategoryBitMask(categoryBitMask)
+// WithCategoryBitMask sets categoryBitMask and returns the receiver so calls can be chained.
+func (x *Node) WithCategoryBitMask(categoryBitMask int) *Node {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
 	return x
 }
 
 // The focus behavior for a node.
 //
-// WithFocusBehavior sets the focusBehavior property and returns the receiver for chaining.
-func (x *Node) WithFocusBehavior(focusBehavior SCNNodeFocusBehavior) *Node {
-	x.inner.SetFocusBehavior(raw.SCNNodeFocusBehavior(focusBehavior))
+// WithFocusBehavior sets focusBehavior and returns the receiver so calls can be chained.
+func (x *Node) WithFocusBehavior(focusBehavior NodeFocusBehavior) *Node {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusBehavior:"), focusBehavior)
 	return x
 }
 
 // Creates a copy of the node and its children.
-//
-// Clone calls the underlying Clone.
 func (x *Node) Clone() *Node {
-	_r := x.inner.Clone()
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clone"))
+	return NodeFromID(_r)
 }
 
 // Creates an optimized copy of the node and its children.
-//
-// FlattenedClone calls the underlying FlattenedClone.
 func (x *Node) FlattenedClone() *Node {
-	_r := x.inner.FlattenedClone()
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
-}
-
-// Sets the world transform applied to the node.
-//
-// SetWorldTransform calls the underlying SetWorldTransform.
-func (x *Node) SetWorldTransform(worldTransform quartzcore.CATransform3D) {
-	x.inner.SetWorldTransform(worldTransform)
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flattenedClone"))
+	return NodeFromID(_r)
 }
 
 // Adds a node to the node’s array of children.
-//
-// AddChildNode calls the underlying AddChildNode.
-func (x *Node) AddChildNode(child *raw.SCNNode) {
-	x.inner.AddChildNode(child)
+func (x *Node) AddChildNode(child *Node) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addChildNode:"), objref.IDOf(child))
 }
 
 // Adds a node to the node’s array of children at a specified index.
-//
-// InsertChildNodeAtIndex calls the underlying InsertChildNodeAtIndex.
-func (x *Node) InsertChildNodeAtIndex(child *raw.SCNNode, index uint) {
-	x.inner.InsertChildNodeAtIndex(child, index)
+func (x *Node) InsertChildNodeAtIndex(child *Node, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertChildNode:atIndex:"), objref.IDOf(child), index)
 }
 
 // Removes the node from its parent’s array of child nodes.
-//
-// RemoveFromParentNode calls the underlying RemoveFromParentNode.
 func (x *Node) RemoveFromParentNode() {
-	x.inner.RemoveFromParentNode()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromParentNode"))
 }
 
 // Removes a child from the node’s array of children and inserts another node in its place.
-//
-// ReplaceChildNodeWith calls the underlying ReplaceChildNodeWith.
-func (x *Node) ReplaceChildNodeWith(oldChild *raw.SCNNode, newChild *raw.SCNNode) {
-	x.inner.ReplaceChildNodeWith(oldChild, newChild)
+func (x *Node) ReplaceChildNodeWith(oldChild *Node, newChild *Node) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceChildNode:with:"), objref.IDOf(oldChild), objref.IDOf(newChild))
 }
 
 // Returns the first node in the node’s child node subtree with the specified name.
-//
-// ChildNodeWithNameRecursively calls the underlying ChildNodeWithNameRecursively.
 func (x *Node) ChildNodeWithNameRecursively(name string, recursively bool) *Node {
-	_r := x.inner.ChildNodeWithNameRecursively(foundation.NSStringStringWithUTF8String(name), recursively)
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childNodeWithName:recursively:"), purego.NSString(name), recursively)
+	return NodeFromID(_r)
 }
 
 // Returns all nodes in the node’s child node subtree that satisfy the test applied by a block.
-//
-// ChildNodesPassingTest calls the underlying ChildNodesPassingTest.
-func (x *Node) ChildNodesPassingTest(predicate func(*raw.SCNNode, *bool) bool) *foundation.NSArray[*raw.SCNNode] {
-	return x.inner.ChildNodesPassingTest(predicate)
+func (x *Node) ChildNodesPassingTest(predicate func(obj.Object, *bool) bool) []*Node {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childNodesPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) bool {
+		return predicate(obj.Wrap(_b0), (*bool)(_b1))
+	}))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Node { return NodeFromID(_id) })
 }
 
 // Executes the specified block for each of the node’s child and descendant nodes.
-//
-// EnumerateChildNodesUsing calls the underlying EnumerateChildNodesUsing.
-func (x *Node) EnumerateChildNodesUsing(block func(*raw.SCNNode, *bool)) {
-	x.inner.EnumerateChildNodesUsing(block)
+func (x *Node) EnumerateChildNodesUsing(block func(obj.Object, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateChildNodesUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
 // Executes the specified block for each of the node’s child and descendant nodes, as well as for the node itself.
-//
-// EnumerateHierarchyUsing calls the underlying EnumerateHierarchyUsing.
-func (x *Node) EnumerateHierarchyUsing(block func(*raw.SCNNode, *bool)) {
-	x.inner.EnumerateHierarchyUsing(block)
+func (x *Node) EnumerateHierarchyUsing(block func(obj.Object, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateHierarchyUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
-// Converts a position from the node’s local coordinate space to that of another node.
-//
-// ConvertPositionToNode calls the underlying ConvertPositionToNode.
-func (x *Node) ConvertPositionToNode(position raw.SCNVector3, node *raw.SCNNode) raw.SCNVector3 {
-	return x.inner.ConvertPositionToNode(position, node)
-}
-
-// Converts a position to the node’s local coordinate space from that of another node.
-//
-// ConvertPositionFromNode calls the underlying ConvertPositionFromNode.
-func (x *Node) ConvertPositionFromNode(position raw.SCNVector3, node *raw.SCNNode) raw.SCNVector3 {
-	return x.inner.ConvertPositionFromNode(position, node)
-}
-
-// Converts a direction vector from the node’s local coordinate space to that of another node.
-//
-// ConvertVectorToNode calls the underlying ConvertVectorToNode.
-func (x *Node) ConvertVectorToNode(vector raw.SCNVector3, node *raw.SCNNode) raw.SCNVector3 {
-	return x.inner.ConvertVectorToNode(vector, node)
-}
-
-// Converts a direction vector to the node’s local coordinate space from that of another node.
-//
-// ConvertVectorFromNode calls the underlying ConvertVectorFromNode.
-func (x *Node) ConvertVectorFromNode(vector raw.SCNVector3, node *raw.SCNNode) raw.SCNVector3 {
-	return x.inner.ConvertVectorFromNode(vector, node)
-}
-
-// Converts a transform from the node’s local coordinate space to that of another node.
-//
-// ConvertTransformToNode calls the underlying ConvertTransformToNode.
-func (x *Node) ConvertTransformToNode(transform quartzcore.CATransform3D, node *raw.SCNNode) quartzcore.CATransform3D {
-	return x.inner.ConvertTransformToNode(transform, node)
-}
-
-// Converts a transform to the node’s local coordinate space from that of another node.
-//
-// ConvertTransformFromNode calls the underlying ConvertTransformFromNode.
-func (x *Node) ConvertTransformFromNode(transform quartzcore.CATransform3D, node *raw.SCNNode) quartzcore.CATransform3D {
-	return x.inner.ConvertTransformFromNode(transform, node)
-}
-
-// Searches the node’s child node subtree for objects intersecting a line segment between two specified points.
-//
-// HitTestWithSegmentFromPointToPointOptions calls the underlying HitTestWithSegmentFromPointToPointOptions.
-func (x *Node) HitTestWithSegmentFromPointToPointOptions(pointA raw.SCNVector3, pointB raw.SCNVector3, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.SCNHitTestResult] {
-	return x.inner.HitTestWithSegmentFromPointToPointOptions(pointA, pointB, options)
-}
-
-// @property name @abstract Determines the name of the receiver.
-//
-// Name calls the underlying Name.
+// Determines the name of the receiver.
 func (x *Node) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
 func (x *Node) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// @property light @abstract Determines the light attached to the receiver.
-//
-// Light calls the underlying Light.
+// Determines the light attached to the receiver.
 func (x *Node) Light() *Light {
-	_r := x.inner.Light()
-	if _r == nil {
-		return nil
-	}
-	return &Light{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("light"))
+	return LightFromID(_r)
 }
 
-// SetLight calls the underlying SetLight.
-func (x *Node) SetLight(light *raw.SCNLight) {
-	x.inner.SetLight(light)
+func (x *Node) SetLight(light *Light) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLight:"), objref.IDOf(light))
 }
 
-// Camera calls the underlying Camera.
 func (x *Node) Camera() *Camera {
-	_r := x.inner.Camera()
-	if _r == nil {
-		return nil
-	}
-	return &Camera{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("camera"))
+	return CameraFromID(_r)
 }
 
-// SetCamera calls the underlying SetCamera.
-func (x *Node) SetCamera(camera *raw.SCNCamera) {
-	x.inner.SetCamera(camera)
+func (x *Node) SetCamera(camera *Camera) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCamera:"), objref.IDOf(camera))
 }
 
-// @property geometry @abstract Returns the geometry attached to the receiver.
-//
-// Geometry calls the underlying Geometry.
+// Returns the geometry attached to the receiver.
 func (x *Node) Geometry() *Geometry {
-	_r := x.inner.Geometry()
-	if _r == nil {
-		return nil
-	}
-	return &Geometry{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("geometry"))
+	return GeometryFromID(_r)
 }
 
-// SetGeometry calls the underlying SetGeometry.
-func (x *Node) SetGeometry(geometry *raw.SCNGeometry) {
-	x.inner.SetGeometry(geometry)
+func (x *Node) SetGeometry(geometry *Geometry) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometry:"), objref.IDOf(geometry))
 }
 
-// @property skinner @abstract Returns the skinner attached to the receiver.
-//
-// Skinner calls the underlying Skinner.
+// Returns the skinner attached to the receiver.
 func (x *Node) Skinner() *Skinner {
-	_r := x.inner.Skinner()
-	if _r == nil {
-		return nil
-	}
-	return &Skinner{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skinner"))
+	return SkinnerFromID(_r)
 }
 
-// SetSkinner calls the underlying SetSkinner.
-func (x *Node) SetSkinner(skinner *raw.SCNSkinner) {
-	x.inner.SetSkinner(skinner)
+func (x *Node) SetSkinner(skinner *Skinner) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkinner:"), objref.IDOf(skinner))
 }
 
-// @property morpher @abstract Returns the morpher attached to the receiver.
-//
-// Morpher calls the underlying Morpher.
+// Returns the morpher attached to the receiver.
 func (x *Node) Morpher() *Morpher {
-	_r := x.inner.Morpher()
-	if _r == nil {
-		return nil
-	}
-	return &Morpher{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("morpher"))
+	return MorpherFromID(_r)
 }
 
-// SetMorpher calls the underlying SetMorpher.
-func (x *Node) SetMorpher(morpher *raw.SCNMorpher) {
-	x.inner.SetMorpher(morpher)
+func (x *Node) SetMorpher(morpher *Morpher) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMorpher:"), objref.IDOf(morpher))
 }
 
-// @property transform @abstract Determines the receiver's transform. Animatable. @discussion The transform is the combination of the position, rotation and scale defined below. So when the transform is set, the receiver's position, rotation and scale are changed to match the new transform.
-//
-// Transform calls the underlying Transform.
-func (x *Node) Transform() quartzcore.CATransform3D {
-	return x.inner.Transform()
-}
-
-// SetTransform calls the underlying SetTransform.
-func (x *Node) SetTransform(transform quartzcore.CATransform3D) {
-	x.inner.SetTransform(transform)
-}
-
-// @property worldTransform @abstract Determines the receiver's transform in world space (relative to the scene's root node). Animatable.
-//
-// WorldTransform calls the underlying WorldTransform.
-func (x *Node) WorldTransform() quartzcore.CATransform3D {
-	return x.inner.WorldTransform()
-}
-
-// @property position @abstract Determines the receiver's position. Animatable.
-//
-// Position calls the underlying Position.
-func (x *Node) Position() raw.SCNVector3 {
-	return x.inner.Position()
-}
-
-// SetPosition calls the underlying SetPosition.
-func (x *Node) SetPosition(position raw.SCNVector3) {
-	x.inner.SetPosition(position)
-}
-
-// @property worldPosition @abstract Determines the receiver's position in world space (relative to the scene's root node).
-//
-// WorldPosition calls the underlying WorldPosition.
-func (x *Node) WorldPosition() raw.SCNVector3 {
-	return x.inner.WorldPosition()
-}
-
-// SetWorldPosition calls the underlying SetWorldPosition.
-func (x *Node) SetWorldPosition(worldPosition raw.SCNVector3) {
-	x.inner.SetWorldPosition(worldPosition)
-}
-
-// @property rotation @abstract Determines the receiver's rotation. Animatable. @discussion The rotation is axis angle rotation. The three first components are the axis, the fourth one is the rotation (in radian).
-//
-// Rotation calls the underlying Rotation.
-func (x *Node) Rotation() raw.SCNVector4 {
-	return x.inner.Rotation()
-}
-
-// SetRotation calls the underlying SetRotation.
-func (x *Node) SetRotation(rotation raw.SCNVector4) {
-	x.inner.SetRotation(rotation)
-}
-
-// @property orientation @abstract Determines the receiver's orientation as a unit quaternion. Animatable.
-//
-// Orientation calls the underlying Orientation.
-func (x *Node) Orientation() raw.SCNVector4 {
-	return x.inner.Orientation()
-}
-
-// SetOrientation calls the underlying SetOrientation.
-func (x *Node) SetOrientation(orientation raw.SCNVector4) {
-	x.inner.SetOrientation(orientation)
-}
-
-// @property worldOrientation @abstract Determines the receiver's orientation in world space (relative to the scene's root node). Animatable.
-//
-// WorldOrientation calls the underlying WorldOrientation.
-func (x *Node) WorldOrientation() raw.SCNVector4 {
-	return x.inner.WorldOrientation()
-}
-
-// SetWorldOrientation calls the underlying SetWorldOrientation.
-func (x *Node) SetWorldOrientation(worldOrientation raw.SCNVector4) {
-	x.inner.SetWorldOrientation(worldOrientation)
-}
-
-// @property eulerAngles @abstract Determines the receiver's euler angles. Animatable. @dicussion The order of components in this vector matches the axes of rotation: 1. Pitch (the x component) is the rotation about the node's x-axis (in radians) 2. Yaw   (the y component) is the rotation about the node's y-axis (in radians) 3. Roll  (the z component) is the rotation about the node's z-axis (in radians) SceneKit applies these rotations in the reverse order of the components: 1. first roll 2. then yaw 3. then pitch
-//
-// EulerAngles calls the underlying EulerAngles.
-func (x *Node) EulerAngles() raw.SCNVector3 {
-	return x.inner.EulerAngles()
-}
-
-// SetEulerAngles calls the underlying SetEulerAngles.
-func (x *Node) SetEulerAngles(eulerAngles raw.SCNVector3) {
-	x.inner.SetEulerAngles(eulerAngles)
-}
-
-// @property scale @abstract Determines the receiver's scale. Animatable.
-//
-// Scale calls the underlying Scale.
-func (x *Node) Scale() raw.SCNVector3 {
-	return x.inner.Scale()
-}
-
-// SetScale calls the underlying SetScale.
-func (x *Node) SetScale(scale raw.SCNVector3) {
-	x.inner.SetScale(scale)
-}
-
-// @property pivot @abstract Determines the receiver's pivot. Animatable.
-//
-// Pivot calls the underlying Pivot.
-func (x *Node) Pivot() quartzcore.CATransform3D {
-	return x.inner.Pivot()
-}
-
-// SetPivot calls the underlying SetPivot.
-func (x *Node) SetPivot(pivot quartzcore.CATransform3D) {
-	x.inner.SetPivot(pivot)
-}
-
-// @property hidden @abstract Determines whether the receiver is displayed. Defaults to NO. Animatable.
-//
-// IsHidden calls the underlying IsHidden.
+// Determines whether the receiver is displayed. Defaults to NO. Animatable.
 func (x *Node) IsHidden() bool {
-	return x.inner.IsHidden()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+	return _r
 }
 
-// SetHidden calls the underlying SetHidden.
 func (x *Node) SetHidden(hidden bool) {
-	x.inner.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 }
 
-// @property opacity @abstract Determines the opacity of the receiver. Default is 1. Animatable.
-//
-// Opacity calls the underlying Opacity.
+// Determines the opacity of the receiver. Default is 1. Animatable.
 func (x *Node) Opacity() float64 {
-	return x.inner.Opacity()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("opacity"))
+	return _r
 }
 
-// SetOpacity calls the underlying SetOpacity.
 func (x *Node) SetOpacity(opacity float64) {
-	x.inner.SetOpacity(opacity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpacity:"), opacity)
 }
 
-// @property renderingOrder @abstract Determines the rendering order of the receiver. @discussion Nodes with greater rendering orders are rendered last. Defaults to 0.
-//
-// RenderingOrder calls the underlying RenderingOrder.
+// Determines the rendering order of the receiver. Nodes with greater rendering orders are rendered last. Defaults to 0.
 func (x *Node) RenderingOrder() int {
-	return x.inner.RenderingOrder()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("renderingOrder"))
+	return _r
 }
 
-// SetRenderingOrder calls the underlying SetRenderingOrder.
 func (x *Node) SetRenderingOrder(renderingOrder int) {
-	x.inner.SetRenderingOrder(renderingOrder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderingOrder:"), renderingOrder)
 }
 
-// @property castsShadow @abstract Determines if the node is rendered in shadow maps. Defaults to YES.
-//
-// CastsShadow calls the underlying CastsShadow.
+// Determines if the node is rendered in shadow maps. Defaults to YES.
 func (x *Node) CastsShadow() bool {
-	return x.inner.CastsShadow()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("castsShadow"))
+	return _r
 }
 
-// SetCastsShadow calls the underlying SetCastsShadow.
 func (x *Node) SetCastsShadow(castsShadow bool) {
-	x.inner.SetCastsShadow(castsShadow)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCastsShadow:"), castsShadow)
 }
 
-// @property movabilityHint @abstract Communicates to SceneKit’s rendering system about how you want to move content in your scene; it does not affect your ability to change the node’s position or add animations or physics to the node. Defaults to SCNMovabilityHintFixed.
-//
-// MovabilityHint calls the underlying MovabilityHint.
-func (x *Node) MovabilityHint() SCNMovabilityHint {
-	return SCNMovabilityHint(x.inner.MovabilityHint())
+// Communicates to SceneKit’s rendering system about how you want to move content in your scene; it does not affect your ability to change the node’s position or add animations or physics to the node. Defaults to SCNMovabilityHintFixed.
+func (x *Node) MovabilityHint() MovabilityHint {
+	_r := objc.Send[MovabilityHint](objref.IDOf(x), objc.RegisterName("movabilityHint"))
+	return _r
 }
 
-// SetMovabilityHint calls the underlying SetMovabilityHint.
-func (x *Node) SetMovabilityHint(movabilityHint SCNMovabilityHint) {
-	x.inner.SetMovabilityHint(raw.SCNMovabilityHint(movabilityHint))
+func (x *Node) SetMovabilityHint(movabilityHint MovabilityHint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMovabilityHint:"), movabilityHint)
 }
 
-// @property parentNode @abstract Returns the parent node of the receiver.
-//
-// ParentNode calls the underlying ParentNode.
+// Returns the parent node of the receiver.
 func (x *Node) ParentNode() *Node {
-	_r := x.inner.ParentNode()
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentNode"))
+	return NodeFromID(_r)
 }
 
-// @property childNodes @abstract Returns the child node array of the receiver.
+// Returns the child node array of the receiver.
 //
 // ChildNodes returns the collection as a Go slice.
 func (x *Node) ChildNodes() []*Node {
-	arr := x.inner.ChildNodes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Node {
-		return &Node{inner: raw.SCNNodeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childNodes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Node { return NodeFromID(_id) })
 }
 
-// @property physicsBody @abstract The description of the physics body of the receiver. @discussion Default is nil.
-//
-// PhysicsBody calls the underlying PhysicsBody.
+// The description of the physics body of the receiver. Default is nil.
 func (x *Node) PhysicsBody() *PhysicsBody {
-	_r := x.inner.PhysicsBody()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsBody{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("physicsBody"))
+	return PhysicsBodyFromID(_r)
 }
 
-// SetPhysicsBody calls the underlying SetPhysicsBody.
-func (x *Node) SetPhysicsBody(physicsBody *raw.SCNPhysicsBody) {
-	x.inner.SetPhysicsBody(physicsBody)
+func (x *Node) SetPhysicsBody(physicsBody *PhysicsBody) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 }
 
-// @property physicsField @abstract The description of the physics field of the receiver. @discussion Default is nil.
-//
-// PhysicsField calls the underlying PhysicsField.
+// The description of the physics field of the receiver. Default is nil.
 func (x *Node) PhysicsField() *PhysicsField {
-	_r := x.inner.PhysicsField()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsField{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("physicsField"))
+	return PhysicsFieldFromID(_r)
 }
 
-// SetPhysicsField calls the underlying SetPhysicsField.
-func (x *Node) SetPhysicsField(physicsField *raw.SCNPhysicsField) {
-	x.inner.SetPhysicsField(physicsField)
+func (x *Node) SetPhysicsField(physicsField *PhysicsField) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsField:"), objref.IDOf(physicsField))
 }
 
-// @property constraints @abstract An array of SCNConstraint that are applied to the receiver. @discussion Adding or removing a constraint can be implicitly animated based on the current transaction.
+// An array of SCNConstraint that are applied to the receiver. Adding or removing a constraint can be implicitly animated based on the current transaction.
 //
 // Constraints returns the collection as a Go slice.
 func (x *Node) Constraints() []*Constraint {
-	arr := x.inner.Constraints()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Constraint {
-		return &Constraint{inner: raw.SCNConstraintFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraints"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Constraint { return ConstraintFromID(_id) })
 }
 
-// SetConstraints calls the underlying SetConstraints.
-func (x *Node) SetConstraints(constraints ...ConstraintProvider) {
-	_ptrs := make([]objc.ID, len(constraints))
-	for _i, _v := range constraints {
-		_ptrs[_i] = _v.asConstraint().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.SCNConstraint]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.SCNConstraint](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.SCNConstraint](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetConstraints(_arg0)
+func (x *Node) SetConstraints(constraints []*Constraint) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), purego.SliceToNSArray(constraints, func(_v *Constraint) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property filters @abstract An array of Core Image filters that are applied to the rendering of the receiver and its child nodes. Animatable. @discussion Defaults to nil. Filter properties should be modified by calling setValue:forKeyPath: on each node that the filter is attached to. If the inputs of the filter are modified directly after the filter is attached to a node, the behavior is undefined.
+// An array of Core Image filters that are applied to the rendering of the receiver and its child nodes. Animatable. Defaults to nil. Filter properties should be modified by calling setValue:forKeyPath: on each node that the filter is attached to. If the inputs of the filter are modified directly after the filter is attached to a node, the behavior is undefined.
 //
 // Filters returns the collection as a Go slice.
-func (x *Node) Filters() []*coreimage.CIFilter {
-	arr := x.inner.Filters()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *coreimage.CIFilter {
-		return coreimage.CIFilterFromID(purego.Retain(_id))
-	})
+func (x *Node) Filters() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filters"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetFilters calls the underlying SetFilters.
-func (x *Node) SetFilters(filters *foundation.NSArray[*coreimage.CIFilter]) {
-	x.inner.SetFilters(filters)
+func (x *Node) SetFilters(filters []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilters:"), purego.SliceToNSArray(filters, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @property presentationNode @abstract Returns the presentation node. @discussion Returns a copy of the node containing all the properties as they were at the start of the current transaction, with any active animations applied. This gives a close approximation to the version of the node that is currently displayed. The effect of attempting to modify the returned node in any way is undefined. The returned node has no parent and no child nodes.
-//
-// PresentationNode calls the underlying PresentationNode.
+// Returns the presentation node. Returns a copy of the node containing all the properties as they were at the start of the current transaction, with any active animations applied. This gives a close approximation to the version of the node that is currently displayed. The effect of attempting to modify the returned node in any way is undefined. The returned node has no parent and no child nodes.
 func (x *Node) PresentationNode() *Node {
-	_r := x.inner.PresentationNode()
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentationNode"))
+	return NodeFromID(_r)
 }
 
-// @property paused @abstract Controls whether or not the node's actions and animations are updated or paused. Defaults to NO.
-//
-// IsPaused calls the underlying IsPaused.
+// Controls whether or not the node's actions and animations are updated or paused. Defaults to NO.
 func (x *Node) IsPaused() bool {
-	return x.inner.IsPaused()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
+	return _r
 }
 
-// SetPaused calls the underlying SetPaused.
 func (x *Node) SetPaused(paused bool) {
-	x.inner.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 }
 
-// @property rendererDelegate @abstract Specifies the receiver's renderer delegate object. @discussion Setting a renderer delegate prevents the SceneKit renderer from drawing the node and lets you use custom OpenGL code instead. The preferred way to customize the rendering is to tweak the material properties of the different materials of the node's geometry. SCNMaterial conforms to the SCNShadable protocol and allows for more advanced rendering using GLSL. You would typically use a renderer delegate with a node that has no geometry and only serves as a location in space. An example would be attaching a particle system to that node and render it with custom OpenGL code.
-//
-// RendererDelegate calls the underlying RendererDelegate.
-func (x *Node) RendererDelegate() raw.SCNNodeRendererDelegate {
-	return x.inner.RendererDelegate()
+// Defines what logical 'categories' the receiver belongs too. Defaults to 1. Categories can be used to 1. exclude nodes from the influence of a given light (see SCNLight.categoryBitMask) 2. include/exclude nodes from render passes (see SCNTechnique.h) 3. specify which nodes to use when hit-testing (see SCNHitTestOptionCategoryBitMask)
+func (x *Node) CategoryBitMask() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("categoryBitMask"))
+	return _r
 }
 
-// SetRendererDelegate calls the underlying SetRendererDelegate.
-func (x *Node) SetRendererDelegate(rendererDelegate raw.SCNNodeRendererDelegate) {
-	x.inner.SetRendererDelegate(rendererDelegate)
+func (x *Node) SetCategoryBitMask(categoryBitMask int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
 }
 
-// @property categoryBitMask @abstract Defines what logical 'categories' the receiver belongs too. Defaults to 1. @discussion Categories can be used to 1. exclude nodes from the influence of a given light (see SCNLight.categoryBitMask) 2. include/exclude nodes from render passes (see SCNTechnique.h) 3. specify which nodes to use when hit-testing (see SCNHitTestOptionCategoryBitMask)
-//
-// CategoryBitMask calls the underlying CategoryBitMask.
-func (x *Node) CategoryBitMask() uint {
-	return x.inner.CategoryBitMask()
+func (x *Node) FocusBehavior() NodeFocusBehavior {
+	_r := objc.Send[NodeFocusBehavior](objref.IDOf(x), objc.RegisterName("focusBehavior"))
+	return _r
 }
 
-// SetCategoryBitMask calls the underlying SetCategoryBitMask.
-func (x *Node) SetCategoryBitMask(categoryBitMask uint) {
-	x.inner.SetCategoryBitMask(categoryBitMask)
-}
-
-// Changes the node’s orientation so that its local forward vector points toward the specified location.
-//
-// LookAt calls the underlying LookAt.
-func (x *Node) LookAt(worldTarget raw.SCNVector3) {
-	x.inner.LookAt(worldTarget)
-}
-
-// Changes the node’s orientation so that the specified forward vector points toward the specified location.
-//
-// LookAtUpLocalFront calls the underlying LookAtUpLocalFront.
-func (x *Node) LookAtUpLocalFront(worldTarget raw.SCNVector3, worldUp raw.SCNVector3, localFront raw.SCNVector3) {
-	x.inner.LookAtUpLocalFront(worldTarget, worldUp, localFront)
-}
-
-// Changes the node’s position relative to its current position.
-//
-// LocalTranslateBy calls the underlying LocalTranslateBy.
-func (x *Node) LocalTranslateBy(translation raw.SCNVector3) {
-	x.inner.LocalTranslateBy(translation)
-}
-
-// Changes the node’s orientation relative to its current orientation.
-//
-// LocalRotateBy calls the underlying LocalRotateBy.
-func (x *Node) LocalRotateBy(rotation raw.SCNVector4) {
-	x.inner.LocalRotateBy(rotation)
-}
-
-// Changes the node’s position and orientation, relative to its current transform, through a rotation around the specified point in scene space.
-//
-// RotateByAroundTarget calls the underlying RotateByAroundTarget.
-func (x *Node) RotateByAroundTarget(worldRotation raw.SCNVector4, worldTarget raw.SCNVector3) {
-	x.inner.RotateByAroundTarget(worldRotation, worldTarget)
-}
-
-// @property worldUp @abstract The local unit Y axis (0, 1, 0) in world space.
-//
-// WorldUp calls the underlying WorldUp.
-func (x *Node) WorldUp() raw.SCNVector3 {
-	return x.inner.WorldUp()
-}
-
-// @property worldRight @abstract The local unit X axis (1, 0, 0) in world space.
-//
-// WorldRight calls the underlying WorldRight.
-func (x *Node) WorldRight() raw.SCNVector3 {
-	return x.inner.WorldRight()
-}
-
-// @property worldFront @abstract The local unit -Z axis (0, 0, -1) in world space.
-//
-// WorldFront calls the underlying WorldFront.
-func (x *Node) WorldFront() raw.SCNVector3 {
-	return x.inner.WorldFront()
-}
-
-// Converts a position from the node’s local coordinate space to that of another node.
-//
-// SimdConvertPositionToNode calls the underlying SimdConvertPositionToNode.
-func (x *Node) SimdConvertPositionToNode(position unsafe.Pointer, node *raw.SCNNode) unsafe.Pointer {
-	return x.inner.SimdConvertPositionToNode(position, node)
-}
-
-// Converts a position to the node’s local coordinate space from that of another node.
-//
-// SimdConvertPositionFromNode calls the underlying SimdConvertPositionFromNode.
-func (x *Node) SimdConvertPositionFromNode(position unsafe.Pointer, node *raw.SCNNode) unsafe.Pointer {
-	return x.inner.SimdConvertPositionFromNode(position, node)
-}
-
-// Converts a direction vector from the node’s local coordinate space to that of another node.
-//
-// SimdConvertVectorToNode calls the underlying SimdConvertVectorToNode.
-func (x *Node) SimdConvertVectorToNode(vector unsafe.Pointer, node *raw.SCNNode) unsafe.Pointer {
-	return x.inner.SimdConvertVectorToNode(vector, node)
-}
-
-// Converts a direction vector to the node’s local coordinate space from that of another node.
-//
-// SimdConvertVectorFromNode calls the underlying SimdConvertVectorFromNode.
-func (x *Node) SimdConvertVectorFromNode(vector unsafe.Pointer, node *raw.SCNNode) unsafe.Pointer {
-	return x.inner.SimdConvertVectorFromNode(vector, node)
-}
-
-// Converts a transform from the node’s local coordinate space to that of another node.
-//
-// SimdConvertTransformToNode calls the underlying SimdConvertTransformToNode.
-func (x *Node) SimdConvertTransformToNode(transform unsafe.Pointer, node *raw.SCNNode) unsafe.Pointer {
-	return x.inner.SimdConvertTransformToNode(transform, node)
-}
-
-// Converts a transform to the node’s local coordinate space from that of another node.
-//
-// SimdConvertTransformFromNode calls the underlying SimdConvertTransformFromNode.
-func (x *Node) SimdConvertTransformFromNode(transform unsafe.Pointer, node *raw.SCNNode) unsafe.Pointer {
-	return x.inner.SimdConvertTransformFromNode(transform, node)
-}
-
-// Changes the node’s orientation so that its local forward vector points toward the specified location.
-//
-// SimdLookAt calls the underlying SimdLookAt.
-func (x *Node) SimdLookAt(worldTarget unsafe.Pointer) {
-	x.inner.SimdLookAt(worldTarget)
-}
-
-// Changes the node’s orientation so that the specified forward vector points toward the specified location.
-//
-// SimdLookAtUpLocalFront calls the underlying SimdLookAtUpLocalFront.
-func (x *Node) SimdLookAtUpLocalFront(worldTarget unsafe.Pointer, worldUp unsafe.Pointer, localFront unsafe.Pointer) {
-	x.inner.SimdLookAtUpLocalFront(worldTarget, worldUp, localFront)
-}
-
-// Changes the node’s position relative to its current position.
-//
-// SimdLocalTranslateBy calls the underlying SimdLocalTranslateBy.
-func (x *Node) SimdLocalTranslateBy(translation unsafe.Pointer) {
-	x.inner.SimdLocalTranslateBy(translation)
-}
-
-// Changes the node’s orientation relative to its current orientation.
-//
-// SimdLocalRotateBy calls the underlying SimdLocalRotateBy.
-func (x *Node) SimdLocalRotateBy(rotation unsafe.Pointer) {
-	x.inner.SimdLocalRotateBy(rotation)
-}
-
-// Changes the node’s position and orientation, relative to its current transform, through a rotation around the specified point in scene space.
-//
-// SimdRotateByAroundTarget calls the underlying SimdRotateByAroundTarget.
-func (x *Node) SimdRotateByAroundTarget(worldRotation unsafe.Pointer, worldTarget unsafe.Pointer) {
-	x.inner.SimdRotateByAroundTarget(worldRotation, worldTarget)
-}
-
-// @abstract Determines the receiver's transform. Animatable. @discussion The transform is the combination of the position, rotation and scale defined below. So when the transform is set, the receiver's position, rotation and scale are changed to match the new transform.
-//
-// SimdTransform calls the underlying SimdTransform.
-func (x *Node) SimdTransform() unsafe.Pointer {
-	return x.inner.SimdTransform()
-}
-
-// SetSimdTransform calls the underlying SetSimdTransform.
-func (x *Node) SetSimdTransform(simdTransform unsafe.Pointer) {
-	x.inner.SetSimdTransform(simdTransform)
-}
-
-// @abstract Determines the receiver's position. Animatable.
-//
-// SimdPosition calls the underlying SimdPosition.
-func (x *Node) SimdPosition() unsafe.Pointer {
-	return x.inner.SimdPosition()
-}
-
-// SetSimdPosition calls the underlying SetSimdPosition.
-func (x *Node) SetSimdPosition(simdPosition unsafe.Pointer) {
-	x.inner.SetSimdPosition(simdPosition)
-}
-
-// @abstract Determines the receiver's rotation. Animatable. @discussion The rotation is axis angle rotation. The three first components are the axis, the fourth one is the rotation (in radian).
-//
-// SimdRotation calls the underlying SimdRotation.
-func (x *Node) SimdRotation() unsafe.Pointer {
-	return x.inner.SimdRotation()
-}
-
-// SetSimdRotation calls the underlying SetSimdRotation.
-func (x *Node) SetSimdRotation(simdRotation unsafe.Pointer) {
-	x.inner.SetSimdRotation(simdRotation)
-}
-
-// @abstract Determines the receiver's orientation as a unit quaternion. Animatable.
-//
-// SimdOrientation calls the underlying SimdOrientation.
-func (x *Node) SimdOrientation() unsafe.Pointer {
-	return x.inner.SimdOrientation()
-}
-
-// SetSimdOrientation calls the underlying SetSimdOrientation.
-func (x *Node) SetSimdOrientation(simdOrientation unsafe.Pointer) {
-	x.inner.SetSimdOrientation(simdOrientation)
-}
-
-// @abstract Determines the receiver's euler angles. Animatable. @dicussion The order of components in this vector matches the axes of rotation: 1. Pitch (the x component) is the rotation about the node's x-axis (in radians) 2. Yaw   (the y component) is the rotation about the node's y-axis (in radians) 3. Roll  (the z component) is the rotation about the node's z-axis (in radians) SceneKit applies these rotations in the reverse order of the components: 1. first roll 2. then yaw 3. then pitch
-//
-// SimdEulerAngles calls the underlying SimdEulerAngles.
-func (x *Node) SimdEulerAngles() unsafe.Pointer {
-	return x.inner.SimdEulerAngles()
-}
-
-// SetSimdEulerAngles calls the underlying SetSimdEulerAngles.
-func (x *Node) SetSimdEulerAngles(simdEulerAngles unsafe.Pointer) {
-	x.inner.SetSimdEulerAngles(simdEulerAngles)
-}
-
-// @abstract Determines the receiver's scale. Animatable.
-//
-// SimdScale calls the underlying SimdScale.
-func (x *Node) SimdScale() unsafe.Pointer {
-	return x.inner.SimdScale()
-}
-
-// SetSimdScale calls the underlying SetSimdScale.
-func (x *Node) SetSimdScale(simdScale unsafe.Pointer) {
-	x.inner.SetSimdScale(simdScale)
-}
-
-// @abstract Determines the receiver's pivot. Animatable.
-//
-// SimdPivot calls the underlying SimdPivot.
-func (x *Node) SimdPivot() unsafe.Pointer {
-	return x.inner.SimdPivot()
-}
-
-// SetSimdPivot calls the underlying SetSimdPivot.
-func (x *Node) SetSimdPivot(simdPivot unsafe.Pointer) {
-	x.inner.SetSimdPivot(simdPivot)
-}
-
-// @abstract Determines the receiver's position in world space (relative to the scene's root node).
-//
-// SimdWorldPosition calls the underlying SimdWorldPosition.
-func (x *Node) SimdWorldPosition() unsafe.Pointer {
-	return x.inner.SimdWorldPosition()
-}
-
-// SetSimdWorldPosition calls the underlying SetSimdWorldPosition.
-func (x *Node) SetSimdWorldPosition(simdWorldPosition unsafe.Pointer) {
-	x.inner.SetSimdWorldPosition(simdWorldPosition)
-}
-
-// @abstract Determines the receiver's orientation in world space (relative to the scene's root node). Animatable.
-//
-// SimdWorldOrientation calls the underlying SimdWorldOrientation.
-func (x *Node) SimdWorldOrientation() unsafe.Pointer {
-	return x.inner.SimdWorldOrientation()
-}
-
-// SetSimdWorldOrientation calls the underlying SetSimdWorldOrientation.
-func (x *Node) SetSimdWorldOrientation(simdWorldOrientation unsafe.Pointer) {
-	x.inner.SetSimdWorldOrientation(simdWorldOrientation)
-}
-
-// @abstract Determines the receiver's transform in world space (relative to the scene's root node). Animatable.
-//
-// SimdWorldTransform calls the underlying SimdWorldTransform.
-func (x *Node) SimdWorldTransform() unsafe.Pointer {
-	return x.inner.SimdWorldTransform()
-}
-
-// SetSimdWorldTransform calls the underlying SetSimdWorldTransform.
-func (x *Node) SetSimdWorldTransform(simdWorldTransform unsafe.Pointer) {
-	x.inner.SetSimdWorldTransform(simdWorldTransform)
-}
-
-// SimdWorldUp calls the underlying SimdWorldUp.
-func (x *Node) SimdWorldUp() unsafe.Pointer {
-	return x.inner.SimdWorldUp()
-}
-
-// SimdWorldRight calls the underlying SimdWorldRight.
-func (x *Node) SimdWorldRight() unsafe.Pointer {
-	return x.inner.SimdWorldRight()
-}
-
-// SimdWorldFront calls the underlying SimdWorldFront.
-func (x *Node) SimdWorldFront() unsafe.Pointer {
-	return x.inner.SimdWorldFront()
-}
-
-// FocusBehavior calls the underlying FocusBehavior.
-func (x *Node) FocusBehavior() SCNNodeFocusBehavior {
-	return SCNNodeFocusBehavior(x.inner.FocusBehavior())
-}
-
-// SetFocusBehavior calls the underlying SetFocusBehavior.
-func (x *Node) SetFocusBehavior(focusBehavior SCNNodeFocusBehavior) {
-	x.inner.SetFocusBehavior(raw.SCNNodeFocusBehavior(focusBehavior))
+func (x *Node) SetFocusBehavior(focusBehavior NodeFocusBehavior) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusBehavior:"), focusBehavior)
 }
 
 // Attaches a particle system to the node.
-//
-// AddParticleSystem calls the underlying AddParticleSystem.
-func (x *Node) AddParticleSystem(system *raw.SCNParticleSystem) {
-	x.inner.AddParticleSystem(system)
+func (x *Node) AddParticleSystem(system *ParticleSystem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addParticleSystem:"), objref.IDOf(system))
 }
 
 // Removes any particle systems directly attached to the node.
-//
-// RemoveAllParticleSystems calls the underlying RemoveAllParticleSystems.
 func (x *Node) RemoveAllParticleSystems() {
-	x.inner.RemoveAllParticleSystems()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllParticleSystems"))
 }
 
 // Removes a particle system attached to the node.
-//
-// RemoveParticleSystem calls the underlying RemoveParticleSystem.
-func (x *Node) RemoveParticleSystem(system *raw.SCNParticleSystem) {
-	x.inner.RemoveParticleSystem(system)
+func (x *Node) RemoveParticleSystem(system *ParticleSystem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeParticleSystem:"), objref.IDOf(system))
 }
 
 // ParticleSystems returns the collection as a Go slice.
 func (x *Node) ParticleSystems() []*ParticleSystem {
-	arr := x.inner.ParticleSystems()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ParticleSystem {
-		return &ParticleSystem{inner: raw.SCNParticleSystemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("particleSystems"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ParticleSystem { return ParticleSystemFromID(_id) })
 }
 
 // Adds the specified auto player to the node and begins playback.
-//
-// AddAudioPlayer calls the underlying AddAudioPlayer.
-func (x *Node) AddAudioPlayer(player *raw.SCNAudioPlayer) {
-	x.inner.AddAudioPlayer(player)
+func (x *Node) AddAudioPlayer(player *AudioPlayer) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAudioPlayer:"), objref.IDOf(player))
 }
 
 // Removes all audio players attached to the node, stopping playback.
-//
-// RemoveAllAudioPlayers calls the underlying RemoveAllAudioPlayers.
 func (x *Node) RemoveAllAudioPlayers() {
-	x.inner.RemoveAllAudioPlayers()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllAudioPlayers"))
 }
 
 // Removes the specified audio player from the node, stopping playback.
-//
-// RemoveAudioPlayer calls the underlying RemoveAudioPlayer.
-func (x *Node) RemoveAudioPlayer(player *raw.SCNAudioPlayer) {
-	x.inner.RemoveAudioPlayer(player)
+func (x *Node) RemoveAudioPlayer(player *AudioPlayer) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAudioPlayer:"), objref.IDOf(player))
 }
 
 // AudioPlayers returns the collection as a Go slice.
 func (x *Node) AudioPlayers() []*AudioPlayer {
-	arr := x.inner.AudioPlayers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AudioPlayer {
-		return &AudioPlayer{inner: raw.SCNAudioPlayerFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioPlayers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AudioPlayer { return AudioPlayerFromID(_id) })
 }
-
-func (x *Node) asNode() *raw.SCNNode { return x.inner }
 
 // Nodeable is the interface implemented by [Node], for mocking and DI.
 type Nodeable interface {
-	Unwrap() *raw.SCNNode
+	obj.Object
 	WithName(name string) *Node
 	WithLight(light *Light) *Node
 	WithCamera(camera *Camera) *Node
 	WithGeometry(geometry GeometryProvider) *Node
 	WithSkinner(skinner *Skinner) *Node
 	WithMorpher(morpher *Morpher) *Node
-	WithTransform(transform quartzcore.CATransform3D) *Node
-	WithWorldTransform(worldTransform quartzcore.CATransform3D) *Node
-	WithPosition(position raw.SCNVector3) *Node
-	WithWorldPosition(worldPosition raw.SCNVector3) *Node
-	WithRotation(rotation raw.SCNVector4) *Node
-	WithOrientation(orientation raw.SCNVector4) *Node
-	WithWorldOrientation(worldOrientation raw.SCNVector4) *Node
-	WithEulerAngles(eulerAngles raw.SCNVector3) *Node
-	WithScale(scale raw.SCNVector3) *Node
-	WithPivot(pivot quartzcore.CATransform3D) *Node
 	WithHidden(hidden bool) *Node
 	WithOpacity(opacity float64) *Node
 	WithRenderingOrder(renderingOrder int) *Node
 	WithCastsShadow(castsShadow bool) *Node
-	WithMovabilityHint(movabilityHint SCNMovabilityHint) *Node
+	WithMovabilityHint(movabilityHint MovabilityHint) *Node
 	WithPhysicsBody(physicsBody *PhysicsBody) *Node
 	WithPhysicsField(physicsField *PhysicsField) *Node
 	WithConstraints(items ...ConstraintProvider) *Node
-	WithFilters(items ...*coreimage.CIFilter) *Node
+	WithFilters(items ...obj.Object) *Node
 	WithPaused(paused bool) *Node
-	WithRendererDelegate(rendererDelegate raw.SCNNodeRendererDelegate) *Node
-	WithCategoryBitMask(categoryBitMask uint) *Node
-	WithFocusBehavior(focusBehavior SCNNodeFocusBehavior) *Node
+	WithCategoryBitMask(categoryBitMask int) *Node
+	WithFocusBehavior(focusBehavior NodeFocusBehavior) *Node
 	Clone() *Node
 	FlattenedClone() *Node
-	SetWorldTransform(worldTransform quartzcore.CATransform3D)
-	AddChildNode(child *raw.SCNNode)
-	InsertChildNodeAtIndex(child *raw.SCNNode, index uint)
+	AddChildNode(child *Node)
+	InsertChildNodeAtIndex(child *Node, index int)
 	RemoveFromParentNode()
-	ReplaceChildNodeWith(oldChild *raw.SCNNode, newChild *raw.SCNNode)
+	ReplaceChildNodeWith(oldChild *Node, newChild *Node)
 	ChildNodeWithNameRecursively(name string, recursively bool) *Node
-	ChildNodesPassingTest(predicate func(*raw.SCNNode, *bool) bool) *foundation.NSArray[*raw.SCNNode]
-	EnumerateChildNodesUsing(block func(*raw.SCNNode, *bool))
-	EnumerateHierarchyUsing(block func(*raw.SCNNode, *bool))
-	ConvertPositionToNode(position raw.SCNVector3, node *raw.SCNNode) raw.SCNVector3
-	ConvertPositionFromNode(position raw.SCNVector3, node *raw.SCNNode) raw.SCNVector3
-	ConvertVectorToNode(vector raw.SCNVector3, node *raw.SCNNode) raw.SCNVector3
-	ConvertVectorFromNode(vector raw.SCNVector3, node *raw.SCNNode) raw.SCNVector3
-	ConvertTransformToNode(transform quartzcore.CATransform3D, node *raw.SCNNode) quartzcore.CATransform3D
-	ConvertTransformFromNode(transform quartzcore.CATransform3D, node *raw.SCNNode) quartzcore.CATransform3D
-	HitTestWithSegmentFromPointToPointOptions(pointA raw.SCNVector3, pointB raw.SCNVector3, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.SCNHitTestResult]
+	ChildNodesPassingTest(predicate func(obj.Object, *bool) bool) []*Node
+	EnumerateChildNodesUsing(block func(obj.Object, *bool))
+	EnumerateHierarchyUsing(block func(obj.Object, *bool))
 	Name() string
 	SetName(name string)
 	Light() *Light
-	SetLight(light *raw.SCNLight)
+	SetLight(light *Light)
 	Camera() *Camera
-	SetCamera(camera *raw.SCNCamera)
+	SetCamera(camera *Camera)
 	Geometry() *Geometry
-	SetGeometry(geometry *raw.SCNGeometry)
+	SetGeometry(geometry *Geometry)
 	Skinner() *Skinner
-	SetSkinner(skinner *raw.SCNSkinner)
+	SetSkinner(skinner *Skinner)
 	Morpher() *Morpher
-	SetMorpher(morpher *raw.SCNMorpher)
-	Transform() quartzcore.CATransform3D
-	SetTransform(transform quartzcore.CATransform3D)
-	WorldTransform() quartzcore.CATransform3D
-	Position() raw.SCNVector3
-	SetPosition(position raw.SCNVector3)
-	WorldPosition() raw.SCNVector3
-	SetWorldPosition(worldPosition raw.SCNVector3)
-	Rotation() raw.SCNVector4
-	SetRotation(rotation raw.SCNVector4)
-	Orientation() raw.SCNVector4
-	SetOrientation(orientation raw.SCNVector4)
-	WorldOrientation() raw.SCNVector4
-	SetWorldOrientation(worldOrientation raw.SCNVector4)
-	EulerAngles() raw.SCNVector3
-	SetEulerAngles(eulerAngles raw.SCNVector3)
-	Scale() raw.SCNVector3
-	SetScale(scale raw.SCNVector3)
-	Pivot() quartzcore.CATransform3D
-	SetPivot(pivot quartzcore.CATransform3D)
+	SetMorpher(morpher *Morpher)
 	IsHidden() bool
 	SetHidden(hidden bool)
 	Opacity() float64
@@ -1294,76 +565,32 @@ type Nodeable interface {
 	SetRenderingOrder(renderingOrder int)
 	CastsShadow() bool
 	SetCastsShadow(castsShadow bool)
-	MovabilityHint() SCNMovabilityHint
-	SetMovabilityHint(movabilityHint SCNMovabilityHint)
+	MovabilityHint() MovabilityHint
+	SetMovabilityHint(movabilityHint MovabilityHint)
 	ParentNode() *Node
 	ChildNodes() []*Node
 	PhysicsBody() *PhysicsBody
-	SetPhysicsBody(physicsBody *raw.SCNPhysicsBody)
+	SetPhysicsBody(physicsBody *PhysicsBody)
 	PhysicsField() *PhysicsField
-	SetPhysicsField(physicsField *raw.SCNPhysicsField)
+	SetPhysicsField(physicsField *PhysicsField)
 	Constraints() []*Constraint
-	SetConstraints(constraints ...ConstraintProvider)
-	Filters() []*coreimage.CIFilter
-	SetFilters(filters *foundation.NSArray[*coreimage.CIFilter])
+	SetConstraints(constraints []*Constraint)
+	Filters() []obj.Object
+	SetFilters(filters []obj.Object)
 	PresentationNode() *Node
 	IsPaused() bool
 	SetPaused(paused bool)
-	RendererDelegate() raw.SCNNodeRendererDelegate
-	SetRendererDelegate(rendererDelegate raw.SCNNodeRendererDelegate)
-	CategoryBitMask() uint
-	SetCategoryBitMask(categoryBitMask uint)
-	LookAt(worldTarget raw.SCNVector3)
-	LookAtUpLocalFront(worldTarget raw.SCNVector3, worldUp raw.SCNVector3, localFront raw.SCNVector3)
-	LocalTranslateBy(translation raw.SCNVector3)
-	LocalRotateBy(rotation raw.SCNVector4)
-	RotateByAroundTarget(worldRotation raw.SCNVector4, worldTarget raw.SCNVector3)
-	WorldUp() raw.SCNVector3
-	WorldRight() raw.SCNVector3
-	WorldFront() raw.SCNVector3
-	SimdConvertPositionToNode(position unsafe.Pointer, node *raw.SCNNode) unsafe.Pointer
-	SimdConvertPositionFromNode(position unsafe.Pointer, node *raw.SCNNode) unsafe.Pointer
-	SimdConvertVectorToNode(vector unsafe.Pointer, node *raw.SCNNode) unsafe.Pointer
-	SimdConvertVectorFromNode(vector unsafe.Pointer, node *raw.SCNNode) unsafe.Pointer
-	SimdConvertTransformToNode(transform unsafe.Pointer, node *raw.SCNNode) unsafe.Pointer
-	SimdConvertTransformFromNode(transform unsafe.Pointer, node *raw.SCNNode) unsafe.Pointer
-	SimdLookAt(worldTarget unsafe.Pointer)
-	SimdLookAtUpLocalFront(worldTarget unsafe.Pointer, worldUp unsafe.Pointer, localFront unsafe.Pointer)
-	SimdLocalTranslateBy(translation unsafe.Pointer)
-	SimdLocalRotateBy(rotation unsafe.Pointer)
-	SimdRotateByAroundTarget(worldRotation unsafe.Pointer, worldTarget unsafe.Pointer)
-	SimdTransform() unsafe.Pointer
-	SetSimdTransform(simdTransform unsafe.Pointer)
-	SimdPosition() unsafe.Pointer
-	SetSimdPosition(simdPosition unsafe.Pointer)
-	SimdRotation() unsafe.Pointer
-	SetSimdRotation(simdRotation unsafe.Pointer)
-	SimdOrientation() unsafe.Pointer
-	SetSimdOrientation(simdOrientation unsafe.Pointer)
-	SimdEulerAngles() unsafe.Pointer
-	SetSimdEulerAngles(simdEulerAngles unsafe.Pointer)
-	SimdScale() unsafe.Pointer
-	SetSimdScale(simdScale unsafe.Pointer)
-	SimdPivot() unsafe.Pointer
-	SetSimdPivot(simdPivot unsafe.Pointer)
-	SimdWorldPosition() unsafe.Pointer
-	SetSimdWorldPosition(simdWorldPosition unsafe.Pointer)
-	SimdWorldOrientation() unsafe.Pointer
-	SetSimdWorldOrientation(simdWorldOrientation unsafe.Pointer)
-	SimdWorldTransform() unsafe.Pointer
-	SetSimdWorldTransform(simdWorldTransform unsafe.Pointer)
-	SimdWorldUp() unsafe.Pointer
-	SimdWorldRight() unsafe.Pointer
-	SimdWorldFront() unsafe.Pointer
-	FocusBehavior() SCNNodeFocusBehavior
-	SetFocusBehavior(focusBehavior SCNNodeFocusBehavior)
-	AddParticleSystem(system *raw.SCNParticleSystem)
+	CategoryBitMask() int
+	SetCategoryBitMask(categoryBitMask int)
+	FocusBehavior() NodeFocusBehavior
+	SetFocusBehavior(focusBehavior NodeFocusBehavior)
+	AddParticleSystem(system *ParticleSystem)
 	RemoveAllParticleSystems()
-	RemoveParticleSystem(system *raw.SCNParticleSystem)
+	RemoveParticleSystem(system *ParticleSystem)
 	ParticleSystems() []*ParticleSystem
-	AddAudioPlayer(player *raw.SCNAudioPlayer)
+	AddAudioPlayer(player *AudioPlayer)
 	RemoveAllAudioPlayers()
-	RemoveAudioPlayer(player *raw.SCNAudioPlayer)
+	RemoveAudioPlayer(player *AudioPlayer)
 	AudioPlayers() []*AudioPlayer
 }
 

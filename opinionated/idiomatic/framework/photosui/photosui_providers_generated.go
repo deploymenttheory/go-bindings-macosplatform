@@ -5,10 +5,10 @@
 package photosui
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// ProjectElementProvider is implemented by ProjectElement and any idiomatic type wrapping a PHProjectElement subclass.
+// ProjectElementProvider is accepted wherever a PHProjectElement (or one of its subclasses) is expected.
 type ProjectElementProvider interface {
-	asProjectElement() *raw.PHProjectElement
+	objref.Object
 }

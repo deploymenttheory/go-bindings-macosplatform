@@ -5,89 +5,108 @@
 package classkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/classkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Activity information that is true or false, pass or fail, yes or no.
 //
-// BinaryItem wraps [raw.CLSBinaryItem] with a fluent Go API.
+// BinaryItem is an idiomatic wrapper over the Objective-C class CLSBinaryItem.
 type BinaryItem struct {
-	inner *raw.CLSBinaryItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLSBinaryItem].
-func (x *BinaryItem) Unwrap() *raw.CLSBinaryItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BinaryItem) ID() objc.ID { return x.inner.Ptr() }
-
-// BinaryItemFromID adopts an existing object pointer as a BinaryItem (nil for 0).
+// BinaryItemFromID adopts an existing Objective-C object as a BinaryItem
+// (nil for 0), retaining it and registering a release finalizer.
 func BinaryItemFromID(id objc.ID) *BinaryItem {
 	if id == 0 {
 		return nil
 	}
-	return &BinaryItem{inner: raw.CLSBinaryItemFromID(id)}
+	x := &BinaryItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// binaryItemAdopt wraps an Objective-C object that this code just created as a
+// BinaryItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func binaryItemAdopt(id objc.ID) *BinaryItem {
+	if id == 0 {
+		return nil
+	}
+	x := &BinaryItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BinaryItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BinaryItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BinaryItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a new binary activity item of the given type.
 //
-// NewBinaryItemWithIdentifierTitleType creates a new [BinaryItem].
-func NewBinaryItemWithIdentifierTitleType(identifier string, title string, valueType CLSBinaryValueType) *BinaryItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLSBinaryItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:title:type:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), foundation.NSStringStringWithUTF8String(title).Ptr(), raw.CLSBinaryValueType(valueType))
-	return &BinaryItem{inner: raw.CLSBinaryItemFromID(_id)}
+// NewBinaryItemWithIdentifierTitleType creates a new BinaryItem.
+func NewBinaryItemWithIdentifierTitleType(identifier string, title string, valueType BinaryValueType) *BinaryItem {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CLSBinaryItem")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:title:type:"), purego.NSString(identifier), purego.NSString(title), valueType)
+	return binaryItemAdopt(_id)
 }
 
 // The value that the binary activity item takes.
 //
-// WithValue sets the value property and returns the receiver for chaining.
+// WithValue sets value and returns the receiver so calls can be chained.
 func (x *BinaryItem) WithValue(value bool) *BinaryItem {
-	x.inner.SetValue(value)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 	return x
 }
 
 // A human readable name for the activity item.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *BinaryItem) WithTitle(title string) *BinaryItem {
-	x.inner.CLSActivityItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// @abstract      True or false value.
-//
-// Value calls the underlying Value.
+// True or false value.
 func (x *BinaryItem) Value() bool {
-	return x.inner.Value()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("value"))
+	return _r
 }
 
-// SetValue calls the underlying SetValue.
 func (x *BinaryItem) SetValue(value bool) {
-	x.inner.SetValue(value)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 }
 
-// @abstract      Value type of this CLSBinaryItem. @discussion    The type that best describes this CLSBinaryItem value.
-//
-// ValueType calls the underlying ValueType.
-func (x *BinaryItem) ValueType() CLSBinaryValueType {
-	return CLSBinaryValueType(x.inner.ValueType())
+// Value type of this CLSBinaryItem. The type that best describes this CLSBinaryItem value.
+func (x *BinaryItem) ValueType() BinaryValueType {
+	_r := objc.Send[BinaryValueType](objref.IDOf(x), objc.RegisterName("valueType"))
+	return _r
 }
-
-func (x *BinaryItem) asActivityItem() *raw.CLSActivityItem { return &x.inner.CLSActivityItem }
-
-func (x *BinaryItem) asObject() *raw.CLSObject { return &x.inner.CLSActivityItem.CLSObject }
 
 // BinaryItemable is the interface implemented by [BinaryItem], for mocking and DI.
 type BinaryItemable interface {
-	Unwrap() *raw.CLSBinaryItem
+	obj.Object
 	WithValue(value bool) *BinaryItem
 	WithTitle(title string) *BinaryItem
 	Value() bool
 	SetValue(value bool)
-	ValueType() CLSBinaryValueType
+	ValueType() BinaryValueType
 }
 
 var _ BinaryItemable = (*BinaryItem)(nil)

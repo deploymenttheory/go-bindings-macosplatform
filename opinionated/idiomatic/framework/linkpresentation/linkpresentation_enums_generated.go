@@ -9,34 +9,34 @@ import (
 )
 
 // Possible error values that can be returned from LinkPresentation APIs.
-type LPErrorCode int64
+type ErrorCode int64
 
 const (
 	// An unknown error.
-	LPErrorUnknown LPErrorCode = 1
+	ErrorUnknown ErrorCode = 1
 	// An error indicating that a metadata fetch failed.
-	LPErrorMetadataFetchFailed LPErrorCode = 2
+	ErrorMetadataFetchFailed ErrorCode = 2
 	// An error indicating that the metadata fetch was canceled by the client.
-	LPErrorMetadataFetchCancelled LPErrorCode = 3
+	ErrorMetadataFetchCancelled ErrorCode = 3
 	// An error indicating that the metadata fetch took longer than allowed.
-	LPErrorMetadataFetchTimedOut LPErrorCode = 4
+	ErrorMetadataFetchTimedOut ErrorCode = 4
 	// An error indicating that the metadata fetch was not allowed due to system policies.
-	LPErrorMetadataFetchNotAllowed LPErrorCode = 5
+	ErrorMetadataFetchNotAllowed ErrorCode = 5
 )
 
-func (e LPErrorCode) String() string {
+func (e ErrorCode) String() string {
 	switch e {
-	case LPErrorUnknown:
-		return "LPErrorUnknown"
-	case LPErrorMetadataFetchFailed:
-		return "LPErrorMetadataFetchFailed"
-	case LPErrorMetadataFetchCancelled:
-		return "LPErrorMetadataFetchCancelled"
-	case LPErrorMetadataFetchTimedOut:
-		return "LPErrorMetadataFetchTimedOut"
-	case LPErrorMetadataFetchNotAllowed:
-		return "LPErrorMetadataFetchNotAllowed"
+	case ErrorUnknown:
+		return "ErrorUnknown"
+	case ErrorMetadataFetchFailed:
+		return "ErrorMetadataFetchFailed"
+	case ErrorMetadataFetchCancelled:
+		return "ErrorMetadataFetchCancelled"
+	case ErrorMetadataFetchTimedOut:
+		return "ErrorMetadataFetchTimedOut"
+	case ErrorMetadataFetchNotAllowed:
+		return "ErrorMetadataFetchNotAllowed"
 	default:
-		return fmt.Sprintf("LPErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }

@@ -5,26 +5,18 @@
 package screensaver
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screensaver"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// DefaultsForModuleWithName calls the underlying ScreenSaverDefaultsDefaultsForModuleWithName.
+// Returns a screen saver defaults instance that reads and writes defaults for the specified module.
 func DefaultsForModuleWithName(inModuleName string) *ScreenSaverDefaults {
-	_r := raw.ScreenSaverDefaultsDefaultsForModuleWithName(foundation.NSStringStringWithUTF8String(inModuleName))
-	if _r == nil {
-		return nil
-	}
-	return &ScreenSaverDefaults{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ScreenSaverDefaults")), objc.RegisterName("defaultsForModuleWithName:"), purego.NSString(inModuleName))
+	return ScreenSaverDefaultsFromID(_r)
 }
 
-// BackingStoreType calls the underlying ScreenSaverViewBackingStoreType.
-func BackingStoreType() appkit.NSBackingStoreType {
-	return raw.ScreenSaverViewBackingStoreType()
-}
-
-// PerformGammaFade calls the underlying ScreenSaverViewPerformGammaFade.
+// Indicates whether to perform a gradual screen fade when the system starts and stops your screen saver’s animation.
 func PerformGammaFade() bool {
-	return raw.ScreenSaverViewPerformGammaFade()
+	_r := objc.Send[bool](objc.ID(_class("ScreenSaverView")), objc.RegisterName("performGammaFade"))
+	return _r
 }

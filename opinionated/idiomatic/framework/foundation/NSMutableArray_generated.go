@@ -5,318 +5,222 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A dynamic ordered collection of objects.
 //
-// MutableArray wraps [raw.NSMutableArray] with a fluent Go API.
+// MutableArray is an idiomatic wrapper over the Objective-C class NSMutableArray.
 type MutableArray struct {
-	inner *raw.NSMutableArray[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSMutableArray].
-func (x *MutableArray) Unwrap() *raw.NSMutableArray[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableArray) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableArrayFromID adopts an existing object pointer as a MutableArray (nil for 0).
+// MutableArrayFromID adopts an existing Objective-C object as a MutableArray
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableArrayFromID(id objc.ID) *MutableArray {
 	if id == 0 {
 		return nil
 	}
-	return &MutableArray{inner: raw.NSMutableArrayFromID[objc.ID](id)}
+	x := &MutableArray{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMutableArray creates a new [MutableArray].
+// mutableArrayAdopt wraps an Objective-C object that this code just created as a
+// MutableArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableArrayAdopt(id objc.ID) *MutableArray {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableArray{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MutableArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MutableArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MutableArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMutableArray creates a new MutableArray.
 func NewMutableArray() *MutableArray {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableArray")), objc.RegisterName("new"))
-	return &MutableArray{inner: raw.NSMutableArrayFromID[objc.ID](_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSMutableArray")), objc.RegisterName("new"))
+	return mutableArrayAdopt(_id)
 }
 
 // Returns an array, initialized with enough memory to initially hold a given number of objects.
 //
-// NewMutableArrayWithCapacity creates a new [MutableArray].
-func NewMutableArrayWithCapacity(numItems uint) *MutableArray {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableArray")), objc.RegisterName("alloc"))
+// NewMutableArrayWithCapacity creates a new MutableArray.
+func NewMutableArrayWithCapacity(numItems int) *MutableArray {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableArray")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCapacity:"), numItems)
-	return &MutableArray{inner: raw.NSMutableArrayFromID[objc.ID](_id)}
+	return mutableArrayAdopt(_id)
 }
 
-// NewMutableArrayWithCoder creates a new [MutableArray].
-func NewMutableArrayWithCoder(coder *raw.NSCoder) *MutableArray {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &MutableArray{inner: raw.NSMutableArrayFromID[objc.ID](_id)}
+// NewMutableArrayWithCoder creates a new MutableArray.
+func NewMutableArrayWithCoder(coder *Coder) *MutableArray {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return mutableArrayAdopt(_id)
 }
 
 // Initializes a newly allocated mutable array with the contents of the file specified by a given path
 //
-// NewMutableArrayWithContentsOfFile creates a new [MutableArray].
+// NewMutableArrayWithContentsOfFile creates a new MutableArray.
 func NewMutableArrayWithContentsOfFile(path string) *MutableArray {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:"), foundation.NSStringStringWithUTF8String(path).Ptr())
-	return &MutableArray{inner: raw.NSMutableArrayFromID[objc.ID](_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfFile:"), purego.NSString(path))
+	return mutableArrayAdopt(_id)
 }
 
 // Initialized a newly allocated mutable array with the contents of the location specified by a given URL.
 //
-// NewMutableArrayWithContentsOfURL creates a new [MutableArray].
+// NewMutableArrayWithContentsOfURL creates a new MutableArray.
 func NewMutableArrayWithContentsOfURL(url string) *MutableArray {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr())
-	return &MutableArray{inner: raw.NSMutableArrayFromID[objc.ID](_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMutableArray")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfURL:"), rt.FileURL(url))
+	return mutableArrayAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MutableArray) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableArray {
-	x.inner.NSArray.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *MutableArray) WithScriptingProperties(scriptingProperties obj.Object) *MutableArray {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Inserts a given object at the end of the array.
-//
-// AddObject calls the underlying AddObject.
-func (x *MutableArray) AddObject(anObject objc.ID) {
-	x.inner.AddObject(anObject)
+func (x *MutableArray) AddObject(anObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObject:"), objref.IDOf(anObject))
 }
 
 // Inserts a given object into the array’s contents at a given index.
-//
-// InsertObjectAtIndex calls the underlying InsertObjectAtIndex.
-func (x *MutableArray) InsertObjectAtIndex(anObject objc.ID, index uint) {
-	x.inner.InsertObjectAtIndex(anObject, index)
+func (x *MutableArray) InsertObjectAtIndex(anObject obj.Object, index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertObject:atIndex:"), objref.IDOf(anObject), index)
 }
 
 // Removes the object with the highest-valued index in the array
-//
-// RemoveLastObject calls the underlying RemoveLastObject.
 func (x *MutableArray) RemoveLastObject() {
-	x.inner.RemoveLastObject()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeLastObject"))
 }
 
 // Removes the object at index .
-//
-// RemoveObjectAtIndex calls the underlying RemoveObjectAtIndex.
-func (x *MutableArray) RemoveObjectAtIndex(index uint) {
-	x.inner.RemoveObjectAtIndex(index)
+func (x *MutableArray) RemoveObjectAtIndex(index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectAtIndex:"), index)
 }
 
 // Replaces the object at index with anObject.
-//
-// ReplaceObjectAtIndexWithObject calls the underlying ReplaceObjectAtIndexWithObject.
-func (x *MutableArray) ReplaceObjectAtIndexWithObject(index uint, anObject objc.ID) {
-	x.inner.ReplaceObjectAtIndexWithObject(index, anObject)
+func (x *MutableArray) ReplaceObjectAtIndexWithObject(index int, anObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceObjectAtIndex:withObject:"), index, objref.IDOf(anObject))
 }
 
 // Adds the objects contained in another given array to the end of the receiving array’s content.
-//
-// AddObjectsFromArray calls the underlying AddObjectsFromArray.
-func (x *MutableArray) AddObjectsFromArray(otherArray *raw.NSArray[objc.ID]) {
-	x.inner.AddObjectsFromArray(otherArray)
+func (x *MutableArray) AddObjectsFromArray(otherArray []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObjectsFromArray:"), purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Exchanges the objects in the array at given indexes.
-//
-// ExchangeObjectAtIndexWithObjectAtIndex calls the underlying ExchangeObjectAtIndexWithObjectAtIndex.
-func (x *MutableArray) ExchangeObjectAtIndexWithObjectAtIndex(idx1 uint, idx2 uint) {
-	x.inner.ExchangeObjectAtIndexWithObjectAtIndex(idx1, idx2)
+func (x *MutableArray) ExchangeObjectAtIndexWithObjectAtIndex(idx1 int, idx2 int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exchangeObjectAtIndex:withObjectAtIndex:"), idx1, idx2)
 }
 
 // Empties the array of all its elements.
-//
-// RemoveAllObjects calls the underlying RemoveAllObjects.
 func (x *MutableArray) RemoveAllObjects() {
-	x.inner.RemoveAllObjects()
-}
-
-// Removes all occurrences within a specified range in the array of a given object.
-//
-// RemoveObjectInRange calls the underlying RemoveObjectInRange.
-func (x *MutableArray) RemoveObjectInRange(anObject objc.ID, range_ raw.NSRange) {
-	x.inner.RemoveObjectInRange(anObject, range_)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllObjects"))
 }
 
 // Removes all occurrences in the array of a given object.
-//
-// RemoveObject calls the underlying RemoveObject.
-func (x *MutableArray) RemoveObject(anObject objc.ID) {
-	x.inner.RemoveObject(anObject)
-}
-
-// Removes all occurrences of anObject within the specified range in the array.
-//
-// RemoveObjectIdenticalToInRange calls the underlying RemoveObjectIdenticalToInRange.
-func (x *MutableArray) RemoveObjectIdenticalToInRange(anObject objc.ID, range_ raw.NSRange) {
-	x.inner.RemoveObjectIdenticalToInRange(anObject, range_)
+func (x *MutableArray) RemoveObject(anObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObject:"), objref.IDOf(anObject))
 }
 
 // Removes all occurrences of a given object in the array.
-//
-// RemoveObjectIdenticalTo calls the underlying RemoveObjectIdenticalTo.
-func (x *MutableArray) RemoveObjectIdenticalTo(anObject objc.ID) {
-	x.inner.RemoveObjectIdenticalTo(anObject)
-}
-
-// Removes the specified number of objects from the array, beginning at the specified index.
-//
-// RemoveObjectsFromIndicesNumIndices calls the underlying RemoveObjectsFromIndicesNumIndices.
-func (x *MutableArray) RemoveObjectsFromIndicesNumIndices(indices *uint, cnt uint) {
-	x.inner.RemoveObjectsFromIndicesNumIndices(indices, cnt)
+func (x *MutableArray) RemoveObjectIdenticalTo(anObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectIdenticalTo:"), objref.IDOf(anObject))
 }
 
 // Removes from the receiving array the objects in another given array.
-//
-// RemoveObjectsInArray calls the underlying RemoveObjectsInArray.
-func (x *MutableArray) RemoveObjectsInArray(otherArray *raw.NSArray[objc.ID]) {
-	x.inner.RemoveObjectsInArray(otherArray)
-}
-
-// Removes from the array each of the objects within a given range.
-//
-// RemoveObjectsInRange calls the underlying RemoveObjectsInRange.
-func (x *MutableArray) RemoveObjectsInRange(range_ raw.NSRange) {
-	x.inner.RemoveObjectsInRange(range_)
-}
-
-// Replaces the objects in the receiving array specified by one given range with the objects in another array specified by another range.
-//
-// ReplaceObjectsInRangeWithObjectsFromArrayRange calls the underlying ReplaceObjectsInRangeWithObjectsFromArrayRange.
-func (x *MutableArray) ReplaceObjectsInRangeWithObjectsFromArrayRange(range_ raw.NSRange, otherArray *raw.NSArray[objc.ID], otherRange raw.NSRange) {
-	x.inner.ReplaceObjectsInRangeWithObjectsFromArrayRange(range_, otherArray, otherRange)
-}
-
-// Replaces the objects in the receiving array specified by a given range with all of the objects from a given array.
-//
-// ReplaceObjectsInRangeWithObjectsFromArray calls the underlying ReplaceObjectsInRangeWithObjectsFromArray.
-func (x *MutableArray) ReplaceObjectsInRangeWithObjectsFromArray(range_ raw.NSRange, otherArray *raw.NSArray[objc.ID]) {
-	x.inner.ReplaceObjectsInRangeWithObjectsFromArray(range_, otherArray)
+func (x *MutableArray) RemoveObjectsInArray(otherArray []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectsInArray:"), purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Sets the receiving array’s elements to those in another given array.
-//
-// SetArray calls the underlying SetArray.
-func (x *MutableArray) SetArray(otherArray *raw.NSArray[objc.ID]) {
-	x.inner.SetArray(otherArray)
-}
-
-// Sorts the receiver in ascending order as defined by the comparison function compare.
-//
-// SortUsingFunctionContext calls the underlying SortUsingFunctionContext.
-func (x *MutableArray) SortUsingFunctionContext(compare unsafe.Pointer, context_ unsafe.Pointer) {
-	x.inner.SortUsingFunctionContext(compare, context_)
-}
-
-// Sorts the receiver in ascending order, as determined by the comparison method specified by a given selector.
-//
-// SortUsingSelector calls the underlying SortUsingSelector.
-func (x *MutableArray) SortUsingSelector(comparator objc.SEL) {
-	x.inner.SortUsingSelector(comparator)
+func (x *MutableArray) SetArray(otherArray []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArray:"), purego.SliceToNSArray(otherArray, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Inserts the objects in the provided array into the receiving array at the specified indexes.
-//
-// InsertObjectsAtIndexes calls the underlying InsertObjectsAtIndexes.
-func (x *MutableArray) InsertObjectsAtIndexes(objects *raw.NSArray[objc.ID], indexes *raw.NSIndexSet) {
-	x.inner.InsertObjectsAtIndexes(objects, indexes)
+func (x *MutableArray) InsertObjectsAtIndexes(objects []obj.Object, indexes *IndexSet) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertObjects:atIndexes:"), purego.SliceToNSArray(objects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(indexes))
 }
 
 // Removes the objects at the specified indexes from the array.
-//
-// RemoveObjectsAtIndexes calls the underlying RemoveObjectsAtIndexes.
-func (x *MutableArray) RemoveObjectsAtIndexes(indexes *raw.NSIndexSet) {
-	x.inner.RemoveObjectsAtIndexes(indexes)
+func (x *MutableArray) RemoveObjectsAtIndexes(indexes *IndexSet) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObjectsAtIndexes:"), objref.IDOf(indexes))
 }
 
 // Replaces the objects in the receiving array at locations specified with the objects from a given array.
-//
-// ReplaceObjectsAtIndexesWithObjects calls the underlying ReplaceObjectsAtIndexesWithObjects.
-func (x *MutableArray) ReplaceObjectsAtIndexesWithObjects(indexes *raw.NSIndexSet, objects *raw.NSArray[objc.ID]) {
-	x.inner.ReplaceObjectsAtIndexesWithObjects(indexes, objects)
+func (x *MutableArray) ReplaceObjectsAtIndexesWithObjects(indexes *IndexSet, objects []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceObjectsAtIndexes:withObjects:"), objref.IDOf(indexes), purego.SliceToNSArray(objects, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Replaces the object at the index with the new object, possibly adding the object.
-//
-// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
-func (x *MutableArray) SetObjectAtIndexedSubscript(obj objc.ID, idx uint) {
-	x.inner.SetObjectAtIndexedSubscript(obj, idx)
+func (x *MutableArray) SetObjectAtIndexedSubscript(obj_ obj.Object, idx int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(obj_), idx)
 }
 
-// Sorts the receiver in ascending order using the comparison method specified by a given NSComparator block.
-//
-// SortUsingComparator calls the underlying SortUsingComparator.
-func (x *MutableArray) SortUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult) {
-	x.inner.SortUsingComparator(func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
-}
-
-// Sorts the receiver in ascending order using the specified options and the comparison method specified by a given NSComparator block.
-//
-// SortWithOptionsUsingComparator calls the underlying SortWithOptionsUsingComparator.
-func (x *MutableArray) SortWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult) {
-	x.inner.SortWithOptionsUsingComparator(raw.NSSortOptions(opts), func(_a0 objc.ID, _a1 objc.ID) raw.NSComparisonResult { return raw.NSComparisonResult(cmptr(_a0, _a1)) })
-}
-
-// ApplyDifference calls the underlying ApplyDifference.
-func (x *MutableArray) ApplyDifference(difference *raw.NSOrderedCollectionDifference[objc.ID]) {
-	x.inner.ApplyDifference(difference)
+func (x *MutableArray) ApplyDifference(difference obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyDifference:"), objref.IDOf(difference))
 }
 
 // Sorts the receiver using a given array of sort descriptors.
-//
-// SortUsingDescriptors calls the underlying SortUsingDescriptors.
-func (x *MutableArray) SortUsingDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor]) {
-	x.inner.SortUsingDescriptors(sortDescriptors)
+func (x *MutableArray) SortUsingDescriptors(sortDescriptors []*SortDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortUsingDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v *SortDescriptor) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Evaluates a given predicate against the array’s content and leaves only objects that match.
-//
-// FilterUsingPredicate calls the underlying FilterUsingPredicate.
-func (x *MutableArray) FilterUsingPredicate(predicate *raw.NSPredicate) {
-	x.inner.FilterUsingPredicate(predicate)
+func (x *MutableArray) FilterUsingPredicate(predicate *Predicate) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterUsingPredicate:"), objref.IDOf(predicate))
 }
-
-func (x *MutableArray) asArray() *raw.NSArray[objc.ID] { return &x.inner.NSArray }
-
-func (x *MutableArray) asObject() *raw.NSObject { return &x.inner.NSArray.NSObject }
 
 // MutableArrayable is the interface implemented by [MutableArray], for mocking and DI.
 type MutableArrayable interface {
-	Unwrap() *raw.NSMutableArray[objc.ID]
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableArray
-	AddObject(anObject objc.ID)
-	InsertObjectAtIndex(anObject objc.ID, index uint)
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *MutableArray
+	AddObject(anObject obj.Object)
+	InsertObjectAtIndex(anObject obj.Object, index int)
 	RemoveLastObject()
-	RemoveObjectAtIndex(index uint)
-	ReplaceObjectAtIndexWithObject(index uint, anObject objc.ID)
-	AddObjectsFromArray(otherArray *raw.NSArray[objc.ID])
-	ExchangeObjectAtIndexWithObjectAtIndex(idx1 uint, idx2 uint)
+	RemoveObjectAtIndex(index int)
+	ReplaceObjectAtIndexWithObject(index int, anObject obj.Object)
+	AddObjectsFromArray(otherArray []obj.Object)
+	ExchangeObjectAtIndexWithObjectAtIndex(idx1 int, idx2 int)
 	RemoveAllObjects()
-	RemoveObjectInRange(anObject objc.ID, range_ raw.NSRange)
-	RemoveObject(anObject objc.ID)
-	RemoveObjectIdenticalToInRange(anObject objc.ID, range_ raw.NSRange)
-	RemoveObjectIdenticalTo(anObject objc.ID)
-	RemoveObjectsFromIndicesNumIndices(indices *uint, cnt uint)
-	RemoveObjectsInArray(otherArray *raw.NSArray[objc.ID])
-	RemoveObjectsInRange(range_ raw.NSRange)
-	ReplaceObjectsInRangeWithObjectsFromArrayRange(range_ raw.NSRange, otherArray *raw.NSArray[objc.ID], otherRange raw.NSRange)
-	ReplaceObjectsInRangeWithObjectsFromArray(range_ raw.NSRange, otherArray *raw.NSArray[objc.ID])
-	SetArray(otherArray *raw.NSArray[objc.ID])
-	SortUsingFunctionContext(compare unsafe.Pointer, context_ unsafe.Pointer)
-	SortUsingSelector(comparator objc.SEL)
-	InsertObjectsAtIndexes(objects *raw.NSArray[objc.ID], indexes *raw.NSIndexSet)
-	RemoveObjectsAtIndexes(indexes *raw.NSIndexSet)
-	ReplaceObjectsAtIndexesWithObjects(indexes *raw.NSIndexSet, objects *raw.NSArray[objc.ID])
-	SetObjectAtIndexedSubscript(obj objc.ID, idx uint)
-	SortUsingComparator(cmptr func(objc.ID, objc.ID) NSComparisonResult)
-	SortWithOptionsUsingComparator(opts NSSortOptions, cmptr func(objc.ID, objc.ID) NSComparisonResult)
-	ApplyDifference(difference *raw.NSOrderedCollectionDifference[objc.ID])
-	SortUsingDescriptors(sortDescriptors *raw.NSArray[*raw.NSSortDescriptor])
-	FilterUsingPredicate(predicate *raw.NSPredicate)
+	RemoveObject(anObject obj.Object)
+	RemoveObjectIdenticalTo(anObject obj.Object)
+	RemoveObjectsInArray(otherArray []obj.Object)
+	SetArray(otherArray []obj.Object)
+	InsertObjectsAtIndexes(objects []obj.Object, indexes *IndexSet)
+	RemoveObjectsAtIndexes(indexes *IndexSet)
+	ReplaceObjectsAtIndexesWithObjects(indexes *IndexSet, objects []obj.Object)
+	SetObjectAtIndexedSubscript(obj_ obj.Object, idx int)
+	ApplyDifference(difference obj.Object)
+	SortUsingDescriptors(sortDescriptors []*SortDescriptor)
+	FilterUsingPredicate(predicate *Predicate)
 }
 
 var _ MutableArrayable = (*MutableArray)(nil)

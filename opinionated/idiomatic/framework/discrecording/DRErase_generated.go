@@ -5,105 +5,115 @@
 package discrecording
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/discrecording"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Erase wraps [raw.DRErase] with a fluent Go API.
+// Erase is an idiomatic wrapper over the Objective-C class DRErase.
 type Erase struct {
-	inner *raw.DRErase
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DRErase].
-func (x *Erase) Unwrap() *raw.DRErase { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Erase) ID() objc.ID { return x.inner.Ptr() }
-
-// EraseFromID adopts an existing object pointer as a Erase (nil for 0).
+// EraseFromID adopts an existing Objective-C object as a Erase
+// (nil for 0), retaining it and registering a release finalizer.
 func EraseFromID(id objc.ID) *Erase {
 	if id == 0 {
 		return nil
 	}
-	return &Erase{inner: raw.DREraseFromID(id)}
+	x := &Erase{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @method			initWithDevice: @abstract		Initializes an erase object. @discussion		An erase object created with this method is ready to erase media. @param 			device	Device to use for the erase. @result  		A DRErase object.
-//
-// NewEraseWithDevice creates a new [Erase].
-func NewEraseWithDevice(device *raw.DRDevice) *Erase {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DRErase")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device.Ptr())
-	return &Erase{inner: raw.DREraseFromID(_id)}
-}
-
-// @method			start @abstract		Begin the process of erasing media. @discussion		This method only kicks off the erase. Once the erasure starts, control returns to the caller. The caller can monitor the progress of the erase by listening for a notification or by polling @link //apple_ref/occ/instm/DRErase/status status @/link.
-//
-// Start calls the underlying Start.
-func (x *Erase) Start() {
-	x.inner.Start()
-}
-
-// @method			status @abstract		Returns a dictionary containing the status of the erase. @discussion		The same dictionary is returned through the @link //apple_ref/occ/data/DREraseStatusChangedNotification DREraseStatusChangedNotification @/link notification. @result			An NSDictionary containing the status of the erase.
-//
-// Status calls the underlying Status.
-func (x *Erase) Status() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.Status()
-}
-
-// @method 		properties @abstract		Returns the properties dictionary of the erase. @result  		An NSDictionary containing the properties of the erase.
-//
-// Properties calls the underlying Properties.
-func (x *Erase) Properties() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.Properties()
-}
-
-// @method 		setProperties: @abstract		Sets the properties dictionary of the erase @param 			properties	NSDictionary of the properties to set.
-//
-// SetProperties calls the underlying SetProperties.
-func (x *Erase) SetProperties(properties *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.SetProperties(properties)
-}
-
-// @method 		device @abstract		Returns the device being used for the erase. @result  		The DRDevice the erase will use.
-//
-// Device calls the underlying Device.
-func (x *Erase) Device() *Device {
-	_r := x.inner.Device()
-	if _r == nil {
+// eraseAdopt wraps an Objective-C object that this code just created as a
+// Erase (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func eraseAdopt(id objc.ID) *Erase {
+	if id == 0 {
 		return nil
 	}
-	return &Device{inner: _r}
+	x := &Erase{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @method			eraseType @abstract		Returns the type of erase to be performed. @result			An NSString
+// Description returns the object's -description text.
+func (x *Erase) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Erase) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Erase) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// Initializes an erase object. An erase object created with this method is ready to erase media.
 //
-// EraseType calls the underlying EraseType.
+// NewEraseWithDevice creates a new Erase.
+func NewEraseWithDevice(device *Device) *Erase {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DRErase")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), objref.IDOf(device))
+	return eraseAdopt(_id)
+}
+
+// Begin the process of erasing media. This method only kicks off the erase. Once the erasure starts, control returns to the caller. The caller can monitor the progress of the erase by listening for a notification or by polling
+func (x *Erase) Start() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
+}
+
+// Returns a dictionary containing the status of the erase. The same dictionary is returned through the
+func (x *Erase) Status() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+	return obj.Wrap(_r)
+}
+
+// Returns the properties dictionary of the erase.
+func (x *Erase) Properties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("properties"))
+	return obj.Wrap(_r)
+}
+
+// Sets the properties dictionary of the erase
+func (x *Erase) SetProperties(properties obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperties:"), objref.IDOf(properties))
+}
+
+// Returns the device being used for the erase.
+func (x *Erase) Device() *Device {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+	return DeviceFromID(_r)
+}
+
+// Returns the type of erase to be performed.
 func (x *Erase) EraseType() string {
-	_r := x.inner.EraseType()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eraseType"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @method			setEraseType: @abstract		Sets the type of erase to perform. @param			type	The type of erase.
-//
-// SetEraseType calls the underlying SetEraseType.
+// Sets the type of erase to perform.
 func (x *Erase) SetEraseType(type_ string) {
-	x.inner.SetEraseType(foundation.NSStringStringWithUTF8String(type_))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEraseType:"), purego.NSString(type_))
 }
 
 // Eraseable is the interface implemented by [Erase], for mocking and DI.
 type Eraseable interface {
-	Unwrap() *raw.DRErase
+	obj.Object
 	Start()
-	Status() *foundation.NSDictionary[objc.ID, objc.ID]
-	Properties() *foundation.NSDictionary[objc.ID, objc.ID]
-	SetProperties(properties *foundation.NSDictionary[objc.ID, objc.ID])
+	Status() obj.Object
+	Properties() obj.Object
+	SetProperties(properties obj.Object)
 	Device() *Device
 	EraseType() string
 	SetEraseType(type_ string)

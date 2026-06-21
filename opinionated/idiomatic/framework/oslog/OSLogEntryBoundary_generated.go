@@ -5,43 +5,68 @@
 package oslog
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/oslog"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The metadata that partitions sequences of other entries.
 //
-// LogEntryBoundary wraps [raw.OSLogEntryBoundary] with a fluent Go API.
+// LogEntryBoundary is an idiomatic wrapper over the Objective-C class OSLogEntryBoundary.
 type LogEntryBoundary struct {
-	inner *raw.OSLogEntryBoundary
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.OSLogEntryBoundary].
-func (x *LogEntryBoundary) Unwrap() *raw.OSLogEntryBoundary { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LogEntryBoundary) ID() objc.ID { return x.inner.Ptr() }
-
-// LogEntryBoundaryFromID adopts an existing object pointer as a LogEntryBoundary (nil for 0).
+// LogEntryBoundaryFromID adopts an existing Objective-C object as a LogEntryBoundary
+// (nil for 0), retaining it and registering a release finalizer.
 func LogEntryBoundaryFromID(id objc.ID) *LogEntryBoundary {
 	if id == 0 {
 		return nil
 	}
-	return &LogEntryBoundary{inner: raw.OSLogEntryBoundaryFromID(id)}
+	x := &LogEntryBoundary{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLogEntryBoundary creates a new [LogEntryBoundary].
+// logEntryBoundaryAdopt wraps an Objective-C object that this code just created as a
+// LogEntryBoundary (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func logEntryBoundaryAdopt(id objc.ID) *LogEntryBoundary {
+	if id == 0 {
+		return nil
+	}
+	x := &LogEntryBoundary{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LogEntryBoundary) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LogEntryBoundary) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LogEntryBoundary) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLogEntryBoundary creates a new LogEntryBoundary.
 func NewLogEntryBoundary() *LogEntryBoundary {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSLogEntryBoundary")), objc.RegisterName("new"))
-	return &LogEntryBoundary{inner: raw.OSLogEntryBoundaryFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("OSLogEntryBoundary")), objc.RegisterName("new"))
+	return logEntryBoundaryAdopt(_id)
 }
-
-func (x *LogEntryBoundary) asLogEntry() *raw.OSLogEntry { return &x.inner.OSLogEntry }
 
 // LogEntryBoundaryable is the interface implemented by [LogEntryBoundary], for mocking and DI.
 type LogEntryBoundaryable interface {
-	Unwrap() *raw.OSLogEntryBoundary
+	obj.Object
 }
 
 var _ LogEntryBoundaryable = (*LogEntryBoundary)(nil)

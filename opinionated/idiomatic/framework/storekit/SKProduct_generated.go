@@ -5,175 +5,164 @@
 package storekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Information about a registered product in App Store Connect.
 //
-// Product wraps [raw.SKProduct] with a fluent Go API.
+// Product is an idiomatic wrapper over the Objective-C class SKProduct.
 type Product struct {
-	inner *raw.SKProduct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKProduct].
-func (x *Product) Unwrap() *raw.SKProduct { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Product) ID() objc.ID { return x.inner.Ptr() }
-
-// ProductFromID adopts an existing object pointer as a Product (nil for 0).
+// ProductFromID adopts an existing Objective-C object as a Product
+// (nil for 0), retaining it and registering a release finalizer.
 func ProductFromID(id objc.ID) *Product {
 	if id == 0 {
 		return nil
 	}
-	return &Product{inner: raw.SKProductFromID(id)}
+	x := &Product{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewProduct creates a new [Product].
+// productAdopt wraps an Objective-C object that this code just created as a
+// Product (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func productAdopt(id objc.ID) *Product {
+	if id == 0 {
+		return nil
+	}
+	x := &Product{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Product) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Product) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Product) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewProduct creates a new Product.
 func NewProduct() *Product {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKProduct")), objc.RegisterName("new"))
-	return &Product{inner: raw.SKProductFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKProduct")), objc.RegisterName("new"))
+	return productAdopt(_id)
 }
 
-// LocalizedDescription calls the underlying LocalizedDescription.
 func (x *Product) LocalizedDescription() string {
-	_r := x.inner.LocalizedDescription()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// LocalizedTitle calls the underlying LocalizedTitle.
 func (x *Product) LocalizedTitle() string {
-	_r := x.inner.LocalizedTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Price calls the underlying Price.
-func (x *Product) Price() *foundation.NSDecimalNumber {
-	return x.inner.Price()
+func (x *Product) Price() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("price"))
+	return obj.Wrap(_r)
 }
 
-// PriceLocale calls the underlying PriceLocale.
-func (x *Product) PriceLocale() *foundation.NSLocale {
-	return x.inner.PriceLocale()
+func (x *Product) PriceLocale() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("priceLocale"))
+	return obj.Wrap(_r)
 }
 
-// ProductIdentifier calls the underlying ProductIdentifier.
 func (x *Product) ProductIdentifier() string {
-	_r := x.inner.ProductIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// IsDownloadable calls the underlying IsDownloadable.
 func (x *Product) IsDownloadable() bool {
-	return x.inner.IsDownloadable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDownloadable"))
+	return _r
 }
 
-// Downloadable calls the underlying Downloadable.
 func (x *Product) Downloadable() bool {
-	return x.inner.Downloadable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("downloadable"))
+	return _r
 }
 
-// IsFamilyShareable calls the underlying IsFamilyShareable.
 func (x *Product) IsFamilyShareable() bool {
-	return x.inner.IsFamilyShareable()
-}
-
-// ContentLengths calls the underlying ContentLengths.
-func (x *Product) ContentLengths() unsafe.Pointer {
-	return x.inner.ContentLengths()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFamilyShareable"))
+	return _r
 }
 
 // DownloadContentLengths returns the collection as a Go slice.
-func (x *Product) DownloadContentLengths() []*foundation.NSNumber {
-	arr := x.inner.DownloadContentLengths()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *Product) DownloadContentLengths() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadContentLengths"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// ContentVersion calls the underlying ContentVersion.
-func (x *Product) ContentVersion() unsafe.Pointer {
-	return x.inner.ContentVersion()
-}
-
-// DownloadContentVersion calls the underlying DownloadContentVersion.
 func (x *Product) DownloadContentVersion() string {
-	_r := x.inner.DownloadContentVersion()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadContentVersion"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SubscriptionPeriod calls the underlying SubscriptionPeriod.
 func (x *Product) SubscriptionPeriod() *ProductSubscriptionPeriod {
-	_r := x.inner.SubscriptionPeriod()
-	if _r == nil {
-		return nil
-	}
-	return &ProductSubscriptionPeriod{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionPeriod"))
+	return ProductSubscriptionPeriodFromID(_r)
 }
 
-// IntroductoryPrice calls the underlying IntroductoryPrice.
 func (x *Product) IntroductoryPrice() *ProductDiscount {
-	_r := x.inner.IntroductoryPrice()
-	if _r == nil {
-		return nil
-	}
-	return &ProductDiscount{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("introductoryPrice"))
+	return ProductDiscountFromID(_r)
 }
 
-// SubscriptionGroupIdentifier calls the underlying SubscriptionGroupIdentifier.
 func (x *Product) SubscriptionGroupIdentifier() string {
-	_r := x.inner.SubscriptionGroupIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionGroupIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Discounts returns the collection as a Go slice.
 func (x *Product) Discounts() []*ProductDiscount {
-	arr := x.inner.Discounts()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ProductDiscount {
-		return &ProductDiscount{inner: raw.SKProductDiscountFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discounts"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ProductDiscount { return ProductDiscountFromID(_id) })
 }
 
 // Productable is the interface implemented by [Product], for mocking and DI.
 type Productable interface {
-	Unwrap() *raw.SKProduct
+	obj.Object
 	LocalizedDescription() string
 	LocalizedTitle() string
-	Price() *foundation.NSDecimalNumber
-	PriceLocale() *foundation.NSLocale
+	Price() obj.Object
+	PriceLocale() obj.Object
 	ProductIdentifier() string
 	IsDownloadable() bool
 	Downloadable() bool
 	IsFamilyShareable() bool
-	ContentLengths() unsafe.Pointer
-	DownloadContentLengths() []*foundation.NSNumber
-	ContentVersion() unsafe.Pointer
+	DownloadContentLengths() []obj.Object
 	DownloadContentVersion() string
 	SubscriptionPeriod() *ProductSubscriptionPeriod
 	IntroductoryPrice() *ProductDiscount

@@ -5,47 +5,68 @@
 package symbols
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/symbols"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A symbol effect applies the MagicReplace animation to symbol images.
 //
-// SymbolMagicReplaceContentTransition wraps [raw.NSSymbolMagicReplaceContentTransition] with a fluent Go API.
+// SymbolMagicReplaceContentTransition is an idiomatic wrapper over the Objective-C class NSSymbolMagicReplaceContentTransition.
 type SymbolMagicReplaceContentTransition struct {
-	inner *raw.NSSymbolMagicReplaceContentTransition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSymbolMagicReplaceContentTransition].
-func (x *SymbolMagicReplaceContentTransition) Unwrap() *raw.NSSymbolMagicReplaceContentTransition {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SymbolMagicReplaceContentTransition) ID() objc.ID { return x.inner.Ptr() }
-
-// SymbolMagicReplaceContentTransitionFromID adopts an existing object pointer as a SymbolMagicReplaceContentTransition (nil for 0).
+// SymbolMagicReplaceContentTransitionFromID adopts an existing Objective-C object as a SymbolMagicReplaceContentTransition
+// (nil for 0), retaining it and registering a release finalizer.
 func SymbolMagicReplaceContentTransitionFromID(id objc.ID) *SymbolMagicReplaceContentTransition {
 	if id == 0 {
 		return nil
 	}
-	return &SymbolMagicReplaceContentTransition{inner: raw.NSSymbolMagicReplaceContentTransitionFromID(id)}
+	x := &SymbolMagicReplaceContentTransition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSymbolMagicReplaceContentTransition creates a new [SymbolMagicReplaceContentTransition].
+// symbolMagicReplaceContentTransitionAdopt wraps an Objective-C object that this code just created as a
+// SymbolMagicReplaceContentTransition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func symbolMagicReplaceContentTransitionAdopt(id objc.ID) *SymbolMagicReplaceContentTransition {
+	if id == 0 {
+		return nil
+	}
+	x := &SymbolMagicReplaceContentTransition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SymbolMagicReplaceContentTransition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SymbolMagicReplaceContentTransition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SymbolMagicReplaceContentTransition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSymbolMagicReplaceContentTransition creates a new SymbolMagicReplaceContentTransition.
 func NewSymbolMagicReplaceContentTransition() *SymbolMagicReplaceContentTransition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSymbolMagicReplaceContentTransition")), objc.RegisterName("new"))
-	return &SymbolMagicReplaceContentTransition{inner: raw.NSSymbolMagicReplaceContentTransitionFromID(_id)}
-}
-
-func (x *SymbolMagicReplaceContentTransition) asSymbolContentTransition() *raw.NSSymbolContentTransition {
-	return &x.inner.NSSymbolContentTransition
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolMagicReplaceContentTransition")), objc.RegisterName("new"))
+	return symbolMagicReplaceContentTransitionAdopt(_id)
 }
 
 // SymbolMagicReplaceContentTransitionable is the interface implemented by [SymbolMagicReplaceContentTransition], for mocking and DI.
 type SymbolMagicReplaceContentTransitionable interface {
-	Unwrap() *raw.NSSymbolMagicReplaceContentTransition
+	obj.Object
 }
 
 var _ SymbolMagicReplaceContentTransitionable = (*SymbolMagicReplaceContentTransition)(nil)

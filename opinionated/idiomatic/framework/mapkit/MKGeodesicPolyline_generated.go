@@ -5,64 +5,84 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An open polygon overlay consisting of line segments that follow the contours of the Earth to create the shortest path between the specified points.
 //
-// GeodesicPolyline wraps [raw.MKGeodesicPolyline] with a fluent Go API.
+// GeodesicPolyline is an idiomatic wrapper over the Objective-C class MKGeodesicPolyline.
 type GeodesicPolyline struct {
-	inner *raw.MKGeodesicPolyline
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKGeodesicPolyline].
-func (x *GeodesicPolyline) Unwrap() *raw.MKGeodesicPolyline { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GeodesicPolyline) ID() objc.ID { return x.inner.Ptr() }
-
-// GeodesicPolylineFromID adopts an existing object pointer as a GeodesicPolyline (nil for 0).
+// GeodesicPolylineFromID adopts an existing Objective-C object as a GeodesicPolyline
+// (nil for 0), retaining it and registering a release finalizer.
 func GeodesicPolylineFromID(id objc.ID) *GeodesicPolyline {
 	if id == 0 {
 		return nil
 	}
-	return &GeodesicPolyline{inner: raw.MKGeodesicPolylineFromID(id)}
+	x := &GeodesicPolyline{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGeodesicPolyline creates a new [GeodesicPolyline].
+// geodesicPolylineAdopt wraps an Objective-C object that this code just created as a
+// GeodesicPolyline (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func geodesicPolylineAdopt(id objc.ID) *GeodesicPolyline {
+	if id == 0 {
+		return nil
+	}
+	x := &GeodesicPolyline{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GeodesicPolyline) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GeodesicPolyline) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GeodesicPolyline) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGeodesicPolyline creates a new GeodesicPolyline.
 func NewGeodesicPolyline() *GeodesicPolyline {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKGeodesicPolyline")), objc.RegisterName("new"))
-	return &GeodesicPolyline{inner: raw.MKGeodesicPolylineFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKGeodesicPolyline")), objc.RegisterName("new"))
+	return geodesicPolylineAdopt(_id)
 }
 
 // The title of the shape annotation.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *GeodesicPolyline) WithTitle(title string) *GeodesicPolyline {
-	x.inner.MKPolyline.MKMultiPoint.MKShape.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // The subtitle of the shape annotation.
 //
-// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
 func (x *GeodesicPolyline) WithSubtitle(subtitle string) *GeodesicPolyline {
-	x.inner.MKPolyline.MKMultiPoint.MKShape.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
-func (x *GeodesicPolyline) asPolyline() *raw.MKPolyline { return &x.inner.MKPolyline }
-
-func (x *GeodesicPolyline) asMultiPoint() *raw.MKMultiPoint { return &x.inner.MKPolyline.MKMultiPoint }
-
-func (x *GeodesicPolyline) asShape() *raw.MKShape { return &x.inner.MKPolyline.MKMultiPoint.MKShape }
-
 // GeodesicPolylineable is the interface implemented by [GeodesicPolyline], for mocking and DI.
 type GeodesicPolylineable interface {
-	Unwrap() *raw.MKGeodesicPolyline
+	obj.Object
 	WithTitle(title string) *GeodesicPolyline
 	WithSubtitle(subtitle string) *GeodesicPolyline
 }

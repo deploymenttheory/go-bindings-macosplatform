@@ -5,101 +5,109 @@
 package gamecontroller
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A recording of all of the values provided by a GCExtendedGamepad object.
 //
-// ExtendedGamepadSnapshot wraps [raw.GCExtendedGamepadSnapshot] with a fluent Go API.
+// ExtendedGamepadSnapshot is an idiomatic wrapper over the Objective-C class GCExtendedGamepadSnapshot.
 type ExtendedGamepadSnapshot struct {
-	inner *raw.GCExtendedGamepadSnapshot
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCExtendedGamepadSnapshot].
-func (x *ExtendedGamepadSnapshot) Unwrap() *raw.GCExtendedGamepadSnapshot { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExtendedGamepadSnapshot) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtendedGamepadSnapshotFromID adopts an existing object pointer as a ExtendedGamepadSnapshot (nil for 0).
+// ExtendedGamepadSnapshotFromID adopts an existing Objective-C object as a ExtendedGamepadSnapshot
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtendedGamepadSnapshotFromID(id objc.ID) *ExtendedGamepadSnapshot {
 	if id == 0 {
 		return nil
 	}
-	return &ExtendedGamepadSnapshot{inner: raw.GCExtendedGamepadSnapshotFromID(id)}
+	x := &ExtendedGamepadSnapshot{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// extendedGamepadSnapshotAdopt wraps an Objective-C object that this code just created as a
+// ExtendedGamepadSnapshot (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extendedGamepadSnapshotAdopt(id objc.ID) *ExtendedGamepadSnapshot {
+	if id == 0 {
+		return nil
+	}
+	x := &ExtendedGamepadSnapshot{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ExtendedGamepadSnapshot) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExtendedGamepadSnapshot) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExtendedGamepadSnapshot) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a snapshot object with the flattened data representation obtained from another snapshot.
 //
-// NewExtendedGamepadSnapshotWithSnapshotData creates a new [ExtendedGamepadSnapshot].
-func NewExtendedGamepadSnapshotWithSnapshotData(data *foundation.NSData) *ExtendedGamepadSnapshot {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GCExtendedGamepadSnapshot")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotData:"), data.Ptr())
-	return &ExtendedGamepadSnapshot{inner: raw.GCExtendedGamepadSnapshotFromID(_id)}
+// NewExtendedGamepadSnapshotWithSnapshotData creates a new ExtendedGamepadSnapshot.
+func NewExtendedGamepadSnapshotWithSnapshotData(data obj.Object) *ExtendedGamepadSnapshot {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GCExtendedGamepadSnapshot")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotData:"), objref.IDOf(data))
+	return extendedGamepadSnapshotAdopt(_id)
 }
 
 // Initializes a snapshot object associated with a specific controller using a flattened data representation obtained from another snapshot.
 //
-// NewExtendedGamepadSnapshotWithControllerSnapshotData creates a new [ExtendedGamepadSnapshot].
-func NewExtendedGamepadSnapshotWithControllerSnapshotData(controller *raw.GCController, data *foundation.NSData) *ExtendedGamepadSnapshot {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GCExtendedGamepadSnapshot")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithController:snapshotData:"), controller.Ptr(), data.Ptr())
-	return &ExtendedGamepadSnapshot{inner: raw.GCExtendedGamepadSnapshotFromID(_id)}
+// NewExtendedGamepadSnapshotWithControllerSnapshotData creates a new ExtendedGamepadSnapshot.
+func NewExtendedGamepadSnapshotWithControllerSnapshotData(controller *Controller, data obj.Object) *ExtendedGamepadSnapshot {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GCExtendedGamepadSnapshot")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithController:snapshotData:"), objref.IDOf(controller), objref.IDOf(data))
+	return extendedGamepadSnapshotAdopt(_id)
 }
 
 // Flattens a snapshot into an archivable memory representation.
 //
-// WithSnapshotData sets the snapshotData property and returns the receiver for chaining.
-func (x *ExtendedGamepadSnapshot) WithSnapshotData(snapshotData *foundation.NSData) *ExtendedGamepadSnapshot {
-	x.inner.SetSnapshotData(snapshotData)
+// WithSnapshotData sets snapshotData and returns the receiver so calls can be chained.
+func (x *ExtendedGamepadSnapshot) WithSnapshotData(snapshotData obj.Object) *ExtendedGamepadSnapshot {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSnapshotData:"), objref.IDOf(snapshotData))
 	return x
 }
 
 // The block that the profile calls when an element’s value changes.
 //
-// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
-func (x *ExtendedGamepadSnapshot) WithValueChangedHandler(valueChangedHandler func(*raw.GCExtendedGamepad, *raw.GCControllerElement)) *ExtendedGamepadSnapshot {
-	x.inner.GCExtendedGamepad.SetValueChangedHandler(valueChangedHandler)
+// WithValueDidChangeHandler sets valueDidChangeHandler and returns the receiver so calls can be chained.
+func (x *ExtendedGamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *ExtendedGamepadSnapshot {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return x
 }
 
-// The block that the profile calls when an element’s value changes.
-//
-// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
-func (x *ExtendedGamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *ExtendedGamepadSnapshot {
-	x.inner.GCExtendedGamepad.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
-	return x
+func (x *ExtendedGamepadSnapshot) SnapshotData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotData"))
+	return obj.Wrap(_r)
 }
 
-// SnapshotData calls the underlying SnapshotData.
-func (x *ExtendedGamepadSnapshot) SnapshotData() *foundation.NSData {
-	return x.inner.SnapshotData()
-}
-
-// SetSnapshotData calls the underlying SetSnapshotData.
-func (x *ExtendedGamepadSnapshot) SetSnapshotData(snapshotData *foundation.NSData) {
-	x.inner.SetSnapshotData(snapshotData)
-}
-
-func (x *ExtendedGamepadSnapshot) asExtendedGamepad() *raw.GCExtendedGamepad {
-	return &x.inner.GCExtendedGamepad
-}
-
-func (x *ExtendedGamepadSnapshot) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
-	return &x.inner.GCExtendedGamepad.GCPhysicalInputProfile
+func (x *ExtendedGamepadSnapshot) SetSnapshotData(snapshotData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSnapshotData:"), objref.IDOf(snapshotData))
 }
 
 // ExtendedGamepadSnapshotable is the interface implemented by [ExtendedGamepadSnapshot], for mocking and DI.
 type ExtendedGamepadSnapshotable interface {
-	Unwrap() *raw.GCExtendedGamepadSnapshot
-	WithSnapshotData(snapshotData *foundation.NSData) *ExtendedGamepadSnapshot
-	WithValueChangedHandler(valueChangedHandler func(*raw.GCExtendedGamepad, *raw.GCControllerElement)) *ExtendedGamepadSnapshot
-	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *ExtendedGamepadSnapshot
-	SnapshotData() *foundation.NSData
-	SetSnapshotData(snapshotData *foundation.NSData)
+	obj.Object
+	WithSnapshotData(snapshotData obj.Object) *ExtendedGamepadSnapshot
+	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *ExtendedGamepadSnapshot
+	SnapshotData() obj.Object
+	SetSnapshotData(snapshotData obj.Object)
 }
 
 var _ ExtendedGamepadSnapshotable = (*ExtendedGamepadSnapshot)(nil)

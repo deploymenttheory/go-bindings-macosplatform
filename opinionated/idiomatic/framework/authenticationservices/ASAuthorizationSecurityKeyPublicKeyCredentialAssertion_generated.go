@@ -5,59 +5,79 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that represents the security key credential assertion type.
 //
-// AuthorizationSecurityKeyPublicKeyCredentialAssertion wraps [raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertion] with a fluent Go API.
+// AuthorizationSecurityKeyPublicKeyCredentialAssertion is an idiomatic wrapper over the Objective-C class ASAuthorizationSecurityKeyPublicKeyCredentialAssertion.
 type AuthorizationSecurityKeyPublicKeyCredentialAssertion struct {
-	inner *raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertion].
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertion {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationSecurityKeyPublicKeyCredentialAssertionFromID adopts an existing object pointer as a AuthorizationSecurityKeyPublicKeyCredentialAssertion (nil for 0).
+// AuthorizationSecurityKeyPublicKeyCredentialAssertionFromID adopts an existing Objective-C object as a AuthorizationSecurityKeyPublicKeyCredentialAssertion
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationSecurityKeyPublicKeyCredentialAssertionFromID(id objc.ID) *AuthorizationSecurityKeyPublicKeyCredentialAssertion {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationSecurityKeyPublicKeyCredentialAssertion{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertionFromID(id)}
+	x := &AuthorizationSecurityKeyPublicKeyCredentialAssertion{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorizationSecurityKeyPublicKeyCredentialAssertion creates a new [AuthorizationSecurityKeyPublicKeyCredentialAssertion].
+// authorizationSecurityKeyPublicKeyCredentialAssertionAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationSecurityKeyPublicKeyCredentialAssertion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationSecurityKeyPublicKeyCredentialAssertionAdopt(id objc.ID) *AuthorizationSecurityKeyPublicKeyCredentialAssertion {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationSecurityKeyPublicKeyCredentialAssertion{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAuthorizationSecurityKeyPublicKeyCredentialAssertion creates a new AuthorizationSecurityKeyPublicKeyCredentialAssertion.
 func NewAuthorizationSecurityKeyPublicKeyCredentialAssertion() *AuthorizationSecurityKeyPublicKeyCredentialAssertion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationSecurityKeyPublicKeyCredentialAssertion")), objc.RegisterName("new"))
-	return &AuthorizationSecurityKeyPublicKeyCredentialAssertion{inner: raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationSecurityKeyPublicKeyCredentialAssertion")), objc.RegisterName("new"))
+	return authorizationSecurityKeyPublicKeyCredentialAssertionAdopt(_id)
 }
 
 // Indicates that this assertion used the appid WebAuthn extension. This can only happen if the requesting app is a web browser and requested to use this extension.
-//
-// AppID calls the underlying AppID.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) AppID() bool {
-	return x.inner.AppID()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appID"))
+	return _r
 }
 
-// Prf calls the underlying Prf.
 func (x *AuthorizationSecurityKeyPublicKeyCredentialAssertion) Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput {
-	_r := x.inner.Prf()
-	if _r == nil {
-		return nil
-	}
-	return &AuthorizationPublicKeyCredentialPRFAssertionOutput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prf"))
+	return AuthorizationPublicKeyCredentialPRFAssertionOutputFromID(_r)
 }
 
 // AuthorizationSecurityKeyPublicKeyCredentialAssertionable is the interface implemented by [AuthorizationSecurityKeyPublicKeyCredentialAssertion], for mocking and DI.
 type AuthorizationSecurityKeyPublicKeyCredentialAssertionable interface {
-	Unwrap() *raw.ASAuthorizationSecurityKeyPublicKeyCredentialAssertion
+	obj.Object
 	AppID() bool
 	Prf() *AuthorizationPublicKeyCredentialPRFAssertionOutput
 }

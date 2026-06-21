@@ -5,93 +5,85 @@
 package mpsimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ImageLaplacian wraps [raw.MPSImageLaplacian] with a fluent Go API.
+// ImageLaplacian is an idiomatic wrapper over the Objective-C class MPSImageLaplacian.
 type ImageLaplacian struct {
-	inner *raw.MPSImageLaplacian
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageLaplacian].
-func (x *ImageLaplacian) Unwrap() *raw.MPSImageLaplacian { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageLaplacian) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageLaplacianFromID adopts an existing object pointer as a ImageLaplacian (nil for 0).
+// ImageLaplacianFromID adopts an existing Objective-C object as a ImageLaplacian
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageLaplacianFromID(id objc.ID) *ImageLaplacian {
 	if id == 0 {
 		return nil
 	}
-	return &ImageLaplacian{inner: raw.MPSImageLaplacianFromID(id)}
+	x := &ImageLaplacian{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewImageLaplacian creates a new [ImageLaplacian].
+// imageLaplacianAdopt wraps an Objective-C object that this code just created as a
+// ImageLaplacian (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageLaplacianAdopt(id objc.ID) *ImageLaplacian {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageLaplacian{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ImageLaplacian) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageLaplacian) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageLaplacian) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageLaplacian creates a new ImageLaplacian.
 func NewImageLaplacian() *ImageLaplacian {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageLaplacian")), objc.RegisterName("new"))
-	return &ImageLaplacian{inner: raw.MPSImageLaplacianFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageLaplacian")), objc.RegisterName("new"))
+	return imageLaplacianAdopt(_id)
 }
 
-// @property    bias @discussion  The bias is a value to be added to convolved pixel before it is converted back to the storage format. It can be used to convert negative values into a representable range for a unsigned MTLPixelFormat. For example, many edge detection filters produce results in the range [-k,k]. By scaling the filter weights by 0.5/k and adding 0.5, the results will be in range [0,1] suitable for use with unorm formats. It can be used in combination with renormalization of the filter weights to do video ranging as part of the convolution effect. It can also just be used to increase the brightness of the image. Default value is 0.0f.
+// The bias is a value to be added to convolved pixel before it is converted back to the storage format. It can be used to convert negative values into a representable range for a unsigned MTLPixelFormat. For example, many edge detection filters produce results in the range [-k,k]. By scaling the filter weights by 0.5/k and adding 0.5, the results will be in range [0,1] suitable for use with unorm formats. It can be used in combination with renormalization of the filter weights to do video ranging as part of the convolution effect. It can also just be used to increase the brightness of the image. Default value is 0.0f.
 //
-// WithBias sets the bias property and returns the receiver for chaining.
+// WithBias sets bias and returns the receiver so calls can be chained.
 func (x *ImageLaplacian) WithBias(bias float32) *ImageLaplacian {
-	x.inner.SetBias(bias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageLaplacian) WithOffset(offset mpscore.MPSOffset) *ImageLaplacian {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
-	return x
-}
-
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageLaplacian) WithClipRect(clipRect metal.MTLRegion) *ImageLaplacian {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
-	return x
-}
-
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageLaplacian) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacian {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property    bias @discussion  The bias is a value to be added to convolved pixel before it is converted back to the storage format. It can be used to convert negative values into a representable range for a unsigned MTLPixelFormat. For example, many edge detection filters produce results in the range [-k,k]. By scaling the filter weights by 0.5/k and adding 0.5, the results will be in range [0,1] suitable for use with unorm formats. It can be used in combination with renormalization of the filter weights to do video ranging as part of the convolution effect. It can also just be used to increase the brightness of the image. Default value is 0.0f.
-//
-// Bias calls the underlying Bias.
+// The bias is a value to be added to convolved pixel before it is converted back to the storage format. It can be used to convert negative values into a representable range for a unsigned MTLPixelFormat. For example, many edge detection filters produce results in the range [-k,k]. By scaling the filter weights by 0.5/k and adding 0.5, the results will be in range [0,1] suitable for use with unorm formats. It can be used in combination with renormalization of the filter weights to do video ranging as part of the convolution effect. It can also just be used to increase the brightness of the image. Default value is 0.0f.
 func (x *ImageLaplacian) Bias() float32 {
-	return x.inner.Bias()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bias"))
+	return _r
 }
 
-// SetBias calls the underlying SetBias.
 func (x *ImageLaplacian) SetBias(bias float32) {
-	x.inner.SetBias(bias)
-}
-
-func (x *ImageLaplacian) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 }
 
 // ImageLaplacianable is the interface implemented by [ImageLaplacian], for mocking and DI.
 type ImageLaplacianable interface {
-	Unwrap() *raw.MPSImageLaplacian
+	obj.Object
 	WithBias(bias float32) *ImageLaplacian
-	WithOffset(offset mpscore.MPSOffset) *ImageLaplacian
-	WithClipRect(clipRect metal.MTLRegion) *ImageLaplacian
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageLaplacian
 	Bias() float32
 	SetBias(bias float32)
 }

@@ -5,64 +5,84 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that defines how to attach a supplementary item to an item in a collection view.
 //
-// CollectionLayoutAnchor wraps [raw.NSCollectionLayoutAnchor] with a fluent Go API.
+// CollectionLayoutAnchor is an idiomatic wrapper over the Objective-C class NSCollectionLayoutAnchor.
 type CollectionLayoutAnchor struct {
-	inner *raw.NSCollectionLayoutAnchor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCollectionLayoutAnchor].
-func (x *CollectionLayoutAnchor) Unwrap() *raw.NSCollectionLayoutAnchor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionLayoutAnchor) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionLayoutAnchorFromID adopts an existing object pointer as a CollectionLayoutAnchor (nil for 0).
+// CollectionLayoutAnchorFromID adopts an existing Objective-C object as a CollectionLayoutAnchor
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionLayoutAnchorFromID(id objc.ID) *CollectionLayoutAnchor {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionLayoutAnchor{inner: raw.NSCollectionLayoutAnchorFromID(id)}
+	x := &CollectionLayoutAnchor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCollectionLayoutAnchor creates a new [CollectionLayoutAnchor].
+// collectionLayoutAnchorAdopt wraps an Objective-C object that this code just created as a
+// CollectionLayoutAnchor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionLayoutAnchorAdopt(id objc.ID) *CollectionLayoutAnchor {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionLayoutAnchor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollectionLayoutAnchor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollectionLayoutAnchor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollectionLayoutAnchor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCollectionLayoutAnchor creates a new CollectionLayoutAnchor.
 func NewCollectionLayoutAnchor() *CollectionLayoutAnchor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionLayoutAnchor")), objc.RegisterName("new"))
-	return &CollectionLayoutAnchor{inner: raw.NSCollectionLayoutAnchorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutAnchor")), objc.RegisterName("new"))
+	return collectionLayoutAnchorAdopt(_id)
 }
 
-// Edges calls the underlying Edges.
-func (x *CollectionLayoutAnchor) Edges() NSDirectionalRectEdge {
-	return NSDirectionalRectEdge(x.inner.Edges())
+func (x *CollectionLayoutAnchor) Edges() DirectionalRectEdge {
+	_r := objc.Send[DirectionalRectEdge](objref.IDOf(x), objc.RegisterName("edges"))
+	return _r
 }
 
-// Offset calls the underlying Offset.
-func (x *CollectionLayoutAnchor) Offset() corefoundation.CGPoint {
-	return x.inner.Offset()
-}
-
-// IsAbsoluteOffset calls the underlying IsAbsoluteOffset.
 func (x *CollectionLayoutAnchor) IsAbsoluteOffset() bool {
-	return x.inner.IsAbsoluteOffset()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAbsoluteOffset"))
+	return _r
 }
 
-// IsFractionalOffset calls the underlying IsFractionalOffset.
 func (x *CollectionLayoutAnchor) IsFractionalOffset() bool {
-	return x.inner.IsFractionalOffset()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFractionalOffset"))
+	return _r
 }
 
 // CollectionLayoutAnchorable is the interface implemented by [CollectionLayoutAnchor], for mocking and DI.
 type CollectionLayoutAnchorable interface {
-	Unwrap() *raw.NSCollectionLayoutAnchor
-	Edges() NSDirectionalRectEdge
-	Offset() corefoundation.CGPoint
+	obj.Object
+	Edges() DirectionalRectEdge
 	IsAbsoluteOffset() bool
 	IsFractionalOffset() bool
 }

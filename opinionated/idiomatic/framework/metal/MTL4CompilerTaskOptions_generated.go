@@ -5,67 +5,79 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The configuration options that control the behavior of a compilation task for a Metal 4 compiler instance.
 //
-// MTL4CompilerTaskOptions wraps [raw.MTL4CompilerTaskOptions] with a fluent Go API.
+// MTL4CompilerTaskOptions is an idiomatic wrapper over the Objective-C class MTL4CompilerTaskOptions.
 type MTL4CompilerTaskOptions struct {
-	inner *raw.MTL4CompilerTaskOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTL4CompilerTaskOptions].
-func (x *MTL4CompilerTaskOptions) Unwrap() *raw.MTL4CompilerTaskOptions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTL4CompilerTaskOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// MTL4CompilerTaskOptionsFromID adopts an existing object pointer as a MTL4CompilerTaskOptions (nil for 0).
+// MTL4CompilerTaskOptionsFromID adopts an existing Objective-C object as a MTL4CompilerTaskOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func MTL4CompilerTaskOptionsFromID(id objc.ID) *MTL4CompilerTaskOptions {
 	if id == 0 {
 		return nil
 	}
-	return &MTL4CompilerTaskOptions{inner: raw.MTL4CompilerTaskOptionsFromID(id)}
+	x := &MTL4CompilerTaskOptions{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTL4CompilerTaskOptions creates a new [MTL4CompilerTaskOptions].
+// mTL4CompilerTaskOptionsAdopt wraps an Objective-C object that this code just created as a
+// MTL4CompilerTaskOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTL4CompilerTaskOptionsAdopt(id objc.ID) *MTL4CompilerTaskOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &MTL4CompilerTaskOptions{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTL4CompilerTaskOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTL4CompilerTaskOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTL4CompilerTaskOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTL4CompilerTaskOptions creates a new MTL4CompilerTaskOptions.
 func NewMTL4CompilerTaskOptions() *MTL4CompilerTaskOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4CompilerTaskOptions")), objc.RegisterName("new"))
-	return &MTL4CompilerTaskOptions{inner: raw.MTL4CompilerTaskOptionsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTL4CompilerTaskOptions")), objc.RegisterName("new"))
+	return mTL4CompilerTaskOptionsAdopt(_id)
 }
 
-// LookupArchives calls the underlying LookupArchives.
-func (x *MTL4CompilerTaskOptions) LookupArchives() *foundation.NSArray[raw.MTL4Archive] {
-	return x.inner.LookupArchives()
+func (x *MTL4CompilerTaskOptions) LookupArchives() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lookupArchives"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetLookupArchives calls the underlying SetLookupArchives.
-func (x *MTL4CompilerTaskOptions) SetLookupArchives(lookupArchives ...purego.IDer) {
-	_ptrs := make([]objc.ID, len(lookupArchives))
-	for _i, _v := range lookupArchives {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *foundation.NSArray[raw.MTL4Archive]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.MTL4Archive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.MTL4Archive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetLookupArchives(_arg0)
+func (x *MTL4CompilerTaskOptions) SetLookupArchives(lookupArchives []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLookupArchives:"), purego.SliceToNSArray(lookupArchives, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // MTL4CompilerTaskOptionsable is the interface implemented by [MTL4CompilerTaskOptions], for mocking and DI.
 type MTL4CompilerTaskOptionsable interface {
-	Unwrap() *raw.MTL4CompilerTaskOptions
-	LookupArchives() *foundation.NSArray[raw.MTL4Archive]
-	SetLookupArchives(lookupArchives ...purego.IDer)
+	obj.Object
+	LookupArchives() []obj.Object
+	SetLookupArchives(lookupArchives []obj.Object)
 }
 
 var _ MTL4CompilerTaskOptionsable = (*MTL4CompilerTaskOptions)(nil)

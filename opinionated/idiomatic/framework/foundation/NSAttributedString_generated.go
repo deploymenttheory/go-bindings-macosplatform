@@ -5,234 +5,189 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // A string of text that manages data, layout, and stylistic information for ranges of characters to support rendering.
 //
-// AttributedString wraps [raw.NSAttributedString] with a fluent Go API.
+// AttributedString is an idiomatic wrapper over the Objective-C class NSAttributedString.
 type AttributedString struct {
-	inner *raw.NSAttributedString
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSAttributedString].
-func (x *AttributedString) Unwrap() *raw.NSAttributedString { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AttributedString) ID() objc.ID { return x.inner.Ptr() }
-
-// AttributedStringFromID adopts an existing object pointer as a AttributedString (nil for 0).
+// AttributedStringFromID adopts an existing Objective-C object as a AttributedString
+// (nil for 0), retaining it and registering a release finalizer.
 func AttributedStringFromID(id objc.ID) *AttributedString {
 	if id == 0 {
 		return nil
 	}
-	return &AttributedString{inner: raw.NSAttributedStringFromID(id)}
-}
-
-// NewAttributedStringWithString creates a new [AttributedString].
-func NewAttributedStringWithString(str string) *AttributedString {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), foundation.NSStringStringWithUTF8String(str).Ptr())
-	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
-}
-
-// NewAttributedStringWithStringAttributes creates a new [AttributedString].
-func NewAttributedStringWithStringAttributes(str string, attrs purego.IDer) *AttributedString {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:attributes:"), foundation.NSStringStringWithUTF8String(str).Ptr(), attrs.ID())
-	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
-}
-
-// NewAttributedStringWithAttributedString creates a new [AttributedString].
-func NewAttributedStringWithAttributedString(attrStr *raw.NSAttributedString) *AttributedString {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttributedString:"), attrStr.Ptr())
-	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
-}
-
-// NewAttributedStringWithContentsOfMarkdownFileAtURLOptionsBaseURLError creates a new [AttributedString].
-func NewAttributedStringWithContentsOfMarkdownFileAtURLOptionsBaseURLError(markdownFile string, options *raw.NSAttributedStringMarkdownParsingOptions, baseURL string) (*AttributedString, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfMarkdownFileAtURL:options:baseURL:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(markdownFile)).Ptr(), options.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)).Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}, nil
-}
-
-// NewAttributedStringWithMarkdownOptionsBaseURLError creates a new [AttributedString].
-func NewAttributedStringWithMarkdownOptionsBaseURLError(markdown *raw.NSData, options *raw.NSAttributedStringMarkdownParsingOptions, baseURL string) (*AttributedString, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMarkdown:options:baseURL:error:"), markdown.Ptr(), options.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)).Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}, nil
-}
-
-// NewAttributedStringWithMarkdownStringOptionsBaseURLError creates a new [AttributedString].
-func NewAttributedStringWithMarkdownStringOptionsBaseURLError(markdownString string, options *raw.NSAttributedStringMarkdownParsingOptions, baseURL string) (*AttributedString, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMarkdownString:options:baseURL:error:"), foundation.NSStringStringWithUTF8String(markdownString).Ptr(), options.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)).Ptr(), unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}, nil
-}
-
-// Formats the string using the specified locale (or the canonical one, if nil).
-//
-// NewAttributedStringWithFormatOptionsLocale creates a new [AttributedString].
-func NewAttributedStringWithFormatOptionsLocale(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions, locale *raw.NSLocale) *AttributedString {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:"), format.Ptr(), raw.NSAttributedStringFormattingOptions(options), locale.Ptr())
-	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
-}
-
-// Formats the string using the arguments list and the specified locale (or the canonical one, if nil).
-//
-// NewAttributedStringWithFormatOptionsLocaleArguments creates a new [AttributedString].
-func NewAttributedStringWithFormatOptionsLocaleArguments(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions, locale *raw.NSLocale, arguments string) *AttributedString {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:arguments:"), format.Ptr(), raw.NSAttributedStringFormattingOptions(options), locale.Ptr(), arguments)
-	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
-}
-
-// Formats the string using the specified locale (or the canonical one, if nil).
-//
-// NewAttributedStringWithFormatOptionsLocaleContext creates a new [AttributedString].
-func NewAttributedStringWithFormatOptionsLocaleContext(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions, locale *raw.NSLocale, context_ purego.IDer) *AttributedString {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:context:"), format.Ptr(), raw.NSAttributedStringFormattingOptions(options), locale.Ptr(), context_.ID())
-	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
-}
-
-// Formats the string using the arguments list and the specified locale (or the canonical one, if nil).
-//
-// NewAttributedStringWithFormatOptionsLocaleContextArguments creates a new [AttributedString].
-func NewAttributedStringWithFormatOptionsLocaleContextArguments(format *raw.NSAttributedString, options NSAttributedStringFormattingOptions, locale *raw.NSLocale, context_ purego.IDer, arguments string) *AttributedString {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAttributedString")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:context:arguments:"), format.Ptr(), raw.NSAttributedStringFormattingOptions(options), locale.Ptr(), context_.ID(), arguments)
-	return &AttributedString{inner: raw.NSAttributedStringFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *AttributedString) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedString {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &AttributedString{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Returns the attributes for the character at the specified index.
-//
-// AttributesAtIndexEffectiveRange calls the underlying AttributesAtIndexEffectiveRange.
-func (x *AttributedString) AttributesAtIndexEffectiveRange(location uint, range_ *raw.NSRange) *raw.NSDictionary[*raw.NSString, objc.ID] {
-	return x.inner.AttributesAtIndexEffectiveRange(location, range_)
-}
-
-// String calls the underlying String.
-func (x *AttributedString) String() *String {
-	_r := x.inner.String()
-	if _r == nil {
+// attributedStringAdopt wraps an Objective-C object that this code just created as a
+// AttributedString (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func attributedStringAdopt(id objc.ID) *AttributedString {
+	if id == 0 {
 		return nil
 	}
-	return &String{inner: _r}
+	x := &AttributedString{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Returns the value for an attribute with the specified name of the character at the specified index and, by reference, the range where the attribute applies.
-//
-// AttributeAtIndexEffectiveRange calls the underlying AttributeAtIndexEffectiveRange.
-func (x *AttributedString) AttributeAtIndexEffectiveRange(attrName *raw.NSString, location uint, range_ *raw.NSRange) objc.ID {
-	return x.inner.AttributeAtIndexEffectiveRange(attrName, location, range_)
+// Description returns the object's -description text.
+func (x *AttributedString) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Returns an attributed string consisting of the characters and attributes within the specified range in the attributed string.
-//
-// AttributedSubstringFromRange calls the underlying AttributedSubstringFromRange.
-func (x *AttributedString) AttributedSubstringFromRange(range_ raw.NSRange) *AttributedString {
-	_r := x.inner.AttributedSubstringFromRange(range_)
-	if _r == nil {
-		return nil
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AttributedString) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AttributedString) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAttributedStringWithString creates a new AttributedString.
+func NewAttributedStringWithString(str string) *AttributedString {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(str))
+	return attributedStringAdopt(_id)
+}
+
+// NewAttributedStringWithStringAttributes creates a new AttributedString.
+func NewAttributedStringWithStringAttributes(str string, attrs obj.Object) *AttributedString {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:attributes:"), purego.NSString(str), objref.IDOf(attrs))
+	return attributedStringAdopt(_id)
+}
+
+// NewAttributedStringWithAttributedString creates a new AttributedString.
+func NewAttributedStringWithAttributedString(attrStr *AttributedString) *AttributedString {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttributedString:"), objref.IDOf(attrStr))
+	return attributedStringAdopt(_id)
+}
+
+// NewAttributedStringWithContentsOfMarkdownFileAtURLOptionsBaseURLError creates a new AttributedString.
+func NewAttributedStringWithContentsOfMarkdownFileAtURLOptionsBaseURLError(markdownFile string, options *AttributedStringMarkdownParsingOptions, baseURL string) (*AttributedString, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContentsOfMarkdownFileAtURL:options:baseURL:error:"), rt.FileURL(markdownFile), objref.IDOf(options), rt.FileURL(baseURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &AttributedString{inner: _r}
+	return attributedStringAdopt(_id), nil
 }
 
-// Returns the attributes for the character at the specified index and, by reference, the range where the attributes apply.
-//
-// AttributesAtIndexLongestEffectiveRangeInRange calls the underlying AttributesAtIndexLongestEffectiveRangeInRange.
-func (x *AttributedString) AttributesAtIndexLongestEffectiveRangeInRange(location uint, range_ *raw.NSRange, rangeLimit raw.NSRange) *raw.NSDictionary[*raw.NSString, objc.ID] {
-	return x.inner.AttributesAtIndexLongestEffectiveRangeInRange(location, range_, rangeLimit)
+// NewAttributedStringWithMarkdownOptionsBaseURLError creates a new AttributedString.
+func NewAttributedStringWithMarkdownOptionsBaseURLError(markdown *Data, options *AttributedStringMarkdownParsingOptions, baseURL string) (*AttributedString, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMarkdown:options:baseURL:error:"), objref.IDOf(markdown), objref.IDOf(options), rt.FileURL(baseURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return attributedStringAdopt(_id), nil
 }
 
-// Returns the value for the attribute with the specified name of the character at the specified index and, by reference, the range where the attribute applies.
+// NewAttributedStringWithMarkdownStringOptionsBaseURLError creates a new AttributedString.
+func NewAttributedStringWithMarkdownStringOptionsBaseURLError(markdownString string, options *AttributedStringMarkdownParsingOptions, baseURL string) (*AttributedString, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
+	var _nsErr uintptr
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMarkdownString:options:baseURL:error:"), purego.NSString(markdownString), objref.IDOf(options), rt.FileURL(baseURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return attributedStringAdopt(_id), nil
+}
+
+// Formats the string using the specified locale (or the canonical one, if nil).
 //
-// AttributeAtIndexLongestEffectiveRangeInRange calls the underlying AttributeAtIndexLongestEffectiveRangeInRange.
-func (x *AttributedString) AttributeAtIndexLongestEffectiveRangeInRange(attrName *raw.NSString, location uint, range_ *raw.NSRange, rangeLimit raw.NSRange) objc.ID {
-	return x.inner.AttributeAtIndexLongestEffectiveRangeInRange(attrName, location, range_, rangeLimit)
+// NewAttributedStringWithFormatOptionsLocale creates a new AttributedString.
+func NewAttributedStringWithFormatOptionsLocale(format *AttributedString, options AttributedStringFormattingOptions, locale *Locale) *AttributedString {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:"), objref.IDOf(format), options, objref.IDOf(locale))
+	return attributedStringAdopt(_id)
+}
+
+// Formats the string using the arguments list and the specified locale (or the canonical one, if nil).
+//
+// NewAttributedStringWithFormatOptionsLocaleArguments creates a new AttributedString.
+func NewAttributedStringWithFormatOptionsLocaleArguments(format *AttributedString, options AttributedStringFormattingOptions, locale *Locale, arguments string) *AttributedString {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:arguments:"), objref.IDOf(format), options, objref.IDOf(locale), arguments)
+	return attributedStringAdopt(_id)
+}
+
+// Formats the string using the specified locale (or the canonical one, if nil).
+//
+// NewAttributedStringWithFormatOptionsLocaleContext creates a new AttributedString.
+func NewAttributedStringWithFormatOptionsLocaleContext(format *AttributedString, options AttributedStringFormattingOptions, locale *Locale, context_ obj.Object) *AttributedString {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:context:"), objref.IDOf(format), options, objref.IDOf(locale), objref.IDOf(context_))
+	return attributedStringAdopt(_id)
+}
+
+// Formats the string using the arguments list and the specified locale (or the canonical one, if nil).
+//
+// NewAttributedStringWithFormatOptionsLocaleContextArguments creates a new AttributedString.
+func NewAttributedStringWithFormatOptionsLocaleContextArguments(format *AttributedString, options AttributedStringFormattingOptions, locale *Locale, context_ obj.Object, arguments string) *AttributedString {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAttributedString")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormat:options:locale:context:arguments:"), objref.IDOf(format), options, objref.IDOf(locale), objref.IDOf(context_), arguments)
+	return attributedStringAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *AttributedString) WithScriptingProperties(scriptingProperties obj.Object) *AttributedString {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+func (x *AttributedString) String() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("string"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
 }
 
 // Returns a Boolean value that indicates whether the attributed string is equal to the specified string.
-//
-// IsEqualToAttributedString calls the underlying IsEqualToAttributedString.
-func (x *AttributedString) IsEqualToAttributedString(other *raw.NSAttributedString) bool {
-	return x.inner.IsEqualToAttributedString(other)
+func (x *AttributedString) IsEqualToAttributedString(other *AttributedString) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToAttributedString:"), objref.IDOf(other))
+	return _r
 }
 
-// Executes the specified closure or block for each range of attributes in the attributed string.
-//
-// EnumerateAttributesInRangeOptionsUsing calls the underlying EnumerateAttributesInRangeOptionsUsing.
-func (x *AttributedString) EnumerateAttributesInRangeOptionsUsing(enumerationRange raw.NSRange, opts NSAttributedStringEnumerationOptions, block objc.Block) {
-	x.inner.EnumerateAttributesInRangeOptionsUsing(enumerationRange, raw.NSAttributedStringEnumerationOptions(opts), block)
-}
-
-// Executes the specified closure or block for each range of a particular attribute in the attributed string.
-//
-// EnumerateAttributeInRangeOptionsUsing calls the underlying EnumerateAttributeInRangeOptionsUsing.
-func (x *AttributedString) EnumerateAttributeInRangeOptionsUsing(attrName *raw.NSString, enumerationRange raw.NSRange, opts NSAttributedStringEnumerationOptions, block objc.Block) {
-	x.inner.EnumerateAttributeInRangeOptionsUsing(attrName, enumerationRange, raw.NSAttributedStringEnumerationOptions(opts), block)
-}
-
-// Length calls the underlying Length.
-func (x *AttributedString) Length() uint {
-	return x.inner.Length()
+func (x *AttributedString) Length() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
 // If the string has portions tagged with NSInflectionRuleAttributeName that have no format specifiers, create a new string with those portions inflected by following the rule in the attribute.
-//
-// AttributedStringByInflectingString calls the underlying AttributedStringByInflectingString.
 func (x *AttributedString) AttributedStringByInflectingString() *AttributedString {
-	_r := x.inner.AttributedStringByInflectingString()
-	if _r == nil {
-		return nil
-	}
-	return &AttributedString{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringByInflectingString"))
+	return AttributedStringFromID(_r)
 }
-
-func (x *AttributedString) asAttributedString() *raw.NSAttributedString { return x.inner }
-
-func (x *AttributedString) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // AttributedStringable is the interface implemented by [AttributedString], for mocking and DI.
 type AttributedStringable interface {
-	Unwrap() *raw.NSAttributedString
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *AttributedString
-	AttributesAtIndexEffectiveRange(location uint, range_ *raw.NSRange) *raw.NSDictionary[*raw.NSString, objc.ID]
-	String() *String
-	AttributeAtIndexEffectiveRange(attrName *raw.NSString, location uint, range_ *raw.NSRange) objc.ID
-	AttributedSubstringFromRange(range_ raw.NSRange) *AttributedString
-	AttributesAtIndexLongestEffectiveRangeInRange(location uint, range_ *raw.NSRange, rangeLimit raw.NSRange) *raw.NSDictionary[*raw.NSString, objc.ID]
-	AttributeAtIndexLongestEffectiveRangeInRange(attrName *raw.NSString, location uint, range_ *raw.NSRange, rangeLimit raw.NSRange) objc.ID
-	IsEqualToAttributedString(other *raw.NSAttributedString) bool
-	EnumerateAttributesInRangeOptionsUsing(enumerationRange raw.NSRange, opts NSAttributedStringEnumerationOptions, block objc.Block)
-	EnumerateAttributeInRangeOptionsUsing(attrName *raw.NSString, enumerationRange raw.NSRange, opts NSAttributedStringEnumerationOptions, block objc.Block)
-	Length() uint
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *AttributedString
+	String() string
+	IsEqualToAttributedString(other *AttributedString) bool
+	Length() int
 	AttributedStringByInflectingString() *AttributedString
 }
 

@@ -5,69 +5,87 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A mechanism for generating requests to authenticate users with third-party providers.
 //
-// AuthorizationSingleSignOnProvider wraps [raw.ASAuthorizationSingleSignOnProvider] with a fluent Go API.
+// AuthorizationSingleSignOnProvider is an idiomatic wrapper over the Objective-C class ASAuthorizationSingleSignOnProvider.
 type AuthorizationSingleSignOnProvider struct {
-	inner *raw.ASAuthorizationSingleSignOnProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationSingleSignOnProvider].
-func (x *AuthorizationSingleSignOnProvider) Unwrap() *raw.ASAuthorizationSingleSignOnProvider {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationSingleSignOnProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationSingleSignOnProviderFromID adopts an existing object pointer as a AuthorizationSingleSignOnProvider (nil for 0).
+// AuthorizationSingleSignOnProviderFromID adopts an existing Objective-C object as a AuthorizationSingleSignOnProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationSingleSignOnProviderFromID(id objc.ID) *AuthorizationSingleSignOnProvider {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationSingleSignOnProvider{inner: raw.ASAuthorizationSingleSignOnProviderFromID(id)}
+	x := &AuthorizationSingleSignOnProvider{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorizationSingleSignOnProvider creates a new [AuthorizationSingleSignOnProvider].
+// authorizationSingleSignOnProviderAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationSingleSignOnProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationSingleSignOnProviderAdopt(id objc.ID) *AuthorizationSingleSignOnProvider {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationSingleSignOnProvider{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthorizationSingleSignOnProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationSingleSignOnProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationSingleSignOnProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAuthorizationSingleSignOnProvider creates a new AuthorizationSingleSignOnProvider.
 func NewAuthorizationSingleSignOnProvider() *AuthorizationSingleSignOnProvider {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationSingleSignOnProvider")), objc.RegisterName("new"))
-	return &AuthorizationSingleSignOnProvider{inner: raw.ASAuthorizationSingleSignOnProviderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationSingleSignOnProvider")), objc.RegisterName("new"))
+	return authorizationSingleSignOnProviderAdopt(_id)
 }
 
 // Creates a single sign-on (SSO) authorization request.
-//
-// CreateRequest calls the underlying CreateRequest.
 func (x *AuthorizationSingleSignOnProvider) CreateRequest() *AuthorizationSingleSignOnRequest {
-	_r := x.inner.CreateRequest()
-	if _r == nil {
-		return nil
-	}
-	return &AuthorizationSingleSignOnRequest{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createRequest"))
+	return AuthorizationSingleSignOnRequestFromID(_r)
 }
 
-// Url calls the underlying Url.
-func (x *AuthorizationSingleSignOnProvider) Url() *foundation.NSURL {
-	return x.inner.Url()
+func (x *AuthorizationSingleSignOnProvider) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
 }
 
-// @abstract Returns YES if the configured provider is capable of performing authorization within a given configuration.
-//
-// CanPerformAuthorization calls the underlying CanPerformAuthorization.
+// Returns YES if the configured provider is capable of performing authorization within a given configuration.
 func (x *AuthorizationSingleSignOnProvider) CanPerformAuthorization() bool {
-	return x.inner.CanPerformAuthorization()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPerformAuthorization"))
+	return _r
 }
 
 // AuthorizationSingleSignOnProviderable is the interface implemented by [AuthorizationSingleSignOnProvider], for mocking and DI.
 type AuthorizationSingleSignOnProviderable interface {
-	Unwrap() *raw.ASAuthorizationSingleSignOnProvider
+	obj.Object
 	CreateRequest() *AuthorizationSingleSignOnRequest
-	Url() *foundation.NSURL
+	Url() obj.Object
 	CanPerformAuthorization() bool
 }
 

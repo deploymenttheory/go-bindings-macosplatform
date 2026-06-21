@@ -5,151 +5,88 @@
 package avfoundation
 
 import (
-	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that you use to create a new composition from existing assets.
 //
-// MutableComposition wraps [raw.AVMutableComposition] with a fluent Go API.
+// MutableComposition is an idiomatic wrapper over the Objective-C class AVMutableComposition.
 type MutableComposition struct {
-	inner *raw.AVMutableComposition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMutableComposition].
-func (x *MutableComposition) Unwrap() *raw.AVMutableComposition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableComposition) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableCompositionFromID adopts an existing object pointer as a MutableComposition (nil for 0).
+// MutableCompositionFromID adopts an existing Objective-C object as a MutableComposition
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableCompositionFromID(id objc.ID) *MutableComposition {
 	if id == 0 {
 		return nil
 	}
-	return &MutableComposition{inner: raw.AVMutableCompositionFromID(id)}
-}
-
-// NewMutableComposition creates a new [MutableComposition].
-func NewMutableComposition() *MutableComposition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableComposition")), objc.RegisterName("new"))
-	return &MutableComposition{inner: raw.AVMutableCompositionFromID(_id)}
-}
-
-// The encoded or authored size of the visual portion of the asset.
-//
-// WithNaturalSize sets the naturalSize property and returns the receiver for chaining.
-func (x *MutableComposition) WithNaturalSize(naturalSize corefoundation.CGSize) *MutableComposition {
-	x.inner.SetNaturalSize(naturalSize)
+	x := &MutableComposition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// SetNaturalSize calls the underlying SetNaturalSize.
-func (x *MutableComposition) SetNaturalSize(naturalSize corefoundation.CGSize) {
-	x.inner.SetNaturalSize(naturalSize)
-}
-
-// Inserts all the tracks within a given time range of a specified asset into the composition.
-//
-// InsertTimeRangeOfAssetAtTimeError calls the underlying InsertTimeRangeOfAssetAtTimeError.
-func (x *MutableComposition) InsertTimeRangeOfAssetAtTimeError(timeRange coremedia.CMTimeRange, asset *raw.AVAsset, startTime coremedia.CMTime) (bool, error) {
-	return x.inner.InsertTimeRangeOfAssetAtTimeError(timeRange, asset, startTime)
-}
-
-// Inserts all tracks of an asset for a time range into a composition.
-//
-// InsertTimeRangeOfAssetAtTime blocks until the operation completes or ctx is cancelled.
-func (x *MutableComposition) InsertTimeRangeOfAssetAtTime(ctx context.Context, timeRange coremedia.CMTimeRange, asset *raw.AVAsset, startTime coremedia.CMTime) error {
-	_ch := make(chan error, 1)
-	x.inner.InsertTimeRangeOfAssetAtTimeCompletionHandler(timeRange, asset, startTime, func(_p0 unsafe.Pointer) {
-		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
-		_ch <- _err
-	})
-	select {
-	case err := <-_ch:
-		return err
-	case <-ctx.Done():
-		return ctx.Err()
+// mutableCompositionAdopt wraps an Objective-C object that this code just created as a
+// MutableComposition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableCompositionAdopt(id objc.ID) *MutableComposition {
+	if id == 0 {
+		return nil
 	}
+	x := &MutableComposition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Adds or extends an empty time range within all tracks of the composition.
-//
-// InsertEmptyTimeRange calls the underlying InsertEmptyTimeRange.
-func (x *MutableComposition) InsertEmptyTimeRange(timeRange coremedia.CMTimeRange) {
-	x.inner.InsertEmptyTimeRange(timeRange)
+// Description returns the object's -description text.
+func (x *MutableComposition) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Removes a specified time range from all tracks of the composition.
-//
-// RemoveTimeRange calls the underlying RemoveTimeRange.
-func (x *MutableComposition) RemoveTimeRange(timeRange coremedia.CMTimeRange) {
-	x.inner.RemoveTimeRange(timeRange)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MutableComposition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Changes the duration of all tracks in a given time range.
-//
-// ScaleTimeRangeToDuration calls the underlying ScaleTimeRangeToDuration.
-func (x *MutableComposition) ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime) {
-	x.inner.ScaleTimeRangeToDuration(timeRange, duration)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MutableComposition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMutableComposition creates a new MutableComposition.
+func NewMutableComposition() *MutableComposition {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMutableComposition")), objc.RegisterName("new"))
+	return mutableCompositionAdopt(_id)
 }
 
 // Adds an empty track to a composition.
-//
-// AddMutableTrackWithMediaTypePreferredTrackID calls the underlying AddMutableTrackWithMediaTypePreferredTrackID.
-func (x *MutableComposition) AddMutableTrackWithMediaTypePreferredTrackID(mediaType *foundation.NSString, preferredTrackID int32) *MutableCompositionTrack {
-	_r := x.inner.AddMutableTrackWithMediaTypePreferredTrackID(mediaType, preferredTrackID)
-	if _r == nil {
-		return nil
-	}
-	return &MutableCompositionTrack{inner: _r}
+func (x *MutableComposition) AddMutableTrackWithMediaTypePreferredTrackID(mediaType obj.Object, preferredTrackID int32) *MutableCompositionTrack {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addMutableTrackWithMediaType:preferredTrackID:"), objref.IDOf(mediaType), preferredTrackID)
+	return MutableCompositionTrackFromID(_r)
 }
 
 // Removes a specified track from the composition.
-//
-// RemoveTrack calls the underlying RemoveTrack.
-func (x *MutableComposition) RemoveTrack(track *raw.AVCompositionTrack) {
-	x.inner.RemoveTrack(track)
+func (x *MutableComposition) RemoveTrack(track *CompositionTrack) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTrack:"), objref.IDOf(track))
 }
 
 // Returns a composition track into which you can insert any time range of the specified asset track.
-//
-// MutableTrackCompatibleWithTrack calls the underlying MutableTrackCompatibleWithTrack.
-func (x *MutableComposition) MutableTrackCompatibleWithTrack(track *raw.AVAssetTrack) *MutableCompositionTrack {
-	_r := x.inner.MutableTrackCompatibleWithTrack(track)
-	if _r == nil {
-		return nil
-	}
-	return &MutableCompositionTrack{inner: _r}
+func (x *MutableComposition) MutableTrackCompatibleWithTrack(track *AssetTrack) *MutableCompositionTrack {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mutableTrackCompatibleWithTrack:"), objref.IDOf(track))
+	return MutableCompositionTrackFromID(_r)
 }
-
-func (x *MutableComposition) asComposition() *raw.AVComposition { return &x.inner.AVComposition }
-
-func (x *MutableComposition) asAsset() *raw.AVAsset { return &x.inner.AVComposition.AVAsset }
 
 // MutableCompositionable is the interface implemented by [MutableComposition], for mocking and DI.
 type MutableCompositionable interface {
-	Unwrap() *raw.AVMutableComposition
-	WithNaturalSize(naturalSize corefoundation.CGSize) *MutableComposition
-	SetNaturalSize(naturalSize corefoundation.CGSize)
-	InsertTimeRangeOfAssetAtTimeError(timeRange coremedia.CMTimeRange, asset *raw.AVAsset, startTime coremedia.CMTime) (bool, error)
-	InsertTimeRangeOfAssetAtTime(ctx context.Context, timeRange coremedia.CMTimeRange, asset *raw.AVAsset, startTime coremedia.CMTime) error
-	InsertEmptyTimeRange(timeRange coremedia.CMTimeRange)
-	RemoveTimeRange(timeRange coremedia.CMTimeRange)
-	ScaleTimeRangeToDuration(timeRange coremedia.CMTimeRange, duration coremedia.CMTime)
-	AddMutableTrackWithMediaTypePreferredTrackID(mediaType *foundation.NSString, preferredTrackID int32) *MutableCompositionTrack
-	RemoveTrack(track *raw.AVCompositionTrack)
-	MutableTrackCompatibleWithTrack(track *raw.AVAssetTrack) *MutableCompositionTrack
+	obj.Object
+	AddMutableTrackWithMediaTypePreferredTrackID(mediaType obj.Object, preferredTrackID int32) *MutableCompositionTrack
+	RemoveTrack(track *CompositionTrack)
+	MutableTrackCompatibleWithTrack(track *AssetTrack) *MutableCompositionTrack
 }
 
 var _ MutableCompositionable = (*MutableComposition)(nil)

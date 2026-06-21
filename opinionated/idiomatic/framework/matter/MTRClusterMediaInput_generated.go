@@ -5,173 +5,118 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterMediaInput wraps [raw.MTRClusterMediaInput] with a fluent Go API.
+// MTRClusterMediaInput is an idiomatic wrapper over the Objective-C class MTRClusterMediaInput.
 type MTRClusterMediaInput struct {
-	inner *raw.MTRClusterMediaInput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterMediaInput].
-func (x *MTRClusterMediaInput) Unwrap() *raw.MTRClusterMediaInput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterMediaInput) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterMediaInputFromID adopts an existing object pointer as a MTRClusterMediaInput (nil for 0).
+// MTRClusterMediaInputFromID adopts an existing Objective-C object as a MTRClusterMediaInput
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterMediaInputFromID(id objc.ID) *MTRClusterMediaInput {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterMediaInput{inner: raw.MTRClusterMediaInputFromID(id)}
+	x := &MTRClusterMediaInput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterMediaInputAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterMediaInput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterMediaInputAdopt(id objc.ID) *MTRClusterMediaInput {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterMediaInput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterMediaInput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterMediaInput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterMediaInput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterMediaInputWithDeviceEndpointIDQueue creates a new [MTRClusterMediaInput].
-func NewMTRClusterMediaInputWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterMediaInput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterMediaInput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterMediaInput{inner: raw.MTRClusterMediaInputFromID(_id)}
+// NewMTRClusterMediaInputWithDeviceEndpointIDQueue creates a new MTRClusterMediaInput.
+func NewMTRClusterMediaInputWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterMediaInput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterMediaInput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterMediaInputAdopt(_id)
 }
 
-// NewMTRClusterMediaInputWithDeviceEndpointQueue creates a new [MTRClusterMediaInput].
-func NewMTRClusterMediaInputWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterMediaInput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterMediaInput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterMediaInput{inner: raw.MTRClusterMediaInputFromID(_id)}
+// NewMTRClusterMediaInputWithDeviceEndpointQueue creates a new MTRClusterMediaInput.
+func NewMTRClusterMediaInputWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterMediaInput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterMediaInput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterMediaInputAdopt(_id)
 }
 
-// SelectInputWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying SelectInputWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterMediaInput) SelectInputWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMediaInputClusterSelectInputParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.SelectInputWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterMediaInput) ReadAttributeInputListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInputListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ShowInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying ShowInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterMediaInput) ShowInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMediaInputClusterShowInputStatusParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ShowInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterMediaInput) ReadAttributeCurrentInputWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentInputWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ShowInputStatusWithExpectedValuesExpectedValueIntervalCompletion calls the underlying ShowInputStatusWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterMediaInput) ShowInputStatusWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ShowInputStatusWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+func (x *MTRClusterMediaInput) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// HideInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying HideInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterMediaInput) HideInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMediaInputClusterHideInputStatusParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.HideInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterMediaInput) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// HideInputStatusWithExpectedValuesExpectedValueIntervalCompletion calls the underlying HideInputStatusWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterMediaInput) HideInputStatusWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.HideInputStatusWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+func (x *MTRClusterMediaInput) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// RenameInputWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying RenameInputWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterMediaInput) RenameInputWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMediaInputClusterRenameInputParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.RenameInputWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterMediaInput) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeInputListWithParams calls the underlying ReadAttributeInputListWithParams.
-func (x *MTRClusterMediaInput) ReadAttributeInputListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeInputListWithParams(params)
-}
-
-// ReadAttributeCurrentInputWithParams calls the underlying ReadAttributeCurrentInputWithParams.
-func (x *MTRClusterMediaInput) ReadAttributeCurrentInputWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentInputWithParams(params)
-}
-
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterMediaInput) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
-}
-
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterMediaInput) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
-}
-
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterMediaInput) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
-}
-
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterMediaInput) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterMediaInput) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-// SelectInputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying SelectInputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterMediaInput) SelectInputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRMediaInputClusterSelectInputParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.SelectInputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// ShowInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying ShowInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterMediaInput) ShowInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRMediaInputClusterShowInputStatusParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.ShowInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// ShowInputStatusWithExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying ShowInputStatusWithExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterMediaInput) ShowInputStatusWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.ShowInputStatusWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
-}
-
-// HideInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying HideInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterMediaInput) HideInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRMediaInputClusterHideInputStatusParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.HideInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// HideInputStatusWithExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying HideInputStatusWithExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterMediaInput) HideInputStatusWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.HideInputStatusWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
-}
-
-// RenameInputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying RenameInputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterMediaInput) RenameInputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRMediaInputClusterRenameInputParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.RenameInputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-func (x *MTRClusterMediaInput) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterMediaInput) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterMediaInput) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterMediaInputable is the interface implemented by [MTRClusterMediaInput], for mocking and DI.
 type MTRClusterMediaInputable interface {
-	Unwrap() *raw.MTRClusterMediaInput
-	SelectInputWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMediaInputClusterSelectInputParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ShowInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMediaInputClusterShowInputStatusParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ShowInputStatusWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	HideInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMediaInputClusterHideInputStatusParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	HideInputStatusWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	RenameInputWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRMediaInputClusterRenameInputParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeInputListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentInputWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SelectInputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRMediaInputClusterSelectInputParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	ShowInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRMediaInputClusterShowInputStatusParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	ShowInputStatusWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	HideInputStatusWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRMediaInputClusterHideInputStatusParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	HideInputStatusWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	RenameInputWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRMediaInputClusterRenameInputParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	obj.Object
+	ReadAttributeInputListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentInputWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterMediaInputable = (*MTRClusterMediaInput)(nil)

@@ -5,71 +5,89 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that combines multiple audio signals into a single signal.
 //
-// Mixer wraps [raw.PHASEMixer] with a fluent Go API.
+// Mixer is an idiomatic wrapper over the Objective-C class PHASEMixer.
 type Mixer struct {
-	inner *raw.PHASEMixer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEMixer].
-func (x *Mixer) Unwrap() *raw.PHASEMixer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Mixer) ID() objc.ID { return x.inner.Ptr() }
-
-// MixerFromID adopts an existing object pointer as a Mixer (nil for 0).
+// MixerFromID adopts an existing Objective-C object as a Mixer
+// (nil for 0), retaining it and registering a release finalizer.
 func MixerFromID(id objc.ID) *Mixer {
 	if id == 0 {
 		return nil
 	}
-	return &Mixer{inner: raw.PHASEMixerFromID(id)}
+	x := &Mixer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMixer creates a new [Mixer].
-func NewMixer() *Mixer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEMixer")), objc.RegisterName("new"))
-	return &Mixer{inner: raw.PHASEMixerFromID(_id)}
-}
-
-// @property identifier @abstract The identifier that uniquely represents this mixer.
-//
-// Identifier calls the underlying Identifier.
-func (x *Mixer) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
-//
-// Gain calls the underlying Gain.
-func (x *Mixer) Gain() float64 {
-	return x.inner.Gain()
-}
-
-// @property gainMetaParameter @abstract The metaparameter that can be used to adjust the gain during playback
-//
-// GainMetaParameter calls the underlying GainMetaParameter.
-func (x *Mixer) GainMetaParameter() *MetaParameter {
-	_r := x.inner.GainMetaParameter()
-	if _r == nil {
+// mixerAdopt wraps an Objective-C object that this code just created as a
+// Mixer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mixerAdopt(id objc.ID) *Mixer {
+	if id == 0 {
 		return nil
 	}
-	return &MetaParameter{inner: _r}
+	x := &Mixer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Mixer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Mixer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Mixer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMixer creates a new Mixer.
+func NewMixer() *Mixer {
+	_id := objc.Send[objc.ID](objc.ID(_class("PHASEMixer")), objc.RegisterName("new"))
+	return mixerAdopt(_id)
+}
+
+// The identifier that uniquely represents this mixer.
+func (x *Mixer) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// Linear gain scalar.
+func (x *Mixer) Gain() float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("gain"))
+	return _r
+}
+
+// The metaparameter that can be used to adjust the gain during playback
+func (x *Mixer) GainMetaParameter() *MetaParameter {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gainMetaParameter"))
+	return MetaParameterFromID(_r)
 }
 
 // Mixerable is the interface implemented by [Mixer], for mocking and DI.
 type Mixerable interface {
-	Unwrap() *raw.PHASEMixer
+	obj.Object
 	Identifier() string
 	Gain() float64
 	GainMetaParameter() *MetaParameter

@@ -5,58 +5,80 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that specifies a mixer for sound events and orients them in 3D space.
 //
-// MixerParameters wraps [raw.PHASEMixerParameters] with a fluent Go API.
+// MixerParameters is an idiomatic wrapper over the Objective-C class PHASEMixerParameters.
 type MixerParameters struct {
-	inner *raw.PHASEMixerParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEMixerParameters].
-func (x *MixerParameters) Unwrap() *raw.PHASEMixerParameters { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MixerParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// MixerParametersFromID adopts an existing object pointer as a MixerParameters (nil for 0).
+// MixerParametersFromID adopts an existing Objective-C object as a MixerParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func MixerParametersFromID(id objc.ID) *MixerParameters {
 	if id == 0 {
 		return nil
 	}
-	return &MixerParameters{inner: raw.PHASEMixerParametersFromID(id)}
+	x := &MixerParameters{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMixerParameters creates a new [MixerParameters].
+// mixerParametersAdopt wraps an Objective-C object that this code just created as a
+// MixerParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mixerParametersAdopt(id objc.ID) *MixerParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &MixerParameters{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MixerParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MixerParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MixerParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMixerParameters creates a new MixerParameters.
 func NewMixerParameters() *MixerParameters {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEMixerParameters")), objc.RegisterName("new"))
-	return &MixerParameters{inner: raw.PHASEMixerParametersFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHASEMixerParameters")), objc.RegisterName("new"))
+	return mixerParametersAdopt(_id)
 }
 
 // Adds runtime parameters for a spatial mixer.
-//
-// AddSpatialMixerParametersWithIdentifierSourceListener calls the underlying AddSpatialMixerParametersWithIdentifierSourceListener.
-func (x *MixerParameters) AddSpatialMixerParametersWithIdentifierSourceListener(identifier string, source *raw.PHASESource, listener *raw.PHASEListener) {
-	x.inner.AddSpatialMixerParametersWithIdentifierSourceListener(foundation.NSStringStringWithUTF8String(identifier), source, listener)
+func (x *MixerParameters) AddSpatialMixerParametersWithIdentifierSourceListener(identifier string, source *Source, listener *Listener) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSpatialMixerParametersWithIdentifier:source:listener:"), purego.NSString(identifier), objref.IDOf(source), objref.IDOf(listener))
 }
 
 // Adds runtime parameters for an ambient mixer.
-//
-// AddAmbientMixerParametersWithIdentifierListener calls the underlying AddAmbientMixerParametersWithIdentifierListener.
-func (x *MixerParameters) AddAmbientMixerParametersWithIdentifierListener(identifier string, listener *raw.PHASEListener) {
-	x.inner.AddAmbientMixerParametersWithIdentifierListener(foundation.NSStringStringWithUTF8String(identifier), listener)
+func (x *MixerParameters) AddAmbientMixerParametersWithIdentifierListener(identifier string, listener *Listener) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAmbientMixerParametersWithIdentifier:listener:"), purego.NSString(identifier), objref.IDOf(listener))
 }
 
 // MixerParametersable is the interface implemented by [MixerParameters], for mocking and DI.
 type MixerParametersable interface {
-	Unwrap() *raw.PHASEMixerParameters
-	AddSpatialMixerParametersWithIdentifierSourceListener(identifier string, source *raw.PHASESource, listener *raw.PHASEListener)
-	AddAmbientMixerParametersWithIdentifierListener(identifier string, listener *raw.PHASEListener)
+	obj.Object
+	AddSpatialMixerParametersWithIdentifierSourceListener(identifier string, source *Source, listener *Listener)
+	AddAmbientMixerParametersWithIdentifierListener(identifier string, listener *Listener)
 }
 
 var _ MixerParametersable = (*MixerParameters)(nil)

@@ -5,67 +5,84 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A graph of points and curves that shapes the volume of a sound over distance.
 //
-// EnvelopeDistanceModelParameters wraps [raw.PHASEEnvelopeDistanceModelParameters] with a fluent Go API.
+// EnvelopeDistanceModelParameters is an idiomatic wrapper over the Objective-C class PHASEEnvelopeDistanceModelParameters.
 type EnvelopeDistanceModelParameters struct {
-	inner *raw.PHASEEnvelopeDistanceModelParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEEnvelopeDistanceModelParameters].
-func (x *EnvelopeDistanceModelParameters) Unwrap() *raw.PHASEEnvelopeDistanceModelParameters {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EnvelopeDistanceModelParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// EnvelopeDistanceModelParametersFromID adopts an existing object pointer as a EnvelopeDistanceModelParameters (nil for 0).
+// EnvelopeDistanceModelParametersFromID adopts an existing Objective-C object as a EnvelopeDistanceModelParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func EnvelopeDistanceModelParametersFromID(id objc.ID) *EnvelopeDistanceModelParameters {
 	if id == 0 {
 		return nil
 	}
-	return &EnvelopeDistanceModelParameters{inner: raw.PHASEEnvelopeDistanceModelParametersFromID(id)}
+	x := &EnvelopeDistanceModelParameters{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// envelopeDistanceModelParametersAdopt wraps an Objective-C object that this code just created as a
+// EnvelopeDistanceModelParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func envelopeDistanceModelParametersAdopt(id objc.ID) *EnvelopeDistanceModelParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &EnvelopeDistanceModelParameters{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EnvelopeDistanceModelParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EnvelopeDistanceModelParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EnvelopeDistanceModelParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates the distance model parameters with an envelope.
 //
-// NewEnvelopeDistanceModelParametersWithEnvelope creates a new [EnvelopeDistanceModelParameters].
-func NewEnvelopeDistanceModelParametersWithEnvelope(envelope *raw.PHASEEnvelope) *EnvelopeDistanceModelParameters {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEEnvelopeDistanceModelParameters")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEnvelope:"), envelope.Ptr())
-	return &EnvelopeDistanceModelParameters{inner: raw.PHASEEnvelopeDistanceModelParametersFromID(_id)}
+// NewEnvelopeDistanceModelParametersWithEnvelope creates a new EnvelopeDistanceModelParameters.
+func NewEnvelopeDistanceModelParametersWithEnvelope(envelope *Envelope) *EnvelopeDistanceModelParameters {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEEnvelopeDistanceModelParameters")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEnvelope:"), objref.IDOf(envelope))
+	return envelopeDistanceModelParametersAdopt(_id)
 }
 
 // A distance over which the framework fades out the mixer’s sound.
 //
-// WithFadeOutParameters sets the fadeOutParameters property and returns the receiver for chaining.
+// WithFadeOutParameters sets fadeOutParameters and returns the receiver so calls can be chained.
 func (x *EnvelopeDistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *EnvelopeDistanceModelParameters {
-	x.inner.PHASEDistanceModelParameters.SetFadeOutParameters(fadeOutParameters.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFadeOutParameters:"), objref.IDOf(fadeOutParameters))
 	return x
 }
 
-// Envelope calls the underlying Envelope.
 func (x *EnvelopeDistanceModelParameters) Envelope() *Envelope {
-	_r := x.inner.Envelope()
-	if _r == nil {
-		return nil
-	}
-	return &Envelope{inner: _r}
-}
-
-func (x *EnvelopeDistanceModelParameters) asDistanceModelParameters() *raw.PHASEDistanceModelParameters {
-	return &x.inner.PHASEDistanceModelParameters
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("envelope"))
+	return EnvelopeFromID(_r)
 }
 
 // EnvelopeDistanceModelParametersable is the interface implemented by [EnvelopeDistanceModelParameters], for mocking and DI.
 type EnvelopeDistanceModelParametersable interface {
-	Unwrap() *raw.PHASEEnvelopeDistanceModelParameters
+	obj.Object
 	WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *EnvelopeDistanceModelParameters
 	Envelope() *Envelope
 }

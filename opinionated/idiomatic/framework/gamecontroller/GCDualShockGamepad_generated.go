@@ -5,96 +5,93 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A controller profile that supports the DualShock 4 controller.
 //
-// DualShockGamepad wraps [raw.GCDualShockGamepad] with a fluent Go API.
+// DualShockGamepad is an idiomatic wrapper over the Objective-C class GCDualShockGamepad.
 type DualShockGamepad struct {
-	inner *raw.GCDualShockGamepad
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCDualShockGamepad].
-func (x *DualShockGamepad) Unwrap() *raw.GCDualShockGamepad { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DualShockGamepad) ID() objc.ID { return x.inner.Ptr() }
-
-// DualShockGamepadFromID adopts an existing object pointer as a DualShockGamepad (nil for 0).
+// DualShockGamepadFromID adopts an existing Objective-C object as a DualShockGamepad
+// (nil for 0), retaining it and registering a release finalizer.
 func DualShockGamepadFromID(id objc.ID) *DualShockGamepad {
 	if id == 0 {
 		return nil
 	}
-	return &DualShockGamepad{inner: raw.GCDualShockGamepadFromID(id)}
-}
-
-// NewDualShockGamepad creates a new [DualShockGamepad].
-func NewDualShockGamepad() *DualShockGamepad {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCDualShockGamepad")), objc.RegisterName("new"))
-	return &DualShockGamepad{inner: raw.GCDualShockGamepadFromID(_id)}
-}
-
-// The block that the profile calls when an element’s value changes.
-//
-// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
-func (x *DualShockGamepad) WithValueChangedHandler(valueChangedHandler func(*raw.GCExtendedGamepad, *raw.GCControllerElement)) *DualShockGamepad {
-	x.inner.GCExtendedGamepad.SetValueChangedHandler(valueChangedHandler)
+	x := &DualShockGamepad{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
+// dualShockGamepadAdopt wraps an Objective-C object that this code just created as a
+// DualShockGamepad (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dualShockGamepadAdopt(id objc.ID) *DualShockGamepad {
+	if id == 0 {
+		return nil
+	}
+	x := &DualShockGamepad{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DualShockGamepad) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DualShockGamepad) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DualShockGamepad) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDualShockGamepad creates a new DualShockGamepad.
+func NewDualShockGamepad() *DualShockGamepad {
+	_id := objc.Send[objc.ID](objc.ID(_class("GCDualShockGamepad")), objc.RegisterName("new"))
+	return dualShockGamepadAdopt(_id)
+}
+
 // The block that the profile calls when an element’s value changes.
 //
-// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
-func (x *DualShockGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *DualShockGamepad {
-	x.inner.GCExtendedGamepad.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
+// WithValueDidChangeHandler sets valueDidChangeHandler and returns the receiver so calls can be chained.
+func (x *DualShockGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *DualShockGamepad {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return x
 }
 
 // DualShock controllers have a touchpad with a button and two-finger tracking.
-//
-// TouchpadButton calls the underlying TouchpadButton.
 func (x *DualShockGamepad) TouchpadButton() *ControllerButtonInput {
-	_r := x.inner.TouchpadButton()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchpadButton"))
+	return ControllerButtonInputFromID(_r)
 }
 
-// TouchpadPrimary calls the underlying TouchpadPrimary.
 func (x *DualShockGamepad) TouchpadPrimary() *ControllerDirectionPad {
-	_r := x.inner.TouchpadPrimary()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerDirectionPad{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchpadPrimary"))
+	return ControllerDirectionPadFromID(_r)
 }
 
-// TouchpadSecondary calls the underlying TouchpadSecondary.
 func (x *DualShockGamepad) TouchpadSecondary() *ControllerDirectionPad {
-	_r := x.inner.TouchpadSecondary()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerDirectionPad{inner: _r}
-}
-
-func (x *DualShockGamepad) asExtendedGamepad() *raw.GCExtendedGamepad {
-	return &x.inner.GCExtendedGamepad
-}
-
-func (x *DualShockGamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
-	return &x.inner.GCExtendedGamepad.GCPhysicalInputProfile
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchpadSecondary"))
+	return ControllerDirectionPadFromID(_r)
 }
 
 // DualShockGamepadable is the interface implemented by [DualShockGamepad], for mocking and DI.
 type DualShockGamepadable interface {
-	Unwrap() *raw.GCDualShockGamepad
-	WithValueChangedHandler(valueChangedHandler func(*raw.GCExtendedGamepad, *raw.GCControllerElement)) *DualShockGamepad
-	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *DualShockGamepad
+	obj.Object
+	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *DualShockGamepad
 	TouchpadButton() *ControllerButtonInput
 	TouchpadPrimary() *ControllerDirectionPad
 	TouchpadSecondary() *ControllerDirectionPad

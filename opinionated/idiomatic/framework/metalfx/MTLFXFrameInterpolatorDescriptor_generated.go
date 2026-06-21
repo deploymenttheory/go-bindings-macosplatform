@@ -5,284 +5,152 @@
 package metalfx
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalfx"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A set of properties that configure a frame interpolator, and a factory method that creates the effect.
 //
-// FrameInterpolatorDescriptor wraps [raw.MTLFXFrameInterpolatorDescriptor] with a fluent Go API.
+// FrameInterpolatorDescriptor is an idiomatic wrapper over the Objective-C class MTLFXFrameInterpolatorDescriptor.
 type FrameInterpolatorDescriptor struct {
-	inner *raw.MTLFXFrameInterpolatorDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLFXFrameInterpolatorDescriptor].
-func (x *FrameInterpolatorDescriptor) Unwrap() *raw.MTLFXFrameInterpolatorDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FrameInterpolatorDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// FrameInterpolatorDescriptorFromID adopts an existing object pointer as a FrameInterpolatorDescriptor (nil for 0).
+// FrameInterpolatorDescriptorFromID adopts an existing Objective-C object as a FrameInterpolatorDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func FrameInterpolatorDescriptorFromID(id objc.ID) *FrameInterpolatorDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &FrameInterpolatorDescriptor{inner: raw.MTLFXFrameInterpolatorDescriptorFromID(id)}
+	x := &FrameInterpolatorDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFrameInterpolatorDescriptor creates a new [FrameInterpolatorDescriptor].
+// frameInterpolatorDescriptorAdopt wraps an Objective-C object that this code just created as a
+// FrameInterpolatorDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func frameInterpolatorDescriptorAdopt(id objc.ID) *FrameInterpolatorDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &FrameInterpolatorDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FrameInterpolatorDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FrameInterpolatorDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FrameInterpolatorDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFrameInterpolatorDescriptor creates a new FrameInterpolatorDescriptor.
 func NewFrameInterpolatorDescriptor() *FrameInterpolatorDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLFXFrameInterpolatorDescriptor")), objc.RegisterName("new"))
-	return &FrameInterpolatorDescriptor{inner: raw.MTLFXFrameInterpolatorDescriptorFromID(_id)}
-}
-
-// The pixel format of the input color texture for the frame interpolator you create with this descriptor.
-//
-// WithColorTextureFormat sets the colorTextureFormat property and returns the receiver for chaining.
-func (x *FrameInterpolatorDescriptor) WithColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor {
-	x.inner.SetColorTextureFormat(colorTextureFormat)
-	return x
-}
-
-// The pixel format of the output color texture for the frame interpolator you create with this descriptor.
-//
-// WithOutputTextureFormat sets the outputTextureFormat property and returns the receiver for chaining.
-func (x *FrameInterpolatorDescriptor) WithOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor {
-	x.inner.SetOutputTextureFormat(outputTextureFormat)
-	return x
-}
-
-// The pixel format of the input depth texture for the frame interpolator you create with this descriptor.
-//
-// WithDepthTextureFormat sets the depthTextureFormat property and returns the receiver for chaining.
-func (x *FrameInterpolatorDescriptor) WithDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor {
-	x.inner.SetDepthTextureFormat(depthTextureFormat)
-	return x
-}
-
-// The pixel format of the input motion texture for the frame interpolator you create with this descriptor.
-//
-// WithMotionTextureFormat sets the motionTextureFormat property and returns the receiver for chaining.
-func (x *FrameInterpolatorDescriptor) WithMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor {
-	x.inner.SetMotionTextureFormat(motionTextureFormat)
-	return x
-}
-
-// The pixel format for the frame interpolator of an input texture containing your game’s custom UI.
-//
-// WithUiTextureFormat sets the uiTextureFormat property and returns the receiver for chaining.
-func (x *FrameInterpolatorDescriptor) WithUiTextureFormat(uiTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor {
-	x.inner.SetUITextureFormat(uiTextureFormat)
-	return x
-}
-
-// WithScaler sets the scaler property and returns the receiver for chaining.
-func (x *FrameInterpolatorDescriptor) WithScaler(scaler raw.MTLFXFrameInterpolatableScaler) *FrameInterpolatorDescriptor {
-	x.inner.SetScaler(scaler)
-	return x
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLFXFrameInterpolatorDescriptor")), objc.RegisterName("new"))
+	return frameInterpolatorDescriptorAdopt(_id)
 }
 
 // The width, in pixels, of the input motion and depth texture for the frame interpolator.
 //
-// WithInputWidth sets the inputWidth property and returns the receiver for chaining.
-func (x *FrameInterpolatorDescriptor) WithInputWidth(inputWidth uint) *FrameInterpolatorDescriptor {
-	x.inner.SetInputWidth(inputWidth)
+// WithInputWidth sets inputWidth and returns the receiver so calls can be chained.
+func (x *FrameInterpolatorDescriptor) WithInputWidth(inputWidth int) *FrameInterpolatorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputWidth:"), inputWidth)
 	return x
 }
 
 // The height, in pixels, of the input motion and depth texture for the frame interpolator.
 //
-// WithInputHeight sets the inputHeight property and returns the receiver for chaining.
-func (x *FrameInterpolatorDescriptor) WithInputHeight(inputHeight uint) *FrameInterpolatorDescriptor {
-	x.inner.SetInputHeight(inputHeight)
+// WithInputHeight sets inputHeight and returns the receiver so calls can be chained.
+func (x *FrameInterpolatorDescriptor) WithInputHeight(inputHeight int) *FrameInterpolatorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputHeight:"), inputHeight)
 	return x
 }
 
 // The width, in pixels, of the output color texture for the frame interpolator.
 //
-// WithOutputWidth sets the outputWidth property and returns the receiver for chaining.
-func (x *FrameInterpolatorDescriptor) WithOutputWidth(outputWidth uint) *FrameInterpolatorDescriptor {
-	x.inner.SetOutputWidth(outputWidth)
+// WithOutputWidth sets outputWidth and returns the receiver so calls can be chained.
+func (x *FrameInterpolatorDescriptor) WithOutputWidth(outputWidth int) *FrameInterpolatorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputWidth:"), outputWidth)
 	return x
 }
 
 // The height, in pixels, of the output color texture for the frame interpolator.
 //
-// WithOutputHeight sets the outputHeight property and returns the receiver for chaining.
-func (x *FrameInterpolatorDescriptor) WithOutputHeight(outputHeight uint) *FrameInterpolatorDescriptor {
-	x.inner.SetOutputHeight(outputHeight)
+// WithOutputHeight sets outputHeight and returns the receiver so calls can be chained.
+func (x *FrameInterpolatorDescriptor) WithOutputHeight(outputHeight int) *FrameInterpolatorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputHeight:"), outputHeight)
 	return x
-}
-
-// Creates a frame interpolator instance for a Metal device.
-//
-// NewFrameInterpolatorWithDevice calls the underlying NewFrameInterpolatorWithDevice.
-func (x *FrameInterpolatorDescriptor) NewFrameInterpolatorWithDevice(device metal.MTLDevice) raw.MTLFXFrameInterpolator {
-	return x.inner.NewFrameInterpolatorWithDevice(device)
-}
-
-// Creates a frame interpolator instance for a Metal device.
-//
-// NewFrameInterpolatorWithDeviceCompiler calls the underlying NewFrameInterpolatorWithDeviceCompiler.
-func (x *FrameInterpolatorDescriptor) NewFrameInterpolatorWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXFrameInterpolator {
-	return x.inner.NewFrameInterpolatorWithDeviceCompiler(device, compiler)
-}
-
-// The pixel format of the input color texture for the frame interpolator you create with this descriptor.
-//
-// ColorTextureFormat calls the underlying ColorTextureFormat.
-func (x *FrameInterpolatorDescriptor) ColorTextureFormat() metal.MTLPixelFormat {
-	return x.inner.ColorTextureFormat()
-}
-
-// SetColorTextureFormat calls the underlying SetColorTextureFormat.
-func (x *FrameInterpolatorDescriptor) SetColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetColorTextureFormat(colorTextureFormat)
-}
-
-// The pixel format of the output color texture for the frame interpolator you create with this descriptor.
-//
-// OutputTextureFormat calls the underlying OutputTextureFormat.
-func (x *FrameInterpolatorDescriptor) OutputTextureFormat() metal.MTLPixelFormat {
-	return x.inner.OutputTextureFormat()
-}
-
-// SetOutputTextureFormat calls the underlying SetOutputTextureFormat.
-func (x *FrameInterpolatorDescriptor) SetOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetOutputTextureFormat(outputTextureFormat)
-}
-
-// The pixel format of the input depth texture for the frame interpolator you create with this descriptor.
-//
-// DepthTextureFormat calls the underlying DepthTextureFormat.
-func (x *FrameInterpolatorDescriptor) DepthTextureFormat() metal.MTLPixelFormat {
-	return x.inner.DepthTextureFormat()
-}
-
-// SetDepthTextureFormat calls the underlying SetDepthTextureFormat.
-func (x *FrameInterpolatorDescriptor) SetDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetDepthTextureFormat(depthTextureFormat)
-}
-
-// The pixel format of the input motion texture for the frame interpolator you create with this descriptor.
-//
-// MotionTextureFormat calls the underlying MotionTextureFormat.
-func (x *FrameInterpolatorDescriptor) MotionTextureFormat() metal.MTLPixelFormat {
-	return x.inner.MotionTextureFormat()
-}
-
-// SetMotionTextureFormat calls the underlying SetMotionTextureFormat.
-func (x *FrameInterpolatorDescriptor) SetMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetMotionTextureFormat(motionTextureFormat)
-}
-
-// The pixel format for the frame interpolator of an input texture containing your game's custom UI.
-//
-// UiTextureFormat calls the underlying UiTextureFormat.
-func (x *FrameInterpolatorDescriptor) UiTextureFormat() metal.MTLPixelFormat {
-	return x.inner.UiTextureFormat()
-}
-
-// SetUITextureFormat calls the underlying SetUITextureFormat.
-func (x *FrameInterpolatorDescriptor) SetUITextureFormat(uiTextureFormat metal.MTLPixelFormat) {
-	x.inner.SetUITextureFormat(uiTextureFormat)
-}
-
-// Scaler calls the underlying Scaler.
-func (x *FrameInterpolatorDescriptor) Scaler() raw.MTLFXFrameInterpolatableScaler {
-	return x.inner.Scaler()
-}
-
-// SetScaler calls the underlying SetScaler.
-func (x *FrameInterpolatorDescriptor) SetScaler(scaler raw.MTLFXFrameInterpolatableScaler) {
-	x.inner.SetScaler(scaler)
 }
 
 // The width, in pixels, of the input motion and depth texture for the frame interpolator.
-//
-// InputWidth calls the underlying InputWidth.
-func (x *FrameInterpolatorDescriptor) InputWidth() uint {
-	return x.inner.InputWidth()
+func (x *FrameInterpolatorDescriptor) InputWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputWidth"))
+	return _r
 }
 
-// SetInputWidth calls the underlying SetInputWidth.
-func (x *FrameInterpolatorDescriptor) SetInputWidth(inputWidth uint) {
-	x.inner.SetInputWidth(inputWidth)
+func (x *FrameInterpolatorDescriptor) SetInputWidth(inputWidth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputWidth:"), inputWidth)
 }
 
 // The height, in pixels, of the input motion and depth texture for the frame interpolator.
-//
-// InputHeight calls the underlying InputHeight.
-func (x *FrameInterpolatorDescriptor) InputHeight() uint {
-	return x.inner.InputHeight()
+func (x *FrameInterpolatorDescriptor) InputHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputHeight"))
+	return _r
 }
 
-// SetInputHeight calls the underlying SetInputHeight.
-func (x *FrameInterpolatorDescriptor) SetInputHeight(inputHeight uint) {
-	x.inner.SetInputHeight(inputHeight)
+func (x *FrameInterpolatorDescriptor) SetInputHeight(inputHeight int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputHeight:"), inputHeight)
 }
 
 // The width, in pixels, of the output color texture for the frame interpolator.
-//
-// OutputWidth calls the underlying OutputWidth.
-func (x *FrameInterpolatorDescriptor) OutputWidth() uint {
-	return x.inner.OutputWidth()
+func (x *FrameInterpolatorDescriptor) OutputWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputWidth"))
+	return _r
 }
 
-// SetOutputWidth calls the underlying SetOutputWidth.
-func (x *FrameInterpolatorDescriptor) SetOutputWidth(outputWidth uint) {
-	x.inner.SetOutputWidth(outputWidth)
+func (x *FrameInterpolatorDescriptor) SetOutputWidth(outputWidth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputWidth:"), outputWidth)
 }
 
 // The height, in pixels, of the output color texture for the frame interpolator.
-//
-// OutputHeight calls the underlying OutputHeight.
-func (x *FrameInterpolatorDescriptor) OutputHeight() uint {
-	return x.inner.OutputHeight()
+func (x *FrameInterpolatorDescriptor) OutputHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("outputHeight"))
+	return _r
 }
 
-// SetOutputHeight calls the underlying SetOutputHeight.
-func (x *FrameInterpolatorDescriptor) SetOutputHeight(outputHeight uint) {
-	x.inner.SetOutputHeight(outputHeight)
+func (x *FrameInterpolatorDescriptor) SetOutputHeight(outputHeight int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputHeight:"), outputHeight)
 }
 
 // FrameInterpolatorDescriptorable is the interface implemented by [FrameInterpolatorDescriptor], for mocking and DI.
 type FrameInterpolatorDescriptorable interface {
-	Unwrap() *raw.MTLFXFrameInterpolatorDescriptor
-	WithColorTextureFormat(colorTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor
-	WithOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor
-	WithDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor
-	WithMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor
-	WithUiTextureFormat(uiTextureFormat metal.MTLPixelFormat) *FrameInterpolatorDescriptor
-	WithScaler(scaler raw.MTLFXFrameInterpolatableScaler) *FrameInterpolatorDescriptor
-	WithInputWidth(inputWidth uint) *FrameInterpolatorDescriptor
-	WithInputHeight(inputHeight uint) *FrameInterpolatorDescriptor
-	WithOutputWidth(outputWidth uint) *FrameInterpolatorDescriptor
-	WithOutputHeight(outputHeight uint) *FrameInterpolatorDescriptor
-	NewFrameInterpolatorWithDevice(device metal.MTLDevice) raw.MTLFXFrameInterpolator
-	NewFrameInterpolatorWithDeviceCompiler(device metal.MTLDevice, compiler metal.MTL4Compiler) raw.MTL4FXFrameInterpolator
-	ColorTextureFormat() metal.MTLPixelFormat
-	SetColorTextureFormat(colorTextureFormat metal.MTLPixelFormat)
-	OutputTextureFormat() metal.MTLPixelFormat
-	SetOutputTextureFormat(outputTextureFormat metal.MTLPixelFormat)
-	DepthTextureFormat() metal.MTLPixelFormat
-	SetDepthTextureFormat(depthTextureFormat metal.MTLPixelFormat)
-	MotionTextureFormat() metal.MTLPixelFormat
-	SetMotionTextureFormat(motionTextureFormat metal.MTLPixelFormat)
-	UiTextureFormat() metal.MTLPixelFormat
-	SetUITextureFormat(uiTextureFormat metal.MTLPixelFormat)
-	Scaler() raw.MTLFXFrameInterpolatableScaler
-	SetScaler(scaler raw.MTLFXFrameInterpolatableScaler)
-	InputWidth() uint
-	SetInputWidth(inputWidth uint)
-	InputHeight() uint
-	SetInputHeight(inputHeight uint)
-	OutputWidth() uint
-	SetOutputWidth(outputWidth uint)
-	OutputHeight() uint
-	SetOutputHeight(outputHeight uint)
+	obj.Object
+	WithInputWidth(inputWidth int) *FrameInterpolatorDescriptor
+	WithInputHeight(inputHeight int) *FrameInterpolatorDescriptor
+	WithOutputWidth(outputWidth int) *FrameInterpolatorDescriptor
+	WithOutputHeight(outputHeight int) *FrameInterpolatorDescriptor
+	InputWidth() int
+	SetInputWidth(inputWidth int)
+	InputHeight() int
+	SetInputHeight(inputHeight int)
+	OutputWidth() int
+	SetOutputWidth(outputWidth int)
+	OutputHeight() int
+	SetOutputHeight(outputHeight int)
 }
 
 var _ FrameInterpolatorDescriptorable = (*FrameInterpolatorDescriptor)(nil)

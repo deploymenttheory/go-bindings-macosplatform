@@ -5,109 +5,118 @@
 package gameplaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A set of goals that together influence the movement of an agent.
 //
-// Behavior wraps [raw.GKBehavior] with a fluent Go API.
+// Behavior is an idiomatic wrapper over the Objective-C class GKBehavior.
 type Behavior struct {
-	inner *raw.GKBehavior
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKBehavior].
-func (x *Behavior) Unwrap() *raw.GKBehavior { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Behavior) ID() objc.ID { return x.inner.Ptr() }
-
-// BehaviorFromID adopts an existing object pointer as a Behavior (nil for 0).
+// BehaviorFromID adopts an existing Objective-C object as a Behavior
+// (nil for 0), retaining it and registering a release finalizer.
 func BehaviorFromID(id objc.ID) *Behavior {
 	if id == 0 {
 		return nil
 	}
-	return &Behavior{inner: raw.GKBehaviorFromID(id)}
+	x := &Behavior{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBehavior creates a new [Behavior].
+// behaviorAdopt wraps an Objective-C object that this code just created as a
+// Behavior (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func behaviorAdopt(id objc.ID) *Behavior {
+	if id == 0 {
+		return nil
+	}
+	x := &Behavior{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Behavior) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Behavior) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Behavior) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBehavior creates a new Behavior.
 func NewBehavior() *Behavior {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKBehavior")), objc.RegisterName("new"))
-	return &Behavior{inner: raw.GKBehaviorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKBehavior")), objc.RegisterName("new"))
+	return behaviorAdopt(_id)
 }
 
 // Sets the weight for the specified goal’s influence on agents, adding that goal to the behavior if not already present.
-//
-// SetWeightForGoal calls the underlying SetWeightForGoal.
-func (x *Behavior) SetWeightForGoal(weight float32, goal *raw.GKGoal) {
-	x.inner.SetWeightForGoal(weight, goal)
+func (x *Behavior) SetWeightForGoal(weight float32, goal *Goal) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeight:forGoal:"), weight, objref.IDOf(goal))
 }
 
 // Returns the weight for the specified goal’s influence on agents.
-//
-// WeightForGoal calls the underlying WeightForGoal.
-func (x *Behavior) WeightForGoal(goal *raw.GKGoal) float32 {
-	return x.inner.WeightForGoal(goal)
+func (x *Behavior) WeightForGoal(goal *Goal) float32 {
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weightForGoal:"), objref.IDOf(goal))
+	return _r
 }
 
 // Removes the specified goal from the behavior.
-//
-// RemoveGoal calls the underlying RemoveGoal.
-func (x *Behavior) RemoveGoal(goal *raw.GKGoal) {
-	x.inner.RemoveGoal(goal)
+func (x *Behavior) RemoveGoal(goal *Goal) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeGoal:"), objref.IDOf(goal))
 }
 
 // Removes all goals from the behavior.
-//
-// RemoveAllGoals calls the underlying RemoveAllGoals.
 func (x *Behavior) RemoveAllGoals() {
-	x.inner.RemoveAllGoals()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllGoals"))
 }
 
 // Returns the goal at the specified index in the behavior’s list of goals.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *Behavior) ObjectAtIndexedSubscript(idx uint) *Goal {
-	_r := x.inner.ObjectAtIndexedSubscript(idx)
-	if _r == nil {
-		return nil
-	}
-	return &Goal{inner: _r}
+func (x *Behavior) ObjectAtIndexedSubscript(idx int) *Goal {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), idx)
+	return GoalFromID(_r)
 }
 
 // Sets the weight for the goal specified by subscript syntax.
-//
-// SetObjectForKeyedSubscript calls the underlying SetObjectForKeyedSubscript.
-func (x *Behavior) SetObjectForKeyedSubscript(weight *foundation.NSNumber, goal *raw.GKGoal) {
-	x.inner.SetObjectForKeyedSubscript(weight, goal)
+func (x *Behavior) SetObjectForKeyedSubscript(weight obj.Object, goal *Goal) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:forKeyedSubscript:"), objref.IDOf(weight), objref.IDOf(goal))
 }
 
 // Returns the weight associated with the goal specified by subscript syntax.
-//
-// ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
-func (x *Behavior) ObjectForKeyedSubscript(goal *raw.GKGoal) *foundation.NSNumber {
-	return x.inner.ObjectForKeyedSubscript(goal)
+func (x *Behavior) ObjectForKeyedSubscript(goal *Goal) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(goal))
+	return obj.Wrap(_r)
 }
 
-// GoalCount calls the underlying GoalCount.
 func (x *Behavior) GoalCount() int {
-	return x.inner.GoalCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("goalCount"))
+	return _r
 }
-
-func (x *Behavior) asBehavior() *raw.GKBehavior { return x.inner }
 
 // Behaviorable is the interface implemented by [Behavior], for mocking and DI.
 type Behaviorable interface {
-	Unwrap() *raw.GKBehavior
-	SetWeightForGoal(weight float32, goal *raw.GKGoal)
-	WeightForGoal(goal *raw.GKGoal) float32
-	RemoveGoal(goal *raw.GKGoal)
+	obj.Object
+	SetWeightForGoal(weight float32, goal *Goal)
+	WeightForGoal(goal *Goal) float32
+	RemoveGoal(goal *Goal)
 	RemoveAllGoals()
-	ObjectAtIndexedSubscript(idx uint) *Goal
-	SetObjectForKeyedSubscript(weight *foundation.NSNumber, goal *raw.GKGoal)
-	ObjectForKeyedSubscript(goal *raw.GKGoal) *foundation.NSNumber
+	ObjectAtIndexedSubscript(idx int) *Goal
+	SetObjectForKeyedSubscript(weight obj.Object, goal *Goal)
+	ObjectForKeyedSubscript(goal *Goal) obj.Object
 	GoalCount() int
 }
 

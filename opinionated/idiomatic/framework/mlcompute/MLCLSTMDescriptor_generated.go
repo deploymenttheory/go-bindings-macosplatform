@@ -5,113 +5,131 @@
 package mlcompute
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The configuration object you use to create the LSTM layer.
 //
-// LSTMDescriptor wraps [raw.MLCLSTMDescriptor] with a fluent Go API.
+// LSTMDescriptor is an idiomatic wrapper over the Objective-C class MLCLSTMDescriptor.
 type LSTMDescriptor struct {
-	inner *raw.MLCLSTMDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCLSTMDescriptor].
-func (x *LSTMDescriptor) Unwrap() *raw.MLCLSTMDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LSTMDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// LSTMDescriptorFromID adopts an existing object pointer as a LSTMDescriptor (nil for 0).
+// LSTMDescriptorFromID adopts an existing Objective-C object as a LSTMDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func LSTMDescriptorFromID(id objc.ID) *LSTMDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &LSTMDescriptor{inner: raw.MLCLSTMDescriptorFromID(id)}
+	x := &LSTMDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLSTMDescriptor creates a new [LSTMDescriptor].
+// lSTMDescriptorAdopt wraps an Objective-C object that this code just created as a
+// LSTMDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func lSTMDescriptorAdopt(id objc.ID) *LSTMDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &LSTMDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LSTMDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LSTMDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LSTMDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLSTMDescriptor creates a new LSTMDescriptor.
 func NewLSTMDescriptor() *LSTMDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCLSTMDescriptor")), objc.RegisterName("new"))
-	return &LSTMDescriptor{inner: raw.MLCLSTMDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCLSTMDescriptor")), objc.RegisterName("new"))
+	return lSTMDescriptorAdopt(_id)
 }
 
-// @property   inputSize @abstract   The number of expected feature channels in the input
-//
-// InputSize calls the underlying InputSize.
-func (x *LSTMDescriptor) InputSize() uint {
-	return x.inner.InputSize()
+// The number of expected feature channels in the input
+func (x *LSTMDescriptor) InputSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("inputSize"))
+	return _r
 }
 
-// @property   hiddenSize @abstract   The number of feature channels in the hidden state
-//
-// HiddenSize calls the underlying HiddenSize.
-func (x *LSTMDescriptor) HiddenSize() uint {
-	return x.inner.HiddenSize()
+// The number of feature channels in the hidden state
+func (x *LSTMDescriptor) HiddenSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("hiddenSize"))
+	return _r
 }
 
-// @property   layerCount @abstract   The number of recurrent layers.  Default is 1.
-//
-// LayerCount calls the underlying LayerCount.
-func (x *LSTMDescriptor) LayerCount() uint {
-	return x.inner.LayerCount()
+// The number of recurrent layers.  Default is 1.
+func (x *LSTMDescriptor) LayerCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("layerCount"))
+	return _r
 }
 
-// @property   usesBiases @abstract   If NO, the layer does not use bias terms.  Default is YES.
-//
-// UsesBiases calls the underlying UsesBiases.
+// If NO, the layer does not use bias terms.  Default is YES.
 func (x *LSTMDescriptor) UsesBiases() bool {
-	return x.inner.UsesBiases()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesBiases"))
+	return _r
 }
 
-// @property   batchFirst @abstract   LSTM only supports batchFirst=YES. This means the input and output will have shape [batch size, time steps, feature]. Default is YES.
-//
-// BatchFirst calls the underlying BatchFirst.
+// LSTM only supports batchFirst=YES. This means the input and output will have shape [batch size, time steps, feature]. Default is YES.
 func (x *LSTMDescriptor) BatchFirst() bool {
-	return x.inner.BatchFirst()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("batchFirst"))
+	return _r
 }
 
-// @property   isBidirectional @abstract   If YES, becomes a bidirectional LSTM.  Default is NO.
-//
-// IsBidirectional calls the underlying IsBidirectional.
+// If YES, becomes a bidirectional LSTM.  Default is NO.
 func (x *LSTMDescriptor) IsBidirectional() bool {
-	return x.inner.IsBidirectional()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBidirectional"))
+	return _r
 }
 
-// @property   returnsSequences @abstract   if YES return output for all sequences else return output only for the last sequences. Default: YES
-//
-// ReturnsSequences calls the underlying ReturnsSequences.
+// if YES return output for all sequences else return output only for the last sequences. Default: YES
 func (x *LSTMDescriptor) ReturnsSequences() bool {
-	return x.inner.ReturnsSequences()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("returnsSequences"))
+	return _r
 }
 
-// @property   dropout @abstract   If non-zero, intrdouces a dropout layer on the outputs of each LSTM layer except the last layer, with dropout probablity equal to dropout.  Default is 0.0.
-//
-// Dropout calls the underlying Dropout.
+// If non-zero, intrdouces a dropout layer on the outputs of each LSTM layer except the last layer, with dropout probablity equal to dropout.  Default is 0.0.
 func (x *LSTMDescriptor) Dropout() float32 {
-	return x.inner.Dropout()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("dropout"))
+	return _r
 }
 
-// @property   resultMode @abstract   MLCLSTMResultModeOutput returns output data. MLCLSTMResultModeOutputAndStates returns output data, last hidden state h_n, and last cell state c_n. Default MLCLSTMResultModeOutput.
-//
-// ResultMode calls the underlying ResultMode.
-func (x *LSTMDescriptor) ResultMode() MLCLSTMResultMode {
-	return MLCLSTMResultMode(x.inner.ResultMode())
+// MLCLSTMResultModeOutput returns output data. MLCLSTMResultModeOutputAndStates returns output data, last hidden state h_n, and last cell state c_n. Default MLCLSTMResultModeOutput.
+func (x *LSTMDescriptor) ResultMode() LSTMResultMode {
+	_r := objc.Send[LSTMResultMode](objref.IDOf(x), objc.RegisterName("resultMode"))
+	return _r
 }
 
 // LSTMDescriptorable is the interface implemented by [LSTMDescriptor], for mocking and DI.
 type LSTMDescriptorable interface {
-	Unwrap() *raw.MLCLSTMDescriptor
-	InputSize() uint
-	HiddenSize() uint
-	LayerCount() uint
+	obj.Object
+	InputSize() int
+	HiddenSize() int
+	LayerCount() int
 	UsesBiases() bool
 	BatchFirst() bool
 	IsBidirectional() bool
 	ReturnsSequences() bool
 	Dropout() float32
-	ResultMode() MLCLSTMResultMode
+	ResultMode() LSTMResultMode
 }
 
 var _ LSTMDescriptorable = (*LSTMDescriptor)(nil)

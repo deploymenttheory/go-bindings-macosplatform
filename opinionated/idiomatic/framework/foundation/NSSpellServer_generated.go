@@ -5,96 +5,95 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A server that your app uses to provide a spell checker service to other apps running in the system.
 //
-// SpellServer wraps [raw.NSSpellServer] with a fluent Go API.
+// SpellServer is an idiomatic wrapper over the Objective-C class NSSpellServer.
 type SpellServer struct {
-	inner *raw.NSSpellServer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSpellServer].
-func (x *SpellServer) Unwrap() *raw.NSSpellServer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpellServer) ID() objc.ID { return x.inner.Ptr() }
-
-// SpellServerFromID adopts an existing object pointer as a SpellServer (nil for 0).
+// SpellServerFromID adopts an existing Objective-C object as a SpellServer
+// (nil for 0), retaining it and registering a release finalizer.
 func SpellServerFromID(id objc.ID) *SpellServer {
 	if id == 0 {
 		return nil
 	}
-	return &SpellServer{inner: raw.NSSpellServerFromID(id)}
-}
-
-// NewSpellServer creates a new [SpellServer].
-func NewSpellServer() *SpellServer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSpellServer")), objc.RegisterName("new"))
-	return &SpellServer{inner: raw.NSSpellServerFromID(_id)}
-}
-
-// Returns the receiver’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *SpellServer) WithDelegate(delegate raw.NSSpellServerDelegate) *SpellServer {
-	x.inner.SetDelegate(delegate)
+	x := &SpellServer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *SpellServer) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SpellServer {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// spellServerAdopt wraps an Objective-C object that this code just created as a
+// SpellServer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func spellServerAdopt(id objc.ID) *SpellServer {
+	if id == 0 {
+		return nil
+	}
+	x := &SpellServer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SpellServer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SpellServer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SpellServer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSpellServer creates a new SpellServer.
+func NewSpellServer() *SpellServer {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSpellServer")), objc.RegisterName("new"))
+	return spellServerAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *SpellServer) WithScriptingProperties(scriptingProperties obj.Object) *SpellServer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Notifies the receiver of a language your spelling checker can check.
-//
-// RegisterLanguageByVendor calls the underlying RegisterLanguageByVendor.
 func (x *SpellServer) RegisterLanguageByVendor(language string, vendor string) bool {
-	return x.inner.RegisterLanguageByVendor(foundation.NSStringStringWithUTF8String(language), foundation.NSStringStringWithUTF8String(vendor))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerLanguage:byVendor:"), purego.NSString(language), purego.NSString(vendor))
+	return _r
 }
 
 // Indicates whether a given word is in the user’s list of learned words or the document’s list of words to ignore.
-//
-// IsWordInUserDictionariesCaseSensitive calls the underlying IsWordInUserDictionariesCaseSensitive.
 func (x *SpellServer) IsWordInUserDictionariesCaseSensitive(word string, flag bool) bool {
-	return x.inner.IsWordInUserDictionariesCaseSensitive(foundation.NSStringStringWithUTF8String(word), flag)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWordInUserDictionaries:caseSensitive:"), purego.NSString(word), flag)
+	return _r
 }
 
 // Causes the receiver to start listening for spell-checking requests.
-//
-// Run calls the underlying Run.
 func (x *SpellServer) Run() {
-	x.inner.Run()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("run"))
 }
-
-// Delegate calls the underlying Delegate.
-func (x *SpellServer) Delegate() raw.NSSpellServerDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *SpellServer) SetDelegate(delegate raw.NSSpellServerDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-func (x *SpellServer) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // SpellServerable is the interface implemented by [SpellServer], for mocking and DI.
 type SpellServerable interface {
-	Unwrap() *raw.NSSpellServer
-	WithDelegate(delegate raw.NSSpellServerDelegate) *SpellServer
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SpellServer
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *SpellServer
 	RegisterLanguageByVendor(language string, vendor string) bool
 	IsWordInUserDictionariesCaseSensitive(word string, flag bool) bool
 	Run()
-	Delegate() raw.NSSpellServerDelegate
-	SetDelegate(delegate raw.NSSpellServerDelegate)
 }
 
 var _ SpellServerable = (*SpellServer)(nil)

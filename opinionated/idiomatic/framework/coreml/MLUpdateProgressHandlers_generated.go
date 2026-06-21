@@ -5,44 +5,71 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A collection of closures an update task uses to notify your app of its progress.
 //
-// UpdateProgressHandlers wraps [raw.MLUpdateProgressHandlers] with a fluent Go API.
+// UpdateProgressHandlers is an idiomatic wrapper over the Objective-C class MLUpdateProgressHandlers.
 type UpdateProgressHandlers struct {
-	inner *raw.MLUpdateProgressHandlers
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLUpdateProgressHandlers].
-func (x *UpdateProgressHandlers) Unwrap() *raw.MLUpdateProgressHandlers { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UpdateProgressHandlers) ID() objc.ID { return x.inner.Ptr() }
-
-// UpdateProgressHandlersFromID adopts an existing object pointer as a UpdateProgressHandlers (nil for 0).
+// UpdateProgressHandlersFromID adopts an existing Objective-C object as a UpdateProgressHandlers
+// (nil for 0), retaining it and registering a release finalizer.
 func UpdateProgressHandlersFromID(id objc.ID) *UpdateProgressHandlers {
 	if id == 0 {
 		return nil
 	}
-	return &UpdateProgressHandlers{inner: raw.MLUpdateProgressHandlersFromID(id)}
+	x := &UpdateProgressHandlers{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// updateProgressHandlersAdopt wraps an Objective-C object that this code just created as a
+// UpdateProgressHandlers (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func updateProgressHandlersAdopt(id objc.ID) *UpdateProgressHandlers {
+	if id == 0 {
+		return nil
+	}
+	x := &UpdateProgressHandlers{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UpdateProgressHandlers) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UpdateProgressHandlers) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UpdateProgressHandlers) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates the collection of closures an update task uses to notify your app of its progress.
 //
-// NewUpdateProgressHandlersForEventsProgressHandlerCompletionHandler creates a new [UpdateProgressHandlers].
-func NewUpdateProgressHandlersForEventsProgressHandlerCompletionHandler(interestedEvents MLUpdateProgressEvent, progressHandler func(*raw.MLUpdateContext), completionHandler func(*raw.MLUpdateContext)) *UpdateProgressHandlers {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MLUpdateProgressHandlers")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForEvents:progressHandler:completionHandler:"), raw.MLUpdateProgressEvent(interestedEvents), progressHandler, completionHandler)
-	return &UpdateProgressHandlers{inner: raw.MLUpdateProgressHandlersFromID(_id)}
+// NewUpdateProgressHandlersForEventsProgressHandlerCompletionHandler creates a new UpdateProgressHandlers.
+func NewUpdateProgressHandlersForEventsProgressHandlerCompletionHandler(interestedEvents UpdateProgressEvent, progressHandler func(obj.Object), completionHandler func(obj.Object)) *UpdateProgressHandlers {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MLUpdateProgressHandlers")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForEvents:progressHandler:completionHandler:"), interestedEvents, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { progressHandler(obj.Wrap(_b0)) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completionHandler(obj.Wrap(_b0)) }))
+	return updateProgressHandlersAdopt(_id)
 }
 
 // UpdateProgressHandlersable is the interface implemented by [UpdateProgressHandlers], for mocking and DI.
 type UpdateProgressHandlersable interface {
-	Unwrap() *raw.MLUpdateProgressHandlers
+	obj.Object
 }
 
 var _ UpdateProgressHandlersable = (*UpdateProgressHandlers)(nil)

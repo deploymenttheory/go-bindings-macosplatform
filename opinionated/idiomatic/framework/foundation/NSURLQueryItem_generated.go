@@ -5,74 +5,96 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object representing a single name/value pair for an item in the query portion of a URL.
 //
-// URLQueryItem wraps [raw.NSURLQueryItem] with a fluent Go API.
+// URLQueryItem is an idiomatic wrapper over the Objective-C class NSURLQueryItem.
 type URLQueryItem struct {
-	inner *raw.NSURLQueryItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSURLQueryItem].
-func (x *URLQueryItem) Unwrap() *raw.NSURLQueryItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *URLQueryItem) ID() objc.ID { return x.inner.Ptr() }
-
-// URLQueryItemFromID adopts an existing object pointer as a URLQueryItem (nil for 0).
+// URLQueryItemFromID adopts an existing Objective-C object as a URLQueryItem
+// (nil for 0), retaining it and registering a release finalizer.
 func URLQueryItemFromID(id objc.ID) *URLQueryItem {
 	if id == 0 {
 		return nil
 	}
-	return &URLQueryItem{inner: raw.NSURLQueryItemFromID(id)}
+	x := &URLQueryItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// uRLQueryItemAdopt wraps an Objective-C object that this code just created as a
+// URLQueryItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uRLQueryItemAdopt(id objc.ID) *URLQueryItem {
+	if id == 0 {
+		return nil
+	}
+	x := &URLQueryItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *URLQueryItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *URLQueryItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *URLQueryItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a newly allocated query item with the specified name and value.
 //
-// NewURLQueryItemWithNameValue creates a new [URLQueryItem].
+// NewURLQueryItemWithNameValue creates a new URLQueryItem.
 func NewURLQueryItemWithNameValue(name string, value string) *URLQueryItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLQueryItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:value:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(value).Ptr())
-	return &URLQueryItem{inner: raw.NSURLQueryItemFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLQueryItem")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:value:"), purego.NSString(name), purego.NSString(value))
+	return uRLQueryItemAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *URLQueryItem) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLQueryItem {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *URLQueryItem) WithScriptingProperties(scriptingProperties obj.Object) *URLQueryItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Name calls the underlying Name.
-func (x *URLQueryItem) Name() *String {
-	_r := x.inner.Name()
-	if _r == nil {
-		return nil
+func (x *URLQueryItem) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Value calls the underlying Value.
-func (x *URLQueryItem) Value() *String {
-	_r := x.inner.Value()
-	if _r == nil {
-		return nil
+func (x *URLQueryItem) Value() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
-
-func (x *URLQueryItem) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // URLQueryItemable is the interface implemented by [URLQueryItem], for mocking and DI.
 type URLQueryItemable interface {
-	Unwrap() *raw.NSURLQueryItem
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLQueryItem
-	Name() *String
-	Value() *String
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *URLQueryItem
+	Name() string
+	Value() string
 }
 
 var _ URLQueryItemable = (*URLQueryItem)(nil)

@@ -5,135 +5,150 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRContentAppObserverClusterContentAppMessageParams wraps [raw.MTRContentAppObserverClusterContentAppMessageParams] with a fluent Go API.
+// MTRContentAppObserverClusterContentAppMessageParams is an idiomatic wrapper over the Objective-C class MTRContentAppObserverClusterContentAppMessageParams.
 type MTRContentAppObserverClusterContentAppMessageParams struct {
-	inner *raw.MTRContentAppObserverClusterContentAppMessageParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRContentAppObserverClusterContentAppMessageParams].
-func (x *MTRContentAppObserverClusterContentAppMessageParams) Unwrap() *raw.MTRContentAppObserverClusterContentAppMessageParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRContentAppObserverClusterContentAppMessageParamsFromID adopts an existing object pointer as a MTRContentAppObserverClusterContentAppMessageParams (nil for 0).
+// MTRContentAppObserverClusterContentAppMessageParamsFromID adopts an existing Objective-C object as a MTRContentAppObserverClusterContentAppMessageParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRContentAppObserverClusterContentAppMessageParamsFromID(id objc.ID) *MTRContentAppObserverClusterContentAppMessageParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRContentAppObserverClusterContentAppMessageParams{inner: raw.MTRContentAppObserverClusterContentAppMessageParamsFromID(id)}
-}
-
-// NewMTRContentAppObserverClusterContentAppMessageParams creates a new [MTRContentAppObserverClusterContentAppMessageParams].
-func NewMTRContentAppObserverClusterContentAppMessageParams() *MTRContentAppObserverClusterContentAppMessageParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRContentAppObserverClusterContentAppMessageParams")), objc.RegisterName("new"))
-	return &MTRContentAppObserverClusterContentAppMessageParams{inner: raw.MTRContentAppObserverClusterContentAppMessageParamsFromID(_id)}
-}
-
-// WithData sets the data property and returns the receiver for chaining.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) WithData(data string) *MTRContentAppObserverClusterContentAppMessageParams {
-	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+	x := &MTRContentAppObserverClusterContentAppMessageParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithEncodingHint sets the encodingHint property and returns the receiver for chaining.
+// mTRContentAppObserverClusterContentAppMessageParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRContentAppObserverClusterContentAppMessageParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRContentAppObserverClusterContentAppMessageParamsAdopt(id objc.ID) *MTRContentAppObserverClusterContentAppMessageParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRContentAppObserverClusterContentAppMessageParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRContentAppObserverClusterContentAppMessageParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRContentAppObserverClusterContentAppMessageParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRContentAppObserverClusterContentAppMessageParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRContentAppObserverClusterContentAppMessageParams creates a new MTRContentAppObserverClusterContentAppMessageParams.
+func NewMTRContentAppObserverClusterContentAppMessageParams() *MTRContentAppObserverClusterContentAppMessageParams {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRContentAppObserverClusterContentAppMessageParams")), objc.RegisterName("new"))
+	return mTRContentAppObserverClusterContentAppMessageParamsAdopt(_id)
+}
+
+// WithData sets data and returns the receiver so calls can be chained.
+func (x *MTRContentAppObserverClusterContentAppMessageParams) WithData(data string) *MTRContentAppObserverClusterContentAppMessageParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
+	return x
+}
+
+// WithEncodingHint sets encodingHint and returns the receiver so calls can be chained.
 func (x *MTRContentAppObserverClusterContentAppMessageParams) WithEncodingHint(encodingHint string) *MTRContentAppObserverClusterContentAppMessageParams {
-	x.inner.SetEncodingHint(foundation.NSStringStringWithUTF8String(encodingHint))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncodingHint:"), purego.NSString(encodingHint))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke).
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRContentAppObserverClusterContentAppMessageParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRContentAppObserverClusterContentAppMessageParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRContentAppObserverClusterContentAppMessageParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRContentAppObserverClusterContentAppMessageParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRContentAppObserverClusterContentAppMessageParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRContentAppObserverClusterContentAppMessageParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// Data calls the underlying Data.
 func (x *MTRContentAppObserverClusterContentAppMessageParams) Data() string {
-	_r := x.inner.Data()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetData calls the underlying SetData.
 func (x *MTRContentAppObserverClusterContentAppMessageParams) SetData(data string) {
-	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 }
 
-// EncodingHint calls the underlying EncodingHint.
 func (x *MTRContentAppObserverClusterContentAppMessageParams) EncodingHint() string {
-	_r := x.inner.EncodingHint()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodingHint"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetEncodingHint calls the underlying SetEncodingHint.
 func (x *MTRContentAppObserverClusterContentAppMessageParams) SetEncodingHint(encodingHint string) {
-	x.inner.SetEncodingHint(foundation.NSStringStringWithUTF8String(encodingHint))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncodingHint:"), purego.NSString(encodingHint))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRContentAppObserverClusterContentAppMessageParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRContentAppObserverClusterContentAppMessageParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRContentAppObserverClusterContentAppMessageParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRContentAppObserverClusterContentAppMessageParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRContentAppObserverClusterContentAppMessageParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRContentAppObserverClusterContentAppMessageParamsable is the interface implemented by [MTRContentAppObserverClusterContentAppMessageParams], for mocking and DI.
 type MTRContentAppObserverClusterContentAppMessageParamsable interface {
-	Unwrap() *raw.MTRContentAppObserverClusterContentAppMessageParams
+	obj.Object
 	WithData(data string) *MTRContentAppObserverClusterContentAppMessageParams
 	WithEncodingHint(encodingHint string) *MTRContentAppObserverClusterContentAppMessageParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRContentAppObserverClusterContentAppMessageParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRContentAppObserverClusterContentAppMessageParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRContentAppObserverClusterContentAppMessageParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRContentAppObserverClusterContentAppMessageParams
 	Data() string
 	SetData(data string)
 	EncodingHint() string
 	SetEncodingHint(encodingHint string)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRContentAppObserverClusterContentAppMessageParamsable = (*MTRContentAppObserverClusterContentAppMessageParams)(nil)

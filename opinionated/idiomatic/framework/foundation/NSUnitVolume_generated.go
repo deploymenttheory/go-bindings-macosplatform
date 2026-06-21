@@ -5,54 +5,75 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A unit of measure for volume.
 //
-// UnitVolume wraps [raw.NSUnitVolume] with a fluent Go API.
+// UnitVolume is an idiomatic wrapper over the Objective-C class NSUnitVolume.
 type UnitVolume struct {
-	inner *raw.NSUnitVolume
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSUnitVolume].
-func (x *UnitVolume) Unwrap() *raw.NSUnitVolume { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitVolume) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitVolumeFromID adopts an existing object pointer as a UnitVolume (nil for 0).
+// UnitVolumeFromID adopts an existing Objective-C object as a UnitVolume
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitVolumeFromID(id objc.ID) *UnitVolume {
 	if id == 0 {
 		return nil
 	}
-	return &UnitVolume{inner: raw.NSUnitVolumeFromID(id)}
-}
-
-// NewUnitVolume creates a new [UnitVolume].
-func NewUnitVolume() *UnitVolume {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitVolume")), objc.RegisterName("new"))
-	return &UnitVolume{inner: raw.NSUnitVolumeFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitVolume) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitVolume {
-	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitVolume{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-func (x *UnitVolume) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
+// unitVolumeAdopt wraps an Objective-C object that this code just created as a
+// UnitVolume (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitVolumeAdopt(id objc.ID) *UnitVolume {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitVolume{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
 
-func (x *UnitVolume) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
+// Description returns the object's -description text.
+func (x *UnitVolume) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
 
-func (x *UnitVolume) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UnitVolume) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UnitVolume) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUnitVolume creates a new UnitVolume.
+func NewUnitVolume() *UnitVolume {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitVolume")), objc.RegisterName("new"))
+	return unitVolumeAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *UnitVolume) WithScriptingProperties(scriptingProperties obj.Object) *UnitVolume {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // UnitVolumeable is the interface implemented by [UnitVolume], for mocking and DI.
 type UnitVolumeable interface {
-	Unwrap() *raw.NSUnitVolume
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitVolume
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitVolume
 }
 
 var _ UnitVolumeable = (*UnitVolume)(nil)

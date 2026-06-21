@@ -5,120 +5,132 @@
 package metalperformanceshadersgraph
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that consists of all the levers to serialize an executable.
 //
-// GraphExecutableSerializationDescriptor wraps [raw.MPSGraphExecutableSerializationDescriptor] with a fluent Go API.
+// GraphExecutableSerializationDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphExecutableSerializationDescriptor.
 type GraphExecutableSerializationDescriptor struct {
-	inner *raw.MPSGraphExecutableSerializationDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSGraphExecutableSerializationDescriptor].
-func (x *GraphExecutableSerializationDescriptor) Unwrap() *raw.MPSGraphExecutableSerializationDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphExecutableSerializationDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphExecutableSerializationDescriptorFromID adopts an existing object pointer as a GraphExecutableSerializationDescriptor (nil for 0).
+// GraphExecutableSerializationDescriptorFromID adopts an existing Objective-C object as a GraphExecutableSerializationDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphExecutableSerializationDescriptorFromID(id objc.ID) *GraphExecutableSerializationDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &GraphExecutableSerializationDescriptor{inner: raw.MPSGraphExecutableSerializationDescriptorFromID(id)}
+	x := &GraphExecutableSerializationDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGraphExecutableSerializationDescriptor creates a new [GraphExecutableSerializationDescriptor].
+// graphExecutableSerializationDescriptorAdopt wraps an Objective-C object that this code just created as a
+// GraphExecutableSerializationDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphExecutableSerializationDescriptorAdopt(id objc.ID) *GraphExecutableSerializationDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphExecutableSerializationDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GraphExecutableSerializationDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GraphExecutableSerializationDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GraphExecutableSerializationDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGraphExecutableSerializationDescriptor creates a new GraphExecutableSerializationDescriptor.
 func NewGraphExecutableSerializationDescriptor() *GraphExecutableSerializationDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphExecutableSerializationDescriptor")), objc.RegisterName("new"))
-	return &GraphExecutableSerializationDescriptor{inner: raw.MPSGraphExecutableSerializationDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphExecutableSerializationDescriptor")), objc.RegisterName("new"))
+	return graphExecutableSerializationDescriptorAdopt(_id)
 }
 
 // Flag to append to an existing .mpsgraphpackage if found at provided url.
 //
-// WithAppend sets the append_ property and returns the receiver for chaining.
+// WithAppend sets append_ and returns the receiver so calls can be chained.
 func (x *GraphExecutableSerializationDescriptor) WithAppend(append_ bool) *GraphExecutableSerializationDescriptor {
-	x.inner.SetAppend(append_)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppend:"), append_)
 	return x
 }
 
 // The deployment platform used to serialize the executable.
 //
-// WithDeploymentPlatform sets the deploymentPlatform property and returns the receiver for chaining.
-func (x *GraphExecutableSerializationDescriptor) WithDeploymentPlatform(deploymentPlatform MPSGraphDeploymentPlatform) *GraphExecutableSerializationDescriptor {
-	x.inner.SetDeploymentPlatform(raw.MPSGraphDeploymentPlatform(deploymentPlatform))
+// WithDeploymentPlatform sets deploymentPlatform and returns the receiver so calls can be chained.
+func (x *GraphExecutableSerializationDescriptor) WithDeploymentPlatform(deploymentPlatform GraphDeploymentPlatform) *GraphExecutableSerializationDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeploymentPlatform:"), deploymentPlatform)
 	return x
 }
 
 // The minimum deployment target to serialize the executable.
 //
-// WithMinimumDeploymentTarget sets the minimumDeploymentTarget property and returns the receiver for chaining.
+// WithMinimumDeploymentTarget sets minimumDeploymentTarget and returns the receiver so calls can be chained.
 func (x *GraphExecutableSerializationDescriptor) WithMinimumDeploymentTarget(minimumDeploymentTarget string) *GraphExecutableSerializationDescriptor {
-	x.inner.SetMinimumDeploymentTarget(foundation.NSStringStringWithUTF8String(minimumDeploymentTarget))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumDeploymentTarget:"), purego.NSString(minimumDeploymentTarget))
 	return x
 }
 
 // Flag to append to an existing .mpsgraphpackage if found at provided url. If false, the exisiting .mpsgraphpackage will be overwritten.
-//
-// Append calls the underlying Append.
 func (x *GraphExecutableSerializationDescriptor) Append() bool {
-	return x.inner.Append()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("append"))
+	return _r
 }
 
-// SetAppend calls the underlying SetAppend.
 func (x *GraphExecutableSerializationDescriptor) SetAppend(append_ bool) {
-	x.inner.SetAppend(append_)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppend:"), append_)
 }
 
 // The deployment platform used to serialize the executable. Defaults to the current platform.
-//
-// DeploymentPlatform calls the underlying DeploymentPlatform.
-func (x *GraphExecutableSerializationDescriptor) DeploymentPlatform() MPSGraphDeploymentPlatform {
-	return MPSGraphDeploymentPlatform(x.inner.DeploymentPlatform())
+func (x *GraphExecutableSerializationDescriptor) DeploymentPlatform() GraphDeploymentPlatform {
+	_r := objc.Send[GraphDeploymentPlatform](objref.IDOf(x), objc.RegisterName("deploymentPlatform"))
+	return _r
 }
 
-// SetDeploymentPlatform calls the underlying SetDeploymentPlatform.
-func (x *GraphExecutableSerializationDescriptor) SetDeploymentPlatform(deploymentPlatform MPSGraphDeploymentPlatform) {
-	x.inner.SetDeploymentPlatform(raw.MPSGraphDeploymentPlatform(deploymentPlatform))
+func (x *GraphExecutableSerializationDescriptor) SetDeploymentPlatform(deploymentPlatform GraphDeploymentPlatform) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeploymentPlatform:"), deploymentPlatform)
 }
 
 // The minimum deployment target to serialize the executable. If not set, the package created will target the latest version of the `deploymentPlatform` set.
-//
-// MinimumDeploymentTarget calls the underlying MinimumDeploymentTarget.
 func (x *GraphExecutableSerializationDescriptor) MinimumDeploymentTarget() string {
-	_r := x.inner.MinimumDeploymentTarget()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minimumDeploymentTarget"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMinimumDeploymentTarget calls the underlying SetMinimumDeploymentTarget.
 func (x *GraphExecutableSerializationDescriptor) SetMinimumDeploymentTarget(minimumDeploymentTarget string) {
-	x.inner.SetMinimumDeploymentTarget(foundation.NSStringStringWithUTF8String(minimumDeploymentTarget))
-}
-
-func (x *GraphExecutableSerializationDescriptor) asGraphObject() *raw.MPSGraphObject {
-	return &x.inner.MPSGraphObject
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumDeploymentTarget:"), purego.NSString(minimumDeploymentTarget))
 }
 
 // GraphExecutableSerializationDescriptorable is the interface implemented by [GraphExecutableSerializationDescriptor], for mocking and DI.
 type GraphExecutableSerializationDescriptorable interface {
-	Unwrap() *raw.MPSGraphExecutableSerializationDescriptor
+	obj.Object
 	WithAppend(append_ bool) *GraphExecutableSerializationDescriptor
-	WithDeploymentPlatform(deploymentPlatform MPSGraphDeploymentPlatform) *GraphExecutableSerializationDescriptor
+	WithDeploymentPlatform(deploymentPlatform GraphDeploymentPlatform) *GraphExecutableSerializationDescriptor
 	WithMinimumDeploymentTarget(minimumDeploymentTarget string) *GraphExecutableSerializationDescriptor
 	Append() bool
 	SetAppend(append_ bool)
-	DeploymentPlatform() MPSGraphDeploymentPlatform
-	SetDeploymentPlatform(deploymentPlatform MPSGraphDeploymentPlatform)
+	DeploymentPlatform() GraphDeploymentPlatform
+	SetDeploymentPlatform(deploymentPlatform GraphDeploymentPlatform)
 	MinimumDeploymentTarget() string
 	SetMinimumDeploymentTarget(minimumDeploymentTarget string)
 }

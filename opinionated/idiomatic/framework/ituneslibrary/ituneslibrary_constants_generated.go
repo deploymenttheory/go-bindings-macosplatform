@@ -5,416 +5,407 @@
 package ituneslibrary
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ituneslibrary"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// ITLibMediaEntityPropertyPersistentID returns the string constant ITLibMediaEntityPropertyPersistentID as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaEntityPropertyPersistentID() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaEntityPropertyPersistentID())
+// ITLibMediaEntityPropertyPersistentID returns the string constant ITLibMediaEntityPropertyPersistentID, for use as a dictionary key or argument.
+func ITLibMediaEntityPropertyPersistentID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaEntityPropertyPersistentID")))
 }
 
-// ITLibMediaItemPropertyAlbumTitle returns the string constant ITLibMediaItemPropertyAlbumTitle as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyAlbumTitle() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyAlbumTitle())
+// ITLibMediaItemPropertyAlbumTitle returns the string constant ITLibMediaItemPropertyAlbumTitle, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyAlbumTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyAlbumTitle")))
 }
 
-// ITLibMediaItemPropertySortAlbumTitle returns the string constant ITLibMediaItemPropertySortAlbumTitle as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertySortAlbumTitle() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertySortAlbumTitle())
+// ITLibMediaItemPropertySortAlbumTitle returns the string constant ITLibMediaItemPropertySortAlbumTitle, for use as a dictionary key or argument.
+func ITLibMediaItemPropertySortAlbumTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertySortAlbumTitle")))
 }
 
-// ITLibMediaItemPropertyAlbumArtist returns the string constant ITLibMediaItemPropertyAlbumArtist as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyAlbumArtist() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyAlbumArtist())
+// ITLibMediaItemPropertyAlbumArtist returns the string constant ITLibMediaItemPropertyAlbumArtist, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyAlbumArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyAlbumArtist")))
 }
 
-// ITLibMediaItemPropertyAlbumRating returns the string constant ITLibMediaItemPropertyAlbumRating as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyAlbumRating() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyAlbumRating())
+// ITLibMediaItemPropertyAlbumRating returns the string constant ITLibMediaItemPropertyAlbumRating, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyAlbumRating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyAlbumRating")))
 }
 
-// ITLibMediaItemPropertyAlbumRatingComputed returns the string constant ITLibMediaItemPropertyAlbumRatingComputed as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyAlbumRatingComputed() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyAlbumRatingComputed())
+// ITLibMediaItemPropertyAlbumRatingComputed returns the string constant ITLibMediaItemPropertyAlbumRatingComputed, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyAlbumRatingComputed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyAlbumRatingComputed")))
 }
 
-// ITLibMediaItemPropertySortAlbumArtist returns the string constant ITLibMediaItemPropertySortAlbumArtist as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertySortAlbumArtist() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertySortAlbumArtist())
+// ITLibMediaItemPropertySortAlbumArtist returns the string constant ITLibMediaItemPropertySortAlbumArtist, for use as a dictionary key or argument.
+func ITLibMediaItemPropertySortAlbumArtist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertySortAlbumArtist")))
 }
 
-// ITLibMediaItemPropertyAlbumIsGapless returns the string constant ITLibMediaItemPropertyAlbumIsGapless as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyAlbumIsGapless() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyAlbumIsGapless())
+// ITLibMediaItemPropertyAlbumIsGapless returns the string constant ITLibMediaItemPropertyAlbumIsGapless, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyAlbumIsGapless() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyAlbumIsGapless")))
 }
 
-// ITLibMediaItemPropertyAlbumIsCompilation returns the string constant ITLibMediaItemPropertyAlbumIsCompilation as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyAlbumIsCompilation() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyAlbumIsCompilation())
+// ITLibMediaItemPropertyAlbumIsCompilation returns the string constant ITLibMediaItemPropertyAlbumIsCompilation, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyAlbumIsCompilation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyAlbumIsCompilation")))
 }
 
-// ITLibMediaItemPropertyAlbumDiscCount returns the string constant ITLibMediaItemPropertyAlbumDiscCount as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyAlbumDiscCount() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyAlbumDiscCount())
+// ITLibMediaItemPropertyAlbumDiscCount returns the string constant ITLibMediaItemPropertyAlbumDiscCount, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyAlbumDiscCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyAlbumDiscCount")))
 }
 
-// ITLibMediaItemPropertyAlbumDiscNumber returns the string constant ITLibMediaItemPropertyAlbumDiscNumber as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyAlbumDiscNumber() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyAlbumDiscNumber())
+// ITLibMediaItemPropertyAlbumDiscNumber returns the string constant ITLibMediaItemPropertyAlbumDiscNumber, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyAlbumDiscNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyAlbumDiscNumber")))
 }
 
-// ITLibMediaItemPropertyAlbumTrackCount returns the string constant ITLibMediaItemPropertyAlbumTrackCount as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyAlbumTrackCount() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyAlbumTrackCount())
+// ITLibMediaItemPropertyAlbumTrackCount returns the string constant ITLibMediaItemPropertyAlbumTrackCount, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyAlbumTrackCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyAlbumTrackCount")))
 }
 
-// ITLibMediaItemPropertyArtistName returns the string constant ITLibMediaItemPropertyArtistName as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyArtistName() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyArtistName())
+// ITLibMediaItemPropertyArtistName returns the string constant ITLibMediaItemPropertyArtistName, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyArtistName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyArtistName")))
 }
 
-// ITLibMediaItemPropertySortArtistName returns the string constant ITLibMediaItemPropertySortArtistName as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertySortArtistName() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertySortArtistName())
+// ITLibMediaItemPropertySortArtistName returns the string constant ITLibMediaItemPropertySortArtistName, for use as a dictionary key or argument.
+func ITLibMediaItemPropertySortArtistName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertySortArtistName")))
 }
 
-// ITLibMediaItemPropertyVideoIsHD returns the string constant ITLibMediaItemPropertyVideoIsHD as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyVideoIsHD() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyVideoIsHD())
+// ITLibMediaItemPropertyVideoIsHD returns the string constant ITLibMediaItemPropertyVideoIsHD, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyVideoIsHD() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyVideoIsHD")))
 }
 
-// ITLibMediaItemPropertyVideoWidth returns the string constant ITLibMediaItemPropertyVideoWidth as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyVideoWidth() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyVideoWidth())
+// ITLibMediaItemPropertyVideoWidth returns the string constant ITLibMediaItemPropertyVideoWidth, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyVideoWidth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyVideoWidth")))
 }
 
-// ITLibMediaItemPropertyVideoHeight returns the string constant ITLibMediaItemPropertyVideoHeight as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyVideoHeight() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyVideoHeight())
+// ITLibMediaItemPropertyVideoHeight returns the string constant ITLibMediaItemPropertyVideoHeight, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyVideoHeight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyVideoHeight")))
 }
 
-// ITLibMediaItemPropertyVideoSeries returns the string constant ITLibMediaItemPropertyVideoSeries as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyVideoSeries() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyVideoSeries())
+// ITLibMediaItemPropertyVideoSeries returns the string constant ITLibMediaItemPropertyVideoSeries, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyVideoSeries() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyVideoSeries")))
 }
 
-// ITLibMediaItemPropertyVideoSortSeries returns the string constant ITLibMediaItemPropertyVideoSortSeries as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyVideoSortSeries() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyVideoSortSeries())
+// ITLibMediaItemPropertyVideoSortSeries returns the string constant ITLibMediaItemPropertyVideoSortSeries, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyVideoSortSeries() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyVideoSortSeries")))
 }
 
-// ITLibMediaItemPropertyVideoSeason returns the string constant ITLibMediaItemPropertyVideoSeason as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyVideoSeason() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyVideoSeason())
+// ITLibMediaItemPropertyVideoSeason returns the string constant ITLibMediaItemPropertyVideoSeason, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyVideoSeason() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyVideoSeason")))
 }
 
-// ITLibMediaItemPropertyVideoEpisode returns the string constant ITLibMediaItemPropertyVideoEpisode as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyVideoEpisode() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyVideoEpisode())
+// ITLibMediaItemPropertyVideoEpisode returns the string constant ITLibMediaItemPropertyVideoEpisode, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyVideoEpisode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyVideoEpisode")))
 }
 
-// ITLibMediaItemPropertyVideoEpisodeOrder returns the string constant ITLibMediaItemPropertyVideoEpisodeOrder as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyVideoEpisodeOrder() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyVideoEpisodeOrder())
+// ITLibMediaItemPropertyVideoEpisodeOrder returns the string constant ITLibMediaItemPropertyVideoEpisodeOrder, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyVideoEpisodeOrder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyVideoEpisodeOrder")))
 }
 
-// ITLibMediaItemPropertyHasArtwork returns the string constant ITLibMediaItemPropertyHasArtwork as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyHasArtwork() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyHasArtwork())
+// ITLibMediaItemPropertyHasArtwork returns the string constant ITLibMediaItemPropertyHasArtwork, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyHasArtwork() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyHasArtwork")))
 }
 
-// ITLibMediaItemPropertyBitRate returns the string constant ITLibMediaItemPropertyBitRate as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyBitRate() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyBitRate())
+// ITLibMediaItemPropertyBitRate returns the string constant ITLibMediaItemPropertyBitRate, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyBitRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyBitRate")))
 }
 
-// ITLibMediaItemPropertyBeatsPerMinute returns the string constant ITLibMediaItemPropertyBeatsPerMinute as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyBeatsPerMinute() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyBeatsPerMinute())
+// ITLibMediaItemPropertyBeatsPerMinute returns the string constant ITLibMediaItemPropertyBeatsPerMinute, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyBeatsPerMinute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyBeatsPerMinute")))
 }
 
-// ITLibMediaItemPropertyCategory returns the string constant ITLibMediaItemPropertyCategory as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyCategory() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyCategory())
+// ITLibMediaItemPropertyCategory returns the string constant ITLibMediaItemPropertyCategory, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyCategory() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyCategory")))
 }
 
-// ITLibMediaItemPropertyComments returns the string constant ITLibMediaItemPropertyComments as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyComments() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyComments())
+// ITLibMediaItemPropertyComments returns the string constant ITLibMediaItemPropertyComments, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyComments() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyComments")))
 }
 
-// ITLibMediaItemPropertyComposer returns the string constant ITLibMediaItemPropertyComposer as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyComposer() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyComposer())
+// ITLibMediaItemPropertyComposer returns the string constant ITLibMediaItemPropertyComposer, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyComposer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyComposer")))
 }
 
-// ITLibMediaItemPropertySortComposer returns the string constant ITLibMediaItemPropertySortComposer as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertySortComposer() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertySortComposer())
+// ITLibMediaItemPropertySortComposer returns the string constant ITLibMediaItemPropertySortComposer, for use as a dictionary key or argument.
+func ITLibMediaItemPropertySortComposer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertySortComposer")))
 }
 
-// ITLibMediaItemPropertyContentRating returns the string constant ITLibMediaItemPropertyContentRating as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyContentRating() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyContentRating())
+// ITLibMediaItemPropertyContentRating returns the string constant ITLibMediaItemPropertyContentRating, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyContentRating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyContentRating")))
 }
 
-// ITLibMediaItemPropertyLyricsContentRating returns the string constant ITLibMediaItemPropertyLyricsContentRating as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyLyricsContentRating() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyLyricsContentRating())
+// ITLibMediaItemPropertyLyricsContentRating returns the string constant ITLibMediaItemPropertyLyricsContentRating, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyLyricsContentRating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyLyricsContentRating")))
 }
 
-// ITLibMediaItemPropertyAddedDate returns the string constant ITLibMediaItemPropertyAddedDate as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyAddedDate() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyAddedDate())
+// ITLibMediaItemPropertyAddedDate returns the string constant ITLibMediaItemPropertyAddedDate, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyAddedDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyAddedDate")))
 }
 
-// ITLibMediaItemPropertyModifiedDate returns the string constant ITLibMediaItemPropertyModifiedDate as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyModifiedDate() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyModifiedDate())
+// ITLibMediaItemPropertyModifiedDate returns the string constant ITLibMediaItemPropertyModifiedDate, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyModifiedDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyModifiedDate")))
 }
 
-// ITLibMediaItemPropertyDescription returns the string constant ITLibMediaItemPropertyDescription as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyDescription() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyDescription())
+// ITLibMediaItemPropertyDescription returns the string constant ITLibMediaItemPropertyDescription, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyDescription")))
 }
 
-// ITLibMediaItemPropertyIsUserDisabled returns the string constant ITLibMediaItemPropertyIsUserDisabled as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyIsUserDisabled() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyIsUserDisabled())
+// ITLibMediaItemPropertyIsUserDisabled returns the string constant ITLibMediaItemPropertyIsUserDisabled, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyIsUserDisabled() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyIsUserDisabled")))
 }
 
-// ITLibMediaItemPropertyFileType returns the string constant ITLibMediaItemPropertyFileType as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyFileType() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyFileType())
+// ITLibMediaItemPropertyFileType returns the string constant ITLibMediaItemPropertyFileType, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyFileType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyFileType")))
 }
 
-// ITLibMediaItemPropertyGenre returns the string constant ITLibMediaItemPropertyGenre as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyGenre() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyGenre())
+// ITLibMediaItemPropertyGenre returns the string constant ITLibMediaItemPropertyGenre, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyGenre() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyGenre")))
 }
 
-// ITLibMediaItemPropertyGrouping returns the string constant ITLibMediaItemPropertyGrouping as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyGrouping() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyGrouping())
+// ITLibMediaItemPropertyGrouping returns the string constant ITLibMediaItemPropertyGrouping, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyGrouping() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyGrouping")))
 }
 
-// ITLibMediaItemPropertyIsVideo returns the string constant ITLibMediaItemPropertyIsVideo as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyIsVideo() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyIsVideo())
+// ITLibMediaItemPropertyIsVideo returns the string constant ITLibMediaItemPropertyIsVideo, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyIsVideo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyIsVideo")))
 }
 
-// ITLibMediaItemPropertyKind returns the string constant ITLibMediaItemPropertyKind as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyKind() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyKind())
+// ITLibMediaItemPropertyKind returns the string constant ITLibMediaItemPropertyKind, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyKind() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyKind")))
 }
 
-// ITLibMediaItemPropertyTitle returns the string constant ITLibMediaItemPropertyTitle as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyTitle() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyTitle())
+// ITLibMediaItemPropertyTitle returns the string constant ITLibMediaItemPropertyTitle, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyTitle")))
 }
 
-// ITLibMediaItemPropertySortTitle returns the string constant ITLibMediaItemPropertySortTitle as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertySortTitle() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertySortTitle())
+// ITLibMediaItemPropertySortTitle returns the string constant ITLibMediaItemPropertySortTitle, for use as a dictionary key or argument.
+func ITLibMediaItemPropertySortTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertySortTitle")))
 }
 
-// ITLibMediaItemPropertyVolumeNormalizationEnergy returns the string constant ITLibMediaItemPropertyVolumeNormalizationEnergy as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyVolumeNormalizationEnergy() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyVolumeNormalizationEnergy())
+// ITLibMediaItemPropertyVolumeNormalizationEnergy returns the string constant ITLibMediaItemPropertyVolumeNormalizationEnergy, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyVolumeNormalizationEnergy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyVolumeNormalizationEnergy")))
 }
 
-// ITLibMediaItemPropertyPlayCount returns the string constant ITLibMediaItemPropertyPlayCount as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyPlayCount() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyPlayCount())
+// ITLibMediaItemPropertyPlayCount returns the string constant ITLibMediaItemPropertyPlayCount, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyPlayCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyPlayCount")))
 }
 
-// ITLibMediaItemPropertyLastPlayDate returns the string constant ITLibMediaItemPropertyLastPlayDate as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyLastPlayDate() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyLastPlayDate())
+// ITLibMediaItemPropertyLastPlayDate returns the string constant ITLibMediaItemPropertyLastPlayDate, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyLastPlayDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyLastPlayDate")))
 }
 
-// ITLibMediaItemPropertyPlayStatus returns the string constant ITLibMediaItemPropertyPlayStatus as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyPlayStatus() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyPlayStatus())
+// ITLibMediaItemPropertyPlayStatus returns the string constant ITLibMediaItemPropertyPlayStatus, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyPlayStatus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyPlayStatus")))
 }
 
-// ITLibMediaItemPropertyIsDRMProtected returns the string constant ITLibMediaItemPropertyIsDRMProtected as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyIsDRMProtected() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyIsDRMProtected())
+// ITLibMediaItemPropertyIsDRMProtected returns the string constant ITLibMediaItemPropertyIsDRMProtected, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyIsDRMProtected() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyIsDRMProtected")))
 }
 
-// ITLibMediaItemPropertyIsPurchased returns the string constant ITLibMediaItemPropertyIsPurchased as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyIsPurchased() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyIsPurchased())
+// ITLibMediaItemPropertyIsPurchased returns the string constant ITLibMediaItemPropertyIsPurchased, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyIsPurchased() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyIsPurchased")))
 }
 
-// ITLibMediaItemPropertyMovementCount returns the string constant ITLibMediaItemPropertyMovementCount as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyMovementCount() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyMovementCount())
+// ITLibMediaItemPropertyMovementCount returns the string constant ITLibMediaItemPropertyMovementCount, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyMovementCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyMovementCount")))
 }
 
-// ITLibMediaItemPropertyMovementName returns the string constant ITLibMediaItemPropertyMovementName as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyMovementName() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyMovementName())
+// ITLibMediaItemPropertyMovementName returns the string constant ITLibMediaItemPropertyMovementName, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyMovementName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyMovementName")))
 }
 
-// ITLibMediaItemPropertyMovementNumber returns the string constant ITLibMediaItemPropertyMovementNumber as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyMovementNumber() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyMovementNumber())
+// ITLibMediaItemPropertyMovementNumber returns the string constant ITLibMediaItemPropertyMovementNumber, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyMovementNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyMovementNumber")))
 }
 
-// ITLibMediaItemPropertyRating returns the string constant ITLibMediaItemPropertyRating as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyRating() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyRating())
+// ITLibMediaItemPropertyRating returns the string constant ITLibMediaItemPropertyRating, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyRating() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyRating")))
 }
 
-// ITLibMediaItemPropertyRatingComputed returns the string constant ITLibMediaItemPropertyRatingComputed as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyRatingComputed() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyRatingComputed())
+// ITLibMediaItemPropertyRatingComputed returns the string constant ITLibMediaItemPropertyRatingComputed, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyRatingComputed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyRatingComputed")))
 }
 
-// ITLibMediaItemPropertyReleaseDate returns the string constant ITLibMediaItemPropertyReleaseDate as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyReleaseDate() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyReleaseDate())
+// ITLibMediaItemPropertyReleaseDate returns the string constant ITLibMediaItemPropertyReleaseDate, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyReleaseDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyReleaseDate")))
 }
 
-// ITLibMediaItemPropertySampleRate returns the string constant ITLibMediaItemPropertySampleRate as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertySampleRate() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertySampleRate())
+// ITLibMediaItemPropertySampleRate returns the string constant ITLibMediaItemPropertySampleRate, for use as a dictionary key or argument.
+func ITLibMediaItemPropertySampleRate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertySampleRate")))
 }
 
-// ITLibMediaItemPropertySize returns the string constant ITLibMediaItemPropertySize as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertySize() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertySize())
+// ITLibMediaItemPropertySize returns the string constant ITLibMediaItemPropertySize, for use as a dictionary key or argument.
+func ITLibMediaItemPropertySize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertySize")))
 }
 
-// ITLibMediaItemPropertyFileSize returns the string constant ITLibMediaItemPropertyFileSize as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyFileSize() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyFileSize())
+// ITLibMediaItemPropertyFileSize returns the string constant ITLibMediaItemPropertyFileSize, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyFileSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyFileSize")))
 }
 
-// ITLibMediaItemPropertyUserSkipCount returns the string constant ITLibMediaItemPropertyUserSkipCount as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyUserSkipCount() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyUserSkipCount())
+// ITLibMediaItemPropertyUserSkipCount returns the string constant ITLibMediaItemPropertyUserSkipCount, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyUserSkipCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyUserSkipCount")))
 }
 
-// ITLibMediaItemPropertySkipDate returns the string constant ITLibMediaItemPropertySkipDate as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertySkipDate() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertySkipDate())
+// ITLibMediaItemPropertySkipDate returns the string constant ITLibMediaItemPropertySkipDate, for use as a dictionary key or argument.
+func ITLibMediaItemPropertySkipDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertySkipDate")))
 }
 
-// ITLibMediaItemPropertyStartTime returns the string constant ITLibMediaItemPropertyStartTime as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyStartTime() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyStartTime())
+// ITLibMediaItemPropertyStartTime returns the string constant ITLibMediaItemPropertyStartTime, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyStartTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyStartTime")))
 }
 
-// ITLibMediaItemPropertyStopTime returns the string constant ITLibMediaItemPropertyStopTime as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyStopTime() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyStopTime())
+// ITLibMediaItemPropertyStopTime returns the string constant ITLibMediaItemPropertyStopTime, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyStopTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyStopTime")))
 }
 
-// ITLibMediaItemPropertyTotalTime returns the string constant ITLibMediaItemPropertyTotalTime as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyTotalTime() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyTotalTime())
+// ITLibMediaItemPropertyTotalTime returns the string constant ITLibMediaItemPropertyTotalTime, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyTotalTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyTotalTime")))
 }
 
-// ITLibMediaItemPropertyTrackNumber returns the string constant ITLibMediaItemPropertyTrackNumber as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyTrackNumber() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyTrackNumber())
+// ITLibMediaItemPropertyTrackNumber returns the string constant ITLibMediaItemPropertyTrackNumber, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyTrackNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyTrackNumber")))
 }
 
-// ITLibMediaItemPropertyLocationType returns the string constant ITLibMediaItemPropertyLocationType as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyLocationType() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyLocationType())
+// ITLibMediaItemPropertyLocationType returns the string constant ITLibMediaItemPropertyLocationType, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyLocationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyLocationType")))
 }
 
-// ITLibMediaItemPropertyVoiceOverLanguage returns the string constant ITLibMediaItemPropertyVoiceOverLanguage as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyVoiceOverLanguage() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyVoiceOverLanguage())
+// ITLibMediaItemPropertyVoiceOverLanguage returns the string constant ITLibMediaItemPropertyVoiceOverLanguage, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyVoiceOverLanguage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyVoiceOverLanguage")))
 }
 
-// ITLibMediaItemPropertyVolumeAdjustment returns the string constant ITLibMediaItemPropertyVolumeAdjustment as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyVolumeAdjustment() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyVolumeAdjustment())
+// ITLibMediaItemPropertyVolumeAdjustment returns the string constant ITLibMediaItemPropertyVolumeAdjustment, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyVolumeAdjustment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyVolumeAdjustment")))
 }
 
-// ITLibMediaItemPropertyWork returns the string constant ITLibMediaItemPropertyWork as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyWork() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyWork())
+// ITLibMediaItemPropertyWork returns the string constant ITLibMediaItemPropertyWork, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyWork() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyWork")))
 }
 
-// ITLibMediaItemPropertyYear returns the string constant ITLibMediaItemPropertyYear as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyYear() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyYear())
+// ITLibMediaItemPropertyYear returns the string constant ITLibMediaItemPropertyYear, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyYear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyYear")))
 }
 
-// ITLibMediaItemPropertyMediaKind returns the string constant ITLibMediaItemPropertyMediaKind as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyMediaKind() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyMediaKind())
+// ITLibMediaItemPropertyMediaKind returns the string constant ITLibMediaItemPropertyMediaKind, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyMediaKind() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyMediaKind")))
 }
 
-// ITLibMediaItemPropertyLocation returns the string constant ITLibMediaItemPropertyLocation as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyLocation() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyLocation())
+// ITLibMediaItemPropertyLocation returns the string constant ITLibMediaItemPropertyLocation, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyLocation")))
 }
 
-// ITLibMediaItemPropertyArtwork returns the string constant ITLibMediaItemPropertyArtwork as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibMediaItemPropertyArtwork() objc.ID {
-	return purego.CFConstant(raw.ITLibMediaItemPropertyArtwork())
+// ITLibMediaItemPropertyArtwork returns the string constant ITLibMediaItemPropertyArtwork, for use as a dictionary key or argument.
+func ITLibMediaItemPropertyArtwork() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibMediaItemPropertyArtwork")))
 }
 
-// @constant ITLibPlaylistPropertyName. @abstract Retrieves the name or title of the playlist. See @link name @/link.
-// ITLibPlaylistPropertyName returns the string constant ITLibPlaylistPropertyName as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibPlaylistPropertyName() objc.ID {
-	return purego.CFConstant(raw.ITLibPlaylistPropertyName())
+// Retrieves the name or title of the playlist. See
+// ITLibPlaylistPropertyName returns the string constant ITLibPlaylistPropertyName, for use as a dictionary key or argument.
+func ITLibPlaylistPropertyName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibPlaylistPropertyName")))
 }
 
-// @constant ITLibPlaylistPropertyAllItems. See allItemsPlaylist.
-// ITLibPlaylistPropertyAllItemsPlaylist returns the string constant ITLibPlaylistPropertyAllItemsPlaylist as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibPlaylistPropertyAllItemsPlaylist() objc.ID {
-	return purego.CFConstant(raw.ITLibPlaylistPropertyAllItemsPlaylist())
+// ITLibPlaylistPropertyAllItemsPlaylist returns the string constant ITLibPlaylistPropertyAllItemsPlaylist, for use as a dictionary key or argument.
+func ITLibPlaylistPropertyAllItemsPlaylist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibPlaylistPropertyAllItemsPlaylist")))
 }
 
-// @constant ITLibPlaylistPropertyDistinguisedKind.
-// ITLibPlaylistPropertyDistinguisedKind returns the string constant ITLibPlaylistPropertyDistinguisedKind as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibPlaylistPropertyDistinguisedKind() objc.ID {
-	return purego.CFConstant(raw.ITLibPlaylistPropertyDistinguisedKind())
+// ITLibPlaylistPropertyDistinguisedKind returns the string constant ITLibPlaylistPropertyDistinguisedKind, for use as a dictionary key or argument.
+func ITLibPlaylistPropertyDistinguisedKind() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibPlaylistPropertyDistinguisedKind")))
 }
 
-// @constant ITLibPlaylistPropertyPrimary.
-// ITLibPlaylistPropertyPrimary returns the string constant ITLibPlaylistPropertyPrimary as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibPlaylistPropertyPrimary() objc.ID {
-	return purego.CFConstant(raw.ITLibPlaylistPropertyPrimary())
+// ITLibPlaylistPropertyPrimary returns the string constant ITLibPlaylistPropertyPrimary, for use as a dictionary key or argument.
+func ITLibPlaylistPropertyPrimary() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibPlaylistPropertyPrimary")))
 }
 
-// @constant ITLibPlaylistPropertyParentPersistentID.
-// ITLibPlaylistPropertyParentPersistentID returns the string constant ITLibPlaylistPropertyParentPersistentID as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibPlaylistPropertyParentPersistentID() objc.ID {
-	return purego.CFConstant(raw.ITLibPlaylistPropertyParentPersistentID())
+// ITLibPlaylistPropertyParentPersistentID returns the string constant ITLibPlaylistPropertyParentPersistentID, for use as a dictionary key or argument.
+func ITLibPlaylistPropertyParentPersistentID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibPlaylistPropertyParentPersistentID")))
 }
 
-// @constant ITLibPlaylistPropertyVisible.
-// ITLibPlaylistPropertyVisible returns the string constant ITLibPlaylistPropertyVisible as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibPlaylistPropertyVisible() objc.ID {
-	return purego.CFConstant(raw.ITLibPlaylistPropertyVisible())
+// ITLibPlaylistPropertyVisible returns the string constant ITLibPlaylistPropertyVisible, for use as a dictionary key or argument.
+func ITLibPlaylistPropertyVisible() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibPlaylistPropertyVisible")))
 }
 
-// @constant ITLibPlaylistPropertyItems.
-// ITLibPlaylistPropertyItems returns the string constant ITLibPlaylistPropertyItems as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibPlaylistPropertyItems() objc.ID {
-	return purego.CFConstant(raw.ITLibPlaylistPropertyItems())
+// ITLibPlaylistPropertyItems returns the string constant ITLibPlaylistPropertyItems, for use as a dictionary key or argument.
+func ITLibPlaylistPropertyItems() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibPlaylistPropertyItems")))
 }
 
-// @constant ITLibPlaylistPropertyFolder.
-// ITLibPlaylistPropertyKind returns the string constant ITLibPlaylistPropertyKind as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibPlaylistPropertyKind() objc.ID {
-	return purego.CFConstant(raw.ITLibPlaylistPropertyKind())
+// ITLibPlaylistPropertyKind returns the string constant ITLibPlaylistPropertyKind, for use as a dictionary key or argument.
+func ITLibPlaylistPropertyKind() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibPlaylistPropertyKind")))
 }
 
-// @constant ITLibPlaylistPropertyMaster.
-// ITLibPlaylistPropertyMaster returns the string constant ITLibPlaylistPropertyMaster as an objc.ID, for use as a dictionary key or selector argument.
-func ITLibPlaylistPropertyMaster() objc.ID {
-	return purego.CFConstant(raw.ITLibPlaylistPropertyMaster())
+// ITLibPlaylistPropertyMaster returns the string constant ITLibPlaylistPropertyMaster, for use as a dictionary key or argument.
+func ITLibPlaylistPropertyMaster() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ITLibPlaylistPropertyMaster")))
 }

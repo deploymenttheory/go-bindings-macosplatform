@@ -5,140 +5,134 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A configuration object that describes the information to fetch from a record zone.
 //
-// FetchRecordZoneChangesConfiguration wraps [raw.CKFetchRecordZoneChangesConfiguration] with a fluent Go API.
+// FetchRecordZoneChangesConfiguration is an idiomatic wrapper over the Objective-C class CKFetchRecordZoneChangesConfiguration.
 type FetchRecordZoneChangesConfiguration struct {
-	inner *raw.CKFetchRecordZoneChangesConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKFetchRecordZoneChangesConfiguration].
-func (x *FetchRecordZoneChangesConfiguration) Unwrap() *raw.CKFetchRecordZoneChangesConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FetchRecordZoneChangesConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// FetchRecordZoneChangesConfigurationFromID adopts an existing object pointer as a FetchRecordZoneChangesConfiguration (nil for 0).
+// FetchRecordZoneChangesConfigurationFromID adopts an existing Objective-C object as a FetchRecordZoneChangesConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func FetchRecordZoneChangesConfigurationFromID(id objc.ID) *FetchRecordZoneChangesConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &FetchRecordZoneChangesConfiguration{inner: raw.CKFetchRecordZoneChangesConfigurationFromID(id)}
+	x := &FetchRecordZoneChangesConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFetchRecordZoneChangesConfiguration creates a new [FetchRecordZoneChangesConfiguration].
+// fetchRecordZoneChangesConfigurationAdopt wraps an Objective-C object that this code just created as a
+// FetchRecordZoneChangesConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fetchRecordZoneChangesConfigurationAdopt(id objc.ID) *FetchRecordZoneChangesConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &FetchRecordZoneChangesConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FetchRecordZoneChangesConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FetchRecordZoneChangesConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FetchRecordZoneChangesConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFetchRecordZoneChangesConfiguration creates a new FetchRecordZoneChangesConfiguration.
 func NewFetchRecordZoneChangesConfiguration() *FetchRecordZoneChangesConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKFetchRecordZoneChangesConfiguration")), objc.RegisterName("new"))
-	return &FetchRecordZoneChangesConfiguration{inner: raw.CKFetchRecordZoneChangesConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKFetchRecordZoneChangesConfiguration")), objc.RegisterName("new"))
+	return fetchRecordZoneChangesConfigurationAdopt(_id)
 }
 
 // The token that identifies the starting point for retrieving changes. Each fetch request returns a unique token in addition to any changes. CloudKit passes the token to your “CKFetchRecordZoneChangesOperation/recordZoneFetchResultBlock“ handler. During a subsequent fetch request, providing the previous token causes the server to return only the changes since the previous fetch request. Tokens are opaque values that you can write to disk safely and reuse later.
 //
-// WithPreviousServerChangeToken sets the previousServerChangeToken property and returns the receiver for chaining.
+// WithPreviousServerChangeToken sets previousServerChangeToken and returns the receiver so calls can be chained.
 func (x *FetchRecordZoneChangesConfiguration) WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchRecordZoneChangesConfiguration {
-	x.inner.SetPreviousServerChangeToken(previousServerChangeToken.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousServerChangeToken:"), objref.IDOf(previousServerChangeToken))
 	return x
 }
 
 // The maximum number of records to fetch from the record zone. Use this property to limit the number of results in situations where you expect a large number of records. The default value is 0, which causes the server to return an appropriate number of records using dynamic conditions. When the number of records that CloudKit returns exceeds this limit, the operation sets the `moreComing` property to <doc://com.apple.documentation/documentation/swift/true> when executing the “CKFetchRecordZoneChangesOperation/recordZoneFetchResultBlock“ handler.
 //
-// WithResultsLimit sets the resultsLimit property and returns the receiver for chaining.
-func (x *FetchRecordZoneChangesConfiguration) WithResultsLimit(resultsLimit uint) *FetchRecordZoneChangesConfiguration {
-	x.inner.SetResultsLimit(resultsLimit)
+// WithResultsLimit sets resultsLimit and returns the receiver so calls can be chained.
+func (x *FetchRecordZoneChangesConfiguration) WithResultsLimit(resultsLimit int) *FetchRecordZoneChangesConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultsLimit:"), resultsLimit)
 	return x
 }
 
 // The fields to fetch for the requested records.
 //
-// WithDesiredKeys sets the collection, converting the Go slice to an NSArray.
-func (x *FetchRecordZoneChangesConfiguration) WithDesiredKeys(items ...*foundation.NSString) *FetchRecordZoneChangesConfiguration {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetDesiredKeys(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetDesiredKeys(_arr)
+// WithDesiredKeys sets the collection and returns the receiver so calls can be chained.
+func (x *FetchRecordZoneChangesConfiguration) WithDesiredKeys(items ...obj.Object) *FetchRecordZoneChangesConfiguration {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredKeys:"), _arr)
 	return x
 }
 
 // The token that identifies the starting point for retrieving changes. Each fetch request returns a unique token in addition to any changes. CloudKit passes the token to your “CKFetchRecordZoneChangesOperation/recordZoneFetchResultBlock“ handler. During a subsequent fetch request, providing the previous token causes the server to return only the changes since the previous fetch request. Tokens are opaque values that you can write to disk safely and reuse later.
-//
-// PreviousServerChangeToken calls the underlying PreviousServerChangeToken.
 func (x *FetchRecordZoneChangesConfiguration) PreviousServerChangeToken() *ServerChangeToken {
-	_r := x.inner.PreviousServerChangeToken()
-	if _r == nil {
-		return nil
-	}
-	return &ServerChangeToken{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousServerChangeToken"))
+	return ServerChangeTokenFromID(_r)
 }
 
-// SetPreviousServerChangeToken calls the underlying SetPreviousServerChangeToken.
-func (x *FetchRecordZoneChangesConfiguration) SetPreviousServerChangeToken(previousServerChangeToken *raw.CKServerChangeToken) {
-	x.inner.SetPreviousServerChangeToken(previousServerChangeToken)
+func (x *FetchRecordZoneChangesConfiguration) SetPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousServerChangeToken:"), objref.IDOf(previousServerChangeToken))
 }
 
 // The maximum number of records to fetch from the record zone. Use this property to limit the number of results in situations where you expect a large number of records. The default value is 0, which causes the server to return an appropriate number of records using dynamic conditions. When the number of records that CloudKit returns exceeds this limit, the operation sets the `moreComing` property to <doc://com.apple.documentation/documentation/swift/true> when executing the “CKFetchRecordZoneChangesOperation/recordZoneFetchResultBlock“ handler.
-//
-// ResultsLimit calls the underlying ResultsLimit.
-func (x *FetchRecordZoneChangesConfiguration) ResultsLimit() uint {
-	return x.inner.ResultsLimit()
+func (x *FetchRecordZoneChangesConfiguration) ResultsLimit() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resultsLimit"))
+	return _r
 }
 
-// SetResultsLimit calls the underlying SetResultsLimit.
-func (x *FetchRecordZoneChangesConfiguration) SetResultsLimit(resultsLimit uint) {
-	x.inner.SetResultsLimit(resultsLimit)
+func (x *FetchRecordZoneChangesConfiguration) SetResultsLimit(resultsLimit int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultsLimit:"), resultsLimit)
 }
 
 // The fields to fetch for the requested records. Use this property to limit the amount of data that CloudKit retrieves for each record during the fetch operation. This property contains an array of strings, each of which is the name of a field from the target records. When you retrieve a record, CloudKit only includes fields with names that match one of the keys in this property. The default value is `nil`, which causes CloudKit to fetch all of the record's keys. Because you can fetch records of different types, configure the array to include the merged set of all field names for the requested records and at least one field name from each record type. If you intend to specify the desired set of keys, set the value of this property before executing the operation or submitting it to a queue.
 //
 // DesiredKeys returns the collection as a Go slice.
-func (x *FetchRecordZoneChangesConfiguration) DesiredKeys() []*foundation.NSString {
-	arr := x.inner.DesiredKeys()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *FetchRecordZoneChangesConfiguration) DesiredKeys() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("desiredKeys"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetDesiredKeys calls the underlying SetDesiredKeys.
-func (x *FetchRecordZoneChangesConfiguration) SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetDesiredKeys(desiredKeys)
+func (x *FetchRecordZoneChangesConfiguration) SetDesiredKeys(desiredKeys []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredKeys:"), purego.SliceToNSArray(desiredKeys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // FetchRecordZoneChangesConfigurationable is the interface implemented by [FetchRecordZoneChangesConfiguration], for mocking and DI.
 type FetchRecordZoneChangesConfigurationable interface {
-	Unwrap() *raw.CKFetchRecordZoneChangesConfiguration
+	obj.Object
 	WithPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken) *FetchRecordZoneChangesConfiguration
-	WithResultsLimit(resultsLimit uint) *FetchRecordZoneChangesConfiguration
-	WithDesiredKeys(items ...*foundation.NSString) *FetchRecordZoneChangesConfiguration
+	WithResultsLimit(resultsLimit int) *FetchRecordZoneChangesConfiguration
+	WithDesiredKeys(items ...obj.Object) *FetchRecordZoneChangesConfiguration
 	PreviousServerChangeToken() *ServerChangeToken
-	SetPreviousServerChangeToken(previousServerChangeToken *raw.CKServerChangeToken)
-	ResultsLimit() uint
-	SetResultsLimit(resultsLimit uint)
-	DesiredKeys() []*foundation.NSString
-	SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString])
+	SetPreviousServerChangeToken(previousServerChangeToken *ServerChangeToken)
+	ResultsLimit() int
+	SetResultsLimit(resultsLimit int)
+	DesiredKeys() []obj.Object
+	SetDesiredKeys(desiredKeys []obj.Object)
 }
 
 var _ FetchRecordZoneChangesConfigurationable = (*FetchRecordZoneChangesConfiguration)(nil)

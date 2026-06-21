@@ -6,59 +6,81 @@ package matter
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterOperationalState wraps [raw.MTRClusterOperationalState] with a fluent Go API.
+// MTRClusterOperationalState is an idiomatic wrapper over the Objective-C class MTRClusterOperationalState.
 type MTRClusterOperationalState struct {
-	inner *raw.MTRClusterOperationalState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterOperationalState].
-func (x *MTRClusterOperationalState) Unwrap() *raw.MTRClusterOperationalState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterOperationalState) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterOperationalStateFromID adopts an existing object pointer as a MTRClusterOperationalState (nil for 0).
+// MTRClusterOperationalStateFromID adopts an existing Objective-C object as a MTRClusterOperationalState
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterOperationalStateFromID(id objc.ID) *MTRClusterOperationalState {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterOperationalState{inner: raw.MTRClusterOperationalStateFromID(id)}
+	x := &MTRClusterOperationalState{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterOperationalStateAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterOperationalState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterOperationalStateAdopt(id objc.ID) *MTRClusterOperationalState {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterOperationalState{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterOperationalState) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterOperationalState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterOperationalState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterOperationalStateWithDeviceEndpointIDQueue creates a new [MTRClusterOperationalState].
-func NewMTRClusterOperationalStateWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterOperationalState {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterOperationalState")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterOperationalState{inner: raw.MTRClusterOperationalStateFromID(_id)}
+// NewMTRClusterOperationalStateWithDeviceEndpointIDQueue creates a new MTRClusterOperationalState.
+func NewMTRClusterOperationalStateWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterOperationalState {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterOperationalState")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterOperationalStateAdopt(_id)
 }
 
 // PauseWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalState) PauseWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalStateClusterPauseParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
+func (x *MTRClusterOperationalState) PauseWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalStateClusterPauseParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.PauseWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROperationalStateClusterOperationalCommandResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTROperationalStateClusterOperationalCommandResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTROperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -69,22 +91,19 @@ func (x *MTRClusterOperationalState) PauseWithParamsExpectedValuesExpectedValueI
 }
 
 // PauseWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalState) PauseWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
+func (x *MTRClusterOperationalState) PauseWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.PauseWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTROperationalStateClusterOperationalCommandResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTROperationalStateClusterOperationalCommandResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTROperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -95,22 +114,19 @@ func (x *MTRClusterOperationalState) PauseWithExpectedValuesExpectedValueInterva
 }
 
 // StopWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalState) StopWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalStateClusterStopParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
+func (x *MTRClusterOperationalState) StopWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalStateClusterStopParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.StopWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROperationalStateClusterOperationalCommandResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTROperationalStateClusterOperationalCommandResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTROperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -121,22 +137,19 @@ func (x *MTRClusterOperationalState) StopWithParamsExpectedValuesExpectedValueIn
 }
 
 // StopWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalState) StopWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
+func (x *MTRClusterOperationalState) StopWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.StopWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTROperationalStateClusterOperationalCommandResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTROperationalStateClusterOperationalCommandResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTROperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -147,22 +160,19 @@ func (x *MTRClusterOperationalState) StopWithExpectedValuesExpectedValueInterval
 }
 
 // StartWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalState) StartWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalStateClusterStartParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
+func (x *MTRClusterOperationalState) StartWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalStateClusterStartParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.StartWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROperationalStateClusterOperationalCommandResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTROperationalStateClusterOperationalCommandResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTROperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -173,22 +183,19 @@ func (x *MTRClusterOperationalState) StartWithParamsExpectedValuesExpectedValueI
 }
 
 // StartWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalState) StartWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
+func (x *MTRClusterOperationalState) StartWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.StartWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTROperationalStateClusterOperationalCommandResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTROperationalStateClusterOperationalCommandResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTROperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -199,22 +206,19 @@ func (x *MTRClusterOperationalState) StartWithExpectedValuesExpectedValueInterva
 }
 
 // ResumeWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalState) ResumeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalStateClusterResumeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
+func (x *MTRClusterOperationalState) ResumeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalStateClusterResumeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ResumeWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTROperationalStateClusterOperationalCommandResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTROperationalStateClusterOperationalCommandResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTROperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -225,22 +229,19 @@ func (x *MTRClusterOperationalState) ResumeWithParamsExpectedValuesExpectedValue
 }
 
 // ResumeWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOperationalState) ResumeWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
+func (x *MTRClusterOperationalState) ResumeWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalStateClusterOperationalCommandResponseParams, error) {
 	type _result struct {
 		val *MTROperationalStateClusterOperationalCommandResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ResumeWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, func(_p0 *raw.MTROperationalStateClusterOperationalCommandResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTROperationalStateClusterOperationalCommandResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTROperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -250,91 +251,83 @@ func (x *MTRClusterOperationalState) ResumeWithExpectedValuesExpectedValueInterv
 	}
 }
 
-// ReadAttributePhaseListWithParams calls the underlying ReadAttributePhaseListWithParams.
-func (x *MTRClusterOperationalState) ReadAttributePhaseListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePhaseListWithParams(params)
+func (x *MTRClusterOperationalState) ReadAttributePhaseListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePhaseListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentPhaseWithParams calls the underlying ReadAttributeCurrentPhaseWithParams.
-func (x *MTRClusterOperationalState) ReadAttributeCurrentPhaseWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentPhaseWithParams(params)
+func (x *MTRClusterOperationalState) ReadAttributeCurrentPhaseWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPhaseWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCountdownTimeWithParams calls the underlying ReadAttributeCountdownTimeWithParams.
-func (x *MTRClusterOperationalState) ReadAttributeCountdownTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCountdownTimeWithParams(params)
+func (x *MTRClusterOperationalState) ReadAttributeCountdownTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCountdownTimeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeOperationalStateListWithParams calls the underlying ReadAttributeOperationalStateListWithParams.
-func (x *MTRClusterOperationalState) ReadAttributeOperationalStateListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOperationalStateListWithParams(params)
+func (x *MTRClusterOperationalState) ReadAttributeOperationalStateListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationalStateListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeOperationalStateWithParams calls the underlying ReadAttributeOperationalStateWithParams.
-func (x *MTRClusterOperationalState) ReadAttributeOperationalStateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOperationalStateWithParams(params)
+func (x *MTRClusterOperationalState) ReadAttributeOperationalStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationalStateWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeOperationalErrorWithParams calls the underlying ReadAttributeOperationalErrorWithParams.
-func (x *MTRClusterOperationalState) ReadAttributeOperationalErrorWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOperationalErrorWithParams(params)
+func (x *MTRClusterOperationalState) ReadAttributeOperationalErrorWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationalErrorWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterOperationalState) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterOperationalState) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterOperationalState) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterOperationalState) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterOperationalState) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterOperationalState) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterOperationalState) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+func (x *MTRClusterOperationalState) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterOperationalState) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterOperationalState) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterOperationalState) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterOperationalState) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterOperationalStateable is the interface implemented by [MTRClusterOperationalState], for mocking and DI.
 type MTRClusterOperationalStateable interface {
-	Unwrap() *raw.MTRClusterOperationalState
-	PauseWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalStateClusterPauseParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
-	PauseWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
-	StopWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalStateClusterStopParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
-	StopWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
-	StartWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalStateClusterStartParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
-	StartWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
-	ResumeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTROperationalStateClusterResumeParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
-	ResumeWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
-	ReadAttributePhaseListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentPhaseWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCountdownTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeOperationalStateListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeOperationalStateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeOperationalErrorWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	PauseWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalStateClusterPauseParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
+	PauseWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
+	StopWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalStateClusterStopParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
+	StopWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
+	StartWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalStateClusterStartParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
+	StartWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
+	ResumeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROperationalStateClusterResumeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
+	ResumeWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTROperationalStateClusterOperationalCommandResponseParams, error)
+	ReadAttributePhaseListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentPhaseWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCountdownTimeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeOperationalStateListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeOperationalStateWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeOperationalErrorWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterOperationalStateable = (*MTRClusterOperationalState)(nil)

@@ -5,67 +5,88 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An abstract base class for describing an individual stage of a migration.
 //
-// MigrationStage wraps [raw.NSMigrationStage] with a fluent Go API.
+// MigrationStage is an idiomatic wrapper over the Objective-C class NSMigrationStage.
 type MigrationStage struct {
-	inner *raw.NSMigrationStage
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSMigrationStage].
-func (x *MigrationStage) Unwrap() *raw.NSMigrationStage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MigrationStage) ID() objc.ID { return x.inner.Ptr() }
-
-// MigrationStageFromID adopts an existing object pointer as a MigrationStage (nil for 0).
+// MigrationStageFromID adopts an existing Objective-C object as a MigrationStage
+// (nil for 0), retaining it and registering a release finalizer.
 func MigrationStageFromID(id objc.ID) *MigrationStage {
 	if id == 0 {
 		return nil
 	}
-	return &MigrationStage{inner: raw.NSMigrationStageFromID(id)}
+	x := &MigrationStage{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMigrationStage creates a new [MigrationStage].
+// migrationStageAdopt wraps an Objective-C object that this code just created as a
+// MigrationStage (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func migrationStageAdopt(id objc.ID) *MigrationStage {
+	if id == 0 {
+		return nil
+	}
+	x := &MigrationStage{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MigrationStage) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MigrationStage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MigrationStage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMigrationStage creates a new MigrationStage.
 func NewMigrationStage() *MigrationStage {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMigrationStage")), objc.RegisterName("new"))
-	return &MigrationStage{inner: raw.NSMigrationStageFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSMigrationStage")), objc.RegisterName("new"))
+	return migrationStageAdopt(_id)
 }
 
 // The textual description of the migration stage’s purpose.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *MigrationStage) WithLabel(label string) *MigrationStage {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// Label calls the underlying Label.
 func (x *MigrationStage) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
 func (x *MigrationStage) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
-
-func (x *MigrationStage) asMigrationStage() *raw.NSMigrationStage { return x.inner }
 
 // MigrationStageable is the interface implemented by [MigrationStage], for mocking and DI.
 type MigrationStageable interface {
-	Unwrap() *raw.NSMigrationStage
+	obj.Object
 	WithLabel(label string) *MigrationStage
 	Label() string
 	SetLabel(label string)

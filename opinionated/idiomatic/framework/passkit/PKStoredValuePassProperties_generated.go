@@ -5,76 +5,92 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents the properties of a pass that contains a balance used for specific transactions, such as a transit pass or loyalty card.
 //
-// StoredValuePassProperties wraps [raw.PKStoredValuePassProperties] with a fluent Go API.
+// StoredValuePassProperties is an idiomatic wrapper over the Objective-C class PKStoredValuePassProperties.
 type StoredValuePassProperties struct {
-	inner *raw.PKStoredValuePassProperties
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKStoredValuePassProperties].
-func (x *StoredValuePassProperties) Unwrap() *raw.PKStoredValuePassProperties { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StoredValuePassProperties) ID() objc.ID { return x.inner.Ptr() }
-
-// StoredValuePassPropertiesFromID adopts an existing object pointer as a StoredValuePassProperties (nil for 0).
+// StoredValuePassPropertiesFromID adopts an existing Objective-C object as a StoredValuePassProperties
+// (nil for 0), retaining it and registering a release finalizer.
 func StoredValuePassPropertiesFromID(id objc.ID) *StoredValuePassProperties {
 	if id == 0 {
 		return nil
 	}
-	return &StoredValuePassProperties{inner: raw.PKStoredValuePassPropertiesFromID(id)}
+	x := &StoredValuePassProperties{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewStoredValuePassProperties creates a new [StoredValuePassProperties].
+// storedValuePassPropertiesAdopt wraps an Objective-C object that this code just created as a
+// StoredValuePassProperties (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func storedValuePassPropertiesAdopt(id objc.ID) *StoredValuePassProperties {
+	if id == 0 {
+		return nil
+	}
+	x := &StoredValuePassProperties{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *StoredValuePassProperties) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StoredValuePassProperties) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StoredValuePassProperties) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewStoredValuePassProperties creates a new StoredValuePassProperties.
 func NewStoredValuePassProperties() *StoredValuePassProperties {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKStoredValuePassProperties")), objc.RegisterName("new"))
-	return &StoredValuePassProperties{inner: raw.PKStoredValuePassPropertiesFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKStoredValuePassProperties")), objc.RegisterName("new"))
+	return storedValuePassPropertiesAdopt(_id)
 }
 
-// IsBlacklisted calls the underlying IsBlacklisted.
 func (x *StoredValuePassProperties) IsBlacklisted() bool {
-	return x.inner.IsBlacklisted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBlacklisted"))
+	return _r
 }
 
-// IsBlocked calls the underlying IsBlocked.
 func (x *StoredValuePassProperties) IsBlocked() bool {
-	return x.inner.IsBlocked()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBlocked"))
+	return _r
 }
 
-// ExpirationDate calls the underlying ExpirationDate.
-func (x *StoredValuePassProperties) ExpirationDate() *foundation.NSDate {
-	return x.inner.ExpirationDate()
+func (x *StoredValuePassProperties) ExpirationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expirationDate"))
+	return obj.Wrap(_r)
 }
 
 // Balances returns the collection as a Go slice.
 func (x *StoredValuePassProperties) Balances() []*StoredValuePassBalance {
-	arr := x.inner.Balances()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *StoredValuePassBalance {
-		return &StoredValuePassBalance{inner: raw.PKStoredValuePassBalanceFromID(purego.Retain(_id))}
-	})
-}
-
-func (x *StoredValuePassProperties) asStoredValuePassProperties() *raw.PKStoredValuePassProperties {
-	return x.inner
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("balances"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *StoredValuePassBalance { return StoredValuePassBalanceFromID(_id) })
 }
 
 // StoredValuePassPropertiesable is the interface implemented by [StoredValuePassProperties], for mocking and DI.
 type StoredValuePassPropertiesable interface {
-	Unwrap() *raw.PKStoredValuePassProperties
+	obj.Object
 	IsBlacklisted() bool
 	IsBlocked() bool
-	ExpirationDate() *foundation.NSDate
+	ExpirationDate() obj.Object
 	Balances() []*StoredValuePassBalance
 }
 

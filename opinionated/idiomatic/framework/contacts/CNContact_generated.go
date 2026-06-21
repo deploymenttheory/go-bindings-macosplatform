@@ -5,305 +5,302 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An immutable object that stores information about a single contact, such as the contact’s first name, phone numbers, and addresses.
 //
-// Contact wraps [raw.CNContact] with a fluent Go API.
+// Contact is an idiomatic wrapper over the Objective-C class CNContact.
 type Contact struct {
-	inner *raw.CNContact
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNContact].
-func (x *Contact) Unwrap() *raw.CNContact { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Contact) ID() objc.ID { return x.inner.Ptr() }
-
-// ContactFromID adopts an existing object pointer as a Contact (nil for 0).
+// ContactFromID adopts an existing Objective-C object as a Contact
+// (nil for 0), retaining it and registering a release finalizer.
 func ContactFromID(id objc.ID) *Contact {
 	if id == 0 {
 		return nil
 	}
-	return &Contact{inner: raw.CNContactFromID(id)}
+	x := &Contact{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewContact creates a new [Contact].
+// contactAdopt wraps an Objective-C object that this code just created as a
+// Contact (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contactAdopt(id objc.ID) *Contact {
+	if id == 0 {
+		return nil
+	}
+	x := &Contact{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Contact) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Contact) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Contact) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewContact creates a new Contact.
 func NewContact() *Contact {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNContact")), objc.RegisterName("new"))
-	return &Contact{inner: raw.CNContactFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNContact")), objc.RegisterName("new"))
+	return contactAdopt(_id)
 }
 
 // Determines whether the contact property value for the specified key is fetched.
-//
-// IsKeyAvailable calls the underlying IsKeyAvailable.
 func (x *Contact) IsKeyAvailable(key string) bool {
-	return x.inner.IsKeyAvailable(foundation.NSStringStringWithUTF8String(key))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isKeyAvailable:"), purego.NSString(key))
+	return _r
 }
 
 // Determines whether all contact property values for the specified keys are fetched.
-//
-// AreKeysAvailable calls the underlying AreKeysAvailable.
-func (x *Contact) AreKeysAvailable(keyDescriptors ...purego.IDer) bool {
-	_ptrs := make([]objc.ID, len(keyDescriptors))
-	for _i, _v := range keyDescriptors {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *foundation.NSArray[raw.CNKeyDescriptor]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return x.inner.AreKeysAvailable(_arg0)
+func (x *Contact) AreKeysAvailable(keyDescriptors []obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("areKeysAvailable:"), purego.SliceToNSArray(keyDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return _r
 }
 
 // Returns a Boolean indicating whether the current contact is a unified contact and includes a contact with the specified identifier.
-//
-// IsUnifiedWithContactWithIdentifier calls the underlying IsUnifiedWithContactWithIdentifier.
 func (x *Contact) IsUnifiedWithContactWithIdentifier(contactIdentifier string) bool {
-	return x.inner.IsUnifiedWithContactWithIdentifier(foundation.NSStringStringWithUTF8String(contactIdentifier))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUnifiedWithContactWithIdentifier:"), purego.NSString(contactIdentifier))
+	return _r
 }
 
 // The identifier is unique among contacts on the device. It can be saved and used for fetching contacts next application launch.
-//
-// Identifier calls the underlying Identifier.
 func (x *Contact) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ContactType calls the underlying ContactType.
-func (x *Contact) ContactType() CNContactType {
-	return CNContactType(x.inner.ContactType())
+func (x *Contact) ContactType() ContactType {
+	_r := objc.Send[ContactType](objref.IDOf(x), objc.RegisterName("contactType"))
+	return _r
 }
 
-// NamePrefix calls the underlying NamePrefix.
 func (x *Contact) NamePrefix() string {
-	_r := x.inner.NamePrefix()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("namePrefix"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// GivenName calls the underlying GivenName.
 func (x *Contact) GivenName() string {
-	_r := x.inner.GivenName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("givenName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// MiddleName calls the underlying MiddleName.
 func (x *Contact) MiddleName() string {
-	_r := x.inner.MiddleName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("middleName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// FamilyName calls the underlying FamilyName.
 func (x *Contact) FamilyName() string {
-	_r := x.inner.FamilyName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("familyName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PreviousFamilyName calls the underlying PreviousFamilyName.
 func (x *Contact) PreviousFamilyName() string {
-	_r := x.inner.PreviousFamilyName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousFamilyName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// NameSuffix calls the underlying NameSuffix.
 func (x *Contact) NameSuffix() string {
-	_r := x.inner.NameSuffix()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nameSuffix"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Nickname calls the underlying Nickname.
 func (x *Contact) Nickname() string {
-	_r := x.inner.Nickname()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nickname"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// OrganizationName calls the underlying OrganizationName.
 func (x *Contact) OrganizationName() string {
-	_r := x.inner.OrganizationName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("organizationName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// DepartmentName calls the underlying DepartmentName.
 func (x *Contact) DepartmentName() string {
-	_r := x.inner.DepartmentName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departmentName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// JobTitle calls the underlying JobTitle.
 func (x *Contact) JobTitle() string {
-	_r := x.inner.JobTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jobTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PhoneticGivenName calls the underlying PhoneticGivenName.
 func (x *Contact) PhoneticGivenName() string {
-	_r := x.inner.PhoneticGivenName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneticGivenName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PhoneticMiddleName calls the underlying PhoneticMiddleName.
 func (x *Contact) PhoneticMiddleName() string {
-	_r := x.inner.PhoneticMiddleName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneticMiddleName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PhoneticFamilyName calls the underlying PhoneticFamilyName.
 func (x *Contact) PhoneticFamilyName() string {
-	_r := x.inner.PhoneticFamilyName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneticFamilyName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PhoneticOrganizationName calls the underlying PhoneticOrganizationName.
 func (x *Contact) PhoneticOrganizationName() string {
-	_r := x.inner.PhoneticOrganizationName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneticOrganizationName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Note calls the underlying Note.
 func (x *Contact) Note() string {
-	_r := x.inner.Note()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("note"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ImageData calls the underlying ImageData.
-func (x *Contact) ImageData() *foundation.NSData {
-	return x.inner.ImageData()
+func (x *Contact) ImageData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageData"))
+	return obj.Wrap(_r)
 }
 
-// ThumbnailImageData calls the underlying ThumbnailImageData.
-func (x *Contact) ThumbnailImageData() *foundation.NSData {
-	return x.inner.ThumbnailImageData()
+func (x *Contact) ThumbnailImageData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("thumbnailImageData"))
+	return obj.Wrap(_r)
 }
 
-// ImageDataAvailable calls the underlying ImageDataAvailable.
 func (x *Contact) ImageDataAvailable() bool {
-	return x.inner.ImageDataAvailable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("imageDataAvailable"))
+	return _r
 }
 
-// PhoneNumbers calls the underlying PhoneNumbers.
-func (x *Contact) PhoneNumbers() *foundation.NSArray[objc.ID] {
-	return x.inner.PhoneNumbers()
+// PhoneNumbers returns the collection as a Go slice.
+func (x *Contact) PhoneNumbers() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneNumbers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// EmailAddresses calls the underlying EmailAddresses.
-func (x *Contact) EmailAddresses() *foundation.NSArray[objc.ID] {
-	return x.inner.EmailAddresses()
+// EmailAddresses returns the collection as a Go slice.
+func (x *Contact) EmailAddresses() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emailAddresses"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// PostalAddresses calls the underlying PostalAddresses.
-func (x *Contact) PostalAddresses() *foundation.NSArray[objc.ID] {
-	return x.inner.PostalAddresses()
+// PostalAddresses returns the collection as a Go slice.
+func (x *Contact) PostalAddresses() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postalAddresses"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// UrlAddresses calls the underlying UrlAddresses.
-func (x *Contact) UrlAddresses() *foundation.NSArray[objc.ID] {
-	return x.inner.UrlAddresses()
+// UrlAddresses returns the collection as a Go slice.
+func (x *Contact) UrlAddresses() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("urlAddresses"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// ContactRelations calls the underlying ContactRelations.
-func (x *Contact) ContactRelations() *foundation.NSArray[objc.ID] {
-	return x.inner.ContactRelations()
+// ContactRelations returns the collection as a Go slice.
+func (x *Contact) ContactRelations() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contactRelations"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SocialProfiles calls the underlying SocialProfiles.
-func (x *Contact) SocialProfiles() *foundation.NSArray[objc.ID] {
-	return x.inner.SocialProfiles()
+// SocialProfiles returns the collection as a Go slice.
+func (x *Contact) SocialProfiles() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("socialProfiles"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// InstantMessageAddresses calls the underlying InstantMessageAddresses.
-func (x *Contact) InstantMessageAddresses() *foundation.NSArray[objc.ID] {
-	return x.inner.InstantMessageAddresses()
+// InstantMessageAddresses returns the collection as a Go slice.
+func (x *Contact) InstantMessageAddresses() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instantMessageAddresses"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // The Gregorian birthday.
-//
-// Birthday calls the underlying Birthday.
-func (x *Contact) Birthday() *foundation.NSDateComponents {
-	return x.inner.Birthday()
+func (x *Contact) Birthday() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("birthday"))
+	return obj.Wrap(_r)
 }
 
 // The alternate birthday (Lunisolar).
-//
-// NonGregorianBirthday calls the underlying NonGregorianBirthday.
-func (x *Contact) NonGregorianBirthday() *foundation.NSDateComponents {
-	return x.inner.NonGregorianBirthday()
+func (x *Contact) NonGregorianBirthday() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nonGregorianBirthday"))
+	return obj.Wrap(_r)
 }
 
 // Other Gregorian dates (anniversaries, etc).
 //
-// Dates calls the underlying Dates.
-func (x *Contact) Dates() *foundation.NSArray[objc.ID] {
-	return x.inner.Dates()
+// Dates returns the collection as a Go slice.
+func (x *Contact) Dates() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dates"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-func (x *Contact) asContact() *raw.CNContact { return x.inner }
 
 // Contactable is the interface implemented by [Contact], for mocking and DI.
 type Contactable interface {
-	Unwrap() *raw.CNContact
+	obj.Object
 	IsKeyAvailable(key string) bool
-	AreKeysAvailable(keyDescriptors ...purego.IDer) bool
+	AreKeysAvailable(keyDescriptors []obj.Object) bool
 	IsUnifiedWithContactWithIdentifier(contactIdentifier string) bool
 	Identifier() string
-	ContactType() CNContactType
+	ContactType() ContactType
 	NamePrefix() string
 	GivenName() string
 	MiddleName() string
@@ -319,19 +316,19 @@ type Contactable interface {
 	PhoneticFamilyName() string
 	PhoneticOrganizationName() string
 	Note() string
-	ImageData() *foundation.NSData
-	ThumbnailImageData() *foundation.NSData
+	ImageData() obj.Object
+	ThumbnailImageData() obj.Object
 	ImageDataAvailable() bool
-	PhoneNumbers() *foundation.NSArray[objc.ID]
-	EmailAddresses() *foundation.NSArray[objc.ID]
-	PostalAddresses() *foundation.NSArray[objc.ID]
-	UrlAddresses() *foundation.NSArray[objc.ID]
-	ContactRelations() *foundation.NSArray[objc.ID]
-	SocialProfiles() *foundation.NSArray[objc.ID]
-	InstantMessageAddresses() *foundation.NSArray[objc.ID]
-	Birthday() *foundation.NSDateComponents
-	NonGregorianBirthday() *foundation.NSDateComponents
-	Dates() *foundation.NSArray[objc.ID]
+	PhoneNumbers() []obj.Object
+	EmailAddresses() []obj.Object
+	PostalAddresses() []obj.Object
+	UrlAddresses() []obj.Object
+	ContactRelations() []obj.Object
+	SocialProfiles() []obj.Object
+	InstantMessageAddresses() []obj.Object
+	Birthday() obj.Object
+	NonGregorianBirthday() obj.Object
+	Dates() []obj.Object
 }
 
 var _ Contactable = (*Contact)(nil)

@@ -5,233 +5,124 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A mutable caption subclass that you use to create new captions.
 //
-// MutableCaption wraps [raw.AVMutableCaption] with a fluent Go API.
+// MutableCaption is an idiomatic wrapper over the Objective-C class AVMutableCaption.
 type MutableCaption struct {
-	inner *raw.AVMutableCaption
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMutableCaption].
-func (x *MutableCaption) Unwrap() *raw.AVMutableCaption { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableCaption) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableCaptionFromID adopts an existing object pointer as a MutableCaption (nil for 0).
+// MutableCaptionFromID adopts an existing Objective-C object as a MutableCaption
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableCaptionFromID(id objc.ID) *MutableCaption {
 	if id == 0 {
 		return nil
 	}
-	return &MutableCaption{inner: raw.AVMutableCaptionFromID(id)}
+	x := &MutableCaption{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMutableCaption creates a new [MutableCaption].
+// mutableCaptionAdopt wraps an Objective-C object that this code just created as a
+// MutableCaption (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableCaptionAdopt(id objc.ID) *MutableCaption {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableCaption{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MutableCaption) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MutableCaption) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MutableCaption) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMutableCaption creates a new MutableCaption.
 func NewMutableCaption() *MutableCaption {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableCaption")), objc.RegisterName("new"))
-	return &MutableCaption{inner: raw.AVMutableCaptionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMutableCaption")), objc.RegisterName("new"))
+	return mutableCaptionAdopt(_id)
 }
 
 // The caption text.
 //
-// WithText sets the text property and returns the receiver for chaining.
+// WithText sets text and returns the receiver so calls can be chained.
 func (x *MutableCaption) WithText(text string) *MutableCaption {
-	x.inner.SetText(foundation.NSStringStringWithUTF8String(text))
-	return x
-}
-
-// The time range over which the system presents the caption.
-//
-// WithTimeRange sets the timeRange property and returns the receiver for chaining.
-func (x *MutableCaption) WithTimeRange(timeRange coremedia.CMTimeRange) *MutableCaption {
-	x.inner.SetTimeRange(timeRange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setText:"), purego.NSString(text))
 	return x
 }
 
 // The region in which the caption exists.
 //
-// WithRegion sets the region property and returns the receiver for chaining.
+// WithRegion sets region and returns the receiver so calls can be chained.
 func (x *MutableCaption) WithRegion(region CaptionRegionProvider) *MutableCaption {
-	x.inner.SetRegion(region.asCaptionRegion())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegion:"), objref.IDOf(region))
 	return x
 }
 
 // The alignment of the caption text.
 //
-// WithTextAlignment sets the textAlignment property and returns the receiver for chaining.
-func (x *MutableCaption) WithTextAlignment(textAlignment AVCaptionTextAlignment) *MutableCaption {
-	x.inner.SetTextAlignment(raw.AVCaptionTextAlignment(textAlignment))
+// WithTextAlignment sets textAlignment and returns the receiver so calls can be chained.
+func (x *MutableCaption) WithTextAlignment(textAlignment CaptionTextAlignment) *MutableCaption {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAlignment:"), textAlignment)
 	return x
 }
 
 // Animations to apply to the caption text.
 //
-// WithAnimation sets the animation property and returns the receiver for chaining.
-func (x *MutableCaption) WithAnimation(animation AVCaptionAnimation) *MutableCaption {
-	x.inner.SetAnimation(raw.AVCaptionAnimation(animation))
+// WithAnimation sets animation and returns the receiver so calls can be chained.
+func (x *MutableCaption) WithAnimation(animation CaptionAnimation) *MutableCaption {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimation:"), animation)
 	return x
 }
 
-// SetText calls the underlying SetText.
 func (x *MutableCaption) SetText(text string) {
-	x.inner.SetText(foundation.NSStringStringWithUTF8String(text))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setText:"), purego.NSString(text))
 }
 
-// SetTimeRange calls the underlying SetTimeRange.
-func (x *MutableCaption) SetTimeRange(timeRange coremedia.CMTimeRange) {
-	x.inner.SetTimeRange(timeRange)
+func (x *MutableCaption) SetRegion(region *CaptionRegion) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegion:"), objref.IDOf(region))
 }
 
-// Sets the text color for a range of text.
-//
-// SetTextColorInRange calls the underlying SetTextColorInRange.
-func (x *MutableCaption) SetTextColorInRange(color unsafe.Pointer, range_ foundation.NSRange) {
-	x.inner.SetTextColorInRange(color, range_)
+func (x *MutableCaption) SetTextAlignment(textAlignment CaptionTextAlignment) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextAlignment:"), textAlignment)
 }
 
-// Sets the background color for a range of text.
-//
-// SetBackgroundColorInRange calls the underlying SetBackgroundColorInRange.
-func (x *MutableCaption) SetBackgroundColorInRange(color unsafe.Pointer, range_ foundation.NSRange) {
-	x.inner.SetBackgroundColorInRange(color, range_)
+func (x *MutableCaption) SetAnimation(animation CaptionAnimation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimation:"), animation)
 }
-
-// Sets the font weight for a range of text.
-//
-// SetFontWeightInRange calls the underlying SetFontWeightInRange.
-func (x *MutableCaption) SetFontWeightInRange(fontWeight AVCaptionFontWeight, range_ foundation.NSRange) {
-	x.inner.SetFontWeightInRange(raw.AVCaptionFontWeight(fontWeight), range_)
-}
-
-// Sets the font style for a range of text.
-//
-// SetFontStyleInRange calls the underlying SetFontStyleInRange.
-func (x *MutableCaption) SetFontStyleInRange(fontStyle AVCaptionFontStyle, range_ foundation.NSRange) {
-	x.inner.SetFontStyleInRange(raw.AVCaptionFontStyle(fontStyle), range_)
-}
-
-// Sets a decoration for a range of text.
-//
-// SetDecorationInRange calls the underlying SetDecorationInRange.
-func (x *MutableCaption) SetDecorationInRange(decoration AVCaptionDecoration, range_ foundation.NSRange) {
-	x.inner.SetDecorationInRange(raw.AVCaptionDecoration(decoration), range_)
-}
-
-// Sets text combine for a range.
-//
-// SetTextCombineInRange calls the underlying SetTextCombineInRange.
-func (x *MutableCaption) SetTextCombineInRange(textCombine AVCaptionTextCombine, range_ foundation.NSRange) {
-	x.inner.SetTextCombineInRange(raw.AVCaptionTextCombine(textCombine), range_)
-}
-
-// Sets ruby text for a range.
-//
-// SetRubyInRange calls the underlying SetRubyInRange.
-func (x *MutableCaption) SetRubyInRange(ruby *raw.AVCaptionRuby, range_ foundation.NSRange) {
-	x.inner.SetRubyInRange(ruby, range_)
-}
-
-// Removes the text color for a range of text.
-//
-// RemoveTextColorInRange calls the underlying RemoveTextColorInRange.
-func (x *MutableCaption) RemoveTextColorInRange(range_ foundation.NSRange) {
-	x.inner.RemoveTextColorInRange(range_)
-}
-
-// Removes a background color from a range of text.
-//
-// RemoveBackgroundColorInRange calls the underlying RemoveBackgroundColorInRange.
-func (x *MutableCaption) RemoveBackgroundColorInRange(range_ foundation.NSRange) {
-	x.inner.RemoveBackgroundColorInRange(range_)
-}
-
-// Removes a font weight from a range of text.
-//
-// RemoveFontWeightInRange calls the underlying RemoveFontWeightInRange.
-func (x *MutableCaption) RemoveFontWeightInRange(range_ foundation.NSRange) {
-	x.inner.RemoveFontWeightInRange(range_)
-}
-
-// Removes a font style from a range of text.
-//
-// RemoveFontStyleInRange calls the underlying RemoveFontStyleInRange.
-func (x *MutableCaption) RemoveFontStyleInRange(range_ foundation.NSRange) {
-	x.inner.RemoveFontStyleInRange(range_)
-}
-
-// Removes a decoration from a range of text.
-//
-// RemoveDecorationInRange calls the underlying RemoveDecorationInRange.
-func (x *MutableCaption) RemoveDecorationInRange(range_ foundation.NSRange) {
-	x.inner.RemoveDecorationInRange(range_)
-}
-
-// Removes text combine from a range of text.
-//
-// RemoveTextCombineInRange calls the underlying RemoveTextCombineInRange.
-func (x *MutableCaption) RemoveTextCombineInRange(range_ foundation.NSRange) {
-	x.inner.RemoveTextCombineInRange(range_)
-}
-
-// Removes ruby text from a range.
-//
-// RemoveRubyInRange calls the underlying RemoveRubyInRange.
-func (x *MutableCaption) RemoveRubyInRange(range_ foundation.NSRange) {
-	x.inner.RemoveRubyInRange(range_)
-}
-
-// SetRegion calls the underlying SetRegion.
-func (x *MutableCaption) SetRegion(region *raw.AVCaptionRegion) {
-	x.inner.SetRegion(region)
-}
-
-// SetTextAlignment calls the underlying SetTextAlignment.
-func (x *MutableCaption) SetTextAlignment(textAlignment AVCaptionTextAlignment) {
-	x.inner.SetTextAlignment(raw.AVCaptionTextAlignment(textAlignment))
-}
-
-// SetAnimation calls the underlying SetAnimation.
-func (x *MutableCaption) SetAnimation(animation AVCaptionAnimation) {
-	x.inner.SetAnimation(raw.AVCaptionAnimation(animation))
-}
-
-func (x *MutableCaption) asCaption() *raw.AVCaption { return &x.inner.AVCaption }
 
 // MutableCaptionable is the interface implemented by [MutableCaption], for mocking and DI.
 type MutableCaptionable interface {
-	Unwrap() *raw.AVMutableCaption
+	obj.Object
 	WithText(text string) *MutableCaption
-	WithTimeRange(timeRange coremedia.CMTimeRange) *MutableCaption
 	WithRegion(region CaptionRegionProvider) *MutableCaption
-	WithTextAlignment(textAlignment AVCaptionTextAlignment) *MutableCaption
-	WithAnimation(animation AVCaptionAnimation) *MutableCaption
+	WithTextAlignment(textAlignment CaptionTextAlignment) *MutableCaption
+	WithAnimation(animation CaptionAnimation) *MutableCaption
 	SetText(text string)
-	SetTimeRange(timeRange coremedia.CMTimeRange)
-	SetTextColorInRange(color unsafe.Pointer, range_ foundation.NSRange)
-	SetBackgroundColorInRange(color unsafe.Pointer, range_ foundation.NSRange)
-	SetFontWeightInRange(fontWeight AVCaptionFontWeight, range_ foundation.NSRange)
-	SetFontStyleInRange(fontStyle AVCaptionFontStyle, range_ foundation.NSRange)
-	SetDecorationInRange(decoration AVCaptionDecoration, range_ foundation.NSRange)
-	SetTextCombineInRange(textCombine AVCaptionTextCombine, range_ foundation.NSRange)
-	SetRubyInRange(ruby *raw.AVCaptionRuby, range_ foundation.NSRange)
-	RemoveTextColorInRange(range_ foundation.NSRange)
-	RemoveBackgroundColorInRange(range_ foundation.NSRange)
-	RemoveFontWeightInRange(range_ foundation.NSRange)
-	RemoveFontStyleInRange(range_ foundation.NSRange)
-	RemoveDecorationInRange(range_ foundation.NSRange)
-	RemoveTextCombineInRange(range_ foundation.NSRange)
-	RemoveRubyInRange(range_ foundation.NSRange)
-	SetRegion(region *raw.AVCaptionRegion)
-	SetTextAlignment(textAlignment AVCaptionTextAlignment)
-	SetAnimation(animation AVCaptionAnimation)
+	SetRegion(region *CaptionRegion)
+	SetTextAlignment(textAlignment CaptionTextAlignment)
+	SetAnimation(animation CaptionAnimation)
 }
 
 var _ MutableCaptionable = (*MutableCaption)(nil)

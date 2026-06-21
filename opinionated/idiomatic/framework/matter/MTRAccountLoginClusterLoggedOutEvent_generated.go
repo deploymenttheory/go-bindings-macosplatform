@@ -5,61 +5,84 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRAccountLoginClusterLoggedOutEvent wraps [raw.MTRAccountLoginClusterLoggedOutEvent] with a fluent Go API.
+// MTRAccountLoginClusterLoggedOutEvent is an idiomatic wrapper over the Objective-C class MTRAccountLoginClusterLoggedOutEvent.
 type MTRAccountLoginClusterLoggedOutEvent struct {
-	inner *raw.MTRAccountLoginClusterLoggedOutEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRAccountLoginClusterLoggedOutEvent].
-func (x *MTRAccountLoginClusterLoggedOutEvent) Unwrap() *raw.MTRAccountLoginClusterLoggedOutEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAccountLoginClusterLoggedOutEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRAccountLoginClusterLoggedOutEventFromID adopts an existing object pointer as a MTRAccountLoginClusterLoggedOutEvent (nil for 0).
+// MTRAccountLoginClusterLoggedOutEventFromID adopts an existing Objective-C object as a MTRAccountLoginClusterLoggedOutEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRAccountLoginClusterLoggedOutEventFromID(id objc.ID) *MTRAccountLoginClusterLoggedOutEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRAccountLoginClusterLoggedOutEvent{inner: raw.MTRAccountLoginClusterLoggedOutEventFromID(id)}
-}
-
-// NewMTRAccountLoginClusterLoggedOutEvent creates a new [MTRAccountLoginClusterLoggedOutEvent].
-func NewMTRAccountLoginClusterLoggedOutEvent() *MTRAccountLoginClusterLoggedOutEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAccountLoginClusterLoggedOutEvent")), objc.RegisterName("new"))
-	return &MTRAccountLoginClusterLoggedOutEvent{inner: raw.MTRAccountLoginClusterLoggedOutEventFromID(_id)}
-}
-
-// WithNode sets the node property and returns the receiver for chaining.
-func (x *MTRAccountLoginClusterLoggedOutEvent) WithNode(node *foundation.NSNumber) *MTRAccountLoginClusterLoggedOutEvent {
-	x.inner.SetNode(node)
+	x := &MTRAccountLoginClusterLoggedOutEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Node calls the underlying Node.
-func (x *MTRAccountLoginClusterLoggedOutEvent) Node() *foundation.NSNumber {
-	return x.inner.Node()
+// mTRAccountLoginClusterLoggedOutEventAdopt wraps an Objective-C object that this code just created as a
+// MTRAccountLoginClusterLoggedOutEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRAccountLoginClusterLoggedOutEventAdopt(id objc.ID) *MTRAccountLoginClusterLoggedOutEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRAccountLoginClusterLoggedOutEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetNode calls the underlying SetNode.
-func (x *MTRAccountLoginClusterLoggedOutEvent) SetNode(node *foundation.NSNumber) {
-	x.inner.SetNode(node)
+// Description returns the object's -description text.
+func (x *MTRAccountLoginClusterLoggedOutEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRAccountLoginClusterLoggedOutEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRAccountLoginClusterLoggedOutEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRAccountLoginClusterLoggedOutEvent creates a new MTRAccountLoginClusterLoggedOutEvent.
+func NewMTRAccountLoginClusterLoggedOutEvent() *MTRAccountLoginClusterLoggedOutEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRAccountLoginClusterLoggedOutEvent")), objc.RegisterName("new"))
+	return mTRAccountLoginClusterLoggedOutEventAdopt(_id)
+}
+
+// WithNode sets node and returns the receiver so calls can be chained.
+func (x *MTRAccountLoginClusterLoggedOutEvent) WithNode(node obj.Object) *MTRAccountLoginClusterLoggedOutEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNode:"), objref.IDOf(node))
+	return x
+}
+
+func (x *MTRAccountLoginClusterLoggedOutEvent) Node() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("node"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRAccountLoginClusterLoggedOutEvent) SetNode(node obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNode:"), objref.IDOf(node))
 }
 
 // MTRAccountLoginClusterLoggedOutEventable is the interface implemented by [MTRAccountLoginClusterLoggedOutEvent], for mocking and DI.
 type MTRAccountLoginClusterLoggedOutEventable interface {
-	Unwrap() *raw.MTRAccountLoginClusterLoggedOutEvent
-	WithNode(node *foundation.NSNumber) *MTRAccountLoginClusterLoggedOutEvent
-	Node() *foundation.NSNumber
-	SetNode(node *foundation.NSNumber)
+	obj.Object
+	WithNode(node obj.Object) *MTRAccountLoginClusterLoggedOutEvent
+	Node() obj.Object
+	SetNode(node obj.Object)
 }
 
 var _ MTRAccountLoginClusterLoggedOutEventable = (*MTRAccountLoginClusterLoggedOutEvent)(nil)

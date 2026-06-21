@@ -5,41 +5,68 @@
 package mlcompute
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An encapsulation of the device memory associated with a tensor that an optimizer uses.
 //
-// TensorOptimizerDeviceData wraps [raw.MLCTensorOptimizerDeviceData] with a fluent Go API.
+// TensorOptimizerDeviceData is an idiomatic wrapper over the Objective-C class MLCTensorOptimizerDeviceData.
 type TensorOptimizerDeviceData struct {
-	inner *raw.MLCTensorOptimizerDeviceData
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCTensorOptimizerDeviceData].
-func (x *TensorOptimizerDeviceData) Unwrap() *raw.MLCTensorOptimizerDeviceData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TensorOptimizerDeviceData) ID() objc.ID { return x.inner.Ptr() }
-
-// TensorOptimizerDeviceDataFromID adopts an existing object pointer as a TensorOptimizerDeviceData (nil for 0).
+// TensorOptimizerDeviceDataFromID adopts an existing Objective-C object as a TensorOptimizerDeviceData
+// (nil for 0), retaining it and registering a release finalizer.
 func TensorOptimizerDeviceDataFromID(id objc.ID) *TensorOptimizerDeviceData {
 	if id == 0 {
 		return nil
 	}
-	return &TensorOptimizerDeviceData{inner: raw.MLCTensorOptimizerDeviceDataFromID(id)}
+	x := &TensorOptimizerDeviceData{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTensorOptimizerDeviceData creates a new [TensorOptimizerDeviceData].
+// tensorOptimizerDeviceDataAdopt wraps an Objective-C object that this code just created as a
+// TensorOptimizerDeviceData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tensorOptimizerDeviceDataAdopt(id objc.ID) *TensorOptimizerDeviceData {
+	if id == 0 {
+		return nil
+	}
+	x := &TensorOptimizerDeviceData{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TensorOptimizerDeviceData) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TensorOptimizerDeviceData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TensorOptimizerDeviceData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTensorOptimizerDeviceData creates a new TensorOptimizerDeviceData.
 func NewTensorOptimizerDeviceData() *TensorOptimizerDeviceData {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCTensorOptimizerDeviceData")), objc.RegisterName("new"))
-	return &TensorOptimizerDeviceData{inner: raw.MLCTensorOptimizerDeviceDataFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCTensorOptimizerDeviceData")), objc.RegisterName("new"))
+	return tensorOptimizerDeviceDataAdopt(_id)
 }
 
 // TensorOptimizerDeviceDataable is the interface implemented by [TensorOptimizerDeviceData], for mocking and DI.
 type TensorOptimizerDeviceDataable interface {
-	Unwrap() *raw.MLCTensorOptimizerDeviceData
+	obj.Object
 }
 
 var _ TensorOptimizerDeviceDataable = (*TensorOptimizerDeviceData)(nil)

@@ -5,144 +5,154 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterThermostatUserInterfaceConfiguration wraps [raw.MTRClusterThermostatUserInterfaceConfiguration] with a fluent Go API.
+// MTRClusterThermostatUserInterfaceConfiguration is an idiomatic wrapper over the Objective-C class MTRClusterThermostatUserInterfaceConfiguration.
 type MTRClusterThermostatUserInterfaceConfiguration struct {
-	inner *raw.MTRClusterThermostatUserInterfaceConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterThermostatUserInterfaceConfiguration].
-func (x *MTRClusterThermostatUserInterfaceConfiguration) Unwrap() *raw.MTRClusterThermostatUserInterfaceConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterThermostatUserInterfaceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterThermostatUserInterfaceConfigurationFromID adopts an existing object pointer as a MTRClusterThermostatUserInterfaceConfiguration (nil for 0).
+// MTRClusterThermostatUserInterfaceConfigurationFromID adopts an existing Objective-C object as a MTRClusterThermostatUserInterfaceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterThermostatUserInterfaceConfigurationFromID(id objc.ID) *MTRClusterThermostatUserInterfaceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterThermostatUserInterfaceConfiguration{inner: raw.MTRClusterThermostatUserInterfaceConfigurationFromID(id)}
+	x := &MTRClusterThermostatUserInterfaceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterThermostatUserInterfaceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterThermostatUserInterfaceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterThermostatUserInterfaceConfigurationAdopt(id objc.ID) *MTRClusterThermostatUserInterfaceConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterThermostatUserInterfaceConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterThermostatUserInterfaceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterThermostatUserInterfaceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterThermostatUserInterfaceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 //
-// NewMTRClusterThermostatUserInterfaceConfigurationWithDeviceEndpointIDQueue creates a new [MTRClusterThermostatUserInterfaceConfiguration].
-func NewMTRClusterThermostatUserInterfaceConfigurationWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterThermostatUserInterfaceConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterThermostatUserInterfaceConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterThermostatUserInterfaceConfiguration{inner: raw.MTRClusterThermostatUserInterfaceConfigurationFromID(_id)}
+// NewMTRClusterThermostatUserInterfaceConfigurationWithDeviceEndpointIDQueue creates a new MTRClusterThermostatUserInterfaceConfiguration.
+func NewMTRClusterThermostatUserInterfaceConfigurationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterThermostatUserInterfaceConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterThermostatUserInterfaceConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterThermostatUserInterfaceConfigurationAdopt(_id)
 }
 
-// NewMTRClusterThermostatUserInterfaceConfigurationWithDeviceEndpointQueue creates a new [MTRClusterThermostatUserInterfaceConfiguration].
-func NewMTRClusterThermostatUserInterfaceConfigurationWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterThermostatUserInterfaceConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterThermostatUserInterfaceConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterThermostatUserInterfaceConfiguration{inner: raw.MTRClusterThermostatUserInterfaceConfigurationFromID(_id)}
+// NewMTRClusterThermostatUserInterfaceConfigurationWithDeviceEndpointQueue creates a new MTRClusterThermostatUserInterfaceConfiguration.
+func NewMTRClusterThermostatUserInterfaceConfigurationWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterThermostatUserInterfaceConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterThermostatUserInterfaceConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterThermostatUserInterfaceConfigurationAdopt(_id)
 }
 
-// ReadAttributeTemperatureDisplayModeWithParams calls the underlying ReadAttributeTemperatureDisplayModeWithParams.
-func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeTemperatureDisplayModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTemperatureDisplayModeWithParams(params)
+func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeTemperatureDisplayModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTemperatureDisplayModeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeTemperatureDisplayModeWithValueExpectedValueInterval calls the underlying WriteAttributeTemperatureDisplayModeWithValueExpectedValueInterval.
-func (x *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeTemperatureDisplayModeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeTemperatureDisplayModeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeTemperatureDisplayModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeTemperatureDisplayModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeTemperatureDisplayModeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeTemperatureDisplayModeWithValueExpectedValueIntervalParams.
-func (x *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeTemperatureDisplayModeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeTemperatureDisplayModeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeTemperatureDisplayModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeTemperatureDisplayModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeKeypadLockoutWithParams calls the underlying ReadAttributeKeypadLockoutWithParams.
-func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeKeypadLockoutWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeKeypadLockoutWithParams(params)
+func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeKeypadLockoutWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeKeypadLockoutWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeKeypadLockoutWithValueExpectedValueInterval calls the underlying WriteAttributeKeypadLockoutWithValueExpectedValueInterval.
-func (x *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeKeypadLockoutWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeKeypadLockoutWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeKeypadLockoutWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeKeypadLockoutWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeKeypadLockoutWithValueExpectedValueIntervalParams calls the underlying WriteAttributeKeypadLockoutWithValueExpectedValueIntervalParams.
-func (x *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeKeypadLockoutWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeKeypadLockoutWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeKeypadLockoutWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeKeypadLockoutWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeScheduleProgrammingVisibilityWithParams calls the underlying ReadAttributeScheduleProgrammingVisibilityWithParams.
-func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeScheduleProgrammingVisibilityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeScheduleProgrammingVisibilityWithParams(params)
+func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeScheduleProgrammingVisibilityWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeScheduleProgrammingVisibilityWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueInterval calls the underlying WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueInterval.
-func (x *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeScheduleProgrammingVisibilityWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueIntervalParams calls the underlying WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueIntervalParams.
-func (x *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterThermostatUserInterfaceConfiguration) WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeScheduleProgrammingVisibilityWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterThermostatUserInterfaceConfiguration) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterThermostatUserInterfaceConfiguration) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterThermostatUserInterfaceConfiguration) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterThermostatUserInterfaceConfigurationable is the interface implemented by [MTRClusterThermostatUserInterfaceConfiguration], for mocking and DI.
 type MTRClusterThermostatUserInterfaceConfigurationable interface {
-	Unwrap() *raw.MTRClusterThermostatUserInterfaceConfiguration
-	ReadAttributeTemperatureDisplayModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeTemperatureDisplayModeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeTemperatureDisplayModeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeKeypadLockoutWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeKeypadLockoutWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeKeypadLockoutWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeScheduleProgrammingVisibilityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeTemperatureDisplayModeWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeTemperatureDisplayModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeTemperatureDisplayModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeKeypadLockoutWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeKeypadLockoutWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeKeypadLockoutWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeScheduleProgrammingVisibilityWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeScheduleProgrammingVisibilityWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterThermostatUserInterfaceConfigurationable = (*MTRClusterThermostatUserInterfaceConfiguration)(nil)

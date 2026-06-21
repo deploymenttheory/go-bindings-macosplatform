@@ -5,49 +5,73 @@
 package notificationcenter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/notificationcenter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object used to specify whether a Today widget has content to display.
 //
-// WidgetController wraps [raw.NCWidgetController] with a fluent Go API.
+// WidgetController is an idiomatic wrapper over the Objective-C class NCWidgetController.
 type WidgetController struct {
-	inner *raw.NCWidgetController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NCWidgetController].
-func (x *WidgetController) Unwrap() *raw.NCWidgetController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WidgetController) ID() objc.ID { return x.inner.Ptr() }
-
-// WidgetControllerFromID adopts an existing object pointer as a WidgetController (nil for 0).
+// WidgetControllerFromID adopts an existing Objective-C object as a WidgetController
+// (nil for 0), retaining it and registering a release finalizer.
 func WidgetControllerFromID(id objc.ID) *WidgetController {
 	if id == 0 {
 		return nil
 	}
-	return &WidgetController{inner: raw.NCWidgetControllerFromID(id)}
+	x := &WidgetController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWidgetController creates a new [WidgetController].
+// widgetControllerAdopt wraps an Objective-C object that this code just created as a
+// WidgetController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func widgetControllerAdopt(id objc.ID) *WidgetController {
+	if id == 0 {
+		return nil
+	}
+	x := &WidgetController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WidgetController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WidgetController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WidgetController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWidgetController creates a new WidgetController.
 func NewWidgetController() *WidgetController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NCWidgetController")), objc.RegisterName("new"))
-	return &WidgetController{inner: raw.NCWidgetControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NCWidgetController")), objc.RegisterName("new"))
+	return widgetControllerAdopt(_id)
 }
 
 // Sets whether the specified widget has content to display.
-//
-// SetHasContentForWidgetWithBundleIdentifier calls the underlying SetHasContentForWidgetWithBundleIdentifier.
 func (x *WidgetController) SetHasContentForWidgetWithBundleIdentifier(flag bool, bundleID string) {
-	x.inner.SetHasContentForWidgetWithBundleIdentifier(flag, foundation.NSStringStringWithUTF8String(bundleID))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasContent:forWidgetWithBundleIdentifier:"), flag, purego.NSString(bundleID))
 }
 
 // WidgetControllerable is the interface implemented by [WidgetController], for mocking and DI.
 type WidgetControllerable interface {
-	Unwrap() *raw.NCWidgetController
+	obj.Object
 	SetHasContentForWidgetWithBundleIdentifier(flag bool, bundleID string)
 }
 

@@ -5,63 +5,81 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An array of color attachment descriptors for the tile render pipeline.
 //
-// TileRenderPipelineColorAttachmentDescriptorArray wraps [raw.MTLTileRenderPipelineColorAttachmentDescriptorArray] with a fluent Go API.
+// TileRenderPipelineColorAttachmentDescriptorArray is an idiomatic wrapper over the Objective-C class MTLTileRenderPipelineColorAttachmentDescriptorArray.
 type TileRenderPipelineColorAttachmentDescriptorArray struct {
-	inner *raw.MTLTileRenderPipelineColorAttachmentDescriptorArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLTileRenderPipelineColorAttachmentDescriptorArray].
-func (x *TileRenderPipelineColorAttachmentDescriptorArray) Unwrap() *raw.MTLTileRenderPipelineColorAttachmentDescriptorArray {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TileRenderPipelineColorAttachmentDescriptorArray) ID() objc.ID { return x.inner.Ptr() }
-
-// TileRenderPipelineColorAttachmentDescriptorArrayFromID adopts an existing object pointer as a TileRenderPipelineColorAttachmentDescriptorArray (nil for 0).
+// TileRenderPipelineColorAttachmentDescriptorArrayFromID adopts an existing Objective-C object as a TileRenderPipelineColorAttachmentDescriptorArray
+// (nil for 0), retaining it and registering a release finalizer.
 func TileRenderPipelineColorAttachmentDescriptorArrayFromID(id objc.ID) *TileRenderPipelineColorAttachmentDescriptorArray {
 	if id == 0 {
 		return nil
 	}
-	return &TileRenderPipelineColorAttachmentDescriptorArray{inner: raw.MTLTileRenderPipelineColorAttachmentDescriptorArrayFromID(id)}
+	x := &TileRenderPipelineColorAttachmentDescriptorArray{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTileRenderPipelineColorAttachmentDescriptorArray creates a new [TileRenderPipelineColorAttachmentDescriptorArray].
+// tileRenderPipelineColorAttachmentDescriptorArrayAdopt wraps an Objective-C object that this code just created as a
+// TileRenderPipelineColorAttachmentDescriptorArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tileRenderPipelineColorAttachmentDescriptorArrayAdopt(id objc.ID) *TileRenderPipelineColorAttachmentDescriptorArray {
+	if id == 0 {
+		return nil
+	}
+	x := &TileRenderPipelineColorAttachmentDescriptorArray{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TileRenderPipelineColorAttachmentDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TileRenderPipelineColorAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TileRenderPipelineColorAttachmentDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTileRenderPipelineColorAttachmentDescriptorArray creates a new TileRenderPipelineColorAttachmentDescriptorArray.
 func NewTileRenderPipelineColorAttachmentDescriptorArray() *TileRenderPipelineColorAttachmentDescriptorArray {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLTileRenderPipelineColorAttachmentDescriptorArray")), objc.RegisterName("new"))
-	return &TileRenderPipelineColorAttachmentDescriptorArray{inner: raw.MTLTileRenderPipelineColorAttachmentDescriptorArrayFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLTileRenderPipelineColorAttachmentDescriptorArray")), objc.RegisterName("new"))
+	return tileRenderPipelineColorAttachmentDescriptorArrayAdopt(_id)
 }
 
 // Returns the render pipeline state for the specified color attachment.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *TileRenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *TileRenderPipelineColorAttachmentDescriptor {
-	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
-	if _r == nil {
-		return nil
-	}
-	return &TileRenderPipelineColorAttachmentDescriptor{inner: _r}
+func (x *TileRenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *TileRenderPipelineColorAttachmentDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
+	return TileRenderPipelineColorAttachmentDescriptorFromID(_r)
 }
 
 // Sets the render pipeline state for a specified color attachment.
-//
-// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
-func (x *TileRenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLTileRenderPipelineColorAttachmentDescriptor, attachmentIndex uint) {
-	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)
+func (x *TileRenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *TileRenderPipelineColorAttachmentDescriptor, attachmentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
 
 // TileRenderPipelineColorAttachmentDescriptorArrayable is the interface implemented by [TileRenderPipelineColorAttachmentDescriptorArray], for mocking and DI.
 type TileRenderPipelineColorAttachmentDescriptorArrayable interface {
-	Unwrap() *raw.MTLTileRenderPipelineColorAttachmentDescriptorArray
-	ObjectAtIndexedSubscript(attachmentIndex uint) *TileRenderPipelineColorAttachmentDescriptor
-	SetObjectAtIndexedSubscript(attachment *raw.MTLTileRenderPipelineColorAttachmentDescriptor, attachmentIndex uint)
+	obj.Object
+	ObjectAtIndexedSubscript(attachmentIndex int) *TileRenderPipelineColorAttachmentDescriptor
+	SetObjectAtIndexedSubscript(attachment *TileRenderPipelineColorAttachmentDescriptor, attachmentIndex int)
 }
 
 var _ TileRenderPipelineColorAttachmentDescriptorArrayable = (*TileRenderPipelineColorAttachmentDescriptorArray)(nil)

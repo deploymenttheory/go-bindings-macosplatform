@@ -5,71 +5,77 @@
 package localauthenticationembeddedui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthenticationembeddedui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A graphical representation of the state of biometric authentication.
 //
-// AuthenticationView wraps [raw.LAAuthenticationView] with a fluent Go API.
+// AuthenticationView is an idiomatic wrapper over the Objective-C class LAAuthenticationView.
 type AuthenticationView struct {
-	inner *raw.LAAuthenticationView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.LAAuthenticationView].
-func (x *AuthenticationView) Unwrap() *raw.LAAuthenticationView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthenticationView) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthenticationViewFromID adopts an existing object pointer as a AuthenticationView (nil for 0).
+// AuthenticationViewFromID adopts an existing Objective-C object as a AuthenticationView
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthenticationViewFromID(id objc.ID) *AuthenticationView {
 	if id == 0 {
 		return nil
 	}
-	return &AuthenticationView{inner: raw.LAAuthenticationViewFromID(id)}
+	x := &AuthenticationView{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// authenticationViewAdopt wraps an Objective-C object that this code just created as a
+// AuthenticationView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authenticationViewAdopt(id objc.ID) *AuthenticationView {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthenticationView{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthenticationView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthenticationView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthenticationView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new authentication icon that reflects the current authentication state.
 //
-// NewAuthenticationViewWithContext creates a new [AuthenticationView].
-func NewAuthenticationViewWithContext(context_ *localauthentication.LAContext) *AuthenticationView {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("LAAuthenticationView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContext:"), context_.Ptr())
-	return &AuthenticationView{inner: raw.LAAuthenticationViewFromID(_id)}
+// NewAuthenticationViewWithContext creates a new AuthenticationView.
+func NewAuthenticationViewWithContext(context_ obj.Object) *AuthenticationView {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("LAAuthenticationView")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContext:"), objref.IDOf(context_))
+	return authenticationViewAdopt(_id)
 }
 
-// Creates a new authentication icon that reflects the current authentication state, using a specified size.
-//
-// NewAuthenticationViewWithContextControlSize creates a new [AuthenticationView].
-func NewAuthenticationViewWithContextControlSize(context_ *localauthentication.LAContext, controlSize appkit.NSControlSize) *AuthenticationView {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("LAAuthenticationView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContext:controlSize:"), context_.Ptr(), controlSize)
-	return &AuthenticationView{inner: raw.LAAuthenticationViewFromID(_id)}
-}
-
-// @brief @c LAContext instance passed to the initializer.
-//
-// Context calls the underlying Context.
-func (x *AuthenticationView) Context() *localauthentication.LAContext {
-	return x.inner.Context()
-}
-
-// @brief @c NSControlSize instance passed to the initializer.
-//
-// ControlSize calls the underlying ControlSize.
-func (x *AuthenticationView) ControlSize() appkit.NSControlSize {
-	return x.inner.ControlSize()
+func (x *AuthenticationView) Context() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
+	return obj.Wrap(_r)
 }
 
 // AuthenticationViewable is the interface implemented by [AuthenticationView], for mocking and DI.
 type AuthenticationViewable interface {
-	Unwrap() *raw.LAAuthenticationView
-	Context() *localauthentication.LAContext
-	ControlSize() appkit.NSControlSize
+	obj.Object
+	Context() obj.Object
 }
 
 var _ AuthenticationViewable = (*AuthenticationView)(nil)

@@ -5,99 +5,113 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description that uniquely identifies a particular password credential.
 //
-// PasswordCredentialIdentity wraps [raw.ASPasswordCredentialIdentity] with a fluent Go API.
+// PasswordCredentialIdentity is an idiomatic wrapper over the Objective-C class ASPasswordCredentialIdentity.
 type PasswordCredentialIdentity struct {
-	inner *raw.ASPasswordCredentialIdentity
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASPasswordCredentialIdentity].
-func (x *PasswordCredentialIdentity) Unwrap() *raw.ASPasswordCredentialIdentity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PasswordCredentialIdentity) ID() objc.ID { return x.inner.Ptr() }
-
-// PasswordCredentialIdentityFromID adopts an existing object pointer as a PasswordCredentialIdentity (nil for 0).
+// PasswordCredentialIdentityFromID adopts an existing Objective-C object as a PasswordCredentialIdentity
+// (nil for 0), retaining it and registering a release finalizer.
 func PasswordCredentialIdentityFromID(id objc.ID) *PasswordCredentialIdentity {
 	if id == 0 {
 		return nil
 	}
-	return &PasswordCredentialIdentity{inner: raw.ASPasswordCredentialIdentityFromID(id)}
+	x := &PasswordCredentialIdentity{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// passwordCredentialIdentityAdopt wraps an Objective-C object that this code just created as a
+// PasswordCredentialIdentity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func passwordCredentialIdentityAdopt(id objc.ID) *PasswordCredentialIdentity {
+	if id == 0 {
+		return nil
+	}
+	x := &PasswordCredentialIdentity{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PasswordCredentialIdentity) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PasswordCredentialIdentity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PasswordCredentialIdentity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a password credential identity.
 //
-// NewPasswordCredentialIdentityWithServiceIdentifierUserRecordIdentifier creates a new [PasswordCredentialIdentity].
-func NewPasswordCredentialIdentityWithServiceIdentifierUserRecordIdentifier(serviceIdentifier *raw.ASCredentialServiceIdentifier, user string, recordIdentifier string) *PasswordCredentialIdentity {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasswordCredentialIdentity")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceIdentifier:user:recordIdentifier:"), serviceIdentifier.Ptr(), foundation.NSStringStringWithUTF8String(user).Ptr(), foundation.NSStringStringWithUTF8String(recordIdentifier).Ptr())
-	return &PasswordCredentialIdentity{inner: raw.ASPasswordCredentialIdentityFromID(_id)}
+// NewPasswordCredentialIdentityWithServiceIdentifierUserRecordIdentifier creates a new PasswordCredentialIdentity.
+func NewPasswordCredentialIdentityWithServiceIdentifierUserRecordIdentifier(serviceIdentifier *CredentialServiceIdentifier, user string, recordIdentifier string) *PasswordCredentialIdentity {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasswordCredentialIdentity")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceIdentifier:user:recordIdentifier:"), objref.IDOf(serviceIdentifier), purego.NSString(user), purego.NSString(recordIdentifier))
+	return passwordCredentialIdentityAdopt(_id)
 }
 
 // An indicator that enables you to prioritze credential identities relative to each other.
 //
-// WithRank sets the rank property and returns the receiver for chaining.
+// WithRank sets rank and returns the receiver so calls can be chained.
 func (x *PasswordCredentialIdentity) WithRank(rank int) *PasswordCredentialIdentity {
-	x.inner.SetRank(rank)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRank:"), rank)
 	return x
 }
 
-// @abstract Get the service identifier. @result The service identifier for this credential identity.
-//
-// ServiceIdentifier calls the underlying ServiceIdentifier.
+// Get the service identifier.
 func (x *PasswordCredentialIdentity) ServiceIdentifier() *CredentialServiceIdentifier {
-	_r := x.inner.ServiceIdentifier()
-	if _r == nil {
-		return nil
-	}
-	return &CredentialServiceIdentifier{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceIdentifier"))
+	return CredentialServiceIdentifierFromID(_r)
 }
 
-// @abstract Get the user. @result The user string.
-//
-// User calls the underlying User.
+// Get the user.
 func (x *PasswordCredentialIdentity) User() string {
-	_r := x.inner.User()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("user"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract Get the record identifier. @result The record identifier. @discussion You can utilize the record identifier to uniquely identify the credential identity in your local database.
-//
-// RecordIdentifier calls the underlying RecordIdentifier.
+// Get the record identifier. You can utilize the record identifier to uniquely identify the credential identity in your local database.
 func (x *PasswordCredentialIdentity) RecordIdentifier() string {
-	_r := x.inner.RecordIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract Get or set the rank of the credential identity object. @discussion The system may utilize the rank to decide which credential identity precedes the other if two identities have the same service identifier. A credential identity with a larger rank value precedes one with a smaller value if both credential identities have the same service identifier. The default value of this property is 0.
-//
-// Rank calls the underlying Rank.
+// Get or set the rank of the credential identity object. The system may utilize the rank to decide which credential identity precedes the other if two identities have the same service identifier. A credential identity with a larger rank value precedes one with a smaller value if both credential identities have the same service identifier. The default value of this property is 0.
 func (x *PasswordCredentialIdentity) Rank() int {
-	return x.inner.Rank()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rank"))
+	return _r
 }
 
-// SetRank calls the underlying SetRank.
 func (x *PasswordCredentialIdentity) SetRank(rank int) {
-	x.inner.SetRank(rank)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRank:"), rank)
 }
 
 // PasswordCredentialIdentityable is the interface implemented by [PasswordCredentialIdentity], for mocking and DI.
 type PasswordCredentialIdentityable interface {
-	Unwrap() *raw.ASPasswordCredentialIdentity
+	obj.Object
 	WithRank(rank int) *PasswordCredentialIdentity
 	ServiceIdentifier() *CredentialServiceIdentifier
 	User() string

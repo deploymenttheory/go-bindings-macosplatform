@@ -5,56 +5,73 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An event that represents when the playback seek completes.
 //
-// MetricPlayerItemSeekDidCompleteEvent wraps [raw.AVMetricPlayerItemSeekDidCompleteEvent] with a fluent Go API.
+// MetricPlayerItemSeekDidCompleteEvent is an idiomatic wrapper over the Objective-C class AVMetricPlayerItemSeekDidCompleteEvent.
 type MetricPlayerItemSeekDidCompleteEvent struct {
-	inner *raw.AVMetricPlayerItemSeekDidCompleteEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMetricPlayerItemSeekDidCompleteEvent].
-func (x *MetricPlayerItemSeekDidCompleteEvent) Unwrap() *raw.AVMetricPlayerItemSeekDidCompleteEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetricPlayerItemSeekDidCompleteEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricPlayerItemSeekDidCompleteEventFromID adopts an existing object pointer as a MetricPlayerItemSeekDidCompleteEvent (nil for 0).
+// MetricPlayerItemSeekDidCompleteEventFromID adopts an existing Objective-C object as a MetricPlayerItemSeekDidCompleteEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricPlayerItemSeekDidCompleteEventFromID(id objc.ID) *MetricPlayerItemSeekDidCompleteEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MetricPlayerItemSeekDidCompleteEvent{inner: raw.AVMetricPlayerItemSeekDidCompleteEventFromID(id)}
+	x := &MetricPlayerItemSeekDidCompleteEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMetricPlayerItemSeekDidCompleteEvent creates a new [MetricPlayerItemSeekDidCompleteEvent].
+// metricPlayerItemSeekDidCompleteEventAdopt wraps an Objective-C object that this code just created as a
+// MetricPlayerItemSeekDidCompleteEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricPlayerItemSeekDidCompleteEventAdopt(id objc.ID) *MetricPlayerItemSeekDidCompleteEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MetricPlayerItemSeekDidCompleteEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetricPlayerItemSeekDidCompleteEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetricPlayerItemSeekDidCompleteEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetricPlayerItemSeekDidCompleteEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMetricPlayerItemSeekDidCompleteEvent creates a new MetricPlayerItemSeekDidCompleteEvent.
 func NewMetricPlayerItemSeekDidCompleteEvent() *MetricPlayerItemSeekDidCompleteEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetricPlayerItemSeekDidCompleteEvent")), objc.RegisterName("new"))
-	return &MetricPlayerItemSeekDidCompleteEvent{inner: raw.AVMetricPlayerItemSeekDidCompleteEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetricPlayerItemSeekDidCompleteEvent")), objc.RegisterName("new"))
+	return metricPlayerItemSeekDidCompleteEventAdopt(_id)
 }
 
-// DidSeekInBuffer calls the underlying DidSeekInBuffer.
 func (x *MetricPlayerItemSeekDidCompleteEvent) DidSeekInBuffer() bool {
-	return x.inner.DidSeekInBuffer()
-}
-
-func (x *MetricPlayerItemSeekDidCompleteEvent) asMetricPlayerItemRateChangeEvent() *raw.AVMetricPlayerItemRateChangeEvent {
-	return &x.inner.AVMetricPlayerItemRateChangeEvent
-}
-
-func (x *MetricPlayerItemSeekDidCompleteEvent) asMetricEvent() *raw.AVMetricEvent {
-	return &x.inner.AVMetricPlayerItemRateChangeEvent.AVMetricEvent
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("didSeekInBuffer"))
+	return _r
 }
 
 // MetricPlayerItemSeekDidCompleteEventable is the interface implemented by [MetricPlayerItemSeekDidCompleteEvent], for mocking and DI.
 type MetricPlayerItemSeekDidCompleteEventable interface {
-	Unwrap() *raw.AVMetricPlayerItemSeekDidCompleteEvent
+	obj.Object
 	DidSeekInBuffer() bool
 }
 

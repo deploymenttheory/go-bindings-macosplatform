@@ -5,51 +5,68 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that manages access to a memory buffer used for the data storage of a Model I/O mesh.
 //
-// MeshBufferMap wraps [raw.MDLMeshBufferMap] with a fluent Go API.
+// MeshBufferMap is an idiomatic wrapper over the Objective-C class MDLMeshBufferMap.
 type MeshBufferMap struct {
-	inner *raw.MDLMeshBufferMap
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLMeshBufferMap].
-func (x *MeshBufferMap) Unwrap() *raw.MDLMeshBufferMap { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MeshBufferMap) ID() objc.ID { return x.inner.Ptr() }
-
-// MeshBufferMapFromID adopts an existing object pointer as a MeshBufferMap (nil for 0).
+// MeshBufferMapFromID adopts an existing Objective-C object as a MeshBufferMap
+// (nil for 0), retaining it and registering a release finalizer.
 func MeshBufferMapFromID(id objc.ID) *MeshBufferMap {
 	if id == 0 {
 		return nil
 	}
-	return &MeshBufferMap{inner: raw.MDLMeshBufferMapFromID(id)}
+	x := &MeshBufferMap{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes a buffer map object to manage access to the specified memory.
-//
-// NewMeshBufferMapWithBytesDeallocator creates a new [MeshBufferMap].
-func NewMeshBufferMapWithBytesDeallocator(bytes_ unsafe.Pointer, deallocator func()) *MeshBufferMap {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLMeshBufferMap")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBytes:deallocator:"), bytes_, deallocator)
-	return &MeshBufferMap{inner: raw.MDLMeshBufferMapFromID(_id)}
+// meshBufferMapAdopt wraps an Objective-C object that this code just created as a
+// MeshBufferMap (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func meshBufferMapAdopt(id objc.ID) *MeshBufferMap {
+	if id == 0 {
+		return nil
+	}
+	x := &MeshBufferMap{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Bytes calls the underlying Bytes.
-func (x *MeshBufferMap) Bytes() unsafe.Pointer {
-	return x.inner.Bytes()
+// Description returns the object's -description text.
+func (x *MeshBufferMap) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MeshBufferMap) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MeshBufferMap) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMeshBufferMap creates a new MeshBufferMap.
+func NewMeshBufferMap() *MeshBufferMap {
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLMeshBufferMap")), objc.RegisterName("new"))
+	return meshBufferMapAdopt(_id)
 }
 
 // MeshBufferMapable is the interface implemented by [MeshBufferMap], for mocking and DI.
 type MeshBufferMapable interface {
-	Unwrap() *raw.MDLMeshBufferMap
-	Bytes() unsafe.Pointer
+	obj.Object
 }
 
 var _ MeshBufferMapable = (*MeshBufferMap)(nil)

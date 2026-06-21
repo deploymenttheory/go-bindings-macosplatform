@@ -5,270 +5,263 @@
 package usernotifications
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The editable content for a notification.
 //
-// MutableNotificationContent wraps [raw.UNMutableNotificationContent] with a fluent Go API.
+// MutableNotificationContent is an idiomatic wrapper over the Objective-C class UNMutableNotificationContent.
 type MutableNotificationContent struct {
-	inner *raw.UNMutableNotificationContent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.UNMutableNotificationContent].
-func (x *MutableNotificationContent) Unwrap() *raw.UNMutableNotificationContent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableNotificationContent) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableNotificationContentFromID adopts an existing object pointer as a MutableNotificationContent (nil for 0).
+// MutableNotificationContentFromID adopts an existing Objective-C object as a MutableNotificationContent
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableNotificationContentFromID(id objc.ID) *MutableNotificationContent {
 	if id == 0 {
 		return nil
 	}
-	return &MutableNotificationContent{inner: raw.UNMutableNotificationContentFromID(id)}
+	x := &MutableNotificationContent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMutableNotificationContent creates a new [MutableNotificationContent].
+// mutableNotificationContentAdopt wraps an Objective-C object that this code just created as a
+// MutableNotificationContent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableNotificationContentAdopt(id objc.ID) *MutableNotificationContent {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableNotificationContent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MutableNotificationContent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MutableNotificationContent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MutableNotificationContent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMutableNotificationContent creates a new MutableNotificationContent.
 func NewMutableNotificationContent() *MutableNotificationContent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNMutableNotificationContent")), objc.RegisterName("new"))
-	return &MutableNotificationContent{inner: raw.UNMutableNotificationContentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("UNMutableNotificationContent")), objc.RegisterName("new"))
+	return mutableNotificationContentAdopt(_id)
 }
 
 // The visual and audio attachments to display alongside the notification’s main content.
 //
-// WithAttachments sets the collection, converting the Go slice to an NSArray.
-func (x *MutableNotificationContent) WithAttachments(items ...*raw.UNNotificationAttachment) *MutableNotificationContent {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetAttachments(foundation.NSArrayFromID[*raw.UNNotificationAttachment](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.UNNotificationAttachment](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetAttachments(_arr)
+// WithAttachments sets the collection and returns the receiver so calls can be chained.
+func (x *MutableNotificationContent) WithAttachments(items ...*NotificationAttachment) *MutableNotificationContent {
+	_arr := purego.SliceToNSArray(items, func(_v *NotificationAttachment) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachments:"), _arr)
 	return x
 }
 
 // The number that your app’s icon displays.
 //
-// WithBadge sets the badge property and returns the receiver for chaining.
-func (x *MutableNotificationContent) WithBadge(badge *foundation.NSNumber) *MutableNotificationContent {
-	x.inner.SetBadge(badge)
+// WithBadge sets badge and returns the receiver so calls can be chained.
+func (x *MutableNotificationContent) WithBadge(badge obj.Object) *MutableNotificationContent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadge:"), objref.IDOf(badge))
 	return x
 }
 
 // The localized text that provides the notification’s main content.
 //
-// WithBody sets the body property and returns the receiver for chaining.
+// WithBody sets body and returns the receiver so calls can be chained.
 func (x *MutableNotificationContent) WithBody(body string) *MutableNotificationContent {
-	x.inner.SetBody(foundation.NSStringStringWithUTF8String(body))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBody:"), purego.NSString(body))
 	return x
 }
 
 // The identifier of the notification’s category.
 //
-// WithCategoryIdentifier sets the categoryIdentifier property and returns the receiver for chaining.
+// WithCategoryIdentifier sets categoryIdentifier and returns the receiver so calls can be chained.
 func (x *MutableNotificationContent) WithCategoryIdentifier(categoryIdentifier string) *MutableNotificationContent {
-	x.inner.SetCategoryIdentifier(foundation.NSStringStringWithUTF8String(categoryIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryIdentifier:"), purego.NSString(categoryIdentifier))
 	return x
 }
 
 // The localized text that provides the notification’s secondary description.
 //
-// WithSubtitle sets the subtitle property and returns the receiver for chaining.
+// WithSubtitle sets subtitle and returns the receiver so calls can be chained.
 func (x *MutableNotificationContent) WithSubtitle(subtitle string) *MutableNotificationContent {
-	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 	return x
 }
 
 // The identifier that groups related notifications.
 //
-// WithThreadIdentifier sets the threadIdentifier property and returns the receiver for chaining.
+// WithThreadIdentifier sets threadIdentifier and returns the receiver so calls can be chained.
 func (x *MutableNotificationContent) WithThreadIdentifier(threadIdentifier string) *MutableNotificationContent {
-	x.inner.SetThreadIdentifier(foundation.NSStringStringWithUTF8String(threadIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadIdentifier:"), purego.NSString(threadIdentifier))
 	return x
 }
 
 // The localized text that provides the notification’s primary description.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *MutableNotificationContent) WithTitle(title string) *MutableNotificationContent {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // The custom data to associate with the notification.
 //
-// WithUserInfo sets the userInfo property and returns the receiver for chaining.
-func (x *MutableNotificationContent) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *MutableNotificationContent {
-	x.inner.SetUserInfo(userInfo)
+// WithUserInfo sets userInfo and returns the receiver so calls can be chained.
+func (x *MutableNotificationContent) WithUserInfo(userInfo obj.Object) *MutableNotificationContent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return x
 }
 
 // The text the system adds to the notification summary to provide additional context.
 //
-// WithSummaryArgument sets the summaryArgument property and returns the receiver for chaining.
+// WithSummaryArgument sets summaryArgument and returns the receiver so calls can be chained.
 func (x *MutableNotificationContent) WithSummaryArgument(summaryArgument string) *MutableNotificationContent {
-	x.inner.SetSummaryArgument(foundation.NSStringStringWithUTF8String(summaryArgument))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSummaryArgument:"), purego.NSString(summaryArgument))
 	return x
 }
 
 // The number the system adds to the notification summary when the notification represents multiple items.
 //
-// WithSummaryArgumentCount sets the summaryArgumentCount property and returns the receiver for chaining.
-func (x *MutableNotificationContent) WithSummaryArgumentCount(summaryArgumentCount uint) *MutableNotificationContent {
-	x.inner.SetSummaryArgumentCount(summaryArgumentCount)
+// WithSummaryArgumentCount sets summaryArgumentCount and returns the receiver so calls can be chained.
+func (x *MutableNotificationContent) WithSummaryArgumentCount(summaryArgumentCount int) *MutableNotificationContent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSummaryArgumentCount:"), summaryArgumentCount)
 	return x
 }
 
 // The value your app uses to determine which scene to display to handle the notification.
 //
-// WithTargetContentIdentifier sets the targetContentIdentifier property and returns the receiver for chaining.
+// WithTargetContentIdentifier sets targetContentIdentifier and returns the receiver so calls can be chained.
 func (x *MutableNotificationContent) WithTargetContentIdentifier(targetContentIdentifier string) *MutableNotificationContent {
-	x.inner.SetTargetContentIdentifier(foundation.NSStringStringWithUTF8String(targetContentIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetContentIdentifier:"), purego.NSString(targetContentIdentifier))
 	return x
 }
 
 // The notification’s importance and required delivery timing.
 //
-// WithInterruptionLevel sets the interruptionLevel property and returns the receiver for chaining.
-func (x *MutableNotificationContent) WithInterruptionLevel(interruptionLevel UNNotificationInterruptionLevel) *MutableNotificationContent {
-	x.inner.SetInterruptionLevel(raw.UNNotificationInterruptionLevel(interruptionLevel))
+// WithInterruptionLevel sets interruptionLevel and returns the receiver so calls can be chained.
+func (x *MutableNotificationContent) WithInterruptionLevel(interruptionLevel NotificationInterruptionLevel) *MutableNotificationContent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterruptionLevel:"), interruptionLevel)
 	return x
 }
 
 // The score the system uses to determine if the notification is the summary’s featured notification.
 //
-// WithRelevanceScore sets the relevanceScore property and returns the receiver for chaining.
+// WithRelevanceScore sets relevanceScore and returns the receiver so calls can be chained.
 func (x *MutableNotificationContent) WithRelevanceScore(relevanceScore float64) *MutableNotificationContent {
-	x.inner.SetRelevanceScore(relevanceScore)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelevanceScore:"), relevanceScore)
 	return x
 }
 
 // The criteria the system evaluates to determine if it displays the notification in the current Focus.
 //
-// WithFilterCriteria sets the filterCriteria property and returns the receiver for chaining.
+// WithFilterCriteria sets filterCriteria and returns the receiver so calls can be chained.
 func (x *MutableNotificationContent) WithFilterCriteria(filterCriteria string) *MutableNotificationContent {
-	x.inner.SetFilterCriteria(foundation.NSStringStringWithUTF8String(filterCriteria))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterCriteria:"), purego.NSString(filterCriteria))
 	return x
 }
 
-// SetAttachments calls the underlying SetAttachments.
-func (x *MutableNotificationContent) SetAttachments(attachments *foundation.NSArray[*raw.UNNotificationAttachment]) {
-	x.inner.SetAttachments(attachments)
+func (x *MutableNotificationContent) SetAttachments(attachments []*NotificationAttachment) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachments:"), purego.SliceToNSArray(attachments, func(_v *NotificationAttachment) objc.ID { return objref.IDOf(_v) }))
 }
 
-// SetBadge calls the underlying SetBadge.
-func (x *MutableNotificationContent) SetBadge(badge *foundation.NSNumber) {
-	x.inner.SetBadge(badge)
+func (x *MutableNotificationContent) SetBadge(badge obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadge:"), objref.IDOf(badge))
 }
 
-// SetBody calls the underlying SetBody.
 func (x *MutableNotificationContent) SetBody(body string) {
-	x.inner.SetBody(foundation.NSStringStringWithUTF8String(body))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBody:"), purego.NSString(body))
 }
 
-// SetCategoryIdentifier calls the underlying SetCategoryIdentifier.
 func (x *MutableNotificationContent) SetCategoryIdentifier(categoryIdentifier string) {
-	x.inner.SetCategoryIdentifier(foundation.NSStringStringWithUTF8String(categoryIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryIdentifier:"), purego.NSString(categoryIdentifier))
 }
 
-// SetSubtitle calls the underlying SetSubtitle.
 func (x *MutableNotificationContent) SetSubtitle(subtitle string) {
-	x.inner.SetSubtitle(foundation.NSStringStringWithUTF8String(subtitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
 }
 
-// SetThreadIdentifier calls the underlying SetThreadIdentifier.
 func (x *MutableNotificationContent) SetThreadIdentifier(threadIdentifier string) {
-	x.inner.SetThreadIdentifier(foundation.NSStringStringWithUTF8String(threadIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadIdentifier:"), purego.NSString(threadIdentifier))
 }
 
-// SetTitle calls the underlying SetTitle.
 func (x *MutableNotificationContent) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// SetUserInfo calls the underlying SetUserInfo.
-func (x *MutableNotificationContent) SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.SetUserInfo(userInfo)
+func (x *MutableNotificationContent) SetUserInfo(userInfo obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 }
 
-// SetSummaryArgument calls the underlying SetSummaryArgument.
 func (x *MutableNotificationContent) SetSummaryArgument(summaryArgument string) {
-	x.inner.SetSummaryArgument(foundation.NSStringStringWithUTF8String(summaryArgument))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSummaryArgument:"), purego.NSString(summaryArgument))
 }
 
-// SetSummaryArgumentCount calls the underlying SetSummaryArgumentCount.
-func (x *MutableNotificationContent) SetSummaryArgumentCount(summaryArgumentCount uint) {
-	x.inner.SetSummaryArgumentCount(summaryArgumentCount)
+func (x *MutableNotificationContent) SetSummaryArgumentCount(summaryArgumentCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSummaryArgumentCount:"), summaryArgumentCount)
 }
 
-// SetTargetContentIdentifier calls the underlying SetTargetContentIdentifier.
 func (x *MutableNotificationContent) SetTargetContentIdentifier(targetContentIdentifier string) {
-	x.inner.SetTargetContentIdentifier(foundation.NSStringStringWithUTF8String(targetContentIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetContentIdentifier:"), purego.NSString(targetContentIdentifier))
 }
 
-// SetInterruptionLevel calls the underlying SetInterruptionLevel.
-func (x *MutableNotificationContent) SetInterruptionLevel(interruptionLevel UNNotificationInterruptionLevel) {
-	x.inner.SetInterruptionLevel(raw.UNNotificationInterruptionLevel(interruptionLevel))
+func (x *MutableNotificationContent) SetInterruptionLevel(interruptionLevel NotificationInterruptionLevel) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterruptionLevel:"), interruptionLevel)
 }
 
-// SetRelevanceScore calls the underlying SetRelevanceScore.
 func (x *MutableNotificationContent) SetRelevanceScore(relevanceScore float64) {
-	x.inner.SetRelevanceScore(relevanceScore)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelevanceScore:"), relevanceScore)
 }
 
-// SetFilterCriteria calls the underlying SetFilterCriteria.
 func (x *MutableNotificationContent) SetFilterCriteria(filterCriteria string) {
-	x.inner.SetFilterCriteria(foundation.NSStringStringWithUTF8String(filterCriteria))
-}
-
-func (x *MutableNotificationContent) asNotificationContent() *raw.UNNotificationContent {
-	return &x.inner.UNNotificationContent
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterCriteria:"), purego.NSString(filterCriteria))
 }
 
 // MutableNotificationContentable is the interface implemented by [MutableNotificationContent], for mocking and DI.
 type MutableNotificationContentable interface {
-	Unwrap() *raw.UNMutableNotificationContent
-	WithAttachments(items ...*raw.UNNotificationAttachment) *MutableNotificationContent
-	WithBadge(badge *foundation.NSNumber) *MutableNotificationContent
+	obj.Object
+	WithAttachments(items ...*NotificationAttachment) *MutableNotificationContent
+	WithBadge(badge obj.Object) *MutableNotificationContent
 	WithBody(body string) *MutableNotificationContent
 	WithCategoryIdentifier(categoryIdentifier string) *MutableNotificationContent
 	WithSubtitle(subtitle string) *MutableNotificationContent
 	WithThreadIdentifier(threadIdentifier string) *MutableNotificationContent
 	WithTitle(title string) *MutableNotificationContent
-	WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *MutableNotificationContent
+	WithUserInfo(userInfo obj.Object) *MutableNotificationContent
 	WithSummaryArgument(summaryArgument string) *MutableNotificationContent
-	WithSummaryArgumentCount(summaryArgumentCount uint) *MutableNotificationContent
+	WithSummaryArgumentCount(summaryArgumentCount int) *MutableNotificationContent
 	WithTargetContentIdentifier(targetContentIdentifier string) *MutableNotificationContent
-	WithInterruptionLevel(interruptionLevel UNNotificationInterruptionLevel) *MutableNotificationContent
+	WithInterruptionLevel(interruptionLevel NotificationInterruptionLevel) *MutableNotificationContent
 	WithRelevanceScore(relevanceScore float64) *MutableNotificationContent
 	WithFilterCriteria(filterCriteria string) *MutableNotificationContent
-	SetAttachments(attachments *foundation.NSArray[*raw.UNNotificationAttachment])
-	SetBadge(badge *foundation.NSNumber)
+	SetAttachments(attachments []*NotificationAttachment)
+	SetBadge(badge obj.Object)
 	SetBody(body string)
 	SetCategoryIdentifier(categoryIdentifier string)
 	SetSubtitle(subtitle string)
 	SetThreadIdentifier(threadIdentifier string)
 	SetTitle(title string)
-	SetUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID])
+	SetUserInfo(userInfo obj.Object)
 	SetSummaryArgument(summaryArgument string)
-	SetSummaryArgumentCount(summaryArgumentCount uint)
+	SetSummaryArgumentCount(summaryArgumentCount int)
 	SetTargetContentIdentifier(targetContentIdentifier string)
-	SetInterruptionLevel(interruptionLevel UNNotificationInterruptionLevel)
+	SetInterruptionLevel(interruptionLevel NotificationInterruptionLevel)
 	SetRelevanceScore(relevanceScore float64)
 	SetFilterCriteria(filterCriteria string)
 }

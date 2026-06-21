@@ -5,16 +5,15 @@
 package social
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/social"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// RequestForServiceTypeRequestMethodURLParameters calls the underlying SLRequestRequestForServiceTypeRequestMethodURLParameters.
-func RequestForServiceTypeRequestMethodURLParameters(serviceType string, requestMethod SLRequestMethod, url string, parameters *foundation.NSDictionary[objc.ID, objc.ID]) *Request {
-	_r := raw.SLRequestRequestForServiceTypeRequestMethodURLParameters(foundation.NSStringStringWithUTF8String(serviceType), raw.SLRequestMethod(requestMethod), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), parameters)
-	if _r == nil {
-		return nil
-	}
-	return &Request{inner: _r}
+// Initializes a newly created request object with the specified properties.
+func RequestForServiceTypeRequestMethodURLParameters(serviceType string, requestMethod RequestMethod, url string, parameters obj.Object) *Request {
+	_r := objc.Send[objc.ID](objc.ID(_class("SLRequest")), objc.RegisterName("requestForServiceType:requestMethod:URL:parameters:"), purego.NSString(serviceType), requestMethod, rt.FileURL(url), objref.IDOf(parameters))
+	return RequestFromID(_r)
 }

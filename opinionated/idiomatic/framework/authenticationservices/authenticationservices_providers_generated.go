@@ -5,15 +5,15 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// AuthorizationOpenIDRequestProvider is implemented by AuthorizationOpenIDRequest and any idiomatic type wrapping a ASAuthorizationOpenIDRequest subclass.
+// AuthorizationOpenIDRequestProvider is accepted wherever a ASAuthorizationOpenIDRequest (or one of its subclasses) is expected.
 type AuthorizationOpenIDRequestProvider interface {
-	asAuthorizationOpenIDRequest() *raw.ASAuthorizationOpenIDRequest
+	objref.Object
 }
 
-// AuthorizationRequestProvider is implemented by AuthorizationRequest and any idiomatic type wrapping a ASAuthorizationRequest subclass.
+// AuthorizationRequestProvider is accepted wherever a ASAuthorizationRequest (or one of its subclasses) is expected.
 type AuthorizationRequestProvider interface {
-	asAuthorizationRequest() *raw.ASAuthorizationRequest
+	objref.Object
 }

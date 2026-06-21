@@ -5,76 +5,94 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRControllerFactory wraps [raw.MTRControllerFactory] with a fluent Go API.
+// MTRControllerFactory is an idiomatic wrapper over the Objective-C class MTRControllerFactory.
 type MTRControllerFactory struct {
-	inner *raw.MTRControllerFactory
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRControllerFactory].
-func (x *MTRControllerFactory) Unwrap() *raw.MTRControllerFactory { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRControllerFactory) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRControllerFactoryFromID adopts an existing object pointer as a MTRControllerFactory (nil for 0).
+// MTRControllerFactoryFromID adopts an existing Objective-C object as a MTRControllerFactory
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRControllerFactoryFromID(id objc.ID) *MTRControllerFactory {
 	if id == 0 {
 		return nil
 	}
-	return &MTRControllerFactory{inner: raw.MTRControllerFactoryFromID(id)}
+	x := &MTRControllerFactory{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRControllerFactory creates a new [MTRControllerFactory].
+// mTRControllerFactoryAdopt wraps an Objective-C object that this code just created as a
+// MTRControllerFactory (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRControllerFactoryAdopt(id objc.ID) *MTRControllerFactory {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRControllerFactory{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRControllerFactory) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRControllerFactory) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRControllerFactory) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRControllerFactory creates a new MTRControllerFactory.
 func NewMTRControllerFactory() *MTRControllerFactory {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRControllerFactory")), objc.RegisterName("new"))
-	return &MTRControllerFactory{inner: raw.MTRControllerFactoryFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRControllerFactory")), objc.RegisterName("new"))
+	return mTRControllerFactoryAdopt(_id)
 }
 
-// Startup calls the underlying Startup.
-func (x *MTRControllerFactory) Startup(startupParams *raw.MTRControllerFactoryParams) bool {
-	return x.inner.Startup(startupParams)
+func (x *MTRControllerFactory) Startup(startupParams *MTRControllerFactoryParams) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startup:"), objref.IDOf(startupParams))
+	return _r
 }
 
-// Shutdown calls the underlying Shutdown.
 func (x *MTRControllerFactory) Shutdown() {
-	x.inner.Shutdown()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shutdown"))
 }
 
-// StartControllerOnExistingFabric calls the underlying StartControllerOnExistingFabric.
-func (x *MTRControllerFactory) StartControllerOnExistingFabric(startupParams *raw.MTRDeviceControllerStartupParams) *MTRDeviceController {
-	_r := x.inner.StartControllerOnExistingFabric(startupParams)
-	if _r == nil {
-		return nil
-	}
-	return &MTRDeviceController{inner: _r}
+func (x *MTRControllerFactory) StartControllerOnExistingFabric(startupParams *MTRDeviceControllerStartupParams) *MTRDeviceController {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startControllerOnExistingFabric:"), objref.IDOf(startupParams))
+	return MTRDeviceControllerFromID(_r)
 }
 
-// StartControllerOnNewFabric calls the underlying StartControllerOnNewFabric.
-func (x *MTRControllerFactory) StartControllerOnNewFabric(startupParams *raw.MTRDeviceControllerStartupParams) *MTRDeviceController {
-	_r := x.inner.StartControllerOnNewFabric(startupParams)
-	if _r == nil {
-		return nil
-	}
-	return &MTRDeviceController{inner: _r}
+func (x *MTRControllerFactory) StartControllerOnNewFabric(startupParams *MTRDeviceControllerStartupParams) *MTRDeviceController {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startControllerOnNewFabric:"), objref.IDOf(startupParams))
+	return MTRDeviceControllerFromID(_r)
 }
 
-// IsRunning calls the underlying IsRunning.
 func (x *MTRControllerFactory) IsRunning() bool {
-	return x.inner.IsRunning()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRunning"))
+	return _r
 }
 
 // MTRControllerFactoryable is the interface implemented by [MTRControllerFactory], for mocking and DI.
 type MTRControllerFactoryable interface {
-	Unwrap() *raw.MTRControllerFactory
-	Startup(startupParams *raw.MTRControllerFactoryParams) bool
+	obj.Object
+	Startup(startupParams *MTRControllerFactoryParams) bool
 	Shutdown()
-	StartControllerOnExistingFabric(startupParams *raw.MTRDeviceControllerStartupParams) *MTRDeviceController
-	StartControllerOnNewFabric(startupParams *raw.MTRDeviceControllerStartupParams) *MTRDeviceController
+	StartControllerOnExistingFabric(startupParams *MTRDeviceControllerStartupParams) *MTRDeviceController
+	StartControllerOnNewFabric(startupParams *MTRDeviceControllerStartupParams) *MTRDeviceController
 	IsRunning() bool
 }
 

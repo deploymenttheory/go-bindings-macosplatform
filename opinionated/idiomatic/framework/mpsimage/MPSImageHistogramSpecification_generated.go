@@ -5,99 +5,66 @@
 package mpsimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ImageHistogramSpecification wraps [raw.MPSImageHistogramSpecification] with a fluent Go API.
+// ImageHistogramSpecification is an idiomatic wrapper over the Objective-C class MPSImageHistogramSpecification.
 type ImageHistogramSpecification struct {
-	inner *raw.MPSImageHistogramSpecification
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageHistogramSpecification].
-func (x *ImageHistogramSpecification) Unwrap() *raw.MPSImageHistogramSpecification { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageHistogramSpecification) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageHistogramSpecificationFromID adopts an existing object pointer as a ImageHistogramSpecification (nil for 0).
+// ImageHistogramSpecificationFromID adopts an existing Objective-C object as a ImageHistogramSpecification
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageHistogramSpecificationFromID(id objc.ID) *ImageHistogramSpecification {
 	if id == 0 {
 		return nil
 	}
-	return &ImageHistogramSpecification{inner: raw.MPSImageHistogramSpecificationFromID(id)}
-}
-
-// NewImageHistogramSpecificationWithDeviceHistogramInfo creates a new [ImageHistogramSpecification].
-func NewImageHistogramSpecificationWithDeviceHistogramInfo(device metal.MTLDevice, histogramInfo *raw.MPSImageHistogramInfo) *ImageHistogramSpecification {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageHistogramSpecification")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:histogramInfo:"), device, histogramInfo)
-	return &ImageHistogramSpecification{inner: raw.MPSImageHistogramSpecificationFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewImageHistogramSpecificationWithCoderDevice creates a new [ImageHistogramSpecification].
-func NewImageHistogramSpecificationWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageHistogramSpecification {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageHistogramSpecification")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageHistogramSpecification{inner: raw.MPSImageHistogramSpecificationFromID(_id)}
-}
-
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageHistogramSpecification) WithOffset(offset mpscore.MPSOffset) *ImageHistogramSpecification {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	x := &ImageHistogramSpecification{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageHistogramSpecification) WithClipRect(clipRect metal.MTLRegion) *ImageHistogramSpecification {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+// imageHistogramSpecificationAdopt wraps an Objective-C object that this code just created as a
+// ImageHistogramSpecification (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageHistogramSpecificationAdopt(id objc.ID) *ImageHistogramSpecification {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageHistogramSpecification{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageHistogramSpecification) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageHistogramSpecification {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
+// Description returns the object's -description text.
+func (x *ImageHistogramSpecification) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract Encode the transform function to a command buffer using a MTLComputeCommandEncoder. The transform function computes the specification lookup table. @discussion The transform function will not begin to execute until after the command buffer has been enqueued and committed. This step will need to be repeated with the new MPSKernel if -copyWithZone:device or -copyWithZone: is called. @param  commandBuffer   A valid MTLCommandBuffer. @param  source          A valid MTLTexture containing the source image for the filter. @param  sourceHistogram A valid MTLBuffer containing the histogram results for the source image.  This filter will use these histogram results to generate the cumulative histogram for equalizing the image.  The histogram results / channel are stored together.  The number of channels for which histogram results are stored is determined by the number of channels in the image. If histogramInfo.histogramForAlpha is false and the source image is RGBA then only histogram results for RGB channels are stored. @param  sourceHistogramOffset   A byte offset into the sourceHistogram MTLBuffer where the histogram starts. Must conform to alignment requirements for [MTLComputeCommandEncoder setBuffer:offset:atIndex:] offset parameter. @param  desiredHistogram    A valid MTLBuffer containing the desired histogram results for the source image. The histogram results / channel are stored together.  The number of channels for which histogram results are stored is determined by the number of channels in the image. If histogramInfo.histogramForAlpha is false and the source image is RGBA then only histogram results for RGB channels are stored. @param  desiredHistogramOffset  A byte offset into the desiredHistogram MTLBuffer where the histogram starts. Must conform to alignment requirements for [MTLComputeCommandEncoder setBuffer:offset:atIndex:] offset parameter.
-//
-// EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset calls the underlying EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset.
-func (x *ImageHistogramSpecification) EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, sourceHistogram metal.MTLBuffer, sourceHistogramOffset uint, desiredHistogram metal.MTLBuffer, desiredHistogramOffset uint) {
-	x.inner.EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset(commandBuffer, source, sourceHistogram, sourceHistogramOffset, desiredHistogram, desiredHistogramOffset)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageHistogramSpecification) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property   histogramInfo @abstract   Return a structure describing the histogram content @discussion Returns a MPSImageHistogramInfo structure describing the format of the histogram.
-//
-// HistogramInfo calls the underlying HistogramInfo.
-func (x *ImageHistogramSpecification) HistogramInfo() raw.MPSImageHistogramInfo {
-	return x.inner.HistogramInfo()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageHistogramSpecification) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-func (x *ImageHistogramSpecification) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
+// NewImageHistogramSpecification creates a new ImageHistogramSpecification.
+func NewImageHistogramSpecification() *ImageHistogramSpecification {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageHistogramSpecification")), objc.RegisterName("new"))
+	return imageHistogramSpecificationAdopt(_id)
 }
 
 // ImageHistogramSpecificationable is the interface implemented by [ImageHistogramSpecification], for mocking and DI.
 type ImageHistogramSpecificationable interface {
-	Unwrap() *raw.MPSImageHistogramSpecification
-	WithOffset(offset mpscore.MPSOffset) *ImageHistogramSpecification
-	WithClipRect(clipRect metal.MTLRegion) *ImageHistogramSpecification
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageHistogramSpecification
-	EncodeTransformToCommandBufferSourceTextureSourceHistogramSourceHistogramOffsetDesiredHistogramDesiredHistogramOffset(commandBuffer metal.MTLCommandBuffer, source metal.MTLTexture, sourceHistogram metal.MTLBuffer, sourceHistogramOffset uint, desiredHistogram metal.MTLBuffer, desiredHistogramOffset uint)
-	HistogramInfo() raw.MPSImageHistogramInfo
+	obj.Object
 }
 
 var _ ImageHistogramSpecificationable = (*ImageHistogramSpecification)(nil)

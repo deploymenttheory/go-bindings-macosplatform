@@ -5,238 +5,212 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that manages interactions between Writing Tools and your custom text view.
 //
-// WritingToolsCoordinator wraps [raw.NSWritingToolsCoordinator] with a fluent Go API.
+// WritingToolsCoordinator is an idiomatic wrapper over the Objective-C class NSWritingToolsCoordinator.
 type WritingToolsCoordinator struct {
-	inner *raw.NSWritingToolsCoordinator
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSWritingToolsCoordinator].
-func (x *WritingToolsCoordinator) Unwrap() *raw.NSWritingToolsCoordinator { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WritingToolsCoordinator) ID() objc.ID { return x.inner.Ptr() }
-
-// WritingToolsCoordinatorFromID adopts an existing object pointer as a WritingToolsCoordinator (nil for 0).
+// WritingToolsCoordinatorFromID adopts an existing Objective-C object as a WritingToolsCoordinator
+// (nil for 0), retaining it and registering a release finalizer.
 func WritingToolsCoordinatorFromID(id objc.ID) *WritingToolsCoordinator {
 	if id == 0 {
 		return nil
 	}
-	return &WritingToolsCoordinator{inner: raw.NSWritingToolsCoordinatorFromID(id)}
+	x := &WritingToolsCoordinator{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a writing tools coordinator and assigns the specified delegate object to it.
-//
-// NewWritingToolsCoordinatorWithDelegate creates a new [WritingToolsCoordinator].
-func NewWritingToolsCoordinatorWithDelegate(delegate raw.NSWritingToolsCoordinatorDelegate) *WritingToolsCoordinator {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWritingToolsCoordinator")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDelegate:"), delegate)
-	return &WritingToolsCoordinator{inner: raw.NSWritingToolsCoordinatorFromID(_id)}
+// writingToolsCoordinatorAdopt wraps an Objective-C object that this code just created as a
+// WritingToolsCoordinator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func writingToolsCoordinatorAdopt(id objc.ID) *WritingToolsCoordinator {
+	if id == 0 {
+		return nil
+	}
+	x := &WritingToolsCoordinator{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WritingToolsCoordinator) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WritingToolsCoordinator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WritingToolsCoordinator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWritingToolsCoordinator creates a new WritingToolsCoordinator.
+func NewWritingToolsCoordinator() *WritingToolsCoordinator {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSWritingToolsCoordinator")), objc.RegisterName("new"))
+	return writingToolsCoordinatorAdopt(_id)
 }
 
 // The view that Writing Tools uses to display visual effects during the text-rewriting process.
 //
-// WithEffectContainerView sets the effectContainerView property and returns the receiver for chaining.
+// WithEffectContainerView sets effectContainerView and returns the receiver so calls can be chained.
 func (x *WritingToolsCoordinator) WithEffectContainerView(effectContainerView ViewProvider) *WritingToolsCoordinator {
-	x.inner.SetEffectContainerView(effectContainerView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEffectContainerView:"), objref.IDOf(effectContainerView))
 	return x
 }
 
 // The view that Writing Tools uses to display background decorations such as proofreading marks.
 //
-// WithDecorationContainerView sets the decorationContainerView property and returns the receiver for chaining.
+// WithDecorationContainerView sets decorationContainerView and returns the receiver so calls can be chained.
 func (x *WritingToolsCoordinator) WithDecorationContainerView(decorationContainerView ViewProvider) *WritingToolsCoordinator {
-	x.inner.SetDecorationContainerView(decorationContainerView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecorationContainerView:"), objref.IDOf(decorationContainerView))
 	return x
 }
 
 // The level of Writing Tools support you want the system to provide for your view.
 //
-// WithPreferredBehavior sets the preferredBehavior property and returns the receiver for chaining.
-func (x *WritingToolsCoordinator) WithPreferredBehavior(preferredBehavior NSWritingToolsBehavior) *WritingToolsCoordinator {
-	x.inner.SetPreferredBehavior(raw.NSWritingToolsBehavior(preferredBehavior))
+// WithPreferredBehavior sets preferredBehavior and returns the receiver so calls can be chained.
+func (x *WritingToolsCoordinator) WithPreferredBehavior(preferredBehavior WritingToolsBehavior) *WritingToolsCoordinator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredBehavior:"), preferredBehavior)
 	return x
 }
 
 // The type of content you allow Writing Tools to generate for your custom text view.
 //
-// WithPreferredResultOptions sets the preferredResultOptions property and returns the receiver for chaining.
-func (x *WritingToolsCoordinator) WithPreferredResultOptions(preferredResultOptions NSWritingToolsResultOptions) *WritingToolsCoordinator {
-	x.inner.SetPreferredResultOptions(raw.NSWritingToolsResultOptions(preferredResultOptions))
+// WithPreferredResultOptions sets preferredResultOptions and returns the receiver so calls can be chained.
+func (x *WritingToolsCoordinator) WithPreferredResultOptions(preferredResultOptions WritingToolsResultOptions) *WritingToolsCoordinator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredResultOptions:"), preferredResultOptions)
 	return x
 }
 
-// WithIncludesTextListMarkers sets the includesTextListMarkers property and returns the receiver for chaining.
+// WithIncludesTextListMarkers sets includesTextListMarkers and returns the receiver so calls can be chained.
 func (x *WritingToolsCoordinator) WithIncludesTextListMarkers(includesTextListMarkers bool) *WritingToolsCoordinator {
-	x.inner.SetIncludesTextListMarkers(includesTextListMarkers)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesTextListMarkers:"), includesTextListMarkers)
 	return x
 }
 
 // Stops the current Writing Tools operation and dismisses the system UI.
-//
-// StopWritingTools calls the underlying StopWritingTools.
 func (x *WritingToolsCoordinator) StopWritingTools() {
-	x.inner.StopWritingTools()
-}
-
-// Informs the coordinator about changes your app made to the text in the specified context object.
-//
-// UpdateRangeWithTextReasonForContextWithIdentifier calls the underlying UpdateRangeWithTextReasonForContextWithIdentifier.
-func (x *WritingToolsCoordinator) UpdateRangeWithTextReasonForContextWithIdentifier(range_ foundation.NSRange, replacementText *foundation.NSAttributedString, reason NSWritingToolsCoordinatorTextUpdateReason, contextID *foundation.NSUUID) {
-	x.inner.UpdateRangeWithTextReasonForContextWithIdentifier(range_, replacementText, raw.NSWritingToolsCoordinatorTextUpdateReason(reason), contextID)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopWritingTools"))
 }
 
 // Informs the coordinator that a change occurred to the view or its text that requires a layout update.
-//
-// UpdateForReflowedTextInContextWithIdentifier calls the underlying UpdateForReflowedTextInContextWithIdentifier.
-func (x *WritingToolsCoordinator) UpdateForReflowedTextInContextWithIdentifier(contextID *foundation.NSUUID) {
-	x.inner.UpdateForReflowedTextInContextWithIdentifier(contextID)
-}
-
-// The object that handles Writing Tools interactions for your view. Specify this object at initialization time when creating your `NSWritingToolsCoordinator` object. The object must adopt the “NSWritingToolsCoordinator/Delegate“ protocol, and be capable of modifying your view’s text storage and refreshing the view’s layout and appearance.
-//
-// Delegate calls the underlying Delegate.
-func (x *WritingToolsCoordinator) Delegate() raw.NSWritingToolsCoordinatorDelegate {
-	return x.inner.Delegate()
+func (x *WritingToolsCoordinator) UpdateForReflowedTextInContextWithIdentifier(contextID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateForReflowedTextInContextWithIdentifier:"), objref.IDOf(contextID))
 }
 
 // The view that currently uses the writing tools coordinator. Use this property to refer to the view that currently owns the coordinator object. The system updates this property automatically when you assign the coordinator to the “NSView/writingToolsCoordinator“ property of your view. The value of this property is `nil` if there is no associated view.
-//
-// View calls the underlying View.
 func (x *WritingToolsCoordinator) View() *View {
-	_r := x.inner.View()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+	return ViewFromID(_r)
 }
 
 // The view that Writing Tools uses to display visual effects during the text-rewriting process. Writing Tools uses the view in this property to host the visual effects it creates when making interactive changes to your view’s content. These visual effects let people know the state of the text and provide feedback about what’s happening to it. Set this property to a subview that sits visually above, and covers, all of the text in your custom text view. If you don’t assign a value to this property, the coordinator places its own effect view in front of the subviews in your custom view. The default value of this property is `nil`. If you display your view’s text using multiple text containers, implement the “NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsSingleContainerSubrangesOf:in:completion:)“ method to request multiple previews.
-//
-// EffectContainerView calls the underlying EffectContainerView.
 func (x *WritingToolsCoordinator) EffectContainerView() *View {
-	_r := x.inner.EffectContainerView()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectContainerView"))
+	return ViewFromID(_r)
 }
 
 // The view that Writing Tools uses to display visual effects during the text-rewriting process. Writing Tools uses the view in this property to host the visual effects it creates when making interactive changes to your view’s content. These visual effects let people know the state of the text and provide feedback about what’s happening to it. Set this property to a subview that sits visually above, and covers, all of the text in your custom text view. If you don’t assign a value to this property, the coordinator places its own effect view in front of the subviews in your custom view. The default value of this property is `nil`. If you display your view’s text using multiple text containers, implement the “NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsSingleContainerSubrangesOf:in:completion:)“ method to request multiple previews.
-//
-// SetEffectContainerView calls the underlying SetEffectContainerView.
-func (x *WritingToolsCoordinator) SetEffectContainerView(effectContainerView *raw.NSView) {
-	x.inner.SetEffectContainerView(effectContainerView)
+func (x *WritingToolsCoordinator) SetEffectContainerView(effectContainerView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEffectContainerView:"), objref.IDOf(effectContainerView))
 }
 
 // The view that Writing Tools uses to display background decorations such as proofreading marks. Writing Tools uses the view in this property to host proofreading marks and other visual elements that show any suggested changes. Set this property to a subview situated visibly below the text in your custom text view. It's also satisfactory to place this view visually in front of the text. Make sure the size of the view is big enough to cover all of the affected text. If you don’t assign a value to this property, the coordinator places its own decoration view behind the subviews in your custom view. The default value of this property is `nil`. If you display your view’s text using multiple text containers, implement the “NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsSingleContainerSubrangesOf:in:completion:)“ and “NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsDecorationContainerViewFor:in:completion:)“ methods to provide separate decoration views for each container.
-//
-// DecorationContainerView calls the underlying DecorationContainerView.
 func (x *WritingToolsCoordinator) DecorationContainerView() *View {
-	_r := x.inner.DecorationContainerView()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decorationContainerView"))
+	return ViewFromID(_r)
 }
 
 // The view that Writing Tools uses to display background decorations such as proofreading marks. Writing Tools uses the view in this property to host proofreading marks and other visual elements that show any suggested changes. Set this property to a subview situated visibly below the text in your custom text view. It's also satisfactory to place this view visually in front of the text. Make sure the size of the view is big enough to cover all of the affected text. If you don’t assign a value to this property, the coordinator places its own decoration view behind the subviews in your custom view. The default value of this property is `nil`. If you display your view’s text using multiple text containers, implement the “NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsSingleContainerSubrangesOf:in:completion:)“ and “NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:requestsDecorationContainerViewFor:in:completion:)“ methods to provide separate decoration views for each container.
-//
-// SetDecorationContainerView calls the underlying SetDecorationContainerView.
-func (x *WritingToolsCoordinator) SetDecorationContainerView(decorationContainerView *raw.NSView) {
-	x.inner.SetDecorationContainerView(decorationContainerView)
+func (x *WritingToolsCoordinator) SetDecorationContainerView(decorationContainerView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecorationContainerView:"), objref.IDOf(decorationContainerView))
 }
 
 // The current level of Writing Tools activity in your view. Use this property to determine when Writing Tools is actively making changes to your view. During the course of Writing Tools interactions, the system reports state changes to the delegate’s “NSWritingToolsCoordinator/Delegate/writingToolsCoordinator(_:willChangeTo:completion:)“ method and updates this property accordingly.
-//
-// State calls the underlying State.
-func (x *WritingToolsCoordinator) State() NSWritingToolsCoordinatorState {
-	return NSWritingToolsCoordinatorState(x.inner.State())
+func (x *WritingToolsCoordinator) State() WritingToolsCoordinatorState {
+	_r := objc.Send[WritingToolsCoordinatorState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
 }
 
 // The level of Writing Tools support you want the system to provide for your view. Use this property to request an inline or panel-based experience, or to disable Writing Tools for your view altogether. The default value of this property is “NSWritingToolsBehavior/default“.
-//
-// PreferredBehavior calls the underlying PreferredBehavior.
-func (x *WritingToolsCoordinator) PreferredBehavior() NSWritingToolsBehavior {
-	return NSWritingToolsBehavior(x.inner.PreferredBehavior())
+func (x *WritingToolsCoordinator) PreferredBehavior() WritingToolsBehavior {
+	_r := objc.Send[WritingToolsBehavior](objref.IDOf(x), objc.RegisterName("preferredBehavior"))
+	return _r
 }
 
 // The level of Writing Tools support you want the system to provide for your view. Use this property to request an inline or panel-based experience, or to disable Writing Tools for your view altogether. The default value of this property is “NSWritingToolsBehavior/default“.
-//
-// SetPreferredBehavior calls the underlying SetPreferredBehavior.
-func (x *WritingToolsCoordinator) SetPreferredBehavior(preferredBehavior NSWritingToolsBehavior) {
-	x.inner.SetPreferredBehavior(raw.NSWritingToolsBehavior(preferredBehavior))
+func (x *WritingToolsCoordinator) SetPreferredBehavior(preferredBehavior WritingToolsBehavior) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredBehavior:"), preferredBehavior)
 }
 
 // The actual level of Writing Tools support the system provides for your view. The system chooses this value based on the device capabilities, and takes the value in the “preferredBehavior“ property into consideration when making the choice. The value in this property is never the default option, and is instead one of the specific options such as “NSWritingToolsBehavior/none“, “NSWritingToolsBehavior/limited“, or “NSWritingToolsBehavior/complete“.
-//
-// Behavior calls the underlying Behavior.
-func (x *WritingToolsCoordinator) Behavior() NSWritingToolsBehavior {
-	return NSWritingToolsBehavior(x.inner.Behavior())
+func (x *WritingToolsCoordinator) Behavior() WritingToolsBehavior {
+	_r := objc.Send[WritingToolsBehavior](objref.IDOf(x), objc.RegisterName("behavior"))
+	return _r
 }
 
 // The type of content you allow Writing Tools to generate for your custom text view. Writing Tools can create plain text or rich text, and it can format text using lists or tables as needed. If your view doesn’t support specific types of content, specify the types you do support in this property. The default value of this property is “NSWritingToolsResultOptions/default“, which lets the system determine the type of content to generate.
-//
-// PreferredResultOptions calls the underlying PreferredResultOptions.
-func (x *WritingToolsCoordinator) PreferredResultOptions() NSWritingToolsResultOptions {
-	return NSWritingToolsResultOptions(x.inner.PreferredResultOptions())
+func (x *WritingToolsCoordinator) PreferredResultOptions() WritingToolsResultOptions {
+	_r := objc.Send[WritingToolsResultOptions](objref.IDOf(x), objc.RegisterName("preferredResultOptions"))
+	return _r
 }
 
 // The type of content you allow Writing Tools to generate for your custom text view. Writing Tools can create plain text or rich text, and it can format text using lists or tables as needed. If your view doesn’t support specific types of content, specify the types you do support in this property. The default value of this property is “NSWritingToolsResultOptions/default“, which lets the system determine the type of content to generate.
-//
-// SetPreferredResultOptions calls the underlying SetPreferredResultOptions.
-func (x *WritingToolsCoordinator) SetPreferredResultOptions(preferredResultOptions NSWritingToolsResultOptions) {
-	x.inner.SetPreferredResultOptions(raw.NSWritingToolsResultOptions(preferredResultOptions))
+func (x *WritingToolsCoordinator) SetPreferredResultOptions(preferredResultOptions WritingToolsResultOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredResultOptions:"), preferredResultOptions)
 }
 
 // The type of content the system generates for your custom text view. This property contains the set of options that Writing Tools outputs for your view. Writing Tools takes the value in the “NSWritingToolsCoordinator/preferredResultOptions“ property into consideration when determining this value.
-//
-// ResultOptions calls the underlying ResultOptions.
-func (x *WritingToolsCoordinator) ResultOptions() NSWritingToolsResultOptions {
-	return NSWritingToolsResultOptions(x.inner.ResultOptions())
+func (x *WritingToolsCoordinator) ResultOptions() WritingToolsResultOptions {
+	_r := objc.Send[WritingToolsResultOptions](objref.IDOf(x), objc.RegisterName("resultOptions"))
+	return _r
 }
 
-// IncludesTextListMarkers calls the underlying IncludesTextListMarkers.
 func (x *WritingToolsCoordinator) IncludesTextListMarkers() bool {
-	return x.inner.IncludesTextListMarkers()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesTextListMarkers"))
+	return _r
 }
 
-// SetIncludesTextListMarkers calls the underlying SetIncludesTextListMarkers.
 func (x *WritingToolsCoordinator) SetIncludesTextListMarkers(includesTextListMarkers bool) {
-	x.inner.SetIncludesTextListMarkers(includesTextListMarkers)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesTextListMarkers:"), includesTextListMarkers)
 }
 
 // WritingToolsCoordinatorable is the interface implemented by [WritingToolsCoordinator], for mocking and DI.
 type WritingToolsCoordinatorable interface {
-	Unwrap() *raw.NSWritingToolsCoordinator
+	obj.Object
 	WithEffectContainerView(effectContainerView ViewProvider) *WritingToolsCoordinator
 	WithDecorationContainerView(decorationContainerView ViewProvider) *WritingToolsCoordinator
-	WithPreferredBehavior(preferredBehavior NSWritingToolsBehavior) *WritingToolsCoordinator
-	WithPreferredResultOptions(preferredResultOptions NSWritingToolsResultOptions) *WritingToolsCoordinator
+	WithPreferredBehavior(preferredBehavior WritingToolsBehavior) *WritingToolsCoordinator
+	WithPreferredResultOptions(preferredResultOptions WritingToolsResultOptions) *WritingToolsCoordinator
 	WithIncludesTextListMarkers(includesTextListMarkers bool) *WritingToolsCoordinator
 	StopWritingTools()
-	UpdateRangeWithTextReasonForContextWithIdentifier(range_ foundation.NSRange, replacementText *foundation.NSAttributedString, reason NSWritingToolsCoordinatorTextUpdateReason, contextID *foundation.NSUUID)
-	UpdateForReflowedTextInContextWithIdentifier(contextID *foundation.NSUUID)
-	Delegate() raw.NSWritingToolsCoordinatorDelegate
+	UpdateForReflowedTextInContextWithIdentifier(contextID obj.Object)
 	View() *View
 	EffectContainerView() *View
-	SetEffectContainerView(effectContainerView *raw.NSView)
+	SetEffectContainerView(effectContainerView *View)
 	DecorationContainerView() *View
-	SetDecorationContainerView(decorationContainerView *raw.NSView)
-	State() NSWritingToolsCoordinatorState
-	PreferredBehavior() NSWritingToolsBehavior
-	SetPreferredBehavior(preferredBehavior NSWritingToolsBehavior)
-	Behavior() NSWritingToolsBehavior
-	PreferredResultOptions() NSWritingToolsResultOptions
-	SetPreferredResultOptions(preferredResultOptions NSWritingToolsResultOptions)
-	ResultOptions() NSWritingToolsResultOptions
+	SetDecorationContainerView(decorationContainerView *View)
+	State() WritingToolsCoordinatorState
+	PreferredBehavior() WritingToolsBehavior
+	SetPreferredBehavior(preferredBehavior WritingToolsBehavior)
+	Behavior() WritingToolsBehavior
+	PreferredResultOptions() WritingToolsResultOptions
+	SetPreferredResultOptions(preferredResultOptions WritingToolsResultOptions)
+	ResultOptions() WritingToolsResultOptions
 	IncludesTextListMarkers() bool
 	SetIncludesTextListMarkers(includesTextListMarkers bool)
 }

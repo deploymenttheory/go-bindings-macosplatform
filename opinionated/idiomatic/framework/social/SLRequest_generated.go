@@ -5,115 +5,125 @@
 package social
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accounts"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/social"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that you use to assemble an HTTP request for communicating with a social media service.
 //
-// Request wraps [raw.SLRequest] with a fluent Go API.
+// Request is an idiomatic wrapper over the Objective-C class SLRequest.
 type Request struct {
-	inner *raw.SLRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SLRequest].
-func (x *Request) Unwrap() *raw.SLRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Request) ID() objc.ID { return x.inner.Ptr() }
-
-// RequestFromID adopts an existing object pointer as a Request (nil for 0).
+// RequestFromID adopts an existing Objective-C object as a Request
+// (nil for 0), retaining it and registering a release finalizer.
 func RequestFromID(id objc.ID) *Request {
 	if id == 0 {
 		return nil
 	}
-	return &Request{inner: raw.SLRequestFromID(id)}
+	x := &Request{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRequest creates a new [Request].
+// requestAdopt wraps an Objective-C object that this code just created as a
+// Request (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func requestAdopt(id objc.ID) *Request {
+	if id == 0 {
+		return nil
+	}
+	x := &Request{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Request) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Request) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Request) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRequest creates a new Request.
 func NewRequest() *Request {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SLRequest")), objc.RegisterName("new"))
-	return &Request{inner: raw.SLRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SLRequest")), objc.RegisterName("new"))
+	return requestAdopt(_id)
 }
 
 // Account information used to authenticate the request.
 //
-// WithAccount sets the account property and returns the receiver for chaining.
-func (x *Request) WithAccount(account *accounts.ACAccount) *Request {
-	x.inner.SetAccount(account)
+// WithAccount sets account and returns the receiver so calls can be chained.
+func (x *Request) WithAccount(account obj.Object) *Request {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccount:"), objref.IDOf(account))
 	return x
 }
 
 // Specifies a named multipart POST body for this request.
-//
-// AddMultipartDataWithNameTypeFilename calls the underlying AddMultipartDataWithNameTypeFilename.
-func (x *Request) AddMultipartDataWithNameTypeFilename(data *foundation.NSData, name string, type_ string, filename string) {
-	x.inner.AddMultipartDataWithNameTypeFilename(data, foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(type_), foundation.NSStringStringWithUTF8String(filename))
+func (x *Request) AddMultipartDataWithNameTypeFilename(data obj.Object, name string, type_ string, filename string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addMultipartData:withName:type:filename:"), objref.IDOf(data), purego.NSString(name), purego.NSString(type_), purego.NSString(filename))
 }
 
 // Specifies a named multipart POST body for this request.
-//
-// AddMultipartDataWithNameType calls the underlying AddMultipartDataWithNameType.
-func (x *Request) AddMultipartDataWithNameType(data *foundation.NSData, name string, type_ string) {
-	x.inner.AddMultipartDataWithNameType(data, foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(type_))
+func (x *Request) AddMultipartDataWithNameType(data obj.Object, name string, type_ string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addMultipartData:withName:type:"), objref.IDOf(data), purego.NSString(name), purego.NSString(type_))
 }
 
 // Returns an authorized URL request that can be sent using an NSURLConnection object.
-//
-// PreparedURLRequest calls the underlying PreparedURLRequest.
-func (x *Request) PreparedURLRequest() *foundation.NSURLRequest {
-	return x.inner.PreparedURLRequest()
+func (x *Request) PreparedURLRequest() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preparedURLRequest"))
+	return obj.Wrap(_r)
 }
 
-// Performs an asynchronous request and calls the specified handler when done.
-//
-// PerformRequestWithHandler calls the underlying PerformRequestWithHandler.
-func (x *Request) PerformRequestWithHandler(handler func(*foundation.NSData, *foundation.NSHTTPURLResponse, unsafe.Pointer)) {
-	x.inner.PerformRequestWithHandler(handler)
+func (x *Request) Account() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("account"))
+	return obj.Wrap(_r)
 }
 
-// Account calls the underlying Account.
-func (x *Request) Account() *accounts.ACAccount {
-	return x.inner.Account()
+func (x *Request) SetAccount(account obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccount:"), objref.IDOf(account))
 }
 
-// SetAccount calls the underlying SetAccount.
-func (x *Request) SetAccount(account *accounts.ACAccount) {
-	x.inner.SetAccount(account)
+func (x *Request) RequestMethod() RequestMethod {
+	_r := objc.Send[RequestMethod](objref.IDOf(x), objc.RegisterName("requestMethod"))
+	return _r
 }
 
-// RequestMethod calls the underlying RequestMethod.
-func (x *Request) RequestMethod() SLRequestMethod {
-	return SLRequestMethod(x.inner.RequestMethod())
+func (x *Request) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
-// URL calls the underlying URL.
-func (x *Request) URL() *foundation.NSURL {
-	return x.inner.URL()
-}
-
-// Parameters calls the underlying Parameters.
-func (x *Request) Parameters() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.Parameters()
+func (x *Request) Parameters() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameters"))
+	return obj.Wrap(_r)
 }
 
 // Requestable is the interface implemented by [Request], for mocking and DI.
 type Requestable interface {
-	Unwrap() *raw.SLRequest
-	WithAccount(account *accounts.ACAccount) *Request
-	AddMultipartDataWithNameTypeFilename(data *foundation.NSData, name string, type_ string, filename string)
-	AddMultipartDataWithNameType(data *foundation.NSData, name string, type_ string)
-	PreparedURLRequest() *foundation.NSURLRequest
-	PerformRequestWithHandler(handler func(*foundation.NSData, *foundation.NSHTTPURLResponse, unsafe.Pointer))
-	Account() *accounts.ACAccount
-	SetAccount(account *accounts.ACAccount)
-	RequestMethod() SLRequestMethod
-	URL() *foundation.NSURL
-	Parameters() *foundation.NSDictionary[objc.ID, objc.ID]
+	obj.Object
+	WithAccount(account obj.Object) *Request
+	AddMultipartDataWithNameTypeFilename(data obj.Object, name string, type_ string, filename string)
+	AddMultipartDataWithNameType(data obj.Object, name string, type_ string)
+	PreparedURLRequest() obj.Object
+	Account() obj.Object
+	SetAccount(account obj.Object)
+	RequestMethod() RequestMethod
+	URL() obj.Object
+	Parameters() obj.Object
 }
 
 var _ Requestable = (*Request)(nil)

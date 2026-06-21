@@ -5,59 +5,79 @@
 package replaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/replaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that sends messages to the broadcasting app.
 //
-// BroadcastHandler wraps [raw.RPBroadcastHandler] with a fluent Go API.
+// BroadcastHandler is an idiomatic wrapper over the Objective-C class RPBroadcastHandler.
 type BroadcastHandler struct {
-	inner *raw.RPBroadcastHandler
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.RPBroadcastHandler].
-func (x *BroadcastHandler) Unwrap() *raw.RPBroadcastHandler { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BroadcastHandler) ID() objc.ID { return x.inner.Ptr() }
-
-// BroadcastHandlerFromID adopts an existing object pointer as a BroadcastHandler (nil for 0).
+// BroadcastHandlerFromID adopts an existing Objective-C object as a BroadcastHandler
+// (nil for 0), retaining it and registering a release finalizer.
 func BroadcastHandlerFromID(id objc.ID) *BroadcastHandler {
 	if id == 0 {
 		return nil
 	}
-	return &BroadcastHandler{inner: raw.RPBroadcastHandlerFromID(id)}
+	x := &BroadcastHandler{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBroadcastHandler creates a new [BroadcastHandler].
+// broadcastHandlerAdopt wraps an Objective-C object that this code just created as a
+// BroadcastHandler (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func broadcastHandlerAdopt(id objc.ID) *BroadcastHandler {
+	if id == 0 {
+		return nil
+	}
+	x := &BroadcastHandler{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BroadcastHandler) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BroadcastHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BroadcastHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBroadcastHandler creates a new BroadcastHandler.
 func NewBroadcastHandler() *BroadcastHandler {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("RPBroadcastHandler")), objc.RegisterName("new"))
-	return &BroadcastHandler{inner: raw.RPBroadcastHandlerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("RPBroadcastHandler")), objc.RegisterName("new"))
+	return broadcastHandlerAdopt(_id)
 }
 
 // Sends information about the current broadcast to the broadcasting app.
-//
-// UpdateServiceInfo calls the underlying UpdateServiceInfo.
-func (x *BroadcastHandler) UpdateServiceInfo(serviceInfo *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) {
-	x.inner.UpdateServiceInfo(serviceInfo)
+func (x *BroadcastHandler) UpdateServiceInfo(serviceInfo obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateServiceInfo:"), objref.IDOf(serviceInfo))
 }
 
 // Sends the current broadcast URL to the broadcast controller.
-//
-// UpdateBroadcastURL calls the underlying UpdateBroadcastURL.
 func (x *BroadcastHandler) UpdateBroadcastURL(broadcastURL string) {
-	x.inner.UpdateBroadcastURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(broadcastURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateBroadcastURL:"), rt.FileURL(broadcastURL))
 }
-
-func (x *BroadcastHandler) asBroadcastHandler() *raw.RPBroadcastHandler { return x.inner }
 
 // BroadcastHandlerable is the interface implemented by [BroadcastHandler], for mocking and DI.
 type BroadcastHandlerable interface {
-	Unwrap() *raw.RPBroadcastHandler
-	UpdateServiceInfo(serviceInfo *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject])
+	obj.Object
+	UpdateServiceInfo(serviceInfo obj.Object)
 	UpdateBroadcastURL(broadcastURL string)
 }
 

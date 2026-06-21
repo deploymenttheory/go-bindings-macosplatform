@@ -5,57 +5,80 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The result of a request to fetch persistent history.
 //
-// PersistentHistoryResult wraps [raw.NSPersistentHistoryResult] with a fluent Go API.
+// PersistentHistoryResult is an idiomatic wrapper over the Objective-C class NSPersistentHistoryResult.
 type PersistentHistoryResult struct {
-	inner *raw.NSPersistentHistoryResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPersistentHistoryResult].
-func (x *PersistentHistoryResult) Unwrap() *raw.NSPersistentHistoryResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersistentHistoryResult) ID() objc.ID { return x.inner.Ptr() }
-
-// PersistentHistoryResultFromID adopts an existing object pointer as a PersistentHistoryResult (nil for 0).
+// PersistentHistoryResultFromID adopts an existing Objective-C object as a PersistentHistoryResult
+// (nil for 0), retaining it and registering a release finalizer.
 func PersistentHistoryResultFromID(id objc.ID) *PersistentHistoryResult {
 	if id == 0 {
 		return nil
 	}
-	return &PersistentHistoryResult{inner: raw.NSPersistentHistoryResultFromID(id)}
+	x := &PersistentHistoryResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPersistentHistoryResult creates a new [PersistentHistoryResult].
+// persistentHistoryResultAdopt wraps an Objective-C object that this code just created as a
+// PersistentHistoryResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func persistentHistoryResultAdopt(id objc.ID) *PersistentHistoryResult {
+	if id == 0 {
+		return nil
+	}
+	x := &PersistentHistoryResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PersistentHistoryResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PersistentHistoryResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PersistentHistoryResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPersistentHistoryResult creates a new PersistentHistoryResult.
 func NewPersistentHistoryResult() *PersistentHistoryResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentHistoryResult")), objc.RegisterName("new"))
-	return &PersistentHistoryResult{inner: raw.NSPersistentHistoryResultFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryResult")), objc.RegisterName("new"))
+	return persistentHistoryResultAdopt(_id)
 }
 
-// Result calls the underlying Result.
-func (x *PersistentHistoryResult) Result() objc.ID {
-	return x.inner.Result()
+func (x *PersistentHistoryResult) Result() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("result"))
+	return obj.Wrap(_r)
 }
 
-// ResultType calls the underlying ResultType.
-func (x *PersistentHistoryResult) ResultType() NSPersistentHistoryResultType {
-	return NSPersistentHistoryResultType(x.inner.ResultType())
-}
-
-func (x *PersistentHistoryResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
-	return &x.inner.NSPersistentStoreResult
+func (x *PersistentHistoryResult) ResultType() PersistentHistoryResultType {
+	_r := objc.Send[PersistentHistoryResultType](objref.IDOf(x), objc.RegisterName("resultType"))
+	return _r
 }
 
 // PersistentHistoryResultable is the interface implemented by [PersistentHistoryResult], for mocking and DI.
 type PersistentHistoryResultable interface {
-	Unwrap() *raw.NSPersistentHistoryResult
-	Result() objc.ID
-	ResultType() NSPersistentHistoryResultType
+	obj.Object
+	Result() obj.Object
+	ResultType() PersistentHistoryResultType
 }
 
 var _ PersistentHistoryResultable = (*PersistentHistoryResult)(nil)

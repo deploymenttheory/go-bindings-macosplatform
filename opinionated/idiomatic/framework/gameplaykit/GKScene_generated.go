@@ -5,120 +5,108 @@
 package gameplaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A container for associating GameplayKit objects with a SpriteKit scene.
 //
-// Scene wraps [raw.GKScene] with a fluent Go API.
+// Scene is an idiomatic wrapper over the Objective-C class GKScene.
 type Scene struct {
-	inner *raw.GKScene
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKScene].
-func (x *Scene) Unwrap() *raw.GKScene { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Scene) ID() objc.ID { return x.inner.Ptr() }
-
-// SceneFromID adopts an existing object pointer as a Scene (nil for 0).
+// SceneFromID adopts an existing Objective-C object as a Scene
+// (nil for 0), retaining it and registering a release finalizer.
 func SceneFromID(id objc.ID) *Scene {
 	if id == 0 {
 		return nil
 	}
-	return &Scene{inner: raw.GKSceneFromID(id)}
-}
-
-// NewScene creates a new [Scene].
-func NewScene() *Scene {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKScene")), objc.RegisterName("new"))
-	return &Scene{inner: raw.GKSceneFromID(_id)}
-}
-
-// The SpriteKit scene managed by this GKScene object.
-//
-// WithRootNode sets the rootNode property and returns the receiver for chaining.
-func (x *Scene) WithRootNode(rootNode raw.GKSceneRootNodeType) *Scene {
-	x.inner.SetRootNode(rootNode)
+	x := &Scene{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
+// sceneAdopt wraps an Objective-C object that this code just created as a
+// Scene (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sceneAdopt(id objc.ID) *Scene {
+	if id == 0 {
+		return nil
+	}
+	x := &Scene{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Scene) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Scene) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Scene) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScene creates a new Scene.
+func NewScene() *Scene {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKScene")), objc.RegisterName("new"))
+	return sceneAdopt(_id)
+}
+
 // Adds a GameplayKit entity to the list of entities managed by the scene.
-//
-// AddEntity calls the underlying AddEntity.
-func (x *Scene) AddEntity(entity *raw.GKEntity) {
-	x.inner.AddEntity(entity)
+func (x *Scene) AddEntity(entity *Entity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addEntity:"), objref.IDOf(entity))
 }
 
 // Removes a GameplayKit entity from the list of entities managed by the scene.
-//
-// RemoveEntity calls the underlying RemoveEntity.
-func (x *Scene) RemoveEntity(entity *raw.GKEntity) {
-	x.inner.RemoveEntity(entity)
+func (x *Scene) RemoveEntity(entity *Entity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeEntity:"), objref.IDOf(entity))
 }
 
-// Adds a graph to the scene's list of graphs. @param graph the graph to add.
-//
-// AddGraphName calls the underlying AddGraphName.
-func (x *Scene) AddGraphName(graph *raw.GKGraph, name string) {
-	x.inner.AddGraphName(graph, foundation.NSStringStringWithUTF8String(name))
+// Adds a graph to the scene's list of graphs.
+func (x *Scene) AddGraphName(graph *Graph, name string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addGraph:name:"), objref.IDOf(graph), purego.NSString(name))
 }
 
 // Removes a pathfinding graph from the list of graphs managed by the scene.
-//
-// RemoveGraph calls the underlying RemoveGraph.
 func (x *Scene) RemoveGraph(name string) {
-	x.inner.RemoveGraph(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeGraph:"), purego.NSString(name))
 }
 
 // The entities of this scene.
 //
 // Entities returns the collection as a Go slice.
 func (x *Scene) Entities() []*Entity {
-	arr := x.inner.Entities()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Entity {
-		return &Entity{inner: raw.GKEntityFromID(purego.Retain(_id))}
-	})
-}
-
-// The root node for the scene. @see GKSceneRootNodeType
-//
-// RootNode calls the underlying RootNode.
-func (x *Scene) RootNode() raw.GKSceneRootNodeType {
-	return x.inner.RootNode()
-}
-
-// SetRootNode calls the underlying SetRootNode.
-func (x *Scene) SetRootNode(rootNode raw.GKSceneRootNodeType) {
-	x.inner.SetRootNode(rootNode)
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entities"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Entity { return EntityFromID(_id) })
 }
 
 // The navigational graphs of this scene.
-//
-// Graphs calls the underlying Graphs.
-func (x *Scene) Graphs() *foundation.NSDictionary[*foundation.NSString, *raw.GKGraph] {
-	return x.inner.Graphs()
+func (x *Scene) Graphs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("graphs"))
+	return obj.Wrap(_r)
 }
 
 // Sceneable is the interface implemented by [Scene], for mocking and DI.
 type Sceneable interface {
-	Unwrap() *raw.GKScene
-	WithRootNode(rootNode raw.GKSceneRootNodeType) *Scene
-	AddEntity(entity *raw.GKEntity)
-	RemoveEntity(entity *raw.GKEntity)
-	AddGraphName(graph *raw.GKGraph, name string)
+	obj.Object
+	AddEntity(entity *Entity)
+	RemoveEntity(entity *Entity)
+	AddGraphName(graph *Graph, name string)
 	RemoveGraph(name string)
 	Entities() []*Entity
-	RootNode() raw.GKSceneRootNodeType
-	SetRootNode(rootNode raw.GKSceneRootNodeType)
-	Graphs() *foundation.NSDictionary[*foundation.NSString, *raw.GKGraph]
+	Graphs() obj.Object
 }
 
 var _ Sceneable = (*Scene)(nil)

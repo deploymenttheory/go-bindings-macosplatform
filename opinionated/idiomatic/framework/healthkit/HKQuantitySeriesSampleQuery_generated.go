@@ -5,97 +5,104 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A query that accesses the series data associated with a quantity sample.
 //
-// QuantitySeriesSampleQuery wraps [raw.HKQuantitySeriesSampleQuery] with a fluent Go API.
+// QuantitySeriesSampleQuery is an idiomatic wrapper over the Objective-C class HKQuantitySeriesSampleQuery.
 type QuantitySeriesSampleQuery struct {
-	inner *raw.HKQuantitySeriesSampleQuery
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKQuantitySeriesSampleQuery].
-func (x *QuantitySeriesSampleQuery) Unwrap() *raw.HKQuantitySeriesSampleQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QuantitySeriesSampleQuery) ID() objc.ID { return x.inner.Ptr() }
-
-// QuantitySeriesSampleQueryFromID adopts an existing object pointer as a QuantitySeriesSampleQuery (nil for 0).
+// QuantitySeriesSampleQueryFromID adopts an existing Objective-C object as a QuantitySeriesSampleQuery
+// (nil for 0), retaining it and registering a release finalizer.
 func QuantitySeriesSampleQueryFromID(id objc.ID) *QuantitySeriesSampleQuery {
 	if id == 0 {
 		return nil
 	}
-	return &QuantitySeriesSampleQuery{inner: raw.HKQuantitySeriesSampleQueryFromID(id)}
+	x := &QuantitySeriesSampleQuery{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a new query for a series of the specified quantity type.
-//
-// NewQuantitySeriesSampleQueryWithQuantityTypePredicateQuantityHandler creates a new [QuantitySeriesSampleQuery].
-func NewQuantitySeriesSampleQueryWithQuantityTypePredicateQuantityHandler(quantityType *raw.HKQuantityType, predicate *foundation.NSPredicate, quantityHandler func(*raw.HKQuantitySeriesSampleQuery, *raw.HKQuantity, *foundation.NSDateInterval, *raw.HKQuantitySample, bool, unsafe.Pointer)) *QuantitySeriesSampleQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKQuantitySeriesSampleQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQuantityType:predicate:quantityHandler:"), quantityType.Ptr(), predicate.Ptr(), quantityHandler)
-	return &QuantitySeriesSampleQuery{inner: raw.HKQuantitySeriesSampleQueryFromID(_id)}
+// quantitySeriesSampleQueryAdopt wraps an Objective-C object that this code just created as a
+// QuantitySeriesSampleQuery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func quantitySeriesSampleQueryAdopt(id objc.ID) *QuantitySeriesSampleQuery {
+	if id == 0 {
+		return nil
+	}
+	x := &QuantitySeriesSampleQuery{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Creates a new series query.
-//
-// NewQuantitySeriesSampleQueryWithSampleQuantityHandler creates a new [QuantitySeriesSampleQuery].
-func NewQuantitySeriesSampleQueryWithSampleQuantityHandler(quantitySample *raw.HKQuantitySample, quantityHandler func(*raw.HKQuantitySeriesSampleQuery, *raw.HKQuantity, *foundation.NSDate, bool, unsafe.Pointer)) *QuantitySeriesSampleQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKQuantitySeriesSampleQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSample:quantityHandler:"), quantitySample.Ptr(), quantityHandler)
-	return &QuantitySeriesSampleQuery{inner: raw.HKQuantitySeriesSampleQueryFromID(_id)}
+// Description returns the object's -description text.
+func (x *QuantitySeriesSampleQuery) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QuantitySeriesSampleQuery) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QuantitySeriesSampleQuery) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewQuantitySeriesSampleQuery creates a new QuantitySeriesSampleQuery.
+func NewQuantitySeriesSampleQuery() *QuantitySeriesSampleQuery {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKQuantitySeriesSampleQuery")), objc.RegisterName("new"))
+	return quantitySeriesSampleQueryAdopt(_id)
 }
 
 // A Boolean value that determines whether the query should return the series sample.
 //
-// WithIncludeSample sets the includeSample property and returns the receiver for chaining.
+// WithIncludeSample sets includeSample and returns the receiver so calls can be chained.
 func (x *QuantitySeriesSampleQuery) WithIncludeSample(includeSample bool) *QuantitySeriesSampleQuery {
-	x.inner.SetIncludeSample(includeSample)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeSample:"), includeSample)
 	return x
 }
 
 // A Boolean value that determines whether the query groups the results based on the quantity sample’s start date.
 //
-// WithOrderByQuantitySampleStartDate sets the orderByQuantitySampleStartDate property and returns the receiver for chaining.
+// WithOrderByQuantitySampleStartDate sets orderByQuantitySampleStartDate and returns the receiver so calls can be chained.
 func (x *QuantitySeriesSampleQuery) WithOrderByQuantitySampleStartDate(orderByQuantitySampleStartDate bool) *QuantitySeriesSampleQuery {
-	x.inner.SetOrderByQuantitySampleStartDate(orderByQuantitySampleStartDate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderByQuantitySampleStartDate:"), orderByQuantitySampleStartDate)
 	return x
 }
 
-// @property      includeSample @abstract      Include owning HKQuantitySample in quantityHandler handler. @discussion    Default value is NO. If includeSample is set then the quantitySample parameter of quantityHandler will be non-nil anytime the quantity parameter is non-nil. Specifying this option has a performance cost. This property may not be modified once the query has been executed.
-//
-// IncludeSample calls the underlying IncludeSample.
+// Include owning HKQuantitySample in quantityHandler handler. Default value is NO. If includeSample is set then the quantitySample parameter of quantityHandler will be non-nil anytime the quantity parameter is non-nil. Specifying this option has a performance cost. This property may not be modified once the query has been executed.
 func (x *QuantitySeriesSampleQuery) IncludeSample() bool {
-	return x.inner.IncludeSample()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeSample"))
+	return _r
 }
 
-// SetIncludeSample calls the underlying SetIncludeSample.
 func (x *QuantitySeriesSampleQuery) SetIncludeSample(includeSample bool) {
-	x.inner.SetIncludeSample(includeSample)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeSample:"), includeSample)
 }
 
-// @property      orderByQuantitySampleStartDate @abstract      Order enumerated results first by quantitySample.startDate, then by the quantity's dateInterval.startDate. @discussion    Default value is NO. All quantities owned by a given quantitySample will be enumerated before any quantities owned by any other quantity sample, and the quantity samples will be enumerated in their startDate order. Note that individual quantities may not be returned in their dateInterval.startDate order if more than one quantitySample overlap in time. This property may not be modified once the query has been executed.
-//
-// OrderByQuantitySampleStartDate calls the underlying OrderByQuantitySampleStartDate.
+// Order enumerated results first by quantitySample.startDate, then by the quantity's dateInterval.startDate. Default value is NO. All quantities owned by a given quantitySample will be enumerated before any quantities owned by any other quantity sample, and the quantity samples will be enumerated in their startDate order. Note that individual quantities may not be returned in their dateInterval.startDate order if more than one quantitySample overlap in time. This property may not be modified once the query has been executed.
 func (x *QuantitySeriesSampleQuery) OrderByQuantitySampleStartDate() bool {
-	return x.inner.OrderByQuantitySampleStartDate()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("orderByQuantitySampleStartDate"))
+	return _r
 }
 
-// SetOrderByQuantitySampleStartDate calls the underlying SetOrderByQuantitySampleStartDate.
 func (x *QuantitySeriesSampleQuery) SetOrderByQuantitySampleStartDate(orderByQuantitySampleStartDate bool) {
-	x.inner.SetOrderByQuantitySampleStartDate(orderByQuantitySampleStartDate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderByQuantitySampleStartDate:"), orderByQuantitySampleStartDate)
 }
-
-func (x *QuantitySeriesSampleQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
 
 // QuantitySeriesSampleQueryable is the interface implemented by [QuantitySeriesSampleQuery], for mocking and DI.
 type QuantitySeriesSampleQueryable interface {
-	Unwrap() *raw.HKQuantitySeriesSampleQuery
+	obj.Object
 	WithIncludeSample(includeSample bool) *QuantitySeriesSampleQuery
 	WithOrderByQuantitySampleStartDate(orderByQuantitySampleStartDate bool) *QuantitySeriesSampleQuery
 	IncludeSample() bool

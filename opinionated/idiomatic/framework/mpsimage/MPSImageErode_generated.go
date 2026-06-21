@@ -5,74 +5,66 @@
 package mpsimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ImageErode wraps [raw.MPSImageErode] with a fluent Go API.
+// ImageErode is an idiomatic wrapper over the Objective-C class MPSImageErode.
 type ImageErode struct {
-	inner *raw.MPSImageErode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageErode].
-func (x *ImageErode) Unwrap() *raw.MPSImageErode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageErode) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageErodeFromID adopts an existing object pointer as a ImageErode (nil for 0).
+// ImageErodeFromID adopts an existing Objective-C object as a ImageErode
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageErodeFromID(id objc.ID) *ImageErode {
 	if id == 0 {
 		return nil
 	}
-	return &ImageErode{inner: raw.MPSImageErodeFromID(id)}
+	x := &ImageErode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewImageErode creates a new [ImageErode].
+// imageErodeAdopt wraps an Objective-C object that this code just created as a
+// ImageErode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageErodeAdopt(id objc.ID) *ImageErode {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageErode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ImageErode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageErode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageErode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageErode creates a new ImageErode.
 func NewImageErode() *ImageErode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageErode")), objc.RegisterName("new"))
-	return &ImageErode{inner: raw.MPSImageErodeFromID(_id)}
-}
-
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageErode) WithOffset(offset mpscore.MPSOffset) *ImageErode {
-	x.inner.MPSImageDilate.MPSUnaryImageKernel.SetOffset(offset)
-	return x
-}
-
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageErode) WithClipRect(clipRect metal.MTLRegion) *ImageErode {
-	x.inner.MPSImageDilate.MPSUnaryImageKernel.SetClipRect(clipRect)
-	return x
-}
-
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageErode) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageErode {
-	x.inner.MPSImageDilate.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-func (x *ImageErode) asImageDilate() *raw.MPSImageDilate { return &x.inner.MPSImageDilate }
-
-func (x *ImageErode) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
-	return &x.inner.MPSImageDilate.MPSUnaryImageKernel
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageErode")), objc.RegisterName("new"))
+	return imageErodeAdopt(_id)
 }
 
 // ImageErodeable is the interface implemented by [ImageErode], for mocking and DI.
 type ImageErodeable interface {
-	Unwrap() *raw.MPSImageErode
-	WithOffset(offset mpscore.MPSOffset) *ImageErode
-	WithClipRect(clipRect metal.MTLRegion) *ImageErode
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageErode
+	obj.Object
 }
 
 var _ ImageErodeable = (*ImageErode)(nil)

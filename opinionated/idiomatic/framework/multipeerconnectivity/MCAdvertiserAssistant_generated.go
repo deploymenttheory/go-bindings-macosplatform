@@ -5,108 +5,103 @@
 package multipeerconnectivity
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/multipeerconnectivity"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The MCAdvertiserAssistant is a convenience class that handles advertising, presents incoming invitations to the user, and handles users’ responses. Use this class to provide a user interface for handling invitations when your app does not require programmatic control over the invitation process.
 //
-// AdvertiserAssistant wraps [raw.MCAdvertiserAssistant] with a fluent Go API.
+// AdvertiserAssistant is an idiomatic wrapper over the Objective-C class MCAdvertiserAssistant.
 type AdvertiserAssistant struct {
-	inner *raw.MCAdvertiserAssistant
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MCAdvertiserAssistant].
-func (x *AdvertiserAssistant) Unwrap() *raw.MCAdvertiserAssistant { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AdvertiserAssistant) ID() objc.ID { return x.inner.Ptr() }
-
-// AdvertiserAssistantFromID adopts an existing object pointer as a AdvertiserAssistant (nil for 0).
+// AdvertiserAssistantFromID adopts an existing Objective-C object as a AdvertiserAssistant
+// (nil for 0), retaining it and registering a release finalizer.
 func AdvertiserAssistantFromID(id objc.ID) *AdvertiserAssistant {
 	if id == 0 {
 		return nil
 	}
-	return &AdvertiserAssistant{inner: raw.MCAdvertiserAssistantFromID(id)}
+	x := &AdvertiserAssistant{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// advertiserAssistantAdopt wraps an Objective-C object that this code just created as a
+// AdvertiserAssistant (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func advertiserAssistantAdopt(id objc.ID) *AdvertiserAssistant {
+	if id == 0 {
+		return nil
+	}
+	x := &AdvertiserAssistant{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AdvertiserAssistant) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AdvertiserAssistant) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AdvertiserAssistant) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes an advertiser assistant object.
 //
-// NewAdvertiserAssistantWithServiceTypeDiscoveryInfoSession creates a new [AdvertiserAssistant].
-func NewAdvertiserAssistantWithServiceTypeDiscoveryInfoSession(serviceType string, info purego.IDer, session *raw.MCSession) *AdvertiserAssistant {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MCAdvertiserAssistant")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceType:discoveryInfo:session:"), foundation.NSStringStringWithUTF8String(serviceType).Ptr(), info.ID(), session.Ptr())
-	return &AdvertiserAssistant{inner: raw.MCAdvertiserAssistantFromID(_id)}
-}
-
-// The delegate object that handles advertising-assistant-related events.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *AdvertiserAssistant) WithDelegate(delegate raw.MCAdvertiserAssistantDelegate) *AdvertiserAssistant {
-	x.inner.SetDelegate(delegate)
-	return x
+// NewAdvertiserAssistantWithServiceTypeDiscoveryInfoSession creates a new AdvertiserAssistant.
+func NewAdvertiserAssistantWithServiceTypeDiscoveryInfoSession(serviceType string, info obj.Object, session *Session) *AdvertiserAssistant {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MCAdvertiserAssistant")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceType:discoveryInfo:session:"), purego.NSString(serviceType), objref.IDOf(info), objref.IDOf(session))
+	return advertiserAssistantAdopt(_id)
 }
 
 // Begins advertising the service provided by a local peer and starts the assistant.
-//
-// Start calls the underlying Start.
 func (x *AdvertiserAssistant) Start() {
-	x.inner.Start()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
 }
 
 // Stops advertising the service provided by a local peer and stops the assistant.
-//
-// Stop calls the underlying Stop.
 func (x *AdvertiserAssistant) Stop() {
-	x.inner.Stop()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *AdvertiserAssistant) Delegate() raw.MCAdvertiserAssistantDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *AdvertiserAssistant) SetDelegate(delegate raw.MCAdvertiserAssistantDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// Session calls the underlying Session.
 func (x *AdvertiserAssistant) Session() *Session {
-	_r := x.inner.Session()
-	if _r == nil {
-		return nil
-	}
-	return &Session{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("session"))
+	return SessionFromID(_r)
 }
 
-// DiscoveryInfo calls the underlying DiscoveryInfo.
-func (x *AdvertiserAssistant) DiscoveryInfo() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString] {
-	return x.inner.DiscoveryInfo()
+func (x *AdvertiserAssistant) DiscoveryInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discoveryInfo"))
+	return obj.Wrap(_r)
 }
 
-// ServiceType calls the underlying ServiceType.
 func (x *AdvertiserAssistant) ServiceType() string {
-	_r := x.inner.ServiceType()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceType"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // AdvertiserAssistantable is the interface implemented by [AdvertiserAssistant], for mocking and DI.
 type AdvertiserAssistantable interface {
-	Unwrap() *raw.MCAdvertiserAssistant
-	WithDelegate(delegate raw.MCAdvertiserAssistantDelegate) *AdvertiserAssistant
+	obj.Object
 	Start()
 	Stop()
-	Delegate() raw.MCAdvertiserAssistantDelegate
-	SetDelegate(delegate raw.MCAdvertiserAssistantDelegate)
 	Session() *Session
-	DiscoveryInfo() *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]
+	DiscoveryInfo() obj.Object
 	ServiceType() string
 }
 

@@ -5,80 +5,80 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An audio stream you manage to provide a sound buffer data.
 //
-// PushStreamNode wraps [raw.PHASEPushStreamNode] with a fluent Go API.
+// PushStreamNode is an idiomatic wrapper over the Objective-C class PHASEPushStreamNode.
 type PushStreamNode struct {
-	inner *raw.PHASEPushStreamNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEPushStreamNode].
-func (x *PushStreamNode) Unwrap() *raw.PHASEPushStreamNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PushStreamNode) ID() objc.ID { return x.inner.Ptr() }
-
-// PushStreamNodeFromID adopts an existing object pointer as a PushStreamNode (nil for 0).
+// PushStreamNodeFromID adopts an existing Objective-C object as a PushStreamNode
+// (nil for 0), retaining it and registering a release finalizer.
 func PushStreamNodeFromID(id objc.ID) *PushStreamNode {
 	if id == 0 {
 		return nil
 	}
-	return &PushStreamNode{inner: raw.PHASEPushStreamNodeFromID(id)}
+	x := &PushStreamNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPushStreamNode creates a new [PushStreamNode].
+// pushStreamNodeAdopt wraps an Objective-C object that this code just created as a
+// PushStreamNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pushStreamNodeAdopt(id objc.ID) *PushStreamNode {
+	if id == 0 {
+		return nil
+	}
+	x := &PushStreamNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PushStreamNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PushStreamNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PushStreamNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPushStreamNode creates a new PushStreamNode.
 func NewPushStreamNode() *PushStreamNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEPushStreamNode")), objc.RegisterName("new"))
-	return &PushStreamNode{inner: raw.PHASEPushStreamNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHASEPushStreamNode")), objc.RegisterName("new"))
+	return pushStreamNodeAdopt(_id)
 }
 
 // Schedules audio data for playback.
-//
-// ScheduleBuffer calls the underlying ScheduleBuffer.
-func (x *PushStreamNode) ScheduleBuffer(buffer *avfaudio.AVAudioPCMBuffer) {
-	x.inner.ScheduleBuffer(buffer)
-}
-
-// Schedules audio data playback with a completion handler.
-//
-// ScheduleBufferCompletionCallbackTypeCompletionHandler calls the underlying ScheduleBufferCompletionCallbackTypeCompletionHandler.
-func (x *PushStreamNode) ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, completionCallbackType PHASEPushStreamCompletionCallbackCondition, completionHandler func(PHASEPushStreamCompletionCallbackCondition)) {
-	x.inner.ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer, raw.PHASEPushStreamCompletionCallbackCondition(completionCallbackType), func(_a0 raw.PHASEPushStreamCompletionCallbackCondition) {
-		completionHandler(PHASEPushStreamCompletionCallbackCondition(_a0))
-	})
+func (x *PushStreamNode) ScheduleBuffer(buffer obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleBuffer:"), objref.IDOf(buffer))
 }
 
 // Schedules audio data playback at a specific time.
-//
-// ScheduleBufferAtTimeOptions calls the underlying ScheduleBufferAtTimeOptions.
-func (x *PushStreamNode) ScheduleBufferAtTimeOptions(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options PHASEPushStreamBufferOptions) {
-	x.inner.ScheduleBufferAtTimeOptions(buffer, when, raw.PHASEPushStreamBufferOptions(options))
+func (x *PushStreamNode) ScheduleBufferAtTimeOptions(buffer obj.Object, when obj.Object, options PushStreamBufferOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleBuffer:atTime:options:"), objref.IDOf(buffer), objref.IDOf(when), options)
 }
-
-// Schedules audio data playback at a specific time with a completion handler.
-//
-// ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler calls the underlying ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler.
-func (x *PushStreamNode) ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options PHASEPushStreamBufferOptions, completionCallbackType PHASEPushStreamCompletionCallbackCondition, completionHandler func(PHASEPushStreamCompletionCallbackCondition)) {
-	x.inner.ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer, when, raw.PHASEPushStreamBufferOptions(options), raw.PHASEPushStreamCompletionCallbackCondition(completionCallbackType), func(_a0 raw.PHASEPushStreamCompletionCallbackCondition) {
-		completionHandler(PHASEPushStreamCompletionCallbackCondition(_a0))
-	})
-}
-
-func (x *PushStreamNode) asStreamNode() *raw.PHASEStreamNode { return &x.inner.PHASEStreamNode }
 
 // PushStreamNodeable is the interface implemented by [PushStreamNode], for mocking and DI.
 type PushStreamNodeable interface {
-	Unwrap() *raw.PHASEPushStreamNode
-	ScheduleBuffer(buffer *avfaudio.AVAudioPCMBuffer)
-	ScheduleBufferCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, completionCallbackType PHASEPushStreamCompletionCallbackCondition, completionHandler func(PHASEPushStreamCompletionCallbackCondition))
-	ScheduleBufferAtTimeOptions(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options PHASEPushStreamBufferOptions)
-	ScheduleBufferAtTimeOptionsCompletionCallbackTypeCompletionHandler(buffer *avfaudio.AVAudioPCMBuffer, when *avfaudio.AVAudioTime, options PHASEPushStreamBufferOptions, completionCallbackType PHASEPushStreamCompletionCallbackCondition, completionHandler func(PHASEPushStreamCompletionCallbackCondition))
+	obj.Object
+	ScheduleBuffer(buffer obj.Object)
+	ScheduleBufferAtTimeOptions(buffer obj.Object, when obj.Object, options PushStreamBufferOptions)
 }
 
 var _ PushStreamNodeable = (*PushStreamNode)(nil)

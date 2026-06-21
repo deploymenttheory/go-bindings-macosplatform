@@ -5,207 +5,178 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that accesses and manages resource data indicated by a URL.
 //
-// URLHandle wraps [raw.NSURLHandle] with a fluent Go API.
+// URLHandle is an idiomatic wrapper over the Objective-C class NSURLHandle.
 type URLHandle struct {
-	inner *raw.NSURLHandle
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSURLHandle].
-func (x *URLHandle) Unwrap() *raw.NSURLHandle { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *URLHandle) ID() objc.ID { return x.inner.Ptr() }
-
-// URLHandleFromID adopts an existing object pointer as a URLHandle (nil for 0).
+// URLHandleFromID adopts an existing Objective-C object as a URLHandle
+// (nil for 0), retaining it and registering a release finalizer.
 func URLHandleFromID(id objc.ID) *URLHandle {
 	if id == 0 {
 		return nil
 	}
-	return &URLHandle{inner: raw.NSURLHandleFromID(id)}
+	x := &URLHandle{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// uRLHandleAdopt wraps an Objective-C object that this code just created as a
+// URLHandle (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uRLHandleAdopt(id objc.ID) *URLHandle {
+	if id == 0 {
+		return nil
+	}
+	x := &URLHandle{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *URLHandle) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *URLHandle) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *URLHandle) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a newly created URL handle with the specified URL.
 //
-// NewURLHandleWithURLCached creates a new [URLHandle].
+// NewURLHandleWithURLCached creates a new URLHandle.
 func NewURLHandleWithURLCached(anURL string, willCache bool) *URLHandle {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLHandle")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:cached:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(anURL)).Ptr(), willCache)
-	return &URLHandle{inner: raw.NSURLHandleFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLHandle")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:cached:"), rt.FileURL(anURL), willCache)
+	return uRLHandleAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *URLHandle) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLHandle {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *URLHandle) WithScriptingProperties(scriptingProperties obj.Object) *URLHandle {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Returns the status of the receiver.
-//
-// Status calls the underlying Status.
-func (x *URLHandle) Status() NSURLHandleStatus {
-	return NSURLHandleStatus(x.inner.Status())
+func (x *URLHandle) Status() URLHandleStatus {
+	_r := objc.Send[URLHandleStatus](objref.IDOf(x), objc.RegisterName("status"))
+	return _r
 }
 
 // Returns a string describing the reason a load failed.
-//
-// FailureReason calls the underlying FailureReason.
-func (x *URLHandle) FailureReason() *String {
-	_r := x.inner.FailureReason()
-	if _r == nil {
-		return nil
+func (x *URLHandle) FailureReason() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("failureReason"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
-}
-
-// Adds a client of the URL handle.
-//
-// AddClient calls the underlying AddClient.
-func (x *URLHandle) AddClient(client raw.NSURLHandleClient) {
-	x.inner.AddClient(client)
-}
-
-// Removes client as an NSURLHandleClient of the receiver.
-//
-// RemoveClient calls the underlying RemoveClient.
-func (x *URLHandle) RemoveClient(client raw.NSURLHandleClient) {
-	x.inner.RemoveClient(client)
+	return purego.GoString(_r)
 }
 
 // Loads the receiver’s data in the background.
-//
-// LoadInBackground calls the underlying LoadInBackground.
 func (x *URLHandle) LoadInBackground() {
-	x.inner.LoadInBackground()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadInBackground"))
 }
 
 // Called to cancel a load currently in progress.
-//
-// CancelLoadInBackground calls the underlying CancelLoadInBackground.
 func (x *URLHandle) CancelLoadInBackground() {
-	x.inner.CancelLoadInBackground()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelLoadInBackground"))
 }
 
 // Returns the resource data managed by the receiver, loading it if necessary.
-//
-// ResourceData calls the underlying ResourceData.
 func (x *URLHandle) ResourceData() *Data {
-	_r := x.inner.ResourceData()
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resourceData"))
+	return DataFromID(_r)
 }
 
 // Immediately returns the currently available resource data managed by the URL handle.
-//
-// AvailableResourceData calls the underlying AvailableResourceData.
 func (x *URLHandle) AvailableResourceData() *Data {
-	_r := x.inner.AvailableResourceData()
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableResourceData"))
+	return DataFromID(_r)
 }
 
 // Returns the expected length of the resource data if it is provided by the server.
-//
-// ExpectedResourceDataSize calls the underlying ExpectedResourceDataSize.
 func (x *URLHandle) ExpectedResourceDataSize() int64 {
-	return x.inner.ExpectedResourceDataSize()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("expectedResourceDataSize"))
+	return _r
 }
 
 // Flushes any cached data for the URL served by this URL handle.
-//
-// FlushCachedData calls the underlying FlushCachedData.
 func (x *URLHandle) FlushCachedData() {
-	x.inner.FlushCachedData()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flushCachedData"))
 }
 
 // Called when a background load fails.
-//
-// BackgroundLoadDidFailWithReason calls the underlying BackgroundLoadDidFailWithReason.
 func (x *URLHandle) BackgroundLoadDidFailWithReason(reason string) {
-	x.inner.BackgroundLoadDidFailWithReason(foundation.NSStringStringWithUTF8String(reason))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundLoadDidFailWithReason:"), purego.NSString(reason))
 }
 
 // Appends new data to the receiver’s resource data.
-//
-// DidLoadBytesLoadComplete calls the underlying DidLoadBytesLoadComplete.
-func (x *URLHandle) DidLoadBytesLoadComplete(newBytes *raw.NSData, yorn bool) {
-	x.inner.DidLoadBytesLoadComplete(newBytes, yorn)
+func (x *URLHandle) DidLoadBytesLoadComplete(newBytes *Data, yorn bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didLoadBytes:loadComplete:"), objref.IDOf(newBytes), yorn)
 }
 
 // Returns the property for the specified key.
-//
-// PropertyForKey calls the underlying PropertyForKey.
-func (x *URLHandle) PropertyForKey(propertyKey string) objc.ID {
-	return x.inner.PropertyForKey(foundation.NSStringStringWithUTF8String(propertyKey))
+func (x *URLHandle) PropertyForKey(propertyKey string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyForKey:"), purego.NSString(propertyKey))
+	return obj.Wrap(_r)
 }
 
 // Returns the property for the specified key only if the value is already available; that is, the client doesn’t need to do any work.
-//
-// PropertyForKeyIfAvailable calls the underlying PropertyForKeyIfAvailable.
-func (x *URLHandle) PropertyForKeyIfAvailable(propertyKey string) objc.ID {
-	return x.inner.PropertyForKeyIfAvailable(foundation.NSStringStringWithUTF8String(propertyKey))
+func (x *URLHandle) PropertyForKeyIfAvailable(propertyKey string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyForKeyIfAvailable:"), purego.NSString(propertyKey))
+	return obj.Wrap(_r)
 }
 
 // Sets the property of the receiver’s resource for a specified key to the specified value.
-//
-// WritePropertyForKey calls the underlying WritePropertyForKey.
-func (x *URLHandle) WritePropertyForKey(propertyValue objc.ID, propertyKey string) bool {
-	return x.inner.WritePropertyForKey(propertyValue, foundation.NSStringStringWithUTF8String(propertyKey))
+func (x *URLHandle) WritePropertyForKey(propertyValue obj.Object, propertyKey string) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeProperty:forKey:"), objref.IDOf(propertyValue), purego.NSString(propertyKey))
+	return _r
 }
 
 // Attempts to write a specified set of data to the location specified by the receiver’s URL.
-//
-// WriteData calls the underlying WriteData.
-func (x *URLHandle) WriteData(data *raw.NSData) bool {
-	return x.inner.WriteData(data)
+func (x *URLHandle) WriteData(data *Data) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeData:"), objref.IDOf(data))
+	return _r
 }
 
 // Loads the receiver’s data synchronously.
-//
-// LoadInForeground calls the underlying LoadInForeground.
 func (x *URLHandle) LoadInForeground() *Data {
-	_r := x.inner.LoadInForeground()
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadInForeground"))
+	return DataFromID(_r)
 }
 
 // Called when a background load begins.
-//
-// BeginLoadInBackground calls the underlying BeginLoadInBackground.
 func (x *URLHandle) BeginLoadInBackground() {
-	x.inner.BeginLoadInBackground()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginLoadInBackground"))
 }
 
 // Halts any background loading.
-//
-// EndLoadInBackground calls the underlying EndLoadInBackground.
 func (x *URLHandle) EndLoadInBackground() {
-	x.inner.EndLoadInBackground()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endLoadInBackground"))
 }
-
-func (x *URLHandle) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // URLHandleable is the interface implemented by [URLHandle], for mocking and DI.
 type URLHandleable interface {
-	Unwrap() *raw.NSURLHandle
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLHandle
-	Status() NSURLHandleStatus
-	FailureReason() *String
-	AddClient(client raw.NSURLHandleClient)
-	RemoveClient(client raw.NSURLHandleClient)
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *URLHandle
+	Status() URLHandleStatus
+	FailureReason() string
 	LoadInBackground()
 	CancelLoadInBackground()
 	ResourceData() *Data
@@ -213,11 +184,11 @@ type URLHandleable interface {
 	ExpectedResourceDataSize() int64
 	FlushCachedData()
 	BackgroundLoadDidFailWithReason(reason string)
-	DidLoadBytesLoadComplete(newBytes *raw.NSData, yorn bool)
-	PropertyForKey(propertyKey string) objc.ID
-	PropertyForKeyIfAvailable(propertyKey string) objc.ID
-	WritePropertyForKey(propertyValue objc.ID, propertyKey string) bool
-	WriteData(data *raw.NSData) bool
+	DidLoadBytesLoadComplete(newBytes *Data, yorn bool)
+	PropertyForKey(propertyKey string) obj.Object
+	PropertyForKeyIfAvailable(propertyKey string) obj.Object
+	WritePropertyForKey(propertyValue obj.Object, propertyKey string) bool
+	WriteData(data *Data) bool
 	LoadInForeground() *Data
 	BeginLoadInBackground()
 	EndLoadInBackground()

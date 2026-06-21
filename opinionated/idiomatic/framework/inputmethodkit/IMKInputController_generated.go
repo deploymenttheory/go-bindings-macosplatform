@@ -5,186 +5,147 @@
 package inputmethodkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/inputmethodkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The IMKInputController class provides a base class for custom input controller classes. The IMKServer class, which is allocated in the main function of an input method, creates an input controller object for each input session created by a client application. For every input session there is a corresponding IMKInputController object.
 //
-// InputController wraps [raw.IMKInputController] with a fluent Go API.
+// InputController is an idiomatic wrapper over the Objective-C class IMKInputController.
 type InputController struct {
-	inner *raw.IMKInputController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IMKInputController].
-func (x *InputController) Unwrap() *raw.IMKInputController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *InputController) ID() objc.ID { return x.inner.Ptr() }
-
-// InputControllerFromID adopts an existing object pointer as a InputController (nil for 0).
+// InputControllerFromID adopts an existing Objective-C object as a InputController
+// (nil for 0), retaining it and registering a release finalizer.
 func InputControllerFromID(id objc.ID) *InputController {
 	if id == 0 {
 		return nil
 	}
-	return &InputController{inner: raw.IMKInputControllerFromID(id)}
+	x := &InputController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// inputControllerAdopt wraps an Objective-C object that this code just created as a
+// InputController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func inputControllerAdopt(id objc.ID) *InputController {
+	if id == 0 {
+		return nil
+	}
+	x := &InputController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *InputController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *InputController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *InputController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes the input control by setting the delegate.
 //
-// NewInputControllerWithServerDelegateClient creates a new [InputController].
-func NewInputControllerWithServerDelegateClient(server *raw.IMKServer, delegate objc.ID, inputClient objc.ID) *InputController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IMKInputController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServer:delegate:client:"), server.Ptr(), delegate, inputClient)
-	return &InputController{inner: raw.IMKInputControllerFromID(_id)}
+// NewInputControllerWithServerDelegateClient creates a new InputController.
+func NewInputControllerWithServerDelegateClient(server *Server, delegate obj.Object, inputClient obj.Object) *InputController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("IMKInputController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServer:delegate:client:"), objref.IDOf(server), objref.IDOf(delegate), objref.IDOf(inputClient))
+	return inputControllerAdopt(_id)
 }
 
 // Informs the input controller that the composition has changed.
-//
-// UpdateComposition calls the underlying UpdateComposition.
 func (x *InputController) UpdateComposition() {
-	x.inner.UpdateComposition()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateComposition"))
 }
 
 // Stops the current composition and replaces marked text with the original text.
-//
-// CancelComposition calls the underlying CancelComposition.
 func (x *InputController) CancelComposition() {
-	x.inner.CancelComposition()
-}
-
-// Returns a dictionary of text attributes.
-//
-// CompositionAttributesAtRange calls the underlying CompositionAttributesAtRange.
-func (x *InputController) CompositionAttributesAtRange(range_ foundation.NSRange) *foundation.NSMutableDictionary[objc.ID, objc.ID] {
-	return x.inner.CompositionAttributesAtRange(range_)
-}
-
-// Returns where the range of the selection that should be placed inside marked text.
-//
-// SelectionRange calls the underlying SelectionRange.
-func (x *InputController) SelectionRange() foundation.NSRange {
-	return x.inner.SelectionRange()
-}
-
-// Returns the range in the client document that the text should replace.
-//
-// ReplacementRange calls the underlying ReplacementRange.
-func (x *InputController) ReplacementRange() foundation.NSRange {
-	return x.inner.ReplacementRange()
-}
-
-// Returns a dictionary of text attributes that can mark a range of an attributed string to send to a client.
-//
-// MarkForStyleAtRange calls the underlying MarkForStyleAtRange.
-func (x *InputController) MarkForStyleAtRange(style int, range_ foundation.NSRange) *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.MarkForStyleAtRange(style, range_)
-}
-
-// Passes commands that are not generated as part of the text input process.
-//
-// DoCommandBySelectorCommandDictionary calls the underlying DoCommandBySelectorCommandDictionary.
-func (x *InputController) DoCommandBySelectorCommandDictionary(aSelector objc.SEL, infoDictionary *foundation.NSDictionary[objc.ID, objc.ID]) {
-	x.inner.DoCommandBySelectorCommandDictionary(aSelector, infoDictionary)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelComposition"))
 }
 
 // Informs an input method that it should close any visible user interface.
-//
-// HidePalettes calls the underlying HidePalettes.
 func (x *InputController) HidePalettes() {
-	x.inner.HidePalettes()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hidePalettes"))
 }
 
 // Returns a menu of commands that are specific to an input method.
-//
-// Menu calls the underlying Menu.
-func (x *InputController) Menu() *appkit.NSMenu {
-	return x.inner.Menu()
+func (x *InputController) Menu() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menu"))
+	return obj.Wrap(_r)
 }
 
 // Returns the delegate for input controller object.
-//
-// Delegate calls the underlying Delegate.
-func (x *InputController) Delegate() objc.ID {
-	return x.inner.Delegate()
+func (x *InputController) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+	return obj.Wrap(_r)
 }
 
 // Sets the delegate for input controller object.
-//
-// SetDelegate calls the underlying SetDelegate.
-func (x *InputController) SetDelegate(newDelegate objc.ID) {
-	x.inner.SetDelegate(newDelegate)
+func (x *InputController) SetDelegate(newDelegate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(newDelegate))
 }
 
 // Returns the server object that manages the input controller.
-//
-// Server calls the underlying Server.
 func (x *InputController) Server() *Server {
-	_r := x.inner.Server()
-	if _r == nil {
-		return nil
-	}
-	return &Server{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("server"))
+	return ServerFromID(_r)
 }
 
 // Returns the client object associated with the input controller.
-//
-// Client calls the underlying Client.
-func (x *InputController) Client() objc.ID {
-	return x.inner.Client()
+func (x *InputController) Client() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("client"))
+	return obj.Wrap(_r)
 }
 
-// @method @abstract   Called to notify an input controller that it is about to be closed.
-//
-// InputControllerWillClose calls the underlying InputControllerWillClose.
+// Called to notify an input controller that it is about to be closed.
 func (x *InputController) InputControllerWillClose() {
-	x.inner.InputControllerWillClose()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputControllerWillClose"))
 }
 
 // Sends the selected candidate string and annotation string to the input controller.
-//
-// AnnotationSelectedForCandidate calls the underlying AnnotationSelectedForCandidate.
-func (x *InputController) AnnotationSelectedForCandidate(annotationString *foundation.NSAttributedString, candidateString *foundation.NSAttributedString) {
-	x.inner.AnnotationSelectedForCandidate(annotationString, candidateString)
+func (x *InputController) AnnotationSelectedForCandidate(annotationString obj.Object, candidateString obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("annotationSelected:forCandidate:"), objref.IDOf(annotationString), objref.IDOf(candidateString))
 }
 
 // Informs an input controller that the current candidate selection in the candidate window has changed.
-//
-// CandidateSelectionChanged calls the underlying CandidateSelectionChanged.
-func (x *InputController) CandidateSelectionChanged(candidateString *foundation.NSAttributedString) {
-	x.inner.CandidateSelectionChanged(candidateString)
+func (x *InputController) CandidateSelectionChanged(candidateString obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("candidateSelectionChanged:"), objref.IDOf(candidateString))
 }
 
 // Informs an input controller that a new candidate is selected.
-//
-// CandidateSelected calls the underlying CandidateSelected.
-func (x *InputController) CandidateSelected(candidateString *foundation.NSAttributedString) {
-	x.inner.CandidateSelected(candidateString)
+func (x *InputController) CandidateSelected(candidateString obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("candidateSelected:"), objref.IDOf(candidateString))
 }
 
 // InputControllerable is the interface implemented by [InputController], for mocking and DI.
 type InputControllerable interface {
-	Unwrap() *raw.IMKInputController
+	obj.Object
 	UpdateComposition()
 	CancelComposition()
-	CompositionAttributesAtRange(range_ foundation.NSRange) *foundation.NSMutableDictionary[objc.ID, objc.ID]
-	SelectionRange() foundation.NSRange
-	ReplacementRange() foundation.NSRange
-	MarkForStyleAtRange(style int, range_ foundation.NSRange) *foundation.NSDictionary[objc.ID, objc.ID]
-	DoCommandBySelectorCommandDictionary(aSelector objc.SEL, infoDictionary *foundation.NSDictionary[objc.ID, objc.ID])
 	HidePalettes()
-	Menu() *appkit.NSMenu
-	Delegate() objc.ID
-	SetDelegate(newDelegate objc.ID)
+	Menu() obj.Object
+	Delegate() obj.Object
+	SetDelegate(newDelegate obj.Object)
 	Server() *Server
-	Client() objc.ID
+	Client() obj.Object
 	InputControllerWillClose()
-	AnnotationSelectedForCandidate(annotationString *foundation.NSAttributedString, candidateString *foundation.NSAttributedString)
-	CandidateSelectionChanged(candidateString *foundation.NSAttributedString)
-	CandidateSelected(candidateString *foundation.NSAttributedString)
+	AnnotationSelectedForCandidate(annotationString obj.Object, candidateString obj.Object)
+	CandidateSelectionChanged(candidateString obj.Object)
+	CandidateSelected(candidateString obj.Object)
 }
 
 var _ InputControllerable = (*InputController)(nil)

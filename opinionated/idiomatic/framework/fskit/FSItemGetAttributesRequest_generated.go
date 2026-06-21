@@ -5,70 +5,94 @@
 package fskit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ItemGetAttributesRequest wraps [raw.FSItemGetAttributesRequest] with a fluent Go API.
+// ItemGetAttributesRequest is an idiomatic wrapper over the Objective-C class FSItemGetAttributesRequest.
 type ItemGetAttributesRequest struct {
-	inner *raw.FSItemGetAttributesRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSItemGetAttributesRequest].
-func (x *ItemGetAttributesRequest) Unwrap() *raw.FSItemGetAttributesRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ItemGetAttributesRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// ItemGetAttributesRequestFromID adopts an existing object pointer as a ItemGetAttributesRequest (nil for 0).
+// ItemGetAttributesRequestFromID adopts an existing Objective-C object as a ItemGetAttributesRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func ItemGetAttributesRequestFromID(id objc.ID) *ItemGetAttributesRequest {
 	if id == 0 {
 		return nil
 	}
-	return &ItemGetAttributesRequest{inner: raw.FSItemGetAttributesRequestFromID(id)}
+	x := &ItemGetAttributesRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewItemGetAttributesRequest creates a new [ItemGetAttributesRequest].
+// itemGetAttributesRequestAdopt wraps an Objective-C object that this code just created as a
+// ItemGetAttributesRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func itemGetAttributesRequestAdopt(id objc.ID) *ItemGetAttributesRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &ItemGetAttributesRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ItemGetAttributesRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ItemGetAttributesRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ItemGetAttributesRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewItemGetAttributesRequest creates a new ItemGetAttributesRequest.
 func NewItemGetAttributesRequest() *ItemGetAttributesRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSItemGetAttributesRequest")), objc.RegisterName("new"))
-	return &ItemGetAttributesRequest{inner: raw.FSItemGetAttributesRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("FSItemGetAttributesRequest")), objc.RegisterName("new"))
+	return itemGetAttributesRequestAdopt(_id)
 }
 
 // The attributes requested by the request. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
 //
-// WithWantedAttributes sets the wantedAttributes property and returns the receiver for chaining.
-func (x *ItemGetAttributesRequest) WithWantedAttributes(wantedAttributes FSItemAttribute) *ItemGetAttributesRequest {
-	x.inner.SetWantedAttributes(raw.FSItemAttribute(wantedAttributes))
+// WithWantedAttributes sets wantedAttributes and returns the receiver so calls can be chained.
+func (x *ItemGetAttributesRequest) WithWantedAttributes(wantedAttributes ItemAttribute) *ItemGetAttributesRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantedAttributes:"), wantedAttributes)
 	return x
 }
 
 // A method that indicates whether the request wants given attribute. - Parameter attribute: The “FSItemAttribute“ to check.
-//
-// IsAttributeWanted calls the underlying IsAttributeWanted.
-func (x *ItemGetAttributesRequest) IsAttributeWanted(attribute FSItemAttribute) bool {
-	return x.inner.IsAttributeWanted(raw.FSItemAttribute(attribute))
+func (x *ItemGetAttributesRequest) IsAttributeWanted(attribute ItemAttribute) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAttributeWanted:"), attribute)
+	return _r
 }
 
 // The attributes requested by the request. This property is a bit field in Objective-C and an <doc://com.apple.documentation/documentation/Swift/OptionSet> in Swift.
-//
-// WantedAttributes calls the underlying WantedAttributes.
-func (x *ItemGetAttributesRequest) WantedAttributes() FSItemAttribute {
-	return FSItemAttribute(x.inner.WantedAttributes())
+func (x *ItemGetAttributesRequest) WantedAttributes() ItemAttribute {
+	_r := objc.Send[ItemAttribute](objref.IDOf(x), objc.RegisterName("wantedAttributes"))
+	return _r
 }
 
-// SetWantedAttributes calls the underlying SetWantedAttributes.
-func (x *ItemGetAttributesRequest) SetWantedAttributes(wantedAttributes FSItemAttribute) {
-	x.inner.SetWantedAttributes(raw.FSItemAttribute(wantedAttributes))
+func (x *ItemGetAttributesRequest) SetWantedAttributes(wantedAttributes ItemAttribute) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantedAttributes:"), wantedAttributes)
 }
 
 // ItemGetAttributesRequestable is the interface implemented by [ItemGetAttributesRequest], for mocking and DI.
 type ItemGetAttributesRequestable interface {
-	Unwrap() *raw.FSItemGetAttributesRequest
-	WithWantedAttributes(wantedAttributes FSItemAttribute) *ItemGetAttributesRequest
-	IsAttributeWanted(attribute FSItemAttribute) bool
-	WantedAttributes() FSItemAttribute
-	SetWantedAttributes(wantedAttributes FSItemAttribute)
+	obj.Object
+	WithWantedAttributes(wantedAttributes ItemAttribute) *ItemGetAttributesRequest
+	IsAttributeWanted(attribute ItemAttribute) bool
+	WantedAttributes() ItemAttribute
+	SetWantedAttributes(wantedAttributes ItemAttribute)
 }
 
 var _ ItemGetAttributesRequestable = (*ItemGetAttributesRequest)(nil)

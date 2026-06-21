@@ -5,137 +5,134 @@
 package calendarstore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/calendarstore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// CalCalendarsChangedNotification returns the string constant CalCalendarsChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func CalCalendarsChangedNotification() objc.ID {
-	return purego.CFConstant(raw.CalCalendarsChangedNotification())
+// CalCalendarsChangedNotification returns the string constant CalCalendarsChangedNotification, for use as a dictionary key or argument.
+func CalCalendarsChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalCalendarsChangedNotification")))
 }
 
-// CalEventsChangedNotification returns the string constant CalEventsChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func CalEventsChangedNotification() objc.ID {
-	return purego.CFConstant(raw.CalEventsChangedNotification())
+// CalEventsChangedNotification returns the string constant CalEventsChangedNotification, for use as a dictionary key or argument.
+func CalEventsChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalEventsChangedNotification")))
 }
 
-// CalTasksChangedNotification returns the string constant CalTasksChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func CalTasksChangedNotification() objc.ID {
-	return purego.CFConstant(raw.CalTasksChangedNotification())
+// CalTasksChangedNotification returns the string constant CalTasksChangedNotification, for use as a dictionary key or argument.
+func CalTasksChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalTasksChangedNotification")))
 }
 
-// CalCalendarsChangedExternallyNotification returns the string constant CalCalendarsChangedExternallyNotification as an objc.ID, for use as a dictionary key or selector argument.
-func CalCalendarsChangedExternallyNotification() objc.ID {
-	return purego.CFConstant(raw.CalCalendarsChangedExternallyNotification())
+// CalCalendarsChangedExternallyNotification returns the string constant CalCalendarsChangedExternallyNotification, for use as a dictionary key or argument.
+func CalCalendarsChangedExternallyNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalCalendarsChangedExternallyNotification")))
 }
 
-// CalEventsChangedExternallyNotification returns the string constant CalEventsChangedExternallyNotification as an objc.ID, for use as a dictionary key or selector argument.
-func CalEventsChangedExternallyNotification() objc.ID {
-	return purego.CFConstant(raw.CalEventsChangedExternallyNotification())
+// CalEventsChangedExternallyNotification returns the string constant CalEventsChangedExternallyNotification, for use as a dictionary key or argument.
+func CalEventsChangedExternallyNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalEventsChangedExternallyNotification")))
 }
 
-// CalTasksChangedExternallyNotification returns the string constant CalTasksChangedExternallyNotification as an objc.ID, for use as a dictionary key or selector argument.
-func CalTasksChangedExternallyNotification() objc.ID {
-	return purego.CFConstant(raw.CalTasksChangedExternallyNotification())
+// CalTasksChangedExternallyNotification returns the string constant CalTasksChangedExternallyNotification, for use as a dictionary key or argument.
+func CalTasksChangedExternallyNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalTasksChangedExternallyNotification")))
 }
 
-// CalInsertedRecordsKey returns the string constant CalInsertedRecordsKey as an objc.ID, for use as a dictionary key or selector argument.
-func CalInsertedRecordsKey() objc.ID {
-	return purego.CFConstant(raw.CalInsertedRecordsKey())
+// CalInsertedRecordsKey returns the string constant CalInsertedRecordsKey, for use as a dictionary key or argument.
+func CalInsertedRecordsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalInsertedRecordsKey")))
 }
 
-// CalUpdatedRecordsKey returns the string constant CalUpdatedRecordsKey as an objc.ID, for use as a dictionary key or selector argument.
-func CalUpdatedRecordsKey() objc.ID {
-	return purego.CFConstant(raw.CalUpdatedRecordsKey())
+// CalUpdatedRecordsKey returns the string constant CalUpdatedRecordsKey, for use as a dictionary key or argument.
+func CalUpdatedRecordsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalUpdatedRecordsKey")))
 }
 
-// CalDeletedRecordsKey returns the string constant CalDeletedRecordsKey as an objc.ID, for use as a dictionary key or selector argument.
-func CalDeletedRecordsKey() objc.ID {
-	return purego.CFConstant(raw.CalDeletedRecordsKey())
+// CalDeletedRecordsKey returns the string constant CalDeletedRecordsKey, for use as a dictionary key or argument.
+func CalDeletedRecordsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalDeletedRecordsKey")))
 }
 
-// CalSenderProcessIDKey returns the string constant CalSenderProcessIDKey as an objc.ID, for use as a dictionary key or selector argument.
-func CalSenderProcessIDKey() objc.ID {
-	return purego.CFConstant(raw.CalSenderProcessIDKey())
+// CalSenderProcessIDKey returns the string constant CalSenderProcessIDKey, for use as a dictionary key or argument.
+func CalSenderProcessIDKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalSenderProcessIDKey")))
 }
 
-// CalUserUIDKey returns the string constant CalUserUIDKey as an objc.ID, for use as a dictionary key or selector argument.
-func CalUserUIDKey() objc.ID {
-	return purego.CFConstant(raw.CalUserUIDKey())
+// CalUserUIDKey returns the string constant CalUserUIDKey, for use as a dictionary key or argument.
+func CalUserUIDKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CalUserUIDKey"))) }
+
+// CalCalendarTypeBirthday returns the string constant CalCalendarTypeBirthday, for use as a dictionary key or argument.
+func CalCalendarTypeBirthday() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalCalendarTypeBirthday")))
 }
 
-// CalCalendarTypeBirthday returns the string constant CalCalendarTypeBirthday as an objc.ID, for use as a dictionary key or selector argument.
-func CalCalendarTypeBirthday() objc.ID {
-	return purego.CFConstant(raw.CalCalendarTypeBirthday())
+// CalCalendarTypeCalDAV returns the string constant CalCalendarTypeCalDAV, for use as a dictionary key or argument.
+func CalCalendarTypeCalDAV() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalCalendarTypeCalDAV")))
 }
 
-// CalCalendarTypeCalDAV returns the string constant CalCalendarTypeCalDAV as an objc.ID, for use as a dictionary key or selector argument.
-func CalCalendarTypeCalDAV() objc.ID {
-	return purego.CFConstant(raw.CalCalendarTypeCalDAV())
+// CalCalendarTypeLocal returns the string constant CalCalendarTypeLocal, for use as a dictionary key or argument.
+func CalCalendarTypeLocal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalCalendarTypeLocal")))
 }
 
-// CalCalendarTypeLocal returns the string constant CalCalendarTypeLocal as an objc.ID, for use as a dictionary key or selector argument.
-func CalCalendarTypeLocal() objc.ID {
-	return purego.CFConstant(raw.CalCalendarTypeLocal())
+// CalCalendarTypeSubscription returns the string constant CalCalendarTypeSubscription, for use as a dictionary key or argument.
+func CalCalendarTypeSubscription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalCalendarTypeSubscription")))
 }
 
-// CalCalendarTypeSubscription returns the string constant CalCalendarTypeSubscription as an objc.ID, for use as a dictionary key or selector argument.
-func CalCalendarTypeSubscription() objc.ID {
-	return purego.CFConstant(raw.CalCalendarTypeSubscription())
+// CalCalendarTypeIMAP returns the string constant CalCalendarTypeIMAP, for use as a dictionary key or argument.
+func CalCalendarTypeIMAP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalCalendarTypeIMAP")))
 }
 
-// CalCalendarTypeIMAP returns the string constant CalCalendarTypeIMAP as an objc.ID, for use as a dictionary key or selector argument.
-func CalCalendarTypeIMAP() objc.ID {
-	return purego.CFConstant(raw.CalCalendarTypeIMAP())
+// CalCalendarTypeExchange returns the string constant CalCalendarTypeExchange, for use as a dictionary key or argument.
+func CalCalendarTypeExchange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalCalendarTypeExchange")))
 }
 
-// CalCalendarTypeExchange returns the string constant CalCalendarTypeExchange as an objc.ID, for use as a dictionary key or selector argument.
-func CalCalendarTypeExchange() objc.ID {
-	return purego.CFConstant(raw.CalCalendarTypeExchange())
+// CalAttendeeStatusNeedsAction returns the string constant CalAttendeeStatusNeedsAction, for use as a dictionary key or argument.
+func CalAttendeeStatusNeedsAction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalAttendeeStatusNeedsAction")))
 }
 
-// CalAttendeeStatusNeedsAction returns the string constant CalAttendeeStatusNeedsAction as an objc.ID, for use as a dictionary key or selector argument.
-func CalAttendeeStatusNeedsAction() objc.ID {
-	return purego.CFConstant(raw.CalAttendeeStatusNeedsAction())
+// CalAttendeeStatusAccepted returns the string constant CalAttendeeStatusAccepted, for use as a dictionary key or argument.
+func CalAttendeeStatusAccepted() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalAttendeeStatusAccepted")))
 }
 
-// CalAttendeeStatusAccepted returns the string constant CalAttendeeStatusAccepted as an objc.ID, for use as a dictionary key or selector argument.
-func CalAttendeeStatusAccepted() objc.ID {
-	return purego.CFConstant(raw.CalAttendeeStatusAccepted())
+// CalAttendeeStatusDeclined returns the string constant CalAttendeeStatusDeclined, for use as a dictionary key or argument.
+func CalAttendeeStatusDeclined() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalAttendeeStatusDeclined")))
 }
 
-// CalAttendeeStatusDeclined returns the string constant CalAttendeeStatusDeclined as an objc.ID, for use as a dictionary key or selector argument.
-func CalAttendeeStatusDeclined() objc.ID {
-	return purego.CFConstant(raw.CalAttendeeStatusDeclined())
+// CalAttendeeStatusTentative returns the string constant CalAttendeeStatusTentative, for use as a dictionary key or argument.
+func CalAttendeeStatusTentative() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalAttendeeStatusTentative")))
 }
 
-// CalAttendeeStatusTentative returns the string constant CalAttendeeStatusTentative as an objc.ID, for use as a dictionary key or selector argument.
-func CalAttendeeStatusTentative() objc.ID {
-	return purego.CFConstant(raw.CalAttendeeStatusTentative())
+// CalAlarmActionDisplay returns the string constant CalAlarmActionDisplay, for use as a dictionary key or argument.
+func CalAlarmActionDisplay() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalAlarmActionDisplay")))
 }
 
-// CalAlarmActionDisplay returns the string constant CalAlarmActionDisplay as an objc.ID, for use as a dictionary key or selector argument.
-func CalAlarmActionDisplay() objc.ID {
-	return purego.CFConstant(raw.CalAlarmActionDisplay())
+// CalAlarmActionEmail returns the string constant CalAlarmActionEmail, for use as a dictionary key or argument.
+func CalAlarmActionEmail() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalAlarmActionEmail")))
 }
 
-// CalAlarmActionEmail returns the string constant CalAlarmActionEmail as an objc.ID, for use as a dictionary key or selector argument.
-func CalAlarmActionEmail() objc.ID {
-	return purego.CFConstant(raw.CalAlarmActionEmail())
+// CalAlarmActionProcedure returns the string constant CalAlarmActionProcedure, for use as a dictionary key or argument.
+func CalAlarmActionProcedure() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalAlarmActionProcedure")))
 }
 
-// CalAlarmActionProcedure returns the string constant CalAlarmActionProcedure as an objc.ID, for use as a dictionary key or selector argument.
-func CalAlarmActionProcedure() objc.ID {
-	return purego.CFConstant(raw.CalAlarmActionProcedure())
+// CalAlarmActionSound returns the string constant CalAlarmActionSound, for use as a dictionary key or argument.
+func CalAlarmActionSound() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalAlarmActionSound")))
 }
 
-// CalAlarmActionSound returns the string constant CalAlarmActionSound as an objc.ID, for use as a dictionary key or selector argument.
-func CalAlarmActionSound() objc.ID {
-	return purego.CFConstant(raw.CalAlarmActionSound())
-}
-
-// CalCalendarStoreErrorDomain returns the string constant CalCalendarStoreErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func CalCalendarStoreErrorDomain() objc.ID {
-	return purego.CFConstant(raw.CalCalendarStoreErrorDomain())
+// CalCalendarStoreErrorDomain returns the string constant CalCalendarStoreErrorDomain, for use as a dictionary key or argument.
+func CalCalendarStoreErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CalCalendarStoreErrorDomain")))
 }

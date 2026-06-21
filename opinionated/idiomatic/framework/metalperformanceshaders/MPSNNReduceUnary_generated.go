@@ -5,178 +5,104 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The base class for unary reduction filters.
 //
-// NNReduceUnary wraps [raw.MPSNNReduceUnary] with a fluent Go API.
+// NNReduceUnary is an idiomatic wrapper over the Objective-C class MPSNNReduceUnary.
 type NNReduceUnary struct {
-	inner *raw.MPSNNReduceUnary
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNReduceUnary].
-func (x *NNReduceUnary) Unwrap() *raw.MPSNNReduceUnary { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNReduceUnary) ID() objc.ID { return x.inner.Ptr() }
-
-// NNReduceUnaryFromID adopts an existing object pointer as a NNReduceUnary (nil for 0).
+// NNReduceUnaryFromID adopts an existing Objective-C object as a NNReduceUnary
+// (nil for 0), retaining it and registering a release finalizer.
 func NNReduceUnaryFromID(id objc.ID) *NNReduceUnary {
 	if id == 0 {
 		return nil
 	}
-	return &NNReduceUnary{inner: raw.MPSNNReduceUnaryFromID(id)}
+	x := &NNReduceUnary{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNNReduceUnary creates a new [NNReduceUnary].
+// nNReduceUnaryAdopt wraps an Objective-C object that this code just created as a
+// NNReduceUnary (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNReduceUnaryAdopt(id objc.ID) *NNReduceUnary {
+	if id == 0 {
+		return nil
+	}
+	x := &NNReduceUnary{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NNReduceUnary) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNReduceUnary) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNReduceUnary) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNNReduceUnary creates a new NNReduceUnary.
 func NewNNReduceUnary() *NNReduceUnary {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNReduceUnary")), objc.RegisterName("new"))
-	return &NNReduceUnary{inner: raw.MPSNNReduceUnaryFromID(_id)}
-}
-
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSCNNKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
-//
-// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
-func (x *NNReduceUnary) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReduceUnary {
-	x.inner.SetClipRectSource(clipRectSource)
-	return x
-}
-
-// @discussion Since the clipRectSource replaces the MPSCNNKernel offset parameter for this filter, this property is deprecated..
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *NNReduceUnary) WithOffset(offset mpscore.MPSOffset) *NNReduceUnary {
-	x.inner.SetOffset(offset)
-	return x
-}
-
-// An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *NNReduceUnary) WithClipRect(clipRect metal.MTLRegion) *NNReduceUnary {
-	x.inner.MPSCNNKernel.SetClipRect(clipRect)
-	return x
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNReduceUnary")), objc.RegisterName("new"))
+	return nNReduceUnaryAdopt(_id)
 }
 
 // The number of channels in the destination image to skip before writing output data.
 //
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNReduceUnary) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceUnary {
-	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *NNReduceUnary) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNReduceUnary {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+// The number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
 //
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNReduceUnary) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNReduceUnary {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset sets sourceFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *NNReduceUnary) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNReduceUnary {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+// The maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 //
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *NNReduceUnary) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNReduceUnary {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
-	return x
-}
-
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *NNReduceUnary) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNReduceUnary {
-	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *NNReduceUnary) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNReduceUnary {
-	x.inner.MPSCNNKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *NNReduceUnary) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceUnary {
-	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NNReduceUnary) WithOptions(options mpscore.MPSKernelOptions) *NNReduceUnary {
-	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+// WithSourceFeatureChannelMaxCount sets sourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+func (x *NNReduceUnary) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNReduceUnary {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *NNReduceUnary) WithLabel(label string) *NNReduceUnary {
-	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSCNNKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
-//
-// ClipRectSource calls the underlying ClipRectSource.
-func (x *NNReduceUnary) ClipRectSource() metal.MTLRegion {
-	return x.inner.ClipRectSource()
-}
-
-// SetClipRectSource calls the underlying SetClipRectSource.
-func (x *NNReduceUnary) SetClipRectSource(clipRectSource metal.MTLRegion) {
-	x.inner.SetClipRectSource(clipRectSource)
-}
-
-// @discussion Since the clipRectSource replaces the MPSCNNKernel offset parameter for this filter, this property is deprecated..
-//
-// Offset calls the underlying Offset.
-func (x *NNReduceUnary) Offset() mpscore.MPSOffset {
-	return x.inner.Offset()
-}
-
-// @discussion Since the clipRectSource replaces the MPSCNNKernel offset parameter for this filter, this property is deprecated..
-//
-// SetOffset calls the underlying SetOffset.
-func (x *NNReduceUnary) SetOffset(offset mpscore.MPSOffset) {
-	x.inner.SetOffset(offset)
-}
-
-func (x *NNReduceUnary) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
-
-func (x *NNReduceUnary) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
-
 // NNReduceUnaryable is the interface implemented by [NNReduceUnary], for mocking and DI.
 type NNReduceUnaryable interface {
-	Unwrap() *raw.MPSNNReduceUnary
-	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReduceUnary
-	WithOffset(offset mpscore.MPSOffset) *NNReduceUnary
-	WithClipRect(clipRect metal.MTLRegion) *NNReduceUnary
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNReduceUnary
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *NNReduceUnary
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *NNReduceUnary
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *NNReduceUnary
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNReduceUnary
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNReduceUnary
-	WithOptions(options mpscore.MPSKernelOptions) *NNReduceUnary
+	obj.Object
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNReduceUnary
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *NNReduceUnary
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *NNReduceUnary
 	WithLabel(label string) *NNReduceUnary
-	ClipRectSource() metal.MTLRegion
-	SetClipRectSource(clipRectSource metal.MTLRegion)
-	Offset() mpscore.MPSOffset
-	SetOffset(offset mpscore.MPSOffset)
 }
 
 var _ NNReduceUnaryable = (*NNReduceUnary)(nil)

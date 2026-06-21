@@ -5,55 +5,80 @@
 package coreimage
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // A single render task.
 //
-// RenderTask wraps [raw.CIRenderTask] with a fluent Go API.
+// RenderTask is an idiomatic wrapper over the Objective-C class CIRenderTask.
 type RenderTask struct {
-	inner *raw.CIRenderTask
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CIRenderTask].
-func (x *RenderTask) Unwrap() *raw.CIRenderTask { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RenderTask) ID() objc.ID { return x.inner.Ptr() }
-
-// RenderTaskFromID adopts an existing object pointer as a RenderTask (nil for 0).
+// RenderTaskFromID adopts an existing Objective-C object as a RenderTask
+// (nil for 0), retaining it and registering a release finalizer.
 func RenderTaskFromID(id objc.ID) *RenderTask {
 	if id == 0 {
 		return nil
 	}
-	return &RenderTask{inner: raw.CIRenderTaskFromID(id)}
+	x := &RenderTask{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRenderTask creates a new [RenderTask].
+// renderTaskAdopt wraps an Objective-C object that this code just created as a
+// RenderTask (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func renderTaskAdopt(id objc.ID) *RenderTask {
+	if id == 0 {
+		return nil
+	}
+	x := &RenderTask{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RenderTask) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RenderTask) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RenderTask) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRenderTask creates a new RenderTask.
 func NewRenderTask() *RenderTask {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CIRenderTask")), objc.RegisterName("new"))
-	return &RenderTask{inner: raw.CIRenderTaskFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CIRenderTask")), objc.RegisterName("new"))
+	return renderTaskAdopt(_id)
 }
 
 // Waits until the CIRenderTask finishes and returns.
-//
-// WaitUntilCompletedAndReturnError calls the underlying WaitUntilCompletedAndReturnError.
 func (x *RenderTask) WaitUntilCompletedAndReturnError() (*RenderInfo, error) {
-	_r, _err := x.inner.WaitUntilCompletedAndReturnError()
-	if _err != nil {
-		return nil, _err
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("waitUntilCompletedAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &RenderInfo{inner: _r}, nil
+	return RenderInfoFromID(_r), nil
 }
 
 // RenderTaskable is the interface implemented by [RenderTask], for mocking and DI.
 type RenderTaskable interface {
-	Unwrap() *raw.CIRenderTask
+	obj.Object
 	WaitUntilCompletedAndReturnError() (*RenderInfo, error)
 }
 

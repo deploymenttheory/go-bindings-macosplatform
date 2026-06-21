@@ -5,141 +5,130 @@
 package avkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A view that displays standard user interface controls for capturing media data.
 //
-// CaptureView wraps [raw.AVCaptureView] with a fluent Go API.
+// CaptureView is an idiomatic wrapper over the Objective-C class AVCaptureView.
 type CaptureView struct {
-	inner *raw.AVCaptureView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureView].
-func (x *CaptureView) Unwrap() *raw.AVCaptureView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureView) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureViewFromID adopts an existing object pointer as a CaptureView (nil for 0).
+// CaptureViewFromID adopts an existing Objective-C object as a CaptureView
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureViewFromID(id objc.ID) *CaptureView {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureView{inner: raw.AVCaptureViewFromID(id)}
-}
-
-// NewCaptureView creates a new [CaptureView].
-func NewCaptureView() *CaptureView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureView")), objc.RegisterName("new"))
-	return &CaptureView{inner: raw.AVCaptureViewFromID(_id)}
-}
-
-// The capture view’s delegate object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *CaptureView) WithDelegate(delegate raw.AVCaptureViewDelegate) *CaptureView {
-	x.inner.SetDelegate(delegate)
+	x := &CaptureView{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// captureViewAdopt wraps an Objective-C object that this code just created as a
+// CaptureView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureViewAdopt(id objc.ID) *CaptureView {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureView{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptureView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptureView creates a new CaptureView.
+func NewCaptureView() *CaptureView {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureView")), objc.RegisterName("new"))
+	return captureViewAdopt(_id)
 }
 
 // The style of the capture controls presented by the view.
 //
-// WithControlsStyle sets the controlsStyle property and returns the receiver for chaining.
-func (x *CaptureView) WithControlsStyle(controlsStyle AVCaptureViewControlsStyle) *CaptureView {
-	x.inner.SetControlsStyle(raw.AVCaptureViewControlsStyle(controlsStyle))
+// WithControlsStyle sets controlsStyle and returns the receiver so calls can be chained.
+func (x *CaptureView) WithControlsStyle(controlsStyle CaptureViewControlsStyle) *CaptureView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlsStyle:"), controlsStyle)
 	return x
 }
 
 // A string value that defines how the capture view displays video within its bounds.
 //
-// WithVideoGravity sets the videoGravity property and returns the receiver for chaining.
-func (x *CaptureView) WithVideoGravity(videoGravity *foundation.NSString) *CaptureView {
-	x.inner.SetVideoGravity(videoGravity)
+// WithVideoGravity sets videoGravity and returns the receiver so calls can be chained.
+func (x *CaptureView) WithVideoGravity(videoGravity obj.Object) *CaptureView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
 	return x
 }
 
 // Sets the view’s capture session.
-//
-// SetSessionShowVideoPreviewShowAudioPreview calls the underlying SetSessionShowVideoPreviewShowAudioPreview.
-func (x *CaptureView) SetSessionShowVideoPreviewShowAudioPreview(session *avfoundation.AVCaptureSession, showVideoPreview bool, showAudioPreview bool) {
-	x.inner.SetSessionShowVideoPreviewShowAudioPreview(session, showVideoPreview, showAudioPreview)
+func (x *CaptureView) SetSessionShowVideoPreviewShowAudioPreview(session obj.Object, showVideoPreview bool, showAudioPreview bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSession:showVideoPreview:showAudioPreview:"), objref.IDOf(session), showVideoPreview, showAudioPreview)
 }
 
-// @property	session @abstract	A capture session represented by this view. @discussion	Modifying the capture session will impact its visual representation in the view. The default value is a session configured for movie file recordings of audio and video media data. Use -setSession:showVideoPreview:showAudioPreview: to change the value of this property.
-//
-// Session calls the underlying Session.
-func (x *CaptureView) Session() *avfoundation.AVCaptureSession {
-	return x.inner.Session()
+// A capture session represented by this view. Modifying the capture session will impact its visual representation in the view. The default value is a session configured for movie file recordings of audio and video media data. Use -setSession:showVideoPreview:showAudioPreview: to change the value of this property.
+func (x *CaptureView) Session() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("session"))
+	return obj.Wrap(_r)
 }
 
-// @property	fileOutput @abstract	A capture file output used to record media data. @discussion	The value of this property is the first instance of AVCaptureFileOutput contained in the session's outputs array or nil if no such instance is found. In the latter case the capture view's start recording button will be disabled. However, the controls for choosing input sources may still be enabled.
-//
-// FileOutput calls the underlying FileOutput.
-func (x *CaptureView) FileOutput() *avfoundation.AVCaptureFileOutput {
-	return x.inner.FileOutput()
+// A capture file output used to record media data. The value of this property is the first instance of AVCaptureFileOutput contained in the session's outputs array or nil if no such instance is found. In the latter case the capture view's start recording button will be disabled. However, the controls for choosing input sources may still be enabled.
+func (x *CaptureView) FileOutput() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileOutput"))
+	return obj.Wrap(_r)
 }
 
-// @property	delegate @abstract	The capture view's delegate. @discussion	The start recording button will be disabled if the delegate is not set.
-//
-// Delegate calls the underlying Delegate.
-func (x *CaptureView) Delegate() raw.AVCaptureViewDelegate {
-	return x.inner.Delegate()
+// The style of the capture controls pane associated with the view.
+func (x *CaptureView) ControlsStyle() CaptureViewControlsStyle {
+	_r := objc.Send[CaptureViewControlsStyle](objref.IDOf(x), objc.RegisterName("controlsStyle"))
+	return _r
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *CaptureView) SetDelegate(delegate raw.AVCaptureViewDelegate) {
-	x.inner.SetDelegate(delegate)
+func (x *CaptureView) SetControlsStyle(controlsStyle CaptureViewControlsStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlsStyle:"), controlsStyle)
 }
 
-// @property	controlsStyle @abstract	The style of the capture controls pane associated with the view.
-//
-// ControlsStyle calls the underlying ControlsStyle.
-func (x *CaptureView) ControlsStyle() AVCaptureViewControlsStyle {
-	return AVCaptureViewControlsStyle(x.inner.ControlsStyle())
+// A string defining how the video is displayed within the views bounds rect. Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default.
+func (x *CaptureView) VideoGravity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoGravity"))
+	return obj.Wrap(_r)
 }
 
-// SetControlsStyle calls the underlying SetControlsStyle.
-func (x *CaptureView) SetControlsStyle(controlsStyle AVCaptureViewControlsStyle) {
-	x.inner.SetControlsStyle(raw.AVCaptureViewControlsStyle(controlsStyle))
-}
-
-// @property	videoGravity @abstract	A string defining how the video is displayed within the views bounds rect. @discussion	Options are AVLayerVideoGravityResize, AVLayerVideoGravityResizeAspect and AVLayerVideoGravityResizeAspectFill. AVLayerVideoGravityResizeAspect is default.
-//
-// VideoGravity calls the underlying VideoGravity.
-func (x *CaptureView) VideoGravity() string {
-	_r := x.inner.VideoGravity()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetVideoGravity calls the underlying SetVideoGravity.
-func (x *CaptureView) SetVideoGravity(videoGravity *foundation.NSString) {
-	x.inner.SetVideoGravity(videoGravity)
+func (x *CaptureView) SetVideoGravity(videoGravity obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoGravity:"), objref.IDOf(videoGravity))
 }
 
 // CaptureViewable is the interface implemented by [CaptureView], for mocking and DI.
 type CaptureViewable interface {
-	Unwrap() *raw.AVCaptureView
-	WithDelegate(delegate raw.AVCaptureViewDelegate) *CaptureView
-	WithControlsStyle(controlsStyle AVCaptureViewControlsStyle) *CaptureView
-	WithVideoGravity(videoGravity *foundation.NSString) *CaptureView
-	SetSessionShowVideoPreviewShowAudioPreview(session *avfoundation.AVCaptureSession, showVideoPreview bool, showAudioPreview bool)
-	Session() *avfoundation.AVCaptureSession
-	FileOutput() *avfoundation.AVCaptureFileOutput
-	Delegate() raw.AVCaptureViewDelegate
-	SetDelegate(delegate raw.AVCaptureViewDelegate)
-	ControlsStyle() AVCaptureViewControlsStyle
-	SetControlsStyle(controlsStyle AVCaptureViewControlsStyle)
-	VideoGravity() string
-	SetVideoGravity(videoGravity *foundation.NSString)
+	obj.Object
+	WithControlsStyle(controlsStyle CaptureViewControlsStyle) *CaptureView
+	WithVideoGravity(videoGravity obj.Object) *CaptureView
+	SetSessionShowVideoPreviewShowAudioPreview(session obj.Object, showVideoPreview bool, showAudioPreview bool)
+	Session() obj.Object
+	FileOutput() obj.Object
+	ControlsStyle() CaptureViewControlsStyle
+	SetControlsStyle(controlsStyle CaptureViewControlsStyle)
+	VideoGravity() obj.Object
+	SetVideoGravity(videoGravity obj.Object)
 }
 
 var _ CaptureViewable = (*CaptureView)(nil)

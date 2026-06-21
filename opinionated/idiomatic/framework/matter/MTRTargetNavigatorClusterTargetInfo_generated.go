@@ -5,59 +5,79 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRTargetNavigatorClusterTargetInfo wraps [raw.MTRTargetNavigatorClusterTargetInfo] with a fluent Go API.
+// MTRTargetNavigatorClusterTargetInfo is an idiomatic wrapper over the Objective-C class MTRTargetNavigatorClusterTargetInfo.
 type MTRTargetNavigatorClusterTargetInfo struct {
-	inner *raw.MTRTargetNavigatorClusterTargetInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRTargetNavigatorClusterTargetInfo].
-func (x *MTRTargetNavigatorClusterTargetInfo) Unwrap() *raw.MTRTargetNavigatorClusterTargetInfo {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTargetNavigatorClusterTargetInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRTargetNavigatorClusterTargetInfoFromID adopts an existing object pointer as a MTRTargetNavigatorClusterTargetInfo (nil for 0).
+// MTRTargetNavigatorClusterTargetInfoFromID adopts an existing Objective-C object as a MTRTargetNavigatorClusterTargetInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRTargetNavigatorClusterTargetInfoFromID(id objc.ID) *MTRTargetNavigatorClusterTargetInfo {
 	if id == 0 {
 		return nil
 	}
-	return &MTRTargetNavigatorClusterTargetInfo{inner: raw.MTRTargetNavigatorClusterTargetInfoFromID(id)}
+	x := &MTRTargetNavigatorClusterTargetInfo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRTargetNavigatorClusterTargetInfo creates a new [MTRTargetNavigatorClusterTargetInfo].
+// mTRTargetNavigatorClusterTargetInfoAdopt wraps an Objective-C object that this code just created as a
+// MTRTargetNavigatorClusterTargetInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRTargetNavigatorClusterTargetInfoAdopt(id objc.ID) *MTRTargetNavigatorClusterTargetInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRTargetNavigatorClusterTargetInfo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRTargetNavigatorClusterTargetInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRTargetNavigatorClusterTargetInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRTargetNavigatorClusterTargetInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRTargetNavigatorClusterTargetInfo creates a new MTRTargetNavigatorClusterTargetInfo.
 func NewMTRTargetNavigatorClusterTargetInfo() *MTRTargetNavigatorClusterTargetInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTargetNavigatorClusterTargetInfo")), objc.RegisterName("new"))
-	return &MTRTargetNavigatorClusterTargetInfo{inner: raw.MTRTargetNavigatorClusterTargetInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRTargetNavigatorClusterTargetInfo")), objc.RegisterName("new"))
+	return mTRTargetNavigatorClusterTargetInfoAdopt(_id)
 }
 
-// WithIdentifier sets the identifier property and returns the receiver for chaining.
-func (x *MTRTargetNavigatorClusterTargetInfo) WithIdentifier(identifier *foundation.NSNumber) *MTRTargetNavigatorClusterTargetInfo {
-	x.inner.MTRTargetNavigatorClusterTargetInfoStruct.SetIdentifier(identifier)
+// WithIdentifier sets identifier and returns the receiver so calls can be chained.
+func (x *MTRTargetNavigatorClusterTargetInfo) WithIdentifier(identifier obj.Object) *MTRTargetNavigatorClusterTargetInfo {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 	return x
 }
 
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *MTRTargetNavigatorClusterTargetInfo) WithName(name string) *MTRTargetNavigatorClusterTargetInfo {
-	x.inner.MTRTargetNavigatorClusterTargetInfoStruct.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
-}
-
-func (x *MTRTargetNavigatorClusterTargetInfo) asMTRTargetNavigatorClusterTargetInfoStruct() *raw.MTRTargetNavigatorClusterTargetInfoStruct {
-	return &x.inner.MTRTargetNavigatorClusterTargetInfoStruct
 }
 
 // MTRTargetNavigatorClusterTargetInfoable is the interface implemented by [MTRTargetNavigatorClusterTargetInfo], for mocking and DI.
 type MTRTargetNavigatorClusterTargetInfoable interface {
-	Unwrap() *raw.MTRTargetNavigatorClusterTargetInfo
-	WithIdentifier(identifier *foundation.NSNumber) *MTRTargetNavigatorClusterTargetInfo
+	obj.Object
+	WithIdentifier(identifier obj.Object) *MTRTargetNavigatorClusterTargetInfo
 	WithName(name string) *MTRTargetNavigatorClusterTargetInfo
 }
 

@@ -5,94 +5,90 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A controller profile that uses the keyboard as the input device.
 //
-// KeyboardInput wraps [raw.GCKeyboardInput] with a fluent Go API.
+// KeyboardInput is an idiomatic wrapper over the Objective-C class GCKeyboardInput.
 type KeyboardInput struct {
-	inner *raw.GCKeyboardInput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCKeyboardInput].
-func (x *KeyboardInput) Unwrap() *raw.GCKeyboardInput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *KeyboardInput) ID() objc.ID { return x.inner.Ptr() }
-
-// KeyboardInputFromID adopts an existing object pointer as a KeyboardInput (nil for 0).
+// KeyboardInputFromID adopts an existing Objective-C object as a KeyboardInput
+// (nil for 0), retaining it and registering a release finalizer.
 func KeyboardInputFromID(id objc.ID) *KeyboardInput {
 	if id == 0 {
 		return nil
 	}
-	return &KeyboardInput{inner: raw.GCKeyboardInputFromID(id)}
-}
-
-// NewKeyboardInput creates a new [KeyboardInput].
-func NewKeyboardInput() *KeyboardInput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCKeyboardInput")), objc.RegisterName("new"))
-	return &KeyboardInput{inner: raw.GCKeyboardInputFromID(_id)}
-}
-
-// The block that the profile calls when the user presses a key.
-//
-// WithKeyChangedHandler sets the keyChangedHandler property and returns the receiver for chaining.
-func (x *KeyboardInput) WithKeyChangedHandler(keyChangedHandler func(*raw.GCKeyboardInput, *raw.GCControllerButtonInput, int, bool)) *KeyboardInput {
-	x.inner.SetKeyChangedHandler(keyChangedHandler)
+	x := &KeyboardInput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// keyboardInputAdopt wraps an Objective-C object that this code just created as a
+// KeyboardInput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func keyboardInputAdopt(id objc.ID) *KeyboardInput {
+	if id == 0 {
+		return nil
+	}
+	x := &KeyboardInput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *KeyboardInput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *KeyboardInput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *KeyboardInput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewKeyboardInput creates a new KeyboardInput.
+func NewKeyboardInput() *KeyboardInput {
+	_id := objc.Send[objc.ID](objc.ID(_class("GCKeyboardInput")), objc.RegisterName("new"))
+	return keyboardInputAdopt(_id)
 }
 
 // The block that the profile calls when an element’s value changes.
 //
-// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
-func (x *KeyboardInput) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *KeyboardInput {
-	x.inner.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
+// WithValueDidChangeHandler sets valueDidChangeHandler and returns the receiver so calls can be chained.
+func (x *KeyboardInput) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *KeyboardInput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return x
 }
 
 // Returns the button element for the specified key code.
-//
-// ButtonForKeyCode calls the underlying ButtonForKeyCode.
 func (x *KeyboardInput) ButtonForKeyCode(code int) *ControllerButtonInput {
-	_r := x.inner.ButtonForKeyCode(code)
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
-}
-
-// KeyChangedHandler calls the underlying KeyChangedHandler.
-func (x *KeyboardInput) KeyChangedHandler() objc.Block {
-	return x.inner.KeyChangedHandler()
-}
-
-// SetKeyChangedHandler calls the underlying SetKeyChangedHandler.
-func (x *KeyboardInput) SetKeyChangedHandler(keyChangedHandler func(*raw.GCKeyboardInput, *raw.GCControllerButtonInput, int, bool)) {
-	x.inner.SetKeyChangedHandler(keyChangedHandler)
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonForKeyCode:"), code)
+	return ControllerButtonInputFromID(_r)
 }
 
 // Before querying any key for a value it might be useful to check if any key is actually pressed
-//
-// IsAnyKeyPressed calls the underlying IsAnyKeyPressed.
 func (x *KeyboardInput) IsAnyKeyPressed() bool {
-	return x.inner.IsAnyKeyPressed()
-}
-
-func (x *KeyboardInput) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
-	return &x.inner.GCPhysicalInputProfile
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAnyKeyPressed"))
+	return _r
 }
 
 // KeyboardInputable is the interface implemented by [KeyboardInput], for mocking and DI.
 type KeyboardInputable interface {
-	Unwrap() *raw.GCKeyboardInput
-	WithKeyChangedHandler(keyChangedHandler func(*raw.GCKeyboardInput, *raw.GCControllerButtonInput, int, bool)) *KeyboardInput
-	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *KeyboardInput
+	obj.Object
+	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *KeyboardInput
 	ButtonForKeyCode(code int) *ControllerButtonInput
-	KeyChangedHandler() objc.Block
-	SetKeyChangedHandler(keyChangedHandler func(*raw.GCKeyboardInput, *raw.GCControllerButtonInput, int, bool))
 	IsAnyKeyPressed() bool
 }
 

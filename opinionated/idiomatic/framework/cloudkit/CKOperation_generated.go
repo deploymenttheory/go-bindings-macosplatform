@@ -6,159 +6,162 @@ package cloudkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The abstract base class for all operations that execute in a database.
 //
-// Operation wraps [raw.CKOperation] with a fluent Go API.
+// Operation is an idiomatic wrapper over the Objective-C class CKOperation.
 type Operation struct {
-	inner *raw.CKOperation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKOperation].
-func (x *Operation) Unwrap() *raw.CKOperation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Operation) ID() objc.ID { return x.inner.Ptr() }
-
-// OperationFromID adopts an existing object pointer as a Operation (nil for 0).
+// OperationFromID adopts an existing Objective-C object as a Operation
+// (nil for 0), retaining it and registering a release finalizer.
 func OperationFromID(id objc.ID) *Operation {
 	if id == 0 {
 		return nil
 	}
-	return &Operation{inner: raw.CKOperationFromID(id)}
+	x := &Operation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewOperation creates a new [Operation].
+// operationAdopt wraps an Objective-C object that this code just created as a
+// Operation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func operationAdopt(id objc.ID) *Operation {
+	if id == 0 {
+		return nil
+	}
+	x := &Operation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Operation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Operation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Operation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewOperation creates a new Operation.
 func NewOperation() *Operation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKOperation")), objc.RegisterName("new"))
-	return &Operation{inner: raw.CKOperationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKOperation")), objc.RegisterName("new"))
+	return operationAdopt(_id)
 }
 
 // The operation’s configuration.
 //
-// WithConfiguration sets the configuration property and returns the receiver for chaining.
+// WithConfiguration sets configuration and returns the receiver so calls can be chained.
 func (x *Operation) WithConfiguration(configuration *OperationConfiguration) *Operation {
-	x.inner.SetConfiguration(configuration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
 // The operation’s group.
 //
-// WithGroup sets the group property and returns the receiver for chaining.
+// WithGroup sets group and returns the receiver so calls can be chained.
 func (x *Operation) WithGroup(group *OperationGroup) *Operation {
-	x.inner.SetGroup(group.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
 // The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
-// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
 func (x *Operation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *Operation {
-	x.inner.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+// The operation's container.
 //
-// WithContainer sets the container property and returns the receiver for chaining.
+// WithContainer sets container and returns the receiver so calls can be chained.
 func (x *Operation) WithContainer(container *Container) *Operation {
-	x.inner.SetContainer(container.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+// A Boolean value that indicates whether the operation can send data over the cellular network.
 //
-// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
 func (x *Operation) WithAllowsCellularAccess(allowsCellularAccess bool) *Operation {
-	x.inner.SetAllowsCellularAccess(allowsCellularAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
 // A Boolean value that indicates whether the operation is long-lived.
 //
-// WithLongLived sets the longLived property and returns the receiver for chaining.
+// WithLongLived sets longLived and returns the receiver so calls can be chained.
 func (x *Operation) WithLongLived(longLived bool) *Operation {
-	x.inner.SetLongLived(longLived)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+// The timeout interval when waiting for additional data.
 //
-// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
 func (x *Operation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *Operation {
-	x.inner.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+// The maximum amount of time that a resource request can use.
 //
-// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
 func (x *Operation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *Operation {
-	x.inner.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
 // The operation's configuration.
-//
-// Configuration calls the underlying Configuration.
 func (x *Operation) Configuration() *OperationConfiguration {
-	_r := x.inner.Configuration()
-	if _r == nil {
-		return nil
-	}
-	return &OperationConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
+	return OperationConfigurationFromID(_r)
 }
 
-// SetConfiguration calls the underlying SetConfiguration.
-func (x *Operation) SetConfiguration(configuration *raw.CKOperationConfiguration) {
-	x.inner.SetConfiguration(configuration)
+func (x *Operation) SetConfiguration(configuration *OperationConfiguration) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 }
 
 // The operation's group.
-//
-// Group calls the underlying Group.
 func (x *Operation) Group() *OperationGroup {
-	_r := x.inner.Group()
-	if _r == nil {
-		return nil
-	}
-	return &OperationGroup{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("group"))
+	return OperationGroupFromID(_r)
 }
 
-// SetGroup calls the underlying SetGroup.
-func (x *Operation) SetGroup(group *raw.CKOperationGroup) {
-	x.inner.SetGroup(group)
+func (x *Operation) SetGroup(group *OperationGroup) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 }
 
 // A unique identifier for a long-lived operation. Pass this property's value to the “CKContainer/longLivedOperation(for:)“ method to fetch the corresponding long-lived operation. For more information, see <doc:CKOperation#Long-Lived-Operations>.
-//
-// OperationID calls the underlying OperationID.
-func (x *Operation) OperationID() string {
-	_r := x.inner.OperationID()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// The closure to execute when the server begins to store callbacks for the long-lived operation. If your app exits before CloudKit calls this property's value, the system doesn't include the operation's ID in the results of calls to the “CKContainer/allLongLivedOperationIDs()“ method. For more information, see <doc:CKOperation#Long-Lived-Operations>.
-//
-// LongLivedOperationWasPersistedBlock calls the underlying LongLivedOperationWasPersistedBlock.
-func (x *Operation) LongLivedOperationWasPersistedBlock() objc.Block {
-	return x.inner.LongLivedOperationWasPersistedBlock()
+func (x *Operation) OperationID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationID"))
+	return obj.Wrap(_r)
 }
 
 // SetLongLivedOperationWasPersistedBlock blocks until the operation completes or ctx is cancelled.
 func (x *Operation) SetLongLivedOperationWasPersistedBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.SetLongLivedOperationWasPersistedBlock(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -167,75 +170,59 @@ func (x *Operation) SetLongLivedOperationWasPersistedBlock(ctx context.Context) 
 	}
 }
 
-// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
-//
-// Container calls the underlying Container.
+// The operation's container.
 func (x *Operation) Container() *Container {
-	_r := x.inner.Container()
-	if _r == nil {
-		return nil
-	}
-	return &Container{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("container"))
+	return ContainerFromID(_r)
 }
 
-// SetContainer calls the underlying SetContainer.
-func (x *Operation) SetContainer(container *raw.CKContainer) {
-	x.inner.SetContainer(container)
+func (x *Operation) SetContainer(container *Container) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
-//
-// AllowsCellularAccess calls the underlying AllowsCellularAccess.
+// A Boolean value that indicates whether the operation can send data over the cellular network.
 func (x *Operation) AllowsCellularAccess() bool {
-	return x.inner.AllowsCellularAccess()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCellularAccess"))
+	return _r
 }
 
-// SetAllowsCellularAccess calls the underlying SetAllowsCellularAccess.
 func (x *Operation) SetAllowsCellularAccess(allowsCellularAccess bool) {
-	x.inner.SetAllowsCellularAccess(allowsCellularAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 }
 
-// A Boolean value that indicates whether the operation is long-lived. @DeprecationSummary { Use “CKOperation/Configuration/isLongLived“ instead. } Set this property to <doc://com.apple.documentation/documentation/swift/true> to make the operation long-lived. The default value is <doc://com.apple.documentation/documentation/swift/false>. If you change this property's value after you execute the operation, the change has no effect. For more information, see <doc:CKOperation#Long-Lived-Operations>.
-//
-// IsLongLived calls the underlying IsLongLived.
+// A Boolean value that indicates whether the operation is long-lived.
 func (x *Operation) IsLongLived() bool {
-	return x.inner.IsLongLived()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLongLived"))
+	return _r
 }
 
-// SetLongLived calls the underlying SetLongLived.
 func (x *Operation) SetLongLived(longLived bool) {
-	x.inner.SetLongLived(longLived)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 }
 
-// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
-//
-// TimeoutIntervalForRequest calls the underlying TimeoutIntervalForRequest.
+// The timeout interval when waiting for additional data.
 func (x *Operation) TimeoutIntervalForRequest() float64 {
-	return x.inner.TimeoutIntervalForRequest()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeoutIntervalForRequest"))
+	return _r
 }
 
-// SetTimeoutIntervalForRequest calls the underlying SetTimeoutIntervalForRequest.
 func (x *Operation) SetTimeoutIntervalForRequest(timeoutIntervalForRequest float64) {
-	x.inner.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 }
 
-// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
-//
-// TimeoutIntervalForResource calls the underlying TimeoutIntervalForResource.
+// The maximum amount of time that a resource request can use.
 func (x *Operation) TimeoutIntervalForResource() float64 {
-	return x.inner.TimeoutIntervalForResource()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeoutIntervalForResource"))
+	return _r
 }
 
-// SetTimeoutIntervalForResource calls the underlying SetTimeoutIntervalForResource.
 func (x *Operation) SetTimeoutIntervalForResource(timeoutIntervalForResource float64) {
-	x.inner.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 }
-
-func (x *Operation) asOperation() *raw.CKOperation { return x.inner }
 
 // Operationable is the interface implemented by [Operation], for mocking and DI.
 type Operationable interface {
-	Unwrap() *raw.CKOperation
+	obj.Object
 	WithConfiguration(configuration *OperationConfiguration) *Operation
 	WithGroup(group *OperationGroup) *Operation
 	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *Operation
@@ -245,14 +232,13 @@ type Operationable interface {
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *Operation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *Operation
 	Configuration() *OperationConfiguration
-	SetConfiguration(configuration *raw.CKOperationConfiguration)
+	SetConfiguration(configuration *OperationConfiguration)
 	Group() *OperationGroup
-	SetGroup(group *raw.CKOperationGroup)
-	OperationID() string
-	LongLivedOperationWasPersistedBlock() objc.Block
+	SetGroup(group *OperationGroup)
+	OperationID() obj.Object
 	SetLongLivedOperationWasPersistedBlock(ctx context.Context) error
 	Container() *Container
-	SetContainer(container *raw.CKContainer)
+	SetContainer(container *Container)
 	AllowsCellularAccess() bool
 	SetAllowsCellularAccess(allowsCellularAccess bool)
 	IsLongLived() bool

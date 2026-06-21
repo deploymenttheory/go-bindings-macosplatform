@@ -5,47 +5,72 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// SliderAccessoryBehavior wraps [raw.NSSliderAccessoryBehavior] with a fluent Go API.
+// SliderAccessoryBehavior is an idiomatic wrapper over the Objective-C class NSSliderAccessoryBehavior.
 type SliderAccessoryBehavior struct {
-	inner *raw.NSSliderAccessoryBehavior
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSliderAccessoryBehavior].
-func (x *SliderAccessoryBehavior) Unwrap() *raw.NSSliderAccessoryBehavior { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SliderAccessoryBehavior) ID() objc.ID { return x.inner.Ptr() }
-
-// SliderAccessoryBehaviorFromID adopts an existing object pointer as a SliderAccessoryBehavior (nil for 0).
+// SliderAccessoryBehaviorFromID adopts an existing Objective-C object as a SliderAccessoryBehavior
+// (nil for 0), retaining it and registering a release finalizer.
 func SliderAccessoryBehaviorFromID(id objc.ID) *SliderAccessoryBehavior {
 	if id == 0 {
 		return nil
 	}
-	return &SliderAccessoryBehavior{inner: raw.NSSliderAccessoryBehaviorFromID(id)}
+	x := &SliderAccessoryBehavior{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSliderAccessoryBehavior creates a new [SliderAccessoryBehavior].
+// sliderAccessoryBehaviorAdopt wraps an Objective-C object that this code just created as a
+// SliderAccessoryBehavior (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sliderAccessoryBehaviorAdopt(id objc.ID) *SliderAccessoryBehavior {
+	if id == 0 {
+		return nil
+	}
+	x := &SliderAccessoryBehavior{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SliderAccessoryBehavior) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SliderAccessoryBehavior) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SliderAccessoryBehavior) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSliderAccessoryBehavior creates a new SliderAccessoryBehavior.
 func NewSliderAccessoryBehavior() *SliderAccessoryBehavior {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSliderAccessoryBehavior")), objc.RegisterName("new"))
-	return &SliderAccessoryBehavior{inner: raw.NSSliderAccessoryBehaviorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSliderAccessoryBehavior")), objc.RegisterName("new"))
+	return sliderAccessoryBehaviorAdopt(_id)
 }
 
 // Override point for custom subclasses to handle interaction.
-//
-// HandleAction calls the underlying HandleAction.
-func (x *SliderAccessoryBehavior) HandleAction(sender *raw.NSSliderAccessory) {
-	x.inner.HandleAction(sender)
+func (x *SliderAccessoryBehavior) HandleAction(sender *SliderAccessory) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleAction:"), objref.IDOf(sender))
 }
 
 // SliderAccessoryBehaviorable is the interface implemented by [SliderAccessoryBehavior], for mocking and DI.
 type SliderAccessoryBehaviorable interface {
-	Unwrap() *raw.NSSliderAccessoryBehavior
-	HandleAction(sender *raw.NSSliderAccessory)
+	obj.Object
+	HandleAction(sender *SliderAccessory)
 }
 
 var _ SliderAccessoryBehaviorable = (*SliderAccessoryBehavior)(nil)

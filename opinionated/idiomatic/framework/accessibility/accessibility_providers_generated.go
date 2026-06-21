@@ -5,10 +5,10 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// MathExpressionProvider is implemented by MathExpression and any idiomatic type wrapping a AXMathExpression subclass.
+// MathExpressionProvider is accepted wherever a AXMathExpression (or one of its subclasses) is expected.
 type MathExpressionProvider interface {
-	asMathExpression() *raw.AXMathExpression
+	objref.Object
 }

@@ -1,28 +1,24 @@
 {{/*
-    slice_method.tmpl — an NSArray-returning method surfaced as a Go []Elem,
-    iterated through purego.NSArrayToSlice with a per-element conversion closure
-    (ConvClosure, pre-built in Go). Two shapes: with and without an error return.
+    slice_method.tmpl renders an Objective-C method that returns an array as a Go
+    method that returns a slice. Each element is converted by ConvClosure (built
+    in Go). One shape returns the slice directly; the other also returns an error
+    when the underlying method reports one.
 */}}
 {{define "slice_method"}}{{if .DocComment}}{{.DocComment}}//
 {{end}}// {{.GoName}} returns the collection as a Go slice.
 {{if .HasError -}}
 func {{.Recv}}{{.GoName}}() ([]{{.ElemGoType}}, error) {
-arr, err := {{.Target}}.{{.RawGoName}}()
-if err != nil {
-return nil, err
+var _nsErr uintptr
+_arr := objc.Send[objc.ID]({{.RecvExpr}}, objc.RegisterName({{.Selector | printf "%q"}}), unsafe.Pointer(&_nsErr))
+if _nsErr != 0 {
+return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 }
-if arr == nil {
-return nil, nil
-}
-return purego.NSArrayToSlice(arr.Ptr(), {{.ConvClosure}}), nil
+return purego.NSArrayToSlice(_arr, {{.ConvClosure}}), nil
 }
 {{else -}}
 func {{.Recv}}{{.GoName}}() []{{.ElemGoType}} {
-arr := {{.Target}}.{{.RawGoName}}()
-if arr == nil {
-return nil
-}
-return purego.NSArrayToSlice(arr.Ptr(), {{.ConvClosure}})
+_arr := objc.Send[objc.ID]({{.RecvExpr}}, objc.RegisterName({{.Selector | printf "%q"}}))
+return purego.NSArrayToSlice(_arr, {{.ConvClosure}})
 }
 {{end}}
 {{end}}

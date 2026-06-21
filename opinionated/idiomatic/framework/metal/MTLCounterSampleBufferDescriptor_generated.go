@@ -5,141 +5,131 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A group of properties that configures the counter sample buffers you create with it.
 //
-// CounterSampleBufferDescriptor wraps [raw.MTLCounterSampleBufferDescriptor] with a fluent Go API.
+// CounterSampleBufferDescriptor is an idiomatic wrapper over the Objective-C class MTLCounterSampleBufferDescriptor.
 type CounterSampleBufferDescriptor struct {
-	inner *raw.MTLCounterSampleBufferDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLCounterSampleBufferDescriptor].
-func (x *CounterSampleBufferDescriptor) Unwrap() *raw.MTLCounterSampleBufferDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CounterSampleBufferDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// CounterSampleBufferDescriptorFromID adopts an existing object pointer as a CounterSampleBufferDescriptor (nil for 0).
+// CounterSampleBufferDescriptorFromID adopts an existing Objective-C object as a CounterSampleBufferDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func CounterSampleBufferDescriptorFromID(id objc.ID) *CounterSampleBufferDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &CounterSampleBufferDescriptor{inner: raw.MTLCounterSampleBufferDescriptorFromID(id)}
-}
-
-// NewCounterSampleBufferDescriptor creates a new [CounterSampleBufferDescriptor].
-func NewCounterSampleBufferDescriptor() *CounterSampleBufferDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLCounterSampleBufferDescriptor")), objc.RegisterName("new"))
-	return &CounterSampleBufferDescriptor{inner: raw.MTLCounterSampleBufferDescriptorFromID(_id)}
-}
-
-// A GPU device’s counter set instance that you want to sample.
-//
-// WithCounterSet sets the counterSet property and returns the receiver for chaining.
-func (x *CounterSampleBufferDescriptor) WithCounterSet(counterSet raw.MTLCounterSet) *CounterSampleBufferDescriptor {
-	x.inner.SetCounterSet(counterSet)
+	x := &CounterSampleBufferDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// counterSampleBufferDescriptorAdopt wraps an Objective-C object that this code just created as a
+// CounterSampleBufferDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func counterSampleBufferDescriptorAdopt(id objc.ID) *CounterSampleBufferDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &CounterSampleBufferDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CounterSampleBufferDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CounterSampleBufferDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CounterSampleBufferDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCounterSampleBufferDescriptor creates a new CounterSampleBufferDescriptor.
+func NewCounterSampleBufferDescriptor() *CounterSampleBufferDescriptor {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLCounterSampleBufferDescriptor")), objc.RegisterName("new"))
+	return counterSampleBufferDescriptorAdopt(_id)
 }
 
 // The name for the counter sample buffer you create with the descriptor.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *CounterSampleBufferDescriptor) WithLabel(label string) *CounterSampleBufferDescriptor {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // The memory storage mode for the counter sample buffers you create with the descriptor.
 //
-// WithStorageMode sets the storageMode property and returns the receiver for chaining.
-func (x *CounterSampleBufferDescriptor) WithStorageMode(storageMode MTLStorageMode) *CounterSampleBufferDescriptor {
-	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
+// WithStorageMode sets storageMode and returns the receiver so calls can be chained.
+func (x *CounterSampleBufferDescriptor) WithStorageMode(storageMode StorageMode) *CounterSampleBufferDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageMode:"), storageMode)
 	return x
 }
 
 // The number of instances of a counter set’s data that a counter sample buffer can store.
 //
-// WithSampleCount sets the sampleCount property and returns the receiver for chaining.
-func (x *CounterSampleBufferDescriptor) WithSampleCount(sampleCount uint) *CounterSampleBufferDescriptor {
-	x.inner.SetSampleCount(sampleCount)
+// WithSampleCount sets sampleCount and returns the receiver so calls can be chained.
+func (x *CounterSampleBufferDescriptor) WithSampleCount(sampleCount int) *CounterSampleBufferDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleCount:"), sampleCount)
 	return x
 }
 
-// @property counterSet The counterset to be sampled for this counter sample buffer
-//
-// CounterSet calls the underlying CounterSet.
-func (x *CounterSampleBufferDescriptor) CounterSet() raw.MTLCounterSet {
-	return x.inner.CounterSet()
-}
-
-// SetCounterSet calls the underlying SetCounterSet.
-func (x *CounterSampleBufferDescriptor) SetCounterSet(counterSet raw.MTLCounterSet) {
-	x.inner.SetCounterSet(counterSet)
-}
-
-// @property label A label to identify the sample buffer in debugging tools.
-//
-// Label calls the underlying Label.
 func (x *CounterSampleBufferDescriptor) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
 func (x *CounterSampleBufferDescriptor) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// @property storageMode The storage mode for the sample buffer.  Only MTLStorageModeShared and MTLStorageModePrivate may be used.
-//
-// StorageMode calls the underlying StorageMode.
-func (x *CounterSampleBufferDescriptor) StorageMode() MTLStorageMode {
-	return MTLStorageMode(x.inner.StorageMode())
+func (x *CounterSampleBufferDescriptor) StorageMode() StorageMode {
+	_r := objc.Send[StorageMode](objref.IDOf(x), objc.RegisterName("storageMode"))
+	return _r
 }
 
-// SetStorageMode calls the underlying SetStorageMode.
-func (x *CounterSampleBufferDescriptor) SetStorageMode(storageMode MTLStorageMode) {
-	x.inner.SetStorageMode(raw.MTLStorageMode(storageMode))
+func (x *CounterSampleBufferDescriptor) SetStorageMode(storageMode StorageMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStorageMode:"), storageMode)
 }
 
-// @property sampleCount The number of samples that may be stored in the counter sample buffer.
-//
-// SampleCount calls the underlying SampleCount.
-func (x *CounterSampleBufferDescriptor) SampleCount() uint {
-	return x.inner.SampleCount()
+func (x *CounterSampleBufferDescriptor) SampleCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sampleCount"))
+	return _r
 }
 
-// SetSampleCount calls the underlying SetSampleCount.
-func (x *CounterSampleBufferDescriptor) SetSampleCount(sampleCount uint) {
-	x.inner.SetSampleCount(sampleCount)
+func (x *CounterSampleBufferDescriptor) SetSampleCount(sampleCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleCount:"), sampleCount)
 }
 
 // CounterSampleBufferDescriptorable is the interface implemented by [CounterSampleBufferDescriptor], for mocking and DI.
 type CounterSampleBufferDescriptorable interface {
-	Unwrap() *raw.MTLCounterSampleBufferDescriptor
-	WithCounterSet(counterSet raw.MTLCounterSet) *CounterSampleBufferDescriptor
+	obj.Object
 	WithLabel(label string) *CounterSampleBufferDescriptor
-	WithStorageMode(storageMode MTLStorageMode) *CounterSampleBufferDescriptor
-	WithSampleCount(sampleCount uint) *CounterSampleBufferDescriptor
-	CounterSet() raw.MTLCounterSet
-	SetCounterSet(counterSet raw.MTLCounterSet)
+	WithStorageMode(storageMode StorageMode) *CounterSampleBufferDescriptor
+	WithSampleCount(sampleCount int) *CounterSampleBufferDescriptor
 	Label() string
 	SetLabel(label string)
-	StorageMode() MTLStorageMode
-	SetStorageMode(storageMode MTLStorageMode)
-	SampleCount() uint
-	SetSampleCount(sampleCount uint)
+	StorageMode() StorageMode
+	SetStorageMode(storageMode StorageMode)
+	SampleCount() int
+	SetSampleCount(sampleCount int)
 }
 
 var _ CounterSampleBufferDescriptorable = (*CounterSampleBufferDescriptor)(nil)

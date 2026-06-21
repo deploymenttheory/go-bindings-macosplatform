@@ -5,66 +5,84 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The object for specifying the metadata necessary to provision identity documents.
 //
-// AddIdentityDocumentMetadata wraps [raw.PKAddIdentityDocumentMetadata] with a fluent Go API.
+// AddIdentityDocumentMetadata is an idiomatic wrapper over the Objective-C class PKAddIdentityDocumentMetadata.
 type AddIdentityDocumentMetadata struct {
-	inner *raw.PKAddIdentityDocumentMetadata
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKAddIdentityDocumentMetadata].
-func (x *AddIdentityDocumentMetadata) Unwrap() *raw.PKAddIdentityDocumentMetadata { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AddIdentityDocumentMetadata) ID() objc.ID { return x.inner.Ptr() }
-
-// AddIdentityDocumentMetadataFromID adopts an existing object pointer as a AddIdentityDocumentMetadata (nil for 0).
+// AddIdentityDocumentMetadataFromID adopts an existing Objective-C object as a AddIdentityDocumentMetadata
+// (nil for 0), retaining it and registering a release finalizer.
 func AddIdentityDocumentMetadataFromID(id objc.ID) *AddIdentityDocumentMetadata {
 	if id == 0 {
 		return nil
 	}
-	return &AddIdentityDocumentMetadata{inner: raw.PKAddIdentityDocumentMetadataFromID(id)}
+	x := &AddIdentityDocumentMetadata{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// addIdentityDocumentMetadataAdopt wraps an Objective-C object that this code just created as a
+// AddIdentityDocumentMetadata (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func addIdentityDocumentMetadataAdopt(id objc.ID) *AddIdentityDocumentMetadata {
+	if id == 0 {
+		return nil
+	}
+	x := &AddIdentityDocumentMetadata{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AddIdentityDocumentMetadata) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AddIdentityDocumentMetadata) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AddIdentityDocumentMetadata) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates the identity document metadata with parameters that the issuer’s server configures to indicate the specific product instance to provision.
 //
-// NewAddIdentityDocumentMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview creates a new [AddIdentityDocumentMetadata].
-func NewAddIdentityDocumentMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview(credentialIdentifier string, sharingInstanceIdentifier string, templateIdentifier string, issuingCountryCode string, documentType PKAddIdentityDocumentType, preview *raw.PKAddPassMetadataPreview) *AddIdentityDocumentMetadata {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKAddIdentityDocumentMetadata")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvisioningCredentialIdentifier:sharingInstanceIdentifier:cardTemplateIdentifier:issuingCountryCode:documentType:preview:"), foundation.NSStringStringWithUTF8String(credentialIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(sharingInstanceIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(templateIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(issuingCountryCode).Ptr(), raw.PKAddIdentityDocumentType(documentType), preview.Ptr())
-	return &AddIdentityDocumentMetadata{inner: raw.PKAddIdentityDocumentMetadataFromID(_id)}
+// NewAddIdentityDocumentMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview creates a new AddIdentityDocumentMetadata.
+func NewAddIdentityDocumentMetadataWithProvisioningCredentialIdentifierSharingInstanceIdentifierCardTemplateIdentifierIssuingCountryCodeDocumentTypePreview(credentialIdentifier string, sharingInstanceIdentifier string, templateIdentifier string, issuingCountryCode string, documentType AddIdentityDocumentType, preview *AddPassMetadataPreview) *AddIdentityDocumentMetadata {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKAddIdentityDocumentMetadata")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProvisioningCredentialIdentifier:sharingInstanceIdentifier:cardTemplateIdentifier:issuingCountryCode:documentType:preview:"), purego.NSString(credentialIdentifier), purego.NSString(sharingInstanceIdentifier), purego.NSString(templateIdentifier), purego.NSString(issuingCountryCode), documentType, objref.IDOf(preview))
+	return addIdentityDocumentMetadataAdopt(_id)
 }
 
 // An identifier that references the target server environment Apple Pay servers need to connect with to provision the pass.
 //
-// WithServerEnvironmentIdentifier sets the serverEnvironmentIdentifier property and returns the receiver for chaining.
+// WithServerEnvironmentIdentifier sets serverEnvironmentIdentifier and returns the receiver so calls can be chained.
 func (x *AddIdentityDocumentMetadata) WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *AddIdentityDocumentMetadata {
-	x.inner.PKIdentityDocumentMetadata.SetServerEnvironmentIdentifier(foundation.NSStringStringWithUTF8String(serverEnvironmentIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerEnvironmentIdentifier:"), purego.NSString(serverEnvironmentIdentifier))
 	return x
 }
 
-// Preview calls the underlying Preview.
 func (x *AddIdentityDocumentMetadata) Preview() *AddPassMetadataPreview {
-	_r := x.inner.Preview()
-	if _r == nil {
-		return nil
-	}
-	return &AddPassMetadataPreview{inner: _r}
-}
-
-func (x *AddIdentityDocumentMetadata) asIdentityDocumentMetadata() *raw.PKIdentityDocumentMetadata {
-	return &x.inner.PKIdentityDocumentMetadata
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preview"))
+	return AddPassMetadataPreviewFromID(_r)
 }
 
 // AddIdentityDocumentMetadataable is the interface implemented by [AddIdentityDocumentMetadata], for mocking and DI.
 type AddIdentityDocumentMetadataable interface {
-	Unwrap() *raw.PKAddIdentityDocumentMetadata
+	obj.Object
 	WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *AddIdentityDocumentMetadata
 	Preview() *AddPassMetadataPreview
 }

@@ -5,115 +5,119 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMCSSStyleSheet wraps [raw.DOMCSSStyleSheet] with a fluent Go API.
+// DOMCSSStyleSheet is an idiomatic wrapper over the Objective-C class DOMCSSStyleSheet.
 type DOMCSSStyleSheet struct {
-	inner *raw.DOMCSSStyleSheet
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMCSSStyleSheet].
-func (x *DOMCSSStyleSheet) Unwrap() *raw.DOMCSSStyleSheet { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMCSSStyleSheet) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMCSSStyleSheetFromID adopts an existing object pointer as a DOMCSSStyleSheet (nil for 0).
+// DOMCSSStyleSheetFromID adopts an existing Objective-C object as a DOMCSSStyleSheet
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMCSSStyleSheetFromID(id objc.ID) *DOMCSSStyleSheet {
 	if id == 0 {
 		return nil
 	}
-	return &DOMCSSStyleSheet{inner: raw.DOMCSSStyleSheetFromID(id)}
-}
-
-// NewDOMCSSStyleSheet creates a new [DOMCSSStyleSheet].
-func NewDOMCSSStyleSheet() *DOMCSSStyleSheet {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMCSSStyleSheet")), objc.RegisterName("new"))
-	return &DOMCSSStyleSheet{inner: raw.DOMCSSStyleSheetFromID(_id)}
-}
-
-// WithDisabled sets the disabled property and returns the receiver for chaining.
-func (x *DOMCSSStyleSheet) WithDisabled(disabled bool) *DOMCSSStyleSheet {
-	x.inner.DOMStyleSheet.SetDisabled(disabled)
+	x := &DOMCSSStyleSheet{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// InsertRuleIndex calls the underlying InsertRuleIndex.
-func (x *DOMCSSStyleSheet) InsertRuleIndex(rule string, index uint) uint {
-	return x.inner.InsertRuleIndex(foundation.NSStringStringWithUTF8String(rule), index)
+// dOMCSSStyleSheetAdopt wraps an Objective-C object that this code just created as a
+// DOMCSSStyleSheet (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMCSSStyleSheetAdopt(id objc.ID) *DOMCSSStyleSheet {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMCSSStyleSheet{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// DeleteRule calls the underlying DeleteRule.
-func (x *DOMCSSStyleSheet) DeleteRule(index uint) {
-	x.inner.DeleteRule(index)
+// Description returns the object's -description text.
+func (x *DOMCSSStyleSheet) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// AddRuleStyleIndex calls the underlying AddRuleStyleIndex.
-func (x *DOMCSSStyleSheet) AddRuleStyleIndex(selector string, style string, index uint) int {
-	return x.inner.AddRuleStyleIndex(foundation.NSStringStringWithUTF8String(selector), foundation.NSStringStringWithUTF8String(style), index)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMCSSStyleSheet) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// RemoveRule calls the underlying RemoveRule.
-func (x *DOMCSSStyleSheet) RemoveRule(index uint) {
-	x.inner.RemoveRule(index)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMCSSStyleSheet) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// OwnerRule calls the underlying OwnerRule.
+// NewDOMCSSStyleSheet creates a new DOMCSSStyleSheet.
+func NewDOMCSSStyleSheet() *DOMCSSStyleSheet {
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMCSSStyleSheet")), objc.RegisterName("new"))
+	return dOMCSSStyleSheetAdopt(_id)
+}
+
+// WithDisabled sets disabled and returns the receiver so calls can be chained.
+func (x *DOMCSSStyleSheet) WithDisabled(disabled bool) *DOMCSSStyleSheet {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
+	return x
+}
+
+func (x *DOMCSSStyleSheet) InsertRuleIndex(rule string, index int) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("insertRule:index:"), purego.NSString(rule), index)
+	return _r
+}
+
+func (x *DOMCSSStyleSheet) DeleteRule(index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteRule:"), index)
+}
+
+func (x *DOMCSSStyleSheet) AddRuleStyleIndex(selector string, style string, index int) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("addRule:style:index:"), purego.NSString(selector), purego.NSString(style), index)
+	return _r
+}
+
+func (x *DOMCSSStyleSheet) RemoveRule(index int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRule:"), index)
+}
+
 func (x *DOMCSSStyleSheet) OwnerRule() *DOMCSSRule {
-	_r := x.inner.OwnerRule()
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSRule{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerRule"))
+	return DOMCSSRuleFromID(_r)
 }
 
-// CssRules calls the underlying CssRules.
 func (x *DOMCSSStyleSheet) CssRules() *DOMCSSRuleList {
-	_r := x.inner.CssRules()
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSRuleList{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cssRules"))
+	return DOMCSSRuleListFromID(_r)
 }
 
-// Rules calls the underlying Rules.
 func (x *DOMCSSStyleSheet) Rules() *DOMCSSRuleList {
-	_r := x.inner.Rules()
-	if _r == nil {
-		return nil
-	}
-	return &DOMCSSRuleList{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rules"))
+	return DOMCSSRuleListFromID(_r)
 }
 
-// InsertRule calls the underlying InsertRule.
-func (x *DOMCSSStyleSheet) InsertRule(rule string, index uint) uint {
-	return x.inner.InsertRule(foundation.NSStringStringWithUTF8String(rule), index)
-}
-
-func (x *DOMCSSStyleSheet) asDOMStyleSheet() *raw.DOMStyleSheet { return &x.inner.DOMStyleSheet }
-
-func (x *DOMCSSStyleSheet) asDOMObject() *raw.DOMObject { return &x.inner.DOMStyleSheet.DOMObject }
-
-func (x *DOMCSSStyleSheet) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMStyleSheet.DOMObject.WebScriptObject
+func (x *DOMCSSStyleSheet) InsertRule(rule string, index int) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("insertRule::"), purego.NSString(rule), index)
+	return _r
 }
 
 // DOMCSSStyleSheetable is the interface implemented by [DOMCSSStyleSheet], for mocking and DI.
 type DOMCSSStyleSheetable interface {
-	Unwrap() *raw.DOMCSSStyleSheet
+	obj.Object
 	WithDisabled(disabled bool) *DOMCSSStyleSheet
-	InsertRuleIndex(rule string, index uint) uint
-	DeleteRule(index uint)
-	AddRuleStyleIndex(selector string, style string, index uint) int
-	RemoveRule(index uint)
+	InsertRuleIndex(rule string, index int) int
+	DeleteRule(index int)
+	AddRuleStyleIndex(selector string, style string, index int) int
+	RemoveRule(index int)
 	OwnerRule() *DOMCSSRule
 	CssRules() *DOMCSSRuleList
 	Rules() *DOMCSSRuleList
-	InsertRule(rule string, index uint) uint
+	InsertRule(rule string, index int) int
 }
 
 var _ DOMCSSStyleSheetable = (*DOMCSSStyleSheet)(nil)

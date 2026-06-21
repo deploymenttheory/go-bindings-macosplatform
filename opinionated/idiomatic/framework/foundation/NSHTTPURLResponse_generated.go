@@ -5,85 +5,102 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The metadata associated with the response to an HTTP protocol URL load request.
 //
-// HTTPURLResponse wraps [raw.NSHTTPURLResponse] with a fluent Go API.
+// HTTPURLResponse is an idiomatic wrapper over the Objective-C class NSHTTPURLResponse.
 type HTTPURLResponse struct {
-	inner *raw.NSHTTPURLResponse
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSHTTPURLResponse].
-func (x *HTTPURLResponse) Unwrap() *raw.NSHTTPURLResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HTTPURLResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// HTTPURLResponseFromID adopts an existing object pointer as a HTTPURLResponse (nil for 0).
+// HTTPURLResponseFromID adopts an existing Objective-C object as a HTTPURLResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func HTTPURLResponseFromID(id objc.ID) *HTTPURLResponse {
 	if id == 0 {
 		return nil
 	}
-	return &HTTPURLResponse{inner: raw.NSHTTPURLResponseFromID(id)}
-}
-
-// @method	initWithURL:statusCode:HTTPVersion:headerFields: @abstract initializer for NSHTTPURLResponse objects. @param 	url the URL from which the response was generated. @param	statusCode an HTTP status code. @param	HTTPVersion The version of the HTTP response as represented by the server.  This is typically represented as "HTTP/1.1". @param 	headerFields A dictionary representing the header keys and values of the server response. @result 	the instance of the object, or NULL if an error occurred during initialization. @discussion This API was introduced in Mac OS X 10.7.2 and iOS 5.0 and is not available prior to those releases.
-//
-// NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields creates a new [HTTPURLResponse].
-func NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields(url string, statusCode int, hTTPVersion string, headerFields purego.IDer) *HTTPURLResponse {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSHTTPURLResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:statusCode:HTTPVersion:headerFields:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), statusCode, foundation.NSStringStringWithUTF8String(hTTPVersion).Ptr(), headerFields.ID())
-	return &HTTPURLResponse{inner: raw.NSHTTPURLResponseFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *HTTPURLResponse) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *HTTPURLResponse {
-	x.inner.NSURLResponse.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &HTTPURLResponse{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @method valueForHTTPHeaderField: @abstract Returns the value which corresponds to the given header field. Note that, in keeping with the HTTP RFC, HTTP header field names are case-insensitive. @param field the header field name to use for the lookup (case-insensitive). @result the value associated with the given header field, or nil if there is no value associated with the given header field.
-//
-// ValueForHTTPHeaderField calls the underlying ValueForHTTPHeaderField.
-func (x *HTTPURLResponse) ValueForHTTPHeaderField(field string) *String {
-	_r := x.inner.ValueForHTTPHeaderField(foundation.NSStringStringWithUTF8String(field))
-	if _r == nil {
+// hTTPURLResponseAdopt wraps an Objective-C object that this code just created as a
+// HTTPURLResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hTTPURLResponseAdopt(id objc.ID) *HTTPURLResponse {
+	if id == 0 {
 		return nil
 	}
-	return &String{inner: _r}
+	x := &HTTPURLResponse{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @abstract Returns the HTTP status code of the receiver. @result The HTTP status code of the receiver.
+// Description returns the object's -description text.
+func (x *HTTPURLResponse) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HTTPURLResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HTTPURLResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// initializer for NSHTTPURLResponse objects. This API was introduced in Mac OS X 10.7.2 and iOS 5.0 and is not available prior to those releases.
 //
-// StatusCode calls the underlying StatusCode.
+// NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields creates a new HTTPURLResponse.
+func NewHTTPURLResponseWithURLStatusCodeHTTPVersionHeaderFields(url string, statusCode int, hTTPVersion string, headerFields obj.Object) *HTTPURLResponse {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSHTTPURLResponse")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:statusCode:HTTPVersion:headerFields:"), rt.FileURL(url), statusCode, purego.NSString(hTTPVersion), objref.IDOf(headerFields))
+	return hTTPURLResponseAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *HTTPURLResponse) WithScriptingProperties(scriptingProperties obj.Object) *HTTPURLResponse {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// Returns the value which corresponds to the given header field. Note that, in keeping with the HTTP RFC, HTTP header field names are case-insensitive.
+func (x *HTTPURLResponse) ValueForHTTPHeaderField(field string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForHTTPHeaderField:"), purego.NSString(field))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// Returns the HTTP status code of the receiver.
 func (x *HTTPURLResponse) StatusCode() int {
-	return x.inner.StatusCode()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("statusCode"))
+	return _r
 }
 
-// @abstract Returns a dictionary containing all the HTTP header fields of the receiver. @discussion By examining this header dictionary, clients can see the "raw" header information which was reported to the protocol implementation by the HTTP server. This may be of use to sophisticated or special-purpose HTTP clients. @result A dictionary containing all the HTTP header fields of the receiver.
-//
-// AllHeaderFields calls the underlying AllHeaderFields.
-func (x *HTTPURLResponse) AllHeaderFields() *raw.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.AllHeaderFields()
+// Returns a dictionary containing all the HTTP header fields of the receiver. By examining this header dictionary, clients can see the "raw" header information which was reported to the protocol implementation by the HTTP server. This may be of use to sophisticated or special-purpose HTTP clients.
+func (x *HTTPURLResponse) AllHeaderFields() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allHeaderFields"))
+	return obj.Wrap(_r)
 }
-
-func (x *HTTPURLResponse) asURLResponse() *raw.NSURLResponse { return &x.inner.NSURLResponse }
-
-func (x *HTTPURLResponse) asObject() *raw.NSObject { return &x.inner.NSURLResponse.NSObject }
 
 // HTTPURLResponseable is the interface implemented by [HTTPURLResponse], for mocking and DI.
 type HTTPURLResponseable interface {
-	Unwrap() *raw.NSHTTPURLResponse
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *HTTPURLResponse
-	ValueForHTTPHeaderField(field string) *String
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *HTTPURLResponse
+	ValueForHTTPHeaderField(field string) string
 	StatusCode() int
-	AllHeaderFields() *raw.NSDictionary[objc.ID, objc.ID]
+	AllHeaderFields() obj.Object
 }
 
 var _ HTTPURLResponseable = (*HTTPURLResponse)(nil)

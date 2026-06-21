@@ -5,63 +5,81 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An array of sample buffer attachments for a render pass.
 //
-// RenderPassSampleBufferAttachmentDescriptorArray wraps [raw.MTLRenderPassSampleBufferAttachmentDescriptorArray] with a fluent Go API.
+// RenderPassSampleBufferAttachmentDescriptorArray is an idiomatic wrapper over the Objective-C class MTLRenderPassSampleBufferAttachmentDescriptorArray.
 type RenderPassSampleBufferAttachmentDescriptorArray struct {
-	inner *raw.MTLRenderPassSampleBufferAttachmentDescriptorArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLRenderPassSampleBufferAttachmentDescriptorArray].
-func (x *RenderPassSampleBufferAttachmentDescriptorArray) Unwrap() *raw.MTLRenderPassSampleBufferAttachmentDescriptorArray {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RenderPassSampleBufferAttachmentDescriptorArray) ID() objc.ID { return x.inner.Ptr() }
-
-// RenderPassSampleBufferAttachmentDescriptorArrayFromID adopts an existing object pointer as a RenderPassSampleBufferAttachmentDescriptorArray (nil for 0).
+// RenderPassSampleBufferAttachmentDescriptorArrayFromID adopts an existing Objective-C object as a RenderPassSampleBufferAttachmentDescriptorArray
+// (nil for 0), retaining it and registering a release finalizer.
 func RenderPassSampleBufferAttachmentDescriptorArrayFromID(id objc.ID) *RenderPassSampleBufferAttachmentDescriptorArray {
 	if id == 0 {
 		return nil
 	}
-	return &RenderPassSampleBufferAttachmentDescriptorArray{inner: raw.MTLRenderPassSampleBufferAttachmentDescriptorArrayFromID(id)}
+	x := &RenderPassSampleBufferAttachmentDescriptorArray{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRenderPassSampleBufferAttachmentDescriptorArray creates a new [RenderPassSampleBufferAttachmentDescriptorArray].
+// renderPassSampleBufferAttachmentDescriptorArrayAdopt wraps an Objective-C object that this code just created as a
+// RenderPassSampleBufferAttachmentDescriptorArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func renderPassSampleBufferAttachmentDescriptorArrayAdopt(id objc.ID) *RenderPassSampleBufferAttachmentDescriptorArray {
+	if id == 0 {
+		return nil
+	}
+	x := &RenderPassSampleBufferAttachmentDescriptorArray{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RenderPassSampleBufferAttachmentDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RenderPassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RenderPassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRenderPassSampleBufferAttachmentDescriptorArray creates a new RenderPassSampleBufferAttachmentDescriptorArray.
 func NewRenderPassSampleBufferAttachmentDescriptorArray() *RenderPassSampleBufferAttachmentDescriptorArray {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLRenderPassSampleBufferAttachmentDescriptorArray")), objc.RegisterName("new"))
-	return &RenderPassSampleBufferAttachmentDescriptorArray{inner: raw.MTLRenderPassSampleBufferAttachmentDescriptorArrayFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLRenderPassSampleBufferAttachmentDescriptorArray")), objc.RegisterName("new"))
+	return renderPassSampleBufferAttachmentDescriptorArrayAdopt(_id)
 }
 
 // Returns the descriptor object for the specified sample buffer attachment.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *RenderPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *RenderPassSampleBufferAttachmentDescriptor {
-	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
-	if _r == nil {
-		return nil
-	}
-	return &RenderPassSampleBufferAttachmentDescriptor{inner: _r}
+func (x *RenderPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *RenderPassSampleBufferAttachmentDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
+	return RenderPassSampleBufferAttachmentDescriptorFromID(_r)
 }
 
 // Sets the descriptor object for the specified sample buffer attachment.
-//
-// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
-func (x *RenderPassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLRenderPassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
-	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)
+func (x *RenderPassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *RenderPassSampleBufferAttachmentDescriptor, attachmentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
 
 // RenderPassSampleBufferAttachmentDescriptorArrayable is the interface implemented by [RenderPassSampleBufferAttachmentDescriptorArray], for mocking and DI.
 type RenderPassSampleBufferAttachmentDescriptorArrayable interface {
-	Unwrap() *raw.MTLRenderPassSampleBufferAttachmentDescriptorArray
-	ObjectAtIndexedSubscript(attachmentIndex uint) *RenderPassSampleBufferAttachmentDescriptor
-	SetObjectAtIndexedSubscript(attachment *raw.MTLRenderPassSampleBufferAttachmentDescriptor, attachmentIndex uint)
+	obj.Object
+	ObjectAtIndexedSubscript(attachmentIndex int) *RenderPassSampleBufferAttachmentDescriptor
+	SetObjectAtIndexedSubscript(attachment *RenderPassSampleBufferAttachmentDescriptor, attachmentIndex int)
 }
 
 var _ RenderPassSampleBufferAttachmentDescriptorArrayable = (*RenderPassSampleBufferAttachmentDescriptorArray)(nil)

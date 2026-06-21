@@ -5,77 +5,95 @@
 package corebluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A live L2CAP connection to a remote device.
 //
-// L2CAPChannel wraps [raw.CBL2CAPChannel] with a fluent Go API.
+// L2CAPChannel is an idiomatic wrapper over the Objective-C class CBL2CAPChannel.
 type L2CAPChannel struct {
-	inner *raw.CBL2CAPChannel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CBL2CAPChannel].
-func (x *L2CAPChannel) Unwrap() *raw.CBL2CAPChannel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *L2CAPChannel) ID() objc.ID { return x.inner.Ptr() }
-
-// L2CAPChannelFromID adopts an existing object pointer as a L2CAPChannel (nil for 0).
+// L2CAPChannelFromID adopts an existing Objective-C object as a L2CAPChannel
+// (nil for 0), retaining it and registering a release finalizer.
 func L2CAPChannelFromID(id objc.ID) *L2CAPChannel {
 	if id == 0 {
 		return nil
 	}
-	return &L2CAPChannel{inner: raw.CBL2CAPChannelFromID(id)}
+	x := &L2CAPChannel{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewL2CAPChannel creates a new [L2CAPChannel].
-func NewL2CAPChannel() *L2CAPChannel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBL2CAPChannel")), objc.RegisterName("new"))
-	return &L2CAPChannel{inner: raw.CBL2CAPChannelFromID(_id)}
-}
-
-// @property peer @discussion The peer connected to the channel
-//
-// Peer calls the underlying Peer.
-func (x *L2CAPChannel) Peer() *Peer {
-	_r := x.inner.Peer()
-	if _r == nil {
+// l2CAPChannelAdopt wraps an Objective-C object that this code just created as a
+// L2CAPChannel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func l2CAPChannelAdopt(id objc.ID) *L2CAPChannel {
+	if id == 0 {
 		return nil
 	}
-	return &Peer{inner: _r}
+	x := &L2CAPChannel{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property inputStream @discussion An NSStream used for reading data from the remote peer
-//
-// InputStream calls the underlying InputStream.
-func (x *L2CAPChannel) InputStream() *foundation.NSInputStream {
-	return x.inner.InputStream()
+// Description returns the object's -description text.
+func (x *L2CAPChannel) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property outputStream @discussion An NSStream used for writing data to the peer
-//
-// OutputStream calls the underlying OutputStream.
-func (x *L2CAPChannel) OutputStream() *foundation.NSOutputStream {
-	return x.inner.OutputStream()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *L2CAPChannel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property PSM @discussion The PSM (Protocol/Service Multiplexer) of the channel
-//
-// PSM calls the underlying PSM.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *L2CAPChannel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewL2CAPChannel creates a new L2CAPChannel.
+func NewL2CAPChannel() *L2CAPChannel {
+	_id := objc.Send[objc.ID](objc.ID(_class("CBL2CAPChannel")), objc.RegisterName("new"))
+	return l2CAPChannelAdopt(_id)
+}
+
+// The peer connected to the channel
+func (x *L2CAPChannel) Peer() *Peer {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("peer"))
+	return PeerFromID(_r)
+}
+
+// An NSStream used for reading data from the remote peer
+func (x *L2CAPChannel) InputStream() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputStream"))
+	return obj.Wrap(_r)
+}
+
+// An NSStream used for writing data to the peer
+func (x *L2CAPChannel) OutputStream() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputStream"))
+	return obj.Wrap(_r)
+}
+
+// The PSM (Protocol/Service Multiplexer) of the channel
 func (x *L2CAPChannel) PSM() uint16 {
-	return x.inner.PSM()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("PSM"))
+	return _r
 }
 
 // L2CAPChannelable is the interface implemented by [L2CAPChannel], for mocking and DI.
 type L2CAPChannelable interface {
-	Unwrap() *raw.CBL2CAPChannel
+	obj.Object
 	Peer() *Peer
-	InputStream() *foundation.NSInputStream
-	OutputStream() *foundation.NSOutputStream
+	InputStream() obj.Object
+	OutputStream() obj.Object
 	PSM() uint16
 }
 

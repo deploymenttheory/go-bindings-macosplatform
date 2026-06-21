@@ -5,600 +5,572 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that enhances the text display capabilities of a cell.
 //
-// TextFieldCell wraps [raw.NSTextFieldCell] with a fluent Go API.
+// TextFieldCell is an idiomatic wrapper over the Objective-C class NSTextFieldCell.
 type TextFieldCell struct {
-	inner *raw.NSTextFieldCell
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTextFieldCell].
-func (x *TextFieldCell) Unwrap() *raw.NSTextFieldCell { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextFieldCell) ID() objc.ID { return x.inner.Ptr() }
-
-// TextFieldCellFromID adopts an existing object pointer as a TextFieldCell (nil for 0).
+// TextFieldCellFromID adopts an existing Objective-C object as a TextFieldCell
+// (nil for 0), retaining it and registering a release finalizer.
 func TextFieldCellFromID(id objc.ID) *TextFieldCell {
 	if id == 0 {
 		return nil
 	}
-	return &TextFieldCell{inner: raw.NSTextFieldCellFromID(id)}
+	x := &TextFieldCell{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// textFieldCellAdopt wraps an Objective-C object that this code just created as a
+// TextFieldCell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textFieldCellAdopt(id objc.ID) *TextFieldCell {
+	if id == 0 {
+		return nil
+	}
+	x := &TextFieldCell{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TextFieldCell) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextFieldCell) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextFieldCell) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a text field cell that displays the specified string.
 //
-// NewTextFieldCellTextCell creates a new [TextFieldCell].
+// NewTextFieldCellTextCell creates a new TextFieldCell.
 func NewTextFieldCellTextCell(string_ string) *TextFieldCell {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextFieldCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
-	return &TextFieldCell{inner: raw.NSTextFieldCellFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextFieldCell")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
+	return textFieldCellAdopt(_id)
 }
 
 // Initializes a text field cell from data in the provided unarchiver.
 //
-// NewTextFieldCellWithCoder creates a new [TextFieldCell].
-func NewTextFieldCellWithCoder(coder *foundation.NSCoder) *TextFieldCell {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextFieldCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &TextFieldCell{inner: raw.NSTextFieldCellFromID(_id)}
+// NewTextFieldCellWithCoder creates a new TextFieldCell.
+func NewTextFieldCellWithCoder(coder obj.Object) *TextFieldCell {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextFieldCell")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return textFieldCellAdopt(_id)
 }
 
 // The color of the cell’s background.
 //
-// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithBackgroundColor(backgroundColor *Color) *TextFieldCell {
-	x.inner.SetBackgroundColor(backgroundColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
 // A Boolean value that indicates whether the cell draws its background color.
 //
-// WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
+// WithDrawsBackground sets drawsBackground and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithDrawsBackground(drawsBackground bool) *TextFieldCell {
-	x.inner.SetDrawsBackground(drawsBackground)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 	return x
 }
 
 // The color to use to draw the cell’s text.
 //
-// WithTextColor sets the textColor property and returns the receiver for chaining.
+// WithTextColor sets textColor and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithTextColor(textColor *Color) *TextFieldCell {
-	x.inner.SetTextColor(textColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	return x
 }
 
 // The bezel style to use when drawing the text field.
 //
-// WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *TextFieldCell) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *TextFieldCell {
-	x.inner.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
+// WithBezelStyle sets bezelStyle and returns the receiver so calls can be chained.
+func (x *TextFieldCell) WithBezelStyle(bezelStyle TextFieldBezelStyle) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
 	return x
 }
 
 // The placeholder text for the cell, specified as a plain text string.
 //
-// WithPlaceholderString sets the placeholderString property and returns the receiver for chaining.
+// WithPlaceholderString sets placeholderString and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithPlaceholderString(placeholderString string) *TextFieldCell {
-	x.inner.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
 	return x
 }
 
 // The placeholder text for the cell, specified as an attributed string.
 //
-// WithPlaceholderAttributedString sets the placeholderAttributedString property and returns the receiver for chaining.
-func (x *TextFieldCell) WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TextFieldCell {
-	x.inner.SetPlaceholderAttributedString(placeholderAttributedString)
+// WithPlaceholderAttributedString sets placeholderAttributedString and returns the receiver so calls can be chained.
+func (x *TextFieldCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	return x
 }
 
 // An array of locale identifiers that represent the allowed input sources when the text field has the keyboard focus.
 //
-// WithAllowedInputSourceLocales sets the collection, converting the Go slice to an NSArray.
-func (x *TextFieldCell) WithAllowedInputSourceLocales(items ...*foundation.NSString) *TextFieldCell {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetAllowedInputSourceLocales(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetAllowedInputSourceLocales(_arr)
+// WithAllowedInputSourceLocales sets the collection and returns the receiver so calls can be chained.
+func (x *TextFieldCell) WithAllowedInputSourceLocales(items ...obj.Object) *TextFieldCell {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedInputSourceLocales:"), _arr)
 	return x
 }
 
 // The view associated with the cell.
 //
-// WithControlView sets the controlView property and returns the receiver for chaining.
+// WithControlView sets controlView and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithControlView(controlView ViewProvider) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetControlView(controlView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	return x
 }
 
 // The type of the cell.
 //
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *TextFieldCell) WithType(type_ NSCellType) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
+// WithType sets type_ and returns the receiver so calls can be chained.
+func (x *TextFieldCell) WithType(type_ CellType) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
 // The cell’s current state.
 //
-// WithState sets the state property and returns the receiver for chaining.
+// WithState sets state and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithState(state int) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
 // The object that receives the cell’s action messages.
 //
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *TextFieldCell) WithTarget(target objc.ID) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetTarget(target)
-	return x
-}
-
-// The action performed by the cell.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *TextFieldCell) WithAction(action objc.SEL) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetAction(action)
+// WithTarget sets target and returns the receiver so calls can be chained.
+func (x *TextFieldCell) WithTarget(target obj.Object) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
 // A tag for identifying the cell.
 //
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag sets tag and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithTag(tag int) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
 // The cell’s title text.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithTitle(title string) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // A Boolean value indicating whether the cell is currently enabled.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithEnabled(enabled bool) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 //
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous sets continuous and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithContinuous(continuous bool) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
 // A Boolean value indicating whether the cell is editable.
 //
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable sets editable and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithEditable(editable bool) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
 // A Boolean value indicating whether the cell’s text can be selected.
 //
-// WithSelectable sets the selectable property and returns the receiver for chaining.
+// WithSelectable sets selectable and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithSelectable(selectable bool) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetSelectable(selectable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
 // A Boolean value indicating whether the cell draws itself outlined with a plain border.
 //
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered sets bordered and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithBordered(bordered bool) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
 // A Boolean value indicating whether the cell has a bezeled border.
 //
-// WithBezeled sets the bezeled property and returns the receiver for chaining.
+// WithBezeled sets bezeled and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithBezeled(bezeled bool) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetBezeled(bezeled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
 // A Boolean value indicating whether excess text scrolls past the cell’s bounds.
 //
-// WithScrollable sets the scrollable property and returns the receiver for chaining.
+// WithScrollable sets scrollable and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithScrollable(scrollable bool) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetScrollable(scrollable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
 	return x
 }
 
 // A Boolean value indicating whether the cell has a highlighted appearance.
 //
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithHighlighted(highlighted bool) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
 // The alignment of the cell’s text.
 //
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *TextFieldCell) WithAlignment(alignment NSTextAlignment) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment sets alignment and returns the receiver so calls can be chained.
+func (x *TextFieldCell) WithAlignment(alignment TextAlignment) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
 // A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 //
-// WithWraps sets the wraps property and returns the receiver for chaining.
+// WithWraps sets wraps and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithWraps(wraps bool) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetWraps(wraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
 // The font that the cell uses to display text.
 //
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont sets font and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithFont(font *Font) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
 // The cell’s formatter object.
 //
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *TextFieldCell) WithFormatter(formatter *foundation.NSFormatter) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetFormatter(formatter)
+// WithFormatter sets formatter and returns the receiver so calls can be chained.
+func (x *TextFieldCell) WithFormatter(formatter obj.Object) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
 // The cell’s value as an Objective-C object.
 //
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *TextFieldCell) WithObjectValue(objectValue objc.ID) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetObjectValue(objectValue)
+// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+func (x *TextFieldCell) WithObjectValue(objectValue obj.Object) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
 // The cell’s value as a string.
 //
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue sets stringValue and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithStringValue(stringValue string) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
 // The cell’s value as an integer.
 //
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue sets intValue and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithIntValue(intValue int) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
 // The cell’s value as a single-precision floating-point number.
 //
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithFloatValue(floatValue float32) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
 // The cell’s value as a double-precision floating-point number.
 //
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithDoubleValue(doubleValue float64) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
 // The cell’s value as an integer value.
 //
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithIntegerValue(integerValue int) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
 // The image displayed by the cell, if any.
 //
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage sets image and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithImage(image *Image) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
 // The size of the cell.
 //
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *TextFieldCell) WithControlSize(controlSize NSControlSize) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+func (x *TextFieldCell) WithControlSize(controlSize ControlSize) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
 // The object represented by the cell.
 //
-// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
-func (x *TextFieldCell) WithRepresentedObject(representedObject objc.ID) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+// WithRepresentedObject sets representedObject and returns the receiver so calls can be chained.
+func (x *TextFieldCell) WithRepresentedObject(representedObject obj.Object) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
 // The cell’s contextual menu.
 //
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu sets menu and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithMenu(menu *Menu) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
 // A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 //
-// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+// WithSendsActionOnEndEditing sets sendsActionOnEndEditing and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
 	return x
 }
 
 // The initial writing direction used to determine the actual writing direction for text.
 //
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *TextFieldCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+func (x *TextFieldCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
 // The line break mode to use when drawing text in the cell.
 //
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *TextFieldCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+func (x *TextFieldCell) WithLineBreakMode(lineBreakMode LineBreakMode) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
 // A Boolean value indicating whether the cell assumes responsibility for undo operations.
 //
-// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+// WithAllowsUndo sets allowsUndo and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithAllowsUndo(allowsUndo bool) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
 	return x
 }
 
 // A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 //
-// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+// WithTruncatesLastVisibleLine sets truncatesLastVisibleLine and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
 	return x
 }
 
 // The layout direction of the user interface.
 //
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *TextFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+func (x *TextFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
 // A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 //
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithUsesSingleLineMode(usesSingleLineMode bool) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
 // A Boolean value indicating whether the cell refuses the first responder status.
 //
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithRefusesFirstResponder(refusesFirstResponder bool) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
 // A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 //
-// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+// WithShowsFirstResponder sets showsFirstResponder and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithShowsFirstResponder(showsFirstResponder bool) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
 	return x
 }
 
 // The type of focus ring to use with the associated view.
 //
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *TextFieldCell) WithFocusRingType(focusRingType NSFocusRingType) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+func (x *TextFieldCell) WithFocusRingType(focusRingType FocusRingType) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
 // The cell’s value as an attributed string.
 //
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *TextFieldCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+func (x *TextFieldCell) WithAttributedStringValue(attributedStringValue obj.Object) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
 // A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 //
-// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+// WithAllowsEditingTextAttributes sets allowsEditingTextAttributes and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
 // A Boolean value indicating whether the cell supports the importation of images into its text.
 //
-// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+// WithImportsGraphics sets importsGraphics and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithImportsGraphics(importsGraphics bool) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
 // A Boolean value indicating whether the cell supports three states instead of two.
 //
-// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+// WithAllowsMixedState sets allowsMixedState and returns the receiver so calls can be chained.
 func (x *TextFieldCell) WithAllowsMixedState(allowsMixedState bool) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
 // The cell’s background style.
 //
-// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *TextFieldCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
+// WithBackgroundStyle sets backgroundStyle and returns the receiver so calls can be chained.
+func (x *TextFieldCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 	return x
 }
 
 // The cell’s control tint.
 //
-// WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *TextFieldCell) WithControlTint(controlTint NSControlTint) *TextFieldCell {
-	x.inner.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
+// WithControlTint sets controlTint and returns the receiver so calls can be chained.
+func (x *TextFieldCell) WithControlTint(controlTint ControlTint) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
 
 // Directs the cell’s associated field editor to post text change notifications.
-//
-// SetWantsNotificationForMarkedText calls the underlying SetWantsNotificationForMarkedText.
 func (x *TextFieldCell) SetWantsNotificationForMarkedText(flag bool) {
-	x.inner.SetWantsNotificationForMarkedText(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsNotificationForMarkedText:"), flag)
 }
 
-// BackgroundColor calls the underlying BackgroundColor.
 func (x *TextFieldCell) BackgroundColor() *Color {
-	_r := x.inner.BackgroundColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+	return ColorFromID(_r)
 }
 
-// SetBackgroundColor calls the underlying SetBackgroundColor.
-func (x *TextFieldCell) SetBackgroundColor(backgroundColor *raw.NSColor) {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *TextFieldCell) SetBackgroundColor(backgroundColor *Color) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
-// DrawsBackground calls the underlying DrawsBackground.
 func (x *TextFieldCell) DrawsBackground() bool {
-	return x.inner.DrawsBackground()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsBackground"))
+	return _r
 }
 
-// SetDrawsBackground calls the underlying SetDrawsBackground.
 func (x *TextFieldCell) SetDrawsBackground(drawsBackground bool) {
-	x.inner.SetDrawsBackground(drawsBackground)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 }
 
-// TextColor calls the underlying TextColor.
 func (x *TextFieldCell) TextColor() *Color {
-	_r := x.inner.TextColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textColor"))
+	return ColorFromID(_r)
 }
 
-// SetTextColor calls the underlying SetTextColor.
-func (x *TextFieldCell) SetTextColor(textColor *raw.NSColor) {
-	x.inner.SetTextColor(textColor)
+func (x *TextFieldCell) SetTextColor(textColor *Color) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 }
 
-// BezelStyle calls the underlying BezelStyle.
-func (x *TextFieldCell) BezelStyle() NSTextFieldBezelStyle {
-	return NSTextFieldBezelStyle(x.inner.BezelStyle())
+func (x *TextFieldCell) BezelStyle() TextFieldBezelStyle {
+	_r := objc.Send[TextFieldBezelStyle](objref.IDOf(x), objc.RegisterName("bezelStyle"))
+	return _r
 }
 
-// SetBezelStyle calls the underlying SetBezelStyle.
-func (x *TextFieldCell) SetBezelStyle(bezelStyle NSTextFieldBezelStyle) {
-	x.inner.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
+func (x *TextFieldCell) SetBezelStyle(bezelStyle TextFieldBezelStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
 }
 
-// PlaceholderString calls the underlying PlaceholderString.
 func (x *TextFieldCell) PlaceholderString() string {
-	_r := x.inner.PlaceholderString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPlaceholderString calls the underlying SetPlaceholderString.
 func (x *TextFieldCell) SetPlaceholderString(placeholderString string) {
-	x.inner.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
 }
 
-// PlaceholderAttributedString calls the underlying PlaceholderAttributedString.
-func (x *TextFieldCell) PlaceholderAttributedString() *foundation.NSAttributedString {
-	return x.inner.PlaceholderAttributedString()
+func (x *TextFieldCell) PlaceholderAttributedString() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderAttributedString"))
+	return obj.Wrap(_r)
 }
 
-// SetPlaceholderAttributedString calls the underlying SetPlaceholderAttributedString.
-func (x *TextFieldCell) SetPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) {
-	x.inner.SetPlaceholderAttributedString(placeholderAttributedString)
+func (x *TextFieldCell) SetPlaceholderAttributedString(placeholderAttributedString obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 }
 
 // AllowedInputSourceLocales returns the collection as a Go slice.
 func (x *TextFieldCell) AllowedInputSourceLocales() []string {
-	arr := x.inner.AllowedInputSourceLocales()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowedInputSourceLocales"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetAllowedInputSourceLocales calls the underlying SetAllowedInputSourceLocales.
-func (x *TextFieldCell) SetAllowedInputSourceLocales(allowedInputSourceLocales *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetAllowedInputSourceLocales(allowedInputSourceLocales)
+func (x *TextFieldCell) SetAllowedInputSourceLocales(allowedInputSourceLocales []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedInputSourceLocales:"), purego.SliceToNSArray(allowedInputSourceLocales, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
-
-func (x *TextFieldCell) asTextFieldCell() *raw.NSTextFieldCell { return x.inner }
-
-func (x *TextFieldCell) asActionCell() *raw.NSActionCell { return &x.inner.NSActionCell }
-
-func (x *TextFieldCell) asCell() *raw.NSCell { return &x.inner.NSActionCell.NSCell }
 
 // TextFieldCellable is the interface implemented by [TextFieldCell], for mocking and DI.
 type TextFieldCellable interface {
-	Unwrap() *raw.NSTextFieldCell
+	obj.Object
 	WithBackgroundColor(backgroundColor *Color) *TextFieldCell
 	WithDrawsBackground(drawsBackground bool) *TextFieldCell
 	WithTextColor(textColor *Color) *TextFieldCell
-	WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *TextFieldCell
+	WithBezelStyle(bezelStyle TextFieldBezelStyle) *TextFieldCell
 	WithPlaceholderString(placeholderString string) *TextFieldCell
-	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *TextFieldCell
-	WithAllowedInputSourceLocales(items ...*foundation.NSString) *TextFieldCell
+	WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TextFieldCell
+	WithAllowedInputSourceLocales(items ...obj.Object) *TextFieldCell
 	WithControlView(controlView ViewProvider) *TextFieldCell
-	WithType(type_ NSCellType) *TextFieldCell
+	WithType(type_ CellType) *TextFieldCell
 	WithState(state int) *TextFieldCell
-	WithTarget(target objc.ID) *TextFieldCell
-	WithAction(action objc.SEL) *TextFieldCell
+	WithTarget(target obj.Object) *TextFieldCell
 	WithTag(tag int) *TextFieldCell
 	WithTitle(title string) *TextFieldCell
 	WithEnabled(enabled bool) *TextFieldCell
@@ -609,51 +581,51 @@ type TextFieldCellable interface {
 	WithBezeled(bezeled bool) *TextFieldCell
 	WithScrollable(scrollable bool) *TextFieldCell
 	WithHighlighted(highlighted bool) *TextFieldCell
-	WithAlignment(alignment NSTextAlignment) *TextFieldCell
+	WithAlignment(alignment TextAlignment) *TextFieldCell
 	WithWraps(wraps bool) *TextFieldCell
 	WithFont(font *Font) *TextFieldCell
-	WithFormatter(formatter *foundation.NSFormatter) *TextFieldCell
-	WithObjectValue(objectValue objc.ID) *TextFieldCell
+	WithFormatter(formatter obj.Object) *TextFieldCell
+	WithObjectValue(objectValue obj.Object) *TextFieldCell
 	WithStringValue(stringValue string) *TextFieldCell
 	WithIntValue(intValue int) *TextFieldCell
 	WithFloatValue(floatValue float32) *TextFieldCell
 	WithDoubleValue(doubleValue float64) *TextFieldCell
 	WithIntegerValue(integerValue int) *TextFieldCell
 	WithImage(image *Image) *TextFieldCell
-	WithControlSize(controlSize NSControlSize) *TextFieldCell
-	WithRepresentedObject(representedObject objc.ID) *TextFieldCell
+	WithControlSize(controlSize ControlSize) *TextFieldCell
+	WithRepresentedObject(representedObject obj.Object) *TextFieldCell
 	WithMenu(menu *Menu) *TextFieldCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TextFieldCell
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *TextFieldCell
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *TextFieldCell
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *TextFieldCell
+	WithLineBreakMode(lineBreakMode LineBreakMode) *TextFieldCell
 	WithAllowsUndo(allowsUndo bool) *TextFieldCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TextFieldCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *TextFieldCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TextFieldCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *TextFieldCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *TextFieldCell
 	WithShowsFirstResponder(showsFirstResponder bool) *TextFieldCell
-	WithFocusRingType(focusRingType NSFocusRingType) *TextFieldCell
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *TextFieldCell
+	WithFocusRingType(focusRingType FocusRingType) *TextFieldCell
+	WithAttributedStringValue(attributedStringValue obj.Object) *TextFieldCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextFieldCell
 	WithImportsGraphics(importsGraphics bool) *TextFieldCell
 	WithAllowsMixedState(allowsMixedState bool) *TextFieldCell
-	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *TextFieldCell
-	WithControlTint(controlTint NSControlTint) *TextFieldCell
+	WithBackgroundStyle(backgroundStyle BackgroundStyle) *TextFieldCell
+	WithControlTint(controlTint ControlTint) *TextFieldCell
 	SetWantsNotificationForMarkedText(flag bool)
 	BackgroundColor() *Color
-	SetBackgroundColor(backgroundColor *raw.NSColor)
+	SetBackgroundColor(backgroundColor *Color)
 	DrawsBackground() bool
 	SetDrawsBackground(drawsBackground bool)
 	TextColor() *Color
-	SetTextColor(textColor *raw.NSColor)
-	BezelStyle() NSTextFieldBezelStyle
-	SetBezelStyle(bezelStyle NSTextFieldBezelStyle)
+	SetTextColor(textColor *Color)
+	BezelStyle() TextFieldBezelStyle
+	SetBezelStyle(bezelStyle TextFieldBezelStyle)
 	PlaceholderString() string
 	SetPlaceholderString(placeholderString string)
-	PlaceholderAttributedString() *foundation.NSAttributedString
-	SetPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString)
+	PlaceholderAttributedString() obj.Object
+	SetPlaceholderAttributedString(placeholderAttributedString obj.Object)
 	AllowedInputSourceLocales() []string
-	SetAllowedInputSourceLocales(allowedInputSourceLocales *foundation.NSArray[*foundation.NSString])
+	SetAllowedInputSourceLocales(allowedInputSourceLocales []string)
 }
 
 var _ TextFieldCellable = (*TextFieldCell)(nil)

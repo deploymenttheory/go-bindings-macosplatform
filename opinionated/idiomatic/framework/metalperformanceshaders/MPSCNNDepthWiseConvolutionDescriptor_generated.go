@@ -5,146 +5,165 @@
 package metalperformanceshaders
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description of a convolution object that does depthwise convolution.
 //
-// CNNDepthWiseConvolutionDescriptor wraps [raw.MPSCNNDepthWiseConvolutionDescriptor] with a fluent Go API.
+// CNNDepthWiseConvolutionDescriptor is an idiomatic wrapper over the Objective-C class MPSCNNDepthWiseConvolutionDescriptor.
 type CNNDepthWiseConvolutionDescriptor struct {
-	inner *raw.MPSCNNDepthWiseConvolutionDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNDepthWiseConvolutionDescriptor].
-func (x *CNNDepthWiseConvolutionDescriptor) Unwrap() *raw.MPSCNNDepthWiseConvolutionDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNDepthWiseConvolutionDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNDepthWiseConvolutionDescriptorFromID adopts an existing object pointer as a CNNDepthWiseConvolutionDescriptor (nil for 0).
+// CNNDepthWiseConvolutionDescriptorFromID adopts an existing Objective-C object as a CNNDepthWiseConvolutionDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNDepthWiseConvolutionDescriptorFromID(id objc.ID) *CNNDepthWiseConvolutionDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &CNNDepthWiseConvolutionDescriptor{inner: raw.MPSCNNDepthWiseConvolutionDescriptorFromID(id)}
+	x := &CNNDepthWiseConvolutionDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCNNDepthWiseConvolutionDescriptor creates a new [CNNDepthWiseConvolutionDescriptor].
+// cNNDepthWiseConvolutionDescriptorAdopt wraps an Objective-C object that this code just created as a
+// CNNDepthWiseConvolutionDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNDepthWiseConvolutionDescriptorAdopt(id objc.ID) *CNNDepthWiseConvolutionDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNDepthWiseConvolutionDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CNNDepthWiseConvolutionDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNDepthWiseConvolutionDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNDepthWiseConvolutionDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNDepthWiseConvolutionDescriptor creates a new CNNDepthWiseConvolutionDescriptor.
 func NewCNNDepthWiseConvolutionDescriptor() *CNNDepthWiseConvolutionDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNDepthWiseConvolutionDescriptor")), objc.RegisterName("new"))
-	return &CNNDepthWiseConvolutionDescriptor{inner: raw.MPSCNNDepthWiseConvolutionDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNDepthWiseConvolutionDescriptor")), objc.RegisterName("new"))
+	return cNNDepthWiseConvolutionDescriptorAdopt(_id)
 }
 
 // The width of the kernel window.
 //
-// WithKernelWidth sets the kernelWidth property and returns the receiver for chaining.
-func (x *CNNDepthWiseConvolutionDescriptor) WithKernelWidth(kernelWidth uint) *CNNDepthWiseConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetKernelWidth(kernelWidth)
+// WithKernelWidth sets kernelWidth and returns the receiver so calls can be chained.
+func (x *CNNDepthWiseConvolutionDescriptor) WithKernelWidth(kernelWidth int) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
 	return x
 }
 
 // The height of the kernel window.
 //
-// WithKernelHeight sets the kernelHeight property and returns the receiver for chaining.
-func (x *CNNDepthWiseConvolutionDescriptor) WithKernelHeight(kernelHeight uint) *CNNDepthWiseConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetKernelHeight(kernelHeight)
+// WithKernelHeight sets kernelHeight and returns the receiver so calls can be chained.
+func (x *CNNDepthWiseConvolutionDescriptor) WithKernelHeight(kernelHeight int) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
 	return x
 }
 
 // The number of feature channels per pixel in the input image.
 //
-// WithInputFeatureChannels sets the inputFeatureChannels property and returns the receiver for chaining.
-func (x *CNNDepthWiseConvolutionDescriptor) WithInputFeatureChannels(inputFeatureChannels uint) *CNNDepthWiseConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetInputFeatureChannels(inputFeatureChannels)
+// WithInputFeatureChannels sets inputFeatureChannels and returns the receiver so calls can be chained.
+func (x *CNNDepthWiseConvolutionDescriptor) WithInputFeatureChannels(inputFeatureChannels int) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
 	return x
 }
 
 // The number of feature channels per pixel in the output image.
 //
-// WithOutputFeatureChannels sets the outputFeatureChannels property and returns the receiver for chaining.
-func (x *CNNDepthWiseConvolutionDescriptor) WithOutputFeatureChannels(outputFeatureChannels uint) *CNNDepthWiseConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetOutputFeatureChannels(outputFeatureChannels)
+// WithOutputFeatureChannels sets outputFeatureChannels and returns the receiver so calls can be chained.
+func (x *CNNDepthWiseConvolutionDescriptor) WithOutputFeatureChannels(outputFeatureChannels int) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
 	return x
 }
 
 // The output stride (downsampling factor) in the x dimension.
 //
-// WithStrideInPixelsX sets the strideInPixelsX property and returns the receiver for chaining.
-func (x *CNNDepthWiseConvolutionDescriptor) WithStrideInPixelsX(strideInPixelsX uint) *CNNDepthWiseConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetStrideInPixelsX(strideInPixelsX)
+// WithStrideInPixelsX sets strideInPixelsX and returns the receiver so calls can be chained.
+func (x *CNNDepthWiseConvolutionDescriptor) WithStrideInPixelsX(strideInPixelsX int) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInPixelsX:"), strideInPixelsX)
 	return x
 }
 
 // The output stride (downsampling factor) in the y dimension.
 //
-// WithStrideInPixelsY sets the strideInPixelsY property and returns the receiver for chaining.
-func (x *CNNDepthWiseConvolutionDescriptor) WithStrideInPixelsY(strideInPixelsY uint) *CNNDepthWiseConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetStrideInPixelsY(strideInPixelsY)
+// WithStrideInPixelsY sets strideInPixelsY and returns the receiver so calls can be chained.
+func (x *CNNDepthWiseConvolutionDescriptor) WithStrideInPixelsY(strideInPixelsY int) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInPixelsY:"), strideInPixelsY)
 	return x
 }
 
 // The number of groups that the input and output channels are divided into.
 //
-// WithGroups sets the groups property and returns the receiver for chaining.
-func (x *CNNDepthWiseConvolutionDescriptor) WithGroups(groups uint) *CNNDepthWiseConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetGroups(groups)
+// WithGroups sets groups and returns the receiver so calls can be chained.
+func (x *CNNDepthWiseConvolutionDescriptor) WithGroups(groups int) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroups:"), groups)
 	return x
 }
 
-// @property      dilationRateX @discussion    dilationRateX property can be used to implement dilated convolution as described in https://arxiv.org/pdf/1511.07122v3.pdf to aggregate global information in dense prediction problems. Default value is 1. When set to value > 1, original kernel width, kW is dilated to kW_Dilated = (kW-1)*dilationRateX + 1 by inserting d-1 zeros between consecutive entries in each row of the original kernel. The kernel is centered based on kW_Dilated.
+// dilationRateX property can be used to implement dilated convolution as described in https://arxiv.org/pdf/1511.07122v3.pdf to aggregate global information in dense prediction problems. Default value is 1. When set to value > 1, original kernel width, kW is dilated to kW_Dilated = (kW-1)*dilationRateX + 1 by inserting d-1 zeros between consecutive entries in each row of the original kernel. The kernel is centered based on kW_Dilated.
 //
-// WithDilationRateX sets the dilationRateX property and returns the receiver for chaining.
-func (x *CNNDepthWiseConvolutionDescriptor) WithDilationRateX(dilationRateX uint) *CNNDepthWiseConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetDilationRateX(dilationRateX)
+// WithDilationRateX sets dilationRateX and returns the receiver so calls can be chained.
+func (x *CNNDepthWiseConvolutionDescriptor) WithDilationRateX(dilationRateX int) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateX:"), dilationRateX)
 	return x
 }
 
-// @property      dilationRateY @discussion    dilationRateY property can be used to implement dilated convolution as described in https://arxiv.org/pdf/1511.07122v3.pdf to aggregate global information in dense prediction problems. Default value is 1. When set to value > 1, original kernel height, kH is dilated to kH_Dilated = (kH-1)*dilationRateY + 1 by inserting d-1 rows of zeros between consecutive row of the original kernel. The kernel is centered based on kH_Dilated.
+// dilationRateY property can be used to implement dilated convolution as described in https://arxiv.org/pdf/1511.07122v3.pdf to aggregate global information in dense prediction problems. Default value is 1. When set to value > 1, original kernel height, kH is dilated to kH_Dilated = (kH-1)*dilationRateY + 1 by inserting d-1 rows of zeros between consecutive row of the original kernel. The kernel is centered based on kH_Dilated.
 //
-// WithDilationRateY sets the dilationRateY property and returns the receiver for chaining.
-func (x *CNNDepthWiseConvolutionDescriptor) WithDilationRateY(dilationRateY uint) *CNNDepthWiseConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetDilationRateY(dilationRateY)
+// WithDilationRateY sets dilationRateY and returns the receiver so calls can be chained.
+func (x *CNNDepthWiseConvolutionDescriptor) WithDilationRateY(dilationRateY int) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateY:"), dilationRateY)
 	return x
 }
 
-// @property   fusedNeuronDescriptor @discussion This mathod can be used to add a neuron activation funtion of given type with associated scalar parameters A and B that are shared across all output channels. Neuron activation fucntion is applied to output of convolution. This is a per-pixel operation that is fused with convolution kernel itself for best performance. Note that this method can only be used to fuse neuron of kind for which parameters A and B are shared across all channels of convoution output. It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. For those kind of neuron activation functions, use appropriate setter functions. Default is descriptor with neuronType MPSCNNNeuronTypeNone. Note: in certain cases the neuron descriptor will be cached by the MPSNNGraph or the MPSCNNConvolution. If the neuron type changes after either is made, behavior is undefined.
+// This mathod can be used to add a neuron activation funtion of given type with associated scalar parameters A and B that are shared across all output channels. Neuron activation fucntion is applied to output of convolution. This is a per-pixel operation that is fused with convolution kernel itself for best performance. Note that this method can only be used to fuse neuron of kind for which parameters A and B are shared across all channels of convoution output. It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. For those kind of neuron activation functions, use appropriate setter functions. Default is descriptor with neuronType MPSCNNNeuronTypeNone. Note: in certain cases the neuron descriptor will be cached by the MPSNNGraph or the MPSCNNConvolution. If the neuron type changes after either is made, behavior is undefined.
 //
-// WithFusedNeuronDescriptor sets the fusedNeuronDescriptor property and returns the receiver for chaining.
-func (x *CNNDepthWiseConvolutionDescriptor) WithFusedNeuronDescriptor(fusedNeuronDescriptor *mpsneuralnetwork.MPSNNNeuronDescriptor) *CNNDepthWiseConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetFusedNeuronDescriptor(fusedNeuronDescriptor)
+// WithFusedNeuronDescriptor sets fusedNeuronDescriptor and returns the receiver so calls can be chained.
+func (x *CNNDepthWiseConvolutionDescriptor) WithFusedNeuronDescriptor(fusedNeuronDescriptor obj.Object) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFusedNeuronDescriptor:"), objref.IDOf(fusedNeuronDescriptor))
 	return x
 }
 
-// @property      channelMultiplier @discussion    Ratio of outputFeactureChannel to inputFeatureChannels for depthwise convolution i.e. how many output feature channels are produced by each input channel.
-//
-// ChannelMultiplier calls the underlying ChannelMultiplier.
-func (x *CNNDepthWiseConvolutionDescriptor) ChannelMultiplier() uint {
-	return x.inner.ChannelMultiplier()
-}
-
-func (x *CNNDepthWiseConvolutionDescriptor) asCNNConvolutionDescriptor() *mpsneuralnetwork.MPSCNNConvolutionDescriptor {
-	return &x.inner.MPSCNNConvolutionDescriptor
+// Ratio of outputFeactureChannel to inputFeatureChannels for depthwise convolution i.e. how many output feature channels are produced by each input channel.
+func (x *CNNDepthWiseConvolutionDescriptor) ChannelMultiplier() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("channelMultiplier"))
+	return _r
 }
 
 // CNNDepthWiseConvolutionDescriptorable is the interface implemented by [CNNDepthWiseConvolutionDescriptor], for mocking and DI.
 type CNNDepthWiseConvolutionDescriptorable interface {
-	Unwrap() *raw.MPSCNNDepthWiseConvolutionDescriptor
-	WithKernelWidth(kernelWidth uint) *CNNDepthWiseConvolutionDescriptor
-	WithKernelHeight(kernelHeight uint) *CNNDepthWiseConvolutionDescriptor
-	WithInputFeatureChannels(inputFeatureChannels uint) *CNNDepthWiseConvolutionDescriptor
-	WithOutputFeatureChannels(outputFeatureChannels uint) *CNNDepthWiseConvolutionDescriptor
-	WithStrideInPixelsX(strideInPixelsX uint) *CNNDepthWiseConvolutionDescriptor
-	WithStrideInPixelsY(strideInPixelsY uint) *CNNDepthWiseConvolutionDescriptor
-	WithGroups(groups uint) *CNNDepthWiseConvolutionDescriptor
-	WithDilationRateX(dilationRateX uint) *CNNDepthWiseConvolutionDescriptor
-	WithDilationRateY(dilationRateY uint) *CNNDepthWiseConvolutionDescriptor
-	WithFusedNeuronDescriptor(fusedNeuronDescriptor *mpsneuralnetwork.MPSNNNeuronDescriptor) *CNNDepthWiseConvolutionDescriptor
-	ChannelMultiplier() uint
+	obj.Object
+	WithKernelWidth(kernelWidth int) *CNNDepthWiseConvolutionDescriptor
+	WithKernelHeight(kernelHeight int) *CNNDepthWiseConvolutionDescriptor
+	WithInputFeatureChannels(inputFeatureChannels int) *CNNDepthWiseConvolutionDescriptor
+	WithOutputFeatureChannels(outputFeatureChannels int) *CNNDepthWiseConvolutionDescriptor
+	WithStrideInPixelsX(strideInPixelsX int) *CNNDepthWiseConvolutionDescriptor
+	WithStrideInPixelsY(strideInPixelsY int) *CNNDepthWiseConvolutionDescriptor
+	WithGroups(groups int) *CNNDepthWiseConvolutionDescriptor
+	WithDilationRateX(dilationRateX int) *CNNDepthWiseConvolutionDescriptor
+	WithDilationRateY(dilationRateY int) *CNNDepthWiseConvolutionDescriptor
+	WithFusedNeuronDescriptor(fusedNeuronDescriptor obj.Object) *CNNDepthWiseConvolutionDescriptor
+	ChannelMultiplier() int
 }
 
 var _ CNNDepthWiseConvolutionDescriptorable = (*CNNDepthWiseConvolutionDescriptor)(nil)

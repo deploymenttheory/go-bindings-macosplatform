@@ -5,116 +5,126 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AnimatedValue wraps [raw.MDLAnimatedValue] with a fluent Go API.
+// AnimatedValue is an idiomatic wrapper over the Objective-C class MDLAnimatedValue.
 type AnimatedValue struct {
-	inner *raw.MDLAnimatedValue
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLAnimatedValue].
-func (x *AnimatedValue) Unwrap() *raw.MDLAnimatedValue { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AnimatedValue) ID() objc.ID { return x.inner.Ptr() }
-
-// AnimatedValueFromID adopts an existing object pointer as a AnimatedValue (nil for 0).
+// AnimatedValueFromID adopts an existing Objective-C object as a AnimatedValue
+// (nil for 0), retaining it and registering a release finalizer.
 func AnimatedValueFromID(id objc.ID) *AnimatedValue {
 	if id == 0 {
 		return nil
 	}
-	return &AnimatedValue{inner: raw.MDLAnimatedValueFromID(id)}
-}
-
-// NewAnimatedValue creates a new [AnimatedValue].
-func NewAnimatedValue() *AnimatedValue {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLAnimatedValue")), objc.RegisterName("new"))
-	return &AnimatedValue{inner: raw.MDLAnimatedValueFromID(_id)}
-}
-
-// WithInterpolation sets the interpolation property and returns the receiver for chaining.
-func (x *AnimatedValue) WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedValue {
-	x.inner.SetInterpolation(raw.MDLAnimatedValueInterpolation(interpolation))
+	x := &AnimatedValue{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// IsAnimated calls the underlying IsAnimated.
+// animatedValueAdopt wraps an Objective-C object that this code just created as a
+// AnimatedValue (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func animatedValueAdopt(id objc.ID) *AnimatedValue {
+	if id == 0 {
+		return nil
+	}
+	x := &AnimatedValue{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AnimatedValue) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AnimatedValue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AnimatedValue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAnimatedValue creates a new AnimatedValue.
+func NewAnimatedValue() *AnimatedValue {
+	_id := objc.Send[objc.ID](objc.ID(_class("MDLAnimatedValue")), objc.RegisterName("new"))
+	return animatedValueAdopt(_id)
+}
+
+// WithInterpolation sets interpolation and returns the receiver so calls can be chained.
+func (x *AnimatedValue) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedValue {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
+	return x
+}
+
 func (x *AnimatedValue) IsAnimated() bool {
-	return x.inner.IsAnimated()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAnimated"))
+	return _r
 }
 
-// Clear calls the underlying Clear.
 func (x *AnimatedValue) Clear() {
-	x.inner.Clear()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clear"))
 }
 
-// GetTimesMaxCount calls the underlying GetTimesMaxCount.
-func (x *AnimatedValue) GetTimesMaxCount(timesArray *float64, maxCount uint) uint {
-	return x.inner.GetTimesMaxCount(timesArray, maxCount)
+func (x *AnimatedValue) Precision() DataPrecision {
+	_r := objc.Send[DataPrecision](objref.IDOf(x), objc.RegisterName("precision"))
+	return _r
 }
 
-// Precision calls the underlying Precision.
-func (x *AnimatedValue) Precision() MDLDataPrecision {
-	return MDLDataPrecision(x.inner.Precision())
+func (x *AnimatedValue) TimeSampleCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeSampleCount"))
+	return _r
 }
 
-// TimeSampleCount calls the underlying TimeSampleCount.
-func (x *AnimatedValue) TimeSampleCount() uint {
-	return x.inner.TimeSampleCount()
-}
-
-// MinimumTime calls the underlying MinimumTime.
 func (x *AnimatedValue) MinimumTime() float64 {
-	return x.inner.MinimumTime()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumTime"))
+	return _r
 }
 
-// MaximumTime calls the underlying MaximumTime.
 func (x *AnimatedValue) MaximumTime() float64 {
-	return x.inner.MaximumTime()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumTime"))
+	return _r
 }
 
-// Interpolation calls the underlying Interpolation.
-func (x *AnimatedValue) Interpolation() MDLAnimatedValueInterpolation {
-	return MDLAnimatedValueInterpolation(x.inner.Interpolation())
+func (x *AnimatedValue) Interpolation() AnimatedValueInterpolation {
+	_r := objc.Send[AnimatedValueInterpolation](objref.IDOf(x), objc.RegisterName("interpolation"))
+	return _r
 }
 
-// SetInterpolation calls the underlying SetInterpolation.
-func (x *AnimatedValue) SetInterpolation(interpolation MDLAnimatedValueInterpolation) {
-	x.inner.SetInterpolation(raw.MDLAnimatedValueInterpolation(interpolation))
+func (x *AnimatedValue) SetInterpolation(interpolation AnimatedValueInterpolation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
 }
 
 // KeyTimes returns the collection as a Go slice.
-func (x *AnimatedValue) KeyTimes() []*foundation.NSNumber {
-	arr := x.inner.KeyTimes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *AnimatedValue) KeyTimes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyTimes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-func (x *AnimatedValue) asAnimatedValue() *raw.MDLAnimatedValue { return x.inner }
 
 // AnimatedValueable is the interface implemented by [AnimatedValue], for mocking and DI.
 type AnimatedValueable interface {
-	Unwrap() *raw.MDLAnimatedValue
-	WithInterpolation(interpolation MDLAnimatedValueInterpolation) *AnimatedValue
+	obj.Object
+	WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedValue
 	IsAnimated() bool
 	Clear()
-	GetTimesMaxCount(timesArray *float64, maxCount uint) uint
-	Precision() MDLDataPrecision
-	TimeSampleCount() uint
+	Precision() DataPrecision
+	TimeSampleCount() int
 	MinimumTime() float64
 	MaximumTime() float64
-	Interpolation() MDLAnimatedValueInterpolation
-	SetInterpolation(interpolation MDLAnimatedValueInterpolation)
-	KeyTimes() []*foundation.NSNumber
+	Interpolation() AnimatedValueInterpolation
+	SetInterpolation(interpolation AnimatedValueInterpolation)
+	KeyTimes() []obj.Object
 }
 
 var _ AnimatedValueable = (*AnimatedValue)(nil)

@@ -5,115 +5,125 @@
 package gamecontroller
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A recording of all of the values provided by a GCMicroGamepad object.
 //
-// MicroGamepadSnapshot wraps [raw.GCMicroGamepadSnapshot] with a fluent Go API.
+// MicroGamepadSnapshot is an idiomatic wrapper over the Objective-C class GCMicroGamepadSnapshot.
 type MicroGamepadSnapshot struct {
-	inner *raw.GCMicroGamepadSnapshot
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCMicroGamepadSnapshot].
-func (x *MicroGamepadSnapshot) Unwrap() *raw.GCMicroGamepadSnapshot { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MicroGamepadSnapshot) ID() objc.ID { return x.inner.Ptr() }
-
-// MicroGamepadSnapshotFromID adopts an existing object pointer as a MicroGamepadSnapshot (nil for 0).
+// MicroGamepadSnapshotFromID adopts an existing Objective-C object as a MicroGamepadSnapshot
+// (nil for 0), retaining it and registering a release finalizer.
 func MicroGamepadSnapshotFromID(id objc.ID) *MicroGamepadSnapshot {
 	if id == 0 {
 		return nil
 	}
-	return &MicroGamepadSnapshot{inner: raw.GCMicroGamepadSnapshotFromID(id)}
+	x := &MicroGamepadSnapshot{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// microGamepadSnapshotAdopt wraps an Objective-C object that this code just created as a
+// MicroGamepadSnapshot (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func microGamepadSnapshotAdopt(id objc.ID) *MicroGamepadSnapshot {
+	if id == 0 {
+		return nil
+	}
+	x := &MicroGamepadSnapshot{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MicroGamepadSnapshot) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MicroGamepadSnapshot) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MicroGamepadSnapshot) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a snapshot object with the flattened data representation obtained from another snapshot.
 //
-// NewMicroGamepadSnapshotWithSnapshotData creates a new [MicroGamepadSnapshot].
-func NewMicroGamepadSnapshotWithSnapshotData(data *foundation.NSData) *MicroGamepadSnapshot {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GCMicroGamepadSnapshot")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotData:"), data.Ptr())
-	return &MicroGamepadSnapshot{inner: raw.GCMicroGamepadSnapshotFromID(_id)}
+// NewMicroGamepadSnapshotWithSnapshotData creates a new MicroGamepadSnapshot.
+func NewMicroGamepadSnapshotWithSnapshotData(data obj.Object) *MicroGamepadSnapshot {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GCMicroGamepadSnapshot")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSnapshotData:"), objref.IDOf(data))
+	return microGamepadSnapshotAdopt(_id)
 }
 
-// NewMicroGamepadSnapshotWithControllerSnapshotData creates a new [MicroGamepadSnapshot].
-func NewMicroGamepadSnapshotWithControllerSnapshotData(controller *raw.GCController, data *foundation.NSData) *MicroGamepadSnapshot {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GCMicroGamepadSnapshot")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithController:snapshotData:"), controller.Ptr(), data.Ptr())
-	return &MicroGamepadSnapshot{inner: raw.GCMicroGamepadSnapshotFromID(_id)}
+// NewMicroGamepadSnapshotWithControllerSnapshotData creates a new MicroGamepadSnapshot.
+func NewMicroGamepadSnapshotWithControllerSnapshotData(controller *Controller, data obj.Object) *MicroGamepadSnapshot {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GCMicroGamepadSnapshot")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithController:snapshotData:"), objref.IDOf(controller), objref.IDOf(data))
+	return microGamepadSnapshotAdopt(_id)
 }
 
 // The flattened control input values for the snapshot.
 //
-// WithSnapshotData sets the snapshotData property and returns the receiver for chaining.
-func (x *MicroGamepadSnapshot) WithSnapshotData(snapshotData *foundation.NSData) *MicroGamepadSnapshot {
-	x.inner.SetSnapshotData(snapshotData)
-	return x
-}
-
-// The block that this profile calls when an element’s value changes.
-//
-// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
-func (x *MicroGamepadSnapshot) WithValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement)) *MicroGamepadSnapshot {
-	x.inner.GCMicroGamepad.SetValueChangedHandler(valueChangedHandler)
+// WithSnapshotData sets snapshotData and returns the receiver so calls can be chained.
+func (x *MicroGamepadSnapshot) WithSnapshotData(snapshotData obj.Object) *MicroGamepadSnapshot {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSnapshotData:"), objref.IDOf(snapshotData))
 	return x
 }
 
 // A Boolean value that indicates whether the directional pad reports absolute or relative values.
 //
-// WithReportsAbsoluteDpadValues sets the reportsAbsoluteDpadValues property and returns the receiver for chaining.
+// WithReportsAbsoluteDpadValues sets reportsAbsoluteDpadValues and returns the receiver so calls can be chained.
 func (x *MicroGamepadSnapshot) WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *MicroGamepadSnapshot {
-	x.inner.GCMicroGamepad.SetReportsAbsoluteDpadValues(reportsAbsoluteDpadValues)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReportsAbsoluteDpadValues:"), reportsAbsoluteDpadValues)
 	return x
 }
 
 // A Boolean value that indicates whether the profile reports the directional pad values relative to its current orientation.
 //
-// WithAllowsRotation sets the allowsRotation property and returns the receiver for chaining.
+// WithAllowsRotation sets allowsRotation and returns the receiver so calls can be chained.
 func (x *MicroGamepadSnapshot) WithAllowsRotation(allowsRotation bool) *MicroGamepadSnapshot {
-	x.inner.GCMicroGamepad.SetAllowsRotation(allowsRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsRotation:"), allowsRotation)
 	return x
 }
 
 // The block that the profile calls when an element’s value changes.
 //
-// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
-func (x *MicroGamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *MicroGamepadSnapshot {
-	x.inner.GCMicroGamepad.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
+// WithValueDidChangeHandler sets valueDidChangeHandler and returns the receiver so calls can be chained.
+func (x *MicroGamepadSnapshot) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *MicroGamepadSnapshot {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return x
 }
 
-// SnapshotData calls the underlying SnapshotData.
-func (x *MicroGamepadSnapshot) SnapshotData() *foundation.NSData {
-	return x.inner.SnapshotData()
+func (x *MicroGamepadSnapshot) SnapshotData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotData"))
+	return obj.Wrap(_r)
 }
 
-// SetSnapshotData calls the underlying SetSnapshotData.
-func (x *MicroGamepadSnapshot) SetSnapshotData(snapshotData *foundation.NSData) {
-	x.inner.SetSnapshotData(snapshotData)
-}
-
-func (x *MicroGamepadSnapshot) asMicroGamepad() *raw.GCMicroGamepad { return &x.inner.GCMicroGamepad }
-
-func (x *MicroGamepadSnapshot) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
-	return &x.inner.GCMicroGamepad.GCPhysicalInputProfile
+func (x *MicroGamepadSnapshot) SetSnapshotData(snapshotData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSnapshotData:"), objref.IDOf(snapshotData))
 }
 
 // MicroGamepadSnapshotable is the interface implemented by [MicroGamepadSnapshot], for mocking and DI.
 type MicroGamepadSnapshotable interface {
-	Unwrap() *raw.GCMicroGamepadSnapshot
-	WithSnapshotData(snapshotData *foundation.NSData) *MicroGamepadSnapshot
-	WithValueChangedHandler(valueChangedHandler func(*raw.GCMicroGamepad, *raw.GCControllerElement)) *MicroGamepadSnapshot
+	obj.Object
+	WithSnapshotData(snapshotData obj.Object) *MicroGamepadSnapshot
 	WithReportsAbsoluteDpadValues(reportsAbsoluteDpadValues bool) *MicroGamepadSnapshot
 	WithAllowsRotation(allowsRotation bool) *MicroGamepadSnapshot
-	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *MicroGamepadSnapshot
-	SnapshotData() *foundation.NSData
-	SetSnapshotData(snapshotData *foundation.NSData)
+	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *MicroGamepadSnapshot
+	SnapshotData() obj.Object
+	SetSnapshotData(snapshotData obj.Object)
 }
 
 var _ MicroGamepadSnapshotable = (*MicroGamepadSnapshot)(nil)

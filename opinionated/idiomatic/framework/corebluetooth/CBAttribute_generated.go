@@ -5,52 +5,73 @@
 package corebluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A representation of common aspects of services offered by a peripheral.
 //
-// Attribute wraps [raw.CBAttribute] with a fluent Go API.
+// Attribute is an idiomatic wrapper over the Objective-C class CBAttribute.
 type Attribute struct {
-	inner *raw.CBAttribute
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CBAttribute].
-func (x *Attribute) Unwrap() *raw.CBAttribute { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Attribute) ID() objc.ID { return x.inner.Ptr() }
-
-// AttributeFromID adopts an existing object pointer as a Attribute (nil for 0).
+// AttributeFromID adopts an existing Objective-C object as a Attribute
+// (nil for 0), retaining it and registering a release finalizer.
 func AttributeFromID(id objc.ID) *Attribute {
 	if id == 0 {
 		return nil
 	}
-	return &Attribute{inner: raw.CBAttributeFromID(id)}
+	x := &Attribute{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAttribute creates a new [Attribute].
-func NewAttribute() *Attribute {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBAttribute")), objc.RegisterName("new"))
-	return &Attribute{inner: raw.CBAttributeFromID(_id)}
-}
-
-// UUID calls the underlying UUID.
-func (x *Attribute) UUID() *UUID {
-	_r := x.inner.UUID()
-	if _r == nil {
+// attributeAdopt wraps an Objective-C object that this code just created as a
+// Attribute (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func attributeAdopt(id objc.ID) *Attribute {
+	if id == 0 {
 		return nil
 	}
-	return &UUID{inner: _r}
+	x := &Attribute{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *Attribute) asAttribute() *raw.CBAttribute { return x.inner }
+// Description returns the object's -description text.
+func (x *Attribute) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Attribute) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Attribute) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAttribute creates a new Attribute.
+func NewAttribute() *Attribute {
+	_id := objc.Send[objc.ID](objc.ID(_class("CBAttribute")), objc.RegisterName("new"))
+	return attributeAdopt(_id)
+}
+
+func (x *Attribute) UUID() *UUID {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
+	return UUIDFromID(_r)
+}
 
 // Attributeable is the interface implemented by [Attribute], for mocking and DI.
 type Attributeable interface {
-	Unwrap() *raw.CBAttribute
+	obj.Object
 	UUID() *UUID
 }
 

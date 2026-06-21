@@ -5,103 +5,122 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A data set that projects sound of a certain frequency outward in the shape of a heart.
 //
-// CardioidDirectivityModelSubbandParameters wraps [raw.PHASECardioidDirectivityModelSubbandParameters] with a fluent Go API.
+// CardioidDirectivityModelSubbandParameters is an idiomatic wrapper over the Objective-C class PHASECardioidDirectivityModelSubbandParameters.
 type CardioidDirectivityModelSubbandParameters struct {
-	inner *raw.PHASECardioidDirectivityModelSubbandParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASECardioidDirectivityModelSubbandParameters].
-func (x *CardioidDirectivityModelSubbandParameters) Unwrap() *raw.PHASECardioidDirectivityModelSubbandParameters {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CardioidDirectivityModelSubbandParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// CardioidDirectivityModelSubbandParametersFromID adopts an existing object pointer as a CardioidDirectivityModelSubbandParameters (nil for 0).
+// CardioidDirectivityModelSubbandParametersFromID adopts an existing Objective-C object as a CardioidDirectivityModelSubbandParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func CardioidDirectivityModelSubbandParametersFromID(id objc.ID) *CardioidDirectivityModelSubbandParameters {
 	if id == 0 {
 		return nil
 	}
-	return &CardioidDirectivityModelSubbandParameters{inner: raw.PHASECardioidDirectivityModelSubbandParametersFromID(id)}
+	x := &CardioidDirectivityModelSubbandParameters{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCardioidDirectivityModelSubbandParameters creates a new [CardioidDirectivityModelSubbandParameters].
+// cardioidDirectivityModelSubbandParametersAdopt wraps an Objective-C object that this code just created as a
+// CardioidDirectivityModelSubbandParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cardioidDirectivityModelSubbandParametersAdopt(id objc.ID) *CardioidDirectivityModelSubbandParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &CardioidDirectivityModelSubbandParameters{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CardioidDirectivityModelSubbandParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CardioidDirectivityModelSubbandParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CardioidDirectivityModelSubbandParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCardioidDirectivityModelSubbandParameters creates a new CardioidDirectivityModelSubbandParameters.
 func NewCardioidDirectivityModelSubbandParameters() *CardioidDirectivityModelSubbandParameters {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASECardioidDirectivityModelSubbandParameters")), objc.RegisterName("new"))
-	return &CardioidDirectivityModelSubbandParameters{inner: raw.PHASECardioidDirectivityModelSubbandParametersFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHASECardioidDirectivityModelSubbandParameters")), objc.RegisterName("new"))
+	return cardioidDirectivityModelSubbandParametersAdopt(_id)
 }
 
 // A frequency in the audio spectrum where the pattern and sharpness resonate most.
 //
-// WithFrequency sets the frequency property and returns the receiver for chaining.
+// WithFrequency sets frequency and returns the receiver so calls can be chained.
 func (x *CardioidDirectivityModelSubbandParameters) WithFrequency(frequency float64) *CardioidDirectivityModelSubbandParameters {
-	x.inner.SetFrequency(frequency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 	return x
 }
 
 // A shape that determines the direction of sound.
 //
-// WithPattern sets the pattern property and returns the receiver for chaining.
+// WithPattern sets pattern and returns the receiver so calls can be chained.
 func (x *CardioidDirectivityModelSubbandParameters) WithPattern(pattern float64) *CardioidDirectivityModelSubbandParameters {
-	x.inner.SetPattern(pattern)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPattern:"), pattern)
 	return x
 }
 
 // The amount that the shape overlaps with bordering subbands.
 //
-// WithSharpness sets the sharpness property and returns the receiver for chaining.
+// WithSharpness sets sharpness and returns the receiver so calls can be chained.
 func (x *CardioidDirectivityModelSubbandParameters) WithSharpness(sharpness float64) *CardioidDirectivityModelSubbandParameters {
-	x.inner.SetSharpness(sharpness)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharpness:"), sharpness)
 	return x
 }
 
-// @property frequency @abstract The frequency of the subband, in hertz. @note Values are clamped to the range [20.0, 20000.0]. Default value is 1000.0.
-//
-// Frequency calls the underlying Frequency.
+// The frequency of the subband, in hertz.
 func (x *CardioidDirectivityModelSubbandParameters) Frequency() float64 {
-	return x.inner.Frequency()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frequency"))
+	return _r
 }
 
-// SetFrequency calls the underlying SetFrequency.
 func (x *CardioidDirectivityModelSubbandParameters) SetFrequency(frequency float64) {
-	x.inner.SetFrequency(frequency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 }
 
-// @property pattern @abstract The directivity pattern. @note Values are clamped to the range [0.0, 1.0]. Default value is 0.0. 0.0 is omnidirectional. 0.5 is cardioid. 1.0 is dipole.
-//
-// Pattern calls the underlying Pattern.
+// The directivity pattern.
 func (x *CardioidDirectivityModelSubbandParameters) Pattern() float64 {
-	return x.inner.Pattern()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("pattern"))
+	return _r
 }
 
-// SetPattern calls the underlying SetPattern.
 func (x *CardioidDirectivityModelSubbandParameters) SetPattern(pattern float64) {
-	x.inner.SetPattern(pattern)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPattern:"), pattern)
 }
 
-// @property sharpness @abstract The sharpness of the directivity pattern. @note Values are clamped to the range [1.0, DBL_MAX]. Default value is 1.0. Values > 1.0 increase sharpness.
-//
-// Sharpness calls the underlying Sharpness.
+// The sharpness of the directivity pattern.
 func (x *CardioidDirectivityModelSubbandParameters) Sharpness() float64 {
-	return x.inner.Sharpness()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("sharpness"))
+	return _r
 }
 
-// SetSharpness calls the underlying SetSharpness.
 func (x *CardioidDirectivityModelSubbandParameters) SetSharpness(sharpness float64) {
-	x.inner.SetSharpness(sharpness)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharpness:"), sharpness)
 }
 
 // CardioidDirectivityModelSubbandParametersable is the interface implemented by [CardioidDirectivityModelSubbandParameters], for mocking and DI.
 type CardioidDirectivityModelSubbandParametersable interface {
-	Unwrap() *raw.PHASECardioidDirectivityModelSubbandParameters
+	obj.Object
 	WithFrequency(frequency float64) *CardioidDirectivityModelSubbandParameters
 	WithPattern(pattern float64) *CardioidDirectivityModelSubbandParameters
 	WithSharpness(sharpness float64) *CardioidDirectivityModelSubbandParameters

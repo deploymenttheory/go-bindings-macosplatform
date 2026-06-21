@@ -5,226 +5,180 @@
 package metalperformanceshadersgraph
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The class that defines the parameters for a 3D-depthwise convolution operation.
 //
-// GraphDepthwiseConvolution3DOpDescriptor wraps [raw.MPSGraphDepthwiseConvolution3DOpDescriptor] with a fluent Go API.
+// GraphDepthwiseConvolution3DOpDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphDepthwiseConvolution3DOpDescriptor.
 type GraphDepthwiseConvolution3DOpDescriptor struct {
-	inner *raw.MPSGraphDepthwiseConvolution3DOpDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSGraphDepthwiseConvolution3DOpDescriptor].
-func (x *GraphDepthwiseConvolution3DOpDescriptor) Unwrap() *raw.MPSGraphDepthwiseConvolution3DOpDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphDepthwiseConvolution3DOpDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphDepthwiseConvolution3DOpDescriptorFromID adopts an existing object pointer as a GraphDepthwiseConvolution3DOpDescriptor (nil for 0).
+// GraphDepthwiseConvolution3DOpDescriptorFromID adopts an existing Objective-C object as a GraphDepthwiseConvolution3DOpDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphDepthwiseConvolution3DOpDescriptorFromID(id objc.ID) *GraphDepthwiseConvolution3DOpDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &GraphDepthwiseConvolution3DOpDescriptor{inner: raw.MPSGraphDepthwiseConvolution3DOpDescriptorFromID(id)}
+	x := &GraphDepthwiseConvolution3DOpDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGraphDepthwiseConvolution3DOpDescriptor creates a new [GraphDepthwiseConvolution3DOpDescriptor].
+// graphDepthwiseConvolution3DOpDescriptorAdopt wraps an Objective-C object that this code just created as a
+// GraphDepthwiseConvolution3DOpDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphDepthwiseConvolution3DOpDescriptorAdopt(id objc.ID) *GraphDepthwiseConvolution3DOpDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphDepthwiseConvolution3DOpDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GraphDepthwiseConvolution3DOpDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GraphDepthwiseConvolution3DOpDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GraphDepthwiseConvolution3DOpDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGraphDepthwiseConvolution3DOpDescriptor creates a new GraphDepthwiseConvolution3DOpDescriptor.
 func NewGraphDepthwiseConvolution3DOpDescriptor() *GraphDepthwiseConvolution3DOpDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphDepthwiseConvolution3DOpDescriptor")), objc.RegisterName("new"))
-	return &GraphDepthwiseConvolution3DOpDescriptor{inner: raw.MPSGraphDepthwiseConvolution3DOpDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphDepthwiseConvolution3DOpDescriptor")), objc.RegisterName("new"))
+	return graphDepthwiseConvolution3DOpDescriptorAdopt(_id)
 }
 
 // The strides for spatial dimensions.
 //
-// WithStrides sets the collection, converting the Go slice to an NSArray.
-func (x *GraphDepthwiseConvolution3DOpDescriptor) WithStrides(items ...*foundation.NSNumber) *GraphDepthwiseConvolution3DOpDescriptor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetStrides(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetStrides(_arr)
+// WithStrides sets the collection and returns the receiver so calls can be chained.
+func (x *GraphDepthwiseConvolution3DOpDescriptor) WithStrides(items ...obj.Object) *GraphDepthwiseConvolution3DOpDescriptor {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrides:"), _arr)
 	return x
 }
 
 // The dilation rates for spatial dimensions.
 //
-// WithDilationRates sets the collection, converting the Go slice to an NSArray.
-func (x *GraphDepthwiseConvolution3DOpDescriptor) WithDilationRates(items ...*foundation.NSNumber) *GraphDepthwiseConvolution3DOpDescriptor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetDilationRates(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetDilationRates(_arr)
+// WithDilationRates sets the collection and returns the receiver so calls can be chained.
+func (x *GraphDepthwiseConvolution3DOpDescriptor) WithDilationRates(items ...obj.Object) *GraphDepthwiseConvolution3DOpDescriptor {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRates:"), _arr)
 	return x
 }
 
 // The padding values for spatial dimensions.
 //
-// WithPaddingValues sets the collection, converting the Go slice to an NSArray.
-func (x *GraphDepthwiseConvolution3DOpDescriptor) WithPaddingValues(items ...*foundation.NSNumber) *GraphDepthwiseConvolution3DOpDescriptor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetPaddingValues(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetPaddingValues(_arr)
+// WithPaddingValues sets the collection and returns the receiver so calls can be chained.
+func (x *GraphDepthwiseConvolution3DOpDescriptor) WithPaddingValues(items ...obj.Object) *GraphDepthwiseConvolution3DOpDescriptor {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingValues:"), _arr)
 	return x
 }
 
 // The padding style for the operation.
 //
-// WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
-func (x *GraphDepthwiseConvolution3DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor {
-	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
+// WithPaddingStyle sets paddingStyle and returns the receiver so calls can be chained.
+func (x *GraphDepthwiseConvolution3DOpDescriptor) WithPaddingStyle(paddingStyle GraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingStyle:"), paddingStyle)
 	return x
 }
 
 // The axis that contains the channels in the input and the weights, within the 4D tile of the last dimensions.
 //
-// WithChannelDimensionIndex sets the channelDimensionIndex property and returns the receiver for chaining.
+// WithChannelDimensionIndex sets channelDimensionIndex and returns the receiver so calls can be chained.
 func (x *GraphDepthwiseConvolution3DOpDescriptor) WithChannelDimensionIndex(channelDimensionIndex int) *GraphDepthwiseConvolution3DOpDescriptor {
-	x.inner.SetChannelDimensionIndex(channelDimensionIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelDimensionIndex:"), channelDimensionIndex)
 	return x
 }
 
-// The strides for spatial dimensions. Must be three numbers, one for each spatial dimension, fastest running index last. Default value: `@[ @1, @1, @1 ]`
+// The strides for spatial dimensions. Must be three numbers, one for each spatial dimension, fastest running index last. Default value: `
 //
 // Strides returns the collection as a Go slice.
-func (x *GraphDepthwiseConvolution3DOpDescriptor) Strides() []*foundation.NSNumber {
-	arr := x.inner.Strides()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *GraphDepthwiseConvolution3DOpDescriptor) Strides() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("strides"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetStrides calls the underlying SetStrides.
-func (x *GraphDepthwiseConvolution3DOpDescriptor) SetStrides(strides *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetStrides(strides)
+func (x *GraphDepthwiseConvolution3DOpDescriptor) SetStrides(strides []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrides:"), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The dilation rates for spatial dimensions. Must be three numbers, one for each spatial dimension, fastest running index last. Default value: `@[ @1, @1, @1 ]`
+// The dilation rates for spatial dimensions. Must be three numbers, one for each spatial dimension, fastest running index last. Default value: `
 //
 // DilationRates returns the collection as a Go slice.
-func (x *GraphDepthwiseConvolution3DOpDescriptor) DilationRates() []*foundation.NSNumber {
-	arr := x.inner.DilationRates()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *GraphDepthwiseConvolution3DOpDescriptor) DilationRates() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dilationRates"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetDilationRates calls the underlying SetDilationRates.
-func (x *GraphDepthwiseConvolution3DOpDescriptor) SetDilationRates(dilationRates *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetDilationRates(dilationRates)
+func (x *GraphDepthwiseConvolution3DOpDescriptor) SetDilationRates(dilationRates []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRates:"), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The padding values for spatial dimensions. Must be six numbers, two for each spatial dimension. For example `paddingValues[0]` defines the explicit padding amount before the first spatial dimension (slowest running index of spatial dimensions), `paddingValues[1]` defines the padding amount after the first spatial dimension etc. Use only with `paddingStyle = MPSGraphPaddingStyleExplicit`. Default value: `@[ @0, @0, @0, @0, @0, @0 ]`
+// The padding values for spatial dimensions. Must be six numbers, two for each spatial dimension. For example `paddingValues[0]` defines the explicit padding amount before the first spatial dimension (slowest running index of spatial dimensions), `paddingValues[1]` defines the padding amount after the first spatial dimension etc. Use only with `paddingStyle = MPSGraphPaddingStyleExplicit`. Default value: `
 //
 // PaddingValues returns the collection as a Go slice.
-func (x *GraphDepthwiseConvolution3DOpDescriptor) PaddingValues() []*foundation.NSNumber {
-	arr := x.inner.PaddingValues()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *GraphDepthwiseConvolution3DOpDescriptor) PaddingValues() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddingValues"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetPaddingValues calls the underlying SetPaddingValues.
-func (x *GraphDepthwiseConvolution3DOpDescriptor) SetPaddingValues(paddingValues *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetPaddingValues(paddingValues)
+func (x *GraphDepthwiseConvolution3DOpDescriptor) SetPaddingValues(paddingValues []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingValues:"), purego.SliceToNSArray(paddingValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // The padding style for the operation. Default value: `MPSGraphPaddingStyleExplicit`.
-//
-// PaddingStyle calls the underlying PaddingStyle.
-func (x *GraphDepthwiseConvolution3DOpDescriptor) PaddingStyle() MPSGraphPaddingStyle {
-	return MPSGraphPaddingStyle(x.inner.PaddingStyle())
+func (x *GraphDepthwiseConvolution3DOpDescriptor) PaddingStyle() GraphPaddingStyle {
+	_r := objc.Send[GraphPaddingStyle](objref.IDOf(x), objc.RegisterName("paddingStyle"))
+	return _r
 }
 
-// SetPaddingStyle calls the underlying SetPaddingStyle.
-func (x *GraphDepthwiseConvolution3DOpDescriptor) SetPaddingStyle(paddingStyle MPSGraphPaddingStyle) {
-	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
+func (x *GraphDepthwiseConvolution3DOpDescriptor) SetPaddingStyle(paddingStyle GraphPaddingStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingStyle:"), paddingStyle)
 }
 
 // The axis that contains the channels in the input and the weights, within the 4D tile of the last dimensions. For example the value of `-1` corresponds to `NDHWC`, `NHWC` layouts. This allows the placement of the channel index anywhere within the last 4 dimensions of the tensor. In case your weights are in a different layout you can bring them to the same layout as inputs using transposes or permutations. Default value: `-4`, corresponds to `NCDHW` and `CDHW` layouts.
-//
-// ChannelDimensionIndex calls the underlying ChannelDimensionIndex.
 func (x *GraphDepthwiseConvolution3DOpDescriptor) ChannelDimensionIndex() int {
-	return x.inner.ChannelDimensionIndex()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("channelDimensionIndex"))
+	return _r
 }
 
-// SetChannelDimensionIndex calls the underlying SetChannelDimensionIndex.
 func (x *GraphDepthwiseConvolution3DOpDescriptor) SetChannelDimensionIndex(channelDimensionIndex int) {
-	x.inner.SetChannelDimensionIndex(channelDimensionIndex)
-}
-
-func (x *GraphDepthwiseConvolution3DOpDescriptor) asGraphObject() *raw.MPSGraphObject {
-	return &x.inner.MPSGraphObject
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelDimensionIndex:"), channelDimensionIndex)
 }
 
 // GraphDepthwiseConvolution3DOpDescriptorable is the interface implemented by [GraphDepthwiseConvolution3DOpDescriptor], for mocking and DI.
 type GraphDepthwiseConvolution3DOpDescriptorable interface {
-	Unwrap() *raw.MPSGraphDepthwiseConvolution3DOpDescriptor
-	WithStrides(items ...*foundation.NSNumber) *GraphDepthwiseConvolution3DOpDescriptor
-	WithDilationRates(items ...*foundation.NSNumber) *GraphDepthwiseConvolution3DOpDescriptor
-	WithPaddingValues(items ...*foundation.NSNumber) *GraphDepthwiseConvolution3DOpDescriptor
-	WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor
+	obj.Object
+	WithStrides(items ...obj.Object) *GraphDepthwiseConvolution3DOpDescriptor
+	WithDilationRates(items ...obj.Object) *GraphDepthwiseConvolution3DOpDescriptor
+	WithPaddingValues(items ...obj.Object) *GraphDepthwiseConvolution3DOpDescriptor
+	WithPaddingStyle(paddingStyle GraphPaddingStyle) *GraphDepthwiseConvolution3DOpDescriptor
 	WithChannelDimensionIndex(channelDimensionIndex int) *GraphDepthwiseConvolution3DOpDescriptor
-	Strides() []*foundation.NSNumber
-	SetStrides(strides *foundation.NSArray[*foundation.NSNumber])
-	DilationRates() []*foundation.NSNumber
-	SetDilationRates(dilationRates *foundation.NSArray[*foundation.NSNumber])
-	PaddingValues() []*foundation.NSNumber
-	SetPaddingValues(paddingValues *foundation.NSArray[*foundation.NSNumber])
-	PaddingStyle() MPSGraphPaddingStyle
-	SetPaddingStyle(paddingStyle MPSGraphPaddingStyle)
+	Strides() []obj.Object
+	SetStrides(strides []obj.Object)
+	DilationRates() []obj.Object
+	SetDilationRates(dilationRates []obj.Object)
+	PaddingValues() []obj.Object
+	SetPaddingValues(paddingValues []obj.Object)
+	PaddingStyle() GraphPaddingStyle
+	SetPaddingStyle(paddingStyle GraphPaddingStyle)
 	ChannelDimensionIndex() int
 	SetChannelDimensionIndex(channelDimensionIndex int)
 }

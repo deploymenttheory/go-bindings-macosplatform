@@ -5,61 +5,80 @@
 package mediaplayer
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description of a command sent by an external media player.
 //
-// RemoteCommandEvent wraps [raw.MPRemoteCommandEvent] with a fluent Go API.
+// RemoteCommandEvent is an idiomatic wrapper over the Objective-C class MPRemoteCommandEvent.
 type RemoteCommandEvent struct {
-	inner *raw.MPRemoteCommandEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPRemoteCommandEvent].
-func (x *RemoteCommandEvent) Unwrap() *raw.MPRemoteCommandEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RemoteCommandEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// RemoteCommandEventFromID adopts an existing object pointer as a RemoteCommandEvent (nil for 0).
+// RemoteCommandEventFromID adopts an existing Objective-C object as a RemoteCommandEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func RemoteCommandEventFromID(id objc.ID) *RemoteCommandEvent {
 	if id == 0 {
 		return nil
 	}
-	return &RemoteCommandEvent{inner: raw.MPRemoteCommandEventFromID(id)}
+	x := &RemoteCommandEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRemoteCommandEvent creates a new [RemoteCommandEvent].
+// remoteCommandEventAdopt wraps an Objective-C object that this code just created as a
+// RemoteCommandEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func remoteCommandEventAdopt(id objc.ID) *RemoteCommandEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &RemoteCommandEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RemoteCommandEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RemoteCommandEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RemoteCommandEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRemoteCommandEvent creates a new RemoteCommandEvent.
 func NewRemoteCommandEvent() *RemoteCommandEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPRemoteCommandEvent")), objc.RegisterName("new"))
-	return &RemoteCommandEvent{inner: raw.MPRemoteCommandEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPRemoteCommandEvent")), objc.RegisterName("new"))
+	return remoteCommandEventAdopt(_id)
 }
 
 // The command that sent the event.
-//
-// Command calls the underlying Command.
 func (x *RemoteCommandEvent) Command() *RemoteCommand {
-	_r := x.inner.Command()
-	if _r == nil {
-		return nil
-	}
-	return &RemoteCommand{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("command"))
+	return RemoteCommandFromID(_r)
 }
 
 // The time when the event occurred.
-//
-// Timestamp calls the underlying Timestamp.
 func (x *RemoteCommandEvent) Timestamp() float64 {
-	return x.inner.Timestamp()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timestamp"))
+	return _r
 }
-
-func (x *RemoteCommandEvent) asRemoteCommandEvent() *raw.MPRemoteCommandEvent { return x.inner }
 
 // RemoteCommandEventable is the interface implemented by [RemoteCommandEvent], for mocking and DI.
 type RemoteCommandEventable interface {
-	Unwrap() *raw.MPRemoteCommandEvent
+	obj.Object
 	Command() *RemoteCommand
 	Timestamp() float64
 }

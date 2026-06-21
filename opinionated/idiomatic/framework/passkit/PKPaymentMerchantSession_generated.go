@@ -5,45 +5,71 @@
 package passkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that validates the identity of a merchant for a payment request.
 //
-// PaymentMerchantSession wraps [raw.PKPaymentMerchantSession] with a fluent Go API.
+// PaymentMerchantSession is an idiomatic wrapper over the Objective-C class PKPaymentMerchantSession.
 type PaymentMerchantSession struct {
-	inner *raw.PKPaymentMerchantSession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKPaymentMerchantSession].
-func (x *PaymentMerchantSession) Unwrap() *raw.PKPaymentMerchantSession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PaymentMerchantSession) ID() objc.ID { return x.inner.Ptr() }
-
-// PaymentMerchantSessionFromID adopts an existing object pointer as a PaymentMerchantSession (nil for 0).
+// PaymentMerchantSessionFromID adopts an existing Objective-C object as a PaymentMerchantSession
+// (nil for 0), retaining it and registering a release finalizer.
 func PaymentMerchantSessionFromID(id objc.ID) *PaymentMerchantSession {
 	if id == 0 {
 		return nil
 	}
-	return &PaymentMerchantSession{inner: raw.PKPaymentMerchantSessionFromID(id)}
+	x := &PaymentMerchantSession{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// paymentMerchantSessionAdopt wraps an Objective-C object that this code just created as a
+// PaymentMerchantSession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paymentMerchantSessionAdopt(id objc.ID) *PaymentMerchantSession {
+	if id == 0 {
+		return nil
+	}
+	x := &PaymentMerchantSession{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PaymentMerchantSession) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PaymentMerchantSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PaymentMerchantSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an object that validates the identity of a merchant for a payment request.
 //
-// NewPaymentMerchantSessionWithDictionary creates a new [PaymentMerchantSession].
-func NewPaymentMerchantSessionWithDictionary(dictionary purego.IDer) *PaymentMerchantSession {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentMerchantSession")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), dictionary.ID())
-	return &PaymentMerchantSession{inner: raw.PKPaymentMerchantSessionFromID(_id)}
+// NewPaymentMerchantSessionWithDictionary creates a new PaymentMerchantSession.
+func NewPaymentMerchantSessionWithDictionary(dictionary obj.Object) *PaymentMerchantSession {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentMerchantSession")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:"), objref.IDOf(dictionary))
+	return paymentMerchantSessionAdopt(_id)
 }
 
 // PaymentMerchantSessionable is the interface implemented by [PaymentMerchantSession], for mocking and DI.
 type PaymentMerchantSessionable interface {
-	Unwrap() *raw.PKPaymentMerchantSession
+	obj.Object
 }
 
 var _ PaymentMerchantSessionable = (*PaymentMerchantSession)(nil)

@@ -5,118 +5,133 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description that uniquely identifies a particular passkey credential.
 //
-// PasskeyCredentialIdentity wraps [raw.ASPasskeyCredentialIdentity] with a fluent Go API.
+// PasskeyCredentialIdentity is an idiomatic wrapper over the Objective-C class ASPasskeyCredentialIdentity.
 type PasskeyCredentialIdentity struct {
-	inner *raw.ASPasskeyCredentialIdentity
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASPasskeyCredentialIdentity].
-func (x *PasskeyCredentialIdentity) Unwrap() *raw.ASPasskeyCredentialIdentity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PasskeyCredentialIdentity) ID() objc.ID { return x.inner.Ptr() }
-
-// PasskeyCredentialIdentityFromID adopts an existing object pointer as a PasskeyCredentialIdentity (nil for 0).
+// PasskeyCredentialIdentityFromID adopts an existing Objective-C object as a PasskeyCredentialIdentity
+// (nil for 0), retaining it and registering a release finalizer.
 func PasskeyCredentialIdentityFromID(id objc.ID) *PasskeyCredentialIdentity {
 	if id == 0 {
 		return nil
 	}
-	return &PasskeyCredentialIdentity{inner: raw.ASPasskeyCredentialIdentityFromID(id)}
+	x := &PasskeyCredentialIdentity{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// passkeyCredentialIdentityAdopt wraps an Objective-C object that this code just created as a
+// PasskeyCredentialIdentity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func passkeyCredentialIdentityAdopt(id objc.ID) *PasskeyCredentialIdentity {
+	if id == 0 {
+		return nil
+	}
+	x := &PasskeyCredentialIdentity{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PasskeyCredentialIdentity) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PasskeyCredentialIdentity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PasskeyCredentialIdentity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a passkey credential identity.
 //
-// NewPasskeyCredentialIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier creates a new [PasskeyCredentialIdentity].
-func NewPasskeyCredentialIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier(relyingPartyIdentifier string, userName string, credentialID *foundation.NSData, userHandle *foundation.NSData, recordIdentifier string) *PasskeyCredentialIdentity {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASPasskeyCredentialIdentity")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRelyingPartyIdentifier:userName:credentialID:userHandle:recordIdentifier:"), foundation.NSStringStringWithUTF8String(relyingPartyIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(userName).Ptr(), credentialID.Ptr(), userHandle.Ptr(), foundation.NSStringStringWithUTF8String(recordIdentifier).Ptr())
-	return &PasskeyCredentialIdentity{inner: raw.ASPasskeyCredentialIdentityFromID(_id)}
+// NewPasskeyCredentialIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier creates a new PasskeyCredentialIdentity.
+func NewPasskeyCredentialIdentityWithRelyingPartyIdentifierUserNameCredentialIDUserHandleRecordIdentifier(relyingPartyIdentifier string, userName string, credentialID obj.Object, userHandle obj.Object, recordIdentifier string) *PasskeyCredentialIdentity {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASPasskeyCredentialIdentity")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRelyingPartyIdentifier:userName:credentialID:userHandle:recordIdentifier:"), purego.NSString(relyingPartyIdentifier), purego.NSString(userName), objref.IDOf(credentialID), objref.IDOf(userHandle), purego.NSString(recordIdentifier))
+	return passkeyCredentialIdentityAdopt(_id)
 }
 
 // An indicator that enables you to prioritize credential identities relative to each other.
 //
-// WithRank sets the rank property and returns the receiver for chaining.
+// WithRank sets rank and returns the receiver so calls can be chained.
 func (x *PasskeyCredentialIdentity) WithRank(rank int) *PasskeyCredentialIdentity {
-	x.inner.SetRank(rank)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRank:"), rank)
 	return x
 }
 
-// @abstract The relying party identifier of this passkey credential. @discussion This field is reported as the serviceIdentifier property of ASCredentialIdentity.
-//
-// RelyingPartyIdentifier calls the underlying RelyingPartyIdentifier.
+// The relying party identifier of this passkey credential. This field is reported as the serviceIdentifier property of ASCredentialIdentity.
 func (x *PasskeyCredentialIdentity) RelyingPartyIdentifier() string {
-	_r := x.inner.RelyingPartyIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relyingPartyIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The user name of this passkey credential. @discussion This field is reported as the user property of ASCredentialIdentity.
-//
-// UserName calls the underlying UserName.
+// The user name of this passkey credential. This field is reported as the user property of ASCredentialIdentity.
 func (x *PasskeyCredentialIdentity) UserName() string {
-	_r := x.inner.UserName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The credential ID of this passkey credential. @discussion This field is used to identify the correct credential to use based on relying party request parameters.
-//
-// CredentialID calls the underlying CredentialID.
-func (x *PasskeyCredentialIdentity) CredentialID() *foundation.NSData {
-	return x.inner.CredentialID()
+// The credential ID of this passkey credential. This field is used to identify the correct credential to use based on relying party request parameters.
+func (x *PasskeyCredentialIdentity) CredentialID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialID"))
+	return obj.Wrap(_r)
 }
 
-// @abstract The user handle of this passkey credential. @discussion This field is used to identify the correct credential to use based on relying party request parameters.
-//
-// UserHandle calls the underlying UserHandle.
-func (x *PasskeyCredentialIdentity) UserHandle() *foundation.NSData {
-	return x.inner.UserHandle()
+// The user handle of this passkey credential. This field is used to identify the correct credential to use based on relying party request parameters.
+func (x *PasskeyCredentialIdentity) UserHandle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userHandle"))
+	return obj.Wrap(_r)
 }
 
-// @abstract Get the record identifier. @result The record identifier. @discussion You can utilize the record identifier to uniquely identify the credential identity in your local database.
-//
-// RecordIdentifier calls the underlying RecordIdentifier.
+// Get the record identifier. You can utilize the record identifier to uniquely identify the credential identity in your local database.
 func (x *PasskeyCredentialIdentity) RecordIdentifier() string {
-	_r := x.inner.RecordIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract Get or set the rank of the credential identity object. @discussion The system may utilize the rank to decide which credential identity precedes the other if two identities have the same service identifier. A credential identity with a larger rank value precedes one with a smaller value if both credential identities have the same service identifier. The default value of this property is 0.
-//
-// Rank calls the underlying Rank.
+// Get or set the rank of the credential identity object. The system may utilize the rank to decide which credential identity precedes the other if two identities have the same service identifier. A credential identity with a larger rank value precedes one with a smaller value if both credential identities have the same service identifier. The default value of this property is 0.
 func (x *PasskeyCredentialIdentity) Rank() int {
-	return x.inner.Rank()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rank"))
+	return _r
 }
 
-// SetRank calls the underlying SetRank.
 func (x *PasskeyCredentialIdentity) SetRank(rank int) {
-	x.inner.SetRank(rank)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRank:"), rank)
 }
 
 // PasskeyCredentialIdentityable is the interface implemented by [PasskeyCredentialIdentity], for mocking and DI.
 type PasskeyCredentialIdentityable interface {
-	Unwrap() *raw.ASPasskeyCredentialIdentity
+	obj.Object
 	WithRank(rank int) *PasskeyCredentialIdentity
 	RelyingPartyIdentifier() string
 	UserName() string
-	CredentialID() *foundation.NSData
-	UserHandle() *foundation.NSData
+	CredentialID() obj.Object
+	UserHandle() obj.Object
 	RecordIdentifier() string
 	Rank() int
 	SetRank(rank int)

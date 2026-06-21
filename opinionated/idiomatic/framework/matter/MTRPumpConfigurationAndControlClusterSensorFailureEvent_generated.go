@@ -5,41 +5,66 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRPumpConfigurationAndControlClusterSensorFailureEvent wraps [raw.MTRPumpConfigurationAndControlClusterSensorFailureEvent] with a fluent Go API.
+// MTRPumpConfigurationAndControlClusterSensorFailureEvent is an idiomatic wrapper over the Objective-C class MTRPumpConfigurationAndControlClusterSensorFailureEvent.
 type MTRPumpConfigurationAndControlClusterSensorFailureEvent struct {
-	inner *raw.MTRPumpConfigurationAndControlClusterSensorFailureEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterSensorFailureEvent].
-func (x *MTRPumpConfigurationAndControlClusterSensorFailureEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterSensorFailureEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRPumpConfigurationAndControlClusterSensorFailureEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRPumpConfigurationAndControlClusterSensorFailureEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterSensorFailureEvent (nil for 0).
+// MTRPumpConfigurationAndControlClusterSensorFailureEventFromID adopts an existing Objective-C object as a MTRPumpConfigurationAndControlClusterSensorFailureEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRPumpConfigurationAndControlClusterSensorFailureEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterSensorFailureEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRPumpConfigurationAndControlClusterSensorFailureEvent{inner: raw.MTRPumpConfigurationAndControlClusterSensorFailureEventFromID(id)}
+	x := &MTRPumpConfigurationAndControlClusterSensorFailureEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRPumpConfigurationAndControlClusterSensorFailureEvent creates a new [MTRPumpConfigurationAndControlClusterSensorFailureEvent].
+// mTRPumpConfigurationAndControlClusterSensorFailureEventAdopt wraps an Objective-C object that this code just created as a
+// MTRPumpConfigurationAndControlClusterSensorFailureEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRPumpConfigurationAndControlClusterSensorFailureEventAdopt(id objc.ID) *MTRPumpConfigurationAndControlClusterSensorFailureEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRPumpConfigurationAndControlClusterSensorFailureEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRPumpConfigurationAndControlClusterSensorFailureEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRPumpConfigurationAndControlClusterSensorFailureEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRPumpConfigurationAndControlClusterSensorFailureEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRPumpConfigurationAndControlClusterSensorFailureEvent creates a new MTRPumpConfigurationAndControlClusterSensorFailureEvent.
 func NewMTRPumpConfigurationAndControlClusterSensorFailureEvent() *MTRPumpConfigurationAndControlClusterSensorFailureEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRPumpConfigurationAndControlClusterSensorFailureEvent")), objc.RegisterName("new"))
-	return &MTRPumpConfigurationAndControlClusterSensorFailureEvent{inner: raw.MTRPumpConfigurationAndControlClusterSensorFailureEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterSensorFailureEvent")), objc.RegisterName("new"))
+	return mTRPumpConfigurationAndControlClusterSensorFailureEventAdopt(_id)
 }
 
 // MTRPumpConfigurationAndControlClusterSensorFailureEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterSensorFailureEvent], for mocking and DI.
 type MTRPumpConfigurationAndControlClusterSensorFailureEventable interface {
-	Unwrap() *raw.MTRPumpConfigurationAndControlClusterSensorFailureEvent
+	obj.Object
 }
 
 var _ MTRPumpConfigurationAndControlClusterSensorFailureEventable = (*MTRPumpConfigurationAndControlClusterSensorFailureEvent)(nil)

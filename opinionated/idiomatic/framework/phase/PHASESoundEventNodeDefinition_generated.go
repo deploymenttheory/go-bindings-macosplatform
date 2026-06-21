@@ -5,61 +5,74 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A base class for sound event nodes that connect to form a node hierarchy.
 //
-// SoundEventNodeDefinition wraps [raw.PHASESoundEventNodeDefinition] with a fluent Go API.
+// SoundEventNodeDefinition is an idiomatic wrapper over the Objective-C class PHASESoundEventNodeDefinition.
 type SoundEventNodeDefinition struct {
-	inner *raw.PHASESoundEventNodeDefinition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASESoundEventNodeDefinition].
-func (x *SoundEventNodeDefinition) Unwrap() *raw.PHASESoundEventNodeDefinition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SoundEventNodeDefinition) ID() objc.ID { return x.inner.Ptr() }
-
-// SoundEventNodeDefinitionFromID adopts an existing object pointer as a SoundEventNodeDefinition (nil for 0).
+// SoundEventNodeDefinitionFromID adopts an existing Objective-C object as a SoundEventNodeDefinition
+// (nil for 0), retaining it and registering a release finalizer.
 func SoundEventNodeDefinitionFromID(id objc.ID) *SoundEventNodeDefinition {
 	if id == 0 {
 		return nil
 	}
-	return &SoundEventNodeDefinition{inner: raw.PHASESoundEventNodeDefinitionFromID(id)}
+	x := &SoundEventNodeDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSoundEventNodeDefinition creates a new [SoundEventNodeDefinition].
+// soundEventNodeDefinitionAdopt wraps an Objective-C object that this code just created as a
+// SoundEventNodeDefinition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func soundEventNodeDefinitionAdopt(id objc.ID) *SoundEventNodeDefinition {
+	if id == 0 {
+		return nil
+	}
+	x := &SoundEventNodeDefinition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SoundEventNodeDefinition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SoundEventNodeDefinition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SoundEventNodeDefinition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSoundEventNodeDefinition creates a new SoundEventNodeDefinition.
 func NewSoundEventNodeDefinition() *SoundEventNodeDefinition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESoundEventNodeDefinition")), objc.RegisterName("new"))
-	return &SoundEventNodeDefinition{inner: raw.PHASESoundEventNodeDefinitionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHASESoundEventNodeDefinition")), objc.RegisterName("new"))
+	return soundEventNodeDefinitionAdopt(_id)
 }
 
 // Children returns the collection as a Go slice.
 func (x *SoundEventNodeDefinition) Children() []*SoundEventNodeDefinition {
-	arr := x.inner.Children()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *SoundEventNodeDefinition {
-		return &SoundEventNodeDefinition{inner: raw.PHASESoundEventNodeDefinitionFromID(purego.Retain(_id))}
-	})
-}
-
-func (x *SoundEventNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition {
-	return x.inner
-}
-
-func (x *SoundEventNodeDefinition) asDefinition() *raw.PHASEDefinition {
-	return &x.inner.PHASEDefinition
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("children"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SoundEventNodeDefinition { return SoundEventNodeDefinitionFromID(_id) })
 }
 
 // SoundEventNodeDefinitionable is the interface implemented by [SoundEventNodeDefinition], for mocking and DI.
 type SoundEventNodeDefinitionable interface {
-	Unwrap() *raw.PHASESoundEventNodeDefinition
+	obj.Object
 	Children() []*SoundEventNodeDefinition
 }
 

@@ -5,189 +5,169 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An operation for retrieving records from a database.
 //
-// FetchRecordsOperation wraps [raw.CKFetchRecordsOperation] with a fluent Go API.
+// FetchRecordsOperation is an idiomatic wrapper over the Objective-C class CKFetchRecordsOperation.
 type FetchRecordsOperation struct {
-	inner *raw.CKFetchRecordsOperation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKFetchRecordsOperation].
-func (x *FetchRecordsOperation) Unwrap() *raw.CKFetchRecordsOperation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FetchRecordsOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// FetchRecordsOperationFromID adopts an existing object pointer as a FetchRecordsOperation (nil for 0).
+// FetchRecordsOperationFromID adopts an existing Objective-C object as a FetchRecordsOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func FetchRecordsOperationFromID(id objc.ID) *FetchRecordsOperation {
 	if id == 0 {
 		return nil
 	}
-	return &FetchRecordsOperation{inner: raw.CKFetchRecordsOperationFromID(id)}
+	x := &FetchRecordsOperation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFetchRecordsOperation creates a new [FetchRecordsOperation].
+// fetchRecordsOperationAdopt wraps an Objective-C object that this code just created as a
+// FetchRecordsOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fetchRecordsOperationAdopt(id objc.ID) *FetchRecordsOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &FetchRecordsOperation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FetchRecordsOperation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FetchRecordsOperation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FetchRecordsOperation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFetchRecordsOperation creates a new FetchRecordsOperation.
 func NewFetchRecordsOperation() *FetchRecordsOperation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKFetchRecordsOperation")), objc.RegisterName("new"))
-	return &FetchRecordsOperation{inner: raw.CKFetchRecordsOperationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKFetchRecordsOperation")), objc.RegisterName("new"))
+	return fetchRecordsOperationAdopt(_id)
 }
 
 // Creates a fetch operation for retrieving the records with the specified IDs.
 //
-// NewFetchRecordsOperationWithRecordIDs creates a new [FetchRecordsOperation].
-func NewFetchRecordsOperationWithRecordIDs(recordIDs *foundation.NSArray[*raw.CKRecordID]) *FetchRecordsOperation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKFetchRecordsOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordIDs:"), recordIDs.Ptr())
-	return &FetchRecordsOperation{inner: raw.CKFetchRecordsOperationFromID(_id)}
+// NewFetchRecordsOperationWithRecordIDs creates a new FetchRecordsOperation.
+func NewFetchRecordsOperationWithRecordIDs(recordIDs []*RecordID) *FetchRecordsOperation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKFetchRecordsOperation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordIDs:"), purego.SliceToNSArray(recordIDs, func(_v *RecordID) objc.ID { return objref.IDOf(_v) }))
+	return fetchRecordsOperationAdopt(_id)
 }
 
 // The record IDs of the records to fetch.
 //
-// WithRecordIDs sets the collection, converting the Go slice to an NSArray.
-func (x *FetchRecordsOperation) WithRecordIDs(items ...*raw.CKRecordID) *FetchRecordsOperation {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetRecordIDs(foundation.NSArrayFromID[*raw.CKRecordID](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CKRecordID](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetRecordIDs(_arr)
+// WithRecordIDs sets the collection and returns the receiver so calls can be chained.
+func (x *FetchRecordsOperation) WithRecordIDs(items ...*RecordID) *FetchRecordsOperation {
+	_arr := purego.SliceToNSArray(items, func(_v *RecordID) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordIDs:"), _arr)
 	return x
 }
 
 // The fields of the records to fetch.
 //
-// WithDesiredKeys sets the collection, converting the Go slice to an NSArray.
-func (x *FetchRecordsOperation) WithDesiredKeys(items ...*foundation.NSString) *FetchRecordsOperation {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetDesiredKeys(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetDesiredKeys(_arr)
+// WithDesiredKeys sets the collection and returns the receiver so calls can be chained.
+func (x *FetchRecordsOperation) WithDesiredKeys(items ...obj.Object) *FetchRecordsOperation {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredKeys:"), _arr)
 	return x
 }
 
 // The closure to execute with progress information for individual records.
 //
-// WithPerRecordProgressBlock sets the perRecordProgressBlock property and returns the receiver for chaining.
-func (x *FetchRecordsOperation) WithPerRecordProgressBlock(perRecordProgressBlock func(*raw.CKRecordID, float64)) *FetchRecordsOperation {
-	x.inner.SetPerRecordProgressBlock(perRecordProgressBlock)
-	return x
-}
-
-// The closure to execute when a record becomes available.
-//
-// WithPerRecordCompletionBlock sets the perRecordCompletionBlock property and returns the receiver for chaining.
-func (x *FetchRecordsOperation) WithPerRecordCompletionBlock(perRecordCompletionBlock func(*raw.CKRecord, *raw.CKRecordID, unsafe.Pointer)) *FetchRecordsOperation {
-	x.inner.SetPerRecordCompletionBlock(perRecordCompletionBlock)
-	return x
-}
-
-// The closure to execute after CloudKit retrieves all of the records.
-//
-// WithFetchRecordsCompletionBlock sets the fetchRecordsCompletionBlock property and returns the receiver for chaining.
-func (x *FetchRecordsOperation) WithFetchRecordsCompletionBlock(fetchRecordsCompletionBlock func(*foundation.NSDictionary[*raw.CKRecordID, *raw.CKRecord], unsafe.Pointer)) *FetchRecordsOperation {
-	x.inner.SetFetchRecordsCompletionBlock(fetchRecordsCompletionBlock)
+// WithPerRecordProgressBlock sets perRecordProgressBlock and returns the receiver so calls can be chained.
+func (x *FetchRecordsOperation) WithPerRecordProgressBlock(perRecordProgressBlock func(obj.Object, float64)) *FetchRecordsOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerRecordProgressBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64) { perRecordProgressBlock(obj.Wrap(_b0), _b1) }))
 	return x
 }
 
 // The database that the operation uses.
 //
-// WithDatabase sets the database property and returns the receiver for chaining.
+// WithDatabase sets database and returns the receiver so calls can be chained.
 func (x *FetchRecordsOperation) WithDatabase(database *Database) *FetchRecordsOperation {
-	x.inner.CKDatabaseOperation.SetDatabase(database.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return x
 }
 
 // The operation’s configuration.
 //
-// WithConfiguration sets the configuration property and returns the receiver for chaining.
+// WithConfiguration sets configuration and returns the receiver so calls can be chained.
 func (x *FetchRecordsOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
 // The operation’s group.
 //
-// WithGroup sets the group property and returns the receiver for chaining.
+// WithGroup sets group and returns the receiver so calls can be chained.
 func (x *FetchRecordsOperation) WithGroup(group *OperationGroup) *FetchRecordsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
 // The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
-// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
 func (x *FetchRecordsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+// The operation's container.
 //
-// WithContainer sets the container property and returns the receiver for chaining.
+// WithContainer sets container and returns the receiver so calls can be chained.
 func (x *FetchRecordsOperation) WithContainer(container *Container) *FetchRecordsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+// A Boolean value that indicates whether the operation can send data over the cellular network.
 //
-// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
 func (x *FetchRecordsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
 // A Boolean value that indicates whether the operation is long-lived.
 //
-// WithLongLived sets the longLived property and returns the receiver for chaining.
+// WithLongLived sets longLived and returns the receiver so calls can be chained.
 func (x *FetchRecordsOperation) WithLongLived(longLived bool) *FetchRecordsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+// The timeout interval when waiting for additional data.
 //
-// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
 func (x *FetchRecordsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+// The maximum amount of time that a resource request can use.
 //
-// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
 func (x *FetchRecordsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordsOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
@@ -195,90 +175,36 @@ func (x *FetchRecordsOperation) WithTimeoutIntervalForResource(timeoutIntervalFo
 //
 // RecordIDs returns the collection as a Go slice.
 func (x *FetchRecordsOperation) RecordIDs() []*RecordID {
-	arr := x.inner.RecordIDs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordID {
-		return &RecordID{inner: raw.CKRecordIDFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordIDs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordID { return RecordIDFromID(_id) })
 }
 
-// SetRecordIDs calls the underlying SetRecordIDs.
-func (x *FetchRecordsOperation) SetRecordIDs(recordIDs *foundation.NSArray[*raw.CKRecordID]) {
-	x.inner.SetRecordIDs(recordIDs)
+func (x *FetchRecordsOperation) SetRecordIDs(recordIDs []*RecordID) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordIDs:"), purego.SliceToNSArray(recordIDs, func(_v *RecordID) objc.ID { return objref.IDOf(_v) }))
 }
 
 // The fields of the records to fetch. Use this property to limit the amount of data that CloudKit returns for each record during the fetch operation. When CloudKit returns a record, it only includes fields with names that match one of the keys in this property. The property's default value is `nil`, which instructs CloudKit to return all of a record's keys. If you're retrieving records of different types, make sure the array includes the fields you want from all of the various record types that the operation can return. If you intend to specify a value other than `nil`, do so before you execute the operation or add the operation to a queue.
 //
 // DesiredKeys returns the collection as a Go slice.
-func (x *FetchRecordsOperation) DesiredKeys() []*foundation.NSString {
-	arr := x.inner.DesiredKeys()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *FetchRecordsOperation) DesiredKeys() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("desiredKeys"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetDesiredKeys calls the underlying SetDesiredKeys.
-func (x *FetchRecordsOperation) SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetDesiredKeys(desiredKeys)
+func (x *FetchRecordsOperation) SetDesiredKeys(desiredKeys []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredKeys:"), purego.SliceToNSArray(desiredKeys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// The closure to execute with progress information for individual records. This property is a closure that returns no value and has the following parameters: - The ID of the record to retrieve. - The amount of data, as a percentage, that CloudKit downloads for the record. The range is `0.0` to `1.0`, where `0.0` indicates that CloudKit hasn't downloaded anything, and `1.0` means the download is complete. The fetch operation executes this closure one or more times for each record ID in the “CKFetchRecordsOperation/recordIDs“ property. Each time the closure executes, it executes serially with respect to the other progress closures of the operation. You can use this closure to track the ongoing progress of the download operation. If you intend to use this closure to process results, set it before you execute the operation or add the operation to a queue.
-//
-// PerRecordProgressBlock calls the underlying PerRecordProgressBlock.
-func (x *FetchRecordsOperation) PerRecordProgressBlock() objc.Block {
-	return x.inner.PerRecordProgressBlock()
-}
-
-// SetPerRecordProgressBlock calls the underlying SetPerRecordProgressBlock.
-func (x *FetchRecordsOperation) SetPerRecordProgressBlock(perRecordProgressBlock func(*raw.CKRecordID, float64)) {
-	x.inner.SetPerRecordProgressBlock(perRecordProgressBlock)
-}
-
-// The closure to execute when a record becomes available. This property is a closure that returns no value and has the following parameters: - The record, or `nil` if CloudKit can't retrieve the record. - The ID of the record. - If CloudKit can't retrieve the record, an error that provides information about the failure; otherwise, `nil`. The fetch operation executes this closure once for each record ID in the “CKFetchRecordsOperation/recordIDs“ property. Each time the closure executes, it executes serially with respect to the other progress closures of the operation. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
-//
-// PerRecordCompletionBlock calls the underlying PerRecordCompletionBlock.
-func (x *FetchRecordsOperation) PerRecordCompletionBlock() objc.Block {
-	return x.inner.PerRecordCompletionBlock()
-}
-
-// SetPerRecordCompletionBlock calls the underlying SetPerRecordCompletionBlock.
-func (x *FetchRecordsOperation) SetPerRecordCompletionBlock(perRecordCompletionBlock func(*raw.CKRecord, *raw.CKRecordID, unsafe.Pointer)) {
-	x.inner.SetPerRecordCompletionBlock(perRecordCompletionBlock)
-}
-
-// The closure to execute after CloudKit retrieves all of the records. This property is a closure that returns no value and has the following parameters: - A dictionary that contains the records that CloudKit retrieves. Each key in the dictionary is a “CKRecord/ID“ object that corresponds to a record you request. The value of each key is the actual “CKRecord“ object that CloudKit returns. - If CloudKit can't retrieve any of the records, an error that provides information about the failure; otherwise, `nil`. The fetch operation executes this closure only once, and it's your final opportunity to process the results. The closure executes after all of the individual progress closures, but before the operation's completion closure. The closure executes serially with respect to the other progress closures of the operation. The closure reports an error of type “CKError/Code/partialFailure“ when it retrieves only some of the records successfully. The <doc://com.apple.documentation/documentation/foundation/nserror/userinfo> dictionary of the error contains a “CKPartialErrorsByItemIDKey“ key that has a dictionary as its value. The keys of the dictionary are the IDs of the records that the operation can't retrieve, and the corresponding values are errors that contain information about the failures. If you intend to use this closure to process results, set it before you execute the operation or submit the operation to a queue.
-//
-// FetchRecordsCompletionBlock calls the underlying FetchRecordsCompletionBlock.
-func (x *FetchRecordsOperation) FetchRecordsCompletionBlock() objc.Block {
-	return x.inner.FetchRecordsCompletionBlock()
-}
-
-// SetFetchRecordsCompletionBlock calls the underlying SetFetchRecordsCompletionBlock.
-func (x *FetchRecordsOperation) SetFetchRecordsCompletionBlock(fetchRecordsCompletionBlock func(*foundation.NSDictionary[*raw.CKRecordID, *raw.CKRecord], unsafe.Pointer)) {
-	x.inner.SetFetchRecordsCompletionBlock(fetchRecordsCompletionBlock)
-}
-
-func (x *FetchRecordsOperation) asDatabaseOperation() *raw.CKDatabaseOperation {
-	return &x.inner.CKDatabaseOperation
-}
-
-func (x *FetchRecordsOperation) asOperation() *raw.CKOperation {
-	return &x.inner.CKDatabaseOperation.CKOperation
+func (x *FetchRecordsOperation) SetPerRecordProgressBlock(perRecordProgressBlock func(obj.Object, float64)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerRecordProgressBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 float64) { perRecordProgressBlock(obj.Wrap(_b0), _b1) }))
 }
 
 // FetchRecordsOperationable is the interface implemented by [FetchRecordsOperation], for mocking and DI.
 type FetchRecordsOperationable interface {
-	Unwrap() *raw.CKFetchRecordsOperation
-	WithRecordIDs(items ...*raw.CKRecordID) *FetchRecordsOperation
-	WithDesiredKeys(items ...*foundation.NSString) *FetchRecordsOperation
-	WithPerRecordProgressBlock(perRecordProgressBlock func(*raw.CKRecordID, float64)) *FetchRecordsOperation
-	WithPerRecordCompletionBlock(perRecordCompletionBlock func(*raw.CKRecord, *raw.CKRecordID, unsafe.Pointer)) *FetchRecordsOperation
-	WithFetchRecordsCompletionBlock(fetchRecordsCompletionBlock func(*foundation.NSDictionary[*raw.CKRecordID, *raw.CKRecord], unsafe.Pointer)) *FetchRecordsOperation
+	obj.Object
+	WithRecordIDs(items ...*RecordID) *FetchRecordsOperation
+	WithDesiredKeys(items ...obj.Object) *FetchRecordsOperation
+	WithPerRecordProgressBlock(perRecordProgressBlock func(obj.Object, float64)) *FetchRecordsOperation
 	WithDatabase(database *Database) *FetchRecordsOperation
 	WithConfiguration(configuration *OperationConfiguration) *FetchRecordsOperation
 	WithGroup(group *OperationGroup) *FetchRecordsOperation
@@ -289,15 +215,10 @@ type FetchRecordsOperationable interface {
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordsOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordsOperation
 	RecordIDs() []*RecordID
-	SetRecordIDs(recordIDs *foundation.NSArray[*raw.CKRecordID])
-	DesiredKeys() []*foundation.NSString
-	SetDesiredKeys(desiredKeys *foundation.NSArray[*foundation.NSString])
-	PerRecordProgressBlock() objc.Block
-	SetPerRecordProgressBlock(perRecordProgressBlock func(*raw.CKRecordID, float64))
-	PerRecordCompletionBlock() objc.Block
-	SetPerRecordCompletionBlock(perRecordCompletionBlock func(*raw.CKRecord, *raw.CKRecordID, unsafe.Pointer))
-	FetchRecordsCompletionBlock() objc.Block
-	SetFetchRecordsCompletionBlock(fetchRecordsCompletionBlock func(*foundation.NSDictionary[*raw.CKRecordID, *raw.CKRecord], unsafe.Pointer))
+	SetRecordIDs(recordIDs []*RecordID)
+	DesiredKeys() []obj.Object
+	SetDesiredKeys(desiredKeys []obj.Object)
+	SetPerRecordProgressBlock(perRecordProgressBlock func(obj.Object, float64))
 }
 
 var _ FetchRecordsOperationable = (*FetchRecordsOperation)(nil)

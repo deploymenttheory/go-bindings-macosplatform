@@ -5,114 +5,124 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A request to start an audio or video call with one or more users.
 //
-// StartCallIntent wraps [raw.INStartCallIntent] with a fluent Go API.
+// StartCallIntent is an idiomatic wrapper over the Objective-C class INStartCallIntent.
 type StartCallIntent struct {
-	inner *raw.INStartCallIntent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INStartCallIntent].
-func (x *StartCallIntent) Unwrap() *raw.INStartCallIntent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StartCallIntent) ID() objc.ID { return x.inner.Ptr() }
-
-// StartCallIntentFromID adopts an existing object pointer as a StartCallIntent (nil for 0).
+// StartCallIntentFromID adopts an existing Objective-C object as a StartCallIntent
+// (nil for 0), retaining it and registering a release finalizer.
 func StartCallIntentFromID(id objc.ID) *StartCallIntent {
 	if id == 0 {
 		return nil
 	}
-	return &StartCallIntent{inner: raw.INStartCallIntentFromID(id)}
+	x := &StartCallIntent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// startCallIntentAdopt wraps an Objective-C object that this code just created as a
+// StartCallIntent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func startCallIntentAdopt(id objc.ID) *StartCallIntent {
+	if id == 0 {
+		return nil
+	}
+	x := &StartCallIntent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *StartCallIntent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StartCallIntent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StartCallIntent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a start call intent object with the specified parameters.
 //
-// NewStartCallIntentWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability creates a new [StartCallIntent].
-func NewStartCallIntentWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability(callRecordFilter *raw.INCallRecordFilter, callRecordToCallBack *raw.INCallRecord, audioRoute INCallAudioRoute, destinationType INCallDestinationType, contacts *foundation.NSArray[*raw.INPerson], callCapability INCallCapability) *StartCallIntent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INStartCallIntent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCallRecordFilter:callRecordToCallBack:audioRoute:destinationType:contacts:callCapability:"), callRecordFilter.Ptr(), callRecordToCallBack.Ptr(), raw.INCallAudioRoute(audioRoute), raw.INCallDestinationType(destinationType), contacts.Ptr(), raw.INCallCapability(callCapability))
-	return &StartCallIntent{inner: raw.INStartCallIntentFromID(_id)}
+// NewStartCallIntentWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability creates a new StartCallIntent.
+func NewStartCallIntentWithCallRecordFilterCallRecordToCallBackAudioRouteDestinationTypeContactsCallCapability(callRecordFilter *CallRecordFilter, callRecordToCallBack *CallRecord, audioRoute CallAudioRoute, destinationType CallDestinationType, contacts []*Person, callCapability CallCapability) *StartCallIntent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INStartCallIntent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCallRecordFilter:callRecordToCallBack:audioRoute:destinationType:contacts:callCapability:"), objref.IDOf(callRecordFilter), objref.IDOf(callRecordToCallBack), audioRoute, destinationType, purego.SliceToNSArray(contacts, func(_v *Person) objc.ID { return objref.IDOf(_v) }), callCapability)
+	return startCallIntentAdopt(_id)
 }
 
 // The intent’s display name.
 //
-// WithSuggestedInvocationPhrase sets the suggestedInvocationPhrase property and returns the receiver for chaining.
+// WithSuggestedInvocationPhrase sets suggestedInvocationPhrase and returns the receiver so calls can be chained.
 func (x *StartCallIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *StartCallIntent {
-	x.inner.INIntent.SetSuggestedInvocationPhrase(foundation.NSStringStringWithUTF8String(suggestedInvocationPhrase))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
 	return x
 }
 
-// WithDonationMetadata sets the donationMetadata property and returns the receiver for chaining.
+// WithDonationMetadata sets donationMetadata and returns the receiver so calls can be chained.
 func (x *StartCallIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *StartCallIntent {
-	x.inner.INIntent.SetDonationMetadata(donationMetadata.asIntentDonationMetadata())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
 	return x
 }
 
-// CallRecordFilter calls the underlying CallRecordFilter.
 func (x *StartCallIntent) CallRecordFilter() *CallRecordFilter {
-	_r := x.inner.CallRecordFilter()
-	if _r == nil {
-		return nil
-	}
-	return &CallRecordFilter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callRecordFilter"))
+	return CallRecordFilterFromID(_r)
 }
 
-// CallRecordToCallBack calls the underlying CallRecordToCallBack.
 func (x *StartCallIntent) CallRecordToCallBack() *CallRecord {
-	_r := x.inner.CallRecordToCallBack()
-	if _r == nil {
-		return nil
-	}
-	return &CallRecord{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callRecordToCallBack"))
+	return CallRecordFromID(_r)
 }
 
-// AudioRoute calls the underlying AudioRoute.
-func (x *StartCallIntent) AudioRoute() INCallAudioRoute {
-	return INCallAudioRoute(x.inner.AudioRoute())
+func (x *StartCallIntent) AudioRoute() CallAudioRoute {
+	_r := objc.Send[CallAudioRoute](objref.IDOf(x), objc.RegisterName("audioRoute"))
+	return _r
 }
 
-// DestinationType calls the underlying DestinationType.
-func (x *StartCallIntent) DestinationType() INCallDestinationType {
-	return INCallDestinationType(x.inner.DestinationType())
+func (x *StartCallIntent) DestinationType() CallDestinationType {
+	_r := objc.Send[CallDestinationType](objref.IDOf(x), objc.RegisterName("destinationType"))
+	return _r
 }
 
 // Contacts returns the collection as a Go slice.
 func (x *StartCallIntent) Contacts() []*Person {
-	arr := x.inner.Contacts()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Person {
-		return &Person{inner: raw.INPersonFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contacts"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
-// CallCapability calls the underlying CallCapability.
-func (x *StartCallIntent) CallCapability() INCallCapability {
-	return INCallCapability(x.inner.CallCapability())
+func (x *StartCallIntent) CallCapability() CallCapability {
+	_r := objc.Send[CallCapability](objref.IDOf(x), objc.RegisterName("callCapability"))
+	return _r
 }
-
-func (x *StartCallIntent) asIntent() *raw.INIntent { return &x.inner.INIntent }
 
 // StartCallIntentable is the interface implemented by [StartCallIntent], for mocking and DI.
 type StartCallIntentable interface {
-	Unwrap() *raw.INStartCallIntent
+	obj.Object
 	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *StartCallIntent
 	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *StartCallIntent
 	CallRecordFilter() *CallRecordFilter
 	CallRecordToCallBack() *CallRecord
-	AudioRoute() INCallAudioRoute
-	DestinationType() INCallDestinationType
+	AudioRoute() CallAudioRoute
+	DestinationType() CallDestinationType
 	Contacts() []*Person
-	CallCapability() INCallCapability
+	CallCapability() CallCapability
 }
 
 var _ StartCallIntentable = (*StartCallIntent)(nil)

@@ -6,13 +6,13 @@ package browserenginekit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/browserenginekit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
+// Launches a networking extension process asynchronously.
+//
 // NetworkProcessWithInterruptionHandlerCompletion blocks until the operation completes or ctx is cancelled.
 func NetworkProcessWithInterruptionHandlerCompletion(ctx context.Context, interruptionHandler func()) (*NetworkingProcess, error) {
 	type _result struct {
@@ -20,16 +20,13 @@ func NetworkProcessWithInterruptionHandlerCompletion(ctx context.Context, interr
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.BENetworkingProcessNetworkProcessWithInterruptionHandlerCompletion(interruptionHandler, func(_p0 *raw.BENetworkingProcess, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &NetworkingProcess{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = NetworkingProcessFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("BENetworkingProcess")), objc.RegisterName("networkProcessWithInterruptionHandler:completion:"), objc.NewBlock(func(_ objc.Block) { interruptionHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -39,6 +36,8 @@ func NetworkProcessWithInterruptionHandlerCompletion(ctx context.Context, interr
 	}
 }
 
+// Launches a networking extension process asynchronously.
+//
 // NetworkProcessWithBundleIDInterruptionHandlerCompletion blocks until the operation completes or ctx is cancelled.
 func NetworkProcessWithBundleIDInterruptionHandlerCompletion(ctx context.Context, bundleID string, interruptionHandler func()) (*NetworkingProcess, error) {
 	type _result struct {
@@ -46,16 +45,13 @@ func NetworkProcessWithBundleIDInterruptionHandlerCompletion(ctx context.Context
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.BENetworkingProcessNetworkProcessWithBundleIDInterruptionHandlerCompletion(foundation.NSStringStringWithUTF8String(bundleID), interruptionHandler, func(_p0 *raw.BENetworkingProcess, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &NetworkingProcess{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = NetworkingProcessFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("BENetworkingProcess")), objc.RegisterName("networkProcessWithBundleID:interruptionHandler:completion:"), purego.NSString(bundleID), objc.NewBlock(func(_ objc.Block) { interruptionHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -65,24 +61,20 @@ func NetworkProcessWithBundleIDInterruptionHandlerCompletion(ctx context.Context
 	}
 }
 
-// Foreground calls the underlying BEProcessCapabilityForeground.
+// The helper extension process may run at foreground priority to work on behalf of the host process while it is foreground.
 func Foreground() *ProcessCapability {
-	_r := raw.BEProcessCapabilityForeground()
-	if _r == nil {
-		return nil
-	}
-	return &ProcessCapability{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("BEProcessCapability")), objc.RegisterName("foreground"))
+	return ProcessCapabilityFromID(_r)
 }
 
-// Suspended calls the underlying BEProcessCapabilitySuspended.
+// The helper extension process may remain resident in a suspended state (it will not be granted CPU time).
 func Suspended() *ProcessCapability {
-	_r := raw.BEProcessCapabilitySuspended()
-	if _r == nil {
-		return nil
-	}
-	return &ProcessCapability{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("BEProcessCapability")), objc.RegisterName("suspended"))
+	return ProcessCapabilityFromID(_r)
 }
 
+// Launches a rendering extension process asynchronously.
+//
 // RenderingProcessWithInterruptionHandlerCompletion blocks until the operation completes or ctx is cancelled.
 func RenderingProcessWithInterruptionHandlerCompletion(ctx context.Context, interruptionHandler func()) (*RenderingProcess, error) {
 	type _result struct {
@@ -90,16 +82,13 @@ func RenderingProcessWithInterruptionHandlerCompletion(ctx context.Context, inte
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.BERenderingProcessRenderingProcessWithInterruptionHandlerCompletion(interruptionHandler, func(_p0 *raw.BERenderingProcess, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &RenderingProcess{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = RenderingProcessFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("BERenderingProcess")), objc.RegisterName("renderingProcessWithInterruptionHandler:completion:"), objc.NewBlock(func(_ objc.Block) { interruptionHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -109,6 +98,8 @@ func RenderingProcessWithInterruptionHandlerCompletion(ctx context.Context, inte
 	}
 }
 
+// Launches a rendering extension process asynchronously.
+//
 // RenderingProcessWithBundleIDInterruptionHandlerCompletion blocks until the operation completes or ctx is cancelled.
 func RenderingProcessWithBundleIDInterruptionHandlerCompletion(ctx context.Context, bundleID string, interruptionHandler func()) (*RenderingProcess, error) {
 	type _result struct {
@@ -116,16 +107,13 @@ func RenderingProcessWithBundleIDInterruptionHandlerCompletion(ctx context.Conte
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.BERenderingProcessRenderingProcessWithBundleIDInterruptionHandlerCompletion(foundation.NSStringStringWithUTF8String(bundleID), interruptionHandler, func(_p0 *raw.BERenderingProcess, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &RenderingProcess{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = RenderingProcessFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("BERenderingProcess")), objc.RegisterName("renderingProcessWithBundleID:interruptionHandler:completion:"), purego.NSString(bundleID), objc.NewBlock(func(_ objc.Block) { interruptionHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -135,6 +123,8 @@ func RenderingProcessWithBundleIDInterruptionHandlerCompletion(ctx context.Conte
 	}
 }
 
+// Launches a web content extension process asynchronously.
+//
 // WebContentProcessWithInterruptionHandlerCompletion blocks until the operation completes or ctx is cancelled.
 func WebContentProcessWithInterruptionHandlerCompletion(ctx context.Context, interruptionHandler func()) (*WebContentProcess, error) {
 	type _result struct {
@@ -142,16 +132,13 @@ func WebContentProcessWithInterruptionHandlerCompletion(ctx context.Context, int
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.BEWebContentProcessWebContentProcessWithInterruptionHandlerCompletion(interruptionHandler, func(_p0 *raw.BEWebContentProcess, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &WebContentProcess{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = WebContentProcessFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("BEWebContentProcess")), objc.RegisterName("webContentProcessWithInterruptionHandler:completion:"), objc.NewBlock(func(_ objc.Block) { interruptionHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -161,6 +148,8 @@ func WebContentProcessWithInterruptionHandlerCompletion(ctx context.Context, int
 	}
 }
 
+// Launches a web content extension process asynchronously.
+//
 // WebContentProcessWithBundleIDInterruptionHandlerCompletion blocks until the operation completes or ctx is cancelled.
 func WebContentProcessWithBundleIDInterruptionHandlerCompletion(ctx context.Context, bundleID string, interruptionHandler func()) (*WebContentProcess, error) {
 	type _result struct {
@@ -168,16 +157,13 @@ func WebContentProcessWithBundleIDInterruptionHandlerCompletion(ctx context.Cont
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.BEWebContentProcessWebContentProcessWithBundleIDInterruptionHandlerCompletion(foundation.NSStringStringWithUTF8String(bundleID), interruptionHandler, func(_p0 *raw.BEWebContentProcess, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &WebContentProcess{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = WebContentProcessFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("BEWebContentProcess")), objc.RegisterName("webContentProcessWithBundleID:interruptionHandler:completion:"), purego.NSString(bundleID), objc.NewBlock(func(_ objc.Block) { interruptionHandler() }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

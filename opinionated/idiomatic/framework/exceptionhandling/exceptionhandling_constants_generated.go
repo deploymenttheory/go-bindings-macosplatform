@@ -5,30 +5,19 @@
 package exceptionhandling
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/exceptionhandling"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// NSUncaughtSystemExceptionException returns the string constant NSUncaughtSystemExceptionException as an objc.ID, for use as a dictionary key or selector argument.
-func NSUncaughtSystemExceptionException() objc.ID {
-	if _r := raw.NSUncaughtSystemExceptionException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSUncaughtSystemExceptionException returns the string constant NSUncaughtSystemExceptionException, for use as a dictionary key or argument.
+func NSUncaughtSystemExceptionException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSUncaughtSystemExceptionException")))
 }
 
-// NSUncaughtRuntimeErrorException returns the string constant NSUncaughtRuntimeErrorException as an objc.ID, for use as a dictionary key or selector argument.
-func NSUncaughtRuntimeErrorException() objc.ID {
-	if _r := raw.NSUncaughtRuntimeErrorException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSUncaughtRuntimeErrorException returns the string constant NSUncaughtRuntimeErrorException, for use as a dictionary key or argument.
+func NSUncaughtRuntimeErrorException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSUncaughtRuntimeErrorException")))
 }
 
-// NSStackTraceKey returns the string constant NSStackTraceKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSStackTraceKey() objc.ID {
-	if _r := raw.NSStackTraceKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSStackTraceKey returns the string constant NSStackTraceKey, for use as a dictionary key or argument.
+func NSStackTraceKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSStackTraceKey"))) }

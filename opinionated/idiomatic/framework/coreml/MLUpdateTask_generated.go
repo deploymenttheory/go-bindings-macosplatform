@@ -5,52 +5,74 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A task that updates a model with additional training data.
 //
-// UpdateTask wraps [raw.MLUpdateTask] with a fluent Go API.
+// UpdateTask is an idiomatic wrapper over the Objective-C class MLUpdateTask.
 type UpdateTask struct {
-	inner *raw.MLUpdateTask
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLUpdateTask].
-func (x *UpdateTask) Unwrap() *raw.MLUpdateTask { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UpdateTask) ID() objc.ID { return x.inner.Ptr() }
-
-// UpdateTaskFromID adopts an existing object pointer as a UpdateTask (nil for 0).
+// UpdateTaskFromID adopts an existing Objective-C object as a UpdateTask
+// (nil for 0), retaining it and registering a release finalizer.
 func UpdateTaskFromID(id objc.ID) *UpdateTask {
 	if id == 0 {
 		return nil
 	}
-	return &UpdateTask{inner: raw.MLUpdateTaskFromID(id)}
+	x := &UpdateTask{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewUpdateTask creates a new [UpdateTask].
+// updateTaskAdopt wraps an Objective-C object that this code just created as a
+// UpdateTask (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func updateTaskAdopt(id objc.ID) *UpdateTask {
+	if id == 0 {
+		return nil
+	}
+	x := &UpdateTask{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UpdateTask) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UpdateTask) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UpdateTask) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUpdateTask creates a new UpdateTask.
 func NewUpdateTask() *UpdateTask {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLUpdateTask")), objc.RegisterName("new"))
-	return &UpdateTask{inner: raw.MLUpdateTaskFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLUpdateTask")), objc.RegisterName("new"))
+	return updateTaskAdopt(_id)
 }
 
 // Resumes a model update with updated parameter values.
-//
-// ResumeWithParameters calls the underlying ResumeWithParameters.
-func (x *UpdateTask) ResumeWithParameters(updateParameters *foundation.NSDictionary[*raw.MLParameterKey, objc.ID]) {
-	x.inner.ResumeWithParameters(updateParameters)
+func (x *UpdateTask) ResumeWithParameters(updateParameters obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeWithParameters:"), objref.IDOf(updateParameters))
 }
-
-func (x *UpdateTask) asTask() *raw.MLTask { return &x.inner.MLTask }
 
 // UpdateTaskable is the interface implemented by [UpdateTask], for mocking and DI.
 type UpdateTaskable interface {
-	Unwrap() *raw.MLUpdateTask
-	ResumeWithParameters(updateParameters *foundation.NSDictionary[*raw.MLParameterKey, objc.ID])
+	obj.Object
+	ResumeWithParameters(updateParameters obj.Object)
 }
 
 var _ UpdateTaskable = (*UpdateTask)(nil)

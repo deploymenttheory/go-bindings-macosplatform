@@ -5,27 +5,227 @@
 package videotoolbox
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// VTCopySupportedPropertyDictionaryForEncoder wraps [raw.VTCopySupportedPropertyDictionaryForEncoder], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func VTCopySupportedPropertyDictionaryForEncoder(width int32, height int32, codecType uint, encoderSpecification objc.ID) (objc.ID, objc.ID, error) {
-	var _out0 uintptr
-	var _out1 uintptr
-	if _err := purego.NewOSStatus(raw.VTCopySupportedPropertyDictionaryForEncoder(width, height, codecType, purego.CFRef(encoderSpecification), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))).Err(); _err != nil {
-		return 0, 0, _err
+var _fnVTCompressionSessionPrepareToEncodeFrames func(objc.ID) int32
+
+// VTCompressionSessionPrepareToEncodeFrames reports an error if the VideoToolbox framework function VTCompressionSessionPrepareToEncodeFrames fails.
+func VTCompressionSessionPrepareToEncodeFrames(session obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTCompressionSessionPrepareToEncodeFrames == nil {
+		ebipurego.RegisterLibFunc(&_fnVTCompressionSessionPrepareToEncodeFrames, _lib, "VTCompressionSessionPrepareToEncodeFrames")
 	}
-	return objc.ID(_out0), objc.ID(_out1), nil
+	_rc := _fnVTCompressionSessionPrepareToEncodeFrames(objref.IDOf(session))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
 }
 
-// VTCopyVideoEncoderList wraps [raw.VTCopyVideoEncoderList], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func VTCopyVideoEncoderList(options objc.ID) (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.VTCopyVideoEncoderList(purego.CFRef(options), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+var _fnVTCopyRAWProcessorExtensionProperties func(objc.ID, unsafe.Pointer) int32
+
+// VTCopyRAWProcessorExtensionProperties reports an error if the VideoToolbox framework function VTCopyRAWProcessorExtensionProperties fails.
+func VTCopyRAWProcessorExtensionProperties(formatDesc obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTCopyRAWProcessorExtensionProperties == nil {
+		ebipurego.RegisterLibFunc(&_fnVTCopyRAWProcessorExtensionProperties, _lib, "VTCopyRAWProcessorExtensionProperties")
 	}
-	return objc.ID(_out0), nil
+	var _out0 uintptr
+	_rc := _fnVTCopyRAWProcessorExtensionProperties(objref.IDOf(formatDesc), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnVTCopySupportedPropertyDictionaryForEncoder func(int32, int32, int, objc.ID, unsafe.Pointer, unsafe.Pointer) int32
+
+// VTCopySupportedPropertyDictionaryForEncoder reports an error if the VideoToolbox framework function VTCopySupportedPropertyDictionaryForEncoder fails.
+func VTCopySupportedPropertyDictionaryForEncoder(width int32, height int32, codecType int, encoderSpecification obj.Object) (obj.Object, obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTCopySupportedPropertyDictionaryForEncoder == nil {
+		ebipurego.RegisterLibFunc(&_fnVTCopySupportedPropertyDictionaryForEncoder, _lib, "VTCopySupportedPropertyDictionaryForEncoder")
+	}
+	var _out0 uintptr
+	var _out1 uintptr
+	_rc := _fnVTCopySupportedPropertyDictionaryForEncoder(width, height, codecType, objref.IDOf(encoderSpecification), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), obj.Wrap(objc.ID(_out1)), nil
+}
+
+var _fnVTCopyVideoDecoderExtensionProperties func(objc.ID, unsafe.Pointer) int32
+
+// VTCopyVideoDecoderExtensionProperties reports an error if the VideoToolbox framework function VTCopyVideoDecoderExtensionProperties fails.
+func VTCopyVideoDecoderExtensionProperties(formatDesc obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTCopyVideoDecoderExtensionProperties == nil {
+		ebipurego.RegisterLibFunc(&_fnVTCopyVideoDecoderExtensionProperties, _lib, "VTCopyVideoDecoderExtensionProperties")
+	}
+	var _out0 uintptr
+	_rc := _fnVTCopyVideoDecoderExtensionProperties(objref.IDOf(formatDesc), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnVTCopyVideoEncoderList func(objc.ID, unsafe.Pointer) int32
+
+// VTCopyVideoEncoderList reports an error if the VideoToolbox framework function VTCopyVideoEncoderList fails.
+func VTCopyVideoEncoderList(options obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTCopyVideoEncoderList == nil {
+		ebipurego.RegisterLibFunc(&_fnVTCopyVideoEncoderList, _lib, "VTCopyVideoEncoderList")
+	}
+	var _out0 uintptr
+	_rc := _fnVTCopyVideoEncoderList(objref.IDOf(options), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnVTDecompressionSessionFinishDelayedFrames func(objc.ID) int32
+
+// VTDecompressionSessionFinishDelayedFrames reports an error if the VideoToolbox framework function VTDecompressionSessionFinishDelayedFrames fails.
+func VTDecompressionSessionFinishDelayedFrames(session obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTDecompressionSessionFinishDelayedFrames == nil {
+		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionFinishDelayedFrames, _lib, "VTDecompressionSessionFinishDelayedFrames")
+	}
+	_rc := _fnVTDecompressionSessionFinishDelayedFrames(objref.IDOf(session))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnVTDecompressionSessionWaitForAsynchronousFrames func(objc.ID) int32
+
+// VTDecompressionSessionWaitForAsynchronousFrames reports an error if the VideoToolbox framework function VTDecompressionSessionWaitForAsynchronousFrames fails.
+func VTDecompressionSessionWaitForAsynchronousFrames(session obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTDecompressionSessionWaitForAsynchronousFrames == nil {
+		ebipurego.RegisterLibFunc(&_fnVTDecompressionSessionWaitForAsynchronousFrames, _lib, "VTDecompressionSessionWaitForAsynchronousFrames")
+	}
+	_rc := _fnVTDecompressionSessionWaitForAsynchronousFrames(objref.IDOf(session))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnVTFrameSiloAddSampleBuffer func(objc.ID, objc.ID) int32
+
+// VTFrameSiloAddSampleBuffer reports an error if the VideoToolbox framework function VTFrameSiloAddSampleBuffer fails.
+func VTFrameSiloAddSampleBuffer(silo obj.Object, sampleBuffer obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTFrameSiloAddSampleBuffer == nil {
+		ebipurego.RegisterLibFunc(&_fnVTFrameSiloAddSampleBuffer, _lib, "VTFrameSiloAddSampleBuffer")
+	}
+	_rc := _fnVTFrameSiloAddSampleBuffer(objref.IDOf(silo), objref.IDOf(sampleBuffer))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnVTMotionEstimationSessionCompleteFrames func(objc.ID) int32
+
+// VTMotionEstimationSessionCompleteFrames reports an error if the VideoToolbox framework function VTMotionEstimationSessionCompleteFrames fails.
+func VTMotionEstimationSessionCompleteFrames(session obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTMotionEstimationSessionCompleteFrames == nil {
+		ebipurego.RegisterLibFunc(&_fnVTMotionEstimationSessionCompleteFrames, _lib, "VTMotionEstimationSessionCompleteFrames")
+	}
+	_rc := _fnVTMotionEstimationSessionCompleteFrames(objref.IDOf(session))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnVTMotionEstimationSessionCopySourcePixelBufferAttributes func(objc.ID, unsafe.Pointer) int32
+
+// VTMotionEstimationSessionCopySourcePixelBufferAttributes reports an error if the VideoToolbox framework function VTMotionEstimationSessionCopySourcePixelBufferAttributes fails.
+func VTMotionEstimationSessionCopySourcePixelBufferAttributes(motionEstimationSession obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTMotionEstimationSessionCopySourcePixelBufferAttributes == nil {
+		ebipurego.RegisterLibFunc(&_fnVTMotionEstimationSessionCopySourcePixelBufferAttributes, _lib, "VTMotionEstimationSessionCopySourcePixelBufferAttributes")
+	}
+	var _out0 uintptr
+	_rc := _fnVTMotionEstimationSessionCopySourcePixelBufferAttributes(objref.IDOf(motionEstimationSession), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnVTMultiPassStorageClose func(objc.ID) int32
+
+// VTMultiPassStorageClose reports an error if the VideoToolbox framework function VTMultiPassStorageClose fails.
+func VTMultiPassStorageClose(multiPassStorage obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTMultiPassStorageClose == nil {
+		ebipurego.RegisterLibFunc(&_fnVTMultiPassStorageClose, _lib, "VTMultiPassStorageClose")
+	}
+	_rc := _fnVTMultiPassStorageClose(objref.IDOf(multiPassStorage))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnVTRAWProcessingSessionCompleteFrames func(objc.ID) int32
+
+// VTRAWProcessingSessionCompleteFrames reports an error if the VideoToolbox framework function VTRAWProcessingSessionCompleteFrames fails.
+func VTRAWProcessingSessionCompleteFrames(session obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTRAWProcessingSessionCompleteFrames == nil {
+		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionCompleteFrames, _lib, "VTRAWProcessingSessionCompleteFrames")
+	}
+	_rc := _fnVTRAWProcessingSessionCompleteFrames(objref.IDOf(session))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnVTRAWProcessingSessionCopyProcessingParameters func(objc.ID, unsafe.Pointer) int32
+
+// VTRAWProcessingSessionCopyProcessingParameters reports an error if the VideoToolbox framework function VTRAWProcessingSessionCopyProcessingParameters fails.
+func VTRAWProcessingSessionCopyProcessingParameters(session obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTRAWProcessingSessionCopyProcessingParameters == nil {
+		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionCopyProcessingParameters, _lib, "VTRAWProcessingSessionCopyProcessingParameters")
+	}
+	var _out0 uintptr
+	_rc := _fnVTRAWProcessingSessionCopyProcessingParameters(objref.IDOf(session), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
+	}
+	return obj.Wrap(objc.ID(_out0)), nil
+}
+
+var _fnVTRAWProcessingSessionSetProcessingParameters func(objc.ID, objc.ID) int32
+
+// VTRAWProcessingSessionSetProcessingParameters reports an error if the VideoToolbox framework function VTRAWProcessingSessionSetProcessingParameters fails.
+func VTRAWProcessingSessionSetProcessingParameters(session obj.Object, processingParameters obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnVTRAWProcessingSessionSetProcessingParameters == nil {
+		ebipurego.RegisterLibFunc(&_fnVTRAWProcessingSessionSetProcessingParameters, _lib, "VTRAWProcessingSessionSetProcessingParameters")
+	}
+	_rc := _fnVTRAWProcessingSessionSetProcessingParameters(objref.IDOf(session), objref.IDOf(processingParameters))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
 }

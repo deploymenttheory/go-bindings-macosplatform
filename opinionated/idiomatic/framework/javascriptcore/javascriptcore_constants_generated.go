@@ -5,43 +5,37 @@
 package javascriptcore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/javascriptcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @group Property Descriptor Constants @discussion These keys may assist in creating a property descriptor for use with the defineProperty method on JSValue. Property descriptors must fit one of three descriptions: Data Descriptor: - A descriptor containing one or both of the keys <code>value</code> and <code>writable</code>, and optionally containing one or both of the keys <code>enumerable</code> and <code>configurable</code>. A data descriptor may not contain either the <code>get</code> or <code>set</code> key. A data descriptor may be used to create or modify the attributes of a data property on an object (replacing any existing accessor property). Accessor Descriptor: - A descriptor containing one or both of the keys <code>get</code> and <code>set</code>, and optionally containing one or both of the keys <code>enumerable</code> and <code>configurable</code>. An accessor descriptor may not contain either the <code>value</code> or <code>writable</code> key. An accessor descriptor may be used to create or modify the attributes of an accessor property on an object (replacing any existing data property). Generic Descriptor: - A descriptor containing one or both of the keys <code>enumerable</code> and <code>configurable</code>. A generic descriptor may not contain any of the keys <code>value</code>, <code>writable</code>, <code>get</code>, or <code>set</code>. A generic descriptor may be used to modify the attributes of an existing data or accessor property, or to create a new data property. @const
-// JSPropertyDescriptorWritableKey returns the string constant JSPropertyDescriptorWritableKey as an objc.ID, for use as a dictionary key or selector argument.
-func JSPropertyDescriptorWritableKey() objc.ID {
-	return purego.CFConstant(raw.JSPropertyDescriptorWritableKey())
+// These keys may assist in creating a property descriptor for use with the defineProperty method on JSValue. Property descriptors must fit one of three descriptions: Data Descriptor: - A descriptor containing one or both of the keys <code>value</code> and <code>writable</code>, and optionally containing one or both of the keys <code>enumerable</code> and <code>configurable</code>. A data descriptor may not contain either the <code>get</code> or <code>set</code> key. A data descriptor may be used to create or modify the attributes of a data property on an object (replacing any existing accessor property). Accessor Descriptor: - A descriptor containing one or both of the keys <code>get</code> and <code>set</code>, and optionally containing one or both of the keys <code>enumerable</code> and <code>configurable</code>. An accessor descriptor may not contain either the <code>value</code> or <code>writable</code> key. An accessor descriptor may be used to create or modify the attributes of an accessor property on an object (replacing any existing data property). Generic Descriptor: - A descriptor containing one or both of the keys <code>enumerable</code> and <code>configurable</code>. A generic descriptor may not contain any of the keys <code>value</code>, <code>writable</code>, <code>get</code>, or <code>set</code>. A generic descriptor may be used to modify the attributes of an existing data or accessor property, or to create a new data property.
+// JSPropertyDescriptorWritableKey returns the string constant JSPropertyDescriptorWritableKey, for use as a dictionary key or argument.
+func JSPropertyDescriptorWritableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("JSPropertyDescriptorWritableKey")))
 }
 
-// @const
-// JSPropertyDescriptorEnumerableKey returns the string constant JSPropertyDescriptorEnumerableKey as an objc.ID, for use as a dictionary key or selector argument.
-func JSPropertyDescriptorEnumerableKey() objc.ID {
-	return purego.CFConstant(raw.JSPropertyDescriptorEnumerableKey())
+// JSPropertyDescriptorEnumerableKey returns the string constant JSPropertyDescriptorEnumerableKey, for use as a dictionary key or argument.
+func JSPropertyDescriptorEnumerableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("JSPropertyDescriptorEnumerableKey")))
 }
 
-// @const
-// JSPropertyDescriptorConfigurableKey returns the string constant JSPropertyDescriptorConfigurableKey as an objc.ID, for use as a dictionary key or selector argument.
-func JSPropertyDescriptorConfigurableKey() objc.ID {
-	return purego.CFConstant(raw.JSPropertyDescriptorConfigurableKey())
+// JSPropertyDescriptorConfigurableKey returns the string constant JSPropertyDescriptorConfigurableKey, for use as a dictionary key or argument.
+func JSPropertyDescriptorConfigurableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("JSPropertyDescriptorConfigurableKey")))
 }
 
-// @const
-// JSPropertyDescriptorValueKey returns the string constant JSPropertyDescriptorValueKey as an objc.ID, for use as a dictionary key or selector argument.
-func JSPropertyDescriptorValueKey() objc.ID {
-	return purego.CFConstant(raw.JSPropertyDescriptorValueKey())
+// JSPropertyDescriptorValueKey returns the string constant JSPropertyDescriptorValueKey, for use as a dictionary key or argument.
+func JSPropertyDescriptorValueKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("JSPropertyDescriptorValueKey")))
 }
 
-// @const
-// JSPropertyDescriptorGetKey returns the string constant JSPropertyDescriptorGetKey as an objc.ID, for use as a dictionary key or selector argument.
-func JSPropertyDescriptorGetKey() objc.ID {
-	return purego.CFConstant(raw.JSPropertyDescriptorGetKey())
+// JSPropertyDescriptorGetKey returns the string constant JSPropertyDescriptorGetKey, for use as a dictionary key or argument.
+func JSPropertyDescriptorGetKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("JSPropertyDescriptorGetKey")))
 }
 
-// @const
-// JSPropertyDescriptorSetKey returns the string constant JSPropertyDescriptorSetKey as an objc.ID, for use as a dictionary key or selector argument.
-func JSPropertyDescriptorSetKey() objc.ID {
-	return purego.CFConstant(raw.JSPropertyDescriptorSetKey())
+// JSPropertyDescriptorSetKey returns the string constant JSPropertyDescriptorSetKey, for use as a dictionary key or argument.
+func JSPropertyDescriptorSetKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("JSPropertyDescriptorSetKey")))
 }

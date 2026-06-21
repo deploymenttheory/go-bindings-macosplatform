@@ -5,99 +5,120 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROccupancySensingClusterHoldTimeLimitsStruct wraps [raw.MTROccupancySensingClusterHoldTimeLimitsStruct] with a fluent Go API.
+// MTROccupancySensingClusterHoldTimeLimitsStruct is an idiomatic wrapper over the Objective-C class MTROccupancySensingClusterHoldTimeLimitsStruct.
 type MTROccupancySensingClusterHoldTimeLimitsStruct struct {
-	inner *raw.MTROccupancySensingClusterHoldTimeLimitsStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROccupancySensingClusterHoldTimeLimitsStruct].
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) Unwrap() *raw.MTROccupancySensingClusterHoldTimeLimitsStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTROccupancySensingClusterHoldTimeLimitsStructFromID adopts an existing object pointer as a MTROccupancySensingClusterHoldTimeLimitsStruct (nil for 0).
+// MTROccupancySensingClusterHoldTimeLimitsStructFromID adopts an existing Objective-C object as a MTROccupancySensingClusterHoldTimeLimitsStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROccupancySensingClusterHoldTimeLimitsStructFromID(id objc.ID) *MTROccupancySensingClusterHoldTimeLimitsStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTROccupancySensingClusterHoldTimeLimitsStruct{inner: raw.MTROccupancySensingClusterHoldTimeLimitsStructFromID(id)}
+	x := &MTROccupancySensingClusterHoldTimeLimitsStruct{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTROccupancySensingClusterHoldTimeLimitsStruct creates a new [MTROccupancySensingClusterHoldTimeLimitsStruct].
+// mTROccupancySensingClusterHoldTimeLimitsStructAdopt wraps an Objective-C object that this code just created as a
+// MTROccupancySensingClusterHoldTimeLimitsStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROccupancySensingClusterHoldTimeLimitsStructAdopt(id objc.ID) *MTROccupancySensingClusterHoldTimeLimitsStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTROccupancySensingClusterHoldTimeLimitsStruct{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTROccupancySensingClusterHoldTimeLimitsStruct creates a new MTROccupancySensingClusterHoldTimeLimitsStruct.
 func NewMTROccupancySensingClusterHoldTimeLimitsStruct() *MTROccupancySensingClusterHoldTimeLimitsStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROccupancySensingClusterHoldTimeLimitsStruct")), objc.RegisterName("new"))
-	return &MTROccupancySensingClusterHoldTimeLimitsStruct{inner: raw.MTROccupancySensingClusterHoldTimeLimitsStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTROccupancySensingClusterHoldTimeLimitsStruct")), objc.RegisterName("new"))
+	return mTROccupancySensingClusterHoldTimeLimitsStructAdopt(_id)
 }
 
-// WithHoldTimeMin sets the holdTimeMin property and returns the receiver for chaining.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeMin(holdTimeMin *foundation.NSNumber) *MTROccupancySensingClusterHoldTimeLimitsStruct {
-	x.inner.SetHoldTimeMin(holdTimeMin)
+// WithHoldTimeMin sets holdTimeMin and returns the receiver so calls can be chained.
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeMin(holdTimeMin obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoldTimeMin:"), objref.IDOf(holdTimeMin))
 	return x
 }
 
-// WithHoldTimeMax sets the holdTimeMax property and returns the receiver for chaining.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeMax(holdTimeMax *foundation.NSNumber) *MTROccupancySensingClusterHoldTimeLimitsStruct {
-	x.inner.SetHoldTimeMax(holdTimeMax)
+// WithHoldTimeMax sets holdTimeMax and returns the receiver so calls can be chained.
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeMax(holdTimeMax obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoldTimeMax:"), objref.IDOf(holdTimeMax))
 	return x
 }
 
-// WithHoldTimeDefault sets the holdTimeDefault property and returns the receiver for chaining.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeDefault(holdTimeDefault *foundation.NSNumber) *MTROccupancySensingClusterHoldTimeLimitsStruct {
-	x.inner.SetHoldTimeDefault(holdTimeDefault)
+// WithHoldTimeDefault sets holdTimeDefault and returns the receiver so calls can be chained.
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) WithHoldTimeDefault(holdTimeDefault obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoldTimeDefault:"), objref.IDOf(holdTimeDefault))
 	return x
 }
 
-// HoldTimeMin calls the underlying HoldTimeMin.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeMin() *foundation.NSNumber {
-	return x.inner.HoldTimeMin()
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeMin() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("holdTimeMin"))
+	return obj.Wrap(_r)
 }
 
-// SetHoldTimeMin calls the underlying SetHoldTimeMin.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) SetHoldTimeMin(holdTimeMin *foundation.NSNumber) {
-	x.inner.SetHoldTimeMin(holdTimeMin)
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) SetHoldTimeMin(holdTimeMin obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoldTimeMin:"), objref.IDOf(holdTimeMin))
 }
 
-// HoldTimeMax calls the underlying HoldTimeMax.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeMax() *foundation.NSNumber {
-	return x.inner.HoldTimeMax()
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeMax() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("holdTimeMax"))
+	return obj.Wrap(_r)
 }
 
-// SetHoldTimeMax calls the underlying SetHoldTimeMax.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) SetHoldTimeMax(holdTimeMax *foundation.NSNumber) {
-	x.inner.SetHoldTimeMax(holdTimeMax)
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) SetHoldTimeMax(holdTimeMax obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoldTimeMax:"), objref.IDOf(holdTimeMax))
 }
 
-// HoldTimeDefault calls the underlying HoldTimeDefault.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeDefault() *foundation.NSNumber {
-	return x.inner.HoldTimeDefault()
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) HoldTimeDefault() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("holdTimeDefault"))
+	return obj.Wrap(_r)
 }
 
-// SetHoldTimeDefault calls the underlying SetHoldTimeDefault.
-func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) SetHoldTimeDefault(holdTimeDefault *foundation.NSNumber) {
-	x.inner.SetHoldTimeDefault(holdTimeDefault)
+func (x *MTROccupancySensingClusterHoldTimeLimitsStruct) SetHoldTimeDefault(holdTimeDefault obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoldTimeDefault:"), objref.IDOf(holdTimeDefault))
 }
 
 // MTROccupancySensingClusterHoldTimeLimitsStructable is the interface implemented by [MTROccupancySensingClusterHoldTimeLimitsStruct], for mocking and DI.
 type MTROccupancySensingClusterHoldTimeLimitsStructable interface {
-	Unwrap() *raw.MTROccupancySensingClusterHoldTimeLimitsStruct
-	WithHoldTimeMin(holdTimeMin *foundation.NSNumber) *MTROccupancySensingClusterHoldTimeLimitsStruct
-	WithHoldTimeMax(holdTimeMax *foundation.NSNumber) *MTROccupancySensingClusterHoldTimeLimitsStruct
-	WithHoldTimeDefault(holdTimeDefault *foundation.NSNumber) *MTROccupancySensingClusterHoldTimeLimitsStruct
-	HoldTimeMin() *foundation.NSNumber
-	SetHoldTimeMin(holdTimeMin *foundation.NSNumber)
-	HoldTimeMax() *foundation.NSNumber
-	SetHoldTimeMax(holdTimeMax *foundation.NSNumber)
-	HoldTimeDefault() *foundation.NSNumber
-	SetHoldTimeDefault(holdTimeDefault *foundation.NSNumber)
+	obj.Object
+	WithHoldTimeMin(holdTimeMin obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct
+	WithHoldTimeMax(holdTimeMax obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct
+	WithHoldTimeDefault(holdTimeDefault obj.Object) *MTROccupancySensingClusterHoldTimeLimitsStruct
+	HoldTimeMin() obj.Object
+	SetHoldTimeMin(holdTimeMin obj.Object)
+	HoldTimeMax() obj.Object
+	SetHoldTimeMax(holdTimeMax obj.Object)
+	HoldTimeDefault() obj.Object
+	SetHoldTimeDefault(holdTimeDefault obj.Object)
 }
 
 var _ MTROccupancySensingClusterHoldTimeLimitsStructable = (*MTROccupancySensingClusterHoldTimeLimitsStruct)(nil)

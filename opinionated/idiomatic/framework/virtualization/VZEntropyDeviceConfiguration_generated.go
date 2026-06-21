@@ -5,45 +5,68 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The common configuration traits for entropy devices.
 //
-// EntropyDeviceConfiguration wraps [raw.VZEntropyDeviceConfiguration] with a fluent Go API.
+// EntropyDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZEntropyDeviceConfiguration.
 type EntropyDeviceConfiguration struct {
-	inner *raw.VZEntropyDeviceConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZEntropyDeviceConfiguration].
-func (x *EntropyDeviceConfiguration) Unwrap() *raw.VZEntropyDeviceConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EntropyDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// EntropyDeviceConfigurationFromID adopts an existing object pointer as a EntropyDeviceConfiguration (nil for 0).
+// EntropyDeviceConfigurationFromID adopts an existing Objective-C object as a EntropyDeviceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func EntropyDeviceConfigurationFromID(id objc.ID) *EntropyDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &EntropyDeviceConfiguration{inner: raw.VZEntropyDeviceConfigurationFromID(id)}
+	x := &EntropyDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEntropyDeviceConfiguration creates a new [EntropyDeviceConfiguration].
+// entropyDeviceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// EntropyDeviceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func entropyDeviceConfigurationAdopt(id objc.ID) *EntropyDeviceConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &EntropyDeviceConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EntropyDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EntropyDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EntropyDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEntropyDeviceConfiguration creates a new EntropyDeviceConfiguration.
 func NewEntropyDeviceConfiguration() *EntropyDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZEntropyDeviceConfiguration")), objc.RegisterName("new"))
-	return &EntropyDeviceConfiguration{inner: raw.VZEntropyDeviceConfigurationFromID(_id)}
-}
-
-func (x *EntropyDeviceConfiguration) asEntropyDeviceConfiguration() *raw.VZEntropyDeviceConfiguration {
-	return x.inner
+	_id := objc.Send[objc.ID](objc.ID(_class("VZEntropyDeviceConfiguration")), objc.RegisterName("new"))
+	return entropyDeviceConfigurationAdopt(_id)
 }
 
 // EntropyDeviceConfigurationable is the interface implemented by [EntropyDeviceConfiguration], for mocking and DI.
 type EntropyDeviceConfigurationable interface {
-	Unwrap() *raw.VZEntropyDeviceConfiguration
+	obj.Object
 }
 
 var _ EntropyDeviceConfigurationable = (*EntropyDeviceConfiguration)(nil)

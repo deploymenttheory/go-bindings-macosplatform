@@ -5,58 +5,82 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object representing a histogram of data values of the same type of unit.
 //
-// Histogram wraps [raw.MXHistogram] with a fluent Go API.
+// Histogram is an idiomatic wrapper over the Objective-C class MXHistogram.
 type Histogram struct {
-	inner *raw.MXHistogram[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MXHistogram].
-func (x *Histogram) Unwrap() *raw.MXHistogram[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Histogram) ID() objc.ID { return x.inner.Ptr() }
-
-// HistogramFromID adopts an existing object pointer as a Histogram (nil for 0).
+// HistogramFromID adopts an existing Objective-C object as a Histogram
+// (nil for 0), retaining it and registering a release finalizer.
 func HistogramFromID(id objc.ID) *Histogram {
 	if id == 0 {
 		return nil
 	}
-	return &Histogram{inner: raw.MXHistogramFromID[objc.ID](id)}
+	x := &Histogram{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewHistogram creates a new [Histogram].
+// histogramAdopt wraps an Objective-C object that this code just created as a
+// Histogram (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func histogramAdopt(id objc.ID) *Histogram {
+	if id == 0 {
+		return nil
+	}
+	x := &Histogram{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Histogram) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Histogram) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Histogram) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHistogram creates a new Histogram.
 func NewHistogram() *Histogram {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXHistogram")), objc.RegisterName("new"))
-	return &Histogram{inner: raw.MXHistogramFromID[objc.ID](_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXHistogram")), objc.RegisterName("new"))
+	return histogramAdopt(_id)
 }
 
-// @property      totalBucketCount @abstract      The number of buckets contained within this histogram. @discussion    This value can never be negative.
-//
-// TotalBucketCount calls the underlying TotalBucketCount.
-func (x *Histogram) TotalBucketCount() uint {
-	return x.inner.TotalBucketCount()
+// The number of buckets contained within this histogram. This value can never be negative.
+func (x *Histogram) TotalBucketCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalBucketCount"))
+	return _r
 }
 
-// @property      bucketEnumerator @abstract      An NSEnumerator that can be used to enumerate the buckets of this histogram.
-//
-// BucketEnumerator calls the underlying BucketEnumerator.
-func (x *Histogram) BucketEnumerator() *foundation.NSEnumerator[objc.ID] {
-	return x.inner.BucketEnumerator()
+// An NSEnumerator that can be used to enumerate the buckets of this histogram.
+func (x *Histogram) BucketEnumerator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bucketEnumerator"))
+	return obj.Wrap(_r)
 }
 
 // Histogramable is the interface implemented by [Histogram], for mocking and DI.
 type Histogramable interface {
-	Unwrap() *raw.MXHistogram[objc.ID]
-	TotalBucketCount() uint
-	BucketEnumerator() *foundation.NSEnumerator[objc.ID]
+	obj.Object
+	TotalBucketCount() int
+	BucketEnumerator() obj.Object
 }
 
 var _ Histogramable = (*Histogram)(nil)

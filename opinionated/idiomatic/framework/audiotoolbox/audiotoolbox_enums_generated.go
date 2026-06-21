@@ -9,44 +9,23 @@ import (
 	"strings"
 )
 
-type AUAudioUnitBusType int64
+type AudioUnitBusType int64
 
 const (
 	// An input bus.
-	AUAudioUnitBusTypeInput AUAudioUnitBusType = 1
+	AudioUnitBusTypeInput AudioUnitBusType = 1
 	// An output bus.
-	AUAudioUnitBusTypeOutput AUAudioUnitBusType = 2
+	AudioUnitBusTypeOutput AudioUnitBusType = 2
 )
 
-func (e AUAudioUnitBusType) String() string {
+func (e AudioUnitBusType) String() string {
 	switch e {
-	case AUAudioUnitBusTypeInput:
-		return "AUAudioUnitBusTypeInput"
-	case AUAudioUnitBusTypeOutput:
-		return "AUAudioUnitBusTypeOutput"
+	case AudioUnitBusTypeInput:
+		return "AudioUnitBusTypeInput"
+	case AudioUnitBusTypeOutput:
+		return "AudioUnitBusTypeOutput"
 	default:
-		return fmt.Sprintf("AUAudioUnitBusType(%d)", int64(e))
-	}
-}
-
-type AUParameterAutomationEventType int64
-
-const (
-	AUParameterAutomationEventTypeValue   AUParameterAutomationEventType = 0
-	AUParameterAutomationEventTypeTouch   AUParameterAutomationEventType = 1
-	AUParameterAutomationEventTypeRelease AUParameterAutomationEventType = 2
-)
-
-func (e AUParameterAutomationEventType) String() string {
-	switch e {
-	case AUParameterAutomationEventTypeValue:
-		return "AUParameterAutomationEventTypeValue"
-	case AUParameterAutomationEventTypeTouch:
-		return "AUParameterAutomationEventTypeTouch"
-	case AUParameterAutomationEventTypeRelease:
-		return "AUParameterAutomationEventTypeRelease"
-	default:
-		return fmt.Sprintf("AUParameterAutomationEventType(%d)", int64(e))
+		return fmt.Sprintf("AudioUnitBusType(%d)", int64(e))
 	}
 }
 
@@ -65,77 +44,6 @@ func (e AudioComponentInstantiationOptions) String() string {
 	}
 	if e&KAudioComponentInstantiation_LoadInProcess != 0 {
 		parts = append(parts, "KAudioComponentInstantiation_LoadInProcess")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-type AudioComponentValidationResult int64
-
-const (
-	KAudioComponentValidationResult_Unknown                AudioComponentValidationResult = 0
-	KAudioComponentValidationResult_Passed                 AudioComponentValidationResult = 1
-	KAudioComponentValidationResult_Failed                 AudioComponentValidationResult = 2
-	KAudioComponentValidationResult_TimedOut               AudioComponentValidationResult = 3
-	KAudioComponentValidationResult_UnauthorizedError_Open AudioComponentValidationResult = 4
-	KAudioComponentValidationResult_UnauthorizedError_Init AudioComponentValidationResult = 5
-)
-
-func (e AudioComponentValidationResult) String() string {
-	switch e {
-	case KAudioComponentValidationResult_Unknown:
-		return "KAudioComponentValidationResult_Unknown"
-	case KAudioComponentValidationResult_Passed:
-		return "KAudioComponentValidationResult_Passed"
-	case KAudioComponentValidationResult_Failed:
-		return "KAudioComponentValidationResult_Failed"
-	case KAudioComponentValidationResult_TimedOut:
-		return "KAudioComponentValidationResult_TimedOut"
-	case KAudioComponentValidationResult_UnauthorizedError_Open:
-		return "KAudioComponentValidationResult_UnauthorizedError_Open"
-	case KAudioComponentValidationResult_UnauthorizedError_Init:
-		return "KAudioComponentValidationResult_UnauthorizedError_Init"
-	default:
-		return fmt.Sprintf("AudioComponentValidationResult(%d)", int64(e))
-	}
-}
-
-// Bitmask — values may be combined with |.
-type AudioConverterOptions int64
-
-const (
-	KAudioConverterOption_Unbuffered AudioConverterOptions = 65536
-)
-
-func (e AudioConverterOptions) String() string {
-	var parts []string
-	if e&KAudioConverterOption_Unbuffered != 0 {
-		parts = append(parts, "KAudioConverterOption_Unbuffered")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-// Bitmask — values may be combined with |.
-type AudioFileFlags int64
-
-const (
-	KAudioFileFlags_EraseFile AudioFileFlags = 1
-	// Typically, the audio data in a file is page aligned. To make reading the file data as fast as possible, you can use page-aligned data to take advantage of optimized code paths in the file system. However, when space is at a premium, you might want to avoid the additional padding required to attain alignment. To do so, set this flag when calling AudioFileCreate or AudioFileCreateWithURL.
-	KAudioFileFlags_DontPageAlignAudioData AudioFileFlags = 2
-)
-
-func (e AudioFileFlags) String() string {
-	var parts []string
-	if e&KAudioFileFlags_EraseFile != 0 {
-		parts = append(parts, "KAudioFileFlags_EraseFile")
-	}
-	if e&KAudioFileFlags_DontPageAlignAudioData != 0 {
-		parts = append(parts, "KAudioFileFlags_DontPageAlignAudioData")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -166,78 +74,6 @@ func (e AudioFilePermissions) String() string {
 	default:
 		return fmt.Sprintf("AudioFilePermissions(%d)", int64(e))
 	}
-}
-
-// Bitmask — values may be combined with |.
-type AudioFileStreamParseFlags int64
-
-const (
-	// Pass this flag to the AudioFileStreamParseBytes function to signal a discontinuity in the audio data.
-	KAudioFileStreamParseFlag_Discontinuity AudioFileStreamParseFlags = 1
-)
-
-func (e AudioFileStreamParseFlags) String() string {
-	var parts []string
-	if e&KAudioFileStreamParseFlag_Discontinuity != 0 {
-		parts = append(parts, "KAudioFileStreamParseFlag_Discontinuity")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-// Bitmask — values may be combined with |.
-type AudioFileStreamSeekFlags int64
-
-const (
-	// This flag is returned by the AudioFileStreamSeek function if the byte offset is only an estimate.
-	KAudioFileStreamSeekFlag_OffsetIsEstimated AudioFileStreamSeekFlags = 1
-)
-
-func (e AudioFileStreamSeekFlags) String() string {
-	var parts []string
-	if e&KAudioFileStreamSeekFlag_OffsetIsEstimated != 0 {
-		parts = append(parts, "KAudioFileStreamSeekFlag_OffsetIsEstimated")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
-// Bitmask — values may be combined with |.
-type AudioQueueProcessingTapFlags int64
-
-const (
-	KAudioQueueProcessingTap_PreEffects    AudioQueueProcessingTapFlags = 1
-	KAudioQueueProcessingTap_PostEffects   AudioQueueProcessingTapFlags = 2
-	KAudioQueueProcessingTap_Siphon        AudioQueueProcessingTapFlags = 4
-	KAudioQueueProcessingTap_StartOfStream AudioQueueProcessingTapFlags = 256
-	KAudioQueueProcessingTap_EndOfStream   AudioQueueProcessingTapFlags = 512
-)
-
-func (e AudioQueueProcessingTapFlags) String() string {
-	var parts []string
-	if e&KAudioQueueProcessingTap_PreEffects != 0 {
-		parts = append(parts, "KAudioQueueProcessingTap_PreEffects")
-	}
-	if e&KAudioQueueProcessingTap_PostEffects != 0 {
-		parts = append(parts, "KAudioQueueProcessingTap_PostEffects")
-	}
-	if e&KAudioQueueProcessingTap_Siphon != 0 {
-		parts = append(parts, "KAudioQueueProcessingTap_Siphon")
-	}
-	if e&KAudioQueueProcessingTap_StartOfStream != 0 {
-		parts = append(parts, "KAudioQueueProcessingTap_StartOfStream")
-	}
-	if e&KAudioQueueProcessingTap_EndOfStream != 0 {
-		parts = append(parts, "KAudioQueueProcessingTap_EndOfStream")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }
 
 // Value options for audio unit parameters.
@@ -467,61 +303,6 @@ func (e AudioUnitParameterUnit) String() string {
 	default:
 		return fmt.Sprintf("AudioUnitParameterUnit(%d)", int64(e))
 	}
-}
-
-// Flags for configuring audio unit rendering.
-// Bitmask — values may be combined with |.
-type AudioUnitRenderActionFlags int64
-
-const (
-	// Called on a render notification Proc - which is called either before or after the render operation of the audio unit. If this flag is set, the proc is being called before the render operation is performed.
-	KAudioUnitRenderAction_PreRender AudioUnitRenderActionFlags = 4
-	// Called on a render notification Proc - which is called either before or after the render operation of the audio unit. If this flag is set, the proc is being called after the render operation is completed.
-	KAudioUnitRenderAction_PostRender AudioUnitRenderActionFlags = 8
-	// This flag can be set in a render input callback (or in the audio unit’s render operation itself) and is used to indicate that the render buffer contains only silence. It can then be used by the caller as a hint to whether the buffer needs to be processed or not.
-	KAudioUnitRenderAction_OutputIsSilence AudioUnitRenderActionFlags = 16
-	// This is used with offline audio units (of type 'auol'). It is used when an offline unit is being preflighted, which is performed prior to the actual offline rendering actions are performed. It is used for those cases where the offline process needs it (for example, with an offline unit that normalizes an audio file, it needs to see all of the audio data first before it can perform its normalization).
-	KAudioOfflineUnitRenderAction_Preflight AudioUnitRenderActionFlags = 32
-	// Once an offline unit has been successfully preflighted, it is then put into its render mode. So this flag is set to indicate to the audio unit that it is now in that state and that it should perform its processing on the input data.
-	KAudioOfflineUnitRenderAction_Render AudioUnitRenderActionFlags = 64
-	// This flag is set when an offline unit has completed either its preflight or performed render operation.
-	KAudioOfflineUnitRenderAction_Complete AudioUnitRenderActionFlags = 128
-	// If this flag is set on the post-render call an error was returned by the audio unit’s render operation. In this case, the error can be retrieved through the lastRenderError property and the audio data in ioData handed to the post-render notification will be invalid.
-	KAudioUnitRenderAction_PostRenderError AudioUnitRenderActionFlags = 256
-	// If this flag is set, then checks that are done on the arguments provided to render are not performed. This can be useful to use to save computation time in situations where you are sure you are providing the correct arguments and structures to the various render calls.
-	KAudioUnitRenderAction_DoNotCheckRenderArgs AudioUnitRenderActionFlags = 512
-)
-
-func (e AudioUnitRenderActionFlags) String() string {
-	var parts []string
-	if e&KAudioUnitRenderAction_PreRender != 0 {
-		parts = append(parts, "KAudioUnitRenderAction_PreRender")
-	}
-	if e&KAudioUnitRenderAction_PostRender != 0 {
-		parts = append(parts, "KAudioUnitRenderAction_PostRender")
-	}
-	if e&KAudioUnitRenderAction_OutputIsSilence != 0 {
-		parts = append(parts, "KAudioUnitRenderAction_OutputIsSilence")
-	}
-	if e&KAudioOfflineUnitRenderAction_Preflight != 0 {
-		parts = append(parts, "KAudioOfflineUnitRenderAction_Preflight")
-	}
-	if e&KAudioOfflineUnitRenderAction_Render != 0 {
-		parts = append(parts, "KAudioOfflineUnitRenderAction_Render")
-	}
-	if e&KAudioOfflineUnitRenderAction_Complete != 0 {
-		parts = append(parts, "KAudioOfflineUnitRenderAction_Complete")
-	}
-	if e&KAudioUnitRenderAction_PostRenderError != 0 {
-		parts = append(parts, "KAudioUnitRenderAction_PostRenderError")
-	}
-	if e&KAudioUnitRenderAction_DoNotCheckRenderArgs != 0 {
-		parts = append(parts, "KAudioUnitRenderAction_DoNotCheckRenderArgs")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
 }
 
 type CAClockPropertyID int64

@@ -9,24 +9,24 @@ import (
 )
 
 // Bitmask — values may be combined with |.
-type MPSMatrixRandomDistribution uint64
+type MatrixRandomDistribution uint64
 
 const (
-	MPSMatrixRandomDistributionDefault MPSMatrixRandomDistribution = 1
-	MPSMatrixRandomDistributionUniform MPSMatrixRandomDistribution = 2
-	MPSMatrixRandomDistributionNormal  MPSMatrixRandomDistribution = 3
+	MatrixRandomDistributionDefault MatrixRandomDistribution = 1
+	MatrixRandomDistributionUniform MatrixRandomDistribution = 2
+	MatrixRandomDistributionNormal  MatrixRandomDistribution = 3
 )
 
-func (e MPSMatrixRandomDistribution) String() string {
+func (e MatrixRandomDistribution) String() string {
 	var parts []string
-	if e&MPSMatrixRandomDistributionDefault != 0 {
-		parts = append(parts, "MPSMatrixRandomDistributionDefault")
+	if e&MatrixRandomDistributionDefault != 0 {
+		parts = append(parts, "MatrixRandomDistributionDefault")
 	}
-	if e&MPSMatrixRandomDistributionUniform != 0 {
-		parts = append(parts, "MPSMatrixRandomDistributionUniform")
+	if e&MatrixRandomDistributionUniform != 0 {
+		parts = append(parts, "MatrixRandomDistributionUniform")
 	}
-	if e&MPSMatrixRandomDistributionNormal != 0 {
-		parts = append(parts, "MPSMatrixRandomDistributionNormal")
+	if e&MatrixRandomDistributionNormal != 0 {
+		parts = append(parts, "MatrixRandomDistributionNormal")
 	}
 	if len(parts) == 0 {
 		return "0"

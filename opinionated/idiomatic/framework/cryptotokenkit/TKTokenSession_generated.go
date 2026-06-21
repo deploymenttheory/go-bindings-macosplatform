@@ -5,77 +5,77 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A token session that manages the authentication state of a token.
 //
-// TokenSession wraps [raw.TKTokenSession] with a fluent Go API.
+// TokenSession is an idiomatic wrapper over the Objective-C class TKTokenSession.
 type TokenSession struct {
-	inner *raw.TKTokenSession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKTokenSession].
-func (x *TokenSession) Unwrap() *raw.TKTokenSession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TokenSession) ID() objc.ID { return x.inner.Ptr() }
-
-// TokenSessionFromID adopts an existing object pointer as a TokenSession (nil for 0).
+// TokenSessionFromID adopts an existing Objective-C object as a TokenSession
+// (nil for 0), retaining it and registering a release finalizer.
 func TokenSessionFromID(id objc.ID) *TokenSession {
 	if id == 0 {
 		return nil
 	}
-	return &TokenSession{inner: raw.TKTokenSessionFromID(id)}
+	x := &TokenSession{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// tokenSessionAdopt wraps an Objective-C object that this code just created as a
+// TokenSession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tokenSessionAdopt(id objc.ID) *TokenSession {
+	if id == 0 {
+		return nil
+	}
+	x := &TokenSession{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TokenSession) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TokenSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TokenSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a token session with the specified token.
 //
-// NewTokenSessionWithToken creates a new [TokenSession].
-func NewTokenSessionWithToken(token *raw.TKToken) *TokenSession {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenSession")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithToken:"), token.Ptr())
-	return &TokenSession{inner: raw.TKTokenSessionFromID(_id)}
+// NewTokenSessionWithToken creates a new TokenSession.
+func NewTokenSessionWithToken(token *Token) *TokenSession {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("TKTokenSession")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithToken:"), objref.IDOf(token))
+	return tokenSessionAdopt(_id)
 }
 
-// The token session delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *TokenSession) WithDelegate(delegate raw.TKTokenSessionDelegate) *TokenSession {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// Token calls the underlying Token.
 func (x *TokenSession) Token() *Token {
-	_r := x.inner.Token()
-	if _r == nil {
-		return nil
-	}
-	return &Token{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("token"))
+	return TokenFromID(_r)
 }
-
-// Delegate calls the underlying Delegate.
-func (x *TokenSession) Delegate() raw.TKTokenSessionDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *TokenSession) SetDelegate(delegate raw.TKTokenSessionDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-func (x *TokenSession) asTokenSession() *raw.TKTokenSession { return x.inner }
 
 // TokenSessionable is the interface implemented by [TokenSession], for mocking and DI.
 type TokenSessionable interface {
-	Unwrap() *raw.TKTokenSession
-	WithDelegate(delegate raw.TKTokenSessionDelegate) *TokenSession
+	obj.Object
 	Token() *Token
-	Delegate() raw.TKTokenSessionDelegate
-	SetDelegate(delegate raw.TKTokenSessionDelegate)
 }
 
 var _ TokenSessionable = (*TokenSession)(nil)

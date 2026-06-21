@@ -5,60 +5,75 @@
 package photosui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The superclass for all element objects.
 //
-// ProjectElement wraps [raw.PHProjectElement] with a fluent Go API.
+// ProjectElement is an idiomatic wrapper over the Objective-C class PHProjectElement.
 type ProjectElement struct {
-	inner *raw.PHProjectElement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHProjectElement].
-func (x *ProjectElement) Unwrap() *raw.PHProjectElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProjectElement) ID() objc.ID { return x.inner.Ptr() }
-
-// ProjectElementFromID adopts an existing object pointer as a ProjectElement (nil for 0).
+// ProjectElementFromID adopts an existing Objective-C object as a ProjectElement
+// (nil for 0), retaining it and registering a release finalizer.
 func ProjectElementFromID(id objc.ID) *ProjectElement {
 	if id == 0 {
 		return nil
 	}
-	return &ProjectElement{inner: raw.PHProjectElementFromID(id)}
+	x := &ProjectElement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewProjectElement creates a new [ProjectElement].
+// projectElementAdopt wraps an Objective-C object that this code just created as a
+// ProjectElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func projectElementAdopt(id objc.ID) *ProjectElement {
+	if id == 0 {
+		return nil
+	}
+	x := &ProjectElement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ProjectElement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ProjectElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ProjectElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewProjectElement creates a new ProjectElement.
 func NewProjectElement() *ProjectElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHProjectElement")), objc.RegisterName("new"))
-	return &ProjectElement{inner: raw.PHProjectElementFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHProjectElement")), objc.RegisterName("new"))
+	return projectElementAdopt(_id)
 }
 
 // Relative significance of any element in the section content is defined by it's weight. Values range from 0.0 to 1.0 where the higher numbers represent higher overall significance. Projects that allow a user to reduce the number of elements in any section content can use this hint to determine which elements are most important to keep in order to preserve context. Default is 0.5.
-//
-// Weight calls the underlying Weight.
 func (x *ProjectElement) Weight() float64 {
-	return x.inner.Weight()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("weight"))
+	return _r
 }
-
-// Placement of elements in the suggested layout is provided in grid space coordinates. For example, a rect of (0,0,3,4) represents a placement in the upper-left of the layout grid that is 3 grid units wide by 4 grid units high. For layout grids with more than one column, the values in the rect will always be integral. For fixed layouts, rect values will be in fractional unit values. If suggested placement could not be determined at time of project creation, placement will contain CGRectNull.
-//
-// Placement calls the underlying Placement.
-func (x *ProjectElement) Placement() corefoundation.CGRect {
-	return x.inner.Placement()
-}
-
-func (x *ProjectElement) asProjectElement() *raw.PHProjectElement { return x.inner }
 
 // ProjectElementable is the interface implemented by [ProjectElement], for mocking and DI.
 type ProjectElementable interface {
-	Unwrap() *raw.PHProjectElement
+	obj.Object
 	Weight() float64
-	Placement() corefoundation.CGRect
 }
 
 var _ ProjectElementable = (*ProjectElement)(nil)

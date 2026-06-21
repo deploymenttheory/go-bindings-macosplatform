@@ -5,48 +5,68 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A query that performs statistical calculations over a set of matching quantity samples, and returns the results.
 //
-// StatisticsQuery wraps [raw.HKStatisticsQuery] with a fluent Go API.
+// StatisticsQuery is an idiomatic wrapper over the Objective-C class HKStatisticsQuery.
 type StatisticsQuery struct {
-	inner *raw.HKStatisticsQuery
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKStatisticsQuery].
-func (x *StatisticsQuery) Unwrap() *raw.HKStatisticsQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StatisticsQuery) ID() objc.ID { return x.inner.Ptr() }
-
-// StatisticsQueryFromID adopts an existing object pointer as a StatisticsQuery (nil for 0).
+// StatisticsQueryFromID adopts an existing Objective-C object as a StatisticsQuery
+// (nil for 0), retaining it and registering a release finalizer.
 func StatisticsQueryFromID(id objc.ID) *StatisticsQuery {
 	if id == 0 {
 		return nil
 	}
-	return &StatisticsQuery{inner: raw.HKStatisticsQueryFromID(id)}
+	x := &StatisticsQuery{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes a statistics query instance that performs the specified calculations over the matching samples in the HeathKit store.
-//
-// NewStatisticsQueryWithQuantityTypeQuantitySamplePredicateOptionsCompletionHandler creates a new [StatisticsQuery].
-func NewStatisticsQueryWithQuantityTypeQuantitySamplePredicateOptionsCompletionHandler(quantityType *raw.HKQuantityType, quantitySamplePredicate *foundation.NSPredicate, options HKStatisticsOptions, handler func(*raw.HKStatisticsQuery, *raw.HKStatistics, unsafe.Pointer)) *StatisticsQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKStatisticsQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQuantityType:quantitySamplePredicate:options:completionHandler:"), quantityType.Ptr(), quantitySamplePredicate.Ptr(), raw.HKStatisticsOptions(options), handler)
-	return &StatisticsQuery{inner: raw.HKStatisticsQueryFromID(_id)}
+// statisticsQueryAdopt wraps an Objective-C object that this code just created as a
+// StatisticsQuery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func statisticsQueryAdopt(id objc.ID) *StatisticsQuery {
+	if id == 0 {
+		return nil
+	}
+	x := &StatisticsQuery{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *StatisticsQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+// Description returns the object's -description text.
+func (x *StatisticsQuery) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StatisticsQuery) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StatisticsQuery) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewStatisticsQuery creates a new StatisticsQuery.
+func NewStatisticsQuery() *StatisticsQuery {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKStatisticsQuery")), objc.RegisterName("new"))
+	return statisticsQueryAdopt(_id)
+}
 
 // StatisticsQueryable is the interface implemented by [StatisticsQuery], for mocking and DI.
 type StatisticsQueryable interface {
-	Unwrap() *raw.HKStatisticsQuery
+	obj.Object
 }
 
 var _ StatisticsQueryable = (*StatisticsQuery)(nil)

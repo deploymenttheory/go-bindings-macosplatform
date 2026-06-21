@@ -5,120 +5,109 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An event that represents when the player attempts a variant switch.
 //
-// MetricPlayerItemVariantSwitchStartEvent wraps [raw.AVMetricPlayerItemVariantSwitchStartEvent] with a fluent Go API.
+// MetricPlayerItemVariantSwitchStartEvent is an idiomatic wrapper over the Objective-C class AVMetricPlayerItemVariantSwitchStartEvent.
 type MetricPlayerItemVariantSwitchStartEvent struct {
-	inner *raw.AVMetricPlayerItemVariantSwitchStartEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMetricPlayerItemVariantSwitchStartEvent].
-func (x *MetricPlayerItemVariantSwitchStartEvent) Unwrap() *raw.AVMetricPlayerItemVariantSwitchStartEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetricPlayerItemVariantSwitchStartEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MetricPlayerItemVariantSwitchStartEventFromID adopts an existing object pointer as a MetricPlayerItemVariantSwitchStartEvent (nil for 0).
+// MetricPlayerItemVariantSwitchStartEventFromID adopts an existing Objective-C object as a MetricPlayerItemVariantSwitchStartEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MetricPlayerItemVariantSwitchStartEventFromID(id objc.ID) *MetricPlayerItemVariantSwitchStartEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MetricPlayerItemVariantSwitchStartEvent{inner: raw.AVMetricPlayerItemVariantSwitchStartEventFromID(id)}
+	x := &MetricPlayerItemVariantSwitchStartEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMetricPlayerItemVariantSwitchStartEvent creates a new [MetricPlayerItemVariantSwitchStartEvent].
+// metricPlayerItemVariantSwitchStartEventAdopt wraps an Objective-C object that this code just created as a
+// MetricPlayerItemVariantSwitchStartEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metricPlayerItemVariantSwitchStartEventAdopt(id objc.ID) *MetricPlayerItemVariantSwitchStartEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MetricPlayerItemVariantSwitchStartEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetricPlayerItemVariantSwitchStartEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetricPlayerItemVariantSwitchStartEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetricPlayerItemVariantSwitchStartEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMetricPlayerItemVariantSwitchStartEvent creates a new MetricPlayerItemVariantSwitchStartEvent.
 func NewMetricPlayerItemVariantSwitchStartEvent() *MetricPlayerItemVariantSwitchStartEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetricPlayerItemVariantSwitchStartEvent")), objc.RegisterName("new"))
-	return &MetricPlayerItemVariantSwitchStartEvent{inner: raw.AVMetricPlayerItemVariantSwitchStartEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetricPlayerItemVariantSwitchStartEvent")), objc.RegisterName("new"))
+	return metricPlayerItemVariantSwitchStartEventAdopt(_id)
 }
 
 // Returns the variant from which the switch is attempted. If no value is available, returns nil
-//
-// FromVariant calls the underlying FromVariant.
 func (x *MetricPlayerItemVariantSwitchStartEvent) FromVariant() *AssetVariant {
-	_r := x.inner.FromVariant()
-	if _r == nil {
-		return nil
-	}
-	return &AssetVariant{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fromVariant"))
+	return AssetVariantFromID(_r)
 }
 
 // Returns the variant to which the switch is attempted.
-//
-// ToVariant calls the underlying ToVariant.
 func (x *MetricPlayerItemVariantSwitchStartEvent) ToVariant() *AssetVariant {
-	_r := x.inner.ToVariant()
-	if _r == nil {
-		return nil
-	}
-	return &AssetVariant{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toVariant"))
+	return AssetVariantFromID(_r)
 }
 
 // This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
 //
 // LoadedTimeRanges returns the collection as a Go slice.
-func (x *MetricPlayerItemVariantSwitchStartEvent) LoadedTimeRanges() []*foundation.NSValue {
-	arr := x.inner.LoadedTimeRanges()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
-		return foundation.NSValueFromID(purego.Retain(_id))
-	})
+func (x *MetricPlayerItemVariantSwitchStartEvent) LoadedTimeRanges() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadedTimeRanges"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @property videoRendition @abstract Contains information corresponding to the currently selected video rendition.
-//
-// VideoRendition calls the underlying VideoRendition.
+// Contains information corresponding to the currently selected video rendition.
 func (x *MetricPlayerItemVariantSwitchStartEvent) VideoRendition() *MetricMediaRendition {
-	_r := x.inner.VideoRendition()
-	if _r == nil {
-		return nil
-	}
-	return &MetricMediaRendition{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoRendition"))
+	return MetricMediaRenditionFromID(_r)
 }
 
-// @property audioRendition @abstract Contains information corresponding to the currently selected audio rendition.
-//
-// AudioRendition calls the underlying AudioRendition.
+// Contains information corresponding to the currently selected audio rendition.
 func (x *MetricPlayerItemVariantSwitchStartEvent) AudioRendition() *MetricMediaRendition {
-	_r := x.inner.AudioRendition()
-	if _r == nil {
-		return nil
-	}
-	return &MetricMediaRendition{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioRendition"))
+	return MetricMediaRenditionFromID(_r)
 }
 
-// @property subtitleRendition @abstract Contains information corresponding to the currently selected subtitle rendition.
-//
-// SubtitleRendition calls the underlying SubtitleRendition.
+// Contains information corresponding to the currently selected subtitle rendition.
 func (x *MetricPlayerItemVariantSwitchStartEvent) SubtitleRendition() *MetricMediaRendition {
-	_r := x.inner.SubtitleRendition()
-	if _r == nil {
-		return nil
-	}
-	return &MetricMediaRendition{inner: _r}
-}
-
-func (x *MetricPlayerItemVariantSwitchStartEvent) asMetricEvent() *raw.AVMetricEvent {
-	return &x.inner.AVMetricEvent
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitleRendition"))
+	return MetricMediaRenditionFromID(_r)
 }
 
 // MetricPlayerItemVariantSwitchStartEventable is the interface implemented by [MetricPlayerItemVariantSwitchStartEvent], for mocking and DI.
 type MetricPlayerItemVariantSwitchStartEventable interface {
-	Unwrap() *raw.AVMetricPlayerItemVariantSwitchStartEvent
+	obj.Object
 	FromVariant() *AssetVariant
 	ToVariant() *AssetVariant
-	LoadedTimeRanges() []*foundation.NSValue
+	LoadedTimeRanges() []obj.Object
 	VideoRendition() *MetricMediaRendition
 	AudioRendition() *MetricMediaRendition
 	SubtitleRendition() *MetricMediaRendition

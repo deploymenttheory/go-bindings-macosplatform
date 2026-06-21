@@ -5,60 +5,80 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRMediaPlaybackClusterPlaybackPosition wraps [raw.MTRMediaPlaybackClusterPlaybackPosition] with a fluent Go API.
+// MTRMediaPlaybackClusterPlaybackPosition is an idiomatic wrapper over the Objective-C class MTRMediaPlaybackClusterPlaybackPosition.
 type MTRMediaPlaybackClusterPlaybackPosition struct {
-	inner *raw.MTRMediaPlaybackClusterPlaybackPosition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRMediaPlaybackClusterPlaybackPosition].
-func (x *MTRMediaPlaybackClusterPlaybackPosition) Unwrap() *raw.MTRMediaPlaybackClusterPlaybackPosition {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRMediaPlaybackClusterPlaybackPosition) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRMediaPlaybackClusterPlaybackPositionFromID adopts an existing object pointer as a MTRMediaPlaybackClusterPlaybackPosition (nil for 0).
+// MTRMediaPlaybackClusterPlaybackPositionFromID adopts an existing Objective-C object as a MTRMediaPlaybackClusterPlaybackPosition
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRMediaPlaybackClusterPlaybackPositionFromID(id objc.ID) *MTRMediaPlaybackClusterPlaybackPosition {
 	if id == 0 {
 		return nil
 	}
-	return &MTRMediaPlaybackClusterPlaybackPosition{inner: raw.MTRMediaPlaybackClusterPlaybackPositionFromID(id)}
+	x := &MTRMediaPlaybackClusterPlaybackPosition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRMediaPlaybackClusterPlaybackPosition creates a new [MTRMediaPlaybackClusterPlaybackPosition].
+// mTRMediaPlaybackClusterPlaybackPositionAdopt wraps an Objective-C object that this code just created as a
+// MTRMediaPlaybackClusterPlaybackPosition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRMediaPlaybackClusterPlaybackPositionAdopt(id objc.ID) *MTRMediaPlaybackClusterPlaybackPosition {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRMediaPlaybackClusterPlaybackPosition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRMediaPlaybackClusterPlaybackPosition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRMediaPlaybackClusterPlaybackPosition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRMediaPlaybackClusterPlaybackPosition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRMediaPlaybackClusterPlaybackPosition creates a new MTRMediaPlaybackClusterPlaybackPosition.
 func NewMTRMediaPlaybackClusterPlaybackPosition() *MTRMediaPlaybackClusterPlaybackPosition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRMediaPlaybackClusterPlaybackPosition")), objc.RegisterName("new"))
-	return &MTRMediaPlaybackClusterPlaybackPosition{inner: raw.MTRMediaPlaybackClusterPlaybackPositionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRMediaPlaybackClusterPlaybackPosition")), objc.RegisterName("new"))
+	return mTRMediaPlaybackClusterPlaybackPositionAdopt(_id)
 }
 
-// WithUpdatedAt sets the updatedAt property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterPlaybackPosition) WithUpdatedAt(updatedAt *foundation.NSNumber) *MTRMediaPlaybackClusterPlaybackPosition {
-	x.inner.MTRMediaPlaybackClusterPlaybackPositionStruct.SetUpdatedAt(updatedAt)
+// WithUpdatedAt sets updatedAt and returns the receiver so calls can be chained.
+func (x *MTRMediaPlaybackClusterPlaybackPosition) WithUpdatedAt(updatedAt obj.Object) *MTRMediaPlaybackClusterPlaybackPosition {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdatedAt:"), objref.IDOf(updatedAt))
 	return x
 }
 
-// WithPosition sets the position property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterPlaybackPosition) WithPosition(position *foundation.NSNumber) *MTRMediaPlaybackClusterPlaybackPosition {
-	x.inner.MTRMediaPlaybackClusterPlaybackPositionStruct.SetPosition(position)
+// WithPosition sets position and returns the receiver so calls can be chained.
+func (x *MTRMediaPlaybackClusterPlaybackPosition) WithPosition(position obj.Object) *MTRMediaPlaybackClusterPlaybackPosition {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), objref.IDOf(position))
 	return x
-}
-
-func (x *MTRMediaPlaybackClusterPlaybackPosition) asMTRMediaPlaybackClusterPlaybackPositionStruct() *raw.MTRMediaPlaybackClusterPlaybackPositionStruct {
-	return &x.inner.MTRMediaPlaybackClusterPlaybackPositionStruct
 }
 
 // MTRMediaPlaybackClusterPlaybackPositionable is the interface implemented by [MTRMediaPlaybackClusterPlaybackPosition], for mocking and DI.
 type MTRMediaPlaybackClusterPlaybackPositionable interface {
-	Unwrap() *raw.MTRMediaPlaybackClusterPlaybackPosition
-	WithUpdatedAt(updatedAt *foundation.NSNumber) *MTRMediaPlaybackClusterPlaybackPosition
-	WithPosition(position *foundation.NSNumber) *MTRMediaPlaybackClusterPlaybackPosition
+	obj.Object
+	WithUpdatedAt(updatedAt obj.Object) *MTRMediaPlaybackClusterPlaybackPosition
+	WithPosition(position obj.Object) *MTRMediaPlaybackClusterPlaybackPosition
 }
 
 var _ MTRMediaPlaybackClusterPlaybackPositionable = (*MTRMediaPlaybackClusterPlaybackPosition)(nil)

@@ -5,15 +5,38 @@
 package securityhi
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/security"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityhi"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
-// SecDisplayCertificateGroup wraps [raw.SecDisplayCertificateGroup], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func SecDisplayCertificateGroup(certificates *security.CssmCertgroup, keychainList objc.ID) error {
-	if _err := purego.NewOSStatus(raw.SecDisplayCertificateGroup(certificates, purego.CFRef(keychainList))).Err(); _err != nil {
+var _fnSecDisplayCertificate func(objc.ID, objc.ID) int32
+
+// SecDisplayCertificate reports an error if the SecurityHI framework function SecDisplayCertificate fails.
+func SecDisplayCertificate(certificate obj.Object, keychainList obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecDisplayCertificate == nil {
+		ebipurego.RegisterLibFunc(&_fnSecDisplayCertificate, _lib, "SecDisplayCertificate")
+	}
+	_rc := _fnSecDisplayCertificate(objref.IDOf(certificate), objref.IDOf(keychainList))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnSecEditTrust func(objc.ID, objc.ID) int32
+
+// SecEditTrust reports an error if the SecurityHI framework function SecEditTrust fails.
+func SecEditTrust(displayInfo obj.Object, trust obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSecEditTrust == nil {
+		ebipurego.RegisterLibFunc(&_fnSecEditTrust, _lib, "SecEditTrust")
+	}
+	_rc := _fnSecEditTrust(objref.IDOf(displayInfo), objref.IDOf(trust))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil

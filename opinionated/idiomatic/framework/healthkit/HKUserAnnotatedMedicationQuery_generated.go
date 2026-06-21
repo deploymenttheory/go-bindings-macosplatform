@@ -5,46 +5,66 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// UserAnnotatedMedicationQuery wraps [raw.HKUserAnnotatedMedicationQuery] with a fluent Go API.
+// UserAnnotatedMedicationQuery is an idiomatic wrapper over the Objective-C class HKUserAnnotatedMedicationQuery.
 type UserAnnotatedMedicationQuery struct {
-	inner *raw.HKUserAnnotatedMedicationQuery
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKUserAnnotatedMedicationQuery].
-func (x *UserAnnotatedMedicationQuery) Unwrap() *raw.HKUserAnnotatedMedicationQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UserAnnotatedMedicationQuery) ID() objc.ID { return x.inner.Ptr() }
-
-// UserAnnotatedMedicationQueryFromID adopts an existing object pointer as a UserAnnotatedMedicationQuery (nil for 0).
+// UserAnnotatedMedicationQueryFromID adopts an existing Objective-C object as a UserAnnotatedMedicationQuery
+// (nil for 0), retaining it and registering a release finalizer.
 func UserAnnotatedMedicationQueryFromID(id objc.ID) *UserAnnotatedMedicationQuery {
 	if id == 0 {
 		return nil
 	}
-	return &UserAnnotatedMedicationQuery{inner: raw.HKUserAnnotatedMedicationQueryFromID(id)}
+	x := &UserAnnotatedMedicationQuery{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @method        initWithPredicate:limit:resultsHandler: @abstract      Returns a query that will retrieve HKUserAnnotatedMedications matching the given predicate and limit. @param         predicate       The predicate which user annotated medications should match. @param         limit           The maximum number of  user annotated medications to return.  Pass HKObjectQueryNoLimit for no limit. @param         resultsHandler  The block to invoke with results to deliver to the client. The results handler will be called with done = YES when there are no more user annotated medications to enumerate.
-//
-// NewUserAnnotatedMedicationQueryWithPredicateLimitResultsHandler creates a new [UserAnnotatedMedicationQuery].
-func NewUserAnnotatedMedicationQueryWithPredicateLimitResultsHandler(predicate *foundation.NSPredicate, limit uint, resultsHandler func(*raw.HKUserAnnotatedMedicationQuery, *raw.HKUserAnnotatedMedication, bool, unsafe.Pointer)) *UserAnnotatedMedicationQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKUserAnnotatedMedicationQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPredicate:limit:resultsHandler:"), predicate.Ptr(), limit, resultsHandler)
-	return &UserAnnotatedMedicationQuery{inner: raw.HKUserAnnotatedMedicationQueryFromID(_id)}
+// userAnnotatedMedicationQueryAdopt wraps an Objective-C object that this code just created as a
+// UserAnnotatedMedicationQuery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func userAnnotatedMedicationQueryAdopt(id objc.ID) *UserAnnotatedMedicationQuery {
+	if id == 0 {
+		return nil
+	}
+	x := &UserAnnotatedMedicationQuery{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *UserAnnotatedMedicationQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+// Description returns the object's -description text.
+func (x *UserAnnotatedMedicationQuery) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UserAnnotatedMedicationQuery) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UserAnnotatedMedicationQuery) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUserAnnotatedMedicationQuery creates a new UserAnnotatedMedicationQuery.
+func NewUserAnnotatedMedicationQuery() *UserAnnotatedMedicationQuery {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKUserAnnotatedMedicationQuery")), objc.RegisterName("new"))
+	return userAnnotatedMedicationQueryAdopt(_id)
+}
 
 // UserAnnotatedMedicationQueryable is the interface implemented by [UserAnnotatedMedicationQuery], for mocking and DI.
 type UserAnnotatedMedicationQueryable interface {
-	Unwrap() *raw.HKUserAnnotatedMedicationQuery
+	obj.Object
 }
 
 var _ UserAnnotatedMedicationQueryable = (*UserAnnotatedMedicationQuery)(nil)

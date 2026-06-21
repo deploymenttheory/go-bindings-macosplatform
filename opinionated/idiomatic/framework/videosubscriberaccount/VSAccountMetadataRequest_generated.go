@@ -5,450 +5,351 @@
 package videosubscriberaccount
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videosubscriberaccount"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that specifies what subscriber account information your app retrieves.
 //
-// VSAccountMetadataRequest wraps [raw.VSAccountMetadataRequest] with a fluent Go API.
+// VSAccountMetadataRequest is an idiomatic wrapper over the Objective-C class VSAccountMetadataRequest.
 type VSAccountMetadataRequest struct {
-	inner *raw.VSAccountMetadataRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VSAccountMetadataRequest].
-func (x *VSAccountMetadataRequest) Unwrap() *raw.VSAccountMetadataRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VSAccountMetadataRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// VSAccountMetadataRequestFromID adopts an existing object pointer as a VSAccountMetadataRequest (nil for 0).
+// VSAccountMetadataRequestFromID adopts an existing Objective-C object as a VSAccountMetadataRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func VSAccountMetadataRequestFromID(id objc.ID) *VSAccountMetadataRequest {
 	if id == 0 {
 		return nil
 	}
-	return &VSAccountMetadataRequest{inner: raw.VSAccountMetadataRequestFromID(id)}
+	x := &VSAccountMetadataRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVSAccountMetadataRequest creates a new [VSAccountMetadataRequest].
+// vSAccountMetadataRequestAdopt wraps an Objective-C object that this code just created as a
+// VSAccountMetadataRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vSAccountMetadataRequestAdopt(id objc.ID) *VSAccountMetadataRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &VSAccountMetadataRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VSAccountMetadataRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VSAccountMetadataRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VSAccountMetadataRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVSAccountMetadataRequest creates a new VSAccountMetadataRequest.
 func NewVSAccountMetadataRequest() *VSAccountMetadataRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VSAccountMetadataRequest")), objc.RegisterName("new"))
-	return &VSAccountMetadataRequest{inner: raw.VSAccountMetadataRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VSAccountMetadataRequest")), objc.RegisterName("new"))
+	return vSAccountMetadataRequestAdopt(_id)
 }
 
 // The channel identifier for the request.
 //
-// WithChannelIdentifier sets the channelIdentifier property and returns the receiver for chaining.
+// WithChannelIdentifier sets channelIdentifier and returns the receiver so calls can be chained.
 func (x *VSAccountMetadataRequest) WithChannelIdentifier(channelIdentifier string) *VSAccountMetadataRequest {
-	x.inner.SetChannelIdentifier(foundation.NSStringStringWithUTF8String(channelIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelIdentifier:"), purego.NSString(channelIdentifier))
 	return x
 }
 
 // A list of identifiers for TV providers that your app supports.
 //
-// WithSupportedAccountProviderIdentifiers sets the collection, converting the Go slice to an NSArray.
-func (x *VSAccountMetadataRequest) WithSupportedAccountProviderIdentifiers(items ...*foundation.NSString) *VSAccountMetadataRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSupportedAccountProviderIdentifiers(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSupportedAccountProviderIdentifiers(_arr)
+// WithSupportedAccountProviderIdentifiers sets the collection and returns the receiver so calls can be chained.
+func (x *VSAccountMetadataRequest) WithSupportedAccountProviderIdentifiers(items ...obj.Object) *VSAccountMetadataRequest {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedAccountProviderIdentifiers:"), _arr)
 	return x
 }
 
 // The providers your app lists prominently during authentication.
 //
-// WithFeaturedAccountProviderIdentifiers sets the collection, converting the Go slice to an NSArray.
-func (x *VSAccountMetadataRequest) WithFeaturedAccountProviderIdentifiers(items ...*foundation.NSString) *VSAccountMetadataRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetFeaturedAccountProviderIdentifiers(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetFeaturedAccountProviderIdentifiers(_arr)
+// WithFeaturedAccountProviderIdentifiers sets the collection and returns the receiver so calls can be chained.
+func (x *VSAccountMetadataRequest) WithFeaturedAccountProviderIdentifiers(items ...obj.Object) *VSAccountMetadataRequest {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFeaturedAccountProviderIdentifiers:"), _arr)
 	return x
 }
 
 // A token that your app sends to an account provider to identify itself.
 //
-// WithVerificationToken sets the verificationToken property and returns the receiver for chaining.
+// WithVerificationToken sets verificationToken and returns the receiver so calls can be chained.
 func (x *VSAccountMetadataRequest) WithVerificationToken(verificationToken string) *VSAccountMetadataRequest {
-	x.inner.SetVerificationToken(foundation.NSStringStringWithUTF8String(verificationToken))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerificationToken:"), purego.NSString(verificationToken))
 	return x
 }
 
 // A Boolean value that indicates whether your app requests the identifier of the account provider.
 //
-// WithIncludeAccountProviderIdentifier sets the includeAccountProviderIdentifier property and returns the receiver for chaining.
+// WithIncludeAccountProviderIdentifier sets includeAccountProviderIdentifier and returns the receiver so calls can be chained.
 func (x *VSAccountMetadataRequest) WithIncludeAccountProviderIdentifier(includeAccountProviderIdentifier bool) *VSAccountMetadataRequest {
-	x.inner.SetIncludeAccountProviderIdentifier(includeAccountProviderIdentifier)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeAccountProviderIdentifier:"), includeAccountProviderIdentifier)
 	return x
 }
 
 // A Boolean value that indicates whether your app requests the expiration date of the user’s current authentication session.
 //
-// WithIncludeAuthenticationExpirationDate sets the includeAuthenticationExpirationDate property and returns the receiver for chaining.
+// WithIncludeAuthenticationExpirationDate sets includeAuthenticationExpirationDate and returns the receiver so calls can be chained.
 func (x *VSAccountMetadataRequest) WithIncludeAuthenticationExpirationDate(includeAuthenticationExpirationDate bool) *VSAccountMetadataRequest {
-	x.inner.SetIncludeAuthenticationExpirationDate(includeAuthenticationExpirationDate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeAuthenticationExpirationDate:"), includeAuthenticationExpirationDate)
 	return x
 }
 
 // A short, user-presentable name for the video that the user wants to play.
 //
-// WithLocalizedVideoTitle sets the localizedVideoTitle property and returns the receiver for chaining.
+// WithLocalizedVideoTitle sets localizedVideoTitle and returns the receiver so calls can be chained.
 func (x *VSAccountMetadataRequest) WithLocalizedVideoTitle(localizedVideoTitle string) *VSAccountMetadataRequest {
-	x.inner.SetLocalizedVideoTitle(foundation.NSStringStringWithUTF8String(localizedVideoTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedVideoTitle:"), purego.NSString(localizedVideoTitle))
 	return x
 }
 
 // A Boolean value that indicates whether your app can prompt the user to authenticate to complete the request.
 //
-// WithInterruptionAllowed sets the interruptionAllowed property and returns the receiver for chaining.
+// WithInterruptionAllowed sets interruptionAllowed and returns the receiver so calls can be chained.
 func (x *VSAccountMetadataRequest) WithInterruptionAllowed(interruptionAllowed bool) *VSAccountMetadataRequest {
-	x.inner.SetInterruptionAllowed(interruptionAllowed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterruptionAllowed:"), interruptionAllowed)
 	return x
 }
 
 // A Boolean value that indicates whether the app ignores cached credentials.
 //
-// WithForceAuthentication sets the forceAuthentication property and returns the receiver for chaining.
+// WithForceAuthentication sets forceAuthentication and returns the receiver so calls can be chained.
 func (x *VSAccountMetadataRequest) WithForceAuthentication(forceAuthentication bool) *VSAccountMetadataRequest {
-	x.inner.SetForceAuthentication(forceAuthentication)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForceAuthentication:"), forceAuthentication)
 	return x
 }
 
 // The SAML attributes that your app sends to the account provider.
 //
-// WithAttributeNames sets the collection, converting the Go slice to an NSArray.
-func (x *VSAccountMetadataRequest) WithAttributeNames(items ...*foundation.NSString) *VSAccountMetadataRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetAttributeNames(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetAttributeNames(_arr)
+// WithAttributeNames sets the collection and returns the receiver so calls can be chained.
+func (x *VSAccountMetadataRequest) WithAttributeNames(items ...obj.Object) *VSAccountMetadataRequest {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeNames:"), _arr)
 	return x
 }
 
 // A collection of authentication schemes your app supports for this request.
 //
-// WithSupportedAuthenticationSchemes sets the collection, converting the Go slice to an NSArray.
-func (x *VSAccountMetadataRequest) WithSupportedAuthenticationSchemes(items ...*foundation.NSString) *VSAccountMetadataRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSupportedAuthenticationSchemes(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSupportedAuthenticationSchemes(_arr)
+// WithSupportedAuthenticationSchemes sets the collection and returns the receiver so calls can be chained.
+func (x *VSAccountMetadataRequest) WithSupportedAuthenticationSchemes(items ...obj.Object) *VSAccountMetadataRequest {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedAuthenticationSchemes:"), _arr)
 	return x
 }
 
 // An authentication session token that your app sends to the account provider.
 //
-// WithAccountProviderAuthenticationToken sets the accountProviderAuthenticationToken property and returns the receiver for chaining.
+// WithAccountProviderAuthenticationToken sets accountProviderAuthenticationToken and returns the receiver so calls can be chained.
 func (x *VSAccountMetadataRequest) WithAccountProviderAuthenticationToken(accountProviderAuthenticationToken string) *VSAccountMetadataRequest {
-	x.inner.SetAccountProviderAuthenticationToken(foundation.NSStringStringWithUTF8String(accountProviderAuthenticationToken))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountProviderAuthenticationToken:"), purego.NSString(accountProviderAuthenticationToken))
 	return x
 }
 
 // An array of application-specific providers to add to the list of account providers.
 //
-// WithApplicationAccountProviders sets the collection, converting the Go slice to an NSArray.
-func (x *VSAccountMetadataRequest) WithApplicationAccountProviders(items ...*raw.VSAccountApplicationProvider) *VSAccountMetadataRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetApplicationAccountProviders(foundation.NSArrayFromID[*raw.VSAccountApplicationProvider](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.VSAccountApplicationProvider](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetApplicationAccountProviders(_arr)
+// WithApplicationAccountProviders sets the collection and returns the receiver so calls can be chained.
+func (x *VSAccountMetadataRequest) WithApplicationAccountProviders(items ...*VSAccountApplicationProvider) *VSAccountMetadataRequest {
+	_arr := purego.SliceToNSArray(items, func(_v *VSAccountApplicationProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationAccountProviders:"), _arr)
 	return x
 }
 
 // Identifies who is making the request. For use by applications using the SAML authentication scheme only.
-//
-// ChannelIdentifier calls the underlying ChannelIdentifier.
 func (x *VSAccountMetadataRequest) ChannelIdentifier() string {
-	_r := x.inner.ChannelIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("channelIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetChannelIdentifier calls the underlying SetChannelIdentifier.
 func (x *VSAccountMetadataRequest) SetChannelIdentifier(channelIdentifier string) {
-	x.inner.SetChannelIdentifier(foundation.NSStringStringWithUTF8String(channelIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannelIdentifier:"), purego.NSString(channelIdentifier))
 }
 
 // If non-empty, limits which account providers can respond to the request.
 //
 // SupportedAccountProviderIdentifiers returns the collection as a Go slice.
 func (x *VSAccountMetadataRequest) SupportedAccountProviderIdentifiers() []string {
-	arr := x.inner.SupportedAccountProviderIdentifiers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedAccountProviderIdentifiers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetSupportedAccountProviderIdentifiers calls the underlying SetSupportedAccountProviderIdentifiers.
-func (x *VSAccountMetadataRequest) SetSupportedAccountProviderIdentifiers(supportedAccountProviderIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetSupportedAccountProviderIdentifiers(supportedAccountProviderIdentifiers)
+func (x *VSAccountMetadataRequest) SetSupportedAccountProviderIdentifiers(supportedAccountProviderIdentifiers []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedAccountProviderIdentifiers:"), purego.SliceToNSArray(supportedAccountProviderIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // If non-empty, specifies providers which may be given more prominent placement when choosing an account provider during authentication.
 //
 // FeaturedAccountProviderIdentifiers returns the collection as a Go slice.
 func (x *VSAccountMetadataRequest) FeaturedAccountProviderIdentifiers() []string {
-	arr := x.inner.FeaturedAccountProviderIdentifiers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("featuredAccountProviderIdentifiers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // If non-empty, specifies providers which may be given more prominent placement when choosing an account provider during authentication.
-//
-// SetFeaturedAccountProviderIdentifiers calls the underlying SetFeaturedAccountProviderIdentifiers.
-func (x *VSAccountMetadataRequest) SetFeaturedAccountProviderIdentifiers(featuredAccountProviderIdentifiers *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetFeaturedAccountProviderIdentifiers(featuredAccountProviderIdentifiers)
+func (x *VSAccountMetadataRequest) SetFeaturedAccountProviderIdentifiers(featuredAccountProviderIdentifiers []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFeaturedAccountProviderIdentifiers:"), purego.SliceToNSArray(featuredAccountProviderIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // A value that the account provider may use to verify the identity of the requesting app.
-//
-// VerificationToken calls the underlying VerificationToken.
 func (x *VSAccountMetadataRequest) VerificationToken() string {
-	_r := x.inner.VerificationToken()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("verificationToken"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetVerificationToken calls the underlying SetVerificationToken.
 func (x *VSAccountMetadataRequest) SetVerificationToken(verificationToken string) {
-	x.inner.SetVerificationToken(foundation.NSStringStringWithUTF8String(verificationToken))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerificationToken:"), purego.NSString(verificationToken))
 }
 
 // Whether to request information that identifies the account provider.
-//
-// IncludeAccountProviderIdentifier calls the underlying IncludeAccountProviderIdentifier.
 func (x *VSAccountMetadataRequest) IncludeAccountProviderIdentifier() bool {
-	return x.inner.IncludeAccountProviderIdentifier()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeAccountProviderIdentifier"))
+	return _r
 }
 
-// SetIncludeAccountProviderIdentifier calls the underlying SetIncludeAccountProviderIdentifier.
 func (x *VSAccountMetadataRequest) SetIncludeAccountProviderIdentifier(includeAccountProviderIdentifier bool) {
-	x.inner.SetIncludeAccountProviderIdentifier(includeAccountProviderIdentifier)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeAccountProviderIdentifier:"), includeAccountProviderIdentifier)
 }
 
 // Whether to request the expiration date of the subscriber's current authentication.
-//
-// IncludeAuthenticationExpirationDate calls the underlying IncludeAuthenticationExpirationDate.
 func (x *VSAccountMetadataRequest) IncludeAuthenticationExpirationDate() bool {
-	return x.inner.IncludeAuthenticationExpirationDate()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeAuthenticationExpirationDate"))
+	return _r
 }
 
-// SetIncludeAuthenticationExpirationDate calls the underlying SetIncludeAuthenticationExpirationDate.
 func (x *VSAccountMetadataRequest) SetIncludeAuthenticationExpirationDate(includeAuthenticationExpirationDate bool) {
-	x.inner.SetIncludeAuthenticationExpirationDate(includeAuthenticationExpirationDate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeAuthenticationExpirationDate:"), includeAuthenticationExpirationDate)
 }
 
 // A brief, user-presentable name for the video that the app will play if it receives a successful response. For example, "What's New in Swift" or "Office Space" Do not provide a value if the request will not be used to play a specific video.
-//
-// LocalizedVideoTitle calls the underlying LocalizedVideoTitle.
 func (x *VSAccountMetadataRequest) LocalizedVideoTitle() string {
-	_r := x.inner.LocalizedVideoTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedVideoTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLocalizedVideoTitle calls the underlying SetLocalizedVideoTitle.
 func (x *VSAccountMetadataRequest) SetLocalizedVideoTitle(localizedVideoTitle string) {
-	x.inner.SetLocalizedVideoTitle(foundation.NSStringStringWithUTF8String(localizedVideoTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedVideoTitle:"), purego.NSString(localizedVideoTitle))
 }
 
 // Whether the user might expect to be prompted to authenticate in order to complete this request.
-//
-// IsInterruptionAllowed calls the underlying IsInterruptionAllowed.
 func (x *VSAccountMetadataRequest) IsInterruptionAllowed() bool {
-	return x.inner.IsInterruptionAllowed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInterruptionAllowed"))
+	return _r
 }
 
-// SetInterruptionAllowed calls the underlying SetInterruptionAllowed.
 func (x *VSAccountMetadataRequest) SetInterruptionAllowed(interruptionAllowed bool) {
-	x.inner.SetInterruptionAllowed(interruptionAllowed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterruptionAllowed:"), interruptionAllowed)
 }
 
 // Requests that the TV Provider reauthenticate the user if they are already authenticated.
-//
-// ForceAuthentication calls the underlying ForceAuthentication.
 func (x *VSAccountMetadataRequest) ForceAuthentication() bool {
-	return x.inner.ForceAuthentication()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("forceAuthentication"))
+	return _r
 }
 
-// SetForceAuthentication calls the underlying SetForceAuthentication.
 func (x *VSAccountMetadataRequest) SetForceAuthentication(forceAuthentication bool) {
-	x.inner.SetForceAuthentication(forceAuthentication)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForceAuthentication:"), forceAuthentication)
 }
 
 // Attributes to add to a SAML attributeQuery request and sent to the account provider.
 //
 // AttributeNames returns the collection as a Go slice.
 func (x *VSAccountMetadataRequest) AttributeNames() []string {
-	arr := x.inner.AttributeNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetAttributeNames calls the underlying SetAttributeNames.
-func (x *VSAccountMetadataRequest) SetAttributeNames(attributeNames *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetAttributeNames(attributeNames)
+func (x *VSAccountMetadataRequest) SetAttributeNames(attributeNames []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeNames:"), purego.SliceToNSArray(attributeNames, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // The collection of authentication schemes that the app supports for this request. This list may be used to determine compatibility of the app with providers. Defaults to SAML.
 //
 // SupportedAuthenticationSchemes returns the collection as a Go slice.
-func (x *VSAccountMetadataRequest) SupportedAuthenticationSchemes() []*foundation.NSString {
-	arr := x.inner.SupportedAuthenticationSchemes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *VSAccountMetadataRequest) SupportedAuthenticationSchemes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedAuthenticationSchemes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // The collection of authentication schemes that the app supports for this request. This list may be used to determine compatibility of the app with providers. Defaults to SAML.
-//
-// SetSupportedAuthenticationSchemes calls the underlying SetSupportedAuthenticationSchemes.
-func (x *VSAccountMetadataRequest) SetSupportedAuthenticationSchemes(supportedAuthenticationSchemes *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetSupportedAuthenticationSchemes(supportedAuthenticationSchemes)
+func (x *VSAccountMetadataRequest) SetSupportedAuthenticationSchemes(supportedAuthenticationSchemes []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedAuthenticationSchemes:"), purego.SliceToNSArray(supportedAuthenticationSchemes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // A value that an account provider application may set to pass an existing authentication session. For use by TV Provider applications only.
-//
-// AccountProviderAuthenticationToken calls the underlying AccountProviderAuthenticationToken.
 func (x *VSAccountMetadataRequest) AccountProviderAuthenticationToken() string {
-	_r := x.inner.AccountProviderAuthenticationToken()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountProviderAuthenticationToken"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetAccountProviderAuthenticationToken calls the underlying SetAccountProviderAuthenticationToken.
 func (x *VSAccountMetadataRequest) SetAccountProviderAuthenticationToken(accountProviderAuthenticationToken string) {
-	x.inner.SetAccountProviderAuthenticationToken(foundation.NSStringStringWithUTF8String(accountProviderAuthenticationToken))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountProviderAuthenticationToken:"), purego.NSString(accountProviderAuthenticationToken))
 }
 
 // Application-specific providers to be added to the list of account providers.
 //
 // ApplicationAccountProviders returns the collection as a Go slice.
 func (x *VSAccountMetadataRequest) ApplicationAccountProviders() []*VSAccountApplicationProvider {
-	arr := x.inner.ApplicationAccountProviders()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *VSAccountApplicationProvider {
-		return &VSAccountApplicationProvider{inner: raw.VSAccountApplicationProviderFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationAccountProviders"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *VSAccountApplicationProvider { return VSAccountApplicationProviderFromID(_id) })
 }
 
 // Application-specific providers to be added to the list of account providers.
-//
-// SetApplicationAccountProviders calls the underlying SetApplicationAccountProviders.
-func (x *VSAccountMetadataRequest) SetApplicationAccountProviders(applicationAccountProviders *foundation.NSArray[*raw.VSAccountApplicationProvider]) {
-	x.inner.SetApplicationAccountProviders(applicationAccountProviders)
+func (x *VSAccountMetadataRequest) SetApplicationAccountProviders(applicationAccountProviders []*VSAccountApplicationProvider) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationAccountProviders:"), purego.SliceToNSArray(applicationAccountProviders, func(_v *VSAccountApplicationProvider) objc.ID { return objref.IDOf(_v) }))
 }
 
 // VSAccountMetadataRequestable is the interface implemented by [VSAccountMetadataRequest], for mocking and DI.
 type VSAccountMetadataRequestable interface {
-	Unwrap() *raw.VSAccountMetadataRequest
+	obj.Object
 	WithChannelIdentifier(channelIdentifier string) *VSAccountMetadataRequest
-	WithSupportedAccountProviderIdentifiers(items ...*foundation.NSString) *VSAccountMetadataRequest
-	WithFeaturedAccountProviderIdentifiers(items ...*foundation.NSString) *VSAccountMetadataRequest
+	WithSupportedAccountProviderIdentifiers(items ...obj.Object) *VSAccountMetadataRequest
+	WithFeaturedAccountProviderIdentifiers(items ...obj.Object) *VSAccountMetadataRequest
 	WithVerificationToken(verificationToken string) *VSAccountMetadataRequest
 	WithIncludeAccountProviderIdentifier(includeAccountProviderIdentifier bool) *VSAccountMetadataRequest
 	WithIncludeAuthenticationExpirationDate(includeAuthenticationExpirationDate bool) *VSAccountMetadataRequest
 	WithLocalizedVideoTitle(localizedVideoTitle string) *VSAccountMetadataRequest
 	WithInterruptionAllowed(interruptionAllowed bool) *VSAccountMetadataRequest
 	WithForceAuthentication(forceAuthentication bool) *VSAccountMetadataRequest
-	WithAttributeNames(items ...*foundation.NSString) *VSAccountMetadataRequest
-	WithSupportedAuthenticationSchemes(items ...*foundation.NSString) *VSAccountMetadataRequest
+	WithAttributeNames(items ...obj.Object) *VSAccountMetadataRequest
+	WithSupportedAuthenticationSchemes(items ...obj.Object) *VSAccountMetadataRequest
 	WithAccountProviderAuthenticationToken(accountProviderAuthenticationToken string) *VSAccountMetadataRequest
-	WithApplicationAccountProviders(items ...*raw.VSAccountApplicationProvider) *VSAccountMetadataRequest
+	WithApplicationAccountProviders(items ...*VSAccountApplicationProvider) *VSAccountMetadataRequest
 	ChannelIdentifier() string
 	SetChannelIdentifier(channelIdentifier string)
 	SupportedAccountProviderIdentifiers() []string
-	SetSupportedAccountProviderIdentifiers(supportedAccountProviderIdentifiers *foundation.NSArray[*foundation.NSString])
+	SetSupportedAccountProviderIdentifiers(supportedAccountProviderIdentifiers []string)
 	FeaturedAccountProviderIdentifiers() []string
-	SetFeaturedAccountProviderIdentifiers(featuredAccountProviderIdentifiers *foundation.NSArray[*foundation.NSString])
+	SetFeaturedAccountProviderIdentifiers(featuredAccountProviderIdentifiers []string)
 	VerificationToken() string
 	SetVerificationToken(verificationToken string)
 	IncludeAccountProviderIdentifier() bool
@@ -462,13 +363,13 @@ type VSAccountMetadataRequestable interface {
 	ForceAuthentication() bool
 	SetForceAuthentication(forceAuthentication bool)
 	AttributeNames() []string
-	SetAttributeNames(attributeNames *foundation.NSArray[*foundation.NSString])
-	SupportedAuthenticationSchemes() []*foundation.NSString
-	SetSupportedAuthenticationSchemes(supportedAuthenticationSchemes *foundation.NSArray[*foundation.NSString])
+	SetAttributeNames(attributeNames []string)
+	SupportedAuthenticationSchemes() []obj.Object
+	SetSupportedAuthenticationSchemes(supportedAuthenticationSchemes []obj.Object)
 	AccountProviderAuthenticationToken() string
 	SetAccountProviderAuthenticationToken(accountProviderAuthenticationToken string)
 	ApplicationAccountProviders() []*VSAccountApplicationProvider
-	SetApplicationAccountProviders(applicationAccountProviders *foundation.NSArray[*raw.VSAccountApplicationProvider])
+	SetApplicationAccountProviders(applicationAccountProviders []*VSAccountApplicationProvider)
 }
 
 var _ VSAccountMetadataRequestable = (*VSAccountMetadataRequest)(nil)

@@ -5,170 +5,179 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that represents a request to set up a recurring payment, typically a subscription.
 //
-// RecurringPaymentRequest wraps [raw.PKRecurringPaymentRequest] with a fluent Go API.
+// RecurringPaymentRequest is an idiomatic wrapper over the Objective-C class PKRecurringPaymentRequest.
 type RecurringPaymentRequest struct {
-	inner *raw.PKRecurringPaymentRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKRecurringPaymentRequest].
-func (x *RecurringPaymentRequest) Unwrap() *raw.PKRecurringPaymentRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RecurringPaymentRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// RecurringPaymentRequestFromID adopts an existing object pointer as a RecurringPaymentRequest (nil for 0).
+// RecurringPaymentRequestFromID adopts an existing Objective-C object as a RecurringPaymentRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func RecurringPaymentRequestFromID(id objc.ID) *RecurringPaymentRequest {
 	if id == 0 {
 		return nil
 	}
-	return &RecurringPaymentRequest{inner: raw.PKRecurringPaymentRequestFromID(id)}
+	x := &RecurringPaymentRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// recurringPaymentRequestAdopt wraps an Objective-C object that this code just created as a
+// RecurringPaymentRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func recurringPaymentRequestAdopt(id objc.ID) *RecurringPaymentRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &RecurringPaymentRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RecurringPaymentRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RecurringPaymentRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RecurringPaymentRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Create a recurring payment object with a description, regular billing information, and a management URL.
 //
-// NewRecurringPaymentRequestWithPaymentDescriptionRegularBillingManagementURL creates a new [RecurringPaymentRequest].
-func NewRecurringPaymentRequestWithPaymentDescriptionRegularBillingManagementURL(paymentDescription string, regularBilling *raw.PKRecurringPaymentSummaryItem, managementURL string) *RecurringPaymentRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKRecurringPaymentRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentDescription:regularBilling:managementURL:"), foundation.NSStringStringWithUTF8String(paymentDescription).Ptr(), regularBilling.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(managementURL)).Ptr())
-	return &RecurringPaymentRequest{inner: raw.PKRecurringPaymentRequestFromID(_id)}
+// NewRecurringPaymentRequestWithPaymentDescriptionRegularBillingManagementURL creates a new RecurringPaymentRequest.
+func NewRecurringPaymentRequestWithPaymentDescriptionRegularBillingManagementURL(paymentDescription string, regularBilling *RecurringPaymentSummaryItem, managementURL string) *RecurringPaymentRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKRecurringPaymentRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentDescription:regularBilling:managementURL:"), purego.NSString(paymentDescription), objref.IDOf(regularBilling), rt.FileURL(managementURL))
+	return recurringPaymentRequestAdopt(_id)
 }
 
 // A description that you provide of the recurring payment and that Apple Pay displays to the user in the payment sheet.
 //
-// WithPaymentDescription sets the paymentDescription property and returns the receiver for chaining.
+// WithPaymentDescription sets paymentDescription and returns the receiver so calls can be chained.
 func (x *RecurringPaymentRequest) WithPaymentDescription(paymentDescription string) *RecurringPaymentRequest {
-	x.inner.SetPaymentDescription(foundation.NSStringStringWithUTF8String(paymentDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentDescription:"), purego.NSString(paymentDescription))
 	return x
 }
 
 // The regular billing cycle for the recurring payment, including start and end dates, an interval, and an interval count.
 //
-// WithRegularBilling sets the regularBilling property and returns the receiver for chaining.
+// WithRegularBilling sets regularBilling and returns the receiver so calls can be chained.
 func (x *RecurringPaymentRequest) WithRegularBilling(regularBilling *RecurringPaymentSummaryItem) *RecurringPaymentRequest {
-	x.inner.SetRegularBilling(regularBilling.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegularBilling:"), objref.IDOf(regularBilling))
 	return x
 }
 
 // The trial billing cycle for the recurring payment.
 //
-// WithTrialBilling sets the trialBilling property and returns the receiver for chaining.
+// WithTrialBilling sets trialBilling and returns the receiver so calls can be chained.
 func (x *RecurringPaymentRequest) WithTrialBilling(trialBilling *RecurringPaymentSummaryItem) *RecurringPaymentRequest {
-	x.inner.SetTrialBilling(trialBilling.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrialBilling:"), objref.IDOf(trialBilling))
 	return x
 }
 
 // A localized billing agreement that the payment sheet displays to the user before the user authorizes the payment.
 //
-// WithBillingAgreement sets the billingAgreement property and returns the receiver for chaining.
+// WithBillingAgreement sets billingAgreement and returns the receiver so calls can be chained.
 func (x *RecurringPaymentRequest) WithBillingAgreement(billingAgreement string) *RecurringPaymentRequest {
-	x.inner.SetBillingAgreement(foundation.NSStringStringWithUTF8String(billingAgreement))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBillingAgreement:"), purego.NSString(billingAgreement))
 	return x
 }
 
 // A URL to a web page where the user can update or delete the payment method for the recurring payment.
 //
-// WithManagementURL sets the managementURL property and returns the receiver for chaining.
+// WithManagementURL sets managementURL and returns the receiver so calls can be chained.
 func (x *RecurringPaymentRequest) WithManagementURL(managementURL string) *RecurringPaymentRequest {
-	x.inner.SetManagementURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(managementURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagementURL:"), rt.FileURL(managementURL))
 	return x
 }
 
 // A URL you provide to receive life-cycle notifications from the Apple Pay servers about the Apple Pay merchant token for the recurring payment.
 //
-// WithTokenNotificationURL sets the tokenNotificationURL property and returns the receiver for chaining.
+// WithTokenNotificationURL sets tokenNotificationURL and returns the receiver so calls can be chained.
 func (x *RecurringPaymentRequest) WithTokenNotificationURL(tokenNotificationURL string) *RecurringPaymentRequest {
-	x.inner.SetTokenNotificationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(tokenNotificationURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTokenNotificationURL:"), rt.FileURL(tokenNotificationURL))
 	return x
 }
 
-// PaymentDescription calls the underlying PaymentDescription.
 func (x *RecurringPaymentRequest) PaymentDescription() string {
-	_r := x.inner.PaymentDescription()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentDescription"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPaymentDescription calls the underlying SetPaymentDescription.
 func (x *RecurringPaymentRequest) SetPaymentDescription(paymentDescription string) {
-	x.inner.SetPaymentDescription(foundation.NSStringStringWithUTF8String(paymentDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentDescription:"), purego.NSString(paymentDescription))
 }
 
-// RegularBilling calls the underlying RegularBilling.
 func (x *RecurringPaymentRequest) RegularBilling() *RecurringPaymentSummaryItem {
-	_r := x.inner.RegularBilling()
-	if _r == nil {
-		return nil
-	}
-	return &RecurringPaymentSummaryItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regularBilling"))
+	return RecurringPaymentSummaryItemFromID(_r)
 }
 
-// SetRegularBilling calls the underlying SetRegularBilling.
-func (x *RecurringPaymentRequest) SetRegularBilling(regularBilling *raw.PKRecurringPaymentSummaryItem) {
-	x.inner.SetRegularBilling(regularBilling)
+func (x *RecurringPaymentRequest) SetRegularBilling(regularBilling *RecurringPaymentSummaryItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegularBilling:"), objref.IDOf(regularBilling))
 }
 
-// TrialBilling calls the underlying TrialBilling.
 func (x *RecurringPaymentRequest) TrialBilling() *RecurringPaymentSummaryItem {
-	_r := x.inner.TrialBilling()
-	if _r == nil {
-		return nil
-	}
-	return &RecurringPaymentSummaryItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trialBilling"))
+	return RecurringPaymentSummaryItemFromID(_r)
 }
 
-// SetTrialBilling calls the underlying SetTrialBilling.
-func (x *RecurringPaymentRequest) SetTrialBilling(trialBilling *raw.PKRecurringPaymentSummaryItem) {
-	x.inner.SetTrialBilling(trialBilling)
+func (x *RecurringPaymentRequest) SetTrialBilling(trialBilling *RecurringPaymentSummaryItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrialBilling:"), objref.IDOf(trialBilling))
 }
 
-// BillingAgreement calls the underlying BillingAgreement.
 func (x *RecurringPaymentRequest) BillingAgreement() string {
-	_r := x.inner.BillingAgreement()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("billingAgreement"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBillingAgreement calls the underlying SetBillingAgreement.
 func (x *RecurringPaymentRequest) SetBillingAgreement(billingAgreement string) {
-	x.inner.SetBillingAgreement(foundation.NSStringStringWithUTF8String(billingAgreement))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBillingAgreement:"), purego.NSString(billingAgreement))
 }
 
-// ManagementURL calls the underlying ManagementURL.
-func (x *RecurringPaymentRequest) ManagementURL() *foundation.NSURL {
-	return x.inner.ManagementURL()
+func (x *RecurringPaymentRequest) ManagementURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managementURL"))
+	return obj.Wrap(_r)
 }
 
-// SetManagementURL calls the underlying SetManagementURL.
 func (x *RecurringPaymentRequest) SetManagementURL(managementURL string) {
-	x.inner.SetManagementURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(managementURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManagementURL:"), rt.FileURL(managementURL))
 }
 
-// TokenNotificationURL calls the underlying TokenNotificationURL.
-func (x *RecurringPaymentRequest) TokenNotificationURL() *foundation.NSURL {
-	return x.inner.TokenNotificationURL()
+func (x *RecurringPaymentRequest) TokenNotificationURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenNotificationURL"))
+	return obj.Wrap(_r)
 }
 
-// SetTokenNotificationURL calls the underlying SetTokenNotificationURL.
 func (x *RecurringPaymentRequest) SetTokenNotificationURL(tokenNotificationURL string) {
-	x.inner.SetTokenNotificationURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(tokenNotificationURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTokenNotificationURL:"), rt.FileURL(tokenNotificationURL))
 }
 
 // RecurringPaymentRequestable is the interface implemented by [RecurringPaymentRequest], for mocking and DI.
 type RecurringPaymentRequestable interface {
-	Unwrap() *raw.PKRecurringPaymentRequest
+	obj.Object
 	WithPaymentDescription(paymentDescription string) *RecurringPaymentRequest
 	WithRegularBilling(regularBilling *RecurringPaymentSummaryItem) *RecurringPaymentRequest
 	WithTrialBilling(trialBilling *RecurringPaymentSummaryItem) *RecurringPaymentRequest
@@ -178,14 +187,14 @@ type RecurringPaymentRequestable interface {
 	PaymentDescription() string
 	SetPaymentDescription(paymentDescription string)
 	RegularBilling() *RecurringPaymentSummaryItem
-	SetRegularBilling(regularBilling *raw.PKRecurringPaymentSummaryItem)
+	SetRegularBilling(regularBilling *RecurringPaymentSummaryItem)
 	TrialBilling() *RecurringPaymentSummaryItem
-	SetTrialBilling(trialBilling *raw.PKRecurringPaymentSummaryItem)
+	SetTrialBilling(trialBilling *RecurringPaymentSummaryItem)
 	BillingAgreement() string
 	SetBillingAgreement(billingAgreement string)
-	ManagementURL() *foundation.NSURL
+	ManagementURL() obj.Object
 	SetManagementURL(managementURL string)
-	TokenNotificationURL() *foundation.NSURL
+	TokenNotificationURL() obj.Object
 	SetTokenNotificationURL(tokenNotificationURL string)
 }
 

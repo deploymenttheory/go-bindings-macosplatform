@@ -5,244 +5,250 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description object used to create and load a persistent store.
 //
-// PersistentStoreDescription wraps [raw.NSPersistentStoreDescription] with a fluent Go API.
+// PersistentStoreDescription is an idiomatic wrapper over the Objective-C class NSPersistentStoreDescription.
 type PersistentStoreDescription struct {
-	inner *raw.NSPersistentStoreDescription
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPersistentStoreDescription].
-func (x *PersistentStoreDescription) Unwrap() *raw.NSPersistentStoreDescription { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersistentStoreDescription) ID() objc.ID { return x.inner.Ptr() }
-
-// PersistentStoreDescriptionFromID adopts an existing object pointer as a PersistentStoreDescription (nil for 0).
+// PersistentStoreDescriptionFromID adopts an existing Objective-C object as a PersistentStoreDescription
+// (nil for 0), retaining it and registering a release finalizer.
 func PersistentStoreDescriptionFromID(id objc.ID) *PersistentStoreDescription {
 	if id == 0 {
 		return nil
 	}
-	return &PersistentStoreDescription{inner: raw.NSPersistentStoreDescriptionFromID(id)}
+	x := &PersistentStoreDescription{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// persistentStoreDescriptionAdopt wraps an Objective-C object that this code just created as a
+// PersistentStoreDescription (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func persistentStoreDescriptionAdopt(id objc.ID) *PersistentStoreDescription {
+	if id == 0 {
+		return nil
+	}
+	x := &PersistentStoreDescription{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PersistentStoreDescription) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PersistentStoreDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PersistentStoreDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes the receiver with a URL for the store.
 //
-// NewPersistentStoreDescriptionWithURL creates a new [PersistentStoreDescription].
+// NewPersistentStoreDescriptionWithURL creates a new PersistentStoreDescription.
 func NewPersistentStoreDescriptionWithURL(url string) *PersistentStoreDescription {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentStoreDescription")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr())
-	return &PersistentStoreDescription{inner: raw.NSPersistentStoreDescriptionFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreDescription")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
+	return persistentStoreDescriptionAdopt(_id)
 }
 
 // The type of store this description represents.
 //
-// WithType sets the type_ property and returns the receiver for chaining.
+// WithType sets type_ and returns the receiver so calls can be chained.
 func (x *PersistentStoreDescription) WithType(type_ string) *PersistentStoreDescription {
-	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 	return x
 }
 
 // The name of the configuration used by this store.
 //
-// WithConfiguration sets the configuration property and returns the receiver for chaining.
+// WithConfiguration sets configuration and returns the receiver so calls can be chained.
 func (x *PersistentStoreDescription) WithConfiguration(configuration string) *PersistentStoreDescription {
-	x.inner.SetConfiguration(foundation.NSStringStringWithUTF8String(configuration))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), purego.NSString(configuration))
 	return x
 }
 
 // The URL that the store will use for its location.
 //
-// WithURL sets the uRL property and returns the receiver for chaining.
+// WithURL sets uRL and returns the receiver so calls can be chained.
 func (x *PersistentStoreDescription) WithURL(uRL string) *PersistentStoreDescription {
-	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 	return x
 }
 
 // A flag that indicates whether this store will be read-only.
 //
-// WithReadOnly sets the readOnly property and returns the receiver for chaining.
+// WithReadOnly sets readOnly and returns the receiver so calls can be chained.
 func (x *PersistentStoreDescription) WithReadOnly(readOnly bool) *PersistentStoreDescription {
-	x.inner.SetReadOnly(readOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadOnly:"), readOnly)
 	return x
 }
 
 // The connection timeout for the associated store.
 //
-// WithTimeout sets the timeout property and returns the receiver for chaining.
+// WithTimeout sets timeout and returns the receiver so calls can be chained.
 func (x *PersistentStoreDescription) WithTimeout(timeout float64) *PersistentStoreDescription {
-	x.inner.SetTimeout(timeout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), timeout)
 	return x
 }
 
 // A flag that determines whether the store is added asynchronously.
 //
-// WithShouldAddStoreAsynchronously sets the shouldAddStoreAsynchronously property and returns the receiver for chaining.
+// WithShouldAddStoreAsynchronously sets shouldAddStoreAsynchronously and returns the receiver so calls can be chained.
 func (x *PersistentStoreDescription) WithShouldAddStoreAsynchronously(shouldAddStoreAsynchronously bool) *PersistentStoreDescription {
-	x.inner.SetShouldAddStoreAsynchronously(shouldAddStoreAsynchronously)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldAddStoreAsynchronously:"), shouldAddStoreAsynchronously)
 	return x
 }
 
 // A flag indicating whether the associated persistent store should be migrated automatically.
 //
-// WithShouldMigrateStoreAutomatically sets the shouldMigrateStoreAutomatically property and returns the receiver for chaining.
+// WithShouldMigrateStoreAutomatically sets shouldMigrateStoreAutomatically and returns the receiver so calls can be chained.
 func (x *PersistentStoreDescription) WithShouldMigrateStoreAutomatically(shouldMigrateStoreAutomatically bool) *PersistentStoreDescription {
-	x.inner.SetShouldMigrateStoreAutomatically(shouldMigrateStoreAutomatically)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldMigrateStoreAutomatically:"), shouldMigrateStoreAutomatically)
 	return x
 }
 
 // A flag indicating whether a mapping model should be created automatically.
 //
-// WithShouldInferMappingModelAutomatically sets the shouldInferMappingModelAutomatically property and returns the receiver for chaining.
+// WithShouldInferMappingModelAutomatically sets shouldInferMappingModelAutomatically and returns the receiver so calls can be chained.
 func (x *PersistentStoreDescription) WithShouldInferMappingModelAutomatically(shouldInferMappingModelAutomatically bool) *PersistentStoreDescription {
-	x.inner.SetShouldInferMappingModelAutomatically(shouldInferMappingModelAutomatically)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldInferMappingModelAutomatically:"), shouldInferMappingModelAutomatically)
 	return x
 }
 
 // Options that customize how this store description aligns with a CloudKit database.
 //
-// WithCloudKitContainerOptions sets the cloudKitContainerOptions property and returns the receiver for chaining.
+// WithCloudKitContainerOptions sets cloudKitContainerOptions and returns the receiver so calls can be chained.
 func (x *PersistentStoreDescription) WithCloudKitContainerOptions(cloudKitContainerOptions *PersistentCloudKitContainerOptions) *PersistentStoreDescription {
-	x.inner.SetCloudKitContainerOptions(cloudKitContainerOptions.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCloudKitContainerOptions:"), objref.IDOf(cloudKitContainerOptions))
 	return x
 }
 
 // Sets an option on the store.
-//
-// SetOptionForKey calls the underlying SetOptionForKey.
-func (x *PersistentStoreDescription) SetOptionForKey(option *foundation.NSObject, key string) {
-	x.inner.SetOptionForKey(option, foundation.NSStringStringWithUTF8String(key))
+func (x *PersistentStoreDescription) SetOptionForKey(option obj.Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOption:forKey:"), objref.IDOf(option), purego.NSString(key))
 }
 
 // Allows you to set pragmas for the SQLite store.
-//
-// SetValueForPragmaNamed calls the underlying SetValueForPragmaNamed.
-func (x *PersistentStoreDescription) SetValueForPragmaNamed(value *foundation.NSObject, name string) {
-	x.inner.SetValueForPragmaNamed(value, foundation.NSStringStringWithUTF8String(name))
+func (x *PersistentStoreDescription) SetValueForPragmaNamed(value obj.Object, name string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:forPragmaNamed:"), objref.IDOf(value), purego.NSString(name))
 }
 
-// Type calls the underlying Type.
 func (x *PersistentStoreDescription) Type() string {
-	_r := x.inner.Type()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetType calls the underlying SetType.
 func (x *PersistentStoreDescription) SetType(type_ string) {
-	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 }
 
-// Configuration calls the underlying Configuration.
 func (x *PersistentStoreDescription) Configuration() string {
-	_r := x.inner.Configuration()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetConfiguration calls the underlying SetConfiguration.
 func (x *PersistentStoreDescription) SetConfiguration(configuration string) {
-	x.inner.SetConfiguration(foundation.NSStringStringWithUTF8String(configuration))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), purego.NSString(configuration))
 }
 
-// URL calls the underlying URL.
-func (x *PersistentStoreDescription) URL() *foundation.NSURL {
-	return x.inner.URL()
+func (x *PersistentStoreDescription) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
-// SetURL calls the underlying SetURL.
 func (x *PersistentStoreDescription) SetURL(uRL string) {
-	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 }
 
-// Options calls the underlying Options.
-func (x *PersistentStoreDescription) Options() *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject] {
-	return x.inner.Options()
+func (x *PersistentStoreDescription) Options() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
+	return obj.Wrap(_r)
 }
 
-// IsReadOnly calls the underlying IsReadOnly.
 func (x *PersistentStoreDescription) IsReadOnly() bool {
-	return x.inner.IsReadOnly()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadOnly"))
+	return _r
 }
 
-// SetReadOnly calls the underlying SetReadOnly.
 func (x *PersistentStoreDescription) SetReadOnly(readOnly bool) {
-	x.inner.SetReadOnly(readOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadOnly:"), readOnly)
 }
 
-// Timeout calls the underlying Timeout.
 func (x *PersistentStoreDescription) Timeout() float64 {
-	return x.inner.Timeout()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeout"))
+	return _r
 }
 
-// SetTimeout calls the underlying SetTimeout.
 func (x *PersistentStoreDescription) SetTimeout(timeout float64) {
-	x.inner.SetTimeout(timeout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), timeout)
 }
 
-// SqlitePragmas calls the underlying SqlitePragmas.
-func (x *PersistentStoreDescription) SqlitePragmas() *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject] {
-	return x.inner.SqlitePragmas()
+func (x *PersistentStoreDescription) SqlitePragmas() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sqlitePragmas"))
+	return obj.Wrap(_r)
 }
 
-// ShouldAddStoreAsynchronously calls the underlying ShouldAddStoreAsynchronously.
 func (x *PersistentStoreDescription) ShouldAddStoreAsynchronously() bool {
-	return x.inner.ShouldAddStoreAsynchronously()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldAddStoreAsynchronously"))
+	return _r
 }
 
-// SetShouldAddStoreAsynchronously calls the underlying SetShouldAddStoreAsynchronously.
 func (x *PersistentStoreDescription) SetShouldAddStoreAsynchronously(shouldAddStoreAsynchronously bool) {
-	x.inner.SetShouldAddStoreAsynchronously(shouldAddStoreAsynchronously)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldAddStoreAsynchronously:"), shouldAddStoreAsynchronously)
 }
 
-// ShouldMigrateStoreAutomatically calls the underlying ShouldMigrateStoreAutomatically.
 func (x *PersistentStoreDescription) ShouldMigrateStoreAutomatically() bool {
-	return x.inner.ShouldMigrateStoreAutomatically()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldMigrateStoreAutomatically"))
+	return _r
 }
 
-// SetShouldMigrateStoreAutomatically calls the underlying SetShouldMigrateStoreAutomatically.
 func (x *PersistentStoreDescription) SetShouldMigrateStoreAutomatically(shouldMigrateStoreAutomatically bool) {
-	x.inner.SetShouldMigrateStoreAutomatically(shouldMigrateStoreAutomatically)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldMigrateStoreAutomatically:"), shouldMigrateStoreAutomatically)
 }
 
-// ShouldInferMappingModelAutomatically calls the underlying ShouldInferMappingModelAutomatically.
 func (x *PersistentStoreDescription) ShouldInferMappingModelAutomatically() bool {
-	return x.inner.ShouldInferMappingModelAutomatically()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldInferMappingModelAutomatically"))
+	return _r
 }
 
-// SetShouldInferMappingModelAutomatically calls the underlying SetShouldInferMappingModelAutomatically.
 func (x *PersistentStoreDescription) SetShouldInferMappingModelAutomatically(shouldInferMappingModelAutomatically bool) {
-	x.inner.SetShouldInferMappingModelAutomatically(shouldInferMappingModelAutomatically)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldInferMappingModelAutomatically:"), shouldInferMappingModelAutomatically)
 }
 
-// CloudKitContainerOptions calls the underlying CloudKitContainerOptions.
 func (x *PersistentStoreDescription) CloudKitContainerOptions() *PersistentCloudKitContainerOptions {
-	_r := x.inner.CloudKitContainerOptions()
-	if _r == nil {
-		return nil
-	}
-	return &PersistentCloudKitContainerOptions{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cloudKitContainerOptions"))
+	return PersistentCloudKitContainerOptionsFromID(_r)
 }
 
-// SetCloudKitContainerOptions calls the underlying SetCloudKitContainerOptions.
-func (x *PersistentStoreDescription) SetCloudKitContainerOptions(cloudKitContainerOptions *raw.NSPersistentCloudKitContainerOptions) {
-	x.inner.SetCloudKitContainerOptions(cloudKitContainerOptions)
+func (x *PersistentStoreDescription) SetCloudKitContainerOptions(cloudKitContainerOptions *PersistentCloudKitContainerOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCloudKitContainerOptions:"), objref.IDOf(cloudKitContainerOptions))
 }
 
 // PersistentStoreDescriptionable is the interface implemented by [PersistentStoreDescription], for mocking and DI.
 type PersistentStoreDescriptionable interface {
-	Unwrap() *raw.NSPersistentStoreDescription
+	obj.Object
 	WithType(type_ string) *PersistentStoreDescription
 	WithConfiguration(configuration string) *PersistentStoreDescription
 	WithURL(uRL string) *PersistentStoreDescription
@@ -252,20 +258,20 @@ type PersistentStoreDescriptionable interface {
 	WithShouldMigrateStoreAutomatically(shouldMigrateStoreAutomatically bool) *PersistentStoreDescription
 	WithShouldInferMappingModelAutomatically(shouldInferMappingModelAutomatically bool) *PersistentStoreDescription
 	WithCloudKitContainerOptions(cloudKitContainerOptions *PersistentCloudKitContainerOptions) *PersistentStoreDescription
-	SetOptionForKey(option *foundation.NSObject, key string)
-	SetValueForPragmaNamed(value *foundation.NSObject, name string)
+	SetOptionForKey(option obj.Object, key string)
+	SetValueForPragmaNamed(value obj.Object, name string)
 	Type() string
 	SetType(type_ string)
 	Configuration() string
 	SetConfiguration(configuration string)
-	URL() *foundation.NSURL
+	URL() obj.Object
 	SetURL(uRL string)
-	Options() *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]
+	Options() obj.Object
 	IsReadOnly() bool
 	SetReadOnly(readOnly bool)
 	Timeout() float64
 	SetTimeout(timeout float64)
-	SqlitePragmas() *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]
+	SqlitePragmas() obj.Object
 	ShouldAddStoreAsynchronously() bool
 	SetShouldAddStoreAsynchronously(shouldAddStoreAsynchronously bool)
 	ShouldMigrateStoreAutomatically() bool
@@ -273,7 +279,7 @@ type PersistentStoreDescriptionable interface {
 	ShouldInferMappingModelAutomatically() bool
 	SetShouldInferMappingModelAutomatically(shouldInferMappingModelAutomatically bool)
 	CloudKitContainerOptions() *PersistentCloudKitContainerOptions
-	SetCloudKitContainerOptions(cloudKitContainerOptions *raw.NSPersistentCloudKitContainerOptions)
+	SetCloudKitContainerOptions(cloudKitContainerOptions *PersistentCloudKitContainerOptions)
 }
 
 var _ PersistentStoreDescriptionable = (*PersistentStoreDescription)(nil)

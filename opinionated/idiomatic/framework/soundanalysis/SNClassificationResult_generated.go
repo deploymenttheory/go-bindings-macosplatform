@@ -5,78 +5,84 @@
 package soundanalysis
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/soundanalysis"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A result that contains the highest-ranking classifications in a time range.
 //
-// ClassificationResult wraps [raw.SNClassificationResult] with a fluent Go API.
+// ClassificationResult is an idiomatic wrapper over the Objective-C class SNClassificationResult.
 type ClassificationResult struct {
-	inner *raw.SNClassificationResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SNClassificationResult].
-func (x *ClassificationResult) Unwrap() *raw.SNClassificationResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ClassificationResult) ID() objc.ID { return x.inner.Ptr() }
-
-// ClassificationResultFromID adopts an existing object pointer as a ClassificationResult (nil for 0).
+// ClassificationResultFromID adopts an existing Objective-C object as a ClassificationResult
+// (nil for 0), retaining it and registering a release finalizer.
 func ClassificationResultFromID(id objc.ID) *ClassificationResult {
 	if id == 0 {
 		return nil
 	}
-	return &ClassificationResult{inner: raw.SNClassificationResultFromID(id)}
+	x := &ClassificationResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewClassificationResult creates a new [ClassificationResult].
+// classificationResultAdopt wraps an Objective-C object that this code just created as a
+// ClassificationResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func classificationResultAdopt(id objc.ID) *ClassificationResult {
+	if id == 0 {
+		return nil
+	}
+	x := &ClassificationResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ClassificationResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ClassificationResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ClassificationResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewClassificationResult creates a new ClassificationResult.
 func NewClassificationResult() *ClassificationResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SNClassificationResult")), objc.RegisterName("new"))
-	return &ClassificationResult{inner: raw.SNClassificationResultFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SNClassificationResult")), objc.RegisterName("new"))
+	return classificationResultAdopt(_id)
 }
 
 // Returns the classification for an identifier.
-//
-// ClassificationForIdentifier calls the underlying ClassificationForIdentifier.
 func (x *ClassificationResult) ClassificationForIdentifier(identifier string) *Classification {
-	_r := x.inner.ClassificationForIdentifier(foundation.NSStringStringWithUTF8String(identifier))
-	if _r == nil {
-		return nil
-	}
-	return &Classification{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classificationForIdentifier:"), purego.NSString(identifier))
+	return ClassificationFromID(_r)
 }
 
 // All classification candidates, sorted with highest confidence first.
 //
 // Classifications returns the collection as a Go slice.
 func (x *ClassificationResult) Classifications() []*Classification {
-	arr := x.inner.Classifications()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Classification {
-		return &Classification{inner: raw.SNClassificationFromID(purego.Retain(_id))}
-	})
-}
-
-// The time range in the client-provided audio stream to which this classification result corresponds Each CMTime contains of a value (audio frame count) and timescale (client sample rate). This enables the client to precisely identify the frame range in the original audio stream to which this result corresponds. Time ranges will often be in the past compared to the frame count of the most recent audio buffer provided to the analyzer, due to the inherent audio buffering operations required to deliver a full block of audio to an MLModel.
-//
-// TimeRange calls the underlying TimeRange.
-func (x *ClassificationResult) TimeRange() coremedia.CMTimeRange {
-	return x.inner.TimeRange()
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classifications"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Classification { return ClassificationFromID(_id) })
 }
 
 // ClassificationResultable is the interface implemented by [ClassificationResult], for mocking and DI.
 type ClassificationResultable interface {
-	Unwrap() *raw.SNClassificationResult
+	obj.Object
 	ClassificationForIdentifier(identifier string) *Classification
 	Classifications() []*Classification
-	TimeRange() coremedia.CMTimeRange
 }
 
 var _ ClassificationResultable = (*ClassificationResult)(nil)

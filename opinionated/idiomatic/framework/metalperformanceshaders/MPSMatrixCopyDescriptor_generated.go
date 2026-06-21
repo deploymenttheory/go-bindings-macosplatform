@@ -5,65 +5,71 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description of multiple matrix copy operations.
 //
-// MatrixCopyDescriptor wraps [raw.MPSMatrixCopyDescriptor] with a fluent Go API.
+// MatrixCopyDescriptor is an idiomatic wrapper over the Objective-C class MPSMatrixCopyDescriptor.
 type MatrixCopyDescriptor struct {
-	inner *raw.MPSMatrixCopyDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSMatrixCopyDescriptor].
-func (x *MatrixCopyDescriptor) Unwrap() *raw.MPSMatrixCopyDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatrixCopyDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixCopyDescriptorFromID adopts an existing object pointer as a MatrixCopyDescriptor (nil for 0).
+// MatrixCopyDescriptorFromID adopts an existing Objective-C object as a MatrixCopyDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixCopyDescriptorFromID(id objc.ID) *MatrixCopyDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &MatrixCopyDescriptor{inner: raw.MPSMatrixCopyDescriptorFromID(id)}
+	x := &MatrixCopyDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @abstract       initialize a MPSMatrixCopyDescriptor with default values. @discussion     Use -setCopyOperationAtIndex:sourceMatrix:destinationMatrix:copyOffsets to initialize. All indices must be initialized before use. @param          device    The device on which the copy will be performed @param          count     The number of copy operations the object will encode @return     A MPSMatrixCopyDescriptor. It still needs to be initialized with -setCopyOperationAtIndex:sourceMatrix:destinationMatrix:copyOffsets
-//
-// NewMatrixCopyDescriptorWithDeviceCount creates a new [MatrixCopyDescriptor].
-func NewMatrixCopyDescriptorWithDeviceCount(device metal.MTLDevice, count uint) *MatrixCopyDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixCopyDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:count:"), device, count)
-	return &MatrixCopyDescriptor{inner: raw.MPSMatrixCopyDescriptorFromID(_id)}
+// matrixCopyDescriptorAdopt wraps an Objective-C object that this code just created as a
+// MatrixCopyDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixCopyDescriptorAdopt(id objc.ID) *MatrixCopyDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &MatrixCopyDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @abstract       Initialize a MPSMatrixCopyDescriptor using offsets generated on the GPU @discussion     Use this method when the offsets needed are coming from GPU based computation. @param          sourceMatrices      A list of matrices from which the matrix data is read @param          destinationMatrices A list of matrices to which to write the data. The count must match the number of source matrices. @param          offsets         A MPSVector of type MPSDataTypeUInt32 containing the list of offsets, stored as a packed array of MPSMatrixCopyOffsets. @param          byteOffset      A byte offset into the offsets vector where the data starts in 'offsets'. This value must be a multiple of 16. @result         A valid MPSMatrixCopyDescriptor to represent the list of copy operations
-//
-// NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOffset creates a new [MatrixCopyDescriptor].
-func NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOffset(sourceMatrices *foundation.NSArray[*mpscore.MPSMatrix], destinationMatrices *foundation.NSArray[*mpscore.MPSMatrix], offsets *mpscore.MPSVector, byteOffset uint) *MatrixCopyDescriptor {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixCopyDescriptor")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceMatrices:destinationMatrices:offsetVector:offset:"), sourceMatrices.Ptr(), destinationMatrices.Ptr(), offsets.Ptr(), byteOffset)
-	return &MatrixCopyDescriptor{inner: raw.MPSMatrixCopyDescriptorFromID(_id)}
+// Description returns the object's -description text.
+func (x *MatrixCopyDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract    Initialize a MPSMatrixCopyDescriptor using offsets generated on the CPU @discussion  This is for one at a time intialization of the copy operations @param  index               The index of the copy operation @param  sourceMatrix        The source matrix for this copy operation @param  destinationMatrix   The destination matrix for this copy operation @param  offsets             The offsets to use for the copy operation
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatrixCopyDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatrixCopyDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// Initialize a MPSMatrixCopyDescriptor using offsets generated on the GPU Use this method when the offsets needed are coming from GPU based computation.
 //
-// SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets calls the underlying SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets.
-func (x *MatrixCopyDescriptor) SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index uint, sourceMatrix *mpscore.MPSMatrix, destinationMatrix *mpscore.MPSMatrix, offsets mpsmatrix.MPSMatrixCopyOffsets) {
-	x.inner.SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index, sourceMatrix, destinationMatrix, offsets)
+// NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOffset creates a new MatrixCopyDescriptor.
+func NewMatrixCopyDescriptorWithSourceMatricesDestinationMatricesOffsetVectorOffset(sourceMatrices []obj.Object, destinationMatrices []obj.Object, offsets obj.Object, byteOffset int) *MatrixCopyDescriptor {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSMatrixCopyDescriptor")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceMatrices:destinationMatrices:offsetVector:offset:"), purego.SliceToNSArray(sourceMatrices, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(destinationMatrices, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(offsets), byteOffset)
+	return matrixCopyDescriptorAdopt(_id)
 }
 
 // MatrixCopyDescriptorable is the interface implemented by [MatrixCopyDescriptor], for mocking and DI.
 type MatrixCopyDescriptorable interface {
-	Unwrap() *raw.MPSMatrixCopyDescriptor
-	SetCopyOperationAtIndexSourceMatrixDestinationMatrixOffsets(index uint, sourceMatrix *mpscore.MPSMatrix, destinationMatrix *mpscore.MPSMatrix, offsets mpsmatrix.MPSMatrixCopyOffsets)
+	obj.Object
 }
 
 var _ MatrixCopyDescriptorable = (*MatrixCopyDescriptor)(nil)

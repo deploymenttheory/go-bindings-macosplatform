@@ -5,175 +5,170 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A description of a function object to create.
 //
-// FunctionDescriptor wraps [raw.MTLFunctionDescriptor] with a fluent Go API.
+// FunctionDescriptor is an idiomatic wrapper over the Objective-C class MTLFunctionDescriptor.
 type FunctionDescriptor struct {
-	inner *raw.MTLFunctionDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLFunctionDescriptor].
-func (x *FunctionDescriptor) Unwrap() *raw.MTLFunctionDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FunctionDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// FunctionDescriptorFromID adopts an existing object pointer as a FunctionDescriptor (nil for 0).
+// FunctionDescriptorFromID adopts an existing Objective-C object as a FunctionDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func FunctionDescriptorFromID(id objc.ID) *FunctionDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &FunctionDescriptor{inner: raw.MTLFunctionDescriptorFromID(id)}
+	x := &FunctionDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFunctionDescriptor creates a new [FunctionDescriptor].
+// functionDescriptorAdopt wraps an Objective-C object that this code just created as a
+// FunctionDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func functionDescriptorAdopt(id objc.ID) *FunctionDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &FunctionDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FunctionDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FunctionDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FunctionDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFunctionDescriptor creates a new FunctionDescriptor.
 func NewFunctionDescriptor() *FunctionDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLFunctionDescriptor")), objc.RegisterName("new"))
-	return &FunctionDescriptor{inner: raw.MTLFunctionDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLFunctionDescriptor")), objc.RegisterName("new"))
+	return functionDescriptorAdopt(_id)
 }
 
 // The name of the function to fetch from the library.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *FunctionDescriptor) WithName(name string) *FunctionDescriptor {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // A new name for the created function object.
 //
-// WithSpecializedName sets the specializedName property and returns the receiver for chaining.
+// WithSpecializedName sets specializedName and returns the receiver so calls can be chained.
 func (x *FunctionDescriptor) WithSpecializedName(specializedName string) *FunctionDescriptor {
-	x.inner.SetSpecializedName(foundation.NSStringStringWithUTF8String(specializedName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpecializedName:"), purego.NSString(specializedName))
 	return x
 }
 
 // The set of constant values assigned to the function constants.
 //
-// WithConstantValues sets the constantValues property and returns the receiver for chaining.
+// WithConstantValues sets constantValues and returns the receiver so calls can be chained.
 func (x *FunctionDescriptor) WithConstantValues(constantValues *FunctionConstantValues) *FunctionDescriptor {
-	x.inner.SetConstantValues(constantValues.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantValues:"), objref.IDOf(constantValues))
 	return x
 }
 
 // Flags specifying how Metal should create the new function object.
 //
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *FunctionDescriptor) WithOptions(options MTLFunctionOptions) *FunctionDescriptor {
-	x.inner.SetOptions(raw.MTLFunctionOptions(options))
+// WithOptions sets options and returns the receiver so calls can be chained.
+func (x *FunctionDescriptor) WithOptions(options FunctionOptions) *FunctionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
 	return x
 }
 
-// @property name @abstract The name of the `visible` function to find.
-//
-// Name calls the underlying Name.
+// The name of the `visible` function to find.
 func (x *FunctionDescriptor) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
 func (x *FunctionDescriptor) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// @property specializedName @abstract An optional new name for a `visible` function to allow reuse with different specializations.
-//
-// SpecializedName calls the underlying SpecializedName.
+// An optional new name for a `visible` function to allow reuse with different specializations.
 func (x *FunctionDescriptor) SpecializedName() string {
-	_r := x.inner.SpecializedName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("specializedName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSpecializedName calls the underlying SetSpecializedName.
 func (x *FunctionDescriptor) SetSpecializedName(specializedName string) {
-	x.inner.SetSpecializedName(foundation.NSStringStringWithUTF8String(specializedName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpecializedName:"), purego.NSString(specializedName))
 }
 
-// @property constantValues @abstract The set of constant values assigned to the function constants. Compilation fails if you do not provide valid constant values for all required function constants.
-//
-// ConstantValues calls the underlying ConstantValues.
+// The set of constant values assigned to the function constants. Compilation fails if you do not provide valid constant values for all required function constants.
 func (x *FunctionDescriptor) ConstantValues() *FunctionConstantValues {
-	_r := x.inner.ConstantValues()
-	if _r == nil {
-		return nil
-	}
-	return &FunctionConstantValues{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constantValues"))
+	return FunctionConstantValuesFromID(_r)
 }
 
-// SetConstantValues calls the underlying SetConstantValues.
-func (x *FunctionDescriptor) SetConstantValues(constantValues *raw.MTLFunctionConstantValues) {
-	x.inner.SetConstantValues(constantValues)
+func (x *FunctionDescriptor) SetConstantValues(constantValues *FunctionConstantValues) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantValues:"), objref.IDOf(constantValues))
 }
 
-// @property options @abstract The options to use for this new `MTLFunction`.
-//
-// Options calls the underlying Options.
-func (x *FunctionDescriptor) Options() MTLFunctionOptions {
-	return MTLFunctionOptions(x.inner.Options())
+// The options to use for this new `MTLFunction`.
+func (x *FunctionDescriptor) Options() FunctionOptions {
+	_r := objc.Send[FunctionOptions](objref.IDOf(x), objc.RegisterName("options"))
+	return _r
 }
 
-// SetOptions calls the underlying SetOptions.
-func (x *FunctionDescriptor) SetOptions(options MTLFunctionOptions) {
-	x.inner.SetOptions(raw.MTLFunctionOptions(options))
+func (x *FunctionDescriptor) SetOptions(options FunctionOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
 }
 
-// @property binaryArchives @abstract The array of archives to be searched. @discussion Binary archives to be searched for precompiled functions during the compilation of this function.
-//
-// BinaryArchives calls the underlying BinaryArchives.
-func (x *FunctionDescriptor) BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive] {
-	return x.inner.BinaryArchives()
+// The array of archives to be searched. Binary archives to be searched for precompiled functions during the compilation of this function.
+func (x *FunctionDescriptor) BinaryArchives() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("binaryArchives"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetBinaryArchives calls the underlying SetBinaryArchives.
-func (x *FunctionDescriptor) SetBinaryArchives(binaryArchives ...purego.IDer) {
-	_ptrs := make([]objc.ID, len(binaryArchives))
-	for _i, _v := range binaryArchives {
-		_ptrs[_i] = _v.ID()
-	}
-	var _arg0 *foundation.NSArray[raw.MTLBinaryArchive]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.MTLBinaryArchive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.MTLBinaryArchive](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetBinaryArchives(_arg0)
+func (x *FunctionDescriptor) SetBinaryArchives(binaryArchives []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBinaryArchives:"), purego.SliceToNSArray(binaryArchives, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
-
-func (x *FunctionDescriptor) asFunctionDescriptor() *raw.MTLFunctionDescriptor { return x.inner }
 
 // FunctionDescriptorable is the interface implemented by [FunctionDescriptor], for mocking and DI.
 type FunctionDescriptorable interface {
-	Unwrap() *raw.MTLFunctionDescriptor
+	obj.Object
 	WithName(name string) *FunctionDescriptor
 	WithSpecializedName(specializedName string) *FunctionDescriptor
 	WithConstantValues(constantValues *FunctionConstantValues) *FunctionDescriptor
-	WithOptions(options MTLFunctionOptions) *FunctionDescriptor
+	WithOptions(options FunctionOptions) *FunctionDescriptor
 	Name() string
 	SetName(name string)
 	SpecializedName() string
 	SetSpecializedName(specializedName string)
 	ConstantValues() *FunctionConstantValues
-	SetConstantValues(constantValues *raw.MTLFunctionConstantValues)
-	Options() MTLFunctionOptions
-	SetOptions(options MTLFunctionOptions)
-	BinaryArchives() *foundation.NSArray[raw.MTLBinaryArchive]
-	SetBinaryArchives(binaryArchives ...purego.IDer)
+	SetConstantValues(constantValues *FunctionConstantValues)
+	Options() FunctionOptions
+	SetOptions(options FunctionOptions)
+	BinaryArchives() []obj.Object
+	SetBinaryArchives(binaryArchives []obj.Object)
 }
 
 var _ FunctionDescriptorable = (*FunctionDescriptor)(nil)

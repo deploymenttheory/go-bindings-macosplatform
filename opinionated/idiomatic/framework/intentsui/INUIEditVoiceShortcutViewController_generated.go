@@ -5,68 +5,71 @@
 package intentsui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intentsui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A view controller that lets the user edit or remove an existing shortcut.
 //
-// EditVoiceShortcutViewController wraps [raw.INUIEditVoiceShortcutViewController] with a fluent Go API.
+// EditVoiceShortcutViewController is an idiomatic wrapper over the Objective-C class INUIEditVoiceShortcutViewController.
 type EditVoiceShortcutViewController struct {
-	inner *raw.INUIEditVoiceShortcutViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INUIEditVoiceShortcutViewController].
-func (x *EditVoiceShortcutViewController) Unwrap() *raw.INUIEditVoiceShortcutViewController {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EditVoiceShortcutViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// EditVoiceShortcutViewControllerFromID adopts an existing object pointer as a EditVoiceShortcutViewController (nil for 0).
+// EditVoiceShortcutViewControllerFromID adopts an existing Objective-C object as a EditVoiceShortcutViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func EditVoiceShortcutViewControllerFromID(id objc.ID) *EditVoiceShortcutViewController {
 	if id == 0 {
 		return nil
 	}
-	return &EditVoiceShortcutViewController{inner: raw.INUIEditVoiceShortcutViewControllerFromID(id)}
+	x := &EditVoiceShortcutViewController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// editVoiceShortcutViewControllerAdopt wraps an Objective-C object that this code just created as a
+// EditVoiceShortcutViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func editVoiceShortcutViewControllerAdopt(id objc.ID) *EditVoiceShortcutViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &EditVoiceShortcutViewController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EditVoiceShortcutViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EditVoiceShortcutViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EditVoiceShortcutViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a view controller with the shortcut to edit or remove.
 //
-// NewEditVoiceShortcutViewControllerWithVoiceShortcut creates a new [EditVoiceShortcutViewController].
-func NewEditVoiceShortcutViewControllerWithVoiceShortcut(voiceShortcut *intents.INVoiceShortcut) *EditVoiceShortcutViewController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INUIEditVoiceShortcutViewController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVoiceShortcut:"), voiceShortcut.Ptr())
-	return &EditVoiceShortcutViewController{inner: raw.INUIEditVoiceShortcutViewControllerFromID(_id)}
-}
-
-// The object that retrieves notifications from the view controller.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *EditVoiceShortcutViewController) WithDelegate(delegate raw.INUIEditVoiceShortcutViewControllerDelegate) *EditVoiceShortcutViewController {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// Delegate calls the underlying Delegate.
-func (x *EditVoiceShortcutViewController) Delegate() raw.INUIEditVoiceShortcutViewControllerDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *EditVoiceShortcutViewController) SetDelegate(delegate raw.INUIEditVoiceShortcutViewControllerDelegate) {
-	x.inner.SetDelegate(delegate)
+// NewEditVoiceShortcutViewControllerWithVoiceShortcut creates a new EditVoiceShortcutViewController.
+func NewEditVoiceShortcutViewControllerWithVoiceShortcut(voiceShortcut obj.Object) *EditVoiceShortcutViewController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INUIEditVoiceShortcutViewController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVoiceShortcut:"), objref.IDOf(voiceShortcut))
+	return editVoiceShortcutViewControllerAdopt(_id)
 }
 
 // EditVoiceShortcutViewControllerable is the interface implemented by [EditVoiceShortcutViewController], for mocking and DI.
 type EditVoiceShortcutViewControllerable interface {
-	Unwrap() *raw.INUIEditVoiceShortcutViewController
-	WithDelegate(delegate raw.INUIEditVoiceShortcutViewControllerDelegate) *EditVoiceShortcutViewController
-	Delegate() raw.INUIEditVoiceShortcutViewControllerDelegate
-	SetDelegate(delegate raw.INUIEditVoiceShortcutViewControllerDelegate)
+	obj.Object
 }
 
 var _ EditVoiceShortcutViewControllerable = (*EditVoiceShortcutViewController)(nil)

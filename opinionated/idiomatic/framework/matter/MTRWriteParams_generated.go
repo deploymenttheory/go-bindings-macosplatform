@@ -5,86 +5,108 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRWriteParams wraps [raw.MTRWriteParams] with a fluent Go API.
+// MTRWriteParams is an idiomatic wrapper over the Objective-C class MTRWriteParams.
 type MTRWriteParams struct {
-	inner *raw.MTRWriteParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRWriteParams].
-func (x *MTRWriteParams) Unwrap() *raw.MTRWriteParams { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRWriteParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRWriteParamsFromID adopts an existing object pointer as a MTRWriteParams (nil for 0).
+// MTRWriteParamsFromID adopts an existing Objective-C object as a MTRWriteParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRWriteParamsFromID(id objc.ID) *MTRWriteParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRWriteParams{inner: raw.MTRWriteParamsFromID(id)}
+	x := &MTRWriteParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRWriteParams creates a new [MTRWriteParams].
+// mTRWriteParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRWriteParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRWriteParamsAdopt(id objc.ID) *MTRWriteParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRWriteParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRWriteParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRWriteParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRWriteParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRWriteParams creates a new MTRWriteParams.
 func NewMTRWriteParams() *MTRWriteParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRWriteParams")), objc.RegisterName("new"))
-	return &MTRWriteParams{inner: raw.MTRWriteParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRWriteParams")), objc.RegisterName("new"))
+	return mTRWriteParamsAdopt(_id)
 }
 
 // Controls whether the write is a timed write. If nil (the default value), a regular write is done for attributes that do not require a timed write and a timed write with some default timed request timeout is done for attributes that require a timed write. If not nil, a timed write is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual write request) within the timeout window. This value is specified in milliseconds.
 //
-// WithTimedWriteTimeout sets the timedWriteTimeout property and returns the receiver for chaining.
-func (x *MTRWriteParams) WithTimedWriteTimeout(timedWriteTimeout *foundation.NSNumber) *MTRWriteParams {
-	x.inner.SetTimedWriteTimeout(timedWriteTimeout)
+// WithTimedWriteTimeout sets timedWriteTimeout and returns the receiver so calls can be chained.
+func (x *MTRWriteParams) WithTimedWriteTimeout(timedWriteTimeout obj.Object) *MTRWriteParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedWriteTimeout:"), objref.IDOf(timedWriteTimeout))
 	return x
 }
 
 // Sets the data version for the Write Request for the interaction. If not nil, the write will only succeed if the current data version of the cluster matches the provided data version.
 //
-// WithDataVersion sets the dataVersion property and returns the receiver for chaining.
-func (x *MTRWriteParams) WithDataVersion(dataVersion *foundation.NSNumber) *MTRWriteParams {
-	x.inner.SetDataVersion(dataVersion)
+// WithDataVersion sets dataVersion and returns the receiver so calls can be chained.
+func (x *MTRWriteParams) WithDataVersion(dataVersion obj.Object) *MTRWriteParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataVersion:"), objref.IDOf(dataVersion))
 	return x
 }
 
 // Controls whether the write is a timed write. If nil (the default value), a regular write is done for attributes that do not require a timed write and a timed write with some default timed request timeout is done for attributes that require a timed write. If not nil, a timed write is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual write request) within the timeout window. This value is specified in milliseconds.
-//
-// TimedWriteTimeout calls the underlying TimedWriteTimeout.
-func (x *MTRWriteParams) TimedWriteTimeout() *foundation.NSNumber {
-	return x.inner.TimedWriteTimeout()
+func (x *MTRWriteParams) TimedWriteTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedWriteTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedWriteTimeout calls the underlying SetTimedWriteTimeout.
-func (x *MTRWriteParams) SetTimedWriteTimeout(timedWriteTimeout *foundation.NSNumber) {
-	x.inner.SetTimedWriteTimeout(timedWriteTimeout)
+func (x *MTRWriteParams) SetTimedWriteTimeout(timedWriteTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedWriteTimeout:"), objref.IDOf(timedWriteTimeout))
 }
 
 // Sets the data version for the Write Request for the interaction. If not nil, the write will only succeed if the current data version of the cluster matches the provided data version.
-//
-// DataVersion calls the underlying DataVersion.
-func (x *MTRWriteParams) DataVersion() *foundation.NSNumber {
-	return x.inner.DataVersion()
+func (x *MTRWriteParams) DataVersion() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataVersion"))
+	return obj.Wrap(_r)
 }
 
-// SetDataVersion calls the underlying SetDataVersion.
-func (x *MTRWriteParams) SetDataVersion(dataVersion *foundation.NSNumber) {
-	x.inner.SetDataVersion(dataVersion)
+func (x *MTRWriteParams) SetDataVersion(dataVersion obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataVersion:"), objref.IDOf(dataVersion))
 }
 
 // MTRWriteParamsable is the interface implemented by [MTRWriteParams], for mocking and DI.
 type MTRWriteParamsable interface {
-	Unwrap() *raw.MTRWriteParams
-	WithTimedWriteTimeout(timedWriteTimeout *foundation.NSNumber) *MTRWriteParams
-	WithDataVersion(dataVersion *foundation.NSNumber) *MTRWriteParams
-	TimedWriteTimeout() *foundation.NSNumber
-	SetTimedWriteTimeout(timedWriteTimeout *foundation.NSNumber)
-	DataVersion() *foundation.NSNumber
-	SetDataVersion(dataVersion *foundation.NSNumber)
+	obj.Object
+	WithTimedWriteTimeout(timedWriteTimeout obj.Object) *MTRWriteParams
+	WithDataVersion(dataVersion obj.Object) *MTRWriteParams
+	TimedWriteTimeout() obj.Object
+	SetTimedWriteTimeout(timedWriteTimeout obj.Object)
+	DataVersion() obj.Object
+	SetDataVersion(dataVersion obj.Object)
 }
 
 var _ MTRWriteParamsable = (*MTRWriteParams)(nil)

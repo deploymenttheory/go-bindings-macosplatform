@@ -5,30 +5,11 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
-	"unsafe"
+	"github.com/ebitengine/purego/objc"
 )
 
-// New calls the underlying PHASEContainerNodeDefinitionNew.
+// Creates a container node.
 func New() *ContainerNodeDefinition {
-	_r := raw.PHASEContainerNodeDefinitionNew()
-	if _r == nil {
-		return nil
-	}
-	return &ContainerNodeDefinition{inner: _r}
-}
-
-// Right calls the underlying PHASEObjectRight.
-func Right() unsafe.Pointer {
-	return raw.PHASEObjectRight()
-}
-
-// Up calls the underlying PHASEObjectUp.
-func Up() unsafe.Pointer {
-	return raw.PHASEObjectUp()
-}
-
-// Forward calls the underlying PHASEObjectForward.
-func Forward() unsafe.Pointer {
-	return raw.PHASEObjectForward()
+	_r := objc.Send[objc.ID](objc.ID(_class("PHASEContainerNodeDefinition")), objc.RegisterName("new"))
+	return ContainerNodeDefinitionFromID(_r)
 }

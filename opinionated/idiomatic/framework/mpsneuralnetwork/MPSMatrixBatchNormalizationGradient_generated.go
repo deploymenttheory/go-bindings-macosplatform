@@ -5,169 +5,161 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MatrixBatchNormalizationGradient wraps [raw.MPSMatrixBatchNormalizationGradient] with a fluent Go API.
+// MatrixBatchNormalizationGradient is an idiomatic wrapper over the Objective-C class MPSMatrixBatchNormalizationGradient.
 type MatrixBatchNormalizationGradient struct {
-	inner *raw.MPSMatrixBatchNormalizationGradient
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSMatrixBatchNormalizationGradient].
-func (x *MatrixBatchNormalizationGradient) Unwrap() *raw.MPSMatrixBatchNormalizationGradient {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatrixBatchNormalizationGradient) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixBatchNormalizationGradientFromID adopts an existing object pointer as a MatrixBatchNormalizationGradient (nil for 0).
+// MatrixBatchNormalizationGradientFromID adopts an existing Objective-C object as a MatrixBatchNormalizationGradient
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixBatchNormalizationGradientFromID(id objc.ID) *MatrixBatchNormalizationGradient {
 	if id == 0 {
 		return nil
 	}
-	return &MatrixBatchNormalizationGradient{inner: raw.MPSMatrixBatchNormalizationGradientFromID(id)}
-}
-
-// NewMatrixBatchNormalizationGradientWithDevice creates a new [MatrixBatchNormalizationGradient].
-func NewMatrixBatchNormalizationGradientWithDevice(device metal.MTLDevice) *MatrixBatchNormalizationGradient {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixBatchNormalizationGradient")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &MatrixBatchNormalizationGradient{inner: raw.MPSMatrixBatchNormalizationGradientFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixBatchNormalizationGradient @param      device      The MTLDevice on which to make the MPSMatrixBatchNormalizationGradient object. @return     A new MPSMatrixBatchNormalizationGradient object, or nil if failure.
-//
-// NewMatrixBatchNormalizationGradientWithCoderDevice creates a new [MatrixBatchNormalizationGradient].
-func NewMatrixBatchNormalizationGradientWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MatrixBatchNormalizationGradient {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixBatchNormalizationGradient")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &MatrixBatchNormalizationGradient{inner: raw.MPSMatrixBatchNormalizationGradientFromID(_id)}
-}
-
-// @property   sourceNumberOfFeatureVectors @discussion The number of input vectors which make up the input array.
-//
-// WithSourceNumberOfFeatureVectors sets the sourceNumberOfFeatureVectors property and returns the receiver for chaining.
-func (x *MatrixBatchNormalizationGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixBatchNormalizationGradient {
-	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
+	x := &MatrixBatchNormalizationGradient{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   sourceInputFeatureChannels @discussion The number of feature channels in the input vectors.
-//
-// WithSourceInputFeatureChannels sets the sourceInputFeatureChannels property and returns the receiver for chaining.
-func (x *MatrixBatchNormalizationGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixBatchNormalizationGradient {
-	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
+// matrixBatchNormalizationGradientAdopt wraps an Objective-C object that this code just created as a
+// MatrixBatchNormalizationGradient (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixBatchNormalizationGradientAdopt(id objc.ID) *MatrixBatchNormalizationGradient {
+	if id == 0 {
+		return nil
+	}
+	x := &MatrixBatchNormalizationGradient{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @property   epsilon @discussion A small term added to the variance when normalizing the input.
+// Description returns the object's -description text.
+func (x *MatrixBatchNormalizationGradient) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatrixBatchNormalizationGradient) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatrixBatchNormalizationGradient) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMatrixBatchNormalizationGradient creates a new MatrixBatchNormalizationGradient.
+func NewMatrixBatchNormalizationGradient() *MatrixBatchNormalizationGradient {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixBatchNormalizationGradient")), objc.RegisterName("new"))
+	return matrixBatchNormalizationGradientAdopt(_id)
+}
+
+// The number of input vectors which make up the input array.
 //
-// WithEpsilon sets the epsilon property and returns the receiver for chaining.
+// WithSourceNumberOfFeatureVectors sets sourceNumberOfFeatureVectors and returns the receiver so calls can be chained.
+func (x *MatrixBatchNormalizationGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixBatchNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
+	return x
+}
+
+// The number of feature channels in the input vectors.
+//
+// WithSourceInputFeatureChannels sets sourceInputFeatureChannels and returns the receiver so calls can be chained.
+func (x *MatrixBatchNormalizationGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixBatchNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
+	return x
+}
+
+// A small term added to the variance when normalizing the input.
+//
+// WithEpsilon sets epsilon and returns the receiver so calls can be chained.
 func (x *MatrixBatchNormalizationGradient) WithEpsilon(epsilon float32) *MatrixBatchNormalizationGradient {
-	x.inner.SetEpsilon(epsilon)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
 	return x
 }
 
-// @abstract   Specifies a neuron activation function to be used. @discussion This method can be used to add a neuron activation funtion of given type with associated scalar parameters A, B, and C that are shared across all output values. Note that this method can only be used to specify neurons which are specified by three (or fewer) parameters shared across all output values (or channels, in CNN nomenclature). It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. An MPSMatrixBatchNormalizationGradient kernel is initialized with a default neuron function of MPSCNNNeuronTypeNone. @param      neuronType      Type of neuron activation function. For full list see MPSCNNNeuronType.h @param      parameterA      parameterA of neuron activation that is shared across all output values. @param      parameterB      parameterB of neuron activation that is shared across all output values. @param      parameterC      parameterC of neuron activation that is shared across all output values.
-//
-// SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
-func (x *MatrixBatchNormalizationGradient) SetNeuronTypeParameterAParameterBParameterC(neuronType MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
-	x.inner.SetNeuronTypeParameterAParameterBParameterC(raw.MPSCNNNeuronType(neuronType), parameterA, parameterB, parameterC)
+// Specifies a neuron activation function to be used. This method can be used to add a neuron activation funtion of given type with associated scalar parameters A, B, and C that are shared across all output values. Note that this method can only be used to specify neurons which are specified by three (or fewer) parameters shared across all output values (or channels, in CNN nomenclature). It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. An MPSMatrixBatchNormalizationGradient kernel is initialized with a default neuron function of MPSCNNNeuronTypeNone.
+func (x *MatrixBatchNormalizationGradient) SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeuronType:parameterA:parameterB:parameterC:"), neuronType, parameterA, parameterB, parameterC)
 }
 
-// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-//
-// NeuronType calls the underlying NeuronType.
-func (x *MatrixBatchNormalizationGradient) NeuronType() MPSCNNNeuronType {
-	return MPSCNNNeuronType(x.inner.NeuronType())
+// Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
+func (x *MatrixBatchNormalizationGradient) NeuronType() CNNNeuronType {
+	_r := objc.Send[CNNNeuronType](objref.IDOf(x), objc.RegisterName("neuronType"))
+	return _r
 }
 
-// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-//
-// NeuronParameterA calls the underlying NeuronParameterA.
+// Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (x *MatrixBatchNormalizationGradient) NeuronParameterA() float32 {
-	return x.inner.NeuronParameterA()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterA"))
+	return _r
 }
 
-// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-//
-// NeuronParameterB calls the underlying NeuronParameterB.
+// Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (x *MatrixBatchNormalizationGradient) NeuronParameterB() float32 {
-	return x.inner.NeuronParameterB()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterB"))
+	return _r
 }
 
-// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-//
-// NeuronParameterC calls the underlying NeuronParameterC.
+// Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (x *MatrixBatchNormalizationGradient) NeuronParameterC() float32 {
-	return x.inner.NeuronParameterC()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterC"))
+	return _r
 }
 
-// @abstract   Encode a MPSMatrixBatchNormalizationGradient object to a command buffer and compute its gradient with respect to its input data. @param      commandBuffer                   The commandBuffer on which to encode the operation. @param      gradientMatrix                  A matrix whose values represent the gradient of a loss function with respect to the results of a forward MPSMatrixBatchNormalization operation. @param      inputMatrix                     A matrix containing the inputs to a forward MPSMatrixBatchNormalization operation for which the gradient values are to be computed. @param      meanVector                      A vector containing the batch mean values.  Should contain either the specified values used to compute the forward result, or the computed values resulting from the forward kernel execution. @param      varianceVector                  A vector containing the batch variance values.  Should contain either the specified values used to compute the forward result, or the computed values resulting from the forward kernel execution. @param      gammaVector                     A vector containing the gamma terms.  Should be the same values as used when computing the forward result. @param      betaVector                      A vector containing the beta terms.  Should be the same values as used when computing the forward result. @param      resultGradientForDataMatrix     The matrix containing the resulting gradient values. @param      resultGradientForGammaVector    If non-NULL the vector containing gradients for the gamma terms. @param      resultGradientForBetaVector     If non-NULL the vector containing gradients for the beta terms.
-//
-// EncodeToCommandBufferGradientMatrixInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultGradientForDataMatrixResultGradientForGammaVectorResultGradientForBetaVector calls the underlying EncodeToCommandBufferGradientMatrixInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultGradientForDataMatrixResultGradientForGammaVectorResultGradientForBetaVector.
-func (x *MatrixBatchNormalizationGradient) EncodeToCommandBufferGradientMatrixInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultGradientForDataMatrixResultGradientForGammaVectorResultGradientForBetaVector(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, inputMatrix *mpscore.MPSMatrix, meanVector *mpscore.MPSVector, varianceVector *mpscore.MPSVector, gammaVector *mpscore.MPSVector, betaVector *mpscore.MPSVector, resultGradientForDataMatrix *mpscore.MPSMatrix, resultGradientForGammaVector *mpscore.MPSVector, resultGradientForBetaVector *mpscore.MPSVector) {
-	x.inner.EncodeToCommandBufferGradientMatrixInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultGradientForDataMatrixResultGradientForGammaVectorResultGradientForBetaVector(commandBuffer, gradientMatrix, inputMatrix, meanVector, varianceVector, gammaVector, betaVector, resultGradientForDataMatrix, resultGradientForGammaVector, resultGradientForBetaVector)
+// The number of input vectors which make up the input array.
+func (x *MatrixBatchNormalizationGradient) SourceNumberOfFeatureVectors() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceNumberOfFeatureVectors"))
+	return _r
 }
 
-// @property   sourceNumberOfFeatureVectors @discussion The number of input vectors which make up the input array.
-//
-// SourceNumberOfFeatureVectors calls the underlying SourceNumberOfFeatureVectors.
-func (x *MatrixBatchNormalizationGradient) SourceNumberOfFeatureVectors() uint {
-	return x.inner.SourceNumberOfFeatureVectors()
+func (x *MatrixBatchNormalizationGradient) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
 }
 
-// SetSourceNumberOfFeatureVectors calls the underlying SetSourceNumberOfFeatureVectors.
-func (x *MatrixBatchNormalizationGradient) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) {
-	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
+// The number of feature channels in the input vectors.
+func (x *MatrixBatchNormalizationGradient) SourceInputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceInputFeatureChannels"))
+	return _r
 }
 
-// @property   sourceInputFeatureChannels @discussion The number of feature channels in the input vectors.
-//
-// SourceInputFeatureChannels calls the underlying SourceInputFeatureChannels.
-func (x *MatrixBatchNormalizationGradient) SourceInputFeatureChannels() uint {
-	return x.inner.SourceInputFeatureChannels()
+func (x *MatrixBatchNormalizationGradient) SetSourceInputFeatureChannels(sourceInputFeatureChannels int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
 }
 
-// SetSourceInputFeatureChannels calls the underlying SetSourceInputFeatureChannels.
-func (x *MatrixBatchNormalizationGradient) SetSourceInputFeatureChannels(sourceInputFeatureChannels uint) {
-	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
-}
-
-// @property   epsilon @discussion A small term added to the variance when normalizing the input.
-//
-// Epsilon calls the underlying Epsilon.
+// A small term added to the variance when normalizing the input.
 func (x *MatrixBatchNormalizationGradient) Epsilon() float32 {
-	return x.inner.Epsilon()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+	return _r
 }
 
-// SetEpsilon calls the underlying SetEpsilon.
 func (x *MatrixBatchNormalizationGradient) SetEpsilon(epsilon float32) {
-	x.inner.SetEpsilon(epsilon)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEpsilon:"), epsilon)
 }
 
 // MatrixBatchNormalizationGradientable is the interface implemented by [MatrixBatchNormalizationGradient], for mocking and DI.
 type MatrixBatchNormalizationGradientable interface {
-	Unwrap() *raw.MPSMatrixBatchNormalizationGradient
-	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixBatchNormalizationGradient
-	WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixBatchNormalizationGradient
+	obj.Object
+	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixBatchNormalizationGradient
+	WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixBatchNormalizationGradient
 	WithEpsilon(epsilon float32) *MatrixBatchNormalizationGradient
-	SetNeuronTypeParameterAParameterBParameterC(neuronType MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
-	NeuronType() MPSCNNNeuronType
+	SetNeuronTypeParameterAParameterBParameterC(neuronType CNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
+	NeuronType() CNNNeuronType
 	NeuronParameterA() float32
 	NeuronParameterB() float32
 	NeuronParameterC() float32
-	EncodeToCommandBufferGradientMatrixInputMatrixMeanVectorVarianceVectorGammaVectorBetaVectorResultGradientForDataMatrixResultGradientForGammaVectorResultGradientForBetaVector(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, inputMatrix *mpscore.MPSMatrix, meanVector *mpscore.MPSVector, varianceVector *mpscore.MPSVector, gammaVector *mpscore.MPSVector, betaVector *mpscore.MPSVector, resultGradientForDataMatrix *mpscore.MPSMatrix, resultGradientForGammaVector *mpscore.MPSVector, resultGradientForBetaVector *mpscore.MPSVector)
-	SourceNumberOfFeatureVectors() uint
-	SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint)
-	SourceInputFeatureChannels() uint
-	SetSourceInputFeatureChannels(sourceInputFeatureChannels uint)
+	SourceNumberOfFeatureVectors() int
+	SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int)
+	SourceInputFeatureChannels() int
+	SetSourceInputFeatureChannels(sourceInputFeatureChannels int)
 	Epsilon() float32
 	SetEpsilon(epsilon float32)
 }

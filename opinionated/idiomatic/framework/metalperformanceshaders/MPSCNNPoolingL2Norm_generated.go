@@ -5,158 +5,103 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An L2-norm pooling filter.
 //
-// CNNPoolingL2Norm wraps [raw.MPSCNNPoolingL2Norm] with a fluent Go API.
+// CNNPoolingL2Norm is an idiomatic wrapper over the Objective-C class MPSCNNPoolingL2Norm.
 type CNNPoolingL2Norm struct {
-	inner *raw.MPSCNNPoolingL2Norm
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNPoolingL2Norm].
-func (x *CNNPoolingL2Norm) Unwrap() *raw.MPSCNNPoolingL2Norm { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNPoolingL2Norm) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNPoolingL2NormFromID adopts an existing object pointer as a CNNPoolingL2Norm (nil for 0).
+// CNNPoolingL2NormFromID adopts an existing Objective-C object as a CNNPoolingL2Norm
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNPoolingL2NormFromID(id objc.ID) *CNNPoolingL2Norm {
 	if id == 0 {
 		return nil
 	}
-	return &CNNPoolingL2Norm{inner: raw.MPSCNNPoolingL2NormFromID(id)}
-}
-
-// Initializes an L2-norm pooling filter.
-//
-// NewCNNPoolingL2NormWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY creates a new [CNNPoolingL2Norm].
-func NewCNNPoolingL2NormWithDeviceKernelWidthKernelHeightStrideInPixelsXStrideInPixelsY(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, strideInPixelsX uint, strideInPixelsY uint) *CNNPoolingL2Norm {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNPoolingL2Norm")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:"), device, kernelWidth, kernelHeight, strideInPixelsX, strideInPixelsY)
-	return &CNNPoolingL2Norm{inner: raw.MPSCNNPoolingL2NormFromID(_id)}
-}
-
-// Initializes an L2-norm pooling filter.
-//
-// NewCNNPoolingL2NormWithCoderDevice creates a new [CNNPoolingL2Norm].
-func NewCNNPoolingL2NormWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *CNNPoolingL2Norm {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNPoolingL2Norm")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &CNNPoolingL2Norm{inner: raw.MPSCNNPoolingL2NormFromID(_id)}
-}
-
-// The position of the destination image’s clip rectangle origin, relative to the source image.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *CNNPoolingL2Norm) WithOffset(offset mpscore.MPSOffset) *CNNPoolingL2Norm {
-	x.inner.MPSCNNPooling.MPSCNNKernel.SetOffset(offset)
+	x := &CNNPoolingL2Norm{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *CNNPoolingL2Norm) WithClipRect(clipRect metal.MTLRegion) *CNNPoolingL2Norm {
-	x.inner.MPSCNNPooling.MPSCNNKernel.SetClipRect(clipRect)
+// cNNPoolingL2NormAdopt wraps an Objective-C object that this code just created as a
+// CNNPoolingL2Norm (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNPoolingL2NormAdopt(id objc.ID) *CNNPoolingL2Norm {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNPoolingL2Norm{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
+}
+
+// Description returns the object's -description text.
+func (x *CNNPoolingL2Norm) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNPoolingL2Norm) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNPoolingL2Norm) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNPoolingL2Norm creates a new CNNPoolingL2Norm.
+func NewCNNPoolingL2Norm() *CNNPoolingL2Norm {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNPoolingL2Norm")), objc.RegisterName("new"))
+	return cNNPoolingL2NormAdopt(_id)
 }
 
 // The number of channels in the destination image to skip before writing output data.
 //
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNPoolingL2Norm) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNPoolingL2Norm {
-	x.inner.MPSCNNPooling.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *CNNPoolingL2Norm) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNPoolingL2Norm {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+// The number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
 //
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNPoolingL2Norm) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNPoolingL2Norm {
-	x.inner.MPSCNNPooling.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset sets sourceFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *CNNPoolingL2Norm) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNPoolingL2Norm {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+// The maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 //
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *CNNPoolingL2Norm) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNPoolingL2Norm {
-	x.inner.MPSCNNPooling.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
-	return x
-}
-
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *CNNPoolingL2Norm) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNPoolingL2Norm {
-	x.inner.MPSCNNPooling.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *CNNPoolingL2Norm) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNPoolingL2Norm {
-	x.inner.MPSCNNPooling.MPSCNNKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *CNNPoolingL2Norm) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNPoolingL2Norm {
-	x.inner.MPSCNNPooling.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *CNNPoolingL2Norm) WithOptions(options mpscore.MPSKernelOptions) *CNNPoolingL2Norm {
-	x.inner.MPSCNNPooling.MPSCNNKernel.MPSKernel.SetOptions(options)
+// WithSourceFeatureChannelMaxCount sets sourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+func (x *CNNPoolingL2Norm) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNPoolingL2Norm {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *CNNPoolingL2Norm) WithLabel(label string) *CNNPoolingL2Norm {
-	x.inner.MPSCNNPooling.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *CNNPoolingL2Norm) asCNNPooling() *mpsneuralnetwork.MPSCNNPooling {
-	return &x.inner.MPSCNNPooling
-}
-
-func (x *CNNPoolingL2Norm) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
-	return &x.inner.MPSCNNPooling.MPSCNNKernel
-}
-
-func (x *CNNPoolingL2Norm) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSCNNPooling.MPSCNNKernel.MPSKernel
 }
 
 // CNNPoolingL2Normable is the interface implemented by [CNNPoolingL2Norm], for mocking and DI.
 type CNNPoolingL2Normable interface {
-	Unwrap() *raw.MPSCNNPoolingL2Norm
-	WithOffset(offset mpscore.MPSOffset) *CNNPoolingL2Norm
-	WithClipRect(clipRect metal.MTLRegion) *CNNPoolingL2Norm
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNPoolingL2Norm
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNPoolingL2Norm
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNPoolingL2Norm
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNPoolingL2Norm
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNPoolingL2Norm
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNPoolingL2Norm
-	WithOptions(options mpscore.MPSKernelOptions) *CNNPoolingL2Norm
+	obj.Object
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNPoolingL2Norm
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNPoolingL2Norm
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNPoolingL2Norm
 	WithLabel(label string) *CNNPoolingL2Norm
 }
 

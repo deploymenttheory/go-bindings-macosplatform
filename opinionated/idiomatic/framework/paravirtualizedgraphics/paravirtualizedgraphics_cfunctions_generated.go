@@ -5,27 +5,30 @@
 package paravirtualizedgraphics
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/paravirtualizedgraphics"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// PGCopyOptionROMURL calls [raw.PGCopyOptionROMURL] (C function PGCopyOptionROMURL).
-func PGCopyOptionROMURL() *foundation.NSURL {
-	return raw.PGCopyOptionROMURL()
+var _fnPGCopyOptionROMURL func() objc.ID
+
+// PGCopyOptionROMURL calls the ParavirtualizedGraphics framework function PGCopyOptionROMURL.
+func PGCopyOptionROMURL() obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnPGCopyOptionROMURL == nil {
+		ebipurego.RegisterLibFunc(&_fnPGCopyOptionROMURL, _lib, "PGCopyOptionROMURL")
+	}
+	_ret := _fnPGCopyOptionROMURL()
+	return obj.Wrap(_ret)
 }
 
-// PGCreateDeviceWithDescriptor calls [raw.PGCreateDeviceWithDescriptor] (C function PGCreateDeviceWithDescriptor).
-func PGCreateDeviceWithDescriptor(descriptor *raw.PGDeviceDescriptor) unsafe.Pointer {
-	return raw.PGCreateDeviceWithDescriptor(descriptor)
-}
+var _fnPGMaxDisplayPortCount func() uint32
 
-// PGMaxDisplayPortCount calls [raw.PGMaxDisplayPortCount] (C function PGMaxDisplayPortCount).
+// PGMaxDisplayPortCount calls the ParavirtualizedGraphics framework function PGMaxDisplayPortCount.
 func PGMaxDisplayPortCount() uint32 {
-	return raw.PGMaxDisplayPortCount()
-}
-
-// PGNewDeviceWithDescriptor calls [raw.PGNewDeviceWithDescriptor] (C function PGNewDeviceWithDescriptor).
-func PGNewDeviceWithDescriptor(descriptor *raw.PGDeviceDescriptor) raw.PGDevice {
-	return raw.PGNewDeviceWithDescriptor(descriptor)
+	_loadOnce.Do(_loadLibrary)
+	if _fnPGMaxDisplayPortCount == nil {
+		ebipurego.RegisterLibFunc(&_fnPGMaxDisplayPortCount, _lib, "PGMaxDisplayPortCount")
+	}
+	return _fnPGMaxDisplayPortCount()
 }

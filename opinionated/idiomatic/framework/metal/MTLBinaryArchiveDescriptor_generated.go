@@ -5,62 +5,87 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description of a binary shader archive that you want to create.
 //
-// BinaryArchiveDescriptor wraps [raw.MTLBinaryArchiveDescriptor] with a fluent Go API.
+// BinaryArchiveDescriptor is an idiomatic wrapper over the Objective-C class MTLBinaryArchiveDescriptor.
 type BinaryArchiveDescriptor struct {
-	inner *raw.MTLBinaryArchiveDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLBinaryArchiveDescriptor].
-func (x *BinaryArchiveDescriptor) Unwrap() *raw.MTLBinaryArchiveDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BinaryArchiveDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// BinaryArchiveDescriptorFromID adopts an existing object pointer as a BinaryArchiveDescriptor (nil for 0).
+// BinaryArchiveDescriptorFromID adopts an existing Objective-C object as a BinaryArchiveDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func BinaryArchiveDescriptorFromID(id objc.ID) *BinaryArchiveDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &BinaryArchiveDescriptor{inner: raw.MTLBinaryArchiveDescriptorFromID(id)}
+	x := &BinaryArchiveDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBinaryArchiveDescriptor creates a new [BinaryArchiveDescriptor].
+// binaryArchiveDescriptorAdopt wraps an Objective-C object that this code just created as a
+// BinaryArchiveDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func binaryArchiveDescriptorAdopt(id objc.ID) *BinaryArchiveDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &BinaryArchiveDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BinaryArchiveDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BinaryArchiveDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BinaryArchiveDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBinaryArchiveDescriptor creates a new BinaryArchiveDescriptor.
 func NewBinaryArchiveDescriptor() *BinaryArchiveDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLBinaryArchiveDescriptor")), objc.RegisterName("new"))
-	return &BinaryArchiveDescriptor{inner: raw.MTLBinaryArchiveDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLBinaryArchiveDescriptor")), objc.RegisterName("new"))
+	return binaryArchiveDescriptorAdopt(_id)
 }
 
 // A URL to a Metal binary archive file.
 //
-// WithUrl sets the url property and returns the receiver for chaining.
+// WithUrl sets url and returns the receiver so calls can be chained.
 func (x *BinaryArchiveDescriptor) WithUrl(url string) *BinaryArchiveDescriptor {
-	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
 	return x
 }
 
-// Url calls the underlying Url.
-func (x *BinaryArchiveDescriptor) Url() *foundation.NSURL {
-	return x.inner.Url()
+func (x *BinaryArchiveDescriptor) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
 }
 
-// SetUrl calls the underlying SetUrl.
 func (x *BinaryArchiveDescriptor) SetUrl(url string) {
-	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
 }
 
 // BinaryArchiveDescriptorable is the interface implemented by [BinaryArchiveDescriptor], for mocking and DI.
 type BinaryArchiveDescriptorable interface {
-	Unwrap() *raw.MTLBinaryArchiveDescriptor
+	obj.Object
 	WithUrl(url string) *BinaryArchiveDescriptor
-	Url() *foundation.NSURL
+	Url() obj.Object
 	SetUrl(url string)
 }
 

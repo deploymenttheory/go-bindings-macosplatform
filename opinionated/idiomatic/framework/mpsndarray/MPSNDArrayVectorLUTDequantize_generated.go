@@ -5,84 +5,87 @@
 package mpsndarray
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ArrayVectorLUTDequantize wraps [raw.MPSNDArrayVectorLUTDequantize] with a fluent Go API.
+// ArrayVectorLUTDequantize is an idiomatic wrapper over the Objective-C class MPSNDArrayVectorLUTDequantize.
 type ArrayVectorLUTDequantize struct {
-	inner *raw.MPSNDArrayVectorLUTDequantize
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayVectorLUTDequantize].
-func (x *ArrayVectorLUTDequantize) Unwrap() *raw.MPSNDArrayVectorLUTDequantize { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArrayVectorLUTDequantize) ID() objc.ID { return x.inner.Ptr() }
-
-// ArrayVectorLUTDequantizeFromID adopts an existing object pointer as a ArrayVectorLUTDequantize (nil for 0).
+// ArrayVectorLUTDequantizeFromID adopts an existing Objective-C object as a ArrayVectorLUTDequantize
+// (nil for 0), retaining it and registering a release finalizer.
 func ArrayVectorLUTDequantizeFromID(id objc.ID) *ArrayVectorLUTDequantize {
 	if id == 0 {
 		return nil
 	}
-	return &ArrayVectorLUTDequantize{inner: raw.MPSNDArrayVectorLUTDequantizeFromID(id)}
-}
-
-// @abstract   Initializes a kernel for vector-based LUT dequantization. @param      device    The Metal device to be used with this kernel. @param      axis        The vector axis in the output. @result     A new vector LUT dequantization kernel.
-//
-// NewArrayVectorLUTDequantizeWithDeviceAxis creates a new [ArrayVectorLUTDequantize].
-func NewArrayVectorLUTDequantizeWithDeviceAxis(device metal.MTLDevice, axis uint) *ArrayVectorLUTDequantize {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayVectorLUTDequantize")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:axis:"), device, axis)
-	return &ArrayVectorLUTDequantize{inner: raw.MPSNDArrayVectorLUTDequantizeFromID(_id)}
-}
-
-// @property  vectorAxis @abstract  Which axis in the destination will receive the vector component, must be less than 4.
-//
-// WithVectorAxis sets the vectorAxis property and returns the receiver for chaining.
-func (x *ArrayVectorLUTDequantize) WithVectorAxis(vectorAxis uint) *ArrayVectorLUTDequantize {
-	x.inner.SetVectorAxis(vectorAxis)
+	x := &ArrayVectorLUTDequantize{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *ArrayVectorLUTDequantize) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayVectorLUTDequantize {
-	x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+// arrayVectorLUTDequantizeAdopt wraps an Objective-C object that this code just created as a
+// ArrayVectorLUTDequantize (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arrayVectorLUTDequantizeAdopt(id objc.ID) *ArrayVectorLUTDequantize {
+	if id == 0 {
+		return nil
+	}
+	x := &ArrayVectorLUTDequantize{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @property  vectorAxis @abstract  Which axis in the destination will receive the vector component, must be less than 4.
+// Description returns the object's -description text.
+func (x *ArrayVectorLUTDequantize) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ArrayVectorLUTDequantize) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ArrayVectorLUTDequantize) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewArrayVectorLUTDequantize creates a new ArrayVectorLUTDequantize.
+func NewArrayVectorLUTDequantize() *ArrayVectorLUTDequantize {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayVectorLUTDequantize")), objc.RegisterName("new"))
+	return arrayVectorLUTDequantizeAdopt(_id)
+}
+
+// Which axis in the destination will receive the vector component, must be less than 4.
 //
-// VectorAxis calls the underlying VectorAxis.
-func (x *ArrayVectorLUTDequantize) VectorAxis() uint {
-	return x.inner.VectorAxis()
+// WithVectorAxis sets vectorAxis and returns the receiver so calls can be chained.
+func (x *ArrayVectorLUTDequantize) WithVectorAxis(vectorAxis int) *ArrayVectorLUTDequantize {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVectorAxis:"), vectorAxis)
+	return x
 }
 
-// SetVectorAxis calls the underlying SetVectorAxis.
-func (x *ArrayVectorLUTDequantize) SetVectorAxis(vectorAxis uint) {
-	x.inner.SetVectorAxis(vectorAxis)
+// Which axis in the destination will receive the vector component, must be less than 4.
+func (x *ArrayVectorLUTDequantize) VectorAxis() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectorAxis"))
+	return _r
 }
 
-func (x *ArrayVectorLUTDequantize) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel {
-	return &x.inner.MPSNDArrayMultiaryKernel
-}
-
-func (x *ArrayVectorLUTDequantize) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
+func (x *ArrayVectorLUTDequantize) SetVectorAxis(vectorAxis int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVectorAxis:"), vectorAxis)
 }
 
 // ArrayVectorLUTDequantizeable is the interface implemented by [ArrayVectorLUTDequantize], for mocking and DI.
 type ArrayVectorLUTDequantizeable interface {
-	Unwrap() *raw.MPSNDArrayVectorLUTDequantize
-	WithVectorAxis(vectorAxis uint) *ArrayVectorLUTDequantize
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayVectorLUTDequantize
-	VectorAxis() uint
-	SetVectorAxis(vectorAxis uint)
+	obj.Object
+	WithVectorAxis(vectorAxis int) *ArrayVectorLUTDequantize
+	VectorAxis() int
+	SetVectorAxis(vectorAxis int)
 }
 
 var _ ArrayVectorLUTDequantizeable = (*ArrayVectorLUTDequantize)(nil)

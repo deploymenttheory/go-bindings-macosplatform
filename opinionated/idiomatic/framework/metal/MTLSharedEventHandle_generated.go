@@ -5,51 +5,76 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An instance you use to recreate a shareable event.
 //
-// SharedEventHandle wraps [raw.MTLSharedEventHandle] with a fluent Go API.
+// SharedEventHandle is an idiomatic wrapper over the Objective-C class MTLSharedEventHandle.
 type SharedEventHandle struct {
-	inner *raw.MTLSharedEventHandle
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLSharedEventHandle].
-func (x *SharedEventHandle) Unwrap() *raw.MTLSharedEventHandle { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SharedEventHandle) ID() objc.ID { return x.inner.Ptr() }
-
-// SharedEventHandleFromID adopts an existing object pointer as a SharedEventHandle (nil for 0).
+// SharedEventHandleFromID adopts an existing Objective-C object as a SharedEventHandle
+// (nil for 0), retaining it and registering a release finalizer.
 func SharedEventHandleFromID(id objc.ID) *SharedEventHandle {
 	if id == 0 {
 		return nil
 	}
-	return &SharedEventHandle{inner: raw.MTLSharedEventHandleFromID(id)}
+	x := &SharedEventHandle{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSharedEventHandle creates a new [SharedEventHandle].
+// sharedEventHandleAdopt wraps an Objective-C object that this code just created as a
+// SharedEventHandle (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sharedEventHandleAdopt(id objc.ID) *SharedEventHandle {
+	if id == 0 {
+		return nil
+	}
+	x := &SharedEventHandle{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SharedEventHandle) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SharedEventHandle) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SharedEventHandle) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSharedEventHandle creates a new SharedEventHandle.
 func NewSharedEventHandle() *SharedEventHandle {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLSharedEventHandle")), objc.RegisterName("new"))
-	return &SharedEventHandle{inner: raw.MTLSharedEventHandleFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLSharedEventHandle")), objc.RegisterName("new"))
+	return sharedEventHandleAdopt(_id)
 }
 
-// Label calls the underlying Label.
 func (x *SharedEventHandle) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // SharedEventHandleable is the interface implemented by [SharedEventHandle], for mocking and DI.
 type SharedEventHandleable interface {
-	Unwrap() *raw.MTLSharedEventHandle
+	obj.Object
 	Label() string
 }
 

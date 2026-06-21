@@ -5,73 +5,89 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Configuration to define the identity document.
 //
-// AddIdentityDocumentConfiguration wraps [raw.PKAddIdentityDocumentConfiguration] with a fluent Go API.
+// AddIdentityDocumentConfiguration is an idiomatic wrapper over the Objective-C class PKAddIdentityDocumentConfiguration.
 type AddIdentityDocumentConfiguration struct {
-	inner *raw.PKAddIdentityDocumentConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKAddIdentityDocumentConfiguration].
-func (x *AddIdentityDocumentConfiguration) Unwrap() *raw.PKAddIdentityDocumentConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AddIdentityDocumentConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// AddIdentityDocumentConfigurationFromID adopts an existing object pointer as a AddIdentityDocumentConfiguration (nil for 0).
+// AddIdentityDocumentConfigurationFromID adopts an existing Objective-C object as a AddIdentityDocumentConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func AddIdentityDocumentConfigurationFromID(id objc.ID) *AddIdentityDocumentConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &AddIdentityDocumentConfiguration{inner: raw.PKAddIdentityDocumentConfigurationFromID(id)}
+	x := &AddIdentityDocumentConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAddIdentityDocumentConfiguration creates a new [AddIdentityDocumentConfiguration].
+// addIdentityDocumentConfigurationAdopt wraps an Objective-C object that this code just created as a
+// AddIdentityDocumentConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func addIdentityDocumentConfigurationAdopt(id objc.ID) *AddIdentityDocumentConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &AddIdentityDocumentConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AddIdentityDocumentConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AddIdentityDocumentConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AddIdentityDocumentConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAddIdentityDocumentConfiguration creates a new AddIdentityDocumentConfiguration.
 func NewAddIdentityDocumentConfiguration() *AddIdentityDocumentConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKAddIdentityDocumentConfiguration")), objc.RegisterName("new"))
-	return &AddIdentityDocumentConfiguration{inner: raw.PKAddIdentityDocumentConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKAddIdentityDocumentConfiguration")), objc.RegisterName("new"))
+	return addIdentityDocumentConfigurationAdopt(_id)
 }
 
 // An opaque value for the configuration.
 //
-// WithIssuerIdentifier sets the issuerIdentifier property and returns the receiver for chaining.
+// WithIssuerIdentifier sets issuerIdentifier and returns the receiver so calls can be chained.
 func (x *AddIdentityDocumentConfiguration) WithIssuerIdentifier(issuerIdentifier string) *AddIdentityDocumentConfiguration {
-	x.inner.PKAddSecureElementPassConfiguration.SetIssuerIdentifier(foundation.NSStringStringWithUTF8String(issuerIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIssuerIdentifier:"), purego.NSString(issuerIdentifier))
 	return x
 }
 
 // The configuration’s localized description.
 //
-// WithLocalizedDescription sets the localizedDescription property and returns the receiver for chaining.
+// WithLocalizedDescription sets localizedDescription and returns the receiver so calls can be chained.
 func (x *AddIdentityDocumentConfiguration) WithLocalizedDescription(localizedDescription string) *AddIdentityDocumentConfiguration {
-	x.inner.PKAddSecureElementPassConfiguration.SetLocalizedDescription(foundation.NSStringStringWithUTF8String(localizedDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
 	return x
 }
 
-// Metadata calls the underlying Metadata.
 func (x *AddIdentityDocumentConfiguration) Metadata() *IdentityDocumentMetadata {
-	_r := x.inner.Metadata()
-	if _r == nil {
-		return nil
-	}
-	return &IdentityDocumentMetadata{inner: _r}
-}
-
-func (x *AddIdentityDocumentConfiguration) asAddSecureElementPassConfiguration() *raw.PKAddSecureElementPassConfiguration {
-	return &x.inner.PKAddSecureElementPassConfiguration
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+	return IdentityDocumentMetadataFromID(_r)
 }
 
 // AddIdentityDocumentConfigurationable is the interface implemented by [AddIdentityDocumentConfiguration], for mocking and DI.
 type AddIdentityDocumentConfigurationable interface {
-	Unwrap() *raw.PKAddIdentityDocumentConfiguration
+	obj.Object
 	WithIssuerIdentifier(issuerIdentifier string) *AddIdentityDocumentConfiguration
 	WithLocalizedDescription(localizedDescription string) *AddIdentityDocumentConfiguration
 	Metadata() *IdentityDocumentMetadata

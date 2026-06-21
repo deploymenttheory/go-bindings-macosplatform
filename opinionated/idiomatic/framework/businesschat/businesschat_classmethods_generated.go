@@ -5,11 +5,13 @@
 package businesschat
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/businesschat"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/ebitengine/purego/objc"
 )
 
-// OpenTranscriptIntentParameters calls the underlying BCChatActionOpenTranscriptIntentParameters.
-func OpenTranscriptIntentParameters(businessIdentifier string, intentParameters *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) {
-	raw.BCChatActionOpenTranscriptIntentParameters(foundation.NSStringStringWithUTF8String(businessIdentifier), intentParameters)
+// Open the chat transcript configured for a given business.
+func OpenTranscriptIntentParameters(businessIdentifier string, intentParameters obj.Object) {
+	objc.Send[objc.ID](objc.ID(_class("BCChatAction")), objc.RegisterName("openTranscript:intentParameters:"), purego.NSString(businessIdentifier), objref.IDOf(intentParameters))
 }

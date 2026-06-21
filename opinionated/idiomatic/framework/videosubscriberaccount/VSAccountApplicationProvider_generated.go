@@ -5,68 +5,89 @@
 package videosubscriberaccount
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videosubscriberaccount"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object to display app-specific providers in your app.
 //
-// VSAccountApplicationProvider wraps [raw.VSAccountApplicationProvider] with a fluent Go API.
+// VSAccountApplicationProvider is an idiomatic wrapper over the Objective-C class VSAccountApplicationProvider.
 type VSAccountApplicationProvider struct {
-	inner *raw.VSAccountApplicationProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VSAccountApplicationProvider].
-func (x *VSAccountApplicationProvider) Unwrap() *raw.VSAccountApplicationProvider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VSAccountApplicationProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// VSAccountApplicationProviderFromID adopts an existing object pointer as a VSAccountApplicationProvider (nil for 0).
+// VSAccountApplicationProviderFromID adopts an existing Objective-C object as a VSAccountApplicationProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func VSAccountApplicationProviderFromID(id objc.ID) *VSAccountApplicationProvider {
 	if id == 0 {
 		return nil
 	}
-	return &VSAccountApplicationProvider{inner: raw.VSAccountApplicationProviderFromID(id)}
+	x := &VSAccountApplicationProvider{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// vSAccountApplicationProviderAdopt wraps an Objective-C object that this code just created as a
+// VSAccountApplicationProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vSAccountApplicationProviderAdopt(id objc.ID) *VSAccountApplicationProvider {
+	if id == 0 {
+		return nil
+	}
+	x := &VSAccountApplicationProvider{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VSAccountApplicationProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VSAccountApplicationProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VSAccountApplicationProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns an application provider using a given display name and identifier.
 //
-// NewVSAccountApplicationProviderWithLocalizedDisplayNameIdentifier creates a new [VSAccountApplicationProvider].
+// NewVSAccountApplicationProviderWithLocalizedDisplayNameIdentifier creates a new VSAccountApplicationProvider.
 func NewVSAccountApplicationProviderWithLocalizedDisplayNameIdentifier(localizedDisplayName string, identifier string) *VSAccountApplicationProvider {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VSAccountApplicationProvider")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedDisplayName:identifier:"), foundation.NSStringStringWithUTF8String(localizedDisplayName).Ptr(), foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &VSAccountApplicationProvider{inner: raw.VSAccountApplicationProviderFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VSAccountApplicationProvider")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedDisplayName:identifier:"), purego.NSString(localizedDisplayName), purego.NSString(identifier))
+	return vSAccountApplicationProviderAdopt(_id)
 }
 
 // The display name of the provider as it will appear in the list of providers.
-//
-// LocalizedDisplayName calls the underlying LocalizedDisplayName.
 func (x *VSAccountApplicationProvider) LocalizedDisplayName() string {
-	_r := x.inner.LocalizedDisplayName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDisplayName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The identifier of the provider. If selected, this value is returned to your application.
-//
-// Identifier calls the underlying Identifier.
 func (x *VSAccountApplicationProvider) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // VSAccountApplicationProviderable is the interface implemented by [VSAccountApplicationProvider], for mocking and DI.
 type VSAccountApplicationProviderable interface {
-	Unwrap() *raw.VSAccountApplicationProvider
+	obj.Object
 	LocalizedDisplayName() string
 	Identifier() string
 }

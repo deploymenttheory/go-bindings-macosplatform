@@ -5,39 +5,66 @@
 package videosubscriberaccount
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videosubscriberaccount"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NSArray wraps [raw.NSArray] with a fluent Go API.
+// NSArray is an idiomatic wrapper over the Objective-C class NSArray.
 type NSArray struct {
-	inner *raw.NSArray[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSArray].
-func (x *NSArray) Unwrap() *raw.NSArray[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NSArray) ID() objc.ID { return x.inner.Ptr() }
-
-// NSArrayFromID adopts an existing object pointer as a NSArray (nil for 0).
+// NSArrayFromID adopts an existing Objective-C object as a NSArray
+// (nil for 0), retaining it and registering a release finalizer.
 func NSArrayFromID(id objc.ID) *NSArray {
 	if id == 0 {
 		return nil
 	}
-	return &NSArray{inner: raw.NSArrayFromID[objc.ID](id)}
+	x := &NSArray{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNSArray creates a new [NSArray].
+// nSArrayAdopt wraps an Objective-C object that this code just created as a
+// NSArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nSArrayAdopt(id objc.ID) *NSArray {
+	if id == 0 {
+		return nil
+	}
+	x := &NSArray{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NSArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NSArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NSArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNSArray creates a new NSArray.
 func NewNSArray() *NSArray {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("new"))
-	return &NSArray{inner: raw.NSArrayFromID[objc.ID](_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("new"))
+	return nSArrayAdopt(_id)
 }
 
 // NSArrayable is the interface implemented by [NSArray], for mocking and DI.
 type NSArrayable interface {
-	Unwrap() *raw.NSArray[objc.ID]
+	obj.Object
 }
 
 var _ NSArrayable = (*NSArray)(nil)

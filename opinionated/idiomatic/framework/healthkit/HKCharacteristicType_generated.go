@@ -5,43 +5,68 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A type that represents data that doesn’t typically change over time.
 //
-// CharacteristicType wraps [raw.HKCharacteristicType] with a fluent Go API.
+// CharacteristicType is an idiomatic wrapper over the Objective-C class HKCharacteristicType.
 type CharacteristicType struct {
-	inner *raw.HKCharacteristicType
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKCharacteristicType].
-func (x *CharacteristicType) Unwrap() *raw.HKCharacteristicType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CharacteristicType) ID() objc.ID { return x.inner.Ptr() }
-
-// CharacteristicTypeFromID adopts an existing object pointer as a CharacteristicType (nil for 0).
+// CharacteristicTypeFromID adopts an existing Objective-C object as a CharacteristicType
+// (nil for 0), retaining it and registering a release finalizer.
 func CharacteristicTypeFromID(id objc.ID) *CharacteristicType {
 	if id == 0 {
 		return nil
 	}
-	return &CharacteristicType{inner: raw.HKCharacteristicTypeFromID(id)}
+	x := &CharacteristicType{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCharacteristicType creates a new [CharacteristicType].
+// characteristicTypeAdopt wraps an Objective-C object that this code just created as a
+// CharacteristicType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func characteristicTypeAdopt(id objc.ID) *CharacteristicType {
+	if id == 0 {
+		return nil
+	}
+	x := &CharacteristicType{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CharacteristicType) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CharacteristicType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CharacteristicType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCharacteristicType creates a new CharacteristicType.
 func NewCharacteristicType() *CharacteristicType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKCharacteristicType")), objc.RegisterName("new"))
-	return &CharacteristicType{inner: raw.HKCharacteristicTypeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKCharacteristicType")), objc.RegisterName("new"))
+	return characteristicTypeAdopt(_id)
 }
-
-func (x *CharacteristicType) asObjectType() *raw.HKObjectType { return &x.inner.HKObjectType }
 
 // CharacteristicTypeable is the interface implemented by [CharacteristicType], for mocking and DI.
 type CharacteristicTypeable interface {
-	Unwrap() *raw.HKCharacteristicType
+	obj.Object
 }
 
 var _ CharacteristicTypeable = (*CharacteristicType)(nil)

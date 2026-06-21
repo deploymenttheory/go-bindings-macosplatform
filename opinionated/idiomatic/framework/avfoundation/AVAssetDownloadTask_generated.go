@@ -5,77 +5,91 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A session used to download HTTP Live Streaming assets.
 //
-// AssetDownloadTask wraps [raw.AVAssetDownloadTask] with a fluent Go API.
+// AssetDownloadTask is an idiomatic wrapper over the Objective-C class AVAssetDownloadTask.
 type AssetDownloadTask struct {
-	inner *raw.AVAssetDownloadTask
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetDownloadTask].
-func (x *AssetDownloadTask) Unwrap() *raw.AVAssetDownloadTask { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetDownloadTask) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetDownloadTaskFromID adopts an existing object pointer as a AssetDownloadTask (nil for 0).
+// AssetDownloadTaskFromID adopts an existing Objective-C object as a AssetDownloadTask
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetDownloadTaskFromID(id objc.ID) *AssetDownloadTask {
 	if id == 0 {
 		return nil
 	}
-	return &AssetDownloadTask{inner: raw.AVAssetDownloadTaskFromID(id)}
+	x := &AssetDownloadTask{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAssetDownloadTask creates a new [AssetDownloadTask].
+// assetDownloadTaskAdopt wraps an Objective-C object that this code just created as a
+// AssetDownloadTask (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetDownloadTaskAdopt(id objc.ID) *AssetDownloadTask {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetDownloadTask{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetDownloadTask) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetDownloadTask) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetDownloadTask) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAssetDownloadTask creates a new AssetDownloadTask.
 func NewAssetDownloadTask() *AssetDownloadTask {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetDownloadTask")), objc.RegisterName("new"))
-	return &AssetDownloadTask{inner: raw.AVAssetDownloadTaskFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetDownloadTask")), objc.RegisterName("new"))
+	return assetDownloadTaskAdopt(_id)
 }
 
 // The asset supplied to the download task upon initialization.
-//
-// URLAsset calls the underlying URLAsset.
 func (x *AssetDownloadTask) URLAsset() *URLAsset {
-	_r := x.inner.URLAsset()
-	if _r == nil {
-		return nil
-	}
-	return &URLAsset{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLAsset"))
+	return URLAssetFromID(_r)
 }
 
 // The options supplied to the download task upon initialization.
-//
-// Options calls the underlying Options.
-func (x *AssetDownloadTask) Options() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.Options()
+func (x *AssetDownloadTask) Options() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
+	return obj.Wrap(_r)
 }
 
 // This property provides a collection of time ranges for which the download task has media data already downloaded and playable. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
 //
 // LoadedTimeRanges returns the collection as a Go slice.
-func (x *AssetDownloadTask) LoadedTimeRanges() []*foundation.NSValue {
-	arr := x.inner.LoadedTimeRanges()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
-		return foundation.NSValueFromID(purego.Retain(_id))
-	})
+func (x *AssetDownloadTask) LoadedTimeRanges() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadedTimeRanges"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AssetDownloadTaskable is the interface implemented by [AssetDownloadTask], for mocking and DI.
 type AssetDownloadTaskable interface {
-	Unwrap() *raw.AVAssetDownloadTask
+	obj.Object
 	URLAsset() *URLAsset
-	Options() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	LoadedTimeRanges() []*foundation.NSValue
+	Options() obj.Object
+	LoadedTimeRanges() []obj.Object
 }
 
 var _ AssetDownloadTaskable = (*AssetDownloadTask)(nil)

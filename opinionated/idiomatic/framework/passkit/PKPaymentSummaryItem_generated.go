@@ -5,112 +5,131 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that defines a summary item in a payment request, taxes, discounts, shipping, a grand total, and the like.
 //
-// PaymentSummaryItem wraps [raw.PKPaymentSummaryItem] with a fluent Go API.
+// PaymentSummaryItem is an idiomatic wrapper over the Objective-C class PKPaymentSummaryItem.
 type PaymentSummaryItem struct {
-	inner *raw.PKPaymentSummaryItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKPaymentSummaryItem].
-func (x *PaymentSummaryItem) Unwrap() *raw.PKPaymentSummaryItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PaymentSummaryItem) ID() objc.ID { return x.inner.Ptr() }
-
-// PaymentSummaryItemFromID adopts an existing object pointer as a PaymentSummaryItem (nil for 0).
+// PaymentSummaryItemFromID adopts an existing Objective-C object as a PaymentSummaryItem
+// (nil for 0), retaining it and registering a release finalizer.
 func PaymentSummaryItemFromID(id objc.ID) *PaymentSummaryItem {
 	if id == 0 {
 		return nil
 	}
-	return &PaymentSummaryItem{inner: raw.PKPaymentSummaryItemFromID(id)}
+	x := &PaymentSummaryItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPaymentSummaryItem creates a new [PaymentSummaryItem].
+// paymentSummaryItemAdopt wraps an Objective-C object that this code just created as a
+// PaymentSummaryItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paymentSummaryItemAdopt(id objc.ID) *PaymentSummaryItem {
+	if id == 0 {
+		return nil
+	}
+	x := &PaymentSummaryItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PaymentSummaryItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PaymentSummaryItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PaymentSummaryItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPaymentSummaryItem creates a new PaymentSummaryItem.
 func NewPaymentSummaryItem() *PaymentSummaryItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentSummaryItem")), objc.RegisterName("new"))
-	return &PaymentSummaryItem{inner: raw.PKPaymentSummaryItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKPaymentSummaryItem")), objc.RegisterName("new"))
+	return paymentSummaryItemAdopt(_id)
 }
 
 // A short, localized description of the item.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *PaymentSummaryItem) WithLabel(label string) *PaymentSummaryItem {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // The summary item’s amount.
 //
-// WithAmount sets the amount property and returns the receiver for chaining.
-func (x *PaymentSummaryItem) WithAmount(amount *foundation.NSDecimalNumber) *PaymentSummaryItem {
-	x.inner.SetAmount(amount)
+// WithAmount sets amount and returns the receiver so calls can be chained.
+func (x *PaymentSummaryItem) WithAmount(amount obj.Object) *PaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return x
 }
 
 // The summary item’s type that indicates whether the amount is final.
 //
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *PaymentSummaryItem) WithType(type_ PKPaymentSummaryItemType) *PaymentSummaryItem {
-	x.inner.SetType(raw.PKPaymentSummaryItemType(type_))
+// WithType sets type_ and returns the receiver so calls can be chained.
+func (x *PaymentSummaryItem) WithType(type_ PaymentSummaryItemType) *PaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// Label calls the underlying Label.
 func (x *PaymentSummaryItem) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
 func (x *PaymentSummaryItem) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// Amount calls the underlying Amount.
-func (x *PaymentSummaryItem) Amount() *foundation.NSDecimalNumber {
-	return x.inner.Amount()
+func (x *PaymentSummaryItem) Amount() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("amount"))
+	return obj.Wrap(_r)
 }
 
-// SetAmount calls the underlying SetAmount.
-func (x *PaymentSummaryItem) SetAmount(amount *foundation.NSDecimalNumber) {
-	x.inner.SetAmount(amount)
+func (x *PaymentSummaryItem) SetAmount(amount obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 }
 
-// Type calls the underlying Type.
-func (x *PaymentSummaryItem) Type() PKPaymentSummaryItemType {
-	return PKPaymentSummaryItemType(x.inner.Type())
+func (x *PaymentSummaryItem) Type() PaymentSummaryItemType {
+	_r := objc.Send[PaymentSummaryItemType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// SetType calls the underlying SetType.
-func (x *PaymentSummaryItem) SetType(type_ PKPaymentSummaryItemType) {
-	x.inner.SetType(raw.PKPaymentSummaryItemType(type_))
+func (x *PaymentSummaryItem) SetType(type_ PaymentSummaryItemType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 }
-
-func (x *PaymentSummaryItem) asPaymentSummaryItem() *raw.PKPaymentSummaryItem { return x.inner }
 
 // PaymentSummaryItemable is the interface implemented by [PaymentSummaryItem], for mocking and DI.
 type PaymentSummaryItemable interface {
-	Unwrap() *raw.PKPaymentSummaryItem
+	obj.Object
 	WithLabel(label string) *PaymentSummaryItem
-	WithAmount(amount *foundation.NSDecimalNumber) *PaymentSummaryItem
-	WithType(type_ PKPaymentSummaryItemType) *PaymentSummaryItem
+	WithAmount(amount obj.Object) *PaymentSummaryItem
+	WithType(type_ PaymentSummaryItemType) *PaymentSummaryItem
 	Label() string
 	SetLabel(label string)
-	Amount() *foundation.NSDecimalNumber
-	SetAmount(amount *foundation.NSDecimalNumber)
-	Type() PKPaymentSummaryItemType
-	SetType(type_ PKPaymentSummaryItemType)
+	Amount() obj.Object
+	SetAmount(amount obj.Object)
+	Type() PaymentSummaryItemType
+	SetType(type_ PaymentSummaryItemType)
 }
 
 var _ PaymentSummaryItemable = (*PaymentSummaryItem)(nil)

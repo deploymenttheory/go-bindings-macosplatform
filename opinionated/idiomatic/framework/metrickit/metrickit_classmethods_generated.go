@@ -5,49 +5,29 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/ebitengine/purego/objc"
 )
 
-// MakeLogHandleWithCategory calls the underlying MXMetricManagerMakeLogHandleWithCategory.
-func MakeLogHandleWithCategory(category string) *foundation.NSObject {
-	return raw.MXMetricManagerMakeLogHandleWithCategory(foundation.NSStringStringWithUTF8String(category))
+// Returns a log handle used for writing custom metric events.
+func MakeLogHandleWithCategory(category string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("MXMetricManager")), objc.RegisterName("makeLogHandleWithCategory:"), purego.NSString(category))
+	return obj.Wrap(_r)
 }
 
-// ExtendLaunchMeasurementForTaskIDError calls the underlying MXMetricManagerExtendLaunchMeasurementForTaskIDError.
-func ExtendLaunchMeasurementForTaskIDError(taskID unsafe.Pointer) (bool, error) {
-	return raw.MXMetricManagerExtendLaunchMeasurementForTaskIDError(taskID)
-}
-
-// FinishExtendedLaunchMeasurementForTaskIDError calls the underlying MXMetricManagerFinishExtendedLaunchMeasurementForTaskIDError.
-func FinishExtendedLaunchMeasurementForTaskIDError(taskID unsafe.Pointer) (bool, error) {
-	return raw.MXMetricManagerFinishExtendedLaunchMeasurementForTaskIDError(taskID)
-}
-
-// SharedManager calls the underlying MXMetricManagerSharedManager.
+// Singleton instance of MXMetricManager.
 func SharedManager() *MetricManager {
-	_r := raw.MXMetricManagerSharedManager()
-	if _r == nil {
-		return nil
-	}
-	return &MetricManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MXMetricManager")), objc.RegisterName("sharedManager"))
+	return MetricManagerFromID(_r)
 }
 
-// Apl calls the underlying MXUnitAveragePixelLuminanceApl.
 func Apl() *UnitAveragePixelLuminance {
-	_r := raw.MXUnitAveragePixelLuminanceApl()
-	if _r == nil {
-		return nil
-	}
-	return &UnitAveragePixelLuminance{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MXUnitAveragePixelLuminance")), objc.RegisterName("apl"))
+	return UnitAveragePixelLuminanceFromID(_r)
 }
 
-// Bars calls the underlying MXUnitSignalBarsBars.
 func Bars() *UnitSignalBars {
-	_r := raw.MXUnitSignalBarsBars()
-	if _r == nil {
-		return nil
-	}
-	return &UnitSignalBars{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MXUnitSignalBars")), objc.RegisterName("bars"))
+	return UnitSignalBarsFromID(_r)
 }

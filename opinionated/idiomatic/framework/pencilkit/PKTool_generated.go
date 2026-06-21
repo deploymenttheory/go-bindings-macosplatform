@@ -5,43 +5,68 @@
 package pencilkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An interface adopted by drawing and writing tools used by a canvas view.
 //
-// Tool wraps [raw.PKTool] with a fluent Go API.
+// Tool is an idiomatic wrapper over the Objective-C class PKTool.
 type Tool struct {
-	inner *raw.PKTool
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKTool].
-func (x *Tool) Unwrap() *raw.PKTool { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Tool) ID() objc.ID { return x.inner.Ptr() }
-
-// ToolFromID adopts an existing object pointer as a Tool (nil for 0).
+// ToolFromID adopts an existing Objective-C object as a Tool
+// (nil for 0), retaining it and registering a release finalizer.
 func ToolFromID(id objc.ID) *Tool {
 	if id == 0 {
 		return nil
 	}
-	return &Tool{inner: raw.PKToolFromID(id)}
+	x := &Tool{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTool creates a new [Tool].
+// toolAdopt wraps an Objective-C object that this code just created as a
+// Tool (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func toolAdopt(id objc.ID) *Tool {
+	if id == 0 {
+		return nil
+	}
+	x := &Tool{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Tool) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Tool) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Tool) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTool creates a new Tool.
 func NewTool() *Tool {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKTool")), objc.RegisterName("new"))
-	return &Tool{inner: raw.PKToolFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKTool")), objc.RegisterName("new"))
+	return toolAdopt(_id)
 }
-
-func (x *Tool) asTool() *raw.PKTool { return x.inner }
 
 // Toolable is the interface implemented by [Tool], for mocking and DI.
 type Toolable interface {
-	Unwrap() *raw.PKTool
+	obj.Object
 }
 
 var _ Toolable = (*Tool)(nil)

@@ -5,139 +5,154 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A controller that accesses user preference information for your app from the user’s defaults database.
 //
-// UserDefaultsController wraps [raw.NSUserDefaultsController] with a fluent Go API.
+// UserDefaultsController is an idiomatic wrapper over the Objective-C class NSUserDefaultsController.
 type UserDefaultsController struct {
-	inner *raw.NSUserDefaultsController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSUserDefaultsController].
-func (x *UserDefaultsController) Unwrap() *raw.NSUserDefaultsController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UserDefaultsController) ID() objc.ID { return x.inner.Ptr() }
-
-// UserDefaultsControllerFromID adopts an existing object pointer as a UserDefaultsController (nil for 0).
+// UserDefaultsControllerFromID adopts an existing Objective-C object as a UserDefaultsController
+// (nil for 0), retaining it and registering a release finalizer.
 func UserDefaultsControllerFromID(id objc.ID) *UserDefaultsController {
 	if id == 0 {
 		return nil
 	}
-	return &UserDefaultsController{inner: raw.NSUserDefaultsControllerFromID(id)}
+	x := &UserDefaultsController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewUserDefaultsController creates a new [UserDefaultsController].
+// userDefaultsControllerAdopt wraps an Objective-C object that this code just created as a
+// UserDefaultsController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func userDefaultsControllerAdopt(id objc.ID) *UserDefaultsController {
+	if id == 0 {
+		return nil
+	}
+	x := &UserDefaultsController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UserDefaultsController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UserDefaultsController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UserDefaultsController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUserDefaultsController creates a new UserDefaultsController.
 func NewUserDefaultsController() *UserDefaultsController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUserDefaultsController")), objc.RegisterName("new"))
-	return &UserDefaultsController{inner: raw.NSUserDefaultsControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUserDefaultsController")), objc.RegisterName("new"))
+	return userDefaultsControllerAdopt(_id)
 }
 
 // Returns an initialized NSUserDefaultsController object using the NSUserDefaults instance specified in defaults and the initial default values contained in the initialValues dictionary.
 //
-// NewUserDefaultsControllerWithDefaultsInitialValues creates a new [UserDefaultsController].
-func NewUserDefaultsControllerWithDefaultsInitialValues(defaults *foundation.NSUserDefaults, initialValues purego.IDer) *UserDefaultsController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUserDefaultsController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDefaults:initialValues:"), defaults.Ptr(), initialValues.ID())
-	return &UserDefaultsController{inner: raw.NSUserDefaultsControllerFromID(_id)}
+// NewUserDefaultsControllerWithDefaultsInitialValues creates a new UserDefaultsController.
+func NewUserDefaultsControllerWithDefaultsInitialValues(defaults obj.Object, initialValues obj.Object) *UserDefaultsController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUserDefaultsController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDefaults:initialValues:"), objref.IDOf(defaults), objref.IDOf(initialValues))
+	return userDefaultsControllerAdopt(_id)
 }
 
-// NewUserDefaultsControllerWithCoder creates a new [UserDefaultsController].
-func NewUserDefaultsControllerWithCoder(coder *foundation.NSCoder) *UserDefaultsController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUserDefaultsController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &UserDefaultsController{inner: raw.NSUserDefaultsControllerFromID(_id)}
+// NewUserDefaultsControllerWithCoder creates a new UserDefaultsController.
+func NewUserDefaultsControllerWithCoder(coder obj.Object) *UserDefaultsController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSUserDefaultsController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return userDefaultsControllerAdopt(_id)
 }
 
 // Returns a dictionary containing the receiver’s initial default values.
 //
-// WithInitialValues sets the initialValues property and returns the receiver for chaining.
-func (x *UserDefaultsController) WithInitialValues(initialValues *foundation.NSDictionary[*foundation.NSString, objc.ID]) *UserDefaultsController {
-	x.inner.SetInitialValues(initialValues)
+// WithInitialValues sets initialValues and returns the receiver so calls can be chained.
+func (x *UserDefaultsController) WithInitialValues(initialValues obj.Object) *UserDefaultsController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialValues:"), objref.IDOf(initialValues))
 	return x
 }
 
 // Returns whether any changes made to bound user default properties are saved immediately.
 //
-// WithAppliesImmediately sets the appliesImmediately property and returns the receiver for chaining.
+// WithAppliesImmediately sets appliesImmediately and returns the receiver so calls can be chained.
 func (x *UserDefaultsController) WithAppliesImmediately(appliesImmediately bool) *UserDefaultsController {
-	x.inner.SetAppliesImmediately(appliesImmediately)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesImmediately:"), appliesImmediately)
 	return x
 }
 
 // Causes the receiver to discard any unsaved changes to bound user default properties, restoring their previous values.
-//
-// Revert calls the underlying Revert.
-func (x *UserDefaultsController) Revert(sender objc.ID) {
-	x.inner.Revert(sender)
+func (x *UserDefaultsController) Revert(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("revert:"), objref.IDOf(sender))
 }
 
 // Saves the values of the receiver’s user default properties.
-//
-// Save calls the underlying Save.
-func (x *UserDefaultsController) Save(sender objc.ID) {
-	x.inner.Save(sender)
+func (x *UserDefaultsController) Save(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("save:"), objref.IDOf(sender))
 }
 
 // Causes the receiver to discard all edits and replace the values of all the user default properties with any corresponding values in the initialValues dictionary.
-//
-// RevertToInitialValues calls the underlying RevertToInitialValues.
-func (x *UserDefaultsController) RevertToInitialValues(sender objc.ID) {
-	x.inner.RevertToInitialValues(sender)
+func (x *UserDefaultsController) RevertToInitialValues(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("revertToInitialValues:"), objref.IDOf(sender))
 }
 
-// Defaults calls the underlying Defaults.
-func (x *UserDefaultsController) Defaults() *foundation.NSUserDefaults {
-	return x.inner.Defaults()
+func (x *UserDefaultsController) Defaults() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaults"))
+	return obj.Wrap(_r)
 }
 
-// SetInitialValues calls the underlying SetInitialValues.
-func (x *UserDefaultsController) SetInitialValues(initialValues *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.SetInitialValues(initialValues)
+func (x *UserDefaultsController) SetInitialValues(initialValues obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialValues:"), objref.IDOf(initialValues))
 }
 
-// AppliesImmediately calls the underlying AppliesImmediately.
 func (x *UserDefaultsController) AppliesImmediately() bool {
-	return x.inner.AppliesImmediately()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appliesImmediately"))
+	return _r
 }
 
-// SetAppliesImmediately calls the underlying SetAppliesImmediately.
 func (x *UserDefaultsController) SetAppliesImmediately(appliesImmediately bool) {
-	x.inner.SetAppliesImmediately(appliesImmediately)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesImmediately:"), appliesImmediately)
 }
 
-// HasUnappliedChanges calls the underlying HasUnappliedChanges.
 func (x *UserDefaultsController) HasUnappliedChanges() bool {
-	return x.inner.HasUnappliedChanges()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasUnappliedChanges"))
+	return _r
 }
 
-// Values calls the underlying Values.
-func (x *UserDefaultsController) Values() objc.ID {
-	return x.inner.Values()
+func (x *UserDefaultsController) Values() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("values"))
+	return obj.Wrap(_r)
 }
-
-func (x *UserDefaultsController) asController() *raw.NSController { return &x.inner.NSController }
 
 // UserDefaultsControllerable is the interface implemented by [UserDefaultsController], for mocking and DI.
 type UserDefaultsControllerable interface {
-	Unwrap() *raw.NSUserDefaultsController
-	WithInitialValues(initialValues *foundation.NSDictionary[*foundation.NSString, objc.ID]) *UserDefaultsController
+	obj.Object
+	WithInitialValues(initialValues obj.Object) *UserDefaultsController
 	WithAppliesImmediately(appliesImmediately bool) *UserDefaultsController
-	Revert(sender objc.ID)
-	Save(sender objc.ID)
-	RevertToInitialValues(sender objc.ID)
-	Defaults() *foundation.NSUserDefaults
-	SetInitialValues(initialValues *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	Revert(sender obj.Object)
+	Save(sender obj.Object)
+	RevertToInitialValues(sender obj.Object)
+	Defaults() obj.Object
+	SetInitialValues(initialValues obj.Object)
 	AppliesImmediately() bool
 	SetAppliesImmediately(appliesImmediately bool)
 	HasUnappliedChanges() bool
-	Values() objc.ID
+	Values() obj.Object
 }
 
 var _ UserDefaultsControllerable = (*UserDefaultsController)(nil)

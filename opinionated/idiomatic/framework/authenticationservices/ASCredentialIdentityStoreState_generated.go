@@ -5,55 +5,80 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A representation of the state of a credential identity store.
 //
-// CredentialIdentityStoreState wraps [raw.ASCredentialIdentityStoreState] with a fluent Go API.
+// CredentialIdentityStoreState is an idiomatic wrapper over the Objective-C class ASCredentialIdentityStoreState.
 type CredentialIdentityStoreState struct {
-	inner *raw.ASCredentialIdentityStoreState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASCredentialIdentityStoreState].
-func (x *CredentialIdentityStoreState) Unwrap() *raw.ASCredentialIdentityStoreState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CredentialIdentityStoreState) ID() objc.ID { return x.inner.Ptr() }
-
-// CredentialIdentityStoreStateFromID adopts an existing object pointer as a CredentialIdentityStoreState (nil for 0).
+// CredentialIdentityStoreStateFromID adopts an existing Objective-C object as a CredentialIdentityStoreState
+// (nil for 0), retaining it and registering a release finalizer.
 func CredentialIdentityStoreStateFromID(id objc.ID) *CredentialIdentityStoreState {
 	if id == 0 {
 		return nil
 	}
-	return &CredentialIdentityStoreState{inner: raw.ASCredentialIdentityStoreStateFromID(id)}
+	x := &CredentialIdentityStoreState{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCredentialIdentityStoreState creates a new [CredentialIdentityStoreState].
+// credentialIdentityStoreStateAdopt wraps an Objective-C object that this code just created as a
+// CredentialIdentityStoreState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func credentialIdentityStoreStateAdopt(id objc.ID) *CredentialIdentityStoreState {
+	if id == 0 {
+		return nil
+	}
+	x := &CredentialIdentityStoreState{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CredentialIdentityStoreState) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CredentialIdentityStoreState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CredentialIdentityStoreState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCredentialIdentityStoreState creates a new CredentialIdentityStoreState.
 func NewCredentialIdentityStoreState() *CredentialIdentityStoreState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASCredentialIdentityStoreState")), objc.RegisterName("new"))
-	return &CredentialIdentityStoreState{inner: raw.ASCredentialIdentityStoreStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ASCredentialIdentityStoreState")), objc.RegisterName("new"))
+	return credentialIdentityStoreStateAdopt(_id)
 }
 
-// @abstract Get the enabled state of the credential identity store. @result YES if the credential identity store is enabled. @dicussion You can only modify the credential identity store when it is enabled.
-//
-// IsEnabled calls the underlying IsEnabled.
+// Get the enabled state of the credential identity store.
 func (x *CredentialIdentityStoreState) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// @abstract Get whether the credential identity store supports incremental updates. @result YES if the credential identity store supports incremental updates. @discussion You should examine the value returned by this property to find out if the credential identity store can accept incremental updates. If incremental updates are supported, you can update the credential identity store with only the new changes since the last time it was updated. Otherwise, you should update the credential identity store by adding all credential identities.
-//
-// SupportsIncrementalUpdates calls the underlying SupportsIncrementalUpdates.
+// Get whether the credential identity store supports incremental updates. You should examine the value returned by this property to find out if the credential identity store can accept incremental updates. If incremental updates are supported, you can update the credential identity store with only the new changes since the last time it was updated. Otherwise, you should update the credential identity store by adding all credential identities.
 func (x *CredentialIdentityStoreState) SupportsIncrementalUpdates() bool {
-	return x.inner.SupportsIncrementalUpdates()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsIncrementalUpdates"))
+	return _r
 }
 
 // CredentialIdentityStoreStateable is the interface implemented by [CredentialIdentityStoreState], for mocking and DI.
 type CredentialIdentityStoreStateable interface {
-	Unwrap() *raw.ASCredentialIdentityStoreState
+	obj.Object
 	IsEnabled() bool
 	SupportsIncrementalUpdates() bool
 }

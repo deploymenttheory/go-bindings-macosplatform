@@ -5,66 +5,92 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An object that represents the Extensible Firmware Interface (EFI) variable store that contains NVRAM variables the EFI exposes.
 //
-// EFIVariableStore wraps [raw.VZEFIVariableStore] with a fluent Go API.
+// EFIVariableStore is an idiomatic wrapper over the Objective-C class VZEFIVariableStore.
 type EFIVariableStore struct {
-	inner *raw.VZEFIVariableStore
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZEFIVariableStore].
-func (x *EFIVariableStore) Unwrap() *raw.VZEFIVariableStore { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EFIVariableStore) ID() objc.ID { return x.inner.Ptr() }
-
-// EFIVariableStoreFromID adopts an existing object pointer as a EFIVariableStore (nil for 0).
+// EFIVariableStoreFromID adopts an existing Objective-C object as a EFIVariableStore
+// (nil for 0), retaining it and registering a release finalizer.
 func EFIVariableStoreFromID(id objc.ID) *EFIVariableStore {
 	if id == 0 {
 		return nil
 	}
-	return &EFIVariableStore{inner: raw.VZEFIVariableStoreFromID(id)}
+	x := &EFIVariableStore{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// eFIVariableStoreAdopt wraps an Objective-C object that this code just created as a
+// EFIVariableStore (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func eFIVariableStoreAdopt(id objc.ID) *EFIVariableStore {
+	if id == 0 {
+		return nil
+	}
+	x := &EFIVariableStore{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EFIVariableStore) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EFIVariableStore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EFIVariableStore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize the variable store from the URL of an existing file.
 //
-// NewEFIVariableStoreWithURL creates a new [EFIVariableStore].
+// NewEFIVariableStoreWithURL creates a new EFIVariableStore.
 func NewEFIVariableStoreWithURL(uRL string) *EFIVariableStore {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZEFIVariableStore")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr())
-	return &EFIVariableStore{inner: raw.VZEFIVariableStoreFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZEFIVariableStore")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(uRL))
+	return eFIVariableStoreAdopt(_id)
 }
 
 // Creates a new EFI variable store at specified the URL on the filesystem, initialization options, and error-return variable.
 //
-// NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError creates a new [EFIVariableStore].
-func NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError(uRL string, options VZEFIVariableStoreInitializationOptions) (*EFIVariableStore, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZEFIVariableStore")), objc.RegisterName("alloc"))
+// NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError creates a new EFIVariableStore.
+func NewEFIVariableStoreCreatingVariableStoreAtURLOptionsError(uRL string, options EFIVariableStoreInitializationOptions) (*EFIVariableStore, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZEFIVariableStore")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCreatingVariableStoreAtURL:options:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), raw.VZEFIVariableStoreInitializationOptions(options), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCreatingVariableStoreAtURL:options:error:"), rt.FileURL(uRL), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &EFIVariableStore{inner: raw.VZEFIVariableStoreFromID(_id)}, nil
+	return eFIVariableStoreAdopt(_id), nil
 }
 
-// URL calls the underlying URL.
-func (x *EFIVariableStore) URL() *foundation.NSURL {
-	return x.inner.URL()
+func (x *EFIVariableStore) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
 // EFIVariableStoreable is the interface implemented by [EFIVariableStore], for mocking and DI.
 type EFIVariableStoreable interface {
-	Unwrap() *raw.VZEFIVariableStore
-	URL() *foundation.NSURL
+	obj.Object
+	URL() obj.Object
 }
 
 var _ EFIVariableStoreable = (*EFIVariableStore)(nil)

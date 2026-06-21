@@ -5,78 +5,68 @@
 package gameplaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A node for use in manually creating decision trees, representing a specific question and possible answers, or an action that follows from answering other questions.
 //
-// DecisionNode wraps [raw.GKDecisionNode] with a fluent Go API.
+// DecisionNode is an idiomatic wrapper over the Objective-C class GKDecisionNode.
 type DecisionNode struct {
-	inner *raw.GKDecisionNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKDecisionNode].
-func (x *DecisionNode) Unwrap() *raw.GKDecisionNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DecisionNode) ID() objc.ID { return x.inner.Ptr() }
-
-// DecisionNodeFromID adopts an existing object pointer as a DecisionNode (nil for 0).
+// DecisionNodeFromID adopts an existing Objective-C object as a DecisionNode
+// (nil for 0), retaining it and registering a release finalizer.
 func DecisionNodeFromID(id objc.ID) *DecisionNode {
 	if id == 0 {
 		return nil
 	}
-	return &DecisionNode{inner: raw.GKDecisionNodeFromID(id)}
+	x := &DecisionNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDecisionNode creates a new [DecisionNode].
+// decisionNodeAdopt wraps an Objective-C object that this code just created as a
+// DecisionNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func decisionNodeAdopt(id objc.ID) *DecisionNode {
+	if id == 0 {
+		return nil
+	}
+	x := &DecisionNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DecisionNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DecisionNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DecisionNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDecisionNode creates a new DecisionNode.
 func NewDecisionNode() *DecisionNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKDecisionNode")), objc.RegisterName("new"))
-	return &DecisionNode{inner: raw.GKDecisionNodeFromID(_id)}
-}
-
-// Creates a child node that the decision tree should use when the current node’s attribute has the specified value.
-//
-// CreateBranchWithValueAttribute calls the underlying CreateBranchWithValueAttribute.
-func (x *DecisionNode) CreateBranchWithValueAttribute(value *foundation.NSNumber, attribute foundation.NSObjectProtocol) *DecisionNode {
-	_r := x.inner.CreateBranchWithValueAttribute(value, attribute)
-	if _r == nil {
-		return nil
-	}
-	return &DecisionNode{inner: _r}
-}
-
-// Creates a child node that the decision tree should use when the current node’s attribute satisfies the specified predicate.
-//
-// CreateBranchWithPredicateAttribute calls the underlying CreateBranchWithPredicateAttribute.
-func (x *DecisionNode) CreateBranchWithPredicateAttribute(predicate *foundation.NSPredicate, attribute foundation.NSObjectProtocol) *DecisionNode {
-	_r := x.inner.CreateBranchWithPredicateAttribute(predicate, attribute)
-	if _r == nil {
-		return nil
-	}
-	return &DecisionNode{inner: _r}
-}
-
-// Creates a child node that the decision tree should use as the result of a random choice, biased by the specified weight.
-//
-// CreateBranchWithWeightAttribute calls the underlying CreateBranchWithWeightAttribute.
-func (x *DecisionNode) CreateBranchWithWeightAttribute(weight int, attribute foundation.NSObjectProtocol) *DecisionNode {
-	_r := x.inner.CreateBranchWithWeightAttribute(weight, attribute)
-	if _r == nil {
-		return nil
-	}
-	return &DecisionNode{inner: _r}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKDecisionNode")), objc.RegisterName("new"))
+	return decisionNodeAdopt(_id)
 }
 
 // DecisionNodeable is the interface implemented by [DecisionNode], for mocking and DI.
 type DecisionNodeable interface {
-	Unwrap() *raw.GKDecisionNode
-	CreateBranchWithValueAttribute(value *foundation.NSNumber, attribute foundation.NSObjectProtocol) *DecisionNode
-	CreateBranchWithPredicateAttribute(predicate *foundation.NSPredicate, attribute foundation.NSObjectProtocol) *DecisionNode
-	CreateBranchWithWeightAttribute(weight int, attribute foundation.NSObjectProtocol) *DecisionNode
+	obj.Object
 }
 
 var _ DecisionNodeable = (*DecisionNode)(nil)

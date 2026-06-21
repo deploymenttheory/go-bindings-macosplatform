@@ -9,22 +9,22 @@ import (
 )
 
 // The error codes for errors raised by the File Provider UI extension.
-type FPUIExtensionErrorCode uint64
+type ExtensionErrorCode uint64
 
 const (
 	// An error indicating that the action was canceled by the user.
-	FPUIExtensionErrorCodeUserCancelled FPUIExtensionErrorCode = 0
+	ExtensionErrorCodeUserCancelled ExtensionErrorCode = 0
 	// An error indicating that the action has failed.
-	FPUIExtensionErrorCodeFailed FPUIExtensionErrorCode = 1
+	ExtensionErrorCodeFailed ExtensionErrorCode = 1
 )
 
-func (e FPUIExtensionErrorCode) String() string {
+func (e ExtensionErrorCode) String() string {
 	switch e {
-	case FPUIExtensionErrorCodeUserCancelled:
-		return "FPUIExtensionErrorCodeUserCancelled"
-	case FPUIExtensionErrorCodeFailed:
-		return "FPUIExtensionErrorCodeFailed"
+	case ExtensionErrorCodeUserCancelled:
+		return "ExtensionErrorCodeUserCancelled"
+	case ExtensionErrorCodeFailed:
+		return "ExtensionErrorCodeFailed"
 	default:
-		return fmt.Sprintf("FPUIExtensionErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ExtensionErrorCode(%d)", int64(e))
 	}
 }

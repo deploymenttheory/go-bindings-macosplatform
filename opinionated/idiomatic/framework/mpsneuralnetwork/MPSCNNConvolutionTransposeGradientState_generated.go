@@ -5,60 +5,72 @@
 package mpsneuralnetwork
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNConvolutionTransposeGradientState wraps [raw.MPSCNNConvolutionTransposeGradientState] with a fluent Go API.
+// CNNConvolutionTransposeGradientState is an idiomatic wrapper over the Objective-C class MPSCNNConvolutionTransposeGradientState.
 type CNNConvolutionTransposeGradientState struct {
-	inner *raw.MPSCNNConvolutionTransposeGradientState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNConvolutionTransposeGradientState].
-func (x *CNNConvolutionTransposeGradientState) Unwrap() *raw.MPSCNNConvolutionTransposeGradientState {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNConvolutionTransposeGradientState) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNConvolutionTransposeGradientStateFromID adopts an existing object pointer as a CNNConvolutionTransposeGradientState (nil for 0).
+// CNNConvolutionTransposeGradientStateFromID adopts an existing Objective-C object as a CNNConvolutionTransposeGradientState
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNConvolutionTransposeGradientStateFromID(id objc.ID) *CNNConvolutionTransposeGradientState {
 	if id == 0 {
 		return nil
 	}
-	return &CNNConvolutionTransposeGradientState{inner: raw.MPSCNNConvolutionTransposeGradientStateFromID(id)}
+	x := &CNNConvolutionTransposeGradientState{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCNNConvolutionTransposeGradientState creates a new [CNNConvolutionTransposeGradientState].
-func NewCNNConvolutionTransposeGradientState() *CNNConvolutionTransposeGradientState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNConvolutionTransposeGradientState")), objc.RegisterName("new"))
-	return &CNNConvolutionTransposeGradientState{inner: raw.MPSCNNConvolutionTransposeGradientStateFromID(_id)}
-}
-
-// @property   convolutionTranspose @abstract   The convolutionTranspose filter that produced the state.
-//
-// ConvolutionTranspose calls the underlying ConvolutionTranspose.
-func (x *CNNConvolutionTransposeGradientState) ConvolutionTranspose() *CNNConvolutionTranspose {
-	_r := x.inner.ConvolutionTranspose()
-	if _r == nil {
+// cNNConvolutionTransposeGradientStateAdopt wraps an Objective-C object that this code just created as a
+// CNNConvolutionTransposeGradientState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNConvolutionTransposeGradientStateAdopt(id objc.ID) *CNNConvolutionTransposeGradientState {
+	if id == 0 {
 		return nil
 	}
-	return &CNNConvolutionTranspose{inner: _r}
+	x := &CNNConvolutionTransposeGradientState{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *CNNConvolutionTransposeGradientState) asCNNConvolutionGradientState() *raw.MPSCNNConvolutionGradientState {
-	return &x.inner.MPSCNNConvolutionGradientState
+// Description returns the object's -description text.
+func (x *CNNConvolutionTransposeGradientState) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *CNNConvolutionTransposeGradientState) asNNGradientState() *raw.MPSNNGradientState {
-	return &x.inner.MPSCNNConvolutionGradientState.MPSNNGradientState
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNConvolutionTransposeGradientState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNConvolutionTransposeGradientState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNConvolutionTransposeGradientState creates a new CNNConvolutionTransposeGradientState.
+func NewCNNConvolutionTransposeGradientState() *CNNConvolutionTransposeGradientState {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNConvolutionTransposeGradientState")), objc.RegisterName("new"))
+	return cNNConvolutionTransposeGradientStateAdopt(_id)
+}
+
+// The convolutionTranspose filter that produced the state.
+func (x *CNNConvolutionTransposeGradientState) ConvolutionTranspose() *CNNConvolutionTranspose {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolutionTranspose"))
+	return CNNConvolutionTransposeFromID(_r)
 }
 
 // CNNConvolutionTransposeGradientStateable is the interface implemented by [CNNConvolutionTransposeGradientState], for mocking and DI.
 type CNNConvolutionTransposeGradientStateable interface {
-	Unwrap() *raw.MPSCNNConvolutionTransposeGradientState
+	obj.Object
 	ConvolutionTranspose() *CNNConvolutionTranspose
 }
 

@@ -5,62 +5,83 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An abstract superclass with subclasses that identify a specific type of data for the HealthKit store.
 //
-// ObjectType wraps [raw.HKObjectType] with a fluent Go API.
+// ObjectType is an idiomatic wrapper over the Objective-C class HKObjectType.
 type ObjectType struct {
-	inner *raw.HKObjectType
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKObjectType].
-func (x *ObjectType) Unwrap() *raw.HKObjectType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ObjectType) ID() objc.ID { return x.inner.Ptr() }
-
-// ObjectTypeFromID adopts an existing object pointer as a ObjectType (nil for 0).
+// ObjectTypeFromID adopts an existing Objective-C object as a ObjectType
+// (nil for 0), retaining it and registering a release finalizer.
 func ObjectTypeFromID(id objc.ID) *ObjectType {
 	if id == 0 {
 		return nil
 	}
-	return &ObjectType{inner: raw.HKObjectTypeFromID(id)}
+	x := &ObjectType{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewObjectType creates a new [ObjectType].
+// objectTypeAdopt wraps an Objective-C object that this code just created as a
+// ObjectType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func objectTypeAdopt(id objc.ID) *ObjectType {
+	if id == 0 {
+		return nil
+	}
+	x := &ObjectType{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ObjectType) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ObjectType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ObjectType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewObjectType creates a new ObjectType.
 func NewObjectType() *ObjectType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKObjectType")), objc.RegisterName("new"))
-	return &ObjectType{inner: raw.HKObjectTypeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKObjectType")), objc.RegisterName("new"))
+	return objectTypeAdopt(_id)
 }
 
 // Returns a Boolean that indicates whether the data type requires per-object authorization.
-//
-// RequiresPerObjectAuthorization calls the underlying RequiresPerObjectAuthorization.
 func (x *ObjectType) RequiresPerObjectAuthorization() bool {
-	return x.inner.RequiresPerObjectAuthorization()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresPerObjectAuthorization"))
+	return _r
 }
 
-// @property      identifier @abstract      A unique string identifying a type of health object. @discussion    See HKTypeIdentifiers.h for possible values.
-//
-// Identifier calls the underlying Identifier.
+// A unique string identifying a type of health object. See HKTypeIdentifiers.h for possible values.
 func (x *ObjectType) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *ObjectType) asObjectType() *raw.HKObjectType { return x.inner }
 
 // ObjectTypeable is the interface implemented by [ObjectType], for mocking and DI.
 type ObjectTypeable interface {
-	Unwrap() *raw.HKObjectType
+	obj.Object
 	RequiresPerObjectAuthorization() bool
 	Identifier() string
 }

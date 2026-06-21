@@ -5,345 +5,334 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMHTMLAreaElement wraps [raw.DOMHTMLAreaElement] with a fluent Go API.
+// DOMHTMLAreaElement is an idiomatic wrapper over the Objective-C class DOMHTMLAreaElement.
 type DOMHTMLAreaElement struct {
-	inner *raw.DOMHTMLAreaElement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMHTMLAreaElement].
-func (x *DOMHTMLAreaElement) Unwrap() *raw.DOMHTMLAreaElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMHTMLAreaElement) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMHTMLAreaElementFromID adopts an existing object pointer as a DOMHTMLAreaElement (nil for 0).
+// DOMHTMLAreaElementFromID adopts an existing Objective-C object as a DOMHTMLAreaElement
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMHTMLAreaElementFromID(id objc.ID) *DOMHTMLAreaElement {
 	if id == 0 {
 		return nil
 	}
-	return &DOMHTMLAreaElement{inner: raw.DOMHTMLAreaElementFromID(id)}
+	x := &DOMHTMLAreaElement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDOMHTMLAreaElement creates a new [DOMHTMLAreaElement].
+// dOMHTMLAreaElementAdopt wraps an Objective-C object that this code just created as a
+// DOMHTMLAreaElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMHTMLAreaElementAdopt(id objc.ID) *DOMHTMLAreaElement {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMHTMLAreaElement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DOMHTMLAreaElement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMHTMLAreaElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMHTMLAreaElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMHTMLAreaElement creates a new DOMHTMLAreaElement.
 func NewDOMHTMLAreaElement() *DOMHTMLAreaElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMHTMLAreaElement")), objc.RegisterName("new"))
-	return &DOMHTMLAreaElement{inner: raw.DOMHTMLAreaElementFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMHTMLAreaElement")), objc.RegisterName("new"))
+	return dOMHTMLAreaElementAdopt(_id)
 }
 
-// WithAlt sets the alt property and returns the receiver for chaining.
+// WithAlt sets alt and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithAlt(alt string) *DOMHTMLAreaElement {
-	x.inner.SetAlt(foundation.NSStringStringWithUTF8String(alt))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlt:"), purego.NSString(alt))
 	return x
 }
 
-// WithCoords sets the coords property and returns the receiver for chaining.
+// WithCoords sets coords and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithCoords(coords string) *DOMHTMLAreaElement {
-	x.inner.SetCoords(foundation.NSStringStringWithUTF8String(coords))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCoords:"), purego.NSString(coords))
 	return x
 }
 
-// WithNoHref sets the noHref property and returns the receiver for chaining.
+// WithNoHref sets noHref and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithNoHref(noHref bool) *DOMHTMLAreaElement {
-	x.inner.SetNoHref(noHref)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNoHref:"), noHref)
 	return x
 }
 
-// WithShape sets the shape property and returns the receiver for chaining.
+// WithShape sets shape and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithShape(shape string) *DOMHTMLAreaElement {
-	x.inner.SetShape(foundation.NSStringStringWithUTF8String(shape))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShape:"), purego.NSString(shape))
 	return x
 }
 
-// WithTarget sets the target property and returns the receiver for chaining.
+// WithTarget sets target and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithTarget(target string) *DOMHTMLAreaElement {
-	x.inner.SetTarget(foundation.NSStringStringWithUTF8String(target))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), purego.NSString(target))
 	return x
 }
 
-// WithHref sets the href property and returns the receiver for chaining.
+// WithHref sets href and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithHref(href string) *DOMHTMLAreaElement {
-	x.inner.SetHref(foundation.NSStringStringWithUTF8String(href))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHref:"), purego.NSString(href))
 	return x
 }
 
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithTitle(title string) *DOMHTMLAreaElement {
-	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithLang sets the lang property and returns the receiver for chaining.
+// WithLang sets lang and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithLang(lang string) *DOMHTMLAreaElement {
-	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return x
 }
 
-// WithDir sets the dir property and returns the receiver for chaining.
+// WithDir sets dir and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithDir(dir string) *DOMHTMLAreaElement {
-	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return x
 }
 
-// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+// WithTabIndex sets tabIndex and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithTabIndex(tabIndex int) *DOMHTMLAreaElement {
-	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
 	return x
 }
 
-// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+// WithAccessKey sets accessKey and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithAccessKey(accessKey string) *DOMHTMLAreaElement {
-	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return x
 }
 
-// WithInnerText sets the innerText property and returns the receiver for chaining.
+// WithInnerText sets innerText and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithInnerText(innerText string) *DOMHTMLAreaElement {
-	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return x
 }
 
-// WithOuterText sets the outerText property and returns the receiver for chaining.
+// WithOuterText sets outerText and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithOuterText(outerText string) *DOMHTMLAreaElement {
-	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return x
 }
 
-// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+// WithContentEditable sets contentEditable and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithContentEditable(contentEditable string) *DOMHTMLAreaElement {
-	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return x
 }
 
-// WithIdName sets the idName property and returns the receiver for chaining.
+// WithIdName sets idName and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithIdName(idName string) *DOMHTMLAreaElement {
-	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return x
 }
 
-// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+// WithScrollLeft sets scrollLeft and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithScrollLeft(scrollLeft int) *DOMHTMLAreaElement {
-	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return x
 }
 
-// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+// WithScrollTop sets scrollTop and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithScrollTop(scrollTop int) *DOMHTMLAreaElement {
-	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
 	return x
 }
 
-// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+// WithInnerHTML sets innerHTML and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithInnerHTML(innerHTML string) *DOMHTMLAreaElement {
-	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return x
 }
 
-// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+// WithOuterHTML sets outerHTML and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithOuterHTML(outerHTML string) *DOMHTMLAreaElement {
-	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return x
 }
 
-// WithClassName sets the className property and returns the receiver for chaining.
+// WithClassName sets className and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithClassName(className string) *DOMHTMLAreaElement {
-	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return x
 }
 
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithNodeValue(nodeValue string) *DOMHTMLAreaElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets the prefix property and returns the receiver for chaining.
+// WithPrefix sets prefix and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithPrefix(prefix string) *DOMHTMLAreaElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets the textContent property and returns the receiver for chaining.
+// WithTextContent sets textContent and returns the receiver so calls can be chained.
 func (x *DOMHTMLAreaElement) WithTextContent(textContent string) *DOMHTMLAreaElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
-// Alt calls the underlying Alt.
 func (x *DOMHTMLAreaElement) Alt() string {
-	_r := x.inner.Alt()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alt"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetAlt calls the underlying SetAlt.
 func (x *DOMHTMLAreaElement) SetAlt(alt string) {
-	x.inner.SetAlt(foundation.NSStringStringWithUTF8String(alt))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlt:"), purego.NSString(alt))
 }
 
-// Coords calls the underlying Coords.
 func (x *DOMHTMLAreaElement) Coords() string {
-	_r := x.inner.Coords()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coords"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCoords calls the underlying SetCoords.
 func (x *DOMHTMLAreaElement) SetCoords(coords string) {
-	x.inner.SetCoords(foundation.NSStringStringWithUTF8String(coords))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCoords:"), purego.NSString(coords))
 }
 
-// NoHref calls the underlying NoHref.
 func (x *DOMHTMLAreaElement) NoHref() bool {
-	return x.inner.NoHref()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("noHref"))
+	return _r
 }
 
-// SetNoHref calls the underlying SetNoHref.
 func (x *DOMHTMLAreaElement) SetNoHref(noHref bool) {
-	x.inner.SetNoHref(noHref)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNoHref:"), noHref)
 }
 
-// Shape calls the underlying Shape.
 func (x *DOMHTMLAreaElement) Shape() string {
-	_r := x.inner.Shape()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shape"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetShape calls the underlying SetShape.
 func (x *DOMHTMLAreaElement) SetShape(shape string) {
-	x.inner.SetShape(foundation.NSStringStringWithUTF8String(shape))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShape:"), purego.NSString(shape))
 }
 
-// Target calls the underlying Target.
 func (x *DOMHTMLAreaElement) Target() string {
-	_r := x.inner.Target()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTarget calls the underlying SetTarget.
 func (x *DOMHTMLAreaElement) SetTarget(target string) {
-	x.inner.SetTarget(foundation.NSStringStringWithUTF8String(target))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), purego.NSString(target))
 }
 
-// AbsoluteLinkURL calls the underlying AbsoluteLinkURL.
-func (x *DOMHTMLAreaElement) AbsoluteLinkURL() *foundation.NSURL {
-	return x.inner.AbsoluteLinkURL()
+func (x *DOMHTMLAreaElement) AbsoluteLinkURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("absoluteLinkURL"))
+	return obj.Wrap(_r)
 }
 
-// Href calls the underlying Href.
 func (x *DOMHTMLAreaElement) Href() string {
-	_r := x.inner.Href()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("href"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetHref calls the underlying SetHref.
 func (x *DOMHTMLAreaElement) SetHref(href string) {
-	x.inner.SetHref(foundation.NSStringStringWithUTF8String(href))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHref:"), purego.NSString(href))
 }
 
-// Protocol calls the underlying Protocol.
 func (x *DOMHTMLAreaElement) Protocol() string {
-	_r := x.inner.Protocol()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocol"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Host calls the underlying Host.
 func (x *DOMHTMLAreaElement) Host() string {
-	_r := x.inner.Host()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("host"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Hostname calls the underlying Hostname.
 func (x *DOMHTMLAreaElement) Hostname() string {
-	_r := x.inner.Hostname()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hostname"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Port calls the underlying Port.
 func (x *DOMHTMLAreaElement) Port() string {
-	_r := x.inner.Port()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("port"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Pathname calls the underlying Pathname.
 func (x *DOMHTMLAreaElement) Pathname() string {
-	_r := x.inner.Pathname()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathname"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Search calls the underlying Search.
 func (x *DOMHTMLAreaElement) Search() string {
-	_r := x.inner.Search()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("search"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// HashName calls the underlying HashName.
 func (x *DOMHTMLAreaElement) HashName() string {
-	_r := x.inner.HashName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hashName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *DOMHTMLAreaElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
-
-func (x *DOMHTMLAreaElement) asDOMElement() *raw.DOMElement {
-	return &x.inner.DOMHTMLElement.DOMElement
-}
-
-func (x *DOMHTMLAreaElement) asDOMNode() *raw.DOMNode {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
-}
-
-func (x *DOMHTMLAreaElement) asDOMObject() *raw.DOMObject {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
-}
-
-func (x *DOMHTMLAreaElement) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+	return purego.GoString(_r)
 }
 
 // DOMHTMLAreaElementable is the interface implemented by [DOMHTMLAreaElement], for mocking and DI.
 type DOMHTMLAreaElementable interface {
-	Unwrap() *raw.DOMHTMLAreaElement
+	obj.Object
 	WithAlt(alt string) *DOMHTMLAreaElement
 	WithCoords(coords string) *DOMHTMLAreaElement
 	WithNoHref(noHref bool) *DOMHTMLAreaElement
@@ -377,7 +366,7 @@ type DOMHTMLAreaElementable interface {
 	SetShape(shape string)
 	Target() string
 	SetTarget(target string)
-	AbsoluteLinkURL() *foundation.NSURL
+	AbsoluteLinkURL() obj.Object
 	Href() string
 	SetHref(href string)
 	Protocol() string

@@ -5,70 +5,83 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An abstract superclass for playback commands.
 //
-// DelegatingPlaybackCoordinatorPlaybackControlCommand wraps [raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand] with a fluent Go API.
+// DelegatingPlaybackCoordinatorPlaybackControlCommand is an idiomatic wrapper over the Objective-C class AVDelegatingPlaybackCoordinatorPlaybackControlCommand.
 type DelegatingPlaybackCoordinatorPlaybackControlCommand struct {
-	inner *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand].
-func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) Unwrap() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) ID() objc.ID { return x.inner.Ptr() }
-
-// DelegatingPlaybackCoordinatorPlaybackControlCommandFromID adopts an existing object pointer as a DelegatingPlaybackCoordinatorPlaybackControlCommand (nil for 0).
+// DelegatingPlaybackCoordinatorPlaybackControlCommandFromID adopts an existing Objective-C object as a DelegatingPlaybackCoordinatorPlaybackControlCommand
+// (nil for 0), retaining it and registering a release finalizer.
 func DelegatingPlaybackCoordinatorPlaybackControlCommandFromID(id objc.ID) *DelegatingPlaybackCoordinatorPlaybackControlCommand {
 	if id == 0 {
 		return nil
 	}
-	return &DelegatingPlaybackCoordinatorPlaybackControlCommand{inner: raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommandFromID(id)}
+	x := &DelegatingPlaybackCoordinatorPlaybackControlCommand{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDelegatingPlaybackCoordinatorPlaybackControlCommand creates a new [DelegatingPlaybackCoordinatorPlaybackControlCommand].
+// delegatingPlaybackCoordinatorPlaybackControlCommandAdopt wraps an Objective-C object that this code just created as a
+// DelegatingPlaybackCoordinatorPlaybackControlCommand (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func delegatingPlaybackCoordinatorPlaybackControlCommandAdopt(id objc.ID) *DelegatingPlaybackCoordinatorPlaybackControlCommand {
+	if id == 0 {
+		return nil
+	}
+	x := &DelegatingPlaybackCoordinatorPlaybackControlCommand{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDelegatingPlaybackCoordinatorPlaybackControlCommand creates a new DelegatingPlaybackCoordinatorPlaybackControlCommand.
 func NewDelegatingPlaybackCoordinatorPlaybackControlCommand() *DelegatingPlaybackCoordinatorPlaybackControlCommand {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVDelegatingPlaybackCoordinatorPlaybackControlCommand")), objc.RegisterName("new"))
-	return &DelegatingPlaybackCoordinatorPlaybackControlCommand{inner: raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommandFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVDelegatingPlaybackCoordinatorPlaybackControlCommand")), objc.RegisterName("new"))
+	return delegatingPlaybackCoordinatorPlaybackControlCommandAdopt(_id)
 }
 
 // The participant causing this command to be issued. Only commands issued on behalf of another participant will contain an originator. Commands caused by local requests, e.g., requests to coordinate a rate change, will not contain an originator. Similarly, re-application of older commands, e.g., in response to a call to [AVDelegatingPlaybackCoordinator reapplyCurrentItemStateToPlaybackControlDelegate], will not contain an originator. If the originator is non-nil, it may be appropriate to show UI indicating someone else's action.
-//
-// Originator calls the underlying Originator.
 func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) Originator() *CoordinatedPlaybackParticipant {
-	_r := x.inner.Originator()
-	if _r == nil {
-		return nil
-	}
-	return &CoordinatedPlaybackParticipant{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originator"))
+	return CoordinatedPlaybackParticipantFromID(_r)
 }
 
 // Indicates the item this command was issued for. Commands are always meant for the current item. A command handler should verify that the identifier of its current item matches this identifier. If it doesn't this command is obsolete and should be ignored. Note that any completion handler of the delegate method issuing the command must still be invoked.
-//
-// ExpectedCurrentItemIdentifier calls the underlying ExpectedCurrentItemIdentifier.
 func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) ExpectedCurrentItemIdentifier() string {
-	_r := x.inner.ExpectedCurrentItemIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expectedCurrentItemIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) asDelegatingPlaybackCoordinatorPlaybackControlCommand() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand {
-	return x.inner
+	return purego.GoString(_r)
 }
 
 // DelegatingPlaybackCoordinatorPlaybackControlCommandable is the interface implemented by [DelegatingPlaybackCoordinatorPlaybackControlCommand], for mocking and DI.
 type DelegatingPlaybackCoordinatorPlaybackControlCommandable interface {
-	Unwrap() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand
+	obj.Object
 	Originator() *CoordinatedPlaybackParticipant
 	ExpectedCurrentItemIdentifier() string
 }

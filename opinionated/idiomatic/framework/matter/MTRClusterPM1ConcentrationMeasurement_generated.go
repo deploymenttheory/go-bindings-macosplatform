@@ -5,149 +5,165 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterPM1ConcentrationMeasurement wraps [raw.MTRClusterPM1ConcentrationMeasurement] with a fluent Go API.
+// MTRClusterPM1ConcentrationMeasurement is an idiomatic wrapper over the Objective-C class MTRClusterPM1ConcentrationMeasurement.
 type MTRClusterPM1ConcentrationMeasurement struct {
-	inner *raw.MTRClusterPM1ConcentrationMeasurement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterPM1ConcentrationMeasurement].
-func (x *MTRClusterPM1ConcentrationMeasurement) Unwrap() *raw.MTRClusterPM1ConcentrationMeasurement {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterPM1ConcentrationMeasurement) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterPM1ConcentrationMeasurementFromID adopts an existing object pointer as a MTRClusterPM1ConcentrationMeasurement (nil for 0).
+// MTRClusterPM1ConcentrationMeasurementFromID adopts an existing Objective-C object as a MTRClusterPM1ConcentrationMeasurement
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterPM1ConcentrationMeasurementFromID(id objc.ID) *MTRClusterPM1ConcentrationMeasurement {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterPM1ConcentrationMeasurement{inner: raw.MTRClusterPM1ConcentrationMeasurementFromID(id)}
+	x := &MTRClusterPM1ConcentrationMeasurement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterPM1ConcentrationMeasurementAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterPM1ConcentrationMeasurement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterPM1ConcentrationMeasurementAdopt(id objc.ID) *MTRClusterPM1ConcentrationMeasurement {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterPM1ConcentrationMeasurement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterPM1ConcentrationMeasurement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterPM1ConcentrationMeasurement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterPM1ConcentrationMeasurement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 //
-// NewMTRClusterPM1ConcentrationMeasurementWithDeviceEndpointIDQueue creates a new [MTRClusterPM1ConcentrationMeasurement].
-func NewMTRClusterPM1ConcentrationMeasurementWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterPM1ConcentrationMeasurement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterPM1ConcentrationMeasurement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterPM1ConcentrationMeasurement{inner: raw.MTRClusterPM1ConcentrationMeasurementFromID(_id)}
+// NewMTRClusterPM1ConcentrationMeasurementWithDeviceEndpointIDQueue creates a new MTRClusterPM1ConcentrationMeasurement.
+func NewMTRClusterPM1ConcentrationMeasurementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterPM1ConcentrationMeasurement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterPM1ConcentrationMeasurement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterPM1ConcentrationMeasurementAdopt(_id)
 }
 
-// ReadAttributeMeasuredValueWithParams calls the underlying ReadAttributeMeasuredValueWithParams.
-func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMeasuredValueWithParams(params)
+func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasuredValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinMeasuredValueWithParams calls the underlying ReadAttributeMinMeasuredValueWithParams.
-func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeMinMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMinMeasuredValueWithParams(params)
+func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinMeasuredValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaxMeasuredValueWithParams calls the underlying ReadAttributeMaxMeasuredValueWithParams.
-func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxMeasuredValueWithParams(params)
+func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxMeasuredValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePeakMeasuredValueWithParams calls the underlying ReadAttributePeakMeasuredValueWithParams.
-func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributePeakMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePeakMeasuredValueWithParams(params)
+func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributePeakMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePeakMeasuredValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePeakMeasuredValueWindowWithParams calls the underlying ReadAttributePeakMeasuredValueWindowWithParams.
-func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributePeakMeasuredValueWindowWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePeakMeasuredValueWindowWithParams(params)
+func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributePeakMeasuredValueWindowWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePeakMeasuredValueWindowWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAverageMeasuredValueWithParams calls the underlying ReadAttributeAverageMeasuredValueWithParams.
-func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeAverageMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAverageMeasuredValueWithParams(params)
+func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeAverageMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageMeasuredValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAverageMeasuredValueWindowWithParams calls the underlying ReadAttributeAverageMeasuredValueWindowWithParams.
-func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeAverageMeasuredValueWindowWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAverageMeasuredValueWindowWithParams(params)
+func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeAverageMeasuredValueWindowWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageMeasuredValueWindowWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeUncertaintyWithParams calls the underlying ReadAttributeUncertaintyWithParams.
-func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeUncertaintyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeUncertaintyWithParams(params)
+func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeUncertaintyWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUncertaintyWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMeasurementUnitWithParams calls the underlying ReadAttributeMeasurementUnitWithParams.
-func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeMeasurementUnitWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMeasurementUnitWithParams(params)
+func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeMeasurementUnitWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasurementUnitWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMeasurementMediumWithParams calls the underlying ReadAttributeMeasurementMediumWithParams.
-func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeMeasurementMediumWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMeasurementMediumWithParams(params)
+func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeMeasurementMediumWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasurementMediumWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeLevelValueWithParams calls the underlying ReadAttributeLevelValueWithParams.
-func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeLevelValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeLevelValueWithParams(params)
+func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeLevelValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLevelValueWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterPM1ConcentrationMeasurement) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterPM1ConcentrationMeasurement) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterPM1ConcentrationMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterPM1ConcentrationMeasurementable is the interface implemented by [MTRClusterPM1ConcentrationMeasurement], for mocking and DI.
 type MTRClusterPM1ConcentrationMeasurementable interface {
-	Unwrap() *raw.MTRClusterPM1ConcentrationMeasurement
-	ReadAttributeMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMinMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMaxMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePeakMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePeakMeasuredValueWindowWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAverageMeasuredValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAverageMeasuredValueWindowWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeUncertaintyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMeasurementUnitWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMeasurementMediumWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeLevelValueWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeMeasuredValueWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePeakMeasuredValueWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePeakMeasuredValueWindowWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAverageMeasuredValueWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAverageMeasuredValueWindowWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeUncertaintyWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMeasurementUnitWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMeasurementMediumWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeLevelValueWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterPM1ConcentrationMeasurementable = (*MTRClusterPM1ConcentrationMeasurement)(nil)

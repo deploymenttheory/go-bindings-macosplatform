@@ -5,73 +5,95 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTREnergyEVSEClusterChargingTargetScheduleStruct wraps [raw.MTREnergyEVSEClusterChargingTargetScheduleStruct] with a fluent Go API.
+// MTREnergyEVSEClusterChargingTargetScheduleStruct is an idiomatic wrapper over the Objective-C class MTREnergyEVSEClusterChargingTargetScheduleStruct.
 type MTREnergyEVSEClusterChargingTargetScheduleStruct struct {
-	inner *raw.MTREnergyEVSEClusterChargingTargetScheduleStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTREnergyEVSEClusterChargingTargetScheduleStruct].
-func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) Unwrap() *raw.MTREnergyEVSEClusterChargingTargetScheduleStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTREnergyEVSEClusterChargingTargetScheduleStructFromID adopts an existing object pointer as a MTREnergyEVSEClusterChargingTargetScheduleStruct (nil for 0).
+// MTREnergyEVSEClusterChargingTargetScheduleStructFromID adopts an existing Objective-C object as a MTREnergyEVSEClusterChargingTargetScheduleStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTREnergyEVSEClusterChargingTargetScheduleStructFromID(id objc.ID) *MTREnergyEVSEClusterChargingTargetScheduleStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTREnergyEVSEClusterChargingTargetScheduleStruct{inner: raw.MTREnergyEVSEClusterChargingTargetScheduleStructFromID(id)}
-}
-
-// NewMTREnergyEVSEClusterChargingTargetScheduleStruct creates a new [MTREnergyEVSEClusterChargingTargetScheduleStruct].
-func NewMTREnergyEVSEClusterChargingTargetScheduleStruct() *MTREnergyEVSEClusterChargingTargetScheduleStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTREnergyEVSEClusterChargingTargetScheduleStruct")), objc.RegisterName("new"))
-	return &MTREnergyEVSEClusterChargingTargetScheduleStruct{inner: raw.MTREnergyEVSEClusterChargingTargetScheduleStructFromID(_id)}
-}
-
-// WithDayOfWeekForSequence sets the dayOfWeekForSequence property and returns the receiver for chaining.
-func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) WithDayOfWeekForSequence(dayOfWeekForSequence *foundation.NSNumber) *MTREnergyEVSEClusterChargingTargetScheduleStruct {
-	x.inner.SetDayOfWeekForSequence(dayOfWeekForSequence)
+	x := &MTREnergyEVSEClusterChargingTargetScheduleStruct{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// DayOfWeekForSequence calls the underlying DayOfWeekForSequence.
-func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) DayOfWeekForSequence() *foundation.NSNumber {
-	return x.inner.DayOfWeekForSequence()
+// mTREnergyEVSEClusterChargingTargetScheduleStructAdopt wraps an Objective-C object that this code just created as a
+// MTREnergyEVSEClusterChargingTargetScheduleStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTREnergyEVSEClusterChargingTargetScheduleStructAdopt(id objc.ID) *MTREnergyEVSEClusterChargingTargetScheduleStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTREnergyEVSEClusterChargingTargetScheduleStruct{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetDayOfWeekForSequence calls the underlying SetDayOfWeekForSequence.
-func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) SetDayOfWeekForSequence(dayOfWeekForSequence *foundation.NSNumber) {
-	x.inner.SetDayOfWeekForSequence(dayOfWeekForSequence)
+// Description returns the object's -description text.
+func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// ChargingTargets calls the underlying ChargingTargets.
-func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) ChargingTargets() *foundation.NSArray[objc.ID] {
-	return x.inner.ChargingTargets()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetChargingTargets calls the underlying SetChargingTargets.
-func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) SetChargingTargets(chargingTargets *foundation.NSArray[objc.ID]) {
-	x.inner.SetChargingTargets(chargingTargets)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTREnergyEVSEClusterChargingTargetScheduleStruct creates a new MTREnergyEVSEClusterChargingTargetScheduleStruct.
+func NewMTREnergyEVSEClusterChargingTargetScheduleStruct() *MTREnergyEVSEClusterChargingTargetScheduleStruct {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTREnergyEVSEClusterChargingTargetScheduleStruct")), objc.RegisterName("new"))
+	return mTREnergyEVSEClusterChargingTargetScheduleStructAdopt(_id)
+}
+
+// WithDayOfWeekForSequence sets dayOfWeekForSequence and returns the receiver so calls can be chained.
+func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) WithDayOfWeekForSequence(dayOfWeekForSequence obj.Object) *MTREnergyEVSEClusterChargingTargetScheduleStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDayOfWeekForSequence:"), objref.IDOf(dayOfWeekForSequence))
+	return x
+}
+
+func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) DayOfWeekForSequence() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dayOfWeekForSequence"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) SetDayOfWeekForSequence(dayOfWeekForSequence obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDayOfWeekForSequence:"), objref.IDOf(dayOfWeekForSequence))
+}
+
+func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) ChargingTargets() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chargingTargets"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTREnergyEVSEClusterChargingTargetScheduleStruct) SetChargingTargets(chargingTargets obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChargingTargets:"), objref.IDOf(chargingTargets))
 }
 
 // MTREnergyEVSEClusterChargingTargetScheduleStructable is the interface implemented by [MTREnergyEVSEClusterChargingTargetScheduleStruct], for mocking and DI.
 type MTREnergyEVSEClusterChargingTargetScheduleStructable interface {
-	Unwrap() *raw.MTREnergyEVSEClusterChargingTargetScheduleStruct
-	WithDayOfWeekForSequence(dayOfWeekForSequence *foundation.NSNumber) *MTREnergyEVSEClusterChargingTargetScheduleStruct
-	DayOfWeekForSequence() *foundation.NSNumber
-	SetDayOfWeekForSequence(dayOfWeekForSequence *foundation.NSNumber)
-	ChargingTargets() *foundation.NSArray[objc.ID]
-	SetChargingTargets(chargingTargets *foundation.NSArray[objc.ID])
+	obj.Object
+	WithDayOfWeekForSequence(dayOfWeekForSequence obj.Object) *MTREnergyEVSEClusterChargingTargetScheduleStruct
+	DayOfWeekForSequence() obj.Object
+	SetDayOfWeekForSequence(dayOfWeekForSequence obj.Object)
+	ChargingTargets() obj.Object
+	SetChargingTargets(chargingTargets obj.Object)
 }
 
 var _ MTREnergyEVSEClusterChargingTargetScheduleStructable = (*MTREnergyEVSEClusterChargingTargetScheduleStruct)(nil)

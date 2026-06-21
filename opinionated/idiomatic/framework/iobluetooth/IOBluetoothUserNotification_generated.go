@@ -5,48 +5,73 @@
 package iobluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Represents a registered notification.
 //
-// IOBluetoothUserNotification wraps [raw.IOBluetoothUserNotification] with a fluent Go API.
+// IOBluetoothUserNotification is an idiomatic wrapper over the Objective-C class IOBluetoothUserNotification.
 type IOBluetoothUserNotification struct {
-	inner *raw.IOBluetoothUserNotification
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IOBluetoothUserNotification].
-func (x *IOBluetoothUserNotification) Unwrap() *raw.IOBluetoothUserNotification { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IOBluetoothUserNotification) ID() objc.ID { return x.inner.Ptr() }
-
-// IOBluetoothUserNotificationFromID adopts an existing object pointer as a IOBluetoothUserNotification (nil for 0).
+// IOBluetoothUserNotificationFromID adopts an existing Objective-C object as a IOBluetoothUserNotification
+// (nil for 0), retaining it and registering a release finalizer.
 func IOBluetoothUserNotificationFromID(id objc.ID) *IOBluetoothUserNotification {
 	if id == 0 {
 		return nil
 	}
-	return &IOBluetoothUserNotification{inner: raw.IOBluetoothUserNotificationFromID(id)}
+	x := &IOBluetoothUserNotification{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewIOBluetoothUserNotification creates a new [IOBluetoothUserNotification].
+// iOBluetoothUserNotificationAdopt wraps an Objective-C object that this code just created as a
+// IOBluetoothUserNotification (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iOBluetoothUserNotificationAdopt(id objc.ID) *IOBluetoothUserNotification {
+	if id == 0 {
+		return nil
+	}
+	x := &IOBluetoothUserNotification{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IOBluetoothUserNotification) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IOBluetoothUserNotification) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IOBluetoothUserNotification) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewIOBluetoothUserNotification creates a new IOBluetoothUserNotification.
 func NewIOBluetoothUserNotification() *IOBluetoothUserNotification {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothUserNotification")), objc.RegisterName("new"))
-	return &IOBluetoothUserNotification{inner: raw.IOBluetoothUserNotificationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothUserNotification")), objc.RegisterName("new"))
+	return iOBluetoothUserNotificationAdopt(_id)
 }
 
 // Called to unregister the target notification.
-//
-// Unregister calls the underlying Unregister.
 func (x *IOBluetoothUserNotification) Unregister() {
-	x.inner.Unregister()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unregister"))
 }
 
 // IOBluetoothUserNotificationable is the interface implemented by [IOBluetoothUserNotification], for mocking and DI.
 type IOBluetoothUserNotificationable interface {
-	Unwrap() *raw.IOBluetoothUserNotification
+	obj.Object
 	Unregister()
 }
 

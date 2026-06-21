@@ -5,53 +5,67 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterBridgedDeviceBasic wraps [raw.MTRClusterBridgedDeviceBasic] with a fluent Go API.
+// MTRClusterBridgedDeviceBasic is an idiomatic wrapper over the Objective-C class MTRClusterBridgedDeviceBasic.
 type MTRClusterBridgedDeviceBasic struct {
-	inner *raw.MTRClusterBridgedDeviceBasic
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterBridgedDeviceBasic].
-func (x *MTRClusterBridgedDeviceBasic) Unwrap() *raw.MTRClusterBridgedDeviceBasic { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterBridgedDeviceBasic) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterBridgedDeviceBasicFromID adopts an existing object pointer as a MTRClusterBridgedDeviceBasic (nil for 0).
+// MTRClusterBridgedDeviceBasicFromID adopts an existing Objective-C object as a MTRClusterBridgedDeviceBasic
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterBridgedDeviceBasicFromID(id objc.ID) *MTRClusterBridgedDeviceBasic {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterBridgedDeviceBasic{inner: raw.MTRClusterBridgedDeviceBasicFromID(id)}
+	x := &MTRClusterBridgedDeviceBasic{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRClusterBridgedDeviceBasicWithDeviceEndpointQueue creates a new [MTRClusterBridgedDeviceBasic].
-func NewMTRClusterBridgedDeviceBasicWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterBridgedDeviceBasic {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterBridgedDeviceBasic")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterBridgedDeviceBasic{inner: raw.MTRClusterBridgedDeviceBasicFromID(_id)}
+// mTRClusterBridgedDeviceBasicAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterBridgedDeviceBasic (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterBridgedDeviceBasicAdopt(id objc.ID) *MTRClusterBridgedDeviceBasic {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterBridgedDeviceBasic{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *MTRClusterBridgedDeviceBasic) asMTRClusterBridgedDeviceBasicInformation() *raw.MTRClusterBridgedDeviceBasicInformation {
-	return &x.inner.MTRClusterBridgedDeviceBasicInformation
+// Description returns the object's -description text.
+func (x *MTRClusterBridgedDeviceBasic) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *MTRClusterBridgedDeviceBasic) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRClusterBridgedDeviceBasicInformation.MTRGenericCluster
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterBridgedDeviceBasic) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-func (x *MTRClusterBridgedDeviceBasic) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRClusterBridgedDeviceBasicInformation.MTRGenericCluster.MTRCluster
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterBridgedDeviceBasic) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRClusterBridgedDeviceBasicWithDeviceEndpointQueue creates a new MTRClusterBridgedDeviceBasic.
+func NewMTRClusterBridgedDeviceBasicWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterBridgedDeviceBasic {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBridgedDeviceBasic")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterBridgedDeviceBasicAdopt(_id)
 }
 
 // MTRClusterBridgedDeviceBasicable is the interface implemented by [MTRClusterBridgedDeviceBasic], for mocking and DI.
 type MTRClusterBridgedDeviceBasicable interface {
-	Unwrap() *raw.MTRClusterBridgedDeviceBasic
+	obj.Object
 }
 
 var _ MTRClusterBridgedDeviceBasicable = (*MTRClusterBridgedDeviceBasic)(nil)

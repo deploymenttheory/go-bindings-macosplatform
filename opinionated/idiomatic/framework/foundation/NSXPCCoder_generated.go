@@ -5,104 +5,93 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A coder that encodes and decodes objects that your app sends over an XPC connection.
 //
-// XPCCoder wraps [raw.NSXPCCoder] with a fluent Go API.
+// XPCCoder is an idiomatic wrapper over the Objective-C class NSXPCCoder.
 type XPCCoder struct {
-	inner *raw.NSXPCCoder
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSXPCCoder].
-func (x *XPCCoder) Unwrap() *raw.NSXPCCoder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *XPCCoder) ID() objc.ID { return x.inner.Ptr() }
-
-// XPCCoderFromID adopts an existing object pointer as a XPCCoder (nil for 0).
+// XPCCoderFromID adopts an existing Objective-C object as a XPCCoder
+// (nil for 0), retaining it and registering a release finalizer.
 func XPCCoderFromID(id objc.ID) *XPCCoder {
 	if id == 0 {
 		return nil
 	}
-	return &XPCCoder{inner: raw.NSXPCCoderFromID(id)}
-}
-
-// NewXPCCoder creates a new [XPCCoder].
-func NewXPCCoder() *XPCCoder {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXPCCoder")), objc.RegisterName("new"))
-	return &XPCCoder{inner: raw.NSXPCCoderFromID(_id)}
-}
-
-// An optional user information object associated with the coder.
-//
-// WithUserInfo sets the userInfo property and returns the receiver for chaining.
-func (x *XPCCoder) WithUserInfo(userInfo raw.NSObjectProtocol) *XPCCoder {
-	x.inner.SetUserInfo(userInfo)
+	x := &XPCCoder{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *XPCCoder) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCCoder {
-	x.inner.NSCoder.NSObject.SetScriptingProperties(scriptingProperties)
+// xPCCoderAdopt wraps an Objective-C object that this code just created as a
+// XPCCoder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func xPCCoderAdopt(id objc.ID) *XPCCoder {
+	if id == 0 {
+		return nil
+	}
+	x := &XPCCoder{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *XPCCoder) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *XPCCoder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *XPCCoder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewXPCCoder creates a new XPCCoder.
+func NewXPCCoder() *XPCCoder {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSXPCCoder")), objc.RegisterName("new"))
+	return xPCCoderAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *XPCCoder) WithScriptingProperties(scriptingProperties obj.Object) *XPCCoder {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Encodes an object to send over an XPC connection.
-//
-// EncodeXPCObjectForKey calls the underlying EncodeXPCObjectForKey.
-func (x *XPCCoder) EncodeXPCObjectForKey(xpcObject *raw.NSObject, key string) {
-	x.inner.EncodeXPCObjectForKey(xpcObject, foundation.NSStringStringWithUTF8String(key))
+func (x *XPCCoder) EncodeXPCObjectForKey(xpcObject *Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeXPCObject:forKey:"), objref.IDOf(xpcObject), purego.NSString(key))
 }
 
 // Decodes an object and validates that its type matches the type a service provides over XPC.
-//
-// DecodeXPCObjectOfTypeForKey calls the underlying DecodeXPCObjectOfTypeForKey.
-func (x *XPCCoder) DecodeXPCObjectOfTypeForKey(type_ unsafe.Pointer, key string) *Object {
-	_r := x.inner.DecodeXPCObjectOfTypeForKey(type_, foundation.NSStringStringWithUTF8String(key))
-	if _r == nil {
-		return nil
-	}
-	return &Object{inner: _r}
+func (x *XPCCoder) DecodeXPCObjectOfTypeForKey(type_ obj.Object, key string) *Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decodeXPCObjectOfType:forKey:"), objref.IDOf(type_), purego.NSString(key))
+	return ObjectFromID(_r)
 }
 
-// UserInfo calls the underlying UserInfo.
-func (x *XPCCoder) UserInfo() raw.NSObjectProtocol {
-	return x.inner.UserInfo()
-}
-
-// SetUserInfo calls the underlying SetUserInfo.
-func (x *XPCCoder) SetUserInfo(userInfo raw.NSObjectProtocol) {
-	x.inner.SetUserInfo(userInfo)
-}
-
-// Connection calls the underlying Connection.
 func (x *XPCCoder) Connection() *XPCConnection {
-	_r := x.inner.Connection()
-	if _r == nil {
-		return nil
-	}
-	return &XPCConnection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connection"))
+	return XPCConnectionFromID(_r)
 }
-
-func (x *XPCCoder) asCoder() *raw.NSCoder { return &x.inner.NSCoder }
-
-func (x *XPCCoder) asObject() *raw.NSObject { return &x.inner.NSCoder.NSObject }
 
 // XPCCoderable is the interface implemented by [XPCCoder], for mocking and DI.
 type XPCCoderable interface {
-	Unwrap() *raw.NSXPCCoder
-	WithUserInfo(userInfo raw.NSObjectProtocol) *XPCCoder
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCCoder
-	EncodeXPCObjectForKey(xpcObject *raw.NSObject, key string)
-	DecodeXPCObjectOfTypeForKey(type_ unsafe.Pointer, key string) *Object
-	UserInfo() raw.NSObjectProtocol
-	SetUserInfo(userInfo raw.NSObjectProtocol)
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *XPCCoder
+	EncodeXPCObjectForKey(xpcObject *Object, key string)
+	DecodeXPCObjectOfTypeForKey(type_ obj.Object, key string) *Object
 	Connection() *XPCConnection
 }
 

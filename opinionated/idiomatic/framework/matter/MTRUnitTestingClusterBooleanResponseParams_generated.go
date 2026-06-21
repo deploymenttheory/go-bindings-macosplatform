@@ -5,97 +5,114 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRUnitTestingClusterBooleanResponseParams wraps [raw.MTRUnitTestingClusterBooleanResponseParams] with a fluent Go API.
+// MTRUnitTestingClusterBooleanResponseParams is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterBooleanResponseParams.
 type MTRUnitTestingClusterBooleanResponseParams struct {
-	inner *raw.MTRUnitTestingClusterBooleanResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRUnitTestingClusterBooleanResponseParams].
-func (x *MTRUnitTestingClusterBooleanResponseParams) Unwrap() *raw.MTRUnitTestingClusterBooleanResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRUnitTestingClusterBooleanResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRUnitTestingClusterBooleanResponseParamsFromID adopts an existing object pointer as a MTRUnitTestingClusterBooleanResponseParams (nil for 0).
+// MTRUnitTestingClusterBooleanResponseParamsFromID adopts an existing Objective-C object as a MTRUnitTestingClusterBooleanResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRUnitTestingClusterBooleanResponseParamsFromID(id objc.ID) *MTRUnitTestingClusterBooleanResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRUnitTestingClusterBooleanResponseParams{inner: raw.MTRUnitTestingClusterBooleanResponseParamsFromID(id)}
+	x := &MTRUnitTestingClusterBooleanResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRUnitTestingClusterBooleanResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRUnitTestingClusterBooleanResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRUnitTestingClusterBooleanResponseParamsAdopt(id objc.ID) *MTRUnitTestingClusterBooleanResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRUnitTestingClusterBooleanResponseParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRUnitTestingClusterBooleanResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRUnitTestingClusterBooleanResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRUnitTestingClusterBooleanResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize an MTRUnitTestingClusterBooleanResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 //
-// NewMTRUnitTestingClusterBooleanResponseParamsWithResponseValueError creates a new [MTRUnitTestingClusterBooleanResponseParams].
-func NewMTRUnitTestingClusterBooleanResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRUnitTestingClusterBooleanResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRUnitTestingClusterBooleanResponseParams")), objc.RegisterName("alloc"))
+// NewMTRUnitTestingClusterBooleanResponseParamsWithResponseValueError creates a new MTRUnitTestingClusterBooleanResponseParams.
+func NewMTRUnitTestingClusterBooleanResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRUnitTestingClusterBooleanResponseParams, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRUnitTestingClusterBooleanResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &MTRUnitTestingClusterBooleanResponseParams{inner: raw.MTRUnitTestingClusterBooleanResponseParamsFromID(_id)}, nil
+	return mTRUnitTestingClusterBooleanResponseParamsAdopt(_id), nil
 }
 
-// WithValue sets the value property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterBooleanResponseParams) WithValue(value *foundation.NSNumber) *MTRUnitTestingClusterBooleanResponseParams {
-	x.inner.SetValue(value)
+// WithValue sets value and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterBooleanResponseParams) WithValue(value obj.Object) *MTRUnitTestingClusterBooleanResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterBooleanResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterBooleanResponseParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterBooleanResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterBooleanResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Value calls the underlying Value.
-func (x *MTRUnitTestingClusterBooleanResponseParams) Value() *foundation.NSNumber {
-	return x.inner.Value()
+func (x *MTRUnitTestingClusterBooleanResponseParams) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
 }
 
-// SetValue calls the underlying SetValue.
-func (x *MTRUnitTestingClusterBooleanResponseParams) SetValue(value *foundation.NSNumber) {
-	x.inner.SetValue(value)
+func (x *MTRUnitTestingClusterBooleanResponseParams) SetValue(value obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRUnitTestingClusterBooleanResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRUnitTestingClusterBooleanResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRUnitTestingClusterBooleanResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
-}
-
-func (x *MTRUnitTestingClusterBooleanResponseParams) asMTRUnitTestingClusterBooleanResponseParams() *raw.MTRUnitTestingClusterBooleanResponseParams {
-	return x.inner
+func (x *MTRUnitTestingClusterBooleanResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // MTRUnitTestingClusterBooleanResponseParamsable is the interface implemented by [MTRUnitTestingClusterBooleanResponseParams], for mocking and DI.
 type MTRUnitTestingClusterBooleanResponseParamsable interface {
-	Unwrap() *raw.MTRUnitTestingClusterBooleanResponseParams
-	WithValue(value *foundation.NSNumber) *MTRUnitTestingClusterBooleanResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterBooleanResponseParams
-	Value() *foundation.NSNumber
-	SetValue(value *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	obj.Object
+	WithValue(value obj.Object) *MTRUnitTestingClusterBooleanResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterBooleanResponseParams
+	Value() obj.Object
+	SetValue(value obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
 }
 
 var _ MTRUnitTestingClusterBooleanResponseParamsable = (*MTRUnitTestingClusterBooleanResponseParams)(nil)

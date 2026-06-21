@@ -5,3065 +5,1940 @@
 package cfopendirectory
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cfopendirectory"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KODErrorDomainFramework returns the value of the CoreFoundation reference constant kODErrorDomainFramework as an objc.ID.
-func KODErrorDomainFramework() objc.ID { return purego.CFConstant(raw.KODErrorDomainFramework()) }
+// KODErrorDomainFramework returns the value of the constant kODErrorDomainFramework.
+func KODErrorDomainFramework() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODErrorDomainFramework")))
+}
+
+// KODSessionProxyAddress returns the value of the constant kODSessionProxyAddress.
+func KODSessionProxyAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODSessionProxyAddress")))
+}
+
+// KODSessionProxyPort returns the value of the constant kODSessionProxyPort.
+func KODSessionProxyPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODSessionProxyPort")))
+}
+
+// KODSessionProxyUsername returns the value of the constant kODSessionProxyUsername.
+func KODSessionProxyUsername() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODSessionProxyUsername")))
+}
+
+// KODSessionProxyPassword returns the value of the constant kODSessionProxyPassword.
+func KODSessionProxyPassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODSessionProxyPassword")))
+}
+
+// KODModuleConfigOptionQueryTimeout returns the value of the constant kODModuleConfigOptionQueryTimeout.
+func KODModuleConfigOptionQueryTimeout() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODModuleConfigOptionQueryTimeout")))
+}
 
-// KODSessionProxyAddress returns the value of the CoreFoundation reference constant kODSessionProxyAddress as an objc.ID.
-func KODSessionProxyAddress() objc.ID { return purego.CFConstant(raw.KODSessionProxyAddress()) }
+// KODModuleConfigOptionConnectionSetupTimeout returns the value of the constant kODModuleConfigOptionConnectionSetupTimeout.
+func KODModuleConfigOptionConnectionSetupTimeout() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODModuleConfigOptionConnectionSetupTimeout")))
+}
+
+// KODModuleConfigOptionConnectionIdleDisconnect returns the value of the constant kODModuleConfigOptionConnectionIdleDisconnect.
+func KODModuleConfigOptionConnectionIdleDisconnect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODModuleConfigOptionConnectionIdleDisconnect")))
+}
+
+// KODModuleConfigOptionPacketSigning returns the value of the constant kODModuleConfigOptionPacketSigning.
+func KODModuleConfigOptionPacketSigning() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODModuleConfigOptionPacketSigning")))
+}
+
+// KODModuleConfigOptionPacketEncryption returns the value of the constant kODModuleConfigOptionPacketEncryption.
+func KODModuleConfigOptionPacketEncryption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODModuleConfigOptionPacketEncryption")))
+}
+
+// KODModuleConfigOptionManInTheMiddle returns the value of the constant kODModuleConfigOptionManInTheMiddle.
+func KODModuleConfigOptionManInTheMiddle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODModuleConfigOptionManInTheMiddle")))
+}
 
-// KODSessionProxyPort returns the value of the CoreFoundation reference constant kODSessionProxyPort as an objc.ID.
-func KODSessionProxyPort() objc.ID { return purego.CFConstant(raw.KODSessionProxyPort()) }
+// KODNodeOptionsQuerySkippedSubnode returns the value of the constant kODNodeOptionsQuerySkippedSubnode.
+func KODNodeOptionsQuerySkippedSubnode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODNodeOptionsQuerySkippedSubnode")))
+}
 
-// KODSessionProxyUsername returns the value of the CoreFoundation reference constant kODSessionProxyUsername as an objc.ID.
-func KODSessionProxyUsername() objc.ID { return purego.CFConstant(raw.KODSessionProxyUsername()) }
+// KODRecordTypeAttributeTypes returns the string constant kODRecordTypeAttributeTypes, for use as a dictionary key or argument.
+func KODRecordTypeAttributeTypes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeAttributeTypes")))
+}
 
-// KODSessionProxyPassword returns the value of the CoreFoundation reference constant kODSessionProxyPassword as an objc.ID.
-func KODSessionProxyPassword() objc.ID { return purego.CFConstant(raw.KODSessionProxyPassword()) }
+// KODRecordTypeAFPServer returns the string constant kODRecordTypeAFPServer, for use as a dictionary key or argument.
+func KODRecordTypeAFPServer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeAFPServer")))
+}
 
-// KODModuleConfigOptionQueryTimeout returns the value of the CoreFoundation reference constant kODModuleConfigOptionQueryTimeout as an objc.ID.
-func KODModuleConfigOptionQueryTimeout() objc.ID {
-	return purego.CFConstant(raw.KODModuleConfigOptionQueryTimeout())
+// KODRecordTypeAliases returns the string constant kODRecordTypeAliases, for use as a dictionary key or argument.
+func KODRecordTypeAliases() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeAliases")))
 }
 
-// KODModuleConfigOptionConnectionSetupTimeout returns the value of the CoreFoundation reference constant kODModuleConfigOptionConnectionSetupTimeout as an objc.ID.
-func KODModuleConfigOptionConnectionSetupTimeout() objc.ID {
-	return purego.CFConstant(raw.KODModuleConfigOptionConnectionSetupTimeout())
+// KODRecordTypeAugments returns the string constant kODRecordTypeAugments, for use as a dictionary key or argument.
+func KODRecordTypeAugments() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeAugments")))
 }
 
-// KODModuleConfigOptionConnectionIdleDisconnect returns the value of the CoreFoundation reference constant kODModuleConfigOptionConnectionIdleDisconnect as an objc.ID.
-func KODModuleConfigOptionConnectionIdleDisconnect() objc.ID {
-	return purego.CFConstant(raw.KODModuleConfigOptionConnectionIdleDisconnect())
+// KODRecordTypeAutomount returns the string constant kODRecordTypeAutomount, for use as a dictionary key or argument.
+func KODRecordTypeAutomount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeAutomount")))
 }
 
-// KODModuleConfigOptionPacketSigning returns the value of the CoreFoundation reference constant kODModuleConfigOptionPacketSigning as an objc.ID.
-func KODModuleConfigOptionPacketSigning() objc.ID {
-	return purego.CFConstant(raw.KODModuleConfigOptionPacketSigning())
+// KODRecordTypeAutomountMap returns the string constant kODRecordTypeAutomountMap, for use as a dictionary key or argument.
+func KODRecordTypeAutomountMap() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeAutomountMap")))
 }
 
-// KODModuleConfigOptionPacketEncryption returns the value of the CoreFoundation reference constant kODModuleConfigOptionPacketEncryption as an objc.ID.
-func KODModuleConfigOptionPacketEncryption() objc.ID {
-	return purego.CFConstant(raw.KODModuleConfigOptionPacketEncryption())
+// KODRecordTypeAutoServerSetup returns the string constant kODRecordTypeAutoServerSetup, for use as a dictionary key or argument.
+func KODRecordTypeAutoServerSetup() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeAutoServerSetup")))
 }
 
-// KODModuleConfigOptionManInTheMiddle returns the value of the CoreFoundation reference constant kODModuleConfigOptionManInTheMiddle as an objc.ID.
-func KODModuleConfigOptionManInTheMiddle() objc.ID {
-	return purego.CFConstant(raw.KODModuleConfigOptionManInTheMiddle())
+// KODRecordTypeBootp returns the string constant kODRecordTypeBootp, for use as a dictionary key or argument.
+func KODRecordTypeBootp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeBootp")))
 }
 
-// KODNodeOptionsQuerySkippedSubnode returns the value of the CoreFoundation reference constant kODNodeOptionsQuerySkippedSubnode as an objc.ID.
-func KODNodeOptionsQuerySkippedSubnode() objc.ID {
-	return purego.CFConstant(raw.KODNodeOptionsQuerySkippedSubnode())
+// KODRecordTypeCertificateAuthorities returns the string constant kODRecordTypeCertificateAuthorities, for use as a dictionary key or argument.
+func KODRecordTypeCertificateAuthorities() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeCertificateAuthorities")))
 }
 
-// KODRecordTypeAttributeTypes returns the string constant kODRecordTypeAttributeTypes as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeAttributeTypes() objc.ID {
-	if _r := raw.KODRecordTypeAttributeTypes(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// KODRecordTypeComputerLists returns the string constant kODRecordTypeComputerLists, for use as a dictionary key or argument.
+func KODRecordTypeComputerLists() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeComputerLists")))
 }
 
-// KODRecordTypeAFPServer returns the string constant kODRecordTypeAFPServer as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeAFPServer() objc.ID {
-	if _r := raw.KODRecordTypeAFPServer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// KODRecordTypeComputerGroups returns the string constant kODRecordTypeComputerGroups, for use as a dictionary key or argument.
+func KODRecordTypeComputerGroups() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeComputerGroups")))
 }
 
-// KODRecordTypeAliases returns the string constant kODRecordTypeAliases as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeAliases() objc.ID {
-	if _r := raw.KODRecordTypeAliases(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// KODRecordTypeComputers returns the string constant kODRecordTypeComputers, for use as a dictionary key or argument.
+func KODRecordTypeComputers() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeComputers")))
 }
 
-// KODRecordTypeAugments returns the string constant kODRecordTypeAugments as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeAugments() objc.ID {
-	if _r := raw.KODRecordTypeAugments(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// KODRecordTypeConfiguration returns the string constant kODRecordTypeConfiguration, for use as a dictionary key or argument.
+func KODRecordTypeConfiguration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeConfiguration")))
 }
 
-// KODRecordTypeAutomount returns the string constant kODRecordTypeAutomount as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeAutomount() objc.ID {
-	if _r := raw.KODRecordTypeAutomount(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// KODRecordTypeEthernets returns the string constant kODRecordTypeEthernets, for use as a dictionary key or argument.
+func KODRecordTypeEthernets() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeEthernets")))
 }
 
-// KODRecordTypeAutomountMap returns the string constant kODRecordTypeAutomountMap as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeAutomountMap() objc.ID {
-	if _r := raw.KODRecordTypeAutomountMap(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// KODRecordTypeFileMakerServers returns the string constant kODRecordTypeFileMakerServers, for use as a dictionary key or argument.
+func KODRecordTypeFileMakerServers() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeFileMakerServers")))
 }
 
-// KODRecordTypeAutoServerSetup returns the string constant kODRecordTypeAutoServerSetup as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeAutoServerSetup() objc.ID {
-	if _r := raw.KODRecordTypeAutoServerSetup(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// KODRecordTypeFTPServer returns the string constant kODRecordTypeFTPServer, for use as a dictionary key or argument.
+func KODRecordTypeFTPServer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeFTPServer")))
 }
-
-// KODRecordTypeBootp returns the string constant kODRecordTypeBootp as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeBootp() objc.ID {
-	if _r := raw.KODRecordTypeBootp(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeGroups returns the string constant kODRecordTypeGroups, for use as a dictionary key or argument.
+func KODRecordTypeGroups() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeGroups")))
 }
-
-// KODRecordTypeCertificateAuthorities returns the string constant kODRecordTypeCertificateAuthorities as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeCertificateAuthorities() objc.ID {
-	if _r := raw.KODRecordTypeCertificateAuthorities(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeHostServices returns the string constant kODRecordTypeHostServices, for use as a dictionary key or argument.
+func KODRecordTypeHostServices() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeHostServices")))
 }
-
-// KODRecordTypeComputerLists returns the string constant kODRecordTypeComputerLists as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeComputerLists() objc.ID {
-	if _r := raw.KODRecordTypeComputerLists(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeHosts returns the string constant kODRecordTypeHosts, for use as a dictionary key or argument.
+func KODRecordTypeHosts() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeHosts")))
 }
-
-// KODRecordTypeComputerGroups returns the string constant kODRecordTypeComputerGroups as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeComputerGroups() objc.ID {
-	if _r := raw.KODRecordTypeComputerGroups(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeLDAPServer returns the string constant kODRecordTypeLDAPServer, for use as a dictionary key or argument.
+func KODRecordTypeLDAPServer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeLDAPServer")))
 }
-
-// KODRecordTypeComputers returns the string constant kODRecordTypeComputers as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeComputers() objc.ID {
-	if _r := raw.KODRecordTypeComputers(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeLocations returns the string constant kODRecordTypeLocations, for use as a dictionary key or argument.
+func KODRecordTypeLocations() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeLocations")))
 }
-
-// KODRecordTypeConfiguration returns the string constant kODRecordTypeConfiguration as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeConfiguration() objc.ID {
-	if _r := raw.KODRecordTypeConfiguration(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeMounts returns the string constant kODRecordTypeMounts, for use as a dictionary key or argument.
+func KODRecordTypeMounts() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeMounts")))
 }
-
-// KODRecordTypeEthernets returns the string constant kODRecordTypeEthernets as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeEthernets() objc.ID {
-	if _r := raw.KODRecordTypeEthernets(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeNFS returns the string constant kODRecordTypeNFS, for use as a dictionary key or argument.
+func KODRecordTypeNFS() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeNFS"))) }
+
+// KODRecordTypeNetDomains returns the string constant kODRecordTypeNetDomains, for use as a dictionary key or argument.
+func KODRecordTypeNetDomains() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeNetDomains")))
 }
-
-// KODRecordTypeFileMakerServers returns the string constant kODRecordTypeFileMakerServers as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeFileMakerServers() objc.ID {
-	if _r := raw.KODRecordTypeFileMakerServers(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeNetGroups returns the string constant kODRecordTypeNetGroups, for use as a dictionary key or argument.
+func KODRecordTypeNetGroups() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeNetGroups")))
 }
-
-// KODRecordTypeFTPServer returns the string constant kODRecordTypeFTPServer as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeFTPServer() objc.ID {
-	if _r := raw.KODRecordTypeFTPServer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeNetworks returns the string constant kODRecordTypeNetworks, for use as a dictionary key or argument.
+func KODRecordTypeNetworks() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeNetworks")))
 }
-
-// KODRecordTypeGroups returns the string constant kODRecordTypeGroups as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeGroups() objc.ID {
-	if _r := raw.KODRecordTypeGroups(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypePeople returns the string constant kODRecordTypePeople, for use as a dictionary key or argument.
+func KODRecordTypePeople() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypePeople")))
 }
-
-// KODRecordTypeHostServices returns the string constant kODRecordTypeHostServices as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeHostServices() objc.ID {
-	if _r := raw.KODRecordTypeHostServices(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypePresetComputers returns the string constant kODRecordTypePresetComputers, for use as a dictionary key or argument.
+func KODRecordTypePresetComputers() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypePresetComputers")))
 }
-
-// KODRecordTypeHosts returns the string constant kODRecordTypeHosts as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeHosts() objc.ID {
-	if _r := raw.KODRecordTypeHosts(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypePresetComputerGroups returns the string constant kODRecordTypePresetComputerGroups, for use as a dictionary key or argument.
+func KODRecordTypePresetComputerGroups() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypePresetComputerGroups")))
 }
-
-// KODRecordTypeLDAPServer returns the string constant kODRecordTypeLDAPServer as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeLDAPServer() objc.ID {
-	if _r := raw.KODRecordTypeLDAPServer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypePresetComputerLists returns the string constant kODRecordTypePresetComputerLists, for use as a dictionary key or argument.
+func KODRecordTypePresetComputerLists() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypePresetComputerLists")))
 }
-
-// KODRecordTypeLocations returns the string constant kODRecordTypeLocations as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeLocations() objc.ID {
-	if _r := raw.KODRecordTypeLocations(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypePresetGroups returns the string constant kODRecordTypePresetGroups, for use as a dictionary key or argument.
+func KODRecordTypePresetGroups() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypePresetGroups")))
 }
-
-// KODRecordTypeMounts returns the string constant kODRecordTypeMounts as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeMounts() objc.ID {
-	if _r := raw.KODRecordTypeMounts(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypePresetUsers returns the string constant kODRecordTypePresetUsers, for use as a dictionary key or argument.
+func KODRecordTypePresetUsers() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypePresetUsers")))
 }
-
-// KODRecordTypeNFS returns the string constant kODRecordTypeNFS as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeNFS() objc.ID {
-	if _r := raw.KODRecordTypeNFS(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypePrintService returns the string constant kODRecordTypePrintService, for use as a dictionary key or argument.
+func KODRecordTypePrintService() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypePrintService")))
 }
-
-// KODRecordTypeNetDomains returns the string constant kODRecordTypeNetDomains as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeNetDomains() objc.ID {
-	if _r := raw.KODRecordTypeNetDomains(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypePrintServiceUser returns the string constant kODRecordTypePrintServiceUser, for use as a dictionary key or argument.
+func KODRecordTypePrintServiceUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypePrintServiceUser")))
 }
-
-// KODRecordTypeNetGroups returns the string constant kODRecordTypeNetGroups as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeNetGroups() objc.ID {
-	if _r := raw.KODRecordTypeNetGroups(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypePrinters returns the string constant kODRecordTypePrinters, for use as a dictionary key or argument.
+func KODRecordTypePrinters() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypePrinters")))
 }
-
-// KODRecordTypeNetworks returns the string constant kODRecordTypeNetworks as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeNetworks() objc.ID {
-	if _r := raw.KODRecordTypeNetworks(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeProtocols returns the string constant kODRecordTypeProtocols, for use as a dictionary key or argument.
+func KODRecordTypeProtocols() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeProtocols")))
 }
-
-// KODRecordTypePeople returns the string constant kODRecordTypePeople as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypePeople() objc.ID {
-	if _r := raw.KODRecordTypePeople(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeQTSServer returns the string constant kODRecordTypeQTSServer, for use as a dictionary key or argument.
+func KODRecordTypeQTSServer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeQTSServer")))
 }
-
-// KODRecordTypePresetComputers returns the string constant kODRecordTypePresetComputers as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypePresetComputers() objc.ID {
-	if _r := raw.KODRecordTypePresetComputers(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeQueryInformation returns the string constant kODRecordTypeQueryInformation, for use as a dictionary key or argument.
+func KODRecordTypeQueryInformation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeQueryInformation")))
 }
-
-// KODRecordTypePresetComputerGroups returns the string constant kODRecordTypePresetComputerGroups as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypePresetComputerGroups() objc.ID {
-	if _r := raw.KODRecordTypePresetComputerGroups(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeRecordTypes returns the string constant kODRecordTypeRecordTypes, for use as a dictionary key or argument.
+func KODRecordTypeRecordTypes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeRecordTypes")))
 }
-
-// KODRecordTypePresetComputerLists returns the string constant kODRecordTypePresetComputerLists as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypePresetComputerLists() objc.ID {
-	if _r := raw.KODRecordTypePresetComputerLists(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeResources returns the string constant kODRecordTypeResources, for use as a dictionary key or argument.
+func KODRecordTypeResources() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeResources")))
 }
-
-// KODRecordTypePresetGroups returns the string constant kODRecordTypePresetGroups as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypePresetGroups() objc.ID {
-	if _r := raw.KODRecordTypePresetGroups(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeRPC returns the string constant kODRecordTypeRPC, for use as a dictionary key or argument.
+func KODRecordTypeRPC() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeRPC"))) }
+
+// KODRecordTypeSMBServer returns the string constant kODRecordTypeSMBServer, for use as a dictionary key or argument.
+func KODRecordTypeSMBServer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeSMBServer")))
 }
-
-// KODRecordTypePresetUsers returns the string constant kODRecordTypePresetUsers as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypePresetUsers() objc.ID {
-	if _r := raw.KODRecordTypePresetUsers(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeServer returns the string constant kODRecordTypeServer, for use as a dictionary key or argument.
+func KODRecordTypeServer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeServer")))
 }
-
-// KODRecordTypePrintService returns the string constant kODRecordTypePrintService as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypePrintService() objc.ID {
-	if _r := raw.KODRecordTypePrintService(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeServices returns the string constant kODRecordTypeServices, for use as a dictionary key or argument.
+func KODRecordTypeServices() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeServices")))
 }
-
-// KODRecordTypePrintServiceUser returns the string constant kODRecordTypePrintServiceUser as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypePrintServiceUser() objc.ID {
-	if _r := raw.KODRecordTypePrintServiceUser(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeSharePoints returns the string constant kODRecordTypeSharePoints, for use as a dictionary key or argument.
+func KODRecordTypeSharePoints() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeSharePoints")))
 }
-
-// KODRecordTypePrinters returns the string constant kODRecordTypePrinters as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypePrinters() objc.ID {
-	if _r := raw.KODRecordTypePrinters(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeUsers returns the string constant kODRecordTypeUsers, for use as a dictionary key or argument.
+func KODRecordTypeUsers() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeUsers")))
 }
-
-// KODRecordTypeProtocols returns the string constant kODRecordTypeProtocols as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeProtocols() objc.ID {
-	if _r := raw.KODRecordTypeProtocols(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODRecordTypeWebServer returns the string constant kODRecordTypeWebServer, for use as a dictionary key or argument.
+func KODRecordTypeWebServer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODRecordTypeWebServer")))
 }
-
-// KODRecordTypeQTSServer returns the string constant kODRecordTypeQTSServer as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeQTSServer() objc.ID {
-	if _r := raw.KODRecordTypeQTSServer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAllAttributes returns the string constant kODAttributeTypeAllAttributes, for use as a dictionary key or argument.
+func KODAttributeTypeAllAttributes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAllAttributes")))
 }
-
-// KODRecordTypeQueryInformation returns the string constant kODRecordTypeQueryInformation as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeQueryInformation() objc.ID {
-	if _r := raw.KODRecordTypeQueryInformation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeStandardOnly returns the string constant kODAttributeTypeStandardOnly, for use as a dictionary key or argument.
+func KODAttributeTypeStandardOnly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeStandardOnly")))
 }
-
-// KODRecordTypeRecordTypes returns the string constant kODRecordTypeRecordTypes as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeRecordTypes() objc.ID {
-	if _r := raw.KODRecordTypeRecordTypes(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeNativeOnly returns the string constant kODAttributeTypeNativeOnly, for use as a dictionary key or argument.
+func KODAttributeTypeNativeOnly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeNativeOnly")))
 }
-
-// KODRecordTypeResources returns the string constant kODRecordTypeResources as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeResources() objc.ID {
-	if _r := raw.KODRecordTypeResources(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeMetaAmbiguousName returns the string constant kODAttributeTypeMetaAmbiguousName, for use as a dictionary key or argument.
+func KODAttributeTypeMetaAmbiguousName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeMetaAmbiguousName")))
 }
-
-// KODRecordTypeRPC returns the string constant kODRecordTypeRPC as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeRPC() objc.ID {
-	if _r := raw.KODRecordTypeRPC(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeMetaAugmentedAttributes returns the string constant kODAttributeTypeMetaAugmentedAttributes, for use as a dictionary key or argument.
+func KODAttributeTypeMetaAugmentedAttributes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeMetaAugmentedAttributes")))
 }
-
-// KODRecordTypeSMBServer returns the string constant kODRecordTypeSMBServer as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeSMBServer() objc.ID {
-	if _r := raw.KODRecordTypeSMBServer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeMetaRecordName returns the string constant kODAttributeTypeMetaRecordName, for use as a dictionary key or argument.
+func KODAttributeTypeMetaRecordName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeMetaRecordName")))
 }
-
-// KODRecordTypeServer returns the string constant kODRecordTypeServer as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeServer() objc.ID {
-	if _r := raw.KODRecordTypeServer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAdminLimits returns the string constant kODAttributeTypeAdminLimits, for use as a dictionary key or argument.
+func KODAttributeTypeAdminLimits() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAdminLimits")))
 }
-
-// KODRecordTypeServices returns the string constant kODRecordTypeServices as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeServices() objc.ID {
-	if _r := raw.KODRecordTypeServices(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAltSecurityIdentities returns the string constant kODAttributeTypeAltSecurityIdentities, for use as a dictionary key or argument.
+func KODAttributeTypeAltSecurityIdentities() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAltSecurityIdentities")))
 }
-
-// KODRecordTypeSharePoints returns the string constant kODRecordTypeSharePoints as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeSharePoints() objc.ID {
-	if _r := raw.KODRecordTypeSharePoints(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAuthenticationHint returns the string constant kODAttributeTypeAuthenticationHint, for use as a dictionary key or argument.
+func KODAttributeTypeAuthenticationHint() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAuthenticationHint")))
 }
-
-// KODRecordTypeUsers returns the string constant kODRecordTypeUsers as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeUsers() objc.ID {
-	if _r := raw.KODRecordTypeUsers(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAllTypes returns the string constant kODAttributeTypeAllTypes, for use as a dictionary key or argument.
+func KODAttributeTypeAllTypes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAllTypes")))
 }
-
-// KODRecordTypeWebServer returns the string constant kODRecordTypeWebServer as an objc.ID, for use as a dictionary key or selector argument.
-func KODRecordTypeWebServer() objc.ID {
-	if _r := raw.KODRecordTypeWebServer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAuthorityRevocationList returns the string constant kODAttributeTypeAuthorityRevocationList, for use as a dictionary key or argument.
+func KODAttributeTypeAuthorityRevocationList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAuthorityRevocationList")))
 }
-
-// KODAttributeTypeAllAttributes returns the string constant kODAttributeTypeAllAttributes as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAllAttributes() objc.ID {
-	if _r := raw.KODAttributeTypeAllAttributes(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeBirthday returns the string constant kODAttributeTypeBirthday, for use as a dictionary key or argument.
+func KODAttributeTypeBirthday() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeBirthday")))
 }
-
-// KODAttributeTypeStandardOnly returns the string constant kODAttributeTypeStandardOnly as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeStandardOnly() objc.ID {
-	if _r := raw.KODAttributeTypeStandardOnly(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeCACertificate returns the string constant kODAttributeTypeCACertificate, for use as a dictionary key or argument.
+func KODAttributeTypeCACertificate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeCACertificate")))
 }
-
-// KODAttributeTypeNativeOnly returns the string constant kODAttributeTypeNativeOnly as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeNativeOnly() objc.ID {
-	if _r := raw.KODAttributeTypeNativeOnly(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeCapacity returns the string constant kODAttributeTypeCapacity, for use as a dictionary key or argument.
+func KODAttributeTypeCapacity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeCapacity")))
 }
-
-// KODAttributeTypeMetaAmbiguousName returns the string constant kODAttributeTypeMetaAmbiguousName as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeMetaAmbiguousName() objc.ID {
-	if _r := raw.KODAttributeTypeMetaAmbiguousName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeCertificateRevocationList returns the string constant kODAttributeTypeCertificateRevocationList, for use as a dictionary key or argument.
+func KODAttributeTypeCertificateRevocationList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeCertificateRevocationList")))
 }
-
-// KODAttributeTypeMetaAugmentedAttributes returns the string constant kODAttributeTypeMetaAugmentedAttributes as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeMetaAugmentedAttributes() objc.ID {
-	if _r := raw.KODAttributeTypeMetaAugmentedAttributes(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeComment returns the string constant kODAttributeTypeComment, for use as a dictionary key or argument.
+func KODAttributeTypeComment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeComment")))
 }
-
-// KODAttributeTypeMetaRecordName returns the string constant kODAttributeTypeMetaRecordName as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeMetaRecordName() objc.ID {
-	if _r := raw.KODAttributeTypeMetaRecordName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeContactGUID returns the string constant kODAttributeTypeContactGUID, for use as a dictionary key or argument.
+func KODAttributeTypeContactGUID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeContactGUID")))
 }
-
-// KODAttributeTypeAdminLimits returns the string constant kODAttributeTypeAdminLimits as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAdminLimits() objc.ID {
-	if _r := raw.KODAttributeTypeAdminLimits(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeContactPerson returns the string constant kODAttributeTypeContactPerson, for use as a dictionary key or argument.
+func KODAttributeTypeContactPerson() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeContactPerson")))
 }
-
-// KODAttributeTypeAltSecurityIdentities returns the string constant kODAttributeTypeAltSecurityIdentities as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAltSecurityIdentities() objc.ID {
-	if _r := raw.KODAttributeTypeAltSecurityIdentities(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeCreationTimestamp returns the string constant kODAttributeTypeCreationTimestamp, for use as a dictionary key or argument.
+func KODAttributeTypeCreationTimestamp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeCreationTimestamp")))
 }
-
-// KODAttributeTypeAuthenticationHint returns the string constant kODAttributeTypeAuthenticationHint as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAuthenticationHint() objc.ID {
-	if _r := raw.KODAttributeTypeAuthenticationHint(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeCrossCertificatePair returns the string constant kODAttributeTypeCrossCertificatePair, for use as a dictionary key or argument.
+func KODAttributeTypeCrossCertificatePair() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeCrossCertificatePair")))
 }
-
-// KODAttributeTypeAllTypes returns the string constant kODAttributeTypeAllTypes as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAllTypes() objc.ID {
-	if _r := raw.KODAttributeTypeAllTypes(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeDataStamp returns the string constant kODAttributeTypeDataStamp, for use as a dictionary key or argument.
+func KODAttributeTypeDataStamp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeDataStamp")))
 }
-
-// KODAttributeTypeAuthorityRevocationList returns the string constant kODAttributeTypeAuthorityRevocationList as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAuthorityRevocationList() objc.ID {
-	if _r := raw.KODAttributeTypeAuthorityRevocationList(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeFullName returns the string constant kODAttributeTypeFullName, for use as a dictionary key or argument.
+func KODAttributeTypeFullName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeFullName")))
 }
-
-// KODAttributeTypeBirthday returns the string constant kODAttributeTypeBirthday as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeBirthday() objc.ID {
-	if _r := raw.KODAttributeTypeBirthday(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeDNSDomain returns the string constant kODAttributeTypeDNSDomain, for use as a dictionary key or argument.
+func KODAttributeTypeDNSDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeDNSDomain")))
 }
-
-// KODAttributeTypeCACertificate returns the string constant kODAttributeTypeCACertificate as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeCACertificate() objc.ID {
-	if _r := raw.KODAttributeTypeCACertificate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeDNSNameServer returns the string constant kODAttributeTypeDNSNameServer, for use as a dictionary key or argument.
+func KODAttributeTypeDNSNameServer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeDNSNameServer")))
 }
-
-// KODAttributeTypeCapacity returns the string constant kODAttributeTypeCapacity as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeCapacity() objc.ID {
-	if _r := raw.KODAttributeTypeCapacity(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeENetAddress returns the string constant kODAttributeTypeENetAddress, for use as a dictionary key or argument.
+func KODAttributeTypeENetAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeENetAddress")))
 }
-
-// KODAttributeTypeCertificateRevocationList returns the string constant kODAttributeTypeCertificateRevocationList as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeCertificateRevocationList() objc.ID {
-	if _r := raw.KODAttributeTypeCertificateRevocationList(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeExpire returns the string constant kODAttributeTypeExpire, for use as a dictionary key or argument.
+func KODAttributeTypeExpire() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeExpire")))
 }
-
-// KODAttributeTypeComment returns the string constant kODAttributeTypeComment as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeComment() objc.ID {
-	if _r := raw.KODAttributeTypeComment(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeFirstName returns the string constant kODAttributeTypeFirstName, for use as a dictionary key or argument.
+func KODAttributeTypeFirstName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeFirstName")))
 }
-
-// KODAttributeTypeContactGUID returns the string constant kODAttributeTypeContactGUID as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeContactGUID() objc.ID {
-	if _r := raw.KODAttributeTypeContactGUID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeGUID returns the string constant kODAttributeTypeGUID, for use as a dictionary key or argument.
+func KODAttributeTypeGUID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeGUID")))
 }
-
-// KODAttributeTypeContactPerson returns the string constant kODAttributeTypeContactPerson as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeContactPerson() objc.ID {
-	if _r := raw.KODAttributeTypeContactPerson(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeHardwareUUID returns the string constant kODAttributeTypeHardwareUUID, for use as a dictionary key or argument.
+func KODAttributeTypeHardwareUUID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeHardwareUUID")))
 }
-
-// KODAttributeTypeCreationTimestamp returns the string constant kODAttributeTypeCreationTimestamp as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeCreationTimestamp() objc.ID {
-	if _r := raw.KODAttributeTypeCreationTimestamp(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeHomeDirectoryQuota returns the string constant kODAttributeTypeHomeDirectoryQuota, for use as a dictionary key or argument.
+func KODAttributeTypeHomeDirectoryQuota() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeHomeDirectoryQuota")))
 }
-
-// KODAttributeTypeCrossCertificatePair returns the string constant kODAttributeTypeCrossCertificatePair as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeCrossCertificatePair() objc.ID {
-	if _r := raw.KODAttributeTypeCrossCertificatePair(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeHomeDirectorySoftQuota returns the string constant kODAttributeTypeHomeDirectorySoftQuota, for use as a dictionary key or argument.
+func KODAttributeTypeHomeDirectorySoftQuota() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeHomeDirectorySoftQuota")))
 }
-
-// KODAttributeTypeDataStamp returns the string constant kODAttributeTypeDataStamp as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeDataStamp() objc.ID {
-	if _r := raw.KODAttributeTypeDataStamp(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeHomeLocOwner returns the string constant kODAttributeTypeHomeLocOwner, for use as a dictionary key or argument.
+func KODAttributeTypeHomeLocOwner() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeHomeLocOwner")))
 }
-
-// KODAttributeTypeFullName returns the string constant kODAttributeTypeFullName as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeFullName() objc.ID {
-	if _r := raw.KODAttributeTypeFullName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeInternetAlias returns the string constant kODAttributeTypeInternetAlias, for use as a dictionary key or argument.
+func KODAttributeTypeInternetAlias() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeInternetAlias")))
 }
-
-// KODAttributeTypeDNSDomain returns the string constant kODAttributeTypeDNSDomain as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeDNSDomain() objc.ID {
-	if _r := raw.KODAttributeTypeDNSDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeKDCConfigData returns the string constant kODAttributeTypeKDCConfigData, for use as a dictionary key or argument.
+func KODAttributeTypeKDCConfigData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeKDCConfigData")))
 }
-
-// KODAttributeTypeDNSNameServer returns the string constant kODAttributeTypeDNSNameServer as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeDNSNameServer() objc.ID {
-	if _r := raw.KODAttributeTypeDNSNameServer(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeKerberosServices returns the string constant kODAttributeTypeKerberosServices, for use as a dictionary key or argument.
+func KODAttributeTypeKerberosServices() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeKerberosServices")))
 }
-
-// KODAttributeTypeENetAddress returns the string constant kODAttributeTypeENetAddress as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeENetAddress() objc.ID {
-	if _r := raw.KODAttributeTypeENetAddress(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeLastName returns the string constant kODAttributeTypeLastName, for use as a dictionary key or argument.
+func KODAttributeTypeLastName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeLastName")))
 }
-
-// KODAttributeTypeExpire returns the string constant kODAttributeTypeExpire as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeExpire() objc.ID {
-	if _r := raw.KODAttributeTypeExpire(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeLDAPSearchBaseSuffix returns the string constant kODAttributeTypeLDAPSearchBaseSuffix, for use as a dictionary key or argument.
+func KODAttributeTypeLDAPSearchBaseSuffix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeLDAPSearchBaseSuffix")))
 }
-
-// KODAttributeTypeFirstName returns the string constant kODAttributeTypeFirstName as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeFirstName() objc.ID {
-	if _r := raw.KODAttributeTypeFirstName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeLocation returns the string constant kODAttributeTypeLocation, for use as a dictionary key or argument.
+func KODAttributeTypeLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeLocation")))
 }
-
-// KODAttributeTypeGUID returns the string constant kODAttributeTypeGUID as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeGUID() objc.ID {
-	if _r := raw.KODAttributeTypeGUID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeMapGUID returns the string constant kODAttributeTypeMapGUID, for use as a dictionary key or argument.
+func KODAttributeTypeMapGUID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeMapGUID")))
 }
-
-// KODAttributeTypeHardwareUUID returns the string constant kODAttributeTypeHardwareUUID as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeHardwareUUID() objc.ID {
-	if _r := raw.KODAttributeTypeHardwareUUID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeMCXFlags returns the string constant kODAttributeTypeMCXFlags, for use as a dictionary key or argument.
+func KODAttributeTypeMCXFlags() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeMCXFlags")))
 }
-
-// KODAttributeTypeHomeDirectoryQuota returns the string constant kODAttributeTypeHomeDirectoryQuota as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeHomeDirectoryQuota() objc.ID {
-	if _r := raw.KODAttributeTypeHomeDirectoryQuota(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeMCXSettings returns the string constant kODAttributeTypeMCXSettings, for use as a dictionary key or argument.
+func KODAttributeTypeMCXSettings() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeMCXSettings")))
 }
-
-// KODAttributeTypeHomeDirectorySoftQuota returns the string constant kODAttributeTypeHomeDirectorySoftQuota as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeHomeDirectorySoftQuota() objc.ID {
-	if _r := raw.KODAttributeTypeHomeDirectorySoftQuota(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeMailAttribute returns the string constant kODAttributeTypeMailAttribute, for use as a dictionary key or argument.
+func KODAttributeTypeMailAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeMailAttribute")))
 }
-
-// KODAttributeTypeHomeLocOwner returns the string constant kODAttributeTypeHomeLocOwner as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeHomeLocOwner() objc.ID {
-	if _r := raw.KODAttributeTypeHomeLocOwner(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeMetaAutomountMap returns the string constant kODAttributeTypeMetaAutomountMap, for use as a dictionary key or argument.
+func KODAttributeTypeMetaAutomountMap() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeMetaAutomountMap")))
 }
-
-// KODAttributeTypeInternetAlias returns the string constant kODAttributeTypeInternetAlias as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeInternetAlias() objc.ID {
-	if _r := raw.KODAttributeTypeInternetAlias(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeMiddleName returns the string constant kODAttributeTypeMiddleName, for use as a dictionary key or argument.
+func KODAttributeTypeMiddleName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeMiddleName")))
 }
-
-// KODAttributeTypeKDCConfigData returns the string constant kODAttributeTypeKDCConfigData as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeKDCConfigData() objc.ID {
-	if _r := raw.KODAttributeTypeKDCConfigData(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeModificationTimestamp returns the string constant kODAttributeTypeModificationTimestamp, for use as a dictionary key or argument.
+func KODAttributeTypeModificationTimestamp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeModificationTimestamp")))
 }
-
-// KODAttributeTypeKerberosServices returns the string constant kODAttributeTypeKerberosServices as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeKerberosServices() objc.ID {
-	if _r := raw.KODAttributeTypeKerberosServices(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeNFSHomeDirectory returns the string constant kODAttributeTypeNFSHomeDirectory, for use as a dictionary key or argument.
+func KODAttributeTypeNFSHomeDirectory() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeNFSHomeDirectory")))
 }
-
-// KODAttributeTypeLastName returns the string constant kODAttributeTypeLastName as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeLastName() objc.ID {
-	if _r := raw.KODAttributeTypeLastName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeNote returns the string constant kODAttributeTypeNote, for use as a dictionary key or argument.
+func KODAttributeTypeNote() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeNote")))
 }
-
-// KODAttributeTypeLDAPSearchBaseSuffix returns the string constant kODAttributeTypeLDAPSearchBaseSuffix as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeLDAPSearchBaseSuffix() objc.ID {
-	if _r := raw.KODAttributeTypeLDAPSearchBaseSuffix(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeOperatingSystem returns the string constant kODAttributeTypeOperatingSystem, for use as a dictionary key or argument.
+func KODAttributeTypeOperatingSystem() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeOperatingSystem")))
 }
-
-// KODAttributeTypeLocation returns the string constant kODAttributeTypeLocation as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeLocation() objc.ID {
-	if _r := raw.KODAttributeTypeLocation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeOperatingSystemVersion returns the string constant kODAttributeTypeOperatingSystemVersion, for use as a dictionary key or argument.
+func KODAttributeTypeOperatingSystemVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeOperatingSystemVersion")))
 }
-
-// KODAttributeTypeMapGUID returns the string constant kODAttributeTypeMapGUID as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeMapGUID() objc.ID {
-	if _r := raw.KODAttributeTypeMapGUID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeOwner returns the string constant kODAttributeTypeOwner, for use as a dictionary key or argument.
+func KODAttributeTypeOwner() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeOwner")))
 }
-
-// KODAttributeTypeMCXFlags returns the string constant kODAttributeTypeMCXFlags as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeMCXFlags() objc.ID {
-	if _r := raw.KODAttributeTypeMCXFlags(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeOwnerGUID returns the string constant kODAttributeTypeOwnerGUID, for use as a dictionary key or argument.
+func KODAttributeTypeOwnerGUID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeOwnerGUID")))
 }
-
-// KODAttributeTypeMCXSettings returns the string constant kODAttributeTypeMCXSettings as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeMCXSettings() objc.ID {
-	if _r := raw.KODAttributeTypeMCXSettings(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePassword returns the string constant kODAttributeTypePassword, for use as a dictionary key or argument.
+func KODAttributeTypePassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePassword")))
 }
-
-// KODAttributeTypeMailAttribute returns the string constant kODAttributeTypeMailAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeMailAttribute() objc.ID {
-	if _r := raw.KODAttributeTypeMailAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePasswordPlus returns the string constant kODAttributeTypePasswordPlus, for use as a dictionary key or argument.
+func KODAttributeTypePasswordPlus() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePasswordPlus")))
 }
-
-// KODAttributeTypeMetaAutomountMap returns the string constant kODAttributeTypeMetaAutomountMap as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeMetaAutomountMap() objc.ID {
-	if _r := raw.KODAttributeTypeMetaAutomountMap(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePasswordPolicyOptions returns the string constant kODAttributeTypePasswordPolicyOptions, for use as a dictionary key or argument.
+func KODAttributeTypePasswordPolicyOptions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePasswordPolicyOptions")))
 }
-
-// KODAttributeTypeMiddleName returns the string constant kODAttributeTypeMiddleName as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeMiddleName() objc.ID {
-	if _r := raw.KODAttributeTypeMiddleName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePasswordServerList returns the string constant kODAttributeTypePasswordServerList, for use as a dictionary key or argument.
+func KODAttributeTypePasswordServerList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePasswordServerList")))
 }
-
-// KODAttributeTypeModificationTimestamp returns the string constant kODAttributeTypeModificationTimestamp as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeModificationTimestamp() objc.ID {
-	if _r := raw.KODAttributeTypeModificationTimestamp(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePasswordServerLocation returns the string constant kODAttributeTypePasswordServerLocation, for use as a dictionary key or argument.
+func KODAttributeTypePasswordServerLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePasswordServerLocation")))
 }
-
-// KODAttributeTypeNFSHomeDirectory returns the string constant kODAttributeTypeNFSHomeDirectory as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeNFSHomeDirectory() objc.ID {
-	if _r := raw.KODAttributeTypeNFSHomeDirectory(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePicture returns the string constant kODAttributeTypePicture, for use as a dictionary key or argument.
+func KODAttributeTypePicture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePicture")))
 }
-
-// KODAttributeTypeNote returns the string constant kODAttributeTypeNote as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeNote() objc.ID {
-	if _r := raw.KODAttributeTypeNote(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePort returns the string constant kODAttributeTypePort, for use as a dictionary key or argument.
+func KODAttributeTypePort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePort")))
 }
-
-// KODAttributeTypeOperatingSystem returns the string constant kODAttributeTypeOperatingSystem as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeOperatingSystem() objc.ID {
-	if _r := raw.KODAttributeTypeOperatingSystem(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePresetUserIsAdmin returns the string constant kODAttributeTypePresetUserIsAdmin, for use as a dictionary key or argument.
+func KODAttributeTypePresetUserIsAdmin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePresetUserIsAdmin")))
 }
-
-// KODAttributeTypeOperatingSystemVersion returns the string constant kODAttributeTypeOperatingSystemVersion as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeOperatingSystemVersion() objc.ID {
-	if _r := raw.KODAttributeTypeOperatingSystemVersion(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePrimaryComputerGUID returns the string constant kODAttributeTypePrimaryComputerGUID, for use as a dictionary key or argument.
+func KODAttributeTypePrimaryComputerGUID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePrimaryComputerGUID")))
 }
-
-// KODAttributeTypeOwner returns the string constant kODAttributeTypeOwner as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeOwner() objc.ID {
-	if _r := raw.KODAttributeTypeOwner(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePrimaryComputerList returns the string constant kODAttributeTypePrimaryComputerList, for use as a dictionary key or argument.
+func KODAttributeTypePrimaryComputerList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePrimaryComputerList")))
 }
-
-// KODAttributeTypeOwnerGUID returns the string constant kODAttributeTypeOwnerGUID as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeOwnerGUID() objc.ID {
-	if _r := raw.KODAttributeTypeOwnerGUID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePrimaryGroupID returns the string constant kODAttributeTypePrimaryGroupID, for use as a dictionary key or argument.
+func KODAttributeTypePrimaryGroupID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePrimaryGroupID")))
 }
-
-// KODAttributeTypePassword returns the string constant kODAttributeTypePassword as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePassword() objc.ID {
-	if _r := raw.KODAttributeTypePassword(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePrinter1284DeviceID returns the string constant kODAttributeTypePrinter1284DeviceID, for use as a dictionary key or argument.
+func KODAttributeTypePrinter1284DeviceID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePrinter1284DeviceID")))
 }
-
-// KODAttributeTypePasswordPlus returns the string constant kODAttributeTypePasswordPlus as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePasswordPlus() objc.ID {
-	if _r := raw.KODAttributeTypePasswordPlus(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePrinterLPRHost returns the string constant kODAttributeTypePrinterLPRHost, for use as a dictionary key or argument.
+func KODAttributeTypePrinterLPRHost() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePrinterLPRHost")))
 }
-
-// KODAttributeTypePasswordPolicyOptions returns the string constant kODAttributeTypePasswordPolicyOptions as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePasswordPolicyOptions() objc.ID {
-	if _r := raw.KODAttributeTypePasswordPolicyOptions(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePrinterLPRQueue returns the string constant kODAttributeTypePrinterLPRQueue, for use as a dictionary key or argument.
+func KODAttributeTypePrinterLPRQueue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePrinterLPRQueue")))
 }
-
-// KODAttributeTypePasswordServerList returns the string constant kODAttributeTypePasswordServerList as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePasswordServerList() objc.ID {
-	if _r := raw.KODAttributeTypePasswordServerList(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePrinterMakeAndModel returns the string constant kODAttributeTypePrinterMakeAndModel, for use as a dictionary key or argument.
+func KODAttributeTypePrinterMakeAndModel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePrinterMakeAndModel")))
 }
-
-// KODAttributeTypePasswordServerLocation returns the string constant kODAttributeTypePasswordServerLocation as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePasswordServerLocation() objc.ID {
-	if _r := raw.KODAttributeTypePasswordServerLocation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePrinterType returns the string constant kODAttributeTypePrinterType, for use as a dictionary key or argument.
+func KODAttributeTypePrinterType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePrinterType")))
 }
-
-// KODAttributeTypePicture returns the string constant kODAttributeTypePicture as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePicture() objc.ID {
-	if _r := raw.KODAttributeTypePicture(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePrinterURI returns the string constant kODAttributeTypePrinterURI, for use as a dictionary key or argument.
+func KODAttributeTypePrinterURI() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePrinterURI")))
 }
-
-// KODAttributeTypePort returns the string constant kODAttributeTypePort as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePort() objc.ID {
-	if _r := raw.KODAttributeTypePort(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePrinterXRISupported returns the string constant kODAttributeTypePrinterXRISupported, for use as a dictionary key or argument.
+func KODAttributeTypePrinterXRISupported() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePrinterXRISupported")))
 }
-
-// KODAttributeTypePresetUserIsAdmin returns the string constant kODAttributeTypePresetUserIsAdmin as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePresetUserIsAdmin() objc.ID {
-	if _r := raw.KODAttributeTypePresetUserIsAdmin(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePrintServiceInfoText returns the string constant kODAttributeTypePrintServiceInfoText, for use as a dictionary key or argument.
+func KODAttributeTypePrintServiceInfoText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePrintServiceInfoText")))
 }
-
-// KODAttributeTypePrimaryComputerGUID returns the string constant kODAttributeTypePrimaryComputerGUID as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePrimaryComputerGUID() objc.ID {
-	if _r := raw.KODAttributeTypePrimaryComputerGUID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePrintServiceInfoXML returns the string constant kODAttributeTypePrintServiceInfoXML, for use as a dictionary key or argument.
+func KODAttributeTypePrintServiceInfoXML() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePrintServiceInfoXML")))
 }
-
-// KODAttributeTypePrimaryComputerList returns the string constant kODAttributeTypePrimaryComputerList as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePrimaryComputerList() objc.ID {
-	if _r := raw.KODAttributeTypePrimaryComputerList(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePrintServiceUserData returns the string constant kODAttributeTypePrintServiceUserData, for use as a dictionary key or argument.
+func KODAttributeTypePrintServiceUserData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePrintServiceUserData")))
 }
-
-// KODAttributeTypePrimaryGroupID returns the string constant kODAttributeTypePrimaryGroupID as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePrimaryGroupID() objc.ID {
-	if _r := raw.KODAttributeTypePrimaryGroupID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeRealUserID returns the string constant kODAttributeTypeRealUserID, for use as a dictionary key or argument.
+func KODAttributeTypeRealUserID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeRealUserID")))
 }
-
-// KODAttributeTypePrinter1284DeviceID returns the string constant kODAttributeTypePrinter1284DeviceID as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePrinter1284DeviceID() objc.ID {
-	if _r := raw.KODAttributeTypePrinter1284DeviceID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeRelativeDNPrefix returns the string constant kODAttributeTypeRelativeDNPrefix, for use as a dictionary key or argument.
+func KODAttributeTypeRelativeDNPrefix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeRelativeDNPrefix")))
 }
-
-// KODAttributeTypePrinterLPRHost returns the string constant kODAttributeTypePrinterLPRHost as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePrinterLPRHost() objc.ID {
-	if _r := raw.KODAttributeTypePrinterLPRHost(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSMBAcctFlags returns the string constant kODAttributeTypeSMBAcctFlags, for use as a dictionary key or argument.
+func KODAttributeTypeSMBAcctFlags() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSMBAcctFlags")))
 }
-
-// KODAttributeTypePrinterLPRQueue returns the string constant kODAttributeTypePrinterLPRQueue as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePrinterLPRQueue() objc.ID {
-	if _r := raw.KODAttributeTypePrinterLPRQueue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSMBGroupRID returns the string constant kODAttributeTypeSMBGroupRID, for use as a dictionary key or argument.
+func KODAttributeTypeSMBGroupRID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSMBGroupRID")))
 }
-
-// KODAttributeTypePrinterMakeAndModel returns the string constant kODAttributeTypePrinterMakeAndModel as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePrinterMakeAndModel() objc.ID {
-	if _r := raw.KODAttributeTypePrinterMakeAndModel(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSMBHome returns the string constant kODAttributeTypeSMBHome, for use as a dictionary key or argument.
+func KODAttributeTypeSMBHome() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSMBHome")))
 }
-
-// KODAttributeTypePrinterType returns the string constant kODAttributeTypePrinterType as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePrinterType() objc.ID {
-	if _r := raw.KODAttributeTypePrinterType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSMBHomeDrive returns the string constant kODAttributeTypeSMBHomeDrive, for use as a dictionary key or argument.
+func KODAttributeTypeSMBHomeDrive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSMBHomeDrive")))
 }
-
-// KODAttributeTypePrinterURI returns the string constant kODAttributeTypePrinterURI as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePrinterURI() objc.ID {
-	if _r := raw.KODAttributeTypePrinterURI(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSMBKickoffTime returns the string constant kODAttributeTypeSMBKickoffTime, for use as a dictionary key or argument.
+func KODAttributeTypeSMBKickoffTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSMBKickoffTime")))
 }
-
-// KODAttributeTypePrinterXRISupported returns the string constant kODAttributeTypePrinterXRISupported as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePrinterXRISupported() objc.ID {
-	if _r := raw.KODAttributeTypePrinterXRISupported(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSMBLogoffTime returns the string constant kODAttributeTypeSMBLogoffTime, for use as a dictionary key or argument.
+func KODAttributeTypeSMBLogoffTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSMBLogoffTime")))
 }
-
-// KODAttributeTypePrintServiceInfoText returns the string constant kODAttributeTypePrintServiceInfoText as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePrintServiceInfoText() objc.ID {
-	if _r := raw.KODAttributeTypePrintServiceInfoText(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSMBLogonTime returns the string constant kODAttributeTypeSMBLogonTime, for use as a dictionary key or argument.
+func KODAttributeTypeSMBLogonTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSMBLogonTime")))
 }
-
-// KODAttributeTypePrintServiceInfoXML returns the string constant kODAttributeTypePrintServiceInfoXML as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePrintServiceInfoXML() objc.ID {
-	if _r := raw.KODAttributeTypePrintServiceInfoXML(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSMBPrimaryGroupSID returns the string constant kODAttributeTypeSMBPrimaryGroupSID, for use as a dictionary key or argument.
+func KODAttributeTypeSMBPrimaryGroupSID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSMBPrimaryGroupSID")))
 }
-
-// KODAttributeTypePrintServiceUserData returns the string constant kODAttributeTypePrintServiceUserData as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePrintServiceUserData() objc.ID {
-	if _r := raw.KODAttributeTypePrintServiceUserData(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSMBPWDLastSet returns the string constant kODAttributeTypeSMBPWDLastSet, for use as a dictionary key or argument.
+func KODAttributeTypeSMBPWDLastSet() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSMBPWDLastSet")))
 }
-
-// KODAttributeTypeRealUserID returns the string constant kODAttributeTypeRealUserID as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeRealUserID() objc.ID {
-	if _r := raw.KODAttributeTypeRealUserID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSMBProfilePath returns the string constant kODAttributeTypeSMBProfilePath, for use as a dictionary key or argument.
+func KODAttributeTypeSMBProfilePath() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSMBProfilePath")))
 }
-
-// KODAttributeTypeRelativeDNPrefix returns the string constant kODAttributeTypeRelativeDNPrefix as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeRelativeDNPrefix() objc.ID {
-	if _r := raw.KODAttributeTypeRelativeDNPrefix(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSMBRID returns the string constant kODAttributeTypeSMBRID, for use as a dictionary key or argument.
+func KODAttributeTypeSMBRID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSMBRID")))
 }
-
-// KODAttributeTypeSMBAcctFlags returns the string constant kODAttributeTypeSMBAcctFlags as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSMBAcctFlags() objc.ID {
-	if _r := raw.KODAttributeTypeSMBAcctFlags(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSMBScriptPath returns the string constant kODAttributeTypeSMBScriptPath, for use as a dictionary key or argument.
+func KODAttributeTypeSMBScriptPath() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSMBScriptPath")))
 }
-
-// KODAttributeTypeSMBGroupRID returns the string constant kODAttributeTypeSMBGroupRID as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSMBGroupRID() objc.ID {
-	if _r := raw.KODAttributeTypeSMBGroupRID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSMBSID returns the string constant kODAttributeTypeSMBSID, for use as a dictionary key or argument.
+func KODAttributeTypeSMBSID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSMBSID")))
 }
-
-// KODAttributeTypeSMBHome returns the string constant kODAttributeTypeSMBHome as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSMBHome() objc.ID {
-	if _r := raw.KODAttributeTypeSMBHome(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSMBUserWorkstations returns the string constant kODAttributeTypeSMBUserWorkstations, for use as a dictionary key or argument.
+func KODAttributeTypeSMBUserWorkstations() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSMBUserWorkstations")))
 }
-
-// KODAttributeTypeSMBHomeDrive returns the string constant kODAttributeTypeSMBHomeDrive as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSMBHomeDrive() objc.ID {
-	if _r := raw.KODAttributeTypeSMBHomeDrive(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeServiceType returns the string constant kODAttributeTypeServiceType, for use as a dictionary key or argument.
+func KODAttributeTypeServiceType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeServiceType")))
 }
-
-// KODAttributeTypeSMBKickoffTime returns the string constant kODAttributeTypeSMBKickoffTime as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSMBKickoffTime() objc.ID {
-	if _r := raw.KODAttributeTypeSMBKickoffTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSetupAdvertising returns the string constant kODAttributeTypeSetupAdvertising, for use as a dictionary key or argument.
+func KODAttributeTypeSetupAdvertising() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSetupAdvertising")))
 }
-
-// KODAttributeTypeSMBLogoffTime returns the string constant kODAttributeTypeSMBLogoffTime as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSMBLogoffTime() objc.ID {
-	if _r := raw.KODAttributeTypeSMBLogoffTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSetupAutoRegister returns the string constant kODAttributeTypeSetupAutoRegister, for use as a dictionary key or argument.
+func KODAttributeTypeSetupAutoRegister() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSetupAutoRegister")))
 }
-
-// KODAttributeTypeSMBLogonTime returns the string constant kODAttributeTypeSMBLogonTime as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSMBLogonTime() objc.ID {
-	if _r := raw.KODAttributeTypeSMBLogonTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSetupLocation returns the string constant kODAttributeTypeSetupLocation, for use as a dictionary key or argument.
+func KODAttributeTypeSetupLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSetupLocation")))
 }
-
-// KODAttributeTypeSMBPrimaryGroupSID returns the string constant kODAttributeTypeSMBPrimaryGroupSID as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSMBPrimaryGroupSID() objc.ID {
-	if _r := raw.KODAttributeTypeSMBPrimaryGroupSID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSetupOccupation returns the string constant kODAttributeTypeSetupOccupation, for use as a dictionary key or argument.
+func KODAttributeTypeSetupOccupation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSetupOccupation")))
 }
-
-// KODAttributeTypeSMBPWDLastSet returns the string constant kODAttributeTypeSMBPWDLastSet as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSMBPWDLastSet() objc.ID {
-	if _r := raw.KODAttributeTypeSMBPWDLastSet(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeTimeToLive returns the string constant kODAttributeTypeTimeToLive, for use as a dictionary key or argument.
+func KODAttributeTypeTimeToLive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeTimeToLive")))
 }
-
-// KODAttributeTypeSMBProfilePath returns the string constant kODAttributeTypeSMBProfilePath as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSMBProfilePath() objc.ID {
-	if _r := raw.KODAttributeTypeSMBProfilePath(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeTrustInformation returns the string constant kODAttributeTypeTrustInformation, for use as a dictionary key or argument.
+func KODAttributeTypeTrustInformation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeTrustInformation")))
 }
-
-// KODAttributeTypeSMBRID returns the string constant kODAttributeTypeSMBRID as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSMBRID() objc.ID {
-	if _r := raw.KODAttributeTypeSMBRID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeUniqueID returns the string constant kODAttributeTypeUniqueID, for use as a dictionary key or argument.
+func KODAttributeTypeUniqueID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeUniqueID")))
 }
-
-// KODAttributeTypeSMBScriptPath returns the string constant kODAttributeTypeSMBScriptPath as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSMBScriptPath() objc.ID {
-	if _r := raw.KODAttributeTypeSMBScriptPath(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeUserCertificate returns the string constant kODAttributeTypeUserCertificate, for use as a dictionary key or argument.
+func KODAttributeTypeUserCertificate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeUserCertificate")))
 }
-
-// KODAttributeTypeSMBSID returns the string constant kODAttributeTypeSMBSID as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSMBSID() objc.ID {
-	if _r := raw.KODAttributeTypeSMBSID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeUserPKCS12Data returns the string constant kODAttributeTypeUserPKCS12Data, for use as a dictionary key or argument.
+func KODAttributeTypeUserPKCS12Data() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeUserPKCS12Data")))
 }
-
-// KODAttributeTypeSMBUserWorkstations returns the string constant kODAttributeTypeSMBUserWorkstations as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSMBUserWorkstations() objc.ID {
-	if _r := raw.KODAttributeTypeSMBUserWorkstations(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeUserShell returns the string constant kODAttributeTypeUserShell, for use as a dictionary key or argument.
+func KODAttributeTypeUserShell() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeUserShell")))
 }
-
-// KODAttributeTypeServiceType returns the string constant kODAttributeTypeServiceType as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeServiceType() objc.ID {
-	if _r := raw.KODAttributeTypeServiceType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeUserSMIMECertificate returns the string constant kODAttributeTypeUserSMIMECertificate, for use as a dictionary key or argument.
+func KODAttributeTypeUserSMIMECertificate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeUserSMIMECertificate")))
 }
-
-// KODAttributeTypeSetupAdvertising returns the string constant kODAttributeTypeSetupAdvertising as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSetupAdvertising() objc.ID {
-	if _r := raw.KODAttributeTypeSetupAdvertising(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeVFSDumpFreq returns the string constant kODAttributeTypeVFSDumpFreq, for use as a dictionary key or argument.
+func KODAttributeTypeVFSDumpFreq() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeVFSDumpFreq")))
 }
-
-// KODAttributeTypeSetupAutoRegister returns the string constant kODAttributeTypeSetupAutoRegister as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSetupAutoRegister() objc.ID {
-	if _r := raw.KODAttributeTypeSetupAutoRegister(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeVFSLinkDir returns the string constant kODAttributeTypeVFSLinkDir, for use as a dictionary key or argument.
+func KODAttributeTypeVFSLinkDir() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeVFSLinkDir")))
 }
-
-// KODAttributeTypeSetupLocation returns the string constant kODAttributeTypeSetupLocation as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSetupLocation() objc.ID {
-	if _r := raw.KODAttributeTypeSetupLocation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeVFSPassNo returns the string constant kODAttributeTypeVFSPassNo, for use as a dictionary key or argument.
+func KODAttributeTypeVFSPassNo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeVFSPassNo")))
 }
-
-// KODAttributeTypeSetupOccupation returns the string constant kODAttributeTypeSetupOccupation as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSetupOccupation() objc.ID {
-	if _r := raw.KODAttributeTypeSetupOccupation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeVFSType returns the string constant kODAttributeTypeVFSType, for use as a dictionary key or argument.
+func KODAttributeTypeVFSType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeVFSType")))
 }
-
-// KODAttributeTypeTimeToLive returns the string constant kODAttributeTypeTimeToLive as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeTimeToLive() objc.ID {
-	if _r := raw.KODAttributeTypeTimeToLive(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeWeblogURI returns the string constant kODAttributeTypeWeblogURI, for use as a dictionary key or argument.
+func KODAttributeTypeWeblogURI() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeWeblogURI")))
 }
-
-// KODAttributeTypeTrustInformation returns the string constant kODAttributeTypeTrustInformation as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeTrustInformation() objc.ID {
-	if _r := raw.KODAttributeTypeTrustInformation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeXMLPlist returns the string constant kODAttributeTypeXMLPlist, for use as a dictionary key or argument.
+func KODAttributeTypeXMLPlist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeXMLPlist")))
 }
-
-// KODAttributeTypeUniqueID returns the string constant kODAttributeTypeUniqueID as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeUniqueID() objc.ID {
-	if _r := raw.KODAttributeTypeUniqueID(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeProtocolNumber returns the string constant kODAttributeTypeProtocolNumber, for use as a dictionary key or argument.
+func KODAttributeTypeProtocolNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeProtocolNumber")))
 }
-
-// KODAttributeTypeUserCertificate returns the string constant kODAttributeTypeUserCertificate as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeUserCertificate() objc.ID {
-	if _r := raw.KODAttributeTypeUserCertificate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeRPCNumber returns the string constant kODAttributeTypeRPCNumber, for use as a dictionary key or argument.
+func KODAttributeTypeRPCNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeRPCNumber")))
 }
-
-// KODAttributeTypeUserPKCS12Data returns the string constant kODAttributeTypeUserPKCS12Data as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeUserPKCS12Data() objc.ID {
-	if _r := raw.KODAttributeTypeUserPKCS12Data(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeNetworkNumber returns the string constant kODAttributeTypeNetworkNumber, for use as a dictionary key or argument.
+func KODAttributeTypeNetworkNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeNetworkNumber")))
 }
-
-// KODAttributeTypeUserShell returns the string constant kODAttributeTypeUserShell as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeUserShell() objc.ID {
-	if _r := raw.KODAttributeTypeUserShell(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAccessControlEntry returns the string constant kODAttributeTypeAccessControlEntry, for use as a dictionary key or argument.
+func KODAttributeTypeAccessControlEntry() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAccessControlEntry")))
 }
-
-// KODAttributeTypeUserSMIMECertificate returns the string constant kODAttributeTypeUserSMIMECertificate as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeUserSMIMECertificate() objc.ID {
-	if _r := raw.KODAttributeTypeUserSMIMECertificate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAddressLine1 returns the string constant kODAttributeTypeAddressLine1, for use as a dictionary key or argument.
+func KODAttributeTypeAddressLine1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAddressLine1")))
 }
-
-// KODAttributeTypeVFSDumpFreq returns the string constant kODAttributeTypeVFSDumpFreq as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeVFSDumpFreq() objc.ID {
-	if _r := raw.KODAttributeTypeVFSDumpFreq(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAddressLine2 returns the string constant kODAttributeTypeAddressLine2, for use as a dictionary key or argument.
+func KODAttributeTypeAddressLine2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAddressLine2")))
 }
-
-// KODAttributeTypeVFSLinkDir returns the string constant kODAttributeTypeVFSLinkDir as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeVFSLinkDir() objc.ID {
-	if _r := raw.KODAttributeTypeVFSLinkDir(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAddressLine3 returns the string constant kODAttributeTypeAddressLine3, for use as a dictionary key or argument.
+func KODAttributeTypeAddressLine3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAddressLine3")))
 }
-
-// KODAttributeTypeVFSPassNo returns the string constant kODAttributeTypeVFSPassNo as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeVFSPassNo() objc.ID {
-	if _r := raw.KODAttributeTypeVFSPassNo(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAreaCode returns the string constant kODAttributeTypeAreaCode, for use as a dictionary key or argument.
+func KODAttributeTypeAreaCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAreaCode")))
 }
-
-// KODAttributeTypeVFSType returns the string constant kODAttributeTypeVFSType as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeVFSType() objc.ID {
-	if _r := raw.KODAttributeTypeVFSType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAuthenticationAuthority returns the string constant kODAttributeTypeAuthenticationAuthority, for use as a dictionary key or argument.
+func KODAttributeTypeAuthenticationAuthority() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAuthenticationAuthority")))
 }
-
-// KODAttributeTypeWeblogURI returns the string constant kODAttributeTypeWeblogURI as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeWeblogURI() objc.ID {
-	if _r := raw.KODAttributeTypeWeblogURI(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAutomountInformation returns the string constant kODAttributeTypeAutomountInformation, for use as a dictionary key or argument.
+func KODAttributeTypeAutomountInformation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAutomountInformation")))
 }
-
-// KODAttributeTypeXMLPlist returns the string constant kODAttributeTypeXMLPlist as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeXMLPlist() objc.ID {
-	if _r := raw.KODAttributeTypeXMLPlist(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeBootParams returns the string constant kODAttributeTypeBootParams, for use as a dictionary key or argument.
+func KODAttributeTypeBootParams() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeBootParams")))
 }
-
-// KODAttributeTypeProtocolNumber returns the string constant kODAttributeTypeProtocolNumber as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeProtocolNumber() objc.ID {
-	if _r := raw.KODAttributeTypeProtocolNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeBuilding returns the string constant kODAttributeTypeBuilding, for use as a dictionary key or argument.
+func KODAttributeTypeBuilding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeBuilding")))
 }
-
-// KODAttributeTypeRPCNumber returns the string constant kODAttributeTypeRPCNumber as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeRPCNumber() objc.ID {
-	if _r := raw.KODAttributeTypeRPCNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeServicesLocator returns the string constant kODAttributeTypeServicesLocator, for use as a dictionary key or argument.
+func KODAttributeTypeServicesLocator() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeServicesLocator")))
 }
-
-// KODAttributeTypeNetworkNumber returns the string constant kODAttributeTypeNetworkNumber as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeNetworkNumber() objc.ID {
-	if _r := raw.KODAttributeTypeNetworkNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeCity returns the string constant kODAttributeTypeCity, for use as a dictionary key or argument.
+func KODAttributeTypeCity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeCity")))
 }
-
-// KODAttributeTypeAccessControlEntry returns the string constant kODAttributeTypeAccessControlEntry as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAccessControlEntry() objc.ID {
-	if _r := raw.KODAttributeTypeAccessControlEntry(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeCompany returns the string constant kODAttributeTypeCompany, for use as a dictionary key or argument.
+func KODAttributeTypeCompany() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeCompany")))
 }
-
-// KODAttributeTypeAddressLine1 returns the string constant kODAttributeTypeAddressLine1 as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAddressLine1() objc.ID {
-	if _r := raw.KODAttributeTypeAddressLine1(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeComputers returns the string constant kODAttributeTypeComputers, for use as a dictionary key or argument.
+func KODAttributeTypeComputers() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeComputers")))
 }
-
-// KODAttributeTypeAddressLine2 returns the string constant kODAttributeTypeAddressLine2 as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAddressLine2() objc.ID {
-	if _r := raw.KODAttributeTypeAddressLine2(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeCountry returns the string constant kODAttributeTypeCountry, for use as a dictionary key or argument.
+func KODAttributeTypeCountry() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeCountry")))
 }
-
-// KODAttributeTypeAddressLine3 returns the string constant kODAttributeTypeAddressLine3 as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAddressLine3() objc.ID {
-	if _r := raw.KODAttributeTypeAddressLine3(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeDepartment returns the string constant kODAttributeTypeDepartment, for use as a dictionary key or argument.
+func KODAttributeTypeDepartment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeDepartment")))
 }
-
-// KODAttributeTypeAreaCode returns the string constant kODAttributeTypeAreaCode as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAreaCode() objc.ID {
-	if _r := raw.KODAttributeTypeAreaCode(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeDNSName returns the string constant kODAttributeTypeDNSName, for use as a dictionary key or argument.
+func KODAttributeTypeDNSName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeDNSName")))
 }
-
-// KODAttributeTypeAuthenticationAuthority returns the string constant kODAttributeTypeAuthenticationAuthority as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAuthenticationAuthority() objc.ID {
-	if _r := raw.KODAttributeTypeAuthenticationAuthority(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeEMailAddress returns the string constant kODAttributeTypeEMailAddress, for use as a dictionary key or argument.
+func KODAttributeTypeEMailAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeEMailAddress")))
 }
-
-// KODAttributeTypeAutomountInformation returns the string constant kODAttributeTypeAutomountInformation as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAutomountInformation() objc.ID {
-	if _r := raw.KODAttributeTypeAutomountInformation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeEMailContacts returns the string constant kODAttributeTypeEMailContacts, for use as a dictionary key or argument.
+func KODAttributeTypeEMailContacts() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeEMailContacts")))
 }
-
-// KODAttributeTypeBootParams returns the string constant kODAttributeTypeBootParams as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeBootParams() objc.ID {
-	if _r := raw.KODAttributeTypeBootParams(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeFaxNumber returns the string constant kODAttributeTypeFaxNumber, for use as a dictionary key or argument.
+func KODAttributeTypeFaxNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeFaxNumber")))
 }
-
-// KODAttributeTypeBuilding returns the string constant kODAttributeTypeBuilding as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeBuilding() objc.ID {
-	if _r := raw.KODAttributeTypeBuilding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeGroup returns the string constant kODAttributeTypeGroup, for use as a dictionary key or argument.
+func KODAttributeTypeGroup() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeGroup")))
 }
-
-// KODAttributeTypeServicesLocator returns the string constant kODAttributeTypeServicesLocator as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeServicesLocator() objc.ID {
-	if _r := raw.KODAttributeTypeServicesLocator(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeGroupMembers returns the string constant kODAttributeTypeGroupMembers, for use as a dictionary key or argument.
+func KODAttributeTypeGroupMembers() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeGroupMembers")))
 }
-
-// KODAttributeTypeCity returns the string constant kODAttributeTypeCity as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeCity() objc.ID {
-	if _r := raw.KODAttributeTypeCity(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeGroupMembership returns the string constant kODAttributeTypeGroupMembership, for use as a dictionary key or argument.
+func KODAttributeTypeGroupMembership() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeGroupMembership")))
 }
-
-// KODAttributeTypeCompany returns the string constant kODAttributeTypeCompany as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeCompany() objc.ID {
-	if _r := raw.KODAttributeTypeCompany(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeGroupServices returns the string constant kODAttributeTypeGroupServices, for use as a dictionary key or argument.
+func KODAttributeTypeGroupServices() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeGroupServices")))
 }
-
-// KODAttributeTypeComputers returns the string constant kODAttributeTypeComputers as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeComputers() objc.ID {
-	if _r := raw.KODAttributeTypeComputers(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeHomePhoneNumber returns the string constant kODAttributeTypeHomePhoneNumber, for use as a dictionary key or argument.
+func KODAttributeTypeHomePhoneNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeHomePhoneNumber")))
 }
-
-// KODAttributeTypeCountry returns the string constant kODAttributeTypeCountry as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeCountry() objc.ID {
-	if _r := raw.KODAttributeTypeCountry(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeHTML returns the string constant kODAttributeTypeHTML, for use as a dictionary key or argument.
+func KODAttributeTypeHTML() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeHTML")))
 }
-
-// KODAttributeTypeDepartment returns the string constant kODAttributeTypeDepartment as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeDepartment() objc.ID {
-	if _r := raw.KODAttributeTypeDepartment(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeHomeDirectory returns the string constant kODAttributeTypeHomeDirectory, for use as a dictionary key or argument.
+func KODAttributeTypeHomeDirectory() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeHomeDirectory")))
 }
-
-// KODAttributeTypeDNSName returns the string constant kODAttributeTypeDNSName as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeDNSName() objc.ID {
-	if _r := raw.KODAttributeTypeDNSName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeIMHandle returns the string constant kODAttributeTypeIMHandle, for use as a dictionary key or argument.
+func KODAttributeTypeIMHandle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeIMHandle")))
 }
-
-// KODAttributeTypeEMailAddress returns the string constant kODAttributeTypeEMailAddress as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeEMailAddress() objc.ID {
-	if _r := raw.KODAttributeTypeEMailAddress(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeIPAddress returns the string constant kODAttributeTypeIPAddress, for use as a dictionary key or argument.
+func KODAttributeTypeIPAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeIPAddress")))
 }
-
-// KODAttributeTypeEMailContacts returns the string constant kODAttributeTypeEMailContacts as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeEMailContacts() objc.ID {
-	if _r := raw.KODAttributeTypeEMailContacts(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeIPAddressAndENetAddress returns the string constant kODAttributeTypeIPAddressAndENetAddress, for use as a dictionary key or argument.
+func KODAttributeTypeIPAddressAndENetAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeIPAddressAndENetAddress")))
 }
-
-// KODAttributeTypeFaxNumber returns the string constant kODAttributeTypeFaxNumber as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeFaxNumber() objc.ID {
-	if _r := raw.KODAttributeTypeFaxNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeIPv6Address returns the string constant kODAttributeTypeIPv6Address, for use as a dictionary key or argument.
+func KODAttributeTypeIPv6Address() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeIPv6Address")))
 }
-
-// KODAttributeTypeGroup returns the string constant kODAttributeTypeGroup as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeGroup() objc.ID {
-	if _r := raw.KODAttributeTypeGroup(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeJPEGPhoto returns the string constant kODAttributeTypeJPEGPhoto, for use as a dictionary key or argument.
+func KODAttributeTypeJPEGPhoto() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeJPEGPhoto")))
 }
-
-// KODAttributeTypeGroupMembers returns the string constant kODAttributeTypeGroupMembers as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeGroupMembers() objc.ID {
-	if _r := raw.KODAttributeTypeGroupMembers(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeJobTitle returns the string constant kODAttributeTypeJobTitle, for use as a dictionary key or argument.
+func KODAttributeTypeJobTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeJobTitle")))
 }
-
-// KODAttributeTypeGroupMembership returns the string constant kODAttributeTypeGroupMembership as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeGroupMembership() objc.ID {
-	if _r := raw.KODAttributeTypeGroupMembership(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeKDCAuthKey returns the string constant kODAttributeTypeKDCAuthKey, for use as a dictionary key or argument.
+func KODAttributeTypeKDCAuthKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeKDCAuthKey")))
 }
-
-// KODAttributeTypeGroupServices returns the string constant kODAttributeTypeGroupServices as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeGroupServices() objc.ID {
-	if _r := raw.KODAttributeTypeGroupServices(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeKeywords returns the string constant kODAttributeTypeKeywords, for use as a dictionary key or argument.
+func KODAttributeTypeKeywords() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeKeywords")))
 }
-
-// KODAttributeTypeHomePhoneNumber returns the string constant kODAttributeTypeHomePhoneNumber as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeHomePhoneNumber() objc.ID {
-	if _r := raw.KODAttributeTypeHomePhoneNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeLDAPReadReplicas returns the string constant kODAttributeTypeLDAPReadReplicas, for use as a dictionary key or argument.
+func KODAttributeTypeLDAPReadReplicas() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeLDAPReadReplicas")))
 }
-
-// KODAttributeTypeHTML returns the string constant kODAttributeTypeHTML as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeHTML() objc.ID {
-	if _r := raw.KODAttributeTypeHTML(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeLDAPWriteReplicas returns the string constant kODAttributeTypeLDAPWriteReplicas, for use as a dictionary key or argument.
+func KODAttributeTypeLDAPWriteReplicas() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeLDAPWriteReplicas")))
 }
-
-// KODAttributeTypeHomeDirectory returns the string constant kODAttributeTypeHomeDirectory as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeHomeDirectory() objc.ID {
-	if _r := raw.KODAttributeTypeHomeDirectory(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeMapCoordinates returns the string constant kODAttributeTypeMapCoordinates, for use as a dictionary key or argument.
+func KODAttributeTypeMapCoordinates() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeMapCoordinates")))
 }
-
-// KODAttributeTypeIMHandle returns the string constant kODAttributeTypeIMHandle as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeIMHandle() objc.ID {
-	if _r := raw.KODAttributeTypeIMHandle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeMapURI returns the string constant kODAttributeTypeMapURI, for use as a dictionary key or argument.
+func KODAttributeTypeMapURI() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeMapURI")))
 }
-
-// KODAttributeTypeIPAddress returns the string constant kODAttributeTypeIPAddress as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeIPAddress() objc.ID {
-	if _r := raw.KODAttributeTypeIPAddress(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeMIME returns the string constant kODAttributeTypeMIME, for use as a dictionary key or argument.
+func KODAttributeTypeMIME() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeMIME")))
 }
-
-// KODAttributeTypeIPAddressAndENetAddress returns the string constant kODAttributeTypeIPAddressAndENetAddress as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeIPAddressAndENetAddress() objc.ID {
-	if _r := raw.KODAttributeTypeIPAddressAndENetAddress(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeMobileNumber returns the string constant kODAttributeTypeMobileNumber, for use as a dictionary key or argument.
+func KODAttributeTypeMobileNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeMobileNumber")))
 }
-
-// KODAttributeTypeIPv6Address returns the string constant kODAttributeTypeIPv6Address as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeIPv6Address() objc.ID {
-	if _r := raw.KODAttributeTypeIPv6Address(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeNestedGroups returns the string constant kODAttributeTypeNestedGroups, for use as a dictionary key or argument.
+func KODAttributeTypeNestedGroups() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeNestedGroups")))
 }
-
-// KODAttributeTypeJPEGPhoto returns the string constant kODAttributeTypeJPEGPhoto as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeJPEGPhoto() objc.ID {
-	if _r := raw.KODAttributeTypeJPEGPhoto(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeNetGroups returns the string constant kODAttributeTypeNetGroups, for use as a dictionary key or argument.
+func KODAttributeTypeNetGroups() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeNetGroups")))
 }
-
-// KODAttributeTypeJobTitle returns the string constant kODAttributeTypeJobTitle as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeJobTitle() objc.ID {
-	if _r := raw.KODAttributeTypeJobTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeNickName returns the string constant kODAttributeTypeNickName, for use as a dictionary key or argument.
+func KODAttributeTypeNickName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeNickName")))
 }
-
-// KODAttributeTypeKDCAuthKey returns the string constant kODAttributeTypeKDCAuthKey as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeKDCAuthKey() objc.ID {
-	if _r := raw.KODAttributeTypeKDCAuthKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeOrganizationInfo returns the string constant kODAttributeTypeOrganizationInfo, for use as a dictionary key or argument.
+func KODAttributeTypeOrganizationInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeOrganizationInfo")))
 }
-
-// KODAttributeTypeKeywords returns the string constant kODAttributeTypeKeywords as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeKeywords() objc.ID {
-	if _r := raw.KODAttributeTypeKeywords(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeOrganizationName returns the string constant kODAttributeTypeOrganizationName, for use as a dictionary key or argument.
+func KODAttributeTypeOrganizationName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeOrganizationName")))
 }
-
-// KODAttributeTypeLDAPReadReplicas returns the string constant kODAttributeTypeLDAPReadReplicas as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeLDAPReadReplicas() objc.ID {
-	if _r := raw.KODAttributeTypeLDAPReadReplicas(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePagerNumber returns the string constant kODAttributeTypePagerNumber, for use as a dictionary key or argument.
+func KODAttributeTypePagerNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePagerNumber")))
 }
-
-// KODAttributeTypeLDAPWriteReplicas returns the string constant kODAttributeTypeLDAPWriteReplicas as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeLDAPWriteReplicas() objc.ID {
-	if _r := raw.KODAttributeTypeLDAPWriteReplicas(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePhoneContacts returns the string constant kODAttributeTypePhoneContacts, for use as a dictionary key or argument.
+func KODAttributeTypePhoneContacts() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePhoneContacts")))
 }
-
-// KODAttributeTypeMapCoordinates returns the string constant kODAttributeTypeMapCoordinates as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeMapCoordinates() objc.ID {
-	if _r := raw.KODAttributeTypeMapCoordinates(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePhoneNumber returns the string constant kODAttributeTypePhoneNumber, for use as a dictionary key or argument.
+func KODAttributeTypePhoneNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePhoneNumber")))
 }
-
-// KODAttributeTypeMapURI returns the string constant kODAttributeTypeMapURI as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeMapURI() objc.ID {
-	if _r := raw.KODAttributeTypeMapURI(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePGPPublicKey returns the string constant kODAttributeTypePGPPublicKey, for use as a dictionary key or argument.
+func KODAttributeTypePGPPublicKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePGPPublicKey")))
 }
-
-// KODAttributeTypeMIME returns the string constant kODAttributeTypeMIME as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeMIME() objc.ID {
-	if _r := raw.KODAttributeTypeMIME(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePostalAddress returns the string constant kODAttributeTypePostalAddress, for use as a dictionary key or argument.
+func KODAttributeTypePostalAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePostalAddress")))
 }
-
-// KODAttributeTypeMobileNumber returns the string constant kODAttributeTypeMobileNumber as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeMobileNumber() objc.ID {
-	if _r := raw.KODAttributeTypeMobileNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePostalAddressContacts returns the string constant kODAttributeTypePostalAddressContacts, for use as a dictionary key or argument.
+func KODAttributeTypePostalAddressContacts() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePostalAddressContacts")))
 }
-
-// KODAttributeTypeNestedGroups returns the string constant kODAttributeTypeNestedGroups as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeNestedGroups() objc.ID {
-	if _r := raw.KODAttributeTypeNestedGroups(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePostalCode returns the string constant kODAttributeTypePostalCode, for use as a dictionary key or argument.
+func KODAttributeTypePostalCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePostalCode")))
 }
-
-// KODAttributeTypeNetGroups returns the string constant kODAttributeTypeNetGroups as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeNetGroups() objc.ID {
-	if _r := raw.KODAttributeTypeNetGroups(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeNamePrefix returns the string constant kODAttributeTypeNamePrefix, for use as a dictionary key or argument.
+func KODAttributeTypeNamePrefix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeNamePrefix")))
 }
-
-// KODAttributeTypeNickName returns the string constant kODAttributeTypeNickName as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeNickName() objc.ID {
-	if _r := raw.KODAttributeTypeNickName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeProfiles returns the string constant kODAttributeTypeProfiles, for use as a dictionary key or argument.
+func KODAttributeTypeProfiles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeProfiles")))
 }
-
-// KODAttributeTypeOrganizationInfo returns the string constant kODAttributeTypeOrganizationInfo as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeOrganizationInfo() objc.ID {
-	if _r := raw.KODAttributeTypeOrganizationInfo(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeProfilesTimestamp returns the string constant kODAttributeTypeProfilesTimestamp, for use as a dictionary key or argument.
+func KODAttributeTypeProfilesTimestamp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeProfilesTimestamp")))
 }
-
-// KODAttributeTypeOrganizationName returns the string constant kODAttributeTypeOrganizationName as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeOrganizationName() objc.ID {
-	if _r := raw.KODAttributeTypeOrganizationName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeProtocols returns the string constant kODAttributeTypeProtocols, for use as a dictionary key or argument.
+func KODAttributeTypeProtocols() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeProtocols")))
 }
-
-// KODAttributeTypePagerNumber returns the string constant kODAttributeTypePagerNumber as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePagerNumber() objc.ID {
-	if _r := raw.KODAttributeTypePagerNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeRecordName returns the string constant kODAttributeTypeRecordName, for use as a dictionary key or argument.
+func KODAttributeTypeRecordName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeRecordName")))
 }
-
-// KODAttributeTypePhoneContacts returns the string constant kODAttributeTypePhoneContacts as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePhoneContacts() objc.ID {
-	if _r := raw.KODAttributeTypePhoneContacts(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeRelationships returns the string constant kODAttributeTypeRelationships, for use as a dictionary key or argument.
+func KODAttributeTypeRelationships() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeRelationships")))
 }
-
-// KODAttributeTypePhoneNumber returns the string constant kODAttributeTypePhoneNumber as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePhoneNumber() objc.ID {
-	if _r := raw.KODAttributeTypePhoneNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeResourceInfo returns the string constant kODAttributeTypeResourceInfo, for use as a dictionary key or argument.
+func KODAttributeTypeResourceInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeResourceInfo")))
 }
-
-// KODAttributeTypePGPPublicKey returns the string constant kODAttributeTypePGPPublicKey as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePGPPublicKey() objc.ID {
-	if _r := raw.KODAttributeTypePGPPublicKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeResourceType returns the string constant kODAttributeTypeResourceType, for use as a dictionary key or argument.
+func KODAttributeTypeResourceType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeResourceType")))
 }
-
-// KODAttributeTypePostalAddress returns the string constant kODAttributeTypePostalAddress as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePostalAddress() objc.ID {
-	if _r := raw.KODAttributeTypePostalAddress(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeState returns the string constant kODAttributeTypeState, for use as a dictionary key or argument.
+func KODAttributeTypeState() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeState")))
 }
-
-// KODAttributeTypePostalAddressContacts returns the string constant kODAttributeTypePostalAddressContacts as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePostalAddressContacts() objc.ID {
-	if _r := raw.KODAttributeTypePostalAddressContacts(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeStreet returns the string constant kODAttributeTypeStreet, for use as a dictionary key or argument.
+func KODAttributeTypeStreet() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeStreet")))
 }
-
-// KODAttributeTypePostalCode returns the string constant kODAttributeTypePostalCode as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePostalCode() objc.ID {
-	if _r := raw.KODAttributeTypePostalCode(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeNameSuffix returns the string constant kODAttributeTypeNameSuffix, for use as a dictionary key or argument.
+func KODAttributeTypeNameSuffix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeNameSuffix")))
 }
-
-// KODAttributeTypeNamePrefix returns the string constant kODAttributeTypeNamePrefix as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeNamePrefix() objc.ID {
-	if _r := raw.KODAttributeTypeNamePrefix(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeURL returns the string constant kODAttributeTypeURL, for use as a dictionary key or argument.
+func KODAttributeTypeURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeURL")))
 }
-
-// KODAttributeTypeProfiles returns the string constant kODAttributeTypeProfiles as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeProfiles() objc.ID {
-	if _r := raw.KODAttributeTypeProfiles(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeVFSOpts returns the string constant kODAttributeTypeVFSOpts, for use as a dictionary key or argument.
+func KODAttributeTypeVFSOpts() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeVFSOpts")))
 }
-
-// KODAttributeTypeProfilesTimestamp returns the string constant kODAttributeTypeProfilesTimestamp as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeProfilesTimestamp() objc.ID {
-	if _r := raw.KODAttributeTypeProfilesTimestamp(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAlias returns the string constant kODAttributeTypeAlias, for use as a dictionary key or argument.
+func KODAttributeTypeAlias() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAlias")))
 }
-
-// KODAttributeTypeProtocols returns the string constant kODAttributeTypeProtocols as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeProtocols() objc.ID {
-	if _r := raw.KODAttributeTypeProtocols(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAuthCredential returns the string constant kODAttributeTypeAuthCredential, for use as a dictionary key or argument.
+func KODAttributeTypeAuthCredential() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAuthCredential")))
 }
-
-// KODAttributeTypeRecordName returns the string constant kODAttributeTypeRecordName as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeRecordName() objc.ID {
-	if _r := raw.KODAttributeTypeRecordName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeCopyTimestamp returns the string constant kODAttributeTypeCopyTimestamp, for use as a dictionary key or argument.
+func KODAttributeTypeCopyTimestamp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeCopyTimestamp")))
 }
-
-// KODAttributeTypeRelationships returns the string constant kODAttributeTypeRelationships as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeRelationships() objc.ID {
-	if _r := raw.KODAttributeTypeRelationships(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeDateRecordCreated returns the string constant kODAttributeTypeDateRecordCreated, for use as a dictionary key or argument.
+func KODAttributeTypeDateRecordCreated() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeDateRecordCreated")))
 }
-
-// KODAttributeTypeResourceInfo returns the string constant kODAttributeTypeResourceInfo as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeResourceInfo() objc.ID {
-	if _r := raw.KODAttributeTypeResourceInfo(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeKerberosRealm returns the string constant kODAttributeTypeKerberosRealm, for use as a dictionary key or argument.
+func KODAttributeTypeKerberosRealm() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeKerberosRealm")))
 }
-
-// KODAttributeTypeResourceType returns the string constant kODAttributeTypeResourceType as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeResourceType() objc.ID {
-	if _r := raw.KODAttributeTypeResourceType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeNTDomainComputerAccount returns the string constant kODAttributeTypeNTDomainComputerAccount, for use as a dictionary key or argument.
+func KODAttributeTypeNTDomainComputerAccount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeNTDomainComputerAccount")))
 }
-
-// KODAttributeTypeState returns the string constant kODAttributeTypeState as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeState() objc.ID {
-	if _r := raw.KODAttributeTypeState(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeOriginalHomeDirectory returns the string constant kODAttributeTypeOriginalHomeDirectory, for use as a dictionary key or argument.
+func KODAttributeTypeOriginalHomeDirectory() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeOriginalHomeDirectory")))
 }
-
-// KODAttributeTypeStreet returns the string constant kODAttributeTypeStreet as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeStreet() objc.ID {
-	if _r := raw.KODAttributeTypeStreet(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeOriginalNFSHomeDirectory returns the string constant kODAttributeTypeOriginalNFSHomeDirectory, for use as a dictionary key or argument.
+func KODAttributeTypeOriginalNFSHomeDirectory() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeOriginalNFSHomeDirectory")))
 }
-
-// KODAttributeTypeNameSuffix returns the string constant kODAttributeTypeNameSuffix as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeNameSuffix() objc.ID {
-	if _r := raw.KODAttributeTypeNameSuffix(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeOriginalNodeName returns the string constant kODAttributeTypeOriginalNodeName, for use as a dictionary key or argument.
+func KODAttributeTypeOriginalNodeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeOriginalNodeName")))
 }
-
-// KODAttributeTypeURL returns the string constant kODAttributeTypeURL as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeURL() objc.ID {
-	if _r := raw.KODAttributeTypeURL(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePrimaryNTDomain returns the string constant kODAttributeTypePrimaryNTDomain, for use as a dictionary key or argument.
+func KODAttributeTypePrimaryNTDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePrimaryNTDomain")))
 }
-
-// KODAttributeTypeVFSOpts returns the string constant kODAttributeTypeVFSOpts as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeVFSOpts() objc.ID {
-	if _r := raw.KODAttributeTypeVFSOpts(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePwdAgingPolicy returns the string constant kODAttributeTypePwdAgingPolicy, for use as a dictionary key or argument.
+func KODAttributeTypePwdAgingPolicy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePwdAgingPolicy")))
 }
-
-// KODAttributeTypeAlias returns the string constant kODAttributeTypeAlias as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAlias() objc.ID {
-	if _r := raw.KODAttributeTypeAlias(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeReadOnlyNode returns the string constant kODAttributeTypeReadOnlyNode, for use as a dictionary key or argument.
+func KODAttributeTypeReadOnlyNode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeReadOnlyNode")))
 }
-
-// KODAttributeTypeAuthCredential returns the string constant kODAttributeTypeAuthCredential as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAuthCredential() objc.ID {
-	if _r := raw.KODAttributeTypeAuthCredential(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeTimePackage returns the string constant kODAttributeTypeTimePackage, for use as a dictionary key or argument.
+func KODAttributeTypeTimePackage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeTimePackage")))
 }
-
-// KODAttributeTypeCopyTimestamp returns the string constant kODAttributeTypeCopyTimestamp as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeCopyTimestamp() objc.ID {
-	if _r := raw.KODAttributeTypeCopyTimestamp(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeTotalSize returns the string constant kODAttributeTypeTotalSize, for use as a dictionary key or argument.
+func KODAttributeTypeTotalSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeTotalSize")))
 }
-
-// KODAttributeTypeDateRecordCreated returns the string constant kODAttributeTypeDateRecordCreated as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeDateRecordCreated() objc.ID {
-	if _r := raw.KODAttributeTypeDateRecordCreated(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAuthMethod returns the string constant kODAttributeTypeAuthMethod, for use as a dictionary key or argument.
+func KODAttributeTypeAuthMethod() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAuthMethod")))
 }
-
-// KODAttributeTypeKerberosRealm returns the string constant kODAttributeTypeKerberosRealm as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeKerberosRealm() objc.ID {
-	if _r := raw.KODAttributeTypeKerberosRealm(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeMetaNodeLocation returns the string constant kODAttributeTypeMetaNodeLocation, for use as a dictionary key or argument.
+func KODAttributeTypeMetaNodeLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeMetaNodeLocation")))
 }
-
-// KODAttributeTypeNTDomainComputerAccount returns the string constant kODAttributeTypeNTDomainComputerAccount as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeNTDomainComputerAccount() objc.ID {
-	if _r := raw.KODAttributeTypeNTDomainComputerAccount(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeNodePath returns the string constant kODAttributeTypeNodePath, for use as a dictionary key or argument.
+func KODAttributeTypeNodePath() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeNodePath")))
 }
-
-// KODAttributeTypeOriginalHomeDirectory returns the string constant kODAttributeTypeOriginalHomeDirectory as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeOriginalHomeDirectory() objc.ID {
-	if _r := raw.KODAttributeTypeOriginalHomeDirectory(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePlugInInfo returns the string constant kODAttributeTypePlugInInfo, for use as a dictionary key or argument.
+func KODAttributeTypePlugInInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePlugInInfo")))
 }
-
-// KODAttributeTypeOriginalNFSHomeDirectory returns the string constant kODAttributeTypeOriginalNFSHomeDirectory as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeOriginalNFSHomeDirectory() objc.ID {
-	if _r := raw.KODAttributeTypeOriginalNFSHomeDirectory(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeRecordType returns the string constant kODAttributeTypeRecordType, for use as a dictionary key or argument.
+func KODAttributeTypeRecordType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeRecordType")))
 }
-
-// KODAttributeTypeOriginalNodeName returns the string constant kODAttributeTypeOriginalNodeName as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeOriginalNodeName() objc.ID {
-	if _r := raw.KODAttributeTypeOriginalNodeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSchema returns the string constant kODAttributeTypeSchema, for use as a dictionary key or argument.
+func KODAttributeTypeSchema() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSchema")))
 }
-
-// KODAttributeTypePrimaryNTDomain returns the string constant kODAttributeTypePrimaryNTDomain as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePrimaryNTDomain() objc.ID {
-	if _r := raw.KODAttributeTypePrimaryNTDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSubNodes returns the string constant kODAttributeTypeSubNodes, for use as a dictionary key or argument.
+func KODAttributeTypeSubNodes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSubNodes")))
 }
-
-// KODAttributeTypePwdAgingPolicy returns the string constant kODAttributeTypePwdAgingPolicy as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePwdAgingPolicy() objc.ID {
-	if _r := raw.KODAttributeTypePwdAgingPolicy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeNetGroupTriplet returns the string constant kODAttributeTypeNetGroupTriplet, for use as a dictionary key or argument.
+func KODAttributeTypeNetGroupTriplet() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeNetGroupTriplet")))
 }
-
-// KODAttributeTypeReadOnlyNode returns the string constant kODAttributeTypeReadOnlyNode as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeReadOnlyNode() objc.ID {
-	if _r := raw.KODAttributeTypeReadOnlyNode(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSearchPath returns the string constant kODAttributeTypeSearchPath, for use as a dictionary key or argument.
+func KODAttributeTypeSearchPath() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSearchPath")))
 }
-
-// KODAttributeTypeTimePackage returns the string constant kODAttributeTypeTimePackage as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeTimePackage() objc.ID {
-	if _r := raw.KODAttributeTypeTimePackage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeSearchPolicy returns the string constant kODAttributeTypeSearchPolicy, for use as a dictionary key or argument.
+func KODAttributeTypeSearchPolicy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeSearchPolicy")))
 }
-
-// KODAttributeTypeTotalSize returns the string constant kODAttributeTypeTotalSize as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeTotalSize() objc.ID {
-	if _r := raw.KODAttributeTypeTotalSize(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAutomaticSearchPath returns the string constant kODAttributeTypeAutomaticSearchPath, for use as a dictionary key or argument.
+func KODAttributeTypeAutomaticSearchPath() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAutomaticSearchPath")))
 }
-
-// KODAttributeTypeAuthMethod returns the string constant kODAttributeTypeAuthMethod as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAuthMethod() objc.ID {
-	if _r := raw.KODAttributeTypeAuthMethod(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeLocalOnlySearchPath returns the string constant kODAttributeTypeLocalOnlySearchPath, for use as a dictionary key or argument.
+func KODAttributeTypeLocalOnlySearchPath() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeLocalOnlySearchPath")))
 }
-
-// KODAttributeTypeMetaNodeLocation returns the string constant kODAttributeTypeMetaNodeLocation as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeMetaNodeLocation() objc.ID {
-	if _r := raw.KODAttributeTypeMetaNodeLocation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeCustomSearchPath returns the string constant kODAttributeTypeCustomSearchPath, for use as a dictionary key or argument.
+func KODAttributeTypeCustomSearchPath() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeCustomSearchPath")))
 }
-
-// KODAttributeTypeNodePath returns the string constant kODAttributeTypeNodePath as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeNodePath() objc.ID {
-	if _r := raw.KODAttributeTypeNodePath(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeNodeOptions returns the string constant kODAttributeTypeNodeOptions, for use as a dictionary key or argument.
+func KODAttributeTypeNodeOptions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeNodeOptions")))
 }
-
-// KODAttributeTypePlugInInfo returns the string constant kODAttributeTypePlugInInfo as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePlugInInfo() objc.ID {
-	if _r := raw.KODAttributeTypePlugInInfo(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeNodeSASLRealm returns the string constant kODAttributeTypeNodeSASLRealm, for use as a dictionary key or argument.
+func KODAttributeTypeNodeSASLRealm() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeNodeSASLRealm")))
 }
-
-// KODAttributeTypeRecordType returns the string constant kODAttributeTypeRecordType as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeRecordType() objc.ID {
-	if _r := raw.KODAttributeTypeRecordType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAdvertisedServices returns the string constant kODAttributeTypeAdvertisedServices, for use as a dictionary key or argument.
+func KODAttributeTypeAdvertisedServices() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAdvertisedServices")))
 }
-
-// KODAttributeTypeSchema returns the string constant kODAttributeTypeSchema as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSchema() objc.ID {
-	if _r := raw.KODAttributeTypeSchema(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeLocaleRelay returns the string constant kODAttributeTypeLocaleRelay, for use as a dictionary key or argument.
+func KODAttributeTypeLocaleRelay() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeLocaleRelay")))
 }
-
-// KODAttributeTypeSubNodes returns the string constant kODAttributeTypeSubNodes as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSubNodes() objc.ID {
-	if _r := raw.KODAttributeTypeSubNodes(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeLocaleSubnets returns the string constant kODAttributeTypeLocaleSubnets, for use as a dictionary key or argument.
+func KODAttributeTypeLocaleSubnets() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeLocaleSubnets")))
 }
-
-// KODAttributeTypeNetGroupTriplet returns the string constant kODAttributeTypeNetGroupTriplet as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeNetGroupTriplet() objc.ID {
-	if _r := raw.KODAttributeTypeNetGroupTriplet(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeNetworkInterfaces returns the string constant kODAttributeTypeNetworkInterfaces, for use as a dictionary key or argument.
+func KODAttributeTypeNetworkInterfaces() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeNetworkInterfaces")))
 }
-
-// KODAttributeTypeSearchPath returns the string constant kODAttributeTypeSearchPath as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSearchPath() objc.ID {
-	if _r := raw.KODAttributeTypeSearchPath(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeParentLocales returns the string constant kODAttributeTypeParentLocales, for use as a dictionary key or argument.
+func KODAttributeTypeParentLocales() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeParentLocales")))
 }
-
-// KODAttributeTypeSearchPolicy returns the string constant kODAttributeTypeSearchPolicy as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeSearchPolicy() objc.ID {
-	if _r := raw.KODAttributeTypeSearchPolicy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePrimaryLocale returns the string constant kODAttributeTypePrimaryLocale, for use as a dictionary key or argument.
+func KODAttributeTypePrimaryLocale() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePrimaryLocale")))
 }
-
-// KODAttributeTypeAutomaticSearchPath returns the string constant kODAttributeTypeAutomaticSearchPath as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAutomaticSearchPath() objc.ID {
-	if _r := raw.KODAttributeTypeAutomaticSearchPath(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeBuildVersion returns the string constant kODAttributeTypeBuildVersion, for use as a dictionary key or argument.
+func KODAttributeTypeBuildVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeBuildVersion")))
 }
-
-// KODAttributeTypeLocalOnlySearchPath returns the string constant kODAttributeTypeLocalOnlySearchPath as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeLocalOnlySearchPath() objc.ID {
-	if _r := raw.KODAttributeTypeLocalOnlySearchPath(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeConfigAvailable returns the string constant kODAttributeTypeConfigAvailable, for use as a dictionary key or argument.
+func KODAttributeTypeConfigAvailable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeConfigAvailable")))
 }
-
-// KODAttributeTypeCustomSearchPath returns the string constant kODAttributeTypeCustomSearchPath as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeCustomSearchPath() objc.ID {
-	if _r := raw.KODAttributeTypeCustomSearchPath(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeConfigFile returns the string constant kODAttributeTypeConfigFile, for use as a dictionary key or argument.
+func KODAttributeTypeConfigFile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeConfigFile")))
 }
-
-// KODAttributeTypeNodeOptions returns the string constant kODAttributeTypeNodeOptions as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeNodeOptions() objc.ID {
-	if _r := raw.KODAttributeTypeNodeOptions(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeCoreFWVersion returns the string constant kODAttributeTypeCoreFWVersion, for use as a dictionary key or argument.
+func KODAttributeTypeCoreFWVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeCoreFWVersion")))
 }
-
-// KODAttributeTypeNodeSASLRealm returns the string constant kODAttributeTypeNodeSASLRealm as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeNodeSASLRealm() objc.ID {
-	if _r := raw.KODAttributeTypeNodeSASLRealm(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeFunctionalState returns the string constant kODAttributeTypeFunctionalState, for use as a dictionary key or argument.
+func KODAttributeTypeFunctionalState() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeFunctionalState")))
 }
-
-// KODAttributeTypeAdvertisedServices returns the string constant kODAttributeTypeAdvertisedServices as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAdvertisedServices() objc.ID {
-	if _r := raw.KODAttributeTypeAdvertisedServices(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeFWVersion returns the string constant kODAttributeTypeFWVersion, for use as a dictionary key or argument.
+func KODAttributeTypeFWVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeFWVersion")))
 }
-
-// KODAttributeTypeLocaleRelay returns the string constant kODAttributeTypeLocaleRelay as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeLocaleRelay() objc.ID {
-	if _r := raw.KODAttributeTypeLocaleRelay(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePluginIndex returns the string constant kODAttributeTypePluginIndex, for use as a dictionary key or argument.
+func KODAttributeTypePluginIndex() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePluginIndex")))
 }
-
-// KODAttributeTypeLocaleSubnets returns the string constant kODAttributeTypeLocaleSubnets as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeLocaleSubnets() objc.ID {
-	if _r := raw.KODAttributeTypeLocaleSubnets(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeNumTableList returns the string constant kODAttributeTypeNumTableList, for use as a dictionary key or argument.
+func KODAttributeTypeNumTableList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeNumTableList")))
 }
-
-// KODAttributeTypeNetworkInterfaces returns the string constant kODAttributeTypeNetworkInterfaces as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeNetworkInterfaces() objc.ID {
-	if _r := raw.KODAttributeTypeNetworkInterfaces(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeVersion returns the string constant kODAttributeTypeVersion, for use as a dictionary key or argument.
+func KODAttributeTypeVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeVersion")))
 }
-
-// KODAttributeTypeParentLocales returns the string constant kODAttributeTypeParentLocales as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeParentLocales() objc.ID {
-	if _r := raw.KODAttributeTypeParentLocales(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypePIDValue returns the string constant kODAttributeTypePIDValue, for use as a dictionary key or argument.
+func KODAttributeTypePIDValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypePIDValue")))
 }
-
-// KODAttributeTypePrimaryLocale returns the string constant kODAttributeTypePrimaryLocale as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePrimaryLocale() objc.ID {
-	if _r := raw.KODAttributeTypePrimaryLocale(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeProcessName returns the string constant kODAttributeTypeProcessName, for use as a dictionary key or argument.
+func KODAttributeTypeProcessName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeProcessName")))
 }
-
-// KODAttributeTypeBuildVersion returns the string constant kODAttributeTypeBuildVersion as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeBuildVersion() objc.ID {
-	if _r := raw.KODAttributeTypeBuildVersion(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeTotalRefCount returns the string constant kODAttributeTypeTotalRefCount, for use as a dictionary key or argument.
+func KODAttributeTypeTotalRefCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeTotalRefCount")))
 }
-
-// KODAttributeTypeConfigAvailable returns the string constant kODAttributeTypeConfigAvailable as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeConfigAvailable() objc.ID {
-	if _r := raw.KODAttributeTypeConfigAvailable(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeDirRefCount returns the string constant kODAttributeTypeDirRefCount, for use as a dictionary key or argument.
+func KODAttributeTypeDirRefCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeDirRefCount")))
 }
-
-// KODAttributeTypeConfigFile returns the string constant kODAttributeTypeConfigFile as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeConfigFile() objc.ID {
-	if _r := raw.KODAttributeTypeConfigFile(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeNodeRefCount returns the string constant kODAttributeTypeNodeRefCount, for use as a dictionary key or argument.
+func KODAttributeTypeNodeRefCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeNodeRefCount")))
 }
-
-// KODAttributeTypeCoreFWVersion returns the string constant kODAttributeTypeCoreFWVersion as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeCoreFWVersion() objc.ID {
-	if _r := raw.KODAttributeTypeCoreFWVersion(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeRecRefCount returns the string constant kODAttributeTypeRecRefCount, for use as a dictionary key or argument.
+func KODAttributeTypeRecRefCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeRecRefCount")))
 }
-
-// KODAttributeTypeFunctionalState returns the string constant kODAttributeTypeFunctionalState as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeFunctionalState() objc.ID {
-	if _r := raw.KODAttributeTypeFunctionalState(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAttrListRefCount returns the string constant kODAttributeTypeAttrListRefCount, for use as a dictionary key or argument.
+func KODAttributeTypeAttrListRefCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAttrListRefCount")))
 }
-
-// KODAttributeTypeFWVersion returns the string constant kODAttributeTypeFWVersion as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeFWVersion() objc.ID {
-	if _r := raw.KODAttributeTypeFWVersion(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAttrListValueRefCount returns the string constant kODAttributeTypeAttrListValueRefCount, for use as a dictionary key or argument.
+func KODAttributeTypeAttrListValueRefCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAttrListValueRefCount")))
 }
-
-// KODAttributeTypePluginIndex returns the string constant kODAttributeTypePluginIndex as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePluginIndex() objc.ID {
-	if _r := raw.KODAttributeTypePluginIndex(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeDirRefs returns the string constant kODAttributeTypeDirRefs, for use as a dictionary key or argument.
+func KODAttributeTypeDirRefs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeDirRefs")))
 }
-
-// KODAttributeTypeNumTableList returns the string constant kODAttributeTypeNumTableList as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeNumTableList() objc.ID {
-	if _r := raw.KODAttributeTypeNumTableList(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeNodeRefs returns the string constant kODAttributeTypeNodeRefs, for use as a dictionary key or argument.
+func KODAttributeTypeNodeRefs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeNodeRefs")))
 }
-
-// KODAttributeTypeVersion returns the string constant kODAttributeTypeVersion as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeVersion() objc.ID {
-	if _r := raw.KODAttributeTypeVersion(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeRecRefs returns the string constant kODAttributeTypeRecRefs, for use as a dictionary key or argument.
+func KODAttributeTypeRecRefs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeRecRefs")))
 }
-
-// KODAttributeTypePIDValue returns the string constant kODAttributeTypePIDValue as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypePIDValue() objc.ID {
-	if _r := raw.KODAttributeTypePIDValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAttrListRefs returns the string constant kODAttributeTypeAttrListRefs, for use as a dictionary key or argument.
+func KODAttributeTypeAttrListRefs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAttrListRefs")))
 }
-
-// KODAttributeTypeProcessName returns the string constant kODAttributeTypeProcessName as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeProcessName() objc.ID {
-	if _r := raw.KODAttributeTypeProcessName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAttributeTypeAttrListValueRefs returns the string constant kODAttributeTypeAttrListValueRefs, for use as a dictionary key or argument.
+func KODAttributeTypeAttrListValueRefs() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAttributeTypeAttrListValueRefs")))
 }
-
-// KODAttributeTypeTotalRefCount returns the string constant kODAttributeTypeTotalRefCount as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeTotalRefCount() objc.ID {
-	if _r := raw.KODAttributeTypeTotalRefCount(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationType2WayRandom returns the string constant kODAuthenticationType2WayRandom, for use as a dictionary key or argument.
+func KODAuthenticationType2WayRandom() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationType2WayRandom")))
 }
-
-// KODAttributeTypeDirRefCount returns the string constant kODAttributeTypeDirRefCount as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeDirRefCount() objc.ID {
-	if _r := raw.KODAttributeTypeDirRefCount(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationType2WayRandomChangePasswd returns the string constant kODAuthenticationType2WayRandomChangePasswd, for use as a dictionary key or argument.
+func KODAuthenticationType2WayRandomChangePasswd() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationType2WayRandomChangePasswd")))
 }
-
-// KODAttributeTypeNodeRefCount returns the string constant kODAttributeTypeNodeRefCount as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeNodeRefCount() objc.ID {
-	if _r := raw.KODAttributeTypeNodeRefCount(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeAPOP returns the string constant kODAuthenticationTypeAPOP, for use as a dictionary key or argument.
+func KODAuthenticationTypeAPOP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeAPOP")))
 }
-
-// KODAttributeTypeRecRefCount returns the string constant kODAttributeTypeRecRefCount as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeRecRefCount() objc.ID {
-	if _r := raw.KODAttributeTypeRecRefCount(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeCRAM_MD5 returns the string constant kODAuthenticationTypeCRAM_MD5, for use as a dictionary key or argument.
+func KODAuthenticationTypeCRAM_MD5() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeCRAM_MD5")))
 }
-
-// KODAttributeTypeAttrListRefCount returns the string constant kODAttributeTypeAttrListRefCount as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAttrListRefCount() objc.ID {
-	if _r := raw.KODAttributeTypeAttrListRefCount(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeChangePasswd returns the string constant kODAuthenticationTypeChangePasswd, for use as a dictionary key or argument.
+func KODAuthenticationTypeChangePasswd() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeChangePasswd")))
 }
-
-// KODAttributeTypeAttrListValueRefCount returns the string constant kODAttributeTypeAttrListValueRefCount as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAttrListValueRefCount() objc.ID {
-	if _r := raw.KODAttributeTypeAttrListValueRefCount(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeClearText returns the string constant kODAuthenticationTypeClearText, for use as a dictionary key or argument.
+func KODAuthenticationTypeClearText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeClearText")))
 }
-
-// KODAttributeTypeDirRefs returns the string constant kODAttributeTypeDirRefs as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeDirRefs() objc.ID {
-	if _r := raw.KODAttributeTypeDirRefs(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeClearTextReadOnly returns the string constant kODAuthenticationTypeClearTextReadOnly, for use as a dictionary key or argument.
+func KODAuthenticationTypeClearTextReadOnly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeClearTextReadOnly")))
 }
-
-// KODAttributeTypeNodeRefs returns the string constant kODAttributeTypeNodeRefs as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeNodeRefs() objc.ID {
-	if _r := raw.KODAttributeTypeNodeRefs(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeCrypt returns the string constant kODAuthenticationTypeCrypt, for use as a dictionary key or argument.
+func KODAuthenticationTypeCrypt() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeCrypt")))
 }
-
-// KODAttributeTypeRecRefs returns the string constant kODAttributeTypeRecRefs as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeRecRefs() objc.ID {
-	if _r := raw.KODAttributeTypeRecRefs(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeDIGEST_MD5 returns the string constant kODAuthenticationTypeDIGEST_MD5, for use as a dictionary key or argument.
+func KODAuthenticationTypeDIGEST_MD5() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeDIGEST_MD5")))
 }
-
-// KODAttributeTypeAttrListRefs returns the string constant kODAttributeTypeAttrListRefs as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAttrListRefs() objc.ID {
-	if _r := raw.KODAttributeTypeAttrListRefs(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeDeleteUser returns the string constant kODAuthenticationTypeDeleteUser, for use as a dictionary key or argument.
+func KODAuthenticationTypeDeleteUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeDeleteUser")))
 }
-
-// KODAttributeTypeAttrListValueRefs returns the string constant kODAttributeTypeAttrListValueRefs as an objc.ID, for use as a dictionary key or selector argument.
-func KODAttributeTypeAttrListValueRefs() objc.ID {
-	if _r := raw.KODAttributeTypeAttrListValueRefs(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeGetEffectivePolicy returns the string constant kODAuthenticationTypeGetEffectivePolicy, for use as a dictionary key or argument.
+func KODAuthenticationTypeGetEffectivePolicy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeGetEffectivePolicy")))
 }
-
-// KODAuthenticationType2WayRandom returns the string constant kODAuthenticationType2WayRandom as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationType2WayRandom() objc.ID {
-	if _r := raw.KODAuthenticationType2WayRandom(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeGetGlobalPolicy returns the string constant kODAuthenticationTypeGetGlobalPolicy, for use as a dictionary key or argument.
+func KODAuthenticationTypeGetGlobalPolicy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeGetGlobalPolicy")))
 }
-
-// KODAuthenticationType2WayRandomChangePasswd returns the string constant kODAuthenticationType2WayRandomChangePasswd as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationType2WayRandomChangePasswd() objc.ID {
-	if _r := raw.KODAuthenticationType2WayRandomChangePasswd(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeGetKerberosPrincipal returns the string constant kODAuthenticationTypeGetKerberosPrincipal, for use as a dictionary key or argument.
+func KODAuthenticationTypeGetKerberosPrincipal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeGetKerberosPrincipal")))
 }
-
-// KODAuthenticationTypeAPOP returns the string constant kODAuthenticationTypeAPOP as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeAPOP() objc.ID {
-	if _r := raw.KODAuthenticationTypeAPOP(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeGetPolicy returns the string constant kODAuthenticationTypeGetPolicy, for use as a dictionary key or argument.
+func KODAuthenticationTypeGetPolicy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeGetPolicy")))
 }
-
-// KODAuthenticationTypeCRAM_MD5 returns the string constant kODAuthenticationTypeCRAM_MD5 as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeCRAM_MD5() objc.ID {
-	if _r := raw.KODAuthenticationTypeCRAM_MD5(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeGetUserData returns the string constant kODAuthenticationTypeGetUserData, for use as a dictionary key or argument.
+func KODAuthenticationTypeGetUserData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeGetUserData")))
 }
-
-// KODAuthenticationTypeChangePasswd returns the string constant kODAuthenticationTypeChangePasswd as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeChangePasswd() objc.ID {
-	if _r := raw.KODAuthenticationTypeChangePasswd(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeGetUserName returns the string constant kODAuthenticationTypeGetUserName, for use as a dictionary key or argument.
+func KODAuthenticationTypeGetUserName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeGetUserName")))
 }
-
-// KODAuthenticationTypeClearText returns the string constant kODAuthenticationTypeClearText as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeClearText() objc.ID {
-	if _r := raw.KODAuthenticationTypeClearText(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeKerberosTickets returns the string constant kODAuthenticationTypeKerberosTickets, for use as a dictionary key or argument.
+func KODAuthenticationTypeKerberosTickets() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeKerberosTickets")))
 }
-
-// KODAuthenticationTypeClearTextReadOnly returns the string constant kODAuthenticationTypeClearTextReadOnly as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeClearTextReadOnly() objc.ID {
-	if _r := raw.KODAuthenticationTypeClearTextReadOnly(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeMPPEPrimaryKeys returns the string constant kODAuthenticationTypeMPPEPrimaryKeys, for use as a dictionary key or argument.
+func KODAuthenticationTypeMPPEPrimaryKeys() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeMPPEPrimaryKeys")))
 }
-
-// KODAuthenticationTypeCrypt returns the string constant kODAuthenticationTypeCrypt as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeCrypt() objc.ID {
-	if _r := raw.KODAuthenticationTypeCrypt(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeMPPEMasterKeys returns the string constant kODAuthenticationTypeMPPEMasterKeys, for use as a dictionary key or argument.
+func KODAuthenticationTypeMPPEMasterKeys() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeMPPEMasterKeys")))
 }
-
-// KODAuthenticationTypeDIGEST_MD5 returns the string constant kODAuthenticationTypeDIGEST_MD5 as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeDIGEST_MD5() objc.ID {
-	if _r := raw.KODAuthenticationTypeDIGEST_MD5(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeMSCHAP2 returns the string constant kODAuthenticationTypeMSCHAP2, for use as a dictionary key or argument.
+func KODAuthenticationTypeMSCHAP2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeMSCHAP2")))
 }
-
-// KODAuthenticationTypeDeleteUser returns the string constant kODAuthenticationTypeDeleteUser as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeDeleteUser() objc.ID {
-	if _r := raw.KODAuthenticationTypeDeleteUser(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeNTLMv2 returns the string constant kODAuthenticationTypeNTLMv2, for use as a dictionary key or argument.
+func KODAuthenticationTypeNTLMv2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeNTLMv2")))
 }
-
-// KODAuthenticationTypeGetEffectivePolicy returns the string constant kODAuthenticationTypeGetEffectivePolicy as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeGetEffectivePolicy() objc.ID {
-	if _r := raw.KODAuthenticationTypeGetEffectivePolicy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeNTLMv2WithSessionKey returns the string constant kODAuthenticationTypeNTLMv2WithSessionKey, for use as a dictionary key or argument.
+func KODAuthenticationTypeNTLMv2WithSessionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeNTLMv2WithSessionKey")))
 }
-
-// KODAuthenticationTypeGetGlobalPolicy returns the string constant kODAuthenticationTypeGetGlobalPolicy as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeGetGlobalPolicy() objc.ID {
-	if _r := raw.KODAuthenticationTypeGetGlobalPolicy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeNewUser returns the string constant kODAuthenticationTypeNewUser, for use as a dictionary key or argument.
+func KODAuthenticationTypeNewUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeNewUser")))
 }
-
-// KODAuthenticationTypeGetKerberosPrincipal returns the string constant kODAuthenticationTypeGetKerberosPrincipal as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeGetKerberosPrincipal() objc.ID {
-	if _r := raw.KODAuthenticationTypeGetKerberosPrincipal(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeNewUserWithPolicy returns the string constant kODAuthenticationTypeNewUserWithPolicy, for use as a dictionary key or argument.
+func KODAuthenticationTypeNewUserWithPolicy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeNewUserWithPolicy")))
 }
-
-// KODAuthenticationTypeGetPolicy returns the string constant kODAuthenticationTypeGetPolicy as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeGetPolicy() objc.ID {
-	if _r := raw.KODAuthenticationTypeGetPolicy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeNodeNativeClearTextOK returns the string constant kODAuthenticationTypeNodeNativeClearTextOK, for use as a dictionary key or argument.
+func KODAuthenticationTypeNodeNativeClearTextOK() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeNodeNativeClearTextOK")))
 }
-
-// KODAuthenticationTypeGetUserData returns the string constant kODAuthenticationTypeGetUserData as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeGetUserData() objc.ID {
-	if _r := raw.KODAuthenticationTypeGetUserData(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeNodeNativeNoClearText returns the string constant kODAuthenticationTypeNodeNativeNoClearText, for use as a dictionary key or argument.
+func KODAuthenticationTypeNodeNativeNoClearText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeNodeNativeNoClearText")))
 }
-
-// KODAuthenticationTypeGetUserName returns the string constant kODAuthenticationTypeGetUserName as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeGetUserName() objc.ID {
-	if _r := raw.KODAuthenticationTypeGetUserName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeReadSecureHash returns the string constant kODAuthenticationTypeReadSecureHash, for use as a dictionary key or argument.
+func KODAuthenticationTypeReadSecureHash() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeReadSecureHash")))
 }
-
-// KODAuthenticationTypeKerberosTickets returns the string constant kODAuthenticationTypeKerberosTickets as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeKerberosTickets() objc.ID {
-	if _r := raw.KODAuthenticationTypeKerberosTickets(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeSMBNTv2UserSessionKey returns the string constant kODAuthenticationTypeSMBNTv2UserSessionKey, for use as a dictionary key or argument.
+func KODAuthenticationTypeSMBNTv2UserSessionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeSMBNTv2UserSessionKey")))
 }
-
-// KODAuthenticationTypeMPPEPrimaryKeys returns the string constant kODAuthenticationTypeMPPEPrimaryKeys as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeMPPEPrimaryKeys() objc.ID {
-	if _r := raw.KODAuthenticationTypeMPPEPrimaryKeys(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeSMBWorkstationCredentialSessionKey returns the string constant kODAuthenticationTypeSMBWorkstationCredentialSessionKey, for use as a dictionary key or argument.
+func KODAuthenticationTypeSMBWorkstationCredentialSessionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeSMBWorkstationCredentialSessionKey")))
 }
-
-// KODAuthenticationTypeMPPEMasterKeys returns the string constant kODAuthenticationTypeMPPEMasterKeys as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeMPPEMasterKeys() objc.ID {
-	if _r := raw.KODAuthenticationTypeMPPEMasterKeys(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeSMB_LM_Key returns the string constant kODAuthenticationTypeSMB_LM_Key, for use as a dictionary key or argument.
+func KODAuthenticationTypeSMB_LM_Key() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeSMB_LM_Key")))
 }
-
-// KODAuthenticationTypeMSCHAP2 returns the string constant kODAuthenticationTypeMSCHAP2 as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeMSCHAP2() objc.ID {
-	if _r := raw.KODAuthenticationTypeMSCHAP2(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeSMB_NT_Key returns the string constant kODAuthenticationTypeSMB_NT_Key, for use as a dictionary key or argument.
+func KODAuthenticationTypeSMB_NT_Key() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeSMB_NT_Key")))
 }
-
-// KODAuthenticationTypeNTLMv2 returns the string constant kODAuthenticationTypeNTLMv2 as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeNTLMv2() objc.ID {
-	if _r := raw.KODAuthenticationTypeNTLMv2(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeSMB_NT_UserSessionKey returns the string constant kODAuthenticationTypeSMB_NT_UserSessionKey, for use as a dictionary key or argument.
+func KODAuthenticationTypeSMB_NT_UserSessionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeSMB_NT_UserSessionKey")))
 }
-
-// KODAuthenticationTypeNTLMv2WithSessionKey returns the string constant kODAuthenticationTypeNTLMv2WithSessionKey as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeNTLMv2WithSessionKey() objc.ID {
-	if _r := raw.KODAuthenticationTypeNTLMv2WithSessionKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeSMB_NT_WithUserSessionKey returns the string constant kODAuthenticationTypeSMB_NT_WithUserSessionKey, for use as a dictionary key or argument.
+func KODAuthenticationTypeSMB_NT_WithUserSessionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeSMB_NT_WithUserSessionKey")))
 }
-
-// KODAuthenticationTypeNewUser returns the string constant kODAuthenticationTypeNewUser as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeNewUser() objc.ID {
-	if _r := raw.KODAuthenticationTypeNewUser(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeSecureHash returns the string constant kODAuthenticationTypeSecureHash, for use as a dictionary key or argument.
+func KODAuthenticationTypeSecureHash() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeSecureHash")))
 }
-
-// KODAuthenticationTypeNewUserWithPolicy returns the string constant kODAuthenticationTypeNewUserWithPolicy as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeNewUserWithPolicy() objc.ID {
-	if _r := raw.KODAuthenticationTypeNewUserWithPolicy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeSetCertificateHashAsCurrent returns the string constant kODAuthenticationTypeSetCertificateHashAsCurrent, for use as a dictionary key or argument.
+func KODAuthenticationTypeSetCertificateHashAsCurrent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeSetCertificateHashAsCurrent")))
 }
-
-// KODAuthenticationTypeNodeNativeClearTextOK returns the string constant kODAuthenticationTypeNodeNativeClearTextOK as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeNodeNativeClearTextOK() objc.ID {
-	if _r := raw.KODAuthenticationTypeNodeNativeClearTextOK(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeSetGlobalPolicy returns the string constant kODAuthenticationTypeSetGlobalPolicy, for use as a dictionary key or argument.
+func KODAuthenticationTypeSetGlobalPolicy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeSetGlobalPolicy")))
 }
-
-// KODAuthenticationTypeNodeNativeNoClearText returns the string constant kODAuthenticationTypeNodeNativeNoClearText as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeNodeNativeNoClearText() objc.ID {
-	if _r := raw.KODAuthenticationTypeNodeNativeNoClearText(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeSetLMHash returns the string constant kODAuthenticationTypeSetLMHash, for use as a dictionary key or argument.
+func KODAuthenticationTypeSetLMHash() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeSetLMHash")))
 }
-
-// KODAuthenticationTypeReadSecureHash returns the string constant kODAuthenticationTypeReadSecureHash as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeReadSecureHash() objc.ID {
-	if _r := raw.KODAuthenticationTypeReadSecureHash(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeSetNTHash returns the string constant kODAuthenticationTypeSetNTHash, for use as a dictionary key or argument.
+func KODAuthenticationTypeSetNTHash() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeSetNTHash")))
 }
-
-// KODAuthenticationTypeSMBNTv2UserSessionKey returns the string constant kODAuthenticationTypeSMBNTv2UserSessionKey as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeSMBNTv2UserSessionKey() objc.ID {
-	if _r := raw.KODAuthenticationTypeSMBNTv2UserSessionKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeSetPassword returns the string constant kODAuthenticationTypeSetPassword, for use as a dictionary key or argument.
+func KODAuthenticationTypeSetPassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeSetPassword")))
 }
-
-// KODAuthenticationTypeSMBWorkstationCredentialSessionKey returns the string constant kODAuthenticationTypeSMBWorkstationCredentialSessionKey as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeSMBWorkstationCredentialSessionKey() objc.ID {
-	if _r := raw.KODAuthenticationTypeSMBWorkstationCredentialSessionKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeSetPasswordAsCurrent returns the string constant kODAuthenticationTypeSetPasswordAsCurrent, for use as a dictionary key or argument.
+func KODAuthenticationTypeSetPasswordAsCurrent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeSetPasswordAsCurrent")))
 }
-
-// KODAuthenticationTypeSMB_LM_Key returns the string constant kODAuthenticationTypeSMB_LM_Key as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeSMB_LM_Key() objc.ID {
-	if _r := raw.KODAuthenticationTypeSMB_LM_Key(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeSetPolicy returns the string constant kODAuthenticationTypeSetPolicy, for use as a dictionary key or argument.
+func KODAuthenticationTypeSetPolicy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeSetPolicy")))
 }
-
-// KODAuthenticationTypeSMB_NT_Key returns the string constant kODAuthenticationTypeSMB_NT_Key as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeSMB_NT_Key() objc.ID {
-	if _r := raw.KODAuthenticationTypeSMB_NT_Key(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeSetPolicyAsCurrent returns the string constant kODAuthenticationTypeSetPolicyAsCurrent, for use as a dictionary key or argument.
+func KODAuthenticationTypeSetPolicyAsCurrent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeSetPolicyAsCurrent")))
 }
-
-// KODAuthenticationTypeSMB_NT_UserSessionKey returns the string constant kODAuthenticationTypeSMB_NT_UserSessionKey as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeSMB_NT_UserSessionKey() objc.ID {
-	if _r := raw.KODAuthenticationTypeSMB_NT_UserSessionKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeSetUserData returns the string constant kODAuthenticationTypeSetUserData, for use as a dictionary key or argument.
+func KODAuthenticationTypeSetUserData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeSetUserData")))
 }
-
-// KODAuthenticationTypeSMB_NT_WithUserSessionKey returns the string constant kODAuthenticationTypeSMB_NT_WithUserSessionKey as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeSMB_NT_WithUserSessionKey() objc.ID {
-	if _r := raw.KODAuthenticationTypeSMB_NT_WithUserSessionKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeSetUserName returns the string constant kODAuthenticationTypeSetUserName, for use as a dictionary key or argument.
+func KODAuthenticationTypeSetUserName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeSetUserName")))
 }
-
-// KODAuthenticationTypeSecureHash returns the string constant kODAuthenticationTypeSecureHash as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeSecureHash() objc.ID {
-	if _r := raw.KODAuthenticationTypeSecureHash(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeSetWorkstationPassword returns the string constant kODAuthenticationTypeSetWorkstationPassword, for use as a dictionary key or argument.
+func KODAuthenticationTypeSetWorkstationPassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeSetWorkstationPassword")))
 }
-
-// KODAuthenticationTypeSetCertificateHashAsCurrent returns the string constant kODAuthenticationTypeSetCertificateHashAsCurrent as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeSetCertificateHashAsCurrent() objc.ID {
-	if _r := raw.KODAuthenticationTypeSetCertificateHashAsCurrent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeWithAuthorizationRef returns the string constant kODAuthenticationTypeWithAuthorizationRef, for use as a dictionary key or argument.
+func KODAuthenticationTypeWithAuthorizationRef() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeWithAuthorizationRef")))
 }
-
-// KODAuthenticationTypeSetGlobalPolicy returns the string constant kODAuthenticationTypeSetGlobalPolicy as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeSetGlobalPolicy() objc.ID {
-	if _r := raw.KODAuthenticationTypeSetGlobalPolicy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODAuthenticationTypeWriteSecureHash returns the string constant kODAuthenticationTypeWriteSecureHash, for use as a dictionary key or argument.
+func KODAuthenticationTypeWriteSecureHash() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODAuthenticationTypeWriteSecureHash")))
 }
-
-// KODAuthenticationTypeSetLMHash returns the string constant kODAuthenticationTypeSetLMHash as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeSetLMHash() objc.ID {
-	if _r := raw.KODAuthenticationTypeSetLMHash(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyTypePasswordCannotBeAccountName returns the string constant kODPolicyTypePasswordCannotBeAccountName, for use as a dictionary key or argument.
+func KODPolicyTypePasswordCannotBeAccountName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyTypePasswordCannotBeAccountName")))
 }
-
-// KODAuthenticationTypeSetNTHash returns the string constant kODAuthenticationTypeSetNTHash as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeSetNTHash() objc.ID {
-	if _r := raw.KODAuthenticationTypeSetNTHash(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyTypePasswordChangeRequired returns the string constant kODPolicyTypePasswordChangeRequired, for use as a dictionary key or argument.
+func KODPolicyTypePasswordChangeRequired() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyTypePasswordChangeRequired")))
 }
-
-// KODAuthenticationTypeSetPassword returns the string constant kODAuthenticationTypeSetPassword as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeSetPassword() objc.ID {
-	if _r := raw.KODAuthenticationTypeSetPassword(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyTypePasswordHistory returns the string constant kODPolicyTypePasswordHistory, for use as a dictionary key or argument.
+func KODPolicyTypePasswordHistory() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyTypePasswordHistory")))
 }
-
-// KODAuthenticationTypeSetPasswordAsCurrent returns the string constant kODAuthenticationTypeSetPasswordAsCurrent as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeSetPasswordAsCurrent() objc.ID {
-	if _r := raw.KODAuthenticationTypeSetPasswordAsCurrent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyTypePasswordMinimumNumberOfCharacters returns the string constant kODPolicyTypePasswordMinimumNumberOfCharacters, for use as a dictionary key or argument.
+func KODPolicyTypePasswordMinimumNumberOfCharacters() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyTypePasswordMinimumNumberOfCharacters")))
 }
-
-// KODAuthenticationTypeSetPolicy returns the string constant kODAuthenticationTypeSetPolicy as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeSetPolicy() objc.ID {
-	if _r := raw.KODAuthenticationTypeSetPolicy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyTypePasswordMaximumNumberOfCharacters returns the string constant kODPolicyTypePasswordMaximumNumberOfCharacters, for use as a dictionary key or argument.
+func KODPolicyTypePasswordMaximumNumberOfCharacters() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyTypePasswordMaximumNumberOfCharacters")))
 }
-
-// KODAuthenticationTypeSetPolicyAsCurrent returns the string constant kODAuthenticationTypeSetPolicyAsCurrent as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeSetPolicyAsCurrent() objc.ID {
-	if _r := raw.KODAuthenticationTypeSetPolicyAsCurrent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyTypePasswordMaximumAgeInMinutes returns the string constant kODPolicyTypePasswordMaximumAgeInMinutes, for use as a dictionary key or argument.
+func KODPolicyTypePasswordMaximumAgeInMinutes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyTypePasswordMaximumAgeInMinutes")))
 }
-
-// KODAuthenticationTypeSetUserData returns the string constant kODAuthenticationTypeSetUserData as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeSetUserData() objc.ID {
-	if _r := raw.KODAuthenticationTypeSetUserData(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyTypePasswordRequiresAlpha returns the string constant kODPolicyTypePasswordRequiresAlpha, for use as a dictionary key or argument.
+func KODPolicyTypePasswordRequiresAlpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyTypePasswordRequiresAlpha")))
 }
-
-// KODAuthenticationTypeSetUserName returns the string constant kODAuthenticationTypeSetUserName as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeSetUserName() objc.ID {
-	if _r := raw.KODAuthenticationTypeSetUserName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyTypePasswordRequiresMixedCase returns the string constant kODPolicyTypePasswordRequiresMixedCase, for use as a dictionary key or argument.
+func KODPolicyTypePasswordRequiresMixedCase() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyTypePasswordRequiresMixedCase")))
 }
-
-// KODAuthenticationTypeSetWorkstationPassword returns the string constant kODAuthenticationTypeSetWorkstationPassword as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeSetWorkstationPassword() objc.ID {
-	if _r := raw.KODAuthenticationTypeSetWorkstationPassword(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyTypePasswordRequiresNumeric returns the string constant kODPolicyTypePasswordRequiresNumeric, for use as a dictionary key or argument.
+func KODPolicyTypePasswordRequiresNumeric() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyTypePasswordRequiresNumeric")))
 }
-
-// KODAuthenticationTypeWithAuthorizationRef returns the string constant kODAuthenticationTypeWithAuthorizationRef as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeWithAuthorizationRef() objc.ID {
-	if _r := raw.KODAuthenticationTypeWithAuthorizationRef(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyTypePasswordRequiresSymbol returns the string constant kODPolicyTypePasswordRequiresSymbol, for use as a dictionary key or argument.
+func KODPolicyTypePasswordRequiresSymbol() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyTypePasswordRequiresSymbol")))
 }
-
-// KODAuthenticationTypeWriteSecureHash returns the string constant kODAuthenticationTypeWriteSecureHash as an objc.ID, for use as a dictionary key or selector argument.
-func KODAuthenticationTypeWriteSecureHash() objc.ID {
-	if _r := raw.KODAuthenticationTypeWriteSecureHash(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyTypePasswordSelfModification returns the string constant kODPolicyTypePasswordSelfModification, for use as a dictionary key or argument.
+func KODPolicyTypePasswordSelfModification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyTypePasswordSelfModification")))
 }
-
-// KODPolicyTypePasswordCannotBeAccountName returns the string constant kODPolicyTypePasswordCannotBeAccountName as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyTypePasswordCannotBeAccountName() objc.ID {
-	if _r := raw.KODPolicyTypePasswordCannotBeAccountName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyTypeAccountExpiresOnDate returns the string constant kODPolicyTypeAccountExpiresOnDate, for use as a dictionary key or argument.
+func KODPolicyTypeAccountExpiresOnDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyTypeAccountExpiresOnDate")))
 }
-
-// KODPolicyTypePasswordChangeRequired returns the string constant kODPolicyTypePasswordChangeRequired as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyTypePasswordChangeRequired() objc.ID {
-	if _r := raw.KODPolicyTypePasswordChangeRequired(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyTypeAccountMaximumFailedLogins returns the string constant kODPolicyTypeAccountMaximumFailedLogins, for use as a dictionary key or argument.
+func KODPolicyTypeAccountMaximumFailedLogins() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyTypeAccountMaximumFailedLogins")))
 }
-
-// KODPolicyTypePasswordHistory returns the string constant kODPolicyTypePasswordHistory as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyTypePasswordHistory() objc.ID {
-	if _r := raw.KODPolicyTypePasswordHistory(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyTypeAccountMaximumMinutesUntilDisabled returns the string constant kODPolicyTypeAccountMaximumMinutesUntilDisabled, for use as a dictionary key or argument.
+func KODPolicyTypeAccountMaximumMinutesUntilDisabled() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyTypeAccountMaximumMinutesUntilDisabled")))
 }
-
-// KODPolicyTypePasswordMinimumNumberOfCharacters returns the string constant kODPolicyTypePasswordMinimumNumberOfCharacters as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyTypePasswordMinimumNumberOfCharacters() objc.ID {
-	if _r := raw.KODPolicyTypePasswordMinimumNumberOfCharacters(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyTypeAccountMinutesUntilFailedLoginReset returns the string constant kODPolicyTypeAccountMinutesUntilFailedLoginReset, for use as a dictionary key or argument.
+func KODPolicyTypeAccountMinutesUntilFailedLoginReset() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyTypeAccountMinutesUntilFailedLoginReset")))
 }
-
-// KODPolicyTypePasswordMaximumNumberOfCharacters returns the string constant kODPolicyTypePasswordMaximumNumberOfCharacters as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyTypePasswordMaximumNumberOfCharacters() objc.ID {
-	if _r := raw.KODPolicyTypePasswordMaximumNumberOfCharacters(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyTypeAccountMaximumMinutesOfNonUse returns the string constant kODPolicyTypeAccountMaximumMinutesOfNonUse, for use as a dictionary key or argument.
+func KODPolicyTypeAccountMaximumMinutesOfNonUse() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyTypeAccountMaximumMinutesOfNonUse")))
 }
-
-// KODPolicyTypePasswordMaximumAgeInMinutes returns the string constant kODPolicyTypePasswordMaximumAgeInMinutes as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyTypePasswordMaximumAgeInMinutes() objc.ID {
-	if _r := raw.KODPolicyTypePasswordMaximumAgeInMinutes(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyKeyIdentifier returns the string constant kODPolicyKeyIdentifier, for use as a dictionary key or argument.
+func KODPolicyKeyIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyKeyIdentifier")))
 }
-
-// KODPolicyTypePasswordRequiresAlpha returns the string constant kODPolicyTypePasswordRequiresAlpha as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyTypePasswordRequiresAlpha() objc.ID {
-	if _r := raw.KODPolicyTypePasswordRequiresAlpha(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyKeyParameters returns the string constant kODPolicyKeyParameters, for use as a dictionary key or argument.
+func KODPolicyKeyParameters() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyKeyParameters")))
 }
-
-// KODPolicyTypePasswordRequiresMixedCase returns the string constant kODPolicyTypePasswordRequiresMixedCase as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyTypePasswordRequiresMixedCase() objc.ID {
-	if _r := raw.KODPolicyTypePasswordRequiresMixedCase(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyKeyContent returns the string constant kODPolicyKeyContent, for use as a dictionary key or argument.
+func KODPolicyKeyContent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyKeyContent")))
 }
-
-// KODPolicyTypePasswordRequiresNumeric returns the string constant kODPolicyTypePasswordRequiresNumeric as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyTypePasswordRequiresNumeric() objc.ID {
-	if _r := raw.KODPolicyTypePasswordRequiresNumeric(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyKeyContentDescription returns the string constant kODPolicyKeyContentDescription, for use as a dictionary key or argument.
+func KODPolicyKeyContentDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyKeyContentDescription")))
 }
-
-// KODPolicyTypePasswordRequiresSymbol returns the string constant kODPolicyTypePasswordRequiresSymbol as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyTypePasswordRequiresSymbol() objc.ID {
-	if _r := raw.KODPolicyTypePasswordRequiresSymbol(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyKeyEvaluationDetails returns the string constant kODPolicyKeyEvaluationDetails, for use as a dictionary key or argument.
+func KODPolicyKeyEvaluationDetails() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyKeyEvaluationDetails")))
 }
-
-// KODPolicyTypePasswordSelfModification returns the string constant kODPolicyTypePasswordSelfModification as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyTypePasswordSelfModification() objc.ID {
-	if _r := raw.KODPolicyTypePasswordSelfModification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyKeyPolicySatisfied returns the string constant kODPolicyKeyPolicySatisfied, for use as a dictionary key or argument.
+func KODPolicyKeyPolicySatisfied() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyKeyPolicySatisfied")))
 }
-
-// KODPolicyTypeAccountExpiresOnDate returns the string constant kODPolicyTypeAccountExpiresOnDate as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyTypeAccountExpiresOnDate() objc.ID {
-	if _r := raw.KODPolicyTypeAccountExpiresOnDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyCategoryAuthentication returns the string constant kODPolicyCategoryAuthentication, for use as a dictionary key or argument.
+func KODPolicyCategoryAuthentication() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyCategoryAuthentication")))
 }
-
-// KODPolicyTypeAccountMaximumFailedLogins returns the string constant kODPolicyTypeAccountMaximumFailedLogins as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyTypeAccountMaximumFailedLogins() objc.ID {
-	if _r := raw.KODPolicyTypeAccountMaximumFailedLogins(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyCategoryPasswordContent returns the string constant kODPolicyCategoryPasswordContent, for use as a dictionary key or argument.
+func KODPolicyCategoryPasswordContent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyCategoryPasswordContent")))
 }
-
-// KODPolicyTypeAccountMaximumMinutesUntilDisabled returns the string constant kODPolicyTypeAccountMaximumMinutesUntilDisabled as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyTypeAccountMaximumMinutesUntilDisabled() objc.ID {
-	if _r := raw.KODPolicyTypeAccountMaximumMinutesUntilDisabled(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyCategoryPasswordChange returns the string constant kODPolicyCategoryPasswordChange, for use as a dictionary key or argument.
+func KODPolicyCategoryPasswordChange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyCategoryPasswordChange")))
 }
-
-// KODPolicyTypeAccountMinutesUntilFailedLoginReset returns the string constant kODPolicyTypeAccountMinutesUntilFailedLoginReset as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyTypeAccountMinutesUntilFailedLoginReset() objc.ID {
-	if _r := raw.KODPolicyTypeAccountMinutesUntilFailedLoginReset(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeRecordName returns the string constant kODPolicyAttributeRecordName, for use as a dictionary key or argument.
+func KODPolicyAttributeRecordName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeRecordName")))
 }
-
-// KODPolicyTypeAccountMaximumMinutesOfNonUse returns the string constant kODPolicyTypeAccountMaximumMinutesOfNonUse as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyTypeAccountMaximumMinutesOfNonUse() objc.ID {
-	if _r := raw.KODPolicyTypeAccountMaximumMinutesOfNonUse(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeRecordType returns the string constant kODPolicyAttributeRecordType, for use as a dictionary key or argument.
+func KODPolicyAttributeRecordType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeRecordType")))
 }
-
-// KODPolicyKeyIdentifier returns the string constant kODPolicyKeyIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyKeyIdentifier() objc.ID {
-	if _r := raw.KODPolicyKeyIdentifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributePassword returns the string constant kODPolicyAttributePassword, for use as a dictionary key or argument.
+func KODPolicyAttributePassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributePassword")))
 }
-
-// KODPolicyKeyParameters returns the string constant kODPolicyKeyParameters as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyKeyParameters() objc.ID {
-	if _r := raw.KODPolicyKeyParameters(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributePasswordHashes returns the string constant kODPolicyAttributePasswordHashes, for use as a dictionary key or argument.
+func KODPolicyAttributePasswordHashes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributePasswordHashes")))
 }
-
-// KODPolicyKeyContent returns the string constant kODPolicyKeyContent as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyKeyContent() objc.ID {
-	if _r := raw.KODPolicyKeyContent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributePasswordHistory returns the string constant kODPolicyAttributePasswordHistory, for use as a dictionary key or argument.
+func KODPolicyAttributePasswordHistory() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributePasswordHistory")))
 }
-
-// KODPolicyKeyContentDescription returns the string constant kODPolicyKeyContentDescription as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyKeyContentDescription() objc.ID {
-	if _r := raw.KODPolicyKeyContentDescription(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributePasswordHistoryDepth returns the string constant kODPolicyAttributePasswordHistoryDepth, for use as a dictionary key or argument.
+func KODPolicyAttributePasswordHistoryDepth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributePasswordHistoryDepth")))
 }
-
-// KODPolicyKeyEvaluationDetails returns the string constant kODPolicyKeyEvaluationDetails as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyKeyEvaluationDetails() objc.ID {
-	if _r := raw.KODPolicyKeyEvaluationDetails(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeCurrentDate returns the string constant kODPolicyAttributeCurrentDate, for use as a dictionary key or argument.
+func KODPolicyAttributeCurrentDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeCurrentDate")))
 }
-
-// KODPolicyKeyPolicySatisfied returns the string constant kODPolicyKeyPolicySatisfied as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyKeyPolicySatisfied() objc.ID {
-	if _r := raw.KODPolicyKeyPolicySatisfied(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeCurrentTime returns the string constant kODPolicyAttributeCurrentTime, for use as a dictionary key or argument.
+func KODPolicyAttributeCurrentTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeCurrentTime")))
 }
-
-// KODPolicyCategoryAuthentication returns the string constant kODPolicyCategoryAuthentication as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyCategoryAuthentication() objc.ID {
-	if _r := raw.KODPolicyCategoryAuthentication(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeCurrentTimeOfDay returns the string constant kODPolicyAttributeCurrentTimeOfDay, for use as a dictionary key or argument.
+func KODPolicyAttributeCurrentTimeOfDay() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeCurrentTimeOfDay")))
 }
-
-// KODPolicyCategoryPasswordContent returns the string constant kODPolicyCategoryPasswordContent as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyCategoryPasswordContent() objc.ID {
-	if _r := raw.KODPolicyCategoryPasswordContent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeCurrentDayOfWeek returns the string constant kODPolicyAttributeCurrentDayOfWeek, for use as a dictionary key or argument.
+func KODPolicyAttributeCurrentDayOfWeek() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeCurrentDayOfWeek")))
 }
-
-// KODPolicyCategoryPasswordChange returns the string constant kODPolicyCategoryPasswordChange as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyCategoryPasswordChange() objc.ID {
-	if _r := raw.KODPolicyCategoryPasswordChange(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeFailedAuthentications returns the string constant kODPolicyAttributeFailedAuthentications, for use as a dictionary key or argument.
+func KODPolicyAttributeFailedAuthentications() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeFailedAuthentications")))
 }
-
-// KODPolicyAttributeRecordName returns the string constant kODPolicyAttributeRecordName as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeRecordName() objc.ID {
-	if _r := raw.KODPolicyAttributeRecordName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeMaximumFailedAuthentications returns the string constant kODPolicyAttributeMaximumFailedAuthentications, for use as a dictionary key or argument.
+func KODPolicyAttributeMaximumFailedAuthentications() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeMaximumFailedAuthentications")))
 }
-
-// KODPolicyAttributeRecordType returns the string constant kODPolicyAttributeRecordType as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeRecordType() objc.ID {
-	if _r := raw.KODPolicyAttributeRecordType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeLastFailedAuthenticationTime returns the string constant kODPolicyAttributeLastFailedAuthenticationTime, for use as a dictionary key or argument.
+func KODPolicyAttributeLastFailedAuthenticationTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeLastFailedAuthenticationTime")))
 }
-
-// KODPolicyAttributePassword returns the string constant kODPolicyAttributePassword as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributePassword() objc.ID {
-	if _r := raw.KODPolicyAttributePassword(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeLastAuthenticationTime returns the string constant kODPolicyAttributeLastAuthenticationTime, for use as a dictionary key or argument.
+func KODPolicyAttributeLastAuthenticationTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeLastAuthenticationTime")))
 }
-
-// KODPolicyAttributePasswordHashes returns the string constant kODPolicyAttributePasswordHashes as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributePasswordHashes() objc.ID {
-	if _r := raw.KODPolicyAttributePasswordHashes(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeLastPasswordChangeTime returns the string constant kODPolicyAttributeLastPasswordChangeTime, for use as a dictionary key or argument.
+func KODPolicyAttributeLastPasswordChangeTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeLastPasswordChangeTime")))
 }
-
-// KODPolicyAttributePasswordHistory returns the string constant kODPolicyAttributePasswordHistory as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributePasswordHistory() objc.ID {
-	if _r := raw.KODPolicyAttributePasswordHistory(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeNewPasswordRequiredTime returns the string constant kODPolicyAttributeNewPasswordRequiredTime, for use as a dictionary key or argument.
+func KODPolicyAttributeNewPasswordRequiredTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeNewPasswordRequiredTime")))
 }
-
-// KODPolicyAttributePasswordHistoryDepth returns the string constant kODPolicyAttributePasswordHistoryDepth as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributePasswordHistoryDepth() objc.ID {
-	if _r := raw.KODPolicyAttributePasswordHistoryDepth(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeCreationTime returns the string constant kODPolicyAttributeCreationTime, for use as a dictionary key or argument.
+func KODPolicyAttributeCreationTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeCreationTime")))
 }
-
-// KODPolicyAttributeCurrentDate returns the string constant kODPolicyAttributeCurrentDate as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeCurrentDate() objc.ID {
-	if _r := raw.KODPolicyAttributeCurrentDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeExpiresEveryNDays returns the string constant kODPolicyAttributeExpiresEveryNDays, for use as a dictionary key or argument.
+func KODPolicyAttributeExpiresEveryNDays() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeExpiresEveryNDays")))
 }
-
-// KODPolicyAttributeCurrentTime returns the string constant kODPolicyAttributeCurrentTime as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeCurrentTime() objc.ID {
-	if _r := raw.KODPolicyAttributeCurrentTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeEnableOnDate returns the string constant kODPolicyAttributeEnableOnDate, for use as a dictionary key or argument.
+func KODPolicyAttributeEnableOnDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeEnableOnDate")))
 }
-
-// KODPolicyAttributeCurrentTimeOfDay returns the string constant kODPolicyAttributeCurrentTimeOfDay as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeCurrentTimeOfDay() objc.ID {
-	if _r := raw.KODPolicyAttributeCurrentTimeOfDay(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeExpiresOnDate returns the string constant kODPolicyAttributeExpiresOnDate, for use as a dictionary key or argument.
+func KODPolicyAttributeExpiresOnDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeExpiresOnDate")))
 }
-
-// KODPolicyAttributeCurrentDayOfWeek returns the string constant kODPolicyAttributeCurrentDayOfWeek as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeCurrentDayOfWeek() objc.ID {
-	if _r := raw.KODPolicyAttributeCurrentDayOfWeek(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeEnableOnDayOfWeek returns the string constant kODPolicyAttributeEnableOnDayOfWeek, for use as a dictionary key or argument.
+func KODPolicyAttributeEnableOnDayOfWeek() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeEnableOnDayOfWeek")))
 }
-
-// KODPolicyAttributeFailedAuthentications returns the string constant kODPolicyAttributeFailedAuthentications as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeFailedAuthentications() objc.ID {
-	if _r := raw.KODPolicyAttributeFailedAuthentications(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeExpiresOnDayOfWeek returns the string constant kODPolicyAttributeExpiresOnDayOfWeek, for use as a dictionary key or argument.
+func KODPolicyAttributeExpiresOnDayOfWeek() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeExpiresOnDayOfWeek")))
 }
-
-// KODPolicyAttributeMaximumFailedAuthentications returns the string constant kODPolicyAttributeMaximumFailedAuthentications as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeMaximumFailedAuthentications() objc.ID {
-	if _r := raw.KODPolicyAttributeMaximumFailedAuthentications(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeEnableAtTimeOfDay returns the string constant kODPolicyAttributeEnableAtTimeOfDay, for use as a dictionary key or argument.
+func KODPolicyAttributeEnableAtTimeOfDay() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeEnableAtTimeOfDay")))
 }
-
-// KODPolicyAttributeLastFailedAuthenticationTime returns the string constant kODPolicyAttributeLastFailedAuthenticationTime as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeLastFailedAuthenticationTime() objc.ID {
-	if _r := raw.KODPolicyAttributeLastFailedAuthenticationTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeExpiresAtTimeOfDay returns the string constant kODPolicyAttributeExpiresAtTimeOfDay, for use as a dictionary key or argument.
+func KODPolicyAttributeExpiresAtTimeOfDay() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeExpiresAtTimeOfDay")))
 }
-
-// KODPolicyAttributeLastAuthenticationTime returns the string constant kODPolicyAttributeLastAuthenticationTime as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeLastAuthenticationTime() objc.ID {
-	if _r := raw.KODPolicyAttributeLastAuthenticationTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// KODPolicyAttributeLastPasswordChangeTime returns the string constant kODPolicyAttributeLastPasswordChangeTime as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeLastPasswordChangeTime() objc.ID {
-	if _r := raw.KODPolicyAttributeLastPasswordChangeTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// KODPolicyAttributeNewPasswordRequiredTime returns the string constant kODPolicyAttributeNewPasswordRequiredTime as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeNewPasswordRequiredTime() objc.ID {
-	if _r := raw.KODPolicyAttributeNewPasswordRequiredTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// KODPolicyAttributeCreationTime returns the string constant kODPolicyAttributeCreationTime as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeCreationTime() objc.ID {
-	if _r := raw.KODPolicyAttributeCreationTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// KODPolicyAttributeExpiresEveryNDays returns the string constant kODPolicyAttributeExpiresEveryNDays as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeExpiresEveryNDays() objc.ID {
-	if _r := raw.KODPolicyAttributeExpiresEveryNDays(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// KODPolicyAttributeEnableOnDate returns the string constant kODPolicyAttributeEnableOnDate as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeEnableOnDate() objc.ID {
-	if _r := raw.KODPolicyAttributeEnableOnDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// KODPolicyAttributeExpiresOnDate returns the string constant kODPolicyAttributeExpiresOnDate as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeExpiresOnDate() objc.ID {
-	if _r := raw.KODPolicyAttributeExpiresOnDate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// KODPolicyAttributeEnableOnDayOfWeek returns the string constant kODPolicyAttributeEnableOnDayOfWeek as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeEnableOnDayOfWeek() objc.ID {
-	if _r := raw.KODPolicyAttributeEnableOnDayOfWeek(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// KODPolicyAttributeExpiresOnDayOfWeek returns the string constant kODPolicyAttributeExpiresOnDayOfWeek as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeExpiresOnDayOfWeek() objc.ID {
-	if _r := raw.KODPolicyAttributeExpiresOnDayOfWeek(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// KODPolicyAttributeEnableAtTimeOfDay returns the string constant kODPolicyAttributeEnableAtTimeOfDay as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeEnableAtTimeOfDay() objc.ID {
-	if _r := raw.KODPolicyAttributeEnableAtTimeOfDay(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// KODPolicyAttributeExpiresAtTimeOfDay returns the string constant kODPolicyAttributeExpiresAtTimeOfDay as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeExpiresAtTimeOfDay() objc.ID {
-	if _r := raw.KODPolicyAttributeExpiresAtTimeOfDay(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// KODPolicyAttributeDaysUntilExpiration returns the string constant kODPolicyAttributeDaysUntilExpiration as an objc.ID, for use as a dictionary key or selector argument.
-func KODPolicyAttributeDaysUntilExpiration() objc.ID {
-	if _r := raw.KODPolicyAttributeDaysUntilExpiration(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// KODBackOffSeconds returns the string constant kODBackOffSeconds as an objc.ID, for use as a dictionary key or selector argument.
-func KODBackOffSeconds() objc.ID {
-	if _r := raw.KODBackOffSeconds(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+
+// KODPolicyAttributeDaysUntilExpiration returns the string constant kODPolicyAttributeDaysUntilExpiration, for use as a dictionary key or argument.
+func KODPolicyAttributeDaysUntilExpiration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kODPolicyAttributeDaysUntilExpiration")))
 }
+
+// KODBackOffSeconds returns the string constant kODBackOffSeconds, for use as a dictionary key or argument.
+func KODBackOffSeconds() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kODBackOffSeconds"))) }

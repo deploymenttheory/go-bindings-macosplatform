@@ -5,72 +5,75 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a buffer of audio data with a format.
 //
-// AudioBuffer wraps [raw.AVAudioBuffer] with a fluent Go API.
+// AudioBuffer is an idiomatic wrapper over the Objective-C class AVAudioBuffer.
 type AudioBuffer struct {
-	inner *raw.AVAudioBuffer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioBuffer].
-func (x *AudioBuffer) Unwrap() *raw.AVAudioBuffer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioBuffer) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioBufferFromID adopts an existing object pointer as a AudioBuffer (nil for 0).
+// AudioBufferFromID adopts an existing Objective-C object as a AudioBuffer
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioBufferFromID(id objc.ID) *AudioBuffer {
 	if id == 0 {
 		return nil
 	}
-	return &AudioBuffer{inner: raw.AVAudioBufferFromID(id)}
+	x := &AudioBuffer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAudioBuffer creates a new [AudioBuffer].
-func NewAudioBuffer() *AudioBuffer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioBuffer")), objc.RegisterName("new"))
-	return &AudioBuffer{inner: raw.AVAudioBufferFromID(_id)}
-}
-
-// @property format @abstract The format of the audio in the buffer.
-//
-// Format calls the underlying Format.
-func (x *AudioBuffer) Format() *AudioFormat {
-	_r := x.inner.Format()
-	if _r == nil {
+// audioBufferAdopt wraps an Objective-C object that this code just created as a
+// AudioBuffer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioBufferAdopt(id objc.ID) *AudioBuffer {
+	if id == 0 {
 		return nil
 	}
-	return &AudioFormat{inner: _r}
+	x := &AudioBuffer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property audioBufferList @abstract The buffer's underlying AudioBufferList. @discussion For compatibility with lower-level CoreAudio and AudioToolbox API's, this method accesses the buffer implementation's internal AudioBufferList. The buffer list structure must not be modified, though you may modify buffer contents. The mDataByteSize fields of this AudioBufferList express the buffer's current frameLength.
-//
-// AudioBufferList calls the underlying AudioBufferList.
-func (x *AudioBuffer) AudioBufferList() *coreaudiotypes.AudioBufferList {
-	return x.inner.AudioBufferList()
+// Description returns the object's -description text.
+func (x *AudioBuffer) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property mutableAudioBufferList @abstract A mutable version of the buffer's underlying AudioBufferList. @discussion Some lower-level CoreAudio and AudioToolbox API's require a mutable AudioBufferList, for example, AudioConverterConvertComplexBuffer. The mDataByteSize fields of this AudioBufferList express the buffer's current frameCapacity. If they are altered, you should modify the buffer's frameLength to match.
-//
-// MutableAudioBufferList calls the underlying MutableAudioBufferList.
-func (x *AudioBuffer) MutableAudioBufferList() *coreaudiotypes.AudioBufferList {
-	return x.inner.MutableAudioBufferList()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioBuffer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-func (x *AudioBuffer) asAudioBuffer() *raw.AVAudioBuffer { return x.inner }
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioBuffer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAudioBuffer creates a new AudioBuffer.
+func NewAudioBuffer() *AudioBuffer {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioBuffer")), objc.RegisterName("new"))
+	return audioBufferAdopt(_id)
+}
+
+// The format of the audio in the buffer.
+func (x *AudioBuffer) Format() *AudioFormat {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("format"))
+	return AudioFormatFromID(_r)
+}
 
 // AudioBufferable is the interface implemented by [AudioBuffer], for mocking and DI.
 type AudioBufferable interface {
-	Unwrap() *raw.AVAudioBuffer
+	obj.Object
 	Format() *AudioFormat
-	AudioBufferList() *coreaudiotypes.AudioBufferList
-	MutableAudioBufferList() *coreaudiotypes.AudioBufferList
 }
 
 var _ AudioBufferable = (*AudioBuffer)(nil)

@@ -5,80 +5,97 @@
 package speech
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A textual representation of the specified speech in its entirety, as recognized by the speech recognizer.
 //
-// Transcription wraps [raw.SFTranscription] with a fluent Go API.
+// Transcription is an idiomatic wrapper over the Objective-C class SFTranscription.
 type Transcription struct {
-	inner *raw.SFTranscription
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFTranscription].
-func (x *Transcription) Unwrap() *raw.SFTranscription { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Transcription) ID() objc.ID { return x.inner.Ptr() }
-
-// TranscriptionFromID adopts an existing object pointer as a Transcription (nil for 0).
+// TranscriptionFromID adopts an existing Objective-C object as a Transcription
+// (nil for 0), retaining it and registering a release finalizer.
 func TranscriptionFromID(id objc.ID) *Transcription {
 	if id == 0 {
 		return nil
 	}
-	return &Transcription{inner: raw.SFTranscriptionFromID(id)}
+	x := &Transcription{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTranscription creates a new [Transcription].
+// transcriptionAdopt wraps an Objective-C object that this code just created as a
+// Transcription (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func transcriptionAdopt(id objc.ID) *Transcription {
+	if id == 0 {
+		return nil
+	}
+	x := &Transcription{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Transcription) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Transcription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Transcription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTranscription creates a new Transcription.
 func NewTranscription() *Transcription {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFTranscription")), objc.RegisterName("new"))
-	return &Transcription{inner: raw.SFTranscriptionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFTranscription")), objc.RegisterName("new"))
+	return transcriptionAdopt(_id)
 }
 
 // The entire transcription of utterances, formatted into a single, user-displayable string.
-//
-// FormattedString calls the underlying FormattedString.
 func (x *Transcription) FormattedString() string {
-	_r := x.inner.FormattedString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formattedString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // An array of transcription segments that represent the parts of the transcription, as identified by the speech recognizer. The order of the segments in the array matches the order in which the corresponding utterances occur in the spoken content.
 //
 // Segments returns the collection as a Go slice.
 func (x *Transcription) Segments() []*TranscriptionSegment {
-	arr := x.inner.Segments()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TranscriptionSegment {
-		return &TranscriptionSegment{inner: raw.SFTranscriptionSegmentFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("segments"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TranscriptionSegment { return TranscriptionSegmentFromID(_id) })
 }
 
 // The number of words spoken per minute.
-//
-// SpeakingRate calls the underlying SpeakingRate.
 func (x *Transcription) SpeakingRate() float64 {
-	return x.inner.SpeakingRate()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speakingRate"))
+	return _r
 }
 
 // The average pause duration between words, measured in seconds.
-//
-// AveragePauseDuration calls the underlying AveragePauseDuration.
 func (x *Transcription) AveragePauseDuration() float64 {
-	return x.inner.AveragePauseDuration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("averagePauseDuration"))
+	return _r
 }
 
 // Transcriptionable is the interface implemented by [Transcription], for mocking and DI.
 type Transcriptionable interface {
-	Unwrap() *raw.SFTranscription
+	obj.Object
 	FormattedString() string
 	Segments() []*TranscriptionSegment
 	SpeakingRate() float64

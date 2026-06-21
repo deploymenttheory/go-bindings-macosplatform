@@ -6,61 +6,85 @@ package networkextension
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The principal class for an app proxy provider app extension.
 //
-// NEAppProxyProvider wraps [raw.NEAppProxyProvider] with a fluent Go API.
+// NEAppProxyProvider is an idiomatic wrapper over the Objective-C class NEAppProxyProvider.
 type NEAppProxyProvider struct {
-	inner *raw.NEAppProxyProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEAppProxyProvider].
-func (x *NEAppProxyProvider) Unwrap() *raw.NEAppProxyProvider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEAppProxyProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// NEAppProxyProviderFromID adopts an existing object pointer as a NEAppProxyProvider (nil for 0).
+// NEAppProxyProviderFromID adopts an existing Objective-C object as a NEAppProxyProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func NEAppProxyProviderFromID(id objc.ID) *NEAppProxyProvider {
 	if id == 0 {
 		return nil
 	}
-	return &NEAppProxyProvider{inner: raw.NEAppProxyProviderFromID(id)}
+	x := &NEAppProxyProvider{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNEAppProxyProvider creates a new [NEAppProxyProvider].
+// nEAppProxyProviderAdopt wraps an Objective-C object that this code just created as a
+// NEAppProxyProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEAppProxyProviderAdopt(id objc.ID) *NEAppProxyProvider {
+	if id == 0 {
+		return nil
+	}
+	x := &NEAppProxyProvider{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NEAppProxyProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEAppProxyProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEAppProxyProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNEAppProxyProvider creates a new NEAppProxyProvider.
 func NewNEAppProxyProvider() *NEAppProxyProvider {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEAppProxyProvider")), objc.RegisterName("new"))
-	return &NEAppProxyProvider{inner: raw.NEAppProxyProviderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NEAppProxyProvider")), objc.RegisterName("new"))
+	return nEAppProxyProviderAdopt(_id)
 }
 
 // Indicate to the system that the tunnel is being re-established.
 //
-// WithReasserting sets the reasserting property and returns the receiver for chaining.
+// WithReasserting sets reasserting and returns the receiver so calls can be chained.
 func (x *NEAppProxyProvider) WithReasserting(reasserting bool) *NEAppProxyProvider {
-	x.inner.NETunnelProvider.SetReasserting(reasserting)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReasserting:"), reasserting)
 	return x
 }
 
 // Start the network proxy.
 //
 // StartProxyWithOptions blocks until the operation completes or ctx is cancelled.
-func (x *NEAppProxyProvider) StartProxyWithOptions(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error {
+func (x *NEAppProxyProvider) StartProxyWithOptions(ctx context.Context, options obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.StartProxyWithOptionsCompletionHandler(options, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startProxyWithOptions:completionHandler:"), objref.IDOf(options), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -74,9 +98,10 @@ func (x *NEAppProxyProvider) StartProxyWithOptions(ctx context.Context, options 
 // StopProxyWithReason blocks until the operation completes or ctx is cancelled.
 func (x *NEAppProxyProvider) StopProxyWithReason(ctx context.Context, reason NEProviderStopReason) error {
 	_ch := make(chan error, 1)
-	x.inner.StopProxyWithReasonCompletionHandler(raw.NEProviderStopReason(reason), func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopProxyWithReason:completionHandler:"), reason, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -85,54 +110,26 @@ func (x *NEAppProxyProvider) StopProxyWithReason(ctx context.Context, reason NEP
 	}
 }
 
-// Stop the network proxy from the App Proxy Provider.
-//
-// CancelProxyWithError calls the underlying CancelProxyWithError.
-func (x *NEAppProxyProvider) CancelProxyWithError(error_ unsafe.Pointer) {
-	x.inner.CancelProxyWithError(error_)
-}
-
 // Handle a new flow of network data.
-//
-// HandleNewFlow calls the underlying HandleNewFlow.
-func (x *NEAppProxyProvider) HandleNewFlow(flow *raw.NEAppProxyFlow) bool {
-	return x.inner.HandleNewFlow(flow)
+func (x *NEAppProxyProvider) HandleNewFlow(flow *NEAppProxyFlow) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("handleNewFlow:"), objref.IDOf(flow))
+	return _r
 }
 
-// @method handleNewUDPFlow:initialRemoteFlowEndpoint: @discussion This function is called by the framework to deliver a new UDP data flow to the proxy provider implementation. Subclasses can override this method to perform whatever steps are necessary to ready the proxy to receive data from the flow. The proxy provider implementation indicates that the proxy is ready to handle flow data by calling -[NEAppProxyFlow openWithLocalFlowEndpoint:completionHandler:] on the flow. If the proxy implementation decides to not handle the flow and instead terminate it, the subclass implementation of this method should return NO. If the proxy implementation decides to handle the flow, the subclass implementation of this method should return YES. In this case the proxy implementation is responsible for retaining the NEAppProxyUDPFlow object. The default implementation of this method calls -[NEAppProxyProvider handleNewFlow:] and returns its result. @seealso NEAppProxyUDPFlowHandling for Swift subclasses. @param flow The new UDP flow @param remoteEndpoint The initial remote endpoint provided by the proxied app when the flow was opened. @return YES if the proxy implementation has retained the flow and intends to handle the flow data. NO if the proxy implementation has not retained the flow and will not handle the flow data. In this case the flow is terminated.
-//
-// HandleNewUDPFlowInitialRemoteFlowEndpoint calls the underlying HandleNewUDPFlowInitialRemoteFlowEndpoint.
-func (x *NEAppProxyProvider) HandleNewUDPFlowInitialRemoteFlowEndpoint(flow *raw.NEAppProxyUDPFlow, remoteEndpoint *foundation.NSObject) bool {
-	return x.inner.HandleNewUDPFlowInitialRemoteFlowEndpoint(flow, remoteEndpoint)
-}
-
-// Handle a new UDP flow of network data.
-//
-// HandleNewUDPFlowInitialRemoteEndpoint calls the underlying HandleNewUDPFlowInitialRemoteEndpoint.
-func (x *NEAppProxyProvider) HandleNewUDPFlowInitialRemoteEndpoint(flow *raw.NEAppProxyUDPFlow, remoteEndpoint unsafe.Pointer) bool {
-	return x.inner.HandleNewUDPFlowInitialRemoteEndpoint(flow, remoteEndpoint)
-}
-
-func (x *NEAppProxyProvider) asNEAppProxyProvider() *raw.NEAppProxyProvider { return x.inner }
-
-func (x *NEAppProxyProvider) asNETunnelProvider() *raw.NETunnelProvider {
-	return &x.inner.NETunnelProvider
-}
-
-func (x *NEAppProxyProvider) asNEProvider() *raw.NEProvider {
-	return &x.inner.NETunnelProvider.NEProvider
+// This function is called by the framework to deliver a new UDP data flow to the proxy provider implementation. Subclasses can override this method to perform whatever steps are necessary to ready the proxy to receive data from the flow. The proxy provider implementation indicates that the proxy is ready to handle flow data by calling -[NEAppProxyFlow openWithLocalFlowEndpoint:completionHandler:] on the flow. If the proxy implementation decides to not handle the flow and instead terminate it, the subclass implementation of this method should return NO. If the proxy implementation decides to handle the flow, the subclass implementation of this method should return YES. In this case the proxy implementation is responsible for retaining the NEAppProxyUDPFlow object. The default implementation of this method calls -[NEAppProxyProvider handleNewFlow:] and returns its result.
+func (x *NEAppProxyProvider) HandleNewUDPFlowInitialRemoteFlowEndpoint(flow *NEAppProxyUDPFlow, remoteEndpoint obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("handleNewUDPFlow:initialRemoteFlowEndpoint:"), objref.IDOf(flow), objref.IDOf(remoteEndpoint))
+	return _r
 }
 
 // NEAppProxyProviderable is the interface implemented by [NEAppProxyProvider], for mocking and DI.
 type NEAppProxyProviderable interface {
-	Unwrap() *raw.NEAppProxyProvider
+	obj.Object
 	WithReasserting(reasserting bool) *NEAppProxyProvider
-	StartProxyWithOptions(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error
+	StartProxyWithOptions(ctx context.Context, options obj.Object) error
 	StopProxyWithReason(ctx context.Context, reason NEProviderStopReason) error
-	CancelProxyWithError(error_ unsafe.Pointer)
-	HandleNewFlow(flow *raw.NEAppProxyFlow) bool
-	HandleNewUDPFlowInitialRemoteFlowEndpoint(flow *raw.NEAppProxyUDPFlow, remoteEndpoint *foundation.NSObject) bool
-	HandleNewUDPFlowInitialRemoteEndpoint(flow *raw.NEAppProxyUDPFlow, remoteEndpoint unsafe.Pointer) bool
+	HandleNewFlow(flow *NEAppProxyFlow) bool
+	HandleNewUDPFlowInitialRemoteFlowEndpoint(flow *NEAppProxyUDPFlow, remoteEndpoint obj.Object) bool
 }
 
 var _ NEAppProxyProviderable = (*NEAppProxyProvider)(nil)

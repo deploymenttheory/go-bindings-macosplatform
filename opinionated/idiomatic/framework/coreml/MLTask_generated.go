@@ -5,83 +5,95 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An abstract base class for machine learning tasks.
 //
-// Task wraps [raw.MLTask] with a fluent Go API.
+// Task is an idiomatic wrapper over the Objective-C class MLTask.
 type Task struct {
-	inner *raw.MLTask
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLTask].
-func (x *Task) Unwrap() *raw.MLTask { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Task) ID() objc.ID { return x.inner.Ptr() }
-
-// TaskFromID adopts an existing object pointer as a Task (nil for 0).
+// TaskFromID adopts an existing Objective-C object as a Task
+// (nil for 0), retaining it and registering a release finalizer.
 func TaskFromID(id objc.ID) *Task {
 	if id == 0 {
 		return nil
 	}
-	return &Task{inner: raw.MLTaskFromID(id)}
+	x := &Task{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTask creates a new [Task].
+// taskAdopt wraps an Objective-C object that this code just created as a
+// Task (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func taskAdopt(id objc.ID) *Task {
+	if id == 0 {
+		return nil
+	}
+	x := &Task{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Task) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Task) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Task) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTask creates a new Task.
 func NewTask() *Task {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLTask")), objc.RegisterName("new"))
-	return &Task{inner: raw.MLTaskFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLTask")), objc.RegisterName("new"))
+	return taskAdopt(_id)
 }
 
 // Begins or resumes a machine learning task.
-//
-// Resume calls the underlying Resume.
 func (x *Task) Resume() {
-	x.inner.Resume()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resume"))
 }
 
 // Cancels a machine learning task before it completes.
-//
-// Cancel calls the underlying Cancel.
 func (x *Task) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// TaskIdentifier calls the underlying TaskIdentifier.
 func (x *Task) TaskIdentifier() string {
-	_r := x.inner.TaskIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("taskIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// State calls the underlying State.
-func (x *Task) State() MLTaskState {
-	return MLTaskState(x.inner.State())
+func (x *Task) State() TaskState {
+	_r := objc.Send[TaskState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
 }
-
-// Error calls the underlying Error.
-func (x *Task) Error() unsafe.Pointer {
-	return x.inner.Error()
-}
-
-func (x *Task) asTask() *raw.MLTask { return x.inner }
 
 // Taskable is the interface implemented by [Task], for mocking and DI.
 type Taskable interface {
-	Unwrap() *raw.MLTask
+	obj.Object
 	Resume()
 	Cancel()
 	TaskIdentifier() string
-	State() MLTaskState
-	Error() unsafe.Pointer
+	State() TaskState
 }
 
 var _ Taskable = (*Task)(nil)

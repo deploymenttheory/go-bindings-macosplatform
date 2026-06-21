@@ -5,134 +5,71 @@
 package coremediaio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// DeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource calls the underlying CMIOExtensionDeviceDeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource.
-func DeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource(localizedName string, deviceID *foundation.NSUUID, legacyDeviceID string, source raw.CMIOExtensionDeviceSource) *ExtensionDevice {
-	_r := raw.CMIOExtensionDeviceDeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource(foundation.NSStringStringWithUTF8String(localizedName), deviceID, foundation.NSStringStringWithUTF8String(legacyDeviceID), source)
-	if _r == nil {
-		return nil
-	}
-	return &ExtensionDevice{inner: _r}
+// Returns a new properties object with a dictionary of property states.
+func DevicePropertiesWithDictionary(propertiesDictionary obj.Object) *ExtensionDeviceProperties {
+	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionDeviceProperties")), objc.RegisterName("devicePropertiesWithDictionary:"), objref.IDOf(propertiesDictionary))
+	return ExtensionDevicePropertiesFromID(_r)
 }
 
-// DevicePropertiesWithDictionary calls the underlying CMIOExtensionDevicePropertiesDevicePropertiesWithDictionary.
-func DevicePropertiesWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionDeviceProperties {
-	_r := raw.CMIOExtensionDevicePropertiesDevicePropertiesWithDictionary(propertiesDictionary)
-	if _r == nil {
-		return nil
-	}
-	return &ExtensionDeviceProperties{inner: _r}
+// Returns a new property attributes object with the specified configuration.
+func PropertyAttributesWithMinValueMaxValueValidValuesReadOnly(minValue obj.Object, maxValue obj.Object, validValues []obj.Object, readOnly bool) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionPropertyAttributes")), objc.RegisterName("propertyAttributesWithMinValue:maxValue:validValues:readOnly:"), objref.IDOf(minValue), objref.IDOf(maxValue), purego.SliceToNSArray(validValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), readOnly)
+	return obj.Wrap(_r)
 }
 
-// PropertyAttributesWithMinValueMaxValueValidValuesReadOnly calls the underlying CMIOExtensionPropertyAttributesPropertyAttributesWithMinValueMaxValueValidValuesReadOnly.
-func PropertyAttributesWithMinValueMaxValueValidValuesReadOnly(minValue objc.ID, maxValue objc.ID, validValues *foundation.NSArray[objc.ID], readOnly bool) *raw.CMIOExtensionPropertyAttributes[objc.ID] {
-	return raw.CMIOExtensionPropertyAttributesPropertyAttributesWithMinValueMaxValueValidValuesReadOnly(minValue, maxValue, validValues, readOnly)
+// The class property representing a readOnly property attribute with no minValue/maxValue/validValues.
+func ReadOnlyPropertyAttribute() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionPropertyAttributes")), objc.RegisterName("readOnlyPropertyAttribute"))
+	return obj.Wrap(_r)
 }
 
-// ReadOnlyPropertyAttribute calls the underlying CMIOExtensionPropertyAttributesReadOnlyPropertyAttribute.
-func ReadOnlyPropertyAttribute() *raw.CMIOExtensionPropertyAttributes[objc.ID] {
-	return raw.CMIOExtensionPropertyAttributesReadOnlyPropertyAttribute()
+// Returns a new property state with a value.
+func PropertyStateWithValue(value obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionPropertyState")), objc.RegisterName("propertyStateWithValue:"), objref.IDOf(value))
+	return obj.Wrap(_r)
 }
 
-// PropertyStateWithValue calls the underlying CMIOExtensionPropertyStatePropertyStateWithValue.
-func PropertyStateWithValue(value objc.ID) *raw.CMIOExtensionPropertyState[objc.ID] {
-	return raw.CMIOExtensionPropertyStatePropertyStateWithValue(value)
+// Returns a new property state with a value and attributes.
+func PropertyStateWithValueAttributes(value obj.Object, attributes obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionPropertyState")), objc.RegisterName("propertyStateWithValue:attributes:"), objref.IDOf(value), objref.IDOf(attributes))
+	return obj.Wrap(_r)
 }
 
-// PropertyStateWithValueAttributes calls the underlying CMIOExtensionPropertyStatePropertyStateWithValueAttributes.
-func PropertyStateWithValueAttributes(value objc.ID, attributes *raw.CMIOExtensionPropertyAttributes[objc.ID]) *raw.CMIOExtensionPropertyState[objc.ID] {
-	return raw.CMIOExtensionPropertyStatePropertyStateWithValueAttributes(value, attributes)
+// Starts the system extension.
+func StartServiceWithProvider(provider *ExtensionProvider) {
+	objc.Send[objc.ID](objc.ID(_class("CMIOExtensionProvider")), objc.RegisterName("startServiceWithProvider:"), objref.IDOf(provider))
 }
 
-// StartServiceWithProvider calls the underlying CMIOExtensionProviderStartServiceWithProvider.
-func StartServiceWithProvider(provider *raw.CMIOExtensionProvider) {
-	raw.CMIOExtensionProviderStartServiceWithProvider(provider)
+// Stops the CoreMediaIO Extension machinery. This should only be called in very rare circumstances.  For example, if an extension is present on a system and there is no possible way that it would ever create a device instance. It is suggested that this be called as soon as possible in the provider's lifecycle, and that the provider's ignoreSIGTERM method be called first. After calling this method the extension should exit.
+func StopServiceWithProvider(provider *ExtensionProvider) {
+	objc.Send[objc.ID](objc.ID(_class("CMIOExtensionProvider")), objc.RegisterName("stopServiceWithProvider:"), objref.IDOf(provider))
 }
 
-// StopServiceWithProvider calls the underlying CMIOExtensionProviderStopServiceWithProvider.
-func StopServiceWithProvider(provider *raw.CMIOExtensionProvider) {
-	raw.CMIOExtensionProviderStopServiceWithProvider(provider)
-}
-
-// ProviderWithSourceClientQueue calls the underlying CMIOExtensionProviderProviderWithSourceClientQueue.
-func ProviderWithSourceClientQueue(source raw.CMIOExtensionProviderSource, clientQueue *foundation.NSObject) *ExtensionProvider {
-	_r := raw.CMIOExtensionProviderProviderWithSourceClientQueue(source, clientQueue)
-	if _r == nil {
-		return nil
-	}
-	return &ExtensionProvider{inner: _r}
-}
-
-// IgnoreSIGTERM calls the underlying CMIOExtensionProviderIgnoreSIGTERM.
+// Directs provider class to ignore the SIGTERM signal. Call this method if your provider handles SIGTERM signals; NOTE: if so, your handler must call exit.
 func IgnoreSIGTERM() {
-	raw.CMIOExtensionProviderIgnoreSIGTERM()
+	objc.Send[objc.ID](objc.ID(_class("CMIOExtensionProvider")), objc.RegisterName("ignoreSIGTERM"))
 }
 
-// ProviderPropertiesWithDictionary calls the underlying CMIOExtensionProviderPropertiesProviderPropertiesWithDictionary.
-func ProviderPropertiesWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionProviderProperties {
-	_r := raw.CMIOExtensionProviderPropertiesProviderPropertiesWithDictionary(propertiesDictionary)
-	if _r == nil {
-		return nil
-	}
-	return &ExtensionProviderProperties{inner: _r}
+// Returns a new provider properties object with the specified properties.
+func ProviderPropertiesWithDictionary(propertiesDictionary obj.Object) *ExtensionProviderProperties {
+	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionProviderProperties")), objc.RegisterName("providerPropertiesWithDictionary:"), objref.IDOf(propertiesDictionary))
+	return ExtensionProviderPropertiesFromID(_r)
 }
 
-// ScheduledOutputWithSequenceNumberHostTimeInNanoseconds calls the underlying CMIOExtensionScheduledOutputScheduledOutputWithSequenceNumberHostTimeInNanoseconds.
+// Returns a new scheduled output object.
 func ScheduledOutputWithSequenceNumberHostTimeInNanoseconds(sequenceNumber uint64, hostTimeInNanoseconds uint64) *ExtensionScheduledOutput {
-	_r := raw.CMIOExtensionScheduledOutputScheduledOutputWithSequenceNumberHostTimeInNanoseconds(sequenceNumber, hostTimeInNanoseconds)
-	if _r == nil {
-		return nil
-	}
-	return &ExtensionScheduledOutput{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionScheduledOutput")), objc.RegisterName("scheduledOutputWithSequenceNumber:hostTimeInNanoseconds:"), sequenceNumber, hostTimeInNanoseconds)
+	return ExtensionScheduledOutputFromID(_r)
 }
 
-// StreamWithLocalizedNameStreamIDDirectionClockTypeSource calls the underlying CMIOExtensionStreamStreamWithLocalizedNameStreamIDDirectionClockTypeSource.
-func StreamWithLocalizedNameStreamIDDirectionClockTypeSource(localizedName string, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, clockType CMIOExtensionStreamClockType, source raw.CMIOExtensionStreamSource) *ExtensionStream {
-	_r := raw.CMIOExtensionStreamStreamWithLocalizedNameStreamIDDirectionClockTypeSource(foundation.NSStringStringWithUTF8String(localizedName), streamID, raw.CMIOExtensionStreamDirection(direction), raw.CMIOExtensionStreamClockType(clockType), source)
-	if _r == nil {
-		return nil
-	}
-	return &ExtensionStream{inner: _r}
-}
-
-// StreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource calls the underlying CMIOExtensionStreamStreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource.
-func StreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource(localizedName string, streamID *foundation.NSUUID, direction CMIOExtensionStreamDirection, customClockConfiguration *raw.CMIOExtensionStreamCustomClockConfiguration, source raw.CMIOExtensionStreamSource) *ExtensionStream {
-	_r := raw.CMIOExtensionStreamStreamWithLocalizedNameStreamIDDirectionCustomClockConfigurationSource(foundation.NSStringStringWithUTF8String(localizedName), streamID, raw.CMIOExtensionStreamDirection(direction), customClockConfiguration, source)
-	if _r == nil {
-		return nil
-	}
-	return &ExtensionStream{inner: _r}
-}
-
-// CustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing calls the underlying CMIOExtensionStreamCustomClockConfigurationCustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing.
-func CustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing(clockName string, sourceIdentifier *foundation.NSUUID, getTimeCallMinimumInterval coremedia.CMTime, numberOfEventsForRateSmoothing uint32, numberOfAveragesForRateSmoothing uint32) *ExtensionStreamCustomClockConfiguration {
-	_r := raw.CMIOExtensionStreamCustomClockConfigurationCustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing(foundation.NSStringStringWithUTF8String(clockName), sourceIdentifier, getTimeCallMinimumInterval, numberOfEventsForRateSmoothing, numberOfAveragesForRateSmoothing)
-	if _r == nil {
-		return nil
-	}
-	return &ExtensionStreamCustomClockConfiguration{inner: _r}
-}
-
-// StreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations calls the underlying CMIOExtensionStreamFormatStreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations.
-func StreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations(formatDescription unsafe.Pointer, maxFrameDuration coremedia.CMTime, minFrameDuration coremedia.CMTime, validFrameDurations *foundation.NSArray[objc.ID]) *ExtensionStreamFormat {
-	_r := raw.CMIOExtensionStreamFormatStreamFormatWithFormatDescriptionMaxFrameDurationMinFrameDurationValidFrameDurations(formatDescription, maxFrameDuration, minFrameDuration, validFrameDurations)
-	if _r == nil {
-		return nil
-	}
-	return &ExtensionStreamFormat{inner: _r}
-}
-
-// StreamPropertiesWithDictionary calls the underlying CMIOExtensionStreamPropertiesStreamPropertiesWithDictionary.
-func StreamPropertiesWithDictionary(propertiesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *ExtensionStreamProperties {
-	_r := raw.CMIOExtensionStreamPropertiesStreamPropertiesWithDictionary(propertiesDictionary)
-	if _r == nil {
-		return nil
-	}
-	return &ExtensionStreamProperties{inner: _r}
+// Returns a new properties object that provides the specified properties and default states.
+func StreamPropertiesWithDictionary(propertiesDictionary obj.Object) *ExtensionStreamProperties {
+	_r := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionStreamProperties")), objc.RegisterName("streamPropertiesWithDictionary:"), objref.IDOf(propertiesDictionary))
+	return ExtensionStreamPropertiesFromID(_r)
 }

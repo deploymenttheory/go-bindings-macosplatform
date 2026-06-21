@@ -6,61 +6,85 @@ package networkextension
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The principal class for a packet tunnel provider app extension.
 //
-// NEPacketTunnelProvider wraps [raw.NEPacketTunnelProvider] with a fluent Go API.
+// NEPacketTunnelProvider is an idiomatic wrapper over the Objective-C class NEPacketTunnelProvider.
 type NEPacketTunnelProvider struct {
-	inner *raw.NEPacketTunnelProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEPacketTunnelProvider].
-func (x *NEPacketTunnelProvider) Unwrap() *raw.NEPacketTunnelProvider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEPacketTunnelProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// NEPacketTunnelProviderFromID adopts an existing object pointer as a NEPacketTunnelProvider (nil for 0).
+// NEPacketTunnelProviderFromID adopts an existing Objective-C object as a NEPacketTunnelProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func NEPacketTunnelProviderFromID(id objc.ID) *NEPacketTunnelProvider {
 	if id == 0 {
 		return nil
 	}
-	return &NEPacketTunnelProvider{inner: raw.NEPacketTunnelProviderFromID(id)}
+	x := &NEPacketTunnelProvider{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNEPacketTunnelProvider creates a new [NEPacketTunnelProvider].
+// nEPacketTunnelProviderAdopt wraps an Objective-C object that this code just created as a
+// NEPacketTunnelProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEPacketTunnelProviderAdopt(id objc.ID) *NEPacketTunnelProvider {
+	if id == 0 {
+		return nil
+	}
+	x := &NEPacketTunnelProvider{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NEPacketTunnelProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEPacketTunnelProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEPacketTunnelProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNEPacketTunnelProvider creates a new NEPacketTunnelProvider.
 func NewNEPacketTunnelProvider() *NEPacketTunnelProvider {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEPacketTunnelProvider")), objc.RegisterName("new"))
-	return &NEPacketTunnelProvider{inner: raw.NEPacketTunnelProviderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NEPacketTunnelProvider")), objc.RegisterName("new"))
+	return nEPacketTunnelProviderAdopt(_id)
 }
 
 // Indicate to the system that the tunnel is being re-established.
 //
-// WithReasserting sets the reasserting property and returns the receiver for chaining.
+// WithReasserting sets reasserting and returns the receiver so calls can be chained.
 func (x *NEPacketTunnelProvider) WithReasserting(reasserting bool) *NEPacketTunnelProvider {
-	x.inner.NETunnelProvider.SetReasserting(reasserting)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReasserting:"), reasserting)
 	return x
 }
 
 // Start the network tunnel.
 //
 // StartTunnelWithOptions blocks until the operation completes or ctx is cancelled.
-func (x *NEPacketTunnelProvider) StartTunnelWithOptions(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) error {
+func (x *NEPacketTunnelProvider) StartTunnelWithOptions(ctx context.Context, options obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.StartTunnelWithOptionsCompletionHandler(options, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTunnelWithOptions:completionHandler:"), objref.IDOf(options), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -74,9 +98,10 @@ func (x *NEPacketTunnelProvider) StartTunnelWithOptions(ctx context.Context, opt
 // StopTunnelWithReason blocks until the operation completes or ctx is cancelled.
 func (x *NEPacketTunnelProvider) StopTunnelWithReason(ctx context.Context, reason NEProviderStopReason) error {
 	_ch := make(chan error, 1)
-	x.inner.StopTunnelWithReasonCompletionHandler(raw.NEProviderStopReason(reason), func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopTunnelWithReason:completionHandler:"), reason, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -85,76 +110,26 @@ func (x *NEPacketTunnelProvider) StopTunnelWithReason(ctx context.Context, reaso
 	}
 }
 
-// Stop the network tunnel from the Packet Tunnel Provider.
-//
-// CancelTunnelWithError calls the underlying CancelTunnelWithError.
-func (x *NEPacketTunnelProvider) CancelTunnelWithError(error_ unsafe.Pointer) {
-	x.inner.CancelTunnelWithError(error_)
-}
-
-// Create a TCP connection through the current tunnel.
-//
-// CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate calls the underlying CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate.
-func (x *NEPacketTunnelProvider) CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *raw.NWTLSParameters, delegate objc.ID) *NWTCPConnection {
-	_r := x.inner.CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint, enableTLS, tLSParameters, delegate)
-	if _r == nil {
-		return nil
-	}
-	return &NWTCPConnection{inner: _r}
-}
-
-// Creates a UDP session through the current tunnel.
-//
-// CreateUDPSessionThroughTunnelToEndpointFromEndpoint calls the underlying CreateUDPSessionThroughTunnelToEndpointFromEndpoint.
-func (x *NEPacketTunnelProvider) CreateUDPSessionThroughTunnelToEndpointFromEndpoint(remoteEndpoint unsafe.Pointer, localEndpoint *raw.NWHostEndpoint) *NWUDPSession {
-	_r := x.inner.CreateUDPSessionThroughTunnelToEndpointFromEndpoint(remoteEndpoint, localEndpoint)
-	if _r == nil {
-		return nil
-	}
-	return &NWUDPSession{inner: _r}
-}
-
-// @property packetFlow @discussion An NEPacketFlow object that the tunnel provider implementation should use to receive packets from the network stack and inject packets into the network stack. Every time the tunnel is started the packet flow object is in an initialized state and must be explicitly opened before any packets can be received or injected.
-//
-// PacketFlow calls the underlying PacketFlow.
+// An NEPacketFlow object that the tunnel provider implementation should use to receive packets from the network stack and inject packets into the network stack. Every time the tunnel is started the packet flow object is in an initialized state and must be explicitly opened before any packets can be received or injected.
 func (x *NEPacketTunnelProvider) PacketFlow() *NEPacketTunnelFlow {
-	_r := x.inner.PacketFlow()
-	if _r == nil {
-		return nil
-	}
-	return &NEPacketTunnelFlow{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("packetFlow"))
+	return NEPacketTunnelFlowFromID(_r)
 }
 
-// @property virtualInterface @abstract The virtual network interface used to route packets to the packet tunnel provider. @discussion For NEPacketTunnelProvider sub-classes, this property will be non-nil when `-[NEPacketTunnelProvider startTunnelWithOptions:completionHandler:]` is called. For NEEthernetTunnelProvider sub-classes, this property will be non-nil when the completion handler passed to `-[NETunnelProvider setTunnelNetworkSettings:completionHandler:]` is executed. To create a connection through the tunnel, pass this interface to `nw_parameters_require_interface`.
-//
-// VirtualInterface calls the underlying VirtualInterface.
-func (x *NEPacketTunnelProvider) VirtualInterface() *foundation.NSObject {
-	return x.inner.VirtualInterface()
-}
-
-func (x *NEPacketTunnelProvider) asNEPacketTunnelProvider() *raw.NEPacketTunnelProvider {
-	return x.inner
-}
-
-func (x *NEPacketTunnelProvider) asNETunnelProvider() *raw.NETunnelProvider {
-	return &x.inner.NETunnelProvider
-}
-
-func (x *NEPacketTunnelProvider) asNEProvider() *raw.NEProvider {
-	return &x.inner.NETunnelProvider.NEProvider
+// The virtual network interface used to route packets to the packet tunnel provider. For NEPacketTunnelProvider sub-classes, this property will be non-nil when `-[NEPacketTunnelProvider startTunnelWithOptions:completionHandler:]` is called. For NEEthernetTunnelProvider sub-classes, this property will be non-nil when the completion handler passed to `-[NETunnelProvider setTunnelNetworkSettings:completionHandler:]` is executed. To create a connection through the tunnel, pass this interface to `nw_parameters_require_interface`.
+func (x *NEPacketTunnelProvider) VirtualInterface() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("virtualInterface"))
+	return obj.Wrap(_r)
 }
 
 // NEPacketTunnelProviderable is the interface implemented by [NEPacketTunnelProvider], for mocking and DI.
 type NEPacketTunnelProviderable interface {
-	Unwrap() *raw.NEPacketTunnelProvider
+	obj.Object
 	WithReasserting(reasserting bool) *NEPacketTunnelProvider
-	StartTunnelWithOptions(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, *foundation.NSObject]) error
+	StartTunnelWithOptions(ctx context.Context, options obj.Object) error
 	StopTunnelWithReason(ctx context.Context, reason NEProviderStopReason) error
-	CancelTunnelWithError(error_ unsafe.Pointer)
-	CreateTCPConnectionThroughTunnelToEndpointEnableTLSTLSParametersDelegate(remoteEndpoint unsafe.Pointer, enableTLS bool, tLSParameters *raw.NWTLSParameters, delegate objc.ID) *NWTCPConnection
-	CreateUDPSessionThroughTunnelToEndpointFromEndpoint(remoteEndpoint unsafe.Pointer, localEndpoint *raw.NWHostEndpoint) *NWUDPSession
 	PacketFlow() *NEPacketTunnelFlow
-	VirtualInterface() *foundation.NSObject
+	VirtualInterface() obj.Object
 }
 
 var _ NEPacketTunnelProviderable = (*NEPacketTunnelProvider)(nil)

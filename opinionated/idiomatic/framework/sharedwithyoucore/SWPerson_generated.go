@@ -5,45 +5,71 @@
 package sharedwithyoucore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that tracks participants in a collaboration.
 //
-// Person wraps [raw.SWPerson] with a fluent Go API.
+// Person is an idiomatic wrapper over the Objective-C class SWPerson.
 type Person struct {
-	inner *raw.SWPerson
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SWPerson].
-func (x *Person) Unwrap() *raw.SWPerson { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Person) ID() objc.ID { return x.inner.Ptr() }
-
-// PersonFromID adopts an existing object pointer as a Person (nil for 0).
+// PersonFromID adopts an existing Objective-C object as a Person
+// (nil for 0), retaining it and registering a release finalizer.
 func PersonFromID(id objc.ID) *Person {
 	if id == 0 {
 		return nil
 	}
-	return &Person{inner: raw.SWPersonFromID(id)}
+	x := &Person{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// personAdopt wraps an Objective-C object that this code just created as a
+// Person (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func personAdopt(id objc.ID) *Person {
+	if id == 0 {
+		return nil
+	}
+	x := &Person{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Person) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Person) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Person) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates and initializes a person object.
 //
-// NewPersonWithHandleIdentityDisplayNameThumbnailImageData creates a new [Person].
-func NewPersonWithHandleIdentityDisplayNameThumbnailImageData(handle string, identity *raw.SWPersonIdentity, displayName string, thumbnailImageData *foundation.NSData) *Person {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWPerson")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHandle:identity:displayName:thumbnailImageData:"), foundation.NSStringStringWithUTF8String(handle).Ptr(), identity.Ptr(), foundation.NSStringStringWithUTF8String(displayName).Ptr(), thumbnailImageData.Ptr())
-	return &Person{inner: raw.SWPersonFromID(_id)}
+// NewPersonWithHandleIdentityDisplayNameThumbnailImageData creates a new Person.
+func NewPersonWithHandleIdentityDisplayNameThumbnailImageData(handle string, identity *PersonIdentity, displayName string, thumbnailImageData obj.Object) *Person {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SWPerson")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHandle:identity:displayName:thumbnailImageData:"), purego.NSString(handle), objref.IDOf(identity), purego.NSString(displayName), objref.IDOf(thumbnailImageData))
+	return personAdopt(_id)
 }
 
 // Personable is the interface implemented by [Person], for mocking and DI.
 type Personable interface {
-	Unwrap() *raw.SWPerson
+	obj.Object
 }
 
 var _ Personable = (*Person)(nil)

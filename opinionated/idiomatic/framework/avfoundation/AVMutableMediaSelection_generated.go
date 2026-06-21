@@ -5,53 +5,74 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A mutable object that represents a complete rendition of media selection options on an asset.
 //
-// MutableMediaSelection wraps [raw.AVMutableMediaSelection] with a fluent Go API.
+// MutableMediaSelection is an idiomatic wrapper over the Objective-C class AVMutableMediaSelection.
 type MutableMediaSelection struct {
-	inner *raw.AVMutableMediaSelection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMutableMediaSelection].
-func (x *MutableMediaSelection) Unwrap() *raw.AVMutableMediaSelection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableMediaSelection) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableMediaSelectionFromID adopts an existing object pointer as a MutableMediaSelection (nil for 0).
+// MutableMediaSelectionFromID adopts an existing Objective-C object as a MutableMediaSelection
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableMediaSelectionFromID(id objc.ID) *MutableMediaSelection {
 	if id == 0 {
 		return nil
 	}
-	return &MutableMediaSelection{inner: raw.AVMutableMediaSelectionFromID(id)}
+	x := &MutableMediaSelection{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMutableMediaSelection creates a new [MutableMediaSelection].
+// mutableMediaSelectionAdopt wraps an Objective-C object that this code just created as a
+// MutableMediaSelection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableMediaSelectionAdopt(id objc.ID) *MutableMediaSelection {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableMediaSelection{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MutableMediaSelection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MutableMediaSelection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MutableMediaSelection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMutableMediaSelection creates a new MutableMediaSelection.
 func NewMutableMediaSelection() *MutableMediaSelection {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableMediaSelection")), objc.RegisterName("new"))
-	return &MutableMediaSelection{inner: raw.AVMutableMediaSelectionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMutableMediaSelection")), objc.RegisterName("new"))
+	return mutableMediaSelectionAdopt(_id)
 }
 
 // Selects the media option in the specified media selection group.
-//
-// SelectMediaOptionInMediaSelectionGroup calls the underlying SelectMediaOptionInMediaSelectionGroup.
-func (x *MutableMediaSelection) SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *raw.AVMediaSelectionOption, mediaSelectionGroup *raw.AVMediaSelectionGroup) {
-	x.inner.SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption, mediaSelectionGroup)
-}
-
-func (x *MutableMediaSelection) asMediaSelection() *raw.AVMediaSelection {
-	return &x.inner.AVMediaSelection
+func (x *MutableMediaSelection) SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *MediaSelectionOption, mediaSelectionGroup *MediaSelectionGroup) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectMediaOption:inMediaSelectionGroup:"), objref.IDOf(mediaSelectionOption), objref.IDOf(mediaSelectionGroup))
 }
 
 // MutableMediaSelectionable is the interface implemented by [MutableMediaSelection], for mocking and DI.
 type MutableMediaSelectionable interface {
-	Unwrap() *raw.AVMutableMediaSelection
-	SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *raw.AVMediaSelectionOption, mediaSelectionGroup *raw.AVMediaSelectionGroup)
+	obj.Object
+	SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *MediaSelectionOption, mediaSelectionGroup *MediaSelectionGroup)
 }
 
 var _ MutableMediaSelectionable = (*MutableMediaSelection)(nil)

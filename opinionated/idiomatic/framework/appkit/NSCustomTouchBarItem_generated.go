@@ -5,97 +5,118 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A bar item that contains a responder of your choice, such as a view, a button, or a scrubber.
 //
-// CustomTouchBarItem wraps [raw.NSCustomTouchBarItem] with a fluent Go API.
+// CustomTouchBarItem is an idiomatic wrapper over the Objective-C class NSCustomTouchBarItem.
 type CustomTouchBarItem struct {
-	inner *raw.NSCustomTouchBarItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCustomTouchBarItem].
-func (x *CustomTouchBarItem) Unwrap() *raw.NSCustomTouchBarItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CustomTouchBarItem) ID() objc.ID { return x.inner.Ptr() }
-
-// CustomTouchBarItemFromID adopts an existing object pointer as a CustomTouchBarItem (nil for 0).
+// CustomTouchBarItemFromID adopts an existing Objective-C object as a CustomTouchBarItem
+// (nil for 0), retaining it and registering a release finalizer.
 func CustomTouchBarItemFromID(id objc.ID) *CustomTouchBarItem {
 	if id == 0 {
 		return nil
 	}
-	return &CustomTouchBarItem{inner: raw.NSCustomTouchBarItemFromID(id)}
+	x := &CustomTouchBarItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCustomTouchBarItem creates a new [CustomTouchBarItem].
+// customTouchBarItemAdopt wraps an Objective-C object that this code just created as a
+// CustomTouchBarItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func customTouchBarItemAdopt(id objc.ID) *CustomTouchBarItem {
+	if id == 0 {
+		return nil
+	}
+	x := &CustomTouchBarItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CustomTouchBarItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CustomTouchBarItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CustomTouchBarItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCustomTouchBarItem creates a new CustomTouchBarItem.
 func NewCustomTouchBarItem() *CustomTouchBarItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCustomTouchBarItem")), objc.RegisterName("new"))
-	return &CustomTouchBarItem{inner: raw.NSCustomTouchBarItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCustomTouchBarItem")), objc.RegisterName("new"))
+	return customTouchBarItemAdopt(_id)
 }
 
 // The view displayed in the bar to represent this item.
 //
-// WithView sets the view property and returns the receiver for chaining.
+// WithView sets view and returns the receiver so calls can be chained.
 func (x *CustomTouchBarItem) WithView(view ViewProvider) *CustomTouchBarItem {
-	x.inner.SetView(view.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 	return x
 }
 
 // A view controller whose view is displayed in the bar to represent this item.
 //
-// WithViewController sets the viewController property and returns the receiver for chaining.
+// WithViewController sets viewController and returns the receiver so calls can be chained.
 func (x *CustomTouchBarItem) WithViewController(viewController ViewControllerProvider) *CustomTouchBarItem {
-	x.inner.SetViewController(viewController.asViewController())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewController:"), objref.IDOf(viewController))
 	return x
 }
 
 // The user-visible string identifying this item during bar customization.
 //
-// WithCustomizationLabel sets the customizationLabel property and returns the receiver for chaining.
+// WithCustomizationLabel sets customizationLabel and returns the receiver so calls can be chained.
 func (x *CustomTouchBarItem) WithCustomizationLabel(customizationLabel string) *CustomTouchBarItem {
-	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
 	return x
 }
 
 // Determines which items are shown in a bar when space is limited.
 //
-// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+// WithVisibilityPriority sets visibilityPriority and returns the receiver so calls can be chained.
 func (x *CustomTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *CustomTouchBarItem {
-	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
 	return x
 }
 
-// SetView calls the underlying SetView.
-func (x *CustomTouchBarItem) SetView(view *raw.NSView) {
-	x.inner.SetView(view)
+func (x *CustomTouchBarItem) SetView(view *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 }
 
-// SetViewController calls the underlying SetViewController.
-func (x *CustomTouchBarItem) SetViewController(viewController *raw.NSViewController) {
-	x.inner.SetViewController(viewController)
+func (x *CustomTouchBarItem) SetViewController(viewController *ViewController) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setViewController:"), objref.IDOf(viewController))
 }
 
-// SetCustomizationLabel calls the underlying SetCustomizationLabel.
 func (x *CustomTouchBarItem) SetCustomizationLabel(customizationLabel string) {
-	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
 }
-
-func (x *CustomTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.inner.NSTouchBarItem }
 
 // CustomTouchBarItemable is the interface implemented by [CustomTouchBarItem], for mocking and DI.
 type CustomTouchBarItemable interface {
-	Unwrap() *raw.NSCustomTouchBarItem
+	obj.Object
 	WithView(view ViewProvider) *CustomTouchBarItem
 	WithViewController(viewController ViewControllerProvider) *CustomTouchBarItem
 	WithCustomizationLabel(customizationLabel string) *CustomTouchBarItem
 	WithVisibilityPriority(visibilityPriority float32) *CustomTouchBarItem
-	SetView(view *raw.NSView)
-	SetViewController(viewController *raw.NSViewController)
+	SetView(view *View)
+	SetViewController(viewController *ViewController)
 	SetCustomizationLabel(customizationLabel string)
 }
 

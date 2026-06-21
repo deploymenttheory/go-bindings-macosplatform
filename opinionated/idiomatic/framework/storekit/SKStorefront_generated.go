@@ -5,60 +5,84 @@
 package storekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object containing the location and unique identifier of an Apple App Store storefront.
 //
-// Storefront wraps [raw.SKStorefront] with a fluent Go API.
+// Storefront is an idiomatic wrapper over the Objective-C class SKStorefront.
 type Storefront struct {
-	inner *raw.SKStorefront
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKStorefront].
-func (x *Storefront) Unwrap() *raw.SKStorefront { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Storefront) ID() objc.ID { return x.inner.Ptr() }
-
-// StorefrontFromID adopts an existing object pointer as a Storefront (nil for 0).
+// StorefrontFromID adopts an existing Objective-C object as a Storefront
+// (nil for 0), retaining it and registering a release finalizer.
 func StorefrontFromID(id objc.ID) *Storefront {
 	if id == 0 {
 		return nil
 	}
-	return &Storefront{inner: raw.SKStorefrontFromID(id)}
+	x := &Storefront{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewStorefront creates a new [Storefront].
+// storefrontAdopt wraps an Objective-C object that this code just created as a
+// Storefront (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func storefrontAdopt(id objc.ID) *Storefront {
+	if id == 0 {
+		return nil
+	}
+	x := &Storefront{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Storefront) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Storefront) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Storefront) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewStorefront creates a new Storefront.
 func NewStorefront() *Storefront {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKStorefront")), objc.RegisterName("new"))
-	return &Storefront{inner: raw.SKStorefrontFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKStorefront")), objc.RegisterName("new"))
+	return storefrontAdopt(_id)
 }
 
-// CountryCode calls the underlying CountryCode.
 func (x *Storefront) CountryCode() string {
-	_r := x.inner.CountryCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("countryCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Identifier calls the underlying Identifier.
 func (x *Storefront) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Storefrontable is the interface implemented by [Storefront], for mocking and DI.
 type Storefrontable interface {
-	Unwrap() *raw.SKStorefront
+	obj.Object
 	CountryCode() string
 	Identifier() string
 }

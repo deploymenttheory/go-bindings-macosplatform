@@ -5,285 +5,214 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A collection of key-value pairs that store your app’s data.
 //
-// Record wraps [raw.CKRecord] with a fluent Go API.
+// Record is an idiomatic wrapper over the Objective-C class CKRecord.
 type Record struct {
-	inner *raw.CKRecord
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKRecord].
-func (x *Record) Unwrap() *raw.CKRecord { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Record) ID() objc.ID { return x.inner.Ptr() }
-
-// RecordFromID adopts an existing object pointer as a Record (nil for 0).
+// RecordFromID adopts an existing Objective-C object as a Record
+// (nil for 0), retaining it and registering a release finalizer.
 func RecordFromID(id objc.ID) *Record {
 	if id == 0 {
 		return nil
 	}
-	return &Record{inner: raw.CKRecordFromID(id)}
+	x := &Record{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// recordAdopt wraps an Objective-C object that this code just created as a
+// Record (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func recordAdopt(id objc.ID) *Record {
+	if id == 0 {
+		return nil
+	}
+	x := &Record{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Record) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Record) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Record) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new record of the specified type.
 //
-// NewRecordWithRecordType creates a new [Record].
-func NewRecordWithRecordType(recordType *foundation.NSString) *Record {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKRecord")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordType:"), recordType.Ptr())
-	return &Record{inner: raw.CKRecordFromID(_id)}
+// NewRecordWithRecordType creates a new Record.
+func NewRecordWithRecordType(recordType obj.Object) *Record {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKRecord")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordType:"), objref.IDOf(recordType))
+	return recordAdopt(_id)
 }
 
 // Creates a record using an ID that you provide.
 //
-// NewRecordWithRecordTypeRecordID creates a new [Record].
-func NewRecordWithRecordTypeRecordID(recordType *foundation.NSString, recordID *raw.CKRecordID) *Record {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKRecord")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordType:recordID:"), recordType.Ptr(), recordID.Ptr())
-	return &Record{inner: raw.CKRecordFromID(_id)}
+// NewRecordWithRecordTypeRecordID creates a new Record.
+func NewRecordWithRecordTypeRecordID(recordType obj.Object, recordID *RecordID) *Record {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKRecord")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordType:recordID:"), objref.IDOf(recordType), objref.IDOf(recordID))
+	return recordAdopt(_id)
 }
 
 // Creates a record in the specified zone.
 //
-// NewRecordWithRecordTypeZoneID creates a new [Record].
-func NewRecordWithRecordTypeZoneID(recordType *foundation.NSString, zoneID *raw.CKRecordZoneID) *Record {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKRecord")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordType:zoneID:"), recordType.Ptr(), zoneID.Ptr())
-	return &Record{inner: raw.CKRecordFromID(_id)}
+// NewRecordWithRecordTypeZoneID creates a new Record.
+func NewRecordWithRecordTypeZoneID(recordType obj.Object, zoneID *RecordZoneID) *Record {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKRecord")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordType:zoneID:"), objref.IDOf(recordType), objref.IDOf(zoneID))
+	return recordAdopt(_id)
 }
 
 // A reference to the record’s parent record.
 //
-// WithParent sets the parent property and returns the receiver for chaining.
+// WithParent sets parent and returns the receiver so calls can be chained.
 func (x *Record) WithParent(parent *Reference) *Record {
-	x.inner.SetParent(parent.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 	return x
-}
-
-// Returns the object that the record stores for the specified key.
-//
-// ObjectForKey calls the underlying ObjectForKey.
-func (x *Record) ObjectForKey(key *foundation.NSString) raw.CKRecordValue {
-	return x.inner.ObjectForKey(key)
-}
-
-// Stores an object in the record using the specified key.
-//
-// SetObjectForKey calls the underlying SetObjectForKey.
-func (x *Record) SetObjectForKey(object raw.CKRecordValue, key *foundation.NSString) {
-	x.inner.SetObjectForKey(object, key)
 }
 
 // Returns an array of the record’s keys.
 //
 // AllKeys returns the collection as a Go slice.
-func (x *Record) AllKeys() []*foundation.NSString {
-	arr := x.inner.AllKeys()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *Record) AllKeys() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allKeys"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Returns an array of strings to use for full-text searches of the field’s string-based values.
 //
 // AllTokens returns the collection as a Go slice.
 func (x *Record) AllTokens() []string {
-	arr := x.inner.AllTokens()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
-}
-
-// Returns the object that the record stores for the specified key.
-//
-// ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
-func (x *Record) ObjectForKeyedSubscript(key *foundation.NSString) raw.CKRecordValue {
-	return x.inner.ObjectForKeyedSubscript(key)
-}
-
-// Stores an object in the record using the specified key.
-//
-// SetObjectForKeyedSubscript calls the underlying SetObjectForKeyedSubscript.
-func (x *Record) SetObjectForKeyedSubscript(object raw.CKRecordValue, key *foundation.NSString) {
-	x.inner.SetObjectForKeyedSubscript(object, key)
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allTokens"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Returns an array of keys with recent changes to their values.
 //
 // ChangedKeys returns the collection as a Go slice.
-func (x *Record) ChangedKeys() []*foundation.NSString {
-	arr := x.inner.ChangedKeys()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+func (x *Record) ChangedKeys() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changedKeys"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Encodes the record’s system fields using the specified archiver.
-//
-// EncodeSystemFieldsWithCoder calls the underlying EncodeSystemFieldsWithCoder.
-func (x *Record) EncodeSystemFieldsWithCoder(coder *foundation.NSCoder) {
-	x.inner.EncodeSystemFieldsWithCoder(coder)
+func (x *Record) EncodeSystemFieldsWithCoder(coder obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeSystemFieldsWithCoder:"), objref.IDOf(coder))
 }
 
 // Creates and sets a reference object for a parent from its record.
-//
-// SetParentReferenceFromRecord calls the underlying SetParentReferenceFromRecord.
-func (x *Record) SetParentReferenceFromRecord(parentRecord *raw.CKRecord) {
-	x.inner.SetParentReferenceFromRecord(parentRecord)
+func (x *Record) SetParentReferenceFromRecord(parentRecord *Record) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentReferenceFromRecord:"), objref.IDOf(parentRecord))
 }
 
 // Creates and sets a reference object for a parent from the parent’s record ID.
-//
-// SetParentReferenceFromRecordID calls the underlying SetParentReferenceFromRecordID.
-func (x *Record) SetParentReferenceFromRecordID(parentRecordID *raw.CKRecordID) {
-	x.inner.SetParentReferenceFromRecordID(parentRecordID)
+func (x *Record) SetParentReferenceFromRecordID(parentRecordID *RecordID) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentReferenceFromRecordID:"), objref.IDOf(parentRecordID))
 }
 
 // The value that your app defines to identify the type of record. Use this value to differentiate between different record types in your app. The value is primarily for your benefit, so choose record types that represent the data in the corresponding records. CloudKit provides two system-defined record types: | Record Type | Description | |---|---| | “CKRecordTypeUserRecord-49k30“ | Identifies records that represent users. | | “CKRecordTypeShare-8b6yt“ | Identifies records that the user shares. |
-//
-// RecordType calls the underlying RecordType.
-func (x *Record) RecordType() string {
-	_r := x.inner.RecordType()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *Record) RecordType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordType"))
+	return obj.Wrap(_r)
 }
 
 // The unique ID of the record. The system sets the ID of a new record at initialization time. If you use the “CKRecord/init(recordType:recordID:)“ method to initialize the record, the ID derives from the “CKRecord/ID“ object you provide. In all other cases, the record generates a UUID and bases its ID on that value. The ID of a record never changes during its lifetime. When you save a new record object to the server, the server validates the uniqueness of the record, but returns an error only if the save policy calls for it. Specifically, it returns an error when the save policy is “CKModifyRecordsOperation/RecordSavePolicy/ifServerRecordUnchanged“, which is the default. For all other save policies, the server overwrites the contents of the existing record.
-//
-// RecordID calls the underlying RecordID.
 func (x *Record) RecordID() *RecordID {
-	_r := x.inner.RecordID()
-	if _r == nil {
-		return nil
-	}
-	return &RecordID{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordID"))
+	return RecordIDFromID(_r)
 }
 
 // The server change token for the record. When you fetch a record from the server, you get the current version of that record as it exists on the server. However, at any time after you fetch a record, other users might save a newer version of it to the server. Every time CloudKit saves a record, the server updates the record's change token to a new value. When you save your copy of the record, the server compares your record's token with the token on the server. If the two tokens match, the server interprets that you modified the latest version of the record and that it can apply your changes immediately. If the two tokens don't match, the server checks your app's save policy to determine how to proceed. In your own code, you can use change tokens to distinguish between two different versions of the same record. - Note: In some situations, setting a record as the parent of another record can cause the `recordChangeTag` to update on the parent record. This usually occurs when you save the child record.
-//
-// RecordChangeTag calls the underlying RecordChangeTag.
 func (x *Record) RecordChangeTag() string {
-	_r := x.inner.RecordChangeTag()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordChangeTag"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The ID of the user who creates the record. Use this property's value to retrieve the user record for the user who creates this record. Every user of the app has a unique user record that is empty by default. Apps can add data to the user record on behalf of the user, but don't store sensitive data in it.
-//
-// CreatorUserRecordID calls the underlying CreatorUserRecordID.
 func (x *Record) CreatorUserRecordID() *RecordID {
-	_r := x.inner.CreatorUserRecordID()
-	if _r == nil {
-		return nil
-	}
-	return &RecordID{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creatorUserRecordID"))
+	return RecordIDFromID(_r)
 }
 
 // The time when CloudKit first saves the record to the server. The creation date reflects the time when CloudKit creates a record on the server with the current record's ID. For new instances of this class, the value of this property is initially `nil`. When you save the record to the server, the value updates with the creation date for the record.
-//
-// CreationDate calls the underlying CreationDate.
-func (x *Record) CreationDate() *foundation.NSDate {
-	return x.inner.CreationDate()
+func (x *Record) CreationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
+	return obj.Wrap(_r)
 }
 
 // The ID of the user who most recently modified the record. Use this property's value to retrieve the user record of the user who most recently modified this record. Every user of the app has a unique user record that is empty by default. Apps can add data to the user record on behalf of the user, but don't store sensitive data in it.
-//
-// LastModifiedUserRecordID calls the underlying LastModifiedUserRecordID.
 func (x *Record) LastModifiedUserRecordID() *RecordID {
-	_r := x.inner.LastModifiedUserRecordID()
-	if _r == nil {
-		return nil
-	}
-	return &RecordID{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastModifiedUserRecordID"))
+	return RecordIDFromID(_r)
 }
 
 // The most recent time that CloudKit saved the record to the server. The modification date reflects the most recent time that CloudKit saved a record with the current record's ID to the server. For new instances of this class, the value of this property is initially `nil`. When you save the record to the server, the value updates with the modification date for the record.
-//
-// ModificationDate calls the underlying ModificationDate.
-func (x *Record) ModificationDate() *foundation.NSDate {
-	return x.inner.ModificationDate()
+func (x *Record) ModificationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modificationDate"))
+	return obj.Wrap(_r)
 }
 
 // A reference to the share object that determines the share status of the record. CloudKit clears this property's value when it deletes the corresponding “CKShare“ object on the server. Send this record in the same batch operation as the share object you're deleting, and this property updates accordingly. CloudKit only supports sharing in zones with the `CKRecordZoneCapabilitySharing` capability. The default zone doesn't support sharing. If any records have a parent reference to this record, CloudKit implicitly shares them along with this record. - Note: Records in a hierarchy must only exist within one share. If a child record in a hierarchy already has a share reference, you get a `CKErrorAlreadyShared` error if you try to share any of that record's parents.
-//
-// Share calls the underlying Share.
 func (x *Record) Share() *Reference {
-	_r := x.inner.Share()
-	if _r == nil {
-		return nil
-	}
-	return &Reference{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("share"))
+	return ReferenceFromID(_r)
 }
 
 // A reference to the record's parent record. Use parent references to inform CloudKit about the hierarchy of your records. CloudKit shares the hierarchy when a “CKShare“ includes a referenced record. Add relationships between records as you create them, even if you don't plan to share them. This allows you to manage the sharing of a hierarchy by only modifying the root record's “CKRecord/share“ reference. To indicate that a record belongs to its parent, set this property to a reference that points to the parent record. The reference must use the “CKRecord/ReferenceAction/none“ action or CloudKit throws an exception. The parent record must exist on the server when you save the child, or you must include the record in the same save operation. Otherwise, the operation fails.
-//
-// Parent calls the underlying Parent.
 func (x *Record) Parent() *Reference {
-	_r := x.inner.Parent()
-	if _r == nil {
-		return nil
-	}
-	return &Reference{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
+	return ReferenceFromID(_r)
 }
 
-// SetParent calls the underlying SetParent.
-func (x *Record) SetParent(parent *raw.CKReference) {
-	x.inner.SetParent(parent)
+func (x *Record) SetParent(parent *Reference) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
 }
-
-// EncryptedValues calls the underlying EncryptedValues.
-func (x *Record) EncryptedValues() raw.CKRecordKeyValueSetting {
-	return x.inner.EncryptedValues()
-}
-
-func (x *Record) asRecord() *raw.CKRecord { return x.inner }
 
 // Recordable is the interface implemented by [Record], for mocking and DI.
 type Recordable interface {
-	Unwrap() *raw.CKRecord
+	obj.Object
 	WithParent(parent *Reference) *Record
-	ObjectForKey(key *foundation.NSString) raw.CKRecordValue
-	SetObjectForKey(object raw.CKRecordValue, key *foundation.NSString)
-	AllKeys() []*foundation.NSString
+	AllKeys() []obj.Object
 	AllTokens() []string
-	ObjectForKeyedSubscript(key *foundation.NSString) raw.CKRecordValue
-	SetObjectForKeyedSubscript(object raw.CKRecordValue, key *foundation.NSString)
-	ChangedKeys() []*foundation.NSString
-	EncodeSystemFieldsWithCoder(coder *foundation.NSCoder)
-	SetParentReferenceFromRecord(parentRecord *raw.CKRecord)
-	SetParentReferenceFromRecordID(parentRecordID *raw.CKRecordID)
-	RecordType() string
+	ChangedKeys() []obj.Object
+	EncodeSystemFieldsWithCoder(coder obj.Object)
+	SetParentReferenceFromRecord(parentRecord *Record)
+	SetParentReferenceFromRecordID(parentRecordID *RecordID)
+	RecordType() obj.Object
 	RecordID() *RecordID
 	RecordChangeTag() string
 	CreatorUserRecordID() *RecordID
-	CreationDate() *foundation.NSDate
+	CreationDate() obj.Object
 	LastModifiedUserRecordID() *RecordID
-	ModificationDate() *foundation.NSDate
+	ModificationDate() obj.Object
 	Share() *Reference
 	Parent() *Reference
-	SetParent(parent *raw.CKReference)
-	EncryptedValues() raw.CKRecordKeyValueSetting
+	SetParent(parent *Reference)
 }
 
 var _ Recordable = (*Record)(nil)

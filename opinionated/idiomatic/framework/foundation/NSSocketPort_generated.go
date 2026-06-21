@@ -5,117 +5,135 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A port that represents a BSD socket.
 //
-// SocketPort wraps [raw.NSSocketPort] with a fluent Go API.
+// SocketPort is an idiomatic wrapper over the Objective-C class NSSocketPort.
 type SocketPort struct {
-	inner *raw.NSSocketPort
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSocketPort].
-func (x *SocketPort) Unwrap() *raw.NSSocketPort { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SocketPort) ID() objc.ID { return x.inner.Ptr() }
-
-// SocketPortFromID adopts an existing object pointer as a SocketPort (nil for 0).
+// SocketPortFromID adopts an existing Objective-C object as a SocketPort
+// (nil for 0), retaining it and registering a release finalizer.
 func SocketPortFromID(id objc.ID) *SocketPort {
 	if id == 0 {
 		return nil
 	}
-	return &SocketPort{inner: raw.NSSocketPortFromID(id)}
-}
-
-// NewSocketPort creates a new [SocketPort].
-func NewSocketPort() *SocketPort {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSocketPort")), objc.RegisterName("new"))
-	return &SocketPort{inner: raw.NSSocketPortFromID(_id)}
-}
-
-// NewSocketPortWithTCPPort creates a new [SocketPort].
-func NewSocketPortWithTCPPort(port uint16) *SocketPort {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSocketPort")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTCPPort:"), port)
-	return &SocketPort{inner: raw.NSSocketPortFromID(_id)}
-}
-
-// NewSocketPortWithProtocolFamilySocketTypeProtocolAddress creates a new [SocketPort].
-func NewSocketPortWithProtocolFamilySocketTypeProtocolAddress(family int, type_ int, protocol int, address *raw.NSData) *SocketPort {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSocketPort")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProtocolFamily:socketType:protocol:address:"), family, type_, protocol, address.Ptr())
-	return &SocketPort{inner: raw.NSSocketPortFromID(_id)}
-}
-
-// NewSocketPortWithProtocolFamilySocketTypeProtocolSocket creates a new [SocketPort].
-func NewSocketPortWithProtocolFamilySocketTypeProtocolSocket(family int, type_ int, protocol int, sock int) *SocketPort {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSocketPort")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProtocolFamily:socketType:protocol:socket:"), family, type_, protocol, sock)
-	return &SocketPort{inner: raw.NSSocketPortFromID(_id)}
-}
-
-// NewSocketPortRemoteWithTCPPortHost creates a new [SocketPort].
-func NewSocketPortRemoteWithTCPPortHost(port uint16, hostName string) *SocketPort {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSocketPort")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRemoteWithTCPPort:host:"), port, foundation.NSStringStringWithUTF8String(hostName).Ptr())
-	return &SocketPort{inner: raw.NSSocketPortFromID(_id)}
-}
-
-// NewSocketPortRemoteWithProtocolFamilySocketTypeProtocolAddress creates a new [SocketPort].
-func NewSocketPortRemoteWithProtocolFamilySocketTypeProtocolAddress(family int, type_ int, protocol int, address *raw.NSData) *SocketPort {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSocketPort")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRemoteWithProtocolFamily:socketType:protocol:address:"), family, type_, protocol, address.Ptr())
-	return &SocketPort{inner: raw.NSSocketPortFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *SocketPort) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SocketPort {
-	x.inner.NSPort.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &SocketPort{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// ProtocolFamily calls the underlying ProtocolFamily.
-func (x *SocketPort) ProtocolFamily() int {
-	return x.inner.ProtocolFamily()
-}
-
-// SocketType calls the underlying SocketType.
-func (x *SocketPort) SocketType() int {
-	return x.inner.SocketType()
-}
-
-// Protocol calls the underlying Protocol.
-func (x *SocketPort) Protocol() int {
-	return x.inner.Protocol()
-}
-
-// Address calls the underlying Address.
-func (x *SocketPort) Address() *Data {
-	_r := x.inner.Address()
-	if _r == nil {
+// socketPortAdopt wraps an Objective-C object that this code just created as a
+// SocketPort (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func socketPortAdopt(id objc.ID) *SocketPort {
+	if id == 0 {
 		return nil
 	}
-	return &Data{inner: _r}
+	x := &SocketPort{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Socket calls the underlying Socket.
+// Description returns the object's -description text.
+func (x *SocketPort) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SocketPort) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SocketPort) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSocketPort creates a new SocketPort.
+func NewSocketPort() *SocketPort {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSocketPort")), objc.RegisterName("new"))
+	return socketPortAdopt(_id)
+}
+
+// NewSocketPortWithTCPPort creates a new SocketPort.
+func NewSocketPortWithTCPPort(port uint16) *SocketPort {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSocketPort")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTCPPort:"), port)
+	return socketPortAdopt(_id)
+}
+
+// NewSocketPortWithProtocolFamilySocketTypeProtocolAddress creates a new SocketPort.
+func NewSocketPortWithProtocolFamilySocketTypeProtocolAddress(family int, type_ int, protocol int, address *Data) *SocketPort {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSocketPort")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProtocolFamily:socketType:protocol:address:"), family, type_, protocol, objref.IDOf(address))
+	return socketPortAdopt(_id)
+}
+
+// NewSocketPortWithProtocolFamilySocketTypeProtocolSocket creates a new SocketPort.
+func NewSocketPortWithProtocolFamilySocketTypeProtocolSocket(family int, type_ int, protocol int, sock int) *SocketPort {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSocketPort")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProtocolFamily:socketType:protocol:socket:"), family, type_, protocol, sock)
+	return socketPortAdopt(_id)
+}
+
+// NewSocketPortRemoteWithTCPPortHost creates a new SocketPort.
+func NewSocketPortRemoteWithTCPPortHost(port uint16, hostName string) *SocketPort {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSocketPort")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRemoteWithTCPPort:host:"), port, purego.NSString(hostName))
+	return socketPortAdopt(_id)
+}
+
+// NewSocketPortRemoteWithProtocolFamilySocketTypeProtocolAddress creates a new SocketPort.
+func NewSocketPortRemoteWithProtocolFamilySocketTypeProtocolAddress(family int, type_ int, protocol int, address *Data) *SocketPort {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSocketPort")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initRemoteWithProtocolFamily:socketType:protocol:address:"), family, type_, protocol, objref.IDOf(address))
+	return socketPortAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *SocketPort) WithScriptingProperties(scriptingProperties obj.Object) *SocketPort {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+func (x *SocketPort) ProtocolFamily() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("protocolFamily"))
+	return _r
+}
+
+func (x *SocketPort) SocketType() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("socketType"))
+	return _r
+}
+
+func (x *SocketPort) Protocol() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("protocol"))
+	return _r
+}
+
+func (x *SocketPort) Address() *Data {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("address"))
+	return DataFromID(_r)
+}
+
 func (x *SocketPort) Socket() int {
-	return x.inner.Socket()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("socket"))
+	return _r
 }
-
-func (x *SocketPort) asPort() *raw.NSPort { return &x.inner.NSPort }
-
-func (x *SocketPort) asObject() *raw.NSObject { return &x.inner.NSPort.NSObject }
 
 // SocketPortable is the interface implemented by [SocketPort], for mocking and DI.
 type SocketPortable interface {
-	Unwrap() *raw.NSSocketPort
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *SocketPort
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *SocketPort
 	ProtocolFamily() int
 	SocketType() int
 	Protocol() int

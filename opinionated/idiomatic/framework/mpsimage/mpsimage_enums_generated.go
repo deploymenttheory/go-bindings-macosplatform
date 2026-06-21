@@ -8,23 +8,23 @@ import (
 	"fmt"
 )
 
-type MPSAlphaType uint64
+type AlphaType uint64
 
 const (
-	MPSAlphaTypeNonPremultiplied MPSAlphaType = 0
-	MPSAlphaTypeAlphaIsOne       MPSAlphaType = 1
-	MPSAlphaTypePremultiplied    MPSAlphaType = 2
+	AlphaTypeNonPremultiplied AlphaType = 0
+	AlphaTypeAlphaIsOne       AlphaType = 1
+	AlphaTypePremultiplied    AlphaType = 2
 )
 
-func (e MPSAlphaType) String() string {
+func (e AlphaType) String() string {
 	switch e {
-	case MPSAlphaTypeNonPremultiplied:
-		return "MPSAlphaTypeNonPremultiplied"
-	case MPSAlphaTypeAlphaIsOne:
-		return "MPSAlphaTypeAlphaIsOne"
-	case MPSAlphaTypePremultiplied:
-		return "MPSAlphaTypePremultiplied"
+	case AlphaTypeNonPremultiplied:
+		return "AlphaTypeNonPremultiplied"
+	case AlphaTypeAlphaIsOne:
+		return "AlphaTypeAlphaIsOne"
+	case AlphaTypePremultiplied:
+		return "AlphaTypePremultiplied"
 	default:
-		return fmt.Sprintf("MPSAlphaType(%d)", int64(e))
+		return fmt.Sprintf("AlphaType(%d)", int64(e))
 	}
 }

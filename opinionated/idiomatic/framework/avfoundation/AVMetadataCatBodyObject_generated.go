@@ -5,49 +5,68 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object representing a single detected cat body in a picture.
 //
-// MetadataCatBodyObject wraps [raw.AVMetadataCatBodyObject] with a fluent Go API.
+// MetadataCatBodyObject is an idiomatic wrapper over the Objective-C class AVMetadataCatBodyObject.
 type MetadataCatBodyObject struct {
-	inner *raw.AVMetadataCatBodyObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMetadataCatBodyObject].
-func (x *MetadataCatBodyObject) Unwrap() *raw.AVMetadataCatBodyObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetadataCatBodyObject) ID() objc.ID { return x.inner.Ptr() }
-
-// MetadataCatBodyObjectFromID adopts an existing object pointer as a MetadataCatBodyObject (nil for 0).
+// MetadataCatBodyObjectFromID adopts an existing Objective-C object as a MetadataCatBodyObject
+// (nil for 0), retaining it and registering a release finalizer.
 func MetadataCatBodyObjectFromID(id objc.ID) *MetadataCatBodyObject {
 	if id == 0 {
 		return nil
 	}
-	return &MetadataCatBodyObject{inner: raw.AVMetadataCatBodyObjectFromID(id)}
+	x := &MetadataCatBodyObject{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMetadataCatBodyObject creates a new [MetadataCatBodyObject].
+// metadataCatBodyObjectAdopt wraps an Objective-C object that this code just created as a
+// MetadataCatBodyObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metadataCatBodyObjectAdopt(id objc.ID) *MetadataCatBodyObject {
+	if id == 0 {
+		return nil
+	}
+	x := &MetadataCatBodyObject{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetadataCatBodyObject) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetadataCatBodyObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetadataCatBodyObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMetadataCatBodyObject creates a new MetadataCatBodyObject.
 func NewMetadataCatBodyObject() *MetadataCatBodyObject {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetadataCatBodyObject")), objc.RegisterName("new"))
-	return &MetadataCatBodyObject{inner: raw.AVMetadataCatBodyObjectFromID(_id)}
-}
-
-func (x *MetadataCatBodyObject) asMetadataBodyObject() *raw.AVMetadataBodyObject {
-	return &x.inner.AVMetadataBodyObject
-}
-
-func (x *MetadataCatBodyObject) asMetadataObject() *raw.AVMetadataObject {
-	return &x.inner.AVMetadataBodyObject.AVMetadataObject
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetadataCatBodyObject")), objc.RegisterName("new"))
+	return metadataCatBodyObjectAdopt(_id)
 }
 
 // MetadataCatBodyObjectable is the interface implemented by [MetadataCatBodyObject], for mocking and DI.
 type MetadataCatBodyObjectable interface {
-	Unwrap() *raw.AVMetadataCatBodyObject
+	obj.Object
 }
 
 var _ MetadataCatBodyObjectable = (*MetadataCatBodyObject)(nil)

@@ -5,234 +5,219 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A description of an attribute that derives its value by composing other attributes.
 //
-// CompositeAttributeDescription wraps [raw.NSCompositeAttributeDescription] with a fluent Go API.
+// CompositeAttributeDescription is an idiomatic wrapper over the Objective-C class NSCompositeAttributeDescription.
 type CompositeAttributeDescription struct {
-	inner *raw.NSCompositeAttributeDescription
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCompositeAttributeDescription].
-func (x *CompositeAttributeDescription) Unwrap() *raw.NSCompositeAttributeDescription { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CompositeAttributeDescription) ID() objc.ID { return x.inner.Ptr() }
-
-// CompositeAttributeDescriptionFromID adopts an existing object pointer as a CompositeAttributeDescription (nil for 0).
+// CompositeAttributeDescriptionFromID adopts an existing Objective-C object as a CompositeAttributeDescription
+// (nil for 0), retaining it and registering a release finalizer.
 func CompositeAttributeDescriptionFromID(id objc.ID) *CompositeAttributeDescription {
 	if id == 0 {
 		return nil
 	}
-	return &CompositeAttributeDescription{inner: raw.NSCompositeAttributeDescriptionFromID(id)}
+	x := &CompositeAttributeDescription{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCompositeAttributeDescription creates a new [CompositeAttributeDescription].
+// compositeAttributeDescriptionAdopt wraps an Objective-C object that this code just created as a
+// CompositeAttributeDescription (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func compositeAttributeDescriptionAdopt(id objc.ID) *CompositeAttributeDescription {
+	if id == 0 {
+		return nil
+	}
+	x := &CompositeAttributeDescription{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CompositeAttributeDescription) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CompositeAttributeDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CompositeAttributeDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCompositeAttributeDescription creates a new CompositeAttributeDescription.
 func NewCompositeAttributeDescription() *CompositeAttributeDescription {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCompositeAttributeDescription")), objc.RegisterName("new"))
-	return &CompositeAttributeDescription{inner: raw.NSCompositeAttributeDescriptionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCompositeAttributeDescription")), objc.RegisterName("new"))
+	return compositeAttributeDescriptionAdopt(_id)
 }
 
 // The composed attribute descriptions.
 //
-// WithElements sets the collection, converting the Go slice to an NSArray.
+// WithElements sets the collection and returns the receiver so calls can be chained.
 func (x *CompositeAttributeDescription) WithElements(items ...AttributeDescriptionProvider) *CompositeAttributeDescription {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetElements(foundation.NSArrayFromID[*raw.NSAttributeDescription](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asAttributeDescription().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSAttributeDescription](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetElements(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v AttributeDescriptionProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElements:"), _arr)
 	return x
 }
 
 // The attribute’s type.
 //
-// WithAttributeType sets the attributeType property and returns the receiver for chaining.
-func (x *CompositeAttributeDescription) WithAttributeType(attributeType NSAttributeType) *CompositeAttributeDescription {
-	x.inner.NSAttributeDescription.SetAttributeType(raw.NSAttributeType(attributeType))
+// WithAttributeType sets attributeType and returns the receiver so calls can be chained.
+func (x *CompositeAttributeDescription) WithAttributeType(attributeType AttributeType) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeType:"), attributeType)
 	return x
 }
 
 // The class name that represents the attribute’s value.
 //
-// WithAttributeValueClassName sets the attributeValueClassName property and returns the receiver for chaining.
+// WithAttributeValueClassName sets attributeValueClassName and returns the receiver so calls can be chained.
 func (x *CompositeAttributeDescription) WithAttributeValueClassName(attributeValueClassName string) *CompositeAttributeDescription {
-	x.inner.NSAttributeDescription.SetAttributeValueClassName(foundation.NSStringStringWithUTF8String(attributeValueClassName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValueClassName:"), purego.NSString(attributeValueClassName))
 	return x
 }
 
 // The default value of the attribute.
 //
-// WithDefaultValue sets the defaultValue property and returns the receiver for chaining.
-func (x *CompositeAttributeDescription) WithDefaultValue(defaultValue objc.ID) *CompositeAttributeDescription {
-	x.inner.NSAttributeDescription.SetDefaultValue(defaultValue)
+// WithDefaultValue sets defaultValue and returns the receiver so calls can be chained.
+func (x *CompositeAttributeDescription) WithDefaultValue(defaultValue obj.Object) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultValue:"), objref.IDOf(defaultValue))
 	return x
 }
 
 // The name of the transformer to use for the attribute value.
 //
-// WithValueTransformerName sets the valueTransformerName property and returns the receiver for chaining.
+// WithValueTransformerName sets valueTransformerName and returns the receiver so calls can be chained.
 func (x *CompositeAttributeDescription) WithValueTransformerName(valueTransformerName string) *CompositeAttributeDescription {
-	x.inner.NSAttributeDescription.SetValueTransformerName(foundation.NSStringStringWithUTF8String(valueTransformerName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueTransformerName:"), purego.NSString(valueTransformerName))
 	return x
 }
 
 // A Boolean value that indicates whether the attribute allows external binary storage.
 //
-// WithAllowsExternalBinaryDataStorage sets the allowsExternalBinaryDataStorage property and returns the receiver for chaining.
+// WithAllowsExternalBinaryDataStorage sets allowsExternalBinaryDataStorage and returns the receiver so calls can be chained.
 func (x *CompositeAttributeDescription) WithAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) *CompositeAttributeDescription {
-	x.inner.NSAttributeDescription.SetAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExternalBinaryDataStorage:"), allowsExternalBinaryDataStorage)
 	return x
 }
 
 // A Boolean value that indicates whether the attribute records its value in the persistent history transaction for a managed object’s deletion.
 //
-// WithPreservesValueInHistoryOnDeletion sets the preservesValueInHistoryOnDeletion property and returns the receiver for chaining.
+// WithPreservesValueInHistoryOnDeletion sets preservesValueInHistoryOnDeletion and returns the receiver so calls can be chained.
 func (x *CompositeAttributeDescription) WithPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) *CompositeAttributeDescription {
-	x.inner.NSAttributeDescription.SetPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreservesValueInHistoryOnDeletion:"), preservesValueInHistoryOnDeletion)
 	return x
 }
 
 // A Boolean value that determines whether to encrypt the attribute’s value.
 //
-// WithAllowsCloudEncryption sets the allowsCloudEncryption property and returns the receiver for chaining.
+// WithAllowsCloudEncryption sets allowsCloudEncryption and returns the receiver so calls can be chained.
 func (x *CompositeAttributeDescription) WithAllowsCloudEncryption(allowsCloudEncryption bool) *CompositeAttributeDescription {
-	x.inner.NSAttributeDescription.SetAllowsCloudEncryption(allowsCloudEncryption)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCloudEncryption:"), allowsCloudEncryption)
 	return x
 }
 
 // The name of the receiver.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *CompositeAttributeDescription) WithName(name string) *CompositeAttributeDescription {
-	x.inner.NSAttributeDescription.NSPropertyDescription.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // A Boolean value that indicates whether the receiver is optional.
 //
-// WithOptional sets the optional property and returns the receiver for chaining.
+// WithOptional sets optional and returns the receiver so calls can be chained.
 func (x *CompositeAttributeDescription) WithOptional(optional bool) *CompositeAttributeDescription {
-	x.inner.NSAttributeDescription.NSPropertyDescription.SetOptional(optional)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptional:"), optional)
 	return x
 }
 
 // A Boolean value that indicates whether the receiver is transient.
 //
-// WithTransient sets the transient property and returns the receiver for chaining.
+// WithTransient sets transient and returns the receiver so calls can be chained.
 func (x *CompositeAttributeDescription) WithTransient(transient bool) *CompositeAttributeDescription {
-	x.inner.NSAttributeDescription.NSPropertyDescription.SetTransient(transient)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransient:"), transient)
 	return x
 }
 
 // The user info dictionary of the receiver.
 //
-// WithUserInfo sets the userInfo property and returns the receiver for chaining.
-func (x *CompositeAttributeDescription) WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *CompositeAttributeDescription {
-	x.inner.NSAttributeDescription.NSPropertyDescription.SetUserInfo(userInfo)
+// WithUserInfo sets userInfo and returns the receiver so calls can be chained.
+func (x *CompositeAttributeDescription) WithUserInfo(userInfo obj.Object) *CompositeAttributeDescription {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return x
 }
 
 // A Boolean value that indicates whether the receiver should be indexed for searching.
 //
-// WithIndexed sets the indexed property and returns the receiver for chaining.
+// WithIndexed sets indexed and returns the receiver so calls can be chained.
 func (x *CompositeAttributeDescription) WithIndexed(indexed bool) *CompositeAttributeDescription {
-	x.inner.NSAttributeDescription.NSPropertyDescription.SetIndexed(indexed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexed:"), indexed)
 	return x
 }
 
 // The version hash modifier for the receiver.
 //
-// WithVersionHashModifier sets the versionHashModifier property and returns the receiver for chaining.
+// WithVersionHashModifier sets versionHashModifier and returns the receiver so calls can be chained.
 func (x *CompositeAttributeDescription) WithVersionHashModifier(versionHashModifier string) *CompositeAttributeDescription {
-	x.inner.NSAttributeDescription.NSPropertyDescription.SetVersionHashModifier(foundation.NSStringStringWithUTF8String(versionHashModifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
 	return x
 }
 
 // A Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
 //
-// WithIndexedBySpotlight sets the indexedBySpotlight property and returns the receiver for chaining.
+// WithIndexedBySpotlight sets indexedBySpotlight and returns the receiver so calls can be chained.
 func (x *CompositeAttributeDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *CompositeAttributeDescription {
-	x.inner.NSAttributeDescription.NSPropertyDescription.SetIndexedBySpotlight(indexedBySpotlight)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexedBySpotlight:"), indexedBySpotlight)
 	return x
 }
 
 // A Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
 //
-// WithStoredInExternalRecord sets the storedInExternalRecord property and returns the receiver for chaining.
+// WithStoredInExternalRecord sets storedInExternalRecord and returns the receiver so calls can be chained.
 func (x *CompositeAttributeDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *CompositeAttributeDescription {
-	x.inner.NSAttributeDescription.NSPropertyDescription.SetStoredInExternalRecord(storedInExternalRecord)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoredInExternalRecord:"), storedInExternalRecord)
 	return x
 }
 
 // The renaming identifier for the receiver.
 //
-// WithRenamingIdentifier sets the renamingIdentifier property and returns the receiver for chaining.
+// WithRenamingIdentifier sets renamingIdentifier and returns the receiver so calls can be chained.
 func (x *CompositeAttributeDescription) WithRenamingIdentifier(renamingIdentifier string) *CompositeAttributeDescription {
-	x.inner.NSAttributeDescription.NSPropertyDescription.SetRenamingIdentifier(foundation.NSStringStringWithUTF8String(renamingIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
 	return x
 }
 
 // Elements returns the collection as a Go slice.
 func (x *CompositeAttributeDescription) Elements() []*AttributeDescription {
-	arr := x.inner.Elements()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AttributeDescription {
-		return &AttributeDescription{inner: raw.NSAttributeDescriptionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elements"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AttributeDescription { return AttributeDescriptionFromID(_id) })
 }
 
-// SetElements calls the underlying SetElements.
-func (x *CompositeAttributeDescription) SetElements(elements ...AttributeDescriptionProvider) {
-	_ptrs := make([]objc.ID, len(elements))
-	for _i, _v := range elements {
-		_ptrs[_i] = _v.asAttributeDescription().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.NSAttributeDescription]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.NSAttributeDescription](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.NSAttributeDescription](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetElements(_arg0)
-}
-
-func (x *CompositeAttributeDescription) asAttributeDescription() *raw.NSAttributeDescription {
-	return &x.inner.NSAttributeDescription
-}
-
-func (x *CompositeAttributeDescription) asPropertyDescription() *raw.NSPropertyDescription {
-	return &x.inner.NSAttributeDescription.NSPropertyDescription
+func (x *CompositeAttributeDescription) SetElements(elements []*AttributeDescription) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElements:"), purego.SliceToNSArray(elements, func(_v *AttributeDescription) objc.ID { return objref.IDOf(_v) }))
 }
 
 // CompositeAttributeDescriptionable is the interface implemented by [CompositeAttributeDescription], for mocking and DI.
 type CompositeAttributeDescriptionable interface {
-	Unwrap() *raw.NSCompositeAttributeDescription
+	obj.Object
 	WithElements(items ...AttributeDescriptionProvider) *CompositeAttributeDescription
-	WithAttributeType(attributeType NSAttributeType) *CompositeAttributeDescription
+	WithAttributeType(attributeType AttributeType) *CompositeAttributeDescription
 	WithAttributeValueClassName(attributeValueClassName string) *CompositeAttributeDescription
-	WithDefaultValue(defaultValue objc.ID) *CompositeAttributeDescription
+	WithDefaultValue(defaultValue obj.Object) *CompositeAttributeDescription
 	WithValueTransformerName(valueTransformerName string) *CompositeAttributeDescription
 	WithAllowsExternalBinaryDataStorage(allowsExternalBinaryDataStorage bool) *CompositeAttributeDescription
 	WithPreservesValueInHistoryOnDeletion(preservesValueInHistoryOnDeletion bool) *CompositeAttributeDescription
@@ -240,14 +225,14 @@ type CompositeAttributeDescriptionable interface {
 	WithName(name string) *CompositeAttributeDescription
 	WithOptional(optional bool) *CompositeAttributeDescription
 	WithTransient(transient bool) *CompositeAttributeDescription
-	WithUserInfo(userInfo *foundation.NSDictionary[objc.ID, objc.ID]) *CompositeAttributeDescription
+	WithUserInfo(userInfo obj.Object) *CompositeAttributeDescription
 	WithIndexed(indexed bool) *CompositeAttributeDescription
 	WithVersionHashModifier(versionHashModifier string) *CompositeAttributeDescription
 	WithIndexedBySpotlight(indexedBySpotlight bool) *CompositeAttributeDescription
 	WithStoredInExternalRecord(storedInExternalRecord bool) *CompositeAttributeDescription
 	WithRenamingIdentifier(renamingIdentifier string) *CompositeAttributeDescription
 	Elements() []*AttributeDescription
-	SetElements(elements ...AttributeDescriptionProvider)
+	SetElements(elements []*AttributeDescription)
 }
 
 var _ CompositeAttributeDescriptionable = (*CompositeAttributeDescription)(nil)

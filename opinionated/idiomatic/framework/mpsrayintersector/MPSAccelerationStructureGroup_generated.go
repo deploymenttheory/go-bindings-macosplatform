@@ -5,49 +5,66 @@
 package mpsrayintersector
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsrayintersector"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AccelerationStructureGroup wraps [raw.MPSAccelerationStructureGroup] with a fluent Go API.
+// AccelerationStructureGroup is an idiomatic wrapper over the Objective-C class MPSAccelerationStructureGroup.
 type AccelerationStructureGroup struct {
-	inner *raw.MPSAccelerationStructureGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSAccelerationStructureGroup].
-func (x *AccelerationStructureGroup) Unwrap() *raw.MPSAccelerationStructureGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AccelerationStructureGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// AccelerationStructureGroupFromID adopts an existing object pointer as a AccelerationStructureGroup (nil for 0).
+// AccelerationStructureGroupFromID adopts an existing Objective-C object as a AccelerationStructureGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func AccelerationStructureGroupFromID(id objc.ID) *AccelerationStructureGroup {
 	if id == 0 {
 		return nil
 	}
-	return &AccelerationStructureGroup{inner: raw.MPSAccelerationStructureGroupFromID(id)}
+	x := &AccelerationStructureGroup{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAccelerationStructureGroupWithDevice creates a new [AccelerationStructureGroup].
-func NewAccelerationStructureGroupWithDevice(device metal.MTLDevice) *AccelerationStructureGroup {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSAccelerationStructureGroup")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &AccelerationStructureGroup{inner: raw.MPSAccelerationStructureGroupFromID(_id)}
+// accelerationStructureGroupAdopt wraps an Objective-C object that this code just created as a
+// AccelerationStructureGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func accelerationStructureGroupAdopt(id objc.ID) *AccelerationStructureGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &AccelerationStructureGroup{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @brief The Metal device this acceleration structure group was created with
-//
-// Device calls the underlying Device.
-func (x *AccelerationStructureGroup) Device() metal.MTLDevice {
-	return x.inner.Device()
+// Description returns the object's -description text.
+func (x *AccelerationStructureGroup) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AccelerationStructureGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AccelerationStructureGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAccelerationStructureGroup creates a new AccelerationStructureGroup.
+func NewAccelerationStructureGroup() *AccelerationStructureGroup {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSAccelerationStructureGroup")), objc.RegisterName("new"))
+	return accelerationStructureGroupAdopt(_id)
 }
 
 // AccelerationStructureGroupable is the interface implemented by [AccelerationStructureGroup], for mocking and DI.
 type AccelerationStructureGroupable interface {
-	Unwrap() *raw.MPSAccelerationStructureGroup
-	Device() metal.MTLDevice
+	obj.Object
 }
 
 var _ AccelerationStructureGroupable = (*AccelerationStructureGroup)(nil)

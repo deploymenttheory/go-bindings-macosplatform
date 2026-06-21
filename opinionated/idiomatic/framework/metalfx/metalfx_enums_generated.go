@@ -9,26 +9,26 @@ import (
 )
 
 // The color space modes for the input and output textures you use with a spatial scaling effect instance.
-type MTLFXSpatialScalerColorProcessingMode int64
+type SpatialScalerColorProcessingMode int64
 
 const (
 	// Indicates your input and output textures use a perceptual color space.
-	MTLFXSpatialScalerColorProcessingModePerceptual MTLFXSpatialScalerColorProcessingMode = 0
+	SpatialScalerColorProcessingModePerceptual SpatialScalerColorProcessingMode = 0
 	// Indicates your input and output textures use a linear color space.
-	MTLFXSpatialScalerColorProcessingModeLinear MTLFXSpatialScalerColorProcessingMode = 1
+	SpatialScalerColorProcessingModeLinear SpatialScalerColorProcessingMode = 1
 	// Indicates your input and output textures use a high dynamic range color space.
-	MTLFXSpatialScalerColorProcessingModeHDR MTLFXSpatialScalerColorProcessingMode = 2
+	SpatialScalerColorProcessingModeHDR SpatialScalerColorProcessingMode = 2
 )
 
-func (e MTLFXSpatialScalerColorProcessingMode) String() string {
+func (e SpatialScalerColorProcessingMode) String() string {
 	switch e {
-	case MTLFXSpatialScalerColorProcessingModePerceptual:
-		return "MTLFXSpatialScalerColorProcessingModePerceptual"
-	case MTLFXSpatialScalerColorProcessingModeLinear:
-		return "MTLFXSpatialScalerColorProcessingModeLinear"
-	case MTLFXSpatialScalerColorProcessingModeHDR:
-		return "MTLFXSpatialScalerColorProcessingModeHDR"
+	case SpatialScalerColorProcessingModePerceptual:
+		return "SpatialScalerColorProcessingModePerceptual"
+	case SpatialScalerColorProcessingModeLinear:
+		return "SpatialScalerColorProcessingModeLinear"
+	case SpatialScalerColorProcessingModeHDR:
+		return "SpatialScalerColorProcessingModeHDR"
 	default:
-		return fmt.Sprintf("MTLFXSpatialScalerColorProcessingMode(%d)", int64(e))
+		return fmt.Sprintf("SpatialScalerColorProcessingMode(%d)", int64(e))
 	}
 }

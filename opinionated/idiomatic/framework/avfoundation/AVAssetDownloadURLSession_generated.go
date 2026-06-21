@@ -5,78 +5,89 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A URL session that creates and executes asset download tasks.
 //
-// AssetDownloadURLSession wraps [raw.AVAssetDownloadURLSession] with a fluent Go API.
+// AssetDownloadURLSession is an idiomatic wrapper over the Objective-C class AVAssetDownloadURLSession.
 type AssetDownloadURLSession struct {
-	inner *raw.AVAssetDownloadURLSession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetDownloadURLSession].
-func (x *AssetDownloadURLSession) Unwrap() *raw.AVAssetDownloadURLSession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetDownloadURLSession) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetDownloadURLSessionFromID adopts an existing object pointer as a AssetDownloadURLSession (nil for 0).
+// AssetDownloadURLSessionFromID adopts an existing Objective-C object as a AssetDownloadURLSession
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetDownloadURLSessionFromID(id objc.ID) *AssetDownloadURLSession {
 	if id == 0 {
 		return nil
 	}
-	return &AssetDownloadURLSession{inner: raw.AVAssetDownloadURLSessionFromID(id)}
+	x := &AssetDownloadURLSession{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAssetDownloadURLSession creates a new [AssetDownloadURLSession].
+// assetDownloadURLSessionAdopt wraps an Objective-C object that this code just created as a
+// AssetDownloadURLSession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetDownloadURLSessionAdopt(id objc.ID) *AssetDownloadURLSession {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetDownloadURLSession{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetDownloadURLSession) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetDownloadURLSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetDownloadURLSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAssetDownloadURLSession creates a new AssetDownloadURLSession.
 func NewAssetDownloadURLSession() *AssetDownloadURLSession {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetDownloadURLSession")), objc.RegisterName("new"))
-	return &AssetDownloadURLSession{inner: raw.AVAssetDownloadURLSessionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetDownloadURLSession")), objc.RegisterName("new"))
+	return assetDownloadURLSessionAdopt(_id)
 }
 
 // Creates a download task to download the asset.
-//
-// AssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions calls the underlying AssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions.
-func (x *AssetDownloadURLSession) AssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions(uRLAsset *raw.AVURLAsset, title string, artworkData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AssetDownloadTask {
-	_r := x.inner.AssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions(uRLAsset, foundation.NSStringStringWithUTF8String(title), artworkData, options)
-	if _r == nil {
-		return nil
-	}
-	return &AssetDownloadTask{inner: _r}
+func (x *AssetDownloadURLSession) AssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions(uRLAsset *URLAsset, title string, artworkData obj.Object, options obj.Object) *AssetDownloadTask {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetDownloadTaskWithURLAsset:assetTitle:assetArtworkData:options:"), objref.IDOf(uRLAsset), purego.NSString(title), objref.IDOf(artworkData), objref.IDOf(options))
+	return AssetDownloadTaskFromID(_r)
 }
 
 // Creates a download task to download the asset and media selections.
-//
-// AggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions calls the underlying AggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions.
-func (x *AssetDownloadURLSession) AggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions(uRLAsset *raw.AVURLAsset, mediaSelections *foundation.NSArray[*raw.AVMediaSelection], title string, artworkData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AggregateAssetDownloadTask {
-	_r := x.inner.AggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions(uRLAsset, mediaSelections, foundation.NSStringStringWithUTF8String(title), artworkData, options)
-	if _r == nil {
-		return nil
-	}
-	return &AggregateAssetDownloadTask{inner: _r}
+func (x *AssetDownloadURLSession) AggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions(uRLAsset *URLAsset, mediaSelections []*MediaSelection, title string, artworkData obj.Object, options obj.Object) *AggregateAssetDownloadTask {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("aggregateAssetDownloadTaskWithURLAsset:mediaSelections:assetTitle:assetArtworkData:options:"), objref.IDOf(uRLAsset), purego.SliceToNSArray(mediaSelections, func(_v *MediaSelection) objc.ID { return objref.IDOf(_v) }), purego.NSString(title), objref.IDOf(artworkData), objref.IDOf(options))
+	return AggregateAssetDownloadTaskFromID(_r)
 }
 
 // Creates a download task that uses the specified configuration.
-//
-// AssetDownloadTaskWithConfiguration calls the underlying AssetDownloadTaskWithConfiguration.
-func (x *AssetDownloadURLSession) AssetDownloadTaskWithConfiguration(downloadConfiguration *raw.AVAssetDownloadConfiguration) *AssetDownloadTask {
-	_r := x.inner.AssetDownloadTaskWithConfiguration(downloadConfiguration)
-	if _r == nil {
-		return nil
-	}
-	return &AssetDownloadTask{inner: _r}
+func (x *AssetDownloadURLSession) AssetDownloadTaskWithConfiguration(downloadConfiguration *AssetDownloadConfiguration) *AssetDownloadTask {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetDownloadTaskWithConfiguration:"), objref.IDOf(downloadConfiguration))
+	return AssetDownloadTaskFromID(_r)
 }
 
 // AssetDownloadURLSessionable is the interface implemented by [AssetDownloadURLSession], for mocking and DI.
 type AssetDownloadURLSessionable interface {
-	Unwrap() *raw.AVAssetDownloadURLSession
-	AssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions(uRLAsset *raw.AVURLAsset, title string, artworkData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AssetDownloadTask
-	AggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions(uRLAsset *raw.AVURLAsset, mediaSelections *foundation.NSArray[*raw.AVMediaSelection], title string, artworkData *foundation.NSData, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AggregateAssetDownloadTask
-	AssetDownloadTaskWithConfiguration(downloadConfiguration *raw.AVAssetDownloadConfiguration) *AssetDownloadTask
+	obj.Object
+	AssetDownloadTaskWithURLAssetAssetTitleAssetArtworkDataOptions(uRLAsset *URLAsset, title string, artworkData obj.Object, options obj.Object) *AssetDownloadTask
+	AggregateAssetDownloadTaskWithURLAssetMediaSelectionsAssetTitleAssetArtworkDataOptions(uRLAsset *URLAsset, mediaSelections []*MediaSelection, title string, artworkData obj.Object, options obj.Object) *AggregateAssetDownloadTask
+	AssetDownloadTaskWithConfiguration(downloadConfiguration *AssetDownloadConfiguration) *AssetDownloadTask
 }
 
 var _ AssetDownloadURLSessionable = (*AssetDownloadURLSession)(nil)

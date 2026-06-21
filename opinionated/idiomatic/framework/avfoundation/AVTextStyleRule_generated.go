@@ -5,74 +5,96 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents the text styling rules to apply to a media item’s textual content.
 //
-// TextStyleRule wraps [raw.AVTextStyleRule] with a fluent Go API.
+// TextStyleRule is an idiomatic wrapper over the Objective-C class AVTextStyleRule.
 type TextStyleRule struct {
-	inner *raw.AVTextStyleRule
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVTextStyleRule].
-func (x *TextStyleRule) Unwrap() *raw.AVTextStyleRule { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextStyleRule) ID() objc.ID { return x.inner.Ptr() }
-
-// TextStyleRuleFromID adopts an existing object pointer as a TextStyleRule (nil for 0).
+// TextStyleRuleFromID adopts an existing Objective-C object as a TextStyleRule
+// (nil for 0), retaining it and registering a release finalizer.
 func TextStyleRuleFromID(id objc.ID) *TextStyleRule {
 	if id == 0 {
 		return nil
 	}
-	return &TextStyleRule{inner: raw.AVTextStyleRuleFromID(id)}
+	x := &TextStyleRule{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// textStyleRuleAdopt wraps an Objective-C object that this code just created as a
+// TextStyleRule (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textStyleRuleAdopt(id objc.ID) *TextStyleRule {
+	if id == 0 {
+		return nil
+	}
+	x := &TextStyleRule{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TextStyleRule) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextStyleRule) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextStyleRule) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a text style rule object with the specified style attributes.
 //
-// NewTextStyleRuleWithTextMarkupAttributes creates a new [TextStyleRule].
-func NewTextStyleRuleWithTextMarkupAttributes(textMarkupAttributes purego.IDer) *TextStyleRule {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVTextStyleRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextMarkupAttributes:"), textMarkupAttributes.ID())
-	return &TextStyleRule{inner: raw.AVTextStyleRuleFromID(_id)}
+// NewTextStyleRuleWithTextMarkupAttributes creates a new TextStyleRule.
+func NewTextStyleRuleWithTextMarkupAttributes(textMarkupAttributes obj.Object) *TextStyleRule {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVTextStyleRule")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextMarkupAttributes:"), objref.IDOf(textMarkupAttributes))
+	return textStyleRuleAdopt(_id)
 }
 
 // Creates a text style rule object with the specified style attributes and text range information.
 //
-// NewTextStyleRuleWithTextMarkupAttributesTextSelector creates a new [TextStyleRule].
-func NewTextStyleRuleWithTextMarkupAttributesTextSelector(textMarkupAttributes purego.IDer, textSelector string) *TextStyleRule {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVTextStyleRule")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextMarkupAttributes:textSelector:"), textMarkupAttributes.ID(), foundation.NSStringStringWithUTF8String(textSelector).Ptr())
-	return &TextStyleRule{inner: raw.AVTextStyleRuleFromID(_id)}
+// NewTextStyleRuleWithTextMarkupAttributesTextSelector creates a new TextStyleRule.
+func NewTextStyleRuleWithTextMarkupAttributesTextSelector(textMarkupAttributes obj.Object, textSelector string) *TextStyleRule {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVTextStyleRule")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextMarkupAttributes:textSelector:"), objref.IDOf(textMarkupAttributes), purego.NSString(textSelector))
+	return textStyleRuleAdopt(_id)
 }
 
-// @property		textMarkupAttributes @abstract		An NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys and the expected types of their corresponding values are defined in <CoreMedia/CMTextMarkup.h>.
-//
-// TextMarkupAttributes calls the underlying TextMarkupAttributes.
-func (x *TextStyleRule) TextMarkupAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.TextMarkupAttributes()
+// An NSDictionary with keys representing text style attributes that are specifiable in text markup. Eligible keys and the expected types of their corresponding values are defined in <CoreMedia/CMTextMarkup.h>.
+func (x *TextStyleRule) TextMarkupAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textMarkupAttributes"))
+	return obj.Wrap(_r)
 }
 
-// @property		textSelector @abstract		A string that identifies the range or ranges of text to which the attributes should be applied. A value of nil indicates that the textMarkupAttributes should be applied as default styles for all text unless overridden by content markup or other applicable text selectors. @dicussion		The syntax of text selectors is determined by the format of the legible media. Eligible selectors may be determined by the content of the legible media (e.g. CSS selectors that are valid for a specific WebVTT document).
-//
-// TextSelector calls the underlying TextSelector.
+// A string that identifies the range or ranges of text to which the attributes should be applied. A value of nil indicates that the textMarkupAttributes should be applied as default styles for all text unless overridden by content markup or other applicable text selectors.
 func (x *TextStyleRule) TextSelector() string {
-	_r := x.inner.TextSelector()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textSelector"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // TextStyleRuleable is the interface implemented by [TextStyleRule], for mocking and DI.
 type TextStyleRuleable interface {
-	Unwrap() *raw.AVTextStyleRule
-	TextMarkupAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	TextMarkupAttributes() obj.Object
 	TextSelector() string
 }
 

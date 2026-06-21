@@ -5,107 +5,122 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A condition variable whose semantics follow those used for POSIX-style conditions.
 //
-// Condition wraps [raw.NSCondition] with a fluent Go API.
+// Condition is an idiomatic wrapper over the Objective-C class NSCondition.
 type Condition struct {
-	inner *raw.NSCondition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCondition].
-func (x *Condition) Unwrap() *raw.NSCondition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Condition) ID() objc.ID { return x.inner.Ptr() }
-
-// ConditionFromID adopts an existing object pointer as a Condition (nil for 0).
+// ConditionFromID adopts an existing Objective-C object as a Condition
+// (nil for 0), retaining it and registering a release finalizer.
 func ConditionFromID(id objc.ID) *Condition {
 	if id == 0 {
 		return nil
 	}
-	return &Condition{inner: raw.NSConditionFromID(id)}
+	x := &Condition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCondition creates a new [Condition].
+// conditionAdopt wraps an Objective-C object that this code just created as a
+// Condition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func conditionAdopt(id objc.ID) *Condition {
+	if id == 0 {
+		return nil
+	}
+	x := &Condition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Condition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Condition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Condition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCondition creates a new Condition.
 func NewCondition() *Condition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCondition")), objc.RegisterName("new"))
-	return &Condition{inner: raw.NSConditionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCondition")), objc.RegisterName("new"))
+	return conditionAdopt(_id)
 }
 
 // The name of the condition.
 //
-// WithName sets the name property and returns the receiver for chaining.
-func (x *Condition) WithName(name string) *Condition {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+// WithName sets name and returns the receiver so calls can be chained.
+func (x *Condition) WithName(name StringProvider) *Condition {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Condition) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Condition {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *Condition) WithScriptingProperties(scriptingProperties obj.Object) *Condition {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Blocks the current thread until the condition is signaled.
-//
-// Wait calls the underlying Wait.
 func (x *Condition) Wait() {
-	x.inner.Wait()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wait"))
 }
 
 // Blocks the current thread until the condition is signaled or the specified time limit is reached.
-//
-// WaitUntilDate calls the underlying WaitUntilDate.
-func (x *Condition) WaitUntilDate(limit *raw.NSDate) bool {
-	return x.inner.WaitUntilDate(limit)
+func (x *Condition) WaitUntilDate(limit *Date) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("waitUntilDate:"), objref.IDOf(limit))
+	return _r
 }
 
 // Signals the condition, waking up one thread waiting on it.
-//
-// Signal calls the underlying Signal.
 func (x *Condition) Signal() {
-	x.inner.Signal()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signal"))
 }
 
 // Signals the condition, waking up all threads waiting on it.
-//
-// Broadcast calls the underlying Broadcast.
 func (x *Condition) Broadcast() {
-	x.inner.Broadcast()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcast"))
 }
 
-// Name calls the underlying Name.
-func (x *Condition) Name() *String {
-	_r := x.inner.Name()
-	if _r == nil {
-		return nil
+func (x *Condition) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
 func (x *Condition) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
-
-func (x *Condition) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Conditionable is the interface implemented by [Condition], for mocking and DI.
 type Conditionable interface {
-	Unwrap() *raw.NSCondition
-	WithName(name string) *Condition
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Condition
+	obj.Object
+	WithName(name StringProvider) *Condition
+	WithScriptingProperties(scriptingProperties obj.Object) *Condition
 	Wait()
-	WaitUntilDate(limit *raw.NSDate) bool
+	WaitUntilDate(limit *Date) bool
 	Signal()
 	Broadcast()
-	Name() *String
+	Name() string
 	SetName(name string)
 }
 

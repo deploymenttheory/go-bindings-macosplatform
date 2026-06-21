@@ -5,56 +5,74 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An image that a snapshotter object generates.
 //
-// MapSnapshot wraps [raw.MKMapSnapshot] with a fluent Go API.
+// MapSnapshot is an idiomatic wrapper over the Objective-C class MKMapSnapshot.
 type MapSnapshot struct {
-	inner *raw.MKMapSnapshot
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKMapSnapshot].
-func (x *MapSnapshot) Unwrap() *raw.MKMapSnapshot { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MapSnapshot) ID() objc.ID { return x.inner.Ptr() }
-
-// MapSnapshotFromID adopts an existing object pointer as a MapSnapshot (nil for 0).
+// MapSnapshotFromID adopts an existing Objective-C object as a MapSnapshot
+// (nil for 0), retaining it and registering a release finalizer.
 func MapSnapshotFromID(id objc.ID) *MapSnapshot {
 	if id == 0 {
 		return nil
 	}
-	return &MapSnapshot{inner: raw.MKMapSnapshotFromID(id)}
+	x := &MapSnapshot{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMapSnapshot creates a new [MapSnapshot].
+// mapSnapshotAdopt wraps an Objective-C object that this code just created as a
+// MapSnapshot (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mapSnapshotAdopt(id objc.ID) *MapSnapshot {
+	if id == 0 {
+		return nil
+	}
+	x := &MapSnapshot{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MapSnapshot) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MapSnapshot) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MapSnapshot) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMapSnapshot creates a new MapSnapshot.
 func NewMapSnapshot() *MapSnapshot {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapSnapshot")), objc.RegisterName("new"))
-	return &MapSnapshot{inner: raw.MKMapSnapshotFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKMapSnapshot")), objc.RegisterName("new"))
+	return mapSnapshotAdopt(_id)
 }
 
-// PointForCoordinate calls the underlying PointForCoordinate.
-func (x *MapSnapshot) PointForCoordinate(coordinate unsafe.Pointer) corefoundation.CGPoint {
-	return x.inner.PointForCoordinate(coordinate)
-}
-
-// Appearance calls the underlying Appearance.
-func (x *MapSnapshot) Appearance() *appkit.NSAppearance {
-	return x.inner.Appearance()
+func (x *MapSnapshot) Appearance() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appearance"))
+	return obj.Wrap(_r)
 }
 
 // MapSnapshotable is the interface implemented by [MapSnapshot], for mocking and DI.
 type MapSnapshotable interface {
-	Unwrap() *raw.MKMapSnapshot
-	PointForCoordinate(coordinate unsafe.Pointer) corefoundation.CGPoint
-	Appearance() *appkit.NSAppearance
+	obj.Object
+	Appearance() obj.Object
 }
 
 var _ MapSnapshotable = (*MapSnapshot)(nil)

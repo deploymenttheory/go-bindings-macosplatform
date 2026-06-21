@@ -5,161 +5,153 @@
 package sharedwithyoucore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that represents a group of collaboration options that the system displays together.
 //
-// CollaborationOptionsGroup wraps [raw.SWCollaborationOptionsGroup] with a fluent Go API.
+// CollaborationOptionsGroup is an idiomatic wrapper over the Objective-C class SWCollaborationOptionsGroup.
 type CollaborationOptionsGroup struct {
-	inner *raw.SWCollaborationOptionsGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SWCollaborationOptionsGroup].
-func (x *CollaborationOptionsGroup) Unwrap() *raw.SWCollaborationOptionsGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollaborationOptionsGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// CollaborationOptionsGroupFromID adopts an existing object pointer as a CollaborationOptionsGroup (nil for 0).
+// CollaborationOptionsGroupFromID adopts an existing Objective-C object as a CollaborationOptionsGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func CollaborationOptionsGroupFromID(id objc.ID) *CollaborationOptionsGroup {
 	if id == 0 {
 		return nil
 	}
-	return &CollaborationOptionsGroup{inner: raw.SWCollaborationOptionsGroupFromID(id)}
+	x := &CollaborationOptionsGroup{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// collaborationOptionsGroupAdopt wraps an Objective-C object that this code just created as a
+// CollaborationOptionsGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collaborationOptionsGroupAdopt(id objc.ID) *CollaborationOptionsGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &CollaborationOptionsGroup{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollaborationOptionsGroup) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollaborationOptionsGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollaborationOptionsGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates and initializes a collaboration options group object.
 //
-// NewCollaborationOptionsGroupWithIdentifierOptions creates a new [CollaborationOptionsGroup].
-func NewCollaborationOptionsGroupWithIdentifierOptions(identifier string, options *foundation.NSArray[*raw.SWCollaborationOption]) *CollaborationOptionsGroup {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWCollaborationOptionsGroup")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:options:"), foundation.NSStringStringWithUTF8String(identifier).Ptr(), options.Ptr())
-	return &CollaborationOptionsGroup{inner: raw.SWCollaborationOptionsGroupFromID(_id)}
+// NewCollaborationOptionsGroupWithIdentifierOptions creates a new CollaborationOptionsGroup.
+func NewCollaborationOptionsGroupWithIdentifierOptions(identifier string, options []*CollaborationOption) *CollaborationOptionsGroup {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationOptionsGroup")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:options:"), purego.NSString(identifier), purego.SliceToNSArray(options, func(_v *CollaborationOption) objc.ID { return objref.IDOf(_v) }))
+	return collaborationOptionsGroupAdopt(_id)
 }
 
 // A localized string the system displays as the title of the group section.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *CollaborationOptionsGroup) WithTitle(title string) *CollaborationOptionsGroup {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // A localized string that provides additional information for the group of options.
 //
-// WithFooter sets the footer property and returns the receiver for chaining.
+// WithFooter sets footer and returns the receiver so calls can be chained.
 func (x *CollaborationOptionsGroup) WithFooter(footer string) *CollaborationOptionsGroup {
-	x.inner.SetFooter(foundation.NSStringStringWithUTF8String(footer))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFooter:"), purego.NSString(footer))
 	return x
 }
 
 // An array of collaboration options the system displays as a group.
 //
-// WithOptions sets the collection, converting the Go slice to an NSArray.
-func (x *CollaborationOptionsGroup) WithOptions(items ...*raw.SWCollaborationOption) *CollaborationOptionsGroup {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetOptions(foundation.NSArrayFromID[*raw.SWCollaborationOption](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SWCollaborationOption](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetOptions(_arr)
+// WithOptions sets the collection and returns the receiver so calls can be chained.
+func (x *CollaborationOptionsGroup) WithOptions(items ...*CollaborationOption) *CollaborationOptionsGroup {
+	_arr := purego.SliceToNSArray(items, func(_v *CollaborationOption) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), _arr)
 	return x
 }
 
-// @abstract Localized string used to title the section
-//
-// Title calls the underlying Title.
+// Localized string used to title the section
 func (x *CollaborationOptionsGroup) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
 func (x *CollaborationOptionsGroup) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// @abstract A unique identifier
-//
-// Identifier calls the underlying Identifier.
+// A unique identifier
 func (x *CollaborationOptionsGroup) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract Localized string to describe or provide additional information about the group of options
-//
-// Footer calls the underlying Footer.
+// Localized string to describe or provide additional information about the group of options
 func (x *CollaborationOptionsGroup) Footer() string {
-	_r := x.inner.Footer()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("footer"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetFooter calls the underlying SetFooter.
 func (x *CollaborationOptionsGroup) SetFooter(footer string) {
-	x.inner.SetFooter(foundation.NSStringStringWithUTF8String(footer))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFooter:"), purego.NSString(footer))
 }
 
-// @abstract SWCollaborationOptions to be displayed in the group
+// SWCollaborationOptions to be displayed in the group
 //
 // Options returns the collection as a Go slice.
 func (x *CollaborationOptionsGroup) Options() []*CollaborationOption {
-	arr := x.inner.Options()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CollaborationOption {
-		return &CollaborationOption{inner: raw.SWCollaborationOptionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollaborationOption { return CollaborationOptionFromID(_id) })
 }
 
-// SetOptions calls the underlying SetOptions.
-func (x *CollaborationOptionsGroup) SetOptions(options *foundation.NSArray[*raw.SWCollaborationOption]) {
-	x.inner.SetOptions(options)
-}
-
-func (x *CollaborationOptionsGroup) asCollaborationOptionsGroup() *raw.SWCollaborationOptionsGroup {
-	return x.inner
+func (x *CollaborationOptionsGroup) SetOptions(options []*CollaborationOption) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), purego.SliceToNSArray(options, func(_v *CollaborationOption) objc.ID { return objref.IDOf(_v) }))
 }
 
 // CollaborationOptionsGroupable is the interface implemented by [CollaborationOptionsGroup], for mocking and DI.
 type CollaborationOptionsGroupable interface {
-	Unwrap() *raw.SWCollaborationOptionsGroup
+	obj.Object
 	WithTitle(title string) *CollaborationOptionsGroup
 	WithFooter(footer string) *CollaborationOptionsGroup
-	WithOptions(items ...*raw.SWCollaborationOption) *CollaborationOptionsGroup
+	WithOptions(items ...*CollaborationOption) *CollaborationOptionsGroup
 	Title() string
 	SetTitle(title string)
 	Identifier() string
 	Footer() string
 	SetFooter(footer string)
 	Options() []*CollaborationOption
-	SetOptions(options *foundation.NSArray[*raw.SWCollaborationOption])
+	SetOptions(options []*CollaborationOption)
 }
 
 var _ CollaborationOptionsGroupable = (*CollaborationOptionsGroup)(nil)

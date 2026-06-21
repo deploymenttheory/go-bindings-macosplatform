@@ -5,45 +5,68 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A Virtio graphics scanout that corresponds to a Virtio graphics scanout configuration.
 //
-// VirtioGraphicsScanout wraps [raw.VZVirtioGraphicsScanout] with a fluent Go API.
+// VirtioGraphicsScanout is an idiomatic wrapper over the Objective-C class VZVirtioGraphicsScanout.
 type VirtioGraphicsScanout struct {
-	inner *raw.VZVirtioGraphicsScanout
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZVirtioGraphicsScanout].
-func (x *VirtioGraphicsScanout) Unwrap() *raw.VZVirtioGraphicsScanout { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioGraphicsScanout) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioGraphicsScanoutFromID adopts an existing object pointer as a VirtioGraphicsScanout (nil for 0).
+// VirtioGraphicsScanoutFromID adopts an existing Objective-C object as a VirtioGraphicsScanout
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioGraphicsScanoutFromID(id objc.ID) *VirtioGraphicsScanout {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioGraphicsScanout{inner: raw.VZVirtioGraphicsScanoutFromID(id)}
+	x := &VirtioGraphicsScanout{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVirtioGraphicsScanout creates a new [VirtioGraphicsScanout].
+// virtioGraphicsScanoutAdopt wraps an Objective-C object that this code just created as a
+// VirtioGraphicsScanout (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioGraphicsScanoutAdopt(id objc.ID) *VirtioGraphicsScanout {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtioGraphicsScanout{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VirtioGraphicsScanout) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VirtioGraphicsScanout) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VirtioGraphicsScanout) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVirtioGraphicsScanout creates a new VirtioGraphicsScanout.
 func NewVirtioGraphicsScanout() *VirtioGraphicsScanout {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioGraphicsScanout")), objc.RegisterName("new"))
-	return &VirtioGraphicsScanout{inner: raw.VZVirtioGraphicsScanoutFromID(_id)}
-}
-
-func (x *VirtioGraphicsScanout) asGraphicsDisplay() *raw.VZGraphicsDisplay {
-	return &x.inner.VZGraphicsDisplay
+	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioGraphicsScanout")), objc.RegisterName("new"))
+	return virtioGraphicsScanoutAdopt(_id)
 }
 
 // VirtioGraphicsScanoutable is the interface implemented by [VirtioGraphicsScanout], for mocking and DI.
 type VirtioGraphicsScanoutable interface {
-	Unwrap() *raw.VZVirtioGraphicsScanout
+	obj.Object
 }
 
 var _ VirtioGraphicsScanoutable = (*VirtioGraphicsScanout)(nil)

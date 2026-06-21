@@ -5,239 +5,329 @@
 package launchservices
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ae"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/launchservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osservices"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// AcquireIconRef calls [raw.AcquireIconRef] (C function AcquireIconRef).
-func AcquireIconRef(theIconRef unsafe.Pointer) int16 {
-	return raw.AcquireIconRef(theIconRef)
+var _fnAcquireIconRef func(objc.ID) int16
+
+// AcquireIconRef calls the LaunchServices framework function AcquireIconRef.
+func AcquireIconRef(theIconRef obj.Object) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAcquireIconRef == nil {
+		ebipurego.RegisterLibFunc(&_fnAcquireIconRef, _lib, "AcquireIconRef")
+	}
+	return _fnAcquireIconRef(objref.IDOf(theIconRef))
 }
 
-// CompositeIconRef calls [raw.CompositeIconRef] (C function CompositeIconRef).
-func CompositeIconRef(backgroundIconRef unsafe.Pointer, foregroundIconRef unsafe.Pointer, compositeIconRef unsafe.Pointer) int16 {
-	return raw.CompositeIconRef(backgroundIconRef, foregroundIconRef, compositeIconRef)
+var _fnIsDataAvailableInIconRef func(int, objc.ID) uint8
+
+// IsDataAvailableInIconRef calls the LaunchServices framework function IsDataAvailableInIconRef.
+func IsDataAvailableInIconRef(inIconKind int, inIconRef obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIsDataAvailableInIconRef == nil {
+		ebipurego.RegisterLibFunc(&_fnIsDataAvailableInIconRef, _lib, "IsDataAvailableInIconRef")
+	}
+	return _fnIsDataAvailableInIconRef(inIconKind, objref.IDOf(inIconRef))
 }
 
-// GetCustomIconsEnabled calls [raw.GetCustomIconsEnabled] (C function GetCustomIconsEnabled).
-func GetCustomIconsEnabled(vRefNum int16, customIconsEnabled *uint8) int16 {
-	return raw.GetCustomIconsEnabled(vRefNum, customIconsEnabled)
+var _fnIsValidIconRef func(objc.ID) uint8
+
+// IsValidIconRef calls the LaunchServices framework function IsValidIconRef.
+func IsValidIconRef(theIconRef obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIsValidIconRef == nil {
+		ebipurego.RegisterLibFunc(&_fnIsValidIconRef, _lib, "IsValidIconRef")
+	}
+	return _fnIsValidIconRef(objref.IDOf(theIconRef))
 }
 
-// GetIconRef calls [raw.GetIconRef] (C function GetIconRef).
-func GetIconRef(vRefNum int16, creator uint, iconType uint, theIconRef unsafe.Pointer) int16 {
-	return raw.GetIconRef(vRefNum, creator, iconType, theIconRef)
+var _fnLSCopyAllHandlersForURLScheme func(objc.ID) objc.ID
+
+// LSCopyAllHandlersForURLScheme calls the LaunchServices framework function LSCopyAllHandlersForURLScheme.
+func LSCopyAllHandlersForURLScheme(inURLScheme obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSCopyAllHandlersForURLScheme == nil {
+		ebipurego.RegisterLibFunc(&_fnLSCopyAllHandlersForURLScheme, _lib, "LSCopyAllHandlersForURLScheme")
+	}
+	_ret := _fnLSCopyAllHandlersForURLScheme(objref.IDOf(inURLScheme))
+	return obj.Wrap(_ret)
 }
 
-// GetIconRefFromComponent calls [raw.GetIconRefFromComponent] (C function GetIconRefFromComponent).
-func GetIconRefFromComponent(inComponent *carboncore.ComponentRecord, outIconRef unsafe.Pointer) int {
-	return raw.GetIconRefFromComponent(inComponent, outIconRef)
+var _fnLSCopyAllRoleHandlersForContentType func(objc.ID, LSRolesMask) objc.ID
+
+// LSCopyAllRoleHandlersForContentType calls the LaunchServices framework function LSCopyAllRoleHandlersForContentType.
+func LSCopyAllRoleHandlersForContentType(inContentType obj.Object, inRole LSRolesMask) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSCopyAllRoleHandlersForContentType == nil {
+		ebipurego.RegisterLibFunc(&_fnLSCopyAllRoleHandlersForContentType, _lib, "LSCopyAllRoleHandlersForContentType")
+	}
+	_ret := _fnLSCopyAllRoleHandlersForContentType(objref.IDOf(inContentType), inRole)
+	return obj.Wrap(_ret)
 }
 
-// GetIconRefFromFileInfo calls [raw.GetIconRefFromFileInfo] (C function GetIconRefFromFileInfo).
-func GetIconRefFromFileInfo(inRef *carboncore.FSRef, inFileNameLength uint, inFileName *uint16, inWhichInfo uint, inCatalogInfo *carboncore.FSCatalogInfo, inUsageFlags uint, outIconRef unsafe.Pointer, outLabel *int16) int {
-	return raw.GetIconRefFromFileInfo(inRef, inFileNameLength, inFileName, inWhichInfo, inCatalogInfo, inUsageFlags, outIconRef, outLabel)
+var _fnLSCopyApplicationURLsForURL func(objc.ID, LSRolesMask) objc.ID
+
+// LSCopyApplicationURLsForURL calls the LaunchServices framework function LSCopyApplicationURLsForURL.
+func LSCopyApplicationURLsForURL(inURL obj.Object, inRoleMask LSRolesMask) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSCopyApplicationURLsForURL == nil {
+		ebipurego.RegisterLibFunc(&_fnLSCopyApplicationURLsForURL, _lib, "LSCopyApplicationURLsForURL")
+	}
+	_ret := _fnLSCopyApplicationURLsForURL(objref.IDOf(inURL), inRoleMask)
+	return obj.Wrap(_ret)
 }
 
-// GetIconRefFromFolder calls [raw.GetIconRefFromFolder] (C function GetIconRefFromFolder).
-func GetIconRefFromFolder(vRefNum int16, parentFolderID int, folderID int, attributes int8, accessPrivileges int8, theIconRef unsafe.Pointer) int16 {
-	return raw.GetIconRefFromFolder(vRefNum, parentFolderID, folderID, attributes, accessPrivileges, theIconRef)
+var _fnLSCopyDefaultHandlerForURLScheme func(objc.ID) objc.ID
+
+// LSCopyDefaultHandlerForURLScheme calls the LaunchServices framework function LSCopyDefaultHandlerForURLScheme.
+func LSCopyDefaultHandlerForURLScheme(inURLScheme obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSCopyDefaultHandlerForURLScheme == nil {
+		ebipurego.RegisterLibFunc(&_fnLSCopyDefaultHandlerForURLScheme, _lib, "LSCopyDefaultHandlerForURLScheme")
+	}
+	_ret := _fnLSCopyDefaultHandlerForURLScheme(objref.IDOf(inURLScheme))
+	return obj.Wrap(_ret)
 }
 
-// GetIconRefFromIconFamilyPtr calls [raw.GetIconRefFromIconFamilyPtr] (C function GetIconRefFromIconFamilyPtr).
-func GetIconRefFromIconFamilyPtr(inIconFamilyPtr *osservices.IconFamilyResource, inSize int, outIconRef unsafe.Pointer) int {
-	return raw.GetIconRefFromIconFamilyPtr(inIconFamilyPtr, inSize, outIconRef)
+var _fnLSCopyDefaultRoleHandlerForContentType func(objc.ID, LSRolesMask) objc.ID
+
+// LSCopyDefaultRoleHandlerForContentType calls the LaunchServices framework function LSCopyDefaultRoleHandlerForContentType.
+func LSCopyDefaultRoleHandlerForContentType(inContentType obj.Object, inRole LSRolesMask) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSCopyDefaultRoleHandlerForContentType == nil {
+		ebipurego.RegisterLibFunc(&_fnLSCopyDefaultRoleHandlerForContentType, _lib, "LSCopyDefaultRoleHandlerForContentType")
+	}
+	_ret := _fnLSCopyDefaultRoleHandlerForContentType(objref.IDOf(inContentType), inRole)
+	return obj.Wrap(_ret)
 }
 
-// GetIconRefFromTypeInfo calls [raw.GetIconRefFromTypeInfo] (C function GetIconRefFromTypeInfo).
-func GetIconRefFromTypeInfo(inCreator uint, inType uint, inExtension unsafe.Pointer, inMIMEType unsafe.Pointer, inUsageFlags uint, outIconRef unsafe.Pointer) int16 {
-	return raw.GetIconRefFromTypeInfo(inCreator, inType, inExtension, inMIMEType, inUsageFlags, outIconRef)
+var _fnLSGetHandlerOptionsForContentType func(objc.ID) LSHandlerOptions
+
+// LSGetHandlerOptionsForContentType calls the LaunchServices framework function LSGetHandlerOptionsForContentType.
+func LSGetHandlerOptionsForContentType(inContentType obj.Object) LSHandlerOptions {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLSGetHandlerOptionsForContentType == nil {
+		ebipurego.RegisterLibFunc(&_fnLSGetHandlerOptionsForContentType, _lib, "LSGetHandlerOptionsForContentType")
+	}
+	return _fnLSGetHandlerOptionsForContentType(objref.IDOf(inContentType))
 }
 
-// GetIconRefOwners calls [raw.GetIconRefOwners] (C function GetIconRefOwners).
-func GetIconRefOwners(theIconRef unsafe.Pointer, owners *uint16) int16 {
-	return raw.GetIconRefOwners(theIconRef, owners)
+var _fnOverrideIconRef func(objc.ID, objc.ID) int16
+
+// OverrideIconRef calls the LaunchServices framework function OverrideIconRef.
+func OverrideIconRef(oldIconRef obj.Object, newIconRef obj.Object) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOverrideIconRef == nil {
+		ebipurego.RegisterLibFunc(&_fnOverrideIconRef, _lib, "OverrideIconRef")
+	}
+	return _fnOverrideIconRef(objref.IDOf(oldIconRef), objref.IDOf(newIconRef))
 }
 
-// IsDataAvailableInIconRef calls [raw.IsDataAvailableInIconRef] (C function IsDataAvailableInIconRef).
-func IsDataAvailableInIconRef(inIconKind uint, inIconRef unsafe.Pointer) uint8 {
-	return raw.IsDataAvailableInIconRef(inIconKind, inIconRef)
+var _fnReleaseIconRef func(objc.ID) int16
+
+// ReleaseIconRef calls the LaunchServices framework function ReleaseIconRef.
+func ReleaseIconRef(theIconRef obj.Object) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnReleaseIconRef == nil {
+		ebipurego.RegisterLibFunc(&_fnReleaseIconRef, _lib, "ReleaseIconRef")
+	}
+	return _fnReleaseIconRef(objref.IDOf(theIconRef))
 }
 
-// IsIconRefComposite calls [raw.IsIconRefComposite] (C function IsIconRefComposite).
-func IsIconRefComposite(compositeIconRef unsafe.Pointer, backgroundIconRef unsafe.Pointer, foregroundIconRef unsafe.Pointer) int16 {
-	return raw.IsIconRefComposite(compositeIconRef, backgroundIconRef, foregroundIconRef)
+var _fnRemoveIconRefOverride func(objc.ID) int16
+
+// RemoveIconRefOverride calls the LaunchServices framework function RemoveIconRefOverride.
+func RemoveIconRefOverride(theIconRef obj.Object) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRemoveIconRefOverride == nil {
+		ebipurego.RegisterLibFunc(&_fnRemoveIconRefOverride, _lib, "RemoveIconRefOverride")
+	}
+	return _fnRemoveIconRefOverride(objref.IDOf(theIconRef))
 }
 
-// IsValidIconRef calls [raw.IsValidIconRef] (C function IsValidIconRef).
-func IsValidIconRef(theIconRef unsafe.Pointer) uint8 {
-	return raw.IsValidIconRef(theIconRef)
-}
+var _fnSetCustomIconsEnabled func(int16, uint8) int16
 
-// LSCopyAllHandlersForURLScheme calls [raw.LSCopyAllHandlersForURLScheme] (C function LSCopyAllHandlersForURLScheme).
-func LSCopyAllHandlersForURLScheme(inURLScheme unsafe.Pointer) unsafe.Pointer {
-	return raw.LSCopyAllHandlersForURLScheme(inURLScheme)
-}
-
-// LSCopyAllRoleHandlersForContentType calls [raw.LSCopyAllRoleHandlersForContentType] (C function LSCopyAllRoleHandlersForContentType).
-func LSCopyAllRoleHandlersForContentType(inContentType unsafe.Pointer, inRole LSRolesMask) unsafe.Pointer {
-	return raw.LSCopyAllRoleHandlersForContentType(inContentType, raw.LSRolesMask(inRole))
-}
-
-// LSCopyApplicationURLsForBundleIdentifier calls [raw.LSCopyApplicationURLsForBundleIdentifier] (C function LSCopyApplicationURLsForBundleIdentifier).
-func LSCopyApplicationURLsForBundleIdentifier(inBundleIdentifier unsafe.Pointer, outError unsafe.Pointer) unsafe.Pointer {
-	return raw.LSCopyApplicationURLsForBundleIdentifier(inBundleIdentifier, outError)
-}
-
-// LSCopyApplicationURLsForURL calls [raw.LSCopyApplicationURLsForURL] (C function LSCopyApplicationURLsForURL).
-func LSCopyApplicationURLsForURL(inURL unsafe.Pointer, inRoleMask LSRolesMask) unsafe.Pointer {
-	return raw.LSCopyApplicationURLsForURL(inURL, raw.LSRolesMask(inRoleMask))
-}
-
-// LSCopyDefaultApplicationURLForContentType calls [raw.LSCopyDefaultApplicationURLForContentType] (C function LSCopyDefaultApplicationURLForContentType).
-func LSCopyDefaultApplicationURLForContentType(inContentType unsafe.Pointer, inRoleMask LSRolesMask, outError unsafe.Pointer) unsafe.Pointer {
-	return raw.LSCopyDefaultApplicationURLForContentType(inContentType, raw.LSRolesMask(inRoleMask), outError)
-}
-
-// LSCopyDefaultApplicationURLForURL calls [raw.LSCopyDefaultApplicationURLForURL] (C function LSCopyDefaultApplicationURLForURL).
-func LSCopyDefaultApplicationURLForURL(inURL unsafe.Pointer, inRoleMask LSRolesMask, outError unsafe.Pointer) unsafe.Pointer {
-	return raw.LSCopyDefaultApplicationURLForURL(inURL, raw.LSRolesMask(inRoleMask), outError)
-}
-
-// LSCopyDefaultHandlerForURLScheme calls [raw.LSCopyDefaultHandlerForURLScheme] (C function LSCopyDefaultHandlerForURLScheme).
-func LSCopyDefaultHandlerForURLScheme(inURLScheme unsafe.Pointer) unsafe.Pointer {
-	return raw.LSCopyDefaultHandlerForURLScheme(inURLScheme)
-}
-
-// LSCopyDefaultRoleHandlerForContentType calls [raw.LSCopyDefaultRoleHandlerForContentType] (C function LSCopyDefaultRoleHandlerForContentType).
-func LSCopyDefaultRoleHandlerForContentType(inContentType unsafe.Pointer, inRole LSRolesMask) unsafe.Pointer {
-	return raw.LSCopyDefaultRoleHandlerForContentType(inContentType, raw.LSRolesMask(inRole))
-}
-
-// LSGetHandlerOptionsForContentType calls [raw.LSGetHandlerOptionsForContentType] (C function LSGetHandlerOptionsForContentType).
-func LSGetHandlerOptionsForContentType(inContentType unsafe.Pointer) LSHandlerOptions {
-	return LSHandlerOptions(raw.LSGetHandlerOptionsForContentType(inContentType))
-}
-
-// LSOpenApplication calls [raw.LSOpenApplication] (C function LSOpenApplication).
-func LSOpenApplication(appParams *raw.LSApplicationParameters, outPSN unsafe.Pointer) int {
-	return raw.LSOpenApplication(appParams, outPSN)
-}
-
-// LSOpenItemsWithRole calls [raw.LSOpenItemsWithRole] (C function LSOpenItemsWithRole).
-func LSOpenItemsWithRole(inItems *carboncore.FSRef, inItemCount int, inRole LSRolesMask, inAEParam *ae.AEKeyDesc, inAppParams *raw.LSApplicationParameters, outPSNs unsafe.Pointer, inMaxPSNCount int) int {
-	return raw.LSOpenItemsWithRole(inItems, inItemCount, raw.LSRolesMask(inRole), inAEParam, inAppParams, outPSNs, inMaxPSNCount)
-}
-
-// LSOpenURLsWithRole calls [raw.LSOpenURLsWithRole] (C function LSOpenURLsWithRole).
-func LSOpenURLsWithRole(inURLs unsafe.Pointer, inRole LSRolesMask, inAEParam *ae.AEKeyDesc, inAppParams *raw.LSApplicationParameters, outPSNs unsafe.Pointer, inMaxPSNCount int) int {
-	return raw.LSOpenURLsWithRole(inURLs, raw.LSRolesMask(inRole), inAEParam, inAppParams, outPSNs, inMaxPSNCount)
-}
-
-// OverrideIconRef calls [raw.OverrideIconRef] (C function OverrideIconRef).
-func OverrideIconRef(oldIconRef unsafe.Pointer, newIconRef unsafe.Pointer) int16 {
-	return raw.OverrideIconRef(oldIconRef, newIconRef)
-}
-
-// RegisterIconRefFromFSRef calls [raw.RegisterIconRefFromFSRef] (C function RegisterIconRefFromFSRef).
-func RegisterIconRefFromFSRef(creator uint, iconType uint, iconFile *carboncore.FSRef, theIconRef unsafe.Pointer) int {
-	return raw.RegisterIconRefFromFSRef(creator, iconType, iconFile, theIconRef)
-}
-
-// RegisterIconRefFromIconFamily calls [raw.RegisterIconRefFromIconFamily] (C function RegisterIconRefFromIconFamily).
-func RegisterIconRefFromIconFamily(creator uint, iconType uint, iconFamily **osservices.IconFamilyResource, theIconRef unsafe.Pointer) int16 {
-	return raw.RegisterIconRefFromIconFamily(creator, iconType, iconFamily, theIconRef)
-}
-
-// ReleaseIconRef calls [raw.ReleaseIconRef] (C function ReleaseIconRef).
-func ReleaseIconRef(theIconRef unsafe.Pointer) int16 {
-	return raw.ReleaseIconRef(theIconRef)
-}
-
-// RemoveIconRefOverride calls [raw.RemoveIconRefOverride] (C function RemoveIconRefOverride).
-func RemoveIconRefOverride(theIconRef unsafe.Pointer) int16 {
-	return raw.RemoveIconRefOverride(theIconRef)
-}
-
-// SetCustomIconsEnabled calls [raw.SetCustomIconsEnabled] (C function SetCustomIconsEnabled).
+// SetCustomIconsEnabled calls the LaunchServices framework function SetCustomIconsEnabled.
 func SetCustomIconsEnabled(vRefNum int16, enableCustomIcons uint8) int16 {
-	return raw.SetCustomIconsEnabled(vRefNum, enableCustomIcons)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetCustomIconsEnabled == nil {
+		ebipurego.RegisterLibFunc(&_fnSetCustomIconsEnabled, _lib, "SetCustomIconsEnabled")
+	}
+	return _fnSetCustomIconsEnabled(vRefNum, enableCustomIcons)
 }
 
-// UTCreateStringForOSType calls [raw.UTCreateStringForOSType] (C function UTCreateStringForOSType).
-func UTCreateStringForOSType(inOSType uint) unsafe.Pointer {
-	return raw.UTCreateStringForOSType(inOSType)
+var _fnUTCreateStringForOSType func(int) objc.ID
+
+// UTCreateStringForOSType calls the LaunchServices framework function UTCreateStringForOSType.
+func UTCreateStringForOSType(inOSType int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUTCreateStringForOSType == nil {
+		ebipurego.RegisterLibFunc(&_fnUTCreateStringForOSType, _lib, "UTCreateStringForOSType")
+	}
+	_ret := _fnUTCreateStringForOSType(inOSType)
+	return obj.Wrap(_ret)
 }
 
-// UTGetOSTypeFromString calls [raw.UTGetOSTypeFromString] (C function UTGetOSTypeFromString).
-func UTGetOSTypeFromString(inString unsafe.Pointer) uint {
-	return raw.UTGetOSTypeFromString(inString)
+var _fnUTGetOSTypeFromString func(objc.ID) int
+
+// UTGetOSTypeFromString calls the LaunchServices framework function UTGetOSTypeFromString.
+func UTGetOSTypeFromString(inString obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUTGetOSTypeFromString == nil {
+		ebipurego.RegisterLibFunc(&_fnUTGetOSTypeFromString, _lib, "UTGetOSTypeFromString")
+	}
+	return _fnUTGetOSTypeFromString(objref.IDOf(inString))
 }
 
-// UTTypeConformsTo calls [raw.UTTypeConformsTo] (C function UTTypeConformsTo).
-func UTTypeConformsTo(inUTI unsafe.Pointer, inConformsToUTI unsafe.Pointer) uint8 {
-	return raw.UTTypeConformsTo(inUTI, inConformsToUTI)
+var _fnUTTypeConformsTo func(objc.ID, objc.ID) uint8
+
+// UTTypeConformsTo calls the LaunchServices framework function UTTypeConformsTo.
+func UTTypeConformsTo(inUTI obj.Object, inConformsToUTI obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUTTypeConformsTo == nil {
+		ebipurego.RegisterLibFunc(&_fnUTTypeConformsTo, _lib, "UTTypeConformsTo")
+	}
+	return _fnUTTypeConformsTo(objref.IDOf(inUTI), objref.IDOf(inConformsToUTI))
 }
 
-// UTTypeCopyAllTagsWithClass calls [raw.UTTypeCopyAllTagsWithClass] (C function UTTypeCopyAllTagsWithClass).
-func UTTypeCopyAllTagsWithClass(inUTI unsafe.Pointer, inTagClass unsafe.Pointer) unsafe.Pointer {
-	return raw.UTTypeCopyAllTagsWithClass(inUTI, inTagClass)
+var _fnUTTypeCopyAllTagsWithClass func(objc.ID, objc.ID) objc.ID
+
+// UTTypeCopyAllTagsWithClass calls the LaunchServices framework function UTTypeCopyAllTagsWithClass.
+func UTTypeCopyAllTagsWithClass(inUTI obj.Object, inTagClass obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUTTypeCopyAllTagsWithClass == nil {
+		ebipurego.RegisterLibFunc(&_fnUTTypeCopyAllTagsWithClass, _lib, "UTTypeCopyAllTagsWithClass")
+	}
+	_ret := _fnUTTypeCopyAllTagsWithClass(objref.IDOf(inUTI), objref.IDOf(inTagClass))
+	return obj.Wrap(_ret)
 }
 
-// UTTypeCopyDeclaration calls [raw.UTTypeCopyDeclaration] (C function UTTypeCopyDeclaration).
-func UTTypeCopyDeclaration(inUTI unsafe.Pointer) unsafe.Pointer {
-	return raw.UTTypeCopyDeclaration(inUTI)
+var _fnUTTypeCopyDeclaration func(objc.ID) objc.ID
+
+// UTTypeCopyDeclaration calls the LaunchServices framework function UTTypeCopyDeclaration.
+func UTTypeCopyDeclaration(inUTI obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUTTypeCopyDeclaration == nil {
+		ebipurego.RegisterLibFunc(&_fnUTTypeCopyDeclaration, _lib, "UTTypeCopyDeclaration")
+	}
+	_ret := _fnUTTypeCopyDeclaration(objref.IDOf(inUTI))
+	return obj.Wrap(_ret)
 }
 
-// UTTypeCopyDeclaringBundleURL calls [raw.UTTypeCopyDeclaringBundleURL] (C function UTTypeCopyDeclaringBundleURL).
-func UTTypeCopyDeclaringBundleURL(inUTI unsafe.Pointer) unsafe.Pointer {
-	return raw.UTTypeCopyDeclaringBundleURL(inUTI)
+var _fnUTTypeCopyDeclaringBundleURL func(objc.ID) objc.ID
+
+// UTTypeCopyDeclaringBundleURL calls the LaunchServices framework function UTTypeCopyDeclaringBundleURL.
+func UTTypeCopyDeclaringBundleURL(inUTI obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUTTypeCopyDeclaringBundleURL == nil {
+		ebipurego.RegisterLibFunc(&_fnUTTypeCopyDeclaringBundleURL, _lib, "UTTypeCopyDeclaringBundleURL")
+	}
+	_ret := _fnUTTypeCopyDeclaringBundleURL(objref.IDOf(inUTI))
+	return obj.Wrap(_ret)
 }
 
-// UTTypeCopyDescription calls [raw.UTTypeCopyDescription] (C function UTTypeCopyDescription).
-func UTTypeCopyDescription(inUTI unsafe.Pointer) unsafe.Pointer {
-	return raw.UTTypeCopyDescription(inUTI)
+var _fnUTTypeCopyDescription func(objc.ID) objc.ID
+
+// UTTypeCopyDescription calls the LaunchServices framework function UTTypeCopyDescription.
+func UTTypeCopyDescription(inUTI obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUTTypeCopyDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnUTTypeCopyDescription, _lib, "UTTypeCopyDescription")
+	}
+	_ret := _fnUTTypeCopyDescription(objref.IDOf(inUTI))
+	return obj.Wrap(_ret)
 }
 
-// UTTypeCopyPreferredTagWithClass calls [raw.UTTypeCopyPreferredTagWithClass] (C function UTTypeCopyPreferredTagWithClass).
-func UTTypeCopyPreferredTagWithClass(inUTI unsafe.Pointer, inTagClass unsafe.Pointer) unsafe.Pointer {
-	return raw.UTTypeCopyPreferredTagWithClass(inUTI, inTagClass)
+var _fnUTTypeCopyPreferredTagWithClass func(objc.ID, objc.ID) objc.ID
+
+// UTTypeCopyPreferredTagWithClass calls the LaunchServices framework function UTTypeCopyPreferredTagWithClass.
+func UTTypeCopyPreferredTagWithClass(inUTI obj.Object, inTagClass obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUTTypeCopyPreferredTagWithClass == nil {
+		ebipurego.RegisterLibFunc(&_fnUTTypeCopyPreferredTagWithClass, _lib, "UTTypeCopyPreferredTagWithClass")
+	}
+	_ret := _fnUTTypeCopyPreferredTagWithClass(objref.IDOf(inUTI), objref.IDOf(inTagClass))
+	return obj.Wrap(_ret)
 }
 
-// UTTypeCreateAllIdentifiersForTag calls [raw.UTTypeCreateAllIdentifiersForTag] (C function UTTypeCreateAllIdentifiersForTag).
-func UTTypeCreateAllIdentifiersForTag(inTagClass unsafe.Pointer, inTag unsafe.Pointer, inConformingToUTI unsafe.Pointer) unsafe.Pointer {
-	return raw.UTTypeCreateAllIdentifiersForTag(inTagClass, inTag, inConformingToUTI)
+var _fnUTTypeCreateAllIdentifiersForTag func(objc.ID, objc.ID, objc.ID) objc.ID
+
+// UTTypeCreateAllIdentifiersForTag calls the LaunchServices framework function UTTypeCreateAllIdentifiersForTag.
+func UTTypeCreateAllIdentifiersForTag(inTagClass obj.Object, inTag obj.Object, inConformingToUTI obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUTTypeCreateAllIdentifiersForTag == nil {
+		ebipurego.RegisterLibFunc(&_fnUTTypeCreateAllIdentifiersForTag, _lib, "UTTypeCreateAllIdentifiersForTag")
+	}
+	_ret := _fnUTTypeCreateAllIdentifiersForTag(objref.IDOf(inTagClass), objref.IDOf(inTag), objref.IDOf(inConformingToUTI))
+	return obj.Wrap(_ret)
 }
 
-// UTTypeCreatePreferredIdentifierForTag calls [raw.UTTypeCreatePreferredIdentifierForTag] (C function UTTypeCreatePreferredIdentifierForTag).
-func UTTypeCreatePreferredIdentifierForTag(inTagClass unsafe.Pointer, inTag unsafe.Pointer, inConformingToUTI unsafe.Pointer) unsafe.Pointer {
-	return raw.UTTypeCreatePreferredIdentifierForTag(inTagClass, inTag, inConformingToUTI)
+var _fnUTTypeCreatePreferredIdentifierForTag func(objc.ID, objc.ID, objc.ID) objc.ID
+
+// UTTypeCreatePreferredIdentifierForTag calls the LaunchServices framework function UTTypeCreatePreferredIdentifierForTag.
+func UTTypeCreatePreferredIdentifierForTag(inTagClass obj.Object, inTag obj.Object, inConformingToUTI obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUTTypeCreatePreferredIdentifierForTag == nil {
+		ebipurego.RegisterLibFunc(&_fnUTTypeCreatePreferredIdentifierForTag, _lib, "UTTypeCreatePreferredIdentifierForTag")
+	}
+	_ret := _fnUTTypeCreatePreferredIdentifierForTag(objref.IDOf(inTagClass), objref.IDOf(inTag), objref.IDOf(inConformingToUTI))
+	return obj.Wrap(_ret)
 }
 
-// UTTypeEqual calls [raw.UTTypeEqual] (C function UTTypeEqual).
-func UTTypeEqual(inUTI1 unsafe.Pointer, inUTI2 unsafe.Pointer) uint8 {
-	return raw.UTTypeEqual(inUTI1, inUTI2)
+var _fnUTTypeEqual func(objc.ID, objc.ID) uint8
+
+// UTTypeEqual calls the LaunchServices framework function UTTypeEqual.
+func UTTypeEqual(inUTI1 obj.Object, inUTI2 obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUTTypeEqual == nil {
+		ebipurego.RegisterLibFunc(&_fnUTTypeEqual, _lib, "UTTypeEqual")
+	}
+	return _fnUTTypeEqual(objref.IDOf(inUTI1), objref.IDOf(inUTI2))
 }
 
-// UTTypeIsDeclared calls [raw.UTTypeIsDeclared] (C function UTTypeIsDeclared).
-func UTTypeIsDeclared(inUTI unsafe.Pointer) uint8 {
-	return raw.UTTypeIsDeclared(inUTI)
+var _fnUTTypeIsDeclared func(objc.ID) uint8
+
+// UTTypeIsDeclared calls the LaunchServices framework function UTTypeIsDeclared.
+func UTTypeIsDeclared(inUTI obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUTTypeIsDeclared == nil {
+		ebipurego.RegisterLibFunc(&_fnUTTypeIsDeclared, _lib, "UTTypeIsDeclared")
+	}
+	return _fnUTTypeIsDeclared(objref.IDOf(inUTI))
 }
 
-// UTTypeIsDynamic calls [raw.UTTypeIsDynamic] (C function UTTypeIsDynamic).
-func UTTypeIsDynamic(inUTI unsafe.Pointer) uint8 {
-	return raw.UTTypeIsDynamic(inUTI)
+var _fnUTTypeIsDynamic func(objc.ID) uint8
+
+// UTTypeIsDynamic calls the LaunchServices framework function UTTypeIsDynamic.
+func UTTypeIsDynamic(inUTI obj.Object) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUTTypeIsDynamic == nil {
+		ebipurego.RegisterLibFunc(&_fnUTTypeIsDynamic, _lib, "UTTypeIsDynamic")
+	}
+	return _fnUTTypeIsDynamic(objref.IDOf(inUTI))
 }
 
-// UnregisterIconRef calls [raw.UnregisterIconRef] (C function UnregisterIconRef).
-func UnregisterIconRef(creator uint, iconType uint) int16 {
-	return raw.UnregisterIconRef(creator, iconType)
+var _fnUnregisterIconRef func(int, int) int16
+
+// UnregisterIconRef calls the LaunchServices framework function UnregisterIconRef.
+func UnregisterIconRef(creator int, iconType int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUnregisterIconRef == nil {
+		ebipurego.RegisterLibFunc(&_fnUnregisterIconRef, _lib, "UnregisterIconRef")
+	}
+	return _fnUnregisterIconRef(creator, iconType)
 }
 
-// UpdateIconRef calls [raw.UpdateIconRef] (C function UpdateIconRef).
-func UpdateIconRef(theIconRef unsafe.Pointer) int16 {
-	return raw.UpdateIconRef(theIconRef)
+var _fnUpdateIconRef func(objc.ID) int16
+
+// UpdateIconRef calls the LaunchServices framework function UpdateIconRef.
+func UpdateIconRef(theIconRef obj.Object) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUpdateIconRef == nil {
+		ebipurego.RegisterLibFunc(&_fnUpdateIconRef, _lib, "UpdateIconRef")
+	}
+	return _fnUpdateIconRef(objref.IDOf(theIconRef))
 }

@@ -5,75 +5,97 @@
 package coremidi
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A mapping of MIDI messages to specific sounds and synthesis behaviors, such as General MIDI, a drawbar organ, and so on.
 //
-// CIProfile wraps [raw.MIDICIProfile] with a fluent Go API.
+// CIProfile is an idiomatic wrapper over the Objective-C class MIDICIProfile.
 type CIProfile struct {
-	inner *raw.MIDICIProfile
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MIDICIProfile].
-func (x *CIProfile) Unwrap() *raw.MIDICIProfile { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CIProfile) ID() objc.ID { return x.inner.Ptr() }
-
-// CIProfileFromID adopts an existing object pointer as a CIProfile (nil for 0).
+// CIProfileFromID adopts an existing Objective-C object as a CIProfile
+// (nil for 0), retaining it and registering a release finalizer.
 func CIProfileFromID(id objc.ID) *CIProfile {
 	if id == 0 {
 		return nil
 	}
-	return &CIProfile{inner: raw.MIDICIProfileFromID(id)}
+	x := &CIProfile{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// cIProfileAdopt wraps an Objective-C object that this code just created as a
+// CIProfile (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cIProfileAdopt(id objc.ID) *CIProfile {
+	if id == 0 {
+		return nil
+	}
+	x := &CIProfile{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CIProfile) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CIProfile) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CIProfile) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a MIDI profile for the specified data.
 //
-// NewCIProfileWithData creates a new [CIProfile].
-func NewCIProfileWithData(data *foundation.NSData) *CIProfile {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICIProfile")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), data.Ptr())
-	return &CIProfile{inner: raw.MIDICIProfileFromID(_id)}
+// NewCIProfileWithData creates a new CIProfile.
+func NewCIProfileWithData(data obj.Object) *CIProfile {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MIDICIProfile")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
+	return cIProfileAdopt(_id)
 }
 
 // Creates a named MIDI profile for the specified data.
 //
-// NewCIProfileWithDataName creates a new [CIProfile].
-func NewCIProfileWithDataName(data *foundation.NSData, inName string) *CIProfile {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICIProfile")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:name:"), data.Ptr(), foundation.NSStringStringWithUTF8String(inName).Ptr())
-	return &CIProfile{inner: raw.MIDICIProfileFromID(_id)}
+// NewCIProfileWithDataName creates a new CIProfile.
+func NewCIProfileWithDataName(data obj.Object, inName string) *CIProfile {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MIDICIProfile")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:name:"), objref.IDOf(data), purego.NSString(inName))
+	return cIProfileAdopt(_id)
 }
 
 // An NSString describing the profile.
-//
-// Name calls the underlying Name.
 func (x *CIProfile) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The unique 5-byte profile identifier representing the profile.
-//
-// ProfileID calls the underlying ProfileID.
-func (x *CIProfile) ProfileID() *foundation.NSData {
-	return x.inner.ProfileID()
+func (x *CIProfile) ProfileID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("profileID"))
+	return obj.Wrap(_r)
 }
 
 // CIProfileable is the interface implemented by [CIProfile], for mocking and DI.
 type CIProfileable interface {
-	Unwrap() *raw.MIDICIProfile
+	obj.Object
 	Name() string
-	ProfileID() *foundation.NSData
+	ProfileID() obj.Object
 }
 
 var _ CIProfileable = (*CIProfile)(nil)

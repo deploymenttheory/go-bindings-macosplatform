@@ -5,65 +5,80 @@
 package symbols
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/symbols"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A type that scales the layers in a symbol-based image separately or as a whole.
 //
-// SymbolScaleEffect wraps [raw.NSSymbolScaleEffect] with a fluent Go API.
+// SymbolScaleEffect is an idiomatic wrapper over the Objective-C class NSSymbolScaleEffect.
 type SymbolScaleEffect struct {
-	inner *raw.NSSymbolScaleEffect
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSymbolScaleEffect].
-func (x *SymbolScaleEffect) Unwrap() *raw.NSSymbolScaleEffect { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SymbolScaleEffect) ID() objc.ID { return x.inner.Ptr() }
-
-// SymbolScaleEffectFromID adopts an existing object pointer as a SymbolScaleEffect (nil for 0).
+// SymbolScaleEffectFromID adopts an existing Objective-C object as a SymbolScaleEffect
+// (nil for 0), retaining it and registering a release finalizer.
 func SymbolScaleEffectFromID(id objc.ID) *SymbolScaleEffect {
 	if id == 0 {
 		return nil
 	}
-	return &SymbolScaleEffect{inner: raw.NSSymbolScaleEffectFromID(id)}
+	x := &SymbolScaleEffect{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSymbolScaleEffect creates a new [SymbolScaleEffect].
+// symbolScaleEffectAdopt wraps an Objective-C object that this code just created as a
+// SymbolScaleEffect (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func symbolScaleEffectAdopt(id objc.ID) *SymbolScaleEffect {
+	if id == 0 {
+		return nil
+	}
+	x := &SymbolScaleEffect{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SymbolScaleEffect) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SymbolScaleEffect) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SymbolScaleEffect) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSymbolScaleEffect creates a new SymbolScaleEffect.
 func NewSymbolScaleEffect() *SymbolScaleEffect {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSymbolScaleEffect")), objc.RegisterName("new"))
-	return &SymbolScaleEffect{inner: raw.NSSymbolScaleEffectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolScaleEffect")), objc.RegisterName("new"))
+	return symbolScaleEffectAdopt(_id)
 }
 
 // An effect that scales each layer separately.
-//
-// EffectWithByLayer calls the underlying EffectWithByLayer.
 func (x *SymbolScaleEffect) EffectWithByLayer() *SymbolScaleEffect {
-	_r := x.inner.EffectWithByLayer()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolScaleEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+	return SymbolScaleEffectFromID(_r)
 }
 
 // An effect that scales all layers simultaneously.
-//
-// EffectWithWholeSymbol calls the underlying EffectWithWholeSymbol.
 func (x *SymbolScaleEffect) EffectWithWholeSymbol() *SymbolScaleEffect {
-	_r := x.inner.EffectWithWholeSymbol()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolScaleEffect{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+	return SymbolScaleEffectFromID(_r)
 }
-
-func (x *SymbolScaleEffect) asSymbolEffect() *raw.NSSymbolEffect { return &x.inner.NSSymbolEffect }
 
 // SymbolScaleEffectable is the interface implemented by [SymbolScaleEffect], for mocking and DI.
 type SymbolScaleEffectable interface {
-	Unwrap() *raw.NSSymbolScaleEffect
+	obj.Object
 	EffectWithByLayer() *SymbolScaleEffect
 	EffectWithWholeSymbol() *SymbolScaleEffect
 }

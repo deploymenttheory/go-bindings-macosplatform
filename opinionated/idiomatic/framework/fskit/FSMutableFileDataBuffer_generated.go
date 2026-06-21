@@ -5,58 +5,75 @@
 package fskit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A wrapper object for a data buffer.
 //
-// MutableFileDataBuffer wraps [raw.FSMutableFileDataBuffer] with a fluent Go API.
+// MutableFileDataBuffer is an idiomatic wrapper over the Objective-C class FSMutableFileDataBuffer.
 type MutableFileDataBuffer struct {
-	inner *raw.FSMutableFileDataBuffer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSMutableFileDataBuffer].
-func (x *MutableFileDataBuffer) Unwrap() *raw.FSMutableFileDataBuffer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableFileDataBuffer) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableFileDataBufferFromID adopts an existing object pointer as a MutableFileDataBuffer (nil for 0).
+// MutableFileDataBufferFromID adopts an existing Objective-C object as a MutableFileDataBuffer
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableFileDataBufferFromID(id objc.ID) *MutableFileDataBuffer {
 	if id == 0 {
 		return nil
 	}
-	return &MutableFileDataBuffer{inner: raw.FSMutableFileDataBufferFromID(id)}
+	x := &MutableFileDataBuffer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMutableFileDataBuffer creates a new [MutableFileDataBuffer].
+// mutableFileDataBufferAdopt wraps an Objective-C object that this code just created as a
+// MutableFileDataBuffer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableFileDataBufferAdopt(id objc.ID) *MutableFileDataBuffer {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableFileDataBuffer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MutableFileDataBuffer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MutableFileDataBuffer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MutableFileDataBuffer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMutableFileDataBuffer creates a new MutableFileDataBuffer.
 func NewMutableFileDataBuffer() *MutableFileDataBuffer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSMutableFileDataBuffer")), objc.RegisterName("new"))
-	return &MutableFileDataBuffer{inner: raw.FSMutableFileDataBufferFromID(_id)}
-}
-
-// The byte data.
-//
-// MutableBytes calls the underlying MutableBytes.
-func (x *MutableFileDataBuffer) MutableBytes() unsafe.Pointer {
-	return x.inner.MutableBytes()
+	_id := objc.Send[objc.ID](objc.ID(_class("FSMutableFileDataBuffer")), objc.RegisterName("new"))
+	return mutableFileDataBufferAdopt(_id)
 }
 
 // The data length of the buffer.
-//
-// Length calls the underlying Length.
-func (x *MutableFileDataBuffer) Length() uint {
-	return x.inner.Length()
+func (x *MutableFileDataBuffer) Length() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
 // MutableFileDataBufferable is the interface implemented by [MutableFileDataBuffer], for mocking and DI.
 type MutableFileDataBufferable interface {
-	Unwrap() *raw.FSMutableFileDataBuffer
-	MutableBytes() unsafe.Pointer
-	Length() uint
+	obj.Object
+	Length() int
 }
 
 var _ MutableFileDataBufferable = (*MutableFileDataBuffer)(nil)

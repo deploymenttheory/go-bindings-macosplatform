@@ -5,71 +5,50 @@
 package javaruntimesupport
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/javaruntimesupport"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AwtAppDelegate calls the underlying JRSAppKitAWTAwtAppDelegate.
-func AwtAppDelegate() appkit.NSApplicationDelegate {
-	return raw.JRSAppKitAWTAwtAppDelegate()
+func RegisterAWTAppWithOptions(options obj.Object) {
+	objc.Send[objc.ID](objc.ID(_class("JRSAppKitAWT")), objc.RegisterName("registerAWTAppWithOptions:"), objref.IDOf(options))
 }
 
-// RegisterAWTAppWithOptions calls the underlying JRSAppKitAWTRegisterAWTAppWithOptions.
-func RegisterAWTAppWithOptions(options *foundation.NSDictionary[objc.ID, objc.ID]) {
-	raw.JRSAppKitAWTRegisterAWTAppWithOptions(options)
-}
-
-// MarkAppIsDaemon calls the underlying JRSAppKitAWTMarkAppIsDaemon.
 func MarkAppIsDaemon() bool {
-	return raw.JRSAppKitAWTMarkAppIsDaemon()
+	_r := objc.Send[bool](objc.ID(_class("JRSAppKitAWT")), objc.RegisterName("markAppIsDaemon"))
+	return _r
 }
 
-// CurrentAllowableActions calls the underlying JRSDragCurrentAllowableActions.
-func CurrentAllowableActions() appkit.NSDragOperation {
-	return raw.JRSDragCurrentAllowableActions()
+func CurrentModifiers() int {
+	_r := objc.Send[int](objc.ID(_class("JRSDrag")), objc.RegisterName("currentModifiers"))
+	return _r
 }
 
-// CurrentModifiers calls the underlying JRSDragCurrentModifiers.
-func CurrentModifiers() uint {
-	return raw.JRSDragCurrentModifiers()
-}
-
-// Controller calls the underlying JRSInputMethodControllerController.
 func Controller() *InputMethodController {
-	_r := raw.JRSInputMethodControllerController()
-	if _r == nil {
-		return nil
-	}
-	return &InputMethodController{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("JRSInputMethodController")), objc.RegisterName("controller"))
+	return InputMethodControllerFromID(_r)
 }
 
-// StartRenderServer calls the underlying JRSRenderServerStartRenderServer.
-func StartRenderServer() uint {
-	return raw.JRSRenderServerStartRenderServer()
+func StartRenderServer() int {
+	_r := objc.Send[int](objc.ID(_class("JRSRenderServer")), objc.RegisterName("startRenderServer"))
+	return _r
 }
 
-// SendRenderServer calls the underlying JRSRenderServerSendRenderServer.
-func SendRenderServer(serverPort uint) string {
-	_r := raw.JRSRenderServerSendRenderServer(serverPort)
-	if _r == nil {
+func SendRenderServer(serverPort int) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("JRSRenderServer")), objc.RegisterName("sendRenderServer:"), serverPort)
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// RecieveRenderServer calls the underlying JRSRenderServerRecieveRenderServer.
-func RecieveRenderServer(serverName string) uint {
-	return raw.JRSRenderServerRecieveRenderServer(foundation.NSStringStringWithUTF8String(serverName))
+func RecieveRenderServer(serverName string) int {
+	_r := objc.Send[int](objc.ID(_class("JRSRenderServer")), objc.RegisterName("recieveRenderServer:"), purego.NSString(serverName))
+	return _r
 }
 
-// SymbolicatorForPid calls the underlying JRSSymbolicatorSymbolicatorForPid.
 func SymbolicatorForPid(pid int) *Symbolicator {
-	_r := raw.JRSSymbolicatorSymbolicatorForPid(pid)
-	if _r == nil {
-		return nil
-	}
-	return &Symbolicator{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("JRSSymbolicator")), objc.RegisterName("symbolicatorForPid:"), pid)
+	return SymbolicatorFromID(_r)
 }

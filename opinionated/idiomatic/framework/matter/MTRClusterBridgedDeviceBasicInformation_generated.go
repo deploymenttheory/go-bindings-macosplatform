@@ -5,208 +5,211 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterBridgedDeviceBasicInformation wraps [raw.MTRClusterBridgedDeviceBasicInformation] with a fluent Go API.
+// MTRClusterBridgedDeviceBasicInformation is an idiomatic wrapper over the Objective-C class MTRClusterBridgedDeviceBasicInformation.
 type MTRClusterBridgedDeviceBasicInformation struct {
-	inner *raw.MTRClusterBridgedDeviceBasicInformation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterBridgedDeviceBasicInformation].
-func (x *MTRClusterBridgedDeviceBasicInformation) Unwrap() *raw.MTRClusterBridgedDeviceBasicInformation {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterBridgedDeviceBasicInformation) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterBridgedDeviceBasicInformationFromID adopts an existing object pointer as a MTRClusterBridgedDeviceBasicInformation (nil for 0).
+// MTRClusterBridgedDeviceBasicInformationFromID adopts an existing Objective-C object as a MTRClusterBridgedDeviceBasicInformation
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterBridgedDeviceBasicInformationFromID(id objc.ID) *MTRClusterBridgedDeviceBasicInformation {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterBridgedDeviceBasicInformation{inner: raw.MTRClusterBridgedDeviceBasicInformationFromID(id)}
+	x := &MTRClusterBridgedDeviceBasicInformation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterBridgedDeviceBasicInformationAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterBridgedDeviceBasicInformation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterBridgedDeviceBasicInformationAdopt(id objc.ID) *MTRClusterBridgedDeviceBasicInformation {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterBridgedDeviceBasicInformation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterBridgedDeviceBasicInformation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterBridgedDeviceBasicInformation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterBridgedDeviceBasicInformation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue creates a new [MTRClusterBridgedDeviceBasicInformation].
-func NewMTRClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterBridgedDeviceBasicInformation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterBridgedDeviceBasicInformation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterBridgedDeviceBasicInformation{inner: raw.MTRClusterBridgedDeviceBasicInformationFromID(_id)}
+// NewMTRClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue creates a new MTRClusterBridgedDeviceBasicInformation.
+func NewMTRClusterBridgedDeviceBasicInformationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterBridgedDeviceBasicInformation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBridgedDeviceBasicInformation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterBridgedDeviceBasicInformationAdopt(_id)
 }
 
-// KeepActiveWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying KeepActiveWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterBridgedDeviceBasicInformation) KeepActiveWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRBridgedDeviceBasicInformationClusterKeepActiveParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.KeepActiveWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeVendorNameWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeVendorNameWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeVendorNameWithParams calls the underlying ReadAttributeVendorNameWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeVendorNameWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeVendorNameWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeVendorIDWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeVendorIDWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeVendorIDWithParams calls the underlying ReadAttributeVendorIDWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeVendorIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeVendorIDWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductNameWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductNameWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeProductNameWithParams calls the underlying ReadAttributeProductNameWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductNameWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeProductNameWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductIDWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductIDWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeProductIDWithParams calls the underlying ReadAttributeProductIDWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeProductIDWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeNodeLabelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNodeLabelWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeNodeLabelWithParams calls the underlying ReadAttributeNodeLabelWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeNodeLabelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeNodeLabelWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) WriteAttributeNodeLabelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNodeLabelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeNodeLabelWithValueExpectedValueInterval calls the underlying WriteAttributeNodeLabelWithValueExpectedValueInterval.
-func (x *MTRClusterBridgedDeviceBasicInformation) WriteAttributeNodeLabelWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeNodeLabelWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterBridgedDeviceBasicInformation) WriteAttributeNodeLabelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNodeLabelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeNodeLabelWithValueExpectedValueIntervalParams calls the underlying WriteAttributeNodeLabelWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) WriteAttributeNodeLabelWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeNodeLabelWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHardwareVersionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeHardwareVersionWithParams calls the underlying ReadAttributeHardwareVersionWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeHardwareVersionWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionStringWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHardwareVersionStringWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeHardwareVersionStringWithParams calls the underlying ReadAttributeHardwareVersionStringWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeHardwareVersionStringWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeHardwareVersionStringWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSoftwareVersionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeSoftwareVersionWithParams calls the underlying ReadAttributeSoftwareVersionWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSoftwareVersionWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionStringWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSoftwareVersionStringWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeSoftwareVersionStringWithParams calls the underlying ReadAttributeSoftwareVersionStringWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeSoftwareVersionStringWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSoftwareVersionStringWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeManufacturingDateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeManufacturingDateWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeManufacturingDateWithParams calls the underlying ReadAttributeManufacturingDateWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeManufacturingDateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeManufacturingDateWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributePartNumberWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePartNumberWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePartNumberWithParams calls the underlying ReadAttributePartNumberWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributePartNumberWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePartNumberWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductURLWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductURLWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeProductURLWithParams calls the underlying ReadAttributeProductURLWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductURLWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeProductURLWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductLabelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductLabelWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeProductLabelWithParams calls the underlying ReadAttributeProductLabelWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductLabelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeProductLabelWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeSerialNumberWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSerialNumberWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeSerialNumberWithParams calls the underlying ReadAttributeSerialNumberWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeSerialNumberWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSerialNumberWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeReachableWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeReachableWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeReachableWithParams calls the underlying ReadAttributeReachableWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeReachableWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeReachableWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeUniqueIDWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUniqueIDWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeUniqueIDWithParams calls the underlying ReadAttributeUniqueIDWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeUniqueIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeUniqueIDWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductAppearanceWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductAppearanceWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeProductAppearanceWithParams calls the underlying ReadAttributeProductAppearanceWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeProductAppearanceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeProductAppearanceWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterBridgedDeviceBasicInformation) asMTRClusterBridgedDeviceBasicInformation() *raw.MTRClusterBridgedDeviceBasicInformation {
-	return x.inner
-}
-
-func (x *MTRClusterBridgedDeviceBasicInformation) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterBridgedDeviceBasicInformation) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterBridgedDeviceBasicInformation) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterBridgedDeviceBasicInformationable is the interface implemented by [MTRClusterBridgedDeviceBasicInformation], for mocking and DI.
 type MTRClusterBridgedDeviceBasicInformationable interface {
-	Unwrap() *raw.MTRClusterBridgedDeviceBasicInformation
-	KeepActiveWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRBridgedDeviceBasicInformationClusterKeepActiveParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeVendorNameWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeVendorIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeProductNameWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeProductIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeNodeLabelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeNodeLabelWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeNodeLabelWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeHardwareVersionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeHardwareVersionStringWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeSoftwareVersionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeSoftwareVersionStringWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeManufacturingDateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePartNumberWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeProductURLWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeProductLabelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeSerialNumberWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeReachableWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeUniqueIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeProductAppearanceWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeVendorNameWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeVendorIDWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeProductNameWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeProductIDWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeNodeLabelWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeNodeLabelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeNodeLabelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeHardwareVersionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeHardwareVersionStringWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeSoftwareVersionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeSoftwareVersionStringWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeManufacturingDateWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePartNumberWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeProductURLWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeProductLabelWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeSerialNumberWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeReachableWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeUniqueIDWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeProductAppearanceWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterBridgedDeviceBasicInformationable = (*MTRClusterBridgedDeviceBasicInformation)(nil)

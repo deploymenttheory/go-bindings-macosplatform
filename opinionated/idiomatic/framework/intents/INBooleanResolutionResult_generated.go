@@ -5,45 +5,68 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A resolution result for a Boolean value associated with an intent.
 //
-// BooleanResolutionResult wraps [raw.INBooleanResolutionResult] with a fluent Go API.
+// BooleanResolutionResult is an idiomatic wrapper over the Objective-C class INBooleanResolutionResult.
 type BooleanResolutionResult struct {
-	inner *raw.INBooleanResolutionResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INBooleanResolutionResult].
-func (x *BooleanResolutionResult) Unwrap() *raw.INBooleanResolutionResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BooleanResolutionResult) ID() objc.ID { return x.inner.Ptr() }
-
-// BooleanResolutionResultFromID adopts an existing object pointer as a BooleanResolutionResult (nil for 0).
+// BooleanResolutionResultFromID adopts an existing Objective-C object as a BooleanResolutionResult
+// (nil for 0), retaining it and registering a release finalizer.
 func BooleanResolutionResultFromID(id objc.ID) *BooleanResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	return &BooleanResolutionResult{inner: raw.INBooleanResolutionResultFromID(id)}
+	x := &BooleanResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBooleanResolutionResult creates a new [BooleanResolutionResult].
+// booleanResolutionResultAdopt wraps an Objective-C object that this code just created as a
+// BooleanResolutionResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func booleanResolutionResultAdopt(id objc.ID) *BooleanResolutionResult {
+	if id == 0 {
+		return nil
+	}
+	x := &BooleanResolutionResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BooleanResolutionResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BooleanResolutionResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BooleanResolutionResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBooleanResolutionResult creates a new BooleanResolutionResult.
 func NewBooleanResolutionResult() *BooleanResolutionResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INBooleanResolutionResult")), objc.RegisterName("new"))
-	return &BooleanResolutionResult{inner: raw.INBooleanResolutionResultFromID(_id)}
-}
-
-func (x *BooleanResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
-	return &x.inner.INIntentResolutionResult
+	_id := objc.Send[objc.ID](objc.ID(_class("INBooleanResolutionResult")), objc.RegisterName("new"))
+	return booleanResolutionResultAdopt(_id)
 }
 
 // BooleanResolutionResultable is the interface implemented by [BooleanResolutionResult], for mocking and DI.
 type BooleanResolutionResultable interface {
-	Unwrap() *raw.INBooleanResolutionResult
+	obj.Object
 }
 
 var _ BooleanResolutionResultable = (*BooleanResolutionResult)(nil)

@@ -5,57 +5,68 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An element that represents either a pattern or a sequential gear shift.
 //
-// GearShifterElement wraps [raw.GCGearShifterElement] with a fluent Go API.
+// GearShifterElement is an idiomatic wrapper over the Objective-C class GCGearShifterElement.
 type GearShifterElement struct {
-	inner *raw.GCGearShifterElement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCGearShifterElement].
-func (x *GearShifterElement) Unwrap() *raw.GCGearShifterElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GearShifterElement) ID() objc.ID { return x.inner.Ptr() }
-
-// GearShifterElementFromID adopts an existing object pointer as a GearShifterElement (nil for 0).
+// GearShifterElementFromID adopts an existing Objective-C object as a GearShifterElement
+// (nil for 0), retaining it and registering a release finalizer.
 func GearShifterElementFromID(id objc.ID) *GearShifterElement {
 	if id == 0 {
 		return nil
 	}
-	return &GearShifterElement{inner: raw.GCGearShifterElementFromID(id)}
+	x := &GearShifterElement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGearShifterElement creates a new [GearShifterElement].
+// gearShifterElementAdopt wraps an Objective-C object that this code just created as a
+// GearShifterElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func gearShifterElementAdopt(id objc.ID) *GearShifterElement {
+	if id == 0 {
+		return nil
+	}
+	x := &GearShifterElement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GearShifterElement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GearShifterElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GearShifterElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGearShifterElement creates a new GearShifterElement.
 func NewGearShifterElement() *GearShifterElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCGearShifterElement")), objc.RegisterName("new"))
-	return &GearShifterElement{inner: raw.GCGearShifterElementFromID(_id)}
-}
-
-// Get the input reporting the position of the pattern gear shifter.  If this property is \c nil, the gear shifter is not a pattern gear shifter. In the returned input, a position of \c -1 corresponds to the "reverse gear". A position of \c 0 corresponds to the neutral gear.
-//
-// PatternInput calls the underlying PatternInput.
-func (x *GearShifterElement) PatternInput() raw.GCSwitchPositionInput {
-	return x.inner.PatternInput()
-}
-
-// Get the input reporting changes to the sequential gear shifter.  If this property is \c nil, the gear shifter is not a sequential gear shifter.
-//
-// SequentialInput calls the underlying SequentialInput.
-func (x *GearShifterElement) SequentialInput() raw.GCRelativeInput {
-	return x.inner.SequentialInput()
+	_id := objc.Send[objc.ID](objc.ID(_class("GCGearShifterElement")), objc.RegisterName("new"))
+	return gearShifterElementAdopt(_id)
 }
 
 // GearShifterElementable is the interface implemented by [GearShifterElement], for mocking and DI.
 type GearShifterElementable interface {
-	Unwrap() *raw.GCGearShifterElement
-	PatternInput() raw.GCSwitchPositionInput
-	SequentialInput() raw.GCRelativeInput
+	obj.Object
 }
 
 var _ GearShifterElementable = (*GearShifterElement)(nil)

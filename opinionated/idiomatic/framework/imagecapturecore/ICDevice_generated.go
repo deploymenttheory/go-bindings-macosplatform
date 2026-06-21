@@ -6,82 +6,92 @@ package imagecapturecore
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An abstract object that represents a device.
 //
-// Device wraps [raw.ICDevice] with a fluent Go API.
+// Device is an idiomatic wrapper over the Objective-C class ICDevice.
 type Device struct {
-	inner *raw.ICDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ICDevice].
-func (x *Device) Unwrap() *raw.ICDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Device) ID() objc.ID { return x.inner.Ptr() }
-
-// DeviceFromID adopts an existing object pointer as a Device (nil for 0).
+// DeviceFromID adopts an existing Objective-C object as a Device
+// (nil for 0), retaining it and registering a release finalizer.
 func DeviceFromID(id objc.ID) *Device {
 	if id == 0 {
 		return nil
 	}
-	return &Device{inner: raw.ICDeviceFromID(id)}
-}
-
-// NewDevice creates a new [Device].
-func NewDevice() *Device {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ICDevice")), objc.RegisterName("new"))
-	return &Device{inner: raw.ICDeviceFromID(_id)}
-}
-
-// The delegate to receive messages once a session is opened on the device.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Device) WithDelegate(delegate raw.ICDeviceDelegate) *Device {
-	x.inner.SetDelegate(delegate)
+	x := &Device{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
+// deviceAdopt wraps an Objective-C object that this code just created as a
+// Device (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func deviceAdopt(id objc.ID) *Device {
+	if id == 0 {
+		return nil
+	}
+	x := &Device{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Device) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Device) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Device) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDevice creates a new Device.
+func NewDevice() *Device {
+	_id := objc.Send[objc.ID](objc.ID(_class("ICDevice")), objc.RegisterName("new"))
+	return deviceAdopt(_id)
+}
+
 // Requests to open a session on the device.
-//
-// RequestOpenSession calls the underlying RequestOpenSession.
 func (x *Device) RequestOpenSession() {
-	x.inner.RequestOpenSession()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestOpenSession"))
 }
 
 // Requests to close an open session on the device.
-//
-// RequestCloseSession calls the underlying RequestCloseSession.
 func (x *Device) RequestCloseSession() {
-	x.inner.RequestCloseSession()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestCloseSession"))
 }
 
 // Requests to eject the media if permitted by the device, or to disconnect from a remote device.
-//
-// RequestEject calls the underlying RequestEject.
 func (x *Device) RequestEject() {
-	x.inner.RequestEject()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestEject"))
 }
 
 // Requests to open a session on the device, then executes the completion handler.
 //
 // RequestOpenSessionWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *Device) RequestOpenSessionWithOptionsCompletion(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error {
+func (x *Device) RequestOpenSessionWithOptionsCompletion(ctx context.Context, options obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.RequestOpenSessionWithOptionsCompletion(options, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestOpenSessionWithOptions:completion:"), objref.IDOf(options), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -93,15 +103,14 @@ func (x *Device) RequestOpenSessionWithOptionsCompletion(ctx context.Context, op
 // Requests to close an open session on the device, then executes the completion handler.
 //
 // RequestCloseSessionWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *Device) RequestCloseSessionWithOptionsCompletion(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error {
+func (x *Device) RequestCloseSessionWithOptionsCompletion(ctx context.Context, options obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.RequestCloseSessionWithOptionsCompletion(options, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestCloseSessionWithOptions:completion:"), objref.IDOf(options), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -115,13 +124,12 @@ func (x *Device) RequestCloseSessionWithOptionsCompletion(ctx context.Context, o
 // RequestEjectWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *Device) RequestEjectWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.RequestEjectWithCompletion(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestEjectWithCompletion:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -130,255 +138,148 @@ func (x *Device) RequestEjectWithCompletion(ctx context.Context) error {
 	}
 }
 
-// Asynchronously sends an arbitrary message with optional data to a device.
-//
-// RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo calls the underlying RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo.
-func (x *Device) RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo(messageCode uint, data *foundation.NSData, maxReturnedDataSize uint, sendMessageDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer) {
-	x.inner.RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo(messageCode, data, maxReturnedDataSize, sendMessageDelegate, selector, contextInfo)
-}
-
 // Requests to eject the media if permitted by the device, or to disconnect from a remote device.
-//
-// RequestEjectOrDisconnect calls the underlying RequestEjectOrDisconnect.
 func (x *Device) RequestEjectOrDisconnect() {
-	x.inner.RequestEjectOrDisconnect()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestEjectOrDisconnect"))
 }
 
 // Requests that device module in control of this device yield control.
-//
-// RequestYield calls the underlying RequestYield.
 func (x *Device) RequestYield() {
-	x.inner.RequestYield()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestYield"))
 }
 
-// @property delegate @abstract The delegate to receive messages once a session is opened on the device. @discussion The delegate must conform ICDeviceDelegate protocol. In addition it should respond to selectors defined in ICCameraDeviceDelegate protocol in order to effectively interact with the device object. The messages this delegate can expect to receive are described by these protocols.
-//
-// Delegate calls the underlying Delegate.
-func (x *Device) Delegate() raw.ICDeviceDelegate {
-	return x.inner.Delegate()
+// ￼The type of the device as defined by ICDeviceType OR'd with its ICDeviceLocationType.
+func (x *Device) Type() DeviceType {
+	_r := objc.Send[DeviceType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *Device) SetDelegate(delegate raw.ICDeviceDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// @property type @abstract ￼The type of the device as defined by ICDeviceType OR'd with its ICDeviceLocationType. @note The type of this device can be obtained by AND'ing the value retuned by this property with an appropriate ICDeviceTypeMask. @note The location type of this device can be obtained by AND'ing the value retuned by this property with an appropriate ICDeviceLocationTypeMask.
-//
-// Type calls the underlying Type.
-func (x *Device) Type() ICDeviceType {
-	return ICDeviceType(x.inner.Type())
-}
-
-// @property capabilities @abstract ￼The capabilities of the device as reported by the device module.
+// ￼The capabilities of the device as reported by the device module.
 //
 // Capabilities returns the collection as a Go slice.
 func (x *Device) Capabilities() []string {
-	arr := x.inner.Capabilities()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("capabilities"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// @property name @abstract ￼Name of the device as reported by the device module or by the device transport when a device module is not in control of this device. @note This name may change if the device module overrides the default name of the device reported by the device's transport, or if the name of the filesystem volume mounted by the device is changed by the user.
-//
-// Name calls the underlying Name.
+// ￼Name of the device as reported by the device module or by the device transport when a device module is not in control of this device.
 func (x *Device) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property productKind @abstract ￼Type of the device. Possible values are: @"iPhone", @"iPod", @"iPad", @"Camera", @"Scanner"
-//
-// ProductKind calls the underlying ProductKind.
+// ￼Type of the device. Possible values are:
 func (x *Device) ProductKind() string {
-	_r := x.inner.ProductKind()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productKind"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property icon @abstract ￼Icon image for the device class.  If there is no custom icon present from a device manufacturer, this will be a rendered version of the system symbol for the device class.  Using a rendered system symbol instead of the systemSymbolName is discouraged.
-//
-// Icon calls the underlying Icon.
-func (x *Device) Icon() unsafe.Pointer {
-	return x.inner.Icon()
+// ￼Icon image for the device class.  If there is no custom icon present from a device manufacturer, this will be a rendered version of the system symbol for the device class.  Using a rendered system symbol instead of the systemSymbolName is discouraged.
+func (x *Device) Icon() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icon"))
+	return obj.Wrap(_r)
 }
 
-// @property systemSymbolName @abstract ￼Standard system symbol used to represent the device class.  Using the symbol to render an appropriate device icon will ensure proper scaling for high resolution devices.
-//
-// SystemSymbolName calls the underlying SystemSymbolName.
+// ￼Standard system symbol used to represent the device class.  Using the symbol to render an appropriate device icon will ensure proper scaling for high resolution devices.
 func (x *Device) SystemSymbolName() string {
-	_r := x.inner.SystemSymbolName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("systemSymbolName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property transportType @abstract ￼The transport type used by the device. The possible values are: ICTransportTypeUSB or ICTransportTypeMassStorage.
-//
-// TransportType calls the underlying TransportType.
+// ￼The transport type used by the device. The possible values are: ICTransportTypeUSB or ICTransportTypeMassStorage.
 func (x *Device) TransportType() string {
-	_r := x.inner.TransportType()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transportType"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property UUIDString @abstract ￼A string representation of the Universally Unique ID of the device.
-//
-// UUIDString calls the underlying UUIDString.
+// ￼A string representation of the Universally Unique ID of the device.
 func (x *Device) UUIDString() string {
-	_r := x.inner.UUIDString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUIDString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property locationDescription @abstract ￼A non-localized location description string for the device. @discussion The value returned in one of the location description strings defined above, or location obtained from the Bonjour TXT record of a network device.
-//
-// LocationDescription calls the underlying LocationDescription.
-func (x *Device) LocationDescription() unsafe.Pointer {
-	return x.inner.LocationDescription()
-}
-
-// @property hasOpenSession @abstract ￼Indicates whether the device has an open session.
-//
-// HasOpenSession calls the underlying HasOpenSession.
+// ￼Indicates whether the device has an open session.
 func (x *Device) HasOpenSession() bool {
-	return x.inner.HasOpenSession()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasOpenSession"))
+	return _r
 }
 
-// @property userData @abstract ￼Client convenience bookkeeping object retained by the framework.
-//
-// UserData calls the underlying UserData.
-func (x *Device) UserData() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
-	return x.inner.UserData()
+// ￼Client convenience bookkeeping object retained by the framework.
+func (x *Device) UserData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userData"))
+	return obj.Wrap(_r)
 }
 
-// @property modulePath @abstract ￼Filesystem path of the device module that is associated with this device. Camera-specific capabilities are defined in ICCameraDevice.h and scanner-specific capabilities are defined in ICScannerDevice.h.
-//
-// ModulePath calls the underlying ModulePath.
-func (x *Device) ModulePath() unsafe.Pointer {
-	return x.inner.ModulePath()
-}
-
-// @property moduleVersion @abstract ￼The bundle version of the device module associated with this device. @note This may change if an existing device module associated with this device is updated or a new device module for this device is installed.
-//
-// ModuleVersion calls the underlying ModuleVersion.
-func (x *Device) ModuleVersion() unsafe.Pointer {
-	return x.inner.ModuleVersion()
-}
-
-// @property serialNumberString @abstract ￼The serial number of the device. This will be NULL if the device does not provide a serial number.
-//
-// SerialNumberString calls the underlying SerialNumberString.
-func (x *Device) SerialNumberString() unsafe.Pointer {
-	return x.inner.SerialNumberString()
-}
-
-// @property usbLocationID @abstract ￼The USB location of which the device is occupying.
-//
-// UsbLocationID calls the underlying UsbLocationID.
+// ￼The USB location of which the device is occupying.
 func (x *Device) UsbLocationID() int {
-	return x.inner.UsbLocationID()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("usbLocationID"))
+	return _r
 }
 
-// @property usbProductID @abstract ￼The USB PID associated with the device attached.
-//
-// UsbProductID calls the underlying UsbProductID.
+// ￼The USB PID associated with the device attached.
 func (x *Device) UsbProductID() int {
-	return x.inner.UsbProductID()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("usbProductID"))
+	return _r
 }
 
-// @property usbVendorID @abstract ￼The USB VID associated with the device attached.
-//
-// UsbVendorID calls the underlying UsbVendorID.
+// ￼The USB VID associated with the device attached.
 func (x *Device) UsbVendorID() int {
-	return x.inner.UsbVendorID()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("usbVendorID"))
+	return _r
 }
 
-// @property autolaunchApplicationPath @abstract ￼Filesystem path of an application that is to be automatically launched when this device is added. @discussion This property is unavailable for devices of ICTransportTypeProximity.
-//
-// AutolaunchApplicationPath calls the underlying AutolaunchApplicationPath.
-func (x *Device) AutolaunchApplicationPath() unsafe.Pointer {
-	return x.inner.AutolaunchApplicationPath()
-}
-
-// SetAutolaunchApplicationPath calls the underlying SetAutolaunchApplicationPath.
-func (x *Device) SetAutolaunchApplicationPath(autolaunchApplicationPath unsafe.Pointer) {
-	x.inner.SetAutolaunchApplicationPath(autolaunchApplicationPath)
-}
-
-// @property remote @abstract ￼Indicates whether the device is a remote device published by Image Capture device sharing facility. @property name @discussion ￼Name of the device as reported by the device module or by the device transport when a device module is not in control of this device. @note This name may change if the device module overrides the default name of the device reported by the device's transport, or if the name of the filesystem volume mounted by the device is changed by the user.
-//
-// IsRemote calls the underlying IsRemote.
+// ￼Indicates whether the device is a remote device published by Image Capture device sharing facility. ￼Name of the device as reported by the device module or by the device transport when a device module is not in control of this device.
 func (x *Device) IsRemote() bool {
-	return x.inner.IsRemote()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRemote"))
+	return _r
 }
 
-// @property persistentIDString @abstract ￼A string representation of the persistent ID of the device.
-//
-// PersistentIDString calls the underlying PersistentIDString.
-func (x *Device) PersistentIDString() unsafe.Pointer {
-	return x.inner.PersistentIDString()
-}
-
-// @property moduleExecutableArchitecture @abstract Reports the device module servicing the requests executable architecture.
-//
-// ModuleExecutableArchitecture calls the underlying ModuleExecutableArchitecture.
+// Reports the device module servicing the requests executable architecture.
 func (x *Device) ModuleExecutableArchitecture() int {
-	return x.inner.ModuleExecutableArchitecture()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("moduleExecutableArchitecture"))
+	return _r
 }
-
-func (x *Device) asDevice() *raw.ICDevice { return x.inner }
 
 // Deviceable is the interface implemented by [Device], for mocking and DI.
 type Deviceable interface {
-	Unwrap() *raw.ICDevice
-	WithDelegate(delegate raw.ICDeviceDelegate) *Device
+	obj.Object
 	RequestOpenSession()
 	RequestCloseSession()
 	RequestEject()
-	RequestOpenSessionWithOptionsCompletion(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error
-	RequestCloseSessionWithOptionsCompletion(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) error
+	RequestOpenSessionWithOptionsCompletion(ctx context.Context, options obj.Object) error
+	RequestCloseSessionWithOptionsCompletion(ctx context.Context, options obj.Object) error
 	RequestEjectWithCompletion(ctx context.Context) error
-	RequestSendMessageOutDataMaxReturnedDataSizeSendMessageDelegateDidSendMessageSelectorContextInfo(messageCode uint, data *foundation.NSData, maxReturnedDataSize uint, sendMessageDelegate objc.ID, selector objc.SEL, contextInfo unsafe.Pointer)
 	RequestEjectOrDisconnect()
 	RequestYield()
-	Delegate() raw.ICDeviceDelegate
-	SetDelegate(delegate raw.ICDeviceDelegate)
-	Type() ICDeviceType
+	Type() DeviceType
 	Capabilities() []string
 	Name() string
 	ProductKind() string
-	Icon() unsafe.Pointer
+	Icon() obj.Object
 	SystemSymbolName() string
 	TransportType() string
 	UUIDString() string
-	LocationDescription() unsafe.Pointer
 	HasOpenSession() bool
-	UserData() *foundation.NSMutableDictionary[objc.ID, objc.ID]
-	ModulePath() unsafe.Pointer
-	ModuleVersion() unsafe.Pointer
-	SerialNumberString() unsafe.Pointer
+	UserData() obj.Object
 	UsbLocationID() int
 	UsbProductID() int
 	UsbVendorID() int
-	AutolaunchApplicationPath() unsafe.Pointer
-	SetAutolaunchApplicationPath(autolaunchApplicationPath unsafe.Pointer)
 	IsRemote() bool
-	PersistentIDString() unsafe.Pointer
 	ModuleExecutableArchitecture() int
 }
 

@@ -5,146 +5,145 @@
 package imagecapturecore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The options for each band of data that the scanner reads.
 //
-// ScannerBandData wraps [raw.ICScannerBandData] with a fluent Go API.
+// ScannerBandData is an idiomatic wrapper over the Objective-C class ICScannerBandData.
 type ScannerBandData struct {
-	inner *raw.ICScannerBandData
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ICScannerBandData].
-func (x *ScannerBandData) Unwrap() *raw.ICScannerBandData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScannerBandData) ID() objc.ID { return x.inner.Ptr() }
-
-// ScannerBandDataFromID adopts an existing object pointer as a ScannerBandData (nil for 0).
+// ScannerBandDataFromID adopts an existing Objective-C object as a ScannerBandData
+// (nil for 0), retaining it and registering a release finalizer.
 func ScannerBandDataFromID(id objc.ID) *ScannerBandData {
 	if id == 0 {
 		return nil
 	}
-	return &ScannerBandData{inner: raw.ICScannerBandDataFromID(id)}
+	x := &ScannerBandData{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewScannerBandData creates a new [ScannerBandData].
+// scannerBandDataAdopt wraps an Objective-C object that this code just created as a
+// ScannerBandData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scannerBandDataAdopt(id objc.ID) *ScannerBandData {
+	if id == 0 {
+		return nil
+	}
+	x := &ScannerBandData{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScannerBandData) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScannerBandData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScannerBandData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScannerBandData creates a new ScannerBandData.
 func NewScannerBandData() *ScannerBandData {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ICScannerBandData")), objc.RegisterName("new"))
-	return &ScannerBandData{inner: raw.ICScannerBandDataFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ICScannerBandData")), objc.RegisterName("new"))
+	return scannerBandDataAdopt(_id)
 }
 
-// @property fullImageWidth @abstract Describes the full image width of the banded image.
-//
-// FullImageWidth calls the underlying FullImageWidth.
-func (x *ScannerBandData) FullImageWidth() uint {
-	return x.inner.FullImageWidth()
+// Describes the full image width of the banded image.
+func (x *ScannerBandData) FullImageWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fullImageWidth"))
+	return _r
 }
 
-// @property fullImageHeight @abstract Describes the full image height of the banded image.
-//
-// FullImageHeight calls the underlying FullImageHeight.
-func (x *ScannerBandData) FullImageHeight() uint {
-	return x.inner.FullImageHeight()
+// Describes the full image height of the banded image.
+func (x *ScannerBandData) FullImageHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fullImageHeight"))
+	return _r
 }
 
-// @property bitsPerPixel @abstract Describes the number of bits per pixel for banded the image.
-//
-// BitsPerPixel calls the underlying BitsPerPixel.
-func (x *ScannerBandData) BitsPerPixel() uint {
-	return x.inner.BitsPerPixel()
+// Describes the number of bits per pixel for banded the image.
+func (x *ScannerBandData) BitsPerPixel() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bitsPerPixel"))
+	return _r
 }
 
-// @property bitsPerComponent @abstract Describes the number of bits per component for the banded image.
-//
-// BitsPerComponent calls the underlying BitsPerComponent.
-func (x *ScannerBandData) BitsPerComponent() uint {
-	return x.inner.BitsPerComponent()
+// Describes the number of bits per component for the banded image.
+func (x *ScannerBandData) BitsPerComponent() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bitsPerComponent"))
+	return _r
 }
 
-// @property numComponents @abstract Describes how many components are contained within the banded image.
-//
-// NumComponents calls the underlying NumComponents.
-func (x *ScannerBandData) NumComponents() uint {
-	return x.inner.NumComponents()
+// Describes how many components are contained within the banded image.
+func (x *ScannerBandData) NumComponents() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numComponents"))
+	return _r
 }
 
-// @property bigEndian @abstract Describes if the banded image data is reported in big endian.
-//
-// IsBigEndian calls the underlying IsBigEndian.
+// Describes if the banded image data is reported in big endian.
 func (x *ScannerBandData) IsBigEndian() bool {
-	return x.inner.IsBigEndian()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBigEndian"))
+	return _r
 }
 
-// @property pixelDataType @abstract Type of pixel data that is contained in the band.
-//
-// PixelDataType calls the underlying PixelDataType.
-func (x *ScannerBandData) PixelDataType() ICScannerPixelDataType {
-	return ICScannerPixelDataType(x.inner.PixelDataType())
+// Type of pixel data that is contained in the band.
+func (x *ScannerBandData) PixelDataType() ScannerPixelDataType {
+	_r := objc.Send[ScannerPixelDataType](objref.IDOf(x), objc.RegisterName("pixelDataType"))
+	return _r
 }
 
-// @property colorSyncProfilePath @abstract Returns the path to the color profile matching the banded data.
-//
-// ColorSyncProfilePath calls the underlying ColorSyncProfilePath.
-func (x *ScannerBandData) ColorSyncProfilePath() unsafe.Pointer {
-	return x.inner.ColorSyncProfilePath()
+// Descries how many bytes are in each image band row.
+func (x *ScannerBandData) BytesPerRow() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesPerRow"))
+	return _r
 }
 
-// @property bytesPerRow @abstract Descries how many bytes are in each image band row.
-//
-// BytesPerRow calls the underlying BytesPerRow.
-func (x *ScannerBandData) BytesPerRow() uint {
-	return x.inner.BytesPerRow()
+// Describes the start row of the image band.
+func (x *ScannerBandData) DataStartRow() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataStartRow"))
+	return _r
 }
 
-// @property dataStartRow @abstract Describes the start row of the image band.
-//
-// DataStartRow calls the underlying DataStartRow.
-func (x *ScannerBandData) DataStartRow() uint {
-	return x.inner.DataStartRow()
+// Describes the number of rows contained in the image band.
+func (x *ScannerBandData) DataNumRows() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataNumRows"))
+	return _r
 }
 
-// @property dataNumRows @abstract Describes the number of rows contained in the image band.
-//
-// DataNumRows calls the underlying DataNumRows.
-func (x *ScannerBandData) DataNumRows() uint {
-	return x.inner.DataNumRows()
-}
-
-// @property dataSize @abstract Describes the actual data size of the image band buffer.
-//
-// DataSize calls the underlying DataSize.
-func (x *ScannerBandData) DataSize() uint {
-	return x.inner.DataSize()
-}
-
-// @property dataBuffer @abstract The pointer to the data buffer object.
-//
-// DataBuffer calls the underlying DataBuffer.
-func (x *ScannerBandData) DataBuffer() unsafe.Pointer {
-	return x.inner.DataBuffer()
+// Describes the actual data size of the image band buffer.
+func (x *ScannerBandData) DataSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataSize"))
+	return _r
 }
 
 // ScannerBandDataable is the interface implemented by [ScannerBandData], for mocking and DI.
 type ScannerBandDataable interface {
-	Unwrap() *raw.ICScannerBandData
-	FullImageWidth() uint
-	FullImageHeight() uint
-	BitsPerPixel() uint
-	BitsPerComponent() uint
-	NumComponents() uint
+	obj.Object
+	FullImageWidth() int
+	FullImageHeight() int
+	BitsPerPixel() int
+	BitsPerComponent() int
+	NumComponents() int
 	IsBigEndian() bool
-	PixelDataType() ICScannerPixelDataType
-	ColorSyncProfilePath() unsafe.Pointer
-	BytesPerRow() uint
-	DataStartRow() uint
-	DataNumRows() uint
-	DataSize() uint
-	DataBuffer() unsafe.Pointer
+	PixelDataType() ScannerPixelDataType
+	BytesPerRow() int
+	DataStartRow() int
+	DataNumRows() int
+	DataSize() int
 }
 
 var _ ScannerBandDataable = (*ScannerBandData)(nil)

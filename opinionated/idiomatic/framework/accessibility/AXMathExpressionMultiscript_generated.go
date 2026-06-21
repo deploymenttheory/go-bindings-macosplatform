@@ -5,77 +5,84 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MathExpressionMultiscript wraps [raw.AXMathExpressionMultiscript] with a fluent Go API.
+// MathExpressionMultiscript is an idiomatic wrapper over the Objective-C class AXMathExpressionMultiscript.
 type MathExpressionMultiscript struct {
-	inner *raw.AXMathExpressionMultiscript
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AXMathExpressionMultiscript].
-func (x *MathExpressionMultiscript) Unwrap() *raw.AXMathExpressionMultiscript { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MathExpressionMultiscript) ID() objc.ID { return x.inner.Ptr() }
-
-// MathExpressionMultiscriptFromID adopts an existing object pointer as a MathExpressionMultiscript (nil for 0).
+// MathExpressionMultiscriptFromID adopts an existing Objective-C object as a MathExpressionMultiscript
+// (nil for 0), retaining it and registering a release finalizer.
 func MathExpressionMultiscriptFromID(id objc.ID) *MathExpressionMultiscript {
 	if id == 0 {
 		return nil
 	}
-	return &MathExpressionMultiscript{inner: raw.AXMathExpressionMultiscriptFromID(id)}
+	x := &MathExpressionMultiscript{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMathExpressionMultiscriptWithBaseExpressionPrescriptExpressionsPostscriptExpressions creates a new [MathExpressionMultiscript].
-func NewMathExpressionMultiscriptWithBaseExpressionPrescriptExpressionsPostscriptExpressions(baseExpression *raw.AXMathExpression, prescriptExpressions *foundation.NSArray[*raw.AXMathExpressionSubSuperscript], postscriptExpressions *foundation.NSArray[*raw.AXMathExpressionSubSuperscript]) *MathExpressionMultiscript {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXMathExpressionMultiscript")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBaseExpression:prescriptExpressions:postscriptExpressions:"), baseExpression.Ptr(), prescriptExpressions.Ptr(), postscriptExpressions.Ptr())
-	return &MathExpressionMultiscript{inner: raw.AXMathExpressionMultiscriptFromID(_id)}
-}
-
-// BaseExpression calls the underlying BaseExpression.
-func (x *MathExpressionMultiscript) BaseExpression() *MathExpression {
-	_r := x.inner.BaseExpression()
-	if _r == nil {
+// mathExpressionMultiscriptAdopt wraps an Objective-C object that this code just created as a
+// MathExpressionMultiscript (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mathExpressionMultiscriptAdopt(id objc.ID) *MathExpressionMultiscript {
+	if id == 0 {
 		return nil
 	}
-	return &MathExpression{inner: _r}
+	x := &MathExpressionMultiscript{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MathExpressionMultiscript) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MathExpressionMultiscript) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MathExpressionMultiscript) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMathExpressionMultiscriptWithBaseExpressionPrescriptExpressionsPostscriptExpressions creates a new MathExpressionMultiscript.
+func NewMathExpressionMultiscriptWithBaseExpressionPrescriptExpressionsPostscriptExpressions(baseExpression *MathExpression, prescriptExpressions []*MathExpressionSubSuperscript, postscriptExpressions []*MathExpressionSubSuperscript) *MathExpressionMultiscript {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AXMathExpressionMultiscript")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBaseExpression:prescriptExpressions:postscriptExpressions:"), objref.IDOf(baseExpression), purego.SliceToNSArray(prescriptExpressions, func(_v *MathExpressionSubSuperscript) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(postscriptExpressions, func(_v *MathExpressionSubSuperscript) objc.ID { return objref.IDOf(_v) }))
+	return mathExpressionMultiscriptAdopt(_id)
+}
+
+func (x *MathExpressionMultiscript) BaseExpression() *MathExpression {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseExpression"))
+	return MathExpressionFromID(_r)
 }
 
 // PrescriptExpressions returns the collection as a Go slice.
 func (x *MathExpressionMultiscript) PrescriptExpressions() []*MathExpressionSubSuperscript {
-	arr := x.inner.PrescriptExpressions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MathExpressionSubSuperscript {
-		return &MathExpressionSubSuperscript{inner: raw.AXMathExpressionSubSuperscriptFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prescriptExpressions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpressionSubSuperscript { return MathExpressionSubSuperscriptFromID(_id) })
 }
 
 // PostscriptExpressions returns the collection as a Go slice.
 func (x *MathExpressionMultiscript) PostscriptExpressions() []*MathExpressionSubSuperscript {
-	arr := x.inner.PostscriptExpressions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MathExpressionSubSuperscript {
-		return &MathExpressionSubSuperscript{inner: raw.AXMathExpressionSubSuperscriptFromID(purego.Retain(_id))}
-	})
-}
-
-func (x *MathExpressionMultiscript) asMathExpression() *raw.AXMathExpression {
-	return &x.inner.AXMathExpression
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postscriptExpressions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpressionSubSuperscript { return MathExpressionSubSuperscriptFromID(_id) })
 }
 
 // MathExpressionMultiscriptable is the interface implemented by [MathExpressionMultiscript], for mocking and DI.
 type MathExpressionMultiscriptable interface {
-	Unwrap() *raw.AXMathExpressionMultiscript
+	obj.Object
 	BaseExpression() *MathExpression
 	PrescriptExpressions() []*MathExpressionSubSuperscript
 	PostscriptExpressions() []*MathExpressionSubSuperscript

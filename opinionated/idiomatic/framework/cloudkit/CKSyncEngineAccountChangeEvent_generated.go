@@ -5,75 +5,87 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The user signed in or out of their account.
 //
-// SyncEngineAccountChangeEvent wraps [raw.CKSyncEngineAccountChangeEvent] with a fluent Go API.
+// SyncEngineAccountChangeEvent is an idiomatic wrapper over the Objective-C class CKSyncEngineAccountChangeEvent.
 type SyncEngineAccountChangeEvent struct {
-	inner *raw.CKSyncEngineAccountChangeEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineAccountChangeEvent].
-func (x *SyncEngineAccountChangeEvent) Unwrap() *raw.CKSyncEngineAccountChangeEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineAccountChangeEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineAccountChangeEventFromID adopts an existing object pointer as a SyncEngineAccountChangeEvent (nil for 0).
+// SyncEngineAccountChangeEventFromID adopts an existing Objective-C object as a SyncEngineAccountChangeEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineAccountChangeEventFromID(id objc.ID) *SyncEngineAccountChangeEvent {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineAccountChangeEvent{inner: raw.CKSyncEngineAccountChangeEventFromID(id)}
+	x := &SyncEngineAccountChangeEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSyncEngineAccountChangeEvent creates a new [SyncEngineAccountChangeEvent].
+// syncEngineAccountChangeEventAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineAccountChangeEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineAccountChangeEventAdopt(id objc.ID) *SyncEngineAccountChangeEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &SyncEngineAccountChangeEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SyncEngineAccountChangeEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEngineAccountChangeEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEngineAccountChangeEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSyncEngineAccountChangeEvent creates a new SyncEngineAccountChangeEvent.
 func NewSyncEngineAccountChangeEvent() *SyncEngineAccountChangeEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineAccountChangeEvent")), objc.RegisterName("new"))
-	return &SyncEngineAccountChangeEvent{inner: raw.CKSyncEngineAccountChangeEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineAccountChangeEvent")), objc.RegisterName("new"))
+	return syncEngineAccountChangeEventAdopt(_id)
 }
 
 // The iCloud account's change type.
-//
-// ChangeType calls the underlying ChangeType.
-func (x *SyncEngineAccountChangeEvent) ChangeType() CKSyncEngineAccountChangeType {
-	return CKSyncEngineAccountChangeType(x.inner.ChangeType())
+func (x *SyncEngineAccountChangeEvent) ChangeType() SyncEngineAccountChangeType {
+	_r := objc.Send[SyncEngineAccountChangeType](objref.IDOf(x), objc.RegisterName("changeType"))
+	return _r
 }
 
 // The previous iCloud account's record identifier. If the user just signed in, this is `nil`. If the user signed out or switched accounts, this is the old account's user record ID.
-//
-// PreviousUser calls the underlying PreviousUser.
 func (x *SyncEngineAccountChangeEvent) PreviousUser() *RecordID {
-	_r := x.inner.PreviousUser()
-	if _r == nil {
-		return nil
-	}
-	return &RecordID{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousUser"))
+	return RecordIDFromID(_r)
 }
 
 // The current iCloud account's record identifier. If the user just signed in or switched accounts, this is the new user record ID. If the user signed out, this is `nil`.
-//
-// CurrentUser calls the underlying CurrentUser.
 func (x *SyncEngineAccountChangeEvent) CurrentUser() *RecordID {
-	_r := x.inner.CurrentUser()
-	if _r == nil {
-		return nil
-	}
-	return &RecordID{inner: _r}
-}
-
-func (x *SyncEngineAccountChangeEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent {
-	return &x.inner.CKSyncEngineEvent
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentUser"))
+	return RecordIDFromID(_r)
 }
 
 // SyncEngineAccountChangeEventable is the interface implemented by [SyncEngineAccountChangeEvent], for mocking and DI.
 type SyncEngineAccountChangeEventable interface {
-	Unwrap() *raw.CKSyncEngineAccountChangeEvent
-	ChangeType() CKSyncEngineAccountChangeType
+	obj.Object
+	ChangeType() SyncEngineAccountChangeType
 	PreviousUser() *RecordID
 	CurrentUser() *RecordID
 }

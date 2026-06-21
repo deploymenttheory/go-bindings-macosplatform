@@ -5,60 +5,85 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// BarcodeEventMetadataResponse wraps [raw.PKBarcodeEventMetadataResponse] with a fluent Go API.
+// BarcodeEventMetadataResponse is an idiomatic wrapper over the Objective-C class PKBarcodeEventMetadataResponse.
 type BarcodeEventMetadataResponse struct {
-	inner *raw.PKBarcodeEventMetadataResponse
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKBarcodeEventMetadataResponse].
-func (x *BarcodeEventMetadataResponse) Unwrap() *raw.PKBarcodeEventMetadataResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BarcodeEventMetadataResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// BarcodeEventMetadataResponseFromID adopts an existing object pointer as a BarcodeEventMetadataResponse (nil for 0).
+// BarcodeEventMetadataResponseFromID adopts an existing Objective-C object as a BarcodeEventMetadataResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func BarcodeEventMetadataResponseFromID(id objc.ID) *BarcodeEventMetadataResponse {
 	if id == 0 {
 		return nil
 	}
-	return &BarcodeEventMetadataResponse{inner: raw.PKBarcodeEventMetadataResponseFromID(id)}
-}
-
-// NewBarcodeEventMetadataResponseWithPaymentInformation creates a new [BarcodeEventMetadataResponse].
-func NewBarcodeEventMetadataResponseWithPaymentInformation(paymentInformation *foundation.NSData) *BarcodeEventMetadataResponse {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKBarcodeEventMetadataResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentInformation:"), paymentInformation.Ptr())
-	return &BarcodeEventMetadataResponse{inner: raw.PKBarcodeEventMetadataResponseFromID(_id)}
-}
-
-// WithPaymentInformation sets the paymentInformation property and returns the receiver for chaining.
-func (x *BarcodeEventMetadataResponse) WithPaymentInformation(paymentInformation *foundation.NSData) *BarcodeEventMetadataResponse {
-	x.inner.SetPaymentInformation(paymentInformation)
+	x := &BarcodeEventMetadataResponse{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// PaymentInformation calls the underlying PaymentInformation.
-func (x *BarcodeEventMetadataResponse) PaymentInformation() *foundation.NSData {
-	return x.inner.PaymentInformation()
+// barcodeEventMetadataResponseAdopt wraps an Objective-C object that this code just created as a
+// BarcodeEventMetadataResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func barcodeEventMetadataResponseAdopt(id objc.ID) *BarcodeEventMetadataResponse {
+	if id == 0 {
+		return nil
+	}
+	x := &BarcodeEventMetadataResponse{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetPaymentInformation calls the underlying SetPaymentInformation.
-func (x *BarcodeEventMetadataResponse) SetPaymentInformation(paymentInformation *foundation.NSData) {
-	x.inner.SetPaymentInformation(paymentInformation)
+// Description returns the object's -description text.
+func (x *BarcodeEventMetadataResponse) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BarcodeEventMetadataResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BarcodeEventMetadataResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBarcodeEventMetadataResponseWithPaymentInformation creates a new BarcodeEventMetadataResponse.
+func NewBarcodeEventMetadataResponseWithPaymentInformation(paymentInformation obj.Object) *BarcodeEventMetadataResponse {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKBarcodeEventMetadataResponse")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPaymentInformation:"), objref.IDOf(paymentInformation))
+	return barcodeEventMetadataResponseAdopt(_id)
+}
+
+// WithPaymentInformation sets paymentInformation and returns the receiver so calls can be chained.
+func (x *BarcodeEventMetadataResponse) WithPaymentInformation(paymentInformation obj.Object) *BarcodeEventMetadataResponse {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentInformation:"), objref.IDOf(paymentInformation))
+	return x
+}
+
+func (x *BarcodeEventMetadataResponse) PaymentInformation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentInformation"))
+	return obj.Wrap(_r)
+}
+
+func (x *BarcodeEventMetadataResponse) SetPaymentInformation(paymentInformation obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentInformation:"), objref.IDOf(paymentInformation))
 }
 
 // BarcodeEventMetadataResponseable is the interface implemented by [BarcodeEventMetadataResponse], for mocking and DI.
 type BarcodeEventMetadataResponseable interface {
-	Unwrap() *raw.PKBarcodeEventMetadataResponse
-	WithPaymentInformation(paymentInformation *foundation.NSData) *BarcodeEventMetadataResponse
-	PaymentInformation() *foundation.NSData
-	SetPaymentInformation(paymentInformation *foundation.NSData)
+	obj.Object
+	WithPaymentInformation(paymentInformation obj.Object) *BarcodeEventMetadataResponse
+	PaymentInformation() obj.Object
+	SetPaymentInformation(paymentInformation obj.Object)
 }
 
 var _ BarcodeEventMetadataResponseable = (*BarcodeEventMetadataResponse)(nil)

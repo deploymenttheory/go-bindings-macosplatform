@@ -5,84 +5,102 @@
 package gamekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An invitation to join a match sent to the local player from another player.
 //
-// Invite wraps [raw.GKInvite] with a fluent Go API.
+// Invite is an idiomatic wrapper over the Objective-C class GKInvite.
 type Invite struct {
-	inner *raw.GKInvite
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKInvite].
-func (x *Invite) Unwrap() *raw.GKInvite { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Invite) ID() objc.ID { return x.inner.Ptr() }
-
-// InviteFromID adopts an existing object pointer as a Invite (nil for 0).
+// InviteFromID adopts an existing Objective-C object as a Invite
+// (nil for 0), retaining it and registering a release finalizer.
 func InviteFromID(id objc.ID) *Invite {
 	if id == 0 {
 		return nil
 	}
-	return &Invite{inner: raw.GKInviteFromID(id)}
+	x := &Invite{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewInvite creates a new [Invite].
-func NewInvite() *Invite {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKInvite")), objc.RegisterName("new"))
-	return &Invite{inner: raw.GKInviteFromID(_id)}
-}
-
-// Sender calls the underlying Sender.
-func (x *Invite) Sender() *Player {
-	_r := x.inner.Sender()
-	if _r == nil {
+// inviteAdopt wraps an Objective-C object that this code just created as a
+// Invite (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func inviteAdopt(id objc.ID) *Invite {
+	if id == 0 {
 		return nil
 	}
-	return &Player{inner: _r}
+	x := &Invite{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// IsHosted calls the underlying IsHosted.
+// Description returns the object's -description text.
+func (x *Invite) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Invite) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Invite) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewInvite creates a new Invite.
+func NewInvite() *Invite {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKInvite")), objc.RegisterName("new"))
+	return inviteAdopt(_id)
+}
+
+func (x *Invite) Sender() *Player {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sender"))
+	return PlayerFromID(_r)
+}
+
 func (x *Invite) IsHosted() bool {
-	return x.inner.IsHosted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHosted"))
+	return _r
 }
 
 // player group from inviter's match request
-//
-// PlayerGroup calls the underlying PlayerGroup.
-func (x *Invite) PlayerGroup() uint {
-	return x.inner.PlayerGroup()
+func (x *Invite) PlayerGroup() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("playerGroup"))
+	return _r
 }
 
 // player attributes from inviter's match request
-//
-// PlayerAttributes calls the underlying PlayerAttributes.
 func (x *Invite) PlayerAttributes() uint32 {
-	return x.inner.PlayerAttributes()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("playerAttributes"))
+	return _r
 }
 
 // * This property is obsolete. **
-//
-// Inviter calls the underlying Inviter.
 func (x *Invite) Inviter() string {
-	_r := x.inner.Inviter()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inviter"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Inviteable is the interface implemented by [Invite], for mocking and DI.
 type Inviteable interface {
-	Unwrap() *raw.GKInvite
+	obj.Object
 	Sender() *Player
 	IsHosted() bool
-	PlayerGroup() uint
+	PlayerGroup() int
 	PlayerAttributes() uint32
 	Inviter() string
 }

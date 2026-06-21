@@ -5,123 +5,103 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A challenge from a server requiring authentication from the client.
 //
-// URLAuthenticationChallenge wraps [raw.NSURLAuthenticationChallenge] with a fluent Go API.
+// URLAuthenticationChallenge is an idiomatic wrapper over the Objective-C class NSURLAuthenticationChallenge.
 type URLAuthenticationChallenge struct {
-	inner *raw.NSURLAuthenticationChallenge
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSURLAuthenticationChallenge].
-func (x *URLAuthenticationChallenge) Unwrap() *raw.NSURLAuthenticationChallenge { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *URLAuthenticationChallenge) ID() objc.ID { return x.inner.Ptr() }
-
-// URLAuthenticationChallengeFromID adopts an existing object pointer as a URLAuthenticationChallenge (nil for 0).
+// URLAuthenticationChallengeFromID adopts an existing Objective-C object as a URLAuthenticationChallenge
+// (nil for 0), retaining it and registering a release finalizer.
 func URLAuthenticationChallengeFromID(id objc.ID) *URLAuthenticationChallenge {
 	if id == 0 {
 		return nil
 	}
-	return &URLAuthenticationChallenge{inner: raw.NSURLAuthenticationChallengeFromID(id)}
-}
-
-// @method initWithProtectionSpace:proposedCredential:previousFailureCount:failureResponse:error: @abstract Initialize an authentication challenge @param space The NSURLProtectionSpace to use @param credential The proposed NSURLCredential for this challenge, or nil @param previousFailureCount A count of previous failures attempting access. @param response The NSURLResponse for the authentication failure, if applicable, else nil @param error The NSError for the authentication failure, if applicable, else nil @result An authentication challenge initialized with the specified parameters
-//
-// NewURLAuthenticationChallengeWithProtectionSpaceProposedCredentialPreviousFailureCountFailureResponseErrorSender creates a new [URLAuthenticationChallenge].
-func NewURLAuthenticationChallengeWithProtectionSpaceProposedCredentialPreviousFailureCountFailureResponseErrorSender(space *raw.NSURLProtectionSpace, credential *raw.NSURLCredential, previousFailureCount int, response *raw.NSURLResponse, error_ unsafe.Pointer, sender raw.NSURLAuthenticationChallengeSender) *URLAuthenticationChallenge {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLAuthenticationChallenge")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProtectionSpace:proposedCredential:previousFailureCount:failureResponse:error:sender:"), space.Ptr(), credential.Ptr(), previousFailureCount, response.Ptr(), error_, sender)
-	return &URLAuthenticationChallenge{inner: raw.NSURLAuthenticationChallengeFromID(_id)}
-}
-
-// @method initWithAuthenticationChallenge: @abstract Initialize an authentication challenge copying all parameters from another one. @result A new challenge initialized with the parameters from the passed in challenge @discussion This initializer may be useful to subclassers that want to proxy one type of authentication challenge to look like another type.
-//
-// NewURLAuthenticationChallengeWithAuthenticationChallengeSender creates a new [URLAuthenticationChallenge].
-func NewURLAuthenticationChallengeWithAuthenticationChallengeSender(challenge *raw.NSURLAuthenticationChallenge, sender raw.NSURLAuthenticationChallengeSender) *URLAuthenticationChallenge {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLAuthenticationChallenge")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAuthenticationChallenge:sender:"), challenge.Ptr(), sender)
-	return &URLAuthenticationChallenge{inner: raw.NSURLAuthenticationChallengeFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *URLAuthenticationChallenge) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLAuthenticationChallenge {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &URLAuthenticationChallenge{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @abstract Get a description of the protection space that requires authentication @result The protection space that needs authentication
-//
-// ProtectionSpace calls the underlying ProtectionSpace.
+// uRLAuthenticationChallengeAdopt wraps an Objective-C object that this code just created as a
+// URLAuthenticationChallenge (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uRLAuthenticationChallengeAdopt(id objc.ID) *URLAuthenticationChallenge {
+	if id == 0 {
+		return nil
+	}
+	x := &URLAuthenticationChallenge{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *URLAuthenticationChallenge) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *URLAuthenticationChallenge) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *URLAuthenticationChallenge) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewURLAuthenticationChallenge creates a new URLAuthenticationChallenge.
+func NewURLAuthenticationChallenge() *URLAuthenticationChallenge {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSURLAuthenticationChallenge")), objc.RegisterName("new"))
+	return uRLAuthenticationChallengeAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *URLAuthenticationChallenge) WithScriptingProperties(scriptingProperties obj.Object) *URLAuthenticationChallenge {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// Get a description of the protection space that requires authentication
 func (x *URLAuthenticationChallenge) ProtectionSpace() *URLProtectionSpace {
-	_r := x.inner.ProtectionSpace()
-	if _r == nil {
-		return nil
-	}
-	return &URLProtectionSpace{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protectionSpace"))
+	return URLProtectionSpaceFromID(_r)
 }
 
-// @abstract Get the proposed credential for this challenge @result The proposed credential @discussion proposedCredential may be nil, if there is no default credential to use for this challenge (either stored or in the URL). If the credential is not nil and returns YES for hasPassword, this means the NSURLConnection thinks the credential is ready to use as-is. If it returns NO for hasPassword, then the credential is not ready to use as-is, but provides a default username the client could use when prompting.
-//
-// ProposedCredential calls the underlying ProposedCredential.
+// Get the proposed credential for this challenge proposedCredential may be nil, if there is no default credential to use for this challenge (either stored or in the URL). If the credential is not nil and returns YES for hasPassword, this means the NSURLConnection thinks the credential is ready to use as-is. If it returns NO for hasPassword, then the credential is not ready to use as-is, but provides a default username the client could use when prompting.
 func (x *URLAuthenticationChallenge) ProposedCredential() *URLCredential {
-	_r := x.inner.ProposedCredential()
-	if _r == nil {
-		return nil
-	}
-	return &URLCredential{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("proposedCredential"))
+	return URLCredentialFromID(_r)
 }
 
-// @abstract Get count of previous failed authentication attempts @result The count of previous failures
-//
-// PreviousFailureCount calls the underlying PreviousFailureCount.
+// Get count of previous failed authentication attempts
 func (x *URLAuthenticationChallenge) PreviousFailureCount() int {
-	return x.inner.PreviousFailureCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("previousFailureCount"))
+	return _r
 }
 
-// @abstract Get the response representing authentication failure. @result The failure response or nil @discussion If there was a previous authentication failure, and this protocol uses responses to indicate authentication failure, then this method will return the response. Otherwise it will return nil.
-//
-// FailureResponse calls the underlying FailureResponse.
+// Get the response representing authentication failure. If there was a previous authentication failure, and this protocol uses responses to indicate authentication failure, then this method will return the response. Otherwise it will return nil.
 func (x *URLAuthenticationChallenge) FailureResponse() *URLResponse {
-	_r := x.inner.FailureResponse()
-	if _r == nil {
-		return nil
-	}
-	return &URLResponse{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("failureResponse"))
+	return URLResponseFromID(_r)
 }
-
-// @abstract Get the error representing authentication failure. @discussion If there was a previous authentication failure, and this protocol uses errors to indicate authentication failure, then this method will return the error. Otherwise it will return nil.
-//
-// Error calls the underlying Error.
-func (x *URLAuthenticationChallenge) Error() unsafe.Pointer {
-	return x.inner.Error()
-}
-
-// @abstract Get the sender of this challenge @result The sender of the challenge @discussion The sender is the object you should reply to when done processing the challenge.
-//
-// Sender calls the underlying Sender.
-func (x *URLAuthenticationChallenge) Sender() raw.NSURLAuthenticationChallengeSender {
-	return x.inner.Sender()
-}
-
-func (x *URLAuthenticationChallenge) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // URLAuthenticationChallengeable is the interface implemented by [URLAuthenticationChallenge], for mocking and DI.
 type URLAuthenticationChallengeable interface {
-	Unwrap() *raw.NSURLAuthenticationChallenge
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLAuthenticationChallenge
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *URLAuthenticationChallenge
 	ProtectionSpace() *URLProtectionSpace
 	ProposedCredential() *URLCredential
 	PreviousFailureCount() int
 	FailureResponse() *URLResponse
-	Error() unsafe.Pointer
-	Sender() raw.NSURLAuthenticationChallengeSender
 }
 
 var _ URLAuthenticationChallengeable = (*URLAuthenticationChallenge)(nil)

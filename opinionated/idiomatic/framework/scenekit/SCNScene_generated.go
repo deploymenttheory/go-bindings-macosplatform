@@ -5,334 +5,292 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A container for the node hierarchy and global properties that together form a displayable 3D scene.
 //
-// Scene wraps [raw.SCNScene] with a fluent Go API.
+// Scene is an idiomatic wrapper over the Objective-C class SCNScene.
 type Scene struct {
-	inner *raw.SCNScene
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNScene].
-func (x *Scene) Unwrap() *raw.SCNScene { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Scene) ID() objc.ID { return x.inner.Ptr() }
-
-// SceneFromID adopts an existing object pointer as a Scene (nil for 0).
+// SceneFromID adopts an existing Objective-C object as a Scene
+// (nil for 0), retaining it and registering a release finalizer.
 func SceneFromID(id objc.ID) *Scene {
 	if id == 0 {
 		return nil
 	}
-	return &Scene{inner: raw.SCNSceneFromID(id)}
+	x := &Scene{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewScene creates a new [Scene].
+// sceneAdopt wraps an Objective-C object that this code just created as a
+// Scene (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sceneAdopt(id objc.ID) *Scene {
+	if id == 0 {
+		return nil
+	}
+	x := &Scene{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Scene) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Scene) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Scene) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScene creates a new Scene.
 func NewScene() *Scene {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNScene")), objc.RegisterName("new"))
-	return &Scene{inner: raw.SCNSceneFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNScene")), objc.RegisterName("new"))
+	return sceneAdopt(_id)
 }
 
 // The distance from a point of view at which the scene’s contents begin to be obscured by fog. Animatable.
 //
-// WithFogStartDistance sets the fogStartDistance property and returns the receiver for chaining.
+// WithFogStartDistance sets fogStartDistance and returns the receiver so calls can be chained.
 func (x *Scene) WithFogStartDistance(fogStartDistance float64) *Scene {
-	x.inner.SetFogStartDistance(fogStartDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFogStartDistance:"), fogStartDistance)
 	return x
 }
 
 // The distance from a point of view at which the scene’s contents are completely obscured by fog. Animatable.
 //
-// WithFogEndDistance sets the fogEndDistance property and returns the receiver for chaining.
+// WithFogEndDistance sets fogEndDistance and returns the receiver so calls can be chained.
 func (x *Scene) WithFogEndDistance(fogEndDistance float64) *Scene {
-	x.inner.SetFogEndDistance(fogEndDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFogEndDistance:"), fogEndDistance)
 	return x
 }
 
 // The transition curve for the fog’s intensity between its start and end distances. Animatable.
 //
-// WithFogDensityExponent sets the fogDensityExponent property and returns the receiver for chaining.
+// WithFogDensityExponent sets fogDensityExponent and returns the receiver so calls can be chained.
 func (x *Scene) WithFogDensityExponent(fogDensityExponent float64) *Scene {
-	x.inner.SetFogDensityExponent(fogDensityExponent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFogDensityExponent:"), fogDensityExponent)
 	return x
 }
 
 // The color of the fog effect to be rendered with the scene. Animatable.
 //
-// WithFogColor sets the fogColor property and returns the receiver for chaining.
-func (x *Scene) WithFogColor(fogColor objc.ID) *Scene {
-	x.inner.SetFogColor(fogColor)
+// WithFogColor sets fogColor and returns the receiver so calls can be chained.
+func (x *Scene) WithFogColor(fogColor obj.Object) *Scene {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFogColor:"), objref.IDOf(fogColor))
 	return x
 }
 
-// @property wantsScreenSpaceReflection @abstract Determines if the scene use screen space reflection. @discussion Defaults to NO.
+// Determines if the scene use screen space reflection. Defaults to NO.
 //
-// WithWantsScreenSpaceReflection sets the wantsScreenSpaceReflection property and returns the receiver for chaining.
+// WithWantsScreenSpaceReflection sets wantsScreenSpaceReflection and returns the receiver so calls can be chained.
 func (x *Scene) WithWantsScreenSpaceReflection(wantsScreenSpaceReflection bool) *Scene {
-	x.inner.SetWantsScreenSpaceReflection(wantsScreenSpaceReflection)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsScreenSpaceReflection:"), wantsScreenSpaceReflection)
 	return x
 }
 
-// @property screenSpaceReflectionSampleCount @abstract Determines the sample count of the screen space reflection. @discussion Defaults to 64.
+// Determines the sample count of the screen space reflection. Defaults to 64.
 //
-// WithScreenSpaceReflectionSampleCount sets the screenSpaceReflectionSampleCount property and returns the receiver for chaining.
+// WithScreenSpaceReflectionSampleCount sets screenSpaceReflectionSampleCount and returns the receiver so calls can be chained.
 func (x *Scene) WithScreenSpaceReflectionSampleCount(screenSpaceReflectionSampleCount int) *Scene {
-	x.inner.SetScreenSpaceReflectionSampleCount(screenSpaceReflectionSampleCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScreenSpaceReflectionSampleCount:"), screenSpaceReflectionSampleCount)
 	return x
 }
 
-// @property screenSpaceReflectionMaximumDistance @abstract Determines the maximum distance in world units. @discussion Defaults to 1000.
+// Determines the maximum distance in world units. Defaults to 1000.
 //
-// WithScreenSpaceReflectionMaximumDistance sets the screenSpaceReflectionMaximumDistance property and returns the receiver for chaining.
+// WithScreenSpaceReflectionMaximumDistance sets screenSpaceReflectionMaximumDistance and returns the receiver so calls can be chained.
 func (x *Scene) WithScreenSpaceReflectionMaximumDistance(screenSpaceReflectionMaximumDistance float64) *Scene {
-	x.inner.SetScreenSpaceReflectionMaximumDistance(screenSpaceReflectionMaximumDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScreenSpaceReflectionMaximumDistance:"), screenSpaceReflectionMaximumDistance)
 	return x
 }
 
-// @property screenSpaceReflectionStride @abstract Raytracing step size in pixel. The lower the better, the higher the faster. @discussion Defaults to 8.
+// Raytracing step size in pixel. The lower the better, the higher the faster. Defaults to 8.
 //
-// WithScreenSpaceReflectionStride sets the screenSpaceReflectionStride property and returns the receiver for chaining.
+// WithScreenSpaceReflectionStride sets screenSpaceReflectionStride and returns the receiver so calls can be chained.
 func (x *Scene) WithScreenSpaceReflectionStride(screenSpaceReflectionStride float64) *Scene {
-	x.inner.SetScreenSpaceReflectionStride(screenSpaceReflectionStride)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScreenSpaceReflectionStride:"), screenSpaceReflectionStride)
 	return x
 }
 
 // A Boolean value that determines whether to run actions, animations, particle systems, and physics simulations in the scene graph.
 //
-// WithPaused sets the paused property and returns the receiver for chaining.
+// WithPaused sets paused and returns the receiver so calls can be chained.
 func (x *Scene) WithPaused(paused bool) *Scene {
-	x.inner.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
 // Returns the scene attribute for the specified key.
-//
-// AttributeForKey calls the underlying AttributeForKey.
-func (x *Scene) AttributeForKey(key string) objc.ID {
-	return x.inner.AttributeForKey(foundation.NSStringStringWithUTF8String(key))
+func (x *Scene) AttributeForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeForKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
 // Sets a scene attribute for the specified key.
-//
-// SetAttributeForKey calls the underlying SetAttributeForKey.
-func (x *Scene) SetAttributeForKey(attribute objc.ID, key string) {
-	x.inner.SetAttributeForKey(attribute, foundation.NSStringStringWithUTF8String(key))
+func (x *Scene) SetAttributeForKey(attribute obj.Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttribute:forKey:"), objref.IDOf(attribute), purego.NSString(key))
 }
 
-// Exports the scene and its contents to a file at the specified URL.
-//
-// WriteToURLOptionsDelegateProgressHandler calls the underlying WriteToURLOptionsDelegateProgressHandler.
-func (x *Scene) WriteToURLOptionsDelegateProgressHandler(url string, options *foundation.NSDictionary[*foundation.NSString, objc.ID], delegate raw.SCNSceneExportDelegate, progressHandler func(float32, unsafe.Pointer, *bool)) bool {
-	return x.inner.WriteToURLOptionsDelegateProgressHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), options, delegate, progressHandler)
-}
-
-// @property root @abstract Specifies the root node of the node hierarchy. @discussion Note that we have only one root node, whereas some file formats might have many nodes at the root of their hierarchies. The root node(s) of the imported files will therefore be children of the SCNScene's root node.
-//
-// RootNode calls the underlying RootNode.
+// Specifies the root node of the node hierarchy. Note that we have only one root node, whereas some file formats might have many nodes at the root of their hierarchies. The root node(s) of the imported files will therefore be children of the SCNScene's root node.
 func (x *Scene) RootNode() *Node {
-	_r := x.inner.RootNode()
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootNode"))
+	return NodeFromID(_r)
 }
 
-// @property physicsWorld @abstract Specifies the physics world of the receiver. @discussion Every scene automatically creates a physics world object to simulate physics on nodes in the scene. You use this property to access the scene’s global physics properties, such as gravity. To add physics to a particular node, see physicsBody.
-//
-// PhysicsWorld calls the underlying PhysicsWorld.
+// Specifies the physics world of the receiver. Every scene automatically creates a physics world object to simulate physics on nodes in the scene. You use this property to access the scene’s global physics properties, such as gravity. To add physics to a particular node, see physicsBody.
 func (x *Scene) PhysicsWorld() *PhysicsWorld {
-	_r := x.inner.PhysicsWorld()
-	if _r == nil {
-		return nil
-	}
-	return &PhysicsWorld{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("physicsWorld"))
+	return PhysicsWorldFromID(_r)
 }
 
-// @property background @abstract Specifies the background of the receiver. @discussion The background is rendered before the rest of the scene. The background can be rendered as a skybox by setting a cube map as described in SCNMaterialProperty.h Colors are supported starting in macOS 10.12 and iOS 10. Prior to that you can use SCNView.backgroundColor. MDLSkyCubeTexture is supported starting in macOS 10.13 and iOS 11.
-//
-// Background calls the underlying Background.
+// Specifies the background of the receiver. The background is rendered before the rest of the scene. The background can be rendered as a skybox by setting a cube map as described in SCNMaterialProperty.h Colors are supported starting in macOS 10.12 and iOS 10. Prior to that you can use SCNView.backgroundColor. MDLSkyCubeTexture is supported starting in macOS 10.13 and iOS 11.
 func (x *Scene) Background() *MaterialProperty {
-	_r := x.inner.Background()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("background"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property lightingEnvironment @abstract Specifies the receiver's environment for image-based lighting (IBL). @discussion The environment can be - a cube map (as described in SCNMaterialProperty.h) - an instance of `MDLSkyCubeTexture` (supported since macOS 10.13 and iOS 11) - an object returned by `+[SCNMaterialProperty precomputedLightingEnvironmentContentsWithURL:error:]` or `+[SCNMaterialProperty precomputedLightingEnvironmentContentsWithData:error:]`
-//
-// LightingEnvironment calls the underlying LightingEnvironment.
+// Specifies the receiver's environment for image-based lighting (IBL). The environment can be - a cube map (as described in SCNMaterialProperty.h) - an instance of `MDLSkyCubeTexture` (supported since macOS 10.13 and iOS 11) - an object returned by `+[SCNMaterialProperty precomputedLightingEnvironmentContentsWithURL:error:]` or `+[SCNMaterialProperty precomputedLightingEnvironmentContentsWithData:error:]`
 func (x *Scene) LightingEnvironment() *MaterialProperty {
-	_r := x.inner.LightingEnvironment()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lightingEnvironment"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property fogStartDistance @abstract Specifies the receiver's fog start distance. Animatable. Defaults to 0.
-//
-// FogStartDistance calls the underlying FogStartDistance.
+// Specifies the receiver's fog start distance. Animatable. Defaults to 0.
 func (x *Scene) FogStartDistance() float64 {
-	return x.inner.FogStartDistance()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("fogStartDistance"))
+	return _r
 }
 
-// SetFogStartDistance calls the underlying SetFogStartDistance.
 func (x *Scene) SetFogStartDistance(fogStartDistance float64) {
-	x.inner.SetFogStartDistance(fogStartDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFogStartDistance:"), fogStartDistance)
 }
 
-// @property fogEndDistance @abstract Specifies the receiver's fog end distance. Animatable. Defaults to 0.
-//
-// FogEndDistance calls the underlying FogEndDistance.
+// Specifies the receiver's fog end distance. Animatable. Defaults to 0.
 func (x *Scene) FogEndDistance() float64 {
-	return x.inner.FogEndDistance()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("fogEndDistance"))
+	return _r
 }
 
-// SetFogEndDistance calls the underlying SetFogEndDistance.
 func (x *Scene) SetFogEndDistance(fogEndDistance float64) {
-	x.inner.SetFogEndDistance(fogEndDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFogEndDistance:"), fogEndDistance)
 }
 
-// @property fogDensityExponent @abstract Specifies the receiver's fog power exponent. Animatable. Defaults to 1. @discussion Controls the attenuation between the start and end fog distances. 0 means a constant fog, 1 a linear fog and 2 a quadratic fog, but any positive value will work.
-//
-// FogDensityExponent calls the underlying FogDensityExponent.
+// Specifies the receiver's fog power exponent. Animatable. Defaults to 1. Controls the attenuation between the start and end fog distances. 0 means a constant fog, 1 a linear fog and 2 a quadratic fog, but any positive value will work.
 func (x *Scene) FogDensityExponent() float64 {
-	return x.inner.FogDensityExponent()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("fogDensityExponent"))
+	return _r
 }
 
-// SetFogDensityExponent calls the underlying SetFogDensityExponent.
 func (x *Scene) SetFogDensityExponent(fogDensityExponent float64) {
-	x.inner.SetFogDensityExponent(fogDensityExponent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFogDensityExponent:"), fogDensityExponent)
 }
 
-// @property fogColor @abstract Specifies the receiver's fog color (NSColor or CGColorRef). Animatable. Defaults to white. @discussion The initial value is a NSColor.
-//
-// FogColor calls the underlying FogColor.
-func (x *Scene) FogColor() objc.ID {
-	return x.inner.FogColor()
+// Specifies the receiver's fog color (NSColor or CGColorRef). Animatable. Defaults to white. The initial value is a NSColor.
+func (x *Scene) FogColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fogColor"))
+	return obj.Wrap(_r)
 }
 
-// SetFogColor calls the underlying SetFogColor.
-func (x *Scene) SetFogColor(fogColor objc.ID) {
-	x.inner.SetFogColor(fogColor)
+func (x *Scene) SetFogColor(fogColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFogColor:"), objref.IDOf(fogColor))
 }
 
-// @property wantsScreenSpaceReflection @abstract Determines if the scene use screen space reflection. @discussion Defaults to NO.
-//
-// WantsScreenSpaceReflection calls the underlying WantsScreenSpaceReflection.
+// Determines if the scene use screen space reflection. Defaults to NO.
 func (x *Scene) WantsScreenSpaceReflection() bool {
-	return x.inner.WantsScreenSpaceReflection()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsScreenSpaceReflection"))
+	return _r
 }
 
-// SetWantsScreenSpaceReflection calls the underlying SetWantsScreenSpaceReflection.
 func (x *Scene) SetWantsScreenSpaceReflection(wantsScreenSpaceReflection bool) {
-	x.inner.SetWantsScreenSpaceReflection(wantsScreenSpaceReflection)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsScreenSpaceReflection:"), wantsScreenSpaceReflection)
 }
 
-// @property screenSpaceReflectionSampleCount @abstract Determines the sample count of the screen space reflection. @discussion Defaults to 64.
-//
-// ScreenSpaceReflectionSampleCount calls the underlying ScreenSpaceReflectionSampleCount.
+// Determines the sample count of the screen space reflection. Defaults to 64.
 func (x *Scene) ScreenSpaceReflectionSampleCount() int {
-	return x.inner.ScreenSpaceReflectionSampleCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("screenSpaceReflectionSampleCount"))
+	return _r
 }
 
-// SetScreenSpaceReflectionSampleCount calls the underlying SetScreenSpaceReflectionSampleCount.
 func (x *Scene) SetScreenSpaceReflectionSampleCount(screenSpaceReflectionSampleCount int) {
-	x.inner.SetScreenSpaceReflectionSampleCount(screenSpaceReflectionSampleCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScreenSpaceReflectionSampleCount:"), screenSpaceReflectionSampleCount)
 }
 
-// @property screenSpaceReflectionMaximumDistance @abstract Determines the maximum distance in world units. @discussion Defaults to 1000.
-//
-// ScreenSpaceReflectionMaximumDistance calls the underlying ScreenSpaceReflectionMaximumDistance.
+// Determines the maximum distance in world units. Defaults to 1000.
 func (x *Scene) ScreenSpaceReflectionMaximumDistance() float64 {
-	return x.inner.ScreenSpaceReflectionMaximumDistance()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("screenSpaceReflectionMaximumDistance"))
+	return _r
 }
 
-// SetScreenSpaceReflectionMaximumDistance calls the underlying SetScreenSpaceReflectionMaximumDistance.
 func (x *Scene) SetScreenSpaceReflectionMaximumDistance(screenSpaceReflectionMaximumDistance float64) {
-	x.inner.SetScreenSpaceReflectionMaximumDistance(screenSpaceReflectionMaximumDistance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScreenSpaceReflectionMaximumDistance:"), screenSpaceReflectionMaximumDistance)
 }
 
-// @property screenSpaceReflectionStride @abstract Raytracing step size in pixel. The lower the better, the higher the faster. @discussion Defaults to 8.
-//
-// ScreenSpaceReflectionStride calls the underlying ScreenSpaceReflectionStride.
+// Raytracing step size in pixel. The lower the better, the higher the faster. Defaults to 8.
 func (x *Scene) ScreenSpaceReflectionStride() float64 {
-	return x.inner.ScreenSpaceReflectionStride()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("screenSpaceReflectionStride"))
+	return _r
 }
 
-// SetScreenSpaceReflectionStride calls the underlying SetScreenSpaceReflectionStride.
 func (x *Scene) SetScreenSpaceReflectionStride(screenSpaceReflectionStride float64) {
-	x.inner.SetScreenSpaceReflectionStride(screenSpaceReflectionStride)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScreenSpaceReflectionStride:"), screenSpaceReflectionStride)
 }
 
-// @property paused @abstract Controls whether or not the scene is paused. Defaults to NO. @discussion Pausing a scene will pause animations, actions, particles and physics.
-//
-// IsPaused calls the underlying IsPaused.
+// Controls whether or not the scene is paused. Defaults to NO. Pausing a scene will pause animations, actions, particles and physics.
 func (x *Scene) IsPaused() bool {
-	return x.inner.IsPaused()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
+	return _r
 }
 
-// SetPaused calls the underlying SetPaused.
 func (x *Scene) SetPaused(paused bool) {
-	x.inner.SetPaused(paused)
-}
-
-// Attaches a particle system to the scene, using the specified transform.
-//
-// AddParticleSystemWithTransform calls the underlying AddParticleSystemWithTransform.
-func (x *Scene) AddParticleSystemWithTransform(system *raw.SCNParticleSystem, transform quartzcore.CATransform3D) {
-	x.inner.AddParticleSystemWithTransform(system, transform)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 }
 
 // Removes any particle systems directly attached to the scene.
-//
-// RemoveAllParticleSystems calls the underlying RemoveAllParticleSystems.
 func (x *Scene) RemoveAllParticleSystems() {
-	x.inner.RemoveAllParticleSystems()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllParticleSystems"))
 }
 
 // Removes a particle system attached to the scene.
-//
-// RemoveParticleSystem calls the underlying RemoveParticleSystem.
-func (x *Scene) RemoveParticleSystem(system *raw.SCNParticleSystem) {
-	x.inner.RemoveParticleSystem(system)
+func (x *Scene) RemoveParticleSystem(system *ParticleSystem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeParticleSystem:"), objref.IDOf(system))
 }
 
 // ParticleSystems returns the collection as a Go slice.
 func (x *Scene) ParticleSystems() []*ParticleSystem {
-	arr := x.inner.ParticleSystems()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ParticleSystem {
-		return &ParticleSystem{inner: raw.SCNParticleSystemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("particleSystems"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ParticleSystem { return ParticleSystemFromID(_id) })
 }
 
 // Sceneable is the interface implemented by [Scene], for mocking and DI.
 type Sceneable interface {
-	Unwrap() *raw.SCNScene
+	obj.Object
 	WithFogStartDistance(fogStartDistance float64) *Scene
 	WithFogEndDistance(fogEndDistance float64) *Scene
 	WithFogDensityExponent(fogDensityExponent float64) *Scene
-	WithFogColor(fogColor objc.ID) *Scene
+	WithFogColor(fogColor obj.Object) *Scene
 	WithWantsScreenSpaceReflection(wantsScreenSpaceReflection bool) *Scene
 	WithScreenSpaceReflectionSampleCount(screenSpaceReflectionSampleCount int) *Scene
 	WithScreenSpaceReflectionMaximumDistance(screenSpaceReflectionMaximumDistance float64) *Scene
 	WithScreenSpaceReflectionStride(screenSpaceReflectionStride float64) *Scene
 	WithPaused(paused bool) *Scene
-	AttributeForKey(key string) objc.ID
-	SetAttributeForKey(attribute objc.ID, key string)
-	WriteToURLOptionsDelegateProgressHandler(url string, options *foundation.NSDictionary[*foundation.NSString, objc.ID], delegate raw.SCNSceneExportDelegate, progressHandler func(float32, unsafe.Pointer, *bool)) bool
+	AttributeForKey(key string) obj.Object
+	SetAttributeForKey(attribute obj.Object, key string)
 	RootNode() *Node
 	PhysicsWorld() *PhysicsWorld
 	Background() *MaterialProperty
@@ -343,8 +301,8 @@ type Sceneable interface {
 	SetFogEndDistance(fogEndDistance float64)
 	FogDensityExponent() float64
 	SetFogDensityExponent(fogDensityExponent float64)
-	FogColor() objc.ID
-	SetFogColor(fogColor objc.ID)
+	FogColor() obj.Object
+	SetFogColor(fogColor obj.Object)
 	WantsScreenSpaceReflection() bool
 	SetWantsScreenSpaceReflection(wantsScreenSpaceReflection bool)
 	ScreenSpaceReflectionSampleCount() int
@@ -355,9 +313,8 @@ type Sceneable interface {
 	SetScreenSpaceReflectionStride(screenSpaceReflectionStride float64)
 	IsPaused() bool
 	SetPaused(paused bool)
-	AddParticleSystemWithTransform(system *raw.SCNParticleSystem, transform quartzcore.CATransform3D)
 	RemoveAllParticleSystems()
-	RemoveParticleSystem(system *raw.SCNParticleSystem)
+	RemoveParticleSystem(system *ParticleSystem)
 	ParticleSystems() []*ParticleSystem
 }
 

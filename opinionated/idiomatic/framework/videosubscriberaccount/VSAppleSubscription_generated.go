@@ -5,108 +5,110 @@
 package videosubscriberaccount
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videosubscriberaccount"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An Apple streaming service customer and their subscriptions.
 //
-// VSAppleSubscription wraps [raw.VSAppleSubscription] with a fluent Go API.
+// VSAppleSubscription is an idiomatic wrapper over the Objective-C class VSAppleSubscription.
 type VSAppleSubscription struct {
-	inner *raw.VSAppleSubscription
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VSAppleSubscription].
-func (x *VSAppleSubscription) Unwrap() *raw.VSAppleSubscription { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VSAppleSubscription) ID() objc.ID { return x.inner.Ptr() }
-
-// VSAppleSubscriptionFromID adopts an existing object pointer as a VSAppleSubscription (nil for 0).
+// VSAppleSubscriptionFromID adopts an existing Objective-C object as a VSAppleSubscription
+// (nil for 0), retaining it and registering a release finalizer.
 func VSAppleSubscriptionFromID(id objc.ID) *VSAppleSubscription {
 	if id == 0 {
 		return nil
 	}
-	return &VSAppleSubscription{inner: raw.VSAppleSubscriptionFromID(id)}
+	x := &VSAppleSubscription{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVSAppleSubscriptionWithCustomerIDProductCodes creates a new [VSAppleSubscription].
-func NewVSAppleSubscriptionWithCustomerIDProductCodes(customerID string, productCodes *foundation.NSArray[*foundation.NSString]) *VSAppleSubscription {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VSAppleSubscription")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCustomerID:productCodes:"), foundation.NSStringStringWithUTF8String(customerID).Ptr(), productCodes.Ptr())
-	return &VSAppleSubscription{inner: raw.VSAppleSubscriptionFromID(_id)}
+// vSAppleSubscriptionAdopt wraps an Objective-C object that this code just created as a
+// VSAppleSubscription (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vSAppleSubscriptionAdopt(id objc.ID) *VSAppleSubscription {
+	if id == 0 {
+		return nil
+	}
+	x := &VSAppleSubscription{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// WithCustomerID sets the customerID property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *VSAppleSubscription) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VSAppleSubscription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VSAppleSubscription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVSAppleSubscriptionWithCustomerIDProductCodes creates a new VSAppleSubscription.
+func NewVSAppleSubscriptionWithCustomerIDProductCodes(customerID string, productCodes []string) *VSAppleSubscription {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VSAppleSubscription")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCustomerID:productCodes:"), purego.NSString(customerID), purego.SliceToNSArray(productCodes, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return vSAppleSubscriptionAdopt(_id)
+}
+
+// WithCustomerID sets customerID and returns the receiver so calls can be chained.
 func (x *VSAppleSubscription) WithCustomerID(customerID string) *VSAppleSubscription {
-	x.inner.SetCustomerID(foundation.NSStringStringWithUTF8String(customerID))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomerID:"), purego.NSString(customerID))
 	return x
 }
 
-// WithProductCodes sets the collection, converting the Go slice to an NSArray.
-func (x *VSAppleSubscription) WithProductCodes(items ...*foundation.NSString) *VSAppleSubscription {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetProductCodes(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetProductCodes(_arr)
+// WithProductCodes sets the collection and returns the receiver so calls can be chained.
+func (x *VSAppleSubscription) WithProductCodes(items ...obj.Object) *VSAppleSubscription {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductCodes:"), _arr)
 	return x
 }
 
-// CustomerID calls the underlying CustomerID.
 func (x *VSAppleSubscription) CustomerID() string {
-	_r := x.inner.CustomerID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customerID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCustomerID calls the underlying SetCustomerID.
 func (x *VSAppleSubscription) SetCustomerID(customerID string) {
-	x.inner.SetCustomerID(foundation.NSStringStringWithUTF8String(customerID))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomerID:"), purego.NSString(customerID))
 }
 
 // ProductCodes returns the collection as a Go slice.
 func (x *VSAppleSubscription) ProductCodes() []string {
-	arr := x.inner.ProductCodes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productCodes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetProductCodes calls the underlying SetProductCodes.
-func (x *VSAppleSubscription) SetProductCodes(productCodes *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetProductCodes(productCodes)
+func (x *VSAppleSubscription) SetProductCodes(productCodes []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductCodes:"), purego.SliceToNSArray(productCodes, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // VSAppleSubscriptionable is the interface implemented by [VSAppleSubscription], for mocking and DI.
 type VSAppleSubscriptionable interface {
-	Unwrap() *raw.VSAppleSubscription
+	obj.Object
 	WithCustomerID(customerID string) *VSAppleSubscription
-	WithProductCodes(items ...*foundation.NSString) *VSAppleSubscription
+	WithProductCodes(items ...obj.Object) *VSAppleSubscription
 	CustomerID() string
 	SetCustomerID(customerID string)
 	ProductCodes() []string
-	SetProductCodes(productCodes *foundation.NSArray[*foundation.NSString])
+	SetProductCodes(productCodes []string)
 }
 
 var _ VSAppleSubscriptionable = (*VSAppleSubscription)(nil)

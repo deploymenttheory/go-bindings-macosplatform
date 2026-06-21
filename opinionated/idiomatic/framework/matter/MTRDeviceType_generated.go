@@ -5,69 +5,90 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Meta-data about a device type defined in the Matter specification.
 //
-// MTRDeviceType wraps [raw.MTRDeviceType] with a fluent Go API.
+// MTRDeviceType is an idiomatic wrapper over the Objective-C class MTRDeviceType.
 type MTRDeviceType struct {
-	inner *raw.MTRDeviceType
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRDeviceType].
-func (x *MTRDeviceType) Unwrap() *raw.MTRDeviceType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRDeviceType) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRDeviceTypeFromID adopts an existing object pointer as a MTRDeviceType (nil for 0).
+// MTRDeviceTypeFromID adopts an existing Objective-C object as a MTRDeviceType
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRDeviceTypeFromID(id objc.ID) *MTRDeviceType {
 	if id == 0 {
 		return nil
 	}
-	return &MTRDeviceType{inner: raw.MTRDeviceTypeFromID(id)}
+	x := &MTRDeviceType{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRDeviceType creates a new [MTRDeviceType].
+// mTRDeviceTypeAdopt wraps an Objective-C object that this code just created as a
+// MTRDeviceType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRDeviceTypeAdopt(id objc.ID) *MTRDeviceType {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRDeviceType{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRDeviceType) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRDeviceType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRDeviceType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRDeviceType creates a new MTRDeviceType.
 func NewMTRDeviceType() *MTRDeviceType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRDeviceType")), objc.RegisterName("new"))
-	return &MTRDeviceType{inner: raw.MTRDeviceTypeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceType")), objc.RegisterName("new"))
+	return mTRDeviceTypeAdopt(_id)
 }
 
 // The identifier of the device type (32-bit unsigned integer).
-//
-// Id calls the underlying Id.
-func (x *MTRDeviceType) Id() *foundation.NSNumber {
-	return x.inner.Id()
+func (x *MTRDeviceType) Id() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("id"))
+	return obj.Wrap(_r)
 }
 
 // Returns the name of the device type.
-//
-// Name calls the underlying Name.
 func (x *MTRDeviceType) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Returns whether this is a utility device type.
-//
-// IsUtility calls the underlying IsUtility.
 func (x *MTRDeviceType) IsUtility() bool {
-	return x.inner.IsUtility()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUtility"))
+	return _r
 }
 
 // MTRDeviceTypeable is the interface implemented by [MTRDeviceType], for mocking and DI.
 type MTRDeviceTypeable interface {
-	Unwrap() *raw.MTRDeviceType
-	Id() *foundation.NSNumber
+	obj.Object
+	Id() obj.Object
 	Name() string
 	IsUtility() bool
 }

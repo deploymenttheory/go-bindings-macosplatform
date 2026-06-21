@@ -5,143 +5,162 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRFanControlClusterStepParams wraps [raw.MTRFanControlClusterStepParams] with a fluent Go API.
+// MTRFanControlClusterStepParams is an idiomatic wrapper over the Objective-C class MTRFanControlClusterStepParams.
 type MTRFanControlClusterStepParams struct {
-	inner *raw.MTRFanControlClusterStepParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRFanControlClusterStepParams].
-func (x *MTRFanControlClusterStepParams) Unwrap() *raw.MTRFanControlClusterStepParams { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRFanControlClusterStepParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRFanControlClusterStepParamsFromID adopts an existing object pointer as a MTRFanControlClusterStepParams (nil for 0).
+// MTRFanControlClusterStepParamsFromID adopts an existing Objective-C object as a MTRFanControlClusterStepParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRFanControlClusterStepParamsFromID(id objc.ID) *MTRFanControlClusterStepParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRFanControlClusterStepParams{inner: raw.MTRFanControlClusterStepParamsFromID(id)}
+	x := &MTRFanControlClusterStepParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRFanControlClusterStepParams creates a new [MTRFanControlClusterStepParams].
+// mTRFanControlClusterStepParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRFanControlClusterStepParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRFanControlClusterStepParamsAdopt(id objc.ID) *MTRFanControlClusterStepParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRFanControlClusterStepParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRFanControlClusterStepParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRFanControlClusterStepParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRFanControlClusterStepParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRFanControlClusterStepParams creates a new MTRFanControlClusterStepParams.
 func NewMTRFanControlClusterStepParams() *MTRFanControlClusterStepParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRFanControlClusterStepParams")), objc.RegisterName("new"))
-	return &MTRFanControlClusterStepParams{inner: raw.MTRFanControlClusterStepParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRFanControlClusterStepParams")), objc.RegisterName("new"))
+	return mTRFanControlClusterStepParamsAdopt(_id)
 }
 
-// WithDirection sets the direction property and returns the receiver for chaining.
-func (x *MTRFanControlClusterStepParams) WithDirection(direction *foundation.NSNumber) *MTRFanControlClusterStepParams {
-	x.inner.SetDirection(direction)
+// WithDirection sets direction and returns the receiver so calls can be chained.
+func (x *MTRFanControlClusterStepParams) WithDirection(direction obj.Object) *MTRFanControlClusterStepParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirection:"), objref.IDOf(direction))
 	return x
 }
 
-// WithWrap sets the wrap property and returns the receiver for chaining.
-func (x *MTRFanControlClusterStepParams) WithWrap(wrap *foundation.NSNumber) *MTRFanControlClusterStepParams {
-	x.inner.SetWrap(wrap)
+// WithWrap sets wrap and returns the receiver so calls can be chained.
+func (x *MTRFanControlClusterStepParams) WithWrap(wrap obj.Object) *MTRFanControlClusterStepParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrap:"), objref.IDOf(wrap))
 	return x
 }
 
-// WithLowestOff sets the lowestOff property and returns the receiver for chaining.
-func (x *MTRFanControlClusterStepParams) WithLowestOff(lowestOff *foundation.NSNumber) *MTRFanControlClusterStepParams {
-	x.inner.SetLowestOff(lowestOff)
+// WithLowestOff sets lowestOff and returns the receiver so calls can be chained.
+func (x *MTRFanControlClusterStepParams) WithLowestOff(lowestOff obj.Object) *MTRFanControlClusterStepParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowestOff:"), objref.IDOf(lowestOff))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRFanControlClusterStepParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRFanControlClusterStepParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRFanControlClusterStepParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRFanControlClusterStepParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRFanControlClusterStepParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRFanControlClusterStepParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRFanControlClusterStepParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRFanControlClusterStepParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// Direction calls the underlying Direction.
-func (x *MTRFanControlClusterStepParams) Direction() *foundation.NSNumber {
-	return x.inner.Direction()
+func (x *MTRFanControlClusterStepParams) Direction() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("direction"))
+	return obj.Wrap(_r)
 }
 
-// SetDirection calls the underlying SetDirection.
-func (x *MTRFanControlClusterStepParams) SetDirection(direction *foundation.NSNumber) {
-	x.inner.SetDirection(direction)
+func (x *MTRFanControlClusterStepParams) SetDirection(direction obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirection:"), objref.IDOf(direction))
 }
 
-// Wrap calls the underlying Wrap.
-func (x *MTRFanControlClusterStepParams) Wrap() *foundation.NSNumber {
-	return x.inner.Wrap()
+func (x *MTRFanControlClusterStepParams) Wrap() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wrap"))
+	return obj.Wrap(_r)
 }
 
-// SetWrap calls the underlying SetWrap.
-func (x *MTRFanControlClusterStepParams) SetWrap(wrap *foundation.NSNumber) {
-	x.inner.SetWrap(wrap)
+func (x *MTRFanControlClusterStepParams) SetWrap(wrap obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrap:"), objref.IDOf(wrap))
 }
 
-// LowestOff calls the underlying LowestOff.
-func (x *MTRFanControlClusterStepParams) LowestOff() *foundation.NSNumber {
-	return x.inner.LowestOff()
+func (x *MTRFanControlClusterStepParams) LowestOff() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lowestOff"))
+	return obj.Wrap(_r)
 }
 
-// SetLowestOff calls the underlying SetLowestOff.
-func (x *MTRFanControlClusterStepParams) SetLowestOff(lowestOff *foundation.NSNumber) {
-	x.inner.SetLowestOff(lowestOff)
+func (x *MTRFanControlClusterStepParams) SetLowestOff(lowestOff obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowestOff:"), objref.IDOf(lowestOff))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRFanControlClusterStepParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRFanControlClusterStepParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRFanControlClusterStepParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRFanControlClusterStepParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRFanControlClusterStepParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRFanControlClusterStepParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRFanControlClusterStepParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRFanControlClusterStepParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRFanControlClusterStepParamsable is the interface implemented by [MTRFanControlClusterStepParams], for mocking and DI.
 type MTRFanControlClusterStepParamsable interface {
-	Unwrap() *raw.MTRFanControlClusterStepParams
-	WithDirection(direction *foundation.NSNumber) *MTRFanControlClusterStepParams
-	WithWrap(wrap *foundation.NSNumber) *MTRFanControlClusterStepParams
-	WithLowestOff(lowestOff *foundation.NSNumber) *MTRFanControlClusterStepParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRFanControlClusterStepParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRFanControlClusterStepParams
-	Direction() *foundation.NSNumber
-	SetDirection(direction *foundation.NSNumber)
-	Wrap() *foundation.NSNumber
-	SetWrap(wrap *foundation.NSNumber)
-	LowestOff() *foundation.NSNumber
-	SetLowestOff(lowestOff *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithDirection(direction obj.Object) *MTRFanControlClusterStepParams
+	WithWrap(wrap obj.Object) *MTRFanControlClusterStepParams
+	WithLowestOff(lowestOff obj.Object) *MTRFanControlClusterStepParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRFanControlClusterStepParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRFanControlClusterStepParams
+	Direction() obj.Object
+	SetDirection(direction obj.Object)
+	Wrap() obj.Object
+	SetWrap(wrap obj.Object)
+	LowestOff() obj.Object
+	SetLowestOff(lowestOff obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRFanControlClusterStepParamsable = (*MTRFanControlClusterStepParams)(nil)

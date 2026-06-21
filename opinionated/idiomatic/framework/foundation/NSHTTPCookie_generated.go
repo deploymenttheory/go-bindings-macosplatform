@@ -5,193 +5,183 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A representation of an HTTP cookie.
 //
-// HTTPCookie wraps [raw.NSHTTPCookie] with a fluent Go API.
+// HTTPCookie is an idiomatic wrapper over the Objective-C class NSHTTPCookie.
 type HTTPCookie struct {
-	inner *raw.NSHTTPCookie
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSHTTPCookie].
-func (x *HTTPCookie) Unwrap() *raw.NSHTTPCookie { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HTTPCookie) ID() objc.ID { return x.inner.Ptr() }
-
-// HTTPCookieFromID adopts an existing object pointer as a HTTPCookie (nil for 0).
+// HTTPCookieFromID adopts an existing Objective-C object as a HTTPCookie
+// (nil for 0), retaining it and registering a release finalizer.
 func HTTPCookieFromID(id objc.ID) *HTTPCookie {
 	if id == 0 {
 		return nil
 	}
-	return &HTTPCookie{inner: raw.NSHTTPCookieFromID(id)}
-}
-
-// @method initWithProperties: @abstract Initialize a NSHTTPCookie object with a dictionary of parameters @param properties The dictionary of properties to be used to initialize this cookie. @discussion Supported dictionary keys and value types for the given dictionary are as follows. All properties can handle an NSString value, but some can also handle other types. <table border="1" cellspacing="2" cellpadding="4"> <tr> <th>Property key constant</th> <th>Type of value</th> <th>Required</th> <th>Description</th> </tr> <tr> <td>NSHTTPCookieComment</td> <td>NSString</td> <td>NO</td> <td>Comment for the cookie. Only valid for version 1 cookies and later. Default is nil.</td> </tr> <tr> <td>NSHTTPCookieCommentURL</td> <td>NSURL or NSString</td> <td>NO</td> <td>Comment URL for the cookie. Only valid for version 1 cookies and later. Default is nil.</td> </tr> <tr> <td>NSHTTPCookieDomain</td> <td>NSString</td> <td>Special, a value for either NSHTTPCookieOriginURL or NSHTTPCookieDomain must be specified.</td> <td>Domain for the cookie. Inferred from the value for NSHTTPCookieOriginURL if not provided.</td> </tr> <tr> <td>NSHTTPCookieDiscard</td> <td>NSString</td> <td>NO</td> <td>A string stating whether the cookie should be discarded at the end of the session. String value must be either "TRUE" or "FALSE". Default is "FALSE", unless this is cookie is version 1 or greater and a value for NSHTTPCookieMaximumAge is not specified, in which case it is assumed "TRUE".</td> </tr> <tr> <td>NSHTTPCookieExpires</td> <td>NSDate or NSString</td> <td>NO</td> <td>Expiration date for the cookie. Used only for version 0 cookies. Ignored for version 1 or greater.</td> </tr> <tr> <td>NSHTTPCookieMaximumAge</td> <td>NSString</td> <td>NO</td> <td>A string containing an integer value stating how long in seconds the cookie should be kept, at most. Only valid for version 1 cookies and later. Default is "0".</td> </tr> <tr> <td>NSHTTPCookieName</td> <td>NSString</td> <td>YES</td> <td>Name of the cookie</td> </tr> <tr> <td>NSHTTPCookieOriginURL</td> <td>NSURL or NSString</td> <td>Special, a value for either NSHTTPCookieOriginURL or NSHTTPCookieDomain must be specified.</td> <td>URL that set this cookie. Used as default for other fields as noted.</td> </tr> <tr> <td>NSHTTPCookiePath</td> <td>NSString</td> <td>NO</td> <td>Path for the cookie. Inferred from the value for NSHTTPCookieOriginURL if not provided. Default is "/".</td> </tr> <tr> <td>NSHTTPCookiePort</td> <td>NSString</td> <td>NO</td> <td>comma-separated integer values specifying the ports for the cookie. Only valid for version 1 cookies and later. Default is empty string ("").</td> </tr> <tr> <td>NSHTTPCookieSecure</td> <td>NSString</td> <td>NO</td> <td>A string stating whether the cookie should be transmitted only over secure channels. String value must be either "TRUE" or "FALSE". Default is "FALSE".</td> </tr> <tr> <td>NSHTTPCookieValue</td> <td>NSString</td> <td>YES</td> <td>Value of the cookie</td> </tr> <tr> <td>NSHTTPCookieVersion</td> <td>NSString</td> <td>NO</td> <td>Specifies the version of the cookie. Must be either "0" or "1". Default is "0".</td> </tr> <tr> <td>NSHTTPCookieSetByJavaScript</td> <td>NSNumber</td> <td>NO</td> <td>@YES if the cookie is set via JavaScript. @NO if the cookie is not set via JavaScript</td> </tr> </table> <p> All other keys are ignored. @result An initialized NSHTTPCookie, or nil if the set of dictionary keys is invalid, for example because a required key is missing, or a recognized key maps to an illegal value.
-//
-// NewHTTPCookieWithProperties creates a new [HTTPCookie].
-func NewHTTPCookieWithProperties(properties purego.IDer) *HTTPCookie {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSHTTPCookie")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProperties:"), properties.ID())
-	return &HTTPCookie{inner: raw.NSHTTPCookieFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *HTTPCookie) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *HTTPCookie {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &HTTPCookie{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @abstract Returns a dictionary representation of the receiver. @discussion This method returns a dictionary representation of the NSHTTPCookie which can be saved and passed to <tt>-initWithProperties:</tt> or <tt>+cookieWithProperties:</tt> later to reconstitute an equivalent cookie. <p>See the NSHTTPCookie <tt>-initWithProperties:</tt> method for more information on the constraints imposed on the dictionary, and for descriptions of the supported keys and values. @result The dictionary representation of the receiver.
-//
-// Properties calls the underlying Properties.
-func (x *HTTPCookie) Properties() *raw.NSDictionary[*raw.NSString, objc.ID] {
-	return x.inner.Properties()
-}
-
-// @abstract Returns the name of the receiver. @result the name of the receiver.
-//
-// Name calls the underlying Name.
-func (x *HTTPCookie) Name() *String {
-	_r := x.inner.Name()
-	if _r == nil {
+// hTTPCookieAdopt wraps an Objective-C object that this code just created as a
+// HTTPCookie (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hTTPCookieAdopt(id objc.ID) *HTTPCookie {
+	if id == 0 {
 		return nil
 	}
-	return &String{inner: _r}
+	x := &HTTPCookie{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @abstract Returns the value of the receiver. @result the value of the receiver.
+// Description returns the object's -description text.
+func (x *HTTPCookie) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HTTPCookie) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HTTPCookie) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// Initialize a NSHTTPCookie object with a dictionary of parameters Supported dictionary keys and value types for the given dictionary are as follows. All properties can handle an NSString value, but some can also handle other types. <table border="1" cellspacing="2" cellpadding="4"> <tr> <th>Property key constant</th> <th>Type of value</th> <th>Required</th> <th>Description</th> </tr> <tr> <td>NSHTTPCookieComment</td> <td>NSString</td> <td>NO</td> <td>Comment for the cookie. Only valid for version 1 cookies and later. Default is nil.</td> </tr> <tr> <td>NSHTTPCookieCommentURL</td> <td>NSURL or NSString</td> <td>NO</td> <td>Comment URL for the cookie. Only valid for version 1 cookies and later. Default is nil.</td> </tr> <tr> <td>NSHTTPCookieDomain</td> <td>NSString</td> <td>Special, a value for either NSHTTPCookieOriginURL or NSHTTPCookieDomain must be specified.</td> <td>Domain for the cookie. Inferred from the value for NSHTTPCookieOriginURL if not provided.</td> </tr> <tr> <td>NSHTTPCookieDiscard</td> <td>NSString</td> <td>NO</td> <td>A string stating whether the cookie should be discarded at the end of the session. String value must be either "TRUE" or "FALSE". Default is "FALSE", unless this is cookie is version 1 or greater and a value for NSHTTPCookieMaximumAge is not specified, in which case it is assumed "TRUE".</td> </tr> <tr> <td>NSHTTPCookieExpires</td> <td>NSDate or NSString</td> <td>NO</td> <td>Expiration date for the cookie. Used only for version 0 cookies. Ignored for version 1 or greater.</td> </tr> <tr> <td>NSHTTPCookieMaximumAge</td> <td>NSString</td> <td>NO</td> <td>A string containing an integer value stating how long in seconds the cookie should be kept, at most. Only valid for version 1 cookies and later. Default is "0".</td> </tr> <tr> <td>NSHTTPCookieName</td> <td>NSString</td> <td>YES</td> <td>Name of the cookie</td> </tr> <tr> <td>NSHTTPCookieOriginURL</td> <td>NSURL or NSString</td> <td>Special, a value for either NSHTTPCookieOriginURL or NSHTTPCookieDomain must be specified.</td> <td>URL that set this cookie. Used as default for other fields as noted.</td> </tr> <tr> <td>NSHTTPCookiePath</td> <td>NSString</td> <td>NO</td> <td>Path for the cookie. Inferred from the value for NSHTTPCookieOriginURL if not provided. Default is "/".</td> </tr> <tr> <td>NSHTTPCookiePort</td> <td>NSString</td> <td>NO</td> <td>comma-separated integer values specifying the ports for the cookie. Only valid for version 1 cookies and later. Default is empty string ("").</td> </tr> <tr> <td>NSHTTPCookieSecure</td> <td>NSString</td> <td>NO</td> <td>A string stating whether the cookie should be transmitted only over secure channels. String value must be either "TRUE" or "FALSE". Default is "FALSE".</td> </tr> <tr> <td>NSHTTPCookieValue</td> <td>NSString</td> <td>YES</td> <td>Value of the cookie</td> </tr> <tr> <td>NSHTTPCookieVersion</td> <td>NSString</td> <td>NO</td> <td>Specifies the version of the cookie. Must be either "0" or "1". Default is "0".</td> </tr> <tr> <td>NSHTTPCookieSetByJavaScript</td> <td>NSNumber</td> <td>NO</td> <td>
 //
-// Value calls the underlying Value.
-func (x *HTTPCookie) Value() *String {
-	_r := x.inner.Value()
-	if _r == nil {
-		return nil
+// NewHTTPCookieWithProperties creates a new HTTPCookie.
+func NewHTTPCookieWithProperties(properties obj.Object) *HTTPCookie {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSHTTPCookie")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProperties:"), objref.IDOf(properties))
+	return hTTPCookieAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *HTTPCookie) WithScriptingProperties(scriptingProperties obj.Object) *HTTPCookie {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+// Returns a dictionary representation of the receiver. This method returns a dictionary representation of the NSHTTPCookie which can be saved and passed to <tt>-initWithProperties:</tt> or <tt>+cookieWithProperties:</tt> later to reconstitute an equivalent cookie. <p>See the NSHTTPCookie <tt>-initWithProperties:</tt> method for more information on the constraints imposed on the dictionary, and for descriptions of the supported keys and values.
+func (x *HTTPCookie) Properties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("properties"))
+	return obj.Wrap(_r)
+}
+
+// Returns the name of the receiver.
+func (x *HTTPCookie) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// @abstract Returns the expires date of the receiver. @result the expires date of the receiver. @discussion The expires date is the date when the cookie should be deleted. The result will be nil if there is no specific expires date. This will be the case only for "session-only" cookies. @result The expires date of the receiver.
-//
-// ExpiresDate calls the underlying ExpiresDate.
+// Returns the value of the receiver.
+func (x *HTTPCookie) Value() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// Returns the expires date of the receiver. The expires date is the date when the cookie should be deleted. The result will be nil if there is no specific expires date. This will be the case only for "session-only" cookies.
 func (x *HTTPCookie) ExpiresDate() *Date {
-	_r := x.inner.ExpiresDate()
-	if _r == nil {
-		return nil
-	}
-	return &Date{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expiresDate"))
+	return DateFromID(_r)
 }
 
-// @abstract Returns whether the receiver is session-only. @result YES if this receiver should be discarded at the end of the session (regardless of expiration date), NO if receiver need not be discarded at the end of the session.
-//
-// IsSessionOnly calls the underlying IsSessionOnly.
+// Returns whether the receiver is session-only.
 func (x *HTTPCookie) IsSessionOnly() bool {
-	return x.inner.IsSessionOnly()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSessionOnly"))
+	return _r
 }
 
-// @abstract Returns the domain of the receiver. @discussion This value specifies URL domain to which the cookie should be sent. A domain with a leading dot means the cookie should be sent to subdomains as well, assuming certain other restrictions are valid. See RFC 2965 for more detail. @result The domain of the receiver.
-//
-// Domain calls the underlying Domain.
-func (x *HTTPCookie) Domain() *String {
-	_r := x.inner.Domain()
-	if _r == nil {
-		return nil
+// Returns the domain of the receiver. This value specifies URL domain to which the cookie should be sent. A domain with a leading dot means the cookie should be sent to subdomains as well, assuming certain other restrictions are valid. See RFC 2965 for more detail.
+func (x *HTTPCookie) Domain() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// @abstract Returns the path of the receiver. @discussion This value specifies the URL path under the cookie's domain for which this cookie should be sent. The cookie will also be sent for children of that path, so "/" is the most general. @result The path of the receiver.
-//
-// Path calls the underlying Path.
-func (x *HTTPCookie) Path() *String {
-	_r := x.inner.Path()
-	if _r == nil {
-		return nil
+// Returns the path of the receiver. This value specifies the URL path under the cookie's domain for which this cookie should be sent. The cookie will also be sent for children of that path, so "/" is the most general.
+func (x *HTTPCookie) Path() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// @abstract Returns whether the receiver should be sent only over secure channels @discussion Cookies may be marked secure by a server (or by a javascript). Cookies marked as such must only be sent via an encrypted connection to trusted servers (i.e. via SSL or TLS), and should not be delivered to any javascript applications to prevent cross-site scripting vulnerabilities. @result YES if this cookie should be sent only over secure channels, NO otherwise.
-//
-// IsSecure calls the underlying IsSecure.
+// Returns whether the receiver should be sent only over secure channels Cookies may be marked secure by a server (or by a javascript). Cookies marked as such must only be sent via an encrypted connection to trusted servers (i.e. via SSL or TLS), and should not be delivered to any javascript applications to prevent cross-site scripting vulnerabilities.
 func (x *HTTPCookie) IsSecure() bool {
-	return x.inner.IsSecure()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSecure"))
+	return _r
 }
 
-// @abstract Returns whether the receiver should only be sent to HTTP servers per RFC 2965 @discussion Cookies may be marked as HTTPOnly by a server (or by a javascript). Cookies marked as such must only be sent via HTTP Headers in HTTP Requests for URL's that match both the path and domain of the respective Cookies. Specifically these cookies should not be delivered to any javascript applications to prevent cross-site scripting vulnerabilities. @result YES if this cookie should only be sent via HTTP headers, NO otherwise.
-//
-// IsHTTPOnly calls the underlying IsHTTPOnly.
+// Returns whether the receiver should only be sent to HTTP servers per RFC 2965 Cookies may be marked as HTTPOnly by a server (or by a javascript). Cookies marked as such must only be sent via HTTP Headers in HTTP Requests for URL's that match both the path and domain of the respective Cookies. Specifically these cookies should not be delivered to any javascript applications to prevent cross-site scripting vulnerabilities.
 func (x *HTTPCookie) IsHTTPOnly() bool {
-	return x.inner.IsHTTPOnly()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHTTPOnly"))
+	return _r
 }
 
-// @abstract Returns the comment of the receiver. @discussion This value specifies a string which is suitable for presentation to the user explaining the contents and purpose of this cookie. It may be nil. @result The comment of the receiver, or nil if the receiver has no comment.
-//
-// Comment calls the underlying Comment.
-func (x *HTTPCookie) Comment() *String {
-	_r := x.inner.Comment()
-	if _r == nil {
-		return nil
+// Returns the comment of the receiver. This value specifies a string which is suitable for presentation to the user explaining the contents and purpose of this cookie. It may be nil.
+func (x *HTTPCookie) Comment() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("comment"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// @abstract Returns the comment URL of the receiver. @discussion This value specifies a URL which is suitable for presentation to the user as a link for further information about this cookie. It may be nil. @result The comment URL of the receiver, or nil if the receiver has no comment URL.
-//
-// CommentURL calls the underlying CommentURL.
+// Returns the comment URL of the receiver. This value specifies a URL which is suitable for presentation to the user as a link for further information about this cookie. It may be nil.
 func (x *HTTPCookie) CommentURL() *URL {
-	_r := x.inner.CommentURL()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commentURL"))
+	return URLFromID(_r)
 }
 
-// @abstract Returns the list ports to which the receiver should be sent. @discussion This value specifies an NSArray of NSNumbers (containing integers) which specify the only ports to which this cookie should be sent. @result The list ports to which the receiver should be sent. The array may be nil, in which case this cookie can be sent to any port.
+// Returns the list ports to which the receiver should be sent. This value specifies an NSArray of NSNumbers (containing integers) which specify the only ports to which this cookie should be sent.
 //
 // PortList returns the collection as a Go slice.
 func (x *HTTPCookie) PortList() []*Number {
-	arr := x.inner.PortList()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Number {
-		return &Number{inner: raw.NSNumberFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("portList"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Number { return NumberFromID(_id) })
 }
 
-// @abstract Returns the value of the same site attribute on the cookie. @discussion Cookies can be marked with an attribute Strict or Lax. Cookies marked with "strict" (NSHTTPCookieSameSiteStrict) are not sent along with cross-site requests. Cookies marked with "lax" (NSHTTPCookieSameSiteLax) sent along cross-site requests provided the cross-site requests are top-level-requests (one that changes the url in the address bar). The attribute value is canonicalized and stored. Any value other than the default (strict and lax) will be ignored. @result strict or lax. The result could also be nil, in which case the cookie will be sent along with all cross-site requests.
-//
-// SameSitePolicy calls the underlying SameSitePolicy.
+// Returns the value of the same site attribute on the cookie. Cookies can be marked with an attribute Strict or Lax. Cookies marked with "strict" (NSHTTPCookieSameSiteStrict) are not sent along with cross-site requests. Cookies marked with "lax" (NSHTTPCookieSameSiteLax) sent along cross-site requests provided the cross-site requests are top-level-requests (one that changes the url in the address bar). The attribute value is canonicalized and stored. Any value other than the default (strict and lax) will be ignored.
 func (x *HTTPCookie) SameSitePolicy() *String {
-	_r := x.inner.SameSitePolicy()
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sameSitePolicy"))
+	return StringFromID(_r)
 }
-
-func (x *HTTPCookie) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // HTTPCookieable is the interface implemented by [HTTPCookie], for mocking and DI.
 type HTTPCookieable interface {
-	Unwrap() *raw.NSHTTPCookie
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *HTTPCookie
-	Properties() *raw.NSDictionary[*raw.NSString, objc.ID]
-	Name() *String
-	Value() *String
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *HTTPCookie
+	Properties() obj.Object
+	Name() string
+	Value() string
 	ExpiresDate() *Date
 	IsSessionOnly() bool
-	Domain() *String
-	Path() *String
+	Domain() string
+	Path() string
 	IsSecure() bool
 	IsHTTPOnly() bool
-	Comment() *String
+	Comment() string
 	CommentURL() *URL
 	PortList() []*Number
 	SameSitePolicy() *String

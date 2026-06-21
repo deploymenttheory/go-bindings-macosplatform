@@ -5,91 +5,112 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A control that provides additional quantitative information specific to a menu item, such as the number of available updates.
 //
-// MenuItemBadge wraps [raw.NSMenuItemBadge] with a fluent Go API.
+// MenuItemBadge is an idiomatic wrapper over the Objective-C class NSMenuItemBadge.
 type MenuItemBadge struct {
-	inner *raw.NSMenuItemBadge
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSMenuItemBadge].
-func (x *MenuItemBadge) Unwrap() *raw.NSMenuItemBadge { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MenuItemBadge) ID() objc.ID { return x.inner.Ptr() }
-
-// MenuItemBadgeFromID adopts an existing object pointer as a MenuItemBadge (nil for 0).
+// MenuItemBadgeFromID adopts an existing Objective-C object as a MenuItemBadge
+// (nil for 0), retaining it and registering a release finalizer.
 func MenuItemBadgeFromID(id objc.ID) *MenuItemBadge {
 	if id == 0 {
 		return nil
 	}
-	return &MenuItemBadge{inner: raw.NSMenuItemBadgeFromID(id)}
+	x := &MenuItemBadge{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// menuItemBadgeAdopt wraps an Objective-C object that this code just created as a
+// MenuItemBadge (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func menuItemBadgeAdopt(id objc.ID) *MenuItemBadge {
+	if id == 0 {
+		return nil
+	}
+	x := &MenuItemBadge{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MenuItemBadge) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MenuItemBadge) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MenuItemBadge) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes the badge with a count and a pre-defined badge type.
 //
-// NewMenuItemBadgeWithCountType creates a new [MenuItemBadge].
-func NewMenuItemBadgeWithCountType(itemCount int, type_ NSMenuItemBadgeType) *MenuItemBadge {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMenuItemBadge")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCount:type:"), itemCount, raw.NSMenuItemBadgeType(type_))
-	return &MenuItemBadge{inner: raw.NSMenuItemBadgeFromID(_id)}
+// NewMenuItemBadgeWithCountType creates a new MenuItemBadge.
+func NewMenuItemBadgeWithCountType(itemCount int, type_ MenuItemBadgeType) *MenuItemBadge {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMenuItemBadge")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCount:type:"), itemCount, type_)
+	return menuItemBadgeAdopt(_id)
 }
 
 // Creates a badge with a count and an empty string.
 //
-// NewMenuItemBadgeWithCount creates a new [MenuItemBadge].
+// NewMenuItemBadgeWithCount creates a new MenuItemBadge.
 func NewMenuItemBadgeWithCount(itemCount int) *MenuItemBadge {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMenuItemBadge")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMenuItemBadge")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCount:"), itemCount)
-	return &MenuItemBadge{inner: raw.NSMenuItemBadgeFromID(_id)}
+	return menuItemBadgeAdopt(_id)
 }
 
 // Creates a badge with the provided custom string.
 //
-// NewMenuItemBadgeWithString creates a new [MenuItemBadge].
+// NewMenuItemBadgeWithString creates a new MenuItemBadge.
 func NewMenuItemBadgeWithString(string_ string) *MenuItemBadge {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMenuItemBadge")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
-	return &MenuItemBadge{inner: raw.NSMenuItemBadgeFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMenuItemBadge")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(string_))
+	return menuItemBadgeAdopt(_id)
 }
 
 // The count of items the badge displays. If a custom string was used to create a badge, the value is 0.
-//
-// ItemCount calls the underlying ItemCount.
 func (x *MenuItemBadge) ItemCount() int {
-	return x.inner.ItemCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("itemCount"))
+	return _r
 }
 
-// The type of items the badge displays. If a custom string was used to create a badge, this value is @c NSMenuItemBadgeTypeNone.
-//
-// Type calls the underlying Type.
-func (x *MenuItemBadge) Type() NSMenuItemBadgeType {
-	return NSMenuItemBadgeType(x.inner.Type())
+// The type of items the badge displays. If a custom string was used to create a badge, this value is
+func (x *MenuItemBadge) Type() MenuItemBadgeType {
+	_r := objc.Send[MenuItemBadgeType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
 // The string representation of the badge as it would appear when the badge is displayed.
-//
-// StringValue calls the underlying StringValue.
 func (x *MenuItemBadge) StringValue() string {
-	_r := x.inner.StringValue()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // MenuItemBadgeable is the interface implemented by [MenuItemBadge], for mocking and DI.
 type MenuItemBadgeable interface {
-	Unwrap() *raw.NSMenuItemBadge
+	obj.Object
 	ItemCount() int
-	Type() NSMenuItemBadgeType
+	Type() MenuItemBadgeType
 	StringValue() string
 }
 

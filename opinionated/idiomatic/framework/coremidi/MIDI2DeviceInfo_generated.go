@@ -5,74 +5,80 @@
 package coremidi
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MIDI2DeviceInfo wraps [raw.MIDI2DeviceInfo] with a fluent Go API.
+// MIDI2DeviceInfo is an idiomatic wrapper over the Objective-C class MIDI2DeviceInfo.
 type MIDI2DeviceInfo struct {
-	inner *raw.MIDI2DeviceInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MIDI2DeviceInfo].
-func (x *MIDI2DeviceInfo) Unwrap() *raw.MIDI2DeviceInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MIDI2DeviceInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// MIDI2DeviceInfoFromID adopts an existing object pointer as a MIDI2DeviceInfo (nil for 0).
+// MIDI2DeviceInfoFromID adopts an existing Objective-C object as a MIDI2DeviceInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func MIDI2DeviceInfoFromID(id objc.ID) *MIDI2DeviceInfo {
 	if id == 0 {
 		return nil
 	}
-	return &MIDI2DeviceInfo{inner: raw.MIDI2DeviceInfoFromID(id)}
+	x := &MIDI2DeviceInfo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @method		initWithManufacturerID:family:modelNumber:revisionLevel: @brief		The initializer for constructing the MIDI2DeviceInfo object. @param		manufacturerID	The 3-Byte manufacturer System Exclusive ID. @param		family			The 14-bit device family. @param		modelNumber		The 14-bit model number. @param		revisionLevel	The 4-Byte revision level. @discussion	Provided values for family or modelNumber must be within their expected bit range. For example, if modelNumber is outside of the range of a 14-bit number.
-//
-// NewMIDI2DeviceInfoWithManufacturerIDFamilyModelNumberRevisionLevel creates a new [MIDI2DeviceInfo].
-func NewMIDI2DeviceInfoWithManufacturerIDFamilyModelNumberRevisionLevel(manufacturerID raw.MIDI2DeviceManufacturer, family uint16, modelNumber uint16, revisionLevel raw.MIDI2DeviceRevisionLevel) *MIDI2DeviceInfo {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDI2DeviceInfo")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithManufacturerID:family:modelNumber:revisionLevel:"), manufacturerID, family, modelNumber, revisionLevel)
-	return &MIDI2DeviceInfo{inner: raw.MIDI2DeviceInfoFromID(_id)}
+// mIDI2DeviceInfoAdopt wraps an Objective-C object that this code just created as a
+// MIDI2DeviceInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mIDI2DeviceInfoAdopt(id objc.ID) *MIDI2DeviceInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &MIDI2DeviceInfo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property	manufacturerID @brief		The MIDI System Exclusive ID of the device manufacturer, up to 3-Bytes. @discussion One-byte SysEx IDs use only the least significant byte (e.g., Apple's System Exclusive ID, 0x11).
-//
-// ManufacturerID calls the underlying ManufacturerID.
-func (x *MIDI2DeviceInfo) ManufacturerID() raw.MIDI2DeviceManufacturer {
-	return x.inner.ManufacturerID()
+// Description returns the object's -description text.
+func (x *MIDI2DeviceInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property	family @brief		The family of models to which the device belongs, up to 14 bits.
-//
-// Family calls the underlying Family.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MIDI2DeviceInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MIDI2DeviceInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMIDI2DeviceInfo creates a new MIDI2DeviceInfo.
+func NewMIDI2DeviceInfo() *MIDI2DeviceInfo {
+	_id := objc.Send[objc.ID](objc.ID(_class("MIDI2DeviceInfo")), objc.RegisterName("new"))
+	return mIDI2DeviceInfoAdopt(_id)
+}
+
+// The family of models to which the device belongs, up to 14 bits.
 func (x *MIDI2DeviceInfo) Family() uint16 {
-	return x.inner.Family()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("family"))
+	return _r
 }
 
-// @property	modelNumber @brief		The specific model from the device manufacturer, up to 14 bits.
-//
-// ModelNumber calls the underlying ModelNumber.
+// The specific model from the device manufacturer, up to 14 bits.
 func (x *MIDI2DeviceInfo) ModelNumber() uint16 {
-	return x.inner.ModelNumber()
-}
-
-// @property	revisionLevel @brief		The version number of a device model number.
-//
-// RevisionLevel calls the underlying RevisionLevel.
-func (x *MIDI2DeviceInfo) RevisionLevel() raw.MIDI2DeviceRevisionLevel {
-	return x.inner.RevisionLevel()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("modelNumber"))
+	return _r
 }
 
 // MIDI2DeviceInfoable is the interface implemented by [MIDI2DeviceInfo], for mocking and DI.
 type MIDI2DeviceInfoable interface {
-	Unwrap() *raw.MIDI2DeviceInfo
-	ManufacturerID() raw.MIDI2DeviceManufacturer
+	obj.Object
 	Family() uint16
 	ModelNumber() uint16
-	RevisionLevel() raw.MIDI2DeviceRevisionLevel
 }
 
 var _ MIDI2DeviceInfoable = (*MIDI2DeviceInfo)(nil)

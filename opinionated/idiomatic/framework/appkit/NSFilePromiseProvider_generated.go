@@ -5,117 +5,111 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides a promise for the pasteboard.
 //
-// FilePromiseProvider wraps [raw.NSFilePromiseProvider] with a fluent Go API.
+// FilePromiseProvider is an idiomatic wrapper over the Objective-C class NSFilePromiseProvider.
 type FilePromiseProvider struct {
-	inner *raw.NSFilePromiseProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFilePromiseProvider].
-func (x *FilePromiseProvider) Unwrap() *raw.NSFilePromiseProvider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FilePromiseProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// FilePromiseProviderFromID adopts an existing object pointer as a FilePromiseProvider (nil for 0).
+// FilePromiseProviderFromID adopts an existing Objective-C object as a FilePromiseProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func FilePromiseProviderFromID(id objc.ID) *FilePromiseProvider {
 	if id == 0 {
 		return nil
 	}
-	return &FilePromiseProvider{inner: raw.NSFilePromiseProviderFromID(id)}
+	x := &FilePromiseProvider{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFilePromiseProvider creates a new [FilePromiseProvider].
+// filePromiseProviderAdopt wraps an Objective-C object that this code just created as a
+// FilePromiseProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func filePromiseProviderAdopt(id objc.ID) *FilePromiseProvider {
+	if id == 0 {
+		return nil
+	}
+	x := &FilePromiseProvider{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FilePromiseProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FilePromiseProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FilePromiseProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFilePromiseProvider creates a new FilePromiseProvider.
 func NewFilePromiseProvider() *FilePromiseProvider {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFilePromiseProvider")), objc.RegisterName("new"))
-	return &FilePromiseProvider{inner: raw.NSFilePromiseProviderFromID(_id)}
-}
-
-// Initializes a file promise provider for a certain file type.
-//
-// NewFilePromiseProviderWithFileTypeDelegate creates a new [FilePromiseProvider].
-func NewFilePromiseProviderWithFileTypeDelegate(fileType string, delegate raw.NSFilePromiseProviderDelegate) *FilePromiseProvider {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFilePromiseProvider")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFileType:delegate:"), foundation.NSStringStringWithUTF8String(fileType).Ptr(), delegate)
-	return &FilePromiseProvider{inner: raw.NSFilePromiseProviderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSFilePromiseProvider")), objc.RegisterName("new"))
+	return filePromiseProviderAdopt(_id)
 }
 
 // The file type of the file promise provider.
 //
-// WithFileType sets the fileType property and returns the receiver for chaining.
+// WithFileType sets fileType and returns the receiver so calls can be chained.
 func (x *FilePromiseProvider) WithFileType(fileType string) *FilePromiseProvider {
-	x.inner.SetFileType(foundation.NSStringStringWithUTF8String(fileType))
-	return x
-}
-
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *FilePromiseProvider) WithDelegate(delegate raw.NSFilePromiseProviderDelegate) *FilePromiseProvider {
-	x.inner.SetDelegate(delegate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileType:"), purego.NSString(fileType))
 	return x
 }
 
 // Optional user information to pass to the file promise provider.
 //
-// WithUserInfo sets the userInfo property and returns the receiver for chaining.
-func (x *FilePromiseProvider) WithUserInfo(userInfo objc.ID) *FilePromiseProvider {
-	x.inner.SetUserInfo(userInfo)
+// WithUserInfo sets userInfo and returns the receiver so calls can be chained.
+func (x *FilePromiseProvider) WithUserInfo(userInfo obj.Object) *FilePromiseProvider {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 	return x
 }
 
-// FileType calls the underlying FileType.
 func (x *FilePromiseProvider) FileType() string {
-	_r := x.inner.FileType()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileType"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetFileType calls the underlying SetFileType.
 func (x *FilePromiseProvider) SetFileType(fileType string) {
-	x.inner.SetFileType(foundation.NSStringStringWithUTF8String(fileType))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileType:"), purego.NSString(fileType))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *FilePromiseProvider) Delegate() raw.NSFilePromiseProviderDelegate {
-	return x.inner.Delegate()
+func (x *FilePromiseProvider) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+	return obj.Wrap(_r)
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *FilePromiseProvider) SetDelegate(delegate raw.NSFilePromiseProviderDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// UserInfo calls the underlying UserInfo.
-func (x *FilePromiseProvider) UserInfo() objc.ID {
-	return x.inner.UserInfo()
-}
-
-// SetUserInfo calls the underlying SetUserInfo.
-func (x *FilePromiseProvider) SetUserInfo(userInfo objc.ID) {
-	x.inner.SetUserInfo(userInfo)
+func (x *FilePromiseProvider) SetUserInfo(userInfo obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 }
 
 // FilePromiseProviderable is the interface implemented by [FilePromiseProvider], for mocking and DI.
 type FilePromiseProviderable interface {
-	Unwrap() *raw.NSFilePromiseProvider
+	obj.Object
 	WithFileType(fileType string) *FilePromiseProvider
-	WithDelegate(delegate raw.NSFilePromiseProviderDelegate) *FilePromiseProvider
-	WithUserInfo(userInfo objc.ID) *FilePromiseProvider
+	WithUserInfo(userInfo obj.Object) *FilePromiseProvider
 	FileType() string
 	SetFileType(fileType string)
-	Delegate() raw.NSFilePromiseProviderDelegate
-	SetDelegate(delegate raw.NSFilePromiseProviderDelegate)
-	UserInfo() objc.ID
-	SetUserInfo(userInfo objc.ID)
+	UserInfo() obj.Object
+	SetUserInfo(userInfo obj.Object)
 }
 
 var _ FilePromiseProviderable = (*FilePromiseProvider)(nil)

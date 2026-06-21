@@ -5,70 +5,86 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The shape and data type constraints for a multidimensional array feature.
 //
-// MultiArrayConstraint wraps [raw.MLMultiArrayConstraint] with a fluent Go API.
+// MultiArrayConstraint is an idiomatic wrapper over the Objective-C class MLMultiArrayConstraint.
 type MultiArrayConstraint struct {
-	inner *raw.MLMultiArrayConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLMultiArrayConstraint].
-func (x *MultiArrayConstraint) Unwrap() *raw.MLMultiArrayConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MultiArrayConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// MultiArrayConstraintFromID adopts an existing object pointer as a MultiArrayConstraint (nil for 0).
+// MultiArrayConstraintFromID adopts an existing Objective-C object as a MultiArrayConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func MultiArrayConstraintFromID(id objc.ID) *MultiArrayConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &MultiArrayConstraint{inner: raw.MLMultiArrayConstraintFromID(id)}
+	x := &MultiArrayConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMultiArrayConstraint creates a new [MultiArrayConstraint].
+// multiArrayConstraintAdopt wraps an Objective-C object that this code just created as a
+// MultiArrayConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func multiArrayConstraintAdopt(id objc.ID) *MultiArrayConstraint {
+	if id == 0 {
+		return nil
+	}
+	x := &MultiArrayConstraint{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MultiArrayConstraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MultiArrayConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MultiArrayConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMultiArrayConstraint creates a new MultiArrayConstraint.
 func NewMultiArrayConstraint() *MultiArrayConstraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLMultiArrayConstraint")), objc.RegisterName("new"))
-	return &MultiArrayConstraint{inner: raw.MLMultiArrayConstraintFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLMultiArrayConstraint")), objc.RegisterName("new"))
+	return multiArrayConstraintAdopt(_id)
 }
 
 // Shape returns the collection as a Go slice.
-func (x *MultiArrayConstraint) Shape() []*foundation.NSNumber {
-	arr := x.inner.Shape()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *MultiArrayConstraint) Shape() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shape"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// DataType calls the underlying DataType.
-func (x *MultiArrayConstraint) DataType() MLMultiArrayDataType {
-	return MLMultiArrayDataType(x.inner.DataType())
+func (x *MultiArrayConstraint) DataType() MultiArrayDataType {
+	_r := objc.Send[MultiArrayDataType](objref.IDOf(x), objc.RegisterName("dataType"))
+	return _r
 }
 
-// ShapeConstraint calls the underlying ShapeConstraint.
 func (x *MultiArrayConstraint) ShapeConstraint() *MultiArrayShapeConstraint {
-	_r := x.inner.ShapeConstraint()
-	if _r == nil {
-		return nil
-	}
-	return &MultiArrayShapeConstraint{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shapeConstraint"))
+	return MultiArrayShapeConstraintFromID(_r)
 }
 
 // MultiArrayConstraintable is the interface implemented by [MultiArrayConstraint], for mocking and DI.
 type MultiArrayConstraintable interface {
-	Unwrap() *raw.MLMultiArrayConstraint
-	Shape() []*foundation.NSNumber
-	DataType() MLMultiArrayDataType
+	obj.Object
+	Shape() []obj.Object
+	DataType() MultiArrayDataType
 	ShapeConstraint() *MultiArrayShapeConstraint
 }
 

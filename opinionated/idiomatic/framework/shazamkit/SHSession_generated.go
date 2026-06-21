@@ -5,102 +5,96 @@
 package shazamkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/shazamkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that matches a specific audio recording when a segment of that recording is part of captured sound in the Shazam catalog or your custom catalog.
 //
-// Session wraps [raw.SHSession] with a fluent Go API.
+// Session is an idiomatic wrapper over the Objective-C class SHSession.
 type Session struct {
-	inner *raw.SHSession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SHSession].
-func (x *Session) Unwrap() *raw.SHSession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Session) ID() objc.ID { return x.inner.Ptr() }
-
-// SessionFromID adopts an existing object pointer as a Session (nil for 0).
+// SessionFromID adopts an existing Objective-C object as a Session
+// (nil for 0), retaining it and registering a release finalizer.
 func SessionFromID(id objc.ID) *Session {
 	if id == 0 {
 		return nil
 	}
-	return &Session{inner: raw.SHSessionFromID(id)}
+	x := &Session{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSession creates a new [Session].
+// sessionAdopt wraps an Objective-C object that this code just created as a
+// Session (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sessionAdopt(id objc.ID) *Session {
+	if id == 0 {
+		return nil
+	}
+	x := &Session{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Session) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Session) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Session) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSession creates a new Session.
 func NewSession() *Session {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SHSession")), objc.RegisterName("new"))
-	return &Session{inner: raw.SHSessionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SHSession")), objc.RegisterName("new"))
+	return sessionAdopt(_id)
 }
 
 // Creates a new session object for matching audio in a custom catalog.
 //
-// NewSessionWithCatalog creates a new [Session].
-func NewSessionWithCatalog(catalog *raw.SHCatalog) *Session {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SHSession")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCatalog:"), catalog.Ptr())
-	return &Session{inner: raw.SHSessionFromID(_id)}
-}
-
-// The object that the session calls with the result of a match request.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Session) WithDelegate(delegate raw.SHSessionDelegate) *Session {
-	x.inner.SetDelegate(delegate)
-	return x
+// NewSessionWithCatalog creates a new Session.
+func NewSessionWithCatalog(catalog *Catalog) *Session {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SHSession")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCatalog:"), objref.IDOf(catalog))
+	return sessionAdopt(_id)
 }
 
 // Converts the audio in the buffer to a signature, and searches the reference signatures in the session catalog.
-//
-// MatchStreamingBufferAtTime calls the underlying MatchStreamingBufferAtTime.
-func (x *Session) MatchStreamingBufferAtTime(buffer *avfaudio.AVAudioPCMBuffer, time_ *avfaudio.AVAudioTime) {
-	x.inner.MatchStreamingBufferAtTime(buffer, time_)
+func (x *Session) MatchStreamingBufferAtTime(buffer obj.Object, time_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchStreamingBuffer:atTime:"), objref.IDOf(buffer), objref.IDOf(time_))
 }
 
 // Searches for the query signature in the reference signatures that the session catalog contains.
-//
-// MatchSignature calls the underlying MatchSignature.
-func (x *Session) MatchSignature(signature *raw.SHSignature) {
-	x.inner.MatchSignature(signature)
+func (x *Session) MatchSignature(signature *Signature) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchSignature:"), objref.IDOf(signature))
 }
 
 // The catalog object containing the reference signatures and their associated metadata that the session uses to perform matches.
-//
-// Catalog calls the underlying Catalog.
 func (x *Session) Catalog() *Catalog {
-	_r := x.inner.Catalog()
-	if _r == nil {
-		return nil
-	}
-	return &Catalog{inner: _r}
-}
-
-// The object that the session calls with the result of a match request.
-//
-// Delegate calls the underlying Delegate.
-func (x *Session) Delegate() raw.SHSessionDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *Session) SetDelegate(delegate raw.SHSessionDelegate) {
-	x.inner.SetDelegate(delegate)
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("catalog"))
+	return CatalogFromID(_r)
 }
 
 // Sessionable is the interface implemented by [Session], for mocking and DI.
 type Sessionable interface {
-	Unwrap() *raw.SHSession
-	WithDelegate(delegate raw.SHSessionDelegate) *Session
-	MatchStreamingBufferAtTime(buffer *avfaudio.AVAudioPCMBuffer, time_ *avfaudio.AVAudioTime)
-	MatchSignature(signature *raw.SHSignature)
+	obj.Object
+	MatchStreamingBufferAtTime(buffer obj.Object, time_ obj.Object)
+	MatchSignature(signature *Signature)
 	Catalog() *Catalog
-	Delegate() raw.SHSessionDelegate
-	SetDelegate(delegate raw.SHSessionDelegate)
 }
 
 var _ Sessionable = (*Session)(nil)

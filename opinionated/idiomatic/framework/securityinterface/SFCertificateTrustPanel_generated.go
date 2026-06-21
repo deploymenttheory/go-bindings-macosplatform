@@ -5,83 +5,89 @@
 package securityinterface
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityinterface"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A panel or sheet that lets the user edit the trust settings in any of the certificates in a certificate chain.
 //
-// CertificateTrustPanel wraps [raw.SFCertificateTrustPanel] with a fluent Go API.
+// CertificateTrustPanel is an idiomatic wrapper over the Objective-C class SFCertificateTrustPanel.
 type CertificateTrustPanel struct {
-	inner *raw.SFCertificateTrustPanel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFCertificateTrustPanel].
-func (x *CertificateTrustPanel) Unwrap() *raw.SFCertificateTrustPanel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CertificateTrustPanel) ID() objc.ID { return x.inner.Ptr() }
-
-// CertificateTrustPanelFromID adopts an existing object pointer as a CertificateTrustPanel (nil for 0).
+// CertificateTrustPanelFromID adopts an existing Objective-C object as a CertificateTrustPanel
+// (nil for 0), retaining it and registering a release finalizer.
 func CertificateTrustPanelFromID(id objc.ID) *CertificateTrustPanel {
 	if id == 0 {
 		return nil
 	}
-	return &CertificateTrustPanel{inner: raw.SFCertificateTrustPanelFromID(id)}
+	x := &CertificateTrustPanel{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCertificateTrustPanel creates a new [CertificateTrustPanel].
+// certificateTrustPanelAdopt wraps an Objective-C object that this code just created as a
+// CertificateTrustPanel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func certificateTrustPanelAdopt(id objc.ID) *CertificateTrustPanel {
+	if id == 0 {
+		return nil
+	}
+	x := &CertificateTrustPanel{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CertificateTrustPanel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CertificateTrustPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CertificateTrustPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCertificateTrustPanel creates a new CertificateTrustPanel.
 func NewCertificateTrustPanel() *CertificateTrustPanel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFCertificateTrustPanel")), objc.RegisterName("new"))
-	return &CertificateTrustPanel{inner: raw.SFCertificateTrustPanelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFCertificateTrustPanel")), objc.RegisterName("new"))
+	return certificateTrustPanelAdopt(_id)
 }
 
 // Displays a modal panel that shows the results of a certificate trust evaluation and that allows the user to edit trust settings.
-//
-// RunModalForTrustMessage calls the underlying RunModalForTrustMessage.
-func (x *CertificateTrustPanel) RunModalForTrustMessage(trust unsafe.Pointer, message string) int {
-	return x.inner.RunModalForTrustMessage(trust, foundation.NSStringStringWithUTF8String(message))
-}
-
-// Displays a modal sheet that shows the results of a certificate trust evaluation and that allows the user to edit trust settings.
-//
-// BeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustMessage calls the underlying BeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustMessage.
-func (x *CertificateTrustPanel) BeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustMessage(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, trust unsafe.Pointer, message string) {
-	x.inner.BeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustMessage(docWindow, delegate, didEndSelector, contextInfo, trust, foundation.NSStringStringWithUTF8String(message))
+func (x *CertificateTrustPanel) RunModalForTrustMessage(trust obj.Object, message string) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalForTrust:message:"), objref.IDOf(trust), purego.NSString(message))
+	return _r
 }
 
 // Sets the (optional) informative text displayed in the panel.
-//
-// SetInformativeText calls the underlying SetInformativeText.
 func (x *CertificateTrustPanel) SetInformativeText(informativeText string) {
-	x.inner.SetInformativeText(foundation.NSStringStringWithUTF8String(informativeText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInformativeText:"), purego.NSString(informativeText))
 }
 
 // Returns the (optional) informative text currently displayed in the panel.
-//
-// InformativeText calls the underlying InformativeText.
 func (x *CertificateTrustPanel) InformativeText() string {
-	_r := x.inner.InformativeText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("informativeText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *CertificateTrustPanel) asCertificatePanel() *raw.SFCertificatePanel {
-	return &x.inner.SFCertificatePanel
+	return purego.GoString(_r)
 }
 
 // CertificateTrustPanelable is the interface implemented by [CertificateTrustPanel], for mocking and DI.
 type CertificateTrustPanelable interface {
-	Unwrap() *raw.SFCertificateTrustPanel
-	RunModalForTrustMessage(trust unsafe.Pointer, message string) int
-	BeginSheetForWindowModalDelegateDidEndSelectorContextInfoTrustMessage(docWindow *appkit.NSWindow, delegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer, trust unsafe.Pointer, message string)
+	obj.Object
+	RunModalForTrustMessage(trust obj.Object, message string) int
 	SetInformativeText(informativeText string)
 	InformativeText() string
 }

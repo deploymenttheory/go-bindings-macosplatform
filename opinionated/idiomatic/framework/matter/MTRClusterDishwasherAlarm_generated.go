@@ -5,120 +5,125 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Cluster Dishwasher Alarm Attributes and commands for configuring the Dishwasher alarm.
 //
-// MTRClusterDishwasherAlarm wraps [raw.MTRClusterDishwasherAlarm] with a fluent Go API.
+// MTRClusterDishwasherAlarm is an idiomatic wrapper over the Objective-C class MTRClusterDishwasherAlarm.
 type MTRClusterDishwasherAlarm struct {
-	inner *raw.MTRClusterDishwasherAlarm
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterDishwasherAlarm].
-func (x *MTRClusterDishwasherAlarm) Unwrap() *raw.MTRClusterDishwasherAlarm { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterDishwasherAlarm) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterDishwasherAlarmFromID adopts an existing object pointer as a MTRClusterDishwasherAlarm (nil for 0).
+// MTRClusterDishwasherAlarmFromID adopts an existing Objective-C object as a MTRClusterDishwasherAlarm
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterDishwasherAlarmFromID(id objc.ID) *MTRClusterDishwasherAlarm {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterDishwasherAlarm{inner: raw.MTRClusterDishwasherAlarmFromID(id)}
+	x := &MTRClusterDishwasherAlarm{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterDishwasherAlarmAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterDishwasherAlarm (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterDishwasherAlarmAdopt(id objc.ID) *MTRClusterDishwasherAlarm {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterDishwasherAlarm{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterDishwasherAlarm) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterDishwasherAlarm) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterDishwasherAlarm) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterDishwasherAlarmWithDeviceEndpointIDQueue creates a new [MTRClusterDishwasherAlarm].
-func NewMTRClusterDishwasherAlarmWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterDishwasherAlarm {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterDishwasherAlarm")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterDishwasherAlarm{inner: raw.MTRClusterDishwasherAlarmFromID(_id)}
+// NewMTRClusterDishwasherAlarmWithDeviceEndpointIDQueue creates a new MTRClusterDishwasherAlarm.
+func NewMTRClusterDishwasherAlarmWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterDishwasherAlarm {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterDishwasherAlarm")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterDishwasherAlarmAdopt(_id)
 }
 
-// ResetWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying ResetWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterDishwasherAlarm) ResetWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDishwasherAlarmClusterResetParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ResetWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterDishwasherAlarm) ReadAttributeMaskWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaskWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ModifyEnabledAlarmsWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying ModifyEnabledAlarmsWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterDishwasherAlarm) ModifyEnabledAlarmsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDishwasherAlarmClusterModifyEnabledAlarmsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ModifyEnabledAlarmsWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterDishwasherAlarm) ReadAttributeLatchWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLatchWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMaskWithParams calls the underlying ReadAttributeMaskWithParams.
-func (x *MTRClusterDishwasherAlarm) ReadAttributeMaskWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaskWithParams(params)
+func (x *MTRClusterDishwasherAlarm) ReadAttributeStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStateWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeLatchWithParams calls the underlying ReadAttributeLatchWithParams.
-func (x *MTRClusterDishwasherAlarm) ReadAttributeLatchWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeLatchWithParams(params)
+func (x *MTRClusterDishwasherAlarm) ReadAttributeSupportedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeStateWithParams calls the underlying ReadAttributeStateWithParams.
-func (x *MTRClusterDishwasherAlarm) ReadAttributeStateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeStateWithParams(params)
+func (x *MTRClusterDishwasherAlarm) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeSupportedWithParams calls the underlying ReadAttributeSupportedWithParams.
-func (x *MTRClusterDishwasherAlarm) ReadAttributeSupportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSupportedWithParams(params)
+func (x *MTRClusterDishwasherAlarm) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterDishwasherAlarm) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterDishwasherAlarm) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterDishwasherAlarm) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterDishwasherAlarm) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterDishwasherAlarm) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
-}
-
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterDishwasherAlarm) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterDishwasherAlarm) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterDishwasherAlarm) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterDishwasherAlarm) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterDishwasherAlarm) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterDishwasherAlarmable is the interface implemented by [MTRClusterDishwasherAlarm], for mocking and DI.
 type MTRClusterDishwasherAlarmable interface {
-	Unwrap() *raw.MTRClusterDishwasherAlarm
-	ResetWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDishwasherAlarmClusterResetParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ModifyEnabledAlarmsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDishwasherAlarmClusterModifyEnabledAlarmsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeMaskWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeLatchWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeStateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeSupportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeMaskWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeLatchWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeStateWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeSupportedWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterDishwasherAlarmable = (*MTRClusterDishwasherAlarm)(nil)

@@ -6,70 +6,78 @@ package screencapturekit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An instance that represents a stream of shareable content.
 //
-// Stream wraps [raw.SCStream] with a fluent Go API.
+// Stream is an idiomatic wrapper over the Objective-C class SCStream.
 type Stream struct {
-	inner *raw.SCStream
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCStream].
-func (x *Stream) Unwrap() *raw.SCStream { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Stream) ID() objc.ID { return x.inner.Ptr() }
-
-// StreamFromID adopts an existing object pointer as a Stream (nil for 0).
+// StreamFromID adopts an existing Objective-C object as a Stream
+// (nil for 0), retaining it and registering a release finalizer.
 func StreamFromID(id objc.ID) *Stream {
 	if id == 0 {
 		return nil
 	}
-	return &Stream{inner: raw.SCStreamFromID(id)}
+	x := &Stream{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a stream with a content filter and configuration.
-//
-// NewStreamWithFilterConfigurationDelegate creates a new [Stream].
-func NewStreamWithFilterConfigurationDelegate(contentFilter *raw.SCContentFilter, streamConfig *raw.SCStreamConfiguration, delegate raw.SCStreamDelegate) *Stream {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SCStream")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFilter:configuration:delegate:"), contentFilter.Ptr(), streamConfig.Ptr(), delegate)
-	return &Stream{inner: raw.SCStreamFromID(_id)}
+// streamAdopt wraps an Objective-C object that this code just created as a
+// Stream (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func streamAdopt(id objc.ID) *Stream {
+	if id == 0 {
+		return nil
+	}
+	x := &Stream{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Adds a destination that receives the stream output.
-//
-// AddStreamOutputTypeSampleHandlerQueueError calls the underlying AddStreamOutputTypeSampleHandlerQueueError.
-func (x *Stream) AddStreamOutputTypeSampleHandlerQueueError(output raw.SCStreamOutput, type_ SCStreamOutputType, sampleHandlerQueue *foundation.NSObject) (bool, error) {
-	return x.inner.AddStreamOutputTypeSampleHandlerQueueError(output, raw.SCStreamOutputType(type_), sampleHandlerQueue)
+// Description returns the object's -description text.
+func (x *Stream) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Removes a destination from receiving stream output.
-//
-// RemoveStreamOutputTypeError calls the underlying RemoveStreamOutputTypeError.
-func (x *Stream) RemoveStreamOutputTypeError(output raw.SCStreamOutput, type_ SCStreamOutputType) (bool, error) {
-	return x.inner.RemoveStreamOutputTypeError(output, raw.SCStreamOutputType(type_))
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Stream) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Stream) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewStream creates a new Stream.
+func NewStream() *Stream {
+	_id := objc.Send[objc.ID](objc.ID(_class("SCStream")), objc.RegisterName("new"))
+	return streamAdopt(_id)
 }
 
 // Updates the stream by applying a new content filter.
 //
 // UpdateContentFilter blocks until the operation completes or ctx is cancelled.
-func (x *Stream) UpdateContentFilter(ctx context.Context, contentFilter *raw.SCContentFilter) error {
+func (x *Stream) UpdateContentFilter(ctx context.Context, contentFilter *ContentFilter) error {
 	_ch := make(chan error, 1)
-	x.inner.UpdateContentFilterCompletionHandler(contentFilter, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateContentFilter:completionHandler:"), objref.IDOf(contentFilter), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -81,15 +89,14 @@ func (x *Stream) UpdateContentFilter(ctx context.Context, contentFilter *raw.SCC
 // Updates the stream with a new configuration.
 //
 // UpdateConfiguration blocks until the operation completes or ctx is cancelled.
-func (x *Stream) UpdateConfiguration(ctx context.Context, streamConfig *raw.SCStreamConfiguration) error {
+func (x *Stream) UpdateConfiguration(ctx context.Context, streamConfig *StreamConfiguration) error {
 	_ch := make(chan error, 1)
-	x.inner.UpdateConfigurationCompletionHandler(streamConfig, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateConfiguration:completionHandler:"), objref.IDOf(streamConfig), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -103,13 +110,12 @@ func (x *Stream) UpdateConfiguration(ctx context.Context, streamConfig *raw.SCSt
 // StartCapture blocks until the operation completes or ctx is cancelled.
 func (x *Stream) StartCapture(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.StartCaptureWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startCaptureWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -123,13 +129,12 @@ func (x *Stream) StartCapture(ctx context.Context) error {
 // StopCapture blocks until the operation completes or ctx is cancelled.
 func (x *Stream) StopCapture(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.StopCaptureWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopCaptureWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -138,39 +143,42 @@ func (x *Stream) StopCapture(ctx context.Context) error {
 	}
 }
 
-// @method addRecordingOutput @abstract Add a SCRecordingOutput to the SCStream. Starts Recording if stream is already capturing, otherwise recording will be started after capture starts. Recording will be written into a file url specified in SCRecordingOutput. Media(Screen/Audio/Microphone) to be recorded will be based on the SCStream configuration. @param recordingOutput an SCRecordingOutput that including configuration of recording, and delegate for recording event. @param error the error pertaining to the add recording output @discussion Returns a BOOL denoting if the add was successful. Currently only support one recordingOutput on a stream. To guarantee the first sample captured in the stream to be written into the recording file, client need to add recordingOutput before startCapture. Delegate for recordingDidStart will be notified in SCRecordingOutput or recordingDidFinishWithError will be notified with an error associated if recording failed to start.
-//
-// AddRecordingOutputError calls the underlying AddRecordingOutputError.
-func (x *Stream) AddRecordingOutputError(recordingOutput *raw.SCRecordingOutput) (bool, error) {
-	return x.inner.AddRecordingOutputError(recordingOutput)
+// Add a SCRecordingOutput to the SCStream. Starts Recording if stream is already capturing, otherwise recording will be started after capture starts. Recording will be written into a file url specified in SCRecordingOutput. Media(Screen/Audio/Microphone) to be recorded will be based on the SCStream configuration. Returns a BOOL denoting if the add was successful. Currently only support one recordingOutput on a stream. To guarantee the first sample captured in the stream to be written into the recording file, client need to add recordingOutput before startCapture. Delegate for recordingDidStart will be notified in SCRecordingOutput or recordingDidFinishWithError will be notified with an error associated if recording failed to start.
+func (x *Stream) AddRecordingOutput(recordingOutput *RecordingOutput) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addRecordingOutput:error:"), objref.IDOf(recordingOutput), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @method removeRecordingOutput @abstract Remove SCRecordingOutput from the SCStream. Stops Recording if the stream is currently recording. @param recordingOutput an SCRecordingOutput that including configuration of recording, and delegate for recording event. @param error the error pertaining to the remove recording output @discussion Returns a BOOL denoting if the remove was successful. Delegate for recordingDidFinishWithError will be notified in SCRecordingOutput, associate with an error code if recording failed to finish written to the file. If stopCapture is called without removing recordingOutput, recording will be stopped and finish writting into the file. In case client update the stream configuration during recording, recording will be stopped as well.
-//
-// RemoveRecordingOutputError calls the underlying RemoveRecordingOutputError.
-func (x *Stream) RemoveRecordingOutputError(recordingOutput *raw.SCRecordingOutput) (bool, error) {
-	return x.inner.RemoveRecordingOutputError(recordingOutput)
+// Remove SCRecordingOutput from the SCStream. Stops Recording if the stream is currently recording. Returns a BOOL denoting if the remove was successful. Delegate for recordingDidFinishWithError will be notified in SCRecordingOutput, associate with an error code if recording failed to finish written to the file. If stopCapture is called without removing recordingOutput, recording will be stopped and finish writting into the file. In case client update the stream configuration during recording, recording will be stopped as well.
+func (x *Stream) RemoveRecordingOutput(recordingOutput *RecordingOutput) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeRecordingOutput:error:"), objref.IDOf(recordingOutput), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// @abstract Synchronization clock used for media capture.
-//
-// SynchronizationClock calls the underlying SynchronizationClock.
-func (x *Stream) SynchronizationClock() unsafe.Pointer {
-	return x.inner.SynchronizationClock()
+// Synchronization clock used for media capture.
+func (x *Stream) SynchronizationClock() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("synchronizationClock"))
+	return obj.Wrap(_r)
 }
 
 // Streamable is the interface implemented by [Stream], for mocking and DI.
 type Streamable interface {
-	Unwrap() *raw.SCStream
-	AddStreamOutputTypeSampleHandlerQueueError(output raw.SCStreamOutput, type_ SCStreamOutputType, sampleHandlerQueue *foundation.NSObject) (bool, error)
-	RemoveStreamOutputTypeError(output raw.SCStreamOutput, type_ SCStreamOutputType) (bool, error)
-	UpdateContentFilter(ctx context.Context, contentFilter *raw.SCContentFilter) error
-	UpdateConfiguration(ctx context.Context, streamConfig *raw.SCStreamConfiguration) error
+	obj.Object
+	UpdateContentFilter(ctx context.Context, contentFilter *ContentFilter) error
+	UpdateConfiguration(ctx context.Context, streamConfig *StreamConfiguration) error
 	StartCapture(ctx context.Context) error
 	StopCapture(ctx context.Context) error
-	AddRecordingOutputError(recordingOutput *raw.SCRecordingOutput) (bool, error)
-	RemoveRecordingOutputError(recordingOutput *raw.SCRecordingOutput) (bool, error)
-	SynchronizationClock() unsafe.Pointer
+	AddRecordingOutput(recordingOutput *RecordingOutput) error
+	RemoveRecordingOutput(recordingOutput *RecordingOutput) error
+	SynchronizationClock() obj.Object
 }
 
 var _ Streamable = (*Stream)(nil)

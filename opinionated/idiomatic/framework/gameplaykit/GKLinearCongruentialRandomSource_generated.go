@@ -5,76 +5,95 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A basic random number generator implementing the linear congruential generator algorithm, which is faster but less random than the default random source.
 //
-// LinearCongruentialRandomSource wraps [raw.GKLinearCongruentialRandomSource] with a fluent Go API.
+// LinearCongruentialRandomSource is an idiomatic wrapper over the Objective-C class GKLinearCongruentialRandomSource.
 type LinearCongruentialRandomSource struct {
-	inner *raw.GKLinearCongruentialRandomSource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKLinearCongruentialRandomSource].
-func (x *LinearCongruentialRandomSource) Unwrap() *raw.GKLinearCongruentialRandomSource {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LinearCongruentialRandomSource) ID() objc.ID { return x.inner.Ptr() }
-
-// LinearCongruentialRandomSourceFromID adopts an existing object pointer as a LinearCongruentialRandomSource (nil for 0).
+// LinearCongruentialRandomSourceFromID adopts an existing Objective-C object as a LinearCongruentialRandomSource
+// (nil for 0), retaining it and registering a release finalizer.
 func LinearCongruentialRandomSourceFromID(id objc.ID) *LinearCongruentialRandomSource {
 	if id == 0 {
 		return nil
 	}
-	return &LinearCongruentialRandomSource{inner: raw.GKLinearCongruentialRandomSourceFromID(id)}
+	x := &LinearCongruentialRandomSource{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLinearCongruentialRandomSource creates a new [LinearCongruentialRandomSource].
+// linearCongruentialRandomSourceAdopt wraps an Objective-C object that this code just created as a
+// LinearCongruentialRandomSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func linearCongruentialRandomSourceAdopt(id objc.ID) *LinearCongruentialRandomSource {
+	if id == 0 {
+		return nil
+	}
+	x := &LinearCongruentialRandomSource{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LinearCongruentialRandomSource) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LinearCongruentialRandomSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LinearCongruentialRandomSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLinearCongruentialRandomSource creates a new LinearCongruentialRandomSource.
 func NewLinearCongruentialRandomSource() *LinearCongruentialRandomSource {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKLinearCongruentialRandomSource")), objc.RegisterName("new"))
-	return &LinearCongruentialRandomSource{inner: raw.GKLinearCongruentialRandomSourceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKLinearCongruentialRandomSource")), objc.RegisterName("new"))
+	return linearCongruentialRandomSourceAdopt(_id)
 }
 
 // Initializes a random source with the specified seed value.
 //
-// NewLinearCongruentialRandomSourceWithSeed creates a new [LinearCongruentialRandomSource].
+// NewLinearCongruentialRandomSourceWithSeed creates a new LinearCongruentialRandomSource.
 func NewLinearCongruentialRandomSourceWithSeed(seed uint64) *LinearCongruentialRandomSource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKLinearCongruentialRandomSource")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKLinearCongruentialRandomSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSeed:"), seed)
-	return &LinearCongruentialRandomSource{inner: raw.GKLinearCongruentialRandomSourceFromID(_id)}
+	return linearCongruentialRandomSourceAdopt(_id)
 }
 
 // The seed value that determines the random source’s behavior.
 //
-// WithSeed sets the seed property and returns the receiver for chaining.
+// WithSeed sets seed and returns the receiver so calls can be chained.
 func (x *LinearCongruentialRandomSource) WithSeed(seed uint64) *LinearCongruentialRandomSource {
-	x.inner.SetSeed(seed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
 	return x
 }
 
 // The seed used to stir the linear congruential random source. The seed changes each time a random value is generated from this source, as the seed is the state buffer. The seed is encoded through archiving.
-//
-// Seed calls the underlying Seed.
 func (x *LinearCongruentialRandomSource) Seed() uint64 {
-	return x.inner.Seed()
+	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("seed"))
+	return _r
 }
 
-// SetSeed calls the underlying SetSeed.
 func (x *LinearCongruentialRandomSource) SetSeed(seed uint64) {
-	x.inner.SetSeed(seed)
-}
-
-func (x *LinearCongruentialRandomSource) asRandomSource() *raw.GKRandomSource {
-	return &x.inner.GKRandomSource
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
 }
 
 // LinearCongruentialRandomSourceable is the interface implemented by [LinearCongruentialRandomSource], for mocking and DI.
 type LinearCongruentialRandomSourceable interface {
-	Unwrap() *raw.GKLinearCongruentialRandomSource
+	obj.Object
 	WithSeed(seed uint64) *LinearCongruentialRandomSource
 	Seed() uint64
 	SetSeed(seed uint64)

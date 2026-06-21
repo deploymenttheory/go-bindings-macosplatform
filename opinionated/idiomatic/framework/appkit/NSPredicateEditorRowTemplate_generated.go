@@ -5,175 +5,139 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A template that describes available predicates and how to display them.
 //
-// PredicateEditorRowTemplate wraps [raw.NSPredicateEditorRowTemplate] with a fluent Go API.
+// PredicateEditorRowTemplate is an idiomatic wrapper over the Objective-C class NSPredicateEditorRowTemplate.
 type PredicateEditorRowTemplate struct {
-	inner *raw.NSPredicateEditorRowTemplate
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPredicateEditorRowTemplate].
-func (x *PredicateEditorRowTemplate) Unwrap() *raw.NSPredicateEditorRowTemplate { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PredicateEditorRowTemplate) ID() objc.ID { return x.inner.Ptr() }
-
-// PredicateEditorRowTemplateFromID adopts an existing object pointer as a PredicateEditorRowTemplate (nil for 0).
+// PredicateEditorRowTemplateFromID adopts an existing Objective-C object as a PredicateEditorRowTemplate
+// (nil for 0), retaining it and registering a release finalizer.
 func PredicateEditorRowTemplateFromID(id objc.ID) *PredicateEditorRowTemplate {
 	if id == 0 {
 		return nil
 	}
-	return &PredicateEditorRowTemplate{inner: raw.NSPredicateEditorRowTemplateFromID(id)}
+	x := &PredicateEditorRowTemplate{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes and returns a “pop-up-pop-up-pop-up”–style row template.
-//
-// NewPredicateEditorRowTemplateWithLeftExpressionsRightExpressionsModifierOperatorsOptions creates a new [PredicateEditorRowTemplate].
-func NewPredicateEditorRowTemplateWithLeftExpressionsRightExpressionsModifierOperatorsOptions(leftExpressions *foundation.NSArray[*foundation.NSExpression], rightExpressions *foundation.NSArray[*foundation.NSExpression], modifier foundation.NSComparisonPredicateModifier, operators *foundation.NSArray[*foundation.NSNumber], options uint) *PredicateEditorRowTemplate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPredicateEditorRowTemplate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeftExpressions:rightExpressions:modifier:operators:options:"), leftExpressions.Ptr(), rightExpressions.Ptr(), modifier, operators.Ptr(), options)
-	return &PredicateEditorRowTemplate{inner: raw.NSPredicateEditorRowTemplateFromID(_id)}
+// predicateEditorRowTemplateAdopt wraps an Objective-C object that this code just created as a
+// PredicateEditorRowTemplate (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func predicateEditorRowTemplateAdopt(id objc.ID) *PredicateEditorRowTemplate {
+	if id == 0 {
+		return nil
+	}
+	x := &PredicateEditorRowTemplate{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Initializes and returns a “pop-up-pop-up-view”–style row template.
-//
-// NewPredicateEditorRowTemplateWithLeftExpressionsRightExpressionAttributeTypeModifierOperatorsOptions creates a new [PredicateEditorRowTemplate].
-func NewPredicateEditorRowTemplateWithLeftExpressionsRightExpressionAttributeTypeModifierOperatorsOptions(leftExpressions *foundation.NSArray[*foundation.NSExpression], attributeType coredata.NSAttributeType, modifier foundation.NSComparisonPredicateModifier, operators *foundation.NSArray[*foundation.NSNumber], options uint) *PredicateEditorRowTemplate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPredicateEditorRowTemplate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLeftExpressions:rightExpressionAttributeType:modifier:operators:options:"), leftExpressions.Ptr(), attributeType, modifier, operators.Ptr(), options)
-	return &PredicateEditorRowTemplate{inner: raw.NSPredicateEditorRowTemplateFromID(_id)}
+// Description returns the object's -description text.
+func (x *PredicateEditorRowTemplate) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PredicateEditorRowTemplate) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PredicateEditorRowTemplate) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes and returns a row template suitable for displaying compound predicates.
 //
-// NewPredicateEditorRowTemplateWithCompoundTypes creates a new [PredicateEditorRowTemplate].
-func NewPredicateEditorRowTemplateWithCompoundTypes(compoundTypes *foundation.NSArray[*foundation.NSNumber]) *PredicateEditorRowTemplate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPredicateEditorRowTemplate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompoundTypes:"), compoundTypes.Ptr())
-	return &PredicateEditorRowTemplate{inner: raw.NSPredicateEditorRowTemplateFromID(_id)}
+// NewPredicateEditorRowTemplateWithCompoundTypes creates a new PredicateEditorRowTemplate.
+func NewPredicateEditorRowTemplateWithCompoundTypes(compoundTypes []obj.Object) *PredicateEditorRowTemplate {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPredicateEditorRowTemplate")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCompoundTypes:"), purego.SliceToNSArray(compoundTypes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return predicateEditorRowTemplateAdopt(_id)
 }
 
 // Returns a positive number if the receiver can represent a given predicate, and 0 if it cannot.
-//
-// MatchForPredicate calls the underlying MatchForPredicate.
-func (x *PredicateEditorRowTemplate) MatchForPredicate(predicate *foundation.NSPredicate) float64 {
-	return x.inner.MatchForPredicate(predicate)
+func (x *PredicateEditorRowTemplate) MatchForPredicate(predicate obj.Object) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("matchForPredicate:"), objref.IDOf(predicate))
+	return _r
 }
 
 // Sets the value of the views according to the given predicate.
-//
-// SetPredicate calls the underlying SetPredicate.
-func (x *PredicateEditorRowTemplate) SetPredicate(predicate *foundation.NSPredicate) {
-	x.inner.SetPredicate(predicate)
+func (x *PredicateEditorRowTemplate) SetPredicate(predicate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 }
 
 // Returns the predicate represented by the receiver’s views’ values and the given sub-predicates.
-//
-// PredicateWithSubpredicates calls the underlying PredicateWithSubpredicates.
-func (x *PredicateEditorRowTemplate) PredicateWithSubpredicates(subpredicates *foundation.NSArray[*foundation.NSPredicate]) *foundation.NSPredicate {
-	return x.inner.PredicateWithSubpredicates(subpredicates)
+func (x *PredicateEditorRowTemplate) PredicateWithSubpredicates(subpredicates []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicateWithSubpredicates:"), purego.SliceToNSArray(subpredicates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return obj.Wrap(_r)
 }
 
 // Returns the subpredicates that should be made sub-rows of a given predicate.
-//
-// DisplayableSubpredicatesOfPredicate calls the underlying DisplayableSubpredicatesOfPredicate.
-func (x *PredicateEditorRowTemplate) DisplayableSubpredicatesOfPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[*foundation.NSPredicate] {
-	return x.inner.DisplayableSubpredicatesOfPredicate(predicate)
+func (x *PredicateEditorRowTemplate) DisplayableSubpredicatesOfPredicate(predicate obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayableSubpredicatesOfPredicate:"), objref.IDOf(predicate))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // TemplateViews returns the collection as a Go slice.
 func (x *PredicateEditorRowTemplate) TemplateViews() []*View {
-	arr := x.inner.TemplateViews()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *View {
-		return &View{inner: raw.NSViewFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("templateViews"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *View { return ViewFromID(_id) })
 }
 
 // LeftExpressions returns the collection as a Go slice.
-func (x *PredicateEditorRowTemplate) LeftExpressions() []*foundation.NSExpression {
-	arr := x.inner.LeftExpressions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSExpression {
-		return foundation.NSExpressionFromID(purego.Retain(_id))
-	})
+func (x *PredicateEditorRowTemplate) LeftExpressions() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftExpressions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // RightExpressions returns the collection as a Go slice.
-func (x *PredicateEditorRowTemplate) RightExpressions() []*foundation.NSExpression {
-	arr := x.inner.RightExpressions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSExpression {
-		return foundation.NSExpressionFromID(purego.Retain(_id))
-	})
-}
-
-// RightExpressionAttributeType calls the underlying RightExpressionAttributeType.
-func (x *PredicateEditorRowTemplate) RightExpressionAttributeType() coredata.NSAttributeType {
-	return x.inner.RightExpressionAttributeType()
-}
-
-// Modifier calls the underlying Modifier.
-func (x *PredicateEditorRowTemplate) Modifier() foundation.NSComparisonPredicateModifier {
-	return x.inner.Modifier()
+func (x *PredicateEditorRowTemplate) RightExpressions() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightExpressions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Operators returns the collection as a Go slice.
-func (x *PredicateEditorRowTemplate) Operators() []*foundation.NSNumber {
-	arr := x.inner.Operators()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *PredicateEditorRowTemplate) Operators() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operators"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Options calls the underlying Options.
-func (x *PredicateEditorRowTemplate) Options() uint {
-	return x.inner.Options()
+func (x *PredicateEditorRowTemplate) Options() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("options"))
+	return _r
 }
 
 // CompoundTypes returns the collection as a Go slice.
-func (x *PredicateEditorRowTemplate) CompoundTypes() []*foundation.NSNumber {
-	arr := x.inner.CompoundTypes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *PredicateEditorRowTemplate) CompoundTypes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compoundTypes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // PredicateEditorRowTemplateable is the interface implemented by [PredicateEditorRowTemplate], for mocking and DI.
 type PredicateEditorRowTemplateable interface {
-	Unwrap() *raw.NSPredicateEditorRowTemplate
-	MatchForPredicate(predicate *foundation.NSPredicate) float64
-	SetPredicate(predicate *foundation.NSPredicate)
-	PredicateWithSubpredicates(subpredicates *foundation.NSArray[*foundation.NSPredicate]) *foundation.NSPredicate
-	DisplayableSubpredicatesOfPredicate(predicate *foundation.NSPredicate) *foundation.NSArray[*foundation.NSPredicate]
+	obj.Object
+	MatchForPredicate(predicate obj.Object) float64
+	SetPredicate(predicate obj.Object)
+	PredicateWithSubpredicates(subpredicates []obj.Object) obj.Object
+	DisplayableSubpredicatesOfPredicate(predicate obj.Object) []obj.Object
 	TemplateViews() []*View
-	LeftExpressions() []*foundation.NSExpression
-	RightExpressions() []*foundation.NSExpression
-	RightExpressionAttributeType() coredata.NSAttributeType
-	Modifier() foundation.NSComparisonPredicateModifier
-	Operators() []*foundation.NSNumber
-	Options() uint
-	CompoundTypes() []*foundation.NSNumber
+	LeftExpressions() []obj.Object
+	RightExpressions() []obj.Object
+	Operators() []obj.Object
+	Options() int
+	CompoundTypes() []obj.Object
 }
 
 var _ PredicateEditorRowTemplateable = (*PredicateEditorRowTemplate)(nil)

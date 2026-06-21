@@ -5,62 +5,88 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A control you add to your interface that enables users to initiate the Sign In with Apple flow.
 //
-// AuthorizationAppleIDButton wraps [raw.ASAuthorizationAppleIDButton] with a fluent Go API.
+// AuthorizationAppleIDButton is an idiomatic wrapper over the Objective-C class ASAuthorizationAppleIDButton.
 type AuthorizationAppleIDButton struct {
-	inner *raw.ASAuthorizationAppleIDButton
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationAppleIDButton].
-func (x *AuthorizationAppleIDButton) Unwrap() *raw.ASAuthorizationAppleIDButton { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationAppleIDButton) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationAppleIDButtonFromID adopts an existing object pointer as a AuthorizationAppleIDButton (nil for 0).
+// AuthorizationAppleIDButtonFromID adopts an existing Objective-C object as a AuthorizationAppleIDButton
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationAppleIDButtonFromID(id objc.ID) *AuthorizationAppleIDButton {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationAppleIDButton{inner: raw.ASAuthorizationAppleIDButtonFromID(id)}
+	x := &AuthorizationAppleIDButton{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// authorizationAppleIDButtonAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationAppleIDButton (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationAppleIDButtonAdopt(id objc.ID) *AuthorizationAppleIDButton {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationAppleIDButton{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthorizationAppleIDButton) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationAppleIDButton) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationAppleIDButton) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new Sign In with Apple authorization button with the given type and style.
 //
-// NewAuthorizationAppleIDButtonWithAuthorizationButtonTypeAuthorizationButtonStyle creates a new [AuthorizationAppleIDButton].
-func NewAuthorizationAppleIDButtonWithAuthorizationButtonTypeAuthorizationButtonStyle(type_ ASAuthorizationAppleIDButtonType, style ASAuthorizationAppleIDButtonStyle) *AuthorizationAppleIDButton {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationAppleIDButton")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAuthorizationButtonType:authorizationButtonStyle:"), raw.ASAuthorizationAppleIDButtonType(type_), raw.ASAuthorizationAppleIDButtonStyle(style))
-	return &AuthorizationAppleIDButton{inner: raw.ASAuthorizationAppleIDButtonFromID(_id)}
+// NewAuthorizationAppleIDButtonWithAuthorizationButtonTypeAuthorizationButtonStyle creates a new AuthorizationAppleIDButton.
+func NewAuthorizationAppleIDButtonWithAuthorizationButtonTypeAuthorizationButtonStyle(type_ AuthorizationAppleIDButtonType, style AuthorizationAppleIDButtonStyle) *AuthorizationAppleIDButton {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationAppleIDButton")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAuthorizationButtonType:authorizationButtonStyle:"), type_, style)
+	return authorizationAppleIDButtonAdopt(_id)
 }
 
 // The radius, in points, for the rounded corners on the Apple ID sign-in button.
 //
-// WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
+// WithCornerRadius sets cornerRadius and returns the receiver so calls can be chained.
 func (x *AuthorizationAppleIDButton) WithCornerRadius(cornerRadius float64) *AuthorizationAppleIDButton {
-	x.inner.SetCornerRadius(cornerRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 	return x
 }
 
-// CornerRadius calls the underlying CornerRadius.
 func (x *AuthorizationAppleIDButton) CornerRadius() float64 {
-	return x.inner.CornerRadius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("cornerRadius"))
+	return _r
 }
 
-// SetCornerRadius calls the underlying SetCornerRadius.
 func (x *AuthorizationAppleIDButton) SetCornerRadius(cornerRadius float64) {
-	x.inner.SetCornerRadius(cornerRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 }
 
 // AuthorizationAppleIDButtonable is the interface implemented by [AuthorizationAppleIDButton], for mocking and DI.
 type AuthorizationAppleIDButtonable interface {
-	Unwrap() *raw.ASAuthorizationAppleIDButton
+	obj.Object
 	WithCornerRadius(cornerRadius float64) *AuthorizationAppleIDButton
 	CornerRadius() float64
 	SetCornerRadius(cornerRadius float64)

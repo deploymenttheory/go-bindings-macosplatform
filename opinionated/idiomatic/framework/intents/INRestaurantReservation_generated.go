@@ -5,79 +5,98 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The information that describes a restaurant reservation.
 //
-// RestaurantReservation wraps [raw.INRestaurantReservation] with a fluent Go API.
+// RestaurantReservation is an idiomatic wrapper over the Objective-C class INRestaurantReservation.
 type RestaurantReservation struct {
-	inner *raw.INRestaurantReservation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INRestaurantReservation].
-func (x *RestaurantReservation) Unwrap() *raw.INRestaurantReservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RestaurantReservation) ID() objc.ID { return x.inner.Ptr() }
-
-// RestaurantReservationFromID adopts an existing object pointer as a RestaurantReservation (nil for 0).
+// RestaurantReservationFromID adopts an existing Objective-C object as a RestaurantReservation
+// (nil for 0), retaining it and registering a release finalizer.
 func RestaurantReservationFromID(id objc.ID) *RestaurantReservation {
 	if id == 0 {
 		return nil
 	}
-	return &RestaurantReservation{inner: raw.INRestaurantReservationFromID(id)}
+	x := &RestaurantReservation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// restaurantReservationAdopt wraps an Objective-C object that this code just created as a
+// RestaurantReservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func restaurantReservationAdopt(id objc.ID) *RestaurantReservation {
+	if id == 0 {
+		return nil
+	}
+	x := &RestaurantReservation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RestaurantReservation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RestaurantReservation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RestaurantReservation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a restaurant reservation with the provided information.
 //
-// NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservationDurationPartySizeRestaurantLocation creates a new [RestaurantReservation].
-func NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservationDurationPartySizeRestaurantLocation(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], uRL string, reservationDuration *raw.INDateComponentsRange, partySize *foundation.NSNumber, restaurantLocation *corelocation.CLPlacemark) *RestaurantReservation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INRestaurantReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservationDuration:partySize:restaurantLocation:"), itemReference.Ptr(), foundation.NSStringStringWithUTF8String(reservationNumber).Ptr(), bookingTime.Ptr(), raw.INReservationStatus(reservationStatus), foundation.NSStringStringWithUTF8String(reservationHolderName).Ptr(), actions.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), reservationDuration.Ptr(), partySize.Ptr(), restaurantLocation.Ptr())
-	return &RestaurantReservation{inner: raw.INRestaurantReservationFromID(_id)}
+// NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservationDurationPartySizeRestaurantLocation creates a new RestaurantReservation.
+func NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservationDurationPartySizeRestaurantLocation(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, reservationDuration *DateComponentsRange, partySize obj.Object, restaurantLocation obj.Object) *RestaurantReservation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INRestaurantReservation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservationDuration:partySize:restaurantLocation:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(reservationDuration), objref.IDOf(partySize), objref.IDOf(restaurantLocation))
+	return restaurantReservationAdopt(_id)
 }
 
 // Creates a new restaurant reservation with the provided information.
 //
-// NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservationDurationPartySizeRestaurantLocation creates a new [RestaurantReservation].
-func NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservationDurationPartySizeRestaurantLocation(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], reservationDuration *raw.INDateComponentsRange, partySize *foundation.NSNumber, restaurantLocation *corelocation.CLPlacemark) *RestaurantReservation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INRestaurantReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservationDuration:partySize:restaurantLocation:"), itemReference.Ptr(), foundation.NSStringStringWithUTF8String(reservationNumber).Ptr(), bookingTime.Ptr(), raw.INReservationStatus(reservationStatus), foundation.NSStringStringWithUTF8String(reservationHolderName).Ptr(), actions.Ptr(), reservationDuration.Ptr(), partySize.Ptr(), restaurantLocation.Ptr())
-	return &RestaurantReservation{inner: raw.INRestaurantReservationFromID(_id)}
+// NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservationDurationPartySizeRestaurantLocation creates a new RestaurantReservation.
+func NewRestaurantReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservationDurationPartySizeRestaurantLocation(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, reservationDuration *DateComponentsRange, partySize obj.Object, restaurantLocation obj.Object) *RestaurantReservation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INRestaurantReservation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservationDuration:partySize:restaurantLocation:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(reservationDuration), objref.IDOf(partySize), objref.IDOf(restaurantLocation))
+	return restaurantReservationAdopt(_id)
 }
 
-// ReservationDuration calls the underlying ReservationDuration.
 func (x *RestaurantReservation) ReservationDuration() *DateComponentsRange {
-	_r := x.inner.ReservationDuration()
-	if _r == nil {
-		return nil
-	}
-	return &DateComponentsRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservationDuration"))
+	return DateComponentsRangeFromID(_r)
 }
 
-// PartySize calls the underlying PartySize.
-func (x *RestaurantReservation) PartySize() *foundation.NSNumber {
-	return x.inner.PartySize()
+func (x *RestaurantReservation) PartySize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("partySize"))
+	return obj.Wrap(_r)
 }
 
-// RestaurantLocation calls the underlying RestaurantLocation.
-func (x *RestaurantReservation) RestaurantLocation() *corelocation.CLPlacemark {
-	return x.inner.RestaurantLocation()
+func (x *RestaurantReservation) RestaurantLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restaurantLocation"))
+	return obj.Wrap(_r)
 }
-
-func (x *RestaurantReservation) asReservation() *raw.INReservation { return &x.inner.INReservation }
 
 // RestaurantReservationable is the interface implemented by [RestaurantReservation], for mocking and DI.
 type RestaurantReservationable interface {
-	Unwrap() *raw.INRestaurantReservation
+	obj.Object
 	ReservationDuration() *DateComponentsRange
-	PartySize() *foundation.NSNumber
-	RestaurantLocation() *corelocation.CLPlacemark
+	PartySize() obj.Object
+	RestaurantLocation() obj.Object
 }
 
 var _ RestaurantReservationable = (*RestaurantReservation)(nil)

@@ -5,96 +5,117 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A numeric quantity labeled with a unit of measure, with support for unit conversion and unit-aware calculations.
 //
-// Measurement wraps [raw.NSMeasurement] with a fluent Go API.
+// Measurement is an idiomatic wrapper over the Objective-C class NSMeasurement.
 type Measurement struct {
-	inner *raw.NSMeasurement[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSMeasurement].
-func (x *Measurement) Unwrap() *raw.NSMeasurement[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Measurement) ID() objc.ID { return x.inner.Ptr() }
-
-// MeasurementFromID adopts an existing object pointer as a Measurement (nil for 0).
+// MeasurementFromID adopts an existing Objective-C object as a Measurement
+// (nil for 0), retaining it and registering a release finalizer.
 func MeasurementFromID(id objc.ID) *Measurement {
 	if id == 0 {
 		return nil
 	}
-	return &Measurement{inner: raw.NSMeasurementFromID[objc.ID](id)}
+	x := &Measurement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// measurementAdopt wraps an Objective-C object that this code just created as a
+// Measurement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func measurementAdopt(id objc.ID) *Measurement {
+	if id == 0 {
+		return nil
+	}
+	x := &Measurement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Measurement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Measurement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Measurement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a new measurement with a specified double-precision floating-point value and unit.
 //
-// NewMeasurementWithDoubleValueUnit creates a new [Measurement].
-func NewMeasurementWithDoubleValueUnit(doubleValue float64, unit objc.ID) *Measurement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMeasurement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDoubleValue:unit:"), doubleValue, unit)
-	return &Measurement{inner: raw.NSMeasurementFromID[objc.ID](_id)}
+// NewMeasurementWithDoubleValueUnit creates a new Measurement.
+func NewMeasurementWithDoubleValueUnit(doubleValue float64, unit obj.Object) *Measurement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMeasurement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDoubleValue:unit:"), doubleValue, objref.IDOf(unit))
+	return measurementAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Measurement) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Measurement {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *Measurement) WithScriptingProperties(scriptingProperties obj.Object) *Measurement {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Indicates whether the measurement can be converted to the given unit.
-//
-// CanBeConvertedToUnit calls the underlying CanBeConvertedToUnit.
-func (x *Measurement) CanBeConvertedToUnit(unit *raw.NSUnit) bool {
-	return x.inner.CanBeConvertedToUnit(unit)
+func (x *Measurement) CanBeConvertedToUnit(unit *Unit) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canBeConvertedToUnit:"), objref.IDOf(unit))
+	return _r
 }
 
 // Returns a measurement created by converting the receiver to the specified unit.
-//
-// MeasurementByConvertingToUnit calls the underlying MeasurementByConvertingToUnit.
-func (x *Measurement) MeasurementByConvertingToUnit(unit *raw.NSUnit) *raw.NSMeasurement[objc.ID] {
-	return x.inner.MeasurementByConvertingToUnit(unit)
+func (x *Measurement) MeasurementByConvertingToUnit(unit *Unit) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("measurementByConvertingToUnit:"), objref.IDOf(unit))
+	return obj.Wrap(_r)
 }
 
 // Returns a new measurement by adding the receiver to the specified measurement.
-//
-// MeasurementByAddingMeasurement calls the underlying MeasurementByAddingMeasurement.
-func (x *Measurement) MeasurementByAddingMeasurement(measurement *raw.NSMeasurement[objc.ID]) *raw.NSMeasurement[objc.ID] {
-	return x.inner.MeasurementByAddingMeasurement(measurement)
+func (x *Measurement) MeasurementByAddingMeasurement(measurement obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("measurementByAddingMeasurement:"), objref.IDOf(measurement))
+	return obj.Wrap(_r)
 }
 
 // Returns a new measurement by subtracting the specified measurement from the receiver.
-//
-// MeasurementBySubtractingMeasurement calls the underlying MeasurementBySubtractingMeasurement.
-func (x *Measurement) MeasurementBySubtractingMeasurement(measurement *raw.NSMeasurement[objc.ID]) *raw.NSMeasurement[objc.ID] {
-	return x.inner.MeasurementBySubtractingMeasurement(measurement)
+func (x *Measurement) MeasurementBySubtractingMeasurement(measurement obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("measurementBySubtractingMeasurement:"), objref.IDOf(measurement))
+	return obj.Wrap(_r)
 }
 
-// Unit calls the underlying Unit.
-func (x *Measurement) Unit() objc.ID {
-	return x.inner.Unit()
+func (x *Measurement) Unit() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unit"))
+	return obj.Wrap(_r)
 }
 
-// DoubleValue calls the underlying DoubleValue.
 func (x *Measurement) DoubleValue() float64 {
-	return x.inner.DoubleValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleValue"))
+	return _r
 }
-
-func (x *Measurement) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Measurementable is the interface implemented by [Measurement], for mocking and DI.
 type Measurementable interface {
-	Unwrap() *raw.NSMeasurement[objc.ID]
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Measurement
-	CanBeConvertedToUnit(unit *raw.NSUnit) bool
-	MeasurementByConvertingToUnit(unit *raw.NSUnit) *raw.NSMeasurement[objc.ID]
-	MeasurementByAddingMeasurement(measurement *raw.NSMeasurement[objc.ID]) *raw.NSMeasurement[objc.ID]
-	MeasurementBySubtractingMeasurement(measurement *raw.NSMeasurement[objc.ID]) *raw.NSMeasurement[objc.ID]
-	Unit() objc.ID
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Measurement
+	CanBeConvertedToUnit(unit *Unit) bool
+	MeasurementByConvertingToUnit(unit *Unit) obj.Object
+	MeasurementByAddingMeasurement(measurement obj.Object) obj.Object
+	MeasurementBySubtractingMeasurement(measurement obj.Object) obj.Object
+	Unit() obj.Object
 	DoubleValue() float64
 }
 

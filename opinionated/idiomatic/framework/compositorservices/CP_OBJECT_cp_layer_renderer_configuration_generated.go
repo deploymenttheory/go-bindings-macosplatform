@@ -5,41 +5,66 @@
 package compositorservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/compositorservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// _cp_layer_renderer_configuration wraps [raw.CP_OBJECT_cp_layer_renderer_configuration] with a fluent Go API.
+// _cp_layer_renderer_configuration is an idiomatic wrapper over the Objective-C class CP_OBJECT_cp_layer_renderer_configuration.
 type _cp_layer_renderer_configuration struct {
-	inner *raw.CP_OBJECT_cp_layer_renderer_configuration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CP_OBJECT_cp_layer_renderer_configuration].
-func (x *_cp_layer_renderer_configuration) Unwrap() *raw.CP_OBJECT_cp_layer_renderer_configuration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *_cp_layer_renderer_configuration) ID() objc.ID { return x.inner.Ptr() }
-
-// _cp_layer_renderer_configurationFromID adopts an existing object pointer as a _cp_layer_renderer_configuration (nil for 0).
+// _cp_layer_renderer_configurationFromID adopts an existing Objective-C object as a _cp_layer_renderer_configuration
+// (nil for 0), retaining it and registering a release finalizer.
 func _cp_layer_renderer_configurationFromID(id objc.ID) *_cp_layer_renderer_configuration {
 	if id == 0 {
 		return nil
 	}
-	return &_cp_layer_renderer_configuration{inner: raw.CP_OBJECT_cp_layer_renderer_configurationFromID(id)}
+	x := &_cp_layer_renderer_configuration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// New_cp_layer_renderer_configuration creates a new [_cp_layer_renderer_configuration].
+// _cp_layer_renderer_configurationAdopt wraps an Objective-C object that this code just created as a
+// _cp_layer_renderer_configuration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func _cp_layer_renderer_configurationAdopt(id objc.ID) *_cp_layer_renderer_configuration {
+	if id == 0 {
+		return nil
+	}
+	x := &_cp_layer_renderer_configuration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *_cp_layer_renderer_configuration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *_cp_layer_renderer_configuration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *_cp_layer_renderer_configuration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// New_cp_layer_renderer_configuration creates a new _cp_layer_renderer_configuration.
 func New_cp_layer_renderer_configuration() *_cp_layer_renderer_configuration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CP_OBJECT_cp_layer_renderer_configuration")), objc.RegisterName("new"))
-	return &_cp_layer_renderer_configuration{inner: raw.CP_OBJECT_cp_layer_renderer_configurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CP_OBJECT_cp_layer_renderer_configuration")), objc.RegisterName("new"))
+	return _cp_layer_renderer_configurationAdopt(_id)
 }
 
 // _cp_layer_renderer_configurationable is the interface implemented by [_cp_layer_renderer_configuration], for mocking and DI.
 type _cp_layer_renderer_configurationable interface {
-	Unwrap() *raw.CP_OBJECT_cp_layer_renderer_configuration
+	obj.Object
 }
 
 var _ _cp_layer_renderer_configurationable = (*_cp_layer_renderer_configuration)(nil)

@@ -5,140 +5,151 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Information about an error condition including a domain, a domain-specific error code, and application-specific information.
 //
-// Error wraps [raw.NSError] with a fluent Go API.
+// Error is an idiomatic wrapper over the Objective-C class NSError.
 type Error struct {
-	inner *raw.NSError
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSError].
-func (x *Error) Unwrap() *raw.NSError { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Error) ID() objc.ID { return x.inner.Ptr() }
-
-// ErrorFromID adopts an existing object pointer as a Error (nil for 0).
+// ErrorFromID adopts an existing Objective-C object as a Error
+// (nil for 0), retaining it and registering a release finalizer.
 func ErrorFromID(id objc.ID) *Error {
 	if id == 0 {
 		return nil
 	}
-	return &Error{inner: raw.NSErrorFromID(id)}
+	x := &Error{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// errorAdopt wraps an Objective-C object that this code just created as a
+// Error (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func errorAdopt(id objc.ID) *Error {
+	if id == 0 {
+		return nil
+	}
+	x := &Error{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Error) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Error) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Error) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns an NSError object initialized for a given domain and code with a given userInfo dictionary.
 //
-// NewErrorWithDomainCodeUserInfo creates a new [Error].
-func NewErrorWithDomainCodeUserInfo(domain *raw.NSString, code int, dict purego.IDer) *Error {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSError")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDomain:code:userInfo:"), domain.Ptr(), code, dict.ID())
-	return &Error{inner: raw.NSErrorFromID(_id)}
+// NewErrorWithDomainCodeUserInfo creates a new Error.
+func NewErrorWithDomainCodeUserInfo(domain *String, code int, dict obj.Object) *Error {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSError")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDomain:code:userInfo:"), objref.IDOf(domain), code, objref.IDOf(dict))
+	return errorAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Error) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Error {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *Error) WithScriptingProperties(scriptingProperties obj.Object) *Error {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Domain calls the underlying Domain.
 func (x *Error) Domain() *String {
-	_r := x.inner.Domain()
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
+	return StringFromID(_r)
 }
 
-// Code calls the underlying Code.
 func (x *Error) Code() int {
-	return x.inner.Code()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("code"))
+	return _r
 }
 
-// UserInfo calls the underlying UserInfo.
-func (x *Error) UserInfo() *raw.NSDictionary[*raw.NSString, objc.ID] {
-	return x.inner.UserInfo()
+func (x *Error) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+	return obj.Wrap(_r)
 }
 
-// LocalizedDescription calls the underlying LocalizedDescription.
-func (x *Error) LocalizedDescription() *String {
-	_r := x.inner.LocalizedDescription()
-	if _r == nil {
-		return nil
+func (x *Error) LocalizedDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// LocalizedFailureReason calls the underlying LocalizedFailureReason.
-func (x *Error) LocalizedFailureReason() *String {
-	_r := x.inner.LocalizedFailureReason()
-	if _r == nil {
-		return nil
+func (x *Error) LocalizedFailureReason() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedFailureReason"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// LocalizedRecoverySuggestion calls the underlying LocalizedRecoverySuggestion.
-func (x *Error) LocalizedRecoverySuggestion() *String {
-	_r := x.inner.LocalizedRecoverySuggestion()
-	if _r == nil {
-		return nil
+func (x *Error) LocalizedRecoverySuggestion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedRecoverySuggestion"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
 // LocalizedRecoveryOptions returns the collection as a Go slice.
 func (x *Error) LocalizedRecoveryOptions() []string {
-	arr := x.inner.LocalizedRecoveryOptions()
-	if arr == nil {
-		return nil
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedRecoveryOptions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
+}
+
+func (x *Error) RecoveryAttempter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recoveryAttempter"))
+	return obj.Wrap(_r)
+}
+
+func (x *Error) HelpAnchor() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("helpAnchor"))
+	if _r == 0 {
+		return ""
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	return purego.GoString(_r)
 }
 
-// RecoveryAttempter calls the underlying RecoveryAttempter.
-func (x *Error) RecoveryAttempter() objc.ID {
-	return x.inner.RecoveryAttempter()
+func (x *Error) UnderlyingErrors() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("underlyingErrors"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// HelpAnchor calls the underlying HelpAnchor.
-func (x *Error) HelpAnchor() *String {
-	_r := x.inner.HelpAnchor()
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// UnderlyingErrors calls the underlying UnderlyingErrors.
-func (x *Error) UnderlyingErrors() *raw.NSArray[objc.ID] {
-	return x.inner.UnderlyingErrors()
-}
-
-func (x *Error) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Errorable is the interface implemented by [Error], for mocking and DI.
 type Errorable interface {
-	Unwrap() *raw.NSError
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Error
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Error
 	Domain() *String
 	Code() int
-	UserInfo() *raw.NSDictionary[*raw.NSString, objc.ID]
-	LocalizedDescription() *String
-	LocalizedFailureReason() *String
-	LocalizedRecoverySuggestion() *String
+	UserInfo() obj.Object
+	LocalizedDescription() string
+	LocalizedFailureReason() string
+	LocalizedRecoverySuggestion() string
 	LocalizedRecoveryOptions() []string
-	RecoveryAttempter() objc.ID
-	HelpAnchor() *String
-	UnderlyingErrors() *raw.NSArray[objc.ID]
+	RecoveryAttempter() obj.Object
+	HelpAnchor() string
+	UnderlyingErrors() []obj.Object
 }
 
 var _ Errorable = (*Error)(nil)

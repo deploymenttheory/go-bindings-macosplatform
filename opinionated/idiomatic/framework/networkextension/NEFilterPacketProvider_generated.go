@@ -5,98 +5,81 @@
 package networkextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A filter provider that evaluates network packets and decides whether to block, allow, or delay the packets.
 //
-// NEFilterPacketProvider wraps [raw.NEFilterPacketProvider] with a fluent Go API.
+// NEFilterPacketProvider is an idiomatic wrapper over the Objective-C class NEFilterPacketProvider.
 type NEFilterPacketProvider struct {
-	inner *raw.NEFilterPacketProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEFilterPacketProvider].
-func (x *NEFilterPacketProvider) Unwrap() *raw.NEFilterPacketProvider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEFilterPacketProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// NEFilterPacketProviderFromID adopts an existing object pointer as a NEFilterPacketProvider (nil for 0).
+// NEFilterPacketProviderFromID adopts an existing Objective-C object as a NEFilterPacketProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func NEFilterPacketProviderFromID(id objc.ID) *NEFilterPacketProvider {
 	if id == 0 {
 		return nil
 	}
-	return &NEFilterPacketProvider{inner: raw.NEFilterPacketProviderFromID(id)}
-}
-
-// NewNEFilterPacketProvider creates a new [NEFilterPacketProvider].
-func NewNEFilterPacketProvider() *NEFilterPacketProvider {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEFilterPacketProvider")), objc.RegisterName("new"))
-	return &NEFilterPacketProvider{inner: raw.NEFilterPacketProviderFromID(_id)}
-}
-
-// A Swift closure or an ObjectiveC block that handles each packet received by the filter.
-//
-// WithPacketHandler sets the packetHandler property and returns the receiver for chaining.
-func (x *NEFilterPacketProvider) WithPacketHandler(packetHandler func(*raw.NEFilterPacketContext, *foundation.NSObject, NETrafficDirection, unsafe.Pointer, unsafe.Pointer) NEFilterPacketProviderVerdict) *NEFilterPacketProvider {
-	x.inner.SetPacketHandler(func(_a0 *raw.NEFilterPacketContext, _a1 *foundation.NSObject, _a2 raw.NETrafficDirection, _a3 unsafe.Pointer, _a4 unsafe.Pointer) raw.NEFilterPacketProviderVerdict {
-		return raw.NEFilterPacketProviderVerdict(packetHandler(_a0, _a1, NETrafficDirection(_a2), _a3, _a4))
-	})
+	x := &NEFilterPacketProvider{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Delay a packet currently processed by a packet handler.
-//
-// DelayCurrentPacket calls the underlying DelayCurrentPacket.
-func (x *NEFilterPacketProvider) DelayCurrentPacket(context_ *raw.NEFilterPacketContext) *NEPacket {
-	_r := x.inner.DelayCurrentPacket(context_)
-	if _r == nil {
+// nEFilterPacketProviderAdopt wraps an Objective-C object that this code just created as a
+// NEFilterPacketProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEFilterPacketProviderAdopt(id objc.ID) *NEFilterPacketProvider {
+	if id == 0 {
 		return nil
 	}
-	return &NEPacket{inner: _r}
+	x := &NEFilterPacketProvider{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NEFilterPacketProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEFilterPacketProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEFilterPacketProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNEFilterPacketProvider creates a new NEFilterPacketProvider.
+func NewNEFilterPacketProvider() *NEFilterPacketProvider {
+	_id := objc.Send[objc.ID](objc.ID(_class("NEFilterPacketProvider")), objc.RegisterName("new"))
+	return nEFilterPacketProviderAdopt(_id)
+}
+
+// Delay a packet currently processed by a packet handler.
+func (x *NEFilterPacketProvider) DelayCurrentPacket(context_ *NEFilterPacketContext) *NEPacket {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delayCurrentPacket:"), objref.IDOf(context_))
+	return NEPacketFromID(_r)
 }
 
 // Allow delivery of a previously-delayed packet.
-//
-// AllowPacket calls the underlying AllowPacket.
-func (x *NEFilterPacketProvider) AllowPacket(packet *raw.NEPacket) {
-	x.inner.AllowPacket(packet)
-}
-
-// @property packetHandler @discussion A block to be set to handle each packet received or to be sent.  A verdict to allow, drop or delay must be returned to indicate the treatment of the packet.  Since there may be multiple filtering sources presenting frames to the provider, this packet handler may be executed by multiple simultaneous threads.  This packet handler must be able to handle execution in a multi-threaded environment.
-//
-// PacketHandler calls the underlying PacketHandler.
-func (x *NEFilterPacketProvider) PacketHandler() objc.Block {
-	return x.inner.PacketHandler()
-}
-
-// SetPacketHandler calls the underlying SetPacketHandler.
-func (x *NEFilterPacketProvider) SetPacketHandler(packetHandler func(*raw.NEFilterPacketContext, *foundation.NSObject, NETrafficDirection, unsafe.Pointer, unsafe.Pointer) NEFilterPacketProviderVerdict) {
-	x.inner.SetPacketHandler(func(_a0 *raw.NEFilterPacketContext, _a1 *foundation.NSObject, _a2 raw.NETrafficDirection, _a3 unsafe.Pointer, _a4 unsafe.Pointer) raw.NEFilterPacketProviderVerdict {
-		return raw.NEFilterPacketProviderVerdict(packetHandler(_a0, _a1, NETrafficDirection(_a2), _a3, _a4))
-	})
-}
-
-func (x *NEFilterPacketProvider) asNEFilterProvider() *raw.NEFilterProvider {
-	return &x.inner.NEFilterProvider
-}
-
-func (x *NEFilterPacketProvider) asNEProvider() *raw.NEProvider {
-	return &x.inner.NEFilterProvider.NEProvider
+func (x *NEFilterPacketProvider) AllowPacket(packet *NEPacket) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowPacket:"), objref.IDOf(packet))
 }
 
 // NEFilterPacketProviderable is the interface implemented by [NEFilterPacketProvider], for mocking and DI.
 type NEFilterPacketProviderable interface {
-	Unwrap() *raw.NEFilterPacketProvider
-	WithPacketHandler(packetHandler func(*raw.NEFilterPacketContext, *foundation.NSObject, NETrafficDirection, unsafe.Pointer, unsafe.Pointer) NEFilterPacketProviderVerdict) *NEFilterPacketProvider
-	DelayCurrentPacket(context_ *raw.NEFilterPacketContext) *NEPacket
-	AllowPacket(packet *raw.NEPacket)
-	PacketHandler() objc.Block
-	SetPacketHandler(packetHandler func(*raw.NEFilterPacketContext, *foundation.NSObject, NETrafficDirection, unsafe.Pointer, unsafe.Pointer) NEFilterPacketProviderVerdict)
+	obj.Object
+	DelayCurrentPacket(context_ *NEFilterPacketContext) *NEPacket
+	AllowPacket(packet *NEPacket)
 }
 
 var _ NEFilterPacketProviderable = (*NEFilterPacketProvider)(nil)

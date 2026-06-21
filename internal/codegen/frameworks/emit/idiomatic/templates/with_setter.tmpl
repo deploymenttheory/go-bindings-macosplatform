@@ -1,37 +1,22 @@
 {{/*
-    with_setter.tmpl — a fluent With* setter on an idiomatic wrapper.
-    Two shapes: a variadic slice → NSArray collection setter, and a scalar/object
-    setter. Indentation is loose (gofmt fixes it); the trailing blank line is
-    emitted explicitly because gofmt preserves but does not insert blank lines
-    between declarations.
+    with_setter.tmpl renders a With… method that sets one Objective-C property
+    and returns the receiver, so calls can be chained. There are two shapes: a
+    collection property, which takes a variable number of items and builds an
+    Objective-C array from them, and a single-value property.
 */}}
 {{define "with_setter"}}{{if .DocComment}}{{.DocComment}}//
 {{end}}{{if .IsNSArray -}}
-// {{.GoName}} sets the collection, converting the Go slice to an {{.ArrayClass}}.
+// {{.GoName}} sets the collection and returns the receiver so calls can be chained.
 func (x *{{.TypeName}}) {{.GoName}}(items ...{{.SliceElemType}}) *{{.TypeName}} {
-if len(items) == 0 {
-// An empty (not nil) array: some raw setters dereference the argument.
-{{.Inner}}.{{.RawSetterGoName}}({{.ArrayFromID}}(
-objc.Send[objc.ID](objc.ID(objc.GetClass({{.ArrayClass | printf "%q"}})),
-objc.RegisterName("array"))))
-return x
-}
-_ptrs := make([]objc.ID, len(items))
-for _i, _v := range items {
-_ptrs[_i] = {{.LoopExpr}}
-}
-_arr := {{.ArrayFromID}}(
-objc.Send[objc.ID](objc.ID(objc.GetClass({{.ArrayClass | printf "%q"}})),
-objc.RegisterName("arrayWithObjects:count:"),
-unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-{{.Inner}}.{{.RawSetterGoName}}(_arr)
+_arr := purego.SliceToNSArray(items, func(_v {{.SliceElemType}}) objc.ID { return objref.IDOf(_v) })
+objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName({{.SetterSelector | printf "%q"}}), _arr)
 return x
 }
 
 {{else -}}
-// {{.GoName}} sets the {{.ParamName}} property and returns the receiver for chaining.
+// {{.GoName}} sets {{.ParamName}} and returns the receiver so calls can be chained.
 func (x *{{.TypeName}}) {{.GoName}}({{.ParamName}} {{.ParamType}}) *{{.TypeName}} {
-{{.Inner}}.{{.RawSetterGoName}}({{.ParamRawExpr}})
+objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName({{.SetterSelector | printf "%q"}}), {{.ParamRawExpr}})
 return x
 }
 

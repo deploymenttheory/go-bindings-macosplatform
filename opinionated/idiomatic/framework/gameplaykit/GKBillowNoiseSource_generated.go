@@ -5,102 +5,120 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A procedural noise generator whose output is a type of fractal coherent noise with smooth features.
 //
-// BillowNoiseSource wraps [raw.GKBillowNoiseSource] with a fluent Go API.
+// BillowNoiseSource is an idiomatic wrapper over the Objective-C class GKBillowNoiseSource.
 type BillowNoiseSource struct {
-	inner *raw.GKBillowNoiseSource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKBillowNoiseSource].
-func (x *BillowNoiseSource) Unwrap() *raw.GKBillowNoiseSource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BillowNoiseSource) ID() objc.ID { return x.inner.Ptr() }
-
-// BillowNoiseSourceFromID adopts an existing object pointer as a BillowNoiseSource (nil for 0).
+// BillowNoiseSourceFromID adopts an existing Objective-C object as a BillowNoiseSource
+// (nil for 0), retaining it and registering a release finalizer.
 func BillowNoiseSourceFromID(id objc.ID) *BillowNoiseSource {
 	if id == 0 {
 		return nil
 	}
-	return &BillowNoiseSource{inner: raw.GKBillowNoiseSourceFromID(id)}
+	x := &BillowNoiseSource{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// billowNoiseSourceAdopt wraps an Objective-C object that this code just created as a
+// BillowNoiseSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func billowNoiseSourceAdopt(id objc.ID) *BillowNoiseSource {
+	if id == 0 {
+		return nil
+	}
+	x := &BillowNoiseSource{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BillowNoiseSource) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BillowNoiseSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BillowNoiseSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a billow noise source with the specified parameters.
 //
-// NewBillowNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed creates a new [BillowNoiseSource].
+// NewBillowNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed creates a new BillowNoiseSource.
 func NewBillowNoiseSourceWithFrequencyOctaveCountPersistenceLacunaritySeed(frequency float64, octaveCount int, persistence float64, lacunarity float64, seed int32) *BillowNoiseSource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKBillowNoiseSource")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKBillowNoiseSource")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrequency:octaveCount:persistence:lacunarity:seed:"), frequency, octaveCount, persistence, lacunarity, seed)
-	return &BillowNoiseSource{inner: raw.GKBillowNoiseSourceFromID(_id)}
+	return billowNoiseSourceAdopt(_id)
 }
 
 // The rate at which successive octaves of the noise function decrease in amplitude.
 //
-// WithPersistence sets the persistence property and returns the receiver for chaining.
+// WithPersistence sets persistence and returns the receiver so calls can be chained.
 func (x *BillowNoiseSource) WithPersistence(persistence float64) *BillowNoiseSource {
-	x.inner.SetPersistence(persistence)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPersistence:"), persistence)
 	return x
 }
 
 // A value that determines the size and spacing of features in generated noise.
 //
-// WithFrequency sets the frequency property and returns the receiver for chaining.
+// WithFrequency sets frequency and returns the receiver so calls can be chained.
 func (x *BillowNoiseSource) WithFrequency(frequency float64) *BillowNoiseSource {
-	x.inner.GKCoherentNoiseSource.SetFrequency(frequency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 	return x
 }
 
 // The number of octaves of the underlying noise function to use for generating noise.
 //
-// WithOctaveCount sets the octaveCount property and returns the receiver for chaining.
+// WithOctaveCount sets octaveCount and returns the receiver so calls can be chained.
 func (x *BillowNoiseSource) WithOctaveCount(octaveCount int) *BillowNoiseSource {
-	x.inner.GKCoherentNoiseSource.SetOctaveCount(octaveCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOctaveCount:"), octaveCount)
 	return x
 }
 
 // The rate at which successive octaves of the noise function increase in frequency.
 //
-// WithLacunarity sets the lacunarity property and returns the receiver for chaining.
+// WithLacunarity sets lacunarity and returns the receiver so calls can be chained.
 func (x *BillowNoiseSource) WithLacunarity(lacunarity float64) *BillowNoiseSource {
-	x.inner.GKCoherentNoiseSource.SetLacunarity(lacunarity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLacunarity:"), lacunarity)
 	return x
 }
 
 // The value that determines the specific configuration of noise produced by the noise source.
 //
-// WithSeed sets the seed property and returns the receiver for chaining.
+// WithSeed sets seed and returns the receiver so calls can be chained.
 func (x *BillowNoiseSource) WithSeed(seed int32) *BillowNoiseSource {
-	x.inner.GKCoherentNoiseSource.SetSeed(seed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
 	return x
 }
 
-// Persistence calls the underlying Persistence.
 func (x *BillowNoiseSource) Persistence() float64 {
-	return x.inner.Persistence()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("persistence"))
+	return _r
 }
 
-// SetPersistence calls the underlying SetPersistence.
 func (x *BillowNoiseSource) SetPersistence(persistence float64) {
-	x.inner.SetPersistence(persistence)
-}
-
-func (x *BillowNoiseSource) asCoherentNoiseSource() *raw.GKCoherentNoiseSource {
-	return &x.inner.GKCoherentNoiseSource
-}
-
-func (x *BillowNoiseSource) asNoiseSource() *raw.GKNoiseSource {
-	return &x.inner.GKCoherentNoiseSource.GKNoiseSource
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPersistence:"), persistence)
 }
 
 // BillowNoiseSourceable is the interface implemented by [BillowNoiseSource], for mocking and DI.
 type BillowNoiseSourceable interface {
-	Unwrap() *raw.GKBillowNoiseSource
+	obj.Object
 	WithPersistence(persistence float64) *BillowNoiseSource
 	WithFrequency(frequency float64) *BillowNoiseSource
 	WithOctaveCount(octaveCount int) *BillowNoiseSource

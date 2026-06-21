@@ -5,43 +5,68 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The common behavior for memory devices.
 //
-// MemoryBalloonDevice wraps [raw.VZMemoryBalloonDevice] with a fluent Go API.
+// MemoryBalloonDevice is an idiomatic wrapper over the Objective-C class VZMemoryBalloonDevice.
 type MemoryBalloonDevice struct {
-	inner *raw.VZMemoryBalloonDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZMemoryBalloonDevice].
-func (x *MemoryBalloonDevice) Unwrap() *raw.VZMemoryBalloonDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MemoryBalloonDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// MemoryBalloonDeviceFromID adopts an existing object pointer as a MemoryBalloonDevice (nil for 0).
+// MemoryBalloonDeviceFromID adopts an existing Objective-C object as a MemoryBalloonDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func MemoryBalloonDeviceFromID(id objc.ID) *MemoryBalloonDevice {
 	if id == 0 {
 		return nil
 	}
-	return &MemoryBalloonDevice{inner: raw.VZMemoryBalloonDeviceFromID(id)}
+	x := &MemoryBalloonDevice{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMemoryBalloonDevice creates a new [MemoryBalloonDevice].
+// memoryBalloonDeviceAdopt wraps an Objective-C object that this code just created as a
+// MemoryBalloonDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func memoryBalloonDeviceAdopt(id objc.ID) *MemoryBalloonDevice {
+	if id == 0 {
+		return nil
+	}
+	x := &MemoryBalloonDevice{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MemoryBalloonDevice) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MemoryBalloonDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MemoryBalloonDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMemoryBalloonDevice creates a new MemoryBalloonDevice.
 func NewMemoryBalloonDevice() *MemoryBalloonDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZMemoryBalloonDevice")), objc.RegisterName("new"))
-	return &MemoryBalloonDevice{inner: raw.VZMemoryBalloonDeviceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZMemoryBalloonDevice")), objc.RegisterName("new"))
+	return memoryBalloonDeviceAdopt(_id)
 }
-
-func (x *MemoryBalloonDevice) asMemoryBalloonDevice() *raw.VZMemoryBalloonDevice { return x.inner }
 
 // MemoryBalloonDeviceable is the interface implemented by [MemoryBalloonDevice], for mocking and DI.
 type MemoryBalloonDeviceable interface {
-	Unwrap() *raw.VZMemoryBalloonDevice
+	obj.Object
 }
 
 var _ MemoryBalloonDeviceable = (*MemoryBalloonDevice)(nil)

@@ -5,87 +5,107 @@
 package corelocation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A condition that describes the identity characteristics of a beacon.
 //
-// BeaconIdentityCondition wraps [raw.CLBeaconIdentityCondition] with a fluent Go API.
+// BeaconIdentityCondition is an idiomatic wrapper over the Objective-C class CLBeaconIdentityCondition.
 type BeaconIdentityCondition struct {
-	inner *raw.CLBeaconIdentityCondition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLBeaconIdentityCondition].
-func (x *BeaconIdentityCondition) Unwrap() *raw.CLBeaconIdentityCondition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BeaconIdentityCondition) ID() objc.ID { return x.inner.Ptr() }
-
-// BeaconIdentityConditionFromID adopts an existing object pointer as a BeaconIdentityCondition (nil for 0).
+// BeaconIdentityConditionFromID adopts an existing Objective-C object as a BeaconIdentityCondition
+// (nil for 0), retaining it and registering a release finalizer.
 func BeaconIdentityConditionFromID(id objc.ID) *BeaconIdentityCondition {
 	if id == 0 {
 		return nil
 	}
-	return &BeaconIdentityCondition{inner: raw.CLBeaconIdentityConditionFromID(id)}
+	x := &BeaconIdentityCondition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// beaconIdentityConditionAdopt wraps an Objective-C object that this code just created as a
+// BeaconIdentityCondition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func beaconIdentityConditionAdopt(id objc.ID) *BeaconIdentityCondition {
+	if id == 0 {
+		return nil
+	}
+	x := &BeaconIdentityCondition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BeaconIdentityCondition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BeaconIdentityCondition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BeaconIdentityCondition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new beacon identity condition with the identifier you specify.
 //
-// NewBeaconIdentityConditionWithUUID creates a new [BeaconIdentityCondition].
-func NewBeaconIdentityConditionWithUUID(uuid *foundation.NSUUID) *BeaconIdentityCondition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLBeaconIdentityCondition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:"), uuid.Ptr())
-	return &BeaconIdentityCondition{inner: raw.CLBeaconIdentityConditionFromID(_id)}
+// NewBeaconIdentityConditionWithUUID creates a new BeaconIdentityCondition.
+func NewBeaconIdentityConditionWithUUID(uuid obj.Object) *BeaconIdentityCondition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CLBeaconIdentityCondition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:"), objref.IDOf(uuid))
+	return beaconIdentityConditionAdopt(_id)
 }
 
 // Creates a new beacon identity condition with the identifier and major value you specify.
 //
-// NewBeaconIdentityConditionWithUUIDMajor creates a new [BeaconIdentityCondition].
-func NewBeaconIdentityConditionWithUUIDMajor(uuid *foundation.NSUUID, major uint16) *BeaconIdentityCondition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLBeaconIdentityCondition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:major:"), uuid.Ptr(), major)
-	return &BeaconIdentityCondition{inner: raw.CLBeaconIdentityConditionFromID(_id)}
+// NewBeaconIdentityConditionWithUUIDMajor creates a new BeaconIdentityCondition.
+func NewBeaconIdentityConditionWithUUIDMajor(uuid obj.Object, major uint16) *BeaconIdentityCondition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CLBeaconIdentityCondition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:major:"), objref.IDOf(uuid), major)
+	return beaconIdentityConditionAdopt(_id)
 }
 
 // Creates a new beacon identity condition with the identifier, and major and minor values you specify.
 //
-// NewBeaconIdentityConditionWithUUIDMajorMinor creates a new [BeaconIdentityCondition].
-func NewBeaconIdentityConditionWithUUIDMajorMinor(uuid *foundation.NSUUID, major uint16, minor uint16) *BeaconIdentityCondition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLBeaconIdentityCondition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:major:minor:"), uuid.Ptr(), major, minor)
-	return &BeaconIdentityCondition{inner: raw.CLBeaconIdentityConditionFromID(_id)}
+// NewBeaconIdentityConditionWithUUIDMajorMinor creates a new BeaconIdentityCondition.
+func NewBeaconIdentityConditionWithUUIDMajorMinor(uuid obj.Object, major uint16, minor uint16) *BeaconIdentityCondition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CLBeaconIdentityCondition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUUID:major:minor:"), objref.IDOf(uuid), major, minor)
+	return beaconIdentityConditionAdopt(_id)
 }
 
-// UUID calls the underlying UUID.
-func (x *BeaconIdentityCondition) UUID() *foundation.NSUUID {
-	return x.inner.UUID()
+func (x *BeaconIdentityCondition) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
+	return obj.Wrap(_r)
 }
 
-// Major calls the underlying Major.
-func (x *BeaconIdentityCondition) Major() *foundation.NSNumber {
-	return x.inner.Major()
+func (x *BeaconIdentityCondition) Major() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("major"))
+	return obj.Wrap(_r)
 }
 
-// Minor calls the underlying Minor.
-func (x *BeaconIdentityCondition) Minor() *foundation.NSNumber {
-	return x.inner.Minor()
+func (x *BeaconIdentityCondition) Minor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minor"))
+	return obj.Wrap(_r)
 }
-
-func (x *BeaconIdentityCondition) asBeaconIdentityCondition() *raw.CLBeaconIdentityCondition {
-	return x.inner
-}
-
-func (x *BeaconIdentityCondition) asCondition() *raw.CLCondition { return &x.inner.CLCondition }
 
 // BeaconIdentityConditionable is the interface implemented by [BeaconIdentityCondition], for mocking and DI.
 type BeaconIdentityConditionable interface {
-	Unwrap() *raw.CLBeaconIdentityCondition
-	UUID() *foundation.NSUUID
-	Major() *foundation.NSNumber
-	Minor() *foundation.NSNumber
+	obj.Object
+	UUID() obj.Object
+	Major() obj.Object
+	Minor() obj.Object
 }
 
 var _ BeaconIdentityConditionable = (*BeaconIdentityCondition)(nil)

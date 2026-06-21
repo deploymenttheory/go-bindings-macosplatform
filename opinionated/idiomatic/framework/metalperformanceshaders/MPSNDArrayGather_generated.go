@@ -5,108 +5,96 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NDArrayGather wraps [raw.MPSNDArrayGather] with a fluent Go API.
+// NDArrayGather is an idiomatic wrapper over the Objective-C class MPSNDArrayGather.
 type NDArrayGather struct {
-	inner *raw.MPSNDArrayGather
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayGather].
-func (x *NDArrayGather) Unwrap() *raw.MPSNDArrayGather { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NDArrayGather) ID() objc.ID { return x.inner.Ptr() }
-
-// NDArrayGatherFromID adopts an existing object pointer as a NDArrayGather (nil for 0).
+// NDArrayGatherFromID adopts an existing Objective-C object as a NDArrayGather
+// (nil for 0), retaining it and registering a release finalizer.
 func NDArrayGatherFromID(id objc.ID) *NDArrayGather {
 	if id == 0 {
 		return nil
 	}
-	return &NDArrayGather{inner: raw.MPSNDArrayGatherFromID(id)}
+	x := &NDArrayGather{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNDArrayGather creates a new [NDArrayGather].
+// nDArrayGatherAdopt wraps an Objective-C object that this code just created as a
+// NDArrayGather (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nDArrayGatherAdopt(id objc.ID) *NDArrayGather {
+	if id == 0 {
+		return nil
+	}
+	x := &NDArrayGather{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NDArrayGather) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NDArrayGather) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NDArrayGather) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNDArrayGather creates a new NDArrayGather.
 func NewNDArrayGather() *NDArrayGather {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayGather")), objc.RegisterName("new"))
-	return &NDArrayGather{inner: raw.MPSNDArrayGatherFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayGather")), objc.RegisterName("new"))
+	return nDArrayGatherAdopt(_id)
 }
 
-// @property  axis @abstract  The axis along which to apply the gather operation. Defaults to zero.
+// The axis along which to apply the gather operation. Defaults to zero.
 //
-// WithAxis sets the axis property and returns the receiver for chaining.
-func (x *NDArrayGather) WithAxis(axis uint) *NDArrayGather {
-	x.inner.SetAxis(axis)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *NDArrayGather) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayGather {
-	x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NDArrayGather) WithOptions(options mpscore.MPSKernelOptions) *NDArrayGather {
-	x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetOptions(options)
+// WithAxis sets axis and returns the receiver so calls can be chained.
+func (x *NDArrayGather) WithAxis(axis int) *NDArrayGather {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAxis:"), axis)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *NDArrayGather) WithLabel(label string) *NDArrayGather {
-	x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property  axis @abstract  The axis along which to apply the gather operation. Defaults to zero.
-//
-// Axis calls the underlying Axis.
-func (x *NDArrayGather) Axis() uint {
-	return x.inner.Axis()
+// The axis along which to apply the gather operation. Defaults to zero.
+func (x *NDArrayGather) Axis() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("axis"))
+	return _r
 }
 
-// SetAxis calls the underlying SetAxis.
-func (x *NDArrayGather) SetAxis(axis uint) {
-	x.inner.SetAxis(axis)
-}
-
-func (x *NDArrayGather) asNDArrayBinaryKernel() *mpsndarray.MPSNDArrayBinaryKernel {
-	return &x.inner.MPSNDArrayBinaryKernel
-}
-
-func (x *NDArrayGather) asNDArrayMultiaryKernel() *mpsndarray.MPSNDArrayMultiaryKernel {
-	return &x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel
-}
-
-func (x *NDArrayGather) asNDArrayMultiaryBase() *mpsndarray.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase
-}
-
-func (x *NDArrayGather) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSNDArrayBinaryKernel.MPSNDArrayMultiaryKernel.MPSNDArrayMultiaryBase.MPSKernel
+func (x *NDArrayGather) SetAxis(axis int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAxis:"), axis)
 }
 
 // NDArrayGatherable is the interface implemented by [NDArrayGather], for mocking and DI.
 type NDArrayGatherable interface {
-	Unwrap() *raw.MPSNDArrayGather
-	WithAxis(axis uint) *NDArrayGather
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *NDArrayGather
-	WithOptions(options mpscore.MPSKernelOptions) *NDArrayGather
+	obj.Object
+	WithAxis(axis int) *NDArrayGather
 	WithLabel(label string) *NDArrayGather
-	Axis() uint
-	SetAxis(axis uint)
+	Axis() int
+	SetAxis(axis int)
 }
 
 var _ NDArrayGatherable = (*NDArrayGather)(nil)

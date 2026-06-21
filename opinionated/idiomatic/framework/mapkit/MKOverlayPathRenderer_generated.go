@@ -5,331 +5,275 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The visual representation of a path-based overlay.
 //
-// OverlayPathRenderer wraps [raw.MKOverlayPathRenderer] with a fluent Go API.
+// OverlayPathRenderer is an idiomatic wrapper over the Objective-C class MKOverlayPathRenderer.
 type OverlayPathRenderer struct {
-	inner *raw.MKOverlayPathRenderer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKOverlayPathRenderer].
-func (x *OverlayPathRenderer) Unwrap() *raw.MKOverlayPathRenderer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OverlayPathRenderer) ID() objc.ID { return x.inner.Ptr() }
-
-// OverlayPathRendererFromID adopts an existing object pointer as a OverlayPathRenderer (nil for 0).
+// OverlayPathRendererFromID adopts an existing Objective-C object as a OverlayPathRenderer
+// (nil for 0), retaining it and registering a release finalizer.
 func OverlayPathRendererFromID(id objc.ID) *OverlayPathRenderer {
 	if id == 0 {
 		return nil
 	}
-	return &OverlayPathRenderer{inner: raw.MKOverlayPathRendererFromID(id)}
+	x := &OverlayPathRenderer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewOverlayPathRenderer creates a new [OverlayPathRenderer].
+// overlayPathRendererAdopt wraps an Objective-C object that this code just created as a
+// OverlayPathRenderer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func overlayPathRendererAdopt(id objc.ID) *OverlayPathRenderer {
+	if id == 0 {
+		return nil
+	}
+	x := &OverlayPathRenderer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *OverlayPathRenderer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *OverlayPathRenderer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *OverlayPathRenderer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewOverlayPathRenderer creates a new OverlayPathRenderer.
 func NewOverlayPathRenderer() *OverlayPathRenderer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKOverlayPathRenderer")), objc.RegisterName("new"))
-	return &OverlayPathRenderer{inner: raw.MKOverlayPathRendererFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKOverlayPathRenderer")), objc.RegisterName("new"))
+	return overlayPathRendererAdopt(_id)
 }
 
 // The fill color to use for the path.
 //
-// WithFillColor sets the fillColor property and returns the receiver for chaining.
-func (x *OverlayPathRenderer) WithFillColor(fillColor *appkit.NSColor) *OverlayPathRenderer {
-	x.inner.SetFillColor(fillColor)
+// WithFillColor sets fillColor and returns the receiver so calls can be chained.
+func (x *OverlayPathRenderer) WithFillColor(fillColor obj.Object) *OverlayPathRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	return x
 }
 
 // The stroke color to use for the path.
 //
-// WithStrokeColor sets the strokeColor property and returns the receiver for chaining.
-func (x *OverlayPathRenderer) WithStrokeColor(strokeColor *appkit.NSColor) *OverlayPathRenderer {
-	x.inner.SetStrokeColor(strokeColor)
+// WithStrokeColor sets strokeColor and returns the receiver so calls can be chained.
+func (x *OverlayPathRenderer) WithStrokeColor(strokeColor obj.Object) *OverlayPathRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 	return x
 }
 
 // The stroke width to use for the path.
 //
-// WithLineWidth sets the lineWidth property and returns the receiver for chaining.
+// WithLineWidth sets lineWidth and returns the receiver so calls can be chained.
 func (x *OverlayPathRenderer) WithLineWidth(lineWidth float64) *OverlayPathRenderer {
-	x.inner.SetLineWidth(lineWidth)
-	return x
-}
-
-// The line join style to apply to the corners of the path.
-//
-// WithLineJoin sets the lineJoin property and returns the receiver for chaining.
-func (x *OverlayPathRenderer) WithLineJoin(lineJoin coregraphics.CGLineJoin) *OverlayPathRenderer {
-	x.inner.SetLineJoin(lineJoin)
-	return x
-}
-
-// The line cap style to apply to the open ends of the path.
-//
-// WithLineCap sets the lineCap property and returns the receiver for chaining.
-func (x *OverlayPathRenderer) WithLineCap(lineCap coregraphics.CGLineCap) *OverlayPathRenderer {
-	x.inner.SetLineCap(lineCap)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
 	return x
 }
 
 // The limiting value that helps avoid spikes at junctions between connected line segments.
 //
-// WithMiterLimit sets the miterLimit property and returns the receiver for chaining.
+// WithMiterLimit sets miterLimit and returns the receiver so calls can be chained.
 func (x *OverlayPathRenderer) WithMiterLimit(miterLimit float64) *OverlayPathRenderer {
-	x.inner.SetMiterLimit(miterLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
 	return x
 }
 
 // The offset (in points) at which to start drawing the dash pattern.
 //
-// WithLineDashPhase sets the lineDashPhase property and returns the receiver for chaining.
+// WithLineDashPhase sets lineDashPhase and returns the receiver so calls can be chained.
 func (x *OverlayPathRenderer) WithLineDashPhase(lineDashPhase float64) *OverlayPathRenderer {
-	x.inner.SetLineDashPhase(lineDashPhase)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
 	return x
 }
 
 // An array of numbers specifying the dash pattern to use for the path.
 //
-// WithLineDashPattern sets the collection, converting the Go slice to an NSArray.
-func (x *OverlayPathRenderer) WithLineDashPattern(items ...*foundation.NSNumber) *OverlayPathRenderer {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetLineDashPattern(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetLineDashPattern(_arr)
+// WithLineDashPattern sets the collection and returns the receiver so calls can be chained.
+func (x *OverlayPathRenderer) WithLineDashPattern(items ...obj.Object) *OverlayPathRenderer {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPattern:"), _arr)
 	return x
 }
 
 // A Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
 //
-// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+// WithShouldRasterize sets shouldRasterize and returns the receiver so calls can be chained.
 func (x *OverlayPathRenderer) WithShouldRasterize(shouldRasterize bool) *OverlayPathRenderer {
-	x.inner.SetShouldRasterize(shouldRasterize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	return x
+}
+
+// The path representing the overlay’s shape.
+//
+// WithPath sets path and returns the receiver so calls can be chained.
+func (x *OverlayPathRenderer) WithPath(path obj.Object) *OverlayPathRenderer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return x
 }
 
 // The amount of transparency to apply to the overlay.
 //
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha sets alpha and returns the receiver so calls can be chained.
 func (x *OverlayPathRenderer) WithAlpha(alpha float64) *OverlayPathRenderer {
-	x.inner.MKOverlayRenderer.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
 // Creates the path for the overlay.
-//
-// CreatePath calls the underlying CreatePath.
 func (x *OverlayPathRenderer) CreatePath() {
-	x.inner.CreatePath()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createPath"))
 }
 
 // Updates the path associated with the overlay renderer.
-//
-// InvalidatePath calls the underlying InvalidatePath.
 func (x *OverlayPathRenderer) InvalidatePath() {
-	x.inner.InvalidatePath()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidatePath"))
 }
 
 // Applies the renderer’s stroke-related drawing properties to the specified graphics context.
-//
-// ApplyStrokePropertiesToContextAtZoomScale calls the underlying ApplyStrokePropertiesToContextAtZoomScale.
-func (x *OverlayPathRenderer) ApplyStrokePropertiesToContextAtZoomScale(context_ unsafe.Pointer, zoomScale float64) {
-	x.inner.ApplyStrokePropertiesToContextAtZoomScale(context_, zoomScale)
+func (x *OverlayPathRenderer) ApplyStrokePropertiesToContextAtZoomScale(context_ obj.Object, zoomScale float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyStrokePropertiesToContext:atZoomScale:"), objref.IDOf(context_), zoomScale)
 }
 
 // Applies the receiver’s fill-related drawing properties to the specified graphics context.
-//
-// ApplyFillPropertiesToContextAtZoomScale calls the underlying ApplyFillPropertiesToContextAtZoomScale.
-func (x *OverlayPathRenderer) ApplyFillPropertiesToContextAtZoomScale(context_ unsafe.Pointer, zoomScale float64) {
-	x.inner.ApplyFillPropertiesToContextAtZoomScale(context_, zoomScale)
+func (x *OverlayPathRenderer) ApplyFillPropertiesToContextAtZoomScale(context_ obj.Object, zoomScale float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyFillPropertiesToContext:atZoomScale:"), objref.IDOf(context_), zoomScale)
 }
 
 // Draws a line along the specified path.
-//
-// StrokePathInContext calls the underlying StrokePathInContext.
-func (x *OverlayPathRenderer) StrokePathInContext(path unsafe.Pointer, context_ unsafe.Pointer) {
-	x.inner.StrokePathInContext(path, context_)
+func (x *OverlayPathRenderer) StrokePathInContext(path obj.Object, context_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("strokePath:inContext:"), objref.IDOf(path), objref.IDOf(context_))
 }
 
 // Fills the area that the specified path encloses.
-//
-// FillPathInContext calls the underlying FillPathInContext.
-func (x *OverlayPathRenderer) FillPathInContext(path unsafe.Pointer, context_ unsafe.Pointer) {
-	x.inner.FillPathInContext(path, context_)
+func (x *OverlayPathRenderer) FillPathInContext(path obj.Object, context_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fillPath:inContext:"), objref.IDOf(path), objref.IDOf(context_))
 }
 
-// FillColor calls the underlying FillColor.
-func (x *OverlayPathRenderer) FillColor() *appkit.NSColor {
-	return x.inner.FillColor()
+func (x *OverlayPathRenderer) FillColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fillColor"))
+	return obj.Wrap(_r)
 }
 
-// SetFillColor calls the underlying SetFillColor.
-func (x *OverlayPathRenderer) SetFillColor(fillColor *appkit.NSColor) {
-	x.inner.SetFillColor(fillColor)
+func (x *OverlayPathRenderer) SetFillColor(fillColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 }
 
-// StrokeColor calls the underlying StrokeColor.
-func (x *OverlayPathRenderer) StrokeColor() *appkit.NSColor {
-	return x.inner.StrokeColor()
+func (x *OverlayPathRenderer) StrokeColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("strokeColor"))
+	return obj.Wrap(_r)
 }
 
-// SetStrokeColor calls the underlying SetStrokeColor.
-func (x *OverlayPathRenderer) SetStrokeColor(strokeColor *appkit.NSColor) {
-	x.inner.SetStrokeColor(strokeColor)
+func (x *OverlayPathRenderer) SetStrokeColor(strokeColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 }
 
-// LineWidth calls the underlying LineWidth.
 func (x *OverlayPathRenderer) LineWidth() float64 {
-	return x.inner.LineWidth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineWidth"))
+	return _r
 }
 
-// SetLineWidth calls the underlying SetLineWidth.
 func (x *OverlayPathRenderer) SetLineWidth(lineWidth float64) {
-	x.inner.SetLineWidth(lineWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
 }
 
-// LineJoin calls the underlying LineJoin.
-func (x *OverlayPathRenderer) LineJoin() coregraphics.CGLineJoin {
-	return x.inner.LineJoin()
-}
-
-// SetLineJoin calls the underlying SetLineJoin.
-func (x *OverlayPathRenderer) SetLineJoin(lineJoin coregraphics.CGLineJoin) {
-	x.inner.SetLineJoin(lineJoin)
-}
-
-// LineCap calls the underlying LineCap.
-func (x *OverlayPathRenderer) LineCap() coregraphics.CGLineCap {
-	return x.inner.LineCap()
-}
-
-// SetLineCap calls the underlying SetLineCap.
-func (x *OverlayPathRenderer) SetLineCap(lineCap coregraphics.CGLineCap) {
-	x.inner.SetLineCap(lineCap)
-}
-
-// MiterLimit calls the underlying MiterLimit.
 func (x *OverlayPathRenderer) MiterLimit() float64 {
-	return x.inner.MiterLimit()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("miterLimit"))
+	return _r
 }
 
-// SetMiterLimit calls the underlying SetMiterLimit.
 func (x *OverlayPathRenderer) SetMiterLimit(miterLimit float64) {
-	x.inner.SetMiterLimit(miterLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
 }
 
-// LineDashPhase calls the underlying LineDashPhase.
 func (x *OverlayPathRenderer) LineDashPhase() float64 {
-	return x.inner.LineDashPhase()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineDashPhase"))
+	return _r
 }
 
-// SetLineDashPhase calls the underlying SetLineDashPhase.
 func (x *OverlayPathRenderer) SetLineDashPhase(lineDashPhase float64) {
-	x.inner.SetLineDashPhase(lineDashPhase)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
 }
 
 // LineDashPattern returns the collection as a Go slice.
-func (x *OverlayPathRenderer) LineDashPattern() []*foundation.NSNumber {
-	arr := x.inner.LineDashPattern()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *OverlayPathRenderer) LineDashPattern() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lineDashPattern"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetLineDashPattern calls the underlying SetLineDashPattern.
-func (x *OverlayPathRenderer) SetLineDashPattern(lineDashPattern *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetLineDashPattern(lineDashPattern)
+func (x *OverlayPathRenderer) SetLineDashPattern(lineDashPattern []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPattern:"), purego.SliceToNSArray(lineDashPattern, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// ShouldRasterize calls the underlying ShouldRasterize.
 func (x *OverlayPathRenderer) ShouldRasterize() bool {
-	return x.inner.ShouldRasterize()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldRasterize"))
+	return _r
 }
 
-// SetShouldRasterize calls the underlying SetShouldRasterize.
 func (x *OverlayPathRenderer) SetShouldRasterize(shouldRasterize bool) {
-	x.inner.SetShouldRasterize(shouldRasterize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
 }
 
-// Path calls the underlying Path.
-func (x *OverlayPathRenderer) Path() unsafe.Pointer {
-	return x.inner.Path()
+func (x *OverlayPathRenderer) Path() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+	return obj.Wrap(_r)
 }
 
-// SetPath calls the underlying SetPath.
-func (x *OverlayPathRenderer) SetPath(path unsafe.Pointer) {
-	x.inner.SetPath(path)
-}
-
-func (x *OverlayPathRenderer) asOverlayPathRenderer() *raw.MKOverlayPathRenderer { return x.inner }
-
-func (x *OverlayPathRenderer) asOverlayRenderer() *raw.MKOverlayRenderer {
-	return &x.inner.MKOverlayRenderer
+func (x *OverlayPathRenderer) SetPath(path obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
 }
 
 // OverlayPathRendererable is the interface implemented by [OverlayPathRenderer], for mocking and DI.
 type OverlayPathRendererable interface {
-	Unwrap() *raw.MKOverlayPathRenderer
-	WithFillColor(fillColor *appkit.NSColor) *OverlayPathRenderer
-	WithStrokeColor(strokeColor *appkit.NSColor) *OverlayPathRenderer
+	obj.Object
+	WithFillColor(fillColor obj.Object) *OverlayPathRenderer
+	WithStrokeColor(strokeColor obj.Object) *OverlayPathRenderer
 	WithLineWidth(lineWidth float64) *OverlayPathRenderer
-	WithLineJoin(lineJoin coregraphics.CGLineJoin) *OverlayPathRenderer
-	WithLineCap(lineCap coregraphics.CGLineCap) *OverlayPathRenderer
 	WithMiterLimit(miterLimit float64) *OverlayPathRenderer
 	WithLineDashPhase(lineDashPhase float64) *OverlayPathRenderer
-	WithLineDashPattern(items ...*foundation.NSNumber) *OverlayPathRenderer
+	WithLineDashPattern(items ...obj.Object) *OverlayPathRenderer
 	WithShouldRasterize(shouldRasterize bool) *OverlayPathRenderer
+	WithPath(path obj.Object) *OverlayPathRenderer
 	WithAlpha(alpha float64) *OverlayPathRenderer
 	CreatePath()
 	InvalidatePath()
-	ApplyStrokePropertiesToContextAtZoomScale(context_ unsafe.Pointer, zoomScale float64)
-	ApplyFillPropertiesToContextAtZoomScale(context_ unsafe.Pointer, zoomScale float64)
-	StrokePathInContext(path unsafe.Pointer, context_ unsafe.Pointer)
-	FillPathInContext(path unsafe.Pointer, context_ unsafe.Pointer)
-	FillColor() *appkit.NSColor
-	SetFillColor(fillColor *appkit.NSColor)
-	StrokeColor() *appkit.NSColor
-	SetStrokeColor(strokeColor *appkit.NSColor)
+	ApplyStrokePropertiesToContextAtZoomScale(context_ obj.Object, zoomScale float64)
+	ApplyFillPropertiesToContextAtZoomScale(context_ obj.Object, zoomScale float64)
+	StrokePathInContext(path obj.Object, context_ obj.Object)
+	FillPathInContext(path obj.Object, context_ obj.Object)
+	FillColor() obj.Object
+	SetFillColor(fillColor obj.Object)
+	StrokeColor() obj.Object
+	SetStrokeColor(strokeColor obj.Object)
 	LineWidth() float64
 	SetLineWidth(lineWidth float64)
-	LineJoin() coregraphics.CGLineJoin
-	SetLineJoin(lineJoin coregraphics.CGLineJoin)
-	LineCap() coregraphics.CGLineCap
-	SetLineCap(lineCap coregraphics.CGLineCap)
 	MiterLimit() float64
 	SetMiterLimit(miterLimit float64)
 	LineDashPhase() float64
 	SetLineDashPhase(lineDashPhase float64)
-	LineDashPattern() []*foundation.NSNumber
-	SetLineDashPattern(lineDashPattern *foundation.NSArray[*foundation.NSNumber])
+	LineDashPattern() []obj.Object
+	SetLineDashPattern(lineDashPattern []obj.Object)
 	ShouldRasterize() bool
 	SetShouldRasterize(shouldRasterize bool)
-	Path() unsafe.Pointer
-	SetPath(path unsafe.Pointer)
+	Path() obj.Object
+	SetPath(path obj.Object)
 }
 
 var _ OverlayPathRendererable = (*OverlayPathRenderer)(nil)

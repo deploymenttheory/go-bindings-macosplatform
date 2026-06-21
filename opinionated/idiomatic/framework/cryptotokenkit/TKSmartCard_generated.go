@@ -6,301 +6,259 @@ package cryptotokenkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A representation of a smart card.
 //
-// SmartCard wraps [raw.TKSmartCard] with a fluent Go API.
+// SmartCard is an idiomatic wrapper over the Objective-C class TKSmartCard.
 type SmartCard struct {
-	inner *raw.TKSmartCard
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKSmartCard].
-func (x *SmartCard) Unwrap() *raw.TKSmartCard { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SmartCard) ID() objc.ID { return x.inner.Ptr() }
-
-// SmartCardFromID adopts an existing object pointer as a SmartCard (nil for 0).
+// SmartCardFromID adopts an existing Objective-C object as a SmartCard
+// (nil for 0), retaining it and registering a release finalizer.
 func SmartCardFromID(id objc.ID) *SmartCard {
 	if id == 0 {
 		return nil
 	}
-	return &SmartCard{inner: raw.TKSmartCardFromID(id)}
+	x := &SmartCard{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSmartCard creates a new [SmartCard].
+// smartCardAdopt wraps an Objective-C object that this code just created as a
+// SmartCard (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func smartCardAdopt(id objc.ID) *SmartCard {
+	if id == 0 {
+		return nil
+	}
+	x := &SmartCard{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SmartCard) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SmartCard) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SmartCard) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSmartCard creates a new SmartCard.
 func NewSmartCard() *SmartCard {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSmartCard")), objc.RegisterName("new"))
-	return &SmartCard{inner: raw.TKSmartCardFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("TKSmartCard")), objc.RegisterName("new"))
+	return smartCardAdopt(_id)
 }
 
 // The protocols allowed for communication with the Smart Card. TKSmartCardProtocolAny by default.
 //
-// WithAllowedProtocols sets the allowedProtocols property and returns the receiver for chaining.
-func (x *SmartCard) WithAllowedProtocols(allowedProtocols TKSmartCardProtocol) *SmartCard {
-	x.inner.SetAllowedProtocols(raw.TKSmartCardProtocol(allowedProtocols))
+// WithAllowedProtocols sets allowedProtocols and returns the receiver so calls can be chained.
+func (x *SmartCard) WithAllowedProtocols(allowedProtocols SmartCardProtocol) *SmartCard {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedProtocols:"), allowedProtocols)
 	return x
 }
 
 // Whether sessions established for the Smart Card should be considered sensitive. false by default.
 //
-// WithSensitive sets the sensitive property and returns the receiver for chaining.
+// WithSensitive sets sensitive and returns the receiver so calls can be chained.
 func (x *SmartCard) WithSensitive(sensitive bool) *SmartCard {
-	x.inner.SetSensitive(sensitive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensitive:"), sensitive)
 	return x
 }
 
 // User-specified information. This property is automatically set to nil if the Smart Card is removed or another TKSmartCard object begins a session.
 //
-// WithContext sets the context_ property and returns the receiver for chaining.
-func (x *SmartCard) WithContext(context_ objc.ID) *SmartCard {
-	x.inner.SetContext(context_)
+// WithContext sets context_ and returns the receiver so calls can be chained.
+func (x *SmartCard) WithContext(context_ obj.Object) *SmartCard {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContext:"), objref.IDOf(context_))
 	return x
 }
 
 // The CLA byte used for APDU transmission. 0x00 by default.
 //
-// WithCla sets the cla property and returns the receiver for chaining.
+// WithCla sets cla and returns the receiver so calls can be chained.
 func (x *SmartCard) WithCla(cla uint8) *SmartCard {
-	x.inner.SetCla(cla)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCla:"), cla)
 	return x
 }
 
 // Whether to use extended length APDU.
 //
-// WithUseExtendedLength sets the useExtendedLength property and returns the receiver for chaining.
+// WithUseExtendedLength sets useExtendedLength and returns the receiver so calls can be chained.
 func (x *SmartCard) WithUseExtendedLength(useExtendedLength bool) *SmartCard {
-	x.inner.SetUseExtendedLength(useExtendedLength)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseExtendedLength:"), useExtendedLength)
 	return x
 }
 
 // Whether to use command chaining of APDU with a data field longer than 255 bytes.
 //
-// WithUseCommandChaining sets the useCommandChaining property and returns the receiver for chaining.
+// WithUseCommandChaining sets useCommandChaining and returns the receiver so calls can be chained.
 func (x *SmartCard) WithUseCommandChaining(useCommandChaining bool) *SmartCard {
-	x.inner.SetUseCommandChaining(useCommandChaining)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseCommandChaining:"), useCommandChaining)
 	return x
-}
-
-// Begins a session with the Smart Card.
-//
-// BeginSessionWithReply calls the underlying BeginSessionWithReply.
-func (x *SmartCard) BeginSessionWithReply(reply func(bool, unsafe.Pointer)) {
-	x.inner.BeginSessionWithReply(reply)
 }
 
 // Transmits data in Application Protocol Data Unit (APDU) format to the Smart Card.
 //
 // TransmitRequestReply blocks until the operation completes or ctx is cancelled.
-func (x *SmartCard) TransmitRequestReply(ctx context.Context, request *foundation.NSData) (*foundation.NSData, error) {
+func (x *SmartCard) TransmitRequestReply(ctx context.Context, request obj.Object) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.TransmitRequestReply(request, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transmitRequest:reply:"), objref.IDOf(request), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
 // Completes any pending transmissions and ends the session to the Smart Card.
-//
-// EndSession calls the underlying EndSession.
 func (x *SmartCard) EndSession() {
-	x.inner.EndSession()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endSession"))
 }
 
 // Creates and returns a new user interaction object for secure PIN verification using the Smart Card reader facilities.
-//
-// UserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset calls the underlying UserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset.
-func (x *SmartCard) UserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset(pINFormat *raw.TKSmartCardPINFormat, aPDU *foundation.NSData, pINByteOffset int) *SmartCardUserInteractionForSecurePINVerification {
-	_r := x.inner.UserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset(pINFormat, aPDU, pINByteOffset)
-	if _r == nil {
-		return nil
-	}
-	return &SmartCardUserInteractionForSecurePINVerification{inner: _r}
+func (x *SmartCard) UserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset(pINFormat *SmartCardPINFormat, aPDU obj.Object, pINByteOffset int) *SmartCardUserInteractionForSecurePINVerification {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInteractionForSecurePINVerificationWithPINFormat:APDU:PINByteOffset:"), objref.IDOf(pINFormat), objref.IDOf(aPDU), pINByteOffset)
+	return SmartCardUserInteractionForSecurePINVerificationFromID(_r)
 }
 
 // Creates a new user interaction object for secure PIN change using the smart card reader facilities (typically a HW keypad).
-//
-// UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset calls the underlying UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset.
-func (x *SmartCard) UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset(pINFormat *raw.TKSmartCardPINFormat, aPDU *foundation.NSData, currentPINByteOffset int, newPINByteOffset int) *SmartCardUserInteractionForSecurePINChange {
-	_r := x.inner.UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset(pINFormat, aPDU, currentPINByteOffset, newPINByteOffset)
-	if _r == nil {
-		return nil
-	}
-	return &SmartCardUserInteractionForSecurePINChange{inner: _r}
+func (x *SmartCard) UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset(pINFormat *SmartCardPINFormat, aPDU obj.Object, currentPINByteOffset int, newPINByteOffset int) *SmartCardUserInteractionForSecurePINChange {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInteractionForSecurePINChangeWithPINFormat:APDU:currentPINByteOffset:newPINByteOffset:"), objref.IDOf(pINFormat), objref.IDOf(aPDU), currentPINByteOffset, newPINByteOffset)
+	return SmartCardUserInteractionForSecurePINChangeFromID(_r)
 }
 
 // Slot in which is this card inserted.
-//
-// Slot calls the underlying Slot.
 func (x *SmartCard) Slot() *SmartCardSlot {
-	_r := x.inner.Slot()
-	if _r == nil {
-		return nil
-	}
-	return &SmartCardSlot{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slot"))
+	return SmartCardSlotFromID(_r)
 }
 
 // Flag indicating whether card is valid, i.e. it was not removed from the reader.  Use Key-Value-Observing to be notified about card removal.
-//
-// Valid calls the underlying Valid.
 func (x *SmartCard) Valid() bool {
-	return x.inner.Valid()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("valid"))
+	return _r
 }
 
 // Bitmask containing allowed protocols to be used when communicating with the card.  This property is consulted only during connection to the card, changes are not propagated to already connected session.  By default, any protocol can be used.
-//
-// AllowedProtocols calls the underlying AllowedProtocols.
-func (x *SmartCard) AllowedProtocols() TKSmartCardProtocol {
-	return TKSmartCardProtocol(x.inner.AllowedProtocols())
+func (x *SmartCard) AllowedProtocols() SmartCardProtocol {
+	_r := objc.Send[SmartCardProtocol](objref.IDOf(x), objc.RegisterName("allowedProtocols"))
+	return _r
 }
 
-// SetAllowedProtocols calls the underlying SetAllowedProtocols.
-func (x *SmartCard) SetAllowedProtocols(allowedProtocols TKSmartCardProtocol) {
-	x.inner.SetAllowedProtocols(raw.TKSmartCardProtocol(allowedProtocols))
+func (x *SmartCard) SetAllowedProtocols(allowedProtocols SmartCardProtocol) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedProtocols:"), allowedProtocols)
 }
 
 // Protocol used for communication with the SmartCard.  If no card session is established, TKSmartCardProtocolNone is set.
-//
-// CurrentProtocol calls the underlying CurrentProtocol.
-func (x *SmartCard) CurrentProtocol() TKSmartCardProtocol {
-	return TKSmartCardProtocol(x.inner.CurrentProtocol())
+func (x *SmartCard) CurrentProtocol() SmartCardProtocol {
+	_r := objc.Send[SmartCardProtocol](objref.IDOf(x), objc.RegisterName("currentProtocol"))
+	return _r
 }
 
 // Flag indicating whether card session should be considered as sensitive.  Sensitive session always gets card after reset before communicating with it and never leaves card without reset to be used by another SmartCard object.  This might be important in case that card session contain some important state which should not leak to another SmartCard object (possibly running in another, foreign application).  Default is NO.
-//
-// Sensitive calls the underlying Sensitive.
 func (x *SmartCard) Sensitive() bool {
-	return x.inner.Sensitive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sensitive"))
+	return _r
 }
 
-// SetSensitive calls the underlying SetSensitive.
 func (x *SmartCard) SetSensitive(sensitive bool) {
-	x.inner.SetSensitive(sensitive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensitive:"), sensitive)
 }
 
 // User-specified context kept as long as the card is powered.  Once the card is removed or another TKSmartCard object opens session, this property is automatically set to nil.
-//
-// Context calls the underlying Context.
-func (x *SmartCard) Context() objc.ID {
-	return x.inner.Context()
+func (x *SmartCard) Context() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
+	return obj.Wrap(_r)
 }
 
-// SetContext calls the underlying SetContext.
-func (x *SmartCard) SetContext(context_ objc.ID) {
-	x.inner.SetContext(context_)
-}
-
-// Asynchronously transmits an APDU command to the card, returning the response in a completion handler.
-//
-// SendInsP1P2DataLeReply calls the underlying SendInsP1P2DataLeReply.
-func (x *SmartCard) SendInsP1P2DataLeReply(ins uint8, p1 uint8, p2 uint8, requestData *foundation.NSData, le *foundation.NSNumber, reply func(*foundation.NSData, uint16, unsafe.Pointer)) {
-	x.inner.SendInsP1P2DataLeReply(ins, p1, p2, requestData, le, reply)
-}
-
-// Synchronously begins a session, executes the given block, and ends the session.
-//
-// InSessionWithErrorExecuteBlock calls the underlying InSessionWithErrorExecuteBlock.
-func (x *SmartCard) InSessionWithErrorExecuteBlock(error_ unsafe.Pointer, block func(unsafe.Pointer) bool) bool {
-	return x.inner.InSessionWithErrorExecuteBlock(error_, block)
-}
-
-// Synchronously transmits an APDU command to the card and returns the response.
-//
-// SendInsP1P2DataLeSwError calls the underlying SendInsP1P2DataLeSwError.
-func (x *SmartCard) SendInsP1P2DataLeSwError(ins uint8, p1 uint8, p2 uint8, requestData *foundation.NSData, le *foundation.NSNumber, sw *uint16) (*foundation.NSData, error) {
-	return x.inner.SendInsP1P2DataLeSwError(ins, p1, p2, requestData, le, sw)
+func (x *SmartCard) SetContext(context_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContext:"), objref.IDOf(context_))
 }
 
 // CLA byte which will be used for sendIns: APDU transmits.  Default value is 0x00.
-//
-// Cla calls the underlying Cla.
 func (x *SmartCard) Cla() uint8 {
-	return x.inner.Cla()
+	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("cla"))
+	return _r
 }
 
 // CLA byte which will be used for sendIns: APDU transmits.  Default value is 0x00.
-//
-// SetCla calls the underlying SetCla.
 func (x *SmartCard) SetCla(cla uint8) {
-	x.inner.SetCla(cla)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCla:"), cla)
 }
 
 // Flag indicating whether extended length APDUs should be used. It is automatically enabled only when used slot supports transmitting extended length commands and card announces that extended length APDU are supported in its ATR. However, caller can explicitly override this decision.
-//
-// UseExtendedLength calls the underlying UseExtendedLength.
 func (x *SmartCard) UseExtendedLength() bool {
-	return x.inner.UseExtendedLength()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("useExtendedLength"))
+	return _r
 }
 
 // Flag indicating whether extended length APDUs should be used. It is automatically enabled only when used slot supports transmitting extended length commands and card announces that extended length APDU are supported in its ATR. However, caller can explicitly override this decision.
-//
-// SetUseExtendedLength calls the underlying SetUseExtendedLength.
 func (x *SmartCard) SetUseExtendedLength(useExtendedLength bool) {
-	x.inner.SetUseExtendedLength(useExtendedLength)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseExtendedLength:"), useExtendedLength)
 }
 
 // Flag indicating whether command chaining of APDU with data field longer than 255 bytes can be used.  It is automatically enabled when card announces that command chaining is supported in its ATR.  However, caller can explicitly override this decision.
-//
-// UseCommandChaining calls the underlying UseCommandChaining.
 func (x *SmartCard) UseCommandChaining() bool {
-	return x.inner.UseCommandChaining()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("useCommandChaining"))
+	return _r
 }
 
 // Flag indicating whether command chaining of APDU with data field longer than 255 bytes can be used.  It is automatically enabled when card announces that command chaining is supported in its ATR.  However, caller can explicitly override this decision.
-//
-// SetUseCommandChaining calls the underlying SetUseCommandChaining.
 func (x *SmartCard) SetUseCommandChaining(useCommandChaining bool) {
-	x.inner.SetUseCommandChaining(useCommandChaining)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseCommandChaining:"), useCommandChaining)
 }
 
 // SmartCardable is the interface implemented by [SmartCard], for mocking and DI.
 type SmartCardable interface {
-	Unwrap() *raw.TKSmartCard
-	WithAllowedProtocols(allowedProtocols TKSmartCardProtocol) *SmartCard
+	obj.Object
+	WithAllowedProtocols(allowedProtocols SmartCardProtocol) *SmartCard
 	WithSensitive(sensitive bool) *SmartCard
-	WithContext(context_ objc.ID) *SmartCard
+	WithContext(context_ obj.Object) *SmartCard
 	WithCla(cla uint8) *SmartCard
 	WithUseExtendedLength(useExtendedLength bool) *SmartCard
 	WithUseCommandChaining(useCommandChaining bool) *SmartCard
-	BeginSessionWithReply(reply func(bool, unsafe.Pointer))
-	TransmitRequestReply(ctx context.Context, request *foundation.NSData) (*foundation.NSData, error)
+	TransmitRequestReply(ctx context.Context, request obj.Object) (obj.Object, error)
 	EndSession()
-	UserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset(pINFormat *raw.TKSmartCardPINFormat, aPDU *foundation.NSData, pINByteOffset int) *SmartCardUserInteractionForSecurePINVerification
-	UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset(pINFormat *raw.TKSmartCardPINFormat, aPDU *foundation.NSData, currentPINByteOffset int, newPINByteOffset int) *SmartCardUserInteractionForSecurePINChange
+	UserInteractionForSecurePINVerificationWithPINFormatAPDUPINByteOffset(pINFormat *SmartCardPINFormat, aPDU obj.Object, pINByteOffset int) *SmartCardUserInteractionForSecurePINVerification
+	UserInteractionForSecurePINChangeWithPINFormatAPDUCurrentPINByteOffsetNewPINByteOffset(pINFormat *SmartCardPINFormat, aPDU obj.Object, currentPINByteOffset int, newPINByteOffset int) *SmartCardUserInteractionForSecurePINChange
 	Slot() *SmartCardSlot
 	Valid() bool
-	AllowedProtocols() TKSmartCardProtocol
-	SetAllowedProtocols(allowedProtocols TKSmartCardProtocol)
-	CurrentProtocol() TKSmartCardProtocol
+	AllowedProtocols() SmartCardProtocol
+	SetAllowedProtocols(allowedProtocols SmartCardProtocol)
+	CurrentProtocol() SmartCardProtocol
 	Sensitive() bool
 	SetSensitive(sensitive bool)
-	Context() objc.ID
-	SetContext(context_ objc.ID)
-	SendInsP1P2DataLeReply(ins uint8, p1 uint8, p2 uint8, requestData *foundation.NSData, le *foundation.NSNumber, reply func(*foundation.NSData, uint16, unsafe.Pointer))
-	InSessionWithErrorExecuteBlock(error_ unsafe.Pointer, block func(unsafe.Pointer) bool) bool
-	SendInsP1P2DataLeSwError(ins uint8, p1 uint8, p2 uint8, requestData *foundation.NSData, le *foundation.NSNumber, sw *uint16) (*foundation.NSData, error)
+	Context() obj.Object
+	SetContext(context_ obj.Object)
 	Cla() uint8
 	SetCla(cla uint8)
 	UseExtendedLength() bool

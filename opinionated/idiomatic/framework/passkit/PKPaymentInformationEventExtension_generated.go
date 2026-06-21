@@ -5,43 +5,68 @@
 package passkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An abstract superclass for an extension to collect payment information and sign transaction data in a QR code purchase.
 //
-// PaymentInformationEventExtension wraps [raw.PKPaymentInformationEventExtension] with a fluent Go API.
+// PaymentInformationEventExtension is an idiomatic wrapper over the Objective-C class PKPaymentInformationEventExtension.
 type PaymentInformationEventExtension struct {
-	inner *raw.PKPaymentInformationEventExtension
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKPaymentInformationEventExtension].
-func (x *PaymentInformationEventExtension) Unwrap() *raw.PKPaymentInformationEventExtension {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PaymentInformationEventExtension) ID() objc.ID { return x.inner.Ptr() }
-
-// PaymentInformationEventExtensionFromID adopts an existing object pointer as a PaymentInformationEventExtension (nil for 0).
+// PaymentInformationEventExtensionFromID adopts an existing Objective-C object as a PaymentInformationEventExtension
+// (nil for 0), retaining it and registering a release finalizer.
 func PaymentInformationEventExtensionFromID(id objc.ID) *PaymentInformationEventExtension {
 	if id == 0 {
 		return nil
 	}
-	return &PaymentInformationEventExtension{inner: raw.PKPaymentInformationEventExtensionFromID(id)}
+	x := &PaymentInformationEventExtension{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPaymentInformationEventExtension creates a new [PaymentInformationEventExtension].
+// paymentInformationEventExtensionAdopt wraps an Objective-C object that this code just created as a
+// PaymentInformationEventExtension (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paymentInformationEventExtensionAdopt(id objc.ID) *PaymentInformationEventExtension {
+	if id == 0 {
+		return nil
+	}
+	x := &PaymentInformationEventExtension{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PaymentInformationEventExtension) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PaymentInformationEventExtension) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PaymentInformationEventExtension) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPaymentInformationEventExtension creates a new PaymentInformationEventExtension.
 func NewPaymentInformationEventExtension() *PaymentInformationEventExtension {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentInformationEventExtension")), objc.RegisterName("new"))
-	return &PaymentInformationEventExtension{inner: raw.PKPaymentInformationEventExtensionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKPaymentInformationEventExtension")), objc.RegisterName("new"))
+	return paymentInformationEventExtensionAdopt(_id)
 }
 
 // PaymentInformationEventExtensionable is the interface implemented by [PaymentInformationEventExtension], for mocking and DI.
 type PaymentInformationEventExtensionable interface {
-	Unwrap() *raw.PKPaymentInformationEventExtension
+	obj.Object
 }
 
 var _ PaymentInformationEventExtensionable = (*PaymentInformationEventExtension)(nil)

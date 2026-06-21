@@ -5,79 +5,104 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A tab in a paragraph.
 //
-// TextTab wraps [raw.NSTextTab] with a fluent Go API.
+// TextTab is an idiomatic wrapper over the Objective-C class NSTextTab.
 type TextTab struct {
-	inner *raw.NSTextTab
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTextTab].
-func (x *TextTab) Unwrap() *raw.NSTextTab { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextTab) ID() objc.ID { return x.inner.Ptr() }
-
-// TextTabFromID adopts an existing object pointer as a TextTab (nil for 0).
+// TextTabFromID adopts an existing Objective-C object as a TextTab
+// (nil for 0), retaining it and registering a release finalizer.
 func TextTabFromID(id objc.ID) *TextTab {
 	if id == 0 {
 		return nil
 	}
-	return &TextTab{inner: raw.NSTextTabFromID(id)}
+	x := &TextTab{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// textTabAdopt wraps an Objective-C object that this code just created as a
+// TextTab (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textTabAdopt(id objc.ID) *TextTab {
+	if id == 0 {
+		return nil
+	}
+	x := &TextTab{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TextTab) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextTab) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextTab) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a text tab with the specified text alignment, location, and options.
 //
-// NewTextTabWithTextAlignmentLocationOptions creates a new [TextTab].
-func NewTextTabWithTextAlignmentLocationOptions(alignment NSTextAlignment, loc float64, options purego.IDer) *TextTab {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextTab")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextAlignment:location:options:"), raw.NSTextAlignment(alignment), loc, options.ID())
-	return &TextTab{inner: raw.NSTextTabFromID(_id)}
+// NewTextTabWithTextAlignmentLocationOptions creates a new TextTab.
+func NewTextTabWithTextAlignmentLocationOptions(alignment TextAlignment, loc float64, options obj.Object) *TextTab {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextTab")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTextAlignment:location:options:"), alignment, loc, objref.IDOf(options))
+	return textTabAdopt(_id)
 }
 
 // Initializes a newly allocated text tab with the specified alignment and location.
 //
-// NewTextTabWithTypeLocation creates a new [TextTab].
-func NewTextTabWithTypeLocation(type_ NSTextTabType, loc float64) *TextTab {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextTab")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:location:"), raw.NSTextTabType(type_), loc)
-	return &TextTab{inner: raw.NSTextTabFromID(_id)}
+// NewTextTabWithTypeLocation creates a new TextTab.
+func NewTextTabWithTypeLocation(type_ TextTabType, loc float64) *TextTab {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTextTab")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:location:"), type_, loc)
+	return textTabAdopt(_id)
 }
 
-// Location calls the underlying Location.
 func (x *TextTab) Location() float64 {
-	return x.inner.Location()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("location"))
+	return _r
 }
 
-// Options calls the underlying Options.
-func (x *TextTab) Options() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.Options()
+func (x *TextTab) Options() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
+	return obj.Wrap(_r)
 }
 
-// Alignment calls the underlying Alignment.
-func (x *TextTab) Alignment() NSTextAlignment {
-	return NSTextAlignment(x.inner.Alignment())
+func (x *TextTab) Alignment() TextAlignment {
+	_r := objc.Send[TextAlignment](objref.IDOf(x), objc.RegisterName("alignment"))
+	return _r
 }
 
-// TabStopType calls the underlying TabStopType.
-func (x *TextTab) TabStopType() NSTextTabType {
-	return NSTextTabType(x.inner.TabStopType())
+func (x *TextTab) TabStopType() TextTabType {
+	_r := objc.Send[TextTabType](objref.IDOf(x), objc.RegisterName("tabStopType"))
+	return _r
 }
 
 // TextTabable is the interface implemented by [TextTab], for mocking and DI.
 type TextTabable interface {
-	Unwrap() *raw.NSTextTab
+	obj.Object
 	Location() float64
-	Options() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	Alignment() NSTextAlignment
-	TabStopType() NSTextTabType
+	Options() obj.Object
+	Alignment() TextAlignment
+	TabStopType() TextTabType
 }
 
 var _ TextTabable = (*TextTab)(nil)

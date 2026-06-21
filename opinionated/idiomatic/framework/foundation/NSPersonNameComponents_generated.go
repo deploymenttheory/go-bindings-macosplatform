@@ -5,226 +5,233 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that manages the separate parts of a person’s name to allow locale-aware formatting.
 //
-// PersonNameComponents wraps [raw.NSPersonNameComponents] with a fluent Go API.
+// PersonNameComponents is an idiomatic wrapper over the Objective-C class NSPersonNameComponents.
 type PersonNameComponents struct {
-	inner *raw.NSPersonNameComponents
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPersonNameComponents].
-func (x *PersonNameComponents) Unwrap() *raw.NSPersonNameComponents { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersonNameComponents) ID() objc.ID { return x.inner.Ptr() }
-
-// PersonNameComponentsFromID adopts an existing object pointer as a PersonNameComponents (nil for 0).
+// PersonNameComponentsFromID adopts an existing Objective-C object as a PersonNameComponents
+// (nil for 0), retaining it and registering a release finalizer.
 func PersonNameComponentsFromID(id objc.ID) *PersonNameComponents {
 	if id == 0 {
 		return nil
 	}
-	return &PersonNameComponents{inner: raw.NSPersonNameComponentsFromID(id)}
+	x := &PersonNameComponents{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPersonNameComponents creates a new [PersonNameComponents].
+// personNameComponentsAdopt wraps an Objective-C object that this code just created as a
+// PersonNameComponents (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func personNameComponentsAdopt(id objc.ID) *PersonNameComponents {
+	if id == 0 {
+		return nil
+	}
+	x := &PersonNameComponents{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PersonNameComponents) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PersonNameComponents) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PersonNameComponents) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPersonNameComponents creates a new PersonNameComponents.
 func NewPersonNameComponents() *PersonNameComponents {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersonNameComponents")), objc.RegisterName("new"))
-	return &PersonNameComponents{inner: raw.NSPersonNameComponentsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPersonNameComponents")), objc.RegisterName("new"))
+	return personNameComponentsAdopt(_id)
 }
 
 // The portion of a name’s full form of address that precedes the name itself (for example, “Dr.,” “Mr.,” “Ms.”).
 //
-// WithNamePrefix sets the namePrefix property and returns the receiver for chaining.
-func (x *PersonNameComponents) WithNamePrefix(namePrefix string) *PersonNameComponents {
-	x.inner.SetNamePrefix(foundation.NSStringStringWithUTF8String(namePrefix))
+// WithNamePrefix sets namePrefix and returns the receiver so calls can be chained.
+func (x *PersonNameComponents) WithNamePrefix(namePrefix StringProvider) *PersonNameComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNamePrefix:"), objref.IDOf(namePrefix))
 	return x
 }
 
 // Name bestowed upon an individual to differentiate them from other members of a group that share a family name (for example, “Johnathan”).
 //
-// WithGivenName sets the givenName property and returns the receiver for chaining.
-func (x *PersonNameComponents) WithGivenName(givenName string) *PersonNameComponents {
-	x.inner.SetGivenName(foundation.NSStringStringWithUTF8String(givenName))
+// WithGivenName sets givenName and returns the receiver so calls can be chained.
+func (x *PersonNameComponents) WithGivenName(givenName StringProvider) *PersonNameComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGivenName:"), objref.IDOf(givenName))
 	return x
 }
 
 // Secondary name bestowed upon an individual to differentiate them from others that have the same given name (for example, “Maple”).
 //
-// WithMiddleName sets the middleName property and returns the receiver for chaining.
-func (x *PersonNameComponents) WithMiddleName(middleName string) *PersonNameComponents {
-	x.inner.SetMiddleName(foundation.NSStringStringWithUTF8String(middleName))
+// WithMiddleName sets middleName and returns the receiver so calls can be chained.
+func (x *PersonNameComponents) WithMiddleName(middleName StringProvider) *PersonNameComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiddleName:"), objref.IDOf(middleName))
 	return x
 }
 
 // Name bestowed upon an individual to denote membership in a group or family. (for example, “Appleseed”).
 //
-// WithFamilyName sets the familyName property and returns the receiver for chaining.
-func (x *PersonNameComponents) WithFamilyName(familyName string) *PersonNameComponents {
-	x.inner.SetFamilyName(foundation.NSStringStringWithUTF8String(familyName))
+// WithFamilyName sets familyName and returns the receiver so calls can be chained.
+func (x *PersonNameComponents) WithFamilyName(familyName StringProvider) *PersonNameComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFamilyName:"), objref.IDOf(familyName))
 	return x
 }
 
 // The portion of a name’s full form of address that follows the name itself (for example, “Esq.,” “Jr.,” “Ph.D.”).
 //
-// WithNameSuffix sets the nameSuffix property and returns the receiver for chaining.
-func (x *PersonNameComponents) WithNameSuffix(nameSuffix string) *PersonNameComponents {
-	x.inner.SetNameSuffix(foundation.NSStringStringWithUTF8String(nameSuffix))
+// WithNameSuffix sets nameSuffix and returns the receiver so calls can be chained.
+func (x *PersonNameComponents) WithNameSuffix(nameSuffix StringProvider) *PersonNameComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNameSuffix:"), objref.IDOf(nameSuffix))
 	return x
 }
 
 // Name substituted for the purposes of familiarity (for example, “Johnny”).
 //
-// WithNickname sets the nickname property and returns the receiver for chaining.
-func (x *PersonNameComponents) WithNickname(nickname string) *PersonNameComponents {
-	x.inner.SetNickname(foundation.NSStringStringWithUTF8String(nickname))
+// WithNickname sets nickname and returns the receiver so calls can be chained.
+func (x *PersonNameComponents) WithNickname(nickname StringProvider) *PersonNameComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNickname:"), objref.IDOf(nickname))
 	return x
 }
 
 // The phonetic representation name components of the receiver.
 //
-// WithPhoneticRepresentation sets the phoneticRepresentation property and returns the receiver for chaining.
+// WithPhoneticRepresentation sets phoneticRepresentation and returns the receiver so calls can be chained.
 func (x *PersonNameComponents) WithPhoneticRepresentation(phoneticRepresentation *PersonNameComponents) *PersonNameComponents {
-	x.inner.SetPhoneticRepresentation(phoneticRepresentation.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneticRepresentation:"), objref.IDOf(phoneticRepresentation))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *PersonNameComponents) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PersonNameComponents {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *PersonNameComponents) WithScriptingProperties(scriptingProperties obj.Object) *PersonNameComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// NamePrefix calls the underlying NamePrefix.
-func (x *PersonNameComponents) NamePrefix() *String {
-	_r := x.inner.NamePrefix()
-	if _r == nil {
-		return nil
+func (x *PersonNameComponents) NamePrefix() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("namePrefix"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetNamePrefix calls the underlying SetNamePrefix.
 func (x *PersonNameComponents) SetNamePrefix(namePrefix string) {
-	x.inner.SetNamePrefix(foundation.NSStringStringWithUTF8String(namePrefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNamePrefix:"), purego.NSString(namePrefix))
 }
 
-// GivenName calls the underlying GivenName.
-func (x *PersonNameComponents) GivenName() *String {
-	_r := x.inner.GivenName()
-	if _r == nil {
-		return nil
+func (x *PersonNameComponents) GivenName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("givenName"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetGivenName calls the underlying SetGivenName.
 func (x *PersonNameComponents) SetGivenName(givenName string) {
-	x.inner.SetGivenName(foundation.NSStringStringWithUTF8String(givenName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGivenName:"), purego.NSString(givenName))
 }
 
-// MiddleName calls the underlying MiddleName.
-func (x *PersonNameComponents) MiddleName() *String {
-	_r := x.inner.MiddleName()
-	if _r == nil {
-		return nil
+func (x *PersonNameComponents) MiddleName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("middleName"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetMiddleName calls the underlying SetMiddleName.
 func (x *PersonNameComponents) SetMiddleName(middleName string) {
-	x.inner.SetMiddleName(foundation.NSStringStringWithUTF8String(middleName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiddleName:"), purego.NSString(middleName))
 }
 
-// FamilyName calls the underlying FamilyName.
-func (x *PersonNameComponents) FamilyName() *String {
-	_r := x.inner.FamilyName()
-	if _r == nil {
-		return nil
+func (x *PersonNameComponents) FamilyName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("familyName"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetFamilyName calls the underlying SetFamilyName.
 func (x *PersonNameComponents) SetFamilyName(familyName string) {
-	x.inner.SetFamilyName(foundation.NSStringStringWithUTF8String(familyName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFamilyName:"), purego.NSString(familyName))
 }
 
-// NameSuffix calls the underlying NameSuffix.
-func (x *PersonNameComponents) NameSuffix() *String {
-	_r := x.inner.NameSuffix()
-	if _r == nil {
-		return nil
+func (x *PersonNameComponents) NameSuffix() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nameSuffix"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetNameSuffix calls the underlying SetNameSuffix.
 func (x *PersonNameComponents) SetNameSuffix(nameSuffix string) {
-	x.inner.SetNameSuffix(foundation.NSStringStringWithUTF8String(nameSuffix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNameSuffix:"), purego.NSString(nameSuffix))
 }
 
-// Nickname calls the underlying Nickname.
-func (x *PersonNameComponents) Nickname() *String {
-	_r := x.inner.Nickname()
-	if _r == nil {
-		return nil
+func (x *PersonNameComponents) Nickname() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nickname"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetNickname calls the underlying SetNickname.
 func (x *PersonNameComponents) SetNickname(nickname string) {
-	x.inner.SetNickname(foundation.NSStringStringWithUTF8String(nickname))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNickname:"), purego.NSString(nickname))
 }
 
-// PhoneticRepresentation calls the underlying PhoneticRepresentation.
 func (x *PersonNameComponents) PhoneticRepresentation() *PersonNameComponents {
-	_r := x.inner.PhoneticRepresentation()
-	if _r == nil {
-		return nil
-	}
-	return &PersonNameComponents{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("phoneticRepresentation"))
+	return PersonNameComponentsFromID(_r)
 }
 
-// SetPhoneticRepresentation calls the underlying SetPhoneticRepresentation.
-func (x *PersonNameComponents) SetPhoneticRepresentation(phoneticRepresentation *raw.NSPersonNameComponents) {
-	x.inner.SetPhoneticRepresentation(phoneticRepresentation)
+func (x *PersonNameComponents) SetPhoneticRepresentation(phoneticRepresentation *PersonNameComponents) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhoneticRepresentation:"), objref.IDOf(phoneticRepresentation))
 }
-
-func (x *PersonNameComponents) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // PersonNameComponentsable is the interface implemented by [PersonNameComponents], for mocking and DI.
 type PersonNameComponentsable interface {
-	Unwrap() *raw.NSPersonNameComponents
-	WithNamePrefix(namePrefix string) *PersonNameComponents
-	WithGivenName(givenName string) *PersonNameComponents
-	WithMiddleName(middleName string) *PersonNameComponents
-	WithFamilyName(familyName string) *PersonNameComponents
-	WithNameSuffix(nameSuffix string) *PersonNameComponents
-	WithNickname(nickname string) *PersonNameComponents
+	obj.Object
+	WithNamePrefix(namePrefix StringProvider) *PersonNameComponents
+	WithGivenName(givenName StringProvider) *PersonNameComponents
+	WithMiddleName(middleName StringProvider) *PersonNameComponents
+	WithFamilyName(familyName StringProvider) *PersonNameComponents
+	WithNameSuffix(nameSuffix StringProvider) *PersonNameComponents
+	WithNickname(nickname StringProvider) *PersonNameComponents
 	WithPhoneticRepresentation(phoneticRepresentation *PersonNameComponents) *PersonNameComponents
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PersonNameComponents
-	NamePrefix() *String
+	WithScriptingProperties(scriptingProperties obj.Object) *PersonNameComponents
+	NamePrefix() string
 	SetNamePrefix(namePrefix string)
-	GivenName() *String
+	GivenName() string
 	SetGivenName(givenName string)
-	MiddleName() *String
+	MiddleName() string
 	SetMiddleName(middleName string)
-	FamilyName() *String
+	FamilyName() string
 	SetFamilyName(familyName string)
-	NameSuffix() *String
+	NameSuffix() string
 	SetNameSuffix(nameSuffix string)
-	Nickname() *String
+	Nickname() string
 	SetNickname(nickname string)
 	PhoneticRepresentation() *PersonNameComponents
-	SetPhoneticRepresentation(phoneticRepresentation *raw.NSPersonNameComponents)
+	SetPhoneticRepresentation(phoneticRepresentation *PersonNameComponents)
 }
 
 var _ PersonNameComponentsable = (*PersonNameComponents)(nil)

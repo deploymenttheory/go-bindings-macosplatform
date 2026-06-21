@@ -5,125 +5,127 @@
 package syncservices
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/syncservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// ISyncManager wraps [raw.ISyncManager] with a fluent Go API.
+// ISyncManager is an idiomatic wrapper over the Objective-C class ISyncManager.
 type ISyncManager struct {
-	inner *raw.ISyncManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ISyncManager].
-func (x *ISyncManager) Unwrap() *raw.ISyncManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ISyncManager) ID() objc.ID { return x.inner.Ptr() }
-
-// ISyncManagerFromID adopts an existing object pointer as a ISyncManager (nil for 0).
+// ISyncManagerFromID adopts an existing Objective-C object as a ISyncManager
+// (nil for 0), retaining it and registering a release finalizer.
 func ISyncManagerFromID(id objc.ID) *ISyncManager {
 	if id == 0 {
 		return nil
 	}
-	return &ISyncManager{inner: raw.ISyncManagerFromID(id)}
+	x := &ISyncManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewISyncManager creates a new [ISyncManager].
+// iSyncManagerAdopt wraps an Objective-C object that this code just created as a
+// ISyncManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iSyncManagerAdopt(id objc.ID) *ISyncManager {
+	if id == 0 {
+		return nil
+	}
+	x := &ISyncManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ISyncManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ISyncManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ISyncManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewISyncManager creates a new ISyncManager.
 func NewISyncManager() *ISyncManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ISyncManager")), objc.RegisterName("new"))
-	return &ISyncManager{inner: raw.ISyncManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ISyncManager")), objc.RegisterName("new"))
+	return iSyncManagerAdopt(_id)
 }
 
-// IsEnabled calls the underlying IsEnabled.
 func (x *ISyncManager) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// SyncDisabledReason calls the underlying SyncDisabledReason.
-func (x *ISyncManager) SyncDisabledReason() unsafe.Pointer {
-	return x.inner.SyncDisabledReason()
-}
-
-// ClientWithIdentifier calls the underlying ClientWithIdentifier.
 func (x *ISyncManager) ClientWithIdentifier(clientId string) *ISyncClient {
-	_r := x.inner.ClientWithIdentifier(foundation.NSStringStringWithUTF8String(clientId))
-	if _r == nil {
-		return nil
-	}
-	return &ISyncClient{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientWithIdentifier:"), purego.NSString(clientId))
+	return ISyncClientFromID(_r)
 }
 
-// RegisterClientWithIdentifierDescriptionFilePath calls the underlying RegisterClientWithIdentifierDescriptionFilePath.
 func (x *ISyncManager) RegisterClientWithIdentifierDescriptionFilePath(clientId string, descriptionFilePath string) *ISyncClient {
-	_r := x.inner.RegisterClientWithIdentifierDescriptionFilePath(foundation.NSStringStringWithUTF8String(clientId), foundation.NSStringStringWithUTF8String(descriptionFilePath))
-	if _r == nil {
-		return nil
-	}
-	return &ISyncClient{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerClientWithIdentifier:descriptionFilePath:"), purego.NSString(clientId), purego.NSString(descriptionFilePath))
+	return ISyncClientFromID(_r)
 }
 
-// UnregisterClient calls the underlying UnregisterClient.
-func (x *ISyncManager) UnregisterClient(client *raw.ISyncClient) {
-	x.inner.UnregisterClient(client)
+func (x *ISyncManager) UnregisterClient(client *ISyncClient) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unregisterClient:"), objref.IDOf(client))
 }
 
-// RegisterSchemaWithBundlePath calls the underlying RegisterSchemaWithBundlePath.
 func (x *ISyncManager) RegisterSchemaWithBundlePath(bundlePath string) bool {
-	return x.inner.RegisterSchemaWithBundlePath(foundation.NSStringStringWithUTF8String(bundlePath))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerSchemaWithBundlePath:"), purego.NSString(bundlePath))
+	return _r
 }
 
-// UnregisterSchemaWithName calls the underlying UnregisterSchemaWithName.
 func (x *ISyncManager) UnregisterSchemaWithName(schemaName string) {
-	x.inner.UnregisterSchemaWithName(foundation.NSStringStringWithUTF8String(schemaName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unregisterSchemaWithName:"), purego.NSString(schemaName))
 }
 
-// ClientWithIdentifierNeedsSyncing calls the underlying ClientWithIdentifierNeedsSyncing.
 func (x *ISyncManager) ClientWithIdentifierNeedsSyncing(clientId string, flag bool) {
-	x.inner.ClientWithIdentifierNeedsSyncing(foundation.NSStringStringWithUTF8String(clientId), flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientWithIdentifier:needsSyncing:"), purego.NSString(clientId), flag)
 }
 
-// SnapshotOfRecordsInTruthWithEntityNamesUsingIdentifiersForClient calls the underlying SnapshotOfRecordsInTruthWithEntityNamesUsingIdentifiersForClient.
-func (x *ISyncManager) SnapshotOfRecordsInTruthWithEntityNamesUsingIdentifiersForClient(entityNames *foundation.NSArray[objc.ID], client *raw.ISyncClient) *ISyncRecordSnapshot {
-	_r := x.inner.SnapshotOfRecordsInTruthWithEntityNamesUsingIdentifiersForClient(entityNames, client)
-	if _r == nil {
-		return nil
-	}
-	return &ISyncRecordSnapshot{inner: _r}
+func (x *ISyncManager) SnapshotOfRecordsInTruthWithEntityNamesUsingIdentifiersForClient(entityNames obj.Object, client *ISyncClient) *ISyncRecordSnapshot {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotOfRecordsInTruthWithEntityNames:usingIdentifiersForClient:"), objref.IDOf(entityNames), objref.IDOf(client))
+	return ISyncRecordSnapshotFromID(_r)
 }
 
-// AddRequestMode calls the underlying AddRequestMode.
 func (x *ISyncManager) AddRequestMode(mode string) {
-	x.inner.AddRequestMode(foundation.NSStringStringWithUTF8String(mode))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRequestMode:"), purego.NSString(mode))
 }
 
-// RemoveRequestMode calls the underlying RemoveRequestMode.
 func (x *ISyncManager) RemoveRequestMode(mode string) {
-	x.inner.RemoveRequestMode(foundation.NSStringStringWithUTF8String(mode))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRequestMode:"), purego.NSString(mode))
 }
 
-// RequestModes calls the underlying RequestModes.
-func (x *ISyncManager) RequestModes() *foundation.NSArray[objc.ID] {
-	return x.inner.RequestModes()
+func (x *ISyncManager) RequestModes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestModes"))
+	return obj.Wrap(_r)
 }
 
 // ISyncManagerable is the interface implemented by [ISyncManager], for mocking and DI.
 type ISyncManagerable interface {
-	Unwrap() *raw.ISyncManager
+	obj.Object
 	IsEnabled() bool
-	SyncDisabledReason() unsafe.Pointer
 	ClientWithIdentifier(clientId string) *ISyncClient
 	RegisterClientWithIdentifierDescriptionFilePath(clientId string, descriptionFilePath string) *ISyncClient
-	UnregisterClient(client *raw.ISyncClient)
+	UnregisterClient(client *ISyncClient)
 	RegisterSchemaWithBundlePath(bundlePath string) bool
 	UnregisterSchemaWithName(schemaName string)
 	ClientWithIdentifierNeedsSyncing(clientId string, flag bool)
-	SnapshotOfRecordsInTruthWithEntityNamesUsingIdentifiersForClient(entityNames *foundation.NSArray[objc.ID], client *raw.ISyncClient) *ISyncRecordSnapshot
+	SnapshotOfRecordsInTruthWithEntityNamesUsingIdentifiersForClient(entityNames obj.Object, client *ISyncClient) *ISyncRecordSnapshot
 	AddRequestMode(mode string)
 	RemoveRequestMode(mode string)
-	RequestModes() *foundation.NSArray[objc.ID]
+	RequestModes() obj.Object
 }
 
 var _ ISyncManagerable = (*ISyncManager)(nil)

@@ -5,49 +5,68 @@
 package corelocation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Identity characteristics that can match one or more beacons.
 //
-// BeaconIdentityConstraint wraps [raw.CLBeaconIdentityConstraint] with a fluent Go API.
+// BeaconIdentityConstraint is an idiomatic wrapper over the Objective-C class CLBeaconIdentityConstraint.
 type BeaconIdentityConstraint struct {
-	inner *raw.CLBeaconIdentityConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLBeaconIdentityConstraint].
-func (x *BeaconIdentityConstraint) Unwrap() *raw.CLBeaconIdentityConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BeaconIdentityConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// BeaconIdentityConstraintFromID adopts an existing object pointer as a BeaconIdentityConstraint (nil for 0).
+// BeaconIdentityConstraintFromID adopts an existing Objective-C object as a BeaconIdentityConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func BeaconIdentityConstraintFromID(id objc.ID) *BeaconIdentityConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &BeaconIdentityConstraint{inner: raw.CLBeaconIdentityConstraintFromID(id)}
+	x := &BeaconIdentityConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBeaconIdentityConstraint creates a new [BeaconIdentityConstraint].
+// beaconIdentityConstraintAdopt wraps an Objective-C object that this code just created as a
+// BeaconIdentityConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func beaconIdentityConstraintAdopt(id objc.ID) *BeaconIdentityConstraint {
+	if id == 0 {
+		return nil
+	}
+	x := &BeaconIdentityConstraint{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BeaconIdentityConstraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BeaconIdentityConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BeaconIdentityConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBeaconIdentityConstraint creates a new BeaconIdentityConstraint.
 func NewBeaconIdentityConstraint() *BeaconIdentityConstraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CLBeaconIdentityConstraint")), objc.RegisterName("new"))
-	return &BeaconIdentityConstraint{inner: raw.CLBeaconIdentityConstraintFromID(_id)}
-}
-
-func (x *BeaconIdentityConstraint) asBeaconIdentityCondition() *raw.CLBeaconIdentityCondition {
-	return &x.inner.CLBeaconIdentityCondition
-}
-
-func (x *BeaconIdentityConstraint) asCondition() *raw.CLCondition {
-	return &x.inner.CLBeaconIdentityCondition.CLCondition
+	_id := objc.Send[objc.ID](objc.ID(_class("CLBeaconIdentityConstraint")), objc.RegisterName("new"))
+	return beaconIdentityConstraintAdopt(_id)
 }
 
 // BeaconIdentityConstraintable is the interface implemented by [BeaconIdentityConstraint], for mocking and DI.
 type BeaconIdentityConstraintable interface {
-	Unwrap() *raw.CLBeaconIdentityConstraint
+	obj.Object
 }
 
 var _ BeaconIdentityConstraintable = (*BeaconIdentityConstraint)(nil)

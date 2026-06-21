@@ -5,330 +5,291 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains the move, exercise, and stand data for a given day.
 //
-// ActivitySummary wraps [raw.HKActivitySummary] with a fluent Go API.
+// ActivitySummary is an idiomatic wrapper over the Objective-C class HKActivitySummary.
 type ActivitySummary struct {
-	inner *raw.HKActivitySummary
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKActivitySummary].
-func (x *ActivitySummary) Unwrap() *raw.HKActivitySummary { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ActivitySummary) ID() objc.ID { return x.inner.Ptr() }
-
-// ActivitySummaryFromID adopts an existing object pointer as a ActivitySummary (nil for 0).
+// ActivitySummaryFromID adopts an existing Objective-C object as a ActivitySummary
+// (nil for 0), retaining it and registering a release finalizer.
 func ActivitySummaryFromID(id objc.ID) *ActivitySummary {
 	if id == 0 {
 		return nil
 	}
-	return &ActivitySummary{inner: raw.HKActivitySummaryFromID(id)}
+	x := &ActivitySummary{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewActivitySummary creates a new [ActivitySummary].
+// activitySummaryAdopt wraps an Objective-C object that this code just created as a
+// ActivitySummary (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func activitySummaryAdopt(id objc.ID) *ActivitySummary {
+	if id == 0 {
+		return nil
+	}
+	x := &ActivitySummary{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ActivitySummary) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ActivitySummary) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ActivitySummary) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewActivitySummary creates a new ActivitySummary.
 func NewActivitySummary() *ActivitySummary {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKActivitySummary")), objc.RegisterName("new"))
-	return &ActivitySummary{inner: raw.HKActivitySummaryFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKActivitySummary")), objc.RegisterName("new"))
+	return activitySummaryAdopt(_id)
 }
 
 // The move mode that they system used for this activity summary.
 //
-// WithActivityMoveMode sets the activityMoveMode property and returns the receiver for chaining.
-func (x *ActivitySummary) WithActivityMoveMode(activityMoveMode HKActivityMoveMode) *ActivitySummary {
-	x.inner.SetActivityMoveMode(raw.HKActivityMoveMode(activityMoveMode))
+// WithActivityMoveMode sets activityMoveMode and returns the receiver so calls can be chained.
+func (x *ActivitySummary) WithActivityMoveMode(activityMoveMode ActivityMoveMode) *ActivitySummary {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivityMoveMode:"), activityMoveMode)
 	return x
 }
 
-// @property paused @abstract The paused state of this activity summary @discussion The paused state of an activity summary indicates if the user is tracking their rings for the given day.
+// The paused state of this activity summary The paused state of an activity summary indicates if the user is tracking their rings for the given day.
 //
-// WithPaused sets the paused property and returns the receiver for chaining.
+// WithPaused sets paused and returns the receiver so calls can be chained.
 func (x *ActivitySummary) WithPaused(paused bool) *ActivitySummary {
-	x.inner.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
 // The amount of active energy the user burned during the specified day.
 //
-// WithActiveEnergyBurned sets the activeEnergyBurned property and returns the receiver for chaining.
+// WithActiveEnergyBurned sets activeEnergyBurned and returns the receiver so calls can be chained.
 func (x *ActivitySummary) WithActiveEnergyBurned(activeEnergyBurned *Quantity) *ActivitySummary {
-	x.inner.SetActiveEnergyBurned(activeEnergyBurned.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveEnergyBurned:"), objref.IDOf(activeEnergyBurned))
 	return x
 }
 
 // The amount of time the user spent performing activities that involve full-body movements during the specified day.
 //
-// WithAppleMoveTime sets the appleMoveTime property and returns the receiver for chaining.
+// WithAppleMoveTime sets appleMoveTime and returns the receiver so calls can be chained.
 func (x *ActivitySummary) WithAppleMoveTime(appleMoveTime *Quantity) *ActivitySummary {
-	x.inner.SetAppleMoveTime(appleMoveTime.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleMoveTime:"), objref.IDOf(appleMoveTime))
 	return x
 }
 
 // The amount of time that the user has spent exercising during the specified day.
 //
-// WithAppleExerciseTime sets the appleExerciseTime property and returns the receiver for chaining.
+// WithAppleExerciseTime sets appleExerciseTime and returns the receiver so calls can be chained.
 func (x *ActivitySummary) WithAppleExerciseTime(appleExerciseTime *Quantity) *ActivitySummary {
-	x.inner.SetAppleExerciseTime(appleExerciseTime.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleExerciseTime:"), objref.IDOf(appleExerciseTime))
 	return x
 }
 
 // The number hours in the specified day during which the user has stood and moved for at least a minute per hour.
 //
-// WithAppleStandHours sets the appleStandHours property and returns the receiver for chaining.
+// WithAppleStandHours sets appleStandHours and returns the receiver so calls can be chained.
 func (x *ActivitySummary) WithAppleStandHours(appleStandHours *Quantity) *ActivitySummary {
-	x.inner.SetAppleStandHours(appleStandHours.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleStandHours:"), objref.IDOf(appleStandHours))
 	return x
 }
 
 // The user’s daily goal for active energy burned.
 //
-// WithActiveEnergyBurnedGoal sets the activeEnergyBurnedGoal property and returns the receiver for chaining.
+// WithActiveEnergyBurnedGoal sets activeEnergyBurnedGoal and returns the receiver so calls can be chained.
 func (x *ActivitySummary) WithActiveEnergyBurnedGoal(activeEnergyBurnedGoal *Quantity) *ActivitySummary {
-	x.inner.SetActiveEnergyBurnedGoal(activeEnergyBurnedGoal.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveEnergyBurnedGoal:"), objref.IDOf(activeEnergyBurnedGoal))
 	return x
 }
 
 // The user’s daily goal for move time.
 //
-// WithAppleMoveTimeGoal sets the appleMoveTimeGoal property and returns the receiver for chaining.
+// WithAppleMoveTimeGoal sets appleMoveTimeGoal and returns the receiver so calls can be chained.
 func (x *ActivitySummary) WithAppleMoveTimeGoal(appleMoveTimeGoal *Quantity) *ActivitySummary {
-	x.inner.SetAppleMoveTimeGoal(appleMoveTimeGoal.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleMoveTimeGoal:"), objref.IDOf(appleMoveTimeGoal))
 	return x
 }
 
 // The user’s daily exercise goal.
 //
-// WithAppleExerciseTimeGoal sets the appleExerciseTimeGoal property and returns the receiver for chaining.
+// WithAppleExerciseTimeGoal sets appleExerciseTimeGoal and returns the receiver so calls can be chained.
 func (x *ActivitySummary) WithAppleExerciseTimeGoal(appleExerciseTimeGoal *Quantity) *ActivitySummary {
-	x.inner.SetAppleExerciseTimeGoal(appleExerciseTimeGoal.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleExerciseTimeGoal:"), objref.IDOf(appleExerciseTimeGoal))
 	return x
 }
 
 // The user’s daily goal for exercise time.
 //
-// WithExerciseTimeGoal sets the exerciseTimeGoal property and returns the receiver for chaining.
+// WithExerciseTimeGoal sets exerciseTimeGoal and returns the receiver so calls can be chained.
 func (x *ActivitySummary) WithExerciseTimeGoal(exerciseTimeGoal *Quantity) *ActivitySummary {
-	x.inner.SetExerciseTimeGoal(exerciseTimeGoal.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExerciseTimeGoal:"), objref.IDOf(exerciseTimeGoal))
 	return x
 }
 
 // The user’s daily goal for stand hours.
 //
-// WithAppleStandHoursGoal sets the appleStandHoursGoal property and returns the receiver for chaining.
+// WithAppleStandHoursGoal sets appleStandHoursGoal and returns the receiver so calls can be chained.
 func (x *ActivitySummary) WithAppleStandHoursGoal(appleStandHoursGoal *Quantity) *ActivitySummary {
-	x.inner.SetAppleStandHoursGoal(appleStandHoursGoal.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleStandHoursGoal:"), objref.IDOf(appleStandHoursGoal))
 	return x
 }
 
 // The user’s daily goal for stand hours.
 //
-// WithStandHoursGoal sets the standHoursGoal property and returns the receiver for chaining.
+// WithStandHoursGoal sets standHoursGoal and returns the receiver so calls can be chained.
 func (x *ActivitySummary) WithStandHoursGoal(standHoursGoal *Quantity) *ActivitySummary {
-	x.inner.SetStandHoursGoal(standHoursGoal.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandHoursGoal:"), objref.IDOf(standHoursGoal))
 	return x
 }
 
 // Date components that uniquely identify the day represented by the summary object.
-//
-// DateComponentsForCalendar calls the underlying DateComponentsForCalendar.
-func (x *ActivitySummary) DateComponentsForCalendar(calendar *foundation.NSCalendar) *foundation.NSDateComponents {
-	return x.inner.DateComponentsForCalendar(calendar)
+func (x *ActivitySummary) DateComponentsForCalendar(calendar obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateComponentsForCalendar:"), objref.IDOf(calendar))
+	return obj.Wrap(_r)
 }
 
-// @property      activityMoveMode @abstract      The move mode of this activity summary @discussion    The move mode of an activity summary determines if activeEnergyBurned or appleMoveTime are used for the move ring.
-//
-// ActivityMoveMode calls the underlying ActivityMoveMode.
-func (x *ActivitySummary) ActivityMoveMode() HKActivityMoveMode {
-	return HKActivityMoveMode(x.inner.ActivityMoveMode())
+// The move mode of this activity summary The move mode of an activity summary determines if activeEnergyBurned or appleMoveTime are used for the move ring.
+func (x *ActivitySummary) ActivityMoveMode() ActivityMoveMode {
+	_r := objc.Send[ActivityMoveMode](objref.IDOf(x), objc.RegisterName("activityMoveMode"))
+	return _r
 }
 
-// SetActivityMoveMode calls the underlying SetActivityMoveMode.
-func (x *ActivitySummary) SetActivityMoveMode(activityMoveMode HKActivityMoveMode) {
-	x.inner.SetActivityMoveMode(raw.HKActivityMoveMode(activityMoveMode))
+func (x *ActivitySummary) SetActivityMoveMode(activityMoveMode ActivityMoveMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActivityMoveMode:"), activityMoveMode)
 }
 
-// @property paused @abstract The paused state of this activity summary @discussion The paused state of an activity summary indicates if the user is tracking their rings for the given day.
-//
-// IsPaused calls the underlying IsPaused.
+// The paused state of this activity summary The paused state of an activity summary indicates if the user is tracking their rings for the given day.
 func (x *ActivitySummary) IsPaused() bool {
-	return x.inner.IsPaused()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
+	return _r
 }
 
-// SetPaused calls the underlying SetPaused.
 func (x *ActivitySummary) SetPaused(paused bool) {
-	x.inner.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 }
 
-// @property      activeEnergyBurned @abstract      The amount of active energy that the user burned. @discussion    This quantity is compatible with energy units.
-//
-// ActiveEnergyBurned calls the underlying ActiveEnergyBurned.
+// The amount of active energy that the user burned. This quantity is compatible with energy units.
 func (x *ActivitySummary) ActiveEnergyBurned() *Quantity {
-	_r := x.inner.ActiveEnergyBurned()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeEnergyBurned"))
+	return QuantityFromID(_r)
 }
 
-// SetActiveEnergyBurned calls the underlying SetActiveEnergyBurned.
-func (x *ActivitySummary) SetActiveEnergyBurned(activeEnergyBurned *raw.HKQuantity) {
-	x.inner.SetActiveEnergyBurned(activeEnergyBurned)
+func (x *ActivitySummary) SetActiveEnergyBurned(activeEnergyBurned *Quantity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveEnergyBurned:"), objref.IDOf(activeEnergyBurned))
 }
 
-// @property      appleMoveTime @abstract      The amount of move time that the user performed. @discussion    This quantity is compatible with time units. The measurement criteria of move time time is defined by Apple.
-//
-// AppleMoveTime calls the underlying AppleMoveTime.
+// The amount of move time that the user performed. This quantity is compatible with time units. The measurement criteria of move time time is defined by Apple.
 func (x *ActivitySummary) AppleMoveTime() *Quantity {
-	_r := x.inner.AppleMoveTime()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appleMoveTime"))
+	return QuantityFromID(_r)
 }
 
-// SetAppleMoveTime calls the underlying SetAppleMoveTime.
-func (x *ActivitySummary) SetAppleMoveTime(appleMoveTime *raw.HKQuantity) {
-	x.inner.SetAppleMoveTime(appleMoveTime)
+func (x *ActivitySummary) SetAppleMoveTime(appleMoveTime *Quantity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleMoveTime:"), objref.IDOf(appleMoveTime))
 }
 
-// @property      appleExerciseTime @abstract      The amount of exercise time that the user performed. @discussion    This quantity is compatible with time units. The measurement criteria of exercise time is defined by Apple.
-//
-// AppleExerciseTime calls the underlying AppleExerciseTime.
+// The amount of exercise time that the user performed. This quantity is compatible with time units. The measurement criteria of exercise time is defined by Apple.
 func (x *ActivitySummary) AppleExerciseTime() *Quantity {
-	_r := x.inner.AppleExerciseTime()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appleExerciseTime"))
+	return QuantityFromID(_r)
 }
 
-// SetAppleExerciseTime calls the underlying SetAppleExerciseTime.
-func (x *ActivitySummary) SetAppleExerciseTime(appleExerciseTime *raw.HKQuantity) {
-	x.inner.SetAppleExerciseTime(appleExerciseTime)
+func (x *ActivitySummary) SetAppleExerciseTime(appleExerciseTime *Quantity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleExerciseTime:"), objref.IDOf(appleExerciseTime))
 }
 
-// @property      appleStandHours @abstract      The number of stand hours that the user earned. @discussion     This quantity is compatible with the count unit. The measurement criteria of stand hours is defined by Apple.
-//
-// AppleStandHours calls the underlying AppleStandHours.
+// The number of stand hours that the user earned. This quantity is compatible with the count unit. The measurement criteria of stand hours is defined by Apple.
 func (x *ActivitySummary) AppleStandHours() *Quantity {
-	_r := x.inner.AppleStandHours()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appleStandHours"))
+	return QuantityFromID(_r)
 }
 
-// SetAppleStandHours calls the underlying SetAppleStandHours.
-func (x *ActivitySummary) SetAppleStandHours(appleStandHours *raw.HKQuantity) {
-	x.inner.SetAppleStandHours(appleStandHours)
+func (x *ActivitySummary) SetAppleStandHours(appleStandHours *Quantity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleStandHours:"), objref.IDOf(appleStandHours))
 }
 
-// @property      activeEnergyBurnedGoal @abstract      The user's active energy goal for the day. @discussion    This quantity is compatible with energy units.
-//
-// ActiveEnergyBurnedGoal calls the underlying ActiveEnergyBurnedGoal.
+// The user's active energy goal for the day. This quantity is compatible with energy units.
 func (x *ActivitySummary) ActiveEnergyBurnedGoal() *Quantity {
-	_r := x.inner.ActiveEnergyBurnedGoal()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeEnergyBurnedGoal"))
+	return QuantityFromID(_r)
 }
 
-// SetActiveEnergyBurnedGoal calls the underlying SetActiveEnergyBurnedGoal.
-func (x *ActivitySummary) SetActiveEnergyBurnedGoal(activeEnergyBurnedGoal *raw.HKQuantity) {
-	x.inner.SetActiveEnergyBurnedGoal(activeEnergyBurnedGoal)
+func (x *ActivitySummary) SetActiveEnergyBurnedGoal(activeEnergyBurnedGoal *Quantity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveEnergyBurnedGoal:"), objref.IDOf(activeEnergyBurnedGoal))
 }
 
-// @property      appleMoveTimeGoal @abstract      The user's move time goal for the day. @discussion    This quantity is compatible with time units.
-//
-// AppleMoveTimeGoal calls the underlying AppleMoveTimeGoal.
+// The user's move time goal for the day. This quantity is compatible with time units.
 func (x *ActivitySummary) AppleMoveTimeGoal() *Quantity {
-	_r := x.inner.AppleMoveTimeGoal()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appleMoveTimeGoal"))
+	return QuantityFromID(_r)
 }
 
-// SetAppleMoveTimeGoal calls the underlying SetAppleMoveTimeGoal.
-func (x *ActivitySummary) SetAppleMoveTimeGoal(appleMoveTimeGoal *raw.HKQuantity) {
-	x.inner.SetAppleMoveTimeGoal(appleMoveTimeGoal)
+func (x *ActivitySummary) SetAppleMoveTimeGoal(appleMoveTimeGoal *Quantity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleMoveTimeGoal:"), objref.IDOf(appleMoveTimeGoal))
 }
 
-// @property      appleExerciseTimeGoal @abstract      The user's exercise time goal for the day. @discussion    This quantity is compatible with time units.
-//
-// AppleExerciseTimeGoal calls the underlying AppleExerciseTimeGoal.
+// The user's exercise time goal for the day. This quantity is compatible with time units.
 func (x *ActivitySummary) AppleExerciseTimeGoal() *Quantity {
-	_r := x.inner.AppleExerciseTimeGoal()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appleExerciseTimeGoal"))
+	return QuantityFromID(_r)
 }
 
-// SetAppleExerciseTimeGoal calls the underlying SetAppleExerciseTimeGoal.
-func (x *ActivitySummary) SetAppleExerciseTimeGoal(appleExerciseTimeGoal *raw.HKQuantity) {
-	x.inner.SetAppleExerciseTimeGoal(appleExerciseTimeGoal)
+func (x *ActivitySummary) SetAppleExerciseTimeGoal(appleExerciseTimeGoal *Quantity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleExerciseTimeGoal:"), objref.IDOf(appleExerciseTimeGoal))
 }
 
-// @property      exerciseTimeGoal @abstract      The user's exercise time goal for the day. @discussion    This quantity is compatible with time units.
-//
-// ExerciseTimeGoal calls the underlying ExerciseTimeGoal.
+// The user's exercise time goal for the day. This quantity is compatible with time units.
 func (x *ActivitySummary) ExerciseTimeGoal() *Quantity {
-	_r := x.inner.ExerciseTimeGoal()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exerciseTimeGoal"))
+	return QuantityFromID(_r)
 }
 
-// SetExerciseTimeGoal calls the underlying SetExerciseTimeGoal.
-func (x *ActivitySummary) SetExerciseTimeGoal(exerciseTimeGoal *raw.HKQuantity) {
-	x.inner.SetExerciseTimeGoal(exerciseTimeGoal)
+func (x *ActivitySummary) SetExerciseTimeGoal(exerciseTimeGoal *Quantity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExerciseTimeGoal:"), objref.IDOf(exerciseTimeGoal))
 }
 
-// @property      appleStandHoursGoal @abstract      The user's active stand hours goal for the day. @discussion    This quantity is compatible with the count unit.
-//
-// AppleStandHoursGoal calls the underlying AppleStandHoursGoal.
+// The user's active stand hours goal for the day. This quantity is compatible with the count unit.
 func (x *ActivitySummary) AppleStandHoursGoal() *Quantity {
-	_r := x.inner.AppleStandHoursGoal()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appleStandHoursGoal"))
+	return QuantityFromID(_r)
 }
 
-// SetAppleStandHoursGoal calls the underlying SetAppleStandHoursGoal.
-func (x *ActivitySummary) SetAppleStandHoursGoal(appleStandHoursGoal *raw.HKQuantity) {
-	x.inner.SetAppleStandHoursGoal(appleStandHoursGoal)
+func (x *ActivitySummary) SetAppleStandHoursGoal(appleStandHoursGoal *Quantity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppleStandHoursGoal:"), objref.IDOf(appleStandHoursGoal))
 }
 
-// @property      standHoursGoal @abstract      The user's active stand hours goal for the day. @discussion    This quantity is compatible with the count unit.
-//
-// StandHoursGoal calls the underlying StandHoursGoal.
+// The user's active stand hours goal for the day. This quantity is compatible with the count unit.
 func (x *ActivitySummary) StandHoursGoal() *Quantity {
-	_r := x.inner.StandHoursGoal()
-	if _r == nil {
-		return nil
-	}
-	return &Quantity{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standHoursGoal"))
+	return QuantityFromID(_r)
 }
 
-// SetStandHoursGoal calls the underlying SetStandHoursGoal.
-func (x *ActivitySummary) SetStandHoursGoal(standHoursGoal *raw.HKQuantity) {
-	x.inner.SetStandHoursGoal(standHoursGoal)
+func (x *ActivitySummary) SetStandHoursGoal(standHoursGoal *Quantity) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandHoursGoal:"), objref.IDOf(standHoursGoal))
 }
 
 // ActivitySummaryable is the interface implemented by [ActivitySummary], for mocking and DI.
 type ActivitySummaryable interface {
-	Unwrap() *raw.HKActivitySummary
-	WithActivityMoveMode(activityMoveMode HKActivityMoveMode) *ActivitySummary
+	obj.Object
+	WithActivityMoveMode(activityMoveMode ActivityMoveMode) *ActivitySummary
 	WithPaused(paused bool) *ActivitySummary
 	WithActiveEnergyBurned(activeEnergyBurned *Quantity) *ActivitySummary
 	WithAppleMoveTime(appleMoveTime *Quantity) *ActivitySummary
@@ -340,31 +301,31 @@ type ActivitySummaryable interface {
 	WithExerciseTimeGoal(exerciseTimeGoal *Quantity) *ActivitySummary
 	WithAppleStandHoursGoal(appleStandHoursGoal *Quantity) *ActivitySummary
 	WithStandHoursGoal(standHoursGoal *Quantity) *ActivitySummary
-	DateComponentsForCalendar(calendar *foundation.NSCalendar) *foundation.NSDateComponents
-	ActivityMoveMode() HKActivityMoveMode
-	SetActivityMoveMode(activityMoveMode HKActivityMoveMode)
+	DateComponentsForCalendar(calendar obj.Object) obj.Object
+	ActivityMoveMode() ActivityMoveMode
+	SetActivityMoveMode(activityMoveMode ActivityMoveMode)
 	IsPaused() bool
 	SetPaused(paused bool)
 	ActiveEnergyBurned() *Quantity
-	SetActiveEnergyBurned(activeEnergyBurned *raw.HKQuantity)
+	SetActiveEnergyBurned(activeEnergyBurned *Quantity)
 	AppleMoveTime() *Quantity
-	SetAppleMoveTime(appleMoveTime *raw.HKQuantity)
+	SetAppleMoveTime(appleMoveTime *Quantity)
 	AppleExerciseTime() *Quantity
-	SetAppleExerciseTime(appleExerciseTime *raw.HKQuantity)
+	SetAppleExerciseTime(appleExerciseTime *Quantity)
 	AppleStandHours() *Quantity
-	SetAppleStandHours(appleStandHours *raw.HKQuantity)
+	SetAppleStandHours(appleStandHours *Quantity)
 	ActiveEnergyBurnedGoal() *Quantity
-	SetActiveEnergyBurnedGoal(activeEnergyBurnedGoal *raw.HKQuantity)
+	SetActiveEnergyBurnedGoal(activeEnergyBurnedGoal *Quantity)
 	AppleMoveTimeGoal() *Quantity
-	SetAppleMoveTimeGoal(appleMoveTimeGoal *raw.HKQuantity)
+	SetAppleMoveTimeGoal(appleMoveTimeGoal *Quantity)
 	AppleExerciseTimeGoal() *Quantity
-	SetAppleExerciseTimeGoal(appleExerciseTimeGoal *raw.HKQuantity)
+	SetAppleExerciseTimeGoal(appleExerciseTimeGoal *Quantity)
 	ExerciseTimeGoal() *Quantity
-	SetExerciseTimeGoal(exerciseTimeGoal *raw.HKQuantity)
+	SetExerciseTimeGoal(exerciseTimeGoal *Quantity)
 	AppleStandHoursGoal() *Quantity
-	SetAppleStandHoursGoal(appleStandHoursGoal *raw.HKQuantity)
+	SetAppleStandHoursGoal(appleStandHoursGoal *Quantity)
 	StandHoursGoal() *Quantity
-	SetStandHoursGoal(standHoursGoal *raw.HKQuantity)
+	SetStandHoursGoal(standHoursGoal *Quantity)
 }
 
 var _ ActivitySummaryable = (*ActivitySummary)(nil)

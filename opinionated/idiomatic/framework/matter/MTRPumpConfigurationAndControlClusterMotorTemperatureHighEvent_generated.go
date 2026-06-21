@@ -5,43 +5,66 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent wraps [raw.MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent] with a fluent Go API.
+// MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent is an idiomatic wrapper over the Objective-C class MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent.
 type MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent struct {
-	inner *raw.MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent].
-func (x *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent (nil for 0).
+// MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventFromID adopts an existing Objective-C object as a MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent{inner: raw.MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventFromID(id)}
+	x := &MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent creates a new [MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent].
+// mTRPumpConfigurationAndControlClusterMotorTemperatureHighEventAdopt wraps an Objective-C object that this code just created as a
+// MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRPumpConfigurationAndControlClusterMotorTemperatureHighEventAdopt(id objc.ID) *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent creates a new MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent.
 func NewMTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent() *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent")), objc.RegisterName("new"))
-	return &MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent{inner: raw.MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent")), objc.RegisterName("new"))
+	return mTRPumpConfigurationAndControlClusterMotorTemperatureHighEventAdopt(_id)
 }
 
 // MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent], for mocking and DI.
 type MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventable interface {
-	Unwrap() *raw.MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent
+	obj.Object
 }
 
 var _ MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventable = (*MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent)(nil)

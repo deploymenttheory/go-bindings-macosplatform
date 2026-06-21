@@ -5,45 +5,45 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// SmartCardUserInteractionProvider is implemented by SmartCardUserInteraction and any idiomatic type wrapping a TKSmartCardUserInteraction subclass.
+// SmartCardUserInteractionProvider is accepted wherever a TKSmartCardUserInteraction (or one of its subclasses) is expected.
 type SmartCardUserInteractionProvider interface {
-	asSmartCardUserInteraction() *raw.TKSmartCardUserInteraction
+	objref.Object
 }
 
-// SmartCardUserInteractionForPINOperationProvider is implemented by SmartCardUserInteractionForPINOperation and any idiomatic type wrapping a TKSmartCardUserInteractionForPINOperation subclass.
+// SmartCardUserInteractionForPINOperationProvider is accepted wherever a TKSmartCardUserInteractionForPINOperation (or one of its subclasses) is expected.
 type SmartCardUserInteractionForPINOperationProvider interface {
-	asSmartCardUserInteractionForPINOperation() *raw.TKSmartCardUserInteractionForPINOperation
+	objref.Object
 }
 
-// TLVRecordProvider is implemented by TLVRecord and any idiomatic type wrapping a TKTLVRecord subclass.
+// TLVRecordProvider is accepted wherever a TKTLVRecord (or one of its subclasses) is expected.
 type TLVRecordProvider interface {
-	asTLVRecord() *raw.TKTLVRecord
+	objref.Object
 }
 
-// TokenProvider is implemented by Token and any idiomatic type wrapping a TKToken subclass.
+// TokenProvider is accepted wherever a TKToken (or one of its subclasses) is expected.
 type TokenProvider interface {
-	asToken() *raw.TKToken
+	objref.Object
 }
 
-// TokenAuthOperationProvider is implemented by TokenAuthOperation and any idiomatic type wrapping a TKTokenAuthOperation subclass.
+// TokenAuthOperationProvider is accepted wherever a TKTokenAuthOperation (or one of its subclasses) is expected.
 type TokenAuthOperationProvider interface {
-	asTokenAuthOperation() *raw.TKTokenAuthOperation
+	objref.Object
 }
 
-// TokenDriverProvider is implemented by TokenDriver and any idiomatic type wrapping a TKTokenDriver subclass.
+// TokenDriverProvider is accepted wherever a TKTokenDriver (or one of its subclasses) is expected.
 type TokenDriverProvider interface {
-	asTokenDriver() *raw.TKTokenDriver
+	objref.Object
 }
 
-// TokenKeychainItemProvider is implemented by TokenKeychainItem and any idiomatic type wrapping a TKTokenKeychainItem subclass.
+// TokenKeychainItemProvider is accepted wherever a TKTokenKeychainItem (or one of its subclasses) is expected.
 type TokenKeychainItemProvider interface {
-	asTokenKeychainItem() *raw.TKTokenKeychainItem
+	objref.Object
 }
 
-// TokenSessionProvider is implemented by TokenSession and any idiomatic type wrapping a TKTokenSession subclass.
+// TokenSessionProvider is accepted wherever a TKTokenSession (or one of its subclasses) is expected.
 type TokenSessionProvider interface {
-	asTokenSession() *raw.TKTokenSession
+	objref.Object
 }

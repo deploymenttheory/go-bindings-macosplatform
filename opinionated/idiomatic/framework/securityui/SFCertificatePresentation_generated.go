@@ -6,75 +6,99 @@ package securityui
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityui"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that displays a certificate sheet for a provided certificate trust.
 //
-// CertificatePresentation wraps [raw.SFCertificatePresentation] with a fluent Go API.
+// CertificatePresentation is an idiomatic wrapper over the Objective-C class SFCertificatePresentation.
 type CertificatePresentation struct {
-	inner *raw.SFCertificatePresentation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFCertificatePresentation].
-func (x *CertificatePresentation) Unwrap() *raw.SFCertificatePresentation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CertificatePresentation) ID() objc.ID { return x.inner.Ptr() }
-
-// CertificatePresentationFromID adopts an existing object pointer as a CertificatePresentation (nil for 0).
+// CertificatePresentationFromID adopts an existing Objective-C object as a CertificatePresentation
+// (nil for 0), retaining it and registering a release finalizer.
 func CertificatePresentationFromID(id objc.ID) *CertificatePresentation {
 	if id == 0 {
 		return nil
 	}
-	return &CertificatePresentation{inner: raw.SFCertificatePresentationFromID(id)}
+	x := &CertificatePresentation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// certificatePresentationAdopt wraps an Objective-C object that this code just created as a
+// CertificatePresentation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func certificatePresentationAdopt(id objc.ID) *CertificatePresentation {
+	if id == 0 {
+		return nil
+	}
+	x := &CertificatePresentation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CertificatePresentation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CertificatePresentation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CertificatePresentation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize the certificate presentation with a certificate trust reference.
 //
-// NewCertificatePresentationWithTrust creates a new [CertificatePresentation].
-func NewCertificatePresentationWithTrust(trust unsafe.Pointer) *CertificatePresentation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SFCertificatePresentation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrust:"), trust)
-	return &CertificatePresentation{inner: raw.SFCertificatePresentationFromID(_id)}
+// NewCertificatePresentationWithTrust creates a new CertificatePresentation.
+func NewCertificatePresentationWithTrust(trust obj.Object) *CertificatePresentation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SFCertificatePresentation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTrust:"), objref.IDOf(trust))
+	return certificatePresentationAdopt(_id)
 }
 
 // Title string to be displayed. If no title is provided, a default title will be used.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *CertificatePresentation) WithTitle(title string) *CertificatePresentation {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // Message string to be displayed. If no message is provided, a default message will be used.
 //
-// WithMessage sets the message property and returns the receiver for chaining.
+// WithMessage sets message and returns the receiver so calls can be chained.
 func (x *CertificatePresentation) WithMessage(message string) *CertificatePresentation {
-	x.inner.SetMessage(foundation.NSStringStringWithUTF8String(message))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessage:"), purego.NSString(message))
 	return x
 }
 
 // The URL that will be opened by clicking the “Learn More” button.
 //
-// WithHelpURL sets the helpURL property and returns the receiver for chaining.
+// WithHelpURL sets helpURL and returns the receiver so calls can be chained.
 func (x *CertificatePresentation) WithHelpURL(helpURL string) *CertificatePresentation {
-	x.inner.SetHelpURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(helpURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpURL:"), rt.FileURL(helpURL))
 	return x
 }
 
 // PresentSheetInWindowDismissHandler blocks until the operation completes or ctx is cancelled.
-func (x *CertificatePresentation) PresentSheetInWindowDismissHandler(ctx context.Context, window *appkit.NSWindow) error {
+func (x *CertificatePresentation) PresentSheetInWindowDismissHandler(ctx context.Context, window obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.PresentSheetInWindowDismissHandler(window, func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentSheetInWindow:dismissHandler:"), objref.IDOf(window), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -84,77 +108,66 @@ func (x *CertificatePresentation) PresentSheetInWindowDismissHandler(ctx context
 }
 
 // Dismisses the certificate sheet.
-//
-// DismissSheet calls the underlying DismissSheet.
 func (x *CertificatePresentation) DismissSheet() {
-	x.inner.DismissSheet()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dismissSheet"))
 }
 
 // A trust reference, previously created with SecTrustCreateWithCertificates (see <Security/SecTrust.h>).
-//
-// Trust calls the underlying Trust.
-func (x *CertificatePresentation) Trust() unsafe.Pointer {
-	return x.inner.Trust()
+func (x *CertificatePresentation) Trust() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trust"))
+	return obj.Wrap(_r)
 }
 
 // Title string to be displayed. If no title is provided, a default title will be used.
-//
-// Title calls the underlying Title.
 func (x *CertificatePresentation) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
 func (x *CertificatePresentation) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
 // Message string to be displayed. If no message is provided, a default message will be used.
-//
-// Message calls the underlying Message.
 func (x *CertificatePresentation) Message() string {
-	_r := x.inner.Message()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("message"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMessage calls the underlying SetMessage.
 func (x *CertificatePresentation) SetMessage(message string) {
-	x.inner.SetMessage(foundation.NSStringStringWithUTF8String(message))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessage:"), purego.NSString(message))
 }
 
 // The URL that will be opened by clicking the "Learn More" button.
-//
-// HelpURL calls the underlying HelpURL.
-func (x *CertificatePresentation) HelpURL() *foundation.NSURL {
-	return x.inner.HelpURL()
+func (x *CertificatePresentation) HelpURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("helpURL"))
+	return obj.Wrap(_r)
 }
 
-// SetHelpURL calls the underlying SetHelpURL.
 func (x *CertificatePresentation) SetHelpURL(helpURL string) {
-	x.inner.SetHelpURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(helpURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpURL:"), rt.FileURL(helpURL))
 }
 
 // CertificatePresentationable is the interface implemented by [CertificatePresentation], for mocking and DI.
 type CertificatePresentationable interface {
-	Unwrap() *raw.SFCertificatePresentation
+	obj.Object
 	WithTitle(title string) *CertificatePresentation
 	WithMessage(message string) *CertificatePresentation
 	WithHelpURL(helpURL string) *CertificatePresentation
-	PresentSheetInWindowDismissHandler(ctx context.Context, window *appkit.NSWindow) error
+	PresentSheetInWindowDismissHandler(ctx context.Context, window obj.Object) error
 	DismissSheet()
-	Trust() unsafe.Pointer
+	Trust() obj.Object
 	Title() string
 	SetTitle(title string)
 	Message() string
 	SetMessage(message string)
-	HelpURL() *foundation.NSURL
+	HelpURL() obj.Object
 	SetHelpURL(helpURL string)
 }
 

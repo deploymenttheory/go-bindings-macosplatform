@@ -5,47 +5,74 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // This class acts as a wrapper for the HKBloodType enumeration.
 //
-// BloodTypeObject wraps [raw.HKBloodTypeObject] with a fluent Go API.
+// BloodTypeObject is an idiomatic wrapper over the Objective-C class HKBloodTypeObject.
 type BloodTypeObject struct {
-	inner *raw.HKBloodTypeObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKBloodTypeObject].
-func (x *BloodTypeObject) Unwrap() *raw.HKBloodTypeObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BloodTypeObject) ID() objc.ID { return x.inner.Ptr() }
-
-// BloodTypeObjectFromID adopts an existing object pointer as a BloodTypeObject (nil for 0).
+// BloodTypeObjectFromID adopts an existing Objective-C object as a BloodTypeObject
+// (nil for 0), retaining it and registering a release finalizer.
 func BloodTypeObjectFromID(id objc.ID) *BloodTypeObject {
 	if id == 0 {
 		return nil
 	}
-	return &BloodTypeObject{inner: raw.HKBloodTypeObjectFromID(id)}
+	x := &BloodTypeObject{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBloodTypeObject creates a new [BloodTypeObject].
+// bloodTypeObjectAdopt wraps an Objective-C object that this code just created as a
+// BloodTypeObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func bloodTypeObjectAdopt(id objc.ID) *BloodTypeObject {
+	if id == 0 {
+		return nil
+	}
+	x := &BloodTypeObject{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BloodTypeObject) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BloodTypeObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BloodTypeObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBloodTypeObject creates a new BloodTypeObject.
 func NewBloodTypeObject() *BloodTypeObject {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKBloodTypeObject")), objc.RegisterName("new"))
-	return &BloodTypeObject{inner: raw.HKBloodTypeObjectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKBloodTypeObject")), objc.RegisterName("new"))
+	return bloodTypeObjectAdopt(_id)
 }
 
-// BloodType calls the underlying BloodType.
-func (x *BloodTypeObject) BloodType() HKBloodType {
-	return HKBloodType(x.inner.BloodType())
+func (x *BloodTypeObject) BloodType() BloodType {
+	_r := objc.Send[BloodType](objref.IDOf(x), objc.RegisterName("bloodType"))
+	return _r
 }
 
 // BloodTypeObjectable is the interface implemented by [BloodTypeObject], for mocking and DI.
 type BloodTypeObjectable interface {
-	Unwrap() *raw.HKBloodTypeObject
-	BloodType() HKBloodType
+	obj.Object
+	BloodType() BloodType
 }
 
 var _ BloodTypeObjectable = (*BloodTypeObject)(nil)

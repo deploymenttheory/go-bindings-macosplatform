@@ -5,63 +5,82 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A notification that triggers when the contents of a record zone change.
 //
-// RecordZoneNotification wraps [raw.CKRecordZoneNotification] with a fluent Go API.
+// RecordZoneNotification is an idiomatic wrapper over the Objective-C class CKRecordZoneNotification.
 type RecordZoneNotification struct {
-	inner *raw.CKRecordZoneNotification
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKRecordZoneNotification].
-func (x *RecordZoneNotification) Unwrap() *raw.CKRecordZoneNotification { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RecordZoneNotification) ID() objc.ID { return x.inner.Ptr() }
-
-// RecordZoneNotificationFromID adopts an existing object pointer as a RecordZoneNotification (nil for 0).
+// RecordZoneNotificationFromID adopts an existing Objective-C object as a RecordZoneNotification
+// (nil for 0), retaining it and registering a release finalizer.
 func RecordZoneNotificationFromID(id objc.ID) *RecordZoneNotification {
 	if id == 0 {
 		return nil
 	}
-	return &RecordZoneNotification{inner: raw.CKRecordZoneNotificationFromID(id)}
+	x := &RecordZoneNotification{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRecordZoneNotification creates a new [RecordZoneNotification].
+// recordZoneNotificationAdopt wraps an Objective-C object that this code just created as a
+// RecordZoneNotification (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func recordZoneNotificationAdopt(id objc.ID) *RecordZoneNotification {
+	if id == 0 {
+		return nil
+	}
+	x := &RecordZoneNotification{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RecordZoneNotification) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RecordZoneNotification) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RecordZoneNotification) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRecordZoneNotification creates a new RecordZoneNotification.
 func NewRecordZoneNotification() *RecordZoneNotification {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKRecordZoneNotification")), objc.RegisterName("new"))
-	return &RecordZoneNotification{inner: raw.CKRecordZoneNotificationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKRecordZoneNotification")), objc.RegisterName("new"))
+	return recordZoneNotificationAdopt(_id)
 }
 
 // The ID of the record zone that has changes.
-//
-// RecordZoneID calls the underlying RecordZoneID.
 func (x *RecordZoneNotification) RecordZoneID() *RecordZoneID {
-	_r := x.inner.RecordZoneID()
-	if _r == nil {
-		return nil
-	}
-	return &RecordZoneID{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordZoneID"))
+	return RecordZoneIDFromID(_r)
 }
 
 // The type of database for the record zone. This property's value is one of the constants that “CKDatabase/Scope“ defines.
-//
-// DatabaseScope calls the underlying DatabaseScope.
-func (x *RecordZoneNotification) DatabaseScope() CKDatabaseScope {
-	return CKDatabaseScope(x.inner.DatabaseScope())
+func (x *RecordZoneNotification) DatabaseScope() DatabaseScope {
+	_r := objc.Send[DatabaseScope](objref.IDOf(x), objc.RegisterName("databaseScope"))
+	return _r
 }
-
-func (x *RecordZoneNotification) asNotification() *raw.CKNotification { return &x.inner.CKNotification }
 
 // RecordZoneNotificationable is the interface implemented by [RecordZoneNotification], for mocking and DI.
 type RecordZoneNotificationable interface {
-	Unwrap() *raw.CKRecordZoneNotification
+	obj.Object
 	RecordZoneID() *RecordZoneID
-	DatabaseScope() CKDatabaseScope
+	DatabaseScope() DatabaseScope
 }
 
 var _ RecordZoneNotificationable = (*RecordZoneNotification)(nil)

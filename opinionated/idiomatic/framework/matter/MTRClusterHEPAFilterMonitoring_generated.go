@@ -5,142 +5,145 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterHEPAFilterMonitoring wraps [raw.MTRClusterHEPAFilterMonitoring] with a fluent Go API.
+// MTRClusterHEPAFilterMonitoring is an idiomatic wrapper over the Objective-C class MTRClusterHEPAFilterMonitoring.
 type MTRClusterHEPAFilterMonitoring struct {
-	inner *raw.MTRClusterHEPAFilterMonitoring
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterHEPAFilterMonitoring].
-func (x *MTRClusterHEPAFilterMonitoring) Unwrap() *raw.MTRClusterHEPAFilterMonitoring { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterHEPAFilterMonitoring) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterHEPAFilterMonitoringFromID adopts an existing object pointer as a MTRClusterHEPAFilterMonitoring (nil for 0).
+// MTRClusterHEPAFilterMonitoringFromID adopts an existing Objective-C object as a MTRClusterHEPAFilterMonitoring
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterHEPAFilterMonitoringFromID(id objc.ID) *MTRClusterHEPAFilterMonitoring {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterHEPAFilterMonitoring{inner: raw.MTRClusterHEPAFilterMonitoringFromID(id)}
+	x := &MTRClusterHEPAFilterMonitoring{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterHEPAFilterMonitoringAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterHEPAFilterMonitoring (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterHEPAFilterMonitoringAdopt(id objc.ID) *MTRClusterHEPAFilterMonitoring {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterHEPAFilterMonitoring{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterHEPAFilterMonitoring) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterHEPAFilterMonitoring) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterHEPAFilterMonitoring) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterHEPAFilterMonitoringWithDeviceEndpointIDQueue creates a new [MTRClusterHEPAFilterMonitoring].
-func NewMTRClusterHEPAFilterMonitoringWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterHEPAFilterMonitoring {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterHEPAFilterMonitoring")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterHEPAFilterMonitoring{inner: raw.MTRClusterHEPAFilterMonitoringFromID(_id)}
+// NewMTRClusterHEPAFilterMonitoringWithDeviceEndpointIDQueue creates a new MTRClusterHEPAFilterMonitoring.
+func NewMTRClusterHEPAFilterMonitoringWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterHEPAFilterMonitoring {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterHEPAFilterMonitoring")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterHEPAFilterMonitoringAdopt(_id)
 }
 
-// ResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying ResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterHEPAFilterMonitoring) ResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRHEPAFilterMonitoringClusterResetConditionParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeConditionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeConditionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ResetConditionWithExpectedValuesExpectedValueIntervalCompletion calls the underlying ResetConditionWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterHEPAFilterMonitoring) ResetConditionWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ResetConditionWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeDegradationDirectionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDegradationDirectionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeConditionWithParams calls the underlying ReadAttributeConditionWithParams.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeConditionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeConditionWithParams(params)
+func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeChangeIndicationWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChangeIndicationWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeDegradationDirectionWithParams calls the underlying ReadAttributeDegradationDirectionWithParams.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeDegradationDirectionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeDegradationDirectionWithParams(params)
+func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeInPlaceIndicatorWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInPlaceIndicatorWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeChangeIndicationWithParams calls the underlying ReadAttributeChangeIndicationWithParams.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeChangeIndicationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeChangeIndicationWithParams(params)
+func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeLastChangedTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLastChangedTimeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeInPlaceIndicatorWithParams calls the underlying ReadAttributeInPlaceIndicatorWithParams.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeInPlaceIndicatorWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeInPlaceIndicatorWithParams(params)
+func (x *MTRClusterHEPAFilterMonitoring) WriteAttributeLastChangedTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLastChangedTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeLastChangedTimeWithParams calls the underlying ReadAttributeLastChangedTimeWithParams.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeLastChangedTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeLastChangedTimeWithParams(params)
+func (x *MTRClusterHEPAFilterMonitoring) WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLastChangedTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeLastChangedTimeWithValueExpectedValueInterval calls the underlying WriteAttributeLastChangedTimeWithValueExpectedValueInterval.
-func (x *MTRClusterHEPAFilterMonitoring) WriteAttributeLastChangedTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeLastChangedTimeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeReplacementProductListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeReplacementProductListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams.
-func (x *MTRClusterHEPAFilterMonitoring) WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeReplacementProductListWithParams calls the underlying ReadAttributeReplacementProductListWithParams.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeReplacementProductListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeReplacementProductListWithParams(params)
+func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
-}
-
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterHEPAFilterMonitoring) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterHEPAFilterMonitoring) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterHEPAFilterMonitoring) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterHEPAFilterMonitoringable is the interface implemented by [MTRClusterHEPAFilterMonitoring], for mocking and DI.
 type MTRClusterHEPAFilterMonitoringable interface {
-	Unwrap() *raw.MTRClusterHEPAFilterMonitoring
-	ResetConditionWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRHEPAFilterMonitoringClusterResetConditionParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ResetConditionWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeConditionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeDegradationDirectionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeChangeIndicationWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeInPlaceIndicatorWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeLastChangedTimeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeLastChangedTimeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeReplacementProductListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeConditionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeDegradationDirectionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeChangeIndicationWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeInPlaceIndicatorWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeLastChangedTimeWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeLastChangedTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeLastChangedTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeReplacementProductListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterHEPAFilterMonitoringable = (*MTRClusterHEPAFilterMonitoring)(nil)

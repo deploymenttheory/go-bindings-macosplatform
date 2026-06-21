@@ -5,53 +5,74 @@
 package coremidi
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// UMPEndpointManager wraps [raw.MIDIUMPEndpointManager] with a fluent Go API.
+// UMPEndpointManager is an idiomatic wrapper over the Objective-C class MIDIUMPEndpointManager.
 type UMPEndpointManager struct {
-	inner *raw.MIDIUMPEndpointManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MIDIUMPEndpointManager].
-func (x *UMPEndpointManager) Unwrap() *raw.MIDIUMPEndpointManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UMPEndpointManager) ID() objc.ID { return x.inner.Ptr() }
-
-// UMPEndpointManagerFromID adopts an existing object pointer as a UMPEndpointManager (nil for 0).
+// UMPEndpointManagerFromID adopts an existing Objective-C object as a UMPEndpointManager
+// (nil for 0), retaining it and registering a release finalizer.
 func UMPEndpointManagerFromID(id objc.ID) *UMPEndpointManager {
 	if id == 0 {
 		return nil
 	}
-	return &UMPEndpointManager{inner: raw.MIDIUMPEndpointManagerFromID(id)}
+	x := &UMPEndpointManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewUMPEndpointManager creates a new [UMPEndpointManager].
+// uMPEndpointManagerAdopt wraps an Objective-C object that this code just created as a
+// UMPEndpointManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uMPEndpointManagerAdopt(id objc.ID) *UMPEndpointManager {
+	if id == 0 {
+		return nil
+	}
+	x := &UMPEndpointManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UMPEndpointManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UMPEndpointManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UMPEndpointManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUMPEndpointManager creates a new UMPEndpointManager.
 func NewUMPEndpointManager() *UMPEndpointManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDIUMPEndpointManager")), objc.RegisterName("new"))
-	return &UMPEndpointManager{inner: raw.MIDIUMPEndpointManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MIDIUMPEndpointManager")), objc.RegisterName("new"))
+	return uMPEndpointManagerAdopt(_id)
 }
 
-// @property	UMPEndpoints @brief		A  list of UMP endpoints discovered using UMP endpoint discovery.
+// A  list of UMP endpoints discovered using UMP endpoint discovery.
 //
 // UMPEndpoints returns the collection as a Go slice.
 func (x *UMPEndpointManager) UMPEndpoints() []*UMPEndpoint {
-	arr := x.inner.UMPEndpoints()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *UMPEndpoint {
-		return &UMPEndpoint{inner: raw.MIDIUMPEndpointFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UMPEndpoints"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UMPEndpoint { return UMPEndpointFromID(_id) })
 }
 
 // UMPEndpointManagerable is the interface implemented by [UMPEndpointManager], for mocking and DI.
 type UMPEndpointManagerable interface {
-	Unwrap() *raw.MIDIUMPEndpointManager
+	obj.Object
 	UMPEndpoints() []*UMPEndpoint
 }
 

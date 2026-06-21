@@ -6,36 +6,63 @@ package appkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that displays the system’s color-sampling interface and returns the selected color to your app.
 //
-// ColorSampler wraps [raw.NSColorSampler] with a fluent Go API.
+// ColorSampler is an idiomatic wrapper over the Objective-C class NSColorSampler.
 type ColorSampler struct {
-	inner *raw.NSColorSampler
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSColorSampler].
-func (x *ColorSampler) Unwrap() *raw.NSColorSampler { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ColorSampler) ID() objc.ID { return x.inner.Ptr() }
-
-// ColorSamplerFromID adopts an existing object pointer as a ColorSampler (nil for 0).
+// ColorSamplerFromID adopts an existing Objective-C object as a ColorSampler
+// (nil for 0), retaining it and registering a release finalizer.
 func ColorSamplerFromID(id objc.ID) *ColorSampler {
 	if id == 0 {
 		return nil
 	}
-	return &ColorSampler{inner: raw.NSColorSamplerFromID(id)}
+	x := &ColorSampler{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewColorSampler creates a new [ColorSampler].
+// colorSamplerAdopt wraps an Objective-C object that this code just created as a
+// ColorSampler (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func colorSamplerAdopt(id objc.ID) *ColorSampler {
+	if id == 0 {
+		return nil
+	}
+	x := &ColorSampler{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ColorSampler) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ColorSampler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ColorSampler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewColorSampler creates a new ColorSampler.
 func NewColorSampler() *ColorSampler {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSColorSampler")), objc.RegisterName("new"))
-	return &ColorSampler{inner: raw.NSColorSamplerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSColorSampler")), objc.RegisterName("new"))
+	return colorSamplerAdopt(_id)
 }
 
 // Displays the system color-sampling interface asynchronously and reports the selected color back to your app.
@@ -47,13 +74,12 @@ func (x *ColorSampler) ShowSamplerWithSelectionHandler(ctx context.Context) (*Co
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ShowSamplerWithSelectionHandler(func(_p0 *raw.NSColor) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &Color{inner: _p0}
-		}
+		_o.val = ColorFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showSamplerWithSelectionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -65,7 +91,7 @@ func (x *ColorSampler) ShowSamplerWithSelectionHandler(ctx context.Context) (*Co
 
 // ColorSamplerable is the interface implemented by [ColorSampler], for mocking and DI.
 type ColorSamplerable interface {
-	Unwrap() *raw.NSColorSampler
+	obj.Object
 	ShowSamplerWithSelectionHandler(ctx context.Context) (*Color, error)
 }
 

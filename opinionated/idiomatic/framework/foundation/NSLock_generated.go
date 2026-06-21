@@ -5,91 +5,111 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that coordinates the operation of multiple threads of execution within the same application.
 //
-// Lock wraps [raw.NSLock] with a fluent Go API.
+// Lock is an idiomatic wrapper over the Objective-C class NSLock.
 type Lock struct {
-	inner *raw.NSLock
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSLock].
-func (x *Lock) Unwrap() *raw.NSLock { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Lock) ID() objc.ID { return x.inner.Ptr() }
-
-// LockFromID adopts an existing object pointer as a Lock (nil for 0).
+// LockFromID adopts an existing Objective-C object as a Lock
+// (nil for 0), retaining it and registering a release finalizer.
 func LockFromID(id objc.ID) *Lock {
 	if id == 0 {
 		return nil
 	}
-	return &Lock{inner: raw.NSLockFromID(id)}
+	x := &Lock{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLock creates a new [Lock].
+// lockAdopt wraps an Objective-C object that this code just created as a
+// Lock (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func lockAdopt(id objc.ID) *Lock {
+	if id == 0 {
+		return nil
+	}
+	x := &Lock{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Lock) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Lock) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Lock) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLock creates a new Lock.
 func NewLock() *Lock {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLock")), objc.RegisterName("new"))
-	return &Lock{inner: raw.NSLockFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSLock")), objc.RegisterName("new"))
+	return lockAdopt(_id)
 }
 
 // The name associated with the receiver.
 //
-// WithName sets the name property and returns the receiver for chaining.
-func (x *Lock) WithName(name string) *Lock {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+// WithName sets name and returns the receiver so calls can be chained.
+func (x *Lock) WithName(name StringProvider) *Lock {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Lock) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Lock {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *Lock) WithScriptingProperties(scriptingProperties obj.Object) *Lock {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Attempts to acquire a lock and immediately returns a Boolean value that indicates whether the attempt was successful.
-//
-// TryLock calls the underlying TryLock.
 func (x *Lock) TryLock() bool {
-	return x.inner.TryLock()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tryLock"))
+	return _r
 }
 
 // Attempts to acquire a lock before a given time and returns a Boolean value indicating whether the attempt was successful.
-//
-// LockBeforeDate calls the underlying LockBeforeDate.
-func (x *Lock) LockBeforeDate(limit *raw.NSDate) bool {
-	return x.inner.LockBeforeDate(limit)
+func (x *Lock) LockBeforeDate(limit *Date) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("lockBeforeDate:"), objref.IDOf(limit))
+	return _r
 }
 
-// Name calls the underlying Name.
-func (x *Lock) Name() *String {
-	_r := x.inner.Name()
-	if _r == nil {
-		return nil
+func (x *Lock) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
 func (x *Lock) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
-
-func (x *Lock) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Lockable is the interface implemented by [Lock], for mocking and DI.
 type Lockable interface {
-	Unwrap() *raw.NSLock
-	WithName(name string) *Lock
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Lock
+	obj.Object
+	WithName(name StringProvider) *Lock
+	WithScriptingProperties(scriptingProperties obj.Object) *Lock
 	TryLock() bool
-	LockBeforeDate(limit *raw.NSDate) bool
-	Name() *String
+	LockBeforeDate(limit *Date) bool
+	Name() string
 	SetName(name string)
 }
 

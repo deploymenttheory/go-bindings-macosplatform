@@ -9,103 +9,103 @@ import (
 )
 
 // A constant that describes the content direction of the chart.
-type AXChartDescriptorContentDirection int64
+type ChartDescriptorContentDirection int64
 
 const (
-	AXChartContentDirectionLeftToRight            AXChartDescriptorContentDirection = 0
-	AXChartContentDirectionRightToLeft            AXChartDescriptorContentDirection = 1
-	AXChartContentDirectionTopToBottom            AXChartDescriptorContentDirection = 2
-	AXChartContentDirectionBottomToTop            AXChartDescriptorContentDirection = 3
-	AXChartContentDirectionRadialClockwise        AXChartDescriptorContentDirection = 4
-	AXChartContentDirectionRadialCounterClockwise AXChartDescriptorContentDirection = 5
+	ChartContentDirectionLeftToRight            ChartDescriptorContentDirection = 0
+	ChartContentDirectionRightToLeft            ChartDescriptorContentDirection = 1
+	ChartContentDirectionTopToBottom            ChartDescriptorContentDirection = 2
+	ChartContentDirectionBottomToTop            ChartDescriptorContentDirection = 3
+	ChartContentDirectionRadialClockwise        ChartDescriptorContentDirection = 4
+	ChartContentDirectionRadialCounterClockwise ChartDescriptorContentDirection = 5
 )
 
-func (e AXChartDescriptorContentDirection) String() string {
+func (e ChartDescriptorContentDirection) String() string {
 	switch e {
-	case AXChartContentDirectionLeftToRight:
-		return "AXChartContentDirectionLeftToRight"
-	case AXChartContentDirectionRightToLeft:
-		return "AXChartContentDirectionRightToLeft"
-	case AXChartContentDirectionTopToBottom:
-		return "AXChartContentDirectionTopToBottom"
-	case AXChartContentDirectionBottomToTop:
-		return "AXChartContentDirectionBottomToTop"
-	case AXChartContentDirectionRadialClockwise:
-		return "AXChartContentDirectionRadialClockwise"
-	case AXChartContentDirectionRadialCounterClockwise:
-		return "AXChartContentDirectionRadialCounterClockwise"
+	case ChartContentDirectionLeftToRight:
+		return "ChartContentDirectionLeftToRight"
+	case ChartContentDirectionRightToLeft:
+		return "ChartContentDirectionRightToLeft"
+	case ChartContentDirectionTopToBottom:
+		return "ChartContentDirectionTopToBottom"
+	case ChartContentDirectionBottomToTop:
+		return "ChartContentDirectionBottomToTop"
+	case ChartContentDirectionRadialClockwise:
+		return "ChartContentDirectionRadialClockwise"
+	case ChartContentDirectionRadialCounterClockwise:
+		return "ChartContentDirectionRadialCounterClockwise"
 	default:
-		return fmt.Sprintf("AXChartDescriptorContentDirection(%d)", int64(e))
+		return fmt.Sprintf("ChartDescriptorContentDirection(%d)", int64(e))
 	}
 }
 
 // Objects that control the timing of content output.
-type AXCustomContentImportance uint64
+type CustomContentImportance uint64
 
 const (
-	AXCustomContentImportanceDefault AXCustomContentImportance = 0
-	AXCustomContentImportanceHigh    AXCustomContentImportance = 1
+	CustomContentImportanceDefault CustomContentImportance = 0
+	CustomContentImportanceHigh    CustomContentImportance = 1
 )
 
-func (e AXCustomContentImportance) String() string {
+func (e CustomContentImportance) String() string {
 	switch e {
-	case AXCustomContentImportanceDefault:
-		return "AXCustomContentImportanceDefault"
-	case AXCustomContentImportanceHigh:
-		return "AXCustomContentImportanceHigh"
+	case CustomContentImportanceDefault:
+		return "CustomContentImportanceDefault"
+	case CustomContentImportanceHigh:
+		return "CustomContentImportanceHigh"
 	default:
-		return fmt.Sprintf("AXCustomContentImportance(%d)", int64(e))
+		return fmt.Sprintf("CustomContentImportance(%d)", int64(e))
 	}
 }
 
 // Constants that describe the scale of a numeric axis.
-type AXNumericDataAxisDescriptorScale int64
+type NumericDataAxisDescriptorScale int64
 
 const (
-	AXScaleTypeLinear AXNumericDataAxisDescriptorScale = 0
-	AXScaleTypeLog10  AXNumericDataAxisDescriptorScale = 1
-	AXScaleTypeLn     AXNumericDataAxisDescriptorScale = 2
+	ScaleTypeLinear NumericDataAxisDescriptorScale = 0
+	ScaleTypeLog10  NumericDataAxisDescriptorScale = 1
+	ScaleTypeLn     NumericDataAxisDescriptorScale = 2
 )
 
-func (e AXNumericDataAxisDescriptorScale) String() string {
+func (e NumericDataAxisDescriptorScale) String() string {
 	switch e {
-	case AXScaleTypeLinear:
-		return "AXScaleTypeLinear"
-	case AXScaleTypeLog10:
-		return "AXScaleTypeLog10"
-	case AXScaleTypeLn:
-		return "AXScaleTypeLn"
+	case ScaleTypeLinear:
+		return "ScaleTypeLinear"
+	case ScaleTypeLog10:
+		return "ScaleTypeLog10"
+	case ScaleTypeLn:
+		return "ScaleTypeLn"
 	default:
-		return fmt.Sprintf("AXNumericDataAxisDescriptorScale(%d)", int64(e))
+		return fmt.Sprintf("NumericDataAxisDescriptorScale(%d)", int64(e))
 	}
 }
 
-type AXSettingsFeature int64
+type SettingsFeature int64
 
 const (
-	AXSettingsFeaturePersonalVoiceAllowAppsToRequestToUse AXSettingsFeature = 1
-	AXSettingsFeatureAllowAppsToAddAudioToCalls           AXSettingsFeature = 2
-	AXSettingsFeatureAssistiveTouch                       AXSettingsFeature = 3
-	AXSettingsFeatureAssistiveTouchDevices                AXSettingsFeature = 4
-	AXSettingsFeatureDwellControl                         AXSettingsFeature = 5
-	AXSettingsFeatureCaptionStyles                        AXSettingsFeature = 6
+	SettingsFeaturePersonalVoiceAllowAppsToRequestToUse SettingsFeature = 1
+	SettingsFeatureAllowAppsToAddAudioToCalls           SettingsFeature = 2
+	SettingsFeatureAssistiveTouch                       SettingsFeature = 3
+	SettingsFeatureAssistiveTouchDevices                SettingsFeature = 4
+	SettingsFeatureDwellControl                         SettingsFeature = 5
+	SettingsFeatureCaptionStyles                        SettingsFeature = 6
 )
 
-func (e AXSettingsFeature) String() string {
+func (e SettingsFeature) String() string {
 	switch e {
-	case AXSettingsFeaturePersonalVoiceAllowAppsToRequestToUse:
-		return "AXSettingsFeaturePersonalVoiceAllowAppsToRequestToUse"
-	case AXSettingsFeatureAllowAppsToAddAudioToCalls:
-		return "AXSettingsFeatureAllowAppsToAddAudioToCalls"
-	case AXSettingsFeatureAssistiveTouch:
-		return "AXSettingsFeatureAssistiveTouch"
-	case AXSettingsFeatureAssistiveTouchDevices:
-		return "AXSettingsFeatureAssistiveTouchDevices"
-	case AXSettingsFeatureDwellControl:
-		return "AXSettingsFeatureDwellControl"
-	case AXSettingsFeatureCaptionStyles:
-		return "AXSettingsFeatureCaptionStyles"
+	case SettingsFeaturePersonalVoiceAllowAppsToRequestToUse:
+		return "SettingsFeaturePersonalVoiceAllowAppsToRequestToUse"
+	case SettingsFeatureAllowAppsToAddAudioToCalls:
+		return "SettingsFeatureAllowAppsToAddAudioToCalls"
+	case SettingsFeatureAssistiveTouch:
+		return "SettingsFeatureAssistiveTouch"
+	case SettingsFeatureAssistiveTouchDevices:
+		return "SettingsFeatureAssistiveTouchDevices"
+	case SettingsFeatureDwellControl:
+		return "SettingsFeatureDwellControl"
+	case SettingsFeatureCaptionStyles:
+		return "SettingsFeatureCaptionStyles"
 	default:
-		return fmt.Sprintf("AXSettingsFeature(%d)", int64(e))
+		return fmt.Sprintf("SettingsFeature(%d)", int64(e))
 	}
 }

@@ -5,43 +5,66 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent wraps [raw.MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent] with a fluent Go API.
+// MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent is an idiomatic wrapper over the Objective-C class MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent.
 type MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent struct {
-	inner *raw.MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent].
-func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent (nil for 0).
+// MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventFromID adopts an existing Objective-C object as a MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent{inner: raw.MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventFromID(id)}
+	x := &MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent creates a new [MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent].
+// mTRPumpConfigurationAndControlClusterSupplyVoltageLowEventAdopt wraps an Objective-C object that this code just created as a
+// MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRPumpConfigurationAndControlClusterSupplyVoltageLowEventAdopt(id objc.ID) *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent creates a new MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent.
 func NewMTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent() *MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent")), objc.RegisterName("new"))
-	return &MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent{inner: raw.MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent")), objc.RegisterName("new"))
+	return mTRPumpConfigurationAndControlClusterSupplyVoltageLowEventAdopt(_id)
 }
 
 // MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent], for mocking and DI.
 type MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventable interface {
-	Unwrap() *raw.MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent
+	obj.Object
 }
 
 var _ MTRPumpConfigurationAndControlClusterSupplyVoltageLowEventable = (*MTRPumpConfigurationAndControlClusterSupplyVoltageLowEvent)(nil)

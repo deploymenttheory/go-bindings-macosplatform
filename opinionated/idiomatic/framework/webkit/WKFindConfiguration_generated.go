@@ -5,95 +5,119 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The configuration parameters to use when searching the contents of the web view.
 //
-// WKFindConfiguration wraps [raw.WKFindConfiguration] with a fluent Go API.
+// WKFindConfiguration is an idiomatic wrapper over the Objective-C class WKFindConfiguration.
 type WKFindConfiguration struct {
-	inner *raw.WKFindConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKFindConfiguration].
-func (x *WKFindConfiguration) Unwrap() *raw.WKFindConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKFindConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// WKFindConfigurationFromID adopts an existing object pointer as a WKFindConfiguration (nil for 0).
+// WKFindConfigurationFromID adopts an existing Objective-C object as a WKFindConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func WKFindConfigurationFromID(id objc.ID) *WKFindConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &WKFindConfiguration{inner: raw.WKFindConfigurationFromID(id)}
+	x := &WKFindConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWKFindConfiguration creates a new [WKFindConfiguration].
+// wKFindConfigurationAdopt wraps an Objective-C object that this code just created as a
+// WKFindConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKFindConfigurationAdopt(id objc.ID) *WKFindConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &WKFindConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WKFindConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKFindConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKFindConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWKFindConfiguration creates a new WKFindConfiguration.
 func NewWKFindConfiguration() *WKFindConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKFindConfiguration")), objc.RegisterName("new"))
-	return &WKFindConfiguration{inner: raw.WKFindConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WKFindConfiguration")), objc.RegisterName("new"))
+	return wKFindConfigurationAdopt(_id)
 }
 
 // A Boolean value that indicates the search direction, relative to the current selection.
 //
-// WithBackwards sets the backwards property and returns the receiver for chaining.
+// WithBackwards sets backwards and returns the receiver so calls can be chained.
 func (x *WKFindConfiguration) WithBackwards(backwards bool) *WKFindConfiguration {
-	x.inner.SetBackwards(backwards)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackwards:"), backwards)
 	return x
 }
 
 // A Boolean value that indicates whether to consider case when matching the search string.
 //
-// WithCaseSensitive sets the caseSensitive property and returns the receiver for chaining.
+// WithCaseSensitive sets caseSensitive and returns the receiver so calls can be chained.
 func (x *WKFindConfiguration) WithCaseSensitive(caseSensitive bool) *WKFindConfiguration {
-	x.inner.SetCaseSensitive(caseSensitive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseSensitive:"), caseSensitive)
 	return x
 }
 
 // A Boolean value that indicates whether the search wraps around to the other side of the page.
 //
-// WithWraps sets the wraps property and returns the receiver for chaining.
+// WithWraps sets wraps and returns the receiver so calls can be chained.
 func (x *WKFindConfiguration) WithWraps(wraps bool) *WKFindConfiguration {
-	x.inner.SetWraps(wraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
-// Backwards calls the underlying Backwards.
 func (x *WKFindConfiguration) Backwards() bool {
-	return x.inner.Backwards()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("backwards"))
+	return _r
 }
 
-// SetBackwards calls the underlying SetBackwards.
 func (x *WKFindConfiguration) SetBackwards(backwards bool) {
-	x.inner.SetBackwards(backwards)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackwards:"), backwards)
 }
 
-// CaseSensitive calls the underlying CaseSensitive.
 func (x *WKFindConfiguration) CaseSensitive() bool {
-	return x.inner.CaseSensitive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("caseSensitive"))
+	return _r
 }
 
-// SetCaseSensitive calls the underlying SetCaseSensitive.
 func (x *WKFindConfiguration) SetCaseSensitive(caseSensitive bool) {
-	x.inner.SetCaseSensitive(caseSensitive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseSensitive:"), caseSensitive)
 }
 
-// Wraps calls the underlying Wraps.
 func (x *WKFindConfiguration) Wraps() bool {
-	return x.inner.Wraps()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wraps"))
+	return _r
 }
 
-// SetWraps calls the underlying SetWraps.
 func (x *WKFindConfiguration) SetWraps(wraps bool) {
-	x.inner.SetWraps(wraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 }
 
 // WKFindConfigurationable is the interface implemented by [WKFindConfiguration], for mocking and DI.
 type WKFindConfigurationable interface {
-	Unwrap() *raw.WKFindConfiguration
+	obj.Object
 	WithBackwards(backwards bool) *WKFindConfiguration
 	WithCaseSensitive(caseSensitive bool) *WKFindConfiguration
 	WithWraps(wraps bool) *WKFindConfiguration

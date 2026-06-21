@@ -5,762 +5,836 @@
 package carboncore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// CSBackupSetItemExcluded wraps [raw.CSBackupSetItemExcluded], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CSBackupSetItemExcluded(item objc.ID, exclude uint8, excludeByPath uint8) error {
-	if _err := purego.NewOSStatus(raw.CSBackupSetItemExcluded(purego.CFRef(item), exclude, excludeByPath)).Err(); _err != nil {
+var _fnCSBackupSetItemExcluded func(objc.ID, uint8, uint8) int32
+
+// CSBackupSetItemExcluded reports an error if the CarbonCore framework function CSBackupSetItemExcluded fails.
+func CSBackupSetItemExcluded(item obj.Object, exclude uint8, excludeByPath uint8) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCSBackupSetItemExcluded == nil {
+		ebipurego.RegisterLibFunc(&_fnCSBackupSetItemExcluded, _lib, "CSBackupSetItemExcluded")
+	}
+	_rc := _fnCSBackupSetItemExcluded(objref.IDOf(item), exclude, excludeByPath)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// CountUnicodeMappings wraps [raw.CountUnicodeMappings], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CountUnicodeMappings(iFilter uint, iFindMapping *raw.UnicodeMapping, oActualCount *uint) error {
-	if _err := purego.NewOSStatus(raw.CountUnicodeMappings(iFilter, iFindMapping, oActualCount)).Err(); _err != nil {
+var _fnDisposeDebugComponent func(int) int32
+
+// DisposeDebugComponent reports an error if the CarbonCore framework function DisposeDebugComponent fails.
+func DisposeDebugComponent(componentSignature int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnDisposeDebugComponent == nil {
+		ebipurego.RegisterLibFunc(&_fnDisposeDebugComponent, _lib, "DisposeDebugComponent")
+	}
+	_rc := _fnDisposeDebugComponent(componentSignature)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// DisposeDebugComponent wraps [raw.DisposeDebugComponent], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func DisposeDebugComponent(componentSignature uint) error {
-	if _err := purego.NewOSStatus(raw.DisposeDebugComponent(componentSignature)).Err(); _err != nil {
+var _fnFNNotifyAll func(int, int) int32
+
+// FNNotifyAll reports an error if the CarbonCore framework function FNNotifyAll fails.
+func FNNotifyAll(message int, flags int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFNNotifyAll == nil {
+		ebipurego.RegisterLibFunc(&_fnFNNotifyAll, _lib, "FNNotifyAll")
+	}
+	_rc := _fnFNNotifyAll(message, flags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// FNNotify wraps [raw.FNNotify], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FNNotify(ref *raw.FSRef, message uint, flags uint) error {
-	if _err := purego.NewOSStatus(raw.FNNotify(ref, message, flags)).Err(); _err != nil {
+var _fnFNUnsubscribe func(objc.ID) int32
+
+// FNUnsubscribe reports an error if the CarbonCore framework function FNUnsubscribe fails.
+func FNUnsubscribe(subscription obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFNUnsubscribe == nil {
+		ebipurego.RegisterLibFunc(&_fnFNUnsubscribe, _lib, "FNUnsubscribe")
+	}
+	_rc := _fnFNUnsubscribe(objref.IDOf(subscription))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// FNNotifyAll wraps [raw.FNNotifyAll], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FNNotifyAll(message uint, flags uint) error {
-	if _err := purego.NewOSStatus(raw.FNNotifyAll(message, flags)).Err(); _err != nil {
+var _fnFSCancelVolumeOperation func(objc.ID) int32
+
+// FSCancelVolumeOperation reports an error if the CarbonCore framework function FSCancelVolumeOperation fails.
+func FSCancelVolumeOperation(volumeOp obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSCancelVolumeOperation == nil {
+		ebipurego.RegisterLibFunc(&_fnFSCancelVolumeOperation, _lib, "FSCancelVolumeOperation")
+	}
+	_rc := _fnFSCancelVolumeOperation(objref.IDOf(volumeOp))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// FNNotifyByPath wraps [raw.FNNotifyByPath], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FNNotifyByPath(path *uint8, message uint, flags uint) error {
-	if _err := purego.NewOSStatus(raw.FNNotifyByPath(path, message, flags)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnFSCopyDiskIDForVolume func(int16, unsafe.Pointer) int32
 
-// FSCopyDiskIDForVolume wraps [raw.FSCopyDiskIDForVolume], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSCopyDiskIDForVolume(vRefNum int16) (objc.ID, error) {
+// FSCopyDiskIDForVolume reports an error if the CarbonCore framework function FSCopyDiskIDForVolume fails.
+func FSCopyDiskIDForVolume(vRefNum int16) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSCopyDiskIDForVolume == nil {
+		ebipurego.RegisterLibFunc(&_fnFSCopyDiskIDForVolume, _lib, "FSCopyDiskIDForVolume")
+	}
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.FSCopyDiskIDForVolume(vRefNum, unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnFSCopyDiskIDForVolume(vRefNum, unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// FSCopyObjectSync wraps [raw.FSCopyObjectSync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSCopyObjectSync(source *raw.FSRef, destDir *raw.FSRef, destName objc.ID, target *raw.FSRef, options uint) error {
-	if _err := purego.NewOSStatus(raw.FSCopyObjectSync(source, destDir, purego.CFRef(destName), target, options)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnFSCopyURLForVolume func(int16, unsafe.Pointer) int32
 
-// FSCopyURLForVolume wraps [raw.FSCopyURLForVolume], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSCopyURLForVolume(vRefNum int16) (objc.ID, error) {
+// FSCopyURLForVolume reports an error if the CarbonCore framework function FSCopyURLForVolume fails.
+func FSCopyURLForVolume(vRefNum int16) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSCopyURLForVolume == nil {
+		ebipurego.RegisterLibFunc(&_fnFSCopyURLForVolume, _lib, "FSCopyURLForVolume")
+	}
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.FSCopyURLForVolume(vRefNum, unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnFSCopyURLForVolume(vRefNum, unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// FSCreateFileAndOpenForkUnicode wraps [raw.FSCreateFileAndOpenForkUnicode], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSCreateFileAndOpenForkUnicode(parentRef *raw.FSRef, nameLength uint, name *uint16, whichInfo uint, catalogInfo *raw.FSCatalogInfo, forkNameLength uint, forkName *uint16, permissions int8, forkRefNum *int, newRef *raw.FSRef) error {
-	if _err := purego.NewOSStatus(raw.FSCreateFileAndOpenForkUnicode(parentRef, nameLength, name, whichInfo, catalogInfo, forkNameLength, forkName, permissions, forkRefNum, newRef)).Err(); _err != nil {
+var _fnFSDisposeVolumeOperation func(objc.ID) int32
+
+// FSDisposeVolumeOperation reports an error if the CarbonCore framework function FSDisposeVolumeOperation fails.
+func FSDisposeVolumeOperation(volumeOp obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSDisposeVolumeOperation == nil {
+		ebipurego.RegisterLibFunc(&_fnFSDisposeVolumeOperation, _lib, "FSDisposeVolumeOperation")
+	}
+	_rc := _fnFSDisposeVolumeOperation(objref.IDOf(volumeOp))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// FSEjectVolumeSync wraps [raw.FSEjectVolumeSync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSEjectVolumeSync(vRefNum int16, flags uint, dissenter *int) error {
-	if _err := purego.NewOSStatus(raw.FSEjectVolumeSync(vRefNum, flags, dissenter)).Err(); _err != nil {
+var _fnFSFileOperationCancel func(objc.ID) int32
+
+// FSFileOperationCancel reports an error if the CarbonCore framework function FSFileOperationCancel fails.
+func FSFileOperationCancel(fileOp obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSFileOperationCancel == nil {
+		ebipurego.RegisterLibFunc(&_fnFSFileOperationCancel, _lib, "FSFileOperationCancel")
+	}
+	_rc := _fnFSFileOperationCancel(objref.IDOf(fileOp))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// FSFlushVolume wraps [raw.FSFlushVolume], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnFSFileOperationScheduleWithRunLoop func(objc.ID, objc.ID, objc.ID) int32
+
+// FSFileOperationScheduleWithRunLoop reports an error if the CarbonCore framework function FSFileOperationScheduleWithRunLoop fails.
+func FSFileOperationScheduleWithRunLoop(fileOp obj.Object, runLoop obj.Object, runLoopMode obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSFileOperationScheduleWithRunLoop == nil {
+		ebipurego.RegisterLibFunc(&_fnFSFileOperationScheduleWithRunLoop, _lib, "FSFileOperationScheduleWithRunLoop")
+	}
+	_rc := _fnFSFileOperationScheduleWithRunLoop(objref.IDOf(fileOp), objref.IDOf(runLoop), objref.IDOf(runLoopMode))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnFSFileOperationUnscheduleFromRunLoop func(objc.ID, objc.ID, objc.ID) int32
+
+// FSFileOperationUnscheduleFromRunLoop reports an error if the CarbonCore framework function FSFileOperationUnscheduleFromRunLoop fails.
+func FSFileOperationUnscheduleFromRunLoop(fileOp obj.Object, runLoop obj.Object, runLoopMode obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSFileOperationUnscheduleFromRunLoop == nil {
+		ebipurego.RegisterLibFunc(&_fnFSFileOperationUnscheduleFromRunLoop, _lib, "FSFileOperationUnscheduleFromRunLoop")
+	}
+	_rc := _fnFSFileOperationUnscheduleFromRunLoop(objref.IDOf(fileOp), objref.IDOf(runLoop), objref.IDOf(runLoopMode))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnFSFileSecuritySetGroup func(objc.ID, int) int32
+
+// FSFileSecuritySetGroup reports an error if the CarbonCore framework function FSFileSecuritySetGroup fails.
+func FSFileSecuritySetGroup(fileSec obj.Object, group int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSFileSecuritySetGroup == nil {
+		ebipurego.RegisterLibFunc(&_fnFSFileSecuritySetGroup, _lib, "FSFileSecuritySetGroup")
+	}
+	_rc := _fnFSFileSecuritySetGroup(objref.IDOf(fileSec), group)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnFSFileSecuritySetMode func(objc.ID, uint16) int32
+
+// FSFileSecuritySetMode reports an error if the CarbonCore framework function FSFileSecuritySetMode fails.
+func FSFileSecuritySetMode(fileSec obj.Object, mode uint16) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSFileSecuritySetMode == nil {
+		ebipurego.RegisterLibFunc(&_fnFSFileSecuritySetMode, _lib, "FSFileSecuritySetMode")
+	}
+	_rc := _fnFSFileSecuritySetMode(objref.IDOf(fileSec), mode)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnFSFileSecuritySetOwner func(objc.ID, int) int32
+
+// FSFileSecuritySetOwner reports an error if the CarbonCore framework function FSFileSecuritySetOwner fails.
+func FSFileSecuritySetOwner(fileSec obj.Object, owner int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSFileSecuritySetOwner == nil {
+		ebipurego.RegisterLibFunc(&_fnFSFileSecuritySetOwner, _lib, "FSFileSecuritySetOwner")
+	}
+	_rc := _fnFSFileSecuritySetOwner(objref.IDOf(fileSec), owner)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnFSFlushVolume func(int16) int32
+
+// FSFlushVolume reports an error if the CarbonCore framework function FSFlushVolume fails.
 func FSFlushVolume(vRefNum int16) error {
-	if _err := purego.NewOSStatus(raw.FSFlushVolume(vRefNum)).Err(); _err != nil {
-		return _err
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSFlushVolume == nil {
+		ebipurego.RegisterLibFunc(&_fnFSFlushVolume, _lib, "FSFlushVolume")
 	}
-	return nil
-}
-
-// FSGetTemporaryDirectoryForReplaceObject wraps [raw.FSGetTemporaryDirectoryForReplaceObject], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSGetTemporaryDirectoryForReplaceObject(originalObject *raw.FSRef, temporaryDirectory *raw.FSRef, flags uint) error {
-	if _err := purego.NewOSStatus(raw.FSGetTemporaryDirectoryForReplaceObject(originalObject, temporaryDirectory, flags)).Err(); _err != nil {
+	_rc := _fnFSFlushVolume(vRefNum)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// FSGetVolumeForDiskID wraps [raw.FSGetVolumeForDiskID], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSGetVolumeForDiskID(diskID objc.ID, vRefNum *int16) error {
-	if _err := purego.NewOSStatus(raw.FSGetVolumeForDiskID(purego.CFRef(diskID), vRefNum)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnFSPathCopyObjectSync func(string, string, objc.ID, string, int) int32
 
-// FSGetVolumeMountInfo wraps [raw.FSGetVolumeMountInfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSGetVolumeMountInfo(volume int16, buffer *uint8, bufferSize uint, actualSize *uint) error {
-	if _err := purego.NewOSStatus(raw.FSGetVolumeMountInfo(volume, buffer, bufferSize, actualSize)).Err(); _err != nil {
-		return _err
+// FSPathCopyObjectSync reports an error if the CarbonCore framework function FSPathCopyObjectSync fails.
+func FSPathCopyObjectSync(sourcePath string, destDirPath string, destName obj.Object, targetPath string, options int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSPathCopyObjectSync == nil {
+		ebipurego.RegisterLibFunc(&_fnFSPathCopyObjectSync, _lib, "FSPathCopyObjectSync")
 	}
-	return nil
-}
-
-// FSGetVolumeMountInfoSize wraps [raw.FSGetVolumeMountInfoSize], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSGetVolumeMountInfoSize(volume int16, size *uint) error {
-	if _err := purego.NewOSStatus(raw.FSGetVolumeMountInfoSize(volume, size)).Err(); _err != nil {
+	_rc := _fnFSPathCopyObjectSync(sourcePath, destDirPath, objref.IDOf(destName), targetPath, options)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// FSGetVolumeParms wraps [raw.FSGetVolumeParms], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSGetVolumeParms(volume int16, buffer *raw.GetVolParmsInfoBuffer, bufferSize uint) error {
-	if _err := purego.NewOSStatus(raw.FSGetVolumeParms(volume, buffer, bufferSize)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnFSPathGetTemporaryDirectoryForReplaceObject func(string, string, int, int) int32
 
-// FSLockRange wraps [raw.FSLockRange], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSLockRange(forkRefNum int, positionMode uint16, positionOffset int64, requestCount uint64, rangeStart *uint64) error {
-	if _err := purego.NewOSStatus(raw.FSLockRange(forkRefNum, positionMode, positionOffset, requestCount, rangeStart)).Err(); _err != nil {
-		return _err
+// FSPathGetTemporaryDirectoryForReplaceObject reports an error if the CarbonCore framework function FSPathGetTemporaryDirectoryForReplaceObject fails.
+func FSPathGetTemporaryDirectoryForReplaceObject(originalObjectPath string, temporaryDirectoryPath string, maxPathSize int, flags int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSPathGetTemporaryDirectoryForReplaceObject == nil {
+		ebipurego.RegisterLibFunc(&_fnFSPathGetTemporaryDirectoryForReplaceObject, _lib, "FSPathGetTemporaryDirectoryForReplaceObject")
 	}
-	return nil
-}
-
-// FSMountLocalVolumeSync wraps [raw.FSMountLocalVolumeSync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSMountLocalVolumeSync(diskID objc.ID, mountDir objc.ID, mountedVolumeRefNum *int16, flags uint) error {
-	if _err := purego.NewOSStatus(raw.FSMountLocalVolumeSync(purego.CFRef(diskID), purego.CFRef(mountDir), mountedVolumeRefNum, flags)).Err(); _err != nil {
+	_rc := _fnFSPathGetTemporaryDirectoryForReplaceObject(originalObjectPath, temporaryDirectoryPath, maxPathSize, flags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// FSMountServerVolumeSync wraps [raw.FSMountServerVolumeSync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSMountServerVolumeSync(url objc.ID, mountDir objc.ID, user objc.ID, password objc.ID, mountedVolumeRefNum *int16, flags uint) error {
-	if _err := purego.NewOSStatus(raw.FSMountServerVolumeSync(purego.CFRef(url), purego.CFRef(mountDir), purego.CFRef(user), purego.CFRef(password), mountedVolumeRefNum, flags)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnFSPathMoveObjectSync func(string, string, objc.ID, string, int) int32
 
-// FSMoveObjectSync wraps [raw.FSMoveObjectSync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSMoveObjectSync(source *raw.FSRef, destDir *raw.FSRef, destName objc.ID, target *raw.FSRef, options uint) error {
-	if _err := purego.NewOSStatus(raw.FSMoveObjectSync(source, destDir, purego.CFRef(destName), target, options)).Err(); _err != nil {
-		return _err
+// FSPathMoveObjectSync reports an error if the CarbonCore framework function FSPathMoveObjectSync fails.
+func FSPathMoveObjectSync(sourcePath string, destDirPath string, destName obj.Object, targetPath string, options int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSPathMoveObjectSync == nil {
+		ebipurego.RegisterLibFunc(&_fnFSPathMoveObjectSync, _lib, "FSPathMoveObjectSync")
 	}
-	return nil
-}
-
-// FSMoveObjectToTrashSync wraps [raw.FSMoveObjectToTrashSync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSMoveObjectToTrashSync(source *raw.FSRef, target *raw.FSRef, options uint) error {
-	if _err := purego.NewOSStatus(raw.FSMoveObjectToTrashSync(source, target, options)).Err(); _err != nil {
+	_rc := _fnFSPathMoveObjectSync(sourcePath, destDirPath, objref.IDOf(destName), targetPath, options)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// FSNewAliasFromPath wraps [raw.FSNewAliasFromPath], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSNewAliasFromPath(fromFilePath string, targetPath string, flags uint, inAlias ***raw.AliasRecord, isDirectory *uint8) error {
-	if _err := purego.NewOSStatus(raw.FSNewAliasFromPath(fromFilePath, targetPath, flags, inAlias, isDirectory)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnFSPathMoveObjectToTrashSync func(string, string, int) int32
 
-// FSPathCopyObjectSync wraps [raw.FSPathCopyObjectSync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSPathCopyObjectSync(sourcePath string, destDirPath string, destName objc.ID, targetPath string, options uint) error {
-	if _err := purego.NewOSStatus(raw.FSPathCopyObjectSync(sourcePath, destDirPath, purego.CFRef(destName), targetPath, options)).Err(); _err != nil {
-		return _err
+// FSPathMoveObjectToTrashSync reports an error if the CarbonCore framework function FSPathMoveObjectToTrashSync fails.
+func FSPathMoveObjectToTrashSync(sourcePath string, targetPath string, options int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSPathMoveObjectToTrashSync == nil {
+		ebipurego.RegisterLibFunc(&_fnFSPathMoveObjectToTrashSync, _lib, "FSPathMoveObjectToTrashSync")
 	}
-	return nil
-}
-
-// FSPathGetTemporaryDirectoryForReplaceObject wraps [raw.FSPathGetTemporaryDirectoryForReplaceObject], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSPathGetTemporaryDirectoryForReplaceObject(originalObjectPath string, temporaryDirectoryPath string, maxPathSize uint, flags uint) error {
-	if _err := purego.NewOSStatus(raw.FSPathGetTemporaryDirectoryForReplaceObject(originalObjectPath, temporaryDirectoryPath, maxPathSize, flags)).Err(); _err != nil {
+	_rc := _fnFSPathMoveObjectToTrashSync(sourcePath, targetPath, options)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// FSPathMakeRef wraps [raw.FSPathMakeRef], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSPathMakeRef(path *uint8, ref *raw.FSRef, isDirectory *uint8) error {
-	if _err := purego.NewOSStatus(raw.FSPathMakeRef(path, ref, isDirectory)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnFSPathReplaceObject func(string, string, objc.ID, objc.ID, string, int) int32
 
-// FSPathMakeRefWithOptions wraps [raw.FSPathMakeRefWithOptions], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSPathMakeRefWithOptions(path *uint8, options uint, ref *raw.FSRef, isDirectory *uint8) error {
-	if _err := purego.NewOSStatus(raw.FSPathMakeRefWithOptions(path, options, ref, isDirectory)).Err(); _err != nil {
-		return _err
+// FSPathReplaceObject reports an error if the CarbonCore framework function FSPathReplaceObject fails.
+func FSPathReplaceObject(originalObjectPath string, replacementObjectPath string, newName obj.Object, temporaryName obj.Object, temporaryDirectoryPath string, flags int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnFSPathReplaceObject == nil {
+		ebipurego.RegisterLibFunc(&_fnFSPathReplaceObject, _lib, "FSPathReplaceObject")
 	}
-	return nil
-}
-
-// FSPathMoveObjectSync wraps [raw.FSPathMoveObjectSync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSPathMoveObjectSync(sourcePath string, destDirPath string, destName objc.ID, targetPath string, options uint) error {
-	if _err := purego.NewOSStatus(raw.FSPathMoveObjectSync(sourcePath, destDirPath, purego.CFRef(destName), targetPath, options)).Err(); _err != nil {
+	_rc := _fnFSPathReplaceObject(originalObjectPath, replacementObjectPath, objref.IDOf(newName), objref.IDOf(temporaryName), temporaryDirectoryPath, flags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// FSPathMoveObjectToTrashSync wraps [raw.FSPathMoveObjectToTrashSync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSPathMoveObjectToTrashSync(sourcePath string, targetPath string, options uint) error {
-	if _err := purego.NewOSStatus(raw.FSPathMoveObjectToTrashSync(sourcePath, targetPath, options)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnLocaleRefGetPartString func(objc.ID, int, int, string) int32
 
-// FSPathReplaceObject wraps [raw.FSPathReplaceObject], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSPathReplaceObject(originalObjectPath string, replacementObjectPath string, newName objc.ID, temporaryName objc.ID, temporaryDirectoryPath string, flags uint) error {
-	if _err := purego.NewOSStatus(raw.FSPathReplaceObject(originalObjectPath, replacementObjectPath, purego.CFRef(newName), purego.CFRef(temporaryName), temporaryDirectoryPath, flags)).Err(); _err != nil {
-		return _err
+// LocaleRefGetPartString reports an error if the CarbonCore framework function LocaleRefGetPartString fails.
+func LocaleRefGetPartString(locale obj.Object, partMask int, maxStringLen int, partString string) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnLocaleRefGetPartString == nil {
+		ebipurego.RegisterLibFunc(&_fnLocaleRefGetPartString, _lib, "LocaleRefGetPartString")
 	}
-	return nil
-}
-
-// FSRefMakePath wraps [raw.FSRefMakePath], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSRefMakePath(ref *raw.FSRef, path *uint8, pathBufferSize uint) error {
-	if _err := purego.NewOSStatus(raw.FSRefMakePath(ref, path, pathBufferSize)).Err(); _err != nil {
+	_rc := _fnLocaleRefGetPartString(objref.IDOf(locale), partMask, maxStringLen, partString)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// FSReplaceObject wraps [raw.FSReplaceObject], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSReplaceObject(originalObject *raw.FSRef, replacementObject *raw.FSRef, newName objc.ID, temporaryName objc.ID, temporaryDirectory *raw.FSRef, flags uint, resultObject *raw.FSRef) error {
-	if _err := purego.NewOSStatus(raw.FSReplaceObject(originalObject, replacementObject, purego.CFRef(newName), purego.CFRef(temporaryName), temporaryDirectory, flags, resultObject)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMPCauseNotification func(objc.ID) int32
 
-// FSResolveNodeID wraps [raw.FSResolveNodeID], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSResolveNodeID(volume int16, nodeID uint, newRef *raw.FSRef) error {
-	if _err := purego.NewOSStatus(raw.FSResolveNodeID(volume, nodeID, newRef)).Err(); _err != nil {
-		return _err
+// MPCauseNotification reports an error if the CarbonCore framework function MPCauseNotification fails.
+func MPCauseNotification(notificationID obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPCauseNotification == nil {
+		ebipurego.RegisterLibFunc(&_fnMPCauseNotification, _lib, "MPCauseNotification")
 	}
-	return nil
-}
-
-// FSUnlockRange wraps [raw.FSUnlockRange], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSUnlockRange(forkRefNum int, positionMode uint16, positionOffset int64, requestCount uint64, rangeStart *uint64) error {
-	if _err := purego.NewOSStatus(raw.FSUnlockRange(forkRefNum, positionMode, positionOffset, requestCount, rangeStart)).Err(); _err != nil {
+	_rc := _fnMPCauseNotification(objref.IDOf(notificationID))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// FSUnmountVolumeSync wraps [raw.FSUnmountVolumeSync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSUnmountVolumeSync(vRefNum int16, flags uint, dissenter *int) error {
-	if _err := purego.NewOSStatus(raw.FSUnmountVolumeSync(vRefNum, flags, dissenter)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMPDeallocateTaskStorageIndex func(int) int32
 
-// FSVolumeMount wraps [raw.FSVolumeMount], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func FSVolumeMount(buffer *uint8, mountedVolume *int16) error {
-	if _err := purego.NewOSStatus(raw.FSVolumeMount(buffer, mountedVolume)).Err(); _err != nil {
-		return _err
+// MPDeallocateTaskStorageIndex reports an error if the CarbonCore framework function MPDeallocateTaskStorageIndex fails.
+func MPDeallocateTaskStorageIndex(taskIndex int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPDeallocateTaskStorageIndex == nil {
+		ebipurego.RegisterLibFunc(&_fnMPDeallocateTaskStorageIndex, _lib, "MPDeallocateTaskStorageIndex")
 	}
-	return nil
-}
-
-// GetDebugComponentInfo wraps [raw.GetDebugComponentInfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func GetDebugComponentInfo(itemIndex uint, componentSignature *uint, componentName *uint8) error {
-	if _err := purego.NewOSStatus(raw.GetDebugComponentInfo(itemIndex, componentSignature, componentName)).Err(); _err != nil {
+	_rc := _fnMPDeallocateTaskStorageIndex(taskIndex)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// GetDebugOptionInfo wraps [raw.GetDebugOptionInfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func GetDebugOptionInfo(itemIndex uint, componentSignature uint, optionSelectorNum *int, optionName *uint8, optionSetting *uint8) error {
-	if _err := purego.NewOSStatus(raw.GetDebugOptionInfo(itemIndex, componentSignature, optionSelectorNum, optionName, optionSetting)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMPDeleteCriticalRegion func(objc.ID) int32
 
-// GetScriptInfoFromTextEncoding wraps [raw.GetScriptInfoFromTextEncoding], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func GetScriptInfoFromTextEncoding(iEncoding uint, oTextScriptID *int16, oTextLanguageID *int16) error {
-	if _err := purego.NewOSStatus(raw.GetScriptInfoFromTextEncoding(iEncoding, oTextScriptID, oTextLanguageID)).Err(); _err != nil {
-		return _err
+// MPDeleteCriticalRegion reports an error if the CarbonCore framework function MPDeleteCriticalRegion fails.
+func MPDeleteCriticalRegion(criticalRegion obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPDeleteCriticalRegion == nil {
+		ebipurego.RegisterLibFunc(&_fnMPDeleteCriticalRegion, _lib, "MPDeleteCriticalRegion")
 	}
-	return nil
-}
-
-// GetTextEncodingFromScriptInfo wraps [raw.GetTextEncodingFromScriptInfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func GetTextEncodingFromScriptInfo(iTextScriptID int16, iTextLanguageID int16, iTextRegionID int16, oEncoding *uint) error {
-	if _err := purego.NewOSStatus(raw.GetTextEncodingFromScriptInfo(iTextScriptID, iTextLanguageID, iTextRegionID, oEncoding)).Err(); _err != nil {
+	_rc := _fnMPDeleteCriticalRegion(objref.IDOf(criticalRegion))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// GetTextEncodingName wraps [raw.GetTextEncodingName], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func GetTextEncodingName(iEncoding uint, iNamePartSelector uint, iPreferredRegion int16, iPreferredEncoding uint, iOutputBufLen uint, oNameLength *uint, oActualRegion *int16, oActualEncoding *uint, oEncodingName *uint8) error {
-	if _err := purego.NewOSStatus(raw.GetTextEncodingName(iEncoding, iNamePartSelector, iPreferredRegion, iPreferredEncoding, iOutputBufLen, oNameLength, oActualRegion, oActualEncoding, oEncodingName)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMPDeleteEvent func(objc.ID) int32
 
-// LocaleOperationCountLocales wraps [raw.LocaleOperationCountLocales], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LocaleOperationCountLocales(opClass uint, localeCount *uint) error {
-	if _err := purego.NewOSStatus(raw.LocaleOperationCountLocales(opClass, localeCount)).Err(); _err != nil {
-		return _err
+// MPDeleteEvent reports an error if the CarbonCore framework function MPDeleteEvent fails.
+func MPDeleteEvent(event obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPDeleteEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnMPDeleteEvent, _lib, "MPDeleteEvent")
 	}
-	return nil
-}
-
-// LocaleOperationCountNames wraps [raw.LocaleOperationCountNames], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LocaleOperationCountNames(opClass uint, nameCount *uint) error {
-	if _err := purego.NewOSStatus(raw.LocaleOperationCountNames(opClass, nameCount)).Err(); _err != nil {
+	_rc := _fnMPDeleteEvent(objref.IDOf(event))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// LocaleOperationGetLocales wraps [raw.LocaleOperationGetLocales], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LocaleOperationGetLocales(opClass uint, maxLocaleCount uint, actualLocaleCount *uint, localeVariantList *raw.LocaleAndVariant) error {
-	if _err := purego.NewOSStatus(raw.LocaleOperationGetLocales(opClass, maxLocaleCount, actualLocaleCount, localeVariantList)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMPDeleteNotification func(objc.ID) int32
 
-// LocaleStringToLangAndRegionCodes wraps [raw.LocaleStringToLangAndRegionCodes], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func LocaleStringToLangAndRegionCodes(localeString string, lang *int16, region *int16) error {
-	if _err := purego.NewOSStatus(raw.LocaleStringToLangAndRegionCodes(localeString, lang, region)).Err(); _err != nil {
-		return _err
+// MPDeleteNotification reports an error if the CarbonCore framework function MPDeleteNotification fails.
+func MPDeleteNotification(notificationID obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPDeleteNotification == nil {
+		ebipurego.RegisterLibFunc(&_fnMPDeleteNotification, _lib, "MPDeleteNotification")
 	}
-	return nil
-}
-
-// MPAllocateTaskStorageIndex wraps [raw.MPAllocateTaskStorageIndex], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MPAllocateTaskStorageIndex(taskIndex *uint) error {
-	if _err := purego.NewOSStatus(raw.MPAllocateTaskStorageIndex(taskIndex)).Err(); _err != nil {
+	_rc := _fnMPDeleteNotification(objref.IDOf(notificationID))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MPDeallocateTaskStorageIndex wraps [raw.MPDeallocateTaskStorageIndex], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MPDeallocateTaskStorageIndex(taskIndex uint) error {
-	if _err := purego.NewOSStatus(raw.MPDeallocateTaskStorageIndex(taskIndex)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMPDeleteQueue func(objc.ID) int32
 
-// NearestMacTextEncodings wraps [raw.NearestMacTextEncodings], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func NearestMacTextEncodings(generalEncoding uint, bestMacEncoding *uint, alternateMacEncoding *uint) error {
-	if _err := purego.NewOSStatus(raw.NearestMacTextEncodings(generalEncoding, bestMacEncoding, alternateMacEncoding)).Err(); _err != nil {
-		return _err
+// MPDeleteQueue reports an error if the CarbonCore framework function MPDeleteQueue fails.
+func MPDeleteQueue(queue obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPDeleteQueue == nil {
+		ebipurego.RegisterLibFunc(&_fnMPDeleteQueue, _lib, "MPDeleteQueue")
 	}
-	return nil
-}
-
-// NewDebugOption wraps [raw.NewDebugOption], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func NewDebugOption(componentSignature uint, optionSelectorNum int, optionName *uint8) error {
-	if _err := purego.NewOSStatus(raw.NewDebugOption(componentSignature, optionSelectorNum, optionName)).Err(); _err != nil {
+	_rc := _fnMPDeleteQueue(objref.IDOf(queue))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// PBCreateFileAndOpenForkUnicodeSync wraps [raw.PBCreateFileAndOpenForkUnicodeSync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func PBCreateFileAndOpenForkUnicodeSync(paramBlock *raw.FSRefForkIOParam) error {
-	if _err := purego.NewOSStatus(raw.PBCreateFileAndOpenForkUnicodeSync(paramBlock)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMPDeleteSemaphore func(objc.ID) int32
 
-// PBFSCopyFileAsync wraps [raw.PBFSCopyFileAsync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func PBFSCopyFileAsync(paramBlock *raw.FSRefParam) error {
-	if _err := purego.NewOSStatus(raw.PBFSCopyFileAsync(paramBlock)).Err(); _err != nil {
-		return _err
+// MPDeleteSemaphore reports an error if the CarbonCore framework function MPDeleteSemaphore fails.
+func MPDeleteSemaphore(semaphore obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPDeleteSemaphore == nil {
+		ebipurego.RegisterLibFunc(&_fnMPDeleteSemaphore, _lib, "MPDeleteSemaphore")
 	}
-	return nil
-}
-
-// PBFSCopyFileSync wraps [raw.PBFSCopyFileSync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func PBFSCopyFileSync(paramBlock *raw.FSRefParam) error {
-	if _err := purego.NewOSStatus(raw.PBFSCopyFileSync(paramBlock)).Err(); _err != nil {
+	_rc := _fnMPDeleteSemaphore(objref.IDOf(semaphore))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// PBFSResolveNodeIDAsync wraps [raw.PBFSResolveNodeIDAsync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func PBFSResolveNodeIDAsync(paramBlock *raw.FSRefParam) error {
-	if _err := purego.NewOSStatus(raw.PBFSResolveNodeIDAsync(paramBlock)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMPDeleteTimer func(objc.ID) int32
 
-// PBFSResolveNodeIDSync wraps [raw.PBFSResolveNodeIDSync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func PBFSResolveNodeIDSync(paramBlock *raw.FSRefParam) error {
-	if _err := purego.NewOSStatus(raw.PBFSResolveNodeIDSync(paramBlock)).Err(); _err != nil {
-		return _err
+// MPDeleteTimer reports an error if the CarbonCore framework function MPDeleteTimer fails.
+func MPDeleteTimer(timerID obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPDeleteTimer == nil {
+		ebipurego.RegisterLibFunc(&_fnMPDeleteTimer, _lib, "MPDeleteTimer")
 	}
-	return nil
-}
-
-// PBFlushVolumeAsync wraps [raw.PBFlushVolumeAsync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func PBFlushVolumeAsync(paramBlock *raw.FSRefParam) error {
-	if _err := purego.NewOSStatus(raw.PBFlushVolumeAsync(paramBlock)).Err(); _err != nil {
+	_rc := _fnMPDeleteTimer(objref.IDOf(timerID))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// PBFlushVolumeSync wraps [raw.PBFlushVolumeSync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func PBFlushVolumeSync(paramBlock *raw.FSRefParam) error {
-	if _err := purego.NewOSStatus(raw.PBFlushVolumeSync(paramBlock)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMPDisposeTaskException func(objc.ID, int) int32
 
-// PBXLockRangeAsync wraps [raw.PBXLockRangeAsync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func PBXLockRangeAsync(paramBlock *raw.FSRangeLockParam) error {
-	if _err := purego.NewOSStatus(raw.PBXLockRangeAsync(paramBlock)).Err(); _err != nil {
-		return _err
+// MPDisposeTaskException reports an error if the CarbonCore framework function MPDisposeTaskException fails.
+func MPDisposeTaskException(task obj.Object, action int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPDisposeTaskException == nil {
+		ebipurego.RegisterLibFunc(&_fnMPDisposeTaskException, _lib, "MPDisposeTaskException")
 	}
-	return nil
-}
-
-// PBXLockRangeSync wraps [raw.PBXLockRangeSync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func PBXLockRangeSync(paramBlock *raw.FSRangeLockParam) error {
-	if _err := purego.NewOSStatus(raw.PBXLockRangeSync(paramBlock)).Err(); _err != nil {
+	_rc := _fnMPDisposeTaskException(objref.IDOf(task), action)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// PBXUnlockRangeAsync wraps [raw.PBXUnlockRangeAsync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func PBXUnlockRangeAsync(paramBlock *raw.FSRangeLockParam) error {
-	if _err := purego.NewOSStatus(raw.PBXUnlockRangeAsync(paramBlock)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMPEnterCriticalRegion func(objc.ID, int) int32
 
-// PBXUnlockRangeSync wraps [raw.PBXUnlockRangeSync], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func PBXUnlockRangeSync(paramBlock *raw.FSRangeLockParam) error {
-	if _err := purego.NewOSStatus(raw.PBXUnlockRangeSync(paramBlock)).Err(); _err != nil {
-		return _err
+// MPEnterCriticalRegion reports an error if the CarbonCore framework function MPEnterCriticalRegion fails.
+func MPEnterCriticalRegion(criticalRegion obj.Object, timeout int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPEnterCriticalRegion == nil {
+		ebipurego.RegisterLibFunc(&_fnMPEnterCriticalRegion, _lib, "MPEnterCriticalRegion")
 	}
-	return nil
-}
-
-// QueryUnicodeMappings wraps [raw.QueryUnicodeMappings], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func QueryUnicodeMappings(iFilter uint, iFindMapping *raw.UnicodeMapping, iMaxCount uint, oActualCount *uint, oReturnedMappings *raw.UnicodeMapping) error {
-	if _err := purego.NewOSStatus(raw.QueryUnicodeMappings(iFilter, iFindMapping, iMaxCount, oActualCount, oReturnedMappings)).Err(); _err != nil {
+	_rc := _fnMPEnterCriticalRegion(objref.IDOf(criticalRegion), timeout)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// RevertTextEncodingToScriptInfo wraps [raw.RevertTextEncodingToScriptInfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func RevertTextEncodingToScriptInfo(iEncoding uint, oTextScriptID *int16, oTextLanguageID *int16, oTextFontname *uint8) error {
-	if _err := purego.NewOSStatus(raw.RevertTextEncodingToScriptInfo(iEncoding, oTextScriptID, oTextLanguageID, oTextFontname)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMPExitCriticalRegion func(objc.ID) int32
 
-// SetDebugOptionValue wraps [raw.SetDebugOptionValue], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func SetDebugOptionValue(componentSignature uint, optionSelectorNum int, newOptionSetting uint8) error {
-	if _err := purego.NewOSStatus(raw.SetDebugOptionValue(componentSignature, optionSelectorNum, newOptionSetting)).Err(); _err != nil {
+// MPExitCriticalRegion reports an error if the CarbonCore framework function MPExitCriticalRegion fails.
+func MPExitCriticalRegion(criticalRegion obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPExitCriticalRegion == nil {
+		ebipurego.RegisterLibFunc(&_fnMPExitCriticalRegion, _lib, "MPExitCriticalRegion")
+	}
+	_rc := _fnMPExitCriticalRegion(objref.IDOf(criticalRegion))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// TECCopyTextEncodingInternetNameAndMIB wraps [raw.TECCopyTextEncodingInternetNameAndMIB], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECCopyTextEncodingInternetNameAndMIB(textEncoding uint, usage uint, mibEnumPtr *int) (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.TECCopyTextEncodingInternetNameAndMIB(textEncoding, usage, unsafe.Pointer(&_out0), mibEnumPtr)).Err(); _err != nil {
-		return 0, _err
-	}
-	return objc.ID(_out0), nil
-}
+var _fnMPRegisterDebugger func(objc.ID, int) int32
 
-// TECCountAvailableSniffers wraps [raw.TECCountAvailableSniffers], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECCountAvailableSniffers(numberOfEncodings *uint) error {
-	if _err := purego.NewOSStatus(raw.TECCountAvailableSniffers(numberOfEncodings)).Err(); _err != nil {
-		return _err
+// MPRegisterDebugger reports an error if the CarbonCore framework function MPRegisterDebugger fails.
+func MPRegisterDebugger(queue obj.Object, level int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPRegisterDebugger == nil {
+		ebipurego.RegisterLibFunc(&_fnMPRegisterDebugger, _lib, "MPRegisterDebugger")
 	}
-	return nil
-}
-
-// TECCountAvailableTextEncodings wraps [raw.TECCountAvailableTextEncodings], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECCountAvailableTextEncodings(numberEncodings *uint) error {
-	if _err := purego.NewOSStatus(raw.TECCountAvailableTextEncodings(numberEncodings)).Err(); _err != nil {
+	_rc := _fnMPRegisterDebugger(objref.IDOf(queue), level)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// TECCountDestinationTextEncodings wraps [raw.TECCountDestinationTextEncodings], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECCountDestinationTextEncodings(inputEncoding uint, numberOfEncodings *uint) error {
-	if _err := purego.NewOSStatus(raw.TECCountDestinationTextEncodings(inputEncoding, numberOfEncodings)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMPSetEvent func(objc.ID, int) int32
 
-// TECCountDirectTextEncodingConversions wraps [raw.TECCountDirectTextEncodingConversions], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECCountDirectTextEncodingConversions(numberOfEncodings *uint) error {
-	if _err := purego.NewOSStatus(raw.TECCountDirectTextEncodingConversions(numberOfEncodings)).Err(); _err != nil {
-		return _err
+// MPSetEvent reports an error if the CarbonCore framework function MPSetEvent fails.
+func MPSetEvent(event obj.Object, flags int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSetEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSetEvent, _lib, "MPSetEvent")
 	}
-	return nil
-}
-
-// TECCountMailTextEncodings wraps [raw.TECCountMailTextEncodings], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECCountMailTextEncodings(locale int16, numberEncodings *uint) error {
-	if _err := purego.NewOSStatus(raw.TECCountMailTextEncodings(locale, numberEncodings)).Err(); _err != nil {
+	_rc := _fnMPSetEvent(objref.IDOf(event), flags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// TECCountSubTextEncodings wraps [raw.TECCountSubTextEncodings], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECCountSubTextEncodings(inputEncoding uint, numberOfEncodings *uint) error {
-	if _err := purego.NewOSStatus(raw.TECCountSubTextEncodings(inputEncoding, numberOfEncodings)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMPSetExceptionHandler func(objc.ID, objc.ID) int32
 
-// TECCountWebTextEncodings wraps [raw.TECCountWebTextEncodings], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECCountWebTextEncodings(locale int16, numberEncodings *uint) error {
-	if _err := purego.NewOSStatus(raw.TECCountWebTextEncodings(locale, numberEncodings)).Err(); _err != nil {
-		return _err
+// MPSetExceptionHandler reports an error if the CarbonCore framework function MPSetExceptionHandler fails.
+func MPSetExceptionHandler(task obj.Object, exceptionQ obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSetExceptionHandler == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSetExceptionHandler, _lib, "MPSetExceptionHandler")
 	}
-	return nil
-}
-
-// TECGetAvailableSniffers wraps [raw.TECGetAvailableSniffers], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECGetAvailableSniffers(availableSniffers *uint, maxAvailableSniffers uint, actualAvailableSniffers *uint) error {
-	if _err := purego.NewOSStatus(raw.TECGetAvailableSniffers(availableSniffers, maxAvailableSniffers, actualAvailableSniffers)).Err(); _err != nil {
+	_rc := _fnMPSetExceptionHandler(objref.IDOf(task), objref.IDOf(exceptionQ))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// TECGetAvailableTextEncodings wraps [raw.TECGetAvailableTextEncodings], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECGetAvailableTextEncodings(availableEncodings *uint, maxAvailableEncodings uint, actualAvailableEncodings *uint) error {
-	if _err := purego.NewOSStatus(raw.TECGetAvailableTextEncodings(availableEncodings, maxAvailableEncodings, actualAvailableEncodings)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMPSetQueueReserve func(objc.ID, int) int32
 
-// TECGetDestinationTextEncodings wraps [raw.TECGetDestinationTextEncodings], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECGetDestinationTextEncodings(inputEncoding uint, destinationEncodings *uint, maxDestinationEncodings uint, actualDestinationEncodings *uint) error {
-	if _err := purego.NewOSStatus(raw.TECGetDestinationTextEncodings(inputEncoding, destinationEncodings, maxDestinationEncodings, actualDestinationEncodings)).Err(); _err != nil {
-		return _err
+// MPSetQueueReserve reports an error if the CarbonCore framework function MPSetQueueReserve fails.
+func MPSetQueueReserve(queue obj.Object, count int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSetQueueReserve == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSetQueueReserve, _lib, "MPSetQueueReserve")
 	}
-	return nil
-}
-
-// TECGetDirectTextEncodingConversions wraps [raw.TECGetDirectTextEncodingConversions], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECGetDirectTextEncodingConversions(availableConversions *raw.TECConversionInfo, maxAvailableConversions uint, actualAvailableConversions *uint) error {
-	if _err := purego.NewOSStatus(raw.TECGetDirectTextEncodingConversions(availableConversions, maxAvailableConversions, actualAvailableConversions)).Err(); _err != nil {
+	_rc := _fnMPSetQueueReserve(objref.IDOf(queue), count)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// TECGetInfo wraps [raw.TECGetInfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECGetInfo(tecInfo ***raw.TECInfo) error {
-	if _err := purego.NewOSStatus(raw.TECGetInfo(tecInfo)).Err(); _err != nil {
+var _fnMPSetTaskType func(objc.ID, int) int32
+
+// MPSetTaskType reports an error if the CarbonCore framework function MPSetTaskType fails.
+func MPSetTaskType(task obj.Object, taskType int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSetTaskType == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSetTaskType, _lib, "MPSetTaskType")
+	}
+	_rc := _fnMPSetTaskType(objref.IDOf(task), taskType)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// TECGetMailTextEncodings wraps [raw.TECGetMailTextEncodings], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECGetMailTextEncodings(locale int16, availableEncodings *uint, maxAvailableEncodings uint, actualAvailableEncodings *uint) error {
-	if _err := purego.NewOSStatus(raw.TECGetMailTextEncodings(locale, availableEncodings, maxAvailableEncodings, actualAvailableEncodings)).Err(); _err != nil {
+var _fnMPSetTaskWeight func(objc.ID, int) int32
+
+// MPSetTaskWeight reports an error if the CarbonCore framework function MPSetTaskWeight fails.
+func MPSetTaskWeight(task obj.Object, weight int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSetTaskWeight == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSetTaskWeight, _lib, "MPSetTaskWeight")
+	}
+	_rc := _fnMPSetTaskWeight(objref.IDOf(task), weight)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
+
+var _fnMPSignalSemaphore func(objc.ID) int32
 
-// TECGetSubTextEncodings wraps [raw.TECGetSubTextEncodings], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECGetSubTextEncodings(inputEncoding uint, subEncodings *uint, maxSubEncodings uint, actualSubEncodings *uint) error {
-	if _err := purego.NewOSStatus(raw.TECGetSubTextEncodings(inputEncoding, subEncodings, maxSubEncodings, actualSubEncodings)).Err(); _err != nil {
+// MPSignalSemaphore reports an error if the CarbonCore framework function MPSignalSemaphore fails.
+func MPSignalSemaphore(semaphore obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPSignalSemaphore == nil {
+		ebipurego.RegisterLibFunc(&_fnMPSignalSemaphore, _lib, "MPSignalSemaphore")
+	}
+	_rc := _fnMPSignalSemaphore(objref.IDOf(semaphore))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// TECGetTextEncodingFromInternetName wraps [raw.TECGetTextEncodingFromInternetName], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECGetTextEncodingFromInternetName(textEncoding *uint, encodingName *uint8) error {
-	if _err := purego.NewOSStatus(raw.TECGetTextEncodingFromInternetName(textEncoding, encodingName)).Err(); _err != nil {
+var _fnMPTerminateTask func(objc.ID, int) int32
+
+// MPTerminateTask reports an error if the CarbonCore framework function MPTerminateTask fails.
+func MPTerminateTask(task obj.Object, terminationStatus int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPTerminateTask == nil {
+		ebipurego.RegisterLibFunc(&_fnMPTerminateTask, _lib, "MPTerminateTask")
+	}
+	_rc := _fnMPTerminateTask(objref.IDOf(task), terminationStatus)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// TECGetTextEncodingFromInternetNameOrMIB wraps [raw.TECGetTextEncodingFromInternetNameOrMIB], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECGetTextEncodingFromInternetNameOrMIB(textEncodingPtr *uint, usage uint, encodingName objc.ID, mibEnum int) error {
-	if _err := purego.NewOSStatus(raw.TECGetTextEncodingFromInternetNameOrMIB(textEncodingPtr, usage, purego.CFRef(encodingName), mibEnum)).Err(); _err != nil {
+var _fnMPThrowException func(objc.ID, int) int32
+
+// MPThrowException reports an error if the CarbonCore framework function MPThrowException fails.
+func MPThrowException(task obj.Object, kind int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPThrowException == nil {
+		ebipurego.RegisterLibFunc(&_fnMPThrowException, _lib, "MPThrowException")
+	}
+	_rc := _fnMPThrowException(objref.IDOf(task), kind)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// TECGetTextEncodingInternetName wraps [raw.TECGetTextEncodingInternetName], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECGetTextEncodingInternetName(textEncoding uint, encodingName *uint8) error {
-	if _err := purego.NewOSStatus(raw.TECGetTextEncodingInternetName(textEncoding, encodingName)).Err(); _err != nil {
+var _fnMPUnregisterDebugger func(objc.ID) int32
+
+// MPUnregisterDebugger reports an error if the CarbonCore framework function MPUnregisterDebugger fails.
+func MPUnregisterDebugger(queue obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPUnregisterDebugger == nil {
+		ebipurego.RegisterLibFunc(&_fnMPUnregisterDebugger, _lib, "MPUnregisterDebugger")
+	}
+	_rc := _fnMPUnregisterDebugger(objref.IDOf(queue))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// TECGetWebTextEncodings wraps [raw.TECGetWebTextEncodings], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func TECGetWebTextEncodings(locale int16, availableEncodings *uint, maxAvailableEncodings uint, actualAvailableEncodings *uint) error {
-	if _err := purego.NewOSStatus(raw.TECGetWebTextEncodings(locale, availableEncodings, maxAvailableEncodings, actualAvailableEncodings)).Err(); _err != nil {
+var _fnMPWaitOnSemaphore func(objc.ID, int) int32
+
+// MPWaitOnSemaphore reports an error if the CarbonCore framework function MPWaitOnSemaphore fails.
+func MPWaitOnSemaphore(semaphore obj.Object, timeout int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMPWaitOnSemaphore == nil {
+		ebipurego.RegisterLibFunc(&_fnMPWaitOnSemaphore, _lib, "MPWaitOnSemaphore")
+	}
+	_rc := _fnMPWaitOnSemaphore(objref.IDOf(semaphore), timeout)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
+
+var _fnReleaseCollection func(objc.ID) int32
 
-// UCCompareCollationKeys wraps [raw.UCCompareCollationKeys], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func UCCompareCollationKeys(key1Ptr *uint, key1Length uint, key2Ptr *uint, key2Length uint, equivalent *uint8, order *int) error {
-	if _err := purego.NewOSStatus(raw.UCCompareCollationKeys(key1Ptr, key1Length, key2Ptr, key2Length, equivalent, order)).Err(); _err != nil {
+// ReleaseCollection reports an error if the CarbonCore framework function ReleaseCollection fails.
+func ReleaseCollection(c obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnReleaseCollection == nil {
+		ebipurego.RegisterLibFunc(&_fnReleaseCollection, _lib, "ReleaseCollection")
+	}
+	_rc := _fnReleaseCollection(objref.IDOf(c))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// UCCompareTextDefault wraps [raw.UCCompareTextDefault], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func UCCompareTextDefault(options uint, text1Ptr *uint16, text1Length uint, text2Ptr *uint16, text2Length uint, equivalent *uint8, order *int) error {
-	if _err := purego.NewOSStatus(raw.UCCompareTextDefault(options, text1Ptr, text1Length, text2Ptr, text2Length, equivalent, order)).Err(); _err != nil {
+var _fnResetTextToUnicodeInfo func(objc.ID) int32
+
+// ResetTextToUnicodeInfo reports an error if the CarbonCore framework function ResetTextToUnicodeInfo fails.
+func ResetTextToUnicodeInfo(ioTextToUnicodeInfo obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnResetTextToUnicodeInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnResetTextToUnicodeInfo, _lib, "ResetTextToUnicodeInfo")
+	}
+	_rc := _fnResetTextToUnicodeInfo(objref.IDOf(ioTextToUnicodeInfo))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// UCCompareTextNoLocale wraps [raw.UCCompareTextNoLocale], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func UCCompareTextNoLocale(options uint, text1Ptr *uint16, text1Length uint, text2Ptr *uint16, text2Length uint, equivalent *uint8, order *int) error {
-	if _err := purego.NewOSStatus(raw.UCCompareTextNoLocale(options, text1Ptr, text1Length, text2Ptr, text2Length, equivalent, order)).Err(); _err != nil {
+var _fnResetUnicodeToTextInfo func(objc.ID) int32
+
+// ResetUnicodeToTextInfo reports an error if the CarbonCore framework function ResetUnicodeToTextInfo fails.
+func ResetUnicodeToTextInfo(ioUnicodeToTextInfo obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnResetUnicodeToTextInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnResetUnicodeToTextInfo, _lib, "ResetUnicodeToTextInfo")
+	}
+	_rc := _fnResetUnicodeToTextInfo(objref.IDOf(ioUnicodeToTextInfo))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
+
+var _fnResetUnicodeToTextRunInfo func(objc.ID) int32
 
-// UCConvertCFAbsoluteTimeToLongDateTime wraps [raw.UCConvertCFAbsoluteTimeToLongDateTime], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func UCConvertCFAbsoluteTimeToLongDateTime(iCFTime float64, oLongDate *int64) error {
-	if _err := purego.NewOSStatus(raw.UCConvertCFAbsoluteTimeToLongDateTime(iCFTime, oLongDate)).Err(); _err != nil {
+// ResetUnicodeToTextRunInfo reports an error if the CarbonCore framework function ResetUnicodeToTextRunInfo fails.
+func ResetUnicodeToTextRunInfo(ioUnicodeToTextRunInfo obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnResetUnicodeToTextRunInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnResetUnicodeToTextRunInfo, _lib, "ResetUnicodeToTextRunInfo")
+	}
+	_rc := _fnResetUnicodeToTextRunInfo(objref.IDOf(ioUnicodeToTextRunInfo))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
+
+var _fnRetainCollection func(objc.ID) int32
 
-// UCConvertCFAbsoluteTimeToSeconds wraps [raw.UCConvertCFAbsoluteTimeToSeconds], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func UCConvertCFAbsoluteTimeToSeconds(iCFTime float64, oSeconds *uint) error {
-	if _err := purego.NewOSStatus(raw.UCConvertCFAbsoluteTimeToSeconds(iCFTime, oSeconds)).Err(); _err != nil {
+// RetainCollection reports an error if the CarbonCore framework function RetainCollection fails.
+func RetainCollection(c obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnRetainCollection == nil {
+		ebipurego.RegisterLibFunc(&_fnRetainCollection, _lib, "RetainCollection")
+	}
+	_rc := _fnRetainCollection(objref.IDOf(c))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
+
+var _fnSetDebugOptionValue func(int, int, uint8) int32
 
-// UCConvertCFAbsoluteTimeToUTCDateTime wraps [raw.UCConvertCFAbsoluteTimeToUTCDateTime], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func UCConvertCFAbsoluteTimeToUTCDateTime(iCFTime float64, oUTCDate *raw.UTCDateTime) error {
-	if _err := purego.NewOSStatus(raw.UCConvertCFAbsoluteTimeToUTCDateTime(iCFTime, oUTCDate)).Err(); _err != nil {
+// SetDebugOptionValue reports an error if the CarbonCore framework function SetDebugOptionValue fails.
+func SetDebugOptionValue(componentSignature int, optionSelectorNum int, newOptionSetting uint8) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSetDebugOptionValue == nil {
+		ebipurego.RegisterLibFunc(&_fnSetDebugOptionValue, _lib, "SetDebugOptionValue")
+	}
+	_rc := _fnSetDebugOptionValue(componentSignature, optionSelectorNum, newOptionSetting)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// UCConvertLongDateTimeToCFAbsoluteTime wraps [raw.UCConvertLongDateTimeToCFAbsoluteTime], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func UCConvertLongDateTimeToCFAbsoluteTime(iLongTime int64, oCFTime *float64) error {
-	if _err := purego.NewOSStatus(raw.UCConvertLongDateTimeToCFAbsoluteTime(iLongTime, oCFTime)).Err(); _err != nil {
+var _fnTECClearConverterContextInfo func(objc.ID) int32
+
+// TECClearConverterContextInfo reports an error if the CarbonCore framework function TECClearConverterContextInfo fails.
+func TECClearConverterContextInfo(encodingConverter obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTECClearConverterContextInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnTECClearConverterContextInfo, _lib, "TECClearConverterContextInfo")
+	}
+	_rc := _fnTECClearConverterContextInfo(objref.IDOf(encodingConverter))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// UCConvertSecondsToCFAbsoluteTime wraps [raw.UCConvertSecondsToCFAbsoluteTime], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func UCConvertSecondsToCFAbsoluteTime(iSeconds uint, oCFTime *float64) error {
-	if _err := purego.NewOSStatus(raw.UCConvertSecondsToCFAbsoluteTime(iSeconds, oCFTime)).Err(); _err != nil {
+var _fnTECClearSnifferContextInfo func(objc.ID) int32
+
+// TECClearSnifferContextInfo reports an error if the CarbonCore framework function TECClearSnifferContextInfo fails.
+func TECClearSnifferContextInfo(encodingSniffer obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTECClearSnifferContextInfo == nil {
+		ebipurego.RegisterLibFunc(&_fnTECClearSnifferContextInfo, _lib, "TECClearSnifferContextInfo")
+	}
+	_rc := _fnTECClearSnifferContextInfo(objref.IDOf(encodingSniffer))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
+
+var _fnTECDisposeConverter func(objc.ID) int32
 
-// UCConvertUTCDateTimeToCFAbsoluteTime wraps [raw.UCConvertUTCDateTimeToCFAbsoluteTime], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func UCConvertUTCDateTimeToCFAbsoluteTime(iUTCDate *raw.UTCDateTime, oCFTime *float64) error {
-	if _err := purego.NewOSStatus(raw.UCConvertUTCDateTimeToCFAbsoluteTime(iUTCDate, oCFTime)).Err(); _err != nil {
+// TECDisposeConverter reports an error if the CarbonCore framework function TECDisposeConverter fails.
+func TECDisposeConverter(newEncodingConverter obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTECDisposeConverter == nil {
+		ebipurego.RegisterLibFunc(&_fnTECDisposeConverter, _lib, "TECDisposeConverter")
+	}
+	_rc := _fnTECDisposeConverter(objref.IDOf(newEncodingConverter))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// UCGetCharProperty wraps [raw.UCGetCharProperty], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func UCGetCharProperty(charPtr *uint16, textLength uint, propType int, propValue *uint) error {
-	if _err := purego.NewOSStatus(raw.UCGetCharProperty(charPtr, textLength, propType, propValue)).Err(); _err != nil {
+var _fnTECDisposeSniffer func(objc.ID) int32
+
+// TECDisposeSniffer reports an error if the CarbonCore framework function TECDisposeSniffer fails.
+func TECDisposeSniffer(encodingSniffer obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTECDisposeSniffer == nil {
+		ebipurego.RegisterLibFunc(&_fnTECDisposeSniffer, _lib, "TECDisposeSniffer")
+	}
+	_rc := _fnTECDisposeSniffer(objref.IDOf(encodingSniffer))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// UCKeyTranslate wraps [raw.UCKeyTranslate], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func UCKeyTranslate(keyLayoutPtr *raw.UCKeyboardLayout, virtualKeyCode uint16, keyAction uint16, modifierKeyState uint, keyboardType uint, keyTranslateOptions uint, deadKeyState *uint, maxStringLength uint, actualStringLength *uint, unicodeString *uint16) error {
-	if _err := purego.NewOSStatus(raw.UCKeyTranslate(keyLayoutPtr, virtualKeyCode, keyAction, modifierKeyState, keyboardType, keyTranslateOptions, deadKeyState, maxStringLength, actualStringLength, unicodeString)).Err(); _err != nil {
+var _fnTECSetBasicOptions func(objc.ID, int) int32
+
+// TECSetBasicOptions reports an error if the CarbonCore framework function TECSetBasicOptions fails.
+func TECSetBasicOptions(encodingConverter obj.Object, controlFlags int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnTECSetBasicOptions == nil {
+		ebipurego.RegisterLibFunc(&_fnTECSetBasicOptions, _lib, "TECSetBasicOptions")
+	}
+	_rc := _fnTECSetBasicOptions(objref.IDOf(encodingConverter), controlFlags)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// UpgradeScriptInfoToTextEncoding wraps [raw.UpgradeScriptInfoToTextEncoding], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func UpgradeScriptInfoToTextEncoding(iTextScriptID int16, iTextLanguageID int16, iRegionID int16, iTextFontname *uint8, oEncoding *uint) error {
-	if _err := purego.NewOSStatus(raw.UpgradeScriptInfoToTextEncoding(iTextScriptID, iTextLanguageID, iRegionID, iTextFontname, oEncoding)).Err(); _err != nil {
+var _fnUCTypeSelectFlushSelectorData func(objc.ID) int32
+
+// UCTypeSelectFlushSelectorData reports an error if the CarbonCore framework function UCTypeSelectFlushSelectorData fails.
+func UCTypeSelectFlushSelectorData(ref obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnUCTypeSelectFlushSelectorData == nil {
+		ebipurego.RegisterLibFunc(&_fnUCTypeSelectFlushSelectorData, _lib, "UCTypeSelectFlushSelectorData")
+	}
+	_rc := _fnUCTypeSelectFlushSelectorData(objref.IDOf(ref))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil

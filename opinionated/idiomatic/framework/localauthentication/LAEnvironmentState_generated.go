@@ -5,88 +5,94 @@
 package localauthentication
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// EnvironmentState wraps [raw.LAEnvironmentState] with a fluent Go API.
+// EnvironmentState is an idiomatic wrapper over the Objective-C class LAEnvironmentState.
 type EnvironmentState struct {
-	inner *raw.LAEnvironmentState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.LAEnvironmentState].
-func (x *EnvironmentState) Unwrap() *raw.LAEnvironmentState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EnvironmentState) ID() objc.ID { return x.inner.Ptr() }
-
-// EnvironmentStateFromID adopts an existing object pointer as a EnvironmentState (nil for 0).
+// EnvironmentStateFromID adopts an existing Objective-C object as a EnvironmentState
+// (nil for 0), retaining it and registering a release finalizer.
 func EnvironmentStateFromID(id objc.ID) *EnvironmentState {
 	if id == 0 {
 		return nil
 	}
-	return &EnvironmentState{inner: raw.LAEnvironmentStateFromID(id)}
+	x := &EnvironmentState{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEnvironmentState creates a new [EnvironmentState].
+// environmentStateAdopt wraps an Objective-C object that this code just created as a
+// EnvironmentState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func environmentStateAdopt(id objc.ID) *EnvironmentState {
+	if id == 0 {
+		return nil
+	}
+	x := &EnvironmentState{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EnvironmentState) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EnvironmentState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EnvironmentState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEnvironmentState creates a new EnvironmentState.
 func NewEnvironmentState() *EnvironmentState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LAEnvironmentState")), objc.RegisterName("new"))
-	return &EnvironmentState{inner: raw.LAEnvironmentStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("LAEnvironmentState")), objc.RegisterName("new"))
+	return environmentStateAdopt(_id)
 }
 
-// @brief Information about biometric authentication (Touch ID, Face ID or Optic ID). @discussion @c nil if biometry is not supported by this device.
-//
-// Biometry calls the underlying Biometry.
+// Information about biometric authentication (Touch ID, Face ID or Optic ID).
 func (x *EnvironmentState) Biometry() *EnvironmentMechanismBiometry {
-	_r := x.inner.Biometry()
-	if _r == nil {
-		return nil
-	}
-	return &EnvironmentMechanismBiometry{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biometry"))
+	return EnvironmentMechanismBiometryFromID(_r)
 }
 
-// @brief Information about local user password (on macOS) or passcode (on embedded platforms). @discussion @c nil if user password or passcode is not supported by this device.
-//
-// UserPassword calls the underlying UserPassword.
+// Information about local user password (on macOS) or passcode (on embedded platforms).
 func (x *EnvironmentState) UserPassword() *EnvironmentMechanismUserPassword {
-	_r := x.inner.UserPassword()
-	if _r == nil {
-		return nil
-	}
-	return &EnvironmentMechanismUserPassword{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userPassword"))
+	return EnvironmentMechanismUserPasswordFromID(_r)
 }
 
-// @brief Companion authentication mechanisms. @discussion Companion mechanisms such as Apple Watch can appear and disappear as they get in and out of reach, but this property enumerates paired companions, even if they are not reachable at the moment. Check @c isUsable property to determine if a particular companion type is available for use. Note that items in this array represent paired companion types, not individual devices. Therefore, even if the user has paired multiple Apple Watch devices for companion authentication, the array will contain only one @c LAEnvironmentMechanimsCompanion instance of type @c LACompanionTypeWatch.
+// Companion authentication mechanisms. Companion mechanisms such as Apple Watch can appear and disappear as they get in and out of reach, but this property enumerates paired companions, even if they are not reachable at the moment. Check
 //
 // Companions returns the collection as a Go slice.
 func (x *EnvironmentState) Companions() []*EnvironmentMechanismCompanion {
-	arr := x.inner.Companions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EnvironmentMechanismCompanion {
-		return &EnvironmentMechanismCompanion{inner: raw.LAEnvironmentMechanismCompanionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("companions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EnvironmentMechanismCompanion { return EnvironmentMechanismCompanionFromID(_id) })
 }
 
-// @brief Information about all authentication mechanisms. @discussion This property aggregates @c biometry, @c userPassword, @c companions and any future authentication mechanisms.
+// Information about all authentication mechanisms. This property aggregates
 //
 // AllMechanisms returns the collection as a Go slice.
 func (x *EnvironmentState) AllMechanisms() []*EnvironmentMechanism {
-	arr := x.inner.AllMechanisms()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EnvironmentMechanism {
-		return &EnvironmentMechanism{inner: raw.LAEnvironmentMechanismFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allMechanisms"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EnvironmentMechanism { return EnvironmentMechanismFromID(_id) })
 }
 
 // EnvironmentStateable is the interface implemented by [EnvironmentState], for mocking and DI.
 type EnvironmentStateable interface {
-	Unwrap() *raw.LAEnvironmentState
+	obj.Object
 	Biometry() *EnvironmentMechanismBiometry
 	UserPassword() *EnvironmentMechanismUserPassword
 	Companions() []*EnvironmentMechanismCompanion

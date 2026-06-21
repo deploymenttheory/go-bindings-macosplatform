@@ -5,76 +5,95 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A transition or containment relationship between two scenes in a storyboard.
 //
-// StoryboardSegue wraps [raw.NSStoryboardSegue] with a fluent Go API.
+// StoryboardSegue is an idiomatic wrapper over the Objective-C class NSStoryboardSegue.
 type StoryboardSegue struct {
-	inner *raw.NSStoryboardSegue
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSStoryboardSegue].
-func (x *StoryboardSegue) Unwrap() *raw.NSStoryboardSegue { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StoryboardSegue) ID() objc.ID { return x.inner.Ptr() }
-
-// StoryboardSegueFromID adopts an existing object pointer as a StoryboardSegue (nil for 0).
+// StoryboardSegueFromID adopts an existing Objective-C object as a StoryboardSegue
+// (nil for 0), retaining it and registering a release finalizer.
 func StoryboardSegueFromID(id objc.ID) *StoryboardSegue {
 	if id == 0 {
 		return nil
 	}
-	return &StoryboardSegue{inner: raw.NSStoryboardSegueFromID(id)}
+	x := &StoryboardSegue{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// storyboardSegueAdopt wraps an Objective-C object that this code just created as a
+// StoryboardSegue (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func storyboardSegueAdopt(id objc.ID) *StoryboardSegue {
+	if id == 0 {
+		return nil
+	}
+	x := &StoryboardSegue{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *StoryboardSegue) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StoryboardSegue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StoryboardSegue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // The designated initializer for a storyboard segue.
 //
-// NewStoryboardSegueWithIdentifierSourceDestination creates a new [StoryboardSegue].
-func NewStoryboardSegueWithIdentifierSourceDestination(identifier *foundation.NSString, sourceController objc.ID, destinationController objc.ID) *StoryboardSegue {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSStoryboardSegue")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:source:destination:"), identifier.Ptr(), sourceController, destinationController)
-	return &StoryboardSegue{inner: raw.NSStoryboardSegueFromID(_id)}
+// NewStoryboardSegueWithIdentifierSourceDestination creates a new StoryboardSegue.
+func NewStoryboardSegueWithIdentifierSourceDestination(identifier obj.Object, sourceController obj.Object, destinationController obj.Object) *StoryboardSegue {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSStoryboardSegue")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:source:destination:"), objref.IDOf(identifier), objref.IDOf(sourceController), objref.IDOf(destinationController))
+	return storyboardSegueAdopt(_id)
 }
 
 // Performs a visual transition from one controller to another.
-//
-// Perform calls the underlying Perform.
 func (x *StoryboardSegue) Perform() {
-	x.inner.Perform()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("perform"))
 }
 
-// Identifier calls the underlying Identifier.
-func (x *StoryboardSegue) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *StoryboardSegue) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	return obj.Wrap(_r)
 }
 
-// SourceController calls the underlying SourceController.
-func (x *StoryboardSegue) SourceController() objc.ID {
-	return x.inner.SourceController()
+func (x *StoryboardSegue) SourceController() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceController"))
+	return obj.Wrap(_r)
 }
 
-// DestinationController calls the underlying DestinationController.
-func (x *StoryboardSegue) DestinationController() objc.ID {
-	return x.inner.DestinationController()
+func (x *StoryboardSegue) DestinationController() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationController"))
+	return obj.Wrap(_r)
 }
 
 // StoryboardSegueable is the interface implemented by [StoryboardSegue], for mocking and DI.
 type StoryboardSegueable interface {
-	Unwrap() *raw.NSStoryboardSegue
+	obj.Object
 	Perform()
-	Identifier() string
-	SourceController() objc.ID
-	DestinationController() objc.ID
+	Identifier() obj.Object
+	SourceController() obj.Object
+	DestinationController() obj.Object
 }
 
 var _ StoryboardSegueable = (*StoryboardSegue)(nil)

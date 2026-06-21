@@ -5,39 +5,66 @@
 package mpsneuralnetwork
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNMultiaryGradientState wraps [raw.MPSNNMultiaryGradientState] with a fluent Go API.
+// NNMultiaryGradientState is an idiomatic wrapper over the Objective-C class MPSNNMultiaryGradientState.
 type NNMultiaryGradientState struct {
-	inner *raw.MPSNNMultiaryGradientState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNMultiaryGradientState].
-func (x *NNMultiaryGradientState) Unwrap() *raw.MPSNNMultiaryGradientState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNMultiaryGradientState) ID() objc.ID { return x.inner.Ptr() }
-
-// NNMultiaryGradientStateFromID adopts an existing object pointer as a NNMultiaryGradientState (nil for 0).
+// NNMultiaryGradientStateFromID adopts an existing Objective-C object as a NNMultiaryGradientState
+// (nil for 0), retaining it and registering a release finalizer.
 func NNMultiaryGradientStateFromID(id objc.ID) *NNMultiaryGradientState {
 	if id == 0 {
 		return nil
 	}
-	return &NNMultiaryGradientState{inner: raw.MPSNNMultiaryGradientStateFromID(id)}
+	x := &NNMultiaryGradientState{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNNMultiaryGradientState creates a new [NNMultiaryGradientState].
+// nNMultiaryGradientStateAdopt wraps an Objective-C object that this code just created as a
+// NNMultiaryGradientState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNMultiaryGradientStateAdopt(id objc.ID) *NNMultiaryGradientState {
+	if id == 0 {
+		return nil
+	}
+	x := &NNMultiaryGradientState{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NNMultiaryGradientState) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNMultiaryGradientState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNMultiaryGradientState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNNMultiaryGradientState creates a new NNMultiaryGradientState.
 func NewNNMultiaryGradientState() *NNMultiaryGradientState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNMultiaryGradientState")), objc.RegisterName("new"))
-	return &NNMultiaryGradientState{inner: raw.MPSNNMultiaryGradientStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNMultiaryGradientState")), objc.RegisterName("new"))
+	return nNMultiaryGradientStateAdopt(_id)
 }
 
 // NNMultiaryGradientStateable is the interface implemented by [NNMultiaryGradientState], for mocking and DI.
 type NNMultiaryGradientStateable interface {
-	Unwrap() *raw.MPSNNMultiaryGradientState
+	obj.Object
 }
 
 var _ NNMultiaryGradientStateable = (*NNMultiaryGradientState)(nil)

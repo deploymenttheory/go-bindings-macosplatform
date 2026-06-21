@@ -5,135 +5,117 @@
 package imagecapturecore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object for finding digital cameras and scanners.
 //
-// DeviceBrowser wraps [raw.ICDeviceBrowser] with a fluent Go API.
+// DeviceBrowser is an idiomatic wrapper over the Objective-C class ICDeviceBrowser.
 type DeviceBrowser struct {
-	inner *raw.ICDeviceBrowser
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ICDeviceBrowser].
-func (x *DeviceBrowser) Unwrap() *raw.ICDeviceBrowser { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DeviceBrowser) ID() objc.ID { return x.inner.Ptr() }
-
-// DeviceBrowserFromID adopts an existing object pointer as a DeviceBrowser (nil for 0).
+// DeviceBrowserFromID adopts an existing Objective-C object as a DeviceBrowser
+// (nil for 0), retaining it and registering a release finalizer.
 func DeviceBrowserFromID(id objc.ID) *DeviceBrowser {
 	if id == 0 {
 		return nil
 	}
-	return &DeviceBrowser{inner: raw.ICDeviceBrowserFromID(id)}
-}
-
-// NewDeviceBrowser creates a new [DeviceBrowser].
-func NewDeviceBrowser() *DeviceBrowser {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ICDeviceBrowser")), objc.RegisterName("new"))
-	return &DeviceBrowser{inner: raw.ICDeviceBrowserFromID(_id)}
-}
-
-// The object that acts as the delegate of the device browser.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *DeviceBrowser) WithDelegate(delegate raw.ICDeviceBrowserDelegate) *DeviceBrowser {
-	x.inner.SetDelegate(delegate)
+	x := &DeviceBrowser{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// deviceBrowserAdopt wraps an Objective-C object that this code just created as a
+// DeviceBrowser (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func deviceBrowserAdopt(id objc.ID) *DeviceBrowser {
+	if id == 0 {
+		return nil
+	}
+	x := &DeviceBrowser{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DeviceBrowser) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DeviceBrowser) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DeviceBrowser) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDeviceBrowser creates a new DeviceBrowser.
+func NewDeviceBrowser() *DeviceBrowser {
+	_id := objc.Send[objc.ID](objc.ID(_class("ICDeviceBrowser")), objc.RegisterName("new"))
+	return deviceBrowserAdopt(_id)
 }
 
 // A mask whose set bits indicate the type of devices being browsed after the delegate receives the start message.
 //
-// WithBrowsedDeviceTypeMask sets the browsedDeviceTypeMask property and returns the receiver for chaining.
-func (x *DeviceBrowser) WithBrowsedDeviceTypeMask(browsedDeviceTypeMask ICDeviceTypeMask) *DeviceBrowser {
-	x.inner.SetBrowsedDeviceTypeMask(raw.ICDeviceTypeMask(browsedDeviceTypeMask))
+// WithBrowsedDeviceTypeMask sets browsedDeviceTypeMask and returns the receiver so calls can be chained.
+func (x *DeviceBrowser) WithBrowsedDeviceTypeMask(browsedDeviceTypeMask DeviceTypeMask) *DeviceBrowser {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBrowsedDeviceTypeMask:"), browsedDeviceTypeMask)
 	return x
 }
 
 // Tells the delegate to start looking for devices.
-//
-// Start calls the underlying Start.
 func (x *DeviceBrowser) Start() {
-	x.inner.Start()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
 }
 
 // Tells the delegate to stop looking for devices.
-//
-// Stop calls the underlying Stop.
 func (x *DeviceBrowser) Stop() {
-	x.inner.Stop()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
-// @property delegate @abstract The delegate. It must conform to ICDeviceBrowserDelegate protocol. The messages this delegate can expect to receive are described by ICDeviceBrowserDelegate protocol.
-//
-// Delegate calls the underlying Delegate.
-func (x *DeviceBrowser) Delegate() raw.ICDeviceBrowserDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *DeviceBrowser) SetDelegate(delegate raw.ICDeviceBrowserDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// @property browsing @abstract Indicates whether the device browser is browsing for devices.
-//
-// IsBrowsing calls the underlying IsBrowsing.
+// Indicates whether the device browser is browsing for devices.
 func (x *DeviceBrowser) IsBrowsing() bool {
-	return x.inner.IsBrowsing()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBrowsing"))
+	return _r
 }
 
-// @property browsedDeviceTypeMask @abstract A mask whose set bits indicate the type of device(s) being browsed after the receiver receives the start message. This property can be changed while the browser is browsing for devices. This property can be constructed by OR'd values of ICDeviceTypeMask with values of ICDeviceLocationTypeMask.
-//
-// BrowsedDeviceTypeMask calls the underlying BrowsedDeviceTypeMask.
-func (x *DeviceBrowser) BrowsedDeviceTypeMask() ICDeviceTypeMask {
-	return ICDeviceTypeMask(x.inner.BrowsedDeviceTypeMask())
+// A mask whose set bits indicate the type of device(s) being browsed after the receiver receives the start message. This property can be changed while the browser is browsing for devices. This property can be constructed by OR'd values of ICDeviceTypeMask with values of ICDeviceLocationTypeMask.
+func (x *DeviceBrowser) BrowsedDeviceTypeMask() DeviceTypeMask {
+	_r := objc.Send[DeviceTypeMask](objref.IDOf(x), objc.RegisterName("browsedDeviceTypeMask"))
+	return _r
 }
 
-// SetBrowsedDeviceTypeMask calls the underlying SetBrowsedDeviceTypeMask.
-func (x *DeviceBrowser) SetBrowsedDeviceTypeMask(browsedDeviceTypeMask ICDeviceTypeMask) {
-	x.inner.SetBrowsedDeviceTypeMask(raw.ICDeviceTypeMask(browsedDeviceTypeMask))
+func (x *DeviceBrowser) SetBrowsedDeviceTypeMask(browsedDeviceTypeMask DeviceTypeMask) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBrowsedDeviceTypeMask:"), browsedDeviceTypeMask)
 }
 
-// @property devices @abstract All devices found by the browser. This property will change as devices appear and disappear. This array is empty before the first invocation of the delegate method 'deviceBrowser:didAddDevice:moreComing:'.
+// All devices found by the browser. This property will change as devices appear and disappear. This array is empty before the first invocation of the delegate method 'deviceBrowser:didAddDevice:moreComing:'.
 //
 // Devices returns the collection as a Go slice.
 func (x *DeviceBrowser) Devices() []*Device {
-	arr := x.inner.Devices()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Device {
-		return &Device{inner: raw.ICDeviceFromID(purego.Retain(_id))}
-	})
-}
-
-// @property preferredDevice @abstract This property returns a device object that should be selected by the client application when it is launched. @discussion If the client application that calls this method is the auto-launch application associated with a device and that device is the last device attached (through USB, FireWire or network), then that device will be the preferred device. The best place to call this method is in the implmentation of the ICDeviceBrowser delegate method "deviceBrowser:didAddDevice:moreComing:", if the "moreComing" parameter passed to the delegate is "NO"; or in the delegate method "deviceBrowserDidEnumerateLocalDevices:".
-//
-// PreferredDevice calls the underlying PreferredDevice.
-func (x *DeviceBrowser) PreferredDevice() unsafe.Pointer {
-	return x.inner.PreferredDevice()
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("devices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Device { return DeviceFromID(_id) })
 }
 
 // DeviceBrowserable is the interface implemented by [DeviceBrowser], for mocking and DI.
 type DeviceBrowserable interface {
-	Unwrap() *raw.ICDeviceBrowser
-	WithDelegate(delegate raw.ICDeviceBrowserDelegate) *DeviceBrowser
-	WithBrowsedDeviceTypeMask(browsedDeviceTypeMask ICDeviceTypeMask) *DeviceBrowser
+	obj.Object
+	WithBrowsedDeviceTypeMask(browsedDeviceTypeMask DeviceTypeMask) *DeviceBrowser
 	Start()
 	Stop()
-	Delegate() raw.ICDeviceBrowserDelegate
-	SetDelegate(delegate raw.ICDeviceBrowserDelegate)
 	IsBrowsing() bool
-	BrowsedDeviceTypeMask() ICDeviceTypeMask
-	SetBrowsedDeviceTypeMask(browsedDeviceTypeMask ICDeviceTypeMask)
+	BrowsedDeviceTypeMask() DeviceTypeMask
+	SetBrowsedDeviceTypeMask(browsedDeviceTypeMask DeviceTypeMask)
 	Devices() []*Device
-	PreferredDevice() unsafe.Pointer
 }
 
 var _ DeviceBrowserable = (*DeviceBrowser)(nil)

@@ -5,219 +5,209 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A bar item that provides a two-state control that can expand into its second state, showing the contents of a bar that it owns.
 //
-// PopoverTouchBarItem wraps [raw.NSPopoverTouchBarItem] with a fluent Go API.
+// PopoverTouchBarItem is an idiomatic wrapper over the Objective-C class NSPopoverTouchBarItem.
 type PopoverTouchBarItem struct {
-	inner *raw.NSPopoverTouchBarItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPopoverTouchBarItem].
-func (x *PopoverTouchBarItem) Unwrap() *raw.NSPopoverTouchBarItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PopoverTouchBarItem) ID() objc.ID { return x.inner.Ptr() }
-
-// PopoverTouchBarItemFromID adopts an existing object pointer as a PopoverTouchBarItem (nil for 0).
+// PopoverTouchBarItemFromID adopts an existing Objective-C object as a PopoverTouchBarItem
+// (nil for 0), retaining it and registering a release finalizer.
 func PopoverTouchBarItemFromID(id objc.ID) *PopoverTouchBarItem {
 	if id == 0 {
 		return nil
 	}
-	return &PopoverTouchBarItem{inner: raw.NSPopoverTouchBarItemFromID(id)}
+	x := &PopoverTouchBarItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPopoverTouchBarItem creates a new [PopoverTouchBarItem].
+// popoverTouchBarItemAdopt wraps an Objective-C object that this code just created as a
+// PopoverTouchBarItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func popoverTouchBarItemAdopt(id objc.ID) *PopoverTouchBarItem {
+	if id == 0 {
+		return nil
+	}
+	x := &PopoverTouchBarItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PopoverTouchBarItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PopoverTouchBarItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PopoverTouchBarItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPopoverTouchBarItem creates a new PopoverTouchBarItem.
 func NewPopoverTouchBarItem() *PopoverTouchBarItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPopoverTouchBarItem")), objc.RegisterName("new"))
-	return &PopoverTouchBarItem{inner: raw.NSPopoverTouchBarItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPopoverTouchBarItem")), objc.RegisterName("new"))
+	return popoverTouchBarItemAdopt(_id)
 }
 
 // The bar displayed when this item is “popped.”
 //
-// WithPopoverTouchBar sets the popoverTouchBar property and returns the receiver for chaining.
+// WithPopoverTouchBar sets popoverTouchBar and returns the receiver so calls can be chained.
 func (x *PopoverTouchBarItem) WithPopoverTouchBar(popoverTouchBar *TouchBar) *PopoverTouchBarItem {
-	x.inner.SetPopoverTouchBar(popoverTouchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPopoverTouchBar:"), objref.IDOf(popoverTouchBar))
 	return x
 }
 
 // The user-visible string identifying this item during bar customization.
 //
-// WithCustomizationLabel sets the customizationLabel property and returns the receiver for chaining.
+// WithCustomizationLabel sets customizationLabel and returns the receiver so calls can be chained.
 func (x *PopoverTouchBarItem) WithCustomizationLabel(customizationLabel string) *PopoverTouchBarItem {
-	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
 	return x
 }
 
 // The view displayed when this item is displayed in its parent bar.
 //
-// WithCollapsedRepresentation sets the collapsedRepresentation property and returns the receiver for chaining.
+// WithCollapsedRepresentation sets collapsedRepresentation and returns the receiver so calls can be chained.
 func (x *PopoverTouchBarItem) WithCollapsedRepresentation(collapsedRepresentation ViewProvider) *PopoverTouchBarItem {
-	x.inner.SetCollapsedRepresentation(collapsedRepresentation.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsedRepresentation:"), objref.IDOf(collapsedRepresentation))
 	return x
 }
 
 // The image displayed by the button for the default collapsed representation.
 //
-// WithCollapsedRepresentationImage sets the collapsedRepresentationImage property and returns the receiver for chaining.
+// WithCollapsedRepresentationImage sets collapsedRepresentationImage and returns the receiver so calls can be chained.
 func (x *PopoverTouchBarItem) WithCollapsedRepresentationImage(collapsedRepresentationImage *Image) *PopoverTouchBarItem {
-	x.inner.SetCollapsedRepresentationImage(collapsedRepresentationImage.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsedRepresentationImage:"), objref.IDOf(collapsedRepresentationImage))
 	return x
 }
 
 // The localized string displayed by the button for the default collapsed representation.
 //
-// WithCollapsedRepresentationLabel sets the collapsedRepresentationLabel property and returns the receiver for chaining.
+// WithCollapsedRepresentationLabel sets collapsedRepresentationLabel and returns the receiver so calls can be chained.
 func (x *PopoverTouchBarItem) WithCollapsedRepresentationLabel(collapsedRepresentationLabel string) *PopoverTouchBarItem {
-	x.inner.SetCollapsedRepresentationLabel(foundation.NSStringStringWithUTF8String(collapsedRepresentationLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsedRepresentationLabel:"), purego.NSString(collapsedRepresentationLabel))
 	return x
 }
 
 // The bar that is displayed when a user press-and-holds on the popover item.
 //
-// WithPressAndHoldTouchBar sets the pressAndHoldTouchBar property and returns the receiver for chaining.
+// WithPressAndHoldTouchBar sets pressAndHoldTouchBar and returns the receiver so calls can be chained.
 func (x *PopoverTouchBarItem) WithPressAndHoldTouchBar(pressAndHoldTouchBar *TouchBar) *PopoverTouchBarItem {
-	x.inner.SetPressAndHoldTouchBar(pressAndHoldTouchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressAndHoldTouchBar:"), objref.IDOf(pressAndHoldTouchBar))
 	return x
 }
 
 // A Boolean value that determines whether a close button should be shown on the popover bar.
 //
-// WithShowsCloseButton sets the showsCloseButton property and returns the receiver for chaining.
+// WithShowsCloseButton sets showsCloseButton and returns the receiver so calls can be chained.
 func (x *PopoverTouchBarItem) WithShowsCloseButton(showsCloseButton bool) *PopoverTouchBarItem {
-	x.inner.SetShowsCloseButton(showsCloseButton)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsCloseButton:"), showsCloseButton)
 	return x
 }
 
 // Determines which items are shown in a bar when space is limited.
 //
-// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+// WithVisibilityPriority sets visibilityPriority and returns the receiver so calls can be chained.
 func (x *PopoverTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *PopoverTouchBarItem {
-	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
 	return x
 }
 
 // Replaces the main bar with this item’s popover bar.
-//
-// ShowPopover calls the underlying ShowPopover.
-func (x *PopoverTouchBarItem) ShowPopover(sender objc.ID) {
-	x.inner.ShowPopover(sender)
+func (x *PopoverTouchBarItem) ShowPopover(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showPopover:"), objref.IDOf(sender))
 }
 
 // Restores the previously visible main bar.
-//
-// DismissPopover calls the underlying DismissPopover.
-func (x *PopoverTouchBarItem) DismissPopover(sender objc.ID) {
-	x.inner.DismissPopover(sender)
+func (x *PopoverTouchBarItem) DismissPopover(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dismissPopover:"), objref.IDOf(sender))
 }
 
 // Returns a gesture recognizer, configured to invoke the showPopover: method.
-//
-// MakeStandardActivatePopoverGestureRecognizer calls the underlying MakeStandardActivatePopoverGestureRecognizer.
 func (x *PopoverTouchBarItem) MakeStandardActivatePopoverGestureRecognizer() *GestureRecognizer {
-	_r := x.inner.MakeStandardActivatePopoverGestureRecognizer()
-	if _r == nil {
-		return nil
-	}
-	return &GestureRecognizer{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeStandardActivatePopoverGestureRecognizer"))
+	return GestureRecognizerFromID(_r)
 }
 
-// PopoverTouchBar calls the underlying PopoverTouchBar.
 func (x *PopoverTouchBarItem) PopoverTouchBar() *TouchBar {
-	_r := x.inner.PopoverTouchBar()
-	if _r == nil {
-		return nil
-	}
-	return &TouchBar{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("popoverTouchBar"))
+	return TouchBarFromID(_r)
 }
 
-// SetPopoverTouchBar calls the underlying SetPopoverTouchBar.
-func (x *PopoverTouchBarItem) SetPopoverTouchBar(popoverTouchBar *raw.NSTouchBar) {
-	x.inner.SetPopoverTouchBar(popoverTouchBar)
+func (x *PopoverTouchBarItem) SetPopoverTouchBar(popoverTouchBar *TouchBar) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPopoverTouchBar:"), objref.IDOf(popoverTouchBar))
 }
 
-// SetCustomizationLabel calls the underlying SetCustomizationLabel.
 func (x *PopoverTouchBarItem) SetCustomizationLabel(customizationLabel string) {
-	x.inner.SetCustomizationLabel(foundation.NSStringStringWithUTF8String(customizationLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
 }
 
-// CollapsedRepresentation calls the underlying CollapsedRepresentation.
 func (x *PopoverTouchBarItem) CollapsedRepresentation() *View {
-	_r := x.inner.CollapsedRepresentation()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collapsedRepresentation"))
+	return ViewFromID(_r)
 }
 
-// SetCollapsedRepresentation calls the underlying SetCollapsedRepresentation.
-func (x *PopoverTouchBarItem) SetCollapsedRepresentation(collapsedRepresentation *raw.NSView) {
-	x.inner.SetCollapsedRepresentation(collapsedRepresentation)
+func (x *PopoverTouchBarItem) SetCollapsedRepresentation(collapsedRepresentation *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsedRepresentation:"), objref.IDOf(collapsedRepresentation))
 }
 
-// CollapsedRepresentationImage calls the underlying CollapsedRepresentationImage.
 func (x *PopoverTouchBarItem) CollapsedRepresentationImage() *Image {
-	_r := x.inner.CollapsedRepresentationImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collapsedRepresentationImage"))
+	return ImageFromID(_r)
 }
 
-// SetCollapsedRepresentationImage calls the underlying SetCollapsedRepresentationImage.
-func (x *PopoverTouchBarItem) SetCollapsedRepresentationImage(collapsedRepresentationImage *raw.NSImage) {
-	x.inner.SetCollapsedRepresentationImage(collapsedRepresentationImage)
+func (x *PopoverTouchBarItem) SetCollapsedRepresentationImage(collapsedRepresentationImage *Image) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsedRepresentationImage:"), objref.IDOf(collapsedRepresentationImage))
 }
 
-// CollapsedRepresentationLabel calls the underlying CollapsedRepresentationLabel.
 func (x *PopoverTouchBarItem) CollapsedRepresentationLabel() string {
-	_r := x.inner.CollapsedRepresentationLabel()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collapsedRepresentationLabel"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCollapsedRepresentationLabel calls the underlying SetCollapsedRepresentationLabel.
 func (x *PopoverTouchBarItem) SetCollapsedRepresentationLabel(collapsedRepresentationLabel string) {
-	x.inner.SetCollapsedRepresentationLabel(foundation.NSStringStringWithUTF8String(collapsedRepresentationLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsedRepresentationLabel:"), purego.NSString(collapsedRepresentationLabel))
 }
 
-// PressAndHoldTouchBar calls the underlying PressAndHoldTouchBar.
 func (x *PopoverTouchBarItem) PressAndHoldTouchBar() *TouchBar {
-	_r := x.inner.PressAndHoldTouchBar()
-	if _r == nil {
-		return nil
-	}
-	return &TouchBar{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pressAndHoldTouchBar"))
+	return TouchBarFromID(_r)
 }
 
-// SetPressAndHoldTouchBar calls the underlying SetPressAndHoldTouchBar.
-func (x *PopoverTouchBarItem) SetPressAndHoldTouchBar(pressAndHoldTouchBar *raw.NSTouchBar) {
-	x.inner.SetPressAndHoldTouchBar(pressAndHoldTouchBar)
+func (x *PopoverTouchBarItem) SetPressAndHoldTouchBar(pressAndHoldTouchBar *TouchBar) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressAndHoldTouchBar:"), objref.IDOf(pressAndHoldTouchBar))
 }
 
-// ShowsCloseButton calls the underlying ShowsCloseButton.
 func (x *PopoverTouchBarItem) ShowsCloseButton() bool {
-	return x.inner.ShowsCloseButton()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsCloseButton"))
+	return _r
 }
 
-// SetShowsCloseButton calls the underlying SetShowsCloseButton.
 func (x *PopoverTouchBarItem) SetShowsCloseButton(showsCloseButton bool) {
-	x.inner.SetShowsCloseButton(showsCloseButton)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsCloseButton:"), showsCloseButton)
 }
-
-func (x *PopoverTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem { return &x.inner.NSTouchBarItem }
 
 // PopoverTouchBarItemable is the interface implemented by [PopoverTouchBarItem], for mocking and DI.
 type PopoverTouchBarItemable interface {
-	Unwrap() *raw.NSPopoverTouchBarItem
+	obj.Object
 	WithPopoverTouchBar(popoverTouchBar *TouchBar) *PopoverTouchBarItem
 	WithCustomizationLabel(customizationLabel string) *PopoverTouchBarItem
 	WithCollapsedRepresentation(collapsedRepresentation ViewProvider) *PopoverTouchBarItem
@@ -226,20 +216,20 @@ type PopoverTouchBarItemable interface {
 	WithPressAndHoldTouchBar(pressAndHoldTouchBar *TouchBar) *PopoverTouchBarItem
 	WithShowsCloseButton(showsCloseButton bool) *PopoverTouchBarItem
 	WithVisibilityPriority(visibilityPriority float32) *PopoverTouchBarItem
-	ShowPopover(sender objc.ID)
-	DismissPopover(sender objc.ID)
+	ShowPopover(sender obj.Object)
+	DismissPopover(sender obj.Object)
 	MakeStandardActivatePopoverGestureRecognizer() *GestureRecognizer
 	PopoverTouchBar() *TouchBar
-	SetPopoverTouchBar(popoverTouchBar *raw.NSTouchBar)
+	SetPopoverTouchBar(popoverTouchBar *TouchBar)
 	SetCustomizationLabel(customizationLabel string)
 	CollapsedRepresentation() *View
-	SetCollapsedRepresentation(collapsedRepresentation *raw.NSView)
+	SetCollapsedRepresentation(collapsedRepresentation *View)
 	CollapsedRepresentationImage() *Image
-	SetCollapsedRepresentationImage(collapsedRepresentationImage *raw.NSImage)
+	SetCollapsedRepresentationImage(collapsedRepresentationImage *Image)
 	CollapsedRepresentationLabel() string
 	SetCollapsedRepresentationLabel(collapsedRepresentationLabel string)
 	PressAndHoldTouchBar() *TouchBar
-	SetPressAndHoldTouchBar(pressAndHoldTouchBar *raw.NSTouchBar)
+	SetPressAndHoldTouchBar(pressAndHoldTouchBar *TouchBar)
 	ShowsCloseButton() bool
 	SetShowsCloseButton(showsCloseButton bool)
 }

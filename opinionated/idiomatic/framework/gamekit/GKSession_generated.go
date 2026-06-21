@@ -5,237 +5,223 @@
 package gamekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // A GKSession object provides the ability to discover and connect to nearby iOS devices using Bluetooth or Wi-fi.
 //
-// Session wraps [raw.GKSession] with a fluent Go API.
+// Session is an idiomatic wrapper over the Objective-C class GKSession.
 type Session struct {
-	inner *raw.GKSession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKSession].
-func (x *Session) Unwrap() *raw.GKSession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Session) ID() objc.ID { return x.inner.Ptr() }
-
-// SessionFromID adopts an existing object pointer as a Session (nil for 0).
+// SessionFromID adopts an existing Objective-C object as a Session
+// (nil for 0), retaining it and registering a release finalizer.
 func SessionFromID(id objc.ID) *Session {
 	if id == 0 {
 		return nil
 	}
-	return &Session{inner: raw.GKSessionFromID(id)}
+	x := &Session{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// sessionAdopt wraps an Objective-C object that this code just created as a
+// Session (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sessionAdopt(id objc.ID) *Session {
+	if id == 0 {
+		return nil
+	}
+	x := &Session{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Session) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Session) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Session) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes and returns a newly allocated session.
 //
-// NewSessionWithSessionIDDisplayNameSessionMode creates a new [Session].
-func NewSessionWithSessionIDDisplayNameSessionMode(sessionID string, name string, mode GKSessionMode) *Session {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKSession")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSessionID:displayName:sessionMode:"), foundation.NSStringStringWithUTF8String(sessionID).Ptr(), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.GKSessionMode(mode))
-	return &Session{inner: raw.GKSessionFromID(_id)}
-}
-
-// The delegate of the session object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Session) WithDelegate(delegate raw.GKSessionDelegate) *Session {
-	x.inner.SetDelegate(delegate)
-	return x
+// NewSessionWithSessionIDDisplayNameSessionMode creates a new Session.
+func NewSessionWithSessionIDDisplayNameSessionMode(sessionID string, name string, mode SessionMode) *Session {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKSession")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSessionID:displayName:sessionMode:"), purego.NSString(sessionID), purego.NSString(name), mode)
+	return sessionAdopt(_id)
 }
 
 // A Boolean value that determines whether or not the session wants to connect to new peers.
 //
-// WithAvailable sets the available property and returns the receiver for chaining.
+// WithAvailable sets available and returns the receiver so calls can be chained.
 func (x *Session) WithAvailable(available bool) *Session {
-	x.inner.SetAvailable(available)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvailable:"), available)
 	return x
 }
 
 // A time interval that expresses how long the session waits before it disconnects a nonresponsive peer.
 //
-// WithDisconnectTimeout sets the disconnectTimeout property and returns the receiver for chaining.
+// WithDisconnectTimeout sets disconnectTimeout and returns the receiver so calls can be chained.
 func (x *Session) WithDisconnectTimeout(disconnectTimeout float64) *Session {
-	x.inner.SetDisconnectTimeout(disconnectTimeout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisconnectTimeout:"), disconnectTimeout)
 	return x
 }
 
 // Returns a user-readable name for a peer.
-//
-// DisplayNameForPeer calls the underlying DisplayNameForPeer.
 func (x *Session) DisplayNameForPeer(peerID string) string {
-	_r := x.inner.DisplayNameForPeer(foundation.NSStringStringWithUTF8String(peerID))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayNameForPeer:"), purego.NSString(peerID))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Transmits a collection of bytes to a list of connected peers.
-//
-// SendDataToPeersWithDataModeError calls the underlying SendDataToPeersWithDataModeError.
-func (x *Session) SendDataToPeersWithDataModeError(data *foundation.NSData, peers *foundation.NSArray[objc.ID], mode GKSendDataMode) (bool, error) {
-	return x.inner.SendDataToPeersWithDataModeError(data, peers, raw.GKSendDataMode(mode))
+func (x *Session) SendDataToPeersWithDataMode(data obj.Object, peers obj.Object, mode SendDataMode) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendData:toPeers:withDataMode:error:"), objref.IDOf(data), objref.IDOf(peers), mode, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Transmits a collection of bytes to all connected peers.
-//
-// SendDataToAllPeersWithDataModeError calls the underlying SendDataToAllPeersWithDataModeError.
-func (x *Session) SendDataToAllPeersWithDataModeError(data *foundation.NSData, mode GKSendDataMode) (bool, error) {
-	return x.inner.SendDataToAllPeersWithDataModeError(data, raw.GKSendDataMode(mode))
-}
-
-// Sets the object that handles data received from other peers connected to the session.
-//
-// SetDataReceiveHandlerWithContext calls the underlying SetDataReceiveHandlerWithContext.
-func (x *Session) SetDataReceiveHandlerWithContext(handler objc.ID, context_ unsafe.Pointer) {
-	x.inner.SetDataReceiveHandlerWithContext(handler, context_)
+func (x *Session) SendDataToAllPeersWithDataMode(data obj.Object, mode SendDataMode) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendDataToAllPeers:withDataMode:error:"), objref.IDOf(data), mode, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Creates a connection to another iOS device.
-//
-// ConnectToPeerWithTimeout calls the underlying ConnectToPeerWithTimeout.
 func (x *Session) ConnectToPeerWithTimeout(peerID string, timeout float64) {
-	x.inner.ConnectToPeerWithTimeout(foundation.NSStringStringWithUTF8String(peerID), timeout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectToPeer:withTimeout:"), purego.NSString(peerID), timeout)
 }
 
 // Cancels a pending request to connect to another iOS device.
-//
-// CancelConnectToPeer calls the underlying CancelConnectToPeer.
 func (x *Session) CancelConnectToPeer(peerID string) {
-	x.inner.CancelConnectToPeer(foundation.NSStringStringWithUTF8String(peerID))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelConnectToPeer:"), purego.NSString(peerID))
 }
 
 // Called by the delegate to accept a connection request received from a remote peer.
-//
-// AcceptConnectionFromPeerError calls the underlying AcceptConnectionFromPeerError.
-func (x *Session) AcceptConnectionFromPeerError(peerID string) (bool, error) {
-	return x.inner.AcceptConnectionFromPeerError(foundation.NSStringStringWithUTF8String(peerID))
+func (x *Session) AcceptConnectionFromPeer(peerID string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("acceptConnectionFromPeer:error:"), purego.NSString(peerID), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Called by the delegate to reject a connection request received from a remote peer.
-//
-// DenyConnectionFromPeer calls the underlying DenyConnectionFromPeer.
 func (x *Session) DenyConnectionFromPeer(peerID string) {
-	x.inner.DenyConnectionFromPeer(foundation.NSStringStringWithUTF8String(peerID))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("denyConnectionFromPeer:"), purego.NSString(peerID))
 }
 
 // Disconnects a connected peer from all peers connected to the session.
-//
-// DisconnectPeerFromAllPeers calls the underlying DisconnectPeerFromAllPeers.
 func (x *Session) DisconnectPeerFromAllPeers(peerID string) {
-	x.inner.DisconnectPeerFromAllPeers(foundation.NSStringStringWithUTF8String(peerID))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnectPeerFromAllPeers:"), purego.NSString(peerID))
 }
 
 // Disconnects the session from all connected peers.
-//
-// DisconnectFromAllPeers calls the underlying DisconnectFromAllPeers.
 func (x *Session) DisconnectFromAllPeers() {
-	x.inner.DisconnectFromAllPeers()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnectFromAllPeers"))
 }
 
 // Returns a list of peers in the specified connection state.
-//
-// PeersWithConnectionState calls the underlying PeersWithConnectionState.
-func (x *Session) PeersWithConnectionState(state GKPeerConnectionState) *foundation.NSArray[objc.ID] {
-	return x.inner.PeersWithConnectionState(raw.GKPeerConnectionState(state))
+func (x *Session) PeersWithConnectionState(state PeerConnectionState) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("peersWithConnectionState:"), state)
+	return obj.Wrap(_r)
 }
 
-// Delegate calls the underlying Delegate.
-func (x *Session) Delegate() raw.GKSessionDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *Session) SetDelegate(delegate raw.GKSessionDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// SessionID calls the underlying SessionID.
 func (x *Session) SessionID() string {
-	_r := x.inner.SessionID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// DisplayName calls the underlying DisplayName.
 func (x *Session) DisplayName() string {
-	_r := x.inner.DisplayName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SessionMode calls the underlying SessionMode.
-func (x *Session) SessionMode() GKSessionMode {
-	return GKSessionMode(x.inner.SessionMode())
+func (x *Session) SessionMode() SessionMode {
+	_r := objc.Send[SessionMode](objref.IDOf(x), objc.RegisterName("sessionMode"))
+	return _r
 }
 
-// PeerID calls the underlying PeerID.
 func (x *Session) PeerID() string {
-	_r := x.inner.PeerID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("peerID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Toggle availability on the network based on session mode and search criteria.  Delegate will get a callback -session:didReceiveConnectionRequestFromPeer: when a peer attempts a connection.
-//
-// IsAvailable calls the underlying IsAvailable.
 func (x *Session) IsAvailable() bool {
-	return x.inner.IsAvailable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAvailable"))
+	return _r
 }
 
-// SetAvailable calls the underlying SetAvailable.
 func (x *Session) SetAvailable(available bool) {
-	x.inner.SetAvailable(available)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvailable:"), available)
 }
 
 // The timeout for disconnecting a peer if it appears that the peer has lost connection to the game network
-//
-// DisconnectTimeout calls the underlying DisconnectTimeout.
 func (x *Session) DisconnectTimeout() float64 {
-	return x.inner.DisconnectTimeout()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("disconnectTimeout"))
+	return _r
 }
 
-// SetDisconnectTimeout calls the underlying SetDisconnectTimeout.
 func (x *Session) SetDisconnectTimeout(disconnectTimeout float64) {
-	x.inner.SetDisconnectTimeout(disconnectTimeout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisconnectTimeout:"), disconnectTimeout)
 }
 
 // Sessionable is the interface implemented by [Session], for mocking and DI.
 type Sessionable interface {
-	Unwrap() *raw.GKSession
-	WithDelegate(delegate raw.GKSessionDelegate) *Session
+	obj.Object
 	WithAvailable(available bool) *Session
 	WithDisconnectTimeout(disconnectTimeout float64) *Session
 	DisplayNameForPeer(peerID string) string
-	SendDataToPeersWithDataModeError(data *foundation.NSData, peers *foundation.NSArray[objc.ID], mode GKSendDataMode) (bool, error)
-	SendDataToAllPeersWithDataModeError(data *foundation.NSData, mode GKSendDataMode) (bool, error)
-	SetDataReceiveHandlerWithContext(handler objc.ID, context_ unsafe.Pointer)
+	SendDataToPeersWithDataMode(data obj.Object, peers obj.Object, mode SendDataMode) error
+	SendDataToAllPeersWithDataMode(data obj.Object, mode SendDataMode) error
 	ConnectToPeerWithTimeout(peerID string, timeout float64)
 	CancelConnectToPeer(peerID string)
-	AcceptConnectionFromPeerError(peerID string) (bool, error)
+	AcceptConnectionFromPeer(peerID string) error
 	DenyConnectionFromPeer(peerID string)
 	DisconnectPeerFromAllPeers(peerID string)
 	DisconnectFromAllPeers()
-	PeersWithConnectionState(state GKPeerConnectionState) *foundation.NSArray[objc.ID]
-	Delegate() raw.GKSessionDelegate
-	SetDelegate(delegate raw.GKSessionDelegate)
+	PeersWithConnectionState(state PeerConnectionState) obj.Object
 	SessionID() string
 	DisplayName() string
-	SessionMode() GKSessionMode
+	SessionMode() SessionMode
 	PeerID() string
 	IsAvailable() bool
 	SetAvailable(available bool)

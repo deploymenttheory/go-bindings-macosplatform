@@ -5,205 +5,188 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An expression for use in a comparison predicate.
 //
-// Expression wraps [raw.NSExpression] with a fluent Go API.
+// Expression is an idiomatic wrapper over the Objective-C class NSExpression.
 type Expression struct {
-	inner *raw.NSExpression
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSExpression].
-func (x *Expression) Unwrap() *raw.NSExpression { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Expression) ID() objc.ID { return x.inner.Ptr() }
-
-// ExpressionFromID adopts an existing object pointer as a Expression (nil for 0).
+// ExpressionFromID adopts an existing Objective-C object as a Expression
+// (nil for 0), retaining it and registering a release finalizer.
 func ExpressionFromID(id objc.ID) *Expression {
 	if id == 0 {
 		return nil
 	}
-	return &Expression{inner: raw.NSExpressionFromID(id)}
+	x := &Expression{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// expressionAdopt wraps an Objective-C object that this code just created as a
+// Expression (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func expressionAdopt(id objc.ID) *Expression {
+	if id == 0 {
+		return nil
+	}
+	x := &Expression{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Expression) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Expression) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Expression) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates the expression with the specified expression type.
 //
-// NewExpressionWithExpressionType creates a new [Expression].
-func NewExpressionWithExpressionType(type_ NSExpressionType) *Expression {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSExpression")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExpressionType:"), raw.NSExpressionType(type_))
-	return &Expression{inner: raw.NSExpressionFromID(_id)}
+// NewExpressionWithExpressionType creates a new Expression.
+func NewExpressionWithExpressionType(type_ ExpressionType) *Expression {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExpressionType:"), type_)
+	return expressionAdopt(_id)
 }
 
 // Creates an expression by decoding from the coder you specify.
 //
-// NewExpressionWithCoder creates a new [Expression].
-func NewExpressionWithCoder(coder *raw.NSCoder) *Expression {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSExpression")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &Expression{inner: raw.NSExpressionFromID(_id)}
+// NewExpressionWithCoder creates a new Expression.
+func NewExpressionWithCoder(coder *Coder) *Expression {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSExpression")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return expressionAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Expression) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Expression {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *Expression) WithScriptingProperties(scriptingProperties obj.Object) *Expression {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Evaluates an expression using a specified object and context.
-//
-// ExpressionValueWithObjectContext calls the underlying ExpressionValueWithObjectContext.
-func (x *Expression) ExpressionValueWithObjectContext(object objc.ID, context_ *raw.NSMutableDictionary[objc.ID, objc.ID]) objc.ID {
-	return x.inner.ExpressionValueWithObjectContext(object, context_)
+func (x *Expression) ExpressionValueWithObjectContext(object obj.Object, context_ obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expressionValueWithObject:context:"), objref.IDOf(object), objref.IDOf(context_))
+	return obj.Wrap(_r)
 }
 
 // Forces a securely decoded expression to allow evaluation.
-//
-// AllowEvaluation calls the underlying AllowEvaluation.
 func (x *Expression) AllowEvaluation() {
-	x.inner.AllowEvaluation()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowEvaluation"))
 }
 
-// ExpressionType calls the underlying ExpressionType.
-func (x *Expression) ExpressionType() NSExpressionType {
-	return NSExpressionType(x.inner.ExpressionType())
+func (x *Expression) ExpressionType() ExpressionType {
+	_r := objc.Send[ExpressionType](objref.IDOf(x), objc.RegisterName("expressionType"))
+	return _r
 }
 
-// ConstantValue calls the underlying ConstantValue.
-func (x *Expression) ConstantValue() objc.ID {
-	return x.inner.ConstantValue()
+func (x *Expression) ConstantValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constantValue"))
+	return obj.Wrap(_r)
 }
 
-// KeyPath calls the underlying KeyPath.
-func (x *Expression) KeyPath() *String {
-	_r := x.inner.KeyPath()
-	if _r == nil {
-		return nil
+func (x *Expression) KeyPath() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyPath"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Function calls the underlying Function.
-func (x *Expression) Function() *String {
-	_r := x.inner.Function()
-	if _r == nil {
-		return nil
+func (x *Expression) Function() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("function"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Variable calls the underlying Variable.
-func (x *Expression) Variable() *String {
-	_r := x.inner.Variable()
-	if _r == nil {
-		return nil
+func (x *Expression) Variable() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variable"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Operand calls the underlying Operand.
 func (x *Expression) Operand() *Expression {
-	_r := x.inner.Operand()
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operand"))
+	return ExpressionFromID(_r)
 }
 
 // Arguments returns the collection as a Go slice.
 func (x *Expression) Arguments() []*Expression {
-	arr := x.inner.Arguments()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Expression {
-		return &Expression{inner: raw.NSExpressionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arguments"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Expression { return ExpressionFromID(_id) })
 }
 
-// Collection calls the underlying Collection.
-func (x *Expression) Collection() objc.ID {
-	return x.inner.Collection()
+func (x *Expression) Collection() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collection"))
+	return obj.Wrap(_r)
 }
 
-// Predicate calls the underlying Predicate.
 func (x *Expression) Predicate() *Predicate {
-	_r := x.inner.Predicate()
-	if _r == nil {
-		return nil
-	}
-	return &Predicate{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
+	return PredicateFromID(_r)
 }
 
-// LeftExpression calls the underlying LeftExpression.
 func (x *Expression) LeftExpression() *Expression {
-	_r := x.inner.LeftExpression()
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftExpression"))
+	return ExpressionFromID(_r)
 }
 
-// RightExpression calls the underlying RightExpression.
 func (x *Expression) RightExpression() *Expression {
-	_r := x.inner.RightExpression()
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightExpression"))
+	return ExpressionFromID(_r)
 }
 
-// TrueExpression calls the underlying TrueExpression.
 func (x *Expression) TrueExpression() *Expression {
-	_r := x.inner.TrueExpression()
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trueExpression"))
+	return ExpressionFromID(_r)
 }
 
-// FalseExpression calls the underlying FalseExpression.
 func (x *Expression) FalseExpression() *Expression {
-	_r := x.inner.FalseExpression()
-	if _r == nil {
-		return nil
-	}
-	return &Expression{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("falseExpression"))
+	return ExpressionFromID(_r)
 }
-
-// ExpressionBlock calls the underlying ExpressionBlock.
-func (x *Expression) ExpressionBlock() objc.Block {
-	return x.inner.ExpressionBlock()
-}
-
-func (x *Expression) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Expressionable is the interface implemented by [Expression], for mocking and DI.
 type Expressionable interface {
-	Unwrap() *raw.NSExpression
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Expression
-	ExpressionValueWithObjectContext(object objc.ID, context_ *raw.NSMutableDictionary[objc.ID, objc.ID]) objc.ID
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Expression
+	ExpressionValueWithObjectContext(object obj.Object, context_ obj.Object) obj.Object
 	AllowEvaluation()
-	ExpressionType() NSExpressionType
-	ConstantValue() objc.ID
-	KeyPath() *String
-	Function() *String
-	Variable() *String
+	ExpressionType() ExpressionType
+	ConstantValue() obj.Object
+	KeyPath() string
+	Function() string
+	Variable() string
 	Operand() *Expression
 	Arguments() []*Expression
-	Collection() objc.ID
+	Collection() obj.Object
 	Predicate() *Predicate
 	LeftExpression() *Expression
 	RightExpression() *Expression
 	TrueExpression() *Expression
 	FalseExpression() *Expression
-	ExpressionBlock() objc.Block
 }
 
 var _ Expressionable = (*Expression)(nil)

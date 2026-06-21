@@ -5,50 +5,77 @@
 package calendarstore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/calendarstore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CalNthWeekDay wraps [raw.CalNthWeekDay] with a fluent Go API.
+// CalNthWeekDay is an idiomatic wrapper over the Objective-C class CalNthWeekDay.
 type CalNthWeekDay struct {
-	inner *raw.CalNthWeekDay
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CalNthWeekDay].
-func (x *CalNthWeekDay) Unwrap() *raw.CalNthWeekDay { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CalNthWeekDay) ID() objc.ID { return x.inner.Ptr() }
-
-// CalNthWeekDayFromID adopts an existing object pointer as a CalNthWeekDay (nil for 0).
+// CalNthWeekDayFromID adopts an existing Objective-C object as a CalNthWeekDay
+// (nil for 0), retaining it and registering a release finalizer.
 func CalNthWeekDayFromID(id objc.ID) *CalNthWeekDay {
 	if id == 0 {
 		return nil
 	}
-	return &CalNthWeekDay{inner: raw.CalNthWeekDayFromID(id)}
+	x := &CalNthWeekDay{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCalNthWeekDay creates a new [CalNthWeekDay].
+// calNthWeekDayAdopt wraps an Objective-C object that this code just created as a
+// CalNthWeekDay (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func calNthWeekDayAdopt(id objc.ID) *CalNthWeekDay {
+	if id == 0 {
+		return nil
+	}
+	x := &CalNthWeekDay{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CalNthWeekDay) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CalNthWeekDay) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CalNthWeekDay) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCalNthWeekDay creates a new CalNthWeekDay.
 func NewCalNthWeekDay() *CalNthWeekDay {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CalNthWeekDay")), objc.RegisterName("new"))
-	return &CalNthWeekDay{inner: raw.CalNthWeekDayFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CalNthWeekDay")), objc.RegisterName("new"))
+	return calNthWeekDayAdopt(_id)
 }
 
-// DayOfTheWeek calls the underlying DayOfTheWeek.
-func (x *CalNthWeekDay) DayOfTheWeek() uint {
-	return x.inner.DayOfTheWeek()
+func (x *CalNthWeekDay) DayOfTheWeek() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dayOfTheWeek"))
+	return _r
 }
 
-// WeekNumber calls the underlying WeekNumber.
 func (x *CalNthWeekDay) WeekNumber() int {
-	return x.inner.WeekNumber()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("weekNumber"))
+	return _r
 }
 
 // CalNthWeekDayable is the interface implemented by [CalNthWeekDay], for mocking and DI.
 type CalNthWeekDayable interface {
-	Unwrap() *raw.CalNthWeekDay
-	DayOfTheWeek() uint
+	obj.Object
+	DayOfTheWeek() int
 	WeekNumber() int
 }
 

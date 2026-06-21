@@ -5,72 +5,95 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description of the edits made to an asset’s photo, video, or Live Photo content, which allows your app to reconstruct or revert the effects of prior editing sessions.
 //
-// AdjustmentData wraps [raw.PHAdjustmentData] with a fluent Go API.
+// AdjustmentData is an idiomatic wrapper over the Objective-C class PHAdjustmentData.
 type AdjustmentData struct {
-	inner *raw.PHAdjustmentData
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHAdjustmentData].
-func (x *AdjustmentData) Unwrap() *raw.PHAdjustmentData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AdjustmentData) ID() objc.ID { return x.inner.Ptr() }
-
-// AdjustmentDataFromID adopts an existing object pointer as a AdjustmentData (nil for 0).
+// AdjustmentDataFromID adopts an existing Objective-C object as a AdjustmentData
+// (nil for 0), retaining it and registering a release finalizer.
 func AdjustmentDataFromID(id objc.ID) *AdjustmentData {
 	if id == 0 {
 		return nil
 	}
-	return &AdjustmentData{inner: raw.PHAdjustmentDataFromID(id)}
+	x := &AdjustmentData{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// adjustmentDataAdopt wraps an Objective-C object that this code just created as a
+// AdjustmentData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func adjustmentDataAdopt(id objc.ID) *AdjustmentData {
+	if id == 0 {
+		return nil
+	}
+	x := &AdjustmentData{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AdjustmentData) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AdjustmentData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AdjustmentData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes an adjustment object with the specified format and data.
 //
-// NewAdjustmentDataWithFormatIdentifierFormatVersionData creates a new [AdjustmentData].
-func NewAdjustmentDataWithFormatIdentifierFormatVersionData(formatIdentifier string, formatVersion string, data *foundation.NSData) *AdjustmentData {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHAdjustmentData")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormatIdentifier:formatVersion:data:"), foundation.NSStringStringWithUTF8String(formatIdentifier).Ptr(), foundation.NSStringStringWithUTF8String(formatVersion).Ptr(), data.Ptr())
-	return &AdjustmentData{inner: raw.PHAdjustmentDataFromID(_id)}
+// NewAdjustmentDataWithFormatIdentifierFormatVersionData creates a new AdjustmentData.
+func NewAdjustmentDataWithFormatIdentifierFormatVersionData(formatIdentifier string, formatVersion string, data obj.Object) *AdjustmentData {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHAdjustmentData")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFormatIdentifier:formatVersion:data:"), purego.NSString(formatIdentifier), purego.NSString(formatVersion), objref.IDOf(data))
+	return adjustmentDataAdopt(_id)
 }
 
-// FormatIdentifier calls the underlying FormatIdentifier.
 func (x *AdjustmentData) FormatIdentifier() string {
-	_r := x.inner.FormatIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// FormatVersion calls the underlying FormatVersion.
 func (x *AdjustmentData) FormatVersion() string {
-	_r := x.inner.FormatVersion()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatVersion"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Data calls the underlying Data.
-func (x *AdjustmentData) Data() *foundation.NSData {
-	return x.inner.Data()
+func (x *AdjustmentData) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
 
 // AdjustmentDataable is the interface implemented by [AdjustmentData], for mocking and DI.
 type AdjustmentDataable interface {
-	Unwrap() *raw.PHAdjustmentData
+	obj.Object
 	FormatIdentifier() string
 	FormatVersion() string
-	Data() *foundation.NSData
+	Data() obj.Object
 }
 
 var _ AdjustmentDataable = (*AdjustmentData)(nil)

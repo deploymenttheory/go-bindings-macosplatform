@@ -10,436 +10,436 @@ import (
 )
 
 // An activation type that you specify for an activation descriptor.
-type MLCActivationType int64
+type ActivationType int64
 
 const (
 	// An activation type that implements the identity function.
-	MLCActivationTypeNone MLCActivationType = 0
+	ActivationTypeNone ActivationType = 0
 	// An activation type that implements the rectified linear unit activation function.
-	MLCActivationTypeReLU MLCActivationType = 1
+	ActivationTypeReLU ActivationType = 1
 	// An activation type that implements the linear activation function.
-	MLCActivationTypeLinear MLCActivationType = 2
+	ActivationTypeLinear ActivationType = 2
 	// An activation type that implements the sigmoid activation function.
-	MLCActivationTypeSigmoid MLCActivationType = 3
+	ActivationTypeSigmoid ActivationType = 3
 	// An activation type that implements the hard sigmoid activation function.
-	MLCActivationTypeHardSigmoid MLCActivationType = 4
+	ActivationTypeHardSigmoid ActivationType = 4
 	// An activation type that implements the hyperbolic tangent activation function.
-	MLCActivationTypeTanh MLCActivationType = 5
+	ActivationTypeTanh ActivationType = 5
 	// An activation type that implements the absolute activation function.
-	MLCActivationTypeAbsolute MLCActivationType = 6
+	ActivationTypeAbsolute ActivationType = 6
 	// An activation type that implements the soft plus activation function.
-	MLCActivationTypeSoftPlus MLCActivationType = 7
+	ActivationTypeSoftPlus ActivationType = 7
 	// An activation type that implements the parametric soft sign activation function.
-	MLCActivationTypeSoftSign MLCActivationType = 8
+	ActivationTypeSoftSign ActivationType = 8
 	// An activation type that implements the exponential linear unit activation function.
-	MLCActivationTypeELU MLCActivationType = 9
+	ActivationTypeELU ActivationType = 9
 	// An activation type that implements the ReLUN activation function.
-	MLCActivationTypeReLUN MLCActivationType = 10
+	ActivationTypeReLUN ActivationType = 10
 	// An activation type that implements the log sigmoid activation function.
-	MLCActivationTypeLogSigmoid MLCActivationType = 11
+	ActivationTypeLogSigmoid ActivationType = 11
 	// An activation type that implements the scaled exponential linear unit activation function.
-	MLCActivationTypeSELU MLCActivationType = 12
+	ActivationTypeSELU ActivationType = 12
 	// An activation type that implements the CELU activation function.
-	MLCActivationTypeCELU MLCActivationType = 13
+	ActivationTypeCELU ActivationType = 13
 	// An activation type that implements the hard shrink activation function.
-	MLCActivationTypeHardShrink MLCActivationType = 14
+	ActivationTypeHardShrink ActivationType = 14
 	// An activation type that implements the soft shrink activation function.
-	MLCActivationTypeSoftShrink MLCActivationType = 15
+	ActivationTypeSoftShrink ActivationType = 15
 	// An activation type that implements the hyperbolic tangent shrink activation function.
-	MLCActivationTypeTanhShrink MLCActivationType = 16
+	ActivationTypeTanhShrink ActivationType = 16
 	// An activation type that implements the threshold activation function.
-	MLCActivationTypeThreshold MLCActivationType = 17
+	ActivationTypeThreshold ActivationType = 17
 	// An activation type that implements the gaussian error linear unit activation function.
-	MLCActivationTypeGELU MLCActivationType = 18
+	ActivationTypeGELU ActivationType = 18
 	// An activation type that implements the hard swish activation function.
-	MLCActivationTypeHardSwish MLCActivationType = 19
+	ActivationTypeHardSwish ActivationType = 19
 	// An activation type that implements the clamp activation function.
-	MLCActivationTypeClamp MLCActivationType = 20
+	ActivationTypeClamp ActivationType = 20
 	// The count of activation types.
-	MLCActivationTypeCount MLCActivationType = 21
+	ActivationTypeCount ActivationType = 21
 )
 
-func (e MLCActivationType) String() string {
+func (e ActivationType) String() string {
 	switch e {
-	case MLCActivationTypeNone:
-		return "MLCActivationTypeNone"
-	case MLCActivationTypeReLU:
-		return "MLCActivationTypeReLU"
-	case MLCActivationTypeLinear:
-		return "MLCActivationTypeLinear"
-	case MLCActivationTypeSigmoid:
-		return "MLCActivationTypeSigmoid"
-	case MLCActivationTypeHardSigmoid:
-		return "MLCActivationTypeHardSigmoid"
-	case MLCActivationTypeTanh:
-		return "MLCActivationTypeTanh"
-	case MLCActivationTypeAbsolute:
-		return "MLCActivationTypeAbsolute"
-	case MLCActivationTypeSoftPlus:
-		return "MLCActivationTypeSoftPlus"
-	case MLCActivationTypeSoftSign:
-		return "MLCActivationTypeSoftSign"
-	case MLCActivationTypeELU:
-		return "MLCActivationTypeELU"
-	case MLCActivationTypeReLUN:
-		return "MLCActivationTypeReLUN"
-	case MLCActivationTypeLogSigmoid:
-		return "MLCActivationTypeLogSigmoid"
-	case MLCActivationTypeSELU:
-		return "MLCActivationTypeSELU"
-	case MLCActivationTypeCELU:
-		return "MLCActivationTypeCELU"
-	case MLCActivationTypeHardShrink:
-		return "MLCActivationTypeHardShrink"
-	case MLCActivationTypeSoftShrink:
-		return "MLCActivationTypeSoftShrink"
-	case MLCActivationTypeTanhShrink:
-		return "MLCActivationTypeTanhShrink"
-	case MLCActivationTypeThreshold:
-		return "MLCActivationTypeThreshold"
-	case MLCActivationTypeGELU:
-		return "MLCActivationTypeGELU"
-	case MLCActivationTypeHardSwish:
-		return "MLCActivationTypeHardSwish"
-	case MLCActivationTypeClamp:
-		return "MLCActivationTypeClamp"
-	case MLCActivationTypeCount:
-		return "MLCActivationTypeCount"
+	case ActivationTypeNone:
+		return "ActivationTypeNone"
+	case ActivationTypeReLU:
+		return "ActivationTypeReLU"
+	case ActivationTypeLinear:
+		return "ActivationTypeLinear"
+	case ActivationTypeSigmoid:
+		return "ActivationTypeSigmoid"
+	case ActivationTypeHardSigmoid:
+		return "ActivationTypeHardSigmoid"
+	case ActivationTypeTanh:
+		return "ActivationTypeTanh"
+	case ActivationTypeAbsolute:
+		return "ActivationTypeAbsolute"
+	case ActivationTypeSoftPlus:
+		return "ActivationTypeSoftPlus"
+	case ActivationTypeSoftSign:
+		return "ActivationTypeSoftSign"
+	case ActivationTypeELU:
+		return "ActivationTypeELU"
+	case ActivationTypeReLUN:
+		return "ActivationTypeReLUN"
+	case ActivationTypeLogSigmoid:
+		return "ActivationTypeLogSigmoid"
+	case ActivationTypeSELU:
+		return "ActivationTypeSELU"
+	case ActivationTypeCELU:
+		return "ActivationTypeCELU"
+	case ActivationTypeHardShrink:
+		return "ActivationTypeHardShrink"
+	case ActivationTypeSoftShrink:
+		return "ActivationTypeSoftShrink"
+	case ActivationTypeTanhShrink:
+		return "ActivationTypeTanhShrink"
+	case ActivationTypeThreshold:
+		return "ActivationTypeThreshold"
+	case ActivationTypeGELU:
+		return "ActivationTypeGELU"
+	case ActivationTypeHardSwish:
+		return "ActivationTypeHardSwish"
+	case ActivationTypeClamp:
+		return "ActivationTypeClamp"
+	case ActivationTypeCount:
+		return "ActivationTypeCount"
 	default:
-		return fmt.Sprintf("MLCActivationType(%d)", int64(e))
+		return fmt.Sprintf("ActivationType(%d)", int64(e))
 	}
 }
 
 // Constants that describe an arithmetic operation.
-type MLCArithmeticOperation int64
+type ArithmeticOperation int64
 
 const (
 	// Calculates the element-wise sum of the inputs.
-	MLCArithmeticOperationAdd MLCArithmeticOperation = 0
+	ArithmeticOperationAdd ArithmeticOperation = 0
 	// Calculates the element-wise difference between the inputs.
-	MLCArithmeticOperationSubtract MLCArithmeticOperation = 1
+	ArithmeticOperationSubtract ArithmeticOperation = 1
 	// Calculates the element-wise product of the inputs.
-	MLCArithmeticOperationMultiply MLCArithmeticOperation = 2
+	ArithmeticOperationMultiply ArithmeticOperation = 2
 	// Calculates the element-wise division of the inputs.
-	MLCArithmeticOperationDivide MLCArithmeticOperation = 3
+	ArithmeticOperationDivide ArithmeticOperation = 3
 	// Calculates the element-wise floor of the inputs.
-	MLCArithmeticOperationFloor MLCArithmeticOperation = 4
+	ArithmeticOperationFloor ArithmeticOperation = 4
 	// Calculates the element-wise rounding of the inputs.
-	MLCArithmeticOperationRound MLCArithmeticOperation = 5
+	ArithmeticOperationRound ArithmeticOperation = 5
 	// Calculates the element-wise ceiling of the inputs.
-	MLCArithmeticOperationCeil MLCArithmeticOperation = 6
+	ArithmeticOperationCeil ArithmeticOperation = 6
 	// Calculates the element-wise square root of the input.
-	MLCArithmeticOperationSqrt MLCArithmeticOperation = 7
+	ArithmeticOperationSqrt ArithmeticOperation = 7
 	// Calculates the element-wise reciprocal of the square root of the input.
-	MLCArithmeticOperationRsqrt MLCArithmeticOperation = 8
+	ArithmeticOperationRsqrt ArithmeticOperation = 8
 	// Calculates the element-wise sine of the input.
-	MLCArithmeticOperationSin MLCArithmeticOperation = 9
+	ArithmeticOperationSin ArithmeticOperation = 9
 	// Calculates the element-wise cosine of the input.
-	MLCArithmeticOperationCos MLCArithmeticOperation = 10
+	ArithmeticOperationCos ArithmeticOperation = 10
 	// Calculates the element-wise tangent of the input.
-	MLCArithmeticOperationTan MLCArithmeticOperation = 11
+	ArithmeticOperationTan ArithmeticOperation = 11
 	// Calculates the element-wise inverse sine of the input.
-	MLCArithmeticOperationAsin MLCArithmeticOperation = 12
+	ArithmeticOperationAsin ArithmeticOperation = 12
 	// Calculates the element-wise inverse cosine of the input.
-	MLCArithmeticOperationAcos MLCArithmeticOperation = 13
+	ArithmeticOperationAcos ArithmeticOperation = 13
 	// Calculates the element-wise inverse tangent of the input.
-	MLCArithmeticOperationAtan MLCArithmeticOperation = 14
+	ArithmeticOperationAtan ArithmeticOperation = 14
 	// Calculates the element-wise hyperbolic sine of the input.
-	MLCArithmeticOperationSinh MLCArithmeticOperation = 15
+	ArithmeticOperationSinh ArithmeticOperation = 15
 	// Calculates the element-wise hyperbolic cosine of the input.
-	MLCArithmeticOperationCosh MLCArithmeticOperation = 16
+	ArithmeticOperationCosh ArithmeticOperation = 16
 	// Calculates the element-wise hyperbolic tangent of the input.
-	MLCArithmeticOperationTanh MLCArithmeticOperation = 17
+	ArithmeticOperationTanh ArithmeticOperation = 17
 	// Calculates the element-wise inverse hyperbolic sine of the input.
-	MLCArithmeticOperationAsinh MLCArithmeticOperation = 18
+	ArithmeticOperationAsinh ArithmeticOperation = 18
 	// Calculates the element-wise inverse hyperbolic cosine of the input.
-	MLCArithmeticOperationAcosh MLCArithmeticOperation = 19
+	ArithmeticOperationAcosh ArithmeticOperation = 19
 	// Calculates the element-wise inverse hyperbolic tangent of the input.
-	MLCArithmeticOperationAtanh MLCArithmeticOperation = 20
+	ArithmeticOperationAtanh ArithmeticOperation = 20
 	// Calculates the element-wise first input raised to the power of the second input.
-	MLCArithmeticOperationPow MLCArithmeticOperation = 21
+	ArithmeticOperationPow ArithmeticOperation = 21
 	// Calculates the element-wise result of the exponent raised to the power of the input.
-	MLCArithmeticOperationExp MLCArithmeticOperation = 22
+	ArithmeticOperationExp ArithmeticOperation = 22
 	// Calculates the element-wise result of the number 2 raised to the power of the input.
-	MLCArithmeticOperationExp2 MLCArithmeticOperation = 23
+	ArithmeticOperationExp2 ArithmeticOperation = 23
 	// Calculates the element-wise natural logarithm of the input.
-	MLCArithmeticOperationLog MLCArithmeticOperation = 24
+	ArithmeticOperationLog ArithmeticOperation = 24
 	// Calculates the element-wise base 2 logarithm of the input.
-	MLCArithmeticOperationLog2 MLCArithmeticOperation = 25
+	ArithmeticOperationLog2 ArithmeticOperation = 25
 	// Calculates the element-wise product of the inputs, and returns 0 when the result isn’t a number or infinity.
-	MLCArithmeticOperationMultiplyNoNaN MLCArithmeticOperation = 26
+	ArithmeticOperationMultiplyNoNaN ArithmeticOperation = 26
 	// Calculates the element-wise division of the inputs, and returns 0 if the denominator is 0.
-	MLCArithmeticOperationDivideNoNaN MLCArithmeticOperation = 27
+	ArithmeticOperationDivideNoNaN ArithmeticOperation = 27
 	// Calculates the element-wise minimum of the inputs.
-	MLCArithmeticOperationMin MLCArithmeticOperation = 28
+	ArithmeticOperationMin ArithmeticOperation = 28
 	// Calculates the element-wise maximum the inputs.
-	MLCArithmeticOperationMax MLCArithmeticOperation = 29
+	ArithmeticOperationMax ArithmeticOperation = 29
 	// The total number of arithmetic operations.
-	MLCArithmeticOperationCount MLCArithmeticOperation = 30
+	ArithmeticOperationCount ArithmeticOperation = 30
 )
 
-func (e MLCArithmeticOperation) String() string {
+func (e ArithmeticOperation) String() string {
 	switch e {
-	case MLCArithmeticOperationAdd:
-		return "MLCArithmeticOperationAdd"
-	case MLCArithmeticOperationSubtract:
-		return "MLCArithmeticOperationSubtract"
-	case MLCArithmeticOperationMultiply:
-		return "MLCArithmeticOperationMultiply"
-	case MLCArithmeticOperationDivide:
-		return "MLCArithmeticOperationDivide"
-	case MLCArithmeticOperationFloor:
-		return "MLCArithmeticOperationFloor"
-	case MLCArithmeticOperationRound:
-		return "MLCArithmeticOperationRound"
-	case MLCArithmeticOperationCeil:
-		return "MLCArithmeticOperationCeil"
-	case MLCArithmeticOperationSqrt:
-		return "MLCArithmeticOperationSqrt"
-	case MLCArithmeticOperationRsqrt:
-		return "MLCArithmeticOperationRsqrt"
-	case MLCArithmeticOperationSin:
-		return "MLCArithmeticOperationSin"
-	case MLCArithmeticOperationCos:
-		return "MLCArithmeticOperationCos"
-	case MLCArithmeticOperationTan:
-		return "MLCArithmeticOperationTan"
-	case MLCArithmeticOperationAsin:
-		return "MLCArithmeticOperationAsin"
-	case MLCArithmeticOperationAcos:
-		return "MLCArithmeticOperationAcos"
-	case MLCArithmeticOperationAtan:
-		return "MLCArithmeticOperationAtan"
-	case MLCArithmeticOperationSinh:
-		return "MLCArithmeticOperationSinh"
-	case MLCArithmeticOperationCosh:
-		return "MLCArithmeticOperationCosh"
-	case MLCArithmeticOperationTanh:
-		return "MLCArithmeticOperationTanh"
-	case MLCArithmeticOperationAsinh:
-		return "MLCArithmeticOperationAsinh"
-	case MLCArithmeticOperationAcosh:
-		return "MLCArithmeticOperationAcosh"
-	case MLCArithmeticOperationAtanh:
-		return "MLCArithmeticOperationAtanh"
-	case MLCArithmeticOperationPow:
-		return "MLCArithmeticOperationPow"
-	case MLCArithmeticOperationExp:
-		return "MLCArithmeticOperationExp"
-	case MLCArithmeticOperationExp2:
-		return "MLCArithmeticOperationExp2"
-	case MLCArithmeticOperationLog:
-		return "MLCArithmeticOperationLog"
-	case MLCArithmeticOperationLog2:
-		return "MLCArithmeticOperationLog2"
-	case MLCArithmeticOperationMultiplyNoNaN:
-		return "MLCArithmeticOperationMultiplyNoNaN"
-	case MLCArithmeticOperationDivideNoNaN:
-		return "MLCArithmeticOperationDivideNoNaN"
-	case MLCArithmeticOperationMin:
-		return "MLCArithmeticOperationMin"
-	case MLCArithmeticOperationMax:
-		return "MLCArithmeticOperationMax"
-	case MLCArithmeticOperationCount:
-		return "MLCArithmeticOperationCount"
+	case ArithmeticOperationAdd:
+		return "ArithmeticOperationAdd"
+	case ArithmeticOperationSubtract:
+		return "ArithmeticOperationSubtract"
+	case ArithmeticOperationMultiply:
+		return "ArithmeticOperationMultiply"
+	case ArithmeticOperationDivide:
+		return "ArithmeticOperationDivide"
+	case ArithmeticOperationFloor:
+		return "ArithmeticOperationFloor"
+	case ArithmeticOperationRound:
+		return "ArithmeticOperationRound"
+	case ArithmeticOperationCeil:
+		return "ArithmeticOperationCeil"
+	case ArithmeticOperationSqrt:
+		return "ArithmeticOperationSqrt"
+	case ArithmeticOperationRsqrt:
+		return "ArithmeticOperationRsqrt"
+	case ArithmeticOperationSin:
+		return "ArithmeticOperationSin"
+	case ArithmeticOperationCos:
+		return "ArithmeticOperationCos"
+	case ArithmeticOperationTan:
+		return "ArithmeticOperationTan"
+	case ArithmeticOperationAsin:
+		return "ArithmeticOperationAsin"
+	case ArithmeticOperationAcos:
+		return "ArithmeticOperationAcos"
+	case ArithmeticOperationAtan:
+		return "ArithmeticOperationAtan"
+	case ArithmeticOperationSinh:
+		return "ArithmeticOperationSinh"
+	case ArithmeticOperationCosh:
+		return "ArithmeticOperationCosh"
+	case ArithmeticOperationTanh:
+		return "ArithmeticOperationTanh"
+	case ArithmeticOperationAsinh:
+		return "ArithmeticOperationAsinh"
+	case ArithmeticOperationAcosh:
+		return "ArithmeticOperationAcosh"
+	case ArithmeticOperationAtanh:
+		return "ArithmeticOperationAtanh"
+	case ArithmeticOperationPow:
+		return "ArithmeticOperationPow"
+	case ArithmeticOperationExp:
+		return "ArithmeticOperationExp"
+	case ArithmeticOperationExp2:
+		return "ArithmeticOperationExp2"
+	case ArithmeticOperationLog:
+		return "ArithmeticOperationLog"
+	case ArithmeticOperationLog2:
+		return "ArithmeticOperationLog2"
+	case ArithmeticOperationMultiplyNoNaN:
+		return "ArithmeticOperationMultiplyNoNaN"
+	case ArithmeticOperationDivideNoNaN:
+		return "ArithmeticOperationDivideNoNaN"
+	case ArithmeticOperationMin:
+		return "ArithmeticOperationMin"
+	case ArithmeticOperationMax:
+		return "ArithmeticOperationMax"
+	case ArithmeticOperationCount:
+		return "ArithmeticOperationCount"
 	default:
-		return fmt.Sprintf("MLCArithmeticOperation(%d)", int64(e))
+		return fmt.Sprintf("ArithmeticOperation(%d)", int64(e))
 	}
 }
 
 // A comparison operation.
-type MLCComparisonOperation int64
+type ComparisonOperation int64
 
 const (
-	MLCComparisonOperationEqual          MLCComparisonOperation = 0
-	MLCComparisonOperationNotEqual       MLCComparisonOperation = 1
-	MLCComparisonOperationLess           MLCComparisonOperation = 2
-	MLCComparisonOperationGreater        MLCComparisonOperation = 3
-	MLCComparisonOperationLessOrEqual    MLCComparisonOperation = 4
-	MLCComparisonOperationGreaterOrEqual MLCComparisonOperation = 5
-	MLCComparisonOperationLogicalAND     MLCComparisonOperation = 6
-	MLCComparisonOperationLogicalOR      MLCComparisonOperation = 7
-	MLCComparisonOperationLogicalNOT     MLCComparisonOperation = 8
-	MLCComparisonOperationLogicalNAND    MLCComparisonOperation = 9
-	MLCComparisonOperationLogicalNOR     MLCComparisonOperation = 10
-	MLCComparisonOperationLogicalXOR     MLCComparisonOperation = 11
+	ComparisonOperationEqual          ComparisonOperation = 0
+	ComparisonOperationNotEqual       ComparisonOperation = 1
+	ComparisonOperationLess           ComparisonOperation = 2
+	ComparisonOperationGreater        ComparisonOperation = 3
+	ComparisonOperationLessOrEqual    ComparisonOperation = 4
+	ComparisonOperationGreaterOrEqual ComparisonOperation = 5
+	ComparisonOperationLogicalAND     ComparisonOperation = 6
+	ComparisonOperationLogicalOR      ComparisonOperation = 7
+	ComparisonOperationLogicalNOT     ComparisonOperation = 8
+	ComparisonOperationLogicalNAND    ComparisonOperation = 9
+	ComparisonOperationLogicalNOR     ComparisonOperation = 10
+	ComparisonOperationLogicalXOR     ComparisonOperation = 11
 	// A number that represents the operation count.
-	MLCComparisonOperationCount MLCComparisonOperation = 12
+	ComparisonOperationCount ComparisonOperation = 12
 )
 
-func (e MLCComparisonOperation) String() string {
+func (e ComparisonOperation) String() string {
 	switch e {
-	case MLCComparisonOperationEqual:
-		return "MLCComparisonOperationEqual"
-	case MLCComparisonOperationNotEqual:
-		return "MLCComparisonOperationNotEqual"
-	case MLCComparisonOperationLess:
-		return "MLCComparisonOperationLess"
-	case MLCComparisonOperationGreater:
-		return "MLCComparisonOperationGreater"
-	case MLCComparisonOperationLessOrEqual:
-		return "MLCComparisonOperationLessOrEqual"
-	case MLCComparisonOperationGreaterOrEqual:
-		return "MLCComparisonOperationGreaterOrEqual"
-	case MLCComparisonOperationLogicalAND:
-		return "MLCComparisonOperationLogicalAND"
-	case MLCComparisonOperationLogicalOR:
-		return "MLCComparisonOperationLogicalOR"
-	case MLCComparisonOperationLogicalNOT:
-		return "MLCComparisonOperationLogicalNOT"
-	case MLCComparisonOperationLogicalNAND:
-		return "MLCComparisonOperationLogicalNAND"
-	case MLCComparisonOperationLogicalNOR:
-		return "MLCComparisonOperationLogicalNOR"
-	case MLCComparisonOperationLogicalXOR:
-		return "MLCComparisonOperationLogicalXOR"
-	case MLCComparisonOperationCount:
-		return "MLCComparisonOperationCount"
+	case ComparisonOperationEqual:
+		return "ComparisonOperationEqual"
+	case ComparisonOperationNotEqual:
+		return "ComparisonOperationNotEqual"
+	case ComparisonOperationLess:
+		return "ComparisonOperationLess"
+	case ComparisonOperationGreater:
+		return "ComparisonOperationGreater"
+	case ComparisonOperationLessOrEqual:
+		return "ComparisonOperationLessOrEqual"
+	case ComparisonOperationGreaterOrEqual:
+		return "ComparisonOperationGreaterOrEqual"
+	case ComparisonOperationLogicalAND:
+		return "ComparisonOperationLogicalAND"
+	case ComparisonOperationLogicalOR:
+		return "ComparisonOperationLogicalOR"
+	case ComparisonOperationLogicalNOT:
+		return "ComparisonOperationLogicalNOT"
+	case ComparisonOperationLogicalNAND:
+		return "ComparisonOperationLogicalNAND"
+	case ComparisonOperationLogicalNOR:
+		return "ComparisonOperationLogicalNOR"
+	case ComparisonOperationLogicalXOR:
+		return "ComparisonOperationLogicalXOR"
+	case ComparisonOperationCount:
+		return "ComparisonOperationCount"
 	default:
-		return fmt.Sprintf("MLCComparisonOperation(%d)", int64(e))
+		return fmt.Sprintf("ComparisonOperation(%d)", int64(e))
 	}
 }
 
 // The convolution type specified for a convolution layer.
-type MLCConvolutionType int64
+type ConvolutionType int64
 
 const (
 	// The standard convolution type.
-	MLCConvolutionTypeStandard MLCConvolutionType = 0
+	ConvolutionTypeStandard ConvolutionType = 0
 	// The transposed convolution type.
-	MLCConvolutionTypeTransposed MLCConvolutionType = 1
+	ConvolutionTypeTransposed ConvolutionType = 1
 	// The depthwise convolution type.
-	MLCConvolutionTypeDepthwise MLCConvolutionType = 2
+	ConvolutionTypeDepthwise ConvolutionType = 2
 )
 
-func (e MLCConvolutionType) String() string {
+func (e ConvolutionType) String() string {
 	switch e {
-	case MLCConvolutionTypeStandard:
-		return "MLCConvolutionTypeStandard"
-	case MLCConvolutionTypeTransposed:
-		return "MLCConvolutionTypeTransposed"
-	case MLCConvolutionTypeDepthwise:
-		return "MLCConvolutionTypeDepthwise"
+	case ConvolutionTypeStandard:
+		return "ConvolutionTypeStandard"
+	case ConvolutionTypeTransposed:
+		return "ConvolutionTypeTransposed"
+	case ConvolutionTypeDepthwise:
+		return "ConvolutionTypeDepthwise"
 	default:
-		return fmt.Sprintf("MLCConvolutionType(%d)", int64(e))
+		return fmt.Sprintf("ConvolutionType(%d)", int64(e))
 	}
 }
 
 // A tensor data type.
-type MLCDataType int64
+type DataType int64
 
 const (
-	MLCDataTypeInvalid MLCDataType = 0
+	DataTypeInvalid DataType = 0
 	// The 32-bit floating-point data type.
-	MLCDataTypeFloat32 MLCDataType = 1
+	DataTypeFloat32 DataType = 1
 	// The 16-bit floating-point data type.
-	MLCDataTypeFloat16 MLCDataType = 3
+	DataTypeFloat16 DataType = 3
 	// The Boolean data type.
-	MLCDataTypeBoolean MLCDataType = 4
+	DataTypeBoolean DataType = 4
 	// The 64-bit integer data type.
-	MLCDataTypeInt64 MLCDataType = 5
+	DataTypeInt64 DataType = 5
 	// The 32-bit integer data type.
-	MLCDataTypeInt32 MLCDataType = 7
+	DataTypeInt32 DataType = 7
 	// The 8-bit integer data type.
-	MLCDataTypeInt8 MLCDataType = 8
+	DataTypeInt8 DataType = 8
 	// The 8-bit unsigned integer data type.
-	MLCDataTypeUInt8 MLCDataType = 9
-	MLCDataTypeCount MLCDataType = 10
+	DataTypeUInt8 DataType = 9
+	DataTypeCount DataType = 10
 )
 
-func (e MLCDataType) String() string {
+func (e DataType) String() string {
 	switch e {
-	case MLCDataTypeInvalid:
-		return "MLCDataTypeInvalid"
-	case MLCDataTypeFloat32:
-		return "MLCDataTypeFloat32"
-	case MLCDataTypeFloat16:
-		return "MLCDataTypeFloat16"
-	case MLCDataTypeBoolean:
-		return "MLCDataTypeBoolean"
-	case MLCDataTypeInt64:
-		return "MLCDataTypeInt64"
-	case MLCDataTypeInt32:
-		return "MLCDataTypeInt32"
-	case MLCDataTypeInt8:
-		return "MLCDataTypeInt8"
-	case MLCDataTypeUInt8:
-		return "MLCDataTypeUInt8"
-	case MLCDataTypeCount:
-		return "MLCDataTypeCount"
+	case DataTypeInvalid:
+		return "DataTypeInvalid"
+	case DataTypeFloat32:
+		return "DataTypeFloat32"
+	case DataTypeFloat16:
+		return "DataTypeFloat16"
+	case DataTypeBoolean:
+		return "DataTypeBoolean"
+	case DataTypeInt64:
+		return "DataTypeInt64"
+	case DataTypeInt32:
+		return "DataTypeInt32"
+	case DataTypeInt8:
+		return "DataTypeInt8"
+	case DataTypeUInt8:
+		return "DataTypeUInt8"
+	case DataTypeCount:
+		return "DataTypeCount"
 	default:
-		return fmt.Sprintf("MLCDataType(%d)", int64(e))
+		return fmt.Sprintf("DataType(%d)", int64(e))
 	}
 }
 
 // A device type for execution of a neural network.
-type MLCDeviceType int64
+type DeviceType int64
 
 const (
 	// A device type that represents the CPU.
-	MLCDeviceTypeCPU MLCDeviceType = 0
+	DeviceTypeCPU DeviceType = 0
 	// A device type that represents the GPU.
-	MLCDeviceTypeGPU MLCDeviceType = 1
+	DeviceTypeGPU DeviceType = 1
 	// A device type that represents either the CPU or GPU.
-	MLCDeviceTypeAny MLCDeviceType = 2
+	DeviceTypeAny DeviceType = 2
 	// A device type that represents the Apple Neural Engine.
-	MLCDeviceTypeANE MLCDeviceType = 3
+	DeviceTypeANE DeviceType = 3
 	// A number that represents the number of device types.
-	MLCDeviceTypeCount MLCDeviceType = 4
+	DeviceTypeCount DeviceType = 4
 )
 
-func (e MLCDeviceType) String() string {
+func (e DeviceType) String() string {
 	switch e {
-	case MLCDeviceTypeCPU:
-		return "MLCDeviceTypeCPU"
-	case MLCDeviceTypeGPU:
-		return "MLCDeviceTypeGPU"
-	case MLCDeviceTypeAny:
-		return "MLCDeviceTypeAny"
-	case MLCDeviceTypeANE:
-		return "MLCDeviceTypeANE"
-	case MLCDeviceTypeCount:
-		return "MLCDeviceTypeCount"
+	case DeviceTypeCPU:
+		return "DeviceTypeCPU"
+	case DeviceTypeGPU:
+		return "DeviceTypeGPU"
+	case DeviceTypeAny:
+		return "DeviceTypeAny"
+	case DeviceTypeANE:
+		return "DeviceTypeANE"
+	case DeviceTypeCount:
+		return "DeviceTypeCount"
 	default:
-		return fmt.Sprintf("MLCDeviceType(%d)", int64(e))
+		return fmt.Sprintf("DeviceType(%d)", int64(e))
 	}
 }
 
 // A bitmask that specifies the options you use when executing a graph.
 // Bitmask — values may be combined with |.
-type MLCExecutionOptions int64
+type ExecutionOptions int64
 
 const (
 	// The option to execute the graph in the most efficient way possible.
-	MLCExecutionOptionsNone MLCExecutionOptions = 0
+	ExecutionOptionsNone ExecutionOptions = 0
 	// The option to skip writing input data to device memory.
-	MLCExecutionOptionsSkipWritingInputDataToDevice MLCExecutionOptions = 1
+	ExecutionOptionsSkipWritingInputDataToDevice ExecutionOptions = 1
 	// The option to execute the graph synchronously.
-	MLCExecutionOptionsSynchronous MLCExecutionOptions = 2
+	ExecutionOptionsSynchronous ExecutionOptions = 2
 	// The option to return profiling information in the callback before returning from execution.
-	MLCExecutionOptionsProfiling MLCExecutionOptions = 4
+	ExecutionOptionsProfiling ExecutionOptions = 4
 	// The option to execute the forward pass for inference only.
-	MLCExecutionOptionsForwardForInference MLCExecutionOptions = 8
+	ExecutionOptionsForwardForInference ExecutionOptions = 8
 	// The option to enable additional per-layer profiling information using signposts.
-	MLCExecutionOptionsPerLayerProfiling MLCExecutionOptions = 16
+	ExecutionOptionsPerLayerProfiling ExecutionOptions = 16
 )
 
-func (e MLCExecutionOptions) String() string {
+func (e ExecutionOptions) String() string {
 	var parts []string
-	if e&MLCExecutionOptionsSkipWritingInputDataToDevice != 0 {
-		parts = append(parts, "MLCExecutionOptionsSkipWritingInputDataToDevice")
+	if e&ExecutionOptionsSkipWritingInputDataToDevice != 0 {
+		parts = append(parts, "ExecutionOptionsSkipWritingInputDataToDevice")
 	}
-	if e&MLCExecutionOptionsSynchronous != 0 {
-		parts = append(parts, "MLCExecutionOptionsSynchronous")
+	if e&ExecutionOptionsSynchronous != 0 {
+		parts = append(parts, "ExecutionOptionsSynchronous")
 	}
-	if e&MLCExecutionOptionsProfiling != 0 {
-		parts = append(parts, "MLCExecutionOptionsProfiling")
+	if e&ExecutionOptionsProfiling != 0 {
+		parts = append(parts, "ExecutionOptionsProfiling")
 	}
-	if e&MLCExecutionOptionsForwardForInference != 0 {
-		parts = append(parts, "MLCExecutionOptionsForwardForInference")
+	if e&ExecutionOptionsForwardForInference != 0 {
+		parts = append(parts, "ExecutionOptionsForwardForInference")
 	}
-	if e&MLCExecutionOptionsPerLayerProfiling != 0 {
-		parts = append(parts, "MLCExecutionOptionsPerLayerProfiling")
+	if e&ExecutionOptionsPerLayerProfiling != 0 {
+		parts = append(parts, "ExecutionOptionsPerLayerProfiling")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -448,60 +448,60 @@ func (e MLCExecutionOptions) String() string {
 }
 
 // A clipping type the system applies to a gradient.
-type MLCGradientClippingType int64
+type GradientClippingType int64
 
 const (
 	// An option that clips by value.
-	MLCGradientClippingTypeByValue MLCGradientClippingType = 0
+	GradientClippingTypeByValue GradientClippingType = 0
 	// An option that clips by norm.
-	MLCGradientClippingTypeByNorm MLCGradientClippingType = 1
+	GradientClippingTypeByNorm GradientClippingType = 1
 	// An option that clips by global norm.
-	MLCGradientClippingTypeByGlobalNorm MLCGradientClippingType = 2
+	GradientClippingTypeByGlobalNorm GradientClippingType = 2
 )
 
-func (e MLCGradientClippingType) String() string {
+func (e GradientClippingType) String() string {
 	switch e {
-	case MLCGradientClippingTypeByValue:
-		return "MLCGradientClippingTypeByValue"
-	case MLCGradientClippingTypeByNorm:
-		return "MLCGradientClippingTypeByNorm"
-	case MLCGradientClippingTypeByGlobalNorm:
-		return "MLCGradientClippingTypeByGlobalNorm"
+	case GradientClippingTypeByValue:
+		return "GradientClippingTypeByValue"
+	case GradientClippingTypeByNorm:
+		return "GradientClippingTypeByNorm"
+	case GradientClippingTypeByGlobalNorm:
+		return "GradientClippingTypeByGlobalNorm"
 	default:
-		return fmt.Sprintf("MLCGradientClippingType(%d)", int64(e))
+		return fmt.Sprintf("GradientClippingType(%d)", int64(e))
 	}
 }
 
 // A bitmask that specifies the options you use when compiling a graph.
 // Bitmask — values may be combined with |.
-type MLCGraphCompilationOptions int64
+type GraphCompilationOptions int64
 
 const (
 	// The default option for graph compilation.
-	MLCGraphCompilationOptionsNone MLCGraphCompilationOptions = 0
+	GraphCompilationOptionsNone GraphCompilationOptions = 0
 	// The option to debug layers during graph compilation.
-	MLCGraphCompilationOptionsDebugLayers MLCGraphCompilationOptions = 1
+	GraphCompilationOptionsDebugLayers GraphCompilationOptions = 1
 	// The option to disable layer fusion during graph compilation.
-	MLCGraphCompilationOptionsDisableLayerFusion MLCGraphCompilationOptions = 2
+	GraphCompilationOptionsDisableLayerFusion GraphCompilationOptions = 2
 	// The option to link graphs during graph compilation.
-	MLCGraphCompilationOptionsLinkGraphs MLCGraphCompilationOptions = 4
+	GraphCompilationOptionsLinkGraphs GraphCompilationOptions = 4
 	// The option to compute all gradients during graph compilation.
-	MLCGraphCompilationOptionsComputeAllGradients MLCGraphCompilationOptions = 8
+	GraphCompilationOptionsComputeAllGradients GraphCompilationOptions = 8
 )
 
-func (e MLCGraphCompilationOptions) String() string {
+func (e GraphCompilationOptions) String() string {
 	var parts []string
-	if e&MLCGraphCompilationOptionsDebugLayers != 0 {
-		parts = append(parts, "MLCGraphCompilationOptionsDebugLayers")
+	if e&GraphCompilationOptionsDebugLayers != 0 {
+		parts = append(parts, "GraphCompilationOptionsDebugLayers")
 	}
-	if e&MLCGraphCompilationOptionsDisableLayerFusion != 0 {
-		parts = append(parts, "MLCGraphCompilationOptionsDisableLayerFusion")
+	if e&GraphCompilationOptionsDisableLayerFusion != 0 {
+		parts = append(parts, "GraphCompilationOptionsDisableLayerFusion")
 	}
-	if e&MLCGraphCompilationOptionsLinkGraphs != 0 {
-		parts = append(parts, "MLCGraphCompilationOptionsLinkGraphs")
+	if e&GraphCompilationOptionsLinkGraphs != 0 {
+		parts = append(parts, "GraphCompilationOptionsLinkGraphs")
 	}
-	if e&MLCGraphCompilationOptionsComputeAllGradients != 0 {
-		parts = append(parts, "MLCGraphCompilationOptionsComputeAllGradients")
+	if e&GraphCompilationOptionsComputeAllGradients != 0 {
+		parts = append(parts, "GraphCompilationOptionsComputeAllGradients")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -510,311 +510,311 @@ func (e MLCGraphCompilationOptions) String() string {
 }
 
 // Constants that describe the result of an LSTM layer.
-type MLCLSTMResultMode int64
+type LSTMResultMode int64
 
 const (
 	// A result mode that indicates the layer produces a single result tensor that represents the final output of the LSTM.
-	MLCLSTMResultModeOutput MLCLSTMResultMode = 0
+	LSTMResultModeOutput LSTMResultMode = 0
 	// A result mode that indicates the layer produces three result tensors that represent the final output of the LSTM, the last hidden state, and the cell state.
-	MLCLSTMResultModeOutputAndStates MLCLSTMResultMode = 1
+	LSTMResultModeOutputAndStates LSTMResultMode = 1
 )
 
-func (e MLCLSTMResultMode) String() string {
+func (e LSTMResultMode) String() string {
 	switch e {
-	case MLCLSTMResultModeOutput:
-		return "MLCLSTMResultModeOutput"
-	case MLCLSTMResultModeOutputAndStates:
-		return "MLCLSTMResultModeOutputAndStates"
+	case LSTMResultModeOutput:
+		return "LSTMResultModeOutput"
+	case LSTMResultModeOutputAndStates:
+		return "LSTMResultModeOutputAndStates"
 	default:
-		return fmt.Sprintf("MLCLSTMResultMode(%d)", int64(e))
+		return fmt.Sprintf("LSTMResultMode(%d)", int64(e))
 	}
 }
 
 // A loss function.
-type MLCLossType int64
+type LossType int64
 
 const (
 	// The mean absolute error loss.
-	MLCLossTypeMeanAbsoluteError MLCLossType = 0
+	LossTypeMeanAbsoluteError LossType = 0
 	// The mean squared error loss.
-	MLCLossTypeMeanSquaredError MLCLossType = 1
+	LossTypeMeanSquaredError LossType = 1
 	// The softmax cross entropy loss.
-	MLCLossTypeSoftmaxCrossEntropy MLCLossType = 2
+	LossTypeSoftmaxCrossEntropy LossType = 2
 	// The sigmoid cross entropy loss.
-	MLCLossTypeSigmoidCrossEntropy MLCLossType = 3
+	LossTypeSigmoidCrossEntropy LossType = 3
 	// The categorical cross entropy loss.
-	MLCLossTypeCategoricalCrossEntropy MLCLossType = 4
+	LossTypeCategoricalCrossEntropy LossType = 4
 	// The hinge loss.
-	MLCLossTypeHinge MLCLossType = 5
+	LossTypeHinge LossType = 5
 	// The Huber loss.
-	MLCLossTypeHuber MLCLossType = 6
+	LossTypeHuber LossType = 6
 	// The cosine distance loss.
-	MLCLossTypeCosineDistance MLCLossType = 7
+	LossTypeCosineDistance LossType = 7
 	// The log loss.
-	MLCLossTypeLog   MLCLossType = 8
-	MLCLossTypeCount MLCLossType = 9
+	LossTypeLog   LossType = 8
+	LossTypeCount LossType = 9
 )
 
-func (e MLCLossType) String() string {
+func (e LossType) String() string {
 	switch e {
-	case MLCLossTypeMeanAbsoluteError:
-		return "MLCLossTypeMeanAbsoluteError"
-	case MLCLossTypeMeanSquaredError:
-		return "MLCLossTypeMeanSquaredError"
-	case MLCLossTypeSoftmaxCrossEntropy:
-		return "MLCLossTypeSoftmaxCrossEntropy"
-	case MLCLossTypeSigmoidCrossEntropy:
-		return "MLCLossTypeSigmoidCrossEntropy"
-	case MLCLossTypeCategoricalCrossEntropy:
-		return "MLCLossTypeCategoricalCrossEntropy"
-	case MLCLossTypeHinge:
-		return "MLCLossTypeHinge"
-	case MLCLossTypeHuber:
-		return "MLCLossTypeHuber"
-	case MLCLossTypeCosineDistance:
-		return "MLCLossTypeCosineDistance"
-	case MLCLossTypeLog:
-		return "MLCLossTypeLog"
-	case MLCLossTypeCount:
-		return "MLCLossTypeCount"
+	case LossTypeMeanAbsoluteError:
+		return "LossTypeMeanAbsoluteError"
+	case LossTypeMeanSquaredError:
+		return "LossTypeMeanSquaredError"
+	case LossTypeSoftmaxCrossEntropy:
+		return "LossTypeSoftmaxCrossEntropy"
+	case LossTypeSigmoidCrossEntropy:
+		return "LossTypeSigmoidCrossEntropy"
+	case LossTypeCategoricalCrossEntropy:
+		return "LossTypeCategoricalCrossEntropy"
+	case LossTypeHinge:
+		return "LossTypeHinge"
+	case LossTypeHuber:
+		return "LossTypeHuber"
+	case LossTypeCosineDistance:
+		return "LossTypeCosineDistance"
+	case LossTypeLog:
+		return "LossTypeLog"
+	case LossTypeCount:
+		return "LossTypeCount"
 	default:
-		return fmt.Sprintf("MLCLossType(%d)", int64(e))
+		return fmt.Sprintf("LossType(%d)", int64(e))
 	}
 }
 
 // A padding policy that you specify for a convolution or pooling layer.
-type MLCPaddingPolicy int64
+type PaddingPolicy int64
 
 const (
 	// The "same" padding policy.
-	MLCPaddingPolicySame MLCPaddingPolicy = 0
+	PaddingPolicySame PaddingPolicy = 0
 	// The "valid" padding policy.
-	MLCPaddingPolicyValid MLCPaddingPolicy = 1
+	PaddingPolicyValid PaddingPolicy = 1
 	// The choice to use explicitly specified padding sizes.
-	MLCPaddingPolicyUsePaddingSize MLCPaddingPolicy = 2
+	PaddingPolicyUsePaddingSize PaddingPolicy = 2
 )
 
-func (e MLCPaddingPolicy) String() string {
+func (e PaddingPolicy) String() string {
 	switch e {
-	case MLCPaddingPolicySame:
-		return "MLCPaddingPolicySame"
-	case MLCPaddingPolicyValid:
-		return "MLCPaddingPolicyValid"
-	case MLCPaddingPolicyUsePaddingSize:
-		return "MLCPaddingPolicyUsePaddingSize"
+	case PaddingPolicySame:
+		return "PaddingPolicySame"
+	case PaddingPolicyValid:
+		return "PaddingPolicyValid"
+	case PaddingPolicyUsePaddingSize:
+		return "PaddingPolicyUsePaddingSize"
 	default:
-		return fmt.Sprintf("MLCPaddingPolicy(%d)", int64(e))
+		return fmt.Sprintf("PaddingPolicy(%d)", int64(e))
 	}
 }
 
 // A padding type that you specify for a padding layer.
-type MLCPaddingType int64
+type PaddingType int64
 
 const (
 	// The zero padding type.
-	MLCPaddingTypeZero MLCPaddingType = 0
+	PaddingTypeZero PaddingType = 0
 	// The reflect padding type.
-	MLCPaddingTypeReflect MLCPaddingType = 1
+	PaddingTypeReflect PaddingType = 1
 	// The symmetric padding type.
-	MLCPaddingTypeSymmetric MLCPaddingType = 2
+	PaddingTypeSymmetric PaddingType = 2
 	// The constant padding type.
-	MLCPaddingTypeConstant MLCPaddingType = 3
+	PaddingTypeConstant PaddingType = 3
 )
 
-func (e MLCPaddingType) String() string {
+func (e PaddingType) String() string {
 	switch e {
-	case MLCPaddingTypeZero:
-		return "MLCPaddingTypeZero"
-	case MLCPaddingTypeReflect:
-		return "MLCPaddingTypeReflect"
-	case MLCPaddingTypeSymmetric:
-		return "MLCPaddingTypeSymmetric"
-	case MLCPaddingTypeConstant:
-		return "MLCPaddingTypeConstant"
+	case PaddingTypeZero:
+		return "PaddingTypeZero"
+	case PaddingTypeReflect:
+		return "PaddingTypeReflect"
+	case PaddingTypeSymmetric:
+		return "PaddingTypeSymmetric"
+	case PaddingTypeConstant:
+		return "PaddingTypeConstant"
 	default:
-		return fmt.Sprintf("MLCPaddingType(%d)", int64(e))
+		return fmt.Sprintf("PaddingType(%d)", int64(e))
 	}
 }
 
 // A pooling function type for a pooling layer.
-type MLCPoolingType int64
+type PoolingType int64
 
 const (
 	// The max pooling type.
-	MLCPoolingTypeMax MLCPoolingType = 1
+	PoolingTypeMax PoolingType = 1
 	// The average pooling type.
-	MLCPoolingTypeAverage MLCPoolingType = 2
+	PoolingTypeAverage PoolingType = 2
 	// The L2-norm pooling type.
-	MLCPoolingTypeL2Norm MLCPoolingType = 3
-	MLCPoolingTypeCount  MLCPoolingType = 4
+	PoolingTypeL2Norm PoolingType = 3
+	PoolingTypeCount  PoolingType = 4
 )
 
-func (e MLCPoolingType) String() string {
+func (e PoolingType) String() string {
 	switch e {
-	case MLCPoolingTypeMax:
-		return "MLCPoolingTypeMax"
-	case MLCPoolingTypeAverage:
-		return "MLCPoolingTypeAverage"
-	case MLCPoolingTypeL2Norm:
-		return "MLCPoolingTypeL2Norm"
-	case MLCPoolingTypeCount:
-		return "MLCPoolingTypeCount"
+	case PoolingTypeMax:
+		return "PoolingTypeMax"
+	case PoolingTypeAverage:
+		return "PoolingTypeAverage"
+	case PoolingTypeL2Norm:
+		return "PoolingTypeL2Norm"
+	case PoolingTypeCount:
+		return "PoolingTypeCount"
 	default:
-		return fmt.Sprintf("MLCPoolingType(%d)", int64(e))
+		return fmt.Sprintf("PoolingType(%d)", int64(e))
 	}
 }
 
 // An initializer type you use to create a tensor with random data.
-type MLCRandomInitializerType int64
+type RandomInitializerType int64
 
 const (
-	MLCRandomInitializerTypeInvalid MLCRandomInitializerType = 0
+	RandomInitializerTypeInvalid RandomInitializerType = 0
 	// The uniform random initializer type.
-	MLCRandomInitializerTypeUniform MLCRandomInitializerType = 1
+	RandomInitializerTypeUniform RandomInitializerType = 1
 	// The glorot uniform random initializer type.
-	MLCRandomInitializerTypeGlorotUniform MLCRandomInitializerType = 2
+	RandomInitializerTypeGlorotUniform RandomInitializerType = 2
 	// The Xavier random initializer type.
-	MLCRandomInitializerTypeXavier MLCRandomInitializerType = 3
-	MLCRandomInitializerTypeCount  MLCRandomInitializerType = 4
+	RandomInitializerTypeXavier RandomInitializerType = 3
+	RandomInitializerTypeCount  RandomInitializerType = 4
 )
 
-func (e MLCRandomInitializerType) String() string {
+func (e RandomInitializerType) String() string {
 	switch e {
-	case MLCRandomInitializerTypeInvalid:
-		return "MLCRandomInitializerTypeInvalid"
-	case MLCRandomInitializerTypeUniform:
-		return "MLCRandomInitializerTypeUniform"
-	case MLCRandomInitializerTypeGlorotUniform:
-		return "MLCRandomInitializerTypeGlorotUniform"
-	case MLCRandomInitializerTypeXavier:
-		return "MLCRandomInitializerTypeXavier"
-	case MLCRandomInitializerTypeCount:
-		return "MLCRandomInitializerTypeCount"
+	case RandomInitializerTypeInvalid:
+		return "RandomInitializerTypeInvalid"
+	case RandomInitializerTypeUniform:
+		return "RandomInitializerTypeUniform"
+	case RandomInitializerTypeGlorotUniform:
+		return "RandomInitializerTypeGlorotUniform"
+	case RandomInitializerTypeXavier:
+		return "RandomInitializerTypeXavier"
+	case RandomInitializerTypeCount:
+		return "RandomInitializerTypeCount"
 	default:
-		return fmt.Sprintf("MLCRandomInitializerType(%d)", int64(e))
+		return fmt.Sprintf("RandomInitializerType(%d)", int64(e))
 	}
 }
 
 // Constants that describe a reduction operation type.
-type MLCReductionType int64
+type ReductionType int64
 
 const (
 	// A reduction operation that applies no reduction.
-	MLCReductionTypeNone MLCReductionType = 0
+	ReductionTypeNone ReductionType = 0
 	// A reduction operation that applies to the sum of the dimensions.
-	MLCReductionTypeSum MLCReductionType = 1
+	ReductionTypeSum ReductionType = 1
 	// A reduction operation that applies to the mean of the dimensions.
-	MLCReductionTypeMean MLCReductionType = 2
+	ReductionTypeMean ReductionType = 2
 	// A reduction operation that applies to the maximum dimension.
-	MLCReductionTypeMax MLCReductionType = 3
+	ReductionTypeMax ReductionType = 3
 	// A reduction operation that applies to the minimum dimension.
-	MLCReductionTypeMin MLCReductionType = 4
+	ReductionTypeMin ReductionType = 4
 	// A reduction operation that applies to the maximum dimension you specify.
-	MLCReductionTypeArgMax MLCReductionType = 5
+	ReductionTypeArgMax ReductionType = 5
 	// A reduction operation that applies to the minimum dimension you specify.
-	MLCReductionTypeArgMin MLCReductionType = 6
+	ReductionTypeArgMin ReductionType = 6
 	// A reduction operation that applies a lasso regularization penalty.
-	MLCReductionTypeL1Norm MLCReductionType = 7
+	ReductionTypeL1Norm ReductionType = 7
 	// A reduction operation that applies to any dimension.
-	MLCReductionTypeAny MLCReductionType = 8
+	ReductionTypeAny ReductionType = 8
 	// A reduction operation that applies to all dimensions.
-	MLCReductionTypeAll MLCReductionType = 9
+	ReductionTypeAll ReductionType = 9
 	// The total number of reduction operations.
-	MLCReductionTypeCount MLCReductionType = 10
+	ReductionTypeCount ReductionType = 10
 )
 
-func (e MLCReductionType) String() string {
+func (e ReductionType) String() string {
 	switch e {
-	case MLCReductionTypeNone:
-		return "MLCReductionTypeNone"
-	case MLCReductionTypeSum:
-		return "MLCReductionTypeSum"
-	case MLCReductionTypeMean:
-		return "MLCReductionTypeMean"
-	case MLCReductionTypeMax:
-		return "MLCReductionTypeMax"
-	case MLCReductionTypeMin:
-		return "MLCReductionTypeMin"
-	case MLCReductionTypeArgMax:
-		return "MLCReductionTypeArgMax"
-	case MLCReductionTypeArgMin:
-		return "MLCReductionTypeArgMin"
-	case MLCReductionTypeL1Norm:
-		return "MLCReductionTypeL1Norm"
-	case MLCReductionTypeAny:
-		return "MLCReductionTypeAny"
-	case MLCReductionTypeAll:
-		return "MLCReductionTypeAll"
-	case MLCReductionTypeCount:
-		return "MLCReductionTypeCount"
+	case ReductionTypeNone:
+		return "ReductionTypeNone"
+	case ReductionTypeSum:
+		return "ReductionTypeSum"
+	case ReductionTypeMean:
+		return "ReductionTypeMean"
+	case ReductionTypeMax:
+		return "ReductionTypeMax"
+	case ReductionTypeMin:
+		return "ReductionTypeMin"
+	case ReductionTypeArgMax:
+		return "ReductionTypeArgMax"
+	case ReductionTypeArgMin:
+		return "ReductionTypeArgMin"
+	case ReductionTypeL1Norm:
+		return "ReductionTypeL1Norm"
+	case ReductionTypeAny:
+		return "ReductionTypeAny"
+	case ReductionTypeAll:
+		return "ReductionTypeAll"
+	case ReductionTypeCount:
+		return "ReductionTypeCount"
 	default:
-		return fmt.Sprintf("MLCReductionType(%d)", int64(e))
+		return fmt.Sprintf("ReductionType(%d)", int64(e))
 	}
 }
 
 // A regularization function to use with an optimizer.
-type MLCRegularizationType int64
+type RegularizationType int64
 
 const (
 	// No regularization.
-	MLCRegularizationTypeNone MLCRegularizationType = 0
+	RegularizationTypeNone RegularizationType = 0
 	// The L1 regularization.
-	MLCRegularizationTypeL1 MLCRegularizationType = 1
+	RegularizationTypeL1 RegularizationType = 1
 	// The L2 regularization.
-	MLCRegularizationTypeL2 MLCRegularizationType = 2
+	RegularizationTypeL2 RegularizationType = 2
 )
 
-func (e MLCRegularizationType) String() string {
+func (e RegularizationType) String() string {
 	switch e {
-	case MLCRegularizationTypeNone:
-		return "MLCRegularizationTypeNone"
-	case MLCRegularizationTypeL1:
-		return "MLCRegularizationTypeL1"
-	case MLCRegularizationTypeL2:
-		return "MLCRegularizationTypeL2"
+	case RegularizationTypeNone:
+		return "RegularizationTypeNone"
+	case RegularizationTypeL1:
+		return "RegularizationTypeL1"
+	case RegularizationTypeL2:
+		return "RegularizationTypeL2"
 	default:
-		return fmt.Sprintf("MLCRegularizationType(%d)", int64(e))
+		return fmt.Sprintf("RegularizationType(%d)", int64(e))
 	}
 }
 
 // A sampling mode for an upsample layer.
-type MLCSampleMode int64
+type SampleMode int64
 
 const (
 	// The nearest sample mode.
-	MLCSampleModeNearest MLCSampleMode = 0
+	SampleModeNearest SampleMode = 0
 	// The linear sample mode.
-	MLCSampleModeLinear MLCSampleMode = 1
+	SampleModeLinear SampleMode = 1
 )
 
-func (e MLCSampleMode) String() string {
+func (e SampleMode) String() string {
 	switch e {
-	case MLCSampleModeNearest:
-		return "MLCSampleModeNearest"
-	case MLCSampleModeLinear:
-		return "MLCSampleModeLinear"
+	case SampleModeNearest:
+		return "SampleModeNearest"
+	case SampleModeLinear:
+		return "SampleModeLinear"
 	default:
-		return fmt.Sprintf("MLCSampleMode(%d)", int64(e))
+		return fmt.Sprintf("SampleMode(%d)", int64(e))
 	}
 }
 
 // A softmax operation.
-type MLCSoftmaxOperation int64
+type SoftmaxOperation int64
 
 const (
 	// The standard softmax operation.
-	MLCSoftmaxOperationSoftmax MLCSoftmaxOperation = 0
+	SoftmaxOperationSoftmax SoftmaxOperation = 0
 	// The log softmax operation.
-	MLCSoftmaxOperationLogSoftmax MLCSoftmaxOperation = 1
+	SoftmaxOperationLogSoftmax SoftmaxOperation = 1
 )
 
-func (e MLCSoftmaxOperation) String() string {
+func (e SoftmaxOperation) String() string {
 	switch e {
-	case MLCSoftmaxOperationSoftmax:
-		return "MLCSoftmaxOperationSoftmax"
-	case MLCSoftmaxOperationLogSoftmax:
-		return "MLCSoftmaxOperationLogSoftmax"
+	case SoftmaxOperationSoftmax:
+		return "SoftmaxOperationSoftmax"
+	case SoftmaxOperationLogSoftmax:
+		return "SoftmaxOperationLogSoftmax"
 	default:
-		return fmt.Sprintf("MLCSoftmaxOperation(%d)", int64(e))
+		return fmt.Sprintf("SoftmaxOperation(%d)", int64(e))
 	}
 }

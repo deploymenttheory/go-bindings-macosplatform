@@ -5,75 +5,94 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A metaparameter defined by a number that can change over time.
 //
-// NumberMetaParameter wraps [raw.PHASENumberMetaParameter] with a fluent Go API.
+// NumberMetaParameter is an idiomatic wrapper over the Objective-C class PHASENumberMetaParameter.
 type NumberMetaParameter struct {
-	inner *raw.PHASENumberMetaParameter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASENumberMetaParameter].
-func (x *NumberMetaParameter) Unwrap() *raw.PHASENumberMetaParameter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NumberMetaParameter) ID() objc.ID { return x.inner.Ptr() }
-
-// NumberMetaParameterFromID adopts an existing object pointer as a NumberMetaParameter (nil for 0).
+// NumberMetaParameterFromID adopts an existing Objective-C object as a NumberMetaParameter
+// (nil for 0), retaining it and registering a release finalizer.
 func NumberMetaParameterFromID(id objc.ID) *NumberMetaParameter {
 	if id == 0 {
 		return nil
 	}
-	return &NumberMetaParameter{inner: raw.PHASENumberMetaParameterFromID(id)}
+	x := &NumberMetaParameter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNumberMetaParameter creates a new [NumberMetaParameter].
+// numberMetaParameterAdopt wraps an Objective-C object that this code just created as a
+// NumberMetaParameter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func numberMetaParameterAdopt(id objc.ID) *NumberMetaParameter {
+	if id == 0 {
+		return nil
+	}
+	x := &NumberMetaParameter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NumberMetaParameter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NumberMetaParameter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NumberMetaParameter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNumberMetaParameter creates a new NumberMetaParameter.
 func NewNumberMetaParameter() *NumberMetaParameter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASENumberMetaParameter")), objc.RegisterName("new"))
-	return &NumberMetaParameter{inner: raw.PHASENumberMetaParameterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHASENumberMetaParameter")), objc.RegisterName("new"))
+	return numberMetaParameterAdopt(_id)
 }
 
 // A value for the metaparameter.
 //
-// WithValue sets the value property and returns the receiver for chaining.
-func (x *NumberMetaParameter) WithValue(value objc.ID) *NumberMetaParameter {
-	x.inner.PHASEMetaParameter.SetValue(value)
+// WithValue sets value and returns the receiver so calls can be chained.
+func (x *NumberMetaParameter) WithValue(value obj.Object) *NumberMetaParameter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
 	return x
 }
 
 // Sets the value gradually over the given amount of time.
-//
-// FadeToValueDuration calls the underlying FadeToValueDuration.
 func (x *NumberMetaParameter) FadeToValueDuration(value float64, duration float64) {
-	x.inner.FadeToValueDuration(value, duration)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fadeToValue:duration:"), value, duration)
 }
 
-// @property minimum @abstract The minimum value this metaparameter can be set to
-//
-// Minimum calls the underlying Minimum.
+// The minimum value this metaparameter can be set to
 func (x *NumberMetaParameter) Minimum() float64 {
-	return x.inner.Minimum()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimum"))
+	return _r
 }
 
-// @property maximum @abstract The maximum value this metaparameter can be set to
-//
-// Maximum calls the underlying Maximum.
+// The maximum value this metaparameter can be set to
 func (x *NumberMetaParameter) Maximum() float64 {
-	return x.inner.Maximum()
-}
-
-func (x *NumberMetaParameter) asMetaParameter() *raw.PHASEMetaParameter {
-	return &x.inner.PHASEMetaParameter
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximum"))
+	return _r
 }
 
 // NumberMetaParameterable is the interface implemented by [NumberMetaParameter], for mocking and DI.
 type NumberMetaParameterable interface {
-	Unwrap() *raw.PHASENumberMetaParameter
-	WithValue(value objc.ID) *NumberMetaParameter
+	obj.Object
+	WithValue(value obj.Object) *NumberMetaParameter
 	FadeToValueDuration(value float64, duration float64)
 	Minimum() float64
 	Maximum() float64

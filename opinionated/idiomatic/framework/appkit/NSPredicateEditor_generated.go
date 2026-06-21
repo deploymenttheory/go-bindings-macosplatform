@@ -5,825 +5,701 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A defined set of rules that allows the editing of predicate objects.
 //
-// PredicateEditor wraps [raw.NSPredicateEditor] with a fluent Go API.
+// PredicateEditor is an idiomatic wrapper over the Objective-C class NSPredicateEditor.
 type PredicateEditor struct {
-	inner *raw.NSPredicateEditor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPredicateEditor].
-func (x *PredicateEditor) Unwrap() *raw.NSPredicateEditor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PredicateEditor) ID() objc.ID { return x.inner.Ptr() }
-
-// PredicateEditorFromID adopts an existing object pointer as a PredicateEditor (nil for 0).
+// PredicateEditorFromID adopts an existing Objective-C object as a PredicateEditor
+// (nil for 0), retaining it and registering a release finalizer.
 func PredicateEditorFromID(id objc.ID) *PredicateEditor {
 	if id == 0 {
 		return nil
 	}
-	return &PredicateEditor{inner: raw.NSPredicateEditorFromID(id)}
+	x := &PredicateEditor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPredicateEditor creates a new [PredicateEditor].
+// predicateEditorAdopt wraps an Objective-C object that this code just created as a
+// PredicateEditor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func predicateEditorAdopt(id objc.ID) *PredicateEditor {
+	if id == 0 {
+		return nil
+	}
+	x := &PredicateEditor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PredicateEditor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PredicateEditor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PredicateEditor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPredicateEditor creates a new PredicateEditor.
 func NewPredicateEditor() *PredicateEditor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPredicateEditor")), objc.RegisterName("new"))
-	return &PredicateEditor{inner: raw.NSPredicateEditorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPredicateEditor")), objc.RegisterName("new"))
+	return predicateEditorAdopt(_id)
 }
 
 // The row templates for the receiver.
 //
-// WithRowTemplates sets the collection, converting the Go slice to an NSArray.
-func (x *PredicateEditor) WithRowTemplates(items ...*raw.NSPredicateEditorRowTemplate) *PredicateEditor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetRowTemplates(foundation.NSArrayFromID[*raw.NSPredicateEditorRowTemplate](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSPredicateEditorRowTemplate](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetRowTemplates(_arr)
-	return x
-}
-
-// The rule editor’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *PredicateEditor) WithDelegate(delegate raw.NSRuleEditorDelegate) *PredicateEditor {
-	x.inner.NSRuleEditor.SetDelegate(delegate)
+// WithRowTemplates sets the collection and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithRowTemplates(items ...*PredicateEditorRowTemplate) *PredicateEditor {
+	_arr := purego.SliceToNSArray(items, func(_v *PredicateEditorRowTemplate) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowTemplates:"), _arr)
 	return x
 }
 
 // The name of the rule editor’s strings file.
 //
-// WithFormattingStringsFilename sets the formattingStringsFilename property and returns the receiver for chaining.
+// WithFormattingStringsFilename sets formattingStringsFilename and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithFormattingStringsFilename(formattingStringsFilename string) *PredicateEditor {
-	x.inner.NSRuleEditor.SetFormattingStringsFilename(foundation.NSStringStringWithUTF8String(formattingStringsFilename))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingStringsFilename:"), purego.NSString(formattingStringsFilename))
 	return x
 }
 
 // The formatting dictionary for the rule editor.
 //
-// WithFormattingDictionary sets the formattingDictionary property and returns the receiver for chaining.
-func (x *PredicateEditor) WithFormattingDictionary(formattingDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *PredicateEditor {
-	x.inner.NSRuleEditor.SetFormattingDictionary(formattingDictionary)
+// WithFormattingDictionary sets formattingDictionary and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithFormattingDictionary(formattingDictionary obj.Object) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingDictionary:"), objref.IDOf(formattingDictionary))
 	return x
 }
 
 // The rule editor’s nesting mode.
 //
-// WithNestingMode sets the nestingMode property and returns the receiver for chaining.
-func (x *PredicateEditor) WithNestingMode(nestingMode NSRuleEditorNestingMode) *PredicateEditor {
-	x.inner.NSRuleEditor.SetNestingMode(raw.NSRuleEditorNestingMode(nestingMode))
+// WithNestingMode sets nestingMode and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithNestingMode(nestingMode RuleEditorNestingMode) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNestingMode:"), nestingMode)
 	return x
 }
 
 // The rule editor’s row height.
 //
-// WithRowHeight sets the rowHeight property and returns the receiver for chaining.
+// WithRowHeight sets rowHeight and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithRowHeight(rowHeight float64) *PredicateEditor {
-	x.inner.NSRuleEditor.SetRowHeight(rowHeight)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowHeight:"), rowHeight)
 	return x
 }
 
 // A Boolean value that determines whether the rule editor is editable.
 //
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable sets editable and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithEditable(editable bool) *PredicateEditor {
-	x.inner.NSRuleEditor.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
 // A Boolean value that indicates whether all the rows can be removed.
 //
-// WithCanRemoveAllRows sets the canRemoveAllRows property and returns the receiver for chaining.
+// WithCanRemoveAllRows sets canRemoveAllRows and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithCanRemoveAllRows(canRemoveAllRows bool) *PredicateEditor {
-	x.inner.NSRuleEditor.SetCanRemoveAllRows(canRemoveAllRows)
-	return x
-}
-
-// The class used to create a new row in the “rows” binding.
-//
-// WithRowClass sets the rowClass property and returns the receiver for chaining.
-func (x *PredicateEditor) WithRowClass(rowClass objc.Class) *PredicateEditor {
-	x.inner.NSRuleEditor.SetRowClass(rowClass)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanRemoveAllRows:"), canRemoveAllRows)
 	return x
 }
 
 // The key path for the row type.
 //
-// WithRowTypeKeyPath sets the rowTypeKeyPath property and returns the receiver for chaining.
+// WithRowTypeKeyPath sets rowTypeKeyPath and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithRowTypeKeyPath(rowTypeKeyPath string) *PredicateEditor {
-	x.inner.NSRuleEditor.SetRowTypeKeyPath(foundation.NSStringStringWithUTF8String(rowTypeKeyPath))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowTypeKeyPath:"), purego.NSString(rowTypeKeyPath))
 	return x
 }
 
 // The key path for the subrows.
 //
-// WithSubrowsKeyPath sets the subrowsKeyPath property and returns the receiver for chaining.
+// WithSubrowsKeyPath sets subrowsKeyPath and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithSubrowsKeyPath(subrowsKeyPath string) *PredicateEditor {
-	x.inner.NSRuleEditor.SetSubrowsKeyPath(foundation.NSStringStringWithUTF8String(subrowsKeyPath))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubrowsKeyPath:"), purego.NSString(subrowsKeyPath))
 	return x
 }
 
 // The criteria key path.
 //
-// WithCriteriaKeyPath sets the criteriaKeyPath property and returns the receiver for chaining.
+// WithCriteriaKeyPath sets criteriaKeyPath and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithCriteriaKeyPath(criteriaKeyPath string) *PredicateEditor {
-	x.inner.NSRuleEditor.SetCriteriaKeyPath(foundation.NSStringStringWithUTF8String(criteriaKeyPath))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCriteriaKeyPath:"), purego.NSString(criteriaKeyPath))
 	return x
 }
 
 // The display values key path.
 //
-// WithDisplayValuesKeyPath sets the displayValuesKeyPath property and returns the receiver for chaining.
+// WithDisplayValuesKeyPath sets displayValuesKeyPath and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithDisplayValuesKeyPath(displayValuesKeyPath string) *PredicateEditor {
-	x.inner.NSRuleEditor.SetDisplayValuesKeyPath(foundation.NSStringStringWithUTF8String(displayValuesKeyPath))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayValuesKeyPath:"), purego.NSString(displayValuesKeyPath))
 	return x
 }
 
 // The target object that receives action messages from the cell.
 //
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *PredicateEditor) WithTarget(target objc.ID) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetTarget(target)
-	return x
-}
-
-// The default action-message selector associated with the control.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *PredicateEditor) WithAction(action objc.SEL) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetAction(action)
+// WithTarget sets target and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithTarget(target obj.Object) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
 // The tag identifying the receiver (not the tag of the receiver’s cell).
 //
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag sets tag and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithTag(tag int) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
 // A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 //
-// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+// WithIgnoresMultiClick sets ignoresMultiClick and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithIgnoresMultiClick(ignoresMultiClick bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
 	return x
 }
 
 // A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 //
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous sets continuous and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithContinuous(continuous bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
 // A Boolean value that indicates whether the receiver reacts to mouse events.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithEnabled(enabled bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // A Boolean value indicating whether the receiver refuses the first responder role.
 //
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithRefusesFirstResponder(refusesFirstResponder bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
 // A Boolean value that indicates whether the cell is highlighted.
 //
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithHighlighted(highlighted bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
 // The size of the control.
 //
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *PredicateEditor) WithControlSize(controlSize NSControlSize) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithControlSize(controlSize ControlSize) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
 // The receiver’s formatter.
 //
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *PredicateEditor) WithFormatter(formatter *foundation.NSFormatter) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetFormatter(formatter)
+// WithFormatter sets formatter and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithFormatter(formatter obj.Object) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
 // The value of the receiver’s cell as an Objective-C object.
 //
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *PredicateEditor) WithObjectValue(objectValue objc.ID) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetObjectValue(objectValue)
+// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithObjectValue(objectValue obj.Object) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
 // The value of the receiver’s cell as an NSString object.
 //
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue sets stringValue and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithStringValue(stringValue string) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
 // The value of the receiver’s cell as an attributed string.
 //
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *PredicateEditor) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithAttributedStringValue(attributedStringValue obj.Object) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
 // The value of the receiver’s cell as an integer.
 //
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue sets intValue and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithIntValue(intValue int) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
 // The value of the receiver’s cell as an integer value.
 //
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithIntegerValue(integerValue int) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
 // The value of the receiver’s cell as a single-precision floating-point number.
 //
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithFloatValue(floatValue float32) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
 // The value of the receiver’s cell as a double-precision floating-point number.
 //
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithDoubleValue(doubleValue float64) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
 // The font used to draw text in the receiver’s cell.
 //
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont sets font and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithFont(font *Font) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
 // A Boolean value that indicates whether the text in the control’s cell uses single line mode.
 //
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithUsesSingleLineMode(usesSingleLineMode bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
 // The line break mode to use for text in the control’s cell.
 //
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *PredicateEditor) WithLineBreakMode(lineBreakMode NSLineBreakMode) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithLineBreakMode(lineBreakMode LineBreakMode) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
 // The alignment mode of the text in the receiver’s cell.
 //
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *PredicateEditor) WithAlignment(alignment NSTextAlignment) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment sets alignment and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithAlignment(alignment TextAlignment) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
 // The initial writing direction used to determine the actual writing direction for text.
 //
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *PredicateEditor) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithBaseWritingDirection(baseWritingDirection WritingDirection) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
 // A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 //
-// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+// WithAllowsExpansionToolTips sets allowsExpansionToolTips and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
 	return x
 }
 
-// WithCell sets the cell property and returns the receiver for chaining.
+// WithCell sets cell and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithCell(cell CellProvider) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.SetCell(cell.asCell())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return x
 }
 
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
+// WithSubviews sets the collection and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithSubviews(items ...ViewProvider) *PredicateEditor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSRuleEditor.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSRuleEditor.NSControl.NSView.SetSubviews(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithHidden(hidden bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+// WithPostsFrameChangedNotifications sets postsFrameChangedNotifications and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+// WithAutoresizesSubviews sets autoresizesSubviews and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithAutoresizesSubviews(autoresizesSubviews bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *PredicateEditor) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
+// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
-func (x *PredicateEditor) WithFrame(frame corefoundation.CGRect) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetFrame(frame)
-	return x
-}
-
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+// WithFrameRotation sets frameRotation and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithFrameRotation(frameRotation float64) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetFrameRotation(frameRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+// WithFrameCenterRotation sets frameCenterRotation and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithFrameCenterRotation(frameCenterRotation float64) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+// WithBoundsRotation sets boundsRotation and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithBoundsRotation(boundsRotation float64) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *PredicateEditor) WithBounds(bounds corefoundation.CGRect) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetBounds(bounds)
-	return x
-}
-
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+// WithCanDrawConcurrently sets canDrawConcurrently and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithCanDrawConcurrently(canDrawConcurrently bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
 // A Boolean value that determines whether the view needs to be redrawn before being displayed.
 //
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+// WithNeedsDisplay sets needsDisplay and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithNeedsDisplay(needsDisplay bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+// WithAcceptsTouchEvents sets acceptsTouchEvents and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithAcceptsTouchEvents(acceptsTouchEvents bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+// WithWantsRestingTouches sets wantsRestingTouches and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithWantsRestingTouches(wantsRestingTouches bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *PredicateEditor) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
+// WithLayerContentsRedrawPolicy sets layerContentsRedrawPolicy and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *PredicateEditor) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
+// WithLayerContentsPlacement sets layerContentsPlacement and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+// WithWantsLayer sets wantsLayer and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithWantsLayer(wantsLayer bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetWantsLayer(wantsLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *PredicateEditor) WithLayer(layer *quartzcore.CALayer) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetLayer(layer)
+// WithLayer sets layer and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithLayer(layer obj.Object) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+// WithCanDrawSubviewsIntoLayer sets canDrawSubviewsIntoLayer and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+// WithNeedsLayout sets needsLayout and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithNeedsLayout(needsLayout bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetNeedsLayout(needsLayout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithAlphaValue(alphaValue float64) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetAlphaValue(alphaValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+// WithLayerUsesCoreImageFilters sets layerUsesCoreImageFilters and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *PredicateEditor) WithBackgroundFilters(items ...*coreimage.CIFilter) *PredicateEditor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSRuleEditor.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSRuleEditor.NSControl.NSView.SetBackgroundFilters(_arr)
+// WithBackgroundFilters sets the collection and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithBackgroundFilters(items ...obj.Object) *PredicateEditor {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *PredicateEditor) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetCompositingFilter(compositingFilter)
+// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithCompositingFilter(compositingFilter obj.Object) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *PredicateEditor) WithContentFilters(items ...*coreimage.CIFilter) *PredicateEditor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSRuleEditor.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSRuleEditor.NSControl.NSView.SetContentFilters(_arr)
+// WithContentFilters sets the collection and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithContentFilters(items ...obj.Object) *PredicateEditor {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets the shadow property and returns the receiver for chaining.
+// WithShadow sets shadow and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithShadow(shadow *Shadow) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetShadow(shadow.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+// WithClipsToBounds sets clipsToBounds and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithClipsToBounds(clipsToBounds bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+// WithPostsBoundsChangedNotifications sets postsBoundsChangedNotifications and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip sets toolTip and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithToolTip(toolTip string) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *PredicateEditor) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
-func (x *PredicateEditor) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
-	return x
-}
-
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+// WithNextKeyView sets nextKeyView and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithNextKeyView(nextKeyView ViewProvider) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *PredicateEditor) WithFocusRingType(focusRingType NSFocusRingType) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithFocusRingType(focusRingType FocusRingType) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+// WithGestureRecognizers sets the collection and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithGestureRecognizers(items ...GestureRecognizerProvider) *PredicateEditor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSRuleEditor.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSRuleEditor.NSControl.NSView.SetGestureRecognizers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *PredicateEditor) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
-	return x
-}
-
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
-func (x *PredicateEditor) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+// WithAllowedTouchTypes sets allowedTouchTypes and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
 // When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+// WithPrefersCompactControlSizeMetrics sets prefersCompactControlSizeMetrics and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+// WithWritingToolsCoordinator sets writingToolsCoordinator and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+// WithNeedsUpdateConstraints sets needsUpdateConstraints and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+// WithTranslatesAutoresizingMaskIntoConstraints sets translatesAutoresizingMaskIntoConstraints and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithHorizontalContentSizeConstraintActive sets horizontalContentSizeConstraintActive and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithVerticalContentSizeConstraintActive sets verticalContentSizeConstraintActive and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+// WithWantsBestResolutionOpenGLSurface sets wantsBestResolutionOpenGLSurface and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets wantsExtendedDynamicRangeOpenGLSurface and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+// WithPressureConfiguration sets pressureConfiguration and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
 // The next responder after this one, or nil if it has none.
 //
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithNextResponder(nextResponder ResponderProvider) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
 // Returns the responder’s menu.
 //
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu sets menu and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithMenu(menu *Menu) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
 // An object encapsulating a user activity supported by this responder.
 //
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *PredicateEditor) WithUserActivity(userActivity *foundation.NSUserActivity) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+func (x *PredicateEditor) WithUserActivity(userActivity obj.Object) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
 // The NSTouchBar object associated with the responder.
 //
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
 func (x *PredicateEditor) WithTouchBar(touchBar *TouchBar) *PredicateEditor {
-	x.inner.NSRuleEditor.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
 // RowTemplates returns the collection as a Go slice.
 func (x *PredicateEditor) RowTemplates() []*PredicateEditorRowTemplate {
-	arr := x.inner.RowTemplates()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PredicateEditorRowTemplate {
-		return &PredicateEditorRowTemplate{inner: raw.NSPredicateEditorRowTemplateFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rowTemplates"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PredicateEditorRowTemplate { return PredicateEditorRowTemplateFromID(_id) })
 }
 
-// SetRowTemplates calls the underlying SetRowTemplates.
-func (x *PredicateEditor) SetRowTemplates(rowTemplates *foundation.NSArray[*raw.NSPredicateEditorRowTemplate]) {
-	x.inner.SetRowTemplates(rowTemplates)
-}
-
-func (x *PredicateEditor) asRuleEditor() *raw.NSRuleEditor { return &x.inner.NSRuleEditor }
-
-func (x *PredicateEditor) asControl() *raw.NSControl { return &x.inner.NSRuleEditor.NSControl }
-
-func (x *PredicateEditor) asView() *raw.NSView { return &x.inner.NSRuleEditor.NSControl.NSView }
-
-func (x *PredicateEditor) asResponder() *raw.NSResponder {
-	return &x.inner.NSRuleEditor.NSControl.NSView.NSResponder
+func (x *PredicateEditor) SetRowTemplates(rowTemplates []*PredicateEditorRowTemplate) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowTemplates:"), purego.SliceToNSArray(rowTemplates, func(_v *PredicateEditorRowTemplate) objc.ID { return objref.IDOf(_v) }))
 }
 
 // PredicateEditorable is the interface implemented by [PredicateEditor], for mocking and DI.
 type PredicateEditorable interface {
-	Unwrap() *raw.NSPredicateEditor
-	WithRowTemplates(items ...*raw.NSPredicateEditorRowTemplate) *PredicateEditor
-	WithDelegate(delegate raw.NSRuleEditorDelegate) *PredicateEditor
+	obj.Object
+	WithRowTemplates(items ...*PredicateEditorRowTemplate) *PredicateEditor
 	WithFormattingStringsFilename(formattingStringsFilename string) *PredicateEditor
-	WithFormattingDictionary(formattingDictionary *foundation.NSDictionary[*foundation.NSString, *foundation.NSString]) *PredicateEditor
-	WithNestingMode(nestingMode NSRuleEditorNestingMode) *PredicateEditor
+	WithFormattingDictionary(formattingDictionary obj.Object) *PredicateEditor
+	WithNestingMode(nestingMode RuleEditorNestingMode) *PredicateEditor
 	WithRowHeight(rowHeight float64) *PredicateEditor
 	WithEditable(editable bool) *PredicateEditor
 	WithCanRemoveAllRows(canRemoveAllRows bool) *PredicateEditor
-	WithRowClass(rowClass objc.Class) *PredicateEditor
 	WithRowTypeKeyPath(rowTypeKeyPath string) *PredicateEditor
 	WithSubrowsKeyPath(subrowsKeyPath string) *PredicateEditor
 	WithCriteriaKeyPath(criteriaKeyPath string) *PredicateEditor
 	WithDisplayValuesKeyPath(displayValuesKeyPath string) *PredicateEditor
-	WithTarget(target objc.ID) *PredicateEditor
-	WithAction(action objc.SEL) *PredicateEditor
+	WithTarget(target obj.Object) *PredicateEditor
 	WithTag(tag int) *PredicateEditor
 	WithIgnoresMultiClick(ignoresMultiClick bool) *PredicateEditor
 	WithContinuous(continuous bool) *PredicateEditor
 	WithEnabled(enabled bool) *PredicateEditor
 	WithRefusesFirstResponder(refusesFirstResponder bool) *PredicateEditor
 	WithHighlighted(highlighted bool) *PredicateEditor
-	WithControlSize(controlSize NSControlSize) *PredicateEditor
-	WithFormatter(formatter *foundation.NSFormatter) *PredicateEditor
-	WithObjectValue(objectValue objc.ID) *PredicateEditor
+	WithControlSize(controlSize ControlSize) *PredicateEditor
+	WithFormatter(formatter obj.Object) *PredicateEditor
+	WithObjectValue(objectValue obj.Object) *PredicateEditor
 	WithStringValue(stringValue string) *PredicateEditor
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *PredicateEditor
+	WithAttributedStringValue(attributedStringValue obj.Object) *PredicateEditor
 	WithIntValue(intValue int) *PredicateEditor
 	WithIntegerValue(integerValue int) *PredicateEditor
 	WithFloatValue(floatValue float32) *PredicateEditor
 	WithDoubleValue(doubleValue float64) *PredicateEditor
 	WithFont(font *Font) *PredicateEditor
 	WithUsesSingleLineMode(usesSingleLineMode bool) *PredicateEditor
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *PredicateEditor
-	WithAlignment(alignment NSTextAlignment) *PredicateEditor
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *PredicateEditor
+	WithLineBreakMode(lineBreakMode LineBreakMode) *PredicateEditor
+	WithAlignment(alignment TextAlignment) *PredicateEditor
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *PredicateEditor
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PredicateEditor
 	WithCell(cell CellProvider) *PredicateEditor
 	WithSubviews(items ...ViewProvider) *PredicateEditor
 	WithHidden(hidden bool) *PredicateEditor
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PredicateEditor
 	WithAutoresizesSubviews(autoresizesSubviews bool) *PredicateEditor
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *PredicateEditor
-	WithFrame(frame corefoundation.CGRect) *PredicateEditor
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *PredicateEditor
 	WithFrameRotation(frameRotation float64) *PredicateEditor
 	WithFrameCenterRotation(frameCenterRotation float64) *PredicateEditor
 	WithBoundsRotation(boundsRotation float64) *PredicateEditor
-	WithBounds(bounds corefoundation.CGRect) *PredicateEditor
 	WithCanDrawConcurrently(canDrawConcurrently bool) *PredicateEditor
 	WithNeedsDisplay(needsDisplay bool) *PredicateEditor
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *PredicateEditor
 	WithWantsRestingTouches(wantsRestingTouches bool) *PredicateEditor
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *PredicateEditor
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *PredicateEditor
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *PredicateEditor
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *PredicateEditor
 	WithWantsLayer(wantsLayer bool) *PredicateEditor
-	WithLayer(layer *quartzcore.CALayer) *PredicateEditor
+	WithLayer(layer obj.Object) *PredicateEditor
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PredicateEditor
 	WithNeedsLayout(needsLayout bool) *PredicateEditor
 	WithAlphaValue(alphaValue float64) *PredicateEditor
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *PredicateEditor
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *PredicateEditor
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *PredicateEditor
-	WithContentFilters(items ...*coreimage.CIFilter) *PredicateEditor
+	WithBackgroundFilters(items ...obj.Object) *PredicateEditor
+	WithCompositingFilter(compositingFilter obj.Object) *PredicateEditor
+	WithContentFilters(items ...obj.Object) *PredicateEditor
 	WithShadow(shadow *Shadow) *PredicateEditor
 	WithClipsToBounds(clipsToBounds bool) *PredicateEditor
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PredicateEditor
 	WithToolTip(toolTip string) *PredicateEditor
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *PredicateEditor
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PredicateEditor
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PredicateEditor
 	WithNextKeyView(nextKeyView ViewProvider) *PredicateEditor
-	WithFocusRingType(focusRingType NSFocusRingType) *PredicateEditor
+	WithFocusRingType(focusRingType FocusRingType) *PredicateEditor
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *PredicateEditor
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *PredicateEditor
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PredicateEditor
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PredicateEditor
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PredicateEditor
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PredicateEditor
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PredicateEditor
@@ -835,10 +711,10 @@ type PredicateEditorable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PredicateEditor
 	WithNextResponder(nextResponder ResponderProvider) *PredicateEditor
 	WithMenu(menu *Menu) *PredicateEditor
-	WithUserActivity(userActivity *foundation.NSUserActivity) *PredicateEditor
+	WithUserActivity(userActivity obj.Object) *PredicateEditor
 	WithTouchBar(touchBar *TouchBar) *PredicateEditor
 	RowTemplates() []*PredicateEditorRowTemplate
-	SetRowTemplates(rowTemplates *foundation.NSArray[*raw.NSPredicateEditorRowTemplate])
+	SetRowTemplates(rowTemplates []*PredicateEditorRowTemplate)
 }
 
 var _ PredicateEditorable = (*PredicateEditor)(nil)

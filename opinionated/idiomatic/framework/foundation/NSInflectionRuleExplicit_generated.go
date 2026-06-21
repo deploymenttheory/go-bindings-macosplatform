@@ -5,66 +5,83 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An inflection rule that uses a morphology instance to determine how to inflect attribued strings.
 //
-// InflectionRuleExplicit wraps [raw.NSInflectionRuleExplicit] with a fluent Go API.
+// InflectionRuleExplicit is an idiomatic wrapper over the Objective-C class NSInflectionRuleExplicit.
 type InflectionRuleExplicit struct {
-	inner *raw.NSInflectionRuleExplicit
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSInflectionRuleExplicit].
-func (x *InflectionRuleExplicit) Unwrap() *raw.NSInflectionRuleExplicit { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *InflectionRuleExplicit) ID() objc.ID { return x.inner.Ptr() }
-
-// InflectionRuleExplicitFromID adopts an existing object pointer as a InflectionRuleExplicit (nil for 0).
+// InflectionRuleExplicitFromID adopts an existing Objective-C object as a InflectionRuleExplicit
+// (nil for 0), retaining it and registering a release finalizer.
 func InflectionRuleExplicitFromID(id objc.ID) *InflectionRuleExplicit {
 	if id == 0 {
 		return nil
 	}
-	return &InflectionRuleExplicit{inner: raw.NSInflectionRuleExplicitFromID(id)}
+	x := &InflectionRuleExplicit{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// inflectionRuleExplicitAdopt wraps an Objective-C object that this code just created as a
+// InflectionRuleExplicit (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func inflectionRuleExplicitAdopt(id objc.ID) *InflectionRuleExplicit {
+	if id == 0 {
+		return nil
+	}
+	x := &InflectionRuleExplicit{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *InflectionRuleExplicit) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *InflectionRuleExplicit) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *InflectionRuleExplicit) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an inflection rule with the given morphology.
 //
-// NewInflectionRuleExplicitWithMorphology creates a new [InflectionRuleExplicit].
-func NewInflectionRuleExplicitWithMorphology(morphology *raw.NSMorphology) *InflectionRuleExplicit {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSInflectionRuleExplicit")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMorphology:"), morphology.Ptr())
-	return &InflectionRuleExplicit{inner: raw.NSInflectionRuleExplicitFromID(_id)}
+// NewInflectionRuleExplicitWithMorphology creates a new InflectionRuleExplicit.
+func NewInflectionRuleExplicitWithMorphology(morphology *Morphology) *InflectionRuleExplicit {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSInflectionRuleExplicit")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMorphology:"), objref.IDOf(morphology))
+	return inflectionRuleExplicitAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *InflectionRuleExplicit) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *InflectionRuleExplicit {
-	x.inner.NSInflectionRule.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *InflectionRuleExplicit) WithScriptingProperties(scriptingProperties obj.Object) *InflectionRuleExplicit {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Morphology calls the underlying Morphology.
 func (x *InflectionRuleExplicit) Morphology() *Morphology {
-	_r := x.inner.Morphology()
-	if _r == nil {
-		return nil
-	}
-	return &Morphology{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("morphology"))
+	return MorphologyFromID(_r)
 }
-
-func (x *InflectionRuleExplicit) asInflectionRule() *raw.NSInflectionRule {
-	return &x.inner.NSInflectionRule
-}
-
-func (x *InflectionRuleExplicit) asObject() *raw.NSObject { return &x.inner.NSInflectionRule.NSObject }
 
 // InflectionRuleExplicitable is the interface implemented by [InflectionRuleExplicit], for mocking and DI.
 type InflectionRuleExplicitable interface {
-	Unwrap() *raw.NSInflectionRuleExplicit
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *InflectionRuleExplicit
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *InflectionRuleExplicit
 	Morphology() *Morphology
 }
 

@@ -5,41 +5,68 @@
 package localauthentication
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A set of requirements to fall back on if biometrics aren’t present.
 //
-// BiometryFallbackRequirement wraps [raw.LABiometryFallbackRequirement] with a fluent Go API.
+// BiometryFallbackRequirement is an idiomatic wrapper over the Objective-C class LABiometryFallbackRequirement.
 type BiometryFallbackRequirement struct {
-	inner *raw.LABiometryFallbackRequirement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.LABiometryFallbackRequirement].
-func (x *BiometryFallbackRequirement) Unwrap() *raw.LABiometryFallbackRequirement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BiometryFallbackRequirement) ID() objc.ID { return x.inner.Ptr() }
-
-// BiometryFallbackRequirementFromID adopts an existing object pointer as a BiometryFallbackRequirement (nil for 0).
+// BiometryFallbackRequirementFromID adopts an existing Objective-C object as a BiometryFallbackRequirement
+// (nil for 0), retaining it and registering a release finalizer.
 func BiometryFallbackRequirementFromID(id objc.ID) *BiometryFallbackRequirement {
 	if id == 0 {
 		return nil
 	}
-	return &BiometryFallbackRequirement{inner: raw.LABiometryFallbackRequirementFromID(id)}
+	x := &BiometryFallbackRequirement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBiometryFallbackRequirement creates a new [BiometryFallbackRequirement].
+// biometryFallbackRequirementAdopt wraps an Objective-C object that this code just created as a
+// BiometryFallbackRequirement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func biometryFallbackRequirementAdopt(id objc.ID) *BiometryFallbackRequirement {
+	if id == 0 {
+		return nil
+	}
+	x := &BiometryFallbackRequirement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BiometryFallbackRequirement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BiometryFallbackRequirement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BiometryFallbackRequirement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBiometryFallbackRequirement creates a new BiometryFallbackRequirement.
 func NewBiometryFallbackRequirement() *BiometryFallbackRequirement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LABiometryFallbackRequirement")), objc.RegisterName("new"))
-	return &BiometryFallbackRequirement{inner: raw.LABiometryFallbackRequirementFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("LABiometryFallbackRequirement")), objc.RegisterName("new"))
+	return biometryFallbackRequirementAdopt(_id)
 }
 
 // BiometryFallbackRequirementable is the interface implemented by [BiometryFallbackRequirement], for mocking and DI.
 type BiometryFallbackRequirementable interface {
-	Unwrap() *raw.LABiometryFallbackRequirement
+	obj.Object
 }
 
 var _ BiometryFallbackRequirementable = (*BiometryFallbackRequirement)(nil)

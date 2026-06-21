@@ -6,68 +6,87 @@ package foundation
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // A convenient interface to the contents of the file system, and the primary means of interacting with it.
 //
-// FileManager wraps [raw.NSFileManager] with a fluent Go API.
+// FileManager is an idiomatic wrapper over the Objective-C class NSFileManager.
 type FileManager struct {
-	inner *raw.NSFileManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFileManager].
-func (x *FileManager) Unwrap() *raw.NSFileManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileManager) ID() objc.ID { return x.inner.Ptr() }
-
-// FileManagerFromID adopts an existing object pointer as a FileManager (nil for 0).
+// FileManagerFromID adopts an existing Objective-C object as a FileManager
+// (nil for 0), retaining it and registering a release finalizer.
 func FileManagerFromID(id objc.ID) *FileManager {
 	if id == 0 {
 		return nil
 	}
-	return &FileManager{inner: raw.NSFileManagerFromID(id)}
+	x := &FileManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFileManager creates a new [FileManager].
+// fileManagerAdopt wraps an Objective-C object that this code just created as a
+// FileManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileManagerAdopt(id objc.ID) *FileManager {
+	if id == 0 {
+		return nil
+	}
+	x := &FileManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FileManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFileManager creates a new FileManager.
 func NewFileManager() *FileManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileManager")), objc.RegisterName("new"))
-	return &FileManager{inner: raw.NSFileManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSFileManager")), objc.RegisterName("new"))
+	return fileManagerAdopt(_id)
 }
 
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *FileManager) WithDelegate(delegate raw.NSFileManagerDelegate) *FileManager {
-	x.inner.SetDelegate(delegate)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *FileManager) WithScriptingProperties(scriptingProperties obj.Object) *FileManager {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *FileManager) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileManager {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
-	return x
-}
-
-// MountedVolumeURLsIncludingResourceValuesForKeysOptions calls the underlying MountedVolumeURLsIncludingResourceValuesForKeysOptions.
-func (x *FileManager) MountedVolumeURLsIncludingResourceValuesForKeysOptions(propertyKeys *raw.NSArray[*raw.NSString], options NSVolumeEnumerationOptions) *raw.NSArray[*raw.NSURL] {
-	return x.inner.MountedVolumeURLsIncludingResourceValuesForKeysOptions(propertyKeys, raw.NSVolumeEnumerationOptions(options))
+func (x *FileManager) MountedVolumeURLsIncludingResourceValuesForKeysOptions(propertyKeys []*String, options VolumeEnumerationOptions) []*URL {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mountedVolumeURLsIncludingResourceValuesForKeys:options:"), purego.SliceToNSArray(propertyKeys, func(_v *String) objc.ID { return objref.IDOf(_v) }), options)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *URL { return URLFromID(_id) })
 }
 
 // UnmountVolumeAtURLOptions blocks until the operation completes or ctx is cancelled.
-func (x *FileManager) UnmountVolumeAtURLOptions(ctx context.Context, url string, mask NSFileManagerUnmountOptions) error {
+func (x *FileManager) UnmountVolumeAtURLOptions(ctx context.Context, url string, mask FileManagerUnmountOptions) error {
 	_ch := make(chan error, 1)
-	x.inner.UnmountVolumeAtURLOptionsCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileManagerUnmountOptions(mask), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unmountVolumeAtURL:options:completionHandler:"), rt.FileURL(url), mask, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -76,350 +95,399 @@ func (x *FileManager) UnmountVolumeAtURLOptions(ctx context.Context, url string,
 	}
 }
 
-// ContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError calls the underlying ContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError.
-func (x *FileManager) ContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError(url string, keys *raw.NSArray[*raw.NSString], mask NSDirectoryEnumerationOptions) (*raw.NSArray[*raw.NSURL], error) {
-	return x.inner.ContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), keys, raw.NSDirectoryEnumerationOptions(mask))
-}
-
-// URLsForDirectoryInDomains calls the underlying URLsForDirectoryInDomains.
-func (x *FileManager) URLsForDirectoryInDomains(directory NSSearchPathDirectory, domainMask NSSearchPathDomainMask) *raw.NSArray[*raw.NSURL] {
-	return x.inner.URLsForDirectoryInDomains(raw.NSSearchPathDirectory(directory), raw.NSSearchPathDomainMask(domainMask))
-}
-
-// URLForDirectoryInDomainAppropriateForURLCreateError calls the underlying URLForDirectoryInDomainAppropriateForURLCreateError.
-func (x *FileManager) URLForDirectoryInDomainAppropriateForURLCreateError(directory NSSearchPathDirectory, domain NSSearchPathDomainMask, url string, shouldCreate bool) (*URL, error) {
-	_r, _err := x.inner.URLForDirectoryInDomainAppropriateForURLCreateError(raw.NSSearchPathDirectory(directory), raw.NSSearchPathDomainMask(domain), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), shouldCreate)
-	if _err != nil {
-		return nil, _err
+func (x *FileManager) ContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError(url string, keys []*String, mask DirectoryEnumerationOptions) ([]*URL, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentsOfDirectoryAtURL:includingPropertiesForKeys:options:error:"), rt.FileURL(url), purego.SliceToNSArray(keys, func(_v *String) objc.ID { return objref.IDOf(_v) }), mask, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *URL { return URLFromID(_id) }), nil
+}
+
+func (x *FileManager) URLsForDirectoryInDomains(directory SearchPathDirectory, domainMask SearchPathDomainMask) []*URL {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLsForDirectory:inDomains:"), directory, domainMask)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *URL { return URLFromID(_id) })
+}
+
+func (x *FileManager) URLForDirectoryInDomainAppropriateForURLCreateError(directory SearchPathDirectory, domain SearchPathDomainMask, url string, shouldCreate bool) (*URL, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLForDirectory:inDomain:appropriateForURL:create:error:"), directory, domain, rt.FileURL(url), shouldCreate, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &URL{inner: _r}, nil
+	return URLFromID(_r), nil
 }
 
-// GetRelationshipOfDirectoryAtURLToItemAtURLError calls the underlying GetRelationshipOfDirectoryAtURLToItemAtURLError.
-func (x *FileManager) GetRelationshipOfDirectoryAtURLToItemAtURLError(outRelationship *raw.NSURLRelationship, directoryURL string, otherURL string) (bool, error) {
-	return x.inner.GetRelationshipOfDirectoryAtURLToItemAtURLError(outRelationship, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(directoryURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(otherURL)))
-}
-
-// GetRelationshipOfDirectoryInDomainToItemAtURLError calls the underlying GetRelationshipOfDirectoryInDomainToItemAtURLError.
-func (x *FileManager) GetRelationshipOfDirectoryInDomainToItemAtURLError(outRelationship *raw.NSURLRelationship, directory NSSearchPathDirectory, domainMask NSSearchPathDomainMask, url string) (bool, error) {
-	return x.inner.GetRelationshipOfDirectoryInDomainToItemAtURLError(outRelationship, raw.NSSearchPathDirectory(directory), raw.NSSearchPathDomainMask(domainMask), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-}
-
-// CreateDirectoryAtURLWithIntermediateDirectoriesAttributesError calls the underlying CreateDirectoryAtURLWithIntermediateDirectoriesAttributesError.
-func (x *FileManager) CreateDirectoryAtURLWithIntermediateDirectoriesAttributesError(url string, createIntermediates bool, attributes *raw.NSDictionary[*raw.NSString, objc.ID]) (bool, error) {
-	return x.inner.CreateDirectoryAtURLWithIntermediateDirectoriesAttributesError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), createIntermediates, attributes)
-}
-
-// CreateSymbolicLinkAtURLWithDestinationURLError calls the underlying CreateSymbolicLinkAtURLWithDestinationURLError.
-func (x *FileManager) CreateSymbolicLinkAtURLWithDestinationURLError(url string, destURL string) (bool, error) {
-	return x.inner.CreateSymbolicLinkAtURLWithDestinationURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(destURL)))
-}
-
-// SetAttributesOfItemAtPathError calls the underlying SetAttributesOfItemAtPathError.
-func (x *FileManager) SetAttributesOfItemAtPathError(attributes *raw.NSDictionary[*raw.NSString, objc.ID], path string) (bool, error) {
-	return x.inner.SetAttributesOfItemAtPathError(attributes, foundation.NSStringStringWithUTF8String(path))
-}
-
-// CreateDirectoryAtPathWithIntermediateDirectoriesAttributesError calls the underlying CreateDirectoryAtPathWithIntermediateDirectoriesAttributesError.
-func (x *FileManager) CreateDirectoryAtPathWithIntermediateDirectoriesAttributesError(path string, createIntermediates bool, attributes *raw.NSDictionary[*raw.NSString, objc.ID]) (bool, error) {
-	return x.inner.CreateDirectoryAtPathWithIntermediateDirectoriesAttributesError(foundation.NSStringStringWithUTF8String(path), createIntermediates, attributes)
-}
-
-// ContentsOfDirectoryAtPathError calls the underlying ContentsOfDirectoryAtPathError.
-func (x *FileManager) ContentsOfDirectoryAtPathError(path string) (*raw.NSArray[*raw.NSString], error) {
-	return x.inner.ContentsOfDirectoryAtPathError(foundation.NSStringStringWithUTF8String(path))
-}
-
-// SubpathsOfDirectoryAtPathError calls the underlying SubpathsOfDirectoryAtPathError.
-func (x *FileManager) SubpathsOfDirectoryAtPathError(path string) (*raw.NSArray[*raw.NSString], error) {
-	return x.inner.SubpathsOfDirectoryAtPathError(foundation.NSStringStringWithUTF8String(path))
-}
-
-// AttributesOfItemAtPathError calls the underlying AttributesOfItemAtPathError.
-func (x *FileManager) AttributesOfItemAtPathError(path string) (*raw.NSDictionary[*raw.NSString, objc.ID], error) {
-	return x.inner.AttributesOfItemAtPathError(foundation.NSStringStringWithUTF8String(path))
-}
-
-// AttributesOfFileSystemForPathError calls the underlying AttributesOfFileSystemForPathError.
-func (x *FileManager) AttributesOfFileSystemForPathError(path string) (*raw.NSDictionary[*raw.NSString, objc.ID], error) {
-	return x.inner.AttributesOfFileSystemForPathError(foundation.NSStringStringWithUTF8String(path))
-}
-
-// CreateSymbolicLinkAtPathWithDestinationPathError calls the underlying CreateSymbolicLinkAtPathWithDestinationPathError.
-func (x *FileManager) CreateSymbolicLinkAtPathWithDestinationPathError(path string, destPath string) (bool, error) {
-	return x.inner.CreateSymbolicLinkAtPathWithDestinationPathError(foundation.NSStringStringWithUTF8String(path), foundation.NSStringStringWithUTF8String(destPath))
-}
-
-// DestinationOfSymbolicLinkAtPathError calls the underlying DestinationOfSymbolicLinkAtPathError.
-func (x *FileManager) DestinationOfSymbolicLinkAtPathError(path string) (*String, error) {
-	_r, _err := x.inner.DestinationOfSymbolicLinkAtPathError(foundation.NSStringStringWithUTF8String(path))
-	if _err != nil {
-		return nil, _err
+func (x *FileManager) CreateDirectoryAtURLWithIntermediateDirectoriesAttributes(url string, createIntermediates bool, attributes obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("createDirectoryAtURL:withIntermediateDirectories:attributes:error:"), rt.FileURL(url), createIntermediates, objref.IDOf(attributes), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
+	return nil
+}
+
+func (x *FileManager) CreateSymbolicLinkAtURLWithDestinationURL(url string, destURL string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("createSymbolicLinkAtURL:withDestinationURL:error:"), rt.FileURL(url), rt.FileURL(destURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &String{inner: _r}, nil
+	return nil
 }
 
-// CopyItemAtPathToPathError calls the underlying CopyItemAtPathToPathError.
-func (x *FileManager) CopyItemAtPathToPathError(srcPath string, dstPath string) (bool, error) {
-	return x.inner.CopyItemAtPathToPathError(foundation.NSStringStringWithUTF8String(srcPath), foundation.NSStringStringWithUTF8String(dstPath))
-}
-
-// MoveItemAtPathToPathError calls the underlying MoveItemAtPathToPathError.
-func (x *FileManager) MoveItemAtPathToPathError(srcPath string, dstPath string) (bool, error) {
-	return x.inner.MoveItemAtPathToPathError(foundation.NSStringStringWithUTF8String(srcPath), foundation.NSStringStringWithUTF8String(dstPath))
-}
-
-// LinkItemAtPathToPathError calls the underlying LinkItemAtPathToPathError.
-func (x *FileManager) LinkItemAtPathToPathError(srcPath string, dstPath string) (bool, error) {
-	return x.inner.LinkItemAtPathToPathError(foundation.NSStringStringWithUTF8String(srcPath), foundation.NSStringStringWithUTF8String(dstPath))
-}
-
-// RemoveItemAtPathError calls the underlying RemoveItemAtPathError.
-func (x *FileManager) RemoveItemAtPathError(path string) (bool, error) {
-	return x.inner.RemoveItemAtPathError(foundation.NSStringStringWithUTF8String(path))
-}
-
-// CopyItemAtURLToURLError calls the underlying CopyItemAtURLToURLError.
-func (x *FileManager) CopyItemAtURLToURLError(srcURL string, dstURL string) (bool, error) {
-	return x.inner.CopyItemAtURLToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(srcURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(dstURL)))
-}
-
-// MoveItemAtURLToURLError calls the underlying MoveItemAtURLToURLError.
-func (x *FileManager) MoveItemAtURLToURLError(srcURL string, dstURL string) (bool, error) {
-	return x.inner.MoveItemAtURLToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(srcURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(dstURL)))
-}
-
-// LinkItemAtURLToURLError calls the underlying LinkItemAtURLToURLError.
-func (x *FileManager) LinkItemAtURLToURLError(srcURL string, dstURL string) (bool, error) {
-	return x.inner.LinkItemAtURLToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(srcURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(dstURL)))
-}
-
-// RemoveItemAtURLError calls the underlying RemoveItemAtURLError.
-func (x *FileManager) RemoveItemAtURLError(uRL string) (bool, error) {
-	return x.inner.RemoveItemAtURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
-}
-
-// TrashItemAtURLResultingItemURLError calls the underlying TrashItemAtURLResultingItemURLError.
-func (x *FileManager) TrashItemAtURLResultingItemURLError(url string, outResultingURL string) (bool, error) {
-	return x.inner.TrashItemAtURLResultingItemURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outResultingURL)))
-}
-
-// FileAttributesAtPathTraverseLink calls the underlying FileAttributesAtPathTraverseLink.
-func (x *FileManager) FileAttributesAtPathTraverseLink(path string, yorn bool) *raw.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.FileAttributesAtPathTraverseLink(foundation.NSStringStringWithUTF8String(path), yorn)
-}
-
-// ChangeFileAttributesAtPath calls the underlying ChangeFileAttributesAtPath.
-func (x *FileManager) ChangeFileAttributesAtPath(attributes *raw.NSDictionary[objc.ID, objc.ID], path string) bool {
-	return x.inner.ChangeFileAttributesAtPath(attributes, foundation.NSStringStringWithUTF8String(path))
-}
-
-// DirectoryContentsAtPath calls the underlying DirectoryContentsAtPath.
-func (x *FileManager) DirectoryContentsAtPath(path string) *raw.NSArray[objc.ID] {
-	return x.inner.DirectoryContentsAtPath(foundation.NSStringStringWithUTF8String(path))
-}
-
-// FileSystemAttributesAtPath calls the underlying FileSystemAttributesAtPath.
-func (x *FileManager) FileSystemAttributesAtPath(path string) *raw.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.FileSystemAttributesAtPath(foundation.NSStringStringWithUTF8String(path))
-}
-
-// PathContentOfSymbolicLinkAtPath calls the underlying PathContentOfSymbolicLinkAtPath.
-func (x *FileManager) PathContentOfSymbolicLinkAtPath(path string) *String {
-	_r := x.inner.PathContentOfSymbolicLinkAtPath(foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
+func (x *FileManager) SetAttributesOfItemAtPath(attributes obj.Object, path string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setAttributes:ofItemAtPath:error:"), objref.IDOf(attributes), purego.NSString(path), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &String{inner: _r}
+	return nil
 }
 
-// CreateSymbolicLinkAtPathPathContent calls the underlying CreateSymbolicLinkAtPathPathContent.
+func (x *FileManager) CreateDirectoryAtPathWithIntermediateDirectoriesAttributes(path string, createIntermediates bool, attributes obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("createDirectoryAtPath:withIntermediateDirectories:attributes:error:"), purego.NSString(path), createIntermediates, objref.IDOf(attributes), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+func (x *FileManager) ContentsOfDirectoryAtPathError(path string) ([]string, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentsOfDirectoryAtPath:error:"), purego.NSString(path), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) }), nil
+}
+
+func (x *FileManager) SubpathsOfDirectoryAtPathError(path string) ([]string, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subpathsOfDirectoryAtPath:error:"), purego.NSString(path), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) }), nil
+}
+
+func (x *FileManager) AttributesOfItemAtPathError(path string) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributesOfItemAtPath:error:"), purego.NSString(path), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
+}
+
+func (x *FileManager) AttributesOfFileSystemForPathError(path string) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributesOfFileSystemForPath:error:"), purego.NSString(path), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
+}
+
+func (x *FileManager) CreateSymbolicLinkAtPathWithDestinationPath(path string, destPath string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("createSymbolicLinkAtPath:withDestinationPath:error:"), purego.NSString(path), purego.NSString(destPath), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+func (x *FileManager) DestinationOfSymbolicLinkAtPathError(path string) (string, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationOfSymbolicLinkAtPath:error:"), purego.NSString(path), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return "", errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	if _r == 0 {
+		return "", nil
+	}
+	return purego.GoString(_r), nil
+}
+
+func (x *FileManager) CopyItemAtPathToPath(srcPath string, dstPath string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("copyItemAtPath:toPath:error:"), purego.NSString(srcPath), purego.NSString(dstPath), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+func (x *FileManager) MoveItemAtPathToPath(srcPath string, dstPath string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("moveItemAtPath:toPath:error:"), purego.NSString(srcPath), purego.NSString(dstPath), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+func (x *FileManager) LinkItemAtPathToPath(srcPath string, dstPath string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("linkItemAtPath:toPath:error:"), purego.NSString(srcPath), purego.NSString(dstPath), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+func (x *FileManager) RemoveItemAtPath(path string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeItemAtPath:error:"), purego.NSString(path), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+func (x *FileManager) CopyItemAtURLToURL(srcURL string, dstURL string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("copyItemAtURL:toURL:error:"), rt.FileURL(srcURL), rt.FileURL(dstURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+func (x *FileManager) MoveItemAtURLToURL(srcURL string, dstURL string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("moveItemAtURL:toURL:error:"), rt.FileURL(srcURL), rt.FileURL(dstURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+func (x *FileManager) LinkItemAtURLToURL(srcURL string, dstURL string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("linkItemAtURL:toURL:error:"), rt.FileURL(srcURL), rt.FileURL(dstURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+func (x *FileManager) RemoveItemAtURL(uRL string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeItemAtURL:error:"), rt.FileURL(uRL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+func (x *FileManager) TrashItemAtURLResultingItemURL(url string, outResultingURL string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("trashItemAtURL:resultingItemURL:error:"), rt.FileURL(url), rt.FileURL(outResultingURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+func (x *FileManager) FileAttributesAtPathTraverseLink(path string, yorn bool) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileAttributesAtPath:traverseLink:"), purego.NSString(path), yorn)
+	return obj.Wrap(_r)
+}
+
+func (x *FileManager) ChangeFileAttributesAtPath(attributes obj.Object, path string) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("changeFileAttributes:atPath:"), objref.IDOf(attributes), purego.NSString(path))
+	return _r
+}
+
+func (x *FileManager) DirectoryContentsAtPath(path string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directoryContentsAtPath:"), purego.NSString(path))
+	return obj.Wrap(_r)
+}
+
+func (x *FileManager) FileSystemAttributesAtPath(path string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileSystemAttributesAtPath:"), purego.NSString(path))
+	return obj.Wrap(_r)
+}
+
+func (x *FileManager) PathContentOfSymbolicLinkAtPath(path string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathContentOfSymbolicLinkAtPath:"), purego.NSString(path))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
 func (x *FileManager) CreateSymbolicLinkAtPathPathContent(path string, otherpath string) bool {
-	return x.inner.CreateSymbolicLinkAtPathPathContent(foundation.NSStringStringWithUTF8String(path), foundation.NSStringStringWithUTF8String(otherpath))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("createSymbolicLinkAtPath:pathContent:"), purego.NSString(path), purego.NSString(otherpath))
+	return _r
 }
 
-// CreateDirectoryAtPathAttributes calls the underlying CreateDirectoryAtPathAttributes.
-func (x *FileManager) CreateDirectoryAtPathAttributes(path string, attributes *raw.NSDictionary[objc.ID, objc.ID]) bool {
-	return x.inner.CreateDirectoryAtPathAttributes(foundation.NSStringStringWithUTF8String(path), attributes)
+func (x *FileManager) CreateDirectoryAtPathAttributes(path string, attributes obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("createDirectoryAtPath:attributes:"), purego.NSString(path), objref.IDOf(attributes))
+	return _r
 }
 
 // Creates a link from a source to a destination.
-//
-// LinkPathToPathHandler calls the underlying LinkPathToPathHandler.
-func (x *FileManager) LinkPathToPathHandler(src string, dest string, handler objc.ID) bool {
-	return x.inner.LinkPathToPathHandler(foundation.NSStringStringWithUTF8String(src), foundation.NSStringStringWithUTF8String(dest), handler)
+func (x *FileManager) LinkPathToPathHandler(src string, dest string, handler obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("linkPath:toPath:handler:"), purego.NSString(src), purego.NSString(dest), objref.IDOf(handler))
+	return _r
 }
 
 // Copies the directory or file specified in a given path to a different location in the file system identified by another path.
-//
-// CopyPathToPathHandler calls the underlying CopyPathToPathHandler.
-func (x *FileManager) CopyPathToPathHandler(src string, dest string, handler objc.ID) bool {
-	return x.inner.CopyPathToPathHandler(foundation.NSStringStringWithUTF8String(src), foundation.NSStringStringWithUTF8String(dest), handler)
+func (x *FileManager) CopyPathToPathHandler(src string, dest string, handler obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("copyPath:toPath:handler:"), purego.NSString(src), purego.NSString(dest), objref.IDOf(handler))
+	return _r
 }
 
 // Moves the directory or file specified by a given path to a different location in the file system identified by another path.
-//
-// MovePathToPathHandler calls the underlying MovePathToPathHandler.
-func (x *FileManager) MovePathToPathHandler(src string, dest string, handler objc.ID) bool {
-	return x.inner.MovePathToPathHandler(foundation.NSStringStringWithUTF8String(src), foundation.NSStringStringWithUTF8String(dest), handler)
+func (x *FileManager) MovePathToPathHandler(src string, dest string, handler obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("movePath:toPath:handler:"), purego.NSString(src), purego.NSString(dest), objref.IDOf(handler))
+	return _r
 }
 
 // Deletes the file, link, or directory (including, recursively, all subdirectories, files, and links in the directory) identified by a given path.
-//
-// RemoveFileAtPathHandler calls the underlying RemoveFileAtPathHandler.
-func (x *FileManager) RemoveFileAtPathHandler(path string, handler objc.ID) bool {
-	return x.inner.RemoveFileAtPathHandler(foundation.NSStringStringWithUTF8String(path), handler)
+func (x *FileManager) RemoveFileAtPathHandler(path string, handler obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeFileAtPath:handler:"), purego.NSString(path), objref.IDOf(handler))
+	return _r
 }
 
-// ChangeCurrentDirectoryPath calls the underlying ChangeCurrentDirectoryPath.
 func (x *FileManager) ChangeCurrentDirectoryPath(path string) bool {
-	return x.inner.ChangeCurrentDirectoryPath(foundation.NSStringStringWithUTF8String(path))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("changeCurrentDirectoryPath:"), purego.NSString(path))
+	return _r
 }
 
-// FileExistsAtPath calls the underlying FileExistsAtPath.
 func (x *FileManager) FileExistsAtPath(path string) bool {
-	return x.inner.FileExistsAtPath(foundation.NSStringStringWithUTF8String(path))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("fileExistsAtPath:"), purego.NSString(path))
+	return _r
 }
 
-// FileExistsAtPathIsDirectory calls the underlying FileExistsAtPathIsDirectory.
-func (x *FileManager) FileExistsAtPathIsDirectory(path string, isDirectory *bool) bool {
-	return x.inner.FileExistsAtPathIsDirectory(foundation.NSStringStringWithUTF8String(path), isDirectory)
-}
-
-// IsReadableFileAtPath calls the underlying IsReadableFileAtPath.
 func (x *FileManager) IsReadableFileAtPath(path string) bool {
-	return x.inner.IsReadableFileAtPath(foundation.NSStringStringWithUTF8String(path))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadableFileAtPath:"), purego.NSString(path))
+	return _r
 }
 
-// IsWritableFileAtPath calls the underlying IsWritableFileAtPath.
 func (x *FileManager) IsWritableFileAtPath(path string) bool {
-	return x.inner.IsWritableFileAtPath(foundation.NSStringStringWithUTF8String(path))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWritableFileAtPath:"), purego.NSString(path))
+	return _r
 }
 
-// IsExecutableFileAtPath calls the underlying IsExecutableFileAtPath.
 func (x *FileManager) IsExecutableFileAtPath(path string) bool {
-	return x.inner.IsExecutableFileAtPath(foundation.NSStringStringWithUTF8String(path))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExecutableFileAtPath:"), purego.NSString(path))
+	return _r
 }
 
-// IsDeletableFileAtPath calls the underlying IsDeletableFileAtPath.
 func (x *FileManager) IsDeletableFileAtPath(path string) bool {
-	return x.inner.IsDeletableFileAtPath(foundation.NSStringStringWithUTF8String(path))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDeletableFileAtPath:"), purego.NSString(path))
+	return _r
 }
 
-// ContentsEqualAtPathAndPath calls the underlying ContentsEqualAtPathAndPath.
 func (x *FileManager) ContentsEqualAtPathAndPath(path1 string, path2 string) bool {
-	return x.inner.ContentsEqualAtPathAndPath(foundation.NSStringStringWithUTF8String(path1), foundation.NSStringStringWithUTF8String(path2))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("contentsEqualAtPath:andPath:"), purego.NSString(path1), purego.NSString(path2))
+	return _r
 }
 
-// DisplayNameAtPath calls the underlying DisplayNameAtPath.
-func (x *FileManager) DisplayNameAtPath(path string) *String {
-	_r := x.inner.DisplayNameAtPath(foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
+func (x *FileManager) DisplayNameAtPath(path string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayNameAtPath:"), purego.NSString(path))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// ComponentsToDisplayForPath calls the underlying ComponentsToDisplayForPath.
-func (x *FileManager) ComponentsToDisplayForPath(path string) *raw.NSArray[*raw.NSString] {
-	return x.inner.ComponentsToDisplayForPath(foundation.NSStringStringWithUTF8String(path))
+func (x *FileManager) ComponentsToDisplayForPath(path string) []string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("componentsToDisplayForPath:"), purego.NSString(path))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// EnumeratorAtPath calls the underlying EnumeratorAtPath.
-func (x *FileManager) EnumeratorAtPath(path string) *raw.NSDirectoryEnumerator[*raw.NSString] {
-	return x.inner.EnumeratorAtPath(foundation.NSStringStringWithUTF8String(path))
+func (x *FileManager) EnumeratorAtPath(path string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumeratorAtPath:"), purego.NSString(path))
+	return obj.Wrap(_r)
 }
 
-// Returns a directory enumerator object that can be used to perform a deep enumeration of the directory at the specified URL.
-//
-// EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler calls the underlying EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler.
-func (x *FileManager) EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler(url string, keys *raw.NSArray[*raw.NSString], mask NSDirectoryEnumerationOptions, handler func(*raw.NSURL, unsafe.Pointer) bool) *raw.NSDirectoryEnumerator[*raw.NSURL] {
-	return x.inner.EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), keys, raw.NSDirectoryEnumerationOptions(mask), handler)
+func (x *FileManager) SubpathsAtPath(path string) []string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subpathsAtPath:"), purego.NSString(path))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SubpathsAtPath calls the underlying SubpathsAtPath.
-func (x *FileManager) SubpathsAtPath(path string) *raw.NSArray[*raw.NSString] {
-	return x.inner.SubpathsAtPath(foundation.NSStringStringWithUTF8String(path))
-}
-
-// ContentsAtPath calls the underlying ContentsAtPath.
 func (x *FileManager) ContentsAtPath(path string) *Data {
-	_r := x.inner.ContentsAtPath(foundation.NSStringStringWithUTF8String(path))
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentsAtPath:"), purego.NSString(path))
+	return DataFromID(_r)
 }
 
-// CreateFileAtPathContentsAttributes calls the underlying CreateFileAtPathContentsAttributes.
-func (x *FileManager) CreateFileAtPathContentsAttributes(path string, data *raw.NSData, attr *raw.NSDictionary[*raw.NSString, objc.ID]) bool {
-	return x.inner.CreateFileAtPathContentsAttributes(foundation.NSStringStringWithUTF8String(path), data, attr)
+func (x *FileManager) CreateFileAtPathContentsAttributes(path string, data *Data, attr obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("createFileAtPath:contents:attributes:"), purego.NSString(path), objref.IDOf(data), objref.IDOf(attr))
+	return _r
 }
 
-// FileSystemRepresentationWithPath calls the underlying FileSystemRepresentationWithPath.
 func (x *FileManager) FileSystemRepresentationWithPath(path string) string {
-	return x.inner.FileSystemRepresentationWithPath(foundation.NSStringStringWithUTF8String(path))
+	_r := objc.Send[string](objref.IDOf(x), objc.RegisterName("fileSystemRepresentationWithPath:"), purego.NSString(path))
+	return _r
 }
 
-// StringWithFileSystemRepresentationLength calls the underlying StringWithFileSystemRepresentationLength.
-func (x *FileManager) StringWithFileSystemRepresentationLength(str string, len_ uint) *String {
-	_r := x.inner.StringWithFileSystemRepresentationLength(str, len_)
-	if _r == nil {
-		return nil
+func (x *FileManager) StringWithFileSystemRepresentationLength(str string, len_ int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringWithFileSystemRepresentation:length:"), str, len_)
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURLError calls the underlying ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURLError.
-func (x *FileManager) ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURLError(originalItemURL string, newItemURL string, backupItemName string, options NSFileManagerItemReplacementOptions, resultingURL string) (bool, error) {
-	return x.inner.ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(originalItemURL)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(newItemURL)), foundation.NSStringStringWithUTF8String(backupItemName), raw.NSFileManagerItemReplacementOptions(options), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(resultingURL)))
+func (x *FileManager) ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURL(originalItemURL string, newItemURL string, backupItemName string, options FileManagerItemReplacementOptions, resultingURL string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("replaceItemAtURL:withItemAtURL:backupItemName:options:resultingItemURL:error:"), rt.FileURL(originalItemURL), rt.FileURL(newItemURL), purego.NSString(backupItemName), options, rt.FileURL(resultingURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// SetUbiquitousItemAtURLDestinationURLError calls the underlying SetUbiquitousItemAtURLDestinationURLError.
-func (x *FileManager) SetUbiquitousItemAtURLDestinationURLError(flag bool, url string, destinationURL string) (bool, error) {
-	return x.inner.SetUbiquitousItemAtURLDestinationURLError(flag, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(destinationURL)))
+func (x *FileManager) SetUbiquitousItemAtURLDestinationURL(flag bool, url string, destinationURL string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setUbiquitous:itemAtURL:destinationURL:error:"), flag, rt.FileURL(url), rt.FileURL(destinationURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// IsUbiquitousItemAtURL calls the underlying IsUbiquitousItemAtURL.
 func (x *FileManager) IsUbiquitousItemAtURL(url string) bool {
-	return x.inner.IsUbiquitousItemAtURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUbiquitousItemAtURL:"), rt.FileURL(url))
+	return _r
 }
 
-// StartDownloadingUbiquitousItemAtURLError calls the underlying StartDownloadingUbiquitousItemAtURLError.
-func (x *FileManager) StartDownloadingUbiquitousItemAtURLError(url string) (bool, error) {
-	return x.inner.StartDownloadingUbiquitousItemAtURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+func (x *FileManager) StartDownloadingUbiquitousItemAtURL(url string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("startDownloadingUbiquitousItemAtURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// EvictUbiquitousItemAtURLError calls the underlying EvictUbiquitousItemAtURLError.
-func (x *FileManager) EvictUbiquitousItemAtURLError(url string) (bool, error) {
-	return x.inner.EvictUbiquitousItemAtURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+func (x *FileManager) EvictUbiquitousItemAtURL(url string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("evictUbiquitousItemAtURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// URLForUbiquityContainerIdentifier calls the underlying URLForUbiquityContainerIdentifier.
 func (x *FileManager) URLForUbiquityContainerIdentifier(containerIdentifier string) *URL {
-	_r := x.inner.URLForUbiquityContainerIdentifier(foundation.NSStringStringWithUTF8String(containerIdentifier))
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLForUbiquityContainerIdentifier:"), purego.NSString(containerIdentifier))
+	return URLFromID(_r)
 }
 
-// URLForPublishingUbiquitousItemAtURLExpirationDateError calls the underlying URLForPublishingUbiquitousItemAtURLExpirationDateError.
-func (x *FileManager) URLForPublishingUbiquitousItemAtURLExpirationDateError(url string, outDate *raw.NSDate) (*URL, error) {
-	_r, _err := x.inner.URLForPublishingUbiquitousItemAtURLExpirationDateError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), outDate)
-	if _err != nil {
-		return nil, _err
+func (x *FileManager) URLForPublishingUbiquitousItemAtURLExpirationDateError(url string, outDate *Date) (*URL, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLForPublishingUbiquitousItemAtURL:expirationDate:error:"), rt.FileURL(url), objref.IDOf(outDate), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &URL{inner: _r}, nil
+	return URLFromID(_r), nil
 }
 
 // Asynchronously pauses sync of an item at the given URL. Call this when opening an item to prevent sync from altering the contents of the URL. Once paused, the file provider will not upload local changes nor download remote changes. While paused, call “uploadLocalVersionOfUbiquitousItem(at:withConflictResolutionPolicy:completionHandler:)“ when the document is in a stable state. This action keeps the server version as up-to-date as possible. If the item is already paused, a second call to this method reports success. If the file provider is already applying changes to the item, the pause fails with an “NSFileWriteUnknownError-enum.case“, with an underlying error that has domain “NSPOSIXErrorDomain“ and code “POSIXError/EBUSY“. If the pause fails, wait for the state to stabilize before retrying. Pausing also fails with “CocoaError/featureUnsupported“ if `url` refers to a regular (non-package) directory. Pausing sync is independent of the calling app's lifecycle; sync doesn't automatically resume if the app closes or crashes and relaunches later. To resume syncing, explicitly call “resumeSyncForUbiquitousItem(at:with:completionHandler:)“. Always be sure to resume syncing before you close the item. - Parameters: - url: The URL of the item for which to pause sync. - completionHandler: A closure or block that the framework calls when the pause action completes. It receives a single “NSError“ parameter to indicate an error that prevented pausing; this value is `nil` if the pause succeeded. In Swift, you can omit the completion handler and catch the thrown error instead.
@@ -427,13 +495,12 @@ func (x *FileManager) URLForPublishingUbiquitousItemAtURLExpirationDateError(url
 // PauseSyncForUbiquitousItemAtURL blocks until the operation completes or ctx is cancelled.
 func (x *FileManager) PauseSyncForUbiquitousItemAtURL(ctx context.Context, url string) error {
 	_ch := make(chan error, 1)
-	x.inner.PauseSyncForUbiquitousItemAtURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseSyncForUbiquitousItemAtURL:completionHandler:"), rt.FileURL(url), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -445,15 +512,14 @@ func (x *FileManager) PauseSyncForUbiquitousItemAtURL(ctx context.Context, url s
 // Asynchronously resumes the sync on a paused item using the given resume behavior. Always call this method when your app closes an item to allow the file provider to sync local changes back to the server. In most situations, the “NSFileManagerResumeSyncBehavior/preserveLocalChanges“ behavior is the best choice to avoid any risk of data loss. The resume call fails with “CocoaError/featureUnsupported“ if `url` isn't currently paused. If the device isn't connected to the network, the call may fail with “NSFileWriteUnknownError-enum.case“, with the underlying error of <doc://com.apple.documentation/documentation/FileProvider/NSFileProviderError/serverUnreachable>. - Parameters: - url: The URL of the item for which to resume sync. - behavior: A “NSFileManagerResumeSyncBehavior“ value that tells the file manager how to handle conflicts between local and remote versions of files. - completionHandler: A closure or block that the framework calls when the resume action completes. It receives a single “NSError“ parameter to indicate an error that prevented the resume action; the value is `nil` if the resume succeeded. In Swift, you can omit the completion handler and catch the thrown error instead.
 //
 // ResumeSyncForUbiquitousItemAtURLWithBehavior blocks until the operation completes or ctx is cancelled.
-func (x *FileManager) ResumeSyncForUbiquitousItemAtURLWithBehavior(ctx context.Context, url string, behavior NSFileManagerResumeSyncBehavior) error {
+func (x *FileManager) ResumeSyncForUbiquitousItemAtURLWithBehavior(ctx context.Context, url string, behavior FileManagerResumeSyncBehavior) error {
 	_ch := make(chan error, 1)
-	x.inner.ResumeSyncForUbiquitousItemAtURLWithBehaviorCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileManagerResumeSyncBehavior(behavior), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeSyncForUbiquitousItemAtURL:withBehavior:completionHandler:"), rt.FileURL(url), behavior, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -471,16 +537,13 @@ func (x *FileManager) FetchLatestRemoteVersionOfItemAtURL(ctx context.Context, u
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.FetchLatestRemoteVersionOfItemAtURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), func(_p0 *raw.NSFileVersion, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &FileVersion{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = FileVersionFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchLatestRemoteVersionOfItemAtURL:completionHandler:"), rt.FileURL(url), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -493,22 +556,19 @@ func (x *FileManager) FetchLatestRemoteVersionOfItemAtURL(ctx context.Context, u
 // Asynchronously uploads the local version of the item using the provided conflict resolution policy. Once your app pauses a sync for an item, call this method every time your document is in a stable state. This action keeps the server version as up-to-date as possible. If the server has a newer version than the one to which the app made changes, uploading fails with “NSFileWriteUnknownError-enum.case“, with an underlying error of <doc://com.apple.documentation/documentation/FileProvider/NSFileProviderError/localVersionConflictingWithServer>. In this case, call “FileManager/fetchLatestRemoteVersionOfItem(at:completionHandler:)“, rebase local changes on top of that version, and retry the upload. If the device isn't connected to the network, the call may fail with “NSFileWriteUnknownError-enum.case“, with the underlying error of <doc://com.apple.documentation/documentation/FileProvider/NSFileProviderError/serverUnreachable>. - Parameters: - url: The URL of the item for which to check the version. - conflictResolutionPolicy: The policy the file manager applies if the local and server versions conflict. - completionHandler: A closure or block that the framework calls when the upload completes. It receives parameters of types “NSFileVersion“ and “NSError“. The error is `nil` if fetching the remote version succeeded; otherwise it indicates the error that caused the call to fail. In Swift, you can omit the completion handler, catching any error in a `do`-`catch` block and receiving the version as the return value.
 //
 // UploadLocalVersionOfUbiquitousItemAtURLWithConflictResolutionPolicy blocks until the operation completes or ctx is cancelled.
-func (x *FileManager) UploadLocalVersionOfUbiquitousItemAtURLWithConflictResolutionPolicy(ctx context.Context, url string, conflictResolutionPolicy NSFileManagerUploadLocalVersionConflictPolicy) (*FileVersion, error) {
+func (x *FileManager) UploadLocalVersionOfUbiquitousItemAtURLWithConflictResolutionPolicy(ctx context.Context, url string, conflictResolutionPolicy FileManagerUploadLocalVersionConflictPolicy) (*FileVersion, error) {
 	type _result struct {
 		val *FileVersion
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.UploadLocalVersionOfUbiquitousItemAtURLWithConflictResolutionPolicyCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), raw.NSFileManagerUploadLocalVersionConflictPolicy(conflictResolutionPolicy), func(_p0 *raw.NSFileVersion, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &FileVersion{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = FileVersionFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uploadLocalVersionOfUbiquitousItemAtURL:withConflictResolutionPolicy:completionHandler:"), rt.FileURL(url), conflictResolutionPolicy, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -518,149 +578,107 @@ func (x *FileManager) UploadLocalVersionOfUbiquitousItemAtURLWithConflictResolut
 	}
 }
 
-// GetFileProviderServicesForItemAtURLCompletionHandler calls the underlying GetFileProviderServicesForItemAtURLCompletionHandler.
-func (x *FileManager) GetFileProviderServicesForItemAtURLCompletionHandler(url string, completionHandler func(*raw.NSDictionary[*raw.NSString, *raw.NSFileProviderService], unsafe.Pointer)) {
-	x.inner.GetFileProviderServicesForItemAtURLCompletionHandler(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), completionHandler)
-}
-
-// ContainerURLForSecurityApplicationGroupIdentifier calls the underlying ContainerURLForSecurityApplicationGroupIdentifier.
 func (x *FileManager) ContainerURLForSecurityApplicationGroupIdentifier(groupIdentifier string) *URL {
-	_r := x.inner.ContainerURLForSecurityApplicationGroupIdentifier(foundation.NSStringStringWithUTF8String(groupIdentifier))
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerURLForSecurityApplicationGroupIdentifier:"), purego.NSString(groupIdentifier))
+	return URLFromID(_r)
+}
+
+func (x *FileManager) CurrentDirectoryPath() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentDirectoryPath"))
+	if _r == 0 {
+		return ""
 	}
-	return &URL{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Delegate calls the underlying Delegate.
-func (x *FileManager) Delegate() raw.NSFileManagerDelegate {
-	return x.inner.Delegate()
+func (x *FileManager) UbiquityIdentityToken() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ubiquityIdentityToken"))
+	return obj.Wrap(_r)
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *FileManager) SetDelegate(delegate raw.NSFileManagerDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// CurrentDirectoryPath calls the underlying CurrentDirectoryPath.
-func (x *FileManager) CurrentDirectoryPath() *String {
-	_r := x.inner.CurrentDirectoryPath()
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// UbiquityIdentityToken calls the underlying UbiquityIdentityToken.
-func (x *FileManager) UbiquityIdentityToken() objc.ID {
-	return x.inner.UbiquityIdentityToken()
-}
-
-// HomeDirectoryForUser calls the underlying HomeDirectoryForUser.
 func (x *FileManager) HomeDirectoryForUser(userName string) *URL {
-	_r := x.inner.HomeDirectoryForUser(foundation.NSStringStringWithUTF8String(userName))
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("homeDirectoryForUser:"), purego.NSString(userName))
+	return URLFromID(_r)
 }
 
-// HomeDirectoryForCurrentUser calls the underlying HomeDirectoryForCurrentUser.
 func (x *FileManager) HomeDirectoryForCurrentUser() *URL {
-	_r := x.inner.HomeDirectoryForCurrentUser()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("homeDirectoryForCurrentUser"))
+	return URLFromID(_r)
 }
 
-// TemporaryDirectory calls the underlying TemporaryDirectory.
 func (x *FileManager) TemporaryDirectory() *URL {
-	_r := x.inner.TemporaryDirectory()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("temporaryDirectory"))
+	return URLFromID(_r)
 }
-
-func (x *FileManager) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // FileManagerable is the interface implemented by [FileManager], for mocking and DI.
 type FileManagerable interface {
-	Unwrap() *raw.NSFileManager
-	WithDelegate(delegate raw.NSFileManagerDelegate) *FileManager
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileManager
-	MountedVolumeURLsIncludingResourceValuesForKeysOptions(propertyKeys *raw.NSArray[*raw.NSString], options NSVolumeEnumerationOptions) *raw.NSArray[*raw.NSURL]
-	UnmountVolumeAtURLOptions(ctx context.Context, url string, mask NSFileManagerUnmountOptions) error
-	ContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError(url string, keys *raw.NSArray[*raw.NSString], mask NSDirectoryEnumerationOptions) (*raw.NSArray[*raw.NSURL], error)
-	URLsForDirectoryInDomains(directory NSSearchPathDirectory, domainMask NSSearchPathDomainMask) *raw.NSArray[*raw.NSURL]
-	URLForDirectoryInDomainAppropriateForURLCreateError(directory NSSearchPathDirectory, domain NSSearchPathDomainMask, url string, shouldCreate bool) (*URL, error)
-	GetRelationshipOfDirectoryAtURLToItemAtURLError(outRelationship *raw.NSURLRelationship, directoryURL string, otherURL string) (bool, error)
-	GetRelationshipOfDirectoryInDomainToItemAtURLError(outRelationship *raw.NSURLRelationship, directory NSSearchPathDirectory, domainMask NSSearchPathDomainMask, url string) (bool, error)
-	CreateDirectoryAtURLWithIntermediateDirectoriesAttributesError(url string, createIntermediates bool, attributes *raw.NSDictionary[*raw.NSString, objc.ID]) (bool, error)
-	CreateSymbolicLinkAtURLWithDestinationURLError(url string, destURL string) (bool, error)
-	SetAttributesOfItemAtPathError(attributes *raw.NSDictionary[*raw.NSString, objc.ID], path string) (bool, error)
-	CreateDirectoryAtPathWithIntermediateDirectoriesAttributesError(path string, createIntermediates bool, attributes *raw.NSDictionary[*raw.NSString, objc.ID]) (bool, error)
-	ContentsOfDirectoryAtPathError(path string) (*raw.NSArray[*raw.NSString], error)
-	SubpathsOfDirectoryAtPathError(path string) (*raw.NSArray[*raw.NSString], error)
-	AttributesOfItemAtPathError(path string) (*raw.NSDictionary[*raw.NSString, objc.ID], error)
-	AttributesOfFileSystemForPathError(path string) (*raw.NSDictionary[*raw.NSString, objc.ID], error)
-	CreateSymbolicLinkAtPathWithDestinationPathError(path string, destPath string) (bool, error)
-	DestinationOfSymbolicLinkAtPathError(path string) (*String, error)
-	CopyItemAtPathToPathError(srcPath string, dstPath string) (bool, error)
-	MoveItemAtPathToPathError(srcPath string, dstPath string) (bool, error)
-	LinkItemAtPathToPathError(srcPath string, dstPath string) (bool, error)
-	RemoveItemAtPathError(path string) (bool, error)
-	CopyItemAtURLToURLError(srcURL string, dstURL string) (bool, error)
-	MoveItemAtURLToURLError(srcURL string, dstURL string) (bool, error)
-	LinkItemAtURLToURLError(srcURL string, dstURL string) (bool, error)
-	RemoveItemAtURLError(uRL string) (bool, error)
-	TrashItemAtURLResultingItemURLError(url string, outResultingURL string) (bool, error)
-	FileAttributesAtPathTraverseLink(path string, yorn bool) *raw.NSDictionary[objc.ID, objc.ID]
-	ChangeFileAttributesAtPath(attributes *raw.NSDictionary[objc.ID, objc.ID], path string) bool
-	DirectoryContentsAtPath(path string) *raw.NSArray[objc.ID]
-	FileSystemAttributesAtPath(path string) *raw.NSDictionary[objc.ID, objc.ID]
-	PathContentOfSymbolicLinkAtPath(path string) *String
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *FileManager
+	MountedVolumeURLsIncludingResourceValuesForKeysOptions(propertyKeys []*String, options VolumeEnumerationOptions) []*URL
+	UnmountVolumeAtURLOptions(ctx context.Context, url string, mask FileManagerUnmountOptions) error
+	ContentsOfDirectoryAtURLIncludingPropertiesForKeysOptionsError(url string, keys []*String, mask DirectoryEnumerationOptions) ([]*URL, error)
+	URLsForDirectoryInDomains(directory SearchPathDirectory, domainMask SearchPathDomainMask) []*URL
+	URLForDirectoryInDomainAppropriateForURLCreateError(directory SearchPathDirectory, domain SearchPathDomainMask, url string, shouldCreate bool) (*URL, error)
+	CreateDirectoryAtURLWithIntermediateDirectoriesAttributes(url string, createIntermediates bool, attributes obj.Object) error
+	CreateSymbolicLinkAtURLWithDestinationURL(url string, destURL string) error
+	SetAttributesOfItemAtPath(attributes obj.Object, path string) error
+	CreateDirectoryAtPathWithIntermediateDirectoriesAttributes(path string, createIntermediates bool, attributes obj.Object) error
+	ContentsOfDirectoryAtPathError(path string) ([]string, error)
+	SubpathsOfDirectoryAtPathError(path string) ([]string, error)
+	AttributesOfItemAtPathError(path string) (obj.Object, error)
+	AttributesOfFileSystemForPathError(path string) (obj.Object, error)
+	CreateSymbolicLinkAtPathWithDestinationPath(path string, destPath string) error
+	DestinationOfSymbolicLinkAtPathError(path string) (string, error)
+	CopyItemAtPathToPath(srcPath string, dstPath string) error
+	MoveItemAtPathToPath(srcPath string, dstPath string) error
+	LinkItemAtPathToPath(srcPath string, dstPath string) error
+	RemoveItemAtPath(path string) error
+	CopyItemAtURLToURL(srcURL string, dstURL string) error
+	MoveItemAtURLToURL(srcURL string, dstURL string) error
+	LinkItemAtURLToURL(srcURL string, dstURL string) error
+	RemoveItemAtURL(uRL string) error
+	TrashItemAtURLResultingItemURL(url string, outResultingURL string) error
+	FileAttributesAtPathTraverseLink(path string, yorn bool) obj.Object
+	ChangeFileAttributesAtPath(attributes obj.Object, path string) bool
+	DirectoryContentsAtPath(path string) obj.Object
+	FileSystemAttributesAtPath(path string) obj.Object
+	PathContentOfSymbolicLinkAtPath(path string) string
 	CreateSymbolicLinkAtPathPathContent(path string, otherpath string) bool
-	CreateDirectoryAtPathAttributes(path string, attributes *raw.NSDictionary[objc.ID, objc.ID]) bool
-	LinkPathToPathHandler(src string, dest string, handler objc.ID) bool
-	CopyPathToPathHandler(src string, dest string, handler objc.ID) bool
-	MovePathToPathHandler(src string, dest string, handler objc.ID) bool
-	RemoveFileAtPathHandler(path string, handler objc.ID) bool
+	CreateDirectoryAtPathAttributes(path string, attributes obj.Object) bool
+	LinkPathToPathHandler(src string, dest string, handler obj.Object) bool
+	CopyPathToPathHandler(src string, dest string, handler obj.Object) bool
+	MovePathToPathHandler(src string, dest string, handler obj.Object) bool
+	RemoveFileAtPathHandler(path string, handler obj.Object) bool
 	ChangeCurrentDirectoryPath(path string) bool
 	FileExistsAtPath(path string) bool
-	FileExistsAtPathIsDirectory(path string, isDirectory *bool) bool
 	IsReadableFileAtPath(path string) bool
 	IsWritableFileAtPath(path string) bool
 	IsExecutableFileAtPath(path string) bool
 	IsDeletableFileAtPath(path string) bool
 	ContentsEqualAtPathAndPath(path1 string, path2 string) bool
-	DisplayNameAtPath(path string) *String
-	ComponentsToDisplayForPath(path string) *raw.NSArray[*raw.NSString]
-	EnumeratorAtPath(path string) *raw.NSDirectoryEnumerator[*raw.NSString]
-	EnumeratorAtURLIncludingPropertiesForKeysOptionsErrorHandler(url string, keys *raw.NSArray[*raw.NSString], mask NSDirectoryEnumerationOptions, handler func(*raw.NSURL, unsafe.Pointer) bool) *raw.NSDirectoryEnumerator[*raw.NSURL]
-	SubpathsAtPath(path string) *raw.NSArray[*raw.NSString]
+	DisplayNameAtPath(path string) string
+	ComponentsToDisplayForPath(path string) []string
+	EnumeratorAtPath(path string) obj.Object
+	SubpathsAtPath(path string) []string
 	ContentsAtPath(path string) *Data
-	CreateFileAtPathContentsAttributes(path string, data *raw.NSData, attr *raw.NSDictionary[*raw.NSString, objc.ID]) bool
+	CreateFileAtPathContentsAttributes(path string, data *Data, attr obj.Object) bool
 	FileSystemRepresentationWithPath(path string) string
-	StringWithFileSystemRepresentationLength(str string, len_ uint) *String
-	ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURLError(originalItemURL string, newItemURL string, backupItemName string, options NSFileManagerItemReplacementOptions, resultingURL string) (bool, error)
-	SetUbiquitousItemAtURLDestinationURLError(flag bool, url string, destinationURL string) (bool, error)
+	StringWithFileSystemRepresentationLength(str string, len_ int) string
+	ReplaceItemAtURLWithItemAtURLBackupItemNameOptionsResultingItemURL(originalItemURL string, newItemURL string, backupItemName string, options FileManagerItemReplacementOptions, resultingURL string) error
+	SetUbiquitousItemAtURLDestinationURL(flag bool, url string, destinationURL string) error
 	IsUbiquitousItemAtURL(url string) bool
-	StartDownloadingUbiquitousItemAtURLError(url string) (bool, error)
-	EvictUbiquitousItemAtURLError(url string) (bool, error)
+	StartDownloadingUbiquitousItemAtURL(url string) error
+	EvictUbiquitousItemAtURL(url string) error
 	URLForUbiquityContainerIdentifier(containerIdentifier string) *URL
-	URLForPublishingUbiquitousItemAtURLExpirationDateError(url string, outDate *raw.NSDate) (*URL, error)
+	URLForPublishingUbiquitousItemAtURLExpirationDateError(url string, outDate *Date) (*URL, error)
 	PauseSyncForUbiquitousItemAtURL(ctx context.Context, url string) error
-	ResumeSyncForUbiquitousItemAtURLWithBehavior(ctx context.Context, url string, behavior NSFileManagerResumeSyncBehavior) error
+	ResumeSyncForUbiquitousItemAtURLWithBehavior(ctx context.Context, url string, behavior FileManagerResumeSyncBehavior) error
 	FetchLatestRemoteVersionOfItemAtURL(ctx context.Context, url string) (*FileVersion, error)
-	UploadLocalVersionOfUbiquitousItemAtURLWithConflictResolutionPolicy(ctx context.Context, url string, conflictResolutionPolicy NSFileManagerUploadLocalVersionConflictPolicy) (*FileVersion, error)
-	GetFileProviderServicesForItemAtURLCompletionHandler(url string, completionHandler func(*raw.NSDictionary[*raw.NSString, *raw.NSFileProviderService], unsafe.Pointer))
+	UploadLocalVersionOfUbiquitousItemAtURLWithConflictResolutionPolicy(ctx context.Context, url string, conflictResolutionPolicy FileManagerUploadLocalVersionConflictPolicy) (*FileVersion, error)
 	ContainerURLForSecurityApplicationGroupIdentifier(groupIdentifier string) *URL
-	Delegate() raw.NSFileManagerDelegate
-	SetDelegate(delegate raw.NSFileManagerDelegate)
-	CurrentDirectoryPath() *String
-	UbiquityIdentityToken() objc.ID
+	CurrentDirectoryPath() string
+	UbiquityIdentityToken() obj.Object
 	HomeDirectoryForUser(userName string) *URL
 	HomeDirectoryForCurrentUser() *URL
 	TemporaryDirectory() *URL

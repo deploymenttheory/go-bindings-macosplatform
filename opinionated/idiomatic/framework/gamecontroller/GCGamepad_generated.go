@@ -5,172 +5,130 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The standard set of gamepad controls.
 //
-// Gamepad wraps [raw.GCGamepad] with a fluent Go API.
+// Gamepad is an idiomatic wrapper over the Objective-C class GCGamepad.
 type Gamepad struct {
-	inner *raw.GCGamepad
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCGamepad].
-func (x *Gamepad) Unwrap() *raw.GCGamepad { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Gamepad) ID() objc.ID { return x.inner.Ptr() }
-
-// GamepadFromID adopts an existing object pointer as a Gamepad (nil for 0).
+// GamepadFromID adopts an existing Objective-C object as a Gamepad
+// (nil for 0), retaining it and registering a release finalizer.
 func GamepadFromID(id objc.ID) *Gamepad {
 	if id == 0 {
 		return nil
 	}
-	return &Gamepad{inner: raw.GCGamepadFromID(id)}
-}
-
-// NewGamepad creates a new [Gamepad].
-func NewGamepad() *Gamepad {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCGamepad")), objc.RegisterName("new"))
-	return &Gamepad{inner: raw.GCGamepadFromID(_id)}
-}
-
-// A block called when any element in the profile changes.
-//
-// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
-func (x *Gamepad) WithValueChangedHandler(valueChangedHandler func(*raw.GCGamepad, *raw.GCControllerElement)) *Gamepad {
-	x.inner.SetValueChangedHandler(valueChangedHandler)
+	x := &Gamepad{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// gamepadAdopt wraps an Objective-C object that this code just created as a
+// Gamepad (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func gamepadAdopt(id objc.ID) *Gamepad {
+	if id == 0 {
+		return nil
+	}
+	x := &Gamepad{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Gamepad) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Gamepad) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Gamepad) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGamepad creates a new Gamepad.
+func NewGamepad() *Gamepad {
+	_id := objc.Send[objc.ID](objc.ID(_class("GCGamepad")), objc.RegisterName("new"))
+	return gamepadAdopt(_id)
 }
 
 // The block that the profile calls when an element’s value changes.
 //
-// WithValueDidChangeHandler sets the valueDidChangeHandler property and returns the receiver for chaining.
-func (x *Gamepad) WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *Gamepad {
-	x.inner.GCPhysicalInputProfile.SetValueDidChangeHandler(valueDidChangeHandler)
+// WithValueDidChangeHandler sets valueDidChangeHandler and returns the receiver so calls can be chained.
+func (x *Gamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *Gamepad {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
 	return x
 }
 
 // Saves a snapshot of all of the profile’s elements.
-//
-// SaveSnapshot calls the underlying SaveSnapshot.
 func (x *Gamepad) SaveSnapshot() *GamepadSnapshot {
-	_r := x.inner.SaveSnapshot()
-	if _r == nil {
-		return nil
-	}
-	return &GamepadSnapshot{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveSnapshot"))
+	return GamepadSnapshotFromID(_r)
 }
 
 // A profile keeps a reference to the controller that this profile is mapping input from.
-//
-// Controller calls the underlying Controller.
 func (x *Gamepad) Controller() *Controller {
-	_r := x.inner.Controller()
-	if _r == nil {
-		return nil
-	}
-	return &Controller{inner: _r}
-}
-
-// ValueChangedHandler calls the underlying ValueChangedHandler.
-func (x *Gamepad) ValueChangedHandler() objc.Block {
-	return x.inner.ValueChangedHandler()
-}
-
-// SetValueChangedHandler calls the underlying SetValueChangedHandler.
-func (x *Gamepad) SetValueChangedHandler(valueChangedHandler func(*raw.GCGamepad, *raw.GCControllerElement)) {
-	x.inner.SetValueChangedHandler(valueChangedHandler)
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controller"))
+	return ControllerFromID(_r)
 }
 
 // Required to be analog in the Standard profile. All the elements of this directional input are thus analog.
-//
-// Dpad calls the underlying Dpad.
 func (x *Gamepad) Dpad() *ControllerDirectionPad {
-	_r := x.inner.Dpad()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerDirectionPad{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dpad"))
+	return ControllerDirectionPadFromID(_r)
 }
 
 // All face buttons are required to be analog in the Standard profile. These must be arranged in the diamond pattern given below: Y / \ X   B \ / A
-//
-// ButtonA calls the underlying ButtonA.
 func (x *Gamepad) ButtonA() *ControllerButtonInput {
-	_r := x.inner.ButtonA()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonA"))
+	return ControllerButtonInputFromID(_r)
 }
 
-// ButtonB calls the underlying ButtonB.
 func (x *Gamepad) ButtonB() *ControllerButtonInput {
-	_r := x.inner.ButtonB()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonB"))
+	return ControllerButtonInputFromID(_r)
 }
 
-// ButtonX calls the underlying ButtonX.
 func (x *Gamepad) ButtonX() *ControllerButtonInput {
-	_r := x.inner.ButtonX()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonX"))
+	return ControllerButtonInputFromID(_r)
 }
 
-// ButtonY calls the underlying ButtonY.
 func (x *Gamepad) ButtonY() *ControllerButtonInput {
-	_r := x.inner.ButtonY()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonY"))
+	return ControllerButtonInputFromID(_r)
 }
 
 // Shoulder buttons are required to be analog inputs.
-//
-// LeftShoulder calls the underlying LeftShoulder.
 func (x *Gamepad) LeftShoulder() *ControllerButtonInput {
-	_r := x.inner.LeftShoulder()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftShoulder"))
+	return ControllerButtonInputFromID(_r)
 }
 
 // Shoulder buttons are required to be analog inputs.
-//
-// RightShoulder calls the underlying RightShoulder.
 func (x *Gamepad) RightShoulder() *ControllerButtonInput {
-	_r := x.inner.RightShoulder()
-	if _r == nil {
-		return nil
-	}
-	return &ControllerButtonInput{inner: _r}
-}
-
-func (x *Gamepad) asGamepad() *raw.GCGamepad { return x.inner }
-
-func (x *Gamepad) asPhysicalInputProfile() *raw.GCPhysicalInputProfile {
-	return &x.inner.GCPhysicalInputProfile
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightShoulder"))
+	return ControllerButtonInputFromID(_r)
 }
 
 // Gamepadable is the interface implemented by [Gamepad], for mocking and DI.
 type Gamepadable interface {
-	Unwrap() *raw.GCGamepad
-	WithValueChangedHandler(valueChangedHandler func(*raw.GCGamepad, *raw.GCControllerElement)) *Gamepad
-	WithValueDidChangeHandler(valueDidChangeHandler func(*raw.GCPhysicalInputProfile, *raw.GCControllerElement)) *Gamepad
+	obj.Object
+	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *Gamepad
 	SaveSnapshot() *GamepadSnapshot
 	Controller() *Controller
-	ValueChangedHandler() objc.Block
-	SetValueChangedHandler(valueChangedHandler func(*raw.GCGamepad, *raw.GCControllerElement))
 	Dpad() *ControllerDirectionPad
 	ButtonA() *ControllerButtonInput
 	ButtonB() *ControllerButtonInput

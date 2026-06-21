@@ -5,119 +5,99 @@
 package gameplaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A data structure that models a set of specific questions, their possible answers, and the actions that follow from a series of answers.
 //
-// DecisionTree wraps [raw.GKDecisionTree] with a fluent Go API.
+// DecisionTree is an idiomatic wrapper over the Objective-C class GKDecisionTree.
 type DecisionTree struct {
-	inner *raw.GKDecisionTree
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKDecisionTree].
-func (x *DecisionTree) Unwrap() *raw.GKDecisionTree { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DecisionTree) ID() objc.ID { return x.inner.Ptr() }
-
-// DecisionTreeFromID adopts an existing object pointer as a DecisionTree (nil for 0).
+// DecisionTreeFromID adopts an existing Objective-C object as a DecisionTree
+// (nil for 0), retaining it and registering a release finalizer.
 func DecisionTreeFromID(id objc.ID) *DecisionTree {
 	if id == 0 {
 		return nil
 	}
-	return &DecisionTree{inner: raw.GKDecisionTreeFromID(id)}
+	x := &DecisionTree{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a decision tree starting with the specified initial attribute to test.
-//
-// NewDecisionTreeWithAttribute creates a new [DecisionTree].
-func NewDecisionTreeWithAttribute(attribute foundation.NSObjectProtocol) *DecisionTree {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKDecisionTree")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttribute:"), attribute)
-	return &DecisionTree{inner: raw.GKDecisionTreeFromID(_id)}
+// decisionTreeAdopt wraps an Objective-C object that this code just created as a
+// DecisionTree (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func decisionTreeAdopt(id objc.ID) *DecisionTree {
+	if id == 0 {
+		return nil
+	}
+	x := &DecisionTree{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DecisionTree) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DecisionTree) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DecisionTree) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an automatically learned decision tree using the specified attributes, example items, and actions.
 //
-// NewDecisionTreeWithExamplesActionsAttributes creates a new [DecisionTree].
-func NewDecisionTreeWithExamplesActionsAttributes(examples *foundation.NSArray[objc.ID], actions *foundation.NSArray[foundation.NSObjectProtocol], attributes *foundation.NSArray[foundation.NSObjectProtocol]) *DecisionTree {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKDecisionTree")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExamples:actions:attributes:"), examples.Ptr(), actions.Ptr(), attributes.Ptr())
-	return &DecisionTree{inner: raw.GKDecisionTreeFromID(_id)}
-}
-
-// Initializes a decision tree from the contents of a file @param url The URL from which the contents will be loaded @return The instance of the decision tree constructed
-//
-// NewDecisionTreeWithURLError creates a new [DecisionTree].
-func NewDecisionTreeWithURLError(url string, error_ unsafe.Pointer) *DecisionTree {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKDecisionTree")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:error:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), error_)
-	return &DecisionTree{inner: raw.GKDecisionTreeFromID(_id)}
+// NewDecisionTreeWithExamplesActionsAttributes creates a new DecisionTree.
+func NewDecisionTreeWithExamplesActionsAttributes(examples []obj.Object, actions []obj.Object, attributes []obj.Object) *DecisionTree {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKDecisionTree")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExamples:actions:attributes:"), purego.SliceToNSArray(examples, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(actions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(attributes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return decisionTreeAdopt(_id)
 }
 
 // The randomizer to be used when evaluating parts of the tree that branch randomly.
 //
-// WithRandomSource sets the randomSource property and returns the receiver for chaining.
+// WithRandomSource sets randomSource and returns the receiver so calls can be chained.
 func (x *DecisionTree) WithRandomSource(randomSource RandomSourceProvider) *DecisionTree {
-	x.inner.SetRandomSource(randomSource.asRandomSource())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRandomSource:"), objref.IDOf(randomSource))
 	return x
 }
 
-// Exports a decision tree to the given URL @param url The URL to which the contents will be exported @return The response indicating the status of the decision tree being successfully exported
-//
-// ExportToURLError calls the underlying ExportToURLError.
-func (x *DecisionTree) ExportToURLError(url string, error_ unsafe.Pointer) bool {
-	return x.inner.ExportToURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)), error_)
-}
-
-// Searches the decision tree, following the branches corresponding to each of the specified answers, and returns the resulting action object.
-//
-// FindActionForAnswers calls the underlying FindActionForAnswers.
-func (x *DecisionTree) FindActionForAnswers(answers *foundation.NSDictionary[foundation.NSObjectProtocol, foundation.NSObjectProtocol]) foundation.NSObjectProtocol {
-	return x.inner.FindActionForAnswers(answers)
-}
-
 // The node for the decision tree that all other nodes descend from
-//
-// RootNode calls the underlying RootNode.
 func (x *DecisionTree) RootNode() *DecisionNode {
-	_r := x.inner.RootNode()
-	if _r == nil {
-		return nil
-	}
-	return &DecisionNode{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootNode"))
+	return DecisionNodeFromID(_r)
 }
 
-// The random source used by the decision tree when descending on a random branch This must be set before creating any weighted branches @see GKDecisionNode
-//
-// RandomSource calls the underlying RandomSource.
+// The random source used by the decision tree when descending on a random branch This must be set before creating any weighted branches
 func (x *DecisionTree) RandomSource() *RandomSource {
-	_r := x.inner.RandomSource()
-	if _r == nil {
-		return nil
-	}
-	return &RandomSource{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("randomSource"))
+	return RandomSourceFromID(_r)
 }
 
-// SetRandomSource calls the underlying SetRandomSource.
-func (x *DecisionTree) SetRandomSource(randomSource *raw.GKRandomSource) {
-	x.inner.SetRandomSource(randomSource)
+func (x *DecisionTree) SetRandomSource(randomSource *RandomSource) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRandomSource:"), objref.IDOf(randomSource))
 }
 
 // DecisionTreeable is the interface implemented by [DecisionTree], for mocking and DI.
 type DecisionTreeable interface {
-	Unwrap() *raw.GKDecisionTree
+	obj.Object
 	WithRandomSource(randomSource RandomSourceProvider) *DecisionTree
-	ExportToURLError(url string, error_ unsafe.Pointer) bool
-	FindActionForAnswers(answers *foundation.NSDictionary[foundation.NSObjectProtocol, foundation.NSObjectProtocol]) foundation.NSObjectProtocol
 	RootNode() *DecisionNode
 	RandomSource() *RandomSource
-	SetRandomSource(randomSource *raw.GKRandomSource)
+	SetRandomSource(randomSource *RandomSource)
 }
 
 var _ DecisionTreeable = (*DecisionTree)(nil)

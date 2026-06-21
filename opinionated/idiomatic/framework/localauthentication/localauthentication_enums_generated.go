@@ -9,175 +9,175 @@ import (
 )
 
 // Operations to be evaluated for access control.
-type LAAccessControlOperation int64
+type AccessControlOperation int64
 
 const (
 	// Specifies that access control is used for item creation.
-	LAAccessControlOperationCreateItem LAAccessControlOperation = 0
+	AccessControlOperationCreateItem AccessControlOperation = 0
 	// Specifies that access control is used for accessing an existing item.
-	LAAccessControlOperationUseItem LAAccessControlOperation = 1
+	AccessControlOperationUseItem AccessControlOperation = 1
 	// Specifies that access control is used for key creation.
-	LAAccessControlOperationCreateKey LAAccessControlOperation = 2
+	AccessControlOperationCreateKey AccessControlOperation = 2
 	// Specifies that access control is used for accessing an existing key.
-	LAAccessControlOperationUseKeySign LAAccessControlOperation = 3
+	AccessControlOperationUseKeySign AccessControlOperation = 3
 	// Specifies that access control is used for data decryption using existing key.
-	LAAccessControlOperationUseKeyDecrypt LAAccessControlOperation = 4
+	AccessControlOperationUseKeyDecrypt AccessControlOperation = 4
 	// Specifies that access control is used for key exchange.
-	LAAccessControlOperationUseKeyKeyExchange LAAccessControlOperation = 5
+	AccessControlOperationUseKeyKeyExchange AccessControlOperation = 5
 )
 
-func (e LAAccessControlOperation) String() string {
+func (e AccessControlOperation) String() string {
 	switch e {
-	case LAAccessControlOperationCreateItem:
-		return "LAAccessControlOperationCreateItem"
-	case LAAccessControlOperationUseItem:
-		return "LAAccessControlOperationUseItem"
-	case LAAccessControlOperationCreateKey:
-		return "LAAccessControlOperationCreateKey"
-	case LAAccessControlOperationUseKeySign:
-		return "LAAccessControlOperationUseKeySign"
-	case LAAccessControlOperationUseKeyDecrypt:
-		return "LAAccessControlOperationUseKeyDecrypt"
-	case LAAccessControlOperationUseKeyKeyExchange:
-		return "LAAccessControlOperationUseKeyKeyExchange"
+	case AccessControlOperationCreateItem:
+		return "AccessControlOperationCreateItem"
+	case AccessControlOperationUseItem:
+		return "AccessControlOperationUseItem"
+	case AccessControlOperationCreateKey:
+		return "AccessControlOperationCreateKey"
+	case AccessControlOperationUseKeySign:
+		return "AccessControlOperationUseKeySign"
+	case AccessControlOperationUseKeyDecrypt:
+		return "AccessControlOperationUseKeyDecrypt"
+	case AccessControlOperationUseKeyKeyExchange:
+		return "AccessControlOperationUseKeyKeyExchange"
 	default:
-		return fmt.Sprintf("LAAccessControlOperation(%d)", int64(e))
+		return fmt.Sprintf("AccessControlOperation(%d)", int64(e))
 	}
 }
 
 // The set of available biometric authentication types.
-type LABiometryType int64
+type BiometryType int64
 
 const (
 	// No biometry type is supported.
-	LABiometryTypeNone LABiometryType = 0
+	BiometryTypeNone BiometryType = 0
 	// No biometry type is supported.
 	//
 	// Deprecated: since macOS 10.13.2.
-	LABiometryNone LABiometryType = 0
+	BiometryNone BiometryType = 0
 	// The device supports Touch ID.
 	//
 	// Deprecated: since macOS 10.13.2.
-	LABiometryTypeTouchID LABiometryType = 1
+	BiometryTypeTouchID BiometryType = 1
 	// The device supports Face ID.
-	LABiometryTypeFaceID LABiometryType = 2
+	BiometryTypeFaceID BiometryType = 2
 	// The device supports Optic ID.
-	LABiometryTypeOpticID LABiometryType = 4
+	BiometryTypeOpticID BiometryType = 4
 )
 
-func (e LABiometryType) String() string {
+func (e BiometryType) String() string {
 	switch e {
-	case LABiometryTypeNone:
-		return "LABiometryTypeNone"
-	case LABiometryTypeTouchID:
-		return "LABiometryTypeTouchID"
-	case LABiometryTypeFaceID:
-		return "LABiometryTypeFaceID"
-	case LABiometryTypeOpticID:
-		return "LABiometryTypeOpticID"
+	case BiometryTypeNone:
+		return "BiometryTypeNone"
+	case BiometryTypeTouchID:
+		return "BiometryTypeTouchID"
+	case BiometryTypeFaceID:
+		return "BiometryTypeFaceID"
+	case BiometryTypeOpticID:
+		return "BiometryTypeOpticID"
 	default:
-		return fmt.Sprintf("LABiometryType(%d)", int64(e))
+		return fmt.Sprintf("BiometryType(%d)", int64(e))
 	}
 }
 
-type LACompanionType int64
+type CompanionType int64
 
 const (
 	// Paired Apple Watch
-	LACompanionTypeWatch LACompanionType = 1
+	CompanionTypeWatch CompanionType = 1
 )
 
-func (e LACompanionType) String() string {
+func (e CompanionType) String() string {
 	switch e {
-	case LACompanionTypeWatch:
-		return "LACompanionTypeWatch"
+	case CompanionTypeWatch:
+		return "CompanionTypeWatch"
 	default:
-		return fmt.Sprintf("LACompanionType(%d)", int64(e))
+		return fmt.Sprintf("CompanionType(%d)", int64(e))
 	}
 }
 
 // The types of credentials to be used for authentication.
-type LACredentialType int64
+type CredentialType int64
 
 const (
 	// Specifies that a password is provided by the application.
-	LACredentialTypeApplicationPassword LACredentialType = 0
-	// Smart card PIN provided by application @discussion If not set, LocalAuthentication will ask users for the smart card PIN when necessary. Applications can provide the PIN using setCredential method. In such case, LocalAuthentication will not show the smart card PIN user interface. When entered from the LocalAuthentication user interface, the PIN is stored as UTF-8 encoded string.
-	LACredentialTypeSmartCardPIN LACredentialType = -3
+	CredentialTypeApplicationPassword CredentialType = 0
+	// Smart card PIN provided by application If not set, LocalAuthentication will ask users for the smart card PIN when necessary. Applications can provide the PIN using setCredential method. In such case, LocalAuthentication will not show the smart card PIN user interface. When entered from the LocalAuthentication user interface, the PIN is stored as UTF-8 encoded string.
+	CredentialTypeSmartCardPIN CredentialType = -3
 )
 
-func (e LACredentialType) String() string {
+func (e CredentialType) String() string {
 	switch e {
-	case LACredentialTypeApplicationPassword:
-		return "LACredentialTypeApplicationPassword"
-	case LACredentialTypeSmartCardPIN:
-		return "LACredentialTypeSmartCardPIN"
+	case CredentialTypeApplicationPassword:
+		return "CredentialTypeApplicationPassword"
+	case CredentialTypeSmartCardPIN:
+		return "CredentialTypeSmartCardPIN"
 	default:
-		return fmt.Sprintf("LACredentialType(%d)", int64(e))
+		return fmt.Sprintf("CredentialType(%d)", int64(e))
 	}
 }
 
 // The set of available local authentication policies.
-type LAPolicy int64
+type Policy int64
 
 const (
 	// User authentication with biometry.
-	LAPolicyDeviceOwnerAuthenticationWithBiometrics LAPolicy = 1
+	PolicyDeviceOwnerAuthenticationWithBiometrics Policy = 1
 	// User authentication with biometry, Apple Watch, or the device passcode.
-	LAPolicyDeviceOwnerAuthentication LAPolicy = 2
+	PolicyDeviceOwnerAuthentication Policy = 2
 	// Device owner will be authenticated by a companion device e.g. Watch, Mac, etc.
-	LAPolicyDeviceOwnerAuthenticationWithCompanion LAPolicy = 3
+	PolicyDeviceOwnerAuthenticationWithCompanion Policy = 3
 	// Device owner will be authenticated by biometry or a companion device e.g. Watch, Mac, etc.
-	LAPolicyDeviceOwnerAuthenticationWithBiometricsOrCompanion LAPolicy = 4
+	PolicyDeviceOwnerAuthenticationWithBiometricsOrCompanion Policy = 4
 	// User authentication with Apple Watch.
 	//
 	// Deprecated: since macOS 15.0.
-	LAPolicyDeviceOwnerAuthenticationWithWatch LAPolicy = 3
+	PolicyDeviceOwnerAuthenticationWithWatch Policy = 3
 	// User authentication with either biometry or Apple Watch.
 	//
 	// Deprecated: since macOS 15.0.
-	LAPolicyDeviceOwnerAuthenticationWithBiometricsOrWatch LAPolicy = 4
+	PolicyDeviceOwnerAuthenticationWithBiometricsOrWatch Policy = 4
 )
 
-func (e LAPolicy) String() string {
+func (e Policy) String() string {
 	switch e {
-	case LAPolicyDeviceOwnerAuthenticationWithBiometrics:
-		return "LAPolicyDeviceOwnerAuthenticationWithBiometrics"
-	case LAPolicyDeviceOwnerAuthentication:
-		return "LAPolicyDeviceOwnerAuthentication"
-	case LAPolicyDeviceOwnerAuthenticationWithCompanion:
-		return "LAPolicyDeviceOwnerAuthenticationWithCompanion"
-	case LAPolicyDeviceOwnerAuthenticationWithBiometricsOrCompanion:
-		return "LAPolicyDeviceOwnerAuthenticationWithBiometricsOrCompanion"
+	case PolicyDeviceOwnerAuthenticationWithBiometrics:
+		return "PolicyDeviceOwnerAuthenticationWithBiometrics"
+	case PolicyDeviceOwnerAuthentication:
+		return "PolicyDeviceOwnerAuthentication"
+	case PolicyDeviceOwnerAuthenticationWithCompanion:
+		return "PolicyDeviceOwnerAuthenticationWithCompanion"
+	case PolicyDeviceOwnerAuthenticationWithBiometricsOrCompanion:
+		return "PolicyDeviceOwnerAuthenticationWithBiometricsOrCompanion"
 	default:
-		return fmt.Sprintf("LAPolicy(%d)", int64(e))
+		return fmt.Sprintf("Policy(%d)", int64(e))
 	}
 }
 
-type LARightState int64
+type RightState int64
 
 const (
-	// @brief Right has not been evaluated yet. @discussion This is the initial state of @c LARight and changes when @c authorize method is called.
-	LARightStateUnknown LARightState = 0
-	// @brief Requirements are currently being evaluated. @discussion This happens after calling @c authorize method but before the user has granted the right.
-	LARightStateAuthorizing LARightState = 1
-	// @brief Authorization was granted @discussion This can be achieved by successful authorization.
-	LARightStateAuthorized LARightState = 2
-	// @brief Authorization was rejected. @discussion This can be caused by several reasons. For example requirements were not satisfied or user rejects to authorize.
-	LARightStateNotAuthorized LARightState = 3
+	// Right has not been evaluated yet. This is the initial state of
+	RightStateUnknown RightState = 0
+	// Requirements are currently being evaluated. This happens after calling
+	RightStateAuthorizing RightState = 1
+	// Authorization was granted This can be achieved by successful authorization.
+	RightStateAuthorized RightState = 2
+	// Authorization was rejected. This can be caused by several reasons. For example requirements were not satisfied or user rejects to authorize.
+	RightStateNotAuthorized RightState = 3
 )
 
-func (e LARightState) String() string {
+func (e RightState) String() string {
 	switch e {
-	case LARightStateUnknown:
-		return "LARightStateUnknown"
-	case LARightStateAuthorizing:
-		return "LARightStateAuthorizing"
-	case LARightStateAuthorized:
-		return "LARightStateAuthorized"
-	case LARightStateNotAuthorized:
-		return "LARightStateNotAuthorized"
+	case RightStateUnknown:
+		return "RightStateUnknown"
+	case RightStateAuthorizing:
+		return "RightStateAuthorizing"
+	case RightStateAuthorized:
+		return "RightStateAuthorized"
+	case RightStateNotAuthorized:
+		return "RightStateNotAuthorized"
 	default:
-		return fmt.Sprintf("LARightState(%d)", int64(e))
+		return fmt.Sprintf("RightState(%d)", int64(e))
 	}
 }

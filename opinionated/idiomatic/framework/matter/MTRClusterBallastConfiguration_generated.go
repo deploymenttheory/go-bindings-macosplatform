@@ -5,310 +5,306 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRClusterBallastConfiguration wraps [raw.MTRClusterBallastConfiguration] with a fluent Go API.
+// MTRClusterBallastConfiguration is an idiomatic wrapper over the Objective-C class MTRClusterBallastConfiguration.
 type MTRClusterBallastConfiguration struct {
-	inner *raw.MTRClusterBallastConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterBallastConfiguration].
-func (x *MTRClusterBallastConfiguration) Unwrap() *raw.MTRClusterBallastConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterBallastConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterBallastConfigurationFromID adopts an existing object pointer as a MTRClusterBallastConfiguration (nil for 0).
+// MTRClusterBallastConfigurationFromID adopts an existing Objective-C object as a MTRClusterBallastConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterBallastConfigurationFromID(id objc.ID) *MTRClusterBallastConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterBallastConfiguration{inner: raw.MTRClusterBallastConfigurationFromID(id)}
+	x := &MTRClusterBallastConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterBallastConfigurationAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterBallastConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterBallastConfigurationAdopt(id objc.ID) *MTRClusterBallastConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterBallastConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterBallastConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterBallastConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterBallastConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // The queue is currently unused, but may be used in the future for calling completions for command invocations if commands are added to this cluster.
 //
-// NewMTRClusterBallastConfigurationWithDeviceEndpointIDQueue creates a new [MTRClusterBallastConfiguration].
-func NewMTRClusterBallastConfigurationWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterBallastConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterBallastConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterBallastConfiguration{inner: raw.MTRClusterBallastConfigurationFromID(_id)}
+// NewMTRClusterBallastConfigurationWithDeviceEndpointIDQueue creates a new MTRClusterBallastConfiguration.
+func NewMTRClusterBallastConfigurationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterBallastConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBallastConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterBallastConfigurationAdopt(_id)
 }
 
-// NewMTRClusterBallastConfigurationWithDeviceEndpointQueue creates a new [MTRClusterBallastConfiguration].
-func NewMTRClusterBallastConfigurationWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterBallastConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterBallastConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterBallastConfiguration{inner: raw.MTRClusterBallastConfigurationFromID(_id)}
+// NewMTRClusterBallastConfigurationWithDeviceEndpointQueue creates a new MTRClusterBallastConfiguration.
+func NewMTRClusterBallastConfigurationWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterBallastConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBallastConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterBallastConfigurationAdopt(_id)
 }
 
-// ReadAttributePhysicalMinLevelWithParams calls the underlying ReadAttributePhysicalMinLevelWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributePhysicalMinLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePhysicalMinLevelWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributePhysicalMinLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePhysicalMinLevelWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePhysicalMaxLevelWithParams calls the underlying ReadAttributePhysicalMaxLevelWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributePhysicalMaxLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePhysicalMaxLevelWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributePhysicalMaxLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePhysicalMaxLevelWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBallastStatusWithParams calls the underlying ReadAttributeBallastStatusWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributeBallastStatusWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBallastStatusWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributeBallastStatusWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBallastStatusWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMinLevelWithParams calls the underlying ReadAttributeMinLevelWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributeMinLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMinLevelWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributeMinLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinLevelWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeMinLevelWithValueExpectedValueInterval calls the underlying WriteAttributeMinLevelWithValueExpectedValueInterval.
-func (x *MTRClusterBallastConfiguration) WriteAttributeMinLevelWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeMinLevelWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterBallastConfiguration) WriteAttributeMinLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeMinLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeMinLevelWithValueExpectedValueIntervalParams calls the underlying WriteAttributeMinLevelWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBallastConfiguration) WriteAttributeMinLevelWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeMinLevelWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterBallastConfiguration) WriteAttributeMinLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeMinLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeMaxLevelWithParams calls the underlying ReadAttributeMaxLevelWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributeMaxLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMaxLevelWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributeMaxLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxLevelWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeMaxLevelWithValueExpectedValueInterval calls the underlying WriteAttributeMaxLevelWithValueExpectedValueInterval.
-func (x *MTRClusterBallastConfiguration) WriteAttributeMaxLevelWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeMaxLevelWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterBallastConfiguration) WriteAttributeMaxLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeMaxLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeMaxLevelWithValueExpectedValueIntervalParams calls the underlying WriteAttributeMaxLevelWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBallastConfiguration) WriteAttributeMaxLevelWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeMaxLevelWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterBallastConfiguration) WriteAttributeMaxLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeMaxLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeIntrinsicBallastFactorWithParams calls the underlying ReadAttributeIntrinsicBallastFactorWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributeIntrinsicBallastFactorWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeIntrinsicBallastFactorWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributeIntrinsicBallastFactorWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeIntrinsicBallastFactorWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeIntrinsicBallastFactorWithValueExpectedValueInterval calls the underlying WriteAttributeIntrinsicBallastFactorWithValueExpectedValueInterval.
-func (x *MTRClusterBallastConfiguration) WriteAttributeIntrinsicBallastFactorWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeIntrinsicBallastFactorWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterBallastConfiguration) WriteAttributeIntrinsicBallastFactorWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeIntrinsicBallastFactorWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeIntrinsicBallastFactorWithValueExpectedValueIntervalParams calls the underlying WriteAttributeIntrinsicBallastFactorWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBallastConfiguration) WriteAttributeIntrinsicBallastFactorWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeIntrinsicBallastFactorWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterBallastConfiguration) WriteAttributeIntrinsicBallastFactorWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeIntrinsicBallastFactorWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeBallastFactorAdjustmentWithParams calls the underlying ReadAttributeBallastFactorAdjustmentWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributeBallastFactorAdjustmentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBallastFactorAdjustmentWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributeBallastFactorAdjustmentWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBallastFactorAdjustmentWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeBallastFactorAdjustmentWithValueExpectedValueInterval calls the underlying WriteAttributeBallastFactorAdjustmentWithValueExpectedValueInterval.
-func (x *MTRClusterBallastConfiguration) WriteAttributeBallastFactorAdjustmentWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeBallastFactorAdjustmentWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterBallastConfiguration) WriteAttributeBallastFactorAdjustmentWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeBallastFactorAdjustmentWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeBallastFactorAdjustmentWithValueExpectedValueIntervalParams calls the underlying WriteAttributeBallastFactorAdjustmentWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBallastConfiguration) WriteAttributeBallastFactorAdjustmentWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeBallastFactorAdjustmentWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterBallastConfiguration) WriteAttributeBallastFactorAdjustmentWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeBallastFactorAdjustmentWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeLampQuantityWithParams calls the underlying ReadAttributeLampQuantityWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributeLampQuantityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeLampQuantityWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributeLampQuantityWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLampQuantityWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeLampTypeWithParams calls the underlying ReadAttributeLampTypeWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributeLampTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeLampTypeWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributeLampTypeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLampTypeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeLampTypeWithValueExpectedValueInterval calls the underlying WriteAttributeLampTypeWithValueExpectedValueInterval.
-func (x *MTRClusterBallastConfiguration) WriteAttributeLampTypeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeLampTypeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterBallastConfiguration) WriteAttributeLampTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLampTypeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeLampTypeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeLampTypeWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBallastConfiguration) WriteAttributeLampTypeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeLampTypeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterBallastConfiguration) WriteAttributeLampTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLampTypeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeLampManufacturerWithParams calls the underlying ReadAttributeLampManufacturerWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributeLampManufacturerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeLampManufacturerWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributeLampManufacturerWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLampManufacturerWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeLampManufacturerWithValueExpectedValueInterval calls the underlying WriteAttributeLampManufacturerWithValueExpectedValueInterval.
-func (x *MTRClusterBallastConfiguration) WriteAttributeLampManufacturerWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeLampManufacturerWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterBallastConfiguration) WriteAttributeLampManufacturerWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLampManufacturerWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeLampManufacturerWithValueExpectedValueIntervalParams calls the underlying WriteAttributeLampManufacturerWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBallastConfiguration) WriteAttributeLampManufacturerWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeLampManufacturerWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterBallastConfiguration) WriteAttributeLampManufacturerWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLampManufacturerWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeLampRatedHoursWithParams calls the underlying ReadAttributeLampRatedHoursWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributeLampRatedHoursWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeLampRatedHoursWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributeLampRatedHoursWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLampRatedHoursWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeLampRatedHoursWithValueExpectedValueInterval calls the underlying WriteAttributeLampRatedHoursWithValueExpectedValueInterval.
-func (x *MTRClusterBallastConfiguration) WriteAttributeLampRatedHoursWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeLampRatedHoursWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterBallastConfiguration) WriteAttributeLampRatedHoursWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLampRatedHoursWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeLampRatedHoursWithValueExpectedValueIntervalParams calls the underlying WriteAttributeLampRatedHoursWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBallastConfiguration) WriteAttributeLampRatedHoursWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeLampRatedHoursWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterBallastConfiguration) WriteAttributeLampRatedHoursWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLampRatedHoursWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeLampBurnHoursWithParams calls the underlying ReadAttributeLampBurnHoursWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributeLampBurnHoursWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeLampBurnHoursWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributeLampBurnHoursWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLampBurnHoursWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeLampBurnHoursWithValueExpectedValueInterval calls the underlying WriteAttributeLampBurnHoursWithValueExpectedValueInterval.
-func (x *MTRClusterBallastConfiguration) WriteAttributeLampBurnHoursWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeLampBurnHoursWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterBallastConfiguration) WriteAttributeLampBurnHoursWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLampBurnHoursWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeLampBurnHoursWithValueExpectedValueIntervalParams calls the underlying WriteAttributeLampBurnHoursWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBallastConfiguration) WriteAttributeLampBurnHoursWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeLampBurnHoursWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterBallastConfiguration) WriteAttributeLampBurnHoursWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLampBurnHoursWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeLampAlarmModeWithParams calls the underlying ReadAttributeLampAlarmModeWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributeLampAlarmModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeLampAlarmModeWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributeLampAlarmModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLampAlarmModeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeLampAlarmModeWithValueExpectedValueInterval calls the underlying WriteAttributeLampAlarmModeWithValueExpectedValueInterval.
-func (x *MTRClusterBallastConfiguration) WriteAttributeLampAlarmModeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeLampAlarmModeWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterBallastConfiguration) WriteAttributeLampAlarmModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLampAlarmModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeLampAlarmModeWithValueExpectedValueIntervalParams calls the underlying WriteAttributeLampAlarmModeWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBallastConfiguration) WriteAttributeLampAlarmModeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeLampAlarmModeWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterBallastConfiguration) WriteAttributeLampAlarmModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLampAlarmModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeLampBurnHoursTripPointWithParams calls the underlying ReadAttributeLampBurnHoursTripPointWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributeLampBurnHoursTripPointWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeLampBurnHoursTripPointWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributeLampBurnHoursTripPointWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLampBurnHoursTripPointWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeLampBurnHoursTripPointWithValueExpectedValueInterval calls the underlying WriteAttributeLampBurnHoursTripPointWithValueExpectedValueInterval.
-func (x *MTRClusterBallastConfiguration) WriteAttributeLampBurnHoursTripPointWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeLampBurnHoursTripPointWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterBallastConfiguration) WriteAttributeLampBurnHoursTripPointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLampBurnHoursTripPointWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeLampBurnHoursTripPointWithValueExpectedValueIntervalParams calls the underlying WriteAttributeLampBurnHoursTripPointWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBallastConfiguration) WriteAttributeLampBurnHoursTripPointWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeLampBurnHoursTripPointWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterBallastConfiguration) WriteAttributeLampBurnHoursTripPointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLampBurnHoursTripPointWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeIntrinsicBalanceFactorWithParams calls the underlying ReadAttributeIntrinsicBalanceFactorWithParams.
-func (x *MTRClusterBallastConfiguration) ReadAttributeIntrinsicBalanceFactorWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeIntrinsicBalanceFactorWithParams(params)
+func (x *MTRClusterBallastConfiguration) ReadAttributeIntrinsicBalanceFactorWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeIntrinsicBalanceFactorWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueInterval calls the underlying WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueInterval.
-func (x *MTRClusterBallastConfiguration) WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterBallastConfiguration) WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeIntrinsicBalanceFactorWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueIntervalParams calls the underlying WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBallastConfiguration) WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
-}
-
-func (x *MTRClusterBallastConfiguration) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterBallastConfiguration) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterBallastConfiguration) WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeIntrinsicBalanceFactorWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // MTRClusterBallastConfigurationable is the interface implemented by [MTRClusterBallastConfiguration], for mocking and DI.
 type MTRClusterBallastConfigurationable interface {
-	Unwrap() *raw.MTRClusterBallastConfiguration
-	ReadAttributePhysicalMinLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePhysicalMaxLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBallastStatusWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMinLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeMinLevelWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeMinLevelWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeMaxLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeMaxLevelWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeMaxLevelWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeIntrinsicBallastFactorWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeIntrinsicBallastFactorWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeIntrinsicBallastFactorWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeBallastFactorAdjustmentWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeBallastFactorAdjustmentWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeBallastFactorAdjustmentWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeLampQuantityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeLampTypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeLampTypeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeLampTypeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeLampManufacturerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeLampManufacturerWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeLampManufacturerWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeLampRatedHoursWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeLampRatedHoursWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeLampRatedHoursWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeLampBurnHoursWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeLampBurnHoursWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeLampBurnHoursWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeLampAlarmModeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeLampAlarmModeWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeLampAlarmModeWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeLampBurnHoursTripPointWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeLampBurnHoursTripPointWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeLampBurnHoursTripPointWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeIntrinsicBalanceFactorWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
+	obj.Object
+	ReadAttributePhysicalMinLevelWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePhysicalMaxLevelWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBallastStatusWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMinLevelWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeMinLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeMinLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeMaxLevelWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeMaxLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeMaxLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeIntrinsicBallastFactorWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeIntrinsicBallastFactorWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeIntrinsicBallastFactorWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeBallastFactorAdjustmentWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeBallastFactorAdjustmentWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeBallastFactorAdjustmentWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeLampQuantityWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeLampTypeWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeLampTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeLampTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeLampManufacturerWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeLampManufacturerWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeLampManufacturerWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeLampRatedHoursWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeLampRatedHoursWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeLampRatedHoursWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeLampBurnHoursWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeLampBurnHoursWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeLampBurnHoursWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeLampAlarmModeWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeLampAlarmModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeLampAlarmModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeLampBurnHoursTripPointWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeLampBurnHoursTripPointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeLampBurnHoursTripPointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeIntrinsicBalanceFactorWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeIntrinsicBalanceFactorWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
 }
 
 var _ MTRClusterBallastConfigurationable = (*MTRClusterBallastConfiguration)(nil)

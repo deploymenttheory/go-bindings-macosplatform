@@ -5,121 +5,126 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMDocumentType wraps [raw.DOMDocumentType] with a fluent Go API.
+// DOMDocumentType is an idiomatic wrapper over the Objective-C class DOMDocumentType.
 type DOMDocumentType struct {
-	inner *raw.DOMDocumentType
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMDocumentType].
-func (x *DOMDocumentType) Unwrap() *raw.DOMDocumentType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMDocumentType) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMDocumentTypeFromID adopts an existing object pointer as a DOMDocumentType (nil for 0).
+// DOMDocumentTypeFromID adopts an existing Objective-C object as a DOMDocumentType
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMDocumentTypeFromID(id objc.ID) *DOMDocumentType {
 	if id == 0 {
 		return nil
 	}
-	return &DOMDocumentType{inner: raw.DOMDocumentTypeFromID(id)}
+	x := &DOMDocumentType{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDOMDocumentType creates a new [DOMDocumentType].
+// dOMDocumentTypeAdopt wraps an Objective-C object that this code just created as a
+// DOMDocumentType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMDocumentTypeAdopt(id objc.ID) *DOMDocumentType {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMDocumentType{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DOMDocumentType) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMDocumentType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMDocumentType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMDocumentType creates a new DOMDocumentType.
 func NewDOMDocumentType() *DOMDocumentType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMDocumentType")), objc.RegisterName("new"))
-	return &DOMDocumentType{inner: raw.DOMDocumentTypeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMDocumentType")), objc.RegisterName("new"))
+	return dOMDocumentTypeAdopt(_id)
 }
 
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
 func (x *DOMDocumentType) WithNodeValue(nodeValue string) *DOMDocumentType {
-	x.inner.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets the prefix property and returns the receiver for chaining.
+// WithPrefix sets prefix and returns the receiver so calls can be chained.
 func (x *DOMDocumentType) WithPrefix(prefix string) *DOMDocumentType {
-	x.inner.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets the textContent property and returns the receiver for chaining.
+// WithTextContent sets textContent and returns the receiver so calls can be chained.
 func (x *DOMDocumentType) WithTextContent(textContent string) *DOMDocumentType {
-	x.inner.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
-// Name calls the underlying Name.
 func (x *DOMDocumentType) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Entities calls the underlying Entities.
 func (x *DOMDocumentType) Entities() *DOMNamedNodeMap {
-	_r := x.inner.Entities()
-	if _r == nil {
-		return nil
-	}
-	return &DOMNamedNodeMap{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entities"))
+	return DOMNamedNodeMapFromID(_r)
 }
 
-// Notations calls the underlying Notations.
 func (x *DOMDocumentType) Notations() *DOMNamedNodeMap {
-	_r := x.inner.Notations()
-	if _r == nil {
-		return nil
-	}
-	return &DOMNamedNodeMap{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notations"))
+	return DOMNamedNodeMapFromID(_r)
 }
 
-// PublicId calls the underlying PublicId.
 func (x *DOMDocumentType) PublicId() string {
-	_r := x.inner.PublicId()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicId"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SystemId calls the underlying SystemId.
 func (x *DOMDocumentType) SystemId() string {
-	_r := x.inner.SystemId()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("systemId"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// InternalSubset calls the underlying InternalSubset.
 func (x *DOMDocumentType) InternalSubset() string {
-	_r := x.inner.InternalSubset()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("internalSubset"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *DOMDocumentType) asDOMNode() *raw.DOMNode { return &x.inner.DOMNode }
-
-func (x *DOMDocumentType) asDOMObject() *raw.DOMObject { return &x.inner.DOMNode.DOMObject }
-
-func (x *DOMDocumentType) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMNode.DOMObject.WebScriptObject
+	return purego.GoString(_r)
 }
 
 // DOMDocumentTypeable is the interface implemented by [DOMDocumentType], for mocking and DI.
 type DOMDocumentTypeable interface {
-	Unwrap() *raw.DOMDocumentType
+	obj.Object
 	WithNodeValue(nodeValue string) *DOMDocumentType
 	WithPrefix(prefix string) *DOMDocumentType
 	WithTextContent(textContent string) *DOMDocumentType

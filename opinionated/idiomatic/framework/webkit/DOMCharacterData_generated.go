@@ -5,163 +5,167 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMCharacterData wraps [raw.DOMCharacterData] with a fluent Go API.
+// DOMCharacterData is an idiomatic wrapper over the Objective-C class DOMCharacterData.
 type DOMCharacterData struct {
-	inner *raw.DOMCharacterData
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMCharacterData].
-func (x *DOMCharacterData) Unwrap() *raw.DOMCharacterData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMCharacterData) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMCharacterDataFromID adopts an existing object pointer as a DOMCharacterData (nil for 0).
+// DOMCharacterDataFromID adopts an existing Objective-C object as a DOMCharacterData
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMCharacterDataFromID(id objc.ID) *DOMCharacterData {
 	if id == 0 {
 		return nil
 	}
-	return &DOMCharacterData{inner: raw.DOMCharacterDataFromID(id)}
+	x := &DOMCharacterData{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDOMCharacterData creates a new [DOMCharacterData].
+// dOMCharacterDataAdopt wraps an Objective-C object that this code just created as a
+// DOMCharacterData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMCharacterDataAdopt(id objc.ID) *DOMCharacterData {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMCharacterData{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DOMCharacterData) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMCharacterData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMCharacterData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMCharacterData creates a new DOMCharacterData.
 func NewDOMCharacterData() *DOMCharacterData {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMCharacterData")), objc.RegisterName("new"))
-	return &DOMCharacterData{inner: raw.DOMCharacterDataFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMCharacterData")), objc.RegisterName("new"))
+	return dOMCharacterDataAdopt(_id)
 }
 
-// WithData sets the data property and returns the receiver for chaining.
+// WithData sets data and returns the receiver so calls can be chained.
 func (x *DOMCharacterData) WithData(data string) *DOMCharacterData {
-	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 	return x
 }
 
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
 func (x *DOMCharacterData) WithNodeValue(nodeValue string) *DOMCharacterData {
-	x.inner.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets the prefix property and returns the receiver for chaining.
+// WithPrefix sets prefix and returns the receiver so calls can be chained.
 func (x *DOMCharacterData) WithPrefix(prefix string) *DOMCharacterData {
-	x.inner.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets the textContent property and returns the receiver for chaining.
+// WithTextContent sets textContent and returns the receiver so calls can be chained.
 func (x *DOMCharacterData) WithTextContent(textContent string) *DOMCharacterData {
-	x.inner.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
-// SubstringDataLength calls the underlying SubstringDataLength.
-func (x *DOMCharacterData) SubstringDataLength(offset uint, length uint) string {
-	_r := x.inner.SubstringDataLength(offset, length)
-	if _r == nil {
+func (x *DOMCharacterData) SubstringDataLength(offset int, length int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("substringData:length:"), offset, length)
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// AppendData calls the underlying AppendData.
 func (x *DOMCharacterData) AppendData(data string) {
-	x.inner.AppendData(foundation.NSStringStringWithUTF8String(data))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendData:"), purego.NSString(data))
 }
 
-// InsertDataData calls the underlying InsertDataData.
-func (x *DOMCharacterData) InsertDataData(offset uint, data string) {
-	x.inner.InsertDataData(offset, foundation.NSStringStringWithUTF8String(data))
+func (x *DOMCharacterData) InsertDataData(offset int, data string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertData:data:"), offset, purego.NSString(data))
 }
 
-// DeleteDataLength calls the underlying DeleteDataLength.
-func (x *DOMCharacterData) DeleteDataLength(offset uint, length uint) {
-	x.inner.DeleteDataLength(offset, length)
+func (x *DOMCharacterData) DeleteDataLength(offset int, length int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteData:length:"), offset, length)
 }
 
-// ReplaceDataLengthData calls the underlying ReplaceDataLengthData.
-func (x *DOMCharacterData) ReplaceDataLengthData(offset uint, length uint, data string) {
-	x.inner.ReplaceDataLengthData(offset, length, foundation.NSStringStringWithUTF8String(data))
+func (x *DOMCharacterData) ReplaceDataLengthData(offset int, length int, data string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceData:length:data:"), offset, length, purego.NSString(data))
 }
 
-// Data calls the underlying Data.
 func (x *DOMCharacterData) Data() string {
-	_r := x.inner.Data()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetData calls the underlying SetData.
 func (x *DOMCharacterData) SetData(data string) {
-	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 }
 
-// Length calls the underlying Length.
-func (x *DOMCharacterData) Length() uint {
-	return x.inner.Length()
+func (x *DOMCharacterData) Length() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
-// SubstringData calls the underlying SubstringData.
-func (x *DOMCharacterData) SubstringData(offset uint, length uint) string {
-	_r := x.inner.SubstringData(offset, length)
-	if _r == nil {
+func (x *DOMCharacterData) SubstringData(offset int, length int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("substringData::"), offset, length)
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// InsertData calls the underlying InsertData.
-func (x *DOMCharacterData) InsertData(offset uint, data string) {
-	x.inner.InsertData(offset, foundation.NSStringStringWithUTF8String(data))
+func (x *DOMCharacterData) InsertData(offset int, data string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertData::"), offset, purego.NSString(data))
 }
 
-// DeleteData calls the underlying DeleteData.
-func (x *DOMCharacterData) DeleteData(offset uint, length uint) {
-	x.inner.DeleteData(offset, length)
+func (x *DOMCharacterData) DeleteData(offset int, length int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteData::"), offset, length)
 }
 
-// ReplaceData calls the underlying ReplaceData.
-func (x *DOMCharacterData) ReplaceData(offset uint, length uint, data string) {
-	x.inner.ReplaceData(offset, length, foundation.NSStringStringWithUTF8String(data))
-}
-
-func (x *DOMCharacterData) asDOMCharacterData() *raw.DOMCharacterData { return x.inner }
-
-func (x *DOMCharacterData) asDOMNode() *raw.DOMNode { return &x.inner.DOMNode }
-
-func (x *DOMCharacterData) asDOMObject() *raw.DOMObject { return &x.inner.DOMNode.DOMObject }
-
-func (x *DOMCharacterData) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMNode.DOMObject.WebScriptObject
+func (x *DOMCharacterData) ReplaceData(offset int, length int, data string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceData:::"), offset, length, purego.NSString(data))
 }
 
 // DOMCharacterDataable is the interface implemented by [DOMCharacterData], for mocking and DI.
 type DOMCharacterDataable interface {
-	Unwrap() *raw.DOMCharacterData
+	obj.Object
 	WithData(data string) *DOMCharacterData
 	WithNodeValue(nodeValue string) *DOMCharacterData
 	WithPrefix(prefix string) *DOMCharacterData
 	WithTextContent(textContent string) *DOMCharacterData
-	SubstringDataLength(offset uint, length uint) string
+	SubstringDataLength(offset int, length int) string
 	AppendData(data string)
-	InsertDataData(offset uint, data string)
-	DeleteDataLength(offset uint, length uint)
-	ReplaceDataLengthData(offset uint, length uint, data string)
+	InsertDataData(offset int, data string)
+	DeleteDataLength(offset int, length int)
+	ReplaceDataLengthData(offset int, length int, data string)
 	Data() string
 	SetData(data string)
-	Length() uint
-	SubstringData(offset uint, length uint) string
-	InsertData(offset uint, data string)
-	DeleteData(offset uint, length uint)
-	ReplaceData(offset uint, length uint, data string)
+	Length() int
+	SubstringData(offset int, length int) string
+	InsertData(offset int, data string)
+	DeleteData(offset int, length int)
+	ReplaceData(offset int, length int, data string)
 }
 
 var _ DOMCharacterDataable = (*DOMCharacterData)(nil)

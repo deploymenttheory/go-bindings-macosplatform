@@ -5,73 +5,89 @@
 package sharedwithyoucore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// PersonIdentityProof wraps [raw.SWPersonIdentityProof] with a fluent Go API.
+// PersonIdentityProof is an idiomatic wrapper over the Objective-C class SWPersonIdentityProof.
 type PersonIdentityProof struct {
-	inner *raw.SWPersonIdentityProof
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SWPersonIdentityProof].
-func (x *PersonIdentityProof) Unwrap() *raw.SWPersonIdentityProof { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersonIdentityProof) ID() objc.ID { return x.inner.Ptr() }
-
-// PersonIdentityProofFromID adopts an existing object pointer as a PersonIdentityProof (nil for 0).
+// PersonIdentityProofFromID adopts an existing Objective-C object as a PersonIdentityProof
+// (nil for 0), retaining it and registering a release finalizer.
 func PersonIdentityProofFromID(id objc.ID) *PersonIdentityProof {
 	if id == 0 {
 		return nil
 	}
-	return &PersonIdentityProof{inner: raw.SWPersonIdentityProofFromID(id)}
+	x := &PersonIdentityProof{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPersonIdentityProof creates a new [PersonIdentityProof].
-func NewPersonIdentityProof() *PersonIdentityProof {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SWPersonIdentityProof")), objc.RegisterName("new"))
-	return &PersonIdentityProof{inner: raw.SWPersonIdentityProofFromID(_id)}
-}
-
-// @abstract Hashes of missing Merkle tree nodes that can provide proof of inclusion. @discussion The data contains an array of SHA256 hash of the user's combined public identities.
-//
-// InclusionHashes returns the collection as a Go slice.
-func (x *PersonIdentityProof) InclusionHashes() []*foundation.NSData {
-	arr := x.inner.InclusionHashes()
-	if arr == nil {
+// personIdentityProofAdopt wraps an Objective-C object that this code just created as a
+// PersonIdentityProof (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func personIdentityProofAdopt(id objc.ID) *PersonIdentityProof {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSData {
-		return foundation.NSDataFromID(purego.Retain(_id))
-	})
+	x := &PersonIdentityProof{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @abstract Public key of local device
+// Description returns the object's -description text.
+func (x *PersonIdentityProof) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PersonIdentityProof) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PersonIdentityProof) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPersonIdentityProof creates a new PersonIdentityProof.
+func NewPersonIdentityProof() *PersonIdentityProof {
+	_id := objc.Send[objc.ID](objc.ID(_class("SWPersonIdentityProof")), objc.RegisterName("new"))
+	return personIdentityProofAdopt(_id)
+}
+
+// Hashes of missing Merkle tree nodes that can provide proof of inclusion. The data contains an array of SHA256 hash of the user's combined public identities.
 //
-// PublicKey calls the underlying PublicKey.
-func (x *PersonIdentityProof) PublicKey() *foundation.NSData {
-	return x.inner.PublicKey()
+// InclusionHashes returns the collection as a Go slice.
+func (x *PersonIdentityProof) InclusionHashes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inclusionHashes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @abstract Index of local public key in the Merkle tree @discussion This data can be used to determine if the node is the left or the right child
-//
-// PublicKeyIndex calls the underlying PublicKeyIndex.
-func (x *PersonIdentityProof) PublicKeyIndex() uint {
-	return x.inner.PublicKeyIndex()
+// Public key of local device
+func (x *PersonIdentityProof) PublicKey() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicKey"))
+	return obj.Wrap(_r)
 }
 
-func (x *PersonIdentityProof) asPersonIdentityProof() *raw.SWPersonIdentityProof { return x.inner }
+// Index of local public key in the Merkle tree This data can be used to determine if the node is the left or the right child
+func (x *PersonIdentityProof) PublicKeyIndex() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("publicKeyIndex"))
+	return _r
+}
 
 // PersonIdentityProofable is the interface implemented by [PersonIdentityProof], for mocking and DI.
 type PersonIdentityProofable interface {
-	Unwrap() *raw.SWPersonIdentityProof
-	InclusionHashes() []*foundation.NSData
-	PublicKey() *foundation.NSData
-	PublicKeyIndex() uint
+	obj.Object
+	InclusionHashes() []obj.Object
+	PublicKey() obj.Object
+	PublicKeyIndex() int
 }
 
 var _ PersonIdentityProofable = (*PersonIdentityProof)(nil)

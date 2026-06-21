@@ -5,56 +5,75 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A unit of measure for electric resistance.
 //
-// UnitElectricResistance wraps [raw.NSUnitElectricResistance] with a fluent Go API.
+// UnitElectricResistance is an idiomatic wrapper over the Objective-C class NSUnitElectricResistance.
 type UnitElectricResistance struct {
-	inner *raw.NSUnitElectricResistance
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSUnitElectricResistance].
-func (x *UnitElectricResistance) Unwrap() *raw.NSUnitElectricResistance { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitElectricResistance) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitElectricResistanceFromID adopts an existing object pointer as a UnitElectricResistance (nil for 0).
+// UnitElectricResistanceFromID adopts an existing Objective-C object as a UnitElectricResistance
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitElectricResistanceFromID(id objc.ID) *UnitElectricResistance {
 	if id == 0 {
 		return nil
 	}
-	return &UnitElectricResistance{inner: raw.NSUnitElectricResistanceFromID(id)}
-}
-
-// NewUnitElectricResistance creates a new [UnitElectricResistance].
-func NewUnitElectricResistance() *UnitElectricResistance {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitElectricResistance")), objc.RegisterName("new"))
-	return &UnitElectricResistance{inner: raw.NSUnitElectricResistanceFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitElectricResistance) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitElectricResistance {
-	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitElectricResistance{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-func (x *UnitElectricResistance) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
+// unitElectricResistanceAdopt wraps an Objective-C object that this code just created as a
+// UnitElectricResistance (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitElectricResistanceAdopt(id objc.ID) *UnitElectricResistance {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitElectricResistance{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
 
-func (x *UnitElectricResistance) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
+// Description returns the object's -description text.
+func (x *UnitElectricResistance) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
 
-func (x *UnitElectricResistance) asObject() *raw.NSObject {
-	return &x.inner.NSDimension.NSUnit.NSObject
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UnitElectricResistance) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UnitElectricResistance) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUnitElectricResistance creates a new UnitElectricResistance.
+func NewUnitElectricResistance() *UnitElectricResistance {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitElectricResistance")), objc.RegisterName("new"))
+	return unitElectricResistanceAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *UnitElectricResistance) WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricResistance {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
 }
 
 // UnitElectricResistanceable is the interface implemented by [UnitElectricResistance], for mocking and DI.
 type UnitElectricResistanceable interface {
-	Unwrap() *raw.NSUnitElectricResistance
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitElectricResistance
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricResistance
 }
 
 var _ UnitElectricResistanceable = (*UnitElectricResistance)(nil)

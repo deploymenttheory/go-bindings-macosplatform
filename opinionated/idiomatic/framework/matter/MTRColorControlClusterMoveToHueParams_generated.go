@@ -5,183 +5,198 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRColorControlClusterMoveToHueParams wraps [raw.MTRColorControlClusterMoveToHueParams] with a fluent Go API.
+// MTRColorControlClusterMoveToHueParams is an idiomatic wrapper over the Objective-C class MTRColorControlClusterMoveToHueParams.
 type MTRColorControlClusterMoveToHueParams struct {
-	inner *raw.MTRColorControlClusterMoveToHueParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRColorControlClusterMoveToHueParams].
-func (x *MTRColorControlClusterMoveToHueParams) Unwrap() *raw.MTRColorControlClusterMoveToHueParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRColorControlClusterMoveToHueParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRColorControlClusterMoveToHueParamsFromID adopts an existing object pointer as a MTRColorControlClusterMoveToHueParams (nil for 0).
+// MTRColorControlClusterMoveToHueParamsFromID adopts an existing Objective-C object as a MTRColorControlClusterMoveToHueParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRColorControlClusterMoveToHueParamsFromID(id objc.ID) *MTRColorControlClusterMoveToHueParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRColorControlClusterMoveToHueParams{inner: raw.MTRColorControlClusterMoveToHueParamsFromID(id)}
+	x := &MTRColorControlClusterMoveToHueParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRColorControlClusterMoveToHueParams creates a new [MTRColorControlClusterMoveToHueParams].
+// mTRColorControlClusterMoveToHueParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRColorControlClusterMoveToHueParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRColorControlClusterMoveToHueParamsAdopt(id objc.ID) *MTRColorControlClusterMoveToHueParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRColorControlClusterMoveToHueParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRColorControlClusterMoveToHueParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRColorControlClusterMoveToHueParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRColorControlClusterMoveToHueParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRColorControlClusterMoveToHueParams creates a new MTRColorControlClusterMoveToHueParams.
 func NewMTRColorControlClusterMoveToHueParams() *MTRColorControlClusterMoveToHueParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRColorControlClusterMoveToHueParams")), objc.RegisterName("new"))
-	return &MTRColorControlClusterMoveToHueParams{inner: raw.MTRColorControlClusterMoveToHueParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRColorControlClusterMoveToHueParams")), objc.RegisterName("new"))
+	return mTRColorControlClusterMoveToHueParamsAdopt(_id)
 }
 
-// WithHue sets the hue property and returns the receiver for chaining.
-func (x *MTRColorControlClusterMoveToHueParams) WithHue(hue *foundation.NSNumber) *MTRColorControlClusterMoveToHueParams {
-	x.inner.SetHue(hue)
+// WithHue sets hue and returns the receiver so calls can be chained.
+func (x *MTRColorControlClusterMoveToHueParams) WithHue(hue obj.Object) *MTRColorControlClusterMoveToHueParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHue:"), objref.IDOf(hue))
 	return x
 }
 
-// WithDirection sets the direction property and returns the receiver for chaining.
-func (x *MTRColorControlClusterMoveToHueParams) WithDirection(direction *foundation.NSNumber) *MTRColorControlClusterMoveToHueParams {
-	x.inner.SetDirection(direction)
+// WithDirection sets direction and returns the receiver so calls can be chained.
+func (x *MTRColorControlClusterMoveToHueParams) WithDirection(direction obj.Object) *MTRColorControlClusterMoveToHueParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirection:"), objref.IDOf(direction))
 	return x
 }
 
-// WithTransitionTime sets the transitionTime property and returns the receiver for chaining.
-func (x *MTRColorControlClusterMoveToHueParams) WithTransitionTime(transitionTime *foundation.NSNumber) *MTRColorControlClusterMoveToHueParams {
-	x.inner.SetTransitionTime(transitionTime)
+// WithTransitionTime sets transitionTime and returns the receiver so calls can be chained.
+func (x *MTRColorControlClusterMoveToHueParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterMoveToHueParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 	return x
 }
 
-// WithOptionsMask sets the optionsMask property and returns the receiver for chaining.
-func (x *MTRColorControlClusterMoveToHueParams) WithOptionsMask(optionsMask *foundation.NSNumber) *MTRColorControlClusterMoveToHueParams {
-	x.inner.SetOptionsMask(optionsMask)
+// WithOptionsMask sets optionsMask and returns the receiver so calls can be chained.
+func (x *MTRColorControlClusterMoveToHueParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterMoveToHueParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 	return x
 }
 
-// WithOptionsOverride sets the optionsOverride property and returns the receiver for chaining.
-func (x *MTRColorControlClusterMoveToHueParams) WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRColorControlClusterMoveToHueParams {
-	x.inner.SetOptionsOverride(optionsOverride)
+// WithOptionsOverride sets optionsOverride and returns the receiver so calls can be chained.
+func (x *MTRColorControlClusterMoveToHueParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterMoveToHueParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRColorControlClusterMoveToHueParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRColorControlClusterMoveToHueParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRColorControlClusterMoveToHueParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterMoveToHueParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRColorControlClusterMoveToHueParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRColorControlClusterMoveToHueParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRColorControlClusterMoveToHueParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterMoveToHueParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// Hue calls the underlying Hue.
-func (x *MTRColorControlClusterMoveToHueParams) Hue() *foundation.NSNumber {
-	return x.inner.Hue()
+func (x *MTRColorControlClusterMoveToHueParams) Hue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hue"))
+	return obj.Wrap(_r)
 }
 
-// SetHue calls the underlying SetHue.
-func (x *MTRColorControlClusterMoveToHueParams) SetHue(hue *foundation.NSNumber) {
-	x.inner.SetHue(hue)
+func (x *MTRColorControlClusterMoveToHueParams) SetHue(hue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHue:"), objref.IDOf(hue))
 }
 
-// Direction calls the underlying Direction.
-func (x *MTRColorControlClusterMoveToHueParams) Direction() *foundation.NSNumber {
-	return x.inner.Direction()
+func (x *MTRColorControlClusterMoveToHueParams) Direction() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("direction"))
+	return obj.Wrap(_r)
 }
 
-// SetDirection calls the underlying SetDirection.
-func (x *MTRColorControlClusterMoveToHueParams) SetDirection(direction *foundation.NSNumber) {
-	x.inner.SetDirection(direction)
+func (x *MTRColorControlClusterMoveToHueParams) SetDirection(direction obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirection:"), objref.IDOf(direction))
 }
 
-// TransitionTime calls the underlying TransitionTime.
-func (x *MTRColorControlClusterMoveToHueParams) TransitionTime() *foundation.NSNumber {
-	return x.inner.TransitionTime()
+func (x *MTRColorControlClusterMoveToHueParams) TransitionTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionTime"))
+	return obj.Wrap(_r)
 }
 
-// SetTransitionTime calls the underlying SetTransitionTime.
-func (x *MTRColorControlClusterMoveToHueParams) SetTransitionTime(transitionTime *foundation.NSNumber) {
-	x.inner.SetTransitionTime(transitionTime)
+func (x *MTRColorControlClusterMoveToHueParams) SetTransitionTime(transitionTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 }
 
-// OptionsMask calls the underlying OptionsMask.
-func (x *MTRColorControlClusterMoveToHueParams) OptionsMask() *foundation.NSNumber {
-	return x.inner.OptionsMask()
+func (x *MTRColorControlClusterMoveToHueParams) OptionsMask() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsMask"))
+	return obj.Wrap(_r)
 }
 
-// SetOptionsMask calls the underlying SetOptionsMask.
-func (x *MTRColorControlClusterMoveToHueParams) SetOptionsMask(optionsMask *foundation.NSNumber) {
-	x.inner.SetOptionsMask(optionsMask)
+func (x *MTRColorControlClusterMoveToHueParams) SetOptionsMask(optionsMask obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 }
 
-// OptionsOverride calls the underlying OptionsOverride.
-func (x *MTRColorControlClusterMoveToHueParams) OptionsOverride() *foundation.NSNumber {
-	return x.inner.OptionsOverride()
+func (x *MTRColorControlClusterMoveToHueParams) OptionsOverride() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsOverride"))
+	return obj.Wrap(_r)
 }
 
-// SetOptionsOverride calls the underlying SetOptionsOverride.
-func (x *MTRColorControlClusterMoveToHueParams) SetOptionsOverride(optionsOverride *foundation.NSNumber) {
-	x.inner.SetOptionsOverride(optionsOverride)
+func (x *MTRColorControlClusterMoveToHueParams) SetOptionsOverride(optionsOverride obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRColorControlClusterMoveToHueParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRColorControlClusterMoveToHueParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRColorControlClusterMoveToHueParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRColorControlClusterMoveToHueParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRColorControlClusterMoveToHueParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRColorControlClusterMoveToHueParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRColorControlClusterMoveToHueParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRColorControlClusterMoveToHueParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRColorControlClusterMoveToHueParamsable is the interface implemented by [MTRColorControlClusterMoveToHueParams], for mocking and DI.
 type MTRColorControlClusterMoveToHueParamsable interface {
-	Unwrap() *raw.MTRColorControlClusterMoveToHueParams
-	WithHue(hue *foundation.NSNumber) *MTRColorControlClusterMoveToHueParams
-	WithDirection(direction *foundation.NSNumber) *MTRColorControlClusterMoveToHueParams
-	WithTransitionTime(transitionTime *foundation.NSNumber) *MTRColorControlClusterMoveToHueParams
-	WithOptionsMask(optionsMask *foundation.NSNumber) *MTRColorControlClusterMoveToHueParams
-	WithOptionsOverride(optionsOverride *foundation.NSNumber) *MTRColorControlClusterMoveToHueParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRColorControlClusterMoveToHueParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRColorControlClusterMoveToHueParams
-	Hue() *foundation.NSNumber
-	SetHue(hue *foundation.NSNumber)
-	Direction() *foundation.NSNumber
-	SetDirection(direction *foundation.NSNumber)
-	TransitionTime() *foundation.NSNumber
-	SetTransitionTime(transitionTime *foundation.NSNumber)
-	OptionsMask() *foundation.NSNumber
-	SetOptionsMask(optionsMask *foundation.NSNumber)
-	OptionsOverride() *foundation.NSNumber
-	SetOptionsOverride(optionsOverride *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithHue(hue obj.Object) *MTRColorControlClusterMoveToHueParams
+	WithDirection(direction obj.Object) *MTRColorControlClusterMoveToHueParams
+	WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterMoveToHueParams
+	WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterMoveToHueParams
+	WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterMoveToHueParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterMoveToHueParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterMoveToHueParams
+	Hue() obj.Object
+	SetHue(hue obj.Object)
+	Direction() obj.Object
+	SetDirection(direction obj.Object)
+	TransitionTime() obj.Object
+	SetTransitionTime(transitionTime obj.Object)
+	OptionsMask() obj.Object
+	SetOptionsMask(optionsMask obj.Object)
+	OptionsOverride() obj.Object
+	SetOptionsOverride(optionsOverride obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRColorControlClusterMoveToHueParamsable = (*MTRColorControlClusterMoveToHueParams)(nil)

@@ -5,77 +5,103 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ObjectCollection wraps [raw.INObjectCollection] with a fluent Go API.
+// ObjectCollection is an idiomatic wrapper over the Objective-C class INObjectCollection.
 type ObjectCollection struct {
-	inner *raw.INObjectCollection[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INObjectCollection].
-func (x *ObjectCollection) Unwrap() *raw.INObjectCollection[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ObjectCollection) ID() objc.ID { return x.inner.Ptr() }
-
-// ObjectCollectionFromID adopts an existing object pointer as a ObjectCollection (nil for 0).
+// ObjectCollectionFromID adopts an existing Objective-C object as a ObjectCollection
+// (nil for 0), retaining it and registering a release finalizer.
 func ObjectCollectionFromID(id objc.ID) *ObjectCollection {
 	if id == 0 {
 		return nil
 	}
-	return &ObjectCollection{inner: raw.INObjectCollectionFromID[objc.ID](id)}
-}
-
-// NewObjectCollectionWithSections creates a new [ObjectCollection].
-func NewObjectCollectionWithSections(sections *foundation.NSArray[objc.ID]) *ObjectCollection {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INObjectCollection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSections:"), sections.Ptr())
-	return &ObjectCollection{inner: raw.INObjectCollectionFromID[objc.ID](_id)}
-}
-
-// NewObjectCollectionWithItems creates a new [ObjectCollection].
-func NewObjectCollectionWithItems(items *foundation.NSArray[objc.ID]) *ObjectCollection {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INObjectCollection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItems:"), items.Ptr())
-	return &ObjectCollection{inner: raw.INObjectCollectionFromID[objc.ID](_id)}
-}
-
-// WithUsesIndexedCollation sets the usesIndexedCollation property and returns the receiver for chaining.
-func (x *ObjectCollection) WithUsesIndexedCollation(usesIndexedCollation bool) *ObjectCollection {
-	x.inner.SetUsesIndexedCollation(usesIndexedCollation)
+	x := &ObjectCollection{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Sections calls the underlying Sections.
-func (x *ObjectCollection) Sections() *foundation.NSArray[objc.ID] {
-	return x.inner.Sections()
+// objectCollectionAdopt wraps an Objective-C object that this code just created as a
+// ObjectCollection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func objectCollectionAdopt(id objc.ID) *ObjectCollection {
+	if id == 0 {
+		return nil
+	}
+	x := &ObjectCollection{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// AllItems calls the underlying AllItems.
-func (x *ObjectCollection) AllItems() *foundation.NSArray[objc.ID] {
-	return x.inner.AllItems()
+// Description returns the object's -description text.
+func (x *ObjectCollection) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// UsesIndexedCollation calls the underlying UsesIndexedCollation.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ObjectCollection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ObjectCollection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewObjectCollectionWithSections creates a new ObjectCollection.
+func NewObjectCollectionWithSections(sections []obj.Object) *ObjectCollection {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INObjectCollection")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSections:"), purego.SliceToNSArray(sections, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return objectCollectionAdopt(_id)
+}
+
+// NewObjectCollectionWithItems creates a new ObjectCollection.
+func NewObjectCollectionWithItems(items []obj.Object) *ObjectCollection {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INObjectCollection")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItems:"), purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return objectCollectionAdopt(_id)
+}
+
+// WithUsesIndexedCollation sets usesIndexedCollation and returns the receiver so calls can be chained.
+func (x *ObjectCollection) WithUsesIndexedCollation(usesIndexedCollation bool) *ObjectCollection {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesIndexedCollation:"), usesIndexedCollation)
+	return x
+}
+
+// Sections returns the collection as a Go slice.
+func (x *ObjectCollection) Sections() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sections"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+func (x *ObjectCollection) AllItems() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allItems"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
 func (x *ObjectCollection) UsesIndexedCollation() bool {
-	return x.inner.UsesIndexedCollation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesIndexedCollation"))
+	return _r
 }
 
-// SetUsesIndexedCollation calls the underlying SetUsesIndexedCollation.
 func (x *ObjectCollection) SetUsesIndexedCollation(usesIndexedCollation bool) {
-	x.inner.SetUsesIndexedCollation(usesIndexedCollation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesIndexedCollation:"), usesIndexedCollation)
 }
 
 // ObjectCollectionable is the interface implemented by [ObjectCollection], for mocking and DI.
 type ObjectCollectionable interface {
-	Unwrap() *raw.INObjectCollection[objc.ID]
+	obj.Object
 	WithUsesIndexedCollation(usesIndexedCollation bool) *ObjectCollection
-	Sections() *foundation.NSArray[objc.ID]
-	AllItems() *foundation.NSArray[objc.ID]
+	Sections() []obj.Object
+	AllItems() []obj.Object
 	UsesIndexedCollation() bool
 	SetUsesIndexedCollation(usesIndexedCollation bool)
 }

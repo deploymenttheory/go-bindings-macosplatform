@@ -5,9296 +5,6591 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// NSCalibratedWhiteColorSpace returns the string constant NSCalibratedWhiteColorSpace as an objc.ID, for use as a dictionary key or selector argument.
-func NSCalibratedWhiteColorSpace() objc.ID {
-	if _r := raw.NSCalibratedWhiteColorSpace(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSCalibratedWhiteColorSpace returns the string constant NSCalibratedWhiteColorSpace, for use as a dictionary key or argument.
+func NSCalibratedWhiteColorSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCalibratedWhiteColorSpace")))
 }
 
-// NSCalibratedRGBColorSpace returns the string constant NSCalibratedRGBColorSpace as an objc.ID, for use as a dictionary key or selector argument.
-func NSCalibratedRGBColorSpace() objc.ID {
-	if _r := raw.NSCalibratedRGBColorSpace(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSCalibratedRGBColorSpace returns the string constant NSCalibratedRGBColorSpace, for use as a dictionary key or argument.
+func NSCalibratedRGBColorSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCalibratedRGBColorSpace")))
 }
 
-// NSDeviceWhiteColorSpace returns the string constant NSDeviceWhiteColorSpace as an objc.ID, for use as a dictionary key or selector argument.
-func NSDeviceWhiteColorSpace() objc.ID {
-	if _r := raw.NSDeviceWhiteColorSpace(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDeviceWhiteColorSpace returns the string constant NSDeviceWhiteColorSpace, for use as a dictionary key or argument.
+func NSDeviceWhiteColorSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDeviceWhiteColorSpace")))
 }
 
-// NSDeviceRGBColorSpace returns the string constant NSDeviceRGBColorSpace as an objc.ID, for use as a dictionary key or selector argument.
-func NSDeviceRGBColorSpace() objc.ID {
-	if _r := raw.NSDeviceRGBColorSpace(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDeviceRGBColorSpace returns the string constant NSDeviceRGBColorSpace, for use as a dictionary key or argument.
+func NSDeviceRGBColorSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDeviceRGBColorSpace")))
 }
 
-// NSDeviceCMYKColorSpace returns the string constant NSDeviceCMYKColorSpace as an objc.ID, for use as a dictionary key or selector argument.
-func NSDeviceCMYKColorSpace() objc.ID {
-	if _r := raw.NSDeviceCMYKColorSpace(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDeviceCMYKColorSpace returns the string constant NSDeviceCMYKColorSpace, for use as a dictionary key or argument.
+func NSDeviceCMYKColorSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDeviceCMYKColorSpace")))
 }
 
-// NSNamedColorSpace returns the string constant NSNamedColorSpace as an objc.ID, for use as a dictionary key or selector argument.
-func NSNamedColorSpace() objc.ID {
-	if _r := raw.NSNamedColorSpace(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSNamedColorSpace returns the string constant NSNamedColorSpace, for use as a dictionary key or argument.
+func NSNamedColorSpace() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSNamedColorSpace"))) }
 
-// NSPatternColorSpace returns the string constant NSPatternColorSpace as an objc.ID, for use as a dictionary key or selector argument.
-func NSPatternColorSpace() objc.ID {
-	if _r := raw.NSPatternColorSpace(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPatternColorSpace returns the string constant NSPatternColorSpace, for use as a dictionary key or argument.
+func NSPatternColorSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPatternColorSpace")))
 }
 
-// NSCustomColorSpace returns the string constant NSCustomColorSpace as an objc.ID, for use as a dictionary key or selector argument.
-func NSCustomColorSpace() objc.ID {
-	if _r := raw.NSCustomColorSpace(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSCustomColorSpace returns the string constant NSCustomColorSpace, for use as a dictionary key or argument.
+func NSCustomColorSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCustomColorSpace")))
 }
 
-// NSCalibratedBlackColorSpace returns the string constant NSCalibratedBlackColorSpace as an objc.ID, for use as a dictionary key or selector argument.
-func NSCalibratedBlackColorSpace() objc.ID {
-	return purego.CFConstant(raw.NSCalibratedBlackColorSpace())
+// NSCalibratedBlackColorSpace returns the string constant NSCalibratedBlackColorSpace, for use as a dictionary key or argument.
+func NSCalibratedBlackColorSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCalibratedBlackColorSpace")))
 }
 
-// NSDeviceBlackColorSpace returns the string constant NSDeviceBlackColorSpace as an objc.ID, for use as a dictionary key or selector argument.
-func NSDeviceBlackColorSpace() objc.ID {
-	return purego.CFConstant(raw.NSDeviceBlackColorSpace())
+// NSDeviceBlackColorSpace returns the string constant NSDeviceBlackColorSpace, for use as a dictionary key or argument.
+func NSDeviceBlackColorSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDeviceBlackColorSpace")))
 }
 
-// NSDeviceResolution returns the string constant NSDeviceResolution as an objc.ID, for use as a dictionary key or selector argument.
-func NSDeviceResolution() objc.ID {
-	if _r := raw.NSDeviceResolution(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDeviceResolution returns the string constant NSDeviceResolution, for use as a dictionary key or argument.
+func NSDeviceResolution() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDeviceResolution")))
 }
 
-// NSDeviceColorSpaceName returns the string constant NSDeviceColorSpaceName as an objc.ID, for use as a dictionary key or selector argument.
-func NSDeviceColorSpaceName() objc.ID {
-	if _r := raw.NSDeviceColorSpaceName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDeviceColorSpaceName returns the string constant NSDeviceColorSpaceName, for use as a dictionary key or argument.
+func NSDeviceColorSpaceName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDeviceColorSpaceName")))
 }
 
-// NSDeviceBitsPerSample returns the string constant NSDeviceBitsPerSample as an objc.ID, for use as a dictionary key or selector argument.
-func NSDeviceBitsPerSample() objc.ID {
-	if _r := raw.NSDeviceBitsPerSample(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDeviceBitsPerSample returns the string constant NSDeviceBitsPerSample, for use as a dictionary key or argument.
+func NSDeviceBitsPerSample() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDeviceBitsPerSample")))
 }
 
-// NSDeviceIsScreen returns the string constant NSDeviceIsScreen as an objc.ID, for use as a dictionary key or selector argument.
-func NSDeviceIsScreen() objc.ID {
-	if _r := raw.NSDeviceIsScreen(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSDeviceIsPrinter returns the string constant NSDeviceIsPrinter as an objc.ID, for use as a dictionary key or selector argument.
-func NSDeviceIsPrinter() objc.ID {
-	if _r := raw.NSDeviceIsPrinter(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSDeviceSize returns the string constant NSDeviceSize as an objc.ID, for use as a dictionary key or selector argument.
-func NSDeviceSize() objc.ID {
-	if _r := raw.NSDeviceSize(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSGraphicsContextDestinationAttributeName returns the string constant NSGraphicsContextDestinationAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSGraphicsContextDestinationAttributeName() objc.ID {
-	if _r := raw.NSGraphicsContextDestinationAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSGraphicsContextRepresentationFormatAttributeName returns the string constant NSGraphicsContextRepresentationFormatAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSGraphicsContextRepresentationFormatAttributeName() objc.ID {
-	if _r := raw.NSGraphicsContextRepresentationFormatAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSGraphicsContextPSFormat returns the string constant NSGraphicsContextPSFormat as an objc.ID, for use as a dictionary key or selector argument.
-func NSGraphicsContextPSFormat() objc.ID {
-	if _r := raw.NSGraphicsContextPSFormat(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSGraphicsContextPDFFormat returns the string constant NSGraphicsContextPDFFormat as an objc.ID, for use as a dictionary key or selector argument.
-func NSGraphicsContextPDFFormat() objc.ID {
-	if _r := raw.NSGraphicsContextPDFFormat(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSTextLineTooLongException returns the string constant NSTextLineTooLongException as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextLineTooLongException() objc.ID {
-	if _r := raw.NSTextLineTooLongException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSTextNoSelectionException returns the string constant NSTextNoSelectionException as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextNoSelectionException() objc.ID {
-	if _r := raw.NSTextNoSelectionException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSWordTablesWriteException returns the string constant NSWordTablesWriteException as an objc.ID, for use as a dictionary key or selector argument.
-func NSWordTablesWriteException() objc.ID {
-	if _r := raw.NSWordTablesWriteException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSWordTablesReadException returns the string constant NSWordTablesReadException as an objc.ID, for use as a dictionary key or selector argument.
-func NSWordTablesReadException() objc.ID {
-	if _r := raw.NSWordTablesReadException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSTextReadException returns the string constant NSTextReadException as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextReadException() objc.ID {
-	if _r := raw.NSTextReadException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSTextWriteException returns the string constant NSTextWriteException as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextWriteException() objc.ID {
-	if _r := raw.NSTextWriteException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSPasteboardCommunicationException returns the string constant NSPasteboardCommunicationException as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardCommunicationException() objc.ID {
-	if _r := raw.NSPasteboardCommunicationException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSPrintingCommunicationException returns the string constant NSPrintingCommunicationException as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintingCommunicationException() objc.ID {
-	if _r := raw.NSPrintingCommunicationException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSAbortModalException returns the string constant NSAbortModalException as an objc.ID, for use as a dictionary key or selector argument.
-func NSAbortModalException() objc.ID {
-	if _r := raw.NSAbortModalException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSAbortPrintingException returns the string constant NSAbortPrintingException as an objc.ID, for use as a dictionary key or selector argument.
-func NSAbortPrintingException() objc.ID {
-	if _r := raw.NSAbortPrintingException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSIllegalSelectorException returns the string constant NSIllegalSelectorException as an objc.ID, for use as a dictionary key or selector argument.
-func NSIllegalSelectorException() objc.ID {
-	if _r := raw.NSIllegalSelectorException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSAppKitVirtualMemoryException returns the string constant NSAppKitVirtualMemoryException as an objc.ID, for use as a dictionary key or selector argument.
-func NSAppKitVirtualMemoryException() objc.ID {
-	if _r := raw.NSAppKitVirtualMemoryException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSBadRTFDirectiveException returns the string constant NSBadRTFDirectiveException as an objc.ID, for use as a dictionary key or selector argument.
-func NSBadRTFDirectiveException() objc.ID {
-	if _r := raw.NSBadRTFDirectiveException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSBadRTFFontTableException returns the string constant NSBadRTFFontTableException as an objc.ID, for use as a dictionary key or selector argument.
-func NSBadRTFFontTableException() objc.ID {
-	if _r := raw.NSBadRTFFontTableException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSBadRTFStyleSheetException returns the string constant NSBadRTFStyleSheetException as an objc.ID, for use as a dictionary key or selector argument.
-func NSBadRTFStyleSheetException() objc.ID {
-	if _r := raw.NSBadRTFStyleSheetException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSTypedStreamVersionException returns the string constant NSTypedStreamVersionException as an objc.ID, for use as a dictionary key or selector argument.
-func NSTypedStreamVersionException() objc.ID {
-	if _r := raw.NSTypedStreamVersionException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSTIFFException returns the string constant NSTIFFException as an objc.ID, for use as a dictionary key or selector argument.
-func NSTIFFException() objc.ID {
-	if _r := raw.NSTIFFException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSPrintPackageException returns the string constant NSPrintPackageException as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintPackageException() objc.ID {
-	if _r := raw.NSPrintPackageException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSBadRTFColorTableException returns the string constant NSBadRTFColorTableException as an objc.ID, for use as a dictionary key or selector argument.
-func NSBadRTFColorTableException() objc.ID {
-	if _r := raw.NSBadRTFColorTableException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSDraggingException returns the string constant NSDraggingException as an objc.ID, for use as a dictionary key or selector argument.
-func NSDraggingException() objc.ID {
-	if _r := raw.NSDraggingException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSColorListIOException returns the string constant NSColorListIOException as an objc.ID, for use as a dictionary key or selector argument.
-func NSColorListIOException() objc.ID {
-	if _r := raw.NSColorListIOException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSColorListNotEditableException returns the string constant NSColorListNotEditableException as an objc.ID, for use as a dictionary key or selector argument.
-func NSColorListNotEditableException() objc.ID {
-	if _r := raw.NSColorListNotEditableException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSBadBitmapParametersException returns the string constant NSBadBitmapParametersException as an objc.ID, for use as a dictionary key or selector argument.
-func NSBadBitmapParametersException() objc.ID {
-	if _r := raw.NSBadBitmapParametersException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSWindowServerCommunicationException returns the string constant NSWindowServerCommunicationException as an objc.ID, for use as a dictionary key or selector argument.
-func NSWindowServerCommunicationException() objc.ID {
-	if _r := raw.NSWindowServerCommunicationException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSFontUnavailableException returns the string constant NSFontUnavailableException as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontUnavailableException() objc.ID {
-	if _r := raw.NSFontUnavailableException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSPPDIncludeNotFoundException returns the string constant NSPPDIncludeNotFoundException as an objc.ID, for use as a dictionary key or selector argument.
-func NSPPDIncludeNotFoundException() objc.ID {
-	if _r := raw.NSPPDIncludeNotFoundException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSPPDParseException returns the string constant NSPPDParseException as an objc.ID, for use as a dictionary key or selector argument.
-func NSPPDParseException() objc.ID {
-	if _r := raw.NSPPDParseException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSPPDIncludeStackOverflowException returns the string constant NSPPDIncludeStackOverflowException as an objc.ID, for use as a dictionary key or selector argument.
-func NSPPDIncludeStackOverflowException() objc.ID {
-	if _r := raw.NSPPDIncludeStackOverflowException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSPPDIncludeStackUnderflowException returns the string constant NSPPDIncludeStackUnderflowException as an objc.ID, for use as a dictionary key or selector argument.
-func NSPPDIncludeStackUnderflowException() objc.ID {
-	if _r := raw.NSPPDIncludeStackUnderflowException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSRTFPropertyStackOverflowException returns the string constant NSRTFPropertyStackOverflowException as an objc.ID, for use as a dictionary key or selector argument.
-func NSRTFPropertyStackOverflowException() objc.ID {
-	if _r := raw.NSRTFPropertyStackOverflowException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSAppKitIgnoredException returns the string constant NSAppKitIgnoredException as an objc.ID, for use as a dictionary key or selector argument.
-func NSAppKitIgnoredException() objc.ID {
-	if _r := raw.NSAppKitIgnoredException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSBadComparisonException returns the string constant NSBadComparisonException as an objc.ID, for use as a dictionary key or selector argument.
-func NSBadComparisonException() objc.ID {
-	if _r := raw.NSBadComparisonException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSImageCacheException returns the string constant NSImageCacheException as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageCacheException() objc.ID {
-	if _r := raw.NSImageCacheException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSNibLoadingException returns the string constant NSNibLoadingException as an objc.ID, for use as a dictionary key or selector argument.
-func NSNibLoadingException() objc.ID {
-	if _r := raw.NSNibLoadingException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSBrowserIllegalDelegateException returns the string constant NSBrowserIllegalDelegateException as an objc.ID, for use as a dictionary key or selector argument.
-func NSBrowserIllegalDelegateException() objc.ID {
-	if _r := raw.NSBrowserIllegalDelegateException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSAccessibilityErrorCodeExceptionInfo returns the string constant NSAccessibilityErrorCodeExceptionInfo as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityErrorCodeExceptionInfo() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityErrorCodeExceptionInfo())
-}
+// NSDeviceIsScreen returns the string constant NSDeviceIsScreen, for use as a dictionary key or argument.
+func NSDeviceIsScreen() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSDeviceIsScreen"))) }
 
-// NSAccessibilityRoleAttribute returns the string constant NSAccessibilityRoleAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRoleAttribute() objc.ID {
-	if _r := raw.NSAccessibilityRoleAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSDeviceIsPrinter returns the string constant NSDeviceIsPrinter, for use as a dictionary key or argument.
+func NSDeviceIsPrinter() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSDeviceIsPrinter"))) }
 
-// NSAccessibilityRoleDescriptionAttribute returns the string constant NSAccessibilityRoleDescriptionAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRoleDescriptionAttribute() objc.ID {
-	if _r := raw.NSAccessibilityRoleDescriptionAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSDeviceSize returns the string constant NSDeviceSize, for use as a dictionary key or argument.
+func NSDeviceSize() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSDeviceSize"))) }
 
-// NSAccessibilitySubroleAttribute returns the string constant NSAccessibilitySubroleAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySubroleAttribute() objc.ID {
-	if _r := raw.NSAccessibilitySubroleAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSGraphicsContextDestinationAttributeName returns the string constant NSGraphicsContextDestinationAttributeName, for use as a dictionary key or argument.
+func NSGraphicsContextDestinationAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSGraphicsContextDestinationAttributeName")))
 }
 
-// NSAccessibilityHelpAttribute returns the string constant NSAccessibilityHelpAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHelpAttribute() objc.ID {
-	if _r := raw.NSAccessibilityHelpAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSGraphicsContextRepresentationFormatAttributeName returns the string constant NSGraphicsContextRepresentationFormatAttributeName, for use as a dictionary key or argument.
+func NSGraphicsContextRepresentationFormatAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSGraphicsContextRepresentationFormatAttributeName")))
 }
 
-// NSAccessibilityValueAttribute returns the string constant NSAccessibilityValueAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityValueAttribute() objc.ID {
-	if _r := raw.NSAccessibilityValueAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSGraphicsContextPSFormat returns the string constant NSGraphicsContextPSFormat, for use as a dictionary key or argument.
+func NSGraphicsContextPSFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSGraphicsContextPSFormat")))
 }
 
-// NSAccessibilityMinValueAttribute returns the string constant NSAccessibilityMinValueAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMinValueAttribute() objc.ID {
-	if _r := raw.NSAccessibilityMinValueAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSGraphicsContextPDFFormat returns the string constant NSGraphicsContextPDFFormat, for use as a dictionary key or argument.
+func NSGraphicsContextPDFFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSGraphicsContextPDFFormat")))
 }
 
-// NSAccessibilityMaxValueAttribute returns the string constant NSAccessibilityMaxValueAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMaxValueAttribute() objc.ID {
-	if _r := raw.NSAccessibilityMaxValueAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextLineTooLongException returns the string constant NSTextLineTooLongException, for use as a dictionary key or argument.
+func NSTextLineTooLongException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextLineTooLongException")))
 }
 
-// NSAccessibilityEnabledAttribute returns the string constant NSAccessibilityEnabledAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityEnabledAttribute() objc.ID {
-	if _r := raw.NSAccessibilityEnabledAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextNoSelectionException returns the string constant NSTextNoSelectionException, for use as a dictionary key or argument.
+func NSTextNoSelectionException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextNoSelectionException")))
 }
 
-// NSAccessibilityFocusedAttribute returns the string constant NSAccessibilityFocusedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityFocusedAttribute() objc.ID {
-	if _r := raw.NSAccessibilityFocusedAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWordTablesWriteException returns the string constant NSWordTablesWriteException, for use as a dictionary key or argument.
+func NSWordTablesWriteException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWordTablesWriteException")))
 }
 
-// NSAccessibilityParentAttribute returns the string constant NSAccessibilityParentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityParentAttribute() objc.ID {
-	if _r := raw.NSAccessibilityParentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWordTablesReadException returns the string constant NSWordTablesReadException, for use as a dictionary key or argument.
+func NSWordTablesReadException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWordTablesReadException")))
 }
 
-// NSAccessibilityChildrenAttribute returns the string constant NSAccessibilityChildrenAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityChildrenAttribute() objc.ID {
-	if _r := raw.NSAccessibilityChildrenAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextReadException returns the string constant NSTextReadException, for use as a dictionary key or argument.
+func NSTextReadException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextReadException")))
 }
 
-// NSAccessibilityWindowAttribute returns the string constant NSAccessibilityWindowAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityWindowAttribute() objc.ID {
-	if _r := raw.NSAccessibilityWindowAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextWriteException returns the string constant NSTextWriteException, for use as a dictionary key or argument.
+func NSTextWriteException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextWriteException")))
 }
 
-// NSAccessibilityTopLevelUIElementAttribute returns the string constant NSAccessibilityTopLevelUIElementAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTopLevelUIElementAttribute() objc.ID {
-	if _r := raw.NSAccessibilityTopLevelUIElementAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPasteboardCommunicationException returns the string constant NSPasteboardCommunicationException, for use as a dictionary key or argument.
+func NSPasteboardCommunicationException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardCommunicationException")))
 }
 
-// NSAccessibilitySelectedChildrenAttribute returns the string constant NSAccessibilitySelectedChildrenAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySelectedChildrenAttribute() objc.ID {
-	if _r := raw.NSAccessibilitySelectedChildrenAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintingCommunicationException returns the string constant NSPrintingCommunicationException, for use as a dictionary key or argument.
+func NSPrintingCommunicationException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintingCommunicationException")))
 }
 
-// NSAccessibilityVisibleChildrenAttribute returns the string constant NSAccessibilityVisibleChildrenAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityVisibleChildrenAttribute() objc.ID {
-	if _r := raw.NSAccessibilityVisibleChildrenAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAbortModalException returns the string constant NSAbortModalException, for use as a dictionary key or argument.
+func NSAbortModalException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAbortModalException")))
 }
 
-// NSAccessibilityPositionAttribute returns the string constant NSAccessibilityPositionAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityPositionAttribute() objc.ID {
-	if _r := raw.NSAccessibilityPositionAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAbortPrintingException returns the string constant NSAbortPrintingException, for use as a dictionary key or argument.
+func NSAbortPrintingException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAbortPrintingException")))
 }
 
-// NSAccessibilitySizeAttribute returns the string constant NSAccessibilitySizeAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySizeAttribute() objc.ID {
-	if _r := raw.NSAccessibilitySizeAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSIllegalSelectorException returns the string constant NSIllegalSelectorException, for use as a dictionary key or argument.
+func NSIllegalSelectorException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSIllegalSelectorException")))
 }
 
-// NSAccessibilityContentsAttribute returns the string constant NSAccessibilityContentsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityContentsAttribute() objc.ID {
-	if _r := raw.NSAccessibilityContentsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAppKitVirtualMemoryException returns the string constant NSAppKitVirtualMemoryException, for use as a dictionary key or argument.
+func NSAppKitVirtualMemoryException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAppKitVirtualMemoryException")))
 }
 
-// NSAccessibilityTitleAttribute returns the string constant NSAccessibilityTitleAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTitleAttribute() objc.ID {
-	if _r := raw.NSAccessibilityTitleAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSBadRTFDirectiveException returns the string constant NSBadRTFDirectiveException, for use as a dictionary key or argument.
+func NSBadRTFDirectiveException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSBadRTFDirectiveException")))
 }
 
-// NSAccessibilityDescriptionAttribute returns the string constant NSAccessibilityDescriptionAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDescriptionAttribute() objc.ID {
-	if _r := raw.NSAccessibilityDescriptionAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSBadRTFFontTableException returns the string constant NSBadRTFFontTableException, for use as a dictionary key or argument.
+func NSBadRTFFontTableException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSBadRTFFontTableException")))
 }
 
-// NSAccessibilityShownMenuAttribute returns the string constant NSAccessibilityShownMenuAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityShownMenuAttribute() objc.ID {
-	if _r := raw.NSAccessibilityShownMenuAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSBadRTFStyleSheetException returns the string constant NSBadRTFStyleSheetException, for use as a dictionary key or argument.
+func NSBadRTFStyleSheetException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSBadRTFStyleSheetException")))
 }
 
-// NSAccessibilityValueDescriptionAttribute returns the string constant NSAccessibilityValueDescriptionAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityValueDescriptionAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityValueDescriptionAttribute())
+// NSTypedStreamVersionException returns the string constant NSTypedStreamVersionException, for use as a dictionary key or argument.
+func NSTypedStreamVersionException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTypedStreamVersionException")))
 }
 
-// NSAccessibilitySharedFocusElementsAttribute returns the string constant NSAccessibilitySharedFocusElementsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySharedFocusElementsAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySharedFocusElementsAttribute())
-}
+// NSTIFFException returns the string constant NSTIFFException, for use as a dictionary key or argument.
+func NSTIFFException() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSTIFFException"))) }
 
-// NSAccessibilityPreviousContentsAttribute returns the string constant NSAccessibilityPreviousContentsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityPreviousContentsAttribute() objc.ID {
-	if _r := raw.NSAccessibilityPreviousContentsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintPackageException returns the string constant NSPrintPackageException, for use as a dictionary key or argument.
+func NSPrintPackageException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintPackageException")))
 }
 
-// NSAccessibilityNextContentsAttribute returns the string constant NSAccessibilityNextContentsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityNextContentsAttribute() objc.ID {
-	if _r := raw.NSAccessibilityNextContentsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSBadRTFColorTableException returns the string constant NSBadRTFColorTableException, for use as a dictionary key or argument.
+func NSBadRTFColorTableException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSBadRTFColorTableException")))
 }
 
-// NSAccessibilityHeaderAttribute returns the string constant NSAccessibilityHeaderAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHeaderAttribute() objc.ID {
-	if _r := raw.NSAccessibilityHeaderAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDraggingException returns the string constant NSDraggingException, for use as a dictionary key or argument.
+func NSDraggingException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDraggingException")))
 }
 
-// NSAccessibilityEditedAttribute returns the string constant NSAccessibilityEditedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityEditedAttribute() objc.ID {
-	if _r := raw.NSAccessibilityEditedAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSColorListIOException returns the string constant NSColorListIOException, for use as a dictionary key or argument.
+func NSColorListIOException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSColorListIOException")))
 }
 
-// NSAccessibilityTabsAttribute returns the string constant NSAccessibilityTabsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTabsAttribute() objc.ID {
-	if _r := raw.NSAccessibilityTabsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSColorListNotEditableException returns the string constant NSColorListNotEditableException, for use as a dictionary key or argument.
+func NSColorListNotEditableException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSColorListNotEditableException")))
 }
 
-// NSAccessibilityHorizontalScrollBarAttribute returns the string constant NSAccessibilityHorizontalScrollBarAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHorizontalScrollBarAttribute() objc.ID {
-	if _r := raw.NSAccessibilityHorizontalScrollBarAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSBadBitmapParametersException returns the string constant NSBadBitmapParametersException, for use as a dictionary key or argument.
+func NSBadBitmapParametersException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSBadBitmapParametersException")))
 }
 
-// NSAccessibilityVerticalScrollBarAttribute returns the string constant NSAccessibilityVerticalScrollBarAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityVerticalScrollBarAttribute() objc.ID {
-	if _r := raw.NSAccessibilityVerticalScrollBarAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWindowServerCommunicationException returns the string constant NSWindowServerCommunicationException, for use as a dictionary key or argument.
+func NSWindowServerCommunicationException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowServerCommunicationException")))
 }
 
-// NSAccessibilityOverflowButtonAttribute returns the string constant NSAccessibilityOverflowButtonAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityOverflowButtonAttribute() objc.ID {
-	if _r := raw.NSAccessibilityOverflowButtonAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontUnavailableException returns the string constant NSFontUnavailableException, for use as a dictionary key or argument.
+func NSFontUnavailableException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontUnavailableException")))
 }
 
-// NSAccessibilityIncrementButtonAttribute returns the string constant NSAccessibilityIncrementButtonAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityIncrementButtonAttribute() objc.ID {
-	if _r := raw.NSAccessibilityIncrementButtonAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPPDIncludeNotFoundException returns the string constant NSPPDIncludeNotFoundException, for use as a dictionary key or argument.
+func NSPPDIncludeNotFoundException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPPDIncludeNotFoundException")))
 }
 
-// NSAccessibilityDecrementButtonAttribute returns the string constant NSAccessibilityDecrementButtonAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDecrementButtonAttribute() objc.ID {
-	if _r := raw.NSAccessibilityDecrementButtonAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPPDParseException returns the string constant NSPPDParseException, for use as a dictionary key or argument.
+func NSPPDParseException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPPDParseException")))
 }
 
-// NSAccessibilityFilenameAttribute returns the string constant NSAccessibilityFilenameAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityFilenameAttribute() objc.ID {
-	if _r := raw.NSAccessibilityFilenameAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPPDIncludeStackOverflowException returns the string constant NSPPDIncludeStackOverflowException, for use as a dictionary key or argument.
+func NSPPDIncludeStackOverflowException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPPDIncludeStackOverflowException")))
 }
 
-// NSAccessibilityExpandedAttribute returns the string constant NSAccessibilityExpandedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityExpandedAttribute() objc.ID {
-	if _r := raw.NSAccessibilityExpandedAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPPDIncludeStackUnderflowException returns the string constant NSPPDIncludeStackUnderflowException, for use as a dictionary key or argument.
+func NSPPDIncludeStackUnderflowException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPPDIncludeStackUnderflowException")))
 }
 
-// NSAccessibilitySelectedAttribute returns the string constant NSAccessibilitySelectedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySelectedAttribute() objc.ID {
-	if _r := raw.NSAccessibilitySelectedAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSRTFPropertyStackOverflowException returns the string constant NSRTFPropertyStackOverflowException, for use as a dictionary key or argument.
+func NSRTFPropertyStackOverflowException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRTFPropertyStackOverflowException")))
 }
 
-// NSAccessibilitySplittersAttribute returns the string constant NSAccessibilitySplittersAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySplittersAttribute() objc.ID {
-	if _r := raw.NSAccessibilitySplittersAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAppKitIgnoredException returns the string constant NSAppKitIgnoredException, for use as a dictionary key or argument.
+func NSAppKitIgnoredException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAppKitIgnoredException")))
 }
 
-// NSAccessibilityDocumentAttribute returns the string constant NSAccessibilityDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDocumentAttribute() objc.ID {
-	if _r := raw.NSAccessibilityDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSBadComparisonException returns the string constant NSBadComparisonException, for use as a dictionary key or argument.
+func NSBadComparisonException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSBadComparisonException")))
 }
 
-// NSAccessibilityActivationPointAttribute returns the string constant NSAccessibilityActivationPointAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityActivationPointAttribute() objc.ID {
-	if _r := raw.NSAccessibilityActivationPointAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageCacheException returns the string constant NSImageCacheException, for use as a dictionary key or argument.
+func NSImageCacheException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageCacheException")))
 }
 
-// NSAccessibilityURLAttribute returns the string constant NSAccessibilityURLAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityURLAttribute() objc.ID {
-	if _r := raw.NSAccessibilityURLAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSNibLoadingException returns the string constant NSNibLoadingException, for use as a dictionary key or argument.
+func NSNibLoadingException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSNibLoadingException")))
 }
 
-// NSAccessibilityIndexAttribute returns the string constant NSAccessibilityIndexAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityIndexAttribute() objc.ID {
-	if _r := raw.NSAccessibilityIndexAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSBrowserIllegalDelegateException returns the string constant NSBrowserIllegalDelegateException, for use as a dictionary key or argument.
+func NSBrowserIllegalDelegateException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSBrowserIllegalDelegateException")))
 }
 
-// NSAccessibilityRowCountAttribute returns the string constant NSAccessibilityRowCountAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRowCountAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityRowCountAttribute())
+// NSAccessibilityErrorCodeExceptionInfo returns the string constant NSAccessibilityErrorCodeExceptionInfo, for use as a dictionary key or argument.
+func NSAccessibilityErrorCodeExceptionInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityErrorCodeExceptionInfo")))
 }
 
-// NSAccessibilityColumnCountAttribute returns the string constant NSAccessibilityColumnCountAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityColumnCountAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityColumnCountAttribute())
+// NSAccessibilityRoleAttribute returns the string constant NSAccessibilityRoleAttribute, for use as a dictionary key or argument.
+func NSAccessibilityRoleAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRoleAttribute")))
 }
 
-// NSAccessibilityOrderedByRowAttribute returns the string constant NSAccessibilityOrderedByRowAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityOrderedByRowAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityOrderedByRowAttribute())
+// NSAccessibilityRoleDescriptionAttribute returns the string constant NSAccessibilityRoleDescriptionAttribute, for use as a dictionary key or argument.
+func NSAccessibilityRoleDescriptionAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRoleDescriptionAttribute")))
 }
 
-// NSAccessibilityWarningValueAttribute returns the string constant NSAccessibilityWarningValueAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityWarningValueAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityWarningValueAttribute())
+// NSAccessibilitySubroleAttribute returns the string constant NSAccessibilitySubroleAttribute, for use as a dictionary key or argument.
+func NSAccessibilitySubroleAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySubroleAttribute")))
 }
 
-// NSAccessibilityCriticalValueAttribute returns the string constant NSAccessibilityCriticalValueAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityCriticalValueAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityCriticalValueAttribute())
+// NSAccessibilityHelpAttribute returns the string constant NSAccessibilityHelpAttribute, for use as a dictionary key or argument.
+func NSAccessibilityHelpAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHelpAttribute")))
 }
 
-// NSAccessibilityPlaceholderValueAttribute returns the string constant NSAccessibilityPlaceholderValueAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityPlaceholderValueAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityPlaceholderValueAttribute())
+// NSAccessibilityValueAttribute returns the string constant NSAccessibilityValueAttribute, for use as a dictionary key or argument.
+func NSAccessibilityValueAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityValueAttribute")))
 }
 
-// NSAccessibilityContainsProtectedContentAttribute returns the string constant NSAccessibilityContainsProtectedContentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityContainsProtectedContentAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityContainsProtectedContentAttribute())
+// NSAccessibilityMinValueAttribute returns the string constant NSAccessibilityMinValueAttribute, for use as a dictionary key or argument.
+func NSAccessibilityMinValueAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMinValueAttribute")))
 }
 
-// NSAccessibilityAlternateUIVisibleAttribute returns the string constant NSAccessibilityAlternateUIVisibleAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityAlternateUIVisibleAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityAlternateUIVisibleAttribute())
+// NSAccessibilityMaxValueAttribute returns the string constant NSAccessibilityMaxValueAttribute, for use as a dictionary key or argument.
+func NSAccessibilityMaxValueAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMaxValueAttribute")))
 }
 
-// NSAccessibilityRequiredAttribute returns the string constant NSAccessibilityRequiredAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRequiredAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityRequiredAttribute())
+// NSAccessibilityEnabledAttribute returns the string constant NSAccessibilityEnabledAttribute, for use as a dictionary key or argument.
+func NSAccessibilityEnabledAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityEnabledAttribute")))
 }
 
-// NSAccessibilityAutoInteractableAttribute returns the string constant NSAccessibilityAutoInteractableAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityAutoInteractableAttribute() objc.ID {
-	if _r := raw.NSAccessibilityAutoInteractableAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityFocusedAttribute returns the string constant NSAccessibilityFocusedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityFocusedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFocusedAttribute")))
 }
 
-// NSAccessibilityDateTimeComponentsAttribute returns the string constant NSAccessibilityDateTimeComponentsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDateTimeComponentsAttribute() objc.ID {
-	if _r := raw.NSAccessibilityDateTimeComponentsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityParentAttribute returns the string constant NSAccessibilityParentAttribute, for use as a dictionary key or argument.
+func NSAccessibilityParentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityParentAttribute")))
 }
 
-// NSAccessibilityEmbeddedImageDescriptionAttribute returns the string constant NSAccessibilityEmbeddedImageDescriptionAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityEmbeddedImageDescriptionAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityEmbeddedImageDescriptionAttribute())
+// NSAccessibilityChildrenAttribute returns the string constant NSAccessibilityChildrenAttribute, for use as a dictionary key or argument.
+func NSAccessibilityChildrenAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityChildrenAttribute")))
 }
 
-// NSAccessibilityPathAttribute returns the string constant NSAccessibilityPathAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityPathAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityPathAttribute())
+// NSAccessibilityWindowAttribute returns the string constant NSAccessibilityWindowAttribute, for use as a dictionary key or argument.
+func NSAccessibilityWindowAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityWindowAttribute")))
 }
 
-// NSAccessibilityTextInputMarkedRangeAttribute returns the string constant NSAccessibilityTextInputMarkedRangeAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTextInputMarkedRangeAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityTextInputMarkedRangeAttribute())
+// NSAccessibilityTopLevelUIElementAttribute returns the string constant NSAccessibilityTopLevelUIElementAttribute, for use as a dictionary key or argument.
+func NSAccessibilityTopLevelUIElementAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTopLevelUIElementAttribute")))
 }
 
-// NSAccessibilityBlockQuoteLevelAttribute returns the string constant NSAccessibilityBlockQuoteLevelAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityBlockQuoteLevelAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityBlockQuoteLevelAttribute())
+// NSAccessibilitySelectedChildrenAttribute returns the string constant NSAccessibilitySelectedChildrenAttribute, for use as a dictionary key or argument.
+func NSAccessibilitySelectedChildrenAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySelectedChildrenAttribute")))
 }
 
-// NSAccessibilityHeadingLevelAttribute returns the string constant NSAccessibilityHeadingLevelAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHeadingLevelAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityHeadingLevelAttribute())
+// NSAccessibilityVisibleChildrenAttribute returns the string constant NSAccessibilityVisibleChildrenAttribute, for use as a dictionary key or argument.
+func NSAccessibilityVisibleChildrenAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityVisibleChildrenAttribute")))
 }
 
-// NSAccessibilityLanguageAttribute returns the string constant NSAccessibilityLanguageAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityLanguageAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityLanguageAttribute())
+// NSAccessibilityPositionAttribute returns the string constant NSAccessibilityPositionAttribute, for use as a dictionary key or argument.
+func NSAccessibilityPositionAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityPositionAttribute")))
 }
 
-// NSAccessibilityVisitedAttribute returns the string constant NSAccessibilityVisitedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityVisitedAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityVisitedAttribute())
+// NSAccessibilitySizeAttribute returns the string constant NSAccessibilitySizeAttribute, for use as a dictionary key or argument.
+func NSAccessibilitySizeAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySizeAttribute")))
 }
 
-// NSAccessibilityTitleUIElementAttribute returns the string constant NSAccessibilityTitleUIElementAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTitleUIElementAttribute() objc.ID {
-	if _r := raw.NSAccessibilityTitleUIElementAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityContentsAttribute returns the string constant NSAccessibilityContentsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityContentsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityContentsAttribute")))
 }
 
-// NSAccessibilityServesAsTitleForUIElementsAttribute returns the string constant NSAccessibilityServesAsTitleForUIElementsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityServesAsTitleForUIElementsAttribute() objc.ID {
-	if _r := raw.NSAccessibilityServesAsTitleForUIElementsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityTitleAttribute returns the string constant NSAccessibilityTitleAttribute, for use as a dictionary key or argument.
+func NSAccessibilityTitleAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTitleAttribute")))
 }
 
-// NSAccessibilityLinkedUIElementsAttribute returns the string constant NSAccessibilityLinkedUIElementsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityLinkedUIElementsAttribute() objc.ID {
-	if _r := raw.NSAccessibilityLinkedUIElementsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityDescriptionAttribute returns the string constant NSAccessibilityDescriptionAttribute, for use as a dictionary key or argument.
+func NSAccessibilityDescriptionAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDescriptionAttribute")))
 }
 
-// NSAccessibilitySelectedTextAttribute returns the string constant NSAccessibilitySelectedTextAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySelectedTextAttribute() objc.ID {
-	if _r := raw.NSAccessibilitySelectedTextAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityShownMenuAttribute returns the string constant NSAccessibilityShownMenuAttribute, for use as a dictionary key or argument.
+func NSAccessibilityShownMenuAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityShownMenuAttribute")))
 }
 
-// NSAccessibilitySelectedTextRangeAttribute returns the string constant NSAccessibilitySelectedTextRangeAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySelectedTextRangeAttribute() objc.ID {
-	if _r := raw.NSAccessibilitySelectedTextRangeAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityValueDescriptionAttribute returns the string constant NSAccessibilityValueDescriptionAttribute, for use as a dictionary key or argument.
+func NSAccessibilityValueDescriptionAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityValueDescriptionAttribute")))
 }
 
-// NSAccessibilityNumberOfCharactersAttribute returns the string constant NSAccessibilityNumberOfCharactersAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityNumberOfCharactersAttribute() objc.ID {
-	if _r := raw.NSAccessibilityNumberOfCharactersAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySharedFocusElementsAttribute returns the string constant NSAccessibilitySharedFocusElementsAttribute, for use as a dictionary key or argument.
+func NSAccessibilitySharedFocusElementsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySharedFocusElementsAttribute")))
 }
 
-// NSAccessibilityVisibleCharacterRangeAttribute returns the string constant NSAccessibilityVisibleCharacterRangeAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityVisibleCharacterRangeAttribute() objc.ID {
-	if _r := raw.NSAccessibilityVisibleCharacterRangeAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityPreviousContentsAttribute returns the string constant NSAccessibilityPreviousContentsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityPreviousContentsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityPreviousContentsAttribute")))
 }
 
-// NSAccessibilitySharedTextUIElementsAttribute returns the string constant NSAccessibilitySharedTextUIElementsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySharedTextUIElementsAttribute() objc.ID {
-	if _r := raw.NSAccessibilitySharedTextUIElementsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityNextContentsAttribute returns the string constant NSAccessibilityNextContentsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityNextContentsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityNextContentsAttribute")))
 }
 
-// NSAccessibilitySharedCharacterRangeAttribute returns the string constant NSAccessibilitySharedCharacterRangeAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySharedCharacterRangeAttribute() objc.ID {
-	if _r := raw.NSAccessibilitySharedCharacterRangeAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityHeaderAttribute returns the string constant NSAccessibilityHeaderAttribute, for use as a dictionary key or argument.
+func NSAccessibilityHeaderAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHeaderAttribute")))
 }
 
-// NSAccessibilityInsertionPointLineNumberAttribute returns the string constant NSAccessibilityInsertionPointLineNumberAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityInsertionPointLineNumberAttribute() objc.ID {
-	if _r := raw.NSAccessibilityInsertionPointLineNumberAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityEditedAttribute returns the string constant NSAccessibilityEditedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityEditedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityEditedAttribute")))
 }
 
-// NSAccessibilitySelectedTextRangesAttribute returns the string constant NSAccessibilitySelectedTextRangesAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySelectedTextRangesAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySelectedTextRangesAttribute())
+// NSAccessibilityTabsAttribute returns the string constant NSAccessibilityTabsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityTabsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTabsAttribute")))
 }
 
-// NSAccessibilityLineForIndexParameterizedAttribute returns the string constant NSAccessibilityLineForIndexParameterizedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityLineForIndexParameterizedAttribute() objc.ID {
-	if _r := raw.NSAccessibilityLineForIndexParameterizedAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityHorizontalScrollBarAttribute returns the string constant NSAccessibilityHorizontalScrollBarAttribute, for use as a dictionary key or argument.
+func NSAccessibilityHorizontalScrollBarAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHorizontalScrollBarAttribute")))
 }
 
-// NSAccessibilityRangeForLineParameterizedAttribute returns the string constant NSAccessibilityRangeForLineParameterizedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRangeForLineParameterizedAttribute() objc.ID {
-	if _r := raw.NSAccessibilityRangeForLineParameterizedAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityVerticalScrollBarAttribute returns the string constant NSAccessibilityVerticalScrollBarAttribute, for use as a dictionary key or argument.
+func NSAccessibilityVerticalScrollBarAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityVerticalScrollBarAttribute")))
 }
 
-// NSAccessibilityStringForRangeParameterizedAttribute returns the string constant NSAccessibilityStringForRangeParameterizedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityStringForRangeParameterizedAttribute() objc.ID {
-	if _r := raw.NSAccessibilityStringForRangeParameterizedAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityOverflowButtonAttribute returns the string constant NSAccessibilityOverflowButtonAttribute, for use as a dictionary key or argument.
+func NSAccessibilityOverflowButtonAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityOverflowButtonAttribute")))
 }
 
-// NSAccessibilityRangeForPositionParameterizedAttribute returns the string constant NSAccessibilityRangeForPositionParameterizedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRangeForPositionParameterizedAttribute() objc.ID {
-	if _r := raw.NSAccessibilityRangeForPositionParameterizedAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityIncrementButtonAttribute returns the string constant NSAccessibilityIncrementButtonAttribute, for use as a dictionary key or argument.
+func NSAccessibilityIncrementButtonAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityIncrementButtonAttribute")))
 }
 
-// NSAccessibilityRangeForIndexParameterizedAttribute returns the string constant NSAccessibilityRangeForIndexParameterizedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRangeForIndexParameterizedAttribute() objc.ID {
-	if _r := raw.NSAccessibilityRangeForIndexParameterizedAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityDecrementButtonAttribute returns the string constant NSAccessibilityDecrementButtonAttribute, for use as a dictionary key or argument.
+func NSAccessibilityDecrementButtonAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDecrementButtonAttribute")))
 }
 
-// NSAccessibilityBoundsForRangeParameterizedAttribute returns the string constant NSAccessibilityBoundsForRangeParameterizedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityBoundsForRangeParameterizedAttribute() objc.ID {
-	if _r := raw.NSAccessibilityBoundsForRangeParameterizedAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityFilenameAttribute returns the string constant NSAccessibilityFilenameAttribute, for use as a dictionary key or argument.
+func NSAccessibilityFilenameAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFilenameAttribute")))
 }
 
-// NSAccessibilityRTFForRangeParameterizedAttribute returns the string constant NSAccessibilityRTFForRangeParameterizedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRTFForRangeParameterizedAttribute() objc.ID {
-	if _r := raw.NSAccessibilityRTFForRangeParameterizedAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityExpandedAttribute returns the string constant NSAccessibilityExpandedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityExpandedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityExpandedAttribute")))
 }
 
-// NSAccessibilityStyleRangeForIndexParameterizedAttribute returns the string constant NSAccessibilityStyleRangeForIndexParameterizedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityStyleRangeForIndexParameterizedAttribute() objc.ID {
-	if _r := raw.NSAccessibilityStyleRangeForIndexParameterizedAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySelectedAttribute returns the string constant NSAccessibilitySelectedAttribute, for use as a dictionary key or argument.
+func NSAccessibilitySelectedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySelectedAttribute")))
 }
 
-// NSAccessibilityAttributedStringForRangeParameterizedAttribute returns the string constant NSAccessibilityAttributedStringForRangeParameterizedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityAttributedStringForRangeParameterizedAttribute() objc.ID {
-	if _r := raw.NSAccessibilityAttributedStringForRangeParameterizedAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySplittersAttribute returns the string constant NSAccessibilitySplittersAttribute, for use as a dictionary key or argument.
+func NSAccessibilitySplittersAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySplittersAttribute")))
 }
 
-// NSAccessibilityFontTextAttribute returns the string constant NSAccessibilityFontTextAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityFontTextAttribute() objc.ID {
-	if _r := raw.NSAccessibilityFontTextAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityDocumentAttribute returns the string constant NSAccessibilityDocumentAttribute, for use as a dictionary key or argument.
+func NSAccessibilityDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDocumentAttribute")))
 }
 
-// NSAccessibilityForegroundColorTextAttribute returns the string constant NSAccessibilityForegroundColorTextAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityForegroundColorTextAttribute() objc.ID {
-	if _r := raw.NSAccessibilityForegroundColorTextAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityActivationPointAttribute returns the string constant NSAccessibilityActivationPointAttribute, for use as a dictionary key or argument.
+func NSAccessibilityActivationPointAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityActivationPointAttribute")))
 }
 
-// NSAccessibilityBackgroundColorTextAttribute returns the string constant NSAccessibilityBackgroundColorTextAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityBackgroundColorTextAttribute() objc.ID {
-	if _r := raw.NSAccessibilityBackgroundColorTextAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityURLAttribute returns the string constant NSAccessibilityURLAttribute, for use as a dictionary key or argument.
+func NSAccessibilityURLAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityURLAttribute")))
 }
 
-// NSAccessibilityUnderlineColorTextAttribute returns the string constant NSAccessibilityUnderlineColorTextAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityUnderlineColorTextAttribute() objc.ID {
-	if _r := raw.NSAccessibilityUnderlineColorTextAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityIndexAttribute returns the string constant NSAccessibilityIndexAttribute, for use as a dictionary key or argument.
+func NSAccessibilityIndexAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityIndexAttribute")))
 }
 
-// NSAccessibilityStrikethroughColorTextAttribute returns the string constant NSAccessibilityStrikethroughColorTextAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityStrikethroughColorTextAttribute() objc.ID {
-	if _r := raw.NSAccessibilityStrikethroughColorTextAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityRowCountAttribute returns the string constant NSAccessibilityRowCountAttribute, for use as a dictionary key or argument.
+func NSAccessibilityRowCountAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRowCountAttribute")))
 }
 
-// NSAccessibilityUnderlineTextAttribute returns the string constant NSAccessibilityUnderlineTextAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityUnderlineTextAttribute() objc.ID {
-	if _r := raw.NSAccessibilityUnderlineTextAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityColumnCountAttribute returns the string constant NSAccessibilityColumnCountAttribute, for use as a dictionary key or argument.
+func NSAccessibilityColumnCountAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityColumnCountAttribute")))
 }
 
-// NSAccessibilitySuperscriptTextAttribute returns the string constant NSAccessibilitySuperscriptTextAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySuperscriptTextAttribute() objc.ID {
-	if _r := raw.NSAccessibilitySuperscriptTextAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityOrderedByRowAttribute returns the string constant NSAccessibilityOrderedByRowAttribute, for use as a dictionary key or argument.
+func NSAccessibilityOrderedByRowAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityOrderedByRowAttribute")))
 }
 
-// NSAccessibilityStrikethroughTextAttribute returns the string constant NSAccessibilityStrikethroughTextAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityStrikethroughTextAttribute() objc.ID {
-	if _r := raw.NSAccessibilityStrikethroughTextAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityWarningValueAttribute returns the string constant NSAccessibilityWarningValueAttribute, for use as a dictionary key or argument.
+func NSAccessibilityWarningValueAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityWarningValueAttribute")))
 }
 
-// NSAccessibilityShadowTextAttribute returns the string constant NSAccessibilityShadowTextAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityShadowTextAttribute() objc.ID {
-	if _r := raw.NSAccessibilityShadowTextAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityCriticalValueAttribute returns the string constant NSAccessibilityCriticalValueAttribute, for use as a dictionary key or argument.
+func NSAccessibilityCriticalValueAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityCriticalValueAttribute")))
 }
 
-// NSAccessibilityAttachmentTextAttribute returns the string constant NSAccessibilityAttachmentTextAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityAttachmentTextAttribute() objc.ID {
-	if _r := raw.NSAccessibilityAttachmentTextAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityPlaceholderValueAttribute returns the string constant NSAccessibilityPlaceholderValueAttribute, for use as a dictionary key or argument.
+func NSAccessibilityPlaceholderValueAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityPlaceholderValueAttribute")))
 }
 
-// NSAccessibilityLinkTextAttribute returns the string constant NSAccessibilityLinkTextAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityLinkTextAttribute() objc.ID {
-	if _r := raw.NSAccessibilityLinkTextAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityContainsProtectedContentAttribute returns the string constant NSAccessibilityContainsProtectedContentAttribute, for use as a dictionary key or argument.
+func NSAccessibilityContainsProtectedContentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityContainsProtectedContentAttribute")))
 }
 
-// NSAccessibilityChildrenInNavigationOrderAttribute returns the string constant NSAccessibilityChildrenInNavigationOrderAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityChildrenInNavigationOrderAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityChildrenInNavigationOrderAttribute())
+// NSAccessibilityAlternateUIVisibleAttribute returns the string constant NSAccessibilityAlternateUIVisibleAttribute, for use as a dictionary key or argument.
+func NSAccessibilityAlternateUIVisibleAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityAlternateUIVisibleAttribute")))
 }
 
-// NSAccessibilityIndexForChildUIElementAttribute returns the string constant NSAccessibilityIndexForChildUIElementAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityIndexForChildUIElementAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityIndexForChildUIElementAttribute())
+// NSAccessibilityRequiredAttribute returns the string constant NSAccessibilityRequiredAttribute, for use as a dictionary key or argument.
+func NSAccessibilityRequiredAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRequiredAttribute")))
 }
 
-// NSAccessibilityIndexForChildUIElementInNavigationOrderAttribute returns the string constant NSAccessibilityIndexForChildUIElementInNavigationOrderAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityIndexForChildUIElementInNavigationOrderAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityIndexForChildUIElementInNavigationOrderAttribute())
+// NSAccessibilityAutoInteractableAttribute returns the string constant NSAccessibilityAutoInteractableAttribute, for use as a dictionary key or argument.
+func NSAccessibilityAutoInteractableAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityAutoInteractableAttribute")))
 }
 
-// NSAccessibilityMisspelledTextAttribute returns the string constant NSAccessibilityMisspelledTextAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMisspelledTextAttribute() objc.ID {
-	if _r := raw.NSAccessibilityMisspelledTextAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityDateTimeComponentsAttribute returns the string constant NSAccessibilityDateTimeComponentsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityDateTimeComponentsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDateTimeComponentsAttribute")))
 }
 
-// NSAccessibilityTextCompletionAttribute returns the string constant NSAccessibilityTextCompletionAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTextCompletionAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityTextCompletionAttribute())
+// NSAccessibilityEmbeddedImageDescriptionAttribute returns the string constant NSAccessibilityEmbeddedImageDescriptionAttribute, for use as a dictionary key or argument.
+func NSAccessibilityEmbeddedImageDescriptionAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityEmbeddedImageDescriptionAttribute")))
 }
 
-// NSAccessibilityAnnotationLabel returns the string constant NSAccessibilityAnnotationLabel as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityAnnotationLabel() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityAnnotationLabel())
+// NSAccessibilityPathAttribute returns the string constant NSAccessibilityPathAttribute, for use as a dictionary key or argument.
+func NSAccessibilityPathAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityPathAttribute")))
 }
 
-// NSAccessibilityAnnotationElement returns the string constant NSAccessibilityAnnotationElement as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityAnnotationElement() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityAnnotationElement())
+// NSAccessibilityTextInputMarkedRangeAttribute returns the string constant NSAccessibilityTextInputMarkedRangeAttribute, for use as a dictionary key or argument.
+func NSAccessibilityTextInputMarkedRangeAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTextInputMarkedRangeAttribute")))
 }
 
-// NSAccessibilityAnnotationLocation returns the string constant NSAccessibilityAnnotationLocation as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityAnnotationLocation() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityAnnotationLocation())
+// NSAccessibilityBlockQuoteLevelAttribute returns the string constant NSAccessibilityBlockQuoteLevelAttribute, for use as a dictionary key or argument.
+func NSAccessibilityBlockQuoteLevelAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityBlockQuoteLevelAttribute")))
 }
 
-// NSAccessibilityFontNameKey returns the string constant NSAccessibilityFontNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityFontNameKey() objc.ID {
-	if _r := raw.NSAccessibilityFontNameKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityHeadingLevelAttribute returns the string constant NSAccessibilityHeadingLevelAttribute, for use as a dictionary key or argument.
+func NSAccessibilityHeadingLevelAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHeadingLevelAttribute")))
 }
 
-// NSAccessibilityFontFamilyKey returns the string constant NSAccessibilityFontFamilyKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityFontFamilyKey() objc.ID {
-	if _r := raw.NSAccessibilityFontFamilyKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityLanguageAttribute returns the string constant NSAccessibilityLanguageAttribute, for use as a dictionary key or argument.
+func NSAccessibilityLanguageAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLanguageAttribute")))
 }
 
-// NSAccessibilityVisibleNameKey returns the string constant NSAccessibilityVisibleNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityVisibleNameKey() objc.ID {
-	if _r := raw.NSAccessibilityVisibleNameKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityVisitedAttribute returns the string constant NSAccessibilityVisitedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityVisitedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityVisitedAttribute")))
 }
 
-// NSAccessibilityFontSizeKey returns the string constant NSAccessibilityFontSizeKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityFontSizeKey() objc.ID {
-	if _r := raw.NSAccessibilityFontSizeKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityTitleUIElementAttribute returns the string constant NSAccessibilityTitleUIElementAttribute, for use as a dictionary key or argument.
+func NSAccessibilityTitleUIElementAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTitleUIElementAttribute")))
 }
 
-// NSAccessibilityMainAttribute returns the string constant NSAccessibilityMainAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMainAttribute() objc.ID {
-	if _r := raw.NSAccessibilityMainAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityServesAsTitleForUIElementsAttribute returns the string constant NSAccessibilityServesAsTitleForUIElementsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityServesAsTitleForUIElementsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityServesAsTitleForUIElementsAttribute")))
 }
 
-// NSAccessibilityMinimizedAttribute returns the string constant NSAccessibilityMinimizedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMinimizedAttribute() objc.ID {
-	if _r := raw.NSAccessibilityMinimizedAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityLinkedUIElementsAttribute returns the string constant NSAccessibilityLinkedUIElementsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityLinkedUIElementsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLinkedUIElementsAttribute")))
 }
 
-// NSAccessibilityCloseButtonAttribute returns the string constant NSAccessibilityCloseButtonAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityCloseButtonAttribute() objc.ID {
-	if _r := raw.NSAccessibilityCloseButtonAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySelectedTextAttribute returns the string constant NSAccessibilitySelectedTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilitySelectedTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySelectedTextAttribute")))
 }
 
-// NSAccessibilityZoomButtonAttribute returns the string constant NSAccessibilityZoomButtonAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityZoomButtonAttribute() objc.ID {
-	if _r := raw.NSAccessibilityZoomButtonAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySelectedTextRangeAttribute returns the string constant NSAccessibilitySelectedTextRangeAttribute, for use as a dictionary key or argument.
+func NSAccessibilitySelectedTextRangeAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySelectedTextRangeAttribute")))
 }
 
-// NSAccessibilityMinimizeButtonAttribute returns the string constant NSAccessibilityMinimizeButtonAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMinimizeButtonAttribute() objc.ID {
-	if _r := raw.NSAccessibilityMinimizeButtonAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityNumberOfCharactersAttribute returns the string constant NSAccessibilityNumberOfCharactersAttribute, for use as a dictionary key or argument.
+func NSAccessibilityNumberOfCharactersAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityNumberOfCharactersAttribute")))
 }
 
-// NSAccessibilityToolbarButtonAttribute returns the string constant NSAccessibilityToolbarButtonAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityToolbarButtonAttribute() objc.ID {
-	if _r := raw.NSAccessibilityToolbarButtonAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityVisibleCharacterRangeAttribute returns the string constant NSAccessibilityVisibleCharacterRangeAttribute, for use as a dictionary key or argument.
+func NSAccessibilityVisibleCharacterRangeAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityVisibleCharacterRangeAttribute")))
 }
 
-// NSAccessibilityProxyAttribute returns the string constant NSAccessibilityProxyAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityProxyAttribute() objc.ID {
-	if _r := raw.NSAccessibilityProxyAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySharedTextUIElementsAttribute returns the string constant NSAccessibilitySharedTextUIElementsAttribute, for use as a dictionary key or argument.
+func NSAccessibilitySharedTextUIElementsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySharedTextUIElementsAttribute")))
 }
 
-// NSAccessibilityGrowAreaAttribute returns the string constant NSAccessibilityGrowAreaAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityGrowAreaAttribute() objc.ID {
-	if _r := raw.NSAccessibilityGrowAreaAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySharedCharacterRangeAttribute returns the string constant NSAccessibilitySharedCharacterRangeAttribute, for use as a dictionary key or argument.
+func NSAccessibilitySharedCharacterRangeAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySharedCharacterRangeAttribute")))
 }
 
-// NSAccessibilityModalAttribute returns the string constant NSAccessibilityModalAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityModalAttribute() objc.ID {
-	if _r := raw.NSAccessibilityModalAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityInsertionPointLineNumberAttribute returns the string constant NSAccessibilityInsertionPointLineNumberAttribute, for use as a dictionary key or argument.
+func NSAccessibilityInsertionPointLineNumberAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityInsertionPointLineNumberAttribute")))
 }
 
-// NSAccessibilityDefaultButtonAttribute returns the string constant NSAccessibilityDefaultButtonAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDefaultButtonAttribute() objc.ID {
-	if _r := raw.NSAccessibilityDefaultButtonAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySelectedTextRangesAttribute returns the string constant NSAccessibilitySelectedTextRangesAttribute, for use as a dictionary key or argument.
+func NSAccessibilitySelectedTextRangesAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySelectedTextRangesAttribute")))
 }
 
-// NSAccessibilityCancelButtonAttribute returns the string constant NSAccessibilityCancelButtonAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityCancelButtonAttribute() objc.ID {
-	if _r := raw.NSAccessibilityCancelButtonAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityLineForIndexParameterizedAttribute returns the string constant NSAccessibilityLineForIndexParameterizedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityLineForIndexParameterizedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLineForIndexParameterizedAttribute")))
 }
 
-// NSAccessibilityFullScreenButtonAttribute returns the string constant NSAccessibilityFullScreenButtonAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityFullScreenButtonAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityFullScreenButtonAttribute())
+// NSAccessibilityRangeForLineParameterizedAttribute returns the string constant NSAccessibilityRangeForLineParameterizedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityRangeForLineParameterizedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRangeForLineParameterizedAttribute")))
 }
 
-// NSAccessibilityMenuBarAttribute returns the string constant NSAccessibilityMenuBarAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMenuBarAttribute() objc.ID {
-	if _r := raw.NSAccessibilityMenuBarAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityStringForRangeParameterizedAttribute returns the string constant NSAccessibilityStringForRangeParameterizedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityStringForRangeParameterizedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityStringForRangeParameterizedAttribute")))
 }
 
-// NSAccessibilityWindowsAttribute returns the string constant NSAccessibilityWindowsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityWindowsAttribute() objc.ID {
-	if _r := raw.NSAccessibilityWindowsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityRangeForPositionParameterizedAttribute returns the string constant NSAccessibilityRangeForPositionParameterizedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityRangeForPositionParameterizedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRangeForPositionParameterizedAttribute")))
 }
 
-// NSAccessibilityFrontmostAttribute returns the string constant NSAccessibilityFrontmostAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityFrontmostAttribute() objc.ID {
-	if _r := raw.NSAccessibilityFrontmostAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityRangeForIndexParameterizedAttribute returns the string constant NSAccessibilityRangeForIndexParameterizedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityRangeForIndexParameterizedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRangeForIndexParameterizedAttribute")))
 }
 
-// NSAccessibilityHiddenAttribute returns the string constant NSAccessibilityHiddenAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHiddenAttribute() objc.ID {
-	if _r := raw.NSAccessibilityHiddenAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityBoundsForRangeParameterizedAttribute returns the string constant NSAccessibilityBoundsForRangeParameterizedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityBoundsForRangeParameterizedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityBoundsForRangeParameterizedAttribute")))
 }
 
-// NSAccessibilityMainWindowAttribute returns the string constant NSAccessibilityMainWindowAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMainWindowAttribute() objc.ID {
-	if _r := raw.NSAccessibilityMainWindowAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityRTFForRangeParameterizedAttribute returns the string constant NSAccessibilityRTFForRangeParameterizedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityRTFForRangeParameterizedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRTFForRangeParameterizedAttribute")))
 }
 
-// NSAccessibilityFocusedWindowAttribute returns the string constant NSAccessibilityFocusedWindowAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityFocusedWindowAttribute() objc.ID {
-	if _r := raw.NSAccessibilityFocusedWindowAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityStyleRangeForIndexParameterizedAttribute returns the string constant NSAccessibilityStyleRangeForIndexParameterizedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityStyleRangeForIndexParameterizedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityStyleRangeForIndexParameterizedAttribute")))
 }
 
-// NSAccessibilityFocusedUIElementAttribute returns the string constant NSAccessibilityFocusedUIElementAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityFocusedUIElementAttribute() objc.ID {
-	if _r := raw.NSAccessibilityFocusedUIElementAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityAttributedStringForRangeParameterizedAttribute returns the string constant NSAccessibilityAttributedStringForRangeParameterizedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityAttributedStringForRangeParameterizedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityAttributedStringForRangeParameterizedAttribute")))
 }
 
-// NSAccessibilityExtrasMenuBarAttribute returns the string constant NSAccessibilityExtrasMenuBarAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityExtrasMenuBarAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityExtrasMenuBarAttribute())
+// NSAccessibilityFontTextAttribute returns the string constant NSAccessibilityFontTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityFontTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFontTextAttribute")))
 }
 
-// NSAccessibilityOrientationAttribute returns the string constant NSAccessibilityOrientationAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityOrientationAttribute() objc.ID {
-	if _r := raw.NSAccessibilityOrientationAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityForegroundColorTextAttribute returns the string constant NSAccessibilityForegroundColorTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityForegroundColorTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityForegroundColorTextAttribute")))
 }
 
-// NSAccessibilityVerticalOrientationValue returns the string constant NSAccessibilityVerticalOrientationValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityVerticalOrientationValue() objc.ID {
-	if _r := raw.NSAccessibilityVerticalOrientationValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityBackgroundColorTextAttribute returns the string constant NSAccessibilityBackgroundColorTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityBackgroundColorTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityBackgroundColorTextAttribute")))
 }
 
-// NSAccessibilityHorizontalOrientationValue returns the string constant NSAccessibilityHorizontalOrientationValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHorizontalOrientationValue() objc.ID {
-	if _r := raw.NSAccessibilityHorizontalOrientationValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityUnderlineColorTextAttribute returns the string constant NSAccessibilityUnderlineColorTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityUnderlineColorTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityUnderlineColorTextAttribute")))
 }
 
-// NSAccessibilityUnknownOrientationValue returns the string constant NSAccessibilityUnknownOrientationValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityUnknownOrientationValue() objc.ID {
-	if _r := raw.NSAccessibilityUnknownOrientationValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityStrikethroughColorTextAttribute returns the string constant NSAccessibilityStrikethroughColorTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityStrikethroughColorTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityStrikethroughColorTextAttribute")))
 }
 
-// NSAccessibilityColumnTitlesAttribute returns the string constant NSAccessibilityColumnTitlesAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityColumnTitlesAttribute() objc.ID {
-	if _r := raw.NSAccessibilityColumnTitlesAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityUnderlineTextAttribute returns the string constant NSAccessibilityUnderlineTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityUnderlineTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityUnderlineTextAttribute")))
 }
 
-// NSAccessibilitySearchButtonAttribute returns the string constant NSAccessibilitySearchButtonAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySearchButtonAttribute() objc.ID {
-	if _r := raw.NSAccessibilitySearchButtonAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySuperscriptTextAttribute returns the string constant NSAccessibilitySuperscriptTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilitySuperscriptTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySuperscriptTextAttribute")))
 }
 
-// NSAccessibilitySearchMenuAttribute returns the string constant NSAccessibilitySearchMenuAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySearchMenuAttribute() objc.ID {
-	if _r := raw.NSAccessibilitySearchMenuAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityStrikethroughTextAttribute returns the string constant NSAccessibilityStrikethroughTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityStrikethroughTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityStrikethroughTextAttribute")))
 }
 
-// NSAccessibilityClearButtonAttribute returns the string constant NSAccessibilityClearButtonAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityClearButtonAttribute() objc.ID {
-	if _r := raw.NSAccessibilityClearButtonAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityShadowTextAttribute returns the string constant NSAccessibilityShadowTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityShadowTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityShadowTextAttribute")))
 }
 
-// NSAccessibilityRowsAttribute returns the string constant NSAccessibilityRowsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRowsAttribute() objc.ID {
-	if _r := raw.NSAccessibilityRowsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityAttachmentTextAttribute returns the string constant NSAccessibilityAttachmentTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityAttachmentTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityAttachmentTextAttribute")))
 }
 
-// NSAccessibilityVisibleRowsAttribute returns the string constant NSAccessibilityVisibleRowsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityVisibleRowsAttribute() objc.ID {
-	if _r := raw.NSAccessibilityVisibleRowsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityLinkTextAttribute returns the string constant NSAccessibilityLinkTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityLinkTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLinkTextAttribute")))
 }
 
-// NSAccessibilitySelectedRowsAttribute returns the string constant NSAccessibilitySelectedRowsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySelectedRowsAttribute() objc.ID {
-	if _r := raw.NSAccessibilitySelectedRowsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityChildrenInNavigationOrderAttribute returns the string constant NSAccessibilityChildrenInNavigationOrderAttribute, for use as a dictionary key or argument.
+func NSAccessibilityChildrenInNavigationOrderAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityChildrenInNavigationOrderAttribute")))
 }
 
-// NSAccessibilityColumnsAttribute returns the string constant NSAccessibilityColumnsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityColumnsAttribute() objc.ID {
-	if _r := raw.NSAccessibilityColumnsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityIndexForChildUIElementAttribute returns the string constant NSAccessibilityIndexForChildUIElementAttribute, for use as a dictionary key or argument.
+func NSAccessibilityIndexForChildUIElementAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityIndexForChildUIElementAttribute")))
 }
 
-// NSAccessibilityVisibleColumnsAttribute returns the string constant NSAccessibilityVisibleColumnsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityVisibleColumnsAttribute() objc.ID {
-	if _r := raw.NSAccessibilityVisibleColumnsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityIndexForChildUIElementInNavigationOrderAttribute returns the string constant NSAccessibilityIndexForChildUIElementInNavigationOrderAttribute, for use as a dictionary key or argument.
+func NSAccessibilityIndexForChildUIElementInNavigationOrderAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityIndexForChildUIElementInNavigationOrderAttribute")))
 }
 
-// NSAccessibilitySelectedColumnsAttribute returns the string constant NSAccessibilitySelectedColumnsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySelectedColumnsAttribute() objc.ID {
-	if _r := raw.NSAccessibilitySelectedColumnsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityMisspelledTextAttribute returns the string constant NSAccessibilityMisspelledTextAttribute, for use as a dictionary key or argument.
+func NSAccessibilityMisspelledTextAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMisspelledTextAttribute")))
 }
 
-// NSAccessibilitySortDirectionAttribute returns the string constant NSAccessibilitySortDirectionAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySortDirectionAttribute() objc.ID {
-	if _r := raw.NSAccessibilitySortDirectionAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityTextCompletionAttribute returns the string constant NSAccessibilityTextCompletionAttribute, for use as a dictionary key or argument.
+func NSAccessibilityTextCompletionAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTextCompletionAttribute")))
 }
 
-// NSAccessibilitySelectedCellsAttribute returns the string constant NSAccessibilitySelectedCellsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySelectedCellsAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySelectedCellsAttribute())
+// NSAccessibilityAnnotationLabel returns the string constant NSAccessibilityAnnotationLabel, for use as a dictionary key or argument.
+func NSAccessibilityAnnotationLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityAnnotationLabel")))
 }
 
-// NSAccessibilityVisibleCellsAttribute returns the string constant NSAccessibilityVisibleCellsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityVisibleCellsAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityVisibleCellsAttribute())
+// NSAccessibilityAnnotationElement returns the string constant NSAccessibilityAnnotationElement, for use as a dictionary key or argument.
+func NSAccessibilityAnnotationElement() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityAnnotationElement")))
 }
 
-// NSAccessibilityRowHeaderUIElementsAttribute returns the string constant NSAccessibilityRowHeaderUIElementsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRowHeaderUIElementsAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityRowHeaderUIElementsAttribute())
+// NSAccessibilityAnnotationLocation returns the string constant NSAccessibilityAnnotationLocation, for use as a dictionary key or argument.
+func NSAccessibilityAnnotationLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityAnnotationLocation")))
 }
 
-// NSAccessibilityColumnHeaderUIElementsAttribute returns the string constant NSAccessibilityColumnHeaderUIElementsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityColumnHeaderUIElementsAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityColumnHeaderUIElementsAttribute())
+// NSAccessibilityFontNameKey returns the string constant NSAccessibilityFontNameKey, for use as a dictionary key or argument.
+func NSAccessibilityFontNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFontNameKey")))
 }
 
-// NSAccessibilityCellForColumnAndRowParameterizedAttribute returns the string constant NSAccessibilityCellForColumnAndRowParameterizedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityCellForColumnAndRowParameterizedAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityCellForColumnAndRowParameterizedAttribute())
+// NSAccessibilityFontFamilyKey returns the string constant NSAccessibilityFontFamilyKey, for use as a dictionary key or argument.
+func NSAccessibilityFontFamilyKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFontFamilyKey")))
 }
 
-// NSAccessibilityRowIndexRangeAttribute returns the string constant NSAccessibilityRowIndexRangeAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRowIndexRangeAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityRowIndexRangeAttribute())
+// NSAccessibilityVisibleNameKey returns the string constant NSAccessibilityVisibleNameKey, for use as a dictionary key or argument.
+func NSAccessibilityVisibleNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityVisibleNameKey")))
 }
 
-// NSAccessibilityColumnIndexRangeAttribute returns the string constant NSAccessibilityColumnIndexRangeAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityColumnIndexRangeAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityColumnIndexRangeAttribute())
+// NSAccessibilityFontSizeKey returns the string constant NSAccessibilityFontSizeKey, for use as a dictionary key or argument.
+func NSAccessibilityFontSizeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFontSizeKey")))
 }
 
-// NSAccessibilityHorizontalUnitsAttribute returns the string constant NSAccessibilityHorizontalUnitsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHorizontalUnitsAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityHorizontalUnitsAttribute())
+// NSAccessibilityMainAttribute returns the string constant NSAccessibilityMainAttribute, for use as a dictionary key or argument.
+func NSAccessibilityMainAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMainAttribute")))
 }
 
-// NSAccessibilityVerticalUnitsAttribute returns the string constant NSAccessibilityVerticalUnitsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityVerticalUnitsAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityVerticalUnitsAttribute())
+// NSAccessibilityMinimizedAttribute returns the string constant NSAccessibilityMinimizedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityMinimizedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMinimizedAttribute")))
 }
 
-// NSAccessibilityHorizontalUnitDescriptionAttribute returns the string constant NSAccessibilityHorizontalUnitDescriptionAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHorizontalUnitDescriptionAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityHorizontalUnitDescriptionAttribute())
+// NSAccessibilityCloseButtonAttribute returns the string constant NSAccessibilityCloseButtonAttribute, for use as a dictionary key or argument.
+func NSAccessibilityCloseButtonAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityCloseButtonAttribute")))
 }
 
-// NSAccessibilityVerticalUnitDescriptionAttribute returns the string constant NSAccessibilityVerticalUnitDescriptionAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityVerticalUnitDescriptionAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityVerticalUnitDescriptionAttribute())
+// NSAccessibilityZoomButtonAttribute returns the string constant NSAccessibilityZoomButtonAttribute, for use as a dictionary key or argument.
+func NSAccessibilityZoomButtonAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityZoomButtonAttribute")))
 }
 
-// NSAccessibilityLayoutPointForScreenPointParameterizedAttribute returns the string constant NSAccessibilityLayoutPointForScreenPointParameterizedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityLayoutPointForScreenPointParameterizedAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityLayoutPointForScreenPointParameterizedAttribute())
+// NSAccessibilityMinimizeButtonAttribute returns the string constant NSAccessibilityMinimizeButtonAttribute, for use as a dictionary key or argument.
+func NSAccessibilityMinimizeButtonAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMinimizeButtonAttribute")))
 }
 
-// NSAccessibilityLayoutSizeForScreenSizeParameterizedAttribute returns the string constant NSAccessibilityLayoutSizeForScreenSizeParameterizedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityLayoutSizeForScreenSizeParameterizedAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityLayoutSizeForScreenSizeParameterizedAttribute())
+// NSAccessibilityToolbarButtonAttribute returns the string constant NSAccessibilityToolbarButtonAttribute, for use as a dictionary key or argument.
+func NSAccessibilityToolbarButtonAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityToolbarButtonAttribute")))
 }
 
-// NSAccessibilityScreenPointForLayoutPointParameterizedAttribute returns the string constant NSAccessibilityScreenPointForLayoutPointParameterizedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityScreenPointForLayoutPointParameterizedAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityScreenPointForLayoutPointParameterizedAttribute())
+// NSAccessibilityProxyAttribute returns the string constant NSAccessibilityProxyAttribute, for use as a dictionary key or argument.
+func NSAccessibilityProxyAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityProxyAttribute")))
 }
 
-// NSAccessibilityScreenSizeForLayoutSizeParameterizedAttribute returns the string constant NSAccessibilityScreenSizeForLayoutSizeParameterizedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityScreenSizeForLayoutSizeParameterizedAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityScreenSizeForLayoutSizeParameterizedAttribute())
+// NSAccessibilityGrowAreaAttribute returns the string constant NSAccessibilityGrowAreaAttribute, for use as a dictionary key or argument.
+func NSAccessibilityGrowAreaAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityGrowAreaAttribute")))
 }
 
-// NSAccessibilityHandlesAttribute returns the string constant NSAccessibilityHandlesAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHandlesAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityHandlesAttribute())
+// NSAccessibilityModalAttribute returns the string constant NSAccessibilityModalAttribute, for use as a dictionary key or argument.
+func NSAccessibilityModalAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityModalAttribute")))
 }
 
-// NSAccessibilityAscendingSortDirectionValue returns the string constant NSAccessibilityAscendingSortDirectionValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityAscendingSortDirectionValue() objc.ID {
-	if _r := raw.NSAccessibilityAscendingSortDirectionValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityDefaultButtonAttribute returns the string constant NSAccessibilityDefaultButtonAttribute, for use as a dictionary key or argument.
+func NSAccessibilityDefaultButtonAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDefaultButtonAttribute")))
 }
 
-// NSAccessibilityDescendingSortDirectionValue returns the string constant NSAccessibilityDescendingSortDirectionValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDescendingSortDirectionValue() objc.ID {
-	if _r := raw.NSAccessibilityDescendingSortDirectionValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityCancelButtonAttribute returns the string constant NSAccessibilityCancelButtonAttribute, for use as a dictionary key or argument.
+func NSAccessibilityCancelButtonAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityCancelButtonAttribute")))
 }
 
-// NSAccessibilityUnknownSortDirectionValue returns the string constant NSAccessibilityUnknownSortDirectionValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityUnknownSortDirectionValue() objc.ID {
-	if _r := raw.NSAccessibilityUnknownSortDirectionValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityFullScreenButtonAttribute returns the string constant NSAccessibilityFullScreenButtonAttribute, for use as a dictionary key or argument.
+func NSAccessibilityFullScreenButtonAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFullScreenButtonAttribute")))
 }
 
-// NSAccessibilityDisclosingAttribute returns the string constant NSAccessibilityDisclosingAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDisclosingAttribute() objc.ID {
-	if _r := raw.NSAccessibilityDisclosingAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityMenuBarAttribute returns the string constant NSAccessibilityMenuBarAttribute, for use as a dictionary key or argument.
+func NSAccessibilityMenuBarAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMenuBarAttribute")))
 }
 
-// NSAccessibilityDisclosedRowsAttribute returns the string constant NSAccessibilityDisclosedRowsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDisclosedRowsAttribute() objc.ID {
-	if _r := raw.NSAccessibilityDisclosedRowsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityWindowsAttribute returns the string constant NSAccessibilityWindowsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityWindowsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityWindowsAttribute")))
 }
 
-// NSAccessibilityDisclosedByRowAttribute returns the string constant NSAccessibilityDisclosedByRowAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDisclosedByRowAttribute() objc.ID {
-	if _r := raw.NSAccessibilityDisclosedByRowAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityFrontmostAttribute returns the string constant NSAccessibilityFrontmostAttribute, for use as a dictionary key or argument.
+func NSAccessibilityFrontmostAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFrontmostAttribute")))
 }
 
-// NSAccessibilityDisclosureLevelAttribute returns the string constant NSAccessibilityDisclosureLevelAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDisclosureLevelAttribute() objc.ID {
-	if _r := raw.NSAccessibilityDisclosureLevelAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityHiddenAttribute returns the string constant NSAccessibilityHiddenAttribute, for use as a dictionary key or argument.
+func NSAccessibilityHiddenAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHiddenAttribute")))
 }
 
-// NSAccessibilityAllowedValuesAttribute returns the string constant NSAccessibilityAllowedValuesAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityAllowedValuesAttribute() objc.ID {
-	if _r := raw.NSAccessibilityAllowedValuesAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityMainWindowAttribute returns the string constant NSAccessibilityMainWindowAttribute, for use as a dictionary key or argument.
+func NSAccessibilityMainWindowAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMainWindowAttribute")))
 }
 
-// NSAccessibilityLabelUIElementsAttribute returns the string constant NSAccessibilityLabelUIElementsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityLabelUIElementsAttribute() objc.ID {
-	if _r := raw.NSAccessibilityLabelUIElementsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityFocusedWindowAttribute returns the string constant NSAccessibilityFocusedWindowAttribute, for use as a dictionary key or argument.
+func NSAccessibilityFocusedWindowAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFocusedWindowAttribute")))
 }
 
-// NSAccessibilityLabelValueAttribute returns the string constant NSAccessibilityLabelValueAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityLabelValueAttribute() objc.ID {
-	if _r := raw.NSAccessibilityLabelValueAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityFocusedUIElementAttribute returns the string constant NSAccessibilityFocusedUIElementAttribute, for use as a dictionary key or argument.
+func NSAccessibilityFocusedUIElementAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFocusedUIElementAttribute")))
 }
 
-// NSAccessibilityMatteHoleAttribute returns the string constant NSAccessibilityMatteHoleAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMatteHoleAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityMatteHoleAttribute())
+// NSAccessibilityExtrasMenuBarAttribute returns the string constant NSAccessibilityExtrasMenuBarAttribute, for use as a dictionary key or argument.
+func NSAccessibilityExtrasMenuBarAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityExtrasMenuBarAttribute")))
 }
 
-// NSAccessibilityMatteContentUIElementAttribute returns the string constant NSAccessibilityMatteContentUIElementAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMatteContentUIElementAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityMatteContentUIElementAttribute())
+// NSAccessibilityOrientationAttribute returns the string constant NSAccessibilityOrientationAttribute, for use as a dictionary key or argument.
+func NSAccessibilityOrientationAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityOrientationAttribute")))
 }
 
-// NSAccessibilityMarkerUIElementsAttribute returns the string constant NSAccessibilityMarkerUIElementsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMarkerUIElementsAttribute() objc.ID {
-	if _r := raw.NSAccessibilityMarkerUIElementsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityVerticalOrientationValue returns the string constant NSAccessibilityVerticalOrientationValue, for use as a dictionary key or argument.
+func NSAccessibilityVerticalOrientationValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityVerticalOrientationValue")))
 }
 
-// NSAccessibilityMarkerValuesAttribute returns the string constant NSAccessibilityMarkerValuesAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMarkerValuesAttribute() objc.ID {
-	if _r := raw.NSAccessibilityMarkerValuesAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityHorizontalOrientationValue returns the string constant NSAccessibilityHorizontalOrientationValue, for use as a dictionary key or argument.
+func NSAccessibilityHorizontalOrientationValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHorizontalOrientationValue")))
 }
 
-// NSAccessibilityMarkerGroupUIElementAttribute returns the string constant NSAccessibilityMarkerGroupUIElementAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMarkerGroupUIElementAttribute() objc.ID {
-	if _r := raw.NSAccessibilityMarkerGroupUIElementAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityUnknownOrientationValue returns the string constant NSAccessibilityUnknownOrientationValue, for use as a dictionary key or argument.
+func NSAccessibilityUnknownOrientationValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityUnknownOrientationValue")))
 }
 
-// NSAccessibilityUnitsAttribute returns the string constant NSAccessibilityUnitsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityUnitsAttribute() objc.ID {
-	if _r := raw.NSAccessibilityUnitsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityColumnTitlesAttribute returns the string constant NSAccessibilityColumnTitlesAttribute, for use as a dictionary key or argument.
+func NSAccessibilityColumnTitlesAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityColumnTitlesAttribute")))
 }
 
-// NSAccessibilityUnitDescriptionAttribute returns the string constant NSAccessibilityUnitDescriptionAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityUnitDescriptionAttribute() objc.ID {
-	if _r := raw.NSAccessibilityUnitDescriptionAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySearchButtonAttribute returns the string constant NSAccessibilitySearchButtonAttribute, for use as a dictionary key or argument.
+func NSAccessibilitySearchButtonAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySearchButtonAttribute")))
 }
 
-// NSAccessibilityMarkerTypeAttribute returns the string constant NSAccessibilityMarkerTypeAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMarkerTypeAttribute() objc.ID {
-	if _r := raw.NSAccessibilityMarkerTypeAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySearchMenuAttribute returns the string constant NSAccessibilitySearchMenuAttribute, for use as a dictionary key or argument.
+func NSAccessibilitySearchMenuAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySearchMenuAttribute")))
 }
 
-// NSAccessibilityMarkerTypeDescriptionAttribute returns the string constant NSAccessibilityMarkerTypeDescriptionAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMarkerTypeDescriptionAttribute() objc.ID {
-	if _r := raw.NSAccessibilityMarkerTypeDescriptionAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityClearButtonAttribute returns the string constant NSAccessibilityClearButtonAttribute, for use as a dictionary key or argument.
+func NSAccessibilityClearButtonAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityClearButtonAttribute")))
 }
 
-// NSAccessibilityIdentifierAttribute returns the string constant NSAccessibilityIdentifierAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityIdentifierAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityIdentifierAttribute())
+// NSAccessibilityRowsAttribute returns the string constant NSAccessibilityRowsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityRowsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRowsAttribute")))
 }
 
-// NSAccessibilityLeftTabStopMarkerTypeValue returns the string constant NSAccessibilityLeftTabStopMarkerTypeValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityLeftTabStopMarkerTypeValue() objc.ID {
-	if _r := raw.NSAccessibilityLeftTabStopMarkerTypeValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityVisibleRowsAttribute returns the string constant NSAccessibilityVisibleRowsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityVisibleRowsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityVisibleRowsAttribute")))
 }
 
-// NSAccessibilityRightTabStopMarkerTypeValue returns the string constant NSAccessibilityRightTabStopMarkerTypeValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRightTabStopMarkerTypeValue() objc.ID {
-	if _r := raw.NSAccessibilityRightTabStopMarkerTypeValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySelectedRowsAttribute returns the string constant NSAccessibilitySelectedRowsAttribute, for use as a dictionary key or argument.
+func NSAccessibilitySelectedRowsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySelectedRowsAttribute")))
 }
 
-// NSAccessibilityCenterTabStopMarkerTypeValue returns the string constant NSAccessibilityCenterTabStopMarkerTypeValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityCenterTabStopMarkerTypeValue() objc.ID {
-	if _r := raw.NSAccessibilityCenterTabStopMarkerTypeValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityColumnsAttribute returns the string constant NSAccessibilityColumnsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityColumnsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityColumnsAttribute")))
 }
 
-// NSAccessibilityDecimalTabStopMarkerTypeValue returns the string constant NSAccessibilityDecimalTabStopMarkerTypeValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDecimalTabStopMarkerTypeValue() objc.ID {
-	if _r := raw.NSAccessibilityDecimalTabStopMarkerTypeValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityVisibleColumnsAttribute returns the string constant NSAccessibilityVisibleColumnsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityVisibleColumnsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityVisibleColumnsAttribute")))
 }
 
-// NSAccessibilityHeadIndentMarkerTypeValue returns the string constant NSAccessibilityHeadIndentMarkerTypeValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHeadIndentMarkerTypeValue() objc.ID {
-	if _r := raw.NSAccessibilityHeadIndentMarkerTypeValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySelectedColumnsAttribute returns the string constant NSAccessibilitySelectedColumnsAttribute, for use as a dictionary key or argument.
+func NSAccessibilitySelectedColumnsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySelectedColumnsAttribute")))
 }
 
-// NSAccessibilityTailIndentMarkerTypeValue returns the string constant NSAccessibilityTailIndentMarkerTypeValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTailIndentMarkerTypeValue() objc.ID {
-	if _r := raw.NSAccessibilityTailIndentMarkerTypeValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySortDirectionAttribute returns the string constant NSAccessibilitySortDirectionAttribute, for use as a dictionary key or argument.
+func NSAccessibilitySortDirectionAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySortDirectionAttribute")))
 }
 
-// NSAccessibilityFirstLineIndentMarkerTypeValue returns the string constant NSAccessibilityFirstLineIndentMarkerTypeValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityFirstLineIndentMarkerTypeValue() objc.ID {
-	if _r := raw.NSAccessibilityFirstLineIndentMarkerTypeValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySelectedCellsAttribute returns the string constant NSAccessibilitySelectedCellsAttribute, for use as a dictionary key or argument.
+func NSAccessibilitySelectedCellsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySelectedCellsAttribute")))
 }
 
-// NSAccessibilityUnknownMarkerTypeValue returns the string constant NSAccessibilityUnknownMarkerTypeValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityUnknownMarkerTypeValue() objc.ID {
-	if _r := raw.NSAccessibilityUnknownMarkerTypeValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityVisibleCellsAttribute returns the string constant NSAccessibilityVisibleCellsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityVisibleCellsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityVisibleCellsAttribute")))
 }
 
-// NSAccessibilityInchesUnitValue returns the string constant NSAccessibilityInchesUnitValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityInchesUnitValue() objc.ID {
-	if _r := raw.NSAccessibilityInchesUnitValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityRowHeaderUIElementsAttribute returns the string constant NSAccessibilityRowHeaderUIElementsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityRowHeaderUIElementsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRowHeaderUIElementsAttribute")))
 }
 
-// NSAccessibilityCentimetersUnitValue returns the string constant NSAccessibilityCentimetersUnitValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityCentimetersUnitValue() objc.ID {
-	if _r := raw.NSAccessibilityCentimetersUnitValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityColumnHeaderUIElementsAttribute returns the string constant NSAccessibilityColumnHeaderUIElementsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityColumnHeaderUIElementsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityColumnHeaderUIElementsAttribute")))
 }
 
-// NSAccessibilityPointsUnitValue returns the string constant NSAccessibilityPointsUnitValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityPointsUnitValue() objc.ID {
-	if _r := raw.NSAccessibilityPointsUnitValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityCellForColumnAndRowParameterizedAttribute returns the string constant NSAccessibilityCellForColumnAndRowParameterizedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityCellForColumnAndRowParameterizedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityCellForColumnAndRowParameterizedAttribute")))
 }
 
-// NSAccessibilityPicasUnitValue returns the string constant NSAccessibilityPicasUnitValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityPicasUnitValue() objc.ID {
-	if _r := raw.NSAccessibilityPicasUnitValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityRowIndexRangeAttribute returns the string constant NSAccessibilityRowIndexRangeAttribute, for use as a dictionary key or argument.
+func NSAccessibilityRowIndexRangeAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRowIndexRangeAttribute")))
 }
 
-// NSAccessibilityUnknownUnitValue returns the string constant NSAccessibilityUnknownUnitValue as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityUnknownUnitValue() objc.ID {
-	if _r := raw.NSAccessibilityUnknownUnitValue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityColumnIndexRangeAttribute returns the string constant NSAccessibilityColumnIndexRangeAttribute, for use as a dictionary key or argument.
+func NSAccessibilityColumnIndexRangeAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityColumnIndexRangeAttribute")))
 }
 
-// NSAccessibilityPressAction returns the string constant NSAccessibilityPressAction as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityPressAction() objc.ID {
-	if _r := raw.NSAccessibilityPressAction(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityHorizontalUnitsAttribute returns the string constant NSAccessibilityHorizontalUnitsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityHorizontalUnitsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHorizontalUnitsAttribute")))
 }
 
-// NSAccessibilityIncrementAction returns the string constant NSAccessibilityIncrementAction as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityIncrementAction() objc.ID {
-	if _r := raw.NSAccessibilityIncrementAction(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityVerticalUnitsAttribute returns the string constant NSAccessibilityVerticalUnitsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityVerticalUnitsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityVerticalUnitsAttribute")))
 }
 
-// NSAccessibilityDecrementAction returns the string constant NSAccessibilityDecrementAction as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDecrementAction() objc.ID {
-	if _r := raw.NSAccessibilityDecrementAction(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityHorizontalUnitDescriptionAttribute returns the string constant NSAccessibilityHorizontalUnitDescriptionAttribute, for use as a dictionary key or argument.
+func NSAccessibilityHorizontalUnitDescriptionAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHorizontalUnitDescriptionAttribute")))
 }
 
-// NSAccessibilityConfirmAction returns the string constant NSAccessibilityConfirmAction as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityConfirmAction() objc.ID {
-	if _r := raw.NSAccessibilityConfirmAction(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityVerticalUnitDescriptionAttribute returns the string constant NSAccessibilityVerticalUnitDescriptionAttribute, for use as a dictionary key or argument.
+func NSAccessibilityVerticalUnitDescriptionAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityVerticalUnitDescriptionAttribute")))
 }
 
-// NSAccessibilityPickAction returns the string constant NSAccessibilityPickAction as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityPickAction() objc.ID {
-	if _r := raw.NSAccessibilityPickAction(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityLayoutPointForScreenPointParameterizedAttribute returns the string constant NSAccessibilityLayoutPointForScreenPointParameterizedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityLayoutPointForScreenPointParameterizedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLayoutPointForScreenPointParameterizedAttribute")))
 }
 
-// NSAccessibilityCancelAction returns the string constant NSAccessibilityCancelAction as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityCancelAction() objc.ID {
-	if _r := raw.NSAccessibilityCancelAction(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityLayoutSizeForScreenSizeParameterizedAttribute returns the string constant NSAccessibilityLayoutSizeForScreenSizeParameterizedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityLayoutSizeForScreenSizeParameterizedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLayoutSizeForScreenSizeParameterizedAttribute")))
 }
 
-// NSAccessibilityRaiseAction returns the string constant NSAccessibilityRaiseAction as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRaiseAction() objc.ID {
-	if _r := raw.NSAccessibilityRaiseAction(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityScreenPointForLayoutPointParameterizedAttribute returns the string constant NSAccessibilityScreenPointForLayoutPointParameterizedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityScreenPointForLayoutPointParameterizedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityScreenPointForLayoutPointParameterizedAttribute")))
 }
 
-// NSAccessibilityShowMenuAction returns the string constant NSAccessibilityShowMenuAction as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityShowMenuAction() objc.ID {
-	if _r := raw.NSAccessibilityShowMenuAction(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityScreenSizeForLayoutSizeParameterizedAttribute returns the string constant NSAccessibilityScreenSizeForLayoutSizeParameterizedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityScreenSizeForLayoutSizeParameterizedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityScreenSizeForLayoutSizeParameterizedAttribute")))
 }
 
-// NSAccessibilityDeleteAction returns the string constant NSAccessibilityDeleteAction as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDeleteAction() objc.ID {
-	if _r := raw.NSAccessibilityDeleteAction(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityHandlesAttribute returns the string constant NSAccessibilityHandlesAttribute, for use as a dictionary key or argument.
+func NSAccessibilityHandlesAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHandlesAttribute")))
 }
 
-// NSAccessibilityScrollToVisibleAction returns the string constant NSAccessibilityScrollToVisibleAction as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityScrollToVisibleAction() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityScrollToVisibleAction())
+// NSAccessibilityAscendingSortDirectionValue returns the string constant NSAccessibilityAscendingSortDirectionValue, for use as a dictionary key or argument.
+func NSAccessibilityAscendingSortDirectionValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityAscendingSortDirectionValue")))
 }
 
-// NSAccessibilityShowAlternateUIAction returns the string constant NSAccessibilityShowAlternateUIAction as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityShowAlternateUIAction() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityShowAlternateUIAction())
+// NSAccessibilityDescendingSortDirectionValue returns the string constant NSAccessibilityDescendingSortDirectionValue, for use as a dictionary key or argument.
+func NSAccessibilityDescendingSortDirectionValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDescendingSortDirectionValue")))
 }
 
-// NSAccessibilityShowDefaultUIAction returns the string constant NSAccessibilityShowDefaultUIAction as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityShowDefaultUIAction() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityShowDefaultUIAction())
+// NSAccessibilityUnknownSortDirectionValue returns the string constant NSAccessibilityUnknownSortDirectionValue, for use as a dictionary key or argument.
+func NSAccessibilityUnknownSortDirectionValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityUnknownSortDirectionValue")))
 }
 
-// NSAccessibilityMainWindowChangedNotification returns the string constant NSAccessibilityMainWindowChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMainWindowChangedNotification() objc.ID {
-	if _r := raw.NSAccessibilityMainWindowChangedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityDisclosingAttribute returns the string constant NSAccessibilityDisclosingAttribute, for use as a dictionary key or argument.
+func NSAccessibilityDisclosingAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDisclosingAttribute")))
 }
 
-// NSAccessibilityFocusedWindowChangedNotification returns the string constant NSAccessibilityFocusedWindowChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityFocusedWindowChangedNotification() objc.ID {
-	if _r := raw.NSAccessibilityFocusedWindowChangedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityDisclosedRowsAttribute returns the string constant NSAccessibilityDisclosedRowsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityDisclosedRowsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDisclosedRowsAttribute")))
 }
 
-// NSAccessibilityFocusedUIElementChangedNotification returns the string constant NSAccessibilityFocusedUIElementChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityFocusedUIElementChangedNotification() objc.ID {
-	if _r := raw.NSAccessibilityFocusedUIElementChangedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityDisclosedByRowAttribute returns the string constant NSAccessibilityDisclosedByRowAttribute, for use as a dictionary key or argument.
+func NSAccessibilityDisclosedByRowAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDisclosedByRowAttribute")))
 }
 
-// NSAccessibilityApplicationActivatedNotification returns the string constant NSAccessibilityApplicationActivatedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityApplicationActivatedNotification() objc.ID {
-	if _r := raw.NSAccessibilityApplicationActivatedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityDisclosureLevelAttribute returns the string constant NSAccessibilityDisclosureLevelAttribute, for use as a dictionary key or argument.
+func NSAccessibilityDisclosureLevelAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDisclosureLevelAttribute")))
 }
 
-// NSAccessibilityApplicationDeactivatedNotification returns the string constant NSAccessibilityApplicationDeactivatedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityApplicationDeactivatedNotification() objc.ID {
-	if _r := raw.NSAccessibilityApplicationDeactivatedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityAllowedValuesAttribute returns the string constant NSAccessibilityAllowedValuesAttribute, for use as a dictionary key or argument.
+func NSAccessibilityAllowedValuesAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityAllowedValuesAttribute")))
 }
 
-// NSAccessibilityApplicationHiddenNotification returns the string constant NSAccessibilityApplicationHiddenNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityApplicationHiddenNotification() objc.ID {
-	if _r := raw.NSAccessibilityApplicationHiddenNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityLabelUIElementsAttribute returns the string constant NSAccessibilityLabelUIElementsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityLabelUIElementsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLabelUIElementsAttribute")))
 }
 
-// NSAccessibilityApplicationShownNotification returns the string constant NSAccessibilityApplicationShownNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityApplicationShownNotification() objc.ID {
-	if _r := raw.NSAccessibilityApplicationShownNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityLabelValueAttribute returns the string constant NSAccessibilityLabelValueAttribute, for use as a dictionary key or argument.
+func NSAccessibilityLabelValueAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLabelValueAttribute")))
 }
 
-// NSAccessibilityWindowCreatedNotification returns the string constant NSAccessibilityWindowCreatedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityWindowCreatedNotification() objc.ID {
-	if _r := raw.NSAccessibilityWindowCreatedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityMatteHoleAttribute returns the string constant NSAccessibilityMatteHoleAttribute, for use as a dictionary key or argument.
+func NSAccessibilityMatteHoleAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMatteHoleAttribute")))
 }
 
-// NSAccessibilityWindowMovedNotification returns the string constant NSAccessibilityWindowMovedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityWindowMovedNotification() objc.ID {
-	if _r := raw.NSAccessibilityWindowMovedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityMatteContentUIElementAttribute returns the string constant NSAccessibilityMatteContentUIElementAttribute, for use as a dictionary key or argument.
+func NSAccessibilityMatteContentUIElementAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMatteContentUIElementAttribute")))
 }
 
-// NSAccessibilityWindowResizedNotification returns the string constant NSAccessibilityWindowResizedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityWindowResizedNotification() objc.ID {
-	if _r := raw.NSAccessibilityWindowResizedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityMarkerUIElementsAttribute returns the string constant NSAccessibilityMarkerUIElementsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityMarkerUIElementsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMarkerUIElementsAttribute")))
 }
 
-// NSAccessibilityWindowMiniaturizedNotification returns the string constant NSAccessibilityWindowMiniaturizedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityWindowMiniaturizedNotification() objc.ID {
-	if _r := raw.NSAccessibilityWindowMiniaturizedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityMarkerValuesAttribute returns the string constant NSAccessibilityMarkerValuesAttribute, for use as a dictionary key or argument.
+func NSAccessibilityMarkerValuesAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMarkerValuesAttribute")))
 }
 
-// NSAccessibilityWindowDeminiaturizedNotification returns the string constant NSAccessibilityWindowDeminiaturizedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityWindowDeminiaturizedNotification() objc.ID {
-	if _r := raw.NSAccessibilityWindowDeminiaturizedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityMarkerGroupUIElementAttribute returns the string constant NSAccessibilityMarkerGroupUIElementAttribute, for use as a dictionary key or argument.
+func NSAccessibilityMarkerGroupUIElementAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMarkerGroupUIElementAttribute")))
 }
 
-// NSAccessibilityDrawerCreatedNotification returns the string constant NSAccessibilityDrawerCreatedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDrawerCreatedNotification() objc.ID {
-	if _r := raw.NSAccessibilityDrawerCreatedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityUnitsAttribute returns the string constant NSAccessibilityUnitsAttribute, for use as a dictionary key or argument.
+func NSAccessibilityUnitsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityUnitsAttribute")))
 }
 
-// NSAccessibilitySheetCreatedNotification returns the string constant NSAccessibilitySheetCreatedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySheetCreatedNotification() objc.ID {
-	if _r := raw.NSAccessibilitySheetCreatedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityUnitDescriptionAttribute returns the string constant NSAccessibilityUnitDescriptionAttribute, for use as a dictionary key or argument.
+func NSAccessibilityUnitDescriptionAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityUnitDescriptionAttribute")))
 }
 
-// NSAccessibilityUIElementDestroyedNotification returns the string constant NSAccessibilityUIElementDestroyedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityUIElementDestroyedNotification() objc.ID {
-	if _r := raw.NSAccessibilityUIElementDestroyedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityMarkerTypeAttribute returns the string constant NSAccessibilityMarkerTypeAttribute, for use as a dictionary key or argument.
+func NSAccessibilityMarkerTypeAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMarkerTypeAttribute")))
 }
 
-// NSAccessibilityValueChangedNotification returns the string constant NSAccessibilityValueChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityValueChangedNotification() objc.ID {
-	if _r := raw.NSAccessibilityValueChangedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityMarkerTypeDescriptionAttribute returns the string constant NSAccessibilityMarkerTypeDescriptionAttribute, for use as a dictionary key or argument.
+func NSAccessibilityMarkerTypeDescriptionAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMarkerTypeDescriptionAttribute")))
 }
 
-// NSAccessibilityTitleChangedNotification returns the string constant NSAccessibilityTitleChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTitleChangedNotification() objc.ID {
-	if _r := raw.NSAccessibilityTitleChangedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityIdentifierAttribute returns the string constant NSAccessibilityIdentifierAttribute, for use as a dictionary key or argument.
+func NSAccessibilityIdentifierAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityIdentifierAttribute")))
 }
 
-// NSAccessibilityResizedNotification returns the string constant NSAccessibilityResizedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityResizedNotification() objc.ID {
-	if _r := raw.NSAccessibilityResizedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityLeftTabStopMarkerTypeValue returns the string constant NSAccessibilityLeftTabStopMarkerTypeValue, for use as a dictionary key or argument.
+func NSAccessibilityLeftTabStopMarkerTypeValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLeftTabStopMarkerTypeValue")))
 }
 
-// NSAccessibilityMovedNotification returns the string constant NSAccessibilityMovedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMovedNotification() objc.ID {
-	if _r := raw.NSAccessibilityMovedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityRightTabStopMarkerTypeValue returns the string constant NSAccessibilityRightTabStopMarkerTypeValue, for use as a dictionary key or argument.
+func NSAccessibilityRightTabStopMarkerTypeValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRightTabStopMarkerTypeValue")))
 }
 
-// NSAccessibilityCreatedNotification returns the string constant NSAccessibilityCreatedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityCreatedNotification() objc.ID {
-	if _r := raw.NSAccessibilityCreatedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityCenterTabStopMarkerTypeValue returns the string constant NSAccessibilityCenterTabStopMarkerTypeValue, for use as a dictionary key or argument.
+func NSAccessibilityCenterTabStopMarkerTypeValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityCenterTabStopMarkerTypeValue")))
 }
 
-// NSAccessibilityLayoutChangedNotification returns the string constant NSAccessibilityLayoutChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityLayoutChangedNotification() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityLayoutChangedNotification())
+// NSAccessibilityDecimalTabStopMarkerTypeValue returns the string constant NSAccessibilityDecimalTabStopMarkerTypeValue, for use as a dictionary key or argument.
+func NSAccessibilityDecimalTabStopMarkerTypeValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDecimalTabStopMarkerTypeValue")))
 }
 
-// NSAccessibilityHelpTagCreatedNotification returns the string constant NSAccessibilityHelpTagCreatedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHelpTagCreatedNotification() objc.ID {
-	if _r := raw.NSAccessibilityHelpTagCreatedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityHeadIndentMarkerTypeValue returns the string constant NSAccessibilityHeadIndentMarkerTypeValue, for use as a dictionary key or argument.
+func NSAccessibilityHeadIndentMarkerTypeValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHeadIndentMarkerTypeValue")))
 }
 
-// NSAccessibilitySelectedTextChangedNotification returns the string constant NSAccessibilitySelectedTextChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySelectedTextChangedNotification() objc.ID {
-	if _r := raw.NSAccessibilitySelectedTextChangedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityTailIndentMarkerTypeValue returns the string constant NSAccessibilityTailIndentMarkerTypeValue, for use as a dictionary key or argument.
+func NSAccessibilityTailIndentMarkerTypeValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTailIndentMarkerTypeValue")))
 }
 
-// NSAccessibilityRowCountChangedNotification returns the string constant NSAccessibilityRowCountChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRowCountChangedNotification() objc.ID {
-	if _r := raw.NSAccessibilityRowCountChangedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityFirstLineIndentMarkerTypeValue returns the string constant NSAccessibilityFirstLineIndentMarkerTypeValue, for use as a dictionary key or argument.
+func NSAccessibilityFirstLineIndentMarkerTypeValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFirstLineIndentMarkerTypeValue")))
 }
 
-// NSAccessibilitySelectedChildrenChangedNotification returns the string constant NSAccessibilitySelectedChildrenChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySelectedChildrenChangedNotification() objc.ID {
-	if _r := raw.NSAccessibilitySelectedChildrenChangedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityUnknownMarkerTypeValue returns the string constant NSAccessibilityUnknownMarkerTypeValue, for use as a dictionary key or argument.
+func NSAccessibilityUnknownMarkerTypeValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityUnknownMarkerTypeValue")))
 }
 
-// NSAccessibilitySelectedRowsChangedNotification returns the string constant NSAccessibilitySelectedRowsChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySelectedRowsChangedNotification() objc.ID {
-	if _r := raw.NSAccessibilitySelectedRowsChangedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityInchesUnitValue returns the string constant NSAccessibilityInchesUnitValue, for use as a dictionary key or argument.
+func NSAccessibilityInchesUnitValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityInchesUnitValue")))
 }
 
-// NSAccessibilitySelectedColumnsChangedNotification returns the string constant NSAccessibilitySelectedColumnsChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySelectedColumnsChangedNotification() objc.ID {
-	if _r := raw.NSAccessibilitySelectedColumnsChangedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityCentimetersUnitValue returns the string constant NSAccessibilityCentimetersUnitValue, for use as a dictionary key or argument.
+func NSAccessibilityCentimetersUnitValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityCentimetersUnitValue")))
 }
 
-// NSAccessibilityRowExpandedNotification returns the string constant NSAccessibilityRowExpandedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRowExpandedNotification() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityRowExpandedNotification())
+// NSAccessibilityPointsUnitValue returns the string constant NSAccessibilityPointsUnitValue, for use as a dictionary key or argument.
+func NSAccessibilityPointsUnitValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityPointsUnitValue")))
 }
 
-// NSAccessibilityRowCollapsedNotification returns the string constant NSAccessibilityRowCollapsedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRowCollapsedNotification() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityRowCollapsedNotification())
+// NSAccessibilityPicasUnitValue returns the string constant NSAccessibilityPicasUnitValue, for use as a dictionary key or argument.
+func NSAccessibilityPicasUnitValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityPicasUnitValue")))
 }
 
-// NSAccessibilityAutocorrectionOccurredNotification returns the string constant NSAccessibilityAutocorrectionOccurredNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityAutocorrectionOccurredNotification() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityAutocorrectionOccurredNotification())
+// NSAccessibilityUnknownUnitValue returns the string constant NSAccessibilityUnknownUnitValue, for use as a dictionary key or argument.
+func NSAccessibilityUnknownUnitValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityUnknownUnitValue")))
 }
 
-// NSAccessibilityTextInputMarkingSessionBeganNotification returns the string constant NSAccessibilityTextInputMarkingSessionBeganNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTextInputMarkingSessionBeganNotification() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityTextInputMarkingSessionBeganNotification())
+// NSAccessibilityPressAction returns the string constant NSAccessibilityPressAction, for use as a dictionary key or argument.
+func NSAccessibilityPressAction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityPressAction")))
 }
 
-// NSAccessibilityTextInputMarkingSessionEndedNotification returns the string constant NSAccessibilityTextInputMarkingSessionEndedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTextInputMarkingSessionEndedNotification() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityTextInputMarkingSessionEndedNotification())
+// NSAccessibilityIncrementAction returns the string constant NSAccessibilityIncrementAction, for use as a dictionary key or argument.
+func NSAccessibilityIncrementAction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityIncrementAction")))
 }
 
-// NSAccessibilityDraggingSourceDragBeganNotification returns the string constant NSAccessibilityDraggingSourceDragBeganNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDraggingSourceDragBeganNotification() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityDraggingSourceDragBeganNotification())
+// NSAccessibilityDecrementAction returns the string constant NSAccessibilityDecrementAction, for use as a dictionary key or argument.
+func NSAccessibilityDecrementAction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDecrementAction")))
 }
 
-// NSAccessibilityDraggingSourceDragEndedNotification returns the string constant NSAccessibilityDraggingSourceDragEndedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDraggingSourceDragEndedNotification() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityDraggingSourceDragEndedNotification())
+// NSAccessibilityConfirmAction returns the string constant NSAccessibilityConfirmAction, for use as a dictionary key or argument.
+func NSAccessibilityConfirmAction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityConfirmAction")))
 }
 
-// NSAccessibilityDraggingDestinationDropAllowedNotification returns the string constant NSAccessibilityDraggingDestinationDropAllowedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDraggingDestinationDropAllowedNotification() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityDraggingDestinationDropAllowedNotification())
+// NSAccessibilityPickAction returns the string constant NSAccessibilityPickAction, for use as a dictionary key or argument.
+func NSAccessibilityPickAction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityPickAction")))
 }
 
-// NSAccessibilityDraggingDestinationDropNotAllowedNotification returns the string constant NSAccessibilityDraggingDestinationDropNotAllowedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDraggingDestinationDropNotAllowedNotification() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityDraggingDestinationDropNotAllowedNotification())
+// NSAccessibilityCancelAction returns the string constant NSAccessibilityCancelAction, for use as a dictionary key or argument.
+func NSAccessibilityCancelAction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityCancelAction")))
 }
 
-// NSAccessibilityDraggingDestinationDragAcceptedNotification returns the string constant NSAccessibilityDraggingDestinationDragAcceptedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDraggingDestinationDragAcceptedNotification() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityDraggingDestinationDragAcceptedNotification())
+// NSAccessibilityRaiseAction returns the string constant NSAccessibilityRaiseAction, for use as a dictionary key or argument.
+func NSAccessibilityRaiseAction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRaiseAction")))
 }
 
-// NSAccessibilityDraggingDestinationDragNotAcceptedNotification returns the string constant NSAccessibilityDraggingDestinationDragNotAcceptedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDraggingDestinationDragNotAcceptedNotification() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityDraggingDestinationDragNotAcceptedNotification())
+// NSAccessibilityShowMenuAction returns the string constant NSAccessibilityShowMenuAction, for use as a dictionary key or argument.
+func NSAccessibilityShowMenuAction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityShowMenuAction")))
 }
 
-// NSAccessibilitySelectedCellsChangedNotification returns the string constant NSAccessibilitySelectedCellsChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySelectedCellsChangedNotification() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySelectedCellsChangedNotification())
+// NSAccessibilityDeleteAction returns the string constant NSAccessibilityDeleteAction, for use as a dictionary key or argument.
+func NSAccessibilityDeleteAction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDeleteAction")))
 }
 
-// NSAccessibilityUnitsChangedNotification returns the string constant NSAccessibilityUnitsChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityUnitsChangedNotification() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityUnitsChangedNotification())
+// NSAccessibilityScrollToVisibleAction returns the string constant NSAccessibilityScrollToVisibleAction, for use as a dictionary key or argument.
+func NSAccessibilityScrollToVisibleAction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityScrollToVisibleAction")))
 }
 
-// NSAccessibilitySelectedChildrenMovedNotification returns the string constant NSAccessibilitySelectedChildrenMovedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySelectedChildrenMovedNotification() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySelectedChildrenMovedNotification())
+// NSAccessibilityShowAlternateUIAction returns the string constant NSAccessibilityShowAlternateUIAction, for use as a dictionary key or argument.
+func NSAccessibilityShowAlternateUIAction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityShowAlternateUIAction")))
 }
 
-// NSAccessibilityAnnouncementRequestedNotification returns the string constant NSAccessibilityAnnouncementRequestedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityAnnouncementRequestedNotification() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityAnnouncementRequestedNotification())
+// NSAccessibilityShowDefaultUIAction returns the string constant NSAccessibilityShowDefaultUIAction, for use as a dictionary key or argument.
+func NSAccessibilityShowDefaultUIAction() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityShowDefaultUIAction")))
 }
 
-// NSAccessibilityUnknownRole returns the string constant NSAccessibilityUnknownRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityUnknownRole() objc.ID {
-	if _r := raw.NSAccessibilityUnknownRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityMainWindowChangedNotification returns the string constant NSAccessibilityMainWindowChangedNotification, for use as a dictionary key or argument.
+func NSAccessibilityMainWindowChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMainWindowChangedNotification")))
 }
 
-// NSAccessibilityButtonRole returns the string constant NSAccessibilityButtonRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityButtonRole() objc.ID {
-	if _r := raw.NSAccessibilityButtonRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityFocusedWindowChangedNotification returns the string constant NSAccessibilityFocusedWindowChangedNotification, for use as a dictionary key or argument.
+func NSAccessibilityFocusedWindowChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFocusedWindowChangedNotification")))
 }
 
-// NSAccessibilityRadioButtonRole returns the string constant NSAccessibilityRadioButtonRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRadioButtonRole() objc.ID {
-	if _r := raw.NSAccessibilityRadioButtonRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityFocusedUIElementChangedNotification returns the string constant NSAccessibilityFocusedUIElementChangedNotification, for use as a dictionary key or argument.
+func NSAccessibilityFocusedUIElementChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFocusedUIElementChangedNotification")))
 }
 
-// NSAccessibilityCheckBoxRole returns the string constant NSAccessibilityCheckBoxRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityCheckBoxRole() objc.ID {
-	if _r := raw.NSAccessibilityCheckBoxRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityApplicationActivatedNotification returns the string constant NSAccessibilityApplicationActivatedNotification, for use as a dictionary key or argument.
+func NSAccessibilityApplicationActivatedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityApplicationActivatedNotification")))
 }
 
-// NSAccessibilitySliderRole returns the string constant NSAccessibilitySliderRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySliderRole() objc.ID {
-	if _r := raw.NSAccessibilitySliderRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityApplicationDeactivatedNotification returns the string constant NSAccessibilityApplicationDeactivatedNotification, for use as a dictionary key or argument.
+func NSAccessibilityApplicationDeactivatedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityApplicationDeactivatedNotification")))
 }
 
-// NSAccessibilityTabGroupRole returns the string constant NSAccessibilityTabGroupRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTabGroupRole() objc.ID {
-	if _r := raw.NSAccessibilityTabGroupRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityApplicationHiddenNotification returns the string constant NSAccessibilityApplicationHiddenNotification, for use as a dictionary key or argument.
+func NSAccessibilityApplicationHiddenNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityApplicationHiddenNotification")))
 }
 
-// NSAccessibilityTextFieldRole returns the string constant NSAccessibilityTextFieldRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTextFieldRole() objc.ID {
-	if _r := raw.NSAccessibilityTextFieldRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityApplicationShownNotification returns the string constant NSAccessibilityApplicationShownNotification, for use as a dictionary key or argument.
+func NSAccessibilityApplicationShownNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityApplicationShownNotification")))
 }
 
-// NSAccessibilityStaticTextRole returns the string constant NSAccessibilityStaticTextRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityStaticTextRole() objc.ID {
-	if _r := raw.NSAccessibilityStaticTextRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityWindowCreatedNotification returns the string constant NSAccessibilityWindowCreatedNotification, for use as a dictionary key or argument.
+func NSAccessibilityWindowCreatedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityWindowCreatedNotification")))
 }
 
-// NSAccessibilityTextAreaRole returns the string constant NSAccessibilityTextAreaRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTextAreaRole() objc.ID {
-	if _r := raw.NSAccessibilityTextAreaRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityWindowMovedNotification returns the string constant NSAccessibilityWindowMovedNotification, for use as a dictionary key or argument.
+func NSAccessibilityWindowMovedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityWindowMovedNotification")))
 }
 
-// NSAccessibilityScrollAreaRole returns the string constant NSAccessibilityScrollAreaRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityScrollAreaRole() objc.ID {
-	if _r := raw.NSAccessibilityScrollAreaRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityWindowResizedNotification returns the string constant NSAccessibilityWindowResizedNotification, for use as a dictionary key or argument.
+func NSAccessibilityWindowResizedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityWindowResizedNotification")))
 }
 
-// NSAccessibilityPopUpButtonRole returns the string constant NSAccessibilityPopUpButtonRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityPopUpButtonRole() objc.ID {
-	if _r := raw.NSAccessibilityPopUpButtonRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityWindowMiniaturizedNotification returns the string constant NSAccessibilityWindowMiniaturizedNotification, for use as a dictionary key or argument.
+func NSAccessibilityWindowMiniaturizedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityWindowMiniaturizedNotification")))
 }
 
-// NSAccessibilityMenuButtonRole returns the string constant NSAccessibilityMenuButtonRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMenuButtonRole() objc.ID {
-	if _r := raw.NSAccessibilityMenuButtonRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityWindowDeminiaturizedNotification returns the string constant NSAccessibilityWindowDeminiaturizedNotification, for use as a dictionary key or argument.
+func NSAccessibilityWindowDeminiaturizedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityWindowDeminiaturizedNotification")))
 }
 
-// NSAccessibilityTableRole returns the string constant NSAccessibilityTableRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTableRole() objc.ID {
-	if _r := raw.NSAccessibilityTableRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityDrawerCreatedNotification returns the string constant NSAccessibilityDrawerCreatedNotification, for use as a dictionary key or argument.
+func NSAccessibilityDrawerCreatedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDrawerCreatedNotification")))
 }
 
-// NSAccessibilityApplicationRole returns the string constant NSAccessibilityApplicationRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityApplicationRole() objc.ID {
-	if _r := raw.NSAccessibilityApplicationRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySheetCreatedNotification returns the string constant NSAccessibilitySheetCreatedNotification, for use as a dictionary key or argument.
+func NSAccessibilitySheetCreatedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySheetCreatedNotification")))
 }
 
-// NSAccessibilityGroupRole returns the string constant NSAccessibilityGroupRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityGroupRole() objc.ID {
-	if _r := raw.NSAccessibilityGroupRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityUIElementDestroyedNotification returns the string constant NSAccessibilityUIElementDestroyedNotification, for use as a dictionary key or argument.
+func NSAccessibilityUIElementDestroyedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityUIElementDestroyedNotification")))
 }
 
-// NSAccessibilityRadioGroupRole returns the string constant NSAccessibilityRadioGroupRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRadioGroupRole() objc.ID {
-	if _r := raw.NSAccessibilityRadioGroupRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityValueChangedNotification returns the string constant NSAccessibilityValueChangedNotification, for use as a dictionary key or argument.
+func NSAccessibilityValueChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityValueChangedNotification")))
 }
 
-// NSAccessibilityListRole returns the string constant NSAccessibilityListRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityListRole() objc.ID {
-	if _r := raw.NSAccessibilityListRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityTitleChangedNotification returns the string constant NSAccessibilityTitleChangedNotification, for use as a dictionary key or argument.
+func NSAccessibilityTitleChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTitleChangedNotification")))
 }
 
-// NSAccessibilityScrollBarRole returns the string constant NSAccessibilityScrollBarRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityScrollBarRole() objc.ID {
-	if _r := raw.NSAccessibilityScrollBarRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityResizedNotification returns the string constant NSAccessibilityResizedNotification, for use as a dictionary key or argument.
+func NSAccessibilityResizedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityResizedNotification")))
 }
 
-// NSAccessibilityValueIndicatorRole returns the string constant NSAccessibilityValueIndicatorRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityValueIndicatorRole() objc.ID {
-	if _r := raw.NSAccessibilityValueIndicatorRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityMovedNotification returns the string constant NSAccessibilityMovedNotification, for use as a dictionary key or argument.
+func NSAccessibilityMovedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMovedNotification")))
 }
 
-// NSAccessibilityImageRole returns the string constant NSAccessibilityImageRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityImageRole() objc.ID {
-	if _r := raw.NSAccessibilityImageRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityCreatedNotification returns the string constant NSAccessibilityCreatedNotification, for use as a dictionary key or argument.
+func NSAccessibilityCreatedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityCreatedNotification")))
 }
 
-// NSAccessibilityMenuBarRole returns the string constant NSAccessibilityMenuBarRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMenuBarRole() objc.ID {
-	if _r := raw.NSAccessibilityMenuBarRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityLayoutChangedNotification returns the string constant NSAccessibilityLayoutChangedNotification, for use as a dictionary key or argument.
+func NSAccessibilityLayoutChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLayoutChangedNotification")))
 }
 
-// NSAccessibilityMenuBarItemRole returns the string constant NSAccessibilityMenuBarItemRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMenuBarItemRole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityMenuBarItemRole())
+// NSAccessibilityHelpTagCreatedNotification returns the string constant NSAccessibilityHelpTagCreatedNotification, for use as a dictionary key or argument.
+func NSAccessibilityHelpTagCreatedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHelpTagCreatedNotification")))
 }
 
-// NSAccessibilityMenuRole returns the string constant NSAccessibilityMenuRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMenuRole() objc.ID {
-	if _r := raw.NSAccessibilityMenuRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySelectedTextChangedNotification returns the string constant NSAccessibilitySelectedTextChangedNotification, for use as a dictionary key or argument.
+func NSAccessibilitySelectedTextChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySelectedTextChangedNotification")))
 }
 
-// NSAccessibilityMenuItemRole returns the string constant NSAccessibilityMenuItemRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMenuItemRole() objc.ID {
-	if _r := raw.NSAccessibilityMenuItemRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityRowCountChangedNotification returns the string constant NSAccessibilityRowCountChangedNotification, for use as a dictionary key or argument.
+func NSAccessibilityRowCountChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRowCountChangedNotification")))
 }
 
-// NSAccessibilityColumnRole returns the string constant NSAccessibilityColumnRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityColumnRole() objc.ID {
-	if _r := raw.NSAccessibilityColumnRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySelectedChildrenChangedNotification returns the string constant NSAccessibilitySelectedChildrenChangedNotification, for use as a dictionary key or argument.
+func NSAccessibilitySelectedChildrenChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySelectedChildrenChangedNotification")))
 }
 
-// NSAccessibilityRowRole returns the string constant NSAccessibilityRowRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRowRole() objc.ID {
-	if _r := raw.NSAccessibilityRowRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySelectedRowsChangedNotification returns the string constant NSAccessibilitySelectedRowsChangedNotification, for use as a dictionary key or argument.
+func NSAccessibilitySelectedRowsChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySelectedRowsChangedNotification")))
 }
 
-// NSAccessibilityToolbarRole returns the string constant NSAccessibilityToolbarRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityToolbarRole() objc.ID {
-	if _r := raw.NSAccessibilityToolbarRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySelectedColumnsChangedNotification returns the string constant NSAccessibilitySelectedColumnsChangedNotification, for use as a dictionary key or argument.
+func NSAccessibilitySelectedColumnsChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySelectedColumnsChangedNotification")))
 }
 
-// NSAccessibilityBusyIndicatorRole returns the string constant NSAccessibilityBusyIndicatorRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityBusyIndicatorRole() objc.ID {
-	if _r := raw.NSAccessibilityBusyIndicatorRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityRowExpandedNotification returns the string constant NSAccessibilityRowExpandedNotification, for use as a dictionary key or argument.
+func NSAccessibilityRowExpandedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRowExpandedNotification")))
 }
 
-// NSAccessibilityProgressIndicatorRole returns the string constant NSAccessibilityProgressIndicatorRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityProgressIndicatorRole() objc.ID {
-	if _r := raw.NSAccessibilityProgressIndicatorRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityRowCollapsedNotification returns the string constant NSAccessibilityRowCollapsedNotification, for use as a dictionary key or argument.
+func NSAccessibilityRowCollapsedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRowCollapsedNotification")))
 }
 
-// NSAccessibilityWindowRole returns the string constant NSAccessibilityWindowRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityWindowRole() objc.ID {
-	if _r := raw.NSAccessibilityWindowRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityAutocorrectionOccurredNotification returns the string constant NSAccessibilityAutocorrectionOccurredNotification, for use as a dictionary key or argument.
+func NSAccessibilityAutocorrectionOccurredNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityAutocorrectionOccurredNotification")))
 }
 
-// NSAccessibilityDrawerRole returns the string constant NSAccessibilityDrawerRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDrawerRole() objc.ID {
-	if _r := raw.NSAccessibilityDrawerRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityTextInputMarkingSessionBeganNotification returns the string constant NSAccessibilityTextInputMarkingSessionBeganNotification, for use as a dictionary key or argument.
+func NSAccessibilityTextInputMarkingSessionBeganNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTextInputMarkingSessionBeganNotification")))
 }
 
-// NSAccessibilitySystemWideRole returns the string constant NSAccessibilitySystemWideRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySystemWideRole() objc.ID {
-	if _r := raw.NSAccessibilitySystemWideRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityTextInputMarkingSessionEndedNotification returns the string constant NSAccessibilityTextInputMarkingSessionEndedNotification, for use as a dictionary key or argument.
+func NSAccessibilityTextInputMarkingSessionEndedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTextInputMarkingSessionEndedNotification")))
 }
 
-// NSAccessibilityOutlineRole returns the string constant NSAccessibilityOutlineRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityOutlineRole() objc.ID {
-	if _r := raw.NSAccessibilityOutlineRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityDraggingSourceDragBeganNotification returns the string constant NSAccessibilityDraggingSourceDragBeganNotification, for use as a dictionary key or argument.
+func NSAccessibilityDraggingSourceDragBeganNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDraggingSourceDragBeganNotification")))
 }
 
-// NSAccessibilityIncrementorRole returns the string constant NSAccessibilityIncrementorRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityIncrementorRole() objc.ID {
-	if _r := raw.NSAccessibilityIncrementorRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityDraggingSourceDragEndedNotification returns the string constant NSAccessibilityDraggingSourceDragEndedNotification, for use as a dictionary key or argument.
+func NSAccessibilityDraggingSourceDragEndedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDraggingSourceDragEndedNotification")))
 }
 
-// NSAccessibilityBrowserRole returns the string constant NSAccessibilityBrowserRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityBrowserRole() objc.ID {
-	if _r := raw.NSAccessibilityBrowserRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityDraggingDestinationDropAllowedNotification returns the string constant NSAccessibilityDraggingDestinationDropAllowedNotification, for use as a dictionary key or argument.
+func NSAccessibilityDraggingDestinationDropAllowedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDraggingDestinationDropAllowedNotification")))
 }
 
-// NSAccessibilityComboBoxRole returns the string constant NSAccessibilityComboBoxRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityComboBoxRole() objc.ID {
-	if _r := raw.NSAccessibilityComboBoxRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityDraggingDestinationDropNotAllowedNotification returns the string constant NSAccessibilityDraggingDestinationDropNotAllowedNotification, for use as a dictionary key or argument.
+func NSAccessibilityDraggingDestinationDropNotAllowedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDraggingDestinationDropNotAllowedNotification")))
 }
 
-// NSAccessibilitySplitGroupRole returns the string constant NSAccessibilitySplitGroupRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySplitGroupRole() objc.ID {
-	if _r := raw.NSAccessibilitySplitGroupRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityDraggingDestinationDragAcceptedNotification returns the string constant NSAccessibilityDraggingDestinationDragAcceptedNotification, for use as a dictionary key or argument.
+func NSAccessibilityDraggingDestinationDragAcceptedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDraggingDestinationDragAcceptedNotification")))
 }
 
-// NSAccessibilitySplitterRole returns the string constant NSAccessibilitySplitterRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySplitterRole() objc.ID {
-	if _r := raw.NSAccessibilitySplitterRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityDraggingDestinationDragNotAcceptedNotification returns the string constant NSAccessibilityDraggingDestinationDragNotAcceptedNotification, for use as a dictionary key or argument.
+func NSAccessibilityDraggingDestinationDragNotAcceptedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDraggingDestinationDragNotAcceptedNotification")))
 }
 
-// NSAccessibilityColorWellRole returns the string constant NSAccessibilityColorWellRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityColorWellRole() objc.ID {
-	if _r := raw.NSAccessibilityColorWellRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySelectedCellsChangedNotification returns the string constant NSAccessibilitySelectedCellsChangedNotification, for use as a dictionary key or argument.
+func NSAccessibilitySelectedCellsChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySelectedCellsChangedNotification")))
 }
 
-// NSAccessibilityGrowAreaRole returns the string constant NSAccessibilityGrowAreaRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityGrowAreaRole() objc.ID {
-	if _r := raw.NSAccessibilityGrowAreaRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityUnitsChangedNotification returns the string constant NSAccessibilityUnitsChangedNotification, for use as a dictionary key or argument.
+func NSAccessibilityUnitsChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityUnitsChangedNotification")))
 }
 
-// NSAccessibilitySheetRole returns the string constant NSAccessibilitySheetRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySheetRole() objc.ID {
-	if _r := raw.NSAccessibilitySheetRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySelectedChildrenMovedNotification returns the string constant NSAccessibilitySelectedChildrenMovedNotification, for use as a dictionary key or argument.
+func NSAccessibilitySelectedChildrenMovedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySelectedChildrenMovedNotification")))
 }
 
-// NSAccessibilityHelpTagRole returns the string constant NSAccessibilityHelpTagRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHelpTagRole() objc.ID {
-	if _r := raw.NSAccessibilityHelpTagRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityAnnouncementRequestedNotification returns the string constant NSAccessibilityAnnouncementRequestedNotification, for use as a dictionary key or argument.
+func NSAccessibilityAnnouncementRequestedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityAnnouncementRequestedNotification")))
 }
 
-// NSAccessibilityMatteRole returns the string constant NSAccessibilityMatteRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMatteRole() objc.ID {
-	if _r := raw.NSAccessibilityMatteRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityUnknownRole returns the string constant NSAccessibilityUnknownRole, for use as a dictionary key or argument.
+func NSAccessibilityUnknownRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityUnknownRole")))
 }
 
-// NSAccessibilityRulerRole returns the string constant NSAccessibilityRulerRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRulerRole() objc.ID {
-	if _r := raw.NSAccessibilityRulerRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityButtonRole returns the string constant NSAccessibilityButtonRole, for use as a dictionary key or argument.
+func NSAccessibilityButtonRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityButtonRole")))
 }
 
-// NSAccessibilityRulerMarkerRole returns the string constant NSAccessibilityRulerMarkerRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRulerMarkerRole() objc.ID {
-	if _r := raw.NSAccessibilityRulerMarkerRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityRadioButtonRole returns the string constant NSAccessibilityRadioButtonRole, for use as a dictionary key or argument.
+func NSAccessibilityRadioButtonRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRadioButtonRole")))
 }
 
-// NSAccessibilityLinkRole returns the string constant NSAccessibilityLinkRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityLinkRole() objc.ID {
-	if _r := raw.NSAccessibilityLinkRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityCheckBoxRole returns the string constant NSAccessibilityCheckBoxRole, for use as a dictionary key or argument.
+func NSAccessibilityCheckBoxRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityCheckBoxRole")))
 }
 
-// NSAccessibilityDisclosureTriangleRole returns the string constant NSAccessibilityDisclosureTriangleRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDisclosureTriangleRole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityDisclosureTriangleRole())
+// NSAccessibilitySliderRole returns the string constant NSAccessibilitySliderRole, for use as a dictionary key or argument.
+func NSAccessibilitySliderRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySliderRole")))
 }
 
-// NSAccessibilityGridRole returns the string constant NSAccessibilityGridRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityGridRole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityGridRole())
+// NSAccessibilityTabGroupRole returns the string constant NSAccessibilityTabGroupRole, for use as a dictionary key or argument.
+func NSAccessibilityTabGroupRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTabGroupRole")))
 }
 
-// NSAccessibilityRelevanceIndicatorRole returns the string constant NSAccessibilityRelevanceIndicatorRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRelevanceIndicatorRole() objc.ID {
-	if _r := raw.NSAccessibilityRelevanceIndicatorRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityTextFieldRole returns the string constant NSAccessibilityTextFieldRole, for use as a dictionary key or argument.
+func NSAccessibilityTextFieldRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTextFieldRole")))
 }
 
-// NSAccessibilityDateTimeAreaRole returns the string constant NSAccessibilityDateTimeAreaRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDateTimeAreaRole() objc.ID {
-	if _r := raw.NSAccessibilityDateTimeAreaRole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityStaticTextRole returns the string constant NSAccessibilityStaticTextRole, for use as a dictionary key or argument.
+func NSAccessibilityStaticTextRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityStaticTextRole")))
 }
 
-// NSAccessibilityLevelIndicatorRole returns the string constant NSAccessibilityLevelIndicatorRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityLevelIndicatorRole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityLevelIndicatorRole())
+// NSAccessibilityTextAreaRole returns the string constant NSAccessibilityTextAreaRole, for use as a dictionary key or argument.
+func NSAccessibilityTextAreaRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTextAreaRole")))
 }
 
-// NSAccessibilityCellRole returns the string constant NSAccessibilityCellRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityCellRole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityCellRole())
+// NSAccessibilityScrollAreaRole returns the string constant NSAccessibilityScrollAreaRole, for use as a dictionary key or argument.
+func NSAccessibilityScrollAreaRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityScrollAreaRole")))
 }
 
-// NSAccessibilityPopoverRole returns the string constant NSAccessibilityPopoverRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityPopoverRole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityPopoverRole())
+// NSAccessibilityPopUpButtonRole returns the string constant NSAccessibilityPopUpButtonRole, for use as a dictionary key or argument.
+func NSAccessibilityPopUpButtonRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityPopUpButtonRole")))
 }
 
-// NSAccessibilityPageRole returns the string constant NSAccessibilityPageRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityPageRole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityPageRole())
+// NSAccessibilityMenuButtonRole returns the string constant NSAccessibilityMenuButtonRole, for use as a dictionary key or argument.
+func NSAccessibilityMenuButtonRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMenuButtonRole")))
 }
 
-// NSAccessibilityHeadingRole returns the string constant NSAccessibilityHeadingRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHeadingRole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityHeadingRole())
+// NSAccessibilityTableRole returns the string constant NSAccessibilityTableRole, for use as a dictionary key or argument.
+func NSAccessibilityTableRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTableRole")))
 }
 
-// NSAccessibilityListMarkerRole returns the string constant NSAccessibilityListMarkerRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityListMarkerRole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityListMarkerRole())
+// NSAccessibilityApplicationRole returns the string constant NSAccessibilityApplicationRole, for use as a dictionary key or argument.
+func NSAccessibilityApplicationRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityApplicationRole")))
 }
 
-// NSAccessibilityWebAreaRole returns the string constant NSAccessibilityWebAreaRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityWebAreaRole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityWebAreaRole())
+// NSAccessibilityGroupRole returns the string constant NSAccessibilityGroupRole, for use as a dictionary key or argument.
+func NSAccessibilityGroupRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityGroupRole")))
 }
 
-// NSAccessibilityLayoutAreaRole returns the string constant NSAccessibilityLayoutAreaRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityLayoutAreaRole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityLayoutAreaRole())
+// NSAccessibilityRadioGroupRole returns the string constant NSAccessibilityRadioGroupRole, for use as a dictionary key or argument.
+func NSAccessibilityRadioGroupRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRadioGroupRole")))
 }
 
-// NSAccessibilityLayoutItemRole returns the string constant NSAccessibilityLayoutItemRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityLayoutItemRole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityLayoutItemRole())
+// NSAccessibilityListRole returns the string constant NSAccessibilityListRole, for use as a dictionary key or argument.
+func NSAccessibilityListRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityListRole")))
 }
 
-// NSAccessibilityHandleRole returns the string constant NSAccessibilityHandleRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHandleRole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityHandleRole())
+// NSAccessibilityScrollBarRole returns the string constant NSAccessibilityScrollBarRole, for use as a dictionary key or argument.
+func NSAccessibilityScrollBarRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityScrollBarRole")))
 }
 
-// NSAccessibilityUnknownSubrole returns the string constant NSAccessibilityUnknownSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityUnknownSubrole() objc.ID {
-	if _r := raw.NSAccessibilityUnknownSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityValueIndicatorRole returns the string constant NSAccessibilityValueIndicatorRole, for use as a dictionary key or argument.
+func NSAccessibilityValueIndicatorRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityValueIndicatorRole")))
 }
 
-// NSAccessibilityCloseButtonSubrole returns the string constant NSAccessibilityCloseButtonSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityCloseButtonSubrole() objc.ID {
-	if _r := raw.NSAccessibilityCloseButtonSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityImageRole returns the string constant NSAccessibilityImageRole, for use as a dictionary key or argument.
+func NSAccessibilityImageRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityImageRole")))
 }
 
-// NSAccessibilityZoomButtonSubrole returns the string constant NSAccessibilityZoomButtonSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityZoomButtonSubrole() objc.ID {
-	if _r := raw.NSAccessibilityZoomButtonSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityMenuBarRole returns the string constant NSAccessibilityMenuBarRole, for use as a dictionary key or argument.
+func NSAccessibilityMenuBarRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMenuBarRole")))
 }
 
-// NSAccessibilityMinimizeButtonSubrole returns the string constant NSAccessibilityMinimizeButtonSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMinimizeButtonSubrole() objc.ID {
-	if _r := raw.NSAccessibilityMinimizeButtonSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityMenuBarItemRole returns the string constant NSAccessibilityMenuBarItemRole, for use as a dictionary key or argument.
+func NSAccessibilityMenuBarItemRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMenuBarItemRole")))
 }
 
-// NSAccessibilityToolbarButtonSubrole returns the string constant NSAccessibilityToolbarButtonSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityToolbarButtonSubrole() objc.ID {
-	if _r := raw.NSAccessibilityToolbarButtonSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityMenuRole returns the string constant NSAccessibilityMenuRole, for use as a dictionary key or argument.
+func NSAccessibilityMenuRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMenuRole")))
 }
 
-// NSAccessibilityTableRowSubrole returns the string constant NSAccessibilityTableRowSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTableRowSubrole() objc.ID {
-	if _r := raw.NSAccessibilityTableRowSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityMenuItemRole returns the string constant NSAccessibilityMenuItemRole, for use as a dictionary key or argument.
+func NSAccessibilityMenuItemRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMenuItemRole")))
 }
 
-// NSAccessibilityOutlineRowSubrole returns the string constant NSAccessibilityOutlineRowSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityOutlineRowSubrole() objc.ID {
-	if _r := raw.NSAccessibilityOutlineRowSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityColumnRole returns the string constant NSAccessibilityColumnRole, for use as a dictionary key or argument.
+func NSAccessibilityColumnRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityColumnRole")))
 }
 
-// NSAccessibilitySecureTextFieldSubrole returns the string constant NSAccessibilitySecureTextFieldSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySecureTextFieldSubrole() objc.ID {
-	if _r := raw.NSAccessibilitySecureTextFieldSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityRowRole returns the string constant NSAccessibilityRowRole, for use as a dictionary key or argument.
+func NSAccessibilityRowRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRowRole")))
 }
 
-// NSAccessibilityStandardWindowSubrole returns the string constant NSAccessibilityStandardWindowSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityStandardWindowSubrole() objc.ID {
-	if _r := raw.NSAccessibilityStandardWindowSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityToolbarRole returns the string constant NSAccessibilityToolbarRole, for use as a dictionary key or argument.
+func NSAccessibilityToolbarRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityToolbarRole")))
 }
 
-// NSAccessibilityDialogSubrole returns the string constant NSAccessibilityDialogSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDialogSubrole() objc.ID {
-	if _r := raw.NSAccessibilityDialogSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityBusyIndicatorRole returns the string constant NSAccessibilityBusyIndicatorRole, for use as a dictionary key or argument.
+func NSAccessibilityBusyIndicatorRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityBusyIndicatorRole")))
 }
 
-// NSAccessibilitySystemDialogSubrole returns the string constant NSAccessibilitySystemDialogSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySystemDialogSubrole() objc.ID {
-	if _r := raw.NSAccessibilitySystemDialogSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityProgressIndicatorRole returns the string constant NSAccessibilityProgressIndicatorRole, for use as a dictionary key or argument.
+func NSAccessibilityProgressIndicatorRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityProgressIndicatorRole")))
 }
 
-// NSAccessibilityFloatingWindowSubrole returns the string constant NSAccessibilityFloatingWindowSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityFloatingWindowSubrole() objc.ID {
-	if _r := raw.NSAccessibilityFloatingWindowSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityWindowRole returns the string constant NSAccessibilityWindowRole, for use as a dictionary key or argument.
+func NSAccessibilityWindowRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityWindowRole")))
 }
 
-// NSAccessibilitySystemFloatingWindowSubrole returns the string constant NSAccessibilitySystemFloatingWindowSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySystemFloatingWindowSubrole() objc.ID {
-	if _r := raw.NSAccessibilitySystemFloatingWindowSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityDrawerRole returns the string constant NSAccessibilityDrawerRole, for use as a dictionary key or argument.
+func NSAccessibilityDrawerRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDrawerRole")))
 }
 
-// NSAccessibilityIncrementArrowSubrole returns the string constant NSAccessibilityIncrementArrowSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityIncrementArrowSubrole() objc.ID {
-	if _r := raw.NSAccessibilityIncrementArrowSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySystemWideRole returns the string constant NSAccessibilitySystemWideRole, for use as a dictionary key or argument.
+func NSAccessibilitySystemWideRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySystemWideRole")))
 }
 
-// NSAccessibilityDecrementArrowSubrole returns the string constant NSAccessibilityDecrementArrowSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDecrementArrowSubrole() objc.ID {
-	if _r := raw.NSAccessibilityDecrementArrowSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityOutlineRole returns the string constant NSAccessibilityOutlineRole, for use as a dictionary key or argument.
+func NSAccessibilityOutlineRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityOutlineRole")))
 }
 
-// NSAccessibilityIncrementPageSubrole returns the string constant NSAccessibilityIncrementPageSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityIncrementPageSubrole() objc.ID {
-	if _r := raw.NSAccessibilityIncrementPageSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityIncrementorRole returns the string constant NSAccessibilityIncrementorRole, for use as a dictionary key or argument.
+func NSAccessibilityIncrementorRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityIncrementorRole")))
 }
 
-// NSAccessibilityDecrementPageSubrole returns the string constant NSAccessibilityDecrementPageSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDecrementPageSubrole() objc.ID {
-	if _r := raw.NSAccessibilityDecrementPageSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityBrowserRole returns the string constant NSAccessibilityBrowserRole, for use as a dictionary key or argument.
+func NSAccessibilityBrowserRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityBrowserRole")))
 }
 
-// NSAccessibilitySearchFieldSubrole returns the string constant NSAccessibilitySearchFieldSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySearchFieldSubrole() objc.ID {
-	if _r := raw.NSAccessibilitySearchFieldSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityComboBoxRole returns the string constant NSAccessibilityComboBoxRole, for use as a dictionary key or argument.
+func NSAccessibilityComboBoxRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityComboBoxRole")))
 }
 
-// NSAccessibilityTextAttachmentSubrole returns the string constant NSAccessibilityTextAttachmentSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTextAttachmentSubrole() objc.ID {
-	if _r := raw.NSAccessibilityTextAttachmentSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySplitGroupRole returns the string constant NSAccessibilitySplitGroupRole, for use as a dictionary key or argument.
+func NSAccessibilitySplitGroupRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySplitGroupRole")))
 }
 
-// NSAccessibilityTextLinkSubrole returns the string constant NSAccessibilityTextLinkSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTextLinkSubrole() objc.ID {
-	if _r := raw.NSAccessibilityTextLinkSubrole(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilitySplitterRole returns the string constant NSAccessibilitySplitterRole, for use as a dictionary key or argument.
+func NSAccessibilitySplitterRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySplitterRole")))
 }
 
-// NSAccessibilityTimelineSubrole returns the string constant NSAccessibilityTimelineSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTimelineSubrole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityTimelineSubrole())
+// NSAccessibilityColorWellRole returns the string constant NSAccessibilityColorWellRole, for use as a dictionary key or argument.
+func NSAccessibilityColorWellRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityColorWellRole")))
 }
 
-// NSAccessibilitySortButtonSubrole returns the string constant NSAccessibilitySortButtonSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySortButtonSubrole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySortButtonSubrole())
+// NSAccessibilityGrowAreaRole returns the string constant NSAccessibilityGrowAreaRole, for use as a dictionary key or argument.
+func NSAccessibilityGrowAreaRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityGrowAreaRole")))
 }
 
-// NSAccessibilityRatingIndicatorSubrole returns the string constant NSAccessibilityRatingIndicatorSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRatingIndicatorSubrole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityRatingIndicatorSubrole())
+// NSAccessibilitySheetRole returns the string constant NSAccessibilitySheetRole, for use as a dictionary key or argument.
+func NSAccessibilitySheetRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySheetRole")))
 }
 
-// NSAccessibilityContentListSubrole returns the string constant NSAccessibilityContentListSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityContentListSubrole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityContentListSubrole())
+// NSAccessibilityHelpTagRole returns the string constant NSAccessibilityHelpTagRole, for use as a dictionary key or argument.
+func NSAccessibilityHelpTagRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHelpTagRole")))
 }
 
-// NSAccessibilityDefinitionListSubrole returns the string constant NSAccessibilityDefinitionListSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDefinitionListSubrole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityDefinitionListSubrole())
+// NSAccessibilityMatteRole returns the string constant NSAccessibilityMatteRole, for use as a dictionary key or argument.
+func NSAccessibilityMatteRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMatteRole")))
 }
 
-// NSAccessibilityFullScreenButtonSubrole returns the string constant NSAccessibilityFullScreenButtonSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityFullScreenButtonSubrole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityFullScreenButtonSubrole())
+// NSAccessibilityRulerRole returns the string constant NSAccessibilityRulerRole, for use as a dictionary key or argument.
+func NSAccessibilityRulerRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRulerRole")))
 }
 
-// NSAccessibilityToggleSubrole returns the string constant NSAccessibilityToggleSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityToggleSubrole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityToggleSubrole())
+// NSAccessibilityRulerMarkerRole returns the string constant NSAccessibilityRulerMarkerRole, for use as a dictionary key or argument.
+func NSAccessibilityRulerMarkerRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRulerMarkerRole")))
 }
 
-// NSAccessibilitySwitchSubrole returns the string constant NSAccessibilitySwitchSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySwitchSubrole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySwitchSubrole())
+// NSAccessibilityLinkRole returns the string constant NSAccessibilityLinkRole, for use as a dictionary key or argument.
+func NSAccessibilityLinkRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLinkRole")))
 }
 
-// NSAccessibilityDescriptionListSubrole returns the string constant NSAccessibilityDescriptionListSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDescriptionListSubrole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityDescriptionListSubrole())
+// NSAccessibilityDisclosureTriangleRole returns the string constant NSAccessibilityDisclosureTriangleRole, for use as a dictionary key or argument.
+func NSAccessibilityDisclosureTriangleRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDisclosureTriangleRole")))
 }
 
-// NSAccessibilityTabButtonSubrole returns the string constant NSAccessibilityTabButtonSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTabButtonSubrole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityTabButtonSubrole())
+// NSAccessibilityGridRole returns the string constant NSAccessibilityGridRole, for use as a dictionary key or argument.
+func NSAccessibilityGridRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityGridRole")))
 }
 
-// NSAccessibilityCollectionListSubrole returns the string constant NSAccessibilityCollectionListSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityCollectionListSubrole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityCollectionListSubrole())
+// NSAccessibilityRelevanceIndicatorRole returns the string constant NSAccessibilityRelevanceIndicatorRole, for use as a dictionary key or argument.
+func NSAccessibilityRelevanceIndicatorRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRelevanceIndicatorRole")))
 }
 
-// NSAccessibilitySectionListSubrole returns the string constant NSAccessibilitySectionListSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySectionListSubrole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySectionListSubrole())
+// NSAccessibilityDateTimeAreaRole returns the string constant NSAccessibilityDateTimeAreaRole, for use as a dictionary key or argument.
+func NSAccessibilityDateTimeAreaRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDateTimeAreaRole")))
 }
 
-// NSAccessibilitySuggestionSubrole returns the string constant NSAccessibilitySuggestionSubrole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySuggestionSubrole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySuggestionSubrole())
+// NSAccessibilityLevelIndicatorRole returns the string constant NSAccessibilityLevelIndicatorRole, for use as a dictionary key or argument.
+func NSAccessibilityLevelIndicatorRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLevelIndicatorRole")))
 }
 
-// NSAccessibilityUIElementsKey returns the string constant NSAccessibilityUIElementsKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityUIElementsKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityUIElementsKey())
+// NSAccessibilityCellRole returns the string constant NSAccessibilityCellRole, for use as a dictionary key or argument.
+func NSAccessibilityCellRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityCellRole")))
 }
 
-// NSAccessibilityPriorityKey returns the string constant NSAccessibilityPriorityKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityPriorityKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityPriorityKey())
+// NSAccessibilityPopoverRole returns the string constant NSAccessibilityPopoverRole, for use as a dictionary key or argument.
+func NSAccessibilityPopoverRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityPopoverRole")))
 }
 
-// NSAccessibilityAnnouncementKey returns the string constant NSAccessibilityAnnouncementKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityAnnouncementKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityAnnouncementKey())
+// NSAccessibilityPageRole returns the string constant NSAccessibilityPageRole, for use as a dictionary key or argument.
+func NSAccessibilityPageRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityPageRole")))
 }
 
-// NSAccessibilityUIElementsForSearchPredicateParameterizedAttribute returns the string constant NSAccessibilityUIElementsForSearchPredicateParameterizedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityUIElementsForSearchPredicateParameterizedAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityUIElementsForSearchPredicateParameterizedAttribute())
+// NSAccessibilityHeadingRole returns the string constant NSAccessibilityHeadingRole, for use as a dictionary key or argument.
+func NSAccessibilityHeadingRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHeadingRole")))
 }
 
-// NSAccessibilityResultsForSearchPredicateParameterizedAttribute returns the string constant NSAccessibilityResultsForSearchPredicateParameterizedAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityResultsForSearchPredicateParameterizedAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityResultsForSearchPredicateParameterizedAttribute())
+// NSAccessibilityListMarkerRole returns the string constant NSAccessibilityListMarkerRole, for use as a dictionary key or argument.
+func NSAccessibilityListMarkerRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityListMarkerRole")))
 }
 
-// NSAccessibilitySearchIdentifiersKey returns the string constant NSAccessibilitySearchIdentifiersKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySearchIdentifiersKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySearchIdentifiersKey())
+// NSAccessibilityWebAreaRole returns the string constant NSAccessibilityWebAreaRole, for use as a dictionary key or argument.
+func NSAccessibilityWebAreaRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityWebAreaRole")))
 }
 
-// NSAccessibilitySearchCurrentElementKey returns the string constant NSAccessibilitySearchCurrentElementKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySearchCurrentElementKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySearchCurrentElementKey())
+// NSAccessibilityLayoutAreaRole returns the string constant NSAccessibilityLayoutAreaRole, for use as a dictionary key or argument.
+func NSAccessibilityLayoutAreaRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLayoutAreaRole")))
 }
 
-// NSAccessibilitySearchCurrentRangeKey returns the string constant NSAccessibilitySearchCurrentRangeKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySearchCurrentRangeKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySearchCurrentRangeKey())
+// NSAccessibilityLayoutItemRole returns the string constant NSAccessibilityLayoutItemRole, for use as a dictionary key or argument.
+func NSAccessibilityLayoutItemRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLayoutItemRole")))
 }
 
-// NSAccessibilitySearchDirectionKey returns the string constant NSAccessibilitySearchDirectionKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySearchDirectionKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySearchDirectionKey())
+// NSAccessibilityHandleRole returns the string constant NSAccessibilityHandleRole, for use as a dictionary key or argument.
+func NSAccessibilityHandleRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHandleRole")))
 }
 
-// NSAccessibilitySearchResultsLimitKey returns the string constant NSAccessibilitySearchResultsLimitKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySearchResultsLimitKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySearchResultsLimitKey())
+// NSAccessibilityUnknownSubrole returns the string constant NSAccessibilityUnknownSubrole, for use as a dictionary key or argument.
+func NSAccessibilityUnknownSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityUnknownSubrole")))
 }
 
-// NSAccessibilitySearchTextKey returns the string constant NSAccessibilitySearchTextKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySearchTextKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySearchTextKey())
+// NSAccessibilityCloseButtonSubrole returns the string constant NSAccessibilityCloseButtonSubrole, for use as a dictionary key or argument.
+func NSAccessibilityCloseButtonSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityCloseButtonSubrole")))
 }
 
-// NSAccessibilitySearchDirectionNext returns the string constant NSAccessibilitySearchDirectionNext as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySearchDirectionNext() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySearchDirectionNext())
+// NSAccessibilityZoomButtonSubrole returns the string constant NSAccessibilityZoomButtonSubrole, for use as a dictionary key or argument.
+func NSAccessibilityZoomButtonSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityZoomButtonSubrole")))
 }
 
-// NSAccessibilitySearchDirectionPrevious returns the string constant NSAccessibilitySearchDirectionPrevious as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySearchDirectionPrevious() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySearchDirectionPrevious())
+// NSAccessibilityMinimizeButtonSubrole returns the string constant NSAccessibilityMinimizeButtonSubrole, for use as a dictionary key or argument.
+func NSAccessibilityMinimizeButtonSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMinimizeButtonSubrole")))
 }
 
-// NSAccessibilitySearchResultElementKey returns the string constant NSAccessibilitySearchResultElementKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySearchResultElementKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySearchResultElementKey())
+// NSAccessibilityToolbarButtonSubrole returns the string constant NSAccessibilityToolbarButtonSubrole, for use as a dictionary key or argument.
+func NSAccessibilityToolbarButtonSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityToolbarButtonSubrole")))
 }
 
-// NSAccessibilitySearchResultRangeKey returns the string constant NSAccessibilitySearchResultRangeKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySearchResultRangeKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySearchResultRangeKey())
+// NSAccessibilityTableRowSubrole returns the string constant NSAccessibilityTableRowSubrole, for use as a dictionary key or argument.
+func NSAccessibilityTableRowSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTableRowSubrole")))
 }
 
-// NSAccessibilitySearchResultDescriptionOverrideKey returns the string constant NSAccessibilitySearchResultDescriptionOverrideKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySearchResultDescriptionOverrideKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySearchResultDescriptionOverrideKey())
+// NSAccessibilityOutlineRowSubrole returns the string constant NSAccessibilityOutlineRowSubrole, for use as a dictionary key or argument.
+func NSAccessibilityOutlineRowSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityOutlineRowSubrole")))
 }
 
-// NSAccessibilitySearchResultLoaderKey returns the string constant NSAccessibilitySearchResultLoaderKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySearchResultLoaderKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySearchResultLoaderKey())
+// NSAccessibilitySecureTextFieldSubrole returns the string constant NSAccessibilitySecureTextFieldSubrole, for use as a dictionary key or argument.
+func NSAccessibilitySecureTextFieldSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySecureTextFieldSubrole")))
 }
 
-// NSAccessibilityAnyTypeSearchKey returns the string constant NSAccessibilityAnyTypeSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityAnyTypeSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityAnyTypeSearchKey())
+// NSAccessibilityStandardWindowSubrole returns the string constant NSAccessibilityStandardWindowSubrole, for use as a dictionary key or argument.
+func NSAccessibilityStandardWindowSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityStandardWindowSubrole")))
 }
 
-// NSAccessibilityArticleSearchKey returns the string constant NSAccessibilityArticleSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityArticleSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityArticleSearchKey())
+// NSAccessibilityDialogSubrole returns the string constant NSAccessibilityDialogSubrole, for use as a dictionary key or argument.
+func NSAccessibilityDialogSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDialogSubrole")))
 }
 
-// NSAccessibilityBlockquoteSameLevelSearchKey returns the string constant NSAccessibilityBlockquoteSameLevelSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityBlockquoteSameLevelSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityBlockquoteSameLevelSearchKey())
+// NSAccessibilitySystemDialogSubrole returns the string constant NSAccessibilitySystemDialogSubrole, for use as a dictionary key or argument.
+func NSAccessibilitySystemDialogSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySystemDialogSubrole")))
 }
 
-// NSAccessibilityBlockquoteSearchKey returns the string constant NSAccessibilityBlockquoteSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityBlockquoteSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityBlockquoteSearchKey())
+// NSAccessibilityFloatingWindowSubrole returns the string constant NSAccessibilityFloatingWindowSubrole, for use as a dictionary key or argument.
+func NSAccessibilityFloatingWindowSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFloatingWindowSubrole")))
 }
 
-// NSAccessibilityBoldFontSearchKey returns the string constant NSAccessibilityBoldFontSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityBoldFontSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityBoldFontSearchKey())
+// NSAccessibilitySystemFloatingWindowSubrole returns the string constant NSAccessibilitySystemFloatingWindowSubrole, for use as a dictionary key or argument.
+func NSAccessibilitySystemFloatingWindowSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySystemFloatingWindowSubrole")))
 }
 
-// NSAccessibilityButtonSearchKey returns the string constant NSAccessibilityButtonSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityButtonSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityButtonSearchKey())
+// NSAccessibilityIncrementArrowSubrole returns the string constant NSAccessibilityIncrementArrowSubrole, for use as a dictionary key or argument.
+func NSAccessibilityIncrementArrowSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityIncrementArrowSubrole")))
 }
 
-// NSAccessibilityCheckBoxSearchKey returns the string constant NSAccessibilityCheckBoxSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityCheckBoxSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityCheckBoxSearchKey())
+// NSAccessibilityDecrementArrowSubrole returns the string constant NSAccessibilityDecrementArrowSubrole, for use as a dictionary key or argument.
+func NSAccessibilityDecrementArrowSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDecrementArrowSubrole")))
 }
 
-// NSAccessibilityControlSearchKey returns the string constant NSAccessibilityControlSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityControlSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityControlSearchKey())
+// NSAccessibilityIncrementPageSubrole returns the string constant NSAccessibilityIncrementPageSubrole, for use as a dictionary key or argument.
+func NSAccessibilityIncrementPageSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityIncrementPageSubrole")))
 }
 
-// NSAccessibilityDifferentTypeSearchKey returns the string constant NSAccessibilityDifferentTypeSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityDifferentTypeSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityDifferentTypeSearchKey())
+// NSAccessibilityDecrementPageSubrole returns the string constant NSAccessibilityDecrementPageSubrole, for use as a dictionary key or argument.
+func NSAccessibilityDecrementPageSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDecrementPageSubrole")))
 }
 
-// NSAccessibilityFontChangeSearchKey returns the string constant NSAccessibilityFontChangeSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityFontChangeSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityFontChangeSearchKey())
+// NSAccessibilitySearchFieldSubrole returns the string constant NSAccessibilitySearchFieldSubrole, for use as a dictionary key or argument.
+func NSAccessibilitySearchFieldSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySearchFieldSubrole")))
 }
 
-// NSAccessibilityFontColorChangeSearchKey returns the string constant NSAccessibilityFontColorChangeSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityFontColorChangeSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityFontColorChangeSearchKey())
+// NSAccessibilityTextAttachmentSubrole returns the string constant NSAccessibilityTextAttachmentSubrole, for use as a dictionary key or argument.
+func NSAccessibilityTextAttachmentSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTextAttachmentSubrole")))
 }
 
-// NSAccessibilityFrameSearchKey returns the string constant NSAccessibilityFrameSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityFrameSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityFrameSearchKey())
+// NSAccessibilityTextLinkSubrole returns the string constant NSAccessibilityTextLinkSubrole, for use as a dictionary key or argument.
+func NSAccessibilityTextLinkSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTextLinkSubrole")))
 }
 
-// NSAccessibilityGraphicSearchKey returns the string constant NSAccessibilityGraphicSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityGraphicSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityGraphicSearchKey())
+// NSAccessibilityTimelineSubrole returns the string constant NSAccessibilityTimelineSubrole, for use as a dictionary key or argument.
+func NSAccessibilityTimelineSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTimelineSubrole")))
 }
 
-// NSAccessibilityHeadingLevel1SearchKey returns the string constant NSAccessibilityHeadingLevel1SearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHeadingLevel1SearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityHeadingLevel1SearchKey())
+// NSAccessibilitySortButtonSubrole returns the string constant NSAccessibilitySortButtonSubrole, for use as a dictionary key or argument.
+func NSAccessibilitySortButtonSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySortButtonSubrole")))
 }
 
-// NSAccessibilityHeadingLevel2SearchKey returns the string constant NSAccessibilityHeadingLevel2SearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHeadingLevel2SearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityHeadingLevel2SearchKey())
+// NSAccessibilityRatingIndicatorSubrole returns the string constant NSAccessibilityRatingIndicatorSubrole, for use as a dictionary key or argument.
+func NSAccessibilityRatingIndicatorSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRatingIndicatorSubrole")))
 }
 
-// NSAccessibilityHeadingLevel3SearchKey returns the string constant NSAccessibilityHeadingLevel3SearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHeadingLevel3SearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityHeadingLevel3SearchKey())
+// NSAccessibilityContentListSubrole returns the string constant NSAccessibilityContentListSubrole, for use as a dictionary key or argument.
+func NSAccessibilityContentListSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityContentListSubrole")))
 }
 
-// NSAccessibilityHeadingLevel4SearchKey returns the string constant NSAccessibilityHeadingLevel4SearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHeadingLevel4SearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityHeadingLevel4SearchKey())
+// NSAccessibilityDefinitionListSubrole returns the string constant NSAccessibilityDefinitionListSubrole, for use as a dictionary key or argument.
+func NSAccessibilityDefinitionListSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDefinitionListSubrole")))
 }
 
-// NSAccessibilityHeadingLevel5SearchKey returns the string constant NSAccessibilityHeadingLevel5SearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHeadingLevel5SearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityHeadingLevel5SearchKey())
+// NSAccessibilityFullScreenButtonSubrole returns the string constant NSAccessibilityFullScreenButtonSubrole, for use as a dictionary key or argument.
+func NSAccessibilityFullScreenButtonSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFullScreenButtonSubrole")))
 }
 
-// NSAccessibilityHeadingLevel6SearchKey returns the string constant NSAccessibilityHeadingLevel6SearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHeadingLevel6SearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityHeadingLevel6SearchKey())
+// NSAccessibilityToggleSubrole returns the string constant NSAccessibilityToggleSubrole, for use as a dictionary key or argument.
+func NSAccessibilityToggleSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityToggleSubrole")))
 }
 
-// NSAccessibilityHeadingSameLevelSearchKey returns the string constant NSAccessibilityHeadingSameLevelSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHeadingSameLevelSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityHeadingSameLevelSearchKey())
+// NSAccessibilitySwitchSubrole returns the string constant NSAccessibilitySwitchSubrole, for use as a dictionary key or argument.
+func NSAccessibilitySwitchSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySwitchSubrole")))
 }
 
-// NSAccessibilityHeadingSearchKey returns the string constant NSAccessibilityHeadingSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityHeadingSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityHeadingSearchKey())
+// NSAccessibilityDescriptionListSubrole returns the string constant NSAccessibilityDescriptionListSubrole, for use as a dictionary key or argument.
+func NSAccessibilityDescriptionListSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDescriptionListSubrole")))
 }
 
-// NSAccessibilityItalicFontSearchKey returns the string constant NSAccessibilityItalicFontSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityItalicFontSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityItalicFontSearchKey())
+// NSAccessibilityTabButtonSubrole returns the string constant NSAccessibilityTabButtonSubrole, for use as a dictionary key or argument.
+func NSAccessibilityTabButtonSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTabButtonSubrole")))
 }
 
-// NSAccessibilityKeyboardFocusableSearchKey returns the string constant NSAccessibilityKeyboardFocusableSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityKeyboardFocusableSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityKeyboardFocusableSearchKey())
+// NSAccessibilityCollectionListSubrole returns the string constant NSAccessibilityCollectionListSubrole, for use as a dictionary key or argument.
+func NSAccessibilityCollectionListSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityCollectionListSubrole")))
 }
 
-// NSAccessibilityLandmarkSearchKey returns the string constant NSAccessibilityLandmarkSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityLandmarkSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityLandmarkSearchKey())
+// NSAccessibilitySectionListSubrole returns the string constant NSAccessibilitySectionListSubrole, for use as a dictionary key or argument.
+func NSAccessibilitySectionListSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySectionListSubrole")))
 }
 
-// NSAccessibilityLinkSearchKey returns the string constant NSAccessibilityLinkSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityLinkSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityLinkSearchKey())
+// NSAccessibilitySuggestionSubrole returns the string constant NSAccessibilitySuggestionSubrole, for use as a dictionary key or argument.
+func NSAccessibilitySuggestionSubrole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySuggestionSubrole")))
 }
 
-// NSAccessibilityListSearchKey returns the string constant NSAccessibilityListSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityListSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityListSearchKey())
+// NSAccessibilityUIElementsKey returns the string constant NSAccessibilityUIElementsKey, for use as a dictionary key or argument.
+func NSAccessibilityUIElementsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityUIElementsKey")))
 }
 
-// NSAccessibilityLiveRegionSearchKey returns the string constant NSAccessibilityLiveRegionSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityLiveRegionSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityLiveRegionSearchKey())
+// NSAccessibilityPriorityKey returns the string constant NSAccessibilityPriorityKey, for use as a dictionary key or argument.
+func NSAccessibilityPriorityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityPriorityKey")))
 }
 
-// NSAccessibilityMisspelledWordSearchKey returns the string constant NSAccessibilityMisspelledWordSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityMisspelledWordSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityMisspelledWordSearchKey())
+// NSAccessibilityAnnouncementKey returns the string constant NSAccessibilityAnnouncementKey, for use as a dictionary key or argument.
+func NSAccessibilityAnnouncementKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityAnnouncementKey")))
 }
 
-// NSAccessibilityOutlineSearchKey returns the string constant NSAccessibilityOutlineSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityOutlineSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityOutlineSearchKey())
+// NSAccessibilityUIElementsForSearchPredicateParameterizedAttribute returns the string constant NSAccessibilityUIElementsForSearchPredicateParameterizedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityUIElementsForSearchPredicateParameterizedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityUIElementsForSearchPredicateParameterizedAttribute")))
 }
 
-// NSAccessibilityPlainTextSearchKey returns the string constant NSAccessibilityPlainTextSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityPlainTextSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityPlainTextSearchKey())
+// NSAccessibilityResultsForSearchPredicateParameterizedAttribute returns the string constant NSAccessibilityResultsForSearchPredicateParameterizedAttribute, for use as a dictionary key or argument.
+func NSAccessibilityResultsForSearchPredicateParameterizedAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityResultsForSearchPredicateParameterizedAttribute")))
 }
 
-// NSAccessibilityRadioGroupSearchKey returns the string constant NSAccessibilityRadioGroupSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityRadioGroupSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityRadioGroupSearchKey())
+// NSAccessibilitySearchIdentifiersKey returns the string constant NSAccessibilitySearchIdentifiersKey, for use as a dictionary key or argument.
+func NSAccessibilitySearchIdentifiersKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySearchIdentifiersKey")))
 }
 
-// NSAccessibilitySameTypeSearchKey returns the string constant NSAccessibilitySameTypeSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySameTypeSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySameTypeSearchKey())
+// NSAccessibilitySearchCurrentElementKey returns the string constant NSAccessibilitySearchCurrentElementKey, for use as a dictionary key or argument.
+func NSAccessibilitySearchCurrentElementKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySearchCurrentElementKey")))
 }
 
-// NSAccessibilityStaticTextSearchKey returns the string constant NSAccessibilityStaticTextSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityStaticTextSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityStaticTextSearchKey())
+// NSAccessibilitySearchCurrentRangeKey returns the string constant NSAccessibilitySearchCurrentRangeKey, for use as a dictionary key or argument.
+func NSAccessibilitySearchCurrentRangeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySearchCurrentRangeKey")))
 }
 
-// NSAccessibilityStyleChangeSearchKey returns the string constant NSAccessibilityStyleChangeSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityStyleChangeSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityStyleChangeSearchKey())
+// NSAccessibilitySearchDirectionKey returns the string constant NSAccessibilitySearchDirectionKey, for use as a dictionary key or argument.
+func NSAccessibilitySearchDirectionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySearchDirectionKey")))
 }
 
-// NSAccessibilityTableSameLevelSearchKey returns the string constant NSAccessibilityTableSameLevelSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTableSameLevelSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityTableSameLevelSearchKey())
+// NSAccessibilitySearchResultsLimitKey returns the string constant NSAccessibilitySearchResultsLimitKey, for use as a dictionary key or argument.
+func NSAccessibilitySearchResultsLimitKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySearchResultsLimitKey")))
 }
 
-// NSAccessibilityTableSearchKey returns the string constant NSAccessibilityTableSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTableSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityTableSearchKey())
+// NSAccessibilitySearchTextKey returns the string constant NSAccessibilitySearchTextKey, for use as a dictionary key or argument.
+func NSAccessibilitySearchTextKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySearchTextKey")))
 }
 
-// NSAccessibilityTextFieldSearchKey returns the string constant NSAccessibilityTextFieldSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTextFieldSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityTextFieldSearchKey())
+// NSAccessibilitySearchDirectionNext returns the string constant NSAccessibilitySearchDirectionNext, for use as a dictionary key or argument.
+func NSAccessibilitySearchDirectionNext() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySearchDirectionNext")))
 }
 
-// NSAccessibilityTextStateChangeTypeKey returns the string constant NSAccessibilityTextStateChangeTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTextStateChangeTypeKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityTextStateChangeTypeKey())
+// NSAccessibilitySearchDirectionPrevious returns the string constant NSAccessibilitySearchDirectionPrevious, for use as a dictionary key or argument.
+func NSAccessibilitySearchDirectionPrevious() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySearchDirectionPrevious")))
 }
 
-// NSAccessibilityTextStateSyncKey returns the string constant NSAccessibilityTextStateSyncKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityTextStateSyncKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityTextStateSyncKey())
+// NSAccessibilitySearchResultElementKey returns the string constant NSAccessibilitySearchResultElementKey, for use as a dictionary key or argument.
+func NSAccessibilitySearchResultElementKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySearchResultElementKey")))
 }
 
-// NSAccessibilityUnderlineSearchKey returns the string constant NSAccessibilityUnderlineSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityUnderlineSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityUnderlineSearchKey())
+// NSAccessibilitySearchResultRangeKey returns the string constant NSAccessibilitySearchResultRangeKey, for use as a dictionary key or argument.
+func NSAccessibilitySearchResultRangeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySearchResultRangeKey")))
 }
 
-// NSAccessibilityUnvisitedLinkSearchKey returns the string constant NSAccessibilityUnvisitedLinkSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityUnvisitedLinkSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityUnvisitedLinkSearchKey())
+// NSAccessibilitySearchResultDescriptionOverrideKey returns the string constant NSAccessibilitySearchResultDescriptionOverrideKey, for use as a dictionary key or argument.
+func NSAccessibilitySearchResultDescriptionOverrideKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySearchResultDescriptionOverrideKey")))
 }
 
-// NSAccessibilityVisitedLinkSearchKey returns the string constant NSAccessibilityVisitedLinkSearchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilityVisitedLinkSearchKey() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilityVisitedLinkSearchKey())
+// NSAccessibilitySearchResultLoaderKey returns the string constant NSAccessibilitySearchResultLoaderKey, for use as a dictionary key or argument.
+func NSAccessibilitySearchResultLoaderKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySearchResultLoaderKey")))
 }
 
-// NSAccessibilitySortButtonRole returns the string constant NSAccessibilitySortButtonRole as an objc.ID, for use as a dictionary key or selector argument.
-func NSAccessibilitySortButtonRole() objc.ID {
-	return purego.CFConstant(raw.NSAccessibilitySortButtonRole())
+// NSAccessibilityAnyTypeSearchKey returns the string constant NSAccessibilityAnyTypeSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityAnyTypeSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityAnyTypeSearchKey")))
 }
 
-// NSWorkspaceDesktopImageScalingKey returns the string constant NSWorkspaceDesktopImageScalingKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceDesktopImageScalingKey() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceDesktopImageScalingKey())
+// NSAccessibilityArticleSearchKey returns the string constant NSAccessibilityArticleSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityArticleSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityArticleSearchKey")))
 }
 
-// NSWorkspaceDesktopImageAllowClippingKey returns the string constant NSWorkspaceDesktopImageAllowClippingKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceDesktopImageAllowClippingKey() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceDesktopImageAllowClippingKey())
+// NSAccessibilityBlockquoteSameLevelSearchKey returns the string constant NSAccessibilityBlockquoteSameLevelSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityBlockquoteSameLevelSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityBlockquoteSameLevelSearchKey")))
 }
 
-// NSWorkspaceDesktopImageFillColorKey returns the string constant NSWorkspaceDesktopImageFillColorKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceDesktopImageFillColorKey() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceDesktopImageFillColorKey())
+// NSAccessibilityBlockquoteSearchKey returns the string constant NSAccessibilityBlockquoteSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityBlockquoteSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityBlockquoteSearchKey")))
 }
 
-// NSWorkspaceApplicationKey returns the string constant NSWorkspaceApplicationKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceApplicationKey() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceApplicationKey())
+// NSAccessibilityBoldFontSearchKey returns the string constant NSAccessibilityBoldFontSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityBoldFontSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityBoldFontSearchKey")))
 }
 
-// NSWorkspaceWillLaunchApplicationNotification returns the string constant NSWorkspaceWillLaunchApplicationNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceWillLaunchApplicationNotification() objc.ID {
-	if _r := raw.NSWorkspaceWillLaunchApplicationNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityButtonSearchKey returns the string constant NSAccessibilityButtonSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityButtonSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityButtonSearchKey")))
 }
 
-// NSWorkspaceDidLaunchApplicationNotification returns the string constant NSWorkspaceDidLaunchApplicationNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceDidLaunchApplicationNotification() objc.ID {
-	if _r := raw.NSWorkspaceDidLaunchApplicationNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityCheckBoxSearchKey returns the string constant NSAccessibilityCheckBoxSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityCheckBoxSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityCheckBoxSearchKey")))
 }
 
-// NSWorkspaceDidTerminateApplicationNotification returns the string constant NSWorkspaceDidTerminateApplicationNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceDidTerminateApplicationNotification() objc.ID {
-	if _r := raw.NSWorkspaceDidTerminateApplicationNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityControlSearchKey returns the string constant NSAccessibilityControlSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityControlSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityControlSearchKey")))
 }
 
-// NSWorkspaceVolumeLocalizedNameKey returns the string constant NSWorkspaceVolumeLocalizedNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceVolumeLocalizedNameKey() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceVolumeLocalizedNameKey())
+// NSAccessibilityDifferentTypeSearchKey returns the string constant NSAccessibilityDifferentTypeSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityDifferentTypeSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityDifferentTypeSearchKey")))
 }
 
-// NSWorkspaceVolumeURLKey returns the string constant NSWorkspaceVolumeURLKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceVolumeURLKey() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceVolumeURLKey())
+// NSAccessibilityFontChangeSearchKey returns the string constant NSAccessibilityFontChangeSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityFontChangeSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFontChangeSearchKey")))
 }
 
-// NSWorkspaceVolumeOldLocalizedNameKey returns the string constant NSWorkspaceVolumeOldLocalizedNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceVolumeOldLocalizedNameKey() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceVolumeOldLocalizedNameKey())
+// NSAccessibilityFontColorChangeSearchKey returns the string constant NSAccessibilityFontColorChangeSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityFontColorChangeSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFontColorChangeSearchKey")))
 }
 
-// NSWorkspaceVolumeOldURLKey returns the string constant NSWorkspaceVolumeOldURLKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceVolumeOldURLKey() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceVolumeOldURLKey())
+// NSAccessibilityFrameSearchKey returns the string constant NSAccessibilityFrameSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityFrameSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityFrameSearchKey")))
 }
 
-// NSWorkspaceDidMountNotification returns the string constant NSWorkspaceDidMountNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceDidMountNotification() objc.ID {
-	if _r := raw.NSWorkspaceDidMountNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityGraphicSearchKey returns the string constant NSAccessibilityGraphicSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityGraphicSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityGraphicSearchKey")))
 }
 
-// NSWorkspaceDidUnmountNotification returns the string constant NSWorkspaceDidUnmountNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceDidUnmountNotification() objc.ID {
-	if _r := raw.NSWorkspaceDidUnmountNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityHeadingLevel1SearchKey returns the string constant NSAccessibilityHeadingLevel1SearchKey, for use as a dictionary key or argument.
+func NSAccessibilityHeadingLevel1SearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHeadingLevel1SearchKey")))
 }
 
-// NSWorkspaceWillUnmountNotification returns the string constant NSWorkspaceWillUnmountNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceWillUnmountNotification() objc.ID {
-	if _r := raw.NSWorkspaceWillUnmountNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityHeadingLevel2SearchKey returns the string constant NSAccessibilityHeadingLevel2SearchKey, for use as a dictionary key or argument.
+func NSAccessibilityHeadingLevel2SearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHeadingLevel2SearchKey")))
 }
 
-// NSWorkspaceWillPowerOffNotification returns the string constant NSWorkspaceWillPowerOffNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceWillPowerOffNotification() objc.ID {
-	if _r := raw.NSWorkspaceWillPowerOffNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityHeadingLevel3SearchKey returns the string constant NSAccessibilityHeadingLevel3SearchKey, for use as a dictionary key or argument.
+func NSAccessibilityHeadingLevel3SearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHeadingLevel3SearchKey")))
 }
 
-// NSWorkspaceWillSleepNotification returns the string constant NSWorkspaceWillSleepNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceWillSleepNotification() objc.ID {
-	if _r := raw.NSWorkspaceWillSleepNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityHeadingLevel4SearchKey returns the string constant NSAccessibilityHeadingLevel4SearchKey, for use as a dictionary key or argument.
+func NSAccessibilityHeadingLevel4SearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHeadingLevel4SearchKey")))
 }
 
-// NSWorkspaceDidWakeNotification returns the string constant NSWorkspaceDidWakeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceDidWakeNotification() objc.ID {
-	if _r := raw.NSWorkspaceDidWakeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityHeadingLevel5SearchKey returns the string constant NSAccessibilityHeadingLevel5SearchKey, for use as a dictionary key or argument.
+func NSAccessibilityHeadingLevel5SearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHeadingLevel5SearchKey")))
 }
 
-// NSWorkspaceSessionDidBecomeActiveNotification returns the string constant NSWorkspaceSessionDidBecomeActiveNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceSessionDidBecomeActiveNotification() objc.ID {
-	if _r := raw.NSWorkspaceSessionDidBecomeActiveNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityHeadingLevel6SearchKey returns the string constant NSAccessibilityHeadingLevel6SearchKey, for use as a dictionary key or argument.
+func NSAccessibilityHeadingLevel6SearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHeadingLevel6SearchKey")))
 }
 
-// NSWorkspaceSessionDidResignActiveNotification returns the string constant NSWorkspaceSessionDidResignActiveNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceSessionDidResignActiveNotification() objc.ID {
-	if _r := raw.NSWorkspaceSessionDidResignActiveNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAccessibilityHeadingSameLevelSearchKey returns the string constant NSAccessibilityHeadingSameLevelSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityHeadingSameLevelSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHeadingSameLevelSearchKey")))
 }
 
-// NSWorkspaceLaunchConfigurationAppleEvent returns the string constant NSWorkspaceLaunchConfigurationAppleEvent as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceLaunchConfigurationAppleEvent() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceLaunchConfigurationAppleEvent())
+// NSAccessibilityHeadingSearchKey returns the string constant NSAccessibilityHeadingSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityHeadingSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityHeadingSearchKey")))
 }
 
-// NSWorkspaceLaunchConfigurationArguments returns the string constant NSWorkspaceLaunchConfigurationArguments as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceLaunchConfigurationArguments() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceLaunchConfigurationArguments())
+// NSAccessibilityItalicFontSearchKey returns the string constant NSAccessibilityItalicFontSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityItalicFontSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityItalicFontSearchKey")))
 }
 
-// NSWorkspaceLaunchConfigurationEnvironment returns the string constant NSWorkspaceLaunchConfigurationEnvironment as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceLaunchConfigurationEnvironment() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceLaunchConfigurationEnvironment())
+// NSAccessibilityKeyboardFocusableSearchKey returns the string constant NSAccessibilityKeyboardFocusableSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityKeyboardFocusableSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityKeyboardFocusableSearchKey")))
 }
 
-// NSWorkspaceLaunchConfigurationArchitecture returns the string constant NSWorkspaceLaunchConfigurationArchitecture as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceLaunchConfigurationArchitecture() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceLaunchConfigurationArchitecture())
+// NSAccessibilityLandmarkSearchKey returns the string constant NSAccessibilityLandmarkSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityLandmarkSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLandmarkSearchKey")))
 }
 
-// NSWorkspaceMoveOperation returns the string constant NSWorkspaceMoveOperation as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceMoveOperation() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceMoveOperation())
+// NSAccessibilityLinkSearchKey returns the string constant NSAccessibilityLinkSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityLinkSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLinkSearchKey")))
 }
 
-// NSWorkspaceCopyOperation returns the string constant NSWorkspaceCopyOperation as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceCopyOperation() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceCopyOperation())
+// NSAccessibilityListSearchKey returns the string constant NSAccessibilityListSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityListSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityListSearchKey")))
 }
 
-// NSWorkspaceLinkOperation returns the string constant NSWorkspaceLinkOperation as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceLinkOperation() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceLinkOperation())
+// NSAccessibilityLiveRegionSearchKey returns the string constant NSAccessibilityLiveRegionSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityLiveRegionSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityLiveRegionSearchKey")))
 }
 
-// NSWorkspaceCompressOperation returns the string constant NSWorkspaceCompressOperation as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceCompressOperation() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceCompressOperation())
+// NSAccessibilityMisspelledWordSearchKey returns the string constant NSAccessibilityMisspelledWordSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityMisspelledWordSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityMisspelledWordSearchKey")))
 }
 
-// NSWorkspaceDecompressOperation returns the string constant NSWorkspaceDecompressOperation as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceDecompressOperation() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceDecompressOperation())
+// NSAccessibilityOutlineSearchKey returns the string constant NSAccessibilityOutlineSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityOutlineSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityOutlineSearchKey")))
 }
 
-// NSWorkspaceEncryptOperation returns the string constant NSWorkspaceEncryptOperation as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceEncryptOperation() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceEncryptOperation())
+// NSAccessibilityPlainTextSearchKey returns the string constant NSAccessibilityPlainTextSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityPlainTextSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityPlainTextSearchKey")))
 }
 
-// NSWorkspaceDecryptOperation returns the string constant NSWorkspaceDecryptOperation as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceDecryptOperation() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceDecryptOperation())
+// NSAccessibilityRadioGroupSearchKey returns the string constant NSAccessibilityRadioGroupSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityRadioGroupSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityRadioGroupSearchKey")))
 }
 
-// NSWorkspaceDestroyOperation returns the string constant NSWorkspaceDestroyOperation as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceDestroyOperation() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceDestroyOperation())
+// NSAccessibilitySameTypeSearchKey returns the string constant NSAccessibilitySameTypeSearchKey, for use as a dictionary key or argument.
+func NSAccessibilitySameTypeSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySameTypeSearchKey")))
 }
 
-// NSWorkspaceRecycleOperation returns the string constant NSWorkspaceRecycleOperation as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceRecycleOperation() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceRecycleOperation())
+// NSAccessibilityStaticTextSearchKey returns the string constant NSAccessibilityStaticTextSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityStaticTextSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityStaticTextSearchKey")))
 }
 
-// NSWorkspaceDuplicateOperation returns the string constant NSWorkspaceDuplicateOperation as an objc.ID, for use as a dictionary key or selector argument.
-func NSWorkspaceDuplicateOperation() objc.ID {
-	return purego.CFConstant(raw.NSWorkspaceDuplicateOperation())
+// NSAccessibilityStyleChangeSearchKey returns the string constant NSAccessibilityStyleChangeSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityStyleChangeSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityStyleChangeSearchKey")))
 }
 
-// NSPlainFileType returns the string constant NSPlainFileType as an objc.ID, for use as a dictionary key or selector argument.
-func NSPlainFileType() objc.ID {
-	return purego.CFConstant(raw.NSPlainFileType())
+// NSAccessibilityTableSameLevelSearchKey returns the string constant NSAccessibilityTableSameLevelSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityTableSameLevelSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTableSameLevelSearchKey")))
 }
 
-// NSDirectoryFileType returns the string constant NSDirectoryFileType as an objc.ID, for use as a dictionary key or selector argument.
-func NSDirectoryFileType() objc.ID {
-	return purego.CFConstant(raw.NSDirectoryFileType())
+// NSAccessibilityTableSearchKey returns the string constant NSAccessibilityTableSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityTableSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTableSearchKey")))
 }
 
-// NSApplicationFileType returns the string constant NSApplicationFileType as an objc.ID, for use as a dictionary key or selector argument.
-func NSApplicationFileType() objc.ID {
-	return purego.CFConstant(raw.NSApplicationFileType())
+// NSAccessibilityTextFieldSearchKey returns the string constant NSAccessibilityTextFieldSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityTextFieldSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTextFieldSearchKey")))
 }
 
-// NSFilesystemFileType returns the string constant NSFilesystemFileType as an objc.ID, for use as a dictionary key or selector argument.
-func NSFilesystemFileType() objc.ID {
-	return purego.CFConstant(raw.NSFilesystemFileType())
+// NSAccessibilityTextStateChangeTypeKey returns the string constant NSAccessibilityTextStateChangeTypeKey, for use as a dictionary key or argument.
+func NSAccessibilityTextStateChangeTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTextStateChangeTypeKey")))
 }
 
-// NSShellCommandFileType returns the string constant NSShellCommandFileType as an objc.ID, for use as a dictionary key or selector argument.
-func NSShellCommandFileType() objc.ID {
-	return purego.CFConstant(raw.NSShellCommandFileType())
+// NSAccessibilityTextStateSyncKey returns the string constant NSAccessibilityTextStateSyncKey, for use as a dictionary key or argument.
+func NSAccessibilityTextStateSyncKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityTextStateSyncKey")))
 }
 
-// NSPasteboardTypeString returns the string constant NSPasteboardTypeString as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardTypeString() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardTypeString())
+// NSAccessibilityUnderlineSearchKey returns the string constant NSAccessibilityUnderlineSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityUnderlineSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityUnderlineSearchKey")))
 }
 
-// NSPasteboardTypePDF returns the string constant NSPasteboardTypePDF as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardTypePDF() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardTypePDF())
+// NSAccessibilityUnvisitedLinkSearchKey returns the string constant NSAccessibilityUnvisitedLinkSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityUnvisitedLinkSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityUnvisitedLinkSearchKey")))
 }
 
-// NSPasteboardTypeTIFF returns the string constant NSPasteboardTypeTIFF as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardTypeTIFF() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardTypeTIFF())
+// NSAccessibilityVisitedLinkSearchKey returns the string constant NSAccessibilityVisitedLinkSearchKey, for use as a dictionary key or argument.
+func NSAccessibilityVisitedLinkSearchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilityVisitedLinkSearchKey")))
 }
 
-// NSPasteboardTypePNG returns the string constant NSPasteboardTypePNG as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardTypePNG() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardTypePNG())
+// NSAccessibilitySortButtonRole returns the string constant NSAccessibilitySortButtonRole, for use as a dictionary key or argument.
+func NSAccessibilitySortButtonRole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAccessibilitySortButtonRole")))
 }
 
-// NSPasteboardTypeRTF returns the string constant NSPasteboardTypeRTF as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardTypeRTF() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardTypeRTF())
+// NSWorkspaceDesktopImageScalingKey returns the string constant NSWorkspaceDesktopImageScalingKey, for use as a dictionary key or argument.
+func NSWorkspaceDesktopImageScalingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDesktopImageScalingKey")))
 }
 
-// NSPasteboardTypeRTFD returns the string constant NSPasteboardTypeRTFD as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardTypeRTFD() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardTypeRTFD())
+// NSWorkspaceDesktopImageAllowClippingKey returns the string constant NSWorkspaceDesktopImageAllowClippingKey, for use as a dictionary key or argument.
+func NSWorkspaceDesktopImageAllowClippingKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDesktopImageAllowClippingKey")))
 }
 
-// NSPasteboardTypeHTML returns the string constant NSPasteboardTypeHTML as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardTypeHTML() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardTypeHTML())
+// NSWorkspaceDesktopImageFillColorKey returns the string constant NSWorkspaceDesktopImageFillColorKey, for use as a dictionary key or argument.
+func NSWorkspaceDesktopImageFillColorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDesktopImageFillColorKey")))
 }
 
-// NSPasteboardTypeTabularText returns the string constant NSPasteboardTypeTabularText as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardTypeTabularText() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardTypeTabularText())
+// NSWorkspaceApplicationKey returns the string constant NSWorkspaceApplicationKey, for use as a dictionary key or argument.
+func NSWorkspaceApplicationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceApplicationKey")))
 }
 
-// NSPasteboardTypeFont returns the string constant NSPasteboardTypeFont as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardTypeFont() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardTypeFont())
+// NSWorkspaceWillLaunchApplicationNotification returns the string constant NSWorkspaceWillLaunchApplicationNotification, for use as a dictionary key or argument.
+func NSWorkspaceWillLaunchApplicationNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceWillLaunchApplicationNotification")))
 }
 
-// NSPasteboardTypeRuler returns the string constant NSPasteboardTypeRuler as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardTypeRuler() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardTypeRuler())
+// NSWorkspaceDidLaunchApplicationNotification returns the string constant NSWorkspaceDidLaunchApplicationNotification, for use as a dictionary key or argument.
+func NSWorkspaceDidLaunchApplicationNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDidLaunchApplicationNotification")))
 }
 
-// NSPasteboardTypeColor returns the string constant NSPasteboardTypeColor as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardTypeColor() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardTypeColor())
+// NSWorkspaceDidTerminateApplicationNotification returns the string constant NSWorkspaceDidTerminateApplicationNotification, for use as a dictionary key or argument.
+func NSWorkspaceDidTerminateApplicationNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDidTerminateApplicationNotification")))
 }
 
-// NSPasteboardTypeSound returns the string constant NSPasteboardTypeSound as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardTypeSound() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardTypeSound())
+// NSWorkspaceVolumeLocalizedNameKey returns the string constant NSWorkspaceVolumeLocalizedNameKey, for use as a dictionary key or argument.
+func NSWorkspaceVolumeLocalizedNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceVolumeLocalizedNameKey")))
 }
 
-// NSPasteboardTypeMultipleTextSelection returns the string constant NSPasteboardTypeMultipleTextSelection as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardTypeMultipleTextSelection() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardTypeMultipleTextSelection())
+// NSWorkspaceVolumeURLKey returns the string constant NSWorkspaceVolumeURLKey, for use as a dictionary key or argument.
+func NSWorkspaceVolumeURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceVolumeURLKey")))
 }
 
-// NSPasteboardTypeTextFinderOptions returns the string constant NSPasteboardTypeTextFinderOptions as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardTypeTextFinderOptions() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardTypeTextFinderOptions())
+// NSWorkspaceVolumeOldLocalizedNameKey returns the string constant NSWorkspaceVolumeOldLocalizedNameKey, for use as a dictionary key or argument.
+func NSWorkspaceVolumeOldLocalizedNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceVolumeOldLocalizedNameKey")))
 }
 
-// NSPasteboardTypeURL returns the string constant NSPasteboardTypeURL as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardTypeURL() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardTypeURL())
+// NSWorkspaceVolumeOldURLKey returns the string constant NSWorkspaceVolumeOldURLKey, for use as a dictionary key or argument.
+func NSWorkspaceVolumeOldURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceVolumeOldURLKey")))
 }
 
-// NSPasteboardTypeFileURL returns the string constant NSPasteboardTypeFileURL as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardTypeFileURL() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardTypeFileURL())
+// NSWorkspaceDidMountNotification returns the string constant NSWorkspaceDidMountNotification, for use as a dictionary key or argument.
+func NSWorkspaceDidMountNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDidMountNotification")))
 }
 
-// NSPasteboardNameGeneral returns the string constant NSPasteboardNameGeneral as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardNameGeneral() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardNameGeneral())
+// NSWorkspaceDidUnmountNotification returns the string constant NSWorkspaceDidUnmountNotification, for use as a dictionary key or argument.
+func NSWorkspaceDidUnmountNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDidUnmountNotification")))
 }
 
-// NSPasteboardNameFont returns the string constant NSPasteboardNameFont as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardNameFont() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardNameFont())
+// NSWorkspaceWillUnmountNotification returns the string constant NSWorkspaceWillUnmountNotification, for use as a dictionary key or argument.
+func NSWorkspaceWillUnmountNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceWillUnmountNotification")))
 }
 
-// NSPasteboardNameRuler returns the string constant NSPasteboardNameRuler as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardNameRuler() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardNameRuler())
+// NSWorkspaceWillPowerOffNotification returns the string constant NSWorkspaceWillPowerOffNotification, for use as a dictionary key or argument.
+func NSWorkspaceWillPowerOffNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceWillPowerOffNotification")))
 }
 
-// NSPasteboardNameFind returns the string constant NSPasteboardNameFind as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardNameFind() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardNameFind())
+// NSWorkspaceWillSleepNotification returns the string constant NSWorkspaceWillSleepNotification, for use as a dictionary key or argument.
+func NSWorkspaceWillSleepNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceWillSleepNotification")))
 }
 
-// NSPasteboardNameDrag returns the string constant NSPasteboardNameDrag as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardNameDrag() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardNameDrag())
+// NSWorkspaceDidWakeNotification returns the string constant NSWorkspaceDidWakeNotification, for use as a dictionary key or argument.
+func NSWorkspaceDidWakeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDidWakeNotification")))
 }
 
-// A pattern that indicates the pasteboard detects a string that consists of a web URL. @returns NSString value, suitable for implementing "Paste and Go"
-// NSPasteboardDetectionPatternProbableWebURL returns the string constant NSPasteboardDetectionPatternProbableWebURL as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardDetectionPatternProbableWebURL() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardDetectionPatternProbableWebURL())
+// NSWorkspaceSessionDidBecomeActiveNotification returns the string constant NSWorkspaceSessionDidBecomeActiveNotification, for use as a dictionary key or argument.
+func NSWorkspaceSessionDidBecomeActiveNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceSessionDidBecomeActiveNotification")))
 }
 
-// A pattern that indicates the pasteboard detects a string suitable for use as a web search term. @returns NSString value, suitable for implementing "Paste and Search"
-// NSPasteboardDetectionPatternProbableWebSearch returns the string constant NSPasteboardDetectionPatternProbableWebSearch as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardDetectionPatternProbableWebSearch() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardDetectionPatternProbableWebSearch())
+// NSWorkspaceSessionDidResignActiveNotification returns the string constant NSWorkspaceSessionDidResignActiveNotification, for use as a dictionary key or argument.
+func NSWorkspaceSessionDidResignActiveNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceSessionDidResignActiveNotification")))
 }
 
-// A pattern that indicates the pasteboard detects a string that consists of a numeric value. @returns NSNumber value
-// NSPasteboardDetectionPatternNumber returns the string constant NSPasteboardDetectionPatternNumber as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardDetectionPatternNumber() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardDetectionPatternNumber())
+// NSWorkspaceLaunchConfigurationAppleEvent returns the string constant NSWorkspaceLaunchConfigurationAppleEvent, for use as a dictionary key or argument.
+func NSWorkspaceLaunchConfigurationAppleEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceLaunchConfigurationAppleEvent")))
 }
 
-// A pattern that indicates the pasteboard detects a string that contains a URL. @returns array of DDMatchLink values
-// NSPasteboardDetectionPatternLink returns the string constant NSPasteboardDetectionPatternLink as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardDetectionPatternLink() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardDetectionPatternLink())
+// NSWorkspaceLaunchConfigurationArguments returns the string constant NSWorkspaceLaunchConfigurationArguments, for use as a dictionary key or argument.
+func NSWorkspaceLaunchConfigurationArguments() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceLaunchConfigurationArguments")))
 }
 
-// A pattern that indicates the pasteboard detects a string that contains a phone number. @returns array of DDMatchPhoneNumber values
-// NSPasteboardDetectionPatternPhoneNumber returns the string constant NSPasteboardDetectionPatternPhoneNumber as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardDetectionPatternPhoneNumber() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardDetectionPatternPhoneNumber())
+// NSWorkspaceLaunchConfigurationEnvironment returns the string constant NSWorkspaceLaunchConfigurationEnvironment, for use as a dictionary key or argument.
+func NSWorkspaceLaunchConfigurationEnvironment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceLaunchConfigurationEnvironment")))
 }
 
-// A pattern that indicates the pasteboard detects a string that contains an email address. @returns array of DDMatchEmailAddress values
-// NSPasteboardDetectionPatternEmailAddress returns the string constant NSPasteboardDetectionPatternEmailAddress as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardDetectionPatternEmailAddress() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardDetectionPatternEmailAddress())
+// NSWorkspaceLaunchConfigurationArchitecture returns the string constant NSWorkspaceLaunchConfigurationArchitecture, for use as a dictionary key or argument.
+func NSWorkspaceLaunchConfigurationArchitecture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceLaunchConfigurationArchitecture")))
 }
 
-// A pattern that indicates the pasteboard detects a string that contains a postal address. @returns array of DDMatchPostalAddress values
-// NSPasteboardDetectionPatternPostalAddress returns the string constant NSPasteboardDetectionPatternPostalAddress as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardDetectionPatternPostalAddress() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardDetectionPatternPostalAddress())
+// NSWorkspaceMoveOperation returns the string constant NSWorkspaceMoveOperation, for use as a dictionary key or argument.
+func NSWorkspaceMoveOperation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceMoveOperation")))
 }
 
-// A pattern that indicates the pasteboard detects a string that contains a calendar event. @returns array of DDMatchCalendarEvent values
-// NSPasteboardDetectionPatternCalendarEvent returns the string constant NSPasteboardDetectionPatternCalendarEvent as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardDetectionPatternCalendarEvent() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardDetectionPatternCalendarEvent())
+// NSWorkspaceCopyOperation returns the string constant NSWorkspaceCopyOperation, for use as a dictionary key or argument.
+func NSWorkspaceCopyOperation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceCopyOperation")))
 }
 
-// A pattern that indicates the pasteboard detects a string that contains a parcel tracking number and carrier. @returns array of DDMatchShipmentTrackingNumber values
-// NSPasteboardDetectionPatternShipmentTrackingNumber returns the string constant NSPasteboardDetectionPatternShipmentTrackingNumber as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardDetectionPatternShipmentTrackingNumber() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardDetectionPatternShipmentTrackingNumber())
+// NSWorkspaceLinkOperation returns the string constant NSWorkspaceLinkOperation, for use as a dictionary key or argument.
+func NSWorkspaceLinkOperation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceLinkOperation")))
 }
 
-// A pattern that indicates the pasteboard detects a string that contains a flight number. @returns array of DDMatchFlightNumber values
-// NSPasteboardDetectionPatternFlightNumber returns the string constant NSPasteboardDetectionPatternFlightNumber as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardDetectionPatternFlightNumber() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardDetectionPatternFlightNumber())
+// NSWorkspaceCompressOperation returns the string constant NSWorkspaceCompressOperation, for use as a dictionary key or argument.
+func NSWorkspaceCompressOperation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceCompressOperation")))
 }
 
-// A pattern that indicates the pasteboard detects a string that contains an amount of money. @returns array of DDMatchMoneyAmount values
-// NSPasteboardDetectionPatternMoneyAmount returns the string constant NSPasteboardDetectionPatternMoneyAmount as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardDetectionPatternMoneyAmount() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardDetectionPatternMoneyAmount())
+// NSWorkspaceDecompressOperation returns the string constant NSWorkspaceDecompressOperation, for use as a dictionary key or argument.
+func NSWorkspaceDecompressOperation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDecompressOperation")))
 }
 
-// A metadata type that returns the content type if the pasteboard detects a reference to a file. @returns UTType value for the detected content type of the file URL, if a file URL type is present.
-// NSPasteboardMetadataTypeContentType returns the string constant NSPasteboardMetadataTypeContentType as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardMetadataTypeContentType() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardMetadataTypeContentType())
+// NSWorkspaceEncryptOperation returns the string constant NSWorkspaceEncryptOperation, for use as a dictionary key or argument.
+func NSWorkspaceEncryptOperation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceEncryptOperation")))
 }
 
-// NSPasteboardURLReadingFileURLsOnlyKey returns the string constant NSPasteboardURLReadingFileURLsOnlyKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardURLReadingFileURLsOnlyKey() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardURLReadingFileURLsOnlyKey())
+// NSWorkspaceDecryptOperation returns the string constant NSWorkspaceDecryptOperation, for use as a dictionary key or argument.
+func NSWorkspaceDecryptOperation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDecryptOperation")))
 }
 
-// NSPasteboardURLReadingContentsConformToTypesKey returns the string constant NSPasteboardURLReadingContentsConformToTypesKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardURLReadingContentsConformToTypesKey() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardURLReadingContentsConformToTypesKey())
+// NSWorkspaceDestroyOperation returns the string constant NSWorkspaceDestroyOperation, for use as a dictionary key or argument.
+func NSWorkspaceDestroyOperation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDestroyOperation")))
 }
 
-// NSFileContentsPboardType returns the string constant NSFileContentsPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSFileContentsPboardType() objc.ID {
-	if _r := raw.NSFileContentsPboardType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWorkspaceRecycleOperation returns the string constant NSWorkspaceRecycleOperation, for use as a dictionary key or argument.
+func NSWorkspaceRecycleOperation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceRecycleOperation")))
 }
 
-// NSStringPboardType returns the string constant NSStringPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSStringPboardType() objc.ID {
-	return purego.CFConstant(raw.NSStringPboardType())
+// NSWorkspaceDuplicateOperation returns the string constant NSWorkspaceDuplicateOperation, for use as a dictionary key or argument.
+func NSWorkspaceDuplicateOperation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWorkspaceDuplicateOperation")))
 }
 
-// NSFilenamesPboardType returns the string constant NSFilenamesPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSFilenamesPboardType() objc.ID {
-	return purego.CFConstant(raw.NSFilenamesPboardType())
-}
+// NSPlainFileType returns the string constant NSPlainFileType, for use as a dictionary key or argument.
+func NSPlainFileType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPlainFileType"))) }
 
-// NSTIFFPboardType returns the string constant NSTIFFPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSTIFFPboardType() objc.ID {
-	return purego.CFConstant(raw.NSTIFFPboardType())
+// NSDirectoryFileType returns the string constant NSDirectoryFileType, for use as a dictionary key or argument.
+func NSDirectoryFileType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDirectoryFileType")))
 }
 
-// NSRTFPboardType returns the string constant NSRTFPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSRTFPboardType() objc.ID {
-	return purego.CFConstant(raw.NSRTFPboardType())
+// NSApplicationFileType returns the string constant NSApplicationFileType, for use as a dictionary key or argument.
+func NSApplicationFileType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationFileType")))
 }
 
-// NSTabularTextPboardType returns the string constant NSTabularTextPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSTabularTextPboardType() objc.ID {
-	return purego.CFConstant(raw.NSTabularTextPboardType())
+// NSFilesystemFileType returns the string constant NSFilesystemFileType, for use as a dictionary key or argument.
+func NSFilesystemFileType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFilesystemFileType")))
 }
 
-// NSFontPboardType returns the string constant NSFontPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontPboardType() objc.ID {
-	return purego.CFConstant(raw.NSFontPboardType())
+// NSShellCommandFileType returns the string constant NSShellCommandFileType, for use as a dictionary key or argument.
+func NSShellCommandFileType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSShellCommandFileType")))
 }
 
-// NSRulerPboardType returns the string constant NSRulerPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSRulerPboardType() objc.ID {
-	return purego.CFConstant(raw.NSRulerPboardType())
+// NSPasteboardTypeString returns the string constant NSPasteboardTypeString, for use as a dictionary key or argument.
+func NSPasteboardTypeString() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypeString")))
 }
 
-// NSColorPboardType returns the string constant NSColorPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSColorPboardType() objc.ID {
-	return purego.CFConstant(raw.NSColorPboardType())
+// NSPasteboardTypePDF returns the string constant NSPasteboardTypePDF, for use as a dictionary key or argument.
+func NSPasteboardTypePDF() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypePDF")))
 }
 
-// NSRTFDPboardType returns the string constant NSRTFDPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSRTFDPboardType() objc.ID {
-	return purego.CFConstant(raw.NSRTFDPboardType())
+// NSPasteboardTypeTIFF returns the string constant NSPasteboardTypeTIFF, for use as a dictionary key or argument.
+func NSPasteboardTypeTIFF() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypeTIFF")))
 }
 
-// NSHTMLPboardType returns the string constant NSHTMLPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSHTMLPboardType() objc.ID {
-	return purego.CFConstant(raw.NSHTMLPboardType())
+// NSPasteboardTypePNG returns the string constant NSPasteboardTypePNG, for use as a dictionary key or argument.
+func NSPasteboardTypePNG() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypePNG")))
 }
 
-// NSURLPboardType returns the string constant NSURLPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSURLPboardType() objc.ID {
-	return purego.CFConstant(raw.NSURLPboardType())
+// NSPasteboardTypeRTF returns the string constant NSPasteboardTypeRTF, for use as a dictionary key or argument.
+func NSPasteboardTypeRTF() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypeRTF")))
 }
 
-// NSPDFPboardType returns the string constant NSPDFPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSPDFPboardType() objc.ID {
-	return purego.CFConstant(raw.NSPDFPboardType())
+// NSPasteboardTypeRTFD returns the string constant NSPasteboardTypeRTFD, for use as a dictionary key or argument.
+func NSPasteboardTypeRTFD() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypeRTFD")))
 }
 
-// NSMultipleTextSelectionPboardType returns the string constant NSMultipleTextSelectionPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSMultipleTextSelectionPboardType() objc.ID {
-	return purego.CFConstant(raw.NSMultipleTextSelectionPboardType())
+// NSPasteboardTypeHTML returns the string constant NSPasteboardTypeHTML, for use as a dictionary key or argument.
+func NSPasteboardTypeHTML() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypeHTML")))
 }
 
-// NSPostScriptPboardType returns the string constant NSPostScriptPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSPostScriptPboardType() objc.ID {
-	return purego.CFConstant(raw.NSPostScriptPboardType())
+// NSPasteboardTypeTabularText returns the string constant NSPasteboardTypeTabularText, for use as a dictionary key or argument.
+func NSPasteboardTypeTabularText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypeTabularText")))
 }
 
-// NSVCardPboardType returns the string constant NSVCardPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSVCardPboardType() objc.ID {
-	return purego.CFConstant(raw.NSVCardPboardType())
+// NSPasteboardTypeFont returns the string constant NSPasteboardTypeFont, for use as a dictionary key or argument.
+func NSPasteboardTypeFont() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypeFont")))
 }
 
-// NSInkTextPboardType returns the string constant NSInkTextPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSInkTextPboardType() objc.ID {
-	return purego.CFConstant(raw.NSInkTextPboardType())
+// NSPasteboardTypeRuler returns the string constant NSPasteboardTypeRuler, for use as a dictionary key or argument.
+func NSPasteboardTypeRuler() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypeRuler")))
 }
 
-// NSFilesPromisePboardType returns the string constant NSFilesPromisePboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSFilesPromisePboardType() objc.ID {
-	return purego.CFConstant(raw.NSFilesPromisePboardType())
+// NSPasteboardTypeColor returns the string constant NSPasteboardTypeColor, for use as a dictionary key or argument.
+func NSPasteboardTypeColor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypeColor")))
 }
 
-// NSPasteboardTypeFindPanelSearchOptions returns the string constant NSPasteboardTypeFindPanelSearchOptions as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardTypeFindPanelSearchOptions() objc.ID {
-	return purego.CFConstant(raw.NSPasteboardTypeFindPanelSearchOptions())
+// NSPasteboardTypeSound returns the string constant NSPasteboardTypeSound, for use as a dictionary key or argument.
+func NSPasteboardTypeSound() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypeSound")))
 }
 
-// NSGeneralPboard returns the string constant NSGeneralPboard as an objc.ID, for use as a dictionary key or selector argument.
-func NSGeneralPboard() objc.ID {
-	return purego.CFConstant(raw.NSGeneralPboard())
+// NSPasteboardTypeMultipleTextSelection returns the string constant NSPasteboardTypeMultipleTextSelection, for use as a dictionary key or argument.
+func NSPasteboardTypeMultipleTextSelection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypeMultipleTextSelection")))
 }
 
-// NSFontPboard returns the string constant NSFontPboard as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontPboard() objc.ID {
-	return purego.CFConstant(raw.NSFontPboard())
+// NSPasteboardTypeTextFinderOptions returns the string constant NSPasteboardTypeTextFinderOptions, for use as a dictionary key or argument.
+func NSPasteboardTypeTextFinderOptions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypeTextFinderOptions")))
 }
 
-// NSRulerPboard returns the string constant NSRulerPboard as an objc.ID, for use as a dictionary key or selector argument.
-func NSRulerPboard() objc.ID {
-	return purego.CFConstant(raw.NSRulerPboard())
+// NSPasteboardTypeURL returns the string constant NSPasteboardTypeURL, for use as a dictionary key or argument.
+func NSPasteboardTypeURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypeURL")))
 }
 
-// NSFindPboard returns the string constant NSFindPboard as an objc.ID, for use as a dictionary key or selector argument.
-func NSFindPboard() objc.ID {
-	return purego.CFConstant(raw.NSFindPboard())
+// NSPasteboardTypeFileURL returns the string constant NSPasteboardTypeFileURL, for use as a dictionary key or argument.
+func NSPasteboardTypeFileURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypeFileURL")))
 }
 
-// NSDragPboard returns the string constant NSDragPboard as an objc.ID, for use as a dictionary key or selector argument.
-func NSDragPboard() objc.ID {
-	return purego.CFConstant(raw.NSDragPboard())
+// NSPasteboardNameGeneral returns the string constant NSPasteboardNameGeneral, for use as a dictionary key or argument.
+func NSPasteboardNameGeneral() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardNameGeneral")))
 }
 
-// NSPICTPboardType returns the string constant NSPICTPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSPICTPboardType() objc.ID {
-	return purego.CFConstant(raw.NSPICTPboardType())
+// NSPasteboardNameFont returns the string constant NSPasteboardNameFont, for use as a dictionary key or argument.
+func NSPasteboardNameFont() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardNameFont")))
 }
 
-// NSNibOwner returns the string constant NSNibOwner as an objc.ID, for use as a dictionary key or selector argument.
-func NSNibOwner() objc.ID {
-	return purego.CFConstant(raw.NSNibOwner())
+// NSPasteboardNameRuler returns the string constant NSPasteboardNameRuler, for use as a dictionary key or argument.
+func NSPasteboardNameRuler() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardNameRuler")))
 }
 
-// NSNibTopLevelObjects returns the string constant NSNibTopLevelObjects as an objc.ID, for use as a dictionary key or selector argument.
-func NSNibTopLevelObjects() objc.ID {
-	return purego.CFConstant(raw.NSNibTopLevelObjects())
+// NSPasteboardNameFind returns the string constant NSPasteboardNameFind, for use as a dictionary key or argument.
+func NSPasteboardNameFind() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardNameFind")))
 }
 
-// NSAnimationProgressMarkNotification returns the string constant NSAnimationProgressMarkNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAnimationProgressMarkNotification() objc.ID {
-	if _r := raw.NSAnimationProgressMarkNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPasteboardNameDrag returns the string constant NSPasteboardNameDrag, for use as a dictionary key or argument.
+func NSPasteboardNameDrag() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardNameDrag")))
 }
 
-// NSAnimationProgressMark returns the string constant NSAnimationProgressMark as an objc.ID, for use as a dictionary key or selector argument.
-func NSAnimationProgressMark() objc.ID {
-	if _r := raw.NSAnimationProgressMark(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// A pattern that indicates the pasteboard detects a string that consists of a web URL.
+// NSPasteboardDetectionPatternProbableWebURL returns the string constant NSPasteboardDetectionPatternProbableWebURL, for use as a dictionary key or argument.
+func NSPasteboardDetectionPatternProbableWebURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternProbableWebURL")))
 }
 
-// NSViewAnimationTargetKey returns the string constant NSViewAnimationTargetKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSViewAnimationTargetKey() objc.ID {
-	if _r := raw.NSViewAnimationTargetKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// A pattern that indicates the pasteboard detects a string suitable for use as a web search term.
+// NSPasteboardDetectionPatternProbableWebSearch returns the string constant NSPasteboardDetectionPatternProbableWebSearch, for use as a dictionary key or argument.
+func NSPasteboardDetectionPatternProbableWebSearch() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternProbableWebSearch")))
 }
 
-// NSViewAnimationStartFrameKey returns the string constant NSViewAnimationStartFrameKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSViewAnimationStartFrameKey() objc.ID {
-	if _r := raw.NSViewAnimationStartFrameKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// A pattern that indicates the pasteboard detects a string that consists of a numeric value.
+// NSPasteboardDetectionPatternNumber returns the string constant NSPasteboardDetectionPatternNumber, for use as a dictionary key or argument.
+func NSPasteboardDetectionPatternNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternNumber")))
 }
 
-// NSViewAnimationEndFrameKey returns the string constant NSViewAnimationEndFrameKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSViewAnimationEndFrameKey() objc.ID {
-	if _r := raw.NSViewAnimationEndFrameKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// A pattern that indicates the pasteboard detects a string that contains a URL.
+// NSPasteboardDetectionPatternLink returns the string constant NSPasteboardDetectionPatternLink, for use as a dictionary key or argument.
+func NSPasteboardDetectionPatternLink() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternLink")))
 }
 
-// NSViewAnimationEffectKey returns the string constant NSViewAnimationEffectKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSViewAnimationEffectKey() objc.ID {
-	if _r := raw.NSViewAnimationEffectKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// A pattern that indicates the pasteboard detects a string that contains a phone number.
+// NSPasteboardDetectionPatternPhoneNumber returns the string constant NSPasteboardDetectionPatternPhoneNumber, for use as a dictionary key or argument.
+func NSPasteboardDetectionPatternPhoneNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternPhoneNumber")))
 }
 
-// NSViewAnimationFadeInEffect returns the string constant NSViewAnimationFadeInEffect as an objc.ID, for use as a dictionary key or selector argument.
-func NSViewAnimationFadeInEffect() objc.ID {
-	if _r := raw.NSViewAnimationFadeInEffect(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// A pattern that indicates the pasteboard detects a string that contains an email address.
+// NSPasteboardDetectionPatternEmailAddress returns the string constant NSPasteboardDetectionPatternEmailAddress, for use as a dictionary key or argument.
+func NSPasteboardDetectionPatternEmailAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternEmailAddress")))
 }
 
-// NSViewAnimationFadeOutEffect returns the string constant NSViewAnimationFadeOutEffect as an objc.ID, for use as a dictionary key or selector argument.
-func NSViewAnimationFadeOutEffect() objc.ID {
-	if _r := raw.NSViewAnimationFadeOutEffect(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// A pattern that indicates the pasteboard detects a string that contains a postal address.
+// NSPasteboardDetectionPatternPostalAddress returns the string constant NSPasteboardDetectionPatternPostalAddress, for use as a dictionary key or argument.
+func NSPasteboardDetectionPatternPostalAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternPostalAddress")))
 }
 
-// NSAnimationTriggerOrderIn returns the string constant NSAnimationTriggerOrderIn as an objc.ID, for use as a dictionary key or selector argument.
-func NSAnimationTriggerOrderIn() objc.ID {
-	return purego.CFConstant(raw.NSAnimationTriggerOrderIn())
+// A pattern that indicates the pasteboard detects a string that contains a calendar event.
+// NSPasteboardDetectionPatternCalendarEvent returns the string constant NSPasteboardDetectionPatternCalendarEvent, for use as a dictionary key or argument.
+func NSPasteboardDetectionPatternCalendarEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternCalendarEvent")))
 }
 
-// NSAnimationTriggerOrderOut returns the string constant NSAnimationTriggerOrderOut as an objc.ID, for use as a dictionary key or selector argument.
-func NSAnimationTriggerOrderOut() objc.ID {
-	return purego.CFConstant(raw.NSAnimationTriggerOrderOut())
+// A pattern that indicates the pasteboard detects a string that contains a parcel tracking number and carrier.
+// NSPasteboardDetectionPatternShipmentTrackingNumber returns the string constant NSPasteboardDetectionPatternShipmentTrackingNumber, for use as a dictionary key or argument.
+func NSPasteboardDetectionPatternShipmentTrackingNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternShipmentTrackingNumber")))
 }
 
-// NSAppearanceNameAqua returns the string constant NSAppearanceNameAqua as an objc.ID, for use as a dictionary key or selector argument.
-func NSAppearanceNameAqua() objc.ID {
-	return purego.CFConstant(raw.NSAppearanceNameAqua())
+// A pattern that indicates the pasteboard detects a string that contains a flight number.
+// NSPasteboardDetectionPatternFlightNumber returns the string constant NSPasteboardDetectionPatternFlightNumber, for use as a dictionary key or argument.
+func NSPasteboardDetectionPatternFlightNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternFlightNumber")))
 }
 
-// NSAppearanceNameDarkAqua returns the string constant NSAppearanceNameDarkAqua as an objc.ID, for use as a dictionary key or selector argument.
-func NSAppearanceNameDarkAqua() objc.ID {
-	return purego.CFConstant(raw.NSAppearanceNameDarkAqua())
+// A pattern that indicates the pasteboard detects a string that contains an amount of money.
+// NSPasteboardDetectionPatternMoneyAmount returns the string constant NSPasteboardDetectionPatternMoneyAmount, for use as a dictionary key or argument.
+func NSPasteboardDetectionPatternMoneyAmount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardDetectionPatternMoneyAmount")))
 }
 
-// NSAppearanceNameLightContent returns the string constant NSAppearanceNameLightContent as an objc.ID, for use as a dictionary key or selector argument.
-func NSAppearanceNameLightContent() objc.ID {
-	return purego.CFConstant(raw.NSAppearanceNameLightContent())
+// A metadata type that returns the content type if the pasteboard detects a reference to a file.
+// NSPasteboardMetadataTypeContentType returns the string constant NSPasteboardMetadataTypeContentType, for use as a dictionary key or argument.
+func NSPasteboardMetadataTypeContentType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardMetadataTypeContentType")))
 }
 
-// NSAppearanceNameVibrantDark returns the string constant NSAppearanceNameVibrantDark as an objc.ID, for use as a dictionary key or selector argument.
-func NSAppearanceNameVibrantDark() objc.ID {
-	return purego.CFConstant(raw.NSAppearanceNameVibrantDark())
+// NSPasteboardURLReadingFileURLsOnlyKey returns the string constant NSPasteboardURLReadingFileURLsOnlyKey, for use as a dictionary key or argument.
+func NSPasteboardURLReadingFileURLsOnlyKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardURLReadingFileURLsOnlyKey")))
 }
 
-// NSAppearanceNameVibrantLight returns the string constant NSAppearanceNameVibrantLight as an objc.ID, for use as a dictionary key or selector argument.
-func NSAppearanceNameVibrantLight() objc.ID {
-	return purego.CFConstant(raw.NSAppearanceNameVibrantLight())
+// NSPasteboardURLReadingContentsConformToTypesKey returns the string constant NSPasteboardURLReadingContentsConformToTypesKey, for use as a dictionary key or argument.
+func NSPasteboardURLReadingContentsConformToTypesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardURLReadingContentsConformToTypesKey")))
 }
 
-// NSAppearanceNameAccessibilityHighContrastAqua returns the string constant NSAppearanceNameAccessibilityHighContrastAqua as an objc.ID, for use as a dictionary key or selector argument.
-func NSAppearanceNameAccessibilityHighContrastAqua() objc.ID {
-	return purego.CFConstant(raw.NSAppearanceNameAccessibilityHighContrastAqua())
+// NSFileContentsPboardType returns the string constant NSFileContentsPboardType, for use as a dictionary key or argument.
+func NSFileContentsPboardType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFileContentsPboardType")))
 }
 
-// NSAppearanceNameAccessibilityHighContrastDarkAqua returns the string constant NSAppearanceNameAccessibilityHighContrastDarkAqua as an objc.ID, for use as a dictionary key or selector argument.
-func NSAppearanceNameAccessibilityHighContrastDarkAqua() objc.ID {
-	return purego.CFConstant(raw.NSAppearanceNameAccessibilityHighContrastDarkAqua())
+// NSStringPboardType returns the string constant NSStringPboardType, for use as a dictionary key or argument.
+func NSStringPboardType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSStringPboardType")))
 }
 
-// NSAppearanceNameAccessibilityHighContrastVibrantLight returns the string constant NSAppearanceNameAccessibilityHighContrastVibrantLight as an objc.ID, for use as a dictionary key or selector argument.
-func NSAppearanceNameAccessibilityHighContrastVibrantLight() objc.ID {
-	return purego.CFConstant(raw.NSAppearanceNameAccessibilityHighContrastVibrantLight())
+// NSFilenamesPboardType returns the string constant NSFilenamesPboardType, for use as a dictionary key or argument.
+func NSFilenamesPboardType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFilenamesPboardType")))
 }
 
-// NSAppearanceNameAccessibilityHighContrastVibrantDark returns the string constant NSAppearanceNameAccessibilityHighContrastVibrantDark as an objc.ID, for use as a dictionary key or selector argument.
-func NSAppearanceNameAccessibilityHighContrastVibrantDark() objc.ID {
-	return purego.CFConstant(raw.NSAppearanceNameAccessibilityHighContrastVibrantDark())
-}
+// NSTIFFPboardType returns the string constant NSTIFFPboardType, for use as a dictionary key or argument.
+func NSTIFFPboardType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSTIFFPboardType"))) }
 
-// NSFullScreenModeAllScreens returns the string constant NSFullScreenModeAllScreens as an objc.ID, for use as a dictionary key or selector argument.
-func NSFullScreenModeAllScreens() objc.ID {
-	return purego.CFConstant(raw.NSFullScreenModeAllScreens())
-}
+// NSRTFPboardType returns the string constant NSRTFPboardType, for use as a dictionary key or argument.
+func NSRTFPboardType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSRTFPboardType"))) }
 
-// NSFullScreenModeSetting returns the string constant NSFullScreenModeSetting as an objc.ID, for use as a dictionary key or selector argument.
-func NSFullScreenModeSetting() objc.ID {
-	return purego.CFConstant(raw.NSFullScreenModeSetting())
+// NSTabularTextPboardType returns the string constant NSTabularTextPboardType, for use as a dictionary key or argument.
+func NSTabularTextPboardType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTabularTextPboardType")))
 }
 
-// NSFullScreenModeWindowLevel returns the string constant NSFullScreenModeWindowLevel as an objc.ID, for use as a dictionary key or selector argument.
-func NSFullScreenModeWindowLevel() objc.ID {
-	return purego.CFConstant(raw.NSFullScreenModeWindowLevel())
-}
+// NSFontPboardType returns the string constant NSFontPboardType, for use as a dictionary key or argument.
+func NSFontPboardType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSFontPboardType"))) }
 
-// NSFullScreenModeApplicationPresentationOptions returns the string constant NSFullScreenModeApplicationPresentationOptions as an objc.ID, for use as a dictionary key or selector argument.
-func NSFullScreenModeApplicationPresentationOptions() objc.ID {
-	return purego.CFConstant(raw.NSFullScreenModeApplicationPresentationOptions())
-}
+// NSRulerPboardType returns the string constant NSRulerPboardType, for use as a dictionary key or argument.
+func NSRulerPboardType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSRulerPboardType"))) }
 
-// NSDefinitionPresentationTypeKey returns the string constant NSDefinitionPresentationTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSDefinitionPresentationTypeKey() objc.ID {
-	return purego.CFConstant(raw.NSDefinitionPresentationTypeKey())
-}
+// NSColorPboardType returns the string constant NSColorPboardType, for use as a dictionary key or argument.
+func NSColorPboardType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSColorPboardType"))) }
 
-// NSDefinitionPresentationTypeOverlay returns the string constant NSDefinitionPresentationTypeOverlay as an objc.ID, for use as a dictionary key or selector argument.
-func NSDefinitionPresentationTypeOverlay() objc.ID {
-	return purego.CFConstant(raw.NSDefinitionPresentationTypeOverlay())
-}
+// NSRTFDPboardType returns the string constant NSRTFDPboardType, for use as a dictionary key or argument.
+func NSRTFDPboardType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSRTFDPboardType"))) }
 
-// NSDefinitionPresentationTypeDictionaryApplication returns the string constant NSDefinitionPresentationTypeDictionaryApplication as an objc.ID, for use as a dictionary key or selector argument.
-func NSDefinitionPresentationTypeDictionaryApplication() objc.ID {
-	return purego.CFConstant(raw.NSDefinitionPresentationTypeDictionaryApplication())
-}
+// NSHTMLPboardType returns the string constant NSHTMLPboardType, for use as a dictionary key or argument.
+func NSHTMLPboardType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSHTMLPboardType"))) }
 
-// NSViewFrameDidChangeNotification returns the string constant NSViewFrameDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSViewFrameDidChangeNotification() objc.ID {
-	if _r := raw.NSViewFrameDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSURLPboardType returns the string constant NSURLPboardType, for use as a dictionary key or argument.
+func NSURLPboardType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSURLPboardType"))) }
 
-// NSViewBoundsDidChangeNotification returns the string constant NSViewBoundsDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSViewBoundsDidChangeNotification() objc.ID {
-	if _r := raw.NSViewBoundsDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSPDFPboardType returns the string constant NSPDFPboardType, for use as a dictionary key or argument.
+func NSPDFPboardType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPDFPboardType"))) }
 
-// NSTextDidBeginEditingNotification returns the string constant NSTextDidBeginEditingNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextDidBeginEditingNotification() objc.ID {
-	if _r := raw.NSTextDidBeginEditingNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSMultipleTextSelectionPboardType returns the string constant NSMultipleTextSelectionPboardType, for use as a dictionary key or argument.
+func NSMultipleTextSelectionPboardType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMultipleTextSelectionPboardType")))
 }
 
-// NSTextDidEndEditingNotification returns the string constant NSTextDidEndEditingNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextDidEndEditingNotification() objc.ID {
-	if _r := raw.NSTextDidEndEditingNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPostScriptPboardType returns the string constant NSPostScriptPboardType, for use as a dictionary key or argument.
+func NSPostScriptPboardType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPostScriptPboardType")))
 }
 
-// NSTextDidChangeNotification returns the string constant NSTextDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextDidChangeNotification() objc.ID {
-	if _r := raw.NSTextDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSVCardPboardType returns the string constant NSVCardPboardType, for use as a dictionary key or argument.
+func NSVCardPboardType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSVCardPboardType"))) }
 
-// NSTextMovementUserInfoKey returns the string constant NSTextMovementUserInfoKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextMovementUserInfoKey() objc.ID {
-	return purego.CFConstant(raw.NSTextMovementUserInfoKey())
+// NSInkTextPboardType returns the string constant NSInkTextPboardType, for use as a dictionary key or argument.
+func NSInkTextPboardType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSInkTextPboardType")))
 }
 
-// NSTabColumnTerminatorsAttributeName returns the string constant NSTabColumnTerminatorsAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSTabColumnTerminatorsAttributeName() objc.ID {
-	if _r := raw.NSTabColumnTerminatorsAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFilesPromisePboardType returns the string constant NSFilesPromisePboardType, for use as a dictionary key or argument.
+func NSFilesPromisePboardType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFilesPromisePboardType")))
 }
 
-// NSMenuItemImportFromDeviceIdentifier returns the string constant NSMenuItemImportFromDeviceIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSMenuItemImportFromDeviceIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSMenuItemImportFromDeviceIdentifier())
+// NSPasteboardTypeFindPanelSearchOptions returns the string constant NSPasteboardTypeFindPanelSearchOptions, for use as a dictionary key or argument.
+func NSPasteboardTypeFindPanelSearchOptions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypeFindPanelSearchOptions")))
 }
 
-// NSMenuWillSendActionNotification returns the string constant NSMenuWillSendActionNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSMenuWillSendActionNotification() objc.ID {
-	if _r := raw.NSMenuWillSendActionNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSGeneralPboard returns the string constant NSGeneralPboard, for use as a dictionary key or argument.
+func NSGeneralPboard() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSGeneralPboard"))) }
 
-// NSMenuDidSendActionNotification returns the string constant NSMenuDidSendActionNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSMenuDidSendActionNotification() objc.ID {
-	if _r := raw.NSMenuDidSendActionNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSFontPboard returns the string constant NSFontPboard, for use as a dictionary key or argument.
+func NSFontPboard() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSFontPboard"))) }
 
-// NSMenuDidAddItemNotification returns the string constant NSMenuDidAddItemNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSMenuDidAddItemNotification() objc.ID {
-	if _r := raw.NSMenuDidAddItemNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSRulerPboard returns the string constant NSRulerPboard, for use as a dictionary key or argument.
+func NSRulerPboard() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSRulerPboard"))) }
 
-// NSMenuDidRemoveItemNotification returns the string constant NSMenuDidRemoveItemNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSMenuDidRemoveItemNotification() objc.ID {
-	if _r := raw.NSMenuDidRemoveItemNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSFindPboard returns the string constant NSFindPboard, for use as a dictionary key or argument.
+func NSFindPboard() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSFindPboard"))) }
 
-// NSMenuDidChangeItemNotification returns the string constant NSMenuDidChangeItemNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSMenuDidChangeItemNotification() objc.ID {
-	if _r := raw.NSMenuDidChangeItemNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSDragPboard returns the string constant NSDragPboard, for use as a dictionary key or argument.
+func NSDragPboard() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSDragPboard"))) }
 
-// NSMenuDidBeginTrackingNotification returns the string constant NSMenuDidBeginTrackingNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSMenuDidBeginTrackingNotification() objc.ID {
-	if _r := raw.NSMenuDidBeginTrackingNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSPICTPboardType returns the string constant NSPICTPboardType, for use as a dictionary key or argument.
+func NSPICTPboardType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPICTPboardType"))) }
 
-// NSMenuDidEndTrackingNotification returns the string constant NSMenuDidEndTrackingNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSMenuDidEndTrackingNotification() objc.ID {
-	if _r := raw.NSMenuDidEndTrackingNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSNibOwner returns the string constant NSNibOwner, for use as a dictionary key or argument.
+func NSNibOwner() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSNibOwner"))) }
 
-// NSPrintPaperName returns the string constant NSPrintPaperName as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintPaperName() objc.ID {
-	if _r := raw.NSPrintPaperName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSNibTopLevelObjects returns the string constant NSNibTopLevelObjects, for use as a dictionary key or argument.
+func NSNibTopLevelObjects() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSNibTopLevelObjects")))
 }
 
-// NSPrintPaperSize returns the string constant NSPrintPaperSize as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintPaperSize() objc.ID {
-	if _r := raw.NSPrintPaperSize(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAnimationProgressMarkNotification returns the string constant NSAnimationProgressMarkNotification, for use as a dictionary key or argument.
+func NSAnimationProgressMarkNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAnimationProgressMarkNotification")))
 }
 
-// NSPrintOrientation returns the string constant NSPrintOrientation as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintOrientation() objc.ID {
-	if _r := raw.NSPrintOrientation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAnimationProgressMark returns the string constant NSAnimationProgressMark, for use as a dictionary key or argument.
+func NSAnimationProgressMark() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAnimationProgressMark")))
 }
 
-// NSPrintScalingFactor returns the string constant NSPrintScalingFactor as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintScalingFactor() objc.ID {
-	if _r := raw.NSPrintScalingFactor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSViewAnimationTargetKey returns the string constant NSViewAnimationTargetKey, for use as a dictionary key or argument.
+func NSViewAnimationTargetKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSViewAnimationTargetKey")))
 }
 
-// NSPrintLeftMargin returns the string constant NSPrintLeftMargin as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintLeftMargin() objc.ID {
-	if _r := raw.NSPrintLeftMargin(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSViewAnimationStartFrameKey returns the string constant NSViewAnimationStartFrameKey, for use as a dictionary key or argument.
+func NSViewAnimationStartFrameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSViewAnimationStartFrameKey")))
 }
 
-// NSPrintRightMargin returns the string constant NSPrintRightMargin as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintRightMargin() objc.ID {
-	if _r := raw.NSPrintRightMargin(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSViewAnimationEndFrameKey returns the string constant NSViewAnimationEndFrameKey, for use as a dictionary key or argument.
+func NSViewAnimationEndFrameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSViewAnimationEndFrameKey")))
 }
 
-// NSPrintTopMargin returns the string constant NSPrintTopMargin as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintTopMargin() objc.ID {
-	if _r := raw.NSPrintTopMargin(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSViewAnimationEffectKey returns the string constant NSViewAnimationEffectKey, for use as a dictionary key or argument.
+func NSViewAnimationEffectKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSViewAnimationEffectKey")))
 }
 
-// NSPrintBottomMargin returns the string constant NSPrintBottomMargin as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintBottomMargin() objc.ID {
-	if _r := raw.NSPrintBottomMargin(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSViewAnimationFadeInEffect returns the string constant NSViewAnimationFadeInEffect, for use as a dictionary key or argument.
+func NSViewAnimationFadeInEffect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSViewAnimationFadeInEffect")))
 }
 
-// NSPrintHorizontallyCentered returns the string constant NSPrintHorizontallyCentered as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintHorizontallyCentered() objc.ID {
-	if _r := raw.NSPrintHorizontallyCentered(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSViewAnimationFadeOutEffect returns the string constant NSViewAnimationFadeOutEffect, for use as a dictionary key or argument.
+func NSViewAnimationFadeOutEffect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSViewAnimationFadeOutEffect")))
 }
 
-// NSPrintVerticallyCentered returns the string constant NSPrintVerticallyCentered as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintVerticallyCentered() objc.ID {
-	if _r := raw.NSPrintVerticallyCentered(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAnimationTriggerOrderIn returns the string constant NSAnimationTriggerOrderIn, for use as a dictionary key or argument.
+func NSAnimationTriggerOrderIn() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAnimationTriggerOrderIn")))
 }
 
-// NSPrintHorizontalPagination returns the string constant NSPrintHorizontalPagination as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintHorizontalPagination() objc.ID {
-	if _r := raw.NSPrintHorizontalPagination(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAnimationTriggerOrderOut returns the string constant NSAnimationTriggerOrderOut, for use as a dictionary key or argument.
+func NSAnimationTriggerOrderOut() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAnimationTriggerOrderOut")))
 }
 
-// NSPrintVerticalPagination returns the string constant NSPrintVerticalPagination as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintVerticalPagination() objc.ID {
-	if _r := raw.NSPrintVerticalPagination(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAppearanceNameAqua returns the string constant NSAppearanceNameAqua, for use as a dictionary key or argument.
+func NSAppearanceNameAqua() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAppearanceNameAqua")))
 }
 
-// NSPrintPrinter returns the string constant NSPrintPrinter as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintPrinter() objc.ID {
-	if _r := raw.NSPrintPrinter(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAppearanceNameDarkAqua returns the string constant NSAppearanceNameDarkAqua, for use as a dictionary key or argument.
+func NSAppearanceNameDarkAqua() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAppearanceNameDarkAqua")))
 }
 
-// NSPrintCopies returns the string constant NSPrintCopies as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintCopies() objc.ID {
-	if _r := raw.NSPrintCopies(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAppearanceNameLightContent returns the string constant NSAppearanceNameLightContent, for use as a dictionary key or argument.
+func NSAppearanceNameLightContent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAppearanceNameLightContent")))
 }
 
-// NSPrintAllPages returns the string constant NSPrintAllPages as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintAllPages() objc.ID {
-	if _r := raw.NSPrintAllPages(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAppearanceNameVibrantDark returns the string constant NSAppearanceNameVibrantDark, for use as a dictionary key or argument.
+func NSAppearanceNameVibrantDark() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAppearanceNameVibrantDark")))
 }
 
-// NSPrintFirstPage returns the string constant NSPrintFirstPage as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintFirstPage() objc.ID {
-	if _r := raw.NSPrintFirstPage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAppearanceNameVibrantLight returns the string constant NSAppearanceNameVibrantLight, for use as a dictionary key or argument.
+func NSAppearanceNameVibrantLight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAppearanceNameVibrantLight")))
 }
 
-// NSPrintLastPage returns the string constant NSPrintLastPage as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintLastPage() objc.ID {
-	if _r := raw.NSPrintLastPage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAppearanceNameAccessibilityHighContrastAqua returns the string constant NSAppearanceNameAccessibilityHighContrastAqua, for use as a dictionary key or argument.
+func NSAppearanceNameAccessibilityHighContrastAqua() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAppearanceNameAccessibilityHighContrastAqua")))
 }
 
-// NSPrintMustCollate returns the string constant NSPrintMustCollate as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintMustCollate() objc.ID {
-	if _r := raw.NSPrintMustCollate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAppearanceNameAccessibilityHighContrastDarkAqua returns the string constant NSAppearanceNameAccessibilityHighContrastDarkAqua, for use as a dictionary key or argument.
+func NSAppearanceNameAccessibilityHighContrastDarkAqua() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAppearanceNameAccessibilityHighContrastDarkAqua")))
 }
 
-// NSPrintReversePageOrder returns the string constant NSPrintReversePageOrder as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintReversePageOrder() objc.ID {
-	if _r := raw.NSPrintReversePageOrder(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAppearanceNameAccessibilityHighContrastVibrantLight returns the string constant NSAppearanceNameAccessibilityHighContrastVibrantLight, for use as a dictionary key or argument.
+func NSAppearanceNameAccessibilityHighContrastVibrantLight() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAppearanceNameAccessibilityHighContrastVibrantLight")))
 }
 
-// NSPrintJobDisposition returns the string constant NSPrintJobDisposition as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintJobDisposition() objc.ID {
-	if _r := raw.NSPrintJobDisposition(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAppearanceNameAccessibilityHighContrastVibrantDark returns the string constant NSAppearanceNameAccessibilityHighContrastVibrantDark, for use as a dictionary key or argument.
+func NSAppearanceNameAccessibilityHighContrastVibrantDark() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAppearanceNameAccessibilityHighContrastVibrantDark")))
 }
 
-// NSPrintPagesAcross returns the string constant NSPrintPagesAcross as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintPagesAcross() objc.ID {
-	if _r := raw.NSPrintPagesAcross(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFullScreenModeAllScreens returns the string constant NSFullScreenModeAllScreens, for use as a dictionary key or argument.
+func NSFullScreenModeAllScreens() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFullScreenModeAllScreens")))
 }
 
-// NSPrintPagesDown returns the string constant NSPrintPagesDown as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintPagesDown() objc.ID {
-	if _r := raw.NSPrintPagesDown(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFullScreenModeSetting returns the string constant NSFullScreenModeSetting, for use as a dictionary key or argument.
+func NSFullScreenModeSetting() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFullScreenModeSetting")))
 }
 
-// NSPrintTime returns the string constant NSPrintTime as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintTime() objc.ID {
-	if _r := raw.NSPrintTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFullScreenModeWindowLevel returns the string constant NSFullScreenModeWindowLevel, for use as a dictionary key or argument.
+func NSFullScreenModeWindowLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFullScreenModeWindowLevel")))
 }
 
-// NSPrintDetailedErrorReporting returns the string constant NSPrintDetailedErrorReporting as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintDetailedErrorReporting() objc.ID {
-	if _r := raw.NSPrintDetailedErrorReporting(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFullScreenModeApplicationPresentationOptions returns the string constant NSFullScreenModeApplicationPresentationOptions, for use as a dictionary key or argument.
+func NSFullScreenModeApplicationPresentationOptions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFullScreenModeApplicationPresentationOptions")))
 }
 
-// NSPrintFaxNumber returns the string constant NSPrintFaxNumber as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintFaxNumber() objc.ID {
-	if _r := raw.NSPrintFaxNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDefinitionPresentationTypeKey returns the string constant NSDefinitionPresentationTypeKey, for use as a dictionary key or argument.
+func NSDefinitionPresentationTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDefinitionPresentationTypeKey")))
 }
 
-// NSPrintPrinterName returns the string constant NSPrintPrinterName as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintPrinterName() objc.ID {
-	if _r := raw.NSPrintPrinterName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDefinitionPresentationTypeOverlay returns the string constant NSDefinitionPresentationTypeOverlay, for use as a dictionary key or argument.
+func NSDefinitionPresentationTypeOverlay() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDefinitionPresentationTypeOverlay")))
 }
 
-// NSPrintSelectionOnly returns the string constant NSPrintSelectionOnly as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintSelectionOnly() objc.ID {
-	return purego.CFConstant(raw.NSPrintSelectionOnly())
+// NSDefinitionPresentationTypeDictionaryApplication returns the string constant NSDefinitionPresentationTypeDictionaryApplication, for use as a dictionary key or argument.
+func NSDefinitionPresentationTypeDictionaryApplication() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDefinitionPresentationTypeDictionaryApplication")))
 }
 
-// NSPrintJobSavingURL returns the string constant NSPrintJobSavingURL as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintJobSavingURL() objc.ID {
-	return purego.CFConstant(raw.NSPrintJobSavingURL())
+// NSViewFrameDidChangeNotification returns the string constant NSViewFrameDidChangeNotification, for use as a dictionary key or argument.
+func NSViewFrameDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSViewFrameDidChangeNotification")))
 }
 
-// NSPrintJobSavingFileNameExtensionHidden returns the string constant NSPrintJobSavingFileNameExtensionHidden as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintJobSavingFileNameExtensionHidden() objc.ID {
-	return purego.CFConstant(raw.NSPrintJobSavingFileNameExtensionHidden())
+// NSViewBoundsDidChangeNotification returns the string constant NSViewBoundsDidChangeNotification, for use as a dictionary key or argument.
+func NSViewBoundsDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSViewBoundsDidChangeNotification")))
 }
 
-// NSPrintHeaderAndFooter returns the string constant NSPrintHeaderAndFooter as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintHeaderAndFooter() objc.ID {
-	if _r := raw.NSPrintHeaderAndFooter(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextDidBeginEditingNotification returns the string constant NSTextDidBeginEditingNotification, for use as a dictionary key or argument.
+func NSTextDidBeginEditingNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextDidBeginEditingNotification")))
 }
 
-// NSPrintSpoolJob returns the string constant NSPrintSpoolJob as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintSpoolJob() objc.ID {
-	if _r := raw.NSPrintSpoolJob(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextDidEndEditingNotification returns the string constant NSTextDidEndEditingNotification, for use as a dictionary key or argument.
+func NSTextDidEndEditingNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextDidEndEditingNotification")))
 }
 
-// NSPrintPreviewJob returns the string constant NSPrintPreviewJob as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintPreviewJob() objc.ID {
-	if _r := raw.NSPrintPreviewJob(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextDidChangeNotification returns the string constant NSTextDidChangeNotification, for use as a dictionary key or argument.
+func NSTextDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextDidChangeNotification")))
 }
 
-// NSPrintSaveJob returns the string constant NSPrintSaveJob as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintSaveJob() objc.ID {
-	if _r := raw.NSPrintSaveJob(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextMovementUserInfoKey returns the string constant NSTextMovementUserInfoKey, for use as a dictionary key or argument.
+func NSTextMovementUserInfoKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextMovementUserInfoKey")))
 }
 
-// NSPrintCancelJob returns the string constant NSPrintCancelJob as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintCancelJob() objc.ID {
-	if _r := raw.NSPrintCancelJob(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTabColumnTerminatorsAttributeName returns the string constant NSTabColumnTerminatorsAttributeName, for use as a dictionary key or argument.
+func NSTabColumnTerminatorsAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTabColumnTerminatorsAttributeName")))
 }
 
-// NSPrintFormName returns the string constant NSPrintFormName as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintFormName() objc.ID {
-	return purego.CFConstant(raw.NSPrintFormName())
+// NSMenuItemImportFromDeviceIdentifier returns the string constant NSMenuItemImportFromDeviceIdentifier, for use as a dictionary key or argument.
+func NSMenuItemImportFromDeviceIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMenuItemImportFromDeviceIdentifier")))
 }
 
-// NSPrintJobFeatures returns the string constant NSPrintJobFeatures as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintJobFeatures() objc.ID {
-	return purego.CFConstant(raw.NSPrintJobFeatures())
+// NSMenuWillSendActionNotification returns the string constant NSMenuWillSendActionNotification, for use as a dictionary key or argument.
+func NSMenuWillSendActionNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMenuWillSendActionNotification")))
 }
 
-// NSPrintManualFeed returns the string constant NSPrintManualFeed as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintManualFeed() objc.ID {
-	return purego.CFConstant(raw.NSPrintManualFeed())
+// NSMenuDidSendActionNotification returns the string constant NSMenuDidSendActionNotification, for use as a dictionary key or argument.
+func NSMenuDidSendActionNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMenuDidSendActionNotification")))
 }
 
-// NSPrintPagesPerSheet returns the string constant NSPrintPagesPerSheet as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintPagesPerSheet() objc.ID {
-	return purego.CFConstant(raw.NSPrintPagesPerSheet())
+// NSMenuDidAddItemNotification returns the string constant NSMenuDidAddItemNotification, for use as a dictionary key or argument.
+func NSMenuDidAddItemNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMenuDidAddItemNotification")))
 }
 
-// NSPrintPaperFeed returns the string constant NSPrintPaperFeed as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintPaperFeed() objc.ID {
-	return purego.CFConstant(raw.NSPrintPaperFeed())
+// NSMenuDidRemoveItemNotification returns the string constant NSMenuDidRemoveItemNotification, for use as a dictionary key or argument.
+func NSMenuDidRemoveItemNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMenuDidRemoveItemNotification")))
 }
 
-// NSPrintSavePath returns the string constant NSPrintSavePath as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintSavePath() objc.ID {
-	return purego.CFConstant(raw.NSPrintSavePath())
+// NSMenuDidChangeItemNotification returns the string constant NSMenuDidChangeItemNotification, for use as a dictionary key or argument.
+func NSMenuDidChangeItemNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMenuDidChangeItemNotification")))
 }
 
-// NSObservedObjectKey returns the string constant NSObservedObjectKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSObservedObjectKey() objc.ID {
-	if _r := raw.NSObservedObjectKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSMenuDidBeginTrackingNotification returns the string constant NSMenuDidBeginTrackingNotification, for use as a dictionary key or argument.
+func NSMenuDidBeginTrackingNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMenuDidBeginTrackingNotification")))
 }
 
-// NSObservedKeyPathKey returns the string constant NSObservedKeyPathKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSObservedKeyPathKey() objc.ID {
-	if _r := raw.NSObservedKeyPathKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSMenuDidEndTrackingNotification returns the string constant NSMenuDidEndTrackingNotification, for use as a dictionary key or argument.
+func NSMenuDidEndTrackingNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMenuDidEndTrackingNotification")))
 }
 
-// NSOptionsKey returns the string constant NSOptionsKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSOptionsKey() objc.ID {
-	if _r := raw.NSOptionsKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSPrintPaperName returns the string constant NSPrintPaperName, for use as a dictionary key or argument.
+func NSPrintPaperName() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintPaperName"))) }
 
-// NSAlignmentBinding returns the string constant NSAlignmentBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSAlignmentBinding() objc.ID {
-	if _r := raw.NSAlignmentBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSPrintPaperSize returns the string constant NSPrintPaperSize, for use as a dictionary key or argument.
+func NSPrintPaperSize() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintPaperSize"))) }
 
-// NSAlternateImageBinding returns the string constant NSAlternateImageBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSAlternateImageBinding() objc.ID {
-	if _r := raw.NSAlternateImageBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintOrientation returns the string constant NSPrintOrientation, for use as a dictionary key or argument.
+func NSPrintOrientation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintOrientation")))
 }
 
-// NSAlternateTitleBinding returns the string constant NSAlternateTitleBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSAlternateTitleBinding() objc.ID {
-	if _r := raw.NSAlternateTitleBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintScalingFactor returns the string constant NSPrintScalingFactor, for use as a dictionary key or argument.
+func NSPrintScalingFactor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintScalingFactor")))
 }
 
-// NSAnimateBinding returns the string constant NSAnimateBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSAnimateBinding() objc.ID {
-	if _r := raw.NSAnimateBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSPrintLeftMargin returns the string constant NSPrintLeftMargin, for use as a dictionary key or argument.
+func NSPrintLeftMargin() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintLeftMargin"))) }
 
-// NSAnimationDelayBinding returns the string constant NSAnimationDelayBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSAnimationDelayBinding() objc.ID {
-	if _r := raw.NSAnimationDelayBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintRightMargin returns the string constant NSPrintRightMargin, for use as a dictionary key or argument.
+func NSPrintRightMargin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintRightMargin")))
 }
 
-// NSArgumentBinding returns the string constant NSArgumentBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSArgumentBinding() objc.ID {
-	if _r := raw.NSArgumentBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintTopMargin returns the string constant NSPrintTopMargin, for use as a dictionary key or argument.
+func NSPrintTopMargin() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintTopMargin"))) }
+
+// NSPrintBottomMargin returns the string constant NSPrintBottomMargin, for use as a dictionary key or argument.
+func NSPrintBottomMargin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintBottomMargin")))
 }
 
-// NSAttributedStringBinding returns the string constant NSAttributedStringBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSAttributedStringBinding() objc.ID {
-	if _r := raw.NSAttributedStringBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintHorizontallyCentered returns the string constant NSPrintHorizontallyCentered, for use as a dictionary key or argument.
+func NSPrintHorizontallyCentered() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintHorizontallyCentered")))
 }
 
-// NSContentArrayBinding returns the string constant NSContentArrayBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSContentArrayBinding() objc.ID {
-	if _r := raw.NSContentArrayBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintVerticallyCentered returns the string constant NSPrintVerticallyCentered, for use as a dictionary key or argument.
+func NSPrintVerticallyCentered() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintVerticallyCentered")))
 }
 
-// NSContentArrayForMultipleSelectionBinding returns the string constant NSContentArrayForMultipleSelectionBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSContentArrayForMultipleSelectionBinding() objc.ID {
-	if _r := raw.NSContentArrayForMultipleSelectionBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintHorizontalPagination returns the string constant NSPrintHorizontalPagination, for use as a dictionary key or argument.
+func NSPrintHorizontalPagination() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintHorizontalPagination")))
 }
 
-// NSContentBinding returns the string constant NSContentBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSContentBinding() objc.ID {
-	if _r := raw.NSContentBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintVerticalPagination returns the string constant NSPrintVerticalPagination, for use as a dictionary key or argument.
+func NSPrintVerticalPagination() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintVerticalPagination")))
 }
+
+// NSPrintPrinter returns the string constant NSPrintPrinter, for use as a dictionary key or argument.
+func NSPrintPrinter() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintPrinter"))) }
+
+// NSPrintCopies returns the string constant NSPrintCopies, for use as a dictionary key or argument.
+func NSPrintCopies() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintCopies"))) }
 
-// NSContentDictionaryBinding returns the string constant NSContentDictionaryBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSContentDictionaryBinding() objc.ID {
-	return purego.CFConstant(raw.NSContentDictionaryBinding())
+// NSPrintAllPages returns the string constant NSPrintAllPages, for use as a dictionary key or argument.
+func NSPrintAllPages() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintAllPages"))) }
+
+// NSPrintFirstPage returns the string constant NSPrintFirstPage, for use as a dictionary key or argument.
+func NSPrintFirstPage() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintFirstPage"))) }
+
+// NSPrintLastPage returns the string constant NSPrintLastPage, for use as a dictionary key or argument.
+func NSPrintLastPage() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintLastPage"))) }
+
+// NSPrintMustCollate returns the string constant NSPrintMustCollate, for use as a dictionary key or argument.
+func NSPrintMustCollate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintMustCollate")))
 }
 
-// NSContentHeightBinding returns the string constant NSContentHeightBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSContentHeightBinding() objc.ID {
-	if _r := raw.NSContentHeightBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintReversePageOrder returns the string constant NSPrintReversePageOrder, for use as a dictionary key or argument.
+func NSPrintReversePageOrder() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintReversePageOrder")))
 }
 
-// NSContentObjectBinding returns the string constant NSContentObjectBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSContentObjectBinding() objc.ID {
-	if _r := raw.NSContentObjectBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintJobDisposition returns the string constant NSPrintJobDisposition, for use as a dictionary key or argument.
+func NSPrintJobDisposition() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintJobDisposition")))
 }
 
-// NSContentObjectsBinding returns the string constant NSContentObjectsBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSContentObjectsBinding() objc.ID {
-	if _r := raw.NSContentObjectsBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintPagesAcross returns the string constant NSPrintPagesAcross, for use as a dictionary key or argument.
+func NSPrintPagesAcross() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintPagesAcross")))
 }
+
+// NSPrintPagesDown returns the string constant NSPrintPagesDown, for use as a dictionary key or argument.
+func NSPrintPagesDown() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintPagesDown"))) }
 
-// NSContentSetBinding returns the string constant NSContentSetBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSContentSetBinding() objc.ID {
-	if _r := raw.NSContentSetBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintTime returns the string constant NSPrintTime, for use as a dictionary key or argument.
+func NSPrintTime() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintTime"))) }
+
+// NSPrintDetailedErrorReporting returns the string constant NSPrintDetailedErrorReporting, for use as a dictionary key or argument.
+func NSPrintDetailedErrorReporting() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintDetailedErrorReporting")))
 }
 
-// NSContentValuesBinding returns the string constant NSContentValuesBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSContentValuesBinding() objc.ID {
-	if _r := raw.NSContentValuesBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintFaxNumber returns the string constant NSPrintFaxNumber, for use as a dictionary key or argument.
+func NSPrintFaxNumber() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintFaxNumber"))) }
+
+// NSPrintPrinterName returns the string constant NSPrintPrinterName, for use as a dictionary key or argument.
+func NSPrintPrinterName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintPrinterName")))
 }
 
-// NSContentWidthBinding returns the string constant NSContentWidthBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSContentWidthBinding() objc.ID {
-	if _r := raw.NSContentWidthBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintSelectionOnly returns the string constant NSPrintSelectionOnly, for use as a dictionary key or argument.
+func NSPrintSelectionOnly() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintSelectionOnly")))
 }
 
-// NSCriticalValueBinding returns the string constant NSCriticalValueBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSCriticalValueBinding() objc.ID {
-	if _r := raw.NSCriticalValueBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintJobSavingURL returns the string constant NSPrintJobSavingURL, for use as a dictionary key or argument.
+func NSPrintJobSavingURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintJobSavingURL")))
 }
 
-// NSDataBinding returns the string constant NSDataBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSDataBinding() objc.ID {
-	if _r := raw.NSDataBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintJobSavingFileNameExtensionHidden returns the string constant NSPrintJobSavingFileNameExtensionHidden, for use as a dictionary key or argument.
+func NSPrintJobSavingFileNameExtensionHidden() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintJobSavingFileNameExtensionHidden")))
 }
 
-// NSDisplayPatternTitleBinding returns the string constant NSDisplayPatternTitleBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSDisplayPatternTitleBinding() objc.ID {
-	if _r := raw.NSDisplayPatternTitleBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintHeaderAndFooter returns the string constant NSPrintHeaderAndFooter, for use as a dictionary key or argument.
+func NSPrintHeaderAndFooter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintHeaderAndFooter")))
 }
+
+// NSPrintSpoolJob returns the string constant NSPrintSpoolJob, for use as a dictionary key or argument.
+func NSPrintSpoolJob() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintSpoolJob"))) }
+
+// NSPrintPreviewJob returns the string constant NSPrintPreviewJob, for use as a dictionary key or argument.
+func NSPrintPreviewJob() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintPreviewJob"))) }
+
+// NSPrintSaveJob returns the string constant NSPrintSaveJob, for use as a dictionary key or argument.
+func NSPrintSaveJob() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintSaveJob"))) }
+
+// NSPrintCancelJob returns the string constant NSPrintCancelJob, for use as a dictionary key or argument.
+func NSPrintCancelJob() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintCancelJob"))) }
+
+// NSPrintFormName returns the string constant NSPrintFormName, for use as a dictionary key or argument.
+func NSPrintFormName() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintFormName"))) }
 
-// NSDisplayPatternValueBinding returns the string constant NSDisplayPatternValueBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSDisplayPatternValueBinding() objc.ID {
-	if _r := raw.NSDisplayPatternValueBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintJobFeatures returns the string constant NSPrintJobFeatures, for use as a dictionary key or argument.
+func NSPrintJobFeatures() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintJobFeatures")))
 }
 
-// NSDocumentEditedBinding returns the string constant NSDocumentEditedBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSDocumentEditedBinding() objc.ID {
-	if _r := raw.NSDocumentEditedBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintManualFeed returns the string constant NSPrintManualFeed, for use as a dictionary key or argument.
+func NSPrintManualFeed() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintManualFeed"))) }
+
+// NSPrintPagesPerSheet returns the string constant NSPrintPagesPerSheet, for use as a dictionary key or argument.
+func NSPrintPagesPerSheet() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintPagesPerSheet")))
 }
+
+// NSPrintPaperFeed returns the string constant NSPrintPaperFeed, for use as a dictionary key or argument.
+func NSPrintPaperFeed() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintPaperFeed"))) }
+
+// NSPrintSavePath returns the string constant NSPrintSavePath, for use as a dictionary key or argument.
+func NSPrintSavePath() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSPrintSavePath"))) }
 
-// NSDoubleClickArgumentBinding returns the string constant NSDoubleClickArgumentBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSDoubleClickArgumentBinding() objc.ID {
-	if _r := raw.NSDoubleClickArgumentBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSObservedObjectKey returns the string constant NSObservedObjectKey, for use as a dictionary key or argument.
+func NSObservedObjectKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSObservedObjectKey")))
 }
 
-// NSDoubleClickTargetBinding returns the string constant NSDoubleClickTargetBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSDoubleClickTargetBinding() objc.ID {
-	if _r := raw.NSDoubleClickTargetBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSObservedKeyPathKey returns the string constant NSObservedKeyPathKey, for use as a dictionary key or argument.
+func NSObservedKeyPathKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSObservedKeyPathKey")))
 }
 
-// NSEditableBinding returns the string constant NSEditableBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSEditableBinding() objc.ID {
-	if _r := raw.NSEditableBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSOptionsKey returns the string constant NSOptionsKey, for use as a dictionary key or argument.
+func NSOptionsKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSOptionsKey"))) }
+
+// NSAlignmentBinding returns the string constant NSAlignmentBinding, for use as a dictionary key or argument.
+func NSAlignmentBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAlignmentBinding")))
 }
 
-// NSEnabledBinding returns the string constant NSEnabledBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSEnabledBinding() objc.ID {
-	if _r := raw.NSEnabledBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAlternateImageBinding returns the string constant NSAlternateImageBinding, for use as a dictionary key or argument.
+func NSAlternateImageBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAlternateImageBinding")))
 }
 
-// NSExcludedKeysBinding returns the string constant NSExcludedKeysBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSExcludedKeysBinding() objc.ID {
-	return purego.CFConstant(raw.NSExcludedKeysBinding())
+// NSAlternateTitleBinding returns the string constant NSAlternateTitleBinding, for use as a dictionary key or argument.
+func NSAlternateTitleBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAlternateTitleBinding")))
 }
+
+// NSAnimateBinding returns the string constant NSAnimateBinding, for use as a dictionary key or argument.
+func NSAnimateBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSAnimateBinding"))) }
 
-// NSFilterPredicateBinding returns the string constant NSFilterPredicateBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSFilterPredicateBinding() objc.ID {
-	if _r := raw.NSFilterPredicateBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAnimationDelayBinding returns the string constant NSAnimationDelayBinding, for use as a dictionary key or argument.
+func NSAnimationDelayBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAnimationDelayBinding")))
 }
 
-// NSFontBinding returns the string constant NSFontBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontBinding() objc.ID {
-	if _r := raw.NSFontBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSArgumentBinding returns the string constant NSArgumentBinding, for use as a dictionary key or argument.
+func NSArgumentBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSArgumentBinding"))) }
+
+// NSAttributedStringBinding returns the string constant NSAttributedStringBinding, for use as a dictionary key or argument.
+func NSAttributedStringBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAttributedStringBinding")))
 }
 
-// NSFontBoldBinding returns the string constant NSFontBoldBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontBoldBinding() objc.ID {
-	if _r := raw.NSFontBoldBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSContentArrayBinding returns the string constant NSContentArrayBinding, for use as a dictionary key or argument.
+func NSContentArrayBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSContentArrayBinding")))
 }
 
-// NSFontFamilyNameBinding returns the string constant NSFontFamilyNameBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontFamilyNameBinding() objc.ID {
-	if _r := raw.NSFontFamilyNameBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSContentArrayForMultipleSelectionBinding returns the string constant NSContentArrayForMultipleSelectionBinding, for use as a dictionary key or argument.
+func NSContentArrayForMultipleSelectionBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSContentArrayForMultipleSelectionBinding")))
 }
+
+// NSContentBinding returns the string constant NSContentBinding, for use as a dictionary key or argument.
+func NSContentBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSContentBinding"))) }
 
-// NSFontItalicBinding returns the string constant NSFontItalicBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontItalicBinding() objc.ID {
-	if _r := raw.NSFontItalicBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSContentDictionaryBinding returns the string constant NSContentDictionaryBinding, for use as a dictionary key or argument.
+func NSContentDictionaryBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSContentDictionaryBinding")))
 }
 
-// NSFontNameBinding returns the string constant NSFontNameBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontNameBinding() objc.ID {
-	if _r := raw.NSFontNameBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSContentHeightBinding returns the string constant NSContentHeightBinding, for use as a dictionary key or argument.
+func NSContentHeightBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSContentHeightBinding")))
 }
 
-// NSFontSizeBinding returns the string constant NSFontSizeBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontSizeBinding() objc.ID {
-	if _r := raw.NSFontSizeBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSContentObjectBinding returns the string constant NSContentObjectBinding, for use as a dictionary key or argument.
+func NSContentObjectBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSContentObjectBinding")))
 }
 
-// NSHeaderTitleBinding returns the string constant NSHeaderTitleBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSHeaderTitleBinding() objc.ID {
-	if _r := raw.NSHeaderTitleBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSContentObjectsBinding returns the string constant NSContentObjectsBinding, for use as a dictionary key or argument.
+func NSContentObjectsBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSContentObjectsBinding")))
 }
 
-// NSHiddenBinding returns the string constant NSHiddenBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSHiddenBinding() objc.ID {
-	if _r := raw.NSHiddenBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSContentSetBinding returns the string constant NSContentSetBinding, for use as a dictionary key or argument.
+func NSContentSetBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSContentSetBinding")))
 }
 
-// NSImageBinding returns the string constant NSImageBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageBinding() objc.ID {
-	if _r := raw.NSImageBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSContentValuesBinding returns the string constant NSContentValuesBinding, for use as a dictionary key or argument.
+func NSContentValuesBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSContentValuesBinding")))
 }
 
-// NSIncludedKeysBinding returns the string constant NSIncludedKeysBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSIncludedKeysBinding() objc.ID {
-	return purego.CFConstant(raw.NSIncludedKeysBinding())
+// NSContentWidthBinding returns the string constant NSContentWidthBinding, for use as a dictionary key or argument.
+func NSContentWidthBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSContentWidthBinding")))
 }
 
-// NSInitialKeyBinding returns the string constant NSInitialKeyBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSInitialKeyBinding() objc.ID {
-	return purego.CFConstant(raw.NSInitialKeyBinding())
+// NSCriticalValueBinding returns the string constant NSCriticalValueBinding, for use as a dictionary key or argument.
+func NSCriticalValueBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCriticalValueBinding")))
 }
 
-// NSInitialValueBinding returns the string constant NSInitialValueBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSInitialValueBinding() objc.ID {
-	return purego.CFConstant(raw.NSInitialValueBinding())
+// NSDataBinding returns the string constant NSDataBinding, for use as a dictionary key or argument.
+func NSDataBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSDataBinding"))) }
+
+// NSDisplayPatternTitleBinding returns the string constant NSDisplayPatternTitleBinding, for use as a dictionary key or argument.
+func NSDisplayPatternTitleBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDisplayPatternTitleBinding")))
 }
 
-// NSIsIndeterminateBinding returns the string constant NSIsIndeterminateBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSIsIndeterminateBinding() objc.ID {
-	if _r := raw.NSIsIndeterminateBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDisplayPatternValueBinding returns the string constant NSDisplayPatternValueBinding, for use as a dictionary key or argument.
+func NSDisplayPatternValueBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDisplayPatternValueBinding")))
 }
 
-// NSLabelBinding returns the string constant NSLabelBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSLabelBinding() objc.ID {
-	if _r := raw.NSLabelBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDocumentEditedBinding returns the string constant NSDocumentEditedBinding, for use as a dictionary key or argument.
+func NSDocumentEditedBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDocumentEditedBinding")))
 }
 
-// NSLocalizedKeyDictionaryBinding returns the string constant NSLocalizedKeyDictionaryBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSLocalizedKeyDictionaryBinding() objc.ID {
-	return purego.CFConstant(raw.NSLocalizedKeyDictionaryBinding())
+// NSDoubleClickArgumentBinding returns the string constant NSDoubleClickArgumentBinding, for use as a dictionary key or argument.
+func NSDoubleClickArgumentBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDoubleClickArgumentBinding")))
 }
 
-// NSManagedObjectContextBinding returns the string constant NSManagedObjectContextBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSManagedObjectContextBinding() objc.ID {
-	if _r := raw.NSManagedObjectContextBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDoubleClickTargetBinding returns the string constant NSDoubleClickTargetBinding, for use as a dictionary key or argument.
+func NSDoubleClickTargetBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDoubleClickTargetBinding")))
 }
+
+// NSEditableBinding returns the string constant NSEditableBinding, for use as a dictionary key or argument.
+func NSEditableBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSEditableBinding"))) }
+
+// NSEnabledBinding returns the string constant NSEnabledBinding, for use as a dictionary key or argument.
+func NSEnabledBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSEnabledBinding"))) }
 
-// NSMaximumRecentsBinding returns the string constant NSMaximumRecentsBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSMaximumRecentsBinding() objc.ID {
-	if _r := raw.NSMaximumRecentsBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSExcludedKeysBinding returns the string constant NSExcludedKeysBinding, for use as a dictionary key or argument.
+func NSExcludedKeysBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSExcludedKeysBinding")))
 }
 
-// NSMaxValueBinding returns the string constant NSMaxValueBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSMaxValueBinding() objc.ID {
-	if _r := raw.NSMaxValueBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFilterPredicateBinding returns the string constant NSFilterPredicateBinding, for use as a dictionary key or argument.
+func NSFilterPredicateBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFilterPredicateBinding")))
 }
 
-// NSMaxWidthBinding returns the string constant NSMaxWidthBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSMaxWidthBinding() objc.ID {
-	if _r := raw.NSMaxWidthBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontBinding returns the string constant NSFontBinding, for use as a dictionary key or argument.
+func NSFontBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSFontBinding"))) }
+
+// NSFontBoldBinding returns the string constant NSFontBoldBinding, for use as a dictionary key or argument.
+func NSFontBoldBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSFontBoldBinding"))) }
+
+// NSFontFamilyNameBinding returns the string constant NSFontFamilyNameBinding, for use as a dictionary key or argument.
+func NSFontFamilyNameBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontFamilyNameBinding")))
 }
 
-// NSMinValueBinding returns the string constant NSMinValueBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSMinValueBinding() objc.ID {
-	if _r := raw.NSMinValueBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontItalicBinding returns the string constant NSFontItalicBinding, for use as a dictionary key or argument.
+func NSFontItalicBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontItalicBinding")))
 }
+
+// NSFontNameBinding returns the string constant NSFontNameBinding, for use as a dictionary key or argument.
+func NSFontNameBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSFontNameBinding"))) }
+
+// NSFontSizeBinding returns the string constant NSFontSizeBinding, for use as a dictionary key or argument.
+func NSFontSizeBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSFontSizeBinding"))) }
 
-// NSMinWidthBinding returns the string constant NSMinWidthBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSMinWidthBinding() objc.ID {
-	if _r := raw.NSMinWidthBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSHeaderTitleBinding returns the string constant NSHeaderTitleBinding, for use as a dictionary key or argument.
+func NSHeaderTitleBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSHeaderTitleBinding")))
 }
 
-// NSMixedStateImageBinding returns the string constant NSMixedStateImageBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSMixedStateImageBinding() objc.ID {
-	if _r := raw.NSMixedStateImageBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSHiddenBinding returns the string constant NSHiddenBinding, for use as a dictionary key or argument.
+func NSHiddenBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSHiddenBinding"))) }
+
+// NSImageBinding returns the string constant NSImageBinding, for use as a dictionary key or argument.
+func NSImageBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSImageBinding"))) }
+
+// NSIncludedKeysBinding returns the string constant NSIncludedKeysBinding, for use as a dictionary key or argument.
+func NSIncludedKeysBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSIncludedKeysBinding")))
 }
 
-// NSOffStateImageBinding returns the string constant NSOffStateImageBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSOffStateImageBinding() objc.ID {
-	if _r := raw.NSOffStateImageBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSInitialKeyBinding returns the string constant NSInitialKeyBinding, for use as a dictionary key or argument.
+func NSInitialKeyBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSInitialKeyBinding")))
 }
 
-// NSOnStateImageBinding returns the string constant NSOnStateImageBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSOnStateImageBinding() objc.ID {
-	if _r := raw.NSOnStateImageBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSInitialValueBinding returns the string constant NSInitialValueBinding, for use as a dictionary key or argument.
+func NSInitialValueBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSInitialValueBinding")))
 }
 
-// NSPositioningRectBinding returns the string constant NSPositioningRectBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSPositioningRectBinding() objc.ID {
-	return purego.CFConstant(raw.NSPositioningRectBinding())
+// NSIsIndeterminateBinding returns the string constant NSIsIndeterminateBinding, for use as a dictionary key or argument.
+func NSIsIndeterminateBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSIsIndeterminateBinding")))
 }
+
+// NSLabelBinding returns the string constant NSLabelBinding, for use as a dictionary key or argument.
+func NSLabelBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSLabelBinding"))) }
 
-// NSPredicateBinding returns the string constant NSPredicateBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSPredicateBinding() objc.ID {
-	if _r := raw.NSPredicateBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSLocalizedKeyDictionaryBinding returns the string constant NSLocalizedKeyDictionaryBinding, for use as a dictionary key or argument.
+func NSLocalizedKeyDictionaryBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSLocalizedKeyDictionaryBinding")))
 }
 
-// NSRecentSearchesBinding returns the string constant NSRecentSearchesBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSRecentSearchesBinding() objc.ID {
-	if _r := raw.NSRecentSearchesBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSManagedObjectContextBinding returns the string constant NSManagedObjectContextBinding, for use as a dictionary key or argument.
+func NSManagedObjectContextBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSManagedObjectContextBinding")))
 }
 
-// NSRepresentedFilenameBinding returns the string constant NSRepresentedFilenameBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSRepresentedFilenameBinding() objc.ID {
-	if _r := raw.NSRepresentedFilenameBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSMaximumRecentsBinding returns the string constant NSMaximumRecentsBinding, for use as a dictionary key or argument.
+func NSMaximumRecentsBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMaximumRecentsBinding")))
 }
+
+// NSMaxValueBinding returns the string constant NSMaxValueBinding, for use as a dictionary key or argument.
+func NSMaxValueBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSMaxValueBinding"))) }
+
+// NSMaxWidthBinding returns the string constant NSMaxWidthBinding, for use as a dictionary key or argument.
+func NSMaxWidthBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSMaxWidthBinding"))) }
+
+// NSMinValueBinding returns the string constant NSMinValueBinding, for use as a dictionary key or argument.
+func NSMinValueBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSMinValueBinding"))) }
+
+// NSMinWidthBinding returns the string constant NSMinWidthBinding, for use as a dictionary key or argument.
+func NSMinWidthBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSMinWidthBinding"))) }
 
-// NSRowHeightBinding returns the string constant NSRowHeightBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSRowHeightBinding() objc.ID {
-	if _r := raw.NSRowHeightBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSMixedStateImageBinding returns the string constant NSMixedStateImageBinding, for use as a dictionary key or argument.
+func NSMixedStateImageBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMixedStateImageBinding")))
 }
 
-// NSSelectedIdentifierBinding returns the string constant NSSelectedIdentifierBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSSelectedIdentifierBinding() objc.ID {
-	if _r := raw.NSSelectedIdentifierBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSOffStateImageBinding returns the string constant NSOffStateImageBinding, for use as a dictionary key or argument.
+func NSOffStateImageBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSOffStateImageBinding")))
 }
 
-// NSSelectedIndexBinding returns the string constant NSSelectedIndexBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSSelectedIndexBinding() objc.ID {
-	if _r := raw.NSSelectedIndexBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSOnStateImageBinding returns the string constant NSOnStateImageBinding, for use as a dictionary key or argument.
+func NSOnStateImageBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSOnStateImageBinding")))
 }
 
-// NSSelectedLabelBinding returns the string constant NSSelectedLabelBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSSelectedLabelBinding() objc.ID {
-	if _r := raw.NSSelectedLabelBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPositioningRectBinding returns the string constant NSPositioningRectBinding, for use as a dictionary key or argument.
+func NSPositioningRectBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPositioningRectBinding")))
 }
 
-// NSSelectedObjectBinding returns the string constant NSSelectedObjectBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSSelectedObjectBinding() objc.ID {
-	if _r := raw.NSSelectedObjectBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPredicateBinding returns the string constant NSPredicateBinding, for use as a dictionary key or argument.
+func NSPredicateBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPredicateBinding")))
 }
 
-// NSSelectedObjectsBinding returns the string constant NSSelectedObjectsBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSSelectedObjectsBinding() objc.ID {
-	if _r := raw.NSSelectedObjectsBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSRecentSearchesBinding returns the string constant NSRecentSearchesBinding, for use as a dictionary key or argument.
+func NSRecentSearchesBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRecentSearchesBinding")))
 }
 
-// NSSelectedTagBinding returns the string constant NSSelectedTagBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSSelectedTagBinding() objc.ID {
-	if _r := raw.NSSelectedTagBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSRepresentedFilenameBinding returns the string constant NSRepresentedFilenameBinding, for use as a dictionary key or argument.
+func NSRepresentedFilenameBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRepresentedFilenameBinding")))
 }
 
-// NSSelectedValueBinding returns the string constant NSSelectedValueBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSSelectedValueBinding() objc.ID {
-	if _r := raw.NSSelectedValueBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSRowHeightBinding returns the string constant NSRowHeightBinding, for use as a dictionary key or argument.
+func NSRowHeightBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRowHeightBinding")))
 }
 
-// NSSelectedValuesBinding returns the string constant NSSelectedValuesBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSSelectedValuesBinding() objc.ID {
-	if _r := raw.NSSelectedValuesBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSelectedIdentifierBinding returns the string constant NSSelectedIdentifierBinding, for use as a dictionary key or argument.
+func NSSelectedIdentifierBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSelectedIdentifierBinding")))
 }
 
-// NSSelectionIndexesBinding returns the string constant NSSelectionIndexesBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSSelectionIndexesBinding() objc.ID {
-	if _r := raw.NSSelectionIndexesBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSelectedIndexBinding returns the string constant NSSelectedIndexBinding, for use as a dictionary key or argument.
+func NSSelectedIndexBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSelectedIndexBinding")))
 }
 
-// NSSelectionIndexPathsBinding returns the string constant NSSelectionIndexPathsBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSSelectionIndexPathsBinding() objc.ID {
-	if _r := raw.NSSelectionIndexPathsBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSelectedLabelBinding returns the string constant NSSelectedLabelBinding, for use as a dictionary key or argument.
+func NSSelectedLabelBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSelectedLabelBinding")))
 }
 
-// NSSortDescriptorsBinding returns the string constant NSSortDescriptorsBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSSortDescriptorsBinding() objc.ID {
-	if _r := raw.NSSortDescriptorsBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSelectedObjectBinding returns the string constant NSSelectedObjectBinding, for use as a dictionary key or argument.
+func NSSelectedObjectBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSelectedObjectBinding")))
 }
 
-// NSTargetBinding returns the string constant NSTargetBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSTargetBinding() objc.ID {
-	if _r := raw.NSTargetBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSelectedObjectsBinding returns the string constant NSSelectedObjectsBinding, for use as a dictionary key or argument.
+func NSSelectedObjectsBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSelectedObjectsBinding")))
 }
 
-// NSTextColorBinding returns the string constant NSTextColorBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextColorBinding() objc.ID {
-	if _r := raw.NSTextColorBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSelectedTagBinding returns the string constant NSSelectedTagBinding, for use as a dictionary key or argument.
+func NSSelectedTagBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSelectedTagBinding")))
 }
 
-// NSTitleBinding returns the string constant NSTitleBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSTitleBinding() objc.ID {
-	if _r := raw.NSTitleBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSelectedValueBinding returns the string constant NSSelectedValueBinding, for use as a dictionary key or argument.
+func NSSelectedValueBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSelectedValueBinding")))
 }
 
-// NSToolTipBinding returns the string constant NSToolTipBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSToolTipBinding() objc.ID {
-	if _r := raw.NSToolTipBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSelectedValuesBinding returns the string constant NSSelectedValuesBinding, for use as a dictionary key or argument.
+func NSSelectedValuesBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSelectedValuesBinding")))
 }
 
-// NSTransparentBinding returns the string constant NSTransparentBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSTransparentBinding() objc.ID {
-	return purego.CFConstant(raw.NSTransparentBinding())
+// NSSelectionIndexesBinding returns the string constant NSSelectionIndexesBinding, for use as a dictionary key or argument.
+func NSSelectionIndexesBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSelectionIndexesBinding")))
 }
 
-// NSValueBinding returns the string constant NSValueBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSValueBinding() objc.ID {
-	if _r := raw.NSValueBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSelectionIndexPathsBinding returns the string constant NSSelectionIndexPathsBinding, for use as a dictionary key or argument.
+func NSSelectionIndexPathsBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSelectionIndexPathsBinding")))
 }
 
-// NSValuePathBinding returns the string constant NSValuePathBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSValuePathBinding() objc.ID {
-	if _r := raw.NSValuePathBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSortDescriptorsBinding returns the string constant NSSortDescriptorsBinding, for use as a dictionary key or argument.
+func NSSortDescriptorsBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSortDescriptorsBinding")))
 }
 
-// NSValueURLBinding returns the string constant NSValueURLBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSValueURLBinding() objc.ID {
-	if _r := raw.NSValueURLBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTargetBinding returns the string constant NSTargetBinding, for use as a dictionary key or argument.
+func NSTargetBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSTargetBinding"))) }
+
+// NSTextColorBinding returns the string constant NSTextColorBinding, for use as a dictionary key or argument.
+func NSTextColorBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextColorBinding")))
 }
+
+// NSTitleBinding returns the string constant NSTitleBinding, for use as a dictionary key or argument.
+func NSTitleBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSTitleBinding"))) }
+
+// NSToolTipBinding returns the string constant NSToolTipBinding, for use as a dictionary key or argument.
+func NSToolTipBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSToolTipBinding"))) }
 
-// NSVisibleBinding returns the string constant NSVisibleBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSVisibleBinding() objc.ID {
-	if _r := raw.NSVisibleBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTransparentBinding returns the string constant NSTransparentBinding, for use as a dictionary key or argument.
+func NSTransparentBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTransparentBinding")))
 }
 
-// NSWarningValueBinding returns the string constant NSWarningValueBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSWarningValueBinding() objc.ID {
-	if _r := raw.NSWarningValueBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSValueBinding returns the string constant NSValueBinding, for use as a dictionary key or argument.
+func NSValueBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSValueBinding"))) }
+
+// NSValuePathBinding returns the string constant NSValuePathBinding, for use as a dictionary key or argument.
+func NSValuePathBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSValuePathBinding")))
 }
+
+// NSValueURLBinding returns the string constant NSValueURLBinding, for use as a dictionary key or argument.
+func NSValueURLBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSValueURLBinding"))) }
 
-// NSWidthBinding returns the string constant NSWidthBinding as an objc.ID, for use as a dictionary key or selector argument.
-func NSWidthBinding() objc.ID {
-	if _r := raw.NSWidthBinding(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSVisibleBinding returns the string constant NSVisibleBinding, for use as a dictionary key or argument.
+func NSVisibleBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSVisibleBinding"))) }
+
+// NSWarningValueBinding returns the string constant NSWarningValueBinding, for use as a dictionary key or argument.
+func NSWarningValueBinding() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWarningValueBinding")))
 }
+
+// NSWidthBinding returns the string constant NSWidthBinding, for use as a dictionary key or argument.
+func NSWidthBinding() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSWidthBinding"))) }
 
-// NSAllowsEditingMultipleValuesSelectionBindingOption returns the string constant NSAllowsEditingMultipleValuesSelectionBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSAllowsEditingMultipleValuesSelectionBindingOption() objc.ID {
-	if _r := raw.NSAllowsEditingMultipleValuesSelectionBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAllowsEditingMultipleValuesSelectionBindingOption returns the string constant NSAllowsEditingMultipleValuesSelectionBindingOption, for use as a dictionary key or argument.
+func NSAllowsEditingMultipleValuesSelectionBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAllowsEditingMultipleValuesSelectionBindingOption")))
 }
 
-// NSAllowsNullArgumentBindingOption returns the string constant NSAllowsNullArgumentBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSAllowsNullArgumentBindingOption() objc.ID {
-	if _r := raw.NSAllowsNullArgumentBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAllowsNullArgumentBindingOption returns the string constant NSAllowsNullArgumentBindingOption, for use as a dictionary key or argument.
+func NSAllowsNullArgumentBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAllowsNullArgumentBindingOption")))
 }
 
-// NSAlwaysPresentsApplicationModalAlertsBindingOption returns the string constant NSAlwaysPresentsApplicationModalAlertsBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSAlwaysPresentsApplicationModalAlertsBindingOption() objc.ID {
-	if _r := raw.NSAlwaysPresentsApplicationModalAlertsBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAlwaysPresentsApplicationModalAlertsBindingOption returns the string constant NSAlwaysPresentsApplicationModalAlertsBindingOption, for use as a dictionary key or argument.
+func NSAlwaysPresentsApplicationModalAlertsBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAlwaysPresentsApplicationModalAlertsBindingOption")))
 }
 
-// NSConditionallySetsEditableBindingOption returns the string constant NSConditionallySetsEditableBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSConditionallySetsEditableBindingOption() objc.ID {
-	if _r := raw.NSConditionallySetsEditableBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSConditionallySetsEditableBindingOption returns the string constant NSConditionallySetsEditableBindingOption, for use as a dictionary key or argument.
+func NSConditionallySetsEditableBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSConditionallySetsEditableBindingOption")))
 }
 
-// NSConditionallySetsEnabledBindingOption returns the string constant NSConditionallySetsEnabledBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSConditionallySetsEnabledBindingOption() objc.ID {
-	if _r := raw.NSConditionallySetsEnabledBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSConditionallySetsEnabledBindingOption returns the string constant NSConditionallySetsEnabledBindingOption, for use as a dictionary key or argument.
+func NSConditionallySetsEnabledBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSConditionallySetsEnabledBindingOption")))
 }
 
-// NSConditionallySetsHiddenBindingOption returns the string constant NSConditionallySetsHiddenBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSConditionallySetsHiddenBindingOption() objc.ID {
-	if _r := raw.NSConditionallySetsHiddenBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSConditionallySetsHiddenBindingOption returns the string constant NSConditionallySetsHiddenBindingOption, for use as a dictionary key or argument.
+func NSConditionallySetsHiddenBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSConditionallySetsHiddenBindingOption")))
 }
 
-// NSContinuouslyUpdatesValueBindingOption returns the string constant NSContinuouslyUpdatesValueBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSContinuouslyUpdatesValueBindingOption() objc.ID {
-	if _r := raw.NSContinuouslyUpdatesValueBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSContinuouslyUpdatesValueBindingOption returns the string constant NSContinuouslyUpdatesValueBindingOption, for use as a dictionary key or argument.
+func NSContinuouslyUpdatesValueBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSContinuouslyUpdatesValueBindingOption")))
 }
 
-// NSCreatesSortDescriptorBindingOption returns the string constant NSCreatesSortDescriptorBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSCreatesSortDescriptorBindingOption() objc.ID {
-	if _r := raw.NSCreatesSortDescriptorBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSCreatesSortDescriptorBindingOption returns the string constant NSCreatesSortDescriptorBindingOption, for use as a dictionary key or argument.
+func NSCreatesSortDescriptorBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCreatesSortDescriptorBindingOption")))
 }
 
-// NSDeletesObjectsOnRemoveBindingsOption returns the string constant NSDeletesObjectsOnRemoveBindingsOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSDeletesObjectsOnRemoveBindingsOption() objc.ID {
-	if _r := raw.NSDeletesObjectsOnRemoveBindingsOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDeletesObjectsOnRemoveBindingsOption returns the string constant NSDeletesObjectsOnRemoveBindingsOption, for use as a dictionary key or argument.
+func NSDeletesObjectsOnRemoveBindingsOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDeletesObjectsOnRemoveBindingsOption")))
 }
 
-// NSDisplayNameBindingOption returns the string constant NSDisplayNameBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSDisplayNameBindingOption() objc.ID {
-	if _r := raw.NSDisplayNameBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDisplayNameBindingOption returns the string constant NSDisplayNameBindingOption, for use as a dictionary key or argument.
+func NSDisplayNameBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDisplayNameBindingOption")))
 }
 
-// NSDisplayPatternBindingOption returns the string constant NSDisplayPatternBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSDisplayPatternBindingOption() objc.ID {
-	if _r := raw.NSDisplayPatternBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDisplayPatternBindingOption returns the string constant NSDisplayPatternBindingOption, for use as a dictionary key or argument.
+func NSDisplayPatternBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDisplayPatternBindingOption")))
 }
 
-// NSContentPlacementTagBindingOption returns the string constant NSContentPlacementTagBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSContentPlacementTagBindingOption() objc.ID {
-	return purego.CFConstant(raw.NSContentPlacementTagBindingOption())
+// NSContentPlacementTagBindingOption returns the string constant NSContentPlacementTagBindingOption, for use as a dictionary key or argument.
+func NSContentPlacementTagBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSContentPlacementTagBindingOption")))
 }
 
-// NSHandlesContentAsCompoundValueBindingOption returns the string constant NSHandlesContentAsCompoundValueBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSHandlesContentAsCompoundValueBindingOption() objc.ID {
-	if _r := raw.NSHandlesContentAsCompoundValueBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSHandlesContentAsCompoundValueBindingOption returns the string constant NSHandlesContentAsCompoundValueBindingOption, for use as a dictionary key or argument.
+func NSHandlesContentAsCompoundValueBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSHandlesContentAsCompoundValueBindingOption")))
 }
 
-// NSInsertsNullPlaceholderBindingOption returns the string constant NSInsertsNullPlaceholderBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSInsertsNullPlaceholderBindingOption() objc.ID {
-	if _r := raw.NSInsertsNullPlaceholderBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSInsertsNullPlaceholderBindingOption returns the string constant NSInsertsNullPlaceholderBindingOption, for use as a dictionary key or argument.
+func NSInsertsNullPlaceholderBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSInsertsNullPlaceholderBindingOption")))
 }
 
-// NSInvokesSeparatelyWithArrayObjectsBindingOption returns the string constant NSInvokesSeparatelyWithArrayObjectsBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSInvokesSeparatelyWithArrayObjectsBindingOption() objc.ID {
-	if _r := raw.NSInvokesSeparatelyWithArrayObjectsBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSInvokesSeparatelyWithArrayObjectsBindingOption returns the string constant NSInvokesSeparatelyWithArrayObjectsBindingOption, for use as a dictionary key or argument.
+func NSInvokesSeparatelyWithArrayObjectsBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSInvokesSeparatelyWithArrayObjectsBindingOption")))
 }
 
-// NSMultipleValuesPlaceholderBindingOption returns the string constant NSMultipleValuesPlaceholderBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSMultipleValuesPlaceholderBindingOption() objc.ID {
-	if _r := raw.NSMultipleValuesPlaceholderBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSMultipleValuesPlaceholderBindingOption returns the string constant NSMultipleValuesPlaceholderBindingOption, for use as a dictionary key or argument.
+func NSMultipleValuesPlaceholderBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMultipleValuesPlaceholderBindingOption")))
 }
 
-// NSNoSelectionPlaceholderBindingOption returns the string constant NSNoSelectionPlaceholderBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSNoSelectionPlaceholderBindingOption() objc.ID {
-	if _r := raw.NSNoSelectionPlaceholderBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSNoSelectionPlaceholderBindingOption returns the string constant NSNoSelectionPlaceholderBindingOption, for use as a dictionary key or argument.
+func NSNoSelectionPlaceholderBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSNoSelectionPlaceholderBindingOption")))
 }
 
-// NSNotApplicablePlaceholderBindingOption returns the string constant NSNotApplicablePlaceholderBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSNotApplicablePlaceholderBindingOption() objc.ID {
-	if _r := raw.NSNotApplicablePlaceholderBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSNotApplicablePlaceholderBindingOption returns the string constant NSNotApplicablePlaceholderBindingOption, for use as a dictionary key or argument.
+func NSNotApplicablePlaceholderBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSNotApplicablePlaceholderBindingOption")))
 }
 
-// NSNullPlaceholderBindingOption returns the string constant NSNullPlaceholderBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSNullPlaceholderBindingOption() objc.ID {
-	if _r := raw.NSNullPlaceholderBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSNullPlaceholderBindingOption returns the string constant NSNullPlaceholderBindingOption, for use as a dictionary key or argument.
+func NSNullPlaceholderBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSNullPlaceholderBindingOption")))
 }
 
-// NSRaisesForNotApplicableKeysBindingOption returns the string constant NSRaisesForNotApplicableKeysBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSRaisesForNotApplicableKeysBindingOption() objc.ID {
-	if _r := raw.NSRaisesForNotApplicableKeysBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSRaisesForNotApplicableKeysBindingOption returns the string constant NSRaisesForNotApplicableKeysBindingOption, for use as a dictionary key or argument.
+func NSRaisesForNotApplicableKeysBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRaisesForNotApplicableKeysBindingOption")))
 }
 
-// NSPredicateFormatBindingOption returns the string constant NSPredicateFormatBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSPredicateFormatBindingOption() objc.ID {
-	if _r := raw.NSPredicateFormatBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPredicateFormatBindingOption returns the string constant NSPredicateFormatBindingOption, for use as a dictionary key or argument.
+func NSPredicateFormatBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPredicateFormatBindingOption")))
 }
 
-// NSSelectorNameBindingOption returns the string constant NSSelectorNameBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSSelectorNameBindingOption() objc.ID {
-	if _r := raw.NSSelectorNameBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSelectorNameBindingOption returns the string constant NSSelectorNameBindingOption, for use as a dictionary key or argument.
+func NSSelectorNameBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSelectorNameBindingOption")))
 }
 
-// NSSelectsAllWhenSettingContentBindingOption returns the string constant NSSelectsAllWhenSettingContentBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSSelectsAllWhenSettingContentBindingOption() objc.ID {
-	if _r := raw.NSSelectsAllWhenSettingContentBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSelectsAllWhenSettingContentBindingOption returns the string constant NSSelectsAllWhenSettingContentBindingOption, for use as a dictionary key or argument.
+func NSSelectsAllWhenSettingContentBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSelectsAllWhenSettingContentBindingOption")))
 }
 
-// NSValidatesImmediatelyBindingOption returns the string constant NSValidatesImmediatelyBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSValidatesImmediatelyBindingOption() objc.ID {
-	if _r := raw.NSValidatesImmediatelyBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSValidatesImmediatelyBindingOption returns the string constant NSValidatesImmediatelyBindingOption, for use as a dictionary key or argument.
+func NSValidatesImmediatelyBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSValidatesImmediatelyBindingOption")))
 }
 
-// NSValueTransformerNameBindingOption returns the string constant NSValueTransformerNameBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSValueTransformerNameBindingOption() objc.ID {
-	if _r := raw.NSValueTransformerNameBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSValueTransformerNameBindingOption returns the string constant NSValueTransformerNameBindingOption, for use as a dictionary key or argument.
+func NSValueTransformerNameBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSValueTransformerNameBindingOption")))
 }
 
-// NSValueTransformerBindingOption returns the string constant NSValueTransformerBindingOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSValueTransformerBindingOption() objc.ID {
-	if _r := raw.NSValueTransformerBindingOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSValueTransformerBindingOption returns the string constant NSValueTransformerBindingOption, for use as a dictionary key or argument.
+func NSValueTransformerBindingOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSValueTransformerBindingOption")))
 }
 
-// NSUserActivityDocumentURLKey returns the string constant NSUserActivityDocumentURLKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSUserActivityDocumentURLKey() objc.ID {
-	return purego.CFConstant(raw.NSUserActivityDocumentURLKey())
+// NSUserActivityDocumentURLKey returns the string constant NSUserActivityDocumentURLKey, for use as a dictionary key or argument.
+func NSUserActivityDocumentURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSUserActivityDocumentURLKey")))
 }
 
-// NSModalPanelRunLoopMode returns the string constant NSModalPanelRunLoopMode as an objc.ID, for use as a dictionary key or selector argument.
-func NSModalPanelRunLoopMode() objc.ID {
-	if _r := raw.NSModalPanelRunLoopMode(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSModalPanelRunLoopMode returns the string constant NSModalPanelRunLoopMode, for use as a dictionary key or argument.
+func NSModalPanelRunLoopMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSModalPanelRunLoopMode")))
 }
 
-// NSEventTrackingRunLoopMode returns the string constant NSEventTrackingRunLoopMode as an objc.ID, for use as a dictionary key or selector argument.
-func NSEventTrackingRunLoopMode() objc.ID {
-	if _r := raw.NSEventTrackingRunLoopMode(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSEventTrackingRunLoopMode returns the string constant NSEventTrackingRunLoopMode, for use as a dictionary key or argument.
+func NSEventTrackingRunLoopMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSEventTrackingRunLoopMode")))
 }
 
 // NSAttributedString displayed in the info area of the panel. If not specified, contents obtained from "Credits.rtf" (.rtfd, .html) in [NSBundle mainBundle]; if not available, blank. Note that  in applications built against the 10.14 SDK or earlier, the credits are shown in light appearance even when the application is running in dark appearance, except when the credits are specified as an attributed string, or come from a file are the text is just pure black. In applications built against the 10.15 SDK or newer, credits will be shown in dark appearance, using the "adaptive color mapping" setting in NSTextView.
-// NSAboutPanelOptionCredits returns the string constant NSAboutPanelOptionCredits as an objc.ID, for use as a dictionary key or selector argument.
-func NSAboutPanelOptionCredits() objc.ID {
-	return purego.CFConstant(raw.NSAboutPanelOptionCredits())
+// NSAboutPanelOptionCredits returns the string constant NSAboutPanelOptionCredits, for use as a dictionary key or argument.
+func NSAboutPanelOptionCredits() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAboutPanelOptionCredits")))
 }
 
 // NSString displayed in place of the default app name. If not specified, uses the value of CFBundleName (localizable). Fallback is [[NSProcessInfo processInfo] processName].
-// NSAboutPanelOptionApplicationName returns the string constant NSAboutPanelOptionApplicationName as an objc.ID, for use as a dictionary key or selector argument.
-func NSAboutPanelOptionApplicationName() objc.ID {
-	return purego.CFConstant(raw.NSAboutPanelOptionApplicationName())
+// NSAboutPanelOptionApplicationName returns the string constant NSAboutPanelOptionApplicationName, for use as a dictionary key or argument.
+func NSAboutPanelOptionApplicationName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAboutPanelOptionApplicationName")))
 }
 
-// NSImage displayed in place of NSApplicationIcon. If not specified, use [NSImage imageNamed:@"NSApplicationIcon"]; if not available, generic icon.
-// NSAboutPanelOptionApplicationIcon returns the string constant NSAboutPanelOptionApplicationIcon as an objc.ID, for use as a dictionary key or selector argument.
-func NSAboutPanelOptionApplicationIcon() objc.ID {
-	return purego.CFConstant(raw.NSAboutPanelOptionApplicationIcon())
+// NSImage displayed in place of NSApplicationIcon. If not specified, use [NSImage imageNamed:
+// NSAboutPanelOptionApplicationIcon returns the string constant NSAboutPanelOptionApplicationIcon, for use as a dictionary key or argument.
+func NSAboutPanelOptionApplicationIcon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAboutPanelOptionApplicationIcon")))
 }
 
 // NSString containing the build version number of the application ("58.4", "1.2d3"); displayed as "Version 58.4" or "Version 1.0 (58.4) depending on the presence of ApplicationVersion. If not specified, obtain from the CFBundleVersion key in infoDictionary; if not specified or empty string, leave blank.
-// NSAboutPanelOptionVersion returns the string constant NSAboutPanelOptionVersion as an objc.ID, for use as a dictionary key or selector argument.
-func NSAboutPanelOptionVersion() objc.ID {
-	return purego.CFConstant(raw.NSAboutPanelOptionVersion())
+// NSAboutPanelOptionVersion returns the string constant NSAboutPanelOptionVersion, for use as a dictionary key or argument.
+func NSAboutPanelOptionVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAboutPanelOptionVersion")))
 }
 
 // NSString displayed as the marketing version  ("1.0", "Mac OS X", "3", "WebObjects 3.5", ...), before the build version. If not specified, obtain from CFBundleShortVersionString key in infoDictionary. Prefixed with word "Version" if it looks like a number.
-// NSAboutPanelOptionApplicationVersion returns the string constant NSAboutPanelOptionApplicationVersion as an objc.ID, for use as a dictionary key or selector argument.
-func NSAboutPanelOptionApplicationVersion() objc.ID {
-	return purego.CFConstant(raw.NSAboutPanelOptionApplicationVersion())
+// NSAboutPanelOptionApplicationVersion returns the string constant NSAboutPanelOptionApplicationVersion, for use as a dictionary key or argument.
+func NSAboutPanelOptionApplicationVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAboutPanelOptionApplicationVersion")))
 }
 
-// NSApplicationDidBecomeActiveNotification returns the string constant NSApplicationDidBecomeActiveNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSApplicationDidBecomeActiveNotification() objc.ID {
-	if _r := raw.NSApplicationDidBecomeActiveNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSApplicationDidBecomeActiveNotification returns the string constant NSApplicationDidBecomeActiveNotification, for use as a dictionary key or argument.
+func NSApplicationDidBecomeActiveNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationDidBecomeActiveNotification")))
 }
 
-// NSApplicationDidHideNotification returns the string constant NSApplicationDidHideNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSApplicationDidHideNotification() objc.ID {
-	if _r := raw.NSApplicationDidHideNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSApplicationDidHideNotification returns the string constant NSApplicationDidHideNotification, for use as a dictionary key or argument.
+func NSApplicationDidHideNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationDidHideNotification")))
 }
 
-// NSApplicationDidFinishLaunchingNotification returns the string constant NSApplicationDidFinishLaunchingNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSApplicationDidFinishLaunchingNotification() objc.ID {
-	if _r := raw.NSApplicationDidFinishLaunchingNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSApplicationDidFinishLaunchingNotification returns the string constant NSApplicationDidFinishLaunchingNotification, for use as a dictionary key or argument.
+func NSApplicationDidFinishLaunchingNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationDidFinishLaunchingNotification")))
 }
 
-// NSApplicationDidResignActiveNotification returns the string constant NSApplicationDidResignActiveNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSApplicationDidResignActiveNotification() objc.ID {
-	if _r := raw.NSApplicationDidResignActiveNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSApplicationDidResignActiveNotification returns the string constant NSApplicationDidResignActiveNotification, for use as a dictionary key or argument.
+func NSApplicationDidResignActiveNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationDidResignActiveNotification")))
 }
 
-// NSApplicationDidUnhideNotification returns the string constant NSApplicationDidUnhideNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSApplicationDidUnhideNotification() objc.ID {
-	if _r := raw.NSApplicationDidUnhideNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSApplicationDidUnhideNotification returns the string constant NSApplicationDidUnhideNotification, for use as a dictionary key or argument.
+func NSApplicationDidUnhideNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationDidUnhideNotification")))
 }
 
-// NSApplicationDidUpdateNotification returns the string constant NSApplicationDidUpdateNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSApplicationDidUpdateNotification() objc.ID {
-	if _r := raw.NSApplicationDidUpdateNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSApplicationDidUpdateNotification returns the string constant NSApplicationDidUpdateNotification, for use as a dictionary key or argument.
+func NSApplicationDidUpdateNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationDidUpdateNotification")))
 }
 
-// NSApplicationWillBecomeActiveNotification returns the string constant NSApplicationWillBecomeActiveNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSApplicationWillBecomeActiveNotification() objc.ID {
-	if _r := raw.NSApplicationWillBecomeActiveNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSApplicationWillBecomeActiveNotification returns the string constant NSApplicationWillBecomeActiveNotification, for use as a dictionary key or argument.
+func NSApplicationWillBecomeActiveNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationWillBecomeActiveNotification")))
 }
 
-// NSApplicationWillHideNotification returns the string constant NSApplicationWillHideNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSApplicationWillHideNotification() objc.ID {
-	if _r := raw.NSApplicationWillHideNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSApplicationWillHideNotification returns the string constant NSApplicationWillHideNotification, for use as a dictionary key or argument.
+func NSApplicationWillHideNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationWillHideNotification")))
 }
 
-// NSApplicationWillFinishLaunchingNotification returns the string constant NSApplicationWillFinishLaunchingNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSApplicationWillFinishLaunchingNotification() objc.ID {
-	if _r := raw.NSApplicationWillFinishLaunchingNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSApplicationWillFinishLaunchingNotification returns the string constant NSApplicationWillFinishLaunchingNotification, for use as a dictionary key or argument.
+func NSApplicationWillFinishLaunchingNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationWillFinishLaunchingNotification")))
 }
 
-// NSApplicationWillResignActiveNotification returns the string constant NSApplicationWillResignActiveNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSApplicationWillResignActiveNotification() objc.ID {
-	if _r := raw.NSApplicationWillResignActiveNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSApplicationWillResignActiveNotification returns the string constant NSApplicationWillResignActiveNotification, for use as a dictionary key or argument.
+func NSApplicationWillResignActiveNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationWillResignActiveNotification")))
 }
 
-// NSApplicationWillUnhideNotification returns the string constant NSApplicationWillUnhideNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSApplicationWillUnhideNotification() objc.ID {
-	if _r := raw.NSApplicationWillUnhideNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSApplicationWillUnhideNotification returns the string constant NSApplicationWillUnhideNotification, for use as a dictionary key or argument.
+func NSApplicationWillUnhideNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationWillUnhideNotification")))
 }
 
-// NSApplicationWillUpdateNotification returns the string constant NSApplicationWillUpdateNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSApplicationWillUpdateNotification() objc.ID {
-	if _r := raw.NSApplicationWillUpdateNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSApplicationWillUpdateNotification returns the string constant NSApplicationWillUpdateNotification, for use as a dictionary key or argument.
+func NSApplicationWillUpdateNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationWillUpdateNotification")))
 }
 
-// NSApplicationWillTerminateNotification returns the string constant NSApplicationWillTerminateNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSApplicationWillTerminateNotification() objc.ID {
-	if _r := raw.NSApplicationWillTerminateNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSApplicationWillTerminateNotification returns the string constant NSApplicationWillTerminateNotification, for use as a dictionary key or argument.
+func NSApplicationWillTerminateNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationWillTerminateNotification")))
 }
 
-// NSApplicationDidChangeScreenParametersNotification returns the string constant NSApplicationDidChangeScreenParametersNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSApplicationDidChangeScreenParametersNotification() objc.ID {
-	if _r := raw.NSApplicationDidChangeScreenParametersNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSApplicationDidChangeScreenParametersNotification returns the string constant NSApplicationDidChangeScreenParametersNotification, for use as a dictionary key or argument.
+func NSApplicationDidChangeScreenParametersNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationDidChangeScreenParametersNotification")))
 }
 
 // The following key is present in the userInfo of NSApplicationDidFinishLaunchingNotification.  Its value is an NSNumber containing a bool.  It will be NO if the app was launched to open or print a file, to perform a Service, if the app had saved state that will be restored, or if the app launch was in some other sense not a "default" launch.  Otherwise its value will be YES.
-// NSApplicationLaunchIsDefaultLaunchKey returns the string constant NSApplicationLaunchIsDefaultLaunchKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSApplicationLaunchIsDefaultLaunchKey() objc.ID {
-	return purego.CFConstant(raw.NSApplicationLaunchIsDefaultLaunchKey())
+// NSApplicationLaunchIsDefaultLaunchKey returns the string constant NSApplicationLaunchIsDefaultLaunchKey, for use as a dictionary key or argument.
+func NSApplicationLaunchIsDefaultLaunchKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationLaunchIsDefaultLaunchKey")))
 }
 
 // The following key is present in the userInfo of NSApplicationDidFinishLaunchingNotification. It will be present if your application was launched because a user activated a notification in the Notification Center. Its value is an NSUserNotification object.
-// NSApplicationLaunchUserNotificationKey returns the string constant NSApplicationLaunchUserNotificationKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSApplicationLaunchUserNotificationKey() objc.ID {
-	return purego.CFConstant(raw.NSApplicationLaunchUserNotificationKey())
+// NSApplicationLaunchUserNotificationKey returns the string constant NSApplicationLaunchUserNotificationKey, for use as a dictionary key or argument.
+func NSApplicationLaunchUserNotificationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationLaunchUserNotificationKey")))
 }
 
 // NSApplicationLaunchRemoteNotificationKey is unimplemented.  Please use NSApplicationLaunchUserNotificationKey to get the NSUserNotification object.  The NSUserNotification object has an isRemote property to indicate whether this application was launched as a result of a remote notification
-// NSApplicationLaunchRemoteNotificationKey returns the string constant NSApplicationLaunchRemoteNotificationKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSApplicationLaunchRemoteNotificationKey() objc.ID {
-	return purego.CFConstant(raw.NSApplicationLaunchRemoteNotificationKey())
+// NSApplicationLaunchRemoteNotificationKey returns the string constant NSApplicationLaunchRemoteNotificationKey, for use as a dictionary key or argument.
+func NSApplicationLaunchRemoteNotificationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSApplicationLaunchRemoteNotificationKey")))
 }
 
-// NSColorListDidChangeNotification returns the string constant NSColorListDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSColorListDidChangeNotification() objc.ID {
-	if _r := raw.NSColorListDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSColorListDidChangeNotification returns the string constant NSColorListDidChangeNotification, for use as a dictionary key or argument.
+func NSColorListDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSColorListDidChangeNotification")))
 }
 
-// NSSystemColorsDidChangeNotification returns the string constant NSSystemColorsDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSSystemColorsDidChangeNotification() objc.ID {
-	if _r := raw.NSSystemColorsDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSystemColorsDidChangeNotification returns the string constant NSSystemColorsDidChangeNotification, for use as a dictionary key or argument.
+func NSSystemColorsDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSystemColorsDidChangeNotification")))
 }
 
-// NSContextHelpModeDidActivateNotification returns the string constant NSContextHelpModeDidActivateNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSContextHelpModeDidActivateNotification() objc.ID {
-	if _r := raw.NSContextHelpModeDidActivateNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSContextHelpModeDidActivateNotification returns the string constant NSContextHelpModeDidActivateNotification, for use as a dictionary key or argument.
+func NSContextHelpModeDidActivateNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSContextHelpModeDidActivateNotification")))
 }
 
-// NSContextHelpModeDidDeactivateNotification returns the string constant NSContextHelpModeDidDeactivateNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSContextHelpModeDidDeactivateNotification() objc.ID {
-	if _r := raw.NSContextHelpModeDidDeactivateNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSContextHelpModeDidDeactivateNotification returns the string constant NSContextHelpModeDidDeactivateNotification, for use as a dictionary key or argument.
+func NSContextHelpModeDidDeactivateNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSContextHelpModeDidDeactivateNotification")))
 }
 
-// NSControlTextDidBeginEditingNotification returns the string constant NSControlTextDidBeginEditingNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSControlTextDidBeginEditingNotification() objc.ID {
-	if _r := raw.NSControlTextDidBeginEditingNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSControlTextDidBeginEditingNotification returns the string constant NSControlTextDidBeginEditingNotification, for use as a dictionary key or argument.
+func NSControlTextDidBeginEditingNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSControlTextDidBeginEditingNotification")))
 }
 
-// NSControlTextDidEndEditingNotification returns the string constant NSControlTextDidEndEditingNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSControlTextDidEndEditingNotification() objc.ID {
-	if _r := raw.NSControlTextDidEndEditingNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSControlTextDidEndEditingNotification returns the string constant NSControlTextDidEndEditingNotification, for use as a dictionary key or argument.
+func NSControlTextDidEndEditingNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSControlTextDidEndEditingNotification")))
 }
 
-// NSControlTextDidChangeNotification returns the string constant NSControlTextDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSControlTextDidChangeNotification() objc.ID {
-	if _r := raw.NSControlTextDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSControlTextDidChangeNotification returns the string constant NSControlTextDidChangeNotification, for use as a dictionary key or argument.
+func NSControlTextDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSControlTextDidChangeNotification")))
 }
 
-// NSTouchBarItemIdentifierFixedSpaceSmall returns the string constant NSTouchBarItemIdentifierFixedSpaceSmall as an objc.ID, for use as a dictionary key or selector argument.
-func NSTouchBarItemIdentifierFixedSpaceSmall() objc.ID {
-	if _r := raw.NSTouchBarItemIdentifierFixedSpaceSmall(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTouchBarItemIdentifierFixedSpaceSmall returns the string constant NSTouchBarItemIdentifierFixedSpaceSmall, for use as a dictionary key or argument.
+func NSTouchBarItemIdentifierFixedSpaceSmall() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTouchBarItemIdentifierFixedSpaceSmall")))
 }
 
-// NSTouchBarItemIdentifierFixedSpaceLarge returns the string constant NSTouchBarItemIdentifierFixedSpaceLarge as an objc.ID, for use as a dictionary key or selector argument.
-func NSTouchBarItemIdentifierFixedSpaceLarge() objc.ID {
-	if _r := raw.NSTouchBarItemIdentifierFixedSpaceLarge(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTouchBarItemIdentifierFixedSpaceLarge returns the string constant NSTouchBarItemIdentifierFixedSpaceLarge, for use as a dictionary key or argument.
+func NSTouchBarItemIdentifierFixedSpaceLarge() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTouchBarItemIdentifierFixedSpaceLarge")))
 }
 
-// NSTouchBarItemIdentifierFlexibleSpace returns the string constant NSTouchBarItemIdentifierFlexibleSpace as an objc.ID, for use as a dictionary key or selector argument.
-func NSTouchBarItemIdentifierFlexibleSpace() objc.ID {
-	if _r := raw.NSTouchBarItemIdentifierFlexibleSpace(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTouchBarItemIdentifierFlexibleSpace returns the string constant NSTouchBarItemIdentifierFlexibleSpace, for use as a dictionary key or argument.
+func NSTouchBarItemIdentifierFlexibleSpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTouchBarItemIdentifierFlexibleSpace")))
 }
 
-// NSTouchBarItemIdentifierOtherItemsProxy returns the string constant NSTouchBarItemIdentifierOtherItemsProxy as an objc.ID, for use as a dictionary key or selector argument.
-func NSTouchBarItemIdentifierOtherItemsProxy() objc.ID {
-	if _r := raw.NSTouchBarItemIdentifierOtherItemsProxy(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTouchBarItemIdentifierOtherItemsProxy returns the string constant NSTouchBarItemIdentifierOtherItemsProxy, for use as a dictionary key or argument.
+func NSTouchBarItemIdentifierOtherItemsProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTouchBarItemIdentifierOtherItemsProxy")))
 }
 
-// NSTouchBarItemIdentifierCandidateList returns the string constant NSTouchBarItemIdentifierCandidateList as an objc.ID, for use as a dictionary key or selector argument.
-func NSTouchBarItemIdentifierCandidateList() objc.ID {
-	return purego.CFConstant(raw.NSTouchBarItemIdentifierCandidateList())
+// NSTouchBarItemIdentifierCandidateList returns the string constant NSTouchBarItemIdentifierCandidateList, for use as a dictionary key or argument.
+func NSTouchBarItemIdentifierCandidateList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTouchBarItemIdentifierCandidateList")))
 }
 
-// NSPopoverCloseReasonKey returns the string constant NSPopoverCloseReasonKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPopoverCloseReasonKey() objc.ID {
-	return purego.CFConstant(raw.NSPopoverCloseReasonKey())
+// NSPopoverCloseReasonKey returns the string constant NSPopoverCloseReasonKey, for use as a dictionary key or argument.
+func NSPopoverCloseReasonKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPopoverCloseReasonKey")))
 }
 
-// NSPopoverCloseReasonStandard returns the string constant NSPopoverCloseReasonStandard as an objc.ID, for use as a dictionary key or selector argument.
-func NSPopoverCloseReasonStandard() objc.ID {
-	return purego.CFConstant(raw.NSPopoverCloseReasonStandard())
+// NSPopoverCloseReasonStandard returns the string constant NSPopoverCloseReasonStandard, for use as a dictionary key or argument.
+func NSPopoverCloseReasonStandard() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPopoverCloseReasonStandard")))
 }
 
-// NSPopoverCloseReasonDetachToWindow returns the string constant NSPopoverCloseReasonDetachToWindow as an objc.ID, for use as a dictionary key or selector argument.
-func NSPopoverCloseReasonDetachToWindow() objc.ID {
-	return purego.CFConstant(raw.NSPopoverCloseReasonDetachToWindow())
+// NSPopoverCloseReasonDetachToWindow returns the string constant NSPopoverCloseReasonDetachToWindow, for use as a dictionary key or argument.
+func NSPopoverCloseReasonDetachToWindow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPopoverCloseReasonDetachToWindow")))
 }
 
-// NSCollectionElementKindInterItemGapIndicator returns the string constant NSCollectionElementKindInterItemGapIndicator as an objc.ID, for use as a dictionary key or selector argument.
-func NSCollectionElementKindInterItemGapIndicator() objc.ID {
-	return purego.CFConstant(raw.NSCollectionElementKindInterItemGapIndicator())
+// NSCollectionElementKindInterItemGapIndicator returns the string constant NSCollectionElementKindInterItemGapIndicator, for use as a dictionary key or argument.
+func NSCollectionElementKindInterItemGapIndicator() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCollectionElementKindInterItemGapIndicator")))
 }
 
-// NSCollectionElementKindSectionHeader returns the string constant NSCollectionElementKindSectionHeader as an objc.ID, for use as a dictionary key or selector argument.
-func NSCollectionElementKindSectionHeader() objc.ID {
-	return purego.CFConstant(raw.NSCollectionElementKindSectionHeader())
+// NSCollectionElementKindSectionHeader returns the string constant NSCollectionElementKindSectionHeader, for use as a dictionary key or argument.
+func NSCollectionElementKindSectionHeader() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCollectionElementKindSectionHeader")))
 }
 
-// NSCollectionElementKindSectionFooter returns the string constant NSCollectionElementKindSectionFooter as an objc.ID, for use as a dictionary key or selector argument.
-func NSCollectionElementKindSectionFooter() objc.ID {
-	return purego.CFConstant(raw.NSCollectionElementKindSectionFooter())
+// NSCollectionElementKindSectionFooter returns the string constant NSCollectionElementKindSectionFooter, for use as a dictionary key or argument.
+func NSCollectionElementKindSectionFooter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCollectionElementKindSectionFooter")))
 }
 
-// NSFontFamilyAttribute returns the string constant NSFontFamilyAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontFamilyAttribute() objc.ID {
-	if _r := raw.NSFontFamilyAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontFamilyAttribute returns the string constant NSFontFamilyAttribute, for use as a dictionary key or argument.
+func NSFontFamilyAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontFamilyAttribute")))
 }
 
-// NSFontNameAttribute returns the string constant NSFontNameAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontNameAttribute() objc.ID {
-	if _r := raw.NSFontNameAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontNameAttribute returns the string constant NSFontNameAttribute, for use as a dictionary key or argument.
+func NSFontNameAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontNameAttribute")))
 }
 
-// NSFontFaceAttribute returns the string constant NSFontFaceAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontFaceAttribute() objc.ID {
-	if _r := raw.NSFontFaceAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontFaceAttribute returns the string constant NSFontFaceAttribute, for use as a dictionary key or argument.
+func NSFontFaceAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontFaceAttribute")))
 }
 
-// NSFontSizeAttribute returns the string constant NSFontSizeAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontSizeAttribute() objc.ID {
-	if _r := raw.NSFontSizeAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontSizeAttribute returns the string constant NSFontSizeAttribute, for use as a dictionary key or argument.
+func NSFontSizeAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontSizeAttribute")))
 }
 
-// NSFontVisibleNameAttribute returns the string constant NSFontVisibleNameAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontVisibleNameAttribute() objc.ID {
-	if _r := raw.NSFontVisibleNameAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontVisibleNameAttribute returns the string constant NSFontVisibleNameAttribute, for use as a dictionary key or argument.
+func NSFontVisibleNameAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontVisibleNameAttribute")))
 }
 
-// NSFontMatrixAttribute returns the string constant NSFontMatrixAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontMatrixAttribute() objc.ID {
-	if _r := raw.NSFontMatrixAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontMatrixAttribute returns the string constant NSFontMatrixAttribute, for use as a dictionary key or argument.
+func NSFontMatrixAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontMatrixAttribute")))
 }
 
-// NSFontVariationAttribute returns the string constant NSFontVariationAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontVariationAttribute() objc.ID {
-	if _r := raw.NSFontVariationAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontVariationAttribute returns the string constant NSFontVariationAttribute, for use as a dictionary key or argument.
+func NSFontVariationAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontVariationAttribute")))
 }
 
-// NSFontCharacterSetAttribute returns the string constant NSFontCharacterSetAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontCharacterSetAttribute() objc.ID {
-	if _r := raw.NSFontCharacterSetAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontCharacterSetAttribute returns the string constant NSFontCharacterSetAttribute, for use as a dictionary key or argument.
+func NSFontCharacterSetAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontCharacterSetAttribute")))
 }
 
-// NSFontCascadeListAttribute returns the string constant NSFontCascadeListAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontCascadeListAttribute() objc.ID {
-	if _r := raw.NSFontCascadeListAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontCascadeListAttribute returns the string constant NSFontCascadeListAttribute, for use as a dictionary key or argument.
+func NSFontCascadeListAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontCascadeListAttribute")))
 }
 
-// NSFontTraitsAttribute returns the string constant NSFontTraitsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontTraitsAttribute() objc.ID {
-	if _r := raw.NSFontTraitsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontTraitsAttribute returns the string constant NSFontTraitsAttribute, for use as a dictionary key or argument.
+func NSFontTraitsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontTraitsAttribute")))
 }
 
-// NSFontFixedAdvanceAttribute returns the string constant NSFontFixedAdvanceAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontFixedAdvanceAttribute() objc.ID {
-	if _r := raw.NSFontFixedAdvanceAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontFixedAdvanceAttribute returns the string constant NSFontFixedAdvanceAttribute, for use as a dictionary key or argument.
+func NSFontFixedAdvanceAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontFixedAdvanceAttribute")))
 }
 
-// NSFontFeatureSettingsAttribute returns the string constant NSFontFeatureSettingsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontFeatureSettingsAttribute() objc.ID {
-	return purego.CFConstant(raw.NSFontFeatureSettingsAttribute())
+// NSFontFeatureSettingsAttribute returns the string constant NSFontFeatureSettingsAttribute, for use as a dictionary key or argument.
+func NSFontFeatureSettingsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontFeatureSettingsAttribute")))
 }
 
-// NSFontSymbolicTrait returns the string constant NSFontSymbolicTrait as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontSymbolicTrait() objc.ID {
-	if _r := raw.NSFontSymbolicTrait(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontSymbolicTrait returns the string constant NSFontSymbolicTrait, for use as a dictionary key or argument.
+func NSFontSymbolicTrait() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontSymbolicTrait")))
 }
 
-// NSFontWeightTrait returns the string constant NSFontWeightTrait as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontWeightTrait() objc.ID {
-	if _r := raw.NSFontWeightTrait(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSFontWeightTrait returns the string constant NSFontWeightTrait, for use as a dictionary key or argument.
+func NSFontWeightTrait() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSFontWeightTrait"))) }
 
-// NSFontWidthTrait returns the string constant NSFontWidthTrait as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontWidthTrait() objc.ID {
-	if _r := raw.NSFontWidthTrait(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSFontWidthTrait returns the string constant NSFontWidthTrait, for use as a dictionary key or argument.
+func NSFontWidthTrait() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSFontWidthTrait"))) }
 
-// NSFontSlantTrait returns the string constant NSFontSlantTrait as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontSlantTrait() objc.ID {
-	if _r := raw.NSFontSlantTrait(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSFontSlantTrait returns the string constant NSFontSlantTrait, for use as a dictionary key or argument.
+func NSFontSlantTrait() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSFontSlantTrait"))) }
 
-// NSFontVariationAxisIdentifierKey returns the string constant NSFontVariationAxisIdentifierKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontVariationAxisIdentifierKey() objc.ID {
-	if _r := raw.NSFontVariationAxisIdentifierKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontVariationAxisIdentifierKey returns the string constant NSFontVariationAxisIdentifierKey, for use as a dictionary key or argument.
+func NSFontVariationAxisIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontVariationAxisIdentifierKey")))
 }
 
-// NSFontVariationAxisMinimumValueKey returns the string constant NSFontVariationAxisMinimumValueKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontVariationAxisMinimumValueKey() objc.ID {
-	if _r := raw.NSFontVariationAxisMinimumValueKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontVariationAxisMinimumValueKey returns the string constant NSFontVariationAxisMinimumValueKey, for use as a dictionary key or argument.
+func NSFontVariationAxisMinimumValueKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontVariationAxisMinimumValueKey")))
 }
 
-// NSFontVariationAxisMaximumValueKey returns the string constant NSFontVariationAxisMaximumValueKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontVariationAxisMaximumValueKey() objc.ID {
-	if _r := raw.NSFontVariationAxisMaximumValueKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontVariationAxisMaximumValueKey returns the string constant NSFontVariationAxisMaximumValueKey, for use as a dictionary key or argument.
+func NSFontVariationAxisMaximumValueKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontVariationAxisMaximumValueKey")))
 }
 
-// NSFontVariationAxisDefaultValueKey returns the string constant NSFontVariationAxisDefaultValueKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontVariationAxisDefaultValueKey() objc.ID {
-	if _r := raw.NSFontVariationAxisDefaultValueKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontVariationAxisDefaultValueKey returns the string constant NSFontVariationAxisDefaultValueKey, for use as a dictionary key or argument.
+func NSFontVariationAxisDefaultValueKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontVariationAxisDefaultValueKey")))
 }
 
-// NSFontVariationAxisNameKey returns the string constant NSFontVariationAxisNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontVariationAxisNameKey() objc.ID {
-	if _r := raw.NSFontVariationAxisNameKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontVariationAxisNameKey returns the string constant NSFontVariationAxisNameKey, for use as a dictionary key or argument.
+func NSFontVariationAxisNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontVariationAxisNameKey")))
 }
 
-// NSFontFeatureTypeIdentifierKey returns the string constant NSFontFeatureTypeIdentifierKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontFeatureTypeIdentifierKey() objc.ID {
-	return purego.CFConstant(raw.NSFontFeatureTypeIdentifierKey())
+// NSFontFeatureTypeIdentifierKey returns the string constant NSFontFeatureTypeIdentifierKey, for use as a dictionary key or argument.
+func NSFontFeatureTypeIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontFeatureTypeIdentifierKey")))
 }
 
-// NSFontFeatureSelectorIdentifierKey returns the string constant NSFontFeatureSelectorIdentifierKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontFeatureSelectorIdentifierKey() objc.ID {
-	return purego.CFConstant(raw.NSFontFeatureSelectorIdentifierKey())
+// NSFontFeatureSelectorIdentifierKey returns the string constant NSFontFeatureSelectorIdentifierKey, for use as a dictionary key or argument.
+func NSFontFeatureSelectorIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontFeatureSelectorIdentifierKey")))
 }
 
-// NSFontDescriptorSystemDesignDefault returns the string constant NSFontDescriptorSystemDesignDefault as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontDescriptorSystemDesignDefault() objc.ID {
-	return purego.CFConstant(raw.NSFontDescriptorSystemDesignDefault())
+// NSFontDescriptorSystemDesignDefault returns the string constant NSFontDescriptorSystemDesignDefault, for use as a dictionary key or argument.
+func NSFontDescriptorSystemDesignDefault() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontDescriptorSystemDesignDefault")))
 }
 
-// NSFontDescriptorSystemDesignSerif returns the string constant NSFontDescriptorSystemDesignSerif as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontDescriptorSystemDesignSerif() objc.ID {
-	return purego.CFConstant(raw.NSFontDescriptorSystemDesignSerif())
+// NSFontDescriptorSystemDesignSerif returns the string constant NSFontDescriptorSystemDesignSerif, for use as a dictionary key or argument.
+func NSFontDescriptorSystemDesignSerif() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontDescriptorSystemDesignSerif")))
 }
 
-// NSFontDescriptorSystemDesignMonospaced returns the string constant NSFontDescriptorSystemDesignMonospaced as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontDescriptorSystemDesignMonospaced() objc.ID {
-	return purego.CFConstant(raw.NSFontDescriptorSystemDesignMonospaced())
+// NSFontDescriptorSystemDesignMonospaced returns the string constant NSFontDescriptorSystemDesignMonospaced, for use as a dictionary key or argument.
+func NSFontDescriptorSystemDesignMonospaced() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontDescriptorSystemDesignMonospaced")))
 }
 
-// NSFontDescriptorSystemDesignRounded returns the string constant NSFontDescriptorSystemDesignRounded as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontDescriptorSystemDesignRounded() objc.ID {
-	return purego.CFConstant(raw.NSFontDescriptorSystemDesignRounded())
+// NSFontDescriptorSystemDesignRounded returns the string constant NSFontDescriptorSystemDesignRounded, for use as a dictionary key or argument.
+func NSFontDescriptorSystemDesignRounded() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontDescriptorSystemDesignRounded")))
 }
 
-// NSFontTextStyleLargeTitle returns the string constant NSFontTextStyleLargeTitle as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontTextStyleLargeTitle() objc.ID {
-	return purego.CFConstant(raw.NSFontTextStyleLargeTitle())
+// NSFontTextStyleLargeTitle returns the string constant NSFontTextStyleLargeTitle, for use as a dictionary key or argument.
+func NSFontTextStyleLargeTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontTextStyleLargeTitle")))
 }
 
-// NSFontTextStyleTitle1 returns the string constant NSFontTextStyleTitle1 as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontTextStyleTitle1() objc.ID {
-	return purego.CFConstant(raw.NSFontTextStyleTitle1())
+// NSFontTextStyleTitle1 returns the string constant NSFontTextStyleTitle1, for use as a dictionary key or argument.
+func NSFontTextStyleTitle1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontTextStyleTitle1")))
 }
 
-// NSFontTextStyleTitle2 returns the string constant NSFontTextStyleTitle2 as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontTextStyleTitle2() objc.ID {
-	return purego.CFConstant(raw.NSFontTextStyleTitle2())
+// NSFontTextStyleTitle2 returns the string constant NSFontTextStyleTitle2, for use as a dictionary key or argument.
+func NSFontTextStyleTitle2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontTextStyleTitle2")))
 }
 
-// NSFontTextStyleTitle3 returns the string constant NSFontTextStyleTitle3 as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontTextStyleTitle3() objc.ID {
-	return purego.CFConstant(raw.NSFontTextStyleTitle3())
+// NSFontTextStyleTitle3 returns the string constant NSFontTextStyleTitle3, for use as a dictionary key or argument.
+func NSFontTextStyleTitle3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontTextStyleTitle3")))
 }
 
-// NSFontTextStyleHeadline returns the string constant NSFontTextStyleHeadline as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontTextStyleHeadline() objc.ID {
-	return purego.CFConstant(raw.NSFontTextStyleHeadline())
+// NSFontTextStyleHeadline returns the string constant NSFontTextStyleHeadline, for use as a dictionary key or argument.
+func NSFontTextStyleHeadline() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontTextStyleHeadline")))
 }
 
-// NSFontTextStyleSubheadline returns the string constant NSFontTextStyleSubheadline as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontTextStyleSubheadline() objc.ID {
-	return purego.CFConstant(raw.NSFontTextStyleSubheadline())
+// NSFontTextStyleSubheadline returns the string constant NSFontTextStyleSubheadline, for use as a dictionary key or argument.
+func NSFontTextStyleSubheadline() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontTextStyleSubheadline")))
 }
 
-// NSFontTextStyleBody returns the string constant NSFontTextStyleBody as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontTextStyleBody() objc.ID {
-	return purego.CFConstant(raw.NSFontTextStyleBody())
+// NSFontTextStyleBody returns the string constant NSFontTextStyleBody, for use as a dictionary key or argument.
+func NSFontTextStyleBody() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontTextStyleBody")))
 }
 
-// NSFontTextStyleCallout returns the string constant NSFontTextStyleCallout as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontTextStyleCallout() objc.ID {
-	return purego.CFConstant(raw.NSFontTextStyleCallout())
+// NSFontTextStyleCallout returns the string constant NSFontTextStyleCallout, for use as a dictionary key or argument.
+func NSFontTextStyleCallout() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontTextStyleCallout")))
 }
 
-// NSFontTextStyleFootnote returns the string constant NSFontTextStyleFootnote as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontTextStyleFootnote() objc.ID {
-	return purego.CFConstant(raw.NSFontTextStyleFootnote())
+// NSFontTextStyleFootnote returns the string constant NSFontTextStyleFootnote, for use as a dictionary key or argument.
+func NSFontTextStyleFootnote() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontTextStyleFootnote")))
 }
 
-// NSFontTextStyleCaption1 returns the string constant NSFontTextStyleCaption1 as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontTextStyleCaption1() objc.ID {
-	return purego.CFConstant(raw.NSFontTextStyleCaption1())
+// NSFontTextStyleCaption1 returns the string constant NSFontTextStyleCaption1, for use as a dictionary key or argument.
+func NSFontTextStyleCaption1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontTextStyleCaption1")))
 }
 
-// NSFontTextStyleCaption2 returns the string constant NSFontTextStyleCaption2 as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontTextStyleCaption2() objc.ID {
-	return purego.CFConstant(raw.NSFontTextStyleCaption2())
+// NSFontTextStyleCaption2 returns the string constant NSFontTextStyleCaption2, for use as a dictionary key or argument.
+func NSFontTextStyleCaption2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontTextStyleCaption2")))
 }
 
-// NSFontColorAttribute returns the string constant NSFontColorAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontColorAttribute() objc.ID {
-	return purego.CFConstant(raw.NSFontColorAttribute())
+// NSFontColorAttribute returns the string constant NSFontColorAttribute, for use as a dictionary key or argument.
+func NSFontColorAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontColorAttribute")))
 }
 
-// NSAntialiasThresholdChangedNotification returns the string constant NSAntialiasThresholdChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSAntialiasThresholdChangedNotification() objc.ID {
-	if _r := raw.NSAntialiasThresholdChangedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAntialiasThresholdChangedNotification returns the string constant NSAntialiasThresholdChangedNotification, for use as a dictionary key or argument.
+func NSAntialiasThresholdChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAntialiasThresholdChangedNotification")))
 }
 
-// NSFontSetChangedNotification returns the string constant NSFontSetChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontSetChangedNotification() objc.ID {
-	if _r := raw.NSFontSetChangedNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontSetChangedNotification returns the string constant NSFontSetChangedNotification, for use as a dictionary key or argument.
+func NSFontSetChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontSetChangedNotification")))
 }
 
-// NSFontCollectionIncludeDisabledFontsOption returns the string constant NSFontCollectionIncludeDisabledFontsOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontCollectionIncludeDisabledFontsOption() objc.ID {
-	return purego.CFConstant(raw.NSFontCollectionIncludeDisabledFontsOption())
+// NSFontCollectionIncludeDisabledFontsOption returns the string constant NSFontCollectionIncludeDisabledFontsOption, for use as a dictionary key or argument.
+func NSFontCollectionIncludeDisabledFontsOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontCollectionIncludeDisabledFontsOption")))
 }
 
-// NSFontCollectionRemoveDuplicatesOption returns the string constant NSFontCollectionRemoveDuplicatesOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontCollectionRemoveDuplicatesOption() objc.ID {
-	return purego.CFConstant(raw.NSFontCollectionRemoveDuplicatesOption())
+// NSFontCollectionRemoveDuplicatesOption returns the string constant NSFontCollectionRemoveDuplicatesOption, for use as a dictionary key or argument.
+func NSFontCollectionRemoveDuplicatesOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontCollectionRemoveDuplicatesOption")))
 }
 
-// NSFontCollectionDisallowAutoActivationOption returns the string constant NSFontCollectionDisallowAutoActivationOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontCollectionDisallowAutoActivationOption() objc.ID {
-	return purego.CFConstant(raw.NSFontCollectionDisallowAutoActivationOption())
+// NSFontCollectionDisallowAutoActivationOption returns the string constant NSFontCollectionDisallowAutoActivationOption, for use as a dictionary key or argument.
+func NSFontCollectionDisallowAutoActivationOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontCollectionDisallowAutoActivationOption")))
 }
 
-// NSFontCollectionActionKey returns the string constant NSFontCollectionActionKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontCollectionActionKey() objc.ID {
-	return purego.CFConstant(raw.NSFontCollectionActionKey())
+// NSFontCollectionActionKey returns the string constant NSFontCollectionActionKey, for use as a dictionary key or argument.
+func NSFontCollectionActionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontCollectionActionKey")))
 }
 
-// NSFontCollectionNameKey returns the string constant NSFontCollectionNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontCollectionNameKey() objc.ID {
-	return purego.CFConstant(raw.NSFontCollectionNameKey())
+// NSFontCollectionNameKey returns the string constant NSFontCollectionNameKey, for use as a dictionary key or argument.
+func NSFontCollectionNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontCollectionNameKey")))
 }
 
-// NSFontCollectionOldNameKey returns the string constant NSFontCollectionOldNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontCollectionOldNameKey() objc.ID {
-	return purego.CFConstant(raw.NSFontCollectionOldNameKey())
+// NSFontCollectionOldNameKey returns the string constant NSFontCollectionOldNameKey, for use as a dictionary key or argument.
+func NSFontCollectionOldNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontCollectionOldNameKey")))
 }
 
-// NSFontCollectionVisibilityKey returns the string constant NSFontCollectionVisibilityKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontCollectionVisibilityKey() objc.ID {
-	return purego.CFConstant(raw.NSFontCollectionVisibilityKey())
+// NSFontCollectionVisibilityKey returns the string constant NSFontCollectionVisibilityKey, for use as a dictionary key or argument.
+func NSFontCollectionVisibilityKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontCollectionVisibilityKey")))
 }
 
-// NSFontCollectionWasShown returns the string constant NSFontCollectionWasShown as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontCollectionWasShown() objc.ID {
-	return purego.CFConstant(raw.NSFontCollectionWasShown())
+// NSFontCollectionWasShown returns the string constant NSFontCollectionWasShown, for use as a dictionary key or argument.
+func NSFontCollectionWasShown() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontCollectionWasShown")))
 }
 
-// NSFontCollectionWasHidden returns the string constant NSFontCollectionWasHidden as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontCollectionWasHidden() objc.ID {
-	return purego.CFConstant(raw.NSFontCollectionWasHidden())
+// NSFontCollectionWasHidden returns the string constant NSFontCollectionWasHidden, for use as a dictionary key or argument.
+func NSFontCollectionWasHidden() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontCollectionWasHidden")))
 }
 
-// NSFontCollectionWasRenamed returns the string constant NSFontCollectionWasRenamed as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontCollectionWasRenamed() objc.ID {
-	return purego.CFConstant(raw.NSFontCollectionWasRenamed())
+// NSFontCollectionWasRenamed returns the string constant NSFontCollectionWasRenamed, for use as a dictionary key or argument.
+func NSFontCollectionWasRenamed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontCollectionWasRenamed")))
 }
 
-// NSFontCollectionAllFonts returns the string constant NSFontCollectionAllFonts as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontCollectionAllFonts() objc.ID {
-	return purego.CFConstant(raw.NSFontCollectionAllFonts())
+// NSFontCollectionAllFonts returns the string constant NSFontCollectionAllFonts, for use as a dictionary key or argument.
+func NSFontCollectionAllFonts() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontCollectionAllFonts")))
 }
 
-// NSFontCollectionUser returns the string constant NSFontCollectionUser as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontCollectionUser() objc.ID {
-	return purego.CFConstant(raw.NSFontCollectionUser())
+// NSFontCollectionUser returns the string constant NSFontCollectionUser, for use as a dictionary key or argument.
+func NSFontCollectionUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontCollectionUser")))
 }
 
-// NSFontCollectionFavorites returns the string constant NSFontCollectionFavorites as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontCollectionFavorites() objc.ID {
-	return purego.CFConstant(raw.NSFontCollectionFavorites())
+// NSFontCollectionFavorites returns the string constant NSFontCollectionFavorites, for use as a dictionary key or argument.
+func NSFontCollectionFavorites() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontCollectionFavorites")))
 }
 
-// NSFontCollectionRecentlyUsed returns the string constant NSFontCollectionRecentlyUsed as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontCollectionRecentlyUsed() objc.ID {
-	return purego.CFConstant(raw.NSFontCollectionRecentlyUsed())
+// NSFontCollectionRecentlyUsed returns the string constant NSFontCollectionRecentlyUsed, for use as a dictionary key or argument.
+func NSFontCollectionRecentlyUsed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontCollectionRecentlyUsed")))
 }
 
-// NSWindowDidBecomeKeyNotification returns the string constant NSWindowDidBecomeKeyNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWindowDidBecomeKeyNotification() objc.ID {
-	if _r := raw.NSWindowDidBecomeKeyNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWindowDidBecomeKeyNotification returns the string constant NSWindowDidBecomeKeyNotification, for use as a dictionary key or argument.
+func NSWindowDidBecomeKeyNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidBecomeKeyNotification")))
 }
 
-// NSWindowDidBecomeMainNotification returns the string constant NSWindowDidBecomeMainNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWindowDidBecomeMainNotification() objc.ID {
-	if _r := raw.NSWindowDidBecomeMainNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWindowDidBecomeMainNotification returns the string constant NSWindowDidBecomeMainNotification, for use as a dictionary key or argument.
+func NSWindowDidBecomeMainNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidBecomeMainNotification")))
 }
 
-// NSWindowDidChangeScreenNotification returns the string constant NSWindowDidChangeScreenNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWindowDidChangeScreenNotification() objc.ID {
-	if _r := raw.NSWindowDidChangeScreenNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWindowDidChangeScreenNotification returns the string constant NSWindowDidChangeScreenNotification, for use as a dictionary key or argument.
+func NSWindowDidChangeScreenNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidChangeScreenNotification")))
 }
 
-// NSWindowDidDeminiaturizeNotification returns the string constant NSWindowDidDeminiaturizeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWindowDidDeminiaturizeNotification() objc.ID {
-	if _r := raw.NSWindowDidDeminiaturizeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWindowDidDeminiaturizeNotification returns the string constant NSWindowDidDeminiaturizeNotification, for use as a dictionary key or argument.
+func NSWindowDidDeminiaturizeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidDeminiaturizeNotification")))
 }
 
-// NSWindowDidExposeNotification returns the string constant NSWindowDidExposeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWindowDidExposeNotification() objc.ID {
-	if _r := raw.NSWindowDidExposeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWindowDidExposeNotification returns the string constant NSWindowDidExposeNotification, for use as a dictionary key or argument.
+func NSWindowDidExposeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidExposeNotification")))
 }
 
-// NSWindowDidMiniaturizeNotification returns the string constant NSWindowDidMiniaturizeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWindowDidMiniaturizeNotification() objc.ID {
-	if _r := raw.NSWindowDidMiniaturizeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWindowDidMiniaturizeNotification returns the string constant NSWindowDidMiniaturizeNotification, for use as a dictionary key or argument.
+func NSWindowDidMiniaturizeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidMiniaturizeNotification")))
 }
 
-// NSWindowDidMoveNotification returns the string constant NSWindowDidMoveNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWindowDidMoveNotification() objc.ID {
-	if _r := raw.NSWindowDidMoveNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWindowDidMoveNotification returns the string constant NSWindowDidMoveNotification, for use as a dictionary key or argument.
+func NSWindowDidMoveNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidMoveNotification")))
 }
 
-// NSWindowDidResignKeyNotification returns the string constant NSWindowDidResignKeyNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWindowDidResignKeyNotification() objc.ID {
-	if _r := raw.NSWindowDidResignKeyNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWindowDidResignKeyNotification returns the string constant NSWindowDidResignKeyNotification, for use as a dictionary key or argument.
+func NSWindowDidResignKeyNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidResignKeyNotification")))
 }
 
-// NSWindowDidResignMainNotification returns the string constant NSWindowDidResignMainNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWindowDidResignMainNotification() objc.ID {
-	if _r := raw.NSWindowDidResignMainNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWindowDidResignMainNotification returns the string constant NSWindowDidResignMainNotification, for use as a dictionary key or argument.
+func NSWindowDidResignMainNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidResignMainNotification")))
 }
 
-// NSWindowDidResizeNotification returns the string constant NSWindowDidResizeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWindowDidResizeNotification() objc.ID {
-	if _r := raw.NSWindowDidResizeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWindowDidResizeNotification returns the string constant NSWindowDidResizeNotification, for use as a dictionary key or argument.
+func NSWindowDidResizeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidResizeNotification")))
 }
 
-// NSWindowDidUpdateNotification returns the string constant NSWindowDidUpdateNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWindowDidUpdateNotification() objc.ID {
-	if _r := raw.NSWindowDidUpdateNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWindowDidUpdateNotification returns the string constant NSWindowDidUpdateNotification, for use as a dictionary key or argument.
+func NSWindowDidUpdateNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidUpdateNotification")))
 }
 
-// NSWindowWillCloseNotification returns the string constant NSWindowWillCloseNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWindowWillCloseNotification() objc.ID {
-	if _r := raw.NSWindowWillCloseNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWindowWillCloseNotification returns the string constant NSWindowWillCloseNotification, for use as a dictionary key or argument.
+func NSWindowWillCloseNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowWillCloseNotification")))
 }
 
-// NSWindowWillMiniaturizeNotification returns the string constant NSWindowWillMiniaturizeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWindowWillMiniaturizeNotification() objc.ID {
-	if _r := raw.NSWindowWillMiniaturizeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWindowWillMiniaturizeNotification returns the string constant NSWindowWillMiniaturizeNotification, for use as a dictionary key or argument.
+func NSWindowWillMiniaturizeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowWillMiniaturizeNotification")))
 }
 
-// NSWindowWillMoveNotification returns the string constant NSWindowWillMoveNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWindowWillMoveNotification() objc.ID {
-	if _r := raw.NSWindowWillMoveNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWindowWillMoveNotification returns the string constant NSWindowWillMoveNotification, for use as a dictionary key or argument.
+func NSWindowWillMoveNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowWillMoveNotification")))
 }
 
-// NSWindowWillBeginSheetNotification returns the string constant NSWindowWillBeginSheetNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWindowWillBeginSheetNotification() objc.ID {
-	if _r := raw.NSWindowWillBeginSheetNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWindowWillBeginSheetNotification returns the string constant NSWindowWillBeginSheetNotification, for use as a dictionary key or argument.
+func NSWindowWillBeginSheetNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowWillBeginSheetNotification")))
 }
 
-// NSWindowDidEndSheetNotification returns the string constant NSWindowDidEndSheetNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWindowDidEndSheetNotification() objc.ID {
-	if _r := raw.NSWindowDidEndSheetNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWindowDidEndSheetNotification returns the string constant NSWindowDidEndSheetNotification, for use as a dictionary key or argument.
+func NSWindowDidEndSheetNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidEndSheetNotification")))
 }
 
-// NSBackingPropertyOldScaleFactorKey returns the string constant NSBackingPropertyOldScaleFactorKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSBackingPropertyOldScaleFactorKey() objc.ID {
-	return purego.CFConstant(raw.NSBackingPropertyOldScaleFactorKey())
+// NSBackingPropertyOldScaleFactorKey returns the string constant NSBackingPropertyOldScaleFactorKey, for use as a dictionary key or argument.
+func NSBackingPropertyOldScaleFactorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSBackingPropertyOldScaleFactorKey")))
 }
 
-// NSBackingPropertyOldColorSpaceKey returns the string constant NSBackingPropertyOldColorSpaceKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSBackingPropertyOldColorSpaceKey() objc.ID {
-	return purego.CFConstant(raw.NSBackingPropertyOldColorSpaceKey())
+// NSBackingPropertyOldColorSpaceKey returns the string constant NSBackingPropertyOldColorSpaceKey, for use as a dictionary key or argument.
+func NSBackingPropertyOldColorSpaceKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSBackingPropertyOldColorSpaceKey")))
 }
 
 // \c NSWindowDidChangeScreenProfileNotification is posted when a window's display's color profile changes, or when the window moves to a display that has a different color profile.  When running on 10.7.3 or later, this notification is still posted for compatibility, but modern applications should instead watch for \c NSWindowDidChangeBackingPropertiesNotification, which is posted for both color space and resolution changes, and facilitates handling both in a single update and redisplay pass.
-// NSWindowDidChangeScreenProfileNotification returns the string constant NSWindowDidChangeScreenProfileNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSWindowDidChangeScreenProfileNotification() objc.ID {
-	if _r := raw.NSWindowDidChangeScreenProfileNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSImageRepRegistryDidChangeNotification returns the string constant NSImageRepRegistryDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageRepRegistryDidChangeNotification() objc.ID {
-	if _r := raw.NSImageRepRegistryDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSImageCompressionMethod returns the string constant NSImageCompressionMethod as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageCompressionMethod() objc.ID {
-	if _r := raw.NSImageCompressionMethod(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSImageCompressionFactor returns the string constant NSImageCompressionFactor as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageCompressionFactor() objc.ID {
-	if _r := raw.NSImageCompressionFactor(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSImageDitherTransparency returns the string constant NSImageDitherTransparency as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageDitherTransparency() objc.ID {
-	if _r := raw.NSImageDitherTransparency(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSImageRGBColorTable returns the string constant NSImageRGBColorTable as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageRGBColorTable() objc.ID {
-	if _r := raw.NSImageRGBColorTable(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// NSImageInterlaced returns the string constant NSImageInterlaced as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageInterlaced() objc.ID {
-	if _r := raw.NSImageInterlaced(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWindowDidChangeScreenProfileNotification returns the string constant NSWindowDidChangeScreenProfileNotification, for use as a dictionary key or argument.
+func NSWindowDidChangeScreenProfileNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWindowDidChangeScreenProfileNotification")))
 }
 
-// NSImageColorSyncProfileData returns the string constant NSImageColorSyncProfileData as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageColorSyncProfileData() objc.ID {
-	if _r := raw.NSImageColorSyncProfileData(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageRepRegistryDidChangeNotification returns the string constant NSImageRepRegistryDidChangeNotification, for use as a dictionary key or argument.
+func NSImageRepRegistryDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageRepRegistryDidChangeNotification")))
 }
 
-// NSImageFrameCount returns the string constant NSImageFrameCount as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageFrameCount() objc.ID {
-	if _r := raw.NSImageFrameCount(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageCompressionMethod returns the string constant NSImageCompressionMethod, for use as a dictionary key or argument.
+func NSImageCompressionMethod() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageCompressionMethod")))
 }
 
-// NSImageCurrentFrame returns the string constant NSImageCurrentFrame as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageCurrentFrame() objc.ID {
-	if _r := raw.NSImageCurrentFrame(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageCompressionFactor returns the string constant NSImageCompressionFactor, for use as a dictionary key or argument.
+func NSImageCompressionFactor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageCompressionFactor")))
 }
 
-// NSImageCurrentFrameDuration returns the string constant NSImageCurrentFrameDuration as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageCurrentFrameDuration() objc.ID {
-	if _r := raw.NSImageCurrentFrameDuration(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageDitherTransparency returns the string constant NSImageDitherTransparency, for use as a dictionary key or argument.
+func NSImageDitherTransparency() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageDitherTransparency")))
 }
 
-// NSImageLoopCount returns the string constant NSImageLoopCount as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageLoopCount() objc.ID {
-	if _r := raw.NSImageLoopCount(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageRGBColorTable returns the string constant NSImageRGBColorTable, for use as a dictionary key or argument.
+func NSImageRGBColorTable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageRGBColorTable")))
 }
 
-// NSImageGamma returns the string constant NSImageGamma as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageGamma() objc.ID {
-	if _r := raw.NSImageGamma(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSImageInterlaced returns the string constant NSImageInterlaced, for use as a dictionary key or argument.
+func NSImageInterlaced() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSImageInterlaced"))) }
 
-// NSImageProgressive returns the string constant NSImageProgressive as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageProgressive() objc.ID {
-	if _r := raw.NSImageProgressive(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageColorSyncProfileData returns the string constant NSImageColorSyncProfileData, for use as a dictionary key or argument.
+func NSImageColorSyncProfileData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageColorSyncProfileData")))
 }
 
-// NSImageEXIFData returns the string constant NSImageEXIFData as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageEXIFData() objc.ID {
-	if _r := raw.NSImageEXIFData(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSImageFrameCount returns the string constant NSImageFrameCount, for use as a dictionary key or argument.
+func NSImageFrameCount() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSImageFrameCount"))) }
 
-// NSImageIPTCData returns the string constant NSImageIPTCData as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageIPTCData() objc.ID {
-	if _r := raw.NSImageIPTCData(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageCurrentFrame returns the string constant NSImageCurrentFrame, for use as a dictionary key or argument.
+func NSImageCurrentFrame() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageCurrentFrame")))
 }
 
-// NSImageFallbackBackgroundColor returns the string constant NSImageFallbackBackgroundColor as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageFallbackBackgroundColor() objc.ID {
-	return purego.CFConstant(raw.NSImageFallbackBackgroundColor())
+// NSImageCurrentFrameDuration returns the string constant NSImageCurrentFrameDuration, for use as a dictionary key or argument.
+func NSImageCurrentFrameDuration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageCurrentFrameDuration")))
 }
 
-// NSBrowserColumnConfigurationDidChangeNotification returns the string constant NSBrowserColumnConfigurationDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSBrowserColumnConfigurationDidChangeNotification() objc.ID {
-	if _r := raw.NSBrowserColumnConfigurationDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSImageLoopCount returns the string constant NSImageLoopCount, for use as a dictionary key or argument.
+func NSImageLoopCount() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSImageLoopCount"))) }
 
-// NSColorPanelColorDidChangeNotification returns the string constant NSColorPanelColorDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSColorPanelColorDidChangeNotification() objc.ID {
-	if _r := raw.NSColorPanelColorDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSImageGamma returns the string constant NSImageGamma, for use as a dictionary key or argument.
+func NSImageGamma() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSImageGamma"))) }
 
-// NSDraggingImageComponentIconKey returns the string constant NSDraggingImageComponentIconKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSDraggingImageComponentIconKey() objc.ID {
-	return purego.CFConstant(raw.NSDraggingImageComponentIconKey())
+// NSImageProgressive returns the string constant NSImageProgressive, for use as a dictionary key or argument.
+func NSImageProgressive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageProgressive")))
 }
 
-// NSDraggingImageComponentLabelKey returns the string constant NSDraggingImageComponentLabelKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSDraggingImageComponentLabelKey() objc.ID {
-	return purego.CFConstant(raw.NSDraggingImageComponentLabelKey())
-}
+// NSImageEXIFData returns the string constant NSImageEXIFData, for use as a dictionary key or argument.
+func NSImageEXIFData() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSImageEXIFData"))) }
 
-// NSImageHintCTM returns the string constant NSImageHintCTM as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageHintCTM() objc.ID {
-	return purego.CFConstant(raw.NSImageHintCTM())
+// NSImageIPTCData returns the string constant NSImageIPTCData, for use as a dictionary key or argument.
+func NSImageIPTCData() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSImageIPTCData"))) }
+
+// NSImageFallbackBackgroundColor returns the string constant NSImageFallbackBackgroundColor, for use as a dictionary key or argument.
+func NSImageFallbackBackgroundColor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageFallbackBackgroundColor")))
 }
 
-// NSImageHintInterpolation returns the string constant NSImageHintInterpolation as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageHintInterpolation() objc.ID {
-	return purego.CFConstant(raw.NSImageHintInterpolation())
+// NSBrowserColumnConfigurationDidChangeNotification returns the string constant NSBrowserColumnConfigurationDidChangeNotification, for use as a dictionary key or argument.
+func NSBrowserColumnConfigurationDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSBrowserColumnConfigurationDidChangeNotification")))
 }
 
-// NSImageHintUserInterfaceLayoutDirection returns the string constant NSImageHintUserInterfaceLayoutDirection as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageHintUserInterfaceLayoutDirection() objc.ID {
-	return purego.CFConstant(raw.NSImageHintUserInterfaceLayoutDirection())
+// NSColorPanelColorDidChangeNotification returns the string constant NSColorPanelColorDidChangeNotification, for use as a dictionary key or argument.
+func NSColorPanelColorDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSColorPanelColorDidChangeNotification")))
 }
 
-// NSImageNameAddTemplate returns the string constant NSImageNameAddTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameAddTemplate() objc.ID {
-	if _r := raw.NSImageNameAddTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDraggingImageComponentIconKey returns the string constant NSDraggingImageComponentIconKey, for use as a dictionary key or argument.
+func NSDraggingImageComponentIconKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDraggingImageComponentIconKey")))
 }
 
-// NSImageNameBluetoothTemplate returns the string constant NSImageNameBluetoothTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameBluetoothTemplate() objc.ID {
-	if _r := raw.NSImageNameBluetoothTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDraggingImageComponentLabelKey returns the string constant NSDraggingImageComponentLabelKey, for use as a dictionary key or argument.
+func NSDraggingImageComponentLabelKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDraggingImageComponentLabelKey")))
 }
 
-// NSImageNameBonjour returns the string constant NSImageNameBonjour as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameBonjour() objc.ID {
-	return purego.CFConstant(raw.NSImageNameBonjour())
+// NSImageHintCTM returns the string constant NSImageHintCTM, for use as a dictionary key or argument.
+func NSImageHintCTM() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSImageHintCTM"))) }
+
+// NSImageHintInterpolation returns the string constant NSImageHintInterpolation, for use as a dictionary key or argument.
+func NSImageHintInterpolation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageHintInterpolation")))
 }
 
-// NSImageNameBookmarksTemplate returns the string constant NSImageNameBookmarksTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameBookmarksTemplate() objc.ID {
-	if _r := raw.NSImageNameBookmarksTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageHintUserInterfaceLayoutDirection returns the string constant NSImageHintUserInterfaceLayoutDirection, for use as a dictionary key or argument.
+func NSImageHintUserInterfaceLayoutDirection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageHintUserInterfaceLayoutDirection")))
 }
 
-// NSImageNameCaution returns the string constant NSImageNameCaution as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameCaution() objc.ID {
-	return purego.CFConstant(raw.NSImageNameCaution())
+// NSImageNameAddTemplate returns the string constant NSImageNameAddTemplate, for use as a dictionary key or argument.
+func NSImageNameAddTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameAddTemplate")))
 }
 
-// NSImageNameComputer returns the string constant NSImageNameComputer as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameComputer() objc.ID {
-	return purego.CFConstant(raw.NSImageNameComputer())
+// NSImageNameBluetoothTemplate returns the string constant NSImageNameBluetoothTemplate, for use as a dictionary key or argument.
+func NSImageNameBluetoothTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameBluetoothTemplate")))
 }
 
-// NSImageNameEnterFullScreenTemplate returns the string constant NSImageNameEnterFullScreenTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameEnterFullScreenTemplate() objc.ID {
-	return purego.CFConstant(raw.NSImageNameEnterFullScreenTemplate())
+// NSImageNameBonjour returns the string constant NSImageNameBonjour, for use as a dictionary key or argument.
+func NSImageNameBonjour() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameBonjour")))
 }
 
-// NSImageNameExitFullScreenTemplate returns the string constant NSImageNameExitFullScreenTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameExitFullScreenTemplate() objc.ID {
-	return purego.CFConstant(raw.NSImageNameExitFullScreenTemplate())
+// NSImageNameBookmarksTemplate returns the string constant NSImageNameBookmarksTemplate, for use as a dictionary key or argument.
+func NSImageNameBookmarksTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameBookmarksTemplate")))
 }
 
-// NSImageNameFolder returns the string constant NSImageNameFolder as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameFolder() objc.ID {
-	return purego.CFConstant(raw.NSImageNameFolder())
+// NSImageNameCaution returns the string constant NSImageNameCaution, for use as a dictionary key or argument.
+func NSImageNameCaution() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameCaution")))
 }
 
-// NSImageNameFolderBurnable returns the string constant NSImageNameFolderBurnable as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameFolderBurnable() objc.ID {
-	return purego.CFConstant(raw.NSImageNameFolderBurnable())
+// NSImageNameComputer returns the string constant NSImageNameComputer, for use as a dictionary key or argument.
+func NSImageNameComputer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameComputer")))
 }
 
-// NSImageNameFolderSmart returns the string constant NSImageNameFolderSmart as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameFolderSmart() objc.ID {
-	return purego.CFConstant(raw.NSImageNameFolderSmart())
+// NSImageNameEnterFullScreenTemplate returns the string constant NSImageNameEnterFullScreenTemplate, for use as a dictionary key or argument.
+func NSImageNameEnterFullScreenTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameEnterFullScreenTemplate")))
 }
 
-// NSImageNameFollowLinkFreestandingTemplate returns the string constant NSImageNameFollowLinkFreestandingTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameFollowLinkFreestandingTemplate() objc.ID {
-	return purego.CFConstant(raw.NSImageNameFollowLinkFreestandingTemplate())
+// NSImageNameExitFullScreenTemplate returns the string constant NSImageNameExitFullScreenTemplate, for use as a dictionary key or argument.
+func NSImageNameExitFullScreenTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameExitFullScreenTemplate")))
 }
+
+// NSImageNameFolder returns the string constant NSImageNameFolder, for use as a dictionary key or argument.
+func NSImageNameFolder() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSImageNameFolder"))) }
 
-// NSImageNameHomeTemplate returns the string constant NSImageNameHomeTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameHomeTemplate() objc.ID {
-	if _r := raw.NSImageNameHomeTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameFolderBurnable returns the string constant NSImageNameFolderBurnable, for use as a dictionary key or argument.
+func NSImageNameFolderBurnable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameFolderBurnable")))
 }
 
-// NSImageNameIChatTheaterTemplate returns the string constant NSImageNameIChatTheaterTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameIChatTheaterTemplate() objc.ID {
-	return purego.CFConstant(raw.NSImageNameIChatTheaterTemplate())
+// NSImageNameFolderSmart returns the string constant NSImageNameFolderSmart, for use as a dictionary key or argument.
+func NSImageNameFolderSmart() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameFolderSmart")))
 }
 
-// NSImageNameLockLockedTemplate returns the string constant NSImageNameLockLockedTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameLockLockedTemplate() objc.ID {
-	if _r := raw.NSImageNameLockLockedTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameFollowLinkFreestandingTemplate returns the string constant NSImageNameFollowLinkFreestandingTemplate, for use as a dictionary key or argument.
+func NSImageNameFollowLinkFreestandingTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameFollowLinkFreestandingTemplate")))
 }
 
-// NSImageNameLockUnlockedTemplate returns the string constant NSImageNameLockUnlockedTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameLockUnlockedTemplate() objc.ID {
-	if _r := raw.NSImageNameLockUnlockedTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameHomeTemplate returns the string constant NSImageNameHomeTemplate, for use as a dictionary key or argument.
+func NSImageNameHomeTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameHomeTemplate")))
 }
 
-// NSImageNameNetwork returns the string constant NSImageNameNetwork as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameNetwork() objc.ID {
-	return purego.CFConstant(raw.NSImageNameNetwork())
+// NSImageNameIChatTheaterTemplate returns the string constant NSImageNameIChatTheaterTemplate, for use as a dictionary key or argument.
+func NSImageNameIChatTheaterTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameIChatTheaterTemplate")))
 }
 
-// NSImageNamePathTemplate returns the string constant NSImageNamePathTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNamePathTemplate() objc.ID {
-	if _r := raw.NSImageNamePathTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameLockLockedTemplate returns the string constant NSImageNameLockLockedTemplate, for use as a dictionary key or argument.
+func NSImageNameLockLockedTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameLockLockedTemplate")))
 }
 
-// NSImageNameQuickLookTemplate returns the string constant NSImageNameQuickLookTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameQuickLookTemplate() objc.ID {
-	if _r := raw.NSImageNameQuickLookTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameLockUnlockedTemplate returns the string constant NSImageNameLockUnlockedTemplate, for use as a dictionary key or argument.
+func NSImageNameLockUnlockedTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameLockUnlockedTemplate")))
 }
 
-// NSImageNameRefreshFreestandingTemplate returns the string constant NSImageNameRefreshFreestandingTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameRefreshFreestandingTemplate() objc.ID {
-	return purego.CFConstant(raw.NSImageNameRefreshFreestandingTemplate())
+// NSImageNameNetwork returns the string constant NSImageNameNetwork, for use as a dictionary key or argument.
+func NSImageNameNetwork() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameNetwork")))
 }
 
-// NSImageNameRefreshTemplate returns the string constant NSImageNameRefreshTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameRefreshTemplate() objc.ID {
-	if _r := raw.NSImageNameRefreshTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNamePathTemplate returns the string constant NSImageNamePathTemplate, for use as a dictionary key or argument.
+func NSImageNamePathTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNamePathTemplate")))
 }
 
-// NSImageNameRemoveTemplate returns the string constant NSImageNameRemoveTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameRemoveTemplate() objc.ID {
-	if _r := raw.NSImageNameRemoveTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameQuickLookTemplate returns the string constant NSImageNameQuickLookTemplate, for use as a dictionary key or argument.
+func NSImageNameQuickLookTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameQuickLookTemplate")))
 }
 
-// NSImageNameRevealFreestandingTemplate returns the string constant NSImageNameRevealFreestandingTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameRevealFreestandingTemplate() objc.ID {
-	return purego.CFConstant(raw.NSImageNameRevealFreestandingTemplate())
+// NSImageNameRefreshFreestandingTemplate returns the string constant NSImageNameRefreshFreestandingTemplate, for use as a dictionary key or argument.
+func NSImageNameRefreshFreestandingTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameRefreshFreestandingTemplate")))
 }
 
-// NSImageNameShareTemplate returns the string constant NSImageNameShareTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameShareTemplate() objc.ID {
-	if _r := raw.NSImageNameShareTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameRefreshTemplate returns the string constant NSImageNameRefreshTemplate, for use as a dictionary key or argument.
+func NSImageNameRefreshTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameRefreshTemplate")))
 }
 
-// NSImageNameSlideshowTemplate returns the string constant NSImageNameSlideshowTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameSlideshowTemplate() objc.ID {
-	if _r := raw.NSImageNameSlideshowTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameRemoveTemplate returns the string constant NSImageNameRemoveTemplate, for use as a dictionary key or argument.
+func NSImageNameRemoveTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameRemoveTemplate")))
 }
 
-// NSImageNameStatusAvailable returns the string constant NSImageNameStatusAvailable as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameStatusAvailable() objc.ID {
-	return purego.CFConstant(raw.NSImageNameStatusAvailable())
+// NSImageNameRevealFreestandingTemplate returns the string constant NSImageNameRevealFreestandingTemplate, for use as a dictionary key or argument.
+func NSImageNameRevealFreestandingTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameRevealFreestandingTemplate")))
 }
 
-// NSImageNameStatusNone returns the string constant NSImageNameStatusNone as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameStatusNone() objc.ID {
-	return purego.CFConstant(raw.NSImageNameStatusNone())
+// NSImageNameShareTemplate returns the string constant NSImageNameShareTemplate, for use as a dictionary key or argument.
+func NSImageNameShareTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameShareTemplate")))
 }
 
-// NSImageNameStatusPartiallyAvailable returns the string constant NSImageNameStatusPartiallyAvailable as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameStatusPartiallyAvailable() objc.ID {
-	return purego.CFConstant(raw.NSImageNameStatusPartiallyAvailable())
+// NSImageNameSlideshowTemplate returns the string constant NSImageNameSlideshowTemplate, for use as a dictionary key or argument.
+func NSImageNameSlideshowTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameSlideshowTemplate")))
 }
 
-// NSImageNameStatusUnavailable returns the string constant NSImageNameStatusUnavailable as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameStatusUnavailable() objc.ID {
-	return purego.CFConstant(raw.NSImageNameStatusUnavailable())
+// NSImageNameStatusAvailable returns the string constant NSImageNameStatusAvailable, for use as a dictionary key or argument.
+func NSImageNameStatusAvailable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameStatusAvailable")))
 }
 
-// NSImageNameStopProgressFreestandingTemplate returns the string constant NSImageNameStopProgressFreestandingTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameStopProgressFreestandingTemplate() objc.ID {
-	return purego.CFConstant(raw.NSImageNameStopProgressFreestandingTemplate())
+// NSImageNameStatusNone returns the string constant NSImageNameStatusNone, for use as a dictionary key or argument.
+func NSImageNameStatusNone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameStatusNone")))
 }
 
-// NSImageNameStopProgressTemplate returns the string constant NSImageNameStopProgressTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameStopProgressTemplate() objc.ID {
-	if _r := raw.NSImageNameStopProgressTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameStatusPartiallyAvailable returns the string constant NSImageNameStatusPartiallyAvailable, for use as a dictionary key or argument.
+func NSImageNameStatusPartiallyAvailable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameStatusPartiallyAvailable")))
 }
 
-// NSImageNameTrashEmpty returns the string constant NSImageNameTrashEmpty as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTrashEmpty() objc.ID {
-	return purego.CFConstant(raw.NSImageNameTrashEmpty())
+// NSImageNameStatusUnavailable returns the string constant NSImageNameStatusUnavailable, for use as a dictionary key or argument.
+func NSImageNameStatusUnavailable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameStatusUnavailable")))
 }
 
-// NSImageNameTrashFull returns the string constant NSImageNameTrashFull as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTrashFull() objc.ID {
-	return purego.CFConstant(raw.NSImageNameTrashFull())
+// NSImageNameStopProgressFreestandingTemplate returns the string constant NSImageNameStopProgressFreestandingTemplate, for use as a dictionary key or argument.
+func NSImageNameStopProgressFreestandingTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameStopProgressFreestandingTemplate")))
 }
 
-// NSImageNameActionTemplate returns the string constant NSImageNameActionTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameActionTemplate() objc.ID {
-	if _r := raw.NSImageNameActionTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameStopProgressTemplate returns the string constant NSImageNameStopProgressTemplate, for use as a dictionary key or argument.
+func NSImageNameStopProgressTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameStopProgressTemplate")))
 }
 
-// NSImageNameSmartBadgeTemplate returns the string constant NSImageNameSmartBadgeTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameSmartBadgeTemplate() objc.ID {
-	return purego.CFConstant(raw.NSImageNameSmartBadgeTemplate())
+// NSImageNameTrashEmpty returns the string constant NSImageNameTrashEmpty, for use as a dictionary key or argument.
+func NSImageNameTrashEmpty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTrashEmpty")))
 }
 
-// NSImageNameIconViewTemplate returns the string constant NSImageNameIconViewTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameIconViewTemplate() objc.ID {
-	if _r := raw.NSImageNameIconViewTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTrashFull returns the string constant NSImageNameTrashFull, for use as a dictionary key or argument.
+func NSImageNameTrashFull() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTrashFull")))
 }
 
-// NSImageNameListViewTemplate returns the string constant NSImageNameListViewTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameListViewTemplate() objc.ID {
-	if _r := raw.NSImageNameListViewTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameActionTemplate returns the string constant NSImageNameActionTemplate, for use as a dictionary key or argument.
+func NSImageNameActionTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameActionTemplate")))
 }
 
-// NSImageNameColumnViewTemplate returns the string constant NSImageNameColumnViewTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameColumnViewTemplate() objc.ID {
-	if _r := raw.NSImageNameColumnViewTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameSmartBadgeTemplate returns the string constant NSImageNameSmartBadgeTemplate, for use as a dictionary key or argument.
+func NSImageNameSmartBadgeTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameSmartBadgeTemplate")))
 }
 
-// NSImageNameFlowViewTemplate returns the string constant NSImageNameFlowViewTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameFlowViewTemplate() objc.ID {
-	return purego.CFConstant(raw.NSImageNameFlowViewTemplate())
+// NSImageNameIconViewTemplate returns the string constant NSImageNameIconViewTemplate, for use as a dictionary key or argument.
+func NSImageNameIconViewTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameIconViewTemplate")))
 }
 
-// NSImageNameInvalidDataFreestandingTemplate returns the string constant NSImageNameInvalidDataFreestandingTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameInvalidDataFreestandingTemplate() objc.ID {
-	return purego.CFConstant(raw.NSImageNameInvalidDataFreestandingTemplate())
+// NSImageNameListViewTemplate returns the string constant NSImageNameListViewTemplate, for use as a dictionary key or argument.
+func NSImageNameListViewTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameListViewTemplate")))
 }
 
-// NSImageNameGoForwardTemplate returns the string constant NSImageNameGoForwardTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameGoForwardTemplate() objc.ID {
-	if _r := raw.NSImageNameGoForwardTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameColumnViewTemplate returns the string constant NSImageNameColumnViewTemplate, for use as a dictionary key or argument.
+func NSImageNameColumnViewTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameColumnViewTemplate")))
 }
 
-// NSImageNameGoBackTemplate returns the string constant NSImageNameGoBackTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameGoBackTemplate() objc.ID {
-	if _r := raw.NSImageNameGoBackTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameFlowViewTemplate returns the string constant NSImageNameFlowViewTemplate, for use as a dictionary key or argument.
+func NSImageNameFlowViewTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameFlowViewTemplate")))
 }
 
-// NSImageNameGoRightTemplate returns the string constant NSImageNameGoRightTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameGoRightTemplate() objc.ID {
-	if _r := raw.NSImageNameGoRightTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameInvalidDataFreestandingTemplate returns the string constant NSImageNameInvalidDataFreestandingTemplate, for use as a dictionary key or argument.
+func NSImageNameInvalidDataFreestandingTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameInvalidDataFreestandingTemplate")))
 }
 
-// NSImageNameGoLeftTemplate returns the string constant NSImageNameGoLeftTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameGoLeftTemplate() objc.ID {
-	if _r := raw.NSImageNameGoLeftTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameGoForwardTemplate returns the string constant NSImageNameGoForwardTemplate, for use as a dictionary key or argument.
+func NSImageNameGoForwardTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameGoForwardTemplate")))
 }
 
-// NSImageNameRightFacingTriangleTemplate returns the string constant NSImageNameRightFacingTriangleTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameRightFacingTriangleTemplate() objc.ID {
-	return purego.CFConstant(raw.NSImageNameRightFacingTriangleTemplate())
+// NSImageNameGoBackTemplate returns the string constant NSImageNameGoBackTemplate, for use as a dictionary key or argument.
+func NSImageNameGoBackTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameGoBackTemplate")))
 }
 
-// NSImageNameLeftFacingTriangleTemplate returns the string constant NSImageNameLeftFacingTriangleTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameLeftFacingTriangleTemplate() objc.ID {
-	return purego.CFConstant(raw.NSImageNameLeftFacingTriangleTemplate())
+// NSImageNameGoRightTemplate returns the string constant NSImageNameGoRightTemplate, for use as a dictionary key or argument.
+func NSImageNameGoRightTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameGoRightTemplate")))
 }
 
-// NSImageNameDotMac returns the string constant NSImageNameDotMac as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameDotMac() objc.ID {
-	return purego.CFConstant(raw.NSImageNameDotMac())
+// NSImageNameGoLeftTemplate returns the string constant NSImageNameGoLeftTemplate, for use as a dictionary key or argument.
+func NSImageNameGoLeftTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameGoLeftTemplate")))
 }
 
-// NSImageNameMobileMe returns the string constant NSImageNameMobileMe as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameMobileMe() objc.ID {
-	return purego.CFConstant(raw.NSImageNameMobileMe())
+// NSImageNameRightFacingTriangleTemplate returns the string constant NSImageNameRightFacingTriangleTemplate, for use as a dictionary key or argument.
+func NSImageNameRightFacingTriangleTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameRightFacingTriangleTemplate")))
 }
 
-// NSImageNameMultipleDocuments returns the string constant NSImageNameMultipleDocuments as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameMultipleDocuments() objc.ID {
-	return purego.CFConstant(raw.NSImageNameMultipleDocuments())
+// NSImageNameLeftFacingTriangleTemplate returns the string constant NSImageNameLeftFacingTriangleTemplate, for use as a dictionary key or argument.
+func NSImageNameLeftFacingTriangleTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameLeftFacingTriangleTemplate")))
 }
 
-// NSImageNameUserAccounts returns the string constant NSImageNameUserAccounts as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameUserAccounts() objc.ID {
-	return purego.CFConstant(raw.NSImageNameUserAccounts())
+// NSImageNameDotMac returns the string constant NSImageNameDotMac, for use as a dictionary key or argument.
+func NSImageNameDotMac() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSImageNameDotMac"))) }
+
+// NSImageNameMobileMe returns the string constant NSImageNameMobileMe, for use as a dictionary key or argument.
+func NSImageNameMobileMe() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameMobileMe")))
 }
 
-// NSImageNamePreferencesGeneral returns the string constant NSImageNamePreferencesGeneral as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNamePreferencesGeneral() objc.ID {
-	return purego.CFConstant(raw.NSImageNamePreferencesGeneral())
+// NSImageNameMultipleDocuments returns the string constant NSImageNameMultipleDocuments, for use as a dictionary key or argument.
+func NSImageNameMultipleDocuments() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameMultipleDocuments")))
 }
 
-// NSImageNameAdvanced returns the string constant NSImageNameAdvanced as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameAdvanced() objc.ID {
-	return purego.CFConstant(raw.NSImageNameAdvanced())
+// NSImageNameUserAccounts returns the string constant NSImageNameUserAccounts, for use as a dictionary key or argument.
+func NSImageNameUserAccounts() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameUserAccounts")))
 }
 
-// NSImageNameInfo returns the string constant NSImageNameInfo as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameInfo() objc.ID {
-	return purego.CFConstant(raw.NSImageNameInfo())
+// NSImageNamePreferencesGeneral returns the string constant NSImageNamePreferencesGeneral, for use as a dictionary key or argument.
+func NSImageNamePreferencesGeneral() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNamePreferencesGeneral")))
 }
 
-// NSImageNameFontPanel returns the string constant NSImageNameFontPanel as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameFontPanel() objc.ID {
-	return purego.CFConstant(raw.NSImageNameFontPanel())
+// NSImageNameAdvanced returns the string constant NSImageNameAdvanced, for use as a dictionary key or argument.
+func NSImageNameAdvanced() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameAdvanced")))
 }
 
-// NSImageNameColorPanel returns the string constant NSImageNameColorPanel as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameColorPanel() objc.ID {
-	return purego.CFConstant(raw.NSImageNameColorPanel())
+// NSImageNameInfo returns the string constant NSImageNameInfo, for use as a dictionary key or argument.
+func NSImageNameInfo() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSImageNameInfo"))) }
+
+// NSImageNameFontPanel returns the string constant NSImageNameFontPanel, for use as a dictionary key or argument.
+func NSImageNameFontPanel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameFontPanel")))
 }
 
-// NSImageNameUser returns the string constant NSImageNameUser as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameUser() objc.ID {
-	return purego.CFConstant(raw.NSImageNameUser())
+// NSImageNameColorPanel returns the string constant NSImageNameColorPanel, for use as a dictionary key or argument.
+func NSImageNameColorPanel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameColorPanel")))
 }
+
+// NSImageNameUser returns the string constant NSImageNameUser, for use as a dictionary key or argument.
+func NSImageNameUser() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSImageNameUser"))) }
 
-// NSImageNameUserGroup returns the string constant NSImageNameUserGroup as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameUserGroup() objc.ID {
-	return purego.CFConstant(raw.NSImageNameUserGroup())
+// NSImageNameUserGroup returns the string constant NSImageNameUserGroup, for use as a dictionary key or argument.
+func NSImageNameUserGroup() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameUserGroup")))
 }
 
-// NSImageNameEveryone returns the string constant NSImageNameEveryone as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameEveryone() objc.ID {
-	return purego.CFConstant(raw.NSImageNameEveryone())
+// NSImageNameEveryone returns the string constant NSImageNameEveryone, for use as a dictionary key or argument.
+func NSImageNameEveryone() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameEveryone")))
 }
 
-// NSImageNameUserGuest returns the string constant NSImageNameUserGuest as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameUserGuest() objc.ID {
-	return purego.CFConstant(raw.NSImageNameUserGuest())
+// NSImageNameUserGuest returns the string constant NSImageNameUserGuest, for use as a dictionary key or argument.
+func NSImageNameUserGuest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameUserGuest")))
 }
 
-// NSImageNameMenuOnStateTemplate returns the string constant NSImageNameMenuOnStateTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameMenuOnStateTemplate() objc.ID {
-	return purego.CFConstant(raw.NSImageNameMenuOnStateTemplate())
+// NSImageNameMenuOnStateTemplate returns the string constant NSImageNameMenuOnStateTemplate, for use as a dictionary key or argument.
+func NSImageNameMenuOnStateTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameMenuOnStateTemplate")))
 }
 
-// NSImageNameMenuMixedStateTemplate returns the string constant NSImageNameMenuMixedStateTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameMenuMixedStateTemplate() objc.ID {
-	return purego.CFConstant(raw.NSImageNameMenuMixedStateTemplate())
+// NSImageNameMenuMixedStateTemplate returns the string constant NSImageNameMenuMixedStateTemplate, for use as a dictionary key or argument.
+func NSImageNameMenuMixedStateTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameMenuMixedStateTemplate")))
 }
 
-// NSImageNameApplicationIcon returns the string constant NSImageNameApplicationIcon as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameApplicationIcon() objc.ID {
-	return purego.CFConstant(raw.NSImageNameApplicationIcon())
+// NSImageNameApplicationIcon returns the string constant NSImageNameApplicationIcon, for use as a dictionary key or argument.
+func NSImageNameApplicationIcon() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameApplicationIcon")))
 }
 
-// NSImageNameTouchBarAddDetailTemplate returns the string constant NSImageNameTouchBarAddDetailTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarAddDetailTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarAddDetailTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarAddDetailTemplate returns the string constant NSImageNameTouchBarAddDetailTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarAddDetailTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarAddDetailTemplate")))
 }
 
-// NSImageNameTouchBarAddTemplate returns the string constant NSImageNameTouchBarAddTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarAddTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarAddTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarAddTemplate returns the string constant NSImageNameTouchBarAddTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarAddTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarAddTemplate")))
 }
 
-// NSImageNameTouchBarAlarmTemplate returns the string constant NSImageNameTouchBarAlarmTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarAlarmTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarAlarmTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarAlarmTemplate returns the string constant NSImageNameTouchBarAlarmTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarAlarmTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarAlarmTemplate")))
 }
 
-// NSImageNameTouchBarAudioInputMuteTemplate returns the string constant NSImageNameTouchBarAudioInputMuteTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarAudioInputMuteTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarAudioInputMuteTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarAudioInputMuteTemplate returns the string constant NSImageNameTouchBarAudioInputMuteTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarAudioInputMuteTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarAudioInputMuteTemplate")))
 }
 
-// NSImageNameTouchBarAudioInputTemplate returns the string constant NSImageNameTouchBarAudioInputTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarAudioInputTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarAudioInputTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarAudioInputTemplate returns the string constant NSImageNameTouchBarAudioInputTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarAudioInputTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarAudioInputTemplate")))
 }
 
-// NSImageNameTouchBarAudioOutputMuteTemplate returns the string constant NSImageNameTouchBarAudioOutputMuteTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarAudioOutputMuteTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarAudioOutputMuteTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarAudioOutputMuteTemplate returns the string constant NSImageNameTouchBarAudioOutputMuteTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarAudioOutputMuteTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarAudioOutputMuteTemplate")))
 }
 
-// NSImageNameTouchBarAudioOutputVolumeHighTemplate returns the string constant NSImageNameTouchBarAudioOutputVolumeHighTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarAudioOutputVolumeHighTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarAudioOutputVolumeHighTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarAudioOutputVolumeHighTemplate returns the string constant NSImageNameTouchBarAudioOutputVolumeHighTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarAudioOutputVolumeHighTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarAudioOutputVolumeHighTemplate")))
 }
 
-// NSImageNameTouchBarAudioOutputVolumeLowTemplate returns the string constant NSImageNameTouchBarAudioOutputVolumeLowTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarAudioOutputVolumeLowTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarAudioOutputVolumeLowTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarAudioOutputVolumeLowTemplate returns the string constant NSImageNameTouchBarAudioOutputVolumeLowTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarAudioOutputVolumeLowTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarAudioOutputVolumeLowTemplate")))
 }
 
-// NSImageNameTouchBarAudioOutputVolumeMediumTemplate returns the string constant NSImageNameTouchBarAudioOutputVolumeMediumTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarAudioOutputVolumeMediumTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarAudioOutputVolumeMediumTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarAudioOutputVolumeMediumTemplate returns the string constant NSImageNameTouchBarAudioOutputVolumeMediumTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarAudioOutputVolumeMediumTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarAudioOutputVolumeMediumTemplate")))
 }
 
-// NSImageNameTouchBarAudioOutputVolumeOffTemplate returns the string constant NSImageNameTouchBarAudioOutputVolumeOffTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarAudioOutputVolumeOffTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarAudioOutputVolumeOffTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarAudioOutputVolumeOffTemplate returns the string constant NSImageNameTouchBarAudioOutputVolumeOffTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarAudioOutputVolumeOffTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarAudioOutputVolumeOffTemplate")))
 }
 
-// NSImageNameTouchBarBookmarksTemplate returns the string constant NSImageNameTouchBarBookmarksTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarBookmarksTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarBookmarksTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarBookmarksTemplate returns the string constant NSImageNameTouchBarBookmarksTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarBookmarksTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarBookmarksTemplate")))
 }
 
-// NSImageNameTouchBarColorPickerFill returns the string constant NSImageNameTouchBarColorPickerFill as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarColorPickerFill() objc.ID {
-	if _r := raw.NSImageNameTouchBarColorPickerFill(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarColorPickerFill returns the string constant NSImageNameTouchBarColorPickerFill, for use as a dictionary key or argument.
+func NSImageNameTouchBarColorPickerFill() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarColorPickerFill")))
 }
 
-// NSImageNameTouchBarColorPickerFont returns the string constant NSImageNameTouchBarColorPickerFont as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarColorPickerFont() objc.ID {
-	if _r := raw.NSImageNameTouchBarColorPickerFont(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarColorPickerFont returns the string constant NSImageNameTouchBarColorPickerFont, for use as a dictionary key or argument.
+func NSImageNameTouchBarColorPickerFont() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarColorPickerFont")))
 }
 
-// NSImageNameTouchBarColorPickerStroke returns the string constant NSImageNameTouchBarColorPickerStroke as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarColorPickerStroke() objc.ID {
-	if _r := raw.NSImageNameTouchBarColorPickerStroke(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarColorPickerStroke returns the string constant NSImageNameTouchBarColorPickerStroke, for use as a dictionary key or argument.
+func NSImageNameTouchBarColorPickerStroke() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarColorPickerStroke")))
 }
 
-// NSImageNameTouchBarCommunicationAudioTemplate returns the string constant NSImageNameTouchBarCommunicationAudioTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarCommunicationAudioTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarCommunicationAudioTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarCommunicationAudioTemplate returns the string constant NSImageNameTouchBarCommunicationAudioTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarCommunicationAudioTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarCommunicationAudioTemplate")))
 }
 
-// NSImageNameTouchBarCommunicationVideoTemplate returns the string constant NSImageNameTouchBarCommunicationVideoTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarCommunicationVideoTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarCommunicationVideoTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarCommunicationVideoTemplate returns the string constant NSImageNameTouchBarCommunicationVideoTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarCommunicationVideoTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarCommunicationVideoTemplate")))
 }
 
-// NSImageNameTouchBarComposeTemplate returns the string constant NSImageNameTouchBarComposeTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarComposeTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarComposeTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarComposeTemplate returns the string constant NSImageNameTouchBarComposeTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarComposeTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarComposeTemplate")))
 }
 
-// NSImageNameTouchBarDeleteTemplate returns the string constant NSImageNameTouchBarDeleteTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarDeleteTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarDeleteTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarDeleteTemplate returns the string constant NSImageNameTouchBarDeleteTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarDeleteTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarDeleteTemplate")))
 }
 
-// NSImageNameTouchBarDownloadTemplate returns the string constant NSImageNameTouchBarDownloadTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarDownloadTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarDownloadTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarDownloadTemplate returns the string constant NSImageNameTouchBarDownloadTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarDownloadTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarDownloadTemplate")))
 }
 
-// NSImageNameTouchBarEnterFullScreenTemplate returns the string constant NSImageNameTouchBarEnterFullScreenTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarEnterFullScreenTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarEnterFullScreenTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarEnterFullScreenTemplate returns the string constant NSImageNameTouchBarEnterFullScreenTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarEnterFullScreenTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarEnterFullScreenTemplate")))
 }
 
-// NSImageNameTouchBarExitFullScreenTemplate returns the string constant NSImageNameTouchBarExitFullScreenTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarExitFullScreenTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarExitFullScreenTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarExitFullScreenTemplate returns the string constant NSImageNameTouchBarExitFullScreenTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarExitFullScreenTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarExitFullScreenTemplate")))
 }
 
-// NSImageNameTouchBarFastForwardTemplate returns the string constant NSImageNameTouchBarFastForwardTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarFastForwardTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarFastForwardTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarFastForwardTemplate returns the string constant NSImageNameTouchBarFastForwardTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarFastForwardTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarFastForwardTemplate")))
 }
 
-// NSImageNameTouchBarFolderCopyToTemplate returns the string constant NSImageNameTouchBarFolderCopyToTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarFolderCopyToTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarFolderCopyToTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarFolderCopyToTemplate returns the string constant NSImageNameTouchBarFolderCopyToTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarFolderCopyToTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarFolderCopyToTemplate")))
 }
 
-// NSImageNameTouchBarFolderMoveToTemplate returns the string constant NSImageNameTouchBarFolderMoveToTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarFolderMoveToTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarFolderMoveToTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarFolderMoveToTemplate returns the string constant NSImageNameTouchBarFolderMoveToTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarFolderMoveToTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarFolderMoveToTemplate")))
 }
 
-// NSImageNameTouchBarFolderTemplate returns the string constant NSImageNameTouchBarFolderTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarFolderTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarFolderTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarFolderTemplate returns the string constant NSImageNameTouchBarFolderTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarFolderTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarFolderTemplate")))
 }
 
-// NSImageNameTouchBarGetInfoTemplate returns the string constant NSImageNameTouchBarGetInfoTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarGetInfoTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarGetInfoTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarGetInfoTemplate returns the string constant NSImageNameTouchBarGetInfoTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarGetInfoTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarGetInfoTemplate")))
 }
 
-// NSImageNameTouchBarGoBackTemplate returns the string constant NSImageNameTouchBarGoBackTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarGoBackTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarGoBackTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarGoBackTemplate returns the string constant NSImageNameTouchBarGoBackTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarGoBackTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarGoBackTemplate")))
 }
 
-// NSImageNameTouchBarGoDownTemplate returns the string constant NSImageNameTouchBarGoDownTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarGoDownTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarGoDownTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarGoDownTemplate returns the string constant NSImageNameTouchBarGoDownTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarGoDownTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarGoDownTemplate")))
 }
 
-// NSImageNameTouchBarGoForwardTemplate returns the string constant NSImageNameTouchBarGoForwardTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarGoForwardTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarGoForwardTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarGoForwardTemplate returns the string constant NSImageNameTouchBarGoForwardTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarGoForwardTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarGoForwardTemplate")))
 }
 
-// NSImageNameTouchBarGoUpTemplate returns the string constant NSImageNameTouchBarGoUpTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarGoUpTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarGoUpTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarGoUpTemplate returns the string constant NSImageNameTouchBarGoUpTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarGoUpTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarGoUpTemplate")))
 }
 
-// NSImageNameTouchBarHistoryTemplate returns the string constant NSImageNameTouchBarHistoryTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarHistoryTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarHistoryTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarHistoryTemplate returns the string constant NSImageNameTouchBarHistoryTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarHistoryTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarHistoryTemplate")))
 }
 
-// NSImageNameTouchBarIconViewTemplate returns the string constant NSImageNameTouchBarIconViewTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarIconViewTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarIconViewTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarIconViewTemplate returns the string constant NSImageNameTouchBarIconViewTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarIconViewTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarIconViewTemplate")))
 }
 
-// NSImageNameTouchBarListViewTemplate returns the string constant NSImageNameTouchBarListViewTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarListViewTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarListViewTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarListViewTemplate returns the string constant NSImageNameTouchBarListViewTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarListViewTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarListViewTemplate")))
 }
 
-// NSImageNameTouchBarMailTemplate returns the string constant NSImageNameTouchBarMailTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarMailTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarMailTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarMailTemplate returns the string constant NSImageNameTouchBarMailTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarMailTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarMailTemplate")))
 }
 
-// NSImageNameTouchBarNewFolderTemplate returns the string constant NSImageNameTouchBarNewFolderTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarNewFolderTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarNewFolderTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarNewFolderTemplate returns the string constant NSImageNameTouchBarNewFolderTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarNewFolderTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarNewFolderTemplate")))
 }
 
-// NSImageNameTouchBarNewMessageTemplate returns the string constant NSImageNameTouchBarNewMessageTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarNewMessageTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarNewMessageTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarNewMessageTemplate returns the string constant NSImageNameTouchBarNewMessageTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarNewMessageTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarNewMessageTemplate")))
 }
 
-// NSImageNameTouchBarOpenInBrowserTemplate returns the string constant NSImageNameTouchBarOpenInBrowserTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarOpenInBrowserTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarOpenInBrowserTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarOpenInBrowserTemplate returns the string constant NSImageNameTouchBarOpenInBrowserTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarOpenInBrowserTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarOpenInBrowserTemplate")))
 }
 
-// NSImageNameTouchBarPauseTemplate returns the string constant NSImageNameTouchBarPauseTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarPauseTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarPauseTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarPauseTemplate returns the string constant NSImageNameTouchBarPauseTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarPauseTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarPauseTemplate")))
 }
 
-// NSImageNameTouchBarPlayPauseTemplate returns the string constant NSImageNameTouchBarPlayPauseTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarPlayPauseTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarPlayPauseTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarPlayPauseTemplate returns the string constant NSImageNameTouchBarPlayPauseTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarPlayPauseTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarPlayPauseTemplate")))
 }
 
-// NSImageNameTouchBarPlayTemplate returns the string constant NSImageNameTouchBarPlayTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarPlayTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarPlayTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarPlayTemplate returns the string constant NSImageNameTouchBarPlayTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarPlayTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarPlayTemplate")))
 }
 
-// NSImageNameTouchBarQuickLookTemplate returns the string constant NSImageNameTouchBarQuickLookTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarQuickLookTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarQuickLookTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarQuickLookTemplate returns the string constant NSImageNameTouchBarQuickLookTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarQuickLookTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarQuickLookTemplate")))
 }
 
-// NSImageNameTouchBarRecordStartTemplate returns the string constant NSImageNameTouchBarRecordStartTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarRecordStartTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarRecordStartTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarRecordStartTemplate returns the string constant NSImageNameTouchBarRecordStartTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarRecordStartTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarRecordStartTemplate")))
 }
 
-// NSImageNameTouchBarRecordStopTemplate returns the string constant NSImageNameTouchBarRecordStopTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarRecordStopTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarRecordStopTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarRecordStopTemplate returns the string constant NSImageNameTouchBarRecordStopTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarRecordStopTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarRecordStopTemplate")))
 }
 
-// NSImageNameTouchBarRefreshTemplate returns the string constant NSImageNameTouchBarRefreshTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarRefreshTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarRefreshTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarRefreshTemplate returns the string constant NSImageNameTouchBarRefreshTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarRefreshTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarRefreshTemplate")))
 }
 
-// NSImageNameTouchBarRemoveTemplate returns the string constant NSImageNameTouchBarRemoveTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarRemoveTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarRemoveTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarRemoveTemplate returns the string constant NSImageNameTouchBarRemoveTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarRemoveTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarRemoveTemplate")))
 }
 
-// NSImageNameTouchBarRewindTemplate returns the string constant NSImageNameTouchBarRewindTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarRewindTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarRewindTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarRewindTemplate returns the string constant NSImageNameTouchBarRewindTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarRewindTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarRewindTemplate")))
 }
 
-// NSImageNameTouchBarRotateLeftTemplate returns the string constant NSImageNameTouchBarRotateLeftTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarRotateLeftTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarRotateLeftTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarRotateLeftTemplate returns the string constant NSImageNameTouchBarRotateLeftTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarRotateLeftTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarRotateLeftTemplate")))
 }
 
-// NSImageNameTouchBarRotateRightTemplate returns the string constant NSImageNameTouchBarRotateRightTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarRotateRightTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarRotateRightTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarRotateRightTemplate returns the string constant NSImageNameTouchBarRotateRightTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarRotateRightTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarRotateRightTemplate")))
 }
 
-// NSImageNameTouchBarSearchTemplate returns the string constant NSImageNameTouchBarSearchTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarSearchTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarSearchTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarSearchTemplate returns the string constant NSImageNameTouchBarSearchTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarSearchTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarSearchTemplate")))
 }
 
-// NSImageNameTouchBarShareTemplate returns the string constant NSImageNameTouchBarShareTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarShareTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarShareTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarShareTemplate returns the string constant NSImageNameTouchBarShareTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarShareTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarShareTemplate")))
 }
 
-// NSImageNameTouchBarSidebarTemplate returns the string constant NSImageNameTouchBarSidebarTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarSidebarTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarSidebarTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarSidebarTemplate returns the string constant NSImageNameTouchBarSidebarTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarSidebarTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarSidebarTemplate")))
 }
 
-// NSImageNameTouchBarSkipAhead15SecondsTemplate returns the string constant NSImageNameTouchBarSkipAhead15SecondsTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarSkipAhead15SecondsTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarSkipAhead15SecondsTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarSkipAhead15SecondsTemplate returns the string constant NSImageNameTouchBarSkipAhead15SecondsTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarSkipAhead15SecondsTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarSkipAhead15SecondsTemplate")))
 }
 
-// NSImageNameTouchBarSkipAhead30SecondsTemplate returns the string constant NSImageNameTouchBarSkipAhead30SecondsTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarSkipAhead30SecondsTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarSkipAhead30SecondsTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarSkipAhead30SecondsTemplate returns the string constant NSImageNameTouchBarSkipAhead30SecondsTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarSkipAhead30SecondsTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarSkipAhead30SecondsTemplate")))
 }
 
-// NSImageNameTouchBarSkipAheadTemplate returns the string constant NSImageNameTouchBarSkipAheadTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarSkipAheadTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarSkipAheadTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarSkipAheadTemplate returns the string constant NSImageNameTouchBarSkipAheadTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarSkipAheadTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarSkipAheadTemplate")))
 }
 
-// NSImageNameTouchBarSkipBack15SecondsTemplate returns the string constant NSImageNameTouchBarSkipBack15SecondsTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarSkipBack15SecondsTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarSkipBack15SecondsTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarSkipBack15SecondsTemplate returns the string constant NSImageNameTouchBarSkipBack15SecondsTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarSkipBack15SecondsTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarSkipBack15SecondsTemplate")))
 }
 
-// NSImageNameTouchBarSkipBack30SecondsTemplate returns the string constant NSImageNameTouchBarSkipBack30SecondsTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarSkipBack30SecondsTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarSkipBack30SecondsTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarSkipBack30SecondsTemplate returns the string constant NSImageNameTouchBarSkipBack30SecondsTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarSkipBack30SecondsTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarSkipBack30SecondsTemplate")))
 }
 
-// NSImageNameTouchBarSkipBackTemplate returns the string constant NSImageNameTouchBarSkipBackTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarSkipBackTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarSkipBackTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarSkipBackTemplate returns the string constant NSImageNameTouchBarSkipBackTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarSkipBackTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarSkipBackTemplate")))
 }
 
-// NSImageNameTouchBarSkipToEndTemplate returns the string constant NSImageNameTouchBarSkipToEndTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarSkipToEndTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarSkipToEndTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarSkipToEndTemplate returns the string constant NSImageNameTouchBarSkipToEndTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarSkipToEndTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarSkipToEndTemplate")))
 }
 
-// NSImageNameTouchBarSkipToStartTemplate returns the string constant NSImageNameTouchBarSkipToStartTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarSkipToStartTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarSkipToStartTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarSkipToStartTemplate returns the string constant NSImageNameTouchBarSkipToStartTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarSkipToStartTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarSkipToStartTemplate")))
 }
 
-// NSImageNameTouchBarSlideshowTemplate returns the string constant NSImageNameTouchBarSlideshowTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarSlideshowTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarSlideshowTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarSlideshowTemplate returns the string constant NSImageNameTouchBarSlideshowTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarSlideshowTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarSlideshowTemplate")))
 }
 
-// NSImageNameTouchBarTagIconTemplate returns the string constant NSImageNameTouchBarTagIconTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarTagIconTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarTagIconTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarTagIconTemplate returns the string constant NSImageNameTouchBarTagIconTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarTagIconTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarTagIconTemplate")))
 }
 
-// NSImageNameTouchBarTextBoldTemplate returns the string constant NSImageNameTouchBarTextBoldTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarTextBoldTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarTextBoldTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarTextBoldTemplate returns the string constant NSImageNameTouchBarTextBoldTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarTextBoldTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarTextBoldTemplate")))
 }
 
-// NSImageNameTouchBarTextBoxTemplate returns the string constant NSImageNameTouchBarTextBoxTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarTextBoxTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarTextBoxTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarTextBoxTemplate returns the string constant NSImageNameTouchBarTextBoxTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarTextBoxTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarTextBoxTemplate")))
 }
 
-// NSImageNameTouchBarTextCenterAlignTemplate returns the string constant NSImageNameTouchBarTextCenterAlignTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarTextCenterAlignTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarTextCenterAlignTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarTextCenterAlignTemplate returns the string constant NSImageNameTouchBarTextCenterAlignTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarTextCenterAlignTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarTextCenterAlignTemplate")))
 }
 
-// NSImageNameTouchBarTextItalicTemplate returns the string constant NSImageNameTouchBarTextItalicTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarTextItalicTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarTextItalicTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarTextItalicTemplate returns the string constant NSImageNameTouchBarTextItalicTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarTextItalicTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarTextItalicTemplate")))
 }
 
-// NSImageNameTouchBarTextJustifiedAlignTemplate returns the string constant NSImageNameTouchBarTextJustifiedAlignTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarTextJustifiedAlignTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarTextJustifiedAlignTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarTextJustifiedAlignTemplate returns the string constant NSImageNameTouchBarTextJustifiedAlignTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarTextJustifiedAlignTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarTextJustifiedAlignTemplate")))
 }
 
-// NSImageNameTouchBarTextLeftAlignTemplate returns the string constant NSImageNameTouchBarTextLeftAlignTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarTextLeftAlignTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarTextLeftAlignTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarTextLeftAlignTemplate returns the string constant NSImageNameTouchBarTextLeftAlignTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarTextLeftAlignTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarTextLeftAlignTemplate")))
 }
 
-// NSImageNameTouchBarTextListTemplate returns the string constant NSImageNameTouchBarTextListTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarTextListTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarTextListTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarTextListTemplate returns the string constant NSImageNameTouchBarTextListTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarTextListTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarTextListTemplate")))
 }
 
-// NSImageNameTouchBarTextRightAlignTemplate returns the string constant NSImageNameTouchBarTextRightAlignTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarTextRightAlignTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarTextRightAlignTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarTextRightAlignTemplate returns the string constant NSImageNameTouchBarTextRightAlignTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarTextRightAlignTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarTextRightAlignTemplate")))
 }
 
-// NSImageNameTouchBarTextStrikethroughTemplate returns the string constant NSImageNameTouchBarTextStrikethroughTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarTextStrikethroughTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarTextStrikethroughTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarTextStrikethroughTemplate returns the string constant NSImageNameTouchBarTextStrikethroughTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarTextStrikethroughTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarTextStrikethroughTemplate")))
 }
 
-// NSImageNameTouchBarTextUnderlineTemplate returns the string constant NSImageNameTouchBarTextUnderlineTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarTextUnderlineTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarTextUnderlineTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarTextUnderlineTemplate returns the string constant NSImageNameTouchBarTextUnderlineTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarTextUnderlineTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarTextUnderlineTemplate")))
 }
 
-// NSImageNameTouchBarUserAddTemplate returns the string constant NSImageNameTouchBarUserAddTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarUserAddTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarUserAddTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarUserAddTemplate returns the string constant NSImageNameTouchBarUserAddTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarUserAddTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarUserAddTemplate")))
 }
 
-// NSImageNameTouchBarUserGroupTemplate returns the string constant NSImageNameTouchBarUserGroupTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarUserGroupTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarUserGroupTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarUserGroupTemplate returns the string constant NSImageNameTouchBarUserGroupTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarUserGroupTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarUserGroupTemplate")))
 }
 
-// NSImageNameTouchBarUserTemplate returns the string constant NSImageNameTouchBarUserTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarUserTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarUserTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarUserTemplate returns the string constant NSImageNameTouchBarUserTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarUserTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarUserTemplate")))
 }
 
-// NSImageNameTouchBarVolumeDownTemplate returns the string constant NSImageNameTouchBarVolumeDownTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarVolumeDownTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarVolumeDownTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarVolumeDownTemplate returns the string constant NSImageNameTouchBarVolumeDownTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarVolumeDownTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarVolumeDownTemplate")))
 }
 
-// NSImageNameTouchBarVolumeUpTemplate returns the string constant NSImageNameTouchBarVolumeUpTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarVolumeUpTemplate() objc.ID {
-	if _r := raw.NSImageNameTouchBarVolumeUpTemplate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSImageNameTouchBarVolumeUpTemplate returns the string constant NSImageNameTouchBarVolumeUpTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarVolumeUpTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarVolumeUpTemplate")))
 }
 
-// NSImageNameTouchBarPlayheadTemplate returns the string constant NSImageNameTouchBarPlayheadTemplate as an objc.ID, for use as a dictionary key or selector argument.
-func NSImageNameTouchBarPlayheadTemplate() objc.ID {
-	return purego.CFConstant(raw.NSImageNameTouchBarPlayheadTemplate())
+// NSImageNameTouchBarPlayheadTemplate returns the string constant NSImageNameTouchBarPlayheadTemplate, for use as a dictionary key or argument.
+func NSImageNameTouchBarPlayheadTemplate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSImageNameTouchBarPlayheadTemplate")))
 }
 
-// NSSharingServiceNameComposeEmail returns the string constant NSSharingServiceNameComposeEmail as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNameComposeEmail() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNameComposeEmail())
+// NSSharingServiceNameComposeEmail returns the string constant NSSharingServiceNameComposeEmail, for use as a dictionary key or argument.
+func NSSharingServiceNameComposeEmail() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNameComposeEmail")))
 }
 
-// NSSharingServiceNameComposeMessage returns the string constant NSSharingServiceNameComposeMessage as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNameComposeMessage() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNameComposeMessage())
+// NSSharingServiceNameComposeMessage returns the string constant NSSharingServiceNameComposeMessage, for use as a dictionary key or argument.
+func NSSharingServiceNameComposeMessage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNameComposeMessage")))
 }
 
-// NSSharingServiceNameSendViaAirDrop returns the string constant NSSharingServiceNameSendViaAirDrop as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNameSendViaAirDrop() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNameSendViaAirDrop())
+// NSSharingServiceNameSendViaAirDrop returns the string constant NSSharingServiceNameSendViaAirDrop, for use as a dictionary key or argument.
+func NSSharingServiceNameSendViaAirDrop() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNameSendViaAirDrop")))
 }
 
-// NSSharingServiceNameAddToSafariReadingList returns the string constant NSSharingServiceNameAddToSafariReadingList as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNameAddToSafariReadingList() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNameAddToSafariReadingList())
+// NSSharingServiceNameAddToSafariReadingList returns the string constant NSSharingServiceNameAddToSafariReadingList, for use as a dictionary key or argument.
+func NSSharingServiceNameAddToSafariReadingList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNameAddToSafariReadingList")))
 }
 
-// NSSharingServiceNameAddToIPhoto returns the string constant NSSharingServiceNameAddToIPhoto as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNameAddToIPhoto() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNameAddToIPhoto())
+// NSSharingServiceNameAddToIPhoto returns the string constant NSSharingServiceNameAddToIPhoto, for use as a dictionary key or argument.
+func NSSharingServiceNameAddToIPhoto() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNameAddToIPhoto")))
 }
 
-// NSSharingServiceNameAddToAperture returns the string constant NSSharingServiceNameAddToAperture as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNameAddToAperture() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNameAddToAperture())
+// NSSharingServiceNameAddToAperture returns the string constant NSSharingServiceNameAddToAperture, for use as a dictionary key or argument.
+func NSSharingServiceNameAddToAperture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNameAddToAperture")))
 }
 
-// NSSharingServiceNameUseAsDesktopPicture returns the string constant NSSharingServiceNameUseAsDesktopPicture as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNameUseAsDesktopPicture() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNameUseAsDesktopPicture())
+// NSSharingServiceNameUseAsDesktopPicture returns the string constant NSSharingServiceNameUseAsDesktopPicture, for use as a dictionary key or argument.
+func NSSharingServiceNameUseAsDesktopPicture() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNameUseAsDesktopPicture")))
 }
 
-// NSSharingServiceNamePostOnFacebook returns the string constant NSSharingServiceNamePostOnFacebook as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNamePostOnFacebook() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNamePostOnFacebook())
+// NSSharingServiceNamePostOnFacebook returns the string constant NSSharingServiceNamePostOnFacebook, for use as a dictionary key or argument.
+func NSSharingServiceNamePostOnFacebook() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNamePostOnFacebook")))
 }
 
-// NSSharingServiceNamePostOnTwitter returns the string constant NSSharingServiceNamePostOnTwitter as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNamePostOnTwitter() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNamePostOnTwitter())
+// NSSharingServiceNamePostOnTwitter returns the string constant NSSharingServiceNamePostOnTwitter, for use as a dictionary key or argument.
+func NSSharingServiceNamePostOnTwitter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNamePostOnTwitter")))
 }
 
-// NSSharingServiceNamePostOnSinaWeibo returns the string constant NSSharingServiceNamePostOnSinaWeibo as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNamePostOnSinaWeibo() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNamePostOnSinaWeibo())
+// NSSharingServiceNamePostOnSinaWeibo returns the string constant NSSharingServiceNamePostOnSinaWeibo, for use as a dictionary key or argument.
+func NSSharingServiceNamePostOnSinaWeibo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNamePostOnSinaWeibo")))
 }
 
-// NSSharingServiceNamePostOnTencentWeibo returns the string constant NSSharingServiceNamePostOnTencentWeibo as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNamePostOnTencentWeibo() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNamePostOnTencentWeibo())
+// NSSharingServiceNamePostOnTencentWeibo returns the string constant NSSharingServiceNamePostOnTencentWeibo, for use as a dictionary key or argument.
+func NSSharingServiceNamePostOnTencentWeibo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNamePostOnTencentWeibo")))
 }
 
-// NSSharingServiceNamePostOnLinkedIn returns the string constant NSSharingServiceNamePostOnLinkedIn as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNamePostOnLinkedIn() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNamePostOnLinkedIn())
+// NSSharingServiceNamePostOnLinkedIn returns the string constant NSSharingServiceNamePostOnLinkedIn, for use as a dictionary key or argument.
+func NSSharingServiceNamePostOnLinkedIn() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNamePostOnLinkedIn")))
 }
 
-// NSSharingServiceNameUseAsTwitterProfileImage returns the string constant NSSharingServiceNameUseAsTwitterProfileImage as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNameUseAsTwitterProfileImage() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNameUseAsTwitterProfileImage())
+// NSSharingServiceNameUseAsTwitterProfileImage returns the string constant NSSharingServiceNameUseAsTwitterProfileImage, for use as a dictionary key or argument.
+func NSSharingServiceNameUseAsTwitterProfileImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNameUseAsTwitterProfileImage")))
 }
 
-// NSSharingServiceNameUseAsFacebookProfileImage returns the string constant NSSharingServiceNameUseAsFacebookProfileImage as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNameUseAsFacebookProfileImage() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNameUseAsFacebookProfileImage())
+// NSSharingServiceNameUseAsFacebookProfileImage returns the string constant NSSharingServiceNameUseAsFacebookProfileImage, for use as a dictionary key or argument.
+func NSSharingServiceNameUseAsFacebookProfileImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNameUseAsFacebookProfileImage")))
 }
 
-// NSSharingServiceNameUseAsLinkedInProfileImage returns the string constant NSSharingServiceNameUseAsLinkedInProfileImage as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNameUseAsLinkedInProfileImage() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNameUseAsLinkedInProfileImage())
+// NSSharingServiceNameUseAsLinkedInProfileImage returns the string constant NSSharingServiceNameUseAsLinkedInProfileImage, for use as a dictionary key or argument.
+func NSSharingServiceNameUseAsLinkedInProfileImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNameUseAsLinkedInProfileImage")))
 }
 
-// NSSharingServiceNamePostImageOnFlickr returns the string constant NSSharingServiceNamePostImageOnFlickr as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNamePostImageOnFlickr() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNamePostImageOnFlickr())
+// NSSharingServiceNamePostImageOnFlickr returns the string constant NSSharingServiceNamePostImageOnFlickr, for use as a dictionary key or argument.
+func NSSharingServiceNamePostImageOnFlickr() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNamePostImageOnFlickr")))
 }
 
-// NSSharingServiceNamePostVideoOnVimeo returns the string constant NSSharingServiceNamePostVideoOnVimeo as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNamePostVideoOnVimeo() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNamePostVideoOnVimeo())
+// NSSharingServiceNamePostVideoOnVimeo returns the string constant NSSharingServiceNamePostVideoOnVimeo, for use as a dictionary key or argument.
+func NSSharingServiceNamePostVideoOnVimeo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNamePostVideoOnVimeo")))
 }
 
-// NSSharingServiceNamePostVideoOnYouku returns the string constant NSSharingServiceNamePostVideoOnYouku as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNamePostVideoOnYouku() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNamePostVideoOnYouku())
+// NSSharingServiceNamePostVideoOnYouku returns the string constant NSSharingServiceNamePostVideoOnYouku, for use as a dictionary key or argument.
+func NSSharingServiceNamePostVideoOnYouku() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNamePostVideoOnYouku")))
 }
 
-// NSSharingServiceNamePostVideoOnTudou returns the string constant NSSharingServiceNamePostVideoOnTudou as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNamePostVideoOnTudou() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNamePostVideoOnTudou())
+// NSSharingServiceNamePostVideoOnTudou returns the string constant NSSharingServiceNamePostVideoOnTudou, for use as a dictionary key or argument.
+func NSSharingServiceNamePostVideoOnTudou() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNamePostVideoOnTudou")))
 }
 
 // This service differs from other NSSharingServices in that it allows the user to establish a persistent sharing session for the specified items with potentially many participants, instead of sending a copy of the items. You can invoke this service with an NSItemProvider that has registered a CKShare & CKContainer via either -registerCloudKitShare:container: or -registerCloudKitShareWithPreparationHandler:. (Registering other types on the same provider to enable other sharing services is allowed.) When performed, this service gives the user the opportunity to invite participants and start sharing. If the content is already shared, the service instead allows the user to view or modify participation or stop sharing. To detect changes the service makes to the CKShare, implement -sharingService:didSaveShare: and -sharingService:didStopSharing:.
-// NSSharingServiceNameCloudSharing returns the string constant NSSharingServiceNameCloudSharing as an objc.ID, for use as a dictionary key or selector argument.
-func NSSharingServiceNameCloudSharing() objc.ID {
-	return purego.CFConstant(raw.NSSharingServiceNameCloudSharing())
+// NSSharingServiceNameCloudSharing returns the string constant NSSharingServiceNameCloudSharing, for use as a dictionary key or argument.
+func NSSharingServiceNameCloudSharing() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSharingServiceNameCloudSharing")))
 }
 
-// NSVoiceName returns the string constant NSVoiceName as an objc.ID, for use as a dictionary key or selector argument.
-func NSVoiceName() objc.ID {
-	if _r := raw.NSVoiceName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSVoiceName returns the string constant NSVoiceName, for use as a dictionary key or argument.
+func NSVoiceName() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSVoiceName"))) }
 
-// NSVoiceIdentifier returns the string constant NSVoiceIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSVoiceIdentifier() objc.ID {
-	if _r := raw.NSVoiceIdentifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSVoiceIdentifier returns the string constant NSVoiceIdentifier, for use as a dictionary key or argument.
+func NSVoiceIdentifier() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSVoiceIdentifier"))) }
 
-// NSVoiceAge returns the string constant NSVoiceAge as an objc.ID, for use as a dictionary key or selector argument.
-func NSVoiceAge() objc.ID {
-	if _r := raw.NSVoiceAge(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSVoiceAge returns the string constant NSVoiceAge, for use as a dictionary key or argument.
+func NSVoiceAge() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSVoiceAge"))) }
 
-// NSVoiceGender returns the string constant NSVoiceGender as an objc.ID, for use as a dictionary key or selector argument.
-func NSVoiceGender() objc.ID {
-	if _r := raw.NSVoiceGender(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSVoiceGender returns the string constant NSVoiceGender, for use as a dictionary key or argument.
+func NSVoiceGender() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSVoiceGender"))) }
 
-// NSVoiceDemoText returns the string constant NSVoiceDemoText as an objc.ID, for use as a dictionary key or selector argument.
-func NSVoiceDemoText() objc.ID {
-	if _r := raw.NSVoiceDemoText(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSVoiceDemoText returns the string constant NSVoiceDemoText, for use as a dictionary key or argument.
+func NSVoiceDemoText() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSVoiceDemoText"))) }
 
-// NSVoiceLocaleIdentifier returns the string constant NSVoiceLocaleIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSVoiceLocaleIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSVoiceLocaleIdentifier())
+// NSVoiceLocaleIdentifier returns the string constant NSVoiceLocaleIdentifier, for use as a dictionary key or argument.
+func NSVoiceLocaleIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSVoiceLocaleIdentifier")))
 }
 
-// NSVoiceSupportedCharacters returns the string constant NSVoiceSupportedCharacters as an objc.ID, for use as a dictionary key or selector argument.
-func NSVoiceSupportedCharacters() objc.ID {
-	return purego.CFConstant(raw.NSVoiceSupportedCharacters())
+// NSVoiceSupportedCharacters returns the string constant NSVoiceSupportedCharacters, for use as a dictionary key or argument.
+func NSVoiceSupportedCharacters() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSVoiceSupportedCharacters")))
 }
 
-// NSVoiceIndividuallySpokenCharacters returns the string constant NSVoiceIndividuallySpokenCharacters as an objc.ID, for use as a dictionary key or selector argument.
-func NSVoiceIndividuallySpokenCharacters() objc.ID {
-	return purego.CFConstant(raw.NSVoiceIndividuallySpokenCharacters())
+// NSVoiceIndividuallySpokenCharacters returns the string constant NSVoiceIndividuallySpokenCharacters, for use as a dictionary key or argument.
+func NSVoiceIndividuallySpokenCharacters() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSVoiceIndividuallySpokenCharacters")))
 }
 
-// NSSpeechDictionaryLocaleIdentifier returns the string constant NSSpeechDictionaryLocaleIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechDictionaryLocaleIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSSpeechDictionaryLocaleIdentifier())
+// NSSpeechDictionaryLocaleIdentifier returns the string constant NSSpeechDictionaryLocaleIdentifier, for use as a dictionary key or argument.
+func NSSpeechDictionaryLocaleIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechDictionaryLocaleIdentifier")))
 }
 
-// NSSpeechDictionaryModificationDate returns the string constant NSSpeechDictionaryModificationDate as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechDictionaryModificationDate() objc.ID {
-	return purego.CFConstant(raw.NSSpeechDictionaryModificationDate())
+// NSSpeechDictionaryModificationDate returns the string constant NSSpeechDictionaryModificationDate, for use as a dictionary key or argument.
+func NSSpeechDictionaryModificationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechDictionaryModificationDate")))
 }
 
-// NSSpeechDictionaryPronunciations returns the string constant NSSpeechDictionaryPronunciations as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechDictionaryPronunciations() objc.ID {
-	return purego.CFConstant(raw.NSSpeechDictionaryPronunciations())
+// NSSpeechDictionaryPronunciations returns the string constant NSSpeechDictionaryPronunciations, for use as a dictionary key or argument.
+func NSSpeechDictionaryPronunciations() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechDictionaryPronunciations")))
 }
 
-// NSSpeechDictionaryAbbreviations returns the string constant NSSpeechDictionaryAbbreviations as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechDictionaryAbbreviations() objc.ID {
-	return purego.CFConstant(raw.NSSpeechDictionaryAbbreviations())
+// NSSpeechDictionaryAbbreviations returns the string constant NSSpeechDictionaryAbbreviations, for use as a dictionary key or argument.
+func NSSpeechDictionaryAbbreviations() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechDictionaryAbbreviations")))
 }
 
-// NSSpeechDictionaryEntrySpelling returns the string constant NSSpeechDictionaryEntrySpelling as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechDictionaryEntrySpelling() objc.ID {
-	return purego.CFConstant(raw.NSSpeechDictionaryEntrySpelling())
+// NSSpeechDictionaryEntrySpelling returns the string constant NSSpeechDictionaryEntrySpelling, for use as a dictionary key or argument.
+func NSSpeechDictionaryEntrySpelling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechDictionaryEntrySpelling")))
 }
 
-// NSSpeechDictionaryEntryPhonemes returns the string constant NSSpeechDictionaryEntryPhonemes as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechDictionaryEntryPhonemes() objc.ID {
-	return purego.CFConstant(raw.NSSpeechDictionaryEntryPhonemes())
+// NSSpeechDictionaryEntryPhonemes returns the string constant NSSpeechDictionaryEntryPhonemes, for use as a dictionary key or argument.
+func NSSpeechDictionaryEntryPhonemes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechDictionaryEntryPhonemes")))
 }
 
-// NSVoiceGenderNeuter returns the string constant NSVoiceGenderNeuter as an objc.ID, for use as a dictionary key or selector argument.
-func NSVoiceGenderNeuter() objc.ID {
-	if _r := raw.NSVoiceGenderNeuter(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSVoiceGenderNeuter returns the string constant NSVoiceGenderNeuter, for use as a dictionary key or argument.
+func NSVoiceGenderNeuter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSVoiceGenderNeuter")))
 }
 
-// NSVoiceGenderMale returns the string constant NSVoiceGenderMale as an objc.ID, for use as a dictionary key or selector argument.
-func NSVoiceGenderMale() objc.ID {
-	if _r := raw.NSVoiceGenderMale(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSVoiceGenderMale returns the string constant NSVoiceGenderMale, for use as a dictionary key or argument.
+func NSVoiceGenderMale() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSVoiceGenderMale"))) }
 
-// NSVoiceGenderFemale returns the string constant NSVoiceGenderFemale as an objc.ID, for use as a dictionary key or selector argument.
-func NSVoiceGenderFemale() objc.ID {
-	if _r := raw.NSVoiceGenderFemale(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSVoiceGenderFemale returns the string constant NSVoiceGenderFemale, for use as a dictionary key or argument.
+func NSVoiceGenderFemale() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSVoiceGenderFemale")))
 }
 
-// NSVoiceGenderNeutral returns the string constant NSVoiceGenderNeutral as an objc.ID, for use as a dictionary key or selector argument.
-func NSVoiceGenderNeutral() objc.ID {
-	return purego.CFConstant(raw.NSVoiceGenderNeutral())
+// NSVoiceGenderNeutral returns the string constant NSVoiceGenderNeutral, for use as a dictionary key or argument.
+func NSVoiceGenderNeutral() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSVoiceGenderNeutral")))
 }
 
-// NSSpeechStatusProperty returns the string constant NSSpeechStatusProperty as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechStatusProperty() objc.ID {
-	return purego.CFConstant(raw.NSSpeechStatusProperty())
+// NSSpeechStatusProperty returns the string constant NSSpeechStatusProperty, for use as a dictionary key or argument.
+func NSSpeechStatusProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechStatusProperty")))
 }
 
-// NSSpeechErrorsProperty returns the string constant NSSpeechErrorsProperty as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechErrorsProperty() objc.ID {
-	return purego.CFConstant(raw.NSSpeechErrorsProperty())
+// NSSpeechErrorsProperty returns the string constant NSSpeechErrorsProperty, for use as a dictionary key or argument.
+func NSSpeechErrorsProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechErrorsProperty")))
 }
 
-// NSSpeechInputModeProperty returns the string constant NSSpeechInputModeProperty as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechInputModeProperty() objc.ID {
-	return purego.CFConstant(raw.NSSpeechInputModeProperty())
+// NSSpeechInputModeProperty returns the string constant NSSpeechInputModeProperty, for use as a dictionary key or argument.
+func NSSpeechInputModeProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechInputModeProperty")))
 }
 
-// NSSpeechCharacterModeProperty returns the string constant NSSpeechCharacterModeProperty as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechCharacterModeProperty() objc.ID {
-	return purego.CFConstant(raw.NSSpeechCharacterModeProperty())
+// NSSpeechCharacterModeProperty returns the string constant NSSpeechCharacterModeProperty, for use as a dictionary key or argument.
+func NSSpeechCharacterModeProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechCharacterModeProperty")))
 }
 
-// NSSpeechNumberModeProperty returns the string constant NSSpeechNumberModeProperty as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechNumberModeProperty() objc.ID {
-	return purego.CFConstant(raw.NSSpeechNumberModeProperty())
+// NSSpeechNumberModeProperty returns the string constant NSSpeechNumberModeProperty, for use as a dictionary key or argument.
+func NSSpeechNumberModeProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechNumberModeProperty")))
 }
 
-// NSSpeechRateProperty returns the string constant NSSpeechRateProperty as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechRateProperty() objc.ID {
-	return purego.CFConstant(raw.NSSpeechRateProperty())
+// NSSpeechRateProperty returns the string constant NSSpeechRateProperty, for use as a dictionary key or argument.
+func NSSpeechRateProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechRateProperty")))
 }
 
-// NSSpeechPitchBaseProperty returns the string constant NSSpeechPitchBaseProperty as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechPitchBaseProperty() objc.ID {
-	return purego.CFConstant(raw.NSSpeechPitchBaseProperty())
+// NSSpeechPitchBaseProperty returns the string constant NSSpeechPitchBaseProperty, for use as a dictionary key or argument.
+func NSSpeechPitchBaseProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechPitchBaseProperty")))
 }
 
-// NSSpeechPitchModProperty returns the string constant NSSpeechPitchModProperty as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechPitchModProperty() objc.ID {
-	return purego.CFConstant(raw.NSSpeechPitchModProperty())
+// NSSpeechPitchModProperty returns the string constant NSSpeechPitchModProperty, for use as a dictionary key or argument.
+func NSSpeechPitchModProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechPitchModProperty")))
 }
 
-// NSSpeechVolumeProperty returns the string constant NSSpeechVolumeProperty as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechVolumeProperty() objc.ID {
-	return purego.CFConstant(raw.NSSpeechVolumeProperty())
+// NSSpeechVolumeProperty returns the string constant NSSpeechVolumeProperty, for use as a dictionary key or argument.
+func NSSpeechVolumeProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechVolumeProperty")))
 }
 
-// NSSpeechSynthesizerInfoProperty returns the string constant NSSpeechSynthesizerInfoProperty as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechSynthesizerInfoProperty() objc.ID {
-	return purego.CFConstant(raw.NSSpeechSynthesizerInfoProperty())
+// NSSpeechSynthesizerInfoProperty returns the string constant NSSpeechSynthesizerInfoProperty, for use as a dictionary key or argument.
+func NSSpeechSynthesizerInfoProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechSynthesizerInfoProperty")))
 }
 
-// NSSpeechRecentSyncProperty returns the string constant NSSpeechRecentSyncProperty as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechRecentSyncProperty() objc.ID {
-	return purego.CFConstant(raw.NSSpeechRecentSyncProperty())
+// NSSpeechRecentSyncProperty returns the string constant NSSpeechRecentSyncProperty, for use as a dictionary key or argument.
+func NSSpeechRecentSyncProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechRecentSyncProperty")))
 }
 
-// NSSpeechPhonemeSymbolsProperty returns the string constant NSSpeechPhonemeSymbolsProperty as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechPhonemeSymbolsProperty() objc.ID {
-	return purego.CFConstant(raw.NSSpeechPhonemeSymbolsProperty())
+// NSSpeechPhonemeSymbolsProperty returns the string constant NSSpeechPhonemeSymbolsProperty, for use as a dictionary key or argument.
+func NSSpeechPhonemeSymbolsProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechPhonemeSymbolsProperty")))
 }
 
-// NSSpeechCurrentVoiceProperty returns the string constant NSSpeechCurrentVoiceProperty as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechCurrentVoiceProperty() objc.ID {
-	return purego.CFConstant(raw.NSSpeechCurrentVoiceProperty())
+// NSSpeechCurrentVoiceProperty returns the string constant NSSpeechCurrentVoiceProperty, for use as a dictionary key or argument.
+func NSSpeechCurrentVoiceProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechCurrentVoiceProperty")))
 }
 
-// NSSpeechCommandDelimiterProperty returns the string constant NSSpeechCommandDelimiterProperty as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechCommandDelimiterProperty() objc.ID {
-	return purego.CFConstant(raw.NSSpeechCommandDelimiterProperty())
+// NSSpeechCommandDelimiterProperty returns the string constant NSSpeechCommandDelimiterProperty, for use as a dictionary key or argument.
+func NSSpeechCommandDelimiterProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechCommandDelimiterProperty")))
 }
 
-// NSSpeechResetProperty returns the string constant NSSpeechResetProperty as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechResetProperty() objc.ID {
-	return purego.CFConstant(raw.NSSpeechResetProperty())
+// NSSpeechResetProperty returns the string constant NSSpeechResetProperty, for use as a dictionary key or argument.
+func NSSpeechResetProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechResetProperty")))
 }
 
-// NSSpeechOutputToFileURLProperty returns the string constant NSSpeechOutputToFileURLProperty as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechOutputToFileURLProperty() objc.ID {
-	return purego.CFConstant(raw.NSSpeechOutputToFileURLProperty())
+// NSSpeechOutputToFileURLProperty returns the string constant NSSpeechOutputToFileURLProperty, for use as a dictionary key or argument.
+func NSSpeechOutputToFileURLProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechOutputToFileURLProperty")))
 }
 
-// NSVoiceLanguage returns the string constant NSVoiceLanguage as an objc.ID, for use as a dictionary key or selector argument.
-func NSVoiceLanguage() objc.ID {
-	return purego.CFConstant(raw.NSVoiceLanguage())
-}
+// NSVoiceLanguage returns the string constant NSVoiceLanguage, for use as a dictionary key or argument.
+func NSVoiceLanguage() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSVoiceLanguage"))) }
 
-// NSSpeechModeText returns the string constant NSSpeechModeText as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechModeText() objc.ID {
-	return purego.CFConstant(raw.NSSpeechModeText())
-}
+// NSSpeechModeText returns the string constant NSSpeechModeText, for use as a dictionary key or argument.
+func NSSpeechModeText() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSSpeechModeText"))) }
 
-// NSSpeechModePhoneme returns the string constant NSSpeechModePhoneme as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechModePhoneme() objc.ID {
-	return purego.CFConstant(raw.NSSpeechModePhoneme())
+// NSSpeechModePhoneme returns the string constant NSSpeechModePhoneme, for use as a dictionary key or argument.
+func NSSpeechModePhoneme() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechModePhoneme")))
 }
 
-// NSSpeechModeNormal returns the string constant NSSpeechModeNormal as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechModeNormal() objc.ID {
-	return purego.CFConstant(raw.NSSpeechModeNormal())
+// NSSpeechModeNormal returns the string constant NSSpeechModeNormal, for use as a dictionary key or argument.
+func NSSpeechModeNormal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechModeNormal")))
 }
 
-// NSSpeechModeLiteral returns the string constant NSSpeechModeLiteral as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechModeLiteral() objc.ID {
-	return purego.CFConstant(raw.NSSpeechModeLiteral())
+// NSSpeechModeLiteral returns the string constant NSSpeechModeLiteral, for use as a dictionary key or argument.
+func NSSpeechModeLiteral() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechModeLiteral")))
 }
 
-// NSSpeechStatusOutputBusy returns the string constant NSSpeechStatusOutputBusy as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechStatusOutputBusy() objc.ID {
-	return purego.CFConstant(raw.NSSpeechStatusOutputBusy())
+// NSSpeechStatusOutputBusy returns the string constant NSSpeechStatusOutputBusy, for use as a dictionary key or argument.
+func NSSpeechStatusOutputBusy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechStatusOutputBusy")))
 }
 
-// NSSpeechStatusOutputPaused returns the string constant NSSpeechStatusOutputPaused as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechStatusOutputPaused() objc.ID {
-	return purego.CFConstant(raw.NSSpeechStatusOutputPaused())
+// NSSpeechStatusOutputPaused returns the string constant NSSpeechStatusOutputPaused, for use as a dictionary key or argument.
+func NSSpeechStatusOutputPaused() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechStatusOutputPaused")))
 }
 
-// NSSpeechStatusNumberOfCharactersLeft returns the string constant NSSpeechStatusNumberOfCharactersLeft as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechStatusNumberOfCharactersLeft() objc.ID {
-	return purego.CFConstant(raw.NSSpeechStatusNumberOfCharactersLeft())
+// NSSpeechStatusNumberOfCharactersLeft returns the string constant NSSpeechStatusNumberOfCharactersLeft, for use as a dictionary key or argument.
+func NSSpeechStatusNumberOfCharactersLeft() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechStatusNumberOfCharactersLeft")))
 }
 
-// NSSpeechStatusPhonemeCode returns the string constant NSSpeechStatusPhonemeCode as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechStatusPhonemeCode() objc.ID {
-	return purego.CFConstant(raw.NSSpeechStatusPhonemeCode())
+// NSSpeechStatusPhonemeCode returns the string constant NSSpeechStatusPhonemeCode, for use as a dictionary key or argument.
+func NSSpeechStatusPhonemeCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechStatusPhonemeCode")))
 }
 
-// NSSpeechErrorCount returns the string constant NSSpeechErrorCount as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechErrorCount() objc.ID {
-	return purego.CFConstant(raw.NSSpeechErrorCount())
+// NSSpeechErrorCount returns the string constant NSSpeechErrorCount, for use as a dictionary key or argument.
+func NSSpeechErrorCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechErrorCount")))
 }
 
-// NSSpeechErrorOldestCode returns the string constant NSSpeechErrorOldestCode as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechErrorOldestCode() objc.ID {
-	return purego.CFConstant(raw.NSSpeechErrorOldestCode())
+// NSSpeechErrorOldestCode returns the string constant NSSpeechErrorOldestCode, for use as a dictionary key or argument.
+func NSSpeechErrorOldestCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechErrorOldestCode")))
 }
 
-// NSSpeechErrorOldestCharacterOffset returns the string constant NSSpeechErrorOldestCharacterOffset as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechErrorOldestCharacterOffset() objc.ID {
-	return purego.CFConstant(raw.NSSpeechErrorOldestCharacterOffset())
+// NSSpeechErrorOldestCharacterOffset returns the string constant NSSpeechErrorOldestCharacterOffset, for use as a dictionary key or argument.
+func NSSpeechErrorOldestCharacterOffset() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechErrorOldestCharacterOffset")))
 }
 
-// NSSpeechErrorNewestCode returns the string constant NSSpeechErrorNewestCode as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechErrorNewestCode() objc.ID {
-	return purego.CFConstant(raw.NSSpeechErrorNewestCode())
+// NSSpeechErrorNewestCode returns the string constant NSSpeechErrorNewestCode, for use as a dictionary key or argument.
+func NSSpeechErrorNewestCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechErrorNewestCode")))
 }
 
-// NSSpeechErrorNewestCharacterOffset returns the string constant NSSpeechErrorNewestCharacterOffset as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechErrorNewestCharacterOffset() objc.ID {
-	return purego.CFConstant(raw.NSSpeechErrorNewestCharacterOffset())
+// NSSpeechErrorNewestCharacterOffset returns the string constant NSSpeechErrorNewestCharacterOffset, for use as a dictionary key or argument.
+func NSSpeechErrorNewestCharacterOffset() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechErrorNewestCharacterOffset")))
 }
 
-// NSSpeechSynthesizerInfoIdentifier returns the string constant NSSpeechSynthesizerInfoIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechSynthesizerInfoIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSSpeechSynthesizerInfoIdentifier())
+// NSSpeechSynthesizerInfoIdentifier returns the string constant NSSpeechSynthesizerInfoIdentifier, for use as a dictionary key or argument.
+func NSSpeechSynthesizerInfoIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechSynthesizerInfoIdentifier")))
 }
 
-// NSSpeechSynthesizerInfoVersion returns the string constant NSSpeechSynthesizerInfoVersion as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechSynthesizerInfoVersion() objc.ID {
-	return purego.CFConstant(raw.NSSpeechSynthesizerInfoVersion())
+// NSSpeechSynthesizerInfoVersion returns the string constant NSSpeechSynthesizerInfoVersion, for use as a dictionary key or argument.
+func NSSpeechSynthesizerInfoVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechSynthesizerInfoVersion")))
 }
 
-// NSSpeechPhonemeInfoOpcode returns the string constant NSSpeechPhonemeInfoOpcode as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechPhonemeInfoOpcode() objc.ID {
-	return purego.CFConstant(raw.NSSpeechPhonemeInfoOpcode())
+// NSSpeechPhonemeInfoOpcode returns the string constant NSSpeechPhonemeInfoOpcode, for use as a dictionary key or argument.
+func NSSpeechPhonemeInfoOpcode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechPhonemeInfoOpcode")))
 }
 
-// NSSpeechPhonemeInfoSymbol returns the string constant NSSpeechPhonemeInfoSymbol as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechPhonemeInfoSymbol() objc.ID {
-	return purego.CFConstant(raw.NSSpeechPhonemeInfoSymbol())
+// NSSpeechPhonemeInfoSymbol returns the string constant NSSpeechPhonemeInfoSymbol, for use as a dictionary key or argument.
+func NSSpeechPhonemeInfoSymbol() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechPhonemeInfoSymbol")))
 }
 
-// NSSpeechPhonemeInfoExample returns the string constant NSSpeechPhonemeInfoExample as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechPhonemeInfoExample() objc.ID {
-	return purego.CFConstant(raw.NSSpeechPhonemeInfoExample())
+// NSSpeechPhonemeInfoExample returns the string constant NSSpeechPhonemeInfoExample, for use as a dictionary key or argument.
+func NSSpeechPhonemeInfoExample() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechPhonemeInfoExample")))
 }
 
-// NSSpeechPhonemeInfoHiliteStart returns the string constant NSSpeechPhonemeInfoHiliteStart as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechPhonemeInfoHiliteStart() objc.ID {
-	return purego.CFConstant(raw.NSSpeechPhonemeInfoHiliteStart())
+// NSSpeechPhonemeInfoHiliteStart returns the string constant NSSpeechPhonemeInfoHiliteStart, for use as a dictionary key or argument.
+func NSSpeechPhonemeInfoHiliteStart() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechPhonemeInfoHiliteStart")))
 }
 
-// NSSpeechPhonemeInfoHiliteEnd returns the string constant NSSpeechPhonemeInfoHiliteEnd as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechPhonemeInfoHiliteEnd() objc.ID {
-	return purego.CFConstant(raw.NSSpeechPhonemeInfoHiliteEnd())
+// NSSpeechPhonemeInfoHiliteEnd returns the string constant NSSpeechPhonemeInfoHiliteEnd, for use as a dictionary key or argument.
+func NSSpeechPhonemeInfoHiliteEnd() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechPhonemeInfoHiliteEnd")))
 }
 
-// NSSpeechCommandPrefix returns the string constant NSSpeechCommandPrefix as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechCommandPrefix() objc.ID {
-	return purego.CFConstant(raw.NSSpeechCommandPrefix())
+// NSSpeechCommandPrefix returns the string constant NSSpeechCommandPrefix, for use as a dictionary key or argument.
+func NSSpeechCommandPrefix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechCommandPrefix")))
 }
 
-// NSSpeechCommandSuffix returns the string constant NSSpeechCommandSuffix as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpeechCommandSuffix() objc.ID {
-	return purego.CFConstant(raw.NSSpeechCommandSuffix())
+// NSSpeechCommandSuffix returns the string constant NSSpeechCommandSuffix, for use as a dictionary key or argument.
+func NSSpeechCommandSuffix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpeechCommandSuffix")))
 }
 
-// NSTextCheckingOrthographyKey returns the string constant NSTextCheckingOrthographyKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextCheckingOrthographyKey() objc.ID {
-	return purego.CFConstant(raw.NSTextCheckingOrthographyKey())
+// NSTextCheckingOrthographyKey returns the string constant NSTextCheckingOrthographyKey, for use as a dictionary key or argument.
+func NSTextCheckingOrthographyKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextCheckingOrthographyKey")))
 }
 
-// NSTextCheckingQuotesKey returns the string constant NSTextCheckingQuotesKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextCheckingQuotesKey() objc.ID {
-	return purego.CFConstant(raw.NSTextCheckingQuotesKey())
+// NSTextCheckingQuotesKey returns the string constant NSTextCheckingQuotesKey, for use as a dictionary key or argument.
+func NSTextCheckingQuotesKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextCheckingQuotesKey")))
 }
 
-// NSTextCheckingReplacementsKey returns the string constant NSTextCheckingReplacementsKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextCheckingReplacementsKey() objc.ID {
-	return purego.CFConstant(raw.NSTextCheckingReplacementsKey())
+// NSTextCheckingReplacementsKey returns the string constant NSTextCheckingReplacementsKey, for use as a dictionary key or argument.
+func NSTextCheckingReplacementsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextCheckingReplacementsKey")))
 }
 
-// NSTextCheckingReferenceDateKey returns the string constant NSTextCheckingReferenceDateKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextCheckingReferenceDateKey() objc.ID {
-	return purego.CFConstant(raw.NSTextCheckingReferenceDateKey())
+// NSTextCheckingReferenceDateKey returns the string constant NSTextCheckingReferenceDateKey, for use as a dictionary key or argument.
+func NSTextCheckingReferenceDateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextCheckingReferenceDateKey")))
 }
 
-// NSTextCheckingReferenceTimeZoneKey returns the string constant NSTextCheckingReferenceTimeZoneKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextCheckingReferenceTimeZoneKey() objc.ID {
-	return purego.CFConstant(raw.NSTextCheckingReferenceTimeZoneKey())
+// NSTextCheckingReferenceTimeZoneKey returns the string constant NSTextCheckingReferenceTimeZoneKey, for use as a dictionary key or argument.
+func NSTextCheckingReferenceTimeZoneKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextCheckingReferenceTimeZoneKey")))
 }
 
-// NSTextCheckingDocumentURLKey returns the string constant NSTextCheckingDocumentURLKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextCheckingDocumentURLKey() objc.ID {
-	return purego.CFConstant(raw.NSTextCheckingDocumentURLKey())
+// NSTextCheckingDocumentURLKey returns the string constant NSTextCheckingDocumentURLKey, for use as a dictionary key or argument.
+func NSTextCheckingDocumentURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextCheckingDocumentURLKey")))
 }
 
-// NSTextCheckingDocumentTitleKey returns the string constant NSTextCheckingDocumentTitleKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextCheckingDocumentTitleKey() objc.ID {
-	return purego.CFConstant(raw.NSTextCheckingDocumentTitleKey())
+// NSTextCheckingDocumentTitleKey returns the string constant NSTextCheckingDocumentTitleKey, for use as a dictionary key or argument.
+func NSTextCheckingDocumentTitleKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextCheckingDocumentTitleKey")))
 }
 
-// NSTextCheckingDocumentAuthorKey returns the string constant NSTextCheckingDocumentAuthorKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextCheckingDocumentAuthorKey() objc.ID {
-	return purego.CFConstant(raw.NSTextCheckingDocumentAuthorKey())
+// NSTextCheckingDocumentAuthorKey returns the string constant NSTextCheckingDocumentAuthorKey, for use as a dictionary key or argument.
+func NSTextCheckingDocumentAuthorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextCheckingDocumentAuthorKey")))
 }
 
-// NSTextCheckingRegularExpressionsKey returns the string constant NSTextCheckingRegularExpressionsKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextCheckingRegularExpressionsKey() objc.ID {
-	return purego.CFConstant(raw.NSTextCheckingRegularExpressionsKey())
+// NSTextCheckingRegularExpressionsKey returns the string constant NSTextCheckingRegularExpressionsKey, for use as a dictionary key or argument.
+func NSTextCheckingRegularExpressionsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextCheckingRegularExpressionsKey")))
 }
 
-// NSTextCheckingSelectedRangeKey returns the string constant NSTextCheckingSelectedRangeKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextCheckingSelectedRangeKey() objc.ID {
-	return purego.CFConstant(raw.NSTextCheckingSelectedRangeKey())
+// NSTextCheckingSelectedRangeKey returns the string constant NSTextCheckingSelectedRangeKey, for use as a dictionary key or argument.
+func NSTextCheckingSelectedRangeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextCheckingSelectedRangeKey")))
 }
 
-// NSTextCheckingGenerateInlinePredictionsKey returns the string constant NSTextCheckingGenerateInlinePredictionsKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextCheckingGenerateInlinePredictionsKey() objc.ID {
-	return purego.CFConstant(raw.NSTextCheckingGenerateInlinePredictionsKey())
+// NSTextCheckingGenerateInlinePredictionsKey returns the string constant NSTextCheckingGenerateInlinePredictionsKey, for use as a dictionary key or argument.
+func NSTextCheckingGenerateInlinePredictionsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextCheckingGenerateInlinePredictionsKey")))
 }
 
-// NSSplitViewWillResizeSubviewsNotification returns the string constant NSSplitViewWillResizeSubviewsNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSSplitViewWillResizeSubviewsNotification() objc.ID {
-	if _r := raw.NSSplitViewWillResizeSubviewsNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSplitViewWillResizeSubviewsNotification returns the string constant NSSplitViewWillResizeSubviewsNotification, for use as a dictionary key or argument.
+func NSSplitViewWillResizeSubviewsNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSplitViewWillResizeSubviewsNotification")))
 }
 
-// NSSplitViewDidResizeSubviewsNotification returns the string constant NSSplitViewDidResizeSubviewsNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSSplitViewDidResizeSubviewsNotification() objc.ID {
-	if _r := raw.NSSplitViewDidResizeSubviewsNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSplitViewDidResizeSubviewsNotification returns the string constant NSSplitViewDidResizeSubviewsNotification, for use as a dictionary key or argument.
+func NSSplitViewDidResizeSubviewsNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSplitViewDidResizeSubviewsNotification")))
 }
 
-// NSPopUpButtonCellWillPopUpNotification returns the string constant NSPopUpButtonCellWillPopUpNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSPopUpButtonCellWillPopUpNotification() objc.ID {
-	if _r := raw.NSPopUpButtonCellWillPopUpNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPopUpButtonCellWillPopUpNotification returns the string constant NSPopUpButtonCellWillPopUpNotification, for use as a dictionary key or argument.
+func NSPopUpButtonCellWillPopUpNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPopUpButtonCellWillPopUpNotification")))
 }
 
-// NSPopUpButtonWillPopUpNotification returns the string constant NSPopUpButtonWillPopUpNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSPopUpButtonWillPopUpNotification() objc.ID {
-	if _r := raw.NSPopUpButtonWillPopUpNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPopUpButtonWillPopUpNotification returns the string constant NSPopUpButtonWillPopUpNotification, for use as a dictionary key or argument.
+func NSPopUpButtonWillPopUpNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPopUpButtonWillPopUpNotification")))
 }
 
-// NSPrintOperationExistsException returns the string constant NSPrintOperationExistsException as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintOperationExistsException() objc.ID {
-	if _r := raw.NSPrintOperationExistsException(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintOperationExistsException returns the string constant NSPrintOperationExistsException, for use as a dictionary key or argument.
+func NSPrintOperationExistsException() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintOperationExistsException")))
 }
 
-// NSPrintPhotoJobStyleHint returns the string constant NSPrintPhotoJobStyleHint as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintPhotoJobStyleHint() objc.ID {
-	if _r := raw.NSPrintPhotoJobStyleHint(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrintPhotoJobStyleHint returns the string constant NSPrintPhotoJobStyleHint, for use as a dictionary key or argument.
+func NSPrintPhotoJobStyleHint() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintPhotoJobStyleHint")))
 }
 
-// NSPrintAllPresetsJobStyleHint returns the string constant NSPrintAllPresetsJobStyleHint as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintAllPresetsJobStyleHint() objc.ID {
-	return purego.CFConstant(raw.NSPrintAllPresetsJobStyleHint())
+// NSPrintAllPresetsJobStyleHint returns the string constant NSPrintAllPresetsJobStyleHint, for use as a dictionary key or argument.
+func NSPrintAllPresetsJobStyleHint() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintAllPresetsJobStyleHint")))
 }
 
-// NSPrintNoPresetsJobStyleHint returns the string constant NSPrintNoPresetsJobStyleHint as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintNoPresetsJobStyleHint() objc.ID {
-	return purego.CFConstant(raw.NSPrintNoPresetsJobStyleHint())
+// NSPrintNoPresetsJobStyleHint returns the string constant NSPrintNoPresetsJobStyleHint, for use as a dictionary key or argument.
+func NSPrintNoPresetsJobStyleHint() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintNoPresetsJobStyleHint")))
 }
 
-// NSPrintPanelAccessorySummaryItemNameKey returns the string constant NSPrintPanelAccessorySummaryItemNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintPanelAccessorySummaryItemNameKey() objc.ID {
-	return purego.CFConstant(raw.NSPrintPanelAccessorySummaryItemNameKey())
+// NSPrintPanelAccessorySummaryItemNameKey returns the string constant NSPrintPanelAccessorySummaryItemNameKey, for use as a dictionary key or argument.
+func NSPrintPanelAccessorySummaryItemNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintPanelAccessorySummaryItemNameKey")))
 }
 
-// NSPrintPanelAccessorySummaryItemDescriptionKey returns the string constant NSPrintPanelAccessorySummaryItemDescriptionKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrintPanelAccessorySummaryItemDescriptionKey() objc.ID {
-	return purego.CFConstant(raw.NSPrintPanelAccessorySummaryItemDescriptionKey())
+// NSPrintPanelAccessorySummaryItemDescriptionKey returns the string constant NSPrintPanelAccessorySummaryItemDescriptionKey, for use as a dictionary key or argument.
+func NSPrintPanelAccessorySummaryItemDescriptionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrintPanelAccessorySummaryItemDescriptionKey")))
 }
 
-// NSTextFinderCaseInsensitiveKey returns the string constant NSTextFinderCaseInsensitiveKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextFinderCaseInsensitiveKey() objc.ID {
-	return purego.CFConstant(raw.NSTextFinderCaseInsensitiveKey())
+// NSTextFinderCaseInsensitiveKey returns the string constant NSTextFinderCaseInsensitiveKey, for use as a dictionary key or argument.
+func NSTextFinderCaseInsensitiveKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextFinderCaseInsensitiveKey")))
 }
 
-// NSTextFinderMatchingTypeKey returns the string constant NSTextFinderMatchingTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextFinderMatchingTypeKey() objc.ID {
-	return purego.CFConstant(raw.NSTextFinderMatchingTypeKey())
+// NSTextFinderMatchingTypeKey returns the string constant NSTextFinderMatchingTypeKey, for use as a dictionary key or argument.
+func NSTextFinderMatchingTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextFinderMatchingTypeKey")))
 }
 
-// NSTextContentTypeUsername returns the string constant NSTextContentTypeUsername as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeUsername() objc.ID {
-	if _r := raw.NSTextContentTypeUsername(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeUsername returns the string constant NSTextContentTypeUsername, for use as a dictionary key or argument.
+func NSTextContentTypeUsername() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeUsername")))
 }
 
-// NSTextContentTypePassword returns the string constant NSTextContentTypePassword as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypePassword() objc.ID {
-	if _r := raw.NSTextContentTypePassword(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypePassword returns the string constant NSTextContentTypePassword, for use as a dictionary key or argument.
+func NSTextContentTypePassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypePassword")))
 }
 
-// NSTextContentTypeOneTimeCode returns the string constant NSTextContentTypeOneTimeCode as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeOneTimeCode() objc.ID {
-	if _r := raw.NSTextContentTypeOneTimeCode(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeOneTimeCode returns the string constant NSTextContentTypeOneTimeCode, for use as a dictionary key or argument.
+func NSTextContentTypeOneTimeCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeOneTimeCode")))
 }
 
-// NSTextContentTypeNewPassword returns the string constant NSTextContentTypeNewPassword as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeNewPassword() objc.ID {
-	if _r := raw.NSTextContentTypeNewPassword(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeNewPassword returns the string constant NSTextContentTypeNewPassword, for use as a dictionary key or argument.
+func NSTextContentTypeNewPassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeNewPassword")))
 }
 
-// NSTextContentTypeName returns the string constant NSTextContentTypeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeName() objc.ID {
-	if _r := raw.NSTextContentTypeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeName returns the string constant NSTextContentTypeName, for use as a dictionary key or argument.
+func NSTextContentTypeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeName")))
 }
 
-// NSTextContentTypeNamePrefix returns the string constant NSTextContentTypeNamePrefix as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeNamePrefix() objc.ID {
-	if _r := raw.NSTextContentTypeNamePrefix(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeNamePrefix returns the string constant NSTextContentTypeNamePrefix, for use as a dictionary key or argument.
+func NSTextContentTypeNamePrefix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeNamePrefix")))
 }
 
-// NSTextContentTypeGivenName returns the string constant NSTextContentTypeGivenName as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeGivenName() objc.ID {
-	if _r := raw.NSTextContentTypeGivenName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeGivenName returns the string constant NSTextContentTypeGivenName, for use as a dictionary key or argument.
+func NSTextContentTypeGivenName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeGivenName")))
 }
 
-// NSTextContentTypeMiddleName returns the string constant NSTextContentTypeMiddleName as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeMiddleName() objc.ID {
-	if _r := raw.NSTextContentTypeMiddleName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeMiddleName returns the string constant NSTextContentTypeMiddleName, for use as a dictionary key or argument.
+func NSTextContentTypeMiddleName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeMiddleName")))
 }
 
-// NSTextContentTypeFamilyName returns the string constant NSTextContentTypeFamilyName as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeFamilyName() objc.ID {
-	if _r := raw.NSTextContentTypeFamilyName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeFamilyName returns the string constant NSTextContentTypeFamilyName, for use as a dictionary key or argument.
+func NSTextContentTypeFamilyName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeFamilyName")))
 }
 
-// NSTextContentTypeNameSuffix returns the string constant NSTextContentTypeNameSuffix as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeNameSuffix() objc.ID {
-	if _r := raw.NSTextContentTypeNameSuffix(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeNameSuffix returns the string constant NSTextContentTypeNameSuffix, for use as a dictionary key or argument.
+func NSTextContentTypeNameSuffix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeNameSuffix")))
 }
 
-// NSTextContentTypeNickname returns the string constant NSTextContentTypeNickname as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeNickname() objc.ID {
-	if _r := raw.NSTextContentTypeNickname(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeNickname returns the string constant NSTextContentTypeNickname, for use as a dictionary key or argument.
+func NSTextContentTypeNickname() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeNickname")))
 }
 
-// NSTextContentTypeJobTitle returns the string constant NSTextContentTypeJobTitle as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeJobTitle() objc.ID {
-	if _r := raw.NSTextContentTypeJobTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeJobTitle returns the string constant NSTextContentTypeJobTitle, for use as a dictionary key or argument.
+func NSTextContentTypeJobTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeJobTitle")))
 }
 
-// NSTextContentTypeOrganizationName returns the string constant NSTextContentTypeOrganizationName as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeOrganizationName() objc.ID {
-	if _r := raw.NSTextContentTypeOrganizationName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeOrganizationName returns the string constant NSTextContentTypeOrganizationName, for use as a dictionary key or argument.
+func NSTextContentTypeOrganizationName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeOrganizationName")))
 }
 
-// NSTextContentTypeLocation returns the string constant NSTextContentTypeLocation as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeLocation() objc.ID {
-	if _r := raw.NSTextContentTypeLocation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeLocation returns the string constant NSTextContentTypeLocation, for use as a dictionary key or argument.
+func NSTextContentTypeLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeLocation")))
 }
 
-// NSTextContentTypeFullStreetAddress returns the string constant NSTextContentTypeFullStreetAddress as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeFullStreetAddress() objc.ID {
-	if _r := raw.NSTextContentTypeFullStreetAddress(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeFullStreetAddress returns the string constant NSTextContentTypeFullStreetAddress, for use as a dictionary key or argument.
+func NSTextContentTypeFullStreetAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeFullStreetAddress")))
 }
 
-// NSTextContentTypeStreetAddressLine1 returns the string constant NSTextContentTypeStreetAddressLine1 as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeStreetAddressLine1() objc.ID {
-	if _r := raw.NSTextContentTypeStreetAddressLine1(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeStreetAddressLine1 returns the string constant NSTextContentTypeStreetAddressLine1, for use as a dictionary key or argument.
+func NSTextContentTypeStreetAddressLine1() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeStreetAddressLine1")))
 }
 
-// NSTextContentTypeStreetAddressLine2 returns the string constant NSTextContentTypeStreetAddressLine2 as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeStreetAddressLine2() objc.ID {
-	if _r := raw.NSTextContentTypeStreetAddressLine2(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeStreetAddressLine2 returns the string constant NSTextContentTypeStreetAddressLine2, for use as a dictionary key or argument.
+func NSTextContentTypeStreetAddressLine2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeStreetAddressLine2")))
 }
 
-// NSTextContentTypeAddressCity returns the string constant NSTextContentTypeAddressCity as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeAddressCity() objc.ID {
-	if _r := raw.NSTextContentTypeAddressCity(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeAddressCity returns the string constant NSTextContentTypeAddressCity, for use as a dictionary key or argument.
+func NSTextContentTypeAddressCity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeAddressCity")))
 }
 
-// NSTextContentTypeAddressState returns the string constant NSTextContentTypeAddressState as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeAddressState() objc.ID {
-	if _r := raw.NSTextContentTypeAddressState(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeAddressState returns the string constant NSTextContentTypeAddressState, for use as a dictionary key or argument.
+func NSTextContentTypeAddressState() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeAddressState")))
 }
 
-// NSTextContentTypeAddressCityAndState returns the string constant NSTextContentTypeAddressCityAndState as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeAddressCityAndState() objc.ID {
-	if _r := raw.NSTextContentTypeAddressCityAndState(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeAddressCityAndState returns the string constant NSTextContentTypeAddressCityAndState, for use as a dictionary key or argument.
+func NSTextContentTypeAddressCityAndState() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeAddressCityAndState")))
 }
 
-// NSTextContentTypeSublocality returns the string constant NSTextContentTypeSublocality as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeSublocality() objc.ID {
-	if _r := raw.NSTextContentTypeSublocality(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeSublocality returns the string constant NSTextContentTypeSublocality, for use as a dictionary key or argument.
+func NSTextContentTypeSublocality() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeSublocality")))
 }
 
-// NSTextContentTypeCountryName returns the string constant NSTextContentTypeCountryName as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeCountryName() objc.ID {
-	if _r := raw.NSTextContentTypeCountryName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeCountryName returns the string constant NSTextContentTypeCountryName, for use as a dictionary key or argument.
+func NSTextContentTypeCountryName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeCountryName")))
 }
 
-// NSTextContentTypePostalCode returns the string constant NSTextContentTypePostalCode as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypePostalCode() objc.ID {
-	if _r := raw.NSTextContentTypePostalCode(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypePostalCode returns the string constant NSTextContentTypePostalCode, for use as a dictionary key or argument.
+func NSTextContentTypePostalCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypePostalCode")))
 }
 
-// NSTextContentTypeTelephoneNumber returns the string constant NSTextContentTypeTelephoneNumber as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeTelephoneNumber() objc.ID {
-	if _r := raw.NSTextContentTypeTelephoneNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeTelephoneNumber returns the string constant NSTextContentTypeTelephoneNumber, for use as a dictionary key or argument.
+func NSTextContentTypeTelephoneNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeTelephoneNumber")))
 }
 
-// NSTextContentTypeEmailAddress returns the string constant NSTextContentTypeEmailAddress as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeEmailAddress() objc.ID {
-	if _r := raw.NSTextContentTypeEmailAddress(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeEmailAddress returns the string constant NSTextContentTypeEmailAddress, for use as a dictionary key or argument.
+func NSTextContentTypeEmailAddress() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeEmailAddress")))
 }
 
-// NSTextContentTypeURL returns the string constant NSTextContentTypeURL as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeURL() objc.ID {
-	if _r := raw.NSTextContentTypeURL(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeURL returns the string constant NSTextContentTypeURL, for use as a dictionary key or argument.
+func NSTextContentTypeURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeURL")))
 }
 
-// NSTextContentTypeCreditCardNumber returns the string constant NSTextContentTypeCreditCardNumber as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeCreditCardNumber() objc.ID {
-	if _r := raw.NSTextContentTypeCreditCardNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeCreditCardNumber returns the string constant NSTextContentTypeCreditCardNumber, for use as a dictionary key or argument.
+func NSTextContentTypeCreditCardNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeCreditCardNumber")))
 }
 
-// NSTextContentTypeCreditCardName returns the string constant NSTextContentTypeCreditCardName as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeCreditCardName() objc.ID {
-	if _r := raw.NSTextContentTypeCreditCardName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeCreditCardName returns the string constant NSTextContentTypeCreditCardName, for use as a dictionary key or argument.
+func NSTextContentTypeCreditCardName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeCreditCardName")))
 }
 
-// NSTextContentTypeCreditCardGivenName returns the string constant NSTextContentTypeCreditCardGivenName as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeCreditCardGivenName() objc.ID {
-	if _r := raw.NSTextContentTypeCreditCardGivenName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeCreditCardGivenName returns the string constant NSTextContentTypeCreditCardGivenName, for use as a dictionary key or argument.
+func NSTextContentTypeCreditCardGivenName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeCreditCardGivenName")))
 }
 
-// NSTextContentTypeCreditCardMiddleName returns the string constant NSTextContentTypeCreditCardMiddleName as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeCreditCardMiddleName() objc.ID {
-	if _r := raw.NSTextContentTypeCreditCardMiddleName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeCreditCardMiddleName returns the string constant NSTextContentTypeCreditCardMiddleName, for use as a dictionary key or argument.
+func NSTextContentTypeCreditCardMiddleName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeCreditCardMiddleName")))
 }
 
-// NSTextContentTypeCreditCardFamilyName returns the string constant NSTextContentTypeCreditCardFamilyName as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeCreditCardFamilyName() objc.ID {
-	if _r := raw.NSTextContentTypeCreditCardFamilyName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeCreditCardFamilyName returns the string constant NSTextContentTypeCreditCardFamilyName, for use as a dictionary key or argument.
+func NSTextContentTypeCreditCardFamilyName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeCreditCardFamilyName")))
 }
 
-// NSTextContentTypeCreditCardSecurityCode returns the string constant NSTextContentTypeCreditCardSecurityCode as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeCreditCardSecurityCode() objc.ID {
-	if _r := raw.NSTextContentTypeCreditCardSecurityCode(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeCreditCardSecurityCode returns the string constant NSTextContentTypeCreditCardSecurityCode, for use as a dictionary key or argument.
+func NSTextContentTypeCreditCardSecurityCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeCreditCardSecurityCode")))
 }
 
-// NSTextContentTypeCreditCardExpiration returns the string constant NSTextContentTypeCreditCardExpiration as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeCreditCardExpiration() objc.ID {
-	if _r := raw.NSTextContentTypeCreditCardExpiration(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeCreditCardExpiration returns the string constant NSTextContentTypeCreditCardExpiration, for use as a dictionary key or argument.
+func NSTextContentTypeCreditCardExpiration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeCreditCardExpiration")))
 }
 
-// NSTextContentTypeCreditCardExpirationMonth returns the string constant NSTextContentTypeCreditCardExpirationMonth as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeCreditCardExpirationMonth() objc.ID {
-	if _r := raw.NSTextContentTypeCreditCardExpirationMonth(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeCreditCardExpirationMonth returns the string constant NSTextContentTypeCreditCardExpirationMonth, for use as a dictionary key or argument.
+func NSTextContentTypeCreditCardExpirationMonth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeCreditCardExpirationMonth")))
 }
 
-// NSTextContentTypeCreditCardExpirationYear returns the string constant NSTextContentTypeCreditCardExpirationYear as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeCreditCardExpirationYear() objc.ID {
-	if _r := raw.NSTextContentTypeCreditCardExpirationYear(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeCreditCardExpirationYear returns the string constant NSTextContentTypeCreditCardExpirationYear, for use as a dictionary key or argument.
+func NSTextContentTypeCreditCardExpirationYear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeCreditCardExpirationYear")))
 }
 
-// NSTextContentTypeCreditCardType returns the string constant NSTextContentTypeCreditCardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeCreditCardType() objc.ID {
-	if _r := raw.NSTextContentTypeCreditCardType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeCreditCardType returns the string constant NSTextContentTypeCreditCardType, for use as a dictionary key or argument.
+func NSTextContentTypeCreditCardType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeCreditCardType")))
 }
 
-// NSTextContentTypeShipmentTrackingNumber returns the string constant NSTextContentTypeShipmentTrackingNumber as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeShipmentTrackingNumber() objc.ID {
-	if _r := raw.NSTextContentTypeShipmentTrackingNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeShipmentTrackingNumber returns the string constant NSTextContentTypeShipmentTrackingNumber, for use as a dictionary key or argument.
+func NSTextContentTypeShipmentTrackingNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeShipmentTrackingNumber")))
 }
 
-// NSTextContentTypeFlightNumber returns the string constant NSTextContentTypeFlightNumber as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeFlightNumber() objc.ID {
-	if _r := raw.NSTextContentTypeFlightNumber(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeFlightNumber returns the string constant NSTextContentTypeFlightNumber, for use as a dictionary key or argument.
+func NSTextContentTypeFlightNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeFlightNumber")))
 }
 
-// NSTextContentTypeDateTime returns the string constant NSTextContentTypeDateTime as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeDateTime() objc.ID {
-	if _r := raw.NSTextContentTypeDateTime(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeDateTime returns the string constant NSTextContentTypeDateTime, for use as a dictionary key or argument.
+func NSTextContentTypeDateTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeDateTime")))
 }
 
-// NSTextContentTypeBirthdate returns the string constant NSTextContentTypeBirthdate as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeBirthdate() objc.ID {
-	if _r := raw.NSTextContentTypeBirthdate(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeBirthdate returns the string constant NSTextContentTypeBirthdate, for use as a dictionary key or argument.
+func NSTextContentTypeBirthdate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeBirthdate")))
 }
 
-// NSTextContentTypeBirthdateDay returns the string constant NSTextContentTypeBirthdateDay as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeBirthdateDay() objc.ID {
-	if _r := raw.NSTextContentTypeBirthdateDay(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeBirthdateDay returns the string constant NSTextContentTypeBirthdateDay, for use as a dictionary key or argument.
+func NSTextContentTypeBirthdateDay() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeBirthdateDay")))
 }
 
-// NSTextContentTypeBirthdateMonth returns the string constant NSTextContentTypeBirthdateMonth as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeBirthdateMonth() objc.ID {
-	if _r := raw.NSTextContentTypeBirthdateMonth(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeBirthdateMonth returns the string constant NSTextContentTypeBirthdateMonth, for use as a dictionary key or argument.
+func NSTextContentTypeBirthdateMonth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeBirthdateMonth")))
 }
 
-// NSTextContentTypeBirthdateYear returns the string constant NSTextContentTypeBirthdateYear as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextContentTypeBirthdateYear() objc.ID {
-	if _r := raw.NSTextContentTypeBirthdateYear(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextContentTypeBirthdateYear returns the string constant NSTextContentTypeBirthdateYear, for use as a dictionary key or argument.
+func NSTextContentTypeBirthdateYear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextContentTypeBirthdateYear")))
 }
 
-// NSFontAttributeName returns the string constant NSFontAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSFontAttributeName() objc.ID {
-	if _r := raw.NSFontAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSFontAttributeName returns the string constant NSFontAttributeName, for use as a dictionary key or argument.
+func NSFontAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFontAttributeName")))
 }
 
-// NSParagraphStyleAttributeName returns the string constant NSParagraphStyleAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSParagraphStyleAttributeName() objc.ID {
-	if _r := raw.NSParagraphStyleAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSParagraphStyleAttributeName returns the string constant NSParagraphStyleAttributeName, for use as a dictionary key or argument.
+func NSParagraphStyleAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSParagraphStyleAttributeName")))
 }
 
-// NSForegroundColorAttributeName returns the string constant NSForegroundColorAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSForegroundColorAttributeName() objc.ID {
-	if _r := raw.NSForegroundColorAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSForegroundColorAttributeName returns the string constant NSForegroundColorAttributeName, for use as a dictionary key or argument.
+func NSForegroundColorAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSForegroundColorAttributeName")))
 }
 
-// NSBackgroundColorAttributeName returns the string constant NSBackgroundColorAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSBackgroundColorAttributeName() objc.ID {
-	if _r := raw.NSBackgroundColorAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSBackgroundColorAttributeName returns the string constant NSBackgroundColorAttributeName, for use as a dictionary key or argument.
+func NSBackgroundColorAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSBackgroundColorAttributeName")))
 }
 
-// NSLigatureAttributeName returns the string constant NSLigatureAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSLigatureAttributeName() objc.ID {
-	if _r := raw.NSLigatureAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSLigatureAttributeName returns the string constant NSLigatureAttributeName, for use as a dictionary key or argument.
+func NSLigatureAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSLigatureAttributeName")))
 }
 
-// NSKernAttributeName returns the string constant NSKernAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSKernAttributeName() objc.ID {
-	if _r := raw.NSKernAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSKernAttributeName returns the string constant NSKernAttributeName, for use as a dictionary key or argument.
+func NSKernAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSKernAttributeName")))
 }
 
-// NSTrackingAttributeName returns the string constant NSTrackingAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSTrackingAttributeName() objc.ID {
-	if _r := raw.NSTrackingAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTrackingAttributeName returns the string constant NSTrackingAttributeName, for use as a dictionary key or argument.
+func NSTrackingAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTrackingAttributeName")))
 }
 
-// NSStrikethroughStyleAttributeName returns the string constant NSStrikethroughStyleAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSStrikethroughStyleAttributeName() objc.ID {
-	if _r := raw.NSStrikethroughStyleAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSStrikethroughStyleAttributeName returns the string constant NSStrikethroughStyleAttributeName, for use as a dictionary key or argument.
+func NSStrikethroughStyleAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSStrikethroughStyleAttributeName")))
 }
 
-// NSUnderlineStyleAttributeName returns the string constant NSUnderlineStyleAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSUnderlineStyleAttributeName() objc.ID {
-	if _r := raw.NSUnderlineStyleAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSUnderlineStyleAttributeName returns the string constant NSUnderlineStyleAttributeName, for use as a dictionary key or argument.
+func NSUnderlineStyleAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSUnderlineStyleAttributeName")))
 }
 
-// NSStrokeColorAttributeName returns the string constant NSStrokeColorAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSStrokeColorAttributeName() objc.ID {
-	if _r := raw.NSStrokeColorAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSStrokeColorAttributeName returns the string constant NSStrokeColorAttributeName, for use as a dictionary key or argument.
+func NSStrokeColorAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSStrokeColorAttributeName")))
 }
 
-// NSStrokeWidthAttributeName returns the string constant NSStrokeWidthAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSStrokeWidthAttributeName() objc.ID {
-	if _r := raw.NSStrokeWidthAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSStrokeWidthAttributeName returns the string constant NSStrokeWidthAttributeName, for use as a dictionary key or argument.
+func NSStrokeWidthAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSStrokeWidthAttributeName")))
 }
 
-// NSShadowAttributeName returns the string constant NSShadowAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSShadowAttributeName() objc.ID {
-	if _r := raw.NSShadowAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSShadowAttributeName returns the string constant NSShadowAttributeName, for use as a dictionary key or argument.
+func NSShadowAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSShadowAttributeName")))
 }
 
-// NSTextEffectAttributeName returns the string constant NSTextEffectAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextEffectAttributeName() objc.ID {
-	if _r := raw.NSTextEffectAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextEffectAttributeName returns the string constant NSTextEffectAttributeName, for use as a dictionary key or argument.
+func NSTextEffectAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextEffectAttributeName")))
 }
 
-// NSAttachmentAttributeName returns the string constant NSAttachmentAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSAttachmentAttributeName() objc.ID {
-	if _r := raw.NSAttachmentAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAttachmentAttributeName returns the string constant NSAttachmentAttributeName, for use as a dictionary key or argument.
+func NSAttachmentAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAttachmentAttributeName")))
 }
 
-// NSLinkAttributeName returns the string constant NSLinkAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSLinkAttributeName() objc.ID {
-	if _r := raw.NSLinkAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSLinkAttributeName returns the string constant NSLinkAttributeName, for use as a dictionary key or argument.
+func NSLinkAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSLinkAttributeName")))
 }
 
-// NSBaselineOffsetAttributeName returns the string constant NSBaselineOffsetAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSBaselineOffsetAttributeName() objc.ID {
-	if _r := raw.NSBaselineOffsetAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSBaselineOffsetAttributeName returns the string constant NSBaselineOffsetAttributeName, for use as a dictionary key or argument.
+func NSBaselineOffsetAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSBaselineOffsetAttributeName")))
 }
 
-// NSUnderlineColorAttributeName returns the string constant NSUnderlineColorAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSUnderlineColorAttributeName() objc.ID {
-	if _r := raw.NSUnderlineColorAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSUnderlineColorAttributeName returns the string constant NSUnderlineColorAttributeName, for use as a dictionary key or argument.
+func NSUnderlineColorAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSUnderlineColorAttributeName")))
 }
 
-// NSStrikethroughColorAttributeName returns the string constant NSStrikethroughColorAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSStrikethroughColorAttributeName() objc.ID {
-	if _r := raw.NSStrikethroughColorAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSStrikethroughColorAttributeName returns the string constant NSStrikethroughColorAttributeName, for use as a dictionary key or argument.
+func NSStrikethroughColorAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSStrikethroughColorAttributeName")))
 }
 
-// NSWritingDirectionAttributeName returns the string constant NSWritingDirectionAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSWritingDirectionAttributeName() objc.ID {
-	if _r := raw.NSWritingDirectionAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWritingDirectionAttributeName returns the string constant NSWritingDirectionAttributeName, for use as a dictionary key or argument.
+func NSWritingDirectionAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWritingDirectionAttributeName")))
 }
 
-// NSTextHighlightStyleAttributeName returns the string constant NSTextHighlightStyleAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextHighlightStyleAttributeName() objc.ID {
-	if _r := raw.NSTextHighlightStyleAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextHighlightStyleAttributeName returns the string constant NSTextHighlightStyleAttributeName, for use as a dictionary key or argument.
+func NSTextHighlightStyleAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextHighlightStyleAttributeName")))
 }
 
-// NSTextHighlightColorSchemeAttributeName returns the string constant NSTextHighlightColorSchemeAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextHighlightColorSchemeAttributeName() objc.ID {
-	if _r := raw.NSTextHighlightColorSchemeAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextHighlightColorSchemeAttributeName returns the string constant NSTextHighlightColorSchemeAttributeName, for use as a dictionary key or argument.
+func NSTextHighlightColorSchemeAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextHighlightColorSchemeAttributeName")))
 }
 
-// NSAdaptiveImageGlyphAttributeName returns the string constant NSAdaptiveImageGlyphAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSAdaptiveImageGlyphAttributeName() objc.ID {
-	if _r := raw.NSAdaptiveImageGlyphAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAdaptiveImageGlyphAttributeName returns the string constant NSAdaptiveImageGlyphAttributeName, for use as a dictionary key or argument.
+func NSAdaptiveImageGlyphAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAdaptiveImageGlyphAttributeName")))
 }
 
-// NSWritingToolsExclusionAttributeName returns the string constant NSWritingToolsExclusionAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSWritingToolsExclusionAttributeName() objc.ID {
-	if _r := raw.NSWritingToolsExclusionAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWritingToolsExclusionAttributeName returns the string constant NSWritingToolsExclusionAttributeName, for use as a dictionary key or argument.
+func NSWritingToolsExclusionAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWritingToolsExclusionAttributeName")))
 }
 
-// NSTextEffectLetterpressStyle returns the string constant NSTextEffectLetterpressStyle as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextEffectLetterpressStyle() objc.ID {
-	if _r := raw.NSTextEffectLetterpressStyle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextEffectLetterpressStyle returns the string constant NSTextEffectLetterpressStyle, for use as a dictionary key or argument.
+func NSTextEffectLetterpressStyle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextEffectLetterpressStyle")))
 }
 
-// NSTextHighlightStyleDefault returns the string constant NSTextHighlightStyleDefault as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextHighlightStyleDefault() objc.ID {
-	if _r := raw.NSTextHighlightStyleDefault(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextHighlightStyleDefault returns the string constant NSTextHighlightStyleDefault, for use as a dictionary key or argument.
+func NSTextHighlightStyleDefault() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextHighlightStyleDefault")))
 }
 
-// NSTextHighlightColorSchemeDefault returns the string constant NSTextHighlightColorSchemeDefault as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextHighlightColorSchemeDefault() objc.ID {
-	if _r := raw.NSTextHighlightColorSchemeDefault(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextHighlightColorSchemeDefault returns the string constant NSTextHighlightColorSchemeDefault, for use as a dictionary key or argument.
+func NSTextHighlightColorSchemeDefault() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextHighlightColorSchemeDefault")))
 }
 
-// NSTextHighlightColorSchemePurple returns the string constant NSTextHighlightColorSchemePurple as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextHighlightColorSchemePurple() objc.ID {
-	if _r := raw.NSTextHighlightColorSchemePurple(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextHighlightColorSchemePurple returns the string constant NSTextHighlightColorSchemePurple, for use as a dictionary key or argument.
+func NSTextHighlightColorSchemePurple() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextHighlightColorSchemePurple")))
 }
 
-// NSTextHighlightColorSchemePink returns the string constant NSTextHighlightColorSchemePink as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextHighlightColorSchemePink() objc.ID {
-	if _r := raw.NSTextHighlightColorSchemePink(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextHighlightColorSchemePink returns the string constant NSTextHighlightColorSchemePink, for use as a dictionary key or argument.
+func NSTextHighlightColorSchemePink() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextHighlightColorSchemePink")))
 }
 
-// NSTextHighlightColorSchemeOrange returns the string constant NSTextHighlightColorSchemeOrange as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextHighlightColorSchemeOrange() objc.ID {
-	if _r := raw.NSTextHighlightColorSchemeOrange(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextHighlightColorSchemeOrange returns the string constant NSTextHighlightColorSchemeOrange, for use as a dictionary key or argument.
+func NSTextHighlightColorSchemeOrange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextHighlightColorSchemeOrange")))
 }
 
-// NSTextHighlightColorSchemeMint returns the string constant NSTextHighlightColorSchemeMint as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextHighlightColorSchemeMint() objc.ID {
-	if _r := raw.NSTextHighlightColorSchemeMint(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextHighlightColorSchemeMint returns the string constant NSTextHighlightColorSchemeMint, for use as a dictionary key or argument.
+func NSTextHighlightColorSchemeMint() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextHighlightColorSchemeMint")))
 }
 
-// NSTextHighlightColorSchemeBlue returns the string constant NSTextHighlightColorSchemeBlue as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextHighlightColorSchemeBlue() objc.ID {
-	if _r := raw.NSTextHighlightColorSchemeBlue(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextHighlightColorSchemeBlue returns the string constant NSTextHighlightColorSchemeBlue, for use as a dictionary key or argument.
+func NSTextHighlightColorSchemeBlue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextHighlightColorSchemeBlue")))
 }
 
-// NSPlainTextDocumentType returns the string constant NSPlainTextDocumentType as an objc.ID, for use as a dictionary key or selector argument.
-func NSPlainTextDocumentType() objc.ID {
-	if _r := raw.NSPlainTextDocumentType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPlainTextDocumentType returns the string constant NSPlainTextDocumentType, for use as a dictionary key or argument.
+func NSPlainTextDocumentType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPlainTextDocumentType")))
 }
 
-// NSRTFTextDocumentType returns the string constant NSRTFTextDocumentType as an objc.ID, for use as a dictionary key or selector argument.
-func NSRTFTextDocumentType() objc.ID {
-	if _r := raw.NSRTFTextDocumentType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSRTFTextDocumentType returns the string constant NSRTFTextDocumentType, for use as a dictionary key or argument.
+func NSRTFTextDocumentType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRTFTextDocumentType")))
 }
 
-// NSRTFDTextDocumentType returns the string constant NSRTFDTextDocumentType as an objc.ID, for use as a dictionary key or selector argument.
-func NSRTFDTextDocumentType() objc.ID {
-	if _r := raw.NSRTFDTextDocumentType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSRTFDTextDocumentType returns the string constant NSRTFDTextDocumentType, for use as a dictionary key or argument.
+func NSRTFDTextDocumentType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRTFDTextDocumentType")))
 }
 
-// NSHTMLTextDocumentType returns the string constant NSHTMLTextDocumentType as an objc.ID, for use as a dictionary key or selector argument.
-func NSHTMLTextDocumentType() objc.ID {
-	if _r := raw.NSHTMLTextDocumentType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSHTMLTextDocumentType returns the string constant NSHTMLTextDocumentType, for use as a dictionary key or argument.
+func NSHTMLTextDocumentType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSHTMLTextDocumentType")))
 }
 
-// NSTextLayoutSectionOrientation returns the string constant NSTextLayoutSectionOrientation as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextLayoutSectionOrientation() objc.ID {
-	if _r := raw.NSTextLayoutSectionOrientation(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextLayoutSectionOrientation returns the string constant NSTextLayoutSectionOrientation, for use as a dictionary key or argument.
+func NSTextLayoutSectionOrientation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextLayoutSectionOrientation")))
 }
 
-// NSTextLayoutSectionRange returns the string constant NSTextLayoutSectionRange as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextLayoutSectionRange() objc.ID {
-	if _r := raw.NSTextLayoutSectionRange(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextLayoutSectionRange returns the string constant NSTextLayoutSectionRange, for use as a dictionary key or argument.
+func NSTextLayoutSectionRange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextLayoutSectionRange")))
 }
 
-// NSDocumentTypeDocumentAttribute returns the string constant NSDocumentTypeDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSDocumentTypeDocumentAttribute() objc.ID {
-	if _r := raw.NSDocumentTypeDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDocumentTypeDocumentAttribute returns the string constant NSDocumentTypeDocumentAttribute, for use as a dictionary key or argument.
+func NSDocumentTypeDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDocumentTypeDocumentAttribute")))
 }
 
-// NSCharacterEncodingDocumentAttribute returns the string constant NSCharacterEncodingDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSCharacterEncodingDocumentAttribute() objc.ID {
-	if _r := raw.NSCharacterEncodingDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSCharacterEncodingDocumentAttribute returns the string constant NSCharacterEncodingDocumentAttribute, for use as a dictionary key or argument.
+func NSCharacterEncodingDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCharacterEncodingDocumentAttribute")))
 }
 
-// NSDefaultAttributesDocumentAttribute returns the string constant NSDefaultAttributesDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSDefaultAttributesDocumentAttribute() objc.ID {
-	if _r := raw.NSDefaultAttributesDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDefaultAttributesDocumentAttribute returns the string constant NSDefaultAttributesDocumentAttribute, for use as a dictionary key or argument.
+func NSDefaultAttributesDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDefaultAttributesDocumentAttribute")))
 }
 
-// NSPaperSizeDocumentAttribute returns the string constant NSPaperSizeDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSPaperSizeDocumentAttribute() objc.ID {
-	if _r := raw.NSPaperSizeDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPaperSizeDocumentAttribute returns the string constant NSPaperSizeDocumentAttribute, for use as a dictionary key or argument.
+func NSPaperSizeDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPaperSizeDocumentAttribute")))
 }
 
-// NSViewSizeDocumentAttribute returns the string constant NSViewSizeDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSViewSizeDocumentAttribute() objc.ID {
-	if _r := raw.NSViewSizeDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSViewSizeDocumentAttribute returns the string constant NSViewSizeDocumentAttribute, for use as a dictionary key or argument.
+func NSViewSizeDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSViewSizeDocumentAttribute")))
 }
 
-// NSViewZoomDocumentAttribute returns the string constant NSViewZoomDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSViewZoomDocumentAttribute() objc.ID {
-	if _r := raw.NSViewZoomDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSViewZoomDocumentAttribute returns the string constant NSViewZoomDocumentAttribute, for use as a dictionary key or argument.
+func NSViewZoomDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSViewZoomDocumentAttribute")))
 }
 
-// NSViewModeDocumentAttribute returns the string constant NSViewModeDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSViewModeDocumentAttribute() objc.ID {
-	if _r := raw.NSViewModeDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSViewModeDocumentAttribute returns the string constant NSViewModeDocumentAttribute, for use as a dictionary key or argument.
+func NSViewModeDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSViewModeDocumentAttribute")))
 }
 
-// NSDefaultFontExcludedDocumentAttribute returns the string constant NSDefaultFontExcludedDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSDefaultFontExcludedDocumentAttribute() objc.ID {
-	if _r := raw.NSDefaultFontExcludedDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDefaultFontExcludedDocumentAttribute returns the string constant NSDefaultFontExcludedDocumentAttribute, for use as a dictionary key or argument.
+func NSDefaultFontExcludedDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDefaultFontExcludedDocumentAttribute")))
 }
 
-// NSReadOnlyDocumentAttribute returns the string constant NSReadOnlyDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSReadOnlyDocumentAttribute() objc.ID {
-	if _r := raw.NSReadOnlyDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSReadOnlyDocumentAttribute returns the string constant NSReadOnlyDocumentAttribute, for use as a dictionary key or argument.
+func NSReadOnlyDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSReadOnlyDocumentAttribute")))
 }
 
-// NSBackgroundColorDocumentAttribute returns the string constant NSBackgroundColorDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSBackgroundColorDocumentAttribute() objc.ID {
-	if _r := raw.NSBackgroundColorDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSBackgroundColorDocumentAttribute returns the string constant NSBackgroundColorDocumentAttribute, for use as a dictionary key or argument.
+func NSBackgroundColorDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSBackgroundColorDocumentAttribute")))
 }
 
-// NSHyphenationFactorDocumentAttribute returns the string constant NSHyphenationFactorDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSHyphenationFactorDocumentAttribute() objc.ID {
-	if _r := raw.NSHyphenationFactorDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSHyphenationFactorDocumentAttribute returns the string constant NSHyphenationFactorDocumentAttribute, for use as a dictionary key or argument.
+func NSHyphenationFactorDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSHyphenationFactorDocumentAttribute")))
 }
 
-// NSDefaultTabIntervalDocumentAttribute returns the string constant NSDefaultTabIntervalDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSDefaultTabIntervalDocumentAttribute() objc.ID {
-	if _r := raw.NSDefaultTabIntervalDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDefaultTabIntervalDocumentAttribute returns the string constant NSDefaultTabIntervalDocumentAttribute, for use as a dictionary key or argument.
+func NSDefaultTabIntervalDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDefaultTabIntervalDocumentAttribute")))
 }
 
-// NSTextLayoutSectionsAttribute returns the string constant NSTextLayoutSectionsAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextLayoutSectionsAttribute() objc.ID {
-	if _r := raw.NSTextLayoutSectionsAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextLayoutSectionsAttribute returns the string constant NSTextLayoutSectionsAttribute, for use as a dictionary key or argument.
+func NSTextLayoutSectionsAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextLayoutSectionsAttribute")))
 }
 
-// NSTextScalingDocumentAttribute returns the string constant NSTextScalingDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextScalingDocumentAttribute() objc.ID {
-	if _r := raw.NSTextScalingDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextScalingDocumentAttribute returns the string constant NSTextScalingDocumentAttribute, for use as a dictionary key or argument.
+func NSTextScalingDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextScalingDocumentAttribute")))
 }
 
-// NSSourceTextScalingDocumentAttribute returns the string constant NSSourceTextScalingDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSSourceTextScalingDocumentAttribute() objc.ID {
-	if _r := raw.NSSourceTextScalingDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSourceTextScalingDocumentAttribute returns the string constant NSSourceTextScalingDocumentAttribute, for use as a dictionary key or argument.
+func NSSourceTextScalingDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSourceTextScalingDocumentAttribute")))
 }
 
-// NSCocoaVersionDocumentAttribute returns the string constant NSCocoaVersionDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSCocoaVersionDocumentAttribute() objc.ID {
-	if _r := raw.NSCocoaVersionDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSCocoaVersionDocumentAttribute returns the string constant NSCocoaVersionDocumentAttribute, for use as a dictionary key or argument.
+func NSCocoaVersionDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCocoaVersionDocumentAttribute")))
 }
 
-// NSDocumentTypeDocumentOption returns the string constant NSDocumentTypeDocumentOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSDocumentTypeDocumentOption() objc.ID {
-	if _r := raw.NSDocumentTypeDocumentOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDocumentTypeDocumentOption returns the string constant NSDocumentTypeDocumentOption, for use as a dictionary key or argument.
+func NSDocumentTypeDocumentOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDocumentTypeDocumentOption")))
 }
 
-// NSDefaultAttributesDocumentOption returns the string constant NSDefaultAttributesDocumentOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSDefaultAttributesDocumentOption() objc.ID {
-	if _r := raw.NSDefaultAttributesDocumentOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDefaultAttributesDocumentOption returns the string constant NSDefaultAttributesDocumentOption, for use as a dictionary key or argument.
+func NSDefaultAttributesDocumentOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDefaultAttributesDocumentOption")))
 }
 
-// NSCharacterEncodingDocumentOption returns the string constant NSCharacterEncodingDocumentOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSCharacterEncodingDocumentOption() objc.ID {
-	if _r := raw.NSCharacterEncodingDocumentOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSCharacterEncodingDocumentOption returns the string constant NSCharacterEncodingDocumentOption, for use as a dictionary key or argument.
+func NSCharacterEncodingDocumentOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCharacterEncodingDocumentOption")))
 }
 
-// NSTargetTextScalingDocumentOption returns the string constant NSTargetTextScalingDocumentOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSTargetTextScalingDocumentOption() objc.ID {
-	if _r := raw.NSTargetTextScalingDocumentOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTargetTextScalingDocumentOption returns the string constant NSTargetTextScalingDocumentOption, for use as a dictionary key or argument.
+func NSTargetTextScalingDocumentOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTargetTextScalingDocumentOption")))
 }
 
-// NSSourceTextScalingDocumentOption returns the string constant NSSourceTextScalingDocumentOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSSourceTextScalingDocumentOption() objc.ID {
-	if _r := raw.NSSourceTextScalingDocumentOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSourceTextScalingDocumentOption returns the string constant NSSourceTextScalingDocumentOption, for use as a dictionary key or argument.
+func NSSourceTextScalingDocumentOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSourceTextScalingDocumentOption")))
 }
 
-// NSTextKit1ListMarkerFormatDocumentOption returns the string constant NSTextKit1ListMarkerFormatDocumentOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextKit1ListMarkerFormatDocumentOption() objc.ID {
-	if _r := raw.NSTextKit1ListMarkerFormatDocumentOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextKit1ListMarkerFormatDocumentOption returns the string constant NSTextKit1ListMarkerFormatDocumentOption, for use as a dictionary key or argument.
+func NSTextKit1ListMarkerFormatDocumentOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextKit1ListMarkerFormatDocumentOption")))
 }
 
-// NSCursorAttributeName returns the string constant NSCursorAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSCursorAttributeName() objc.ID {
-	if _r := raw.NSCursorAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSCursorAttributeName returns the string constant NSCursorAttributeName, for use as a dictionary key or argument.
+func NSCursorAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCursorAttributeName")))
 }
 
-// NSToolTipAttributeName returns the string constant NSToolTipAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSToolTipAttributeName() objc.ID {
-	if _r := raw.NSToolTipAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSToolTipAttributeName returns the string constant NSToolTipAttributeName, for use as a dictionary key or argument.
+func NSToolTipAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSToolTipAttributeName")))
 }
 
-// NSMarkedClauseSegmentAttributeName returns the string constant NSMarkedClauseSegmentAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSMarkedClauseSegmentAttributeName() objc.ID {
-	if _r := raw.NSMarkedClauseSegmentAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSMarkedClauseSegmentAttributeName returns the string constant NSMarkedClauseSegmentAttributeName, for use as a dictionary key or argument.
+func NSMarkedClauseSegmentAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMarkedClauseSegmentAttributeName")))
 }
 
-// NSSpellingStateAttributeName returns the string constant NSSpellingStateAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSSpellingStateAttributeName() objc.ID {
-	if _r := raw.NSSpellingStateAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSpellingStateAttributeName returns the string constant NSSpellingStateAttributeName, for use as a dictionary key or argument.
+func NSSpellingStateAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSpellingStateAttributeName")))
 }
 
-// NSSuperscriptAttributeName returns the string constant NSSuperscriptAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSSuperscriptAttributeName() objc.ID {
-	if _r := raw.NSSuperscriptAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSuperscriptAttributeName returns the string constant NSSuperscriptAttributeName, for use as a dictionary key or argument.
+func NSSuperscriptAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSuperscriptAttributeName")))
 }
 
-// NSGlyphInfoAttributeName returns the string constant NSGlyphInfoAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSGlyphInfoAttributeName() objc.ID {
-	if _r := raw.NSGlyphInfoAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSGlyphInfoAttributeName returns the string constant NSGlyphInfoAttributeName, for use as a dictionary key or argument.
+func NSGlyphInfoAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSGlyphInfoAttributeName")))
 }
 
-// NSMacSimpleTextDocumentType returns the string constant NSMacSimpleTextDocumentType as an objc.ID, for use as a dictionary key or selector argument.
-func NSMacSimpleTextDocumentType() objc.ID {
-	if _r := raw.NSMacSimpleTextDocumentType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSMacSimpleTextDocumentType returns the string constant NSMacSimpleTextDocumentType, for use as a dictionary key or argument.
+func NSMacSimpleTextDocumentType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSMacSimpleTextDocumentType")))
 }
 
-// NSDocFormatTextDocumentType returns the string constant NSDocFormatTextDocumentType as an objc.ID, for use as a dictionary key or selector argument.
-func NSDocFormatTextDocumentType() objc.ID {
-	if _r := raw.NSDocFormatTextDocumentType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSDocFormatTextDocumentType returns the string constant NSDocFormatTextDocumentType, for use as a dictionary key or argument.
+func NSDocFormatTextDocumentType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSDocFormatTextDocumentType")))
 }
 
-// NSWordMLTextDocumentType returns the string constant NSWordMLTextDocumentType as an objc.ID, for use as a dictionary key or selector argument.
-func NSWordMLTextDocumentType() objc.ID {
-	if _r := raw.NSWordMLTextDocumentType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWordMLTextDocumentType returns the string constant NSWordMLTextDocumentType, for use as a dictionary key or argument.
+func NSWordMLTextDocumentType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWordMLTextDocumentType")))
 }
 
-// NSWebArchiveTextDocumentType returns the string constant NSWebArchiveTextDocumentType as an objc.ID, for use as a dictionary key or selector argument.
-func NSWebArchiveTextDocumentType() objc.ID {
-	if _r := raw.NSWebArchiveTextDocumentType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWebArchiveTextDocumentType returns the string constant NSWebArchiveTextDocumentType, for use as a dictionary key or argument.
+func NSWebArchiveTextDocumentType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWebArchiveTextDocumentType")))
 }
 
-// NSOfficeOpenXMLTextDocumentType returns the string constant NSOfficeOpenXMLTextDocumentType as an objc.ID, for use as a dictionary key or selector argument.
-func NSOfficeOpenXMLTextDocumentType() objc.ID {
-	return purego.CFConstant(raw.NSOfficeOpenXMLTextDocumentType())
+// NSOfficeOpenXMLTextDocumentType returns the string constant NSOfficeOpenXMLTextDocumentType, for use as a dictionary key or argument.
+func NSOfficeOpenXMLTextDocumentType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSOfficeOpenXMLTextDocumentType")))
 }
 
-// NSOpenDocumentTextDocumentType returns the string constant NSOpenDocumentTextDocumentType as an objc.ID, for use as a dictionary key or selector argument.
-func NSOpenDocumentTextDocumentType() objc.ID {
-	return purego.CFConstant(raw.NSOpenDocumentTextDocumentType())
+// NSOpenDocumentTextDocumentType returns the string constant NSOpenDocumentTextDocumentType, for use as a dictionary key or argument.
+func NSOpenDocumentTextDocumentType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSOpenDocumentTextDocumentType")))
 }
 
-// NSConvertedDocumentAttribute returns the string constant NSConvertedDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSConvertedDocumentAttribute() objc.ID {
-	if _r := raw.NSConvertedDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSConvertedDocumentAttribute returns the string constant NSConvertedDocumentAttribute, for use as a dictionary key or argument.
+func NSConvertedDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSConvertedDocumentAttribute")))
 }
 
-// NSFileTypeDocumentAttribute returns the string constant NSFileTypeDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSFileTypeDocumentAttribute() objc.ID {
-	return purego.CFConstant(raw.NSFileTypeDocumentAttribute())
+// NSFileTypeDocumentAttribute returns the string constant NSFileTypeDocumentAttribute, for use as a dictionary key or argument.
+func NSFileTypeDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFileTypeDocumentAttribute")))
 }
 
-// NSTitleDocumentAttribute returns the string constant NSTitleDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSTitleDocumentAttribute() objc.ID {
-	if _r := raw.NSTitleDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTitleDocumentAttribute returns the string constant NSTitleDocumentAttribute, for use as a dictionary key or argument.
+func NSTitleDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTitleDocumentAttribute")))
 }
 
-// NSCompanyDocumentAttribute returns the string constant NSCompanyDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSCompanyDocumentAttribute() objc.ID {
-	if _r := raw.NSCompanyDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSCompanyDocumentAttribute returns the string constant NSCompanyDocumentAttribute, for use as a dictionary key or argument.
+func NSCompanyDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCompanyDocumentAttribute")))
 }
 
-// NSCopyrightDocumentAttribute returns the string constant NSCopyrightDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSCopyrightDocumentAttribute() objc.ID {
-	if _r := raw.NSCopyrightDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSCopyrightDocumentAttribute returns the string constant NSCopyrightDocumentAttribute, for use as a dictionary key or argument.
+func NSCopyrightDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCopyrightDocumentAttribute")))
 }
 
-// NSSubjectDocumentAttribute returns the string constant NSSubjectDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSSubjectDocumentAttribute() objc.ID {
-	if _r := raw.NSSubjectDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSSubjectDocumentAttribute returns the string constant NSSubjectDocumentAttribute, for use as a dictionary key or argument.
+func NSSubjectDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSSubjectDocumentAttribute")))
 }
 
-// NSAuthorDocumentAttribute returns the string constant NSAuthorDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAuthorDocumentAttribute() objc.ID {
-	if _r := raw.NSAuthorDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSAuthorDocumentAttribute returns the string constant NSAuthorDocumentAttribute, for use as a dictionary key or argument.
+func NSAuthorDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAuthorDocumentAttribute")))
 }
 
-// NSKeywordsDocumentAttribute returns the string constant NSKeywordsDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSKeywordsDocumentAttribute() objc.ID {
-	if _r := raw.NSKeywordsDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSKeywordsDocumentAttribute returns the string constant NSKeywordsDocumentAttribute, for use as a dictionary key or argument.
+func NSKeywordsDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSKeywordsDocumentAttribute")))
 }
 
-// NSCommentDocumentAttribute returns the string constant NSCommentDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSCommentDocumentAttribute() objc.ID {
-	if _r := raw.NSCommentDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSCommentDocumentAttribute returns the string constant NSCommentDocumentAttribute, for use as a dictionary key or argument.
+func NSCommentDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCommentDocumentAttribute")))
 }
 
-// NSEditorDocumentAttribute returns the string constant NSEditorDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSEditorDocumentAttribute() objc.ID {
-	if _r := raw.NSEditorDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSEditorDocumentAttribute returns the string constant NSEditorDocumentAttribute, for use as a dictionary key or argument.
+func NSEditorDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSEditorDocumentAttribute")))
 }
 
-// NSCreationTimeDocumentAttribute returns the string constant NSCreationTimeDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSCreationTimeDocumentAttribute() objc.ID {
-	if _r := raw.NSCreationTimeDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSCreationTimeDocumentAttribute returns the string constant NSCreationTimeDocumentAttribute, for use as a dictionary key or argument.
+func NSCreationTimeDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCreationTimeDocumentAttribute")))
 }
 
-// NSModificationTimeDocumentAttribute returns the string constant NSModificationTimeDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSModificationTimeDocumentAttribute() objc.ID {
-	if _r := raw.NSModificationTimeDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSModificationTimeDocumentAttribute returns the string constant NSModificationTimeDocumentAttribute, for use as a dictionary key or argument.
+func NSModificationTimeDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSModificationTimeDocumentAttribute")))
 }
 
-// NSManagerDocumentAttribute returns the string constant NSManagerDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSManagerDocumentAttribute() objc.ID {
-	return purego.CFConstant(raw.NSManagerDocumentAttribute())
+// NSManagerDocumentAttribute returns the string constant NSManagerDocumentAttribute, for use as a dictionary key or argument.
+func NSManagerDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSManagerDocumentAttribute")))
 }
 
-// NSCategoryDocumentAttribute returns the string constant NSCategoryDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSCategoryDocumentAttribute() objc.ID {
-	return purego.CFConstant(raw.NSCategoryDocumentAttribute())
+// NSCategoryDocumentAttribute returns the string constant NSCategoryDocumentAttribute, for use as a dictionary key or argument.
+func NSCategoryDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSCategoryDocumentAttribute")))
 }
 
-// NSAppearanceDocumentAttribute returns the string constant NSAppearanceDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSAppearanceDocumentAttribute() objc.ID {
-	return purego.CFConstant(raw.NSAppearanceDocumentAttribute())
+// NSAppearanceDocumentAttribute returns the string constant NSAppearanceDocumentAttribute, for use as a dictionary key or argument.
+func NSAppearanceDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAppearanceDocumentAttribute")))
 }
 
-// NSExcludedElementsDocumentAttribute returns the string constant NSExcludedElementsDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSExcludedElementsDocumentAttribute() objc.ID {
-	if _r := raw.NSExcludedElementsDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSExcludedElementsDocumentAttribute returns the string constant NSExcludedElementsDocumentAttribute, for use as a dictionary key or argument.
+func NSExcludedElementsDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSExcludedElementsDocumentAttribute")))
 }
 
-// NSTextEncodingNameDocumentAttribute returns the string constant NSTextEncodingNameDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextEncodingNameDocumentAttribute() objc.ID {
-	if _r := raw.NSTextEncodingNameDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextEncodingNameDocumentAttribute returns the string constant NSTextEncodingNameDocumentAttribute, for use as a dictionary key or argument.
+func NSTextEncodingNameDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextEncodingNameDocumentAttribute")))
 }
 
-// NSPrefixSpacesDocumentAttribute returns the string constant NSPrefixSpacesDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSPrefixSpacesDocumentAttribute() objc.ID {
-	if _r := raw.NSPrefixSpacesDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPrefixSpacesDocumentAttribute returns the string constant NSPrefixSpacesDocumentAttribute, for use as a dictionary key or argument.
+func NSPrefixSpacesDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPrefixSpacesDocumentAttribute")))
 }
 
-// NSLeftMarginDocumentAttribute returns the string constant NSLeftMarginDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSLeftMarginDocumentAttribute() objc.ID {
-	if _r := raw.NSLeftMarginDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSLeftMarginDocumentAttribute returns the string constant NSLeftMarginDocumentAttribute, for use as a dictionary key or argument.
+func NSLeftMarginDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSLeftMarginDocumentAttribute")))
 }
 
-// NSRightMarginDocumentAttribute returns the string constant NSRightMarginDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSRightMarginDocumentAttribute() objc.ID {
-	if _r := raw.NSRightMarginDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSRightMarginDocumentAttribute returns the string constant NSRightMarginDocumentAttribute, for use as a dictionary key or argument.
+func NSRightMarginDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRightMarginDocumentAttribute")))
 }
 
-// NSTopMarginDocumentAttribute returns the string constant NSTopMarginDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSTopMarginDocumentAttribute() objc.ID {
-	if _r := raw.NSTopMarginDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTopMarginDocumentAttribute returns the string constant NSTopMarginDocumentAttribute, for use as a dictionary key or argument.
+func NSTopMarginDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTopMarginDocumentAttribute")))
 }
 
-// NSBottomMarginDocumentAttribute returns the string constant NSBottomMarginDocumentAttribute as an objc.ID, for use as a dictionary key or selector argument.
-func NSBottomMarginDocumentAttribute() objc.ID {
-	if _r := raw.NSBottomMarginDocumentAttribute(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSBottomMarginDocumentAttribute returns the string constant NSBottomMarginDocumentAttribute, for use as a dictionary key or argument.
+func NSBottomMarginDocumentAttribute() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSBottomMarginDocumentAttribute")))
 }
 
-// NSTextEncodingNameDocumentOption returns the string constant NSTextEncodingNameDocumentOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextEncodingNameDocumentOption() objc.ID {
-	if _r := raw.NSTextEncodingNameDocumentOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextEncodingNameDocumentOption returns the string constant NSTextEncodingNameDocumentOption, for use as a dictionary key or argument.
+func NSTextEncodingNameDocumentOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextEncodingNameDocumentOption")))
 }
 
-// NSBaseURLDocumentOption returns the string constant NSBaseURLDocumentOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSBaseURLDocumentOption() objc.ID {
-	if _r := raw.NSBaseURLDocumentOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSBaseURLDocumentOption returns the string constant NSBaseURLDocumentOption, for use as a dictionary key or argument.
+func NSBaseURLDocumentOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSBaseURLDocumentOption")))
 }
 
-// NSTimeoutDocumentOption returns the string constant NSTimeoutDocumentOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSTimeoutDocumentOption() objc.ID {
-	if _r := raw.NSTimeoutDocumentOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTimeoutDocumentOption returns the string constant NSTimeoutDocumentOption, for use as a dictionary key or argument.
+func NSTimeoutDocumentOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTimeoutDocumentOption")))
 }
 
-// NSWebPreferencesDocumentOption returns the string constant NSWebPreferencesDocumentOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSWebPreferencesDocumentOption() objc.ID {
-	if _r := raw.NSWebPreferencesDocumentOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWebPreferencesDocumentOption returns the string constant NSWebPreferencesDocumentOption, for use as a dictionary key or argument.
+func NSWebPreferencesDocumentOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWebPreferencesDocumentOption")))
 }
 
-// NSWebResourceLoadDelegateDocumentOption returns the string constant NSWebResourceLoadDelegateDocumentOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSWebResourceLoadDelegateDocumentOption() objc.ID {
-	if _r := raw.NSWebResourceLoadDelegateDocumentOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSWebResourceLoadDelegateDocumentOption returns the string constant NSWebResourceLoadDelegateDocumentOption, for use as a dictionary key or argument.
+func NSWebResourceLoadDelegateDocumentOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSWebResourceLoadDelegateDocumentOption")))
 }
 
-// NSTextSizeMultiplierDocumentOption returns the string constant NSTextSizeMultiplierDocumentOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextSizeMultiplierDocumentOption() objc.ID {
-	if _r := raw.NSTextSizeMultiplierDocumentOption(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextSizeMultiplierDocumentOption returns the string constant NSTextSizeMultiplierDocumentOption, for use as a dictionary key or argument.
+func NSTextSizeMultiplierDocumentOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextSizeMultiplierDocumentOption")))
 }
 
-// NSFileTypeDocumentOption returns the string constant NSFileTypeDocumentOption as an objc.ID, for use as a dictionary key or selector argument.
-func NSFileTypeDocumentOption() objc.ID {
-	return purego.CFConstant(raw.NSFileTypeDocumentOption())
+// NSFileTypeDocumentOption returns the string constant NSFileTypeDocumentOption, for use as a dictionary key or argument.
+func NSFileTypeDocumentOption() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFileTypeDocumentOption")))
 }
 
-// NSObliquenessAttributeName returns the string constant NSObliquenessAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSObliquenessAttributeName() objc.ID {
-	if _r := raw.NSObliquenessAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSObliquenessAttributeName returns the string constant NSObliquenessAttributeName, for use as a dictionary key or argument.
+func NSObliquenessAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSObliquenessAttributeName")))
 }
 
-// NSExpansionAttributeName returns the string constant NSExpansionAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSExpansionAttributeName() objc.ID {
-	if _r := raw.NSExpansionAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSExpansionAttributeName returns the string constant NSExpansionAttributeName, for use as a dictionary key or argument.
+func NSExpansionAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSExpansionAttributeName")))
 }
 
-// NSVerticalGlyphFormAttributeName returns the string constant NSVerticalGlyphFormAttributeName as an objc.ID, for use as a dictionary key or selector argument.
-func NSVerticalGlyphFormAttributeName() objc.ID {
-	if _r := raw.NSVerticalGlyphFormAttributeName(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSVerticalGlyphFormAttributeName returns the string constant NSVerticalGlyphFormAttributeName, for use as a dictionary key or argument.
+func NSVerticalGlyphFormAttributeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSVerticalGlyphFormAttributeName")))
 }
 
-// NSTextStorageWillProcessEditingNotification returns the string constant NSTextStorageWillProcessEditingNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextStorageWillProcessEditingNotification() objc.ID {
-	if _r := raw.NSTextStorageWillProcessEditingNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextStorageWillProcessEditingNotification returns the string constant NSTextStorageWillProcessEditingNotification, for use as a dictionary key or argument.
+func NSTextStorageWillProcessEditingNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextStorageWillProcessEditingNotification")))
 }
 
-// NSTextStorageDidProcessEditingNotification returns the string constant NSTextStorageDidProcessEditingNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextStorageDidProcessEditingNotification() objc.ID {
-	if _r := raw.NSTextStorageDidProcessEditingNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextStorageDidProcessEditingNotification returns the string constant NSTextStorageDidProcessEditingNotification, for use as a dictionary key or argument.
+func NSTextStorageDidProcessEditingNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextStorageDidProcessEditingNotification")))
 }
 
-// NSToolbarItemKey returns the string constant NSToolbarItemKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSToolbarItemKey() objc.ID {
-	return purego.CFConstant(raw.NSToolbarItemKey())
-}
+// NSToolbarItemKey returns the string constant NSToolbarItemKey, for use as a dictionary key or argument.
+func NSToolbarItemKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSToolbarItemKey"))) }
 
-// NSToolbarNewIndexKey returns the string constant NSToolbarNewIndexKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSToolbarNewIndexKey() objc.ID {
-	return purego.CFConstant(raw.NSToolbarNewIndexKey())
+// NSToolbarNewIndexKey returns the string constant NSToolbarNewIndexKey, for use as a dictionary key or argument.
+func NSToolbarNewIndexKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarNewIndexKey")))
 }
 
 // A space item of a standard fixed size.
-// NSToolbarSpaceItemIdentifier returns the string constant NSToolbarSpaceItemIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSToolbarSpaceItemIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSToolbarSpaceItemIdentifier())
+// NSToolbarSpaceItemIdentifier returns the string constant NSToolbarSpaceItemIdentifier, for use as a dictionary key or argument.
+func NSToolbarSpaceItemIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarSpaceItemIdentifier")))
 }
 
 // A space item of flexible width.
-// NSToolbarFlexibleSpaceItemIdentifier returns the string constant NSToolbarFlexibleSpaceItemIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSToolbarFlexibleSpaceItemIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSToolbarFlexibleSpaceItemIdentifier())
+// NSToolbarFlexibleSpaceItemIdentifier returns the string constant NSToolbarFlexibleSpaceItemIdentifier, for use as a dictionary key or argument.
+func NSToolbarFlexibleSpaceItemIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarFlexibleSpaceItemIdentifier")))
 }
 
 // A standard item that is configured to show the color panel when invoked.
-// NSToolbarShowColorsItemIdentifier returns the string constant NSToolbarShowColorsItemIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSToolbarShowColorsItemIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSToolbarShowColorsItemIdentifier())
+// NSToolbarShowColorsItemIdentifier returns the string constant NSToolbarShowColorsItemIdentifier, for use as a dictionary key or argument.
+func NSToolbarShowColorsItemIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarShowColorsItemIdentifier")))
 }
 
 // A standard item that is configured to show the font panel when invoked.
-// NSToolbarShowFontsItemIdentifier returns the string constant NSToolbarShowFontsItemIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSToolbarShowFontsItemIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSToolbarShowFontsItemIdentifier())
+// NSToolbarShowFontsItemIdentifier returns the string constant NSToolbarShowFontsItemIdentifier, for use as a dictionary key or argument.
+func NSToolbarShowFontsItemIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarShowFontsItemIdentifier")))
 }
 
 // A standard item that is configured to send -printDocument: to the firstResponder when invoked
-// NSToolbarPrintItemIdentifier returns the string constant NSToolbarPrintItemIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSToolbarPrintItemIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSToolbarPrintItemIdentifier())
+// NSToolbarPrintItemIdentifier returns the string constant NSToolbarPrintItemIdentifier, for use as a dictionary key or argument.
+func NSToolbarPrintItemIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarPrintItemIdentifier")))
 }
 
 // A standard item that is configured to send -toggleSidebar: to the firstResponder when invoked.
-// NSToolbarToggleSidebarItemIdentifier returns the string constant NSToolbarToggleSidebarItemIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSToolbarToggleSidebarItemIdentifier() objc.ID {
-	if _r := raw.NSToolbarToggleSidebarItemIdentifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSToolbarToggleSidebarItemIdentifier returns the string constant NSToolbarToggleSidebarItemIdentifier, for use as a dictionary key or argument.
+func NSToolbarToggleSidebarItemIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarToggleSidebarItemIdentifier")))
 }
 
 // A standard item that is configured to send -toggleInspector: to the firstResponder when invoked.
-// NSToolbarToggleInspectorItemIdentifier returns the string constant NSToolbarToggleInspectorItemIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSToolbarToggleInspectorItemIdentifier() objc.ID {
-	if _r := raw.NSToolbarToggleInspectorItemIdentifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSToolbarToggleInspectorItemIdentifier returns the string constant NSToolbarToggleInspectorItemIdentifier, for use as a dictionary key or argument.
+func NSToolbarToggleInspectorItemIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarToggleInspectorItemIdentifier")))
 }
 
 // A standard item for cloud sharing via NSSharingServiceNameCloudSharing. It validates itself and modifies its appearance by using the NSCloudSharingValidation protocol. It sends -performCloudSharing: to the firstResponder.
-// NSToolbarCloudSharingItemIdentifier returns the string constant NSToolbarCloudSharingItemIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSToolbarCloudSharingItemIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSToolbarCloudSharingItemIdentifier())
+// NSToolbarCloudSharingItemIdentifier returns the string constant NSToolbarCloudSharingItemIdentifier, for use as a dictionary key or argument.
+func NSToolbarCloudSharingItemIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarCloudSharingItemIdentifier")))
 }
 
 // A standard item that is configured to send -showWritingTools: to the firstResponder when invoked.
-// NSToolbarWritingToolsItemIdentifier returns the string constant NSToolbarWritingToolsItemIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSToolbarWritingToolsItemIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSToolbarWritingToolsItemIdentifier())
+// NSToolbarWritingToolsItemIdentifier returns the string constant NSToolbarWritingToolsItemIdentifier, for use as a dictionary key or argument.
+func NSToolbarWritingToolsItemIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarWritingToolsItemIdentifier")))
 }
 
 // Creates a new `NSTrackingSeparatorToolbarItem` and automatically configures it to track the divider of the sidebar if one is discovered. Only applies to windows with `NSWindowStyleMaskFullSizeContentView` applied.
-// NSToolbarSidebarTrackingSeparatorItemIdentifier returns the string constant NSToolbarSidebarTrackingSeparatorItemIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSToolbarSidebarTrackingSeparatorItemIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSToolbarSidebarTrackingSeparatorItemIdentifier())
+// NSToolbarSidebarTrackingSeparatorItemIdentifier returns the string constant NSToolbarSidebarTrackingSeparatorItemIdentifier, for use as a dictionary key or argument.
+func NSToolbarSidebarTrackingSeparatorItemIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarSidebarTrackingSeparatorItemIdentifier")))
 }
 
 // Creates a new `NSTrackingSeparatorToolbarItem` and automatically configures it to track the divider of the inspector if one is discovered. Only applies to windows with `NSWindowStyleMaskFullSizeContentView` applied.
-// NSToolbarInspectorTrackingSeparatorItemIdentifier returns the string constant NSToolbarInspectorTrackingSeparatorItemIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSToolbarInspectorTrackingSeparatorItemIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSToolbarInspectorTrackingSeparatorItemIdentifier())
+// NSToolbarInspectorTrackingSeparatorItemIdentifier returns the string constant NSToolbarInspectorTrackingSeparatorItemIdentifier, for use as a dictionary key or argument.
+func NSToolbarInspectorTrackingSeparatorItemIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarInspectorTrackingSeparatorItemIdentifier")))
 }
 
 // Deprecated Item Identifiers
-// NSToolbarSeparatorItemIdentifier returns the string constant NSToolbarSeparatorItemIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSToolbarSeparatorItemIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSToolbarSeparatorItemIdentifier())
+// NSToolbarSeparatorItemIdentifier returns the string constant NSToolbarSeparatorItemIdentifier, for use as a dictionary key or argument.
+func NSToolbarSeparatorItemIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarSeparatorItemIdentifier")))
 }
 
-// NSToolbarCustomizeToolbarItemIdentifier returns the string constant NSToolbarCustomizeToolbarItemIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSToolbarCustomizeToolbarItemIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSToolbarCustomizeToolbarItemIdentifier())
+// NSToolbarCustomizeToolbarItemIdentifier returns the string constant NSToolbarCustomizeToolbarItemIdentifier, for use as a dictionary key or argument.
+func NSToolbarCustomizeToolbarItemIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSToolbarCustomizeToolbarItemIdentifier")))
 }
 
-// NSComboBoxWillPopUpNotification returns the string constant NSComboBoxWillPopUpNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSComboBoxWillPopUpNotification() objc.ID {
-	if _r := raw.NSComboBoxWillPopUpNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSComboBoxWillPopUpNotification returns the string constant NSComboBoxWillPopUpNotification, for use as a dictionary key or argument.
+func NSComboBoxWillPopUpNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSComboBoxWillPopUpNotification")))
 }
 
-// NSComboBoxWillDismissNotification returns the string constant NSComboBoxWillDismissNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSComboBoxWillDismissNotification() objc.ID {
-	if _r := raw.NSComboBoxWillDismissNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSComboBoxWillDismissNotification returns the string constant NSComboBoxWillDismissNotification, for use as a dictionary key or argument.
+func NSComboBoxWillDismissNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSComboBoxWillDismissNotification")))
 }
 
-// NSComboBoxSelectionDidChangeNotification returns the string constant NSComboBoxSelectionDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSComboBoxSelectionDidChangeNotification() objc.ID {
-	if _r := raw.NSComboBoxSelectionDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSComboBoxSelectionDidChangeNotification returns the string constant NSComboBoxSelectionDidChangeNotification, for use as a dictionary key or argument.
+func NSComboBoxSelectionDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSComboBoxSelectionDidChangeNotification")))
 }
 
-// NSComboBoxSelectionIsChangingNotification returns the string constant NSComboBoxSelectionIsChangingNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSComboBoxSelectionIsChangingNotification() objc.ID {
-	if _r := raw.NSComboBoxSelectionIsChangingNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSComboBoxSelectionIsChangingNotification returns the string constant NSComboBoxSelectionIsChangingNotification, for use as a dictionary key or argument.
+func NSComboBoxSelectionIsChangingNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSComboBoxSelectionIsChangingNotification")))
 }
 
-// NSAllRomanInputSourcesLocaleIdentifier returns the string constant NSAllRomanInputSourcesLocaleIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSAllRomanInputSourcesLocaleIdentifier() objc.ID {
-	return purego.CFConstant(raw.NSAllRomanInputSourcesLocaleIdentifier())
+// NSAllRomanInputSourcesLocaleIdentifier returns the string constant NSAllRomanInputSourcesLocaleIdentifier, for use as a dictionary key or argument.
+func NSAllRomanInputSourcesLocaleIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSAllRomanInputSourcesLocaleIdentifier")))
 }
 
-// NSTouchBarItemIdentifierCharacterPicker returns the string constant NSTouchBarItemIdentifierCharacterPicker as an objc.ID, for use as a dictionary key or selector argument.
-func NSTouchBarItemIdentifierCharacterPicker() objc.ID {
-	return purego.CFConstant(raw.NSTouchBarItemIdentifierCharacterPicker())
+// NSTouchBarItemIdentifierCharacterPicker returns the string constant NSTouchBarItemIdentifierCharacterPicker, for use as a dictionary key or argument.
+func NSTouchBarItemIdentifierCharacterPicker() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTouchBarItemIdentifierCharacterPicker")))
 }
 
-// NSTouchBarItemIdentifierTextColorPicker returns the string constant NSTouchBarItemIdentifierTextColorPicker as an objc.ID, for use as a dictionary key or selector argument.
-func NSTouchBarItemIdentifierTextColorPicker() objc.ID {
-	return purego.CFConstant(raw.NSTouchBarItemIdentifierTextColorPicker())
+// NSTouchBarItemIdentifierTextColorPicker returns the string constant NSTouchBarItemIdentifierTextColorPicker, for use as a dictionary key or argument.
+func NSTouchBarItemIdentifierTextColorPicker() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTouchBarItemIdentifierTextColorPicker")))
 }
 
-// NSTouchBarItemIdentifierTextStyle returns the string constant NSTouchBarItemIdentifierTextStyle as an objc.ID, for use as a dictionary key or selector argument.
-func NSTouchBarItemIdentifierTextStyle() objc.ID {
-	return purego.CFConstant(raw.NSTouchBarItemIdentifierTextStyle())
+// NSTouchBarItemIdentifierTextStyle returns the string constant NSTouchBarItemIdentifierTextStyle, for use as a dictionary key or argument.
+func NSTouchBarItemIdentifierTextStyle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTouchBarItemIdentifierTextStyle")))
 }
 
-// NSTouchBarItemIdentifierTextAlignment returns the string constant NSTouchBarItemIdentifierTextAlignment as an objc.ID, for use as a dictionary key or selector argument.
-func NSTouchBarItemIdentifierTextAlignment() objc.ID {
-	return purego.CFConstant(raw.NSTouchBarItemIdentifierTextAlignment())
+// NSTouchBarItemIdentifierTextAlignment returns the string constant NSTouchBarItemIdentifierTextAlignment, for use as a dictionary key or argument.
+func NSTouchBarItemIdentifierTextAlignment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTouchBarItemIdentifierTextAlignment")))
 }
 
-// NSTouchBarItemIdentifierTextList returns the string constant NSTouchBarItemIdentifierTextList as an objc.ID, for use as a dictionary key or selector argument.
-func NSTouchBarItemIdentifierTextList() objc.ID {
-	return purego.CFConstant(raw.NSTouchBarItemIdentifierTextList())
+// NSTouchBarItemIdentifierTextList returns the string constant NSTouchBarItemIdentifierTextList, for use as a dictionary key or argument.
+func NSTouchBarItemIdentifierTextList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTouchBarItemIdentifierTextList")))
 }
 
-// NSTouchBarItemIdentifierTextFormat returns the string constant NSTouchBarItemIdentifierTextFormat as an objc.ID, for use as a dictionary key or selector argument.
-func NSTouchBarItemIdentifierTextFormat() objc.ID {
-	return purego.CFConstant(raw.NSTouchBarItemIdentifierTextFormat())
+// NSTouchBarItemIdentifierTextFormat returns the string constant NSTouchBarItemIdentifierTextFormat, for use as a dictionary key or argument.
+func NSTouchBarItemIdentifierTextFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTouchBarItemIdentifierTextFormat")))
 }
 
-// NSTextViewWillChangeNotifyingTextViewNotification returns the string constant NSTextViewWillChangeNotifyingTextViewNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextViewWillChangeNotifyingTextViewNotification() objc.ID {
-	if _r := raw.NSTextViewWillChangeNotifyingTextViewNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextViewWillChangeNotifyingTextViewNotification returns the string constant NSTextViewWillChangeNotifyingTextViewNotification, for use as a dictionary key or argument.
+func NSTextViewWillChangeNotifyingTextViewNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextViewWillChangeNotifyingTextViewNotification")))
 }
 
-// NSTextViewDidChangeSelectionNotification returns the string constant NSTextViewDidChangeSelectionNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextViewDidChangeSelectionNotification() objc.ID {
-	if _r := raw.NSTextViewDidChangeSelectionNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextViewDidChangeSelectionNotification returns the string constant NSTextViewDidChangeSelectionNotification, for use as a dictionary key or argument.
+func NSTextViewDidChangeSelectionNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextViewDidChangeSelectionNotification")))
 }
 
-// NSTextViewDidChangeTypingAttributesNotification returns the string constant NSTextViewDidChangeTypingAttributesNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextViewDidChangeTypingAttributesNotification() objc.ID {
-	if _r := raw.NSTextViewDidChangeTypingAttributesNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextViewDidChangeTypingAttributesNotification returns the string constant NSTextViewDidChangeTypingAttributesNotification, for use as a dictionary key or argument.
+func NSTextViewDidChangeTypingAttributesNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextViewDidChangeTypingAttributesNotification")))
 }
 
-// NSFindPanelSearchOptionsPboardType returns the string constant NSFindPanelSearchOptionsPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSFindPanelSearchOptionsPboardType() objc.ID {
-	return purego.CFConstant(raw.NSFindPanelSearchOptionsPboardType())
+// NSFindPanelSearchOptionsPboardType returns the string constant NSFindPanelSearchOptionsPboardType, for use as a dictionary key or argument.
+func NSFindPanelSearchOptionsPboardType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFindPanelSearchOptionsPboardType")))
 }
 
-// NSFindPanelCaseInsensitiveSearch returns the string constant NSFindPanelCaseInsensitiveSearch as an objc.ID, for use as a dictionary key or selector argument.
-func NSFindPanelCaseInsensitiveSearch() objc.ID {
-	return purego.CFConstant(raw.NSFindPanelCaseInsensitiveSearch())
+// NSFindPanelCaseInsensitiveSearch returns the string constant NSFindPanelCaseInsensitiveSearch, for use as a dictionary key or argument.
+func NSFindPanelCaseInsensitiveSearch() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFindPanelCaseInsensitiveSearch")))
 }
 
-// NSFindPanelSubstringMatch returns the string constant NSFindPanelSubstringMatch as an objc.ID, for use as a dictionary key or selector argument.
-func NSFindPanelSubstringMatch() objc.ID {
-	return purego.CFConstant(raw.NSFindPanelSubstringMatch())
+// NSFindPanelSubstringMatch returns the string constant NSFindPanelSubstringMatch, for use as a dictionary key or argument.
+func NSFindPanelSubstringMatch() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSFindPanelSubstringMatch")))
 }
 
-// NSTableViewSelectionDidChangeNotification returns the string constant NSTableViewSelectionDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSTableViewSelectionDidChangeNotification() objc.ID {
-	if _r := raw.NSTableViewSelectionDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTableViewSelectionDidChangeNotification returns the string constant NSTableViewSelectionDidChangeNotification, for use as a dictionary key or argument.
+func NSTableViewSelectionDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTableViewSelectionDidChangeNotification")))
 }
 
-// NSTableViewColumnDidMoveNotification returns the string constant NSTableViewColumnDidMoveNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSTableViewColumnDidMoveNotification() objc.ID {
-	if _r := raw.NSTableViewColumnDidMoveNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTableViewColumnDidMoveNotification returns the string constant NSTableViewColumnDidMoveNotification, for use as a dictionary key or argument.
+func NSTableViewColumnDidMoveNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTableViewColumnDidMoveNotification")))
 }
 
-// NSTableViewColumnDidResizeNotification returns the string constant NSTableViewColumnDidResizeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSTableViewColumnDidResizeNotification() objc.ID {
-	if _r := raw.NSTableViewColumnDidResizeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTableViewColumnDidResizeNotification returns the string constant NSTableViewColumnDidResizeNotification, for use as a dictionary key or argument.
+func NSTableViewColumnDidResizeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTableViewColumnDidResizeNotification")))
 }
 
-// NSTableViewSelectionIsChangingNotification returns the string constant NSTableViewSelectionIsChangingNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSTableViewSelectionIsChangingNotification() objc.ID {
-	if _r := raw.NSTableViewSelectionIsChangingNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTableViewSelectionIsChangingNotification returns the string constant NSTableViewSelectionIsChangingNotification, for use as a dictionary key or argument.
+func NSTableViewSelectionIsChangingNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTableViewSelectionIsChangingNotification")))
 }
 
-// NSTableViewRowViewKey returns the string constant NSTableViewRowViewKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSTableViewRowViewKey() objc.ID {
-	return purego.CFConstant(raw.NSTableViewRowViewKey())
+// NSTableViewRowViewKey returns the string constant NSTableViewRowViewKey, for use as a dictionary key or argument.
+func NSTableViewRowViewKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTableViewRowViewKey")))
 }
 
-// NSOutlineViewDisclosureButtonKey returns the string constant NSOutlineViewDisclosureButtonKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSOutlineViewDisclosureButtonKey() objc.ID {
-	return purego.CFConstant(raw.NSOutlineViewDisclosureButtonKey())
+// NSOutlineViewDisclosureButtonKey returns the string constant NSOutlineViewDisclosureButtonKey, for use as a dictionary key or argument.
+func NSOutlineViewDisclosureButtonKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSOutlineViewDisclosureButtonKey")))
 }
 
-// NSOutlineViewShowHideButtonKey returns the string constant NSOutlineViewShowHideButtonKey as an objc.ID, for use as a dictionary key or selector argument.
-func NSOutlineViewShowHideButtonKey() objc.ID {
-	return purego.CFConstant(raw.NSOutlineViewShowHideButtonKey())
+// NSOutlineViewShowHideButtonKey returns the string constant NSOutlineViewShowHideButtonKey, for use as a dictionary key or argument.
+func NSOutlineViewShowHideButtonKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSOutlineViewShowHideButtonKey")))
 }
 
-// NSOutlineViewSelectionDidChangeNotification returns the string constant NSOutlineViewSelectionDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSOutlineViewSelectionDidChangeNotification() objc.ID {
-	if _r := raw.NSOutlineViewSelectionDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSOutlineViewSelectionDidChangeNotification returns the string constant NSOutlineViewSelectionDidChangeNotification, for use as a dictionary key or argument.
+func NSOutlineViewSelectionDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSOutlineViewSelectionDidChangeNotification")))
 }
 
-// NSOutlineViewColumnDidMoveNotification returns the string constant NSOutlineViewColumnDidMoveNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSOutlineViewColumnDidMoveNotification() objc.ID {
-	if _r := raw.NSOutlineViewColumnDidMoveNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSOutlineViewColumnDidMoveNotification returns the string constant NSOutlineViewColumnDidMoveNotification, for use as a dictionary key or argument.
+func NSOutlineViewColumnDidMoveNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSOutlineViewColumnDidMoveNotification")))
 }
 
-// NSOutlineViewColumnDidResizeNotification returns the string constant NSOutlineViewColumnDidResizeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSOutlineViewColumnDidResizeNotification() objc.ID {
-	if _r := raw.NSOutlineViewColumnDidResizeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSOutlineViewColumnDidResizeNotification returns the string constant NSOutlineViewColumnDidResizeNotification, for use as a dictionary key or argument.
+func NSOutlineViewColumnDidResizeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSOutlineViewColumnDidResizeNotification")))
 }
 
-// NSOutlineViewSelectionIsChangingNotification returns the string constant NSOutlineViewSelectionIsChangingNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSOutlineViewSelectionIsChangingNotification() objc.ID {
-	if _r := raw.NSOutlineViewSelectionIsChangingNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSOutlineViewSelectionIsChangingNotification returns the string constant NSOutlineViewSelectionIsChangingNotification, for use as a dictionary key or argument.
+func NSOutlineViewSelectionIsChangingNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSOutlineViewSelectionIsChangingNotification")))
 }
 
-// NSOutlineViewItemWillExpandNotification returns the string constant NSOutlineViewItemWillExpandNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSOutlineViewItemWillExpandNotification() objc.ID {
-	if _r := raw.NSOutlineViewItemWillExpandNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSOutlineViewItemWillExpandNotification returns the string constant NSOutlineViewItemWillExpandNotification, for use as a dictionary key or argument.
+func NSOutlineViewItemWillExpandNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSOutlineViewItemWillExpandNotification")))
 }
 
-// NSOutlineViewItemDidExpandNotification returns the string constant NSOutlineViewItemDidExpandNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSOutlineViewItemDidExpandNotification() objc.ID {
-	if _r := raw.NSOutlineViewItemDidExpandNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSOutlineViewItemDidExpandNotification returns the string constant NSOutlineViewItemDidExpandNotification, for use as a dictionary key or argument.
+func NSOutlineViewItemDidExpandNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSOutlineViewItemDidExpandNotification")))
 }
 
-// NSOutlineViewItemWillCollapseNotification returns the string constant NSOutlineViewItemWillCollapseNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSOutlineViewItemWillCollapseNotification() objc.ID {
-	if _r := raw.NSOutlineViewItemWillCollapseNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSOutlineViewItemWillCollapseNotification returns the string constant NSOutlineViewItemWillCollapseNotification, for use as a dictionary key or argument.
+func NSOutlineViewItemWillCollapseNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSOutlineViewItemWillCollapseNotification")))
 }
 
-// NSOutlineViewItemDidCollapseNotification returns the string constant NSOutlineViewItemDidCollapseNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSOutlineViewItemDidCollapseNotification() objc.ID {
-	if _r := raw.NSOutlineViewItemDidCollapseNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSOutlineViewItemDidCollapseNotification returns the string constant NSOutlineViewItemDidCollapseNotification, for use as a dictionary key or argument.
+func NSOutlineViewItemDidCollapseNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSOutlineViewItemDidCollapseNotification")))
 }
 
-// NSRulerViewUnitInches returns the string constant NSRulerViewUnitInches as an objc.ID, for use as a dictionary key or selector argument.
-func NSRulerViewUnitInches() objc.ID {
-	return purego.CFConstant(raw.NSRulerViewUnitInches())
+// NSRulerViewUnitInches returns the string constant NSRulerViewUnitInches, for use as a dictionary key or argument.
+func NSRulerViewUnitInches() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRulerViewUnitInches")))
 }
 
-// NSRulerViewUnitCentimeters returns the string constant NSRulerViewUnitCentimeters as an objc.ID, for use as a dictionary key or selector argument.
-func NSRulerViewUnitCentimeters() objc.ID {
-	return purego.CFConstant(raw.NSRulerViewUnitCentimeters())
+// NSRulerViewUnitCentimeters returns the string constant NSRulerViewUnitCentimeters, for use as a dictionary key or argument.
+func NSRulerViewUnitCentimeters() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRulerViewUnitCentimeters")))
 }
 
-// NSRulerViewUnitPoints returns the string constant NSRulerViewUnitPoints as an objc.ID, for use as a dictionary key or selector argument.
-func NSRulerViewUnitPoints() objc.ID {
-	return purego.CFConstant(raw.NSRulerViewUnitPoints())
+// NSRulerViewUnitPoints returns the string constant NSRulerViewUnitPoints, for use as a dictionary key or argument.
+func NSRulerViewUnitPoints() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRulerViewUnitPoints")))
 }
 
-// NSRulerViewUnitPicas returns the string constant NSRulerViewUnitPicas as an objc.ID, for use as a dictionary key or selector argument.
-func NSRulerViewUnitPicas() objc.ID {
-	return purego.CFConstant(raw.NSRulerViewUnitPicas())
+// NSRulerViewUnitPicas returns the string constant NSRulerViewUnitPicas, for use as a dictionary key or argument.
+func NSRulerViewUnitPicas() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRulerViewUnitPicas")))
 }
 
-// NSInterfaceStyleDefault returns the string constant NSInterfaceStyleDefault as an objc.ID, for use as a dictionary key or selector argument.
-func NSInterfaceStyleDefault() objc.ID {
-	if _r := raw.NSInterfaceStyleDefault(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSInterfaceStyleDefault returns the string constant NSInterfaceStyleDefault, for use as a dictionary key or argument.
+func NSInterfaceStyleDefault() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSInterfaceStyleDefault")))
 }
 
-// NSSoundPboardType returns the string constant NSSoundPboardType as an objc.ID, for use as a dictionary key or selector argument.
-func NSSoundPboardType() objc.ID {
-	if _r := raw.NSSoundPboardType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// NSSoundPboardType returns the string constant NSSoundPboardType, for use as a dictionary key or argument.
+func NSSoundPboardType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("NSSoundPboardType"))) }
 
-// NSTextListMarkerBox returns the string constant NSTextListMarkerBox as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextListMarkerBox() objc.ID {
-	if _r := raw.NSTextListMarkerBox(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextListMarkerBox returns the string constant NSTextListMarkerBox, for use as a dictionary key or argument.
+func NSTextListMarkerBox() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextListMarkerBox")))
 }
 
-// NSTextListMarkerCheck returns the string constant NSTextListMarkerCheck as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextListMarkerCheck() objc.ID {
-	if _r := raw.NSTextListMarkerCheck(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextListMarkerCheck returns the string constant NSTextListMarkerCheck, for use as a dictionary key or argument.
+func NSTextListMarkerCheck() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextListMarkerCheck")))
 }
 
-// NSTextListMarkerCircle returns the string constant NSTextListMarkerCircle as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextListMarkerCircle() objc.ID {
-	if _r := raw.NSTextListMarkerCircle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextListMarkerCircle returns the string constant NSTextListMarkerCircle, for use as a dictionary key or argument.
+func NSTextListMarkerCircle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextListMarkerCircle")))
 }
 
-// NSTextListMarkerDiamond returns the string constant NSTextListMarkerDiamond as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextListMarkerDiamond() objc.ID {
-	if _r := raw.NSTextListMarkerDiamond(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextListMarkerDiamond returns the string constant NSTextListMarkerDiamond, for use as a dictionary key or argument.
+func NSTextListMarkerDiamond() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextListMarkerDiamond")))
 }
 
-// NSTextListMarkerDisc returns the string constant NSTextListMarkerDisc as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextListMarkerDisc() objc.ID {
-	if _r := raw.NSTextListMarkerDisc(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextListMarkerDisc returns the string constant NSTextListMarkerDisc, for use as a dictionary key or argument.
+func NSTextListMarkerDisc() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextListMarkerDisc")))
 }
 
-// NSTextListMarkerHyphen returns the string constant NSTextListMarkerHyphen as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextListMarkerHyphen() objc.ID {
-	if _r := raw.NSTextListMarkerHyphen(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextListMarkerHyphen returns the string constant NSTextListMarkerHyphen, for use as a dictionary key or argument.
+func NSTextListMarkerHyphen() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextListMarkerHyphen")))
 }
 
-// NSTextListMarkerSquare returns the string constant NSTextListMarkerSquare as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextListMarkerSquare() objc.ID {
-	if _r := raw.NSTextListMarkerSquare(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextListMarkerSquare returns the string constant NSTextListMarkerSquare, for use as a dictionary key or argument.
+func NSTextListMarkerSquare() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextListMarkerSquare")))
 }
 
-// NSTextListMarkerLowercaseHexadecimal returns the string constant NSTextListMarkerLowercaseHexadecimal as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextListMarkerLowercaseHexadecimal() objc.ID {
-	if _r := raw.NSTextListMarkerLowercaseHexadecimal(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextListMarkerLowercaseHexadecimal returns the string constant NSTextListMarkerLowercaseHexadecimal, for use as a dictionary key or argument.
+func NSTextListMarkerLowercaseHexadecimal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextListMarkerLowercaseHexadecimal")))
 }
 
-// NSTextListMarkerUppercaseHexadecimal returns the string constant NSTextListMarkerUppercaseHexadecimal as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextListMarkerUppercaseHexadecimal() objc.ID {
-	if _r := raw.NSTextListMarkerUppercaseHexadecimal(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextListMarkerUppercaseHexadecimal returns the string constant NSTextListMarkerUppercaseHexadecimal, for use as a dictionary key or argument.
+func NSTextListMarkerUppercaseHexadecimal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextListMarkerUppercaseHexadecimal")))
 }
 
-// NSTextListMarkerOctal returns the string constant NSTextListMarkerOctal as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextListMarkerOctal() objc.ID {
-	if _r := raw.NSTextListMarkerOctal(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextListMarkerOctal returns the string constant NSTextListMarkerOctal, for use as a dictionary key or argument.
+func NSTextListMarkerOctal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextListMarkerOctal")))
 }
 
-// NSTextListMarkerLowercaseAlpha returns the string constant NSTextListMarkerLowercaseAlpha as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextListMarkerLowercaseAlpha() objc.ID {
-	if _r := raw.NSTextListMarkerLowercaseAlpha(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextListMarkerLowercaseAlpha returns the string constant NSTextListMarkerLowercaseAlpha, for use as a dictionary key or argument.
+func NSTextListMarkerLowercaseAlpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextListMarkerLowercaseAlpha")))
 }
 
-// NSTextListMarkerUppercaseAlpha returns the string constant NSTextListMarkerUppercaseAlpha as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextListMarkerUppercaseAlpha() objc.ID {
-	if _r := raw.NSTextListMarkerUppercaseAlpha(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextListMarkerUppercaseAlpha returns the string constant NSTextListMarkerUppercaseAlpha, for use as a dictionary key or argument.
+func NSTextListMarkerUppercaseAlpha() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextListMarkerUppercaseAlpha")))
 }
 
-// NSTextListMarkerLowercaseLatin returns the string constant NSTextListMarkerLowercaseLatin as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextListMarkerLowercaseLatin() objc.ID {
-	if _r := raw.NSTextListMarkerLowercaseLatin(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextListMarkerLowercaseLatin returns the string constant NSTextListMarkerLowercaseLatin, for use as a dictionary key or argument.
+func NSTextListMarkerLowercaseLatin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextListMarkerLowercaseLatin")))
 }
 
-// NSTextListMarkerUppercaseLatin returns the string constant NSTextListMarkerUppercaseLatin as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextListMarkerUppercaseLatin() objc.ID {
-	if _r := raw.NSTextListMarkerUppercaseLatin(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextListMarkerUppercaseLatin returns the string constant NSTextListMarkerUppercaseLatin, for use as a dictionary key or argument.
+func NSTextListMarkerUppercaseLatin() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextListMarkerUppercaseLatin")))
 }
 
-// NSTextListMarkerLowercaseRoman returns the string constant NSTextListMarkerLowercaseRoman as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextListMarkerLowercaseRoman() objc.ID {
-	if _r := raw.NSTextListMarkerLowercaseRoman(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextListMarkerLowercaseRoman returns the string constant NSTextListMarkerLowercaseRoman, for use as a dictionary key or argument.
+func NSTextListMarkerLowercaseRoman() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextListMarkerLowercaseRoman")))
 }
 
-// NSTextListMarkerUppercaseRoman returns the string constant NSTextListMarkerUppercaseRoman as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextListMarkerUppercaseRoman() objc.ID {
-	if _r := raw.NSTextListMarkerUppercaseRoman(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextListMarkerUppercaseRoman returns the string constant NSTextListMarkerUppercaseRoman, for use as a dictionary key or argument.
+func NSTextListMarkerUppercaseRoman() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextListMarkerUppercaseRoman")))
 }
 
-// NSTextListMarkerDecimal returns the string constant NSTextListMarkerDecimal as an objc.ID, for use as a dictionary key or selector argument.
-func NSTextListMarkerDecimal() objc.ID {
-	if _r := raw.NSTextListMarkerDecimal(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSTextListMarkerDecimal returns the string constant NSTextListMarkerDecimal, for use as a dictionary key or argument.
+func NSTextListMarkerDecimal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTextListMarkerDecimal")))
 }
 
-// NSRuleEditorPredicateLeftExpression returns the string constant NSRuleEditorPredicateLeftExpression as an objc.ID, for use as a dictionary key or selector argument.
-func NSRuleEditorPredicateLeftExpression() objc.ID {
-	if _r := raw.NSRuleEditorPredicateLeftExpression(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSRuleEditorPredicateLeftExpression returns the string constant NSRuleEditorPredicateLeftExpression, for use as a dictionary key or argument.
+func NSRuleEditorPredicateLeftExpression() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRuleEditorPredicateLeftExpression")))
 }
 
-// NSRuleEditorPredicateRightExpression returns the string constant NSRuleEditorPredicateRightExpression as an objc.ID, for use as a dictionary key or selector argument.
-func NSRuleEditorPredicateRightExpression() objc.ID {
-	if _r := raw.NSRuleEditorPredicateRightExpression(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSRuleEditorPredicateRightExpression returns the string constant NSRuleEditorPredicateRightExpression, for use as a dictionary key or argument.
+func NSRuleEditorPredicateRightExpression() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRuleEditorPredicateRightExpression")))
 }
 
-// NSRuleEditorPredicateComparisonModifier returns the string constant NSRuleEditorPredicateComparisonModifier as an objc.ID, for use as a dictionary key or selector argument.
-func NSRuleEditorPredicateComparisonModifier() objc.ID {
-	if _r := raw.NSRuleEditorPredicateComparisonModifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSRuleEditorPredicateComparisonModifier returns the string constant NSRuleEditorPredicateComparisonModifier, for use as a dictionary key or argument.
+func NSRuleEditorPredicateComparisonModifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRuleEditorPredicateComparisonModifier")))
 }
 
-// NSRuleEditorPredicateOptions returns the string constant NSRuleEditorPredicateOptions as an objc.ID, for use as a dictionary key or selector argument.
-func NSRuleEditorPredicateOptions() objc.ID {
-	if _r := raw.NSRuleEditorPredicateOptions(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSRuleEditorPredicateOptions returns the string constant NSRuleEditorPredicateOptions, for use as a dictionary key or argument.
+func NSRuleEditorPredicateOptions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRuleEditorPredicateOptions")))
 }
 
-// NSRuleEditorPredicateOperatorType returns the string constant NSRuleEditorPredicateOperatorType as an objc.ID, for use as a dictionary key or selector argument.
-func NSRuleEditorPredicateOperatorType() objc.ID {
-	if _r := raw.NSRuleEditorPredicateOperatorType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSRuleEditorPredicateOperatorType returns the string constant NSRuleEditorPredicateOperatorType, for use as a dictionary key or argument.
+func NSRuleEditorPredicateOperatorType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRuleEditorPredicateOperatorType")))
 }
 
-// NSRuleEditorPredicateCustomSelector returns the string constant NSRuleEditorPredicateCustomSelector as an objc.ID, for use as a dictionary key or selector argument.
-func NSRuleEditorPredicateCustomSelector() objc.ID {
-	if _r := raw.NSRuleEditorPredicateCustomSelector(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSRuleEditorPredicateCustomSelector returns the string constant NSRuleEditorPredicateCustomSelector, for use as a dictionary key or argument.
+func NSRuleEditorPredicateCustomSelector() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRuleEditorPredicateCustomSelector")))
 }
 
-// NSRuleEditorPredicateCompoundType returns the string constant NSRuleEditorPredicateCompoundType as an objc.ID, for use as a dictionary key or selector argument.
-func NSRuleEditorPredicateCompoundType() objc.ID {
-	if _r := raw.NSRuleEditorPredicateCompoundType(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSRuleEditorPredicateCompoundType returns the string constant NSRuleEditorPredicateCompoundType, for use as a dictionary key or argument.
+func NSRuleEditorPredicateCompoundType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRuleEditorPredicateCompoundType")))
 }
 
-// NSRuleEditorRowsDidChangeNotification returns the string constant NSRuleEditorRowsDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSRuleEditorRowsDidChangeNotification() objc.ID {
-	if _r := raw.NSRuleEditorRowsDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSRuleEditorRowsDidChangeNotification returns the string constant NSRuleEditorRowsDidChangeNotification, for use as a dictionary key or argument.
+func NSRuleEditorRowsDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSRuleEditorRowsDidChangeNotification")))
 }
 
-// NSTypeIdentifierDateText returns the string constant NSTypeIdentifierDateText as an objc.ID, for use as a dictionary key or selector argument.
-func NSTypeIdentifierDateText() objc.ID {
-	return purego.CFConstant(raw.NSTypeIdentifierDateText())
+// NSTypeIdentifierDateText returns the string constant NSTypeIdentifierDateText, for use as a dictionary key or argument.
+func NSTypeIdentifierDateText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTypeIdentifierDateText")))
 }
 
-// NSTypeIdentifierAddressText returns the string constant NSTypeIdentifierAddressText as an objc.ID, for use as a dictionary key or selector argument.
-func NSTypeIdentifierAddressText() objc.ID {
-	return purego.CFConstant(raw.NSTypeIdentifierAddressText())
+// NSTypeIdentifierAddressText returns the string constant NSTypeIdentifierAddressText, for use as a dictionary key or argument.
+func NSTypeIdentifierAddressText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTypeIdentifierAddressText")))
 }
 
-// NSTypeIdentifierPhoneNumberText returns the string constant NSTypeIdentifierPhoneNumberText as an objc.ID, for use as a dictionary key or selector argument.
-func NSTypeIdentifierPhoneNumberText() objc.ID {
-	return purego.CFConstant(raw.NSTypeIdentifierPhoneNumberText())
+// NSTypeIdentifierPhoneNumberText returns the string constant NSTypeIdentifierPhoneNumberText, for use as a dictionary key or argument.
+func NSTypeIdentifierPhoneNumberText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTypeIdentifierPhoneNumberText")))
 }
 
-// NSTypeIdentifierTransitInformationText returns the string constant NSTypeIdentifierTransitInformationText as an objc.ID, for use as a dictionary key or selector argument.
-func NSTypeIdentifierTransitInformationText() objc.ID {
-	return purego.CFConstant(raw.NSTypeIdentifierTransitInformationText())
+// NSTypeIdentifierTransitInformationText returns the string constant NSTypeIdentifierTransitInformationText, for use as a dictionary key or argument.
+func NSTypeIdentifierTransitInformationText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSTypeIdentifierTransitInformationText")))
 }

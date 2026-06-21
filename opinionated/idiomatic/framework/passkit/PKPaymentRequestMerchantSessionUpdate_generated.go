@@ -5,92 +5,111 @@
 package passkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that updates a payment request with a merchant validation.
 //
-// PaymentRequestMerchantSessionUpdate wraps [raw.PKPaymentRequestMerchantSessionUpdate] with a fluent Go API.
+// PaymentRequestMerchantSessionUpdate is an idiomatic wrapper over the Objective-C class PKPaymentRequestMerchantSessionUpdate.
 type PaymentRequestMerchantSessionUpdate struct {
-	inner *raw.PKPaymentRequestMerchantSessionUpdate
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKPaymentRequestMerchantSessionUpdate].
-func (x *PaymentRequestMerchantSessionUpdate) Unwrap() *raw.PKPaymentRequestMerchantSessionUpdate {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PaymentRequestMerchantSessionUpdate) ID() objc.ID { return x.inner.Ptr() }
-
-// PaymentRequestMerchantSessionUpdateFromID adopts an existing object pointer as a PaymentRequestMerchantSessionUpdate (nil for 0).
+// PaymentRequestMerchantSessionUpdateFromID adopts an existing Objective-C object as a PaymentRequestMerchantSessionUpdate
+// (nil for 0), retaining it and registering a release finalizer.
 func PaymentRequestMerchantSessionUpdateFromID(id objc.ID) *PaymentRequestMerchantSessionUpdate {
 	if id == 0 {
 		return nil
 	}
-	return &PaymentRequestMerchantSessionUpdate{inner: raw.PKPaymentRequestMerchantSessionUpdateFromID(id)}
+	x := &PaymentRequestMerchantSessionUpdate{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// paymentRequestMerchantSessionUpdateAdopt wraps an Objective-C object that this code just created as a
+// PaymentRequestMerchantSessionUpdate (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func paymentRequestMerchantSessionUpdateAdopt(id objc.ID) *PaymentRequestMerchantSessionUpdate {
+	if id == 0 {
+		return nil
+	}
+	x := &PaymentRequestMerchantSessionUpdate{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PaymentRequestMerchantSessionUpdate) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PaymentRequestMerchantSessionUpdate) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PaymentRequestMerchantSessionUpdate) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a payment method update with the specified status and merchant session.
 //
-// NewPaymentRequestMerchantSessionUpdateWithStatusMerchantSession creates a new [PaymentRequestMerchantSessionUpdate].
-func NewPaymentRequestMerchantSessionUpdateWithStatusMerchantSession(status PKPaymentAuthorizationStatus, session *raw.PKPaymentMerchantSession) *PaymentRequestMerchantSessionUpdate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPaymentRequestMerchantSessionUpdate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStatus:merchantSession:"), raw.PKPaymentAuthorizationStatus(status), session.Ptr())
-	return &PaymentRequestMerchantSessionUpdate{inner: raw.PKPaymentRequestMerchantSessionUpdateFromID(_id)}
+// NewPaymentRequestMerchantSessionUpdateWithStatusMerchantSession creates a new PaymentRequestMerchantSessionUpdate.
+func NewPaymentRequestMerchantSessionUpdateWithStatusMerchantSession(status PaymentAuthorizationStatus, session *PaymentMerchantSession) *PaymentRequestMerchantSessionUpdate {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPaymentRequestMerchantSessionUpdate")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithStatus:merchantSession:"), status, objref.IDOf(session))
+	return paymentRequestMerchantSessionUpdateAdopt(_id)
 }
 
 // The current authorization status for the payment.
 //
-// WithStatus sets the status property and returns the receiver for chaining.
-func (x *PaymentRequestMerchantSessionUpdate) WithStatus(status PKPaymentAuthorizationStatus) *PaymentRequestMerchantSessionUpdate {
-	x.inner.SetStatus(raw.PKPaymentAuthorizationStatus(status))
+// WithStatus sets status and returns the receiver so calls can be chained.
+func (x *PaymentRequestMerchantSessionUpdate) WithStatus(status PaymentAuthorizationStatus) *PaymentRequestMerchantSessionUpdate {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
 	return x
 }
 
 // An object that validates the identity of a merchant for the payment request.
 //
-// WithSession sets the session property and returns the receiver for chaining.
+// WithSession sets session and returns the receiver so calls can be chained.
 func (x *PaymentRequestMerchantSessionUpdate) WithSession(session *PaymentMerchantSession) *PaymentRequestMerchantSessionUpdate {
-	x.inner.SetSession(session.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSession:"), objref.IDOf(session))
 	return x
 }
 
-// Status calls the underlying Status.
-func (x *PaymentRequestMerchantSessionUpdate) Status() PKPaymentAuthorizationStatus {
-	return PKPaymentAuthorizationStatus(x.inner.Status())
+func (x *PaymentRequestMerchantSessionUpdate) Status() PaymentAuthorizationStatus {
+	_r := objc.Send[PaymentAuthorizationStatus](objref.IDOf(x), objc.RegisterName("status"))
+	return _r
 }
 
-// SetStatus calls the underlying SetStatus.
-func (x *PaymentRequestMerchantSessionUpdate) SetStatus(status PKPaymentAuthorizationStatus) {
-	x.inner.SetStatus(raw.PKPaymentAuthorizationStatus(status))
+func (x *PaymentRequestMerchantSessionUpdate) SetStatus(status PaymentAuthorizationStatus) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
 }
 
-// Session calls the underlying Session.
 func (x *PaymentRequestMerchantSessionUpdate) Session() *PaymentMerchantSession {
-	_r := x.inner.Session()
-	if _r == nil {
-		return nil
-	}
-	return &PaymentMerchantSession{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("session"))
+	return PaymentMerchantSessionFromID(_r)
 }
 
-// SetSession calls the underlying SetSession.
-func (x *PaymentRequestMerchantSessionUpdate) SetSession(session *raw.PKPaymentMerchantSession) {
-	x.inner.SetSession(session)
+func (x *PaymentRequestMerchantSessionUpdate) SetSession(session *PaymentMerchantSession) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSession:"), objref.IDOf(session))
 }
 
 // PaymentRequestMerchantSessionUpdateable is the interface implemented by [PaymentRequestMerchantSessionUpdate], for mocking and DI.
 type PaymentRequestMerchantSessionUpdateable interface {
-	Unwrap() *raw.PKPaymentRequestMerchantSessionUpdate
-	WithStatus(status PKPaymentAuthorizationStatus) *PaymentRequestMerchantSessionUpdate
+	obj.Object
+	WithStatus(status PaymentAuthorizationStatus) *PaymentRequestMerchantSessionUpdate
 	WithSession(session *PaymentMerchantSession) *PaymentRequestMerchantSessionUpdate
-	Status() PKPaymentAuthorizationStatus
-	SetStatus(status PKPaymentAuthorizationStatus)
+	Status() PaymentAuthorizationStatus
+	SetStatus(status PaymentAuthorizationStatus)
 	Session() *PaymentMerchantSession
-	SetSession(session *raw.PKPaymentMerchantSession)
+	SetSession(session *PaymentMerchantSession)
 }
 
 var _ PaymentRequestMerchantSessionUpdateable = (*PaymentRequestMerchantSessionUpdate)(nil)

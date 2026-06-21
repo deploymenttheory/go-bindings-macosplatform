@@ -5,15 +5,15 @@
 package automator
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automator"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// ActionProvider is implemented by Action and any idiomatic type wrapping a AMAction subclass.
+// ActionProvider is accepted wherever a AMAction (or one of its subclasses) is expected.
 type ActionProvider interface {
-	asAction() *raw.AMAction
+	objref.Object
 }
 
-// BundleActionProvider is implemented by BundleAction and any idiomatic type wrapping a AMBundleAction subclass.
+// BundleActionProvider is accepted wherever a AMBundleAction (or one of its subclasses) is expected.
 type BundleActionProvider interface {
-	asBundleAction() *raw.AMBundleAction
+	objref.Object
 }

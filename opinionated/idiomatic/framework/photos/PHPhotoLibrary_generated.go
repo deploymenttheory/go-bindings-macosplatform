@@ -5,154 +5,126 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An object that manages access and changes to the user’s photo library.
 //
-// PhotoLibrary wraps [raw.PHPhotoLibrary] with a fluent Go API.
+// PhotoLibrary is an idiomatic wrapper over the Objective-C class PHPhotoLibrary.
 type PhotoLibrary struct {
-	inner *raw.PHPhotoLibrary
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHPhotoLibrary].
-func (x *PhotoLibrary) Unwrap() *raw.PHPhotoLibrary { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhotoLibrary) ID() objc.ID { return x.inner.Ptr() }
-
-// PhotoLibraryFromID adopts an existing object pointer as a PhotoLibrary (nil for 0).
+// PhotoLibraryFromID adopts an existing Objective-C object as a PhotoLibrary
+// (nil for 0), retaining it and registering a release finalizer.
 func PhotoLibraryFromID(id objc.ID) *PhotoLibrary {
 	if id == 0 {
 		return nil
 	}
-	return &PhotoLibrary{inner: raw.PHPhotoLibraryFromID(id)}
+	x := &PhotoLibrary{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPhotoLibrary creates a new [PhotoLibrary].
+// photoLibraryAdopt wraps an Objective-C object that this code just created as a
+// PhotoLibrary (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func photoLibraryAdopt(id objc.ID) *PhotoLibrary {
+	if id == 0 {
+		return nil
+	}
+	x := &PhotoLibrary{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PhotoLibrary) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PhotoLibrary) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PhotoLibrary) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPhotoLibrary creates a new PhotoLibrary.
 func NewPhotoLibrary() *PhotoLibrary {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHPhotoLibrary")), objc.RegisterName("new"))
-	return &PhotoLibrary{inner: raw.PHPhotoLibraryFromID(_id)}
-}
-
-// Registers an object to observe changes to the photo library’s availability.
-//
-// RegisterAvailabilityObserver calls the underlying RegisterAvailabilityObserver.
-func (x *PhotoLibrary) RegisterAvailabilityObserver(observer raw.PHPhotoLibraryAvailabilityObserver) {
-	x.inner.RegisterAvailabilityObserver(observer)
-}
-
-// Unregisters an object from observing changes to the photo library’s availability.
-//
-// UnregisterAvailabilityObserver calls the underlying UnregisterAvailabilityObserver.
-func (x *PhotoLibrary) UnregisterAvailabilityObserver(observer raw.PHPhotoLibraryAvailabilityObserver) {
-	x.inner.UnregisterAvailabilityObserver(observer)
-}
-
-// Asynchronously runs a block that requests changes to the photo library.
-//
-// PerformChangesCompletionHandler calls the underlying PerformChangesCompletionHandler.
-func (x *PhotoLibrary) PerformChangesCompletionHandler(changeBlock func(), completionHandler func(bool, unsafe.Pointer)) {
-	x.inner.PerformChangesCompletionHandler(changeBlock, completionHandler)
+	_id := objc.Send[objc.ID](objc.ID(_class("PHPhotoLibrary")), objc.RegisterName("new"))
+	return photoLibraryAdopt(_id)
 }
 
 // Synchronously runs a block that requests changes to be performed in the photo library.
-//
-// PerformChangesAndWaitError calls the underlying PerformChangesAndWaitError.
-func (x *PhotoLibrary) PerformChangesAndWaitError(changeBlock func()) (bool, error) {
-	return x.inner.PerformChangesAndWaitError(changeBlock)
-}
-
-// Registers an object to receive messages when objects in the photo library change.
-//
-// RegisterChangeObserver calls the underlying RegisterChangeObserver.
-func (x *PhotoLibrary) RegisterChangeObserver(observer raw.PHPhotoLibraryChangeObserver) {
-	x.inner.RegisterChangeObserver(observer)
-}
-
-// Unregisters an object so that it no longer receives change messages.
-//
-// UnregisterChangeObserver calls the underlying UnregisterChangeObserver.
-func (x *PhotoLibrary) UnregisterChangeObserver(observer raw.PHPhotoLibraryChangeObserver) {
-	x.inner.UnregisterChangeObserver(observer)
+func (x *PhotoLibrary) PerformChangesAndWait(changeBlock func()) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("performChangesAndWait:error:"), changeBlock, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Retrieves the Photos library changes since the token you specify.
-//
-// FetchPersistentChangesSinceTokenError calls the underlying FetchPersistentChangesSinceTokenError.
-func (x *PhotoLibrary) FetchPersistentChangesSinceTokenError(token *raw.PHPersistentChangeToken) (*PersistentChangeFetchResult, error) {
-	_r, _err := x.inner.FetchPersistentChangesSinceTokenError(token)
-	if _err != nil {
-		return nil, _err
+func (x *PhotoLibrary) FetchPersistentChangesSinceTokenError(token *PersistentChangeToken) (*PersistentChangeFetchResult, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchPersistentChangesSinceToken:error:"), objref.IDOf(token), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &PersistentChangeFetchResult{inner: _r}, nil
+	return PersistentChangeFetchResultFromID(_r), nil
 }
 
-// UnavailabilityReason calls the underlying UnavailabilityReason.
-func (x *PhotoLibrary) UnavailabilityReason() unsafe.Pointer {
-	return x.inner.UnavailabilityReason()
-}
-
-// CurrentChangeToken calls the underlying CurrentChangeToken.
 func (x *PhotoLibrary) CurrentChangeToken() *PersistentChangeToken {
-	_r := x.inner.CurrentChangeToken()
-	if _r == nil {
-		return nil
-	}
-	return &PersistentChangeToken{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentChangeToken"))
+	return PersistentChangeTokenFromID(_r)
 }
 
 // Retrieves the local identifier mappings for the list of cloud identifiers.
-//
-// LocalIdentifierMappingsForCloudIdentifiers calls the underlying LocalIdentifierMappingsForCloudIdentifiers.
-func (x *PhotoLibrary) LocalIdentifierMappingsForCloudIdentifiers(cloudIdentifiers *foundation.NSArray[*raw.PHCloudIdentifier]) *foundation.NSDictionary[*raw.PHCloudIdentifier, *raw.PHLocalIdentifierMapping] {
-	return x.inner.LocalIdentifierMappingsForCloudIdentifiers(cloudIdentifiers)
+func (x *PhotoLibrary) LocalIdentifierMappingsForCloudIdentifiers(cloudIdentifiers []*CloudIdentifier) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localIdentifierMappingsForCloudIdentifiers:"), purego.SliceToNSArray(cloudIdentifiers, func(_v *CloudIdentifier) objc.ID { return objref.IDOf(_v) }))
+	return obj.Wrap(_r)
 }
 
 // Retrieves the cloud identifier mappings for the list of local identifiers.
-//
-// CloudIdentifierMappingsForLocalIdentifiers calls the underlying CloudIdentifierMappingsForLocalIdentifiers.
-func (x *PhotoLibrary) CloudIdentifierMappingsForLocalIdentifiers(localIdentifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSDictionary[*foundation.NSString, *raw.PHCloudIdentifierMapping] {
-	return x.inner.CloudIdentifierMappingsForLocalIdentifiers(localIdentifiers)
+func (x *PhotoLibrary) CloudIdentifierMappingsForLocalIdentifiers(localIdentifiers []string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cloudIdentifierMappingsForLocalIdentifiers:"), purego.SliceToNSArray(localIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return obj.Wrap(_r)
 }
 
 // Retrieves the equivalent local identifiers for the list of iCloud identifiers.
-//
-// LocalIdentifiersForCloudIdentifiers calls the underlying LocalIdentifiersForCloudIdentifiers.
-func (x *PhotoLibrary) LocalIdentifiersForCloudIdentifiers(cloudIdentifiers *foundation.NSArray[*raw.PHCloudIdentifier]) *foundation.NSArray[*foundation.NSString] {
-	return x.inner.LocalIdentifiersForCloudIdentifiers(cloudIdentifiers)
+func (x *PhotoLibrary) LocalIdentifiersForCloudIdentifiers(cloudIdentifiers []*CloudIdentifier) []string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localIdentifiersForCloudIdentifiers:"), purego.SliceToNSArray(cloudIdentifiers, func(_v *CloudIdentifier) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Retrieves the equivalent iCloud identifiers for the list of local identifiers.
-//
-// CloudIdentifiersForLocalIdentifiers calls the underlying CloudIdentifiersForLocalIdentifiers.
-func (x *PhotoLibrary) CloudIdentifiersForLocalIdentifiers(localIdentifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*raw.PHCloudIdentifier] {
-	return x.inner.CloudIdentifiersForLocalIdentifiers(localIdentifiers)
+func (x *PhotoLibrary) CloudIdentifiersForLocalIdentifiers(localIdentifiers []string) []*CloudIdentifier {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cloudIdentifiersForLocalIdentifiers:"), purego.SliceToNSArray(localIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *CloudIdentifier { return CloudIdentifierFromID(_id) })
 }
 
 // PhotoLibraryable is the interface implemented by [PhotoLibrary], for mocking and DI.
 type PhotoLibraryable interface {
-	Unwrap() *raw.PHPhotoLibrary
-	RegisterAvailabilityObserver(observer raw.PHPhotoLibraryAvailabilityObserver)
-	UnregisterAvailabilityObserver(observer raw.PHPhotoLibraryAvailabilityObserver)
-	PerformChangesCompletionHandler(changeBlock func(), completionHandler func(bool, unsafe.Pointer))
-	PerformChangesAndWaitError(changeBlock func()) (bool, error)
-	RegisterChangeObserver(observer raw.PHPhotoLibraryChangeObserver)
-	UnregisterChangeObserver(observer raw.PHPhotoLibraryChangeObserver)
-	FetchPersistentChangesSinceTokenError(token *raw.PHPersistentChangeToken) (*PersistentChangeFetchResult, error)
-	UnavailabilityReason() unsafe.Pointer
+	obj.Object
+	PerformChangesAndWait(changeBlock func()) error
+	FetchPersistentChangesSinceTokenError(token *PersistentChangeToken) (*PersistentChangeFetchResult, error)
 	CurrentChangeToken() *PersistentChangeToken
-	LocalIdentifierMappingsForCloudIdentifiers(cloudIdentifiers *foundation.NSArray[*raw.PHCloudIdentifier]) *foundation.NSDictionary[*raw.PHCloudIdentifier, *raw.PHLocalIdentifierMapping]
-	CloudIdentifierMappingsForLocalIdentifiers(localIdentifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSDictionary[*foundation.NSString, *raw.PHCloudIdentifierMapping]
-	LocalIdentifiersForCloudIdentifiers(cloudIdentifiers *foundation.NSArray[*raw.PHCloudIdentifier]) *foundation.NSArray[*foundation.NSString]
-	CloudIdentifiersForLocalIdentifiers(localIdentifiers *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*raw.PHCloudIdentifier]
+	LocalIdentifierMappingsForCloudIdentifiers(cloudIdentifiers []*CloudIdentifier) obj.Object
+	CloudIdentifierMappingsForLocalIdentifiers(localIdentifiers []string) obj.Object
+	LocalIdentifiersForCloudIdentifiers(cloudIdentifiers []*CloudIdentifier) []string
+	CloudIdentifiersForLocalIdentifiers(localIdentifiers []string) []*CloudIdentifier
 }
 
 var _ PhotoLibraryable = (*PhotoLibrary)(nil)

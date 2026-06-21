@@ -5,285 +5,72 @@
 package mpscore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CommandBufferWithCommandBuffer calls the underlying MPSCommandBufferCommandBufferWithCommandBuffer.
-func CommandBufferWithCommandBuffer(commandBuffer metal.MTLCommandBuffer) *CommandBuffer {
-	_r := raw.MPSCommandBufferCommandBufferWithCommandBuffer(commandBuffer)
-	if _r == nil {
-		return nil
-	}
-	return &CommandBuffer{inner: _r}
+// Create a MPSImageDescriptor for a single read/write cnn image.
+func ImageDescriptorWithChannelFormatWidthHeightFeatureChannels(channelFormat ImageFeatureChannelFormat, width int, height int, featureChannels int) *ImageDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSImageDescriptor")), objc.RegisterName("imageDescriptorWithChannelFormat:width:height:featureChannels:"), channelFormat, width, height, featureChannels)
+	return ImageDescriptorFromID(_r)
 }
 
-// CommandBufferFromCommandQueue calls the underlying MPSCommandBufferCommandBufferFromCommandQueue.
-func CommandBufferFromCommandQueue(commandQueue metal.MTLCommandQueue) *CommandBuffer {
-	_r := raw.MPSCommandBufferCommandBufferFromCommandQueue(commandQueue)
-	if _r == nil {
-		return nil
-	}
-	return &CommandBuffer{inner: _r}
+// Create a MPSMatrixDescriptor with the specified dimensions and data type. For performance considerations the optimal row stride may not necessarily be equal to the number of columns in the matrix.  The MPSMatrix class provides a method which may be used to determine this value, see the rowBytesForColumns API in the MPSMatrix class. The number of matrices described is initialized to 1.
+func MatrixDescriptorWithDimensionsColumnsRowBytesDataType(rows int, columns int, rowBytes int, dataType DataType) *MatrixDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixDescriptor")), objc.RegisterName("matrixDescriptorWithDimensions:columns:rowBytes:dataType:"), rows, columns, rowBytes, dataType)
+	return MatrixDescriptorFromID(_r)
 }
 
-// DefaultAllocator calls the underlying MPSImageDefaultAllocator.
-func DefaultAllocator() raw.MPSImageAllocator {
-	return raw.MPSImageDefaultAllocator()
+func MatrixDescriptorWithRowsColumnsRowBytesDataType(rows int, columns int, rowBytes int, dataType DataType) *MatrixDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixDescriptor")), objc.RegisterName("matrixDescriptorWithRows:columns:rowBytes:dataType:"), rows, columns, rowBytes, dataType)
+	return MatrixDescriptorFromID(_r)
 }
 
-// ImageDescriptorWithChannelFormatWidthHeightFeatureChannels calls the underlying MPSImageDescriptorImageDescriptorWithChannelFormatWidthHeightFeatureChannels.
-func ImageDescriptorWithChannelFormatWidthHeightFeatureChannels(channelFormat MPSImageFeatureChannelFormat, width uint, height uint, featureChannels uint) *ImageDescriptor {
-	_r := raw.MPSImageDescriptorImageDescriptorWithChannelFormatWidthHeightFeatureChannels(raw.MPSImageFeatureChannelFormat(channelFormat), width, height, featureChannels)
-	if _r == nil {
-		return nil
-	}
-	return &ImageDescriptor{inner: _r}
+// Create a MPSMatrixDescriptor with the specified dimensions and data type. For performance considerations the optimal row stride may not necessarily be equal to the number of columns in the matrix.  The MPSMatrix class provides a method which may be used to determine this value, see the rowBytesForColumns API in the MPSMatrix class.
+func MatrixDescriptorWithRowsColumnsMatricesRowBytesMatrixBytesDataType(rows int, columns int, matrices int, rowBytes int, matrixBytes int, dataType DataType) *MatrixDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSMatrixDescriptor")), objc.RegisterName("matrixDescriptorWithRows:columns:matrices:rowBytes:matrixBytes:dataType:"), rows, columns, matrices, rowBytes, matrixBytes, dataType)
+	return MatrixDescriptorFromID(_r)
 }
 
-// ImageDescriptorWithChannelFormatWidthHeightFeatureChannelsNumberOfImagesUsage calls the underlying MPSImageDescriptorImageDescriptorWithChannelFormatWidthHeightFeatureChannelsNumberOfImagesUsage.
-func ImageDescriptorWithChannelFormatWidthHeightFeatureChannelsNumberOfImagesUsage(channelFormat MPSImageFeatureChannelFormat, width uint, height uint, featureChannels uint, numberOfImages uint, usage metal.MTLTextureUsage) *ImageDescriptor {
-	_r := raw.MPSImageDescriptorImageDescriptorWithChannelFormatWidthHeightFeatureChannelsNumberOfImagesUsage(raw.MPSImageFeatureChannelFormat(channelFormat), width, height, featureChannels, numberOfImages, usage)
-	if _r == nil {
-		return nil
-	}
-	return &ImageDescriptor{inner: _r}
+// Return the recommended row stride, in bytes, for a given number of columns. To achieve best performance the optimal stride between rows of a matrix is not necessarily equivalent to the number of columns.  This method returns the row stride, in bytes, which gives best performance for a given number of columns.  Using this row stride to construct your array is recommended, but not required (provided that the stride used is still large enough to allocate a full row of data).
+func RowBytesFromColumnsDataType(columns int, dataType DataType) int {
+	_r := objc.Send[int](objc.ID(_class("MPSMatrixDescriptor")), objc.RegisterName("rowBytesFromColumns:dataType:"), columns, dataType)
+	return _r
 }
 
-// UnarchivedObjectOfClassesFromDataDeviceError calls the underlying MPSKeyedUnarchiverUnarchivedObjectOfClassesFromDataDeviceError.
-func UnarchivedObjectOfClassesFromDataDeviceError(classes *foundation.NSSet[objc.Class], data *foundation.NSData, device metal.MTLDevice) (objc.ID, error) {
-	return raw.MPSKeyedUnarchiverUnarchivedObjectOfClassesFromDataDeviceError(classes, data, device)
+func RowBytesForColumnsDataType(columns int, dataType DataType) int {
+	_r := objc.Send[int](objc.ID(_class("MPSMatrixDescriptor")), objc.RegisterName("rowBytesForColumns:dataType:"), columns, dataType)
+	return _r
 }
 
-// UnarchivedObjectOfClassFromDataDeviceError calls the underlying MPSKeyedUnarchiverUnarchivedObjectOfClassFromDataDeviceError.
-func UnarchivedObjectOfClassFromDataDeviceError(cls objc.Class, data *foundation.NSData, device metal.MTLDevice) (objc.ID, error) {
-	return raw.MPSKeyedUnarchiverUnarchivedObjectOfClassFromDataDeviceError(cls, data, device)
+// A convenience function to create an MPSNDArrayDescriptor object for a given size of dimensions. Sample code:
+func DescriptorWithDataTypeShape(dataType DataType, shape []obj.Object) *NDArrayDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayDescriptor")), objc.RegisterName("descriptorWithDataType:shape:"), dataType, purego.SliceToNSArray(shape, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+	return NDArrayDescriptorFromID(_r)
 }
 
-// UnarchiveObjectWithDataDevice calls the underlying MPSKeyedUnarchiverUnarchiveObjectWithDataDevice.
-func UnarchiveObjectWithDataDevice(data *foundation.NSData, device metal.MTLDevice) objc.ID {
-	return raw.MPSKeyedUnarchiverUnarchiveObjectWithDataDevice(data, device)
-}
-
-// UnarchiveObjectWithFileDevice calls the underlying MPSKeyedUnarchiverUnarchiveObjectWithFileDevice.
-func UnarchiveObjectWithFileDevice(path string, device metal.MTLDevice) objc.ID {
-	return raw.MPSKeyedUnarchiverUnarchiveObjectWithFileDevice(foundation.NSStringStringWithUTF8String(path), device)
-}
-
-// MatrixDescriptorWithDimensionsColumnsRowBytesDataType calls the underlying MPSMatrixDescriptorMatrixDescriptorWithDimensionsColumnsRowBytesDataType.
-func MatrixDescriptorWithDimensionsColumnsRowBytesDataType(rows uint, columns uint, rowBytes uint, dataType MPSDataType) *MatrixDescriptor {
-	_r := raw.MPSMatrixDescriptorMatrixDescriptorWithDimensionsColumnsRowBytesDataType(rows, columns, rowBytes, raw.MPSDataType(dataType))
-	if _r == nil {
-		return nil
-	}
-	return &MatrixDescriptor{inner: _r}
-}
-
-// MatrixDescriptorWithRowsColumnsRowBytesDataType calls the underlying MPSMatrixDescriptorMatrixDescriptorWithRowsColumnsRowBytesDataType.
-func MatrixDescriptorWithRowsColumnsRowBytesDataType(rows uint, columns uint, rowBytes uint, dataType MPSDataType) *MatrixDescriptor {
-	_r := raw.MPSMatrixDescriptorMatrixDescriptorWithRowsColumnsRowBytesDataType(rows, columns, rowBytes, raw.MPSDataType(dataType))
-	if _r == nil {
-		return nil
-	}
-	return &MatrixDescriptor{inner: _r}
-}
-
-// MatrixDescriptorWithRowsColumnsMatricesRowBytesMatrixBytesDataType calls the underlying MPSMatrixDescriptorMatrixDescriptorWithRowsColumnsMatricesRowBytesMatrixBytesDataType.
-func MatrixDescriptorWithRowsColumnsMatricesRowBytesMatrixBytesDataType(rows uint, columns uint, matrices uint, rowBytes uint, matrixBytes uint, dataType MPSDataType) *MatrixDescriptor {
-	_r := raw.MPSMatrixDescriptorMatrixDescriptorWithRowsColumnsMatricesRowBytesMatrixBytesDataType(rows, columns, matrices, rowBytes, matrixBytes, raw.MPSDataType(dataType))
-	if _r == nil {
-		return nil
-	}
-	return &MatrixDescriptor{inner: _r}
-}
-
-// RowBytesFromColumnsDataType calls the underlying MPSMatrixDescriptorRowBytesFromColumnsDataType.
-func RowBytesFromColumnsDataType(columns uint, dataType MPSDataType) uint {
-	return raw.MPSMatrixDescriptorRowBytesFromColumnsDataType(columns, raw.MPSDataType(dataType))
-}
-
-// RowBytesForColumnsDataType calls the underlying MPSMatrixDescriptorRowBytesForColumnsDataType.
-func RowBytesForColumnsDataType(columns uint, dataType MPSDataType) uint {
-	return raw.MPSMatrixDescriptorRowBytesForColumnsDataType(columns, raw.MPSDataType(dataType))
-}
-
-// MPSNDArrayDefaultAllocator calls the underlying MPSNDArrayDefaultAllocator.
-func MPSNDArrayDefaultAllocator() raw.MPSNDArrayAllocator {
-	return raw.MPSNDArrayDefaultAllocator()
-}
-
-// DescriptorWithDataTypeDimensionCountDimensionSizes calls the underlying MPSNDArrayDescriptorDescriptorWithDataTypeDimensionCountDimensionSizes.
-func DescriptorWithDataTypeDimensionCountDimensionSizes(dataType MPSDataType, numberOfDimensions uint, dimensionSizes *uint) *NDArrayDescriptor {
-	_r := raw.MPSNDArrayDescriptorDescriptorWithDataTypeDimensionCountDimensionSizes(raw.MPSDataType(dataType), numberOfDimensions, dimensionSizes)
-	if _r == nil {
-		return nil
-	}
-	return &NDArrayDescriptor{inner: _r}
-}
-
-// DescriptorWithDataTypeShape calls the underlying MPSNDArrayDescriptorDescriptorWithDataTypeShape.
-func DescriptorWithDataTypeShape(dataType MPSDataType, shape *foundation.NSArray[*foundation.NSNumber]) *NDArrayDescriptor {
-	_r := raw.MPSNDArrayDescriptorDescriptorWithDataTypeShape(raw.MPSDataType(dataType), shape)
-	if _r == nil {
-		return nil
-	}
-	return &NDArrayDescriptor{inner: _r}
-}
-
-// PredicateWithBufferOffset calls the underlying MPSPredicatePredicateWithBufferOffset.
-func PredicateWithBufferOffset(buffer metal.MTLBuffer, offset uint) *Predicate {
-	_r := raw.MPSPredicatePredicateWithBufferOffset(buffer, offset)
-	if _r == nil {
-		return nil
-	}
-	return &Predicate{inner: _r}
-}
-
-// TemporaryStateWithCommandBufferBufferSize calls the underlying MPSStateTemporaryStateWithCommandBufferBufferSize.
-func TemporaryStateWithCommandBufferBufferSize(cmdBuf metal.MTLCommandBuffer, bufferSize uint) *State {
-	_r := raw.MPSStateTemporaryStateWithCommandBufferBufferSize(cmdBuf, bufferSize)
-	if _r == nil {
-		return nil
-	}
-	return &State{inner: _r}
-}
-
-// TemporaryStateWithCommandBufferTextureDescriptor calls the underlying MPSStateTemporaryStateWithCommandBufferTextureDescriptor.
-func TemporaryStateWithCommandBufferTextureDescriptor(cmdBuf metal.MTLCommandBuffer, descriptor *metal.MTLTextureDescriptor) *State {
-	_r := raw.MPSStateTemporaryStateWithCommandBufferTextureDescriptor(cmdBuf, descriptor)
-	if _r == nil {
-		return nil
-	}
-	return &State{inner: _r}
-}
-
-// TemporaryStateWithCommandBuffer calls the underlying MPSStateTemporaryStateWithCommandBuffer.
-func TemporaryStateWithCommandBuffer(cmdBuf metal.MTLCommandBuffer) *State {
-	_r := raw.MPSStateTemporaryStateWithCommandBuffer(cmdBuf)
-	if _r == nil {
-		return nil
-	}
-	return &State{inner: _r}
-}
-
-// TemporaryStateWithCommandBufferResourceList calls the underlying MPSStateTemporaryStateWithCommandBufferResourceList.
-func TemporaryStateWithCommandBufferResourceList(commandBuffer metal.MTLCommandBuffer, resourceList *raw.MPSStateResourceList) *State {
-	_r := raw.MPSStateTemporaryStateWithCommandBufferResourceList(commandBuffer, resourceList)
-	if _r == nil {
-		return nil
-	}
-	return &State{inner: _r}
-}
-
-// ResourceList calls the underlying MPSStateResourceListResourceList.
+// Init an empty autoreleased resource list
 func ResourceList() *StateResourceList {
-	_r := raw.MPSStateResourceListResourceList()
-	if _r == nil {
-		return nil
-	}
-	return &StateResourceList{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSStateResourceList")), objc.RegisterName("resourceList"))
+	return StateResourceListFromID(_r)
 }
 
-// MPSTemporaryImageDefaultAllocator calls the underlying MPSTemporaryImageDefaultAllocator.
-func MPSTemporaryImageDefaultAllocator() raw.MPSImageAllocator {
-	return raw.MPSTemporaryImageDefaultAllocator()
+// Create a MPSVectorDescriptor with the specified length and data type. Use this function for creating a descriptor of a MPSVector object containing a single vector.
+func VectorDescriptorWithLengthDataType(length int, dataType DataType) *VectorDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSVectorDescriptor")), objc.RegisterName("vectorDescriptorWithLength:dataType:"), length, dataType)
+	return VectorDescriptorFromID(_r)
 }
 
-// TemporaryImageWithCommandBufferImageDescriptor calls the underlying MPSTemporaryImageTemporaryImageWithCommandBufferImageDescriptor.
-func TemporaryImageWithCommandBufferImageDescriptor(commandBuffer metal.MTLCommandBuffer, imageDescriptor *raw.MPSImageDescriptor) *TemporaryImage {
-	_r := raw.MPSTemporaryImageTemporaryImageWithCommandBufferImageDescriptor(commandBuffer, imageDescriptor)
-	if _r == nil {
-		return nil
-	}
-	return &TemporaryImage{inner: _r}
+// Create a MPSVectorDescriptor with the specified length and data type. For performance considerations the optimal stride between vectors may not necessarily be equal to the vector length.  The MPSVectorDescriptor class provides a method which may be used to determine this value, see the vectorBytesForLength API.
+func VectorDescriptorWithLengthVectorsVectorBytesDataType(length int, vectors int, vectorBytes int, dataType DataType) *VectorDescriptor {
+	_r := objc.Send[objc.ID](objc.ID(_class("MPSVectorDescriptor")), objc.RegisterName("vectorDescriptorWithLength:vectors:vectorBytes:dataType:"), length, vectors, vectorBytes, dataType)
+	return VectorDescriptorFromID(_r)
 }
 
-// TemporaryImageWithCommandBufferTextureDescriptor calls the underlying MPSTemporaryImageTemporaryImageWithCommandBufferTextureDescriptor.
-func TemporaryImageWithCommandBufferTextureDescriptor(commandBuffer metal.MTLCommandBuffer, textureDescriptor *metal.MTLTextureDescriptor) *TemporaryImage {
-	_r := raw.MPSTemporaryImageTemporaryImageWithCommandBufferTextureDescriptor(commandBuffer, textureDescriptor)
-	if _r == nil {
-		return nil
-	}
-	return &TemporaryImage{inner: _r}
-}
-
-// TemporaryImageWithCommandBufferTextureDescriptorFeatureChannels calls the underlying MPSTemporaryImageTemporaryImageWithCommandBufferTextureDescriptorFeatureChannels.
-func TemporaryImageWithCommandBufferTextureDescriptorFeatureChannels(commandBuffer metal.MTLCommandBuffer, textureDescriptor *metal.MTLTextureDescriptor, featureChannels uint) *TemporaryImage {
-	_r := raw.MPSTemporaryImageTemporaryImageWithCommandBufferTextureDescriptorFeatureChannels(commandBuffer, textureDescriptor, featureChannels)
-	if _r == nil {
-		return nil
-	}
-	return &TemporaryImage{inner: _r}
-}
-
-// PrefetchStorageWithCommandBufferImageDescriptorList calls the underlying MPSTemporaryImagePrefetchStorageWithCommandBufferImageDescriptorList.
-func PrefetchStorageWithCommandBufferImageDescriptorList(commandBuffer metal.MTLCommandBuffer, descriptorList *foundation.NSArray[*raw.MPSImageDescriptor]) {
-	raw.MPSTemporaryImagePrefetchStorageWithCommandBufferImageDescriptorList(commandBuffer, descriptorList)
-}
-
-// TemporaryMatrixWithCommandBufferMatrixDescriptor calls the underlying MPSTemporaryMatrixTemporaryMatrixWithCommandBufferMatrixDescriptor.
-func TemporaryMatrixWithCommandBufferMatrixDescriptor(commandBuffer metal.MTLCommandBuffer, matrixDescriptor *raw.MPSMatrixDescriptor) *TemporaryMatrix {
-	_r := raw.MPSTemporaryMatrixTemporaryMatrixWithCommandBufferMatrixDescriptor(commandBuffer, matrixDescriptor)
-	if _r == nil {
-		return nil
-	}
-	return &TemporaryMatrix{inner: _r}
-}
-
-// PrefetchStorageWithCommandBufferMatrixDescriptorList calls the underlying MPSTemporaryMatrixPrefetchStorageWithCommandBufferMatrixDescriptorList.
-func PrefetchStorageWithCommandBufferMatrixDescriptorList(commandBuffer metal.MTLCommandBuffer, descriptorList *foundation.NSArray[*raw.MPSMatrixDescriptor]) {
-	raw.MPSTemporaryMatrixPrefetchStorageWithCommandBufferMatrixDescriptorList(commandBuffer, descriptorList)
-}
-
-// MPSTemporaryNDArrayDefaultAllocator calls the underlying MPSTemporaryNDArrayDefaultAllocator.
-func MPSTemporaryNDArrayDefaultAllocator() raw.MPSNDArrayAllocator {
-	return raw.MPSTemporaryNDArrayDefaultAllocator()
-}
-
-// TemporaryNDArrayWithCommandBufferDescriptor calls the underlying MPSTemporaryNDArrayTemporaryNDArrayWithCommandBufferDescriptor.
-func TemporaryNDArrayWithCommandBufferDescriptor(commandBuffer metal.MTLCommandBuffer, descriptor *raw.MPSNDArrayDescriptor) *TemporaryNDArray {
-	_r := raw.MPSTemporaryNDArrayTemporaryNDArrayWithCommandBufferDescriptor(commandBuffer, descriptor)
-	if _r == nil {
-		return nil
-	}
-	return &TemporaryNDArray{inner: _r}
-}
-
-// TemporaryVectorWithCommandBufferDescriptor calls the underlying MPSTemporaryVectorTemporaryVectorWithCommandBufferDescriptor.
-func TemporaryVectorWithCommandBufferDescriptor(commandBuffer metal.MTLCommandBuffer, descriptor *raw.MPSVectorDescriptor) *TemporaryVector {
-	_r := raw.MPSTemporaryVectorTemporaryVectorWithCommandBufferDescriptor(commandBuffer, descriptor)
-	if _r == nil {
-		return nil
-	}
-	return &TemporaryVector{inner: _r}
-}
-
-// PrefetchStorageWithCommandBufferDescriptorList calls the underlying MPSTemporaryVectorPrefetchStorageWithCommandBufferDescriptorList.
-func PrefetchStorageWithCommandBufferDescriptorList(commandBuffer metal.MTLCommandBuffer, descriptorList *foundation.NSArray[*raw.MPSVectorDescriptor]) {
-	raw.MPSTemporaryVectorPrefetchStorageWithCommandBufferDescriptorList(commandBuffer, descriptorList)
-}
-
-// VectorDescriptorWithLengthDataType calls the underlying MPSVectorDescriptorVectorDescriptorWithLengthDataType.
-func VectorDescriptorWithLengthDataType(length uint, dataType MPSDataType) *VectorDescriptor {
-	_r := raw.MPSVectorDescriptorVectorDescriptorWithLengthDataType(length, raw.MPSDataType(dataType))
-	if _r == nil {
-		return nil
-	}
-	return &VectorDescriptor{inner: _r}
-}
-
-// VectorDescriptorWithLengthVectorsVectorBytesDataType calls the underlying MPSVectorDescriptorVectorDescriptorWithLengthVectorsVectorBytesDataType.
-func VectorDescriptorWithLengthVectorsVectorBytesDataType(length uint, vectors uint, vectorBytes uint, dataType MPSDataType) *VectorDescriptor {
-	_r := raw.MPSVectorDescriptorVectorDescriptorWithLengthVectorsVectorBytesDataType(length, vectors, vectorBytes, raw.MPSDataType(dataType))
-	if _r == nil {
-		return nil
-	}
-	return &VectorDescriptor{inner: _r}
-}
-
-// VectorBytesForLengthDataType calls the underlying MPSVectorDescriptorVectorBytesForLengthDataType.
-func VectorBytesForLengthDataType(length uint, dataType MPSDataType) uint {
-	return raw.MPSVectorDescriptorVectorBytesForLengthDataType(length, raw.MPSDataType(dataType))
+// Return the recommended stride, in bytes, to be used for an array of vectors of a given length. To achieve best performance the optimal stride between vectors within an array of vectors is not necessarily equivalent to the number of elements per vector.  This method returns the stride, in bytes, which gives best performance for a given vector length. Using this stride to construct your array is recommended, but not required (provided that the stride used is still large enough to allocate a full vector of data).
+func VectorBytesForLengthDataType(length int, dataType DataType) int {
+	_r := objc.Send[int](objc.ID(_class("MPSVectorDescriptor")), objc.RegisterName("vectorBytesForLength:dataType:"), length, dataType)
+	return _r
 }

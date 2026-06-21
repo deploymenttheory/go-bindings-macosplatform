@@ -5,93 +5,108 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The platform configuration for a generic Intel or ARM virtual machine.
 //
-// GenericPlatformConfiguration wraps [raw.VZGenericPlatformConfiguration] with a fluent Go API.
+// GenericPlatformConfiguration is an idiomatic wrapper over the Objective-C class VZGenericPlatformConfiguration.
 type GenericPlatformConfiguration struct {
-	inner *raw.VZGenericPlatformConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZGenericPlatformConfiguration].
-func (x *GenericPlatformConfiguration) Unwrap() *raw.VZGenericPlatformConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GenericPlatformConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// GenericPlatformConfigurationFromID adopts an existing object pointer as a GenericPlatformConfiguration (nil for 0).
+// GenericPlatformConfigurationFromID adopts an existing Objective-C object as a GenericPlatformConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func GenericPlatformConfigurationFromID(id objc.ID) *GenericPlatformConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &GenericPlatformConfiguration{inner: raw.VZGenericPlatformConfigurationFromID(id)}
+	x := &GenericPlatformConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGenericPlatformConfiguration creates a new [GenericPlatformConfiguration].
+// genericPlatformConfigurationAdopt wraps an Objective-C object that this code just created as a
+// GenericPlatformConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func genericPlatformConfigurationAdopt(id objc.ID) *GenericPlatformConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &GenericPlatformConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GenericPlatformConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GenericPlatformConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GenericPlatformConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGenericPlatformConfiguration creates a new GenericPlatformConfiguration.
 func NewGenericPlatformConfiguration() *GenericPlatformConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZGenericPlatformConfiguration")), objc.RegisterName("new"))
-	return &GenericPlatformConfiguration{inner: raw.VZGenericPlatformConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZGenericPlatformConfiguration")), objc.RegisterName("new"))
+	return genericPlatformConfigurationAdopt(_id)
 }
 
 // A value that represents a unique identifier for the virtual machine.
 //
-// WithMachineIdentifier sets the machineIdentifier property and returns the receiver for chaining.
+// WithMachineIdentifier sets machineIdentifier and returns the receiver so calls can be chained.
 func (x *GenericPlatformConfiguration) WithMachineIdentifier(machineIdentifier *GenericMachineIdentifier) *GenericPlatformConfiguration {
-	x.inner.SetMachineIdentifier(machineIdentifier.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMachineIdentifier:"), objref.IDOf(machineIdentifier))
 	return x
 }
 
 // A Boolean value that indicates whether nested virtualization is in an enabled state.
 //
-// WithNestedVirtualizationEnabled sets the nestedVirtualizationEnabled property and returns the receiver for chaining.
+// WithNestedVirtualizationEnabled sets nestedVirtualizationEnabled and returns the receiver so calls can be chained.
 func (x *GenericPlatformConfiguration) WithNestedVirtualizationEnabled(nestedVirtualizationEnabled bool) *GenericPlatformConfiguration {
-	x.inner.SetNestedVirtualizationEnabled(nestedVirtualizationEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNestedVirtualizationEnabled:"), nestedVirtualizationEnabled)
 	return x
 }
 
-// @abstract The unique machine identifier. @discussion Running two virtual machines concurrently with the same identifier results in undefined behavior in the guest operating system. When restoring a virtual machine from saved state, this `machineIdentifier` must match the `machineIdentifier` of the saved virtual machine.
-//
-// MachineIdentifier calls the underlying MachineIdentifier.
+// The unique machine identifier. Running two virtual machines concurrently with the same identifier results in undefined behavior in the guest operating system. When restoring a virtual machine from saved state, this `machineIdentifier` must match the `machineIdentifier` of the saved virtual machine.
 func (x *GenericPlatformConfiguration) MachineIdentifier() *GenericMachineIdentifier {
-	_r := x.inner.MachineIdentifier()
-	if _r == nil {
-		return nil
-	}
-	return &GenericMachineIdentifier{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("machineIdentifier"))
+	return GenericMachineIdentifierFromID(_r)
 }
 
-// SetMachineIdentifier calls the underlying SetMachineIdentifier.
-func (x *GenericPlatformConfiguration) SetMachineIdentifier(machineIdentifier *raw.VZGenericMachineIdentifier) {
-	x.inner.SetMachineIdentifier(machineIdentifier)
+func (x *GenericPlatformConfiguration) SetMachineIdentifier(machineIdentifier *GenericMachineIdentifier) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMachineIdentifier:"), objref.IDOf(machineIdentifier))
 }
 
-// @abstract Enable nested virtualization for the platform. @discussion If nested virtualization is available, enable it for the current platform configuration. You can use `nestedVirtualizationSupported` to discover the nested virtualization availability before enabling it. The default value is NO, nested virtualization is disabled. @see nestedVirtualizationSupported.
-//
-// IsNestedVirtualizationEnabled calls the underlying IsNestedVirtualizationEnabled.
+// Enable nested virtualization for the platform. If nested virtualization is available, enable it for the current platform configuration. You can use `nestedVirtualizationSupported` to discover the nested virtualization availability before enabling it. The default value is NO, nested virtualization is disabled.
 func (x *GenericPlatformConfiguration) IsNestedVirtualizationEnabled() bool {
-	return x.inner.IsNestedVirtualizationEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNestedVirtualizationEnabled"))
+	return _r
 }
 
-// SetNestedVirtualizationEnabled calls the underlying SetNestedVirtualizationEnabled.
 func (x *GenericPlatformConfiguration) SetNestedVirtualizationEnabled(nestedVirtualizationEnabled bool) {
-	x.inner.SetNestedVirtualizationEnabled(nestedVirtualizationEnabled)
-}
-
-func (x *GenericPlatformConfiguration) asPlatformConfiguration() *raw.VZPlatformConfiguration {
-	return &x.inner.VZPlatformConfiguration
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNestedVirtualizationEnabled:"), nestedVirtualizationEnabled)
 }
 
 // GenericPlatformConfigurationable is the interface implemented by [GenericPlatformConfiguration], for mocking and DI.
 type GenericPlatformConfigurationable interface {
-	Unwrap() *raw.VZGenericPlatformConfiguration
+	obj.Object
 	WithMachineIdentifier(machineIdentifier *GenericMachineIdentifier) *GenericPlatformConfiguration
 	WithNestedVirtualizationEnabled(nestedVirtualizationEnabled bool) *GenericPlatformConfiguration
 	MachineIdentifier() *GenericMachineIdentifier
-	SetMachineIdentifier(machineIdentifier *raw.VZGenericMachineIdentifier)
+	SetMachineIdentifier(machineIdentifier *GenericMachineIdentifier)
 	IsNestedVirtualizationEnabled() bool
 	SetNestedVirtualizationEnabled(nestedVirtualizationEnabled bool)
 }

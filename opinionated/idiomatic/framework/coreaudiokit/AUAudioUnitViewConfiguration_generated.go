@@ -5,65 +5,89 @@
 package coreaudiokit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiokit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A configuration object that describes how to present the audio unit’s user interface.
 //
-// AUAudioUnitViewConfiguration wraps [raw.AUAudioUnitViewConfiguration] with a fluent Go API.
+// AUAudioUnitViewConfiguration is an idiomatic wrapper over the Objective-C class AUAudioUnitViewConfiguration.
 type AUAudioUnitViewConfiguration struct {
-	inner *raw.AUAudioUnitViewConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AUAudioUnitViewConfiguration].
-func (x *AUAudioUnitViewConfiguration) Unwrap() *raw.AUAudioUnitViewConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AUAudioUnitViewConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// AUAudioUnitViewConfigurationFromID adopts an existing object pointer as a AUAudioUnitViewConfiguration (nil for 0).
+// AUAudioUnitViewConfigurationFromID adopts an existing Objective-C object as a AUAudioUnitViewConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func AUAudioUnitViewConfigurationFromID(id objc.ID) *AUAudioUnitViewConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &AUAudioUnitViewConfiguration{inner: raw.AUAudioUnitViewConfigurationFromID(id)}
+	x := &AUAudioUnitViewConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// aUAudioUnitViewConfigurationAdopt wraps an Objective-C object that this code just created as a
+// AUAudioUnitViewConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func aUAudioUnitViewConfigurationAdopt(id objc.ID) *AUAudioUnitViewConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &AUAudioUnitViewConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AUAudioUnitViewConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AUAudioUnitViewConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AUAudioUnitViewConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new configuration object.
 //
-// NewAUAudioUnitViewConfigurationWithWidthHeightHostHasController creates a new [AUAudioUnitViewConfiguration].
+// NewAUAudioUnitViewConfigurationWithWidthHeightHostHasController creates a new AUAudioUnitViewConfiguration.
 func NewAUAudioUnitViewConfigurationWithWidthHeightHostHasController(width float64, height float64, hostHasController bool) *AUAudioUnitViewConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AUAudioUnitViewConfiguration")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AUAudioUnitViewConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWidth:height:hostHasController:"), width, height, hostHasController)
-	return &AUAudioUnitViewConfiguration{inner: raw.AUAudioUnitViewConfigurationFromID(_id)}
+	return aUAudioUnitViewConfigurationAdopt(_id)
 }
 
-// @property	width @brief		The width of the view, measured in points. @discussion Setting the width to 0 will match any width.
-//
-// Width calls the underlying Width.
+// The width of the view, measured in points. Setting the width to 0 will match any width.
 func (x *AUAudioUnitViewConfiguration) Width() float64 {
-	return x.inner.Width()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("width"))
+	return _r
 }
 
-// @property	height @brief		The height of the view, measured in points. @discussion Setting the height to 0 will match any height.
-//
-// Height calls the underlying Height.
+// The height of the view, measured in points. Setting the height to 0 will match any height.
 func (x *AUAudioUnitViewConfiguration) Height() float64 {
-	return x.inner.Height()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("height"))
+	return _r
 }
 
-// @property	hostHasController @brief		Boolean property specifying whether the host displays its own control surface when showing the view of the audio unit.
-//
-// HostHasController calls the underlying HostHasController.
+// Boolean property specifying whether the host displays its own control surface when showing the view of the audio unit.
 func (x *AUAudioUnitViewConfiguration) HostHasController() bool {
-	return x.inner.HostHasController()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hostHasController"))
+	return _r
 }
 
 // AUAudioUnitViewConfigurationable is the interface implemented by [AUAudioUnitViewConfiguration], for mocking and DI.
 type AUAudioUnitViewConfigurationable interface {
-	Unwrap() *raw.AUAudioUnitViewConfiguration
+	obj.Object
 	Width() float64
 	Height() float64
 	HostHasController() bool

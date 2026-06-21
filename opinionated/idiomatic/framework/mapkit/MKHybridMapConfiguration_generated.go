@@ -5,107 +5,124 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The class that represents a satellite image of the area with road and road name information layers on top.
 //
-// HybridMapConfiguration wraps [raw.MKHybridMapConfiguration] with a fluent Go API.
+// HybridMapConfiguration is an idiomatic wrapper over the Objective-C class MKHybridMapConfiguration.
 type HybridMapConfiguration struct {
-	inner *raw.MKHybridMapConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKHybridMapConfiguration].
-func (x *HybridMapConfiguration) Unwrap() *raw.MKHybridMapConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HybridMapConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// HybridMapConfigurationFromID adopts an existing object pointer as a HybridMapConfiguration (nil for 0).
+// HybridMapConfigurationFromID adopts an existing Objective-C object as a HybridMapConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func HybridMapConfigurationFromID(id objc.ID) *HybridMapConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &HybridMapConfiguration{inner: raw.MKHybridMapConfigurationFromID(id)}
+	x := &HybridMapConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewHybridMapConfiguration creates a new [HybridMapConfiguration].
+// hybridMapConfigurationAdopt wraps an Objective-C object that this code just created as a
+// HybridMapConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hybridMapConfigurationAdopt(id objc.ID) *HybridMapConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &HybridMapConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HybridMapConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HybridMapConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HybridMapConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHybridMapConfiguration creates a new HybridMapConfiguration.
 func NewHybridMapConfiguration() *HybridMapConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKHybridMapConfiguration")), objc.RegisterName("new"))
-	return &HybridMapConfiguration{inner: raw.MKHybridMapConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKHybridMapConfiguration")), objc.RegisterName("new"))
+	return hybridMapConfigurationAdopt(_id)
 }
 
 // Creates a new hybrid map configuration with the specified elevation style.
 //
-// NewHybridMapConfigurationWithElevationStyle creates a new [HybridMapConfiguration].
-func NewHybridMapConfigurationWithElevationStyle(elevationStyle MKMapElevationStyle) *HybridMapConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKHybridMapConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:"), raw.MKMapElevationStyle(elevationStyle))
-	return &HybridMapConfiguration{inner: raw.MKHybridMapConfigurationFromID(_id)}
+// NewHybridMapConfigurationWithElevationStyle creates a new HybridMapConfiguration.
+func NewHybridMapConfigurationWithElevationStyle(elevationStyle MapElevationStyle) *HybridMapConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKHybridMapConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElevationStyle:"), elevationStyle)
+	return hybridMapConfigurationAdopt(_id)
 }
 
 // The filter the framework uses to determine the points of interest to show on the map.
 //
-// WithPointOfInterestFilter sets the pointOfInterestFilter property and returns the receiver for chaining.
+// WithPointOfInterestFilter sets pointOfInterestFilter and returns the receiver so calls can be chained.
 func (x *HybridMapConfiguration) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *HybridMapConfiguration {
-	x.inner.SetPointOfInterestFilter(pointOfInterestFilter.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 	return x
 }
 
 // A Boolean value that indicates whether the maps shows traffic conditions.
 //
-// WithShowsTraffic sets the showsTraffic property and returns the receiver for chaining.
+// WithShowsTraffic sets showsTraffic and returns the receiver so calls can be chained.
 func (x *HybridMapConfiguration) WithShowsTraffic(showsTraffic bool) *HybridMapConfiguration {
-	x.inner.SetShowsTraffic(showsTraffic)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsTraffic:"), showsTraffic)
 	return x
 }
 
 // The value that indicates the map’s elevation style.
 //
-// WithElevationStyle sets the elevationStyle property and returns the receiver for chaining.
-func (x *HybridMapConfiguration) WithElevationStyle(elevationStyle MKMapElevationStyle) *HybridMapConfiguration {
-	x.inner.MKMapConfiguration.SetElevationStyle(raw.MKMapElevationStyle(elevationStyle))
+// WithElevationStyle sets elevationStyle and returns the receiver so calls can be chained.
+func (x *HybridMapConfiguration) WithElevationStyle(elevationStyle MapElevationStyle) *HybridMapConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElevationStyle:"), elevationStyle)
 	return x
 }
 
-// PointOfInterestFilter calls the underlying PointOfInterestFilter.
 func (x *HybridMapConfiguration) PointOfInterestFilter() *PointOfInterestFilter {
-	_r := x.inner.PointOfInterestFilter()
-	if _r == nil {
-		return nil
-	}
-	return &PointOfInterestFilter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestFilter"))
+	return PointOfInterestFilterFromID(_r)
 }
 
-// SetPointOfInterestFilter calls the underlying SetPointOfInterestFilter.
-func (x *HybridMapConfiguration) SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) {
-	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+func (x *HybridMapConfiguration) SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 }
 
-// ShowsTraffic calls the underlying ShowsTraffic.
 func (x *HybridMapConfiguration) ShowsTraffic() bool {
-	return x.inner.ShowsTraffic()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsTraffic"))
+	return _r
 }
 
-// SetShowsTraffic calls the underlying SetShowsTraffic.
 func (x *HybridMapConfiguration) SetShowsTraffic(showsTraffic bool) {
-	x.inner.SetShowsTraffic(showsTraffic)
-}
-
-func (x *HybridMapConfiguration) asMapConfiguration() *raw.MKMapConfiguration {
-	return &x.inner.MKMapConfiguration
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsTraffic:"), showsTraffic)
 }
 
 // HybridMapConfigurationable is the interface implemented by [HybridMapConfiguration], for mocking and DI.
 type HybridMapConfigurationable interface {
-	Unwrap() *raw.MKHybridMapConfiguration
+	obj.Object
 	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *HybridMapConfiguration
 	WithShowsTraffic(showsTraffic bool) *HybridMapConfiguration
-	WithElevationStyle(elevationStyle MKMapElevationStyle) *HybridMapConfiguration
+	WithElevationStyle(elevationStyle MapElevationStyle) *HybridMapConfiguration
 	PointOfInterestFilter() *PointOfInterestFilter
-	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
+	SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter)
 	ShowsTraffic() bool
 	SetShowsTraffic(showsTraffic bool)
 }

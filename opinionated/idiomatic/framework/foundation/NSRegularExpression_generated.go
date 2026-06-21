@@ -5,162 +5,115 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An immutable representation of a compiled regular expression that you apply to Unicode strings.
 //
-// RegularExpression wraps [raw.NSRegularExpression] with a fluent Go API.
+// RegularExpression is an idiomatic wrapper over the Objective-C class NSRegularExpression.
 type RegularExpression struct {
-	inner *raw.NSRegularExpression
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSRegularExpression].
-func (x *RegularExpression) Unwrap() *raw.NSRegularExpression { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RegularExpression) ID() objc.ID { return x.inner.Ptr() }
-
-// RegularExpressionFromID adopts an existing object pointer as a RegularExpression (nil for 0).
+// RegularExpressionFromID adopts an existing Objective-C object as a RegularExpression
+// (nil for 0), retaining it and registering a release finalizer.
 func RegularExpressionFromID(id objc.ID) *RegularExpression {
 	if id == 0 {
 		return nil
 	}
-	return &RegularExpression{inner: raw.NSRegularExpressionFromID(id)}
+	x := &RegularExpression{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// regularExpressionAdopt wraps an Objective-C object that this code just created as a
+// RegularExpression (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func regularExpressionAdopt(id objc.ID) *RegularExpression {
+	if id == 0 {
+		return nil
+	}
+	x := &RegularExpression{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RegularExpression) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RegularExpression) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RegularExpression) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns an initialized NSRegularExpression instance with the specified regular expression pattern and options.
 //
-// NewRegularExpressionWithPatternOptionsError creates a new [RegularExpression].
-func NewRegularExpressionWithPatternOptionsError(pattern string, options NSRegularExpressionOptions) (*RegularExpression, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSRegularExpression")), objc.RegisterName("alloc"))
+// NewRegularExpressionWithPatternOptionsError creates a new RegularExpression.
+func NewRegularExpressionWithPatternOptionsError(pattern string, options RegularExpressionOptions) (*RegularExpression, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSRegularExpression")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPattern:options:error:"), foundation.NSStringStringWithUTF8String(pattern).Ptr(), raw.NSRegularExpressionOptions(options), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPattern:options:error:"), purego.NSString(pattern), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &RegularExpression{inner: raw.NSRegularExpressionFromID(_id)}, nil
+	return regularExpressionAdopt(_id), nil
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *RegularExpression) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RegularExpression {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *RegularExpression) WithScriptingProperties(scriptingProperties obj.Object) *RegularExpression {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Pattern calls the underlying Pattern.
-func (x *RegularExpression) Pattern() *String {
-	_r := x.inner.Pattern()
-	if _r == nil {
-		return nil
+func (x *RegularExpression) Pattern() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pattern"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Options calls the underlying Options.
-func (x *RegularExpression) Options() NSRegularExpressionOptions {
-	return NSRegularExpressionOptions(x.inner.Options())
+func (x *RegularExpression) Options() RegularExpressionOptions {
+	_r := objc.Send[RegularExpressionOptions](objref.IDOf(x), objc.RegisterName("options"))
+	return _r
 }
 
-// NumberOfCaptureGroups calls the underlying NumberOfCaptureGroups.
-func (x *RegularExpression) NumberOfCaptureGroups() uint {
-	return x.inner.NumberOfCaptureGroups()
-}
-
-// Enumerates the string allowing the Block to handle each regular expression match.
-//
-// EnumerateMatchesInStringOptionsRangeUsing calls the underlying EnumerateMatchesInStringOptionsRangeUsing.
-func (x *RegularExpression) EnumerateMatchesInStringOptionsRangeUsing(string_ string, options NSMatchingOptions, range_ raw.NSRange, block func(*raw.NSTextCheckingResult, NSMatchingFlags, *bool)) {
-	x.inner.EnumerateMatchesInStringOptionsRangeUsing(foundation.NSStringStringWithUTF8String(string_), raw.NSMatchingOptions(options), range_, func(_a0 *raw.NSTextCheckingResult, _a1 raw.NSMatchingFlags, _a2 *bool) {
-		block(_a0, NSMatchingFlags(_a1), _a2)
-	})
-}
-
-// Returns an array containing all the matches of the regular expression in the string.
-//
-// MatchesInStringOptionsRange calls the underlying MatchesInStringOptionsRange.
-func (x *RegularExpression) MatchesInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) *raw.NSArray[*raw.NSTextCheckingResult] {
-	return x.inner.MatchesInStringOptionsRange(foundation.NSStringStringWithUTF8String(string_), raw.NSMatchingOptions(options), range_)
-}
-
-// Returns the number of matches of the regular expression within the specified range of the string.
-//
-// NumberOfMatchesInStringOptionsRange calls the underlying NumberOfMatchesInStringOptionsRange.
-func (x *RegularExpression) NumberOfMatchesInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) uint {
-	return x.inner.NumberOfMatchesInStringOptionsRange(foundation.NSStringStringWithUTF8String(string_), raw.NSMatchingOptions(options), range_)
-}
-
-// Returns the first match of the regular expression within the specified range of the string.
-//
-// FirstMatchInStringOptionsRange calls the underlying FirstMatchInStringOptionsRange.
-func (x *RegularExpression) FirstMatchInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) *TextCheckingResult {
-	_r := x.inner.FirstMatchInStringOptionsRange(foundation.NSStringStringWithUTF8String(string_), raw.NSMatchingOptions(options), range_)
-	if _r == nil {
-		return nil
-	}
-	return &TextCheckingResult{inner: _r}
-}
-
-// Returns the range of the first match of the regular expression within the specified range of the string.
-//
-// RangeOfFirstMatchInStringOptionsRange calls the underlying RangeOfFirstMatchInStringOptionsRange.
-func (x *RegularExpression) RangeOfFirstMatchInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) raw.NSRange {
-	return x.inner.RangeOfFirstMatchInStringOptionsRange(foundation.NSStringStringWithUTF8String(string_), raw.NSMatchingOptions(options), range_)
-}
-
-// Returns a new string containing matching regular expressions replaced with the template string.
-//
-// StringByReplacingMatchesInStringOptionsRangeWithTemplate calls the underlying StringByReplacingMatchesInStringOptionsRangeWithTemplate.
-func (x *RegularExpression) StringByReplacingMatchesInStringOptionsRangeWithTemplate(string_ string, options NSMatchingOptions, range_ raw.NSRange, templ string) *String {
-	_r := x.inner.StringByReplacingMatchesInStringOptionsRangeWithTemplate(foundation.NSStringStringWithUTF8String(string_), raw.NSMatchingOptions(options), range_, foundation.NSStringStringWithUTF8String(templ))
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// Replaces regular expression matches within the mutable string using the template string.
-//
-// ReplaceMatchesInStringOptionsRangeWithTemplate calls the underlying ReplaceMatchesInStringOptionsRangeWithTemplate.
-func (x *RegularExpression) ReplaceMatchesInStringOptionsRangeWithTemplate(string_ *raw.NSMutableString, options NSMatchingOptions, range_ raw.NSRange, templ string) uint {
-	return x.inner.ReplaceMatchesInStringOptionsRangeWithTemplate(string_, raw.NSMatchingOptions(options), range_, foundation.NSStringStringWithUTF8String(templ))
+func (x *RegularExpression) NumberOfCaptureGroups() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfCaptureGroups"))
+	return _r
 }
 
 // Used to perform template substitution for a single result for clients implementing their own replace functionality.
-//
-// ReplacementStringForResultInStringOffsetTemplate calls the underlying ReplacementStringForResultInStringOffsetTemplate.
-func (x *RegularExpression) ReplacementStringForResultInStringOffsetTemplate(result *raw.NSTextCheckingResult, string_ string, offset int, templ string) *String {
-	_r := x.inner.ReplacementStringForResultInStringOffsetTemplate(result, foundation.NSStringStringWithUTF8String(string_), offset, foundation.NSStringStringWithUTF8String(templ))
-	if _r == nil {
-		return nil
+func (x *RegularExpression) ReplacementStringForResultInStringOffsetTemplate(result *TextCheckingResult, string_ string, offset int, templ string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replacementStringForResult:inString:offset:template:"), objref.IDOf(result), purego.NSString(string_), offset, purego.NSString(templ))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
-
-func (x *RegularExpression) asRegularExpression() *raw.NSRegularExpression { return x.inner }
-
-func (x *RegularExpression) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // RegularExpressionable is the interface implemented by [RegularExpression], for mocking and DI.
 type RegularExpressionable interface {
-	Unwrap() *raw.NSRegularExpression
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *RegularExpression
-	Pattern() *String
-	Options() NSRegularExpressionOptions
-	NumberOfCaptureGroups() uint
-	EnumerateMatchesInStringOptionsRangeUsing(string_ string, options NSMatchingOptions, range_ raw.NSRange, block func(*raw.NSTextCheckingResult, NSMatchingFlags, *bool))
-	MatchesInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) *raw.NSArray[*raw.NSTextCheckingResult]
-	NumberOfMatchesInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) uint
-	FirstMatchInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) *TextCheckingResult
-	RangeOfFirstMatchInStringOptionsRange(string_ string, options NSMatchingOptions, range_ raw.NSRange) raw.NSRange
-	StringByReplacingMatchesInStringOptionsRangeWithTemplate(string_ string, options NSMatchingOptions, range_ raw.NSRange, templ string) *String
-	ReplaceMatchesInStringOptionsRangeWithTemplate(string_ *raw.NSMutableString, options NSMatchingOptions, range_ raw.NSRange, templ string) uint
-	ReplacementStringForResultInStringOffsetTemplate(result *raw.NSTextCheckingResult, string_ string, offset int, templ string) *String
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *RegularExpression
+	Pattern() string
+	Options() RegularExpressionOptions
+	NumberOfCaptureGroups() int
+	ReplacementStringForResultInStringOffsetTemplate(result *TextCheckingResult, string_ string, offset int, templ string) string
 }
 
 var _ RegularExpressionable = (*RegularExpression)(nil)

@@ -5,45 +5,68 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The base class for a pointing device configuration.
 //
-// PointingDeviceConfiguration wraps [raw.VZPointingDeviceConfiguration] with a fluent Go API.
+// PointingDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZPointingDeviceConfiguration.
 type PointingDeviceConfiguration struct {
-	inner *raw.VZPointingDeviceConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZPointingDeviceConfiguration].
-func (x *PointingDeviceConfiguration) Unwrap() *raw.VZPointingDeviceConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PointingDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// PointingDeviceConfigurationFromID adopts an existing object pointer as a PointingDeviceConfiguration (nil for 0).
+// PointingDeviceConfigurationFromID adopts an existing Objective-C object as a PointingDeviceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func PointingDeviceConfigurationFromID(id objc.ID) *PointingDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &PointingDeviceConfiguration{inner: raw.VZPointingDeviceConfigurationFromID(id)}
+	x := &PointingDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPointingDeviceConfiguration creates a new [PointingDeviceConfiguration].
+// pointingDeviceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// PointingDeviceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pointingDeviceConfigurationAdopt(id objc.ID) *PointingDeviceConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &PointingDeviceConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PointingDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PointingDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PointingDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPointingDeviceConfiguration creates a new PointingDeviceConfiguration.
 func NewPointingDeviceConfiguration() *PointingDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZPointingDeviceConfiguration")), objc.RegisterName("new"))
-	return &PointingDeviceConfiguration{inner: raw.VZPointingDeviceConfigurationFromID(_id)}
-}
-
-func (x *PointingDeviceConfiguration) asPointingDeviceConfiguration() *raw.VZPointingDeviceConfiguration {
-	return x.inner
+	_id := objc.Send[objc.ID](objc.ID(_class("VZPointingDeviceConfiguration")), objc.RegisterName("new"))
+	return pointingDeviceConfigurationAdopt(_id)
 }
 
 // PointingDeviceConfigurationable is the interface implemented by [PointingDeviceConfiguration], for mocking and DI.
 type PointingDeviceConfigurationable interface {
-	Unwrap() *raw.VZPointingDeviceConfiguration
+	obj.Object
 }
 
 var _ PointingDeviceConfigurationable = (*PointingDeviceConfiguration)(nil)

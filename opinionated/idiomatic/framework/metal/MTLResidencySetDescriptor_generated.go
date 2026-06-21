@@ -5,85 +5,106 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A configuration that customizes the behavior for a residency set.
 //
-// ResidencySetDescriptor wraps [raw.MTLResidencySetDescriptor] with a fluent Go API.
+// ResidencySetDescriptor is an idiomatic wrapper over the Objective-C class MTLResidencySetDescriptor.
 type ResidencySetDescriptor struct {
-	inner *raw.MTLResidencySetDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLResidencySetDescriptor].
-func (x *ResidencySetDescriptor) Unwrap() *raw.MTLResidencySetDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ResidencySetDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// ResidencySetDescriptorFromID adopts an existing object pointer as a ResidencySetDescriptor (nil for 0).
+// ResidencySetDescriptorFromID adopts an existing Objective-C object as a ResidencySetDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func ResidencySetDescriptorFromID(id objc.ID) *ResidencySetDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &ResidencySetDescriptor{inner: raw.MTLResidencySetDescriptorFromID(id)}
+	x := &ResidencySetDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewResidencySetDescriptor creates a new [ResidencySetDescriptor].
+// residencySetDescriptorAdopt wraps an Objective-C object that this code just created as a
+// ResidencySetDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func residencySetDescriptorAdopt(id objc.ID) *ResidencySetDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &ResidencySetDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ResidencySetDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ResidencySetDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ResidencySetDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewResidencySetDescriptor creates a new ResidencySetDescriptor.
 func NewResidencySetDescriptor() *ResidencySetDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLResidencySetDescriptor")), objc.RegisterName("new"))
-	return &ResidencySetDescriptor{inner: raw.MTLResidencySetDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLResidencySetDescriptor")), objc.RegisterName("new"))
+	return residencySetDescriptorAdopt(_id)
 }
 
 // An optional name that can help you identify a residency set you create with the descriptor.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ResidencySetDescriptor) WithLabel(label string) *ResidencySetDescriptor {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // The number of allocations a new residency set can store without reallocating memory.
 //
-// WithInitialCapacity sets the initialCapacity property and returns the receiver for chaining.
-func (x *ResidencySetDescriptor) WithInitialCapacity(initialCapacity uint) *ResidencySetDescriptor {
-	x.inner.SetInitialCapacity(initialCapacity)
+// WithInitialCapacity sets initialCapacity and returns the receiver so calls can be chained.
+func (x *ResidencySetDescriptor) WithInitialCapacity(initialCapacity int) *ResidencySetDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialCapacity:"), initialCapacity)
 	return x
 }
 
-// @property label @abstract An optional label for the MTLResidencySet.
-//
-// Label calls the underlying Label.
+// An optional label for the MTLResidencySet.
 func (x *ResidencySetDescriptor) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
 func (x *ResidencySetDescriptor) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// SetInitialCapacity calls the underlying SetInitialCapacity.
-func (x *ResidencySetDescriptor) SetInitialCapacity(initialCapacity uint) {
-	x.inner.SetInitialCapacity(initialCapacity)
+func (x *ResidencySetDescriptor) SetInitialCapacity(initialCapacity int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialCapacity:"), initialCapacity)
 }
 
 // ResidencySetDescriptorable is the interface implemented by [ResidencySetDescriptor], for mocking and DI.
 type ResidencySetDescriptorable interface {
-	Unwrap() *raw.MTLResidencySetDescriptor
+	obj.Object
 	WithLabel(label string) *ResidencySetDescriptor
-	WithInitialCapacity(initialCapacity uint) *ResidencySetDescriptor
+	WithInitialCapacity(initialCapacity int) *ResidencySetDescriptor
 	Label() string
 	SetLabel(label string)
-	SetInitialCapacity(initialCapacity uint)
+	SetInitialCapacity(initialCapacity int)
 }
 
 var _ ResidencySetDescriptorable = (*ResidencySetDescriptor)(nil)

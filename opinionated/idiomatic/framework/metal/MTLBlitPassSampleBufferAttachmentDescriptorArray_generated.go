@@ -5,63 +5,81 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A container that stores an array of sample buffer attachments for a blit pass.
 //
-// BlitPassSampleBufferAttachmentDescriptorArray wraps [raw.MTLBlitPassSampleBufferAttachmentDescriptorArray] with a fluent Go API.
+// BlitPassSampleBufferAttachmentDescriptorArray is an idiomatic wrapper over the Objective-C class MTLBlitPassSampleBufferAttachmentDescriptorArray.
 type BlitPassSampleBufferAttachmentDescriptorArray struct {
-	inner *raw.MTLBlitPassSampleBufferAttachmentDescriptorArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLBlitPassSampleBufferAttachmentDescriptorArray].
-func (x *BlitPassSampleBufferAttachmentDescriptorArray) Unwrap() *raw.MTLBlitPassSampleBufferAttachmentDescriptorArray {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BlitPassSampleBufferAttachmentDescriptorArray) ID() objc.ID { return x.inner.Ptr() }
-
-// BlitPassSampleBufferAttachmentDescriptorArrayFromID adopts an existing object pointer as a BlitPassSampleBufferAttachmentDescriptorArray (nil for 0).
+// BlitPassSampleBufferAttachmentDescriptorArrayFromID adopts an existing Objective-C object as a BlitPassSampleBufferAttachmentDescriptorArray
+// (nil for 0), retaining it and registering a release finalizer.
 func BlitPassSampleBufferAttachmentDescriptorArrayFromID(id objc.ID) *BlitPassSampleBufferAttachmentDescriptorArray {
 	if id == 0 {
 		return nil
 	}
-	return &BlitPassSampleBufferAttachmentDescriptorArray{inner: raw.MTLBlitPassSampleBufferAttachmentDescriptorArrayFromID(id)}
+	x := &BlitPassSampleBufferAttachmentDescriptorArray{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBlitPassSampleBufferAttachmentDescriptorArray creates a new [BlitPassSampleBufferAttachmentDescriptorArray].
+// blitPassSampleBufferAttachmentDescriptorArrayAdopt wraps an Objective-C object that this code just created as a
+// BlitPassSampleBufferAttachmentDescriptorArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func blitPassSampleBufferAttachmentDescriptorArrayAdopt(id objc.ID) *BlitPassSampleBufferAttachmentDescriptorArray {
+	if id == 0 {
+		return nil
+	}
+	x := &BlitPassSampleBufferAttachmentDescriptorArray{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BlitPassSampleBufferAttachmentDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BlitPassSampleBufferAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BlitPassSampleBufferAttachmentDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBlitPassSampleBufferAttachmentDescriptorArray creates a new BlitPassSampleBufferAttachmentDescriptorArray.
 func NewBlitPassSampleBufferAttachmentDescriptorArray() *BlitPassSampleBufferAttachmentDescriptorArray {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLBlitPassSampleBufferAttachmentDescriptorArray")), objc.RegisterName("new"))
-	return &BlitPassSampleBufferAttachmentDescriptorArray{inner: raw.MTLBlitPassSampleBufferAttachmentDescriptorArrayFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLBlitPassSampleBufferAttachmentDescriptorArray")), objc.RegisterName("new"))
+	return blitPassSampleBufferAttachmentDescriptorArrayAdopt(_id)
 }
 
 // Accesses one of the array’s blit pass sample buffer attachment descriptor instances.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *BlitPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *BlitPassSampleBufferAttachmentDescriptor {
-	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
-	if _r == nil {
-		return nil
-	}
-	return &BlitPassSampleBufferAttachmentDescriptor{inner: _r}
+func (x *BlitPassSampleBufferAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *BlitPassSampleBufferAttachmentDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
+	return BlitPassSampleBufferAttachmentDescriptorFromID(_r)
 }
 
 // Copies the properties of a blit pass sample buffer attachment descriptor instance to the properties of one of the array’s instances.
-//
-// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
-func (x *BlitPassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTLBlitPassSampleBufferAttachmentDescriptor, attachmentIndex uint) {
-	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)
+func (x *BlitPassSampleBufferAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *BlitPassSampleBufferAttachmentDescriptor, attachmentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
 
 // BlitPassSampleBufferAttachmentDescriptorArrayable is the interface implemented by [BlitPassSampleBufferAttachmentDescriptorArray], for mocking and DI.
 type BlitPassSampleBufferAttachmentDescriptorArrayable interface {
-	Unwrap() *raw.MTLBlitPassSampleBufferAttachmentDescriptorArray
-	ObjectAtIndexedSubscript(attachmentIndex uint) *BlitPassSampleBufferAttachmentDescriptor
-	SetObjectAtIndexedSubscript(attachment *raw.MTLBlitPassSampleBufferAttachmentDescriptor, attachmentIndex uint)
+	obj.Object
+	ObjectAtIndexedSubscript(attachmentIndex int) *BlitPassSampleBufferAttachmentDescriptor
+	SetObjectAtIndexedSubscript(attachment *BlitPassSampleBufferAttachmentDescriptor, attachmentIndex int)
 }
 
 var _ BlitPassSampleBufferAttachmentDescriptorArrayable = (*BlitPassSampleBufferAttachmentDescriptorArray)(nil)

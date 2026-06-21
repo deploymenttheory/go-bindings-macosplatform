@@ -92,8 +92,8 @@ func emitConstants(
 		takenNames[goName] = true
 
 		comment := ""
-		if ext.Doc != "" {
-			comment = "// " + ext.Doc + "\n"
+		if doc := cleanDoc(ext.Doc); doc != "" {
+			comment = "// " + strings.ReplaceAll(doc, "\n", "\n// ") + "\n"
 		}
 		item := constantItem{
 			GoName:       goName,
@@ -119,10 +119,10 @@ func emitConstants(
 		return err
 	}
 
+	_ = rawPkgPath
 	imports := map[string]string{
-		rawPkgAlias: rawPkgPath,
-		"purego":    pureobjcImportPath,
-		"objc":      objcImportPath,
+		"purego": pureobjcImportPath,
+		"obj":    objImportPath,
 	}
 
 	fname := pkgName + "_constants_generated.go"

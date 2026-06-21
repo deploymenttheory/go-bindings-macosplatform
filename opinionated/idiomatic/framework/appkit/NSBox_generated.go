@@ -5,741 +5,602 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A stylized rectangular box with an optional title.
 //
-// Box wraps [raw.NSBox] with a fluent Go API.
+// Box is an idiomatic wrapper over the Objective-C class NSBox.
 type Box struct {
-	inner *raw.NSBox
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSBox].
-func (x *Box) Unwrap() *raw.NSBox { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Box) ID() objc.ID { return x.inner.Ptr() }
-
-// BoxFromID adopts an existing object pointer as a Box (nil for 0).
+// BoxFromID adopts an existing Objective-C object as a Box
+// (nil for 0), retaining it and registering a release finalizer.
 func BoxFromID(id objc.ID) *Box {
 	if id == 0 {
 		return nil
 	}
-	return &Box{inner: raw.NSBoxFromID(id)}
+	x := &Box{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBox creates a new [Box].
+// boxAdopt wraps an Objective-C object that this code just created as a
+// Box (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func boxAdopt(id objc.ID) *Box {
+	if id == 0 {
+		return nil
+	}
+	x := &Box{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Box) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Box) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Box) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBox creates a new Box.
 func NewBox() *Box {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSBox")), objc.RegisterName("new"))
-	return &Box{inner: raw.NSBoxFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSBox")), objc.RegisterName("new"))
+	return boxAdopt(_id)
 }
 
 // The receiver’s box type.
 //
-// WithBoxType sets the boxType property and returns the receiver for chaining.
-func (x *Box) WithBoxType(boxType NSBoxType) *Box {
-	x.inner.SetBoxType(raw.NSBoxType(boxType))
+// WithBoxType sets boxType and returns the receiver so calls can be chained.
+func (x *Box) WithBoxType(boxType BoxType) *Box {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoxType:"), boxType)
 	return x
 }
 
 // A constant representing the title position.
 //
-// WithTitlePosition sets the titlePosition property and returns the receiver for chaining.
-func (x *Box) WithTitlePosition(titlePosition NSTitlePosition) *Box {
-	x.inner.SetTitlePosition(raw.NSTitlePosition(titlePosition))
+// WithTitlePosition sets titlePosition and returns the receiver so calls can be chained.
+func (x *Box) WithTitlePosition(titlePosition TitlePosition) *Box {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlePosition:"), titlePosition)
 	return x
 }
 
 // The receiver’s title.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *Box) WithTitle(title string) *Box {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // The font object used to draw the receiver’s title.
 //
-// WithTitleFont sets the titleFont property and returns the receiver for chaining.
+// WithTitleFont sets titleFont and returns the receiver so calls can be chained.
 func (x *Box) WithTitleFont(titleFont *Font) *Box {
-	x.inner.SetTitleFont(titleFont.Unwrap())
-	return x
-}
-
-// The distances between the border and the content view.
-//
-// WithContentViewMargins sets the contentViewMargins property and returns the receiver for chaining.
-func (x *Box) WithContentViewMargins(contentViewMargins corefoundation.CGSize) *Box {
-	x.inner.SetContentViewMargins(contentViewMargins)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleFont:"), objref.IDOf(titleFont))
 	return x
 }
 
 // The receiver’s content view.
 //
-// WithContentView sets the contentView property and returns the receiver for chaining.
+// WithContentView sets contentView and returns the receiver so calls can be chained.
 func (x *Box) WithContentView(contentView ViewProvider) *Box {
-	x.inner.SetContentView(contentView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 	return x
 }
 
 // A Boolean value that indicates whether the receiver is transparent.
 //
-// WithTransparent sets the transparent property and returns the receiver for chaining.
+// WithTransparent sets transparent and returns the receiver so calls can be chained.
 func (x *Box) WithTransparent(transparent bool) *Box {
-	x.inner.SetTransparent(transparent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransparent:"), transparent)
 	return x
 }
 
 // The width of the receiver’s border when the receiver is a custom box with a simple line border.
 //
-// WithBorderWidth sets the borderWidth property and returns the receiver for chaining.
+// WithBorderWidth sets borderWidth and returns the receiver so calls can be chained.
 func (x *Box) WithBorderWidth(borderWidth float64) *Box {
-	x.inner.SetBorderWidth(borderWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderWidth:"), borderWidth)
 	return x
 }
 
 // The radius of the receiver’s corners when the receiver is a custom box with a simple line border.
 //
-// WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
+// WithCornerRadius sets cornerRadius and returns the receiver so calls can be chained.
 func (x *Box) WithCornerRadius(cornerRadius float64) *Box {
-	x.inner.SetCornerRadius(cornerRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 	return x
 }
 
 // The color of the receiver’s border when the receiver is a custom box with a simple line border.
 //
-// WithBorderColor sets the borderColor property and returns the receiver for chaining.
+// WithBorderColor sets borderColor and returns the receiver so calls can be chained.
 func (x *Box) WithBorderColor(borderColor *Color) *Box {
-	x.inner.SetBorderColor(borderColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 	return x
 }
 
 // The color of the receiver’s background when the receiver is a custom box with a simple line border.
 //
-// WithFillColor sets the fillColor property and returns the receiver for chaining.
+// WithFillColor sets fillColor and returns the receiver so calls can be chained.
 func (x *Box) WithFillColor(fillColor *Color) *Box {
-	x.inner.SetFillColor(fillColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	return x
 }
 
 // The receiver’s border type.
 //
-// WithBorderType sets the borderType property and returns the receiver for chaining.
-func (x *Box) WithBorderType(borderType NSBorderType) *Box {
-	x.inner.SetBorderType(raw.NSBorderType(borderType))
+// WithBorderType sets borderType and returns the receiver so calls can be chained.
+func (x *Box) WithBorderType(borderType BorderType) *Box {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderType:"), borderType)
 	return x
 }
 
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
+// WithSubviews sets the collection and returns the receiver so calls can be chained.
 func (x *Box) WithSubviews(items ...ViewProvider) *Box {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetSubviews(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *Box) WithHidden(hidden bool) *Box {
-	x.inner.NSView.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+// WithPostsFrameChangedNotifications sets postsFrameChangedNotifications and returns the receiver so calls can be chained.
 func (x *Box) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Box {
-	x.inner.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+// WithAutoresizesSubviews sets autoresizesSubviews and returns the receiver so calls can be chained.
 func (x *Box) WithAutoresizesSubviews(autoresizesSubviews bool) *Box {
-	x.inner.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *Box) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Box {
-	x.inner.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
+// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+func (x *Box) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Box {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
-func (x *Box) WithFrame(frame corefoundation.CGRect) *Box {
-	x.inner.NSView.SetFrame(frame)
-	return x
-}
-
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+// WithFrameRotation sets frameRotation and returns the receiver so calls can be chained.
 func (x *Box) WithFrameRotation(frameRotation float64) *Box {
-	x.inner.NSView.SetFrameRotation(frameRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+// WithFrameCenterRotation sets frameCenterRotation and returns the receiver so calls can be chained.
 func (x *Box) WithFrameCenterRotation(frameCenterRotation float64) *Box {
-	x.inner.NSView.SetFrameCenterRotation(frameCenterRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+// WithBoundsRotation sets boundsRotation and returns the receiver so calls can be chained.
 func (x *Box) WithBoundsRotation(boundsRotation float64) *Box {
-	x.inner.NSView.SetBoundsRotation(boundsRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *Box) WithBounds(bounds corefoundation.CGRect) *Box {
-	x.inner.NSView.SetBounds(bounds)
-	return x
-}
-
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+// WithCanDrawConcurrently sets canDrawConcurrently and returns the receiver so calls can be chained.
 func (x *Box) WithCanDrawConcurrently(canDrawConcurrently bool) *Box {
-	x.inner.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
 // A Boolean value that determines whether the view needs to be redrawn before being displayed.
 //
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+// WithNeedsDisplay sets needsDisplay and returns the receiver so calls can be chained.
 func (x *Box) WithNeedsDisplay(needsDisplay bool) *Box {
-	x.inner.NSView.SetNeedsDisplay(needsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+// WithAcceptsTouchEvents sets acceptsTouchEvents and returns the receiver so calls can be chained.
 func (x *Box) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Box {
-	x.inner.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+// WithWantsRestingTouches sets wantsRestingTouches and returns the receiver so calls can be chained.
 func (x *Box) WithWantsRestingTouches(wantsRestingTouches bool) *Box {
-	x.inner.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *Box) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Box {
-	x.inner.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
+// WithLayerContentsRedrawPolicy sets layerContentsRedrawPolicy and returns the receiver so calls can be chained.
+func (x *Box) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Box {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *Box) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Box {
-	x.inner.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
+// WithLayerContentsPlacement sets layerContentsPlacement and returns the receiver so calls can be chained.
+func (x *Box) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Box {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+// WithWantsLayer sets wantsLayer and returns the receiver so calls can be chained.
 func (x *Box) WithWantsLayer(wantsLayer bool) *Box {
-	x.inner.NSView.SetWantsLayer(wantsLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *Box) WithLayer(layer *quartzcore.CALayer) *Box {
-	x.inner.NSView.SetLayer(layer)
+// WithLayer sets layer and returns the receiver so calls can be chained.
+func (x *Box) WithLayer(layer obj.Object) *Box {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+// WithCanDrawSubviewsIntoLayer sets canDrawSubviewsIntoLayer and returns the receiver so calls can be chained.
 func (x *Box) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Box {
-	x.inner.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+// WithNeedsLayout sets needsLayout and returns the receiver so calls can be chained.
 func (x *Box) WithNeedsLayout(needsLayout bool) *Box {
-	x.inner.NSView.SetNeedsLayout(needsLayout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
 func (x *Box) WithAlphaValue(alphaValue float64) *Box {
-	x.inner.NSView.SetAlphaValue(alphaValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+// WithLayerUsesCoreImageFilters sets layerUsesCoreImageFilters and returns the receiver so calls can be chained.
 func (x *Box) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Box {
-	x.inner.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *Box) WithBackgroundFilters(items ...*coreimage.CIFilter) *Box {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetBackgroundFilters(_arr)
+// WithBackgroundFilters sets the collection and returns the receiver so calls can be chained.
+func (x *Box) WithBackgroundFilters(items ...obj.Object) *Box {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *Box) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Box {
-	x.inner.NSView.SetCompositingFilter(compositingFilter)
+// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+func (x *Box) WithCompositingFilter(compositingFilter obj.Object) *Box {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *Box) WithContentFilters(items ...*coreimage.CIFilter) *Box {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetContentFilters(_arr)
+// WithContentFilters sets the collection and returns the receiver so calls can be chained.
+func (x *Box) WithContentFilters(items ...obj.Object) *Box {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets the shadow property and returns the receiver for chaining.
+// WithShadow sets shadow and returns the receiver so calls can be chained.
 func (x *Box) WithShadow(shadow *Shadow) *Box {
-	x.inner.NSView.SetShadow(shadow.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+// WithClipsToBounds sets clipsToBounds and returns the receiver so calls can be chained.
 func (x *Box) WithClipsToBounds(clipsToBounds bool) *Box {
-	x.inner.NSView.SetClipsToBounds(clipsToBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+// WithPostsBoundsChangedNotifications sets postsBoundsChangedNotifications and returns the receiver so calls can be chained.
 func (x *Box) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Box {
-	x.inner.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip sets toolTip and returns the receiver so calls can be chained.
 func (x *Box) WithToolTip(toolTip string) *Box {
-	x.inner.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *Box) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Box {
-	x.inner.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+func (x *Box) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Box {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
-func (x *Box) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Box {
-	x.inner.NSView.SetPreparedContentRect(preparedContentRect)
-	return x
-}
-
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+// WithNextKeyView sets nextKeyView and returns the receiver so calls can be chained.
 func (x *Box) WithNextKeyView(nextKeyView ViewProvider) *Box {
-	x.inner.NSView.SetNextKeyView(nextKeyView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *Box) WithFocusRingType(focusRingType NSFocusRingType) *Box {
-	x.inner.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+func (x *Box) WithFocusRingType(focusRingType FocusRingType) *Box {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+// WithGestureRecognizers sets the collection and returns the receiver so calls can be chained.
 func (x *Box) WithGestureRecognizers(items ...GestureRecognizerProvider) *Box {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSView.SetGestureRecognizers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *Box) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Box {
-	x.inner.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
-	return x
-}
-
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
-func (x *Box) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Box {
-	x.inner.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+// WithAllowedTouchTypes sets allowedTouchTypes and returns the receiver so calls can be chained.
+func (x *Box) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Box {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
 // When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+// WithPrefersCompactControlSizeMetrics sets prefersCompactControlSizeMetrics and returns the receiver so calls can be chained.
 func (x *Box) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Box {
-	x.inner.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+// WithWritingToolsCoordinator sets writingToolsCoordinator and returns the receiver so calls can be chained.
 func (x *Box) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Box {
-	x.inner.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+// WithNeedsUpdateConstraints sets needsUpdateConstraints and returns the receiver so calls can be chained.
 func (x *Box) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Box {
-	x.inner.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+// WithTranslatesAutoresizingMaskIntoConstraints sets translatesAutoresizingMaskIntoConstraints and returns the receiver so calls can be chained.
 func (x *Box) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Box {
-	x.inner.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithHorizontalContentSizeConstraintActive sets horizontalContentSizeConstraintActive and returns the receiver so calls can be chained.
 func (x *Box) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Box {
-	x.inner.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithVerticalContentSizeConstraintActive sets verticalContentSizeConstraintActive and returns the receiver so calls can be chained.
 func (x *Box) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Box {
-	x.inner.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+// WithWantsBestResolutionOpenGLSurface sets wantsBestResolutionOpenGLSurface and returns the receiver so calls can be chained.
 func (x *Box) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Box {
-	x.inner.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets wantsExtendedDynamicRangeOpenGLSurface and returns the receiver so calls can be chained.
 func (x *Box) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Box {
-	x.inner.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+// WithPressureConfiguration sets pressureConfiguration and returns the receiver so calls can be chained.
 func (x *Box) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Box {
-	x.inner.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
 // The next responder after this one, or nil if it has none.
 //
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
 func (x *Box) WithNextResponder(nextResponder ResponderProvider) *Box {
-	x.inner.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
 // Returns the responder’s menu.
 //
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu sets menu and returns the receiver so calls can be chained.
 func (x *Box) WithMenu(menu *Menu) *Box {
-	x.inner.NSView.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
 // An object encapsulating a user activity supported by this responder.
 //
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *Box) WithUserActivity(userActivity *foundation.NSUserActivity) *Box {
-	x.inner.NSView.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+func (x *Box) WithUserActivity(userActivity obj.Object) *Box {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
 // The NSTouchBar object associated with the responder.
 //
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
 func (x *Box) WithTouchBar(touchBar *TouchBar) *Box {
-	x.inner.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
 // Resizes and moves the receiver’s content view so it just encloses its subviews.
-//
-// SizeToFit calls the underlying SizeToFit.
 func (x *Box) SizeToFit() {
-	x.inner.SizeToFit()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sizeToFit"))
 }
 
-// Places the receiver so its content view lies on the specified frame.
-//
-// SetFrameFromContentFrame calls the underlying SetFrameFromContentFrame.
-func (x *Box) SetFrameFromContentFrame(contentFrame corefoundation.CGRect) {
-	x.inner.SetFrameFromContentFrame(contentFrame)
+func (x *Box) BoxType() BoxType {
+	_r := objc.Send[BoxType](objref.IDOf(x), objc.RegisterName("boxType"))
+	return _r
 }
 
-// BoxType calls the underlying BoxType.
-func (x *Box) BoxType() NSBoxType {
-	return NSBoxType(x.inner.BoxType())
+func (x *Box) SetBoxType(boxType BoxType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoxType:"), boxType)
 }
 
-// SetBoxType calls the underlying SetBoxType.
-func (x *Box) SetBoxType(boxType NSBoxType) {
-	x.inner.SetBoxType(raw.NSBoxType(boxType))
+func (x *Box) TitlePosition() TitlePosition {
+	_r := objc.Send[TitlePosition](objref.IDOf(x), objc.RegisterName("titlePosition"))
+	return _r
 }
 
-// TitlePosition calls the underlying TitlePosition.
-func (x *Box) TitlePosition() NSTitlePosition {
-	return NSTitlePosition(x.inner.TitlePosition())
+func (x *Box) SetTitlePosition(titlePosition TitlePosition) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitlePosition:"), titlePosition)
 }
 
-// SetTitlePosition calls the underlying SetTitlePosition.
-func (x *Box) SetTitlePosition(titlePosition NSTitlePosition) {
-	x.inner.SetTitlePosition(raw.NSTitlePosition(titlePosition))
-}
-
-// Title calls the underlying Title.
 func (x *Box) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
 func (x *Box) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// TitleFont calls the underlying TitleFont.
 func (x *Box) TitleFont() *Font {
-	_r := x.inner.TitleFont()
-	if _r == nil {
-		return nil
-	}
-	return &Font{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("titleFont"))
+	return FontFromID(_r)
 }
 
-// SetTitleFont calls the underlying SetTitleFont.
-func (x *Box) SetTitleFont(titleFont *raw.NSFont) {
-	x.inner.SetTitleFont(titleFont)
+func (x *Box) SetTitleFont(titleFont *Font) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleFont:"), objref.IDOf(titleFont))
 }
 
-// BorderRect calls the underlying BorderRect.
-func (x *Box) BorderRect() corefoundation.CGRect {
-	return x.inner.BorderRect()
+func (x *Box) TitleCell() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("titleCell"))
+	return obj.Wrap(_r)
 }
 
-// TitleRect calls the underlying TitleRect.
-func (x *Box) TitleRect() corefoundation.CGRect {
-	return x.inner.TitleRect()
-}
-
-// TitleCell calls the underlying TitleCell.
-func (x *Box) TitleCell() objc.ID {
-	return x.inner.TitleCell()
-}
-
-// ContentViewMargins calls the underlying ContentViewMargins.
-func (x *Box) ContentViewMargins() corefoundation.CGSize {
-	return x.inner.ContentViewMargins()
-}
-
-// SetContentViewMargins calls the underlying SetContentViewMargins.
-func (x *Box) SetContentViewMargins(contentViewMargins corefoundation.CGSize) {
-	x.inner.SetContentViewMargins(contentViewMargins)
-}
-
-// ContentView calls the underlying ContentView.
 func (x *Box) ContentView() *View {
-	_r := x.inner.ContentView()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentView"))
+	return ViewFromID(_r)
 }
 
-// SetContentView calls the underlying SetContentView.
-func (x *Box) SetContentView(contentView *raw.NSView) {
-	x.inner.SetContentView(contentView)
+func (x *Box) SetContentView(contentView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentView:"), objref.IDOf(contentView))
 }
 
-// IsTransparent calls the underlying IsTransparent.
 func (x *Box) IsTransparent() bool {
-	return x.inner.IsTransparent()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTransparent"))
+	return _r
 }
 
-// SetTransparent calls the underlying SetTransparent.
 func (x *Box) SetTransparent(transparent bool) {
-	x.inner.SetTransparent(transparent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransparent:"), transparent)
 }
 
-// BorderWidth calls the underlying BorderWidth.
 func (x *Box) BorderWidth() float64 {
-	return x.inner.BorderWidth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("borderWidth"))
+	return _r
 }
 
-// SetBorderWidth calls the underlying SetBorderWidth.
 func (x *Box) SetBorderWidth(borderWidth float64) {
-	x.inner.SetBorderWidth(borderWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderWidth:"), borderWidth)
 }
 
-// CornerRadius calls the underlying CornerRadius.
 func (x *Box) CornerRadius() float64 {
-	return x.inner.CornerRadius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("cornerRadius"))
+	return _r
 }
 
-// SetCornerRadius calls the underlying SetCornerRadius.
 func (x *Box) SetCornerRadius(cornerRadius float64) {
-	x.inner.SetCornerRadius(cornerRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 }
 
-// BorderColor calls the underlying BorderColor.
 func (x *Box) BorderColor() *Color {
-	_r := x.inner.BorderColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderColor"))
+	return ColorFromID(_r)
 }
 
-// SetBorderColor calls the underlying SetBorderColor.
-func (x *Box) SetBorderColor(borderColor *raw.NSColor) {
-	x.inner.SetBorderColor(borderColor)
+func (x *Box) SetBorderColor(borderColor *Color) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 }
 
-// FillColor calls the underlying FillColor.
 func (x *Box) FillColor() *Color {
-	_r := x.inner.FillColor()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fillColor"))
+	return ColorFromID(_r)
 }
 
-// SetFillColor calls the underlying SetFillColor.
-func (x *Box) SetFillColor(fillColor *raw.NSColor) {
-	x.inner.SetFillColor(fillColor)
+func (x *Box) SetFillColor(fillColor *Color) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 }
 
 // Sets the title of the receiver with a character denoted as an access key.
-//
-// SetTitleWithMnemonic calls the underlying SetTitleWithMnemonic.
 func (x *Box) SetTitleWithMnemonic(stringWithAmpersand string) {
-	x.inner.SetTitleWithMnemonic(foundation.NSStringStringWithUTF8String(stringWithAmpersand))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleWithMnemonic:"), purego.NSString(stringWithAmpersand))
 }
 
-// BorderType calls the underlying BorderType.
-func (x *Box) BorderType() NSBorderType {
-	return NSBorderType(x.inner.BorderType())
+func (x *Box) BorderType() BorderType {
+	_r := objc.Send[BorderType](objref.IDOf(x), objc.RegisterName("borderType"))
+	return _r
 }
 
-// SetBorderType calls the underlying SetBorderType.
-func (x *Box) SetBorderType(borderType NSBorderType) {
-	x.inner.SetBorderType(raw.NSBorderType(borderType))
+func (x *Box) SetBorderType(borderType BorderType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderType:"), borderType)
 }
-
-func (x *Box) asView() *raw.NSView { return &x.inner.NSView }
-
-func (x *Box) asResponder() *raw.NSResponder { return &x.inner.NSView.NSResponder }
 
 // Boxable is the interface implemented by [Box], for mocking and DI.
 type Boxable interface {
-	Unwrap() *raw.NSBox
-	WithBoxType(boxType NSBoxType) *Box
-	WithTitlePosition(titlePosition NSTitlePosition) *Box
+	obj.Object
+	WithBoxType(boxType BoxType) *Box
+	WithTitlePosition(titlePosition TitlePosition) *Box
 	WithTitle(title string) *Box
 	WithTitleFont(titleFont *Font) *Box
-	WithContentViewMargins(contentViewMargins corefoundation.CGSize) *Box
 	WithContentView(contentView ViewProvider) *Box
 	WithTransparent(transparent bool) *Box
 	WithBorderWidth(borderWidth float64) *Box
 	WithCornerRadius(cornerRadius float64) *Box
 	WithBorderColor(borderColor *Color) *Box
 	WithFillColor(fillColor *Color) *Box
-	WithBorderType(borderType NSBorderType) *Box
+	WithBorderType(borderType BorderType) *Box
 	WithSubviews(items ...ViewProvider) *Box
 	WithHidden(hidden bool) *Box
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Box
 	WithAutoresizesSubviews(autoresizesSubviews bool) *Box
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *Box
-	WithFrame(frame corefoundation.CGRect) *Box
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Box
 	WithFrameRotation(frameRotation float64) *Box
 	WithFrameCenterRotation(frameCenterRotation float64) *Box
 	WithBoundsRotation(boundsRotation float64) *Box
-	WithBounds(bounds corefoundation.CGRect) *Box
 	WithCanDrawConcurrently(canDrawConcurrently bool) *Box
 	WithNeedsDisplay(needsDisplay bool) *Box
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Box
 	WithWantsRestingTouches(wantsRestingTouches bool) *Box
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *Box
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *Box
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Box
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Box
 	WithWantsLayer(wantsLayer bool) *Box
-	WithLayer(layer *quartzcore.CALayer) *Box
+	WithLayer(layer obj.Object) *Box
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Box
 	WithNeedsLayout(needsLayout bool) *Box
 	WithAlphaValue(alphaValue float64) *Box
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Box
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *Box
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *Box
-	WithContentFilters(items ...*coreimage.CIFilter) *Box
+	WithBackgroundFilters(items ...obj.Object) *Box
+	WithCompositingFilter(compositingFilter obj.Object) *Box
+	WithContentFilters(items ...obj.Object) *Box
 	WithShadow(shadow *Shadow) *Box
 	WithClipsToBounds(clipsToBounds bool) *Box
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Box
 	WithToolTip(toolTip string) *Box
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *Box
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Box
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Box
 	WithNextKeyView(nextKeyView ViewProvider) *Box
-	WithFocusRingType(focusRingType NSFocusRingType) *Box
+	WithFocusRingType(focusRingType FocusRingType) *Box
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *Box
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *Box
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Box
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Box
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Box
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Box
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Box
@@ -751,25 +612,20 @@ type Boxable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Box
 	WithNextResponder(nextResponder ResponderProvider) *Box
 	WithMenu(menu *Menu) *Box
-	WithUserActivity(userActivity *foundation.NSUserActivity) *Box
+	WithUserActivity(userActivity obj.Object) *Box
 	WithTouchBar(touchBar *TouchBar) *Box
 	SizeToFit()
-	SetFrameFromContentFrame(contentFrame corefoundation.CGRect)
-	BoxType() NSBoxType
-	SetBoxType(boxType NSBoxType)
-	TitlePosition() NSTitlePosition
-	SetTitlePosition(titlePosition NSTitlePosition)
+	BoxType() BoxType
+	SetBoxType(boxType BoxType)
+	TitlePosition() TitlePosition
+	SetTitlePosition(titlePosition TitlePosition)
 	Title() string
 	SetTitle(title string)
 	TitleFont() *Font
-	SetTitleFont(titleFont *raw.NSFont)
-	BorderRect() corefoundation.CGRect
-	TitleRect() corefoundation.CGRect
-	TitleCell() objc.ID
-	ContentViewMargins() corefoundation.CGSize
-	SetContentViewMargins(contentViewMargins corefoundation.CGSize)
+	SetTitleFont(titleFont *Font)
+	TitleCell() obj.Object
 	ContentView() *View
-	SetContentView(contentView *raw.NSView)
+	SetContentView(contentView *View)
 	IsTransparent() bool
 	SetTransparent(transparent bool)
 	BorderWidth() float64
@@ -777,12 +633,12 @@ type Boxable interface {
 	CornerRadius() float64
 	SetCornerRadius(cornerRadius float64)
 	BorderColor() *Color
-	SetBorderColor(borderColor *raw.NSColor)
+	SetBorderColor(borderColor *Color)
 	FillColor() *Color
-	SetFillColor(fillColor *raw.NSColor)
+	SetFillColor(fillColor *Color)
 	SetTitleWithMnemonic(stringWithAmpersand string)
-	BorderType() NSBorderType
-	SetBorderType(borderType NSBorderType)
+	BorderType() BorderType
+	SetBorderType(borderType BorderType)
 }
 
 var _ Boxable = (*Box)(nil)

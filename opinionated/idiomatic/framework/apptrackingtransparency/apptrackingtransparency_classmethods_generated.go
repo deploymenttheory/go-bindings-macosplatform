@@ -5,17 +5,11 @@
 package apptrackingtransparency
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/apptrackingtransparency"
+	"github.com/ebitengine/purego/objc"
 )
 
-// RequestTrackingAuthorizationWithCompletionHandler calls the underlying ATTrackingManagerRequestTrackingAuthorizationWithCompletionHandler.
-func RequestTrackingAuthorizationWithCompletionHandler(completion func(ATTrackingManagerAuthorizationStatus)) {
-	raw.ATTrackingManagerRequestTrackingAuthorizationWithCompletionHandler(func(_a0 raw.ATTrackingManagerAuthorizationStatus) {
-		completion(ATTrackingManagerAuthorizationStatus(_a0))
-	})
-}
-
-// TrackingAuthorizationStatus calls the underlying ATTrackingManagerTrackingAuthorizationStatus.
-func TrackingAuthorizationStatus() ATTrackingManagerAuthorizationStatus {
-	return ATTrackingManagerAuthorizationStatus(raw.ATTrackingManagerTrackingAuthorizationStatus())
+// The authorization status that is current for the calling application. If the user has not yet been prompted to approve access, the return value will either be “ATTrackingManagerAuthorizationStatusNotDetermined“, or “ATTrackingManagerAuthorizationStatusRestricted“ if this value is managed. Once the user has been prompted, the return value will be either “ATTrackingManagerAuthorizationStatusDenied“ or “ATTrackingManagerAuthorizationStatusAuthorized“. Use the “ATTrackingManager/trackingAuthorizationStatus“ property to check authorization status. - Returns: Information about your application’s tracking authorization status. Users are able to grant or deny developers tracking privileges on a per-app basis. Application developers must call `requestTrackingAuthorizationWithCompletionHandler:` for the ability to track users.
+func TrackingAuthorizationStatus() TrackingManagerAuthorizationStatus {
+	_r := objc.Send[TrackingManagerAuthorizationStatus](objc.ID(_class("ATTrackingManager")), objc.RegisterName("trackingAuthorizationStatus"))
+	return _r
 }

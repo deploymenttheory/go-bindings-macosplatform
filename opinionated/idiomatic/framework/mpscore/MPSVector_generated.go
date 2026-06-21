@@ -5,135 +5,108 @@
 package mpscore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Vector wraps [raw.MPSVector] with a fluent Go API.
+// Vector is an idiomatic wrapper over the Objective-C class MPSVector.
 type Vector struct {
-	inner *raw.MPSVector
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSVector].
-func (x *Vector) Unwrap() *raw.MPSVector { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Vector) ID() objc.ID { return x.inner.Ptr() }
-
-// VectorFromID adopts an existing object pointer as a Vector (nil for 0).
+// VectorFromID adopts an existing Objective-C object as a Vector
+// (nil for 0), retaining it and registering a release finalizer.
 func VectorFromID(id objc.ID) *Vector {
 	if id == 0 {
 		return nil
 	}
-	return &Vector{inner: raw.MPSVectorFromID(id)}
+	x := &Vector{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initialize a MPSVector object with a MTLBuffer. @param      buffer          The MTLBuffer object which contains the data to use for the MPSVector. May not be NULL. @param      descriptor      The MPSVectorDescriptor. May not be NULL. @return     A valid MPSVector object or nil, if failure. @discussion This function returns a MPSVector object which uses the supplied MTLBuffer.  The length, number of vectors, and stride between vectors are specified by the MPSVectorDescriptor object. The provided MTLBuffer must have enough storage to hold (descriptor.vectors-1) * descriptor.vectorBytes + descriptor.length * (element size) bytes.
-//
-// NewVectorWithBufferDescriptor creates a new [Vector].
-func NewVectorWithBufferDescriptor(buffer metal.MTLBuffer, descriptor *raw.MPSVectorDescriptor) *Vector {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSVector")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBuffer:descriptor:"), buffer, descriptor.Ptr())
-	return &Vector{inner: raw.MPSVectorFromID(_id)}
+// vectorAdopt wraps an Objective-C object that this code just created as a
+// Vector (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vectorAdopt(id objc.ID) *Vector {
+	if id == 0 {
+		return nil
+	}
+	x := &Vector{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Initialize a MPSVector object with a MTLBuffer and an offset. @param      buffer  The MTLBuffer containing the data. @param      offset  The offset, in bytes, into the buffer at which data begins. @param      descriptor  The MPSVectorDescriptor.
-//
-// NewVectorWithBufferOffsetDescriptor creates a new [Vector].
-func NewVectorWithBufferOffsetDescriptor(buffer metal.MTLBuffer, offset uint, descriptor *raw.MPSVectorDescriptor) *Vector {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSVector")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBuffer:offset:descriptor:"), buffer, offset, descriptor.Ptr())
-	return &Vector{inner: raw.MPSVectorFromID(_id)}
+// Description returns the object's -description text.
+func (x *Vector) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract   Initialize a lazily backed MPSVector object with a descriptor @param      device      The device with which it will be used @param      descriptor  The shape and style of the matrix @return     A valid MPSVector object or nil @discussion The vector object will be created, but the storage to hold the vector data will only be allocated when it is needed, typically when the data property is invoked.  In conjunction with -resourceSize, this will allow you to estimate storage needs without actually creating the backing store for the vector.
-//
-// NewVectorWithDeviceDescriptor creates a new [Vector].
-func NewVectorWithDeviceDescriptor(device metal.MTLDevice, descriptor *raw.MPSVectorDescriptor) *Vector {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSVector")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:descriptor:"), device, descriptor.Ptr())
-	return &Vector{inner: raw.MPSVectorFromID(_id)}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Vector) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @abstract   Flush the underlying MTLBuffer from the device's caches, and invalidate any CPU caches if needed. @discussion This will call [id <MTLBlitEncoder> synchronizeResource: ] on the vector's MTLBuffer, if any. This is necessary for all MTLStorageModeManaged resources. For other resources, including temporary resources (these are all MTLStorageModePrivate), and buffers that have not yet been allocated, nothing is done. It is more efficient to use this method than to attempt to do this yourself with the data property. @param      commandBuffer       The commandbuffer on which to synchronize
-//
-// SynchronizeOnCommandBuffer calls the underlying SynchronizeOnCommandBuffer.
-func (x *Vector) SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer) {
-	x.inner.SynchronizeOnCommandBuffer(commandBuffer)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Vector) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @abstract       Get the number of bytes used to allocate underyling MTLResources @discussion     This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSVector instantiation and MTLBuffer is not included. It only measures the size of the allocation used to hold the vector data in the buffer. This value is subject to change between different devices and operating systems. Except when -initWithBuffer:descriptor: is used, most MPSVectors are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSMatrix to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSMatrix is created with -initWithBuffer:descriptor:. In such cases, 0 will be returned.
-//
-// ResourceSize calls the underlying ResourceSize.
-func (x *Vector) ResourceSize() uint {
-	return x.inner.ResourceSize()
+// NewVector creates a new Vector.
+func NewVector() *Vector {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSVector")), objc.RegisterName("new"))
+	return vectorAdopt(_id)
 }
 
-// @property   device @discussion The device on which the MPSVector will be used.
-//
-// Device calls the underlying Device.
-func (x *Vector) Device() metal.MTLDevice {
-	return x.inner.Device()
+// Get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSVector instantiation and MTLBuffer is not included. It only measures the size of the allocation used to hold the vector data in the buffer. This value is subject to change between different devices and operating systems. Except when -initWithBuffer:descriptor: is used, most MPSVectors are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSMatrix to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSMatrix is created with -initWithBuffer:descriptor:. In such cases, 0 will be returned.
+func (x *Vector) ResourceSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resourceSize"))
+	return _r
 }
 
-// @property   length @discussion The number of elements in the vector.
-//
-// Length calls the underlying Length.
-func (x *Vector) Length() uint {
-	return x.inner.Length()
+// The number of elements in the vector.
+func (x *Vector) Length() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+	return _r
 }
 
-// @property   vectors @discussion The number of vectors in the MPSVector.
-//
-// Vectors calls the underlying Vectors.
-func (x *Vector) Vectors() uint {
-	return x.inner.Vectors()
+// The number of vectors in the MPSVector.
+func (x *Vector) Vectors() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectors"))
+	return _r
 }
 
-// @property   dataType @discussion The type of the MPSVector data.
-//
-// DataType calls the underlying DataType.
-func (x *Vector) DataType() MPSDataType {
-	return MPSDataType(x.inner.DataType())
+// The type of the MPSVector data.
+func (x *Vector) DataType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("dataType"))
+	return _r
 }
 
-// @property   vectorBytes @discussion The stride, in bytes, between corresponding elements of consecutive vectors.
-//
-// VectorBytes calls the underlying VectorBytes.
-func (x *Vector) VectorBytes() uint {
-	return x.inner.VectorBytes()
+// The stride, in bytes, between corresponding elements of consecutive vectors.
+func (x *Vector) VectorBytes() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectorBytes"))
+	return _r
 }
 
-// @property   offset @discussion Byte-offset to the buffer where the vector data begins - see @ref initWithBuffer: offset: descriptor: .
-//
-// Offset calls the underlying Offset.
-func (x *Vector) Offset() uint {
-	return x.inner.Offset()
+// Byte-offset to the buffer where the vector data begins - see
+func (x *Vector) Offset() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
+	return _r
 }
-
-// @property   data @discussion An MTLBuffer to store the data.
-//
-// Data calls the underlying Data.
-func (x *Vector) Data() metal.MTLBuffer {
-	return x.inner.Data()
-}
-
-func (x *Vector) asVector() *raw.MPSVector { return x.inner }
 
 // Vectorable is the interface implemented by [Vector], for mocking and DI.
 type Vectorable interface {
-	Unwrap() *raw.MPSVector
-	SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer)
-	ResourceSize() uint
-	Device() metal.MTLDevice
-	Length() uint
-	Vectors() uint
-	DataType() MPSDataType
-	VectorBytes() uint
-	Offset() uint
-	Data() metal.MTLBuffer
+	obj.Object
+	ResourceSize() int
+	Length() int
+	Vectors() int
+	DataType() DataType
+	VectorBytes() int
+	Offset() int
 }
 
 var _ Vectorable = (*Vector)(nil)

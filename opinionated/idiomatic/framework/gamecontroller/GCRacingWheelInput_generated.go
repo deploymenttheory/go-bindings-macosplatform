@@ -5,67 +5,80 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A controller profile that supports a racing wheel.
 //
-// RacingWheelInput wraps [raw.GCRacingWheelInput] with a fluent Go API.
+// RacingWheelInput is an idiomatic wrapper over the Objective-C class GCRacingWheelInput.
 type RacingWheelInput struct {
-	inner *raw.GCRacingWheelInput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCRacingWheelInput].
-func (x *RacingWheelInput) Unwrap() *raw.GCRacingWheelInput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RacingWheelInput) ID() objc.ID { return x.inner.Ptr() }
-
-// RacingWheelInputFromID adopts an existing object pointer as a RacingWheelInput (nil for 0).
+// RacingWheelInputFromID adopts an existing Objective-C object as a RacingWheelInput
+// (nil for 0), retaining it and registering a release finalizer.
 func RacingWheelInputFromID(id objc.ID) *RacingWheelInput {
 	if id == 0 {
 		return nil
 	}
-	return &RacingWheelInput{inner: raw.GCRacingWheelInputFromID(id)}
+	x := &RacingWheelInput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRacingWheelInput creates a new [RacingWheelInput].
+// racingWheelInputAdopt wraps an Objective-C object that this code just created as a
+// RacingWheelInput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func racingWheelInputAdopt(id objc.ID) *RacingWheelInput {
+	if id == 0 {
+		return nil
+	}
+	x := &RacingWheelInput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RacingWheelInput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RacingWheelInput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RacingWheelInput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRacingWheelInput creates a new RacingWheelInput.
 func NewRacingWheelInput() *RacingWheelInput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCRacingWheelInput")), objc.RegisterName("new"))
-	return &RacingWheelInput{inner: raw.GCRacingWheelInputFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GCRacingWheelInput")), objc.RegisterName("new"))
+	return racingWheelInputAdopt(_id)
 }
 
 // Returns a snapshot of the racing wheel inputs.
-//
-// Capture calls the underlying Capture.
 func (x *RacingWheelInput) Capture() *RacingWheelInputState {
-	_r := x.inner.Capture()
-	if _r == nil {
-		return nil
-	}
-	return &RacingWheelInputState{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("capture"))
+	return RacingWheelInputStateFromID(_r)
 }
 
 // Returns the next input state of the racing wheel from the queue.
-//
-// NextInputState calls the underlying NextInputState.
 func (x *RacingWheelInput) NextInputState() *RacingWheelInputState {
-	_r := x.inner.NextInputState()
-	if _r == nil {
-		return nil
-	}
-	return &RacingWheelInputState{inner: _r}
-}
-
-func (x *RacingWheelInput) asRacingWheelInputState() *raw.GCRacingWheelInputState {
-	return &x.inner.GCRacingWheelInputState
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextInputState"))
+	return RacingWheelInputStateFromID(_r)
 }
 
 // RacingWheelInputable is the interface implemented by [RacingWheelInput], for mocking and DI.
 type RacingWheelInputable interface {
-	Unwrap() *raw.GCRacingWheelInput
+	obj.Object
 	Capture() *RacingWheelInputState
 	NextInputState() *RacingWheelInputState
 }

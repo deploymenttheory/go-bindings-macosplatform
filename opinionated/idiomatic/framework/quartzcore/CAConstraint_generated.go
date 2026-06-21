@@ -5,78 +5,102 @@
 package quartzcore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A representation of a single layout constraint between two layers.
 //
-// Constraint wraps [raw.CAConstraint] with a fluent Go API.
+// Constraint is an idiomatic wrapper over the Objective-C class CAConstraint.
 type Constraint struct {
-	inner *raw.CAConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CAConstraint].
-func (x *Constraint) Unwrap() *raw.CAConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Constraint) ID() objc.ID { return x.inner.Ptr() }
-
-// ConstraintFromID adopts an existing object pointer as a Constraint (nil for 0).
+// ConstraintFromID adopts an existing Objective-C object as a Constraint
+// (nil for 0), retaining it and registering a release finalizer.
 func ConstraintFromID(id objc.ID) *Constraint {
 	if id == 0 {
 		return nil
 	}
-	return &Constraint{inner: raw.CAConstraintFromID(id)}
+	x := &Constraint{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// constraintAdopt wraps an Objective-C object that this code just created as a
+// Constraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func constraintAdopt(id objc.ID) *Constraint {
+	if id == 0 {
+		return nil
+	}
+	x := &Constraint{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Constraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Constraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Constraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns an CAConstraint object with the specified parameters. Designated initializer.
 //
-// NewConstraintWithAttributeRelativeToAttributeScaleOffset creates a new [Constraint].
-func NewConstraintWithAttributeRelativeToAttributeScaleOffset(attr CAConstraintAttribute, srcId string, srcAttr CAConstraintAttribute, m float64, c float64) *Constraint {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CAConstraint")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttribute:relativeTo:attribute:scale:offset:"), raw.CAConstraintAttribute(attr), foundation.NSStringStringWithUTF8String(srcId).Ptr(), raw.CAConstraintAttribute(srcAttr), m, c)
-	return &Constraint{inner: raw.CAConstraintFromID(_id)}
+// NewConstraintWithAttributeRelativeToAttributeScaleOffset creates a new Constraint.
+func NewConstraintWithAttributeRelativeToAttributeScaleOffset(attr ConstraintAttribute, srcId string, srcAttr ConstraintAttribute, m float64, c float64) *Constraint {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CAConstraint")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttribute:relativeTo:attribute:scale:offset:"), attr, purego.NSString(srcId), srcAttr, m, c)
+	return constraintAdopt(_id)
 }
 
-// Attribute calls the underlying Attribute.
-func (x *Constraint) Attribute() CAConstraintAttribute {
-	return CAConstraintAttribute(x.inner.Attribute())
+func (x *Constraint) Attribute() ConstraintAttribute {
+	_r := objc.Send[ConstraintAttribute](objref.IDOf(x), objc.RegisterName("attribute"))
+	return _r
 }
 
-// SourceName calls the underlying SourceName.
 func (x *Constraint) SourceName() string {
-	_r := x.inner.SourceName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SourceAttribute calls the underlying SourceAttribute.
-func (x *Constraint) SourceAttribute() CAConstraintAttribute {
-	return CAConstraintAttribute(x.inner.SourceAttribute())
+func (x *Constraint) SourceAttribute() ConstraintAttribute {
+	_r := objc.Send[ConstraintAttribute](objref.IDOf(x), objc.RegisterName("sourceAttribute"))
+	return _r
 }
 
-// Scale calls the underlying Scale.
 func (x *Constraint) Scale() float64 {
-	return x.inner.Scale()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scale"))
+	return _r
 }
 
-// Offset calls the underlying Offset.
 func (x *Constraint) Offset() float64 {
-	return x.inner.Offset()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("offset"))
+	return _r
 }
 
 // Constraintable is the interface implemented by [Constraint], for mocking and DI.
 type Constraintable interface {
-	Unwrap() *raw.CAConstraint
-	Attribute() CAConstraintAttribute
+	obj.Object
+	Attribute() ConstraintAttribute
 	SourceName() string
-	SourceAttribute() CAConstraintAttribute
+	SourceAttribute() ConstraintAttribute
 	Scale() float64
 	Offset() float64
 }

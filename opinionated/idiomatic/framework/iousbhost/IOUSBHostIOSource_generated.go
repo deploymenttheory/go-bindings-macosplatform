@@ -5,71 +5,89 @@
 package iousbhost
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iousbhost"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // This class provides basic functionality for deriving pipe and stream classes.
 //
-// HostIOSource wraps [raw.IOUSBHostIOSource] with a fluent Go API.
+// HostIOSource is an idiomatic wrapper over the Objective-C class IOUSBHostIOSource.
 type HostIOSource struct {
-	inner *raw.IOUSBHostIOSource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IOUSBHostIOSource].
-func (x *HostIOSource) Unwrap() *raw.IOUSBHostIOSource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HostIOSource) ID() objc.ID { return x.inner.Ptr() }
-
-// HostIOSourceFromID adopts an existing object pointer as a HostIOSource (nil for 0).
+// HostIOSourceFromID adopts an existing Objective-C object as a HostIOSource
+// (nil for 0), retaining it and registering a release finalizer.
 func HostIOSourceFromID(id objc.ID) *HostIOSource {
 	if id == 0 {
 		return nil
 	}
-	return &HostIOSource{inner: raw.IOUSBHostIOSourceFromID(id)}
+	x := &HostIOSource{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewHostIOSource creates a new [HostIOSource].
-func NewHostIOSource() *HostIOSource {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IOUSBHostIOSource")), objc.RegisterName("new"))
-	return &HostIOSource{inner: raw.IOUSBHostIOSourceFromID(_id)}
-}
-
-// @brief   Retrieve the source's IOUSBHostInterface @return  IOUSBHostInterface pointer that the IOSource was created from.
-//
-// HostInterface calls the underlying HostInterface.
-func (x *HostIOSource) HostInterface() *HostInterface {
-	_r := x.inner.HostInterface()
-	if _r == nil {
+// hostIOSourceAdopt wraps an Objective-C object that this code just created as a
+// HostIOSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hostIOSourceAdopt(id objc.ID) *HostIOSource {
+	if id == 0 {
 		return nil
 	}
-	return &HostInterface{inner: _r}
+	x := &HostIOSource{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @brief   Retrieve the device's address @return  Current address of the device
-//
-// DeviceAddress calls the underlying DeviceAddress.
-func (x *HostIOSource) DeviceAddress() uint {
-	return x.inner.DeviceAddress()
+// Description returns the object's -description text.
+func (x *HostIOSource) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @brief   Retrieve the IOSource's endpoint address @return  Current address of the endpoint
-//
-// EndpointAddress calls the underlying EndpointAddress.
-func (x *HostIOSource) EndpointAddress() uint {
-	return x.inner.EndpointAddress()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HostIOSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-func (x *HostIOSource) asHostIOSource() *raw.IOUSBHostIOSource { return x.inner }
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HostIOSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHostIOSource creates a new HostIOSource.
+func NewHostIOSource() *HostIOSource {
+	_id := objc.Send[objc.ID](objc.ID(_class("IOUSBHostIOSource")), objc.RegisterName("new"))
+	return hostIOSourceAdopt(_id)
+}
+
+// Retrieve the source's IOUSBHostInterface
+func (x *HostIOSource) HostInterface() *HostInterface {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hostInterface"))
+	return HostInterfaceFromID(_r)
+}
+
+// Retrieve the device's address
+func (x *HostIOSource) DeviceAddress() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("deviceAddress"))
+	return _r
+}
+
+// Retrieve the IOSource's endpoint address
+func (x *HostIOSource) EndpointAddress() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("endpointAddress"))
+	return _r
+}
 
 // HostIOSourceable is the interface implemented by [HostIOSource], for mocking and DI.
 type HostIOSourceable interface {
-	Unwrap() *raw.IOUSBHostIOSource
+	obj.Object
 	HostInterface() *HostInterface
-	DeviceAddress() uint
-	EndpointAddress() uint
+	DeviceAddress() int
+	EndpointAddress() int
 }
 
 var _ HostIOSourceable = (*HostIOSource)(nil)

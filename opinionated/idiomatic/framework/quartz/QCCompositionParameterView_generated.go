@@ -5,114 +5,127 @@
 package quartz
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that allows users to edit the input parameters of a composition in real time. The composition can be rendering in any of the following objects: QCRenderer, QCView, or QCCompositionLayer.
 //
-// QCCompositionParameterView wraps [raw.QCCompositionParameterView] with a fluent Go API.
+// QCCompositionParameterView is an idiomatic wrapper over the Objective-C class QCCompositionParameterView.
 type QCCompositionParameterView struct {
-	inner *raw.QCCompositionParameterView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QCCompositionParameterView].
-func (x *QCCompositionParameterView) Unwrap() *raw.QCCompositionParameterView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *QCCompositionParameterView) ID() objc.ID { return x.inner.Ptr() }
-
-// QCCompositionParameterViewFromID adopts an existing object pointer as a QCCompositionParameterView (nil for 0).
+// QCCompositionParameterViewFromID adopts an existing Objective-C object as a QCCompositionParameterView
+// (nil for 0), retaining it and registering a release finalizer.
 func QCCompositionParameterViewFromID(id objc.ID) *QCCompositionParameterView {
 	if id == 0 {
 		return nil
 	}
-	return &QCCompositionParameterView{inner: raw.QCCompositionParameterViewFromID(id)}
+	x := &QCCompositionParameterView{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewQCCompositionParameterView creates a new [QCCompositionParameterView].
+// qCCompositionParameterViewAdopt wraps an Objective-C object that this code just created as a
+// QCCompositionParameterView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func qCCompositionParameterViewAdopt(id objc.ID) *QCCompositionParameterView {
+	if id == 0 {
+		return nil
+	}
+	x := &QCCompositionParameterView{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *QCCompositionParameterView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *QCCompositionParameterView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *QCCompositionParameterView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewQCCompositionParameterView creates a new QCCompositionParameterView.
 func NewQCCompositionParameterView() *QCCompositionParameterView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QCCompositionParameterView")), objc.RegisterName("new"))
-	return &QCCompositionParameterView{inner: raw.QCCompositionParameterViewFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QCCompositionParameterView")), objc.RegisterName("new"))
+	return qCCompositionParameterViewAdopt(_id)
 }
 
 // Sets the composition parameter view for editing the input parameters of the provided renderer object.
-//
-// SetCompositionRenderer calls the underlying SetCompositionRenderer.
-func (x *QCCompositionParameterView) SetCompositionRenderer(renderer objc.ID) {
-	x.inner.SetCompositionRenderer(renderer)
+func (x *QCCompositionParameterView) SetCompositionRenderer(renderer obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositionRenderer:"), objref.IDOf(renderer))
 }
 
 // Returns the renderer object associated with the composition parameter view.
-//
-// CompositionRenderer calls the underlying CompositionRenderer.
-func (x *QCCompositionParameterView) CompositionRenderer() objc.ID {
-	return x.inner.CompositionRenderer()
+func (x *QCCompositionParameterView) CompositionRenderer() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionRenderer"))
+	return obj.Wrap(_r)
 }
 
 // Checks whether the composition that is currently edited by the composition parameter view has any input parameters.
-//
-// HasParameters calls the underlying HasParameters.
 func (x *QCCompositionParameterView) HasParameters() bool {
-	return x.inner.HasParameters()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasParameters"))
+	return _r
 }
 
 // Sets the background color of the composition parameter view.
-//
-// SetBackgroundColor calls the underlying SetBackgroundColor.
-func (x *QCCompositionParameterView) SetBackgroundColor(color *appkit.NSColor) {
-	x.inner.SetBackgroundColor(color)
+func (x *QCCompositionParameterView) SetBackgroundColor(color obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(color))
 }
 
 // Retrieves the background color of the composition parameter view.
-//
-// BackgroundColor calls the underlying BackgroundColor.
-func (x *QCCompositionParameterView) BackgroundColor() *appkit.NSColor {
-	return x.inner.BackgroundColor()
+func (x *QCCompositionParameterView) BackgroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+	return obj.Wrap(_r)
 }
 
 // Sets whether the composition parameter view draws its background.
-//
-// SetDrawsBackground calls the underlying SetDrawsBackground.
 func (x *QCCompositionParameterView) SetDrawsBackground(flag bool) {
-	x.inner.SetDrawsBackground(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), flag)
 }
 
 // Returns whether the composition parameter view draws its background.
-//
-// DrawsBackground calls the underlying DrawsBackground.
 func (x *QCCompositionParameterView) DrawsBackground() bool {
-	return x.inner.DrawsBackground()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsBackground"))
+	return _r
 }
 
 // Sets the composition parameter view delegate.
-//
-// SetDelegate calls the underlying SetDelegate.
-func (x *QCCompositionParameterView) SetDelegate(delegate objc.ID) {
-	x.inner.SetDelegate(delegate)
+func (x *QCCompositionParameterView) SetDelegate(delegate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 }
 
 // Returns the composition parameter view delegate.
-//
-// Delegate calls the underlying Delegate.
-func (x *QCCompositionParameterView) Delegate() objc.ID {
-	return x.inner.Delegate()
+func (x *QCCompositionParameterView) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+	return obj.Wrap(_r)
 }
 
 // QCCompositionParameterViewable is the interface implemented by [QCCompositionParameterView], for mocking and DI.
 type QCCompositionParameterViewable interface {
-	Unwrap() *raw.QCCompositionParameterView
-	SetCompositionRenderer(renderer objc.ID)
-	CompositionRenderer() objc.ID
+	obj.Object
+	SetCompositionRenderer(renderer obj.Object)
+	CompositionRenderer() obj.Object
 	HasParameters() bool
-	SetBackgroundColor(color *appkit.NSColor)
-	BackgroundColor() *appkit.NSColor
+	SetBackgroundColor(color obj.Object)
+	BackgroundColor() obj.Object
 	SetDrawsBackground(flag bool)
 	DrawsBackground() bool
-	SetDelegate(delegate objc.ID)
-	Delegate() objc.ID
+	SetDelegate(delegate obj.Object)
+	Delegate() obj.Object
 }
 
 var _ QCCompositionParameterViewable = (*QCCompositionParameterView)(nil)

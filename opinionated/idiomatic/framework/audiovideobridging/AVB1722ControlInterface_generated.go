@@ -5,77 +5,92 @@
 package audiovideobridging
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AVB1722ControlInterface wraps [raw.AVB1722ControlInterface] with a fluent Go API.
+// AVB1722ControlInterface is an idiomatic wrapper over the Objective-C class AVB1722ControlInterface.
 type AVB1722ControlInterface struct {
-	inner *raw.AVB1722ControlInterface
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVB1722ControlInterface].
-func (x *AVB1722ControlInterface) Unwrap() *raw.AVB1722ControlInterface { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AVB1722ControlInterface) ID() objc.ID { return x.inner.Ptr() }
-
-// AVB1722ControlInterfaceFromID adopts an existing object pointer as a AVB1722ControlInterface (nil for 0).
+// AVB1722ControlInterfaceFromID adopts an existing Objective-C object as a AVB1722ControlInterface
+// (nil for 0), retaining it and registering a release finalizer.
 func AVB1722ControlInterfaceFromID(id objc.ID) *AVB1722ControlInterface {
 	if id == 0 {
 		return nil
 	}
-	return &AVB1722ControlInterface{inner: raw.AVB1722ControlInterfaceFromID(id)}
+	x := &AVB1722ControlInterface{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @method		initWithInterfaceName: @abstract	Initializes the receiver to work with a 1722 control service on the specified interface. The client must have previously be requested to load on the interface. @param		anInterfaceName	The BSD name of the interface on which to create the object. @result		The initialized receiver.
-//
-// NewAVB1722ControlInterfaceWithInterfaceName creates a new [AVB1722ControlInterface].
-func NewAVB1722ControlInterfaceWithInterfaceName(anInterfaceName string) *AVB1722ControlInterface {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVB1722ControlInterface")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterfaceName:"), foundation.NSStringStringWithUTF8String(anInterfaceName).Ptr())
-	return &AVB1722ControlInterface{inner: raw.AVB1722ControlInterfaceFromID(_id)}
-}
-
-// @method		initWithInterface: @abstract	Initializes the receiver to work with a 1722 control service on the specified interface. The client must have previously be requested to load on the interface. @param		anInterface	The AVBInterface object of the interface on which to create the object. @result		The initialized receiver.
-//
-// NewAVB1722ControlInterfaceWithInterface creates a new [AVB1722ControlInterface].
-func NewAVB1722ControlInterfaceWithInterface(anInterface *raw.AVBInterface) *AVB1722ControlInterface {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVB1722ControlInterface")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:"), anInterface.Ptr())
-	return &AVB1722ControlInterface{inner: raw.AVB1722ControlInterfaceFromID(_id)}
-}
-
-// InterfaceName calls the underlying InterfaceName.
-func (x *AVB1722ControlInterface) InterfaceName() string {
-	_r := x.inner.InterfaceName()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// @property	interface @abstract	The AVBInterface object which owns this object. This may be nil if it was not created by an instance of AVBInterface
-//
-// Interface calls the underlying Interface.
-func (x *AVB1722ControlInterface) Interface() *Interface {
-	_r := x.inner.Interface()
-	if _r == nil {
+// aVB1722ControlInterfaceAdopt wraps an Objective-C object that this code just created as a
+// AVB1722ControlInterface (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func aVB1722ControlInterfaceAdopt(id objc.ID) *AVB1722ControlInterface {
+	if id == 0 {
 		return nil
 	}
-	return &Interface{inner: _r}
+	x := &AVB1722ControlInterface{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *AVB1722ControlInterface) asAVB1722ControlInterface() *raw.AVB1722ControlInterface {
-	return x.inner
+// Description returns the object's -description text.
+func (x *AVB1722ControlInterface) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AVB1722ControlInterface) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AVB1722ControlInterface) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// Initializes the receiver to work with a 1722 control service on the specified interface. The client must have previously be requested to load on the interface.
+//
+// NewAVB1722ControlInterfaceWithInterfaceName creates a new AVB1722ControlInterface.
+func NewAVB1722ControlInterfaceWithInterfaceName(anInterfaceName string) *AVB1722ControlInterface {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVB1722ControlInterface")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterfaceName:"), purego.NSString(anInterfaceName))
+	return aVB1722ControlInterfaceAdopt(_id)
+}
+
+// Initializes the receiver to work with a 1722 control service on the specified interface. The client must have previously be requested to load on the interface.
+//
+// NewAVB1722ControlInterfaceWithInterface creates a new AVB1722ControlInterface.
+func NewAVB1722ControlInterfaceWithInterface(anInterface *Interface) *AVB1722ControlInterface {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVB1722ControlInterface")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterface:"), objref.IDOf(anInterface))
+	return aVB1722ControlInterfaceAdopt(_id)
+}
+
+func (x *AVB1722ControlInterface) InterfaceName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interfaceName"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// The AVBInterface object which owns this object. This may be nil if it was not created by an instance of AVBInterface
+func (x *AVB1722ControlInterface) Interface() *Interface {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interface"))
+	return InterfaceFromID(_r)
 }
 
 // AVB1722ControlInterfaceable is the interface implemented by [AVB1722ControlInterface], for mocking and DI.
 type AVB1722ControlInterfaceable interface {
-	Unwrap() *raw.AVB1722ControlInterface
+	obj.Object
 	InterfaceName() string
 	Interface() *Interface
 }

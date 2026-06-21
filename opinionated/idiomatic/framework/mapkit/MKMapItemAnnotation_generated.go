@@ -5,53 +5,76 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An annotation that represents a map item
 //
-// MapItemAnnotation wraps [raw.MKMapItemAnnotation] with a fluent Go API.
+// MapItemAnnotation is an idiomatic wrapper over the Objective-C class MKMapItemAnnotation.
 type MapItemAnnotation struct {
-	inner *raw.MKMapItemAnnotation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKMapItemAnnotation].
-func (x *MapItemAnnotation) Unwrap() *raw.MKMapItemAnnotation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MapItemAnnotation) ID() objc.ID { return x.inner.Ptr() }
-
-// MapItemAnnotationFromID adopts an existing object pointer as a MapItemAnnotation (nil for 0).
+// MapItemAnnotationFromID adopts an existing Objective-C object as a MapItemAnnotation
+// (nil for 0), retaining it and registering a release finalizer.
 func MapItemAnnotationFromID(id objc.ID) *MapItemAnnotation {
 	if id == 0 {
 		return nil
 	}
-	return &MapItemAnnotation{inner: raw.MKMapItemAnnotationFromID(id)}
+	x := &MapItemAnnotation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mapItemAnnotationAdopt wraps an Objective-C object that this code just created as a
+// MapItemAnnotation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mapItemAnnotationAdopt(id objc.ID) *MapItemAnnotation {
+	if id == 0 {
+		return nil
+	}
+	x := &MapItemAnnotation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MapItemAnnotation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MapItemAnnotation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MapItemAnnotation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a map item annotation
 //
-// NewMapItemAnnotationWithMapItem creates a new [MapItemAnnotation].
-func NewMapItemAnnotationWithMapItem(mapItem *raw.MKMapItem) *MapItemAnnotation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapItemAnnotation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItem:"), mapItem.Ptr())
-	return &MapItemAnnotation{inner: raw.MKMapItemAnnotationFromID(_id)}
+// NewMapItemAnnotationWithMapItem creates a new MapItemAnnotation.
+func NewMapItemAnnotationWithMapItem(mapItem *MapItem) *MapItemAnnotation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItemAnnotation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMapItem:"), objref.IDOf(mapItem))
+	return mapItemAnnotationAdopt(_id)
 }
 
-// MapItem calls the underlying MapItem.
 func (x *MapItemAnnotation) MapItem() *MapItem {
-	_r := x.inner.MapItem()
-	if _r == nil {
-		return nil
-	}
-	return &MapItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapItem"))
+	return MapItemFromID(_r)
 }
 
 // MapItemAnnotationable is the interface implemented by [MapItemAnnotation], for mocking and DI.
 type MapItemAnnotationable interface {
-	Unwrap() *raw.MKMapItemAnnotation
+	obj.Object
 	MapItem() *MapItem
 }
 

@@ -5,70 +5,92 @@
 package javaruntimesupport
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/javaruntimesupport"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// InputMethodController wraps [raw.JRSInputMethodController] with a fluent Go API.
+// InputMethodController is an idiomatic wrapper over the Objective-C class JRSInputMethodController.
 type InputMethodController struct {
-	inner *raw.JRSInputMethodController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.JRSInputMethodController].
-func (x *InputMethodController) Unwrap() *raw.JRSInputMethodController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *InputMethodController) ID() objc.ID { return x.inner.Ptr() }
-
-// InputMethodControllerFromID adopts an existing object pointer as a InputMethodController (nil for 0).
+// InputMethodControllerFromID adopts an existing Objective-C object as a InputMethodController
+// (nil for 0), retaining it and registering a release finalizer.
 func InputMethodControllerFromID(id objc.ID) *InputMethodController {
 	if id == 0 {
 		return nil
 	}
-	return &InputMethodController{inner: raw.JRSInputMethodControllerFromID(id)}
+	x := &InputMethodController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewInputMethodController creates a new [InputMethodController].
+// inputMethodControllerAdopt wraps an Objective-C object that this code just created as a
+// InputMethodController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func inputMethodControllerAdopt(id objc.ID) *InputMethodController {
+	if id == 0 {
+		return nil
+	}
+	x := &InputMethodController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *InputMethodController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *InputMethodController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *InputMethodController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewInputMethodController creates a new InputMethodController.
 func NewInputMethodController() *InputMethodController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("JRSInputMethodController")), objc.RegisterName("new"))
-	return &InputMethodController{inner: raw.JRSInputMethodControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("JRSInputMethodController")), objc.RegisterName("new"))
+	return inputMethodControllerAdopt(_id)
 }
 
-// AvailableInputMethodLocales calls the underlying AvailableInputMethodLocales.
-func (x *InputMethodController) AvailableInputMethodLocales() *foundation.NSArray[objc.ID] {
-	return x.inner.AvailableInputMethodLocales()
+func (x *InputMethodController) AvailableInputMethodLocales() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableInputMethodLocales"))
+	return obj.Wrap(_r)
 }
 
-// CurrentInputMethodName calls the underlying CurrentInputMethodName.
 func (x *InputMethodController) CurrentInputMethodName() string {
-	_r := x.inner.CurrentInputMethodName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentInputMethodName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// CurrentInputMethodLocale calls the underlying CurrentInputMethodLocale.
 func (x *InputMethodController) CurrentInputMethodLocale() string {
-	_r := x.inner.CurrentInputMethodLocale()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentInputMethodLocale"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCurrentInputMethodForLocale calls the underlying SetCurrentInputMethodForLocale.
 func (x *InputMethodController) SetCurrentInputMethodForLocale(theLocale string) {
-	x.inner.SetCurrentInputMethodForLocale(foundation.NSStringStringWithUTF8String(theLocale))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentInputMethodForLocale:"), purego.NSString(theLocale))
 }
 
 // InputMethodControllerable is the interface implemented by [InputMethodController], for mocking and DI.
 type InputMethodControllerable interface {
-	Unwrap() *raw.JRSInputMethodController
-	AvailableInputMethodLocales() *foundation.NSArray[objc.ID]
+	obj.Object
+	AvailableInputMethodLocales() obj.Object
 	CurrentInputMethodName() string
 	CurrentInputMethodLocale() string
 	SetCurrentInputMethodForLocale(theLocale string)

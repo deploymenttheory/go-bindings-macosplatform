@@ -5,71 +5,92 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents attributes specific to a particular rendition.
 //
-// AssetVariantAudioRenditionSpecificAttributes wraps [raw.AVAssetVariantAudioRenditionSpecificAttributes] with a fluent Go API.
+// AssetVariantAudioRenditionSpecificAttributes is an idiomatic wrapper over the Objective-C class AVAssetVariantAudioRenditionSpecificAttributes.
 type AssetVariantAudioRenditionSpecificAttributes struct {
-	inner *raw.AVAssetVariantAudioRenditionSpecificAttributes
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAssetVariantAudioRenditionSpecificAttributes].
-func (x *AssetVariantAudioRenditionSpecificAttributes) Unwrap() *raw.AVAssetVariantAudioRenditionSpecificAttributes {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetVariantAudioRenditionSpecificAttributes) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetVariantAudioRenditionSpecificAttributesFromID adopts an existing object pointer as a AssetVariantAudioRenditionSpecificAttributes (nil for 0).
+// AssetVariantAudioRenditionSpecificAttributesFromID adopts an existing Objective-C object as a AssetVariantAudioRenditionSpecificAttributes
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetVariantAudioRenditionSpecificAttributesFromID(id objc.ID) *AssetVariantAudioRenditionSpecificAttributes {
 	if id == 0 {
 		return nil
 	}
-	return &AssetVariantAudioRenditionSpecificAttributes{inner: raw.AVAssetVariantAudioRenditionSpecificAttributesFromID(id)}
+	x := &AssetVariantAudioRenditionSpecificAttributes{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAssetVariantAudioRenditionSpecificAttributes creates a new [AssetVariantAudioRenditionSpecificAttributes].
+// assetVariantAudioRenditionSpecificAttributesAdopt wraps an Objective-C object that this code just created as a
+// AssetVariantAudioRenditionSpecificAttributes (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetVariantAudioRenditionSpecificAttributesAdopt(id objc.ID) *AssetVariantAudioRenditionSpecificAttributes {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetVariantAudioRenditionSpecificAttributes{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetVariantAudioRenditionSpecificAttributes) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetVariantAudioRenditionSpecificAttributes) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetVariantAudioRenditionSpecificAttributes) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAssetVariantAudioRenditionSpecificAttributes creates a new AssetVariantAudioRenditionSpecificAttributes.
 func NewAssetVariantAudioRenditionSpecificAttributes() *AssetVariantAudioRenditionSpecificAttributes {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAssetVariantAudioRenditionSpecificAttributes")), objc.RegisterName("new"))
-	return &AssetVariantAudioRenditionSpecificAttributes{inner: raw.AVAssetVariantAudioRenditionSpecificAttributesFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetVariantAudioRenditionSpecificAttributes")), objc.RegisterName("new"))
+	return assetVariantAudioRenditionSpecificAttributesAdopt(_id)
 }
 
 // If it is not declared, the value will be negative. A channel count greater than two indicates that the variant offers a rich multichannel authoring.
-//
-// ChannelCount calls the underlying ChannelCount.
 func (x *AssetVariantAudioRenditionSpecificAttributes) ChannelCount() int {
-	return x.inner.ChannelCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("channelCount"))
+	return _r
 }
 
 // Indicates that the variant is best suited for delivery to headphones. A binaural variant may originate from a direct binaural recording or from the processing of a multichannel audio source.
-//
-// IsBinaural calls the underlying IsBinaural.
 func (x *AssetVariantAudioRenditionSpecificAttributes) IsBinaural() bool {
-	return x.inner.IsBinaural()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBinaural"))
+	return _r
 }
 
 // Indicates that this variant contains virtualized or otherwise pre-processed audio content that is suitable for a variety of purposes. If a variant audio redition is immersive it is eligible for rendering either to headphones or speakers.
-//
-// IsImmersive calls the underlying IsImmersive.
 func (x *AssetVariantAudioRenditionSpecificAttributes) IsImmersive() bool {
-	return x.inner.IsImmersive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isImmersive"))
+	return _r
 }
 
 // Indicates that this variant is declared as a downmix derivative of other media of greater channel count. If one or more multichannel variants are also provided, the dowmix is assumed to be compatible in its internal timing and other attributes with those variants. Typically this is because it has been derived from the same source. A downmix can be used as a suitable substitute for a multichannel variant under some conditions.
-//
-// IsDownmix calls the underlying IsDownmix.
 func (x *AssetVariantAudioRenditionSpecificAttributes) IsDownmix() bool {
-	return x.inner.IsDownmix()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDownmix"))
+	return _r
 }
 
 // AssetVariantAudioRenditionSpecificAttributesable is the interface implemented by [AssetVariantAudioRenditionSpecificAttributes], for mocking and DI.
 type AssetVariantAudioRenditionSpecificAttributesable interface {
-	Unwrap() *raw.AVAssetVariantAudioRenditionSpecificAttributes
+	obj.Object
 	ChannelCount() int
 	IsBinaural() bool
 	IsImmersive() bool

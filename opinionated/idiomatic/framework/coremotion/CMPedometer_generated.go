@@ -5,66 +5,73 @@
 package coremotion
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremotion"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object for fetching the system-generated live walking data.
 //
-// Pedometer wraps [raw.CMPedometer] with a fluent Go API.
+// Pedometer is an idiomatic wrapper over the Objective-C class CMPedometer.
 type Pedometer struct {
-	inner *raw.CMPedometer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CMPedometer].
-func (x *Pedometer) Unwrap() *raw.CMPedometer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Pedometer) ID() objc.ID { return x.inner.Ptr() }
-
-// PedometerFromID adopts an existing object pointer as a Pedometer (nil for 0).
+// PedometerFromID adopts an existing Objective-C object as a Pedometer
+// (nil for 0), retaining it and registering a release finalizer.
 func PedometerFromID(id objc.ID) *Pedometer {
 	if id == 0 {
 		return nil
 	}
-	return &Pedometer{inner: raw.CMPedometerFromID(id)}
+	x := &Pedometer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPedometer creates a new [Pedometer].
+// pedometerAdopt wraps an Objective-C object that this code just created as a
+// Pedometer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pedometerAdopt(id objc.ID) *Pedometer {
+	if id == 0 {
+		return nil
+	}
+	x := &Pedometer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Pedometer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Pedometer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Pedometer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPedometer creates a new Pedometer.
 func NewPedometer() *Pedometer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CMPedometer")), objc.RegisterName("new"))
-	return &Pedometer{inner: raw.CMPedometerFromID(_id)}
-}
-
-// Retrieves the data between the specified start and end dates.
-//
-// QueryPedometerDataFromDateToDateWithHandler calls the underlying QueryPedometerDataFromDateToDateWithHandler.
-func (x *Pedometer) QueryPedometerDataFromDateToDateWithHandler(start *foundation.NSDate, end *foundation.NSDate, handler func(*raw.CMPedometerData, unsafe.Pointer)) {
-	x.inner.QueryPedometerDataFromDateToDateWithHandler(start, end, handler)
-}
-
-// Starts the delivery of recent pedestrian-related data to your app.
-//
-// StartPedometerUpdatesFromDateWithHandler calls the underlying StartPedometerUpdatesFromDateWithHandler.
-func (x *Pedometer) StartPedometerUpdatesFromDateWithHandler(start *foundation.NSDate, handler func(*raw.CMPedometerData, unsafe.Pointer)) {
-	x.inner.StartPedometerUpdatesFromDateWithHandler(start, handler)
+	_id := objc.Send[objc.ID](objc.ID(_class("CMPedometer")), objc.RegisterName("new"))
+	return pedometerAdopt(_id)
 }
 
 // Stops the delivery of recent pedestrian data updates to your app.
-//
-// StopPedometerUpdates calls the underlying StopPedometerUpdates.
 func (x *Pedometer) StopPedometerUpdates() {
-	x.inner.StopPedometerUpdates()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopPedometerUpdates"))
 }
 
 // Pedometerable is the interface implemented by [Pedometer], for mocking and DI.
 type Pedometerable interface {
-	Unwrap() *raw.CMPedometer
-	QueryPedometerDataFromDateToDateWithHandler(start *foundation.NSDate, end *foundation.NSDate, handler func(*raw.CMPedometerData, unsafe.Pointer))
-	StartPedometerUpdatesFromDateWithHandler(start *foundation.NSDate, handler func(*raw.CMPedometerData, unsafe.Pointer))
+	obj.Object
 	StopPedometerUpdates()
 }
 

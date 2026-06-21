@@ -5,106 +5,117 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that represents a stream of data that a capture input provides.
 //
-// CaptureInputPort wraps [raw.AVCaptureInputPort] with a fluent Go API.
+// CaptureInputPort is an idiomatic wrapper over the Objective-C class AVCaptureInputPort.
 type CaptureInputPort struct {
-	inner *raw.AVCaptureInputPort
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureInputPort].
-func (x *CaptureInputPort) Unwrap() *raw.AVCaptureInputPort { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureInputPort) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureInputPortFromID adopts an existing object pointer as a CaptureInputPort (nil for 0).
+// CaptureInputPortFromID adopts an existing Objective-C object as a CaptureInputPort
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureInputPortFromID(id objc.ID) *CaptureInputPort {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureInputPort{inner: raw.AVCaptureInputPortFromID(id)}
-}
-
-// NewCaptureInputPort creates a new [CaptureInputPort].
-func NewCaptureInputPort() *CaptureInputPort {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureInputPort")), objc.RegisterName("new"))
-	return &CaptureInputPort{inner: raw.AVCaptureInputPortFromID(_id)}
-}
-
-// @property enabled @abstract Whether the receiver should provide data. @discussion The value of this property is a BOOL that determines whether the receiver should provide data to outputs when a session is running. Clients can set this property to fine tune which media streams from a given input will be used during capture. The default value is YES.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
-func (x *CaptureInputPort) WithEnabled(enabled bool) *CaptureInputPort {
-	x.inner.SetEnabled(enabled)
+	x := &CaptureInputPort{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property input @abstract The input that owns the receiver. @discussion The value of this property is an AVCaptureInput instance that owns the receiver.
-//
-// Input calls the underlying Input.
-func (x *CaptureInputPort) Input() *CaptureInput {
-	_r := x.inner.Input()
-	if _r == nil {
+// captureInputPortAdopt wraps an Objective-C object that this code just created as a
+// CaptureInputPort (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureInputPortAdopt(id objc.ID) *CaptureInputPort {
+	if id == 0 {
 		return nil
 	}
-	return &CaptureInput{inner: _r}
+	x := &CaptureInputPort{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property mediaType @abstract The media type of the data provided by the receiver. @discussion The value of this property is a constant describing the type of media, such as AVMediaTypeVideo or AVMediaTypeAudio, provided by the receiver. Media type constants are defined in AVMediaFormat.h.
-//
-// MediaType calls the underlying MediaType.
-func (x *CaptureInputPort) MediaType() string {
-	_r := x.inner.MediaType()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// Description returns the object's -description text.
+func (x *CaptureInputPort) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property formatDescription @abstract The format of the data provided by the receiver. @discussion The value of this property is a CMFormatDescription that describes the format of the media data currently provided by the receiver. Clients can be notified of changes to the format by observing the AVCaptureInputPortFormatDescriptionDidChangeNotification.
-//
-// FormatDescription calls the underlying FormatDescription.
-func (x *CaptureInputPort) FormatDescription() unsafe.Pointer {
-	return x.inner.FormatDescription()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureInputPort) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @property enabled @abstract Whether the receiver should provide data. @discussion The value of this property is a BOOL that determines whether the receiver should provide data to outputs when a session is running. Clients can set this property to fine tune which media streams from a given input will be used during capture. The default value is YES.
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureInputPort) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptureInputPort creates a new CaptureInputPort.
+func NewCaptureInputPort() *CaptureInputPort {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureInputPort")), objc.RegisterName("new"))
+	return captureInputPortAdopt(_id)
+}
+
+// Whether the receiver should provide data. The value of this property is a BOOL that determines whether the receiver should provide data to outputs when a session is running. Clients can set this property to fine tune which media streams from a given input will be used during capture. The default value is YES.
 //
-// IsEnabled calls the underlying IsEnabled.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
+func (x *CaptureInputPort) WithEnabled(enabled bool) *CaptureInputPort {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
+	return x
+}
+
+// The input that owns the receiver. The value of this property is an AVCaptureInput instance that owns the receiver.
+func (x *CaptureInputPort) Input() *CaptureInput {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("input"))
+	return CaptureInputFromID(_r)
+}
+
+// The media type of the data provided by the receiver. The value of this property is a constant describing the type of media, such as AVMediaTypeVideo or AVMediaTypeAudio, provided by the receiver. Media type constants are defined in AVMediaFormat.h.
+func (x *CaptureInputPort) MediaType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaType"))
+	return obj.Wrap(_r)
+}
+
+// The format of the data provided by the receiver. The value of this property is a CMFormatDescription that describes the format of the media data currently provided by the receiver. Clients can be notified of changes to the format by observing the AVCaptureInputPortFormatDescriptionDidChangeNotification.
+func (x *CaptureInputPort) FormatDescription() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatDescription"))
+	return obj.Wrap(_r)
+}
+
+// Whether the receiver should provide data. The value of this property is a BOOL that determines whether the receiver should provide data to outputs when a session is running. Clients can set this property to fine tune which media streams from a given input will be used during capture. The default value is YES.
 func (x *CaptureInputPort) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// SetEnabled calls the underlying SetEnabled.
 func (x *CaptureInputPort) SetEnabled(enabled bool) {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
-// @property clock @abstract Provides access to the "native" clock used by the input port. @discussion The clock is read-only.
-//
-// Clock calls the underlying Clock.
-func (x *CaptureInputPort) Clock() unsafe.Pointer {
-	return x.inner.Clock()
+// Provides access to the "native" clock used by the input port. The clock is read-only.
+func (x *CaptureInputPort) Clock() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clock"))
+	return obj.Wrap(_r)
 }
 
 // CaptureInputPortable is the interface implemented by [CaptureInputPort], for mocking and DI.
 type CaptureInputPortable interface {
-	Unwrap() *raw.AVCaptureInputPort
+	obj.Object
 	WithEnabled(enabled bool) *CaptureInputPort
 	Input() *CaptureInput
-	MediaType() string
-	FormatDescription() unsafe.Pointer
+	MediaType() obj.Object
+	FormatDescription() obj.Object
 	IsEnabled() bool
 	SetEnabled(enabled bool)
-	Clock() unsafe.Pointer
+	Clock() obj.Object
 }
 
 var _ CaptureInputPortable = (*CaptureInputPort)(nil)

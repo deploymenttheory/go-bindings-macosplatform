@@ -5,202 +5,158 @@
 package coreimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The Core Image class that defines a vector object.
 //
-// Vector wraps [raw.CIVector] with a fluent Go API.
+// Vector is an idiomatic wrapper over the Objective-C class CIVector.
 type Vector struct {
-	inner *raw.CIVector
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CIVector].
-func (x *Vector) Unwrap() *raw.CIVector { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Vector) ID() objc.ID { return x.inner.Ptr() }
-
-// VectorFromID adopts an existing object pointer as a Vector (nil for 0).
+// VectorFromID adopts an existing Objective-C object as a Vector
+// (nil for 0), retaining it and registering a release finalizer.
 func VectorFromID(id objc.ID) *Vector {
 	if id == 0 {
 		return nil
 	}
-	return &Vector{inner: raw.CIVectorFromID(id)}
+	x := &Vector{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initialize a Core Image vector object with the specified the values.
-//
-// NewVectorWithValuesCount creates a new [Vector].
-func NewVectorWithValuesCount(values *float64, count uint) *Vector {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIVector")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithValues:count:"), values, count)
-	return &Vector{inner: raw.CIVectorFromID(_id)}
+// vectorAdopt wraps an Objective-C object that this code just created as a
+// Vector (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vectorAdopt(id objc.ID) *Vector {
+	if id == 0 {
+		return nil
+	}
+	x := &Vector{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Vector) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Vector) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Vector) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize a Core Image vector object with one value.
 //
-// NewVectorWithX creates a new [Vector].
+// NewVectorWithX creates a new Vector.
 func NewVectorWithX(x float64) *Vector {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIVector")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIVector")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithX:"), x)
-	return &Vector{inner: raw.CIVectorFromID(_id)}
+	return vectorAdopt(_id)
 }
 
 // Initialize a Core Image vector object with two values.
 //
-// NewVectorWithXY creates a new [Vector].
+// NewVectorWithXY creates a new Vector.
 func NewVectorWithXY(x float64, y float64) *Vector {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIVector")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIVector")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithX:Y:"), x, y)
-	return &Vector{inner: raw.CIVectorFromID(_id)}
+	return vectorAdopt(_id)
 }
 
 // Initialize a Core Image vector object with three values.
 //
-// NewVectorWithXYZ creates a new [Vector].
+// NewVectorWithXYZ creates a new Vector.
 func NewVectorWithXYZ(x float64, y float64, z float64) *Vector {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIVector")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIVector")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithX:Y:Z:"), x, y, z)
-	return &Vector{inner: raw.CIVectorFromID(_id)}
+	return vectorAdopt(_id)
 }
 
 // Initialize a Core Image vector object with four values.
 //
-// NewVectorWithXYZW creates a new [Vector].
+// NewVectorWithXYZW creates a new Vector.
 func NewVectorWithXYZW(x float64, y float64, z float64, w float64) *Vector {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIVector")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIVector")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithX:Y:Z:W:"), x, y, z, w)
-	return &Vector{inner: raw.CIVectorFromID(_id)}
-}
-
-// Initialize a Core Image vector object with two values provided by a CGPoint structure.
-//
-// NewVectorWithCGPoint creates a new [Vector].
-func NewVectorWithCGPoint(p corefoundation.CGPoint) *Vector {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIVector")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGPoint:"), p)
-	return &Vector{inner: raw.CIVectorFromID(_id)}
-}
-
-// Initialize a Core Image vector object with four values provided by a CGRect structure.
-//
-// NewVectorWithCGRect creates a new [Vector].
-func NewVectorWithCGRect(r corefoundation.CGRect) *Vector {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIVector")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGRect:"), r)
-	return &Vector{inner: raw.CIVectorFromID(_id)}
-}
-
-// Initialize a Core Image vector object with six values provided by a CGAffineTransform structure.
-//
-// NewVectorWithCGAffineTransform creates a new [Vector].
-func NewVectorWithCGAffineTransform(t corefoundation.CGAffineTransform) *Vector {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIVector")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCGAffineTransform:"), t)
-	return &Vector{inner: raw.CIVectorFromID(_id)}
+	return vectorAdopt(_id)
 }
 
 // Initialize a Core Image vector object with values provided in a string representation.
 //
-// NewVectorWithString creates a new [Vector].
+// NewVectorWithString creates a new Vector.
 func NewVectorWithString(representation string) *Vector {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CIVector")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), foundation.NSStringStringWithUTF8String(representation).Ptr())
-	return &Vector{inner: raw.CIVectorFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CIVector")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(representation))
+	return vectorAdopt(_id)
 }
 
 // Returns a value from a specific position in the vector.
-//
-// ValueAtIndex calls the underlying ValueAtIndex.
-func (x *Vector) ValueAtIndex(index uint) float64 {
-	return x.inner.ValueAtIndex(index)
+func (x *Vector) ValueAtIndex(index int) float64 {
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("valueAtIndex:"), index)
+	return _r
 }
 
 // The number of items in the vector.
-//
-// Count calls the underlying Count.
-func (x *Vector) Count() uint {
-	return x.inner.Count()
+func (x *Vector) Count() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+	return _r
 }
 
 // The value located in the first position in the vector.
-//
-// X calls the underlying X.
 func (x *Vector) X() float64 {
-	return x.inner.X()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("X"))
+	return _r
 }
 
 // The value located in the second position in the vector.
-//
-// Y calls the underlying Y.
 func (x *Vector) Y() float64 {
-	return x.inner.Y()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("Y"))
+	return _r
 }
 
 // The value located in the third position in the vector.
-//
-// Z calls the underlying Z.
 func (x *Vector) Z() float64 {
-	return x.inner.Z()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("Z"))
+	return _r
 }
 
 // The value located in the forth position in the vector.
-//
-// W calls the underlying W.
 func (x *Vector) W() float64 {
-	return x.inner.W()
-}
-
-// Returns the values in the vector as a `CGPoint` structure. - Returns: Reading this property returns a `CGPoint` structure from the `X` and `Y` values from the vector.
-//
-// CGPointValue calls the underlying CGPointValue.
-func (x *Vector) CGPointValue() corefoundation.CGPoint {
-	return x.inner.CGPointValue()
-}
-
-// Returns the values in the vector as a `CGRect` structure. - Returns: Reading this property creates a `CGRect` structure whose origin is the `X`, `Y`, `Z` and `W` values from the vector.
-//
-// CGRectValue calls the underlying CGRectValue.
-func (x *Vector) CGRectValue() corefoundation.CGRect {
-	return x.inner.CGRectValue()
-}
-
-// Returns the values in the vector as a `CGAffineTransformValue` structure. - Returns: Reading this property creates a `CGAffineTransformValue` structure from the first six values in the vector.
-//
-// CGAffineTransformValue calls the underlying CGAffineTransformValue.
-func (x *Vector) CGAffineTransformValue() corefoundation.CGAffineTransform {
-	return x.inner.CGAffineTransformValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("W"))
+	return _r
 }
 
 // Returns a formatted string with all the values of a `CIVector`. Some example string representations of vectors: `CIVector`                               | `stringRepresentation` ---------------------------------------- | -------------- `[CIVector vectorWithX:1.0 Y:0.5 Z:0.3]` | `"[1.0 0.5 0.3]"` `[CIVector vectorWithX:10.0 Y:23.0]`     | `"[10.0 23.0]"` To create a “CIVector“ object from a string representation, use the “vectorWithString:“ method.
-//
-// StringRepresentation calls the underlying StringRepresentation.
 func (x *Vector) StringRepresentation() string {
-	_r := x.inner.StringRepresentation()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringRepresentation"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Vectorable is the interface implemented by [Vector], for mocking and DI.
 type Vectorable interface {
-	Unwrap() *raw.CIVector
-	ValueAtIndex(index uint) float64
-	Count() uint
+	obj.Object
+	ValueAtIndex(index int) float64
+	Count() int
 	X() float64
 	Y() float64
 	Z() float64
 	W() float64
-	CGPointValue() corefoundation.CGPoint
-	CGRectValue() corefoundation.CGRect
-	CGAffineTransformValue() corefoundation.CGAffineTransform
 	StringRepresentation() string
 }
 

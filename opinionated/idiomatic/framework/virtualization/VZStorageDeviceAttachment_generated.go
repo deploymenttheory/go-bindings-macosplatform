@@ -5,45 +5,68 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The common behaviors for storage devices in the guest system.
 //
-// StorageDeviceAttachment wraps [raw.VZStorageDeviceAttachment] with a fluent Go API.
+// StorageDeviceAttachment is an idiomatic wrapper over the Objective-C class VZStorageDeviceAttachment.
 type StorageDeviceAttachment struct {
-	inner *raw.VZStorageDeviceAttachment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZStorageDeviceAttachment].
-func (x *StorageDeviceAttachment) Unwrap() *raw.VZStorageDeviceAttachment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StorageDeviceAttachment) ID() objc.ID { return x.inner.Ptr() }
-
-// StorageDeviceAttachmentFromID adopts an existing object pointer as a StorageDeviceAttachment (nil for 0).
+// StorageDeviceAttachmentFromID adopts an existing Objective-C object as a StorageDeviceAttachment
+// (nil for 0), retaining it and registering a release finalizer.
 func StorageDeviceAttachmentFromID(id objc.ID) *StorageDeviceAttachment {
 	if id == 0 {
 		return nil
 	}
-	return &StorageDeviceAttachment{inner: raw.VZStorageDeviceAttachmentFromID(id)}
+	x := &StorageDeviceAttachment{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewStorageDeviceAttachment creates a new [StorageDeviceAttachment].
+// storageDeviceAttachmentAdopt wraps an Objective-C object that this code just created as a
+// StorageDeviceAttachment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func storageDeviceAttachmentAdopt(id objc.ID) *StorageDeviceAttachment {
+	if id == 0 {
+		return nil
+	}
+	x := &StorageDeviceAttachment{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *StorageDeviceAttachment) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StorageDeviceAttachment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StorageDeviceAttachment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewStorageDeviceAttachment creates a new StorageDeviceAttachment.
 func NewStorageDeviceAttachment() *StorageDeviceAttachment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZStorageDeviceAttachment")), objc.RegisterName("new"))
-	return &StorageDeviceAttachment{inner: raw.VZStorageDeviceAttachmentFromID(_id)}
-}
-
-func (x *StorageDeviceAttachment) asStorageDeviceAttachment() *raw.VZStorageDeviceAttachment {
-	return x.inner
+	_id := objc.Send[objc.ID](objc.ID(_class("VZStorageDeviceAttachment")), objc.RegisterName("new"))
+	return storageDeviceAttachmentAdopt(_id)
 }
 
 // StorageDeviceAttachmentable is the interface implemented by [StorageDeviceAttachment], for mocking and DI.
 type StorageDeviceAttachmentable interface {
-	Unwrap() *raw.VZStorageDeviceAttachment
+	obj.Object
 }
 
 var _ StorageDeviceAttachmentable = (*StorageDeviceAttachment)(nil)

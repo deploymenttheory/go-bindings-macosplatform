@@ -5,108 +5,104 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object representing a mutable set of Unicode character values for use in search operations.
 //
-// MutableCharacterSet wraps [raw.NSMutableCharacterSet] with a fluent Go API.
+// MutableCharacterSet is an idiomatic wrapper over the Objective-C class NSMutableCharacterSet.
 type MutableCharacterSet struct {
-	inner *raw.NSMutableCharacterSet
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSMutableCharacterSet].
-func (x *MutableCharacterSet) Unwrap() *raw.NSMutableCharacterSet { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableCharacterSet) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableCharacterSetFromID adopts an existing object pointer as a MutableCharacterSet (nil for 0).
+// MutableCharacterSetFromID adopts an existing Objective-C object as a MutableCharacterSet
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableCharacterSetFromID(id objc.ID) *MutableCharacterSet {
 	if id == 0 {
 		return nil
 	}
-	return &MutableCharacterSet{inner: raw.NSMutableCharacterSetFromID(id)}
-}
-
-// NewMutableCharacterSet creates a new [MutableCharacterSet].
-func NewMutableCharacterSet() *MutableCharacterSet {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMutableCharacterSet")), objc.RegisterName("new"))
-	return &MutableCharacterSet{inner: raw.NSMutableCharacterSetFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MutableCharacterSet) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableCharacterSet {
-	x.inner.NSCharacterSet.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &MutableCharacterSet{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Adds to the receiver the characters whose Unicode values are in a given range.
-//
-// AddCharactersInRange calls the underlying AddCharactersInRange.
-func (x *MutableCharacterSet) AddCharactersInRange(aRange raw.NSRange) {
-	x.inner.AddCharactersInRange(aRange)
+// mutableCharacterSetAdopt wraps an Objective-C object that this code just created as a
+// MutableCharacterSet (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableCharacterSetAdopt(id objc.ID) *MutableCharacterSet {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableCharacterSet{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Removes from the receiver the characters whose Unicode values are in a given range.
-//
-// RemoveCharactersInRange calls the underlying RemoveCharactersInRange.
-func (x *MutableCharacterSet) RemoveCharactersInRange(aRange raw.NSRange) {
-	x.inner.RemoveCharactersInRange(aRange)
+// Description returns the object's -description text.
+func (x *MutableCharacterSet) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MutableCharacterSet) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MutableCharacterSet) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMutableCharacterSet creates a new MutableCharacterSet.
+func NewMutableCharacterSet() *MutableCharacterSet {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSMutableCharacterSet")), objc.RegisterName("new"))
+	return mutableCharacterSetAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *MutableCharacterSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableCharacterSet {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
 }
 
 // Adds to the receiver the characters in a given string.
-//
-// AddCharactersInString calls the underlying AddCharactersInString.
 func (x *MutableCharacterSet) AddCharactersInString(aString string) {
-	x.inner.AddCharactersInString(foundation.NSStringStringWithUTF8String(aString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addCharactersInString:"), purego.NSString(aString))
 }
 
 // Removes from the receiver the characters in a given string.
-//
-// RemoveCharactersInString calls the underlying RemoveCharactersInString.
 func (x *MutableCharacterSet) RemoveCharactersInString(aString string) {
-	x.inner.RemoveCharactersInString(foundation.NSStringStringWithUTF8String(aString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeCharactersInString:"), purego.NSString(aString))
 }
 
 // Modifies the receiver so it contains all characters that exist in either the receiver or another set.
-//
-// FormUnionWithCharacterSet calls the underlying FormUnionWithCharacterSet.
-func (x *MutableCharacterSet) FormUnionWithCharacterSet(otherSet *raw.NSCharacterSet) {
-	x.inner.FormUnionWithCharacterSet(otherSet)
+func (x *MutableCharacterSet) FormUnionWithCharacterSet(otherSet *CharacterSet) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formUnionWithCharacterSet:"), objref.IDOf(otherSet))
 }
 
 // Modifies the receiver so it contains only characters that exist in both the receiver and another set.
-//
-// FormIntersectionWithCharacterSet calls the underlying FormIntersectionWithCharacterSet.
-func (x *MutableCharacterSet) FormIntersectionWithCharacterSet(otherSet *raw.NSCharacterSet) {
-	x.inner.FormIntersectionWithCharacterSet(otherSet)
+func (x *MutableCharacterSet) FormIntersectionWithCharacterSet(otherSet *CharacterSet) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formIntersectionWithCharacterSet:"), objref.IDOf(otherSet))
 }
 
 // Replaces all the characters in the receiver with all the characters it didn’t previously contain.
-//
-// Invert calls the underlying Invert.
 func (x *MutableCharacterSet) Invert() {
-	x.inner.Invert()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invert"))
 }
-
-func (x *MutableCharacterSet) asCharacterSet() *raw.NSCharacterSet { return &x.inner.NSCharacterSet }
-
-func (x *MutableCharacterSet) asObject() *raw.NSObject { return &x.inner.NSCharacterSet.NSObject }
 
 // MutableCharacterSetable is the interface implemented by [MutableCharacterSet], for mocking and DI.
 type MutableCharacterSetable interface {
-	Unwrap() *raw.NSMutableCharacterSet
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MutableCharacterSet
-	AddCharactersInRange(aRange raw.NSRange)
-	RemoveCharactersInRange(aRange raw.NSRange)
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *MutableCharacterSet
 	AddCharactersInString(aString string)
 	RemoveCharactersInString(aString string)
-	FormUnionWithCharacterSet(otherSet *raw.NSCharacterSet)
-	FormIntersectionWithCharacterSet(otherSet *raw.NSCharacterSet)
+	FormUnionWithCharacterSet(otherSet *CharacterSet)
+	FormIntersectionWithCharacterSet(otherSet *CharacterSet)
 	Invert()
 }
 

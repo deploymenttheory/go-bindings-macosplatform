@@ -5,48 +5,68 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a GPU compute device.
 //
-// GPUComputeDevice wraps [raw.MLGPUComputeDevice] with a fluent Go API.
+// GPUComputeDevice is an idiomatic wrapper over the Objective-C class MLGPUComputeDevice.
 type GPUComputeDevice struct {
-	inner *raw.MLGPUComputeDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLGPUComputeDevice].
-func (x *GPUComputeDevice) Unwrap() *raw.MLGPUComputeDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GPUComputeDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// GPUComputeDeviceFromID adopts an existing object pointer as a GPUComputeDevice (nil for 0).
+// GPUComputeDeviceFromID adopts an existing Objective-C object as a GPUComputeDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func GPUComputeDeviceFromID(id objc.ID) *GPUComputeDevice {
 	if id == 0 {
 		return nil
 	}
-	return &GPUComputeDevice{inner: raw.MLGPUComputeDeviceFromID(id)}
+	x := &GPUComputeDevice{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGPUComputeDevice creates a new [GPUComputeDevice].
+// gPUComputeDeviceAdopt wraps an Objective-C object that this code just created as a
+// GPUComputeDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func gPUComputeDeviceAdopt(id objc.ID) *GPUComputeDevice {
+	if id == 0 {
+		return nil
+	}
+	x := &GPUComputeDevice{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GPUComputeDevice) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GPUComputeDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GPUComputeDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGPUComputeDevice creates a new GPUComputeDevice.
 func NewGPUComputeDevice() *GPUComputeDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLGPUComputeDevice")), objc.RegisterName("new"))
-	return &GPUComputeDevice{inner: raw.MLGPUComputeDeviceFromID(_id)}
-}
-
-// MetalDevice calls the underlying MetalDevice.
-func (x *GPUComputeDevice) MetalDevice() metal.MTLDevice {
-	return x.inner.MetalDevice()
+	_id := objc.Send[objc.ID](objc.ID(_class("MLGPUComputeDevice")), objc.RegisterName("new"))
+	return gPUComputeDeviceAdopt(_id)
 }
 
 // GPUComputeDeviceable is the interface implemented by [GPUComputeDevice], for mocking and DI.
 type GPUComputeDeviceable interface {
-	Unwrap() *raw.MLGPUComputeDevice
-	MetalDevice() metal.MTLDevice
+	obj.Object
 }
 
 var _ GPUComputeDeviceable = (*GPUComputeDevice)(nil)

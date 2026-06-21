@@ -5,74 +5,90 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The information that describes a train reservation.
 //
-// TrainReservation wraps [raw.INTrainReservation] with a fluent Go API.
+// TrainReservation is an idiomatic wrapper over the Objective-C class INTrainReservation.
 type TrainReservation struct {
-	inner *raw.INTrainReservation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INTrainReservation].
-func (x *TrainReservation) Unwrap() *raw.INTrainReservation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TrainReservation) ID() objc.ID { return x.inner.Ptr() }
-
-// TrainReservationFromID adopts an existing object pointer as a TrainReservation (nil for 0).
+// TrainReservationFromID adopts an existing Objective-C object as a TrainReservation
+// (nil for 0), retaining it and registering a release finalizer.
 func TrainReservationFromID(id objc.ID) *TrainReservation {
 	if id == 0 {
 		return nil
 	}
-	return &TrainReservation{inner: raw.INTrainReservationFromID(id)}
+	x := &TrainReservation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// trainReservationAdopt wraps an Objective-C object that this code just created as a
+// TrainReservation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func trainReservationAdopt(id objc.ID) *TrainReservation {
+	if id == 0 {
+		return nil
+	}
+	x := &TrainReservation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TrainReservation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TrainReservation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TrainReservation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a train reservation with the specified contents and attributes.
 //
-// NewTrainReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatTrainTrip creates a new [TrainReservation].
-func NewTrainReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatTrainTrip(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], uRL string, reservedSeat *raw.INSeat, trainTrip *raw.INTrainTrip) *TrainReservation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INTrainReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:trainTrip:"), itemReference.Ptr(), foundation.NSStringStringWithUTF8String(reservationNumber).Ptr(), bookingTime.Ptr(), raw.INReservationStatus(reservationStatus), foundation.NSStringStringWithUTF8String(reservationHolderName).Ptr(), actions.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), reservedSeat.Ptr(), trainTrip.Ptr())
-	return &TrainReservation{inner: raw.INTrainReservationFromID(_id)}
+// NewTrainReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatTrainTrip creates a new TrainReservation.
+func NewTrainReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsURLReservedSeatTrainTrip(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, uRL string, reservedSeat *Seat, trainTrip *TrainTrip) *TrainReservation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INTrainReservation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:URL:reservedSeat:trainTrip:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), rt.FileURL(uRL), objref.IDOf(reservedSeat), objref.IDOf(trainTrip))
+	return trainReservationAdopt(_id)
 }
 
 // Creates a new train reservation with the specified contents and attributes.
 //
-// NewTrainReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatTrainTrip creates a new [TrainReservation].
-func NewTrainReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatTrainTrip(itemReference *raw.INSpeakableString, reservationNumber string, bookingTime *foundation.NSDate, reservationStatus INReservationStatus, reservationHolderName string, actions *foundation.NSArray[*raw.INReservationAction], reservedSeat *raw.INSeat, trainTrip *raw.INTrainTrip) *TrainReservation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INTrainReservation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservedSeat:trainTrip:"), itemReference.Ptr(), foundation.NSStringStringWithUTF8String(reservationNumber).Ptr(), bookingTime.Ptr(), raw.INReservationStatus(reservationStatus), foundation.NSStringStringWithUTF8String(reservationHolderName).Ptr(), actions.Ptr(), reservedSeat.Ptr(), trainTrip.Ptr())
-	return &TrainReservation{inner: raw.INTrainReservationFromID(_id)}
+// NewTrainReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatTrainTrip creates a new TrainReservation.
+func NewTrainReservationWithItemReferenceReservationNumberBookingTimeReservationStatusReservationHolderNameActionsReservedSeatTrainTrip(itemReference *SpeakableString, reservationNumber string, bookingTime obj.Object, reservationStatus ReservationStatus, reservationHolderName string, actions []*ReservationAction, reservedSeat *Seat, trainTrip *TrainTrip) *TrainReservation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INTrainReservation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithItemReference:reservationNumber:bookingTime:reservationStatus:reservationHolderName:actions:reservedSeat:trainTrip:"), objref.IDOf(itemReference), purego.NSString(reservationNumber), objref.IDOf(bookingTime), reservationStatus, purego.NSString(reservationHolderName), purego.SliceToNSArray(actions, func(_v *ReservationAction) objc.ID { return objref.IDOf(_v) }), objref.IDOf(reservedSeat), objref.IDOf(trainTrip))
+	return trainReservationAdopt(_id)
 }
 
-// ReservedSeat calls the underlying ReservedSeat.
 func (x *TrainReservation) ReservedSeat() *Seat {
-	_r := x.inner.ReservedSeat()
-	if _r == nil {
-		return nil
-	}
-	return &Seat{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservedSeat"))
+	return SeatFromID(_r)
 }
 
-// TrainTrip calls the underlying TrainTrip.
 func (x *TrainReservation) TrainTrip() *TrainTrip {
-	_r := x.inner.TrainTrip()
-	if _r == nil {
-		return nil
-	}
-	return &TrainTrip{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trainTrip"))
+	return TrainTripFromID(_r)
 }
-
-func (x *TrainReservation) asReservation() *raw.INReservation { return &x.inner.INReservation }
 
 // TrainReservationable is the interface implemented by [TrainReservation], for mocking and DI.
 type TrainReservationable interface {
-	Unwrap() *raw.INTrainReservation
+	obj.Object
 	ReservedSeat() *Seat
 	TrainTrip() *TrainTrip
 }

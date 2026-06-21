@@ -5,26 +5,27 @@
 package screensaver
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screensaver"
+	ebipurego "github.com/ebitengine/purego"
 )
 
-// SSCenteredRectInRect calls [raw.SSCenteredRectInRect] (C function SSCenteredRectInRect).
-func SSCenteredRectInRect(innerRect corefoundation.CGRect, outerRect corefoundation.CGRect) corefoundation.CGRect {
-	return raw.SSCenteredRectInRect(innerRect, outerRect)
-}
+var _fnSSRandomFloatBetween func(float64, float64) float64
 
-// SSRandomFloatBetween calls [raw.SSRandomFloatBetween] (C function SSRandomFloatBetween).
+// SSRandomFloatBetween calls the ScreenSaver framework function SSRandomFloatBetween.
 func SSRandomFloatBetween(a float64, b float64) float64 {
-	return raw.SSRandomFloatBetween(a, b)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSSRandomFloatBetween == nil {
+		ebipurego.RegisterLibFunc(&_fnSSRandomFloatBetween, _lib, "SSRandomFloatBetween")
+	}
+	return _fnSSRandomFloatBetween(a, b)
 }
 
-// SSRandomIntBetween calls [raw.SSRandomIntBetween] (C function SSRandomIntBetween).
+var _fnSSRandomIntBetween func(int, int) int
+
+// SSRandomIntBetween calls the ScreenSaver framework function SSRandomIntBetween.
 func SSRandomIntBetween(a int, b int) int {
-	return raw.SSRandomIntBetween(a, b)
-}
-
-// SSRandomPointForSizeWithinRect calls [raw.SSRandomPointForSizeWithinRect] (C function SSRandomPointForSizeWithinRect).
-func SSRandomPointForSizeWithinRect(size corefoundation.CGSize, rect corefoundation.CGRect) corefoundation.CGPoint {
-	return raw.SSRandomPointForSizeWithinRect(size, rect)
+	_loadOnce.Do(_loadLibrary)
+	if _fnSSRandomIntBetween == nil {
+		ebipurego.RegisterLibFunc(&_fnSSRandomIntBetween, _lib, "SSRandomIntBetween")
+	}
+	return _fnSSRandomIntBetween(a, b)
 }

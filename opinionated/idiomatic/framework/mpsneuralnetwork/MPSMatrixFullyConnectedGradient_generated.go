@@ -5,158 +5,148 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MatrixFullyConnectedGradient wraps [raw.MPSMatrixFullyConnectedGradient] with a fluent Go API.
+// MatrixFullyConnectedGradient is an idiomatic wrapper over the Objective-C class MPSMatrixFullyConnectedGradient.
 type MatrixFullyConnectedGradient struct {
-	inner *raw.MPSMatrixFullyConnectedGradient
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSMatrixFullyConnectedGradient].
-func (x *MatrixFullyConnectedGradient) Unwrap() *raw.MPSMatrixFullyConnectedGradient { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatrixFullyConnectedGradient) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixFullyConnectedGradientFromID adopts an existing object pointer as a MatrixFullyConnectedGradient (nil for 0).
+// MatrixFullyConnectedGradientFromID adopts an existing Objective-C object as a MatrixFullyConnectedGradient
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixFullyConnectedGradientFromID(id objc.ID) *MatrixFullyConnectedGradient {
 	if id == 0 {
 		return nil
 	}
-	return &MatrixFullyConnectedGradient{inner: raw.MPSMatrixFullyConnectedGradientFromID(id)}
-}
-
-// NewMatrixFullyConnectedGradientWithDevice creates a new [MatrixFullyConnectedGradient].
-func NewMatrixFullyConnectedGradientWithDevice(device metal.MTLDevice) *MatrixFullyConnectedGradient {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixFullyConnectedGradient")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &MatrixFullyConnectedGradient{inner: raw.MPSMatrixFullyConnectedGradientFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixFullyConnectedGradient @param      device      The MTLDevice on which to make the MPSMatrixFullyConnectedGradient object. @return     A new MPSMatrixFullyConnected object, or nil if failure.
-//
-// NewMatrixFullyConnectedGradientWithCoderDevice creates a new [MatrixFullyConnectedGradient].
-func NewMatrixFullyConnectedGradientWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MatrixFullyConnectedGradient {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixFullyConnectedGradient")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &MatrixFullyConnectedGradient{inner: raw.MPSMatrixFullyConnectedGradientFromID(_id)}
-}
-
-// @property   sourceNumberOfFeatureVectors @discussion The number of input vectors which make up the input array. This is equivalent to the number of rows in both the input matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
-//
-// WithSourceNumberOfFeatureVectors sets the sourceNumberOfFeatureVectors property and returns the receiver for chaining.
-func (x *MatrixFullyConnectedGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixFullyConnectedGradient {
-	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
+	x := &MatrixFullyConnectedGradient{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   sourceOutputFeatureChannels @discussion The number of feature channels in the output of the forward fully connected layer. This is equivalent to the number of columns in both the weight matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
-//
-// WithSourceOutputFeatureChannels sets the sourceOutputFeatureChannels property and returns the receiver for chaining.
-func (x *MatrixFullyConnectedGradient) WithSourceOutputFeatureChannels(sourceOutputFeatureChannels uint) *MatrixFullyConnectedGradient {
-	x.inner.SetSourceOutputFeatureChannels(sourceOutputFeatureChannels)
+// matrixFullyConnectedGradientAdopt wraps an Objective-C object that this code just created as a
+// MatrixFullyConnectedGradient (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixFullyConnectedGradientAdopt(id objc.ID) *MatrixFullyConnectedGradient {
+	if id == 0 {
+		return nil
+	}
+	x := &MatrixFullyConnectedGradient{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @property   sourceInputFeatureChannels @discussion The number of feature channels in the input to the forward fully connected layer. This is equivalent to the number of columns in the input matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+// Description returns the object's -description text.
+func (x *MatrixFullyConnectedGradient) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatrixFullyConnectedGradient) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatrixFullyConnectedGradient) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMatrixFullyConnectedGradient creates a new MatrixFullyConnectedGradient.
+func NewMatrixFullyConnectedGradient() *MatrixFullyConnectedGradient {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixFullyConnectedGradient")), objc.RegisterName("new"))
+	return matrixFullyConnectedGradientAdopt(_id)
+}
+
+// The number of input vectors which make up the input array. This is equivalent to the number of rows in both the input matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
 //
-// WithSourceInputFeatureChannels sets the sourceInputFeatureChannels property and returns the receiver for chaining.
-func (x *MatrixFullyConnectedGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixFullyConnectedGradient {
-	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
+// WithSourceNumberOfFeatureVectors sets sourceNumberOfFeatureVectors and returns the receiver so calls can be chained.
+func (x *MatrixFullyConnectedGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixFullyConnectedGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
 	return x
 }
 
-// @property   alpha @discussion Scale factor to apply to the product.  This value should be equal to the corresponding value in the forward fully connected kernel.
+// The number of feature channels in the output of the forward fully connected layer. This is equivalent to the number of columns in both the weight matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
 //
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithSourceOutputFeatureChannels sets sourceOutputFeatureChannels and returns the receiver so calls can be chained.
+func (x *MatrixFullyConnectedGradient) WithSourceOutputFeatureChannels(sourceOutputFeatureChannels int) *MatrixFullyConnectedGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceOutputFeatureChannels:"), sourceOutputFeatureChannels)
+	return x
+}
+
+// The number of feature channels in the input to the forward fully connected layer. This is equivalent to the number of columns in the input matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+//
+// WithSourceInputFeatureChannels sets sourceInputFeatureChannels and returns the receiver so calls can be chained.
+func (x *MatrixFullyConnectedGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixFullyConnectedGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
+	return x
+}
+
+// Scale factor to apply to the product.  This value should be equal to the corresponding value in the forward fully connected kernel.
+//
+// WithAlpha sets alpha and returns the receiver so calls can be chained.
 func (x *MatrixFullyConnectedGradient) WithAlpha(alpha float64) *MatrixFullyConnectedGradient {
-	x.inner.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// @abstract   Encode a MPSMatrixFullyConnectedGradient object to a command buffer and produce the gradient of the loss function with respect to the input data. @param      commandBuffer               A valid MTLCommandBuffer to receive the encoded kernel. @param      gradientMatrix              A valid MPSMatrix object which specifies the input gradient. @param      weightMatrix                A valid MPSMatrix object which specifies the weight array. @param      resultGradientForDataMatrix A valid MPSMatrix object which specifies the result gradient. @discussion This operation computes the resulting gradient of the loss function with respect to the forward kernel's input data.  weightMatrix should contain the same values used to compute the result of the forward kernel.
-//
-// EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix calls the underlying EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix.
-func (x *MatrixFullyConnectedGradient) EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, weightMatrix *mpscore.MPSMatrix, resultGradientForDataMatrix *mpscore.MPSMatrix) {
-	x.inner.EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix(commandBuffer, gradientMatrix, weightMatrix, resultGradientForDataMatrix)
+// The number of input vectors which make up the input array. This is equivalent to the number of rows in both the input matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+func (x *MatrixFullyConnectedGradient) SourceNumberOfFeatureVectors() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceNumberOfFeatureVectors"))
+	return _r
 }
 
-// @abstract   Encode a MPSMatrixFullyConnectedGradient object to a command buffer and produce the gradient of the loss function with respect to the weight matrix and bias vector. @param      commandBuffer                   A valid MTLCommandBuffer to receive the encoded kernel. @param      gradientMatrix                  A valid MPSMatrix object which specifies the input gradient. @param      inputMatrix                     A valid MPSMatrix object which specifies the input array. @param      resultGradientForWeightMatrix   A valid MPSMatrix object which specifies the resulting gradients with respect to the weights. @param      resultGradientForBiasVector     A valid MPSVector object which specifies the resulting gradients with respect to the bias terms.  If NULL these values will not be returned. @discussion This operation computes the resulting gradient of the loss function with respect to the forward kernel's weight data.  inputMatrix should contain the same values used to compute the result of the forward kernel.
-//
-// EncodeGradientForWeightsAndBiasToCommandBufferGradientMatrixInputMatrixResultGradientForWeightMatrixResultGradientForBiasVector calls the underlying EncodeGradientForWeightsAndBiasToCommandBufferGradientMatrixInputMatrixResultGradientForWeightMatrixResultGradientForBiasVector.
-func (x *MatrixFullyConnectedGradient) EncodeGradientForWeightsAndBiasToCommandBufferGradientMatrixInputMatrixResultGradientForWeightMatrixResultGradientForBiasVector(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, inputMatrix *mpscore.MPSMatrix, resultGradientForWeightMatrix *mpscore.MPSMatrix, resultGradientForBiasVector *mpscore.MPSVector) {
-	x.inner.EncodeGradientForWeightsAndBiasToCommandBufferGradientMatrixInputMatrixResultGradientForWeightMatrixResultGradientForBiasVector(commandBuffer, gradientMatrix, inputMatrix, resultGradientForWeightMatrix, resultGradientForBiasVector)
+func (x *MatrixFullyConnectedGradient) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
 }
 
-// @property   sourceNumberOfFeatureVectors @discussion The number of input vectors which make up the input array. This is equivalent to the number of rows in both the input matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
-//
-// SourceNumberOfFeatureVectors calls the underlying SourceNumberOfFeatureVectors.
-func (x *MatrixFullyConnectedGradient) SourceNumberOfFeatureVectors() uint {
-	return x.inner.SourceNumberOfFeatureVectors()
+// The number of feature channels in the output of the forward fully connected layer. This is equivalent to the number of columns in both the weight matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+func (x *MatrixFullyConnectedGradient) SourceOutputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceOutputFeatureChannels"))
+	return _r
 }
 
-// SetSourceNumberOfFeatureVectors calls the underlying SetSourceNumberOfFeatureVectors.
-func (x *MatrixFullyConnectedGradient) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) {
-	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
+func (x *MatrixFullyConnectedGradient) SetSourceOutputFeatureChannels(sourceOutputFeatureChannels int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceOutputFeatureChannels:"), sourceOutputFeatureChannels)
 }
 
-// @property   sourceOutputFeatureChannels @discussion The number of feature channels in the output of the forward fully connected layer. This is equivalent to the number of columns in both the weight matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
-//
-// SourceOutputFeatureChannels calls the underlying SourceOutputFeatureChannels.
-func (x *MatrixFullyConnectedGradient) SourceOutputFeatureChannels() uint {
-	return x.inner.SourceOutputFeatureChannels()
+// The number of feature channels in the input to the forward fully connected layer. This is equivalent to the number of columns in the input matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+func (x *MatrixFullyConnectedGradient) SourceInputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceInputFeatureChannels"))
+	return _r
 }
 
-// SetSourceOutputFeatureChannels calls the underlying SetSourceOutputFeatureChannels.
-func (x *MatrixFullyConnectedGradient) SetSourceOutputFeatureChannels(sourceOutputFeatureChannels uint) {
-	x.inner.SetSourceOutputFeatureChannels(sourceOutputFeatureChannels)
+func (x *MatrixFullyConnectedGradient) SetSourceInputFeatureChannels(sourceInputFeatureChannels int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
 }
 
-// @property   sourceInputFeatureChannels @discussion The number of feature channels in the input to the forward fully connected layer. This is equivalent to the number of columns in the input matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
-//
-// SourceInputFeatureChannels calls the underlying SourceInputFeatureChannels.
-func (x *MatrixFullyConnectedGradient) SourceInputFeatureChannels() uint {
-	return x.inner.SourceInputFeatureChannels()
-}
-
-// SetSourceInputFeatureChannels calls the underlying SetSourceInputFeatureChannels.
-func (x *MatrixFullyConnectedGradient) SetSourceInputFeatureChannels(sourceInputFeatureChannels uint) {
-	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
-}
-
-// @property   alpha @discussion Scale factor to apply to the product.  This value should be equal to the corresponding value in the forward fully connected kernel.
-//
-// Alpha calls the underlying Alpha.
+// Scale factor to apply to the product.  This value should be equal to the corresponding value in the forward fully connected kernel.
 func (x *MatrixFullyConnectedGradient) Alpha() float64 {
-	return x.inner.Alpha()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
+	return _r
 }
 
-// SetAlpha calls the underlying SetAlpha.
 func (x *MatrixFullyConnectedGradient) SetAlpha(alpha float64) {
-	x.inner.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
 // MatrixFullyConnectedGradientable is the interface implemented by [MatrixFullyConnectedGradient], for mocking and DI.
 type MatrixFullyConnectedGradientable interface {
-	Unwrap() *raw.MPSMatrixFullyConnectedGradient
-	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixFullyConnectedGradient
-	WithSourceOutputFeatureChannels(sourceOutputFeatureChannels uint) *MatrixFullyConnectedGradient
-	WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixFullyConnectedGradient
+	obj.Object
+	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixFullyConnectedGradient
+	WithSourceOutputFeatureChannels(sourceOutputFeatureChannels int) *MatrixFullyConnectedGradient
+	WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixFullyConnectedGradient
 	WithAlpha(alpha float64) *MatrixFullyConnectedGradient
-	EncodeGradientForDataToCommandBufferGradientMatrixWeightMatrixResultGradientForDataMatrix(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, weightMatrix *mpscore.MPSMatrix, resultGradientForDataMatrix *mpscore.MPSMatrix)
-	EncodeGradientForWeightsAndBiasToCommandBufferGradientMatrixInputMatrixResultGradientForWeightMatrixResultGradientForBiasVector(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, inputMatrix *mpscore.MPSMatrix, resultGradientForWeightMatrix *mpscore.MPSMatrix, resultGradientForBiasVector *mpscore.MPSVector)
-	SourceNumberOfFeatureVectors() uint
-	SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint)
-	SourceOutputFeatureChannels() uint
-	SetSourceOutputFeatureChannels(sourceOutputFeatureChannels uint)
-	SourceInputFeatureChannels() uint
-	SetSourceInputFeatureChannels(sourceInputFeatureChannels uint)
+	SourceNumberOfFeatureVectors() int
+	SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int)
+	SourceOutputFeatureChannels() int
+	SetSourceOutputFeatureChannels(sourceOutputFeatureChannels int)
+	SourceInputFeatureChannels() int
+	SetSourceInputFeatureChannels(sourceInputFeatureChannels int)
 	Alpha() float64
 	SetAlpha(alpha float64)
 }

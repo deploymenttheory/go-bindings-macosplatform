@@ -5,69 +5,89 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRContentLauncherClusterLaunchResponseParams wraps [raw.MTRContentLauncherClusterLaunchResponseParams] with a fluent Go API.
+// MTRContentLauncherClusterLaunchResponseParams is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterLaunchResponseParams.
 type MTRContentLauncherClusterLaunchResponseParams struct {
-	inner *raw.MTRContentLauncherClusterLaunchResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRContentLauncherClusterLaunchResponseParams].
-func (x *MTRContentLauncherClusterLaunchResponseParams) Unwrap() *raw.MTRContentLauncherClusterLaunchResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRContentLauncherClusterLaunchResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRContentLauncherClusterLaunchResponseParamsFromID adopts an existing object pointer as a MTRContentLauncherClusterLaunchResponseParams (nil for 0).
+// MTRContentLauncherClusterLaunchResponseParamsFromID adopts an existing Objective-C object as a MTRContentLauncherClusterLaunchResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRContentLauncherClusterLaunchResponseParamsFromID(id objc.ID) *MTRContentLauncherClusterLaunchResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRContentLauncherClusterLaunchResponseParams{inner: raw.MTRContentLauncherClusterLaunchResponseParamsFromID(id)}
-}
-
-// NewMTRContentLauncherClusterLaunchResponseParams creates a new [MTRContentLauncherClusterLaunchResponseParams].
-func NewMTRContentLauncherClusterLaunchResponseParams() *MTRContentLauncherClusterLaunchResponseParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRContentLauncherClusterLaunchResponseParams")), objc.RegisterName("new"))
-	return &MTRContentLauncherClusterLaunchResponseParams{inner: raw.MTRContentLauncherClusterLaunchResponseParamsFromID(_id)}
-}
-
-// WithStatus sets the status property and returns the receiver for chaining.
-func (x *MTRContentLauncherClusterLaunchResponseParams) WithStatus(status *foundation.NSNumber) *MTRContentLauncherClusterLaunchResponseParams {
-	x.inner.MTRContentLauncherClusterLauncherResponseParams.SetStatus(status)
+	x := &MTRContentLauncherClusterLaunchResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithData sets the data property and returns the receiver for chaining.
+// mTRContentLauncherClusterLaunchResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRContentLauncherClusterLaunchResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRContentLauncherClusterLaunchResponseParamsAdopt(id objc.ID) *MTRContentLauncherClusterLaunchResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRContentLauncherClusterLaunchResponseParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRContentLauncherClusterLaunchResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRContentLauncherClusterLaunchResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRContentLauncherClusterLaunchResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRContentLauncherClusterLaunchResponseParams creates a new MTRContentLauncherClusterLaunchResponseParams.
+func NewMTRContentLauncherClusterLaunchResponseParams() *MTRContentLauncherClusterLaunchResponseParams {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRContentLauncherClusterLaunchResponseParams")), objc.RegisterName("new"))
+	return mTRContentLauncherClusterLaunchResponseParamsAdopt(_id)
+}
+
+// WithStatus sets status and returns the receiver so calls can be chained.
+func (x *MTRContentLauncherClusterLaunchResponseParams) WithStatus(status obj.Object) *MTRContentLauncherClusterLaunchResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
+	return x
+}
+
+// WithData sets data and returns the receiver so calls can be chained.
 func (x *MTRContentLauncherClusterLaunchResponseParams) WithData(data string) *MTRContentLauncherClusterLaunchResponseParams {
-	x.inner.MTRContentLauncherClusterLauncherResponseParams.SetData(foundation.NSStringStringWithUTF8String(data))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRContentLauncherClusterLaunchResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRContentLauncherClusterLaunchResponseParams {
-	x.inner.MTRContentLauncherClusterLauncherResponseParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRContentLauncherClusterLaunchResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRContentLauncherClusterLaunchResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
-}
-
-func (x *MTRContentLauncherClusterLaunchResponseParams) asMTRContentLauncherClusterLauncherResponseParams() *raw.MTRContentLauncherClusterLauncherResponseParams {
-	return &x.inner.MTRContentLauncherClusterLauncherResponseParams
 }
 
 // MTRContentLauncherClusterLaunchResponseParamsable is the interface implemented by [MTRContentLauncherClusterLaunchResponseParams], for mocking and DI.
 type MTRContentLauncherClusterLaunchResponseParamsable interface {
-	Unwrap() *raw.MTRContentLauncherClusterLaunchResponseParams
-	WithStatus(status *foundation.NSNumber) *MTRContentLauncherClusterLaunchResponseParams
+	obj.Object
+	WithStatus(status obj.Object) *MTRContentLauncherClusterLaunchResponseParams
 	WithData(data string) *MTRContentLauncherClusterLaunchResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRContentLauncherClusterLaunchResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRContentLauncherClusterLaunchResponseParams
 }
 
 var _ MTRContentLauncherClusterLaunchResponseParamsable = (*MTRContentLauncherClusterLaunchResponseParams)(nil)

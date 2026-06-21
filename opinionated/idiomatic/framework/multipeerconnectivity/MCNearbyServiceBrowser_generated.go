@@ -5,109 +5,102 @@
 package multipeerconnectivity
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/multipeerconnectivity"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Searches (by service type) for services offered by nearby devices using infrastructure Wi-Fi, peer-to-peer Wi-Fi, and Bluetooth (in iOS) or Ethernet (in macOS and tvOS), and provides the ability to easily invite those devices to a Multipeer Connectivity session (MCSession).
 //
-// NearbyServiceBrowser wraps [raw.MCNearbyServiceBrowser] with a fluent Go API.
+// NearbyServiceBrowser is an idiomatic wrapper over the Objective-C class MCNearbyServiceBrowser.
 type NearbyServiceBrowser struct {
-	inner *raw.MCNearbyServiceBrowser
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MCNearbyServiceBrowser].
-func (x *NearbyServiceBrowser) Unwrap() *raw.MCNearbyServiceBrowser { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NearbyServiceBrowser) ID() objc.ID { return x.inner.Ptr() }
-
-// NearbyServiceBrowserFromID adopts an existing object pointer as a NearbyServiceBrowser (nil for 0).
+// NearbyServiceBrowserFromID adopts an existing Objective-C object as a NearbyServiceBrowser
+// (nil for 0), retaining it and registering a release finalizer.
 func NearbyServiceBrowserFromID(id objc.ID) *NearbyServiceBrowser {
 	if id == 0 {
 		return nil
 	}
-	return &NearbyServiceBrowser{inner: raw.MCNearbyServiceBrowserFromID(id)}
+	x := &NearbyServiceBrowser{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// nearbyServiceBrowserAdopt wraps an Objective-C object that this code just created as a
+// NearbyServiceBrowser (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nearbyServiceBrowserAdopt(id objc.ID) *NearbyServiceBrowser {
+	if id == 0 {
+		return nil
+	}
+	x := &NearbyServiceBrowser{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NearbyServiceBrowser) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NearbyServiceBrowser) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NearbyServiceBrowser) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes the nearby service browser object.
 //
-// NewNearbyServiceBrowserWithPeerServiceType creates a new [NearbyServiceBrowser].
-func NewNearbyServiceBrowserWithPeerServiceType(myPeerID *raw.MCPeerID, serviceType string) *NearbyServiceBrowser {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MCNearbyServiceBrowser")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPeer:serviceType:"), myPeerID.Ptr(), foundation.NSStringStringWithUTF8String(serviceType).Ptr())
-	return &NearbyServiceBrowser{inner: raw.MCNearbyServiceBrowserFromID(_id)}
-}
-
-// The delegate object that handles browser-related events.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *NearbyServiceBrowser) WithDelegate(delegate raw.MCNearbyServiceBrowserDelegate) *NearbyServiceBrowser {
-	x.inner.SetDelegate(delegate)
-	return x
+// NewNearbyServiceBrowserWithPeerServiceType creates a new NearbyServiceBrowser.
+func NewNearbyServiceBrowserWithPeerServiceType(myPeerID *PeerID, serviceType string) *NearbyServiceBrowser {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MCNearbyServiceBrowser")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPeer:serviceType:"), objref.IDOf(myPeerID), purego.NSString(serviceType))
+	return nearbyServiceBrowserAdopt(_id)
 }
 
 // Starts browsing for peers.
-//
-// StartBrowsingForPeers calls the underlying StartBrowsingForPeers.
 func (x *NearbyServiceBrowser) StartBrowsingForPeers() {
-	x.inner.StartBrowsingForPeers()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startBrowsingForPeers"))
 }
 
 // Stops browsing for peers.
-//
-// StopBrowsingForPeers calls the underlying StopBrowsingForPeers.
 func (x *NearbyServiceBrowser) StopBrowsingForPeers() {
-	x.inner.StopBrowsingForPeers()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopBrowsingForPeers"))
 }
 
 // Invites a discovered peer to join a Multipeer Connectivity session.
-//
-// InvitePeerToSessionWithContextTimeout calls the underlying InvitePeerToSessionWithContextTimeout.
-func (x *NearbyServiceBrowser) InvitePeerToSessionWithContextTimeout(peerID *raw.MCPeerID, session *raw.MCSession, context_ *foundation.NSData, timeout float64) {
-	x.inner.InvitePeerToSessionWithContextTimeout(peerID, session, context_, timeout)
+func (x *NearbyServiceBrowser) InvitePeerToSessionWithContextTimeout(peerID *PeerID, session *Session, context_ obj.Object, timeout float64) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invitePeer:toSession:withContext:timeout:"), objref.IDOf(peerID), objref.IDOf(session), objref.IDOf(context_), timeout)
 }
 
-// Delegate calls the underlying Delegate.
-func (x *NearbyServiceBrowser) Delegate() raw.MCNearbyServiceBrowserDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *NearbyServiceBrowser) SetDelegate(delegate raw.MCNearbyServiceBrowserDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// MyPeerID calls the underlying MyPeerID.
 func (x *NearbyServiceBrowser) MyPeerID() *PeerID {
-	_r := x.inner.MyPeerID()
-	if _r == nil {
-		return nil
-	}
-	return &PeerID{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("myPeerID"))
+	return PeerIDFromID(_r)
 }
 
-// ServiceType calls the underlying ServiceType.
 func (x *NearbyServiceBrowser) ServiceType() string {
-	_r := x.inner.ServiceType()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceType"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // NearbyServiceBrowserable is the interface implemented by [NearbyServiceBrowser], for mocking and DI.
 type NearbyServiceBrowserable interface {
-	Unwrap() *raw.MCNearbyServiceBrowser
-	WithDelegate(delegate raw.MCNearbyServiceBrowserDelegate) *NearbyServiceBrowser
+	obj.Object
 	StartBrowsingForPeers()
 	StopBrowsingForPeers()
-	InvitePeerToSessionWithContextTimeout(peerID *raw.MCPeerID, session *raw.MCSession, context_ *foundation.NSData, timeout float64)
-	Delegate() raw.MCNearbyServiceBrowserDelegate
-	SetDelegate(delegate raw.MCNearbyServiceBrowserDelegate)
+	InvitePeerToSessionWithContextTimeout(peerID *PeerID, session *Session, context_ obj.Object, timeout float64)
 	MyPeerID() *PeerID
 	ServiceType() string
 }

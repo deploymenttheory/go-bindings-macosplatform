@@ -5,82 +5,89 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A curved portion of an envelope.
 //
-// EnvelopeSegment wraps [raw.PHASEEnvelopeSegment] with a fluent Go API.
+// EnvelopeSegment is an idiomatic wrapper over the Objective-C class PHASEEnvelopeSegment.
 type EnvelopeSegment struct {
-	inner *raw.PHASEEnvelopeSegment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEEnvelopeSegment].
-func (x *EnvelopeSegment) Unwrap() *raw.PHASEEnvelopeSegment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EnvelopeSegment) ID() objc.ID { return x.inner.Ptr() }
-
-// EnvelopeSegmentFromID adopts an existing object pointer as a EnvelopeSegment (nil for 0).
+// EnvelopeSegmentFromID adopts an existing Objective-C object as a EnvelopeSegment
+// (nil for 0), retaining it and registering a release finalizer.
 func EnvelopeSegmentFromID(id objc.ID) *EnvelopeSegment {
 	if id == 0 {
 		return nil
 	}
-	return &EnvelopeSegment{inner: raw.PHASEEnvelopeSegmentFromID(id)}
+	x := &EnvelopeSegment{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a curved portion of an envelope.
-//
-// NewEnvelopeSegmentWithEndPointCurveType creates a new [EnvelopeSegment].
-func NewEnvelopeSegmentWithEndPointCurveType(endPoint unsafe.Pointer, curveType PHASECurveType) *EnvelopeSegment {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEEnvelopeSegment")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEndPoint:curveType:"), endPoint, raw.PHASECurveType(curveType))
-	return &EnvelopeSegment{inner: raw.PHASEEnvelopeSegmentFromID(_id)}
+// envelopeSegmentAdopt wraps an Objective-C object that this code just created as a
+// EnvelopeSegment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func envelopeSegmentAdopt(id objc.ID) *EnvelopeSegment {
+	if id == 0 {
+		return nil
+	}
+	x := &EnvelopeSegment{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EnvelopeSegment) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EnvelopeSegment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EnvelopeSegment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEnvelopeSegment creates a new EnvelopeSegment.
+func NewEnvelopeSegment() *EnvelopeSegment {
+	_id := objc.Send[objc.ID](objc.ID(_class("PHASEEnvelopeSegment")), objc.RegisterName("new"))
+	return envelopeSegmentAdopt(_id)
 }
 
 // A curve along the envelope that shapes the segment.
 //
-// WithCurveType sets the curveType property and returns the receiver for chaining.
-func (x *EnvelopeSegment) WithCurveType(curveType PHASECurveType) *EnvelopeSegment {
-	x.inner.SetCurveType(raw.PHASECurveType(curveType))
+// WithCurveType sets curveType and returns the receiver so calls can be chained.
+func (x *EnvelopeSegment) WithCurveType(curveType CurveType) *EnvelopeSegment {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurveType:"), curveType)
 	return x
 }
 
-// @property endPoint @abstract The end point of the envelope segment. @discussion The default value is [0.0, 0.0].
-//
-// EndPoint calls the underlying EndPoint.
-func (x *EnvelopeSegment) EndPoint() unsafe.Pointer {
-	return x.inner.EndPoint()
+// The curve type of the envelope segment. The default value is PHASECurveTypeLinear.
+func (x *EnvelopeSegment) CurveType() CurveType {
+	_r := objc.Send[CurveType](objref.IDOf(x), objc.RegisterName("curveType"))
+	return _r
 }
 
-// SetEndPoint calls the underlying SetEndPoint.
-func (x *EnvelopeSegment) SetEndPoint(endPoint unsafe.Pointer) {
-	x.inner.SetEndPoint(endPoint)
-}
-
-// @property curveType @abstract The curve type of the envelope segment. @discussion The default value is PHASECurveTypeLinear.
-//
-// CurveType calls the underlying CurveType.
-func (x *EnvelopeSegment) CurveType() PHASECurveType {
-	return PHASECurveType(x.inner.CurveType())
-}
-
-// SetCurveType calls the underlying SetCurveType.
-func (x *EnvelopeSegment) SetCurveType(curveType PHASECurveType) {
-	x.inner.SetCurveType(raw.PHASECurveType(curveType))
+func (x *EnvelopeSegment) SetCurveType(curveType CurveType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurveType:"), curveType)
 }
 
 // EnvelopeSegmentable is the interface implemented by [EnvelopeSegment], for mocking and DI.
 type EnvelopeSegmentable interface {
-	Unwrap() *raw.PHASEEnvelopeSegment
-	WithCurveType(curveType PHASECurveType) *EnvelopeSegment
-	EndPoint() unsafe.Pointer
-	SetEndPoint(endPoint unsafe.Pointer)
-	CurveType() PHASECurveType
-	SetCurveType(curveType PHASECurveType)
+	obj.Object
+	WithCurveType(curveType CurveType) *EnvelopeSegment
+	CurveType() CurveType
+	SetCurveType(curveType CurveType)
 }
 
 var _ EnvelopeSegmentable = (*EnvelopeSegment)(nil)

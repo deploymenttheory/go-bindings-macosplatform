@@ -5,68 +5,83 @@
 package videotoolbox
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains both input and output parameters that the low-latency super-resolution scaler frame processor needs.
 //
-// LowLatencySuperResolutionScalerParameters wraps [raw.VTLowLatencySuperResolutionScalerParameters] with a fluent Go API.
+// LowLatencySuperResolutionScalerParameters is an idiomatic wrapper over the Objective-C class VTLowLatencySuperResolutionScalerParameters.
 type LowLatencySuperResolutionScalerParameters struct {
-	inner *raw.VTLowLatencySuperResolutionScalerParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VTLowLatencySuperResolutionScalerParameters].
-func (x *LowLatencySuperResolutionScalerParameters) Unwrap() *raw.VTLowLatencySuperResolutionScalerParameters {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LowLatencySuperResolutionScalerParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// LowLatencySuperResolutionScalerParametersFromID adopts an existing object pointer as a LowLatencySuperResolutionScalerParameters (nil for 0).
+// LowLatencySuperResolutionScalerParametersFromID adopts an existing Objective-C object as a LowLatencySuperResolutionScalerParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func LowLatencySuperResolutionScalerParametersFromID(id objc.ID) *LowLatencySuperResolutionScalerParameters {
 	if id == 0 {
 		return nil
 	}
-	return &LowLatencySuperResolutionScalerParameters{inner: raw.VTLowLatencySuperResolutionScalerParametersFromID(id)}
+	x := &LowLatencySuperResolutionScalerParameters{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// lowLatencySuperResolutionScalerParametersAdopt wraps an Objective-C object that this code just created as a
+// LowLatencySuperResolutionScalerParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func lowLatencySuperResolutionScalerParametersAdopt(id objc.ID) *LowLatencySuperResolutionScalerParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &LowLatencySuperResolutionScalerParameters{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LowLatencySuperResolutionScalerParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LowLatencySuperResolutionScalerParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LowLatencySuperResolutionScalerParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new low-latency, super-resolution scaler parameters object.
 //
-// NewLowLatencySuperResolutionScalerParametersWithSourceFrameDestinationFrame creates a new [LowLatencySuperResolutionScalerParameters].
-func NewLowLatencySuperResolutionScalerParametersWithSourceFrameDestinationFrame(sourceFrame *raw.VTFrameProcessorFrame, destinationFrame *raw.VTFrameProcessorFrame) *LowLatencySuperResolutionScalerParameters {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTLowLatencySuperResolutionScalerParameters")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:destinationFrame:"), sourceFrame.Ptr(), destinationFrame.Ptr())
-	return &LowLatencySuperResolutionScalerParameters{inner: raw.VTLowLatencySuperResolutionScalerParametersFromID(_id)}
+// NewLowLatencySuperResolutionScalerParametersWithSourceFrameDestinationFrame creates a new LowLatencySuperResolutionScalerParameters.
+func NewLowLatencySuperResolutionScalerParametersWithSourceFrameDestinationFrame(sourceFrame *FrameProcessorFrame, destinationFrame *FrameProcessorFrame) *LowLatencySuperResolutionScalerParameters {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VTLowLatencySuperResolutionScalerParameters")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:destinationFrame:"), objref.IDOf(sourceFrame), objref.IDOf(destinationFrame))
+	return lowLatencySuperResolutionScalerParametersAdopt(_id)
 }
 
 // Current source frame, which must be non `nil`.
-//
-// SourceFrame calls the underlying SourceFrame.
 func (x *LowLatencySuperResolutionScalerParameters) SourceFrame() *FrameProcessorFrame {
-	_r := x.inner.SourceFrame()
-	if _r == nil {
-		return nil
-	}
-	return &FrameProcessorFrame{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
+	return FrameProcessorFrameFromID(_r)
 }
 
 // Destination frame that contains user-allocated pixel buffer that receives the scaled processor output.
-//
-// DestinationFrame calls the underlying DestinationFrame.
 func (x *LowLatencySuperResolutionScalerParameters) DestinationFrame() *FrameProcessorFrame {
-	_r := x.inner.DestinationFrame()
-	if _r == nil {
-		return nil
-	}
-	return &FrameProcessorFrame{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationFrame"))
+	return FrameProcessorFrameFromID(_r)
 }
 
 // LowLatencySuperResolutionScalerParametersable is the interface implemented by [LowLatencySuperResolutionScalerParameters], for mocking and DI.
 type LowLatencySuperResolutionScalerParametersable interface {
-	Unwrap() *raw.VTLowLatencySuperResolutionScalerParameters
+	obj.Object
 	SourceFrame() *FrameProcessorFrame
 	DestinationFrame() *FrameProcessorFrame
 }

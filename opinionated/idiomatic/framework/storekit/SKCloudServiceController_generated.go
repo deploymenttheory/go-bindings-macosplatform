@@ -6,48 +6,64 @@ package storekit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that determines the current capabilities of a person’s Music library.
 //
-// CloudServiceController wraps [raw.SKCloudServiceController] with a fluent Go API.
+// CloudServiceController is an idiomatic wrapper over the Objective-C class SKCloudServiceController.
 type CloudServiceController struct {
-	inner *raw.SKCloudServiceController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKCloudServiceController].
-func (x *CloudServiceController) Unwrap() *raw.SKCloudServiceController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CloudServiceController) ID() objc.ID { return x.inner.Ptr() }
-
-// CloudServiceControllerFromID adopts an existing object pointer as a CloudServiceController (nil for 0).
+// CloudServiceControllerFromID adopts an existing Objective-C object as a CloudServiceController
+// (nil for 0), retaining it and registering a release finalizer.
 func CloudServiceControllerFromID(id objc.ID) *CloudServiceController {
 	if id == 0 {
 		return nil
 	}
-	return &CloudServiceController{inner: raw.SKCloudServiceControllerFromID(id)}
+	x := &CloudServiceController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCloudServiceController creates a new [CloudServiceController].
+// cloudServiceControllerAdopt wraps an Objective-C object that this code just created as a
+// CloudServiceController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cloudServiceControllerAdopt(id objc.ID) *CloudServiceController {
+	if id == 0 {
+		return nil
+	}
+	x := &CloudServiceController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CloudServiceController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CloudServiceController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CloudServiceController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCloudServiceController creates a new CloudServiceController.
 func NewCloudServiceController() *CloudServiceController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKCloudServiceController")), objc.RegisterName("new"))
-	return &CloudServiceController{inner: raw.SKCloudServiceControllerFromID(_id)}
-}
-
-// Gets the current capabilities associated with the Music library on the device.
-//
-// RequestCapabilitiesWithCompletionHandler calls the underlying RequestCapabilitiesWithCompletionHandler.
-func (x *CloudServiceController) RequestCapabilitiesWithCompletionHandler(completionHandler func(SKCloudServiceCapability, unsafe.Pointer)) {
-	x.inner.RequestCapabilitiesWithCompletionHandler(func(_a0 raw.SKCloudServiceCapability, _a1 unsafe.Pointer) {
-		completionHandler(SKCloudServiceCapability(_a0), _a1)
-	})
+	_id := objc.Send[objc.ID](objc.ID(_class("SKCloudServiceController")), objc.RegisterName("new"))
+	return cloudServiceControllerAdopt(_id)
 }
 
 // Gets the country code for the storefront associated with a customer’s iTunes account.
@@ -59,16 +75,13 @@ func (x *CloudServiceController) RequestStorefrontCountryCode(ctx context.Contex
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RequestStorefrontCountryCodeWithCompletionHandler(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestStorefrontCountryCodeWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -87,16 +100,13 @@ func (x *CloudServiceController) RequestStorefrontIdentifier(ctx context.Context
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RequestStorefrontIdentifierWithCompletionHandler(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestStorefrontIdentifierWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -115,16 +125,13 @@ func (x *CloudServiceController) RequestUserTokenForDeveloperToken(ctx context.C
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RequestUserTokenForDeveloperTokenCompletionHandler(foundation.NSStringStringWithUTF8String(developerToken), func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestUserTokenForDeveloperToken:completionHandler:"), purego.NSString(developerToken), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -136,8 +143,7 @@ func (x *CloudServiceController) RequestUserTokenForDeveloperToken(ctx context.C
 
 // CloudServiceControllerable is the interface implemented by [CloudServiceController], for mocking and DI.
 type CloudServiceControllerable interface {
-	Unwrap() *raw.SKCloudServiceController
-	RequestCapabilitiesWithCompletionHandler(completionHandler func(SKCloudServiceCapability, unsafe.Pointer))
+	obj.Object
 	RequestStorefrontCountryCode(ctx context.Context) (string, error)
 	RequestStorefrontIdentifier(ctx context.Context) (string, error)
 	RequestUserTokenForDeveloperToken(ctx context.Context, developerToken string) (string, error)

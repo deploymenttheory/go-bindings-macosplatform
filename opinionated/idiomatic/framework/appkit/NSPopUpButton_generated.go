@@ -5,1231 +5,1044 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A control for selecting an item from a list.
 //
-// PopUpButton wraps [raw.NSPopUpButton] with a fluent Go API.
+// PopUpButton is an idiomatic wrapper over the Objective-C class NSPopUpButton.
 type PopUpButton struct {
-	inner *raw.NSPopUpButton
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPopUpButton].
-func (x *PopUpButton) Unwrap() *raw.NSPopUpButton { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PopUpButton) ID() objc.ID { return x.inner.Ptr() }
-
-// PopUpButtonFromID adopts an existing object pointer as a PopUpButton (nil for 0).
+// PopUpButtonFromID adopts an existing Objective-C object as a PopUpButton
+// (nil for 0), retaining it and registering a release finalizer.
 func PopUpButtonFromID(id objc.ID) *PopUpButton {
 	if id == 0 {
 		return nil
 	}
-	return &PopUpButton{inner: raw.NSPopUpButtonFromID(id)}
+	x := &PopUpButton{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Returns an NSPopUpButton object initialized to the specified dimensions.
-//
-// NewPopUpButtonWithFramePullsDown creates a new [PopUpButton].
-func NewPopUpButtonWithFramePullsDown(buttonFrame corefoundation.CGRect, flag bool) *PopUpButton {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPopUpButton")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:pullsDown:"), buttonFrame, flag)
-	return &PopUpButton{inner: raw.NSPopUpButtonFromID(_id)}
+// popUpButtonAdopt wraps an Objective-C object that this code just created as a
+// PopUpButton (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func popUpButtonAdopt(id objc.ID) *PopUpButton {
+	if id == 0 {
+		return nil
+	}
+	x := &PopUpButton{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PopUpButton) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PopUpButton) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PopUpButton) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPopUpButton creates a new PopUpButton.
+func NewPopUpButton() *PopUpButton {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPopUpButton")), objc.RegisterName("new"))
+	return popUpButtonAdopt(_id)
 }
 
 // A Boolean value indicating whether the button displays a pull-down or pop-up menu.
 //
-// WithPullsDown sets the pullsDown property and returns the receiver for chaining.
+// WithPullsDown sets pullsDown and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithPullsDown(pullsDown bool) *PopUpButton {
-	x.inner.SetPullsDown(pullsDown)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPullsDown:"), pullsDown)
 	return x
 }
 
 // A Boolean value indicating whether the button enables and disables its items every time a user event occurs.
 //
-// WithAutoenablesItems sets the autoenablesItems property and returns the receiver for chaining.
+// WithAutoenablesItems sets autoenablesItems and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithAutoenablesItems(autoenablesItems bool) *PopUpButton {
-	x.inner.SetAutoenablesItems(autoenablesItems)
-	return x
-}
-
-// The edge of the button on which to display the menu when screen space is constrained.
-//
-// WithPreferredEdge sets the preferredEdge property and returns the receiver for chaining.
-func (x *PopUpButton) WithPreferredEdge(preferredEdge foundation.NSRectEdge) *PopUpButton {
-	x.inner.SetPreferredEdge(preferredEdge)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoenablesItems:"), autoenablesItems)
 	return x
 }
 
 // When usesItemFromMenu is YES, a pull-down button uses the title of the first menu item and hides the first menu item. A pop-up button uses the title of the currently selected menu. The default value is YES.
 //
-// WithUsesItemFromMenu sets the usesItemFromMenu property and returns the receiver for chaining.
+// WithUsesItemFromMenu sets usesItemFromMenu and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithUsesItemFromMenu(usesItemFromMenu bool) *PopUpButton {
-	x.inner.SetUsesItemFromMenu(usesItemFromMenu)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesItemFromMenu:"), usesItemFromMenu)
 	return x
 }
 
 // When the value of this property is YES, the selected menu item’s state is set to NSControlStateValueOn. When the value of this property is NO, the menu item’s state is not changed. When this property changes, the state of the currently selected item is updated appropriately. This property is ignored for pull-down buttons.
 //
-// WithAltersStateOfSelectedItem sets the altersStateOfSelectedItem property and returns the receiver for chaining.
+// WithAltersStateOfSelectedItem sets altersStateOfSelectedItem and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithAltersStateOfSelectedItem(altersStateOfSelectedItem bool) *PopUpButton {
-	x.inner.SetAltersStateOfSelectedItem(altersStateOfSelectedItem)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAltersStateOfSelectedItem:"), altersStateOfSelectedItem)
 	return x
 }
 
 // The title displayed on the button when it’s in an off state.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithTitle(title string) *PopUpButton {
-	x.inner.NSButton.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // The title that the button displays in an off state, as an attributed string.
 //
-// WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
-func (x *PopUpButton) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *PopUpButton {
-	x.inner.NSButton.SetAttributedTitle(attributedTitle)
+// WithAttributedTitle sets attributedTitle and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithAttributedTitle(attributedTitle obj.Object) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	return x
 }
 
 // The title that the button displays when the button is in an on state.
 //
-// WithAlternateTitle sets the alternateTitle property and returns the receiver for chaining.
+// WithAlternateTitle sets alternateTitle and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithAlternateTitle(alternateTitle string) *PopUpButton {
-	x.inner.NSButton.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateTitle:"), purego.NSString(alternateTitle))
 	return x
 }
 
 // The title that the button displays as an attributed string when the button is in an on state.
 //
-// WithAttributedAlternateTitle sets the attributedAlternateTitle property and returns the receiver for chaining.
-func (x *PopUpButton) WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *PopUpButton {
-	x.inner.NSButton.SetAttributedAlternateTitle(attributedAlternateTitle)
+// WithAttributedAlternateTitle sets attributedAlternateTitle and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
 	return x
 }
 
 // A Boolean value that defines whether a button’s action has a destructive effect.
 //
-// WithHasDestructiveAction sets the hasDestructiveAction property and returns the receiver for chaining.
+// WithHasDestructiveAction sets hasDestructiveAction and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithHasDestructiveAction(hasDestructiveAction bool) *PopUpButton {
-	x.inner.NSButton.SetHasDestructiveAction(hasDestructiveAction)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDestructiveAction:"), hasDestructiveAction)
 	return x
 }
 
 // The sound that plays when the user clicks the button.
 //
-// WithSound sets the sound property and returns the receiver for chaining.
+// WithSound sets sound and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithSound(sound *Sound) *PopUpButton {
-	x.inner.NSButton.SetSound(sound.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSound:"), objref.IDOf(sound))
 	return x
 }
 
 // A Boolean value that indicates whether spring loading is enabled for the button.
 //
-// WithSpringLoaded sets the springLoaded property and returns the receiver for chaining.
+// WithSpringLoaded sets springLoaded and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithSpringLoaded(springLoaded bool) *PopUpButton {
-	x.inner.NSButton.SetSpringLoaded(springLoaded)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpringLoaded:"), springLoaded)
 	return x
 }
 
 // An integer value indicating the maximum pressure level for a button of type NSMultiLevelAcceleratorButton.
 //
-// WithMaxAcceleratorLevel sets the maxAcceleratorLevel property and returns the receiver for chaining.
+// WithMaxAcceleratorLevel sets maxAcceleratorLevel and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithMaxAcceleratorLevel(maxAcceleratorLevel int) *PopUpButton {
-	x.inner.NSButton.SetMaxAcceleratorLevel(maxAcceleratorLevel)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAcceleratorLevel:"), maxAcceleratorLevel)
 	return x
 }
 
 // The appearance of the button’s border.
 //
-// WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *PopUpButton) WithBezelStyle(bezelStyle NSBezelStyle) *PopUpButton {
-	x.inner.NSButton.SetBezelStyle(raw.NSBezelStyle(bezelStyle))
+// WithBezelStyle sets bezelStyle and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithBezelStyle(bezelStyle BezelStyle) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
 	return x
 }
 
 // A Boolean value that determines whether the button has a border.
 //
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered sets bordered and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithBordered(bordered bool) *PopUpButton {
-	x.inner.NSButton.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
 // A Boolean value that indicates whether the button is transparent.
 //
-// WithTransparent sets the transparent property and returns the receiver for chaining.
+// WithTransparent sets transparent and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithTransparent(transparent bool) *PopUpButton {
-	x.inner.NSButton.SetTransparent(transparent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransparent:"), transparent)
 	return x
 }
 
 // A Boolean value that determines whether the button displays its border only when the pointer is over it.
 //
-// WithShowsBorderOnlyWhileMouseInside sets the showsBorderOnlyWhileMouseInside property and returns the receiver for chaining.
+// WithShowsBorderOnlyWhileMouseInside sets showsBorderOnlyWhileMouseInside and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *PopUpButton {
-	x.inner.NSButton.SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsBorderOnlyWhileMouseInside:"), showsBorderOnlyWhileMouseInside)
 	return x
 }
 
 // The color of the button’s bezel, in appearances that support it.
 //
-// WithBezelColor sets the bezelColor property and returns the receiver for chaining.
+// WithBezelColor sets bezelColor and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithBezelColor(bezelColor *Color) *PopUpButton {
-	x.inner.NSButton.SetBezelColor(bezelColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelColor:"), objref.IDOf(bezelColor))
 	return x
 }
 
 // A tint color to use for the template image and text content.
 //
-// WithContentTintColor sets the contentTintColor property and returns the receiver for chaining.
+// WithContentTintColor sets contentTintColor and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithContentTintColor(contentTintColor *Color) *PopUpButton {
-	x.inner.NSButton.SetContentTintColor(contentTintColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentTintColor:"), objref.IDOf(contentTintColor))
 	return x
 }
 
 // The tint prominence of the button. Use tint prominence to gently suggest a hierarchy when multiple buttons perform similar actions. A button with primary tint prominence suggests the most preferred option, while secondary prominence indicates a reasonable alternative. See NSTintProminence for a list of possible values.
 //
-// WithTintProminence sets the tintProminence property and returns the receiver for chaining.
-func (x *PopUpButton) WithTintProminence(tintProminence NSTintProminence) *PopUpButton {
-	x.inner.NSButton.SetTintProminence(raw.NSTintProminence(tintProminence))
+// WithTintProminence sets tintProminence and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithTintProminence(tintProminence TintProminence) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTintProminence:"), tintProminence)
 	return x
 }
 
 // The image that appears on the button when it’s in an off state, or nil if there is no such image.
 //
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage sets image and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithImage(image *Image) *PopUpButton {
-	x.inner.NSButton.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
 // An alternate image that appears on the button when the button is in an on state.
 //
-// WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
+// WithAlternateImage sets alternateImage and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithAlternateImage(alternateImage *Image) *PopUpButton {
-	x.inner.NSButton.SetAlternateImage(alternateImage.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
 	return x
 }
 
 // The position of the button’s image relative to its title.
 //
-// WithImagePosition sets the imagePosition property and returns the receiver for chaining.
-func (x *PopUpButton) WithImagePosition(imagePosition NSCellImagePosition) *PopUpButton {
-	x.inner.NSButton.SetImagePosition(raw.NSCellImagePosition(imagePosition))
+// WithImagePosition sets imagePosition and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithImagePosition(imagePosition CellImagePosition) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImagePosition:"), imagePosition)
 	return x
 }
 
 // The scaling mode applied to make the cell’s image fit the frame of the image view.
 //
-// WithImageScaling sets the imageScaling property and returns the receiver for chaining.
-func (x *PopUpButton) WithImageScaling(imageScaling NSImageScaling) *PopUpButton {
-	x.inner.NSButton.SetImageScaling(raw.NSImageScaling(imageScaling))
+// WithImageScaling sets imageScaling and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithImageScaling(imageScaling ImageScaling) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageScaling:"), imageScaling)
 	return x
 }
 
 // A Boolean value that determines how the button’s image and title are positioned together within the button bezel.
 //
-// WithImageHugsTitle sets the imageHugsTitle property and returns the receiver for chaining.
+// WithImageHugsTitle sets imageHugsTitle and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithImageHugsTitle(imageHugsTitle bool) *PopUpButton {
-	x.inner.NSButton.SetImageHugsTitle(imageHugsTitle)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageHugsTitle:"), imageHugsTitle)
 	return x
 }
 
 // The combination of point size, weight, and scale to use when sizing and displaying symbol images.
 //
-// WithSymbolConfiguration sets the symbolConfiguration property and returns the receiver for chaining.
+// WithSymbolConfiguration sets symbolConfiguration and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *PopUpButton {
-	x.inner.NSButton.SetSymbolConfiguration(symbolConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSymbolConfiguration:"), objref.IDOf(symbolConfiguration))
 	return x
 }
 
 // The button’s state.
 //
-// WithState sets the state property and returns the receiver for chaining.
+// WithState sets state and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithState(state int) *PopUpButton {
-	x.inner.NSButton.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
 // A Boolean value that indicates whether the button allows a mixed state.
 //
-// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+// WithAllowsMixedState sets allowsMixedState and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithAllowsMixedState(allowsMixedState bool) *PopUpButton {
-	x.inner.NSButton.SetAllowsMixedState(allowsMixedState)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
 // The key-equivalent character of the button.
 //
-// WithKeyEquivalent sets the keyEquivalent property and returns the receiver for chaining.
+// WithKeyEquivalent sets keyEquivalent and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithKeyEquivalent(keyEquivalent string) *PopUpButton {
-	x.inner.NSButton.SetKeyEquivalent(foundation.NSStringStringWithUTF8String(keyEquivalent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalent:"), purego.NSString(keyEquivalent))
 	return x
 }
 
 // The mask specifying the modifier keys for the button’s key equivalent.
 //
-// WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
-func (x *PopUpButton) WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *PopUpButton {
-	x.inner.NSButton.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))
+// WithKeyEquivalentModifierMask sets keyEquivalentModifierMask and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalentModifierMask:"), keyEquivalentModifierMask)
 	return x
 }
 
-// WithBorderShape sets the borderShape property and returns the receiver for chaining.
-func (x *PopUpButton) WithBorderShape(borderShape NSControlBorderShape) *PopUpButton {
-	x.inner.NSButton.SetBorderShape(raw.NSControlBorderShape(borderShape))
+// WithBorderShape sets borderShape and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithBorderShape(borderShape ControlBorderShape) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderShape:"), borderShape)
 	return x
 }
 
 // The target object that receives action messages from the cell.
 //
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *PopUpButton) WithTarget(target objc.ID) *PopUpButton {
-	x.inner.NSButton.NSControl.SetTarget(target)
-	return x
-}
-
-// The default action-message selector associated with the control.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *PopUpButton) WithAction(action objc.SEL) *PopUpButton {
-	x.inner.NSButton.NSControl.SetAction(action)
+// WithTarget sets target and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithTarget(target obj.Object) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
 // The tag identifying the receiver (not the tag of the receiver’s cell).
 //
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag sets tag and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithTag(tag int) *PopUpButton {
-	x.inner.NSButton.NSControl.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
 // A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 //
-// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+// WithIgnoresMultiClick sets ignoresMultiClick and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithIgnoresMultiClick(ignoresMultiClick bool) *PopUpButton {
-	x.inner.NSButton.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
 	return x
 }
 
 // A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 //
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous sets continuous and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithContinuous(continuous bool) *PopUpButton {
-	x.inner.NSButton.NSControl.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
 // A Boolean value that indicates whether the receiver reacts to mouse events.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithEnabled(enabled bool) *PopUpButton {
-	x.inner.NSButton.NSControl.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // A Boolean value indicating whether the receiver refuses the first responder role.
 //
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithRefusesFirstResponder(refusesFirstResponder bool) *PopUpButton {
-	x.inner.NSButton.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
 // A Boolean value that indicates whether the cell is highlighted.
 //
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithHighlighted(highlighted bool) *PopUpButton {
-	x.inner.NSButton.NSControl.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
 // The size of the control.
 //
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *PopUpButton) WithControlSize(controlSize NSControlSize) *PopUpButton {
-	x.inner.NSButton.NSControl.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithControlSize(controlSize ControlSize) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
 // The receiver’s formatter.
 //
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *PopUpButton) WithFormatter(formatter *foundation.NSFormatter) *PopUpButton {
-	x.inner.NSButton.NSControl.SetFormatter(formatter)
+// WithFormatter sets formatter and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithFormatter(formatter obj.Object) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
 // The value of the receiver’s cell as an Objective-C object.
 //
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *PopUpButton) WithObjectValue(objectValue objc.ID) *PopUpButton {
-	x.inner.NSButton.NSControl.SetObjectValue(objectValue)
+// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithObjectValue(objectValue obj.Object) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
 // The value of the receiver’s cell as an NSString object.
 //
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue sets stringValue and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithStringValue(stringValue string) *PopUpButton {
-	x.inner.NSButton.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
 // The value of the receiver’s cell as an attributed string.
 //
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *PopUpButton) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *PopUpButton {
-	x.inner.NSButton.NSControl.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithAttributedStringValue(attributedStringValue obj.Object) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
 // The value of the receiver’s cell as an integer.
 //
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue sets intValue and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithIntValue(intValue int) *PopUpButton {
-	x.inner.NSButton.NSControl.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
 // The value of the receiver’s cell as an integer value.
 //
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithIntegerValue(integerValue int) *PopUpButton {
-	x.inner.NSButton.NSControl.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
 // The value of the receiver’s cell as a single-precision floating-point number.
 //
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithFloatValue(floatValue float32) *PopUpButton {
-	x.inner.NSButton.NSControl.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
 // The value of the receiver’s cell as a double-precision floating-point number.
 //
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithDoubleValue(doubleValue float64) *PopUpButton {
-	x.inner.NSButton.NSControl.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
 // The font used to draw text in the receiver’s cell.
 //
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont sets font and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithFont(font *Font) *PopUpButton {
-	x.inner.NSButton.NSControl.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
 // A Boolean value that indicates whether the text in the control’s cell uses single line mode.
 //
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithUsesSingleLineMode(usesSingleLineMode bool) *PopUpButton {
-	x.inner.NSButton.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
 // The line break mode to use for text in the control’s cell.
 //
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *PopUpButton) WithLineBreakMode(lineBreakMode NSLineBreakMode) *PopUpButton {
-	x.inner.NSButton.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithLineBreakMode(lineBreakMode LineBreakMode) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
 // The alignment mode of the text in the receiver’s cell.
 //
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *PopUpButton) WithAlignment(alignment NSTextAlignment) *PopUpButton {
-	x.inner.NSButton.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment sets alignment and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithAlignment(alignment TextAlignment) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
 // The initial writing direction used to determine the actual writing direction for text.
 //
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *PopUpButton) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *PopUpButton {
-	x.inner.NSButton.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithBaseWritingDirection(baseWritingDirection WritingDirection) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
 // A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 //
-// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+// WithAllowsExpansionToolTips sets allowsExpansionToolTips and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PopUpButton {
-	x.inner.NSButton.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
 	return x
 }
 
-// WithCell sets the cell property and returns the receiver for chaining.
+// WithCell sets cell and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithCell(cell CellProvider) *PopUpButton {
-	x.inner.NSButton.NSControl.SetCell(cell.asCell())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return x
 }
 
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
+// WithSubviews sets the collection and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithSubviews(items ...ViewProvider) *PopUpButton {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSButton.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSButton.NSControl.NSView.SetSubviews(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithHidden(hidden bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+// WithPostsFrameChangedNotifications sets postsFrameChangedNotifications and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+// WithAutoresizesSubviews sets autoresizesSubviews and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithAutoresizesSubviews(autoresizesSubviews bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *PopUpButton) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
+// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
-func (x *PopUpButton) WithFrame(frame corefoundation.CGRect) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetFrame(frame)
-	return x
-}
-
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+// WithFrameRotation sets frameRotation and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithFrameRotation(frameRotation float64) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetFrameRotation(frameRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+// WithFrameCenterRotation sets frameCenterRotation and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithFrameCenterRotation(frameCenterRotation float64) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+// WithBoundsRotation sets boundsRotation and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithBoundsRotation(boundsRotation float64) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *PopUpButton) WithBounds(bounds corefoundation.CGRect) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetBounds(bounds)
-	return x
-}
-
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+// WithCanDrawConcurrently sets canDrawConcurrently and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithCanDrawConcurrently(canDrawConcurrently bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
 // A Boolean value that determines whether the view needs to be redrawn before being displayed.
 //
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+// WithNeedsDisplay sets needsDisplay and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithNeedsDisplay(needsDisplay bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+// WithAcceptsTouchEvents sets acceptsTouchEvents and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithAcceptsTouchEvents(acceptsTouchEvents bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+// WithWantsRestingTouches sets wantsRestingTouches and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithWantsRestingTouches(wantsRestingTouches bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *PopUpButton) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
+// WithLayerContentsRedrawPolicy sets layerContentsRedrawPolicy and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *PopUpButton) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
+// WithLayerContentsPlacement sets layerContentsPlacement and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+// WithWantsLayer sets wantsLayer and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithWantsLayer(wantsLayer bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetWantsLayer(wantsLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *PopUpButton) WithLayer(layer *quartzcore.CALayer) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetLayer(layer)
+// WithLayer sets layer and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithLayer(layer obj.Object) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+// WithCanDrawSubviewsIntoLayer sets canDrawSubviewsIntoLayer and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+// WithNeedsLayout sets needsLayout and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithNeedsLayout(needsLayout bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetNeedsLayout(needsLayout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithAlphaValue(alphaValue float64) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetAlphaValue(alphaValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+// WithLayerUsesCoreImageFilters sets layerUsesCoreImageFilters and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *PopUpButton) WithBackgroundFilters(items ...*coreimage.CIFilter) *PopUpButton {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSButton.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSButton.NSControl.NSView.SetBackgroundFilters(_arr)
+// WithBackgroundFilters sets the collection and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithBackgroundFilters(items ...obj.Object) *PopUpButton {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *PopUpButton) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetCompositingFilter(compositingFilter)
+// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithCompositingFilter(compositingFilter obj.Object) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *PopUpButton) WithContentFilters(items ...*coreimage.CIFilter) *PopUpButton {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSButton.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSButton.NSControl.NSView.SetContentFilters(_arr)
+// WithContentFilters sets the collection and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithContentFilters(items ...obj.Object) *PopUpButton {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets the shadow property and returns the receiver for chaining.
+// WithShadow sets shadow and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithShadow(shadow *Shadow) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetShadow(shadow.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+// WithClipsToBounds sets clipsToBounds and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithClipsToBounds(clipsToBounds bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+// WithPostsBoundsChangedNotifications sets postsBoundsChangedNotifications and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip sets toolTip and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithToolTip(toolTip string) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *PopUpButton) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
-func (x *PopUpButton) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
-	return x
-}
-
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+// WithNextKeyView sets nextKeyView and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithNextKeyView(nextKeyView ViewProvider) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *PopUpButton) WithFocusRingType(focusRingType NSFocusRingType) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithFocusRingType(focusRingType FocusRingType) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+// WithGestureRecognizers sets the collection and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithGestureRecognizers(items ...GestureRecognizerProvider) *PopUpButton {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSButton.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSButton.NSControl.NSView.SetGestureRecognizers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *PopUpButton) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
-	return x
-}
-
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
-func (x *PopUpButton) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+// WithAllowedTouchTypes sets allowedTouchTypes and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
 // When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+// WithPrefersCompactControlSizeMetrics sets prefersCompactControlSizeMetrics and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+// WithWritingToolsCoordinator sets writingToolsCoordinator and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+// WithNeedsUpdateConstraints sets needsUpdateConstraints and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+// WithTranslatesAutoresizingMaskIntoConstraints sets translatesAutoresizingMaskIntoConstraints and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithHorizontalContentSizeConstraintActive sets horizontalContentSizeConstraintActive and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithVerticalContentSizeConstraintActive sets verticalContentSizeConstraintActive and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+// WithWantsBestResolutionOpenGLSurface sets wantsBestResolutionOpenGLSurface and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets wantsExtendedDynamicRangeOpenGLSurface and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+// WithPressureConfiguration sets pressureConfiguration and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
 // The next responder after this one, or nil if it has none.
 //
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithNextResponder(nextResponder ResponderProvider) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
 // Returns the responder’s menu.
 //
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu sets menu and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithMenu(menu *Menu) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
 // An object encapsulating a user activity supported by this responder.
 //
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *PopUpButton) WithUserActivity(userActivity *foundation.NSUserActivity) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+func (x *PopUpButton) WithUserActivity(userActivity obj.Object) *PopUpButton {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
 // The NSTouchBar object associated with the responder.
 //
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
 func (x *PopUpButton) WithTouchBar(touchBar *TouchBar) *PopUpButton {
-	x.inner.NSButton.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
 // Adds an item with the specified title to the end of the menu.
-//
-// AddItemWithTitle calls the underlying AddItemWithTitle.
 func (x *PopUpButton) AddItemWithTitle(title string) {
-	x.inner.AddItemWithTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addItemWithTitle:"), purego.NSString(title))
 }
 
 // Adds multiple items to the end of the menu.
-//
-// AddItemsWithTitles calls the underlying AddItemsWithTitles.
-func (x *PopUpButton) AddItemsWithTitles(itemTitles *foundation.NSArray[*foundation.NSString]) {
-	x.inner.AddItemsWithTitles(itemTitles)
+func (x *PopUpButton) AddItemsWithTitles(itemTitles []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addItemsWithTitles:"), purego.SliceToNSArray(itemTitles, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // Inserts an item at the specified position in the menu.
-//
-// InsertItemWithTitleAtIndex calls the underlying InsertItemWithTitleAtIndex.
 func (x *PopUpButton) InsertItemWithTitleAtIndex(title string, index int) {
-	x.inner.InsertItemWithTitleAtIndex(foundation.NSStringStringWithUTF8String(title), index)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertItemWithTitle:atIndex:"), purego.NSString(title), index)
 }
 
 // Removes the item with the specified title from the menu.
-//
-// RemoveItemWithTitle calls the underlying RemoveItemWithTitle.
 func (x *PopUpButton) RemoveItemWithTitle(title string) {
-	x.inner.RemoveItemWithTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeItemWithTitle:"), purego.NSString(title))
 }
 
 // Removes the item at the specified index.
-//
-// RemoveItemAtIndex calls the underlying RemoveItemAtIndex.
 func (x *PopUpButton) RemoveItemAtIndex(index int) {
-	x.inner.RemoveItemAtIndex(index)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeItemAtIndex:"), index)
 }
 
 // Removes all items in the receiver’s item menu.
-//
-// RemoveAllItems calls the underlying RemoveAllItems.
 func (x *PopUpButton) RemoveAllItems() {
-	x.inner.RemoveAllItems()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllItems"))
 }
 
 // Returns the index of the specified menu item.
-//
-// IndexOfItem calls the underlying IndexOfItem.
-func (x *PopUpButton) IndexOfItem(item *raw.NSMenuItem) int {
-	return x.inner.IndexOfItem(item)
+func (x *PopUpButton) IndexOfItem(item *MenuItem) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfItem:"), objref.IDOf(item))
+	return _r
 }
 
 // Returns the index of the item with the specified title.
-//
-// IndexOfItemWithTitle calls the underlying IndexOfItemWithTitle.
 func (x *PopUpButton) IndexOfItemWithTitle(title string) int {
-	return x.inner.IndexOfItemWithTitle(foundation.NSStringStringWithUTF8String(title))
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfItemWithTitle:"), purego.NSString(title))
+	return _r
 }
 
 // Returns the index of the menu item with the specified tag.
-//
-// IndexOfItemWithTag calls the underlying IndexOfItemWithTag.
 func (x *PopUpButton) IndexOfItemWithTag(tag int) int {
-	return x.inner.IndexOfItemWithTag(tag)
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfItemWithTag:"), tag)
+	return _r
 }
 
 // Returns the index of the menu item that holds the specified represented object.
-//
-// IndexOfItemWithRepresentedObject calls the underlying IndexOfItemWithRepresentedObject.
-func (x *PopUpButton) IndexOfItemWithRepresentedObject(obj objc.ID) int {
-	return x.inner.IndexOfItemWithRepresentedObject(obj)
-}
-
-// Returns the index of the menu item with the specified target and action.
-//
-// IndexOfItemWithTargetAndAction calls the underlying IndexOfItemWithTargetAndAction.
-func (x *PopUpButton) IndexOfItemWithTargetAndAction(target objc.ID, actionSelector objc.SEL) int {
-	return x.inner.IndexOfItemWithTargetAndAction(target, actionSelector)
+func (x *PopUpButton) IndexOfItemWithRepresentedObject(obj_ obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfItemWithRepresentedObject:"), objref.IDOf(obj_))
+	return _r
 }
 
 // Returns the menu item at the specified index.
-//
-// ItemAtIndex calls the underlying ItemAtIndex.
 func (x *PopUpButton) ItemAtIndex(index int) *MenuItem {
-	_r := x.inner.ItemAtIndex(index)
-	if _r == nil {
-		return nil
-	}
-	return &MenuItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemAtIndex:"), index)
+	return MenuItemFromID(_r)
 }
 
 // Returns the menu item with the specified title.
-//
-// ItemWithTitle calls the underlying ItemWithTitle.
 func (x *PopUpButton) ItemWithTitle(title string) *MenuItem {
-	_r := x.inner.ItemWithTitle(foundation.NSStringStringWithUTF8String(title))
-	if _r == nil {
-		return nil
-	}
-	return &MenuItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemWithTitle:"), purego.NSString(title))
+	return MenuItemFromID(_r)
 }
 
 // Selects the specified menu item.
-//
-// SelectItem calls the underlying SelectItem.
-func (x *PopUpButton) SelectItem(item *raw.NSMenuItem) {
-	x.inner.SelectItem(item)
+func (x *PopUpButton) SelectItem(item *MenuItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectItem:"), objref.IDOf(item))
 }
 
 // Selects the item in the menu at the specified index.
-//
-// SelectItemAtIndex calls the underlying SelectItemAtIndex.
 func (x *PopUpButton) SelectItemAtIndex(index int) {
-	x.inner.SelectItemAtIndex(index)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectItemAtIndex:"), index)
 }
 
 // Selects the item with the specified title.
-//
-// SelectItemWithTitle calls the underlying SelectItemWithTitle.
 func (x *PopUpButton) SelectItemWithTitle(title string) {
-	x.inner.SelectItemWithTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectItemWithTitle:"), purego.NSString(title))
 }
 
 // Selects the menu item with the specified tag.
-//
-// SelectItemWithTag calls the underlying SelectItemWithTag.
 func (x *PopUpButton) SelectItemWithTag(tag int) bool {
-	return x.inner.SelectItemWithTag(tag)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("selectItemWithTag:"), tag)
+	return _r
 }
 
 // Ensures that the item being displayed by the receiver agrees with the selected item.
-//
-// SynchronizeTitleAndSelectedItem calls the underlying SynchronizeTitleAndSelectedItem.
 func (x *PopUpButton) SynchronizeTitleAndSelectedItem() {
-	x.inner.SynchronizeTitleAndSelectedItem()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("synchronizeTitleAndSelectedItem"))
 }
 
 // Returns the title of the item at the specified index.
-//
-// ItemTitleAtIndex calls the underlying ItemTitleAtIndex.
 func (x *PopUpButton) ItemTitleAtIndex(index int) string {
-	_r := x.inner.ItemTitleAtIndex(index)
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemTitleAtIndex:"), index)
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // When the value of this property is `YES` the button adopts 'pull-down' behavior, displaying static button contents and presenting its menu at the edge of the button. When the value of this property is `NO` the button behaves as a popup, displaying the currently-selected menu item and presenting its menu above the button, positioning the selected menu item to match the button's contents.
-//
-// PullsDown calls the underlying PullsDown.
 func (x *PopUpButton) PullsDown() bool {
-	return x.inner.PullsDown()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pullsDown"))
+	return _r
 }
 
 // When the value of this property is `YES` the button adopts 'pull-down' behavior, displaying static button contents and presenting its menu at the edge of the button. When the value of this property is `NO` the button behaves as a popup, displaying the currently-selected menu item and presenting its menu above the button, positioning the selected menu item to match the button's contents.
-//
-// SetPullsDown calls the underlying SetPullsDown.
 func (x *PopUpButton) SetPullsDown(pullsDown bool) {
-	x.inner.SetPullsDown(pullsDown)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPullsDown:"), pullsDown)
 }
 
 // When the value of this property is `YES`, the popup button automatically enables and disables its menu items according to the `NSMenuValidation` protocol prior to user interaction.
-//
-// AutoenablesItems calls the underlying AutoenablesItems.
 func (x *PopUpButton) AutoenablesItems() bool {
-	return x.inner.AutoenablesItems()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autoenablesItems"))
+	return _r
 }
 
 // When the value of this property is `YES`, the popup button automatically enables and disables its menu items according to the `NSMenuValidation` protocol prior to user interaction.
-//
-// SetAutoenablesItems calls the underlying SetAutoenablesItems.
 func (x *PopUpButton) SetAutoenablesItems(autoenablesItems bool) {
-	x.inner.SetAutoenablesItems(autoenablesItems)
-}
-
-// For pull-down buttons and for popups under severe screen position restrictions, this property specifies the edge of the control that the menu should present from.
-//
-// PreferredEdge calls the underlying PreferredEdge.
-func (x *PopUpButton) PreferredEdge() foundation.NSRectEdge {
-	return x.inner.PreferredEdge()
-}
-
-// For pull-down buttons and for popups under severe screen position restrictions, this property specifies the edge of the control that the menu should present from.
-//
-// SetPreferredEdge calls the underlying SetPreferredEdge.
-func (x *PopUpButton) SetPreferredEdge(preferredEdge foundation.NSRectEdge) {
-	x.inner.SetPreferredEdge(preferredEdge)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoenablesItems:"), autoenablesItems)
 }
 
 // When `usesItemFromMenu` is `YES`, a pull-down button uses the title of the first menu item and hides the first menu item. A pop-up button uses the title of the currently selected menu. The default value is `YES`.
-//
-// UsesItemFromMenu calls the underlying UsesItemFromMenu.
 func (x *PopUpButton) UsesItemFromMenu() bool {
-	return x.inner.UsesItemFromMenu()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesItemFromMenu"))
+	return _r
 }
 
 // When `usesItemFromMenu` is `YES`, a pull-down button uses the title of the first menu item and hides the first menu item. A pop-up button uses the title of the currently selected menu. The default value is `YES`.
-//
-// SetUsesItemFromMenu calls the underlying SetUsesItemFromMenu.
 func (x *PopUpButton) SetUsesItemFromMenu(usesItemFromMenu bool) {
-	x.inner.SetUsesItemFromMenu(usesItemFromMenu)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesItemFromMenu:"), usesItemFromMenu)
 }
 
 // When the value of this property is `YES`, the selected menu item's `state` is set to `NSControlStateValueOn`. When the value of this property is `NO`, the menu item's `state` is not changed. When this property changes, the `state` of the currently selected item is updated appropriately. This property is ignored for pull-down buttons.
-//
-// AltersStateOfSelectedItem calls the underlying AltersStateOfSelectedItem.
 func (x *PopUpButton) AltersStateOfSelectedItem() bool {
-	return x.inner.AltersStateOfSelectedItem()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("altersStateOfSelectedItem"))
+	return _r
 }
 
 // When the value of this property is `YES`, the selected menu item's `state` is set to `NSControlStateValueOn`. When the value of this property is `NO`, the menu item's `state` is not changed. When this property changes, the `state` of the currently selected item is updated appropriately. This property is ignored for pull-down buttons.
-//
-// SetAltersStateOfSelectedItem calls the underlying SetAltersStateOfSelectedItem.
 func (x *PopUpButton) SetAltersStateOfSelectedItem(altersStateOfSelectedItem bool) {
-	x.inner.SetAltersStateOfSelectedItem(altersStateOfSelectedItem)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAltersStateOfSelectedItem:"), altersStateOfSelectedItem)
 }
 
 // ItemArray returns the collection as a Go slice.
 func (x *PopUpButton) ItemArray() []*MenuItem {
-	arr := x.inner.ItemArray()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MenuItem {
-		return &MenuItem{inner: raw.NSMenuItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemArray"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MenuItem { return MenuItemFromID(_id) })
 }
 
-// NumberOfItems calls the underlying NumberOfItems.
 func (x *PopUpButton) NumberOfItems() int {
-	return x.inner.NumberOfItems()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfItems"))
+	return _r
 }
 
-// LastItem calls the underlying LastItem.
 func (x *PopUpButton) LastItem() *MenuItem {
-	_r := x.inner.LastItem()
-	if _r == nil {
-		return nil
-	}
-	return &MenuItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastItem"))
+	return MenuItemFromID(_r)
 }
 
-// SelectedItem calls the underlying SelectedItem.
 func (x *PopUpButton) SelectedItem() *MenuItem {
-	_r := x.inner.SelectedItem()
-	if _r == nil {
-		return nil
-	}
-	return &MenuItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedItem"))
+	return MenuItemFromID(_r)
 }
 
-// IndexOfSelectedItem calls the underlying IndexOfSelectedItem.
 func (x *PopUpButton) IndexOfSelectedItem() int {
-	return x.inner.IndexOfSelectedItem()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfSelectedItem"))
+	return _r
 }
 
 // ItemTitles returns the collection as a Go slice.
 func (x *PopUpButton) ItemTitles() []string {
-	arr := x.inner.ItemTitles()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemTitles"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// TitleOfSelectedItem calls the underlying TitleOfSelectedItem.
 func (x *PopUpButton) TitleOfSelectedItem() string {
-	_r := x.inner.TitleOfSelectedItem()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("titleOfSelectedItem"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-func (x *PopUpButton) asButton() *raw.NSButton { return &x.inner.NSButton }
-
-func (x *PopUpButton) asControl() *raw.NSControl { return &x.inner.NSButton.NSControl }
-
-func (x *PopUpButton) asView() *raw.NSView { return &x.inner.NSButton.NSControl.NSView }
-
-func (x *PopUpButton) asResponder() *raw.NSResponder {
-	return &x.inner.NSButton.NSControl.NSView.NSResponder
+	return purego.GoString(_r)
 }
 
 // PopUpButtonable is the interface implemented by [PopUpButton], for mocking and DI.
 type PopUpButtonable interface {
-	Unwrap() *raw.NSPopUpButton
+	obj.Object
 	WithPullsDown(pullsDown bool) *PopUpButton
 	WithAutoenablesItems(autoenablesItems bool) *PopUpButton
-	WithPreferredEdge(preferredEdge foundation.NSRectEdge) *PopUpButton
 	WithUsesItemFromMenu(usesItemFromMenu bool) *PopUpButton
 	WithAltersStateOfSelectedItem(altersStateOfSelectedItem bool) *PopUpButton
 	WithTitle(title string) *PopUpButton
-	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *PopUpButton
+	WithAttributedTitle(attributedTitle obj.Object) *PopUpButton
 	WithAlternateTitle(alternateTitle string) *PopUpButton
-	WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *PopUpButton
+	WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *PopUpButton
 	WithHasDestructiveAction(hasDestructiveAction bool) *PopUpButton
 	WithSound(sound *Sound) *PopUpButton
 	WithSpringLoaded(springLoaded bool) *PopUpButton
 	WithMaxAcceleratorLevel(maxAcceleratorLevel int) *PopUpButton
-	WithBezelStyle(bezelStyle NSBezelStyle) *PopUpButton
+	WithBezelStyle(bezelStyle BezelStyle) *PopUpButton
 	WithBordered(bordered bool) *PopUpButton
 	WithTransparent(transparent bool) *PopUpButton
 	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *PopUpButton
 	WithBezelColor(bezelColor *Color) *PopUpButton
 	WithContentTintColor(contentTintColor *Color) *PopUpButton
-	WithTintProminence(tintProminence NSTintProminence) *PopUpButton
+	WithTintProminence(tintProminence TintProminence) *PopUpButton
 	WithImage(image *Image) *PopUpButton
 	WithAlternateImage(alternateImage *Image) *PopUpButton
-	WithImagePosition(imagePosition NSCellImagePosition) *PopUpButton
-	WithImageScaling(imageScaling NSImageScaling) *PopUpButton
+	WithImagePosition(imagePosition CellImagePosition) *PopUpButton
+	WithImageScaling(imageScaling ImageScaling) *PopUpButton
 	WithImageHugsTitle(imageHugsTitle bool) *PopUpButton
 	WithSymbolConfiguration(symbolConfiguration *ImageSymbolConfiguration) *PopUpButton
 	WithState(state int) *PopUpButton
 	WithAllowsMixedState(allowsMixedState bool) *PopUpButton
 	WithKeyEquivalent(keyEquivalent string) *PopUpButton
-	WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *PopUpButton
-	WithBorderShape(borderShape NSControlBorderShape) *PopUpButton
-	WithTarget(target objc.ID) *PopUpButton
-	WithAction(action objc.SEL) *PopUpButton
+	WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) *PopUpButton
+	WithBorderShape(borderShape ControlBorderShape) *PopUpButton
+	WithTarget(target obj.Object) *PopUpButton
 	WithTag(tag int) *PopUpButton
 	WithIgnoresMultiClick(ignoresMultiClick bool) *PopUpButton
 	WithContinuous(continuous bool) *PopUpButton
 	WithEnabled(enabled bool) *PopUpButton
 	WithRefusesFirstResponder(refusesFirstResponder bool) *PopUpButton
 	WithHighlighted(highlighted bool) *PopUpButton
-	WithControlSize(controlSize NSControlSize) *PopUpButton
-	WithFormatter(formatter *foundation.NSFormatter) *PopUpButton
-	WithObjectValue(objectValue objc.ID) *PopUpButton
+	WithControlSize(controlSize ControlSize) *PopUpButton
+	WithFormatter(formatter obj.Object) *PopUpButton
+	WithObjectValue(objectValue obj.Object) *PopUpButton
 	WithStringValue(stringValue string) *PopUpButton
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *PopUpButton
+	WithAttributedStringValue(attributedStringValue obj.Object) *PopUpButton
 	WithIntValue(intValue int) *PopUpButton
 	WithIntegerValue(integerValue int) *PopUpButton
 	WithFloatValue(floatValue float32) *PopUpButton
 	WithDoubleValue(doubleValue float64) *PopUpButton
 	WithFont(font *Font) *PopUpButton
 	WithUsesSingleLineMode(usesSingleLineMode bool) *PopUpButton
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *PopUpButton
-	WithAlignment(alignment NSTextAlignment) *PopUpButton
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *PopUpButton
+	WithLineBreakMode(lineBreakMode LineBreakMode) *PopUpButton
+	WithAlignment(alignment TextAlignment) *PopUpButton
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *PopUpButton
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PopUpButton
 	WithCell(cell CellProvider) *PopUpButton
 	WithSubviews(items ...ViewProvider) *PopUpButton
 	WithHidden(hidden bool) *PopUpButton
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PopUpButton
 	WithAutoresizesSubviews(autoresizesSubviews bool) *PopUpButton
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *PopUpButton
-	WithFrame(frame corefoundation.CGRect) *PopUpButton
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *PopUpButton
 	WithFrameRotation(frameRotation float64) *PopUpButton
 	WithFrameCenterRotation(frameCenterRotation float64) *PopUpButton
 	WithBoundsRotation(boundsRotation float64) *PopUpButton
-	WithBounds(bounds corefoundation.CGRect) *PopUpButton
 	WithCanDrawConcurrently(canDrawConcurrently bool) *PopUpButton
 	WithNeedsDisplay(needsDisplay bool) *PopUpButton
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *PopUpButton
 	WithWantsRestingTouches(wantsRestingTouches bool) *PopUpButton
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *PopUpButton
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *PopUpButton
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *PopUpButton
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *PopUpButton
 	WithWantsLayer(wantsLayer bool) *PopUpButton
-	WithLayer(layer *quartzcore.CALayer) *PopUpButton
+	WithLayer(layer obj.Object) *PopUpButton
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PopUpButton
 	WithNeedsLayout(needsLayout bool) *PopUpButton
 	WithAlphaValue(alphaValue float64) *PopUpButton
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *PopUpButton
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *PopUpButton
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *PopUpButton
-	WithContentFilters(items ...*coreimage.CIFilter) *PopUpButton
+	WithBackgroundFilters(items ...obj.Object) *PopUpButton
+	WithCompositingFilter(compositingFilter obj.Object) *PopUpButton
+	WithContentFilters(items ...obj.Object) *PopUpButton
 	WithShadow(shadow *Shadow) *PopUpButton
 	WithClipsToBounds(clipsToBounds bool) *PopUpButton
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PopUpButton
 	WithToolTip(toolTip string) *PopUpButton
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *PopUpButton
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PopUpButton
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PopUpButton
 	WithNextKeyView(nextKeyView ViewProvider) *PopUpButton
-	WithFocusRingType(focusRingType NSFocusRingType) *PopUpButton
+	WithFocusRingType(focusRingType FocusRingType) *PopUpButton
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *PopUpButton
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *PopUpButton
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PopUpButton
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PopUpButton
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PopUpButton
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PopUpButton
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PopUpButton
@@ -1241,22 +1054,21 @@ type PopUpButtonable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PopUpButton
 	WithNextResponder(nextResponder ResponderProvider) *PopUpButton
 	WithMenu(menu *Menu) *PopUpButton
-	WithUserActivity(userActivity *foundation.NSUserActivity) *PopUpButton
+	WithUserActivity(userActivity obj.Object) *PopUpButton
 	WithTouchBar(touchBar *TouchBar) *PopUpButton
 	AddItemWithTitle(title string)
-	AddItemsWithTitles(itemTitles *foundation.NSArray[*foundation.NSString])
+	AddItemsWithTitles(itemTitles []string)
 	InsertItemWithTitleAtIndex(title string, index int)
 	RemoveItemWithTitle(title string)
 	RemoveItemAtIndex(index int)
 	RemoveAllItems()
-	IndexOfItem(item *raw.NSMenuItem) int
+	IndexOfItem(item *MenuItem) int
 	IndexOfItemWithTitle(title string) int
 	IndexOfItemWithTag(tag int) int
-	IndexOfItemWithRepresentedObject(obj objc.ID) int
-	IndexOfItemWithTargetAndAction(target objc.ID, actionSelector objc.SEL) int
+	IndexOfItemWithRepresentedObject(obj_ obj.Object) int
 	ItemAtIndex(index int) *MenuItem
 	ItemWithTitle(title string) *MenuItem
-	SelectItem(item *raw.NSMenuItem)
+	SelectItem(item *MenuItem)
 	SelectItemAtIndex(index int)
 	SelectItemWithTitle(title string)
 	SelectItemWithTag(tag int) bool
@@ -1266,8 +1078,6 @@ type PopUpButtonable interface {
 	SetPullsDown(pullsDown bool)
 	AutoenablesItems() bool
 	SetAutoenablesItems(autoenablesItems bool)
-	PreferredEdge() foundation.NSRectEdge
-	SetPreferredEdge(preferredEdge foundation.NSRectEdge)
 	UsesItemFromMenu() bool
 	SetUsesItemFromMenu(usesItemFromMenu bool)
 	AltersStateOfSelectedItem() bool

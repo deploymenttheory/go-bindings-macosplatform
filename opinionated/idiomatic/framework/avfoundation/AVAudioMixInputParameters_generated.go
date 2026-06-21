@@ -5,84 +5,89 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that represents the parameters that you apply when adding an audio track to a mix.
 //
-// AudioMixInputParameters wraps [raw.AVAudioMixInputParameters] with a fluent Go API.
+// AudioMixInputParameters is an idiomatic wrapper over the Objective-C class AVAudioMixInputParameters.
 type AudioMixInputParameters struct {
-	inner *raw.AVAudioMixInputParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioMixInputParameters].
-func (x *AudioMixInputParameters) Unwrap() *raw.AVAudioMixInputParameters { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioMixInputParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioMixInputParametersFromID adopts an existing object pointer as a AudioMixInputParameters (nil for 0).
+// AudioMixInputParametersFromID adopts an existing Objective-C object as a AudioMixInputParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioMixInputParametersFromID(id objc.ID) *AudioMixInputParameters {
 	if id == 0 {
 		return nil
 	}
-	return &AudioMixInputParameters{inner: raw.AVAudioMixInputParametersFromID(id)}
+	x := &AudioMixInputParameters{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAudioMixInputParameters creates a new [AudioMixInputParameters].
-func NewAudioMixInputParameters() *AudioMixInputParameters {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioMixInputParameters")), objc.RegisterName("new"))
-	return &AudioMixInputParameters{inner: raw.AVAudioMixInputParametersFromID(_id)}
-}
-
-// Retrieves the volume ramp that includes the specified time.
-//
-// GetVolumeRampForTimeStartVolumeEndVolumeTimeRange calls the underlying GetVolumeRampForTimeStartVolumeEndVolumeTimeRange.
-func (x *AudioMixInputParameters) GetVolumeRampForTimeStartVolumeEndVolumeTimeRange(time_ coremedia.CMTime, startVolume *float32, endVolume *float32, timeRange *coremedia.CMTimeRange) bool {
-	return x.inner.GetVolumeRampForTimeStartVolumeEndVolumeTimeRange(time_, startVolume, endVolume, timeRange)
-}
-
-// @property		trackID @abstract		Indicates the trackID of the audio track to which the parameters should be applied.
-//
-// TrackID calls the underlying TrackID.
-func (x *AudioMixInputParameters) TrackID() int32 {
-	return x.inner.TrackID()
-}
-
-// @property		audioTimePitchAlgorithm @abstract		Indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits. @discussion Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
-//
-// AudioTimePitchAlgorithm calls the underlying AudioTimePitchAlgorithm.
-func (x *AudioMixInputParameters) AudioTimePitchAlgorithm() string {
-	_r := x.inner.AudioTimePitchAlgorithm()
-	if _r == nil {
-		return ""
+// audioMixInputParametersAdopt wraps an Objective-C object that this code just created as a
+// AudioMixInputParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioMixInputParametersAdopt(id objc.ID) *AudioMixInputParameters {
+	if id == 0 {
+		return nil
 	}
-	return purego.GoString(_r.Ptr())
+	x := &AudioMixInputParameters{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property		audioTapProcessor @abstract		Indicates the audio processing tap that will be used for the audio track.
-//
-// AudioTapProcessor calls the underlying AudioTapProcessor.
-func (x *AudioMixInputParameters) AudioTapProcessor() unsafe.Pointer {
-	return x.inner.AudioTapProcessor()
+// Description returns the object's -description text.
+func (x *AudioMixInputParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *AudioMixInputParameters) asAudioMixInputParameters() *raw.AVAudioMixInputParameters {
-	return x.inner
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioMixInputParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioMixInputParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAudioMixInputParameters creates a new AudioMixInputParameters.
+func NewAudioMixInputParameters() *AudioMixInputParameters {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioMixInputParameters")), objc.RegisterName("new"))
+	return audioMixInputParametersAdopt(_id)
+}
+
+// Indicates the trackID of the audio track to which the parameters should be applied.
+func (x *AudioMixInputParameters) TrackID() int32 {
+	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("trackID"))
+	return _r
+}
+
+// Indicates the processing algorithm used to manage audio pitch at varying rates and for scaled audio edits. Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h. Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
+func (x *AudioMixInputParameters) AudioTimePitchAlgorithm() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioTimePitchAlgorithm"))
+	return obj.Wrap(_r)
+}
+
+// Indicates the audio processing tap that will be used for the audio track.
+func (x *AudioMixInputParameters) AudioTapProcessor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioTapProcessor"))
+	return obj.Wrap(_r)
 }
 
 // AudioMixInputParametersable is the interface implemented by [AudioMixInputParameters], for mocking and DI.
 type AudioMixInputParametersable interface {
-	Unwrap() *raw.AVAudioMixInputParameters
-	GetVolumeRampForTimeStartVolumeEndVolumeTimeRange(time_ coremedia.CMTime, startVolume *float32, endVolume *float32, timeRange *coremedia.CMTimeRange) bool
+	obj.Object
 	TrackID() int32
-	AudioTimePitchAlgorithm() string
-	AudioTapProcessor() unsafe.Pointer
+	AudioTimePitchAlgorithm() obj.Object
+	AudioTapProcessor() obj.Object
 }
 
 var _ AudioMixInputParametersable = (*AudioMixInputParameters)(nil)

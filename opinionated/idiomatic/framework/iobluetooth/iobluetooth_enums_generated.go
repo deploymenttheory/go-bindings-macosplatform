@@ -73,24 +73,3 @@ func (e IOBluetoothSMSMode) String() string {
 		return fmt.Sprintf("IOBluetoothSMSMode(%d)", int64(e))
 	}
 }
-
-type IOBluetoothUserNotificationChannelDirection int64
-
-const (
-	KIOBluetoothUserNotificationChannelDirectionAny      IOBluetoothUserNotificationChannelDirection = 0
-	KIOBluetoothUserNotificationChannelDirectionIncoming IOBluetoothUserNotificationChannelDirection = 1
-	KIOBluetoothUserNotificationChannelDirectionOutgoing IOBluetoothUserNotificationChannelDirection = 2
-)
-
-func (e IOBluetoothUserNotificationChannelDirection) String() string {
-	switch e {
-	case KIOBluetoothUserNotificationChannelDirectionAny:
-		return "KIOBluetoothUserNotificationChannelDirectionAny"
-	case KIOBluetoothUserNotificationChannelDirectionIncoming:
-		return "KIOBluetoothUserNotificationChannelDirectionIncoming"
-	case KIOBluetoothUserNotificationChannelDirectionOutgoing:
-		return "KIOBluetoothUserNotificationChannelDirectionOutgoing"
-	default:
-		return fmt.Sprintf("IOBluetoothUserNotificationChannelDirection(%d)", int64(e))
-	}
-}

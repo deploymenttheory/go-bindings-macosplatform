@@ -6,93 +6,102 @@ package appkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// WritingToolsCoordinatorAnimationParameters wraps [raw.NSWritingToolsCoordinatorAnimationParameters] with a fluent Go API.
+// WritingToolsCoordinatorAnimationParameters is an idiomatic wrapper over the Objective-C class NSWritingToolsCoordinatorAnimationParameters.
 type WritingToolsCoordinatorAnimationParameters struct {
-	inner *raw.NSWritingToolsCoordinatorAnimationParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSWritingToolsCoordinatorAnimationParameters].
-func (x *WritingToolsCoordinatorAnimationParameters) Unwrap() *raw.NSWritingToolsCoordinatorAnimationParameters {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WritingToolsCoordinatorAnimationParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// WritingToolsCoordinatorAnimationParametersFromID adopts an existing object pointer as a WritingToolsCoordinatorAnimationParameters (nil for 0).
+// WritingToolsCoordinatorAnimationParametersFromID adopts an existing Objective-C object as a WritingToolsCoordinatorAnimationParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func WritingToolsCoordinatorAnimationParametersFromID(id objc.ID) *WritingToolsCoordinatorAnimationParameters {
 	if id == 0 {
 		return nil
 	}
-	return &WritingToolsCoordinatorAnimationParameters{inner: raw.NSWritingToolsCoordinatorAnimationParametersFromID(id)}
+	x := &WritingToolsCoordinatorAnimationParameters{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWritingToolsCoordinatorAnimationParameters creates a new [WritingToolsCoordinatorAnimationParameters].
+// writingToolsCoordinatorAnimationParametersAdopt wraps an Objective-C object that this code just created as a
+// WritingToolsCoordinatorAnimationParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func writingToolsCoordinatorAnimationParametersAdopt(id objc.ID) *WritingToolsCoordinatorAnimationParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &WritingToolsCoordinatorAnimationParameters{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WritingToolsCoordinatorAnimationParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WritingToolsCoordinatorAnimationParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WritingToolsCoordinatorAnimationParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWritingToolsCoordinatorAnimationParameters creates a new WritingToolsCoordinatorAnimationParameters.
 func NewWritingToolsCoordinatorAnimationParameters() *WritingToolsCoordinatorAnimationParameters {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWritingToolsCoordinatorAnimationParameters")), objc.RegisterName("new"))
-	return &WritingToolsCoordinatorAnimationParameters{inner: raw.NSWritingToolsCoordinatorAnimationParametersFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSWritingToolsCoordinatorAnimationParameters")), objc.RegisterName("new"))
+	return writingToolsCoordinatorAnimationParametersAdopt(_id)
 }
 
 // A custom block that runs at the same time as the system animations. If you have animations you want to run at the same time as the system animations, assign a block to this property and use it to run your animations. The block you provide must have no return value and take a floating-point value as a parameter. The parameter indicates the current progress of the animations as a percentage value between `0.0` to `1.0`. The system executes your block multiple times during the course of the animations, providing an updated completion value each time.
 //
-// WithProgressHandler sets the progressHandler property and returns the receiver for chaining.
+// WithProgressHandler sets progressHandler and returns the receiver so calls can be chained.
 func (x *WritingToolsCoordinatorAnimationParameters) WithProgressHandler(progressHandler func(float32)) *WritingToolsCoordinatorAnimationParameters {
-	x.inner.SetProgressHandler(progressHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressHandler:"), objc.NewBlock(func(_ objc.Block, _b0 float32) { progressHandler(_b0) }))
 	return x
 }
 
 // A custom block to run when the system animations finish. Set this property to a block that you want the system to run when any animations finish. The block you provide must have no return value and no parameters. The system executes this block once when the current animation finish.
 //
-// WithCompletionHandler sets the completionHandler property and returns the receiver for chaining.
+// WithCompletionHandler sets completionHandler and returns the receiver so calls can be chained.
 func (x *WritingToolsCoordinatorAnimationParameters) WithCompletionHandler(completionHandler func()) *WritingToolsCoordinatorAnimationParameters {
-	x.inner.SetCompletionHandler(completionHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionHandler:"), objc.NewBlock(func(_ objc.Block) { completionHandler() }))
 	return x
 }
 
 // The number of seconds it takes the system animations to run.
-//
-// Duration calls the underlying Duration.
 func (x *WritingToolsCoordinatorAnimationParameters) Duration() float64 {
-	return x.inner.Duration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+	return _r
 }
 
 // The number of seconds the system waits before starting its animations.
-//
-// Delay calls the underlying Delay.
 func (x *WritingToolsCoordinatorAnimationParameters) Delay() float64 {
-	return x.inner.Delay()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("delay"))
+	return _r
 }
 
-// A custom block that runs at the same time as the system animations. If you have animations you want to run at the same time as the system animations, assign a block to this property and use it to run your animations. The block you provide must have no return value and take a floating-point value as a parameter. The parameter indicates the current progress of the animations as a percentage value between `0.0` to `1.0`. The system executes your block multiple times during the course of the animations, providing an updated completion value each time.
-//
-// ProgressHandler calls the underlying ProgressHandler.
-func (x *WritingToolsCoordinatorAnimationParameters) ProgressHandler() objc.Block {
-	return x.inner.ProgressHandler()
-}
-
-// SetProgressHandler calls the underlying SetProgressHandler.
 func (x *WritingToolsCoordinatorAnimationParameters) SetProgressHandler(progressHandler func(float32)) {
-	x.inner.SetProgressHandler(progressHandler)
-}
-
-// A custom block to run when the system animations finish. Set this property to a block that you want the system to run when any animations finish. The block you provide must have no return value and no parameters. The system executes this block once when the current animation finish.
-//
-// CompletionHandler calls the underlying CompletionHandler.
-func (x *WritingToolsCoordinatorAnimationParameters) CompletionHandler() objc.Block {
-	return x.inner.CompletionHandler()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressHandler:"), objc.NewBlock(func(_ objc.Block, _b0 float32) { progressHandler(_b0) }))
 }
 
 // Set blocks until the operation completes or ctx is cancelled.
 func (x *WritingToolsCoordinatorAnimationParameters) Set(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.SetCompletionHandler(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -103,14 +112,12 @@ func (x *WritingToolsCoordinatorAnimationParameters) Set(ctx context.Context) er
 
 // WritingToolsCoordinatorAnimationParametersable is the interface implemented by [WritingToolsCoordinatorAnimationParameters], for mocking and DI.
 type WritingToolsCoordinatorAnimationParametersable interface {
-	Unwrap() *raw.NSWritingToolsCoordinatorAnimationParameters
+	obj.Object
 	WithProgressHandler(progressHandler func(float32)) *WritingToolsCoordinatorAnimationParameters
 	WithCompletionHandler(completionHandler func()) *WritingToolsCoordinatorAnimationParameters
 	Duration() float64
 	Delay() float64
-	ProgressHandler() objc.Block
 	SetProgressHandler(progressHandler func(float32))
-	CompletionHandler() objc.Block
 	Set(ctx context.Context) error
 }
 

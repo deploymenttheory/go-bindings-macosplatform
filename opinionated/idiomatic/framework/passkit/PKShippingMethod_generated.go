@@ -5,149 +5,161 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that defines a shipping method for delivering physical goods.
 //
-// ShippingMethod wraps [raw.PKShippingMethod] with a fluent Go API.
+// ShippingMethod is an idiomatic wrapper over the Objective-C class PKShippingMethod.
 type ShippingMethod struct {
-	inner *raw.PKShippingMethod
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKShippingMethod].
-func (x *ShippingMethod) Unwrap() *raw.PKShippingMethod { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ShippingMethod) ID() objc.ID { return x.inner.Ptr() }
-
-// ShippingMethodFromID adopts an existing object pointer as a ShippingMethod (nil for 0).
+// ShippingMethodFromID adopts an existing Objective-C object as a ShippingMethod
+// (nil for 0), retaining it and registering a release finalizer.
 func ShippingMethodFromID(id objc.ID) *ShippingMethod {
 	if id == 0 {
 		return nil
 	}
-	return &ShippingMethod{inner: raw.PKShippingMethodFromID(id)}
+	x := &ShippingMethod{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewShippingMethod creates a new [ShippingMethod].
+// shippingMethodAdopt wraps an Objective-C object that this code just created as a
+// ShippingMethod (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shippingMethodAdopt(id objc.ID) *ShippingMethod {
+	if id == 0 {
+		return nil
+	}
+	x := &ShippingMethod{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ShippingMethod) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ShippingMethod) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ShippingMethod) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewShippingMethod creates a new ShippingMethod.
 func NewShippingMethod() *ShippingMethod {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKShippingMethod")), objc.RegisterName("new"))
-	return &ShippingMethod{inner: raw.PKShippingMethodFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKShippingMethod")), objc.RegisterName("new"))
+	return shippingMethodAdopt(_id)
 }
 
 // A unique identifier for the shipping method, used by the app.
 //
-// WithIdentifier sets the identifier property and returns the receiver for chaining.
+// WithIdentifier sets identifier and returns the receiver so calls can be chained.
 func (x *ShippingMethod) WithIdentifier(identifier string) *ShippingMethod {
-	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 	return x
 }
 
 // A user-readable description of the shipping method.
 //
-// WithDetail sets the detail property and returns the receiver for chaining.
+// WithDetail sets detail and returns the receiver so calls can be chained.
 func (x *ShippingMethod) WithDetail(detail string) *ShippingMethod {
-	x.inner.SetDetail(foundation.NSStringStringWithUTF8String(detail))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetail:"), purego.NSString(detail))
 	return x
 }
 
 // An expected range of delivery or shipping dates for a package, or the time range when an item is available for pickup.
 //
-// WithDateComponentsRange sets the dateComponentsRange property and returns the receiver for chaining.
+// WithDateComponentsRange sets dateComponentsRange and returns the receiver so calls can be chained.
 func (x *ShippingMethod) WithDateComponentsRange(dateComponentsRange *DateComponentsRange) *ShippingMethod {
-	x.inner.SetDateComponentsRange(dateComponentsRange.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateComponentsRange:"), objref.IDOf(dateComponentsRange))
 	return x
 }
 
 // A short, localized description of the item.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ShippingMethod) WithLabel(label string) *ShippingMethod {
-	x.inner.PKPaymentSummaryItem.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // The summary item’s amount.
 //
-// WithAmount sets the amount property and returns the receiver for chaining.
-func (x *ShippingMethod) WithAmount(amount *foundation.NSDecimalNumber) *ShippingMethod {
-	x.inner.PKPaymentSummaryItem.SetAmount(amount)
+// WithAmount sets amount and returns the receiver so calls can be chained.
+func (x *ShippingMethod) WithAmount(amount obj.Object) *ShippingMethod {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
 	return x
 }
 
 // The summary item’s type that indicates whether the amount is final.
 //
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *ShippingMethod) WithType(type_ PKPaymentSummaryItemType) *ShippingMethod {
-	x.inner.PKPaymentSummaryItem.SetType(raw.PKPaymentSummaryItemType(type_))
+// WithType sets type_ and returns the receiver so calls can be chained.
+func (x *ShippingMethod) WithType(type_ PaymentSummaryItemType) *ShippingMethod {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
-// Identifier calls the underlying Identifier.
 func (x *ShippingMethod) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetIdentifier calls the underlying SetIdentifier.
 func (x *ShippingMethod) SetIdentifier(identifier string) {
-	x.inner.SetIdentifier(foundation.NSStringStringWithUTF8String(identifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
 }
 
-// Detail calls the underlying Detail.
 func (x *ShippingMethod) Detail() string {
-	_r := x.inner.Detail()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detail"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetDetail calls the underlying SetDetail.
 func (x *ShippingMethod) SetDetail(detail string) {
-	x.inner.SetDetail(foundation.NSStringStringWithUTF8String(detail))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetail:"), purego.NSString(detail))
 }
 
-// DateComponentsRange calls the underlying DateComponentsRange.
 func (x *ShippingMethod) DateComponentsRange() *DateComponentsRange {
-	_r := x.inner.DateComponentsRange()
-	if _r == nil {
-		return nil
-	}
-	return &DateComponentsRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateComponentsRange"))
+	return DateComponentsRangeFromID(_r)
 }
 
-// SetDateComponentsRange calls the underlying SetDateComponentsRange.
-func (x *ShippingMethod) SetDateComponentsRange(dateComponentsRange *raw.PKDateComponentsRange) {
-	x.inner.SetDateComponentsRange(dateComponentsRange)
-}
-
-func (x *ShippingMethod) asPaymentSummaryItem() *raw.PKPaymentSummaryItem {
-	return &x.inner.PKPaymentSummaryItem
+func (x *ShippingMethod) SetDateComponentsRange(dateComponentsRange *DateComponentsRange) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateComponentsRange:"), objref.IDOf(dateComponentsRange))
 }
 
 // ShippingMethodable is the interface implemented by [ShippingMethod], for mocking and DI.
 type ShippingMethodable interface {
-	Unwrap() *raw.PKShippingMethod
+	obj.Object
 	WithIdentifier(identifier string) *ShippingMethod
 	WithDetail(detail string) *ShippingMethod
 	WithDateComponentsRange(dateComponentsRange *DateComponentsRange) *ShippingMethod
 	WithLabel(label string) *ShippingMethod
-	WithAmount(amount *foundation.NSDecimalNumber) *ShippingMethod
-	WithType(type_ PKPaymentSummaryItemType) *ShippingMethod
+	WithAmount(amount obj.Object) *ShippingMethod
+	WithType(type_ PaymentSummaryItemType) *ShippingMethod
 	Identifier() string
 	SetIdentifier(identifier string)
 	Detail() string
 	SetDetail(detail string)
 	DateComponentsRange() *DateComponentsRange
-	SetDateComponentsRange(dateComponentsRange *raw.PKDateComponentsRange)
+	SetDateComponentsRange(dateComponentsRange *DateComponentsRange)
 }
 
 var _ ShippingMethodable = (*ShippingMethod)(nil)

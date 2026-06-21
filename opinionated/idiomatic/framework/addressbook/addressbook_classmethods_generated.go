@@ -5,97 +5,91 @@
 package addressbook
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/addressbook"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// SharedAddressBook calls the underlying ABAddressBookSharedAddressBook.
+// Returns the unique shared instance of ABAddressBook, or nil if the Address Book database can’t be initialized.
 func SharedAddressBook() *AddressBook {
-	_r := raw.ABAddressBookSharedAddressBook()
-	if _r == nil {
-		return nil
-	}
-	return &AddressBook{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ABAddressBook")), objc.RegisterName("sharedAddressBook"))
+	return AddressBookFromID(_r)
 }
 
-// ABAddressBookAddressBook calls the underlying ABAddressBookAddressBook.
+// Returns a new instance of ABAddressBook, or nil if the Address Book database can’t be initialized.
 func ABAddressBookAddressBook() *AddressBook {
-	_r := raw.ABAddressBookAddressBook()
-	if _r == nil {
-		return nil
-	}
-	return &AddressBook{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ABAddressBook")), objc.RegisterName("addressBook"))
+	return AddressBookFromID(_r)
 }
 
-// AddPropertiesAndTypes calls the underlying ABGroupAddPropertiesAndTypes.
-func AddPropertiesAndTypes(properties *foundation.NSDictionary[objc.ID, objc.ID]) int {
-	return raw.ABGroupAddPropertiesAndTypes(properties)
+// Adds the given properties to all records of this type in the Address Book database.
+func AddPropertiesAndTypes(properties obj.Object) int {
+	_r := objc.Send[int](objc.ID(_class("ABGroup")), objc.RegisterName("addPropertiesAndTypes:"), objref.IDOf(properties))
+	return _r
 }
 
-// RemoveProperties calls the underlying ABGroupRemoveProperties.
-func RemoveProperties(properties *foundation.NSArray[objc.ID]) int {
-	return raw.ABGroupRemoveProperties(properties)
+// Removes the given properties from all the records of this type in the Address Book database.
+func RemoveProperties(properties obj.Object) int {
+	_r := objc.Send[int](objc.ID(_class("ABGroup")), objc.RegisterName("removeProperties:"), objref.IDOf(properties))
+	return _r
 }
 
-// Properties calls the underlying ABGroupProperties.
-func Properties() *foundation.NSArray[objc.ID] {
-	return raw.ABGroupProperties()
+// Returns an array of the names of all the properties for this record type in the Address Book database.
+func Properties() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("ABGroup")), objc.RegisterName("properties"))
+	return obj.Wrap(_r)
 }
 
-// TypeOfProperty calls the underlying ABGroupTypeOfProperty.
+// Returns the type for a given property.
 func TypeOfProperty(property string) int {
-	return raw.ABGroupTypeOfProperty(foundation.NSStringStringWithUTF8String(property))
+	_r := objc.Send[int](objc.ID(_class("ABGroup")), objc.RegisterName("typeOfProperty:"), purego.NSString(property))
+	return _r
 }
 
-// SearchElementForPropertyLabelKeyValueComparison calls the underlying ABGroupSearchElementForPropertyLabelKeyValueComparison.
-func SearchElementForPropertyLabelKeyValueComparison(property string, label string, key string, value objc.ID, comparison int) *SearchElement {
-	_r := raw.ABGroupSearchElementForPropertyLabelKeyValueComparison(foundation.NSStringStringWithUTF8String(property), foundation.NSStringStringWithUTF8String(label), foundation.NSStringStringWithUTF8String(key), value, comparison)
-	if _r == nil {
-		return nil
-	}
-	return &SearchElement{inner: _r}
+// Returns a search element object that searches for records of this type.
+func SearchElementForPropertyLabelKeyValueComparison(property string, label string, key string, value obj.Object, comparison int) *SearchElement {
+	_r := objc.Send[objc.ID](objc.ID(_class("ABGroup")), objc.RegisterName("searchElementForProperty:label:key:value:comparison:"), purego.NSString(property), purego.NSString(label), purego.NSString(key), objref.IDOf(value), comparison)
+	return SearchElementFromID(_r)
 }
 
-// ABPersonAddPropertiesAndTypes calls the underlying ABPersonAddPropertiesAndTypes.
-func ABPersonAddPropertiesAndTypes(properties *foundation.NSDictionary[objc.ID, objc.ID]) int {
-	return raw.ABPersonAddPropertiesAndTypes(properties)
+// Adds the given properties to all the records of this type in the Address Book database.
+func ABPersonAddPropertiesAndTypes(properties obj.Object) int {
+	_r := objc.Send[int](objc.ID(_class("ABPerson")), objc.RegisterName("addPropertiesAndTypes:"), objref.IDOf(properties))
+	return _r
 }
 
-// ABPersonRemoveProperties calls the underlying ABPersonRemoveProperties.
-func ABPersonRemoveProperties(properties *foundation.NSArray[objc.ID]) int {
-	return raw.ABPersonRemoveProperties(properties)
+// Removes the given properties from all the records of this type in the Address Book database.
+func ABPersonRemoveProperties(properties obj.Object) int {
+	_r := objc.Send[int](objc.ID(_class("ABPerson")), objc.RegisterName("removeProperties:"), objref.IDOf(properties))
+	return _r
 }
 
-// ABPersonProperties calls the underlying ABPersonProperties.
-func ABPersonProperties() *foundation.NSArray[objc.ID] {
-	return raw.ABPersonProperties()
+// Returns an array of the names of all the properties for the record in the Address Book database.
+func ABPersonProperties() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("ABPerson")), objc.RegisterName("properties"))
+	return obj.Wrap(_r)
 }
 
-// ABPersonTypeOfProperty calls the underlying ABPersonTypeOfProperty.
+// Returns the type of a given property.
 func ABPersonTypeOfProperty(property string) int {
-	return raw.ABPersonTypeOfProperty(foundation.NSStringStringWithUTF8String(property))
+	_r := objc.Send[int](objc.ID(_class("ABPerson")), objc.RegisterName("typeOfProperty:"), purego.NSString(property))
+	return _r
 }
 
-// ABPersonSearchElementForPropertyLabelKeyValueComparison calls the underlying ABPersonSearchElementForPropertyLabelKeyValueComparison.
-func ABPersonSearchElementForPropertyLabelKeyValueComparison(property string, label string, key string, value objc.ID, comparison int) *SearchElement {
-	_r := raw.ABPersonSearchElementForPropertyLabelKeyValueComparison(foundation.NSStringStringWithUTF8String(property), foundation.NSStringStringWithUTF8String(label), foundation.NSStringStringWithUTF8String(key), value, comparison)
-	if _r == nil {
-		return nil
-	}
-	return &SearchElement{inner: _r}
+// Returns a search element object that specifies a query for records of this type.
+func ABPersonSearchElementForPropertyLabelKeyValueComparison(property string, label string, key string, value obj.Object, comparison int) *SearchElement {
+	_r := objc.Send[objc.ID](objc.ID(_class("ABPerson")), objc.RegisterName("searchElementForProperty:label:key:value:comparison:"), purego.NSString(property), purego.NSString(label), purego.NSString(key), objref.IDOf(value), comparison)
+	return SearchElementFromID(_r)
 }
 
-// CancelLoadingImageDataForTag calls the underlying ABPersonCancelLoadingImageDataForTag.
+// Cancels an asynchronous fetch of the images for a given tag.
 func CancelLoadingImageDataForTag(tag int) {
-	raw.ABPersonCancelLoadingImageDataForTag(tag)
+	objc.Send[objc.ID](objc.ID(_class("ABPerson")), objc.RegisterName("cancelLoadingImageDataForTag:"), tag)
 }
 
-// SearchElementForConjunctionChildren calls the underlying ABSearchElementSearchElementForConjunctionChildren.
-func SearchElementForConjunctionChildren(conjuction int, children *foundation.NSArray[objc.ID]) *SearchElement {
-	_r := raw.ABSearchElementSearchElementForConjunctionChildren(conjuction, children)
-	if _r == nil {
-		return nil
-	}
-	return &SearchElement{inner: _r}
+// Returns a compound search element, created by combining the search elements in an array with the given conjunction.
+func SearchElementForConjunctionChildren(conjuction int, children obj.Object) *SearchElement {
+	_r := objc.Send[objc.ID](objc.ID(_class("ABSearchElement")), objc.RegisterName("searchElementForConjunction:children:"), conjuction, objref.IDOf(children))
+	return SearchElementFromID(_r)
 }

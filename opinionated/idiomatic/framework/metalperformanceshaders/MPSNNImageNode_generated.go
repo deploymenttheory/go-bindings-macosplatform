@@ -5,177 +5,126 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A placeholder node denoting the position of a neural network image in a graph.
 //
-// NNImageNode wraps [raw.MPSNNImageNode] with a fluent Go API.
+// NNImageNode is an idiomatic wrapper over the Objective-C class MPSNNImageNode.
 type NNImageNode struct {
-	inner *raw.MPSNNImageNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNImageNode].
-func (x *NNImageNode) Unwrap() *raw.MPSNNImageNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNImageNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNImageNodeFromID adopts an existing object pointer as a NNImageNode (nil for 0).
+// NNImageNodeFromID adopts an existing Objective-C object as a NNImageNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNImageNodeFromID(id objc.ID) *NNImageNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNImageNode{inner: raw.MPSNNImageNodeFromID(id)}
-}
-
-// NewNNImageNodeWithHandle creates a new [NNImageNode].
-func NewNNImageNodeWithHandle(handle *foundation.NSObject) *NNImageNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNImageNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHandle:"), handle.Ptr())
-	return &NNImageNode{inner: raw.MPSNNImageNodeFromID(_id)}
-}
-
-// @abstract   MPS resource identifier @discussion See MPSHandle protocol description.  Default: nil
-//
-// WithHandle sets the handle property and returns the receiver for chaining.
-func (x *NNImageNode) WithHandle(handle mpsneuralnetwork.MPSHandle) *NNImageNode {
-	x.inner.SetHandle(handle)
+	x := &NNImageNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @abstract   The preferred precision for the image @discussion Default: MPSImageFeatureChannelFormatNone, meaning MPS should pick a format Typically, this is 16-bit floating-point.
-//
-// WithFormat sets the format property and returns the receiver for chaining.
-func (x *NNImageNode) WithFormat(format mpscore.MPSImageFeatureChannelFormat) *NNImageNode {
-	x.inner.SetFormat(format)
+// nNImageNodeAdopt wraps an Objective-C object that this code just created as a
+// NNImageNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNImageNodeAdopt(id objc.ID) *NNImageNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNImageNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @abstract   Configurability for image allocation @discussion Allows you to influence how the image is allocated Default: MPSTemporaryImage.defaultAllocator
-//
-// WithImageAllocator sets the imageAllocator property and returns the receiver for chaining.
-func (x *NNImageNode) WithImageAllocator(imageAllocator mpscore.MPSImageAllocator) *NNImageNode {
-	x.inner.SetImageAllocator(imageAllocator)
-	return x
+// Description returns the object's -description text.
+func (x *NNImageNode) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract   Tag a image node for view later @discussion Most image nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... intermediateImages:... list. CAUTION: exporting an image from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the image. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNImageNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNImageNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNNImageNodeWithHandle creates a new NNImageNode.
+func NewNNImageNodeWithHandle(handle obj.Object) *NNImageNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNImageNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHandle:"), objref.IDOf(handle))
+	return nNImageNodeAdopt(_id)
+}
+
+// Tag a image node for view later Most image nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... intermediateImages:... list. CAUTION: exporting an image from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the image. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
 //
-// WithExportFromGraph sets the exportFromGraph property and returns the receiver for chaining.
+// WithExportFromGraph sets exportFromGraph and returns the receiver so calls can be chained.
 func (x *NNImageNode) WithExportFromGraph(exportFromGraph bool) *NNImageNode {
-	x.inner.SetExportFromGraph(exportFromGraph)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
 	return x
 }
 
-// @abstract   Set to true to cause the resource to be synchronized with the CPU @discussion It is not needed on iOS/tvOS devices, where it does nothing.
+// Set to true to cause the resource to be synchronized with the CPU It is not needed on iOS/tvOS devices, where it does nothing.
 //
-// WithSynchronizeResource sets the synchronizeResource property and returns the receiver for chaining.
+// WithSynchronizeResource sets synchronizeResource and returns the receiver so calls can be chained.
 func (x *NNImageNode) WithSynchronizeResource(synchronizeResource bool) *NNImageNode {
-	x.inner.SetSynchronizeResource(synchronizeResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
 	return x
 }
 
-// @abstract   Stop training graph automatic creation at this node. @discussion An inference graph of MPSNNFilterNodes, MPSNNStateNodes and MPSNNImageNodes can be automatically converted to a training graph using -[MPSNNFilterNode trainingGraphWithSourceGradient:nodeHandler:]. Sometimes, an inference graph may contain extra nodes at start to do operations like resampling or range adjustment that should not be part of the training graph. To prevent gradient operations for these extra nodes from being included in the training graph, set <undesired node>.resultImage.stopGradient = YES. This will prevent gradient propagation beyond this MPSNNImageNode. Default: NO
+// Stop training graph automatic creation at this node. An inference graph of MPSNNFilterNodes, MPSNNStateNodes and MPSNNImageNodes can be automatically converted to a training graph using -[MPSNNFilterNode trainingGraphWithSourceGradient:nodeHandler:]. Sometimes, an inference graph may contain extra nodes at start to do operations like resampling or range adjustment that should not be part of the training graph. To prevent gradient operations for these extra nodes from being included in the training graph, set <undesired node>.resultImage.stopGradient = YES. This will prevent gradient propagation beyond this MPSNNImageNode. Default: NO
 //
-// WithStopGradient sets the stopGradient property and returns the receiver for chaining.
+// WithStopGradient sets stopGradient and returns the receiver so calls can be chained.
 func (x *NNImageNode) WithStopGradient(stopGradient bool) *NNImageNode {
-	x.inner.SetStopGradient(stopGradient)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStopGradient:"), stopGradient)
 	return x
 }
 
-// @abstract   MPS resource identifier @discussion See MPSHandle protocol description.  Default: nil
-//
-// Handle calls the underlying Handle.
-func (x *NNImageNode) Handle() mpsneuralnetwork.MPSHandle {
-	return x.inner.Handle()
-}
-
-// SetHandle calls the underlying SetHandle.
-func (x *NNImageNode) SetHandle(handle mpsneuralnetwork.MPSHandle) {
-	x.inner.SetHandle(handle)
-}
-
-// @abstract   The preferred precision for the image @discussion Default: MPSImageFeatureChannelFormatNone, meaning MPS should pick a format Typically, this is 16-bit floating-point.
-//
-// Format calls the underlying Format.
-func (x *NNImageNode) Format() mpscore.MPSImageFeatureChannelFormat {
-	return x.inner.Format()
-}
-
-// SetFormat calls the underlying SetFormat.
-func (x *NNImageNode) SetFormat(format mpscore.MPSImageFeatureChannelFormat) {
-	x.inner.SetFormat(format)
-}
-
-// @abstract   Configurability for image allocation @discussion Allows you to influence how the image is allocated Default: MPSTemporaryImage.defaultAllocator
-//
-// ImageAllocator calls the underlying ImageAllocator.
-func (x *NNImageNode) ImageAllocator() mpscore.MPSImageAllocator {
-	return x.inner.ImageAllocator()
-}
-
-// SetImageAllocator calls the underlying SetImageAllocator.
-func (x *NNImageNode) SetImageAllocator(imageAllocator mpscore.MPSImageAllocator) {
-	x.inner.SetImageAllocator(imageAllocator)
-}
-
-// @abstract   Tag a image node for view later @discussion Most image nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... intermediateImages:... list. CAUTION: exporting an image from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the image. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
-//
-// ExportFromGraph calls the underlying ExportFromGraph.
+// Tag a image node for view later Most image nodes are private to the graph. These alias memory heavily and consequently generally have invalid state when the graph exits.  When exportFromGraph = YES, the image is preserved and made available through the [MPSNNGraph encode... intermediateImages:... list. CAUTION: exporting an image from a graph prevents MPS from recycling memory. It will nearly always cause the amount of memory used by the graph to increase by the size of the image. There will probably be a performance regression accordingly.  This feature should generally be used only when the node is needed as an input for further work and recomputing it is prohibitively costly. Default: NO
 func (x *NNImageNode) ExportFromGraph() bool {
-	return x.inner.ExportFromGraph()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("exportFromGraph"))
+	return _r
 }
 
-// SetExportFromGraph calls the underlying SetExportFromGraph.
 func (x *NNImageNode) SetExportFromGraph(exportFromGraph bool) {
-	x.inner.SetExportFromGraph(exportFromGraph)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportFromGraph:"), exportFromGraph)
 }
 
-// @abstract   Set to true to cause the resource to be synchronized with the CPU @discussion It is not needed on iOS/tvOS devices, where it does nothing.
-//
-// SynchronizeResource calls the underlying SynchronizeResource.
+// Set to true to cause the resource to be synchronized with the CPU It is not needed on iOS/tvOS devices, where it does nothing.
 func (x *NNImageNode) SynchronizeResource() bool {
-	return x.inner.SynchronizeResource()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("synchronizeResource"))
+	return _r
 }
 
-// SetSynchronizeResource calls the underlying SetSynchronizeResource.
 func (x *NNImageNode) SetSynchronizeResource(synchronizeResource bool) {
-	x.inner.SetSynchronizeResource(synchronizeResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSynchronizeResource:"), synchronizeResource)
 }
 
-// @abstract   Stop training graph automatic creation at this node. @discussion An inference graph of MPSNNFilterNodes, MPSNNStateNodes and MPSNNImageNodes can be automatically converted to a training graph using -[MPSNNFilterNode trainingGraphWithSourceGradient:nodeHandler:]. Sometimes, an inference graph may contain extra nodes at start to do operations like resampling or range adjustment that should not be part of the training graph. To prevent gradient operations for these extra nodes from being included in the training graph, set <undesired node>.resultImage.stopGradient = YES. This will prevent gradient propagation beyond this MPSNNImageNode. Default: NO
-//
-// StopGradient calls the underlying StopGradient.
+// Stop training graph automatic creation at this node. An inference graph of MPSNNFilterNodes, MPSNNStateNodes and MPSNNImageNodes can be automatically converted to a training graph using -[MPSNNFilterNode trainingGraphWithSourceGradient:nodeHandler:]. Sometimes, an inference graph may contain extra nodes at start to do operations like resampling or range adjustment that should not be part of the training graph. To prevent gradient operations for these extra nodes from being included in the training graph, set <undesired node>.resultImage.stopGradient = YES. This will prevent gradient propagation beyond this MPSNNImageNode. Default: NO
 func (x *NNImageNode) StopGradient() bool {
-	return x.inner.StopGradient()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stopGradient"))
+	return _r
 }
 
-// SetStopGradient calls the underlying SetStopGradient.
 func (x *NNImageNode) SetStopGradient(stopGradient bool) {
-	x.inner.SetStopGradient(stopGradient)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStopGradient:"), stopGradient)
 }
 
 // NNImageNodeable is the interface implemented by [NNImageNode], for mocking and DI.
 type NNImageNodeable interface {
-	Unwrap() *raw.MPSNNImageNode
-	WithHandle(handle mpsneuralnetwork.MPSHandle) *NNImageNode
-	WithFormat(format mpscore.MPSImageFeatureChannelFormat) *NNImageNode
-	WithImageAllocator(imageAllocator mpscore.MPSImageAllocator) *NNImageNode
+	obj.Object
 	WithExportFromGraph(exportFromGraph bool) *NNImageNode
 	WithSynchronizeResource(synchronizeResource bool) *NNImageNode
 	WithStopGradient(stopGradient bool) *NNImageNode
-	Handle() mpsneuralnetwork.MPSHandle
-	SetHandle(handle mpsneuralnetwork.MPSHandle)
-	Format() mpscore.MPSImageFeatureChannelFormat
-	SetFormat(format mpscore.MPSImageFeatureChannelFormat)
-	ImageAllocator() mpscore.MPSImageAllocator
-	SetImageAllocator(imageAllocator mpscore.MPSImageAllocator)
 	ExportFromGraph() bool
 	SetExportFromGraph(exportFromGraph bool)
 	SynchronizeResource() bool

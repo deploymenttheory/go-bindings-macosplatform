@@ -5,229 +5,241 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A formatter that converts a byte count value into a localized description that is formatted with the appropriate byte modifier (KB, MB, GB and so on).
 //
-// ByteCountFormatter wraps [raw.NSByteCountFormatter] with a fluent Go API.
+// ByteCountFormatter is an idiomatic wrapper over the Objective-C class NSByteCountFormatter.
 type ByteCountFormatter struct {
-	inner *raw.NSByteCountFormatter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSByteCountFormatter].
-func (x *ByteCountFormatter) Unwrap() *raw.NSByteCountFormatter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ByteCountFormatter) ID() objc.ID { return x.inner.Ptr() }
-
-// ByteCountFormatterFromID adopts an existing object pointer as a ByteCountFormatter (nil for 0).
+// ByteCountFormatterFromID adopts an existing Objective-C object as a ByteCountFormatter
+// (nil for 0), retaining it and registering a release finalizer.
 func ByteCountFormatterFromID(id objc.ID) *ByteCountFormatter {
 	if id == 0 {
 		return nil
 	}
-	return &ByteCountFormatter{inner: raw.NSByteCountFormatterFromID(id)}
+	x := &ByteCountFormatter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewByteCountFormatter creates a new [ByteCountFormatter].
+// byteCountFormatterAdopt wraps an Objective-C object that this code just created as a
+// ByteCountFormatter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func byteCountFormatterAdopt(id objc.ID) *ByteCountFormatter {
+	if id == 0 {
+		return nil
+	}
+	x := &ByteCountFormatter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ByteCountFormatter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ByteCountFormatter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ByteCountFormatter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewByteCountFormatter creates a new ByteCountFormatter.
 func NewByteCountFormatter() *ByteCountFormatter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSByteCountFormatter")), objc.RegisterName("new"))
-	return &ByteCountFormatter{inner: raw.NSByteCountFormatterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSByteCountFormatter")), objc.RegisterName("new"))
+	return byteCountFormatterAdopt(_id)
 }
 
-// WithAllowedUnits sets the allowedUnits property and returns the receiver for chaining.
-func (x *ByteCountFormatter) WithAllowedUnits(allowedUnits NSByteCountFormatterUnits) *ByteCountFormatter {
-	x.inner.SetAllowedUnits(raw.NSByteCountFormatterUnits(allowedUnits))
+// WithAllowedUnits sets allowedUnits and returns the receiver so calls can be chained.
+func (x *ByteCountFormatter) WithAllowedUnits(allowedUnits ByteCountFormatterUnits) *ByteCountFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedUnits:"), allowedUnits)
 	return x
 }
 
-// WithCountStyle sets the countStyle property and returns the receiver for chaining.
-func (x *ByteCountFormatter) WithCountStyle(countStyle NSByteCountFormatterCountStyle) *ByteCountFormatter {
-	x.inner.SetCountStyle(raw.NSByteCountFormatterCountStyle(countStyle))
+// WithCountStyle sets countStyle and returns the receiver so calls can be chained.
+func (x *ByteCountFormatter) WithCountStyle(countStyle ByteCountFormatterCountStyle) *ByteCountFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountStyle:"), countStyle)
 	return x
 }
 
-// WithAllowsNonnumericFormatting sets the allowsNonnumericFormatting property and returns the receiver for chaining.
+// WithAllowsNonnumericFormatting sets allowsNonnumericFormatting and returns the receiver so calls can be chained.
 func (x *ByteCountFormatter) WithAllowsNonnumericFormatting(allowsNonnumericFormatting bool) *ByteCountFormatter {
-	x.inner.SetAllowsNonnumericFormatting(allowsNonnumericFormatting)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsNonnumericFormatting:"), allowsNonnumericFormatting)
 	return x
 }
 
-// WithIncludesUnit sets the includesUnit property and returns the receiver for chaining.
+// WithIncludesUnit sets includesUnit and returns the receiver so calls can be chained.
 func (x *ByteCountFormatter) WithIncludesUnit(includesUnit bool) *ByteCountFormatter {
-	x.inner.SetIncludesUnit(includesUnit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesUnit:"), includesUnit)
 	return x
 }
 
-// WithIncludesCount sets the includesCount property and returns the receiver for chaining.
+// WithIncludesCount sets includesCount and returns the receiver so calls can be chained.
 func (x *ByteCountFormatter) WithIncludesCount(includesCount bool) *ByteCountFormatter {
-	x.inner.SetIncludesCount(includesCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesCount:"), includesCount)
 	return x
 }
 
-// WithIncludesActualByteCount sets the includesActualByteCount property and returns the receiver for chaining.
+// WithIncludesActualByteCount sets includesActualByteCount and returns the receiver so calls can be chained.
 func (x *ByteCountFormatter) WithIncludesActualByteCount(includesActualByteCount bool) *ByteCountFormatter {
-	x.inner.SetIncludesActualByteCount(includesActualByteCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesActualByteCount:"), includesActualByteCount)
 	return x
 }
 
-// WithAdaptive sets the adaptive property and returns the receiver for chaining.
+// WithAdaptive sets adaptive and returns the receiver so calls can be chained.
 func (x *ByteCountFormatter) WithAdaptive(adaptive bool) *ByteCountFormatter {
-	x.inner.SetAdaptive(adaptive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdaptive:"), adaptive)
 	return x
 }
 
-// WithZeroPadsFractionDigits sets the zeroPadsFractionDigits property and returns the receiver for chaining.
+// WithZeroPadsFractionDigits sets zeroPadsFractionDigits and returns the receiver so calls can be chained.
 func (x *ByteCountFormatter) WithZeroPadsFractionDigits(zeroPadsFractionDigits bool) *ByteCountFormatter {
-	x.inner.SetZeroPadsFractionDigits(zeroPadsFractionDigits)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroPadsFractionDigits:"), zeroPadsFractionDigits)
 	return x
 }
 
-// WithFormattingContext sets the formattingContext property and returns the receiver for chaining.
-func (x *ByteCountFormatter) WithFormattingContext(formattingContext NSFormattingContext) *ByteCountFormatter {
-	x.inner.SetFormattingContext(raw.NSFormattingContext(formattingContext))
+// WithFormattingContext sets formattingContext and returns the receiver so calls can be chained.
+func (x *ByteCountFormatter) WithFormattingContext(formattingContext FormattingContext) *ByteCountFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingContext:"), formattingContext)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *ByteCountFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ByteCountFormatter {
-	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *ByteCountFormatter) WithScriptingProperties(scriptingProperties obj.Object) *ByteCountFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// StringFromByteCount calls the underlying StringFromByteCount.
-func (x *ByteCountFormatter) StringFromByteCount(byteCount int64) *String {
-	_r := x.inner.StringFromByteCount(byteCount)
-	if _r == nil {
-		return nil
+func (x *ByteCountFormatter) StringFromByteCount(byteCount int64) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromByteCount:"), byteCount)
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// StringFromMeasurement calls the underlying StringFromMeasurement.
-func (x *ByteCountFormatter) StringFromMeasurement(measurement *raw.NSMeasurement[*raw.NSUnitInformationStorage]) *String {
-	_r := x.inner.StringFromMeasurement(measurement)
-	if _r == nil {
-		return nil
+func (x *ByteCountFormatter) StringFromMeasurement(measurement obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromMeasurement:"), objref.IDOf(measurement))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// AllowedUnits calls the underlying AllowedUnits.
-func (x *ByteCountFormatter) AllowedUnits() NSByteCountFormatterUnits {
-	return NSByteCountFormatterUnits(x.inner.AllowedUnits())
+func (x *ByteCountFormatter) AllowedUnits() ByteCountFormatterUnits {
+	_r := objc.Send[ByteCountFormatterUnits](objref.IDOf(x), objc.RegisterName("allowedUnits"))
+	return _r
 }
 
-// SetAllowedUnits calls the underlying SetAllowedUnits.
-func (x *ByteCountFormatter) SetAllowedUnits(allowedUnits NSByteCountFormatterUnits) {
-	x.inner.SetAllowedUnits(raw.NSByteCountFormatterUnits(allowedUnits))
+func (x *ByteCountFormatter) SetAllowedUnits(allowedUnits ByteCountFormatterUnits) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedUnits:"), allowedUnits)
 }
 
-// CountStyle calls the underlying CountStyle.
-func (x *ByteCountFormatter) CountStyle() NSByteCountFormatterCountStyle {
-	return NSByteCountFormatterCountStyle(x.inner.CountStyle())
+func (x *ByteCountFormatter) CountStyle() ByteCountFormatterCountStyle {
+	_r := objc.Send[ByteCountFormatterCountStyle](objref.IDOf(x), objc.RegisterName("countStyle"))
+	return _r
 }
 
-// SetCountStyle calls the underlying SetCountStyle.
-func (x *ByteCountFormatter) SetCountStyle(countStyle NSByteCountFormatterCountStyle) {
-	x.inner.SetCountStyle(raw.NSByteCountFormatterCountStyle(countStyle))
+func (x *ByteCountFormatter) SetCountStyle(countStyle ByteCountFormatterCountStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountStyle:"), countStyle)
 }
 
-// AllowsNonnumericFormatting calls the underlying AllowsNonnumericFormatting.
 func (x *ByteCountFormatter) AllowsNonnumericFormatting() bool {
-	return x.inner.AllowsNonnumericFormatting()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsNonnumericFormatting"))
+	return _r
 }
 
-// SetAllowsNonnumericFormatting calls the underlying SetAllowsNonnumericFormatting.
 func (x *ByteCountFormatter) SetAllowsNonnumericFormatting(allowsNonnumericFormatting bool) {
-	x.inner.SetAllowsNonnumericFormatting(allowsNonnumericFormatting)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsNonnumericFormatting:"), allowsNonnumericFormatting)
 }
 
-// IncludesUnit calls the underlying IncludesUnit.
 func (x *ByteCountFormatter) IncludesUnit() bool {
-	return x.inner.IncludesUnit()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesUnit"))
+	return _r
 }
 
-// SetIncludesUnit calls the underlying SetIncludesUnit.
 func (x *ByteCountFormatter) SetIncludesUnit(includesUnit bool) {
-	x.inner.SetIncludesUnit(includesUnit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesUnit:"), includesUnit)
 }
 
-// IncludesCount calls the underlying IncludesCount.
 func (x *ByteCountFormatter) IncludesCount() bool {
-	return x.inner.IncludesCount()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesCount"))
+	return _r
 }
 
-// SetIncludesCount calls the underlying SetIncludesCount.
 func (x *ByteCountFormatter) SetIncludesCount(includesCount bool) {
-	x.inner.SetIncludesCount(includesCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesCount:"), includesCount)
 }
 
-// IncludesActualByteCount calls the underlying IncludesActualByteCount.
 func (x *ByteCountFormatter) IncludesActualByteCount() bool {
-	return x.inner.IncludesActualByteCount()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesActualByteCount"))
+	return _r
 }
 
-// SetIncludesActualByteCount calls the underlying SetIncludesActualByteCount.
 func (x *ByteCountFormatter) SetIncludesActualByteCount(includesActualByteCount bool) {
-	x.inner.SetIncludesActualByteCount(includesActualByteCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesActualByteCount:"), includesActualByteCount)
 }
 
-// IsAdaptive calls the underlying IsAdaptive.
 func (x *ByteCountFormatter) IsAdaptive() bool {
-	return x.inner.IsAdaptive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAdaptive"))
+	return _r
 }
 
-// SetAdaptive calls the underlying SetAdaptive.
 func (x *ByteCountFormatter) SetAdaptive(adaptive bool) {
-	x.inner.SetAdaptive(adaptive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdaptive:"), adaptive)
 }
 
-// ZeroPadsFractionDigits calls the underlying ZeroPadsFractionDigits.
 func (x *ByteCountFormatter) ZeroPadsFractionDigits() bool {
-	return x.inner.ZeroPadsFractionDigits()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("zeroPadsFractionDigits"))
+	return _r
 }
 
-// SetZeroPadsFractionDigits calls the underlying SetZeroPadsFractionDigits.
 func (x *ByteCountFormatter) SetZeroPadsFractionDigits(zeroPadsFractionDigits bool) {
-	x.inner.SetZeroPadsFractionDigits(zeroPadsFractionDigits)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroPadsFractionDigits:"), zeroPadsFractionDigits)
 }
 
-// FormattingContext calls the underlying FormattingContext.
-func (x *ByteCountFormatter) FormattingContext() NSFormattingContext {
-	return NSFormattingContext(x.inner.FormattingContext())
+func (x *ByteCountFormatter) FormattingContext() FormattingContext {
+	_r := objc.Send[FormattingContext](objref.IDOf(x), objc.RegisterName("formattingContext"))
+	return _r
 }
 
-// SetFormattingContext calls the underlying SetFormattingContext.
-func (x *ByteCountFormatter) SetFormattingContext(formattingContext NSFormattingContext) {
-	x.inner.SetFormattingContext(raw.NSFormattingContext(formattingContext))
+func (x *ByteCountFormatter) SetFormattingContext(formattingContext FormattingContext) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingContext:"), formattingContext)
 }
-
-func (x *ByteCountFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
-
-func (x *ByteCountFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.NSObject }
 
 // ByteCountFormatterable is the interface implemented by [ByteCountFormatter], for mocking and DI.
 type ByteCountFormatterable interface {
-	Unwrap() *raw.NSByteCountFormatter
-	WithAllowedUnits(allowedUnits NSByteCountFormatterUnits) *ByteCountFormatter
-	WithCountStyle(countStyle NSByteCountFormatterCountStyle) *ByteCountFormatter
+	obj.Object
+	WithAllowedUnits(allowedUnits ByteCountFormatterUnits) *ByteCountFormatter
+	WithCountStyle(countStyle ByteCountFormatterCountStyle) *ByteCountFormatter
 	WithAllowsNonnumericFormatting(allowsNonnumericFormatting bool) *ByteCountFormatter
 	WithIncludesUnit(includesUnit bool) *ByteCountFormatter
 	WithIncludesCount(includesCount bool) *ByteCountFormatter
 	WithIncludesActualByteCount(includesActualByteCount bool) *ByteCountFormatter
 	WithAdaptive(adaptive bool) *ByteCountFormatter
 	WithZeroPadsFractionDigits(zeroPadsFractionDigits bool) *ByteCountFormatter
-	WithFormattingContext(formattingContext NSFormattingContext) *ByteCountFormatter
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ByteCountFormatter
-	StringFromByteCount(byteCount int64) *String
-	StringFromMeasurement(measurement *raw.NSMeasurement[*raw.NSUnitInformationStorage]) *String
-	AllowedUnits() NSByteCountFormatterUnits
-	SetAllowedUnits(allowedUnits NSByteCountFormatterUnits)
-	CountStyle() NSByteCountFormatterCountStyle
-	SetCountStyle(countStyle NSByteCountFormatterCountStyle)
+	WithFormattingContext(formattingContext FormattingContext) *ByteCountFormatter
+	WithScriptingProperties(scriptingProperties obj.Object) *ByteCountFormatter
+	StringFromByteCount(byteCount int64) string
+	StringFromMeasurement(measurement obj.Object) string
+	AllowedUnits() ByteCountFormatterUnits
+	SetAllowedUnits(allowedUnits ByteCountFormatterUnits)
+	CountStyle() ByteCountFormatterCountStyle
+	SetCountStyle(countStyle ByteCountFormatterCountStyle)
 	AllowsNonnumericFormatting() bool
 	SetAllowsNonnumericFormatting(allowsNonnumericFormatting bool)
 	IncludesUnit() bool
@@ -240,8 +252,8 @@ type ByteCountFormatterable interface {
 	SetAdaptive(adaptive bool)
 	ZeroPadsFractionDigits() bool
 	SetZeroPadsFractionDigits(zeroPadsFractionDigits bool)
-	FormattingContext() NSFormattingContext
-	SetFormattingContext(formattingContext NSFormattingContext)
+	FormattingContext() FormattingContext
+	SetFormattingContext(formattingContext FormattingContext)
 }
 
 var _ ByteCountFormatterable = (*ByteCountFormatter)(nil)

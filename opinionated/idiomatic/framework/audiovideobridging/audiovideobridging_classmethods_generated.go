@@ -5,155 +5,115 @@
 package audiovideobridging
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// ACMPInterfaceWithInterface calls the underlying AVB17221ACMPInterfaceACMPInterfaceWithInterface.
-func ACMPInterfaceWithInterface(anInterface *raw.AVBInterface) *AVB17221ACMPInterface {
-	_r := raw.AVB17221ACMPInterfaceACMPInterfaceWithInterface(anInterface)
-	if _r == nil {
-		return nil
-	}
-	return &AVB17221ACMPInterface{inner: _r}
+// Creates an autoreleased instance of AVB17221ACMPInterface for the specified AVBInterface
+func ACMPInterfaceWithInterface(anInterface *Interface) *AVB17221ACMPInterface {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVB17221ACMPInterface")), objc.RegisterName("ACMPInterfaceWithInterface:"), objref.IDOf(anInterface))
+	return AVB17221ACMPInterfaceFromID(_r)
 }
 
-// ACMPInterfaceWithInterfaceNamed calls the underlying AVB17221ACMPInterfaceACMPInterfaceWithInterfaceNamed.
+// Creates an autoreleased instance of AVB17221ACMPInterfaceWithInterfaceNamed for the specified network interface with the specified BSD name.
 func ACMPInterfaceWithInterfaceNamed(anInterfaceName string) *AVB17221ACMPInterface {
-	_r := raw.AVB17221ACMPInterfaceACMPInterfaceWithInterfaceNamed(foundation.NSStringStringWithUTF8String(anInterfaceName))
-	if _r == nil {
-		return nil
-	}
-	return &AVB17221ACMPInterface{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AVB17221ACMPInterface")), objc.RegisterName("ACMPInterfaceWithInterfaceNamed:"), purego.NSString(anInterfaceName))
+	return AVB17221ACMPInterfaceFromID(_r)
 }
 
-// ErrorForStatusCode calls the underlying AVB17221ACMPMessageErrorForStatusCode.
-func ErrorForStatusCode(statusCode AVB17221ACMPStatusCode) unsafe.Pointer {
-	return raw.AVB17221ACMPMessageErrorForStatusCode(raw.AVB17221ACMPStatusCode(statusCode))
-}
-
-// CommandMessage calls the underlying AVB17221AECPAEMMessageCommandMessage.
+// This method returns an AVB17221AECPAEMMessage instance setup as an AEM command.
 func CommandMessage() *AVB17221AECPAEMMessage {
-	_r := raw.AVB17221AECPAEMMessageCommandMessage()
-	if _r == nil {
-		return nil
-	}
-	return &AVB17221AECPAEMMessage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPAEMMessage")), objc.RegisterName("commandMessage"))
+	return AVB17221AECPAEMMessageFromID(_r)
 }
 
-// ResponseMessage calls the underlying AVB17221AECPAEMMessageResponseMessage.
+// This method returns an AVB17221AECPAEMMessage instance setup as an AEM response.
 func ResponseMessage() *AVB17221AECPAEMMessage {
-	_r := raw.AVB17221AECPAEMMessageResponseMessage()
-	if _r == nil {
-		return nil
-	}
-	return &AVB17221AECPAEMMessage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPAEMMessage")), objc.RegisterName("responseMessage"))
+	return AVB17221AECPAEMMessageFromID(_r)
 }
 
-// ResponseMessageFromCommandMessage calls the underlying AVB17221AECPAEMMessageResponseMessageFromCommandMessage.
-func ResponseMessageFromCommandMessage(commandMessage *raw.AVB17221AECPAEMMessage) *AVB17221AECPAEMMessage {
-	_r := raw.AVB17221AECPAEMMessageResponseMessageFromCommandMessage(commandMessage)
-	if _r == nil {
-		return nil
-	}
-	return &AVB17221AECPAEMMessage{inner: _r}
+// This method returns an AVB17221AECPAEMMessage instance setup as an AEM response with the appropriate info copied from the supplied command message.
+func ResponseMessageFromCommandMessage(commandMessage *AVB17221AECPAEMMessage) *AVB17221AECPAEMMessage {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPAEMMessage")), objc.RegisterName("responseMessageFromCommandMessage:"), objref.IDOf(commandMessage))
+	return AVB17221AECPAEMMessageFromID(_r)
 }
 
-// AVB17221AECPAddressAccessMessageCommandMessage calls the underlying AVB17221AECPAddressAccessMessageCommandMessage.
+// This method returns an AVB17221AECPAddressAccessMessage instance setup as an Address Access command.
 func AVB17221AECPAddressAccessMessageCommandMessage() *AVB17221AECPAddressAccessMessage {
-	_r := raw.AVB17221AECPAddressAccessMessageCommandMessage()
-	if _r == nil {
-		return nil
-	}
-	return &AVB17221AECPAddressAccessMessage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPAddressAccessMessage")), objc.RegisterName("commandMessage"))
+	return AVB17221AECPAddressAccessMessageFromID(_r)
 }
 
-// AVB17221AECPAddressAccessMessageResponseMessage calls the underlying AVB17221AECPAddressAccessMessageResponseMessage.
+// This method returns an AVB17221AECPAEMMessage instance setup as an Address Access response.
 func AVB17221AECPAddressAccessMessageResponseMessage() *AVB17221AECPAddressAccessMessage {
-	_r := raw.AVB17221AECPAddressAccessMessageResponseMessage()
-	if _r == nil {
-		return nil
-	}
-	return &AVB17221AECPAddressAccessMessage{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPAddressAccessMessage")), objc.RegisterName("responseMessage"))
+	return AVB17221AECPAddressAccessMessageFromID(_r)
 }
 
-// AECPInterfaceWithInterface calls the underlying AVB17221AECPInterfaceAECPInterfaceWithInterface.
-func AECPInterfaceWithInterface(anInterface *raw.AVBInterface) *AVB17221AECPInterface {
-	_r := raw.AVB17221AECPInterfaceAECPInterfaceWithInterface(anInterface)
-	if _r == nil {
-		return nil
-	}
-	return &AVB17221AECPInterface{inner: _r}
+// Creates an autoreleased instance of AVB17221AECPInterface for the specified AVBInterface
+func AECPInterfaceWithInterface(anInterface *Interface) *AVB17221AECPInterface {
+	_r := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPInterface")), objc.RegisterName("AECPInterfaceWithInterface:"), objref.IDOf(anInterface))
+	return AVB17221AECPInterfaceFromID(_r)
 }
 
-// AECPInterfaceWithInterfaceNamed calls the underlying AVB17221AECPInterfaceAECPInterfaceWithInterfaceNamed.
+// Creates an autoreleased instance of AVB17221AECPInterfaceWithInterfaceNamed for the specified network interface with the specified BSD name.
 func AECPInterfaceWithInterfaceNamed(anInterfaceName string) *AVB17221AECPInterface {
-	_r := raw.AVB17221AECPInterfaceAECPInterfaceWithInterfaceNamed(foundation.NSStringStringWithUTF8String(anInterfaceName))
-	if _r == nil {
-		return nil
-	}
-	return &AVB17221AECPInterface{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPInterface")), objc.RegisterName("AECPInterfaceWithInterfaceNamed:"), purego.NSString(anInterfaceName))
+	return AVB17221AECPInterfaceFromID(_r)
 }
 
-// AVB17221AECPMessageErrorForStatusCode calls the underlying AVB17221AECPMessageErrorForStatusCode.
-func AVB17221AECPMessageErrorForStatusCode(statusCode AVB17221AECPStatusCode) unsafe.Pointer {
-	return raw.AVB17221AECPMessageErrorForStatusCode(raw.AVB17221AECPStatusCode(statusCode))
-}
-
-// NextAvailableDynamicEntityID calls the underlying AVBCentralManagerNextAvailableDynamicEntityID.
+// This method is used to allocate a dynamic Entity ID . The entity ID allocated by this call can be used for both publishing an Entity with the AVB17221EntityDiscovery class or as a controllerID for the AVB17221ACMPMessage and AVB17221AECPMessage.
 func NextAvailableDynamicEntityID() uint64 {
-	return raw.AVBCentralManagerNextAvailableDynamicEntityID()
+	_r := objc.Send[uint64](objc.ID(_class("AVBCentralManager")), objc.RegisterName("nextAvailableDynamicEntityID"))
+	return _r
 }
 
-// ReleaseDynamicEntityID calls the underlying AVBCentralManagerReleaseDynamicEntityID.
+// This method is used to release a previously allocated dynamic Entity ID.
 func ReleaseDynamicEntityID(entityID uint64) {
-	raw.AVBCentralManagerReleaseDynamicEntityID(entityID)
+	objc.Send[objc.ID](objc.ID(_class("AVBCentralManager")), objc.RegisterName("releaseDynamicEntityID:"), entityID)
 }
 
-// NextAvailableDynamicEntityModelID calls the underlying AVBCentralManagerNextAvailableDynamicEntityModelID.
+// This method is used to allocate a dynamic Entity Model ID . The entity model ID allocated by this call can be used for publishing an Entity with the AVB17221EntityDiscovery class when using a dynamically generated or modified model.
 func NextAvailableDynamicEntityModelID() uint64 {
-	return raw.AVBCentralManagerNextAvailableDynamicEntityModelID()
+	_r := objc.Send[uint64](objc.ID(_class("AVBCentralManager")), objc.RegisterName("nextAvailableDynamicEntityModelID"))
+	return _r
 }
 
-// ReleaseDynamicEntityModelID calls the underlying AVBCentralManagerReleaseDynamicEntityModelID.
+// This method is used to release a previously allocated dynamic Entity Model ID.
 func ReleaseDynamicEntityModelID(entityModelID uint64) {
-	raw.AVBCentralManagerReleaseDynamicEntityModelID(entityModelID)
+	objc.Send[objc.ID](objc.ID(_class("AVBCentralManager")), objc.RegisterName("releaseDynamicEntityModelID:"), entityModelID)
 }
 
-// MacAddressForInterfaceNamed calls the underlying AVBInterfaceMacAddressForInterfaceNamed.
+// This method looks up the MAC address for an interface with a given BSD name.
 func MacAddressForInterfaceNamed(anInterfaceName string) *MACAddress {
-	_r := raw.AVBInterfaceMacAddressForInterfaceNamed(foundation.NSStringStringWithUTF8String(anInterfaceName))
-	if _r == nil {
-		return nil
-	}
-	return &MACAddress{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AVBInterface")), objc.RegisterName("macAddressForInterfaceNamed:"), purego.NSString(anInterfaceName))
+	return MACAddressFromID(_r)
 }
 
+// This method returns an array of BSD interface names of interfaces supporting AVB. An interface is included in this list if it claims it supports AVB.
+//
 // SupportedInterfaces returns the collection as a Go slice.
 func SupportedInterfaces() []string {
-	arr := raw.AVBInterfaceSupportedInterfaces()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("AVBInterface")), objc.RegisterName("supportedInterfaces"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// IsAVBEnabledOnInterfaceNamed calls the underlying AVBInterfaceIsAVBEnabledOnInterfaceNamed.
+// This method determines if AVB has been enabled on an interface.
 func IsAVBEnabledOnInterfaceNamed(anInterfaceName string) bool {
-	return raw.AVBInterfaceIsAVBEnabledOnInterfaceNamed(foundation.NSStringStringWithUTF8String(anInterfaceName))
+	_r := objc.Send[bool](objc.ID(_class("AVBInterface")), objc.RegisterName("isAVBEnabledOnInterfaceNamed:"), purego.NSString(anInterfaceName))
+	return _r
 }
 
-// IsAVBCapableInterfaceNamed calls the underlying AVBInterfaceIsAVBCapableInterfaceNamed.
+// This method determines if AVB is supported on an interface.
 func IsAVBCapableInterfaceNamed(anInterfaceName string) bool {
-	return raw.AVBInterfaceIsAVBCapableInterfaceNamed(foundation.NSStringStringWithUTF8String(anInterfaceName))
+	_r := objc.Send[bool](objc.ID(_class("AVBInterface")), objc.RegisterName("isAVBCapableInterfaceNamed:"), purego.NSString(anInterfaceName))
+	return _r
 }
 
-// MyEntityID calls the underlying AVBInterfaceMyEntityID.
+// This method returns the EntityID which is used by the built-in controller functionality of Mac OS X. This is either the FireWire GUID or an EUI64 based on the first found ethernet type interface (may be an ethernet port, USB ethernet adapter, PCI Express adapter or the AirPort card).
 func MyEntityID() uint64 {
-	return raw.AVBInterfaceMyEntityID()
+	_r := objc.Send[uint64](objc.ID(_class("AVBInterface")), objc.RegisterName("myEntityID"))
+	return _r
 }

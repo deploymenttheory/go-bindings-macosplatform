@@ -5,46 +5,72 @@
 package safariservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safariservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The view controller for a popover associated with your app extension.
 //
-// SafariExtensionViewController wraps [raw.SFSafariExtensionViewController] with a fluent Go API.
+// SafariExtensionViewController is an idiomatic wrapper over the Objective-C class SFSafariExtensionViewController.
 type SafariExtensionViewController struct {
-	inner *raw.SFSafariExtensionViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFSafariExtensionViewController].
-func (x *SafariExtensionViewController) Unwrap() *raw.SFSafariExtensionViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SafariExtensionViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// SafariExtensionViewControllerFromID adopts an existing object pointer as a SafariExtensionViewController (nil for 0).
+// SafariExtensionViewControllerFromID adopts an existing Objective-C object as a SafariExtensionViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func SafariExtensionViewControllerFromID(id objc.ID) *SafariExtensionViewController {
 	if id == 0 {
 		return nil
 	}
-	return &SafariExtensionViewController{inner: raw.SFSafariExtensionViewControllerFromID(id)}
+	x := &SafariExtensionViewController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSafariExtensionViewController creates a new [SafariExtensionViewController].
+// safariExtensionViewControllerAdopt wraps an Objective-C object that this code just created as a
+// SafariExtensionViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func safariExtensionViewControllerAdopt(id objc.ID) *SafariExtensionViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &SafariExtensionViewController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SafariExtensionViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SafariExtensionViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SafariExtensionViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSafariExtensionViewController creates a new SafariExtensionViewController.
 func NewSafariExtensionViewController() *SafariExtensionViewController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSafariExtensionViewController")), objc.RegisterName("new"))
-	return &SafariExtensionViewController{inner: raw.SFSafariExtensionViewControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFSafariExtensionViewController")), objc.RegisterName("new"))
+	return safariExtensionViewControllerAdopt(_id)
 }
 
-// DismissPopover calls the underlying DismissPopover.
 func (x *SafariExtensionViewController) DismissPopover() {
-	x.inner.DismissPopover()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dismissPopover"))
 }
 
 // SafariExtensionViewControllerable is the interface implemented by [SafariExtensionViewController], for mocking and DI.
 type SafariExtensionViewControllerable interface {
-	Unwrap() *raw.SFSafariExtensionViewController
+	obj.Object
 	DismissPopover()
 }
 

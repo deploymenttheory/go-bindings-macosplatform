@@ -5,80 +5,104 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A glyph attribute in an attributed string.
 //
-// GlyphInfo wraps [raw.NSGlyphInfo] with a fluent Go API.
+// GlyphInfo is an idiomatic wrapper over the Objective-C class NSGlyphInfo.
 type GlyphInfo struct {
-	inner *raw.NSGlyphInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSGlyphInfo].
-func (x *GlyphInfo) Unwrap() *raw.NSGlyphInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GlyphInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// GlyphInfoFromID adopts an existing object pointer as a GlyphInfo (nil for 0).
+// GlyphInfoFromID adopts an existing Objective-C object as a GlyphInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func GlyphInfoFromID(id objc.ID) *GlyphInfo {
 	if id == 0 {
 		return nil
 	}
-	return &GlyphInfo{inner: raw.NSGlyphInfoFromID(id)}
+	x := &GlyphInfo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGlyphInfo creates a new [GlyphInfo].
+// glyphInfoAdopt wraps an Objective-C object that this code just created as a
+// GlyphInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func glyphInfoAdopt(id objc.ID) *GlyphInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &GlyphInfo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GlyphInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GlyphInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GlyphInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGlyphInfo creates a new GlyphInfo.
 func NewGlyphInfo() *GlyphInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSGlyphInfo")), objc.RegisterName("new"))
-	return &GlyphInfo{inner: raw.NSGlyphInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSGlyphInfo")), objc.RegisterName("new"))
+	return glyphInfoAdopt(_id)
 }
 
-// GlyphID calls the underlying GlyphID.
 func (x *GlyphInfo) GlyphID() uint16 {
-	return x.inner.GlyphID()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("glyphID"))
+	return _r
 }
 
-// BaseString calls the underlying BaseString.
 func (x *GlyphInfo) BaseString() string {
-	_r := x.inner.BaseString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// GlyphName calls the underlying GlyphName.
 func (x *GlyphInfo) GlyphName() string {
-	_r := x.inner.GlyphName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("glyphName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// CharacterIdentifier calls the underlying CharacterIdentifier.
-func (x *GlyphInfo) CharacterIdentifier() uint {
-	return x.inner.CharacterIdentifier()
+func (x *GlyphInfo) CharacterIdentifier() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("characterIdentifier"))
+	return _r
 }
 
-// CharacterCollection calls the underlying CharacterCollection.
-func (x *GlyphInfo) CharacterCollection() NSCharacterCollection {
-	return NSCharacterCollection(x.inner.CharacterCollection())
+func (x *GlyphInfo) CharacterCollection() CharacterCollection {
+	_r := objc.Send[CharacterCollection](objref.IDOf(x), objc.RegisterName("characterCollection"))
+	return _r
 }
 
 // GlyphInfoable is the interface implemented by [GlyphInfo], for mocking and DI.
 type GlyphInfoable interface {
-	Unwrap() *raw.NSGlyphInfo
+	obj.Object
 	GlyphID() uint16
 	BaseString() string
 	GlyphName() string
-	CharacterIdentifier() uint
-	CharacterCollection() NSCharacterCollection
+	CharacterIdentifier() int
+	CharacterCollection() CharacterCollection
 }
 
 var _ GlyphInfoable = (*GlyphInfo)(nil)

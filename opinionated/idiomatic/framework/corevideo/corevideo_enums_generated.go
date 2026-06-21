@@ -30,26 +30,6 @@ func (e CVAttachmentMode) String() string {
 	}
 }
 
-// The flags to pass to CVPixelBufferLockBaseAddress and CVPixelBufferUnlockBaseAddress.
-// Bitmask — values may be combined with |.
-type CVPixelBufferLockFlags int64
-
-const (
-	// A read-only buffer.
-	KCVPixelBufferLock_ReadOnly CVPixelBufferLockFlags = 1
-)
-
-func (e CVPixelBufferLockFlags) String() string {
-	var parts []string
-	if e&KCVPixelBufferLock_ReadOnly != 0 {
-		parts = append(parts, "KCVPixelBufferLock_ReadOnly")
-	}
-	if len(parts) == 0 {
-		return "0"
-	}
-	return strings.Join(parts, "|")
-}
-
 // The flags to pass to flush the pool.
 // Bitmask — values may be combined with |.
 type CVPixelBufferPoolFlushFlags int64

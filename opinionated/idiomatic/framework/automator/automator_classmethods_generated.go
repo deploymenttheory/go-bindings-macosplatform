@@ -5,21 +5,26 @@
 package automator
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automator"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// RunWorkflowAtURLWithInputError calls the underlying AMWorkflowRunWorkflowAtURLWithInputError.
-func RunWorkflowAtURLWithInputError(fileURL string, input objc.ID) (objc.ID, error) {
-	return raw.AMWorkflowRunWorkflowAtURLWithInputError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), input)
+// Loads and runs the specified workflow file.
+func RunWorkflowAtURLWithInputError(fileURL string, input obj.Object) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("AMWorkflow")), objc.RegisterName("runWorkflowAtURL:withInput:error:"), rt.FileURL(fileURL), objref.IDOf(input), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
-// SharedWorkspace calls the underlying AMWorkspaceSharedWorkspace.
 func SharedWorkspace() *Workspace {
-	_r := raw.AMWorkspaceSharedWorkspace()
-	if _r == nil {
-		return nil
-	}
-	return &Workspace{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AMWorkspace")), objc.RegisterName("sharedWorkspace"))
+	return WorkspaceFromID(_r)
 }

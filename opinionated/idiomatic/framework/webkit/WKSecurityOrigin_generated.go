@@ -5,71 +5,92 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that identifies the origin of a particular resource.
 //
-// WKSecurityOrigin wraps [raw.WKSecurityOrigin] with a fluent Go API.
+// WKSecurityOrigin is an idiomatic wrapper over the Objective-C class WKSecurityOrigin.
 type WKSecurityOrigin struct {
-	inner *raw.WKSecurityOrigin
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKSecurityOrigin].
-func (x *WKSecurityOrigin) Unwrap() *raw.WKSecurityOrigin { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKSecurityOrigin) ID() objc.ID { return x.inner.Ptr() }
-
-// WKSecurityOriginFromID adopts an existing object pointer as a WKSecurityOrigin (nil for 0).
+// WKSecurityOriginFromID adopts an existing Objective-C object as a WKSecurityOrigin
+// (nil for 0), retaining it and registering a release finalizer.
 func WKSecurityOriginFromID(id objc.ID) *WKSecurityOrigin {
 	if id == 0 {
 		return nil
 	}
-	return &WKSecurityOrigin{inner: raw.WKSecurityOriginFromID(id)}
+	x := &WKSecurityOrigin{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWKSecurityOrigin creates a new [WKSecurityOrigin].
+// wKSecurityOriginAdopt wraps an Objective-C object that this code just created as a
+// WKSecurityOrigin (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKSecurityOriginAdopt(id objc.ID) *WKSecurityOrigin {
+	if id == 0 {
+		return nil
+	}
+	x := &WKSecurityOrigin{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WKSecurityOrigin) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKSecurityOrigin) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKSecurityOrigin) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWKSecurityOrigin creates a new WKSecurityOrigin.
 func NewWKSecurityOrigin() *WKSecurityOrigin {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKSecurityOrigin")), objc.RegisterName("new"))
-	return &WKSecurityOrigin{inner: raw.WKSecurityOriginFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WKSecurityOrigin")), objc.RegisterName("new"))
+	return wKSecurityOriginAdopt(_id)
 }
 
-// @abstract The security origin's protocol.
-//
-// Protocol calls the underlying Protocol.
+// The security origin's protocol.
 func (x *WKSecurityOrigin) Protocol() string {
-	_r := x.inner.Protocol()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocol"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The security origin's host.
-//
-// Host calls the underlying Host.
+// The security origin's host.
 func (x *WKSecurityOrigin) Host() string {
-	_r := x.inner.Host()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("host"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The security origin's port.
-//
-// Port calls the underlying Port.
+// The security origin's port.
 func (x *WKSecurityOrigin) Port() int {
-	return x.inner.Port()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("port"))
+	return _r
 }
 
 // WKSecurityOriginable is the interface implemented by [WKSecurityOrigin], for mocking and DI.
 type WKSecurityOriginable interface {
-	Unwrap() *raw.WKSecurityOrigin
+	obj.Object
 	Protocol() string
 	Host() string
 	Port() int

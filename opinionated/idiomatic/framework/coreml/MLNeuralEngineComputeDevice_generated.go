@@ -5,46 +5,73 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a Neural Engine compute device.
 //
-// NeuralEngineComputeDevice wraps [raw.MLNeuralEngineComputeDevice] with a fluent Go API.
+// NeuralEngineComputeDevice is an idiomatic wrapper over the Objective-C class MLNeuralEngineComputeDevice.
 type NeuralEngineComputeDevice struct {
-	inner *raw.MLNeuralEngineComputeDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLNeuralEngineComputeDevice].
-func (x *NeuralEngineComputeDevice) Unwrap() *raw.MLNeuralEngineComputeDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NeuralEngineComputeDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// NeuralEngineComputeDeviceFromID adopts an existing object pointer as a NeuralEngineComputeDevice (nil for 0).
+// NeuralEngineComputeDeviceFromID adopts an existing Objective-C object as a NeuralEngineComputeDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func NeuralEngineComputeDeviceFromID(id objc.ID) *NeuralEngineComputeDevice {
 	if id == 0 {
 		return nil
 	}
-	return &NeuralEngineComputeDevice{inner: raw.MLNeuralEngineComputeDeviceFromID(id)}
+	x := &NeuralEngineComputeDevice{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNeuralEngineComputeDevice creates a new [NeuralEngineComputeDevice].
+// neuralEngineComputeDeviceAdopt wraps an Objective-C object that this code just created as a
+// NeuralEngineComputeDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func neuralEngineComputeDeviceAdopt(id objc.ID) *NeuralEngineComputeDevice {
+	if id == 0 {
+		return nil
+	}
+	x := &NeuralEngineComputeDevice{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NeuralEngineComputeDevice) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NeuralEngineComputeDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NeuralEngineComputeDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNeuralEngineComputeDevice creates a new NeuralEngineComputeDevice.
 func NewNeuralEngineComputeDevice() *NeuralEngineComputeDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLNeuralEngineComputeDevice")), objc.RegisterName("new"))
-	return &NeuralEngineComputeDevice{inner: raw.MLNeuralEngineComputeDeviceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLNeuralEngineComputeDevice")), objc.RegisterName("new"))
+	return neuralEngineComputeDeviceAdopt(_id)
 }
 
-// TotalCoreCount calls the underlying TotalCoreCount.
 func (x *NeuralEngineComputeDevice) TotalCoreCount() int {
-	return x.inner.TotalCoreCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalCoreCount"))
+	return _r
 }
 
 // NeuralEngineComputeDeviceable is the interface implemented by [NeuralEngineComputeDevice], for mocking and DI.
 type NeuralEngineComputeDeviceable interface {
-	Unwrap() *raw.MLNeuralEngineComputeDevice
+	obj.Object
 	TotalCoreCount() int
 }
 

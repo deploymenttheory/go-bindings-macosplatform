@@ -5,90 +5,88 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRAsyncCallbackQueueWorkItem wraps [raw.MTRAsyncCallbackQueueWorkItem] with a fluent Go API.
+// MTRAsyncCallbackQueueWorkItem is an idiomatic wrapper over the Objective-C class MTRAsyncCallbackQueueWorkItem.
 type MTRAsyncCallbackQueueWorkItem struct {
-	inner *raw.MTRAsyncCallbackQueueWorkItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRAsyncCallbackQueueWorkItem].
-func (x *MTRAsyncCallbackQueueWorkItem) Unwrap() *raw.MTRAsyncCallbackQueueWorkItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAsyncCallbackQueueWorkItem) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRAsyncCallbackQueueWorkItemFromID adopts an existing object pointer as a MTRAsyncCallbackQueueWorkItem (nil for 0).
+// MTRAsyncCallbackQueueWorkItemFromID adopts an existing Objective-C object as a MTRAsyncCallbackQueueWorkItem
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRAsyncCallbackQueueWorkItemFromID(id objc.ID) *MTRAsyncCallbackQueueWorkItem {
 	if id == 0 {
 		return nil
 	}
-	return &MTRAsyncCallbackQueueWorkItem{inner: raw.MTRAsyncCallbackQueueWorkItemFromID(id)}
-}
-
-// NewMTRAsyncCallbackQueueWorkItemWithQueue creates a new [MTRAsyncCallbackQueueWorkItem].
-func NewMTRAsyncCallbackQueueWorkItemWithQueue(queue *foundation.NSObject) *MTRAsyncCallbackQueueWorkItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAsyncCallbackQueueWorkItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueue:"), queue.Ptr())
-	return &MTRAsyncCallbackQueueWorkItem{inner: raw.MTRAsyncCallbackQueueWorkItemFromID(_id)}
-}
-
-// WithReadyHandler sets the readyHandler property and returns the receiver for chaining.
-func (x *MTRAsyncCallbackQueueWorkItem) WithReadyHandler(readyHandler func(objc.ID, uint)) *MTRAsyncCallbackQueueWorkItem {
-	x.inner.SetReadyHandler(readyHandler)
+	x := &MTRAsyncCallbackQueueWorkItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithCancelHandler sets the cancelHandler property and returns the receiver for chaining.
+// mTRAsyncCallbackQueueWorkItemAdopt wraps an Objective-C object that this code just created as a
+// MTRAsyncCallbackQueueWorkItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRAsyncCallbackQueueWorkItemAdopt(id objc.ID) *MTRAsyncCallbackQueueWorkItem {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRAsyncCallbackQueueWorkItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRAsyncCallbackQueueWorkItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRAsyncCallbackQueueWorkItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRAsyncCallbackQueueWorkItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRAsyncCallbackQueueWorkItemWithQueue creates a new MTRAsyncCallbackQueueWorkItem.
+func NewMTRAsyncCallbackQueueWorkItemWithQueue(queue obj.Object) *MTRAsyncCallbackQueueWorkItem {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRAsyncCallbackQueueWorkItem")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueue:"), objref.IDOf(queue))
+	return mTRAsyncCallbackQueueWorkItemAdopt(_id)
+}
+
+// WithCancelHandler sets cancelHandler and returns the receiver so calls can be chained.
 func (x *MTRAsyncCallbackQueueWorkItem) WithCancelHandler(cancelHandler func()) *MTRAsyncCallbackQueueWorkItem {
-	x.inner.SetCancelHandler(cancelHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelHandler:"), cancelHandler)
 	return x
 }
 
-// EndWork calls the underlying EndWork.
 func (x *MTRAsyncCallbackQueueWorkItem) EndWork() {
-	x.inner.EndWork()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endWork"))
 }
 
-// RetryWork calls the underlying RetryWork.
 func (x *MTRAsyncCallbackQueueWorkItem) RetryWork() {
-	x.inner.RetryWork()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("retryWork"))
 }
 
-// ReadyHandler calls the underlying ReadyHandler.
-func (x *MTRAsyncCallbackQueueWorkItem) ReadyHandler() objc.Block {
-	return x.inner.ReadyHandler()
-}
-
-// SetReadyHandler calls the underlying SetReadyHandler.
-func (x *MTRAsyncCallbackQueueWorkItem) SetReadyHandler(readyHandler func(objc.ID, uint)) {
-	x.inner.SetReadyHandler(readyHandler)
-}
-
-// CancelHandler calls the underlying CancelHandler.
-func (x *MTRAsyncCallbackQueueWorkItem) CancelHandler() objc.Block {
-	return x.inner.CancelHandler()
-}
-
-// SetCancelHandler calls the underlying SetCancelHandler.
 func (x *MTRAsyncCallbackQueueWorkItem) SetCancelHandler(cancelHandler func()) {
-	x.inner.SetCancelHandler(cancelHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelHandler:"), cancelHandler)
 }
 
 // MTRAsyncCallbackQueueWorkItemable is the interface implemented by [MTRAsyncCallbackQueueWorkItem], for mocking and DI.
 type MTRAsyncCallbackQueueWorkItemable interface {
-	Unwrap() *raw.MTRAsyncCallbackQueueWorkItem
-	WithReadyHandler(readyHandler func(objc.ID, uint)) *MTRAsyncCallbackQueueWorkItem
+	obj.Object
 	WithCancelHandler(cancelHandler func()) *MTRAsyncCallbackQueueWorkItem
 	EndWork()
 	RetryWork()
-	ReadyHandler() objc.Block
-	SetReadyHandler(readyHandler func(objc.ID, uint))
-	CancelHandler() objc.Block
 	SetCancelHandler(cancelHandler func())
 }
 

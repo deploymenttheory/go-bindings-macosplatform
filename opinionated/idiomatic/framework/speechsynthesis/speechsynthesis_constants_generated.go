@@ -5,272 +5,341 @@
 package speechsynthesis
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speechsynthesis"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KSpeechStatusProperty returns the value of the CoreFoundation reference constant kSpeechStatusProperty as an objc.ID.
-func KSpeechStatusProperty() objc.ID { return purego.CFConstant(raw.KSpeechStatusProperty()) }
-
-// KSpeechErrorsProperty returns the value of the CoreFoundation reference constant kSpeechErrorsProperty as an objc.ID.
-func KSpeechErrorsProperty() objc.ID { return purego.CFConstant(raw.KSpeechErrorsProperty()) }
-
-// KSpeechInputModeProperty returns the value of the CoreFoundation reference constant kSpeechInputModeProperty as an objc.ID.
-func KSpeechInputModeProperty() objc.ID { return purego.CFConstant(raw.KSpeechInputModeProperty()) }
-
-// KSpeechCharacterModeProperty returns the value of the CoreFoundation reference constant kSpeechCharacterModeProperty as an objc.ID.
-func KSpeechCharacterModeProperty() objc.ID {
-	return purego.CFConstant(raw.KSpeechCharacterModeProperty())
+// KSpeechStatusProperty returns the value of the constant kSpeechStatusProperty.
+func KSpeechStatusProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechStatusProperty")))
 }
 
-// KSpeechNumberModeProperty returns the value of the CoreFoundation reference constant kSpeechNumberModeProperty as an objc.ID.
-func KSpeechNumberModeProperty() objc.ID { return purego.CFConstant(raw.KSpeechNumberModeProperty()) }
-
-// KSpeechRateProperty returns the value of the CoreFoundation reference constant kSpeechRateProperty as an objc.ID.
-func KSpeechRateProperty() objc.ID { return purego.CFConstant(raw.KSpeechRateProperty()) }
-
-// KSpeechPitchBaseProperty returns the value of the CoreFoundation reference constant kSpeechPitchBaseProperty as an objc.ID.
-func KSpeechPitchBaseProperty() objc.ID { return purego.CFConstant(raw.KSpeechPitchBaseProperty()) }
-
-// KSpeechPitchModProperty returns the value of the CoreFoundation reference constant kSpeechPitchModProperty as an objc.ID.
-func KSpeechPitchModProperty() objc.ID { return purego.CFConstant(raw.KSpeechPitchModProperty()) }
-
-// KSpeechVolumeProperty returns the value of the CoreFoundation reference constant kSpeechVolumeProperty as an objc.ID.
-func KSpeechVolumeProperty() objc.ID { return purego.CFConstant(raw.KSpeechVolumeProperty()) }
-
-// KSpeechSynthesizerInfoProperty returns the value of the CoreFoundation reference constant kSpeechSynthesizerInfoProperty as an objc.ID.
-func KSpeechSynthesizerInfoProperty() objc.ID {
-	return purego.CFConstant(raw.KSpeechSynthesizerInfoProperty())
+// KSpeechErrorsProperty returns the value of the constant kSpeechErrorsProperty.
+func KSpeechErrorsProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechErrorsProperty")))
 }
 
-// KSpeechRecentSyncProperty returns the value of the CoreFoundation reference constant kSpeechRecentSyncProperty as an objc.ID.
-func KSpeechRecentSyncProperty() objc.ID { return purego.CFConstant(raw.KSpeechRecentSyncProperty()) }
-
-// KSpeechPhonemeSymbolsProperty returns the value of the CoreFoundation reference constant kSpeechPhonemeSymbolsProperty as an objc.ID.
-func KSpeechPhonemeSymbolsProperty() objc.ID {
-	return purego.CFConstant(raw.KSpeechPhonemeSymbolsProperty())
+// KSpeechInputModeProperty returns the value of the constant kSpeechInputModeProperty.
+func KSpeechInputModeProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechInputModeProperty")))
 }
 
-// KSpeechCurrentVoiceProperty returns the value of the CoreFoundation reference constant kSpeechCurrentVoiceProperty as an objc.ID.
-func KSpeechCurrentVoiceProperty() objc.ID {
-	return purego.CFConstant(raw.KSpeechCurrentVoiceProperty())
+// KSpeechCharacterModeProperty returns the value of the constant kSpeechCharacterModeProperty.
+func KSpeechCharacterModeProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechCharacterModeProperty")))
 }
 
-// KSpeechCommandDelimiterProperty returns the value of the CoreFoundation reference constant kSpeechCommandDelimiterProperty as an objc.ID.
-func KSpeechCommandDelimiterProperty() objc.ID {
-	return purego.CFConstant(raw.KSpeechCommandDelimiterProperty())
+// KSpeechNumberModeProperty returns the value of the constant kSpeechNumberModeProperty.
+func KSpeechNumberModeProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechNumberModeProperty")))
 }
 
-// KSpeechResetProperty returns the value of the CoreFoundation reference constant kSpeechResetProperty as an objc.ID.
-func KSpeechResetProperty() objc.ID { return purego.CFConstant(raw.KSpeechResetProperty()) }
-
-// KSpeechOutputToFileURLProperty returns the value of the CoreFoundation reference constant kSpeechOutputToFileURLProperty as an objc.ID.
-func KSpeechOutputToFileURLProperty() objc.ID {
-	return purego.CFConstant(raw.KSpeechOutputToFileURLProperty())
+// KSpeechRateProperty returns the value of the constant kSpeechRateProperty.
+func KSpeechRateProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechRateProperty")))
 }
 
-// KSpeechOutputToExtAudioFileProperty returns the value of the CoreFoundation reference constant kSpeechOutputToExtAudioFileProperty as an objc.ID.
-func KSpeechOutputToExtAudioFileProperty() objc.ID {
-	return purego.CFConstant(raw.KSpeechOutputToExtAudioFileProperty())
+// KSpeechPitchBaseProperty returns the value of the constant kSpeechPitchBaseProperty.
+func KSpeechPitchBaseProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechPitchBaseProperty")))
 }
 
-// KSpeechOutputToAudioDeviceProperty returns the value of the CoreFoundation reference constant kSpeechOutputToAudioDeviceProperty as an objc.ID.
-func KSpeechOutputToAudioDeviceProperty() objc.ID {
-	return purego.CFConstant(raw.KSpeechOutputToAudioDeviceProperty())
+// KSpeechPitchModProperty returns the value of the constant kSpeechPitchModProperty.
+func KSpeechPitchModProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechPitchModProperty")))
 }
 
-// KSpeechOutputToFileDescriptorProperty returns the value of the CoreFoundation reference constant kSpeechOutputToFileDescriptorProperty as an objc.ID.
-func KSpeechOutputToFileDescriptorProperty() objc.ID {
-	return purego.CFConstant(raw.KSpeechOutputToFileDescriptorProperty())
+// KSpeechVolumeProperty returns the value of the constant kSpeechVolumeProperty.
+func KSpeechVolumeProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechVolumeProperty")))
 }
 
-// KSpeechAudioOutputFormatProperty returns the value of the CoreFoundation reference constant kSpeechAudioOutputFormatProperty as an objc.ID.
-func KSpeechAudioOutputFormatProperty() objc.ID {
-	return purego.CFConstant(raw.KSpeechAudioOutputFormatProperty())
+// KSpeechSynthesizerInfoProperty returns the value of the constant kSpeechSynthesizerInfoProperty.
+func KSpeechSynthesizerInfoProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechSynthesizerInfoProperty")))
 }
 
-// KSpeechOutputChannelMapProperty returns the value of the CoreFoundation reference constant kSpeechOutputChannelMapProperty as an objc.ID.
-func KSpeechOutputChannelMapProperty() objc.ID {
-	return purego.CFConstant(raw.KSpeechOutputChannelMapProperty())
+// KSpeechRecentSyncProperty returns the value of the constant kSpeechRecentSyncProperty.
+func KSpeechRecentSyncProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechRecentSyncProperty")))
 }
 
-// KSpeechRefConProperty returns the value of the CoreFoundation reference constant kSpeechRefConProperty as an objc.ID.
-func KSpeechRefConProperty() objc.ID { return purego.CFConstant(raw.KSpeechRefConProperty()) }
-
-// KSpeechTextDoneCallBack returns the value of the CoreFoundation reference constant kSpeechTextDoneCallBack as an objc.ID.
-func KSpeechTextDoneCallBack() objc.ID { return purego.CFConstant(raw.KSpeechTextDoneCallBack()) }
-
-// KSpeechSpeechDoneCallBack returns the value of the CoreFoundation reference constant kSpeechSpeechDoneCallBack as an objc.ID.
-func KSpeechSpeechDoneCallBack() objc.ID { return purego.CFConstant(raw.KSpeechSpeechDoneCallBack()) }
-
-// KSpeechSyncCallBack returns the value of the CoreFoundation reference constant kSpeechSyncCallBack as an objc.ID.
-func KSpeechSyncCallBack() objc.ID { return purego.CFConstant(raw.KSpeechSyncCallBack()) }
-
-// KSpeechPhonemeCallBack returns the value of the CoreFoundation reference constant kSpeechPhonemeCallBack as an objc.ID.
-func KSpeechPhonemeCallBack() objc.ID { return purego.CFConstant(raw.KSpeechPhonemeCallBack()) }
-
-// KSpeechErrorCFCallBack returns the value of the CoreFoundation reference constant kSpeechErrorCFCallBack as an objc.ID.
-func KSpeechErrorCFCallBack() objc.ID { return purego.CFConstant(raw.KSpeechErrorCFCallBack()) }
-
-// KSpeechWordCFCallBack returns the value of the CoreFoundation reference constant kSpeechWordCFCallBack as an objc.ID.
-func KSpeechWordCFCallBack() objc.ID { return purego.CFConstant(raw.KSpeechWordCFCallBack()) }
-
-// KSpeechPhonemeOptionsProperty returns the value of the CoreFoundation reference constant kSpeechPhonemeOptionsProperty as an objc.ID.
-func KSpeechPhonemeOptionsProperty() objc.ID {
-	return purego.CFConstant(raw.KSpeechPhonemeOptionsProperty())
+// KSpeechPhonemeSymbolsProperty returns the value of the constant kSpeechPhonemeSymbolsProperty.
+func KSpeechPhonemeSymbolsProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechPhonemeSymbolsProperty")))
 }
 
-// KSpeechAudioUnitProperty returns the value of the CoreFoundation reference constant kSpeechAudioUnitProperty as an objc.ID.
-func KSpeechAudioUnitProperty() objc.ID { return purego.CFConstant(raw.KSpeechAudioUnitProperty()) }
-
-// KSpeechAudioGraphProperty returns the value of the CoreFoundation reference constant kSpeechAudioGraphProperty as an objc.ID.
-func KSpeechAudioGraphProperty() objc.ID { return purego.CFConstant(raw.KSpeechAudioGraphProperty()) }
-
-// KSpeechSynthExtensionProperty returns the value of the CoreFoundation reference constant kSpeechSynthExtensionProperty as an objc.ID.
-func KSpeechSynthExtensionProperty() objc.ID {
-	return purego.CFConstant(raw.KSpeechSynthExtensionProperty())
+// KSpeechCurrentVoiceProperty returns the value of the constant kSpeechCurrentVoiceProperty.
+func KSpeechCurrentVoiceProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechCurrentVoiceProperty")))
 }
 
-// KSpeechModeText returns the value of the CoreFoundation reference constant kSpeechModeText as an objc.ID.
-func KSpeechModeText() objc.ID { return purego.CFConstant(raw.KSpeechModeText()) }
-
-// KSpeechModePhoneme returns the value of the CoreFoundation reference constant kSpeechModePhoneme as an objc.ID.
-func KSpeechModePhoneme() objc.ID { return purego.CFConstant(raw.KSpeechModePhoneme()) }
-
-// KSpeechModeTune returns the value of the CoreFoundation reference constant kSpeechModeTune as an objc.ID.
-func KSpeechModeTune() objc.ID { return purego.CFConstant(raw.KSpeechModeTune()) }
-
-// KSpeechModeNormal returns the value of the CoreFoundation reference constant kSpeechModeNormal as an objc.ID.
-func KSpeechModeNormal() objc.ID { return purego.CFConstant(raw.KSpeechModeNormal()) }
-
-// KSpeechModeLiteral returns the value of the CoreFoundation reference constant kSpeechModeLiteral as an objc.ID.
-func KSpeechModeLiteral() objc.ID { return purego.CFConstant(raw.KSpeechModeLiteral()) }
-
-// KSpeechNoEndingProsody returns the value of the CoreFoundation reference constant kSpeechNoEndingProsody as an objc.ID.
-func KSpeechNoEndingProsody() objc.ID { return purego.CFConstant(raw.KSpeechNoEndingProsody()) }
-
-// KSpeechNoSpeechInterrupt returns the value of the CoreFoundation reference constant kSpeechNoSpeechInterrupt as an objc.ID.
-func KSpeechNoSpeechInterrupt() objc.ID { return purego.CFConstant(raw.KSpeechNoSpeechInterrupt()) }
-
-// KSpeechPreflightThenPause returns the value of the CoreFoundation reference constant kSpeechPreflightThenPause as an objc.ID.
-func KSpeechPreflightThenPause() objc.ID { return purego.CFConstant(raw.KSpeechPreflightThenPause()) }
-
-// KSpeechStatusOutputBusy returns the value of the CoreFoundation reference constant kSpeechStatusOutputBusy as an objc.ID.
-func KSpeechStatusOutputBusy() objc.ID { return purego.CFConstant(raw.KSpeechStatusOutputBusy()) }
-
-// KSpeechStatusOutputPaused returns the value of the CoreFoundation reference constant kSpeechStatusOutputPaused as an objc.ID.
-func KSpeechStatusOutputPaused() objc.ID { return purego.CFConstant(raw.KSpeechStatusOutputPaused()) }
-
-// KSpeechStatusNumberOfCharactersLeft returns the value of the CoreFoundation reference constant kSpeechStatusNumberOfCharactersLeft as an objc.ID.
-func KSpeechStatusNumberOfCharactersLeft() objc.ID {
-	return purego.CFConstant(raw.KSpeechStatusNumberOfCharactersLeft())
+// KSpeechCommandDelimiterProperty returns the value of the constant kSpeechCommandDelimiterProperty.
+func KSpeechCommandDelimiterProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechCommandDelimiterProperty")))
 }
 
-// KSpeechStatusPhonemeCode returns the value of the CoreFoundation reference constant kSpeechStatusPhonemeCode as an objc.ID.
-func KSpeechStatusPhonemeCode() objc.ID { return purego.CFConstant(raw.KSpeechStatusPhonemeCode()) }
-
-// KSpeechErrorCount returns the value of the CoreFoundation reference constant kSpeechErrorCount as an objc.ID.
-func KSpeechErrorCount() objc.ID { return purego.CFConstant(raw.KSpeechErrorCount()) }
-
-// KSpeechErrorOldest returns the value of the CoreFoundation reference constant kSpeechErrorOldest as an objc.ID.
-func KSpeechErrorOldest() objc.ID { return purego.CFConstant(raw.KSpeechErrorOldest()) }
-
-// KSpeechErrorOldestCharacterOffset returns the value of the CoreFoundation reference constant kSpeechErrorOldestCharacterOffset as an objc.ID.
-func KSpeechErrorOldestCharacterOffset() objc.ID {
-	return purego.CFConstant(raw.KSpeechErrorOldestCharacterOffset())
+// KSpeechResetProperty returns the value of the constant kSpeechResetProperty.
+func KSpeechResetProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechResetProperty")))
 }
 
-// KSpeechErrorNewest returns the value of the CoreFoundation reference constant kSpeechErrorNewest as an objc.ID.
-func KSpeechErrorNewest() objc.ID { return purego.CFConstant(raw.KSpeechErrorNewest()) }
-
-// KSpeechErrorNewestCharacterOffset returns the value of the CoreFoundation reference constant kSpeechErrorNewestCharacterOffset as an objc.ID.
-func KSpeechErrorNewestCharacterOffset() objc.ID {
-	return purego.CFConstant(raw.KSpeechErrorNewestCharacterOffset())
+// KSpeechOutputToFileURLProperty returns the value of the constant kSpeechOutputToFileURLProperty.
+func KSpeechOutputToFileURLProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechOutputToFileURLProperty")))
 }
 
-// KSpeechSynthesizerInfoIdentifier returns the value of the CoreFoundation reference constant kSpeechSynthesizerInfoIdentifier as an objc.ID.
-func KSpeechSynthesizerInfoIdentifier() objc.ID {
-	return purego.CFConstant(raw.KSpeechSynthesizerInfoIdentifier())
+// KSpeechOutputToExtAudioFileProperty returns the value of the constant kSpeechOutputToExtAudioFileProperty.
+func KSpeechOutputToExtAudioFileProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechOutputToExtAudioFileProperty")))
 }
 
-// KSpeechSynthesizerInfoManufacturer returns the value of the CoreFoundation reference constant kSpeechSynthesizerInfoManufacturer as an objc.ID.
-func KSpeechSynthesizerInfoManufacturer() objc.ID {
-	return purego.CFConstant(raw.KSpeechSynthesizerInfoManufacturer())
+// KSpeechOutputToAudioDeviceProperty returns the value of the constant kSpeechOutputToAudioDeviceProperty.
+func KSpeechOutputToAudioDeviceProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechOutputToAudioDeviceProperty")))
 }
 
-// KSpeechSynthesizerInfoVersion returns the value of the CoreFoundation reference constant kSpeechSynthesizerInfoVersion as an objc.ID.
-func KSpeechSynthesizerInfoVersion() objc.ID {
-	return purego.CFConstant(raw.KSpeechSynthesizerInfoVersion())
+// KSpeechOutputToFileDescriptorProperty returns the value of the constant kSpeechOutputToFileDescriptorProperty.
+func KSpeechOutputToFileDescriptorProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechOutputToFileDescriptorProperty")))
 }
 
-// KSpeechPhonemeInfoOpcode returns the value of the CoreFoundation reference constant kSpeechPhonemeInfoOpcode as an objc.ID.
-func KSpeechPhonemeInfoOpcode() objc.ID { return purego.CFConstant(raw.KSpeechPhonemeInfoOpcode()) }
-
-// KSpeechPhonemeInfoSymbol returns the value of the CoreFoundation reference constant kSpeechPhonemeInfoSymbol as an objc.ID.
-func KSpeechPhonemeInfoSymbol() objc.ID { return purego.CFConstant(raw.KSpeechPhonemeInfoSymbol()) }
-
-// KSpeechPhonemeInfoExample returns the value of the CoreFoundation reference constant kSpeechPhonemeInfoExample as an objc.ID.
-func KSpeechPhonemeInfoExample() objc.ID { return purego.CFConstant(raw.KSpeechPhonemeInfoExample()) }
-
-// KSpeechPhonemeInfoHiliteStart returns the value of the CoreFoundation reference constant kSpeechPhonemeInfoHiliteStart as an objc.ID.
-func KSpeechPhonemeInfoHiliteStart() objc.ID {
-	return purego.CFConstant(raw.KSpeechPhonemeInfoHiliteStart())
+// KSpeechAudioOutputFormatProperty returns the value of the constant kSpeechAudioOutputFormatProperty.
+func KSpeechAudioOutputFormatProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechAudioOutputFormatProperty")))
 }
 
-// KSpeechPhonemeInfoHiliteEnd returns the value of the CoreFoundation reference constant kSpeechPhonemeInfoHiliteEnd as an objc.ID.
-func KSpeechPhonemeInfoHiliteEnd() objc.ID {
-	return purego.CFConstant(raw.KSpeechPhonemeInfoHiliteEnd())
+// KSpeechOutputChannelMapProperty returns the value of the constant kSpeechOutputChannelMapProperty.
+func KSpeechOutputChannelMapProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechOutputChannelMapProperty")))
 }
 
-// KSpeechVoiceCreator returns the value of the CoreFoundation reference constant kSpeechVoiceCreator as an objc.ID.
-func KSpeechVoiceCreator() objc.ID { return purego.CFConstant(raw.KSpeechVoiceCreator()) }
-
-// KSpeechVoiceID returns the value of the CoreFoundation reference constant kSpeechVoiceID as an objc.ID.
-func KSpeechVoiceID() objc.ID { return purego.CFConstant(raw.KSpeechVoiceID()) }
-
-// KSpeechCommandPrefix returns the value of the CoreFoundation reference constant kSpeechCommandPrefix as an objc.ID.
-func KSpeechCommandPrefix() objc.ID { return purego.CFConstant(raw.KSpeechCommandPrefix()) }
-
-// KSpeechCommandSuffix returns the value of the CoreFoundation reference constant kSpeechCommandSuffix as an objc.ID.
-func KSpeechCommandSuffix() objc.ID { return purego.CFConstant(raw.KSpeechCommandSuffix()) }
-
-// KSpeechDictionaryLocaleIdentifier returns the value of the CoreFoundation reference constant kSpeechDictionaryLocaleIdentifier as an objc.ID.
-func KSpeechDictionaryLocaleIdentifier() objc.ID {
-	return purego.CFConstant(raw.KSpeechDictionaryLocaleIdentifier())
+// KSpeechRefConProperty returns the value of the constant kSpeechRefConProperty.
+func KSpeechRefConProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechRefConProperty")))
 }
 
-// KSpeechDictionaryModificationDate returns the value of the CoreFoundation reference constant kSpeechDictionaryModificationDate as an objc.ID.
-func KSpeechDictionaryModificationDate() objc.ID {
-	return purego.CFConstant(raw.KSpeechDictionaryModificationDate())
+// KSpeechTextDoneCallBack returns the value of the constant kSpeechTextDoneCallBack.
+func KSpeechTextDoneCallBack() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechTextDoneCallBack")))
 }
 
-// KSpeechDictionaryPronunciations returns the value of the CoreFoundation reference constant kSpeechDictionaryPronunciations as an objc.ID.
-func KSpeechDictionaryPronunciations() objc.ID {
-	return purego.CFConstant(raw.KSpeechDictionaryPronunciations())
+// KSpeechSpeechDoneCallBack returns the value of the constant kSpeechSpeechDoneCallBack.
+func KSpeechSpeechDoneCallBack() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechSpeechDoneCallBack")))
 }
 
-// KSpeechDictionaryAbbreviations returns the value of the CoreFoundation reference constant kSpeechDictionaryAbbreviations as an objc.ID.
-func KSpeechDictionaryAbbreviations() objc.ID {
-	return purego.CFConstant(raw.KSpeechDictionaryAbbreviations())
+// KSpeechSyncCallBack returns the value of the constant kSpeechSyncCallBack.
+func KSpeechSyncCallBack() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechSyncCallBack")))
 }
 
-// KSpeechDictionaryEntrySpelling returns the value of the CoreFoundation reference constant kSpeechDictionaryEntrySpelling as an objc.ID.
-func KSpeechDictionaryEntrySpelling() objc.ID {
-	return purego.CFConstant(raw.KSpeechDictionaryEntrySpelling())
+// KSpeechPhonemeCallBack returns the value of the constant kSpeechPhonemeCallBack.
+func KSpeechPhonemeCallBack() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechPhonemeCallBack")))
 }
 
-// KSpeechDictionaryEntryPhonemes returns the value of the CoreFoundation reference constant kSpeechDictionaryEntryPhonemes as an objc.ID.
-func KSpeechDictionaryEntryPhonemes() objc.ID {
-	return purego.CFConstant(raw.KSpeechDictionaryEntryPhonemes())
+// KSpeechErrorCFCallBack returns the value of the constant kSpeechErrorCFCallBack.
+func KSpeechErrorCFCallBack() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechErrorCFCallBack")))
 }
 
-// KSpeechErrorCallbackSpokenString returns the value of the CoreFoundation reference constant kSpeechErrorCallbackSpokenString as an objc.ID.
-func KSpeechErrorCallbackSpokenString() objc.ID {
-	return purego.CFConstant(raw.KSpeechErrorCallbackSpokenString())
+// KSpeechWordCFCallBack returns the value of the constant kSpeechWordCFCallBack.
+func KSpeechWordCFCallBack() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechWordCFCallBack")))
 }
 
-// KSpeechErrorCallbackCharacterOffset returns the value of the CoreFoundation reference constant kSpeechErrorCallbackCharacterOffset as an objc.ID.
-func KSpeechErrorCallbackCharacterOffset() objc.ID {
-	return purego.CFConstant(raw.KSpeechErrorCallbackCharacterOffset())
+// KSpeechPhonemeOptionsProperty returns the value of the constant kSpeechPhonemeOptionsProperty.
+func KSpeechPhonemeOptionsProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechPhonemeOptionsProperty")))
+}
+
+// KSpeechAudioUnitProperty returns the value of the constant kSpeechAudioUnitProperty.
+func KSpeechAudioUnitProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechAudioUnitProperty")))
+}
+
+// KSpeechAudioGraphProperty returns the value of the constant kSpeechAudioGraphProperty.
+func KSpeechAudioGraphProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechAudioGraphProperty")))
+}
+
+// KSpeechSynthExtensionProperty returns the value of the constant kSpeechSynthExtensionProperty.
+func KSpeechSynthExtensionProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechSynthExtensionProperty")))
+}
+
+// KSpeechModeText returns the value of the constant kSpeechModeText.
+func KSpeechModeText() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSpeechModeText"))) }
+
+// KSpeechModePhoneme returns the value of the constant kSpeechModePhoneme.
+func KSpeechModePhoneme() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechModePhoneme")))
+}
+
+// KSpeechModeTune returns the value of the constant kSpeechModeTune.
+func KSpeechModeTune() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSpeechModeTune"))) }
+
+// KSpeechModeNormal returns the value of the constant kSpeechModeNormal.
+func KSpeechModeNormal() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSpeechModeNormal"))) }
+
+// KSpeechModeLiteral returns the value of the constant kSpeechModeLiteral.
+func KSpeechModeLiteral() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechModeLiteral")))
+}
+
+// KSpeechNoEndingProsody returns the value of the constant kSpeechNoEndingProsody.
+func KSpeechNoEndingProsody() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechNoEndingProsody")))
+}
+
+// KSpeechNoSpeechInterrupt returns the value of the constant kSpeechNoSpeechInterrupt.
+func KSpeechNoSpeechInterrupt() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechNoSpeechInterrupt")))
+}
+
+// KSpeechPreflightThenPause returns the value of the constant kSpeechPreflightThenPause.
+func KSpeechPreflightThenPause() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechPreflightThenPause")))
+}
+
+// KSpeechStatusOutputBusy returns the value of the constant kSpeechStatusOutputBusy.
+func KSpeechStatusOutputBusy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechStatusOutputBusy")))
+}
+
+// KSpeechStatusOutputPaused returns the value of the constant kSpeechStatusOutputPaused.
+func KSpeechStatusOutputPaused() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechStatusOutputPaused")))
+}
+
+// KSpeechStatusNumberOfCharactersLeft returns the value of the constant kSpeechStatusNumberOfCharactersLeft.
+func KSpeechStatusNumberOfCharactersLeft() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechStatusNumberOfCharactersLeft")))
+}
+
+// KSpeechStatusPhonemeCode returns the value of the constant kSpeechStatusPhonemeCode.
+func KSpeechStatusPhonemeCode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechStatusPhonemeCode")))
+}
+
+// KSpeechErrorCount returns the value of the constant kSpeechErrorCount.
+func KSpeechErrorCount() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSpeechErrorCount"))) }
+
+// KSpeechErrorOldest returns the value of the constant kSpeechErrorOldest.
+func KSpeechErrorOldest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechErrorOldest")))
+}
+
+// KSpeechErrorOldestCharacterOffset returns the value of the constant kSpeechErrorOldestCharacterOffset.
+func KSpeechErrorOldestCharacterOffset() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechErrorOldestCharacterOffset")))
+}
+
+// KSpeechErrorNewest returns the value of the constant kSpeechErrorNewest.
+func KSpeechErrorNewest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechErrorNewest")))
+}
+
+// KSpeechErrorNewestCharacterOffset returns the value of the constant kSpeechErrorNewestCharacterOffset.
+func KSpeechErrorNewestCharacterOffset() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechErrorNewestCharacterOffset")))
+}
+
+// KSpeechSynthesizerInfoIdentifier returns the value of the constant kSpeechSynthesizerInfoIdentifier.
+func KSpeechSynthesizerInfoIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechSynthesizerInfoIdentifier")))
+}
+
+// KSpeechSynthesizerInfoManufacturer returns the value of the constant kSpeechSynthesizerInfoManufacturer.
+func KSpeechSynthesizerInfoManufacturer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechSynthesizerInfoManufacturer")))
+}
+
+// KSpeechSynthesizerInfoVersion returns the value of the constant kSpeechSynthesizerInfoVersion.
+func KSpeechSynthesizerInfoVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechSynthesizerInfoVersion")))
+}
+
+// KSpeechPhonemeInfoOpcode returns the value of the constant kSpeechPhonemeInfoOpcode.
+func KSpeechPhonemeInfoOpcode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechPhonemeInfoOpcode")))
+}
+
+// KSpeechPhonemeInfoSymbol returns the value of the constant kSpeechPhonemeInfoSymbol.
+func KSpeechPhonemeInfoSymbol() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechPhonemeInfoSymbol")))
+}
+
+// KSpeechPhonemeInfoExample returns the value of the constant kSpeechPhonemeInfoExample.
+func KSpeechPhonemeInfoExample() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechPhonemeInfoExample")))
+}
+
+// KSpeechPhonemeInfoHiliteStart returns the value of the constant kSpeechPhonemeInfoHiliteStart.
+func KSpeechPhonemeInfoHiliteStart() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechPhonemeInfoHiliteStart")))
+}
+
+// KSpeechPhonemeInfoHiliteEnd returns the value of the constant kSpeechPhonemeInfoHiliteEnd.
+func KSpeechPhonemeInfoHiliteEnd() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechPhonemeInfoHiliteEnd")))
+}
+
+// KSpeechVoiceCreator returns the value of the constant kSpeechVoiceCreator.
+func KSpeechVoiceCreator() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechVoiceCreator")))
+}
+
+// KSpeechVoiceID returns the value of the constant kSpeechVoiceID.
+func KSpeechVoiceID() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSpeechVoiceID"))) }
+
+// KSpeechCommandPrefix returns the value of the constant kSpeechCommandPrefix.
+func KSpeechCommandPrefix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechCommandPrefix")))
+}
+
+// KSpeechCommandSuffix returns the value of the constant kSpeechCommandSuffix.
+func KSpeechCommandSuffix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechCommandSuffix")))
+}
+
+// KSpeechDictionaryLocaleIdentifier returns the value of the constant kSpeechDictionaryLocaleIdentifier.
+func KSpeechDictionaryLocaleIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechDictionaryLocaleIdentifier")))
+}
+
+// KSpeechDictionaryModificationDate returns the value of the constant kSpeechDictionaryModificationDate.
+func KSpeechDictionaryModificationDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechDictionaryModificationDate")))
+}
+
+// KSpeechDictionaryPronunciations returns the value of the constant kSpeechDictionaryPronunciations.
+func KSpeechDictionaryPronunciations() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechDictionaryPronunciations")))
+}
+
+// KSpeechDictionaryAbbreviations returns the value of the constant kSpeechDictionaryAbbreviations.
+func KSpeechDictionaryAbbreviations() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechDictionaryAbbreviations")))
+}
+
+// KSpeechDictionaryEntrySpelling returns the value of the constant kSpeechDictionaryEntrySpelling.
+func KSpeechDictionaryEntrySpelling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechDictionaryEntrySpelling")))
+}
+
+// KSpeechDictionaryEntryPhonemes returns the value of the constant kSpeechDictionaryEntryPhonemes.
+func KSpeechDictionaryEntryPhonemes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechDictionaryEntryPhonemes")))
+}
+
+// KSpeechErrorCallbackSpokenString returns the value of the constant kSpeechErrorCallbackSpokenString.
+func KSpeechErrorCallbackSpokenString() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechErrorCallbackSpokenString")))
+}
+
+// KSpeechErrorCallbackCharacterOffset returns the value of the constant kSpeechErrorCallbackCharacterOffset.
+func KSpeechErrorCallbackCharacterOffset() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSpeechErrorCallbackCharacterOffset")))
 }

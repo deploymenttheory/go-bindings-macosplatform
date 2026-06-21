@@ -5,41 +5,68 @@
 package quartz
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartz"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A view for displaying and browsing a large collection of images and movies.
 //
-// IKImageBrowserView wraps [raw.IKImageBrowserView] with a fluent Go API.
+// IKImageBrowserView is an idiomatic wrapper over the Objective-C class IKImageBrowserView.
 type IKImageBrowserView struct {
-	inner *raw.IKImageBrowserView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IKImageBrowserView].
-func (x *IKImageBrowserView) Unwrap() *raw.IKImageBrowserView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IKImageBrowserView) ID() objc.ID { return x.inner.Ptr() }
-
-// IKImageBrowserViewFromID adopts an existing object pointer as a IKImageBrowserView (nil for 0).
+// IKImageBrowserViewFromID adopts an existing Objective-C object as a IKImageBrowserView
+// (nil for 0), retaining it and registering a release finalizer.
 func IKImageBrowserViewFromID(id objc.ID) *IKImageBrowserView {
 	if id == 0 {
 		return nil
 	}
-	return &IKImageBrowserView{inner: raw.IKImageBrowserViewFromID(id)}
+	x := &IKImageBrowserView{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewIKImageBrowserView creates a new [IKImageBrowserView].
+// iKImageBrowserViewAdopt wraps an Objective-C object that this code just created as a
+// IKImageBrowserView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iKImageBrowserViewAdopt(id objc.ID) *IKImageBrowserView {
+	if id == 0 {
+		return nil
+	}
+	x := &IKImageBrowserView{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IKImageBrowserView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IKImageBrowserView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IKImageBrowserView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewIKImageBrowserView creates a new IKImageBrowserView.
 func NewIKImageBrowserView() *IKImageBrowserView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("IKImageBrowserView")), objc.RegisterName("new"))
-	return &IKImageBrowserView{inner: raw.IKImageBrowserViewFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("IKImageBrowserView")), objc.RegisterName("new"))
+	return iKImageBrowserViewAdopt(_id)
 }
 
 // IKImageBrowserViewable is the interface implemented by [IKImageBrowserView], for mocking and DI.
 type IKImageBrowserViewable interface {
-	Unwrap() *raw.IKImageBrowserView
+	obj.Object
 }
 
 var _ IKImageBrowserViewable = (*IKImageBrowserView)(nil)

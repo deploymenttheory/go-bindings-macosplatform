@@ -5,61 +5,84 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRSwitchClusterSwitchLatchedEvent wraps [raw.MTRSwitchClusterSwitchLatchedEvent] with a fluent Go API.
+// MTRSwitchClusterSwitchLatchedEvent is an idiomatic wrapper over the Objective-C class MTRSwitchClusterSwitchLatchedEvent.
 type MTRSwitchClusterSwitchLatchedEvent struct {
-	inner *raw.MTRSwitchClusterSwitchLatchedEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRSwitchClusterSwitchLatchedEvent].
-func (x *MTRSwitchClusterSwitchLatchedEvent) Unwrap() *raw.MTRSwitchClusterSwitchLatchedEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRSwitchClusterSwitchLatchedEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRSwitchClusterSwitchLatchedEventFromID adopts an existing object pointer as a MTRSwitchClusterSwitchLatchedEvent (nil for 0).
+// MTRSwitchClusterSwitchLatchedEventFromID adopts an existing Objective-C object as a MTRSwitchClusterSwitchLatchedEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRSwitchClusterSwitchLatchedEventFromID(id objc.ID) *MTRSwitchClusterSwitchLatchedEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRSwitchClusterSwitchLatchedEvent{inner: raw.MTRSwitchClusterSwitchLatchedEventFromID(id)}
-}
-
-// NewMTRSwitchClusterSwitchLatchedEvent creates a new [MTRSwitchClusterSwitchLatchedEvent].
-func NewMTRSwitchClusterSwitchLatchedEvent() *MTRSwitchClusterSwitchLatchedEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRSwitchClusterSwitchLatchedEvent")), objc.RegisterName("new"))
-	return &MTRSwitchClusterSwitchLatchedEvent{inner: raw.MTRSwitchClusterSwitchLatchedEventFromID(_id)}
-}
-
-// WithNewPosition sets the newPosition property and returns the receiver for chaining.
-func (x *MTRSwitchClusterSwitchLatchedEvent) WithNewPosition(newPosition *foundation.NSNumber) *MTRSwitchClusterSwitchLatchedEvent {
-	x.inner.SetNewPosition(newPosition)
+	x := &MTRSwitchClusterSwitchLatchedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// GetNewPosition calls the underlying GetNewPosition.
-func (x *MTRSwitchClusterSwitchLatchedEvent) GetNewPosition() *foundation.NSNumber {
-	return x.inner.GetNewPosition()
+// mTRSwitchClusterSwitchLatchedEventAdopt wraps an Objective-C object that this code just created as a
+// MTRSwitchClusterSwitchLatchedEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRSwitchClusterSwitchLatchedEventAdopt(id objc.ID) *MTRSwitchClusterSwitchLatchedEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRSwitchClusterSwitchLatchedEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetNewPosition calls the underlying SetNewPosition.
-func (x *MTRSwitchClusterSwitchLatchedEvent) SetNewPosition(newPosition *foundation.NSNumber) {
-	x.inner.SetNewPosition(newPosition)
+// Description returns the object's -description text.
+func (x *MTRSwitchClusterSwitchLatchedEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRSwitchClusterSwitchLatchedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRSwitchClusterSwitchLatchedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRSwitchClusterSwitchLatchedEvent creates a new MTRSwitchClusterSwitchLatchedEvent.
+func NewMTRSwitchClusterSwitchLatchedEvent() *MTRSwitchClusterSwitchLatchedEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRSwitchClusterSwitchLatchedEvent")), objc.RegisterName("new"))
+	return mTRSwitchClusterSwitchLatchedEventAdopt(_id)
+}
+
+// WithNewPosition sets newPosition and returns the receiver so calls can be chained.
+func (x *MTRSwitchClusterSwitchLatchedEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterSwitchLatchedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
+	return x
+}
+
+func (x *MTRSwitchClusterSwitchLatchedEvent) GetNewPosition() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewPosition"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRSwitchClusterSwitchLatchedEvent) SetNewPosition(newPosition obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
 }
 
 // MTRSwitchClusterSwitchLatchedEventable is the interface implemented by [MTRSwitchClusterSwitchLatchedEvent], for mocking and DI.
 type MTRSwitchClusterSwitchLatchedEventable interface {
-	Unwrap() *raw.MTRSwitchClusterSwitchLatchedEvent
-	WithNewPosition(newPosition *foundation.NSNumber) *MTRSwitchClusterSwitchLatchedEvent
-	GetNewPosition() *foundation.NSNumber
-	SetNewPosition(newPosition *foundation.NSNumber)
+	obj.Object
+	WithNewPosition(newPosition obj.Object) *MTRSwitchClusterSwitchLatchedEvent
+	GetNewPosition() obj.Object
+	SetNewPosition(newPosition obj.Object)
 }
 
 var _ MTRSwitchClusterSwitchLatchedEventable = (*MTRSwitchClusterSwitchLatchedEvent)(nil)

@@ -5,156 +5,131 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that connects to the system’s audio input.
 //
-// AudioInputNode wraps [raw.AVAudioInputNode] with a fluent Go API.
+// AudioInputNode is an idiomatic wrapper over the Objective-C class AVAudioInputNode.
 type AudioInputNode struct {
-	inner *raw.AVAudioInputNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioInputNode].
-func (x *AudioInputNode) Unwrap() *raw.AVAudioInputNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioInputNode) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioInputNodeFromID adopts an existing object pointer as a AudioInputNode (nil for 0).
+// AudioInputNodeFromID adopts an existing Objective-C object as a AudioInputNode
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioInputNodeFromID(id objc.ID) *AudioInputNode {
 	if id == 0 {
 		return nil
 	}
-	return &AudioInputNode{inner: raw.AVAudioInputNodeFromID(id)}
+	x := &AudioInputNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAudioInputNode creates a new [AudioInputNode].
+// audioInputNodeAdopt wraps an Objective-C object that this code just created as a
+// AudioInputNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioInputNodeAdopt(id objc.ID) *AudioInputNode {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioInputNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudioInputNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioInputNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioInputNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAudioInputNode creates a new AudioInputNode.
 func NewAudioInputNode() *AudioInputNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioInputNode")), objc.RegisterName("new"))
-	return &AudioInputNode{inner: raw.AVAudioInputNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioInputNode")), objc.RegisterName("new"))
+	return audioInputNodeAdopt(_id)
 }
 
 // A Boolean that indicates whether the node bypasses all microphone uplink processing of the voice-processing unit.
 //
-// WithVoiceProcessingBypassed sets the voiceProcessingBypassed property and returns the receiver for chaining.
+// WithVoiceProcessingBypassed sets voiceProcessingBypassed and returns the receiver so calls can be chained.
 func (x *AudioInputNode) WithVoiceProcessingBypassed(voiceProcessingBypassed bool) *AudioInputNode {
-	x.inner.SetVoiceProcessingBypassed(voiceProcessingBypassed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceProcessingBypassed:"), voiceProcessingBypassed)
 	return x
 }
 
 // A Boolean that indicates whether automatic gain control on the processed microphone uplink signal is active.
 //
-// WithVoiceProcessingAGCEnabled sets the voiceProcessingAGCEnabled property and returns the receiver for chaining.
+// WithVoiceProcessingAGCEnabled sets voiceProcessingAGCEnabled and returns the receiver so calls can be chained.
 func (x *AudioInputNode) WithVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled bool) *AudioInputNode {
-	x.inner.SetVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceProcessingAGCEnabled:"), voiceProcessingAGCEnabled)
 	return x
 }
 
 // A Boolean that indicates whether the input of the voice processing unit is in a muted state.
 //
-// WithVoiceProcessingInputMuted sets the voiceProcessingInputMuted property and returns the receiver for chaining.
+// WithVoiceProcessingInputMuted sets voiceProcessingInputMuted and returns the receiver so calls can be chained.
 func (x *AudioInputNode) WithVoiceProcessingInputMuted(voiceProcessingInputMuted bool) *AudioInputNode {
-	x.inner.SetVoiceProcessingInputMuted(voiceProcessingInputMuted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceProcessingInputMuted:"), voiceProcessingInputMuted)
 	return x
 }
 
-// The ducking configuration of nonvoice audio.
-//
-// WithVoiceProcessingOtherAudioDuckingConfiguration sets the voiceProcessingOtherAudioDuckingConfiguration property and returns the receiver for chaining.
-func (x *AudioInputNode) WithVoiceProcessingOtherAudioDuckingConfiguration(voiceProcessingOtherAudioDuckingConfiguration raw.AVAudioVoiceProcessingOtherAudioDuckingConfiguration) *AudioInputNode {
-	x.inner.SetVoiceProcessingOtherAudioDuckingConfiguration(voiceProcessingOtherAudioDuckingConfiguration)
-	return x
-}
-
-// Supplies the data through the input node to the engine while operating in the manual rendering mode.
-//
-// SetManualRenderingInputPCMFormatInputBlock calls the underlying SetManualRenderingInputPCMFormatInputBlock.
-func (x *AudioInputNode) SetManualRenderingInputPCMFormatInputBlock(format *raw.AVAudioFormat, block func(uint32) *coreaudiotypes.AudioBufferList) bool {
-	return x.inner.SetManualRenderingInputPCMFormatInputBlock(format, block)
-}
-
-// @method setMutedSpeechActivityEventListener @abstract Register a listener to be notified when speech activity event occurs while the input is muted. @param listenerBlock The block the engine will call when speech activity event occurs while the input is muted. Passing nil will remove an already set block. @return YES for success @discussion Continuous presence of or lack of speech activity during mute will not cause redundant notification. In order to use this API, it's expected to implement the mute via the voiceProcessingInputMuted.
-//
-// SetMutedSpeechActivityEventListener calls the underlying SetMutedSpeechActivityEventListener.
-func (x *AudioInputNode) SetMutedSpeechActivityEventListener(listenerBlock func(AVAudioVoiceProcessingSpeechActivityEvent)) bool {
-	return x.inner.SetMutedSpeechActivityEventListener(func(_a0 raw.AVAudioVoiceProcessingSpeechActivityEvent) {
-		listenerBlock(AVAudioVoiceProcessingSpeechActivityEvent(_a0))
-	})
-}
-
-// @property voiceProcessingBypassed @abstract Bypass all processing for microphone uplink done by the voice processing unit. @discussion Querying this property when voice processing is disabled will return false.
-//
-// IsVoiceProcessingBypassed calls the underlying IsVoiceProcessingBypassed.
+// Bypass all processing for microphone uplink done by the voice processing unit. Querying this property when voice processing is disabled will return false.
 func (x *AudioInputNode) IsVoiceProcessingBypassed() bool {
-	return x.inner.IsVoiceProcessingBypassed()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVoiceProcessingBypassed"))
+	return _r
 }
 
-// SetVoiceProcessingBypassed calls the underlying SetVoiceProcessingBypassed.
 func (x *AudioInputNode) SetVoiceProcessingBypassed(voiceProcessingBypassed bool) {
-	x.inner.SetVoiceProcessingBypassed(voiceProcessingBypassed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceProcessingBypassed:"), voiceProcessingBypassed)
 }
 
-// @property voiceProcessingAGCEnabled @abstract Enable automatic gain control on the processed microphone uplink. signal. Enabled by default. @discussion Querying this property when voice processing is disabled will return false.
-//
-// IsVoiceProcessingAGCEnabled calls the underlying IsVoiceProcessingAGCEnabled.
+// Enable automatic gain control on the processed microphone uplink. signal. Enabled by default. Querying this property when voice processing is disabled will return false.
 func (x *AudioInputNode) IsVoiceProcessingAGCEnabled() bool {
-	return x.inner.IsVoiceProcessingAGCEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVoiceProcessingAGCEnabled"))
+	return _r
 }
 
-// SetVoiceProcessingAGCEnabled calls the underlying SetVoiceProcessingAGCEnabled.
 func (x *AudioInputNode) SetVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled bool) {
-	x.inner.SetVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceProcessingAGCEnabled:"), voiceProcessingAGCEnabled)
 }
 
-// @property voiceProcessingInputMuted @abstract Mutes the input of the voice processing unit. @discussion Querying this property when voice processing is disabled will return false.
-//
-// IsVoiceProcessingInputMuted calls the underlying IsVoiceProcessingInputMuted.
+// Mutes the input of the voice processing unit. Querying this property when voice processing is disabled will return false.
 func (x *AudioInputNode) IsVoiceProcessingInputMuted() bool {
-	return x.inner.IsVoiceProcessingInputMuted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVoiceProcessingInputMuted"))
+	return _r
 }
 
-// SetVoiceProcessingInputMuted calls the underlying SetVoiceProcessingInputMuted.
 func (x *AudioInputNode) SetVoiceProcessingInputMuted(voiceProcessingInputMuted bool) {
-	x.inner.SetVoiceProcessingInputMuted(voiceProcessingInputMuted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVoiceProcessingInputMuted:"), voiceProcessingInputMuted)
 }
-
-// @property voiceProcessingOtherAudioDuckingConfiguration @abstract The configuration of ducking other (i.e. non-voice) audio @discussion Configures the ducking of other (i.e. non-voice) audio, including advanced ducking enablement and ducking level. In general, when other audio is played during voice chat, applying a higher level of ducking could increase the intelligibility of the voice chat. If not set, the default ducking configuration is to disable advanced ducking, with a ducking level set to AVAudioVoiceProcessingOtherAudioDuckingLevelDefault.
-//
-// VoiceProcessingOtherAudioDuckingConfiguration calls the underlying VoiceProcessingOtherAudioDuckingConfiguration.
-func (x *AudioInputNode) VoiceProcessingOtherAudioDuckingConfiguration() raw.AVAudioVoiceProcessingOtherAudioDuckingConfiguration {
-	return x.inner.VoiceProcessingOtherAudioDuckingConfiguration()
-}
-
-// SetVoiceProcessingOtherAudioDuckingConfiguration calls the underlying SetVoiceProcessingOtherAudioDuckingConfiguration.
-func (x *AudioInputNode) SetVoiceProcessingOtherAudioDuckingConfiguration(voiceProcessingOtherAudioDuckingConfiguration raw.AVAudioVoiceProcessingOtherAudioDuckingConfiguration) {
-	x.inner.SetVoiceProcessingOtherAudioDuckingConfiguration(voiceProcessingOtherAudioDuckingConfiguration)
-}
-
-func (x *AudioInputNode) asAudioIONode() *raw.AVAudioIONode { return &x.inner.AVAudioIONode }
-
-func (x *AudioInputNode) asAudioNode() *raw.AVAudioNode { return &x.inner.AVAudioIONode.AVAudioNode }
 
 // AudioInputNodeable is the interface implemented by [AudioInputNode], for mocking and DI.
 type AudioInputNodeable interface {
-	Unwrap() *raw.AVAudioInputNode
+	obj.Object
 	WithVoiceProcessingBypassed(voiceProcessingBypassed bool) *AudioInputNode
 	WithVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled bool) *AudioInputNode
 	WithVoiceProcessingInputMuted(voiceProcessingInputMuted bool) *AudioInputNode
-	WithVoiceProcessingOtherAudioDuckingConfiguration(voiceProcessingOtherAudioDuckingConfiguration raw.AVAudioVoiceProcessingOtherAudioDuckingConfiguration) *AudioInputNode
-	SetManualRenderingInputPCMFormatInputBlock(format *raw.AVAudioFormat, block func(uint32) *coreaudiotypes.AudioBufferList) bool
-	SetMutedSpeechActivityEventListener(listenerBlock func(AVAudioVoiceProcessingSpeechActivityEvent)) bool
 	IsVoiceProcessingBypassed() bool
 	SetVoiceProcessingBypassed(voiceProcessingBypassed bool)
 	IsVoiceProcessingAGCEnabled() bool
 	SetVoiceProcessingAGCEnabled(voiceProcessingAGCEnabled bool)
 	IsVoiceProcessingInputMuted() bool
 	SetVoiceProcessingInputMuted(voiceProcessingInputMuted bool)
-	VoiceProcessingOtherAudioDuckingConfiguration() raw.AVAudioVoiceProcessingOtherAudioDuckingConfiguration
-	SetVoiceProcessingOtherAudioDuckingConfiguration(voiceProcessingOtherAudioDuckingConfiguration raw.AVAudioVoiceProcessingOtherAudioDuckingConfiguration)
 }
 
 var _ AudioInputNodeable = (*AudioInputNode)(nil)

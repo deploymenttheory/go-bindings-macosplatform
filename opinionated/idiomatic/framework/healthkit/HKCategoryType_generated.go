@@ -5,45 +5,68 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A type that identifies samples that contain a value from a small set of possible values.
 //
-// CategoryType wraps [raw.HKCategoryType] with a fluent Go API.
+// CategoryType is an idiomatic wrapper over the Objective-C class HKCategoryType.
 type CategoryType struct {
-	inner *raw.HKCategoryType
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKCategoryType].
-func (x *CategoryType) Unwrap() *raw.HKCategoryType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CategoryType) ID() objc.ID { return x.inner.Ptr() }
-
-// CategoryTypeFromID adopts an existing object pointer as a CategoryType (nil for 0).
+// CategoryTypeFromID adopts an existing Objective-C object as a CategoryType
+// (nil for 0), retaining it and registering a release finalizer.
 func CategoryTypeFromID(id objc.ID) *CategoryType {
 	if id == 0 {
 		return nil
 	}
-	return &CategoryType{inner: raw.HKCategoryTypeFromID(id)}
+	x := &CategoryType{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCategoryType creates a new [CategoryType].
+// categoryTypeAdopt wraps an Objective-C object that this code just created as a
+// CategoryType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func categoryTypeAdopt(id objc.ID) *CategoryType {
+	if id == 0 {
+		return nil
+	}
+	x := &CategoryType{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CategoryType) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CategoryType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CategoryType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCategoryType creates a new CategoryType.
 func NewCategoryType() *CategoryType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKCategoryType")), objc.RegisterName("new"))
-	return &CategoryType{inner: raw.HKCategoryTypeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKCategoryType")), objc.RegisterName("new"))
+	return categoryTypeAdopt(_id)
 }
-
-func (x *CategoryType) asSampleType() *raw.HKSampleType { return &x.inner.HKSampleType }
-
-func (x *CategoryType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
 
 // CategoryTypeable is the interface implemented by [CategoryType], for mocking and DI.
 type CategoryTypeable interface {
-	Unwrap() *raw.HKCategoryType
+	obj.Object
 }
 
 var _ CategoryTypeable = (*CategoryType)(nil)

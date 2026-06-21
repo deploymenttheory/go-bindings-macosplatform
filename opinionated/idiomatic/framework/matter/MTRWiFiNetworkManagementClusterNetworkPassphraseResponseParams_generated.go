@@ -5,72 +5,93 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams wraps [raw.MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams] with a fluent Go API.
+// MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams is an idiomatic wrapper over the Objective-C class MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams.
 type MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams struct {
-	inner *raw.MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams].
-func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) Unwrap() *raw.MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsFromID adopts an existing object pointer as a MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams (nil for 0).
+// MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsFromID adopts an existing Objective-C object as a MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsFromID(id objc.ID) *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams{inner: raw.MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsFromID(id)}
+	x := &MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsAdopt(id objc.ID) *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize an MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
 //
-// NewMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsWithResponseValueError creates a new [MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams].
-func NewMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams")), objc.RegisterName("alloc"))
+// NewMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsWithResponseValueError creates a new MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams.
+func NewMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams{inner: raw.MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsFromID(_id)}, nil
+	return mTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsAdopt(_id), nil
 }
 
-// WithPassphrase sets the passphrase property and returns the receiver for chaining.
-func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) WithPassphrase(passphrase *foundation.NSData) *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams {
-	x.inner.SetPassphrase(passphrase)
+// WithPassphrase sets passphrase and returns the receiver so calls can be chained.
+func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) WithPassphrase(passphrase obj.Object) *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassphrase:"), objref.IDOf(passphrase))
 	return x
 }
 
-// Passphrase calls the underlying Passphrase.
-func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) Passphrase() *foundation.NSData {
-	return x.inner.Passphrase()
+func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) Passphrase() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passphrase"))
+	return obj.Wrap(_r)
 }
 
-// SetPassphrase calls the underlying SetPassphrase.
-func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) SetPassphrase(passphrase *foundation.NSData) {
-	x.inner.SetPassphrase(passphrase)
+func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) SetPassphrase(passphrase obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassphrase:"), objref.IDOf(passphrase))
 }
 
 // MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsable is the interface implemented by [MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams], for mocking and DI.
 type MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsable interface {
-	Unwrap() *raw.MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams
-	WithPassphrase(passphrase *foundation.NSData) *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams
-	Passphrase() *foundation.NSData
-	SetPassphrase(passphrase *foundation.NSData)
+	obj.Object
+	WithPassphrase(passphrase obj.Object) *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams
+	Passphrase() obj.Object
+	SetPassphrase(passphrase obj.Object)
 }
 
 var _ MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsable = (*MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams)(nil)

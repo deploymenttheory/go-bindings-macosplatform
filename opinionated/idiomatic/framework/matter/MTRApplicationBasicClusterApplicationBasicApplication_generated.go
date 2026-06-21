@@ -5,72 +5,92 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRApplicationBasicClusterApplicationBasicApplication wraps [raw.MTRApplicationBasicClusterApplicationBasicApplication] with a fluent Go API.
+// MTRApplicationBasicClusterApplicationBasicApplication is an idiomatic wrapper over the Objective-C class MTRApplicationBasicClusterApplicationBasicApplication.
 type MTRApplicationBasicClusterApplicationBasicApplication struct {
-	inner *raw.MTRApplicationBasicClusterApplicationBasicApplication
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRApplicationBasicClusterApplicationBasicApplication].
-func (x *MTRApplicationBasicClusterApplicationBasicApplication) Unwrap() *raw.MTRApplicationBasicClusterApplicationBasicApplication {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRApplicationBasicClusterApplicationBasicApplication) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRApplicationBasicClusterApplicationBasicApplicationFromID adopts an existing object pointer as a MTRApplicationBasicClusterApplicationBasicApplication (nil for 0).
+// MTRApplicationBasicClusterApplicationBasicApplicationFromID adopts an existing Objective-C object as a MTRApplicationBasicClusterApplicationBasicApplication
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRApplicationBasicClusterApplicationBasicApplicationFromID(id objc.ID) *MTRApplicationBasicClusterApplicationBasicApplication {
 	if id == 0 {
 		return nil
 	}
-	return &MTRApplicationBasicClusterApplicationBasicApplication{inner: raw.MTRApplicationBasicClusterApplicationBasicApplicationFromID(id)}
+	x := &MTRApplicationBasicClusterApplicationBasicApplication{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRApplicationBasicClusterApplicationBasicApplication creates a new [MTRApplicationBasicClusterApplicationBasicApplication].
+// mTRApplicationBasicClusterApplicationBasicApplicationAdopt wraps an Objective-C object that this code just created as a
+// MTRApplicationBasicClusterApplicationBasicApplication (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRApplicationBasicClusterApplicationBasicApplicationAdopt(id objc.ID) *MTRApplicationBasicClusterApplicationBasicApplication {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRApplicationBasicClusterApplicationBasicApplication{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRApplicationBasicClusterApplicationBasicApplication) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRApplicationBasicClusterApplicationBasicApplication) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRApplicationBasicClusterApplicationBasicApplication) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRApplicationBasicClusterApplicationBasicApplication creates a new MTRApplicationBasicClusterApplicationBasicApplication.
 func NewMTRApplicationBasicClusterApplicationBasicApplication() *MTRApplicationBasicClusterApplicationBasicApplication {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRApplicationBasicClusterApplicationBasicApplication")), objc.RegisterName("new"))
-	return &MTRApplicationBasicClusterApplicationBasicApplication{inner: raw.MTRApplicationBasicClusterApplicationBasicApplicationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRApplicationBasicClusterApplicationBasicApplication")), objc.RegisterName("new"))
+	return mTRApplicationBasicClusterApplicationBasicApplicationAdopt(_id)
 }
 
-// WithCatalogVendorID sets the catalogVendorID property and returns the receiver for chaining.
-func (x *MTRApplicationBasicClusterApplicationBasicApplication) WithCatalogVendorID(catalogVendorID *foundation.NSNumber) *MTRApplicationBasicClusterApplicationBasicApplication {
-	x.inner.MTRApplicationBasicClusterApplicationStruct.SetCatalogVendorID(catalogVendorID)
+// WithCatalogVendorID sets catalogVendorID and returns the receiver so calls can be chained.
+func (x *MTRApplicationBasicClusterApplicationBasicApplication) WithCatalogVendorID(catalogVendorID obj.Object) *MTRApplicationBasicClusterApplicationBasicApplication {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCatalogVendorID:"), objref.IDOf(catalogVendorID))
 	return x
 }
 
-// WithCatalogVendorId sets the catalogVendorId property and returns the receiver for chaining.
-func (x *MTRApplicationBasicClusterApplicationBasicApplication) WithCatalogVendorId(catalogVendorId *foundation.NSNumber) *MTRApplicationBasicClusterApplicationBasicApplication {
-	x.inner.MTRApplicationBasicClusterApplicationStruct.SetCatalogVendorId(catalogVendorId)
+// WithCatalogVendorId sets catalogVendorId and returns the receiver so calls can be chained.
+func (x *MTRApplicationBasicClusterApplicationBasicApplication) WithCatalogVendorId(catalogVendorId obj.Object) *MTRApplicationBasicClusterApplicationBasicApplication {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCatalogVendorId:"), objref.IDOf(catalogVendorId))
 	return x
 }
 
-// WithApplicationID sets the applicationID property and returns the receiver for chaining.
+// WithApplicationID sets applicationID and returns the receiver so calls can be chained.
 func (x *MTRApplicationBasicClusterApplicationBasicApplication) WithApplicationID(applicationID string) *MTRApplicationBasicClusterApplicationBasicApplication {
-	x.inner.MTRApplicationBasicClusterApplicationStruct.SetApplicationID(foundation.NSStringStringWithUTF8String(applicationID))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationID:"), purego.NSString(applicationID))
 	return x
 }
 
-// WithApplicationId sets the applicationId property and returns the receiver for chaining.
+// WithApplicationId sets applicationId and returns the receiver so calls can be chained.
 func (x *MTRApplicationBasicClusterApplicationBasicApplication) WithApplicationId(applicationId string) *MTRApplicationBasicClusterApplicationBasicApplication {
-	x.inner.MTRApplicationBasicClusterApplicationStruct.SetApplicationId(foundation.NSStringStringWithUTF8String(applicationId))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationId:"), purego.NSString(applicationId))
 	return x
-}
-
-func (x *MTRApplicationBasicClusterApplicationBasicApplication) asMTRApplicationBasicClusterApplicationStruct() *raw.MTRApplicationBasicClusterApplicationStruct {
-	return &x.inner.MTRApplicationBasicClusterApplicationStruct
 }
 
 // MTRApplicationBasicClusterApplicationBasicApplicationable is the interface implemented by [MTRApplicationBasicClusterApplicationBasicApplication], for mocking and DI.
 type MTRApplicationBasicClusterApplicationBasicApplicationable interface {
-	Unwrap() *raw.MTRApplicationBasicClusterApplicationBasicApplication
-	WithCatalogVendorID(catalogVendorID *foundation.NSNumber) *MTRApplicationBasicClusterApplicationBasicApplication
-	WithCatalogVendorId(catalogVendorId *foundation.NSNumber) *MTRApplicationBasicClusterApplicationBasicApplication
+	obj.Object
+	WithCatalogVendorID(catalogVendorID obj.Object) *MTRApplicationBasicClusterApplicationBasicApplication
+	WithCatalogVendorId(catalogVendorId obj.Object) *MTRApplicationBasicClusterApplicationBasicApplication
 	WithApplicationID(applicationID string) *MTRApplicationBasicClusterApplicationBasicApplication
 	WithApplicationId(applicationId string) *MTRApplicationBasicClusterApplicationBasicApplication
 }

@@ -5,73 +5,92 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The information that describes an arrival or departure gate for a flight.
 //
-// AirportGate wraps [raw.INAirportGate] with a fluent Go API.
+// AirportGate is an idiomatic wrapper over the Objective-C class INAirportGate.
 type AirportGate struct {
-	inner *raw.INAirportGate
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INAirportGate].
-func (x *AirportGate) Unwrap() *raw.INAirportGate { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AirportGate) ID() objc.ID { return x.inner.Ptr() }
-
-// AirportGateFromID adopts an existing object pointer as a AirportGate (nil for 0).
+// AirportGateFromID adopts an existing Objective-C object as a AirportGate
+// (nil for 0), retaining it and registering a release finalizer.
 func AirportGateFromID(id objc.ID) *AirportGate {
 	if id == 0 {
 		return nil
 	}
-	return &AirportGate{inner: raw.INAirportGateFromID(id)}
+	x := &AirportGate{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// airportGateAdopt wraps an Objective-C object that this code just created as a
+// AirportGate (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func airportGateAdopt(id objc.ID) *AirportGate {
+	if id == 0 {
+		return nil
+	}
+	x := &AirportGate{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AirportGate) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AirportGate) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AirportGate) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new gate object for a flight.
 //
-// NewAirportGateWithAirportTerminalGate creates a new [AirportGate].
-func NewAirportGateWithAirportTerminalGate(airport *raw.INAirport, terminal string, gate string) *AirportGate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INAirportGate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAirport:terminal:gate:"), airport.Ptr(), foundation.NSStringStringWithUTF8String(terminal).Ptr(), foundation.NSStringStringWithUTF8String(gate).Ptr())
-	return &AirportGate{inner: raw.INAirportGateFromID(_id)}
+// NewAirportGateWithAirportTerminalGate creates a new AirportGate.
+func NewAirportGateWithAirportTerminalGate(airport *Airport, terminal string, gate string) *AirportGate {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INAirportGate")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAirport:terminal:gate:"), objref.IDOf(airport), purego.NSString(terminal), purego.NSString(gate))
+	return airportGateAdopt(_id)
 }
 
-// Airport calls the underlying Airport.
 func (x *AirportGate) Airport() *Airport {
-	_r := x.inner.Airport()
-	if _r == nil {
-		return nil
-	}
-	return &Airport{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("airport"))
+	return AirportFromID(_r)
 }
 
-// Terminal calls the underlying Terminal.
 func (x *AirportGate) Terminal() string {
-	_r := x.inner.Terminal()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("terminal"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Gate calls the underlying Gate.
 func (x *AirportGate) Gate() string {
-	_r := x.inner.Gate()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gate"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // AirportGateable is the interface implemented by [AirportGate], for mocking and DI.
 type AirportGateable interface {
-	Unwrap() *raw.INAirportGate
+	obj.Object
 	Airport() *Airport
 	Terminal() string
 	Gate() string

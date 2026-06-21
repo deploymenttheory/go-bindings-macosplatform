@@ -5,52 +5,74 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A task that downloads multiple media selections for an asset.
 //
-// AggregateAssetDownloadTask wraps [raw.AVAggregateAssetDownloadTask] with a fluent Go API.
+// AggregateAssetDownloadTask is an idiomatic wrapper over the Objective-C class AVAggregateAssetDownloadTask.
 type AggregateAssetDownloadTask struct {
-	inner *raw.AVAggregateAssetDownloadTask
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAggregateAssetDownloadTask].
-func (x *AggregateAssetDownloadTask) Unwrap() *raw.AVAggregateAssetDownloadTask { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AggregateAssetDownloadTask) ID() objc.ID { return x.inner.Ptr() }
-
-// AggregateAssetDownloadTaskFromID adopts an existing object pointer as a AggregateAssetDownloadTask (nil for 0).
+// AggregateAssetDownloadTaskFromID adopts an existing Objective-C object as a AggregateAssetDownloadTask
+// (nil for 0), retaining it and registering a release finalizer.
 func AggregateAssetDownloadTaskFromID(id objc.ID) *AggregateAssetDownloadTask {
 	if id == 0 {
 		return nil
 	}
-	return &AggregateAssetDownloadTask{inner: raw.AVAggregateAssetDownloadTaskFromID(id)}
+	x := &AggregateAssetDownloadTask{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAggregateAssetDownloadTask creates a new [AggregateAssetDownloadTask].
+// aggregateAssetDownloadTaskAdopt wraps an Objective-C object that this code just created as a
+// AggregateAssetDownloadTask (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func aggregateAssetDownloadTaskAdopt(id objc.ID) *AggregateAssetDownloadTask {
+	if id == 0 {
+		return nil
+	}
+	x := &AggregateAssetDownloadTask{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AggregateAssetDownloadTask) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AggregateAssetDownloadTask) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AggregateAssetDownloadTask) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAggregateAssetDownloadTask creates a new AggregateAssetDownloadTask.
 func NewAggregateAssetDownloadTask() *AggregateAssetDownloadTask {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAggregateAssetDownloadTask")), objc.RegisterName("new"))
-	return &AggregateAssetDownloadTask{inner: raw.AVAggregateAssetDownloadTaskFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAggregateAssetDownloadTask")), objc.RegisterName("new"))
+	return aggregateAssetDownloadTaskAdopt(_id)
 }
 
 // The asset supplied to the download task upon initialization.
-//
-// URLAsset calls the underlying URLAsset.
 func (x *AggregateAssetDownloadTask) URLAsset() *URLAsset {
-	_r := x.inner.URLAsset()
-	if _r == nil {
-		return nil
-	}
-	return &URLAsset{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLAsset"))
+	return URLAssetFromID(_r)
 }
 
 // AggregateAssetDownloadTaskable is the interface implemented by [AggregateAssetDownloadTask], for mocking and DI.
 type AggregateAssetDownloadTaskable interface {
-	Unwrap() *raw.AVAggregateAssetDownloadTask
+	obj.Object
 	URLAsset() *URLAsset
 }
 

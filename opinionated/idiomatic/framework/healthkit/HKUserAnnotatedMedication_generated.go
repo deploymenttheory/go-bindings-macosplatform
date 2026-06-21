@@ -5,78 +5,95 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A reference to the tracked medication and the details a person can customize.
 //
-// UserAnnotatedMedication wraps [raw.HKUserAnnotatedMedication] with a fluent Go API.
+// UserAnnotatedMedication is an idiomatic wrapper over the Objective-C class HKUserAnnotatedMedication.
 type UserAnnotatedMedication struct {
-	inner *raw.HKUserAnnotatedMedication
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKUserAnnotatedMedication].
-func (x *UserAnnotatedMedication) Unwrap() *raw.HKUserAnnotatedMedication { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UserAnnotatedMedication) ID() objc.ID { return x.inner.Ptr() }
-
-// UserAnnotatedMedicationFromID adopts an existing object pointer as a UserAnnotatedMedication (nil for 0).
+// UserAnnotatedMedicationFromID adopts an existing Objective-C object as a UserAnnotatedMedication
+// (nil for 0), retaining it and registering a release finalizer.
 func UserAnnotatedMedicationFromID(id objc.ID) *UserAnnotatedMedication {
 	if id == 0 {
 		return nil
 	}
-	return &UserAnnotatedMedication{inner: raw.HKUserAnnotatedMedicationFromID(id)}
+	x := &UserAnnotatedMedication{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewUserAnnotatedMedication creates a new [UserAnnotatedMedication].
+// userAnnotatedMedicationAdopt wraps an Objective-C object that this code just created as a
+// UserAnnotatedMedication (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func userAnnotatedMedicationAdopt(id objc.ID) *UserAnnotatedMedication {
+	if id == 0 {
+		return nil
+	}
+	x := &UserAnnotatedMedication{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UserAnnotatedMedication) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UserAnnotatedMedication) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UserAnnotatedMedication) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUserAnnotatedMedication creates a new UserAnnotatedMedication.
 func NewUserAnnotatedMedication() *UserAnnotatedMedication {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKUserAnnotatedMedication")), objc.RegisterName("new"))
-	return &UserAnnotatedMedication{inner: raw.HKUserAnnotatedMedicationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKUserAnnotatedMedication")), objc.RegisterName("new"))
+	return userAnnotatedMedicationAdopt(_id)
 }
 
 // The nickname that a person added to a medication during the entry experience. This can be edited at any point.
-//
-// Nickname calls the underlying Nickname.
 func (x *UserAnnotatedMedication) Nickname() string {
-	_r := x.inner.Nickname()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nickname"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // A Boolean value that indicates whether a medication is archived. The value is `true` if a person moves a medication to the archived section in the Health App. The value is `false` if a medication isn't in the archived section.
-//
-// IsArchived calls the underlying IsArchived.
 func (x *UserAnnotatedMedication) IsArchived() bool {
-	return x.inner.IsArchived()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isArchived"))
+	return _r
 }
 
 // A Boolean value that indicates whether a medication has a schedule set up. The value is `true` for medications for which a person has set up reminders and `false` for medications that are only taken as needed. > Note: Scheduled medications can still be taken as needed.
-//
-// HasSchedule calls the underlying HasSchedule.
 func (x *UserAnnotatedMedication) HasSchedule() bool {
-	return x.inner.HasSchedule()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasSchedule"))
+	return _r
 }
 
 // A reference to the specific medication a person is tracking. This concept's identifier is directly associated with the logged dose events.
-//
-// Medication calls the underlying Medication.
 func (x *UserAnnotatedMedication) Medication() *MedicationConcept {
-	_r := x.inner.Medication()
-	if _r == nil {
-		return nil
-	}
-	return &MedicationConcept{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("medication"))
+	return MedicationConceptFromID(_r)
 }
 
 // UserAnnotatedMedicationable is the interface implemented by [UserAnnotatedMedication], for mocking and DI.
 type UserAnnotatedMedicationable interface {
-	Unwrap() *raw.HKUserAnnotatedMedication
+	obj.Object
 	Nickname() string
 	IsArchived() bool
 	HasSchedule() bool

@@ -5,102 +5,116 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A request to create a new Photos asset from underlying data resources, for use in a photo library change block.
 //
-// AssetCreationRequest wraps [raw.PHAssetCreationRequest] with a fluent Go API.
+// AssetCreationRequest is an idiomatic wrapper over the Objective-C class PHAssetCreationRequest.
 type AssetCreationRequest struct {
-	inner *raw.PHAssetCreationRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHAssetCreationRequest].
-func (x *AssetCreationRequest) Unwrap() *raw.PHAssetCreationRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetCreationRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetCreationRequestFromID adopts an existing object pointer as a AssetCreationRequest (nil for 0).
+// AssetCreationRequestFromID adopts an existing Objective-C object as a AssetCreationRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetCreationRequestFromID(id objc.ID) *AssetCreationRequest {
 	if id == 0 {
 		return nil
 	}
-	return &AssetCreationRequest{inner: raw.PHAssetCreationRequestFromID(id)}
+	x := &AssetCreationRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAssetCreationRequest creates a new [AssetCreationRequest].
+// assetCreationRequestAdopt wraps an Objective-C object that this code just created as a
+// AssetCreationRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetCreationRequestAdopt(id objc.ID) *AssetCreationRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetCreationRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetCreationRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetCreationRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetCreationRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAssetCreationRequest creates a new AssetCreationRequest.
 func NewAssetCreationRequest() *AssetCreationRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHAssetCreationRequest")), objc.RegisterName("new"))
-	return &AssetCreationRequest{inner: raw.PHAssetCreationRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHAssetCreationRequest")), objc.RegisterName("new"))
+	return assetCreationRequestAdopt(_id)
 }
 
 // The date and time at which the asset claims to have been originally created.
 //
-// WithCreationDate sets the creationDate property and returns the receiver for chaining.
-func (x *AssetCreationRequest) WithCreationDate(creationDate *foundation.NSDate) *AssetCreationRequest {
-	x.inner.PHAssetChangeRequest.SetCreationDate(creationDate)
+// WithCreationDate sets creationDate and returns the receiver so calls can be chained.
+func (x *AssetCreationRequest) WithCreationDate(creationDate obj.Object) *AssetCreationRequest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCreationDate:"), objref.IDOf(creationDate))
 	return x
 }
 
 // A Boolean value that indicates whether the asset is marked as one of the user’s favorites.
 //
-// WithFavorite sets the favorite property and returns the receiver for chaining.
+// WithFavorite sets favorite and returns the receiver so calls can be chained.
 func (x *AssetCreationRequest) WithFavorite(favorite bool) *AssetCreationRequest {
-	x.inner.PHAssetChangeRequest.SetFavorite(favorite)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFavorite:"), favorite)
 	return x
 }
 
 // A Boolean value that indicates whether the asset is hidden in collections.
 //
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *AssetCreationRequest) WithHidden(hidden bool) *AssetCreationRequest {
-	x.inner.PHAssetChangeRequest.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
 // The output of an asset content editing session.
 //
-// WithContentEditingOutput sets the contentEditingOutput property and returns the receiver for chaining.
+// WithContentEditingOutput sets contentEditingOutput and returns the receiver so calls can be chained.
 func (x *AssetCreationRequest) WithContentEditingOutput(contentEditingOutput *ContentEditingOutput) *AssetCreationRequest {
-	x.inner.PHAssetChangeRequest.SetContentEditingOutput(contentEditingOutput.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditingOutput:"), objref.IDOf(contentEditingOutput))
 	return x
 }
 
 // Adds a data resource to the asset being created, using the file at the specified URL.
-//
-// AddResourceWithTypeFileURLOptions calls the underlying AddResourceWithTypeFileURLOptions.
-func (x *AssetCreationRequest) AddResourceWithTypeFileURLOptions(type_ PHAssetResourceType, fileURL string, options *raw.PHAssetResourceCreationOptions) {
-	x.inner.AddResourceWithTypeFileURLOptions(raw.PHAssetResourceType(type_), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(fileURL)), options)
+func (x *AssetCreationRequest) AddResourceWithTypeFileURLOptions(type_ AssetResourceType, fileURL string, options *AssetResourceCreationOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addResourceWithType:fileURL:options:"), type_, rt.FileURL(fileURL), objref.IDOf(options))
 }
 
 // Adds a data resource to the asset being created, using the specified data.
-//
-// AddResourceWithTypeDataOptions calls the underlying AddResourceWithTypeDataOptions.
-func (x *AssetCreationRequest) AddResourceWithTypeDataOptions(type_ PHAssetResourceType, data *foundation.NSData, options *raw.PHAssetResourceCreationOptions) {
-	x.inner.AddResourceWithTypeDataOptions(raw.PHAssetResourceType(type_), data, options)
-}
-
-func (x *AssetCreationRequest) asAssetChangeRequest() *raw.PHAssetChangeRequest {
-	return &x.inner.PHAssetChangeRequest
-}
-
-func (x *AssetCreationRequest) asChangeRequest() *raw.PHChangeRequest {
-	return &x.inner.PHAssetChangeRequest.PHChangeRequest
+func (x *AssetCreationRequest) AddResourceWithTypeDataOptions(type_ AssetResourceType, data obj.Object, options *AssetResourceCreationOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addResourceWithType:data:options:"), type_, objref.IDOf(data), objref.IDOf(options))
 }
 
 // AssetCreationRequestable is the interface implemented by [AssetCreationRequest], for mocking and DI.
 type AssetCreationRequestable interface {
-	Unwrap() *raw.PHAssetCreationRequest
-	WithCreationDate(creationDate *foundation.NSDate) *AssetCreationRequest
+	obj.Object
+	WithCreationDate(creationDate obj.Object) *AssetCreationRequest
 	WithFavorite(favorite bool) *AssetCreationRequest
 	WithHidden(hidden bool) *AssetCreationRequest
 	WithContentEditingOutput(contentEditingOutput *ContentEditingOutput) *AssetCreationRequest
-	AddResourceWithTypeFileURLOptions(type_ PHAssetResourceType, fileURL string, options *raw.PHAssetResourceCreationOptions)
-	AddResourceWithTypeDataOptions(type_ PHAssetResourceType, data *foundation.NSData, options *raw.PHAssetResourceCreationOptions)
+	AddResourceWithTypeFileURLOptions(type_ AssetResourceType, fileURL string, options *AssetResourceCreationOptions)
+	AddResourceWithTypeDataOptions(type_ AssetResourceType, data obj.Object, options *AssetResourceCreationOptions)
 }
 
 var _ AssetCreationRequestable = (*AssetCreationRequest)(nil)

@@ -5,60 +5,37 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// @const PHASEErrorDomain @abstract The NSErrorDomain for general PHASE errors
-// PHASEErrorDomain returns the string constant PHASEErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func PHASEErrorDomain() objc.ID {
-	if _r := raw.PHASEErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// The NSErrorDomain for general PHASE errors
+// PHASEErrorDomain returns the string constant PHASEErrorDomain, for use as a dictionary key or argument.
+func PHASEErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("PHASEErrorDomain"))) }
+
+// The NSErrorDomain for PHASE sound event errors.
+// PHASESoundEventErrorDomain returns the string constant PHASESoundEventErrorDomain, for use as a dictionary key or argument.
+func PHASESoundEventErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHASESoundEventErrorDomain")))
 }
 
-// @const PHASESoundEventErrorDomain @abstract The NSErrorDomain for PHASE sound event errors.
-// PHASESoundEventErrorDomain returns the string constant PHASESoundEventErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func PHASESoundEventErrorDomain() objc.ID {
-	if _r := raw.PHASESoundEventErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// The NSErrorDomain for PHASE Asset errors
+// PHASEAssetErrorDomain returns the string constant PHASEAssetErrorDomain, for use as a dictionary key or argument.
+func PHASEAssetErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHASEAssetErrorDomain")))
 }
 
-// @const PHASEAssetErrorDomain @abstract The NSErrorDomain for PHASE Asset errors
-// PHASEAssetErrorDomain returns the string constant PHASEAssetErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func PHASEAssetErrorDomain() objc.ID {
-	if _r := raw.PHASEAssetErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PHASESpatialCategoryDirectPathTransmission returns the string constant PHASESpatialCategoryDirectPathTransmission, for use as a dictionary key or argument.
+func PHASESpatialCategoryDirectPathTransmission() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHASESpatialCategoryDirectPathTransmission")))
 }
 
-// @constant PHASESpatialCategoryDirectPathTransmission
-// PHASESpatialCategoryDirectPathTransmission returns the string constant PHASESpatialCategoryDirectPathTransmission as an objc.ID, for use as a dictionary key or selector argument.
-func PHASESpatialCategoryDirectPathTransmission() objc.ID {
-	if _r := raw.PHASESpatialCategoryDirectPathTransmission(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PHASESpatialCategoryEarlyReflections returns the string constant PHASESpatialCategoryEarlyReflections, for use as a dictionary key or argument.
+func PHASESpatialCategoryEarlyReflections() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHASESpatialCategoryEarlyReflections")))
 }
 
-// @constant PHASEEarlyReflections
-// PHASESpatialCategoryEarlyReflections returns the string constant PHASESpatialCategoryEarlyReflections as an objc.ID, for use as a dictionary key or selector argument.
-func PHASESpatialCategoryEarlyReflections() objc.ID {
-	if _r := raw.PHASESpatialCategoryEarlyReflections(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// @constant PHASELateReverb
-// PHASESpatialCategoryLateReverb returns the string constant PHASESpatialCategoryLateReverb as an objc.ID, for use as a dictionary key or selector argument.
-func PHASESpatialCategoryLateReverb() objc.ID {
-	if _r := raw.PHASESpatialCategoryLateReverb(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// PHASESpatialCategoryLateReverb returns the string constant PHASESpatialCategoryLateReverb, for use as a dictionary key or argument.
+func PHASESpatialCategoryLateReverb() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("PHASESpatialCategoryLateReverb")))
 }

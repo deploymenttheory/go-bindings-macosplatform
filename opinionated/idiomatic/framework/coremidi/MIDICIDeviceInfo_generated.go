@@ -5,75 +5,101 @@
 package coremidi
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides basic information about a MIDI-CI device.
 //
-// CIDeviceInfo wraps [raw.MIDICIDeviceInfo] with a fluent Go API.
+// CIDeviceInfo is an idiomatic wrapper over the Objective-C class MIDICIDeviceInfo.
 type CIDeviceInfo struct {
-	inner *raw.MIDICIDeviceInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MIDICIDeviceInfo].
-func (x *CIDeviceInfo) Unwrap() *raw.MIDICIDeviceInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CIDeviceInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// CIDeviceInfoFromID adopts an existing object pointer as a CIDeviceInfo (nil for 0).
+// CIDeviceInfoFromID adopts an existing Objective-C object as a CIDeviceInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func CIDeviceInfoFromID(id objc.ID) *CIDeviceInfo {
 	if id == 0 {
 		return nil
 	}
-	return &CIDeviceInfo{inner: raw.MIDICIDeviceInfoFromID(id)}
+	x := &CIDeviceInfo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// cIDeviceInfoAdopt wraps an Objective-C object that this code just created as a
+// CIDeviceInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cIDeviceInfoAdopt(id objc.ID) *CIDeviceInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &CIDeviceInfo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CIDeviceInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CIDeviceInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CIDeviceInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new device information instance.
 //
-// NewCIDeviceInfoWithDestinationManufacturerFamilyModelRevision creates a new [CIDeviceInfo].
-func NewCIDeviceInfoWithDestinationManufacturerFamilyModelRevision(midiDestination uint, manufacturer *foundation.NSData, family *foundation.NSData, modelNumber *foundation.NSData, revisionLevel *foundation.NSData) *CIDeviceInfo {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MIDICIDeviceInfo")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestination:manufacturer:family:model:revision:"), midiDestination, manufacturer.Ptr(), family.Ptr(), modelNumber.Ptr(), revisionLevel.Ptr())
-	return &CIDeviceInfo{inner: raw.MIDICIDeviceInfoFromID(_id)}
+// NewCIDeviceInfoWithDestinationManufacturerFamilyModelRevision creates a new CIDeviceInfo.
+func NewCIDeviceInfoWithDestinationManufacturerFamilyModelRevision(midiDestination int, manufacturer obj.Object, family obj.Object, modelNumber obj.Object, revisionLevel obj.Object) *CIDeviceInfo {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MIDICIDeviceInfo")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDestination:manufacturer:family:model:revision:"), midiDestination, objref.IDOf(manufacturer), objref.IDOf(family), objref.IDOf(modelNumber), objref.IDOf(revisionLevel))
+	return cIDeviceInfoAdopt(_id)
 }
 
-// ManufacturerID calls the underlying ManufacturerID.
-func (x *CIDeviceInfo) ManufacturerID() *foundation.NSData {
-	return x.inner.ManufacturerID()
+func (x *CIDeviceInfo) ManufacturerID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manufacturerID"))
+	return obj.Wrap(_r)
 }
 
-// Family calls the underlying Family.
-func (x *CIDeviceInfo) Family() *foundation.NSData {
-	return x.inner.Family()
+func (x *CIDeviceInfo) Family() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("family"))
+	return obj.Wrap(_r)
 }
 
-// ModelNumber calls the underlying ModelNumber.
-func (x *CIDeviceInfo) ModelNumber() *foundation.NSData {
-	return x.inner.ModelNumber()
+func (x *CIDeviceInfo) ModelNumber() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modelNumber"))
+	return obj.Wrap(_r)
 }
 
-// RevisionLevel calls the underlying RevisionLevel.
-func (x *CIDeviceInfo) RevisionLevel() *foundation.NSData {
-	return x.inner.RevisionLevel()
+func (x *CIDeviceInfo) RevisionLevel() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("revisionLevel"))
+	return obj.Wrap(_r)
 }
 
-// MidiDestination calls the underlying MidiDestination.
-func (x *CIDeviceInfo) MidiDestination() uint {
-	return x.inner.MidiDestination()
+func (x *CIDeviceInfo) MidiDestination() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("midiDestination"))
+	return _r
 }
 
 // CIDeviceInfoable is the interface implemented by [CIDeviceInfo], for mocking and DI.
 type CIDeviceInfoable interface {
-	Unwrap() *raw.MIDICIDeviceInfo
-	ManufacturerID() *foundation.NSData
-	Family() *foundation.NSData
-	ModelNumber() *foundation.NSData
-	RevisionLevel() *foundation.NSData
-	MidiDestination() uint
+	obj.Object
+	ManufacturerID() obj.Object
+	Family() obj.Object
+	ModelNumber() obj.Object
+	RevisionLevel() obj.Object
+	MidiDestination() int
 }
 
 var _ CIDeviceInfoable = (*CIDeviceInfo)(nil)

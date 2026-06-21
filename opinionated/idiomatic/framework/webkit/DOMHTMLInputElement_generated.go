@@ -5,579 +5,544 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMHTMLInputElement wraps [raw.DOMHTMLInputElement] with a fluent Go API.
+// DOMHTMLInputElement is an idiomatic wrapper over the Objective-C class DOMHTMLInputElement.
 type DOMHTMLInputElement struct {
-	inner *raw.DOMHTMLInputElement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMHTMLInputElement].
-func (x *DOMHTMLInputElement) Unwrap() *raw.DOMHTMLInputElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMHTMLInputElement) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMHTMLInputElementFromID adopts an existing object pointer as a DOMHTMLInputElement (nil for 0).
+// DOMHTMLInputElementFromID adopts an existing Objective-C object as a DOMHTMLInputElement
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMHTMLInputElementFromID(id objc.ID) *DOMHTMLInputElement {
 	if id == 0 {
 		return nil
 	}
-	return &DOMHTMLInputElement{inner: raw.DOMHTMLInputElementFromID(id)}
+	x := &DOMHTMLInputElement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDOMHTMLInputElement creates a new [DOMHTMLInputElement].
+// dOMHTMLInputElementAdopt wraps an Objective-C object that this code just created as a
+// DOMHTMLInputElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMHTMLInputElementAdopt(id objc.ID) *DOMHTMLInputElement {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMHTMLInputElement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DOMHTMLInputElement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMHTMLInputElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMHTMLInputElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMHTMLInputElement creates a new DOMHTMLInputElement.
 func NewDOMHTMLInputElement() *DOMHTMLInputElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMHTMLInputElement")), objc.RegisterName("new"))
-	return &DOMHTMLInputElement{inner: raw.DOMHTMLInputElementFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMHTMLInputElement")), objc.RegisterName("new"))
+	return dOMHTMLInputElementAdopt(_id)
 }
 
-// WithAccept sets the accept property and returns the receiver for chaining.
+// WithAccept sets accept and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithAccept(accept string) *DOMHTMLInputElement {
-	x.inner.SetAccept(foundation.NSStringStringWithUTF8String(accept))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccept:"), purego.NSString(accept))
 	return x
 }
 
-// WithAlt sets the alt property and returns the receiver for chaining.
+// WithAlt sets alt and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithAlt(alt string) *DOMHTMLInputElement {
-	x.inner.SetAlt(foundation.NSStringStringWithUTF8String(alt))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlt:"), purego.NSString(alt))
 	return x
 }
 
-// WithAutofocus sets the autofocus property and returns the receiver for chaining.
+// WithAutofocus sets autofocus and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithAutofocus(autofocus bool) *DOMHTMLInputElement {
-	x.inner.SetAutofocus(autofocus)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutofocus:"), autofocus)
 	return x
 }
 
-// WithDefaultChecked sets the defaultChecked property and returns the receiver for chaining.
+// WithDefaultChecked sets defaultChecked and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithDefaultChecked(defaultChecked bool) *DOMHTMLInputElement {
-	x.inner.SetDefaultChecked(defaultChecked)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultChecked:"), defaultChecked)
 	return x
 }
 
-// WithChecked sets the checked property and returns the receiver for chaining.
+// WithChecked sets checked and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithChecked(checked bool) *DOMHTMLInputElement {
-	x.inner.SetChecked(checked)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChecked:"), checked)
 	return x
 }
 
-// WithDisabled sets the disabled property and returns the receiver for chaining.
+// WithDisabled sets disabled and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithDisabled(disabled bool) *DOMHTMLInputElement {
-	x.inner.SetDisabled(disabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
 	return x
 }
 
-// WithFiles sets the files property and returns the receiver for chaining.
+// WithFiles sets files and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithFiles(files *DOMFileList) *DOMHTMLInputElement {
-	x.inner.SetFiles(files.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFiles:"), objref.IDOf(files))
 	return x
 }
 
-// WithIndeterminate sets the indeterminate property and returns the receiver for chaining.
+// WithIndeterminate sets indeterminate and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithIndeterminate(indeterminate bool) *DOMHTMLInputElement {
-	x.inner.SetIndeterminate(indeterminate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndeterminate:"), indeterminate)
 	return x
 }
 
-// WithMaxLength sets the maxLength property and returns the receiver for chaining.
+// WithMaxLength sets maxLength and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithMaxLength(maxLength int) *DOMHTMLInputElement {
-	x.inner.SetMaxLength(maxLength)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxLength:"), maxLength)
 	return x
 }
 
-// WithMultiple sets the multiple property and returns the receiver for chaining.
+// WithMultiple sets multiple and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithMultiple(multiple bool) *DOMHTMLInputElement {
-	x.inner.SetMultiple(multiple)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiple:"), multiple)
 	return x
 }
 
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithName(name string) *DOMHTMLInputElement {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
-// WithReadOnly sets the readOnly property and returns the receiver for chaining.
+// WithReadOnly sets readOnly and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithReadOnly(readOnly bool) *DOMHTMLInputElement {
-	x.inner.SetReadOnly(readOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadOnly:"), readOnly)
 	return x
 }
 
-// WithSize sets the size property and returns the receiver for chaining.
+// WithSize sets size and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithSize(size string) *DOMHTMLInputElement {
-	x.inner.SetSize(foundation.NSStringStringWithUTF8String(size))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), purego.NSString(size))
 	return x
 }
 
-// WithSrc sets the src property and returns the receiver for chaining.
+// WithSrc sets src and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithSrc(src string) *DOMHTMLInputElement {
-	x.inner.SetSrc(foundation.NSStringStringWithUTF8String(src))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSrc:"), purego.NSString(src))
 	return x
 }
 
-// WithType sets the type_ property and returns the receiver for chaining.
+// WithType sets type_ and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithType(type_ string) *DOMHTMLInputElement {
-	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 	return x
 }
 
-// WithDefaultValue sets the defaultValue property and returns the receiver for chaining.
+// WithDefaultValue sets defaultValue and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithDefaultValue(defaultValue string) *DOMHTMLInputElement {
-	x.inner.SetDefaultValue(foundation.NSStringStringWithUTF8String(defaultValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultValue:"), purego.NSString(defaultValue))
 	return x
 }
 
-// WithValue sets the value property and returns the receiver for chaining.
+// WithValue sets value and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithValue(value string) *DOMHTMLInputElement {
-	x.inner.SetValue(foundation.NSStringStringWithUTF8String(value))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 	return x
 }
 
-// WithSelectionStart sets the selectionStart property and returns the receiver for chaining.
+// WithSelectionStart sets selectionStart and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithSelectionStart(selectionStart int) *DOMHTMLInputElement {
-	x.inner.SetSelectionStart(selectionStart)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionStart:"), selectionStart)
 	return x
 }
 
-// WithSelectionEnd sets the selectionEnd property and returns the receiver for chaining.
+// WithSelectionEnd sets selectionEnd and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithSelectionEnd(selectionEnd int) *DOMHTMLInputElement {
-	x.inner.SetSelectionEnd(selectionEnd)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionEnd:"), selectionEnd)
 	return x
 }
 
-// WithAlign sets the align property and returns the receiver for chaining.
+// WithAlign sets align and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithAlign(align string) *DOMHTMLInputElement {
-	x.inner.SetAlign(foundation.NSStringStringWithUTF8String(align))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
 	return x
 }
 
-// WithUseMap sets the useMap property and returns the receiver for chaining.
+// WithUseMap sets useMap and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithUseMap(useMap string) *DOMHTMLInputElement {
-	x.inner.SetUseMap(foundation.NSStringStringWithUTF8String(useMap))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseMap:"), purego.NSString(useMap))
 	return x
 }
 
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithTitle(title string) *DOMHTMLInputElement {
-	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithLang sets the lang property and returns the receiver for chaining.
+// WithLang sets lang and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithLang(lang string) *DOMHTMLInputElement {
-	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return x
 }
 
-// WithDir sets the dir property and returns the receiver for chaining.
+// WithDir sets dir and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithDir(dir string) *DOMHTMLInputElement {
-	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return x
 }
 
-// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+// WithTabIndex sets tabIndex and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithTabIndex(tabIndex int) *DOMHTMLInputElement {
-	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
 	return x
 }
 
-// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+// WithAccessKey sets accessKey and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithAccessKey(accessKey string) *DOMHTMLInputElement {
-	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return x
 }
 
-// WithInnerText sets the innerText property and returns the receiver for chaining.
+// WithInnerText sets innerText and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithInnerText(innerText string) *DOMHTMLInputElement {
-	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return x
 }
 
-// WithOuterText sets the outerText property and returns the receiver for chaining.
+// WithOuterText sets outerText and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithOuterText(outerText string) *DOMHTMLInputElement {
-	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return x
 }
 
-// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+// WithContentEditable sets contentEditable and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithContentEditable(contentEditable string) *DOMHTMLInputElement {
-	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return x
 }
 
-// WithIdName sets the idName property and returns the receiver for chaining.
+// WithIdName sets idName and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithIdName(idName string) *DOMHTMLInputElement {
-	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return x
 }
 
-// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+// WithScrollLeft sets scrollLeft and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithScrollLeft(scrollLeft int) *DOMHTMLInputElement {
-	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return x
 }
 
-// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+// WithScrollTop sets scrollTop and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithScrollTop(scrollTop int) *DOMHTMLInputElement {
-	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
 	return x
 }
 
-// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+// WithInnerHTML sets innerHTML and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithInnerHTML(innerHTML string) *DOMHTMLInputElement {
-	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return x
 }
 
-// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+// WithOuterHTML sets outerHTML and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithOuterHTML(outerHTML string) *DOMHTMLInputElement {
-	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return x
 }
 
-// WithClassName sets the className property and returns the receiver for chaining.
+// WithClassName sets className and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithClassName(className string) *DOMHTMLInputElement {
-	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return x
 }
 
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithNodeValue(nodeValue string) *DOMHTMLInputElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets the prefix property and returns the receiver for chaining.
+// WithPrefix sets prefix and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithPrefix(prefix string) *DOMHTMLInputElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets the textContent property and returns the receiver for chaining.
+// WithTextContent sets textContent and returns the receiver so calls can be chained.
 func (x *DOMHTMLInputElement) WithTextContent(textContent string) *DOMHTMLInputElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
-// Select calls the underlying Select.
 func (x *DOMHTMLInputElement) Select() {
-	x.inner.Select()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("select"))
 }
 
-// SetSelectionRangeEnd calls the underlying SetSelectionRangeEnd.
 func (x *DOMHTMLInputElement) SetSelectionRangeEnd(start int, end int) {
-	x.inner.SetSelectionRangeEnd(start, end)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionRange:end:"), start, end)
 }
 
-// Accept calls the underlying Accept.
 func (x *DOMHTMLInputElement) Accept() string {
-	_r := x.inner.Accept()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accept"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetAccept calls the underlying SetAccept.
 func (x *DOMHTMLInputElement) SetAccept(accept string) {
-	x.inner.SetAccept(foundation.NSStringStringWithUTF8String(accept))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccept:"), purego.NSString(accept))
 }
 
-// Alt calls the underlying Alt.
 func (x *DOMHTMLInputElement) Alt() string {
-	_r := x.inner.Alt()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alt"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetAlt calls the underlying SetAlt.
 func (x *DOMHTMLInputElement) SetAlt(alt string) {
-	x.inner.SetAlt(foundation.NSStringStringWithUTF8String(alt))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlt:"), purego.NSString(alt))
 }
 
-// Autofocus calls the underlying Autofocus.
 func (x *DOMHTMLInputElement) Autofocus() bool {
-	return x.inner.Autofocus()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autofocus"))
+	return _r
 }
 
-// SetAutofocus calls the underlying SetAutofocus.
 func (x *DOMHTMLInputElement) SetAutofocus(autofocus bool) {
-	x.inner.SetAutofocus(autofocus)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutofocus:"), autofocus)
 }
 
-// DefaultChecked calls the underlying DefaultChecked.
 func (x *DOMHTMLInputElement) DefaultChecked() bool {
-	return x.inner.DefaultChecked()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("defaultChecked"))
+	return _r
 }
 
-// SetDefaultChecked calls the underlying SetDefaultChecked.
 func (x *DOMHTMLInputElement) SetDefaultChecked(defaultChecked bool) {
-	x.inner.SetDefaultChecked(defaultChecked)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultChecked:"), defaultChecked)
 }
 
-// Checked calls the underlying Checked.
 func (x *DOMHTMLInputElement) Checked() bool {
-	return x.inner.Checked()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("checked"))
+	return _r
 }
 
-// SetChecked calls the underlying SetChecked.
 func (x *DOMHTMLInputElement) SetChecked(checked bool) {
-	x.inner.SetChecked(checked)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChecked:"), checked)
 }
 
-// Disabled calls the underlying Disabled.
 func (x *DOMHTMLInputElement) Disabled() bool {
-	return x.inner.Disabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("disabled"))
+	return _r
 }
 
-// SetDisabled calls the underlying SetDisabled.
 func (x *DOMHTMLInputElement) SetDisabled(disabled bool) {
-	x.inner.SetDisabled(disabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
 }
 
-// Form calls the underlying Form.
 func (x *DOMHTMLInputElement) Form() *DOMHTMLFormElement {
-	_r := x.inner.Form()
-	if _r == nil {
-		return nil
-	}
-	return &DOMHTMLFormElement{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("form"))
+	return DOMHTMLFormElementFromID(_r)
 }
 
-// Files calls the underlying Files.
 func (x *DOMHTMLInputElement) Files() *DOMFileList {
-	_r := x.inner.Files()
-	if _r == nil {
-		return nil
-	}
-	return &DOMFileList{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("files"))
+	return DOMFileListFromID(_r)
 }
 
-// SetFiles calls the underlying SetFiles.
-func (x *DOMHTMLInputElement) SetFiles(files *raw.DOMFileList) {
-	x.inner.SetFiles(files)
+func (x *DOMHTMLInputElement) SetFiles(files *DOMFileList) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFiles:"), objref.IDOf(files))
 }
 
-// Indeterminate calls the underlying Indeterminate.
 func (x *DOMHTMLInputElement) Indeterminate() bool {
-	return x.inner.Indeterminate()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("indeterminate"))
+	return _r
 }
 
-// SetIndeterminate calls the underlying SetIndeterminate.
 func (x *DOMHTMLInputElement) SetIndeterminate(indeterminate bool) {
-	x.inner.SetIndeterminate(indeterminate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndeterminate:"), indeterminate)
 }
 
-// MaxLength calls the underlying MaxLength.
 func (x *DOMHTMLInputElement) MaxLength() int {
-	return x.inner.MaxLength()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxLength"))
+	return _r
 }
 
-// SetMaxLength calls the underlying SetMaxLength.
 func (x *DOMHTMLInputElement) SetMaxLength(maxLength int) {
-	x.inner.SetMaxLength(maxLength)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxLength:"), maxLength)
 }
 
-// Multiple calls the underlying Multiple.
 func (x *DOMHTMLInputElement) Multiple() bool {
-	return x.inner.Multiple()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("multiple"))
+	return _r
 }
 
-// SetMultiple calls the underlying SetMultiple.
 func (x *DOMHTMLInputElement) SetMultiple(multiple bool) {
-	x.inner.SetMultiple(multiple)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiple:"), multiple)
 }
 
-// Name calls the underlying Name.
 func (x *DOMHTMLInputElement) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
 func (x *DOMHTMLInputElement) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// ReadOnly calls the underlying ReadOnly.
 func (x *DOMHTMLInputElement) ReadOnly() bool {
-	return x.inner.ReadOnly()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("readOnly"))
+	return _r
 }
 
-// SetReadOnly calls the underlying SetReadOnly.
 func (x *DOMHTMLInputElement) SetReadOnly(readOnly bool) {
-	x.inner.SetReadOnly(readOnly)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadOnly:"), readOnly)
 }
 
-// Size calls the underlying Size.
 func (x *DOMHTMLInputElement) Size() string {
-	_r := x.inner.Size()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("size"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSize calls the underlying SetSize.
 func (x *DOMHTMLInputElement) SetSize(size string) {
-	x.inner.SetSize(foundation.NSStringStringWithUTF8String(size))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), purego.NSString(size))
 }
 
-// Src calls the underlying Src.
 func (x *DOMHTMLInputElement) Src() string {
-	_r := x.inner.Src()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("src"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSrc calls the underlying SetSrc.
 func (x *DOMHTMLInputElement) SetSrc(src string) {
-	x.inner.SetSrc(foundation.NSStringStringWithUTF8String(src))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSrc:"), purego.NSString(src))
 }
 
-// Type calls the underlying Type.
 func (x *DOMHTMLInputElement) Type() string {
-	_r := x.inner.Type()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetType calls the underlying SetType.
 func (x *DOMHTMLInputElement) SetType(type_ string) {
-	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 }
 
-// DefaultValue calls the underlying DefaultValue.
 func (x *DOMHTMLInputElement) DefaultValue() string {
-	_r := x.inner.DefaultValue()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultValue"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetDefaultValue calls the underlying SetDefaultValue.
 func (x *DOMHTMLInputElement) SetDefaultValue(defaultValue string) {
-	x.inner.SetDefaultValue(foundation.NSStringStringWithUTF8String(defaultValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultValue:"), purego.NSString(defaultValue))
 }
 
-// Value calls the underlying Value.
 func (x *DOMHTMLInputElement) Value() string {
-	_r := x.inner.Value()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetValue calls the underlying SetValue.
 func (x *DOMHTMLInputElement) SetValue(value string) {
-	x.inner.SetValue(foundation.NSStringStringWithUTF8String(value))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
 }
 
-// WillValidate calls the underlying WillValidate.
 func (x *DOMHTMLInputElement) WillValidate() bool {
-	return x.inner.WillValidate()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("willValidate"))
+	return _r
 }
 
-// SelectionStart calls the underlying SelectionStart.
 func (x *DOMHTMLInputElement) SelectionStart() int {
-	return x.inner.SelectionStart()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectionStart"))
+	return _r
 }
 
-// SetSelectionStart calls the underlying SetSelectionStart.
 func (x *DOMHTMLInputElement) SetSelectionStart(selectionStart int) {
-	x.inner.SetSelectionStart(selectionStart)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionStart:"), selectionStart)
 }
 
-// SelectionEnd calls the underlying SelectionEnd.
 func (x *DOMHTMLInputElement) SelectionEnd() int {
-	return x.inner.SelectionEnd()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectionEnd"))
+	return _r
 }
 
-// SetSelectionEnd calls the underlying SetSelectionEnd.
 func (x *DOMHTMLInputElement) SetSelectionEnd(selectionEnd int) {
-	x.inner.SetSelectionEnd(selectionEnd)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectionEnd:"), selectionEnd)
 }
 
-// Align calls the underlying Align.
 func (x *DOMHTMLInputElement) Align() string {
-	_r := x.inner.Align()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("align"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetAlign calls the underlying SetAlign.
 func (x *DOMHTMLInputElement) SetAlign(align string) {
-	x.inner.SetAlign(foundation.NSStringStringWithUTF8String(align))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
 }
 
-// UseMap calls the underlying UseMap.
 func (x *DOMHTMLInputElement) UseMap() string {
-	_r := x.inner.UseMap()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("useMap"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetUseMap calls the underlying SetUseMap.
 func (x *DOMHTMLInputElement) SetUseMap(useMap string) {
-	x.inner.SetUseMap(foundation.NSStringStringWithUTF8String(useMap))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseMap:"), purego.NSString(useMap))
 }
 
-// AltDisplayString calls the underlying AltDisplayString.
 func (x *DOMHTMLInputElement) AltDisplayString() string {
-	_r := x.inner.AltDisplayString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("altDisplayString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// AbsoluteImageURL calls the underlying AbsoluteImageURL.
-func (x *DOMHTMLInputElement) AbsoluteImageURL() *foundation.NSURL {
-	return x.inner.AbsoluteImageURL()
-}
-
-func (x *DOMHTMLInputElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
-
-func (x *DOMHTMLInputElement) asDOMElement() *raw.DOMElement {
-	return &x.inner.DOMHTMLElement.DOMElement
-}
-
-func (x *DOMHTMLInputElement) asDOMNode() *raw.DOMNode {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
-}
-
-func (x *DOMHTMLInputElement) asDOMObject() *raw.DOMObject {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
-}
-
-func (x *DOMHTMLInputElement) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+func (x *DOMHTMLInputElement) AbsoluteImageURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("absoluteImageURL"))
+	return obj.Wrap(_r)
 }
 
 // DOMHTMLInputElementable is the interface implemented by [DOMHTMLInputElement], for mocking and DI.
 type DOMHTMLInputElementable interface {
-	Unwrap() *raw.DOMHTMLInputElement
+	obj.Object
 	WithAccept(accept string) *DOMHTMLInputElement
 	WithAlt(alt string) *DOMHTMLInputElement
 	WithAutofocus(autofocus bool) *DOMHTMLInputElement
@@ -632,7 +597,7 @@ type DOMHTMLInputElementable interface {
 	SetDisabled(disabled bool)
 	Form() *DOMHTMLFormElement
 	Files() *DOMFileList
-	SetFiles(files *raw.DOMFileList)
+	SetFiles(files *DOMFileList)
 	Indeterminate() bool
 	SetIndeterminate(indeterminate bool)
 	MaxLength() int
@@ -663,7 +628,7 @@ type DOMHTMLInputElementable interface {
 	UseMap() string
 	SetUseMap(useMap string)
 	AltDisplayString() string
-	AbsoluteImageURL() *foundation.NSURL
+	AbsoluteImageURL() obj.Object
 }
 
 var _ DOMHTMLInputElementable = (*DOMHTMLInputElement)(nil)

@@ -5,222 +5,221 @@
 package corehaptics
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corehaptics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// CHHapticEventParameterIDHapticIntensity returns the string constant CHHapticEventParameterIDHapticIntensity as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticEventParameterIDHapticIntensity() objc.ID {
-	return purego.CFConstant(raw.CHHapticEventParameterIDHapticIntensity())
+// CHHapticEventParameterIDHapticIntensity returns the string constant CHHapticEventParameterIDHapticIntensity, for use as a dictionary key or argument.
+func CHHapticEventParameterIDHapticIntensity() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticEventParameterIDHapticIntensity")))
 }
 
-// CHHapticEventParameterIDHapticSharpness returns the string constant CHHapticEventParameterIDHapticSharpness as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticEventParameterIDHapticSharpness() objc.ID {
-	return purego.CFConstant(raw.CHHapticEventParameterIDHapticSharpness())
+// CHHapticEventParameterIDHapticSharpness returns the string constant CHHapticEventParameterIDHapticSharpness, for use as a dictionary key or argument.
+func CHHapticEventParameterIDHapticSharpness() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticEventParameterIDHapticSharpness")))
 }
 
-// CHHapticEventParameterIDAttackTime returns the string constant CHHapticEventParameterIDAttackTime as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticEventParameterIDAttackTime() objc.ID {
-	return purego.CFConstant(raw.CHHapticEventParameterIDAttackTime())
+// CHHapticEventParameterIDAttackTime returns the string constant CHHapticEventParameterIDAttackTime, for use as a dictionary key or argument.
+func CHHapticEventParameterIDAttackTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticEventParameterIDAttackTime")))
 }
 
-// CHHapticEventParameterIDDecayTime returns the string constant CHHapticEventParameterIDDecayTime as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticEventParameterIDDecayTime() objc.ID {
-	return purego.CFConstant(raw.CHHapticEventParameterIDDecayTime())
+// CHHapticEventParameterIDDecayTime returns the string constant CHHapticEventParameterIDDecayTime, for use as a dictionary key or argument.
+func CHHapticEventParameterIDDecayTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticEventParameterIDDecayTime")))
 }
 
-// CHHapticEventParameterIDReleaseTime returns the string constant CHHapticEventParameterIDReleaseTime as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticEventParameterIDReleaseTime() objc.ID {
-	return purego.CFConstant(raw.CHHapticEventParameterIDReleaseTime())
+// CHHapticEventParameterIDReleaseTime returns the string constant CHHapticEventParameterIDReleaseTime, for use as a dictionary key or argument.
+func CHHapticEventParameterIDReleaseTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticEventParameterIDReleaseTime")))
 }
 
-// CHHapticEventParameterIDSustained returns the string constant CHHapticEventParameterIDSustained as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticEventParameterIDSustained() objc.ID {
-	return purego.CFConstant(raw.CHHapticEventParameterIDSustained())
+// CHHapticEventParameterIDSustained returns the string constant CHHapticEventParameterIDSustained, for use as a dictionary key or argument.
+func CHHapticEventParameterIDSustained() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticEventParameterIDSustained")))
 }
 
-// CHHapticEventParameterIDAudioVolume returns the string constant CHHapticEventParameterIDAudioVolume as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticEventParameterIDAudioVolume() objc.ID {
-	return purego.CFConstant(raw.CHHapticEventParameterIDAudioVolume())
+// CHHapticEventParameterIDAudioVolume returns the string constant CHHapticEventParameterIDAudioVolume, for use as a dictionary key or argument.
+func CHHapticEventParameterIDAudioVolume() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticEventParameterIDAudioVolume")))
 }
 
-// CHHapticEventParameterIDAudioPitch returns the string constant CHHapticEventParameterIDAudioPitch as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticEventParameterIDAudioPitch() objc.ID {
-	return purego.CFConstant(raw.CHHapticEventParameterIDAudioPitch())
+// CHHapticEventParameterIDAudioPitch returns the string constant CHHapticEventParameterIDAudioPitch, for use as a dictionary key or argument.
+func CHHapticEventParameterIDAudioPitch() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticEventParameterIDAudioPitch")))
 }
 
-// CHHapticEventParameterIDAudioPan returns the string constant CHHapticEventParameterIDAudioPan as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticEventParameterIDAudioPan() objc.ID {
-	return purego.CFConstant(raw.CHHapticEventParameterIDAudioPan())
+// CHHapticEventParameterIDAudioPan returns the string constant CHHapticEventParameterIDAudioPan, for use as a dictionary key or argument.
+func CHHapticEventParameterIDAudioPan() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticEventParameterIDAudioPan")))
 }
 
-// CHHapticEventParameterIDAudioBrightness returns the string constant CHHapticEventParameterIDAudioBrightness as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticEventParameterIDAudioBrightness() objc.ID {
-	return purego.CFConstant(raw.CHHapticEventParameterIDAudioBrightness())
+// CHHapticEventParameterIDAudioBrightness returns the string constant CHHapticEventParameterIDAudioBrightness, for use as a dictionary key or argument.
+func CHHapticEventParameterIDAudioBrightness() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticEventParameterIDAudioBrightness")))
 }
 
-// CHHapticDynamicParameterIDHapticIntensityControl returns the string constant CHHapticDynamicParameterIDHapticIntensityControl as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticDynamicParameterIDHapticIntensityControl() objc.ID {
-	return purego.CFConstant(raw.CHHapticDynamicParameterIDHapticIntensityControl())
+// CHHapticDynamicParameterIDHapticIntensityControl returns the string constant CHHapticDynamicParameterIDHapticIntensityControl, for use as a dictionary key or argument.
+func CHHapticDynamicParameterIDHapticIntensityControl() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticDynamicParameterIDHapticIntensityControl")))
 }
 
-// CHHapticDynamicParameterIDHapticSharpnessControl returns the string constant CHHapticDynamicParameterIDHapticSharpnessControl as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticDynamicParameterIDHapticSharpnessControl() objc.ID {
-	return purego.CFConstant(raw.CHHapticDynamicParameterIDHapticSharpnessControl())
+// CHHapticDynamicParameterIDHapticSharpnessControl returns the string constant CHHapticDynamicParameterIDHapticSharpnessControl, for use as a dictionary key or argument.
+func CHHapticDynamicParameterIDHapticSharpnessControl() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticDynamicParameterIDHapticSharpnessControl")))
 }
 
-// CHHapticDynamicParameterIDHapticAttackTimeControl returns the string constant CHHapticDynamicParameterIDHapticAttackTimeControl as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticDynamicParameterIDHapticAttackTimeControl() objc.ID {
-	return purego.CFConstant(raw.CHHapticDynamicParameterIDHapticAttackTimeControl())
+// CHHapticDynamicParameterIDHapticAttackTimeControl returns the string constant CHHapticDynamicParameterIDHapticAttackTimeControl, for use as a dictionary key or argument.
+func CHHapticDynamicParameterIDHapticAttackTimeControl() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticDynamicParameterIDHapticAttackTimeControl")))
 }
 
-// CHHapticDynamicParameterIDHapticDecayTimeControl returns the string constant CHHapticDynamicParameterIDHapticDecayTimeControl as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticDynamicParameterIDHapticDecayTimeControl() objc.ID {
-	return purego.CFConstant(raw.CHHapticDynamicParameterIDHapticDecayTimeControl())
+// CHHapticDynamicParameterIDHapticDecayTimeControl returns the string constant CHHapticDynamicParameterIDHapticDecayTimeControl, for use as a dictionary key or argument.
+func CHHapticDynamicParameterIDHapticDecayTimeControl() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticDynamicParameterIDHapticDecayTimeControl")))
 }
 
-// CHHapticDynamicParameterIDHapticReleaseTimeControl returns the string constant CHHapticDynamicParameterIDHapticReleaseTimeControl as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticDynamicParameterIDHapticReleaseTimeControl() objc.ID {
-	return purego.CFConstant(raw.CHHapticDynamicParameterIDHapticReleaseTimeControl())
+// CHHapticDynamicParameterIDHapticReleaseTimeControl returns the string constant CHHapticDynamicParameterIDHapticReleaseTimeControl, for use as a dictionary key or argument.
+func CHHapticDynamicParameterIDHapticReleaseTimeControl() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticDynamicParameterIDHapticReleaseTimeControl")))
 }
 
-// CHHapticDynamicParameterIDAudioVolumeControl returns the string constant CHHapticDynamicParameterIDAudioVolumeControl as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticDynamicParameterIDAudioVolumeControl() objc.ID {
-	return purego.CFConstant(raw.CHHapticDynamicParameterIDAudioVolumeControl())
+// CHHapticDynamicParameterIDAudioVolumeControl returns the string constant CHHapticDynamicParameterIDAudioVolumeControl, for use as a dictionary key or argument.
+func CHHapticDynamicParameterIDAudioVolumeControl() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticDynamicParameterIDAudioVolumeControl")))
 }
 
-// CHHapticDynamicParameterIDAudioPanControl returns the string constant CHHapticDynamicParameterIDAudioPanControl as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticDynamicParameterIDAudioPanControl() objc.ID {
-	return purego.CFConstant(raw.CHHapticDynamicParameterIDAudioPanControl())
+// CHHapticDynamicParameterIDAudioPanControl returns the string constant CHHapticDynamicParameterIDAudioPanControl, for use as a dictionary key or argument.
+func CHHapticDynamicParameterIDAudioPanControl() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticDynamicParameterIDAudioPanControl")))
 }
 
-// CHHapticDynamicParameterIDAudioBrightnessControl returns the string constant CHHapticDynamicParameterIDAudioBrightnessControl as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticDynamicParameterIDAudioBrightnessControl() objc.ID {
-	return purego.CFConstant(raw.CHHapticDynamicParameterIDAudioBrightnessControl())
+// CHHapticDynamicParameterIDAudioBrightnessControl returns the string constant CHHapticDynamicParameterIDAudioBrightnessControl, for use as a dictionary key or argument.
+func CHHapticDynamicParameterIDAudioBrightnessControl() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticDynamicParameterIDAudioBrightnessControl")))
 }
 
-// CHHapticDynamicParameterIDAudioPitchControl returns the string constant CHHapticDynamicParameterIDAudioPitchControl as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticDynamicParameterIDAudioPitchControl() objc.ID {
-	return purego.CFConstant(raw.CHHapticDynamicParameterIDAudioPitchControl())
+// CHHapticDynamicParameterIDAudioPitchControl returns the string constant CHHapticDynamicParameterIDAudioPitchControl, for use as a dictionary key or argument.
+func CHHapticDynamicParameterIDAudioPitchControl() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticDynamicParameterIDAudioPitchControl")))
 }
 
-// CHHapticDynamicParameterIDAudioAttackTimeControl returns the string constant CHHapticDynamicParameterIDAudioAttackTimeControl as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticDynamicParameterIDAudioAttackTimeControl() objc.ID {
-	return purego.CFConstant(raw.CHHapticDynamicParameterIDAudioAttackTimeControl())
+// CHHapticDynamicParameterIDAudioAttackTimeControl returns the string constant CHHapticDynamicParameterIDAudioAttackTimeControl, for use as a dictionary key or argument.
+func CHHapticDynamicParameterIDAudioAttackTimeControl() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticDynamicParameterIDAudioAttackTimeControl")))
 }
 
-// CHHapticDynamicParameterIDAudioDecayTimeControl returns the string constant CHHapticDynamicParameterIDAudioDecayTimeControl as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticDynamicParameterIDAudioDecayTimeControl() objc.ID {
-	return purego.CFConstant(raw.CHHapticDynamicParameterIDAudioDecayTimeControl())
+// CHHapticDynamicParameterIDAudioDecayTimeControl returns the string constant CHHapticDynamicParameterIDAudioDecayTimeControl, for use as a dictionary key or argument.
+func CHHapticDynamicParameterIDAudioDecayTimeControl() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticDynamicParameterIDAudioDecayTimeControl")))
 }
 
-// CHHapticDynamicParameterIDAudioReleaseTimeControl returns the string constant CHHapticDynamicParameterIDAudioReleaseTimeControl as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticDynamicParameterIDAudioReleaseTimeControl() objc.ID {
-	return purego.CFConstant(raw.CHHapticDynamicParameterIDAudioReleaseTimeControl())
+// CHHapticDynamicParameterIDAudioReleaseTimeControl returns the string constant CHHapticDynamicParameterIDAudioReleaseTimeControl, for use as a dictionary key or argument.
+func CHHapticDynamicParameterIDAudioReleaseTimeControl() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticDynamicParameterIDAudioReleaseTimeControl")))
 }
 
-// CHHapticEventTypeHapticTransient returns the string constant CHHapticEventTypeHapticTransient as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticEventTypeHapticTransient() objc.ID {
-	return purego.CFConstant(raw.CHHapticEventTypeHapticTransient())
+// CHHapticEventTypeHapticTransient returns the string constant CHHapticEventTypeHapticTransient, for use as a dictionary key or argument.
+func CHHapticEventTypeHapticTransient() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticEventTypeHapticTransient")))
 }
 
-// CHHapticEventTypeHapticContinuous returns the string constant CHHapticEventTypeHapticContinuous as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticEventTypeHapticContinuous() objc.ID {
-	return purego.CFConstant(raw.CHHapticEventTypeHapticContinuous())
+// CHHapticEventTypeHapticContinuous returns the string constant CHHapticEventTypeHapticContinuous, for use as a dictionary key or argument.
+func CHHapticEventTypeHapticContinuous() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticEventTypeHapticContinuous")))
 }
 
-// CHHapticEventTypeAudioContinuous returns the string constant CHHapticEventTypeAudioContinuous as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticEventTypeAudioContinuous() objc.ID {
-	return purego.CFConstant(raw.CHHapticEventTypeAudioContinuous())
+// CHHapticEventTypeAudioContinuous returns the string constant CHHapticEventTypeAudioContinuous, for use as a dictionary key or argument.
+func CHHapticEventTypeAudioContinuous() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticEventTypeAudioContinuous")))
 }
 
-// CHHapticEventTypeAudioCustom returns the string constant CHHapticEventTypeAudioCustom as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticEventTypeAudioCustom() objc.ID {
-	return purego.CFConstant(raw.CHHapticEventTypeAudioCustom())
+// CHHapticEventTypeAudioCustom returns the string constant CHHapticEventTypeAudioCustom, for use as a dictionary key or argument.
+func CHHapticEventTypeAudioCustom() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticEventTypeAudioCustom")))
 }
 
-// CHHapticAudioResourceKeyUseVolumeEnvelope returns the string constant CHHapticAudioResourceKeyUseVolumeEnvelope as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticAudioResourceKeyUseVolumeEnvelope() objc.ID {
-	return purego.CFConstant(raw.CHHapticAudioResourceKeyUseVolumeEnvelope())
+// CHHapticAudioResourceKeyUseVolumeEnvelope returns the string constant CHHapticAudioResourceKeyUseVolumeEnvelope, for use as a dictionary key or argument.
+func CHHapticAudioResourceKeyUseVolumeEnvelope() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticAudioResourceKeyUseVolumeEnvelope")))
 }
 
-// CHHapticAudioResourceKeyLoopEnabled returns the string constant CHHapticAudioResourceKeyLoopEnabled as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticAudioResourceKeyLoopEnabled() objc.ID {
-	return purego.CFConstant(raw.CHHapticAudioResourceKeyLoopEnabled())
+// CHHapticAudioResourceKeyLoopEnabled returns the string constant CHHapticAudioResourceKeyLoopEnabled, for use as a dictionary key or argument.
+func CHHapticAudioResourceKeyLoopEnabled() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticAudioResourceKeyLoopEnabled")))
 }
 
-// CHHapticPatternKeyVersion returns the string constant CHHapticPatternKeyVersion as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticPatternKeyVersion() objc.ID {
-	return purego.CFConstant(raw.CHHapticPatternKeyVersion())
+// CHHapticPatternKeyVersion returns the string constant CHHapticPatternKeyVersion, for use as a dictionary key or argument.
+func CHHapticPatternKeyVersion() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticPatternKeyVersion")))
 }
 
-// CHHapticPatternKeyPattern returns the string constant CHHapticPatternKeyPattern as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticPatternKeyPattern() objc.ID {
-	return purego.CFConstant(raw.CHHapticPatternKeyPattern())
+// CHHapticPatternKeyPattern returns the string constant CHHapticPatternKeyPattern, for use as a dictionary key or argument.
+func CHHapticPatternKeyPattern() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticPatternKeyPattern")))
 }
 
-// CHHapticPatternKeyEvent returns the string constant CHHapticPatternKeyEvent as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticPatternKeyEvent() objc.ID {
-	return purego.CFConstant(raw.CHHapticPatternKeyEvent())
+// CHHapticPatternKeyEvent returns the string constant CHHapticPatternKeyEvent, for use as a dictionary key or argument.
+func CHHapticPatternKeyEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticPatternKeyEvent")))
 }
 
-// CHHapticPatternKeyEventType returns the string constant CHHapticPatternKeyEventType as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticPatternKeyEventType() objc.ID {
-	return purego.CFConstant(raw.CHHapticPatternKeyEventType())
+// CHHapticPatternKeyEventType returns the string constant CHHapticPatternKeyEventType, for use as a dictionary key or argument.
+func CHHapticPatternKeyEventType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticPatternKeyEventType")))
 }
 
-// CHHapticPatternKeyTime returns the string constant CHHapticPatternKeyTime as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticPatternKeyTime() objc.ID {
-	return purego.CFConstant(raw.CHHapticPatternKeyTime())
+// CHHapticPatternKeyTime returns the string constant CHHapticPatternKeyTime, for use as a dictionary key or argument.
+func CHHapticPatternKeyTime() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticPatternKeyTime")))
 }
 
-// CHHapticPatternKeyEventDuration returns the string constant CHHapticPatternKeyEventDuration as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticPatternKeyEventDuration() objc.ID {
-	return purego.CFConstant(raw.CHHapticPatternKeyEventDuration())
+// CHHapticPatternKeyEventDuration returns the string constant CHHapticPatternKeyEventDuration, for use as a dictionary key or argument.
+func CHHapticPatternKeyEventDuration() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticPatternKeyEventDuration")))
 }
 
-// CHHapticPatternKeyEventWaveformPath returns the string constant CHHapticPatternKeyEventWaveformPath as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticPatternKeyEventWaveformPath() objc.ID {
-	return purego.CFConstant(raw.CHHapticPatternKeyEventWaveformPath())
+// CHHapticPatternKeyEventWaveformPath returns the string constant CHHapticPatternKeyEventWaveformPath, for use as a dictionary key or argument.
+func CHHapticPatternKeyEventWaveformPath() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticPatternKeyEventWaveformPath")))
 }
 
-// CHHapticPatternKeyEventParameters returns the string constant CHHapticPatternKeyEventParameters as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticPatternKeyEventParameters() objc.ID {
-	return purego.CFConstant(raw.CHHapticPatternKeyEventParameters())
+// CHHapticPatternKeyEventParameters returns the string constant CHHapticPatternKeyEventParameters, for use as a dictionary key or argument.
+func CHHapticPatternKeyEventParameters() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticPatternKeyEventParameters")))
 }
 
-// CHHapticPatternKeyEventWaveformUseVolumeEnvelope returns the string constant CHHapticPatternKeyEventWaveformUseVolumeEnvelope as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticPatternKeyEventWaveformUseVolumeEnvelope() objc.ID {
-	return purego.CFConstant(raw.CHHapticPatternKeyEventWaveformUseVolumeEnvelope())
+// CHHapticPatternKeyEventWaveformUseVolumeEnvelope returns the string constant CHHapticPatternKeyEventWaveformUseVolumeEnvelope, for use as a dictionary key or argument.
+func CHHapticPatternKeyEventWaveformUseVolumeEnvelope() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticPatternKeyEventWaveformUseVolumeEnvelope")))
 }
 
-// CHHapticPatternKeyEventWaveformLoopEnabled returns the string constant CHHapticPatternKeyEventWaveformLoopEnabled as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticPatternKeyEventWaveformLoopEnabled() objc.ID {
-	return purego.CFConstant(raw.CHHapticPatternKeyEventWaveformLoopEnabled())
+// CHHapticPatternKeyEventWaveformLoopEnabled returns the string constant CHHapticPatternKeyEventWaveformLoopEnabled, for use as a dictionary key or argument.
+func CHHapticPatternKeyEventWaveformLoopEnabled() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticPatternKeyEventWaveformLoopEnabled")))
 }
 
-// CHHapticPatternKeyParameter returns the string constant CHHapticPatternKeyParameter as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticPatternKeyParameter() objc.ID {
-	return purego.CFConstant(raw.CHHapticPatternKeyParameter())
+// CHHapticPatternKeyParameter returns the string constant CHHapticPatternKeyParameter, for use as a dictionary key or argument.
+func CHHapticPatternKeyParameter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticPatternKeyParameter")))
 }
 
-// CHHapticPatternKeyParameterID returns the string constant CHHapticPatternKeyParameterID as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticPatternKeyParameterID() objc.ID {
-	return purego.CFConstant(raw.CHHapticPatternKeyParameterID())
+// CHHapticPatternKeyParameterID returns the string constant CHHapticPatternKeyParameterID, for use as a dictionary key or argument.
+func CHHapticPatternKeyParameterID() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticPatternKeyParameterID")))
 }
 
-// CHHapticPatternKeyParameterValue returns the string constant CHHapticPatternKeyParameterValue as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticPatternKeyParameterValue() objc.ID {
-	return purego.CFConstant(raw.CHHapticPatternKeyParameterValue())
+// CHHapticPatternKeyParameterValue returns the string constant CHHapticPatternKeyParameterValue, for use as a dictionary key or argument.
+func CHHapticPatternKeyParameterValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticPatternKeyParameterValue")))
 }
 
-// CHHapticPatternKeyParameterCurve returns the string constant CHHapticPatternKeyParameterCurve as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticPatternKeyParameterCurve() objc.ID {
-	return purego.CFConstant(raw.CHHapticPatternKeyParameterCurve())
+// CHHapticPatternKeyParameterCurve returns the string constant CHHapticPatternKeyParameterCurve, for use as a dictionary key or argument.
+func CHHapticPatternKeyParameterCurve() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticPatternKeyParameterCurve")))
 }
 
-// CHHapticPatternKeyParameterCurveControlPoints returns the string constant CHHapticPatternKeyParameterCurveControlPoints as an objc.ID, for use as a dictionary key or selector argument.
-func CHHapticPatternKeyParameterCurveControlPoints() objc.ID {
-	return purego.CFConstant(raw.CHHapticPatternKeyParameterCurveControlPoints())
+// CHHapticPatternKeyParameterCurveControlPoints returns the string constant CHHapticPatternKeyParameterCurveControlPoints, for use as a dictionary key or argument.
+func CHHapticPatternKeyParameterCurveControlPoints() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CHHapticPatternKeyParameterCurveControlPoints")))
 }

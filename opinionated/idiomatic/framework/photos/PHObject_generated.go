@@ -5,53 +5,76 @@
 package photos
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The abstract superclass for Photos model objects (assets and collections).
 //
-// Object wraps [raw.PHObject] with a fluent Go API.
+// Object is an idiomatic wrapper over the Objective-C class PHObject.
 type Object struct {
-	inner *raw.PHObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHObject].
-func (x *Object) Unwrap() *raw.PHObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Object) ID() objc.ID { return x.inner.Ptr() }
-
-// ObjectFromID adopts an existing object pointer as a Object (nil for 0).
+// ObjectFromID adopts an existing Objective-C object as a Object
+// (nil for 0), retaining it and registering a release finalizer.
 func ObjectFromID(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	return &Object{inner: raw.PHObjectFromID(id)}
+	x := &Object{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewObject creates a new [Object].
+// objectAdopt wraps an Objective-C object that this code just created as a
+// Object (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func objectAdopt(id objc.ID) *Object {
+	if id == 0 {
+		return nil
+	}
+	x := &Object{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Object) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Object) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Object) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewObject creates a new Object.
 func NewObject() *Object {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHObject")), objc.RegisterName("new"))
-	return &Object{inner: raw.PHObjectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHObject")), objc.RegisterName("new"))
+	return objectAdopt(_id)
 }
 
-// LocalIdentifier calls the underlying LocalIdentifier.
 func (x *Object) LocalIdentifier() string {
-	_r := x.inner.LocalIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *Object) asObject() *raw.PHObject { return x.inner }
 
 // Objectable is the interface implemented by [Object], for mocking and DI.
 type Objectable interface {
-	Unwrap() *raw.PHObject
+	obj.Object
 	LocalIdentifier() string
 }
 

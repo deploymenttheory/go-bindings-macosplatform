@@ -5,107 +5,96 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Criteria used to retrieve data from or save data to a persistent store.
 //
-// PersistentStoreRequest wraps [raw.NSPersistentStoreRequest] with a fluent Go API.
+// PersistentStoreRequest is an idiomatic wrapper over the Objective-C class NSPersistentStoreRequest.
 type PersistentStoreRequest struct {
-	inner *raw.NSPersistentStoreRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPersistentStoreRequest].
-func (x *PersistentStoreRequest) Unwrap() *raw.NSPersistentStoreRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersistentStoreRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// PersistentStoreRequestFromID adopts an existing object pointer as a PersistentStoreRequest (nil for 0).
+// PersistentStoreRequestFromID adopts an existing Objective-C object as a PersistentStoreRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func PersistentStoreRequestFromID(id objc.ID) *PersistentStoreRequest {
 	if id == 0 {
 		return nil
 	}
-	return &PersistentStoreRequest{inner: raw.NSPersistentStoreRequestFromID(id)}
+	x := &PersistentStoreRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPersistentStoreRequest creates a new [PersistentStoreRequest].
+// persistentStoreRequestAdopt wraps an Objective-C object that this code just created as a
+// PersistentStoreRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func persistentStoreRequestAdopt(id objc.ID) *PersistentStoreRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &PersistentStoreRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PersistentStoreRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PersistentStoreRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PersistentStoreRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPersistentStoreRequest creates a new PersistentStoreRequest.
 func NewPersistentStoreRequest() *PersistentStoreRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentStoreRequest")), objc.RegisterName("new"))
-	return &PersistentStoreRequest{inner: raw.NSPersistentStoreRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPersistentStoreRequest")), objc.RegisterName("new"))
+	return persistentStoreRequestAdopt(_id)
 }
 
 // The stores the request should be sent to.
 //
-// WithAffectedStores sets the collection, converting the Go slice to an NSArray.
+// WithAffectedStores sets the collection and returns the receiver so calls can be chained.
 func (x *PersistentStoreRequest) WithAffectedStores(items ...PersistentStoreProvider) *PersistentStoreRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetAffectedStores(foundation.NSArrayFromID[*raw.NSPersistentStore](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asPersistentStore().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetAffectedStores(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
 	return x
 }
 
 // AffectedStores returns the collection as a Go slice.
 func (x *PersistentStoreRequest) AffectedStores() []*PersistentStore {
-	arr := x.inner.AffectedStores()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PersistentStore {
-		return &PersistentStore{inner: raw.NSPersistentStoreFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("affectedStores"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersistentStore { return PersistentStoreFromID(_id) })
 }
 
-// SetAffectedStores calls the underlying SetAffectedStores.
-func (x *PersistentStoreRequest) SetAffectedStores(affectedStores ...PersistentStoreProvider) {
-	_ptrs := make([]objc.ID, len(affectedStores))
-	for _i, _v := range affectedStores {
-		_ptrs[_i] = _v.asPersistentStore().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.NSPersistentStore]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.NSPersistentStore](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.NSPersistentStore](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetAffectedStores(_arg0)
+func (x *PersistentStoreRequest) SetAffectedStores(affectedStores []*PersistentStore) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), purego.SliceToNSArray(affectedStores, func(_v *PersistentStore) objc.ID { return objref.IDOf(_v) }))
 }
 
-// RequestType calls the underlying RequestType.
-func (x *PersistentStoreRequest) RequestType() NSPersistentStoreRequestType {
-	return NSPersistentStoreRequestType(x.inner.RequestType())
-}
-
-func (x *PersistentStoreRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest {
-	return x.inner
+func (x *PersistentStoreRequest) RequestType() PersistentStoreRequestType {
+	_r := objc.Send[PersistentStoreRequestType](objref.IDOf(x), objc.RegisterName("requestType"))
+	return _r
 }
 
 // PersistentStoreRequestable is the interface implemented by [PersistentStoreRequest], for mocking and DI.
 type PersistentStoreRequestable interface {
-	Unwrap() *raw.NSPersistentStoreRequest
+	obj.Object
 	WithAffectedStores(items ...PersistentStoreProvider) *PersistentStoreRequest
 	AffectedStores() []*PersistentStore
-	SetAffectedStores(affectedStores ...PersistentStoreProvider)
-	RequestType() NSPersistentStoreRequestType
+	SetAffectedStores(affectedStores []*PersistentStore)
+	RequestType() PersistentStoreRequestType
 }
 
 var _ PersistentStoreRequestable = (*PersistentStoreRequest)(nil)

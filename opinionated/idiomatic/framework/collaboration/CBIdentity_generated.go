@@ -5,167 +5,165 @@
 package collaboration
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/collaboration"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A CBIdentity object is used for accessing the attributes of an identity stored in an identity authority. You can use an identity object for finding identities, and storing them in an access control list (ACL). If you need to edit these attributes, take advantage of the CSIdentity class in Core Services.
 //
-// Identity wraps [raw.CBIdentity] with a fluent Go API.
+// Identity is an idiomatic wrapper over the Objective-C class CBIdentity.
 type Identity struct {
-	inner *raw.CBIdentity
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CBIdentity].
-func (x *Identity) Unwrap() *raw.CBIdentity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Identity) ID() objc.ID { return x.inner.Ptr() }
-
-// IdentityFromID adopts an existing object pointer as a Identity (nil for 0).
+// IdentityFromID adopts an existing Objective-C object as a Identity
+// (nil for 0), retaining it and registering a release finalizer.
 func IdentityFromID(id objc.ID) *Identity {
 	if id == 0 {
 		return nil
 	}
-	return &Identity{inner: raw.CBIdentityFromID(id)}
+	x := &Identity{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewIdentity creates a new [Identity].
+// identityAdopt wraps an Objective-C object that this code just created as a
+// Identity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func identityAdopt(id objc.ID) *Identity {
+	if id == 0 {
+		return nil
+	}
+	x := &Identity{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Identity) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Identity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Identity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewIdentity creates a new Identity.
 func NewIdentity() *Identity {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBIdentity")), objc.RegisterName("new"))
-	return &Identity{inner: raw.CBIdentityFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CBIdentity")), objc.RegisterName("new"))
+	return identityAdopt(_id)
 }
 
 // Returns a Boolean value indicating whether the identity is a member of the specified group.
-//
-// IsMemberOfGroup calls the underlying IsMemberOfGroup.
-func (x *Identity) IsMemberOfGroup(group *raw.CBGroupIdentity) bool {
-	return x.inner.IsMemberOfGroup(group)
+func (x *Identity) IsMemberOfGroup(group *GroupIdentity) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMemberOfGroup:"), objref.IDOf(group))
+	return _r
 }
 
 // Returns the identity authority where the identity is stored. - Returns: The identity authority where the identity is stored.
-//
-// Authority calls the underlying Authority.
 func (x *Identity) Authority() *IdentityAuthority {
-	_r := x.inner.Authority()
-	if _r == nil {
-		return nil
-	}
-	return &IdentityAuthority{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authority"))
+	return IdentityAuthorityFromID(_r)
 }
 
-// UniqueIdentifier calls the underlying UniqueIdentifier.
-func (x *Identity) UniqueIdentifier() *foundation.NSUUID {
-	return x.inner.UniqueIdentifier()
+func (x *Identity) UniqueIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueIdentifier"))
+	return obj.Wrap(_r)
 }
 
 // Returns the UUID of the identity as a string. The UUID string is generated so it is unique across all identity authorities. When storing ACLs, one method is to store the UUID of each identity. However, it is recommended that you use a persistent data object instead (see “CBIdentity/persistentReference“). - Returns: The UUID string of the identity.
-//
-// UUIDString calls the underlying UUIDString.
 func (x *Identity) UUIDString() string {
-	_r := x.inner.UUIDString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUIDString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Returns the full name of the identity. - Returns: The full name for the identity.
-//
-// FullName calls the underlying FullName.
 func (x *Identity) FullName() string {
-	_r := x.inner.FullName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Returns the POSIX name of the identity. The POSIX name is also referred to as the “short name” for an identity. It can only contain the characters A-Z, a-z, 0-9, -, _, ., and @. - Returns: The POSIX name of the identity.
-//
-// PosixName calls the underlying PosixName.
+// Returns the POSIX name of the identity. The POSIX name is also referred to as the “short name” for an identity. It can only contain the characters A-Z, a-z, 0-9, -, _, ., and
 func (x *Identity) PosixName() string {
-	_r := x.inner.PosixName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("posixName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Returns an array of aliases (alternate names) for the identity. An identity can have zero or more aliases. Like the full and short names, two identities cannot share an alias. - Returns: An array of `NSString` objects containing the alternate names for the identity.
 //
 // Aliases returns the collection as a Go slice.
 func (x *Identity) Aliases() []string {
-	arr := x.inner.Aliases()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("aliases"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Returns the email address of an identity. - Returns: The email address of an identity or `nil` if none exists.
-//
-// EmailAddress calls the underlying EmailAddress.
 func (x *Identity) EmailAddress() string {
-	_r := x.inner.EmailAddress()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emailAddress"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Returns the image associated with an identity. - Returns: The image associated with an identity, or `nil` if none exists.
-//
-// Image calls the underlying Image.
-func (x *Identity) Image() *appkit.NSImage {
-	return x.inner.Image()
+func (x *Identity) Image() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+	return obj.Wrap(_r)
 }
 
 // Returns a persistent reference to store a reference to an identity. A persistent reference data object is an object generated from an identity. Persistent data objects can be written to and read from a file, making them extremely useful for storing identities in an ACL. - Returns: A data object that uniquely references an identity.
-//
-// PersistentReference calls the underlying PersistentReference.
-func (x *Identity) PersistentReference() *foundation.NSData {
-	return x.inner.PersistentReference()
+func (x *Identity) PersistentReference() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentReference"))
+	return obj.Wrap(_r)
 }
 
 // Returns a Boolean value indicating the state of the identity’s hidden property. A hidden identity does not show up in the Identity Picker. A hidden identity refers to system identities such as `root`, `www`, and `wheel`. - Returns: <doc://com.apple.documentation/documentation/objectivec/yes> if the identity is hidden; <doc://com.apple.documentation/documentation/objectivec/no> if it is not.
-//
-// IsHidden calls the underlying IsHidden.
 func (x *Identity) IsHidden() bool {
-	return x.inner.IsHidden()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+	return _r
 }
 
 // Returns an opaque object for use with the Core Services Identity API. This method, along with “CBIdentity/identityWithCSIdentity:“, is used for interoperability with the Core Services Identity API. - Returns: The opaque object for use with the Core Services Identity API.
-//
-// CSIdentity calls the underlying CSIdentity.
-func (x *Identity) CSIdentity() unsafe.Pointer {
-	return x.inner.CSIdentity()
+func (x *Identity) CSIdentity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CSIdentity"))
+	return obj.Wrap(_r)
 }
-
-func (x *Identity) asIdentity() *raw.CBIdentity { return x.inner }
 
 // Identityable is the interface implemented by [Identity], for mocking and DI.
 type Identityable interface {
-	Unwrap() *raw.CBIdentity
-	IsMemberOfGroup(group *raw.CBGroupIdentity) bool
+	obj.Object
+	IsMemberOfGroup(group *GroupIdentity) bool
 	Authority() *IdentityAuthority
-	UniqueIdentifier() *foundation.NSUUID
+	UniqueIdentifier() obj.Object
 	UUIDString() string
 	FullName() string
 	PosixName() string
 	Aliases() []string
 	EmailAddress() string
-	Image() *appkit.NSImage
-	PersistentReference() *foundation.NSData
+	Image() obj.Object
+	PersistentReference() obj.Object
 	IsHidden() bool
-	CSIdentity() unsafe.Pointer
+	CSIdentity() obj.Object
 }
 
 var _ Identityable = (*Identity)(nil)

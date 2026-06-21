@@ -5,48 +5,74 @@
 package quicklookui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A Quick Look preview request that indicates the content to preview.
 //
-// FilePreviewRequest wraps [raw.QLFilePreviewRequest] with a fluent Go API.
+// FilePreviewRequest is an idiomatic wrapper over the Objective-C class QLFilePreviewRequest.
 type FilePreviewRequest struct {
-	inner *raw.QLFilePreviewRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QLFilePreviewRequest].
-func (x *FilePreviewRequest) Unwrap() *raw.QLFilePreviewRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FilePreviewRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// FilePreviewRequestFromID adopts an existing object pointer as a FilePreviewRequest (nil for 0).
+// FilePreviewRequestFromID adopts an existing Objective-C object as a FilePreviewRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func FilePreviewRequestFromID(id objc.ID) *FilePreviewRequest {
 	if id == 0 {
 		return nil
 	}
-	return &FilePreviewRequest{inner: raw.QLFilePreviewRequestFromID(id)}
+	x := &FilePreviewRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFilePreviewRequest creates a new [FilePreviewRequest].
+// filePreviewRequestAdopt wraps an Objective-C object that this code just created as a
+// FilePreviewRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func filePreviewRequestAdopt(id objc.ID) *FilePreviewRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &FilePreviewRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FilePreviewRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FilePreviewRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FilePreviewRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFilePreviewRequest creates a new FilePreviewRequest.
 func NewFilePreviewRequest() *FilePreviewRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("QLFilePreviewRequest")), objc.RegisterName("new"))
-	return &FilePreviewRequest{inner: raw.QLFilePreviewRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("QLFilePreviewRequest")), objc.RegisterName("new"))
+	return filePreviewRequestAdopt(_id)
 }
 
-// FileURL calls the underlying FileURL.
-func (x *FilePreviewRequest) FileURL() *foundation.NSURL {
-	return x.inner.FileURL()
+func (x *FilePreviewRequest) FileURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileURL"))
+	return obj.Wrap(_r)
 }
 
 // FilePreviewRequestable is the interface implemented by [FilePreviewRequest], for mocking and DI.
 type FilePreviewRequestable interface {
-	Unwrap() *raw.QLFilePreviewRequest
-	FileURL() *foundation.NSURL
+	obj.Object
+	FileURL() obj.Object
 }
 
 var _ FilePreviewRequestable = (*FilePreviewRequest)(nil)

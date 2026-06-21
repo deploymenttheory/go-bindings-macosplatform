@@ -5,41 +5,68 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An opaque token that represents a specific point in a database’s history.
 //
-// ServerChangeToken wraps [raw.CKServerChangeToken] with a fluent Go API.
+// ServerChangeToken is an idiomatic wrapper over the Objective-C class CKServerChangeToken.
 type ServerChangeToken struct {
-	inner *raw.CKServerChangeToken
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKServerChangeToken].
-func (x *ServerChangeToken) Unwrap() *raw.CKServerChangeToken { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ServerChangeToken) ID() objc.ID { return x.inner.Ptr() }
-
-// ServerChangeTokenFromID adopts an existing object pointer as a ServerChangeToken (nil for 0).
+// ServerChangeTokenFromID adopts an existing Objective-C object as a ServerChangeToken
+// (nil for 0), retaining it and registering a release finalizer.
 func ServerChangeTokenFromID(id objc.ID) *ServerChangeToken {
 	if id == 0 {
 		return nil
 	}
-	return &ServerChangeToken{inner: raw.CKServerChangeTokenFromID(id)}
+	x := &ServerChangeToken{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewServerChangeToken creates a new [ServerChangeToken].
+// serverChangeTokenAdopt wraps an Objective-C object that this code just created as a
+// ServerChangeToken (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func serverChangeTokenAdopt(id objc.ID) *ServerChangeToken {
+	if id == 0 {
+		return nil
+	}
+	x := &ServerChangeToken{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ServerChangeToken) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ServerChangeToken) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ServerChangeToken) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewServerChangeToken creates a new ServerChangeToken.
 func NewServerChangeToken() *ServerChangeToken {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKServerChangeToken")), objc.RegisterName("new"))
-	return &ServerChangeToken{inner: raw.CKServerChangeTokenFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKServerChangeToken")), objc.RegisterName("new"))
+	return serverChangeTokenAdopt(_id)
 }
 
 // ServerChangeTokenable is the interface implemented by [ServerChangeToken], for mocking and DI.
 type ServerChangeTokenable interface {
-	Unwrap() *raw.CKServerChangeToken
+	obj.Object
 }
 
 var _ ServerChangeTokenable = (*ServerChangeToken)(nil)

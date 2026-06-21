@@ -5,60 +5,82 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// UnsendMessagesIntentResponse wraps [raw.INUnsendMessagesIntentResponse] with a fluent Go API.
+// UnsendMessagesIntentResponse is an idiomatic wrapper over the Objective-C class INUnsendMessagesIntentResponse.
 type UnsendMessagesIntentResponse struct {
-	inner *raw.INUnsendMessagesIntentResponse
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INUnsendMessagesIntentResponse].
-func (x *UnsendMessagesIntentResponse) Unwrap() *raw.INUnsendMessagesIntentResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnsendMessagesIntentResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// UnsendMessagesIntentResponseFromID adopts an existing object pointer as a UnsendMessagesIntentResponse (nil for 0).
+// UnsendMessagesIntentResponseFromID adopts an existing Objective-C object as a UnsendMessagesIntentResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func UnsendMessagesIntentResponseFromID(id objc.ID) *UnsendMessagesIntentResponse {
 	if id == 0 {
 		return nil
 	}
-	return &UnsendMessagesIntentResponse{inner: raw.INUnsendMessagesIntentResponseFromID(id)}
+	x := &UnsendMessagesIntentResponse{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewUnsendMessagesIntentResponseWithCodeUserActivity creates a new [UnsendMessagesIntentResponse].
-func NewUnsendMessagesIntentResponseWithCodeUserActivity(code INUnsendMessagesIntentResponseCode, userActivity *foundation.NSUserActivity) *UnsendMessagesIntentResponse {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INUnsendMessagesIntentResponse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), raw.INUnsendMessagesIntentResponseCode(code), userActivity.Ptr())
-	return &UnsendMessagesIntentResponse{inner: raw.INUnsendMessagesIntentResponseFromID(_id)}
+// unsendMessagesIntentResponseAdopt wraps an Objective-C object that this code just created as a
+// UnsendMessagesIntentResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unsendMessagesIntentResponseAdopt(id objc.ID) *UnsendMessagesIntentResponse {
+	if id == 0 {
+		return nil
+	}
+	x := &UnsendMessagesIntentResponse{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UnsendMessagesIntentResponse) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UnsendMessagesIntentResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UnsendMessagesIntentResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUnsendMessagesIntentResponseWithCodeUserActivity creates a new UnsendMessagesIntentResponse.
+func NewUnsendMessagesIntentResponseWithCodeUserActivity(code UnsendMessagesIntentResponseCode, userActivity obj.Object) *UnsendMessagesIntentResponse {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INUnsendMessagesIntentResponse")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCode:userActivity:"), code, objref.IDOf(userActivity))
+	return unsendMessagesIntentResponseAdopt(_id)
 }
 
 // The user activity object to use when launching the app.
 //
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *UnsendMessagesIntentResponse) WithUserActivity(userActivity *foundation.NSUserActivity) *UnsendMessagesIntentResponse {
-	x.inner.INIntentResponse.SetUserActivity(userActivity)
+// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+func (x *UnsendMessagesIntentResponse) WithUserActivity(userActivity obj.Object) *UnsendMessagesIntentResponse {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
-// Code calls the underlying Code.
-func (x *UnsendMessagesIntentResponse) Code() INUnsendMessagesIntentResponseCode {
-	return INUnsendMessagesIntentResponseCode(x.inner.Code())
-}
-
-func (x *UnsendMessagesIntentResponse) asIntentResponse() *raw.INIntentResponse {
-	return &x.inner.INIntentResponse
+func (x *UnsendMessagesIntentResponse) Code() UnsendMessagesIntentResponseCode {
+	_r := objc.Send[UnsendMessagesIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
+	return _r
 }
 
 // UnsendMessagesIntentResponseable is the interface implemented by [UnsendMessagesIntentResponse], for mocking and DI.
 type UnsendMessagesIntentResponseable interface {
-	Unwrap() *raw.INUnsendMessagesIntentResponse
-	WithUserActivity(userActivity *foundation.NSUserActivity) *UnsendMessagesIntentResponse
-	Code() INUnsendMessagesIntentResponseCode
+	obj.Object
+	WithUserActivity(userActivity obj.Object) *UnsendMessagesIntentResponse
+	Code() UnsendMessagesIntentResponseCode
 }
 
 var _ UnsendMessagesIntentResponseable = (*UnsendMessagesIntentResponse)(nil)

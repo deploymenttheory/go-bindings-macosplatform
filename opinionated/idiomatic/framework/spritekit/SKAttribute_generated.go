@@ -5,62 +5,86 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A specification for dynamic per-node data used with a custom shader.
 //
-// Attribute wraps [raw.SKAttribute] with a fluent Go API.
+// Attribute is an idiomatic wrapper over the Objective-C class SKAttribute.
 type Attribute struct {
-	inner *raw.SKAttribute
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKAttribute].
-func (x *Attribute) Unwrap() *raw.SKAttribute { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Attribute) ID() objc.ID { return x.inner.Ptr() }
-
-// AttributeFromID adopts an existing object pointer as a Attribute (nil for 0).
+// AttributeFromID adopts an existing Objective-C object as a Attribute
+// (nil for 0), retaining it and registering a release finalizer.
 func AttributeFromID(id objc.ID) *Attribute {
 	if id == 0 {
 		return nil
 	}
-	return &Attribute{inner: raw.SKAttributeFromID(id)}
+	x := &Attribute{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// attributeAdopt wraps an Objective-C object that this code just created as a
+// Attribute (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func attributeAdopt(id objc.ID) *Attribute {
+	if id == 0 {
+		return nil
+	}
+	x := &Attribute{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Attribute) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Attribute) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Attribute) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates and initializes a new attribute object of a specified type with a name that can be referenced within the shader.
 //
-// NewAttributeWithNameType creates a new [Attribute].
-func NewAttributeWithNameType(name string, type_ SKAttributeType) *Attribute {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKAttribute")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:type:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.SKAttributeType(type_))
-	return &Attribute{inner: raw.SKAttributeFromID(_id)}
+// NewAttributeWithNameType creates a new Attribute.
+func NewAttributeWithNameType(name string, type_ AttributeType) *Attribute {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKAttribute")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:type:"), purego.NSString(name), type_)
+	return attributeAdopt(_id)
 }
 
-// Name calls the underlying Name.
 func (x *Attribute) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Type calls the underlying Type.
-func (x *Attribute) Type() SKAttributeType {
-	return SKAttributeType(x.inner.Type())
+func (x *Attribute) Type() AttributeType {
+	_r := objc.Send[AttributeType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
 // Attributeable is the interface implemented by [Attribute], for mocking and DI.
 type Attributeable interface {
-	Unwrap() *raw.SKAttribute
+	obj.Object
 	Name() string
-	Type() SKAttributeType
+	Type() AttributeType
 }
 
 var _ Attributeable = (*Attribute)(nil)

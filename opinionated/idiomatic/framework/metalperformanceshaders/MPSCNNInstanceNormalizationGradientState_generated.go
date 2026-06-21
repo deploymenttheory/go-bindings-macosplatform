@@ -5,111 +5,91 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that stores information required to execute a gradient pass for instance normalization.
 //
-// CNNInstanceNormalizationGradientState wraps [raw.MPSCNNInstanceNormalizationGradientState] with a fluent Go API.
+// CNNInstanceNormalizationGradientState is an idiomatic wrapper over the Objective-C class MPSCNNInstanceNormalizationGradientState.
 type CNNInstanceNormalizationGradientState struct {
-	inner *raw.MPSCNNInstanceNormalizationGradientState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNInstanceNormalizationGradientState].
-func (x *CNNInstanceNormalizationGradientState) Unwrap() *raw.MPSCNNInstanceNormalizationGradientState {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNInstanceNormalizationGradientState) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNInstanceNormalizationGradientStateFromID adopts an existing object pointer as a CNNInstanceNormalizationGradientState (nil for 0).
+// CNNInstanceNormalizationGradientStateFromID adopts an existing Objective-C object as a CNNInstanceNormalizationGradientState
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNInstanceNormalizationGradientStateFromID(id objc.ID) *CNNInstanceNormalizationGradientState {
 	if id == 0 {
 		return nil
 	}
-	return &CNNInstanceNormalizationGradientState{inner: raw.MPSCNNInstanceNormalizationGradientStateFromID(id)}
+	x := &CNNInstanceNormalizationGradientState{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCNNInstanceNormalizationGradientState creates a new [CNNInstanceNormalizationGradientState].
+// cNNInstanceNormalizationGradientStateAdopt wraps an Objective-C object that this code just created as a
+// CNNInstanceNormalizationGradientState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNInstanceNormalizationGradientStateAdopt(id objc.ID) *CNNInstanceNormalizationGradientState {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNInstanceNormalizationGradientState{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CNNInstanceNormalizationGradientState) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNInstanceNormalizationGradientState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNInstanceNormalizationGradientState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNInstanceNormalizationGradientState creates a new CNNInstanceNormalizationGradientState.
 func NewCNNInstanceNormalizationGradientState() *CNNInstanceNormalizationGradientState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNInstanceNormalizationGradientState")), objc.RegisterName("new"))
-	return &CNNInstanceNormalizationGradientState{inner: raw.MPSCNNInstanceNormalizationGradientStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNInstanceNormalizationGradientState")), objc.RegisterName("new"))
+	return cNNInstanceNormalizationGradientStateAdopt(_id)
 }
 
-// WithReadCount sets the readCount property and returns the receiver for chaining.
-func (x *CNNInstanceNormalizationGradientState) WithReadCount(readCount uint) *CNNInstanceNormalizationGradientState {
-	x.inner.MPSNNGradientState.MPSState.SetReadCount(readCount)
+// WithReadCount sets readCount and returns the receiver so calls can be chained.
+func (x *CNNInstanceNormalizationGradientState) WithReadCount(readCount int) *CNNInstanceNormalizationGradientState {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// A string to help identify this object.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *CNNInstanceNormalizationGradientState) WithLabel(label string) *CNNInstanceNormalizationGradientState {
-	x.inner.MPSNNGradientState.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract The MPSCNNInstanceNormalization object that created this state object.
-//
-// InstanceNormalization calls the underlying InstanceNormalization.
-func (x *CNNInstanceNormalizationGradientState) InstanceNormalization() *mpsneuralnetwork.MPSCNNInstanceNormalization {
-	return x.inner.InstanceNormalization()
-}
-
-// @abstract   Return an MTLBuffer object with the state's current gamma values.
-//
-// Gamma calls the underlying Gamma.
-func (x *CNNInstanceNormalizationGradientState) Gamma() metal.MTLBuffer {
-	return x.inner.Gamma()
-}
-
-// @abstract   Return an MTLBuffer object with the state's current beta values..
-//
-// Beta calls the underlying Beta.
-func (x *CNNInstanceNormalizationGradientState) Beta() metal.MTLBuffer {
-	return x.inner.Beta()
-}
-
-// @property   The MTLBuffer containing the gradient values for gamma.
-//
-// GradientForGamma calls the underlying GradientForGamma.
-func (x *CNNInstanceNormalizationGradientState) GradientForGamma() metal.MTLBuffer {
-	return x.inner.GradientForGamma()
-}
-
-// @property   The MTLBuffer containing the gradient values for beta.
-//
-// GradientForBeta calls the underlying GradientForBeta.
-func (x *CNNInstanceNormalizationGradientState) GradientForBeta() metal.MTLBuffer {
-	return x.inner.GradientForBeta()
-}
-
-func (x *CNNInstanceNormalizationGradientState) asNNGradientState() *mpsneuralnetwork.MPSNNGradientState {
-	return &x.inner.MPSNNGradientState
-}
-
-func (x *CNNInstanceNormalizationGradientState) asState() *mpscore.MPSState {
-	return &x.inner.MPSNNGradientState.MPSState
+// The MPSCNNInstanceNormalization object that created this state object.
+func (x *CNNInstanceNormalizationGradientState) InstanceNormalization() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instanceNormalization"))
+	return obj.Wrap(_r)
 }
 
 // CNNInstanceNormalizationGradientStateable is the interface implemented by [CNNInstanceNormalizationGradientState], for mocking and DI.
 type CNNInstanceNormalizationGradientStateable interface {
-	Unwrap() *raw.MPSCNNInstanceNormalizationGradientState
-	WithReadCount(readCount uint) *CNNInstanceNormalizationGradientState
+	obj.Object
+	WithReadCount(readCount int) *CNNInstanceNormalizationGradientState
 	WithLabel(label string) *CNNInstanceNormalizationGradientState
-	InstanceNormalization() *mpsneuralnetwork.MPSCNNInstanceNormalization
-	Gamma() metal.MTLBuffer
-	Beta() metal.MTLBuffer
-	GradientForGamma() metal.MTLBuffer
-	GradientForBeta() metal.MTLBuffer
+	InstanceNormalization() obj.Object
 }
 
 var _ CNNInstanceNormalizationGradientStateable = (*CNNInstanceNormalizationGradientState)(nil)

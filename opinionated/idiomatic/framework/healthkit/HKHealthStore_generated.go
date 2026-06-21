@@ -6,272 +6,181 @@ package healthkit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // The access point for all data managed by HealthKit.
 //
-// HealthStore wraps [raw.HKHealthStore] with a fluent Go API.
+// HealthStore is an idiomatic wrapper over the Objective-C class HKHealthStore.
 type HealthStore struct {
-	inner *raw.HKHealthStore
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKHealthStore].
-func (x *HealthStore) Unwrap() *raw.HKHealthStore { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HealthStore) ID() objc.ID { return x.inner.Ptr() }
-
-// HealthStoreFromID adopts an existing object pointer as a HealthStore (nil for 0).
+// HealthStoreFromID adopts an existing Objective-C object as a HealthStore
+// (nil for 0), retaining it and registering a release finalizer.
 func HealthStoreFromID(id objc.ID) *HealthStore {
 	if id == 0 {
 		return nil
 	}
-	return &HealthStore{inner: raw.HKHealthStoreFromID(id)}
+	x := &HealthStore{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewHealthStore creates a new [HealthStore].
+// healthStoreAdopt wraps an Objective-C object that this code just created as a
+// HealthStore (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func healthStoreAdopt(id objc.ID) *HealthStore {
+	if id == 0 {
+		return nil
+	}
+	x := &HealthStore{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HealthStore) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HealthStore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HealthStore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHealthStore creates a new HealthStore.
 func NewHealthStore() *HealthStore {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKHealthStore")), objc.RegisterName("new"))
-	return &HealthStore{inner: raw.HKHealthStoreFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKHealthStore")), objc.RegisterName("new"))
+	return healthStoreAdopt(_id)
 }
 
 // A block that the system calls when it starts a mirrored workout session.
 //
-// WithWorkoutSessionMirroringStartHandler sets the workoutSessionMirroringStartHandler property and returns the receiver for chaining.
-func (x *HealthStore) WithWorkoutSessionMirroringStartHandler(workoutSessionMirroringStartHandler func(*raw.HKWorkoutSession)) *HealthStore {
-	x.inner.SetWorkoutSessionMirroringStartHandler(workoutSessionMirroringStartHandler)
+// WithWorkoutSessionMirroringStartHandler sets workoutSessionMirroringStartHandler and returns the receiver so calls can be chained.
+func (x *HealthStore) WithWorkoutSessionMirroringStartHandler(workoutSessionMirroringStartHandler func(obj.Object)) *HealthStore {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorkoutSessionMirroringStartHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { workoutSessionMirroringStartHandler(obj.Wrap(_b0)) }))
 	return x
 }
 
 // Returns a Boolean value that indicates whether the current device supports clinical records.
-//
-// SupportsHealthRecords calls the underlying SupportsHealthRecords.
 func (x *HealthStore) SupportsHealthRecords() bool {
-	return x.inner.SupportsHealthRecords()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsHealthRecords"))
+	return _r
 }
 
 // Returns the app’s authorization status for sharing the specified data type.
-//
-// AuthorizationStatusForType calls the underlying AuthorizationStatusForType.
-func (x *HealthStore) AuthorizationStatusForType(type_ *raw.HKObjectType) HKAuthorizationStatus {
-	return HKAuthorizationStatus(x.inner.AuthorizationStatusForType(type_))
-}
-
-// Requests permission to save and read the specified data types.
-//
-// RequestAuthorizationToShareTypesReadTypesCompletion calls the underlying RequestAuthorizationToShareTypesReadTypesCompletion.
-func (x *HealthStore) RequestAuthorizationToShareTypesReadTypesCompletion(typesToShare *foundation.NSSet[*raw.HKSampleType], typesToRead *foundation.NSSet[*raw.HKObjectType], completion func(bool, unsafe.Pointer)) {
-	x.inner.RequestAuthorizationToShareTypesReadTypesCompletion(typesToShare, typesToRead, completion)
-}
-
-// Asynchronously requests permission to read a data type that requires per-object authorization (such as vision prescriptions).
-//
-// RequestPerObjectReadAuthorizationForTypePredicateCompletion calls the underlying RequestPerObjectReadAuthorizationForTypePredicateCompletion.
-func (x *HealthStore) RequestPerObjectReadAuthorizationForTypePredicateCompletion(objectType *raw.HKObjectType, predicate *foundation.NSPredicate, completion func(bool, unsafe.Pointer)) {
-	x.inner.RequestPerObjectReadAuthorizationForTypePredicateCompletion(objectType, predicate, completion)
-}
-
-// Indicates whether the system presents the user with a permission sheet if your app requests authorization for the provided types.
-//
-// GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion calls the underlying GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion.
-func (x *HealthStore) GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion(typesToShare *foundation.NSSet[*raw.HKSampleType], typesToRead *foundation.NSSet[*raw.HKObjectType], completion func(HKAuthorizationRequestStatus, unsafe.Pointer)) {
-	x.inner.GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion(typesToShare, typesToRead, func(_a0 raw.HKAuthorizationRequestStatus, _a1 unsafe.Pointer) {
-		completion(HKAuthorizationRequestStatus(_a0), _a1)
-	})
-}
-
-// Requests permission to save and read the data types specified by an extension.
-//
-// HandleAuthorizationForExtensionWithCompletion calls the underlying HandleAuthorizationForExtensionWithCompletion.
-func (x *HealthStore) HandleAuthorizationForExtensionWithCompletion(completion func(bool, unsafe.Pointer)) {
-	x.inner.HandleAuthorizationForExtensionWithCompletion(completion)
+func (x *HealthStore) AuthorizationStatusForType(type_ *ObjectType) AuthorizationStatus {
+	_r := objc.Send[AuthorizationStatus](objref.IDOf(x), objc.RegisterName("authorizationStatusForType:"), objref.IDOf(type_))
+	return _r
 }
 
 // Returns the earliest date permitted for samples.
-//
-// EarliestPermittedSampleDate calls the underlying EarliestPermittedSampleDate.
-func (x *HealthStore) EarliestPermittedSampleDate() *foundation.NSDate {
-	return x.inner.EarliestPermittedSampleDate()
-}
-
-// Saves the provided object to the HealthKit store.
-//
-// SaveObjectWithCompletion calls the underlying SaveObjectWithCompletion.
-func (x *HealthStore) SaveObjectWithCompletion(object *raw.HKObject, completion func(bool, unsafe.Pointer)) {
-	x.inner.SaveObjectWithCompletion(object, completion)
-}
-
-// Saves an array of objects to the HealthKit store.
-//
-// SaveObjectsWithCompletion calls the underlying SaveObjectsWithCompletion.
-func (x *HealthStore) SaveObjectsWithCompletion(objects *foundation.NSArray[*raw.HKObject], completion func(bool, unsafe.Pointer)) {
-	x.inner.SaveObjectsWithCompletion(objects, completion)
-}
-
-// Deletes the specified object from the HealthKit store.
-//
-// DeleteObjectWithCompletion calls the underlying DeleteObjectWithCompletion.
-func (x *HealthStore) DeleteObjectWithCompletion(object *raw.HKObject, completion func(bool, unsafe.Pointer)) {
-	x.inner.DeleteObjectWithCompletion(object, completion)
-}
-
-// Deletes the specified objects from the HealthKit store.
-//
-// DeleteObjectsWithCompletion calls the underlying DeleteObjectsWithCompletion.
-func (x *HealthStore) DeleteObjectsWithCompletion(objects *foundation.NSArray[*raw.HKObject], completion func(bool, unsafe.Pointer)) {
-	x.inner.DeleteObjectsWithCompletion(objects, completion)
-}
-
-// Deletes objects saved by this application that match the provided type and predicate.
-//
-// DeleteObjectsOfTypePredicateWithCompletion calls the underlying DeleteObjectsOfTypePredicateWithCompletion.
-func (x *HealthStore) DeleteObjectsOfTypePredicateWithCompletion(objectType *raw.HKObjectType, predicate *foundation.NSPredicate, completion func(bool, uint, unsafe.Pointer)) {
-	x.inner.DeleteObjectsOfTypePredicateWithCompletion(objectType, predicate, completion)
+func (x *HealthStore) EarliestPermittedSampleDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("earliestPermittedSampleDate"))
+	return obj.Wrap(_r)
 }
 
 // Starts executing the provided query.
-//
-// ExecuteQuery calls the underlying ExecuteQuery.
-func (x *HealthStore) ExecuteQuery(query *raw.HKQuery) {
-	x.inner.ExecuteQuery(query)
+func (x *HealthStore) ExecuteQuery(query *Query) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executeQuery:"), objref.IDOf(query))
 }
 
 // Stops a long-running query.
-//
-// StopQuery calls the underlying StopQuery.
-func (x *HealthStore) StopQuery(query *raw.HKQuery) {
-	x.inner.StopQuery(query)
-}
-
-// Calculates the active and resting energy burned based on the total energy burned over the given duration.
-//
-// SplitTotalEnergyStartDateEndDateResultsHandler calls the underlying SplitTotalEnergyStartDateEndDateResultsHandler.
-func (x *HealthStore) SplitTotalEnergyStartDateEndDateResultsHandler(totalEnergy *raw.HKQuantity, startDate *foundation.NSDate, endDate *foundation.NSDate, resultsHandler func(*raw.HKQuantity, *raw.HKQuantity, unsafe.Pointer)) {
-	x.inner.SplitTotalEnergyStartDateEndDateResultsHandler(totalEnergy, startDate, endDate, resultsHandler)
+func (x *HealthStore) StopQuery(query *Query) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopQuery:"), objref.IDOf(query))
 }
 
 // Reads the user’s date of birth from the HealthKit store as a date value.
-//
-// DateOfBirthWithError calls the underlying DateOfBirthWithError.
-func (x *HealthStore) DateOfBirthWithError() (*foundation.NSDate, error) {
-	return x.inner.DateOfBirthWithError()
+func (x *HealthStore) DateOfBirthWithError() (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateOfBirthWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // Reads the user’s date of birth from the HealthKit store as date components.
-//
-// DateOfBirthComponentsWithError calls the underlying DateOfBirthComponentsWithError.
-func (x *HealthStore) DateOfBirthComponentsWithError() (*foundation.NSDateComponents, error) {
-	return x.inner.DateOfBirthComponentsWithError()
+func (x *HealthStore) DateOfBirthComponentsWithError() (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateOfBirthComponentsWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // Reads someone’s biological sex from the HealthKit store.
-//
-// BiologicalSexWithError calls the underlying BiologicalSexWithError.
 func (x *HealthStore) BiologicalSexWithError() (*BiologicalSexObject, error) {
-	_r, _err := x.inner.BiologicalSexWithError()
-	if _err != nil {
-		return nil, _err
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biologicalSexWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &BiologicalSexObject{inner: _r}, nil
+	return BiologicalSexObjectFromID(_r), nil
 }
 
 // Reads the user’s blood type from the HealthKit store.
-//
-// BloodTypeWithError calls the underlying BloodTypeWithError.
 func (x *HealthStore) BloodTypeWithError() (*BloodTypeObject, error) {
-	_r, _err := x.inner.BloodTypeWithError()
-	if _err != nil {
-		return nil, _err
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bloodTypeWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &BloodTypeObject{inner: _r}, nil
+	return BloodTypeObjectFromID(_r), nil
 }
 
 // Reads the user’s Fitzpatrick Skin Type from the HealthKit store.
-//
-// FitzpatrickSkinTypeWithError calls the underlying FitzpatrickSkinTypeWithError.
 func (x *HealthStore) FitzpatrickSkinTypeWithError() (*FitzpatrickSkinTypeObject, error) {
-	_r, _err := x.inner.FitzpatrickSkinTypeWithError()
-	if _err != nil {
-		return nil, _err
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fitzpatrickSkinTypeWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &FitzpatrickSkinTypeObject{inner: _r}, nil
+	return FitzpatrickSkinTypeObjectFromID(_r), nil
 }
 
 // Reads the user’s wheelchair use from the HealthKit store.
-//
-// WheelchairUseWithError calls the underlying WheelchairUseWithError.
 func (x *HealthStore) WheelchairUseWithError() (*WheelchairUseObject, error) {
-	_r, _err := x.inner.WheelchairUseWithError()
-	if _err != nil {
-		return nil, _err
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wheelchairUseWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &WheelchairUseObject{inner: _r}, nil
+	return WheelchairUseObjectFromID(_r), nil
 }
 
 // Returns the activity move mode for the current user.
-//
-// ActivityMoveModeWithError calls the underlying ActivityMoveModeWithError.
 func (x *HealthStore) ActivityMoveModeWithError() (*ActivityMoveModeObject, error) {
-	_r, _err := x.inner.ActivityMoveModeWithError()
-	if _err != nil {
-		return nil, _err
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activityMoveModeWithError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &ActivityMoveModeObject{inner: _r}, nil
-}
-
-// Associates the provided samples with the specified workout.
-//
-// AddSamplesToWorkoutCompletion calls the underlying AddSamplesToWorkoutCompletion.
-func (x *HealthStore) AddSamplesToWorkoutCompletion(samples *foundation.NSArray[*raw.HKSample], workout *raw.HKWorkout, completion func(bool, unsafe.Pointer)) {
-	x.inner.AddSamplesToWorkoutCompletion(samples, workout, completion)
+	return ActivityMoveModeObjectFromID(_r), nil
 }
 
 // Pauses the provided workout session.
-//
-// PauseWorkoutSession calls the underlying PauseWorkoutSession.
-func (x *HealthStore) PauseWorkoutSession(workoutSession *raw.HKWorkoutSession) {
-	x.inner.PauseWorkoutSession(workoutSession)
+func (x *HealthStore) PauseWorkoutSession(workoutSession *WorkoutSession) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseWorkoutSession:"), objref.IDOf(workoutSession))
 }
 
 // Resumes the provided workout session.
-//
-// ResumeWorkoutSession calls the underlying ResumeWorkoutSession.
-func (x *HealthStore) ResumeWorkoutSession(workoutSession *raw.HKWorkoutSession) {
-	x.inner.ResumeWorkoutSession(workoutSession)
-}
-
-// Launches or wakes the companion watchOS app to create a new workout session.
-//
-// StartWatchAppWithWorkoutConfigurationCompletion calls the underlying StartWatchAppWithWorkoutConfigurationCompletion.
-func (x *HealthStore) StartWatchAppWithWorkoutConfigurationCompletion(workoutConfiguration *raw.HKWorkoutConfiguration, completion func(bool, unsafe.Pointer)) {
-	x.inner.StartWatchAppWithWorkoutConfigurationCompletion(workoutConfiguration, completion)
-}
-
-// @property      workoutSessionMirroringStartHandler @abstract      Called when a session has started mirroring. @discussion    This property should always be assigned a value promptly after your app is launched, to ensure it is always observing for incoming mirrored workout sessions. If your app is not active when a mirrored session starts, it will be launched in the background and given a one-time permission to start a Live Activity from the background. The assigned block will be executed on an arbitrary background queue.
-//
-// WorkoutSessionMirroringStartHandler calls the underlying WorkoutSessionMirroringStartHandler.
-func (x *HealthStore) WorkoutSessionMirroringStartHandler() objc.Block {
-	return x.inner.WorkoutSessionMirroringStartHandler()
+func (x *HealthStore) ResumeWorkoutSession(workoutSession *WorkoutSession) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeWorkoutSession:"), objref.IDOf(workoutSession))
 }
 
 // SetWorkoutSessionMirroringStartHandler blocks until the operation completes or ctx is cancelled.
@@ -281,13 +190,12 @@ func (x *HealthStore) SetWorkoutSessionMirroringStartHandler(ctx context.Context
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SetWorkoutSessionMirroringStartHandler(func(_p0 *raw.HKWorkoutSession) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &WorkoutSession{inner: _p0}
-		}
+		_o.val = WorkoutSessionFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorkoutSessionMirroringStartHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -297,94 +205,25 @@ func (x *HealthStore) SetWorkoutSessionMirroringStartHandler(ctx context.Context
 	}
 }
 
-// Enables the delivery of updates to an app running in the background.
-//
-// EnableBackgroundDeliveryForTypeFrequencyWithCompletion calls the underlying EnableBackgroundDeliveryForTypeFrequencyWithCompletion.
-func (x *HealthStore) EnableBackgroundDeliveryForTypeFrequencyWithCompletion(type_ *raw.HKObjectType, frequency HKUpdateFrequency, completion func(bool, unsafe.Pointer)) {
-	x.inner.EnableBackgroundDeliveryForTypeFrequencyWithCompletion(type_, raw.HKUpdateFrequency(frequency), completion)
-}
-
-// Disables background deliveries of update notifications for the specified data type.
-//
-// DisableBackgroundDeliveryForTypeWithCompletion calls the underlying DisableBackgroundDeliveryForTypeWithCompletion.
-func (x *HealthStore) DisableBackgroundDeliveryForTypeWithCompletion(type_ *raw.HKObjectType, completion func(bool, unsafe.Pointer)) {
-	x.inner.DisableBackgroundDeliveryForTypeWithCompletion(type_, completion)
-}
-
-// Disables all background deliveries of update notifications.
-//
-// DisableAllBackgroundDeliveryWithCompletion calls the underlying DisableAllBackgroundDeliveryWithCompletion.
-func (x *HealthStore) DisableAllBackgroundDeliveryWithCompletion(completion func(bool, unsafe.Pointer)) {
-	x.inner.DisableAllBackgroundDeliveryWithCompletion(completion)
-}
-
-// Returns the user’s preferred units for the given quantity types.
-//
-// PreferredUnitsForQuantityTypesCompletion calls the underlying PreferredUnitsForQuantityTypesCompletion.
-func (x *HealthStore) PreferredUnitsForQuantityTypesCompletion(quantityTypes *foundation.NSSet[*raw.HKQuantityType], completion func(*foundation.NSDictionary[*raw.HKQuantityType, *raw.HKUnit], unsafe.Pointer)) {
-	x.inner.PreferredUnitsForQuantityTypesCompletion(quantityTypes, completion)
-}
-
-// Recalibrates the prediction algorithm used to calculate the specified sample type.
-//
-// RecalibrateEstimatesForSampleTypeAtDateCompletion calls the underlying RecalibrateEstimatesForSampleTypeAtDateCompletion.
-func (x *HealthStore) RecalibrateEstimatesForSampleTypeAtDateCompletion(sampleType *raw.HKSampleType, date *foundation.NSDate, completion func(bool, unsafe.Pointer)) {
-	x.inner.RecalibrateEstimatesForSampleTypeAtDateCompletion(sampleType, date, completion)
-}
-
-// @method        relateWorkoutEffortSample:withWorkout:activity:completion @abstract      Relates a workout effort sample with a workout @param         sample     The workout effort sample @param         workout    The HKWorkout to relate the sample to @param         activity   The HKWorkoutActivity on the HKWorkout @param         completion The block to be called when the sample has been related
-//
-// RelateWorkoutEffortSampleWithWorkoutActivityCompletion calls the underlying RelateWorkoutEffortSampleWithWorkoutActivityCompletion.
-func (x *HealthStore) RelateWorkoutEffortSampleWithWorkoutActivityCompletion(sample *raw.HKSample, workout *raw.HKWorkout, activity *raw.HKWorkoutActivity, completion func(bool, unsafe.Pointer)) {
-	x.inner.RelateWorkoutEffortSampleWithWorkoutActivityCompletion(sample, workout, activity, completion)
-}
-
-// @method        unrelateWorkoutEffortSample:fromWorkout:activity:completion @abstract      Unrelates a workout effort sample from a workout @param         sample     The workout effort sample @param         workout    The HKWorkout to unrelate the sample from @param         activity   The HKWorkoutActivity on the HKWorkout @param         completion The block to be called when the sample has been unrelated
-//
-// UnrelateWorkoutEffortSampleFromWorkoutActivityCompletion calls the underlying UnrelateWorkoutEffortSampleFromWorkoutActivityCompletion.
-func (x *HealthStore) UnrelateWorkoutEffortSampleFromWorkoutActivityCompletion(sample *raw.HKSample, workout *raw.HKWorkout, activity *raw.HKWorkoutActivity, completion func(bool, unsafe.Pointer)) {
-	x.inner.UnrelateWorkoutEffortSampleFromWorkoutActivityCompletion(sample, workout, activity, completion)
-}
-
 // HealthStoreable is the interface implemented by [HealthStore], for mocking and DI.
 type HealthStoreable interface {
-	Unwrap() *raw.HKHealthStore
-	WithWorkoutSessionMirroringStartHandler(workoutSessionMirroringStartHandler func(*raw.HKWorkoutSession)) *HealthStore
+	obj.Object
+	WithWorkoutSessionMirroringStartHandler(workoutSessionMirroringStartHandler func(obj.Object)) *HealthStore
 	SupportsHealthRecords() bool
-	AuthorizationStatusForType(type_ *raw.HKObjectType) HKAuthorizationStatus
-	RequestAuthorizationToShareTypesReadTypesCompletion(typesToShare *foundation.NSSet[*raw.HKSampleType], typesToRead *foundation.NSSet[*raw.HKObjectType], completion func(bool, unsafe.Pointer))
-	RequestPerObjectReadAuthorizationForTypePredicateCompletion(objectType *raw.HKObjectType, predicate *foundation.NSPredicate, completion func(bool, unsafe.Pointer))
-	GetRequestStatusForAuthorizationToShareTypesReadTypesCompletion(typesToShare *foundation.NSSet[*raw.HKSampleType], typesToRead *foundation.NSSet[*raw.HKObjectType], completion func(HKAuthorizationRequestStatus, unsafe.Pointer))
-	HandleAuthorizationForExtensionWithCompletion(completion func(bool, unsafe.Pointer))
-	EarliestPermittedSampleDate() *foundation.NSDate
-	SaveObjectWithCompletion(object *raw.HKObject, completion func(bool, unsafe.Pointer))
-	SaveObjectsWithCompletion(objects *foundation.NSArray[*raw.HKObject], completion func(bool, unsafe.Pointer))
-	DeleteObjectWithCompletion(object *raw.HKObject, completion func(bool, unsafe.Pointer))
-	DeleteObjectsWithCompletion(objects *foundation.NSArray[*raw.HKObject], completion func(bool, unsafe.Pointer))
-	DeleteObjectsOfTypePredicateWithCompletion(objectType *raw.HKObjectType, predicate *foundation.NSPredicate, completion func(bool, uint, unsafe.Pointer))
-	ExecuteQuery(query *raw.HKQuery)
-	StopQuery(query *raw.HKQuery)
-	SplitTotalEnergyStartDateEndDateResultsHandler(totalEnergy *raw.HKQuantity, startDate *foundation.NSDate, endDate *foundation.NSDate, resultsHandler func(*raw.HKQuantity, *raw.HKQuantity, unsafe.Pointer))
-	DateOfBirthWithError() (*foundation.NSDate, error)
-	DateOfBirthComponentsWithError() (*foundation.NSDateComponents, error)
+	AuthorizationStatusForType(type_ *ObjectType) AuthorizationStatus
+	EarliestPermittedSampleDate() obj.Object
+	ExecuteQuery(query *Query)
+	StopQuery(query *Query)
+	DateOfBirthWithError() (obj.Object, error)
+	DateOfBirthComponentsWithError() (obj.Object, error)
 	BiologicalSexWithError() (*BiologicalSexObject, error)
 	BloodTypeWithError() (*BloodTypeObject, error)
 	FitzpatrickSkinTypeWithError() (*FitzpatrickSkinTypeObject, error)
 	WheelchairUseWithError() (*WheelchairUseObject, error)
 	ActivityMoveModeWithError() (*ActivityMoveModeObject, error)
-	AddSamplesToWorkoutCompletion(samples *foundation.NSArray[*raw.HKSample], workout *raw.HKWorkout, completion func(bool, unsafe.Pointer))
-	PauseWorkoutSession(workoutSession *raw.HKWorkoutSession)
-	ResumeWorkoutSession(workoutSession *raw.HKWorkoutSession)
-	StartWatchAppWithWorkoutConfigurationCompletion(workoutConfiguration *raw.HKWorkoutConfiguration, completion func(bool, unsafe.Pointer))
-	WorkoutSessionMirroringStartHandler() objc.Block
+	PauseWorkoutSession(workoutSession *WorkoutSession)
+	ResumeWorkoutSession(workoutSession *WorkoutSession)
 	SetWorkoutSessionMirroringStartHandler(ctx context.Context) (*WorkoutSession, error)
-	EnableBackgroundDeliveryForTypeFrequencyWithCompletion(type_ *raw.HKObjectType, frequency HKUpdateFrequency, completion func(bool, unsafe.Pointer))
-	DisableBackgroundDeliveryForTypeWithCompletion(type_ *raw.HKObjectType, completion func(bool, unsafe.Pointer))
-	DisableAllBackgroundDeliveryWithCompletion(completion func(bool, unsafe.Pointer))
-	PreferredUnitsForQuantityTypesCompletion(quantityTypes *foundation.NSSet[*raw.HKQuantityType], completion func(*foundation.NSDictionary[*raw.HKQuantityType, *raw.HKUnit], unsafe.Pointer))
-	RecalibrateEstimatesForSampleTypeAtDateCompletion(sampleType *raw.HKSampleType, date *foundation.NSDate, completion func(bool, unsafe.Pointer))
-	RelateWorkoutEffortSampleWithWorkoutActivityCompletion(sample *raw.HKSample, workout *raw.HKWorkout, activity *raw.HKWorkoutActivity, completion func(bool, unsafe.Pointer))
-	UnrelateWorkoutEffortSampleFromWorkoutActivityCompletion(sample *raw.HKSample, workout *raw.HKWorkout, activity *raw.HKWorkoutActivity, completion func(bool, unsafe.Pointer))
 }
 
 var _ HealthStoreable = (*HealthStore)(nil)

@@ -5,50 +5,81 @@
 package corespotlight
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corespotlight"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // An object that provides searchable attributes for file types that the app supports.
 //
-// ImportExtension wraps [raw.CSImportExtension] with a fluent Go API.
+// ImportExtension is an idiomatic wrapper over the Objective-C class CSImportExtension.
 type ImportExtension struct {
-	inner *raw.CSImportExtension
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CSImportExtension].
-func (x *ImportExtension) Unwrap() *raw.CSImportExtension { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImportExtension) ID() objc.ID { return x.inner.Ptr() }
-
-// ImportExtensionFromID adopts an existing object pointer as a ImportExtension (nil for 0).
+// ImportExtensionFromID adopts an existing Objective-C object as a ImportExtension
+// (nil for 0), retaining it and registering a release finalizer.
 func ImportExtensionFromID(id objc.ID) *ImportExtension {
 	if id == 0 {
 		return nil
 	}
-	return &ImportExtension{inner: raw.CSImportExtensionFromID(id)}
+	x := &ImportExtension{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewImportExtension creates a new [ImportExtension].
+// importExtensionAdopt wraps an Objective-C object that this code just created as a
+// ImportExtension (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func importExtensionAdopt(id objc.ID) *ImportExtension {
+	if id == 0 {
+		return nil
+	}
+	x := &ImportExtension{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ImportExtension) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImportExtension) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImportExtension) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImportExtension creates a new ImportExtension.
 func NewImportExtension() *ImportExtension {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CSImportExtension")), objc.RegisterName("new"))
-	return &ImportExtension{inner: raw.CSImportExtensionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CSImportExtension")), objc.RegisterName("new"))
+	return importExtensionAdopt(_id)
 }
 
 // Provides searchable attributes for a file at the specified URL.
-//
-// UpdateAttributesForFileAtURLError calls the underlying UpdateAttributesForFileAtURLError.
-func (x *ImportExtension) UpdateAttributesForFileAtURLError(attributes *raw.CSSearchableItemAttributeSet, contentURL string) (bool, error) {
-	return x.inner.UpdateAttributesForFileAtURLError(attributes, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(contentURL)))
+func (x *ImportExtension) UpdateAttributesForFileAtURL(attributes *SearchableItemAttributeSet, contentURL string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("updateAttributes:forFileAtURL:error:"), objref.IDOf(attributes), rt.FileURL(contentURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // ImportExtensionable is the interface implemented by [ImportExtension], for mocking and DI.
 type ImportExtensionable interface {
-	Unwrap() *raw.CSImportExtension
-	UpdateAttributesForFileAtURLError(attributes *raw.CSSearchableItemAttributeSet, contentURL string) (bool, error)
+	obj.Object
+	UpdateAttributesForFileAtURL(attributes *SearchableItemAttributeSet, contentURL string) error
 }
 
 var _ ImportExtensionable = (*ImportExtension)(nil)

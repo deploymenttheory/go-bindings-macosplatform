@@ -5,544 +5,663 @@
 package launchservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/launchservices"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KLSItemContentType returns the value of the CoreFoundation reference constant kLSItemContentType as an objc.ID.
-func KLSItemContentType() objc.ID { return purego.CFConstant(raw.KLSItemContentType()) }
-
-// KLSItemFileType returns the value of the CoreFoundation reference constant kLSItemFileType as an objc.ID.
-func KLSItemFileType() objc.ID { return purego.CFConstant(raw.KLSItemFileType()) }
-
-// KLSItemFileCreator returns the value of the CoreFoundation reference constant kLSItemFileCreator as an objc.ID.
-func KLSItemFileCreator() objc.ID { return purego.CFConstant(raw.KLSItemFileCreator()) }
-
-// KLSItemExtension returns the value of the CoreFoundation reference constant kLSItemExtension as an objc.ID.
-func KLSItemExtension() objc.ID { return purego.CFConstant(raw.KLSItemExtension()) }
-
-// KLSItemDisplayName returns the value of the CoreFoundation reference constant kLSItemDisplayName as an objc.ID.
-func KLSItemDisplayName() objc.ID { return purego.CFConstant(raw.KLSItemDisplayName()) }
-
-// KLSItemDisplayKind returns the value of the CoreFoundation reference constant kLSItemDisplayKind as an objc.ID.
-func KLSItemDisplayKind() objc.ID { return purego.CFConstant(raw.KLSItemDisplayKind()) }
-
-// KLSItemRoleHandlerDisplayName returns the value of the CoreFoundation reference constant kLSItemRoleHandlerDisplayName as an objc.ID.
-func KLSItemRoleHandlerDisplayName() objc.ID {
-	return purego.CFConstant(raw.KLSItemRoleHandlerDisplayName())
+// KLSItemContentType returns the value of the constant kLSItemContentType.
+func KLSItemContentType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSItemContentType")))
 }
 
-// KLSItemIsInvisible returns the value of the CoreFoundation reference constant kLSItemIsInvisible as an objc.ID.
-func KLSItemIsInvisible() objc.ID { return purego.CFConstant(raw.KLSItemIsInvisible()) }
+// KLSItemFileType returns the value of the constant kLSItemFileType.
+func KLSItemFileType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kLSItemFileType"))) }
 
-// KLSItemExtensionIsHidden returns the value of the CoreFoundation reference constant kLSItemExtensionIsHidden as an objc.ID.
-func KLSItemExtensionIsHidden() objc.ID { return purego.CFConstant(raw.KLSItemExtensionIsHidden()) }
-
-// KLSItemQuarantineProperties returns the value of the CoreFoundation reference constant kLSItemQuarantineProperties as an objc.ID.
-func KLSItemQuarantineProperties() objc.ID {
-	return purego.CFConstant(raw.KLSItemQuarantineProperties())
+// KLSItemFileCreator returns the value of the constant kLSItemFileCreator.
+func KLSItemFileCreator() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSItemFileCreator")))
 }
 
-// KLSQuarantineAgentNameKey returns the value of the CoreFoundation reference constant kLSQuarantineAgentNameKey as an objc.ID.
-func KLSQuarantineAgentNameKey() objc.ID { return purego.CFConstant(raw.KLSQuarantineAgentNameKey()) }
+// KLSItemExtension returns the value of the constant kLSItemExtension.
+func KLSItemExtension() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kLSItemExtension"))) }
 
-// KLSQuarantineAgentBundleIdentifierKey returns the value of the CoreFoundation reference constant kLSQuarantineAgentBundleIdentifierKey as an objc.ID.
-func KLSQuarantineAgentBundleIdentifierKey() objc.ID {
-	return purego.CFConstant(raw.KLSQuarantineAgentBundleIdentifierKey())
+// KLSItemDisplayName returns the value of the constant kLSItemDisplayName.
+func KLSItemDisplayName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSItemDisplayName")))
 }
 
-// KLSQuarantineTimeStampKey returns the value of the CoreFoundation reference constant kLSQuarantineTimeStampKey as an objc.ID.
-func KLSQuarantineTimeStampKey() objc.ID { return purego.CFConstant(raw.KLSQuarantineTimeStampKey()) }
-
-// KLSQuarantineTypeKey returns the value of the CoreFoundation reference constant kLSQuarantineTypeKey as an objc.ID.
-func KLSQuarantineTypeKey() objc.ID { return purego.CFConstant(raw.KLSQuarantineTypeKey()) }
-
-// KLSQuarantineTypeWebDownload returns the value of the CoreFoundation reference constant kLSQuarantineTypeWebDownload as an objc.ID.
-func KLSQuarantineTypeWebDownload() objc.ID {
-	return purego.CFConstant(raw.KLSQuarantineTypeWebDownload())
+// KLSItemDisplayKind returns the value of the constant kLSItemDisplayKind.
+func KLSItemDisplayKind() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSItemDisplayKind")))
 }
 
-// KLSQuarantineTypeOtherDownload returns the value of the CoreFoundation reference constant kLSQuarantineTypeOtherDownload as an objc.ID.
-func KLSQuarantineTypeOtherDownload() objc.ID {
-	return purego.CFConstant(raw.KLSQuarantineTypeOtherDownload())
+// KLSItemRoleHandlerDisplayName returns the value of the constant kLSItemRoleHandlerDisplayName.
+func KLSItemRoleHandlerDisplayName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSItemRoleHandlerDisplayName")))
 }
 
-// KLSQuarantineTypeEmailAttachment returns the value of the CoreFoundation reference constant kLSQuarantineTypeEmailAttachment as an objc.ID.
-func KLSQuarantineTypeEmailAttachment() objc.ID {
-	return purego.CFConstant(raw.KLSQuarantineTypeEmailAttachment())
+// KLSItemIsInvisible returns the value of the constant kLSItemIsInvisible.
+func KLSItemIsInvisible() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSItemIsInvisible")))
 }
 
-// KLSQuarantineTypeInstantMessageAttachment returns the value of the CoreFoundation reference constant kLSQuarantineTypeInstantMessageAttachment as an objc.ID.
-func KLSQuarantineTypeInstantMessageAttachment() objc.ID {
-	return purego.CFConstant(raw.KLSQuarantineTypeInstantMessageAttachment())
+// KLSItemExtensionIsHidden returns the value of the constant kLSItemExtensionIsHidden.
+func KLSItemExtensionIsHidden() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSItemExtensionIsHidden")))
 }
 
-// KLSQuarantineTypeCalendarEventAttachment returns the value of the CoreFoundation reference constant kLSQuarantineTypeCalendarEventAttachment as an objc.ID.
-func KLSQuarantineTypeCalendarEventAttachment() objc.ID {
-	return purego.CFConstant(raw.KLSQuarantineTypeCalendarEventAttachment())
+// KLSItemQuarantineProperties returns the value of the constant kLSItemQuarantineProperties.
+func KLSItemQuarantineProperties() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSItemQuarantineProperties")))
 }
 
-// KLSQuarantineTypeOtherAttachment returns the value of the CoreFoundation reference constant kLSQuarantineTypeOtherAttachment as an objc.ID.
-func KLSQuarantineTypeOtherAttachment() objc.ID {
-	return purego.CFConstant(raw.KLSQuarantineTypeOtherAttachment())
+// KLSQuarantineAgentNameKey returns the value of the constant kLSQuarantineAgentNameKey.
+func KLSQuarantineAgentNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSQuarantineAgentNameKey")))
 }
 
-// KLSQuarantineOriginURLKey returns the value of the CoreFoundation reference constant kLSQuarantineOriginURLKey as an objc.ID.
-func KLSQuarantineOriginURLKey() objc.ID { return purego.CFConstant(raw.KLSQuarantineOriginURLKey()) }
-
-// KLSQuarantineDataURLKey returns the value of the CoreFoundation reference constant kLSQuarantineDataURLKey as an objc.ID.
-func KLSQuarantineDataURLKey() objc.ID { return purego.CFConstant(raw.KLSQuarantineDataURLKey()) }
-
-// KUTTypeItem returns the value of the CoreFoundation reference constant kUTTypeItem as an objc.ID.
-func KUTTypeItem() objc.ID { return purego.CFConstant(raw.KUTTypeItem()) }
-
-// KUTTypeContent returns the value of the CoreFoundation reference constant kUTTypeContent as an objc.ID.
-func KUTTypeContent() objc.ID { return purego.CFConstant(raw.KUTTypeContent()) }
-
-// KUTTypeCompositeContent returns the value of the CoreFoundation reference constant kUTTypeCompositeContent as an objc.ID.
-func KUTTypeCompositeContent() objc.ID { return purego.CFConstant(raw.KUTTypeCompositeContent()) }
-
-// KUTTypeMessage returns the value of the CoreFoundation reference constant kUTTypeMessage as an objc.ID.
-func KUTTypeMessage() objc.ID { return purego.CFConstant(raw.KUTTypeMessage()) }
-
-// KUTTypeContact returns the value of the CoreFoundation reference constant kUTTypeContact as an objc.ID.
-func KUTTypeContact() objc.ID { return purego.CFConstant(raw.KUTTypeContact()) }
-
-// KUTTypeArchive returns the value of the CoreFoundation reference constant kUTTypeArchive as an objc.ID.
-func KUTTypeArchive() objc.ID { return purego.CFConstant(raw.KUTTypeArchive()) }
-
-// KUTTypeDiskImage returns the value of the CoreFoundation reference constant kUTTypeDiskImage as an objc.ID.
-func KUTTypeDiskImage() objc.ID { return purego.CFConstant(raw.KUTTypeDiskImage()) }
-
-// KUTTypeAliasRecord returns the value of the CoreFoundation reference constant kUTTypeAliasRecord as an objc.ID.
-func KUTTypeAliasRecord() objc.ID { return purego.CFConstant(raw.KUTTypeAliasRecord()) }
-
-// KUTTypeData returns the value of the CoreFoundation reference constant kUTTypeData as an objc.ID.
-func KUTTypeData() objc.ID { return purego.CFConstant(raw.KUTTypeData()) }
-
-// KUTTypeDirectory returns the value of the CoreFoundation reference constant kUTTypeDirectory as an objc.ID.
-func KUTTypeDirectory() objc.ID { return purego.CFConstant(raw.KUTTypeDirectory()) }
-
-// KUTTypeResolvable returns the value of the CoreFoundation reference constant kUTTypeResolvable as an objc.ID.
-func KUTTypeResolvable() objc.ID { return purego.CFConstant(raw.KUTTypeResolvable()) }
-
-// KUTTypeSymLink returns the value of the CoreFoundation reference constant kUTTypeSymLink as an objc.ID.
-func KUTTypeSymLink() objc.ID { return purego.CFConstant(raw.KUTTypeSymLink()) }
-
-// KUTTypeExecutable returns the value of the CoreFoundation reference constant kUTTypeExecutable as an objc.ID.
-func KUTTypeExecutable() objc.ID { return purego.CFConstant(raw.KUTTypeExecutable()) }
-
-// KUTTypeMountPoint returns the value of the CoreFoundation reference constant kUTTypeMountPoint as an objc.ID.
-func KUTTypeMountPoint() objc.ID { return purego.CFConstant(raw.KUTTypeMountPoint()) }
-
-// KUTTypeAliasFile returns the value of the CoreFoundation reference constant kUTTypeAliasFile as an objc.ID.
-func KUTTypeAliasFile() objc.ID { return purego.CFConstant(raw.KUTTypeAliasFile()) }
-
-// KUTTypeURLBookmarkData returns the value of the CoreFoundation reference constant kUTTypeURLBookmarkData as an objc.ID.
-func KUTTypeURLBookmarkData() objc.ID { return purego.CFConstant(raw.KUTTypeURLBookmarkData()) }
-
-// KUTTypeURL returns the value of the CoreFoundation reference constant kUTTypeURL as an objc.ID.
-func KUTTypeURL() objc.ID { return purego.CFConstant(raw.KUTTypeURL()) }
-
-// KUTTypeFileURL returns the value of the CoreFoundation reference constant kUTTypeFileURL as an objc.ID.
-func KUTTypeFileURL() objc.ID { return purego.CFConstant(raw.KUTTypeFileURL()) }
-
-// KUTTypeText returns the value of the CoreFoundation reference constant kUTTypeText as an objc.ID.
-func KUTTypeText() objc.ID { return purego.CFConstant(raw.KUTTypeText()) }
-
-// KUTTypePlainText returns the value of the CoreFoundation reference constant kUTTypePlainText as an objc.ID.
-func KUTTypePlainText() objc.ID { return purego.CFConstant(raw.KUTTypePlainText()) }
-
-// KUTTypeUTF8PlainText returns the value of the CoreFoundation reference constant kUTTypeUTF8PlainText as an objc.ID.
-func KUTTypeUTF8PlainText() objc.ID { return purego.CFConstant(raw.KUTTypeUTF8PlainText()) }
-
-// KUTTypeUTF16ExternalPlainText returns the value of the CoreFoundation reference constant kUTTypeUTF16ExternalPlainText as an objc.ID.
-func KUTTypeUTF16ExternalPlainText() objc.ID {
-	return purego.CFConstant(raw.KUTTypeUTF16ExternalPlainText())
+// KLSQuarantineAgentBundleIdentifierKey returns the value of the constant kLSQuarantineAgentBundleIdentifierKey.
+func KLSQuarantineAgentBundleIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSQuarantineAgentBundleIdentifierKey")))
 }
 
-// KUTTypeUTF16PlainText returns the value of the CoreFoundation reference constant kUTTypeUTF16PlainText as an objc.ID.
-func KUTTypeUTF16PlainText() objc.ID { return purego.CFConstant(raw.KUTTypeUTF16PlainText()) }
-
-// KUTTypeDelimitedText returns the value of the CoreFoundation reference constant kUTTypeDelimitedText as an objc.ID.
-func KUTTypeDelimitedText() objc.ID { return purego.CFConstant(raw.KUTTypeDelimitedText()) }
-
-// KUTTypeCommaSeparatedText returns the value of the CoreFoundation reference constant kUTTypeCommaSeparatedText as an objc.ID.
-func KUTTypeCommaSeparatedText() objc.ID { return purego.CFConstant(raw.KUTTypeCommaSeparatedText()) }
-
-// KUTTypeTabSeparatedText returns the value of the CoreFoundation reference constant kUTTypeTabSeparatedText as an objc.ID.
-func KUTTypeTabSeparatedText() objc.ID { return purego.CFConstant(raw.KUTTypeTabSeparatedText()) }
-
-// KUTTypeUTF8TabSeparatedText returns the value of the CoreFoundation reference constant kUTTypeUTF8TabSeparatedText as an objc.ID.
-func KUTTypeUTF8TabSeparatedText() objc.ID {
-	return purego.CFConstant(raw.KUTTypeUTF8TabSeparatedText())
+// KLSQuarantineTimeStampKey returns the value of the constant kLSQuarantineTimeStampKey.
+func KLSQuarantineTimeStampKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSQuarantineTimeStampKey")))
 }
 
-// KUTTypeRTF returns the value of the CoreFoundation reference constant kUTTypeRTF as an objc.ID.
-func KUTTypeRTF() objc.ID { return purego.CFConstant(raw.KUTTypeRTF()) }
-
-// KUTTypeHTML returns the value of the CoreFoundation reference constant kUTTypeHTML as an objc.ID.
-func KUTTypeHTML() objc.ID { return purego.CFConstant(raw.KUTTypeHTML()) }
-
-// KUTTypeXML returns the value of the CoreFoundation reference constant kUTTypeXML as an objc.ID.
-func KUTTypeXML() objc.ID { return purego.CFConstant(raw.KUTTypeXML()) }
-
-// KUTTypeJavaSource returns the value of the CoreFoundation reference constant kUTTypeJavaSource as an objc.ID.
-func KUTTypeJavaSource() objc.ID { return purego.CFConstant(raw.KUTTypeJavaSource()) }
-
-// KUTTypeSourceCode returns the value of the CoreFoundation reference constant kUTTypeSourceCode as an objc.ID.
-func KUTTypeSourceCode() objc.ID { return purego.CFConstant(raw.KUTTypeSourceCode()) }
-
-// KUTTypeAssemblyLanguageSource returns the value of the CoreFoundation reference constant kUTTypeAssemblyLanguageSource as an objc.ID.
-func KUTTypeAssemblyLanguageSource() objc.ID {
-	return purego.CFConstant(raw.KUTTypeAssemblyLanguageSource())
+// KLSQuarantineTypeKey returns the value of the constant kLSQuarantineTypeKey.
+func KLSQuarantineTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSQuarantineTypeKey")))
 }
 
-// KUTTypeCSource returns the value of the CoreFoundation reference constant kUTTypeCSource as an objc.ID.
-func KUTTypeCSource() objc.ID { return purego.CFConstant(raw.KUTTypeCSource()) }
-
-// KUTTypeObjectiveCSource returns the value of the CoreFoundation reference constant kUTTypeObjectiveCSource as an objc.ID.
-func KUTTypeObjectiveCSource() objc.ID { return purego.CFConstant(raw.KUTTypeObjectiveCSource()) }
-
-// KUTTypeSwiftSource returns the value of the CoreFoundation reference constant kUTTypeSwiftSource as an objc.ID.
-func KUTTypeSwiftSource() objc.ID { return purego.CFConstant(raw.KUTTypeSwiftSource()) }
-
-// KUTTypeCPlusPlusSource returns the value of the CoreFoundation reference constant kUTTypeCPlusPlusSource as an objc.ID.
-func KUTTypeCPlusPlusSource() objc.ID { return purego.CFConstant(raw.KUTTypeCPlusPlusSource()) }
-
-// KUTTypeObjectiveCPlusPlusSource returns the value of the CoreFoundation reference constant kUTTypeObjectiveCPlusPlusSource as an objc.ID.
-func KUTTypeObjectiveCPlusPlusSource() objc.ID {
-	return purego.CFConstant(raw.KUTTypeObjectiveCPlusPlusSource())
+// KLSQuarantineTypeWebDownload returns the value of the constant kLSQuarantineTypeWebDownload.
+func KLSQuarantineTypeWebDownload() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSQuarantineTypeWebDownload")))
 }
 
-// KUTTypeCHeader returns the value of the CoreFoundation reference constant kUTTypeCHeader as an objc.ID.
-func KUTTypeCHeader() objc.ID { return purego.CFConstant(raw.KUTTypeCHeader()) }
-
-// KUTTypeCPlusPlusHeader returns the value of the CoreFoundation reference constant kUTTypeCPlusPlusHeader as an objc.ID.
-func KUTTypeCPlusPlusHeader() objc.ID { return purego.CFConstant(raw.KUTTypeCPlusPlusHeader()) }
-
-// KUTTypeScript returns the value of the CoreFoundation reference constant kUTTypeScript as an objc.ID.
-func KUTTypeScript() objc.ID { return purego.CFConstant(raw.KUTTypeScript()) }
-
-// KUTTypeAppleScript returns the value of the CoreFoundation reference constant kUTTypeAppleScript as an objc.ID.
-func KUTTypeAppleScript() objc.ID { return purego.CFConstant(raw.KUTTypeAppleScript()) }
-
-// KUTTypeOSAScript returns the value of the CoreFoundation reference constant kUTTypeOSAScript as an objc.ID.
-func KUTTypeOSAScript() objc.ID { return purego.CFConstant(raw.KUTTypeOSAScript()) }
-
-// KUTTypeOSAScriptBundle returns the value of the CoreFoundation reference constant kUTTypeOSAScriptBundle as an objc.ID.
-func KUTTypeOSAScriptBundle() objc.ID { return purego.CFConstant(raw.KUTTypeOSAScriptBundle()) }
-
-// KUTTypeJavaScript returns the value of the CoreFoundation reference constant kUTTypeJavaScript as an objc.ID.
-func KUTTypeJavaScript() objc.ID { return purego.CFConstant(raw.KUTTypeJavaScript()) }
-
-// KUTTypeShellScript returns the value of the CoreFoundation reference constant kUTTypeShellScript as an objc.ID.
-func KUTTypeShellScript() objc.ID { return purego.CFConstant(raw.KUTTypeShellScript()) }
-
-// KUTTypePerlScript returns the value of the CoreFoundation reference constant kUTTypePerlScript as an objc.ID.
-func KUTTypePerlScript() objc.ID { return purego.CFConstant(raw.KUTTypePerlScript()) }
-
-// KUTTypePythonScript returns the value of the CoreFoundation reference constant kUTTypePythonScript as an objc.ID.
-func KUTTypePythonScript() objc.ID { return purego.CFConstant(raw.KUTTypePythonScript()) }
-
-// KUTTypeRubyScript returns the value of the CoreFoundation reference constant kUTTypeRubyScript as an objc.ID.
-func KUTTypeRubyScript() objc.ID { return purego.CFConstant(raw.KUTTypeRubyScript()) }
-
-// KUTTypePHPScript returns the value of the CoreFoundation reference constant kUTTypePHPScript as an objc.ID.
-func KUTTypePHPScript() objc.ID { return purego.CFConstant(raw.KUTTypePHPScript()) }
-
-// KUTTypeJSON returns the value of the CoreFoundation reference constant kUTTypeJSON as an objc.ID.
-func KUTTypeJSON() objc.ID { return purego.CFConstant(raw.KUTTypeJSON()) }
-
-// KUTTypePropertyList returns the value of the CoreFoundation reference constant kUTTypePropertyList as an objc.ID.
-func KUTTypePropertyList() objc.ID { return purego.CFConstant(raw.KUTTypePropertyList()) }
-
-// KUTTypeXMLPropertyList returns the value of the CoreFoundation reference constant kUTTypeXMLPropertyList as an objc.ID.
-func KUTTypeXMLPropertyList() objc.ID { return purego.CFConstant(raw.KUTTypeXMLPropertyList()) }
-
-// KUTTypeBinaryPropertyList returns the value of the CoreFoundation reference constant kUTTypeBinaryPropertyList as an objc.ID.
-func KUTTypeBinaryPropertyList() objc.ID { return purego.CFConstant(raw.KUTTypeBinaryPropertyList()) }
-
-// KUTTypeTXNTextAndMultimediaData returns the value of the CoreFoundation reference constant kUTTypeTXNTextAndMultimediaData as an objc.ID.
-func KUTTypeTXNTextAndMultimediaData() objc.ID {
-	return purego.CFConstant(raw.KUTTypeTXNTextAndMultimediaData())
+// KLSQuarantineTypeOtherDownload returns the value of the constant kLSQuarantineTypeOtherDownload.
+func KLSQuarantineTypeOtherDownload() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSQuarantineTypeOtherDownload")))
 }
 
-// KUTTypePDF returns the value of the CoreFoundation reference constant kUTTypePDF as an objc.ID.
-func KUTTypePDF() objc.ID { return purego.CFConstant(raw.KUTTypePDF()) }
-
-// KUTTypeRTFD returns the value of the CoreFoundation reference constant kUTTypeRTFD as an objc.ID.
-func KUTTypeRTFD() objc.ID { return purego.CFConstant(raw.KUTTypeRTFD()) }
-
-// KUTTypeFlatRTFD returns the value of the CoreFoundation reference constant kUTTypeFlatRTFD as an objc.ID.
-func KUTTypeFlatRTFD() objc.ID { return purego.CFConstant(raw.KUTTypeFlatRTFD()) }
-
-// KUTTypeWebArchive returns the value of the CoreFoundation reference constant kUTTypeWebArchive as an objc.ID.
-func KUTTypeWebArchive() objc.ID { return purego.CFConstant(raw.KUTTypeWebArchive()) }
-
-// KUTTypeJPEG2000 returns the value of the CoreFoundation reference constant kUTTypeJPEG2000 as an objc.ID.
-func KUTTypeJPEG2000() objc.ID { return purego.CFConstant(raw.KUTTypeJPEG2000()) }
-
-// KUTTypeQuickTimeImage returns the value of the CoreFoundation reference constant kUTTypeQuickTimeImage as an objc.ID.
-func KUTTypeQuickTimeImage() objc.ID { return purego.CFConstant(raw.KUTTypeQuickTimeImage()) }
-
-// KUTTypeImage returns the value of the CoreFoundation reference constant kUTTypeImage as an objc.ID.
-func KUTTypeImage() objc.ID { return purego.CFConstant(raw.KUTTypeImage()) }
-
-// KUTTypeJPEG returns the value of the CoreFoundation reference constant kUTTypeJPEG as an objc.ID.
-func KUTTypeJPEG() objc.ID { return purego.CFConstant(raw.KUTTypeJPEG()) }
-
-// KUTTypeTIFF returns the value of the CoreFoundation reference constant kUTTypeTIFF as an objc.ID.
-func KUTTypeTIFF() objc.ID { return purego.CFConstant(raw.KUTTypeTIFF()) }
-
-// KUTTypePICT returns the value of the CoreFoundation reference constant kUTTypePICT as an objc.ID.
-func KUTTypePICT() objc.ID { return purego.CFConstant(raw.KUTTypePICT()) }
-
-// KUTTypeGIF returns the value of the CoreFoundation reference constant kUTTypeGIF as an objc.ID.
-func KUTTypeGIF() objc.ID { return purego.CFConstant(raw.KUTTypeGIF()) }
-
-// KUTTypePNG returns the value of the CoreFoundation reference constant kUTTypePNG as an objc.ID.
-func KUTTypePNG() objc.ID { return purego.CFConstant(raw.KUTTypePNG()) }
-
-// KUTTypeAppleICNS returns the value of the CoreFoundation reference constant kUTTypeAppleICNS as an objc.ID.
-func KUTTypeAppleICNS() objc.ID { return purego.CFConstant(raw.KUTTypeAppleICNS()) }
-
-// KUTTypeBMP returns the value of the CoreFoundation reference constant kUTTypeBMP as an objc.ID.
-func KUTTypeBMP() objc.ID { return purego.CFConstant(raw.KUTTypeBMP()) }
-
-// KUTTypeICO returns the value of the CoreFoundation reference constant kUTTypeICO as an objc.ID.
-func KUTTypeICO() objc.ID { return purego.CFConstant(raw.KUTTypeICO()) }
-
-// KUTTypeRawImage returns the value of the CoreFoundation reference constant kUTTypeRawImage as an objc.ID.
-func KUTTypeRawImage() objc.ID { return purego.CFConstant(raw.KUTTypeRawImage()) }
-
-// KUTTypeScalableVectorGraphics returns the value of the CoreFoundation reference constant kUTTypeScalableVectorGraphics as an objc.ID.
-func KUTTypeScalableVectorGraphics() objc.ID {
-	return purego.CFConstant(raw.KUTTypeScalableVectorGraphics())
+// KLSQuarantineTypeEmailAttachment returns the value of the constant kLSQuarantineTypeEmailAttachment.
+func KLSQuarantineTypeEmailAttachment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSQuarantineTypeEmailAttachment")))
 }
 
-// KUTTypeLivePhoto returns the value of the CoreFoundation reference constant kUTTypeLivePhoto as an objc.ID.
-func KUTTypeLivePhoto() objc.ID { return purego.CFConstant(raw.KUTTypeLivePhoto()) }
-
-// KUTTypeAudiovisualContent returns the value of the CoreFoundation reference constant kUTTypeAudiovisualContent as an objc.ID.
-func KUTTypeAudiovisualContent() objc.ID { return purego.CFConstant(raw.KUTTypeAudiovisualContent()) }
-
-// KUTTypeMovie returns the value of the CoreFoundation reference constant kUTTypeMovie as an objc.ID.
-func KUTTypeMovie() objc.ID { return purego.CFConstant(raw.KUTTypeMovie()) }
-
-// KUTTypeVideo returns the value of the CoreFoundation reference constant kUTTypeVideo as an objc.ID.
-func KUTTypeVideo() objc.ID { return purego.CFConstant(raw.KUTTypeVideo()) }
-
-// KUTTypeAudio returns the value of the CoreFoundation reference constant kUTTypeAudio as an objc.ID.
-func KUTTypeAudio() objc.ID { return purego.CFConstant(raw.KUTTypeAudio()) }
-
-// KUTTypeQuickTimeMovie returns the value of the CoreFoundation reference constant kUTTypeQuickTimeMovie as an objc.ID.
-func KUTTypeQuickTimeMovie() objc.ID { return purego.CFConstant(raw.KUTTypeQuickTimeMovie()) }
-
-// KUTTypeMPEG returns the value of the CoreFoundation reference constant kUTTypeMPEG as an objc.ID.
-func KUTTypeMPEG() objc.ID { return purego.CFConstant(raw.KUTTypeMPEG()) }
-
-// KUTTypeMPEG2Video returns the value of the CoreFoundation reference constant kUTTypeMPEG2Video as an objc.ID.
-func KUTTypeMPEG2Video() objc.ID { return purego.CFConstant(raw.KUTTypeMPEG2Video()) }
-
-// KUTTypeMPEG2TransportStream returns the value of the CoreFoundation reference constant kUTTypeMPEG2TransportStream as an objc.ID.
-func KUTTypeMPEG2TransportStream() objc.ID {
-	return purego.CFConstant(raw.KUTTypeMPEG2TransportStream())
+// KLSQuarantineTypeInstantMessageAttachment returns the value of the constant kLSQuarantineTypeInstantMessageAttachment.
+func KLSQuarantineTypeInstantMessageAttachment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSQuarantineTypeInstantMessageAttachment")))
 }
 
-// KUTTypeMP3 returns the value of the CoreFoundation reference constant kUTTypeMP3 as an objc.ID.
-func KUTTypeMP3() objc.ID { return purego.CFConstant(raw.KUTTypeMP3()) }
-
-// KUTTypeMPEG4 returns the value of the CoreFoundation reference constant kUTTypeMPEG4 as an objc.ID.
-func KUTTypeMPEG4() objc.ID { return purego.CFConstant(raw.KUTTypeMPEG4()) }
-
-// KUTTypeMPEG4Audio returns the value of the CoreFoundation reference constant kUTTypeMPEG4Audio as an objc.ID.
-func KUTTypeMPEG4Audio() objc.ID { return purego.CFConstant(raw.KUTTypeMPEG4Audio()) }
-
-// KUTTypeAppleProtectedMPEG4Audio returns the value of the CoreFoundation reference constant kUTTypeAppleProtectedMPEG4Audio as an objc.ID.
-func KUTTypeAppleProtectedMPEG4Audio() objc.ID {
-	return purego.CFConstant(raw.KUTTypeAppleProtectedMPEG4Audio())
+// KLSQuarantineTypeCalendarEventAttachment returns the value of the constant kLSQuarantineTypeCalendarEventAttachment.
+func KLSQuarantineTypeCalendarEventAttachment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSQuarantineTypeCalendarEventAttachment")))
 }
 
-// KUTTypeAppleProtectedMPEG4Video returns the value of the CoreFoundation reference constant kUTTypeAppleProtectedMPEG4Video as an objc.ID.
-func KUTTypeAppleProtectedMPEG4Video() objc.ID {
-	return purego.CFConstant(raw.KUTTypeAppleProtectedMPEG4Video())
+// KLSQuarantineTypeOtherAttachment returns the value of the constant kLSQuarantineTypeOtherAttachment.
+func KLSQuarantineTypeOtherAttachment() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSQuarantineTypeOtherAttachment")))
 }
 
-// KUTTypeAVIMovie returns the value of the CoreFoundation reference constant kUTTypeAVIMovie as an objc.ID.
-func KUTTypeAVIMovie() objc.ID { return purego.CFConstant(raw.KUTTypeAVIMovie()) }
-
-// KUTTypeAudioInterchangeFileFormat returns the value of the CoreFoundation reference constant kUTTypeAudioInterchangeFileFormat as an objc.ID.
-func KUTTypeAudioInterchangeFileFormat() objc.ID {
-	return purego.CFConstant(raw.KUTTypeAudioInterchangeFileFormat())
+// KLSQuarantineOriginURLKey returns the value of the constant kLSQuarantineOriginURLKey.
+func KLSQuarantineOriginURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSQuarantineOriginURLKey")))
 }
 
-// KUTTypeWaveformAudio returns the value of the CoreFoundation reference constant kUTTypeWaveformAudio as an objc.ID.
-func KUTTypeWaveformAudio() objc.ID { return purego.CFConstant(raw.KUTTypeWaveformAudio()) }
-
-// KUTTypeMIDIAudio returns the value of the CoreFoundation reference constant kUTTypeMIDIAudio as an objc.ID.
-func KUTTypeMIDIAudio() objc.ID { return purego.CFConstant(raw.KUTTypeMIDIAudio()) }
-
-// KUTTypePlaylist returns the value of the CoreFoundation reference constant kUTTypePlaylist as an objc.ID.
-func KUTTypePlaylist() objc.ID { return purego.CFConstant(raw.KUTTypePlaylist()) }
-
-// KUTTypeM3UPlaylist returns the value of the CoreFoundation reference constant kUTTypeM3UPlaylist as an objc.ID.
-func KUTTypeM3UPlaylist() objc.ID { return purego.CFConstant(raw.KUTTypeM3UPlaylist()) }
-
-// KUTTypeFolder returns the value of the CoreFoundation reference constant kUTTypeFolder as an objc.ID.
-func KUTTypeFolder() objc.ID { return purego.CFConstant(raw.KUTTypeFolder()) }
-
-// KUTTypeVolume returns the value of the CoreFoundation reference constant kUTTypeVolume as an objc.ID.
-func KUTTypeVolume() objc.ID { return purego.CFConstant(raw.KUTTypeVolume()) }
-
-// KUTTypePackage returns the value of the CoreFoundation reference constant kUTTypePackage as an objc.ID.
-func KUTTypePackage() objc.ID { return purego.CFConstant(raw.KUTTypePackage()) }
-
-// KUTTypeBundle returns the value of the CoreFoundation reference constant kUTTypeBundle as an objc.ID.
-func KUTTypeBundle() objc.ID { return purego.CFConstant(raw.KUTTypeBundle()) }
-
-// KUTTypePluginBundle returns the value of the CoreFoundation reference constant kUTTypePluginBundle as an objc.ID.
-func KUTTypePluginBundle() objc.ID { return purego.CFConstant(raw.KUTTypePluginBundle()) }
-
-// KUTTypeSpotlightImporter returns the value of the CoreFoundation reference constant kUTTypeSpotlightImporter as an objc.ID.
-func KUTTypeSpotlightImporter() objc.ID { return purego.CFConstant(raw.KUTTypeSpotlightImporter()) }
-
-// KUTTypeQuickLookGenerator returns the value of the CoreFoundation reference constant kUTTypeQuickLookGenerator as an objc.ID.
-func KUTTypeQuickLookGenerator() objc.ID { return purego.CFConstant(raw.KUTTypeQuickLookGenerator()) }
-
-// KUTTypeXPCService returns the value of the CoreFoundation reference constant kUTTypeXPCService as an objc.ID.
-func KUTTypeXPCService() objc.ID { return purego.CFConstant(raw.KUTTypeXPCService()) }
-
-// KUTTypeFramework returns the value of the CoreFoundation reference constant kUTTypeFramework as an objc.ID.
-func KUTTypeFramework() objc.ID { return purego.CFConstant(raw.KUTTypeFramework()) }
-
-// KUTTypeApplication returns the value of the CoreFoundation reference constant kUTTypeApplication as an objc.ID.
-func KUTTypeApplication() objc.ID { return purego.CFConstant(raw.KUTTypeApplication()) }
-
-// KUTTypeApplicationBundle returns the value of the CoreFoundation reference constant kUTTypeApplicationBundle as an objc.ID.
-func KUTTypeApplicationBundle() objc.ID { return purego.CFConstant(raw.KUTTypeApplicationBundle()) }
-
-// KUTTypeApplicationFile returns the value of the CoreFoundation reference constant kUTTypeApplicationFile as an objc.ID.
-func KUTTypeApplicationFile() objc.ID { return purego.CFConstant(raw.KUTTypeApplicationFile()) }
-
-// KUTTypeUnixExecutable returns the value of the CoreFoundation reference constant kUTTypeUnixExecutable as an objc.ID.
-func KUTTypeUnixExecutable() objc.ID { return purego.CFConstant(raw.KUTTypeUnixExecutable()) }
-
-// KUTTypeJavaClass returns the value of the CoreFoundation reference constant kUTTypeJavaClass as an objc.ID.
-func KUTTypeJavaClass() objc.ID { return purego.CFConstant(raw.KUTTypeJavaClass()) }
-
-// KUTTypeJavaArchive returns the value of the CoreFoundation reference constant kUTTypeJavaArchive as an objc.ID.
-func KUTTypeJavaArchive() objc.ID { return purego.CFConstant(raw.KUTTypeJavaArchive()) }
-
-// KUTTypeWindowsExecutable returns the value of the CoreFoundation reference constant kUTTypeWindowsExecutable as an objc.ID.
-func KUTTypeWindowsExecutable() objc.ID { return purego.CFConstant(raw.KUTTypeWindowsExecutable()) }
-
-// KUTTypeSystemPreferencesPane returns the value of the CoreFoundation reference constant kUTTypeSystemPreferencesPane as an objc.ID.
-func KUTTypeSystemPreferencesPane() objc.ID {
-	return purego.CFConstant(raw.KUTTypeSystemPreferencesPane())
+// KLSQuarantineDataURLKey returns the value of the constant kLSQuarantineDataURLKey.
+func KLSQuarantineDataURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kLSQuarantineDataURLKey")))
 }
 
-// KUTTypeGNUZipArchive returns the value of the CoreFoundation reference constant kUTTypeGNUZipArchive as an objc.ID.
-func KUTTypeGNUZipArchive() objc.ID { return purego.CFConstant(raw.KUTTypeGNUZipArchive()) }
+// KUTTypeItem returns the value of the constant kUTTypeItem.
+func KUTTypeItem() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeItem"))) }
 
-// KUTTypeBzip2Archive returns the value of the CoreFoundation reference constant kUTTypeBzip2Archive as an objc.ID.
-func KUTTypeBzip2Archive() objc.ID { return purego.CFConstant(raw.KUTTypeBzip2Archive()) }
+// KUTTypeContent returns the value of the constant kUTTypeContent.
+func KUTTypeContent() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeContent"))) }
 
-// KUTTypeZipArchive returns the value of the CoreFoundation reference constant kUTTypeZipArchive as an objc.ID.
-func KUTTypeZipArchive() objc.ID { return purego.CFConstant(raw.KUTTypeZipArchive()) }
-
-// KUTTypeSpreadsheet returns the value of the CoreFoundation reference constant kUTTypeSpreadsheet as an objc.ID.
-func KUTTypeSpreadsheet() objc.ID { return purego.CFConstant(raw.KUTTypeSpreadsheet()) }
-
-// KUTTypePresentation returns the value of the CoreFoundation reference constant kUTTypePresentation as an objc.ID.
-func KUTTypePresentation() objc.ID { return purego.CFConstant(raw.KUTTypePresentation()) }
-
-// KUTTypeDatabase returns the value of the CoreFoundation reference constant kUTTypeDatabase as an objc.ID.
-func KUTTypeDatabase() objc.ID { return purego.CFConstant(raw.KUTTypeDatabase()) }
-
-// KUTTypeVCard returns the value of the CoreFoundation reference constant kUTTypeVCard as an objc.ID.
-func KUTTypeVCard() objc.ID { return purego.CFConstant(raw.KUTTypeVCard()) }
-
-// KUTTypeToDoItem returns the value of the CoreFoundation reference constant kUTTypeToDoItem as an objc.ID.
-func KUTTypeToDoItem() objc.ID { return purego.CFConstant(raw.KUTTypeToDoItem()) }
-
-// KUTTypeCalendarEvent returns the value of the CoreFoundation reference constant kUTTypeCalendarEvent as an objc.ID.
-func KUTTypeCalendarEvent() objc.ID { return purego.CFConstant(raw.KUTTypeCalendarEvent()) }
-
-// KUTTypeEmailMessage returns the value of the CoreFoundation reference constant kUTTypeEmailMessage as an objc.ID.
-func KUTTypeEmailMessage() objc.ID { return purego.CFConstant(raw.KUTTypeEmailMessage()) }
-
-// KUTTypeInternetLocation returns the value of the CoreFoundation reference constant kUTTypeInternetLocation as an objc.ID.
-func KUTTypeInternetLocation() objc.ID { return purego.CFConstant(raw.KUTTypeInternetLocation()) }
-
-// KUTTypeInkText returns the value of the CoreFoundation reference constant kUTTypeInkText as an objc.ID.
-func KUTTypeInkText() objc.ID { return purego.CFConstant(raw.KUTTypeInkText()) }
-
-// KUTTypeFont returns the value of the CoreFoundation reference constant kUTTypeFont as an objc.ID.
-func KUTTypeFont() objc.ID { return purego.CFConstant(raw.KUTTypeFont()) }
-
-// KUTTypeBookmark returns the value of the CoreFoundation reference constant kUTTypeBookmark as an objc.ID.
-func KUTTypeBookmark() objc.ID { return purego.CFConstant(raw.KUTTypeBookmark()) }
-
-// KUTType3DContent returns the value of the CoreFoundation reference constant kUTType3DContent as an objc.ID.
-func KUTType3DContent() objc.ID { return purego.CFConstant(raw.KUTType3DContent()) }
-
-// KUTTypePKCS12 returns the value of the CoreFoundation reference constant kUTTypePKCS12 as an objc.ID.
-func KUTTypePKCS12() objc.ID { return purego.CFConstant(raw.KUTTypePKCS12()) }
-
-// KUTTypeX509Certificate returns the value of the CoreFoundation reference constant kUTTypeX509Certificate as an objc.ID.
-func KUTTypeX509Certificate() objc.ID { return purego.CFConstant(raw.KUTTypeX509Certificate()) }
-
-// KUTTypeElectronicPublication returns the value of the CoreFoundation reference constant kUTTypeElectronicPublication as an objc.ID.
-func KUTTypeElectronicPublication() objc.ID {
-	return purego.CFConstant(raw.KUTTypeElectronicPublication())
+// KUTTypeCompositeContent returns the value of the constant kUTTypeCompositeContent.
+func KUTTypeCompositeContent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeCompositeContent")))
 }
 
-// KUTTypeLog returns the value of the CoreFoundation reference constant kUTTypeLog as an objc.ID.
-func KUTTypeLog() objc.ID { return purego.CFConstant(raw.KUTTypeLog()) }
+// KUTTypeMessage returns the value of the constant kUTTypeMessage.
+func KUTTypeMessage() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeMessage"))) }
 
-// KUTExportedTypeDeclarationsKey returns the value of the CoreFoundation reference constant kUTExportedTypeDeclarationsKey as an objc.ID.
-func KUTExportedTypeDeclarationsKey() objc.ID {
-	return purego.CFConstant(raw.KUTExportedTypeDeclarationsKey())
+// KUTTypeContact returns the value of the constant kUTTypeContact.
+func KUTTypeContact() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeContact"))) }
+
+// KUTTypeArchive returns the value of the constant kUTTypeArchive.
+func KUTTypeArchive() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeArchive"))) }
+
+// KUTTypeDiskImage returns the value of the constant kUTTypeDiskImage.
+func KUTTypeDiskImage() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeDiskImage"))) }
+
+// KUTTypeAliasRecord returns the value of the constant kUTTypeAliasRecord.
+func KUTTypeAliasRecord() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeAliasRecord")))
 }
 
-// KUTImportedTypeDeclarationsKey returns the value of the CoreFoundation reference constant kUTImportedTypeDeclarationsKey as an objc.ID.
-func KUTImportedTypeDeclarationsKey() objc.ID {
-	return purego.CFConstant(raw.KUTImportedTypeDeclarationsKey())
+// KUTTypeData returns the value of the constant kUTTypeData.
+func KUTTypeData() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeData"))) }
+
+// KUTTypeDirectory returns the value of the constant kUTTypeDirectory.
+func KUTTypeDirectory() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeDirectory"))) }
+
+// KUTTypeResolvable returns the value of the constant kUTTypeResolvable.
+func KUTTypeResolvable() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeResolvable"))) }
+
+// KUTTypeSymLink returns the value of the constant kUTTypeSymLink.
+func KUTTypeSymLink() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeSymLink"))) }
+
+// KUTTypeExecutable returns the value of the constant kUTTypeExecutable.
+func KUTTypeExecutable() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeExecutable"))) }
+
+// KUTTypeMountPoint returns the value of the constant kUTTypeMountPoint.
+func KUTTypeMountPoint() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeMountPoint"))) }
+
+// KUTTypeAliasFile returns the value of the constant kUTTypeAliasFile.
+func KUTTypeAliasFile() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeAliasFile"))) }
+
+// KUTTypeURLBookmarkData returns the value of the constant kUTTypeURLBookmarkData.
+func KUTTypeURLBookmarkData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeURLBookmarkData")))
 }
 
-// KUTTypeIdentifierKey returns the value of the CoreFoundation reference constant kUTTypeIdentifierKey as an objc.ID.
-func KUTTypeIdentifierKey() objc.ID { return purego.CFConstant(raw.KUTTypeIdentifierKey()) }
+// KUTTypeURL returns the value of the constant kUTTypeURL.
+func KUTTypeURL() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeURL"))) }
 
-// KUTTypeTagSpecificationKey returns the value of the CoreFoundation reference constant kUTTypeTagSpecificationKey as an objc.ID.
-func KUTTypeTagSpecificationKey() objc.ID { return purego.CFConstant(raw.KUTTypeTagSpecificationKey()) }
+// KUTTypeFileURL returns the value of the constant kUTTypeFileURL.
+func KUTTypeFileURL() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeFileURL"))) }
 
-// KUTTypeConformsToKey returns the value of the CoreFoundation reference constant kUTTypeConformsToKey as an objc.ID.
-func KUTTypeConformsToKey() objc.ID { return purego.CFConstant(raw.KUTTypeConformsToKey()) }
+// KUTTypeText returns the value of the constant kUTTypeText.
+func KUTTypeText() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeText"))) }
 
-// KUTTypeDescriptionKey returns the value of the CoreFoundation reference constant kUTTypeDescriptionKey as an objc.ID.
-func KUTTypeDescriptionKey() objc.ID { return purego.CFConstant(raw.KUTTypeDescriptionKey()) }
+// KUTTypePlainText returns the value of the constant kUTTypePlainText.
+func KUTTypePlainText() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypePlainText"))) }
 
-// KUTTypeIconFileKey returns the value of the CoreFoundation reference constant kUTTypeIconFileKey as an objc.ID.
-func KUTTypeIconFileKey() objc.ID { return purego.CFConstant(raw.KUTTypeIconFileKey()) }
-
-// KUTTypeReferenceURLKey returns the value of the CoreFoundation reference constant kUTTypeReferenceURLKey as an objc.ID.
-func KUTTypeReferenceURLKey() objc.ID { return purego.CFConstant(raw.KUTTypeReferenceURLKey()) }
-
-// KUTTypeVersionKey returns the value of the CoreFoundation reference constant kUTTypeVersionKey as an objc.ID.
-func KUTTypeVersionKey() objc.ID { return purego.CFConstant(raw.KUTTypeVersionKey()) }
-
-// KUTTagClassFilenameExtension returns the value of the CoreFoundation reference constant kUTTagClassFilenameExtension as an objc.ID.
-func KUTTagClassFilenameExtension() objc.ID {
-	return purego.CFConstant(raw.KUTTagClassFilenameExtension())
+// KUTTypeUTF8PlainText returns the value of the constant kUTTypeUTF8PlainText.
+func KUTTypeUTF8PlainText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeUTF8PlainText")))
 }
 
-// KUTTagClassMIMEType returns the value of the CoreFoundation reference constant kUTTagClassMIMEType as an objc.ID.
-func KUTTagClassMIMEType() objc.ID { return purego.CFConstant(raw.KUTTagClassMIMEType()) }
+// KUTTypeUTF16ExternalPlainText returns the value of the constant kUTTypeUTF16ExternalPlainText.
+func KUTTypeUTF16ExternalPlainText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeUTF16ExternalPlainText")))
+}
 
-// KUTTagClassNSPboardType returns the value of the CoreFoundation reference constant kUTTagClassNSPboardType as an objc.ID.
-func KUTTagClassNSPboardType() objc.ID { return purego.CFConstant(raw.KUTTagClassNSPboardType()) }
+// KUTTypeUTF16PlainText returns the value of the constant kUTTypeUTF16PlainText.
+func KUTTypeUTF16PlainText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeUTF16PlainText")))
+}
 
-// KUTTagClassOSType returns the value of the CoreFoundation reference constant kUTTagClassOSType as an objc.ID.
-func KUTTagClassOSType() objc.ID { return purego.CFConstant(raw.KUTTagClassOSType()) }
+// KUTTypeDelimitedText returns the value of the constant kUTTypeDelimitedText.
+func KUTTypeDelimitedText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeDelimitedText")))
+}
+
+// KUTTypeCommaSeparatedText returns the value of the constant kUTTypeCommaSeparatedText.
+func KUTTypeCommaSeparatedText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeCommaSeparatedText")))
+}
+
+// KUTTypeTabSeparatedText returns the value of the constant kUTTypeTabSeparatedText.
+func KUTTypeTabSeparatedText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeTabSeparatedText")))
+}
+
+// KUTTypeUTF8TabSeparatedText returns the value of the constant kUTTypeUTF8TabSeparatedText.
+func KUTTypeUTF8TabSeparatedText() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeUTF8TabSeparatedText")))
+}
+
+// KUTTypeRTF returns the value of the constant kUTTypeRTF.
+func KUTTypeRTF() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeRTF"))) }
+
+// KUTTypeHTML returns the value of the constant kUTTypeHTML.
+func KUTTypeHTML() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeHTML"))) }
+
+// KUTTypeXML returns the value of the constant kUTTypeXML.
+func KUTTypeXML() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeXML"))) }
+
+// KUTTypeJavaSource returns the value of the constant kUTTypeJavaSource.
+func KUTTypeJavaSource() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeJavaSource"))) }
+
+// KUTTypeSourceCode returns the value of the constant kUTTypeSourceCode.
+func KUTTypeSourceCode() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeSourceCode"))) }
+
+// KUTTypeAssemblyLanguageSource returns the value of the constant kUTTypeAssemblyLanguageSource.
+func KUTTypeAssemblyLanguageSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeAssemblyLanguageSource")))
+}
+
+// KUTTypeCSource returns the value of the constant kUTTypeCSource.
+func KUTTypeCSource() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeCSource"))) }
+
+// KUTTypeObjectiveCSource returns the value of the constant kUTTypeObjectiveCSource.
+func KUTTypeObjectiveCSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeObjectiveCSource")))
+}
+
+// KUTTypeSwiftSource returns the value of the constant kUTTypeSwiftSource.
+func KUTTypeSwiftSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeSwiftSource")))
+}
+
+// KUTTypeCPlusPlusSource returns the value of the constant kUTTypeCPlusPlusSource.
+func KUTTypeCPlusPlusSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeCPlusPlusSource")))
+}
+
+// KUTTypeObjectiveCPlusPlusSource returns the value of the constant kUTTypeObjectiveCPlusPlusSource.
+func KUTTypeObjectiveCPlusPlusSource() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeObjectiveCPlusPlusSource")))
+}
+
+// KUTTypeCHeader returns the value of the constant kUTTypeCHeader.
+func KUTTypeCHeader() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeCHeader"))) }
+
+// KUTTypeCPlusPlusHeader returns the value of the constant kUTTypeCPlusPlusHeader.
+func KUTTypeCPlusPlusHeader() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeCPlusPlusHeader")))
+}
+
+// KUTTypeScript returns the value of the constant kUTTypeScript.
+func KUTTypeScript() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeScript"))) }
+
+// KUTTypeAppleScript returns the value of the constant kUTTypeAppleScript.
+func KUTTypeAppleScript() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeAppleScript")))
+}
+
+// KUTTypeOSAScript returns the value of the constant kUTTypeOSAScript.
+func KUTTypeOSAScript() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeOSAScript"))) }
+
+// KUTTypeOSAScriptBundle returns the value of the constant kUTTypeOSAScriptBundle.
+func KUTTypeOSAScriptBundle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeOSAScriptBundle")))
+}
+
+// KUTTypeJavaScript returns the value of the constant kUTTypeJavaScript.
+func KUTTypeJavaScript() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeJavaScript"))) }
+
+// KUTTypeShellScript returns the value of the constant kUTTypeShellScript.
+func KUTTypeShellScript() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeShellScript")))
+}
+
+// KUTTypePerlScript returns the value of the constant kUTTypePerlScript.
+func KUTTypePerlScript() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypePerlScript"))) }
+
+// KUTTypePythonScript returns the value of the constant kUTTypePythonScript.
+func KUTTypePythonScript() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypePythonScript")))
+}
+
+// KUTTypeRubyScript returns the value of the constant kUTTypeRubyScript.
+func KUTTypeRubyScript() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeRubyScript"))) }
+
+// KUTTypePHPScript returns the value of the constant kUTTypePHPScript.
+func KUTTypePHPScript() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypePHPScript"))) }
+
+// KUTTypeJSON returns the value of the constant kUTTypeJSON.
+func KUTTypeJSON() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeJSON"))) }
+
+// KUTTypePropertyList returns the value of the constant kUTTypePropertyList.
+func KUTTypePropertyList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypePropertyList")))
+}
+
+// KUTTypeXMLPropertyList returns the value of the constant kUTTypeXMLPropertyList.
+func KUTTypeXMLPropertyList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeXMLPropertyList")))
+}
+
+// KUTTypeBinaryPropertyList returns the value of the constant kUTTypeBinaryPropertyList.
+func KUTTypeBinaryPropertyList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeBinaryPropertyList")))
+}
+
+// KUTTypeTXNTextAndMultimediaData returns the value of the constant kUTTypeTXNTextAndMultimediaData.
+func KUTTypeTXNTextAndMultimediaData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeTXNTextAndMultimediaData")))
+}
+
+// KUTTypePDF returns the value of the constant kUTTypePDF.
+func KUTTypePDF() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypePDF"))) }
+
+// KUTTypeRTFD returns the value of the constant kUTTypeRTFD.
+func KUTTypeRTFD() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeRTFD"))) }
+
+// KUTTypeFlatRTFD returns the value of the constant kUTTypeFlatRTFD.
+func KUTTypeFlatRTFD() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeFlatRTFD"))) }
+
+// KUTTypeWebArchive returns the value of the constant kUTTypeWebArchive.
+func KUTTypeWebArchive() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeWebArchive"))) }
+
+// KUTTypeJPEG2000 returns the value of the constant kUTTypeJPEG2000.
+func KUTTypeJPEG2000() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeJPEG2000"))) }
+
+// KUTTypeQuickTimeImage returns the value of the constant kUTTypeQuickTimeImage.
+func KUTTypeQuickTimeImage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeQuickTimeImage")))
+}
+
+// KUTTypeImage returns the value of the constant kUTTypeImage.
+func KUTTypeImage() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeImage"))) }
+
+// KUTTypeJPEG returns the value of the constant kUTTypeJPEG.
+func KUTTypeJPEG() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeJPEG"))) }
+
+// KUTTypeTIFF returns the value of the constant kUTTypeTIFF.
+func KUTTypeTIFF() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeTIFF"))) }
+
+// KUTTypePICT returns the value of the constant kUTTypePICT.
+func KUTTypePICT() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypePICT"))) }
+
+// KUTTypeGIF returns the value of the constant kUTTypeGIF.
+func KUTTypeGIF() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeGIF"))) }
+
+// KUTTypePNG returns the value of the constant kUTTypePNG.
+func KUTTypePNG() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypePNG"))) }
+
+// KUTTypeAppleICNS returns the value of the constant kUTTypeAppleICNS.
+func KUTTypeAppleICNS() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeAppleICNS"))) }
+
+// KUTTypeBMP returns the value of the constant kUTTypeBMP.
+func KUTTypeBMP() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeBMP"))) }
+
+// KUTTypeICO returns the value of the constant kUTTypeICO.
+func KUTTypeICO() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeICO"))) }
+
+// KUTTypeRawImage returns the value of the constant kUTTypeRawImage.
+func KUTTypeRawImage() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeRawImage"))) }
+
+// KUTTypeScalableVectorGraphics returns the value of the constant kUTTypeScalableVectorGraphics.
+func KUTTypeScalableVectorGraphics() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeScalableVectorGraphics")))
+}
+
+// KUTTypeLivePhoto returns the value of the constant kUTTypeLivePhoto.
+func KUTTypeLivePhoto() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeLivePhoto"))) }
+
+// KUTTypeAudiovisualContent returns the value of the constant kUTTypeAudiovisualContent.
+func KUTTypeAudiovisualContent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeAudiovisualContent")))
+}
+
+// KUTTypeMovie returns the value of the constant kUTTypeMovie.
+func KUTTypeMovie() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeMovie"))) }
+
+// KUTTypeVideo returns the value of the constant kUTTypeVideo.
+func KUTTypeVideo() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeVideo"))) }
+
+// KUTTypeAudio returns the value of the constant kUTTypeAudio.
+func KUTTypeAudio() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeAudio"))) }
+
+// KUTTypeQuickTimeMovie returns the value of the constant kUTTypeQuickTimeMovie.
+func KUTTypeQuickTimeMovie() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeQuickTimeMovie")))
+}
+
+// KUTTypeMPEG returns the value of the constant kUTTypeMPEG.
+func KUTTypeMPEG() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeMPEG"))) }
+
+// KUTTypeMPEG2Video returns the value of the constant kUTTypeMPEG2Video.
+func KUTTypeMPEG2Video() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeMPEG2Video"))) }
+
+// KUTTypeMPEG2TransportStream returns the value of the constant kUTTypeMPEG2TransportStream.
+func KUTTypeMPEG2TransportStream() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeMPEG2TransportStream")))
+}
+
+// KUTTypeMP3 returns the value of the constant kUTTypeMP3.
+func KUTTypeMP3() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeMP3"))) }
+
+// KUTTypeMPEG4 returns the value of the constant kUTTypeMPEG4.
+func KUTTypeMPEG4() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeMPEG4"))) }
+
+// KUTTypeMPEG4Audio returns the value of the constant kUTTypeMPEG4Audio.
+func KUTTypeMPEG4Audio() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeMPEG4Audio"))) }
+
+// KUTTypeAppleProtectedMPEG4Audio returns the value of the constant kUTTypeAppleProtectedMPEG4Audio.
+func KUTTypeAppleProtectedMPEG4Audio() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeAppleProtectedMPEG4Audio")))
+}
+
+// KUTTypeAppleProtectedMPEG4Video returns the value of the constant kUTTypeAppleProtectedMPEG4Video.
+func KUTTypeAppleProtectedMPEG4Video() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeAppleProtectedMPEG4Video")))
+}
+
+// KUTTypeAVIMovie returns the value of the constant kUTTypeAVIMovie.
+func KUTTypeAVIMovie() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeAVIMovie"))) }
+
+// KUTTypeAudioInterchangeFileFormat returns the value of the constant kUTTypeAudioInterchangeFileFormat.
+func KUTTypeAudioInterchangeFileFormat() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeAudioInterchangeFileFormat")))
+}
+
+// KUTTypeWaveformAudio returns the value of the constant kUTTypeWaveformAudio.
+func KUTTypeWaveformAudio() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeWaveformAudio")))
+}
+
+// KUTTypeMIDIAudio returns the value of the constant kUTTypeMIDIAudio.
+func KUTTypeMIDIAudio() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeMIDIAudio"))) }
+
+// KUTTypePlaylist returns the value of the constant kUTTypePlaylist.
+func KUTTypePlaylist() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypePlaylist"))) }
+
+// KUTTypeM3UPlaylist returns the value of the constant kUTTypeM3UPlaylist.
+func KUTTypeM3UPlaylist() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeM3UPlaylist")))
+}
+
+// KUTTypeFolder returns the value of the constant kUTTypeFolder.
+func KUTTypeFolder() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeFolder"))) }
+
+// KUTTypeVolume returns the value of the constant kUTTypeVolume.
+func KUTTypeVolume() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeVolume"))) }
+
+// KUTTypePackage returns the value of the constant kUTTypePackage.
+func KUTTypePackage() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypePackage"))) }
+
+// KUTTypeBundle returns the value of the constant kUTTypeBundle.
+func KUTTypeBundle() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeBundle"))) }
+
+// KUTTypePluginBundle returns the value of the constant kUTTypePluginBundle.
+func KUTTypePluginBundle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypePluginBundle")))
+}
+
+// KUTTypeSpotlightImporter returns the value of the constant kUTTypeSpotlightImporter.
+func KUTTypeSpotlightImporter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeSpotlightImporter")))
+}
+
+// KUTTypeQuickLookGenerator returns the value of the constant kUTTypeQuickLookGenerator.
+func KUTTypeQuickLookGenerator() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeQuickLookGenerator")))
+}
+
+// KUTTypeXPCService returns the value of the constant kUTTypeXPCService.
+func KUTTypeXPCService() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeXPCService"))) }
+
+// KUTTypeFramework returns the value of the constant kUTTypeFramework.
+func KUTTypeFramework() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeFramework"))) }
+
+// KUTTypeApplication returns the value of the constant kUTTypeApplication.
+func KUTTypeApplication() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeApplication")))
+}
+
+// KUTTypeApplicationBundle returns the value of the constant kUTTypeApplicationBundle.
+func KUTTypeApplicationBundle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeApplicationBundle")))
+}
+
+// KUTTypeApplicationFile returns the value of the constant kUTTypeApplicationFile.
+func KUTTypeApplicationFile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeApplicationFile")))
+}
+
+// KUTTypeUnixExecutable returns the value of the constant kUTTypeUnixExecutable.
+func KUTTypeUnixExecutable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeUnixExecutable")))
+}
+
+// KUTTypeJavaClass returns the value of the constant kUTTypeJavaClass.
+func KUTTypeJavaClass() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeJavaClass"))) }
+
+// KUTTypeJavaArchive returns the value of the constant kUTTypeJavaArchive.
+func KUTTypeJavaArchive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeJavaArchive")))
+}
+
+// KUTTypeWindowsExecutable returns the value of the constant kUTTypeWindowsExecutable.
+func KUTTypeWindowsExecutable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeWindowsExecutable")))
+}
+
+// KUTTypeSystemPreferencesPane returns the value of the constant kUTTypeSystemPreferencesPane.
+func KUTTypeSystemPreferencesPane() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeSystemPreferencesPane")))
+}
+
+// KUTTypeGNUZipArchive returns the value of the constant kUTTypeGNUZipArchive.
+func KUTTypeGNUZipArchive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeGNUZipArchive")))
+}
+
+// KUTTypeBzip2Archive returns the value of the constant kUTTypeBzip2Archive.
+func KUTTypeBzip2Archive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeBzip2Archive")))
+}
+
+// KUTTypeZipArchive returns the value of the constant kUTTypeZipArchive.
+func KUTTypeZipArchive() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeZipArchive"))) }
+
+// KUTTypeSpreadsheet returns the value of the constant kUTTypeSpreadsheet.
+func KUTTypeSpreadsheet() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeSpreadsheet")))
+}
+
+// KUTTypePresentation returns the value of the constant kUTTypePresentation.
+func KUTTypePresentation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypePresentation")))
+}
+
+// KUTTypeDatabase returns the value of the constant kUTTypeDatabase.
+func KUTTypeDatabase() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeDatabase"))) }
+
+// KUTTypeVCard returns the value of the constant kUTTypeVCard.
+func KUTTypeVCard() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeVCard"))) }
+
+// KUTTypeToDoItem returns the value of the constant kUTTypeToDoItem.
+func KUTTypeToDoItem() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeToDoItem"))) }
+
+// KUTTypeCalendarEvent returns the value of the constant kUTTypeCalendarEvent.
+func KUTTypeCalendarEvent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeCalendarEvent")))
+}
+
+// KUTTypeEmailMessage returns the value of the constant kUTTypeEmailMessage.
+func KUTTypeEmailMessage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeEmailMessage")))
+}
+
+// KUTTypeInternetLocation returns the value of the constant kUTTypeInternetLocation.
+func KUTTypeInternetLocation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeInternetLocation")))
+}
+
+// KUTTypeInkText returns the value of the constant kUTTypeInkText.
+func KUTTypeInkText() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeInkText"))) }
+
+// KUTTypeFont returns the value of the constant kUTTypeFont.
+func KUTTypeFont() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeFont"))) }
+
+// KUTTypeBookmark returns the value of the constant kUTTypeBookmark.
+func KUTTypeBookmark() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeBookmark"))) }
+
+// KUTType3DContent returns the value of the constant kUTType3DContent.
+func KUTType3DContent() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTType3DContent"))) }
+
+// KUTTypePKCS12 returns the value of the constant kUTTypePKCS12.
+func KUTTypePKCS12() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypePKCS12"))) }
+
+// KUTTypeX509Certificate returns the value of the constant kUTTypeX509Certificate.
+func KUTTypeX509Certificate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeX509Certificate")))
+}
+
+// KUTTypeElectronicPublication returns the value of the constant kUTTypeElectronicPublication.
+func KUTTypeElectronicPublication() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeElectronicPublication")))
+}
+
+// KUTTypeLog returns the value of the constant kUTTypeLog.
+func KUTTypeLog() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeLog"))) }
+
+// KUTExportedTypeDeclarationsKey returns the value of the constant kUTExportedTypeDeclarationsKey.
+func KUTExportedTypeDeclarationsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTExportedTypeDeclarationsKey")))
+}
+
+// KUTImportedTypeDeclarationsKey returns the value of the constant kUTImportedTypeDeclarationsKey.
+func KUTImportedTypeDeclarationsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTImportedTypeDeclarationsKey")))
+}
+
+// KUTTypeIdentifierKey returns the value of the constant kUTTypeIdentifierKey.
+func KUTTypeIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeIdentifierKey")))
+}
+
+// KUTTypeTagSpecificationKey returns the value of the constant kUTTypeTagSpecificationKey.
+func KUTTypeTagSpecificationKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeTagSpecificationKey")))
+}
+
+// KUTTypeConformsToKey returns the value of the constant kUTTypeConformsToKey.
+func KUTTypeConformsToKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeConformsToKey")))
+}
+
+// KUTTypeDescriptionKey returns the value of the constant kUTTypeDescriptionKey.
+func KUTTypeDescriptionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeDescriptionKey")))
+}
+
+// KUTTypeIconFileKey returns the value of the constant kUTTypeIconFileKey.
+func KUTTypeIconFileKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeIconFileKey")))
+}
+
+// KUTTypeReferenceURLKey returns the value of the constant kUTTypeReferenceURLKey.
+func KUTTypeReferenceURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeReferenceURLKey")))
+}
+
+// KUTTypeVersionKey returns the value of the constant kUTTypeVersionKey.
+func KUTTypeVersionKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeVersionKey"))) }
+
+// KUTTagClassFilenameExtension returns the value of the constant kUTTagClassFilenameExtension.
+func KUTTagClassFilenameExtension() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTagClassFilenameExtension")))
+}
+
+// KUTTagClassMIMEType returns the value of the constant kUTTagClassMIMEType.
+func KUTTagClassMIMEType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTagClassMIMEType")))
+}
+
+// KUTTagClassNSPboardType returns the value of the constant kUTTagClassNSPboardType.
+func KUTTagClassNSPboardType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTagClassNSPboardType")))
+}
+
+// KUTTagClassOSType returns the value of the constant kUTTagClassOSType.
+func KUTTagClassOSType() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTagClassOSType"))) }

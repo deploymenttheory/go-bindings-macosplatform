@@ -5,60 +5,80 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent wraps [raw.MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent] with a fluent Go API.
+// MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent is an idiomatic wrapper over the Objective-C class MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent.
 type MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent struct {
-	inner *raw.MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent].
-func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventFromID adopts an existing object pointer as a MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent (nil for 0).
+// MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventFromID adopts an existing Objective-C object as a MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventFromID(id objc.ID) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent{inner: raw.MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventFromID(id)}
+	x := &MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent creates a new [MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent].
+// mTROtaSoftwareUpdateRequestorClusterVersionAppliedEventAdopt wraps an Objective-C object that this code just created as a
+// MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROtaSoftwareUpdateRequestorClusterVersionAppliedEventAdopt(id objc.ID) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent creates a new MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent.
 func NewMTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent() *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent")), objc.RegisterName("new"))
-	return &MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent{inner: raw.MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent")), objc.RegisterName("new"))
+	return mTROtaSoftwareUpdateRequestorClusterVersionAppliedEventAdopt(_id)
 }
 
-// WithSoftwareVersion sets the softwareVersion property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
-	x.inner.MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent.SetSoftwareVersion(softwareVersion)
+// WithSoftwareVersion sets softwareVersion and returns the receiver so calls can be chained.
+func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
 	return x
 }
 
-// WithProductID sets the productID property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) WithProductID(productID *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
-	x.inner.MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent.SetProductID(productID)
+// WithProductID sets productID and returns the receiver so calls can be chained.
+func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) WithProductID(productID obj.Object) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductID:"), objref.IDOf(productID))
 	return x
-}
-
-func (x *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent) asMTROTASoftwareUpdateRequestorClusterVersionAppliedEvent() *raw.MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent {
-	return &x.inner.MTROTASoftwareUpdateRequestorClusterVersionAppliedEvent
 }
 
 // MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent], for mocking and DI.
 type MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable interface {
-	Unwrap() *raw.MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent
-	WithSoftwareVersion(softwareVersion *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent
-	WithProductID(productID *foundation.NSNumber) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent
+	obj.Object
+	WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent
+	WithProductID(productID obj.Object) *MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent
 }
 
 var _ MTROtaSoftwareUpdateRequestorClusterVersionAppliedEventable = (*MTROtaSoftwareUpdateRequestorClusterVersionAppliedEvent)(nil)

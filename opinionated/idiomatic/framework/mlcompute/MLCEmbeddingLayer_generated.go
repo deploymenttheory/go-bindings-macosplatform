@@ -5,91 +5,101 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A layer that stores a word embedding.
 //
-// EmbeddingLayer wraps [raw.MLCEmbeddingLayer] with a fluent Go API.
+// EmbeddingLayer is an idiomatic wrapper over the Objective-C class MLCEmbeddingLayer.
 type EmbeddingLayer struct {
-	inner *raw.MLCEmbeddingLayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCEmbeddingLayer].
-func (x *EmbeddingLayer) Unwrap() *raw.MLCEmbeddingLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EmbeddingLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// EmbeddingLayerFromID adopts an existing object pointer as a EmbeddingLayer (nil for 0).
+// EmbeddingLayerFromID adopts an existing Objective-C object as a EmbeddingLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func EmbeddingLayerFromID(id objc.ID) *EmbeddingLayer {
 	if id == 0 {
 		return nil
 	}
-	return &EmbeddingLayer{inner: raw.MLCEmbeddingLayerFromID(id)}
+	x := &EmbeddingLayer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEmbeddingLayer creates a new [EmbeddingLayer].
+// embeddingLayerAdopt wraps an Objective-C object that this code just created as a
+// EmbeddingLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func embeddingLayerAdopt(id objc.ID) *EmbeddingLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &EmbeddingLayer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EmbeddingLayer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EmbeddingLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EmbeddingLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEmbeddingLayer creates a new EmbeddingLayer.
 func NewEmbeddingLayer() *EmbeddingLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCEmbeddingLayer")), objc.RegisterName("new"))
-	return &EmbeddingLayer{inner: raw.MLCEmbeddingLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCEmbeddingLayer")), objc.RegisterName("new"))
+	return embeddingLayerAdopt(_id)
 }
 
 // A string that helps identify this layer.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *EmbeddingLayer) WithLabel(label string) *EmbeddingLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 //
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
 func (x *EmbeddingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *EmbeddingLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// Descriptor calls the underlying Descriptor.
 func (x *EmbeddingLayer) Descriptor() *EmbeddingDescriptor {
-	_r := x.inner.Descriptor()
-	if _r == nil {
-		return nil
-	}
-	return &EmbeddingDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+	return EmbeddingDescriptorFromID(_r)
 }
 
-// @property   weights @abstract   The array of word embeddings
-//
-// Weights calls the underlying Weights.
+// The array of word embeddings
 func (x *EmbeddingLayer) Weights() *Tensor {
-	_r := x.inner.Weights()
-	if _r == nil {
-		return nil
-	}
-	return &Tensor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weights"))
+	return TensorFromID(_r)
 }
 
-// @property   weightsParameter @abstract   The weights tensor parameter used for optimizer update
-//
-// WeightsParameter calls the underlying WeightsParameter.
+// The weights tensor parameter used for optimizer update
 func (x *EmbeddingLayer) WeightsParameter() *TensorParameter {
-	_r := x.inner.WeightsParameter()
-	if _r == nil {
-		return nil
-	}
-	return &TensorParameter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weightsParameter"))
+	return TensorParameterFromID(_r)
 }
-
-func (x *EmbeddingLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // EmbeddingLayerable is the interface implemented by [EmbeddingLayer], for mocking and DI.
 type EmbeddingLayerable interface {
-	Unwrap() *raw.MLCEmbeddingLayer
+	obj.Object
 	WithLabel(label string) *EmbeddingLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *EmbeddingLayer
 	Descriptor() *EmbeddingDescriptor

@@ -5,130 +5,140 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// PullStreamNodeDefinition wraps [raw.PHASEPullStreamNodeDefinition] with a fluent Go API.
+// PullStreamNodeDefinition is an idiomatic wrapper over the Objective-C class PHASEPullStreamNodeDefinition.
 type PullStreamNodeDefinition struct {
-	inner *raw.PHASEPullStreamNodeDefinition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEPullStreamNodeDefinition].
-func (x *PullStreamNodeDefinition) Unwrap() *raw.PHASEPullStreamNodeDefinition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PullStreamNodeDefinition) ID() objc.ID { return x.inner.Ptr() }
-
-// PullStreamNodeDefinitionFromID adopts an existing object pointer as a PullStreamNodeDefinition (nil for 0).
+// PullStreamNodeDefinitionFromID adopts an existing Objective-C object as a PullStreamNodeDefinition
+// (nil for 0), retaining it and registering a release finalizer.
 func PullStreamNodeDefinitionFromID(id objc.ID) *PullStreamNodeDefinition {
 	if id == 0 {
 		return nil
 	}
-	return &PullStreamNodeDefinition{inner: raw.PHASEPullStreamNodeDefinitionFromID(id)}
+	x := &PullStreamNodeDefinition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @method initWithMixerDefinition:format:identifier @abstract Create a pull stream node definition @param mixerDefinition The mixer definition this stream will be assigned to @param format The AVAudioFormat object that will define the attributes of the audio this node will accept. Only Core Audio's standard deinterleaved 32-bit floating-point formats are supported. @param identifier An optional custom identifier to give to this object @return A new PHASEPullStreamNodeDefinition object
-//
-// NewPullStreamNodeDefinitionWithMixerDefinitionFormatIdentifier creates a new [PullStreamNodeDefinition].
-func NewPullStreamNodeDefinitionWithMixerDefinitionFormatIdentifier(mixerDefinition *raw.PHASEMixerDefinition, format *avfaudio.AVAudioFormat, identifier string) *PullStreamNodeDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEPullStreamNodeDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMixerDefinition:format:identifier:"), mixerDefinition.Ptr(), format.Ptr(), foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &PullStreamNodeDefinition{inner: raw.PHASEPullStreamNodeDefinitionFromID(_id)}
+// pullStreamNodeDefinitionAdopt wraps an Objective-C object that this code just created as a
+// PullStreamNodeDefinition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pullStreamNodeDefinitionAdopt(id objc.ID) *PullStreamNodeDefinition {
+	if id == 0 {
+		return nil
+	}
+	x := &PullStreamNodeDefinition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @method initWithMixerDefinition:format @abstract Create a pull stream node definition @param mixerDefinition The mixer definition this stream will be assigned to @param format The AVAudioFormat object that will define the attributes of the audio this node will accept. Only Core Audio's standard deinterleaved 32-bit floating-point formats are supported. @return A new PHASEPullStreamNodeDefinition object
-//
-// NewPullStreamNodeDefinitionWithMixerDefinitionFormat creates a new [PullStreamNodeDefinition].
-func NewPullStreamNodeDefinitionWithMixerDefinitionFormat(mixerDefinition *raw.PHASEMixerDefinition, format *avfaudio.AVAudioFormat) *PullStreamNodeDefinition {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEPullStreamNodeDefinition")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMixerDefinition:format:"), mixerDefinition.Ptr(), format.Ptr())
-	return &PullStreamNodeDefinition{inner: raw.PHASEPullStreamNodeDefinitionFromID(_id)}
+// Description returns the object's -description text.
+func (x *PullStreamNodeDefinition) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property normalize @abstract Determines whether or not the engine should normalize the stream. The default value is NO. @discussion In general, clients are advised to normalize the input. Normalization is required to properly calibrate the output level. If you set this value to NO, it's advised that you do custom normalization of the audio data prior to passing the buffers to PHASE.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PullStreamNodeDefinition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PullStreamNodeDefinition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// Create a pull stream node definition
 //
-// WithNormalize sets the normalize property and returns the receiver for chaining.
+// NewPullStreamNodeDefinitionWithMixerDefinitionFormatIdentifier creates a new PullStreamNodeDefinition.
+func NewPullStreamNodeDefinitionWithMixerDefinitionFormatIdentifier(mixerDefinition *MixerDefinition, format obj.Object, identifier string) *PullStreamNodeDefinition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEPullStreamNodeDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMixerDefinition:format:identifier:"), objref.IDOf(mixerDefinition), objref.IDOf(format), purego.NSString(identifier))
+	return pullStreamNodeDefinitionAdopt(_id)
+}
+
+// Create a pull stream node definition
+//
+// NewPullStreamNodeDefinitionWithMixerDefinitionFormat creates a new PullStreamNodeDefinition.
+func NewPullStreamNodeDefinitionWithMixerDefinitionFormat(mixerDefinition *MixerDefinition, format obj.Object) *PullStreamNodeDefinition {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEPullStreamNodeDefinition")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMixerDefinition:format:"), objref.IDOf(mixerDefinition), objref.IDOf(format))
+	return pullStreamNodeDefinitionAdopt(_id)
+}
+
+// Determines whether or not the engine should normalize the stream. The default value is NO. In general, clients are advised to normalize the input. Normalization is required to properly calibrate the output level. If you set this value to NO, it's advised that you do custom normalization of the audio data prior to passing the buffers to PHASE.
+//
+// WithNormalize sets normalize and returns the receiver so calls can be chained.
 func (x *PullStreamNodeDefinition) WithNormalize(normalize bool) *PullStreamNodeDefinition {
-	x.inner.SetNormalize(normalize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalize:"), normalize)
 	return x
 }
 
 // A playback speed for the node’s audio.
 //
-// WithRate sets the rate property and returns the receiver for chaining.
+// WithRate sets rate and returns the receiver so calls can be chained.
 func (x *PullStreamNodeDefinition) WithRate(rate float64) *PullStreamNodeDefinition {
-	x.inner.PHASEGeneratorNodeDefinition.SetRate(rate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 	return x
 }
 
 // A group this node conforms to for gain and rate control.
 //
-// WithGroup sets the group property and returns the receiver for chaining.
+// WithGroup sets group and returns the receiver so calls can be chained.
 func (x *PullStreamNodeDefinition) WithGroup(group *Group) *PullStreamNodeDefinition {
-	x.inner.PHASEGeneratorNodeDefinition.SetGroup(group.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
 // A meta parameter that dynamically changes the audio’s loudness.
 //
-// WithGainMetaParameterDefinition sets the gainMetaParameterDefinition property and returns the receiver for chaining.
+// WithGainMetaParameterDefinition sets gainMetaParameterDefinition and returns the receiver so calls can be chained.
 func (x *PullStreamNodeDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PullStreamNodeDefinition {
-	x.inner.PHASEGeneratorNodeDefinition.SetGainMetaParameterDefinition(gainMetaParameterDefinition.asNumberMetaParameterDefinition())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
 	return x
 }
 
 // A meta parameter that dynamically changes the audio’s rate.
 //
-// WithRateMetaParameterDefinition sets the rateMetaParameterDefinition property and returns the receiver for chaining.
+// WithRateMetaParameterDefinition sets rateMetaParameterDefinition and returns the receiver so calls can be chained.
 func (x *PullStreamNodeDefinition) WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PullStreamNodeDefinition {
-	x.inner.PHASEGeneratorNodeDefinition.SetRateMetaParameterDefinition(rateMetaParameterDefinition.asNumberMetaParameterDefinition())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRateMetaParameterDefinition:"), objref.IDOf(rateMetaParameterDefinition))
 	return x
 }
 
-// @property format @abstract The readonly property that returns the AVAudioFormat that this stream was initialized with
-//
-// Format calls the underlying Format.
-func (x *PullStreamNodeDefinition) Format() *avfaudio.AVAudioFormat {
-	return x.inner.Format()
+// The readonly property that returns the AVAudioFormat that this stream was initialized with
+func (x *PullStreamNodeDefinition) Format() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("format"))
+	return obj.Wrap(_r)
 }
 
-// @property normalize @abstract Determines whether or not the engine should normalize the stream. The default value is NO. @discussion In general, clients are advised to normalize the input. Normalization is required to properly calibrate the output level. If you set this value to NO, it's advised that you do custom normalization of the audio data prior to passing the buffers to PHASE.
-//
-// Normalize calls the underlying Normalize.
+// Determines whether or not the engine should normalize the stream. The default value is NO. In general, clients are advised to normalize the input. Normalization is required to properly calibrate the output level. If you set this value to NO, it's advised that you do custom normalization of the audio data prior to passing the buffers to PHASE.
 func (x *PullStreamNodeDefinition) Normalize() bool {
-	return x.inner.Normalize()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("normalize"))
+	return _r
 }
 
-// SetNormalize calls the underlying SetNormalize.
 func (x *PullStreamNodeDefinition) SetNormalize(normalize bool) {
-	x.inner.SetNormalize(normalize)
-}
-
-func (x *PullStreamNodeDefinition) asGeneratorNodeDefinition() *raw.PHASEGeneratorNodeDefinition {
-	return &x.inner.PHASEGeneratorNodeDefinition
-}
-
-func (x *PullStreamNodeDefinition) asSoundEventNodeDefinition() *raw.PHASESoundEventNodeDefinition {
-	return &x.inner.PHASEGeneratorNodeDefinition.PHASESoundEventNodeDefinition
-}
-
-func (x *PullStreamNodeDefinition) asDefinition() *raw.PHASEDefinition {
-	return &x.inner.PHASEGeneratorNodeDefinition.PHASESoundEventNodeDefinition.PHASEDefinition
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalize:"), normalize)
 }
 
 // PullStreamNodeDefinitionable is the interface implemented by [PullStreamNodeDefinition], for mocking and DI.
 type PullStreamNodeDefinitionable interface {
-	Unwrap() *raw.PHASEPullStreamNodeDefinition
+	obj.Object
 	WithNormalize(normalize bool) *PullStreamNodeDefinition
 	WithRate(rate float64) *PullStreamNodeDefinition
 	WithGroup(group *Group) *PullStreamNodeDefinition
 	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PullStreamNodeDefinition
 	WithRateMetaParameterDefinition(rateMetaParameterDefinition NumberMetaParameterDefinitionProvider) *PullStreamNodeDefinition
-	Format() *avfaudio.AVAudioFormat
+	Format() obj.Object
 	Normalize() bool
 	SetNormalize(normalize bool)
 }

@@ -5,175 +5,188 @@
 package calendarstore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/calendarstore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CalEvent wraps [raw.CalEvent] with a fluent Go API.
+// CalEvent is an idiomatic wrapper over the Objective-C class CalEvent.
 type CalEvent struct {
-	inner *raw.CalEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CalEvent].
-func (x *CalEvent) Unwrap() *raw.CalEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CalEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// CalEventFromID adopts an existing object pointer as a CalEvent (nil for 0).
+// CalEventFromID adopts an existing Objective-C object as a CalEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func CalEventFromID(id objc.ID) *CalEvent {
 	if id == 0 {
 		return nil
 	}
-	return &CalEvent{inner: raw.CalEventFromID(id)}
-}
-
-// NewCalEvent creates a new [CalEvent].
-func NewCalEvent() *CalEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CalEvent")), objc.RegisterName("new"))
-	return &CalEvent{inner: raw.CalEventFromID(_id)}
-}
-
-// WithIsAllDay sets the isAllDay property and returns the receiver for chaining.
-func (x *CalEvent) WithIsAllDay(isAllDay bool) *CalEvent {
-	x.inner.SetIsAllDay(isAllDay)
+	x := &CalEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithLocation sets the location property and returns the receiver for chaining.
-func (x *CalEvent) WithLocation(location string) *CalEvent {
-	x.inner.SetLocation(foundation.NSStringStringWithUTF8String(location))
-	return x
-}
-
-// WithRecurrenceRule sets the recurrenceRule property and returns the receiver for chaining.
-func (x *CalEvent) WithRecurrenceRule(recurrenceRule *CalRecurrenceRule) *CalEvent {
-	x.inner.SetRecurrenceRule(recurrenceRule.Unwrap())
-	return x
-}
-
-// WithStartDate sets the startDate property and returns the receiver for chaining.
-func (x *CalEvent) WithStartDate(startDate *foundation.NSDate) *CalEvent {
-	x.inner.SetStartDate(startDate)
-	return x
-}
-
-// WithEndDate sets the endDate property and returns the receiver for chaining.
-func (x *CalEvent) WithEndDate(endDate *foundation.NSDate) *CalEvent {
-	x.inner.SetEndDate(endDate)
-	return x
-}
-
-// WithCalendar sets the calendar property and returns the receiver for chaining.
-func (x *CalEvent) WithCalendar(calendar *CalCalendar) *CalEvent {
-	x.inner.CalCalendarItem.SetCalendar(calendar.Unwrap())
-	return x
-}
-
-// WithNotes sets the notes property and returns the receiver for chaining.
-func (x *CalEvent) WithNotes(notes string) *CalEvent {
-	x.inner.CalCalendarItem.SetNotes(foundation.NSStringStringWithUTF8String(notes))
-	return x
-}
-
-// WithUrl sets the url property and returns the receiver for chaining.
-func (x *CalEvent) WithUrl(url string) *CalEvent {
-	x.inner.CalCalendarItem.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	return x
-}
-
-// WithTitle sets the title property and returns the receiver for chaining.
-func (x *CalEvent) WithTitle(title string) *CalEvent {
-	x.inner.CalCalendarItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
-	return x
-}
-
-// IsAllDay calls the underlying IsAllDay.
-func (x *CalEvent) IsAllDay() bool {
-	return x.inner.IsAllDay()
-}
-
-// SetIsAllDay calls the underlying SetIsAllDay.
-func (x *CalEvent) SetIsAllDay(isAllDay bool) {
-	x.inner.SetIsAllDay(isAllDay)
-}
-
-// Location calls the underlying Location.
-func (x *CalEvent) Location() string {
-	_r := x.inner.Location()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetLocation calls the underlying SetLocation.
-func (x *CalEvent) SetLocation(location string) {
-	x.inner.SetLocation(foundation.NSStringStringWithUTF8String(location))
-}
-
-// RecurrenceRule calls the underlying RecurrenceRule.
-func (x *CalEvent) RecurrenceRule() *CalRecurrenceRule {
-	_r := x.inner.RecurrenceRule()
-	if _r == nil {
+// calEventAdopt wraps an Objective-C object that this code just created as a
+// CalEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func calEventAdopt(id objc.ID) *CalEvent {
+	if id == 0 {
 		return nil
 	}
-	return &CalRecurrenceRule{inner: _r}
+	x := &CalEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetRecurrenceRule calls the underlying SetRecurrenceRule.
-func (x *CalEvent) SetRecurrenceRule(recurrenceRule *raw.CalRecurrenceRule) {
-	x.inner.SetRecurrenceRule(recurrenceRule)
+// Description returns the object's -description text.
+func (x *CalEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// StartDate calls the underlying StartDate.
-func (x *CalEvent) StartDate() *foundation.NSDate {
-	return x.inner.StartDate()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CalEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetStartDate calls the underlying SetStartDate.
-func (x *CalEvent) SetStartDate(startDate *foundation.NSDate) {
-	x.inner.SetStartDate(startDate)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CalEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// EndDate calls the underlying EndDate.
-func (x *CalEvent) EndDate() *foundation.NSDate {
-	return x.inner.EndDate()
+// NewCalEvent creates a new CalEvent.
+func NewCalEvent() *CalEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("CalEvent")), objc.RegisterName("new"))
+	return calEventAdopt(_id)
 }
 
-// SetEndDate calls the underlying SetEndDate.
-func (x *CalEvent) SetEndDate(endDate *foundation.NSDate) {
-	x.inner.SetEndDate(endDate)
+// WithIsAllDay sets isAllDay and returns the receiver so calls can be chained.
+func (x *CalEvent) WithIsAllDay(isAllDay bool) *CalEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsAllDay:"), isAllDay)
+	return x
 }
 
-// Attendees calls the underlying Attendees.
-func (x *CalEvent) Attendees() *foundation.NSArray[objc.ID] {
-	return x.inner.Attendees()
+// WithLocation sets location and returns the receiver so calls can be chained.
+func (x *CalEvent) WithLocation(location string) *CalEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocation:"), purego.NSString(location))
+	return x
 }
 
-// IsDetached calls the underlying IsDetached.
+// WithRecurrenceRule sets recurrenceRule and returns the receiver so calls can be chained.
+func (x *CalEvent) WithRecurrenceRule(recurrenceRule *CalRecurrenceRule) *CalEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrenceRule:"), objref.IDOf(recurrenceRule))
+	return x
+}
+
+// WithStartDate sets startDate and returns the receiver so calls can be chained.
+func (x *CalEvent) WithStartDate(startDate obj.Object) *CalEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
+	return x
+}
+
+// WithEndDate sets endDate and returns the receiver so calls can be chained.
+func (x *CalEvent) WithEndDate(endDate obj.Object) *CalEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
+	return x
+}
+
+// WithCalendar sets calendar and returns the receiver so calls can be chained.
+func (x *CalEvent) WithCalendar(calendar *CalCalendar) *CalEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
+	return x
+}
+
+// WithNotes sets notes and returns the receiver so calls can be chained.
+func (x *CalEvent) WithNotes(notes string) *CalEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotes:"), purego.NSString(notes))
+	return x
+}
+
+// WithUrl sets url and returns the receiver so calls can be chained.
+func (x *CalEvent) WithUrl(url string) *CalEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
+	return x
+}
+
+// WithTitle sets title and returns the receiver so calls can be chained.
+func (x *CalEvent) WithTitle(title string) *CalEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return x
+}
+
+func (x *CalEvent) IsAllDay() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAllDay"))
+	return _r
+}
+
+func (x *CalEvent) SetIsAllDay(isAllDay bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsAllDay:"), isAllDay)
+}
+
+func (x *CalEvent) Location() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("location"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *CalEvent) SetLocation(location string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocation:"), purego.NSString(location))
+}
+
+func (x *CalEvent) RecurrenceRule() *CalRecurrenceRule {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recurrenceRule"))
+	return CalRecurrenceRuleFromID(_r)
+}
+
+func (x *CalEvent) SetRecurrenceRule(recurrenceRule *CalRecurrenceRule) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrenceRule:"), objref.IDOf(recurrenceRule))
+}
+
+func (x *CalEvent) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+	return obj.Wrap(_r)
+}
+
+func (x *CalEvent) SetStartDate(startDate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
+}
+
+func (x *CalEvent) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+	return obj.Wrap(_r)
+}
+
+func (x *CalEvent) SetEndDate(endDate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
+}
+
+func (x *CalEvent) Attendees() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attendees"))
+	return obj.Wrap(_r)
+}
+
 func (x *CalEvent) IsDetached() bool {
-	return x.inner.IsDetached()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDetached"))
+	return _r
 }
 
-// Occurrence calls the underlying Occurrence.
-func (x *CalEvent) Occurrence() *foundation.NSDate {
-	return x.inner.Occurrence()
+func (x *CalEvent) Occurrence() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("occurrence"))
+	return obj.Wrap(_r)
 }
-
-func (x *CalEvent) asCalCalendarItem() *raw.CalCalendarItem { return &x.inner.CalCalendarItem }
 
 // CalEventable is the interface implemented by [CalEvent], for mocking and DI.
 type CalEventable interface {
-	Unwrap() *raw.CalEvent
+	obj.Object
 	WithIsAllDay(isAllDay bool) *CalEvent
 	WithLocation(location string) *CalEvent
 	WithRecurrenceRule(recurrenceRule *CalRecurrenceRule) *CalEvent
-	WithStartDate(startDate *foundation.NSDate) *CalEvent
-	WithEndDate(endDate *foundation.NSDate) *CalEvent
+	WithStartDate(startDate obj.Object) *CalEvent
+	WithEndDate(endDate obj.Object) *CalEvent
 	WithCalendar(calendar *CalCalendar) *CalEvent
 	WithNotes(notes string) *CalEvent
 	WithUrl(url string) *CalEvent
@@ -183,14 +196,14 @@ type CalEventable interface {
 	Location() string
 	SetLocation(location string)
 	RecurrenceRule() *CalRecurrenceRule
-	SetRecurrenceRule(recurrenceRule *raw.CalRecurrenceRule)
-	StartDate() *foundation.NSDate
-	SetStartDate(startDate *foundation.NSDate)
-	EndDate() *foundation.NSDate
-	SetEndDate(endDate *foundation.NSDate)
-	Attendees() *foundation.NSArray[objc.ID]
+	SetRecurrenceRule(recurrenceRule *CalRecurrenceRule)
+	StartDate() obj.Object
+	SetStartDate(startDate obj.Object)
+	EndDate() obj.Object
+	SetEndDate(endDate obj.Object)
+	Attendees() obj.Object
 	IsDetached() bool
-	Occurrence() *foundation.NSDate
+	Occurrence() obj.Object
 }
 
 var _ CalEventable = (*CalEvent)(nil)

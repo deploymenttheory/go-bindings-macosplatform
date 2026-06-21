@@ -5,263 +5,183 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsmatrix"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A gradient neuron activation kernel that operates on matrices.
 //
-// MatrixNeuronGradient wraps [raw.MPSMatrixNeuronGradient] with a fluent Go API.
+// MatrixNeuronGradient is an idiomatic wrapper over the Objective-C class MPSMatrixNeuronGradient.
 type MatrixNeuronGradient struct {
-	inner *raw.MPSMatrixNeuronGradient
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSMatrixNeuronGradient].
-func (x *MatrixNeuronGradient) Unwrap() *raw.MPSMatrixNeuronGradient { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MatrixNeuronGradient) ID() objc.ID { return x.inner.Ptr() }
-
-// MatrixNeuronGradientFromID adopts an existing object pointer as a MatrixNeuronGradient (nil for 0).
+// MatrixNeuronGradientFromID adopts an existing Objective-C object as a MatrixNeuronGradient
+// (nil for 0), retaining it and registering a release finalizer.
 func MatrixNeuronGradientFromID(id objc.ID) *MatrixNeuronGradient {
 	if id == 0 {
 		return nil
 	}
-	return &MatrixNeuronGradient{inner: raw.MPSMatrixNeuronGradientFromID(id)}
-}
-
-// NewMatrixNeuronGradientWithDevice creates a new [MatrixNeuronGradient].
-func NewMatrixNeuronGradientWithDevice(device metal.MTLDevice) *MatrixNeuronGradient {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixNeuronGradient")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &MatrixNeuronGradient{inner: raw.MPSMatrixNeuronGradientFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion See @ref MPSKernel#initWithCoder. @param      aDecoder    The NSCoder subclass with your serialized MPSMatrixNeuronGradient @param      device      The MTLDevice on which to make the MPSMatrixNeuronGradient object. @return     A new MPSMatrixNeuronGradient object, or nil if failure.
-//
-// NewMatrixNeuronGradientWithCoderDevice creates a new [MatrixNeuronGradient].
-func NewMatrixNeuronGradientWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *MatrixNeuronGradient {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSMatrixNeuronGradient")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &MatrixNeuronGradient{inner: raw.MPSMatrixNeuronGradientFromID(_id)}
-}
-
-// @property   sourceNumberOfFeatureVectors @discussion The number of input vectors which make up the input array.
-//
-// WithSourceNumberOfFeatureVectors sets the sourceNumberOfFeatureVectors property and returns the receiver for chaining.
-func (x *MatrixNeuronGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixNeuronGradient {
-	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
+	x := &MatrixNeuronGradient{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   sourceInputFeatureChannels @discussion The number of feature channels in the input vectors.
-//
-// WithSourceInputFeatureChannels sets the sourceInputFeatureChannels property and returns the receiver for chaining.
-func (x *MatrixNeuronGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixNeuronGradient {
-	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
+// matrixNeuronGradientAdopt wraps an Objective-C object that this code just created as a
+// MatrixNeuronGradient (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matrixNeuronGradientAdopt(id objc.ID) *MatrixNeuronGradient {
+	if id == 0 {
+		return nil
+	}
+	x := &MatrixNeuronGradient{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @property   alpha @discussion The scale factor to apply to the input.
+// Description returns the object's -description text.
+func (x *MatrixNeuronGradient) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MatrixNeuronGradient) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MatrixNeuronGradient) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMatrixNeuronGradient creates a new MatrixNeuronGradient.
+func NewMatrixNeuronGradient() *MatrixNeuronGradient {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSMatrixNeuronGradient")), objc.RegisterName("new"))
+	return matrixNeuronGradientAdopt(_id)
+}
+
+// The number of input vectors which make up the input array.
 //
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithSourceNumberOfFeatureVectors sets sourceNumberOfFeatureVectors and returns the receiver so calls can be chained.
+func (x *MatrixNeuronGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixNeuronGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
+	return x
+}
+
+// The number of feature channels in the input vectors.
+//
+// WithSourceInputFeatureChannels sets sourceInputFeatureChannels and returns the receiver so calls can be chained.
+func (x *MatrixNeuronGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixNeuronGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
+	return x
+}
+
+// The scale factor to apply to the input.
+//
+// WithAlpha sets alpha and returns the receiver so calls can be chained.
 func (x *MatrixNeuronGradient) WithAlpha(alpha float64) *MatrixNeuronGradient {
-	x.inner.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
-// @property   primarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+// The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
 //
-// WithPrimarySourceMatrixOrigin sets the primarySourceMatrixOrigin property and returns the receiver for chaining.
-func (x *MatrixNeuronGradient) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixNeuronGradient {
-	x.inner.MPSMatrixBinaryKernel.SetPrimarySourceMatrixOrigin(primarySourceMatrixOrigin)
+// WithBatchStart sets batchStart and returns the receiver so calls can be chained.
+func (x *MatrixNeuronGradient) WithBatchStart(batchStart int) *MatrixNeuronGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
 	return x
 }
 
-// @property   secondarySourceMatrixOrigin @discussion The origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+// The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
 //
-// WithSecondarySourceMatrixOrigin sets the secondarySourceMatrixOrigin property and returns the receiver for chaining.
-func (x *MatrixNeuronGradient) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixNeuronGradient {
-	x.inner.MPSMatrixBinaryKernel.SetSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin)
-	return x
-}
-
-// @property   resultMatrixOrigin @discussion The origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-//
-// WithResultMatrixOrigin sets the resultMatrixOrigin property and returns the receiver for chaining.
-func (x *MatrixNeuronGradient) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixNeuronGradient {
-	x.inner.MPSMatrixBinaryKernel.SetResultMatrixOrigin(resultMatrixOrigin)
-	return x
-}
-
-// @property   batchStart @discussion The index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-//
-// WithBatchStart sets the batchStart property and returns the receiver for chaining.
-func (x *MatrixNeuronGradient) WithBatchStart(batchStart uint) *MatrixNeuronGradient {
-	x.inner.MPSMatrixBinaryKernel.SetBatchStart(batchStart)
-	return x
-}
-
-// @property   batchSize @discussion The number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-//
-// WithBatchSize sets the batchSize property and returns the receiver for chaining.
-func (x *MatrixNeuronGradient) WithBatchSize(batchSize uint) *MatrixNeuronGradient {
-	x.inner.MPSMatrixBinaryKernel.SetBatchSize(batchSize)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *MatrixNeuronGradient) WithOptions(options mpscore.MPSKernelOptions) *MatrixNeuronGradient {
-	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetOptions(options)
+// WithBatchSize sets batchSize and returns the receiver so calls can be chained.
+func (x *MatrixNeuronGradient) WithBatchSize(batchSize int) *MatrixNeuronGradient {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *MatrixNeuronGradient) WithLabel(label string) *MatrixNeuronGradient {
-	x.inner.MPSMatrixBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract   Specifies a neuron activation function to be used. @discussion This method can be used to add a neuron activation funtion of given type with associated scalar parameters A, B, and C that are shared across all output values. Note that this method can only be used to specify neurons which are specified by three (or fewer) parameters shared across all output values (or channels, in CNN nomenclature). It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. For those kind of neuron activation functions, use appropriate setter functions.  An MPSMatrixNeuron kernel is initialized with a default neuron function of MPSCNNNeuronTypeNone. @param      neuronType      Type of neuron activation function. For full list see MPSCNNNeuronType.h @param      parameterA      parameterA of neuron activation that is shared across all output values. @param      parameterB      parameterB of neuron activation that is shared across all output values. @param      parameterC      parameterC of neuron activation that is shared across all output values.
-//
-// SetNeuronTypeParameterAParameterBParameterC calls the underlying SetNeuronTypeParameterAParameterBParameterC.
-func (x *MatrixNeuronGradient) SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32) {
-	x.inner.SetNeuronTypeParameterAParameterBParameterC(neuronType, parameterA, parameterB, parameterC)
-}
-
-// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-//
-// NeuronType calls the underlying NeuronType.
-func (x *MatrixNeuronGradient) NeuronType() mpsneuralnetwork.MPSCNNNeuronType {
-	return x.inner.NeuronType()
-}
-
-// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-//
-// NeuronParameterA calls the underlying NeuronParameterA.
+// Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (x *MatrixNeuronGradient) NeuronParameterA() float32 {
-	return x.inner.NeuronParameterA()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterA"))
+	return _r
 }
 
-// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-//
-// NeuronParameterB calls the underlying NeuronParameterB.
+// Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (x *MatrixNeuronGradient) NeuronParameterB() float32 {
-	return x.inner.NeuronParameterB()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterB"))
+	return _r
 }
 
-// @abstract   Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
-//
-// NeuronParameterC calls the underlying NeuronParameterC.
+// Getter funtion for neuronType set using setNeuronType:parameterA:parameterB:parameterC method
 func (x *MatrixNeuronGradient) NeuronParameterC() float32 {
-	return x.inner.NeuronParameterC()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterC"))
+	return _r
 }
 
-// @abstract   Add per output value neuron parameters A for PReLu neuron activation functions. @discussion This method sets the neuron to PReLU, zeros parameters A and B and sets the per output value neuron parameters A to an array containing a unique value of A for each output value. If the neuron function is f(v,a,b), it will apply resultMatrix(i, j) = f( input(i, j), A[j], B[j] ) where j in [0, sourceInputFeatureChannels] See https://arxiv.org/pdf/1502.01852.pdf for details. All other neuron types, where parameter A and parameter B are shared across output values must be set using -setNeuronType:parameterA:parameterB: @param      A       An array containing float values for neuron parameter A. Number of entries must be equal to MIN(inputMatrix.columns - sourceMatrixOrigin.y, sourceInputFeatureChannels)
-//
-// SetNeuronToPReLUWithParametersA calls the underlying SetNeuronToPReLUWithParametersA.
-func (x *MatrixNeuronGradient) SetNeuronToPReLUWithParametersA(a *foundation.NSData) {
-	x.inner.SetNeuronToPReLUWithParametersA(a)
+// Add per output value neuron parameters A for PReLu neuron activation functions. This method sets the neuron to PReLU, zeros parameters A and B and sets the per output value neuron parameters A to an array containing a unique value of A for each output value. If the neuron function is f(v,a,b), it will apply resultMatrix(i, j) = f( input(i, j), A[j], B[j] ) where j in [0, sourceInputFeatureChannels] See https://arxiv.org/pdf/1502.01852.pdf for details. All other neuron types, where parameter A and parameter B are shared across output values must be set using -setNeuronType:parameterA:parameterB:
+func (x *MatrixNeuronGradient) SetNeuronToPReLUWithParametersA(a obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeuronToPReLUWithParametersA:"), objref.IDOf(a))
 }
 
-// @abstract   Encode a MPSMatrixNeuronGradient object to a command buffer and compute its gradient with respect to its input data. @param      commandBuffer               The commandBuffer on which to encode the operation. @param      gradientMatrix              A matrix whose values represent the gradient of a loss function with respect to the results of a forward MPSMatrixNeuron operation. @param      inputMatrix                 A matrix containing the inputs to a forward MPSMatrixNeuron operation for which the gradient values are to be computed. @param      biasVector                  A vector containing the bias terms. @param      resultGradientForDataMatrix The matrix containing the resulting gradient values. @param      resultGradientForBiasVector If non-NULL the vector containing gradients for the bias terms.
-//
-// EncodeToCommandBufferGradientMatrixInputMatrixBiasVectorResultGradientForDataMatrixResultGradientForBiasVector calls the underlying EncodeToCommandBufferGradientMatrixInputMatrixBiasVectorResultGradientForDataMatrixResultGradientForBiasVector.
-func (x *MatrixNeuronGradient) EncodeToCommandBufferGradientMatrixInputMatrixBiasVectorResultGradientForDataMatrixResultGradientForBiasVector(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, inputMatrix *mpscore.MPSMatrix, biasVector *mpscore.MPSVector, resultGradientForDataMatrix *mpscore.MPSMatrix, resultGradientForBiasVector *mpscore.MPSVector) {
-	x.inner.EncodeToCommandBufferGradientMatrixInputMatrixBiasVectorResultGradientForDataMatrixResultGradientForBiasVector(commandBuffer, gradientMatrix, inputMatrix, biasVector, resultGradientForDataMatrix, resultGradientForBiasVector)
+// The number of input vectors which make up the input array.
+func (x *MatrixNeuronGradient) SourceNumberOfFeatureVectors() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceNumberOfFeatureVectors"))
+	return _r
 }
 
-// @abstract   Make a copy of this kernel for a new device - @see MPSKernel @param      zone        The NSZone in which to allocate the object @param      device      The device for the new MPSKernel. If nil, then use self.device. @result     A pointer to a copy of this MPSKernel. This will fail, returning nil if the device is not supported. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later.
-//
-// CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
-func (x *MatrixNeuronGradient) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *MatrixNeuronGradient {
-	_r := x.inner.CopyWithZoneDevice(zone, device)
-	if _r == nil {
-		return nil
-	}
-	return &MatrixNeuronGradient{inner: _r}
+func (x *MatrixNeuronGradient) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
 }
 
-// @property   sourceNumberOfFeatureVectors @discussion The number of input vectors which make up the input array.
-//
-// SourceNumberOfFeatureVectors calls the underlying SourceNumberOfFeatureVectors.
-func (x *MatrixNeuronGradient) SourceNumberOfFeatureVectors() uint {
-	return x.inner.SourceNumberOfFeatureVectors()
+// The number of feature channels in the input vectors.
+func (x *MatrixNeuronGradient) SourceInputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceInputFeatureChannels"))
+	return _r
 }
 
-// SetSourceNumberOfFeatureVectors calls the underlying SetSourceNumberOfFeatureVectors.
-func (x *MatrixNeuronGradient) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) {
-	x.inner.SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors)
+func (x *MatrixNeuronGradient) SetSourceInputFeatureChannels(sourceInputFeatureChannels int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
 }
 
-// @property   sourceInputFeatureChannels @discussion The number of feature channels in the input vectors.
-//
-// SourceInputFeatureChannels calls the underlying SourceInputFeatureChannels.
-func (x *MatrixNeuronGradient) SourceInputFeatureChannels() uint {
-	return x.inner.SourceInputFeatureChannels()
-}
-
-// SetSourceInputFeatureChannels calls the underlying SetSourceInputFeatureChannels.
-func (x *MatrixNeuronGradient) SetSourceInputFeatureChannels(sourceInputFeatureChannels uint) {
-	x.inner.SetSourceInputFeatureChannels(sourceInputFeatureChannels)
-}
-
-// @property   alpha @discussion The scale factor to apply to the input.
-//
-// Alpha calls the underlying Alpha.
+// The scale factor to apply to the input.
 func (x *MatrixNeuronGradient) Alpha() float64 {
-	return x.inner.Alpha()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
+	return _r
 }
 
-// SetAlpha calls the underlying SetAlpha.
 func (x *MatrixNeuronGradient) SetAlpha(alpha float64) {
-	x.inner.SetAlpha(alpha)
-}
-
-func (x *MatrixNeuronGradient) asMatrixBinaryKernel() *mpsmatrix.MPSMatrixBinaryKernel {
-	return &x.inner.MPSMatrixBinaryKernel
-}
-
-func (x *MatrixNeuronGradient) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSMatrixBinaryKernel.MPSKernel
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 }
 
 // MatrixNeuronGradientable is the interface implemented by [MatrixNeuronGradient], for mocking and DI.
 type MatrixNeuronGradientable interface {
-	Unwrap() *raw.MPSMatrixNeuronGradient
-	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint) *MatrixNeuronGradient
-	WithSourceInputFeatureChannels(sourceInputFeatureChannels uint) *MatrixNeuronGradient
+	obj.Object
+	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixNeuronGradient
+	WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixNeuronGradient
 	WithAlpha(alpha float64) *MatrixNeuronGradient
-	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixNeuronGradient
-	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixNeuronGradient
-	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixNeuronGradient
-	WithBatchStart(batchStart uint) *MatrixNeuronGradient
-	WithBatchSize(batchSize uint) *MatrixNeuronGradient
-	WithOptions(options mpscore.MPSKernelOptions) *MatrixNeuronGradient
+	WithBatchStart(batchStart int) *MatrixNeuronGradient
+	WithBatchSize(batchSize int) *MatrixNeuronGradient
 	WithLabel(label string) *MatrixNeuronGradient
-	SetNeuronTypeParameterAParameterBParameterC(neuronType mpsneuralnetwork.MPSCNNNeuronType, parameterA float32, parameterB float32, parameterC float32)
-	NeuronType() mpsneuralnetwork.MPSCNNNeuronType
 	NeuronParameterA() float32
 	NeuronParameterB() float32
 	NeuronParameterC() float32
-	SetNeuronToPReLUWithParametersA(a *foundation.NSData)
-	EncodeToCommandBufferGradientMatrixInputMatrixBiasVectorResultGradientForDataMatrixResultGradientForBiasVector(commandBuffer metal.MTLCommandBuffer, gradientMatrix *mpscore.MPSMatrix, inputMatrix *mpscore.MPSMatrix, biasVector *mpscore.MPSVector, resultGradientForDataMatrix *mpscore.MPSMatrix, resultGradientForBiasVector *mpscore.MPSVector)
-	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *MatrixNeuronGradient
-	SourceNumberOfFeatureVectors() uint
-	SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors uint)
-	SourceInputFeatureChannels() uint
-	SetSourceInputFeatureChannels(sourceInputFeatureChannels uint)
+	SetNeuronToPReLUWithParametersA(a obj.Object)
+	SourceNumberOfFeatureVectors() int
+	SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int)
+	SourceInputFeatureChannels() int
+	SetSourceInputFeatureChannels(sourceInputFeatureChannels int)
 	Alpha() float64
 	SetAlpha(alpha float64)
 }

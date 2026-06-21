@@ -5,30 +5,30 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// ChangeHistoryEventProvider is implemented by ChangeHistoryEvent and any idiomatic type wrapping a CNChangeHistoryEvent subclass.
+// ChangeHistoryEventProvider is accepted wherever a CNChangeHistoryEvent (or one of its subclasses) is expected.
 type ChangeHistoryEventProvider interface {
-	asChangeHistoryEvent() *raw.CNChangeHistoryEvent
+	objref.Object
 }
 
-// ContactProvider is implemented by Contact and any idiomatic type wrapping a CNContact subclass.
+// ContactProvider is accepted wherever a CNContact (or one of its subclasses) is expected.
 type ContactProvider interface {
-	asContact() *raw.CNContact
+	objref.Object
 }
 
-// FetchRequestProvider is implemented by FetchRequest and any idiomatic type wrapping a CNFetchRequest subclass.
+// FetchRequestProvider is accepted wherever a CNFetchRequest (or one of its subclasses) is expected.
 type FetchRequestProvider interface {
-	asFetchRequest() *raw.CNFetchRequest
+	objref.Object
 }
 
-// GroupProvider is implemented by Group and any idiomatic type wrapping a CNGroup subclass.
+// GroupProvider is accepted wherever a CNGroup (or one of its subclasses) is expected.
 type GroupProvider interface {
-	asGroup() *raw.CNGroup
+	objref.Object
 }
 
-// PostalAddressProvider is implemented by PostalAddress and any idiomatic type wrapping a CNPostalAddress subclass.
+// PostalAddressProvider is accepted wherever a CNPostalAddress (or one of its subclasses) is expected.
 type PostalAddressProvider interface {
-	asPostalAddress() *raw.CNPostalAddress
+	objref.Object
 }

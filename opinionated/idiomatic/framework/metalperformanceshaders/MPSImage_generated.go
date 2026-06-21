@@ -5,300 +5,148 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A texture that may have more than four channels for use in convolutional neural networks.
 //
-// Image wraps [raw.MPSImage] with a fluent Go API.
+// Image is an idiomatic wrapper over the Objective-C class MPSImage.
 type Image struct {
-	inner *raw.MPSImage
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImage].
-func (x *Image) Unwrap() *raw.MPSImage { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Image) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageFromID adopts an existing object pointer as a Image (nil for 0).
+// ImageFromID adopts an existing Objective-C object as a Image
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageFromID(id objc.ID) *Image {
 	if id == 0 {
 		return nil
 	}
-	return &Image{inner: raw.MPSImageFromID(id)}
+	x := &Image{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes an empty image.
-//
-// NewImageWithDeviceImageDescriptor creates a new [Image].
-func NewImageWithDeviceImageDescriptor(device metal.MTLDevice, imageDescriptor *mpscore.MPSImageDescriptor) *Image {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:imageDescriptor:"), device, imageDescriptor.Ptr())
-	return &Image{inner: raw.MPSImageFromID(_id)}
+// imageAdopt wraps an Objective-C object that this code just created as a
+// Image (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageAdopt(id objc.ID) *Image {
+	if id == 0 {
+		return nil
+	}
+	x := &Image{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Use -batchRepresentation or -subImageWithFeatureChannelRange instead @discussion Generally, you should call -batchRepresentation or -subImageWithFeatureChannelRange instead because they are safer. This is provided so that these interfaces will work with your MPSImage subclass. @param  parent  The parent image that owns the texture. It may be a sub-image. @param  sliceRange  The range of MTLTexture2dArray slices to be included in the sub-image @param  featureChannels The number of feature channels in the new image. The number of images is inferred. @return A MPSImage that references a subregion of the texel storage in parent instead of using its own storage.
-//
-// NewImageWithParentImageSliceRangeFeatureChannels creates a new [Image].
-func NewImageWithParentImageSliceRangeFeatureChannels(parent *mpscore.MPSImage, sliceRange foundation.NSRange, featureChannels uint) *Image {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithParentImage:sliceRange:featureChannels:"), parent.Ptr(), sliceRange, featureChannels)
-	return &Image{inner: raw.MPSImageFromID(_id)}
+// Description returns the object's -description text.
+func (x *Image) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Initializes an image from a texture. The user-allocated texture has been created for a specific number of feature channels and number of images.
-//
-// NewImageWithTextureFeatureChannels creates a new [Image].
-func NewImageWithTextureFeatureChannels(texture metal.MTLTexture, featureChannels uint) *Image {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImage")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTexture:featureChannels:"), texture, featureChannels)
-	return &Image{inner: raw.MPSImageFromID(_id)}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Image) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Image) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImage creates a new Image.
+func NewImage() *Image {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImage")), objc.RegisterName("new"))
+	return imageAdopt(_id)
 }
 
 // A string to help identify this object.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *Image) WithLabel(label string) *Image {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @abstract       Make a representation of a MPSImage (batch) as a MPSImageBatch @discussion     Before the MPSImageBatch was introduced, several images could be concatenated into a MPSImage as multiple image slices in a MTLTexture2DArray to make a image batch. If the image contained more than 4 feature channels, then each image would have round_up( feature channels / 4) slices and the total number of slices in the MPSImage would be slices * number of images. Because many devices can operate on texture arrays of no more than 2048 slices, storage in this format is limited. For example in InceptionV3, 2048 feature channels at its widest point, the largest batch size that can be processed in this way is 4, well under commonly accepted practice for training. Consequently, the older batching style is deprecated and the MPSImageBatch is introduced. It is also easier to manage sub-batches and to concatenate sub-batches for memory management with the MPSImageBatch, so this format is favored going forward. To facilitate forward migration, this method will prepare an array of MPSImages that each point to the appropriate set of slices in storage for the original image. Since they share storage, writes to the parent will alter the content of the children, and vice versa. If the original is a temporary image, the result will be a temporary image. It will hold 1 readCount on the original. When the readCount drops to 0, it will decrement the appropriate counter on the parent. This is a much cheaper form of the slice operator, and should be used instead when the slice operator does not need to operate out of place. @param  subRange  The range of images in the original image from which the batch will be derived. @return A MPSImageBatch referencing a subregion of the original batch image.
-//
-// BatchRepresentationWithSubRange calls the underlying BatchRepresentationWithSubRange.
-func (x *Image) BatchRepresentationWithSubRange(subRange foundation.NSRange) unsafe.Pointer {
-	return x.inner.BatchRepresentationWithSubRange(subRange)
+// Get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSImage instantiation and MTLTexture is not included. It only measures the size of the allocation used to hold the texels in the image. This value is subject to change between different devices and operating systems. Except when -initWithTexture:featureChannels: is used, most MPSImages (including MPSTemporaryImages) are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSImage is created with -initWithTexture:featureChannels:, in which case 0 will be returned. 0 will also be returned if it is a sub-image or sub-batch (.parent is not nil).
+func (x *Image) ResourceSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resourceSize"))
+	return _r
 }
 
-// @abstract    Make a MPSImageBatch that points to the individual images in the MPSImage @discussion   If the original is a temporary image, the result will be a temporary image. It will hold 1 readCount on the original. When the readCount drops to 0, it will decrement the appropriate counter on the parent. @return A MPSImageBatch aliasing the texel storage in the original batch image
-//
-// BatchRepresentation calls the underlying BatchRepresentation.
-func (x *Image) BatchRepresentation() unsafe.Pointer {
-	return x.inner.BatchRepresentation()
+// The formal width of the image in pixels.
+func (x *Image) Width() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("width"))
+	return _r
 }
 
-// SubImageWithFeatureChannelRange calls the underlying SubImageWithFeatureChannelRange.
-func (x *Image) SubImageWithFeatureChannelRange(range_ foundation.NSRange) *mpscore.MPSImage {
-	return x.inner.SubImageWithFeatureChannelRange(range_)
+// The formal height of the image in pixels.
+func (x *Image) Height() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("height"))
+	return _r
 }
 
-// @abstract       Get the number of bytes used to allocate underyling MTLResources @discussion     This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSImage instantiation and MTLTexture is not included. It only measures the size of the allocation used to hold the texels in the image. This value is subject to change between different devices and operating systems. Except when -initWithTexture:featureChannels: is used, most MPSImages (including MPSTemporaryImages) are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSImage is created with -initWithTexture:featureChannels:, in which case 0 will be returned. 0 will also be returned if it is a sub-image or sub-batch (.parent is not nil).
-//
-// ResourceSize calls the underlying ResourceSize.
-func (x *Image) ResourceSize() uint {
-	return x.inner.ResourceSize()
+// The number of feature channels per pixel.
+func (x *Image) FeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("featureChannels"))
+	return _r
 }
 
-// Set (or query) the purgeable state of the image’s underlying texture.
-//
-// SetPurgeableState calls the underlying SetPurgeableState.
-func (x *Image) SetPurgeableState(state mpscore.MPSPurgeableState) mpscore.MPSPurgeableState {
-	return x.inner.SetPurgeableState(state)
+// numberOfImages for batch processing
+func (x *Image) NumberOfImages() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfImages"))
+	return _r
 }
 
-// @method         readBytes @abstract       Get the values inside MPSImage and put them in the Buffer passed in. @param          dataBytes                    The array allocated by the user to be used to put data from MPSImage, the length should be imageWidth * imageHeight * numberOfFeatureChannels and dataType should be inferred from pixelFormat defined in the Image Descriptor. @param          dataLayout                   The enum tells how to layout MPS data in the buffer. @param          bytesPerRow                  Bytes to stride to point to next row(pixel just below current one) in the user buffer. @param          featureChannelInfo           information user fills in to write to a set of feature channels in the image @param          imageIndex                   Image index in MPSImage to write to. @param          region                       region of the MPSImage to read from. A region is a structure with the origin in the Image from which to start reading values and a size which represents the width and height of the rectangular region to read from. The z direction denotes the number of images, thus for 1 image, origin.z = 0 and size.depth = 1 @discussion     Use the enum to set data is coming in with what order. The data type will be determined by the pixelFormat defined in the Image Descriptor.
-//
-// ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex calls the underlying ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex.
-func (x *Image) ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerRow uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint) {
-	x.inner.ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes, dataLayout, bytesPerRow, region, featureChannelInfo, imageIndex)
+// The number of bits of numeric precision available for each feature channel. This is precision, not size.  That is, float is 24 bits, not 32. half precision floating-point is 11 bits, not 16. SNorm formats have one less bit of precision for the sign bit, etc. For formats like MTLPixelFormatB5G6R5Unorm it is the precision of the most precise channel, in this case 6.  When this information is unavailable, typically compressed formats, 0 will be returned.
+func (x *Image) Precision() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("precision"))
+	return _r
 }
 
-// @abstract       Set the values inside MPSImage with the Buffer passed in. @param          dataBytes                    The array allocated by the user to be used to put data from MPSImage, the length should be imageWidth * imageHeight * numberOfFeatureChannels and dataType should be inferred from pixelFormat defined in the Image Descriptor. @param          dataLayout                   The enum tells how to layout MPS data in the buffer. @param          bytesPerRow                  Bytes to stride to point to next row(pixel just below current one) in the user buffer. @param          region                       region of the MPSImage to write to. A region is a structure with the origin in the Image from which to start writing values and a size which represents the width and height of the rectangular region to write in. The z direction denotes the number of images, thus for 1 image, origin.z = 0 and size.depth = 1 @param          featureChannelInfo           information user fills in to read from a set of feature channels in the image @param          imageIndex                   Image index in MPSImage to write to. @discussion     This method is used to copy data from the storage provided by dataBytes to the MPSImage. The ordering of data in your dataBytes buffer is given by dataLayout. Each image may be stored as either a series of planar images (a series of single WxH images, one per feature channel) or a single chunky image, WxHxfeature_channels. BytesPerRow and BytesPerImage are there to allow some padding between successive rows and successive images. No padding is allowed between successive feature channels.
-//
-// WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex calls the underlying WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex.
-func (x *Image) WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerRow uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint) {
-	x.inner.WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes, dataLayout, bytesPerRow, region, featureChannelInfo, imageIndex)
+// Number of bytes from the first byte of one pixel to the first byte of the next pixel in storage order.  (Includes padding.)
+func (x *Image) PixelSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelSize"))
+	return _r
 }
 
-// @abstract       Set the values inside MPSImage with the Buffer passed in. @param          dataBytes                    The array allocated by the user to be used to put data from MPSImage, the length should be imageWidth * imageHeight * numberOfFeatureChannels and dataType should be inferred from pixelFormat defined in the Image Descriptor. @param          dataLayout                   The enum tells how to layout MPS data in the buffer. @param          bytesPerColumn               This is the stride in bytes from W[0] to W[1], for both HWC and CHW orderings in the buffer pointed to by dataBytes. @param          bytesPerRow                  Bytes to stride to point to next row(pixel just below current one, i.e. H[0] to H[1]) in the buffer pointed to by  dataBytes. @param          bytesPerImage                This is the stride in bytes from image[0] to image[1] im the buffer pointed to by dataBytes. @param          region                       region of the MPSImage to write to. A region is a structure with the origin in the Image from which to start writing values and a size which represents the width and height of the rectangular region to write in. The z direction denotes the number of images, thus for 1 image, origin.z = 0 and size.depth = 1 @param          featureChannelInfo           information user fills in to read from a set of feature channels in the image @param          imageIndex                   Image index in MPSImage to write to. @discussion     This method is used to copy data from the storage provided by dataBytes to the MPSImage. The ordering of data in your dataBytes buffer is given by dataLayout. Each image may be stored as either a series of planar images (a series of single WxH images, one per feature channel) or a single chunky image, WxHxfeature_channels. BytesPerRow and BytesPerImage are there to allow some padding between successive rows and successive images. No padding is allowed between successive feature channels.
-//
-// WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex calls the underlying WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex.
-func (x *Image) WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerColumn uint, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint) {
-	x.inner.WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes, dataLayout, bytesPerColumn, bytesPerRow, bytesPerImage, region, featureChannelInfo, imageIndex)
-}
-
-// @method         readBytes @abstract       Get the values inside MPSImage and put them in the Buffer passed in. @param          dataBytes                    The array allocated by the user to be used to put data from MPSImage, the length should be imageWidth * imageHeight * numberOfFeatureChannels and dataType should be inferred from pixelFormat defined in the Image Descriptor. @param          dataLayout                   The enum tells how to layout MPS data in the buffer. @param          bytesPerRow                  Bytes to stride to point to next row(pixel just below current one) in the user buffer. @param          bytesPerImage                Bytes to stride to point to next dataBytes image. See region.size.depth for image count. @param          featureChannelInfo           information user fills in to write to a set of feature channels in the image @param          imageIndex                   Image index in MPSImage to write to. @param          region                       region of the MPSImage to read from. A region is a structure with the origin in the Image from which to start reading values and a size which represents the width and height of the rectangular region to read from. The z direction denotes the number of images, thus for 1 image, origin.z = 0 and size.depth = 1 @discussion     This method is used to copy data from the MPSImage to the storage provided by dataBytes. The ordering of data in your dataBytes buffer is given by dataLayout. Each image may be stored as either a series of planar images (a series of single WxH images, one per feature channel) or a single chunky image, WxHxfeature_channels. BytesPerRow and BytesPerImage are there to allow some padding between successive rows and successive images. No padding is allowed between successive feature channels. BUG: Prior to MacOS 10.15, iOS/tvOS 13.0, incorrect behavior may be observed if region.size.depth != 1 or if bytesPerRow allowed for unused padding between rows. BUG: To provide for full capability to extract and insert content from arbitrarily sized buffers, there should also be a featureChannelStride in addition to bytesPerRow and bytesPerImage. With the current design, when we finish the last feature channel, the next byte will contain the 0th feature channel for the next texel or slice, depending on packing order. This method can not be used to modify some but not all of the feature channels in an image.
-//
-// ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex calls the underlying ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex.
-func (x *Image) ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint) {
-	x.inner.ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes, dataLayout, bytesPerRow, bytesPerImage, region, featureChannelInfo, imageIndex)
-}
-
-// @method         writeBytes @abstract       Set the values inside MPSImage with the Buffer passed in. @param          dataBytes                    The array allocated by the user to be used to put data from MPSImage, the length should be imageWidth * imageHeight * numberOfFeatureChannels and dataType should be inferred from pixelFormat defined in the Image Descriptor. @param          dataLayout                   The enum tells how to layout MPS data in the buffer. @param          bytesPerRow                  Bytes to stride to point to next row(pixel just below current one) in the user buffer. @param          bytesPerImage                Bytes to stride to point to next dataBytes image. See region.size.depth for image count. @param          region                       region of the MPSImage to write to. A region is a structure with the origin in the Image from which to start writing values and a size which represents the width and height of the rectangular region to write in. The z direction denotes the number of images, thus for 1 image, origin.z = 0 and size.depth = 1 @param          featureChannelInfo           information user fills in to read from a set of feature channels in the image @param          imageIndex                   Image index in MPSImage to write to. @discussion     Use the enum to set data is coming in with what order. The data type will be determined by the pixelFormat defined in the Image Descriptor. BUG: Prior to MacOS 10.15, iOS/tvOS 13.0, incorrect behavior may be observed if region.size.depth != 1 or if bytesPerRow allowed for unused padding between rows. BUG: To provide for full capability to extract and insert content from arbitrarily sized buffers, there should also be a featureChannelStride in addition to bytesPerRow and bytesPerImage. With the current design, when we finish the last feature channel, the next byte will contain the 0th feature channel for the next texel or slice, depending on packing order. This method can not be used to modify some but not all of the feature channels in an image.
-//
-// WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex calls the underlying WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex.
-func (x *Image) WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint) {
-	x.inner.WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes, dataLayout, bytesPerRow, bytesPerImage, region, featureChannelInfo, imageIndex)
-}
-
-// @method         readBytes @abstract       Get the values inside MPSImage and put them in the Buffer passed in. @param          dataBytes                    The array allocated by the user to be used to put data from MPSImage, the length should be imageWidth * imageHeight * numberOfFeatureChannels and dataType should be inferred from pixelFormat defined in the Image Descriptor. @param          dataLayout                   The enum tells how to layout MPS data in the buffer. @param          imageIndex                   Image index in MPSImage to read from. @discussion     Use the enum to set data is coming in with what order. The data type will be determined by the pixelFormat defined in the Image Descriptor. Region is full image, buffer width and height is same as MPSImage width and height.
-//
-// ReadBytesDataLayoutImageIndex calls the underlying ReadBytesDataLayoutImageIndex.
-func (x *Image) ReadBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, imageIndex uint) {
-	x.inner.ReadBytesDataLayoutImageIndex(dataBytes, dataLayout, imageIndex)
-}
-
-// @method         writeBytes @abstract       Set the values inside MPSImage with the Buffer passed in. @param          dataBytes                    The array allocated by the user to be used to put data from MPSImage, the length should be imageWidth * imageHeight * numberOfFeatureChannels and dataType should be inferred from pixelFormat defined in the Image Descriptor. @param          dataLayout                   The enum tells how to layout MPS data in the buffer. @param          imageIndex                   Image index in MPSImage to write to. @discussion     Use the enum to set data is coming in with what order. The data type will be determined by the pixelFormat defined in the Image Descriptor. Region is full image, buffer width and height is same as MPSImage width and height.
-//
-// WriteBytesDataLayoutImageIndex calls the underlying WriteBytesDataLayoutImageIndex.
-func (x *Image) WriteBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, imageIndex uint) {
-	x.inner.WriteBytesDataLayoutImageIndex(dataBytes, dataLayout, imageIndex)
-}
-
-// @abstract   Flush the underlying MTLTexture from the device's caches, and invalidate any CPU caches if needed. @discussion This will call [id <MTLBlitEncoder> synchronizeResource: ] on the image's MTLTexture, if any. This is necessary for all MTLStorageModeManaged resources. For other resources, including temporary resources (these are all MTLStorageModePrivate), and textures that have not yet been allocated, nothing is done. It is more efficient to use this method than to attempt to do this yourself with the texture property. @param      commandBuffer       The commandbuffer on which to synchronize
-//
-// SynchronizeOnCommandBuffer calls the underlying SynchronizeOnCommandBuffer.
-func (x *Image) SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer) {
-	x.inner.SynchronizeOnCommandBuffer(commandBuffer)
-}
-
-// @property device @abstract  The device on which the MPSImage will be used
-//
-// Device calls the underlying Device.
-func (x *Image) Device() metal.MTLDevice {
-	return x.inner.Device()
-}
-
-// @property   width @abstract   The formal width of the image in pixels.
-//
-// Width calls the underlying Width.
-func (x *Image) Width() uint {
-	return x.inner.Width()
-}
-
-// @property   height @abstract   The formal height of the image in pixels.
-//
-// Height calls the underlying Height.
-func (x *Image) Height() uint {
-	return x.inner.Height()
-}
-
-// @property   featureChannels @abstract   The number of feature channels per pixel.
-//
-// FeatureChannels calls the underlying FeatureChannels.
-func (x *Image) FeatureChannels() uint {
-	return x.inner.FeatureChannels()
-}
-
-// @property   numberOfImages @abstract   numberOfImages for batch processing
-//
-// NumberOfImages calls the underlying NumberOfImages.
-func (x *Image) NumberOfImages() uint {
-	return x.inner.NumberOfImages()
-}
-
-// @property   textureType @abstract   The type of the underlying texture, typically MTLTextureType2D or MTLTextureType2DArray
-//
-// TextureType calls the underlying TextureType.
-func (x *Image) TextureType() metal.MTLTextureType {
-	return x.inner.TextureType()
-}
-
-// @property   pixelFormat @abstract   The MTLPixelFormat of the underlying texture @discussion Note that in some cases, this value may be misleading. For example, float16 data (BFloat16) is sometimes stored in MTLPixelFormatRGBA16Unorm Please consult the featureChannelFormat.
-//
-// PixelFormat calls the underlying PixelFormat.
-func (x *Image) PixelFormat() metal.MTLPixelFormat {
-	return x.inner.PixelFormat()
-}
-
-// @property   precision @abstract   The number of bits of numeric precision available for each feature channel. @discussion This is precision, not size.  That is, float is 24 bits, not 32. half precision floating-point is 11 bits, not 16. SNorm formats have one less bit of precision for the sign bit, etc. For formats like MTLPixelFormatB5G6R5Unorm it is the precision of the most precise channel, in this case 6.  When this information is unavailable, typically compressed formats, 0 will be returned.
-//
-// Precision calls the underlying Precision.
-func (x *Image) Precision() uint {
-	return x.inner.Precision()
-}
-
-// @property   usage @abstract   Description of texture usage.
-//
-// Usage calls the underlying Usage.
-func (x *Image) Usage() metal.MTLTextureUsage {
-	return x.inner.Usage()
-}
-
-// @property   featureChannelFormat @abstract   The true encoding of the feature channels
-//
-// FeatureChannelFormat calls the underlying FeatureChannelFormat.
-func (x *Image) FeatureChannelFormat() mpscore.MPSImageFeatureChannelFormat {
-	return x.inner.FeatureChannelFormat()
-}
-
-// @property   pixelSize @abstract   Number of bytes from the first byte of one pixel to the first byte of the next pixel in storage order.  (Includes padding.)
-//
-// PixelSize calls the underlying PixelSize.
-func (x *Image) PixelSize() uint {
-	return x.inner.PixelSize()
-}
-
-// @property   texture @abstract   The associated MTLTexture object. This is a 2D texture if numberOfImages is 1 and number of feature channels <= 4. It is a 2D texture array otherwise. @discussion To avoid the high cost of premature allocation of the underlying texture, avoid calling this property except when strictly necessary. [MPSCNNKernel encode...] calls typically cause their arguments to become allocated. Likewise, MPSImages initialized with -initWithTexture: featureChannels: have already been allocated.
-//
-// Texture calls the underlying Texture.
-func (x *Image) Texture() metal.MTLTexture {
-	return x.inner.Texture()
-}
-
-// @property label @abstract A string to help identify this object.
-//
-// Label calls the underlying Label.
+// A string to help identify this object.
 func (x *Image) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
 func (x *Image) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// @abstract   The MPSImage from which this MPSImage was derived. Otherwise nil. @discussion This will point to the original image if this image was created using -batchRepresentation, -batchRepresentationWithRange: or -subImageWithFeatureChannelRange:.
-//
-// Parent calls the underlying Parent.
-func (x *Image) Parent() *mpscore.MPSImage {
-	return x.inner.Parent()
+// The MPSImage from which this MPSImage was derived. Otherwise nil. This will point to the original image if this image was created using -batchRepresentation, -batchRepresentationWithRange: or -subImageWithFeatureChannelRange:.
+func (x *Image) Parent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
+	return obj.Wrap(_r)
 }
 
 // Imageable is the interface implemented by [Image], for mocking and DI.
 type Imageable interface {
-	Unwrap() *raw.MPSImage
+	obj.Object
 	WithLabel(label string) *Image
-	BatchRepresentationWithSubRange(subRange foundation.NSRange) unsafe.Pointer
-	BatchRepresentation() unsafe.Pointer
-	SubImageWithFeatureChannelRange(range_ foundation.NSRange) *mpscore.MPSImage
-	ResourceSize() uint
-	SetPurgeableState(state mpscore.MPSPurgeableState) mpscore.MPSPurgeableState
-	ReadBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerRow uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint)
-	WriteBytesDataLayoutBytesPerRowRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerRow uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint)
-	WriteBytesDataLayoutBytesPerColumnBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerColumn uint, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint)
-	ReadBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint)
-	WriteBytesDataLayoutBytesPerRowBytesPerImageRegionFeatureChannelInfoImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, bytesPerRow uint, bytesPerImage uint, region metal.MTLRegion, featureChannelInfo mpscore.MPSImageReadWriteParams, imageIndex uint)
-	ReadBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, imageIndex uint)
-	WriteBytesDataLayoutImageIndex(dataBytes unsafe.Pointer, dataLayout mpscore.MPSDataLayout, imageIndex uint)
-	SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer)
-	Device() metal.MTLDevice
-	Width() uint
-	Height() uint
-	FeatureChannels() uint
-	NumberOfImages() uint
-	TextureType() metal.MTLTextureType
-	PixelFormat() metal.MTLPixelFormat
-	Precision() uint
-	Usage() metal.MTLTextureUsage
-	FeatureChannelFormat() mpscore.MPSImageFeatureChannelFormat
-	PixelSize() uint
-	Texture() metal.MTLTexture
+	ResourceSize() int
+	Width() int
+	Height() int
+	FeatureChannels() int
+	NumberOfImages() int
+	Precision() int
+	PixelSize() int
 	Label() string
 	SetLabel(label string)
-	Parent() *mpscore.MPSImage
+	Parent() obj.Object
 }
 
 var _ Imageable = (*Image)(nil)

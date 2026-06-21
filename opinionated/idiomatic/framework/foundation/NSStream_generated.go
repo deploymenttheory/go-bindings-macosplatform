@@ -5,120 +5,113 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An abstract class representing a stream.
 //
-// Stream wraps [raw.NSStream] with a fluent Go API.
+// Stream is an idiomatic wrapper over the Objective-C class NSStream.
 type Stream struct {
-	inner *raw.NSStream
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSStream].
-func (x *Stream) Unwrap() *raw.NSStream { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Stream) ID() objc.ID { return x.inner.Ptr() }
-
-// StreamFromID adopts an existing object pointer as a Stream (nil for 0).
+// StreamFromID adopts an existing Objective-C object as a Stream
+// (nil for 0), retaining it and registering a release finalizer.
 func StreamFromID(id objc.ID) *Stream {
 	if id == 0 {
 		return nil
 	}
-	return &Stream{inner: raw.NSStreamFromID(id)}
+	x := &Stream{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewStream creates a new [Stream].
+// streamAdopt wraps an Objective-C object that this code just created as a
+// Stream (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func streamAdopt(id objc.ID) *Stream {
+	if id == 0 {
+		return nil
+	}
+	x := &Stream{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Stream) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Stream) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Stream) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewStream creates a new Stream.
 func NewStream() *Stream {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSStream")), objc.RegisterName("new"))
-	return &Stream{inner: raw.NSStreamFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSStream")), objc.RegisterName("new"))
+	return streamAdopt(_id)
 }
 
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Stream) WithDelegate(delegate raw.NSStreamDelegate) *Stream {
-	x.inner.SetDelegate(delegate)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *Stream) WithScriptingProperties(scriptingProperties obj.Object) *Stream {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Stream) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Stream {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
-	return x
-}
-
-// Open calls the underlying Open.
 func (x *Stream) Open() {
-	x.inner.Open()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("open"))
 }
 
-// Close calls the underlying Close.
 func (x *Stream) Close() {
-	x.inner.Close()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }
 
-// PropertyForKey calls the underlying PropertyForKey.
-func (x *Stream) PropertyForKey(key *raw.NSString) objc.ID {
-	return x.inner.PropertyForKey(key)
+func (x *Stream) PropertyForKey(key *String) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyForKey:"), objref.IDOf(key))
+	return obj.Wrap(_r)
 }
 
-// SetPropertyForKey calls the underlying SetPropertyForKey.
-func (x *Stream) SetPropertyForKey(property objc.ID, key *raw.NSString) bool {
-	return x.inner.SetPropertyForKey(property, key)
+func (x *Stream) SetPropertyForKey(property obj.Object, key *String) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setProperty:forKey:"), objref.IDOf(property), objref.IDOf(key))
+	return _r
 }
 
-// ScheduleInRunLoopForMode calls the underlying ScheduleInRunLoopForMode.
-func (x *Stream) ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString) {
-	x.inner.ScheduleInRunLoopForMode(aRunLoop, mode)
+func (x *Stream) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
-// RemoveFromRunLoopForMode calls the underlying RemoveFromRunLoopForMode.
-func (x *Stream) RemoveFromRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString) {
-	x.inner.RemoveFromRunLoopForMode(aRunLoop, mode)
+func (x *Stream) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *Stream) Delegate() raw.NSStreamDelegate {
-	return x.inner.Delegate()
+func (x *Stream) StreamStatus() StreamStatus {
+	_r := objc.Send[StreamStatus](objref.IDOf(x), objc.RegisterName("streamStatus"))
+	return _r
 }
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *Stream) SetDelegate(delegate raw.NSStreamDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// StreamStatus calls the underlying StreamStatus.
-func (x *Stream) StreamStatus() NSStreamStatus {
-	return NSStreamStatus(x.inner.StreamStatus())
-}
-
-// StreamError calls the underlying StreamError.
-func (x *Stream) StreamError() unsafe.Pointer {
-	return x.inner.StreamError()
-}
-
-func (x *Stream) asStream() *raw.NSStream { return x.inner }
-
-func (x *Stream) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Streamable is the interface implemented by [Stream], for mocking and DI.
 type Streamable interface {
-	Unwrap() *raw.NSStream
-	WithDelegate(delegate raw.NSStreamDelegate) *Stream
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Stream
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Stream
 	Open()
 	Close()
-	PropertyForKey(key *raw.NSString) objc.ID
-	SetPropertyForKey(property objc.ID, key *raw.NSString) bool
-	ScheduleInRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
-	RemoveFromRunLoopForMode(aRunLoop *raw.NSRunLoop, mode *raw.NSString)
-	Delegate() raw.NSStreamDelegate
-	SetDelegate(delegate raw.NSStreamDelegate)
-	StreamStatus() NSStreamStatus
-	StreamError() unsafe.Pointer
+	PropertyForKey(key *String) obj.Object
+	SetPropertyForKey(property obj.Object, key *String) bool
+	ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String)
+	RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String)
+	StreamStatus() StreamStatus
 }
 
 var _ Streamable = (*Stream)(nil)

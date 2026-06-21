@@ -5,109 +5,133 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description of changes that occurred in the set of asset or collection objects listed in a fetch result.
 //
-// FetchResultChangeDetails wraps [raw.PHFetchResultChangeDetails] with a fluent Go API.
+// FetchResultChangeDetails is an idiomatic wrapper over the Objective-C class PHFetchResultChangeDetails.
 type FetchResultChangeDetails struct {
-	inner *raw.PHFetchResultChangeDetails[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHFetchResultChangeDetails].
-func (x *FetchResultChangeDetails) Unwrap() *raw.PHFetchResultChangeDetails[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FetchResultChangeDetails) ID() objc.ID { return x.inner.Ptr() }
-
-// FetchResultChangeDetailsFromID adopts an existing object pointer as a FetchResultChangeDetails (nil for 0).
+// FetchResultChangeDetailsFromID adopts an existing Objective-C object as a FetchResultChangeDetails
+// (nil for 0), retaining it and registering a release finalizer.
 func FetchResultChangeDetailsFromID(id objc.ID) *FetchResultChangeDetails {
 	if id == 0 {
 		return nil
 	}
-	return &FetchResultChangeDetails{inner: raw.PHFetchResultChangeDetailsFromID[objc.ID](id)}
+	x := &FetchResultChangeDetails{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFetchResultChangeDetails creates a new [FetchResultChangeDetails].
+// fetchResultChangeDetailsAdopt wraps an Objective-C object that this code just created as a
+// FetchResultChangeDetails (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fetchResultChangeDetailsAdopt(id objc.ID) *FetchResultChangeDetails {
+	if id == 0 {
+		return nil
+	}
+	x := &FetchResultChangeDetails{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FetchResultChangeDetails) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FetchResultChangeDetails) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FetchResultChangeDetails) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFetchResultChangeDetails creates a new FetchResultChangeDetails.
 func NewFetchResultChangeDetails() *FetchResultChangeDetails {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHFetchResultChangeDetails")), objc.RegisterName("new"))
-	return &FetchResultChangeDetails{inner: raw.PHFetchResultChangeDetailsFromID[objc.ID](_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHFetchResultChangeDetails")), objc.RegisterName("new"))
+	return fetchResultChangeDetailsAdopt(_id)
 }
 
 // Runs the specified block for each case where an object has moved from one index to another in the fetch result.
-//
-// EnumerateMovesWith calls the underlying EnumerateMovesWith.
-func (x *FetchResultChangeDetails) EnumerateMovesWith(handler func(uint, uint)) {
-	x.inner.EnumerateMovesWith(handler)
+func (x *FetchResultChangeDetails) EnumerateMovesWith(handler func(int, int)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateMovesWithBlock:"), objc.NewBlock(func(_ objc.Block, _b0 int, _b1 int) { handler(_b0, _b1) }))
 }
 
-// FetchResultBeforeChanges calls the underlying FetchResultBeforeChanges.
-func (x *FetchResultChangeDetails) FetchResultBeforeChanges() *raw.PHFetchResult[objc.ID] {
-	return x.inner.FetchResultBeforeChanges()
+func (x *FetchResultChangeDetails) FetchResultBeforeChanges() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchResultBeforeChanges"))
+	return obj.Wrap(_r)
 }
 
-// FetchResultAfterChanges calls the underlying FetchResultAfterChanges.
-func (x *FetchResultChangeDetails) FetchResultAfterChanges() *raw.PHFetchResult[objc.ID] {
-	return x.inner.FetchResultAfterChanges()
+func (x *FetchResultChangeDetails) FetchResultAfterChanges() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchResultAfterChanges"))
+	return obj.Wrap(_r)
 }
 
-// HasIncrementalChanges calls the underlying HasIncrementalChanges.
 func (x *FetchResultChangeDetails) HasIncrementalChanges() bool {
-	return x.inner.HasIncrementalChanges()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasIncrementalChanges"))
+	return _r
 }
 
-// RemovedIndexes calls the underlying RemovedIndexes.
-func (x *FetchResultChangeDetails) RemovedIndexes() *foundation.NSIndexSet {
-	return x.inner.RemovedIndexes()
+func (x *FetchResultChangeDetails) RemovedIndexes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removedIndexes"))
+	return obj.Wrap(_r)
 }
 
-// RemovedObjects calls the underlying RemovedObjects.
-func (x *FetchResultChangeDetails) RemovedObjects() *foundation.NSArray[objc.ID] {
-	return x.inner.RemovedObjects()
+func (x *FetchResultChangeDetails) RemovedObjects() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removedObjects"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// InsertedIndexes calls the underlying InsertedIndexes.
-func (x *FetchResultChangeDetails) InsertedIndexes() *foundation.NSIndexSet {
-	return x.inner.InsertedIndexes()
+func (x *FetchResultChangeDetails) InsertedIndexes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertedIndexes"))
+	return obj.Wrap(_r)
 }
 
-// InsertedObjects calls the underlying InsertedObjects.
-func (x *FetchResultChangeDetails) InsertedObjects() *foundation.NSArray[objc.ID] {
-	return x.inner.InsertedObjects()
+func (x *FetchResultChangeDetails) InsertedObjects() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertedObjects"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// ChangedIndexes calls the underlying ChangedIndexes.
-func (x *FetchResultChangeDetails) ChangedIndexes() *foundation.NSIndexSet {
-	return x.inner.ChangedIndexes()
+func (x *FetchResultChangeDetails) ChangedIndexes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changedIndexes"))
+	return obj.Wrap(_r)
 }
 
-// ChangedObjects calls the underlying ChangedObjects.
-func (x *FetchResultChangeDetails) ChangedObjects() *foundation.NSArray[objc.ID] {
-	return x.inner.ChangedObjects()
+func (x *FetchResultChangeDetails) ChangedObjects() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changedObjects"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// HasMoves calls the underlying HasMoves.
 func (x *FetchResultChangeDetails) HasMoves() bool {
-	return x.inner.HasMoves()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasMoves"))
+	return _r
 }
 
 // FetchResultChangeDetailsable is the interface implemented by [FetchResultChangeDetails], for mocking and DI.
 type FetchResultChangeDetailsable interface {
-	Unwrap() *raw.PHFetchResultChangeDetails[objc.ID]
-	EnumerateMovesWith(handler func(uint, uint))
-	FetchResultBeforeChanges() *raw.PHFetchResult[objc.ID]
-	FetchResultAfterChanges() *raw.PHFetchResult[objc.ID]
+	obj.Object
+	EnumerateMovesWith(handler func(int, int))
+	FetchResultBeforeChanges() obj.Object
+	FetchResultAfterChanges() obj.Object
 	HasIncrementalChanges() bool
-	RemovedIndexes() *foundation.NSIndexSet
-	RemovedObjects() *foundation.NSArray[objc.ID]
-	InsertedIndexes() *foundation.NSIndexSet
-	InsertedObjects() *foundation.NSArray[objc.ID]
-	ChangedIndexes() *foundation.NSIndexSet
-	ChangedObjects() *foundation.NSArray[objc.ID]
+	RemovedIndexes() obj.Object
+	RemovedObjects() []obj.Object
+	InsertedIndexes() obj.Object
+	InsertedObjects() []obj.Object
+	ChangedIndexes() obj.Object
+	ChangedObjects() []obj.Object
 	HasMoves() bool
 }
 

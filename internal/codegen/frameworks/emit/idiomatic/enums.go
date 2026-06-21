@@ -89,17 +89,24 @@ func emitEnums(
 	}
 	sort.Strings(refNames)
 
+	// Enum type names were reserved up front (see EmitFrameworkWrappers), so this
+	// pass tracks the names it actually defines locally to avoid emitting two
+	// definitions when two enums shorten to the same name.
+	emitted := map[string]bool{}
 	var body bytes.Buffer
 	needsFmt, needsStrings := false, false
 	for _, goType := range refNames {
-		if takenNames[goType] {
+		// Use the de-prefixed name, matching localizeEnumType so signatures and
+		// this definition agree.
+		localName := deprefixEnumName(goType, frameworkPrefix(fw))
+		if emitted[localName] {
 			continue
 		}
-		view := buildEnumView(goType, enumsByGoType[goType])
+		view := buildEnumView(localName, enumsByGoType[goType], frameworkPrefix(fw))
 		if len(view.Members) == 0 {
 			continue
 		}
-		takenNames[goType] = true
+		emitted[localName] = true
 		if view.IsBitmask {
 			needsStrings = true
 		} else {
@@ -128,7 +135,7 @@ func emitEnums(
 // the raw emitter's decisions: underlying type via emit.MapEnumGoType +
 // UpgradeEnumTypeIfOverflow, names via naming.GoTypeName, (name,value) dedup for
 // the const block, and value dedup for the String() switch.
-func buildEnumView(goName string, e meta.Enum) enumView {
+func buildEnumView(goName string, e meta.Enum, prefix string) enumView {
 	goType := e.GoType
 	if goType == "" {
 		goType = "int64"
@@ -143,7 +150,7 @@ func buildEnumView(goName string, e meta.Enum) enumView {
 		if m.Availability.IsUnavailable {
 			continue
 		}
-		constName := naming.GoTypeName(m.Name)
+		constName := deprefixEnumName(naming.GoTypeName(m.Name), prefix)
 		k := nv{constName, m.Value}
 		if seen[k] {
 			continue
@@ -182,7 +189,7 @@ func buildEnumView(goName string, e meta.Enum) enumView {
 // member. prefix is "\t" inside the const block, "" at top level.
 func renderEnumComment(doc string, avail meta.Availability, prefix string) string {
 	var sb strings.Builder
-	if doc != "" {
+	if doc = cleanDoc(doc); doc != "" {
 		for _, line := range strings.Split(strings.TrimRight(doc, "\n"), "\n") {
 			fmt.Fprintf(&sb, "%s// %s\n", prefix, line)
 		}

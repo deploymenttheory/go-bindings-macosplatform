@@ -5,107 +5,126 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRRVCRunModeClusterChangeToModeParams wraps [raw.MTRRVCRunModeClusterChangeToModeParams] with a fluent Go API.
+// MTRRVCRunModeClusterChangeToModeParams is an idiomatic wrapper over the Objective-C class MTRRVCRunModeClusterChangeToModeParams.
 type MTRRVCRunModeClusterChangeToModeParams struct {
-	inner *raw.MTRRVCRunModeClusterChangeToModeParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRRVCRunModeClusterChangeToModeParams].
-func (x *MTRRVCRunModeClusterChangeToModeParams) Unwrap() *raw.MTRRVCRunModeClusterChangeToModeParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRRVCRunModeClusterChangeToModeParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRRVCRunModeClusterChangeToModeParamsFromID adopts an existing object pointer as a MTRRVCRunModeClusterChangeToModeParams (nil for 0).
+// MTRRVCRunModeClusterChangeToModeParamsFromID adopts an existing Objective-C object as a MTRRVCRunModeClusterChangeToModeParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRRVCRunModeClusterChangeToModeParamsFromID(id objc.ID) *MTRRVCRunModeClusterChangeToModeParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRRVCRunModeClusterChangeToModeParams{inner: raw.MTRRVCRunModeClusterChangeToModeParamsFromID(id)}
+	x := &MTRRVCRunModeClusterChangeToModeParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRRVCRunModeClusterChangeToModeParams creates a new [MTRRVCRunModeClusterChangeToModeParams].
+// mTRRVCRunModeClusterChangeToModeParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRRVCRunModeClusterChangeToModeParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRRVCRunModeClusterChangeToModeParamsAdopt(id objc.ID) *MTRRVCRunModeClusterChangeToModeParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRRVCRunModeClusterChangeToModeParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRRVCRunModeClusterChangeToModeParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRRVCRunModeClusterChangeToModeParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRRVCRunModeClusterChangeToModeParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRRVCRunModeClusterChangeToModeParams creates a new MTRRVCRunModeClusterChangeToModeParams.
 func NewMTRRVCRunModeClusterChangeToModeParams() *MTRRVCRunModeClusterChangeToModeParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRRVCRunModeClusterChangeToModeParams")), objc.RegisterName("new"))
-	return &MTRRVCRunModeClusterChangeToModeParams{inner: raw.MTRRVCRunModeClusterChangeToModeParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRRVCRunModeClusterChangeToModeParams")), objc.RegisterName("new"))
+	return mTRRVCRunModeClusterChangeToModeParamsAdopt(_id)
 }
 
-// WithNewMode sets the newMode property and returns the receiver for chaining.
-func (x *MTRRVCRunModeClusterChangeToModeParams) WithNewMode(newMode *foundation.NSNumber) *MTRRVCRunModeClusterChangeToModeParams {
-	x.inner.SetNewMode(newMode)
+// WithNewMode sets newMode and returns the receiver so calls can be chained.
+func (x *MTRRVCRunModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTRRVCRunModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRRVCRunModeClusterChangeToModeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRRVCRunModeClusterChangeToModeParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRRVCRunModeClusterChangeToModeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRRVCRunModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRRVCRunModeClusterChangeToModeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRRVCRunModeClusterChangeToModeParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRRVCRunModeClusterChangeToModeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRRVCRunModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// GetNewMode calls the underlying GetNewMode.
-func (x *MTRRVCRunModeClusterChangeToModeParams) GetNewMode() *foundation.NSNumber {
-	return x.inner.GetNewMode()
+func (x *MTRRVCRunModeClusterChangeToModeParams) GetNewMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewMode"))
+	return obj.Wrap(_r)
 }
 
-// SetNewMode calls the underlying SetNewMode.
-func (x *MTRRVCRunModeClusterChangeToModeParams) SetNewMode(newMode *foundation.NSNumber) {
-	x.inner.SetNewMode(newMode)
+func (x *MTRRVCRunModeClusterChangeToModeParams) SetNewMode(newMode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRRVCRunModeClusterChangeToModeParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRRVCRunModeClusterChangeToModeParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRRVCRunModeClusterChangeToModeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRRVCRunModeClusterChangeToModeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRRVCRunModeClusterChangeToModeParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRRVCRunModeClusterChangeToModeParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRRVCRunModeClusterChangeToModeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRRVCRunModeClusterChangeToModeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRRVCRunModeClusterChangeToModeParamsable is the interface implemented by [MTRRVCRunModeClusterChangeToModeParams], for mocking and DI.
 type MTRRVCRunModeClusterChangeToModeParamsable interface {
-	Unwrap() *raw.MTRRVCRunModeClusterChangeToModeParams
-	WithNewMode(newMode *foundation.NSNumber) *MTRRVCRunModeClusterChangeToModeParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRRVCRunModeClusterChangeToModeParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRRVCRunModeClusterChangeToModeParams
-	GetNewMode() *foundation.NSNumber
-	SetNewMode(newMode *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithNewMode(newMode obj.Object) *MTRRVCRunModeClusterChangeToModeParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRRVCRunModeClusterChangeToModeParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRRVCRunModeClusterChangeToModeParams
+	GetNewMode() obj.Object
+	SetNewMode(newMode obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRRVCRunModeClusterChangeToModeParamsable = (*MTRRVCRunModeClusterChangeToModeParams)(nil)

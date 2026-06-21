@@ -5,95 +5,76 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A filter that transposes an image.
 //
-// ImageTranspose wraps [raw.MPSImageTranspose] with a fluent Go API.
+// ImageTranspose is an idiomatic wrapper over the Objective-C class MPSImageTranspose.
 type ImageTranspose struct {
-	inner *raw.MPSImageTranspose
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageTranspose].
-func (x *ImageTranspose) Unwrap() *raw.MPSImageTranspose { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageTranspose) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageTransposeFromID adopts an existing object pointer as a ImageTranspose (nil for 0).
+// ImageTransposeFromID adopts an existing Objective-C object as a ImageTranspose
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageTransposeFromID(id objc.ID) *ImageTranspose {
 	if id == 0 {
 		return nil
 	}
-	return &ImageTranspose{inner: raw.MPSImageTransposeFromID(id)}
+	x := &ImageTranspose{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewImageTranspose creates a new [ImageTranspose].
+// imageTransposeAdopt wraps an Objective-C object that this code just created as a
+// ImageTranspose (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageTransposeAdopt(id objc.ID) *ImageTranspose {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageTranspose{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ImageTranspose) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageTranspose) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageTranspose) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageTranspose creates a new ImageTranspose.
 func NewImageTranspose() *ImageTranspose {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageTranspose")), objc.RegisterName("new"))
-	return &ImageTranspose{inner: raw.MPSImageTransposeFromID(_id)}
-}
-
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageTranspose) WithOffset(offset mpscore.MPSOffset) *ImageTranspose {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
-	return x
-}
-
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageTranspose) WithClipRect(clipRect metal.MTLRegion) *ImageTranspose {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
-	return x
-}
-
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageTranspose) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageTranspose {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageTranspose) WithOptions(options mpscore.MPSKernelOptions) *ImageTranspose {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageTranspose")), objc.RegisterName("new"))
+	return imageTransposeAdopt(_id)
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ImageTranspose) WithLabel(label string) *ImageTranspose {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-func (x *ImageTranspose) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
-}
-
-func (x *ImageTranspose) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
-
 // ImageTransposeable is the interface implemented by [ImageTranspose], for mocking and DI.
 type ImageTransposeable interface {
-	Unwrap() *raw.MPSImageTranspose
-	WithOffset(offset mpscore.MPSOffset) *ImageTranspose
-	WithClipRect(clipRect metal.MTLRegion) *ImageTranspose
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageTranspose
-	WithOptions(options mpscore.MPSKernelOptions) *ImageTranspose
+	obj.Object
 	WithLabel(label string) *ImageTranspose
 }
 

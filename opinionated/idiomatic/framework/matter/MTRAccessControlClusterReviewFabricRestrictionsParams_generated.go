@@ -5,100 +5,119 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRAccessControlClusterReviewFabricRestrictionsParams wraps [raw.MTRAccessControlClusterReviewFabricRestrictionsParams] with a fluent Go API.
+// MTRAccessControlClusterReviewFabricRestrictionsParams is an idiomatic wrapper over the Objective-C class MTRAccessControlClusterReviewFabricRestrictionsParams.
 type MTRAccessControlClusterReviewFabricRestrictionsParams struct {
-	inner *raw.MTRAccessControlClusterReviewFabricRestrictionsParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRAccessControlClusterReviewFabricRestrictionsParams].
-func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) Unwrap() *raw.MTRAccessControlClusterReviewFabricRestrictionsParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRAccessControlClusterReviewFabricRestrictionsParamsFromID adopts an existing object pointer as a MTRAccessControlClusterReviewFabricRestrictionsParams (nil for 0).
+// MTRAccessControlClusterReviewFabricRestrictionsParamsFromID adopts an existing Objective-C object as a MTRAccessControlClusterReviewFabricRestrictionsParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRAccessControlClusterReviewFabricRestrictionsParamsFromID(id objc.ID) *MTRAccessControlClusterReviewFabricRestrictionsParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRAccessControlClusterReviewFabricRestrictionsParams{inner: raw.MTRAccessControlClusterReviewFabricRestrictionsParamsFromID(id)}
+	x := &MTRAccessControlClusterReviewFabricRestrictionsParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRAccessControlClusterReviewFabricRestrictionsParams creates a new [MTRAccessControlClusterReviewFabricRestrictionsParams].
+// mTRAccessControlClusterReviewFabricRestrictionsParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRAccessControlClusterReviewFabricRestrictionsParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRAccessControlClusterReviewFabricRestrictionsParamsAdopt(id objc.ID) *MTRAccessControlClusterReviewFabricRestrictionsParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRAccessControlClusterReviewFabricRestrictionsParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRAccessControlClusterReviewFabricRestrictionsParams creates a new MTRAccessControlClusterReviewFabricRestrictionsParams.
 func NewMTRAccessControlClusterReviewFabricRestrictionsParams() *MTRAccessControlClusterReviewFabricRestrictionsParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAccessControlClusterReviewFabricRestrictionsParams")), objc.RegisterName("new"))
-	return &MTRAccessControlClusterReviewFabricRestrictionsParams{inner: raw.MTRAccessControlClusterReviewFabricRestrictionsParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRAccessControlClusterReviewFabricRestrictionsParams")), objc.RegisterName("new"))
+	return mTRAccessControlClusterReviewFabricRestrictionsParamsAdopt(_id)
 }
 
 // Controls whether the command is a timed command (using Timed Invoke).
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRAccessControlClusterReviewFabricRestrictionsParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAccessControlClusterReviewFabricRestrictionsParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRAccessControlClusterReviewFabricRestrictionsParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAccessControlClusterReviewFabricRestrictionsParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// Arl calls the underlying Arl.
-func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) Arl() *foundation.NSArray[objc.ID] {
-	return x.inner.Arl()
+func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) Arl() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arl"))
+	return obj.Wrap(_r)
 }
 
-// SetArl calls the underlying SetArl.
-func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) SetArl(arl *foundation.NSArray[objc.ID]) {
-	x.inner.SetArl(arl)
+func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) SetArl(arl obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArl:"), objref.IDOf(arl))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRAccessControlClusterReviewFabricRestrictionsParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRAccessControlClusterReviewFabricRestrictionsParamsable is the interface implemented by [MTRAccessControlClusterReviewFabricRestrictionsParams], for mocking and DI.
 type MTRAccessControlClusterReviewFabricRestrictionsParamsable interface {
-	Unwrap() *raw.MTRAccessControlClusterReviewFabricRestrictionsParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRAccessControlClusterReviewFabricRestrictionsParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRAccessControlClusterReviewFabricRestrictionsParams
-	Arl() *foundation.NSArray[objc.ID]
-	SetArl(arl *foundation.NSArray[objc.ID])
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAccessControlClusterReviewFabricRestrictionsParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAccessControlClusterReviewFabricRestrictionsParams
+	Arl() obj.Object
+	SetArl(arl obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRAccessControlClusterReviewFabricRestrictionsParamsable = (*MTRAccessControlClusterReviewFabricRestrictionsParams)(nil)

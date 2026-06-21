@@ -5,42 +5,39 @@
 package oslog
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/oslog"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
+	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// LocalStoreAndReturnError calls the underlying OSLogStoreLocalStoreAndReturnError.
+// Creates a log store representing the Mac’s local store.
 func LocalStoreAndReturnError() (*LogStore, error) {
-	_r, _err := raw.OSLogStoreLocalStoreAndReturnError()
-	if _err != nil {
-		return nil, _err
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("OSLogStore")), objc.RegisterName("localStoreAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &LogStore{inner: _r}, nil
+	return LogStoreFromID(_r), nil
 }
 
-// StoreWithScopeError calls the underlying OSLogStoreStoreWithScopeError.
-func StoreWithScopeError(scope OSLogStoreScope) (*LogStore, error) {
-	_r, _err := raw.OSLogStoreStoreWithScopeError(raw.OSLogStoreScope(scope))
-	if _err != nil {
-		return nil, _err
+// Create an OSLogStore for a subset of entries in the local store.
+func StoreWithScopeError(scope LogStoreScope) (*LogStore, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("OSLogStore")), objc.RegisterName("storeWithScope:error:"), scope, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &LogStore{inner: _r}, nil
+	return LogStoreFromID(_r), nil
 }
 
-// StoreWithURLError calls the underlying OSLogStoreStoreWithURLError.
+// Creates a log store based on a log archive.
 func StoreWithURLError(url string) (*LogStore, error) {
-	_r, _err := raw.OSLogStoreStoreWithURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _err != nil {
-		return nil, _err
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("OSLogStore")), objc.RegisterName("storeWithURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &LogStore{inner: _r}, nil
+	return LogStoreFromID(_r), nil
 }

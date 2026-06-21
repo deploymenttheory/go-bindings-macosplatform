@@ -5,217 +5,194 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A representation of user interaction for secure PIN operations on a Smart Card reader.
 //
-// SmartCardUserInteractionForPINOperation wraps [raw.TKSmartCardUserInteractionForPINOperation] with a fluent Go API.
+// SmartCardUserInteractionForPINOperation is an idiomatic wrapper over the Objective-C class TKSmartCardUserInteractionForPINOperation.
 type SmartCardUserInteractionForPINOperation struct {
-	inner *raw.TKSmartCardUserInteractionForPINOperation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKSmartCardUserInteractionForPINOperation].
-func (x *SmartCardUserInteractionForPINOperation) Unwrap() *raw.TKSmartCardUserInteractionForPINOperation {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SmartCardUserInteractionForPINOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// SmartCardUserInteractionForPINOperationFromID adopts an existing object pointer as a SmartCardUserInteractionForPINOperation (nil for 0).
+// SmartCardUserInteractionForPINOperationFromID adopts an existing Objective-C object as a SmartCardUserInteractionForPINOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func SmartCardUserInteractionForPINOperationFromID(id objc.ID) *SmartCardUserInteractionForPINOperation {
 	if id == 0 {
 		return nil
 	}
-	return &SmartCardUserInteractionForPINOperation{inner: raw.TKSmartCardUserInteractionForPINOperationFromID(id)}
+	x := &SmartCardUserInteractionForPINOperation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSmartCardUserInteractionForPINOperation creates a new [SmartCardUserInteractionForPINOperation].
+// smartCardUserInteractionForPINOperationAdopt wraps an Objective-C object that this code just created as a
+// SmartCardUserInteractionForPINOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func smartCardUserInteractionForPINOperationAdopt(id objc.ID) *SmartCardUserInteractionForPINOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &SmartCardUserInteractionForPINOperation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SmartCardUserInteractionForPINOperation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SmartCardUserInteractionForPINOperation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SmartCardUserInteractionForPINOperation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSmartCardUserInteractionForPINOperation creates a new SmartCardUserInteractionForPINOperation.
 func NewSmartCardUserInteractionForPINOperation() *SmartCardUserInteractionForPINOperation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSmartCardUserInteractionForPINOperation")), objc.RegisterName("new"))
-	return &SmartCardUserInteractionForPINOperation{inner: raw.TKSmartCardUserInteractionForPINOperationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("TKSmartCardUserInteractionForPINOperation")), objc.RegisterName("new"))
+	return smartCardUserInteractionForPINOperationAdopt(_id)
 }
 
 // The conditions under which PIN entry should be considered complete.
 //
-// WithPINCompletion sets the pINCompletion property and returns the receiver for chaining.
-func (x *SmartCardUserInteractionForPINOperation) WithPINCompletion(pINCompletion TKSmartCardPINCompletion) *SmartCardUserInteractionForPINOperation {
-	x.inner.SetPINCompletion(raw.TKSmartCardPINCompletion(pINCompletion))
+// WithPINCompletion sets pINCompletion and returns the receiver so calls can be chained.
+func (x *SmartCardUserInteractionForPINOperation) WithPINCompletion(pINCompletion SmartCardPINCompletion) *SmartCardUserInteractionForPINOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINCompletion:"), pINCompletion)
 	return x
 }
 
 // A list of message indices referring to a predefined message table, used to specify the type and number of messages displayed during the PIN operation. nil by default.
 //
-// WithPINMessageIndices sets the collection, converting the Go slice to an NSArray.
-func (x *SmartCardUserInteractionForPINOperation) WithPINMessageIndices(items ...*foundation.NSNumber) *SmartCardUserInteractionForPINOperation {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetPINMessageIndices(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetPINMessageIndices(_arr)
+// WithPINMessageIndices sets the collection and returns the receiver so calls can be chained.
+func (x *SmartCardUserInteractionForPINOperation) WithPINMessageIndices(items ...obj.Object) *SmartCardUserInteractionForPINOperation {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINMessageIndices:"), _arr)
 	return x
 }
 
 // The locale for the displayed messages. If nil, the user’s current locale is used. By default, this value is the current locale of the system.
 //
-// WithLocale sets the locale property and returns the receiver for chaining.
-func (x *SmartCardUserInteractionForPINOperation) WithLocale(locale *foundation.NSLocale) *SmartCardUserInteractionForPINOperation {
-	x.inner.SetLocale(locale)
+// WithLocale sets locale and returns the receiver so calls can be chained.
+func (x *SmartCardUserInteractionForPINOperation) WithLocale(locale obj.Object) *SmartCardUserInteractionForPINOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return x
 }
 
 // The SW1-SW2 status bytes.
 //
-// WithResultSW sets the resultSW property and returns the receiver for chaining.
+// WithResultSW sets resultSW and returns the receiver so calls can be chained.
 func (x *SmartCardUserInteractionForPINOperation) WithResultSW(resultSW uint16) *SmartCardUserInteractionForPINOperation {
-	x.inner.SetResultSW(resultSW)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultSW:"), resultSW)
 	return x
 }
 
 // The returned data without SW1-SW2 bytes, if any.
 //
-// WithResultData sets the resultData property and returns the receiver for chaining.
-func (x *SmartCardUserInteractionForPINOperation) WithResultData(resultData *foundation.NSData) *SmartCardUserInteractionForPINOperation {
-	x.inner.SetResultData(resultData)
-	return x
-}
-
-// The delegate for observing events that occur during the user interaction.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *SmartCardUserInteractionForPINOperation) WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteractionForPINOperation {
-	x.inner.TKSmartCardUserInteraction.SetDelegate(delegate)
+// WithResultData sets resultData and returns the receiver so calls can be chained.
+func (x *SmartCardUserInteractionForPINOperation) WithResultData(resultData obj.Object) *SmartCardUserInteractionForPINOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultData:"), objref.IDOf(resultData))
 	return x
 }
 
 // The timeout, in seconds, for initial interaction. If set to 0, the reader-defined default timeout is used. 0 by default.
 //
-// WithInitialTimeout sets the initialTimeout property and returns the receiver for chaining.
+// WithInitialTimeout sets initialTimeout and returns the receiver so calls can be chained.
 func (x *SmartCardUserInteractionForPINOperation) WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForPINOperation {
-	x.inner.TKSmartCardUserInteraction.SetInitialTimeout(initialTimeout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInitialTimeout:"), initialTimeout)
 	return x
 }
 
 // The timeout, in seconds, after the first key stroke. If set to 0, the reader-defined default timeout is used. 0 by default.
 //
-// WithInteractionTimeout sets the interactionTimeout property and returns the receiver for chaining.
+// WithInteractionTimeout sets interactionTimeout and returns the receiver so calls can be chained.
 func (x *SmartCardUserInteractionForPINOperation) WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForPINOperation {
-	x.inner.TKSmartCardUserInteraction.SetInteractionTimeout(interactionTimeout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteractionTimeout:"), interactionTimeout)
 	return x
 }
 
-// Bitmask specifying condition(s) under which PIN entry should be considered complete. @note Default value: TKSmartCardPINCompletionKey
-//
-// PINCompletion calls the underlying PINCompletion.
-func (x *SmartCardUserInteractionForPINOperation) PINCompletion() TKSmartCardPINCompletion {
-	return TKSmartCardPINCompletion(x.inner.PINCompletion())
+// Bitmask specifying condition(s) under which PIN entry should be considered complete.
+func (x *SmartCardUserInteractionForPINOperation) PINCompletion() SmartCardPINCompletion {
+	_r := objc.Send[SmartCardPINCompletion](objref.IDOf(x), objc.RegisterName("PINCompletion"))
+	return _r
 }
 
-// SetPINCompletion calls the underlying SetPINCompletion.
-func (x *SmartCardUserInteractionForPINOperation) SetPINCompletion(pINCompletion TKSmartCardPINCompletion) {
-	x.inner.SetPINCompletion(raw.TKSmartCardPINCompletion(pINCompletion))
+func (x *SmartCardUserInteractionForPINOperation) SetPINCompletion(pINCompletion SmartCardPINCompletion) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINCompletion:"), pINCompletion)
 }
 
-// List of message indices referring to a predefined message table. It is used to specify the type and number of messages displayed during the PIN operation. @discussion If nil, the reader does not display any message (reader specific). Typically, PIN verification takes 1 message, PIN modification 1-3 messages. @note Default value: nil
+// List of message indices referring to a predefined message table. It is used to specify the type and number of messages displayed during the PIN operation. If nil, the reader does not display any message (reader specific). Typically, PIN verification takes 1 message, PIN modification 1-3 messages.
 //
 // PINMessageIndices returns the collection as a Go slice.
-func (x *SmartCardUserInteractionForPINOperation) PINMessageIndices() []*foundation.NSNumber {
-	arr := x.inner.PINMessageIndices()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *SmartCardUserInteractionForPINOperation) PINMessageIndices() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("PINMessageIndices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetPINMessageIndices calls the underlying SetPINMessageIndices.
-func (x *SmartCardUserInteractionForPINOperation) SetPINMessageIndices(pINMessageIndices *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetPINMessageIndices(pINMessageIndices)
+func (x *SmartCardUserInteractionForPINOperation) SetPINMessageIndices(pINMessageIndices []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPINMessageIndices:"), purego.SliceToNSArray(pINMessageIndices, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Locale defining the language of displayed messages. If set to nil, the user's current locale is used. @note Default value: the user's current locale
-//
-// Locale calls the underlying Locale.
-func (x *SmartCardUserInteractionForPINOperation) Locale() *foundation.NSLocale {
-	return x.inner.Locale()
+// Locale defining the language of displayed messages. If set to nil, the user's current locale is used.
+func (x *SmartCardUserInteractionForPINOperation) Locale() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
+	return obj.Wrap(_r)
 }
 
-// SetLocale calls the underlying SetLocale.
-func (x *SmartCardUserInteractionForPINOperation) SetLocale(locale *foundation.NSLocale) {
-	x.inner.SetLocale(locale)
+func (x *SmartCardUserInteractionForPINOperation) SetLocale(locale obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 }
 
 // SW1SW2 result code.
-//
-// ResultSW calls the underlying ResultSW.
 func (x *SmartCardUserInteractionForPINOperation) ResultSW() uint16 {
-	return x.inner.ResultSW()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("resultSW"))
+	return _r
 }
 
-// SetResultSW calls the underlying SetResultSW.
 func (x *SmartCardUserInteractionForPINOperation) SetResultSW(resultSW uint16) {
-	x.inner.SetResultSW(resultSW)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultSW:"), resultSW)
 }
 
 // Optional block of returned data (without SW1SW2 bytes).
-//
-// ResultData calls the underlying ResultData.
-func (x *SmartCardUserInteractionForPINOperation) ResultData() *foundation.NSData {
-	return x.inner.ResultData()
+func (x *SmartCardUserInteractionForPINOperation) ResultData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultData"))
+	return obj.Wrap(_r)
 }
 
-// SetResultData calls the underlying SetResultData.
-func (x *SmartCardUserInteractionForPINOperation) SetResultData(resultData *foundation.NSData) {
-	x.inner.SetResultData(resultData)
-}
-
-func (x *SmartCardUserInteractionForPINOperation) asSmartCardUserInteractionForPINOperation() *raw.TKSmartCardUserInteractionForPINOperation {
-	return x.inner
-}
-
-func (x *SmartCardUserInteractionForPINOperation) asSmartCardUserInteraction() *raw.TKSmartCardUserInteraction {
-	return &x.inner.TKSmartCardUserInteraction
+func (x *SmartCardUserInteractionForPINOperation) SetResultData(resultData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultData:"), objref.IDOf(resultData))
 }
 
 // SmartCardUserInteractionForPINOperationable is the interface implemented by [SmartCardUserInteractionForPINOperation], for mocking and DI.
 type SmartCardUserInteractionForPINOperationable interface {
-	Unwrap() *raw.TKSmartCardUserInteractionForPINOperation
-	WithPINCompletion(pINCompletion TKSmartCardPINCompletion) *SmartCardUserInteractionForPINOperation
-	WithPINMessageIndices(items ...*foundation.NSNumber) *SmartCardUserInteractionForPINOperation
-	WithLocale(locale *foundation.NSLocale) *SmartCardUserInteractionForPINOperation
+	obj.Object
+	WithPINCompletion(pINCompletion SmartCardPINCompletion) *SmartCardUserInteractionForPINOperation
+	WithPINMessageIndices(items ...obj.Object) *SmartCardUserInteractionForPINOperation
+	WithLocale(locale obj.Object) *SmartCardUserInteractionForPINOperation
 	WithResultSW(resultSW uint16) *SmartCardUserInteractionForPINOperation
-	WithResultData(resultData *foundation.NSData) *SmartCardUserInteractionForPINOperation
-	WithDelegate(delegate raw.TKSmartCardUserInteractionDelegate) *SmartCardUserInteractionForPINOperation
+	WithResultData(resultData obj.Object) *SmartCardUserInteractionForPINOperation
 	WithInitialTimeout(initialTimeout float64) *SmartCardUserInteractionForPINOperation
 	WithInteractionTimeout(interactionTimeout float64) *SmartCardUserInteractionForPINOperation
-	PINCompletion() TKSmartCardPINCompletion
-	SetPINCompletion(pINCompletion TKSmartCardPINCompletion)
-	PINMessageIndices() []*foundation.NSNumber
-	SetPINMessageIndices(pINMessageIndices *foundation.NSArray[*foundation.NSNumber])
-	Locale() *foundation.NSLocale
-	SetLocale(locale *foundation.NSLocale)
+	PINCompletion() SmartCardPINCompletion
+	SetPINCompletion(pINCompletion SmartCardPINCompletion)
+	PINMessageIndices() []obj.Object
+	SetPINMessageIndices(pINMessageIndices []obj.Object)
+	Locale() obj.Object
+	SetLocale(locale obj.Object)
 	ResultSW() uint16
 	SetResultSW(resultSW uint16)
-	ResultData() *foundation.NSData
-	SetResultData(resultData *foundation.NSData)
+	ResultData() obj.Object
+	SetResultData(resultData obj.Object)
 }
 
 var _ SmartCardUserInteractionForPINOperationable = (*SmartCardUserInteractionForPINOperation)(nil)

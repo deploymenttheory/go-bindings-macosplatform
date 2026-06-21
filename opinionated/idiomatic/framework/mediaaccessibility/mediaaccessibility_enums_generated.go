@@ -8,40 +8,19 @@ import (
 	"fmt"
 )
 
-// A value that indicates the preferred behavior for a preference setting.
-type MACaptionAppearanceBehavior int64
-
-const (
-	// The preference setting should always be used.
-	KMACaptionAppearanceBehaviorUseValue MACaptionAppearanceBehavior = 0
-	// The preference setting should be used unless the content media being played has its own custom value for this setting.
-	KMACaptionAppearanceBehaviorUseContentIfAvailable MACaptionAppearanceBehavior = 1
-)
-
-func (e MACaptionAppearanceBehavior) String() string {
-	switch e {
-	case KMACaptionAppearanceBehaviorUseValue:
-		return "KMACaptionAppearanceBehaviorUseValue"
-	case KMACaptionAppearanceBehaviorUseContentIfAvailable:
-		return "KMACaptionAppearanceBehaviorUseContentIfAvailable"
-	default:
-		return fmt.Sprintf("MACaptionAppearanceBehavior(%d)", int64(e))
-	}
-}
-
 // A value that specifies the type of captions to display.
-type MACaptionAppearanceDisplayType int64
+type CaptionAppearanceDisplayType int64
 
 const (
 	// Do not display captions unless they are forced for translation.
-	KMACaptionAppearanceDisplayTypeForcedOnly MACaptionAppearanceDisplayType = 0
+	KMACaptionAppearanceDisplayTypeForcedOnly CaptionAppearanceDisplayType = 0
 	// If the language of the audio track differs from the system locale, then captions matching the system locale should be displayed (if available). If the language of the audio and the language of the system locale match, no captions are shown.
-	KMACaptionAppearanceDisplayTypeAutomatic MACaptionAppearanceDisplayType = 1
+	KMACaptionAppearanceDisplayTypeAutomatic CaptionAppearanceDisplayType = 1
 	// The most robust available captioning track should always be displayed, whether subtitles, CC, or SDH. This option is selected by a switch labeled “Closed Captions + SDH” (on the Subtitles & Captioning page of iOS) and “Prefer Closed Captions and SDH” checkbox (on the Captions pane of the Accessibility options in macOS).
-	KMACaptionAppearanceDisplayTypeAlwaysOn MACaptionAppearanceDisplayType = 2
+	KMACaptionAppearanceDisplayTypeAlwaysOn CaptionAppearanceDisplayType = 2
 )
 
-func (e MACaptionAppearanceDisplayType) String() string {
+func (e CaptionAppearanceDisplayType) String() string {
 	switch e {
 	case KMACaptionAppearanceDisplayTypeForcedOnly:
 		return "KMACaptionAppearanceDisplayTypeForcedOnly"
@@ -50,109 +29,27 @@ func (e MACaptionAppearanceDisplayType) String() string {
 	case KMACaptionAppearanceDisplayTypeAlwaysOn:
 		return "KMACaptionAppearanceDisplayTypeAlwaysOn"
 	default:
-		return fmt.Sprintf("MACaptionAppearanceDisplayType(%d)", int64(e))
+		return fmt.Sprintf("CaptionAppearanceDisplayType(%d)", int64(e))
 	}
 }
 
 // A value that specifies which domain to retrieve a preference setting from.
-type MACaptionAppearanceDomain int64
+type CaptionAppearanceDomain int64
 
 const (
 	// The system default value for the setting should be returned.
-	KMACaptionAppearanceDomainDefault MACaptionAppearanceDomain = 0
+	KMACaptionAppearanceDomainDefault CaptionAppearanceDomain = 0
 	// The user’s preferred value for the setting should be returned.
-	KMACaptionAppearanceDomainUser MACaptionAppearanceDomain = 1
+	KMACaptionAppearanceDomainUser CaptionAppearanceDomain = 1
 )
 
-func (e MACaptionAppearanceDomain) String() string {
+func (e CaptionAppearanceDomain) String() string {
 	switch e {
 	case KMACaptionAppearanceDomainDefault:
 		return "KMACaptionAppearanceDomainDefault"
 	case KMACaptionAppearanceDomainUser:
 		return "KMACaptionAppearanceDomainUser"
 	default:
-		return fmt.Sprintf("MACaptionAppearanceDomain(%d)", int64(e))
-	}
-}
-
-// A value that specifies a font style.
-type MACaptionAppearanceFontStyle int64
-
-const (
-	// The default font style for all caption text.
-	KMACaptionAppearanceFontStyleDefault MACaptionAppearanceFontStyle = 0
-	// The font style preferred for the monospaced serif font style.
-	KMACaptionAppearanceFontStyleMonospacedWithSerif MACaptionAppearanceFontStyle = 1
-	// The font style preferred for the proportional serif font style.
-	KMACaptionAppearanceFontStyleProportionalWithSerif MACaptionAppearanceFontStyle = 2
-	// The font style preferred for the monospaced sans serif font style.
-	KMACaptionAppearanceFontStyleMonospacedWithoutSerif MACaptionAppearanceFontStyle = 3
-	// The font style preferred for the proportional sans serif font style.
-	KMACaptionAppearanceFontStyleProportionalWithoutSerif MACaptionAppearanceFontStyle = 4
-	// The font style preferred for the casual font style.
-	KMACaptionAppearanceFontStyleCasual MACaptionAppearanceFontStyle = 5
-	// The font style preferred for the cursive font style.
-	KMACaptionAppearanceFontStyleCursive MACaptionAppearanceFontStyle = 6
-	// The font style preferred for the small capital font style.
-	KMACaptionAppearanceFontStyleSmallCapital MACaptionAppearanceFontStyle = 7
-)
-
-func (e MACaptionAppearanceFontStyle) String() string {
-	switch e {
-	case KMACaptionAppearanceFontStyleDefault:
-		return "KMACaptionAppearanceFontStyleDefault"
-	case KMACaptionAppearanceFontStyleMonospacedWithSerif:
-		return "KMACaptionAppearanceFontStyleMonospacedWithSerif"
-	case KMACaptionAppearanceFontStyleProportionalWithSerif:
-		return "KMACaptionAppearanceFontStyleProportionalWithSerif"
-	case KMACaptionAppearanceFontStyleMonospacedWithoutSerif:
-		return "KMACaptionAppearanceFontStyleMonospacedWithoutSerif"
-	case KMACaptionAppearanceFontStyleProportionalWithoutSerif:
-		return "KMACaptionAppearanceFontStyleProportionalWithoutSerif"
-	case KMACaptionAppearanceFontStyleCasual:
-		return "KMACaptionAppearanceFontStyleCasual"
-	case KMACaptionAppearanceFontStyleCursive:
-		return "KMACaptionAppearanceFontStyleCursive"
-	case KMACaptionAppearanceFontStyleSmallCapital:
-		return "KMACaptionAppearanceFontStyleSmallCapital"
-	default:
-		return fmt.Sprintf("MACaptionAppearanceFontStyle(%d)", int64(e))
-	}
-}
-
-// A value that specifies a style for the outside of the text.
-type MACaptionAppearanceTextEdgeStyle int64
-
-const (
-	// An edge style has not been specified.
-	KMACaptionAppearanceTextEdgeStyleUndefined MACaptionAppearanceTextEdgeStyle = 0
-	// The text should not have a styled edge.
-	KMACaptionAppearanceTextEdgeStyleNone MACaptionAppearanceTextEdgeStyle = 1
-	// An edge makes the text appear to rise above the background.
-	KMACaptionAppearanceTextEdgeStyleRaised MACaptionAppearanceTextEdgeStyle = 2
-	// An edge makes the text appear pushed in.
-	KMACaptionAppearanceTextEdgeStyleDepressed MACaptionAppearanceTextEdgeStyle = 3
-	// A thin outline lies along the edge of the text.
-	KMACaptionAppearanceTextEdgeStyleUniform MACaptionAppearanceTextEdgeStyle = 4
-	// An edge makes the text appear to float above the background.
-	KMACaptionAppearanceTextEdgeStyleDropShadow MACaptionAppearanceTextEdgeStyle = 5
-)
-
-func (e MACaptionAppearanceTextEdgeStyle) String() string {
-	switch e {
-	case KMACaptionAppearanceTextEdgeStyleUndefined:
-		return "KMACaptionAppearanceTextEdgeStyleUndefined"
-	case KMACaptionAppearanceTextEdgeStyleNone:
-		return "KMACaptionAppearanceTextEdgeStyleNone"
-	case KMACaptionAppearanceTextEdgeStyleRaised:
-		return "KMACaptionAppearanceTextEdgeStyleRaised"
-	case KMACaptionAppearanceTextEdgeStyleDepressed:
-		return "KMACaptionAppearanceTextEdgeStyleDepressed"
-	case KMACaptionAppearanceTextEdgeStyleUniform:
-		return "KMACaptionAppearanceTextEdgeStyleUniform"
-	case KMACaptionAppearanceTextEdgeStyleDropShadow:
-		return "KMACaptionAppearanceTextEdgeStyleDropShadow"
-	default:
-		return fmt.Sprintf("MACaptionAppearanceTextEdgeStyle(%d)", int64(e))
+		return fmt.Sprintf("CaptionAppearanceDomain(%d)", int64(e))
 	}
 }

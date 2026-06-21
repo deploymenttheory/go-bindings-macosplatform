@@ -5,75 +5,92 @@
 package passkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that represents an item available to add to as a Wallet pass.
 //
-// IssuerProvisioningExtensionPassEntry wraps [raw.PKIssuerProvisioningExtensionPassEntry] with a fluent Go API.
+// IssuerProvisioningExtensionPassEntry is an idiomatic wrapper over the Objective-C class PKIssuerProvisioningExtensionPassEntry.
 type IssuerProvisioningExtensionPassEntry struct {
-	inner *raw.PKIssuerProvisioningExtensionPassEntry
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKIssuerProvisioningExtensionPassEntry].
-func (x *IssuerProvisioningExtensionPassEntry) Unwrap() *raw.PKIssuerProvisioningExtensionPassEntry {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IssuerProvisioningExtensionPassEntry) ID() objc.ID { return x.inner.Ptr() }
-
-// IssuerProvisioningExtensionPassEntryFromID adopts an existing object pointer as a IssuerProvisioningExtensionPassEntry (nil for 0).
+// IssuerProvisioningExtensionPassEntryFromID adopts an existing Objective-C object as a IssuerProvisioningExtensionPassEntry
+// (nil for 0), retaining it and registering a release finalizer.
 func IssuerProvisioningExtensionPassEntryFromID(id objc.ID) *IssuerProvisioningExtensionPassEntry {
 	if id == 0 {
 		return nil
 	}
-	return &IssuerProvisioningExtensionPassEntry{inner: raw.PKIssuerProvisioningExtensionPassEntryFromID(id)}
+	x := &IssuerProvisioningExtensionPassEntry{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewIssuerProvisioningExtensionPassEntry creates a new [IssuerProvisioningExtensionPassEntry].
+// issuerProvisioningExtensionPassEntryAdopt wraps an Objective-C object that this code just created as a
+// IssuerProvisioningExtensionPassEntry (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func issuerProvisioningExtensionPassEntryAdopt(id objc.ID) *IssuerProvisioningExtensionPassEntry {
+	if id == 0 {
+		return nil
+	}
+	x := &IssuerProvisioningExtensionPassEntry{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IssuerProvisioningExtensionPassEntry) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IssuerProvisioningExtensionPassEntry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IssuerProvisioningExtensionPassEntry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewIssuerProvisioningExtensionPassEntry creates a new IssuerProvisioningExtensionPassEntry.
 func NewIssuerProvisioningExtensionPassEntry() *IssuerProvisioningExtensionPassEntry {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKIssuerProvisioningExtensionPassEntry")), objc.RegisterName("new"))
-	return &IssuerProvisioningExtensionPassEntry{inner: raw.PKIssuerProvisioningExtensionPassEntryFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKIssuerProvisioningExtensionPassEntry")), objc.RegisterName("new"))
+	return issuerProvisioningExtensionPassEntryAdopt(_id)
 }
 
-// Identifier calls the underlying Identifier.
 func (x *IssuerProvisioningExtensionPassEntry) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Title calls the underlying Title.
 func (x *IssuerProvisioningExtensionPassEntry) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Art calls the underlying Art.
-func (x *IssuerProvisioningExtensionPassEntry) Art() unsafe.Pointer {
-	return x.inner.Art()
-}
-
-func (x *IssuerProvisioningExtensionPassEntry) asIssuerProvisioningExtensionPassEntry() *raw.PKIssuerProvisioningExtensionPassEntry {
-	return x.inner
+func (x *IssuerProvisioningExtensionPassEntry) Art() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("art"))
+	return obj.Wrap(_r)
 }
 
 // IssuerProvisioningExtensionPassEntryable is the interface implemented by [IssuerProvisioningExtensionPassEntry], for mocking and DI.
 type IssuerProvisioningExtensionPassEntryable interface {
-	Unwrap() *raw.PKIssuerProvisioningExtensionPassEntry
+	obj.Object
 	Identifier() string
 	Title() string
-	Art() unsafe.Pointer
+	Art() obj.Object
 }
 
 var _ IssuerProvisioningExtensionPassEntryable = (*IssuerProvisioningExtensionPassEntry)(nil)

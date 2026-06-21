@@ -5,14 +5,23 @@
 package imageio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imageio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CGImageSourceSetAllowableTypes wraps [raw.CGImageSourceSetAllowableTypes], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func CGImageSourceSetAllowableTypes(allowableTypes objc.ID) error {
-	if _err := purego.NewOSStatus(raw.CGImageSourceSetAllowableTypes(purego.CFRef(allowableTypes))).Err(); _err != nil {
+var _fnCGImageSourceSetAllowableTypes func(objc.ID) int32
+
+// CGImageSourceSetAllowableTypes reports an error if the ImageIO framework function CGImageSourceSetAllowableTypes fails.
+func CGImageSourceSetAllowableTypes(allowableTypes obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnCGImageSourceSetAllowableTypes == nil {
+		ebipurego.RegisterLibFunc(&_fnCGImageSourceSetAllowableTypes, _lib, "CGImageSourceSetAllowableTypes")
+	}
+	_rc := _fnCGImageSourceSetAllowableTypes(objref.IDOf(allowableTypes))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil

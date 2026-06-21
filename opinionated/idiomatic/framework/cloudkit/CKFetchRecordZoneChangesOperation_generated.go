@@ -6,225 +6,214 @@ package cloudkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An operation that fetches record zone changes.
 //
-// FetchRecordZoneChangesOperation wraps [raw.CKFetchRecordZoneChangesOperation] with a fluent Go API.
+// FetchRecordZoneChangesOperation is an idiomatic wrapper over the Objective-C class CKFetchRecordZoneChangesOperation.
 type FetchRecordZoneChangesOperation struct {
-	inner *raw.CKFetchRecordZoneChangesOperation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKFetchRecordZoneChangesOperation].
-func (x *FetchRecordZoneChangesOperation) Unwrap() *raw.CKFetchRecordZoneChangesOperation {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FetchRecordZoneChangesOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// FetchRecordZoneChangesOperationFromID adopts an existing object pointer as a FetchRecordZoneChangesOperation (nil for 0).
+// FetchRecordZoneChangesOperationFromID adopts an existing Objective-C object as a FetchRecordZoneChangesOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func FetchRecordZoneChangesOperationFromID(id objc.ID) *FetchRecordZoneChangesOperation {
 	if id == 0 {
 		return nil
 	}
-	return &FetchRecordZoneChangesOperation{inner: raw.CKFetchRecordZoneChangesOperationFromID(id)}
+	x := &FetchRecordZoneChangesOperation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFetchRecordZoneChangesOperation creates a new [FetchRecordZoneChangesOperation].
+// fetchRecordZoneChangesOperationAdopt wraps an Objective-C object that this code just created as a
+// FetchRecordZoneChangesOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fetchRecordZoneChangesOperationAdopt(id objc.ID) *FetchRecordZoneChangesOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &FetchRecordZoneChangesOperation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FetchRecordZoneChangesOperation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FetchRecordZoneChangesOperation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FetchRecordZoneChangesOperation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFetchRecordZoneChangesOperation creates a new FetchRecordZoneChangesOperation.
 func NewFetchRecordZoneChangesOperation() *FetchRecordZoneChangesOperation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKFetchRecordZoneChangesOperation")), objc.RegisterName("new"))
-	return &FetchRecordZoneChangesOperation{inner: raw.CKFetchRecordZoneChangesOperationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKFetchRecordZoneChangesOperation")), objc.RegisterName("new"))
+	return fetchRecordZoneChangesOperationAdopt(_id)
 }
 
 // Creates an operation for fetching record zone changes.
 //
-// NewFetchRecordZoneChangesOperationWithRecordZoneIDsConfigurationsByRecordZoneID creates a new [FetchRecordZoneChangesOperation].
-func NewFetchRecordZoneChangesOperationWithRecordZoneIDsConfigurationsByRecordZoneID(recordZoneIDs *foundation.NSArray[*raw.CKRecordZoneID], configurationsByRecordZoneID purego.IDer) *FetchRecordZoneChangesOperation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKFetchRecordZoneChangesOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordZoneIDs:configurationsByRecordZoneID:"), recordZoneIDs.Ptr(), configurationsByRecordZoneID.ID())
-	return &FetchRecordZoneChangesOperation{inner: raw.CKFetchRecordZoneChangesOperationFromID(_id)}
+// NewFetchRecordZoneChangesOperationWithRecordZoneIDsConfigurationsByRecordZoneID creates a new FetchRecordZoneChangesOperation.
+func NewFetchRecordZoneChangesOperationWithRecordZoneIDsConfigurationsByRecordZoneID(recordZoneIDs []*RecordZoneID, configurationsByRecordZoneID obj.Object) *FetchRecordZoneChangesOperation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKFetchRecordZoneChangesOperation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordZoneIDs:configurationsByRecordZoneID:"), purego.SliceToNSArray(recordZoneIDs, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) }), objref.IDOf(configurationsByRecordZoneID))
+	return fetchRecordZoneChangesOperationAdopt(_id)
 }
 
-// Creates an operation for fetching record zone changes. @DeprecationSummary { Use “CKFetchRecordZoneChangesOperation/init(recordZoneIDs:configurationsByRecordZoneID:)“ instead. } - Parameters: - recordZoneIDs: The IDs of the record zones that you want to query for changes. - optionsByRecordZoneID: A dictionary that maps record zone IDs to their corresponding options. You can specify `nil` for this parameter. CloudKit configures the operation for retrieving all of the record zones that you specify. If you want to reduce the amount of data that CloudKit returns, provide zone options for each record zone.
+// Creates an operation for fetching record zone changes.
 //
-// NewFetchRecordZoneChangesOperationWithRecordZoneIDsOptionsByRecordZoneID creates a new [FetchRecordZoneChangesOperation].
-func NewFetchRecordZoneChangesOperationWithRecordZoneIDsOptionsByRecordZoneID(recordZoneIDs *foundation.NSArray[*raw.CKRecordZoneID], optionsByRecordZoneID purego.IDer) *FetchRecordZoneChangesOperation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKFetchRecordZoneChangesOperation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordZoneIDs:optionsByRecordZoneID:"), recordZoneIDs.Ptr(), optionsByRecordZoneID.ID())
-	return &FetchRecordZoneChangesOperation{inner: raw.CKFetchRecordZoneChangesOperationFromID(_id)}
+// NewFetchRecordZoneChangesOperationWithRecordZoneIDsOptionsByRecordZoneID creates a new FetchRecordZoneChangesOperation.
+func NewFetchRecordZoneChangesOperationWithRecordZoneIDsOptionsByRecordZoneID(recordZoneIDs []*RecordZoneID, optionsByRecordZoneID obj.Object) *FetchRecordZoneChangesOperation {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKFetchRecordZoneChangesOperation")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordZoneIDs:optionsByRecordZoneID:"), purego.SliceToNSArray(recordZoneIDs, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) }), objref.IDOf(optionsByRecordZoneID))
+	return fetchRecordZoneChangesOperationAdopt(_id)
 }
 
 // The IDs of the record zones that contain the records to fetch.
 //
-// WithRecordZoneIDs sets the collection, converting the Go slice to an NSArray.
-func (x *FetchRecordZoneChangesOperation) WithRecordZoneIDs(items ...*raw.CKRecordZoneID) *FetchRecordZoneChangesOperation {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetRecordZoneIDs(foundation.NSArrayFromID[*raw.CKRecordZoneID](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CKRecordZoneID](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetRecordZoneIDs(_arr)
+// WithRecordZoneIDs sets the collection and returns the receiver so calls can be chained.
+func (x *FetchRecordZoneChangesOperation) WithRecordZoneIDs(items ...*RecordZoneID) *FetchRecordZoneChangesOperation {
+	_arr := purego.SliceToNSArray(items, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneIDs:"), _arr)
 	return x
 }
 
 // A dictionary of configurations for fetching change operations by zone identifier.
 //
-// WithConfigurationsByRecordZoneID sets the configurationsByRecordZoneID property and returns the receiver for chaining.
-func (x *FetchRecordZoneChangesOperation) WithConfigurationsByRecordZoneID(configurationsByRecordZoneID *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesConfiguration]) *FetchRecordZoneChangesOperation {
-	x.inner.SetConfigurationsByRecordZoneID(configurationsByRecordZoneID)
+// WithConfigurationsByRecordZoneID sets configurationsByRecordZoneID and returns the receiver so calls can be chained.
+func (x *FetchRecordZoneChangesOperation) WithConfigurationsByRecordZoneID(configurationsByRecordZoneID obj.Object) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfigurationsByRecordZoneID:"), objref.IDOf(configurationsByRecordZoneID))
 	return x
 }
 
 // A Boolean value that indicates whether to send repeated requests to the server.
 //
-// WithFetchAllChanges sets the fetchAllChanges property and returns the receiver for chaining.
+// WithFetchAllChanges sets fetchAllChanges and returns the receiver so calls can be chained.
 func (x *FetchRecordZoneChangesOperation) WithFetchAllChanges(fetchAllChanges bool) *FetchRecordZoneChangesOperation {
-	x.inner.SetFetchAllChanges(fetchAllChanges)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchAllChanges:"), fetchAllChanges)
 	return x
 }
 
 // The closure to execute with the contents of a changed record.
 //
-// WithRecordChangedBlock sets the recordChangedBlock property and returns the receiver for chaining.
-func (x *FetchRecordZoneChangesOperation) WithRecordChangedBlock(recordChangedBlock func(*raw.CKRecord)) *FetchRecordZoneChangesOperation {
-	x.inner.SetRecordChangedBlock(recordChangedBlock)
-	return x
-}
-
-// The closure to execute with the results of retrieving a record change.
-//
-// WithRecordWasChangedBlock sets the recordWasChangedBlock property and returns the receiver for chaining.
-func (x *FetchRecordZoneChangesOperation) WithRecordWasChangedBlock(recordWasChangedBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) *FetchRecordZoneChangesOperation {
-	x.inner.SetRecordWasChangedBlock(recordWasChangedBlock)
+// WithRecordChangedBlock sets recordChangedBlock and returns the receiver so calls can be chained.
+func (x *FetchRecordZoneChangesOperation) WithRecordChangedBlock(recordChangedBlock func(obj.Object)) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordChangedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { recordChangedBlock(obj.Wrap(_b0)) }))
 	return x
 }
 
 // The block to execute when a record no longer exists.
 //
-// WithRecordWithIDWasDeletedBlock sets the recordWithIDWasDeletedBlock property and returns the receiver for chaining.
-func (x *FetchRecordZoneChangesOperation) WithRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(*raw.CKRecordID, *foundation.NSString)) *FetchRecordZoneChangesOperation {
-	x.inner.SetRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock)
+// WithRecordWithIDWasDeletedBlock sets recordWithIDWasDeletedBlock and returns the receiver so calls can be chained.
+func (x *FetchRecordZoneChangesOperation) WithRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(obj.Object, obj.Object)) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordWithIDWasDeletedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) {
+		recordWithIDWasDeletedBlock(obj.Wrap(_b0), obj.Wrap(_b1))
+	}))
 	return x
 }
 
 // The closure to execute when the change token updates.
 //
-// WithRecordZoneChangeTokensUpdatedBlock sets the recordZoneChangeTokensUpdatedBlock property and returns the receiver for chaining.
-func (x *FetchRecordZoneChangesOperation) WithRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock func(*raw.CKRecordZoneID, *raw.CKServerChangeToken, *foundation.NSData)) *FetchRecordZoneChangesOperation {
-	x.inner.SetRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock)
+// WithRecordZoneChangeTokensUpdatedBlock sets recordZoneChangeTokensUpdatedBlock and returns the receiver so calls can be chained.
+func (x *FetchRecordZoneChangesOperation) WithRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock func(obj.Object, obj.Object, obj.Object)) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneChangeTokensUpdatedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID) {
+		recordZoneChangeTokensUpdatedBlock(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2))
+	}))
 	return x
 }
 
-// The closure to execute when a record zone’s fetch finishes.
+// Configuration options for each record zone that the operation retrieves.
 //
-// WithRecordZoneFetchCompletionBlock sets the recordZoneFetchCompletionBlock property and returns the receiver for chaining.
-func (x *FetchRecordZoneChangesOperation) WithRecordZoneFetchCompletionBlock(recordZoneFetchCompletionBlock func(*raw.CKRecordZoneID, *raw.CKServerChangeToken, *foundation.NSData, bool, unsafe.Pointer)) *FetchRecordZoneChangesOperation {
-	x.inner.SetRecordZoneFetchCompletionBlock(recordZoneFetchCompletionBlock)
-	return x
-}
-
-// The closure to execute when the operation finishes.
-//
-// WithFetchRecordZoneChangesCompletionBlock sets the fetchRecordZoneChangesCompletionBlock property and returns the receiver for chaining.
-func (x *FetchRecordZoneChangesOperation) WithFetchRecordZoneChangesCompletionBlock(fetchRecordZoneChangesCompletionBlock func(unsafe.Pointer)) *FetchRecordZoneChangesOperation {
-	x.inner.SetFetchRecordZoneChangesCompletionBlock(fetchRecordZoneChangesCompletionBlock)
-	return x
-}
-
-// Configuration options for each record zone that the operation retrieves. @DeprecationSummary { Use “CKFetchRecordZoneChangesOperation/configurationsByRecordZoneID“ instead. } You can associate each record zone ID with options that define what CloudKit fetches for that record zone.  See “CKFetchRecordZoneChangesOperation/ZoneOptions“ for more information.
-//
-// WithOptionsByRecordZoneID sets the optionsByRecordZoneID property and returns the receiver for chaining.
-func (x *FetchRecordZoneChangesOperation) WithOptionsByRecordZoneID(optionsByRecordZoneID *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesOptions]) *FetchRecordZoneChangesOperation {
-	x.inner.SetOptionsByRecordZoneID(optionsByRecordZoneID)
+// WithOptionsByRecordZoneID sets optionsByRecordZoneID and returns the receiver so calls can be chained.
+func (x *FetchRecordZoneChangesOperation) WithOptionsByRecordZoneID(optionsByRecordZoneID obj.Object) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsByRecordZoneID:"), objref.IDOf(optionsByRecordZoneID))
 	return x
 }
 
 // The database that the operation uses.
 //
-// WithDatabase sets the database property and returns the receiver for chaining.
+// WithDatabase sets database and returns the receiver so calls can be chained.
 func (x *FetchRecordZoneChangesOperation) WithDatabase(database *Database) *FetchRecordZoneChangesOperation {
-	x.inner.CKDatabaseOperation.SetDatabase(database.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
 	return x
 }
 
 // The operation’s configuration.
 //
-// WithConfiguration sets the configuration property and returns the receiver for chaining.
+// WithConfiguration sets configuration and returns the receiver so calls can be chained.
 func (x *FetchRecordZoneChangesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordZoneChangesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetConfiguration(configuration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
 	return x
 }
 
 // The operation’s group.
 //
-// WithGroup sets the group property and returns the receiver for chaining.
+// WithGroup sets group and returns the receiver so calls can be chained.
 func (x *FetchRecordZoneChangesOperation) WithGroup(group *OperationGroup) *FetchRecordZoneChangesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetGroup(group.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
 	return x
 }
 
 // The closure to execute when the server begins to store callbacks for the long-lived operation.
 //
-// WithLongLivedOperationWasPersistedBlock sets the longLivedOperationWasPersistedBlock property and returns the receiver for chaining.
+// WithLongLivedOperationWasPersistedBlock sets longLivedOperationWasPersistedBlock and returns the receiver so calls can be chained.
 func (x *FetchRecordZoneChangesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordZoneChangesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
 	return x
 }
 
-// The operation's container. @DeprecationSummary { Use “CKOperation/Configuration/container“ instead. } The container defines where the operation executes. The “CKContainer/add(_:)“ method of the “CKContainer“ and “CKDatabase“ classes implicitly set this property to their container. If you execute the operation yourself, either directly or using a custom operation queue, set the value of this property explicitly. If the value is `nil` when you execute an operation, the operation implicitly executes in your app's default container.
+// The operation's container.
 //
-// WithContainer sets the container property and returns the receiver for chaining.
+// WithContainer sets container and returns the receiver so calls can be chained.
 func (x *FetchRecordZoneChangesOperation) WithContainer(container *Container) *FetchRecordZoneChangesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetContainer(container.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
 	return x
 }
 
-// A Boolean value that indicates whether the operation can send data over the cellular network. @DeprecationSummary { Use “CKOperation/Configuration/allowsCellularAccess“ instead. } When you send or receive many records, or when you send records with large assets, you might set this property to <doc://com.apple.documentation/documentation/swift/false> to avoid consuming too much of the user's cellular data bandwidth. The default value is <doc://com.apple.documentation/documentation/swift/true>. When this property is <doc://com.apple.documentation/documentation/swift/false>, the operation fails if Wi-Fi isn't available.
+// A Boolean value that indicates whether the operation can send data over the cellular network.
 //
-// WithAllowsCellularAccess sets the allowsCellularAccess property and returns the receiver for chaining.
+// WithAllowsCellularAccess sets allowsCellularAccess and returns the receiver so calls can be chained.
 func (x *FetchRecordZoneChangesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordZoneChangesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetAllowsCellularAccess(allowsCellularAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 	return x
 }
 
 // A Boolean value that indicates whether the operation is long-lived.
 //
-// WithLongLived sets the longLived property and returns the receiver for chaining.
+// WithLongLived sets longLived and returns the receiver so calls can be chained.
 func (x *FetchRecordZoneChangesOperation) WithLongLived(longLived bool) *FetchRecordZoneChangesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetLongLived(longLived)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
 	return x
 }
 
-// The timeout interval when waiting for additional data. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForRequest“ instead. } This property determines the request timeout interval for the operation, which controls how long, in seconds, the operation waits for additional data to arrive before stopping. The timer for this value resets whenever new data arrives. When the timer reaches the interval without receiving any new data, it triggers a timeout. The default value is `60`.
+// The timeout interval when waiting for additional data.
 //
-// WithTimeoutIntervalForRequest sets the timeoutIntervalForRequest property and returns the receiver for chaining.
+// WithTimeoutIntervalForRequest sets timeoutIntervalForRequest and returns the receiver so calls can be chained.
 func (x *FetchRecordZoneChangesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordZoneChangesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForRequest(timeoutIntervalForRequest)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 	return x
 }
 
-// The maximum amount of time that a resource request can use. @DeprecationSummary { Use “CKOperation/Configuration/timeoutIntervalForResource“ instead. } This property determines the resource timeout interval for this operation, which controls how long, in seconds, to wait for the entire operation to complete before stopping. The resource timer starts when the operation executes and counts until either the operation completes or this timeout interval occurs, whichever comes first. The default value is `604800`, the number of seconds in 7 days.
+// The maximum amount of time that a resource request can use.
 //
-// WithTimeoutIntervalForResource sets the timeoutIntervalForResource property and returns the receiver for chaining.
+// WithTimeoutIntervalForResource sets timeoutIntervalForResource and returns the receiver so calls can be chained.
 func (x *FetchRecordZoneChangesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordZoneChangesOperation {
-	x.inner.CKDatabaseOperation.CKOperation.SetTimeoutIntervalForResource(timeoutIntervalForResource)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 	return x
 }
 
@@ -232,49 +221,32 @@ func (x *FetchRecordZoneChangesOperation) WithTimeoutIntervalForResource(timeout
 //
 // RecordZoneIDs returns the collection as a Go slice.
 func (x *FetchRecordZoneChangesOperation) RecordZoneIDs() []*RecordZoneID {
-	arr := x.inner.RecordZoneIDs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordZoneID {
-		return &RecordZoneID{inner: raw.CKRecordZoneIDFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordZoneIDs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }
 
-// SetRecordZoneIDs calls the underlying SetRecordZoneIDs.
-func (x *FetchRecordZoneChangesOperation) SetRecordZoneIDs(recordZoneIDs *foundation.NSArray[*raw.CKRecordZoneID]) {
-	x.inner.SetRecordZoneIDs(recordZoneIDs)
+func (x *FetchRecordZoneChangesOperation) SetRecordZoneIDs(recordZoneIDs []*RecordZoneID) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneIDs:"), purego.SliceToNSArray(recordZoneIDs, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) }))
 }
 
 // A dictionary of configurations for fetching change operations by zone identifier.
-//
-// ConfigurationsByRecordZoneID calls the underlying ConfigurationsByRecordZoneID.
-func (x *FetchRecordZoneChangesOperation) ConfigurationsByRecordZoneID() *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesConfiguration] {
-	return x.inner.ConfigurationsByRecordZoneID()
+func (x *FetchRecordZoneChangesOperation) ConfigurationsByRecordZoneID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationsByRecordZoneID"))
+	return obj.Wrap(_r)
 }
 
-// SetConfigurationsByRecordZoneID calls the underlying SetConfigurationsByRecordZoneID.
-func (x *FetchRecordZoneChangesOperation) SetConfigurationsByRecordZoneID(configurationsByRecordZoneID *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesConfiguration]) {
-	x.inner.SetConfigurationsByRecordZoneID(configurationsByRecordZoneID)
+func (x *FetchRecordZoneChangesOperation) SetConfigurationsByRecordZoneID(configurationsByRecordZoneID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfigurationsByRecordZoneID:"), objref.IDOf(configurationsByRecordZoneID))
 }
 
 // A Boolean value that indicates whether to send repeated requests to the server. If <doc://com.apple.documentation/documentation/swift/true>, the operation sends repeat requests to the server until it fetches all changes. CloudKit executes the handler you set on the “CKFetchRecordZoneChangesOperation/recordZoneFetchResultBlock“ property with a change token after each request. The default value is <doc://com.apple.documentation/documentation/swift/true>.
-//
-// FetchAllChanges calls the underlying FetchAllChanges.
 func (x *FetchRecordZoneChangesOperation) FetchAllChanges() bool {
-	return x.inner.FetchAllChanges()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("fetchAllChanges"))
+	return _r
 }
 
-// SetFetchAllChanges calls the underlying SetFetchAllChanges.
 func (x *FetchRecordZoneChangesOperation) SetFetchAllChanges(fetchAllChanges bool) {
-	x.inner.SetFetchAllChanges(fetchAllChanges)
-}
-
-// The closure to execute with the contents of a changed record. The closure returns no value and takes the following parameter: - The changed record. If you specify a value for the “CKFetchRecordZoneChangesConfiguration/desiredKeys“ property, the record contains only the corresponding fields. The operation executes this closure once for each record in the record zone with changes since the previous fetch request. Each time the closure executes, it executes serially with respect to the other closures of the operation. If there aren't any record changes, this closure doesn't execute. Set this property before you execute the operation or submit it to a queue.
-//
-// RecordChangedBlock calls the underlying RecordChangedBlock.
-func (x *FetchRecordZoneChangesOperation) RecordChangedBlock() objc.Block {
-	return x.inner.RecordChangedBlock()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchAllChanges:"), fetchAllChanges)
 }
 
 // SetRecordChangedBlock blocks until the operation completes or ctx is cancelled.
@@ -284,13 +256,12 @@ func (x *FetchRecordZoneChangesOperation) SetRecordChangedBlock(ctx context.Cont
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SetRecordChangedBlock(func(_p0 *raw.CKRecord) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &Record{inner: _p0}
-		}
+		_o.val = RecordFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordChangedBlock:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -300,71 +271,27 @@ func (x *FetchRecordZoneChangesOperation) SetRecordChangedBlock(ctx context.Cont
 	}
 }
 
-// The closure to execute with the results of retrieving a record change. The closure returns no value and takes the following parameters: - The ID of the changed record to retrieve. - The changed record, or `nil` if CloudKit can't retrieve the record. If you specify a value for the “CKFetchRecordZoneChangesConfiguration/desiredKeys“ property, the record contains only the corresponding fields. - An error that contains information about a problem, or `nil` if CloudKit retrieves the record successfully. The operation executes this closure once for each record in the record zone with changes since the previous fetch request. Each time the closure executes, it executes serially with respect to the other closures of the operation. If there aren't any record changes, this closure doesn't execute. Set this property before you execute the operation or submit it to a queue.
-//
-// RecordWasChangedBlock calls the underlying RecordWasChangedBlock.
-func (x *FetchRecordZoneChangesOperation) RecordWasChangedBlock() objc.Block {
-	return x.inner.RecordWasChangedBlock()
+func (x *FetchRecordZoneChangesOperation) SetRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(obj.Object, obj.Object)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordWithIDWasDeletedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) {
+		recordWithIDWasDeletedBlock(obj.Wrap(_b0), obj.Wrap(_b1))
+	}))
 }
 
-// SetRecordWasChangedBlock calls the underlying SetRecordWasChangedBlock.
-func (x *FetchRecordZoneChangesOperation) SetRecordWasChangedBlock(recordWasChangedBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) {
-	x.inner.SetRecordWasChangedBlock(recordWasChangedBlock)
-}
-
-// The block to execute when a record no longer exists. The block returns no value and takes the following parameters: - term `recordID`: The deleted record's ID. - term `recordType`: The deleted record's type. The operation executes this block once for each record the server deletes after the previous change token. Each time the block executes, it executes serially with respect to the other blocks of the operation. If there aren't any record deletions, this block doesn't execute. Set this property before you execute the operation or submit it to a queue.
-//
-// RecordWithIDWasDeletedBlock calls the underlying RecordWithIDWasDeletedBlock.
-func (x *FetchRecordZoneChangesOperation) RecordWithIDWasDeletedBlock() objc.Block {
-	return x.inner.RecordWithIDWasDeletedBlock()
-}
-
-// SetRecordWithIDWasDeletedBlock calls the underlying SetRecordWithIDWasDeletedBlock.
-func (x *FetchRecordZoneChangesOperation) SetRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(*raw.CKRecordID, *foundation.NSString)) {
-	x.inner.SetRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock)
-}
-
-// The closure to execute when the change token updates. The closure returns no value and takes the following parameters: - The record zone's ID. - The new change token from the server. You can store this token locally and use it during subsequent fetch operations to limit the results to records that change after this operation executes. - The most recent client change token from the device. If the change token isn't the most recent change token you provided, the server might not have received the associated changes. The operation executes this closure once for each retrieved change token. Each time the closure executes, it executes serially with respect to the other blocks of the operation. Set this property before you execute the operation or submit it to a queue.
-//
-// RecordZoneChangeTokensUpdatedBlock calls the underlying RecordZoneChangeTokensUpdatedBlock.
-func (x *FetchRecordZoneChangesOperation) RecordZoneChangeTokensUpdatedBlock() objc.Block {
-	return x.inner.RecordZoneChangeTokensUpdatedBlock()
-}
-
-// SetRecordZoneChangeTokensUpdatedBlock calls the underlying SetRecordZoneChangeTokensUpdatedBlock.
-func (x *FetchRecordZoneChangesOperation) SetRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock func(*raw.CKRecordZoneID, *raw.CKServerChangeToken, *foundation.NSData)) {
-	x.inner.SetRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock)
-}
-
-// The closure to execute when a record zone's fetch finishes. The closure returns no value and takes the following parameters: - The record zone's ID. - The change token to store and use in subsequent instances of “CKFetchRecordZoneChangesOperation“. - The more recent client change token from the device. If the change token isn't the more recent change token you provided, the server might not have received the associated changes. - A Boolean that indicates whether this is the final record zone change. If “CKFetchRecordZoneChangesOperation/fetchAllChanges“ is <doc://com.apple.documentation/documentation/swift/false>, it's the app's responsibility to create additional instances of “CKFetchRecordZoneChangesOperation“ to fetch further changes. - An error object that contains information about a problem, or `nil` if the operation successfully retrieves the results. The app is responsible for saving the change token at the end of the operation and providing it to future uses of “CKFetchRecordZoneChangesOperation“. Each time the closure executes, it executes serially with respect to the other closures of the operation. Set this property before you execute the operation or submit it to a queue.
-//
-// RecordZoneFetchCompletionBlock calls the underlying RecordZoneFetchCompletionBlock.
-func (x *FetchRecordZoneChangesOperation) RecordZoneFetchCompletionBlock() objc.Block {
-	return x.inner.RecordZoneFetchCompletionBlock()
-}
-
-// SetRecordZoneFetchCompletionBlock calls the underlying SetRecordZoneFetchCompletionBlock.
-func (x *FetchRecordZoneChangesOperation) SetRecordZoneFetchCompletionBlock(recordZoneFetchCompletionBlock func(*raw.CKRecordZoneID, *raw.CKServerChangeToken, *foundation.NSData, bool, unsafe.Pointer)) {
-	x.inner.SetRecordZoneFetchCompletionBlock(recordZoneFetchCompletionBlock)
-}
-
-// The closure to execute when the operation finishes. The closure has no return value and takes the following parameter: - An error object that contains information about a problem, or `nil` if CloudKit successfully retrieves the record zone changes. This closure executes only once, and represents your final opportunity to process the results. The closure executes serially with respect to the other closures of the operation. Set this property before you execute the operation or submit it to a queue.
-//
-// FetchRecordZoneChangesCompletionBlock calls the underlying FetchRecordZoneChangesCompletionBlock.
-func (x *FetchRecordZoneChangesOperation) FetchRecordZoneChangesCompletionBlock() objc.Block {
-	return x.inner.FetchRecordZoneChangesCompletionBlock()
+func (x *FetchRecordZoneChangesOperation) SetRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock func(obj.Object, obj.Object, obj.Object)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneChangeTokensUpdatedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID) {
+		recordZoneChangeTokensUpdatedBlock(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2))
+	}))
 }
 
 // SetFetchRecordZoneChangesCompletionBlock blocks until the operation completes or ctx is cancelled.
 func (x *FetchRecordZoneChangesOperation) SetFetchRecordZoneChangesCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.SetFetchRecordZoneChangesCompletionBlock(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchRecordZoneChangesCompletionBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -373,41 +300,27 @@ func (x *FetchRecordZoneChangesOperation) SetFetchRecordZoneChangesCompletionBlo
 	}
 }
 
-// Configuration options for each record zone that the operation retrieves. @DeprecationSummary { Use “CKFetchRecordZoneChangesOperation/configurationsByRecordZoneID“ instead. } You can associate each record zone ID with options that define what CloudKit fetches for that record zone.  See “CKFetchRecordZoneChangesOperation/ZoneOptions“ for more information.
-//
-// OptionsByRecordZoneID calls the underlying OptionsByRecordZoneID.
-func (x *FetchRecordZoneChangesOperation) OptionsByRecordZoneID() *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesOptions] {
-	return x.inner.OptionsByRecordZoneID()
+// Configuration options for each record zone that the operation retrieves.
+func (x *FetchRecordZoneChangesOperation) OptionsByRecordZoneID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsByRecordZoneID"))
+	return obj.Wrap(_r)
 }
 
-// Configuration options for each record zone that the operation retrieves. @DeprecationSummary { Use “CKFetchRecordZoneChangesOperation/configurationsByRecordZoneID“ instead. } You can associate each record zone ID with options that define what CloudKit fetches for that record zone.  See “CKFetchRecordZoneChangesOperation/ZoneOptions“ for more information.
-//
-// SetOptionsByRecordZoneID calls the underlying SetOptionsByRecordZoneID.
-func (x *FetchRecordZoneChangesOperation) SetOptionsByRecordZoneID(optionsByRecordZoneID *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesOptions]) {
-	x.inner.SetOptionsByRecordZoneID(optionsByRecordZoneID)
-}
-
-func (x *FetchRecordZoneChangesOperation) asDatabaseOperation() *raw.CKDatabaseOperation {
-	return &x.inner.CKDatabaseOperation
-}
-
-func (x *FetchRecordZoneChangesOperation) asOperation() *raw.CKOperation {
-	return &x.inner.CKDatabaseOperation.CKOperation
+// Configuration options for each record zone that the operation retrieves.
+func (x *FetchRecordZoneChangesOperation) SetOptionsByRecordZoneID(optionsByRecordZoneID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsByRecordZoneID:"), objref.IDOf(optionsByRecordZoneID))
 }
 
 // FetchRecordZoneChangesOperationable is the interface implemented by [FetchRecordZoneChangesOperation], for mocking and DI.
 type FetchRecordZoneChangesOperationable interface {
-	Unwrap() *raw.CKFetchRecordZoneChangesOperation
-	WithRecordZoneIDs(items ...*raw.CKRecordZoneID) *FetchRecordZoneChangesOperation
-	WithConfigurationsByRecordZoneID(configurationsByRecordZoneID *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesConfiguration]) *FetchRecordZoneChangesOperation
+	obj.Object
+	WithRecordZoneIDs(items ...*RecordZoneID) *FetchRecordZoneChangesOperation
+	WithConfigurationsByRecordZoneID(configurationsByRecordZoneID obj.Object) *FetchRecordZoneChangesOperation
 	WithFetchAllChanges(fetchAllChanges bool) *FetchRecordZoneChangesOperation
-	WithRecordChangedBlock(recordChangedBlock func(*raw.CKRecord)) *FetchRecordZoneChangesOperation
-	WithRecordWasChangedBlock(recordWasChangedBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer)) *FetchRecordZoneChangesOperation
-	WithRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(*raw.CKRecordID, *foundation.NSString)) *FetchRecordZoneChangesOperation
-	WithRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock func(*raw.CKRecordZoneID, *raw.CKServerChangeToken, *foundation.NSData)) *FetchRecordZoneChangesOperation
-	WithRecordZoneFetchCompletionBlock(recordZoneFetchCompletionBlock func(*raw.CKRecordZoneID, *raw.CKServerChangeToken, *foundation.NSData, bool, unsafe.Pointer)) *FetchRecordZoneChangesOperation
-	WithFetchRecordZoneChangesCompletionBlock(fetchRecordZoneChangesCompletionBlock func(unsafe.Pointer)) *FetchRecordZoneChangesOperation
-	WithOptionsByRecordZoneID(optionsByRecordZoneID *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesOptions]) *FetchRecordZoneChangesOperation
+	WithRecordChangedBlock(recordChangedBlock func(obj.Object)) *FetchRecordZoneChangesOperation
+	WithRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(obj.Object, obj.Object)) *FetchRecordZoneChangesOperation
+	WithRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock func(obj.Object, obj.Object, obj.Object)) *FetchRecordZoneChangesOperation
+	WithOptionsByRecordZoneID(optionsByRecordZoneID obj.Object) *FetchRecordZoneChangesOperation
 	WithDatabase(database *Database) *FetchRecordZoneChangesOperation
 	WithConfiguration(configuration *OperationConfiguration) *FetchRecordZoneChangesOperation
 	WithGroup(group *OperationGroup) *FetchRecordZoneChangesOperation
@@ -418,25 +331,17 @@ type FetchRecordZoneChangesOperationable interface {
 	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordZoneChangesOperation
 	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordZoneChangesOperation
 	RecordZoneIDs() []*RecordZoneID
-	SetRecordZoneIDs(recordZoneIDs *foundation.NSArray[*raw.CKRecordZoneID])
-	ConfigurationsByRecordZoneID() *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesConfiguration]
-	SetConfigurationsByRecordZoneID(configurationsByRecordZoneID *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesConfiguration])
+	SetRecordZoneIDs(recordZoneIDs []*RecordZoneID)
+	ConfigurationsByRecordZoneID() obj.Object
+	SetConfigurationsByRecordZoneID(configurationsByRecordZoneID obj.Object)
 	FetchAllChanges() bool
 	SetFetchAllChanges(fetchAllChanges bool)
-	RecordChangedBlock() objc.Block
 	SetRecordChangedBlock(ctx context.Context) (*Record, error)
-	RecordWasChangedBlock() objc.Block
-	SetRecordWasChangedBlock(recordWasChangedBlock func(*raw.CKRecordID, *raw.CKRecord, unsafe.Pointer))
-	RecordWithIDWasDeletedBlock() objc.Block
-	SetRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(*raw.CKRecordID, *foundation.NSString))
-	RecordZoneChangeTokensUpdatedBlock() objc.Block
-	SetRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock func(*raw.CKRecordZoneID, *raw.CKServerChangeToken, *foundation.NSData))
-	RecordZoneFetchCompletionBlock() objc.Block
-	SetRecordZoneFetchCompletionBlock(recordZoneFetchCompletionBlock func(*raw.CKRecordZoneID, *raw.CKServerChangeToken, *foundation.NSData, bool, unsafe.Pointer))
-	FetchRecordZoneChangesCompletionBlock() objc.Block
+	SetRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(obj.Object, obj.Object))
+	SetRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock func(obj.Object, obj.Object, obj.Object))
 	SetFetchRecordZoneChangesCompletionBlock(ctx context.Context) error
-	OptionsByRecordZoneID() *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesOptions]
-	SetOptionsByRecordZoneID(optionsByRecordZoneID *foundation.NSDictionary[*raw.CKRecordZoneID, *raw.CKFetchRecordZoneChangesOptions])
+	OptionsByRecordZoneID() obj.Object
+	SetOptionsByRecordZoneID(optionsByRecordZoneID obj.Object)
 }
 
 var _ FetchRecordZoneChangesOperationable = (*FetchRecordZoneChangesOperation)(nil)

@@ -5,283 +5,233 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that controls swipe navigation and animations between views or view content.
 //
-// PageController wraps [raw.NSPageController] with a fluent Go API.
+// PageController is an idiomatic wrapper over the Objective-C class NSPageController.
 type PageController struct {
-	inner *raw.NSPageController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPageController].
-func (x *PageController) Unwrap() *raw.NSPageController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PageController) ID() objc.ID { return x.inner.Ptr() }
-
-// PageControllerFromID adopts an existing object pointer as a PageController (nil for 0).
+// PageControllerFromID adopts an existing Objective-C object as a PageController
+// (nil for 0), retaining it and registering a release finalizer.
 func PageControllerFromID(id objc.ID) *PageController {
 	if id == 0 {
 		return nil
 	}
-	return &PageController{inner: raw.NSPageControllerFromID(id)}
-}
-
-// NewPageController creates a new [PageController].
-func NewPageController() *PageController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPageController")), objc.RegisterName("new"))
-	return &PageController{inner: raw.NSPageControllerFromID(_id)}
-}
-
-// The page controller’s delegate object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *PageController) WithDelegate(delegate raw.NSPageControllerDelegate) *PageController {
-	x.inner.SetDelegate(delegate)
+	x := &PageController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// pageControllerAdopt wraps an Objective-C object that this code just created as a
+// PageController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pageControllerAdopt(id objc.ID) *PageController {
+	if id == 0 {
+		return nil
+	}
+	x := &PageController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PageController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PageController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PageController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPageController creates a new PageController.
+func NewPageController() *PageController {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPageController")), objc.RegisterName("new"))
+	return pageControllerAdopt(_id)
 }
 
 // The transition style the page controller uses when changing pages.
 //
-// WithTransitionStyle sets the transitionStyle property and returns the receiver for chaining.
-func (x *PageController) WithTransitionStyle(transitionStyle NSPageControllerTransitionStyle) *PageController {
-	x.inner.SetTransitionStyle(raw.NSPageControllerTransitionStyle(transitionStyle))
+// WithTransitionStyle sets transitionStyle and returns the receiver so calls can be chained.
+func (x *PageController) WithTransitionStyle(transitionStyle PageControllerTransitionStyle) *PageController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionStyle:"), transitionStyle)
 	return x
 }
 
 // The currently selected object in the arranged objects array.
 //
-// WithSelectedIndex sets the selectedIndex property and returns the receiver for chaining.
+// WithSelectedIndex sets selectedIndex and returns the receiver so calls can be chained.
 func (x *PageController) WithSelectedIndex(selectedIndex int) *PageController {
-	x.inner.SetSelectedIndex(selectedIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedIndex:"), selectedIndex)
 	return x
 }
 
 // The object whose value is presented in the receiver’s primary view.
 //
-// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
-func (x *PageController) WithRepresentedObject(representedObject objc.ID) *PageController {
-	x.inner.NSViewController.SetRepresentedObject(representedObject)
+// WithRepresentedObject sets representedObject and returns the receiver so calls can be chained.
+func (x *PageController) WithRepresentedObject(representedObject obj.Object) *PageController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
 // The localized title of the receiver’s primary view.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *PageController) WithTitle(title string) *PageController {
-	x.inner.NSViewController.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // The view controller’s primary view.
 //
-// WithView sets the view property and returns the receiver for chaining.
+// WithView sets view and returns the receiver so calls can be chained.
 func (x *PageController) WithView(view ViewProvider) *PageController {
-	x.inner.NSViewController.SetView(view.asView())
-	return x
-}
-
-// The desired size of the view controller’s view, in screen units.
-//
-// WithPreferredContentSize sets the preferredContentSize property and returns the receiver for chaining.
-func (x *PageController) WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *PageController {
-	x.inner.NSViewController.SetPreferredContentSize(preferredContentSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
 	return x
 }
 
 // An array of view controllers that are hierarchical children of the view controller.
 //
-// WithChildViewControllers sets the collection, converting the Go slice to an NSArray.
+// WithChildViewControllers sets the collection and returns the receiver so calls can be chained.
 func (x *PageController) WithChildViewControllers(items ...ViewControllerProvider) *PageController {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSViewController.SetChildViewControllers(foundation.NSArrayFromID[*raw.NSViewController](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asViewController().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSViewController](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSViewController.SetChildViewControllers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ViewControllerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildViewControllers:"), _arr)
 	return x
 }
 
-// WithSourceItemView sets the sourceItemView property and returns the receiver for chaining.
+// WithSourceItemView sets sourceItemView and returns the receiver so calls can be chained.
 func (x *PageController) WithSourceItemView(sourceItemView ViewProvider) *PageController {
-	x.inner.NSViewController.SetSourceItemView(sourceItemView.asView())
-	return x
-}
-
-// For a view controller that is part of an app extension, the preferred screen origin.
-//
-// WithPreferredScreenOrigin sets the preferredScreenOrigin property and returns the receiver for chaining.
-func (x *PageController) WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *PageController {
-	x.inner.NSViewController.SetPreferredScreenOrigin(preferredScreenOrigin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceItemView:"), objref.IDOf(sourceItemView))
 	return x
 }
 
 // The next responder after this one, or nil if it has none.
 //
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
 func (x *PageController) WithNextResponder(nextResponder ResponderProvider) *PageController {
-	x.inner.NSViewController.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
 // Returns the responder’s menu.
 //
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu sets menu and returns the receiver so calls can be chained.
 func (x *PageController) WithMenu(menu *Menu) *PageController {
-	x.inner.NSViewController.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
 // An object encapsulating a user activity supported by this responder.
 //
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *PageController) WithUserActivity(userActivity *foundation.NSUserActivity) *PageController {
-	x.inner.NSViewController.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+func (x *PageController) WithUserActivity(userActivity obj.Object) *PageController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
 // The NSTouchBar object associated with the responder.
 //
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
 func (x *PageController) WithTouchBar(touchBar *TouchBar) *PageController {
-	x.inner.NSViewController.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
 }
 
 // Navigates to the specific object.
-//
-// NavigateForwardToObject calls the underlying NavigateForwardToObject.
-func (x *PageController) NavigateForwardToObject(object objc.ID) {
-	x.inner.NavigateForwardToObject(object)
+func (x *PageController) NavigateForwardToObject(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("navigateForwardToObject:"), objref.IDOf(object))
 }
 
 // Invoked when the page transition is completed.
-//
-// CompleteTransition calls the underlying CompleteTransition.
 func (x *PageController) CompleteTransition() {
-	x.inner.CompleteTransition()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeTransition"))
 }
 
 // Navigates backwards in the page controller’s arranged objects array.
-//
-// NavigateBack calls the underlying NavigateBack.
-func (x *PageController) NavigateBack(sender objc.ID) {
-	x.inner.NavigateBack(sender)
+func (x *PageController) NavigateBack(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("navigateBack:"), objref.IDOf(sender))
 }
 
 // Navigates to the next object in the page controller’s arranged objects array, if appropriate.
-//
-// NavigateForward calls the underlying NavigateForward.
-func (x *PageController) NavigateForward(sender objc.ID) {
-	x.inner.NavigateForward(sender)
+func (x *PageController) NavigateForward(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("navigateForward:"), objref.IDOf(sender))
 }
 
 // Navigates to the selected index, which is taken from the sender.
-//
-// TakeSelectedIndexFrom calls the underlying TakeSelectedIndexFrom.
-func (x *PageController) TakeSelectedIndexFrom(sender objc.ID) {
-	x.inner.TakeSelectedIndexFrom(sender)
+func (x *PageController) TakeSelectedIndexFrom(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeSelectedIndexFrom:"), objref.IDOf(sender))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *PageController) Delegate() raw.NSPageControllerDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *PageController) SetDelegate(delegate raw.NSPageControllerDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// SelectedViewController calls the underlying SelectedViewController.
 func (x *PageController) SelectedViewController() *ViewController {
-	_r := x.inner.SelectedViewController()
-	if _r == nil {
-		return nil
-	}
-	return &ViewController{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedViewController"))
+	return ViewControllerFromID(_r)
 }
 
-// TransitionStyle calls the underlying TransitionStyle.
-func (x *PageController) TransitionStyle() NSPageControllerTransitionStyle {
-	return NSPageControllerTransitionStyle(x.inner.TransitionStyle())
+func (x *PageController) TransitionStyle() PageControllerTransitionStyle {
+	_r := objc.Send[PageControllerTransitionStyle](objref.IDOf(x), objc.RegisterName("transitionStyle"))
+	return _r
 }
 
-// SetTransitionStyle calls the underlying SetTransitionStyle.
-func (x *PageController) SetTransitionStyle(transitionStyle NSPageControllerTransitionStyle) {
-	x.inner.SetTransitionStyle(raw.NSPageControllerTransitionStyle(transitionStyle))
+func (x *PageController) SetTransitionStyle(transitionStyle PageControllerTransitionStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionStyle:"), transitionStyle)
 }
 
-// ArrangedObjects calls the underlying ArrangedObjects.
-func (x *PageController) ArrangedObjects() *foundation.NSArray[objc.ID] {
-	return x.inner.ArrangedObjects()
+func (x *PageController) ArrangedObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrangedObjects"))
+	return obj.Wrap(_r)
 }
 
-// SetArrangedObjects calls the underlying SetArrangedObjects.
-func (x *PageController) SetArrangedObjects(arrangedObjects *foundation.NSArray[objc.ID]) {
-	x.inner.SetArrangedObjects(arrangedObjects)
+func (x *PageController) SetArrangedObjects(arrangedObjects obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArrangedObjects:"), objref.IDOf(arrangedObjects))
 }
 
-// SelectedIndex calls the underlying SelectedIndex.
 func (x *PageController) SelectedIndex() int {
-	return x.inner.SelectedIndex()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectedIndex"))
+	return _r
 }
 
-// SetSelectedIndex calls the underlying SetSelectedIndex.
 func (x *PageController) SetSelectedIndex(selectedIndex int) {
-	x.inner.SetSelectedIndex(selectedIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedIndex:"), selectedIndex)
 }
-
-func (x *PageController) asViewController() *raw.NSViewController { return &x.inner.NSViewController }
-
-func (x *PageController) asResponder() *raw.NSResponder { return &x.inner.NSViewController.NSResponder }
 
 // PageControllerable is the interface implemented by [PageController], for mocking and DI.
 type PageControllerable interface {
-	Unwrap() *raw.NSPageController
-	WithDelegate(delegate raw.NSPageControllerDelegate) *PageController
-	WithTransitionStyle(transitionStyle NSPageControllerTransitionStyle) *PageController
+	obj.Object
+	WithTransitionStyle(transitionStyle PageControllerTransitionStyle) *PageController
 	WithSelectedIndex(selectedIndex int) *PageController
-	WithRepresentedObject(representedObject objc.ID) *PageController
+	WithRepresentedObject(representedObject obj.Object) *PageController
 	WithTitle(title string) *PageController
 	WithView(view ViewProvider) *PageController
-	WithPreferredContentSize(preferredContentSize corefoundation.CGSize) *PageController
 	WithChildViewControllers(items ...ViewControllerProvider) *PageController
 	WithSourceItemView(sourceItemView ViewProvider) *PageController
-	WithPreferredScreenOrigin(preferredScreenOrigin corefoundation.CGPoint) *PageController
 	WithNextResponder(nextResponder ResponderProvider) *PageController
 	WithMenu(menu *Menu) *PageController
-	WithUserActivity(userActivity *foundation.NSUserActivity) *PageController
+	WithUserActivity(userActivity obj.Object) *PageController
 	WithTouchBar(touchBar *TouchBar) *PageController
-	NavigateForwardToObject(object objc.ID)
+	NavigateForwardToObject(object obj.Object)
 	CompleteTransition()
-	NavigateBack(sender objc.ID)
-	NavigateForward(sender objc.ID)
-	TakeSelectedIndexFrom(sender objc.ID)
-	Delegate() raw.NSPageControllerDelegate
-	SetDelegate(delegate raw.NSPageControllerDelegate)
+	NavigateBack(sender obj.Object)
+	NavigateForward(sender obj.Object)
+	TakeSelectedIndexFrom(sender obj.Object)
 	SelectedViewController() *ViewController
-	TransitionStyle() NSPageControllerTransitionStyle
-	SetTransitionStyle(transitionStyle NSPageControllerTransitionStyle)
-	ArrangedObjects() *foundation.NSArray[objc.ID]
-	SetArrangedObjects(arrangedObjects *foundation.NSArray[objc.ID])
+	TransitionStyle() PageControllerTransitionStyle
+	SetTransitionStyle(transitionStyle PageControllerTransitionStyle)
+	ArrangedObjects() obj.Object
+	SetArrangedObjects(arrangedObjects obj.Object)
 	SelectedIndex() int
 	SetSelectedIndex(selectedIndex int)
 }

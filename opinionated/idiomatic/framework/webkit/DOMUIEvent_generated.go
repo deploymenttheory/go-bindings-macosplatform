@@ -5,119 +5,131 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMUIEvent wraps [raw.DOMUIEvent] with a fluent Go API.
+// DOMUIEvent is an idiomatic wrapper over the Objective-C class DOMUIEvent.
 type DOMUIEvent struct {
-	inner *raw.DOMUIEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMUIEvent].
-func (x *DOMUIEvent) Unwrap() *raw.DOMUIEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMUIEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMUIEventFromID adopts an existing object pointer as a DOMUIEvent (nil for 0).
+// DOMUIEventFromID adopts an existing Objective-C object as a DOMUIEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMUIEventFromID(id objc.ID) *DOMUIEvent {
 	if id == 0 {
 		return nil
 	}
-	return &DOMUIEvent{inner: raw.DOMUIEventFromID(id)}
-}
-
-// NewDOMUIEventUIEventCanBubbleCancelableViewDetail creates a new [DOMUIEvent].
-func NewDOMUIEventUIEventCanBubbleCancelableViewDetail(type_ string, canBubble bool, cancelable bool, view *raw.DOMAbstractView, detail int) *DOMUIEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMUIEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initUIEvent:canBubble:cancelable:view:detail:"), foundation.NSStringStringWithUTF8String(type_).Ptr(), canBubble, cancelable, view.Ptr(), detail)
-	return &DOMUIEvent{inner: raw.DOMUIEventFromID(_id)}
-}
-
-// NewDOMUIEventUIEvent creates a new [DOMUIEvent].
-func NewDOMUIEventUIEvent(type_ string, canBubble bool, cancelable bool, view *raw.DOMAbstractView, detail int) *DOMUIEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMUIEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initUIEvent:::::"), foundation.NSStringStringWithUTF8String(type_).Ptr(), canBubble, cancelable, view.Ptr(), detail)
-	return &DOMUIEvent{inner: raw.DOMUIEventFromID(_id)}
-}
-
-// WithReturnValue sets the returnValue property and returns the receiver for chaining.
-func (x *DOMUIEvent) WithReturnValue(returnValue bool) *DOMUIEvent {
-	x.inner.DOMEvent.SetReturnValue(returnValue)
+	x := &DOMUIEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithCancelBubble sets the cancelBubble property and returns the receiver for chaining.
-func (x *DOMUIEvent) WithCancelBubble(cancelBubble bool) *DOMUIEvent {
-	x.inner.DOMEvent.SetCancelBubble(cancelBubble)
-	return x
-}
-
-// View calls the underlying View.
-func (x *DOMUIEvent) View() *DOMAbstractView {
-	_r := x.inner.View()
-	if _r == nil {
+// dOMUIEventAdopt wraps an Objective-C object that this code just created as a
+// DOMUIEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMUIEventAdopt(id objc.ID) *DOMUIEvent {
+	if id == 0 {
 		return nil
 	}
-	return &DOMAbstractView{inner: _r}
+	x := &DOMUIEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Detail calls the underlying Detail.
+// Description returns the object's -description text.
+func (x *DOMUIEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMUIEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMUIEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMUIEventUIEventCanBubbleCancelableViewDetail creates a new DOMUIEvent.
+func NewDOMUIEventUIEventCanBubbleCancelableViewDetail(type_ string, canBubble bool, cancelable bool, view *DOMAbstractView, detail int) *DOMUIEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DOMUIEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initUIEvent:canBubble:cancelable:view:detail:"), purego.NSString(type_), canBubble, cancelable, objref.IDOf(view), detail)
+	return dOMUIEventAdopt(_id)
+}
+
+// NewDOMUIEventUIEvent creates a new DOMUIEvent.
+func NewDOMUIEventUIEvent(type_ string, canBubble bool, cancelable bool, view *DOMAbstractView, detail int) *DOMUIEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DOMUIEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initUIEvent:::::"), purego.NSString(type_), canBubble, cancelable, objref.IDOf(view), detail)
+	return dOMUIEventAdopt(_id)
+}
+
+// WithReturnValue sets returnValue and returns the receiver so calls can be chained.
+func (x *DOMUIEvent) WithReturnValue(returnValue bool) *DOMUIEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
+	return x
+}
+
+// WithCancelBubble sets cancelBubble and returns the receiver so calls can be chained.
+func (x *DOMUIEvent) WithCancelBubble(cancelBubble bool) *DOMUIEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
+	return x
+}
+
+func (x *DOMUIEvent) View() *DOMAbstractView {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+	return DOMAbstractViewFromID(_r)
+}
+
 func (x *DOMUIEvent) Detail() int {
-	return x.inner.Detail()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("detail"))
+	return _r
 }
 
-// KeyCode calls the underlying KeyCode.
 func (x *DOMUIEvent) KeyCode() int {
-	return x.inner.KeyCode()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("keyCode"))
+	return _r
 }
 
-// CharCode calls the underlying CharCode.
 func (x *DOMUIEvent) CharCode() int {
-	return x.inner.CharCode()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("charCode"))
+	return _r
 }
 
-// LayerX calls the underlying LayerX.
 func (x *DOMUIEvent) LayerX() int {
-	return x.inner.LayerX()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("layerX"))
+	return _r
 }
 
-// LayerY calls the underlying LayerY.
 func (x *DOMUIEvent) LayerY() int {
-	return x.inner.LayerY()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("layerY"))
+	return _r
 }
 
-// PageX calls the underlying PageX.
 func (x *DOMUIEvent) PageX() int {
-	return x.inner.PageX()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pageX"))
+	return _r
 }
 
-// PageY calls the underlying PageY.
 func (x *DOMUIEvent) PageY() int {
-	return x.inner.PageY()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pageY"))
+	return _r
 }
 
-// Which calls the underlying Which.
 func (x *DOMUIEvent) Which() int {
-	return x.inner.Which()
-}
-
-func (x *DOMUIEvent) asDOMUIEvent() *raw.DOMUIEvent { return x.inner }
-
-func (x *DOMUIEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMEvent }
-
-func (x *DOMUIEvent) asDOMObject() *raw.DOMObject { return &x.inner.DOMEvent.DOMObject }
-
-func (x *DOMUIEvent) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMEvent.DOMObject.WebScriptObject
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("which"))
+	return _r
 }
 
 // DOMUIEventable is the interface implemented by [DOMUIEvent], for mocking and DI.
 type DOMUIEventable interface {
-	Unwrap() *raw.DOMUIEvent
+	obj.Object
 	WithReturnValue(returnValue bool) *DOMUIEvent
 	WithCancelBubble(cancelBubble bool) *DOMUIEvent
 	View() *DOMAbstractView

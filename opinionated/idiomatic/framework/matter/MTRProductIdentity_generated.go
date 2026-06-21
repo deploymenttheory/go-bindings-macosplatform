@@ -5,53 +5,79 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRProductIdentity wraps [raw.MTRProductIdentity] with a fluent Go API.
+// MTRProductIdentity is an idiomatic wrapper over the Objective-C class MTRProductIdentity.
 type MTRProductIdentity struct {
-	inner *raw.MTRProductIdentity
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRProductIdentity].
-func (x *MTRProductIdentity) Unwrap() *raw.MTRProductIdentity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRProductIdentity) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRProductIdentityFromID adopts an existing object pointer as a MTRProductIdentity (nil for 0).
+// MTRProductIdentityFromID adopts an existing Objective-C object as a MTRProductIdentity
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRProductIdentityFromID(id objc.ID) *MTRProductIdentity {
 	if id == 0 {
 		return nil
 	}
-	return &MTRProductIdentity{inner: raw.MTRProductIdentityFromID(id)}
+	x := &MTRProductIdentity{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRProductIdentityWithVendorIDProductID creates a new [MTRProductIdentity].
-func NewMTRProductIdentityWithVendorIDProductID(vendorID *foundation.NSNumber, productID *foundation.NSNumber) *MTRProductIdentity {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRProductIdentity")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVendorID:productID:"), vendorID.Ptr(), productID.Ptr())
-	return &MTRProductIdentity{inner: raw.MTRProductIdentityFromID(_id)}
+// mTRProductIdentityAdopt wraps an Objective-C object that this code just created as a
+// MTRProductIdentity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRProductIdentityAdopt(id objc.ID) *MTRProductIdentity {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRProductIdentity{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// VendorID calls the underlying VendorID.
-func (x *MTRProductIdentity) VendorID() *foundation.NSNumber {
-	return x.inner.VendorID()
+// Description returns the object's -description text.
+func (x *MTRProductIdentity) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// ProductID calls the underlying ProductID.
-func (x *MTRProductIdentity) ProductID() *foundation.NSNumber {
-	return x.inner.ProductID()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRProductIdentity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRProductIdentity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRProductIdentityWithVendorIDProductID creates a new MTRProductIdentity.
+func NewMTRProductIdentityWithVendorIDProductID(vendorID obj.Object, productID obj.Object) *MTRProductIdentity {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRProductIdentity")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVendorID:productID:"), objref.IDOf(vendorID), objref.IDOf(productID))
+	return mTRProductIdentityAdopt(_id)
+}
+
+func (x *MTRProductIdentity) VendorID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorID"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRProductIdentity) ProductID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productID"))
+	return obj.Wrap(_r)
 }
 
 // MTRProductIdentityable is the interface implemented by [MTRProductIdentity], for mocking and DI.
 type MTRProductIdentityable interface {
-	Unwrap() *raw.MTRProductIdentity
-	VendorID() *foundation.NSNumber
-	ProductID() *foundation.NSNumber
+	obj.Object
+	VendorID() obj.Object
+	ProductID() obj.Object
 }
 
 var _ MTRProductIdentityable = (*MTRProductIdentity)(nil)

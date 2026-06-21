@@ -5,129 +5,98 @@
 package contactsui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contactsui"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A popover-based interface for selecting a contact.
 //
-// ContactPicker wraps [raw.CNContactPicker] with a fluent Go API.
+// ContactPicker is an idiomatic wrapper over the Objective-C class CNContactPicker.
 type ContactPicker struct {
-	inner *raw.CNContactPicker
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNContactPicker].
-func (x *ContactPicker) Unwrap() *raw.CNContactPicker { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContactPicker) ID() objc.ID { return x.inner.Ptr() }
-
-// ContactPickerFromID adopts an existing object pointer as a ContactPicker (nil for 0).
+// ContactPickerFromID adopts an existing Objective-C object as a ContactPicker
+// (nil for 0), retaining it and registering a release finalizer.
 func ContactPickerFromID(id objc.ID) *ContactPicker {
 	if id == 0 {
 		return nil
 	}
-	return &ContactPicker{inner: raw.CNContactPickerFromID(id)}
+	x := &ContactPicker{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewContactPicker creates a new [ContactPicker].
+// contactPickerAdopt wraps an Objective-C object that this code just created as a
+// ContactPicker (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contactPickerAdopt(id objc.ID) *ContactPicker {
+	if id == 0 {
+		return nil
+	}
+	x := &ContactPicker{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ContactPicker) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ContactPicker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ContactPicker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewContactPicker creates a new ContactPicker.
 func NewContactPicker() *ContactPicker {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNContactPicker")), objc.RegisterName("new"))
-	return &ContactPicker{inner: raw.CNContactPickerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNContactPicker")), objc.RegisterName("new"))
+	return contactPickerAdopt(_id)
 }
 
 // The keys to be displayed when a contact is expanded.
 //
-// WithDisplayedKeys sets the collection, converting the Go slice to an NSArray.
-func (x *ContactPicker) WithDisplayedKeys(items ...*foundation.NSString) *ContactPicker {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetDisplayedKeys(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetDisplayedKeys(_arr)
+// WithDisplayedKeys sets the collection and returns the receiver so calls can be chained.
+func (x *ContactPicker) WithDisplayedKeys(items ...obj.Object) *ContactPicker {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayedKeys:"), _arr)
 	return x
-}
-
-// The picker delegate to be notified when the user chooses a contact.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *ContactPicker) WithDelegate(delegate raw.CNContactPickerDelegate) *ContactPicker {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// Shows the picker popover anchored to the specified view.
-//
-// ShowRelativeToRectOfViewPreferredEdge calls the underlying ShowRelativeToRectOfViewPreferredEdge.
-func (x *ContactPicker) ShowRelativeToRectOfViewPreferredEdge(positioningRect corefoundation.CGRect, positioningView *appkit.NSView, preferredEdge foundation.NSRectEdge) {
-	x.inner.ShowRelativeToRectOfViewPreferredEdge(positioningRect, positioningView, preferredEdge)
 }
 
 // Closes the popover.
-//
-// Close calls the underlying Close.
 func (x *ContactPicker) Close() {
-	x.inner.Close()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }
 
-// @abstract The CNContact keys to display when a contact is expanded. @discussion If no keys are provided, the picker will select contacts instead of values.
+// The CNContact keys to display when a contact is expanded. If no keys are provided, the picker will select contacts instead of values.
 //
 // DisplayedKeys returns the collection as a Go slice.
 func (x *ContactPicker) DisplayedKeys() []string {
-	arr := x.inner.DisplayedKeys()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayedKeys"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetDisplayedKeys calls the underlying SetDisplayedKeys.
-func (x *ContactPicker) SetDisplayedKeys(displayedKeys *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetDisplayedKeys(displayedKeys)
-}
-
-// @abstract The picker delegate to be notified when the user chooses a contact or value.
-//
-// Delegate calls the underlying Delegate.
-func (x *ContactPicker) Delegate() raw.CNContactPickerDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *ContactPicker) SetDelegate(delegate raw.CNContactPickerDelegate) {
-	x.inner.SetDelegate(delegate)
+func (x *ContactPicker) SetDisplayedKeys(displayedKeys []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayedKeys:"), purego.SliceToNSArray(displayedKeys, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // ContactPickerable is the interface implemented by [ContactPicker], for mocking and DI.
 type ContactPickerable interface {
-	Unwrap() *raw.CNContactPicker
-	WithDisplayedKeys(items ...*foundation.NSString) *ContactPicker
-	WithDelegate(delegate raw.CNContactPickerDelegate) *ContactPicker
-	ShowRelativeToRectOfViewPreferredEdge(positioningRect corefoundation.CGRect, positioningView *appkit.NSView, preferredEdge foundation.NSRectEdge)
+	obj.Object
+	WithDisplayedKeys(items ...obj.Object) *ContactPicker
 	Close()
 	DisplayedKeys() []string
-	SetDisplayedKeys(displayedKeys *foundation.NSArray[*foundation.NSString])
-	Delegate() raw.CNContactPickerDelegate
-	SetDelegate(delegate raw.CNContactPickerDelegate)
+	SetDisplayedKeys(displayedKeys []string)
 }
 
 var _ ContactPickerable = (*ContactPicker)(nil)

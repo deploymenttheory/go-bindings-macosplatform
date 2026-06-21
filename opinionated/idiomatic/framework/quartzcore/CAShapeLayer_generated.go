@@ -5,766 +5,680 @@
 package quartzcore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A layer that draws a cubic Bezier spline in its coordinate space.
 //
-// ShapeLayer wraps [raw.CAShapeLayer] with a fluent Go API.
+// ShapeLayer is an idiomatic wrapper over the Objective-C class CAShapeLayer.
 type ShapeLayer struct {
-	inner *raw.CAShapeLayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CAShapeLayer].
-func (x *ShapeLayer) Unwrap() *raw.CAShapeLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ShapeLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// ShapeLayerFromID adopts an existing object pointer as a ShapeLayer (nil for 0).
+// ShapeLayerFromID adopts an existing Objective-C object as a ShapeLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func ShapeLayerFromID(id objc.ID) *ShapeLayer {
 	if id == 0 {
 		return nil
 	}
-	return &ShapeLayer{inner: raw.CAShapeLayerFromID(id)}
+	x := &ShapeLayer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewShapeLayer creates a new [ShapeLayer].
+// shapeLayerAdopt wraps an Objective-C object that this code just created as a
+// ShapeLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shapeLayerAdopt(id objc.ID) *ShapeLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &ShapeLayer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ShapeLayer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ShapeLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ShapeLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewShapeLayer creates a new ShapeLayer.
 func NewShapeLayer() *ShapeLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CAShapeLayer")), objc.RegisterName("new"))
-	return &ShapeLayer{inner: raw.CAShapeLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CAShapeLayer")), objc.RegisterName("new"))
+	return shapeLayerAdopt(_id)
+}
+
+// The path defining the shape to be rendered. Animatable.
+//
+// WithPath sets path and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithPath(path obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
+	return x
+}
+
+// The color used to fill the shape’s path. Animatable.
+//
+// WithFillColor sets fillColor and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithFillColor(fillColor obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
+	return x
 }
 
 // The fill rule used when filling the shape’s path.
 //
-// WithFillRule sets the fillRule property and returns the receiver for chaining.
-func (x *ShapeLayer) WithFillRule(fillRule *foundation.NSString) *ShapeLayer {
-	x.inner.SetFillRule(fillRule)
+// WithFillRule sets fillRule and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithFillRule(fillRule obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillRule:"), objref.IDOf(fillRule))
+	return x
+}
+
+// The color used to stroke the shape’s path. Animatable.
+//
+// WithStrokeColor sets strokeColor and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithStrokeColor(strokeColor obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 	return x
 }
 
 // The relative location at which to begin stroking the path. Animatable.
 //
-// WithStrokeStart sets the strokeStart property and returns the receiver for chaining.
+// WithStrokeStart sets strokeStart and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithStrokeStart(strokeStart float64) *ShapeLayer {
-	x.inner.SetStrokeStart(strokeStart)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeStart:"), strokeStart)
 	return x
 }
 
 // The relative location at which to stop stroking the path. Animatable.
 //
-// WithStrokeEnd sets the strokeEnd property and returns the receiver for chaining.
+// WithStrokeEnd sets strokeEnd and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithStrokeEnd(strokeEnd float64) *ShapeLayer {
-	x.inner.SetStrokeEnd(strokeEnd)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeEnd:"), strokeEnd)
 	return x
 }
 
 // Specifies the line width of the shape’s path. Animatable.
 //
-// WithLineWidth sets the lineWidth property and returns the receiver for chaining.
+// WithLineWidth sets lineWidth and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithLineWidth(lineWidth float64) *ShapeLayer {
-	x.inner.SetLineWidth(lineWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
 	return x
 }
 
 // The miter limit used when stroking the shape’s path. Animatable.
 //
-// WithMiterLimit sets the miterLimit property and returns the receiver for chaining.
+// WithMiterLimit sets miterLimit and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithMiterLimit(miterLimit float64) *ShapeLayer {
-	x.inner.SetMiterLimit(miterLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
 	return x
 }
 
 // Specifies the line cap style for the shape’s path.
 //
-// WithLineCap sets the lineCap property and returns the receiver for chaining.
-func (x *ShapeLayer) WithLineCap(lineCap *foundation.NSString) *ShapeLayer {
-	x.inner.SetLineCap(lineCap)
+// WithLineCap sets lineCap and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithLineCap(lineCap obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineCap:"), objref.IDOf(lineCap))
 	return x
 }
 
 // Specifies the line join style for the shape’s path.
 //
-// WithLineJoin sets the lineJoin property and returns the receiver for chaining.
-func (x *ShapeLayer) WithLineJoin(lineJoin *foundation.NSString) *ShapeLayer {
-	x.inner.SetLineJoin(lineJoin)
+// WithLineJoin sets lineJoin and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithLineJoin(lineJoin obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineJoin:"), objref.IDOf(lineJoin))
 	return x
 }
 
 // The dash phase applied to the shape’s path when stroked. Animatable.
 //
-// WithLineDashPhase sets the lineDashPhase property and returns the receiver for chaining.
+// WithLineDashPhase sets lineDashPhase and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithLineDashPhase(lineDashPhase float64) *ShapeLayer {
-	x.inner.SetLineDashPhase(lineDashPhase)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
 	return x
 }
 
 // The dash pattern applied to the shape’s path when stroked.
 //
-// WithLineDashPattern sets the collection, converting the Go slice to an NSArray.
-func (x *ShapeLayer) WithLineDashPattern(items ...*foundation.NSNumber) *ShapeLayer {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetLineDashPattern(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetLineDashPattern(_arr)
-	return x
-}
-
-// The layer’s bounds rectangle. Animatable.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *ShapeLayer) WithBounds(bounds corefoundation.CGRect) *ShapeLayer {
-	x.inner.CALayer.SetBounds(bounds)
-	return x
-}
-
-// The layer’s position in its superlayer’s coordinate space. Animatable.
-//
-// WithPosition sets the position property and returns the receiver for chaining.
-func (x *ShapeLayer) WithPosition(position corefoundation.CGPoint) *ShapeLayer {
-	x.inner.CALayer.SetPosition(position)
+// WithLineDashPattern sets the collection and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithLineDashPattern(items ...obj.Object) *ShapeLayer {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPattern:"), _arr)
 	return x
 }
 
 // The layer’s position on the z axis. Animatable.
 //
-// WithZPosition sets the zPosition property and returns the receiver for chaining.
+// WithZPosition sets zPosition and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithZPosition(zPosition float64) *ShapeLayer {
-	x.inner.CALayer.SetZPosition(zPosition)
-	return x
-}
-
-// Defines the anchor point of the layer’s bounds rectangle. Animatable.
-//
-// WithAnchorPoint sets the anchorPoint property and returns the receiver for chaining.
-func (x *ShapeLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *ShapeLayer {
-	x.inner.CALayer.SetAnchorPoint(anchorPoint)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
 // The anchor point for the layer’s position along the z axis. Animatable.
 //
-// WithAnchorPointZ sets the anchorPointZ property and returns the receiver for chaining.
+// WithAnchorPointZ sets anchorPointZ and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithAnchorPointZ(anchorPointZ float64) *ShapeLayer {
-	x.inner.CALayer.SetAnchorPointZ(anchorPointZ)
-	return x
-}
-
-// The transform applied to the layer’s contents. Animatable.
-//
-// WithTransform sets the transform property and returns the receiver for chaining.
-func (x *ShapeLayer) WithTransform(transform raw.CATransform3D) *ShapeLayer {
-	x.inner.CALayer.SetTransform(transform)
-	return x
-}
-
-// The layer’s frame rectangle.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
-func (x *ShapeLayer) WithFrame(frame corefoundation.CGRect) *ShapeLayer {
-	x.inner.CALayer.SetFrame(frame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
 	return x
 }
 
 // A Boolean indicating whether the layer is displayed. Animatable.
 //
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithHidden(hidden bool) *ShapeLayer {
-	x.inner.CALayer.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
 // A Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
 //
-// WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
+// WithDoubleSided sets doubleSided and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithDoubleSided(doubleSided bool) *ShapeLayer {
-	x.inner.CALayer.SetDoubleSided(doubleSided)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleSided:"), doubleSided)
 	return x
 }
 
 // A Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
 //
-// WithGeometryFlipped sets the geometryFlipped property and returns the receiver for chaining.
+// WithGeometryFlipped sets geometryFlipped and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithGeometryFlipped(geometryFlipped bool) *ShapeLayer {
-	x.inner.CALayer.SetGeometryFlipped(geometryFlipped)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
 	return x
 }
 
 // An array containing the layer’s sublayers.
 //
-// WithSublayers sets the collection, converting the Go slice to an NSArray.
+// WithSublayers sets the collection and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithSublayers(items ...LayerProvider) *ShapeLayer {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.CALayer.SetSublayers(foundation.NSArrayFromID[*raw.CALayer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asLayer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CALayer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.CALayer.SetSublayers(_arr)
-	return x
-}
-
-// Specifies the transform to apply to sublayers when rendering. Animatable.
-//
-// WithSublayerTransform sets the sublayerTransform property and returns the receiver for chaining.
-func (x *ShapeLayer) WithSublayerTransform(sublayerTransform raw.CATransform3D) *ShapeLayer {
-	x.inner.CALayer.SetSublayerTransform(sublayerTransform)
+	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSublayers:"), _arr)
 	return x
 }
 
 // An optional layer whose alpha channel is used to mask the layer’s content.
 //
-// WithMask sets the mask property and returns the receiver for chaining.
+// WithMask sets mask and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithMask(mask LayerProvider) *ShapeLayer {
-	x.inner.CALayer.SetMask(mask.asLayer())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMask:"), objref.IDOf(mask))
 	return x
 }
 
 // A Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
 //
-// WithMasksToBounds sets the masksToBounds property and returns the receiver for chaining.
+// WithMasksToBounds sets masksToBounds and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithMasksToBounds(masksToBounds bool) *ShapeLayer {
-	x.inner.CALayer.SetMasksToBounds(masksToBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasksToBounds:"), masksToBounds)
 	return x
 }
 
 // An object that provides the contents of the layer. Animatable.
 //
-// WithContents sets the contents property and returns the receiver for chaining.
-func (x *ShapeLayer) WithContents(contents objc.ID) *ShapeLayer {
-	x.inner.CALayer.SetContents(contents)
-	return x
-}
-
-// The rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
-//
-// WithContentsRect sets the contentsRect property and returns the receiver for chaining.
-func (x *ShapeLayer) WithContentsRect(contentsRect corefoundation.CGRect) *ShapeLayer {
-	x.inner.CALayer.SetContentsRect(contentsRect)
+// WithContents sets contents and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithContents(contents obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
 	return x
 }
 
 // A constant that specifies how the layer’s contents are positioned or scaled within its bounds.
 //
-// WithContentsGravity sets the contentsGravity property and returns the receiver for chaining.
-func (x *ShapeLayer) WithContentsGravity(contentsGravity *foundation.NSString) *ShapeLayer {
-	x.inner.CALayer.SetContentsGravity(contentsGravity)
+// WithContentsGravity sets contentsGravity and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithContentsGravity(contentsGravity obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
 	return x
 }
 
 // The scale factor applied to the layer.
 //
-// WithContentsScale sets the contentsScale property and returns the receiver for chaining.
+// WithContentsScale sets contentsScale and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithContentsScale(contentsScale float64) *ShapeLayer {
-	x.inner.CALayer.SetContentsScale(contentsScale)
-	return x
-}
-
-// The rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
-//
-// WithContentsCenter sets the contentsCenter property and returns the receiver for chaining.
-func (x *ShapeLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *ShapeLayer {
-	x.inner.CALayer.SetContentsCenter(contentsCenter)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsScale:"), contentsScale)
 	return x
 }
 
 // A hint for the desired storage format of the layer contents.
 //
-// WithContentsFormat sets the contentsFormat property and returns the receiver for chaining.
-func (x *ShapeLayer) WithContentsFormat(contentsFormat *foundation.NSString) *ShapeLayer {
-	x.inner.CALayer.SetContentsFormat(contentsFormat)
+// WithContentsFormat sets contentsFormat and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithContentsFormat(contentsFormat obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
 	return x
 }
 
-// WithWantsExtendedDynamicRangeContent sets the wantsExtendedDynamicRangeContent property and returns the receiver for chaining.
+// WithWantsExtendedDynamicRangeContent sets wantsExtendedDynamicRangeContent and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *ShapeLayer {
-	x.inner.CALayer.SetWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
 	return x
 }
 
-// WithToneMapMode sets the toneMapMode property and returns the receiver for chaining.
-func (x *ShapeLayer) WithToneMapMode(toneMapMode *foundation.NSString) *ShapeLayer {
-	x.inner.CALayer.SetToneMapMode(toneMapMode)
+// WithToneMapMode sets toneMapMode and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithToneMapMode(toneMapMode obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
 	return x
 }
 
-// WithPreferredDynamicRange sets the preferredDynamicRange property and returns the receiver for chaining.
-func (x *ShapeLayer) WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *ShapeLayer {
-	x.inner.CALayer.SetPreferredDynamicRange(preferredDynamicRange)
+// WithPreferredDynamicRange sets preferredDynamicRange and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
 	return x
 }
 
-// WithContentsHeadroom sets the contentsHeadroom property and returns the receiver for chaining.
+// WithContentsHeadroom sets contentsHeadroom and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithContentsHeadroom(contentsHeadroom float64) *ShapeLayer {
-	x.inner.CALayer.SetContentsHeadroom(contentsHeadroom)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
 	return x
 }
 
 // The filter used when reducing the size of the content.
 //
-// WithMinificationFilter sets the minificationFilter property and returns the receiver for chaining.
-func (x *ShapeLayer) WithMinificationFilter(minificationFilter *foundation.NSString) *ShapeLayer {
-	x.inner.CALayer.SetMinificationFilter(minificationFilter)
+// WithMinificationFilter sets minificationFilter and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithMinificationFilter(minificationFilter obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
 	return x
 }
 
 // The filter used when increasing the size of the content.
 //
-// WithMagnificationFilter sets the magnificationFilter property and returns the receiver for chaining.
-func (x *ShapeLayer) WithMagnificationFilter(magnificationFilter *foundation.NSString) *ShapeLayer {
-	x.inner.CALayer.SetMagnificationFilter(magnificationFilter)
+// WithMagnificationFilter sets magnificationFilter and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithMagnificationFilter(magnificationFilter obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
 	return x
 }
 
 // The bias factor used by the minification filter to determine the levels of detail.
 //
-// WithMinificationFilterBias sets the minificationFilterBias property and returns the receiver for chaining.
+// WithMinificationFilterBias sets minificationFilterBias and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithMinificationFilterBias(minificationFilterBias float32) *ShapeLayer {
-	x.inner.CALayer.SetMinificationFilterBias(minificationFilterBias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
 	return x
 }
 
 // A Boolean value indicating whether the layer contains completely opaque content.
 //
-// WithOpaque sets the opaque property and returns the receiver for chaining.
+// WithOpaque sets opaque and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithOpaque(opaque bool) *ShapeLayer {
-	x.inner.CALayer.SetOpaque(opaque)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 	return x
 }
 
 // A Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
 //
-// WithNeedsDisplayOnBoundsChange sets the needsDisplayOnBoundsChange property and returns the receiver for chaining.
+// WithNeedsDisplayOnBoundsChange sets needsDisplayOnBoundsChange and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *ShapeLayer {
-	x.inner.CALayer.SetNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
 	return x
 }
 
 // A Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
 //
-// WithDrawsAsynchronously sets the drawsAsynchronously property and returns the receiver for chaining.
+// WithDrawsAsynchronously sets drawsAsynchronously and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *ShapeLayer {
-	x.inner.CALayer.SetDrawsAsynchronously(drawsAsynchronously)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
 	return x
 }
 
 // A bitmask defining how the edges of the receiver are rasterized.
 //
-// WithEdgeAntialiasingMask sets the edgeAntialiasingMask property and returns the receiver for chaining.
-func (x *ShapeLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *ShapeLayer {
-	x.inner.CALayer.SetEdgeAntialiasingMask(raw.CAEdgeAntialiasingMask(edgeAntialiasingMask))
+// WithEdgeAntialiasingMask sets edgeAntialiasingMask and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
 	return x
 }
 
 // A Boolean indicating whether the layer is allowed to perform edge antialiasing.
 //
-// WithAllowsEdgeAntialiasing sets the allowsEdgeAntialiasing property and returns the receiver for chaining.
+// WithAllowsEdgeAntialiasing sets allowsEdgeAntialiasing and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *ShapeLayer {
-	x.inner.CALayer.SetAllowsEdgeAntialiasing(allowsEdgeAntialiasing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
+	return x
+}
+
+// The background color of the receiver. Animatable.
+//
+// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithBackgroundColor(backgroundColor obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
 // The radius to use when drawing rounded corners for the layer’s background. Animatable.
 //
-// WithCornerRadius sets the cornerRadius property and returns the receiver for chaining.
+// WithCornerRadius sets cornerRadius and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithCornerRadius(cornerRadius float64) *ShapeLayer {
-	x.inner.CALayer.SetCornerRadius(cornerRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
 	return x
 }
 
-// WithMaskedCorners sets the maskedCorners property and returns the receiver for chaining.
-func (x *ShapeLayer) WithMaskedCorners(maskedCorners CACornerMask) *ShapeLayer {
-	x.inner.CALayer.SetMaskedCorners(raw.CACornerMask(maskedCorners))
+// WithMaskedCorners sets maskedCorners and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithMaskedCorners(maskedCorners CornerMask) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskedCorners:"), maskedCorners)
 	return x
 }
 
-// WithCornerCurve sets the cornerCurve property and returns the receiver for chaining.
-func (x *ShapeLayer) WithCornerCurve(cornerCurve *foundation.NSString) *ShapeLayer {
-	x.inner.CALayer.SetCornerCurve(cornerCurve)
+// WithCornerCurve sets cornerCurve and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithCornerCurve(cornerCurve obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
 	return x
 }
 
 // The width of the layer’s border. Animatable.
 //
-// WithBorderWidth sets the borderWidth property and returns the receiver for chaining.
+// WithBorderWidth sets borderWidth and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithBorderWidth(borderWidth float64) *ShapeLayer {
-	x.inner.CALayer.SetBorderWidth(borderWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderWidth:"), borderWidth)
+	return x
+}
+
+// The color of the layer’s border. Animatable.
+//
+// WithBorderColor sets borderColor and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithBorderColor(borderColor obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 	return x
 }
 
 // The opacity of the receiver. Animatable.
 //
-// WithOpacity sets the opacity property and returns the receiver for chaining.
+// WithOpacity sets opacity and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithOpacity(opacity float32) *ShapeLayer {
-	x.inner.CALayer.SetOpacity(opacity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpacity:"), opacity)
 	return x
 }
 
 // A Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
 //
-// WithAllowsGroupOpacity sets the allowsGroupOpacity property and returns the receiver for chaining.
+// WithAllowsGroupOpacity sets allowsGroupOpacity and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *ShapeLayer {
-	x.inner.CALayer.SetAllowsGroupOpacity(allowsGroupOpacity)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
 	return x
 }
 
 // A CoreImage filter used to composite the layer and the content behind it. Animatable.
 //
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *ShapeLayer) WithCompositingFilter(compositingFilter objc.ID) *ShapeLayer {
-	x.inner.CALayer.SetCompositingFilter(compositingFilter)
+// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithCompositingFilter(compositingFilter obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
 // A Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
 //
-// WithShouldRasterize sets the shouldRasterize property and returns the receiver for chaining.
+// WithShouldRasterize sets shouldRasterize and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithShouldRasterize(shouldRasterize bool) *ShapeLayer {
-	x.inner.CALayer.SetShouldRasterize(shouldRasterize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
 	return x
 }
 
 // The scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
 //
-// WithRasterizationScale sets the rasterizationScale property and returns the receiver for chaining.
+// WithRasterizationScale sets rasterizationScale and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithRasterizationScale(rasterizationScale float64) *ShapeLayer {
-	x.inner.CALayer.SetRasterizationScale(rasterizationScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
+	return x
+}
+
+// The color of the layer’s shadow. Animatable.
+//
+// WithShadowColor sets shadowColor and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithShadowColor(shadowColor obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
 	return x
 }
 
 // The opacity of the layer’s shadow. Animatable.
 //
-// WithShadowOpacity sets the shadowOpacity property and returns the receiver for chaining.
+// WithShadowOpacity sets shadowOpacity and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithShadowOpacity(shadowOpacity float32) *ShapeLayer {
-	x.inner.CALayer.SetShadowOpacity(shadowOpacity)
-	return x
-}
-
-// The offset (in points) of the layer’s shadow. Animatable.
-//
-// WithShadowOffset sets the shadowOffset property and returns the receiver for chaining.
-func (x *ShapeLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *ShapeLayer {
-	x.inner.CALayer.SetShadowOffset(shadowOffset)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
 	return x
 }
 
 // The blur radius (in points) used to render the layer’s shadow. Animatable.
 //
-// WithShadowRadius sets the shadowRadius property and returns the receiver for chaining.
+// WithShadowRadius sets shadowRadius and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithShadowRadius(shadowRadius float64) *ShapeLayer {
-	x.inner.CALayer.SetShadowRadius(shadowRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowRadius:"), shadowRadius)
+	return x
+}
+
+// The shape of the layer’s shadow. Animatable.
+//
+// WithShadowPath sets shadowPath and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithShadowPath(shadowPath obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
 	return x
 }
 
 // A bitmask defining how the layer is resized when the bounds of its superlayer changes.
 //
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *ShapeLayer) WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *ShapeLayer {
-	x.inner.CALayer.SetAutoresizingMask(raw.CAAutoresizingMask(autoresizingMask))
-	return x
-}
-
-// The object responsible for laying out the layer’s sublayers.
-//
-// WithLayoutManager sets the layoutManager property and returns the receiver for chaining.
-func (x *ShapeLayer) WithLayoutManager(layoutManager raw.CALayoutManager) *ShapeLayer {
-	x.inner.CALayer.SetLayoutManager(layoutManager)
+// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
 // A dictionary containing layer actions.
 //
-// WithActions sets the actions property and returns the receiver for chaining.
-func (x *ShapeLayer) WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *ShapeLayer {
-	x.inner.CALayer.SetActions(actions)
+// WithActions sets actions and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithActions(actions obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActions:"), objref.IDOf(actions))
 	return x
 }
 
 // The name of the receiver.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *ShapeLayer) WithName(name string) *ShapeLayer {
-	x.inner.CALayer.SetName(foundation.NSStringStringWithUTF8String(name))
-	return x
-}
-
-// The layer’s delegate object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *ShapeLayer) WithDelegate(delegate raw.CALayerDelegate) *ShapeLayer {
-	x.inner.CALayer.SetDelegate(delegate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // An optional dictionary used to store property values that aren’t explicitly defined by the layer.
 //
-// WithStyle sets the style property and returns the receiver for chaining.
-func (x *ShapeLayer) WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *ShapeLayer {
-	x.inner.CALayer.SetStyle(style)
+// WithStyle sets style and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithStyle(style obj.Object) *ShapeLayer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), objref.IDOf(style))
 	return x
 }
 
 // The constraints used to position current layer’s sublayers.
 //
-// WithConstraints sets the collection, converting the Go slice to an NSArray.
-func (x *ShapeLayer) WithConstraints(items ...*raw.CAConstraint) *ShapeLayer {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.CALayer.SetConstraints(foundation.NSArrayFromID[*raw.CAConstraint](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.CAConstraint](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.CALayer.SetConstraints(_arr)
+// WithConstraints sets the collection and returns the receiver so calls can be chained.
+func (x *ShapeLayer) WithConstraints(items ...*Constraint) *ShapeLayer {
+	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
-// Path calls the underlying Path.
-func (x *ShapeLayer) Path() unsafe.Pointer {
-	return x.inner.Path()
+func (x *ShapeLayer) Path() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+	return obj.Wrap(_r)
 }
 
-// SetPath calls the underlying SetPath.
-func (x *ShapeLayer) SetPath(path unsafe.Pointer) {
-	x.inner.SetPath(path)
+func (x *ShapeLayer) SetPath(path obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
 }
 
-// FillColor calls the underlying FillColor.
-func (x *ShapeLayer) FillColor() unsafe.Pointer {
-	return x.inner.FillColor()
+func (x *ShapeLayer) FillColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fillColor"))
+	return obj.Wrap(_r)
 }
 
-// SetFillColor calls the underlying SetFillColor.
-func (x *ShapeLayer) SetFillColor(fillColor unsafe.Pointer) {
-	x.inner.SetFillColor(fillColor)
+func (x *ShapeLayer) SetFillColor(fillColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 }
 
-// FillRule calls the underlying FillRule.
-func (x *ShapeLayer) FillRule() string {
-	_r := x.inner.FillRule()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *ShapeLayer) FillRule() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fillRule"))
+	return obj.Wrap(_r)
 }
 
-// SetFillRule calls the underlying SetFillRule.
-func (x *ShapeLayer) SetFillRule(fillRule *foundation.NSString) {
-	x.inner.SetFillRule(fillRule)
+func (x *ShapeLayer) SetFillRule(fillRule obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillRule:"), objref.IDOf(fillRule))
 }
 
-// StrokeColor calls the underlying StrokeColor.
-func (x *ShapeLayer) StrokeColor() unsafe.Pointer {
-	return x.inner.StrokeColor()
+func (x *ShapeLayer) StrokeColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("strokeColor"))
+	return obj.Wrap(_r)
 }
 
-// SetStrokeColor calls the underlying SetStrokeColor.
-func (x *ShapeLayer) SetStrokeColor(strokeColor unsafe.Pointer) {
-	x.inner.SetStrokeColor(strokeColor)
+func (x *ShapeLayer) SetStrokeColor(strokeColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 }
 
-// StrokeStart calls the underlying StrokeStart.
 func (x *ShapeLayer) StrokeStart() float64 {
-	return x.inner.StrokeStart()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("strokeStart"))
+	return _r
 }
 
-// SetStrokeStart calls the underlying SetStrokeStart.
 func (x *ShapeLayer) SetStrokeStart(strokeStart float64) {
-	x.inner.SetStrokeStart(strokeStart)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeStart:"), strokeStart)
 }
 
-// StrokeEnd calls the underlying StrokeEnd.
 func (x *ShapeLayer) StrokeEnd() float64 {
-	return x.inner.StrokeEnd()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("strokeEnd"))
+	return _r
 }
 
-// SetStrokeEnd calls the underlying SetStrokeEnd.
 func (x *ShapeLayer) SetStrokeEnd(strokeEnd float64) {
-	x.inner.SetStrokeEnd(strokeEnd)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeEnd:"), strokeEnd)
 }
 
-// LineWidth calls the underlying LineWidth.
 func (x *ShapeLayer) LineWidth() float64 {
-	return x.inner.LineWidth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineWidth"))
+	return _r
 }
 
-// SetLineWidth calls the underlying SetLineWidth.
 func (x *ShapeLayer) SetLineWidth(lineWidth float64) {
-	x.inner.SetLineWidth(lineWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
 }
 
-// MiterLimit calls the underlying MiterLimit.
 func (x *ShapeLayer) MiterLimit() float64 {
-	return x.inner.MiterLimit()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("miterLimit"))
+	return _r
 }
 
-// SetMiterLimit calls the underlying SetMiterLimit.
 func (x *ShapeLayer) SetMiterLimit(miterLimit float64) {
-	x.inner.SetMiterLimit(miterLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
 }
 
-// LineCap calls the underlying LineCap.
-func (x *ShapeLayer) LineCap() string {
-	_r := x.inner.LineCap()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *ShapeLayer) LineCap() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lineCap"))
+	return obj.Wrap(_r)
 }
 
-// SetLineCap calls the underlying SetLineCap.
-func (x *ShapeLayer) SetLineCap(lineCap *foundation.NSString) {
-	x.inner.SetLineCap(lineCap)
+func (x *ShapeLayer) SetLineCap(lineCap obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineCap:"), objref.IDOf(lineCap))
 }
 
-// LineJoin calls the underlying LineJoin.
-func (x *ShapeLayer) LineJoin() string {
-	_r := x.inner.LineJoin()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *ShapeLayer) LineJoin() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lineJoin"))
+	return obj.Wrap(_r)
 }
 
-// SetLineJoin calls the underlying SetLineJoin.
-func (x *ShapeLayer) SetLineJoin(lineJoin *foundation.NSString) {
-	x.inner.SetLineJoin(lineJoin)
+func (x *ShapeLayer) SetLineJoin(lineJoin obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineJoin:"), objref.IDOf(lineJoin))
 }
 
-// LineDashPhase calls the underlying LineDashPhase.
 func (x *ShapeLayer) LineDashPhase() float64 {
-	return x.inner.LineDashPhase()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineDashPhase"))
+	return _r
 }
 
-// SetLineDashPhase calls the underlying SetLineDashPhase.
 func (x *ShapeLayer) SetLineDashPhase(lineDashPhase float64) {
-	x.inner.SetLineDashPhase(lineDashPhase)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
 }
 
 // LineDashPattern returns the collection as a Go slice.
-func (x *ShapeLayer) LineDashPattern() []*foundation.NSNumber {
-	arr := x.inner.LineDashPattern()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *ShapeLayer) LineDashPattern() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lineDashPattern"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetLineDashPattern calls the underlying SetLineDashPattern.
-func (x *ShapeLayer) SetLineDashPattern(lineDashPattern *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetLineDashPattern(lineDashPattern)
+func (x *ShapeLayer) SetLineDashPattern(lineDashPattern []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPattern:"), purego.SliceToNSArray(lineDashPattern, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
-
-func (x *ShapeLayer) asLayer() *raw.CALayer { return &x.inner.CALayer }
 
 // ShapeLayerable is the interface implemented by [ShapeLayer], for mocking and DI.
 type ShapeLayerable interface {
-	Unwrap() *raw.CAShapeLayer
-	WithFillRule(fillRule *foundation.NSString) *ShapeLayer
+	obj.Object
+	WithPath(path obj.Object) *ShapeLayer
+	WithFillColor(fillColor obj.Object) *ShapeLayer
+	WithFillRule(fillRule obj.Object) *ShapeLayer
+	WithStrokeColor(strokeColor obj.Object) *ShapeLayer
 	WithStrokeStart(strokeStart float64) *ShapeLayer
 	WithStrokeEnd(strokeEnd float64) *ShapeLayer
 	WithLineWidth(lineWidth float64) *ShapeLayer
 	WithMiterLimit(miterLimit float64) *ShapeLayer
-	WithLineCap(lineCap *foundation.NSString) *ShapeLayer
-	WithLineJoin(lineJoin *foundation.NSString) *ShapeLayer
+	WithLineCap(lineCap obj.Object) *ShapeLayer
+	WithLineJoin(lineJoin obj.Object) *ShapeLayer
 	WithLineDashPhase(lineDashPhase float64) *ShapeLayer
-	WithLineDashPattern(items ...*foundation.NSNumber) *ShapeLayer
-	WithBounds(bounds corefoundation.CGRect) *ShapeLayer
-	WithPosition(position corefoundation.CGPoint) *ShapeLayer
+	WithLineDashPattern(items ...obj.Object) *ShapeLayer
 	WithZPosition(zPosition float64) *ShapeLayer
-	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *ShapeLayer
 	WithAnchorPointZ(anchorPointZ float64) *ShapeLayer
-	WithTransform(transform raw.CATransform3D) *ShapeLayer
-	WithFrame(frame corefoundation.CGRect) *ShapeLayer
 	WithHidden(hidden bool) *ShapeLayer
 	WithDoubleSided(doubleSided bool) *ShapeLayer
 	WithGeometryFlipped(geometryFlipped bool) *ShapeLayer
 	WithSublayers(items ...LayerProvider) *ShapeLayer
-	WithSublayerTransform(sublayerTransform raw.CATransform3D) *ShapeLayer
 	WithMask(mask LayerProvider) *ShapeLayer
 	WithMasksToBounds(masksToBounds bool) *ShapeLayer
-	WithContents(contents objc.ID) *ShapeLayer
-	WithContentsRect(contentsRect corefoundation.CGRect) *ShapeLayer
-	WithContentsGravity(contentsGravity *foundation.NSString) *ShapeLayer
+	WithContents(contents obj.Object) *ShapeLayer
+	WithContentsGravity(contentsGravity obj.Object) *ShapeLayer
 	WithContentsScale(contentsScale float64) *ShapeLayer
-	WithContentsCenter(contentsCenter corefoundation.CGRect) *ShapeLayer
-	WithContentsFormat(contentsFormat *foundation.NSString) *ShapeLayer
+	WithContentsFormat(contentsFormat obj.Object) *ShapeLayer
 	WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *ShapeLayer
-	WithToneMapMode(toneMapMode *foundation.NSString) *ShapeLayer
-	WithPreferredDynamicRange(preferredDynamicRange *foundation.NSString) *ShapeLayer
+	WithToneMapMode(toneMapMode obj.Object) *ShapeLayer
+	WithPreferredDynamicRange(preferredDynamicRange obj.Object) *ShapeLayer
 	WithContentsHeadroom(contentsHeadroom float64) *ShapeLayer
-	WithMinificationFilter(minificationFilter *foundation.NSString) *ShapeLayer
-	WithMagnificationFilter(magnificationFilter *foundation.NSString) *ShapeLayer
+	WithMinificationFilter(minificationFilter obj.Object) *ShapeLayer
+	WithMagnificationFilter(magnificationFilter obj.Object) *ShapeLayer
 	WithMinificationFilterBias(minificationFilterBias float32) *ShapeLayer
 	WithOpaque(opaque bool) *ShapeLayer
 	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *ShapeLayer
 	WithDrawsAsynchronously(drawsAsynchronously bool) *ShapeLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask CAEdgeAntialiasingMask) *ShapeLayer
+	WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *ShapeLayer
 	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *ShapeLayer
+	WithBackgroundColor(backgroundColor obj.Object) *ShapeLayer
 	WithCornerRadius(cornerRadius float64) *ShapeLayer
-	WithMaskedCorners(maskedCorners CACornerMask) *ShapeLayer
-	WithCornerCurve(cornerCurve *foundation.NSString) *ShapeLayer
+	WithMaskedCorners(maskedCorners CornerMask) *ShapeLayer
+	WithCornerCurve(cornerCurve obj.Object) *ShapeLayer
 	WithBorderWidth(borderWidth float64) *ShapeLayer
+	WithBorderColor(borderColor obj.Object) *ShapeLayer
 	WithOpacity(opacity float32) *ShapeLayer
 	WithAllowsGroupOpacity(allowsGroupOpacity bool) *ShapeLayer
-	WithCompositingFilter(compositingFilter objc.ID) *ShapeLayer
+	WithCompositingFilter(compositingFilter obj.Object) *ShapeLayer
 	WithShouldRasterize(shouldRasterize bool) *ShapeLayer
 	WithRasterizationScale(rasterizationScale float64) *ShapeLayer
+	WithShadowColor(shadowColor obj.Object) *ShapeLayer
 	WithShadowOpacity(shadowOpacity float32) *ShapeLayer
-	WithShadowOffset(shadowOffset corefoundation.CGSize) *ShapeLayer
 	WithShadowRadius(shadowRadius float64) *ShapeLayer
-	WithAutoresizingMask(autoresizingMask CAAutoresizingMask) *ShapeLayer
-	WithLayoutManager(layoutManager raw.CALayoutManager) *ShapeLayer
-	WithActions(actions *foundation.NSDictionary[*foundation.NSString, raw.CAAction]) *ShapeLayer
+	WithShadowPath(shadowPath obj.Object) *ShapeLayer
+	WithAutoresizingMask(autoresizingMask AutoresizingMask) *ShapeLayer
+	WithActions(actions obj.Object) *ShapeLayer
 	WithName(name string) *ShapeLayer
-	WithDelegate(delegate raw.CALayerDelegate) *ShapeLayer
-	WithStyle(style *foundation.NSDictionary[objc.ID, objc.ID]) *ShapeLayer
-	WithConstraints(items ...*raw.CAConstraint) *ShapeLayer
-	Path() unsafe.Pointer
-	SetPath(path unsafe.Pointer)
-	FillColor() unsafe.Pointer
-	SetFillColor(fillColor unsafe.Pointer)
-	FillRule() string
-	SetFillRule(fillRule *foundation.NSString)
-	StrokeColor() unsafe.Pointer
-	SetStrokeColor(strokeColor unsafe.Pointer)
+	WithStyle(style obj.Object) *ShapeLayer
+	WithConstraints(items ...*Constraint) *ShapeLayer
+	Path() obj.Object
+	SetPath(path obj.Object)
+	FillColor() obj.Object
+	SetFillColor(fillColor obj.Object)
+	FillRule() obj.Object
+	SetFillRule(fillRule obj.Object)
+	StrokeColor() obj.Object
+	SetStrokeColor(strokeColor obj.Object)
 	StrokeStart() float64
 	SetStrokeStart(strokeStart float64)
 	StrokeEnd() float64
@@ -773,14 +687,14 @@ type ShapeLayerable interface {
 	SetLineWidth(lineWidth float64)
 	MiterLimit() float64
 	SetMiterLimit(miterLimit float64)
-	LineCap() string
-	SetLineCap(lineCap *foundation.NSString)
-	LineJoin() string
-	SetLineJoin(lineJoin *foundation.NSString)
+	LineCap() obj.Object
+	SetLineCap(lineCap obj.Object)
+	LineJoin() obj.Object
+	SetLineJoin(lineJoin obj.Object)
 	LineDashPhase() float64
 	SetLineDashPhase(lineDashPhase float64)
-	LineDashPattern() []*foundation.NSNumber
-	SetLineDashPattern(lineDashPattern *foundation.NSArray[*foundation.NSNumber])
+	LineDashPattern() []obj.Object
+	SetLineDashPattern(lineDashPattern []obj.Object)
 }
 
 var _ ShapeLayerable = (*ShapeLayer)(nil)

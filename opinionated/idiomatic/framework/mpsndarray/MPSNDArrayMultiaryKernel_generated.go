@@ -5,105 +5,66 @@
 package mpsndarray
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ArrayMultiaryKernel wraps [raw.MPSNDArrayMultiaryKernel] with a fluent Go API.
+// ArrayMultiaryKernel is an idiomatic wrapper over the Objective-C class MPSNDArrayMultiaryKernel.
 type ArrayMultiaryKernel struct {
-	inner *raw.MPSNDArrayMultiaryKernel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayMultiaryKernel].
-func (x *ArrayMultiaryKernel) Unwrap() *raw.MPSNDArrayMultiaryKernel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArrayMultiaryKernel) ID() objc.ID { return x.inner.Ptr() }
-
-// ArrayMultiaryKernelFromID adopts an existing object pointer as a ArrayMultiaryKernel (nil for 0).
+// ArrayMultiaryKernelFromID adopts an existing Objective-C object as a ArrayMultiaryKernel
+// (nil for 0), retaining it and registering a release finalizer.
 func ArrayMultiaryKernelFromID(id objc.ID) *ArrayMultiaryKernel {
 	if id == 0 {
 		return nil
 	}
-	return &ArrayMultiaryKernel{inner: raw.MPSNDArrayMultiaryKernelFromID(id)}
-}
-
-// NewArrayMultiaryKernelWithDeviceSourceCount creates a new [ArrayMultiaryKernel].
-func NewArrayMultiaryKernelWithDeviceSourceCount(device metal.MTLDevice, count uint) *ArrayMultiaryKernel {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayMultiaryKernel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:sourceCount:"), device, count)
-	return &ArrayMultiaryKernel{inner: raw.MPSNDArrayMultiaryKernelFromID(_id)}
-}
-
-// NewArrayMultiaryKernelWithCoderDevice creates a new [ArrayMultiaryKernel].
-func NewArrayMultiaryKernelWithCoderDevice(coder *foundation.NSCoder, device metal.MTLDevice) *ArrayMultiaryKernel {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayMultiaryKernel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), coder.Ptr(), device)
-	return &ArrayMultiaryKernel{inner: raw.MPSNDArrayMultiaryKernelFromID(_id)}
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *ArrayMultiaryKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayMultiaryKernel {
-	x.inner.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	x := &ArrayMultiaryKernel{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      sourceArrays    The list of sources for the filter in a NSArray. Ordering to be defined by subclass @result     A newly allocated MPSNDArray that will contain the result of the calculation when the command buffer completes successfully.
-//
-// EncodeToCommandBufferSourceArrays calls the underlying EncodeToCommandBufferSourceArrays.
-func (x *ArrayMultiaryKernel) EncodeToCommandBufferSourceArrays(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray]) *mpscore.MPSNDArray {
-	return x.inner.EncodeToCommandBufferSourceArrays(cmdBuf, sourceArrays)
+// arrayMultiaryKernelAdopt wraps an Objective-C object that this code just created as a
+// ArrayMultiaryKernel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arrayMultiaryKernelAdopt(id objc.ID) *ArrayMultiaryKernel {
+	if id == 0 {
+		return nil
+	}
+	x := &ArrayMultiaryKernel{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      sourceArrays    The list of sources for the filter in a NSArray. Ordering to be defined by subclass @param      destination     The NDArray to receive the result
-//
-// EncodeToCommandBufferSourceArraysDestinationArray calls the underlying EncodeToCommandBufferSourceArraysDestinationArray.
-func (x *ArrayMultiaryKernel) EncodeToCommandBufferSourceArraysDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray) {
-	x.inner.EncodeToCommandBufferSourceArraysDestinationArray(cmdBuf, sourceArrays, destination)
+// Description returns the object's -description text.
+func (x *ArrayMultiaryKernel) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      sourceArrays    The list of sources for the filter in a NSArray. Ordering to be defined by subclass @param      outGradientState If non-nil, the address output gradient state is written to this address @param      outputStateIsTemporary  If YES, the state if any will be allocated to contain temporary textures and buffers as needed @result     A newly allocated MPSNDArray that will contain the result of the calculation when the command buffer completes successfully.
-//
-// EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary calls the underlying EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary.
-func (x *ArrayMultiaryKernel) EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray {
-	return x.inner.EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary(cmdBuf, sourceArrays, outGradientState, outputStateIsTemporary)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ArrayMultiaryKernel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      cmdBuf          The command buffer into which to encode the kernel @param      sourceArrays    The list of sources for the filter in a NSArray. Ordering to be defined by subclass @param      outGradientState The output gradient state to record the operation for later use by gradient @param      destination     A destination array to contain the result of the calculation when the command buffer completes successfully.
-//
-// EncodeToCommandBufferSourceArraysResultStateDestinationArray calls the underlying EncodeToCommandBufferSourceArraysResultStateDestinationArray.
-func (x *ArrayMultiaryKernel) EncodeToCommandBufferSourceArraysResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray) {
-	x.inner.EncodeToCommandBufferSourceArraysResultStateDestinationArray(cmdBuf, sourceArrays, outGradientState, destination)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ArrayMultiaryKernel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @abstract   Encode a simple inference NDArray kernel and return a NDArray to hold the result @param      encoder                       The MTLComputeCommandEncoder that the kernel will be encoded on @param      commandBuffer          The command buffer into which to encode the kernel @param      sourceArrays             The list of sources for the filter in a NSArray. Ordering to be defined by subclass @param      destination               A destination array to contain the result of the calculation when the command buffer completes successfully.
-//
-// EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray calls the underlying EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray.
-func (x *ArrayMultiaryKernel) EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray(encoder metal.MTLComputeCommandEncoder, commandBuffer metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray) {
-	x.inner.EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray(encoder, commandBuffer, sourceArrays, destination)
-}
-
-func (x *ArrayMultiaryKernel) asArrayMultiaryKernel() *raw.MPSNDArrayMultiaryKernel { return x.inner }
-
-func (x *ArrayMultiaryKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayMultiaryBase
+// NewArrayMultiaryKernel creates a new ArrayMultiaryKernel.
+func NewArrayMultiaryKernel() *ArrayMultiaryKernel {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayMultiaryKernel")), objc.RegisterName("new"))
+	return arrayMultiaryKernelAdopt(_id)
 }
 
 // ArrayMultiaryKernelable is the interface implemented by [ArrayMultiaryKernel], for mocking and DI.
 type ArrayMultiaryKernelable interface {
-	Unwrap() *raw.MPSNDArrayMultiaryKernel
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayMultiaryKernel
-	EncodeToCommandBufferSourceArrays(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray]) *mpscore.MPSNDArray
-	EncodeToCommandBufferSourceArraysDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray)
-	EncodeToCommandBufferSourceArraysResultStateOutputStateIsTemporary(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], outGradientState *mpscore.MPSState, outputStateIsTemporary bool) *mpscore.MPSNDArray
-	EncodeToCommandBufferSourceArraysResultStateDestinationArray(cmdBuf metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], outGradientState *mpscore.MPSState, destination *mpscore.MPSNDArray)
-	EncodeToCommandEncoderCommandBufferSourceArraysDestinationArray(encoder metal.MTLComputeCommandEncoder, commandBuffer metal.MTLCommandBuffer, sourceArrays *foundation.NSArray[*mpscore.MPSNDArray], destination *mpscore.MPSNDArray)
+	obj.Object
 }
 
 var _ ArrayMultiaryKernelable = (*ArrayMultiaryKernel)(nil)

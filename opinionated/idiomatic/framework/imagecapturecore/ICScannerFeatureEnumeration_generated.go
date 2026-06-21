@@ -5,118 +5,121 @@
 package imagecapturecore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A feature that can have one of several discrete values, strings or numbers.
 //
-// ScannerFeatureEnumeration wraps [raw.ICScannerFeatureEnumeration] with a fluent Go API.
+// ScannerFeatureEnumeration is an idiomatic wrapper over the Objective-C class ICScannerFeatureEnumeration.
 type ScannerFeatureEnumeration struct {
-	inner *raw.ICScannerFeatureEnumeration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ICScannerFeatureEnumeration].
-func (x *ScannerFeatureEnumeration) Unwrap() *raw.ICScannerFeatureEnumeration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScannerFeatureEnumeration) ID() objc.ID { return x.inner.Ptr() }
-
-// ScannerFeatureEnumerationFromID adopts an existing object pointer as a ScannerFeatureEnumeration (nil for 0).
+// ScannerFeatureEnumerationFromID adopts an existing Objective-C object as a ScannerFeatureEnumeration
+// (nil for 0), retaining it and registering a release finalizer.
 func ScannerFeatureEnumerationFromID(id objc.ID) *ScannerFeatureEnumeration {
 	if id == 0 {
 		return nil
 	}
-	return &ScannerFeatureEnumeration{inner: raw.ICScannerFeatureEnumerationFromID(id)}
-}
-
-// NewScannerFeatureEnumeration creates a new [ScannerFeatureEnumeration].
-func NewScannerFeatureEnumeration() *ScannerFeatureEnumeration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ICScannerFeatureEnumeration")), objc.RegisterName("new"))
-	return &ScannerFeatureEnumeration{inner: raw.ICScannerFeatureEnumerationFromID(_id)}
-}
-
-// @property currentValue @abstract The current value. The current value can be set to one of the possible values in the "values" property below￼.
-//
-// WithCurrentValue sets the currentValue property and returns the receiver for chaining.
-func (x *ScannerFeatureEnumeration) WithCurrentValue(currentValue objc.ID) *ScannerFeatureEnumeration {
-	x.inner.SetCurrentValue(currentValue)
+	x := &ScannerFeatureEnumeration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property currentValue @abstract The current value. The current value can be set to one of the possible values in the "values" property below￼.
-//
-// CurrentValue calls the underlying CurrentValue.
-func (x *ScannerFeatureEnumeration) CurrentValue() objc.ID {
-	return x.inner.CurrentValue()
-}
-
-// SetCurrentValue calls the underlying SetCurrentValue.
-func (x *ScannerFeatureEnumeration) SetCurrentValue(currentValue objc.ID) {
-	x.inner.SetCurrentValue(currentValue)
-}
-
-// @property defaultValue @abstract ￼The default value. The default value can be set to one of the possible values in the "values" property below.
-//
-// DefaultValue calls the underlying DefaultValue.
-func (x *ScannerFeatureEnumeration) DefaultValue() objc.ID {
-	return x.inner.DefaultValue()
-}
-
-// @property values @abstract An array of possible values. All items in this array must be of same type￼.
-//
-// Values returns the collection as a Go slice.
-func (x *ScannerFeatureEnumeration) Values() []*foundation.NSNumber {
-	arr := x.inner.Values()
-	if arr == nil {
+// scannerFeatureEnumerationAdopt wraps an Objective-C object that this code just created as a
+// ScannerFeatureEnumeration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scannerFeatureEnumerationAdopt(id objc.ID) *ScannerFeatureEnumeration {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+	x := &ScannerFeatureEnumeration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property menuItemLabels @abstract ￼The human readable menu item labels to be used in a menu to allow the user to select the current value from an array of possible values.
+// Description returns the object's -description text.
+func (x *ScannerFeatureEnumeration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScannerFeatureEnumeration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScannerFeatureEnumeration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScannerFeatureEnumeration creates a new ScannerFeatureEnumeration.
+func NewScannerFeatureEnumeration() *ScannerFeatureEnumeration {
+	_id := objc.Send[objc.ID](objc.ID(_class("ICScannerFeatureEnumeration")), objc.RegisterName("new"))
+	return scannerFeatureEnumerationAdopt(_id)
+}
+
+// The current value. The current value can be set to one of the possible values in the "values" property below￼.
+//
+// WithCurrentValue sets currentValue and returns the receiver so calls can be chained.
+func (x *ScannerFeatureEnumeration) WithCurrentValue(currentValue obj.Object) *ScannerFeatureEnumeration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), objref.IDOf(currentValue))
+	return x
+}
+
+// The current value. The current value can be set to one of the possible values in the "values" property below￼.
+func (x *ScannerFeatureEnumeration) CurrentValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentValue"))
+	return obj.Wrap(_r)
+}
+
+func (x *ScannerFeatureEnumeration) SetCurrentValue(currentValue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), objref.IDOf(currentValue))
+}
+
+// ￼The default value. The default value can be set to one of the possible values in the "values" property below.
+func (x *ScannerFeatureEnumeration) DefaultValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultValue"))
+	return obj.Wrap(_r)
+}
+
+// An array of possible values. All items in this array must be of same type￼.
+//
+// Values returns the collection as a Go slice.
+func (x *ScannerFeatureEnumeration) Values() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("values"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// ￼The human readable menu item labels to be used in a menu to allow the user to select the current value from an array of possible values.
 //
 // MenuItemLabels returns the collection as a Go slice.
 func (x *ScannerFeatureEnumeration) MenuItemLabels() []string {
-	arr := x.inner.MenuItemLabels()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuItemLabels"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// @property menuItemLabelsTooltips @abstract ￼Tooltip text associated with the menu items.
+// ￼Tooltip text associated with the menu items.
 //
 // MenuItemLabelsTooltips returns the collection as a Go slice.
 func (x *ScannerFeatureEnumeration) MenuItemLabelsTooltips() []string {
-	arr := x.inner.MenuItemLabelsTooltips()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
-}
-
-func (x *ScannerFeatureEnumeration) asScannerFeature() *raw.ICScannerFeature {
-	return &x.inner.ICScannerFeature
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuItemLabelsTooltips"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ScannerFeatureEnumerationable is the interface implemented by [ScannerFeatureEnumeration], for mocking and DI.
 type ScannerFeatureEnumerationable interface {
-	Unwrap() *raw.ICScannerFeatureEnumeration
-	WithCurrentValue(currentValue objc.ID) *ScannerFeatureEnumeration
-	CurrentValue() objc.ID
-	SetCurrentValue(currentValue objc.ID)
-	DefaultValue() objc.ID
-	Values() []*foundation.NSNumber
+	obj.Object
+	WithCurrentValue(currentValue obj.Object) *ScannerFeatureEnumeration
+	CurrentValue() obj.Object
+	SetCurrentValue(currentValue obj.Object)
+	DefaultValue() obj.Object
+	Values() []obj.Object
 	MenuItemLabels() []string
 	MenuItemLabelsTooltips() []string
 }

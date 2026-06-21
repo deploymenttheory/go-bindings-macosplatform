@@ -5,107 +5,126 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRBooleanStateConfigurationClusterSuppressAlarmParams wraps [raw.MTRBooleanStateConfigurationClusterSuppressAlarmParams] with a fluent Go API.
+// MTRBooleanStateConfigurationClusterSuppressAlarmParams is an idiomatic wrapper over the Objective-C class MTRBooleanStateConfigurationClusterSuppressAlarmParams.
 type MTRBooleanStateConfigurationClusterSuppressAlarmParams struct {
-	inner *raw.MTRBooleanStateConfigurationClusterSuppressAlarmParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRBooleanStateConfigurationClusterSuppressAlarmParams].
-func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) Unwrap() *raw.MTRBooleanStateConfigurationClusterSuppressAlarmParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRBooleanStateConfigurationClusterSuppressAlarmParamsFromID adopts an existing object pointer as a MTRBooleanStateConfigurationClusterSuppressAlarmParams (nil for 0).
+// MTRBooleanStateConfigurationClusterSuppressAlarmParamsFromID adopts an existing Objective-C object as a MTRBooleanStateConfigurationClusterSuppressAlarmParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRBooleanStateConfigurationClusterSuppressAlarmParamsFromID(id objc.ID) *MTRBooleanStateConfigurationClusterSuppressAlarmParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRBooleanStateConfigurationClusterSuppressAlarmParams{inner: raw.MTRBooleanStateConfigurationClusterSuppressAlarmParamsFromID(id)}
+	x := &MTRBooleanStateConfigurationClusterSuppressAlarmParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRBooleanStateConfigurationClusterSuppressAlarmParams creates a new [MTRBooleanStateConfigurationClusterSuppressAlarmParams].
+// mTRBooleanStateConfigurationClusterSuppressAlarmParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRBooleanStateConfigurationClusterSuppressAlarmParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRBooleanStateConfigurationClusterSuppressAlarmParamsAdopt(id objc.ID) *MTRBooleanStateConfigurationClusterSuppressAlarmParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRBooleanStateConfigurationClusterSuppressAlarmParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRBooleanStateConfigurationClusterSuppressAlarmParams creates a new MTRBooleanStateConfigurationClusterSuppressAlarmParams.
 func NewMTRBooleanStateConfigurationClusterSuppressAlarmParams() *MTRBooleanStateConfigurationClusterSuppressAlarmParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBooleanStateConfigurationClusterSuppressAlarmParams")), objc.RegisterName("new"))
-	return &MTRBooleanStateConfigurationClusterSuppressAlarmParams{inner: raw.MTRBooleanStateConfigurationClusterSuppressAlarmParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRBooleanStateConfigurationClusterSuppressAlarmParams")), objc.RegisterName("new"))
+	return mTRBooleanStateConfigurationClusterSuppressAlarmParamsAdopt(_id)
 }
 
-// WithAlarmsToSuppress sets the alarmsToSuppress property and returns the receiver for chaining.
-func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) WithAlarmsToSuppress(alarmsToSuppress *foundation.NSNumber) *MTRBooleanStateConfigurationClusterSuppressAlarmParams {
-	x.inner.SetAlarmsToSuppress(alarmsToSuppress)
+// WithAlarmsToSuppress sets alarmsToSuppress and returns the receiver so calls can be chained.
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) WithAlarmsToSuppress(alarmsToSuppress obj.Object) *MTRBooleanStateConfigurationClusterSuppressAlarmParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmsToSuppress:"), objref.IDOf(alarmsToSuppress))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRBooleanStateConfigurationClusterSuppressAlarmParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRBooleanStateConfigurationClusterSuppressAlarmParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRBooleanStateConfigurationClusterSuppressAlarmParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRBooleanStateConfigurationClusterSuppressAlarmParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// AlarmsToSuppress calls the underlying AlarmsToSuppress.
-func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) AlarmsToSuppress() *foundation.NSNumber {
-	return x.inner.AlarmsToSuppress()
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) AlarmsToSuppress() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alarmsToSuppress"))
+	return obj.Wrap(_r)
 }
 
-// SetAlarmsToSuppress calls the underlying SetAlarmsToSuppress.
-func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) SetAlarmsToSuppress(alarmsToSuppress *foundation.NSNumber) {
-	x.inner.SetAlarmsToSuppress(alarmsToSuppress)
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) SetAlarmsToSuppress(alarmsToSuppress obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmsToSuppress:"), objref.IDOf(alarmsToSuppress))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRBooleanStateConfigurationClusterSuppressAlarmParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRBooleanStateConfigurationClusterSuppressAlarmParamsable is the interface implemented by [MTRBooleanStateConfigurationClusterSuppressAlarmParams], for mocking and DI.
 type MTRBooleanStateConfigurationClusterSuppressAlarmParamsable interface {
-	Unwrap() *raw.MTRBooleanStateConfigurationClusterSuppressAlarmParams
-	WithAlarmsToSuppress(alarmsToSuppress *foundation.NSNumber) *MTRBooleanStateConfigurationClusterSuppressAlarmParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRBooleanStateConfigurationClusterSuppressAlarmParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRBooleanStateConfigurationClusterSuppressAlarmParams
-	AlarmsToSuppress() *foundation.NSNumber
-	SetAlarmsToSuppress(alarmsToSuppress *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithAlarmsToSuppress(alarmsToSuppress obj.Object) *MTRBooleanStateConfigurationClusterSuppressAlarmParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRBooleanStateConfigurationClusterSuppressAlarmParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRBooleanStateConfigurationClusterSuppressAlarmParams
+	AlarmsToSuppress() obj.Object
+	SetAlarmsToSuppress(alarmsToSuppress obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRBooleanStateConfigurationClusterSuppressAlarmParamsable = (*MTRBooleanStateConfigurationClusterSuppressAlarmParams)(nil)

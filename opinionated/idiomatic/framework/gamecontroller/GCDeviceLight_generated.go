@@ -5,66 +5,88 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The colored light on a device.
 //
-// DeviceLight wraps [raw.GCDeviceLight] with a fluent Go API.
+// DeviceLight is an idiomatic wrapper over the Objective-C class GCDeviceLight.
 type DeviceLight struct {
-	inner *raw.GCDeviceLight
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCDeviceLight].
-func (x *DeviceLight) Unwrap() *raw.GCDeviceLight { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DeviceLight) ID() objc.ID { return x.inner.Ptr() }
-
-// DeviceLightFromID adopts an existing object pointer as a DeviceLight (nil for 0).
+// DeviceLightFromID adopts an existing Objective-C object as a DeviceLight
+// (nil for 0), retaining it and registering a release finalizer.
 func DeviceLightFromID(id objc.ID) *DeviceLight {
 	if id == 0 {
 		return nil
 	}
-	return &DeviceLight{inner: raw.GCDeviceLightFromID(id)}
+	x := &DeviceLight{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDeviceLight creates a new [DeviceLight].
+// deviceLightAdopt wraps an Objective-C object that this code just created as a
+// DeviceLight (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func deviceLightAdopt(id objc.ID) *DeviceLight {
+	if id == 0 {
+		return nil
+	}
+	x := &DeviceLight{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DeviceLight) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DeviceLight) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DeviceLight) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDeviceLight creates a new DeviceLight.
 func NewDeviceLight() *DeviceLight {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCDeviceLight")), objc.RegisterName("new"))
-	return &DeviceLight{inner: raw.GCDeviceLightFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GCDeviceLight")), objc.RegisterName("new"))
+	return deviceLightAdopt(_id)
 }
 
 // The color of a device’s light.
 //
-// WithColor sets the color property and returns the receiver for chaining.
+// WithColor sets color and returns the receiver so calls can be chained.
 func (x *DeviceLight) WithColor(color *Color) *DeviceLight {
-	x.inner.SetColor(color.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 	return x
 }
 
-// Color calls the underlying Color.
 func (x *DeviceLight) Color() *Color {
-	_r := x.inner.Color()
-	if _r == nil {
-		return nil
-	}
-	return &Color{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+	return ColorFromID(_r)
 }
 
-// SetColor calls the underlying SetColor.
-func (x *DeviceLight) SetColor(color *raw.GCColor) {
-	x.inner.SetColor(color)
+func (x *DeviceLight) SetColor(color *Color) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 }
 
 // DeviceLightable is the interface implemented by [DeviceLight], for mocking and DI.
 type DeviceLightable interface {
-	Unwrap() *raw.GCDeviceLight
+	obj.Object
 	WithColor(color *Color) *DeviceLight
 	Color() *Color
-	SetColor(color *raw.GCColor)
+	SetColor(color *Color)
 }
 
 var _ DeviceLightable = (*DeviceLight)(nil)

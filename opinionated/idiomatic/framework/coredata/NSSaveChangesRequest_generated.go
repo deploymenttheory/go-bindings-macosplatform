@@ -5,98 +5,105 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An encapsulation of a collection of changes to be made by an object store in response to a save operation on a managed object context.
 //
-// SaveChangesRequest wraps [raw.NSSaveChangesRequest] with a fluent Go API.
+// SaveChangesRequest is an idiomatic wrapper over the Objective-C class NSSaveChangesRequest.
 type SaveChangesRequest struct {
-	inner *raw.NSSaveChangesRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSaveChangesRequest].
-func (x *SaveChangesRequest) Unwrap() *raw.NSSaveChangesRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SaveChangesRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// SaveChangesRequestFromID adopts an existing object pointer as a SaveChangesRequest (nil for 0).
+// SaveChangesRequestFromID adopts an existing Objective-C object as a SaveChangesRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func SaveChangesRequestFromID(id objc.ID) *SaveChangesRequest {
 	if id == 0 {
 		return nil
 	}
-	return &SaveChangesRequest{inner: raw.NSSaveChangesRequestFromID(id)}
+	x := &SaveChangesRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// saveChangesRequestAdopt wraps an Objective-C object that this code just created as a
+// SaveChangesRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func saveChangesRequestAdopt(id objc.ID) *SaveChangesRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &SaveChangesRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SaveChangesRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SaveChangesRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SaveChangesRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a save changes request with collections of given changes.
 //
-// NewSaveChangesRequestWithInsertedObjectsUpdatedObjectsDeletedObjectsLockedObjects creates a new [SaveChangesRequest].
-func NewSaveChangesRequestWithInsertedObjectsUpdatedObjectsDeletedObjectsLockedObjects(insertedObjects *foundation.NSSet[*raw.NSManagedObject], updatedObjects *foundation.NSSet[*raw.NSManagedObject], deletedObjects *foundation.NSSet[*raw.NSManagedObject], lockedObjects *foundation.NSSet[*raw.NSManagedObject]) *SaveChangesRequest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSaveChangesRequest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInsertedObjects:updatedObjects:deletedObjects:lockedObjects:"), insertedObjects.Ptr(), updatedObjects.Ptr(), deletedObjects.Ptr(), lockedObjects.Ptr())
-	return &SaveChangesRequest{inner: raw.NSSaveChangesRequestFromID(_id)}
+// NewSaveChangesRequestWithInsertedObjectsUpdatedObjectsDeletedObjectsLockedObjects creates a new SaveChangesRequest.
+func NewSaveChangesRequestWithInsertedObjectsUpdatedObjectsDeletedObjectsLockedObjects(insertedObjects obj.Object, updatedObjects obj.Object, deletedObjects obj.Object, lockedObjects obj.Object) *SaveChangesRequest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSSaveChangesRequest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInsertedObjects:updatedObjects:deletedObjects:lockedObjects:"), objref.IDOf(insertedObjects), objref.IDOf(updatedObjects), objref.IDOf(deletedObjects), objref.IDOf(lockedObjects))
+	return saveChangesRequestAdopt(_id)
 }
 
 // The stores the request should be sent to.
 //
-// WithAffectedStores sets the collection, converting the Go slice to an NSArray.
+// WithAffectedStores sets the collection and returns the receiver so calls can be chained.
 func (x *SaveChangesRequest) WithAffectedStores(items ...PersistentStoreProvider) *SaveChangesRequest {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSPersistentStoreRequest.SetAffectedStores(foundation.NSArrayFromID[*raw.NSPersistentStore](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asPersistentStore().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSPersistentStore](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSPersistentStoreRequest.SetAffectedStores(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
 	return x
 }
 
-// InsertedObjects calls the underlying InsertedObjects.
-func (x *SaveChangesRequest) InsertedObjects() *foundation.NSSet[*raw.NSManagedObject] {
-	return x.inner.InsertedObjects()
+func (x *SaveChangesRequest) InsertedObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertedObjects"))
+	return obj.Wrap(_r)
 }
 
-// UpdatedObjects calls the underlying UpdatedObjects.
-func (x *SaveChangesRequest) UpdatedObjects() *foundation.NSSet[*raw.NSManagedObject] {
-	return x.inner.UpdatedObjects()
+func (x *SaveChangesRequest) UpdatedObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updatedObjects"))
+	return obj.Wrap(_r)
 }
 
-// DeletedObjects calls the underlying DeletedObjects.
-func (x *SaveChangesRequest) DeletedObjects() *foundation.NSSet[*raw.NSManagedObject] {
-	return x.inner.DeletedObjects()
+func (x *SaveChangesRequest) DeletedObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deletedObjects"))
+	return obj.Wrap(_r)
 }
 
-// LockedObjects calls the underlying LockedObjects.
-func (x *SaveChangesRequest) LockedObjects() *foundation.NSSet[*raw.NSManagedObject] {
-	return x.inner.LockedObjects()
-}
-
-func (x *SaveChangesRequest) asPersistentStoreRequest() *raw.NSPersistentStoreRequest {
-	return &x.inner.NSPersistentStoreRequest
+func (x *SaveChangesRequest) LockedObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lockedObjects"))
+	return obj.Wrap(_r)
 }
 
 // SaveChangesRequestable is the interface implemented by [SaveChangesRequest], for mocking and DI.
 type SaveChangesRequestable interface {
-	Unwrap() *raw.NSSaveChangesRequest
+	obj.Object
 	WithAffectedStores(items ...PersistentStoreProvider) *SaveChangesRequest
-	InsertedObjects() *foundation.NSSet[*raw.NSManagedObject]
-	UpdatedObjects() *foundation.NSSet[*raw.NSManagedObject]
-	DeletedObjects() *foundation.NSSet[*raw.NSManagedObject]
-	LockedObjects() *foundation.NSSet[*raw.NSManagedObject]
+	InsertedObjects() obj.Object
+	UpdatedObjects() obj.Object
+	DeletedObjects() obj.Object
+	LockedObjects() obj.Object
 }
 
 var _ SaveChangesRequestable = (*SaveChangesRequest)(nil)

@@ -5,43 +5,68 @@
 package phase
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A reference to a registered metaparameter that the app can share with multiple sound events or sources.
 //
-// GlobalMetaParameterAsset wraps [raw.PHASEGlobalMetaParameterAsset] with a fluent Go API.
+// GlobalMetaParameterAsset is an idiomatic wrapper over the Objective-C class PHASEGlobalMetaParameterAsset.
 type GlobalMetaParameterAsset struct {
-	inner *raw.PHASEGlobalMetaParameterAsset
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEGlobalMetaParameterAsset].
-func (x *GlobalMetaParameterAsset) Unwrap() *raw.PHASEGlobalMetaParameterAsset { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GlobalMetaParameterAsset) ID() objc.ID { return x.inner.Ptr() }
-
-// GlobalMetaParameterAssetFromID adopts an existing object pointer as a GlobalMetaParameterAsset (nil for 0).
+// GlobalMetaParameterAssetFromID adopts an existing Objective-C object as a GlobalMetaParameterAsset
+// (nil for 0), retaining it and registering a release finalizer.
 func GlobalMetaParameterAssetFromID(id objc.ID) *GlobalMetaParameterAsset {
 	if id == 0 {
 		return nil
 	}
-	return &GlobalMetaParameterAsset{inner: raw.PHASEGlobalMetaParameterAssetFromID(id)}
+	x := &GlobalMetaParameterAsset{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGlobalMetaParameterAsset creates a new [GlobalMetaParameterAsset].
+// globalMetaParameterAssetAdopt wraps an Objective-C object that this code just created as a
+// GlobalMetaParameterAsset (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func globalMetaParameterAssetAdopt(id objc.ID) *GlobalMetaParameterAsset {
+	if id == 0 {
+		return nil
+	}
+	x := &GlobalMetaParameterAsset{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GlobalMetaParameterAsset) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GlobalMetaParameterAsset) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GlobalMetaParameterAsset) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGlobalMetaParameterAsset creates a new GlobalMetaParameterAsset.
 func NewGlobalMetaParameterAsset() *GlobalMetaParameterAsset {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEGlobalMetaParameterAsset")), objc.RegisterName("new"))
-	return &GlobalMetaParameterAsset{inner: raw.PHASEGlobalMetaParameterAssetFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHASEGlobalMetaParameterAsset")), objc.RegisterName("new"))
+	return globalMetaParameterAssetAdopt(_id)
 }
-
-func (x *GlobalMetaParameterAsset) asAsset() *raw.PHASEAsset { return &x.inner.PHASEAsset }
 
 // GlobalMetaParameterAssetable is the interface implemented by [GlobalMetaParameterAsset], for mocking and DI.
 type GlobalMetaParameterAssetable interface {
-	Unwrap() *raw.PHASEGlobalMetaParameterAsset
+	obj.Object
 }
 
 var _ GlobalMetaParameterAssetable = (*GlobalMetaParameterAsset)(nil)

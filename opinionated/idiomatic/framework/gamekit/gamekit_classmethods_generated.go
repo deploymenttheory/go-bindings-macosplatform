@@ -6,57 +6,55 @@ package gamekit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// Shared calls the underlying GKAccessPointShared.
 func Shared() *AccessPoint {
-	_r := raw.GKAccessPointShared()
-	if _r == nil {
-		return nil
-	}
-	return &AccessPoint{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("GKAccessPoint")), objc.RegisterName("shared"))
+	return AccessPointFromID(_r)
 }
 
+// Loads the achievements that you previously reported the player making progress toward.
+//
 // LoadAchievements blocks until the operation completes or ctx is cancelled.
-func LoadAchievements(ctx context.Context) (*foundation.NSArray[*raw.GKAchievement], error) {
+func LoadAchievements(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.GKAchievement]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.GKAchievementLoadAchievementsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.GKAchievement], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKAchievement")), objc.RegisterName("loadAchievementsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.GKAchievement]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
+// Resets the percentage completed for all of the player’s achievements.
+//
 // ResetAchievements blocks until the operation completes or ctx is cancelled.
 func ResetAchievements(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	raw.GKAchievementResetAchievementsWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKAchievement")), objc.RegisterName("resetAchievementsWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -65,16 +63,17 @@ func ResetAchievements(ctx context.Context) error {
 	}
 }
 
+// Reports the player’s progress of players toward one or more achievements.
+//
 // ReportAchievements blocks until the operation completes or ctx is cancelled.
-func ReportAchievements(ctx context.Context, achievements *foundation.NSArray[*raw.GKAchievement]) error {
+func ReportAchievements(ctx context.Context, achievements []*Achievement) error {
 	_ch := make(chan error, 1)
-	raw.GKAchievementReportAchievementsWithCompletionHandler(achievements, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKAchievement")), objc.RegisterName("reportAchievements:withCompletionHandler:"), purego.SliceToNSArray(achievements, func(_v *Achievement) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -83,16 +82,17 @@ func ReportAchievements(ctx context.Context, achievements *foundation.NSArray[*r
 	}
 }
 
+// Reports the player’s progress on achievements and limits the challenges, associated with those achievements, that the player may complete.
+//
 // ReportAchievementsWithEligibleChallenges blocks until the operation completes or ctx is cancelled.
-func ReportAchievementsWithEligibleChallenges(ctx context.Context, achievements *foundation.NSArray[*raw.GKAchievement], challenges *foundation.NSArray[*raw.GKChallenge]) error {
+func ReportAchievementsWithEligibleChallenges(ctx context.Context, achievements []*Achievement, challenges []*Challenge) error {
 	_ch := make(chan error, 1)
-	raw.GKAchievementReportAchievementsWithEligibleChallengesWithCompletionHandler(achievements, challenges, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKAchievement")), objc.RegisterName("reportAchievements:withEligibleChallenges:withCompletionHandler:"), purego.SliceToNSArray(achievements, func(_v *Achievement) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(challenges, func(_v *Challenge) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -101,97 +101,101 @@ func ReportAchievementsWithEligibleChallenges(ctx context.Context, achievements 
 	}
 }
 
+// Downloads the localized descriptions of achievements from Game Center.
+//
 // LoadAchievementDescriptions blocks until the operation completes or ctx is cancelled.
-func LoadAchievementDescriptions(ctx context.Context) (*foundation.NSArray[*raw.GKAchievementDescription], error) {
+func LoadAchievementDescriptions(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.GKAchievementDescription]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.GKAchievementDescriptionLoadAchievementDescriptionsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.GKAchievementDescription], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKAchievementDescription")), objc.RegisterName("loadAchievementDescriptionsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.GKAchievementDescription]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// IncompleteAchievementImage calls the underlying GKAchievementDescriptionIncompleteAchievementImage.
-func IncompleteAchievementImage() *appkit.NSImage {
-	return raw.GKAchievementDescriptionIncompleteAchievementImage()
+// A common image that you can display when the player hasn’t completed the achievement.
+func IncompleteAchievementImage() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("GKAchievementDescription")), objc.RegisterName("incompleteAchievementImage"))
+	return obj.Wrap(_r)
 }
 
-// PlaceholderCompletedAchievementImage calls the underlying GKAchievementDescriptionPlaceholderCompletedAchievementImage.
-func PlaceholderCompletedAchievementImage() *appkit.NSImage {
-	return raw.GKAchievementDescriptionPlaceholderCompletedAchievementImage()
+// A placeholder image that you can display when the player completes the achievement.
+func PlaceholderCompletedAchievementImage() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("GKAchievementDescription")), objc.RegisterName("placeholderCompletedAchievementImage"))
+	return obj.Wrap(_r)
 }
 
+// Loads the list of outstanding challenges.
+//
 // LoadReceivedChallenges blocks until the operation completes or ctx is cancelled.
-func LoadReceivedChallenges(ctx context.Context) (*foundation.NSArray[*raw.GKChallenge], error) {
+func LoadReceivedChallenges(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.GKChallenge]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.GKChallengeLoadReceivedChallengesWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.GKChallenge], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKChallenge")), objc.RegisterName("loadReceivedChallengesWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.GKChallenge]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
+// Loads all the challenge definitions for the current game, returns an empty array if none exist.
+//
 // LoadChallengeDefinitions blocks until the operation completes or ctx is cancelled.
-func LoadChallengeDefinitions(ctx context.Context) (*foundation.NSArray[*raw.GKChallengeDefinition], error) {
+func LoadChallengeDefinitions(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.GKChallengeDefinition]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.GKChallengeDefinitionLoadChallengeDefinitionsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.GKChallengeDefinition], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKChallengeDefinition")), objc.RegisterName("loadChallengeDefinitionsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.GKChallengeDefinition]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// GKChallengeEventHandlerChallengeEventHandler calls the underlying GKChallengeEventHandlerChallengeEventHandler.
+// Returns the shared instance of the event handler
 func GKChallengeEventHandlerChallengeEventHandler() *ChallengeEventHandler {
-	_r := raw.GKChallengeEventHandlerChallengeEventHandler()
-	if _r == nil {
-		return nil
-	}
-	return &ChallengeEventHandler{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("GKChallengeEventHandler")), objc.RegisterName("challengeEventHandler"))
+	return ChallengeEventHandlerFromID(_r)
 }
 
+// Returns player information for the currently signed-in player.
+//
 // GetCurrentSignedInPlayerForContainer blocks until the operation completes or ctx is cancelled.
 func GetCurrentSignedInPlayerForContainer(ctx context.Context, containerName string) (*CloudPlayer, error) {
 	type _result struct {
@@ -199,16 +203,13 @@ func GetCurrentSignedInPlayerForContainer(ctx context.Context, containerName str
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.GKCloudPlayerGetCurrentSignedInPlayerForContainerCompletionHandler(foundation.NSStringStringWithUTF8String(containerName), func(_p0 *raw.GKCloudPlayer, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &CloudPlayer{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = CloudPlayerFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKCloudPlayer")), objc.RegisterName("getCurrentSignedInPlayerForContainer:completionHandler:"), purego.NSString(containerName), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -218,113 +219,109 @@ func GetCurrentSignedInPlayerForContainer(ctx context.Context, containerName str
 	}
 }
 
-// SharedDialogController calls the underlying GKDialogControllerSharedDialogController.
+// Retrieves the shared instance of the dialog controller.
 func SharedDialogController() *DialogController {
-	_r := raw.GKDialogControllerSharedDialogController()
-	if _r == nil {
-		return nil
-	}
-	return &DialogController{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("GKDialogController")), objc.RegisterName("sharedDialogController"))
+	return DialogControllerFromID(_r)
 }
 
-// MaxNumberOfRecipients calls the underlying GKFriendRequestComposeViewControllerMaxNumberOfRecipients.
-func MaxNumberOfRecipients() uint {
-	return raw.GKFriendRequestComposeViewControllerMaxNumberOfRecipients()
+// Returns the maximum number of recipients permitted in a single request.
+func MaxNumberOfRecipients() int {
+	_r := objc.Send[int](objc.ID(_class("GKFriendRequestComposeViewController")), objc.RegisterName("maxNumberOfRecipients"))
+	return _r
 }
 
-// StartWithDefinitionPartyCodeError calls the underlying GKGameActivityStartWithDefinitionPartyCodeError.
-func StartWithDefinitionPartyCodeError(activityDefinition *raw.GKGameActivityDefinition, partyCode string) (*GameActivity, error) {
-	_r, _err := raw.GKGameActivityStartWithDefinitionPartyCodeError(activityDefinition, foundation.NSStringStringWithUTF8String(partyCode))
-	if _err != nil {
-		return nil, _err
+// Creates and starts a new game activity with a custom party code.
+func StartWithDefinitionPartyCodeError(activityDefinition *GameActivityDefinition, partyCode string) (*GameActivity, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("GKGameActivity")), objc.RegisterName("startWithDefinition:partyCode:error:"), objref.IDOf(activityDefinition), purego.NSString(partyCode), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &GameActivity{inner: _r}, nil
+	return GameActivityFromID(_r), nil
 }
 
-// StartWithDefinitionError calls the underlying GKGameActivityStartWithDefinitionError.
-func StartWithDefinitionError(activityDefinition *raw.GKGameActivityDefinition) (*GameActivity, error) {
-	_r, _err := raw.GKGameActivityStartWithDefinitionError(activityDefinition)
-	if _err != nil {
-		return nil, _err
+// Creates and starts a game activity with a definition.
+func StartWithDefinitionError(activityDefinition *GameActivityDefinition) (*GameActivity, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("GKGameActivity")), objc.RegisterName("startWithDefinition:error:"), objref.IDOf(activityDefinition), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &GameActivity{inner: _r}, nil
+	return GameActivityFromID(_r), nil
 }
 
-// IsValidPartyCode calls the underlying GKGameActivityIsValidPartyCode.
+// Checks whether a party code is in valid format.
 func IsValidPartyCode(partyCode string) bool {
-	return raw.GKGameActivityIsValidPartyCode(foundation.NSStringStringWithUTF8String(partyCode))
+	_r := objc.Send[bool](objc.ID(_class("GKGameActivity")), objc.RegisterName("isValidPartyCode:"), purego.NSString(partyCode))
+	return _r
 }
 
+// Allowed characters for the party code to be used to share this activity.
+//
 // ValidPartyCodeAlphabet returns the collection as a Go slice.
 func ValidPartyCodeAlphabet() []string {
-	arr := raw.GKGameActivityValidPartyCodeAlphabet()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objc.ID(_class("GKGameActivity")), objc.RegisterName("validPartyCodeAlphabet"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// CheckPendingGameActivityExistenceWithCompletionHandler calls the underlying GKGameActivityCheckPendingGameActivityExistenceWithCompletionHandler.
+// Checks whether there is a pending activity to handle for the current game.
 func CheckPendingGameActivityExistenceWithCompletionHandler(completionHandler func(bool)) {
-	raw.GKGameActivityCheckPendingGameActivityExistenceWithCompletionHandler(completionHandler)
+	objc.Send[objc.ID](objc.ID(_class("GKGameActivity")), objc.RegisterName("checkPendingGameActivityExistenceWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
+// Loads all the game activity definitions for the current game.
+//
 // LoadGameActivityDefinitions blocks until the operation completes or ctx is cancelled.
-func LoadGameActivityDefinitions(ctx context.Context) (*foundation.NSArray[*raw.GKGameActivityDefinition], error) {
+func LoadGameActivityDefinitions(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.GKGameActivityDefinition]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.GKGameActivityDefinitionLoadGameActivityDefinitionsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.GKGameActivityDefinition], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKGameActivityDefinition")), objc.RegisterName("loadGameActivityDefinitionsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.GKGameActivityDefinition]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
+// Loads game activity definitions with the supplied App Store Connect identifiers.
+//
 // LoadGameActivityDefinitionsWithIDs blocks until the operation completes or ctx is cancelled.
-func LoadGameActivityDefinitionsWithIDs(ctx context.Context, activityDefinitionIDs *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.GKGameActivityDefinition], error) {
+func LoadGameActivityDefinitionsWithIDs(ctx context.Context, activityDefinitionIDs []string) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.GKGameActivityDefinition]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.GKGameActivityDefinitionLoadGameActivityDefinitionsWithIDsCompletionHandler(activityDefinitionIDs, func(_p0 *foundation.NSArray[*raw.GKGameActivityDefinition], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKGameActivityDefinition")), objc.RegisterName("loadGameActivityDefinitionsWithIDs:completionHandler:"), purego.SliceToNSArray(activityDefinitionIDs, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.GKGameActivityDefinition]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
+// Creates a new game session inside of an iCloud container.
+//
 // CreateSessionInContainerWithTitleMaxConnectedPlayers blocks until the operation completes or ctx is cancelled.
 func CreateSessionInContainerWithTitleMaxConnectedPlayers(ctx context.Context, containerName string, title string, maxPlayers int) (*GameSession, error) {
 	type _result struct {
@@ -332,16 +329,13 @@ func CreateSessionInContainerWithTitleMaxConnectedPlayers(ctx context.Context, c
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.GKGameSessionCreateSessionInContainerWithTitleMaxConnectedPlayersCompletionHandler(foundation.NSStringStringWithUTF8String(containerName), foundation.NSStringStringWithUTF8String(title), maxPlayers, func(_p0 *raw.GKGameSession, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &GameSession{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = GameSessionFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKGameSession")), objc.RegisterName("createSessionInContainer:withTitle:maxConnectedPlayers:completionHandler:"), purego.NSString(containerName), purego.NSString(title), maxPlayers, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -351,30 +345,33 @@ func CreateSessionInContainerWithTitleMaxConnectedPlayers(ctx context.Context, c
 	}
 }
 
+// Retrieves all of the game sessions associated with a container.
+//
 // LoadSessionsInContainer blocks until the operation completes or ctx is cancelled.
-func LoadSessionsInContainer(ctx context.Context, containerName string) (*foundation.NSArray[*raw.GKGameSession], error) {
+func LoadSessionsInContainer(ctx context.Context, containerName string) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.GKGameSession]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.GKGameSessionLoadSessionsInContainerCompletionHandler(foundation.NSStringStringWithUTF8String(containerName), func(_p0 *foundation.NSArray[*raw.GKGameSession], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKGameSession")), objc.RegisterName("loadSessionsInContainer:completionHandler:"), purego.NSString(containerName), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.GKGameSession]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
+// Loads a specific game session.
+//
 // LoadSessionWithIdentifier blocks until the operation completes or ctx is cancelled.
 func LoadSessionWithIdentifier(ctx context.Context, identifier string) (*GameSession, error) {
 	type _result struct {
@@ -382,16 +379,13 @@ func LoadSessionWithIdentifier(ctx context.Context, identifier string) (*GameSes
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.GKGameSessionLoadSessionWithIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(identifier), func(_p0 *raw.GKGameSession, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &GameSession{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = GameSessionFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKGameSession")), objc.RegisterName("loadSessionWithIdentifier:completionHandler:"), purego.NSString(identifier), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -401,16 +395,17 @@ func LoadSessionWithIdentifier(ctx context.Context, identifier string) (*GameSes
 	}
 }
 
+// Removes the specified game session.
+//
 // RemoveSessionWithIdentifier blocks until the operation completes or ctx is cancelled.
 func RemoveSessionWithIdentifier(ctx context.Context, identifier string) error {
 	_ch := make(chan error, 1)
-	raw.GKGameSessionRemoveSessionWithIdentifierCompletionHandler(foundation.NSStringStringWithUTF8String(identifier), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKGameSession")), objc.RegisterName("removeSessionWithIdentifier:completionHandler:"), purego.NSString(identifier), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -419,73 +414,69 @@ func RemoveSessionWithIdentifier(ctx context.Context, identifier string) error {
 	}
 }
 
-// AddEventListener calls the underlying GKGameSessionAddEventListener.
-func AddEventListener(listener *foundation.NSObject) {
-	raw.GKGameSessionAddEventListener(listener)
+// Adds a new event listener object.
+func AddEventListener(listener obj.Object) {
+	objc.Send[objc.ID](objc.ID(_class("GKGameSession")), objc.RegisterName("addEventListener:"), objref.IDOf(listener))
 }
 
-// RemoveEventListener calls the underlying GKGameSessionRemoveEventListener.
-func RemoveEventListener(listener *foundation.NSObject) {
-	raw.GKGameSessionRemoveEventListener(listener)
+// Stops listening to the event listener object.
+func RemoveEventListener(listener obj.Object) {
+	objc.Send[objc.ID](objc.ID(_class("GKGameSession")), objc.RegisterName("removeEventListener:"), objref.IDOf(listener))
 }
 
+// Loads leaderboards for the specified leaderboard IDs that Game Center uses.
+//
 // LoadLeaderboardsWithIDs blocks until the operation completes or ctx is cancelled.
-func LoadLeaderboardsWithIDs(ctx context.Context, leaderboardIDs *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.GKLeaderboard], error) {
+func LoadLeaderboardsWithIDs(ctx context.Context, leaderboardIDs []string) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.GKLeaderboard]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.GKLeaderboardLoadLeaderboardsWithIDsCompletionHandler(leaderboardIDs, func(_p0 *foundation.NSArray[*raw.GKLeaderboard], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKLeaderboard")), objc.RegisterName("loadLeaderboardsWithIDs:completionHandler:"), purego.SliceToNSArray(leaderboardIDs, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.GKLeaderboard]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
+// Submits a score to multiple leaderboards.
+//
 // SubmitScoreContextPlayerLeaderboardIDs blocks until the operation completes or ctx is cancelled.
-func SubmitScoreContextPlayerLeaderboardIDs(ctx context.Context, score int, context_ uint, player *raw.GKPlayer, leaderboardIDs *foundation.NSArray[*foundation.NSString]) error {
+func SubmitScoreContextPlayerLeaderboardIDs(ctx context.Context, score int, context_ int, player *Player, leaderboardIDs []string) error {
 	_ch := make(chan error, 1)
-	raw.GKLeaderboardSubmitScoreContextPlayerLeaderboardIDsCompletionHandler(score, context_, player, leaderboardIDs, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKLeaderboard")), objc.RegisterName("submitScore:context:player:leaderboardIDs:completionHandler:"), score, context_, objref.IDOf(player), purego.SliceToNSArray(leaderboardIDs, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
 	case <-ctx.Done():
 		return ctx.Err()
 	}
-}
-
-// LoadCategoriesWithCompletionHandler calls the underlying GKLeaderboardLoadCategoriesWithCompletionHandler.
-func LoadCategoriesWithCompletionHandler(completionHandler func(*foundation.NSArray[*foundation.NSString], *foundation.NSArray[*foundation.NSString], unsafe.Pointer)) {
-	raw.GKLeaderboardLoadCategoriesWithCompletionHandler(completionHandler)
 }
 
 // SetDefaultLeaderboard blocks until the operation completes or ctx is cancelled.
 func SetDefaultLeaderboard(ctx context.Context, leaderboardIdentifier string) error {
 	_ch := make(chan error, 1)
-	raw.GKLeaderboardSetDefaultLeaderboardWithCompletionHandler(foundation.NSStringStringWithUTF8String(leaderboardIdentifier), func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKLeaderboard")), objc.RegisterName("setDefaultLeaderboard:withCompletionHandler:"), purego.NSString(leaderboardIdentifier), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -494,92 +485,88 @@ func SetDefaultLeaderboard(ctx context.Context, leaderboardIdentifier string) er
 	}
 }
 
+// Loads the array of GKLeaderboard for your app Possible reasons for error: 1. Communications problem 2. Unauthenticated player 3. Leaderboard not present
+//
 // LoadLeaderboards blocks until the operation completes or ctx is cancelled.
-func LoadLeaderboards(ctx context.Context) (*foundation.NSArray[*raw.GKLeaderboard], error) {
+func LoadLeaderboards(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.GKLeaderboard]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.GKLeaderboardLoadLeaderboardsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.GKLeaderboard], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKLeaderboard")), objc.RegisterName("loadLeaderboardsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.GKLeaderboard]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
+// Loads all of the leaderboard sets you configure for your game.
+//
 // LoadLeaderboardSets blocks until the operation completes or ctx is cancelled.
-func LoadLeaderboardSets(ctx context.Context) (*foundation.NSArray[*raw.GKLeaderboardSet], error) {
+func LoadLeaderboardSets(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.GKLeaderboardSet]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.GKLeaderboardSetLoadLeaderboardSetsWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.GKLeaderboardSet], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKLeaderboardSet")), objc.RegisterName("loadLeaderboardSetsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.GKLeaderboardSet]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// Local calls the underlying GKLocalPlayerLocal.
+// Obtain the primary GKLocalPlayer object. The player is only available for offline play until logged in. A temporary player is created if no account is set up.
 func Local() *LocalPlayer {
-	_r := raw.GKLocalPlayerLocal()
-	if _r == nil {
-		return nil
-	}
-	return &LocalPlayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("GKLocalPlayer")), objc.RegisterName("local"))
+	return LocalPlayerFromID(_r)
 }
 
-// GKLocalPlayerLocalPlayer calls the underlying GKLocalPlayerLocalPlayer.
 func GKLocalPlayerLocalPlayer() *LocalPlayer {
-	_r := raw.GKLocalPlayerLocalPlayer()
-	if _r == nil {
-		return nil
-	}
-	return &LocalPlayer{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("GKLocalPlayer")), objc.RegisterName("localPlayer"))
+	return LocalPlayerFromID(_r)
 }
 
-// MaxPlayersAllowedForMatchOfType calls the underlying GKMatchRequestMaxPlayersAllowedForMatchOfType.
-func MaxPlayersAllowedForMatchOfType(matchType GKMatchType) uint {
-	return raw.GKMatchRequestMaxPlayersAllowedForMatchOfType(raw.GKMatchType(matchType))
+// Returns the maximum number of players allowed in the match request for a given match type.
+func MaxPlayersAllowedForMatchOfType(matchType MatchType) int {
+	_r := objc.Send[int](objc.ID(_class("GKMatchRequest")), objc.RegisterName("maxPlayersAllowedForMatchOfType:"), matchType)
+	return _r
 }
 
-// SharedMatchmaker calls the underlying GKMatchmakerSharedMatchmaker.
+// Returns the singleton matchmaker instance.
 func SharedMatchmaker() *Matchmaker {
-	_r := raw.GKMatchmakerSharedMatchmaker()
-	if _r == nil {
-		return nil
-	}
-	return &Matchmaker{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("GKMatchmaker")), objc.RegisterName("sharedMatchmaker"))
+	return MatchmakerFromID(_r)
 }
 
+// Displays a banner with a title and message to the player.
+//
 // ShowBannerWithTitleMessage blocks until the operation completes or ctx is cancelled.
 func ShowBannerWithTitleMessage(ctx context.Context, title string, message string) error {
 	_ch := make(chan error, 1)
-	raw.GKNotificationBannerShowBannerWithTitleMessageCompletionHandler(foundation.NSStringStringWithUTF8String(title), foundation.NSStringStringWithUTF8String(message), func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKNotificationBanner")), objc.RegisterName("showBannerWithTitle:message:completionHandler:"), purego.NSString(title), purego.NSString(message), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -588,12 +575,15 @@ func ShowBannerWithTitleMessage(ctx context.Context, title string, message strin
 	}
 }
 
+// Displays a banner to the player for a specified period of time.
+//
 // ShowBannerWithTitleMessageDuration blocks until the operation completes or ctx is cancelled.
 func ShowBannerWithTitleMessageDuration(ctx context.Context, title string, message string, duration float64) error {
 	_ch := make(chan error, 1)
-	raw.GKNotificationBannerShowBannerWithTitleMessageDurationCompletionHandler(foundation.NSStringStringWithUTF8String(title), foundation.NSStringStringWithUTF8String(message), duration, func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKNotificationBanner")), objc.RegisterName("showBannerWithTitle:message:duration:completionHandler:"), purego.NSString(title), purego.NSString(message), duration, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -602,49 +592,48 @@ func ShowBannerWithTitleMessageDuration(ctx context.Context, title string, messa
 	}
 }
 
-// AnonymousGuestPlayerWithIdentifier calls the underlying GKPlayerAnonymousGuestPlayerWithIdentifier.
+// Creates a guest player with the specified identifier.
 func AnonymousGuestPlayerWithIdentifier(guestIdentifier string) *Player {
-	_r := raw.GKPlayerAnonymousGuestPlayerWithIdentifier(foundation.NSStringStringWithUTF8String(guestIdentifier))
-	if _r == nil {
-		return nil
-	}
-	return &Player{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("GKPlayer")), objc.RegisterName("anonymousGuestPlayerWithIdentifier:"), purego.NSString(guestIdentifier))
+	return PlayerFromID(_r)
 }
 
+// Loads information about a list of players from Game Center.
+//
 // LoadPlayersForIdentifiers blocks until the operation completes or ctx is cancelled.
-func LoadPlayersForIdentifiers(ctx context.Context, identifiers *foundation.NSArray[*foundation.NSString]) (*foundation.NSArray[*raw.GKPlayer], error) {
+func LoadPlayersForIdentifiers(ctx context.Context, identifiers []string) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.GKPlayer]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.GKPlayerLoadPlayersForIdentifiersWithCompletionHandler(identifiers, func(_p0 *foundation.NSArray[*raw.GKPlayer], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKPlayer")), objc.RegisterName("loadPlayersForIdentifiers:withCompletionHandler:"), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.GKPlayer]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
+// Reports a list of scores to Game Center
+//
 // ReportScores blocks until the operation completes or ctx is cancelled.
-func ReportScores(ctx context.Context, scores *foundation.NSArray[*raw.GKScore]) error {
+func ReportScores(ctx context.Context, scores []*Score) error {
 	_ch := make(chan error, 1)
-	raw.GKScoreReportScoresWithCompletionHandler(scores, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKScore")), objc.RegisterName("reportScores:withCompletionHandler:"), purego.SliceToNSArray(scores, func(_v *Score) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -653,16 +642,17 @@ func ReportScores(ctx context.Context, scores *foundation.NSArray[*raw.GKScore])
 	}
 }
 
+// Submits a list of scores and all eligible challenges.
+//
 // ReportScoresWithEligibleChallenges blocks until the operation completes or ctx is cancelled.
-func ReportScoresWithEligibleChallenges(ctx context.Context, scores *foundation.NSArray[*raw.GKScore], challenges *foundation.NSArray[*raw.GKChallenge]) error {
+func ReportScoresWithEligibleChallenges(ctx context.Context, scores []*Score, challenges []*Challenge) error {
 	_ch := make(chan error, 1)
-	raw.GKScoreReportScoresWithEligibleChallengesWithCompletionHandler(scores, challenges, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKScore")), objc.RegisterName("reportScores:withEligibleChallenges:withCompletionHandler:"), purego.SliceToNSArray(scores, func(_v *Score) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(challenges, func(_v *Challenge) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -671,16 +661,17 @@ func ReportScoresWithEligibleChallenges(ctx context.Context, scores *foundation.
 	}
 }
 
+// Submits a list of scores and all eligible challenges.
+//
 // ReportLeaderboardScoresWithEligibleChallenges blocks until the operation completes or ctx is cancelled.
-func ReportLeaderboardScoresWithEligibleChallenges(ctx context.Context, scores *foundation.NSArray[*raw.GKLeaderboardScore], challenges *foundation.NSArray[*raw.GKChallenge]) error {
+func ReportLeaderboardScoresWithEligibleChallenges(ctx context.Context, scores []*LeaderboardScore, challenges []*Challenge) error {
 	_ch := make(chan error, 1)
-	raw.GKScoreReportLeaderboardScoresWithEligibleChallengesWithCompletionHandler(scores, challenges, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKScore")), objc.RegisterName("reportLeaderboardScores:withEligibleChallenges:withCompletionHandler:"), purego.SliceToNSArray(scores, func(_v *LeaderboardScore) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(challenges, func(_v *Challenge) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -689,32 +680,28 @@ func ReportLeaderboardScoresWithEligibleChallenges(ctx context.Context, scores *
 	}
 }
 
-// SharedTurnBasedEventHandler calls the underlying GKTurnBasedEventHandlerSharedTurnBasedEventHandler.
+// Returns the shared instance of the event handler.
 func SharedTurnBasedEventHandler() *TurnBasedEventHandler {
-	_r := raw.GKTurnBasedEventHandlerSharedTurnBasedEventHandler()
-	if _r == nil {
-		return nil
-	}
-	return &TurnBasedEventHandler{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("GKTurnBasedEventHandler")), objc.RegisterName("sharedTurnBasedEventHandler"))
+	return TurnBasedEventHandlerFromID(_r)
 }
 
+// Creates a new match or finds an existing match that needs a player.
+//
 // FindMatchForRequest blocks until the operation completes or ctx is cancelled.
-func FindMatchForRequest(ctx context.Context, request *raw.GKMatchRequest) (*TurnBasedMatch, error) {
+func FindMatchForRequest(ctx context.Context, request *MatchRequest) (*TurnBasedMatch, error) {
 	type _result struct {
 		val *TurnBasedMatch
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.GKTurnBasedMatchFindMatchForRequestWithCompletionHandler(request, func(_p0 *raw.GKTurnBasedMatch, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &TurnBasedMatch{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = TurnBasedMatchFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKTurnBasedMatch")), objc.RegisterName("findMatchForRequest:withCompletionHandler:"), objref.IDOf(request), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -724,30 +711,33 @@ func FindMatchForRequest(ctx context.Context, request *raw.GKMatchRequest) (*Tur
 	}
 }
 
+// Fetches the turn-based matches from Game Center that the local player participates in.
+//
 // LoadMatches blocks until the operation completes or ctx is cancelled.
-func LoadMatches(ctx context.Context) (*foundation.NSArray[*raw.GKTurnBasedMatch], error) {
+func LoadMatches(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSArray[*raw.GKTurnBasedMatch]
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.GKTurnBasedMatchLoadMatchesWithCompletionHandler(func(_p0 *foundation.NSArray[*raw.GKTurnBasedMatch], _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKTurnBasedMatch")), objc.RegisterName("loadMatchesWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSArray[*raw.GKTurnBasedMatch]
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
+// Loads a specific match with the specified identifier.
+//
 // LoadMatchWithID blocks until the operation completes or ctx is cancelled.
 func LoadMatchWithID(ctx context.Context, matchID string) (*TurnBasedMatch, error) {
 	type _result struct {
@@ -755,16 +745,13 @@ func LoadMatchWithID(ctx context.Context, matchID string) (*TurnBasedMatch, erro
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.GKTurnBasedMatchLoadMatchWithIDWithCompletionHandler(foundation.NSStringStringWithUTF8String(matchID), func(_p0 *raw.GKTurnBasedMatch, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &TurnBasedMatch{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = TurnBasedMatchFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("GKTurnBasedMatch")), objc.RegisterName("loadMatchWithID:withCompletionHandler:"), purego.NSString(matchID), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -774,7 +761,8 @@ func LoadMatchWithID(ctx context.Context, matchID string) (*TurnBasedMatch, erro
 	}
 }
 
-// IsVoIPAllowed calls the underlying GKVoiceChatIsVoIPAllowed.
+// Returns whether voice chat is available on the device.
 func IsVoIPAllowed() bool {
-	return raw.GKVoiceChatIsVoIPAllowed()
+	_r := objc.Send[bool](objc.ID(_class("GKVoiceChat")), objc.RegisterName("isVoIPAllowed"))
+	return _r
 }

@@ -5,200 +5,149 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Cluster Device Energy Management This cluster allows a client to manage the power draw of a device. An example of such a client could be an Energy Management System (EMS) which controls an Energy Smart Appliance (ESA).
 //
-// MTRClusterDeviceEnergyManagement wraps [raw.MTRClusterDeviceEnergyManagement] with a fluent Go API.
+// MTRClusterDeviceEnergyManagement is an idiomatic wrapper over the Objective-C class MTRClusterDeviceEnergyManagement.
 type MTRClusterDeviceEnergyManagement struct {
-	inner *raw.MTRClusterDeviceEnergyManagement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterDeviceEnergyManagement].
-func (x *MTRClusterDeviceEnergyManagement) Unwrap() *raw.MTRClusterDeviceEnergyManagement {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterDeviceEnergyManagement) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterDeviceEnergyManagementFromID adopts an existing object pointer as a MTRClusterDeviceEnergyManagement (nil for 0).
+// MTRClusterDeviceEnergyManagementFromID adopts an existing Objective-C object as a MTRClusterDeviceEnergyManagement
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterDeviceEnergyManagementFromID(id objc.ID) *MTRClusterDeviceEnergyManagement {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterDeviceEnergyManagement{inner: raw.MTRClusterDeviceEnergyManagementFromID(id)}
+	x := &MTRClusterDeviceEnergyManagement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterDeviceEnergyManagementAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterDeviceEnergyManagement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterDeviceEnergyManagementAdopt(id objc.ID) *MTRClusterDeviceEnergyManagement {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterDeviceEnergyManagement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterDeviceEnergyManagement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterDeviceEnergyManagement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterDeviceEnergyManagement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterDeviceEnergyManagementWithDeviceEndpointIDQueue creates a new [MTRClusterDeviceEnergyManagement].
-func NewMTRClusterDeviceEnergyManagementWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterDeviceEnergyManagement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterDeviceEnergyManagement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterDeviceEnergyManagement{inner: raw.MTRClusterDeviceEnergyManagementFromID(_id)}
+// NewMTRClusterDeviceEnergyManagementWithDeviceEndpointIDQueue creates a new MTRClusterDeviceEnergyManagement.
+func NewMTRClusterDeviceEnergyManagementWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterDeviceEnergyManagement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterDeviceEnergyManagement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterDeviceEnergyManagementAdopt(_id)
 }
 
-// PowerAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying PowerAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterDeviceEnergyManagement) PowerAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDeviceEnergyManagementClusterPowerAdjustRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.PowerAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterDeviceEnergyManagement) ReadAttributeESATypeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeESATypeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// CancelPowerAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying CancelPowerAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterDeviceEnergyManagement) CancelPowerAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.CancelPowerAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterDeviceEnergyManagement) ReadAttributeESACanGenerateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeESACanGenerateWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// CancelPowerAdjustRequestWithExpectedValuesExpectedValueIntervalCompletion calls the underlying CancelPowerAdjustRequestWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterDeviceEnergyManagement) CancelPowerAdjustRequestWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.CancelPowerAdjustRequestWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+func (x *MTRClusterDeviceEnergyManagement) ReadAttributeESAStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeESAStateWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// StartTimeAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying StartTimeAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterDeviceEnergyManagement) StartTimeAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.StartTimeAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterDeviceEnergyManagement) ReadAttributeAbsMinPowerWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAbsMinPowerWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// PauseRequestWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying PauseRequestWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterDeviceEnergyManagement) PauseRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDeviceEnergyManagementClusterPauseRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.PauseRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterDeviceEnergyManagement) ReadAttributeAbsMaxPowerWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAbsMaxPowerWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ResumeRequestWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying ResumeRequestWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterDeviceEnergyManagement) ResumeRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDeviceEnergyManagementClusterResumeRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ResumeRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterDeviceEnergyManagement) ReadAttributePowerAdjustmentCapabilityWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePowerAdjustmentCapabilityWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ResumeRequestWithExpectedValuesExpectedValueIntervalCompletion calls the underlying ResumeRequestWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterDeviceEnergyManagement) ResumeRequestWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ResumeRequestWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+func (x *MTRClusterDeviceEnergyManagement) ReadAttributeForecastWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeForecastWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ModifyForecastRequestWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying ModifyForecastRequestWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterDeviceEnergyManagement) ModifyForecastRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDeviceEnergyManagementClusterModifyForecastRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ModifyForecastRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterDeviceEnergyManagement) ReadAttributeOptOutStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOptOutStateWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// RequestConstraintBasedForecastWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying RequestConstraintBasedForecastWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterDeviceEnergyManagement) RequestConstraintBasedForecastWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.RequestConstraintBasedForecastWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterDeviceEnergyManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// CancelRequestWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying CancelRequestWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterDeviceEnergyManagement) CancelRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDeviceEnergyManagementClusterCancelRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.CancelRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterDeviceEnergyManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// CancelRequestWithExpectedValuesExpectedValueIntervalCompletion calls the underlying CancelRequestWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterDeviceEnergyManagement) CancelRequestWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.CancelRequestWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+func (x *MTRClusterDeviceEnergyManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeESATypeWithParams calls the underlying ReadAttributeESATypeWithParams.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeESATypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeESATypeWithParams(params)
+func (x *MTRClusterDeviceEnergyManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeESACanGenerateWithParams calls the underlying ReadAttributeESACanGenerateWithParams.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeESACanGenerateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeESACanGenerateWithParams(params)
-}
-
-// ReadAttributeESAStateWithParams calls the underlying ReadAttributeESAStateWithParams.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeESAStateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeESAStateWithParams(params)
-}
-
-// ReadAttributeAbsMinPowerWithParams calls the underlying ReadAttributeAbsMinPowerWithParams.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeAbsMinPowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAbsMinPowerWithParams(params)
-}
-
-// ReadAttributeAbsMaxPowerWithParams calls the underlying ReadAttributeAbsMaxPowerWithParams.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeAbsMaxPowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAbsMaxPowerWithParams(params)
-}
-
-// ReadAttributePowerAdjustmentCapabilityWithParams calls the underlying ReadAttributePowerAdjustmentCapabilityWithParams.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributePowerAdjustmentCapabilityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePowerAdjustmentCapabilityWithParams(params)
-}
-
-// ReadAttributeForecastWithParams calls the underlying ReadAttributeForecastWithParams.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeForecastWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeForecastWithParams(params)
-}
-
-// ReadAttributeOptOutStateWithParams calls the underlying ReadAttributeOptOutStateWithParams.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeOptOutStateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOptOutStateWithParams(params)
-}
-
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
-}
-
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
-}
-
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
-}
-
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterDeviceEnergyManagement) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterDeviceEnergyManagement) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterDeviceEnergyManagement) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterDeviceEnergyManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterDeviceEnergyManagementable is the interface implemented by [MTRClusterDeviceEnergyManagement], for mocking and DI.
 type MTRClusterDeviceEnergyManagementable interface {
-	Unwrap() *raw.MTRClusterDeviceEnergyManagement
-	PowerAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDeviceEnergyManagementClusterPowerAdjustRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	CancelPowerAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDeviceEnergyManagementClusterCancelPowerAdjustRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	CancelPowerAdjustRequestWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	StartTimeAdjustRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDeviceEnergyManagementClusterStartTimeAdjustRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	PauseRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDeviceEnergyManagementClusterPauseRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ResumeRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDeviceEnergyManagementClusterResumeRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ResumeRequestWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ModifyForecastRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDeviceEnergyManagementClusterModifyForecastRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	RequestConstraintBasedForecastWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDeviceEnergyManagementClusterRequestConstraintBasedForecastParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	CancelRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRDeviceEnergyManagementClusterCancelRequestParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	CancelRequestWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeESATypeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeESACanGenerateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeESAStateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAbsMinPowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAbsMaxPowerWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePowerAdjustmentCapabilityWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeForecastWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeOptOutStateWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeESATypeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeESACanGenerateWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeESAStateWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAbsMinPowerWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAbsMaxPowerWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePowerAdjustmentCapabilityWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeForecastWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeOptOutStateWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterDeviceEnergyManagementable = (*MTRClusterDeviceEnergyManagement)(nil)

@@ -5,542 +5,609 @@
 package cfnetwork
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cfnetwork"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KCFErrorDomainCFNetwork returns the value of the CoreFoundation reference constant kCFErrorDomainCFNetwork as an objc.ID.
-func KCFErrorDomainCFNetwork() objc.ID { return purego.CFConstant(raw.KCFErrorDomainCFNetwork()) }
+// KCFErrorDomainCFNetwork returns the value of the constant kCFErrorDomainCFNetwork.
+func KCFErrorDomainCFNetwork() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFErrorDomainCFNetwork")))
+}
 
-// KCFErrorDomainWinSock returns the value of the CoreFoundation reference constant kCFErrorDomainWinSock as an objc.ID.
-func KCFErrorDomainWinSock() objc.ID { return purego.CFConstant(raw.KCFErrorDomainWinSock()) }
+// KCFErrorDomainWinSock returns the value of the constant kCFErrorDomainWinSock.
+func KCFErrorDomainWinSock() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFErrorDomainWinSock")))
+}
 
-// KCFURLErrorFailingURLErrorKey returns the value of the CoreFoundation reference constant kCFURLErrorFailingURLErrorKey as an objc.ID.
-func KCFURLErrorFailingURLErrorKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLErrorFailingURLErrorKey())
+// KCFURLErrorFailingURLErrorKey returns the value of the constant kCFURLErrorFailingURLErrorKey.
+func KCFURLErrorFailingURLErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLErrorFailingURLErrorKey")))
 }
 
-// KCFURLErrorFailingURLStringErrorKey returns the value of the CoreFoundation reference constant kCFURLErrorFailingURLStringErrorKey as an objc.ID.
-func KCFURLErrorFailingURLStringErrorKey() objc.ID {
-	return purego.CFConstant(raw.KCFURLErrorFailingURLStringErrorKey())
+// KCFURLErrorFailingURLStringErrorKey returns the value of the constant kCFURLErrorFailingURLStringErrorKey.
+func KCFURLErrorFailingURLStringErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFURLErrorFailingURLStringErrorKey")))
 }
 
-// KCFGetAddrInfoFailureKey returns the value of the CoreFoundation reference constant kCFGetAddrInfoFailureKey as an objc.ID.
-func KCFGetAddrInfoFailureKey() objc.ID { return purego.CFConstant(raw.KCFGetAddrInfoFailureKey()) }
+// KCFGetAddrInfoFailureKey returns the value of the constant kCFGetAddrInfoFailureKey.
+func KCFGetAddrInfoFailureKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFGetAddrInfoFailureKey")))
+}
 
-// KCFSOCKSStatusCodeKey returns the value of the CoreFoundation reference constant kCFSOCKSStatusCodeKey as an objc.ID.
-func KCFSOCKSStatusCodeKey() objc.ID { return purego.CFConstant(raw.KCFSOCKSStatusCodeKey()) }
+// KCFSOCKSStatusCodeKey returns the value of the constant kCFSOCKSStatusCodeKey.
+func KCFSOCKSStatusCodeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFSOCKSStatusCodeKey")))
+}
 
-// KCFSOCKSVersionKey returns the value of the CoreFoundation reference constant kCFSOCKSVersionKey as an objc.ID.
-func KCFSOCKSVersionKey() objc.ID { return purego.CFConstant(raw.KCFSOCKSVersionKey()) }
+// KCFSOCKSVersionKey returns the value of the constant kCFSOCKSVersionKey.
+func KCFSOCKSVersionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFSOCKSVersionKey")))
+}
 
-// KCFSOCKSNegotiationMethodKey returns the value of the CoreFoundation reference constant kCFSOCKSNegotiationMethodKey as an objc.ID.
-func KCFSOCKSNegotiationMethodKey() objc.ID {
-	return purego.CFConstant(raw.KCFSOCKSNegotiationMethodKey())
+// KCFSOCKSNegotiationMethodKey returns the value of the constant kCFSOCKSNegotiationMethodKey.
+func KCFSOCKSNegotiationMethodKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFSOCKSNegotiationMethodKey")))
 }
 
-// KCFDNSServiceFailureKey returns the value of the CoreFoundation reference constant kCFDNSServiceFailureKey as an objc.ID.
-func KCFDNSServiceFailureKey() objc.ID { return purego.CFConstant(raw.KCFDNSServiceFailureKey()) }
+// KCFDNSServiceFailureKey returns the value of the constant kCFDNSServiceFailureKey.
+func KCFDNSServiceFailureKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFDNSServiceFailureKey")))
+}
 
-// KCFFTPStatusCodeKey returns the value of the CoreFoundation reference constant kCFFTPStatusCodeKey as an objc.ID.
-func KCFFTPStatusCodeKey() objc.ID { return purego.CFConstant(raw.KCFFTPStatusCodeKey()) }
+// KCFFTPStatusCodeKey returns the value of the constant kCFFTPStatusCodeKey.
+func KCFFTPStatusCodeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFFTPStatusCodeKey")))
+}
 
-// KCFStreamPropertySSLContext returns the value of the CoreFoundation reference constant kCFStreamPropertySSLContext as an objc.ID.
-func KCFStreamPropertySSLContext() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertySSLContext())
+// KCFStreamPropertySSLContext returns the value of the constant kCFStreamPropertySSLContext.
+func KCFStreamPropertySSLContext() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertySSLContext")))
 }
 
-// KCFStreamPropertySSLPeerTrust returns the value of the CoreFoundation reference constant kCFStreamPropertySSLPeerTrust as an objc.ID.
-func KCFStreamPropertySSLPeerTrust() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertySSLPeerTrust())
+// KCFStreamPropertySSLPeerTrust returns the value of the constant kCFStreamPropertySSLPeerTrust.
+func KCFStreamPropertySSLPeerTrust() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertySSLPeerTrust")))
 }
 
-// KCFStreamSSLValidatesCertificateChain returns the value of the CoreFoundation reference constant kCFStreamSSLValidatesCertificateChain as an objc.ID.
-func KCFStreamSSLValidatesCertificateChain() objc.ID {
-	return purego.CFConstant(raw.KCFStreamSSLValidatesCertificateChain())
+// KCFStreamSSLValidatesCertificateChain returns the value of the constant kCFStreamSSLValidatesCertificateChain.
+func KCFStreamSSLValidatesCertificateChain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamSSLValidatesCertificateChain")))
 }
 
-// KCFStreamPropertySSLSettings returns the value of the CoreFoundation reference constant kCFStreamPropertySSLSettings as an objc.ID.
-func KCFStreamPropertySSLSettings() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertySSLSettings())
+// KCFStreamPropertySSLSettings returns the value of the constant kCFStreamPropertySSLSettings.
+func KCFStreamPropertySSLSettings() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertySSLSettings")))
 }
 
-// KCFStreamSSLLevel returns the value of the CoreFoundation reference constant kCFStreamSSLLevel as an objc.ID.
-func KCFStreamSSLLevel() objc.ID { return purego.CFConstant(raw.KCFStreamSSLLevel()) }
+// KCFStreamSSLLevel returns the value of the constant kCFStreamSSLLevel.
+func KCFStreamSSLLevel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFStreamSSLLevel"))) }
 
-// KCFStreamSSLPeerName returns the value of the CoreFoundation reference constant kCFStreamSSLPeerName as an objc.ID.
-func KCFStreamSSLPeerName() objc.ID { return purego.CFConstant(raw.KCFStreamSSLPeerName()) }
+// KCFStreamSSLPeerName returns the value of the constant kCFStreamSSLPeerName.
+func KCFStreamSSLPeerName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamSSLPeerName")))
+}
 
-// KCFStreamSSLCertificates returns the value of the CoreFoundation reference constant kCFStreamSSLCertificates as an objc.ID.
-func KCFStreamSSLCertificates() objc.ID { return purego.CFConstant(raw.KCFStreamSSLCertificates()) }
+// KCFStreamSSLCertificates returns the value of the constant kCFStreamSSLCertificates.
+func KCFStreamSSLCertificates() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamSSLCertificates")))
+}
 
-// KCFStreamSSLIsServer returns the value of the CoreFoundation reference constant kCFStreamSSLIsServer as an objc.ID.
-func KCFStreamSSLIsServer() objc.ID { return purego.CFConstant(raw.KCFStreamSSLIsServer()) }
+// KCFStreamSSLIsServer returns the value of the constant kCFStreamSSLIsServer.
+func KCFStreamSSLIsServer() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamSSLIsServer")))
+}
 
-// KCFStreamNetworkServiceType returns the value of the CoreFoundation reference constant kCFStreamNetworkServiceType as an objc.ID.
-func KCFStreamNetworkServiceType() objc.ID {
-	return purego.CFConstant(raw.KCFStreamNetworkServiceType())
+// KCFStreamNetworkServiceType returns the value of the constant kCFStreamNetworkServiceType.
+func KCFStreamNetworkServiceType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamNetworkServiceType")))
 }
 
-// KCFStreamNetworkServiceTypeVideo returns the value of the CoreFoundation reference constant kCFStreamNetworkServiceTypeVideo as an objc.ID.
-func KCFStreamNetworkServiceTypeVideo() objc.ID {
-	return purego.CFConstant(raw.KCFStreamNetworkServiceTypeVideo())
+// KCFStreamNetworkServiceTypeVideo returns the value of the constant kCFStreamNetworkServiceTypeVideo.
+func KCFStreamNetworkServiceTypeVideo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamNetworkServiceTypeVideo")))
 }
 
-// KCFStreamNetworkServiceTypeVoice returns the value of the CoreFoundation reference constant kCFStreamNetworkServiceTypeVoice as an objc.ID.
-func KCFStreamNetworkServiceTypeVoice() objc.ID {
-	return purego.CFConstant(raw.KCFStreamNetworkServiceTypeVoice())
+// KCFStreamNetworkServiceTypeVoice returns the value of the constant kCFStreamNetworkServiceTypeVoice.
+func KCFStreamNetworkServiceTypeVoice() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamNetworkServiceTypeVoice")))
 }
 
-// KCFStreamNetworkServiceTypeBackground returns the value of the CoreFoundation reference constant kCFStreamNetworkServiceTypeBackground as an objc.ID.
-func KCFStreamNetworkServiceTypeBackground() objc.ID {
-	return purego.CFConstant(raw.KCFStreamNetworkServiceTypeBackground())
+// KCFStreamNetworkServiceTypeBackground returns the value of the constant kCFStreamNetworkServiceTypeBackground.
+func KCFStreamNetworkServiceTypeBackground() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamNetworkServiceTypeBackground")))
 }
 
-// KCFStreamNetworkServiceTypeResponsiveData returns the value of the CoreFoundation reference constant kCFStreamNetworkServiceTypeResponsiveData as an objc.ID.
-func KCFStreamNetworkServiceTypeResponsiveData() objc.ID {
-	return purego.CFConstant(raw.KCFStreamNetworkServiceTypeResponsiveData())
+// KCFStreamNetworkServiceTypeResponsiveData returns the value of the constant kCFStreamNetworkServiceTypeResponsiveData.
+func KCFStreamNetworkServiceTypeResponsiveData() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamNetworkServiceTypeResponsiveData")))
 }
 
-// KCFStreamNetworkServiceTypeCallSignaling returns the value of the CoreFoundation reference constant kCFStreamNetworkServiceTypeCallSignaling as an objc.ID.
-func KCFStreamNetworkServiceTypeCallSignaling() objc.ID {
-	return purego.CFConstant(raw.KCFStreamNetworkServiceTypeCallSignaling())
+// KCFStreamNetworkServiceTypeCallSignaling returns the value of the constant kCFStreamNetworkServiceTypeCallSignaling.
+func KCFStreamNetworkServiceTypeCallSignaling() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamNetworkServiceTypeCallSignaling")))
 }
 
-// KCFStreamNetworkServiceTypeAVStreaming returns the value of the CoreFoundation reference constant kCFStreamNetworkServiceTypeAVStreaming as an objc.ID.
-func KCFStreamNetworkServiceTypeAVStreaming() objc.ID {
-	return purego.CFConstant(raw.KCFStreamNetworkServiceTypeAVStreaming())
+// KCFStreamNetworkServiceTypeAVStreaming returns the value of the constant kCFStreamNetworkServiceTypeAVStreaming.
+func KCFStreamNetworkServiceTypeAVStreaming() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamNetworkServiceTypeAVStreaming")))
 }
 
-// KCFStreamNetworkServiceTypeResponsiveAV returns the value of the CoreFoundation reference constant kCFStreamNetworkServiceTypeResponsiveAV as an objc.ID.
-func KCFStreamNetworkServiceTypeResponsiveAV() objc.ID {
-	return purego.CFConstant(raw.KCFStreamNetworkServiceTypeResponsiveAV())
+// KCFStreamNetworkServiceTypeResponsiveAV returns the value of the constant kCFStreamNetworkServiceTypeResponsiveAV.
+func KCFStreamNetworkServiceTypeResponsiveAV() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamNetworkServiceTypeResponsiveAV")))
 }
 
-// KCFStreamNetworkServiceTypeVoIP returns the value of the CoreFoundation reference constant kCFStreamNetworkServiceTypeVoIP as an objc.ID.
-func KCFStreamNetworkServiceTypeVoIP() objc.ID {
-	return purego.CFConstant(raw.KCFStreamNetworkServiceTypeVoIP())
+// KCFStreamNetworkServiceTypeVoIP returns the value of the constant kCFStreamNetworkServiceTypeVoIP.
+func KCFStreamNetworkServiceTypeVoIP() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamNetworkServiceTypeVoIP")))
 }
 
-// KCFStreamPropertyNoCellular returns the value of the CoreFoundation reference constant kCFStreamPropertyNoCellular as an objc.ID.
-func KCFStreamPropertyNoCellular() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyNoCellular())
+// KCFStreamPropertyNoCellular returns the value of the constant kCFStreamPropertyNoCellular.
+func KCFStreamPropertyNoCellular() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyNoCellular")))
 }
 
-// KCFStreamPropertyConnectionIsCellular returns the value of the CoreFoundation reference constant kCFStreamPropertyConnectionIsCellular as an objc.ID.
-func KCFStreamPropertyConnectionIsCellular() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyConnectionIsCellular())
+// KCFStreamPropertyConnectionIsCellular returns the value of the constant kCFStreamPropertyConnectionIsCellular.
+func KCFStreamPropertyConnectionIsCellular() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyConnectionIsCellular")))
 }
 
-// KCFStreamPropertyAllowExpensiveNetworkAccess returns the value of the CoreFoundation reference constant kCFStreamPropertyAllowExpensiveNetworkAccess as an objc.ID.
-func KCFStreamPropertyAllowExpensiveNetworkAccess() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyAllowExpensiveNetworkAccess())
+// KCFStreamPropertyAllowExpensiveNetworkAccess returns the value of the constant kCFStreamPropertyAllowExpensiveNetworkAccess.
+func KCFStreamPropertyAllowExpensiveNetworkAccess() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyAllowExpensiveNetworkAccess")))
 }
 
-// KCFStreamPropertyConnectionIsExpensive returns the value of the CoreFoundation reference constant kCFStreamPropertyConnectionIsExpensive as an objc.ID.
-func KCFStreamPropertyConnectionIsExpensive() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyConnectionIsExpensive())
+// KCFStreamPropertyConnectionIsExpensive returns the value of the constant kCFStreamPropertyConnectionIsExpensive.
+func KCFStreamPropertyConnectionIsExpensive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyConnectionIsExpensive")))
 }
 
-// KCFStreamPropertyAllowConstrainedNetworkAccess returns the value of the CoreFoundation reference constant kCFStreamPropertyAllowConstrainedNetworkAccess as an objc.ID.
-func KCFStreamPropertyAllowConstrainedNetworkAccess() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyAllowConstrainedNetworkAccess())
+// KCFStreamPropertyAllowConstrainedNetworkAccess returns the value of the constant kCFStreamPropertyAllowConstrainedNetworkAccess.
+func KCFStreamPropertyAllowConstrainedNetworkAccess() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyAllowConstrainedNetworkAccess")))
 }
 
-// KCFStreamPropertyProxyLocalBypass returns the value of the CoreFoundation reference constant kCFStreamPropertyProxyLocalBypass as an objc.ID.
-func KCFStreamPropertyProxyLocalBypass() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyProxyLocalBypass())
+// KCFStreamPropertyProxyLocalBypass returns the value of the constant kCFStreamPropertyProxyLocalBypass.
+func KCFStreamPropertyProxyLocalBypass() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyProxyLocalBypass")))
 }
 
-// KCFStreamPropertySocketRemoteHost returns the value of the CoreFoundation reference constant kCFStreamPropertySocketRemoteHost as an objc.ID.
-func KCFStreamPropertySocketRemoteHost() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertySocketRemoteHost())
+// KCFStreamPropertySocketRemoteHost returns the value of the constant kCFStreamPropertySocketRemoteHost.
+func KCFStreamPropertySocketRemoteHost() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertySocketRemoteHost")))
 }
 
-// KCFStreamPropertySocketRemoteNetService returns the value of the CoreFoundation reference constant kCFStreamPropertySocketRemoteNetService as an objc.ID.
-func KCFStreamPropertySocketRemoteNetService() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertySocketRemoteNetService())
+// KCFStreamPropertySocketRemoteNetService returns the value of the constant kCFStreamPropertySocketRemoteNetService.
+func KCFStreamPropertySocketRemoteNetService() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertySocketRemoteNetService")))
 }
 
-// KCFStreamPropertySocketExtendedBackgroundIdleMode returns the value of the CoreFoundation reference constant kCFStreamPropertySocketExtendedBackgroundIdleMode as an objc.ID.
-func KCFStreamPropertySocketExtendedBackgroundIdleMode() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertySocketExtendedBackgroundIdleMode())
+// KCFStreamPropertySocketExtendedBackgroundIdleMode returns the value of the constant kCFStreamPropertySocketExtendedBackgroundIdleMode.
+func KCFStreamPropertySocketExtendedBackgroundIdleMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertySocketExtendedBackgroundIdleMode")))
 }
 
-// KCFStreamPropertySSLPeerCertificates returns the value of the CoreFoundation reference constant kCFStreamPropertySSLPeerCertificates as an objc.ID.
-func KCFStreamPropertySSLPeerCertificates() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertySSLPeerCertificates())
+// KCFStreamPropertySSLPeerCertificates returns the value of the constant kCFStreamPropertySSLPeerCertificates.
+func KCFStreamPropertySSLPeerCertificates() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertySSLPeerCertificates")))
 }
 
-// KCFStreamSSLAllowsExpiredCertificates returns the value of the CoreFoundation reference constant kCFStreamSSLAllowsExpiredCertificates as an objc.ID.
-func KCFStreamSSLAllowsExpiredCertificates() objc.ID {
-	return purego.CFConstant(raw.KCFStreamSSLAllowsExpiredCertificates())
+// KCFStreamSSLAllowsExpiredCertificates returns the value of the constant kCFStreamSSLAllowsExpiredCertificates.
+func KCFStreamSSLAllowsExpiredCertificates() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamSSLAllowsExpiredCertificates")))
 }
 
-// KCFStreamSSLAllowsExpiredRoots returns the value of the CoreFoundation reference constant kCFStreamSSLAllowsExpiredRoots as an objc.ID.
-func KCFStreamSSLAllowsExpiredRoots() objc.ID {
-	return purego.CFConstant(raw.KCFStreamSSLAllowsExpiredRoots())
+// KCFStreamSSLAllowsExpiredRoots returns the value of the constant kCFStreamSSLAllowsExpiredRoots.
+func KCFStreamSSLAllowsExpiredRoots() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamSSLAllowsExpiredRoots")))
 }
 
-// KCFStreamSSLAllowsAnyRoot returns the value of the CoreFoundation reference constant kCFStreamSSLAllowsAnyRoot as an objc.ID.
-func KCFStreamSSLAllowsAnyRoot() objc.ID { return purego.CFConstant(raw.KCFStreamSSLAllowsAnyRoot()) }
+// KCFStreamSSLAllowsAnyRoot returns the value of the constant kCFStreamSSLAllowsAnyRoot.
+func KCFStreamSSLAllowsAnyRoot() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamSSLAllowsAnyRoot")))
+}
 
-// KCFStreamPropertyFTPUserName returns the value of the CoreFoundation reference constant kCFStreamPropertyFTPUserName as an objc.ID.
-func KCFStreamPropertyFTPUserName() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyFTPUserName())
+// KCFStreamPropertyFTPUserName returns the value of the constant kCFStreamPropertyFTPUserName.
+func KCFStreamPropertyFTPUserName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyFTPUserName")))
 }
 
-// KCFStreamPropertyFTPPassword returns the value of the CoreFoundation reference constant kCFStreamPropertyFTPPassword as an objc.ID.
-func KCFStreamPropertyFTPPassword() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyFTPPassword())
+// KCFStreamPropertyFTPPassword returns the value of the constant kCFStreamPropertyFTPPassword.
+func KCFStreamPropertyFTPPassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyFTPPassword")))
 }
 
-// KCFStreamPropertyFTPUsePassiveMode returns the value of the CoreFoundation reference constant kCFStreamPropertyFTPUsePassiveMode as an objc.ID.
-func KCFStreamPropertyFTPUsePassiveMode() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyFTPUsePassiveMode())
+// KCFStreamPropertyFTPUsePassiveMode returns the value of the constant kCFStreamPropertyFTPUsePassiveMode.
+func KCFStreamPropertyFTPUsePassiveMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyFTPUsePassiveMode")))
 }
 
-// KCFStreamPropertyFTPResourceSize returns the value of the CoreFoundation reference constant kCFStreamPropertyFTPResourceSize as an objc.ID.
-func KCFStreamPropertyFTPResourceSize() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyFTPResourceSize())
+// KCFStreamPropertyFTPResourceSize returns the value of the constant kCFStreamPropertyFTPResourceSize.
+func KCFStreamPropertyFTPResourceSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyFTPResourceSize")))
 }
 
-// KCFStreamPropertyFTPFetchResourceInfo returns the value of the CoreFoundation reference constant kCFStreamPropertyFTPFetchResourceInfo as an objc.ID.
-func KCFStreamPropertyFTPFetchResourceInfo() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyFTPFetchResourceInfo())
+// KCFStreamPropertyFTPFetchResourceInfo returns the value of the constant kCFStreamPropertyFTPFetchResourceInfo.
+func KCFStreamPropertyFTPFetchResourceInfo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyFTPFetchResourceInfo")))
 }
 
-// KCFStreamPropertyFTPFileTransferOffset returns the value of the CoreFoundation reference constant kCFStreamPropertyFTPFileTransferOffset as an objc.ID.
-func KCFStreamPropertyFTPFileTransferOffset() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyFTPFileTransferOffset())
+// KCFStreamPropertyFTPFileTransferOffset returns the value of the constant kCFStreamPropertyFTPFileTransferOffset.
+func KCFStreamPropertyFTPFileTransferOffset() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyFTPFileTransferOffset")))
 }
 
-// KCFStreamPropertyFTPAttemptPersistentConnection returns the value of the CoreFoundation reference constant kCFStreamPropertyFTPAttemptPersistentConnection as an objc.ID.
-func KCFStreamPropertyFTPAttemptPersistentConnection() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyFTPAttemptPersistentConnection())
+// KCFStreamPropertyFTPAttemptPersistentConnection returns the value of the constant kCFStreamPropertyFTPAttemptPersistentConnection.
+func KCFStreamPropertyFTPAttemptPersistentConnection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyFTPAttemptPersistentConnection")))
 }
 
-// KCFStreamPropertyFTPProxy returns the value of the CoreFoundation reference constant kCFStreamPropertyFTPProxy as an objc.ID.
-func KCFStreamPropertyFTPProxy() objc.ID { return purego.CFConstant(raw.KCFStreamPropertyFTPProxy()) }
+// KCFStreamPropertyFTPProxy returns the value of the constant kCFStreamPropertyFTPProxy.
+func KCFStreamPropertyFTPProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyFTPProxy")))
+}
 
-// KCFStreamPropertyFTPProxyHost returns the value of the CoreFoundation reference constant kCFStreamPropertyFTPProxyHost as an objc.ID.
-func KCFStreamPropertyFTPProxyHost() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyFTPProxyHost())
+// KCFStreamPropertyFTPProxyHost returns the value of the constant kCFStreamPropertyFTPProxyHost.
+func KCFStreamPropertyFTPProxyHost() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyFTPProxyHost")))
 }
 
-// KCFStreamPropertyFTPProxyPort returns the value of the CoreFoundation reference constant kCFStreamPropertyFTPProxyPort as an objc.ID.
-func KCFStreamPropertyFTPProxyPort() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyFTPProxyPort())
+// KCFStreamPropertyFTPProxyPort returns the value of the constant kCFStreamPropertyFTPProxyPort.
+func KCFStreamPropertyFTPProxyPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyFTPProxyPort")))
 }
 
-// KCFStreamPropertyFTPProxyUser returns the value of the CoreFoundation reference constant kCFStreamPropertyFTPProxyUser as an objc.ID.
-func KCFStreamPropertyFTPProxyUser() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyFTPProxyUser())
+// KCFStreamPropertyFTPProxyUser returns the value of the constant kCFStreamPropertyFTPProxyUser.
+func KCFStreamPropertyFTPProxyUser() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyFTPProxyUser")))
 }
 
-// KCFStreamPropertyFTPProxyPassword returns the value of the CoreFoundation reference constant kCFStreamPropertyFTPProxyPassword as an objc.ID.
-func KCFStreamPropertyFTPProxyPassword() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyFTPProxyPassword())
+// KCFStreamPropertyFTPProxyPassword returns the value of the constant kCFStreamPropertyFTPProxyPassword.
+func KCFStreamPropertyFTPProxyPassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyFTPProxyPassword")))
 }
 
-// KCFFTPResourceMode returns the value of the CoreFoundation reference constant kCFFTPResourceMode as an objc.ID.
-func KCFFTPResourceMode() objc.ID { return purego.CFConstant(raw.KCFFTPResourceMode()) }
+// KCFFTPResourceMode returns the value of the constant kCFFTPResourceMode.
+func KCFFTPResourceMode() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFFTPResourceMode")))
+}
 
-// KCFFTPResourceName returns the value of the CoreFoundation reference constant kCFFTPResourceName as an objc.ID.
-func KCFFTPResourceName() objc.ID { return purego.CFConstant(raw.KCFFTPResourceName()) }
+// KCFFTPResourceName returns the value of the constant kCFFTPResourceName.
+func KCFFTPResourceName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFFTPResourceName")))
+}
 
-// KCFFTPResourceOwner returns the value of the CoreFoundation reference constant kCFFTPResourceOwner as an objc.ID.
-func KCFFTPResourceOwner() objc.ID { return purego.CFConstant(raw.KCFFTPResourceOwner()) }
+// KCFFTPResourceOwner returns the value of the constant kCFFTPResourceOwner.
+func KCFFTPResourceOwner() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFFTPResourceOwner")))
+}
 
-// KCFFTPResourceGroup returns the value of the CoreFoundation reference constant kCFFTPResourceGroup as an objc.ID.
-func KCFFTPResourceGroup() objc.ID { return purego.CFConstant(raw.KCFFTPResourceGroup()) }
+// KCFFTPResourceGroup returns the value of the constant kCFFTPResourceGroup.
+func KCFFTPResourceGroup() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFFTPResourceGroup")))
+}
 
-// KCFFTPResourceLink returns the value of the CoreFoundation reference constant kCFFTPResourceLink as an objc.ID.
-func KCFFTPResourceLink() objc.ID { return purego.CFConstant(raw.KCFFTPResourceLink()) }
+// KCFFTPResourceLink returns the value of the constant kCFFTPResourceLink.
+func KCFFTPResourceLink() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFFTPResourceLink")))
+}
 
-// KCFFTPResourceSize returns the value of the CoreFoundation reference constant kCFFTPResourceSize as an objc.ID.
-func KCFFTPResourceSize() objc.ID { return purego.CFConstant(raw.KCFFTPResourceSize()) }
+// KCFFTPResourceSize returns the value of the constant kCFFTPResourceSize.
+func KCFFTPResourceSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFFTPResourceSize")))
+}
 
-// KCFFTPResourceType returns the value of the CoreFoundation reference constant kCFFTPResourceType as an objc.ID.
-func KCFFTPResourceType() objc.ID { return purego.CFConstant(raw.KCFFTPResourceType()) }
+// KCFFTPResourceType returns the value of the constant kCFFTPResourceType.
+func KCFFTPResourceType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFFTPResourceType")))
+}
 
-// KCFFTPResourceModDate returns the value of the CoreFoundation reference constant kCFFTPResourceModDate as an objc.ID.
-func KCFFTPResourceModDate() objc.ID { return purego.CFConstant(raw.KCFFTPResourceModDate()) }
+// KCFFTPResourceModDate returns the value of the constant kCFFTPResourceModDate.
+func KCFFTPResourceModDate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFFTPResourceModDate")))
+}
 
-// KCFHTTPVersion1_0 returns the value of the CoreFoundation reference constant kCFHTTPVersion1_0 as an objc.ID.
-func KCFHTTPVersion1_0() objc.ID { return purego.CFConstant(raw.KCFHTTPVersion1_0()) }
+// KCFHTTPVersion1_0 returns the value of the constant kCFHTTPVersion1_0.
+func KCFHTTPVersion1_0() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFHTTPVersion1_0"))) }
 
-// KCFHTTPVersion1_1 returns the value of the CoreFoundation reference constant kCFHTTPVersion1_1 as an objc.ID.
-func KCFHTTPVersion1_1() objc.ID { return purego.CFConstant(raw.KCFHTTPVersion1_1()) }
+// KCFHTTPVersion1_1 returns the value of the constant kCFHTTPVersion1_1.
+func KCFHTTPVersion1_1() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFHTTPVersion1_1"))) }
 
-// KCFHTTPVersion2_0 returns the value of the CoreFoundation reference constant kCFHTTPVersion2_0 as an objc.ID.
-func KCFHTTPVersion2_0() objc.ID { return purego.CFConstant(raw.KCFHTTPVersion2_0()) }
+// KCFHTTPVersion2_0 returns the value of the constant kCFHTTPVersion2_0.
+func KCFHTTPVersion2_0() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFHTTPVersion2_0"))) }
 
-// KCFHTTPVersion3_0 returns the value of the CoreFoundation reference constant kCFHTTPVersion3_0 as an objc.ID.
-func KCFHTTPVersion3_0() objc.ID { return purego.CFConstant(raw.KCFHTTPVersion3_0()) }
+// KCFHTTPVersion3_0 returns the value of the constant kCFHTTPVersion3_0.
+func KCFHTTPVersion3_0() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFHTTPVersion3_0"))) }
 
-// KCFHTTPAuthenticationSchemeBasic returns the value of the CoreFoundation reference constant kCFHTTPAuthenticationSchemeBasic as an objc.ID.
-func KCFHTTPAuthenticationSchemeBasic() objc.ID {
-	return purego.CFConstant(raw.KCFHTTPAuthenticationSchemeBasic())
+// KCFHTTPAuthenticationSchemeBasic returns the value of the constant kCFHTTPAuthenticationSchemeBasic.
+func KCFHTTPAuthenticationSchemeBasic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFHTTPAuthenticationSchemeBasic")))
 }
 
-// KCFHTTPAuthenticationSchemeDigest returns the value of the CoreFoundation reference constant kCFHTTPAuthenticationSchemeDigest as an objc.ID.
-func KCFHTTPAuthenticationSchemeDigest() objc.ID {
-	return purego.CFConstant(raw.KCFHTTPAuthenticationSchemeDigest())
+// KCFHTTPAuthenticationSchemeDigest returns the value of the constant kCFHTTPAuthenticationSchemeDigest.
+func KCFHTTPAuthenticationSchemeDigest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFHTTPAuthenticationSchemeDigest")))
 }
 
-// KCFHTTPAuthenticationSchemeNTLM returns the value of the CoreFoundation reference constant kCFHTTPAuthenticationSchemeNTLM as an objc.ID.
-func KCFHTTPAuthenticationSchemeNTLM() objc.ID {
-	return purego.CFConstant(raw.KCFHTTPAuthenticationSchemeNTLM())
+// KCFHTTPAuthenticationSchemeNTLM returns the value of the constant kCFHTTPAuthenticationSchemeNTLM.
+func KCFHTTPAuthenticationSchemeNTLM() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFHTTPAuthenticationSchemeNTLM")))
 }
 
-// KCFHTTPAuthenticationSchemeKerberos returns the value of the CoreFoundation reference constant kCFHTTPAuthenticationSchemeKerberos as an objc.ID.
-func KCFHTTPAuthenticationSchemeKerberos() objc.ID {
-	return purego.CFConstant(raw.KCFHTTPAuthenticationSchemeKerberos())
+// KCFHTTPAuthenticationSchemeKerberos returns the value of the constant kCFHTTPAuthenticationSchemeKerberos.
+func KCFHTTPAuthenticationSchemeKerberos() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFHTTPAuthenticationSchemeKerberos")))
 }
 
-// KCFHTTPAuthenticationSchemeNegotiate returns the value of the CoreFoundation reference constant kCFHTTPAuthenticationSchemeNegotiate as an objc.ID.
-func KCFHTTPAuthenticationSchemeNegotiate() objc.ID {
-	return purego.CFConstant(raw.KCFHTTPAuthenticationSchemeNegotiate())
+// KCFHTTPAuthenticationSchemeNegotiate returns the value of the constant kCFHTTPAuthenticationSchemeNegotiate.
+func KCFHTTPAuthenticationSchemeNegotiate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFHTTPAuthenticationSchemeNegotiate")))
 }
 
-// KCFHTTPAuthenticationSchemeNegotiate2 returns the value of the CoreFoundation reference constant kCFHTTPAuthenticationSchemeNegotiate2 as an objc.ID.
-func KCFHTTPAuthenticationSchemeNegotiate2() objc.ID {
-	return purego.CFConstant(raw.KCFHTTPAuthenticationSchemeNegotiate2())
+// KCFHTTPAuthenticationSchemeNegotiate2 returns the value of the constant kCFHTTPAuthenticationSchemeNegotiate2.
+func KCFHTTPAuthenticationSchemeNegotiate2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFHTTPAuthenticationSchemeNegotiate2")))
 }
 
-// KCFHTTPAuthenticationSchemeXMobileMeAuthToken returns the value of the CoreFoundation reference constant kCFHTTPAuthenticationSchemeXMobileMeAuthToken as an objc.ID.
-func KCFHTTPAuthenticationSchemeXMobileMeAuthToken() objc.ID {
-	return purego.CFConstant(raw.KCFHTTPAuthenticationSchemeXMobileMeAuthToken())
+// KCFHTTPAuthenticationSchemeXMobileMeAuthToken returns the value of the constant kCFHTTPAuthenticationSchemeXMobileMeAuthToken.
+func KCFHTTPAuthenticationSchemeXMobileMeAuthToken() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFHTTPAuthenticationSchemeXMobileMeAuthToken")))
 }
 
-// KCFStreamPropertyHTTPResponseHeader returns the value of the CoreFoundation reference constant kCFStreamPropertyHTTPResponseHeader as an objc.ID.
-func KCFStreamPropertyHTTPResponseHeader() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyHTTPResponseHeader())
+// KCFStreamPropertyHTTPResponseHeader returns the value of the constant kCFStreamPropertyHTTPResponseHeader.
+func KCFStreamPropertyHTTPResponseHeader() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyHTTPResponseHeader")))
 }
 
-// KCFStreamPropertyHTTPFinalURL returns the value of the CoreFoundation reference constant kCFStreamPropertyHTTPFinalURL as an objc.ID.
-func KCFStreamPropertyHTTPFinalURL() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyHTTPFinalURL())
+// KCFStreamPropertyHTTPFinalURL returns the value of the constant kCFStreamPropertyHTTPFinalURL.
+func KCFStreamPropertyHTTPFinalURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyHTTPFinalURL")))
 }
 
-// KCFStreamPropertyHTTPFinalRequest returns the value of the CoreFoundation reference constant kCFStreamPropertyHTTPFinalRequest as an objc.ID.
-func KCFStreamPropertyHTTPFinalRequest() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyHTTPFinalRequest())
+// KCFStreamPropertyHTTPFinalRequest returns the value of the constant kCFStreamPropertyHTTPFinalRequest.
+func KCFStreamPropertyHTTPFinalRequest() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyHTTPFinalRequest")))
 }
 
-// KCFStreamPropertyHTTPProxy returns the value of the CoreFoundation reference constant kCFStreamPropertyHTTPProxy as an objc.ID.
-func KCFStreamPropertyHTTPProxy() objc.ID { return purego.CFConstant(raw.KCFStreamPropertyHTTPProxy()) }
+// KCFStreamPropertyHTTPProxy returns the value of the constant kCFStreamPropertyHTTPProxy.
+func KCFStreamPropertyHTTPProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyHTTPProxy")))
+}
 
-// KCFStreamPropertyHTTPProxyHost returns the value of the CoreFoundation reference constant kCFStreamPropertyHTTPProxyHost as an objc.ID.
-func KCFStreamPropertyHTTPProxyHost() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyHTTPProxyHost())
+// KCFStreamPropertyHTTPProxyHost returns the value of the constant kCFStreamPropertyHTTPProxyHost.
+func KCFStreamPropertyHTTPProxyHost() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyHTTPProxyHost")))
 }
 
-// KCFStreamPropertyHTTPProxyPort returns the value of the CoreFoundation reference constant kCFStreamPropertyHTTPProxyPort as an objc.ID.
-func KCFStreamPropertyHTTPProxyPort() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyHTTPProxyPort())
+// KCFStreamPropertyHTTPProxyPort returns the value of the constant kCFStreamPropertyHTTPProxyPort.
+func KCFStreamPropertyHTTPProxyPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyHTTPProxyPort")))
 }
 
-// KCFStreamPropertyHTTPSProxyHost returns the value of the CoreFoundation reference constant kCFStreamPropertyHTTPSProxyHost as an objc.ID.
-func KCFStreamPropertyHTTPSProxyHost() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyHTTPSProxyHost())
+// KCFStreamPropertyHTTPSProxyHost returns the value of the constant kCFStreamPropertyHTTPSProxyHost.
+func KCFStreamPropertyHTTPSProxyHost() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyHTTPSProxyHost")))
 }
 
-// KCFStreamPropertyHTTPSProxyPort returns the value of the CoreFoundation reference constant kCFStreamPropertyHTTPSProxyPort as an objc.ID.
-func KCFStreamPropertyHTTPSProxyPort() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyHTTPSProxyPort())
+// KCFStreamPropertyHTTPSProxyPort returns the value of the constant kCFStreamPropertyHTTPSProxyPort.
+func KCFStreamPropertyHTTPSProxyPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyHTTPSProxyPort")))
 }
 
-// KCFStreamPropertyHTTPShouldAutoredirect returns the value of the CoreFoundation reference constant kCFStreamPropertyHTTPShouldAutoredirect as an objc.ID.
-func KCFStreamPropertyHTTPShouldAutoredirect() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyHTTPShouldAutoredirect())
+// KCFStreamPropertyHTTPShouldAutoredirect returns the value of the constant kCFStreamPropertyHTTPShouldAutoredirect.
+func KCFStreamPropertyHTTPShouldAutoredirect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyHTTPShouldAutoredirect")))
 }
 
-// KCFStreamPropertyHTTPAttemptPersistentConnection returns the value of the CoreFoundation reference constant kCFStreamPropertyHTTPAttemptPersistentConnection as an objc.ID.
-func KCFStreamPropertyHTTPAttemptPersistentConnection() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyHTTPAttemptPersistentConnection())
+// KCFStreamPropertyHTTPAttemptPersistentConnection returns the value of the constant kCFStreamPropertyHTTPAttemptPersistentConnection.
+func KCFStreamPropertyHTTPAttemptPersistentConnection() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyHTTPAttemptPersistentConnection")))
 }
 
-// KCFStreamPropertyHTTPRequestBytesWrittenCount returns the value of the CoreFoundation reference constant kCFStreamPropertyHTTPRequestBytesWrittenCount as an objc.ID.
-func KCFStreamPropertyHTTPRequestBytesWrittenCount() objc.ID {
-	return purego.CFConstant(raw.KCFStreamPropertyHTTPRequestBytesWrittenCount())
+// KCFStreamPropertyHTTPRequestBytesWrittenCount returns the value of the constant kCFStreamPropertyHTTPRequestBytesWrittenCount.
+func KCFStreamPropertyHTTPRequestBytesWrittenCount() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFStreamPropertyHTTPRequestBytesWrittenCount")))
 }
 
-// KCFHTTPAuthenticationUsername returns the value of the CoreFoundation reference constant kCFHTTPAuthenticationUsername as an objc.ID.
-func KCFHTTPAuthenticationUsername() objc.ID {
-	return purego.CFConstant(raw.KCFHTTPAuthenticationUsername())
+// KCFHTTPAuthenticationUsername returns the value of the constant kCFHTTPAuthenticationUsername.
+func KCFHTTPAuthenticationUsername() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFHTTPAuthenticationUsername")))
 }
 
-// KCFHTTPAuthenticationPassword returns the value of the CoreFoundation reference constant kCFHTTPAuthenticationPassword as an objc.ID.
-func KCFHTTPAuthenticationPassword() objc.ID {
-	return purego.CFConstant(raw.KCFHTTPAuthenticationPassword())
+// KCFHTTPAuthenticationPassword returns the value of the constant kCFHTTPAuthenticationPassword.
+func KCFHTTPAuthenticationPassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFHTTPAuthenticationPassword")))
 }
 
-// KCFHTTPAuthenticationAccountDomain returns the value of the CoreFoundation reference constant kCFHTTPAuthenticationAccountDomain as an objc.ID.
-func KCFHTTPAuthenticationAccountDomain() objc.ID {
-	return purego.CFConstant(raw.KCFHTTPAuthenticationAccountDomain())
+// KCFHTTPAuthenticationAccountDomain returns the value of the constant kCFHTTPAuthenticationAccountDomain.
+func KCFHTTPAuthenticationAccountDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFHTTPAuthenticationAccountDomain")))
 }
 
-// KCFProxyTypeKey returns the value of the CoreFoundation reference constant kCFProxyTypeKey as an objc.ID.
-func KCFProxyTypeKey() objc.ID { return purego.CFConstant(raw.KCFProxyTypeKey()) }
+// KCFProxyTypeKey returns the value of the constant kCFProxyTypeKey.
+func KCFProxyTypeKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFProxyTypeKey"))) }
 
-// KCFProxyHostNameKey returns the value of the CoreFoundation reference constant kCFProxyHostNameKey as an objc.ID.
-func KCFProxyHostNameKey() objc.ID { return purego.CFConstant(raw.KCFProxyHostNameKey()) }
+// KCFProxyHostNameKey returns the value of the constant kCFProxyHostNameKey.
+func KCFProxyHostNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFProxyHostNameKey")))
+}
 
-// KCFProxyPortNumberKey returns the value of the CoreFoundation reference constant kCFProxyPortNumberKey as an objc.ID.
-func KCFProxyPortNumberKey() objc.ID { return purego.CFConstant(raw.KCFProxyPortNumberKey()) }
+// KCFProxyPortNumberKey returns the value of the constant kCFProxyPortNumberKey.
+func KCFProxyPortNumberKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFProxyPortNumberKey")))
+}
 
-// KCFProxyAutoConfigurationURLKey returns the value of the CoreFoundation reference constant kCFProxyAutoConfigurationURLKey as an objc.ID.
-func KCFProxyAutoConfigurationURLKey() objc.ID {
-	return purego.CFConstant(raw.KCFProxyAutoConfigurationURLKey())
+// KCFProxyAutoConfigurationURLKey returns the value of the constant kCFProxyAutoConfigurationURLKey.
+func KCFProxyAutoConfigurationURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFProxyAutoConfigurationURLKey")))
 }
 
-// KCFProxyAutoConfigurationJavaScriptKey returns the value of the CoreFoundation reference constant kCFProxyAutoConfigurationJavaScriptKey as an objc.ID.
-func KCFProxyAutoConfigurationJavaScriptKey() objc.ID {
-	return purego.CFConstant(raw.KCFProxyAutoConfigurationJavaScriptKey())
+// KCFProxyAutoConfigurationJavaScriptKey returns the value of the constant kCFProxyAutoConfigurationJavaScriptKey.
+func KCFProxyAutoConfigurationJavaScriptKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFProxyAutoConfigurationJavaScriptKey")))
 }
 
-// KCFProxyUsernameKey returns the value of the CoreFoundation reference constant kCFProxyUsernameKey as an objc.ID.
-func KCFProxyUsernameKey() objc.ID { return purego.CFConstant(raw.KCFProxyUsernameKey()) }
+// KCFProxyUsernameKey returns the value of the constant kCFProxyUsernameKey.
+func KCFProxyUsernameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFProxyUsernameKey")))
+}
 
-// KCFProxyPasswordKey returns the value of the CoreFoundation reference constant kCFProxyPasswordKey as an objc.ID.
-func KCFProxyPasswordKey() objc.ID { return purego.CFConstant(raw.KCFProxyPasswordKey()) }
+// KCFProxyPasswordKey returns the value of the constant kCFProxyPasswordKey.
+func KCFProxyPasswordKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFProxyPasswordKey")))
+}
 
-// KCFProxyTypeNone returns the value of the CoreFoundation reference constant kCFProxyTypeNone as an objc.ID.
-func KCFProxyTypeNone() objc.ID { return purego.CFConstant(raw.KCFProxyTypeNone()) }
+// KCFProxyTypeNone returns the value of the constant kCFProxyTypeNone.
+func KCFProxyTypeNone() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFProxyTypeNone"))) }
 
-// KCFProxyTypeHTTP returns the value of the CoreFoundation reference constant kCFProxyTypeHTTP as an objc.ID.
-func KCFProxyTypeHTTP() objc.ID { return purego.CFConstant(raw.KCFProxyTypeHTTP()) }
+// KCFProxyTypeHTTP returns the value of the constant kCFProxyTypeHTTP.
+func KCFProxyTypeHTTP() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFProxyTypeHTTP"))) }
 
-// KCFProxyTypeHTTPS returns the value of the CoreFoundation reference constant kCFProxyTypeHTTPS as an objc.ID.
-func KCFProxyTypeHTTPS() objc.ID { return purego.CFConstant(raw.KCFProxyTypeHTTPS()) }
+// KCFProxyTypeHTTPS returns the value of the constant kCFProxyTypeHTTPS.
+func KCFProxyTypeHTTPS() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFProxyTypeHTTPS"))) }
 
-// KCFProxyTypeSOCKS returns the value of the CoreFoundation reference constant kCFProxyTypeSOCKS as an objc.ID.
-func KCFProxyTypeSOCKS() objc.ID { return purego.CFConstant(raw.KCFProxyTypeSOCKS()) }
+// KCFProxyTypeSOCKS returns the value of the constant kCFProxyTypeSOCKS.
+func KCFProxyTypeSOCKS() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFProxyTypeSOCKS"))) }
 
-// KCFProxyTypeFTP returns the value of the CoreFoundation reference constant kCFProxyTypeFTP as an objc.ID.
-func KCFProxyTypeFTP() objc.ID { return purego.CFConstant(raw.KCFProxyTypeFTP()) }
+// KCFProxyTypeFTP returns the value of the constant kCFProxyTypeFTP.
+func KCFProxyTypeFTP() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCFProxyTypeFTP"))) }
 
-// KCFProxyTypeAutoConfigurationURL returns the value of the CoreFoundation reference constant kCFProxyTypeAutoConfigurationURL as an objc.ID.
-func KCFProxyTypeAutoConfigurationURL() objc.ID {
-	return purego.CFConstant(raw.KCFProxyTypeAutoConfigurationURL())
+// KCFProxyTypeAutoConfigurationURL returns the value of the constant kCFProxyTypeAutoConfigurationURL.
+func KCFProxyTypeAutoConfigurationURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFProxyTypeAutoConfigurationURL")))
 }
 
-// KCFProxyTypeAutoConfigurationJavaScript returns the value of the CoreFoundation reference constant kCFProxyTypeAutoConfigurationJavaScript as an objc.ID.
-func KCFProxyTypeAutoConfigurationJavaScript() objc.ID {
-	return purego.CFConstant(raw.KCFProxyTypeAutoConfigurationJavaScript())
+// KCFProxyTypeAutoConfigurationJavaScript returns the value of the constant kCFProxyTypeAutoConfigurationJavaScript.
+func KCFProxyTypeAutoConfigurationJavaScript() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFProxyTypeAutoConfigurationJavaScript")))
 }
 
-// KCFProxyAutoConfigurationHTTPResponseKey returns the value of the CoreFoundation reference constant kCFProxyAutoConfigurationHTTPResponseKey as an objc.ID.
-func KCFProxyAutoConfigurationHTTPResponseKey() objc.ID {
-	return purego.CFConstant(raw.KCFProxyAutoConfigurationHTTPResponseKey())
+// KCFProxyAutoConfigurationHTTPResponseKey returns the value of the constant kCFProxyAutoConfigurationHTTPResponseKey.
+func KCFProxyAutoConfigurationHTTPResponseKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFProxyAutoConfigurationHTTPResponseKey")))
 }
 
-// KCFNetworkProxiesExceptionsList returns the value of the CoreFoundation reference constant kCFNetworkProxiesExceptionsList as an objc.ID.
-func KCFNetworkProxiesExceptionsList() objc.ID {
-	return purego.CFConstant(raw.KCFNetworkProxiesExceptionsList())
+// KCFNetworkProxiesExceptionsList returns the value of the constant kCFNetworkProxiesExceptionsList.
+func KCFNetworkProxiesExceptionsList() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesExceptionsList")))
 }
 
-// KCFNetworkProxiesExcludeSimpleHostnames returns the value of the CoreFoundation reference constant kCFNetworkProxiesExcludeSimpleHostnames as an objc.ID.
-func KCFNetworkProxiesExcludeSimpleHostnames() objc.ID {
-	return purego.CFConstant(raw.KCFNetworkProxiesExcludeSimpleHostnames())
+// KCFNetworkProxiesExcludeSimpleHostnames returns the value of the constant kCFNetworkProxiesExcludeSimpleHostnames.
+func KCFNetworkProxiesExcludeSimpleHostnames() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesExcludeSimpleHostnames")))
 }
 
-// KCFNetworkProxiesFTPEnable returns the value of the CoreFoundation reference constant kCFNetworkProxiesFTPEnable as an objc.ID.
-func KCFNetworkProxiesFTPEnable() objc.ID { return purego.CFConstant(raw.KCFNetworkProxiesFTPEnable()) }
+// KCFNetworkProxiesFTPEnable returns the value of the constant kCFNetworkProxiesFTPEnable.
+func KCFNetworkProxiesFTPEnable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesFTPEnable")))
+}
 
-// KCFNetworkProxiesFTPPassive returns the value of the CoreFoundation reference constant kCFNetworkProxiesFTPPassive as an objc.ID.
-func KCFNetworkProxiesFTPPassive() objc.ID {
-	return purego.CFConstant(raw.KCFNetworkProxiesFTPPassive())
+// KCFNetworkProxiesFTPPassive returns the value of the constant kCFNetworkProxiesFTPPassive.
+func KCFNetworkProxiesFTPPassive() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesFTPPassive")))
 }
 
-// KCFNetworkProxiesFTPPort returns the value of the CoreFoundation reference constant kCFNetworkProxiesFTPPort as an objc.ID.
-func KCFNetworkProxiesFTPPort() objc.ID { return purego.CFConstant(raw.KCFNetworkProxiesFTPPort()) }
+// KCFNetworkProxiesFTPPort returns the value of the constant kCFNetworkProxiesFTPPort.
+func KCFNetworkProxiesFTPPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesFTPPort")))
+}
 
-// KCFNetworkProxiesFTPProxy returns the value of the CoreFoundation reference constant kCFNetworkProxiesFTPProxy as an objc.ID.
-func KCFNetworkProxiesFTPProxy() objc.ID { return purego.CFConstant(raw.KCFNetworkProxiesFTPProxy()) }
+// KCFNetworkProxiesFTPProxy returns the value of the constant kCFNetworkProxiesFTPProxy.
+func KCFNetworkProxiesFTPProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesFTPProxy")))
+}
 
-// KCFNetworkProxiesGopherEnable returns the value of the CoreFoundation reference constant kCFNetworkProxiesGopherEnable as an objc.ID.
-func KCFNetworkProxiesGopherEnable() objc.ID {
-	return purego.CFConstant(raw.KCFNetworkProxiesGopherEnable())
+// KCFNetworkProxiesGopherEnable returns the value of the constant kCFNetworkProxiesGopherEnable.
+func KCFNetworkProxiesGopherEnable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesGopherEnable")))
 }
 
-// KCFNetworkProxiesGopherPort returns the value of the CoreFoundation reference constant kCFNetworkProxiesGopherPort as an objc.ID.
-func KCFNetworkProxiesGopherPort() objc.ID {
-	return purego.CFConstant(raw.KCFNetworkProxiesGopherPort())
+// KCFNetworkProxiesGopherPort returns the value of the constant kCFNetworkProxiesGopherPort.
+func KCFNetworkProxiesGopherPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesGopherPort")))
 }
 
-// KCFNetworkProxiesGopherProxy returns the value of the CoreFoundation reference constant kCFNetworkProxiesGopherProxy as an objc.ID.
-func KCFNetworkProxiesGopherProxy() objc.ID {
-	return purego.CFConstant(raw.KCFNetworkProxiesGopherProxy())
+// KCFNetworkProxiesGopherProxy returns the value of the constant kCFNetworkProxiesGopherProxy.
+func KCFNetworkProxiesGopherProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesGopherProxy")))
 }
 
-// KCFNetworkProxiesHTTPEnable returns the value of the CoreFoundation reference constant kCFNetworkProxiesHTTPEnable as an objc.ID.
-func KCFNetworkProxiesHTTPEnable() objc.ID {
-	return purego.CFConstant(raw.KCFNetworkProxiesHTTPEnable())
+// KCFNetworkProxiesHTTPEnable returns the value of the constant kCFNetworkProxiesHTTPEnable.
+func KCFNetworkProxiesHTTPEnable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesHTTPEnable")))
 }
 
-// KCFNetworkProxiesHTTPPort returns the value of the CoreFoundation reference constant kCFNetworkProxiesHTTPPort as an objc.ID.
-func KCFNetworkProxiesHTTPPort() objc.ID { return purego.CFConstant(raw.KCFNetworkProxiesHTTPPort()) }
+// KCFNetworkProxiesHTTPPort returns the value of the constant kCFNetworkProxiesHTTPPort.
+func KCFNetworkProxiesHTTPPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesHTTPPort")))
+}
 
-// KCFNetworkProxiesHTTPProxy returns the value of the CoreFoundation reference constant kCFNetworkProxiesHTTPProxy as an objc.ID.
-func KCFNetworkProxiesHTTPProxy() objc.ID { return purego.CFConstant(raw.KCFNetworkProxiesHTTPProxy()) }
+// KCFNetworkProxiesHTTPProxy returns the value of the constant kCFNetworkProxiesHTTPProxy.
+func KCFNetworkProxiesHTTPProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesHTTPProxy")))
+}
 
-// KCFNetworkProxiesHTTPSEnable returns the value of the CoreFoundation reference constant kCFNetworkProxiesHTTPSEnable as an objc.ID.
-func KCFNetworkProxiesHTTPSEnable() objc.ID {
-	return purego.CFConstant(raw.KCFNetworkProxiesHTTPSEnable())
+// KCFNetworkProxiesHTTPSEnable returns the value of the constant kCFNetworkProxiesHTTPSEnable.
+func KCFNetworkProxiesHTTPSEnable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesHTTPSEnable")))
 }
 
-// KCFNetworkProxiesHTTPSPort returns the value of the CoreFoundation reference constant kCFNetworkProxiesHTTPSPort as an objc.ID.
-func KCFNetworkProxiesHTTPSPort() objc.ID { return purego.CFConstant(raw.KCFNetworkProxiesHTTPSPort()) }
+// KCFNetworkProxiesHTTPSPort returns the value of the constant kCFNetworkProxiesHTTPSPort.
+func KCFNetworkProxiesHTTPSPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesHTTPSPort")))
+}
 
-// KCFNetworkProxiesHTTPSProxy returns the value of the CoreFoundation reference constant kCFNetworkProxiesHTTPSProxy as an objc.ID.
-func KCFNetworkProxiesHTTPSProxy() objc.ID {
-	return purego.CFConstant(raw.KCFNetworkProxiesHTTPSProxy())
+// KCFNetworkProxiesHTTPSProxy returns the value of the constant kCFNetworkProxiesHTTPSProxy.
+func KCFNetworkProxiesHTTPSProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesHTTPSProxy")))
 }
 
-// KCFNetworkProxiesRTSPEnable returns the value of the CoreFoundation reference constant kCFNetworkProxiesRTSPEnable as an objc.ID.
-func KCFNetworkProxiesRTSPEnable() objc.ID {
-	return purego.CFConstant(raw.KCFNetworkProxiesRTSPEnable())
+// KCFNetworkProxiesRTSPEnable returns the value of the constant kCFNetworkProxiesRTSPEnable.
+func KCFNetworkProxiesRTSPEnable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesRTSPEnable")))
 }
 
-// KCFNetworkProxiesRTSPPort returns the value of the CoreFoundation reference constant kCFNetworkProxiesRTSPPort as an objc.ID.
-func KCFNetworkProxiesRTSPPort() objc.ID { return purego.CFConstant(raw.KCFNetworkProxiesRTSPPort()) }
+// KCFNetworkProxiesRTSPPort returns the value of the constant kCFNetworkProxiesRTSPPort.
+func KCFNetworkProxiesRTSPPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesRTSPPort")))
+}
 
-// KCFNetworkProxiesRTSPProxy returns the value of the CoreFoundation reference constant kCFNetworkProxiesRTSPProxy as an objc.ID.
-func KCFNetworkProxiesRTSPProxy() objc.ID { return purego.CFConstant(raw.KCFNetworkProxiesRTSPProxy()) }
+// KCFNetworkProxiesRTSPProxy returns the value of the constant kCFNetworkProxiesRTSPProxy.
+func KCFNetworkProxiesRTSPProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesRTSPProxy")))
+}
 
-// KCFNetworkProxiesSOCKSEnable returns the value of the CoreFoundation reference constant kCFNetworkProxiesSOCKSEnable as an objc.ID.
-func KCFNetworkProxiesSOCKSEnable() objc.ID {
-	return purego.CFConstant(raw.KCFNetworkProxiesSOCKSEnable())
+// KCFNetworkProxiesSOCKSEnable returns the value of the constant kCFNetworkProxiesSOCKSEnable.
+func KCFNetworkProxiesSOCKSEnable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesSOCKSEnable")))
 }
 
-// KCFNetworkProxiesSOCKSPort returns the value of the CoreFoundation reference constant kCFNetworkProxiesSOCKSPort as an objc.ID.
-func KCFNetworkProxiesSOCKSPort() objc.ID { return purego.CFConstant(raw.KCFNetworkProxiesSOCKSPort()) }
+// KCFNetworkProxiesSOCKSPort returns the value of the constant kCFNetworkProxiesSOCKSPort.
+func KCFNetworkProxiesSOCKSPort() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesSOCKSPort")))
+}
 
-// KCFNetworkProxiesSOCKSProxy returns the value of the CoreFoundation reference constant kCFNetworkProxiesSOCKSProxy as an objc.ID.
-func KCFNetworkProxiesSOCKSProxy() objc.ID {
-	return purego.CFConstant(raw.KCFNetworkProxiesSOCKSProxy())
+// KCFNetworkProxiesSOCKSProxy returns the value of the constant kCFNetworkProxiesSOCKSProxy.
+func KCFNetworkProxiesSOCKSProxy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesSOCKSProxy")))
 }
 
-// KCFNetworkProxiesProxyAutoConfigEnable returns the value of the CoreFoundation reference constant kCFNetworkProxiesProxyAutoConfigEnable as an objc.ID.
-func KCFNetworkProxiesProxyAutoConfigEnable() objc.ID {
-	return purego.CFConstant(raw.KCFNetworkProxiesProxyAutoConfigEnable())
+// KCFNetworkProxiesProxyAutoConfigEnable returns the value of the constant kCFNetworkProxiesProxyAutoConfigEnable.
+func KCFNetworkProxiesProxyAutoConfigEnable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesProxyAutoConfigEnable")))
 }
 
-// KCFNetworkProxiesProxyAutoConfigURLString returns the value of the CoreFoundation reference constant kCFNetworkProxiesProxyAutoConfigURLString as an objc.ID.
-func KCFNetworkProxiesProxyAutoConfigURLString() objc.ID {
-	return purego.CFConstant(raw.KCFNetworkProxiesProxyAutoConfigURLString())
+// KCFNetworkProxiesProxyAutoConfigURLString returns the value of the constant kCFNetworkProxiesProxyAutoConfigURLString.
+func KCFNetworkProxiesProxyAutoConfigURLString() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesProxyAutoConfigURLString")))
 }
 
-// KCFNetworkProxiesProxyAutoConfigJavaScript returns the value of the CoreFoundation reference constant kCFNetworkProxiesProxyAutoConfigJavaScript as an objc.ID.
-func KCFNetworkProxiesProxyAutoConfigJavaScript() objc.ID {
-	return purego.CFConstant(raw.KCFNetworkProxiesProxyAutoConfigJavaScript())
+// KCFNetworkProxiesProxyAutoConfigJavaScript returns the value of the constant kCFNetworkProxiesProxyAutoConfigJavaScript.
+func KCFNetworkProxiesProxyAutoConfigJavaScript() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesProxyAutoConfigJavaScript")))
 }
 
-// KCFNetworkProxiesProxyAutoDiscoveryEnable returns the value of the CoreFoundation reference constant kCFNetworkProxiesProxyAutoDiscoveryEnable as an objc.ID.
-func KCFNetworkProxiesProxyAutoDiscoveryEnable() objc.ID {
-	return purego.CFConstant(raw.KCFNetworkProxiesProxyAutoDiscoveryEnable())
+// KCFNetworkProxiesProxyAutoDiscoveryEnable returns the value of the constant kCFNetworkProxiesProxyAutoDiscoveryEnable.
+func KCFNetworkProxiesProxyAutoDiscoveryEnable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCFNetworkProxiesProxyAutoDiscoveryEnable")))
 }

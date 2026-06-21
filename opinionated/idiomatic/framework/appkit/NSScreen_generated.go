@@ -5,223 +5,165 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that describes the attributes of a computer’s monitor or screen.
 //
-// Screen wraps [raw.NSScreen] with a fluent Go API.
+// Screen is an idiomatic wrapper over the Objective-C class NSScreen.
 type Screen struct {
-	inner *raw.NSScreen
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSScreen].
-func (x *Screen) Unwrap() *raw.NSScreen { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Screen) ID() objc.ID { return x.inner.Ptr() }
-
-// ScreenFromID adopts an existing object pointer as a Screen (nil for 0).
+// ScreenFromID adopts an existing Objective-C object as a Screen
+// (nil for 0), retaining it and registering a release finalizer.
 func ScreenFromID(id objc.ID) *Screen {
 	if id == 0 {
 		return nil
 	}
-	return &Screen{inner: raw.NSScreenFromID(id)}
+	x := &Screen{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewScreen creates a new [Screen].
+// screenAdopt wraps an Objective-C object that this code just created as a
+// Screen (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func screenAdopt(id objc.ID) *Screen {
+	if id == 0 {
+		return nil
+	}
+	x := &Screen{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Screen) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Screen) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Screen) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScreen creates a new Screen.
 func NewScreen() *Screen {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScreen")), objc.RegisterName("new"))
-	return &Screen{inner: raw.NSScreenFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSScreen")), objc.RegisterName("new"))
+	return screenAdopt(_id)
 }
 
 // A Boolean value indicating whether the color space of the screen is capable of representing the specified display gamut.
-//
-// CanRepresentDisplayGamut calls the underlying CanRepresentDisplayGamut.
-func (x *Screen) CanRepresentDisplayGamut(displayGamut NSDisplayGamut) bool {
-	return x.inner.CanRepresentDisplayGamut(raw.NSDisplayGamut(displayGamut))
+func (x *Screen) CanRepresentDisplayGamut(displayGamut DisplayGamut) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canRepresentDisplayGamut:"), displayGamut)
+	return _r
 }
 
-// Converts the rectangle to the device pixel aligned coordinates system of a screen.
-//
-// ConvertRectToBacking calls the underlying ConvertRectToBacking.
-func (x *Screen) ConvertRectToBacking(rect corefoundation.CGRect) corefoundation.CGRect {
-	return x.inner.ConvertRectToBacking(rect)
+func (x *Screen) Depth() WindowDepth {
+	_r := objc.Send[WindowDepth](objref.IDOf(x), objc.RegisterName("depth"))
+	return _r
 }
 
-// Converts the rectangle from the device pixel aligned coordinates system of a screen.
-//
-// ConvertRectFromBacking calls the underlying ConvertRectFromBacking.
-func (x *Screen) ConvertRectFromBacking(rect corefoundation.CGRect) corefoundation.CGRect {
-	return x.inner.ConvertRectFromBacking(rect)
+func (x *Screen) DeviceDescription() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceDescription"))
+	return obj.Wrap(_r)
 }
 
-// Converts a rectangle in global screen coordinates to a pixel aligned rectangle.
-//
-// BackingAlignedRectOptions calls the underlying BackingAlignedRectOptions.
-func (x *Screen) BackingAlignedRectOptions(rect corefoundation.CGRect, options foundation.NSAlignmentOptions) corefoundation.CGRect {
-	return x.inner.BackingAlignedRectOptions(rect, options)
-}
-
-// Depth calls the underlying Depth.
-func (x *Screen) Depth() NSWindowDepth {
-	return NSWindowDepth(x.inner.Depth())
-}
-
-// Frame calls the underlying Frame.
-func (x *Screen) Frame() corefoundation.CGRect {
-	return x.inner.Frame()
-}
-
-// VisibleFrame calls the underlying VisibleFrame.
-func (x *Screen) VisibleFrame() corefoundation.CGRect {
-	return x.inner.VisibleFrame()
-}
-
-// DeviceDescription calls the underlying DeviceDescription.
-func (x *Screen) DeviceDescription() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.DeviceDescription()
-}
-
-// ColorSpace calls the underlying ColorSpace.
 func (x *Screen) ColorSpace() *ColorSpace {
-	_r := x.inner.ColorSpace()
-	if _r == nil {
-		return nil
-	}
-	return &ColorSpace{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorSpace"))
+	return ColorSpaceFromID(_r)
 }
 
-// SupportedWindowDepths calls the underlying SupportedWindowDepths.
-func (x *Screen) SupportedWindowDepths() unsafe.Pointer {
-	return x.inner.SupportedWindowDepths()
-}
-
-// BackingScaleFactor calls the underlying BackingScaleFactor.
 func (x *Screen) BackingScaleFactor() float64 {
-	return x.inner.BackingScaleFactor()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("backingScaleFactor"))
+	return _r
 }
 
-// LocalizedName calls the underlying LocalizedName.
 func (x *Screen) LocalizedName() string {
-	_r := x.inner.LocalizedName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SafeAreaInsets calls the underlying SafeAreaInsets.
-func (x *Screen) SafeAreaInsets() foundation.NSEdgeInsets {
-	return x.inner.SafeAreaInsets()
-}
-
-// AuxiliaryTopLeftArea calls the underlying AuxiliaryTopLeftArea.
-func (x *Screen) AuxiliaryTopLeftArea() corefoundation.CGRect {
-	return x.inner.AuxiliaryTopLeftArea()
-}
-
-// AuxiliaryTopRightArea calls the underlying AuxiliaryTopRightArea.
-func (x *Screen) AuxiliaryTopRightArea() corefoundation.CGRect {
-	return x.inner.AuxiliaryTopRightArea()
+	return purego.GoString(_r)
 }
 
 // The CGDirectDisplayID for this screen. This will return kCGNullDirectDisplay if there isn't one.
-//
-// CGDirectDisplayID calls the underlying CGDirectDisplayID.
 func (x *Screen) CGDirectDisplayID() uint32 {
-	return x.inner.CGDirectDisplayID()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("CGDirectDisplayID"))
+	return _r
 }
 
-// MaximumExtendedDynamicRangeColorComponentValue calls the underlying MaximumExtendedDynamicRangeColorComponentValue.
 func (x *Screen) MaximumExtendedDynamicRangeColorComponentValue() float64 {
-	return x.inner.MaximumExtendedDynamicRangeColorComponentValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumExtendedDynamicRangeColorComponentValue"))
+	return _r
 }
 
-// MaximumPotentialExtendedDynamicRangeColorComponentValue calls the underlying MaximumPotentialExtendedDynamicRangeColorComponentValue.
 func (x *Screen) MaximumPotentialExtendedDynamicRangeColorComponentValue() float64 {
-	return x.inner.MaximumPotentialExtendedDynamicRangeColorComponentValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumPotentialExtendedDynamicRangeColorComponentValue"))
+	return _r
 }
 
-// MaximumReferenceExtendedDynamicRangeColorComponentValue calls the underlying MaximumReferenceExtendedDynamicRangeColorComponentValue.
 func (x *Screen) MaximumReferenceExtendedDynamicRangeColorComponentValue() float64 {
-	return x.inner.MaximumReferenceExtendedDynamicRangeColorComponentValue()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumReferenceExtendedDynamicRangeColorComponentValue"))
+	return _r
 }
 
 // The maximum frames per second this screen supports.
-//
-// MaximumFramesPerSecond calls the underlying MaximumFramesPerSecond.
 func (x *Screen) MaximumFramesPerSecond() int {
-	return x.inner.MaximumFramesPerSecond()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumFramesPerSecond"))
+	return _r
 }
 
 // The minimum refresh interval this screen supports, in seconds. This is the shortest amount of time a frame will be present on screen. minimumRefreshInterval and maximumRefreshInterval will be the same for displays that do not support variable refresh rates.
-//
-// MinimumRefreshInterval calls the underlying MinimumRefreshInterval.
 func (x *Screen) MinimumRefreshInterval() float64 {
-	return x.inner.MinimumRefreshInterval()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumRefreshInterval"))
+	return _r
 }
 
 // The maximum refresh interval this screen supports, in seconds. minimumRefreshInterval and maximumRefreshInterval will be the same for displays that do not support variable refresh rates.
-//
-// MaximumRefreshInterval calls the underlying MaximumRefreshInterval.
 func (x *Screen) MaximumRefreshInterval() float64 {
-	return x.inner.MaximumRefreshInterval()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumRefreshInterval"))
+	return _r
 }
 
 // The update granularity of the screen's current mode, in seconds. The display will update at the next boundary defined by the granularity, after the minimum refresh interval has been reached. When 0, the display can update at any time between the minimum and maximum refresh rate intervals of the screen. Fixed refresh rate screen modes will return the refresh interval as the update granularity (e.g. 16.66ms for 60Hz refresh rates), meaning updates only occur at refresh rate boundaries.
-//
-// DisplayUpdateGranularity calls the underlying DisplayUpdateGranularity.
 func (x *Screen) DisplayUpdateGranularity() float64 {
-	return x.inner.DisplayUpdateGranularity()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("displayUpdateGranularity"))
+	return _r
 }
 
 // The time at which the last framebuffer update occurred on the display, in seconds since startup that the system has been awake.
-//
-// LastDisplayUpdateTimestamp calls the underlying LastDisplayUpdateTimestamp.
 func (x *Screen) LastDisplayUpdateTimestamp() float64 {
-	return x.inner.LastDisplayUpdateTimestamp()
-}
-
-// Returns a new display link whose callback will be invoked in-sync with the display the screen is on.
-//
-// DisplayLinkWithTargetSelector calls the underlying DisplayLinkWithTargetSelector.
-func (x *Screen) DisplayLinkWithTargetSelector(target objc.ID, selector objc.SEL) *quartzcore.CADisplayLink {
-	return x.inner.DisplayLinkWithTargetSelector(target, selector)
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lastDisplayUpdateTimestamp"))
+	return _r
 }
 
 // Returns the scaling factor from user space to device space on the screen.
-//
-// UserSpaceScaleFactor calls the underlying UserSpaceScaleFactor.
 func (x *Screen) UserSpaceScaleFactor() float64 {
-	return x.inner.UserSpaceScaleFactor()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("userSpaceScaleFactor"))
+	return _r
 }
 
 // Screenable is the interface implemented by [Screen], for mocking and DI.
 type Screenable interface {
-	Unwrap() *raw.NSScreen
-	CanRepresentDisplayGamut(displayGamut NSDisplayGamut) bool
-	ConvertRectToBacking(rect corefoundation.CGRect) corefoundation.CGRect
-	ConvertRectFromBacking(rect corefoundation.CGRect) corefoundation.CGRect
-	BackingAlignedRectOptions(rect corefoundation.CGRect, options foundation.NSAlignmentOptions) corefoundation.CGRect
-	Depth() NSWindowDepth
-	Frame() corefoundation.CGRect
-	VisibleFrame() corefoundation.CGRect
-	DeviceDescription() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	CanRepresentDisplayGamut(displayGamut DisplayGamut) bool
+	Depth() WindowDepth
+	DeviceDescription() obj.Object
 	ColorSpace() *ColorSpace
-	SupportedWindowDepths() unsafe.Pointer
 	BackingScaleFactor() float64
 	LocalizedName() string
-	SafeAreaInsets() foundation.NSEdgeInsets
-	AuxiliaryTopLeftArea() corefoundation.CGRect
-	AuxiliaryTopRightArea() corefoundation.CGRect
 	CGDirectDisplayID() uint32
 	MaximumExtendedDynamicRangeColorComponentValue() float64
 	MaximumPotentialExtendedDynamicRangeColorComponentValue() float64
@@ -231,7 +173,6 @@ type Screenable interface {
 	MaximumRefreshInterval() float64
 	DisplayUpdateGranularity() float64
 	LastDisplayUpdateTimestamp() float64
-	DisplayLinkWithTargetSelector(target objc.ID, selector objc.SEL) *quartzcore.CADisplayLink
 	UserSpaceScaleFactor() float64
 }
 

@@ -5,90 +5,76 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/ebitengine/purego/objc"
 )
 
-// SupportedLocales calls the underlying AXBrailleTableSupportedLocales.
-func SupportedLocales() *foundation.NSSet[*foundation.NSLocale] {
-	return raw.AXBrailleTableSupportedLocales()
+// All locales supported by existing tables.
+func SupportedLocales() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("AXBrailleTable")), objc.RegisterName("supportedLocales"))
+	return obj.Wrap(_r)
 }
 
-// DefaultTableForLocale calls the underlying AXBrailleTableDefaultTableForLocale.
-func DefaultTableForLocale(locale *foundation.NSLocale) *BrailleTable {
-	_r := raw.AXBrailleTableDefaultTableForLocale(locale)
-	if _r == nil {
-		return nil
-	}
-	return &BrailleTable{inner: _r}
+// The default table that provides translations for the given locale’s language. Returns nil if there is none.
+func DefaultTableForLocale(locale obj.Object) *BrailleTable {
+	_r := objc.Send[objc.ID](objc.ID(_class("AXBrailleTable")), objc.RegisterName("defaultTableForLocale:"), objref.IDOf(locale))
+	return BrailleTableFromID(_r)
 }
 
-// TablesForLocale calls the underlying AXBrailleTableTablesForLocale.
-func TablesForLocale(locale *foundation.NSLocale) *foundation.NSSet[*raw.AXBrailleTable] {
-	return raw.AXBrailleTableTablesForLocale(locale)
+// All tables that provide translations for the given locale’s language.
+func TablesForLocale(locale obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("AXBrailleTable")), objc.RegisterName("tablesForLocale:"), objref.IDOf(locale))
+	return obj.Wrap(_r)
 }
 
-// LanguageAgnosticTables calls the underlying AXBrailleTableLanguageAgnosticTables.
-func LanguageAgnosticTables() *foundation.NSSet[*raw.AXBrailleTable] {
-	return raw.AXBrailleTableLanguageAgnosticTables()
+// All tables that are not specific to any language.
+func LanguageAgnosticTables() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("AXBrailleTable")), objc.RegisterName("languageAgnosticTables"))
+	return obj.Wrap(_r)
 }
 
-// CustomContentWithLabelValue calls the underlying AXCustomContentCustomContentWithLabelValue.
+// Creates new custom content with a label and value.
 func CustomContentWithLabelValue(label string, value string) *CustomContent {
-	_r := raw.AXCustomContentCustomContentWithLabelValue(foundation.NSStringStringWithUTF8String(label), foundation.NSStringStringWithUTF8String(value))
-	if _r == nil {
-		return nil
-	}
-	return &CustomContent{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AXCustomContent")), objc.RegisterName("customContentWithLabel:value:"), purego.NSString(label), purego.NSString(value))
+	return CustomContentFromID(_r)
 }
 
-// CustomContentWithAttributedLabelAttributedValue calls the underlying AXCustomContentCustomContentWithAttributedLabelAttributedValue.
-func CustomContentWithAttributedLabelAttributedValue(label *foundation.NSAttributedString, value *foundation.NSAttributedString) *CustomContent {
-	_r := raw.AXCustomContentCustomContentWithAttributedLabelAttributedValue(label, value)
-	if _r == nil {
-		return nil
-	}
-	return &CustomContent{inner: _r}
+// Creates new custom content with an attributed string and attributed value.
+func CustomContentWithAttributedLabelAttributedValue(label obj.Object, value obj.Object) *CustomContent {
+	_r := objc.Send[objc.ID](objc.ID(_class("AXCustomContent")), objc.RegisterName("customContentWithAttributedLabel:attributedValue:"), objref.IDOf(label), objref.IDOf(value))
+	return CustomContentFromID(_r)
 }
 
-// ValueWithNumber calls the underlying AXDataPointValueValueWithNumber.
+// Creates a numeric data value with the specified number.
 func ValueWithNumber(number float64) *DataPointValue {
-	_r := raw.AXDataPointValueValueWithNumber(number)
-	if _r == nil {
-		return nil
-	}
-	return &DataPointValue{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AXDataPointValue")), objc.RegisterName("valueWithNumber:"), number)
+	return DataPointValueFromID(_r)
 }
 
-// ValueWithCategory calls the underlying AXDataPointValueValueWithCategory.
+// Creates a categorical data value with the specified category string.
 func ValueWithCategory(category string) *DataPointValue {
-	_r := raw.AXDataPointValueValueWithCategory(foundation.NSStringStringWithUTF8String(category))
-	if _r == nil {
-		return nil
-	}
-	return &DataPointValue{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AXDataPointValue")), objc.RegisterName("valueWithCategory:"), purego.NSString(category))
+	return DataPointValueFromID(_r)
 }
 
-// Start calls the underlying AXLiveAudioGraphStart.
+// Begins the live audio graph session.
 func Start() {
-	raw.AXLiveAudioGraphStart()
+	objc.Send[objc.ID](objc.ID(_class("AXLiveAudioGraph")), objc.RegisterName("start"))
 }
 
-// UpdateValue calls the underlying AXLiveAudioGraphUpdateValue.
+// Sets the pitch of the audio graph’s tone.
 func UpdateValue(value float64) {
-	raw.AXLiveAudioGraphUpdateValue(value)
+	objc.Send[objc.ID](objc.ID(_class("AXLiveAudioGraph")), objc.RegisterName("updateValue:"), value)
 }
 
-// Stop calls the underlying AXLiveAudioGraphStop.
+// Ends the live audio graph session.
 func Stop() {
-	raw.AXLiveAudioGraphStop()
+	objc.Send[objc.ID](objc.ID(_class("AXLiveAudioGraph")), objc.RegisterName("stop"))
 }
 
-// CurrentRequest calls the underlying AXRequestCurrentRequest.
 func CurrentRequest() *Request {
-	_r := raw.AXRequestCurrentRequest()
-	if _r == nil {
-		return nil
-	}
-	return &Request{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("AXRequest")), objc.RegisterName("currentRequest"))
+	return RequestFromID(_r)
 }

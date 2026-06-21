@@ -5,158 +5,103 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A bilinear spatial upsampling filter.
 //
-// CNNUpsamplingBilinear wraps [raw.MPSCNNUpsamplingBilinear] with a fluent Go API.
+// CNNUpsamplingBilinear is an idiomatic wrapper over the Objective-C class MPSCNNUpsamplingBilinear.
 type CNNUpsamplingBilinear struct {
-	inner *raw.MPSCNNUpsamplingBilinear
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNUpsamplingBilinear].
-func (x *CNNUpsamplingBilinear) Unwrap() *raw.MPSCNNUpsamplingBilinear { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNUpsamplingBilinear) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNUpsamplingBilinearFromID adopts an existing object pointer as a CNNUpsamplingBilinear (nil for 0).
+// CNNUpsamplingBilinearFromID adopts an existing Objective-C object as a CNNUpsamplingBilinear
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNUpsamplingBilinearFromID(id objc.ID) *CNNUpsamplingBilinear {
 	if id == 0 {
 		return nil
 	}
-	return &CNNUpsamplingBilinear{inner: raw.MPSCNNUpsamplingBilinearFromID(id)}
-}
-
-// Initializes a bilinear spatial upsampling filter.
-//
-// NewCNNUpsamplingBilinearWithDeviceIntegerScaleFactorXIntegerScaleFactorY creates a new [CNNUpsamplingBilinear].
-func NewCNNUpsamplingBilinearWithDeviceIntegerScaleFactorXIntegerScaleFactorY(device metal.MTLDevice, integerScaleFactorX uint, integerScaleFactorY uint) *CNNUpsamplingBilinear {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNUpsamplingBilinear")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:integerScaleFactorX:integerScaleFactorY:"), device, integerScaleFactorX, integerScaleFactorY)
-	return &CNNUpsamplingBilinear{inner: raw.MPSCNNUpsamplingBilinearFromID(_id)}
-}
-
-// @abstract  Initialize the bilinear spatial upsampling filter. @param     device                   The device the filter will run on. @param     integerScaleFactorX      The upsampling factor for the x dimension. @param     integerScaleFactorY      The upsampling factor for the y dimension. @param     alignCorners             Specifier whether the centers of the 4 corner pixels of the input and output regions are aligned, preserving the values at the corner pixels. @return    A valid MPSCNNUpsamplingBilinear object or nil, if failure.
-//
-// NewCNNUpsamplingBilinearWithDeviceIntegerScaleFactorXIntegerScaleFactorYAlignCorners creates a new [CNNUpsamplingBilinear].
-func NewCNNUpsamplingBilinearWithDeviceIntegerScaleFactorXIntegerScaleFactorYAlignCorners(device metal.MTLDevice, integerScaleFactorX uint, integerScaleFactorY uint, alignCorners bool) *CNNUpsamplingBilinear {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNUpsamplingBilinear")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:integerScaleFactorX:integerScaleFactorY:alignCorners:"), device, integerScaleFactorX, integerScaleFactorY, alignCorners)
-	return &CNNUpsamplingBilinear{inner: raw.MPSCNNUpsamplingBilinearFromID(_id)}
-}
-
-// The position of the destination image’s clip rectangle origin, relative to the source image.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *CNNUpsamplingBilinear) WithOffset(offset mpscore.MPSOffset) *CNNUpsamplingBilinear {
-	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetOffset(offset)
+	x := &CNNUpsamplingBilinear{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *CNNUpsamplingBilinear) WithClipRect(clipRect metal.MTLRegion) *CNNUpsamplingBilinear {
-	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetClipRect(clipRect)
+// cNNUpsamplingBilinearAdopt wraps an Objective-C object that this code just created as a
+// CNNUpsamplingBilinear (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNUpsamplingBilinearAdopt(id objc.ID) *CNNUpsamplingBilinear {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNUpsamplingBilinear{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
+}
+
+// Description returns the object's -description text.
+func (x *CNNUpsamplingBilinear) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNUpsamplingBilinear) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNUpsamplingBilinear) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNUpsamplingBilinear creates a new CNNUpsamplingBilinear.
+func NewCNNUpsamplingBilinear() *CNNUpsamplingBilinear {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNUpsamplingBilinear")), objc.RegisterName("new"))
+	return cNNUpsamplingBilinearAdopt(_id)
 }
 
 // The number of channels in the destination image to skip before writing output data.
 //
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNUpsamplingBilinear) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNUpsamplingBilinear {
-	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *CNNUpsamplingBilinear) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNUpsamplingBilinear {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+// The number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
 //
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNUpsamplingBilinear) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNUpsamplingBilinear {
-	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset sets sourceFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *CNNUpsamplingBilinear) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNUpsamplingBilinear {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+// The maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 //
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *CNNUpsamplingBilinear) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNUpsamplingBilinear {
-	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
-	return x
-}
-
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *CNNUpsamplingBilinear) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNUpsamplingBilinear {
-	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *CNNUpsamplingBilinear) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNUpsamplingBilinear {
-	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *CNNUpsamplingBilinear) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNUpsamplingBilinear {
-	x.inner.MPSCNNUpsampling.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *CNNUpsamplingBilinear) WithOptions(options mpscore.MPSKernelOptions) *CNNUpsamplingBilinear {
-	x.inner.MPSCNNUpsampling.MPSCNNKernel.MPSKernel.SetOptions(options)
+// WithSourceFeatureChannelMaxCount sets sourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+func (x *CNNUpsamplingBilinear) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNUpsamplingBilinear {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *CNNUpsamplingBilinear) WithLabel(label string) *CNNUpsamplingBilinear {
-	x.inner.MPSCNNUpsampling.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *CNNUpsamplingBilinear) asCNNUpsampling() *mpsneuralnetwork.MPSCNNUpsampling {
-	return &x.inner.MPSCNNUpsampling
-}
-
-func (x *CNNUpsamplingBilinear) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel {
-	return &x.inner.MPSCNNUpsampling.MPSCNNKernel
-}
-
-func (x *CNNUpsamplingBilinear) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSCNNUpsampling.MPSCNNKernel.MPSKernel
 }
 
 // CNNUpsamplingBilinearable is the interface implemented by [CNNUpsamplingBilinear], for mocking and DI.
 type CNNUpsamplingBilinearable interface {
-	Unwrap() *raw.MPSCNNUpsamplingBilinear
-	WithOffset(offset mpscore.MPSOffset) *CNNUpsamplingBilinear
-	WithClipRect(clipRect metal.MTLRegion) *CNNUpsamplingBilinear
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNUpsamplingBilinear
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNUpsamplingBilinear
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNUpsamplingBilinear
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNUpsamplingBilinear
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNUpsamplingBilinear
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNUpsamplingBilinear
-	WithOptions(options mpscore.MPSKernelOptions) *CNNUpsamplingBilinear
+	obj.Object
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNUpsamplingBilinear
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNUpsamplingBilinear
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNUpsamplingBilinear
 	WithLabel(label string) *CNNUpsamplingBilinear
 }
 

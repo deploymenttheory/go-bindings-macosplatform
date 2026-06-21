@@ -5,73 +5,82 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// PHQ9Assessment wraps [raw.HKPHQ9Assessment] with a fluent Go API.
+// PHQ9Assessment is an idiomatic wrapper over the Objective-C class HKPHQ9Assessment.
 type PHQ9Assessment struct {
-	inner *raw.HKPHQ9Assessment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKPHQ9Assessment].
-func (x *PHQ9Assessment) Unwrap() *raw.HKPHQ9Assessment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PHQ9Assessment) ID() objc.ID { return x.inner.Ptr() }
-
-// PHQ9AssessmentFromID adopts an existing object pointer as a PHQ9Assessment (nil for 0).
+// PHQ9AssessmentFromID adopts an existing Objective-C object as a PHQ9Assessment
+// (nil for 0), retaining it and registering a release finalizer.
 func PHQ9AssessmentFromID(id objc.ID) *PHQ9Assessment {
 	if id == 0 {
 		return nil
 	}
-	return &PHQ9Assessment{inner: raw.HKPHQ9AssessmentFromID(id)}
+	x := &PHQ9Assessment{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPHQ9Assessment creates a new [PHQ9Assessment].
+// pHQ9AssessmentAdopt wraps an Objective-C object that this code just created as a
+// PHQ9Assessment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pHQ9AssessmentAdopt(id objc.ID) *PHQ9Assessment {
+	if id == 0 {
+		return nil
+	}
+	x := &PHQ9Assessment{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PHQ9Assessment) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PHQ9Assessment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PHQ9Assessment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPHQ9Assessment creates a new PHQ9Assessment.
 func NewPHQ9Assessment() *PHQ9Assessment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKPHQ9Assessment")), objc.RegisterName("new"))
-	return &PHQ9Assessment{inner: raw.HKPHQ9AssessmentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKPHQ9Assessment")), objc.RegisterName("new"))
+	return pHQ9AssessmentAdopt(_id)
 }
 
 // Answers on the PHQ-9 assessment. There are exactly 9 answers, one for each multiple choice question. Each answer is of type `HKPHQ9AssessmentAnswer`. If the 9th question was unanswered,  the answer is `HKPHQ9AssessmentAnswerPreferNotToAnswer`.
 //
 // Answers returns the collection as a Go slice.
-func (x *PHQ9Assessment) Answers() []*foundation.NSNumber {
-	arr := x.inner.Answers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *PHQ9Assessment) Answers() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("answers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// @property   risk @discussion The risk determined by the score on a PHQ-9 assessment.
-//
-// Risk calls the underlying Risk.
-func (x *PHQ9Assessment) Risk() HKPHQ9AssessmentRisk {
-	return HKPHQ9AssessmentRisk(x.inner.Risk())
-}
-
-func (x *PHQ9Assessment) asScoredAssessment() *raw.HKScoredAssessment {
-	return &x.inner.HKScoredAssessment
-}
-
-func (x *PHQ9Assessment) asSample() *raw.HKSample { return &x.inner.HKScoredAssessment.HKSample }
-
-func (x *PHQ9Assessment) asObject() *raw.HKObject {
-	return &x.inner.HKScoredAssessment.HKSample.HKObject
+// The risk determined by the score on a PHQ-9 assessment.
+func (x *PHQ9Assessment) Risk() PHQ9AssessmentRisk {
+	_r := objc.Send[PHQ9AssessmentRisk](objref.IDOf(x), objc.RegisterName("risk"))
+	return _r
 }
 
 // PHQ9Assessmentable is the interface implemented by [PHQ9Assessment], for mocking and DI.
 type PHQ9Assessmentable interface {
-	Unwrap() *raw.HKPHQ9Assessment
-	Answers() []*foundation.NSNumber
-	Risk() HKPHQ9AssessmentRisk
+	obj.Object
+	Answers() []obj.Object
+	Risk() PHQ9AssessmentRisk
 }
 
 var _ PHQ9Assessmentable = (*PHQ9Assessment)(nil)

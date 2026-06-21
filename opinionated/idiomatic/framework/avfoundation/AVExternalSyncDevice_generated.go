@@ -5,107 +5,103 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An external sync device connected to a host device that can be used to drive the timing of an internal component, such as a camera sensor.
 //
-// ExternalSyncDevice wraps [raw.AVExternalSyncDevice] with a fluent Go API.
+// ExternalSyncDevice is an idiomatic wrapper over the Objective-C class AVExternalSyncDevice.
 type ExternalSyncDevice struct {
-	inner *raw.AVExternalSyncDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVExternalSyncDevice].
-func (x *ExternalSyncDevice) Unwrap() *raw.AVExternalSyncDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExternalSyncDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// ExternalSyncDeviceFromID adopts an existing object pointer as a ExternalSyncDevice (nil for 0).
+// ExternalSyncDeviceFromID adopts an existing Objective-C object as a ExternalSyncDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func ExternalSyncDeviceFromID(id objc.ID) *ExternalSyncDevice {
 	if id == 0 {
 		return nil
 	}
-	return &ExternalSyncDevice{inner: raw.AVExternalSyncDeviceFromID(id)}
-}
-
-// NewExternalSyncDevice creates a new [ExternalSyncDevice].
-func NewExternalSyncDevice() *ExternalSyncDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVExternalSyncDevice")), objc.RegisterName("new"))
-	return &ExternalSyncDevice{inner: raw.AVExternalSyncDeviceFromID(_id)}
-}
-
-// Delay to wait before starting the frame capture.
-//
-// WithSignalCompensationDelay sets the signalCompensationDelay property and returns the receiver for chaining.
-func (x *ExternalSyncDevice) WithSignalCompensationDelay(signalCompensationDelay coremedia.CMTime) *ExternalSyncDevice {
-	x.inner.SetSignalCompensationDelay(signalCompensationDelay)
+	x := &ExternalSyncDevice{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
+// externalSyncDeviceAdopt wraps an Objective-C object that this code just created as a
+// ExternalSyncDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func externalSyncDeviceAdopt(id objc.ID) *ExternalSyncDevice {
+	if id == 0 {
+		return nil
+	}
+	x := &ExternalSyncDevice{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ExternalSyncDevice) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExternalSyncDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExternalSyncDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewExternalSyncDevice creates a new ExternalSyncDevice.
+func NewExternalSyncDevice() *ExternalSyncDevice {
+	_id := objc.Send[objc.ID](objc.ID(_class("AVExternalSyncDevice")), objc.RegisterName("new"))
+	return externalSyncDeviceAdopt(_id)
+}
+
 // The status of the externally connected device. Use this property to query the current connection status of the external sync device. This property is key-value observable.
-//
-// Status calls the underlying Status.
-func (x *ExternalSyncDevice) Status() AVExternalSyncDeviceStatus {
-	return AVExternalSyncDeviceStatus(x.inner.Status())
+func (x *ExternalSyncDevice) Status() ExternalSyncDeviceStatus {
+	_r := objc.Send[ExternalSyncDeviceStatus](objref.IDOf(x), objc.RegisterName("status"))
+	return _r
 }
 
 // A clock representing the source of time from the external sync device. This property returns `NULL` until the “status“ reaches “AVExternalSyncDeviceStatusActiveSync“.
-//
-// Clock calls the underlying Clock.
-func (x *ExternalSyncDevice) Clock() unsafe.Pointer {
-	return x.inner.Clock()
-}
-
-// Delay to wait before starting the frame capture. An external sync is generally used to configure multiple devices in the real world. A display and a camera may receive a signal at the same time, but that does not mean the refresh of the display and camera are aligned in a way that does not cause tearing in the recording. The signal compensation delay can be used to offset the readout of a camera on an intra-frame scale. - Important: You should always set this property to a value less than the frame duration at which the camera is operating.
-//
-// SignalCompensationDelay calls the underlying SignalCompensationDelay.
-func (x *ExternalSyncDevice) SignalCompensationDelay() coremedia.CMTime {
-	return x.inner.SignalCompensationDelay()
-}
-
-// SetSignalCompensationDelay calls the underlying SetSignalCompensationDelay.
-func (x *ExternalSyncDevice) SetSignalCompensationDelay(signalCompensationDelay coremedia.CMTime) {
-	x.inner.SetSignalCompensationDelay(signalCompensationDelay)
+func (x *ExternalSyncDevice) Clock() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clock"))
+	return obj.Wrap(_r)
 }
 
 // A unique identifier for an external sync device. Use this property to select a specific external sync device.
-//
-// Uuid calls the underlying Uuid.
-func (x *ExternalSyncDevice) Uuid() *foundation.NSUUID {
-	return x.inner.Uuid()
+func (x *ExternalSyncDevice) Uuid() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uuid"))
+	return obj.Wrap(_r)
 }
 
 // The USB vendor identifier associated with the external sync device. This `UInt32` value is provided by the hardware vendor, and returns 0 if not available.
-//
-// VendorID calls the underlying VendorID.
-func (x *ExternalSyncDevice) VendorID() uint {
-	return x.inner.VendorID()
+func (x *ExternalSyncDevice) VendorID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vendorID"))
+	return _r
 }
 
 // The USB product identifier associated with the external sync device. This `UInt32` value comes from the hardware vendor, and returns 0 if not available. Use this value in conjunction with the “vendorID“ to determine a specific product.
-//
-// ProductID calls the underlying ProductID.
-func (x *ExternalSyncDevice) ProductID() uint {
-	return x.inner.ProductID()
+func (x *ExternalSyncDevice) ProductID() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("productID"))
+	return _r
 }
 
 // ExternalSyncDeviceable is the interface implemented by [ExternalSyncDevice], for mocking and DI.
 type ExternalSyncDeviceable interface {
-	Unwrap() *raw.AVExternalSyncDevice
-	WithSignalCompensationDelay(signalCompensationDelay coremedia.CMTime) *ExternalSyncDevice
-	Status() AVExternalSyncDeviceStatus
-	Clock() unsafe.Pointer
-	SignalCompensationDelay() coremedia.CMTime
-	SetSignalCompensationDelay(signalCompensationDelay coremedia.CMTime)
-	Uuid() *foundation.NSUUID
-	VendorID() uint
-	ProductID() uint
+	obj.Object
+	Status() ExternalSyncDeviceStatus
+	Clock() obj.Object
+	Uuid() obj.Object
+	VendorID() int
+	ProductID() int
 }
 
 var _ ExternalSyncDeviceable = (*ExternalSyncDevice)(nil)

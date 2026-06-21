@@ -5,178 +5,188 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An animation for a single property of the individual particles rendered by a particle system.
 //
-// ParticlePropertyController wraps [raw.SCNParticlePropertyController] with a fluent Go API.
+// ParticlePropertyController is an idiomatic wrapper over the Objective-C class SCNParticlePropertyController.
 type ParticlePropertyController struct {
-	inner *raw.SCNParticlePropertyController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNParticlePropertyController].
-func (x *ParticlePropertyController) Unwrap() *raw.SCNParticlePropertyController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ParticlePropertyController) ID() objc.ID { return x.inner.Ptr() }
-
-// ParticlePropertyControllerFromID adopts an existing object pointer as a ParticlePropertyController (nil for 0).
+// ParticlePropertyControllerFromID adopts an existing Objective-C object as a ParticlePropertyController
+// (nil for 0), retaining it and registering a release finalizer.
 func ParticlePropertyControllerFromID(id objc.ID) *ParticlePropertyController {
 	if id == 0 {
 		return nil
 	}
-	return &ParticlePropertyController{inner: raw.SCNParticlePropertyControllerFromID(id)}
+	x := &ParticlePropertyController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewParticlePropertyController creates a new [ParticlePropertyController].
+// particlePropertyControllerAdopt wraps an Objective-C object that this code just created as a
+// ParticlePropertyController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func particlePropertyControllerAdopt(id objc.ID) *ParticlePropertyController {
+	if id == 0 {
+		return nil
+	}
+	x := &ParticlePropertyController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ParticlePropertyController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ParticlePropertyController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ParticlePropertyController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewParticlePropertyController creates a new ParticlePropertyController.
 func NewParticlePropertyController() *ParticlePropertyController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNParticlePropertyController")), objc.RegisterName("new"))
-	return &ParticlePropertyController{inner: raw.SCNParticlePropertyControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNParticlePropertyController")), objc.RegisterName("new"))
+	return particlePropertyControllerAdopt(_id)
 }
 
 // The Core Animation object defining the behavior of the property animation.
 //
-// WithAnimation sets the animation property and returns the receiver for chaining.
-func (x *ParticlePropertyController) WithAnimation(animation *quartzcore.CAAnimation) *ParticlePropertyController {
-	x.inner.SetAnimation(animation)
+// WithAnimation sets animation and returns the receiver so calls can be chained.
+func (x *ParticlePropertyController) WithAnimation(animation obj.Object) *ParticlePropertyController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimation:"), objref.IDOf(animation))
 	return x
 }
 
 // The mode that determines input values for the property controller’s animation.
 //
-// WithInputMode sets the inputMode property and returns the receiver for chaining.
-func (x *ParticlePropertyController) WithInputMode(inputMode SCNParticleInputMode) *ParticlePropertyController {
-	x.inner.SetInputMode(raw.SCNParticleInputMode(inputMode))
+// WithInputMode sets inputMode and returns the receiver so calls can be chained.
+func (x *ParticlePropertyController) WithInputMode(inputMode ParticleInputMode) *ParticlePropertyController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputMode:"), inputMode)
 	return x
 }
 
 // A factor for multiplying the input value of the controller’s animation.
 //
-// WithInputScale sets the inputScale property and returns the receiver for chaining.
+// WithInputScale sets inputScale and returns the receiver so calls can be chained.
 func (x *ParticlePropertyController) WithInputScale(inputScale float64) *ParticlePropertyController {
-	x.inner.SetInputScale(inputScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputScale:"), inputScale)
 	return x
 }
 
 // An offset to add to the input value of the controller’s animation.
 //
-// WithInputBias sets the inputBias property and returns the receiver for chaining.
+// WithInputBias sets inputBias and returns the receiver so calls can be chained.
 func (x *ParticlePropertyController) WithInputBias(inputBias float64) *ParticlePropertyController {
-	x.inner.SetInputBias(inputBias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputBias:"), inputBias)
 	return x
 }
 
 // A node whose distance to each particle provides input values for the controller’s animation.
 //
-// WithInputOrigin sets the inputOrigin property and returns the receiver for chaining.
+// WithInputOrigin sets inputOrigin and returns the receiver so calls can be chained.
 func (x *ParticlePropertyController) WithInputOrigin(inputOrigin NodeProvider) *ParticlePropertyController {
-	x.inner.SetInputOrigin(inputOrigin.asNode())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputOrigin:"), objref.IDOf(inputOrigin))
 	return x
 }
 
 // A particle property that provides input values for this property controller’s animation.
 //
-// WithInputProperty sets the inputProperty property and returns the receiver for chaining.
-func (x *ParticlePropertyController) WithInputProperty(inputProperty *foundation.NSString) *ParticlePropertyController {
-	x.inner.SetInputProperty(inputProperty)
+// WithInputProperty sets inputProperty and returns the receiver so calls can be chained.
+func (x *ParticlePropertyController) WithInputProperty(inputProperty obj.Object) *ParticlePropertyController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputProperty:"), objref.IDOf(inputProperty))
 	return x
 }
 
-// Animation calls the underlying Animation.
-func (x *ParticlePropertyController) Animation() *quartzcore.CAAnimation {
-	return x.inner.Animation()
+func (x *ParticlePropertyController) Animation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animation"))
+	return obj.Wrap(_r)
 }
 
-// SetAnimation calls the underlying SetAnimation.
-func (x *ParticlePropertyController) SetAnimation(animation *quartzcore.CAAnimation) {
-	x.inner.SetAnimation(animation)
+func (x *ParticlePropertyController) SetAnimation(animation obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimation:"), objref.IDOf(animation))
 }
 
-// InputMode calls the underlying InputMode.
-func (x *ParticlePropertyController) InputMode() SCNParticleInputMode {
-	return SCNParticleInputMode(x.inner.InputMode())
+func (x *ParticlePropertyController) InputMode() ParticleInputMode {
+	_r := objc.Send[ParticleInputMode](objref.IDOf(x), objc.RegisterName("inputMode"))
+	return _r
 }
 
-// SetInputMode calls the underlying SetInputMode.
-func (x *ParticlePropertyController) SetInputMode(inputMode SCNParticleInputMode) {
-	x.inner.SetInputMode(raw.SCNParticleInputMode(inputMode))
+func (x *ParticlePropertyController) SetInputMode(inputMode ParticleInputMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputMode:"), inputMode)
 }
 
-// InputScale calls the underlying InputScale.
 func (x *ParticlePropertyController) InputScale() float64 {
-	return x.inner.InputScale()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("inputScale"))
+	return _r
 }
 
-// SetInputScale calls the underlying SetInputScale.
 func (x *ParticlePropertyController) SetInputScale(inputScale float64) {
-	x.inner.SetInputScale(inputScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputScale:"), inputScale)
 }
 
-// InputBias calls the underlying InputBias.
 func (x *ParticlePropertyController) InputBias() float64 {
-	return x.inner.InputBias()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("inputBias"))
+	return _r
 }
 
-// SetInputBias calls the underlying SetInputBias.
 func (x *ParticlePropertyController) SetInputBias(inputBias float64) {
-	x.inner.SetInputBias(inputBias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputBias:"), inputBias)
 }
 
-// InputOrigin calls the underlying InputOrigin.
 func (x *ParticlePropertyController) InputOrigin() *Node {
-	_r := x.inner.InputOrigin()
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputOrigin"))
+	return NodeFromID(_r)
 }
 
-// SetInputOrigin calls the underlying SetInputOrigin.
-func (x *ParticlePropertyController) SetInputOrigin(inputOrigin *raw.SCNNode) {
-	x.inner.SetInputOrigin(inputOrigin)
+func (x *ParticlePropertyController) SetInputOrigin(inputOrigin *Node) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputOrigin:"), objref.IDOf(inputOrigin))
 }
 
-// InputProperty calls the underlying InputProperty.
-func (x *ParticlePropertyController) InputProperty() string {
-	_r := x.inner.InputProperty()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *ParticlePropertyController) InputProperty() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputProperty"))
+	return obj.Wrap(_r)
 }
 
-// SetInputProperty calls the underlying SetInputProperty.
-func (x *ParticlePropertyController) SetInputProperty(inputProperty *foundation.NSString) {
-	x.inner.SetInputProperty(inputProperty)
+func (x *ParticlePropertyController) SetInputProperty(inputProperty obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputProperty:"), objref.IDOf(inputProperty))
 }
 
 // ParticlePropertyControllerable is the interface implemented by [ParticlePropertyController], for mocking and DI.
 type ParticlePropertyControllerable interface {
-	Unwrap() *raw.SCNParticlePropertyController
-	WithAnimation(animation *quartzcore.CAAnimation) *ParticlePropertyController
-	WithInputMode(inputMode SCNParticleInputMode) *ParticlePropertyController
+	obj.Object
+	WithAnimation(animation obj.Object) *ParticlePropertyController
+	WithInputMode(inputMode ParticleInputMode) *ParticlePropertyController
 	WithInputScale(inputScale float64) *ParticlePropertyController
 	WithInputBias(inputBias float64) *ParticlePropertyController
 	WithInputOrigin(inputOrigin NodeProvider) *ParticlePropertyController
-	WithInputProperty(inputProperty *foundation.NSString) *ParticlePropertyController
-	Animation() *quartzcore.CAAnimation
-	SetAnimation(animation *quartzcore.CAAnimation)
-	InputMode() SCNParticleInputMode
-	SetInputMode(inputMode SCNParticleInputMode)
+	WithInputProperty(inputProperty obj.Object) *ParticlePropertyController
+	Animation() obj.Object
+	SetAnimation(animation obj.Object)
+	InputMode() ParticleInputMode
+	SetInputMode(inputMode ParticleInputMode)
 	InputScale() float64
 	SetInputScale(inputScale float64)
 	InputBias() float64
 	SetInputBias(inputBias float64)
 	InputOrigin() *Node
-	SetInputOrigin(inputOrigin *raw.SCNNode)
-	InputProperty() string
-	SetInputProperty(inputProperty *foundation.NSString)
+	SetInputOrigin(inputOrigin *Node)
+	InputProperty() obj.Object
+	SetInputProperty(inputProperty obj.Object)
 }
 
 var _ ParticlePropertyControllerable = (*ParticlePropertyController)(nil)

@@ -5,132 +5,140 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that renders an image from a PICT format data stream of version 1, version 2, and extended version 2.
 //
-// PICTImageRep wraps [raw.NSPICTImageRep] with a fluent Go API.
+// PICTImageRep is an idiomatic wrapper over the Objective-C class NSPICTImageRep.
 type PICTImageRep struct {
-	inner *raw.NSPICTImageRep
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPICTImageRep].
-func (x *PICTImageRep) Unwrap() *raw.NSPICTImageRep { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PICTImageRep) ID() objc.ID { return x.inner.Ptr() }
-
-// PICTImageRepFromID adopts an existing object pointer as a PICTImageRep (nil for 0).
+// PICTImageRepFromID adopts an existing Objective-C object as a PICTImageRep
+// (nil for 0), retaining it and registering a release finalizer.
 func PICTImageRepFromID(id objc.ID) *PICTImageRep {
 	if id == 0 {
 		return nil
 	}
-	return &PICTImageRep{inner: raw.NSPICTImageRepFromID(id)}
+	x := &PICTImageRep{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// pICTImageRepAdopt wraps an Objective-C object that this code just created as a
+// PICTImageRep (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pICTImageRepAdopt(id objc.ID) *PICTImageRep {
+	if id == 0 {
+		return nil
+	}
+	x := &PICTImageRep{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PICTImageRep) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PICTImageRep) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PICTImageRep) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns a representation of an image from the specified data in the PICT file format.
 //
-// NewPICTImageRepWithData creates a new [PICTImageRep].
-func NewPICTImageRepWithData(pictData *foundation.NSData) *PICTImageRep {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPICTImageRep")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), pictData.Ptr())
-	return &PICTImageRep{inner: raw.NSPICTImageRepFromID(_id)}
-}
-
-// The size of the image representation, measured in points in the user coordinate space.
-//
-// WithSize sets the size property and returns the receiver for chaining.
-func (x *PICTImageRep) WithSize(size corefoundation.CGSize) *PICTImageRep {
-	x.inner.NSImageRep.SetSize(size)
-	return x
+// NewPICTImageRepWithData creates a new PICTImageRep.
+func NewPICTImageRepWithData(pictData obj.Object) *PICTImageRep {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPICTImageRep")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(pictData))
+	return pICTImageRepAdopt(_id)
 }
 
 // A Boolean value that indicates whether the image data has an alpha channel.
 //
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha sets alpha and returns the receiver so calls can be chained.
 func (x *PICTImageRep) WithAlpha(alpha bool) *PICTImageRep {
-	x.inner.NSImageRep.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
 // A Boolean value that indicates whether the image is opaque.
 //
-// WithOpaque sets the opaque property and returns the receiver for chaining.
+// WithOpaque sets opaque and returns the receiver so calls can be chained.
 func (x *PICTImageRep) WithOpaque(opaque bool) *PICTImageRep {
-	x.inner.NSImageRep.SetOpaque(opaque)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
 	return x
 }
 
 // The name of the color space used by the image data.
 //
-// WithColorSpaceName sets the colorSpaceName property and returns the receiver for chaining.
-func (x *PICTImageRep) WithColorSpaceName(colorSpaceName *foundation.NSString) *PICTImageRep {
-	x.inner.NSImageRep.SetColorSpaceName(colorSpaceName)
+// WithColorSpaceName sets colorSpaceName and returns the receiver so calls can be chained.
+func (x *PICTImageRep) WithColorSpaceName(colorSpaceName obj.Object) *PICTImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
 	return x
 }
 
 // The number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
 //
-// WithBitsPerSample sets the bitsPerSample property and returns the receiver for chaining.
+// WithBitsPerSample sets bitsPerSample and returns the receiver so calls can be chained.
 func (x *PICTImageRep) WithBitsPerSample(bitsPerSample int) *PICTImageRep {
-	x.inner.NSImageRep.SetBitsPerSample(bitsPerSample)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
 	return x
 }
 
 // The width of the image, measured in pixels.
 //
-// WithPixelsWide sets the pixelsWide property and returns the receiver for chaining.
+// WithPixelsWide sets pixelsWide and returns the receiver so calls can be chained.
 func (x *PICTImageRep) WithPixelsWide(pixelsWide int) *PICTImageRep {
-	x.inner.NSImageRep.SetPixelsWide(pixelsWide)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsWide:"), pixelsWide)
 	return x
 }
 
 // The height of the image, measured in pixels.
 //
-// WithPixelsHigh sets the pixelsHigh property and returns the receiver for chaining.
+// WithPixelsHigh sets pixelsHigh and returns the receiver so calls can be chained.
 func (x *PICTImageRep) WithPixelsHigh(pixelsHigh int) *PICTImageRep {
-	x.inner.NSImageRep.SetPixelsHigh(pixelsHigh)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
 	return x
 }
 
 // The layout direction for the image.
 //
-// WithLayoutDirection sets the layoutDirection property and returns the receiver for chaining.
-func (x *PICTImageRep) WithLayoutDirection(layoutDirection NSImageLayoutDirection) *PICTImageRep {
-	x.inner.NSImageRep.SetLayoutDirection(raw.NSImageLayoutDirection(layoutDirection))
+// WithLayoutDirection sets layoutDirection and returns the receiver so calls can be chained.
+func (x *PICTImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *PICTImageRep {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutDirection:"), layoutDirection)
 	return x
 }
 
-// PICTRepresentation calls the underlying PICTRepresentation.
-func (x *PICTImageRep) PICTRepresentation() *foundation.NSData {
-	return x.inner.PICTRepresentation()
+func (x *PICTImageRep) PICTRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("PICTRepresentation"))
+	return obj.Wrap(_r)
 }
-
-// BoundingBox calls the underlying BoundingBox.
-func (x *PICTImageRep) BoundingBox() corefoundation.CGRect {
-	return x.inner.BoundingBox()
-}
-
-func (x *PICTImageRep) asImageRep() *raw.NSImageRep { return &x.inner.NSImageRep }
 
 // PICTImageRepable is the interface implemented by [PICTImageRep], for mocking and DI.
 type PICTImageRepable interface {
-	Unwrap() *raw.NSPICTImageRep
-	WithSize(size corefoundation.CGSize) *PICTImageRep
+	obj.Object
 	WithAlpha(alpha bool) *PICTImageRep
 	WithOpaque(opaque bool) *PICTImageRep
-	WithColorSpaceName(colorSpaceName *foundation.NSString) *PICTImageRep
+	WithColorSpaceName(colorSpaceName obj.Object) *PICTImageRep
 	WithBitsPerSample(bitsPerSample int) *PICTImageRep
 	WithPixelsWide(pixelsWide int) *PICTImageRep
 	WithPixelsHigh(pixelsHigh int) *PICTImageRep
-	WithLayoutDirection(layoutDirection NSImageLayoutDirection) *PICTImageRep
-	PICTRepresentation() *foundation.NSData
-	BoundingBox() corefoundation.CGRect
+	WithLayoutDirection(layoutDirection ImageLayoutDirection) *PICTImageRep
+	PICTRepresentation() obj.Object
 }
 
 var _ PICTImageRepable = (*PICTImageRep)(nil)

@@ -5,124 +5,113 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A listener that waits for new incoming connections, configures them, and accepts or rejects them.
 //
-// XPCListener wraps [raw.NSXPCListener] with a fluent Go API.
+// XPCListener is an idiomatic wrapper over the Objective-C class NSXPCListener.
 type XPCListener struct {
-	inner *raw.NSXPCListener
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSXPCListener].
-func (x *XPCListener) Unwrap() *raw.NSXPCListener { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *XPCListener) ID() objc.ID { return x.inner.Ptr() }
-
-// XPCListenerFromID adopts an existing object pointer as a XPCListener (nil for 0).
+// XPCListenerFromID adopts an existing Objective-C object as a XPCListener
+// (nil for 0), retaining it and registering a release finalizer.
 func XPCListenerFromID(id objc.ID) *XPCListener {
 	if id == 0 {
 		return nil
 	}
-	return &XPCListener{inner: raw.NSXPCListenerFromID(id)}
+	x := &XPCListener{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// xPCListenerAdopt wraps an Objective-C object that this code just created as a
+// XPCListener (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func xPCListenerAdopt(id objc.ID) *XPCListener {
+	if id == 0 {
+		return nil
+	}
+	x := &XPCListener{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *XPCListener) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *XPCListener) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *XPCListener) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a listener in a LaunchAgent or LaunchDaemon which has a name advertised in a launchd.plist file.
 //
-// NewXPCListenerWithMachServiceName creates a new [XPCListener].
+// NewXPCListenerWithMachServiceName creates a new XPCListener.
 func NewXPCListenerWithMachServiceName(name string) *XPCListener {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXPCListener")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMachServiceName:"), foundation.NSStringStringWithUTF8String(name).Ptr())
-	return &XPCListener{inner: raw.NSXPCListenerFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXPCListener")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMachServiceName:"), purego.NSString(name))
+	return xPCListenerAdopt(_id)
 }
 
-// The delegate for the listener.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *XPCListener) WithDelegate(delegate raw.NSXPCListenerDelegate) *XPCListener {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *XPCListener) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCListener {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *XPCListener) WithScriptingProperties(scriptingProperties obj.Object) *XPCListener {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Starts processing of incoming requests.
-//
-// Resume calls the underlying Resume.
 func (x *XPCListener) Resume() {
-	x.inner.Resume()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resume"))
 }
 
 // Suspends the listener.
-//
-// Suspend calls the underlying Suspend.
 func (x *XPCListener) Suspend() {
-	x.inner.Suspend()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suspend"))
 }
 
 // Activates the listener.
-//
-// Activate calls the underlying Activate.
 func (x *XPCListener) Activate() {
-	x.inner.Activate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activate"))
 }
 
 // Invalidates the listener.
-//
-// Invalidate calls the underlying Invalidate.
 func (x *XPCListener) Invalidate() {
-	x.inner.Invalidate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
 // Sets the code signing requirement for connections to this listener.
-//
-// SetConnectionCodeSigningRequirement calls the underlying SetConnectionCodeSigningRequirement.
 func (x *XPCListener) SetConnectionCodeSigningRequirement(requirement string) {
-	x.inner.SetConnectionCodeSigningRequirement(foundation.NSStringStringWithUTF8String(requirement))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionCodeSigningRequirement:"), purego.NSString(requirement))
 }
 
-// Delegate calls the underlying Delegate.
-func (x *XPCListener) Delegate() raw.NSXPCListenerDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *XPCListener) SetDelegate(delegate raw.NSXPCListenerDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// Endpoint calls the underlying Endpoint.
 func (x *XPCListener) Endpoint() *XPCListenerEndpoint {
-	_r := x.inner.Endpoint()
-	if _r == nil {
-		return nil
-	}
-	return &XPCListenerEndpoint{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
+	return XPCListenerEndpointFromID(_r)
 }
-
-func (x *XPCListener) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // XPCListenerable is the interface implemented by [XPCListener], for mocking and DI.
 type XPCListenerable interface {
-	Unwrap() *raw.NSXPCListener
-	WithDelegate(delegate raw.NSXPCListenerDelegate) *XPCListener
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCListener
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *XPCListener
 	Resume()
 	Suspend()
 	Activate()
 	Invalidate()
 	SetConnectionCodeSigningRequirement(requirement string)
-	Delegate() raw.NSXPCListenerDelegate
-	SetDelegate(delegate raw.NSXPCListenerDelegate)
 	Endpoint() *XPCListenerEndpoint
 }
 

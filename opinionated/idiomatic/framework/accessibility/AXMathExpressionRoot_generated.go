@@ -5,66 +5,78 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MathExpressionRoot wraps [raw.AXMathExpressionRoot] with a fluent Go API.
+// MathExpressionRoot is an idiomatic wrapper over the Objective-C class AXMathExpressionRoot.
 type MathExpressionRoot struct {
-	inner *raw.AXMathExpressionRoot
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AXMathExpressionRoot].
-func (x *MathExpressionRoot) Unwrap() *raw.AXMathExpressionRoot { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MathExpressionRoot) ID() objc.ID { return x.inner.Ptr() }
-
-// MathExpressionRootFromID adopts an existing object pointer as a MathExpressionRoot (nil for 0).
+// MathExpressionRootFromID adopts an existing Objective-C object as a MathExpressionRoot
+// (nil for 0), retaining it and registering a release finalizer.
 func MathExpressionRootFromID(id objc.ID) *MathExpressionRoot {
 	if id == 0 {
 		return nil
 	}
-	return &MathExpressionRoot{inner: raw.AXMathExpressionRootFromID(id)}
+	x := &MathExpressionRoot{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMathExpressionRootWithRadicandExpressionsRootIndexExpression creates a new [MathExpressionRoot].
-func NewMathExpressionRootWithRadicandExpressionsRootIndexExpression(radicandExpressions *foundation.NSArray[*raw.AXMathExpression], rootIndexExpression *raw.AXMathExpression) *MathExpressionRoot {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXMathExpressionRoot")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRadicandExpressions:rootIndexExpression:"), radicandExpressions.Ptr(), rootIndexExpression.Ptr())
-	return &MathExpressionRoot{inner: raw.AXMathExpressionRootFromID(_id)}
+// mathExpressionRootAdopt wraps an Objective-C object that this code just created as a
+// MathExpressionRoot (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mathExpressionRootAdopt(id objc.ID) *MathExpressionRoot {
+	if id == 0 {
+		return nil
+	}
+	x := &MathExpressionRoot{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MathExpressionRoot) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MathExpressionRoot) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MathExpressionRoot) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMathExpressionRootWithRadicandExpressionsRootIndexExpression creates a new MathExpressionRoot.
+func NewMathExpressionRootWithRadicandExpressionsRootIndexExpression(radicandExpressions []*MathExpression, rootIndexExpression *MathExpression) *MathExpressionRoot {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AXMathExpressionRoot")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRadicandExpressions:rootIndexExpression:"), purego.SliceToNSArray(radicandExpressions, func(_v *MathExpression) objc.ID { return objref.IDOf(_v) }), objref.IDOf(rootIndexExpression))
+	return mathExpressionRootAdopt(_id)
 }
 
 // RadicandExpressions returns the collection as a Go slice.
 func (x *MathExpressionRoot) RadicandExpressions() []*MathExpression {
-	arr := x.inner.RadicandExpressions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MathExpression {
-		return &MathExpression{inner: raw.AXMathExpressionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("radicandExpressions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
 
-// RootIndexExpression calls the underlying RootIndexExpression.
 func (x *MathExpressionRoot) RootIndexExpression() *MathExpression {
-	_r := x.inner.RootIndexExpression()
-	if _r == nil {
-		return nil
-	}
-	return &MathExpression{inner: _r}
-}
-
-func (x *MathExpressionRoot) asMathExpression() *raw.AXMathExpression {
-	return &x.inner.AXMathExpression
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootIndexExpression"))
+	return MathExpressionFromID(_r)
 }
 
 // MathExpressionRootable is the interface implemented by [MathExpressionRoot], for mocking and DI.
 type MathExpressionRootable interface {
-	Unwrap() *raw.AXMathExpressionRoot
+	obj.Object
 	RadicandExpressions() []*MathExpression
 	RootIndexExpression() *MathExpression
 }

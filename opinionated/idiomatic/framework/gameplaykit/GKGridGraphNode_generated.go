@@ -5,53 +5,68 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A node in a navigation graph, associated with a position on a discrete two-dimensional grid.
 //
-// GridGraphNode wraps [raw.GKGridGraphNode] with a fluent Go API.
+// GridGraphNode is an idiomatic wrapper over the Objective-C class GKGridGraphNode.
 type GridGraphNode struct {
-	inner *raw.GKGridGraphNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKGridGraphNode].
-func (x *GridGraphNode) Unwrap() *raw.GKGridGraphNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GridGraphNode) ID() objc.ID { return x.inner.Ptr() }
-
-// GridGraphNodeFromID adopts an existing object pointer as a GridGraphNode (nil for 0).
+// GridGraphNodeFromID adopts an existing Objective-C object as a GridGraphNode
+// (nil for 0), retaining it and registering a release finalizer.
 func GridGraphNodeFromID(id objc.ID) *GridGraphNode {
 	if id == 0 {
 		return nil
 	}
-	return &GridGraphNode{inner: raw.GKGridGraphNodeFromID(id)}
+	x := &GridGraphNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes a graph node with the specified position on a grid.
-//
-// NewGridGraphNodeWithGridPosition creates a new [GridGraphNode].
-func NewGridGraphNodeWithGridPosition(gridPosition unsafe.Pointer) *GridGraphNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGridGraphNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGridPosition:"), gridPosition)
-	return &GridGraphNode{inner: raw.GKGridGraphNodeFromID(_id)}
+// gridGraphNodeAdopt wraps an Objective-C object that this code just created as a
+// GridGraphNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func gridGraphNodeAdopt(id objc.ID) *GridGraphNode {
+	if id == 0 {
+		return nil
+	}
+	x := &GridGraphNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// GridPosition calls the underlying GridPosition.
-func (x *GridGraphNode) GridPosition() unsafe.Pointer {
-	return x.inner.GridPosition()
+// Description returns the object's -description text.
+func (x *GridGraphNode) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *GridGraphNode) asGraphNode() *raw.GKGraphNode { return &x.inner.GKGraphNode }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GridGraphNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GridGraphNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGridGraphNode creates a new GridGraphNode.
+func NewGridGraphNode() *GridGraphNode {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKGridGraphNode")), objc.RegisterName("new"))
+	return gridGraphNodeAdopt(_id)
+}
 
 // GridGraphNodeable is the interface implemented by [GridGraphNode], for mocking and DI.
 type GridGraphNodeable interface {
-	Unwrap() *raw.GKGridGraphNode
-	GridPosition() unsafe.Pointer
+	obj.Object
 }
 
 var _ GridGraphNodeable = (*GridGraphNode)(nil)

@@ -5,1255 +5,662 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A formatter that converts between dates and their textual representations.
 //
-// DateFormatter wraps [raw.NSDateFormatter] with a fluent Go API.
+// DateFormatter is an idiomatic wrapper over the Objective-C class NSDateFormatter.
 type DateFormatter struct {
-	inner *raw.NSDateFormatter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSDateFormatter].
-func (x *DateFormatter) Unwrap() *raw.NSDateFormatter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DateFormatter) ID() objc.ID { return x.inner.Ptr() }
-
-// DateFormatterFromID adopts an existing object pointer as a DateFormatter (nil for 0).
+// DateFormatterFromID adopts an existing Objective-C object as a DateFormatter
+// (nil for 0), retaining it and registering a release finalizer.
 func DateFormatterFromID(id objc.ID) *DateFormatter {
 	if id == 0 {
 		return nil
 	}
-	return &DateFormatter{inner: raw.NSDateFormatterFromID(id)}
+	x := &DateFormatter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// dateFormatterAdopt wraps an Objective-C object that this code just created as a
+// DateFormatter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dateFormatterAdopt(id objc.ID) *DateFormatter {
+	if id == 0 {
+		return nil
+	}
+	x := &DateFormatter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DateFormatter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DateFormatter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DateFormatter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes and returns an NSDateFormatter instance that uses the OS X 10.0 formatting behavior and the given date format string in its conversions.
 //
-// NewDateFormatterWithDateFormatAllowNaturalLanguage creates a new [DateFormatter].
+// NewDateFormatterWithDateFormatAllowNaturalLanguage creates a new DateFormatter.
 func NewDateFormatterWithDateFormatAllowNaturalLanguage(format string, flag bool) *DateFormatter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDateFormatter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDateFormat:allowNaturalLanguage:"), foundation.NSStringStringWithUTF8String(format).Ptr(), flag)
-	return &DateFormatter{inner: raw.NSDateFormatterFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSDateFormatter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDateFormat:allowNaturalLanguage:"), purego.NSString(format), flag)
+	return dateFormatterAdopt(_id)
 }
 
-// WithFormattingContext sets the formattingContext property and returns the receiver for chaining.
-func (x *DateFormatter) WithFormattingContext(formattingContext NSFormattingContext) *DateFormatter {
-	x.inner.SetFormattingContext(raw.NSFormattingContext(formattingContext))
+// WithFormattingContext sets formattingContext and returns the receiver so calls can be chained.
+func (x *DateFormatter) WithFormattingContext(formattingContext FormattingContext) *DateFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingContext:"), formattingContext)
 	return x
 }
 
-// WithDateFormat sets the dateFormat property and returns the receiver for chaining.
-func (x *DateFormatter) WithDateFormat(dateFormat string) *DateFormatter {
-	x.inner.SetDateFormat(foundation.NSStringStringWithUTF8String(dateFormat))
+// WithDateFormat sets dateFormat and returns the receiver so calls can be chained.
+func (x *DateFormatter) WithDateFormat(dateFormat StringProvider) *DateFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateFormat:"), objref.IDOf(dateFormat))
 	return x
 }
 
-// WithDateStyle sets the dateStyle property and returns the receiver for chaining.
-func (x *DateFormatter) WithDateStyle(dateStyle NSDateFormatterStyle) *DateFormatter {
-	x.inner.SetDateStyle(raw.NSDateFormatterStyle(dateStyle))
+// WithDateStyle sets dateStyle and returns the receiver so calls can be chained.
+func (x *DateFormatter) WithDateStyle(dateStyle DateFormatterStyle) *DateFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateStyle:"), dateStyle)
 	return x
 }
 
-// WithTimeStyle sets the timeStyle property and returns the receiver for chaining.
-func (x *DateFormatter) WithTimeStyle(timeStyle NSDateFormatterStyle) *DateFormatter {
-	x.inner.SetTimeStyle(raw.NSDateFormatterStyle(timeStyle))
+// WithTimeStyle sets timeStyle and returns the receiver so calls can be chained.
+func (x *DateFormatter) WithTimeStyle(timeStyle DateFormatterStyle) *DateFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeStyle:"), timeStyle)
 	return x
 }
 
-// WithLocale sets the locale property and returns the receiver for chaining.
+// WithLocale sets locale and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithLocale(locale *Locale) *DateFormatter {
-	x.inner.SetLocale(locale.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return x
 }
 
-// WithGeneratesCalendarDates sets the generatesCalendarDates property and returns the receiver for chaining.
+// WithGeneratesCalendarDates sets generatesCalendarDates and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithGeneratesCalendarDates(generatesCalendarDates bool) *DateFormatter {
-	x.inner.SetGeneratesCalendarDates(generatesCalendarDates)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeneratesCalendarDates:"), generatesCalendarDates)
 	return x
 }
 
-// WithFormatterBehavior sets the formatterBehavior property and returns the receiver for chaining.
-func (x *DateFormatter) WithFormatterBehavior(formatterBehavior NSDateFormatterBehavior) *DateFormatter {
-	x.inner.SetFormatterBehavior(raw.NSDateFormatterBehavior(formatterBehavior))
+// WithFormatterBehavior sets formatterBehavior and returns the receiver so calls can be chained.
+func (x *DateFormatter) WithFormatterBehavior(formatterBehavior DateFormatterBehavior) *DateFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatterBehavior:"), formatterBehavior)
 	return x
 }
 
-// WithTimeZone sets the timeZone property and returns the receiver for chaining.
+// WithTimeZone sets timeZone and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithTimeZone(timeZone *TimeZone) *DateFormatter {
-	x.inner.SetTimeZone(timeZone.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 	return x
 }
 
-// WithCalendar sets the calendar property and returns the receiver for chaining.
+// WithCalendar sets calendar and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithCalendar(calendar *Calendar) *DateFormatter {
-	x.inner.SetCalendar(calendar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return x
 }
 
-// WithLenient sets the lenient property and returns the receiver for chaining.
+// WithLenient sets lenient and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithLenient(lenient bool) *DateFormatter {
-	x.inner.SetLenient(lenient)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLenient:"), lenient)
 	return x
 }
 
-// WithTwoDigitStartDate sets the twoDigitStartDate property and returns the receiver for chaining.
+// WithTwoDigitStartDate sets twoDigitStartDate and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithTwoDigitStartDate(twoDigitStartDate DateProvider) *DateFormatter {
-	x.inner.SetTwoDigitStartDate(twoDigitStartDate.asDate())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTwoDigitStartDate:"), objref.IDOf(twoDigitStartDate))
 	return x
 }
 
-// WithDefaultDate sets the defaultDate property and returns the receiver for chaining.
+// WithDefaultDate sets defaultDate and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithDefaultDate(defaultDate DateProvider) *DateFormatter {
-	x.inner.SetDefaultDate(defaultDate.asDate())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultDate:"), objref.IDOf(defaultDate))
 	return x
 }
 
-// WithEraSymbols sets the collection, converting the Go slice to an NSArray.
+// WithEraSymbols sets the collection and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithEraSymbols(items ...StringProvider) *DateFormatter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetEraSymbols(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetEraSymbols(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEraSymbols:"), _arr)
 	return x
 }
 
-// WithMonthSymbols sets the collection, converting the Go slice to an NSArray.
+// WithMonthSymbols sets the collection and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithMonthSymbols(items ...StringProvider) *DateFormatter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetMonthSymbols(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetMonthSymbols(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMonthSymbols:"), _arr)
 	return x
 }
 
-// WithShortMonthSymbols sets the collection, converting the Go slice to an NSArray.
+// WithShortMonthSymbols sets the collection and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithShortMonthSymbols(items ...StringProvider) *DateFormatter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetShortMonthSymbols(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetShortMonthSymbols(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortMonthSymbols:"), _arr)
 	return x
 }
 
-// WithWeekdaySymbols sets the collection, converting the Go slice to an NSArray.
+// WithWeekdaySymbols sets the collection and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithWeekdaySymbols(items ...StringProvider) *DateFormatter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetWeekdaySymbols(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetWeekdaySymbols(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeekdaySymbols:"), _arr)
 	return x
 }
 
-// WithShortWeekdaySymbols sets the collection, converting the Go slice to an NSArray.
+// WithShortWeekdaySymbols sets the collection and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithShortWeekdaySymbols(items ...StringProvider) *DateFormatter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetShortWeekdaySymbols(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetShortWeekdaySymbols(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortWeekdaySymbols:"), _arr)
 	return x
 }
 
-// WithAMSymbol sets the aMSymbol property and returns the receiver for chaining.
-func (x *DateFormatter) WithAMSymbol(aMSymbol string) *DateFormatter {
-	x.inner.SetAMSymbol(foundation.NSStringStringWithUTF8String(aMSymbol))
+// WithAMSymbol sets aMSymbol and returns the receiver so calls can be chained.
+func (x *DateFormatter) WithAMSymbol(aMSymbol StringProvider) *DateFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAMSymbol:"), objref.IDOf(aMSymbol))
 	return x
 }
 
-// WithPMSymbol sets the pMSymbol property and returns the receiver for chaining.
-func (x *DateFormatter) WithPMSymbol(pMSymbol string) *DateFormatter {
-	x.inner.SetPMSymbol(foundation.NSStringStringWithUTF8String(pMSymbol))
+// WithPMSymbol sets pMSymbol and returns the receiver so calls can be chained.
+func (x *DateFormatter) WithPMSymbol(pMSymbol StringProvider) *DateFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPMSymbol:"), objref.IDOf(pMSymbol))
 	return x
 }
 
-// WithLongEraSymbols sets the collection, converting the Go slice to an NSArray.
+// WithLongEraSymbols sets the collection and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithLongEraSymbols(items ...StringProvider) *DateFormatter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetLongEraSymbols(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetLongEraSymbols(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongEraSymbols:"), _arr)
 	return x
 }
 
-// WithVeryShortMonthSymbols sets the collection, converting the Go slice to an NSArray.
+// WithVeryShortMonthSymbols sets the collection and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithVeryShortMonthSymbols(items ...StringProvider) *DateFormatter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetVeryShortMonthSymbols(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetVeryShortMonthSymbols(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVeryShortMonthSymbols:"), _arr)
 	return x
 }
 
-// WithStandaloneMonthSymbols sets the collection, converting the Go slice to an NSArray.
+// WithStandaloneMonthSymbols sets the collection and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithStandaloneMonthSymbols(items ...StringProvider) *DateFormatter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetStandaloneMonthSymbols(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetStandaloneMonthSymbols(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandaloneMonthSymbols:"), _arr)
 	return x
 }
 
-// WithShortStandaloneMonthSymbols sets the collection, converting the Go slice to an NSArray.
+// WithShortStandaloneMonthSymbols sets the collection and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithShortStandaloneMonthSymbols(items ...StringProvider) *DateFormatter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetShortStandaloneMonthSymbols(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetShortStandaloneMonthSymbols(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortStandaloneMonthSymbols:"), _arr)
 	return x
 }
 
-// WithVeryShortStandaloneMonthSymbols sets the collection, converting the Go slice to an NSArray.
+// WithVeryShortStandaloneMonthSymbols sets the collection and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithVeryShortStandaloneMonthSymbols(items ...StringProvider) *DateFormatter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetVeryShortStandaloneMonthSymbols(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetVeryShortStandaloneMonthSymbols(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVeryShortStandaloneMonthSymbols:"), _arr)
 	return x
 }
 
-// WithVeryShortWeekdaySymbols sets the collection, converting the Go slice to an NSArray.
+// WithVeryShortWeekdaySymbols sets the collection and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithVeryShortWeekdaySymbols(items ...StringProvider) *DateFormatter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetVeryShortWeekdaySymbols(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetVeryShortWeekdaySymbols(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVeryShortWeekdaySymbols:"), _arr)
 	return x
 }
 
-// WithStandaloneWeekdaySymbols sets the collection, converting the Go slice to an NSArray.
+// WithStandaloneWeekdaySymbols sets the collection and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithStandaloneWeekdaySymbols(items ...StringProvider) *DateFormatter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetStandaloneWeekdaySymbols(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetStandaloneWeekdaySymbols(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandaloneWeekdaySymbols:"), _arr)
 	return x
 }
 
-// WithShortStandaloneWeekdaySymbols sets the collection, converting the Go slice to an NSArray.
+// WithShortStandaloneWeekdaySymbols sets the collection and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithShortStandaloneWeekdaySymbols(items ...StringProvider) *DateFormatter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetShortStandaloneWeekdaySymbols(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetShortStandaloneWeekdaySymbols(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortStandaloneWeekdaySymbols:"), _arr)
 	return x
 }
 
-// WithVeryShortStandaloneWeekdaySymbols sets the collection, converting the Go slice to an NSArray.
+// WithVeryShortStandaloneWeekdaySymbols sets the collection and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithVeryShortStandaloneWeekdaySymbols(items ...StringProvider) *DateFormatter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetVeryShortStandaloneWeekdaySymbols(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetVeryShortStandaloneWeekdaySymbols(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVeryShortStandaloneWeekdaySymbols:"), _arr)
 	return x
 }
 
-// WithQuarterSymbols sets the collection, converting the Go slice to an NSArray.
+// WithQuarterSymbols sets the collection and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithQuarterSymbols(items ...StringProvider) *DateFormatter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetQuarterSymbols(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetQuarterSymbols(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuarterSymbols:"), _arr)
 	return x
 }
 
-// WithShortQuarterSymbols sets the collection, converting the Go slice to an NSArray.
+// WithShortQuarterSymbols sets the collection and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithShortQuarterSymbols(items ...StringProvider) *DateFormatter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetShortQuarterSymbols(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetShortQuarterSymbols(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortQuarterSymbols:"), _arr)
 	return x
 }
 
-// WithStandaloneQuarterSymbols sets the collection, converting the Go slice to an NSArray.
+// WithStandaloneQuarterSymbols sets the collection and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithStandaloneQuarterSymbols(items ...StringProvider) *DateFormatter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetStandaloneQuarterSymbols(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetStandaloneQuarterSymbols(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandaloneQuarterSymbols:"), _arr)
 	return x
 }
 
-// WithShortStandaloneQuarterSymbols sets the collection, converting the Go slice to an NSArray.
+// WithShortStandaloneQuarterSymbols sets the collection and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithShortStandaloneQuarterSymbols(items ...StringProvider) *DateFormatter {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetShortStandaloneQuarterSymbols(raw.NSArrayFromID[*raw.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetShortStandaloneQuarterSymbols(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v StringProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortStandaloneQuarterSymbols:"), _arr)
 	return x
 }
 
-// WithGregorianStartDate sets the gregorianStartDate property and returns the receiver for chaining.
+// WithGregorianStartDate sets gregorianStartDate and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithGregorianStartDate(gregorianStartDate DateProvider) *DateFormatter {
-	x.inner.SetGregorianStartDate(gregorianStartDate.asDate())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGregorianStartDate:"), objref.IDOf(gregorianStartDate))
 	return x
 }
 
-// WithDoesRelativeDateFormatting sets the doesRelativeDateFormatting property and returns the receiver for chaining.
+// WithDoesRelativeDateFormatting sets doesRelativeDateFormatting and returns the receiver so calls can be chained.
 func (x *DateFormatter) WithDoesRelativeDateFormatting(doesRelativeDateFormatting bool) *DateFormatter {
-	x.inner.SetDoesRelativeDateFormatting(doesRelativeDateFormatting)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoesRelativeDateFormatting:"), doesRelativeDateFormatting)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *DateFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DateFormatter {
-	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *DateFormatter) WithScriptingProperties(scriptingProperties obj.Object) *DateFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// GetObjectValueForStringRangeError calls the underlying GetObjectValueForStringRangeError.
-func (x *DateFormatter) GetObjectValueForStringRangeError(obj **raw.ObjcObject, string_ string, rangep *raw.NSRange) (bool, error) {
-	return x.inner.GetObjectValueForStringRangeError(obj, foundation.NSStringStringWithUTF8String(string_), rangep)
-}
-
-// StringFromDate calls the underlying StringFromDate.
-func (x *DateFormatter) StringFromDate(date *raw.NSDate) *String {
-	_r := x.inner.StringFromDate(date)
-	if _r == nil {
-		return nil
+func (x *DateFormatter) StringFromDate(date *Date) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromDate:"), objref.IDOf(date))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// DateFromString calls the underlying DateFromString.
 func (x *DateFormatter) DateFromString(string_ string) *Date {
-	_r := x.inner.DateFromString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
-	}
-	return &Date{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateFromString:"), purego.NSString(string_))
+	return DateFromID(_r)
 }
 
-// SetLocalizedDateFormatFromTemplate calls the underlying SetLocalizedDateFormatFromTemplate.
 func (x *DateFormatter) SetLocalizedDateFormatFromTemplate(dateFormatTemplate string) {
-	x.inner.SetLocalizedDateFormatFromTemplate(foundation.NSStringStringWithUTF8String(dateFormatTemplate))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDateFormatFromTemplate:"), purego.NSString(dateFormatTemplate))
 }
 
-// FormattingContext calls the underlying FormattingContext.
-func (x *DateFormatter) FormattingContext() NSFormattingContext {
-	return NSFormattingContext(x.inner.FormattingContext())
+func (x *DateFormatter) FormattingContext() FormattingContext {
+	_r := objc.Send[FormattingContext](objref.IDOf(x), objc.RegisterName("formattingContext"))
+	return _r
 }
 
-// SetFormattingContext calls the underlying SetFormattingContext.
-func (x *DateFormatter) SetFormattingContext(formattingContext NSFormattingContext) {
-	x.inner.SetFormattingContext(raw.NSFormattingContext(formattingContext))
+func (x *DateFormatter) SetFormattingContext(formattingContext FormattingContext) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingContext:"), formattingContext)
 }
 
-// DateFormat calls the underlying DateFormat.
-func (x *DateFormatter) DateFormat() *String {
-	_r := x.inner.DateFormat()
-	if _r == nil {
-		return nil
+func (x *DateFormatter) DateFormat() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateFormat"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetDateFormat calls the underlying SetDateFormat.
 func (x *DateFormatter) SetDateFormat(dateFormat string) {
-	x.inner.SetDateFormat(foundation.NSStringStringWithUTF8String(dateFormat))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateFormat:"), purego.NSString(dateFormat))
 }
 
-// DateStyle calls the underlying DateStyle.
-func (x *DateFormatter) DateStyle() NSDateFormatterStyle {
-	return NSDateFormatterStyle(x.inner.DateStyle())
+func (x *DateFormatter) DateStyle() DateFormatterStyle {
+	_r := objc.Send[DateFormatterStyle](objref.IDOf(x), objc.RegisterName("dateStyle"))
+	return _r
 }
 
-// SetDateStyle calls the underlying SetDateStyle.
-func (x *DateFormatter) SetDateStyle(dateStyle NSDateFormatterStyle) {
-	x.inner.SetDateStyle(raw.NSDateFormatterStyle(dateStyle))
+func (x *DateFormatter) SetDateStyle(dateStyle DateFormatterStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDateStyle:"), dateStyle)
 }
 
-// TimeStyle calls the underlying TimeStyle.
-func (x *DateFormatter) TimeStyle() NSDateFormatterStyle {
-	return NSDateFormatterStyle(x.inner.TimeStyle())
+func (x *DateFormatter) TimeStyle() DateFormatterStyle {
+	_r := objc.Send[DateFormatterStyle](objref.IDOf(x), objc.RegisterName("timeStyle"))
+	return _r
 }
 
-// SetTimeStyle calls the underlying SetTimeStyle.
-func (x *DateFormatter) SetTimeStyle(timeStyle NSDateFormatterStyle) {
-	x.inner.SetTimeStyle(raw.NSDateFormatterStyle(timeStyle))
+func (x *DateFormatter) SetTimeStyle(timeStyle DateFormatterStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeStyle:"), timeStyle)
 }
 
-// Locale calls the underlying Locale.
 func (x *DateFormatter) Locale() *Locale {
-	_r := x.inner.Locale()
-	if _r == nil {
-		return nil
-	}
-	return &Locale{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
+	return LocaleFromID(_r)
 }
 
-// SetLocale calls the underlying SetLocale.
-func (x *DateFormatter) SetLocale(locale *raw.NSLocale) {
-	x.inner.SetLocale(locale)
+func (x *DateFormatter) SetLocale(locale *Locale) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 }
 
-// GeneratesCalendarDates calls the underlying GeneratesCalendarDates.
 func (x *DateFormatter) GeneratesCalendarDates() bool {
-	return x.inner.GeneratesCalendarDates()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("generatesCalendarDates"))
+	return _r
 }
 
-// SetGeneratesCalendarDates calls the underlying SetGeneratesCalendarDates.
 func (x *DateFormatter) SetGeneratesCalendarDates(generatesCalendarDates bool) {
-	x.inner.SetGeneratesCalendarDates(generatesCalendarDates)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeneratesCalendarDates:"), generatesCalendarDates)
 }
 
-// FormatterBehavior calls the underlying FormatterBehavior.
-func (x *DateFormatter) FormatterBehavior() NSDateFormatterBehavior {
-	return NSDateFormatterBehavior(x.inner.FormatterBehavior())
+func (x *DateFormatter) FormatterBehavior() DateFormatterBehavior {
+	_r := objc.Send[DateFormatterBehavior](objref.IDOf(x), objc.RegisterName("formatterBehavior"))
+	return _r
 }
 
-// SetFormatterBehavior calls the underlying SetFormatterBehavior.
-func (x *DateFormatter) SetFormatterBehavior(formatterBehavior NSDateFormatterBehavior) {
-	x.inner.SetFormatterBehavior(raw.NSDateFormatterBehavior(formatterBehavior))
+func (x *DateFormatter) SetFormatterBehavior(formatterBehavior DateFormatterBehavior) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatterBehavior:"), formatterBehavior)
 }
 
-// TimeZone calls the underlying TimeZone.
 func (x *DateFormatter) TimeZone() *TimeZone {
-	_r := x.inner.TimeZone()
-	if _r == nil {
-		return nil
-	}
-	return &TimeZone{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeZone"))
+	return TimeZoneFromID(_r)
 }
 
-// SetTimeZone calls the underlying SetTimeZone.
-func (x *DateFormatter) SetTimeZone(timeZone *raw.NSTimeZone) {
-	x.inner.SetTimeZone(timeZone)
+func (x *DateFormatter) SetTimeZone(timeZone *TimeZone) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
 }
 
-// Calendar calls the underlying Calendar.
 func (x *DateFormatter) Calendar() *Calendar {
-	_r := x.inner.Calendar()
-	if _r == nil {
-		return nil
-	}
-	return &Calendar{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calendar"))
+	return CalendarFromID(_r)
 }
 
-// SetCalendar calls the underlying SetCalendar.
-func (x *DateFormatter) SetCalendar(calendar *raw.NSCalendar) {
-	x.inner.SetCalendar(calendar)
+func (x *DateFormatter) SetCalendar(calendar *Calendar) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 }
 
-// IsLenient calls the underlying IsLenient.
 func (x *DateFormatter) IsLenient() bool {
-	return x.inner.IsLenient()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLenient"))
+	return _r
 }
 
-// SetLenient calls the underlying SetLenient.
 func (x *DateFormatter) SetLenient(lenient bool) {
-	x.inner.SetLenient(lenient)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLenient:"), lenient)
 }
 
-// TwoDigitStartDate calls the underlying TwoDigitStartDate.
 func (x *DateFormatter) TwoDigitStartDate() *Date {
-	_r := x.inner.TwoDigitStartDate()
-	if _r == nil {
-		return nil
-	}
-	return &Date{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("twoDigitStartDate"))
+	return DateFromID(_r)
 }
 
-// SetTwoDigitStartDate calls the underlying SetTwoDigitStartDate.
-func (x *DateFormatter) SetTwoDigitStartDate(twoDigitStartDate *raw.NSDate) {
-	x.inner.SetTwoDigitStartDate(twoDigitStartDate)
+func (x *DateFormatter) SetTwoDigitStartDate(twoDigitStartDate *Date) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTwoDigitStartDate:"), objref.IDOf(twoDigitStartDate))
 }
 
-// DefaultDate calls the underlying DefaultDate.
 func (x *DateFormatter) DefaultDate() *Date {
-	_r := x.inner.DefaultDate()
-	if _r == nil {
-		return nil
-	}
-	return &Date{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultDate"))
+	return DateFromID(_r)
 }
 
-// SetDefaultDate calls the underlying SetDefaultDate.
-func (x *DateFormatter) SetDefaultDate(defaultDate *raw.NSDate) {
-	x.inner.SetDefaultDate(defaultDate)
+func (x *DateFormatter) SetDefaultDate(defaultDate *Date) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultDate:"), objref.IDOf(defaultDate))
 }
 
 // EraSymbols returns the collection as a Go slice.
 func (x *DateFormatter) EraSymbols() []string {
-	arr := x.inner.EraSymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eraSymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetEraSymbols calls the underlying SetEraSymbols.
-func (x *DateFormatter) SetEraSymbols(eraSymbols ...StringProvider) {
-	_ptrs := make([]objc.ID, len(eraSymbols))
-	for _i, _v := range eraSymbols {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetEraSymbols(_arg0)
+func (x *DateFormatter) SetEraSymbols(eraSymbols []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEraSymbols:"), purego.SliceToNSArray(eraSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // MonthSymbols returns the collection as a Go slice.
 func (x *DateFormatter) MonthSymbols() []string {
-	arr := x.inner.MonthSymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("monthSymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetMonthSymbols calls the underlying SetMonthSymbols.
-func (x *DateFormatter) SetMonthSymbols(monthSymbols ...StringProvider) {
-	_ptrs := make([]objc.ID, len(monthSymbols))
-	for _i, _v := range monthSymbols {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetMonthSymbols(_arg0)
+func (x *DateFormatter) SetMonthSymbols(monthSymbols []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMonthSymbols:"), purego.SliceToNSArray(monthSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // ShortMonthSymbols returns the collection as a Go slice.
 func (x *DateFormatter) ShortMonthSymbols() []string {
-	arr := x.inner.ShortMonthSymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortMonthSymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetShortMonthSymbols calls the underlying SetShortMonthSymbols.
-func (x *DateFormatter) SetShortMonthSymbols(shortMonthSymbols ...StringProvider) {
-	_ptrs := make([]objc.ID, len(shortMonthSymbols))
-	for _i, _v := range shortMonthSymbols {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetShortMonthSymbols(_arg0)
+func (x *DateFormatter) SetShortMonthSymbols(shortMonthSymbols []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortMonthSymbols:"), purego.SliceToNSArray(shortMonthSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // WeekdaySymbols returns the collection as a Go slice.
 func (x *DateFormatter) WeekdaySymbols() []string {
-	arr := x.inner.WeekdaySymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weekdaySymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetWeekdaySymbols calls the underlying SetWeekdaySymbols.
-func (x *DateFormatter) SetWeekdaySymbols(weekdaySymbols ...StringProvider) {
-	_ptrs := make([]objc.ID, len(weekdaySymbols))
-	for _i, _v := range weekdaySymbols {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetWeekdaySymbols(_arg0)
+func (x *DateFormatter) SetWeekdaySymbols(weekdaySymbols []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeekdaySymbols:"), purego.SliceToNSArray(weekdaySymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // ShortWeekdaySymbols returns the collection as a Go slice.
 func (x *DateFormatter) ShortWeekdaySymbols() []string {
-	arr := x.inner.ShortWeekdaySymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortWeekdaySymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetShortWeekdaySymbols calls the underlying SetShortWeekdaySymbols.
-func (x *DateFormatter) SetShortWeekdaySymbols(shortWeekdaySymbols ...StringProvider) {
-	_ptrs := make([]objc.ID, len(shortWeekdaySymbols))
-	for _i, _v := range shortWeekdaySymbols {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetShortWeekdaySymbols(_arg0)
+func (x *DateFormatter) SetShortWeekdaySymbols(shortWeekdaySymbols []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortWeekdaySymbols:"), purego.SliceToNSArray(shortWeekdaySymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// AMSymbol calls the underlying AMSymbol.
-func (x *DateFormatter) AMSymbol() *String {
-	_r := x.inner.AMSymbol()
-	if _r == nil {
-		return nil
+func (x *DateFormatter) AMSymbol() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("AMSymbol"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetAMSymbol calls the underlying SetAMSymbol.
 func (x *DateFormatter) SetAMSymbol(aMSymbol string) {
-	x.inner.SetAMSymbol(foundation.NSStringStringWithUTF8String(aMSymbol))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAMSymbol:"), purego.NSString(aMSymbol))
 }
 
-// PMSymbol calls the underlying PMSymbol.
-func (x *DateFormatter) PMSymbol() *String {
-	_r := x.inner.PMSymbol()
-	if _r == nil {
-		return nil
+func (x *DateFormatter) PMSymbol() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("PMSymbol"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetPMSymbol calls the underlying SetPMSymbol.
 func (x *DateFormatter) SetPMSymbol(pMSymbol string) {
-	x.inner.SetPMSymbol(foundation.NSStringStringWithUTF8String(pMSymbol))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPMSymbol:"), purego.NSString(pMSymbol))
 }
 
 // LongEraSymbols returns the collection as a Go slice.
 func (x *DateFormatter) LongEraSymbols() []string {
-	arr := x.inner.LongEraSymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("longEraSymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetLongEraSymbols calls the underlying SetLongEraSymbols.
-func (x *DateFormatter) SetLongEraSymbols(longEraSymbols ...StringProvider) {
-	_ptrs := make([]objc.ID, len(longEraSymbols))
-	for _i, _v := range longEraSymbols {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetLongEraSymbols(_arg0)
+func (x *DateFormatter) SetLongEraSymbols(longEraSymbols []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongEraSymbols:"), purego.SliceToNSArray(longEraSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // VeryShortMonthSymbols returns the collection as a Go slice.
 func (x *DateFormatter) VeryShortMonthSymbols() []string {
-	arr := x.inner.VeryShortMonthSymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("veryShortMonthSymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetVeryShortMonthSymbols calls the underlying SetVeryShortMonthSymbols.
-func (x *DateFormatter) SetVeryShortMonthSymbols(veryShortMonthSymbols ...StringProvider) {
-	_ptrs := make([]objc.ID, len(veryShortMonthSymbols))
-	for _i, _v := range veryShortMonthSymbols {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetVeryShortMonthSymbols(_arg0)
+func (x *DateFormatter) SetVeryShortMonthSymbols(veryShortMonthSymbols []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVeryShortMonthSymbols:"), purego.SliceToNSArray(veryShortMonthSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // StandaloneMonthSymbols returns the collection as a Go slice.
 func (x *DateFormatter) StandaloneMonthSymbols() []string {
-	arr := x.inner.StandaloneMonthSymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standaloneMonthSymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetStandaloneMonthSymbols calls the underlying SetStandaloneMonthSymbols.
-func (x *DateFormatter) SetStandaloneMonthSymbols(standaloneMonthSymbols ...StringProvider) {
-	_ptrs := make([]objc.ID, len(standaloneMonthSymbols))
-	for _i, _v := range standaloneMonthSymbols {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetStandaloneMonthSymbols(_arg0)
+func (x *DateFormatter) SetStandaloneMonthSymbols(standaloneMonthSymbols []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandaloneMonthSymbols:"), purego.SliceToNSArray(standaloneMonthSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // ShortStandaloneMonthSymbols returns the collection as a Go slice.
 func (x *DateFormatter) ShortStandaloneMonthSymbols() []string {
-	arr := x.inner.ShortStandaloneMonthSymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortStandaloneMonthSymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetShortStandaloneMonthSymbols calls the underlying SetShortStandaloneMonthSymbols.
-func (x *DateFormatter) SetShortStandaloneMonthSymbols(shortStandaloneMonthSymbols ...StringProvider) {
-	_ptrs := make([]objc.ID, len(shortStandaloneMonthSymbols))
-	for _i, _v := range shortStandaloneMonthSymbols {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetShortStandaloneMonthSymbols(_arg0)
+func (x *DateFormatter) SetShortStandaloneMonthSymbols(shortStandaloneMonthSymbols []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortStandaloneMonthSymbols:"), purego.SliceToNSArray(shortStandaloneMonthSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // VeryShortStandaloneMonthSymbols returns the collection as a Go slice.
 func (x *DateFormatter) VeryShortStandaloneMonthSymbols() []string {
-	arr := x.inner.VeryShortStandaloneMonthSymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("veryShortStandaloneMonthSymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetVeryShortStandaloneMonthSymbols calls the underlying SetVeryShortStandaloneMonthSymbols.
-func (x *DateFormatter) SetVeryShortStandaloneMonthSymbols(veryShortStandaloneMonthSymbols ...StringProvider) {
-	_ptrs := make([]objc.ID, len(veryShortStandaloneMonthSymbols))
-	for _i, _v := range veryShortStandaloneMonthSymbols {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetVeryShortStandaloneMonthSymbols(_arg0)
+func (x *DateFormatter) SetVeryShortStandaloneMonthSymbols(veryShortStandaloneMonthSymbols []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVeryShortStandaloneMonthSymbols:"), purego.SliceToNSArray(veryShortStandaloneMonthSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // VeryShortWeekdaySymbols returns the collection as a Go slice.
 func (x *DateFormatter) VeryShortWeekdaySymbols() []string {
-	arr := x.inner.VeryShortWeekdaySymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("veryShortWeekdaySymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetVeryShortWeekdaySymbols calls the underlying SetVeryShortWeekdaySymbols.
-func (x *DateFormatter) SetVeryShortWeekdaySymbols(veryShortWeekdaySymbols ...StringProvider) {
-	_ptrs := make([]objc.ID, len(veryShortWeekdaySymbols))
-	for _i, _v := range veryShortWeekdaySymbols {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetVeryShortWeekdaySymbols(_arg0)
+func (x *DateFormatter) SetVeryShortWeekdaySymbols(veryShortWeekdaySymbols []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVeryShortWeekdaySymbols:"), purego.SliceToNSArray(veryShortWeekdaySymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // StandaloneWeekdaySymbols returns the collection as a Go slice.
 func (x *DateFormatter) StandaloneWeekdaySymbols() []string {
-	arr := x.inner.StandaloneWeekdaySymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standaloneWeekdaySymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetStandaloneWeekdaySymbols calls the underlying SetStandaloneWeekdaySymbols.
-func (x *DateFormatter) SetStandaloneWeekdaySymbols(standaloneWeekdaySymbols ...StringProvider) {
-	_ptrs := make([]objc.ID, len(standaloneWeekdaySymbols))
-	for _i, _v := range standaloneWeekdaySymbols {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetStandaloneWeekdaySymbols(_arg0)
+func (x *DateFormatter) SetStandaloneWeekdaySymbols(standaloneWeekdaySymbols []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandaloneWeekdaySymbols:"), purego.SliceToNSArray(standaloneWeekdaySymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // ShortStandaloneWeekdaySymbols returns the collection as a Go slice.
 func (x *DateFormatter) ShortStandaloneWeekdaySymbols() []string {
-	arr := x.inner.ShortStandaloneWeekdaySymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortStandaloneWeekdaySymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetShortStandaloneWeekdaySymbols calls the underlying SetShortStandaloneWeekdaySymbols.
-func (x *DateFormatter) SetShortStandaloneWeekdaySymbols(shortStandaloneWeekdaySymbols ...StringProvider) {
-	_ptrs := make([]objc.ID, len(shortStandaloneWeekdaySymbols))
-	for _i, _v := range shortStandaloneWeekdaySymbols {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetShortStandaloneWeekdaySymbols(_arg0)
+func (x *DateFormatter) SetShortStandaloneWeekdaySymbols(shortStandaloneWeekdaySymbols []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortStandaloneWeekdaySymbols:"), purego.SliceToNSArray(shortStandaloneWeekdaySymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // VeryShortStandaloneWeekdaySymbols returns the collection as a Go slice.
 func (x *DateFormatter) VeryShortStandaloneWeekdaySymbols() []string {
-	arr := x.inner.VeryShortStandaloneWeekdaySymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("veryShortStandaloneWeekdaySymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetVeryShortStandaloneWeekdaySymbols calls the underlying SetVeryShortStandaloneWeekdaySymbols.
-func (x *DateFormatter) SetVeryShortStandaloneWeekdaySymbols(veryShortStandaloneWeekdaySymbols ...StringProvider) {
-	_ptrs := make([]objc.ID, len(veryShortStandaloneWeekdaySymbols))
-	for _i, _v := range veryShortStandaloneWeekdaySymbols {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetVeryShortStandaloneWeekdaySymbols(_arg0)
+func (x *DateFormatter) SetVeryShortStandaloneWeekdaySymbols(veryShortStandaloneWeekdaySymbols []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVeryShortStandaloneWeekdaySymbols:"), purego.SliceToNSArray(veryShortStandaloneWeekdaySymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // QuarterSymbols returns the collection as a Go slice.
 func (x *DateFormatter) QuarterSymbols() []string {
-	arr := x.inner.QuarterSymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quarterSymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetQuarterSymbols calls the underlying SetQuarterSymbols.
-func (x *DateFormatter) SetQuarterSymbols(quarterSymbols ...StringProvider) {
-	_ptrs := make([]objc.ID, len(quarterSymbols))
-	for _i, _v := range quarterSymbols {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetQuarterSymbols(_arg0)
+func (x *DateFormatter) SetQuarterSymbols(quarterSymbols []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuarterSymbols:"), purego.SliceToNSArray(quarterSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // ShortQuarterSymbols returns the collection as a Go slice.
 func (x *DateFormatter) ShortQuarterSymbols() []string {
-	arr := x.inner.ShortQuarterSymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortQuarterSymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetShortQuarterSymbols calls the underlying SetShortQuarterSymbols.
-func (x *DateFormatter) SetShortQuarterSymbols(shortQuarterSymbols ...StringProvider) {
-	_ptrs := make([]objc.ID, len(shortQuarterSymbols))
-	for _i, _v := range shortQuarterSymbols {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetShortQuarterSymbols(_arg0)
+func (x *DateFormatter) SetShortQuarterSymbols(shortQuarterSymbols []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortQuarterSymbols:"), purego.SliceToNSArray(shortQuarterSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // StandaloneQuarterSymbols returns the collection as a Go slice.
 func (x *DateFormatter) StandaloneQuarterSymbols() []string {
-	arr := x.inner.StandaloneQuarterSymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standaloneQuarterSymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetStandaloneQuarterSymbols calls the underlying SetStandaloneQuarterSymbols.
-func (x *DateFormatter) SetStandaloneQuarterSymbols(standaloneQuarterSymbols ...StringProvider) {
-	_ptrs := make([]objc.ID, len(standaloneQuarterSymbols))
-	for _i, _v := range standaloneQuarterSymbols {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetStandaloneQuarterSymbols(_arg0)
+func (x *DateFormatter) SetStandaloneQuarterSymbols(standaloneQuarterSymbols []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStandaloneQuarterSymbols:"), purego.SliceToNSArray(standaloneQuarterSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // ShortStandaloneQuarterSymbols returns the collection as a Go slice.
 func (x *DateFormatter) ShortStandaloneQuarterSymbols() []string {
-	arr := x.inner.ShortStandaloneQuarterSymbols()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortStandaloneQuarterSymbols"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetShortStandaloneQuarterSymbols calls the underlying SetShortStandaloneQuarterSymbols.
-func (x *DateFormatter) SetShortStandaloneQuarterSymbols(shortStandaloneQuarterSymbols ...StringProvider) {
-	_ptrs := make([]objc.ID, len(shortStandaloneQuarterSymbols))
-	for _i, _v := range shortStandaloneQuarterSymbols {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetShortStandaloneQuarterSymbols(_arg0)
+func (x *DateFormatter) SetShortStandaloneQuarterSymbols(shortStandaloneQuarterSymbols []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShortStandaloneQuarterSymbols:"), purego.SliceToNSArray(shortStandaloneQuarterSymbols, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// GregorianStartDate calls the underlying GregorianStartDate.
 func (x *DateFormatter) GregorianStartDate() *Date {
-	_r := x.inner.GregorianStartDate()
-	if _r == nil {
-		return nil
-	}
-	return &Date{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gregorianStartDate"))
+	return DateFromID(_r)
 }
 
-// SetGregorianStartDate calls the underlying SetGregorianStartDate.
-func (x *DateFormatter) SetGregorianStartDate(gregorianStartDate *raw.NSDate) {
-	x.inner.SetGregorianStartDate(gregorianStartDate)
+func (x *DateFormatter) SetGregorianStartDate(gregorianStartDate *Date) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGregorianStartDate:"), objref.IDOf(gregorianStartDate))
 }
 
-// DoesRelativeDateFormatting calls the underlying DoesRelativeDateFormatting.
 func (x *DateFormatter) DoesRelativeDateFormatting() bool {
-	return x.inner.DoesRelativeDateFormatting()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("doesRelativeDateFormatting"))
+	return _r
 }
 
-// SetDoesRelativeDateFormatting calls the underlying SetDoesRelativeDateFormatting.
 func (x *DateFormatter) SetDoesRelativeDateFormatting(doesRelativeDateFormatting bool) {
-	x.inner.SetDoesRelativeDateFormatting(doesRelativeDateFormatting)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoesRelativeDateFormatting:"), doesRelativeDateFormatting)
 }
 
 // Returns a Boolean value that indicates whether the receiver attempts to process dates entered as a vernacular string.
-//
-// AllowsNaturalLanguage calls the underlying AllowsNaturalLanguage.
 func (x *DateFormatter) AllowsNaturalLanguage() bool {
-	return x.inner.AllowsNaturalLanguage()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsNaturalLanguage"))
+	return _r
 }
-
-func (x *DateFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
-
-func (x *DateFormatter) asObject() *raw.NSObject { return &x.inner.NSFormatter.NSObject }
 
 // DateFormatterable is the interface implemented by [DateFormatter], for mocking and DI.
 type DateFormatterable interface {
-	Unwrap() *raw.NSDateFormatter
-	WithFormattingContext(formattingContext NSFormattingContext) *DateFormatter
-	WithDateFormat(dateFormat string) *DateFormatter
-	WithDateStyle(dateStyle NSDateFormatterStyle) *DateFormatter
-	WithTimeStyle(timeStyle NSDateFormatterStyle) *DateFormatter
+	obj.Object
+	WithFormattingContext(formattingContext FormattingContext) *DateFormatter
+	WithDateFormat(dateFormat StringProvider) *DateFormatter
+	WithDateStyle(dateStyle DateFormatterStyle) *DateFormatter
+	WithTimeStyle(timeStyle DateFormatterStyle) *DateFormatter
 	WithLocale(locale *Locale) *DateFormatter
 	WithGeneratesCalendarDates(generatesCalendarDates bool) *DateFormatter
-	WithFormatterBehavior(formatterBehavior NSDateFormatterBehavior) *DateFormatter
+	WithFormatterBehavior(formatterBehavior DateFormatterBehavior) *DateFormatter
 	WithTimeZone(timeZone *TimeZone) *DateFormatter
 	WithCalendar(calendar *Calendar) *DateFormatter
 	WithLenient(lenient bool) *DateFormatter
@@ -1264,8 +671,8 @@ type DateFormatterable interface {
 	WithShortMonthSymbols(items ...StringProvider) *DateFormatter
 	WithWeekdaySymbols(items ...StringProvider) *DateFormatter
 	WithShortWeekdaySymbols(items ...StringProvider) *DateFormatter
-	WithAMSymbol(aMSymbol string) *DateFormatter
-	WithPMSymbol(pMSymbol string) *DateFormatter
+	WithAMSymbol(aMSymbol StringProvider) *DateFormatter
+	WithPMSymbol(pMSymbol StringProvider) *DateFormatter
 	WithLongEraSymbols(items ...StringProvider) *DateFormatter
 	WithVeryShortMonthSymbols(items ...StringProvider) *DateFormatter
 	WithStandaloneMonthSymbols(items ...StringProvider) *DateFormatter
@@ -1281,77 +688,76 @@ type DateFormatterable interface {
 	WithShortStandaloneQuarterSymbols(items ...StringProvider) *DateFormatter
 	WithGregorianStartDate(gregorianStartDate DateProvider) *DateFormatter
 	WithDoesRelativeDateFormatting(doesRelativeDateFormatting bool) *DateFormatter
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DateFormatter
-	GetObjectValueForStringRangeError(obj **raw.ObjcObject, string_ string, rangep *raw.NSRange) (bool, error)
-	StringFromDate(date *raw.NSDate) *String
+	WithScriptingProperties(scriptingProperties obj.Object) *DateFormatter
+	StringFromDate(date *Date) string
 	DateFromString(string_ string) *Date
 	SetLocalizedDateFormatFromTemplate(dateFormatTemplate string)
-	FormattingContext() NSFormattingContext
-	SetFormattingContext(formattingContext NSFormattingContext)
-	DateFormat() *String
+	FormattingContext() FormattingContext
+	SetFormattingContext(formattingContext FormattingContext)
+	DateFormat() string
 	SetDateFormat(dateFormat string)
-	DateStyle() NSDateFormatterStyle
-	SetDateStyle(dateStyle NSDateFormatterStyle)
-	TimeStyle() NSDateFormatterStyle
-	SetTimeStyle(timeStyle NSDateFormatterStyle)
+	DateStyle() DateFormatterStyle
+	SetDateStyle(dateStyle DateFormatterStyle)
+	TimeStyle() DateFormatterStyle
+	SetTimeStyle(timeStyle DateFormatterStyle)
 	Locale() *Locale
-	SetLocale(locale *raw.NSLocale)
+	SetLocale(locale *Locale)
 	GeneratesCalendarDates() bool
 	SetGeneratesCalendarDates(generatesCalendarDates bool)
-	FormatterBehavior() NSDateFormatterBehavior
-	SetFormatterBehavior(formatterBehavior NSDateFormatterBehavior)
+	FormatterBehavior() DateFormatterBehavior
+	SetFormatterBehavior(formatterBehavior DateFormatterBehavior)
 	TimeZone() *TimeZone
-	SetTimeZone(timeZone *raw.NSTimeZone)
+	SetTimeZone(timeZone *TimeZone)
 	Calendar() *Calendar
-	SetCalendar(calendar *raw.NSCalendar)
+	SetCalendar(calendar *Calendar)
 	IsLenient() bool
 	SetLenient(lenient bool)
 	TwoDigitStartDate() *Date
-	SetTwoDigitStartDate(twoDigitStartDate *raw.NSDate)
+	SetTwoDigitStartDate(twoDigitStartDate *Date)
 	DefaultDate() *Date
-	SetDefaultDate(defaultDate *raw.NSDate)
+	SetDefaultDate(defaultDate *Date)
 	EraSymbols() []string
-	SetEraSymbols(eraSymbols ...StringProvider)
+	SetEraSymbols(eraSymbols []string)
 	MonthSymbols() []string
-	SetMonthSymbols(monthSymbols ...StringProvider)
+	SetMonthSymbols(monthSymbols []string)
 	ShortMonthSymbols() []string
-	SetShortMonthSymbols(shortMonthSymbols ...StringProvider)
+	SetShortMonthSymbols(shortMonthSymbols []string)
 	WeekdaySymbols() []string
-	SetWeekdaySymbols(weekdaySymbols ...StringProvider)
+	SetWeekdaySymbols(weekdaySymbols []string)
 	ShortWeekdaySymbols() []string
-	SetShortWeekdaySymbols(shortWeekdaySymbols ...StringProvider)
-	AMSymbol() *String
+	SetShortWeekdaySymbols(shortWeekdaySymbols []string)
+	AMSymbol() string
 	SetAMSymbol(aMSymbol string)
-	PMSymbol() *String
+	PMSymbol() string
 	SetPMSymbol(pMSymbol string)
 	LongEraSymbols() []string
-	SetLongEraSymbols(longEraSymbols ...StringProvider)
+	SetLongEraSymbols(longEraSymbols []string)
 	VeryShortMonthSymbols() []string
-	SetVeryShortMonthSymbols(veryShortMonthSymbols ...StringProvider)
+	SetVeryShortMonthSymbols(veryShortMonthSymbols []string)
 	StandaloneMonthSymbols() []string
-	SetStandaloneMonthSymbols(standaloneMonthSymbols ...StringProvider)
+	SetStandaloneMonthSymbols(standaloneMonthSymbols []string)
 	ShortStandaloneMonthSymbols() []string
-	SetShortStandaloneMonthSymbols(shortStandaloneMonthSymbols ...StringProvider)
+	SetShortStandaloneMonthSymbols(shortStandaloneMonthSymbols []string)
 	VeryShortStandaloneMonthSymbols() []string
-	SetVeryShortStandaloneMonthSymbols(veryShortStandaloneMonthSymbols ...StringProvider)
+	SetVeryShortStandaloneMonthSymbols(veryShortStandaloneMonthSymbols []string)
 	VeryShortWeekdaySymbols() []string
-	SetVeryShortWeekdaySymbols(veryShortWeekdaySymbols ...StringProvider)
+	SetVeryShortWeekdaySymbols(veryShortWeekdaySymbols []string)
 	StandaloneWeekdaySymbols() []string
-	SetStandaloneWeekdaySymbols(standaloneWeekdaySymbols ...StringProvider)
+	SetStandaloneWeekdaySymbols(standaloneWeekdaySymbols []string)
 	ShortStandaloneWeekdaySymbols() []string
-	SetShortStandaloneWeekdaySymbols(shortStandaloneWeekdaySymbols ...StringProvider)
+	SetShortStandaloneWeekdaySymbols(shortStandaloneWeekdaySymbols []string)
 	VeryShortStandaloneWeekdaySymbols() []string
-	SetVeryShortStandaloneWeekdaySymbols(veryShortStandaloneWeekdaySymbols ...StringProvider)
+	SetVeryShortStandaloneWeekdaySymbols(veryShortStandaloneWeekdaySymbols []string)
 	QuarterSymbols() []string
-	SetQuarterSymbols(quarterSymbols ...StringProvider)
+	SetQuarterSymbols(quarterSymbols []string)
 	ShortQuarterSymbols() []string
-	SetShortQuarterSymbols(shortQuarterSymbols ...StringProvider)
+	SetShortQuarterSymbols(shortQuarterSymbols []string)
 	StandaloneQuarterSymbols() []string
-	SetStandaloneQuarterSymbols(standaloneQuarterSymbols ...StringProvider)
+	SetStandaloneQuarterSymbols(standaloneQuarterSymbols []string)
 	ShortStandaloneQuarterSymbols() []string
-	SetShortStandaloneQuarterSymbols(shortStandaloneQuarterSymbols ...StringProvider)
+	SetShortStandaloneQuarterSymbols(shortStandaloneQuarterSymbols []string)
 	GregorianStartDate() *Date
-	SetGregorianStartDate(gregorianStartDate *raw.NSDate)
+	SetGregorianStartDate(gregorianStartDate *Date)
 	DoesRelativeDateFormatting() bool
 	SetDoesRelativeDateFormatting(doesRelativeDateFormatting bool)
 	AllowsNaturalLanguage() bool

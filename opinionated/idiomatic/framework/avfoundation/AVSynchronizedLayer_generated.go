@@ -5,66 +5,88 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A Core Animation layer that derives its timing from a player item so that you can synchronize layer animations with media playback.
 //
-// SynchronizedLayer wraps [raw.AVSynchronizedLayer] with a fluent Go API.
+// SynchronizedLayer is an idiomatic wrapper over the Objective-C class AVSynchronizedLayer.
 type SynchronizedLayer struct {
-	inner *raw.AVSynchronizedLayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVSynchronizedLayer].
-func (x *SynchronizedLayer) Unwrap() *raw.AVSynchronizedLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SynchronizedLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// SynchronizedLayerFromID adopts an existing object pointer as a SynchronizedLayer (nil for 0).
+// SynchronizedLayerFromID adopts an existing Objective-C object as a SynchronizedLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func SynchronizedLayerFromID(id objc.ID) *SynchronizedLayer {
 	if id == 0 {
 		return nil
 	}
-	return &SynchronizedLayer{inner: raw.AVSynchronizedLayerFromID(id)}
+	x := &SynchronizedLayer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSynchronizedLayer creates a new [SynchronizedLayer].
+// synchronizedLayerAdopt wraps an Objective-C object that this code just created as a
+// SynchronizedLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func synchronizedLayerAdopt(id objc.ID) *SynchronizedLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &SynchronizedLayer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SynchronizedLayer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SynchronizedLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SynchronizedLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSynchronizedLayer creates a new SynchronizedLayer.
 func NewSynchronizedLayer() *SynchronizedLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVSynchronizedLayer")), objc.RegisterName("new"))
-	return &SynchronizedLayer{inner: raw.AVSynchronizedLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVSynchronizedLayer")), objc.RegisterName("new"))
+	return synchronizedLayerAdopt(_id)
 }
 
 // The player item to which the timing of the layer is synchronized.
 //
-// WithPlayerItem sets the playerItem property and returns the receiver for chaining.
+// WithPlayerItem sets playerItem and returns the receiver so calls can be chained.
 func (x *SynchronizedLayer) WithPlayerItem(playerItem *PlayerItem) *SynchronizedLayer {
-	x.inner.SetPlayerItem(playerItem.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayerItem:"), objref.IDOf(playerItem))
 	return x
 }
 
-// PlayerItem calls the underlying PlayerItem.
 func (x *SynchronizedLayer) PlayerItem() *PlayerItem {
-	_r := x.inner.PlayerItem()
-	if _r == nil {
-		return nil
-	}
-	return &PlayerItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerItem"))
+	return PlayerItemFromID(_r)
 }
 
-// SetPlayerItem calls the underlying SetPlayerItem.
-func (x *SynchronizedLayer) SetPlayerItem(playerItem *raw.AVPlayerItem) {
-	x.inner.SetPlayerItem(playerItem)
+func (x *SynchronizedLayer) SetPlayerItem(playerItem *PlayerItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayerItem:"), objref.IDOf(playerItem))
 }
 
 // SynchronizedLayerable is the interface implemented by [SynchronizedLayer], for mocking and DI.
 type SynchronizedLayerable interface {
-	Unwrap() *raw.AVSynchronizedLayer
+	obj.Object
 	WithPlayerItem(playerItem *PlayerItem) *SynchronizedLayer
 	PlayerItem() *PlayerItem
-	SetPlayerItem(playerItem *raw.AVPlayerItem)
+	SetPlayerItem(playerItem *PlayerItem)
 }
 
 var _ SynchronizedLayerable = (*SynchronizedLayer)(nil)

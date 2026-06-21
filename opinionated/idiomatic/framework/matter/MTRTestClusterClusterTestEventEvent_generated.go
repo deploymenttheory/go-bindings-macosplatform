@@ -5,73 +5,93 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRTestClusterClusterTestEventEvent wraps [raw.MTRTestClusterClusterTestEventEvent] with a fluent Go API.
+// MTRTestClusterClusterTestEventEvent is an idiomatic wrapper over the Objective-C class MTRTestClusterClusterTestEventEvent.
 type MTRTestClusterClusterTestEventEvent struct {
-	inner *raw.MTRTestClusterClusterTestEventEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRTestClusterClusterTestEventEvent].
-func (x *MTRTestClusterClusterTestEventEvent) Unwrap() *raw.MTRTestClusterClusterTestEventEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRTestClusterClusterTestEventEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRTestClusterClusterTestEventEventFromID adopts an existing object pointer as a MTRTestClusterClusterTestEventEvent (nil for 0).
+// MTRTestClusterClusterTestEventEventFromID adopts an existing Objective-C object as a MTRTestClusterClusterTestEventEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRTestClusterClusterTestEventEventFromID(id objc.ID) *MTRTestClusterClusterTestEventEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRTestClusterClusterTestEventEvent{inner: raw.MTRTestClusterClusterTestEventEventFromID(id)}
+	x := &MTRTestClusterClusterTestEventEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRTestClusterClusterTestEventEvent creates a new [MTRTestClusterClusterTestEventEvent].
+// mTRTestClusterClusterTestEventEventAdopt wraps an Objective-C object that this code just created as a
+// MTRTestClusterClusterTestEventEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRTestClusterClusterTestEventEventAdopt(id objc.ID) *MTRTestClusterClusterTestEventEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRTestClusterClusterTestEventEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRTestClusterClusterTestEventEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRTestClusterClusterTestEventEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRTestClusterClusterTestEventEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRTestClusterClusterTestEventEvent creates a new MTRTestClusterClusterTestEventEvent.
 func NewMTRTestClusterClusterTestEventEvent() *MTRTestClusterClusterTestEventEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRTestClusterClusterTestEventEvent")), objc.RegisterName("new"))
-	return &MTRTestClusterClusterTestEventEvent{inner: raw.MTRTestClusterClusterTestEventEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRTestClusterClusterTestEventEvent")), objc.RegisterName("new"))
+	return mTRTestClusterClusterTestEventEventAdopt(_id)
 }
 
-// WithArg1 sets the arg1 property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestEventEvent) WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestEventEvent {
-	x.inner.MTRUnitTestingClusterTestEventEvent.SetArg1(arg1)
+// WithArg1 sets arg1 and returns the receiver so calls can be chained.
+func (x *MTRTestClusterClusterTestEventEvent) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestEventEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 	return x
 }
 
-// WithArg2 sets the arg2 property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestEventEvent) WithArg2(arg2 *foundation.NSNumber) *MTRTestClusterClusterTestEventEvent {
-	x.inner.MTRUnitTestingClusterTestEventEvent.SetArg2(arg2)
+// WithArg2 sets arg2 and returns the receiver so calls can be chained.
+func (x *MTRTestClusterClusterTestEventEvent) WithArg2(arg2 obj.Object) *MTRTestClusterClusterTestEventEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
 	return x
 }
 
-// WithArg3 sets the arg3 property and returns the receiver for chaining.
-func (x *MTRTestClusterClusterTestEventEvent) WithArg3(arg3 *foundation.NSNumber) *MTRTestClusterClusterTestEventEvent {
-	x.inner.MTRUnitTestingClusterTestEventEvent.SetArg3(arg3)
+// WithArg3 sets arg3 and returns the receiver so calls can be chained.
+func (x *MTRTestClusterClusterTestEventEvent) WithArg3(arg3 obj.Object) *MTRTestClusterClusterTestEventEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg3:"), objref.IDOf(arg3))
 	return x
 }
 
-// WithArg4 sets the arg4 property and returns the receiver for chaining.
+// WithArg4 sets arg4 and returns the receiver so calls can be chained.
 func (x *MTRTestClusterClusterTestEventEvent) WithArg4(arg4 MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestEventEvent {
-	x.inner.MTRUnitTestingClusterTestEventEvent.SetArg4(arg4.asMTRUnitTestingClusterSimpleStruct())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg4:"), objref.IDOf(arg4))
 	return x
-}
-
-func (x *MTRTestClusterClusterTestEventEvent) asMTRUnitTestingClusterTestEventEvent() *raw.MTRUnitTestingClusterTestEventEvent {
-	return &x.inner.MTRUnitTestingClusterTestEventEvent
 }
 
 // MTRTestClusterClusterTestEventEventable is the interface implemented by [MTRTestClusterClusterTestEventEvent], for mocking and DI.
 type MTRTestClusterClusterTestEventEventable interface {
-	Unwrap() *raw.MTRTestClusterClusterTestEventEvent
-	WithArg1(arg1 *foundation.NSNumber) *MTRTestClusterClusterTestEventEvent
-	WithArg2(arg2 *foundation.NSNumber) *MTRTestClusterClusterTestEventEvent
-	WithArg3(arg3 *foundation.NSNumber) *MTRTestClusterClusterTestEventEvent
+	obj.Object
+	WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestEventEvent
+	WithArg2(arg2 obj.Object) *MTRTestClusterClusterTestEventEvent
+	WithArg3(arg3 obj.Object) *MTRTestClusterClusterTestEventEvent
 	WithArg4(arg4 MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestEventEvent
 }
 

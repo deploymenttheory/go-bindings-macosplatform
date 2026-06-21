@@ -5,58 +5,68 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Cryptographic algorithms used by token keys.
 //
-// TokenKeyAlgorithm wraps [raw.TKTokenKeyAlgorithm] with a fluent Go API.
+// TokenKeyAlgorithm is an idiomatic wrapper over the Objective-C class TKTokenKeyAlgorithm.
 type TokenKeyAlgorithm struct {
-	inner *raw.TKTokenKeyAlgorithm
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKTokenKeyAlgorithm].
-func (x *TokenKeyAlgorithm) Unwrap() *raw.TKTokenKeyAlgorithm { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TokenKeyAlgorithm) ID() objc.ID { return x.inner.Ptr() }
-
-// TokenKeyAlgorithmFromID adopts an existing object pointer as a TokenKeyAlgorithm (nil for 0).
+// TokenKeyAlgorithmFromID adopts an existing Objective-C object as a TokenKeyAlgorithm
+// (nil for 0), retaining it and registering a release finalizer.
 func TokenKeyAlgorithmFromID(id objc.ID) *TokenKeyAlgorithm {
 	if id == 0 {
 		return nil
 	}
-	return &TokenKeyAlgorithm{inner: raw.TKTokenKeyAlgorithmFromID(id)}
+	x := &TokenKeyAlgorithm{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTokenKeyAlgorithm creates a new [TokenKeyAlgorithm].
+// tokenKeyAlgorithmAdopt wraps an Objective-C object that this code just created as a
+// TokenKeyAlgorithm (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tokenKeyAlgorithmAdopt(id objc.ID) *TokenKeyAlgorithm {
+	if id == 0 {
+		return nil
+	}
+	x := &TokenKeyAlgorithm{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TokenKeyAlgorithm) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TokenKeyAlgorithm) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TokenKeyAlgorithm) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTokenKeyAlgorithm creates a new TokenKeyAlgorithm.
 func NewTokenKeyAlgorithm() *TokenKeyAlgorithm {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("TKTokenKeyAlgorithm")), objc.RegisterName("new"))
-	return &TokenKeyAlgorithm{inner: raw.TKTokenKeyAlgorithmFromID(_id)}
-}
-
-// Returns whether the specified algorithm is the target operation algorithm.
-//
-// IsAlgorithm calls the underlying IsAlgorithm.
-func (x *TokenKeyAlgorithm) IsAlgorithm(algorithm unsafe.Pointer) bool {
-	return x.inner.IsAlgorithm(algorithm)
-}
-
-// Whether the specified algorithm is the target operation algorithm, or one of the other algorithms used.
-//
-// SupportsAlgorithm calls the underlying SupportsAlgorithm.
-func (x *TokenKeyAlgorithm) SupportsAlgorithm(algorithm unsafe.Pointer) bool {
-	return x.inner.SupportsAlgorithm(algorithm)
+	_id := objc.Send[objc.ID](objc.ID(_class("TKTokenKeyAlgorithm")), objc.RegisterName("new"))
+	return tokenKeyAlgorithmAdopt(_id)
 }
 
 // TokenKeyAlgorithmable is the interface implemented by [TokenKeyAlgorithm], for mocking and DI.
 type TokenKeyAlgorithmable interface {
-	Unwrap() *raw.TKTokenKeyAlgorithm
-	IsAlgorithm(algorithm unsafe.Pointer) bool
-	SupportsAlgorithm(algorithm unsafe.Pointer) bool
+	obj.Object
 }
 
 var _ TokenKeyAlgorithmable = (*TokenKeyAlgorithm)(nil)

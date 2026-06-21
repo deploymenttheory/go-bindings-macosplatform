@@ -5,66 +5,85 @@
 package browserenginekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/browserenginekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides alternative text suggestions for a person’s text selection.
 //
-// TextAlternatives wraps [raw.BETextAlternatives] with a fluent Go API.
+// TextAlternatives is an idiomatic wrapper over the Objective-C class BETextAlternatives.
 type TextAlternatives struct {
-	inner *raw.BETextAlternatives
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.BETextAlternatives].
-func (x *TextAlternatives) Unwrap() *raw.BETextAlternatives { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextAlternatives) ID() objc.ID { return x.inner.Ptr() }
-
-// TextAlternativesFromID adopts an existing object pointer as a TextAlternatives (nil for 0).
+// TextAlternativesFromID adopts an existing Objective-C object as a TextAlternatives
+// (nil for 0), retaining it and registering a release finalizer.
 func TextAlternativesFromID(id objc.ID) *TextAlternatives {
 	if id == 0 {
 		return nil
 	}
-	return &TextAlternatives{inner: raw.BETextAlternativesFromID(id)}
+	x := &TextAlternatives{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTextAlternatives creates a new [TextAlternatives].
+// textAlternativesAdopt wraps an Objective-C object that this code just created as a
+// TextAlternatives (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textAlternativesAdopt(id objc.ID) *TextAlternatives {
+	if id == 0 {
+		return nil
+	}
+	x := &TextAlternatives{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TextAlternatives) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextAlternatives) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextAlternatives) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTextAlternatives creates a new TextAlternatives.
 func NewTextAlternatives() *TextAlternatives {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("BETextAlternatives")), objc.RegisterName("new"))
-	return &TextAlternatives{inner: raw.BETextAlternativesFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("BETextAlternatives")), objc.RegisterName("new"))
+	return textAlternativesAdopt(_id)
 }
 
 // Original text for which alternative strings are provided
-//
-// PrimaryString calls the underlying PrimaryString.
 func (x *TextAlternatives) PrimaryString() string {
-	_r := x.inner.PrimaryString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Array of available aternative strings
 //
 // AlternativeStrings returns the collection as a Go slice.
 func (x *TextAlternatives) AlternativeStrings() []string {
-	arr := x.inner.AlternativeStrings()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternativeStrings"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // TextAlternativesable is the interface implemented by [TextAlternatives], for mocking and DI.
 type TextAlternativesable interface {
-	Unwrap() *raw.BETextAlternatives
+	obj.Object
 	PrimaryString() string
 	AlternativeStrings() []string
 }

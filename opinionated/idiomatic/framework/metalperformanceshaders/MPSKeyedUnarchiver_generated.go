@@ -5,72 +5,68 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A keyed archiver that supports Metal Performance Shaders kernel decoding.
 //
-// KeyedUnarchiver wraps [raw.MPSKeyedUnarchiver] with a fluent Go API.
+// KeyedUnarchiver is an idiomatic wrapper over the Objective-C class MPSKeyedUnarchiver.
 type KeyedUnarchiver struct {
-	inner *raw.MPSKeyedUnarchiver
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSKeyedUnarchiver].
-func (x *KeyedUnarchiver) Unwrap() *raw.MPSKeyedUnarchiver { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *KeyedUnarchiver) ID() objc.ID { return x.inner.Ptr() }
-
-// KeyedUnarchiverFromID adopts an existing object pointer as a KeyedUnarchiver (nil for 0).
+// KeyedUnarchiverFromID adopts an existing Objective-C object as a KeyedUnarchiver
+// (nil for 0), retaining it and registering a release finalizer.
 func KeyedUnarchiverFromID(id objc.ID) *KeyedUnarchiver {
 	if id == 0 {
 		return nil
 	}
-	return &KeyedUnarchiver{inner: raw.MPSKeyedUnarchiverFromID(id)}
+	x := &KeyedUnarchiver{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewKeyedUnarchiverForReadingFromDataDeviceError creates a new [KeyedUnarchiver].
-func NewKeyedUnarchiverForReadingFromDataDeviceError(data *foundation.NSData, device metal.MTLDevice) (*KeyedUnarchiver, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSKeyedUnarchiver")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReadingFromData:device:error:"), data.Ptr(), device, unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+// keyedUnarchiverAdopt wraps an Objective-C object that this code just created as a
+// KeyedUnarchiver (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func keyedUnarchiverAdopt(id objc.ID) *KeyedUnarchiver {
+	if id == 0 {
+		return nil
 	}
-	return &KeyedUnarchiver{inner: raw.MPSKeyedUnarchiverFromID(_id)}, nil
+	x := &KeyedUnarchiver{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// NewKeyedUnarchiverWithDevice creates a new [KeyedUnarchiver].
-func NewKeyedUnarchiverWithDevice(device metal.MTLDevice) *KeyedUnarchiver {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSKeyedUnarchiver")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &KeyedUnarchiver{inner: raw.MPSKeyedUnarchiverFromID(_id)}
+// Description returns the object's -description text.
+func (x *KeyedUnarchiver) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// NewKeyedUnarchiverForReadingWithDataDevice creates a new [KeyedUnarchiver].
-func NewKeyedUnarchiverForReadingWithDataDevice(data *foundation.NSData, device metal.MTLDevice) *KeyedUnarchiver {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSKeyedUnarchiver")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForReadingWithData:device:"), data.Ptr(), device)
-	return &KeyedUnarchiver{inner: raw.MPSKeyedUnarchiverFromID(_id)}
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *KeyedUnarchiver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @abstract   Reports which device to use for unarchiving MPSKernels
-//
-// MpsMTLDevice calls the underlying MpsMTLDevice.
-func (x *KeyedUnarchiver) MpsMTLDevice() metal.MTLDevice {
-	return x.inner.MpsMTLDevice()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *KeyedUnarchiver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewKeyedUnarchiver creates a new KeyedUnarchiver.
+func NewKeyedUnarchiver() *KeyedUnarchiver {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSKeyedUnarchiver")), objc.RegisterName("new"))
+	return keyedUnarchiverAdopt(_id)
 }
 
 // KeyedUnarchiverable is the interface implemented by [KeyedUnarchiver], for mocking and DI.
 type KeyedUnarchiverable interface {
-	Unwrap() *raw.MPSKeyedUnarchiver
-	MpsMTLDevice() metal.MTLDevice
+	obj.Object
 }
 
 var _ KeyedUnarchiverable = (*KeyedUnarchiver)(nil)

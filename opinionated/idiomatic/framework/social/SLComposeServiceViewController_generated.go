@@ -5,154 +5,163 @@
 package social
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/social"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A view controller that you present from your share app extension, allowing the user to compose social media posts.
 //
-// ComposeServiceViewController wraps [raw.SLComposeServiceViewController] with a fluent Go API.
+// ComposeServiceViewController is an idiomatic wrapper over the Objective-C class SLComposeServiceViewController.
 type ComposeServiceViewController struct {
-	inner *raw.SLComposeServiceViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SLComposeServiceViewController].
-func (x *ComposeServiceViewController) Unwrap() *raw.SLComposeServiceViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ComposeServiceViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// ComposeServiceViewControllerFromID adopts an existing object pointer as a ComposeServiceViewController (nil for 0).
+// ComposeServiceViewControllerFromID adopts an existing Objective-C object as a ComposeServiceViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func ComposeServiceViewControllerFromID(id objc.ID) *ComposeServiceViewController {
 	if id == 0 {
 		return nil
 	}
-	return &ComposeServiceViewController{inner: raw.SLComposeServiceViewControllerFromID(id)}
+	x := &ComposeServiceViewController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewComposeServiceViewController creates a new [ComposeServiceViewController].
+// composeServiceViewControllerAdopt wraps an Objective-C object that this code just created as a
+// ComposeServiceViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func composeServiceViewControllerAdopt(id objc.ID) *ComposeServiceViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &ComposeServiceViewController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ComposeServiceViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ComposeServiceViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ComposeServiceViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewComposeServiceViewController creates a new ComposeServiceViewController.
 func NewComposeServiceViewController() *ComposeServiceViewController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SLComposeServiceViewController")), objc.RegisterName("new"))
-	return &ComposeServiceViewController{inner: raw.SLComposeServiceViewControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SLComposeServiceViewController")), objc.RegisterName("new"))
+	return composeServiceViewControllerAdopt(_id)
 }
 
 // A string that’s displayed in the compose view’s text view when the text view is empty.
 //
-// WithPlaceholder sets the placeholder property and returns the receiver for chaining.
+// WithPlaceholder sets placeholder and returns the receiver so calls can be chained.
 func (x *ComposeServiceViewController) WithPlaceholder(placeholder string) *ComposeServiceViewController {
-	x.inner.SetPlaceholder(foundation.NSStringStringWithUTF8String(placeholder))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholder:"), purego.NSString(placeholder))
 	return x
 }
 
 // The number of characters remaining in a custom character limit.
 //
-// WithCharactersRemaining sets the charactersRemaining property and returns the receiver for chaining.
-func (x *ComposeServiceViewController) WithCharactersRemaining(charactersRemaining *foundation.NSNumber) *ComposeServiceViewController {
-	x.inner.SetCharactersRemaining(charactersRemaining)
+// WithCharactersRemaining sets charactersRemaining and returns the receiver so calls can be chained.
+func (x *ComposeServiceViewController) WithCharactersRemaining(charactersRemaining obj.Object) *ComposeServiceViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharactersRemaining:"), objref.IDOf(charactersRemaining))
 	return x
 }
 
 // Tells the compose view controller that the presentation animation is finished.
-//
-// PresentationAnimationDidFinish calls the underlying PresentationAnimationDidFinish.
 func (x *ComposeServiceViewController) PresentationAnimationDidFinish() {
-	x.inner.PresentationAnimationDidFinish()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentationAnimationDidFinish"))
 }
 
 // Sent to the compose view after the post animation finishes.
-//
-// DidSelectPost calls the underlying DidSelectPost.
 func (x *ComposeServiceViewController) DidSelectPost() {
-	x.inner.DidSelectPost()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didSelectPost"))
 }
 
 // Sent to the compose view after the cancel animation finishes.
-//
-// DidSelectCancel calls the underlying DidSelectCancel.
 func (x *ComposeServiceViewController) DidSelectCancel() {
-	x.inner.DidSelectCancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didSelectCancel"))
 }
 
 // Starts the animated dismissal of the compose view.
-//
-// Cancel calls the underlying Cancel.
 func (x *ComposeServiceViewController) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
 // A Boolean value that indicates whether the current content and attachments are valid.
-//
-// IsContentValid calls the underlying IsContentValid.
 func (x *ComposeServiceViewController) IsContentValid() bool {
-	return x.inner.IsContentValid()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isContentValid"))
+	return _r
 }
 
 // Performs validation of the current content and updates the state of the Post button, if appropriate.
-//
-// ValidateContent calls the underlying ValidateContent.
 func (x *ComposeServiceViewController) ValidateContent() {
-	x.inner.ValidateContent()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validateContent"))
 }
 
-// TextView calls the underlying TextView.
-func (x *ComposeServiceViewController) TextView() *appkit.NSTextView {
-	return x.inner.TextView()
+func (x *ComposeServiceViewController) TextView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textView"))
+	return obj.Wrap(_r)
 }
 
-// ContentText calls the underlying ContentText.
 func (x *ComposeServiceViewController) ContentText() string {
-	_r := x.inner.ContentText()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentText"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Placeholder calls the underlying Placeholder.
 func (x *ComposeServiceViewController) Placeholder() string {
-	_r := x.inner.Placeholder()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholder"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPlaceholder calls the underlying SetPlaceholder.
 func (x *ComposeServiceViewController) SetPlaceholder(placeholder string) {
-	x.inner.SetPlaceholder(foundation.NSStringStringWithUTF8String(placeholder))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholder:"), purego.NSString(placeholder))
 }
 
-// CharactersRemaining calls the underlying CharactersRemaining.
-func (x *ComposeServiceViewController) CharactersRemaining() *foundation.NSNumber {
-	return x.inner.CharactersRemaining()
+func (x *ComposeServiceViewController) CharactersRemaining() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("charactersRemaining"))
+	return obj.Wrap(_r)
 }
 
-// SetCharactersRemaining calls the underlying SetCharactersRemaining.
-func (x *ComposeServiceViewController) SetCharactersRemaining(charactersRemaining *foundation.NSNumber) {
-	x.inner.SetCharactersRemaining(charactersRemaining)
+func (x *ComposeServiceViewController) SetCharactersRemaining(charactersRemaining obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharactersRemaining:"), objref.IDOf(charactersRemaining))
 }
 
 // ComposeServiceViewControllerable is the interface implemented by [ComposeServiceViewController], for mocking and DI.
 type ComposeServiceViewControllerable interface {
-	Unwrap() *raw.SLComposeServiceViewController
+	obj.Object
 	WithPlaceholder(placeholder string) *ComposeServiceViewController
-	WithCharactersRemaining(charactersRemaining *foundation.NSNumber) *ComposeServiceViewController
+	WithCharactersRemaining(charactersRemaining obj.Object) *ComposeServiceViewController
 	PresentationAnimationDidFinish()
 	DidSelectPost()
 	DidSelectCancel()
 	Cancel()
 	IsContentValid() bool
 	ValidateContent()
-	TextView() *appkit.NSTextView
+	TextView() obj.Object
 	ContentText() string
 	Placeholder() string
 	SetPlaceholder(placeholder string)
-	CharactersRemaining() *foundation.NSNumber
-	SetCharactersRemaining(charactersRemaining *foundation.NSNumber)
+	CharactersRemaining() obj.Object
+	SetCharactersRemaining(charactersRemaining obj.Object)
 }
 
 var _ ComposeServiceViewControllerable = (*ComposeServiceViewController)(nil)

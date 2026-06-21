@@ -5,43 +5,53 @@
 package mediatoolbox
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediatoolbox"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// MTAudioProcessingTapCreate calls [raw.MTAudioProcessingTapCreate] (C function MTAudioProcessingTapCreate).
-func MTAudioProcessingTapCreate(allocator unsafe.Pointer, callbacks *raw.MTAudioProcessingTapCallbacks, flags uint32, tapOut unsafe.Pointer) int {
-	return raw.MTAudioProcessingTapCreate(allocator, callbacks, flags, tapOut)
+var _fnMTAudioProcessingTapGetTypeID func() int
+
+// MTAudioProcessingTapGetTypeID calls the MediaToolbox framework function MTAudioProcessingTapGetTypeID.
+func MTAudioProcessingTapGetTypeID() int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTAudioProcessingTapGetTypeID == nil {
+		ebipurego.RegisterLibFunc(&_fnMTAudioProcessingTapGetTypeID, _lib, "MTAudioProcessingTapGetTypeID")
+	}
+	return _fnMTAudioProcessingTapGetTypeID()
 }
 
-// MTAudioProcessingTapGetSourceAudio calls [raw.MTAudioProcessingTapGetSourceAudio] (C function MTAudioProcessingTapGetSourceAudio).
-func MTAudioProcessingTapGetSourceAudio(tap unsafe.Pointer, numberFrames int, bufferListInOut *coreaudiotypes.AudioBufferList, flagsOut *uint32, timeRangeOut *coremedia.CMTimeRange, numberFramesOut *int) int {
-	return raw.MTAudioProcessingTapGetSourceAudio(tap, numberFrames, bufferListInOut, flagsOut, timeRangeOut, numberFramesOut)
+var _fnMTCopyLocalizedNameForMediaSubType func(int, int) objc.ID
+
+// MTCopyLocalizedNameForMediaSubType calls the MediaToolbox framework function MTCopyLocalizedNameForMediaSubType.
+func MTCopyLocalizedNameForMediaSubType(mediaType int, mediaSubType int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTCopyLocalizedNameForMediaSubType == nil {
+		ebipurego.RegisterLibFunc(&_fnMTCopyLocalizedNameForMediaSubType, _lib, "MTCopyLocalizedNameForMediaSubType")
+	}
+	_ret := _fnMTCopyLocalizedNameForMediaSubType(mediaType, mediaSubType)
+	return obj.Wrap(_ret)
 }
 
-// MTAudioProcessingTapGetStorage calls [raw.MTAudioProcessingTapGetStorage] (C function MTAudioProcessingTapGetStorage).
-func MTAudioProcessingTapGetStorage(tap unsafe.Pointer) unsafe.Pointer {
-	return raw.MTAudioProcessingTapGetStorage(tap)
+var _fnMTCopyLocalizedNameForMediaType func(int) objc.ID
+
+// MTCopyLocalizedNameForMediaType calls the MediaToolbox framework function MTCopyLocalizedNameForMediaType.
+func MTCopyLocalizedNameForMediaType(mediaType int) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTCopyLocalizedNameForMediaType == nil {
+		ebipurego.RegisterLibFunc(&_fnMTCopyLocalizedNameForMediaType, _lib, "MTCopyLocalizedNameForMediaType")
+	}
+	_ret := _fnMTCopyLocalizedNameForMediaType(mediaType)
+	return obj.Wrap(_ret)
 }
 
-// MTAudioProcessingTapGetTypeID calls [raw.MTAudioProcessingTapGetTypeID] (C function MTAudioProcessingTapGetTypeID).
-func MTAudioProcessingTapGetTypeID() uint {
-	return raw.MTAudioProcessingTapGetTypeID()
-}
+var _fnMTRegisterProfessionalVideoWorkflowFormatReaders func()
 
-// MTCopyLocalizedNameForMediaSubType calls [raw.MTCopyLocalizedNameForMediaSubType] (C function MTCopyLocalizedNameForMediaSubType).
-func MTCopyLocalizedNameForMediaSubType(mediaType uint, mediaSubType uint) unsafe.Pointer {
-	return raw.MTCopyLocalizedNameForMediaSubType(mediaType, mediaSubType)
-}
-
-// MTCopyLocalizedNameForMediaType calls [raw.MTCopyLocalizedNameForMediaType] (C function MTCopyLocalizedNameForMediaType).
-func MTCopyLocalizedNameForMediaType(mediaType uint) unsafe.Pointer {
-	return raw.MTCopyLocalizedNameForMediaType(mediaType)
-}
-
-// MTRegisterProfessionalVideoWorkflowFormatReaders calls [raw.MTRegisterProfessionalVideoWorkflowFormatReaders] (C function MTRegisterProfessionalVideoWorkflowFormatReaders).
+// MTRegisterProfessionalVideoWorkflowFormatReaders calls the MediaToolbox framework function MTRegisterProfessionalVideoWorkflowFormatReaders.
 func MTRegisterProfessionalVideoWorkflowFormatReaders() {
-	raw.MTRegisterProfessionalVideoWorkflowFormatReaders()
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTRegisterProfessionalVideoWorkflowFormatReaders == nil {
+		ebipurego.RegisterLibFunc(&_fnMTRegisterProfessionalVideoWorkflowFormatReaders, _lib, "MTRegisterProfessionalVideoWorkflowFormatReaders")
+	}
+	_fnMTRegisterProfessionalVideoWorkflowFormatReaders()
 }

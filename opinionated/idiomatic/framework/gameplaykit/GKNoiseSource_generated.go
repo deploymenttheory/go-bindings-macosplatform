@@ -5,43 +5,68 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The abstract superclass for procedural noise generators.
 //
-// NoiseSource wraps [raw.GKNoiseSource] with a fluent Go API.
+// NoiseSource is an idiomatic wrapper over the Objective-C class GKNoiseSource.
 type NoiseSource struct {
-	inner *raw.GKNoiseSource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKNoiseSource].
-func (x *NoiseSource) Unwrap() *raw.GKNoiseSource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NoiseSource) ID() objc.ID { return x.inner.Ptr() }
-
-// NoiseSourceFromID adopts an existing object pointer as a NoiseSource (nil for 0).
+// NoiseSourceFromID adopts an existing Objective-C object as a NoiseSource
+// (nil for 0), retaining it and registering a release finalizer.
 func NoiseSourceFromID(id objc.ID) *NoiseSource {
 	if id == 0 {
 		return nil
 	}
-	return &NoiseSource{inner: raw.GKNoiseSourceFromID(id)}
+	x := &NoiseSource{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNoiseSource creates a new [NoiseSource].
+// noiseSourceAdopt wraps an Objective-C object that this code just created as a
+// NoiseSource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func noiseSourceAdopt(id objc.ID) *NoiseSource {
+	if id == 0 {
+		return nil
+	}
+	x := &NoiseSource{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NoiseSource) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NoiseSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NoiseSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNoiseSource creates a new NoiseSource.
 func NewNoiseSource() *NoiseSource {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKNoiseSource")), objc.RegisterName("new"))
-	return &NoiseSource{inner: raw.GKNoiseSourceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKNoiseSource")), objc.RegisterName("new"))
+	return noiseSourceAdopt(_id)
 }
-
-func (x *NoiseSource) asNoiseSource() *raw.GKNoiseSource { return x.inner }
 
 // NoiseSourceable is the interface implemented by [NoiseSource], for mocking and DI.
 type NoiseSourceable interface {
-	Unwrap() *raw.GKNoiseSource
+	obj.Object
 }
 
 var _ NoiseSourceable = (*NoiseSource)(nil)

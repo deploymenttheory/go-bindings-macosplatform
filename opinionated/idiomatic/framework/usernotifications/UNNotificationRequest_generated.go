@@ -5,69 +5,86 @@
 package usernotifications
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/usernotifications"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A request to schedule a local notification, which includes the content of the notification and the trigger conditions for delivery.
 //
-// NotificationRequest wraps [raw.UNNotificationRequest] with a fluent Go API.
+// NotificationRequest is an idiomatic wrapper over the Objective-C class UNNotificationRequest.
 type NotificationRequest struct {
-	inner *raw.UNNotificationRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.UNNotificationRequest].
-func (x *NotificationRequest) Unwrap() *raw.UNNotificationRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NotificationRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// NotificationRequestFromID adopts an existing object pointer as a NotificationRequest (nil for 0).
+// NotificationRequestFromID adopts an existing Objective-C object as a NotificationRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func NotificationRequestFromID(id objc.ID) *NotificationRequest {
 	if id == 0 {
 		return nil
 	}
-	return &NotificationRequest{inner: raw.UNNotificationRequestFromID(id)}
+	x := &NotificationRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNotificationRequest creates a new [NotificationRequest].
+// notificationRequestAdopt wraps an Objective-C object that this code just created as a
+// NotificationRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func notificationRequestAdopt(id objc.ID) *NotificationRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &NotificationRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NotificationRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NotificationRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NotificationRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNotificationRequest creates a new NotificationRequest.
 func NewNotificationRequest() *NotificationRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("UNNotificationRequest")), objc.RegisterName("new"))
-	return &NotificationRequest{inner: raw.UNNotificationRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("UNNotificationRequest")), objc.RegisterName("new"))
+	return notificationRequestAdopt(_id)
 }
 
-// Identifier calls the underlying Identifier.
 func (x *NotificationRequest) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Content calls the underlying Content.
 func (x *NotificationRequest) Content() *NotificationContent {
-	_r := x.inner.Content()
-	if _r == nil {
-		return nil
-	}
-	return &NotificationContent{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("content"))
+	return NotificationContentFromID(_r)
 }
 
-// Trigger calls the underlying Trigger.
 func (x *NotificationRequest) Trigger() *NotificationTrigger {
-	_r := x.inner.Trigger()
-	if _r == nil {
-		return nil
-	}
-	return &NotificationTrigger{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trigger"))
+	return NotificationTriggerFromID(_r)
 }
 
 // NotificationRequestable is the interface implemented by [NotificationRequest], for mocking and DI.
 type NotificationRequestable interface {
-	Unwrap() *raw.UNNotificationRequest
+	obj.Object
 	Identifier() string
 	Content() *NotificationContent
 	Trigger() *NotificationTrigger

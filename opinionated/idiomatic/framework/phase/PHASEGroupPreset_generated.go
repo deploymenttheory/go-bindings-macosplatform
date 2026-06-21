@@ -5,100 +5,114 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A collection of settings for groups.
 //
-// GroupPreset wraps [raw.PHASEGroupPreset] with a fluent Go API.
+// GroupPreset is an idiomatic wrapper over the Objective-C class PHASEGroupPreset.
 type GroupPreset struct {
-	inner *raw.PHASEGroupPreset
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEGroupPreset].
-func (x *GroupPreset) Unwrap() *raw.PHASEGroupPreset { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GroupPreset) ID() objc.ID { return x.inner.Ptr() }
-
-// GroupPresetFromID adopts an existing object pointer as a GroupPreset (nil for 0).
+// GroupPresetFromID adopts an existing Objective-C object as a GroupPreset
+// (nil for 0), retaining it and registering a release finalizer.
 func GroupPresetFromID(id objc.ID) *GroupPreset {
 	if id == 0 {
 		return nil
 	}
-	return &GroupPreset{inner: raw.PHASEGroupPresetFromID(id)}
+	x := &GroupPreset{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// groupPresetAdopt wraps an Objective-C object that this code just created as a
+// GroupPreset (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func groupPresetAdopt(id objc.ID) *GroupPreset {
+	if id == 0 {
+		return nil
+	}
+	x := &GroupPreset{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GroupPreset) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GroupPreset) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GroupPreset) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a group preset with the designated engine, settings, and fade parameters.
 //
-// NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset creates a new [GroupPreset].
-func NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset(engine *raw.PHASEEngine, settings purego.IDer, timeToTarget float64, timeToReset float64) *GroupPreset {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEGroupPreset")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:settings:timeToTarget:timeToReset:"), engine.Ptr(), settings.ID(), timeToTarget, timeToReset)
-	return &GroupPreset{inner: raw.PHASEGroupPresetFromID(_id)}
+// NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset creates a new GroupPreset.
+func NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset(engine *Engine, settings obj.Object, timeToTarget float64, timeToReset float64) *GroupPreset {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEGroupPreset")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:settings:timeToTarget:timeToReset:"), objref.IDOf(engine), objref.IDOf(settings), timeToTarget, timeToReset)
+	return groupPresetAdopt(_id)
 }
 
 // Applies settings to the designated groups.
-//
-// Activate calls the underlying Activate.
 func (x *GroupPreset) Activate() {
-	x.inner.Activate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activate"))
 }
 
 // Applies settings with an overriden fade duration.
-//
-// ActivateWithTimeToTargetOverride calls the underlying ActivateWithTimeToTargetOverride.
 func (x *GroupPreset) ActivateWithTimeToTargetOverride(timeToTargetOverride float64) {
-	x.inner.ActivateWithTimeToTargetOverride(timeToTargetOverride)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activateWithTimeToTargetOverride:"), timeToTargetOverride)
 }
 
 // Reverts settings for the preset’s groups.
-//
-// Deactivate calls the underlying Deactivate.
 func (x *GroupPreset) Deactivate() {
-	x.inner.Deactivate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deactivate"))
 }
 
 // Reverts settings for the preset’s groups using a timed adjustment.
-//
-// DeactivateWithTimeToResetOverride calls the underlying DeactivateWithTimeToResetOverride.
 func (x *GroupPreset) DeactivateWithTimeToResetOverride(timeToResetOverride float64) {
-	x.inner.DeactivateWithTimeToResetOverride(timeToResetOverride)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deactivateWithTimeToResetOverride:"), timeToResetOverride)
 }
 
-// @property settings @abstract The collection of PHASEGroupPresetSetting objects to apply when this preset is activated.
-//
-// Settings calls the underlying Settings.
-func (x *GroupPreset) Settings() *foundation.NSDictionary[*foundation.NSString, *raw.PHASEGroupPresetSetting] {
-	return x.inner.Settings()
+// The collection of PHASEGroupPresetSetting objects to apply when this preset is activated.
+func (x *GroupPreset) Settings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("settings"))
+	return obj.Wrap(_r)
 }
 
-// @property timeToTarget @abstract The time interval that all group settings in this preset will take to gradually fade to the new value @note The timeToTarget is scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
-//
-// TimeToTarget calls the underlying TimeToTarget.
+// The time interval that all group settings in this preset will take to gradually fade to the new value
 func (x *GroupPreset) TimeToTarget() float64 {
-	return x.inner.TimeToTarget()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeToTarget"))
+	return _r
 }
 
-// @property timeToReset @abstract The time interval that all group settings in this preset will take to gradually fade to the unity value @note The timeToReset is scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
-//
-// TimeToReset calls the underlying TimeToReset.
+// The time interval that all group settings in this preset will take to gradually fade to the unity value
 func (x *GroupPreset) TimeToReset() float64 {
-	return x.inner.TimeToReset()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeToReset"))
+	return _r
 }
 
 // GroupPresetable is the interface implemented by [GroupPreset], for mocking and DI.
 type GroupPresetable interface {
-	Unwrap() *raw.PHASEGroupPreset
+	obj.Object
 	Activate()
 	ActivateWithTimeToTargetOverride(timeToTargetOverride float64)
 	Deactivate()
 	DeactivateWithTimeToResetOverride(timeToResetOverride float64)
-	Settings() *foundation.NSDictionary[*foundation.NSString, *raw.PHASEGroupPresetSetting]
+	Settings() obj.Object
 	TimeToTarget() float64
 	TimeToReset() float64
 }

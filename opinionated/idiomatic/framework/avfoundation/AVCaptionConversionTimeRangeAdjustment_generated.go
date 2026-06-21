@@ -5,64 +5,68 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that describes an adjustment to the time range of one or more captions.
 //
-// CaptionConversionTimeRangeAdjustment wraps [raw.AVCaptionConversionTimeRangeAdjustment] with a fluent Go API.
+// CaptionConversionTimeRangeAdjustment is an idiomatic wrapper over the Objective-C class AVCaptionConversionTimeRangeAdjustment.
 type CaptionConversionTimeRangeAdjustment struct {
-	inner *raw.AVCaptionConversionTimeRangeAdjustment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptionConversionTimeRangeAdjustment].
-func (x *CaptionConversionTimeRangeAdjustment) Unwrap() *raw.AVCaptionConversionTimeRangeAdjustment {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptionConversionTimeRangeAdjustment) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptionConversionTimeRangeAdjustmentFromID adopts an existing object pointer as a CaptionConversionTimeRangeAdjustment (nil for 0).
+// CaptionConversionTimeRangeAdjustmentFromID adopts an existing Objective-C object as a CaptionConversionTimeRangeAdjustment
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptionConversionTimeRangeAdjustmentFromID(id objc.ID) *CaptionConversionTimeRangeAdjustment {
 	if id == 0 {
 		return nil
 	}
-	return &CaptionConversionTimeRangeAdjustment{inner: raw.AVCaptionConversionTimeRangeAdjustmentFromID(id)}
+	x := &CaptionConversionTimeRangeAdjustment{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCaptionConversionTimeRangeAdjustment creates a new [CaptionConversionTimeRangeAdjustment].
+// captionConversionTimeRangeAdjustmentAdopt wraps an Objective-C object that this code just created as a
+// CaptionConversionTimeRangeAdjustment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captionConversionTimeRangeAdjustmentAdopt(id objc.ID) *CaptionConversionTimeRangeAdjustment {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptionConversionTimeRangeAdjustment{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptionConversionTimeRangeAdjustment) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptionConversionTimeRangeAdjustment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptionConversionTimeRangeAdjustment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptionConversionTimeRangeAdjustment creates a new CaptionConversionTimeRangeAdjustment.
 func NewCaptionConversionTimeRangeAdjustment() *CaptionConversionTimeRangeAdjustment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptionConversionTimeRangeAdjustment")), objc.RegisterName("new"))
-	return &CaptionConversionTimeRangeAdjustment{inner: raw.AVCaptionConversionTimeRangeAdjustmentFromID(_id)}
-}
-
-// @property      startTimeOffset @abstract      Indicates the amount by which the timeRange.start of the captions must be adjusted in order to correct a problem. @discussion    The value may any numeric value, positive, negative, or zero.
-//
-// StartTimeOffset calls the underlying StartTimeOffset.
-func (x *CaptionConversionTimeRangeAdjustment) StartTimeOffset() coremedia.CMTime {
-	return x.inner.StartTimeOffset()
-}
-
-// @property      durationOffset @abstract      Indicates the amount by which the timeRange.duration of the captions must be adjusted in order to correct a problem. @discussion    The value may any numeric value, positive, negative, or zero.
-//
-// DurationOffset calls the underlying DurationOffset.
-func (x *CaptionConversionTimeRangeAdjustment) DurationOffset() coremedia.CMTime {
-	return x.inner.DurationOffset()
-}
-
-func (x *CaptionConversionTimeRangeAdjustment) asCaptionConversionAdjustment() *raw.AVCaptionConversionAdjustment {
-	return &x.inner.AVCaptionConversionAdjustment
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptionConversionTimeRangeAdjustment")), objc.RegisterName("new"))
+	return captionConversionTimeRangeAdjustmentAdopt(_id)
 }
 
 // CaptionConversionTimeRangeAdjustmentable is the interface implemented by [CaptionConversionTimeRangeAdjustment], for mocking and DI.
 type CaptionConversionTimeRangeAdjustmentable interface {
-	Unwrap() *raw.AVCaptionConversionTimeRangeAdjustment
-	StartTimeOffset() coremedia.CMTime
-	DurationOffset() coremedia.CMTime
+	obj.Object
 }
 
 var _ CaptionConversionTimeRangeAdjustmentable = (*CaptionConversionTimeRangeAdjustment)(nil)
